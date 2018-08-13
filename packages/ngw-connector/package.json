@@ -1,0 +1,28 @@
+{
+  "name": "@ngw-front/api-connector",
+  "version": "0.0.5",
+  "description": "Module for interaction with NGW (NextGis Web) server API",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "start": "http-server",
+    "gen": "node ./scripts/generator.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nextgis/nextgisweb_frontend.git"
+  },
+  "keywords": [
+    "NextGIS",
+    "Web",
+    "NGW",
+    "API",
+    "GIS"
+  ],
+  "author": "NextGIS",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "http-server": "^0.11.1"
+  }
+}
