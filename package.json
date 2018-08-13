@@ -1,0 +1,13 @@
+{
+  "name": "root",
+  "private": true,
+  "dependencies": {
+    "strict-event-emitter-types": "*"
+  },
+  "devDependencies": {
+    "lerna": "^3.0.3",
+    "typescript": "*",
+    "rollup": "*",
+    "rollup-plugin-typescript2": "*"
+  }
+}
