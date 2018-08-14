@@ -5,7 +5,7 @@ export interface MapOptions {
   minZoom?: number;
 }
 
-export interface MapAdapter<M> {
+export interface MapAdapter<M = any> {
 
   lonlatProjection: string;
   displayProjection: string;

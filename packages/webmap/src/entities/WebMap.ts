@@ -11,7 +11,7 @@ import { MapAdapter } from '../Interfaces/MapAdapter';
 export class WebMap {
 
   options: AppOptions = {
-    target: 'map',
+    target: '',
     displayConfig: {
       extent: [-180, -90, 180, 90],
     },
@@ -34,12 +34,13 @@ export class WebMap {
 
   private settingsIsLoading = false;
 
-  constructor(options: AppOptions) {
-    this.options = deepmerge(this.options, options);
-    this.map = this.options.mapAdapter;
+  constructor(webMapOptions) {
+    this.map = webMapOptions.mapAdapter;
   }
 
-  async create(): Promise<this> {
+  async create(options: AppOptions): Promise<this> {
+
+    this.options = deepmerge(this.options, options);
 
     if (!this.settings && this._settings) {
       await this.getSettings();
@@ -85,25 +86,25 @@ export class WebMap {
   // region MAP
   private _setupMap() {
 
-    const { extent_bottom, extent_left, extent_top, extent_right } = this.settings.webmap;
-    if (extent_bottom && extent_left && extent_top && extent_right) {
-      this.options.displayConfig.extent = [extent_bottom, extent_left, extent_top, extent_right];
-    }
+    // const { extent_bottom, extent_left, extent_top, extent_right } = this.settings.webmap;
+    // if (extent_bottom && extent_left && extent_top && extent_right) {
+    //   this.options.displayConfig.extent = [extent_bottom, extent_left, extent_top, extent_right];
+    // }
 
-    const extent = this.options.displayConfig.extent;
-    if (extent[3] > 82) {
-      extent[3] = 82;
-    }
-    if (extent[1] < -82) {
-      extent[1] = -82;
-    }
-    this.map.displayProjection = this.displayProjection;
-    this.map.lonlatProjection = this.lonlatProjection;
+    // const extent = this.options.displayConfig.extent;
+    // if (extent[3] > 82) {
+    //   extent[3] = 82;
+    // }
+    // if (extent[1] < -82) {
+    //   extent[1] = -82;
+    // }
+    // this.map.displayProjection = this.displayProjection;
+    // this.map.lonlatProjection = this.lonlatProjection;
     this.map.create({ target: this.options.target });
 
-    this._addTreeLayers();
+    // this._addTreeLayers();
 
-    this._zoomToInitialExtent();
+    // this._zoomToInitialExtent();
 
     this.emitter.emit('build-map', this.map);
   }

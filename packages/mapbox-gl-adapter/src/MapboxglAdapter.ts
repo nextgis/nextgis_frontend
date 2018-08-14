@@ -6,32 +6,29 @@ import { TileAdapter } from './layer-adapters/TileAdapter';
 export class MapboxglAdapter { // implements MapAdapter {
 
   static layerAdapter = {
-    tile: TileAdapter,
-    mvt: MvtAdapter,
-    osm: OsmAdapter
+    TILE: TileAdapter,
+    MVT: MvtAdapter,
+    OSM: OsmAdapter
   };
 
-  options: any = {};
+  options: any;
 
   displayProjection = 'EPSG:3857';
   lonlatProjection = 'EPSG:4326';
 
   map: mapboxgl.Map;
 
+  _layers = {};
+  _baseLayers = [];
   private DPI = 1000 / 39.37 / 0.28;
   private IPM = 39.37;
-  private _layers = {};
   private isLoaded = false;
 
-  constructor(options) {
-    this.options = Object.assign({}, this.options, options);
-    // already registered layers, if true - it means on the map
-  }
-
   // create(options: MapOptions = {target: 'map'}) {
-  create() {
+  create(options) {
+    this.options = options;
     this.map = new mapboxgl.Map({
-      container: this.options.target,
+      container: options.target,
       center: [96, 63], // initial map center in [lon, lat]
       zoom: 2,
       style: {
@@ -60,19 +57,34 @@ export class MapboxglAdapter { // implements MapAdapter {
   }
 
   showLayer(layerName: string) {
-    // ignore
+    this.onMapLoad(() => this.toggleLayer(layerName, true));
   }
 
-  hideLayer(layername: string) {
-    // ignore
+  hideLayer(layerName: string) {
+    this.onMapLoad(() => this.toggleLayer(layerName, false));
   }
 
-  addBaseLayer(providerName: string, options?) {
-    // ignore
+  addBaseLayer(name, providerDef, options?) {
+    this.onMapLoad(() => {
+      const layerId = this.addLayer(name, providerDef, options);
+      if (layerId) {
+        this._baseLayers.push(layerId);
+      }
+    });
   }
 
-  addLayer(layerName: string, adapter) {
-    // this._toggleLayer(true, layerName);
+  addLayer(layerName: string, adapterDef, options?) {
+    let adapterEngine;
+    if (typeof adapterDef === 'string') {
+      adapterEngine = MapboxglAdapter.layerAdapter[adapterDef];
+    }
+    if (adapterEngine) {
+      const adapter = new adapterEngine(options);
+      const layerId = adapter.addLayer(this.map, layerName, options);
+      this._layers[layerId] = false;
+      return layerId;
+    }
+    return false;
   }
 
   removeLayer(layerName: string) {
@@ -88,7 +100,7 @@ export class MapboxglAdapter { // implements MapAdapter {
     return parseFloat(scale) / (mpu * this.IPM * this.DPI);
   }
 
-  private onMapLoad(cb, context) {
+  onMapLoad(cb, context?) {
     if (this.isLoaded) { // map.loaded()
       cb.call(context);
     } else {
@@ -98,68 +110,10 @@ export class MapboxglAdapter { // implements MapAdapter {
     }
   }
 
-  private addMvtLayer(layerId, layerUrl) {
+  toggleLayer(layerId, status) {
+    const exist = this._layers[layerId];
 
-    // read about https://blog.mapbox.com/vector-tile-specification-version-2-whats-changed-259d4cd73df6
-
-    const idString = String(layerId);
-    this.map.addLayer({
-      'id': idString,
-      'type': 'fill',
-      'source-layer': idString,
-      'source': {
-        type: 'vector',
-        tiles: [layerUrl]
-      },
-      'layout': {
-        visibility: 'none'
-      },
-      'paint': {
-        'fill-color': 'red',
-        'fill-opacity': 0.8,
-        'fill-opacity-transition': {
-          duration: 0
-        },
-        'fill-outline-color': '#8b0000' // darkred
-      }
-    });
-    this._layers[layerId] = false;
-    return this._layers[layerId];
-  }
-
-  private addTileLayer(layerName, url, params) {
-
-    let tiles;
-    if (params && params.subdomains) {
-      tiles = params.subdomains.split('').map((x) => {
-        const subUrl = url.replace('{s}', x);
-        return subUrl;
-      });
-    } else {
-      tiles = [url];
-    }
-
-    this.map.addLayer({
-      id: layerName,
-      type: 'raster',
-      source: {
-        type: 'raster',
-        // point to our third-party tiles. Note that some examples
-        // show a "url" property. This only applies to tilesets with
-        // corresponding TileJSON (such as mapbox tiles).
-        tiles,
-        tileSize: params && params.tileSize || 256
-      }
-    });
-  }
-
-  private toggleLayer(layerId, status) {
-    let exist = this._layers[layerId];
-    if (exist === undefined) {
-      const layerUrl = this.options.baseUrl + '/api/resource/' + layerId + '/{z}/{x}/{y}.mvt';
-      exist = this.addMvtLayer(layerId, layerUrl);
-    }
-    if (exist !== status) {
+    if (exist !== undefined && exist !== status) {
       this.map.setLayoutProperty(layerId, 'visibility', status ? 'visible' : 'none');
       this._layers[layerId] = status;
     }

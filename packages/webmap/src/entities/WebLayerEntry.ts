@@ -68,14 +68,13 @@ export class WebLayerEntry extends Entry<WebLayerEntryOptions> {
       }
     } else if (item.item_type === 'layer') {
       const url = fixUrlStr(this.options.ngwConfig.applicationUrl + '/api/component/render/image');
-      newLayer = this.map.registrateWmsLayer(this.id, {
+      newLayer = this.map.addLayer(this.id, 'image', {
         url,
         styleId: item.layer_style_id,
         transparency: item.layer_transparency,
         // visibility: item.layer_enabled,
         minResolution: item.layer_min_scale_denom,
         maxResolution: item.layer_max_scale_denom,
-
       });
     }
     if (newLayer) {
