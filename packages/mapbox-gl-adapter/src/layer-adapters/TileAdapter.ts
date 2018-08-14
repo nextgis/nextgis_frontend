@@ -2,13 +2,7 @@ import mapboxgl from 'mapbox-gl';
 
 export class TileAdapter {
 
-  private map: mapboxgl.Map;
-
-  constructor(map: mapboxgl.Map) {
-    this.map = map;
-  }
-
-  addLayer(name: string, options) {
+  addLayer(map: mapboxgl.Map, name: string, options) {
 
     let tiles;
     if (options && options.subdomains) {
@@ -20,9 +14,12 @@ export class TileAdapter {
       tiles = [options.url];
     }
 
-    this.map.addLayer({
+    map.addLayer({
       id: name,
       type: 'raster',
+      layout: {
+        visibility: 'none'
+      },
       source: {
         type: 'raster',
         // point to our third-party tiles. Note that some examples
@@ -32,5 +29,6 @@ export class TileAdapter {
         tileSize: options && options.tileSize || 256
       }
     });
+    return name;
   }
 }

@@ -9,6 +9,31 @@
   var MvtAdapter = /** @class */ (function () {
       function MvtAdapter() {
       }
+      MvtAdapter.prototype.addLayer = function (map, name, options) {
+          // read about https://blog.mapbox.com/vector-tile-specification-version-2-whats-changed-259d4cd73df6
+          var idString = String(name);
+          map.addLayer({
+              'id': idString,
+              'type': 'fill',
+              'source-layer': idString,
+              'source': {
+                  type: 'vector',
+                  tiles: [options.url]
+              },
+              'layout': {
+                  visibility: 'none'
+              },
+              'paint': {
+                  'fill-color': 'red',
+                  'fill-opacity': 0.8,
+                  'fill-opacity-transition': {
+                      duration: 0
+                  },
+                  'fill-outline-color': '#8b0000' // darkred
+              }
+          });
+          return name;
+      };
       return MvtAdapter;
   }());
 
@@ -42,10 +67,9 @@
   }
 
   var TileAdapter = /** @class */ (function () {
-      function TileAdapter(map) {
-          this.map = map;
+      function TileAdapter() {
       }
-      TileAdapter.prototype.addLayer = function (name, options) {
+      TileAdapter.prototype.addLayer = function (map, name, options) {
           var tiles;
           if (options && options.subdomains) {
               tiles = options.subdomains.split('').map(function (x) {
@@ -56,9 +80,12 @@
           else {
               tiles = [options.url];
           }
-          this.map.addLayer({
+          map.addLayer({
               id: name,
               type: 'raster',
+              layout: {
+                  visibility: 'none'
+              },
               source: {
                   type: 'raster',
                   // point to our third-party tiles. Note that some examples
@@ -68,6 +95,7 @@
                   tileSize: options && options.tileSize || 256
               }
           });
+          return name;
       };
       return TileAdapter;
   }());
@@ -77,34 +105,33 @@
       function OsmAdapter() {
           var _this = _super !== null && _super.apply(this, arguments) || this;
           _this.options = {
-              url: '',
+              url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
               attribution: '&copy; <a href="http://osm.org/copyright" target="_blank">OpenStreetMap</a> contributors',
               subdomains: 'abc'
           };
           return _this;
       }
-      OsmAdapter.prototype.addLayer = function (name, options) {
-          _super.prototype.addLayer.call(this, this.name, Object.assign({}, this.options, options));
+      OsmAdapter.prototype.addLayer = function (map, name, options) {
+          return _super.prototype.addLayer.call(this, map, name, Object.assign({}, this.options, options));
       };
       return OsmAdapter;
   }(TileAdapter));
 
   var MapboxglAdapter = /** @class */ (function () {
-      function MapboxglAdapter(options) {
-          this.options = {};
+      function MapboxglAdapter() {
           this.displayProjection = 'EPSG:3857';
           this.lonlatProjection = 'EPSG:4326';
+          this._layers = {};
+          this._baseLayers = [];
           this.DPI = 1000 / 39.37 / 0.28;
           this.IPM = 39.37;
-          this._layers = {};
           this.isLoaded = false;
-          this.options = Object.assign({}, this.options, options);
-          // already registered layers, if true - it means on the map
       }
       // create(options: MapOptions = {target: 'map'}) {
-      MapboxglAdapter.prototype.create = function () {
+      MapboxglAdapter.prototype.create = function (options) {
+          this.options = options;
           this.map = new mapboxgl.Map({
-              container: this.options.target,
+              container: options.target,
               center: [96, 63],
               zoom: 2,
               style: {
@@ -128,16 +155,34 @@
           // ignore
       };
       MapboxglAdapter.prototype.showLayer = function (layerName) {
-          // ignore
+          var _this = this;
+          this.onMapLoad(function () { return _this.toggleLayer(layerName, true); });
       };
-      MapboxglAdapter.prototype.hideLayer = function (layername) {
-          // ignore
+      MapboxglAdapter.prototype.hideLayer = function (layerName) {
+          var _this = this;
+          this.onMapLoad(function () { return _this.toggleLayer(layerName, false); });
       };
-      MapboxglAdapter.prototype.addBaseLayer = function (providerName, options) {
-          // ignore
+      MapboxglAdapter.prototype.addBaseLayer = function (name, providerDef, options) {
+          var _this = this;
+          this.onMapLoad(function () {
+              var layerId = _this.addLayer(name, providerDef, options);
+              if (layerId) {
+                  _this._baseLayers.push(layerId);
+              }
+          });
       };
-      MapboxglAdapter.prototype.addLayer = function (layerName, adapter) {
-          // this._toggleLayer(true, layerName);
+      MapboxglAdapter.prototype.addLayer = function (layerName, adapterDef, options) {
+          var adapterEngine;
+          if (typeof adapterDef === 'string') {
+              adapterEngine = MapboxglAdapter.layerAdapter[adapterDef];
+          }
+          if (adapterEngine) {
+              var adapter = new adapterEngine(options);
+              var layerId = adapter.addLayer(this.map, layerName, options);
+              this._layers[layerId] = false;
+              return layerId;
+          }
+          return false;
       };
       MapboxglAdapter.prototype.removeLayer = function (layerName) {
           // this._toggleLayer(false, layerName);
@@ -158,71 +203,17 @@
               });
           }
       };
-      MapboxglAdapter.prototype.addMvtLayer = function (layerId, layerUrl) {
-          // read about https://blog.mapbox.com/vector-tile-specification-version-2-whats-changed-259d4cd73df6
-          var idString = String(layerId);
-          this.map.addLayer({
-              'id': idString,
-              'type': 'fill',
-              'source-layer': idString,
-              'source': {
-                  type: 'vector',
-                  tiles: [layerUrl]
-              },
-              'layout': {
-                  visibility: 'none'
-              },
-              'paint': {
-                  'fill-color': 'red',
-                  'fill-opacity': 0.8,
-                  'fill-opacity-transition': {
-                      duration: 0
-                  },
-                  'fill-outline-color': '#8b0000' // darkred
-              }
-          });
-          this._layers[layerId] = false;
-          return this._layers[layerId];
-      };
-      MapboxglAdapter.prototype.addTileLayer = function (layerName, url, params) {
-          var tiles;
-          if (params && params.subdomains) {
-              tiles = params.subdomains.split('').map(function (x) {
-                  var subUrl = url.replace('{s}', x);
-                  return subUrl;
-              });
-          }
-          else {
-              tiles = [url];
-          }
-          this.map.addLayer({
-              id: layerName,
-              type: 'raster',
-              source: {
-                  type: 'raster',
-                  // point to our third-party tiles. Note that some examples
-                  // show a "url" property. This only applies to tilesets with
-                  // corresponding TileJSON (such as mapbox tiles).
-                  tiles: tiles,
-                  tileSize: params && params.tileSize || 256
-              }
-          });
-      };
       MapboxglAdapter.prototype.toggleLayer = function (layerId, status) {
           var exist = this._layers[layerId];
-          if (exist === undefined) {
-              var layerUrl = this.options.baseUrl + '/api/resource/' + layerId + '/{z}/{x}/{y}.mvt';
-              exist = this.addMvtLayer(layerId, layerUrl);
-          }
-          if (exist !== status) {
+          if (exist !== undefined && exist !== status) {
               this.map.setLayoutProperty(layerId, 'visibility', status ? 'visible' : 'none');
               this._layers[layerId] = status;
           }
       };
       MapboxglAdapter.layerAdapter = {
-          tile: TileAdapter,
-          mvt: MvtAdapter,
-          osm: OsmAdapter
+          TILE: TileAdapter,
+          MVT: MvtAdapter,
+          OSM: OsmAdapter
       };
       return MapboxglAdapter;
   }());
