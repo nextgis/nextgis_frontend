@@ -5,17 +5,21 @@ export interface MapOptions {
   minZoom?: number;
 }
 
-export interface MapAdapter {
+export interface MapAdapter<M> {
 
   lonlatProjection: string;
   displayProjection: string;
+  map: M;
 
   create(options?): void;
 
-  addLayer(layerName: string): any;
+  addLayer(layerName: string, layerProvider, options: any): any;
   removeLayer(layerName: string): any;
 
-  registrateWmsLayer(layerName: string, options: any): any;
+  addBaseLayer(prooviderName, options: any): any;
+
+  showLayer(layerName: string): void;
+  hidelayer(layerName: string): void;
 
   setCenter(latLng: [number, number]): void;
   setZoom(zoom: number): void;

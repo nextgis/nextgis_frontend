@@ -8,6 +8,7 @@ const pckg = require('./package');
 const input = 'index.ts';
 
 export default {
+  external: ['mapbox-gl'],
   input,
   output: [
       {file: pckg.main + '.js', format: 'umd', name: 'webmap'}
