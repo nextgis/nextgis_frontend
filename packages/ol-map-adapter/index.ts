@@ -16,7 +16,7 @@ interface LayerMem {
 let ORDER = 0;
 const LENGTH = 9999; // TODO: get real layers length count, after all registered
 
-export class OlMap { // implements MapAdapter {
+export class OlMapAdapter { // implements MapAdapter {
 
   displayProjection = 'EPSG:3857';
   lonlatProjection = 'EPSG:4326';

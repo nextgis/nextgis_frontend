@@ -1,13 +1,12 @@
-import { AppOptions, WebMapAppEvents } from '../interfaces/WebMapApp';
+import { AppOptions } from '../interfaces/WebMapApp';
 import { AppSettings, Settings } from '../interfaces/AppSettings';
 import { RuntimeParams } from '../interfaces/RuntimeParams';
 import { deepmerge } from '../utils/lang';
-import StrictEventEmitter from 'strict-event-emitter-types/types/src';
+// import StrictEventEmitter from 'strict-event-emitter-types';
 import { EventEmitter } from 'events';
 import { WebLayerEntry } from './WebLayerEntry';
 import { Keys } from './keys/Keys';
 import { MapAdapter } from '../Interfaces/MapAdapter';
-
 
 export class WebMap {
 
@@ -25,7 +24,7 @@ export class WebMap {
 
   layers: WebLayerEntry;
 
-  emitter: StrictEventEmitter<EventEmitter, WebMapAppEvents> = new EventEmitter();
+  emitter /** : StrictEventEmitter<EventEmitter, WebMapAppEvents> */ = new EventEmitter();
 
   keys: Keys = new Keys(); // TODO: make injectable cashed
 
@@ -35,11 +34,14 @@ export class WebMap {
 
   private settingsIsLoading = false;
 
-  async create(options: AppOptions): Promise<this> {
-
+  constructor(options: AppOptions) {
     this.options = deepmerge(this.options, options);
+    this.map = this.options.mapAdapter;
+  }
 
-    if (!this.settings) {
+  async create(): Promise<this> {
+
+    if (!this.settings && this._settings) {
       await this.getSettings();
     }
 

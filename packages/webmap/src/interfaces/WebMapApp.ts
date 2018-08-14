@@ -39,6 +39,7 @@ export interface DisplayConfig {
 
 export interface AppOptions {
   target: string | HTMLElement;
+  mapAdapter?: MapAdapter;
   ngwConfig?: NgwConfig;
   // displayConfig?: DisplayConfig;
   [configName: string]: any;
