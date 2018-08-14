@@ -28,7 +28,7 @@ export class WebMap {
 
   keys: Keys = new Keys(); // TODO: make injectable cashed
 
-  map: MapAdapter;
+  map: MapAdapter<any>;
   private _settings: AppSettings;
   private runtimeParams: RuntimeParams;
 
@@ -141,4 +141,5 @@ export class WebMap {
     }
   }
   // endregion
+
 }

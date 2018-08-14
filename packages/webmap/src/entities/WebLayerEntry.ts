@@ -1,8 +1,8 @@
-import {Entry, EntryOptions} from './entry/Entry';
-import {TreeGroup, TreeLayer} from './../interfaces/AppSettings';
-import {fixUrlStr} from '../utils/lang';
-import {MapAdapter} from '../interfaces/MapAdapter';
-import {NgwConfig} from '../interfaces/NgwConfig';
+import { Entry, EntryOptions } from './entry/Entry';
+import { TreeGroup, TreeLayer } from './../interfaces/AppSettings';
+import { fixUrlStr } from '../utils/lang';
+import { MapAdapter } from '../interfaces/MapAdapter';
+import { NgwConfig } from '../interfaces/NgwConfig';
 
 interface WebLayerEntryOptions extends EntryOptions {
   ngwConfig?: NgwConfig;
@@ -29,9 +29,9 @@ export class WebLayerEntry extends Entry<WebLayerEntryOptions> {
           const entry: WebLayerEntry = this.entry;
           if (entry.item.item_type === 'layer') {
             if (value) {
-              entry.map.addLayer(entry.id);
+              entry.map.showLayer(entry.id);
             } else {
-              entry.map.removeLayer(entry.id);
+              entry.map.hidelayer(entry.id);
             }
             entry.item.layer_enabled = value;
           }
@@ -40,11 +40,12 @@ export class WebLayerEntry extends Entry<WebLayerEntryOptions> {
     ],
   };
 
-  map: MapAdapter;
+  map: MapAdapter<any>;
 
   item: TreeGroup | TreeLayer;
 
-  constructor(map: MapAdapter, item: TreeGroup | TreeLayer, options: WebLayerEntryOptions, parent?: WebLayerEntry) {
+  constructor(map: MapAdapter<any>,
+              item: TreeGroup | TreeLayer, options: WebLayerEntryOptions, parent?: WebLayerEntry) {
     super(Object.assign({}, WebLayerEntry.options, options));
     this.map = map;
     this.item = item;

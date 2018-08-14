@@ -1,6 +1,6 @@
 import {EventEmitter} from 'events';
 import {Entry} from '../Entry';
-import StrictEventEmitter from 'strict-event-emitter-types/types/src';
+// import StrictEventEmitter from 'strict-event-emitter-types/types/src';
 
 export interface IEntryBasePropertyOptions<V> {
   hierarchy?: boolean;
@@ -12,16 +12,17 @@ export interface IEntryBasePropertyOptions<V> {
   onSet?: (value: V, options?: IEntryBasePropertyOptions<V>) => void;
 }
 
-export interface BasePropertyEvents<V, O> {
-  'change': {value: V, options: O};
-  'change-tree': {value: V, options: O, entry: Entry};
-}
+// export interface BasePropertyEvents<V, O> {
+//   'change': {value: V, options: O};
+//   'change-tree': {value: V, options: O, entry: Entry};
+// }
 
 export class BaseProperty<V = any, O extends IEntryBasePropertyOptions<V> = IEntryBasePropertyOptions<V> > {
 
   options: O;
 
-  emitter: StrictEventEmitter<EventEmitter, BasePropertyEvents<V, O>> = new EventEmitter();
+  // emitter: StrictEventEmitter<EventEmitter, BasePropertyEvents<V, O>> = new EventEmitter();
+  emitter = new EventEmitter();
   name: string;
 
   entry: Entry;

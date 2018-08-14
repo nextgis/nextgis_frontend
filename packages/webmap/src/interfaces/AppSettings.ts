@@ -1,19 +1,5 @@
 import { AppOptions } from './WebMapApp';
 
-export interface BaseMapOptions {
-  source: {
-    imagerySet?: string;
-  };
-  layer: {
-    visible?: boolean;
-    title: string;
-  };
-  base: {
-    keyname: string;
-    mid: string;
-  };
-}
-
 export interface TreeItem {
   item_type: 'root' | 'group' | 'layer';
   display_name?: string;
