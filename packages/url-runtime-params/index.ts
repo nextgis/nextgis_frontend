@@ -1,8 +1,6 @@
-import { injectable } from 'inversify';
-import { RuntimeParams } from '../../Interfaces/RuntimeParams';
+// iimport { RuntimeParams } from '../../Interfaces/RuntimeParams';
 
-@injectable()
-export class UrlParams implements RuntimeParams {
+export class UrlParams { // implements RuntimeParams {
 
   private _params: { [paramName: string]: any };
 

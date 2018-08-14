@@ -18,8 +18,7 @@
   "author": "",
   "license": "GPL-3.0",
   "dependencies": {
-    "@ngw-front/api-connector": "0.0.5",
-    "strict-event-emitter-types": "^1.2.0"
+    "@ngw-front/api-connector": "0.0.5"
   },
   "devDependencies": {
     "@types/events": "^1.2.0",
