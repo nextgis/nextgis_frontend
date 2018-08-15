@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('mapbox-gl')) :
   typeof define === 'function' && define.amd ? define(['exports', 'mapbox-gl'], factory) :
-  (factory((global.webmap = {}),global.mapboxgl));
+  (factory((global.MapboxglAdapter = {}),global.mapboxgl));
 }(this, (function (exports,mapboxgl) { 'use strict';
 
   mapboxgl = mapboxgl && mapboxgl.hasOwnProperty('default') ? mapboxgl['default'] : mapboxgl;
@@ -223,3 +223,4 @@
   Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
+//# sourceMappingURL=index.js.map
