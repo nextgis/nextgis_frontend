@@ -14,6 +14,6 @@ export default {
   output: [
       {file: pckg.main + '.js', format: 'umd', name: 'MapboxglAdapter', sourcemap: true}
   ],
-  plugins: [typescript(), builtins(), commonjs(), node(), sourcemaps()]
+  plugins: [builtins(), typescript(),  commonjs(), node(), sourcemaps()]
   // plugins: [typescript(), builtins(), commonjs(), node(), uglify()]
 }

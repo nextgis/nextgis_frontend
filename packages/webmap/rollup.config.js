@@ -13,6 +13,6 @@ export default {
   output: [
       {file: pckg.main + '.js', format: 'umd', name: 'WebMap', sourcemap: true}
   ],
-  plugins: [typescript(), builtins(), commonjs(), node(), sourcemaps()]
+  plugins: [builtins(), typescript(), commonjs(), node(), sourcemaps()]
   // plugins: [typescript(), builtins(), commonjs(), node(), uglify()]
 }
