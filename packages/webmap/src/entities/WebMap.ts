@@ -6,9 +6,11 @@ import { deepmerge } from '../utils/lang';
 import { EventEmitter } from 'events';
 import { WebLayerEntry } from './WebLayerEntry';
 import { Keys } from './keys/Keys';
-import { MapAdapter } from '../Interfaces/MapAdapter';
+import { MapAdapter } from '../interfaces/MapAdapter';
+import { Type } from '../Utils/Type';
+import { LayerAdapter } from '../interfaces/LayerAdapter';
 
-export class WebMap {
+export class WebMap<M = any> {
 
   options: AppOptions = {
     target: '',
@@ -28,11 +30,14 @@ export class WebMap {
 
   keys: Keys = new Keys(); // TODO: make injectable cashed
 
-  map: MapAdapter<any>;
+  map: MapAdapter<M>;
+
   private _settings: AppSettings;
   private runtimeParams: RuntimeParams;
 
   private settingsIsLoading = false;
+
+  private _baseLayers: string[] = [];
 
   constructor(webMapOptions) {
     this.map = webMapOptions.mapAdapter;
@@ -81,6 +86,18 @@ export class WebMap {
         return settings;
       }
     }
+  }
+
+  addBaseLayer(layerName: string, provider: string | Type<LayerAdapter>, options: any): any {
+    this.map.addLayer(layerName, provider, options).then((layer) => {
+      if (layer) {
+        this._baseLayers.push(layer.name);
+      }
+    });
+  }
+
+  isBaseLayer(layerName) {
+    return this._baseLayers.indexOf(layerName) !== -1;
   }
 
   // region MAP

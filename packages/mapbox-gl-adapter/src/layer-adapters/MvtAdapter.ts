@@ -1,10 +1,12 @@
-import mapboxgl from 'mapbox-gl';
+import { BaseAdapter } from './BaseAdapter';
 
-export class MvtAdapter {
-  addLayer(map: mapboxgl.Map, name: string, options) {
+export class MvtAdapter extends BaseAdapter {
+
+  addLayer(options?): string {
+    options = Object.assign({}, this.options, options || {});
     // read about https://blog.mapbox.com/vector-tile-specification-version-2-whats-changed-259d4cd73df6
-    const idString = String(name);
-    map.addLayer({
+    const idString = String(this.name);
+    this.map.addLayer({
       'id': idString,
       'type': 'fill',
       'source-layer': idString,
@@ -24,6 +26,6 @@ export class MvtAdapter {
         'fill-outline-color': '#8b0000' // darkred
       }
     });
-    return name;
+    return this.name;
   }
 }

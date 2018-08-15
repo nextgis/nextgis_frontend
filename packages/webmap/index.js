@@ -1038,7 +1038,7 @@
                                 entry.map.showLayer(entry.id);
                             }
                             else {
-                                entry.map.hidelayer(entry.id);
+                                entry.map.hideLayer(entry.id);
                             }
                             entry.item.layer_enabled = value;
                         }
@@ -1171,6 +1171,7 @@
             this.emitter /** : StrictEventEmitter<EventEmitter, WebMapAppEvents> */ = new EventEmitter();
             this.keys = new Keys(); // TODO: make injectable cashed
             this.settingsIsLoading = false;
+            this._baseLayers = [];
             this.map = webMapOptions.mapAdapter;
         }
         WebMap.prototype.create = function (options) {
@@ -1235,6 +1236,17 @@
                     }
                 });
             });
+        };
+        WebMap.prototype.addBaseLayer = function (layerName, provider, options) {
+            var _this = this;
+            this.map.addLayer(layerName, provider, options).then(function (layer) {
+                if (layer) {
+                    _this._baseLayers.push(layer.name);
+                }
+            });
+        };
+        WebMap.prototype.isBaseLayer = function (layerName) {
+            return this._baseLayers.indexOf(layerName) !== -1;
         };
         // region MAP
         WebMap.prototype._setupMap = function () {

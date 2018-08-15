@@ -1,21 +1,24 @@
-import mapboxgl from 'mapbox-gl';
+import { BaseAdapter } from './BaseAdapter';
 
-export class TileAdapter {
+export class TileAdapter extends BaseAdapter{
 
-  addLayer(map: mapboxgl.Map, name: string, options) {
+  addLayer(options?): string {
+
+    const opt = Object.assign({}, this.options, options || {});
 
     let tiles;
-    if (options && options.subdomains) {
-      tiles = options.subdomains.split('').map((x) => {
-        const subUrl = options.url.replace('{s}', x);
+    if (opt && opt.subdomains) {
+      tiles = opt.subdomains.split('').map((x) => {
+        const subUrl = opt.url.replace('{s}', x);
         return subUrl;
-      });
+      }
+    );
     } else {
-      tiles = [options.url];
+      tiles = [opt.url];
     }
 
-    map.addLayer({
-      id: name,
+    this.map.addLayer({
+      id: String(this.name),
       type: 'raster',
       layout: {
         visibility: 'none'
@@ -26,9 +29,9 @@ export class TileAdapter {
         // show a "url" property. This only applies to tilesets with
         // corresponding TileJSON (such as mapbox tiles).
         tiles,
-        tileSize: options && options.tileSize || 256
+        tileSize: opt && opt.tileSize || 256
       }
     });
-    return name;
+    return this.name;
   }
 }

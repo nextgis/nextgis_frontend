@@ -1,5 +1,5 @@
 import { Entry, EntryOptions } from './entry/Entry';
-import { TreeGroup, TreeLayer } from './../interfaces/AppSettings';
+import { TreeGroup, TreeLayer } from '../interfaces/AppSettings';
 import { fixUrlStr } from '../utils/lang';
 import { MapAdapter } from '../interfaces/MapAdapter';
 import { NgwConfig } from '../interfaces/NgwConfig';
@@ -31,7 +31,7 @@ export class WebLayerEntry extends Entry<WebLayerEntryOptions> {
             if (value) {
               entry.map.showLayer(entry.id);
             } else {
-              entry.map.hidelayer(entry.id);
+              entry.map.hideLayer(entry.id);
             }
             entry.item.layer_enabled = value;
           }

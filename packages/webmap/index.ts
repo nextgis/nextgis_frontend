@@ -1,5 +1,5 @@
 import { WebMap } from './src/entities/WebMap';
-import { AppOptions } from './src/Interfaces/WebMapApp';
+import { AppOptions } from './src/interfaces/WebMapApp';
 
 export {WebMap, AppOptions};
 
