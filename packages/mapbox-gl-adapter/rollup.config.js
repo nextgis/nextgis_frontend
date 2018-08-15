@@ -6,13 +6,13 @@ import sourcemaps from 'rollup-plugin-sourcemaps';
 import { uglify } from 'rollup-plugin-uglify';
 
 const pckg = require('./package');
-const input = 'index.ts';
+const input = pckg.main + '.ts';
 
 export default {
   external: ['mapbox-gl'],
   input,
   output: [
-      {file: pckg.main + '.js', format: 'umd', name: 'webmap'}
+      {file: pckg.main + '.js', format: 'umd', name: 'MapboxglAdapter', sourcemap: true}
   ],
   plugins: [typescript(), builtins(), commonjs(), node(), sourcemaps()]
   // plugins: [typescript(), builtins(), commonjs(), node(), uglify()]

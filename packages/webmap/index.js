@@ -1,7 +1,7 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
     typeof define === 'function' && define.amd ? define(['exports'], factory) :
-    (factory((global.webmap = {})));
+    (factory((global.WebMap = {})));
 }(this, (function (exports) { 'use strict';
 
     /*! *****************************************************************************
@@ -1296,14 +1296,14 @@
     }());
 
     // Composition root
-    function buildWebMap(opt) {
+    function buildWebMap(opt, config) {
         return __awaiter(this, void 0, void 0, function () {
             var webMap;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        webMap = new WebMap(opt);
-                        return [4 /*yield*/, webMap.create()];
+                        webMap = new WebMap(config);
+                        return [4 /*yield*/, webMap.create(opt)];
                     case 1:
                         _a.sent();
                         return [2 /*return*/, webMap];
@@ -1319,3 +1319,4 @@
     Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
+//# sourceMappingURL=index.js.map
