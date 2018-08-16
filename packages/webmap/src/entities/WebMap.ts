@@ -32,8 +32,8 @@ export class WebMap<M = any> {
 
   map: MapAdapter<M>;
 
+  runtimeParams: RuntimeParams[];
   private _settings: AppSettings;
-  private runtimeParams: RuntimeParams;
 
   private settingsIsLoading = false;
 
@@ -126,38 +126,38 @@ export class WebMap<M = any> {
     this.emitter.emit('build-map', this.map);
   }
 
-  private async _addTreeLayers() {
-    const settings = await this.getSettings();
-    if (settings) {
-      const rootLayer = settings.webmap.root_item;
-      if (rootLayer) {
-        this.layers = new WebLayerEntry(this.map, rootLayer, this.options);
-        this.emitter.emit('add-layers', this.layers);
-      }
-    }
-  }
+  // private async _addTreeLayers() {
+  //   const settings = await this.getSettings();
+  //   if (settings) {
+  //     const rootLayer = settings.webmap.root_item;
+  //     if (rootLayer) {
+  //       this.layers = new WebLayerEntry(this.map, rootLayer, this.options);
+  //       this.emitter.emit('add-layers', this.layers);
+  //     }
+  //   }
+  // }
 
-  private _zoomToInitialExtent() {
-    const { lat, lon, zoom, angle } = this.runtimeParams.getParams();
-    if (zoom && lon && lat) {
-      this.map.setCenter([
-        parseFloat(lon),
-        parseFloat(lat),
-      ],
-      );
-      this.map.setZoom(
-        parseInt(zoom, 10),
-      );
+  // private _zoomToInitialExtent() {
+  //   const { lat, lon, zoom, angle } = this.runtimeParams.getParams();
+  //   if (zoom && lon && lat) {
+  //     this.map.setCenter([
+  //       parseFloat(lon),
+  //       parseFloat(lat),
+  //     ],
+  //     );
+  //     this.map.setZoom(
+  //       parseInt(zoom, 10),
+  //     );
 
-      if (angle) {
-        this.map.setRotation(
-          parseFloat(angle),
-        );
-      }
-    } else {
-      this.map.fit(this.options.displayConfig.extent);
-    }
-  }
+  //     if (angle) {
+  //       this.map.setRotation(
+  //         parseFloat(angle),
+  //       );
+  //     }
+  //   } else {
+  //     this.map.fit(this.options.displayConfig.extent);
+  //   }
+  // }
   // endregion
 
 }

@@ -173,6 +173,6 @@ export class MapboxglAdapter { // implements MapAdapter {
           this.emitter.emit('data-loaded', {target: data.sourceId});
         }
       }
-    })
+    });
   }
 }
