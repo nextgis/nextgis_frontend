@@ -1,6 +1,6 @@
-import { LayerAdapter } from "./LayerAdapter";
-import { Type } from "../Utils/Type";
-import { EventEmitter } from "events";
+import { LayerAdapter } from './LayerAdapter';
+import { Type } from '../Utils/Type';
+import { EventEmitter } from 'events';
 
 export interface MapOptions {
   target: string | HTMLElement;
@@ -18,12 +18,18 @@ export interface MapAdapter<M = any> {
 
   create(options?): void;
   getLayerAdapter(adapterName: string): Type<LayerAdapter>;
+  onMapLoad(cb?: () => void): Promise<any>;
 
   addLayer(layerName: string, layerProvider, options: any): Promise<LayerAdapter>;
   removeLayer(layerName: string): any;
+  getLayer(layerName: string): any;
+  isLayerOnTheMap(layerName: string): boolean;
+  setLayerOpacity(layerName: string, opacity: number): void;
+  getLayers(): string[];
 
   showLayer(layerName: string): void;
   hideLayer(layerName: string): void;
+  toggleLayer(layerName: string, status: boolean): void;
 
   setCenter(latLng: [number, number]): void;
   setZoom(zoom: number): void;
