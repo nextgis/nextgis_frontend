@@ -1,4 +1,4 @@
-import { LayerAdapter } from './LayerAdapter';
+import { LayerAdapter, LayerAdapters } from './LayerAdapter';
 import { Type } from '../Utils/Type';
 import { EventEmitter } from 'events';
 
@@ -20,7 +20,10 @@ export interface MapAdapter<M = any> {
   getLayerAdapter(adapterName: string): Type<LayerAdapter>;
   onMapLoad(cb?: () => void): Promise<any>;
 
-  addLayer(layerName: string, layerProvider, options: any): Promise<LayerAdapter>;
+  addLayer<K extends keyof LayerAdapters>(
+    layerAdapter: K | Type<LayerAdapter>,
+    options: LayerAdapters[K]): Promise<LayerAdapter>;
+
   removeLayer(layerName: string): any;
   getLayer(layerName: string): any;
   isLayerOnTheMap(layerName: string): boolean;

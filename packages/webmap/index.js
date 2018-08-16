@@ -761,7 +761,7 @@
         };
         WebMap.prototype.addBaseLayer = function (layerName, provider, options) {
             var _this = this;
-            this.map.addLayer(layerName, provider, options).then(function (layer) {
+            this.map.addLayer(provider, Object.assign({}, options, { id: layerName })).then(function (layer) {
                 if (layer) {
                     _this._baseLayers.push(layer.name);
                 }
