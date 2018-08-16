@@ -1,4 +1,5 @@
 import { BaseAdapter } from './BaseAdapter';
+import { Layer } from 'mapbox-gl';
 
 export class MvtAdapter extends BaseAdapter {
 
@@ -6,7 +7,9 @@ export class MvtAdapter extends BaseAdapter {
     options = Object.assign({}, this.options, options || {});
     // read about https://blog.mapbox.com/vector-tile-specification-version-2-whats-changed-259d4cd73df6
     const idString = String(this.name);
-    this.map.addLayer({
+
+
+    const layerOptions: Layer = {
       'id': idString,
       'type': 'fill',
       'source-layer': idString,
@@ -16,16 +19,14 @@ export class MvtAdapter extends BaseAdapter {
       },
       'layout': {
         visibility: 'none'
-      },
-      'paint': {
-        'fill-color': 'red',
-        'fill-opacity': 0.8,
-        'fill-opacity-transition': {
-          duration: 0
-        },
-        'fill-outline-color': '#8b0000' // darkred
       }
-    });
+    };
+
+    if (options.paint) {
+      layerOptions.paint = options.paint;
+    }
+
+    this.map.addLayer(layerOptions);
     return this.name;
   }
 }

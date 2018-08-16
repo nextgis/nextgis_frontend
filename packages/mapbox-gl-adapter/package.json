@@ -25,6 +25,7 @@
     "mapbox-gl": "^0.47.0"
   },
   "devDependencies": {
+    "@types/mapbox-gl": "^0.47.0",
     "rollup": "^0.64.1",
     "rollup-plugin-commonjs": "^9.1.5",
     "rollup-plugin-node-builtins": "^2.1.2",

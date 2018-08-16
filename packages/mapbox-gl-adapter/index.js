@@ -1,10 +1,8 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('mapbox-gl')) :
     typeof define === 'function' && define.amd ? define(['exports', 'mapbox-gl'], factory) :
-    (factory((global.MapboxglAdapter = {}),global.mapboxgl));
-}(this, (function (exports,mapboxgl) { 'use strict';
-
-    mapboxgl = mapboxgl && mapboxgl.hasOwnProperty('default') ? mapboxgl['default'] : mapboxgl;
+    (factory((global.MapboxglAdapter = {}),global.mapboxGl));
+}(this, (function (exports,mapboxGl) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -35,10 +33,11 @@
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     }
 
+    var ID = 1;
     var BaseAdapter = /** @class */ (function () {
-        function BaseAdapter(map, layerName, options) {
+        function BaseAdapter(map, options) {
             this.map = map;
-            this.name = layerName;
+            this.name = options.id || String(ID++);
             this.options = Object.assign({}, this.options, options);
             this.addLayer();
         }
@@ -57,7 +56,7 @@
             options = Object.assign({}, this.options, options || {});
             // read about https://blog.mapbox.com/vector-tile-specification-version-2-whats-changed-259d4cd73df6
             var idString = String(this.name);
-            this.map.addLayer({
+            var layerOptions = {
                 'id': idString,
                 'type': 'fill',
                 'source-layer': idString,
@@ -67,16 +66,12 @@
                 },
                 'layout': {
                     visibility: 'none'
-                },
-                'paint': {
-                    'fill-color': 'red',
-                    'fill-opacity': 0.8,
-                    'fill-opacity-transition': {
-                        duration: 0
-                    },
-                    'fill-outline-color': '#8b0000' // darkred
                 }
-            });
+            };
+            if (options.paint) {
+                layerOptions.paint = options.paint;
+            }
+            this.map.addLayer(layerOptions);
             return this.name;
         };
         return MvtAdapter;
@@ -615,7 +610,7 @@
         MapboxglAdapter.prototype.create = function (options) {
             if (!this.map) {
                 this.options = options;
-                this.map = new mapboxgl.Map({
+                this.map = new mapboxGl.Map({
                     container: options.target,
                     center: [96, 63],
                     zoom: 2,
@@ -655,7 +650,7 @@
             var _this = this;
             this.onMapLoad(function () { return _this.toggleLayer(layerName, false); });
         };
-        MapboxglAdapter.prototype.addLayer = function (layerName, adapterDef, options) {
+        MapboxglAdapter.prototype.addLayer = function (adapterDef, options) {
             var _this = this;
             return this.onMapLoad(function () {
                 var adapterEngine;
@@ -663,7 +658,7 @@
                     adapterEngine = _this.getLayerAdapter(adapterDef);
                 }
                 if (adapterEngine) {
-                    var adapter = new adapterEngine(_this.map, layerName, options);
+                    var adapter = new adapterEngine(_this.map, options);
                     var layerId = adapter.name;
                     _this._layers[layerId] = false;
                     return adapter;
@@ -748,7 +743,7 @@
             OSM: OsmAdapter
         };
         MapboxglAdapter.controlAdapters = {
-            ZOOM: mapboxgl.NavigationControl
+            ZOOM: mapboxGl.NavigationControl
         };
         return MapboxglAdapter;
     }());
