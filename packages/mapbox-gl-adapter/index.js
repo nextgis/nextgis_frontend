@@ -673,6 +673,15 @@
         MapboxglAdapter.prototype.removeLayer = function (layerName) {
             // this._toggleLayer(false, layerName);
         };
+        MapboxglAdapter.prototype.getLayer = function (layerName) {
+            return this._layers[layerName] !== undefined;
+        };
+        MapboxglAdapter.prototype.isLayerOnTheMap = function (layerName) {
+            return this._layers[layerName];
+        };
+        MapboxglAdapter.prototype.getLayers = function () {
+            return Object.keys(this._layers);
+        };
         MapboxglAdapter.prototype.setLayerOpacity = function (layerName, opacity) {
             var _this = this;
             this.onMapLoad().then(function () { return _this.map.setPaintProperty(layerName, 'fill-opacity', opacity); });
