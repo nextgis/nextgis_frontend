@@ -68,7 +68,8 @@ export class WebLayerEntry extends Entry<WebLayerEntryOptions> {
       }
     } else if (item.item_type === 'layer') {
       const url = fixUrlStr(this.options.ngwConfig.applicationUrl + '/api/component/render/image');
-      newLayer = this.map.addLayer(this.id, 'image', {
+      newLayer = this.map.addLayer('IMAGE', {
+        id: this.id,
         url,
         styleId: item.layer_style_id,
         transparency: item.layer_transparency,
