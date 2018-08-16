@@ -8,7 +8,7 @@ import { WebLayerEntry } from './WebLayerEntry';
 import { Keys } from './keys/Keys';
 import { MapAdapter } from '../interfaces/MapAdapter';
 import { Type } from '../Utils/Type';
-import { LayerAdapter } from '../interfaces/LayerAdapter';
+import { LayerAdapter, LayerAdapters } from '../interfaces/LayerAdapter';
 
 export class WebMap<M = any> {
 
@@ -88,8 +88,8 @@ export class WebMap<M = any> {
     }
   }
 
-  addBaseLayer(layerName: string, provider: string | Type<LayerAdapter>, options?: any): any {
-    this.map.addLayer(layerName, provider, options).then((layer) => {
+  addBaseLayer(layerName: string, provider: keyof LayerAdapters | Type<LayerAdapter>, options?: any): any {
+    this.map.addLayer(provider, Object.assign({}, options, {id: layerName})).then((layer) => {
       if (layer) {
         this._baseLayers.push(layer.name);
       }

@@ -1,8 +1,10 @@
 import { MvtAdapter } from './layer-adapters/MvtAdapter';
-import mapboxgl from 'mapbox-gl';
+import { NavigationControl, Map } from 'mapbox-gl';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
 import { TileAdapter } from './layer-adapters/TileAdapter';
 import { EventEmitter } from 'events';
+
+type positions = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
 
 export class MapboxglAdapter { // implements MapAdapter {
 
@@ -13,7 +15,7 @@ export class MapboxglAdapter { // implements MapAdapter {
   };
 
   static controlAdapters = {
-    ZOOM: mapboxgl.NavigationControl
+    ZOOM: NavigationControl
   };
 
   options: any;
@@ -21,7 +23,7 @@ export class MapboxglAdapter { // implements MapAdapter {
   displayProjection = 'EPSG:3857';
   lonlatProjection = 'EPSG:4326';
 
-  map: mapboxgl.Map;
+  map: Map;
 
   emitter = new EventEmitter();
 
@@ -36,7 +38,7 @@ export class MapboxglAdapter { // implements MapAdapter {
   create(options) {
     if (!this.map) {
       this.options = options;
-      this.map = new mapboxgl.Map({
+      this.map = new Map({
         container: options.target,
         center: [96, 63], // initial map center in [lon, lat]
         zoom: 2,
@@ -83,14 +85,14 @@ export class MapboxglAdapter { // implements MapAdapter {
     this.onMapLoad(() => this.toggleLayer(layerName, false));
   }
 
-  addLayer(layerName: string, adapterDef, options?) {
+  addLayer(adapterDef, options?) {
     return this.onMapLoad(() => {
       let adapterEngine;
       if (typeof adapterDef === 'string') {
         adapterEngine = this.getLayerAdapter(adapterDef);
       }
       if (adapterEngine) {
-        const adapter = new adapterEngine(this.map, layerName, options);
+        const adapter = new adapterEngine(this.map, options);
         const layerId = adapter.name;
         this._layers[layerId] = false;
         return adapter;
@@ -150,7 +152,7 @@ export class MapboxglAdapter { // implements MapAdapter {
     });
   }
 
-  addControl(controlDef, position: string) {
+  addControl(controlDef, position: positions) {
     let control;
     if (typeof controlDef === 'string') {
       const engine = MapboxglAdapter.controlAdapters[controlDef];
@@ -170,7 +172,7 @@ export class MapboxglAdapter { // implements MapAdapter {
       if (data.dataType === 'source') {
         const isLoaded = data.isSourceLoaded;
         if (isLoaded) {
-          this.emitter.emit('data-loaded', {target: data.sourceId});
+          this.emitter.emit('data-loaded', { target: data.sourceId });
         }
       }
     });
