@@ -14,7 +14,7 @@ export class MapboxglAdapter { // implements MapAdapter {
 
   static controlAdapters = {
     ZOOM: mapboxgl.NavigationControl
-  }
+  };
 
   options: any;
 
@@ -102,6 +102,18 @@ export class MapboxglAdapter { // implements MapAdapter {
     // this._toggleLayer(false, layerName);
   }
 
+  getLayer(layerName: string) {
+    return this._layers[layerName] !== undefined;
+  }
+
+  isLayerOnTheMap(layerName: string): boolean {
+    return this._layers[layerName];
+  }
+
+  getLayers(): string[] {
+    return Object.keys(this._layers);
+  }
+
   setLayerOpacity(layerName: string, opacity: number) {
     this.onMapLoad().then(() => this.map.setPaintProperty(layerName, 'fill-opacity', opacity));
   }
@@ -124,8 +136,7 @@ export class MapboxglAdapter { // implements MapAdapter {
           resolve(cb && cb());
         });
       }
-    })
-
+    });
   }
 
   toggleLayer(layerId, status) {

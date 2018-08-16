@@ -88,7 +88,7 @@ export class WebMap<M = any> {
     }
   }
 
-  addBaseLayer(layerName: string, provider: string | Type<LayerAdapter>, options: any): any {
+  addBaseLayer(layerName: string, provider: string | Type<LayerAdapter>, options?: any): any {
     this.map.addLayer(layerName, provider, options).then((layer) => {
       if (layer) {
         this._baseLayers.push(layer.name);
@@ -96,7 +96,7 @@ export class WebMap<M = any> {
     });
   }
 
-  isBaseLayer(layerName) {
+  isBaseLayer(layerName: string): boolean {
     return this._baseLayers.indexOf(layerName) !== -1;
   }
 
