@@ -1,12 +1,18 @@
+interface AdapterOptions {
+  id: string;
+}
 
-export interface MvtOptions extends mapboxgl.Layer {
+interface MvtOptions extends AdapterOptions {
+  id: string;
   url: string;
+  paint?;
 }
 
 export interface LayerAdapters {
   'MVT': MvtOptions;
-  'IMAGE': any;
-  'OSM': any;
+  'IMAGE': AdapterOptions;
+  'OSM': AdapterOptions;
+  'TILE': AdapterOptions;
 }
 
 export interface LayerAdapter<M = any, O = any> {
