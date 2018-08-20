@@ -668,12 +668,15 @@
         MapboxglAdapter.prototype.removeLayer = function (layerName) {
             // this._toggleLayer(false, layerName);
         };
+        // TODO: rename hasLayer; move to WebMap
         MapboxglAdapter.prototype.getLayer = function (layerName) {
             return this._layers[layerName] !== undefined;
         };
+        // TODO: move to WebMap
         MapboxglAdapter.prototype.isLayerOnTheMap = function (layerName) {
             return this._layers[layerName];
         };
+        // TODO: move to WebMap
         MapboxglAdapter.prototype.getLayers = function () {
             return Object.keys(this._layers);
         };

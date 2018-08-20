@@ -990,16 +990,6 @@
                 newLayer = this.map.addLayer(adapter, Object.assign({
                     id: this.id,
                 }, item));
-                // const url = fixUrlStr(this.options.ngwConfig.applicationUrl + '/api/component/render/image');
-                // newLayer = this.map.addLayer('IMAGE', {
-                //   id: this.id,
-                //   url,
-                //   styleId: item.layer_style_id,
-                //   transparency: item.layer_transparency,
-                //   // visibility: item.layer_enabled,
-                //   minResolution: item.layer_min_scale_denom,
-                //   maxResolution: item.layer_max_scale_denom,
-                // });
             }
             if (newLayer) {
                 item._layer = newLayer;
@@ -1190,7 +1180,7 @@
         };
         WebMap.prototype.getSettings = function () {
             return __awaiter(this, void 0, void 0, function () {
-                var settings, _i, _a, getSetting, setting, er_1;
+                var settings, _i, _a, kit, setting, er_1;
                 var _this = this;
                 return __generator(this, function (_b) {
                     switch (_b.label) {
@@ -1213,12 +1203,12 @@
                         case 2:
                             _b.trys.push([2, 7, , 8]);
                             settings = {};
-                            _i = 0, _a = this._starterKits.map(function (x) { return x.getSettings; });
+                            _i = 0, _a = this._starterKits;
                             _b.label = 3;
                         case 3:
                             if (!(_i < _a.length)) return [3 /*break*/, 6];
-                            getSetting = _a[_i];
-                            return [4 /*yield*/, getSetting()];
+                            kit = _a[_i];
+                            return [4 /*yield*/, kit.getSettings.call(kit)];
                         case 4:
                             setting = _b.sent();
                             if (setting) {
@@ -1259,22 +1249,22 @@
         };
         // region MAP
         WebMap.prototype._setupMap = function () {
-            // const { extent_bottom, extent_left, extent_top, extent_right } = this.settings.webmap;
-            // if (extent_bottom && extent_left && extent_top && extent_right) {
-            //   this.options.displayConfig.extent = [extent_bottom, extent_left, extent_top, extent_right];
-            // }
-            // const extent = this.options.displayConfig.extent;
-            // if (extent[3] > 82) {
-            //   extent[3] = 82;
-            // }
-            // if (extent[1] < -82) {
-            //   extent[1] = -82;
-            // }
-            // this.map.displayProjection = this.displayProjection;
-            // this.map.lonlatProjection = this.lonlatProjection;
+            var _a = this.settings, extent_bottom = _a.extent_bottom, extent_left = _a.extent_left, extent_top = _a.extent_top, extent_right = _a.extent_right;
+            if (extent_bottom && extent_left && extent_top && extent_right) {
+                this._extent = [extent_bottom, extent_left, extent_top, extent_right];
+            }
+            var extent = this._extent;
+            if (extent[3] > 82) {
+                extent[3] = 82;
+            }
+            if (extent[1] < -82) {
+                extent[1] = -82;
+            }
+            this.map.displayProjection = this.displayProjection;
+            this.map.lonlatProjection = this.lonlatProjection;
             this.map.create({ target: this.options.target });
-            // this._addTreeLayers();
-            // this._zoomToInitialExtent();
+            this._addTreeLayers();
+            this._zoomToInitialExtent();
             this.emitter.emit('build-map', this.map);
         };
         WebMap.prototype._addTreeLayers = function () {
@@ -1296,6 +1286,27 @@
                     }
                 });
             });
+        };
+        WebMap.prototype._zoomToInitialExtent = function () {
+            // const { lat, lon, zoom, angle } = this.runtimeParams.getParams();
+            // if (zoom && lon && lat) {
+            //   this.map.setCenter([
+            //     parseFloat(lon),
+            //     parseFloat(lat),
+            //   ],
+            //   );
+            //   this.map.setZoom(
+            //     parseInt(zoom, 10),
+            //   );
+            //   if (angle) {
+            //     this.map.setRotation(
+            //       parseFloat(angle),
+            //     );
+            //   }
+            // } else {
+            //   this.map.fit(this.options.displayConfig.extent);
+            // }
+            this.map.fit(this._extent);
         };
         return WebMap;
     }());

@@ -52,7 +52,6 @@ export class WebLayerEntry extends Entry<EntryOptions> {
   }
 
   initItem(item: TreeGroup | TreeLayer) {
-
     let newLayer = item._layer;
     if (item.item_type === 'group' || item.item_type === 'root') {
       if (item.children && item.children.length) {
@@ -66,16 +65,6 @@ export class WebLayerEntry extends Entry<EntryOptions> {
       newLayer = this.map.addLayer(adapter, Object.assign({
         id: this.id,
       }, item));
-      // const url = fixUrlStr(this.options.ngwConfig.applicationUrl + '/api/component/render/image');
-      // newLayer = this.map.addLayer('IMAGE', {
-      //   id: this.id,
-      //   url,
-      //   styleId: item.layer_style_id,
-      //   transparency: item.layer_transparency,
-      //   // visibility: item.layer_enabled,
-      //   minResolution: item.layer_min_scale_denom,
-      //   maxResolution: item.layer_max_scale_denom,
-      // });
     }
     if (newLayer) {
       item._layer = newLayer;
