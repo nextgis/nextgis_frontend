@@ -1,6 +1,6 @@
 {
   "name": "@ngw-front/url-runtime-params",
-  "version": "0.0.0",
+  "version": "0.0.1-alpha.0",
   "description": "",
   "main": "index",
   "types": "index.d.ts",

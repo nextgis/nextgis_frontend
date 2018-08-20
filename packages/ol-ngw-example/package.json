@@ -1,6 +1,6 @@
 {
   "name": "ol-ngw-example",
-  "version": "0.0.0",
+  "version": "0.0.1-alpha.0",
   "description": "",
   "main": "index",
   "types": "index.d.ts",
@@ -22,9 +22,9 @@
   "author": "",
   "license": "GPL-3.0",
   "dependencies": {
-    "@ngw-front/ngw-kit": "0.0.0",
-    "@ngw-front/ol-map-adapter": "0.0.0",
-    "@ngw-front/webmap": "0.0.0",
+    "@ngw-front/ngw-kit": "^0.0.1-alpha.0",
+    "@ngw-front/ol-map-adapter": "^0.0.1-alpha.0",
+    "@ngw-front/webmap": "^0.0.1-alpha.0",
     "ol": "^5.1.3"
   },
   "devDependencies": {

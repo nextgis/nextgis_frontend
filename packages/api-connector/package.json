@@ -1,6 +1,6 @@
 {
   "name": "@ngw-front/api-connector",
-  "version": "0.0.5",
+  "version": "0.0.6-alpha.0",
   "description": "Module for interaction with NGW (NextGis Web) server API",
   "main": "index.js",
   "types": "index.d.ts",
