@@ -1,5 +1,5 @@
 {
-  "name": "@ngw-front/mapbox-gl-adapter",
+  "name": "@nextgis/mapbox-gl-adapter",
   "version": "0.0.1-alpha.0",
   "description": "",
   "main": "index",

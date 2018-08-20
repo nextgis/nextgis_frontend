@@ -1,5 +1,5 @@
 {
-  "name": "@ngw-front/ol-map-adapter",
+  "name": "@nextgis/ol-map-adapter",
   "version": "0.0.1-alpha.0",
   "description": "",
   "main": "index",

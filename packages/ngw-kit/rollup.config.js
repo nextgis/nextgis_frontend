@@ -9,7 +9,7 @@ const pckg = require('./package');
 const input = pckg.main + '.ts';
 
 export default {
-  external: ['ol', '@ngw-front/api-connector'],
+  external: ['ol', '@nextgis/api-connector'],
   input,
   output: [
       {file: pckg.main + '.js', format: 'umd', name: 'NgwKit', sourcemap: true}

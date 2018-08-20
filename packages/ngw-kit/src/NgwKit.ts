@@ -1,4 +1,4 @@
-import { Ngw } from '@ngw-front/api-connector';
+import { Ngw } from '@nextgis/api-connector';
 
 export interface NgwConfig {
   applicationUrl: string;

@@ -1,6 +1,6 @@
-import { WebMap } from '@ngw-front/webmap';
-import { OlMapAdapter } from '@ngw-front/ol-map-adapter';
-import { NgwKit } from '@ngw-front/ngw-kit';
+import { WebMap } from '@nextgis/webmap';
+import { OlMapAdapter } from '@nextgis/ol-map-adapter';
+import { NgwKit } from '@nextgis/ngw-kit';
 
 
 

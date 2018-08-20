@@ -1,6 +1,6 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@ngw-front/api-connector')) :
-  typeof define === 'function' && define.amd ? define(['exports', '@ngw-front/api-connector'], factory) :
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@nextgis/api-connector')) :
+  typeof define === 'function' && define.amd ? define(['exports', '@nextgis/api-connector'], factory) :
   (factory((global.NgwKit = {}),global.apiConnector));
 }(this, (function (exports,apiConnector) { 'use strict';
 
