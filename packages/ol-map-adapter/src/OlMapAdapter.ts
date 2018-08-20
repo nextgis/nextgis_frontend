@@ -1,11 +1,11 @@
-import TileLayer from 'ol/layer/Tile';
-
 import Map from 'ol/Map';
 import {fromLonLat, transformExtent} from 'ol/proj';
-import OSM from 'ol/source/OSM';
+
 import View from 'ol/View';
 import { ImageAdapter } from './layer-adapters/ImageAdapter';
 import { EventEmitter } from 'events';
+import { OsmAdapter } from './layer-adapters/OsmAdapter';
+import { resolve } from 'path';
 
 interface LayerMem {
   order: number;
@@ -19,7 +19,7 @@ export class OlMapAdapter { // implements MapAdapter {
     IMAGE: ImageAdapter,
     // TILE: TileAdapter,
     // MVT: MvtAdapter,
-    // OSM: OsmAdapter
+    OSM: OsmAdapter
   };
 
   options;
@@ -54,9 +54,6 @@ export class OlMapAdapter { // implements MapAdapter {
       controls: [],
       view,
       layers: [
-        new TileLayer({
-          source: new OSM(),
-        }),
       ],
     };
     const mapInitOptions = {...defOpt, ...options};
@@ -150,9 +147,9 @@ export class OlMapAdapter { // implements MapAdapter {
       // const layerId = adapter.name;
       this._layers[options.id] = {layer, order: options.order || this._order++, onMap: false};
       this._length++;
-      return adapter;
+      return Promise.resolve(adapter);
     }
-
+    return Promise.reject('No adapter');
   }
 
   removeLayer(layerName: string) {

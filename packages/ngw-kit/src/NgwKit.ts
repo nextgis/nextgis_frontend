@@ -1,4 +1,4 @@
-import Ngw from '@ngw-front/api-connector';
+import { Ngw } from '@ngw-front/api-connector';
 
 export interface NgwConfig {
   applicationUrl: string;
@@ -22,10 +22,30 @@ export class NgwKit {
   getSettings() {
     return new Promise((resolve) => {
       this.connector.request('resource.item', (data) => {
-        if (data && data.webmap) {
+        const webmap = data.webmap;
+        if (webmap) {
+
+          this._updateItemsUrl(webmap.root_item)
+
           resolve(data.webmap);
         }
       }, { id: this.resourceId });
     });
   }
+
+  private _updateItemsUrl(item) {
+    if (item) {
+      if (item.children) {
+        item.children.forEach((x) => this._updateItemsUrl(x));
+      } else if (item.item_type === 'layer' && item.layer_adapter === 'image') {
+        const url = fixUrlStr(this.url + '/api/component/render/image');
+        item.url = url;
+      }
+    }
+  }
+}
+
+export function fixUrlStr(url: string) {
+  // remove double slash
+  return url.replace(/([^:]\/)\/+/g, '$1');
 }

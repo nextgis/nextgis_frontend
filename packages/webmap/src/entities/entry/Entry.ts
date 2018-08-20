@@ -1,6 +1,6 @@
 import {EventEmitter} from 'events';
 import {TreeHelper} from './TreeHelper';
-import {EntryProperties, IEntryPropertyConfig, IEntryPropertyTypes} from './Properties/EntryProperties';
+import {EntryProperties, IEntryPropertyConfig, IEntryPropertyTypes} from './properties/EntryProperties';
 
 export interface EntryOptions {
   properties?: Array<IEntryPropertyConfig<keyof IEntryPropertyTypes>>;

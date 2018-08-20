@@ -20,7 +20,7 @@ export class ImageAdapter {
     const source = new ImageWMS({
       url: options.url,
       params: {
-        resource: options.styleId,
+        resource: options.layer_style_id,
       },
       ratio: 1,
       imageLoadFunction: (image, src) => {

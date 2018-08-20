@@ -1,3 +1,3 @@
-import { NgwKit, NgwConfig } from './src/NgwKit';
+import { NgwKit } from './src/NgwKit';
 
-export { NgwKit, NgwConfig };
+export { NgwKit };

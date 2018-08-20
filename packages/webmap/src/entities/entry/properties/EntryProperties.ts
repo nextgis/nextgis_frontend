@@ -1,7 +1,7 @@
 import { BaseProperty, IEntryBasePropertyOptions } from './BaseProperty';
 import { CheckProperty } from './CheckProperty';
 import { Entry } from '../Entry';
-import { Type } from '../../../Utils/Type';
+import { Type } from '../../../utils/Type';
 
 export interface IEntryPropertyTypes {
   'boolean': boolean;
