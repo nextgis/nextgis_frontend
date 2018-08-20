@@ -2,13 +2,6 @@ import { LayerAdapter, LayerAdapters } from './LayerAdapter';
 import { Type } from '../Utils/Type';
 import { EventEmitter } from 'events';
 
-export interface MapOptions {
-  target: string | HTMLElement;
-  logo?: string;
-  controls?: any[];
-  minZoom?: number;
-}
-
 export interface MapAdapter<M = any> {
 
   lonlatProjection: string;

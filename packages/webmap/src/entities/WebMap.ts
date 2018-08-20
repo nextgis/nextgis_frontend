@@ -1,5 +1,4 @@
-import { AppOptions } from '../interfaces/WebMapApp';
-import { AppSettings, Settings } from '../interfaces/AppSettings';
+import { AppOptions, MapOptions } from '../interfaces/WebMapApp';
 import { RuntimeParams } from '../interfaces/RuntimeParams';
 import { deepmerge } from '../utils/lang';
 // import StrictEventEmitter from 'strict-event-emitter-types';
@@ -9,20 +8,16 @@ import { Keys } from './keys/Keys';
 import { MapAdapter } from '../interfaces/MapAdapter';
 import { Type } from '../Utils/Type';
 import { LayerAdapter, LayerAdapters } from '../interfaces/LayerAdapter';
+import { StarterKit, AppSettings } from '../interfaces/AppSettings';
 
 export class WebMap<M = any> {
 
-  options: AppOptions = {
-    target: '',
-    displayConfig: {
-      extent: [-180, -90, 180, 90],
-    },
-  };
+  options: MapOptions;
 
   displayProjection = 'EPSG:3857';
   lonlatProjection = 'EPSG:4326';
 
-  settings: Settings;
+  settings: AppSettings;
 
   layers: WebLayerEntry;
 
@@ -33,21 +28,22 @@ export class WebMap<M = any> {
   map: MapAdapter<M>;
 
   runtimeParams: RuntimeParams[];
-  private _settings: AppSettings;
+  private _starterKits: StarterKit[];
 
   private settingsIsLoading = false;
 
   private _baseLayers: string[] = [];
 
-  constructor(webMapOptions) {
-    this.map = webMapOptions.mapAdapter;
+  constructor(appOptions: AppOptions) {
+    this.map = appOptions.mapAdapter;
+    this._starterKits = appOptions.starterKits || [];
   }
 
-  async create(options: AppOptions): Promise<this> {
+  async create(options: MapOptions): Promise<this> {
 
     this.options = deepmerge(this.options, options);
 
-    if (!this.settings && this._settings) {
+    if (!this.settings && this._starterKits.length) {
       await this.getSettings();
     }
 
@@ -56,13 +52,13 @@ export class WebMap<M = any> {
     return this;
   }
 
-  async getSettings(): Promise<Settings> {
+  async getSettings(): Promise<AppSettings> {
     if (this.settings) {
       return Promise.resolve(this.settings);
     }
     if (this.settingsIsLoading) {
 
-      return new Promise<Settings>((resolve) => {
+      return new Promise<AppSettings>((resolve) => {
         const onLoad = (x) => {
           resolve(x);
           this.emitter.removeListener('load-settings', onLoad);
@@ -72,9 +68,15 @@ export class WebMap<M = any> {
 
     } else {
       this.settingsIsLoading = true;
-      let settings: Settings | boolean;
+      let settings: AppSettings | boolean;
       try {
-        settings = await this._settings.getSettings(this.options);
+        settings = {};
+        for (const getSetting of this._starterKits.map((x) => x.getSettings)) {
+          const setting = await getSetting();
+          if (setting) {
+            Object.assign(settings, setting);
+          }
+        }
       } catch (er) {
         this.settingsIsLoading = false;
         throw new Error(er);
@@ -126,16 +128,16 @@ export class WebMap<M = any> {
     this.emitter.emit('build-map', this.map);
   }
 
-  // private async _addTreeLayers() {
-  //   const settings = await this.getSettings();
-  //   if (settings) {
-  //     const rootLayer = settings.webmap.root_item;
-  //     if (rootLayer) {
-  //       this.layers = new WebLayerEntry(this.map, rootLayer, this.options);
-  //       this.emitter.emit('add-layers', this.layers);
-  //     }
-  //   }
-  // }
+  private async _addTreeLayers() {
+    const settings = await this.getSettings();
+    if (settings) {
+      const rootLayer = settings.root_item;
+      if (rootLayer) {
+        this.layers = new WebLayerEntry(this.map, rootLayer);
+        this.emitter.emit('add-layers', this.layers);
+      }
+    }
+  }
 
   // private _zoomToInitialExtent() {
   //   const { lat, lon, zoom, angle } = this.runtimeParams.getParams();

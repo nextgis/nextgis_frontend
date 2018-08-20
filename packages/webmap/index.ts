@@ -1,12 +1,18 @@
 import { WebMap } from './src/entities/WebMap';
-import { AppOptions } from './src/interfaces/WebMapApp';
+import { AppOptions, MapOptions } from './src/interfaces/WebMapApp';
+import { LayerAdapter, LayerAdapters } from './src/interfaces/LayerAdapter';
+import { MapAdapter } from './src/interfaces/MapAdapter';
 
-export {WebMap, AppOptions};
+export {
+  WebMap, AppOptions,
+  LayerAdapter, LayerAdapters,
+  MapAdapter, MapOptions,
+};
 
 // Composition root
-export async function buildWebMap(opt: AppOptions, config): Promise<WebMap> {
-  const webMap = new WebMap(config);
-  await webMap.create(opt);
+export async function buildWebMap(appOpt: AppOptions, mapOpt: MapOptions): Promise<WebMap> {
+  const webMap = new WebMap(appOpt);
+  await webMap.create(mapOpt);
   return webMap;
 }
 

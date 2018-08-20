@@ -2,14 +2,10 @@ import { Entry, EntryOptions } from './entry/Entry';
 import { TreeGroup, TreeLayer } from '../interfaces/AppSettings';
 import { fixUrlStr } from '../utils/lang';
 import { MapAdapter } from '../interfaces/MapAdapter';
-import { NgwConfig } from '../interfaces/NgwConfig';
+import { LayerAdapters } from '../interfaces/LayerAdapter';
 
-interface WebLayerEntryOptions extends EntryOptions {
-  ngwConfig?: NgwConfig;
-}
-
-export class WebLayerEntry extends Entry<WebLayerEntryOptions> {
-  static options: WebLayerEntryOptions = {
+export class WebLayerEntry extends Entry<EntryOptions> {
+  static options: EntryOptions = {
     properties: [
       {
         type: 'boolean',
@@ -45,7 +41,7 @@ export class WebLayerEntry extends Entry<WebLayerEntryOptions> {
   item: TreeGroup | TreeLayer;
 
   constructor(map: MapAdapter<any>,
-              item: TreeGroup | TreeLayer, options: WebLayerEntryOptions, parent?: WebLayerEntry) {
+              item: TreeGroup | TreeLayer, options?: EntryOptions, parent?: WebLayerEntry) {
     super(Object.assign({}, WebLayerEntry.options, options));
     this.map = map;
     this.item = item;
@@ -67,16 +63,20 @@ export class WebLayerEntry extends Entry<WebLayerEntryOptions> {
         });
       }
     } else if (item.item_type === 'layer') {
-      const url = fixUrlStr(this.options.ngwConfig.applicationUrl + '/api/component/render/image');
-      newLayer = this.map.addLayer('IMAGE', {
+      const adapter = item.layer_adapter.toUpperCase() as keyof LayerAdapters;
+      newLayer = this.map.addLayer(adapter, Object.assign({
         id: this.id,
-        url,
-        styleId: item.layer_style_id,
-        transparency: item.layer_transparency,
-        // visibility: item.layer_enabled,
-        minResolution: item.layer_min_scale_denom,
-        maxResolution: item.layer_max_scale_denom,
-      });
+      }, item));
+      // const url = fixUrlStr(this.options.ngwConfig.applicationUrl + '/api/component/render/image');
+      // newLayer = this.map.addLayer('IMAGE', {
+      //   id: this.id,
+      //   url,
+      //   styleId: item.layer_style_id,
+      //   transparency: item.layer_transparency,
+      //   // visibility: item.layer_enabled,
+      //   minResolution: item.layer_min_scale_denom,
+      //   maxResolution: item.layer_max_scale_denom,
+      // });
     }
     if (newLayer) {
       item._layer = newLayer;
