@@ -1,6 +1,5 @@
 import { Entry, EntryOptions } from './entry/Entry';
 import { TreeGroup, TreeLayer } from '../interfaces/AppSettings';
-import { fixUrlStr } from '../utils/lang';
 import { MapAdapter } from '../interfaces/MapAdapter';
 import { LayerAdapters } from '../interfaces/LayerAdapter';
 

@@ -1,10 +1,16 @@
 interface AdapterOptions {
-  id: string;
+  id?: string;
+  url?: string;
+  transparency?: number;
+  // visibility: item.layer_enabled,
+  minResolution?: number;
+  maxResolution?: number;
+
+  // move out of here
+  styleId?: number;
 }
 
 interface MvtOptions extends AdapterOptions {
-  id: string;
-  url: string;
   paint?;
 }
 

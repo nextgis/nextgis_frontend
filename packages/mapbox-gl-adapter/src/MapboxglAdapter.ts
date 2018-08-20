@@ -104,14 +104,16 @@ export class MapboxglAdapter { // implements MapAdapter {
     // this._toggleLayer(false, layerName);
   }
 
+  // TODO: rename hasLayer; move to WebMap
   getLayer(layerName: string) {
     return this._layers[layerName] !== undefined;
   }
 
+  // TODO: move to WebMap
   isLayerOnTheMap(layerName: string): boolean {
     return this._layers[layerName];
   }
-
+  // TODO: move to WebMap
   getLayers(): string[] {
     return Object.keys(this._layers);
   }
