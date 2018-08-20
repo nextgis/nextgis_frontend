@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/ngw-kit",
-  "version": "0.0.1-alpha.0",
+  "version": "0.0.1",
   "description": "",
   "main": "index",
   "types": "index.d.ts",
@@ -22,7 +22,7 @@
   "author": "",
   "license": "GPL-3.0",
   "dependencies": {
-    "@nextgis/api-connector": "^0.0.6-alpha.0"
+    "@nextgis/api-connector": "^0.0.6"
   },
   "devDependencies": {
     "rollup": "^0.64.1",
