@@ -24,6 +24,8 @@ export interface TreeLayer extends TreeItem {
   layer_min_scale_denom: any;
   layer_style_id: number;
   layer_transparency: any;
+
+  layer_url: string;
 }
 
 // Ngw api settings

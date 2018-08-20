@@ -1,5 +1,5 @@
 {
-  "name": "@ngw-front/ol-map-adapter",
+  "name": "@ngw-front/ngw-kit",
   "version": "0.0.0",
   "description": "",
   "main": "index",
@@ -22,7 +22,7 @@
   "author": "",
   "license": "GPL-3.0",
   "dependencies": {
-    "ol": "^5.0.3"
+    "@ngw-front/api-connector": "0.0.5"
   },
   "devDependencies": {
     "rollup": "^0.64.1",

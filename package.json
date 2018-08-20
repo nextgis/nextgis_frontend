@@ -2,7 +2,7 @@
   "name": "root",
   "private": true,
   "devDependencies": {
-    "lerna": "^3.0.6",
+    "lerna": "^3.1.1",
     "typescript": "*",
     "rollup": "*",
     "rollup-plugin-typescript2": "*"

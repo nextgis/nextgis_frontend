@@ -69,14 +69,7 @@
                 }
             };
             if (options.paint) {
-                layerOptions.paint = {
-                    'fill-color': 'red',
-                    'fill-opacity': 0.8,
-                    'fill-opacity-transition': {
-                        duration: 0
-                    },
-                    'fill-outline-color': '#8b0000' // darkred
-                };
+                layerOptions.paint = options.paint;
             }
             this.map.addLayer(layerOptions);
             return this.name;

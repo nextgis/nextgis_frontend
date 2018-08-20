@@ -4,8 +4,8 @@ import { EventEmitter } from 'events';
 
 export interface MapAdapter<M = any> {
 
-  lonlatProjection: string;
-  displayProjection: string;
+  lonlatProjection?: string;
+  displayProjection?: string;
   map: M;
   emitter: EventEmitter;
 

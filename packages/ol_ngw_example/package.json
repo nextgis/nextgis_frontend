@@ -1,0 +1,48 @@
+{
+  "name": "ol-ngw-example",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index",
+  "types": "index.d.ts",
+  "files": [
+    "index.js",
+    "index.d.ts"
+  ],
+  "scripts": {
+    "build": "webpack ./src/main.js --mode development",
+
+    "start": "webpack-dev-server --progress",
+    "watch": "rimraf ./dist && npm run build -- --watch",
+    "dev": "rimraf ./dist && npm run build",
+    "data": "node ./scripts/generator.js",
+    "prod": "rimraf ./dist && npm run build -- --mode=production"
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nextgis/nextgisweb_frontend.git"
+  },
+  "keywords": [
+    "NextGIS",
+    "MAP"
+  ],
+  "author": "",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "@ngw-front/ngw-kit": "0.0.0",
+    "@ngw-front/ol-map-adapter": "0.0.0",
+    "@ngw-front/webmap": "0.0.0",
+    "ol": "^5.1.3"
+  },
+  "devDependencies": {
+    "fork-ts-checker-webpack-plugin": "^0.4.3",
+    "rimraf": "^2.6.2",
+    "ts-loader": "^4.4.2",
+    "tslint": "^5.11.0",
+    "tslint-loader": "^3.6.0",
+    "typescript": "^3.0.1",
+    "webpack": "^4.16.5",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.5"
+  }
+}
