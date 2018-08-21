@@ -24,5 +24,6 @@
   "license": "GPL-3.0",
   "devDependencies": {
     "http-server": "^0.11.1"
-  }
+  },
+  "gitHead": "bfca4116cc6f97eadae8093142123ca08efa9f55"
 }

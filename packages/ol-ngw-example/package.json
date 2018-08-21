@@ -1,12 +1,7 @@
 {
   "name": "@nextgis/ol-ngw-example",
+  "private": true,
   "version": "0.0.2",
-  "main": "index",
-  "types": "index.d.ts",
-  "files": [
-    "index.js",
-    "index.d.ts"
-  ],
   "scripts": {
     "build": "webpack ./src/main.js --progress",
     "watch": "webpack ./src/main.js --mode development --watch --progress"
@@ -35,5 +30,6 @@
     "url": "https://github.com/nextgis/nextgisweb_frontend/issues"
   },
   "homepage": "https://github.com/nextgis/nextgisweb_frontend#readme",
-  "description": ""
+  "description": "",
+  "gitHead": "bfca4116cc6f97eadae8093142123ca08efa9f55"
 }

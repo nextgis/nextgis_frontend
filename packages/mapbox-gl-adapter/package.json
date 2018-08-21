@@ -34,5 +34,6 @@
     "rollup-plugin-typescript2": "^0.16.1",
     "rollup-plugin-uglify": "^4.0.0",
     "typescript": "^3.0.1"
-  }
+  },
+  "gitHead": "bfca4116cc6f97eadae8093142123ca08efa9f55"
 }
