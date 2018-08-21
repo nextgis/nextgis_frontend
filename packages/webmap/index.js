@@ -773,7 +773,7 @@
                         property.set(value, Object.assign({}, options, { bubble: true, propagation: false }));
                     }
                 }
-                else if (!this.isBlocked()) {
+                if (!this.isBlocked()) {
                     this._turnOn(options);
                 }
             }
