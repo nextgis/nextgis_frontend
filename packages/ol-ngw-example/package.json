@@ -8,7 +8,8 @@
     "index.d.ts"
   ],
   "scripts": {
-    "build": "webpack ./src/main.js --progress"
+    "build": "webpack ./src/main.js --progress",
+    "watch": "webpack ./src/main.js --mode development --watch --progress"
   },
   "repository": {
     "type": "git",

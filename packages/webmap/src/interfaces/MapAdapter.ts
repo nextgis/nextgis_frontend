@@ -2,6 +2,10 @@ import { LayerAdapter, LayerAdapters } from './LayerAdapter';
 import { Type } from '../Utils/Type';
 import { EventEmitter } from 'events';
 
+interface MapClickEvent {
+  coordinates;
+}
+
 export interface MapAdapter<M = any> {
 
   lonlatProjection?: string;
@@ -35,4 +39,6 @@ export interface MapAdapter<M = any> {
   addControl(controlDef, position: string): void;
 
   getContainer(): HTMLElement;
+
+  onMapClick(evt: MapClickEvent): void;
 }

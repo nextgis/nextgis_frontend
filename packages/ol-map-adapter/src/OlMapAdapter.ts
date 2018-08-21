@@ -1,11 +1,11 @@
 import Map from 'ol/Map';
-import {fromLonLat, transformExtent} from 'ol/proj';
+import { fromLonLat, transformExtent, transform } from 'ol/proj';
 
 import View from 'ol/View';
 import { ImageAdapter } from './layer-adapters/ImageAdapter';
 import { EventEmitter } from 'events';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
-import { resolve } from 'path';
+import { MarkerAdapter } from './layer-adapters/markerAdapter';
 
 interface LayerMem {
   order: number;
@@ -19,7 +19,8 @@ export class OlMapAdapter { // implements MapAdapter {
     IMAGE: ImageAdapter,
     // TILE: TileAdapter,
     // MVT: MvtAdapter,
-    OSM: OsmAdapter
+    OSM: OsmAdapter,
+    MARKER: MarkerAdapter
   };
 
   options;
@@ -30,7 +31,7 @@ export class OlMapAdapter { // implements MapAdapter {
 
   map: Map;
 
-  _layers: {[x: string]: LayerMem} = {};
+  _layers: { [x: string]: LayerMem } = {};
   private _olView: View;
   private _order = 0;
   private _length = 9999; // TODO: get real layers length count, after all registered
@@ -41,7 +42,7 @@ export class OlMapAdapter { // implements MapAdapter {
   // private _layers: {[name: string]: LayerMem} = {};
 
   // create(options: MapOptions = {target: 'map'}) {
-  create(options = {target: 'map'}) {
+  create(options = { target: 'map' }) {
     this.options = Object.assign({}, options);
     const view = new View({
       center: [-9101767, 2822912],
@@ -53,14 +54,11 @@ export class OlMapAdapter { // implements MapAdapter {
       logo: false,
       controls: [],
       view,
-      layers: [
-      ],
+      layers: [],
     };
-    const mapInitOptions = {...defOpt, ...options};
+    const mapInitOptions = { ...defOpt, ...options };
 
     this.map = new Map(mapInitOptions);
-
-    // this._olMap.addLayer(new TileLayer({ source: new OSM()}));
 
     this._olView = this.map.getView();
 
@@ -71,10 +69,11 @@ export class OlMapAdapter { // implements MapAdapter {
     // olView.on('change:center', (evt) => {
     //   this.set('center', olView.getCenter());
     // });
+
+    this._addMapListeners();
   }
 
   getContainer() {
-    // ignore
     return document.getElementById(this.options.target);
   }
 
@@ -109,19 +108,6 @@ export class OlMapAdapter { // implements MapAdapter {
     return OlMapAdapter.layerAdapters[name];
   }
 
-  registrateWmsLayer(layerName: string, options?: {url: string, styleId: string, order?: number}) {
-    // if (!layerName) {
-    //   throw new Error('layerName is required parameter');
-    // }
-    // let layer = this._layers[layerName];
-    // if (!layer) {
-    //   layer = this._imageAdapter(options);
-    //   this._layers[layerName] = {layer, order: options.order || ORDER++};
-    //   // LENGTH++;
-    // }
-    // return layer;
-  }
-
   getLayer(layerName: string) {
     return this._layers[layerName] !== undefined;
   }
@@ -144,8 +130,8 @@ export class OlMapAdapter { // implements MapAdapter {
     if (adapterEngine) {
       const adapter = new adapterEngine(this.map, options);
       const layer = adapter.addLayer(options);
-      // const layerId = adapter.name;
-      this._layers[options.id] = {layer, order: options.order || this._order++, onMap: false};
+      const layerId = adapter.name;
+      this._layers[layerId] = { layer, order: options.order || this._order++, onMap: false };
       this._length++;
       return Promise.resolve(adapter);
     }
@@ -189,13 +175,35 @@ export class OlMapAdapter { // implements MapAdapter {
       l.onMap = status;
     };
     const layer = this._layers[layerName];
-    if (layer) {
+    if (layer && layer.onMap !== status) {
       action(this.map, layer);
     }
   }
 
   addControl(controlDef, position: string) {
     // ignore
+  }
+
+  onMapClick(evt) {
+    const [lng, lat] = transform(
+      evt.coordinate,
+      this.displayProjection,
+      this.lonlatProjection,
+    );
+    const latLng = {
+      lat, lng
+    };
+    this.emitter.emit('click', {
+      latLng,
+      pixel: {left: evt.pixel[0], top: evt.pixel[1]},
+      source: evt
+    });
+  }
+
+  private _addMapListeners() {
+    this.map.on('click', (evt) => {
+      this.onMapClick(evt);
+    });
   }
 
 }
