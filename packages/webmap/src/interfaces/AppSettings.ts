@@ -1,5 +1,3 @@
-import { AppOptions } from './WebMapApp';
-
 export interface TreeItem {
   item_type: 'root' | 'group' | 'layer';
   display_name?: string;

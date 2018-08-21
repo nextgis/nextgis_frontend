@@ -92,7 +92,7 @@ export class MapboxglAdapter { // implements MapAdapter {
         adapterEngine = this.getLayerAdapter(adapterDef);
       }
       if (adapterEngine) {
-        const adapter = new adapterEngine(this.map, options);
+        const adapter = new adapterEngine(this.map, options) as any;
         const layerId = adapter.name;
         this._layers[layerId] = false;
         return adapter;
@@ -130,8 +130,8 @@ export class MapboxglAdapter { // implements MapAdapter {
     return parseFloat(scale) / (mpu * this.IPM * this.DPI);
   }
 
-  onMapLoad(cb?) {
-    return new Promise((resolve) => {
+  onMapLoad<K = any>(cb?): Promise<K> {
+    return new Promise<K>((resolve) => {
       if (this.isLoaded) { // map.loaded()
         resolve(cb && cb());
       } else {
@@ -169,6 +169,13 @@ export class MapboxglAdapter { // implements MapAdapter {
     }
   }
 
+  onMapClick(evt) {
+
+    const latLng = evt.latLng;
+
+    this.emitter.emit('click', {latLng});
+  }
+
   private _addEventsListeners() {
     this.map.on('data', (data) => {
       if (data.dataType === 'source') {
@@ -177,6 +184,9 @@ export class MapboxglAdapter { // implements MapAdapter {
           this.emitter.emit('data-loaded', { target: data.sourceId });
         }
       }
+    });
+    this.map.on('click', (evt) => {
+      this.onMapClick(evt);
     });
   }
 }
