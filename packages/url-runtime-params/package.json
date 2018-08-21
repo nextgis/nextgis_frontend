@@ -24,5 +24,6 @@
   "devDependencies": {
     "@types/events": "^1.2.0",
     "typescript": "^2.9.2"
-  }
+  },
+  "gitHead": "bfca4116cc6f97eadae8093142123ca08efa9f55"
 }
