@@ -42,7 +42,7 @@ export class WebMap<M = any> {
 
   async create(options: MapOptions): Promise<this> {
 
-    this.options = deepmerge(this.options, options);
+    this.options = deepmerge(this.options || {}, options);
 
     if (!this.settings && this._starterKits.length) {
       await this.getSettings();
@@ -93,7 +93,7 @@ export class WebMap<M = any> {
   }
 
   addBaseLayer(layerName: string, provider: keyof LayerAdapters | Type<LayerAdapter>, options?: any): any {
-    this.map.addLayer(provider, Object.assign({}, options, {id: layerName})).then((layer) => {
+    this.map.addLayer(provider, Object.assign({}, options, { id: layerName })).then((layer) => {
       if (layer) {
         this._baseLayers.push(layer.name);
       }
@@ -106,18 +106,19 @@ export class WebMap<M = any> {
 
   // region MAP
   private _setupMap() {
+    if (this.settings) {
+      const { extent_bottom, extent_left, extent_top, extent_right } = this.settings;
+      if (extent_bottom && extent_left && extent_top && extent_right) {
+        this._extent = [extent_bottom, extent_left, extent_top, extent_right];
+      }
 
-    const { extent_bottom, extent_left, extent_top, extent_right } = this.settings;
-    if (extent_bottom && extent_left && extent_top && extent_right) {
-      this._extent = [extent_bottom, extent_left, extent_top, extent_right];
-    }
-
-    const extent = this._extent;
-    if (extent[3] > 82) {
-      extent[3] = 82;
-    }
-    if (extent[1] < -82) {
-      extent[1] = -82;
+      const extent = this._extent;
+      if (extent[3] > 82) {
+        extent[3] = 82;
+      }
+      if (extent[1] < -82) {
+        extent[1] = -82;
+      }
     }
     this.map.displayProjection = this.displayProjection;
     this.map.lonlatProjection = this.lonlatProjection;
