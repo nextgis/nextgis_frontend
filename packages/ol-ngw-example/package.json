@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/ol-ngw-example",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "index",
   "types": "index.d.ts",
   "files": [
@@ -22,9 +22,9 @@
   "author": "",
   "license": "GPL-3.0",
   "dependencies": {
-    "@nextgis/ngw-kit": "^0.0.1",
-    "@nextgis/ol-map-adapter": "^0.0.1",
-    "@nextgis/webmap": "^0.0.1",
+    "@nextgis/ngw-kit": "^0.0.2",
+    "@nextgis/ol-map-adapter": "^0.0.2",
+    "@nextgis/webmap": "^0.0.2",
     "ol": "^5.1.3"
   },
   "devDependencies": {
