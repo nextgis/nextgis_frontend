@@ -33,6 +33,8 @@ export class MapboxglAdapter { // implements MapAdapter {
   private IPM = 39.37;
   private isLoaded = false;
 
+  private _sourcedataloading: {[name: string]: any[]} = {};
+
 
   // create(options: MapOptions = {target: 'map'}) {
   create(options) {
@@ -171,17 +173,44 @@ export class MapboxglAdapter { // implements MapAdapter {
 
   onMapClick(evt) {
 
-    const latLng = evt.latLng;
+    const latLng = evt.lngLat;
+    const {x, y} = evt.point;
 
-    this.emitter.emit('click', {latLng});
+    this.emitter.emit('click', { latLng, pixel: {top: y, left: x} });
   }
 
   private _addEventsListeners() {
-    this.map.on('data', (data) => {
+    // write mem for start loaded layers
+    this.map.on('sourcedataloading', (data) => {
+      this._sourcedataloading[data.sourceId] = this._sourcedataloading[data.sourceId] || [];
+      if (data.tile) {
+        this._sourcedataloading[data.sourceId].push(data.tile);
+      }
+    });
+    // emmit data-loaded for each layer or all sources is loaded
+    this.map.on('sourcedata', (data) => {
       if (data.dataType === 'source') {
         const isLoaded = data.isSourceLoaded;
+        // if all sources is loaded emmit event for all and clean mem
         if (isLoaded) {
-          this.emitter.emit('data-loaded', { target: data.sourceId });
+          Object.keys(this._sourcedataloading).forEach((x) => {
+            this.emitter.emit('data-loaded', { target: x });
+          });
+          this._sourcedataloading = {};
+        } else {
+          // check if all tiles in layer is loaded
+          const tiles = this._sourcedataloading[data.sourceId];
+          if (tiles && data.tile) {
+            const index = tiles.indexOf(data.tile);
+            if (index !== -1) {
+              this._sourcedataloading[data.sourceId].splice(index, 1);
+            }
+            // if no more loaded tiles in layer emit event and clean mem only for this layer
+            if (!tiles.length) {
+              this.emitter.emit('data-loaded', { target: data.sourceId });
+              delete this._sourcedataloading[data.sourceId];
+            }
+          }
         }
       }
     });
