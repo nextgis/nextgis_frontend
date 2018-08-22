@@ -1,8 +1,10 @@
 import { MvtAdapter } from './layer-adapters/MvtAdapter';
-import { NavigationControl, Map } from 'mapbox-gl';
+import { Map } from 'mapbox-gl';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
 import { TileAdapter } from './layer-adapters/TileAdapter';
 import { EventEmitter } from 'events';
+import { ZoomControl } from './controls/ZoomControl';
+import { CompassControl } from './controls/CompassControl';
 
 type positions = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
 
@@ -15,7 +17,8 @@ export class MapboxglAdapter { // implements MapAdapter {
   };
 
   static controlAdapters = {
-    ZOOM: NavigationControl
+    ZOOM: ZoomControl,
+    COMPASS: CompassControl
   };
 
   options: any;
@@ -209,10 +212,16 @@ export class MapboxglAdapter { // implements MapAdapter {
     this.map.on('sourcedata', (data) => {
       if (data.dataType === 'source') {
         const isLoaded = data.isSourceLoaded;
+        const emit = (target) => {
+          if (this._layers[target]) {
+            console.log(target);
+            this.emitter.emit('data-loaded', { target });
+          }
+        };
         // if all sources is loaded emmit event for all and clean mem
         if (isLoaded) {
           Object.keys(this._sourcedataloading).forEach((x) => {
-            this.emitter.emit('data-loaded', { target: x });
+            emit(x);
           });
           this._sourcedataloading = {};
         } else {
@@ -225,7 +234,7 @@ export class MapboxglAdapter { // implements MapAdapter {
             }
             // if no more loaded tiles in layer emit event and clean mem only for this layer
             if (!tiles.length) {
-              this.emitter.emit('data-loaded', { target: data.sourceId });
+              emit(data.sourceId);
               delete this._sourcedataloading[data.sourceId];
             }
           }
