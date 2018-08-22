@@ -19,7 +19,7 @@
   "dependencies": {
     "@nextgis/ngw-kit": "^0.0.2",
     "@nextgis/ol-map-adapter": "^0.0.2",
-    "@nextgis/webmap": "^0.0.2",
+    "@nextgis/webmap": "^0.0.3",
     "ol": "^5.1.3"
   },
   "devDependencies": {
