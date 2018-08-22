@@ -595,6 +595,30 @@
       return ret;
     }
 
+    var ZoomControl = /** @class */ (function (_super) {
+        __extends(ZoomControl, _super);
+        function ZoomControl(options) {
+            if (options === void 0) { options = {}; }
+            var _this = this;
+            options = Object.assign({}, options, { showCompass: false });
+            _this = _super.call(this, options) || this;
+            return _this;
+        }
+        return ZoomControl;
+    }(mapboxGl.NavigationControl));
+
+    var CompassControl = /** @class */ (function (_super) {
+        __extends(CompassControl, _super);
+        function CompassControl(options) {
+            if (options === void 0) { options = {}; }
+            var _this = this;
+            options = Object.assign({}, options, { showZoom: false });
+            _this = _super.call(this, options) || this;
+            return _this;
+        }
+        return CompassControl;
+    }(mapboxGl.NavigationControl));
+
     var MapboxglAdapter = /** @class */ (function () {
         function MapboxglAdapter() {
             this.displayProjection = 'EPSG:3857';
@@ -765,10 +789,16 @@
             this.map.on('sourcedata', function (data) {
                 if (data.dataType === 'source') {
                     var isLoaded = data.isSourceLoaded;
+                    var emit_1 = function (target) {
+                        if (_this._layers[target]) {
+                            console.log(target);
+                            _this.emitter.emit('data-loaded', { target: target });
+                        }
+                    };
                     // if all sources is loaded emmit event for all and clean mem
                     if (isLoaded) {
                         Object.keys(_this._sourcedataloading).forEach(function (x) {
-                            _this.emitter.emit('data-loaded', { target: x });
+                            emit_1(x);
                         });
                         _this._sourcedataloading = {};
                     }
@@ -782,7 +812,7 @@
                             }
                             // if no more loaded tiles in layer emit event and clean mem only for this layer
                             if (!tiles.length) {
-                                _this.emitter.emit('data-loaded', { target: data.sourceId });
+                                emit_1(data.sourceId);
                                 delete _this._sourcedataloading[data.sourceId];
                             }
                         }
@@ -799,7 +829,8 @@
             OSM: OsmAdapter
         };
         MapboxglAdapter.controlAdapters = {
-            ZOOM: mapboxGl.NavigationControl
+            ZOOM: ZoomControl,
+            COMPASS: CompassControl
         };
         return MapboxglAdapter;
     }());
