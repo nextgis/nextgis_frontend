@@ -18,6 +18,31 @@
     See the Apache Version 2.0 License for specific language governing permissions
     and limitations under the License.
     ***************************************************************************** */
+    /* global Reflect, Promise */
+
+    var extendStatics = function(d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+
+    function __extends(d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    }
+
+    var __assign = function() {
+        __assign = Object.assign || function __assign(t) {
+            for (var s, i = 1, n = arguments.length; i < n; i++) {
+                s = arguments[i];
+                for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+            }
+            return t;
+        };
+        return __assign.apply(this, arguments);
+    };
 
     function __awaiter(thisArg, _arguments, P, generator) {
         return new (P || (P = Promise))(function (resolve, reject) {
@@ -571,6 +596,450 @@
       return ret;
     }
 
+    function filterIn(entry, filterFunc, relationFunc, _filtered) {
+        if (filterFunc === void 0) { filterFunc = function (x) { return x; }; }
+        if (_filtered === void 0) { _filtered = []; }
+        var child;
+        if (Array.isArray(entry)) {
+            child = entry;
+        }
+        else {
+            var filter = filterFunc(entry);
+            if (filter) {
+                _filtered.push(entry);
+            }
+            var relChild = relationFunc(entry);
+            if (relChild) {
+                child = [].concat(relChild);
+            }
+        }
+        if (child) {
+            for (var fry = 0; fry < child.length; fry++) {
+                if (child[fry]) {
+                    filterIn(child[fry], filterFunc, relationFunc, _filtered);
+                }
+            }
+        }
+        return _filtered;
+    }
+
+    var TreeHelper = /** @class */ (function () {
+        function TreeHelper(entry) {
+            this._children = [];
+            this.entry = entry;
+        }
+        // region Parents
+        TreeHelper.prototype.setParent = function (parent) {
+            this._parent = parent;
+        };
+        TreeHelper.prototype.addChildren = function (children) {
+            this._children.push(children);
+        };
+        TreeHelper.prototype.getParent = function () {
+            return this._parent;
+        };
+        TreeHelper.prototype.getParents = function (filterFunc) {
+            if (this.getParent()) {
+                var generator = filterIn(this._parent, filterFunc, function (x) { return x.tree.getParent(); });
+                return generator;
+            }
+            return [];
+        };
+        // endregion
+        // region Child
+        TreeHelper.prototype.getDescendants = function (filterFunc) {
+            return filterIn(this._children, filterFunc, function (x) {
+                return x.tree.getChildren();
+            });
+        };
+        TreeHelper.prototype.getChildren = function () {
+            return this._children;
+        };
+        return TreeHelper;
+    }());
+
+    // export interface BasePropertyEvents<V, O> {
+    //   'change': {value: V, options: O};
+    //   'change-tree': {value: V, options: O, entry: Entry};
+    // }
+    var BaseProperty = /** @class */ (function () {
+        function BaseProperty(name, entry, options) {
+            // emitter: StrictEventEmitter<EventEmitter, BasePropertyEvents<V, O>> = new EventEmitter();
+            this.emitter = new EventEmitter();
+            this.entry = entry;
+            this.options = Object.assign({}, options);
+            this.name = name;
+            this._value = this.getProperty();
+        }
+        BaseProperty.prototype.getProperty = function () {
+            if (typeof this.options.getProperty === 'function') {
+                return this.options.getProperty.call(this);
+            }
+            return this.options.value;
+        };
+        BaseProperty.prototype.getParents = function () {
+            return this.entry.tree.getParents() || [];
+        };
+        BaseProperty.prototype.getParent = function () {
+            return this.entry.tree.getParent();
+        };
+        BaseProperty.prototype.isGroup = function () {
+            var children = this.entry.tree.getDescendants();
+            return children.length;
+        };
+        BaseProperty.prototype.isBlocked = function () {
+            var _this = this;
+            if (this._blocked === undefined) {
+                var parents = this.entry.tree.getParents();
+                if (parents) {
+                    var isBlocked = parents.find(function (x) {
+                        var parentProp = x.properties.get(_this.name);
+                        if (parentProp) {
+                            return !parentProp.value();
+                        }
+                    });
+                    this._blocked = !!isBlocked;
+                }
+                else {
+                    this._blocked = false;
+                }
+            }
+            return this._blocked;
+        };
+        BaseProperty.prototype.set = function (value, options) {
+            this._value = this._prepareValue(value);
+            this.update(this._value, options);
+            this._fireChangeEvent(this._value, options);
+        };
+        // shortcut for getValue
+        BaseProperty.prototype.value = function () {
+            return this.getValue();
+        };
+        BaseProperty.prototype.update = function (value, options) {
+            this._callOnSet(value, options);
+        };
+        BaseProperty.prototype.getContainer = function () {
+            return this._container;
+        };
+        BaseProperty.prototype.destroy = function () {
+            if (this._container) {
+                this._container.parentNode.removeChild(this._container);
+            }
+            if (this._removeEventsListener) {
+                this._removeEventsListener();
+            }
+        };
+        BaseProperty.prototype.getValue = function () {
+            return this._value !== undefined ? this._value : this.getProperty();
+        };
+        BaseProperty.prototype._prepareValue = function (value) {
+            return value;
+        };
+        BaseProperty.prototype._callOnSet = function (value, options) {
+            if (this.options.onSet) {
+                this.options.onSet.call(this, value, options);
+            }
+        };
+        BaseProperty.prototype._fireChangeEvent = function (value, options) {
+            var _this = this;
+            value = value !== undefined ? value : this.getValue();
+            this.emitter.emit('change', { value: value, options: options });
+            var parents = this.entry.tree.getParents();
+            parents.forEach(function (x) {
+                var prop = x.properties.get(_this.name);
+                if (prop) {
+                    prop.emitter.emit('change-tree', { value: value, options: options, entry: _this.entry });
+                }
+            });
+        };
+        return BaseProperty;
+    }());
+
+    var CheckProperty = /** @class */ (function (_super) {
+        __extends(CheckProperty, _super);
+        function CheckProperty(name, entry, options) {
+            var _this = _super.call(this, name, entry, Object.assign({}, CheckProperty.options, options)) || this;
+            _this.set(_this.value());
+            return _this;
+        }
+        CheckProperty.prototype.update = function (value, options) {
+            if (value) {
+                var bubble = (options && options.bubble) || this.options.bubble;
+                if (bubble) {
+                    this.unBlock(options);
+                    var parent_1 = this.getParent();
+                    var property = parent_1 && parent_1.properties.get(this.name);
+                    if (property) {
+                        property.set(value, Object.assign({}, options, { bubble: true, propagation: false }));
+                    }
+                }
+                if (!this.isBlocked()) {
+                    this._turnOn(options);
+                }
+            }
+            else {
+                this._turnOff(options);
+            }
+            var propagation = (options && options.propagation) || this.options.propagation;
+            if (propagation) {
+                this._propagation(value, options);
+            }
+        };
+        CheckProperty.prototype.getHierarchyValue = function () {
+            var _this = this;
+            return this.value() && this.getParents().every(function (x) {
+                var property = x.properties[_this.name];
+                return property && property.get();
+            });
+        };
+        CheckProperty.prototype._prepareValue = function (value) {
+            return !!value;
+        };
+        CheckProperty.prototype._turnOff = function (options) {
+            if (this.options.turnOff) {
+                this.options.turnOff.call(this, options);
+            }
+            this._callOnSet(false, options);
+            if (this.options.hierarchy && this.isGroup()) {
+                this.blockChilds(options);
+            }
+        };
+        CheckProperty.prototype._turnOn = function (options) {
+            if (this.options.turnOn) {
+                this.options.turnOn.call(this, options);
+            }
+            this._callOnSet(true, options);
+            if (this.options.hierarchy && this.isGroup()) {
+                this.unblockChilds(options);
+            }
+        };
+        CheckProperty.prototype.block = function (options) {
+            this._blocked = true;
+            this._block(options);
+        };
+        CheckProperty.prototype._block = function (options) {
+            this._turnOff(options);
+        };
+        CheckProperty.prototype.unBlock = function (options) {
+            this._blocked = false;
+            if (this.getValue()) {
+                this._unBlock(options);
+            }
+        };
+        CheckProperty.prototype._unBlock = function (options) {
+            this._turnOn(options);
+        };
+        CheckProperty.prototype.blockChilds = function (options) {
+            this.entry.tree.getDescendants().forEach(this._blockChild.bind(this, options));
+        };
+        CheckProperty.prototype.unblockChilds = function (options) {
+            this.entry.tree.getChildren().forEach(this._unBlockChild.bind(this, options));
+        };
+        CheckProperty.prototype._blockChild = function (options, entry) {
+            var prop = entry.properties.get(this.name);
+            if (prop.block) {
+                prop.block(options);
+            }
+        };
+        CheckProperty.prototype._unBlockChild = function (options, entry) {
+            var prop = entry.properties.get(this.name);
+            if (prop.unBlock) {
+                prop.unBlock(options);
+            }
+        };
+        CheckProperty.prototype._propagation = function (value, options) {
+            if (this.isGroup()) {
+                var childs = this.entry.tree.getChildren();
+                for (var fry = 0; fry < childs.length; fry++) {
+                    var child = childs[fry];
+                    var property = child.properties.get(this.name);
+                    if (property) {
+                        property.set(value, __assign({}, options, {
+                            propagation: true,
+                            bubble: false,
+                        }));
+                    }
+                }
+            }
+        };
+        CheckProperty.options = {
+            hierarchy: true,
+            bubble: false,
+            propagation: false,
+            label: 'Toggle',
+        };
+        return CheckProperty;
+    }(BaseProperty));
+
+    var EntryProperties = /** @class */ (function () {
+        function EntryProperties(entry, propertiesList) {
+            this.options = {};
+            this.entry = entry;
+            this._properties = {};
+            this._propertiesList = []; // ordered list
+            if (propertiesList) {
+                propertiesList.forEach(this._setPropertyHandler.bind(this));
+            }
+        }
+        EntryProperties.prototype.add = function (propOpt) {
+            this._setPropertyHandler(propOpt);
+        };
+        EntryProperties.prototype._setPropertyHandler = function (propOpt) {
+            var handlers = EntryProperties.handlers;
+            var handler = propOpt.handler;
+            if (!handler && propOpt.type) {
+                switch (propOpt.type) {
+                    case 'boolean':
+                        handler = handlers.CheckProperty;
+                        break;
+                    case 'string':
+                        handler = handlers.BaseProperty;
+                        break;
+                    default:
+                        handler = handlers.BaseProperty;
+                }
+            }
+            if (handler) {
+                var options = __assign({}, propOpt || {});
+                this._properties[propOpt.name] = new handler(propOpt.name, this.entry, options);
+                this._propertiesList.push(propOpt.name);
+            }
+        };
+        EntryProperties.prototype.update = function () {
+            this.list().forEach(function (x) {
+                x.update();
+            });
+        };
+        EntryProperties.prototype.value = function (name) {
+            var prop = this.get(name);
+            if (prop) {
+                return prop.value;
+            }
+        };
+        EntryProperties.prototype.set = function (name, value, options) {
+            var prop = this.get(name);
+            if (prop) {
+                return prop.set(value, options);
+            }
+        };
+        EntryProperties.prototype.get = function (name) {
+            return this._properties[name];
+        };
+        EntryProperties.prototype.list = function () {
+            var _this = this;
+            return this._propertiesList.map(function (x) { return _this._properties[x]; });
+        };
+        EntryProperties.prototype.destroy = function () {
+            for (var p in this._properties) {
+                if (this._properties.hasOwnProperty(p)) {
+                    var prop = this.get(p);
+                    if (prop && prop.destroy) {
+                        prop.destroy();
+                    }
+                }
+            }
+            this._properties = null;
+            this._propertiesList = [];
+        };
+        EntryProperties.handlers = {
+            CheckProperty: CheckProperty,
+        };
+        return EntryProperties;
+    }());
+
+    var ID = 0;
+    var Entry = /** @class */ (function () {
+        function Entry(options) {
+            this.emitter = new EventEmitter();
+            this.options = Object.assign({}, this.options, options);
+            this.id = String(ID++);
+            this.tree = new TreeHelper(this);
+        }
+        Entry.prototype.initProperties = function () {
+            this.properties = new EntryProperties(this, this.options.properties);
+        };
+        return Entry;
+    }());
+
+    var WebLayerEntry = /** @class */ (function (_super) {
+        __extends(WebLayerEntry, _super);
+        function WebLayerEntry(map, item, options, parent) {
+            var _this = _super.call(this, Object.assign({}, WebLayerEntry.options, options)) || this;
+            _this.map = map;
+            _this.item = item;
+            if (parent) {
+                _this.tree.setParent(parent);
+            }
+            _this.initProperties();
+            _this.initItem(item);
+            return _this;
+        }
+        WebLayerEntry.prototype.initItem = function (item) {
+            var _this = this;
+            var newLayer = item._layer;
+            if (item.item_type === 'group' || item.item_type === 'root') {
+                if (item.children && item.children.length) {
+                    item.children.forEach(function (x) {
+                        var children = new WebLayerEntry(_this.map, x, _this.options, _this);
+                        _this.tree.addChildren(children);
+                    });
+                }
+            }
+            else if (item.item_type === 'layer') {
+                var adapter = item.layer_adapter.toUpperCase();
+                newLayer = this.map.addLayer(adapter, Object.assign({
+                    id: this.id,
+                }, item));
+            }
+            if (newLayer) {
+                item._layer = newLayer;
+                if (item.item_type === 'layer' && item.layer_enabled) {
+                    this.properties.get('visibility').set(true);
+                }
+            }
+        };
+        // region layer control
+        WebLayerEntry.prototype.fit = function () {
+            if (this.item.item_type === 'layer') {
+                console.log(this.item);
+            }
+        };
+        WebLayerEntry.options = {
+            properties: [
+                {
+                    type: 'boolean',
+                    name: 'visibility',
+                    getProperty: function () {
+                        var entry = this.entry;
+                        if (entry.item.item_type === 'group') {
+                            return true;
+                        }
+                        else if (entry.item.item_type === 'layer') {
+                            return entry.item.layer_enabled;
+                        }
+                        else if (entry.item.item_type === 'root') {
+                            return true;
+                        }
+                        return false;
+                    },
+                    onSet: function (value) {
+                        var entry = this.entry;
+                        if (entry.item.item_type === 'layer') {
+                            if (value) {
+                                entry.map.showLayer(entry.id);
+                            }
+                            else {
+                                entry.map.hideLayer(entry.id);
+                            }
+                            entry.item.layer_enabled = value;
+                        }
+                    },
+                },
+            ],
+        };
+        return WebLayerEntry;
+    }(Entry));
+
     var KeyCodes = /** @class */ (function () {
         function KeyCodes() {
             this['backspace'] = 8;
@@ -681,28 +1150,23 @@
     }());
 
     var WebMap = /** @class */ (function () {
-        function WebMap(webMapOptions) {
-            this.options = {
-                target: '',
-                displayConfig: {
-                    extent: [-180, -90, 180, 90],
-                },
-            };
+        function WebMap(appOptions) {
             this.displayProjection = 'EPSG:3857';
             this.lonlatProjection = 'EPSG:4326';
             this.emitter /** : StrictEventEmitter<EventEmitter, WebMapAppEvents> */ = new EventEmitter();
             this.keys = new Keys(); // TODO: make injectable cashed
             this.settingsIsLoading = false;
             this._baseLayers = [];
-            this.map = webMapOptions.mapAdapter;
+            this.map = appOptions.mapAdapter;
+            this._starterKits = appOptions.starterKits || [];
         }
         WebMap.prototype.create = function (options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0:
-                            this.options = deepmerge(this.options, options);
-                            if (!(!this.settings && this._settings)) return [3 /*break*/, 2];
+                            this.options = deepmerge(this.options || {}, options);
+                            if (!(!this.settings && this._starterKits.length)) return [3 /*break*/, 2];
                             return [4 /*yield*/, this.getSettings()];
                         case 1:
                             _a.sent();
@@ -716,10 +1180,10 @@
         };
         WebMap.prototype.getSettings = function () {
             return __awaiter(this, void 0, void 0, function () {
-                var settings, er_1;
+                var settings, _i, _a, kit, setting, er_1;
                 var _this = this;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
+                return __generator(this, function (_b) {
+                    switch (_b.label) {
                         case 0:
                             if (this.settings) {
                                 return [2 /*return*/, Promise.resolve(this.settings)];
@@ -735,36 +1199,50 @@
                         case 1:
                             this.settingsIsLoading = true;
                             settings = void 0;
-                            _a.label = 2;
+                            _b.label = 2;
                         case 2:
-                            _a.trys.push([2, 4, , 5]);
-                            return [4 /*yield*/, this._settings.getSettings(this.options)];
+                            _b.trys.push([2, 7, , 8]);
+                            settings = {};
+                            _i = 0, _a = this._starterKits.filter(function (x) { return x.getSettings; });
+                            _b.label = 3;
                         case 3:
-                            settings = _a.sent();
-                            return [3 /*break*/, 5];
+                            if (!(_i < _a.length)) return [3 /*break*/, 6];
+                            kit = _a[_i];
+                            return [4 /*yield*/, kit.getSettings.call(kit)];
                         case 4:
-                            er_1 = _a.sent();
+                            setting = _b.sent();
+                            if (setting) {
+                                Object.assign(settings, setting);
+                            }
+                            _b.label = 5;
+                        case 5:
+                            _i++;
+                            return [3 /*break*/, 3];
+                        case 6: return [3 /*break*/, 8];
+                        case 7:
+                            er_1 = _b.sent();
                             this.settingsIsLoading = false;
                             throw new Error(er_1);
-                        case 5:
+                        case 8:
                             if (settings) {
                                 this.settings = settings;
                                 this.settingsIsLoading = false;
                                 this.emitter.emit('load-settings', settings);
                                 return [2 /*return*/, settings];
                             }
-                            _a.label = 6;
-                        case 6: return [2 /*return*/];
+                            _b.label = 9;
+                        case 9: return [2 /*return*/];
                     }
                 });
             });
         };
         WebMap.prototype.addBaseLayer = function (layerName, provider, options) {
             var _this = this;
-            this.map.addLayer(provider, Object.assign({}, options, { id: layerName })).then(function (layer) {
+            return this.map.addLayer(provider, __assign({}, options, { id: layerName }), true).then(function (layer) {
                 if (layer) {
                     _this._baseLayers.push(layer.name);
                 }
+                return layer;
             });
         };
         WebMap.prototype.isBaseLayer = function (layerName) {
@@ -772,36 +1250,126 @@
         };
         // region MAP
         WebMap.prototype._setupMap = function () {
-            // const { extent_bottom, extent_left, extent_top, extent_right } = this.settings.webmap;
-            // if (extent_bottom && extent_left && extent_top && extent_right) {
-            //   this.options.displayConfig.extent = [extent_bottom, extent_left, extent_top, extent_right];
+            return __awaiter(this, void 0, void 0, function () {
+                var _a, extent_bottom, extent_left, extent_top, extent_right, extent;
+                return __generator(this, function (_b) {
+                    if (this.settings) {
+                        _a = this.settings, extent_bottom = _a.extent_bottom, extent_left = _a.extent_left, extent_top = _a.extent_top, extent_right = _a.extent_right;
+                        if (extent_bottom && extent_left && extent_top && extent_right) {
+                            this._extent = [extent_bottom, extent_left, extent_top, extent_right];
+                            extent = this._extent;
+                            if (extent[3] > 82) {
+                                extent[3] = 82;
+                            }
+                            if (extent[1] < -82) {
+                                extent[1] = -82;
+                            }
+                        }
+                    }
+                    this.map.displayProjection = this.displayProjection;
+                    this.map.lonlatProjection = this.lonlatProjection;
+                    this.map.create({ target: this.options.target });
+                    this._addTreeLayers();
+                    this._addLayerProviders();
+                    this._zoomToInitialExtent();
+                    this.emitter.emit('build-map', this.map);
+                    return [2 /*return*/];
+                });
+            });
+        };
+        WebMap.prototype._addTreeLayers = function () {
+            return __awaiter(this, void 0, void 0, function () {
+                var settings, rootLayer;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, this.getSettings()];
+                        case 1:
+                            settings = _a.sent();
+                            if (settings) {
+                                rootLayer = settings.root_item;
+                                if (rootLayer) {
+                                    this.layers = new WebLayerEntry(this.map, rootLayer);
+                                    this.emitter.emit('add-layers', this.layers);
+                                }
+                            }
+                            return [2 /*return*/];
+                    }
+                });
+            });
+        };
+        WebMap.prototype._zoomToInitialExtent = function () {
+            // const { lat, lon, zoom, angle } = this.runtimeParams.getParams();
+            // if (zoom && lon && lat) {
+            //   this.map.setCenter([
+            //     parseFloat(lon),
+            //     parseFloat(lat),
+            //   ],
+            //   );
+            //   this.map.setZoom(
+            //     parseInt(zoom, 10),
+            //   );
+            //   if (angle) {
+            //     this.map.setRotation(
+            //       parseFloat(angle),
+            //     );
+            //   }
+            // } else {
+            //   this.map.fit(this.options.displayConfig.extent);
             // }
-            // const extent = this.options.displayConfig.extent;
-            // if (extent[3] > 82) {
-            //   extent[3] = 82;
-            // }
-            // if (extent[1] < -82) {
-            //   extent[1] = -82;
-            // }
-            // this.map.displayProjection = this.displayProjection;
-            // this.map.lonlatProjection = this.lonlatProjection;
-            this.map.create({ target: this.options.target });
-            // this._addTreeLayers();
-            // this._zoomToInitialExtent();
-            this.emitter.emit('build-map', this.map);
+            if (this._extent) {
+                this.map.fit(this._extent);
+            }
+        };
+        WebMap.prototype._addLayerProviders = function () {
+            return __awaiter(this, void 0, void 0, function () {
+                var _i, _a, kit, adapters, er_2;
+                var _this = this;
+                return __generator(this, function (_b) {
+                    switch (_b.label) {
+                        case 0:
+                            _b.trys.push([0, 5, , 6]);
+                            _i = 0, _a = this._starterKits.filter(function (x) { return x.getLayerAdapters; });
+                            _b.label = 1;
+                        case 1:
+                            if (!(_i < _a.length)) return [3 /*break*/, 4];
+                            kit = _a[_i];
+                            return [4 /*yield*/, kit.getLayerAdapters.call(kit)];
+                        case 2:
+                            adapters = _b.sent();
+                            if (adapters) {
+                                adapters.forEach(function (adapter) {
+                                    adapter.createAdapter(_this.map).then(function (newAdapter) {
+                                        if (newAdapter) {
+                                            _this.map.layerAdapters[adapter.name] = newAdapter;
+                                        }
+                                    });
+                                });
+                            }
+                            _b.label = 3;
+                        case 3:
+                            _i++;
+                            return [3 /*break*/, 1];
+                        case 4: return [3 /*break*/, 6];
+                        case 5:
+                            er_2 = _b.sent();
+                            throw new Error(er_2);
+                        case 6: return [2 /*return*/];
+                    }
+                });
+            });
         };
         return WebMap;
     }());
 
     // Composition root
-    function buildWebMap(opt, config) {
+    function buildWebMap(appOpt, mapOpt) {
         return __awaiter(this, void 0, void 0, function () {
             var webMap;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        webMap = new WebMap(config);
-                        return [4 /*yield*/, webMap.create(opt)];
+                        webMap = new WebMap(appOpt);
+                        return [4 /*yield*/, webMap.create(mapOpt)];
                     case 1:
                         _a.sent();
                         return [2 /*return*/, webMap];

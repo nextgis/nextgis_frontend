@@ -226,3 +226,5 @@ bower_components
 ### Project Specific
 build
 dist
+
+*.tgz

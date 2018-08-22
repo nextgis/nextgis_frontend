@@ -13,13 +13,14 @@ interface Params {
 }
 
 interface Options {
-  route: string;
-  baseUrl: string;
+  route?: string;
+  baseUrl?: string;
 }
 
 export default Ngw
 export class Ngw {
   options: Options;
+  constructor(options: Options);
   connect(callback: (router: Router) => void, context: any): void;
   request<K extends keyof RequestItemsParamsMap>(
     name: K,

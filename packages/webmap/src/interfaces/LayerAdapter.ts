@@ -1,12 +1,25 @@
+interface AdapterOptions {
+  id?: string;
+  url?: string;
+  transparency?: number;
+  // visibility: item.layer_enabled,
+  minResolution?: number;
+  maxResolution?: number;
 
-export interface MvtOptions extends mapboxgl.Layer {
-  url: string;
+  // move out of here
+  styleId?: number;
+}
+
+interface MvtOptions extends AdapterOptions {
+  paint?;
 }
 
 export interface LayerAdapters {
   'MVT': MvtOptions;
-  'IMAGE': any;
-  'OSM': any;
+  'IMAGE': AdapterOptions;
+  'OSM': AdapterOptions;
+  'TILE': AdapterOptions;
+  [name: string]: AdapterOptions;
 }
 
 export interface LayerAdapter<M = any, O = any> {
