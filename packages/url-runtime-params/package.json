@@ -1,6 +1,6 @@
 {
-  "name": "@ngw-front/url-runtime-params",
-  "version": "0.0.0",
+  "name": "@nextgis/url-runtime-params",
+  "version": "0.0.2",
   "description": "",
   "main": "index",
   "types": "index.d.ts",
@@ -24,5 +24,6 @@
   "devDependencies": {
     "@types/events": "^1.2.0",
     "typescript": "^2.9.2"
-  }
+  },
+  "gitHead": "bfca4116cc6f97eadae8093142123ca08efa9f55"
 }

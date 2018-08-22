@@ -31,7 +31,7 @@ export class TileAdapter extends BaseAdapter {
         tiles,
         tileSize: opt && opt.tileSize || 256
       }
-    });
+    }, options.before);
     return this.name;
   }
 }

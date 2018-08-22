@@ -26,7 +26,7 @@ export class MvtAdapter extends BaseAdapter {
       layerOptions.paint = options.paint;
     }
 
-    this.map.addLayer(layerOptions);
+    this.map.addLayer(layerOptions, options.before);
     return this.name;
   }
 }

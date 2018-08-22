@@ -1,6 +1,6 @@
 {
-  "name": "@ngw-front/ol-map-adapter",
-  "version": "0.0.0",
+  "name": "@nextgis/ol-map-adapter",
+  "version": "0.0.2",
   "description": "",
   "main": "index",
   "types": "index.d.ts",
@@ -9,7 +9,8 @@
     "index.d.ts"
   ],
   "scripts": {
-    "build": "tsc"
+    "build": "rollup -c rollup.config.js",
+    "watch": "rollup -c rollup.config.js -w"
   },
   "repository": {
     "type": "git",
@@ -25,7 +26,14 @@
     "ol": "^5.0.3"
   },
   "devDependencies": {
-    "@types/events": "^1.2.0",
+    "rollup": "^0.64.1",
+    "rollup-plugin-commonjs": "^9.1.5",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-resolve": "^3.3.0",
+    "rollup-plugin-sourcemaps": "^0.4.2",
+    "rollup-plugin-typescript2": "^0.16.1",
+    "rollup-plugin-uglify": "^4.0.0",
     "typescript": "^3.0.1"
-  }
+  },
+  "gitHead": "bfca4116cc6f97eadae8093142123ca08efa9f55"
 }

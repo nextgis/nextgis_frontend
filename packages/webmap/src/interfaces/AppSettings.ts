@@ -1,5 +1,3 @@
-import { AppOptions } from './WebMapApp';
-
 export interface TreeItem {
   item_type: 'root' | 'group' | 'layer';
   display_name?: string;
@@ -24,44 +22,22 @@ export interface TreeLayer extends TreeItem {
   layer_min_scale_denom: any;
   layer_style_id: number;
   layer_transparency: any;
+
+  layer_url: string;
 }
 
 // Ngw api settings
-export interface Settings {
-  resource: {
-    id: number;
-    cls: string;
-    parent: {
-      id: number;
-      parent: {
-        id: any;
-      };
-    };
-    owner_user: {
-      id: number;
-    };
-    permissions: any[];
-    keyname: any;
-    display_name: string;
-    description: string;
-    children: boolean;
-    interfaces: any[];
-    scopes: string[];
-  };
-  resmeta: {
-    items: {};
-  };
-  webmap: {
-    extent_left: number;
-    extent_right: number;
-    extent_bottom: number;
-    extent_top: number;
-    draw_order_enabled: any;
-    bookmark_resource: any;
-    root_item: TreeGroup;
-  };
+export interface AppSettings {
+  extent_left?: number;
+  extent_right?: number;
+  extent_bottom?: number;
+  extent_top?: number;
+  draw_order_enabled?: any;
+  bookmark_resource?: any;
+  root_item?: TreeGroup;
 }
 
-export interface AppSettings {
-  getSettings(opt: AppOptions): Promise<Settings | false>;
+export interface StarterKit {
+  getSettings?(): Promise<AppSettings | false>;
+  getLayerAdapters?(): Promise<any>;
 }

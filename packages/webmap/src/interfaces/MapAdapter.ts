@@ -2,27 +2,31 @@ import { LayerAdapter, LayerAdapters } from './LayerAdapter';
 import { Type } from '../Utils/Type';
 import { EventEmitter } from 'events';
 
-export interface MapOptions {
-  target: string | HTMLElement;
-  logo?: string;
-  controls?: any[];
-  minZoom?: number;
+interface LatLng {
+  lat: number; lng: number;
+}
+
+interface MapClickEvent {
+  latLng: LatLng;
+  pixel: {top: number, left: number, right?: number, bottom?: number};
+  source?: any;
 }
 
 export interface MapAdapter<M = any> {
 
-  lonlatProjection: string;
-  displayProjection: string;
+  lonlatProjection?: string;
+  displayProjection?: string;
   map: M;
   emitter: EventEmitter;
+  layerAdapters: {[name: string]: Type<LayerAdapter>};
 
   create(options?): void;
-  getLayerAdapter(adapterName: string): Type<LayerAdapter>;
+
   onMapLoad(cb?: () => void): Promise<any>;
 
   addLayer<K extends keyof LayerAdapters>(
     layerAdapter: K | Type<LayerAdapter>,
-    options: LayerAdapters[K]): Promise<LayerAdapter>;
+    options?: LayerAdapters[K], baselayer?: boolean): Promise<LayerAdapter>;
 
   removeLayer(layerName: string): any;
   getLayer(layerName: string): any;
@@ -42,4 +46,6 @@ export interface MapAdapter<M = any> {
   addControl(controlDef, position: string): void;
 
   getContainer(): HTMLElement;
+
+  onMapClick(evt: MapClickEvent): void;
 }

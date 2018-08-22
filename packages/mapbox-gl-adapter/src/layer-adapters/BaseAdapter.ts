@@ -12,7 +12,6 @@ export abstract class BaseAdapter {
     this.map = map;
     this.name = options.id || String(ID++);
     this.options = Object.assign({}, this.options, options);
-    this.addLayer();
   }
 
   addLayer(options?): string {
