@@ -39,7 +39,6 @@
             this.map = map;
             this.name = options.id || String(ID++);
             this.options = Object.assign({}, this.options, options);
-            this.addLayer();
         }
         BaseAdapter.prototype.addLayer = function (options) {
             return '';
@@ -71,7 +70,7 @@
             if (options.paint) {
                 layerOptions.paint = options.paint;
             }
-            this.map.addLayer(layerOptions);
+            this.map.addLayer(layerOptions, options.before);
             return this.name;
         };
         return MvtAdapter;
@@ -108,7 +107,7 @@
                     tiles: tiles,
                     tileSize: opt && opt.tileSize || 256
                 }
-            });
+            }, options.before);
             return this.name;
         };
         return TileAdapter;
@@ -601,10 +600,14 @@
             this.displayProjection = 'EPSG:3857';
             this.lonlatProjection = 'EPSG:4326';
             this.emitter = new EventEmitter();
+            this.layerAdapters = MapboxglAdapter.layerAdapters;
             this._layers = {};
+            this._baseLayers = [];
             this.DPI = 1000 / 39.37 / 0.28;
             this.IPM = 39.37;
             this.isLoaded = false;
+            this.orders = [];
+            this._sourcedataloading = {};
         }
         // create(options: MapOptions = {target: 'map'}) {
         MapboxglAdapter.prototype.create = function (options) {
@@ -639,9 +642,6 @@
         MapboxglAdapter.prototype.setRotation = function (angle) {
             // ignore
         };
-        MapboxglAdapter.prototype.getLayerAdapter = function (name) {
-            return MapboxglAdapter.layerAdapters[name];
-        };
         MapboxglAdapter.prototype.showLayer = function (layerName) {
             var _this = this;
             this.onMapLoad(function () { return _this.toggleLayer(layerName, true); });
@@ -650,7 +650,7 @@
             var _this = this;
             this.onMapLoad(function () { return _this.toggleLayer(layerName, false); });
         };
-        MapboxglAdapter.prototype.addLayer = function (adapterDef, options) {
+        MapboxglAdapter.prototype.addLayer = function (adapterDef, options, baselayer) {
             var _this = this;
             return this.onMapLoad(function () {
                 var adapterEngine;
@@ -658,10 +658,25 @@
                     adapterEngine = _this.getLayerAdapter(adapterDef);
                 }
                 if (adapterEngine) {
-                    var adapter = new adapterEngine(_this.map, options);
-                    var layerId = adapter.name;
-                    _this._layers[layerId] = false;
-                    return adapter;
+                    var adapter_1 = new adapterEngine(_this.map, options);
+                    if (baselayer && _this.orders.length) {
+                        options.before = _this.orders[0];
+                    }
+                    var addlayerFun = adapter_1.addLayer(options);
+                    var toResolve_1 = function () {
+                        var layerId = adapter_1.name;
+                        _this._layers[layerId] = false;
+                        _this.orders.push(layerId);
+                        _this._baseLayers.push(layerId);
+                        if (!baselayer) {
+                            _this.map.moveLayer(layerId);
+                        }
+                        else {
+                            _this.map.moveLayer(layerId, _this.orders[0]);
+                        }
+                        return adapter_1;
+                    };
+                    return addlayerFun.then ? addlayerFun.then(function (layer) { return toResolve_1(); }) : Promise.resolve(toResolve_1());
                 }
             });
         };
@@ -729,15 +744,53 @@
                 this.map.addControl(control, position);
             }
         };
+        MapboxglAdapter.prototype.onMapClick = function (evt) {
+            var latLng = evt.lngLat;
+            var _a = evt.point, x = _a.x, y = _a.y;
+            this.emitter.emit('click', { latLng: latLng, pixel: { top: y, left: x } });
+        };
+        MapboxglAdapter.prototype.getLayerAdapter = function (name) {
+            return MapboxglAdapter.layerAdapters[name];
+        };
         MapboxglAdapter.prototype._addEventsListeners = function () {
             var _this = this;
-            this.map.on('data', function (data) {
+            // write mem for start loaded layers
+            this.map.on('sourcedataloading', function (data) {
+                _this._sourcedataloading[data.sourceId] = _this._sourcedataloading[data.sourceId] || [];
+                if (data.tile) {
+                    _this._sourcedataloading[data.sourceId].push(data.tile);
+                }
+            });
+            // emmit data-loaded for each layer or all sources is loaded
+            this.map.on('sourcedata', function (data) {
                 if (data.dataType === 'source') {
                     var isLoaded = data.isSourceLoaded;
+                    // if all sources is loaded emmit event for all and clean mem
                     if (isLoaded) {
-                        _this.emitter.emit('data-loaded', { target: data.sourceId });
+                        Object.keys(_this._sourcedataloading).forEach(function (x) {
+                            _this.emitter.emit('data-loaded', { target: x });
+                        });
+                        _this._sourcedataloading = {};
+                    }
+                    else {
+                        // check if all tiles in layer is loaded
+                        var tiles = _this._sourcedataloading[data.sourceId];
+                        if (tiles && data.tile) {
+                            var index = tiles.indexOf(data.tile);
+                            if (index !== -1) {
+                                _this._sourcedataloading[data.sourceId].splice(index, 1);
+                            }
+                            // if no more loaded tiles in layer emit event and clean mem only for this layer
+                            if (!tiles.length) {
+                                _this.emitter.emit('data-loaded', { target: data.sourceId });
+                                delete _this._sourcedataloading[data.sourceId];
+                            }
+                        }
                     }
                 }
+            });
+            this.map.on('click', function (evt) {
+                _this.onMapClick(evt);
             });
         };
         MapboxglAdapter.layerAdapters = {

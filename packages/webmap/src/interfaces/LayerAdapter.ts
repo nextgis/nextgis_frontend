@@ -19,6 +19,7 @@ export interface LayerAdapters {
   'IMAGE': AdapterOptions;
   'OSM': AdapterOptions;
   'TILE': AdapterOptions;
+  [name: string]: AdapterOptions;
 }
 
 export interface LayerAdapter<M = any, O = any> {

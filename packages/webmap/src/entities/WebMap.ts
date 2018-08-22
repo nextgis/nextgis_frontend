@@ -73,7 +73,7 @@ export class WebMap<M = any> {
       try {
         settings = {};
 
-        for (const kit of this._starterKits) {
+        for (const kit of this._starterKits.filter((x) => x.getSettings)) {
           const setting = await kit.getSettings.call(kit);
           if (setting) {
             Object.assign(settings, setting);
@@ -92,11 +92,16 @@ export class WebMap<M = any> {
     }
   }
 
-  addBaseLayer(layerName: string, provider: keyof LayerAdapters | Type<LayerAdapter>, options?: any): any {
-    this.map.addLayer(provider, Object.assign({}, options, { id: layerName })).then((layer) => {
+  addBaseLayer(
+    layerName: string,
+    provider: keyof LayerAdapters | Type<LayerAdapter>,
+    options?: any): Promise<LayerAdapter> {
+
+    return this.map.addLayer(provider, {...options, ...{ id: layerName }}, true).then((layer) => {
       if (layer) {
         this._baseLayers.push(layer.name);
       }
+      return layer;
     });
   }
 
@@ -105,19 +110,18 @@ export class WebMap<M = any> {
   }
 
   // region MAP
-  private _setupMap() {
+  private async _setupMap() {
     if (this.settings) {
       const { extent_bottom, extent_left, extent_top, extent_right } = this.settings;
       if (extent_bottom && extent_left && extent_top && extent_right) {
         this._extent = [extent_bottom, extent_left, extent_top, extent_right];
-      }
-
-      const extent = this._extent;
-      if (extent[3] > 82) {
-        extent[3] = 82;
-      }
-      if (extent[1] < -82) {
-        extent[1] = -82;
+        const extent = this._extent;
+        if (extent[3] > 82) {
+          extent[3] = 82;
+        }
+        if (extent[1] < -82) {
+          extent[1] = -82;
+        }
       }
     }
     this.map.displayProjection = this.displayProjection;
@@ -125,10 +129,12 @@ export class WebMap<M = any> {
     this.map.create({ target: this.options.target });
 
     this._addTreeLayers();
+    this._addLayerProviders();
 
     this._zoomToInitialExtent();
 
     this.emitter.emit('build-map', this.map);
+
   }
 
   private async _addTreeLayers() {
@@ -162,7 +168,29 @@ export class WebMap<M = any> {
     // } else {
     //   this.map.fit(this.options.displayConfig.extent);
     // }
-    this.map.fit(this._extent);
+    if (this._extent) {
+      this.map.fit(this._extent);
+    }
+  }
+
+  private async _addLayerProviders() {
+    try {
+
+      for (const kit of this._starterKits.filter((x) => x.getLayerAdapters)) {
+        const adapters = await kit.getLayerAdapters.call(kit);
+        if (adapters) {
+          adapters.forEach((adapter) => {
+            adapter.createAdapter(this.map).then((newAdapter) => {
+              if (newAdapter) {
+                this.map.layerAdapters[adapter.name] = newAdapter;
+              }
+            });
+          });
+        }
+      }
+    } catch (er) {
+      throw new Error(er);
+    }
   }
   // endregion
 
