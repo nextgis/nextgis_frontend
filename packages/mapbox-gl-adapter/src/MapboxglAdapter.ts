@@ -27,13 +27,17 @@ export class MapboxglAdapter { // implements MapAdapter {
 
   emitter = new EventEmitter();
 
+  layerAdapters = MapboxglAdapter.layerAdapters;
+
   _layers = {};
+
+  private _baseLayers: string[] = [];
 
   private DPI = 1000 / 39.37 / 0.28;
   private IPM = 39.37;
   private isLoaded = false;
-
-  private _sourcedataloading: {[name: string]: any[]} = {};
+  private orders: string[] = [];
+  private _sourcedataloading: { [name: string]: any[] } = {};
 
 
   // create(options: MapOptions = {target: 'map'}) {
@@ -75,10 +79,6 @@ export class MapboxglAdapter { // implements MapAdapter {
     // ignore
   }
 
-  getLayerAdapter(name: string) {
-    return MapboxglAdapter.layerAdapters[name];
-  }
-
   showLayer(layerName: string) {
     this.onMapLoad(() => this.toggleLayer(layerName, true));
   }
@@ -87,7 +87,7 @@ export class MapboxglAdapter { // implements MapAdapter {
     this.onMapLoad(() => this.toggleLayer(layerName, false));
   }
 
-  addLayer(adapterDef, options?) {
+  addLayer(adapterDef, options?, baselayer?: boolean) {
     return this.onMapLoad(() => {
       let adapterEngine;
       if (typeof adapterDef === 'string') {
@@ -95,9 +95,23 @@ export class MapboxglAdapter { // implements MapAdapter {
       }
       if (adapterEngine) {
         const adapter = new adapterEngine(this.map, options) as any;
-        const layerId = adapter.name;
-        this._layers[layerId] = false;
-        return adapter;
+        if (baselayer && this.orders.length) {
+          options.before = this.orders[0];
+        }
+        const addlayerFun = adapter.addLayer(options);
+        const toResolve = () => {
+          const layerId = adapter.name;
+          this._layers[layerId] = false;
+          this.orders.push(layerId);
+          this._baseLayers.push(layerId);
+          if (!baselayer) {
+            this.map.moveLayer(layerId);
+          } else {
+            this.map.moveLayer(layerId, this.orders[0]);
+          }
+          return adapter;
+        };
+        return addlayerFun.then ? addlayerFun.then((layer) => toResolve()) : Promise.resolve(toResolve());
       }
     });
   }
@@ -174,9 +188,13 @@ export class MapboxglAdapter { // implements MapAdapter {
   onMapClick(evt) {
 
     const latLng = evt.lngLat;
-    const {x, y} = evt.point;
+    const { x, y } = evt.point;
 
-    this.emitter.emit('click', { latLng, pixel: {top: y, left: x} });
+    this.emitter.emit('click', { latLng, pixel: { top: y, left: x } });
+  }
+
+  private getLayerAdapter(name: string) {
+    return MapboxglAdapter.layerAdapters[name];
   }
 
   private _addEventsListeners() {

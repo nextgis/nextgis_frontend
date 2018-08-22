@@ -38,5 +38,6 @@ export interface AppSettings {
 }
 
 export interface StarterKit {
-  getSettings(): Promise<AppSettings | false>;
+  getSettings?(): Promise<AppSettings | false>;
+  getLayerAdapters?(): Promise<any>;
 }

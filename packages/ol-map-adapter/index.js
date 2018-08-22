@@ -9641,7 +9641,7 @@
     })));
     });
 
-    var C__Users_rendr_nextgis_nextgisweb_frontend_packages_olMapAdapter_node_modules_rbush = rbush;
+    var C__Users_rendr_nextgis_russiaHistory_nextgisweb_frontend_packages_olMapAdapter_node_modules_rbush = rbush;
     var default_1 = rbush;
 
 
@@ -10201,7 +10201,7 @@
             stack.push(left, mid, mid, right);
         }
     }
-    C__Users_rendr_nextgis_nextgisweb_frontend_packages_olMapAdapter_node_modules_rbush.default = default_1;
+    C__Users_rendr_nextgis_russiaHistory_nextgisweb_frontend_packages_olMapAdapter_node_modules_rbush.default = default_1;
 
     /**
      * @module ol/structs/RBush
@@ -10228,7 +10228,7 @@
       /**
        * @private
        */
-      this.rbush_ = C__Users_rendr_nextgis_nextgisweb_frontend_packages_olMapAdapter_node_modules_rbush(opt_maxEntries, undefined);
+      this.rbush_ = C__Users_rendr_nextgis_russiaHistory_nextgisweb_frontend_packages_olMapAdapter_node_modules_rbush(opt_maxEntries, undefined);
 
       /**
        * A mapping between the objects added to this rbush wrapper
