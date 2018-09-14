@@ -12,6 +12,8 @@ interface AdapterOptions {
 
 interface MvtOptions extends AdapterOptions {
   paint?;
+  type?: 'fill' | 'line' | 'circle' | 'point';
+  'source-layer'?: string;
 }
 
 export interface LayerAdapters {

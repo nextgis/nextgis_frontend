@@ -138,7 +138,12 @@ export class MapboxglAdapter { // implements MapAdapter {
   }
 
   setLayerOpacity(layerName: string, opacity: number) {
-    this.onMapLoad().then(() => this.map.setPaintProperty(layerName, 'fill-opacity', opacity));
+    this.onMapLoad().then(() => {
+      const layer = this.map.getLayer(layerName);
+      if (layer) {
+        this.map.setPaintProperty(layerName, layer.type + '-opacity', opacity);
+      }
+    });
   }
 
   getScaleForResolution(res, mpu) {
@@ -214,7 +219,6 @@ export class MapboxglAdapter { // implements MapAdapter {
         const isLoaded = data.isSourceLoaded;
         const emit = (target) => {
           if (this._layers[target]) {
-            console.log(target);
             this.emitter.emit('data-loaded', { target });
           }
         };
