@@ -11,8 +11,8 @@ export class MvtAdapter extends BaseAdapter {
 
     const layerOptions: Layer = {
       'id': idString,
-      'type': 'fill',
-      'source-layer': idString,
+      'type': options.type || 'fill',
+      'source-layer': options['source-layer'] || idString,
       'source': {
         type: 'vector',
         tiles: [options.url]
