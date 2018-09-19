@@ -119,7 +119,12 @@ export class MapboxglAdapter { // implements MapAdapter {
     });
   }
 
-  removeLayer(layerName: string) {
+  removeLayer(layerId: string) {
+    if (this._layers[layerId]) {
+      this.map.removeLayer(layerId);
+      this.map.removeSource(layerId);
+      delete this._layers[layerId];
+    }
     // this._toggleLayer(false, layerName);
   }
 
