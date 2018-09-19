@@ -8,7 +8,6 @@ export class MvtAdapter extends BaseAdapter {
     // read about https://blog.mapbox.com/vector-tile-specification-version-2-whats-changed-259d4cd73df6
     const idString = String(this.name);
 
-
     const layerOptions: Layer = {
       'id': idString,
       'type': options.type || 'fill',
