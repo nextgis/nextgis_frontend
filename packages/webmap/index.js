@@ -1256,7 +1256,7 @@
                     if (this.settings) {
                         _a = this.settings, extent_bottom = _a.extent_bottom, extent_left = _a.extent_left, extent_top = _a.extent_top, extent_right = _a.extent_right;
                         if (extent_bottom && extent_left && extent_top && extent_right) {
-                            this._extent = [extent_bottom, extent_left, extent_top, extent_right];
+                            this._extent = [extent_left, extent_bottom, extent_right, extent_top];
                             extent = this._extent;
                             if (extent[3] > 82) {
                                 extent[3] = 82;

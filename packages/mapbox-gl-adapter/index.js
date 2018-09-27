@@ -57,8 +57,8 @@
             var idString = String(this.name);
             var layerOptions = {
                 'id': idString,
-                'type': 'fill',
-                'source-layer': idString,
+                'type': options.type || 'fill',
+                'source-layer': options['source-layer'] || idString,
                 'source': {
                     type: 'vector',
                     tiles: [options.url]
@@ -704,7 +704,12 @@
                 }
             });
         };
-        MapboxglAdapter.prototype.removeLayer = function (layerName) {
+        MapboxglAdapter.prototype.removeLayer = function (layerId) {
+            if (this._layers[layerId]) {
+                this.map.removeLayer(layerId);
+                this.map.removeSource(layerId);
+                delete this._layers[layerId];
+            }
             // this._toggleLayer(false, layerName);
         };
         // TODO: rename hasLayer; move to WebMap
@@ -721,7 +726,12 @@
         };
         MapboxglAdapter.prototype.setLayerOpacity = function (layerName, opacity) {
             var _this = this;
-            this.onMapLoad().then(function () { return _this.map.setPaintProperty(layerName, 'fill-opacity', opacity); });
+            this.onMapLoad().then(function () {
+                var layer = _this.map.getLayer(layerName);
+                if (layer) {
+                    _this.map.setPaintProperty(layerName, layer.type + '-opacity', opacity);
+                }
+            });
         };
         MapboxglAdapter.prototype.getScaleForResolution = function (res, mpu) {
             return parseFloat(res) * (mpu * this.IPM * this.DPI);
@@ -791,7 +801,6 @@
                     var isLoaded = data.isSourceLoaded;
                     var emit_1 = function (target) {
                         if (_this._layers[target]) {
-                            console.log(target);
                             _this.emitter.emit('data-loaded', { target: target });
                         }
                     };
