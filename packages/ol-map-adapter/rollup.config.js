@@ -9,21 +9,9 @@ const pckg = require('./package');
 const input = pckg.main + '.ts';
 
 export default {
-  external: [
-    'ol',
-    'ol/source/ImageWMS',
-    'ol/layer/Image',
-    'ol/layer/Tile',
-    'ol/Map',
-    'ol/proj',
-    'ol/source/OSM',
-    'ol/View',
-    'ol/geom/Point.js',
-    'ol/Feature.js',
-    'ol/style.js',
-    'ol/source/Vector.js',
-    'ol/layer.js'
-  ],
+  external: function (a) {
+    return a.indexOf('node_modules/ol') >= 0;
+  },
   input,
   output: [
     { file: pckg.main + '.js', format: 'umd', name: 'OlMapAdapter', sourcemap: true }

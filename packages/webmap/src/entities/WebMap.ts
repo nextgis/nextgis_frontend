@@ -114,7 +114,7 @@ export class WebMap<M = any> {
     if (this.settings) {
       const { extent_bottom, extent_left, extent_top, extent_right } = this.settings;
       if (extent_bottom && extent_left && extent_top && extent_right) {
-        this._extent = [extent_bottom, extent_left, extent_top, extent_right];
+        this._extent = [extent_left, extent_bottom, extent_right, extent_top];
         const extent = this._extent;
         if (extent[3] > 82) {
           extent[3] = 82;
@@ -132,7 +132,6 @@ export class WebMap<M = any> {
     this._addLayerProviders();
 
     this._zoomToInitialExtent();
-
     this.emitter.emit('build-map', this.map);
 
   }

@@ -91,9 +91,9 @@ export class OlMapAdapter { // implements MapAdapter {
     this._olView.setZoom(zoom);
   }
 
-  fit(extent) {
-    extent = transformExtent(
-      extent,
+  fit(e: [number, number, number, number]) {
+    const extent = transformExtent(
+      e,
       this.lonlatProjection,
       this.displayProjection,
     );
