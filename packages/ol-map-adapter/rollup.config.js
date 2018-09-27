@@ -4,6 +4,7 @@ import commonjs from 'rollup-plugin-commonjs';
 import builtins from 'rollup-plugin-node-builtins';
 import sourcemaps from 'rollup-plugin-sourcemaps';
 import { uglify } from 'rollup-plugin-uglify';
+const path = require('path');
 
 const pckg = require('./package');
 const input = pckg.main + '.ts';
@@ -50,9 +51,7 @@ export default {
   //   'ol/Map':'ol/Map',
   //   'ol/View':'ol/View',
   // },
-  external: function (a) {
-    return a.indexOf('node_modules/ol') >= 0;
-  },
+  external: id => !(path.isAbsolute(id) || id.startsWith(".")),
   input,
   output: [
     { file: pckg.main + '.js', format: 'umd', name: 'OlMapAdapter', sourcemap: true }
