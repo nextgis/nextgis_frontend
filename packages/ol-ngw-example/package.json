@@ -1,7 +1,7 @@
 {
   "name": "@nextgis/ol-ngw-example",
   "private": true,
-  "version": "0.0.3",
+  "version": "0.0.4",
   "scripts": {
     "build": "webpack ./src/main.js --progress",
     "watch": "webpack ./src/main.js --mode development --watch --progress"

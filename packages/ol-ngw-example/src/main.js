@@ -5,10 +5,8 @@ import { NgwKit } from '@nextgis/ngw-kit';
 const webMap = new WebMap({
   mapAdapter: new OlMapAdapter(),
   starterKits: [new NgwKit({
-    // 'baseUrl': "http://geonote.nextgis.com",
-    // 'resourceId': 1
-    'baseUrl': 'http://oriental-stork.amurinfocenter.org',
-    'resourceId': 5
+    'baseUrl': "http://geonote.nextgis.com",
+    'resourceId': 1
   })],
 });
 
