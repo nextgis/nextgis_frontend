@@ -9,6 +9,47 @@ const pckg = require('./package');
 const input = pckg.main + '.ts';
 
 export default {
+  // external: [
+  //   'ol',
+  //   'ol/source/ImageWMS',
+  //   'ol/layer/Image',
+  //   'ol/layer/Tile',
+  //   'ol/Map',
+  //   'ol/proj',
+  //   'ol/source/OSM',
+  //   'ol/View',
+  //   'ol/geom/Point.js',
+  //   'ol/Feature.js',
+  //   'ol/style.js',
+  //   'ol/source/Vector.js',
+  //   'ol/layer.js',
+
+  //   'ol/source/ImageWMS.js',
+  //   'ol/layer/Image.js',
+  //   'ol/source/OSM.js',
+  //   'ol/layer/Tile.js',
+  //   'ol/geom/Point.js',
+  //   'ol/Feature.js',
+  //   'ol/proj.js',
+  //   'ol/layer.js',
+  //   'ol/source/Vector.js',
+  //   'ol/Map.js',
+  //   'ol/View.js',
+  // ],
+
+  // globals: {
+  //   'ol/source/ImageWMS':'ol/source/ImageWMS',
+  //   'ol/layer/Image':'ol/layer/Image',
+  //   'ol/source/OSM':'ol/source/OSM',
+  //   'ol/layer/Tile':'ol/layer/Tile',
+  //   'ol/geom/Point':'ol/geom/Point',
+  //   'ol/Feature':'ol/Feature',
+  //   'ol/proj':'ol/proj',
+  //   'ol/layer':'ol/layer',
+  //   'ol/source/Vector':'ol/source/Vector',
+  //   'ol/Map':'ol/Map',
+  //   'ol/View':'ol/View',
+  // },
   external: function (a) {
     return a.indexOf('node_modules/ol') >= 0;
   },
