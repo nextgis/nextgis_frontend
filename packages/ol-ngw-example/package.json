@@ -18,7 +18,7 @@
   "license": "GPL-3.0",
   "dependencies": {
     "@nextgis/ngw-kit": "^0.0.2",
-    "@nextgis/ol-map-adapter": "^0.0.4",
+    "@nextgis/ol-map-adapter": "^0.0.5",
     "@nextgis/webmap": "^0.0.4",
     "@nextgis/qms-kit": "^0.0.2",
     "ol": "^5.2.0"
