@@ -4,13 +4,11 @@
   "description": "",
   "main": "lib/ol-map-adapter.js",
   "types": "lib/ol-map-adapter.d.ts",
-
   "scripts": {
     "build": "rollup -c rollup.config.js",
     "watch": "rollup -c rollup.config.js -w",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
-
   "dependencies": {
     "ol": "^5.0.3"
   },
