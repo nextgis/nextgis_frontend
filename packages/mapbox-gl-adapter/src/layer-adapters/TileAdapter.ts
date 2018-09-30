@@ -11,7 +11,7 @@ export class TileAdapter extends BaseAdapter {
       tiles = opt.subdomains.split('').map((x) => {
         const subUrl = opt.url.replace('{s}', x);
         return subUrl;
-      }
+      },
     );
     } else {
       tiles = [opt.url];
@@ -21,7 +21,7 @@ export class TileAdapter extends BaseAdapter {
       id: String(this.name),
       type: 'raster',
       layout: {
-        visibility: 'none'
+        visibility: 'none',
       },
       source: {
         type: 'raster',
@@ -29,8 +29,8 @@ export class TileAdapter extends BaseAdapter {
         // show a "url" property. This only applies to tilesets with
         // corresponding TileJSON (such as mapbox tiles).
         tiles,
-        tileSize: opt && opt.tileSize || 256
-      }
+        tileSize: opt && opt.tileSize || 256,
+      },
     }, options.before);
     return this.name;
   }

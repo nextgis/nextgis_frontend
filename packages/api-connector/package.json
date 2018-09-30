@@ -2,8 +2,8 @@
   "name": "@nextgis/api-connector",
   "version": "0.1.0",
   "description": "Module for interaction with NGW (NextGis Web) server API",
-  "main": "index.js",
-  "types": "index.d.ts",
+  "main": "lib/api-connector.js",
+  "types": "lib/api-connector.d.ts",
   "scripts": {
     "start": "http-server",
     "gen": "node ./scripts/generator.js",

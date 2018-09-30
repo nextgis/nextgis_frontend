@@ -1,12 +1,14 @@
 /**
  * This node script allow to generate actual index.js and index.d.ts files for current api version
  */
-const index = require('../index');
+const index = require('../lib/index');
 const args = require('minimist')(process.argv.slice(2));
 const Ngw = index.Ngw;
 // TODO: use something like http://api.nextgis.com to get all awailabe data
 //       from current version on instelled NGW Server API
 let baseUrl = 'http://geonote.nextgis.com';
+
+const typePath = 'lib/api-connector.d.ts';
 
 if (args.url || args.u) {
   baseUrl = args.url || args.u;
@@ -46,14 +48,14 @@ connector.connect(function (router) {
 function generateTypes(router) {
   let stop = false;
   const newLines = [];
-  readLines('index.d.ts', (line) => {
+  readLines(typePath, (line) => {
     if (!stop) {
       stop = line.indexOf('==./scripts/generator.js==') !== -1;
       newLines.push(line);
     }
   }, () => {
     insertRequestItemsParamsMap(newLines, router);
-    require('fs').writeFile('index.d.ts', '', () => writeLines('index.d.ts', newLines));
+    require('fs').writeFile(typePath, '', () => writeLines(typePath, newLines));
   });
 }
 

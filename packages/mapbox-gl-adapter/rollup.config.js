@@ -14,7 +14,6 @@ export default {
   output: [
     { file: pckg.main, format: 'umd', name: 'MapboxglAdapter', sourcemap: true }
   ],
-  external: [],
   watch: {
     include: 'src/**',
   },

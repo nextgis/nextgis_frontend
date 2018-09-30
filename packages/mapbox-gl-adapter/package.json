@@ -2,25 +2,8 @@
   "name": "@nextgis/mapbox-gl-adapter",
   "version": "0.1.0",
   "description": "",
-  "main": "index",
-  "types": "index.d.ts",
-  "files": [
-    "index.js",
-    "index.d.ts"
-  ],
-  "scripts": {
-    "build": "rollup -c rollup.config.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/nextgis/nextgisweb_frontend.git"
-  },
-  "keywords": [
-    "NextGIS",
-    "MAP"
-  ],
-  "author": "",
-  "license": "GPL-3.0",
+  "main": "lib/mapbox-gl-adapter.js",
+  "types": "lib/mapbox-gl-adapter.d.ts",
   "dependencies": {
     "mapbox-gl": "^0.48.0"
   },
@@ -35,5 +18,25 @@
     "rollup-plugin-uglify": "^4.0.0",
     "typescript": "^3.0.1"
   },
-  "gitHead": "bfca4116cc6f97eadae8093142123ca08efa9f55"
+  "scripts": {
+    "build": "rollup -c rollup.config.js",
+    "watch": "rollup -c rollup.config.js -w",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nextgis/nextgisweb_frontend.git"
+  },
+  "keywords": [
+    "NextGIS",
+    "MAP"
+  ],
+  "author": "NextGIS",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib"
+  ],
+  "license": "GPL-3.0"
 }
