@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/mapbox-gl-adapter",
-  "version": "0.0.7",
+  "version": "0.1.0",
   "description": "",
   "main": "index",
   "types": "index.d.ts",

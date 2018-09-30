@@ -1,27 +1,16 @@
 {
   "name": "@nextgis/ol-map-adapter",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "",
-  "main": "index",
-  "types": "index.d.ts",
-  "files": [
-    "index.js",
-    "index.d.ts"
-  ],
+  "main": "lib/ol-map-adapter.js",
+  "types": "lib/ol-map-adapter.d.ts",
+
   "scripts": {
     "build": "rollup -c rollup.config.js",
-    "watch": "rollup -c rollup.config.js -w"
+    "watch": "rollup -c rollup.config.js -w",
+    "test": "echo \"Error: run tests from root\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/nextgis/nextgisweb_frontend.git"
-  },
-  "keywords": [
-    "NextGIS",
-    "MAP"
-  ],
-  "author": "",
-  "license": "GPL-3.0",
+
   "dependencies": {
     "ol": "^5.0.3"
   },
@@ -35,5 +24,20 @@
     "rollup-plugin-uglify": "^6.0.0",
     "typescript": "^3.0.1"
   },
-  "gitHead": "bfca4116cc6f97eadae8093142123ca08efa9f55"
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nextgis/nextgisweb_frontend.git"
+  },
+  "keywords": [
+    "NextGIS",
+    "MAP"
+  ],
+  "author": "NextGIS",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib"
+  ],
+  "license": "GPL-3.0"
 }

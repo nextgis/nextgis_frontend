@@ -1,16 +1,30 @@
 {
   "name": "@nextgis/qms-kit",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "",
-  "main": "index",
-  "types": "index.d.ts",
-  "files": [
-    "index.js",
-    "index.d.ts"
-  ],
+  "main": "lib/qms-kit.js",
+  "types": "lib/qms-kit.d.ts",
+
   "scripts": {
-    "build": "rollup -c rollup.config.js"
+    "build": "rollup -c rollup.config.js",
+    "watch": "rollup -c rollup.config.js -w",
+    "test": "echo \"Error: run tests from root\" && exit 1"
   },
+
+  "dependencies": {
+    "@nextgis/api-connector": "^0.0.7"
+  },
+  "devDependencies": {
+    "rollup": "^0.66.2",
+    "rollup-plugin-commonjs": "^9.1.8",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-resolve": "^3.4.0",
+    "rollup-plugin-sourcemaps": "^0.4.2",
+    "rollup-plugin-typescript2": "^0.17.0",
+    "rollup-plugin-uglify": "^6.0.0",
+    "typescript": "^3.1.1"
+  },
+
   "repository": {
     "type": "git",
     "url": "git://github.com/nextgis/nextgisweb_frontend.git"
@@ -19,19 +33,12 @@
     "NextGIS",
     "MAP"
   ],
-  "author": "",
-  "license": "GPL-3.0",
-  "dependencies": {
-    "@nextgis/api-connector": "^0.0.7"
+  "author": "NextGIS",
+  "directories": {
+    "lib": "lib"
   },
-  "devDependencies": {
-    "rollup": "^0.64.1",
-    "rollup-plugin-commonjs": "^9.1.5",
-    "rollup-plugin-node-builtins": "^2.1.2",
-    "rollup-plugin-node-resolve": "^3.3.0",
-    "rollup-plugin-sourcemaps": "^0.4.2",
-    "rollup-plugin-typescript2": "^0.16.1",
-    "rollup-plugin-uglify": "^4.0.0",
-    "typescript": "^3.0.1"
-  }
+  "files": [
+    "lib"
+  ],
+  "license": "GPL-3.0"
 }

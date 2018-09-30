@@ -212,6 +212,10 @@ node_modules
 # Optional REPL history
 .node_repl_history
 
+### Lerna
+
+lerna-debug.log
+
 
 ### Bower
 bower_components
