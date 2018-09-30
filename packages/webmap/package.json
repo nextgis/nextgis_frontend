@@ -1,26 +1,15 @@
 {
   "name": "@nextgis/webmap",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "",
-  "main": "index",
-  "types": "index.d.ts",
-  "scripts": {
-    "build": "rollup -c rollup.config.js",
-    "watch": "rollup -c rollup.config.js -w"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/nextgis/nextgisweb_frontend.git"
-  },
-  "keywords": [
-    "NextGIS",
-    "MAP"
-  ],
-  "author": "",
-  "license": "GPL-3.0",
+  "main": "lib/webmap.js",
+  "types": "lib/webmap.d.ts",
+
   "devDependencies": {
+    "@types/node": "^10.11.3",
     "@types/events": "^1.2.0",
-    "rollup": "^0.66.2",
+    "lerna": "^3.4.0",
+    "rollup": "*",
     "rollup-plugin-commonjs": "^9.1.5",
     "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-resolve": "^3.3.0",
@@ -30,5 +19,27 @@
     "tslint": "^5.11.0",
     "typescript": "^3.0.1"
   },
-  "gitHead": "bfca4116cc6f97eadae8093142123ca08efa9f55"
+
+  "scripts": {
+    "build": "rollup -c rollup.config.js",
+    "watch": "rollup -c rollup.config.js -w",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nextgis/nextgisweb_frontend.git"
+  },
+  "keywords": [
+    "NextGIS",
+    "MAP"
+  ],
+  "author": "NextGIS",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib"
+  ],
+  "license": "GPL-3.0"
 }

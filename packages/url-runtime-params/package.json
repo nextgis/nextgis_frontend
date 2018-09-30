@@ -1,15 +1,17 @@
 {
   "name": "@nextgis/url-runtime-params",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "",
-  "main": "index",
-  "types": "index.d.ts",
-  "files": [
-    "index.js",
-    "index.d.ts"
-  ],
+  "main": "lib/url-runtime-params.js",
+  "types": "lib/url-runtime-params.d.ts",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "devDependencies": {
+    "@types/events": "^1.2.0",
+    "typescript": "^2.9.2"
   },
   "repository": {
     "type": "git",
@@ -19,11 +21,12 @@
     "NextGIS",
     "MAP"
   ],
-  "author": "",
-  "license": "GPL-3.0",
-  "devDependencies": {
-    "@types/events": "^1.2.0",
-    "typescript": "^2.9.2"
+  "author": "NextGIS",
+  "directories": {
+    "lib": "lib"
   },
-  "gitHead": "bfca4116cc6f97eadae8093142123ca08efa9f55"
+  "files": [
+    "lib"
+  ],
+  "license": "GPL-3.0"
 }
