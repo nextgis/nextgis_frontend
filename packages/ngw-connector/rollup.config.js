@@ -6,14 +6,14 @@ import sourcemaps from 'rollup-plugin-sourcemaps';
 import { uglify } from 'rollup-plugin-uglify';
 
 const pckg = require('./package');
-const input = 'src/ngw-kit.ts';
+const input = 'src/ngw-connector.ts';
 
 export default {
-  external: ['@nextgis/ngw-connector'],
   input,
   output: [
-    { file: pckg.main, format: 'umd', name: 'NgwKit', sourcemap: true }
+    { file: pckg.main, format: 'umd', name: 'NgwConnector', sourcemap: true },
   ],
+  external: [],
   watch: {
     include: 'src/**',
   },
@@ -32,4 +32,5 @@ export default {
     sourcemaps(),
     // uglify()
   ],
+
 }

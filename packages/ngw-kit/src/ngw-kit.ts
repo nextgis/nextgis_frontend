@@ -1,4 +1,4 @@
-import { Ngw } from '@nextgis/api-connector';
+import { NgwConnector } from '@nextgis/ngw-connector';
 
 export interface NgwConfig {
   applicationUrl: string;
@@ -11,12 +11,12 @@ export class NgwKit {
 
   url: string;
   resourceId: number;
-  connector: Ngw;
+  connector: NgwConnector;
 
   constructor(options?) {
     this.url = options.baseUrl;
     this.resourceId = options.resourceId;
-    this.connector = new Ngw({ baseUrl: this.url });
+    this.connector = new NgwConnector({ baseUrl: this.url });
   }
 
   getSettings() {
@@ -25,7 +25,7 @@ export class NgwKit {
         const webmap = data.webmap;
         if (webmap) {
 
-          this._updateItemsUrl(webmap.root_item)
+          this._updateItemsUrl(webmap.root_item);
 
           resolve(data.webmap);
         }

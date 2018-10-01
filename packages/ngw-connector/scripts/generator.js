@@ -1,14 +1,14 @@
 /**
  * This node script allow to generate actual index.js and index.d.ts files for current api version
  */
-const index = require('../lib/index');
+const index = require('../lib/ngw-connector');
 const args = require('minimist')(process.argv.slice(2));
 const Ngw = index.Ngw;
 // TODO: use something like http://api.nextgis.com to get all awailabe data
 //       from current version on instelled NGW Server API
 let baseUrl = 'http://geonote.nextgis.com';
 
-const typePath = 'lib/api-connector.d.ts';
+const typePath = 'src/types/RequestItemsParamsMap.ts';
 
 if (args.url || args.u) {
   baseUrl = args.url || args.u;
