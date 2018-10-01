@@ -13,10 +13,10 @@
 
   </div>
 
-<script src="../index.js"></script>
+<script src="../lib/ngw-connector.js"></script>
 <script>
   var element = document.getElementById('results');
-  var connector = new Ngw({baseUrl: 'http://dev.nextgis.ru/practice2/'});
+  var connector = new NgwConnector({baseUrl: 'http://dev.nextgis.ru/practice2/'});
   connector.request('resource.item', function (data) {
      console.log(data);
      element.appendChild(document.createTextNode(JSON.stringify(data)));

@@ -10,7 +10,7 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "@nextgis/api-connector": "^0.0.7"
+    "@nextgis/ngw-connector": "^0.1.0"
   },
   "devDependencies": {
     "rollup": "^0.66.2",
