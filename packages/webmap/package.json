@@ -5,8 +5,8 @@
   "main": "lib/webmap.js",
   "types": "lib/webmap.d.ts",
   "devDependencies": {
-    "@types/node": "^10.11.3",
     "@types/events": "^1.2.0",
+    "@types/node": "^10.11.3",
     "lerna": "^3.4.0",
     "rollup": "*",
     "rollup-plugin-commonjs": "^9.1.5",
