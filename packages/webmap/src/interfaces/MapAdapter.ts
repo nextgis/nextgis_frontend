@@ -6,7 +6,7 @@ interface LatLng {
   lat: number; lng: number;
 }
 
-interface MapClickEvent {
+export interface MapClickEvent {
   latLng: LatLng;
   pixel: {top: number, left: number, right?: number, bottom?: number};
   source?: any;
@@ -48,4 +48,7 @@ export interface MapAdapter<M = any> {
   getContainer(): HTMLElement;
 
   onMapClick(evt: MapClickEvent): void;
+
+  // TODO: now return WKT geometry but need geojson
+  requestGeomString?(pixel: {top: number, left: number}, pixelRadius?: number): string;
 }

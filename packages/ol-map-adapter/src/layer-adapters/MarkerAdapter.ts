@@ -21,7 +21,6 @@ export class MarkerAdapter {
       geometry: new Point(fromLonLat([lng, lat])),
      });
 
-    console.log(point);
     // const icon = new Icon({
     //   color: '#4271AE',
     //   crossOrigin: 'anonymous',
@@ -33,11 +32,11 @@ export class MarkerAdapter {
     // }));
 
     const source = new VectorSource({
-      features: [point]
+      features: [point],
     });
 
     const layer = new VectorLayer({
-      source
+      source,
     });
 
     return layer;

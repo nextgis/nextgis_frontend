@@ -1,7 +1,9 @@
-import Map from 'ol/Map';
+import { Map, View } from 'ol';
 import { fromLonLat, transformExtent, transform } from 'ol/proj';
+import { boundingExtent } from 'ol/extent';
+import { WKT } from 'ol/format';
+import { fromExtent } from 'ol/geom/Polygon';
 
-import View from 'ol/View';
 import { ImageAdapter } from './layer-adapters/ImageAdapter';
 import { EventEmitter } from 'events';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
@@ -20,7 +22,7 @@ export class OlMapAdapter { // implements MapAdapter {
     // TILE: TileAdapter,
     // MVT: MvtAdapter,
     OSM: OsmAdapter,
-    MARKER: MarkerAdapter
+    MARKER: MarkerAdapter,
   };
 
   options;
@@ -92,12 +94,12 @@ export class OlMapAdapter { // implements MapAdapter {
   }
 
   fit(e: [number, number, number, number]) {
-    const extent = transformExtent(
+    const toExtent = transformExtent(
       e,
       this.lonlatProjection,
       this.displayProjection,
     );
-    this._olView.fit(extent);
+    this._olView.fit(toExtent);
   }
 
   setRotation(angle: number) {
@@ -191,13 +193,31 @@ export class OlMapAdapter { // implements MapAdapter {
       this.lonlatProjection,
     );
     const latLng = {
-      lat, lng
+      lat, lng,
     };
     this.emitter.emit('click', {
       latLng,
-      pixel: {left: evt.pixel[0], top: evt.pixel[1]},
-      source: evt
+      pixel: { left: evt.pixel[0], top: evt.pixel[1] },
+      source: evt,
     });
+  }
+
+  requestGeomString(pixel: {top: number, left: number}, pixelRadius = 5) {
+    const {top, left} = pixel;
+    const olMap = this.map;
+    const bounds = boundingExtent([
+      olMap.getCoordinateFromPixel([
+        left - pixelRadius,
+        top - pixelRadius,
+      ]),
+      olMap.getCoordinateFromPixel([
+        left + pixelRadius,
+        top + pixelRadius,
+      ]),
+    ]);
+
+    return new WKT().writeGeometry(
+      fromExtent(bounds));
   }
 
   private _addMapListeners() {
