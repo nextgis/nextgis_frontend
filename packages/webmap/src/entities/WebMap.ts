@@ -5,7 +5,7 @@ import { deepmerge } from '../utils/lang';
 import { EventEmitter } from 'events';
 import { WebLayerEntry } from './WebLayerEntry';
 import { Keys } from './keys/Keys';
-import { MapAdapter } from '../interfaces/MapAdapter';
+import { MapAdapter, MapClickEvent } from '../interfaces/MapAdapter';
 import { Type } from '../utils/Type';
 import { LayerAdapter, LayerAdapters } from '../interfaces/LayerAdapter';
 import { StarterKit, AppSettings } from '../interfaces/AppSettings';
@@ -38,6 +38,8 @@ export class WebMap<M = any> {
   constructor(appOptions: AppOptions) {
     this.map = appOptions.mapAdapter;
     this._starterKits = appOptions.starterKits || [];
+
+    this._addEventsListeners();
   }
 
   async create(options: MapOptions): Promise<this> {
@@ -191,6 +193,24 @@ export class WebMap<M = any> {
       throw new Error(er);
     }
   }
+  // endregion
+
+  // region Events
+
+  private _addEventsListeners() {
+    // propagate map click event
+    this.map.emitter.on('click', (ev: MapClickEvent) => this._onMapClick(ev));
+  }
+
+  private _onMapClick(ev: MapClickEvent) {
+    this.emitter.emit('click', ev);
+    this._starterKits.forEach((x) => {
+      if (x.onMapClick) {
+        x.onMapClick(ev, this);
+      }
+    });
+  }
+
   // endregion
 
 }

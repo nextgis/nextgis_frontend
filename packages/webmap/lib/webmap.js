@@ -1149,6 +1149,7 @@
             this._baseLayers = [];
             this.map = appOptions.mapAdapter;
             this._starterKits = appOptions.starterKits || [];
+            this._addEventsListeners();
         }
         WebMap.prototype.create = function (options) {
             return __awaiter(this, void 0, void 0, function () {
@@ -1327,6 +1328,19 @@
                         case 6: return [2];
                     }
                 });
+            });
+        };
+        WebMap.prototype._addEventsListeners = function () {
+            var _this = this;
+            this.map.emitter.on('click', function (ev) { return _this._onMapClick(ev); });
+        };
+        WebMap.prototype._onMapClick = function (ev) {
+            var _this = this;
+            this.emitter.emit('click', ev);
+            this._starterKits.forEach(function (x) {
+                if (x.onMapClick) {
+                    x.onMapClick(ev, _this);
+                }
             });
         };
         return WebMap;

@@ -21,12 +21,17 @@ interface Params {
 interface RequestItemsResponseMap {
   'resource.item': ResourceItem;
   'resource.child': any;
-  [x: string]: {[x: string]: any};
+  [x: string]: { [x: string]: any };
 }
 
 export interface NgwConnectorOptions {
   route?: string;
   baseUrl?: string;
+}
+
+export interface RequestOptions {
+  method?: 'POST' | 'GET';
+  data?: any;
 }
 
 const OPTIONS: NgwConnectorOptions = {
@@ -54,14 +59,15 @@ export class NgwConnector {
       this.makeQuery(this.options.route, function (route) {
         self.route = route;
         callback.call(this, route);
-      }, {}, context);
+      }, {}, {}, context);
     }
   }
 
   request<K extends keyof RequestItemsParamsMap>(
     name: K,
-    callback: (data: RequestItemsResponseMap[K]) => void,
+    callback?: (data: RequestItemsResponseMap[K]) => void,
     params?: RequestItemsParamsMap[K] | {},
+    options?: RequestOptions,
     error?: (er: Error) => void,
     context?: any): void {
     this.connect((apiItems) => {
@@ -82,17 +88,31 @@ export class NgwConnector {
               }
               url = template(url, replaceParams);
             }
-            this.makeQuery(url, callback, params, this, error);
+            this.makeQuery(url, callback, params, options, this, error);
           }
         }
       }
     }, context || this);
   }
 
+  post<K extends keyof RequestItemsParamsMap>(
+    name: K,
+    callback: (data: RequestItemsResponseMap[K]) => void,
+    options?: RequestOptions,
+    error?: (er: Error) => void,
+    params?: RequestItemsParamsMap[K] | {},
+    context?: any): void {
+
+    options = options || {};
+    options.method = 'POST';
+    this.request(name, callback, params, options, error, context);
+  }
+
   makeQuery(
     url: string,
     callback: ({ }) => void,
     params: Params,
+    options: RequestOptions,
     context: any,
     error?: (er: Error) => void): void {
 
@@ -106,11 +126,12 @@ export class NgwConnector {
       url = url.replace(/([^:]\/)\/+/g, '$1');
       if (!this._loadingStatus[url]) {
         this._loadingStatus[url] = true;
+
         this._getJson(url, (data) => {
           callback.call(context, data);
           this._loadingStatus[url] = false;
           this._exequteLoadingQueue(url, data);
-        }, context, (er) => {
+        }, options, context, (er) => {
           this._loadingStatus[url] = false;
           this._exequteLoadingQueue(url, er, true);
           if (error) {
@@ -159,12 +180,12 @@ export class NgwConnector {
     }
   }
 
-  _getJson(url, callback, context, error) {
-    return loadJSON(url, callback, context, error);
+  _getJson(url: string, callback, options: RequestOptions, context, error) {
+    return loadJSON(url, callback, options, context, error);
   }
 }
 
-function loadJSON (url, callback, context, error) {
+function loadJSON(url, callback, options: RequestOptions = {}, context, error) {
   const xmlHttp = new XMLHttpRequest();
   xmlHttp.onreadystatechange = () => {
     if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
@@ -177,14 +198,14 @@ function loadJSON (url, callback, context, error) {
       }
     }
   };
-  xmlHttp.open('GET', url, true); // true for asynchronous
-  xmlHttp.send(null);
+  xmlHttp.open(options.method || 'GET', url, true); // true for asynchronous
+  xmlHttp.send(options.data ? JSON.stringify(options.data) : null);
 }
 
 // https://github.com/Leaflet/Leaflet/blob/b507e21c510b53cd704fb8d3f89bb46ea925c8eb/src/core/Util.js#L165
 const templateRe = /\{ *([\w_-]+) *\}/g;
 
-function template (str, data) {
+function template(str, data) {
   return str.replace(templateRe, (s, key) => {
     let value = data[key];
 

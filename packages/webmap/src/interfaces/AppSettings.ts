@@ -1,3 +1,6 @@
+import { MapClickEvent } from './MapAdapter';
+import { WebMap } from '../webmap';
+
 export interface TreeItem {
   item_type: 'root' | 'group' | 'layer';
   display_name?: string;
@@ -40,4 +43,5 @@ export interface AppSettings {
 export interface StarterKit {
   getSettings?(): Promise<AppSettings | false>;
   getLayerAdapters?(): Promise<any>;
+  onMapClick?(evt: MapClickEvent, webMap?: WebMap);
 }
