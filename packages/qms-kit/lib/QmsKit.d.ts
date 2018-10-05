@@ -1,3 +1,4 @@
+import { StarterKit } from '@nextgis/webmap';
 export interface QmsOptions {
     url: string;
 }
@@ -9,7 +10,7 @@ interface GeoserviceInList {
     type: string;
     epsg: number;
 }
-export declare class QmsKit {
+export declare class QmsKit implements StarterKit {
     options: QmsOptions;
     url: string;
     map: any;

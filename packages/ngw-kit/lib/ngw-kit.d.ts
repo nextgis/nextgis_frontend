@@ -1,12 +1,12 @@
 import { NgwConnector } from '@nextgis/ngw-connector';
-import { WebMap } from '@nextgis/webmap';
+import { WebMap, StarterKit } from '@nextgis/webmap';
 export interface NgwConfig {
     applicationUrl: string;
     assetUrl: string;
     amdUrl: string;
     id: number;
 }
-export declare class NgwKit {
+export declare class NgwKit implements StarterKit {
     url: string;
     resourceId: number;
     connector: NgwConnector;

@@ -1,4 +1,5 @@
-export declare class ImageAdapter {
+import { LayerAdapter } from '@nextgis/webmap';
+export declare class ImageAdapter implements LayerAdapter {
     name: string;
     addLayer(options?: any): any;
 }

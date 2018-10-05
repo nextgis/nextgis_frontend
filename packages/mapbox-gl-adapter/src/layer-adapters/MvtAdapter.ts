@@ -1,7 +1,8 @@
+import { LayerAdapter } from '@nextgis/webmap';
 import { BaseAdapter } from './BaseAdapter';
 import { Layer } from 'mapbox-gl';
 
-export class MvtAdapter extends BaseAdapter {
+export class MvtAdapter extends BaseAdapter implements LayerAdapter {
 
   addLayer(options?): string {
     options = Object.assign({}, this.options, options || {});
@@ -14,11 +15,11 @@ export class MvtAdapter extends BaseAdapter {
       'source-layer': options['source-layer'] || idString,
       'source': {
         type: 'vector',
-        tiles: [options.url]
+        tiles: [options.url],
       },
       'layout': {
-        visibility: 'none'
-      }
+        visibility: 'none',
+      },
     };
 
     if (options.paint) {

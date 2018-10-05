@@ -1,6 +1,7 @@
+import { LayerAdapter } from '@nextgis/webmap';
 import { BaseAdapter } from './BaseAdapter';
 
-export class TileAdapter extends BaseAdapter {
+export class TileAdapter extends BaseAdapter implements LayerAdapter {
 
   addLayer(options?): string {
 

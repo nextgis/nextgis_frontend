@@ -1,4 +1,5 @@
 /// <reference types="node" />
+import { MapAdapter } from '@nextgis/webmap';
 import { MvtAdapter } from './layer-adapters/MvtAdapter';
 import { Map } from 'mapbox-gl';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
@@ -7,7 +8,7 @@ import { EventEmitter } from 'events';
 import { ZoomControl } from './controls/ZoomControl';
 import { CompassControl } from './controls/CompassControl';
 declare type positions = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
-export declare class MapboxglAdapter {
+export declare class MapboxglAdapter implements MapAdapter {
     static layerAdapters: {
         TILE: typeof TileAdapter;
         MVT: typeof MvtAdapter;
