@@ -6,7 +6,7 @@ interface LatLng {
     lat: number;
     lng: number;
 }
-interface MapClickEvent {
+export interface MapClickEvent {
     latLng: LatLng;
     pixel: {
         top: number;
@@ -42,5 +42,9 @@ export interface MapAdapter<M = any> {
     addControl(controlDef: any, position: string): void;
     getContainer(): HTMLElement;
     onMapClick(evt: MapClickEvent): void;
+    requestGeomString?(pixel: {
+        top: number;
+        left: number;
+    }, pixelRadius?: number): string;
 }
 export {};

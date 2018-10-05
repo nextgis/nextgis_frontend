@@ -1,11 +1,14 @@
 {
   "name": "@nextgis/ngw-kit",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "",
   "main": "lib/ngw-kit.js",
   "types": "lib/ngw-kit.d.ts",
+  "dependencies": {
+    "@nextgis/ngw-connector": "^0.1.1"
+  },
   "devDependencies": {
-    "@nextgis/ngw-connector": "^0.1.0",
+    "@nextgis/webmap": "^0.1.1",
     "rollup": "^0.66.2",
     "rollup-plugin-commonjs": "^9.1.5",
     "rollup-plugin-node-builtins": "^2.1.2",

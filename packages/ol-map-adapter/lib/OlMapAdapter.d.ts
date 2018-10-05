@@ -1,5 +1,5 @@
 /// <reference types="node" />
-import Map from 'ol/Map';
+import { Map } from 'ol';
 import { ImageAdapter } from './layer-adapters/ImageAdapter';
 import { EventEmitter } from 'events';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
@@ -51,6 +51,10 @@ export declare class OlMapAdapter {
     toggleLayer(layerName: string, status: boolean): void;
     addControl(controlDef: any, position: string): void;
     onMapClick(evt: any): void;
+    requestGeomString(pixel: {
+        top: number;
+        left: number;
+    }, pixelRadius?: number): any;
     private _addMapListeners;
 }
 export {};

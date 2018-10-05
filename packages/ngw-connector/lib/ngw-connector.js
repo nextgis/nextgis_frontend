@@ -23,10 +23,10 @@
               this.makeQuery(this.options.route, function (route) {
                   self.route = route;
                   callback.call(this, route);
-              }, {}, context);
+              }, {}, {}, context);
           }
       };
-      NgwConnector.prototype.request = function (name, callback, params, error, context) {
+      NgwConnector.prototype.request = function (name, callback, params, options, error, context) {
           var _this = this;
           this.connect(function (apiItems) {
               for (var a in apiItems) {
@@ -46,13 +46,18 @@
                               }
                               url = template(url, replaceParams);
                           }
-                          _this.makeQuery(url, callback, params, _this, error);
+                          _this.makeQuery(url, callback, params, options, _this, error);
                       }
                   }
               }
           }, context || this);
       };
-      NgwConnector.prototype.makeQuery = function (url, callback, params, context, error) {
+      NgwConnector.prototype.post = function (name, callback, options, error, params, context) {
+          options = options || {};
+          options.method = 'POST';
+          this.request(name, callback, params, options, error, context);
+      };
+      NgwConnector.prototype.makeQuery = function (url, callback, params, options, context, error) {
           var _this = this;
           context = context || this;
           url = (this.options.baseUrl ? this.options.baseUrl : '') + url;
@@ -67,7 +72,7 @@
                       callback.call(context, data);
                       _this._loadingStatus[url] = false;
                       _this._exequteLoadingQueue(url, data);
-                  }, context, function (er) {
+                  }, options, context, function (er) {
                       _this._loadingStatus[url] = false;
                       _this._exequteLoadingQueue(url, er, true);
                       if (error) {
@@ -116,12 +121,13 @@
               queue.waiting = [];
           }
       };
-      NgwConnector.prototype._getJson = function (url, callback, context, error) {
-          return loadJSON(url, callback, context, error);
+      NgwConnector.prototype._getJson = function (url, callback, options, context, error) {
+          return loadJSON(url, callback, options, context, error);
       };
       return NgwConnector;
   }());
-  function loadJSON(url, callback, context, error) {
+  function loadJSON(url, callback, options, context, error) {
+      if (options === void 0) { options = {}; }
       var xmlHttp = new XMLHttpRequest();
       xmlHttp.onreadystatechange = function () {
           if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
@@ -135,8 +141,8 @@
               }
           }
       };
-      xmlHttp.open('GET', url, true);
-      xmlHttp.send(null);
+      xmlHttp.open(options.method || 'GET', url, true);
+      xmlHttp.send(options.data ? JSON.stringify(options.data) : null);
   }
   var templateRe = /\{ *([\w_-]+) *\}/g;
   function template(str, data) {

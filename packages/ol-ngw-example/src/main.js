@@ -2,12 +2,15 @@ import { WebMap } from '@nextgis/webmap';
 import { OlMapAdapter } from '@nextgis/ol-map-adapter';
 import { NgwKit } from '@nextgis/ngw-kit';
 
+const ngwKit = new NgwKit({
+  'baseUrl': "http://geonote.nextgis.com",
+  'resourceId': 1,
+  // 'pixelRadius': 10
+})
+
 const webMap = new WebMap({
   mapAdapter: new OlMapAdapter(),
-  starterKits: [new NgwKit({
-    'baseUrl': "http://geonote.nextgis.com",
-    'resourceId': 1
-  })],
+  starterKits: [ngwKit],
 });
 
 webMap.create({
@@ -31,7 +34,7 @@ webMap.emitter.on('add-layers', function () {
 })
 
 
-webMap.map.emitter.on('click', function (evt) {
+webMap.emitter.on('click', function (evt) {
 
   // Map lat lng coordinates
   console.log('latlang', evt.latLng);
@@ -47,6 +50,20 @@ webMap.map.emitter.on('click', function (evt) {
   }).then((x) => {
     webMap.map.showLayer(x.name);
   });
+
+  // TODO layer_style_id - 1 is hardcode to get layers id for geonote.nextgis.com instant
+  const layers = webMap.layers.tree.getDescendants().filter((x) => {
+    return x.item.item_type === 'layer' && x.properties.get('visibility');
+  }).map((x) => x.item.layer_style_id - 1);
+
+  ngwKit.sendIdentifyRequest(evt, webMap, { layers: layers })
+    .then((resp) => console.log(resp))
+    .catch((er) => console.log(er));
+});
+
+// better use this subscribe to future compatibility
+webMap.emitter.on('identify', function (data) {
+  console.log(data);
 });
 
 window.webMap = webMap;

@@ -15,6 +15,9 @@ const _globals = [
   'ol/geom/Point',
   'ol/Feature',
   'ol/proj',
+  'ol/extent',
+  'ol/format',
+  'ol/geom',
   'ol/layer',
   'ol/source/Vector',
   'tslib',
@@ -29,7 +32,7 @@ const pckg = require('./package');
 const input = 'src/ol-map-adapter.ts';
 
 export default {
-  external: id => id.indexOf('ol/') !== -1 && !(path.isAbsolute(id) || id.startsWith(".")),
+  external: id => id.indexOf('ol') !== -1 && !(path.isAbsolute(id) || id.startsWith(".")),
   input,
   output: [
     { file: pckg.main, format: 'umd', name: 'OlMapAdapter', sourcemap: true, globals }],
