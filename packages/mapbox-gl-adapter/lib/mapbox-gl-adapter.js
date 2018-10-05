@@ -60,11 +60,11 @@
                 'source-layer': options['source-layer'] || idString,
                 'source': {
                     type: 'vector',
-                    tiles: [options.url]
+                    tiles: [options.url],
                 },
                 'layout': {
-                    visibility: 'none'
-                }
+                    visibility: 'none',
+                },
             };
             if (options.paint) {
                 layerOptions.paint = options.paint;
@@ -112,7 +112,7 @@
     var OPTIONS = {
         url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         attribution: '&copy; <a href="http://osm.org/copyright" target="_blank">OpenStreetMap</a> contributors',
-        subdomains: 'abc'
+        subdomains: 'abc',
     };
     var OsmAdapter = (function (_super) {
         __extends(OsmAdapter, _super);

@@ -1,9 +1,10 @@
+import { LayerAdapter } from '@nextgis/webmap';
 import ImageWMS from 'ol/source/ImageWMS';
 import ImageLayer from 'ol/layer/Image';
 
 let ID = 1;
 
-export class ImageAdapter {
+export class ImageAdapter implements LayerAdapter {
 
   name: string;
 
@@ -41,7 +42,6 @@ export class ImageAdapter {
     return layer;
   }
 }
-
 
 // TODO: move to utils or rewrite with native js methods
 export function queryToObject(str: string) {

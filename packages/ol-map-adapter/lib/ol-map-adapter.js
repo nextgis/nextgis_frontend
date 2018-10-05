@@ -600,6 +600,7 @@
 
     var OlMapAdapter = (function () {
         function OlMapAdapter() {
+            this.layerAdapters = OlMapAdapter.layerAdapters;
             this.displayProjection = 'EPSG:3857';
             this.lonlatProjection = 'EPSG:4326';
             this.emitter = new EventEmitter();

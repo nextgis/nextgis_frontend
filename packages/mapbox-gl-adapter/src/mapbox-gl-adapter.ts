@@ -1,3 +1,4 @@
+import { MapAdapter } from '@nextgis/webmap';
 import { MvtAdapter } from './layer-adapters/MvtAdapter';
 import { Map } from 'mapbox-gl';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
@@ -8,7 +9,7 @@ import { CompassControl } from './controls/CompassControl';
 
 type positions = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
 
-export class MapboxglAdapter { // implements MapAdapter {
+export class MapboxglAdapter implements MapAdapter {
 
   static layerAdapters = {
     TILE: TileAdapter,

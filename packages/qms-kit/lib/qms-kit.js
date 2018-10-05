@@ -70,7 +70,7 @@
     var QmsKit = (function () {
         function QmsKit(options) {
             this.options = {
-                url: 'https://qms.nextgis.com'
+                url: 'https://qms.nextgis.com',
             };
             this.options = __assign({}, this.options, options);
             this.url = this.options.url;
@@ -79,7 +79,7 @@
             var _this = this;
             return Promise.resolve([{
                     name: 'QMS',
-                    createAdapter: function (webmap) { return Promise.resolve(_this._createAdapter(webmap)); }
+                    createAdapter: function (webmap) { return Promise.resolve(_this._createAdapter(webmap)); },
                 }]);
         };
         QmsKit.prototype.getQmsServices = function () {
@@ -93,7 +93,7 @@
             var url = this.url;
             this.map = map;
             var alias = {
-                tms: 'TILE'
+                tms: 'TILE',
             };
             var adapter = function (m, options) {
                 this.map = m;

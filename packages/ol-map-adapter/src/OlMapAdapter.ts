@@ -1,3 +1,4 @@
+import { MapAdapter } from '@nextgis/webmap';
 import { Map, View } from 'ol';
 import { fromLonLat, transformExtent, transform } from 'ol/proj';
 import { boundingExtent } from 'ol/extent';
@@ -15,7 +16,7 @@ interface LayerMem {
   onMap: boolean;
 }
 
-export class OlMapAdapter { // implements MapAdapter {
+export class OlMapAdapter implements MapAdapter {
 
   static layerAdapters = {
     IMAGE: ImageAdapter,
@@ -26,6 +27,8 @@ export class OlMapAdapter { // implements MapAdapter {
   };
 
   options;
+
+  layerAdapters = OlMapAdapter.layerAdapters;
 
   displayProjection = 'EPSG:3857';
   lonlatProjection = 'EPSG:4326';

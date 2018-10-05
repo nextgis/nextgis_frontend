@@ -1,5 +1,5 @@
 import { NgwConnector } from '@nextgis/ngw-connector';
-import { WebMap } from '@nextgis/webmap';
+import { WebMap, StarterKit } from '@nextgis/webmap';
 
 export interface NgwConfig {
   applicationUrl: string;
@@ -14,7 +14,7 @@ interface RequestOptions {
   layers: string[];
 }
 
-export class NgwKit {
+export class NgwKit implements StarterKit {
 
   url: string;
   resourceId: number;

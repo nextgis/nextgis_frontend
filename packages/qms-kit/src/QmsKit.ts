@@ -1,3 +1,5 @@
+import { StarterKit } from '@nextgis/webmap';
+
 export interface QmsOptions {
   url: string;
 }
@@ -30,10 +32,10 @@ interface Geoservice {
   icon: number;
 }
 
-export class QmsKit {
+export class QmsKit implements StarterKit {
 
   options: QmsOptions = {
-    url: 'https://qms.nextgis.com'
+    url: 'https://qms.nextgis.com',
   };
 
   url: string;
@@ -48,7 +50,7 @@ export class QmsKit {
   getLayerAdapters() {
     return Promise.resolve([{
       name: 'QMS',
-      createAdapter: (webmap) => Promise.resolve(this._createAdapter(webmap))
+      createAdapter: (webmap) => Promise.resolve(this._createAdapter(webmap)),
     }]);
 
   }
@@ -61,7 +63,7 @@ export class QmsKit {
     const url = this.url;
     this.map = map;
     const alias = {
-      tms: 'TILE'
+      tms: 'TILE',
     };
     const adapter = function(m, options) {
       this.map = m;

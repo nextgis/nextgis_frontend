@@ -1,4 +1,5 @@
 /// <reference types="node" />
+import { MapAdapter } from '@nextgis/webmap';
 import { Map } from 'ol';
 import { ImageAdapter } from './layer-adapters/ImageAdapter';
 import { EventEmitter } from 'events';
@@ -9,13 +10,18 @@ interface LayerMem {
     layer: any;
     onMap: boolean;
 }
-export declare class OlMapAdapter {
+export declare class OlMapAdapter implements MapAdapter {
     static layerAdapters: {
         IMAGE: typeof ImageAdapter;
         OSM: typeof OsmAdapter;
         MARKER: typeof MarkerAdapter;
     };
     options: any;
+    layerAdapters: {
+        IMAGE: typeof ImageAdapter;
+        OSM: typeof OsmAdapter;
+        MARKER: typeof MarkerAdapter;
+    };
     displayProjection: string;
     lonlatProjection: string;
     emitter: EventEmitter;

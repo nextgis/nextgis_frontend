@@ -9,8 +9,8 @@ This repository under construction
     // Clone git through ssh
     git clone git@github.com:nextgis/nextgisweb_frontend.git
     cd ./nextgisweb_frontend
-    // Install yarn global
-    npm i -g yarn
+    // Install yarn and lerna global
+    npm i -g yarn lerna
     // Install dependencies
     yarn install
     // Prepare packages
@@ -52,8 +52,26 @@ In this case, you need to execute commands from root directory
     lerna clean
     lerna bootstrap
 
+---
+
 During the publication, an error may occur if the git is not connected via ssh, but via http[s]
+
+---
+
+VSCode
+
+[Bug](https://github.com/Microsoft/vscode/issues/25312) Wen not finding symbolyc linked modules try to
+
+1. CTRL + SHIFT + P & equivalent for MacOS (brings up the command palette)
+2. Search something like "typescript"
+3. Select TypeScript: Restart TS server
+
+---
 
 ### Helpful information
 
-Some lerna+yarn instruction https://medium.com/trabe/monorepo-setup-with-lerna-and-yarn-workspaces-5d747d7c0e91
+Some [lerna+yarn instruction](https://medium.com/trabe/monorepo-setup-with-lerna-and-yarn-workspaces-5d747d7c0e91)
+
+Usefull VSCode plugins:
+
+- Typescript MonoRepo Import Fixer
