@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('ol/source/ImageWMS'), require('ol/layer/Image'), require('ol/source/OSM'), require('ol/layer/Tile'), require('ol/geom/Point'), require('ol/Feature'), require('ol/proj'), require('ol/layer'), require('ol/source/Vector'), require('ol/Map'), require('ol/View')) :
-    typeof define === 'function' && define.amd ? define(['exports', 'ol/source/ImageWMS', 'ol/layer/Image', 'ol/source/OSM', 'ol/layer/Tile', 'ol/geom/Point', 'ol/Feature', 'ol/proj', 'ol/layer', 'ol/source/Vector', 'ol/Map', 'ol/View'], factory) :
-    (factory((global.OlMapAdapter = {}),global.ol.source.ImageWMS,global.ol.layer.Image,global.ol.source.OSM,global.ol.layer.Tile,global.ol.geom.Point,global.ol.Feature,global.ol.proj,global.ol.layer,global.ol.source.Vector,global.ol.Map,global.ol.View));
-}(this, (function (exports,ImageWMS,ImageLayer,OSM,TileLayer,Point,Feature,proj,layer,VectorSource,Map,View) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('ol/source/ImageWMS'), require('ol/layer/Image'), require('ol/source/OSM'), require('ol/layer/Tile'), require('ol/geom/Point'), require('ol/Feature'), require('ol/proj'), require('ol/layer'), require('ol/source/Vector'), require('ol'), require('ol/extent'), require('ol/format'), require('ol/geom/Polygon')) :
+    typeof define === 'function' && define.amd ? define(['exports', 'ol/source/ImageWMS', 'ol/layer/Image', 'ol/source/OSM', 'ol/layer/Tile', 'ol/geom/Point', 'ol/Feature', 'ol/proj', 'ol/layer', 'ol/source/Vector', 'ol', 'ol/extent', 'ol/format', 'ol/geom/Polygon'], factory) :
+    (factory((global.OlMapAdapter = {}),global.ol.source.ImageWMS,global.ol.layer.Image,global.ol.source.OSM,global.ol.layer.Tile,global.ol.geom.Point,global.ol.Feature,global.ol.proj,global.ol.layer,global.ol.source.Vector,global.ol,global.ol.extent,global.ol.format,global.Polygon));
+}(this, (function (exports,ImageWMS,ImageLayer,OSM,TileLayer,Point,Feature,proj,layer,VectorSource,ol,extent,format,Polygon) { 'use strict';
 
     ImageWMS = ImageWMS && ImageWMS.hasOwnProperty('default') ? ImageWMS['default'] : ImageWMS;
     ImageLayer = ImageLayer && ImageLayer.hasOwnProperty('default') ? ImageLayer['default'] : ImageLayer;
@@ -11,8 +11,6 @@
     Point = Point && Point.hasOwnProperty('default') ? Point['default'] : Point;
     Feature = Feature && Feature.hasOwnProperty('default') ? Feature['default'] : Feature;
     VectorSource = VectorSource && VectorSource.hasOwnProperty('default') ? VectorSource['default'] : VectorSource;
-    Map = Map && Map.hasOwnProperty('default') ? Map['default'] : Map;
-    View = View && View.hasOwnProperty('default') ? View['default'] : View;
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -589,12 +587,11 @@
             var point = new Feature({
                 geometry: new Point(proj.fromLonLat([lng, lat])),
             });
-            console.log(point);
             var source = new VectorSource({
-                features: [point]
+                features: [point],
             });
             var layer$$1 = new layer.Vector({
-                source: source
+                source: source,
             });
             return layer$$1;
         };
@@ -615,7 +612,7 @@
         OlMapAdapter.prototype.create = function (options) {
             if (options === void 0) { options = { target: 'map' }; }
             this.options = Object.assign({}, options);
-            var view = new View({
+            var view = new ol.View({
                 center: [-9101767, 2822912],
                 zoom: 14,
                 projection: this.displayProjection,
@@ -627,7 +624,7 @@
                 layers: [],
             };
             var mapInitOptions = __assign({}, defOpt, options);
-            this.map = new Map(mapInitOptions);
+            this.map = new ol.Map(mapInitOptions);
             this._olView = this.map.getView();
             this._addMapListeners();
         };
@@ -646,8 +643,8 @@
             this._olView.setZoom(zoom);
         };
         OlMapAdapter.prototype.fit = function (e) {
-            var extent = proj.transformExtent(e, this.lonlatProjection, this.displayProjection);
-            this._olView.fit(extent);
+            var toExtent = proj.transformExtent(e, this.lonlatProjection, this.displayProjection);
+            this._olView.fit(toExtent);
         };
         OlMapAdapter.prototype.setRotation = function (angle) {
             this._olView.setRotation(angle);
@@ -700,7 +697,7 @@
             var _this = this;
             var action = function (source, l) {
                 if (status) {
-                    if (source instanceof Map) {
+                    if (source instanceof ol.Map) {
                         source.addLayer(l.layer);
                         l.layer.setZIndex(_this._length - l.order);
                     }
@@ -720,13 +717,29 @@
         OlMapAdapter.prototype.onMapClick = function (evt) {
             var _a = proj.transform(evt.coordinate, this.displayProjection, this.lonlatProjection), lng = _a[0], lat = _a[1];
             var latLng = {
-                lat: lat, lng: lng
+                lat: lat, lng: lng,
             };
             this.emitter.emit('click', {
                 latLng: latLng,
                 pixel: { left: evt.pixel[0], top: evt.pixel[1] },
-                source: evt
+                source: evt,
             });
+        };
+        OlMapAdapter.prototype.requestGeomString = function (pixel, pixelRadius) {
+            if (pixelRadius === void 0) { pixelRadius = 5; }
+            var top = pixel.top, left = pixel.left;
+            var olMap = this.map;
+            var bounds = extent.boundingExtent([
+                olMap.getCoordinateFromPixel([
+                    left - pixelRadius,
+                    top - pixelRadius,
+                ]),
+                olMap.getCoordinateFromPixel([
+                    left + pixelRadius,
+                    top + pixelRadius,
+                ]),
+            ]);
+            return new format.WKT().writeGeometry(Polygon.fromExtent(bounds));
         };
         OlMapAdapter.prototype._addMapListeners = function () {
             var _this = this;
@@ -737,7 +750,7 @@
         OlMapAdapter.layerAdapters = {
             IMAGE: ImageAdapter,
             OSM: OsmAdapter,
-            MARKER: MarkerAdapter
+            MARKER: MarkerAdapter,
         };
         return OlMapAdapter;
     }());

@@ -8,6 +8,6 @@ export declare class TreeHelper {
     addChildren(children: Entry): void;
     getParent(): Entry;
     getParents(filterFunc?: (entry: Entry) => boolean): Entry[];
-    getDescendants(filterFunc?: (entry: Entry) => boolean): Entry[];
+    getDescendants(filterFunc?: (entry: Entry) => boolean): any[];
     getChildren(): Entry[];
 }

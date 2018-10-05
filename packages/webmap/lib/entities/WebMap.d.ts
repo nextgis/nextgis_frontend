@@ -31,4 +31,6 @@ export declare class WebMap<M = any> {
     private _addTreeLayers;
     private _zoomToInitialExtent;
     private _addLayerProviders;
+    private _addEventsListeners;
+    private _onMapClick;
 }

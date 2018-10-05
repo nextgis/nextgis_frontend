@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/qms-kit",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "",
   "main": "lib/qms-kit.js",
   "types": "lib/qms-kit.d.ts",
@@ -10,7 +10,7 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "@nextgis/ngw-connector": "^0.1.0"
+    "@nextgis/ngw-connector": "^0.1.1"
   },
   "devDependencies": {
     "rollup": "^0.66.2",
