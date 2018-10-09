@@ -31,9 +31,12 @@ export class NgwConnector {
     if (this.route) {
       return Promise.resolve(this.route);
     } else {
-      const {login, password} = this.options.auth;
-      if (login && password) {
-        await this.getUserInfo();
+      if (this.options.auth) {
+        console.log(1234);
+        const { login, password } = this.options.auth;
+        if (login && password) {
+          await this.getUserInfo();
+        }
       }
       return await this.makeQuery(this.options.route, {}, {}).then((route) => {
         this.route = route;
@@ -62,6 +65,24 @@ export class NgwConnector {
         }
       }
     });
+    // return fetch(this.options.baseUrl + '/api/component/auth/current_user', {
+    //   headers: {
+    //     Authorization: 'Basic ' + client,
+    //     // 'Access-Control-Allow-Origin': '*',
+    //     // 'Access-Control-Allow-Headers': '*',
+    //   },
+    //   mode: 'cors',
+    // }).then((resp) => {
+    //   console.log(resp);
+    //   resp.json().then((data) => {
+    //     if (data.keyname !== 'guest') {
+    //       data.clientId = this.makeClientId();
+    //       if (localStorage) {
+    //         localStorage.setItem('nguser', JSON.stringify(data));
+    //       }
+    //     }
+    //   });
+    // });
   }
 
   makeClientId() {
