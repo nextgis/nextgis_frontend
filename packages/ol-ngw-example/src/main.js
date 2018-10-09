@@ -1,6 +1,7 @@
 import { WebMap } from '@nextgis/webmap';
 import { OlMapAdapter } from '@nextgis/ol-map-adapter';
 import { NgwKit } from '@nextgis/ngw-kit';
+import { QmsKit } from '@nextgis/qms-kit';
 
 const ngwKit = new NgwKit({
   'baseUrl': "http://geonote.nextgis.com",
@@ -8,25 +9,29 @@ const ngwKit = new NgwKit({
   // 'pixelRadius': 10,
   auth: {
     login: 'administrator',
-    password: '',
+    password: 'NextgisNextgis',
   }
 })
 
 const webMap = new WebMap({
   mapAdapter: new OlMapAdapter(),
-  starterKits: [ngwKit],
+  starterKits: [new QmsKit(), ngwKit],
 });
 
 webMap.create({
   target: 'map'
+}).then(() => {
+  // webMap.addBaseLayer('sputnik', 'QMS', {
+  //   qmsid: 487
+  // }).then((layer) => {
+  //   webMap.map.showLayer(layer.name);
+  // });
 });
+
 webMap.addBaseLayer('osm', 'OSM').then((layer) => {
   webMap.map.showLayer(layer.name);
 });
 
-// webMap.emitter.on('build-map', function () {
-//   webMap.map.showLayer('osm');
-// });
 
 webMap.emitter.on('add-layers', function () {
   // webMap.layers.tree.getDescendants().forEach(function (x) {

@@ -81,6 +81,25 @@
         }
     }
 
+    function __values(o) {
+        var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+        if (m) return m.call(o);
+        return {
+            next: function () {
+                if (o && i >= o.length) o = void 0;
+                return { value: o && o[i++], done: !o };
+            }
+        };
+    }
+
+    function __asyncValues(o) {
+        if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+        var m = o[Symbol.asyncIterator], i;
+        return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
+        function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
+        function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
+    }
+
     function deepmerge(target, src, mergeArray) {
         if (mergeArray === void 0) { mergeArray = false; }
         var array = Array.isArray(src);
@@ -129,6 +148,7 @@
         }
         return dst;
     }
+    //# sourceMappingURL=lang.js.map
 
     var domain;
 
@@ -622,6 +642,7 @@
         }
         return _filtered;
     }
+    //# sourceMappingURL=TreeUtil.js.map
 
     var TreeHelper = (function () {
         function TreeHelper(entry) {
@@ -654,6 +675,7 @@
         };
         return TreeHelper;
     }());
+    //# sourceMappingURL=TreeHelper.js.map
 
     var BaseProperty = (function () {
         function BaseProperty(name, entry, options) {
@@ -745,6 +767,7 @@
         };
         return BaseProperty;
     }());
+    //# sourceMappingURL=BaseProperty.js.map
 
     var CheckProperty = (function (_super) {
         __extends(CheckProperty, _super);
@@ -861,6 +884,7 @@
         };
         return CheckProperty;
     }(BaseProperty));
+    //# sourceMappingURL=CheckProperty.js.map
 
     var EntryProperties = (function () {
         function EntryProperties(entry, propertiesList) {
@@ -937,6 +961,7 @@
         };
         return EntryProperties;
     }());
+    //# sourceMappingURL=EntryProperties.js.map
 
     var ID = 0;
     var Entry = (function () {
@@ -951,6 +976,7 @@
         };
         return Entry;
     }());
+    //# sourceMappingURL=Entry.js.map
 
     var WebLayerEntry = (function (_super) {
         __extends(WebLayerEntry, _super);
@@ -1029,6 +1055,7 @@
         };
         return WebLayerEntry;
     }(Entry));
+    //# sourceMappingURL=WebLayerEntry.js.map
 
     var KeyCodes = (function () {
         function KeyCodes() {
@@ -1097,6 +1124,7 @@
         }
         return KeyCodes;
     }());
+    //# sourceMappingURL=KeysCodes.js.map
 
     var Keys = (function () {
         function Keys() {
@@ -1138,6 +1166,7 @@
         };
         return Keys;
     }());
+    //# sourceMappingURL=Keys.js.map
 
     var WebMap = (function () {
         function WebMap(appOptions) {
@@ -1162,8 +1191,10 @@
                         case 1:
                             _a.sent();
                             _a.label = 2;
-                        case 2:
-                            this._setupMap();
+                        case 2: return [4, this._setupMap()];
+                        case 3:
+                            _a.sent();
+                            console.log(1);
                             return [2, this];
                     }
                 });
@@ -1243,27 +1274,32 @@
             return __awaiter(this, void 0, void 0, function () {
                 var _a, extent_bottom, extent_left, extent_top, extent_right, extent;
                 return __generator(this, function (_b) {
-                    if (this.settings) {
-                        _a = this.settings, extent_bottom = _a.extent_bottom, extent_left = _a.extent_left, extent_top = _a.extent_top, extent_right = _a.extent_right;
-                        if (extent_bottom && extent_left && extent_top && extent_right) {
-                            this._extent = [extent_left, extent_bottom, extent_right, extent_top];
-                            extent = this._extent;
-                            if (extent[3] > 82) {
-                                extent[3] = 82;
+                    switch (_b.label) {
+                        case 0:
+                            if (this.settings) {
+                                _a = this.settings, extent_bottom = _a.extent_bottom, extent_left = _a.extent_left, extent_top = _a.extent_top, extent_right = _a.extent_right;
+                                if (extent_bottom && extent_left && extent_top && extent_right) {
+                                    this._extent = [extent_left, extent_bottom, extent_right, extent_top];
+                                    extent = this._extent;
+                                    if (extent[3] > 82) {
+                                        extent[3] = 82;
+                                    }
+                                    if (extent[1] < -82) {
+                                        extent[1] = -82;
+                                    }
+                                }
                             }
-                            if (extent[1] < -82) {
-                                extent[1] = -82;
-                            }
-                        }
+                            this.map.displayProjection = this.displayProjection;
+                            this.map.lonlatProjection = this.lonlatProjection;
+                            this.map.create({ target: this.options.target });
+                            this._addTreeLayers();
+                            return [4, this._addLayerProviders()];
+                        case 1:
+                            _b.sent();
+                            this._zoomToInitialExtent();
+                            this.emitter.emit('build-map', this.map);
+                            return [2, this];
                     }
-                    this.map.displayProjection = this.displayProjection;
-                    this.map.lonlatProjection = this.lonlatProjection;
-                    this.map.create({ target: this.options.target });
-                    this._addTreeLayers();
-                    this._addLayerProviders();
-                    this._zoomToInitialExtent();
-                    this.emitter.emit('build-map', this.map);
-                    return [2];
                 });
             });
         };
@@ -1294,38 +1330,81 @@
         };
         WebMap.prototype._addLayerProviders = function () {
             return __awaiter(this, void 0, void 0, function () {
-                var _i, _a, kit, adapters, er_2;
-                var _this = this;
-                return __generator(this, function (_b) {
-                    switch (_b.label) {
+                var e_1, _a, e_2, _b, _c, _d, kit, adapters, adapters_1, adapters_1_1, adapter, newAdapter, e_2_1, e_1_1, er_2;
+                return __generator(this, function (_e) {
+                    switch (_e.label) {
                         case 0:
-                            _b.trys.push([0, 5, , 6]);
-                            _i = 0, _a = this._starterKits.filter(function (x) { return x.getLayerAdapters; });
-                            _b.label = 1;
+                            _e.trys.push([0, 26, , 27]);
+                            _e.label = 1;
                         case 1:
-                            if (!(_i < _a.length)) return [3, 4];
-                            kit = _a[_i];
-                            return [4, kit.getLayerAdapters.call(kit)];
-                        case 2:
-                            adapters = _b.sent();
-                            if (adapters) {
-                                adapters.forEach(function (adapter) {
-                                    adapter.createAdapter(_this.map).then(function (newAdapter) {
-                                        if (newAdapter) {
-                                            _this.map.layerAdapters[adapter.name] = newAdapter;
-                                        }
-                                    });
-                                });
-                            }
-                            _b.label = 3;
+                            _e.trys.push([1, 19, 20, 25]);
+                            _c = __asyncValues(this._starterKits.filter(function (x) { return x.getLayerAdapters; }));
+                            _e.label = 2;
+                        case 2: return [4, _c.next()];
                         case 3:
-                            _i++;
-                            return [3, 1];
-                        case 4: return [3, 6];
+                            if (!(_d = _e.sent(), !_d.done)) return [3, 18];
+                            kit = _d.value;
+                            return [4, kit.getLayerAdapters.call(kit)];
+                        case 4:
+                            adapters = _e.sent();
+                            if (!adapters) return [3, 17];
+                            _e.label = 5;
                         case 5:
-                            er_2 = _b.sent();
+                            _e.trys.push([5, 11, 12, 17]);
+                            adapters_1 = __asyncValues(adapters);
+                            _e.label = 6;
+                        case 6: return [4, adapters_1.next()];
+                        case 7:
+                            if (!(adapters_1_1 = _e.sent(), !adapters_1_1.done)) return [3, 10];
+                            adapter = adapters_1_1.value;
+                            return [4, adapter.createAdapter(this.map)];
+                        case 8:
+                            newAdapter = _e.sent();
+                            if (newAdapter) {
+                                this.map.layerAdapters[adapter.name] = newAdapter;
+                            }
+                            _e.label = 9;
+                        case 9: return [3, 6];
+                        case 10: return [3, 17];
+                        case 11:
+                            e_2_1 = _e.sent();
+                            e_2 = { error: e_2_1 };
+                            return [3, 17];
+                        case 12:
+                            _e.trys.push([12, , 15, 16]);
+                            if (!(adapters_1_1 && !adapters_1_1.done && (_b = adapters_1.return))) return [3, 14];
+                            return [4, _b.call(adapters_1)];
+                        case 13:
+                            _e.sent();
+                            _e.label = 14;
+                        case 14: return [3, 16];
+                        case 15:
+                            if (e_2) throw e_2.error;
+                            return [7];
+                        case 16: return [7];
+                        case 17: return [3, 2];
+                        case 18: return [3, 25];
+                        case 19:
+                            e_1_1 = _e.sent();
+                            e_1 = { error: e_1_1 };
+                            return [3, 25];
+                        case 20:
+                            _e.trys.push([20, , 23, 24]);
+                            if (!(_d && !_d.done && (_a = _c.return))) return [3, 22];
+                            return [4, _a.call(_c)];
+                        case 21:
+                            _e.sent();
+                            _e.label = 22;
+                        case 22: return [3, 24];
+                        case 23:
+                            if (e_1) throw e_1.error;
+                            return [7];
+                        case 24: return [7];
+                        case 25: return [3, 27];
+                        case 26:
+                            er_2 = _e.sent();
                             throw new Error(er_2);
-                        case 6: return [2];
+                        case 27: return [2];
                     }
                 });
             });
@@ -1362,6 +1441,7 @@
         });
     }
     window.buildWebMap = buildWebMap;
+    //# sourceMappingURL=webmap.js.map
 
     exports.WebMap = WebMap;
     exports.buildWebMap = buildWebMap;

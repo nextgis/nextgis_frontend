@@ -126,7 +126,7 @@ export class OlMapAdapter implements MapAdapter {
     return layerMem.onMap;
   }
 
-  addLayer(adapterDef, options?) {
+  addLayer(adapterDef, options?, baselayer?: boolean) {
 
     let adapterEngine;
     if (typeof adapterDef === 'string') {
@@ -135,10 +135,22 @@ export class OlMapAdapter implements MapAdapter {
     if (adapterEngine) {
       const adapter = new adapterEngine(this.map, options);
       const layer = adapter.addLayer(options);
-      const layerId = adapter.name;
-      this._layers[layerId] = { layer, order: options.order || this._order++, onMap: false };
-      this._length++;
-      return Promise.resolve(adapter);
+
+      // return Promise.resolve(adapter);
+      const addlayerFun = adapter.addLayer(options);
+      const toResolve = () => {
+        const layerId = adapter.name;
+        this._layers[layerId] = { layer, order: options.order || this._order++, onMap: false };
+        this._length++;
+        // this._baseLayers.push(layerId);
+        // if (!baselayer) {
+
+        // } else {
+
+        // }
+        return adapter;
+      };
+      return addlayerFun.then ? addlayerFun.then(() => toResolve()) : Promise.resolve(toResolve());
     }
     return Promise.reject('No adapter');
   }

@@ -7,8 +7,6 @@ import {
   RequestItemsResponseMap, RequestOptions,
   Params, LoadingQueue, UserInfo,
 } from './interfaces';
-import { puts } from 'util';
-import { userInfo } from 'os';
 
 export * from './interfaces';
 
@@ -53,10 +51,11 @@ export class NgwConnector {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Headers': '*',
       },
-      withCredentials: true,
+      // withCredentials: true,
       mode: 'cors',
     }).then((data: UserInfo) => {
-      if (data.keyname === 'guest') {
+      console.log(data);
+      if (data.keyname !== 'guest') {
         data.clientId = this.makeClientId();
         if (localStorage) {
           localStorage.setItem('nguser', JSON.stringify(data));

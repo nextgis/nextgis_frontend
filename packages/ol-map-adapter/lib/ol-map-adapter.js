@@ -664,18 +664,23 @@
             var layerMem = this._layers[layerName];
             return layerMem.onMap;
         };
-        OlMapAdapter.prototype.addLayer = function (adapterDef, options) {
+        OlMapAdapter.prototype.addLayer = function (adapterDef, options, baselayer) {
+            var _this = this;
             var adapterEngine;
             if (typeof adapterDef === 'string') {
                 adapterEngine = this.getLayerAdapter(adapterDef);
             }
             if (adapterEngine) {
-                var adapter = new adapterEngine(this.map, options);
-                var layer$$1 = adapter.addLayer(options);
-                var layerId = adapter.name;
-                this._layers[layerId] = { layer: layer$$1, order: options.order || this._order++, onMap: false };
-                this._length++;
-                return Promise.resolve(adapter);
+                var adapter_1 = new adapterEngine(this.map, options);
+                var layer_1 = adapter_1.addLayer(options);
+                var addlayerFun = adapter_1.addLayer(options);
+                var toResolve_1 = function () {
+                    var layerId = adapter_1.name;
+                    _this._layers[layerId] = { layer: layer_1, order: options.order || _this._order++, onMap: false };
+                    _this._length++;
+                    return adapter_1;
+                };
+                return addlayerFun.then ? addlayerFun.then(function () { return toResolve_1(); }) : Promise.resolve(toResolve_1());
             }
             return Promise.reject('No adapter');
         };

@@ -47,7 +47,7 @@ export declare class OlMapAdapter implements MapAdapter {
     getLayer(layerName: string): boolean;
     getLayers(): string[];
     isLayerOnTheMap(layerName: string): boolean;
-    addLayer(adapterDef: any, options?: any): Promise<any>;
+    addLayer(adapterDef: any, options?: any, baselayer?: boolean): any;
     removeLayer(layerName: string): void;
     showLayer(layerName: string): void;
     hideLayer(layerName: string): void;
