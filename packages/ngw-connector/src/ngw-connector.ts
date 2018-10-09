@@ -1,38 +1,16 @@
 
-import { ResourceItem } from './types/ResourceItem';
+import './polyfills';
+
 import { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
+import {
+  NgwConnectorOptions, Router,
+  RequestItemsResponseMap, RequestOptions,
+  Params, LoadingQueue, UserInfo,
+} from './interfaces';
+import { puts } from 'util';
+import { userInfo } from 'os';
 
-// region inline polyfills
-// tslint:disable-next-line:max-line-length
-// Object.assign || Object.defineProperty(Object, "assign", { enumerable: !1, configurable: !0, writable: !0, value: function (e, r) { "use strict"; if (null == e) throw new TypeError("Cannot convert first argument to object"); for (let t = Object(e), n = 1; n < arguments.length; n++) { let o = arguments[n]; if (null != o) for (let a = Object.keys(Object(o)), c = 0, b = a.length; c < b; c++) { let i = a[c], l = Object.getOwnPropertyDescriptor(o, i); void 0 !== l && l.enumerable && (t[i] = o[i]) } } return t } });
-
-type simple = string | number | boolean;
-
-type cbParams = (params: Params) => simple;
-
-interface Router {
-  [name: string]: string[];
-}
-
-interface Params {
-  [name: string]: simple | cbParams;
-}
-
-interface RequestItemsResponseMap {
-  'resource.item': ResourceItem;
-  'resource.child': any;
-  [x: string]: { [x: string]: any };
-}
-
-export interface NgwConnectorOptions {
-  route?: string;
-  baseUrl?: string;
-}
-
-export interface RequestOptions {
-  method?: 'POST' | 'GET';
-  data?: any;
-}
+export * from './interfaces';
 
 const OPTIONS: NgwConnectorOptions = {
   route: '/api/component/pyramid/route',
@@ -42,35 +20,62 @@ const OPTIONS: NgwConnectorOptions = {
 export class NgwConnector {
 
   options: NgwConnectorOptions = {};
-  private route;
 
-  private _loadingQueue = {};
+  private route;
+  private _loadingQueue: { [name: string]: LoadingQueue } = {};
   private _loadingStatus = {};
 
-  constructor(options) {
+  constructor(options: NgwConnectorOptions) {
     this.options = Object.assign({}, OPTIONS, options || {});
   }
 
-  connect(callback: (router: Router) => void, context: any): void {
-    const self = this;
+  async connect(): Promise<Router> {
     if (this.route) {
-      callback.call(context || this, this.route);
+      return Promise.resolve(this.route);
     } else {
-      this.makeQuery(this.options.route, function (route) {
-        self.route = route;
-        callback.call(this, route);
-      }, {}, {}, context);
+      const {login, password} = this.options.auth;
+      if (login && password) {
+        await this.getUserInfo();
+      }
+      return await this.makeQuery(this.options.route, {}, {}).then((route) => {
+        this.route = route;
+        return route;
+      });
     }
+  }
+
+  getUserInfo(): Promise<any> {
+    const client = this.makeClientId();
+    // return this.request('auth.current_user', {}, {
+    return this.makeQuery('/api/component/auth/current_user', {}, {
+      headers: {
+        'Authorization': 'Basic ' + client,
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': '*',
+      },
+      withCredentials: true,
+      mode: 'cors',
+    }).then((data: UserInfo) => {
+      if (data.keyname === 'guest') {
+        data.clientId = this.makeClientId();
+        if (localStorage) {
+          localStorage.setItem('nguser', JSON.stringify(data));
+        }
+      }
+    });
+  }
+
+  makeClientId() {
+    const { login, password } = this.options.auth;
+    return window.btoa(unescape(encodeURIComponent(`${login}:${password}`)));
   }
 
   request<K extends keyof RequestItemsParamsMap>(
     name: K,
-    callback?: (data: RequestItemsResponseMap[K]) => void,
     params?: RequestItemsParamsMap[K] | {},
-    options?: RequestOptions,
-    error?: (er: Error) => void,
-    context?: any): void {
-    this.connect((apiItems) => {
+    options?: RequestOptions): Promise<RequestItemsResponseMap[K]> {
+
+    return this.connect().then((apiItems) => {
       for (const a in apiItems) {
         if (apiItems.hasOwnProperty(a)) {
           if (a === name) {
@@ -88,35 +93,28 @@ export class NgwConnector {
               }
               url = template(url, replaceParams);
             }
-            this.makeQuery(url, callback, params, options, this, error);
+            return this.makeQuery(url, params, options);
           }
         }
       }
-    }, context || this);
+    });
   }
 
   post<K extends keyof RequestItemsParamsMap>(
     name: K,
-    callback: (data: RequestItemsResponseMap[K]) => void,
     options?: RequestOptions,
-    error?: (er: Error) => void,
-    params?: RequestItemsParamsMap[K] | {},
-    context?: any): void {
+    params?: RequestItemsParamsMap[K] | {}): Promise<RequestItemsResponseMap[K]> {
 
     options = options || {};
     options.method = 'POST';
-    this.request(name, callback, params, options, error, context);
+    return this.request(name, params, options);
   }
 
   makeQuery(
     url: string,
-    callback: ({ }) => void,
     params: Params,
-    options: RequestOptions,
-    context: any,
-    error?: (er: Error) => void): void {
+    options: RequestOptions): Promise<any> {
 
-    context = context || this;
     url = (this.options.baseUrl ? this.options.baseUrl : '') + url;
     if (url) {
       if (params) {
@@ -127,22 +125,20 @@ export class NgwConnector {
       if (!this._loadingStatus[url]) {
         this._loadingStatus[url] = true;
 
-        this._getJson(url, (data) => {
-          callback.call(context, data);
+        return this._getJson(url, options).then((data) => {
           this._loadingStatus[url] = false;
           this._exequteLoadingQueue(url, data);
-        }, options, context, (er) => {
+          return data;
+        }).catch((er) => {
           this._loadingStatus[url] = false;
           this._exequteLoadingQueue(url, er, true);
-          if (error) {
-            error.call(context, er);
-          } else {
-            throw new Error(er);
-          }
         });
       } else {
         this._loadingStatus[url] = false;
-        this._setLoadingQueue(url, callback, context, error);
+        const promise = new Promise((resolve, reject) => {
+          this._setLoadingQueue(url, resolve, reject);
+        });
+        return promise;
       }
     } else {
       throw new Error('No `url` parameter set for option ' + name);
@@ -150,15 +146,14 @@ export class NgwConnector {
 
   }
 
-  _setLoadingQueue(name, callback, context, error) {
+  _setLoadingQueue(name, resolve, reject) {
     this._loadingQueue[name] = this._loadingQueue[name] || {
       name,
       waiting: [],
     };
     this._loadingQueue[name].waiting.push({
-      callback,
-      error,
-      context,
+      resolve,
+      reject,
       timestamp: new Date(),
     });
   }
@@ -169,24 +164,33 @@ export class NgwConnector {
       for (let fry = 0; fry < queue.waiting.length; fry++) {
         const wait = queue.waiting[fry];
         if (isError) {
-          if (wait.error) {
-            wait.error.call(wait.context, data);
+          if (wait.reject) {
+            wait.reject();
           }
         } else {
-          wait.callback.call(wait.context, data);
+          wait.resolve(data);
         }
       }
       queue.waiting = [];
     }
   }
 
-  _getJson(url: string, callback, options: RequestOptions, context, error) {
-    return loadJSON(url, callback, options, context, error);
+  _getJson(url: string, options: RequestOptions): Promise<any> {
+    return new Promise((resolve, reject) => {
+      loadJSON(url, resolve, options, reject);
+    });
   }
 }
 
-function loadJSON(url, callback, options: RequestOptions = {}, context, error) {
-  const xmlHttp = new XMLHttpRequest();
+function loadJSON(url, callback, options: RequestOptions = {}, error) {
+  options.method = options.method || 'GET';
+  let xmlHttp: XMLHttpRequest;
+  if (options.mode === 'cors') {
+    xmlHttp = createCORSRequest(options.method, url);
+  } else {
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.open(options.method || 'GET', url, true); // true for asynchronous
+  }
   xmlHttp.onreadystatechange = () => {
     if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
       if (xmlHttp.responseText) {
@@ -198,8 +202,39 @@ function loadJSON(url, callback, options: RequestOptions = {}, context, error) {
       }
     }
   };
-  xmlHttp.open(options.method || 'GET', url, true); // true for asynchronous
+
+  const headers = options.headers;
+  if (headers) {
+    for (const h in headers) {
+      if (headers.hasOwnProperty(h)) {
+        xmlHttp.setRequestHeader(h, headers[h]);
+      }
+    }
+  }
+  xmlHttp.withCredentials = options.withCredentials;
   xmlHttp.send(options.data ? JSON.stringify(options.data) : null);
+}
+
+function createCORSRequest(method, url) {
+  let xhr = new XMLHttpRequest();
+  if ('withCredentials' in xhr) {
+    // Check if the XMLHttpRequest object has a "withCredentials" property.
+    // "withCredentials" only exists on XMLHTTPRequest2 objects.
+    xhr.open(method, url, true);
+  } else {
+    // @ts-ignore
+    const X = XDomainRequest;
+    if (typeof X !== 'undefined') {
+      // Otherwise, check if XDomainRequest.
+      // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
+      xhr = new X();
+      xhr.open(method, url);
+    } else {
+      // Otherwise, CORS is not supported by the browser.
+      xhr = null;
+    }
+  }
+  return xhr;
 }
 
 // https://github.com/Leaflet/Leaflet/blob/b507e21c510b53cd704fb8d3f89bb46ea925c8eb/src/core/Util.js#L165

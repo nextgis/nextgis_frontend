@@ -6,17 +6,29 @@ export interface NgwConfig {
     amdUrl: string;
     id: number;
 }
+export interface NgwKitOptions {
+    baseUrl?: string;
+    pixelRadius?: number;
+    resourceId?: number;
+    auth?: {
+        login: string;
+        password: string;
+    };
+}
 export declare class NgwKit implements StarterKit {
+    options: NgwKitOptions;
     url: string;
     resourceId: number;
     connector: NgwConnector;
-    pixelRadius: 10;
-    constructor(options?: any);
+    pixelRadius: number;
+    constructor(options?: NgwKitOptions);
     getSettings(): Promise<{}>;
     onMapClick(ev: any, webMap: WebMap): void;
     sendIdentifyRequest(ev: any, webMap: WebMap, options?: {
         layers?: string[];
-    }): Promise<{}>;
+    }): Promise<{
+        [x: string]: any;
+    }>;
     private _updateItemsUrl;
 }
 export declare function fixUrlStr(url: string): string;
