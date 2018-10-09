@@ -50,8 +50,8 @@ export class WebMap<M = any> {
       await this.getSettings();
     }
 
-    this._setupMap();
-
+    await this._setupMap();
+    console.log(1);
     return this;
   }
 
@@ -99,7 +99,7 @@ export class WebMap<M = any> {
     provider: keyof LayerAdapters | Type<LayerAdapter>,
     options?: any): Promise<LayerAdapter> {
 
-    return this.map.addLayer(provider, {...options, ...{ id: layerName }}, true).then((layer) => {
+    return this.map.addLayer(provider, { ...options, ...{ id: layerName } }, true).then((layer) => {
       if (layer) {
         this._baseLayers.push(layer.name);
       }
@@ -131,11 +131,11 @@ export class WebMap<M = any> {
     this.map.create({ target: this.options.target });
 
     this._addTreeLayers();
-    this._addLayerProviders();
+    await this._addLayerProviders();
 
     this._zoomToInitialExtent();
     this.emitter.emit('build-map', this.map);
-
+    return this;
   }
 
   private async _addTreeLayers() {
@@ -177,16 +177,16 @@ export class WebMap<M = any> {
   private async _addLayerProviders() {
     try {
 
-      for (const kit of this._starterKits.filter((x) => x.getLayerAdapters)) {
+      for await(const kit of this._starterKits.filter((x) => x.getLayerAdapters)) {
         const adapters = await kit.getLayerAdapters.call(kit);
         if (adapters) {
-          adapters.forEach((adapter) => {
-            adapter.createAdapter(this.map).then((newAdapter) => {
-              if (newAdapter) {
-                this.map.layerAdapters[adapter.name] = newAdapter;
-              }
-            });
-          });
+          for await(const adapter of adapters) {
+            // this.map.layerAdapters[adapter.name] = adapter;
+            const newAdapter = await adapter.createAdapter(this.map);
+            if (newAdapter) {
+              this.map.layerAdapters[adapter.name] = newAdapter;
+            }
+          }
         }
       }
     } catch (er) {

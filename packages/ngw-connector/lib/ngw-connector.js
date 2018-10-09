@@ -133,10 +133,10 @@
                     'Access-Control-Allow-Origin': '*',
                     'Access-Control-Allow-Headers': '*',
                 },
-                withCredentials: true,
                 mode: 'cors',
             }).then(function (data) {
-                if (data.keyname === 'guest') {
+                console.log(data);
+                if (data.keyname !== 'guest') {
                     data.clientId = _this.makeClientId();
                     if (localStorage) {
                         localStorage.setItem('nguser', JSON.stringify(data));
