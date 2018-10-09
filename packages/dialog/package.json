@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/dialog",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Modal window management",
   "main": "lib/dialog.js",
   "types": "lib/dialog.d.ts",
@@ -8,7 +8,7 @@
     "dialog-polyfill": "^0.4.10"
   },
   "devDependencies": {
-    "@nextgis/webmap": "^0.1.1",
+    "@nextgis/webmap": "^0.2.0",
     "@types/mapbox-gl": "^0.47.1",
     "rollup": "^0.64.1",
     "rollup-plugin-commonjs": "^9.1.5",
