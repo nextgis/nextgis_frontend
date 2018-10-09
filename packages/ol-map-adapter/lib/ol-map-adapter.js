@@ -626,6 +626,7 @@
             };
             var mapInitOptions = __assign({}, defOpt, options);
             this.map = new ol.Map(mapInitOptions);
+            this.emitter.emit('create', { map: this.map });
             this._olView = this.map.getView();
             this._addMapListeners();
         };
@@ -710,7 +711,14 @@
             };
             var layer$$1 = this._layers[layerName];
             if (layer$$1 && layer$$1.onMap !== status) {
-                action(this.map, layer$$1);
+                if (this.map) {
+                    action(this.map, layer$$1);
+                }
+                else {
+                    this.emitter.once('create', function (data) {
+                        action(data.map, layer$$1);
+                    });
+                }
             }
         };
         OlMapAdapter.prototype.addControl = function (controlDef, position) {

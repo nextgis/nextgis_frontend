@@ -64,7 +64,7 @@ export class OlMapAdapter implements MapAdapter {
     const mapInitOptions = { ...defOpt, ...options };
 
     this.map = new Map(mapInitOptions);
-
+    this.emitter.emit('create', { map: this.map });
     this._olView = this.map.getView();
 
     // olView.on('change:resolution', (evt) => {
@@ -181,7 +181,13 @@ export class OlMapAdapter implements MapAdapter {
     };
     const layer = this._layers[layerName];
     if (layer && layer.onMap !== status) {
-      action(this.map, layer);
+      if (this.map) {
+        action(this.map, layer);
+      } else {
+        this.emitter.once('create', (data) => {
+          action(data.map, layer);
+        });
+      }
     }
   }
 
@@ -205,8 +211,8 @@ export class OlMapAdapter implements MapAdapter {
     });
   }
 
-  requestGeomString(pixel: {top: number, left: number}, pixelRadius = 5) {
-    const {top, left} = pixel;
+  requestGeomString(pixel: { top: number, left: number }, pixelRadius = 5) {
+    const { top, left } = pixel;
     const olMap = this.map;
     const bounds = boundingExtent([
       olMap.getCoordinateFromPixel([
