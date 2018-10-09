@@ -7,10 +7,10 @@ const ngwKit = new NgwKit({
   'baseUrl': "http://geonote.nextgis.com",
   'resourceId': 1,
   // 'pixelRadius': 10,
-  auth: {
-    login: 'administrator',
-    password: 'NextgisNextgis',
-  }
+  // auth: {
+  //   login: 'administrator',
+  //   password: '',
+  // }
 })
 
 const webMap = new WebMap({

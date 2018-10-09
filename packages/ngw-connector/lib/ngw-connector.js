@@ -109,6 +109,8 @@
                             if (!this.route) return [3, 1];
                             return [2, Promise.resolve(this.route)];
                         case 1:
+                            if (!this.options.auth) return [3, 3];
+                            console.log(1234);
                             _a = this.options.auth, login = _a.login, password = _a.password;
                             if (!(login && password)) return [3, 3];
                             return [4, this.getUserInfo()];
@@ -127,21 +129,21 @@
         NgwConnector.prototype.getUserInfo = function () {
             var _this = this;
             var client = this.makeClientId();
-            return this.makeQuery('/api/component/auth/current_user', {}, {
+            return fetch(this.options.baseUrl + '/api/component/auth/current_user', {
                 headers: {
-                    'Authorization': 'Basic ' + client,
-                    'Access-Control-Allow-Origin': '*',
-                    'Access-Control-Allow-Headers': '*',
+                    Authorization: 'Basic ' + client,
                 },
                 mode: 'cors',
-            }).then(function (data) {
-                console.log(data);
-                if (data.keyname !== 'guest') {
-                    data.clientId = _this.makeClientId();
-                    if (localStorage) {
-                        localStorage.setItem('nguser', JSON.stringify(data));
+            }).then(function (resp) {
+                console.log(resp);
+                resp.json().then(function (data) {
+                    if (data.keyname !== 'guest') {
+                        data.clientId = _this.makeClientId();
+                        if (localStorage) {
+                            localStorage.setItem('nguser', JSON.stringify(data));
+                        }
                     }
-                }
+                });
             });
         };
         NgwConnector.prototype.makeClientId = function () {

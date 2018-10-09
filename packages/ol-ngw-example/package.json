@@ -3,8 +3,9 @@
   "private": true,
   "version": "0.2.0",
   "scripts": {
-    "build": "webpack ./src/main.js --progress",
-    "watch": "webpack ./src/main.js --mode development --watch --progress"
+    "start": "webpack-dev-server ./src/main.js --progress --devtool source-map --mode=development",
+    "build": "webpack ./src/main.js --progress --devtool source-map --mode=production",
+    "watch": "webpack ./src/main.js --mode development --watch --progress --devtool source-map --mode=development"
   },
   "repository": {
     "type": "git",
@@ -25,7 +26,8 @@
   },
   "devDependencies": {
     "webpack": "^4.20.2",
-    "webpack-cli": "^3.1.1"
+    "webpack-cli": "^3.1.1",
+    "webpack-dev-server": "^3.1.9"
   },
   "bugs": {
     "url": "https://github.com/nextgis/nextgisweb_frontend/issues"
