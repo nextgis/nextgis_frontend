@@ -1,5 +1,5 @@
 {
-  "name": "dialog",
+  "name": "@nextgis/dialog",
   "version": "0.1.1",
   "description": "Modal window management",
   "main": "lib/dialog.js",
