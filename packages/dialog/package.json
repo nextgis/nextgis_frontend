@@ -1,0 +1,51 @@
+{
+  "name": "dialog",
+  "version": "0.1.1",
+  "description": "Modal window management",
+  "main": "lib/dialog.js",
+  "types": "lib/dialog.d.ts",
+  "dependencies": {
+    "dialog-polyfill": "^0.4.10"
+  },
+  "devDependencies": {
+    "@nextgis/webmap": "^0.1.1",
+    "@types/mapbox-gl": "^0.47.1",
+    "rollup": "^0.64.1",
+    "rollup-plugin-commonjs": "^9.1.5",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-resolve": "^3.3.0",
+    "rollup-plugin-postcss": "^1.6.2",
+    "rollup-plugin-sourcemaps": "^0.4.2",
+    "rollup-plugin-typescript2": "^0.16.1",
+    "rollup-plugin-uglify": "^4.0.0",
+    "typescript": "^3.0.1"
+  },
+  "scripts": {
+    "build": "rollup -c rollup.config.js",
+    "watch": "rollup -c rollup.config.js -w",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "keywords": [
+    "NextGIS",
+    "MAP"
+  ],
+  "author": "NextGIS",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "license": "GPL-3.0",
+  "publishConfig": {
+    "registry": "http://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nextgis/nextgisweb_frontend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nextgis/nextgisweb_frontend/issues"
+  }
+}
