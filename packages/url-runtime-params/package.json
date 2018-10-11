@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/url-runtime-params",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "",
   "main": "lib/url-runtime-params.js",
   "types": "lib/url-runtime-params.d.ts",
