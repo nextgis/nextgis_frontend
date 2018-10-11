@@ -4,7 +4,7 @@ import { Map } from 'ol';
 import { ImageAdapter } from './layer-adapters/ImageAdapter';
 import { EventEmitter } from 'events';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
-import { MarkerAdapter } from './layer-adapters/markerAdapter';
+import { MarkerAdapter } from './layer-adapters/MarkerAdapter';
 interface LayerMem {
     order: number;
     layer: any;

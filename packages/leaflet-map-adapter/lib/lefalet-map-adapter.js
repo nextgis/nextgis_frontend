@@ -470,6 +470,73 @@
     return ret;
   }
 
+  /*! *****************************************************************************
+  Copyright (c) Microsoft Corporation. All rights reserved.
+  Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+  this file except in compliance with the License. You may obtain a copy of the
+  License at http://www.apache.org/licenses/LICENSE-2.0
+
+  THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+  WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+  MERCHANTABLITY OR NON-INFRINGEMENT.
+
+  See the Apache Version 2.0 License for specific language governing permissions
+  and limitations under the License.
+  ***************************************************************************** */
+  /* global Reflect, Promise */
+
+  var extendStatics = function(d, b) {
+      extendStatics = Object.setPrototypeOf ||
+          ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+          function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+      return extendStatics(d, b);
+  };
+
+  function __extends(d, b) {
+      extendStatics(d, b);
+      function __() { this.constructor = d; }
+      d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  }
+
+  function __rest(s, e) {
+      var t = {};
+      for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+          t[p] = s[p];
+      if (s != null && typeof Object.getOwnPropertySymbols === "function")
+          for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) if (e.indexOf(p[i]) < 0)
+              t[p[i]] = s[p[i]];
+      return t;
+  }
+
+  var ID = 1;
+  var BaseAdapter = (function () {
+      function BaseAdapter(map, options) {
+          this.map = map;
+          this.name = options.id || String(ID++);
+          this.options = Object.assign({}, this.options, options);
+      }
+      BaseAdapter.prototype.addLayer = function (options) {
+          return null;
+      };
+      return BaseAdapter;
+  }());
+
+  var ID$1 = 1;
+  var TileAdapter = (function (_super) {
+      __extends(TileAdapter, _super);
+      function TileAdapter() {
+          return _super !== null && _super.apply(this, arguments) || this;
+      }
+      TileAdapter.prototype.addLayer = function (options) {
+          this.name = options.id || 'tile-' + ID$1++;
+          var url = options.url, opt = __rest(options, ["url"]);
+          var layer = new leaflet.TileLayer(url, opt);
+          return layer;
+      };
+      return TileAdapter;
+  }(BaseAdapter));
+
   var LeafletMapAdapter = (function () {
       function LeafletMapAdapter() {
           this.options = { target: 'map' };
@@ -482,6 +549,7 @@
           this.IPM = 39.37;
           this._order = 0;
           this._length = 9999;
+          this._baseLayers = [];
       }
       LeafletMapAdapter.prototype.create = function (options) {
           if (options === void 0) { options = { target: 'map' }; }
@@ -528,15 +596,16 @@
           }
           if (adapterEngine) {
               var adapter_1 = new adapterEngine(this.map, options);
-              var layer_1 = adapter_1.addLayer(options);
+              var layer = adapter_1.addLayer(options);
               var addlayerFun = adapter_1.addLayer(options);
-              var toResolve_1 = function () {
+              var toResolve_1 = function (l) {
                   var layerId = adapter_1.name;
-                  _this._layers[layerId] = { layer: layer_1, order: options.order || _this._order++, onMap: false };
+                  _this._layers[layerId] = { layer: l, order: options.order || _this._order++, onMap: false };
                   _this._length++;
+                  _this._baseLayers.push(layerId);
                   return adapter_1;
               };
-              return addlayerFun.then ? addlayerFun.then(function () { return toResolve_1(); }) : Promise.resolve(toResolve_1());
+              return addlayerFun.then ? addlayerFun.then(function (l) { return toResolve_1(l); }) : Promise.resolve(toResolve_1(layer));
           }
           return Promise.reject('No adapter');
       };
@@ -585,13 +654,11 @@
       LeafletMapAdapter.prototype.addControl = function (controlDef, position) {
       };
       LeafletMapAdapter.prototype.onMapClick = function (evt) {
-          var _a = evt.coordinate, lng = _a[0], lat = _a[1];
-          var latLng = {
-              lat: lat, lng: lng,
-          };
+          var coord = evt.containerPoint;
+          var latLng = evt.latlng;
           this.emitter.emit('click', {
               latLng: latLng,
-              pixel: { left: evt.pixel[0], top: evt.pixel[1] },
+              pixel: { left: coord.x, top: coord.y },
               source: evt,
           });
       };
@@ -601,7 +668,9 @@
               _this.onMapClick(evt);
           });
       };
-      LeafletMapAdapter.layerAdapters = {};
+      LeafletMapAdapter.layerAdapters = {
+          TILE: TileAdapter,
+      };
       return LeafletMapAdapter;
   }());
 

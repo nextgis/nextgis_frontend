@@ -20,7 +20,7 @@ export interface LayerAdapters {
 }
 export interface LayerAdapter<M = any, O = any> {
     name: string;
-    map: M;
+    map?: M;
     addLayer(options: O): any;
 }
 export {};

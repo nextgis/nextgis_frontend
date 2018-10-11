@@ -129,21 +129,21 @@
         NgwConnector.prototype.getUserInfo = function () {
             var _this = this;
             var client = this.makeClientId();
-            return fetch(this.options.baseUrl + '/api/component/auth/current_user', {
+            return this.makeQuery('/api/component/auth/current_user', {}, {
                 headers: {
-                    Authorization: 'Basic ' + client,
+                    'Authorization': 'Basic ' + client,
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Headers': '*',
                 },
                 mode: 'cors',
-            }).then(function (resp) {
-                console.log(resp);
-                resp.json().then(function (data) {
-                    if (data.keyname !== 'guest') {
-                        data.clientId = _this.makeClientId();
-                        if (localStorage) {
-                            localStorage.setItem('nguser', JSON.stringify(data));
-                        }
+            }).then(function (data) {
+                console.log(data);
+                if (data.keyname !== 'guest') {
+                    data.clientId = _this.makeClientId();
+                    if (localStorage) {
+                        localStorage.setItem('nguser', JSON.stringify(data));
                     }
-                });
+                }
             });
         };
         NgwConnector.prototype.makeClientId = function () {
