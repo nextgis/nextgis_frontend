@@ -26,5 +26,6 @@ export interface LayerAdapters {
 
 export interface LayerAdapter<M = any, O = any> {
   name: string;
-  addLayer(map: M, name: string, options: O): string;
+  map: M;
+  addLayer(options: O): any;
 }

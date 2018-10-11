@@ -7,6 +7,9 @@ export interface MapOptions {
   logo?: string;
   controls?: any[];
   minZoom?: number;
+  // lat lng
+  center?: [number, number];
+  zoom?: number;
 }
 
 export interface AppOptions {

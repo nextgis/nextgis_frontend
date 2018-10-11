@@ -1,6 +1,7 @@
 import { LayerAdapter, LayerAdapters } from './LayerAdapter';
 import { Type } from '../Utils/Type';
 import { EventEmitter } from 'events';
+import { MapOptions } from '../webmap';
 
 interface LatLng {
   lat: number; lng: number;
@@ -20,7 +21,7 @@ export interface MapAdapter<M = any> {
   emitter: EventEmitter;
   layerAdapters: {[name: string]: Type<LayerAdapter>};
 
-  create(options?): void;
+  create(options?: MapOptions): void;
 
   onMapLoad(cb?: () => void): Promise<any>;
 

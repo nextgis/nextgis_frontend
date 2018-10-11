@@ -51,7 +51,6 @@ export class WebMap<M = any> {
     }
 
     await this._setupMap();
-    console.log(1);
     return this;
   }
 
@@ -128,7 +127,8 @@ export class WebMap<M = any> {
     }
     this.map.displayProjection = this.displayProjection;
     this.map.lonlatProjection = this.lonlatProjection;
-    this.map.create({ target: this.options.target });
+
+    this.map.create(this.options);
 
     this._addTreeLayers();
     await this._addLayerProviders();
@@ -171,6 +171,15 @@ export class WebMap<M = any> {
     // }
     if (this._extent) {
       this.map.fit(this._extent);
+    } else {
+      const {center, zoom} = this.options;
+
+      if (center) {
+        this.map.setCenter(center);
+      }
+      if (zoom) {
+        this.map.setZoom(zoom);
+      }
     }
   }
 
