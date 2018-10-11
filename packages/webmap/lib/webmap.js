@@ -1280,7 +1280,7 @@
                             }
                             this.map.displayProjection = this.displayProjection;
                             this.map.lonlatProjection = this.lonlatProjection;
-                            this.map.create({ target: this.options.target });
+                            this.map.create(this.options);
                             this._addTreeLayers();
                             return [4, this._addLayerProviders()];
                         case 1:
@@ -1315,6 +1315,15 @@
         WebMap.prototype._zoomToInitialExtent = function () {
             if (this._extent) {
                 this.map.fit(this._extent);
+            }
+            else {
+                var _a = this.options, center = _a.center, zoom = _a.zoom;
+                if (center) {
+                    this.map.setCenter(center);
+                }
+                if (zoom) {
+                    this.map.setZoom(zoom);
+                }
             }
         };
         WebMap.prototype._addLayerProviders = function () {

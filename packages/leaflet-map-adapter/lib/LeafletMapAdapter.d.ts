@@ -2,6 +2,7 @@
 import { MapAdapter, MapOptions } from '@nextgis/webmap';
 import { Map } from 'leaflet';
 import { EventEmitter } from 'events';
+import { TileAdapter } from './layer-adapters/TileAdapter';
 interface LayerMem {
     order: number;
     layer: any;
@@ -11,9 +12,13 @@ export interface LeafletMapAdapterOptions extends MapOptions {
     id?: string;
 }
 export declare class LeafletMapAdapter implements MapAdapter {
-    static layerAdapters: {};
+    static layerAdapters: {
+        TILE: typeof TileAdapter;
+    };
     options: LeafletMapAdapterOptions;
-    layerAdapters: {};
+    layerAdapters: {
+        TILE: typeof TileAdapter;
+    };
     displayProjection: string;
     lonlatProjection: string;
     emitter: EventEmitter;
@@ -25,6 +30,7 @@ export declare class LeafletMapAdapter implements MapAdapter {
     private IPM;
     private _order;
     private _length;
+    private _baseLayers;
     create(options?: LeafletMapAdapterOptions): void;
     getContainer(): HTMLElement;
     onMapLoad(cb?: any): Promise<{}>;
