@@ -148,7 +148,6 @@
         }
         return dst;
     }
-    //# sourceMappingURL=lang.js.map
 
     var domain;
 
@@ -642,7 +641,6 @@
         }
         return _filtered;
     }
-    //# sourceMappingURL=TreeUtil.js.map
 
     var TreeHelper = (function () {
         function TreeHelper(entry) {
@@ -675,7 +673,6 @@
         };
         return TreeHelper;
     }());
-    //# sourceMappingURL=TreeHelper.js.map
 
     var BaseProperty = (function () {
         function BaseProperty(name, entry, options) {
@@ -767,7 +764,6 @@
         };
         return BaseProperty;
     }());
-    //# sourceMappingURL=BaseProperty.js.map
 
     var CheckProperty = (function (_super) {
         __extends(CheckProperty, _super);
@@ -884,7 +880,6 @@
         };
         return CheckProperty;
     }(BaseProperty));
-    //# sourceMappingURL=CheckProperty.js.map
 
     var EntryProperties = (function () {
         function EntryProperties(entry, propertiesList) {
@@ -961,7 +956,6 @@
         };
         return EntryProperties;
     }());
-    //# sourceMappingURL=EntryProperties.js.map
 
     var ID = 0;
     var Entry = (function () {
@@ -976,7 +970,6 @@
         };
         return Entry;
     }());
-    //# sourceMappingURL=Entry.js.map
 
     var WebLayerEntry = (function (_super) {
         __extends(WebLayerEntry, _super);
@@ -1055,7 +1048,6 @@
         };
         return WebLayerEntry;
     }(Entry));
-    //# sourceMappingURL=WebLayerEntry.js.map
 
     var KeyCodes = (function () {
         function KeyCodes() {
@@ -1124,7 +1116,6 @@
         }
         return KeyCodes;
     }());
-    //# sourceMappingURL=KeysCodes.js.map
 
     var Keys = (function () {
         function Keys() {
@@ -1166,7 +1157,6 @@
         };
         return Keys;
     }());
-    //# sourceMappingURL=Keys.js.map
 
     var WebMap = (function () {
         function WebMap(appOptions) {
@@ -1194,7 +1184,6 @@
                         case 2: return [4, this._setupMap()];
                         case 3:
                             _a.sent();
-                            console.log(1);
                             return [2, this];
                     }
                 });
@@ -1441,7 +1430,6 @@
         });
     }
     window.buildWebMap = buildWebMap;
-    //# sourceMappingURL=webmap.js.map
 
     exports.WebMap = WebMap;
     exports.buildWebMap = buildWebMap;

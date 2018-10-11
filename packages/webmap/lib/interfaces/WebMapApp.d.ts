@@ -6,6 +6,8 @@ export interface MapOptions {
     logo?: string;
     controls?: any[];
     minZoom?: number;
+    center?: [number, number];
+    zoom?: number;
 }
 export interface AppOptions {
     mapAdapter: MapAdapter;

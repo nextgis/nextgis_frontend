@@ -1,14 +1,10 @@
-import { MapAdapter } from '@nextgis/webmap';
-import { Map, View } from 'ol';
-import { fromLonLat, transformExtent, transform } from 'ol/proj';
-import { boundingExtent } from 'ol/extent';
-import { WKT } from 'ol/format';
-import { fromExtent } from 'ol/geom/Polygon';
-
-import { ImageAdapter } from './layer-adapters/ImageAdapter';
+import { MapAdapter, MapOptions } from '@nextgis/webmap';
+import { Map } from 'leaflet';
 import { EventEmitter } from 'events';
-import { OsmAdapter } from './layer-adapters/OsmAdapter';
-import { MarkerAdapter } from './layer-adapters/MarkerAdapter';
+import { TileAdapter } from './layer-adapters/TileAdapter';
+// import { ImageAdapter } from './layer-adapters/ImageAdapter';
+// import { OsmAdapter } from './layer-adapters/OsmAdapter';
+// import { MarkerAdapter } from './layer-adapters/MarkerAdapter';
 
 interface LayerMem {
   order: number;
@@ -16,19 +12,23 @@ interface LayerMem {
   onMap: boolean;
 }
 
-export class OlMapAdapter implements MapAdapter {
+export interface LeafletMapAdapterOptions extends MapOptions {
+  id?: string;
+}
+
+export class LeafletMapAdapter implements MapAdapter {
 
   static layerAdapters = {
-    IMAGE: ImageAdapter,
-    // TILE: TileAdapter,
-    // MVT: MvtAdapter,
-    OSM: OsmAdapter,
-    MARKER: MarkerAdapter,
+    // IMAGE: ImageAdapter,
+    TILE: TileAdapter,
+    // // MVT: MvtAdapter,
+    // OSM: OsmAdapter,
+    // MARKER: MarkerAdapter,
   };
 
-  options: any;
+  options: LeafletMapAdapterOptions = { target: 'map' };
 
-  layerAdapters = OlMapAdapter.layerAdapters;
+  layerAdapters = LeafletMapAdapter.layerAdapters;
 
   displayProjection = 'EPSG:3857';
   lonlatProjection = 'EPSG:4326';
@@ -37,49 +37,25 @@ export class OlMapAdapter implements MapAdapter {
   map: Map;
 
   _layers: { [x: string]: LayerMem } = {};
-  private _olView: View;
-  private _order = 0;
-  private _length = 9999; // TODO: get real layers length count, after all registered
 
   private DPI = 1000 / 39.37 / 0.28;
   private IPM = 39.37;
-
-  // private _layers: {[name: string]: LayerMem} = {};
+  private _order = 0;
+  private _length = 9999; // TODO: get real layers length count, after all registered
+  private _baseLayers: string[] = [];
 
   // create(options: MapOptions = {target: 'map'}) {
-  create(options = { target: 'map' }) {
+  create(options: LeafletMapAdapterOptions = { target: 'map' }) {
     this.options = Object.assign({}, options);
-    const view = new View({
-      center: [-9101767, 2822912],
-      zoom: 14,
-      projection: this.displayProjection,
-    });
 
-    const defOpt = {
-      logo: false,
-      controls: [],
-      view,
-      layers: [],
-    };
-    const mapInitOptions = { ...defOpt, ...options };
-
-    this.map = new Map(mapInitOptions);
+    this.map = new Map(this.options.target, {});
     this.emitter.emit('create', { map: this.map });
-    this._olView = this.map.getView();
-
-    // olView.on('change:resolution', (evt) => {
-    //   this.set('resolution', olView.getResolution());
-    // });
-
-    // olView.on('change:center', (evt) => {
-    //   this.set('center', olView.getCenter());
-    // });
 
     this._addMapListeners();
   }
 
   getContainer(): HTMLElement {
-    return document.getElementById(this.options.target);
+    return this.map.getContainer();
   }
 
   onMapLoad(cb?: any) {
@@ -89,28 +65,19 @@ export class OlMapAdapter implements MapAdapter {
   }
 
   setCenter(latLng: [number, number]) {
-    this._olView.setCenter(fromLonLat(latLng));
+    this.map.setView(latLng, this.map.getZoom());
   }
 
   setZoom(zoom: number) {
-    this._olView.setZoom(zoom);
+    this.map.setZoom(zoom);
   }
 
   fit(e: [number, number, number, number]) {
-    const toExtent = transformExtent(
-      e,
-      this.lonlatProjection,
-      this.displayProjection,
-    );
-    this._olView.fit(toExtent);
-  }
-
-  setRotation(angle: number) {
-    this._olView.setRotation(angle);
+    this.map.fitBounds([[e[0], e[1]], [e[2], e[3]]]);
   }
 
   getLayerAdapter(name: string) {
-    return OlMapAdapter.layerAdapters[name];
+    return LeafletMapAdapter.layerAdapters[name];
   }
 
   getLayer(layerName: string) {
@@ -138,11 +105,11 @@ export class OlMapAdapter implements MapAdapter {
 
       // return Promise.resolve(adapter);
       const addlayerFun = adapter.addLayer(options);
-      const toResolve = () => {
+      const toResolve = (l) => {
         const layerId = adapter.name;
-        this._layers[layerId] = { layer, order: options.order || this._order++, onMap: false };
+        this._layers[layerId] = { layer: l, order: options.order || this._order++, onMap: false };
         this._length++;
-        // this._baseLayers.push(layerId);
+        this._baseLayers.push(layerId);
         // if (!baselayer) {
 
         // } else {
@@ -150,7 +117,7 @@ export class OlMapAdapter implements MapAdapter {
         // }
         return adapter;
       };
-      return addlayerFun.then ? addlayerFun.then(() => toResolve()) : Promise.resolve(toResolve());
+      return addlayerFun.then ? addlayerFun.then((l) => toResolve(l)) : Promise.resolve(toResolve(layer));
     }
     return Promise.reject('No adapter');
   }
@@ -208,37 +175,13 @@ export class OlMapAdapter implements MapAdapter {
   }
 
   onMapClick(evt) {
-    const [lng, lat] = transform(
-      evt.coordinate,
-      this.displayProjection,
-      this.lonlatProjection,
-    );
-    const latLng = {
-      lat, lng,
-    };
+    const coord = evt.containerPoint;
+    const latLng = evt.latlng;
     this.emitter.emit('click', {
       latLng,
-      pixel: { left: evt.pixel[0], top: evt.pixel[1] },
+      pixel: { left: coord.x, top: coord.y },
       source: evt,
     });
-  }
-
-  requestGeomString(pixel: { top: number, left: number }, pixelRadius = 5) {
-    const { top, left } = pixel;
-    const olMap = this.map;
-    const bounds = boundingExtent([
-      olMap.getCoordinateFromPixel([
-        left - pixelRadius,
-        top - pixelRadius,
-      ]),
-      olMap.getCoordinateFromPixel([
-        left + pixelRadius,
-        top + pixelRadius,
-      ]),
-    ]);
-
-    return new WKT().writeGeometry(
-      fromExtent(bounds));
   }
 
   private _addMapListeners() {
