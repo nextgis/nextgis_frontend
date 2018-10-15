@@ -2,14 +2,16 @@ import { MapAdapter, MapOptions } from '@nextgis/webmap';
 import { Map } from 'leaflet';
 import { EventEmitter } from 'events';
 import { TileAdapter } from './layer-adapters/TileAdapter';
+import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 // import { ImageAdapter } from './layer-adapters/ImageAdapter';
 // import { OsmAdapter } from './layer-adapters/OsmAdapter';
 // import { MarkerAdapter } from './layer-adapters/MarkerAdapter';
 
 interface LayerMem {
-  order: number;
   layer: any;
   onMap: boolean;
+  order?: number;
+  baseLayer?: boolean;
 }
 
 export interface LeafletMapAdapterOptions extends MapOptions {
@@ -21,6 +23,7 @@ export class LeafletMapAdapter implements MapAdapter {
   static layerAdapters = {
     // IMAGE: ImageAdapter,
     TILE: TileAdapter,
+    GEOJSON: GeoJsonAdapter,
     // // MVT: MvtAdapter,
     // OSM: OsmAdapter,
     // MARKER: MarkerAdapter,
@@ -107,7 +110,13 @@ export class LeafletMapAdapter implements MapAdapter {
       const addlayerFun = adapter.addLayer(options);
       const toResolve = (l) => {
         const layerId = adapter.name;
-        this._layers[layerId] = { layer: l, order: options.order || this._order++, onMap: false };
+        const layerOpts: LayerMem = { layer: l, onMap: false };
+        if (baselayer) {
+          layerOpts.baseLayer = true;
+        } else {
+          layerOpts.order = options.order || this._order++;
+        }
+        this._layers[layerId] = layerOpts;
         this._length++;
         this._baseLayers.push(layerId);
         // if (!baselayer) {
@@ -150,8 +159,9 @@ export class LeafletMapAdapter implements MapAdapter {
     const action = (source: Map, l: LayerMem) => {
       if (status) {
         if (source instanceof Map) {
-          source.addLayer(l.layer);
-          l.layer.setZIndex(this._length - l.order);
+          l.layer.addTo(source);
+          const order = l.baseLayer ? 0 :  this._length - l.order;
+          l.layer.setZIndex(order);
         }
       } else {
         source.removeLayer(l.layer);

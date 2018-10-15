@@ -1,13 +1,13 @@
 import { WebMap } from './entities/WebMap';
 import { AppOptions, MapOptions } from './interfaces/WebMapApp';
-import { LayerAdapter, LayerAdapters } from './interfaces/LayerAdapter';
+import { LayerAdapter, LayerAdapters, MvtAdapterOptions, GeoJsonAdapterOptions } from './interfaces/LayerAdapter';
 import { MapAdapter } from './interfaces/MapAdapter';
 import { StarterKit } from './interfaces/AppSettings';
 import { DialogAdapter, DialogAdapterOptions } from './interfaces/DialogAdapter';
 
 export {
   WebMap, AppOptions,
-  LayerAdapter, LayerAdapters,
+  LayerAdapter, LayerAdapters, MvtAdapterOptions, GeoJsonAdapterOptions,
   MapAdapter, MapOptions,
   StarterKit,
   DialogAdapter, DialogAdapterOptions,
