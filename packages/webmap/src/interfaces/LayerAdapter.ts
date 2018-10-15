@@ -10,17 +10,22 @@ interface AdapterOptions {
   styleId?: number;
 }
 
-interface MvtOptions extends AdapterOptions {
+export interface MvtAdapterOptions extends AdapterOptions {
   paint?;
   type?: 'fill' | 'line' | 'circle' | 'point';
   'source-layer'?: string;
 }
 
+export interface GeoJsonAdapterOptions extends AdapterOptions {
+  data?: any;
+}
+
 export interface LayerAdapters {
-  'MVT': MvtOptions;
+  'MVT': MvtAdapterOptions;
   'IMAGE': AdapterOptions;
   'OSM': AdapterOptions;
   'TILE': AdapterOptions;
+  'GEOJSON': GeoJsonAdapterOptions;
   [name: string]: AdapterOptions;
 }
 
