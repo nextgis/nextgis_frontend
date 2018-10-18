@@ -3,10 +3,12 @@ import { MapAdapter, MapOptions } from '@nextgis/webmap';
 import { Map } from 'leaflet';
 import { EventEmitter } from 'events';
 import { TileAdapter } from './layer-adapters/TileAdapter';
+import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 interface LayerMem {
-    order: number;
     layer: any;
     onMap: boolean;
+    order?: number;
+    baseLayer?: boolean;
 }
 export interface LeafletMapAdapterOptions extends MapOptions {
     id?: string;
@@ -14,10 +16,12 @@ export interface LeafletMapAdapterOptions extends MapOptions {
 export declare class LeafletMapAdapter implements MapAdapter {
     static layerAdapters: {
         TILE: typeof TileAdapter;
+        GEOJSON: typeof GeoJsonAdapter;
     };
     options: LeafletMapAdapterOptions;
     layerAdapters: {
         TILE: typeof TileAdapter;
+        GEOJSON: typeof GeoJsonAdapter;
     };
     displayProjection: string;
     lonlatProjection: string;

@@ -5,6 +5,3 @@ export declare class TileAdapter extends BaseAdapter implements LayerAdapter {
     name: string;
     addLayer(options?: any): TileLayer;
 }
-export declare function queryToObject(str: string): {
-    [name: string]: any;
-};

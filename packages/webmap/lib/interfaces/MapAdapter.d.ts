@@ -3,6 +3,7 @@ import { LayerAdapter, LayerAdapters } from './LayerAdapter';
 import { Type } from '../Utils/Type';
 import { EventEmitter } from 'events';
 import { MapOptions } from '../webmap';
+import { MapControls } from './MapControl';
 interface LatLng {
     lat: number;
     lng: number;
@@ -40,7 +41,7 @@ export interface MapAdapter<M = any> {
     setZoom(zoom: number): void;
     fit(extent: [number, number, number, number]): void;
     setRotation?(angle: number): void;
-    addControl(controlDef: any, position: string): void;
+    addControl<C extends keyof MapControls>(controlName: C, position: string, options?: MapControls[C]): void;
     getContainer(): HTMLElement;
     onMapClick(evt: MapClickEvent): void;
     requestGeomString?(pixel: {

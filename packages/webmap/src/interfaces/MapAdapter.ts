@@ -2,6 +2,7 @@ import { LayerAdapter, LayerAdapters } from './LayerAdapter';
 import { Type } from '../Utils/Type';
 import { EventEmitter } from 'events';
 import { MapOptions } from '../webmap';
+import { MapControls, MapControl } from './MapControl';
 
 interface LatLng {
   lat: number; lng: number;
@@ -9,7 +10,7 @@ interface LatLng {
 
 export interface MapClickEvent {
   latLng: LatLng;
-  pixel: {top: number, left: number, right?: number, bottom?: number};
+  pixel: { top: number, left: number, right?: number, bottom?: number };
   source?: any;
 }
 
@@ -19,7 +20,7 @@ export interface MapAdapter<M = any> {
   displayProjection?: string;
   map: M;
   emitter: EventEmitter;
-  layerAdapters: {[name: string]: Type<LayerAdapter>};
+  layerAdapters: { [name: string]: Type<LayerAdapter> };
 
   create(options?: MapOptions): void;
 
@@ -44,12 +45,15 @@ export interface MapAdapter<M = any> {
   fit(extent: [number, number, number, number]): void;
   setRotation?(angle: number): void;
 
-  addControl(controlDef, position: string): void;
+  addControl<C extends keyof MapControls>(
+    controlName: C | MapControl,
+    position: string,
+    options?: MapControls[C]): void;
 
   getContainer(): HTMLElement;
 
   onMapClick(evt: MapClickEvent): void;
 
   // TODO: now return WKT geometry but need geojson
-  requestGeomString?(pixel: {top: number, left: number}, pixelRadius?: number): string;
+  requestGeomString?(pixel: { top: number, left: number }, pixelRadius?: number): string;
 }
