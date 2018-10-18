@@ -4,6 +4,7 @@ import { LayerAdapter, LayerAdapters, MvtAdapterOptions, GeoJsonAdapterOptions }
 import { MapAdapter } from './interfaces/MapAdapter';
 import { StarterKit } from './interfaces/AppSettings';
 import { DialogAdapter, DialogAdapterOptions } from './interfaces/DialogAdapter';
+import { MapControl, MapControls, AttributionControlOptions, ZoomControlOptions } from './interfaces/MapControl';
 
 export {
   WebMap, AppOptions,
@@ -11,6 +12,7 @@ export {
   MapAdapter, MapOptions,
   StarterKit,
   DialogAdapter, DialogAdapterOptions,
+  MapControl, MapControls, AttributionControlOptions, ZoomControlOptions,
 };
 
 // Composition root

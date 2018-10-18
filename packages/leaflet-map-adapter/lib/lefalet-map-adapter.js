@@ -537,6 +537,20 @@
       return TileAdapter;
   }(BaseAdapter));
 
+  var ID$2 = 1;
+  var GeoJsonAdapter = (function (_super) {
+      __extends(GeoJsonAdapter, _super);
+      function GeoJsonAdapter() {
+          return _super !== null && _super.apply(this, arguments) || this;
+      }
+      GeoJsonAdapter.prototype.addLayer = function (options) {
+          this.name = options.id || 'geojson-' + ID$2++;
+          var layer = new leaflet.GeoJSON(options.data, options);
+          return layer;
+      };
+      return GeoJsonAdapter;
+  }(BaseAdapter));
+
   var LeafletMapAdapter = (function () {
       function LeafletMapAdapter() {
           this.options = { target: 'map' };
@@ -600,7 +614,14 @@
               var addlayerFun = adapter_1.addLayer(options);
               var toResolve_1 = function (l) {
                   var layerId = adapter_1.name;
-                  _this._layers[layerId] = { layer: l, order: options.order || _this._order++, onMap: false };
+                  var layerOpts = { layer: l, onMap: false };
+                  if (baselayer) {
+                      layerOpts.baseLayer = true;
+                  }
+                  else {
+                      layerOpts.order = options.order || _this._order++;
+                  }
+                  _this._layers[layerId] = layerOpts;
                   _this._length++;
                   _this._baseLayers.push(layerId);
                   return adapter_1;
@@ -630,8 +651,9 @@
           var action = function (source, l) {
               if (status) {
                   if (source instanceof leaflet.Map) {
-                      source.addLayer(l.layer);
-                      l.layer.setZIndex(_this._length - l.order);
+                      l.layer.addTo(source);
+                      var order = l.baseLayer ? 0 : _this._length - l.order;
+                      l.layer.setZIndex(order);
                   }
               }
               else {
@@ -670,6 +692,7 @@
       };
       LeafletMapAdapter.layerAdapters = {
           TILE: TileAdapter,
+          GEOJSON: GeoJsonAdapter,
       };
       return LeafletMapAdapter;
   }());

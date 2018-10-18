@@ -6,6 +6,7 @@ import { TileAdapter } from './layer-adapters/TileAdapter';
 import { EventEmitter } from 'events';
 import { ZoomControl } from './controls/ZoomControl';
 import { CompassControl } from './controls/CompassControl';
+import { AttributionControl } from './controls/AttributionControl';
 
 type positions = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
 
@@ -20,6 +21,7 @@ export class MapboxglAdapter implements MapAdapter {
   static controlAdapters = {
     ZOOM: ZoomControl,
     COMPASS: CompassControl,
+    ATTRIBUTION: AttributionControl,
   };
 
   options: any;
@@ -183,12 +185,12 @@ export class MapboxglAdapter implements MapAdapter {
     });
   }
 
-  addControl(controlDef, position: positions) {
+  addControl(controlDef, position: positions, options) {
     let control;
     if (typeof controlDef === 'string') {
       const engine = MapboxglAdapter.controlAdapters[controlDef];
       if (engine) {
-        control = new engine();
+        control = new engine(options);
       }
     } else {
       control = controlDef;
