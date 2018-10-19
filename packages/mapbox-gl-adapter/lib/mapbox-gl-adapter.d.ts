@@ -7,6 +7,7 @@ import { TileAdapter } from './layer-adapters/TileAdapter';
 import { EventEmitter } from 'events';
 import { ZoomControl } from './controls/ZoomControl';
 import { CompassControl } from './controls/CompassControl';
+import { AttributionControl } from './controls/AttributionControl';
 declare type positions = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
 export declare class MapboxglAdapter implements MapAdapter {
     static layerAdapters: {
@@ -17,6 +18,7 @@ export declare class MapboxglAdapter implements MapAdapter {
     static controlAdapters: {
         ZOOM: typeof ZoomControl;
         COMPASS: typeof CompassControl;
+        ATTRIBUTION: typeof AttributionControl;
     };
     options: any;
     displayProjection: string;
@@ -53,7 +55,7 @@ export declare class MapboxglAdapter implements MapAdapter {
     getResolutionForScale(scale: any, mpu: any): number;
     onMapLoad<K = any>(cb?: any): Promise<K>;
     toggleLayer(layerId: any, status: any): void;
-    addControl(controlDef: any, position: positions): void;
+    addControl(controlDef: any, position: positions, options: any): void;
     onMapClick(evt: any): void;
     private getLayerAdapter;
     private _addEventsListeners;
