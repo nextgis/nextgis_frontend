@@ -1,8 +1,9 @@
 import { MapAdapter, MapOptions } from '@nextgis/webmap';
-import { Map } from 'leaflet';
+import { Map, Control } from 'leaflet';
 import { EventEmitter } from 'events';
 import { TileAdapter } from './layer-adapters/TileAdapter';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
+import { AttributionControl } from './controls/Attribution';
 // import { ImageAdapter } from './layer-adapters/ImageAdapter';
 // import { OsmAdapter } from './layer-adapters/OsmAdapter';
 // import { MarkerAdapter } from './layer-adapters/MarkerAdapter';
@@ -29,6 +30,11 @@ export class LeafletMapAdapter implements MapAdapter {
     // MARKER: MarkerAdapter,
   };
 
+  static controlAdapters = {
+    ZOOM: Control.Zoom,
+    ATTRIBUTION: AttributionControl,
+  };
+
   options: LeafletMapAdapterOptions = { target: 'map' };
 
   layerAdapters = LeafletMapAdapter.layerAdapters;
@@ -51,7 +57,7 @@ export class LeafletMapAdapter implements MapAdapter {
   create(options: LeafletMapAdapterOptions = { target: 'map' }) {
     this.options = Object.assign({}, options);
 
-    this.map = new Map(this.options.target, {});
+    this.map = new Map(this.options.target, {zoomControl: false, attributionControl: false});
     this.emitter.emit('create', { map: this.map });
 
     this._addMapListeners();
@@ -94,6 +100,23 @@ export class LeafletMapAdapter implements MapAdapter {
   isLayerOnTheMap(layerName: string): boolean {
     const layerMem = this._layers[layerName];
     return layerMem.onMap;
+  }
+
+  addControl(controlDef, position, options) {
+    let control;
+    if (typeof controlDef === 'string') {
+      const engine = LeafletMapAdapter.controlAdapters[controlDef];
+      if (engine) {
+        control = new engine(options);
+      }
+    } else {
+      control = controlDef;
+    }
+    if (control) {
+      control.options.position = position.replace('-', '');
+      this.map.addControl(control);
+      return control;
+    }
   }
 
   addLayer(adapterDef, options?, baselayer?: boolean) {
@@ -178,10 +201,6 @@ export class LeafletMapAdapter implements MapAdapter {
         });
       }
     }
-  }
-
-  addControl(controlDef, position: string) {
-    // ignore
   }
 
   onMapClick(evt) {

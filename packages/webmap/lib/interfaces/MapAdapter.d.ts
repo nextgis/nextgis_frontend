@@ -3,7 +3,7 @@ import { LayerAdapter, LayerAdapters } from './LayerAdapter';
 import { Type } from '../Utils/Type';
 import { EventEmitter } from 'events';
 import { MapOptions } from '../webmap';
-import { MapControls } from './MapControl';
+import { MapControls, MapControl } from './MapControl';
 interface LatLng {
     lat: number;
     lng: number;
@@ -18,6 +18,7 @@ export interface MapClickEvent {
     };
     source?: any;
 }
+export declare type ControlPositions = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
 export interface MapAdapter<M = any> {
     lonlatProjection?: string;
     displayProjection?: string;
@@ -41,7 +42,7 @@ export interface MapAdapter<M = any> {
     setZoom(zoom: number): void;
     fit(extent: [number, number, number, number]): void;
     setRotation?(angle: number): void;
-    addControl<C extends keyof MapControls>(controlName: C, position: string, options?: MapControls[C]): void;
+    addControl<C extends keyof MapControls>(controlName: C | MapControl, position: ControlPositions, options?: MapControls[C]): any;
     getContainer(): HTMLElement;
     onMapClick(evt: MapClickEvent): void;
     requestGeomString?(pixel: {

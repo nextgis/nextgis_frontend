@@ -14,6 +14,8 @@ export interface MapClickEvent {
   source?: any;
 }
 
+export type ControlPositions = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
+
 export interface MapAdapter<M = any> {
 
   lonlatProjection?: string;
@@ -47,8 +49,8 @@ export interface MapAdapter<M = any> {
 
   addControl<C extends keyof MapControls>(
     controlName: C | MapControl,
-    position: string,
-    options?: MapControls[C]): void;
+    position: ControlPositions,
+    options?: MapControls[C]): any;
 
   getContainer(): HTMLElement;
 

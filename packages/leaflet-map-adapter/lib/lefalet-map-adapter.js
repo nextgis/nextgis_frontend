@@ -551,6 +551,19 @@
       return GeoJsonAdapter;
   }(BaseAdapter));
 
+  var AttributionControl = (function (_super) {
+      __extends(AttributionControl, _super);
+      function AttributionControl(options) {
+          var _this = _super.call(this, options) || this;
+          if (options.customAttribution) {
+              var attributions = [].concat(options.customAttribution);
+              attributions.forEach(function (x) { return _this.addAttribution(x); });
+          }
+          return _this;
+      }
+      return AttributionControl;
+  }(leaflet.Control.Attribution));
+
   var LeafletMapAdapter = (function () {
       function LeafletMapAdapter() {
           this.options = { target: 'map' };
@@ -568,7 +581,7 @@
       LeafletMapAdapter.prototype.create = function (options) {
           if (options === void 0) { options = { target: 'map' }; }
           this.options = Object.assign({}, options);
-          this.map = new leaflet.Map(this.options.target, {});
+          this.map = new leaflet.Map(this.options.target, { zoomControl: false, attributionControl: false });
           this.emitter.emit('create', { map: this.map });
           this._addMapListeners();
       };
@@ -601,6 +614,23 @@
       LeafletMapAdapter.prototype.isLayerOnTheMap = function (layerName) {
           var layerMem = this._layers[layerName];
           return layerMem.onMap;
+      };
+      LeafletMapAdapter.prototype.addControl = function (controlDef, position, options) {
+          var control;
+          if (typeof controlDef === 'string') {
+              var engine = LeafletMapAdapter.controlAdapters[controlDef];
+              if (engine) {
+                  control = new engine(options);
+              }
+          }
+          else {
+              control = controlDef;
+          }
+          if (control) {
+              control.options.position = position.replace('-', '');
+              this.map.addControl(control);
+              return control;
+          }
       };
       LeafletMapAdapter.prototype.addLayer = function (adapterDef, options, baselayer) {
           var _this = this;
@@ -673,8 +703,6 @@
               }
           }
       };
-      LeafletMapAdapter.prototype.addControl = function (controlDef, position) {
-      };
       LeafletMapAdapter.prototype.onMapClick = function (evt) {
           var coord = evt.containerPoint;
           var latLng = evt.latlng;
@@ -693,6 +721,10 @@
       LeafletMapAdapter.layerAdapters = {
           TILE: TileAdapter,
           GEOJSON: GeoJsonAdapter,
+      };
+      LeafletMapAdapter.controlAdapters = {
+          ZOOM: leaflet.Control.Zoom,
+          ATTRIBUTION: AttributionControl,
       };
       return LeafletMapAdapter;
   }());

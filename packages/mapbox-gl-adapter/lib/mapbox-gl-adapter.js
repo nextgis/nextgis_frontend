@@ -615,6 +615,14 @@
         return CompassControl;
     }(mapboxGl.NavigationControl));
 
+    var AttributionControl = (function (_super) {
+        __extends(AttributionControl, _super);
+        function AttributionControl() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        return AttributionControl;
+    }(mapboxGl.AttributionControl));
+
     var MapboxglAdapter = (function () {
         function MapboxglAdapter() {
             this.displayProjection = 'EPSG:3857';
@@ -750,12 +758,12 @@
                 }
             });
         };
-        MapboxglAdapter.prototype.addControl = function (controlDef, position) {
+        MapboxglAdapter.prototype.addControl = function (controlDef, position, options) {
             var control;
             if (typeof controlDef === 'string') {
                 var engine = MapboxglAdapter.controlAdapters[controlDef];
                 if (engine) {
-                    control = new engine();
+                    control = new engine(options);
                 }
             }
             else {
@@ -822,6 +830,7 @@
         MapboxglAdapter.controlAdapters = {
             ZOOM: ZoomControl,
             COMPASS: CompassControl,
+            ATTRIBUTION: AttributionControl,
         };
         return MapboxglAdapter;
     }());
