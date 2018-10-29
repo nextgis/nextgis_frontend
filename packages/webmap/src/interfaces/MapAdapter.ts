@@ -1,5 +1,5 @@
 import { LayerAdapter, LayerAdapters } from './LayerAdapter';
-import { Type } from '../Utils/Type';
+import { Type } from '../utils/Type';
 import { EventEmitter } from 'events';
 import { MapOptions } from '../webmap';
 import { MapControls, MapControl } from './MapControl';
