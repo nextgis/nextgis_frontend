@@ -2,7 +2,7 @@
   "name": "@nextgis/leaflet-map-adapter",
   "version": "0.2.3",
   "description": "",
-  "main": "lib/lefalet-map-adapter.js",
+  "main": "lib/leaflet-map-adapter.js",
   "types": "lib/leaflet-map-adapter.d.ts",
   "scripts": {
     "build": "rollup -c rollup.config.js",
