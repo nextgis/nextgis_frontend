@@ -98,7 +98,6 @@
         }
         return ret;
     }
-    //# sourceMappingURL=ImageAdapter.js.map
 
     var domain;
 
@@ -578,7 +577,6 @@
         };
         return OsmAdapter;
     }());
-    //# sourceMappingURL=OsmAdapter.js.map
 
     var ID$1 = 1;
     var MarkerAdapter = (function () {
@@ -600,7 +598,6 @@
         };
         return MarkerAdapter;
     }());
-    //# sourceMappingURL=MarkerAdapter.js.map
 
     var ID$2 = 1;
     var TileAdapter = (function () {
@@ -617,7 +614,6 @@
         };
         return TileAdapter;
     }());
-    //# sourceMappingURL=TileAdapter.js.map
 
     var OlMapAdapter = (function () {
         function OlMapAdapter() {
@@ -828,8 +824,6 @@
         };
         return OlMapAdapter;
     }());
-
-    //# sourceMappingURL=ol-map-adapter.js.map
 
     exports.OlMapAdapter = OlMapAdapter;
 
