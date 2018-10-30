@@ -1,3 +1,5 @@
+import { GeoJsonObject } from 'geojson';
+import { LatLng } from './BaseTypes';
 interface AdapterOptions {
     id?: string;
     url?: string;
@@ -12,13 +14,17 @@ export interface MvtAdapterOptions extends AdapterOptions {
     'source-layer'?: string;
 }
 export interface GeoJsonAdapterOptions extends AdapterOptions {
-    data?: any;
+    data?: GeoJsonObject;
+}
+export interface MarkerAdapterOptions extends AdapterOptions {
+    latLng: LatLng;
 }
 export interface LayerAdapters {
     'MVT': MvtAdapterOptions;
     'IMAGE': AdapterOptions;
     'OSM': AdapterOptions;
     'TILE': AdapterOptions;
+    'MARKER': MarkerAdapterOptions;
     'GEOJSON': GeoJsonAdapterOptions;
     [name: string]: AdapterOptions;
 }

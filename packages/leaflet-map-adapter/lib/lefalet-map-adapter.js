@@ -647,13 +647,13 @@
                   var layerOpts = { layer: l, onMap: false };
                   if (baselayer) {
                       layerOpts.baseLayer = true;
+                      _this._baseLayers.push(layerId);
                   }
                   else {
                       layerOpts.order = options.order || _this._order++;
                   }
                   _this._layers[layerId] = layerOpts;
                   _this._length++;
-                  _this._baseLayers.push(layerId);
                   return adapter_1;
               };
               return addlayerFun.then ? addlayerFun.then(function (l) { return toResolve_1(l); }) : Promise.resolve(toResolve_1(layer));
