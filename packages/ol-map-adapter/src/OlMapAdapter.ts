@@ -1,6 +1,7 @@
 import { MapAdapter } from '@nextgis/webmap';
 import { Map, View } from 'ol';
 import { fromLonLat, transformExtent, transform } from 'ol/proj';
+import { Zoom, Attribution, defaults as defaultControls } from 'ol/control';
 import { boundingExtent } from 'ol/extent';
 import { WKT } from 'ol/format';
 import { fromExtent } from 'ol/geom/Polygon';
@@ -9,21 +10,28 @@ import { ImageAdapter } from './layer-adapters/ImageAdapter';
 import { EventEmitter } from 'events';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
 import { MarkerAdapter } from './layer-adapters/MarkerAdapter';
+import { TileAdapter } from './layer-adapters/TileAdapter';
 
 interface LayerMem {
-  order: number;
   layer: any;
   onMap: boolean;
+  order?: number;
+  baseLayer?: boolean;
 }
 
 export class OlMapAdapter implements MapAdapter {
 
   static layerAdapters = {
     IMAGE: ImageAdapter,
-    // TILE: TileAdapter,
+    TILE: TileAdapter,
     // MVT: MvtAdapter,
     OSM: OsmAdapter,
     MARKER: MarkerAdapter,
+  };
+
+  static controlAdapters = {
+    ZOOM: Zoom,
+    ATTRIBUTION: Attribution,
   };
 
   options: any;
@@ -37,6 +45,7 @@ export class OlMapAdapter implements MapAdapter {
   map: Map;
 
   _layers: { [x: string]: LayerMem } = {};
+  _baseLayers: string[] = [];
   private _olView: View;
   private _order = 0;
   private _length = 9999; // TODO: get real layers length count, after all registered
@@ -136,27 +145,38 @@ export class OlMapAdapter implements MapAdapter {
       const adapter = new adapterEngine(this.map, options);
       const layer = adapter.addLayer(options);
 
-      // return Promise.resolve(adapter);
       const addlayerFun = adapter.addLayer(options);
-      const toResolve = () => {
+      const toResolve = (l) => {
         const layerId = adapter.name;
-        this._layers[layerId] = { layer, order: options.order || this._order++, onMap: false };
+        const layerOpts: LayerMem = { layer: l, onMap: false };
+        if (baselayer) {
+          layerOpts.baseLayer = true;
+          this._baseLayers.push(layerId);
+        } else {
+          layerOpts.order = options.order || this._order++;
+        }
+        this._layers[layerId] = layerOpts;
         this._length++;
-        // this._baseLayers.push(layerId);
-        // if (!baselayer) {
 
-        // } else {
-
-        // }
         return adapter;
       };
-      return addlayerFun.then ? addlayerFun.then(() => toResolve()) : Promise.resolve(toResolve());
+      return addlayerFun.then ? addlayerFun.then((l) => toResolve(l)) : Promise.resolve(toResolve(layer));
     }
     return Promise.reject('No adapter');
   }
 
   removeLayer(layerName: string) {
-    // ignore
+    const layer = this._layers[layerName];
+    if (layer) {
+      this.map.removeLayer(layer.layer);
+      if (layer.baseLayer) {
+        const index = this._baseLayers.indexOf(layerName);
+        if (index) {
+          this._baseLayers.splice(index, 1);
+        }
+      }
+      delete this._layers[layerName];
+    }
   }
 
   showLayer(layerName: string) {
@@ -203,8 +223,20 @@ export class OlMapAdapter implements MapAdapter {
     }
   }
 
-  addControl(controlDef, position: string) {
-    // ignore
+  addControl(controlDef, position?: string, options?) {
+    let control;
+    if (typeof controlDef === 'string') {
+      const engine = OlMapAdapter.controlAdapters[controlDef];
+      if (engine) {
+        control = new engine(options);
+      }
+    } else {
+      control = controlDef;
+    }
+    if (control) {
+      this.map.addControl(control);
+      return control;
+    }
   }
 
   onMapClick(evt) {

@@ -21,16 +21,17 @@ const webMap = new WebMap({
 webMap.create({
   target: 'map'
 }).then(() => {
-  // webMap.addBaseLayer('sputnik', 'QMS', {
-  //   qmsid: 487
-  // }).then((layer) => {
-  //   webMap.map.showLayer(layer.name);
-  // });
+  webMap.map.addControl('ZOOM', 'top-left');
+  webMap.addBaseLayer('sputnik', 'QMS', {
+    qmsid: 487
+  }).then((layer) => {
+    webMap.map.showLayer(layer.name);
+  });
 });
 
-webMap.addBaseLayer('osm', 'OSM').then((layer) => {
-  webMap.map.showLayer(layer.name);
-});
+// webMap.addBaseLayer('osm', 'OSM').then((layer) => {
+//   webMap.map.showLayer(layer.name);
+// });
 
 
 webMap.emitter.on('add-layers', function () {
@@ -60,6 +61,9 @@ webMap.emitter.on('click', function (evt) {
     latLng: evt.latLng
   }).then((x) => {
     webMap.map.showLayer(x.name);
+    setTimeout(function () {
+      webMap.map.removeLayer(x.name);
+    }, 300);
   });
 
   // TODO layer_style_id - 1 is hardcode to get layers id for geonote.nextgis.com instant

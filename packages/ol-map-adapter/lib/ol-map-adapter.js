@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('ol/source/ImageWMS'), require('ol/layer/Image'), require('ol/source/OSM'), require('ol/layer/Tile'), require('ol/geom/Point'), require('ol/Feature'), require('ol/proj'), require('ol/layer'), require('ol/source/Vector'), require('ol'), require('ol/extent'), require('ol/format'), require('ol/geom/Polygon')) :
-    typeof define === 'function' && define.amd ? define(['exports', 'ol/source/ImageWMS', 'ol/layer/Image', 'ol/source/OSM', 'ol/layer/Tile', 'ol/geom/Point', 'ol/Feature', 'ol/proj', 'ol/layer', 'ol/source/Vector', 'ol', 'ol/extent', 'ol/format', 'ol/geom/Polygon'], factory) :
-    (factory((global.OlMapAdapter = {}),global.ol.source.ImageWMS,global.ol.layer.Image,global.ol.source.OSM,global.ol.layer.Tile,global.ol.geom.Point,global.ol.Feature,global.ol.proj,global.ol.layer,global.ol.source.Vector,global.ol,global.ol.extent,global.ol.format,global.Polygon));
-}(this, (function (exports,ImageWMS,ImageLayer,OSM,TileLayer,Point,Feature,proj,layer,VectorSource,ol,extent,format,Polygon) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('ol/source/ImageWMS'), require('ol/layer/Image'), require('ol/source/OSM'), require('ol/layer/Tile'), require('ol/geom/Point'), require('ol/Feature'), require('ol/proj'), require('ol/layer'), require('ol/source/Vector'), require('ol/source/XYZ'), require('ol'), require('ol/control'), require('ol/extent'), require('ol/format'), require('ol/geom/Polygon')) :
+    typeof define === 'function' && define.amd ? define(['exports', 'ol/source/ImageWMS', 'ol/layer/Image', 'ol/source/OSM', 'ol/layer/Tile', 'ol/geom/Point', 'ol/Feature', 'ol/proj', 'ol/layer', 'ol/source/Vector', 'ol/source/XYZ', 'ol', 'ol/control', 'ol/extent', 'ol/format', 'ol/geom/Polygon'], factory) :
+    (factory((global.OlMapAdapter = {}),global.ol.source.ImageWMS,global.ol.layer.Image,global.ol.source.OSM,global.ol.layer.Tile,global.ol.geom.Point,global.ol.Feature,global.ol.proj,global.ol.layer,global.ol.source.Vector,global.XYZ,global.ol,global.control,global.ol.extent,global.ol.format,global.Polygon));
+}(this, (function (exports,ImageWMS,ImageLayer,OSM,TileLayer,Point,Feature,proj,layer,VectorSource,XYZ,ol,control,extent,format,Polygon) { 'use strict';
 
     ImageWMS = ImageWMS && ImageWMS.hasOwnProperty('default') ? ImageWMS['default'] : ImageWMS;
     ImageLayer = ImageLayer && ImageLayer.hasOwnProperty('default') ? ImageLayer['default'] : ImageLayer;
@@ -11,6 +11,7 @@
     Point = Point && Point.hasOwnProperty('default') ? Point['default'] : Point;
     Feature = Feature && Feature.hasOwnProperty('default') ? Feature['default'] : Feature;
     VectorSource = VectorSource && VectorSource.hasOwnProperty('default') ? VectorSource['default'] : VectorSource;
+    XYZ = XYZ && XYZ.hasOwnProperty('default') ? XYZ['default'] : XYZ;
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -97,6 +98,7 @@
         }
         return ret;
     }
+    //# sourceMappingURL=ImageAdapter.js.map
 
     var domain;
 
@@ -576,6 +578,7 @@
         };
         return OsmAdapter;
     }());
+    //# sourceMappingURL=OsmAdapter.js.map
 
     var ID$1 = 1;
     var MarkerAdapter = (function () {
@@ -597,6 +600,24 @@
         };
         return MarkerAdapter;
     }());
+    //# sourceMappingURL=MarkerAdapter.js.map
+
+    var ID$2 = 1;
+    var TileAdapter = (function () {
+        function TileAdapter() {
+        }
+        TileAdapter.prototype.addLayer = function (options) {
+            this.name = options.id || 'tile-' + ID$2++;
+            var layer$$1 = new TileLayer({
+                source: new XYZ({
+                    url: options.url,
+                }),
+            });
+            return layer$$1;
+        };
+        return TileAdapter;
+    }());
+    //# sourceMappingURL=TileAdapter.js.map
 
     var OlMapAdapter = (function () {
         function OlMapAdapter() {
@@ -605,6 +626,7 @@
             this.lonlatProjection = 'EPSG:4326';
             this.emitter = new EventEmitter();
             this._layers = {};
+            this._baseLayers = [];
             this._order = 0;
             this._length = 9999;
             this.DPI = 1000 / 39.37 / 0.28;
@@ -672,19 +694,38 @@
             }
             if (adapterEngine) {
                 var adapter_1 = new adapterEngine(this.map, options);
-                var layer_1 = adapter_1.addLayer(options);
+                var layer$$1 = adapter_1.addLayer(options);
                 var addlayerFun = adapter_1.addLayer(options);
-                var toResolve_1 = function () {
+                var toResolve_1 = function (l) {
                     var layerId = adapter_1.name;
-                    _this._layers[layerId] = { layer: layer_1, order: options.order || _this._order++, onMap: false };
+                    var layerOpts = { layer: l, onMap: false };
+                    if (baselayer) {
+                        layerOpts.baseLayer = true;
+                        _this._baseLayers.push(layerId);
+                    }
+                    else {
+                        layerOpts.order = options.order || _this._order++;
+                    }
+                    _this._layers[layerId] = layerOpts;
                     _this._length++;
                     return adapter_1;
                 };
-                return addlayerFun.then ? addlayerFun.then(function () { return toResolve_1(); }) : Promise.resolve(toResolve_1());
+                return addlayerFun.then ? addlayerFun.then(function (l) { return toResolve_1(l); }) : Promise.resolve(toResolve_1(layer$$1));
             }
             return Promise.reject('No adapter');
         };
         OlMapAdapter.prototype.removeLayer = function (layerName) {
+            var layer$$1 = this._layers[layerName];
+            if (layer$$1) {
+                this.map.removeLayer(layer$$1.layer);
+                if (layer$$1.baseLayer) {
+                    var index = this._baseLayers.indexOf(layerName);
+                    if (index) {
+                        this._baseLayers.splice(index, 1);
+                    }
+                }
+                delete this._layers[layerName];
+            }
         };
         OlMapAdapter.prototype.showLayer = function (layerName) {
             this.toggleLayer(layerName, true);
@@ -726,7 +767,21 @@
                 }
             }
         };
-        OlMapAdapter.prototype.addControl = function (controlDef, position) {
+        OlMapAdapter.prototype.addControl = function (controlDef, position, options) {
+            var control$$1;
+            if (typeof controlDef === 'string') {
+                var engine = OlMapAdapter.controlAdapters[controlDef];
+                if (engine) {
+                    control$$1 = new engine(options);
+                }
+            }
+            else {
+                control$$1 = controlDef;
+            }
+            if (control$$1) {
+                this.map.addControl(control$$1);
+                return control$$1;
+            }
         };
         OlMapAdapter.prototype.onMapClick = function (evt) {
             var _a = proj.transform(evt.coordinate, this.displayProjection, this.lonlatProjection), lng = _a[0], lat = _a[1];
@@ -763,11 +818,18 @@
         };
         OlMapAdapter.layerAdapters = {
             IMAGE: ImageAdapter,
+            TILE: TileAdapter,
             OSM: OsmAdapter,
             MARKER: MarkerAdapter,
         };
+        OlMapAdapter.controlAdapters = {
+            ZOOM: control.Zoom,
+            ATTRIBUTION: control.Attribution,
+        };
         return OlMapAdapter;
     }());
+
+    //# sourceMappingURL=ol-map-adapter.js.map
 
     exports.OlMapAdapter = OlMapAdapter;
 

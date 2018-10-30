@@ -5,20 +5,28 @@ import { ImageAdapter } from './layer-adapters/ImageAdapter';
 import { EventEmitter } from 'events';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
 import { MarkerAdapter } from './layer-adapters/MarkerAdapter';
+import { TileAdapter } from './layer-adapters/TileAdapter';
 interface LayerMem {
-    order: number;
     layer: any;
     onMap: boolean;
+    order?: number;
+    baseLayer?: boolean;
 }
 export declare class OlMapAdapter implements MapAdapter {
     static layerAdapters: {
         IMAGE: typeof ImageAdapter;
+        TILE: typeof TileAdapter;
         OSM: typeof OsmAdapter;
         MARKER: typeof MarkerAdapter;
+    };
+    static controlAdapters: {
+        ZOOM: any;
+        ATTRIBUTION: any;
     };
     options: any;
     layerAdapters: {
         IMAGE: typeof ImageAdapter;
+        TILE: typeof TileAdapter;
         OSM: typeof OsmAdapter;
         MARKER: typeof MarkerAdapter;
     };
@@ -29,6 +37,7 @@ export declare class OlMapAdapter implements MapAdapter {
     _layers: {
         [x: string]: LayerMem;
     };
+    _baseLayers: string[];
     private _olView;
     private _order;
     private _length;
@@ -55,7 +64,7 @@ export declare class OlMapAdapter implements MapAdapter {
     getScaleForResolution(res: any, mpu: any): number;
     getResolutionForScale(scale: any, mpu: any): number;
     toggleLayer(layerName: string, status: boolean): void;
-    addControl(controlDef: any, position: string): void;
+    addControl(controlDef: any, position?: string, options?: any): any;
     onMapClick(evt: any): void;
     requestGeomString(pixel: {
         top: number;
