@@ -9,14 +9,14 @@
   },
   "devDependencies": {
     "@nextgis/webmap": "^0.2.3",
-    "rollup": "^0.66.2",
-    "rollup-plugin-commonjs": "^9.1.5",
+    "rollup": "^0.66.6",
+    "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-node-builtins": "^2.1.2",
-    "rollup-plugin-node-resolve": "^3.3.0",
+    "rollup-plugin-node-resolve": "^3.4.0",
     "rollup-plugin-sourcemaps": "^0.4.2",
-    "rollup-plugin-typescript2": "^0.17.0",
+    "rollup-plugin-typescript2": "^0.17.2",
     "rollup-plugin-uglify": "^6.0.0",
-    "typescript": "^3.0.1"
+    "typescript": "^3.1.4"
   },
   "scripts": {
     "build": "rollup -c rollup.config.js",

@@ -129,24 +129,19 @@ export class LeafletMapAdapter implements MapAdapter {
       const adapter = new adapterEngine(this.map, options);
       const layer = adapter.addLayer(options);
 
-      // return Promise.resolve(adapter);
       const addlayerFun = adapter.addLayer(options);
       const toResolve = (l) => {
         const layerId = adapter.name;
         const layerOpts: LayerMem = { layer: l, onMap: false };
         if (baselayer) {
           layerOpts.baseLayer = true;
+          this._baseLayers.push(layerId);
         } else {
           layerOpts.order = options.order || this._order++;
         }
         this._layers[layerId] = layerOpts;
         this._length++;
-        this._baseLayers.push(layerId);
-        // if (!baselayer) {
 
-        // } else {
-
-        // }
         return adapter;
       };
       return addlayerFun.then ? addlayerFun.then((l) => toResolve(l)) : Promise.resolve(toResolve(layer));
