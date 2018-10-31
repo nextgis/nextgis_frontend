@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    /* Basic Options */
+    "target": "es5", /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017','ES2018' or 'ESNEXT'. */
+    "declaration": false, /* Generates corresponding '.d.ts' file. */
+    /* "declarationDir": "lib", */
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "lib": [
+      "es6",
+      "dom"
+    ],
+    /* Strict Type-Checking Options */
+    "strict": false, /* Enable all strict type-checking options. */
+    /* Module Resolution Options */
+    "esModuleInterop": true, /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */
+    "sourceMap": true,
+
+    "noImplicitReturns": false,
+    "module": "es2015",
+    "resolveJsonModule": true,
+
+  },
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ]
+}
