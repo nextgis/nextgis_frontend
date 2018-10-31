@@ -42,4 +42,5 @@ export interface RasterRequestOptions {
 export interface RasterUploadOptions {
   name?: string;
   parentId?: number;
+  onProgress?: (percentComplete: number) => void;
 }
