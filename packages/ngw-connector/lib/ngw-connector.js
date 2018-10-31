@@ -193,11 +193,11 @@
                     this._loadingStatus[url] = true;
                     return this._getJson(url, options).then(function (data) {
                         _this._loadingStatus[url] = false;
-                        _this._exequteLoadingQueue(url, data);
+                        _this._executeLoadingQueue(url, data);
                         return data;
                     }).catch(function (er) {
                         _this._loadingStatus[url] = false;
-                        _this._exequteLoadingQueue(url, er, true);
+                        _this._executeLoadingQueue(url, er, true);
                     });
                 }
                 else {
@@ -223,7 +223,7 @@
                 timestamp: new Date(),
             });
         };
-        NgwConnector.prototype._exequteLoadingQueue = function (name, data, isError) {
+        NgwConnector.prototype._executeLoadingQueue = function (name, data, isError) {
             var queue = this._loadingQueue[name];
             if (queue) {
                 for (var fry = 0; fry < queue.waiting.length; fry++) {
@@ -250,19 +250,19 @@
     function loadJSON(url, callback, options, error) {
         if (options === void 0) { options = {}; }
         options.method = options.method || 'GET';
-        var xmlHttp;
+        var xhr;
         if (options.mode === 'cors') {
-            xmlHttp = createCORSRequest(options.method, url);
+            xhr = createCORSRequest(options.method, url);
         }
         else {
-            xmlHttp = new XMLHttpRequest();
-            xmlHttp.open(options.method || 'GET', url, true);
+            xhr = new XMLHttpRequest();
+            xhr.open(options.method || 'GET', url, true);
         }
-        xmlHttp.onreadystatechange = function () {
-            if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-                if (xmlHttp.responseText) {
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                if (xhr.responseText) {
                     try {
-                        callback(JSON.parse(xmlHttp.responseText));
+                        callback(JSON.parse(xhr.responseText));
                     }
                     catch (er) {
                         error(er);
@@ -270,16 +270,39 @@
                 }
             }
         };
+        xhr.upload.onprogress = function (e) {
+            if (e.lengthComputable) {
+                var percentComplete = (e.loaded / e.total) * 100;
+                if (options.onProgress) {
+                    options.onProgress(percentComplete);
+                }
+            }
+        };
         var headers = options.headers;
         if (headers) {
             for (var h in headers) {
                 if (headers.hasOwnProperty(h)) {
-                    xmlHttp.setRequestHeader(h, headers[h]);
+                    xhr.setRequestHeader(h, headers[h]);
                 }
             }
         }
-        xmlHttp.withCredentials = options.withCredentials;
-        xmlHttp.send(options.data ? JSON.stringify(options.data) : null);
+        xhr.withCredentials = options.withCredentials;
+        var data;
+        if (options.file) {
+            data = new FormData();
+            data.append('file', options.file);
+            if (options.data) {
+                for (var d in data) {
+                    if (data.hasOwnProperty(d)) {
+                        data.append(d, data[d]);
+                    }
+                }
+            }
+        }
+        else {
+            data = options.data ? JSON.stringify(options.data) : null;
+        }
+        xhr.send(data);
     }
     function createCORSRequest(method, url) {
         var xhr = new XMLHttpRequest();
