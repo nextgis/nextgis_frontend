@@ -147,11 +147,11 @@ export class NgwConnector {
 
         return this._getJson(url, options).then((data) => {
           this._loadingStatus[url] = false;
-          this._exequteLoadingQueue(url, data);
+          this._executeLoadingQueue(url, data);
           return data;
         }).catch((er) => {
           this._loadingStatus[url] = false;
-          this._exequteLoadingQueue(url, er, true);
+          this._executeLoadingQueue(url, er, true);
         });
       } else {
         this._loadingStatus[url] = false;
@@ -178,7 +178,7 @@ export class NgwConnector {
     });
   }
 
-  _exequteLoadingQueue(name, data, isError?) {
+  _executeLoadingQueue(name, data, isError?) {
     const queue = this._loadingQueue[name];
     if (queue) {
       for (let fry = 0; fry < queue.waiting.length; fry++) {
@@ -204,18 +204,18 @@ export class NgwConnector {
 
 function loadJSON(url, callback, options: RequestOptions = {}, error) {
   options.method = options.method || 'GET';
-  let xmlHttp: XMLHttpRequest;
+  let xhr: XMLHttpRequest;
   if (options.mode === 'cors') {
-    xmlHttp = createCORSRequest(options.method, url);
+    xhr = createCORSRequest(options.method, url);
   } else {
-    xmlHttp = new XMLHttpRequest();
-    xmlHttp.open(options.method || 'GET', url, true); // true for asynchronous
+    xhr = new XMLHttpRequest();
+    xhr.open(options.method || 'GET', url, true); // true for asynchronous
   }
-  xmlHttp.onreadystatechange = () => {
-    if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-      if (xmlHttp.responseText) {
+  xhr.onreadystatechange = () => {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      if (xhr.responseText) {
         try {
-          callback(JSON.parse(xmlHttp.responseText));
+          callback(JSON.parse(xhr.responseText));
         } catch (er) {
           error(er);
         }
@@ -223,16 +223,42 @@ function loadJSON(url, callback, options: RequestOptions = {}, error) {
     }
   };
 
+  xhr.upload.onprogress = function(e) {
+    if (e.lengthComputable) {
+      const percentComplete = (e.loaded / e.total) * 100;
+      if (options.onProgress) {
+        options.onProgress(percentComplete);
+      }
+      // console.log(percentComplete + '% uploaded');
+    }
+  };
+
   const headers = options.headers;
   if (headers) {
     for (const h in headers) {
       if (headers.hasOwnProperty(h)) {
-        xmlHttp.setRequestHeader(h, headers[h]);
+        xhr.setRequestHeader(h, headers[h]);
       }
     }
   }
-  xmlHttp.withCredentials = options.withCredentials;
-  xmlHttp.send(options.data ? JSON.stringify(options.data) : null);
+  xhr.withCredentials = options.withCredentials;
+
+  let data;
+  if (options.file) {
+    data = new FormData();
+    data.append('file', options.file);
+    if (options.data) {
+      for (const d in data) {
+        if (data.hasOwnProperty(d)) {
+          data.append(d, data[d]);
+        }
+      }
+    }
+  } else {
+    data = options.data ? JSON.stringify(options.data) : null;
+  }
+
+  xhr.send(data);
 }
 
 function createCORSRequest(method, url) {

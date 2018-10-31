@@ -1,4 +1,13 @@
 import { ResourceItem } from './types/ResourceItem';
+export interface FileMeta {
+    id: string;
+    mime_type: string;
+    name: string;
+    size: number;
+}
+interface FileUploadResp {
+    upload_meta: FileMeta[];
+}
 declare type simple = string | number | boolean;
 declare type cbParams = (params: Params) => simple;
 export interface Router {
@@ -10,6 +19,7 @@ export interface Params {
 export interface RequestItemsResponseMap {
     'resource.item': ResourceItem;
     'resource.child': any;
+    'file_upload.upload': FileUploadResp;
     [x: string]: {
         [x: string]: any;
     };
@@ -34,6 +44,8 @@ export interface RequestOptions {
     headers?: RequestHeaders;
     mode?: 'cors';
     withCredentials?: boolean;
+    file?: File;
+    onProgress?: (percentComplete: number) => void;
 }
 export interface LoadingQueue {
     name: string;
