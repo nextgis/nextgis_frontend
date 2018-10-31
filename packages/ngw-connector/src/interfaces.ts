@@ -11,6 +11,11 @@ interface FileUploadResp {
   upload_meta: FileMeta[];
 }
 
+interface ResourceCreatedRest {
+  id: number;
+  parent: { id: number };
+}
+
 type simple = string | number | boolean;
 
 type cbParams = (params: Params) => simple;
@@ -43,8 +48,9 @@ export interface NgwConnectorOptions {
 
 export interface RequestHeaders {
   Authorization?: string;
-  'Access-Control-Allow-Origin': string | '*';
-  'Access-Control-Allow-Headers': string | '*';
+  Accept?: string | '*/*';
+  'Access-Control-Allow-Origin'?: string | '*';
+  'Access-Control-Allow-Headers'?: string | '*';
 }
 
 export interface RequestOptions {

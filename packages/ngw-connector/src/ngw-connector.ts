@@ -212,7 +212,7 @@ function loadJSON(url, callback, options: RequestOptions = {}, error) {
     xhr.open(options.method || 'GET', url, true); // true for asynchronous
   }
   xhr.onreadystatechange = () => {
-    if (xhr.readyState === 4 && xhr.status === 200) {
+    if ((xhr.readyState === 4 && xhr.status === 200) || (xhr.readyState === 3 && xhr.status === 201)) {
       if (xhr.responseText) {
         try {
           callback(JSON.parse(xhr.responseText));
