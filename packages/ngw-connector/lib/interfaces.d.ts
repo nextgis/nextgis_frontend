@@ -35,8 +35,9 @@ export interface NgwConnectorOptions {
 }
 export interface RequestHeaders {
     Authorization?: string;
-    'Access-Control-Allow-Origin': string | '*';
-    'Access-Control-Allow-Headers': string | '*';
+    Accept?: string | '*/*';
+    'Access-Control-Allow-Origin'?: string | '*';
+    'Access-Control-Allow-Headers'?: string | '*';
 }
 export interface RequestOptions {
     method?: 'POST' | 'GET';
