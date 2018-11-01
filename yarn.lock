@@ -569,10 +569,10 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
-"@nextgis/ngw-connector@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@nextgis/ngw-connector/-/ngw-connector-0.3.0.tgz#5d585721e1ec671fc482ba2049b8a325a035691b"
-  integrity sha512-mh+TJouiz/MsfML7GgWwsKJeJYhGxsLfdsK5LmP5fc+Nc2KaQtUVmGdHg2z4draVdYypAcYm9zMrs8oYA/+tFw==
+"@nextgis/ngw-connector@^0.3.2":
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/@nextgis/ngw-connector/-/ngw-connector-0.3.2.tgz#7a37913de704f7e6c0e4f74362a25ce8f5e88e0f"
+  integrity sha512-N54JBireOQkH7PbKSR9iOOKLRIHCTaezaKfEam4tb/gavZLmxYyCKnrx0vx0rnuLotU8ymujLfQAmL3krqu0gw==
 
 "@nodelib/fs.stat@^1.0.1":
   version "1.1.2"
@@ -3285,6 +3285,11 @@ he@1.2.x, he@^1.1.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/he/-/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
   integrity sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==
+
+highlight.js@*, highlight.js@^9.13.1:
+  version "9.13.1"
+  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.13.1.tgz#054586d53a6863311168488a0f58d6c505ce641e"
+  integrity sha512-Sc28JNQNDzaH6PORtRLMvif9RSn1mYuOoX3omVjnb0+HbpPygU2ALBI0R/wsiqCb4/fcp07Gdo8g+fhtFrQl6A==
 
 hmac-drbg@^1.0.0:
   version "1.0.1"
@@ -7001,6 +7006,13 @@ vue-class-component@^6.2.0, vue-class-component@^6.3.2:
   version "6.3.2"
   resolved "https://registry.yarnpkg.com/vue-class-component/-/vue-class-component-6.3.2.tgz#e6037e84d1df2af3bde4f455e50ca1b9eec02be6"
   integrity sha512-cH208IoM+jgZyEf/g7mnFyofwPDJTM/QvBNhYMjqGB8fCsRyTf68rH2ISw/G20tJv+5mIThQ3upKwoL4jLTr1A==
+
+vue-highlightjs@^1.3.3:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/vue-highlightjs/-/vue-highlightjs-1.3.3.tgz#29a0d57132fc1ce15cfa61e896918f5b718c5d52"
+  integrity sha1-KaDVcTL8HOFc+mHolpGPW3GMXVI=
+  dependencies:
+    highlight.js "*"
 
 vue-hot-reload-api@^2.3.0:
   version "2.3.1"
