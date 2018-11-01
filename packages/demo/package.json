@@ -1,10 +1,10 @@
 {
   "name": "@nextgis-apps/demo-app",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "",
   "private": true,
   "dependencies": {
-    "@nextgis-apps/ngw-uploader": "^0.0.0",
+    "@nextgis-apps/ngw-uploader": "^0.0.1",
     "highlight.js": "^9.13.1",
     "vue": "^2.5.17",
     "vue-class-component": "^6.3.2",
