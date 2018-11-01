@@ -65,11 +65,7 @@
 
     </v-toolbar>
     <v-content>
-      <v-container fluid fill-height>
-        <v-layout justify-center align-center>
-          <component v-if="currentComponent" v-bind:is="currentComponent"></component>
-        </v-layout>
-      </v-container>
+      <component v-if="currentComponent" v-bind:is="currentComponent"></component>
     </v-content>
 
 

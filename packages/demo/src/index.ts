@@ -4,10 +4,12 @@ import Vue from 'vue';
 import store from './store';
 import App from './App.vue';
 // import { version } from '../package.json';
+import VueHighlightJS from 'vue-highlightjs';
 import Vuetify from 'vuetify/lib';
 import 'vuetify/src/stylus/app.styl';
 // import 'material-design-icons-iconfont/dist/material-design-icons.css';
 
+Vue.use(VueHighlightJS);
 Vue.use(Vuetify);
 // Vue.use(VueRouter);
 
