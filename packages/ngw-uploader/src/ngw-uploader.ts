@@ -1,7 +1,51 @@
 // import { NgwConnector } from '../../../nextgisweb_frontend/packages/ngw-connector/src/ngw-connector';
-import { NgwConnector } from '@nextgis/ngw-connector';
-import { NgwUploadOptions, UploadInputOptions, RasterUploadOptions } from './interfaces';
+import { NgwConnector, NgwConnectorOptions } from '@nextgis/ngw-connector';
 import { EventEmitter } from 'events';
+
+export interface UploadInputOptions {
+  html?: string;
+  name?: string;
+  parentId?: number;
+  addTimestampToName?: boolean;
+}
+
+export interface NgwUploadOptions extends NgwConnectorOptions {
+  baseUrl?: string;
+  inputOptions?: UploadInputOptions;
+}
+
+export interface RasterUploadResp {
+  status?: number;
+}
+
+export interface RasterRequestResourceOptions {
+  cls: 'raster_layer';
+  display_name: string;
+  parent: { id: number };
+}
+
+export interface RasterLayerSourceOptions {
+  id: string;
+  mime_type: string;
+  size: number;
+}
+
+export interface RasterRequestLayerOptions {
+  source: RasterLayerSourceOptions;
+  srs: { id: 3857 };
+}
+
+export interface RasterRequestOptions {
+  resource: RasterRequestResourceOptions;
+  raster_layer: RasterRequestLayerOptions;
+}
+
+export interface RasterUploadOptions {
+  name?: string;
+  parentId?: number;
+  onProgress?: (percentComplete: number) => void;
+  addTimestampToName?: boolean;
+}
 
 export interface RespError {
   exception: 'ValidationError';
@@ -10,7 +54,7 @@ export interface RespError {
 }
 
 interface EmitterStatus {
-  status: 'upload' | 'create-resource' | 'create-style';
+  status: 'upload' | 'create-resource' | 'create-style' | 'create-wms';
   state: 'begin' | 'end' | 'progress' | 'error';
   message?: string;
   data?: any;
@@ -51,11 +95,15 @@ export default class NgwUploader {
         if (resp && resp.upload_meta) {
 
           const meta = resp.upload_meta[0];
-          const name = options.name || meta.name;
-
+          let name = options.name || meta.name;
+          if (options.addTimestampToName) {
+            name += '_' + new Date().toISOString();
+          }
           return this._createResource(name, meta, options).then((newRes) => {
             if (newRes) {
-              return this._createStyle(name, newRes);
+              return this._createStyle(name, newRes).then((newStyle) => {
+                return this._createWms(name, newStyle);
+              });
             }
             return Promise.reject('No resource');
           });
@@ -95,7 +143,7 @@ export default class NgwUploader {
       const eventEnd: EmitterStatus = {
         status: 'create-resource',
         state: 'end',
-        message: 'resource creation complate',
+        message: 'resource creation complete',
         data: resp
       };
       this.emitter.emit('status:change', eventEnd);
@@ -137,7 +185,7 @@ export default class NgwUploader {
       const eventEnd: EmitterStatus = {
         status: 'create-style',
         state: 'end',
-        message: `style creation for resource ${newRes.id} complate`,
+        message: `style creation for resource ${newRes.id} complete`,
         data: resp
       };
       this.emitter.emit('status:change', eventEnd);
@@ -146,7 +194,63 @@ export default class NgwUploader {
       const eventError: EmitterStatus = {
         status: 'create-style',
         state: 'error',
-        message: 'style creation for resource ${newRes.id} faild',
+        message: `style creation for resource ${newRes.id} failed`,
+        data: error
+      };
+      this.emitter.emit('status:change', eventError);
+      throw error;
+    });
+  }
+
+  private _createWms(name: string, newStyle) {
+
+    const eventBegin: EmitterStatus = {
+      status: 'create-wms',
+      state: 'begin',
+      message: `wms creation for resource ${newStyle.id} start`,
+      data: newStyle
+    };
+    this.emitter.emit('status:change', eventBegin);
+
+    const wmsData = {
+      resource: {
+        cls: 'wmsserver_service',
+        parent: {
+          id: 0
+        },
+        display_name: 'WMS_' + name,
+        keyname: null,
+        description: null
+      },
+      resmeta: {
+        items: {}
+      },
+      wmsserver_service: {
+        layers: [
+          {
+            keyname: 'image1',
+            display_name: name,
+            resource_id: newStyle.id,
+            min_scale_denom: null,
+            max_scale_denom: null
+          }
+        ]
+      }
+    };
+    return this.connector.post('resource.collection', { data: wmsData }).then((resp) => {
+      const eventEnd: EmitterStatus = {
+        status: 'create-wms',
+        state: 'end',
+        message: `wms creation for style ${newStyle.id} complete`,
+        data: resp
+      };
+      this.emitter.emit('status:change', eventEnd);
+      return resp;
+    }).catch((error) => {
+      const eventError: EmitterStatus = {
+        status: 'create-wms',
+        state: 'error',
+        message: `wms creation for style ${newStyle.id} failed`,
         data: error
       };
       this.emitter.emit('status:change', eventError);
@@ -182,11 +286,15 @@ export default class NgwUploader {
         this.emitter.emit('status:change', eventProgress);
       },
     }).then((resp) => {
+      let meta;
+      if (resp && resp.upload_meta) {
+        meta = resp.upload_meta[0];
+      }
       const eventEnd: EmitterStatus = {
         status: 'upload',
         state: 'end',
         message: 'file upload finish',
-        data: resp
+        data: meta
       };
       this.emitter.emit('status:change', eventEnd);
       return resp;

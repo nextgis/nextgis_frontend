@@ -3,6 +3,7 @@
 
     <h4 style="margin-bottom: 10px;">A simple example showing how to use `ngw-uploader.js` to upload a GEOTIFF to the NextgisWeb cloud.</h4>
     <p>Select GEOTIFF file (<a href="http://docs.nextgis.ru/docs_ngweb_dev/doc/developer/create.html#raster-preparing">how to prepare file</a>)</p>
+
     <div id='uploader'></div>
     <p id='status'></p>
 
@@ -20,5 +21,9 @@ export { UploaderSimple as default } from './UploaderSimple';
 <style lang="scss">
   .content {
     margin: 30px;
+  }
+  #name-select {
+    margin: 10px 0;
+    border-style: inset;
   }
 </style>

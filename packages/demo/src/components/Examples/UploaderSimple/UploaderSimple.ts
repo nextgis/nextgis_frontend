@@ -11,19 +11,19 @@ export class UploaderSimple extends Vue {
       <p id='status'></p>
     </div>
 
-    <script src="https://unpkg.com/@nextgis-apps/ngw-uploader@0.0.2/lib/ngw-uploader.js"></script>
+    <script src="https://unpkg.com/@nextgis-apps/ngw-uploader@0.0.3/lib/ngw-uploader.js"></script>
 
     <script>
 
       const uploader = document.getElementById('uploader');
-      const status = document.getElementById('status');
+      const statusUpload = document.getElementById('status');
 
       const ngwUploader = new window.NgwUploader({
         baseUrl: 'http://dev.nextgis.com/sandbox'
       });
 
       ngwUploader.emitter.on('status:change', function (evt) {
-        status.innerHTML = evt.message;
+        statusUpload.innerHTML = evt.message;
         let color;
         switch (evt.state) {
           case 'begin':
@@ -37,7 +37,7 @@ export class UploaderSimple extends Vue {
             break;
           case 'error':
             if (evt.data.message) {
-              status.innerHTML += '</br>' + evt.data.message;
+              statusUpload.innerHTML += '</br>' + evt.data.message;
             }
             color = 'darkred';
             break;
@@ -46,8 +46,8 @@ export class UploaderSimple extends Vue {
         }
         status.style.color = color;
       });
-
-      const input = ngwUploader.createInput();
+      // addTimestampToName - allow you to avoid resource uniqueness errors
+      const input = ngwUploader.createInput({addTimestampToName: true});
       uploader.appendChild(input);
 
     </script>
@@ -57,13 +57,14 @@ export class UploaderSimple extends Vue {
   mounted() {
 
     const uploader = document.getElementById('uploader');
-    const status = document.getElementById('status');
+    const statusUpload = document.getElementById('status');
+
     const ngwUploader = new NgwUploader({
       baseUrl: 'http://dev.nextgis.com/sandbox'
     });
 
     ngwUploader.emitter.on('status:change', function (evt) {
-      status.innerHTML = evt.message;
+      statusUpload.innerHTML = evt.message;
       let color;
       switch (evt.state) {
         case 'begin':
@@ -77,17 +78,17 @@ export class UploaderSimple extends Vue {
           break;
         case 'error':
           if (evt.data.message) {
-            status.innerHTML += '</br>' + evt.data.message;
+            statusUpload.innerHTML += '</br>' + evt.data.message;
           }
           color = 'darkred';
           break;
         default:
           color = 'black';
       }
-      status.style.color = color;
+      statusUpload.style.color = color;
     });
 
-    const input = ngwUploader.createInput();
+    const input = ngwUploader.createInput({addTimestampToName: true});
     uploader.appendChild(input);
   }
 }
