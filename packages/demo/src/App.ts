@@ -10,7 +10,7 @@ export class App extends Vue {
 
   drawer = null;
 
-  currentComponent = null;
+  currentComponent = UploaderSimple;
 
   items = [
     {
