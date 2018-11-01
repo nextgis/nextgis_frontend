@@ -5,7 +5,7 @@
   "main": "lib/ngw-uploader.js",
   "types": "lib/ngw-uploader.d.ts",
   "dependencies": {
-    "@nextgis/ngw-connector": "^0.3.3"
+    "@nextgis/ngw-connector": "^0.3.4"
   },
   "devDependencies": {
     "@types/events": "^1.2.0",

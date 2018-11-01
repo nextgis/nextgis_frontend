@@ -569,10 +569,10 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
-"@nextgis/ngw-connector@^0.3.3":
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/@nextgis/ngw-connector/-/ngw-connector-0.3.3.tgz#16e4a1ddf91b446b503d84dce489747595878b94"
-  integrity sha512-4lGcx3cQZ/tHdS33bLQIcXgAhDVcSYdfyqsJSQb4f6ujFjZL2ABVobdbSLY0fmJXW5Z9SS2wi+k7b1/uMfOSnw==
+"@nextgis/ngw-connector@^0.3.4":
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/@nextgis/ngw-connector/-/ngw-connector-0.3.4.tgz#5f00bcf470ad7f96d987086adc1e280c3ad66cf9"
+  integrity sha512-n32uv4MtdhVRAXFmIuejl9Zq26Jka4dPQGFTeqxWlKO5q6Jpt09PvqZ7aRrUZBZWMUSsfEL7+upsBZ1bpDPOMA==
 
 "@nodelib/fs.stat@^1.0.1":
   version "1.1.2"
