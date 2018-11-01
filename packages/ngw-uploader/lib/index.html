@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Ngw Uploader Example</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="ngw-uploader.js"></script></head>
+<body>
+
+  <div id="uploader">
+
+  </div>
+
+<script>
+  var uploader = document.getElementById('uploader');
+  var ngwUploader = new window.NgwUploader({
+    baseUrl: 'http://dev.nextgis.com/sandbox'
+  });
+
+  var input = ngwUploader.createInput();
+  uploader.appendChild(input);
+</script>
+
+</body>
+</html>

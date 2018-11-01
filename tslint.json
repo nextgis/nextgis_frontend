@@ -29,6 +29,7 @@
     "no-implicit-dependencies": false,
     "no-submodule-imports": false,
     "interface-name": false,
+    "trailing-comma": false,
     "typeRoots": [
       "node_modules/@types",
       "./custom_typings"
@@ -37,6 +38,7 @@
       "anonymous": "always",
       "named": "always",
       "asyncArrow": "always"
-    }]
+    }],
+    "object-literal-key-quotes": false
   }
 }
