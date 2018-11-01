@@ -110,7 +110,6 @@
                             return [2, Promise.resolve(this.route)];
                         case 1:
                             if (!this.options.auth) return [3, 3];
-                            console.log(1234);
                             _a = this.options.auth, login = _a.login, password = _a.password;
                             if (!(login && password)) return [3, 3];
                             return [4, this.getUserInfo()];
@@ -198,6 +197,7 @@
                     }).catch(function (er) {
                         _this._loadingStatus[url] = false;
                         _this._executeLoadingQueue(url, er, true);
+                        throw er;
                     });
                 }
                 else {
@@ -265,10 +265,26 @@
                         callback(JSON.parse(xhr.responseText));
                     }
                     catch (er) {
-                        error(er);
+                        error();
                     }
                 }
             }
+            else if (xhr.readyState === 3 && xhr.status === 400) {
+                if (xhr.responseText) {
+                    try {
+                        error(JSON.parse(xhr.responseText));
+                    }
+                    catch (er) {
+                        error({ message: '' });
+                    }
+                }
+                else {
+                    error({ message: '' });
+                }
+            }
+        };
+        xhr.onerror = function (er) {
+            error(er);
         };
         xhr.upload.onprogress = function (e) {
             if (e.lengthComputable) {
