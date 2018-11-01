@@ -11,14 +11,14 @@ export class UploaderSimple extends Vue {
       <p id='status'></p>
     </div>
 
-    <script src="dist/ngw-uploader.js"></script>
+    <script src="https://unpkg.com/@nextgis-apps/ngw-uploader@0.0.0/lib/ngw-uploader.js"></script>
 
     <script>
 
       const uploader = document.getElementById('uploader');
       const status = document.getElementById('status');
 
-      const ngwUploader = new NgwUploader({
+      const ngwUploader = new window.NgwUploader({
         baseUrl: 'http://dev.nextgis.com/sandbox'
       });
 
