@@ -16,7 +16,7 @@ export default class NgwUploader {
     this.connector = new NgwConnector(options);
   }
 
-  createInput(options: UploadInputOptions): HTMLElement {
+  createInput(options: UploadInputOptions = {}): HTMLElement {
     options = {...this.options.inputOptions, ...options};
     const input = document.createElement('input');
     input.setAttribute('type', 'file');
