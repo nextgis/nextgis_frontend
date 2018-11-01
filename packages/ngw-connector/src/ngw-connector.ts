@@ -32,7 +32,6 @@ export class NgwConnector {
       return Promise.resolve(this.route);
     } else {
       if (this.options.auth) {
-        console.log(1234);
         const { login, password } = this.options.auth;
         if (login && password) {
           await this.getUserInfo();
@@ -152,6 +151,7 @@ export class NgwConnector {
         }).catch((er) => {
           this._loadingStatus[url] = false;
           this._executeLoadingQueue(url, er, true);
+          throw er;
         });
       } else {
         this._loadingStatus[url] = false;
@@ -217,13 +217,27 @@ function loadJSON(url, callback, options: RequestOptions = {}, error) {
         try {
           callback(JSON.parse(xhr.responseText));
         } catch (er) {
-          error(er);
+          error();
         }
+      }
+    } else if (xhr.readyState === 3 && xhr.status === 400) {
+      if (xhr.responseText) {
+        try {
+          error(JSON.parse(xhr.responseText));
+        } catch (er) {
+          error({ message: '' });
+        }
+      } else {
+        error({ message: '' });
       }
     }
   };
 
-  xhr.upload.onprogress = function(e) {
+  xhr.onerror = (er) => {
+    error(er);
+  };
+
+  xhr.upload.onprogress = function (e) {
     if (e.lengthComputable) {
       const percentComplete = (e.loaded / e.total) * 100;
       if (options.onProgress) {
