@@ -6,7 +6,7 @@
     <div id='uploader'></div>
     <p id='status'></p>
 
-    <h4 style="margin-top: 10px">Code</h4>
+    <h4 style="margin-top: 10px;">Code</h4>
     <div>
       <pre v-highlightjs="sourcecode"><code class="html"></code></pre>
     </div>
