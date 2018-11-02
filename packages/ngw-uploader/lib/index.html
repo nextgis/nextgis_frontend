@@ -1,26 +1,55 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Ngw Uploader Example</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <script type="text/javascript" src="ngw-uploader.js"></script></head>
+
 <body>
 
-  <div id="uploader">
+  <div id='uploader'></div>
+  <p id='status'></p>
 
-  </div>
+  <script>
+    var uploader = document.getElementById('uploader');
+    var statusUpload = document.getElementById('status');
 
-<script>
-  var uploader = document.getElementById('uploader');
-  var ngwUploader = new window.NgwUploader({
-    baseUrl: 'http://dev.nextgis.com/sandbox'
-  });
+    var ngwUploader = new NgwUploader({
+      baseUrl: 'http://dev.nextgis.com/sandbox'
+    });
 
-  var input = ngwUploader.createInput();
-  uploader.appendChild(input);
-</script>
+    ngwUploader.emitter.on('status:change', function (evt) {
+      statusUpload.innerHTML = evt.message;
+      var color;
+      switch (evt.state) {
+        case 'begin':
+          color = 'black';
+          break;
+        case 'progress':
+          color = 'gray';
+          break;
+        case 'end':
+          color = 'green';
+          break;
+        case 'error':
+          if (evt.data.message) {
+            statusUpload.innerHTML += '</br>' + evt.data.message;
+          }
+          color = 'darkred';
+          break;
+        default:
+          color = 'black';
+      }
+      statusUpload.style.color = color;
+    });
+
+    const input = ngwUploader.createInput({ addTimestampToName: true });
+    uploader.appendChild(input);
+  </script>
 
 </body>
+
 </html>

@@ -1,6 +1,7 @@
 // import { NgwConnector } from '../../../nextgisweb_frontend/packages/ngw-connector/src/ngw-connector';
 import { NgwConnector, NgwConnectorOptions } from '@nextgis/ngw-connector';
 import { EventEmitter } from 'events';
+import { evented } from './decorators';
 
 export interface UploadInputOptions {
   html?: string;
@@ -53,8 +54,10 @@ export interface RespError {
   serializer: string;
 }
 
-interface EmitterStatus {
-  status: 'upload' | 'create-resource' | 'create-style' | 'create-wms';
+export type AvailableStatus = 'upload' | 'create-resource' | 'create-style' | 'create-wms';
+
+export interface EmitterStatus {
+  status: AvailableStatus;
   state: 'begin' | 'end' | 'progress' | 'error';
   message?: string;
   data?: any;
@@ -83,45 +86,32 @@ export default class NgwUploader {
     input.innerHTML = options.html;
 
     input.addEventListener('change', () => {
-      this.uploadRaster(input.files[0], options);
+      this.uploadRaster(input.files[0], options).then((newStyle) => {
+        this.createWms(newStyle, options.name);
+      });
     });
 
     return input;
   }
 
   uploadRaster(file: File, options: RasterUploadOptions): Promise<any> {
-    return this._fileUpload(file, options)
-      .then((resp) => {
-        if (resp && resp.upload_meta) {
-
-          const meta = resp.upload_meta[0];
-          let name = options.name || meta.name;
-          if (options.addTimestampToName) {
-            name += '_' + new Date().toISOString();
-          }
-          return this._createResource(name, meta, options).then((newRes) => {
-            if (newRes) {
-              return this._createStyle(name, newRes).then((newStyle) => {
-                return this._createWms(name, newStyle);
-              });
-            }
-            return Promise.reject('No resource');
-          });
+    return this.fileUpload(file, options).then((meta) => {
+      let name = options.name || meta.name;
+      if (options.addTimestampToName) {
+        name += '_' + new Date().toISOString();
+      }
+      options.name = name;
+      return this.createResource(meta, name, options).then((newRes) => {
+        if (newRes) {
+          return this.createStyle(newRes, options.name);
         }
-      }).catch((er: RespError) => {
-        console.error(er.message);
+        return Promise.reject('No resource');
       });
+    });
   }
 
-  private _createResource(name: string, meta, options: RasterUploadOptions) {
-
-    const eventBegin: EmitterStatus = {
-      status: 'create-resource',
-      state: 'begin',
-      message: 'resource creation start',
-      data: meta
-    };
-    this.emitter.emit('status:change', eventBegin);
+  @evented({ status: 'create-resource', template: 'resource creation' })
+  createResource(meta, name: string, options: RasterUploadOptions) {
 
     const data = {
       resource: {
@@ -139,37 +129,11 @@ export default class NgwUploader {
       },
     };
 
-    return this.connector.post('resource.collection', { data, headers: { Accept: '*/*' } }).then((resp) => {
-      const eventEnd: EmitterStatus = {
-        status: 'create-resource',
-        state: 'end',
-        message: 'resource creation complete',
-        data: resp
-      };
-      this.emitter.emit('status:change', eventEnd);
-      return resp;
-    }).catch((error) => {
-      const eventError: EmitterStatus = {
-        status: 'create-resource',
-        state: 'error',
-        message: 'resource creation error',
-        data: error
-      };
-      this.emitter.emit('status:change', eventError);
-      throw error;
-    });
+    return this.connector.post('resource.collection', { data, headers: { Accept: '*/*' } });
   }
 
-  private _createStyle(name: string, newRes) {
-
-    const eventBegin: EmitterStatus = {
-      status: 'create-style',
-      state: 'begin',
-      message: `style creation for resource ${newRes.id} start`,
-      data: newRes
-    };
-    this.emitter.emit('status:change', eventBegin);
-
+  @evented({ status: 'create-style', template: 'style creation for resource ID {id}' })
+  createStyle(newRes, name: string) {
     const styleData = {
       resource: {
         cls: 'raster_style',
@@ -181,37 +145,11 @@ export default class NgwUploader {
         },
       },
     };
-    return this.connector.post('resource.collection', { data: styleData }).then((resp) => {
-      const eventEnd: EmitterStatus = {
-        status: 'create-style',
-        state: 'end',
-        message: `style creation for resource ${newRes.id} complete`,
-        data: resp
-      };
-      this.emitter.emit('status:change', eventEnd);
-      return resp;
-    }).catch((error) => {
-      const eventError: EmitterStatus = {
-        status: 'create-style',
-        state: 'error',
-        message: `style creation for resource ${newRes.id} failed`,
-        data: error
-      };
-      this.emitter.emit('status:change', eventError);
-      throw error;
-    });
+    return this.connector.post('resource.collection', { data: styleData });
   }
 
-  private _createWms(name: string, newStyle) {
-
-    const eventBegin: EmitterStatus = {
-      status: 'create-wms',
-      state: 'begin',
-      message: `wms creation for resource ${newStyle.id} start`,
-      data: newStyle
-    };
-    this.emitter.emit('status:change', eventBegin);
-
+  @evented({ status: 'create-wms', template: 'wms creation for resource ID {id}' })
+  createWms(newStyle, name: string) {
     const wmsData = {
       resource: {
         cls: 'wmsserver_service',
@@ -237,37 +175,11 @@ export default class NgwUploader {
         ]
       }
     };
-    return this.connector.post('resource.collection', { data: wmsData }).then((resp) => {
-      const eventEnd: EmitterStatus = {
-        status: 'create-wms',
-        state: 'end',
-        message: `wms creation for style ${newStyle.id} complete`,
-        data: resp
-      };
-      this.emitter.emit('status:change', eventEnd);
-      return resp;
-    }).catch((error) => {
-      const eventError: EmitterStatus = {
-        status: 'create-wms',
-        state: 'error',
-        message: `wms creation for style ${newStyle.id} failed`,
-        data: error
-      };
-      this.emitter.emit('status:change', eventError);
-      throw error;
-    });
+    return this.connector.post('resource.collection', { data: wmsData });
   }
 
-  private _fileUpload(file: File, options: RasterUploadOptions = {}) {
-    const eventBegin: EmitterStatus = {
-      status: 'upload',
-      state: 'begin',
-      message: 'file upload start',
-      data: {
-        file
-      }
-    };
-    this.emitter.emit('status:change', eventBegin);
+  @evented({ status: 'upload', template: 'file upload' })
+  fileUpload(file: File, options: RasterUploadOptions = {}) {
     return this.connector.post('file_upload.upload', {
       file,
       onProgress: (percentComplete) => {
@@ -290,23 +202,7 @@ export default class NgwUploader {
       if (resp && resp.upload_meta) {
         meta = resp.upload_meta[0];
       }
-      const eventEnd: EmitterStatus = {
-        status: 'upload',
-        state: 'end',
-        message: 'file upload finish',
-        data: meta
-      };
-      this.emitter.emit('status:change', eventEnd);
-      return resp;
-    }).catch((error) => {
-      const eventError: EmitterStatus = {
-        status: 'upload',
-        state: 'error',
-        message: 'file upload error',
-        data: error
-      };
-      this.emitter.emit('status:change', eventError);
-      throw error;
+      return meta;
     });
   }
 }

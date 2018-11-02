@@ -47,6 +47,13 @@ export interface RespError {
     message: string;
     serializer: string;
 }
+export declare type AvailableStatus = 'upload' | 'create-resource' | 'create-style' | 'create-wms';
+export interface EmitterStatus {
+    status: AvailableStatus;
+    state: 'begin' | 'end' | 'progress' | 'error';
+    message?: string;
+    data?: any;
+}
 export default class NgwUploader {
     options: NgwUploadOptions;
     emitter: EventEmitter;
@@ -54,8 +61,14 @@ export default class NgwUploader {
     constructor(options: NgwUploadOptions);
     createInput(options?: UploadInputOptions): HTMLElement;
     uploadRaster(file: File, options: RasterUploadOptions): Promise<any>;
-    private _createResource;
-    private _createStyle;
-    private _createWms;
-    private _fileUpload;
+    createResource(meta: any, name: string, options: RasterUploadOptions): Promise<{
+        [x: string]: any;
+    }>;
+    createStyle(newRes: any, name: string): Promise<{
+        [x: string]: any;
+    }>;
+    createWms(newStyle: any, name: string): Promise<{
+        [x: string]: any;
+    }>;
+    fileUpload(file: File, options?: RasterUploadOptions): Promise<any>;
 }
