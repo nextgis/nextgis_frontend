@@ -3,7 +3,9 @@
     <h3 class="title pb-3">{{ text }}</h3>
     <p>{{ description }}</p>
 
-    <iframe class="example-iframe" id="example-iframe"></iframe>
+    <div class="example-iframe" id="example-iframe">
+
+    </div>
 
     <div>
       <pre v-highlightjs="source"><code class="html"></code></pre>
@@ -19,7 +21,12 @@ export { HtmlExample as default } from './HtmlExample';
 
   .example-iframe {
     width: 100%;
-    min-height: 300px;
+    height: 300px;
+
+  }
+  .example-iframe iframe {
+    width: 100%;
+    height: 100%;
     border: 1px solid rgba(0,0,0,.3);
   }
 

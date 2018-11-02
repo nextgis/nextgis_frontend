@@ -6,24 +6,41 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Custom Input | Ngw Uploader Example</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://unpkg.com/@nextgis-apps/ngw-uploader@0.1.0/lib/ngw-uploader.js"></script>
+  <script src="https://unpkg.com/@nextgis-apps/ngw-uploader@0.1.1/lib/ngw-uploader.js"></script>
+  <script src="https://unpkg.com/@nextgis-apps/ngw-leaflet@0.1.1/lib/ngw-leaflet.js"></script>
   <!-- <script type="text/javascript" src="../lib/ngw-uploader.js"></script> -->
-
+  <!-- <script type="text/javascript" src="../lib/ngw-leaflet.js"></script> -->
+  <style>
+    #map {
+      width: 400px;
+      height: 300px;
+    }
+  </style>
 </head>
 
 <body>
-  <p>Select GEOTIFF file (<a href="http://docs.nextgis.ru/docs_ngweb_dev/doc/developer/create.html#raster-preparing">how to prepare file</a>)</p>
+  <p>Select GEOTIFF file (<a href="http://docs.nextgis.ru/docs_ngweb_dev/doc/developer/create.html#raster-preparing">how
+      to prepare file</a>)</p>
   <input id="resource-input" type="file" />
   <div id='uploader'></div>
   <p id='status'></p>
+  <div id='map'></div>
 
   <script>
     var uploader = document.getElementById('uploader');
     var statusUpload = document.getElementById('status');
     var input = document.getElementById('resource-input');
+    var baseUrl = 'http://dev.nextgis.com/sandbox';
 
     var ngwUploader = new NgwUploader({
-      baseUrl: 'http://dev.nextgis.com/sandbox'
+      baseUrl: baseUrl
+    });
+
+    var map = new NgwLeaflet({
+      baseUrl: baseUrl,
+      target: 'map',
+      qmsId: 465,
+      bounds: [-90, -180, 90, 180]
     });
 
     ngwUploader.emitter.on('status:change', function (evt) {
@@ -32,7 +49,7 @@
 
     input.addEventListener('change', function () {
       ngwUploader.uploadRaster(input.files[0], { addTimestampToName: true }).then(function (newStyle) {
-        ngwUploader.createWms(newStyle, options.name);
+        map.addNgwLayer('TILE', newStyle);
       });
     });
 
