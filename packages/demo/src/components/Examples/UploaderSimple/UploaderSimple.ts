@@ -11,7 +11,7 @@ export class UploaderSimple extends Vue {
       <p id='status'></p>
     </div>
 
-    <script src="https://unpkg.com/@nextgis-apps/ngw-uploader@0.0.3/lib/ngw-uploader.js"></script>
+    <script src="https://unpkg.com/@nextgis-apps/ngw-uploader@0.1.0/lib/ngw-uploader.js"></script>
 
     <script>
 
