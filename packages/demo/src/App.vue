@@ -7,7 +7,7 @@
       app
     >
       <v-list dense>
-        <template v-for="item in items">
+        <template v-if="items" v-for="item in items">
 
           <v-list-group
             v-if="item.children"
@@ -26,7 +26,7 @@
             <v-list-tile
               v-for="(child, i) in item.children"
               :key="i"
-              @click="currentComponent = child.component"
+              @click="current = child"
             >
               <v-list-tile-action v-if="child.icon">
                 <v-icon>{{ child.icon }}</v-icon>
@@ -65,7 +65,14 @@
 
     </v-toolbar>
     <v-content>
-      <component v-if="currentComponent" v-bind:is="currentComponent"></component>
+      <component
+        v-if="current"
+        v-bind:is="current.component"
+        :text="current.text"
+        :description="current.description"
+        :source="current.source"
+      >
+      </component>
     </v-content>
 
 
