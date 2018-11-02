@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Ngw Leafet Example</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    html, body, #map {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id='map'></div>
+
+  <script>
+
+    var ngwUploader = new NgwLeaflet({
+      baseUrl: 'http://dev.nextgis.com/sandbox',
+      target: map,
+      qmsId: 465,
+      bounds: [35.067, 54.76, 35.086, 54.768]
+    });
+
+    ngwUploader.addNgwLayer('TILE', {id: 26})
+
+  </script>
+
+</body>
+
+</html>

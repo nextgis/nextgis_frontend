@@ -1,29 +1,15 @@
-import { Vue, Component } from 'vue-property-decorator';
+import { Vue, Component, } from 'vue-property-decorator';
 import { AppPages } from './store/modules/app';
-import AboutComponent from './components/NextGIS/About.vue';
-import UploaderSimple from './components/Examples/UploaderSimple/UploaderSimple.vue';
+import HtmlExample from './components/Examples/HtmlExample/HtmlExample.vue';
 
-@Component({
-  components: { AboutComponent }
-})
+@Component
 export class App extends Vue {
 
   drawer = null;
 
-  currentComponent = UploaderSimple;
+  current = null;
 
-  items = [
-    {
-      icon: 'keyboard_arrow_up',
-      'icon-alt': 'keyboard_arrow_down',
-      text: 'Uploader',
-      model: true,
-      children: [
-        { text: 'Raster upload simple example', component: UploaderSimple},
-        { text: 'Raster upload with map', component: UploaderSimple }
-      ]
-    }
-  ];
+  items = null;
 
   get page(): AppPages {
     return this.$store.state.app.page;
@@ -31,6 +17,38 @@ export class App extends Vue {
 
   set page(value: AppPages) {
     this.$store.dispatch('app/setPage', value);
+  }
+
+  mounted() {
+
+    this.items = [
+      {
+        icon: 'keyboard_arrow_up',
+        'icon-alt': 'keyboard_arrow_down',
+        text: 'Uploader',
+        model: true,
+        children: [
+          {
+            text: 'Raster upload simple example',
+            description: `
+              A simple example showing how to use ngw-uploader.js to upload a GEOTIFF to the NextgisWeb cloud.
+            `,
+            component: HtmlExample,
+            source: require('../../ngw-uploader/examples/simple_input.html')
+          },
+          {
+            text: 'Raster upload with map',
+            description: `
+            This example shows how to add a newly created raster on the map.
+            `,
+            source: require('../../ngw-uploader/examples/custom_input.html'),
+            component: HtmlExample,
+          }
+        ]
+      }
+    ];
+
+    this.current = this.items[0].children[0];
   }
 
 }

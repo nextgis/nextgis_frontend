@@ -39,6 +39,15 @@ module.exports = (env, argv) => {
       options: {
         name: '[name].[ext]?[hash]'
       }
+    },
+    {
+      test: /\.(html)$/,
+      use: {
+        loader: 'html-loader',
+        options: {
+          attrs: [':data-src']
+        }
+      }
     }
   ].concat(utils.styleLoaders({
     sourceMap: true,
