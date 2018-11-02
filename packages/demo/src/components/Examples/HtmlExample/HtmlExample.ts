@@ -8,11 +8,20 @@ export class HtmlExample extends Vue {
   @Prop() description: string;
 
   mounted() {
-    const iframe = document.getElementById('example-iframe') as HTMLFrameElement;
+    this._writeIFrame(this.source);
+    this.$watch('source', (newVal) => {
+      this._writeIFrame(newVal);
+    });
+  }
+
+  private _writeIFrame(html) {
+    const wrapper = document.getElementById('example-iframe') as HTMLFrameElement;
+    wrapper.innerHTML = '';
+    const iframe = document.createElement('iframe');
+    wrapper.appendChild(iframe);
     const doc = iframe.contentWindow.document;
     doc.open();
-    doc.write(this.source);
+    doc.write(html);
     doc.close();
-
   }
 }
