@@ -57,7 +57,7 @@ export class LeafletMapAdapter implements MapAdapter {
   create(options: LeafletMapAdapterOptions = { target: 'map' }) {
     this.options = Object.assign({}, options);
 
-    this.map = new Map(this.options.target, {zoomControl: false, attributionControl: false});
+    this.map = new Map(this.options.target, { zoomControl: false, attributionControl: false });
     this.emitter.emit('create', { map: this.map });
 
     this._addMapListeners();
@@ -124,6 +124,8 @@ export class LeafletMapAdapter implements MapAdapter {
     let adapterEngine;
     if (typeof adapterDef === 'string') {
       adapterEngine = this.getLayerAdapter(adapterDef);
+    } else {
+      adapterEngine = adapterDef;
     }
     if (adapterEngine) {
       const adapter = new adapterEngine(this.map, options);
@@ -178,8 +180,11 @@ export class LeafletMapAdapter implements MapAdapter {
       if (status) {
         if (source instanceof Map) {
           l.layer.addTo(source);
-          const order = l.baseLayer ? 0 :  this._length - l.order;
-          l.layer.setZIndex(order);
+          // TODO: set order for any layer
+          if (l.layer.setZIndex) {
+            const order = l.baseLayer ? 0 : this._length - l.order;
+            l.layer.setZIndex(order);
+          }
         }
       } else {
         source.removeLayer(l.layer);
