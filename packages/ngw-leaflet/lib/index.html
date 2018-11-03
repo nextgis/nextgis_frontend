@@ -27,17 +27,17 @@
 
   <script>
 
-    var ngwUploader = new NgwLeaflet({
+    var ngwMap = new NgwLeaflet({
       baseUrl: 'http://demo.nextgis.com',
       target: map,
       qmsId: 487,
       bound: [71, 182, 46, 14]
     });
 
-    ngwUploader.addNgwLayer({
+    ngwMap.addNgwLayer({
       id: 4005,
     }).then(function() {
-      ngwUploader.zoomToLayer(4005);
+      ngwMap.zoomToLayer(4005);
     });
 
   </script>
