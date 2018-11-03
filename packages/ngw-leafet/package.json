@@ -1,6 +1,6 @@
 {
   "name": "@nextgis-apps/ngw-leaflet",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "",
   "main": "lib/ngw-leaflet.js",
   "types": "lib/ngw-leaflet.d.ts",
