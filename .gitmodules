@@ -1,0 +1,3 @@
+[submodule "nextgisweb_frontend"]
+	path = nextgisweb_frontend
+	url = git@github.com:nextgis/nextgisweb_frontend.git
