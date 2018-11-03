@@ -1,4 +1,5 @@
 import { WebMap } from '@nextgis/webmap';
+import { NgwConnector } from '@nextgis/ngw-connector';
 import { LeafletMapAdapter } from '@nextgis/leaflet-map-adapter';
 import { QmsKit } from '@nextgis/qms-kit';
 // import { LeafletMapAdapter } from '../../../nextgisweb_frontend/packages/leaflet-map-adapter/src/LeafletMapAdapter';
@@ -36,9 +37,12 @@ export default class NgwLeaflet {
   });
 
   isLoaded: boolean = false;
+  connector: NgwConnector;
+  private _ngwLayers = {};
 
   constructor(options: MapOptions) {
     this.options = { ...this.options, ...options };
+    this.connector = new NgwConnector({ baseUrl: this.options.baseUrl });
     this._createWebMap().then(() => {
       this._addControls();
       this.isLoaded = true;
@@ -46,7 +50,7 @@ export default class NgwLeaflet {
   }
 
   fit() {
-    const {center, zoom, bound} = this.options;
+    const { center, zoom, bound } = this.options;
     if (center) {
       this.webMap.map.setCenter(center);
       if (zoom) {
@@ -60,23 +64,49 @@ export default class NgwLeaflet {
   @onMapLoad()
   addNgwLayer(options: NgwLayerOptions) {
     const adapter = options.adapter || 'IMAGE';
-    if (adapter === 'IMAGE') {
-      const url = fixUrlStr(this.options.baseUrl + '/api/component/render/image');
-      this.webMap.map.addLayer(NgwImageAdapter, { url, id: String(options.id) }).then((layer) => {
+    if (adapter === 'IMAGE' || adapter === 'TILE') {
+      let url = this.options.baseUrl;
+      let addLayerPromise;
+      if (adapter === 'IMAGE') {
+        url += '/api/component/render/image';
+        addLayerPromise = this.webMap.map.addLayer(NgwImageAdapter, { url, id: String(options.id) });
+      } else if (adapter === 'TILE') {
+        url += '/api/component/render/tile?z={z}&x={x}&y={y}&resource=' + options.id;
+        addLayerPromise = this.webMap.map.addLayer(adapter, { url });
+      }
+      return addLayerPromise.then((layer) => {
+        this._ngwLayers[layer.name] = layer;
         this.webMap.map.showLayer(layer.name);
-      });
-    } else if (adapter === 'TILE') {
-      const url = fixUrlStr(
-        this.options.baseUrl +
-        '/api/component/render/tile?z={z}&x={x}&y={y}&resource=' +
-        options.id
-      );
-      this.webMap.map.addLayer(adapter, { url }).then((layer) => {
-        this.webMap.map.showLayer(layer.name);
+        return layer.name;
       });
     } else {
       throw new Error(adapter + ' not supported yet. Only TILE');
     }
+  }
+
+  zoomToLayer(id: string | number) {
+    if (this._ngwLayers[id]) {
+      return this.connector.request('resource.item', { id }).then((resp) => {
+        if (resp) {
+          if (resp.resource.cls === 'raster_style') {
+            return this.connector.request('resource.item', {
+              id: resp.resource.parent.id
+            }).then((res) => {
+              return this._fitNgwLayerExtend(res.resource.id);
+            });
+          } else {
+            return this._fitNgwLayerExtend(id);
+          }
+        }
+      });
+    }
+  }
+
+  private _fitNgwLayerExtend(id) {
+    return this.connector.request('layer.extent', { id }).then((resp) => {
+      const { maxLat, maxLon, minLat, minLon } = resp.extent;
+      this.webMap.map.fit([maxLat, maxLon, minLat, minLon]);
+    });
   }
 
   private _createWebMap() {

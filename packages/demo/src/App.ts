@@ -25,6 +25,23 @@ export class App extends Vue {
       {
         icon: 'keyboard_arrow_up',
         'icon-alt': 'keyboard_arrow_down',
+        text: 'WebMap',
+        model: true,
+        children: [
+          {
+            text: 'NGW Leaflet add layer from cloud',
+            description: `
+              A simple example showing how create ngw-leaflet map and add some image layer from cloud.
+            `,
+            component: HtmlExample,
+            source: require('../../ngw-leaflet/examples/ngw_layer.html')
+          },
+
+        ]
+      },
+      {
+        icon: 'keyboard_arrow_up',
+        'icon-alt': 'keyboard_arrow_down',
         text: 'Uploader',
         model: true,
         children: [

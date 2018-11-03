@@ -7,7 +7,7 @@
   <title>Custom Input | Ngw Uploader Example</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://unpkg.com/@nextgis-apps/ngw-uploader@0.1.1/lib/ngw-uploader.js"></script>
-  <script src="https://unpkg.com/@nextgis-apps/ngw-leaflet@0.1.2/lib/ngw-leaflet.js"></script>
+  <script src="https://unpkg.com/@nextgis-apps/ngw-leaflet@0.1.3/lib/ngw-leaflet.js"></script>
   <!-- <script type="text/javascript" src="../lib/ngw-uploader.js"></script> -->
   <!-- <script type="text/javascript" src="../lib/ngw-leaflet.js"></script> -->
   <style>
@@ -48,8 +48,12 @@
     });
 
     input.addEventListener('change', function () {
-      ngwUploader.uploadRaster(input.files[0], { addTimestampToName: true }).then(function (newStyle) {
-        map.addNgwLayer({id: newStyle.id});
+      ngwUploader.uploadRaster(input.files[0], {
+        addTimestampToName: true
+      }).then(function (newStyle) {
+        map.addNgwLayer({ id: newStyle.id }).then(function () {
+          ngwUploader.zoomToLayer(newStyle.id);
+        });
       });
     });
 

@@ -9,13 +9,15 @@ export function onMapLoad() {
 
     descriptor.value = function (...args) {
       const self: NgwLeaflet = this;
-      if (self.isLoaded) {
-        originalMethod.apply(this, args);
-      } else {
-        self.webMap.emitter.once('map:created', () => {
-          originalMethod.apply(this, args);
-        });
-      }
+      return new Promise((resolve, reject) => {
+        if (self.isLoaded) {
+          originalMethod.apply(this, args).then(resolve).catch(reject);
+        } else {
+          self.webMap.emitter.once('map:created', () => {
+            originalMethod.apply(this, args).then(resolve).catch(reject);
+          });
+        }
+      });
     };
     return descriptor;
   };
