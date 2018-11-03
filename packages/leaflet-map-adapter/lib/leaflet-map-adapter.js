@@ -638,6 +638,9 @@
           if (typeof adapterDef === 'string') {
               adapterEngine = this.getLayerAdapter(adapterDef);
           }
+          else {
+              adapterEngine = adapterDef;
+          }
           if (adapterEngine) {
               var adapter_1 = new adapterEngine(this.map, options);
               var layer = adapter_1.addLayer(options);
@@ -682,8 +685,10 @@
               if (status) {
                   if (source instanceof leaflet.Map) {
                       l.layer.addTo(source);
-                      var order = l.baseLayer ? 0 : _this._length - l.order;
-                      l.layer.setZIndex(order);
+                      if (l.layer.setZIndex) {
+                          var order = l.baseLayer ? 0 : _this._length - l.order;
+                          l.layer.setZIndex(order);
+                      }
                   }
               }
               else {
