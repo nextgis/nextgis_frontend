@@ -31,13 +31,14 @@
       baseUrl: 'http://demo.nextgis.com',
       target: map,
       qmsId: 487,
-      // bound: [71, 182, 46, 14] // Russia
-      bound: [54.76, 35.067, 54.768, 35.086]
+      bound: [71, 182, 46, 14]
     });
 
     ngwUploader.addNgwLayer({
       id: 4005,
-    })
+    }).then(function() {
+      ngwUploader.zoomToLayer(4005);
+    });
 
   </script>
 
