@@ -12,7 +12,7 @@ export function onMapLoad() {
       if (self.isLoaded) {
         originalMethod.apply(this, args);
       } else {
-        self.webMap.emitter.once('build-map', () => {
+        self.webMap.emitter.once('map:created', () => {
           originalMethod.apply(this, args);
         });
       }

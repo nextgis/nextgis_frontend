@@ -4,10 +4,17 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Ngw Leafet Example</title>
+  <title>Ngw Leaflet Example</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    html, body, #map {
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body,
+    #map {
       width: 100%;
       height: 100%;
     }
@@ -21,11 +28,16 @@
   <script>
 
     var ngwUploader = new NgwLeaflet({
-      baseUrl: 'http://dev.nextgis.com/sandbox',
+      baseUrl: 'http://demo.nextgis.com',
       target: map,
-      qmsId: 465,
-      bounds: [35.067, 54.76, 35.086, 54.768]
+      qmsId: 487,
+      // bound: [71, 182, 46, 14] // Russia
+      bound: [54.76, 35.067, 54.768, 35.086]
     });
+
+    ngwUploader.addNgwLayer({
+      id: 4005,
+    })
 
   </script>
 

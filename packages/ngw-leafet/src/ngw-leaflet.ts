@@ -1,19 +1,25 @@
 import { WebMap } from '@nextgis/webmap';
 import { LeafletMapAdapter } from '@nextgis/leaflet-map-adapter';
 import { QmsKit } from '@nextgis/qms-kit';
+// import { LeafletMapAdapter } from '../../../nextgisweb_frontend/packages/leaflet-map-adapter/src/LeafletMapAdapter';
 
 import 'leaflet/dist/leaflet.css';
 import { onMapLoad } from './decorators';
+import { NgwImageAdapter } from './ngw-image-adapter';
+import { fixUrlStr } from './utils';
 
 export interface MapOptions {
   target: string;
   qmsId: number;
   baseUrl: string;
-  bound: [number, number, number, number];
+  center?: [number, number];
+  zoom?: number;
+  bound?: [number, number, number, number];
 }
 
 export interface NgwLayerOptions {
   id: number;
+  adapter: 'IMAGE' | 'TILE';
 }
 
 export default class NgwLeaflet {
@@ -22,7 +28,6 @@ export default class NgwLeaflet {
     target: 'map',
     qmsId: 465,
     baseUrl: 'http://dev.nextgis.com/sandbox',
-    bound: [-90, -180, 90, 180]
   };
 
   webMap = new WebMap({
@@ -41,14 +46,32 @@ export default class NgwLeaflet {
   }
 
   fit() {
-    this.webMap.map.fit(this.options.bound);
+    const {center, zoom, bound} = this.options;
+    if (center) {
+      this.webMap.map.setCenter(center);
+      if (zoom) {
+        this.webMap.map.setZoom(zoom);
+      }
+    } else if (bound) {
+      this.webMap.map.fit(bound);
+    }
   }
 
   @onMapLoad()
-  addNgwLayer(adapter, options: NgwLayerOptions) {
-    if (adapter === 'TILE') {
-      const url = this.options.baseUrl + '/api/component/render/tile?z={z}&x={x}&y={y}&resource=' + options.id;
-      this.webMap.map.addLayer(adapter, {url}).then((layer) => {
+  addNgwLayer(options: NgwLayerOptions) {
+    const adapter = options.adapter || 'IMAGE';
+    if (adapter === 'IMAGE') {
+      const url = fixUrlStr(this.options.baseUrl + '/api/component/render/image');
+      this.webMap.map.addLayer(NgwImageAdapter, { url, id: String(options.id) }).then((layer) => {
+        this.webMap.map.showLayer(layer.name);
+      });
+    } else if (adapter === 'TILE') {
+      const url = fixUrlStr(
+        this.options.baseUrl +
+        '/api/component/render/tile?z={z}&x={x}&y={y}&resource=' +
+        options.id
+      );
+      this.webMap.map.addLayer(adapter, { url }).then((layer) => {
         this.webMap.map.showLayer(layer.name);
       });
     } else {
@@ -69,7 +92,9 @@ export default class NgwLeaflet {
       }
 
       this.fit();
-
+      this.webMap.emitter.emit('map:created');
+      // @ts-ignore
+      window.lmap = this.webMap.map.map;
     });
   }
 
