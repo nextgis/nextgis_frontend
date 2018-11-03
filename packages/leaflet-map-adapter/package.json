@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/leaflet-map-adapter",
-  "version": "0.3.0",
+  "version": "0.3.5",
   "description": "",
   "main": "lib/leaflet-map-adapter.js",
   "types": "lib/leaflet-map-adapter.d.ts",
