@@ -52,7 +52,7 @@
         addTimestampToName: true
       }).then(function (newStyle) {
         map.addNgwLayer({ id: newStyle.id }).then(function () {
-          ngwUploader.zoomToLayer(newStyle.id);
+          map.zoomToLayer(newStyle.id);
         });
       });
     });
