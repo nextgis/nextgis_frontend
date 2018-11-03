@@ -1,4 +1,5 @@
 import { WebMap } from '@nextgis/webmap';
+import { NgwConnector } from '@nextgis/ngw-connector';
 import 'leaflet/dist/leaflet.css';
 export interface MapOptions {
     target: string;
@@ -16,9 +17,13 @@ export default class NgwLeaflet {
     options: MapOptions;
     webMap: WebMap<any>;
     isLoaded: boolean;
+    connector: NgwConnector;
+    private _ngwLayers;
     constructor(options: MapOptions);
     fit(): void;
-    addNgwLayer(options: NgwLayerOptions): void;
+    addNgwLayer(options: NgwLayerOptions): any;
+    zoomToLayer(id: string | number): Promise<void>;
+    private _fitNgwLayerExtend;
     private _createWebMap;
     private _addControls;
 }
