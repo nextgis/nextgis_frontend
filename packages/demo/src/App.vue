@@ -12,14 +12,14 @@
           <v-list-group
             v-if="item.children"
             v-model="item.model"
-            :key="item.text"
-            :prepend-icon="item.model ? item.icon : item['icon-alt']"
+            :key="item.name"
+            :prepend-icon="item.model ? item.icon : item.iconAlt"
             append-icon=""
           >
             <v-list-tile slot="activator">
               <v-list-tile-content>
                 <v-list-tile-title>
-                  {{ item.text }}
+                  {{ item.name }}
                 </v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
@@ -33,18 +33,18 @@
               </v-list-tile-action>
               <v-list-tile-content>
                 <v-list-tile-title>
-                  {{ child.text }}
+                  {{ child.name }}
                 </v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
           </v-list-group>
-          <v-list-tile v-else :key="item.text">
+          <v-list-tile v-else :key="item.name">
             <v-list-tile-action>
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
               <v-list-tile-title>
-                {{ item.text }}
+                {{ item.name }}
               </v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
@@ -68,9 +68,9 @@
       <component
         v-if="current"
         v-bind:is="current.component"
-        :text="current.text"
+        :text="current.name"
         :description="current.description"
-        :source="current.source"
+        :html="current.html"
       >
       </component>
     </v-content>
