@@ -1,6 +1,9 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
+import SendToCodepen from '../../SendToCodepen/SendToCodepen.vue';
 
-@Component
+@Component({
+  components: { SendToCodepen },
+})
 export class HtmlExample extends Vue {
 
   @Prop() html: string;
