@@ -7,8 +7,6 @@ interface Item {
   name: string;
   description?: string;
   html?: string;
-  icon?: string;
-  iconAlt?: string;
   children?: Item[];
   model?: boolean;
   component?: any;
@@ -17,9 +15,12 @@ interface Item {
 @Component
 export class App extends Vue {
 
-  drawer = null;
+  active = [];
+  tree = [];
 
-  current = null;
+  open: string[] = [];
+
+  drawer = null;
 
   items = null;
 
@@ -31,21 +32,39 @@ export class App extends Vue {
     this.$store.dispatch('app/setPage', value);
   }
 
+  get current() {
+
+    if (!this.active.length) { return undefined; }
+    const id = this.active[0];
+    const item = this.findItem(id);
+    return item;
+  }
+
+  findItem(id, _items = this.items) {
+    for (let fry = 0; fry < _items.length; fry++) {
+      const x = _items[fry];
+      if (x.id === id) {
+        return x;
+      }
+      if (x.children) {
+        const find = this.findItem(id, x.children);
+        if (find) {
+          return find;
+        }
+      }
+    }
+
+  }
+
   mounted() {
     const prepareItem = (conf) => {
-
-      const icon = 'keyboard_arrow_up';
-      const iconAlt = 'keyboard_arrow_down';
       const item: Item = {
         id: conf.id,
         name: conf.name,
       };
       if (conf.children) {
         item.model = true;
-        item.icon = icon;
-        item.iconAlt = iconAlt;
         item.children = conf.children.map(prepareItem);
-        console.log(item.children);
       } else {
         item.component = HtmlExample;
         item.html = conf.html;
@@ -53,12 +72,13 @@ export class App extends Vue {
       return item;
     };
     const config = process.env.EXAMPLES;
-    // console.log(JSON.parse(config));
     // @ts-ignore
     this.items = config.map((x) => {
       return prepareItem(x);
     });
-    this.current = this.items[0].children[0];
+    this.open = [this.items[0].id];
+    // this.current = this.items[0].children[0];
+    this.active = [this.items[0].children[0].id];
   }
 
 }

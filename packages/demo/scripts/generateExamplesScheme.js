@@ -8,39 +8,41 @@ function generate(source = '../') {
   const getNameFromPath = (path) => path.split('\\').pop()
 
   readdirSync(source)
-    .map(name => join(source, name))
-    .filter(isDirectory)
-    .forEach((path) => {
-      const examplesPath = join(path, 'examples');
-      const examples = [];
-      if (existsSync(examplesPath) && isDirectory(examplesPath)) {
-        readdirSync(examplesPath)
-          .map(name => join(examplesPath, name))
-          .filter(isDirectory)
-          .forEach((examplePath) => {
-            const id = getNameFromPath(examplePath);
-            if (existsSync(examplePath) && isDirectory(examplePath)) {
-              const htmlPath = join(examplePath, 'index.html');
-              const metaPath = join(examplePath, 'index.json');
-              if (existsSync(htmlPath) && existsSync(metaPath)) {
-                const meta = JSON.parse(readFileSync(metaPath, 'utf8'));
-                const example = {
-                  id,
-                  html: readFileSync(htmlPath, 'utf8'),
-                  name: meta.name,
-                  description: meta.description
+    .forEach((name) => {
+      const libPath = join(source, name);
+      if (isDirectory(libPath)) {
+        const examplesPath = join(libPath, 'examples');
+        const examples = [];
+        if (existsSync(examplesPath) && isDirectory(examplesPath)) {
+          readdirSync(examplesPath)
+            .map(name => join(examplesPath, name))
+            .filter(isDirectory)
+            .forEach((examplePath) => {
+              const id = getNameFromPath(examplePath);
+              if (existsSync(examplePath) && isDirectory(examplePath)) {
+                const htmlPath = join(examplePath, 'index.html');
+                const metaPath = join(examplePath, 'index.json');
+                if (existsSync(htmlPath) && existsSync(metaPath)) {
+                  const meta = JSON.parse(readFileSync(metaPath, 'utf8'));
+                  const example = {
+                    id,
+                    html: readFileSync(htmlPath, 'utf8'),
+                    name: meta.name,
+                    description: meta.description
+                  }
+                  examples.push(example)
                 }
-                examples.push(example)
               }
-            }
-          });
-      }
-      if (examples.length) {
-        const item = {
-          name: getNameFromPath(path),
-          children: examples
-        };
-        items.push(item);
+            });
+        }
+        if (examples.length) {
+          const item = {
+            name,
+            id: name,
+            children: examples
+          };
+          items.push(item);
+        }
       }
     });
   return items;
