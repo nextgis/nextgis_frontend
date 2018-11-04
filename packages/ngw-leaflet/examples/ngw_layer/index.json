@@ -1,4 +1,4 @@
 {
-  "name": "NGW Leaflet - add layer from cloud",
+  "name": "Add layer from NGW Cloud",
   "description": "Example showing how to create ngw-leaflet map and add some image layer from cloud"
 }
