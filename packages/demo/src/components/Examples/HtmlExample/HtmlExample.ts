@@ -3,13 +3,13 @@ import { Vue, Component, Prop } from 'vue-property-decorator';
 @Component
 export class HtmlExample extends Vue {
 
-  @Prop() source: string;
+  @Prop() html: string;
   @Prop() text: string;
   @Prop() description: string;
 
   mounted() {
-    this._writeIFrame(this.source);
-    this.$watch('source', (newVal) => {
+    this._writeIFrame(this.html);
+    this.$watch('html', (newVal) => {
       this._writeIFrame(newVal);
     });
   }

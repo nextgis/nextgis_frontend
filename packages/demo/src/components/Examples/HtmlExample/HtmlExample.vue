@@ -8,7 +8,7 @@
     </div>
 
     <div>
-      <pre v-highlightjs="source"><code class="html"></code></pre>
+      <pre v-highlightjs="html"><code class="html"></code></pre>
     </div>
   </div>
 </template>

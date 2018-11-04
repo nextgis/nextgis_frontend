@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TSLintPlugin = require('tslint-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin');
+const generateExamples = require('./scripts/generateExamplesScheme');
 const utils = require('../../build/utils');
 const package = require('./package.json');
 const path = require('path');
@@ -60,7 +61,8 @@ module.exports = (env, argv) => {
       files: ['./src/**/*.ts']
     }),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(argv.mode || 'development')
+      'process.env.NODE_ENV': JSON.stringify(argv.mode || 'development'),
+      'process.env.EXAMPLES':  JSON.stringify(generateExamples('../'))
     }),
 
     new HtmlWebpackPlugin({
