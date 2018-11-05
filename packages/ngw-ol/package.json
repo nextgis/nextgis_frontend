@@ -1,14 +1,13 @@
 {
-  "name": "@nextgis-apps/ngw-leaflet",
+  "name": "@nextgis-apps/ngw-ol",
   "version": "0.1.4",
   "description": "",
-  "main": "lib/ngw-leaflet.js",
-  "types": "lib/ngw-leaflet.d.ts",
+  "main": "lib/ngw-ol.js",
+  "types": "lib/ngw-ol.d.ts",
   "dependencies": {
     "@nextgis-apps/ngw-map": "^0.1.4",
-    "@nextgis/leaflet-map-adapter": "^0.3.5",
-    "leaflet": "^1.3.4",
-    "leaflet.wms": "^0.2.0"
+    "@nextgis/ol-map-adapter": "^0.3.6",
+    "ol": "^5.2.0"
   },
   "devDependencies": {
     "@types/events": "^1.2.0",
@@ -44,7 +43,8 @@
     "NextGIS",
     "MAP",
     "NGW",
-    "API"
+    "API",
+    "OL"
   ],
   "author": "NextGIS",
   "directories": {
@@ -53,6 +53,5 @@
   "files": [
     "lib"
   ],
-  "license": "GPL-3.0",
-  "gitHead": "b90045b438f39d1300b5950cdbfc16415355729d"
+  "license": "GPL-3.0"
 }
