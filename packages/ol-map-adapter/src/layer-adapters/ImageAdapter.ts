@@ -21,7 +21,7 @@ export class ImageAdapter implements LayerAdapter {
     const source = new ImageWMS({
       url: options.url,
       params: {
-        resource: options.layer_style_id,
+        resource: options.layer_style_id || options.id,
       },
       ratio: 1,
       imageLoadFunction: (image, src) => {
