@@ -6,9 +6,10 @@ function generate(source = '../') {
   const items = [];
   const isDirectory = (source) => lstatSync(source).isDirectory();
   const getIdFromPath = (id) => {
-    id = id.replace(/\.\\/g, '');
-    id = id.replace(/\\/g, '-');
+    id = id.replace(/\.[/\\\\]/g, '');
+    id = id.replace(/[/\\\\]/g, '-');
     id = id.replace(/\./g, '');
+    console.log(id);
     return id;
   }
 
