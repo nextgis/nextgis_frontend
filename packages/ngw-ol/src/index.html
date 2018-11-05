@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Ngw Layer | Ol Example</title>
+  <title>Ngw Ol Example</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     * {
@@ -19,17 +19,16 @@
       height: 100%;
     }
   </style>
-
 </head>
 
 <body>
 
   <div id='map'></div>
-  <script src="https://unpkg.com/@nextgis-apps/ngw-leaflet@latest"></script>
+
   <script>
 
-    var ngwMap = new NgwLeaflet({
-      baseUrl: 'https://demo.nextgis.com',
+    var ngwMap = new NgwOl({
+      baseUrl: 'http://demo.nextgis.com',
       target: map,
       qmsId: 487,
       bounds: [71, 182, 46, 14]
@@ -37,7 +36,7 @@
 
     ngwMap.addNgwLayer({
       id: 4005,
-    }).then(function () {
+    }).then(function() {
       ngwMap.zoomToLayer(4005);
     });
 
