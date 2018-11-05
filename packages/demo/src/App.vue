@@ -25,7 +25,7 @@
     >
       <v-toolbar-title class="ml-0 pl-3">
         <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-        <span class="hidden-sm-and-down">NextGIS Frontend Examples</span>
+        <span class="">NextGIS Frontend Examples</span>
       </v-toolbar-title>
 
 

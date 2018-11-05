@@ -30,8 +30,9 @@ export class SendToCodepen extends Vue {
       const match = html.match(re);
       if (match && match.length) {
         html = html.replace(match[0], '');
-        return match[1];
+        return match[1] || '';
       }
+      return '';
     };
     const js = parseTag('script').trim();
     const css = parseTag('style').trim();

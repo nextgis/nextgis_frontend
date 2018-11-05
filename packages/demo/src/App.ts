@@ -1,6 +1,7 @@
-import { Vue, Component, } from 'vue-property-decorator';
+import { Vue, Component, Watch } from 'vue-property-decorator';
 import { AppPages } from './store/modules/app';
 import HtmlExample from './components/Examples/HtmlExample/HtmlExample.vue';
+import { watch } from 'fs';
 
 interface Item {
   id?: string;
@@ -10,6 +11,7 @@ interface Item {
   children?: Item[];
   model?: boolean;
   component?: any;
+  _parent?: Item;
 }
 
 @Component
@@ -24,19 +26,17 @@ export class App extends Vue {
 
   items = null;
 
-  get page(): AppPages {
-    return this.$store.state.app.page;
-  }
-
-  set page(value: AppPages) {
-    this.$store.dispatch('app/setPage', value);
+  @Watch('$route')
+  onPathChange(to, from) {
+    console.log(to, from);
+    this._setActive();
   }
 
   get current() {
-
     if (!this.active.length) { return undefined; }
     const id = this.active[0];
     const item = this.findItem(id);
+    this.$router.push('/' + item.id);
     return item;
   }
 
@@ -53,21 +53,22 @@ export class App extends Vue {
         }
       }
     }
-
   }
 
   mounted() {
-    const prepareItem = (conf) => {
+    const prepareItem = (conf, _parent?) => {
       const item: Item = {
         id: conf.id,
         name: conf.name,
+        description: conf.description
       };
       if (conf.children) {
         item.model = true;
-        item.children = conf.children.map(prepareItem);
+        item.children = conf.children.map((i) => prepareItem(i, item));
       } else {
         item.component = HtmlExample;
         item.html = conf.html;
+        item._parent = _parent;
       }
       return item;
     };
@@ -76,9 +77,23 @@ export class App extends Vue {
     this.items = config.map((x) => {
       return prepareItem(x);
     });
-    this.open = [this.items[0].id];
-    // this.current = this.items[0].children[0];
-    this.active = [this.items[0].children[0].id];
+    this._setActive();
   }
 
+  _setActive() {
+    const id = this.$route.params && this.$route.params.id;
+    const treeItem = id && this.findItem(id);
+    if (treeItem) {
+      const parents = [];
+      let parent = treeItem._parent;
+      while (parent) {
+        parents.push(parent.id);
+        parent = parent._parent;
+      }
+      this.open = parents;
+      this.active = [treeItem.id];
+    } else {
+      this.$router.push('/' + this.items[0].children[0].id);
+    }
+  }
 }
