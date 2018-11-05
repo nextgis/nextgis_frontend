@@ -6,6 +6,7 @@
   "types": "lib/ngw-map.d.ts",
   "dependencies": {
     "@nextgis/ngw-connector": "^0.3.4",
+    "@nextgis/ngw-kit": "^0.3.4",
     "@nextgis/qms-kit": "^0.3.4",
     "@nextgis/webmap": "^0.3.0"
   },
@@ -51,5 +52,6 @@
   "files": [
     "lib"
   ],
-  "license": "GPL-3.0"
+  "license": "GPL-3.0",
+  "gitHead": "defa75f89891d726891d02ce6883d8c81210cb70"
 }

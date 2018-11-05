@@ -590,6 +590,13 @@
   resolved "https://registry.yarnpkg.com/@nextgis/ngw-connector/-/ngw-connector-0.3.4.tgz#5f00bcf470ad7f96d987086adc1e280c3ad66cf9"
   integrity sha512-n32uv4MtdhVRAXFmIuejl9Zq26Jka4dPQGFTeqxWlKO5q6Jpt09PvqZ7aRrUZBZWMUSsfEL7+upsBZ1bpDPOMA==
 
+"@nextgis/ngw-kit@^0.3.4":
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/@nextgis/ngw-kit/-/ngw-kit-0.3.4.tgz#e33b4616095362a156912fb318e93bddcac3bc87"
+  integrity sha512-xP4xmZpAbMgs46zqaYreYVK/gZCsxZuyOPvp8rRbeTl01xtNlmKhm7mB+bx8MYNttMiLEi46L5Ic1FkrCm40ZQ==
+  dependencies:
+    "@nextgis/ngw-connector" "^0.3.4"
+
 "@nextgis/ol-map-adapter@^0.3.6":
   version "0.3.6"
   resolved "https://registry.yarnpkg.com/@nextgis/ol-map-adapter/-/ol-map-adapter-0.3.6.tgz#315603ba52f3ee7ffe40a67470ea51a3ab61f6ef"

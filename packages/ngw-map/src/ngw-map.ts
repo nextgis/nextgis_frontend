@@ -1,6 +1,7 @@
-import { WebMap, MapAdapter } from '@nextgis/webmap';
+import { WebMap, MapAdapter, StarterKit } from '@nextgis/webmap';
 import { NgwConnector } from '@nextgis/ngw-connector';
 import { QmsKit } from '@nextgis/qms-kit';
+import { NgwKit } from '@nextgis/ngw-kit';
 // import { LeafletMapAdapter } from '../../../nextgisweb_frontend/packages/leaflet-map-adapter/src/LeafletMapAdapter';
 
 import 'leaflet/dist/leaflet.css';
@@ -11,6 +12,7 @@ import { fixUrlStr } from './utils';
 export interface MapOptions {
   target: string;
   qmsId: number;
+  webmapId?: number;
   baseUrl: string;
   center?: [number, number];
   zoom?: number;
@@ -24,8 +26,8 @@ export interface NgwLayerOptions {
 
 export default class NgwMap {
 
-  static utils = {fixUrlStr};
-  static decorators = {onMapLoad};
+  static utils = { fixUrlStr };
+  static decorators = { onMapLoad };
 
   options: MapOptions = {
     target: 'map',
@@ -42,9 +44,16 @@ export default class NgwMap {
   constructor(mapAdapter: MapAdapter, options: MapOptions) {
     this.options = { ...this.options, ...options };
     this.connector = new NgwConnector({ baseUrl: this.options.baseUrl });
+    const kits: StarterKit[] = [new QmsKit()];
+    if (this.options.webmapId) {
+      kits.push(new NgwKit({
+        baseUrl: this.options.baseUrl,
+        resourceId: this.options.webmapId
+      }));
+    }
     this.webMap = new WebMap({
       mapAdapter,
-      starterKits: [new QmsKit()]
+      starterKits: kits
     });
     this._createWebMap().then(() => {
       this._addControls();

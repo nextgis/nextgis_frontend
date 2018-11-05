@@ -5,7 +5,12 @@ const { join } = require('path');
 function generate(source = '../') {
   const items = [];
   const isDirectory = (source) => lstatSync(source).isDirectory();
-  const getNameFromPath = (path) => path.split('\\').pop()
+  const getIdFromPath = (id) => {
+    id = id.replace(/\.\\/g, '');
+    id = id.replace(/\\/g, '-');
+    id = id.replace(/\./g, '');
+    return id;
+  }
 
   readdirSync(source)
     .forEach((name) => {
@@ -18,7 +23,7 @@ function generate(source = '../') {
             .map(name => join(examplesPath, name))
             .filter(isDirectory)
             .forEach((examplePath) => {
-              const id = getNameFromPath(examplePath);
+              const id = getIdFromPath(examplePath);
               if (existsSync(examplePath) && isDirectory(examplePath)) {
                 const htmlPath = join(examplePath, 'index.html');
                 const metaPath = join(examplePath, 'index.json');
@@ -38,7 +43,7 @@ function generate(source = '../') {
         if (examples.length) {
           const item = {
             name,
-            id: name,
+            id: libPath,
             children: examples
           };
           items.push(item);
