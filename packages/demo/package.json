@@ -47,7 +47,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --progress --open --hot",
-    "clean": "rimraf ./lib",
+    "clean": "rimraf ./dist",
     "dev": "npm run clean && webpack --config ./webpack.config.js --progress",
     "build": "npm run dev -- --mode=production",
     "prod": "npm run build",
