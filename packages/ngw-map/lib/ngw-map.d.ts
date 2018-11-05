@@ -6,6 +6,7 @@ import { fixUrlStr } from './utils';
 export interface MapOptions {
     target: string;
     qmsId: number;
+    webmapId?: number;
     baseUrl: string;
     center?: [number, number];
     zoom?: number;

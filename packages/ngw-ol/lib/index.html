@@ -28,16 +28,9 @@
   <script>
 
     var ngwMap = new NgwOl({
-      baseUrl: 'http://demo.nextgis.com',
+      baseUrl: 'https://demo.nextgis.com',
       target: map,
-      qmsId: 487,
-      bounds: [71, 182, 46, 14]
-    });
-
-    ngwMap.addNgwLayer({
-      id: 4005,
-    }).then(function() {
-      ngwMap.zoomToLayer(4005);
+      webmapId: 3985
     });
 
   </script>
