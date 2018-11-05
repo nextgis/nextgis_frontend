@@ -48,7 +48,7 @@
             var source = new ImageWMS({
                 url: options.url,
                 params: {
-                    resource: options.layer_style_id,
+                    resource: options.layer_style_id || options.id,
                 },
                 ratio: 1,
                 imageLoadFunction: function (image, src) {
