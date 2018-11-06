@@ -75,7 +75,7 @@ export default class NgwUploader {
     createResource(meta: any, name: string, options: RasterUploadOptions): Promise<{
         [x: string]: any;
     }>;
-    createStyle(newRes: any, name: string): Promise<{
+    createStyle(newRes: any, name?: string): Promise<{
         [x: string]: any;
     }>;
     createWms(newStyle: any, name?: string): Promise<{

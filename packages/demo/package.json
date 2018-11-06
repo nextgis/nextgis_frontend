@@ -19,7 +19,7 @@
     "vuex-type-helper": "^1.2.0"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.117",
+    "@types/lodash": "^4.14.118",
     "clean-webpack-plugin": "^0.1.19",
     "compression-webpack-plugin": "^2.0.0",
     "css-loader": "^1.0.1",
@@ -40,7 +40,7 @@
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.5.17",
     "vuetify-loader": "^1.0.6",
-    "webpack": "^4.25.0",
+    "webpack": "^4.25.1",
     "webpack-bundle-analyzer": "^3.0.3",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10"

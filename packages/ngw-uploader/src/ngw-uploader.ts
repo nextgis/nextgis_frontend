@@ -123,7 +123,7 @@ export default class NgwUploader {
       return this.createResource(meta, name, options).then((newRes) => {
         if (newRes) {
           newRes.name = newRes.name || options.name;
-          return newRes;
+          return this.createStyle(newRes);
         }
         return Promise.reject('No resource');
       });
@@ -153,7 +153,8 @@ export default class NgwUploader {
   }
 
   @evented({ status: 'create-style', template: 'style creation for resource ID {id}' })
-  createStyle(newRes, name: string) {
+  createStyle(newRes, name?: string) {
+    name = name || newRes.name || newRes.id;
     const styleData = {
       resource: {
         cls: 'raster_style',
@@ -165,12 +166,15 @@ export default class NgwUploader {
         },
       },
     };
-    return this.connector.post('resource.collection', { data: styleData });
+    return this.connector.post('resource.collection', { data: styleData }).then((newStyle) => {
+      newStyle.name = newStyle.name || name;
+      return newStyle;
+    });
   }
 
   @evented({ status: 'create-wms', template: 'wms creation for resource ID {id}' })
   createWms(newStyle, name?: string) {
-    name = name || newStyle.name || 'wmsserver_service_for_' + newStyle.id;
+    name = name || newStyle.name || newStyle.id;
     const wmsData = {
       resource: {
         cls: 'wmsserver_service',
