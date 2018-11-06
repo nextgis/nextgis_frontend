@@ -6,6 +6,16 @@ export interface UploadInputOptions {
     name?: string;
     parentId?: number;
     addTimestampToName?: boolean;
+    success?: (newRes: ResourceCreateResp) => void;
+    error?: (er: Error) => void;
+    createName?: (name: string) => string;
+}
+interface ResourceCreateResp {
+    id: number;
+    name?: string;
+    parent?: {
+        id: number;
+    };
 }
 export interface NgwUploadOptions extends NgwConnectorOptions {
     baseUrl?: string;
@@ -41,6 +51,7 @@ export interface RasterUploadOptions {
     parentId?: number;
     onProgress?: (percentComplete: number) => void;
     addTimestampToName?: boolean;
+    createName?: (name: string) => string;
 }
 export interface RespError {
     exception: 'ValidationError';
@@ -67,8 +78,9 @@ export default class NgwUploader {
     createStyle(newRes: any, name: string): Promise<{
         [x: string]: any;
     }>;
-    createWms(newStyle: any, name: string): Promise<{
+    createWms(newStyle: any, name?: string): Promise<{
         [x: string]: any;
     }>;
     fileUpload(file: File, options?: RasterUploadOptions): Promise<any>;
 }
+export {};
