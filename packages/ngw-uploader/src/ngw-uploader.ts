@@ -8,6 +8,15 @@ export interface UploadInputOptions {
   name?: string;
   parentId?: number;
   addTimestampToName?: boolean;
+  success?: (newRes: ResourceCreateResp) => void;
+  error?: (er: Error) => void;
+  createName?: (name: string) => string;
+}
+
+interface ResourceCreateResp {
+  id: number;
+  name?: string;
+  parent?: { id: number };
 }
 
 export interface NgwUploadOptions extends NgwConnectorOptions {
@@ -46,6 +55,7 @@ export interface RasterUploadOptions {
   parentId?: number;
   onProgress?: (percentComplete: number) => void;
   addTimestampToName?: boolean;
+  createName?: (name: string) => string;
 }
 
 export interface RespError {
@@ -86,9 +96,16 @@ export default class NgwUploader {
     input.innerHTML = options.html;
 
     input.addEventListener('change', () => {
-      this.uploadRaster(input.files[0], options).then((newStyle) => {
-        this.createWms(newStyle, options.name);
-      });
+      const uploadPromise = this.uploadRaster(input.files[0], options);
+      if (options.success) {
+        uploadPromise.then(options.success);
+      }
+      if (options.error) {
+        uploadPromise.then(options.error);
+      }
+      // .then((newStyle) => {
+      //   this.createWms(newStyle, options.name);
+      // });
     });
 
     return input;
@@ -97,13 +114,16 @@ export default class NgwUploader {
   uploadRaster(file: File, options: RasterUploadOptions): Promise<any> {
     return this.fileUpload(file, options).then((meta) => {
       let name = options.name || meta.name;
-      if (options.addTimestampToName) {
+      if (options.createName) {
+        name = options.createName(name);
+      } else if (options.addTimestampToName) {
         name += '_' + new Date().toISOString();
       }
       options.name = name;
       return this.createResource(meta, name, options).then((newRes) => {
         if (newRes) {
-          return this.createStyle(newRes, options.name);
+          newRes.name = newRes.name || options.name;
+          return newRes;
         }
         return Promise.reject('No resource');
       });
@@ -149,7 +169,8 @@ export default class NgwUploader {
   }
 
   @evented({ status: 'create-wms', template: 'wms creation for resource ID {id}' })
-  createWms(newStyle, name: string) {
+  createWms(newStyle, name?: string) {
+    name = name || newStyle.name || 'wmsserver_service_for_' + newStyle.id;
     const wmsData = {
       resource: {
         cls: 'wmsserver_service',
@@ -183,7 +204,7 @@ export default class NgwUploader {
     return this.connector.post('file_upload.upload', {
       file,
       onProgress: (percentComplete) => {
-        const message = percentComplete + '% uploaded';
+        const message = percentComplete.toFixed(2) + '% uploaded';
         if (options.onProgress) {
           options.onProgress(percentComplete);
         }

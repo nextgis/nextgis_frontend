@@ -1,0 +1,4 @@
+{
+  "name": "Create WMS service",
+  "description": "Use of additional `createInput`-method parameters for processing the result, error and name formation. Demonstration of creating WMS service from style"
+}

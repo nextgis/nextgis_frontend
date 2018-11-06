@@ -6,7 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Ngw Uploader Example</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
+  <script src="https://unpkg.com/@nextgis-apps/ngw-uploader@latest"></script>
+  <!-- <script type="text/javascript" src="../lib/ngw-uploader.js"></script> -->
 
 <body>
 
@@ -23,27 +24,6 @@
 
     ngwUploader.emitter.on('status:change', function (evt) {
       statusUpload.innerHTML = evt.message;
-      var color;
-      switch (evt.state) {
-        case 'begin':
-          color = 'black';
-          break;
-        case 'progress':
-          color = 'gray';
-          break;
-        case 'end':
-          color = 'green';
-          break;
-        case 'error':
-          if (evt.data.message) {
-            statusUpload.innerHTML += '</br>' + evt.data.message;
-          }
-          color = 'darkred';
-          break;
-        default:
-          color = 'black';
-      }
-      statusUpload.style.color = color;
     });
 
     const createInput = function () {

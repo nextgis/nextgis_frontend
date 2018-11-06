@@ -46,8 +46,27 @@
       statusUpload.style.color = color;
     });
 
-    const input = ngwUploader.createInput({ addTimestampToName: true });
-    uploader.appendChild(input);
+    const createInput = function () {
+      const input = ngwUploader.createInput({
+        // way to change resource name
+        createName: function (name) {
+          return name + '-' + new Date().getTime();
+        },
+        success: function (newStyle) {
+          // refresh input
+          createInput();
+          ngwUploader.createWms(newStyle);
+        },
+        error: function (er) {
+          // refresh input
+          createInput();
+          console.log(er);
+        },
+      });
+      uploader.innerHTML = '';
+      uploader.appendChild(input);
+    }
+    createInput();
   </script>
 
 </body>
