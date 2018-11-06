@@ -28,7 +28,6 @@ export class App extends Vue {
 
   @Watch('$route')
   onPathChange(to, from) {
-    console.log(to, from);
     this._setActive();
   }
 

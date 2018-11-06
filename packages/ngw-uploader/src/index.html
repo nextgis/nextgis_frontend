@@ -46,27 +46,16 @@
       statusUpload.style.color = color;
     });
 
-    const createInput = function () {
-      const input = ngwUploader.createInput({
-        // way to change resource name
-        createName: function (name) {
-          return name + '-' + new Date().getTime();
-        },
-        success: function (newStyle) {
-          // refresh input
-          createInput();
-          ngwUploader.createWms(newStyle);
-        },
-        error: function (er) {
-          // refresh input
-          createInput();
-          console.log(er);
-        },
-      });
-      uploader.innerHTML = '';
-      uploader.appendChild(input);
-    }
-    createInput();
+    const input = ngwUploader.createInput({
+      // way to change resource name
+      createName: function (name) {
+        return name + '-' + new Date().getTime();
+      },
+      success: function (newStyle) {
+        ngwUploader.createWms(newStyle);
+      }
+    });
+    uploader.appendChild(input);
   </script>
 
 </body>
