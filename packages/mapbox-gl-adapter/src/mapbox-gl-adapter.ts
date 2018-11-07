@@ -7,6 +7,7 @@ import { EventEmitter } from 'events';
 import { ZoomControl } from './controls/ZoomControl';
 import { CompassControl } from './controls/CompassControl';
 import { AttributionControl } from './controls/AttributionControl';
+import { ImageAdapter } from './layer-adapters/ImageAdapter';
 
 type positions = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
 
@@ -14,6 +15,7 @@ export class MapboxglAdapter implements MapAdapter {
 
   static layerAdapters = {
     TILE: TileAdapter,
+    // IMAGE: ImageAdapter,
     MVT: MvtAdapter,
     OSM: OsmAdapter,
   };
@@ -76,8 +78,10 @@ export class MapboxglAdapter implements MapAdapter {
     // ignore
   }
 
-  fit(extent) {
-    // ignore
+  // [extent_left, extent_bottom, extent_right, extent_top];
+  fit(e: [number, number, number, number]) {
+    // top, left, bottom, right
+    this.map.fitBounds([[e[0], e[1]], [e[2], e[3]]]);
   }
 
   setRotation(angle: number) {
