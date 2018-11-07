@@ -1,4 +1,4 @@
-import NgwMap, { MapOptions, NgwLayerOptions } from '@nextgis-apps/ngw-map';
+import NgwMap, { MapOptions } from '@nextgis-apps/ngw-map';
 import 'leaflet/dist/leaflet.css';
 import { LeafletMapAdapter } from '@nextgis/leaflet-map-adapter';
 
