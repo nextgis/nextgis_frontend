@@ -28,17 +28,23 @@
   <script>
 
     var ngwMap = new NgwLeaflet({
-      baseUrl: 'http://demo.nextgis.com',
+      baseUrl: 'https://demo.nextgis.com',
       target: map,
-      qmsId: 487,
-      bound: [71, 182, 46, 14]
+      webmapId: 3985
     });
 
-    ngwMap.addNgwLayer({
-      id: 4005,
-    }).then(function() {
-      ngwMap.zoomToLayer(4005);
-    });
+    // var ngwMap = new NgwLeaflet({
+    //   baseUrl: 'http://demo.nextgis.com',
+    //   target: map,
+    //   qmsId: 487,
+    //   bounds: [71, 182, 46, 14]
+    // });
+
+    // ngwMap.addNgwLayer({
+    //   id: 4005,
+    // }).then(function() {
+    //   ngwMap.zoomToLayer(4005);
+    // });
 
   </script>
 

@@ -5,10 +5,10 @@
   "main": "lib/ngw-map.js",
   "types": "lib/ngw-map.d.ts",
   "dependencies": {
-    "@nextgis/ngw-connector": "^0.3.4",
-    "@nextgis/ngw-kit": "^0.3.4",
-    "@nextgis/qms-kit": "^0.3.4",
-    "@nextgis/webmap": "^0.3.0"
+    "@nextgis/ngw-connector": "^0.4.0",
+    "@nextgis/ngw-kit": "^0.4.0",
+    "@nextgis/qms-kit": "^0.4.0",
+    "@nextgis/webmap": "^0.4.0"
   },
   "devDependencies": {
     "@types/events": "^1.2.0",
@@ -23,7 +23,7 @@
     "tslint-loader": "^3.6.0",
     "tslint-webpack-plugin": "^1.2.2",
     "typescript": "^3.1.6",
-    "webpack": "^4.24.0",
+    "webpack": "^4.25.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10"
   },
