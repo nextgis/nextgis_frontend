@@ -33,6 +33,17 @@
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     }
 
+    var __assign = function() {
+        __assign = Object.assign || function __assign(t) {
+            for (var s, i = 1, n = arguments.length; i < n; i++) {
+                s = arguments[i];
+                for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+            }
+            return t;
+        };
+        return __assign.apply(this, arguments);
+    };
+
     var ID = 1;
     var BaseAdapter = (function () {
         function BaseAdapter(map, options) {
@@ -75,13 +86,15 @@
         return MvtAdapter;
     }(BaseAdapter));
 
+    var ID$1 = 1;
     var TileAdapter = (function (_super) {
         __extends(TileAdapter, _super);
         function TileAdapter() {
             return _super !== null && _super.apply(this, arguments) || this;
         }
         TileAdapter.prototype.addLayer = function (options) {
-            var opt = Object.assign({}, this.options, options || {});
+            this.name = options.id || 'tile-' + ID$1++;
+            var opt = __assign({}, this.options, (options || {}));
             var tiles;
             if (opt && opt.subdomains) {
                 tiles = opt.subdomains.split('').map(function (x) {
@@ -661,7 +674,8 @@
         };
         MapboxglAdapter.prototype.setZoom = function (zoom) {
         };
-        MapboxglAdapter.prototype.fit = function (extent) {
+        MapboxglAdapter.prototype.fit = function (e) {
+            this.map.fitBounds([[e[0], e[1]], [e[2], e[3]]]);
         };
         MapboxglAdapter.prototype.setRotation = function (angle) {
         };

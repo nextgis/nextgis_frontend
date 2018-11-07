@@ -47,7 +47,8 @@
             if (adapter === 'IMAGE' || adapter === 'TILE') {
                 var url = baseUrl;
                 var addLayerPromise = void 0;
-                if (adapter === 'IMAGE') {
+                var isImageAllowed = webMap.map.layerAdapters ? webMap.map.layerAdapters.IMAGE : true;
+                if (adapter === 'IMAGE' && isImageAllowed) {
                     url += '/api/component/render/image';
                     addLayerPromise = webMap.map.addLayer(adapter, {
                         url: url,
@@ -58,7 +59,7 @@
                 }
                 else if (adapter === 'TILE') {
                     url += '/api/component/render/tile?z={z}&x={x}&y={y}&resource=' + options.id;
-                    addLayerPromise = webMap.map.addLayer(adapter, { url: url });
+                    addLayerPromise = webMap.map.addLayer(adapter, { url: url, id: String(options.id) });
                 }
                 return addLayerPromise;
             }
