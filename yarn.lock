@@ -626,19 +626,19 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
-"@nextgis/leaflet-map-adapter@^0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@nextgis/leaflet-map-adapter/-/leaflet-map-adapter-0.4.0.tgz#95cd7b70db13df57763fc0e5bd0a73633a01172b"
-  integrity sha512-qp3RLX9mjRz9mKWh4FmjOflKBu1NY/o7FuVzISlzn6skMW2FY3lgFNREkV/wegsRARJsZOeB+LE+5J+yAVEmPg==
+"@nextgis/leaflet-map-adapter@^0.4.2":
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/@nextgis/leaflet-map-adapter/-/leaflet-map-adapter-0.4.2.tgz#0f599358286705eb6c24dc78c7d0bbb4a29d899a"
+  integrity sha512-+oxlly4f/QzZXTkGjSikEHLeBkYk7QGVcxlLuP/tgMoap8z1/92n+W75rrp2oVVikM0erRi0gVoOisV+tgFaXA==
   dependencies:
     "@types/leaflet" "^1.2.11"
     leaflet "^1.3.4"
     leaflet.wms "^0.2.0"
 
-"@nextgis/mapbox-gl-adapter@^0.4.1":
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/@nextgis/mapbox-gl-adapter/-/mapbox-gl-adapter-0.4.1.tgz#fa2f6f10dd36a8dddc938e782d8708a70bc76d9a"
-  integrity sha512-KgdG1FI8rZsw3r61/z9Iob1K7fkZbGruwjaA5tALJI6/4RNxeJQTs4jVfO7bCq73/k6HVs1Xq8ptXvbNvGRymw==
+"@nextgis/mapbox-gl-adapter@^0.4.2":
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/@nextgis/mapbox-gl-adapter/-/mapbox-gl-adapter-0.4.2.tgz#0c0415dee21d8ffe910d4ff7638673a94b746f89"
+  integrity sha512-kLTfNMy8pWIuYdIr+FO7AFsYeiZU5LIrbq6J8Dv/V6BHmc9fbY8vP3M/lbB8pkvaKKDY0xxT1gXQN8bybGrjAg==
   dependencies:
     mapbox-gl "^0.50.0"
 
@@ -647,31 +647,31 @@
   resolved "https://registry.yarnpkg.com/@nextgis/ngw-connector/-/ngw-connector-0.4.0.tgz#4a212c3c36654826736e43ff53b1fa70853bbc03"
   integrity sha512-luNKM064ucnGzu+VwclJCzApG8C3KvFRh7a4J/H50xciDtpS5II+IQtH4XGxi1UXZJsx+iE3/tJKgpqjLeR2Yg==
 
-"@nextgis/ngw-kit@^0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@nextgis/ngw-kit/-/ngw-kit-0.4.0.tgz#b93cd6bc1357e6aed92647fb89546868fdf7dac3"
-  integrity sha512-2iOP4MILTjB3L+t33Z21o8Bu2XcWadlsRtUfM6n6qo4zCVXhFAqsGTGUO06VasAGRUC7unXGerZ5xm6t94gjAQ==
+"@nextgis/ngw-kit@^0.4.2":
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/@nextgis/ngw-kit/-/ngw-kit-0.4.2.tgz#f1dfba676dd918005dcbccc80674867800f7d582"
+  integrity sha512-V5dw458K83m0TZdDdpow4IOJCPZgxbmOXJ3TE+MR6UJsu1V66rFZGj8pbq+Lez1JE3Al2n4CwGv/rlZepzVV0w==
   dependencies:
     "@nextgis/ngw-connector" "^0.4.0"
 
-"@nextgis/ol-map-adapter@^0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@nextgis/ol-map-adapter/-/ol-map-adapter-0.4.0.tgz#eea379aacb79dcb64104f1bcd74f335ca4000253"
-  integrity sha512-xdS4IAKM2DODqqQldctIR2XRanogbfAG8IUpB2Ham6y6EHHPiMaHSY/LLpDg7hB0u4JUU6TATGCncz0+ICO6XA==
+"@nextgis/ol-map-adapter@^0.4.2":
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/@nextgis/ol-map-adapter/-/ol-map-adapter-0.4.2.tgz#44e09b5507f7ad95a2f874aaebf0d7b5f6524f18"
+  integrity sha512-o34XplwqUA8mO/WDblRijswciOwxIbBKLrFubD1CLUmMRCdGB1w7ysdM9nfQJBMzENQMgQARpDWXJRu6lcKDtw==
   dependencies:
     ol "^5.2.0"
 
-"@nextgis/qms-kit@^0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@nextgis/qms-kit/-/qms-kit-0.4.0.tgz#a97865fb1faf4cf8d485d072e7c8258a0c3d3270"
-  integrity sha512-TeuzL2DdXhT7OSrthdCnBB+QnYHCXL8SFVRYpqfkC/c9wpNkusoNpERz0XU6xJoy+xK56LwvrHzJKoMhah0LoA==
+"@nextgis/qms-kit@^0.4.2":
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/@nextgis/qms-kit/-/qms-kit-0.4.2.tgz#9d73859314fc72582bf706311d7d795753e45c32"
+  integrity sha512-XdvbuvtcqFEtxobZiy8vUKmCg/TEjhsixrUBSzmbnoyAjEE/Y0p7YcGdVe5C0lC0F9SuvqrgF7/brdWxWweBCA==
   dependencies:
     "@nextgis/ngw-connector" "^0.4.0"
 
-"@nextgis/webmap@^0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@nextgis/webmap/-/webmap-0.4.0.tgz#3331bda8cfd7c139f168145181ddaaf1ee55453d"
-  integrity sha512-/xqs153lDkqHEBFoQgEXw3NgB7wNrpy1Ea6hfucj3QsLYq859woY9TR5n75uWj1xRon72k3v2pW7GgyTWCb55w==
+"@nextgis/webmap@^0.4.2":
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/@nextgis/webmap/-/webmap-0.4.2.tgz#cac189f704f372f22ac151516266a56a206ee2ac"
+  integrity sha512-gtSTkGlRMgKo8LvN6/Kec4rgS8D7xOQqNgBkThreLkullGZCIGxAUJSqKyauhXaPX4LAMO3r97oMergkpKwhWw==
   dependencies:
     "@types/geojson" "^7946.0.4"
 
@@ -702,10 +702,10 @@
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.118.tgz#247bab39bfcc6d910d4927c6e06cbc70ec376f27"
   integrity sha512-iiJbKLZbhSa6FYRip/9ZDX6HXhayXLDGY2Fqws9cOkEQ6XeKfaxB0sC541mowZJueYyMnVUmmG+al5/4fCDrgw==
 
-"@types/node@^10.12.2":
-  version "10.12.2"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.2.tgz#d77f9faa027cadad9c912cd47f4f8b07b0fb0864"
-  integrity sha512-53ElVDSnZeFUUFIYzI8WLQ25IhWzb6vbddNp8UHlXQyU0ET2RhV5zg0NfubzU7iNMh5bBXb0htCzfvrSVNgzaQ==
+"@types/node@^10.12.3":
+  version "10.12.3"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.3.tgz#3918b73ceed484e58367be5acb79d1775239e393"
+  integrity sha512-sfGmOtSMSbQ/AKG8V9xD1gmjquC9awIIZ/Kj309pHb2n3bcRAcGMQv5nJ6gCXZVsneGE4+ve8DXKRCsrg3TFzg==
 
 "@vue/component-compiler-utils@^2.0.0":
   version "2.3.0"
@@ -7763,10 +7763,10 @@ vuetify-loader@^1.0.6:
     gm "^1.23.1"
     loader-utils "^1.1.0"
 
-vuetify@^1.3.5:
-  version "1.3.5"
-  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-1.3.5.tgz#9f0466b83255e8b0aab76a7378039f12bb12f42a"
-  integrity sha512-81otPD6/hTiDGzFWyqATEMgsOsKdj+MLJrgOkR7zmwIDnKBlE04HWhhpTosKPugxI3g+SXdY8ha0cf3WWNhMzA==
+vuetify@^1.3.6:
+  version "1.3.6"
+  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-1.3.6.tgz#aff768363532fb824ee77294de23ee46d20b9c39"
+  integrity sha512-0nwwQbbXU4ZAkJQV9ojMwojXyna0Hjkk5P+8DBPovp3T5H1Nn1Nze2M9zwMt0FgX0TJtgdkV01JRKn3G/xnCng==
 
 vuex-class@^0.3.1:
   version "0.3.1"

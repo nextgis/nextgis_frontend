@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "@types/events": "^1.2.0",
-    "@types/node": "^10.12.2",
+    "@types/node": "^10.12.3",
     "base64-inline-loader": "^1.1.1",
     "css-loader": "^1.0.1",
     "file-loader": "^2.0.0",
@@ -51,5 +51,5 @@
     "lib"
   ],
   "license": "GPL-3.0",
-  "gitHead": "defa75f89891d726891d02ce6883d8c81210cb70"
+  "gitHead": "b0ada99d132188e7dcc80b713b7b3017f38fc078"
 }
