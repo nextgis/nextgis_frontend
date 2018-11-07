@@ -19,30 +19,24 @@
       height: 100%;
     }
   </style>
-
+  <script src="https://unpkg.com/@nextgis-apps/ngw-leaflet@latest"></script>
 </head>
 
 <body>
-
   <div id='map'></div>
-  <script src="https://unpkg.com/@nextgis-apps/ngw-leaflet@latest"></script>
   <script>
-
     var ngwMap = new NgwLeaflet({
       baseUrl: 'https://demo.nextgis.com',
       target: map,
       qmsId: 487,
       bounds: [71, 182, 46, 14]
     });
-
     ngwMap.addNgwLayer({
       id: 4005,
     }).then(function () {
       ngwMap.zoomToLayer(4005);
     });
-
   </script>
-
 </body>
 
 </html>

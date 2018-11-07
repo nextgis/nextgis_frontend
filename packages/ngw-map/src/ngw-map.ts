@@ -2,7 +2,11 @@ import { WebMap, MapAdapter, StarterKit } from '@nextgis/webmap';
 import { NgwConnector } from '@nextgis/ngw-connector';
 import { QmsKit } from '@nextgis/qms-kit';
 import { NgwKit } from '@nextgis/ngw-kit';
-// import { LeafletMapAdapter } from '../../../nextgisweb_frontend/packages/leaflet-map-adapter/src/LeafletMapAdapter';
+
+// import { WebMap, MapAdapter, StarterKit } from '../../../nextgisweb_frontend/packages/webmap/src/webmap';
+// import { NgwConnector } from '../../../nextgisweb_frontend/packages/ngw-connector/src/ngw-connector';
+// import { QmsKit } from '../../../nextgisweb_frontend/packages/qms-kit/src/QmsKit';
+// import { NgwKit } from '../../../nextgisweb_frontend/packages/ngw-kit/src/ngw-kit';
 
 import 'leaflet/dist/leaflet.css';
 import { onMapLoad } from './decorators';
@@ -11,7 +15,7 @@ import { fixUrlStr } from './utils';
 
 export interface MapOptions {
   target: string;
-  qmsId: number;
+  qmsId?: number;
   webmapId?: number;
   baseUrl: string;
   center?: [number, number];
@@ -21,7 +25,7 @@ export interface MapOptions {
 
 export interface NgwLayerOptions {
   id: number;
-  adapter: 'IMAGE' | 'TILE';
+  adapter?: 'IMAGE' | 'TILE';
 }
 
 export default class NgwMap {
@@ -31,7 +35,6 @@ export default class NgwMap {
 
   options: MapOptions = {
     target: 'map',
-    qmsId: 465,
     baseUrl: 'http://dev.nextgis.com/sandbox',
   };
 
@@ -44,7 +47,8 @@ export default class NgwMap {
   constructor(mapAdapter: MapAdapter, options: MapOptions) {
     this.options = { ...this.options, ...options };
     this.connector = new NgwConnector({ baseUrl: this.options.baseUrl });
-    const kits: StarterKit[] = [new QmsKit()];
+    // const kits: StarterKit[] = [new QmsKit()];
+    const kits: any[] = [new QmsKit()];
     if (this.options.webmapId) {
       kits.push(new NgwKit({
         baseUrl: this.options.baseUrl,
@@ -76,23 +80,20 @@ export default class NgwMap {
   /**
    * top, left, bottom, right
    */
-  fitBounds(bound: [number, number, number, number]) {
-    this.webMap.map.fit(bound);
+  fitBounds(bounds: [number, number, number, number]) {
+    const [top, left, bottom, right] = bounds;
+    // [extent_left, extent_bottom, extent_right, extent_top];
+    this.webMap.map.fit([left, bottom, right, top]);
   }
 
   @onMapLoad()
   addNgwLayer(options: NgwLayerOptions) {
-    const adapter = options.adapter || 'IMAGE';
-    if (adapter === 'IMAGE' || adapter === 'TILE') {
-      const url = fixUrlStr(this.options.baseUrl + '/api/component/render/image');
-      return this.webMap.map.addLayer(adapter, { url, id: String(options.id) }).then((layer) => {
-        this._ngwLayers[layer.name] = layer;
-        this.webMap.map.showLayer(layer.name);
-        return layer.name;
-      });
-    } else {
-      throw new Error(adapter + ' not supported yet. Only TILE');
-    }
+    return NgwKit.addNgwLayer(options, this.webMap, this.options.baseUrl).then((layer) => {
+      this._ngwLayers[layer.name] = layer;
+      this.webMap.map.showLayer(layer.name);
+      return layer.name;
+    });
+
   }
 
   zoomToLayer(id: string | number) {
@@ -135,7 +136,7 @@ export default class NgwMap {
       this.fit();
       this.webMap.emitter.emit('map:created');
       // @ts-ignore
-      window.lmap = this.webMap.map.map;
+      // window.lmap = this.webMap.map.map;
     });
   }
 

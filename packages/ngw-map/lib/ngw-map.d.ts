@@ -5,7 +5,7 @@ import { onMapLoad } from './decorators';
 import { fixUrlStr } from './utils';
 export interface MapOptions {
     target: string;
-    qmsId: number;
+    qmsId?: number;
     webmapId?: number;
     baseUrl: string;
     center?: [number, number];
@@ -14,7 +14,7 @@ export interface MapOptions {
 }
 export interface NgwLayerOptions {
     id: number;
-    adapter: 'IMAGE' | 'TILE';
+    adapter?: 'IMAGE' | 'TILE';
 }
 export default class NgwMap {
     static utils: {
@@ -30,8 +30,8 @@ export default class NgwMap {
     _ngwLayers: {};
     constructor(mapAdapter: MapAdapter, options: MapOptions);
     fit(): void;
-    fitBounds(bound: [number, number, number, number]): void;
-    addNgwLayer(options: NgwLayerOptions): Promise<string>;
+    fitBounds(bounds: [number, number, number, number]): void;
+    addNgwLayer(options: NgwLayerOptions): any;
     zoomToLayer(id: string | number): Promise<void>;
     private _fitNgwLayerExtend;
     private _createWebMap;

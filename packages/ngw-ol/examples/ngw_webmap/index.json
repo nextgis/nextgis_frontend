@@ -1,4 +1,4 @@
 {
   "name": "Add webmap from NGW Cloud",
-  "description": "Example showing how to create ngw-leaflet map and add some webmap from cloud"
+  "description": "Example showing how to create ngw-ol map and add some webmap from cloud"
 }

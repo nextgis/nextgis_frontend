@@ -6,9 +6,10 @@
   "types": "lib/ngw-leaflet.d.ts",
   "dependencies": {
     "@nextgis-apps/ngw-map": "^0.1.6",
-    "@nextgis/leaflet-map-adapter": "^0.3.5",
+    "@nextgis/leaflet-map-adapter": "^0.4.0",
     "leaflet": "^1.3.4",
-    "leaflet.wms": "^0.2.0"
+    "leaflet.wms": "^0.2.0",
+    "renamer": "^1.1.0"
   },
   "devDependencies": {
     "@types/events": "^1.2.0",
@@ -24,16 +25,17 @@
     "tslint-loader": "^3.6.0",
     "tslint-webpack-plugin": "^1.2.2",
     "typescript": "^3.1.6",
-    "webpack": "^4.24.0",
+    "webpack": "^4.25.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10"
   },
   "scripts": {
+    "mjs": "tsc -d --outDir ./lib/modules",
     "start": "webpack-dev-server --progress --open --hot",
     "clean": "rimraf ./lib",
     "dev": "npm run clean && webpack --config ./webpack.config.js --progress",
     "build": "npm run dev -- --mode=production",
-    "prod": "npm run build",
+    "prod": "npm run build && npm run mjs",
     "watch": "npm run dev -- --watch"
   },
   "repository": {
@@ -51,8 +53,7 @@
     "lib": "lib"
   },
   "files": [
-    "lib",
-    "src"
+    "lib"
   ],
   "license": "GPL-3.0",
   "gitHead": "defa75f89891d726891d02ce6883d8c81210cb70"
