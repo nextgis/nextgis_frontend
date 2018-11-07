@@ -1,11 +1,11 @@
 {
   "name": "@nextgis-apps/demo-app",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "",
   "private": true,
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
-    "@nextgis-apps/ngw-uploader": "^0.2.1",
+    "@nextgis-apps/ngw-uploader": "^0.2.2",
     "highlight.js": "^9.13.1",
     "vue": "^2.5.17",
     "vue-class-component": "^6.3.2",
