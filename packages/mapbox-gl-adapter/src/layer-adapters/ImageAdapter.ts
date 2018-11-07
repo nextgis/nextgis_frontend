@@ -1,13 +1,11 @@
-import { LayerAdapter } from '@nextgis/webmap';
+import { LayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
 import { BaseAdapter } from './BaseAdapter';
 
-let ID = 1;
+export class ImageAdapter extends BaseAdapter implements LayerAdapter {
 
-export class TileAdapter extends BaseAdapter implements LayerAdapter {
+  addLayer(options?: ImageAdapterOptions): string {
 
-  addLayer(options?): string {
-    this.name = options.id || 'tile-' + ID++;
-    const opt = {...this.options, ...(options || {})};
+    const opt = Object.assign({}, this.options, options || {});
 
     let tiles;
     if (opt && opt.subdomains) {
@@ -28,12 +26,11 @@ export class TileAdapter extends BaseAdapter implements LayerAdapter {
       },
       source: {
         type: 'raster',
-        // point to our third-party tiles. Note that some examples
-        // show a "url" property. This only applies to tilesets with
-        // corresponding TileJSON (such as mapbox tiles).
         tiles,
-        tileSize: opt && opt.tileSize || 256,
+        tileSize: opt && opt.tileSize || 1024,
       },
+      paint: {}
+    // @ts-ignore
     }, options.before);
     return this.name;
   }

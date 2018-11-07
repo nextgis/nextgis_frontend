@@ -41,22 +41,23 @@ export class NgwKit implements StarterKit {
     };
   }
 
-  static addNgwLayer(options: NgwLayerOptions, webMap, baseUrl) {
+  static addNgwLayer(options: NgwLayerOptions, webMap: WebMap, baseUrl) {
     const adapter = options.adapter || 'IMAGE';
     if (adapter === 'IMAGE' || adapter === 'TILE') {
       let url = baseUrl;
       let addLayerPromise;
-      if (adapter === 'IMAGE') {
+      const isImageAllowed = webMap.map.layerAdapters ? webMap.map.layerAdapters.IMAGE : true;
+      if (adapter === 'IMAGE' && isImageAllowed) {
         url += '/api/component/render/image';
         addLayerPromise = webMap.map.addLayer(adapter, {
           url,
           id: String(options.id),
           resourceId: options.id,
-          updateWmsParams: (params) => NgwKit.updateWmsParams(params, options.id )
+          updateWmsParams: (params) => NgwKit.updateWmsParams(params, options.id)
         });
       } else if (adapter === 'TILE') {
         url += '/api/component/render/tile?z={z}&x={x}&y={y}&resource=' + options.id;
-        addLayerPromise = webMap.map.addLayer(adapter, { url });
+        addLayerPromise = webMap.map.addLayer(adapter, { url, id: String(options.id) });
       }
       return addLayerPromise;
     } else {
