@@ -1,11 +1,13 @@
 {
-  "name": "@nextgis-apps/ngw-uploader",
+  "name": "@nextgis-apps/ngw-mapbox",
   "version": "0.2.1",
   "description": "",
-  "main": "lib/ngw-uploader.js",
-  "types": "lib/ngw-uploader.d.ts",
+  "main": "lib/ngw-mapbox.js",
+  "types": "lib/ngw-mapbox.d.ts",
   "dependencies": {
-    "@nextgis/ngw-connector": "^0.4.0"
+    "@nextgis-apps/ngw-map": "^0.2.1",
+    "@nextgis/mapbox-gl-adapter": "^0.4.1",
+    "mapbox-gl": "^0.51.0-beta.2"
   },
   "devDependencies": {
     "@types/events": "^1.2.0",
@@ -26,11 +28,12 @@
     "webpack-dev-server": "^3.1.10"
   },
   "scripts": {
+    "mjs": "tsc -d --outDir ./lib/modules",
     "start": "webpack-dev-server --progress --open --hot",
     "clean": "rimraf ./lib",
     "dev": "npm run clean && webpack --config ./webpack.config.js --progress",
     "build": "npm run dev -- --mode=production",
-    "prod": "npm run build",
+    "prod": "npm run build && npm run mjs",
     "watch": "npm run dev -- --watch"
   },
   "repository": {
@@ -50,6 +53,5 @@
   "files": [
     "lib"
   ],
-  "license": "GPL-3.0",
-  "gitHead": "defa75f89891d726891d02ce6883d8c81210cb70"
+  "license": "GPL-3.0"
 }
