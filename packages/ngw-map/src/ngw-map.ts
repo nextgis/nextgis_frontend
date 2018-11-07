@@ -93,7 +93,6 @@ export default class NgwMap {
       this.webMap.map.showLayer(layer.name);
       return layer.name;
     });
-
   }
 
   zoomToLayer(id: string | number) {
