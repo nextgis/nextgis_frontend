@@ -26,7 +26,7 @@ export declare class NgwKit implements StarterKit {
         size: string;
         timestamp: number;
     };
-    static addNgwLayer(options: NgwLayerOptions, webMap: any, baseUrl: any): any;
+    static addNgwLayer(options: NgwLayerOptions, webMap: WebMap, baseUrl: any): any;
     options: NgwKitOptions;
     url: string;
     resourceId: number;

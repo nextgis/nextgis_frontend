@@ -41,7 +41,7 @@ export declare class MapboxglAdapter implements MapAdapter {
     getContainer(): HTMLElement;
     setCenter(latLng: [number, number]): void;
     setZoom(zoom: number): void;
-    fit(extent: any): void;
+    fit(e: [number, number, number, number]): void;
     setRotation(angle: number): void;
     showLayer(layerName: string): void;
     hideLayer(layerName: string): void;
