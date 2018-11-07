@@ -15,7 +15,7 @@ const input = 'src/leaflet-map-adapter.ts';
 
 export default {
   // external: id => id.indexOf('ol') !== -1 && !(path.isAbsolute(id) || id.startsWith(".")),
-  external: ['leaflet'],
+  external: ['leaflet', 'leaflet.wms'],
   input,
   output: [
     { file: pckg.main, format: 'umd', name: 'LeafletMapAdapter', sourcemap: true, globals }],

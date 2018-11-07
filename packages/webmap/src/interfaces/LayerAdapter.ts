@@ -27,9 +27,14 @@ export interface MarkerAdapterOptions extends AdapterOptions {
   latLng: LatLng;
 }
 
+export interface ImageAdapterOptions extends AdapterOptions {
+  resourceId: string | number;
+  updateWmsParams?: (object) => object;
+}
+
 export interface LayerAdapters {
   'MVT': MvtAdapterOptions;
-  'IMAGE': AdapterOptions;
+  'IMAGE': ImageAdapterOptions;
   'OSM': AdapterOptions;
   'TILE': AdapterOptions;
   'MARKER': MarkerAdapterOptions;
@@ -39,6 +44,7 @@ export interface LayerAdapters {
 
 export interface LayerAdapter<M = any, O = any> {
   name: string;
+  layer?: any;
   map?: M;
   addLayer(options: O): any;
 }

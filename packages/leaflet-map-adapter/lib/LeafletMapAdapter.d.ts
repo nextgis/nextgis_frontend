@@ -5,6 +5,7 @@ import { EventEmitter } from 'events';
 import { TileAdapter } from './layer-adapters/TileAdapter';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 import { AttributionControl } from './controls/Attribution';
+import { ImageAdapter } from './layer-adapters/ImageAdapter';
 interface LayerMem {
     layer: any;
     onMap: boolean;
@@ -16,6 +17,7 @@ export interface LeafletMapAdapterOptions extends MapOptions {
 }
 export declare class LeafletMapAdapter implements MapAdapter {
     static layerAdapters: {
+        IMAGE: typeof ImageAdapter;
         TILE: typeof TileAdapter;
         GEOJSON: typeof GeoJsonAdapter;
     };
@@ -25,6 +27,7 @@ export declare class LeafletMapAdapter implements MapAdapter {
     };
     options: LeafletMapAdapterOptions;
     layerAdapters: {
+        IMAGE: typeof ImageAdapter;
         TILE: typeof TileAdapter;
         GEOJSON: typeof GeoJsonAdapter;
     };

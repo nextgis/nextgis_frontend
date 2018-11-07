@@ -42,13 +42,37 @@
             this.resourceId = options.resourceId;
             this.connector = new ngwConnector.NgwConnector({ baseUrl: this.url, auth: this.options.auth });
         }
+        NgwKit.addNgwLayer = function (options, webMap, baseUrl) {
+            var adapter = options.adapter || 'IMAGE';
+            if (adapter === 'IMAGE' || adapter === 'TILE') {
+                var url = baseUrl;
+                var addLayerPromise = void 0;
+                if (adapter === 'IMAGE') {
+                    url += '/api/component/render/image';
+                    addLayerPromise = webMap.map.addLayer(adapter, {
+                        url: url,
+                        id: String(options.id),
+                        resourceId: options.id,
+                        updateWmsParams: function (params) { return NgwKit.updateWmsParams(params, options.id); }
+                    });
+                }
+                else if (adapter === 'TILE') {
+                    url += '/api/component/render/tile?z={z}&x={x}&y={y}&resource=' + options.id;
+                    addLayerPromise = webMap.map.addLayer(adapter, { url: url });
+                }
+                return addLayerPromise;
+            }
+            else {
+                throw new Error(adapter + ' not supported yet. Only TILE');
+            }
+        };
         NgwKit.prototype.getSettings = function () {
             var _this = this;
             return new Promise(function (resolve) {
                 _this.connector.request('resource.item', { id: _this.resourceId }).then(function (data) {
                     var webmap = data.webmap;
                     if (webmap) {
-                        _this._updateItemsUrl(webmap.root_item);
+                        _this._updateItemsParams(webmap.root_item);
                         resolve(data.webmap);
                     }
                 });
@@ -78,17 +102,28 @@
                 });
             }
         };
-        NgwKit.prototype._updateItemsUrl = function (item) {
+        NgwKit.prototype._updateItemsParams = function (item) {
             var _this = this;
             if (item) {
                 if (item.children) {
-                    item.children.forEach(function (x) { return _this._updateItemsUrl(x); });
+                    item.children.forEach(function (x) { return _this._updateItemsParams(x); });
                 }
                 else if (item.item_type === 'layer' && item.layer_adapter === 'image') {
                     var url = fixUrlStr(this.url + '/api/component/render/image');
                     item.url = url;
+                    item.resourceId = item.layer_style_id;
+                    item.updateWmsParams = function (params) { return NgwKit.updateWmsParams(params, item.resourceId); };
                 }
             }
+        };
+        NgwKit.updateWmsParams = function (params, resourceId) {
+            var bbox = params.bbox, width = params.width, height = params.height;
+            return {
+                resource: resourceId,
+                extent: bbox,
+                size: width + ',' + height,
+                timestamp: Date.now(),
+            };
         };
         return NgwKit;
     }());
