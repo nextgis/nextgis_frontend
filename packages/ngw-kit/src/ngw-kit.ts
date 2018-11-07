@@ -1,6 +1,11 @@
 import { NgwConnector } from '@nextgis/ngw-connector';
 import { WebMap, StarterKit } from '@nextgis/webmap';
 
+export interface NgwLayerOptions {
+  id: number;
+  adapter?: 'IMAGE' | 'TILE';
+}
+
 export interface NgwConfig {
   applicationUrl: string;
   assetUrl: string;
@@ -26,6 +31,39 @@ interface RequestOptions {
 
 export class NgwKit implements StarterKit {
 
+  static updateWmsParams = (params, resourceId) => {
+    const { bbox, width, height } = params;
+    return {
+      resource: resourceId,
+      extent: bbox,
+      size: width + ',' + height,
+      timestamp: Date.now(),
+    };
+  }
+
+  static addNgwLayer(options: NgwLayerOptions, webMap, baseUrl) {
+    const adapter = options.adapter || 'IMAGE';
+    if (adapter === 'IMAGE' || adapter === 'TILE') {
+      let url = baseUrl;
+      let addLayerPromise;
+      if (adapter === 'IMAGE') {
+        url += '/api/component/render/image';
+        addLayerPromise = webMap.map.addLayer(adapter, {
+          url,
+          id: String(options.id),
+          resourceId: options.id,
+          updateWmsParams: (params) => NgwKit.updateWmsParams(params, options.id )
+        });
+      } else if (adapter === 'TILE') {
+        url += '/api/component/render/tile?z={z}&x={x}&y={y}&resource=' + options.id;
+        addLayerPromise = webMap.map.addLayer(adapter, { url });
+      }
+      return addLayerPromise;
+    } else {
+      throw new Error(adapter + ' not supported yet. Only TILE');
+    }
+  }
+
   options: NgwKitOptions = {};
 
   url: string;
@@ -50,7 +88,7 @@ export class NgwKit implements StarterKit {
       this.connector.request('resource.item', { id: this.resourceId }).then((data) => {
         const webmap = data.webmap;
         if (webmap) {
-          this._updateItemsUrl(webmap.root_item);
+          this._updateItemsParams(webmap.root_item);
           resolve(data.webmap);
         }
       });
@@ -86,13 +124,15 @@ export class NgwKit implements StarterKit {
     }
   }
 
-  private _updateItemsUrl(item) {
+  private _updateItemsParams(item) {
     if (item) {
       if (item.children) {
-        item.children.forEach((x) => this._updateItemsUrl(x));
+        item.children.forEach((x) => this._updateItemsParams(x));
       } else if (item.item_type === 'layer' && item.layer_adapter === 'image') {
         const url = fixUrlStr(this.url + '/api/component/render/image');
         item.url = url;
+        item.resourceId = item.layer_style_id;
+        item.updateWmsParams = (params) => NgwKit.updateWmsParams(params, item.resourceId);
       }
     }
   }

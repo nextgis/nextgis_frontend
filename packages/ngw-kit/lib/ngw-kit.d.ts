@@ -1,5 +1,9 @@
 import { NgwConnector } from '@nextgis/ngw-connector';
 import { WebMap, StarterKit } from '@nextgis/webmap';
+export interface NgwLayerOptions {
+    id: number;
+    adapter?: 'IMAGE' | 'TILE';
+}
 export interface NgwConfig {
     applicationUrl: string;
     assetUrl: string;
@@ -16,6 +20,13 @@ export interface NgwKitOptions {
     };
 }
 export declare class NgwKit implements StarterKit {
+    static updateWmsParams: (params: any, resourceId: any) => {
+        resource: any;
+        extent: any;
+        size: string;
+        timestamp: number;
+    };
+    static addNgwLayer(options: NgwLayerOptions, webMap: any, baseUrl: any): any;
     options: NgwKitOptions;
     url: string;
     resourceId: number;
@@ -29,6 +40,6 @@ export declare class NgwKit implements StarterKit {
     }): Promise<{
         [x: string]: any;
     }>;
-    private _updateItemsUrl;
+    private _updateItemsParams;
 }
 export declare function fixUrlStr(url: string): string;

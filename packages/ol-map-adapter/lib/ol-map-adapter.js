@@ -45,24 +45,30 @@
         }
         ImageAdapter.prototype.addLayer = function (options) {
             this.name = options.id || 'image-' + ID++;
-            var source = new ImageWMS({
+            var imageOptions = {
                 url: options.url,
                 params: {
-                    resource: options.layer_style_id || options.id,
+                    resource: options.resourceId || options.id,
                 },
                 ratio: 1,
-                imageLoadFunction: function (image, src) {
+            };
+            if (options.updateWmsParams) {
+                imageOptions.imageLoadFunction = function (image, src) {
                     var url = src.split('?')[0];
                     var query = src.split('?')[1];
-                    var queryObject = queryToObject(query);
-                    image.getImage().src = url
-                        + '?resource=' + queryObject.resource
-                        + '&extent=' + queryObject.BBOX
-                        + '&size=' + queryObject.WIDTH + ',' + queryObject.HEIGHT
-                        + '#' + Date.now();
-                },
-            });
+                    var _a = queryToObject(query), resource = _a.resource, BBOX = _a.BBOX, WIDTH = _a.WIDTH, HEIGHT = _a.HEIGHT;
+                    var queryString = objectToQuery(options.updateWmsParams({
+                        resource: resource,
+                        bbox: BBOX,
+                        width: WIDTH,
+                        height: HEIGHT
+                    }));
+                    image.getImage().src = url + '?' + queryString;
+                };
+            }
+            var source = new ImageWMS(imageOptions);
             var layer$$1 = new ImageLayer({ source: source });
+            this.layer = layer$$1;
             return layer$$1;
         };
         return ImageAdapter;
@@ -97,6 +103,20 @@
             }
         }
         return ret;
+    }
+    function objectToQuery(obj, prefix) {
+        var str = [];
+        var p;
+        for (p in obj) {
+            if (obj.hasOwnProperty(p)) {
+                var k = prefix ? prefix + '[' + p + ']' : p;
+                var v = obj[p];
+                str.push((v !== null && typeof v === 'object') ?
+                    objectToQuery(v, k) :
+                    encodeURIComponent(k) + '=' + encodeURIComponent(v));
+            }
+        }
+        return str.join('&');
     }
 
     var domain;

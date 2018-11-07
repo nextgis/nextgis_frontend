@@ -4,6 +4,7 @@ import { EventEmitter } from 'events';
 import { TileAdapter } from './layer-adapters/TileAdapter';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 import { AttributionControl } from './controls/Attribution';
+import { ImageAdapter } from './layer-adapters/ImageAdapter';
 // import { ImageAdapter } from './layer-adapters/ImageAdapter';
 // import { OsmAdapter } from './layer-adapters/OsmAdapter';
 // import { MarkerAdapter } from './layer-adapters/MarkerAdapter';
@@ -22,7 +23,7 @@ export interface LeafletMapAdapterOptions extends MapOptions {
 export class LeafletMapAdapter implements MapAdapter {
 
   static layerAdapters = {
-    // IMAGE: ImageAdapter,
+    IMAGE: ImageAdapter,
     TILE: TileAdapter,
     GEOJSON: GeoJsonAdapter,
     // // MVT: MvtAdapter,
@@ -81,8 +82,10 @@ export class LeafletMapAdapter implements MapAdapter {
     this.map.setZoom(zoom);
   }
 
+  // [extent_left, extent_bottom, extent_right, extent_top];
   fit(e: [number, number, number, number]) {
-    this.map.fitBounds([[e[0], e[1]], [e[2], e[3]]]);
+    // top, left, bottom, right
+    this.map.fitBounds([[e[3], e[0]], [e[1], e[2]]]);
   }
 
   getLayerAdapter(name: string) {

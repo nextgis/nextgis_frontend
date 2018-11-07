@@ -1,8 +1,6 @@
-import { LayerAdapter } from '@nextgis/webmap';
+import { LayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
 export declare class ImageAdapter implements LayerAdapter {
     name: string;
-    addLayer(options?: any): any;
+    layer: any;
+    addLayer(options?: ImageAdapterOptions): any;
 }
-export declare function queryToObject(str: string): {
-    [name: string]: any;
-};
