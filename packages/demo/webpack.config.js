@@ -5,11 +5,8 @@ const { VueLoaderPlugin } = require('vue-loader');
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin');
 const generateExamples = require('./scripts/generateExamplesScheme');
 const utils = require('../../build/utils');
-const package = require('./package.json');
-const path = require('path');
 
 const entry = './src/index.ts';
-const library = 'NgwUploader';
 
 module.exports = (env, argv) => {
 
