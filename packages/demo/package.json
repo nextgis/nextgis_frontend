@@ -1,0 +1,74 @@
+{
+  "name": "@nextgis-apps/demo-app",
+  "version": "0.2.2",
+  "description": "",
+  "private": true,
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0",
+    "@nextgis-apps/ngw-uploader": "^0.2.2",
+    "highlight.js": "^9.13.1",
+    "vue": "^2.5.17",
+    "vue-class-component": "^6.3.2",
+    "vue-highlightjs": "^1.3.3",
+    "vue-property-decorator": "^7.2.0",
+    "vue-router": "^3.0.1",
+    "vuetify": "^1.3.6",
+    "vuex": "^3.0.1",
+    "vuex-class": "^0.3.1",
+    "vuex-router-sync": "^5.0.0",
+    "vuex-type-helper": "^1.2.0"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.118",
+    "clean-webpack-plugin": "^0.1.19",
+    "compression-webpack-plugin": "^2.0.0",
+    "css-loader": "^1.0.1",
+    "file-loader": "^2.0.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "node-sass": "^4.10.0",
+    "rimraf": "^2.6.2",
+    "sass-loader": "^7.1.0",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
+    "ts-loader": "^5.3.0",
+    "tslint": "^5.11.0",
+    "tslint-loader": "^3.6.0",
+    "tslint-webpack-plugin": "^1.2.2",
+    "typescript": "^3.1.6",
+    "vue-loader": "^15.4.2",
+    "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "^2.5.17",
+    "vuetify-loader": "^1.0.6",
+    "webpack": "^4.25.1",
+    "webpack-bundle-analyzer": "^3.0.3",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
+  },
+  "scripts": {
+    "start": "webpack-dev-server --progress --open --hot",
+    "clean": "rimraf ./dist",
+    "dev": "npm run clean && webpack --config ./webpack.config.js --progress",
+    "prod": "npm run build",
+    "watch": "npm run dev -- --watch",
+    "build": "echo \"No build for this app\" && exit 1",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nextgis/nextgis_frontend_apps.git"
+  },
+  "keywords": [
+    "NextGIS",
+    "MAP",
+    "NGW"
+  ],
+  "author": "NextGIS",
+  "directories": {
+    "lib": "dist"
+  },
+  "files": [
+    "dist"
+  ],
+  "license": "GPL-3.0"
+}

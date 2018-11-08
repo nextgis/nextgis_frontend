@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Ngw Uploader Example</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://unpkg.com/@nextgis-apps/ngw-uploader@latest"></script>
+  <!-- <script type="text/javascript" src="../lib/ngw-uploader.js"></script> -->
+
+<body>
+
+  <div id='uploader'></div>
+  <p id='status'></p>
+
+  <script>
+    var uploader = document.getElementById('uploader');
+    var statusUpload = document.getElementById('status');
+
+    var ngwUploader = new NgwUploader({
+      baseUrl: 'http://dev.nextgis.com/sandbox'
+    });
+
+    ngwUploader.emitter.on('status:change', function (evt) {
+      statusUpload.innerHTML = evt.message;
+    });
+
+    const createInput = function () {
+      const input = ngwUploader.createInput({
+        // way to change resource name
+        createName: function (name) {
+          return name + '-' + new Date().getTime();
+        },
+        success: function (newStyle) {
+          // refresh input
+          createInput();
+          ngwUploader.createWms(newStyle);
+        },
+        error: function (er) {
+          // refresh input
+          createInput();
+          console.log(er);
+        },
+      });
+      uploader.innerHTML = '';
+      uploader.appendChild(input);
+    }
+    createInput();
+  </script>
+
+</body>
+
+</html>
