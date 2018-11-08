@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/qms-kit",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "",
   "main": "lib/qms-kit.js",
   "types": "lib/qms-kit.d.ts",
@@ -10,10 +10,10 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "@nextgis/ngw-connector": "^0.4.0"
+    "@nextgis/ngw-connector": "^0.4.3"
   },
   "devDependencies": {
-    "@nextgis/webmap": "^0.4.2",
+    "@nextgis/webmap": "^0.4.3",
     "rollup": "^0.66.6",
     "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-node-builtins": "^2.1.2",
