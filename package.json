@@ -4,6 +4,15 @@
   "devDependencies": {
     "lerna": "^3.4.3"
   },
+  "scripts": {
+    "clean": "lerna run clean",
+    "bootstrap": "lerna run bootstrap",
+    "dev": "lerna run dev",
+    "prod": "lerna run build",
+    "build": "lerna run build",
+    "demo": "cd ./packages/demo/ && yarn run prod",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
   "workspaces": [
     "packages/*"
   ]
