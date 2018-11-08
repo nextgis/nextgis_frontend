@@ -209,6 +209,7 @@ packages-lock.json
 
 # Optional npm cache directory
 .npm
+package-lock.json
 
 # Optional REPL history
 .node_repl_history
@@ -229,7 +230,6 @@ bower_components
 
 
 ### Project Specific
-build
 dist
 
 *.tgz
