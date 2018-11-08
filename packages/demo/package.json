@@ -20,8 +20,6 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.118",
-    "clean-webpack-plugin": "^0.1.19",
-    "compression-webpack-plugin": "^2.0.0",
     "css-loader": "^1.0.1",
     "file-loader": "^2.0.0",
     "html-loader": "^0.5.5",
