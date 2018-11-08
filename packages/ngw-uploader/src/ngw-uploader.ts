@@ -1,4 +1,4 @@
-// import { NgwConnector } from '../../../nextgisweb_frontend/packages/ngw-connector/src/ngw-connector';
+// import { NgwConnector } from '../ngw-connector/src/ngw-connector';
 import { NgwConnector, NgwConnectorOptions } from '@nextgis/ngw-connector';
 import { EventEmitter } from 'events';
 import { evented } from './decorators';

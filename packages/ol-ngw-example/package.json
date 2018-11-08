@@ -5,7 +5,7 @@
   "scripts": {
     "start": "webpack-dev-server ./src/main.js --progress --devtool source-map --mode=development",
     "watch": "webpack ./src/main.js --mode development --watch --progress --devtool source-map --mode=development",
-    "build": "echo \"No build for this app\" && exit 1",
+    "build": "echo \"No build for this app\" && exit 0",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "repository": {

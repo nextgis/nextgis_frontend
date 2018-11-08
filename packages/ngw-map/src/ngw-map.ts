@@ -3,10 +3,10 @@ import { NgwConnector } from '@nextgis/ngw-connector';
 import { QmsKit } from '@nextgis/qms-kit';
 import { NgwKit } from '@nextgis/ngw-kit';
 
-// import { WebMap, MapAdapter, StarterKit } from '../../../nextgisweb_frontend/packages/webmap/src/webmap';
-// import { NgwConnector } from '../../../nextgisweb_frontend/packages/ngw-connector/src/ngw-connector';
-// import { QmsKit } from '../../../nextgisweb_frontend/packages/qms-kit/src/QmsKit';
-// import { NgwKit } from '../../../nextgisweb_frontend/packages/ngw-kit/src/ngw-kit';
+// import { WebMap, MapAdapter, StarterKit } from '../webmap/src/webmap';
+// import { NgwConnector } from '../ngw-connector/src/ngw-connector';
+// import { QmsKit } from '../qms-kit/src/QmsKit';
+// import { NgwKit } from '../ngw-kit/src/ngw-kit';
 
 import 'leaflet/dist/leaflet.css';
 import { onMapLoad } from './decorators';

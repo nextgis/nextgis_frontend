@@ -1,11 +1,11 @@
 {
-  "name": "@nextgis-apps/demo-app",
+  "name": "@nextgis/demo-app",
   "version": "0.2.2",
   "description": "",
   "private": true,
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
-    "@nextgis-apps/ngw-uploader": "^0.2.2",
+    "@nextgis/ngw-uploader": "^0.4.2",
     "highlight.js": "^9.13.1",
     "vue": "^2.5.17",
     "vue-class-component": "^6.3.2",
@@ -51,7 +51,7 @@
     "dev": "npm run clean && webpack --config ./webpack.config.js --progress",
     "prod": "npm run build",
     "watch": "npm run dev -- --watch",
-    "build": "echo \"No build for this app\" && exit 1",
+    "build": "echo \"No build for Demo app\" && exit 0",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "repository": {
