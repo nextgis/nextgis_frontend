@@ -7,6 +7,7 @@ import {
   RequestItemsResponseMap, RequestOptions,
   Params, LoadingQueue, UserInfo,
 } from './interfaces';
+import { loadJSON, template } from './utils';
 
 export * from './interfaces';
 
@@ -15,16 +16,18 @@ const OPTIONS: NgwConnectorOptions = {
   // baseUrl: 'http://'
 };
 
-export class NgwConnector {
+export default class NgwConnector {
 
   options: NgwConnectorOptions = {};
+
+  user: UserInfo;
 
   private route;
   private _loadingQueue: { [name: string]: LoadingQueue } = {};
   private _loadingStatus = {};
 
   constructor(options: NgwConnectorOptions) {
-    this.options = Object.assign({}, OPTIONS, options || {});
+    this.options = {...OPTIONS, ...(options || {})};
   }
 
   async connect(): Promise<Router> {
@@ -49,39 +52,13 @@ export class NgwConnector {
     // return this.request('auth.current_user', {}, {
     return this.makeQuery('/api/component/auth/current_user', {}, {
       headers: {
-        'Authorization': 'Basic ' + client,
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': '*',
+        'Authorization': 'Basic ' + client
       },
-      // withCredentials: true,
-      mode: 'cors',
+      withCredentials: true
     }).then((data: UserInfo) => {
-      console.log(data);
-      if (data.keyname !== 'guest') {
-        data.clientId = this.makeClientId();
-        if (localStorage) {
-          localStorage.setItem('nguser', JSON.stringify(data));
-        }
-      }
+      this.user = data;
+      return data;
     });
-    // return fetch(this.options.baseUrl + '/api/component/auth/current_user', {
-    //   headers: {
-    //     Authorization: 'Basic ' + client,
-    //     // 'Access-Control-Allow-Origin': '*',
-    //     // 'Access-Control-Allow-Headers': '*',
-    //   },
-    //   mode: 'cors',
-    // }).then((resp) => {
-    //   console.log(resp);
-    //   resp.json().then((data) => {
-    //     if (data.keyname !== 'guest') {
-    //       data.clientId = this.makeClientId();
-    //       if (localStorage) {
-    //         localStorage.setItem('nguser', JSON.stringify(data));
-    //       }
-    //     }
-    //   });
-    // });
   }
 
   makeClientId() {
@@ -197,119 +174,11 @@ export class NgwConnector {
 
   _getJson(url: string, options: RequestOptions): Promise<any> {
     return new Promise((resolve, reject) => {
+      if (this.user) {
+        options = options || {};
+        options.withCredentials = true;
+      }
       loadJSON(url, resolve, options, reject);
     });
   }
-}
-
-function loadJSON(url, callback, options: RequestOptions = {}, error) {
-  options.method = options.method || 'GET';
-  let xhr: XMLHttpRequest;
-  if (options.mode === 'cors') {
-    xhr = createCORSRequest(options.method, url);
-  } else {
-    xhr = new XMLHttpRequest();
-    xhr.open(options.method || 'GET', url, true); // true for asynchronous
-  }
-  xhr.onreadystatechange = () => {
-    if ((xhr.readyState === 4 && xhr.status === 200) || (xhr.readyState === 3 && xhr.status === 201)) {
-      if (xhr.responseText) {
-        try {
-          callback(JSON.parse(xhr.responseText));
-        } catch (er) {
-          error();
-        }
-      }
-    } else if (xhr.readyState === 3 && xhr.status === 400) {
-      if (xhr.responseText) {
-        try {
-          error(JSON.parse(xhr.responseText));
-        } catch (er) {
-          error({ message: '' });
-        }
-      } else {
-        error({ message: '' });
-      }
-    }
-  };
-
-  xhr.onerror = (er) => {
-    error(er);
-  };
-
-  xhr.upload.onprogress = function (e) {
-    if (e.lengthComputable) {
-      const percentComplete = (e.loaded / e.total) * 100;
-      if (options.onProgress) {
-        options.onProgress(percentComplete);
-      }
-      // console.log(percentComplete + '% uploaded');
-    }
-  };
-
-  const headers = options.headers;
-  if (headers) {
-    for (const h in headers) {
-      if (headers.hasOwnProperty(h)) {
-        xhr.setRequestHeader(h, headers[h]);
-      }
-    }
-  }
-  xhr.withCredentials = options.withCredentials;
-
-  let data;
-  if (options.file) {
-    data = new FormData();
-    data.append('file', options.file);
-    if (options.data) {
-      for (const d in data) {
-        if (data.hasOwnProperty(d)) {
-          data.append(d, data[d]);
-        }
-      }
-    }
-  } else {
-    data = options.data ? JSON.stringify(options.data) : null;
-  }
-
-  xhr.send(data);
-}
-
-function createCORSRequest(method, url) {
-  let xhr = new XMLHttpRequest();
-  if ('withCredentials' in xhr) {
-    // Check if the XMLHttpRequest object has a "withCredentials" property.
-    // "withCredentials" only exists on XMLHTTPRequest2 objects.
-    xhr.open(method, url, true);
-  } else {
-    // @ts-ignore
-    const X = XDomainRequest;
-    if (typeof X !== 'undefined') {
-      // Otherwise, check if XDomainRequest.
-      // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
-      xhr = new X();
-      xhr.open(method, url);
-    } else {
-      // Otherwise, CORS is not supported by the browser.
-      xhr = null;
-    }
-  }
-  return xhr;
-}
-
-// https://github.com/Leaflet/Leaflet/blob/b507e21c510b53cd704fb8d3f89bb46ea925c8eb/src/core/Util.js#L165
-const templateRe = /\{ *([\w_-]+) *\}/g;
-
-function template(str, data) {
-  return str.replace(templateRe, (s, key) => {
-    let value = data[key];
-
-    if (value === undefined) {
-      throw new Error('No value provided for letiable ' + s);
-
-    } else if (typeof value === 'function') {
-      value = value(data);
-    }
-    return value;
-  });
 }

@@ -1,5 +1,3 @@
-Object.assign || Object.defineProperty(Object, 'assign', { enumerable: !1, configurable: !0, writable: !0, value: function (e, r) { 'use strict'; if (null == e) throw new TypeError('Cannot convert first argument to object'); for (let t = Object(e), n = 1; n < arguments.length; n++) { let o = arguments[n]; if (null != o) for (let a = Object.keys(Object(o)), c = 0, b = a.length; c < b; c++) { let i = a[c], l = Object.getOwnPropertyDescriptor(o, i); void 0 !== l && l.enumerable && (t[i] = o[i]) } } return t } });
-
 // https://github.com/taylorhakes/promise-polyfill
 // Copyright (c) 2014 Taylor Hakes
 // Copyright (c) 2014 Forbes Lindesay
