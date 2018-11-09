@@ -89,7 +89,7 @@ export class App extends Vue {
         parents.push(parent.id);
         parent = parent._parent;
       }
-      this.open = parents;
+      this.open = this.open.concat(parents);
       this.active = [treeItem.id];
     } else {
       this.$router.push('/' + this.items[0].children[0].id);

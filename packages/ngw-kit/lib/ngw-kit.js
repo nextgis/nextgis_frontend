@@ -1,8 +1,10 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@nextgis/ngw-connector')) :
     typeof define === 'function' && define.amd ? define(['exports', '@nextgis/ngw-connector'], factory) :
-    (factory((global.NgwKit = {}),global.ngwConnector));
-}(this, (function (exports,ngwConnector) { 'use strict';
+    (factory((global.NgwKit = {}),global.NgwConnector));
+}(this, (function (exports,NgwConnector) { 'use strict';
+
+    NgwConnector = NgwConnector && NgwConnector.hasOwnProperty('default') ? NgwConnector['default'] : NgwConnector;
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -40,7 +42,7 @@
             }
             this.url = this.options.baseUrl;
             this.resourceId = options.resourceId;
-            this.connector = new ngwConnector.NgwConnector({ baseUrl: this.url, auth: this.options.auth });
+            this.connector = new NgwConnector({ baseUrl: this.url, auth: this.options.auth });
         }
         NgwKit.addNgwLayer = function (options, webMap, baseUrl) {
             var adapter = options.adapter || 'IMAGE';
