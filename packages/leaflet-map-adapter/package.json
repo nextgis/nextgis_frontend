@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/leaflet-map-adapter",
-  "version": "0.4.5",
+  "version": "0.4.6",
   "description": "",
   "main": "lib/leaflet-map-adapter.js",
   "types": "lib/leaflet-map-adapter.d.ts",
@@ -15,7 +15,7 @@
     "leaflet.wms": "^0.2.0"
   },
   "devDependencies": {
-    "@nextgis/webmap": "^0.4.5",
+    "@nextgis/webmap": "^0.4.6",
     "rollup": "^0.66.6",
     "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-node-builtins": "^2.1.2",
