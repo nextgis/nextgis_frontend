@@ -145,7 +145,7 @@ export class LeafletMapAdapter implements MapAdapter {
           layerOpts.order = options.order || this._order++;
         }
         this._layers[layerId] = layerOpts;
-        this._length++;
+        // this._length++;
 
         return adapter;
       };

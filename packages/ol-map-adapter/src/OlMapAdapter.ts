@@ -156,7 +156,7 @@ export class OlMapAdapter implements MapAdapter {
           layerOpts.order = options.order || this._order++;
         }
         this._layers[layerId] = layerOpts;
-        this._length++;
+        // this._length++;
 
         return adapter;
       };
@@ -203,8 +203,8 @@ export class OlMapAdapter implements MapAdapter {
     const action = (source: Map, l: LayerMem) => {
       if (status) {
         if (source instanceof Map) {
-          source.addLayer(l.layer);
           l.layer.setZIndex(this._length - l.order);
+          source.addLayer(l.layer);
         }
       } else {
         source.removeLayer(l.layer);
