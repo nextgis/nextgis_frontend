@@ -51,7 +51,7 @@ export function loadJSON(url, callback, options: RequestOptions = {}, error) {
       }
     }
   }
-  xhr.withCredentials = true;
+  xhr.withCredentials = options.withCredentials;
 
   let data;
   if (options.file) {
