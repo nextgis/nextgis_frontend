@@ -44,7 +44,6 @@ export class QmsKit implements StarterKit {
   constructor(options?: QmsOptions) {
     this.options = { ...this.options, ...options };
     this.url = this.options.url;
-
   }
 
   getLayerAdapters() {
@@ -78,6 +77,8 @@ export class QmsKit implements StarterKit {
           if (webMapAdapter) {
             if (type === 'TILE') {
               options.url = service.url;
+              options.name = service.name;
+              options.attribution = service.copyright_text;
               return webMapAdapter.prototype.addLayer.call(this, options);
             }
           }

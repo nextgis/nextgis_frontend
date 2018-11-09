@@ -1,15 +1,16 @@
-import { WebMap, MapAdapter } from '@nextgis/webmap';
+import { WebMap, MapAdapter, MapOptions as MO, ControlPositions } from '@nextgis/webmap';
 import NgwConnector from '@nextgis/ngw-connector';
 import 'leaflet/dist/leaflet.css';
 import { onMapLoad } from './decorators';
 import { fixUrlStr } from './utils';
-export interface MapOptions {
-    target: string;
+export interface ControlOptions {
+    position?: ControlPositions;
+}
+export interface MapOptions extends MO {
+    target: string | HTMLElement;
     qmsId?: number;
     webmapId?: number;
     baseUrl: string;
-    center?: [number, number];
-    zoom?: number;
     bounds?: [number, number, number, number];
 }
 export interface NgwLayerOptions {

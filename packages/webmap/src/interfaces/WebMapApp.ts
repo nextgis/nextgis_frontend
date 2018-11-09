@@ -1,14 +1,18 @@
 import { WebLayerEntry } from '../entities/WebLayerEntry';
 import { MapAdapter } from './MapAdapter';
 import { StarterKit } from './AppSettings';
+import { MapControl } from './MapControl';
 
 export interface MapOptions {
   target: string | HTMLElement;
   logo?: string;
-  controls?: any[];
+  controls?: Array<string | MapControl>;
+  controlsOptions?: {[controlName: string]: any};
   minZoom?: number;
-  // lat lng
+  /** lat lng */
   center?: [number, number];
+  /** top, left, bottom, right */
+  bounds?: [number, number, number, number];
   zoom?: number;
 }
 
