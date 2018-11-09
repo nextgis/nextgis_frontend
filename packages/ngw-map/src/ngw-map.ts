@@ -1,4 +1,4 @@
-import { WebMap, MapAdapter, StarterKit } from '@nextgis/webmap';
+import { WebMap, MapAdapter, StarterKit, MapOptions as MO, ControlPositions } from '@nextgis/webmap';
 import { NgwConnector } from '@nextgis/ngw-connector';
 import { QmsKit } from '@nextgis/qms-kit';
 import { NgwKit } from '@nextgis/ngw-kit';
@@ -7,19 +7,19 @@ import { NgwKit } from '@nextgis/ngw-kit';
 // import { NgwConnector } from '../ngw-connector/src/ngw-connector';
 // import { QmsKit } from '../qms-kit/src/QmsKit';
 // import { NgwKit } from '../ngw-kit/src/ngw-kit';
-
 import 'leaflet/dist/leaflet.css';
 import { onMapLoad } from './decorators';
+import { fixUrlStr, deepmerge } from './utils';
 
-import { fixUrlStr } from './utils';
+export interface ControlOptions {
+  position?: ControlPositions;
+}
 
-export interface MapOptions {
-  target: string;
+export interface MapOptions extends MO {
+  target: string | HTMLElement;
   qmsId?: number;
   webmapId?: number;
   baseUrl: string;
-  center?: [number, number];
-  zoom?: number;
   bounds?: [number, number, number, number];
 }
 
@@ -36,6 +36,16 @@ export default class NgwMap {
   options: MapOptions = {
     target: 'map',
     baseUrl: 'http://dev.nextgis.com/sandbox',
+    controls: ['ZOOM', 'ATTRIBUTION'],
+    controlsOptions: {
+      ZOOM: { position: 'top-left' },
+      ATTRIBUTION: {
+        position: 'bottom-right',
+        customAttribution: [
+          '<a href="http://nextgis.ru" target="_blank">©NextGIS</a>',
+        ]
+      }
+    }
   };
 
   webMap: WebMap;
@@ -45,10 +55,10 @@ export default class NgwMap {
   _ngwLayers = {};
 
   constructor(mapAdapter: MapAdapter, options: MapOptions) {
-    this.options = { ...this.options, ...options };
+    this.options = deepmerge(this.options, options);
     this.connector = new NgwConnector({ baseUrl: this.options.baseUrl });
-    // const kits: StarterKit[] = [new QmsKit()];
-    const kits: any[] = [new QmsKit()];
+    const kits: StarterKit[] = [new QmsKit()];
+    // const kits: any[] = [new QmsKit()];
     if (this.options.webmapId) {
       kits.push(new NgwKit({
         baseUrl: this.options.baseUrl,
@@ -140,13 +150,13 @@ export default class NgwMap {
   }
 
   private _addControls() {
-
-    this.webMap.map.addControl('ZOOM', 'top-left');
-
-    this.webMap.map.addControl('ATTRIBUTION', 'bottom-right', {
-      customAttribution: [
-        '<a href="http://nextgis.ru" target="_blank">©NextGIS</a>',
-      ]
+    this.options.controls.forEach((x) => {
+      let controlOptions: ControlOptions = {position: 'top-left'};
+      if (typeof x === 'string') {
+        controlOptions = this.options.controlsOptions[x];
+      }
+      const {position, ...options} = controlOptions;
+      this.webMap.map.addControl(x, position, options);
     });
   }
 }
