@@ -1182,7 +1182,6 @@
                       layerOpts.order = options.order || _this._order++;
                   }
                   _this._layers[layerId] = layerOpts;
-                  _this._length++;
                   return adapter_1;
               };
               return addlayerFun.then ? addlayerFun.then(function (l) { return toResolve_1(l); }) : Promise.resolve(toResolve_1(layer));
