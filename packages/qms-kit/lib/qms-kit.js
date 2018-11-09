@@ -108,6 +108,8 @@
                         if (webMapAdapter) {
                             if (type === 'TILE') {
                                 options.url = service.url;
+                                options.name = service.name;
+                                options.attribution = service.copyright_text;
                                 return webMapAdapter.prototype.addLayer.call(_this, options);
                             }
                         }

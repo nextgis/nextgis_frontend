@@ -27,10 +27,19 @@
 
   <script>
 
+    // var ngwMap = new NgwLeaflet({
+    //   baseUrl: 'https://demo.nextgis.com',
+    //   target: map,
+    //   webmapId: 3985
+    // });
     var ngwMap = new NgwLeaflet({
       baseUrl: 'https://demo.nextgis.com',
       target: map,
-      webmapId: 3985
+      qmsId: 487,
+      controls: ['ZOOM'],
+      controlsOptions: {ZOOM: {position: 'bottom-right'}},
+      center: [54, 106],
+      zoom: 6
     });
 
     // var ngwMap = new NgwLeaflet({
