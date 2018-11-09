@@ -1,7 +1,7 @@
 {
   "name": "@nextgis/ol-ngw-example",
   "private": true,
-  "version": "0.4.7",
+  "version": "0.4.8",
   "scripts": {
     "start": "webpack-dev-server ./src/main.js --progress --devtool source-map --mode=development",
     "watch": "webpack ./src/main.js --mode development --watch --progress --devtool source-map --mode=development",
@@ -19,9 +19,9 @@
   "author": "",
   "license": "GPL-3.0",
   "dependencies": {
-    "@nextgis/ngw-kit": "^0.4.6",
+    "@nextgis/ngw-kit": "^0.4.8",
     "@nextgis/ol-map-adapter": "^0.4.7",
-    "@nextgis/qms-kit": "^0.4.6",
+    "@nextgis/qms-kit": "^0.4.8",
     "@nextgis/webmap": "^0.4.6",
     "ol": "^5.2.0"
   },
