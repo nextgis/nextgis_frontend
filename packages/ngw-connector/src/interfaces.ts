@@ -57,7 +57,6 @@ export interface RequestOptions {
   method?: 'POST' | 'GET';
   data?: any;
   headers?: RequestHeaders;
-  mode?: 'cors';
   withCredentials?: boolean;
   file?: File;
   onProgress?: (percentComplete: number) => void;

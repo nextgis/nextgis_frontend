@@ -1,5 +1,5 @@
 // import { NgwConnector } from '../ngw-connector/src/ngw-connector';
-import { NgwConnector, NgwConnectorOptions } from '@nextgis/ngw-connector';
+import NgwConnector, { NgwConnectorOptions } from '@nextgis/ngw-connector';
 import { EventEmitter } from 'events';
 import { evented } from './decorators';
 
@@ -20,7 +20,6 @@ interface ResourceCreateResp {
 }
 
 export interface NgwUploadOptions extends NgwConnectorOptions {
-  baseUrl?: string;
   inputOptions?: UploadInputOptions;
 }
 

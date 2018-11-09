@@ -1,9 +1,10 @@
 import './polyfills';
 import { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
-import { NgwConnectorOptions, Router, RequestItemsResponseMap, RequestOptions, Params } from './interfaces';
+import { NgwConnectorOptions, Router, RequestItemsResponseMap, RequestOptions, Params, UserInfo } from './interfaces';
 export * from './interfaces';
-export declare class NgwConnector {
+export default class NgwConnector {
     options: NgwConnectorOptions;
+    user: UserInfo;
     private route;
     private _loadingQueue;
     private _loadingStatus;
