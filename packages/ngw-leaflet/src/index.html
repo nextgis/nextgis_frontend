@@ -32,28 +32,28 @@
     //   target: map,
     //   webmapId: 3985
     // });
-    var ngwMap = new NgwLeaflet({
-      baseUrl: 'https://demo.nextgis.com',
-      target: map,
-      qmsId: 487,
-      controls: ['ZOOM'],
-      controlsOptions: {ZOOM: {position: 'bottom-right'}},
-      center: [54, 106],
-      zoom: 6
-    });
-
     // var ngwMap = new NgwLeaflet({
-    //   baseUrl: 'http://demo.nextgis.com',
+    //   baseUrl: 'https://demo.nextgis.com',
     //   target: map,
     //   qmsId: 487,
-    //   bounds: [71, 182, 46, 14]
+    //   controls: ['ZOOM'],
+    //   controlsOptions: {ZOOM: {position: 'bottom-right'}},
+    //   center: [54, 106],
+    //   zoom: 6
     // });
 
-    // ngwMap.addNgwLayer({
-    //   id: 4005,
-    // }).then(function() {
-    //   ngwMap.zoomToLayer(4005);
-    // });
+    var ngwMap = new NgwLeaflet({
+      baseUrl: 'http://demo.nextgis.com',
+      target: map,
+      qmsId: 487,
+      bounds: [71, 182, 46, 14]
+    });
+
+    ngwMap.addNgwLayer({
+      id: 4005,
+    }).then(function() {
+      ngwMap.zoomToLayer(4005);
+    });
 
   </script>
 
