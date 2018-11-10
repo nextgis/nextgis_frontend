@@ -13,7 +13,7 @@ export function onMapLoad() {
         if (self.isLoaded) {
           originalMethod.apply(this, args).then(resolve).catch(reject);
         } else {
-          self.webMap.emitter.once('map:created', () => {
+          self.emitter.once('map:created', () => {
             originalMethod.apply(this, args).then(resolve).catch(reject);
           });
         }

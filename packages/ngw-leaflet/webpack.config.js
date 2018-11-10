@@ -65,7 +65,7 @@ module.exports = (env, argv) => {
   return [{
     mode: argv.mode || 'development',
 
-    devtool: isProd ? '#source-map' : 'eval-source-map',
+    devtool: isProd ? 'source-map' : 'eval-source-map',
 
     entry: entry,
 

@@ -1,8 +1,10 @@
+/// <reference types="node" />
 import { WebMap, MapAdapter, MapOptions as MO, ControlPositions } from '@nextgis/webmap';
 import NgwConnector from '@nextgis/ngw-connector';
 import 'leaflet/dist/leaflet.css';
 import { onMapLoad } from './decorators';
 import { fixUrlStr } from './utils';
+import { EventEmitter } from 'events';
 export interface ControlOptions {
     position?: ControlPositions;
 }
@@ -26,6 +28,7 @@ export default class NgwMap {
     };
     options: MapOptions;
     webMap: WebMap;
+    emitter: EventEmitter;
     isLoaded: boolean;
     connector: NgwConnector;
     _ngwLayers: {};

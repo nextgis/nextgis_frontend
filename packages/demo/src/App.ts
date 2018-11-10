@@ -1,7 +1,5 @@
 import { Vue, Component, Watch } from 'vue-property-decorator';
-import { AppPages } from './store/modules/app';
 import HtmlExample from './components/Examples/HtmlExample/HtmlExample.vue';
-import { watch } from 'fs';
 
 interface Item {
   id?: string;
