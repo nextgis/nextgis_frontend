@@ -12,8 +12,8 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 import NgwMap from '@nextgis/ngw-map';
-import 'leaflet/dist/leaflet.css';
 import { LeafletMapAdapter } from '@nextgis/leaflet-map-adapter';
+import 'leaflet/dist/leaflet.css';
 var NgwLeaflet = (function (_super) {
     __extends(NgwLeaflet, _super);
     function NgwLeaflet(options) {

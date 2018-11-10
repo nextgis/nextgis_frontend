@@ -10,6 +10,7 @@ import { NgwKit } from '@nextgis/ngw-kit';
 import 'leaflet/dist/leaflet.css';
 import { onMapLoad } from './decorators';
 import { fixUrlStr, deepmerge } from './utils';
+import { EventEmitter } from 'events';
 
 export interface ControlOptions {
   position?: ControlPositions;
@@ -49,7 +50,7 @@ export default class NgwMap {
   };
 
   webMap: WebMap;
-
+  emitter = new EventEmitter();
   isLoaded: boolean = false;
   connector: NgwConnector;
   _ngwLayers = {};
@@ -71,7 +72,6 @@ export default class NgwMap {
     });
     this._createWebMap().then(() => {
       this._addControls();
-      this.isLoaded = true;
     });
   }
 
@@ -134,6 +134,8 @@ export default class NgwMap {
     return this.webMap.create({
       target: this.options.target
     }).then(() => {
+      this.isLoaded = true;
+      this.emitter.emit('map:created');
       if (this.options.qmsId) {
         this.webMap.addBaseLayer(String(this.options.qmsId), 'QMS', {
           qmsid: this.options.qmsId
@@ -143,7 +145,6 @@ export default class NgwMap {
       }
 
       this.fit();
-      this.webMap.emitter.emit('map:created');
       // @ts-ignore
       // window.lmap = this.webMap.map.map;
     });
