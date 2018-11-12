@@ -7,7 +7,6 @@ import { EventEmitter } from 'events';
 import { ZoomControl } from './controls/ZoomControl';
 import { CompassControl } from './controls/CompassControl';
 import { AttributionControl } from './controls/AttributionControl';
-import { ImageAdapter } from './layer-adapters/ImageAdapter';
 
 type positions = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
 
