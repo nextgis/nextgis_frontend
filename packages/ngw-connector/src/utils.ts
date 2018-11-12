@@ -1,3 +1,19 @@
+// readyState
+// Holds the status of the XMLHttpRequest.
+// 0: request not initialized
+// 1: server connection established
+// 2: request received
+// 3: processing request
+// 4: request finished and response is ready
+
+// status
+// 200: "OK"
+// 201 "Created"	The request has been fulfilled, and a new resource is created
+// 403: "Forbidden"
+// 404: "Page not found"
+// 500: "Internal Server Error"
+// For a complete list go to the Http Messages Reference
+
 import { RequestOptions } from './interfaces';
 
 export function loadJSON(url, callback, options: RequestOptions = {}, error) {
@@ -7,25 +23,26 @@ export function loadJSON(url, callback, options: RequestOptions = {}, error) {
   xhr = new XMLHttpRequest();
   xhr.open(options.method || 'GET', url, true); // true for asynchronous
 
-  xhr.onreadystatechange = () => {
-    if ((xhr.readyState === 4 && xhr.status === 200) || (xhr.readyState === 3 && xhr.status === 201)) {
-      if (xhr.responseText) {
-        try {
-          callback(JSON.parse(xhr.responseText));
-        } catch (er) {
-          error();
-        }
-      }
-    } else if (xhr.readyState === 3 && xhr.status === 400) {
-      if (xhr.responseText) {
-        try {
-          error(JSON.parse(xhr.responseText));
-        } catch (er) {
-          error({ message: '' });
-        }
-      } else {
+  const processingResponce = (forError: boolean = false) => {
+    const cb = forError ? error : callback;
+    if (xhr.responseText) {
+      try {
+        cb(JSON.parse(xhr.responseText));
+      } catch (er) {
         error({ message: '' });
       }
+    } else {
+      error({ message: '' });
+    }
+  };
+
+  xhr.onreadystatechange = () => {
+    if ((xhr.readyState === 4 && xhr.status === 200) || (xhr.readyState === 3 && xhr.status === 201)) {
+      processingResponce();
+    } else if (xhr.readyState === 3 && xhr.status === 400) {
+      processingResponce();
+    } else if (xhr.readyState === 4 && xhr.status === 500) {
+      processingResponce();
     }
   };
 

@@ -42,8 +42,8 @@ To publish a new package, run the following command in the package folder
 
 ### Troubleshoot
 
-Sometimes there are problems of establishing dependencies between libraries
-or example, between the ngw-kit and the ngw-connector).
+Sometimes there are problems of establishing dependencies between libraries.
+For example, between the ngw-kit and the ngw-connector.
 In this case, you need to execute commands from root directory
 
     rm -rf ./node_modules
@@ -74,4 +74,13 @@ Some [lerna+yarn instruction](https://medium.com/trabe/monorepo-setup-with-lerna
 
 Useful VSCode plugins:
 
-- Typescript MonoRepo Import Fixer
+- alefragnani.numbered-bookmarks
+- donjayamanne.githistory
+- eamodio.gitlens
+- EditorConfig.EditorConfig
+- eg2.tslint
+- k--kato.intellij-idea-keybindings (shortcuts like intellij)
+- octref.vetur (Vue for demo project)
+- prograhammer.tslint-vue (Vue)
+- ritwickdey.LiveServer
+- wayou.vscode-todo-highlight

@@ -8,6 +8,7 @@ import {
   Params, LoadingQueue, UserInfo,
 } from './interfaces';
 import { loadJSON, template } from './utils';
+import { EventEmitter } from 'events';
 
 export * from './interfaces';
 
@@ -21,13 +22,13 @@ export default class NgwConnector {
   options: NgwConnectorOptions = {};
 
   user: UserInfo;
-
+  emitter = new EventEmitter();
   private route;
   private _loadingQueue: { [name: string]: LoadingQueue } = {};
   private _loadingStatus = {};
 
   constructor(options: NgwConnectorOptions) {
-    this.options = {...OPTIONS, ...(options || {})};
+    this.options = { ...OPTIONS, ...(options || {}) };
   }
 
   async connect(): Promise<Router> {
@@ -48,17 +49,25 @@ export default class NgwConnector {
   }
 
   getUserInfo(): Promise<any> {
-    const client = this.makeClientId();
-    // return this.request('auth.current_user', {}, {
+    // Do not use request('auth.current_user') to vaoid circular-references
     return this.makeQuery('/api/component/auth/current_user', {}, {
-      headers: {
-        'Authorization': 'Basic ' + client
-      },
+      headers: this.getAuthorizationHeaders(),
       withCredentials: true
     }).then((data: UserInfo) => {
       this.user = data;
+      this.emitter.emit('login', data);
       return data;
+    }).catch((er) => {
+      this.emitter.emit('login:error', er);
+      throw er;
     });
+  }
+
+  getAuthorizationHeaders() {
+    const client = this.makeClientId();
+    return {
+      'Authorization': 'Basic ' + client
+    };
   }
 
   makeClientId() {
@@ -128,6 +137,7 @@ export default class NgwConnector {
         }).catch((er) => {
           this._loadingStatus[url] = false;
           this._executeLoadingQueue(url, er, true);
+          this.emitter.emit('error', er);
           throw er;
         });
       } else {
@@ -176,7 +186,8 @@ export default class NgwConnector {
     return new Promise((resolve, reject) => {
       if (this.user) {
         options = options || {};
-        options.withCredentials = true;
+        // options.withCredentials = true;
+        options.headers = this.getAuthorizationHeaders();
       }
       loadJSON(url, resolve, options, reject);
     });
