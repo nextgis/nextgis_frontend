@@ -46,3 +46,26 @@ export function evented(options?: { status: AvailableStatus; template?: string }
     return descriptor;
   };
 }
+
+/**
+ * decorator to run action only after application is load
+ */
+export function onLoad() {
+  return function (target: NgwUploader, propertyKey: string, descriptor: PropertyDescriptor) {
+    const originalMethod = descriptor.value;
+
+    descriptor.value = function (...args) {
+      const self: NgwUploader = this;
+      return new Promise((resolve, reject) => {
+        if (self.isLoaded) {
+          originalMethod.apply(this, args).then(resolve).catch(reject);
+        } else {
+          self.emitter.once('loaded', () => {
+            originalMethod.apply(this, args).then(resolve).catch(reject);
+          });
+        }
+      });
+    };
+    return descriptor;
+  };
+}

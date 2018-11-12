@@ -1,7 +1,9 @@
-// import { NgwConnector } from '../ngw-connector/src/ngw-connector';
-import NgwConnector, { NgwConnectorOptions } from '@nextgis/ngw-connector';
+// import NgwConnector from '../../ngw-connector/src/ngw-connector';
+import NgwConnector, { NgwConnectorOptions, AuthOptions } from '@nextgis/ngw-connector';
 import { EventEmitter } from 'events';
-import { evented } from './decorators';
+import { evented, onLoad } from './decorators';
+import { Dialog } from '@nextgis/dialog';
+import './ngw-uploader.css';
 
 export interface UploadInputOptions {
   html?: string;
@@ -11,6 +13,7 @@ export interface UploadInputOptions {
   success?: (newRes: ResourceCreateResp) => void;
   error?: (er: Error) => void;
   createName?: (name: string) => string;
+  element?: HTMLElement;
 }
 
 interface ResourceCreateResp {
@@ -21,6 +24,7 @@ interface ResourceCreateResp {
 
 export interface NgwUploadOptions extends NgwConnectorOptions {
   inputOptions?: UploadInputOptions;
+  loginDialog?: boolean;
 }
 
 export interface RasterUploadResp {
@@ -82,10 +86,11 @@ export default class NgwUploader {
 
   emitter = new EventEmitter();
   connector: NgwConnector;
+  isLoaded: boolean = false;
 
   constructor(options: NgwUploadOptions) {
     this.options = { ...this.options, ...options };
-    this.connector = new NgwConnector(options);
+    this._initialize();
   }
 
   createInput(options: UploadInputOptions = {}): HTMLElement {
@@ -102,14 +107,14 @@ export default class NgwUploader {
       if (options.error) {
         uploadPromise.then(options.error);
       }
-      // .then((newStyle) => {
-      //   this.createWms(newStyle, options.name);
-      // });
     });
-
+    if (options.element) {
+      options.element.appendChild(input);
+    }
     return input;
   }
 
+  @onLoad()
   uploadRaster(file: File, options: RasterUploadOptions): Promise<any> {
     return this.fileUpload(file, options).then((meta) => {
       let name = options.name || meta.name;
@@ -229,4 +234,95 @@ export default class NgwUploader {
       return meta;
     });
   }
+
+  private async _initialize() {
+    if (this.options.loginDialog) {
+      try {
+        const loginOpt = await this._showLoginDialog(this.options.auth);
+        this.options.auth = loginOpt;
+      } catch (er) {
+        // ignore
+      }
+    }
+    this.connector = new NgwConnector(this.options);
+    this.isLoaded = true;
+    this.emitter.emit('load');
+  }
+
+  private _showLoginDialog(defAuth?: AuthOptions): Promise<AuthOptions> {
+    return new Promise((resolve, reject) => {
+      const dialog = new Dialog();
+      const onResolve = (auth: AuthOptions) => {
+        dialog.close();
+        resolve(auth);
+      };
+      const onReject = (er: Error) => {
+        dialog.close();
+        reject(er);
+      };
+      const html = this._createDialogHtml(defAuth, onResolve, onReject);
+      dialog.updateContent(html);
+      dialog.show();
+    });
+  }
+
+  private _createDialogHtml(defAuth: AuthOptions = {}, resolve, reject): HTMLElement {
+    const { login, password } = defAuth;
+    const form = document.createElement('div');
+    form.className = 'ngw-uploader__login-dialog--form';
+    const formHtml = `
+      <div><label><div>Name:</div>
+        <input value=${login} class="ngw-uploader__login-dialog--input name"></input>
+      </label></div>
+      <div><label><div>Password:</div>
+        <input value=${password} type="password" class="ngw-uploader__login-dialog--input password"></input>
+      </label></div>
+      <button class="ngw-uploader__login-dialog--button login">Login</button>
+      <button class="ngw-uploader__login-dialog--button cancel">Cancel</button>
+    `;
+    form.innerHTML = formHtml;
+    const loginElement = form.getElementsByClassName('name')[0] as HTMLInputElement;
+    const passwordElement = form.getElementsByClassName('password')[0] as HTMLInputElement;
+    const loginBtn = form.getElementsByClassName('login')[0] as HTMLButtonElement;
+    const cancelBtn = form.getElementsByClassName('cancel')[0] as HTMLButtonElement;
+    const getAuthOpt: () => AuthOptions = () => {
+      return {
+        login: loginElement.value,
+        password: passwordElement.value
+      };
+    };
+    const onInputChange = () => {
+      validate();
+    };
+    const validate = () => {
+      const auth = getAuthOpt();
+      if (auth.login && auth.password) {
+        loginBtn.disabled = false;
+      } else {
+        loginBtn.disabled = true;
+      }
+    };
+    const addEventListener = () => {
+      [loginElement, passwordElement].forEach((x) => {
+        ['change', 'input'].forEach((y) => x.addEventListener(y, onInputChange));
+      });
+    };
+    const removeEventListener = () => {
+      [loginElement, passwordElement].forEach((x) => {
+        ['change', 'input'].forEach((y) => x.removeEventListener(y, onInputChange));
+      });
+    };
+    loginBtn.onclick = () => {
+      removeEventListener();
+      resolve(getAuthOpt());
+    };
+    cancelBtn.onclick = () => {
+      removeEventListener();
+      reject('Login cancel');
+    };
+    validate();
+    addEventListener();
+    return form;
+  }
+
 }

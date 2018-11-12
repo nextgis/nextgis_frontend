@@ -5,6 +5,7 @@
   "main": "lib/ngw-uploader.js",
   "types": "lib/ngw-uploader.d.ts",
   "dependencies": {
+    "@nextgis/dialog": "^0.4.10",
     "@nextgis/ngw-connector": "^0.4.10"
   },
   "devDependencies": {
