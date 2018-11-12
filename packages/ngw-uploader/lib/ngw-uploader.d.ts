@@ -1,6 +1,7 @@
 /// <reference types="node" />
 import NgwConnector, { NgwConnectorOptions } from '@nextgis/ngw-connector';
 import { EventEmitter } from 'events';
+import './ngw-uploader.css';
 export interface UploadInputOptions {
     html?: string;
     name?: string;
@@ -9,6 +10,7 @@ export interface UploadInputOptions {
     success?: (newRes: ResourceCreateResp) => void;
     error?: (er: Error) => void;
     createName?: (name: string) => string;
+    element?: HTMLElement;
 }
 interface ResourceCreateResp {
     id: number;
@@ -19,6 +21,7 @@ interface ResourceCreateResp {
 }
 export interface NgwUploadOptions extends NgwConnectorOptions {
     inputOptions?: UploadInputOptions;
+    loginDialog?: boolean;
 }
 export interface RasterUploadResp {
     status?: number;
@@ -68,6 +71,7 @@ export default class NgwUploader {
     options: NgwUploadOptions;
     emitter: EventEmitter;
     connector: NgwConnector;
+    isLoaded: boolean;
     constructor(options: NgwUploadOptions);
     createInput(options?: UploadInputOptions): HTMLElement;
     uploadRaster(file: File, options: RasterUploadOptions): Promise<any>;
@@ -81,5 +85,8 @@ export default class NgwUploader {
         [x: string]: any;
     }>;
     fileUpload(file: File, options?: RasterUploadOptions): Promise<any>;
+    private _initialize;
+    private _showLoginDialog;
+    private _createDialogHtml;
 }
 export {};
