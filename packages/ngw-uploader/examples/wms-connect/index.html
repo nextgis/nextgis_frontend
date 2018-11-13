@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Ngw Uploader Example</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://unpkg.com/@nextgis/ngw-uploader@latest"></script>
+  <!-- <script type="text/javascript" src="../../lib/ngw-uploader.js"></script> -->
+
+<body>
+  <label>
+    <div>WMS service URL:</div>
+    <input id="wms-url" value='http://pkk5.rosreestr.ru/arcgis/services/Cadastre/CadastreWMS/MapServer/WMSServer'/>
+  </label>
+  <button id="connect-wms">Connect WMS</button>
+  <p id='status'></p>
+  <div id="result-block" style="display: none;">
+    <p>WMS data</p>
+    <div id='wms-data-block'>Loading...</div>
+  </div>
+
+  <script>
+    var statusUpload = document.getElementById('status');
+    var input = document.getElementById('wms-url');
+    var button = document.getElementById('connect-wms');
+    var resultBlock = document.getElementById('result-block');
+    var wmsDataBlock = document.getElementById('wms-data-block');
+    var ngwUploader = new NgwUploader({
+      baseUrl: 'http://dev.nextgis.com/sandbox'
+    });
+
+    ngwUploader.emitter.on('status:change', function (evt) {
+      statusUpload.innerHTML = evt.message;
+    });
+
+    button.onclick = function () {
+      ngwUploader.createWmsConnection({
+        name: 'ppk5_' + new Date().getTime(),
+        url: input.value,
+        version: "1.1.1"
+      }).then(function(newWmsConnection){
+        resultBlock.style.display = 'block';
+        ngwUploader.getResource(newWmsConnection.id).then(function(wmsData) {
+          wmsDataBlock.innerHTML = '';
+          wmsDataBlock.appendChild(document.createElement('pre')).innerHTML = JSON.stringify(wmsData, null, 2);
+        });
+      });
+    };
+  </script>
+
+</body>
+
+</html>
