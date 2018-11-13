@@ -1,12 +1,12 @@
-# ngw-leaflet
+# ngw-mapbox
 
-Library providing tools to show NGW cloud through leaflet.js
+One file bundle for building [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/) map interacting with NextGIS;
 
 ## Usage
 
 ### Using directly in the browser
 
-#### Direct <script> Include
+#### Include assets
 
 Simply download and include with a script tag. NgwMapbox will be registered as a global variable.
 

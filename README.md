@@ -2,6 +2,71 @@
 
 This repository under construction
 
+## Packages `@nextgis/`
+
+- [webmap](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/webmap) – universal map constructor;
+- [leaflet-map-adapter](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/leaflet-map-adapter) – webmap adapter to use [Laeflet](https://leafletjs.com/) GIS framework;
+- [ol-map-adapter](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/ol-map-adapter) – webmap adapter to use [OpenLayers](https://openlayers.org/) GIS framework;
+- [mapbox-gl-adapter](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/mapbox-gl-adapter) – webmap adapter to use [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/) framework;
+- [qms-kit](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/qms-kit) – build webmap with [Nextgis QMS](https://qms.nextgis.com/) baselayer;
+- [ngw-connector](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/ngw-connector) – module for interaction with [NextGIS Web](http://docs.nextgis.ru/docs_ngweb_dev/doc/developer/toc.html) REST API;
+- [ngw-kit](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/ngw-kit) – build webmap with [NextGIS Web](http://nextgis.ru/nextgis-web/) instance;
+- [ngw-uploader](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/ngw-uploader) – library providing tools for uploading data to the [NextGIS Web](http://nextgis.ru/nextgis-web/) cloud;
+- [ngw-map](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/ngw-map) – abstract map to simplify work with NextGIS services;
+- [ngw-leaflet](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/ngw-leaflet) – one file bundle for building [Laeflet](https://leafletjs.com/) map interacting with NextGIS services;
+- [ngw-ol](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/ngw-ol) – one file bundle for building [OpenLayers](https://openlayers.org/) map interacting with NextGIS;
+- [ngw-mapbox](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/ngw-mapbox) – one file bundle for building [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/) map interacting with NextGIS;
+- [dialog](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/dialog) – utility for working with modal windows;
+
+### Base usage
+
+## Usage
+
+### Using directly in the browser
+
+#### Include assets
+
+Simply download and include with a script tag. \[Package\] will be registered as a global variable.
+
+```html
+<script src="./lib/[package].js"></script>
+<script>
+  var package = new Package(options);
+</script>
+```
+
+#### CDN
+
+```html
+<script src="https://unpkg.com/@nextgis/[package]@latest"></script>
+```
+
+We recommend linking to a specific version number that you can update manually:
+
+```html
+<script src="https://unpkg.com/@nextgis/[package]@0.4.0"></script>
+```
+
+### NPM/YARN
+
+NPM/YARN is the recommended installation method when building large scale applications with [PACKAGE]. It pairs nicely with module bundlers such as [Webpack](https://webpack.js.org/).
+
+```bash
+# latest stable
+$ npm i -S @nextgis/[package]
+# or with yarn
+$ yarn add @nextgis/[package]
+```
+
+then import the \[package\] in the project modules
+
+```js
+import Package from '@nextgis/[package]';
+
+const package = new Package(options);
+
+```
+
 ## For developers
 
 ### Instruction for whole repository
@@ -84,3 +149,9 @@ Useful VSCode plugins:
 - prograhammer.tslint-vue (Vue)
 - ritwickdey.LiveServer
 - wayou.vscode-todo-highlight
+
+## Commercial support
+
+Need to fix a bug or add a feature to NextGIS Web? We provide custom development and support for this software. [Contact us](http://nextgis.com/contact/) to discuss options!
+
+[![http://nextgis.com](http://nextgis.ru/img/nextgis.png)](http://nextgis.com)

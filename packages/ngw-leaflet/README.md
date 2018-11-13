@@ -1,12 +1,12 @@
 # ngw-leaflet
 
-Library providing tools to show NGW cloud through leaflet.js
+One file bundle for building [Laeflet](https://leafletjs.com/) map interacting with NextGIS services
 
 ## Usage
 
 ### Using directly in the browser
 
-#### Direct <script> Include
+#### Include assets
 
 Simply download and include with a script tag. NgwLeaflet will be registered as a global variable.
 
@@ -32,7 +32,7 @@ Simply download and include with a script tag. NgwLeaflet will be registered as 
 We recommend linking to a specific version number that you can update manually:
 
 ```html
-<script src="https://unpkg.com/@nextgis/ngw-leaflet@0.2.0"></script>
+<script src="https://unpkg.com/@nextgis/ngw-leaflet@0.4.2"></script>
 ```
 
 ### NPM

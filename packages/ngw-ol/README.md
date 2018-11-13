@@ -1,11 +1,57 @@
 # ngw-ol
 
-Library providing tools to show NGW cloud through ol.js
+One file bundle for building [OpenLayers](https://openlayers.org/) map interacting with NextGIS
 
 ## Usage
 
-```js
-import { NgwOl } from 'ngw-ol';
+### Using directly in the browser
 
+#### Include assets
+
+Simply download and include with a script tag. NgwOl will be registered as a global variable.
+
+```html
+<script src="./lib/ngw-ol.js"></script>
+<div id='map'></div>
+<script>
+  var ngwMap = new NgwOl({
+    baseUrl: 'https://demo.nextgis.com',
+    target: map,
+    qmsId: 487,
+    webmapId: 3985
+  });
+</script>
+```
+
+#### CDN
+
+```html
+<script src="https://unpkg.com/@nextgis/ngw-ol@latest"></script>
+```
+
+We recommend linking to a specific version number that you can update manually:
+
+```html
+<script src="https://unpkg.com/@nextgis/ngw-ol@0.4.2"></script>
+```
+
+### NPM
+
+NPM is the recommended installation method when building large scale applications with NgwOl. It pairs nicely with module bundlers such as [Webpack](https://webpack.js.org/)
+
+```bash
+# latest stable
+$ npm install @nextgis/ngw-ol
+```
+
+```js
+import NgwOl from 'ngw-ol';
+
+const ngwOl = new NgwOl({
+  baseUrl: 'https://demo.nextgis.com',
+  target: map,
+  qmsId: 487,
+  webmapId: 3985
+});
 
 ```
