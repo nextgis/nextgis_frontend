@@ -1,0 +1,4 @@
+{
+  "name": "Proxy external WMS service",
+  "description": "This example create NextGIS Web WMS service which proxies external WMS service with selected layers"
+}
