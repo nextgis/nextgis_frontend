@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/ngw-ol",
-  "version": "0.4.12",
+  "version": "0.4.13",
   "description": "",
   "main": "lib/ngw-ol.js",
   "types": "lib/ngw-ol.d.ts",
