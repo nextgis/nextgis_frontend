@@ -11,12 +11,12 @@ One file bundle for building [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/
 Simply download and include with a script tag. NgwMapbox will be registered as a global variable.
 
 ```html
-<script src="./lib/ngw-leaflet.js"></script>
+<script src="../lib/ngw-leaflet.js"></script>
 <div id='map'></div>
 <script>
   var ngwMap = new NgwMapbox({
     baseUrl: 'https://demo.nextgis.com',
-    target: map,
+    target: 'map',
     qmsId: 487,
     webmapId: 3985
   });
@@ -49,7 +49,7 @@ import NgwMapbox from '@nextgis/ngw-mapbox';
 
 const ngwMapbox = new NgwMapbox({
   baseUrl: 'https://demo.nextgis.com',
-  target: map,
+  target: 'map',
   qmsId: 487,
   webmapId: 3985
 });

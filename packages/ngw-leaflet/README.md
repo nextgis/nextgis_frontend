@@ -11,12 +11,12 @@ One file bundle for building [Laeflet](https://leafletjs.com/) map interacting w
 Simply download and include with a script tag. NgwLeaflet will be registered as a global variable.
 
 ```html
-<script src="./lib/ngw-leaflet.js"></script>
+<script src="../lib/ngw-leaflet.js"></script>
 <div id='map'></div>
 <script>
   var ngwMap = new NgwLeaflet({
     baseUrl: 'https://demo.nextgis.com',
-    target: map,
+    target: 'map',
     qmsId: 487,
     webmapId: 3985
   });
@@ -51,7 +51,7 @@ import NgwLeaflet from '@nextgis/ngw-leaflet';
 
 const ngwLeaflet = new NgwLeaflet({
   baseUrl: 'https://demo.nextgis.com',
-  target: map,
+  target: 'map',
   qmsId: 487,
   webmapId: 3985
 });
