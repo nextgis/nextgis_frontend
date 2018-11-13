@@ -1,8 +1,8 @@
-# ngw-ol
+# Ngw Ol
 
 One file bundle for building [OpenLayers](https://openlayers.org/) map interacting with NextGIS
 
-## Usage
+## Installation
 
 ### Using directly in the browser
 
@@ -45,7 +45,7 @@ $ npm install @nextgis/ngw-ol
 ```
 
 ```js
-import NgwOl from 'ngw-ol';
+import NgwOl from '@nextgis/ngw-ol';
 
 const ngwOl = new NgwOl({
   baseUrl: 'https://demo.nextgis.com',
@@ -55,3 +55,9 @@ const ngwOl = new NgwOl({
 });
 
 ```
+
+## Commercial support
+
+Need to fix a bug or add a feature to NextGIS Web? We provide custom development and support for this software. [Contact us](http://nextgis.com/contact/) to discuss options!
+
+[![http://nextgis.com](http://nextgis.ru/img/nextgis.png)](http://nextgis.com)

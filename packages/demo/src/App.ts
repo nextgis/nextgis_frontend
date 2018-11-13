@@ -1,14 +1,17 @@
 import { Vue, Component, Watch } from 'vue-property-decorator';
 import HtmlExample from './components/Examples/HtmlExample/HtmlExample.vue';
+import Readme from './components/Readme/Readme.vue';
 
 interface Item {
-  id?: string;
+  id: string;
   name: string;
+  page?: 'example' | 'readme';
   description?: string;
   html?: string;
   children?: Item[];
   model?: boolean;
   component?: any;
+  icon?: string;
   _parent?: Item;
 }
 
@@ -57,16 +60,23 @@ export class App extends Vue {
       const item: Item = {
         id: conf.id,
         name: conf.name,
-        description: conf.description
+        description: conf.description,
+        page: conf.page
       };
       if (conf.children) {
         item.model = true;
         item.children = conf.children.map((i) => prepareItem(i, item));
       } else {
-        item.component = HtmlExample;
-        item.html = conf.html;
         item._parent = _parent;
       }
+      if (item.page === 'example') {
+        item.component = HtmlExample;
+        item.icon = 'mdi-code-tags';
+      } else if (item.page === 'readme') {
+        item.component = Readme;
+        item.icon = 'mdi-information-outline';
+      }
+      item.html = conf.html;
       return item;
     };
     const config = process.env.EXAMPLES;
@@ -90,7 +100,18 @@ export class App extends Vue {
       this.open = this.open.concat(parents);
       this.active = [treeItem.id];
     } else {
-      this.$router.push('/' + this.items[0].children[0].id);
+      const getFirstHtmlItem = (items: Item[]) => {
+        return items.find((i) => {
+          if (i.html) {
+            return i.html;
+          } else if (i.children) {
+            return getFirstHtmlItem(i.children);
+          }
+        });
+      };
+      const item = getFirstHtmlItem(this.items);
+      const slug = item ? item.id : '';
+      this.$router.push('/' + slug);
     }
   }
 }
