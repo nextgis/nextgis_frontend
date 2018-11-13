@@ -13,7 +13,25 @@ export interface UploadInputOptions {
   success?: (newRes: ResourceCreateResp) => void;
   error?: (er: Error) => void;
   createName?: (name: string) => string;
-  element?: HTMLElement;
+  element?: string | HTMLElement;
+}
+
+interface ResourceCreateOptions {
+  name?: string;
+  id?: string;
+}
+
+export interface CreateWmsConnectionOptions extends ResourceCreateOptions {
+  /** WMS service url */
+  url: string;
+  /** User name to connect to service */
+  username?: string;
+  /** Password to connect to service */
+  password?: string;
+  /** WMS version */
+  version?: string;
+  /** If equal query - query capabilities from service */
+  capcache?: string;
 }
 
 interface ResourceCreateResp {
@@ -67,7 +85,7 @@ export interface RespError {
   serializer: string;
 }
 
-export type AvailableStatus = 'upload' | 'create-resource' | 'create-style' | 'create-wms';
+export type AvailableStatus = 'upload' | 'create-resource' | 'create-style' | 'create-wms' | 'create-wms-connection';
 
 export interface EmitterStatus {
   status: AvailableStatus;
@@ -109,9 +127,23 @@ export default class NgwUploader {
       }
     });
     if (options.element) {
-      options.element.appendChild(input);
+      let element;
+      if (typeof options.element === 'string') {
+        element = document.getElementById(options.element);
+      } else if (options.element instanceof HTMLElement) {
+        element = options.element;
+      }
+      if (element) {
+        element.appendChild(input);
+      } else {
+        throw new Error('target element not founded');
+      }
     }
     return input;
+  }
+
+  getResource(id: number) {
+    return this.connector.request('resource.item', {id});
   }
 
   @onLoad()
@@ -202,6 +234,33 @@ export default class NgwUploader {
             max_scale_denom: null
           }
         ]
+      }
+    };
+    return this.connector.post('resource.collection', { data: wmsData });
+  }
+
+  @evented({ status: 'create-wms-connection', template: 'wms creation for resource ID {id}' })
+  createWmsConnection(options: CreateWmsConnectionOptions, name?: string) {
+    name = name || options.name || options.id;
+    const wmsData = {
+      resource: {
+        cls: 'wmsclient_connection',
+        parent: {
+          id: 0
+        },
+        display_name: name,
+        keyname: null,
+        description: null
+      },
+      resmeta: {
+        items: {}
+      },
+      wmsclient_connection: {
+        url: options.url,
+        username: options.password,
+        password: options.password,
+        version: options.version,
+        capcache: options.capcache || 'query'
       }
     };
     return this.connector.post('resource.collection', { data: wmsData });

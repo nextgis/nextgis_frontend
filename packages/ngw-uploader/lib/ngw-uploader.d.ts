@@ -10,7 +10,18 @@ export interface UploadInputOptions {
     success?: (newRes: ResourceCreateResp) => void;
     error?: (er: Error) => void;
     createName?: (name: string) => string;
-    element?: HTMLElement;
+    element?: string | HTMLElement;
+}
+interface ResourceCreateOptions {
+    name?: string;
+    id?: string;
+}
+export interface CreateWmsConnectionOptions extends ResourceCreateOptions {
+    url: string;
+    username?: string;
+    password?: string;
+    version?: string;
+    capcache?: string;
 }
 interface ResourceCreateResp {
     id: number;
@@ -60,7 +71,7 @@ export interface RespError {
     message: string;
     serializer: string;
 }
-export declare type AvailableStatus = 'upload' | 'create-resource' | 'create-style' | 'create-wms';
+export declare type AvailableStatus = 'upload' | 'create-resource' | 'create-style' | 'create-wms' | 'create-wms-connection';
 export interface EmitterStatus {
     status: AvailableStatus;
     state: 'begin' | 'end' | 'progress' | 'error';
@@ -74,6 +85,7 @@ export default class NgwUploader {
     isLoaded: boolean;
     constructor(options: NgwUploadOptions);
     createInput(options?: UploadInputOptions): HTMLElement;
+    getResource(id: number): Promise<import("../../ngw-connector/lib/types/ResourceItem").ResourceItem>;
     uploadRaster(file: File, options: RasterUploadOptions): Promise<any>;
     createResource(meta: any, name: string, options: RasterUploadOptions): Promise<{
         [x: string]: any;
@@ -82,6 +94,9 @@ export default class NgwUploader {
         [x: string]: any;
     }>;
     createWms(newStyle: any, name?: string): Promise<{
+        [x: string]: any;
+    }>;
+    createWmsConnection(options: CreateWmsConnectionOptions, name?: string): Promise<{
         [x: string]: any;
     }>;
     fileUpload(file: File, options?: RasterUploadOptions): Promise<any>;
