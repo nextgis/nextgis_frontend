@@ -112,6 +112,7 @@ export default class NgwConnector {
 
     options = options || {};
     options.method = 'POST';
+    options.nocache = true;
     return this.request(name, params, options);
   }
 
@@ -127,7 +128,7 @@ export default class NgwConnector {
       }
       // remove double slash
       url = url.replace(/([^:]\/)\/+/g, '$1');
-      if (!this._loadingStatus[url]) {
+      if (!this._loadingStatus[url] || options.nocache) {
         this._loadingStatus[url] = true;
 
         return this._getJson(url, options).then((data) => {

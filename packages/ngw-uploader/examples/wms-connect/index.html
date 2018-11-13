@@ -9,24 +9,52 @@
   <script src="https://unpkg.com/@nextgis/ngw-uploader@latest"></script>
   <!-- <script type="text/javascript" src="../../lib/ngw-uploader.js"></script> -->
 
+  <style>
+    #connect-wms {
+      display: block;
+    }
+
+    #wms-url {
+      width: 550px;
+      margin: 1rem 0;
+    }
+  </style>
+
 <body>
-  <label>
-    <div>WMS service URL:</div>
-    <input id="wms-url" value='http://pkk5.rosreestr.ru/arcgis/services/Cadastre/CadastreWMS/MapServer/WMSServer'/>
-  </label>
-  <button id="connect-wms">Connect WMS</button>
+  <div id="wms-connect-block">
+    <label>
+      <div>WMS service URL:</div>
+      <input id="wms-url" value='http://pkk5.rosreestr.ru/arcgis/services/Cadastre/CadastreWMS/MapServer/WMSServer' />
+    </label>
+    <button id="connect-wms">Create WMS connection</button>
+  </div>
+
+  <div id="wms-layers-block" style="display: none">
+    <p>Select layers to create new WMS Service</p>
+    <div id='layers-select'></div>
+    <button id="create-wms-layers">Create WMS layers</button>
+    <p id='status'></p>
+  </div>
+
   <p id='status'></p>
+
   <div id="result-block" style="display: none;">
-    <p>WMS data</p>
+    <p>Result:</p>
     <div id='wms-data-block'>Loading...</div>
   </div>
 
   <script>
-    var statusUpload = document.getElementById('status');
     var input = document.getElementById('wms-url');
     var button = document.getElementById('connect-wms');
     var resultBlock = document.getElementById('result-block');
+    var statusUpload = document.getElementById('status');
     var wmsDataBlock = document.getElementById('wms-data-block');
+    var wmsConnectBlock = document.getElementById('wms-connect-block');
+
+    var wmsLayersBlock = document.getElementById('wms-layers-block');
+    var createWmsLayersBtn = document.getElementById('create-wms-layers');
+    var layersSelect = document.getElementById('layers-select');
+
     var ngwUploader = new NgwUploader({
       baseUrl: 'http://dev.nextgis.com/sandbox'
     });
@@ -37,17 +65,86 @@
 
     button.onclick = function () {
       ngwUploader.createWmsConnection({
-        name: 'ppk5_' + new Date().getTime(),
+        name: 'custom_' + new Date().getTime(),
         url: input.value,
         version: "1.1.1"
-      }).then(function(newWmsConnection){
-        resultBlock.style.display = 'block';
-        ngwUploader.getResource(newWmsConnection.id).then(function(wmsData) {
-          wmsDataBlock.innerHTML = '';
-          wmsDataBlock.appendChild(document.createElement('pre')).innerHTML = JSON.stringify(wmsData, null, 2);
-        });
-      });
+      }).then(onWmsConectionCreated);
     };
+
+    function onWmsConectionCreated(newWmsConnection) {
+      resultBlock.style.display = 'block';
+      ngwUploader.getResource(newWmsConnection.id).then(function (wmsData) {
+        wmsConnectBlock.style.display = 'none';
+        wmsDataBlock.innerHTML = '';
+        wmsLayersBlock.style.display = 'block';
+        wmsDataBlock.appendChild(document.createElement('pre')).innerHTML = JSON.stringify(wmsData, null, 2);
+
+        var layers = wmsData.wmsclient_connection.capcache.layers;
+        var layersToCreate = {};
+
+        var onCheckBoxChange = function (l) {
+          layersToCreate[l.id] = this.checked ? l.title : false;
+        }
+
+        var createPromise = function (id, title) {
+          return ngwUploader.createWmsConnectedLayer({
+            id: wmsData.resource.id,
+            parentId: wmsData.resource.parent.id,
+            name: layersToCreate[id] + '_' + new Date().getTime(),
+            wmslayers: [id]
+          }).then(function (newLayer) {
+            newLayer.name = title;
+            return newLayer;
+          })
+        }
+
+        for (var fry = 0; fry < layers.length; fry++) {
+          var layer = layers[fry];
+          var label = document.createElement('checkbox');
+          var checkbox = document.createElement('input');
+          checkbox.setAttribute('type', 'checkbox');
+          label.appendChild(checkbox);
+          label.appendChild(document.createTextNode(layer.title));
+          checkbox.onchange = onCheckBoxChange.bind(checkbox, layer)
+          layersSelect.appendChild(label);
+        }
+        createWmsLayersBtn.onclick = function () {
+          var promises = [];
+          for (var l in layersToCreate) {
+            if (layersToCreate[l]) {
+              var promise = createPromise(Number(l), layersToCreate[l]);
+              promises.push(promise);
+            }
+          }
+          if (promises.length) {
+            createWmsLayersBtn.disabled = true;
+            window.Promise.all(promises).then(function (values) {
+              var layers = [];
+              for (var fry = 0; fry < values.length; fry++) {
+                var layer = values[fry];
+                layers.push({
+                  keyname: 'image' + fry,
+                  display_name: layer.name + '_' + new Date().getTime(),
+                  resource_id: layer.id,
+                })
+              }
+              ngwUploader.createWms({
+                name: 'custom',
+                layers: layers
+              }).then(function (newWmsService) {
+                ngwUploader.getResource(newWmsService.id).then(function (wmsService) {
+                  wmsLayersBlock.style.display = 'none';
+                  wmsDataBlock.innerHTML = '';
+                  wmsDataBlock.appendChild(document.createElement('pre')).innerHTML = JSON.stringify(wmsService, null, 2);
+                });
+              })
+            })
+          } else {
+            statusUpload.innerHTML = 'no one layer selected';
+          }
+        }
+      });
+    }
   </script>
 
 </body>
