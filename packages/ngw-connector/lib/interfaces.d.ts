@@ -46,6 +46,7 @@ export interface RequestOptions {
     withCredentials?: boolean;
     file?: File;
     onProgress?: (percentComplete: number) => void;
+    nocache?: boolean;
 }
 export interface LoadingQueue {
     name: string;

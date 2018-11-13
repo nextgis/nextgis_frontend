@@ -1,4 +1,4 @@
-// import NgwConnector from '../../ngw-connector/src/ngw-connector';
+// import NgwConnector, { NgwConnectorOptions, AuthOptions } from '../../ngw-connector/src/ngw-connector';
 import NgwConnector, { NgwConnectorOptions, AuthOptions } from '@nextgis/ngw-connector';
 import { EventEmitter } from 'events';
 import { evented, onLoad } from './decorators';
@@ -18,7 +18,8 @@ export interface UploadInputOptions {
 
 interface ResourceCreateOptions {
   name?: string;
-  id?: string;
+  id?: number;
+  parendId?: number;
 }
 
 export interface CreateWmsConnectionOptions extends ResourceCreateOptions {
@@ -32,6 +33,17 @@ export interface CreateWmsConnectionOptions extends ResourceCreateOptions {
   version?: string;
   /** If equal query - query capabilities from service */
   capcache?: string;
+}
+
+export interface CreateWmsConnectedLayerOptions extends ResourceCreateOptions {
+  connection: {
+    id: 18
+  };
+  srs?: {
+    id: number // 3857
+  };
+  imgformat?: string; // 'image/png'
+  wmslayers: string; // '1,2'
 }
 
 interface ResourceCreateResp {
@@ -85,7 +97,12 @@ export interface RespError {
   serializer: string;
 }
 
-export type AvailableStatus = 'upload' | 'create-resource' | 'create-style' | 'create-wms' | 'create-wms-connection';
+export type AvailableStatus = 'upload' |
+  'create-resource' |
+  'create-style' |
+  'create-wms' |
+  'create-wms-connection' |
+  'create-wms-connected-layer';
 
 export interface EmitterStatus {
   status: AvailableStatus;
@@ -143,7 +160,7 @@ export default class NgwUploader {
   }
 
   getResource(id: number) {
-    return this.connector.request('resource.item', {id});
+    return this.connector.request('resource.item', { id });
   }
 
   @onLoad()
@@ -209,13 +226,26 @@ export default class NgwUploader {
   }
 
   @evented({ status: 'create-wms', template: 'wms creation for resource ID {id}' })
-  createWms(newStyle, name?: string) {
-    name = name || newStyle.name || newStyle.id;
+  createWms(options, name?: string) {
+    name = name || options.name || options.id;
+    let layers = options.layers || [{
+      keyname: 'image1',
+      display_name: name,
+      resource_id: options.id,
+    }];
+    layers = layers.map((x) => {
+      return {
+        ...{
+          min_scale_denom: null,
+          max_scale_denom: null
+        }, ...x
+      };
+    });
     const wmsData = {
       resource: {
         cls: 'wmsserver_service',
         parent: {
-          id: 0
+          id: options.parentId || 0
         },
         display_name: 'WMS_' + name,
         keyname: null,
@@ -225,23 +255,15 @@ export default class NgwUploader {
         items: {}
       },
       wmsserver_service: {
-        layers: [
-          {
-            keyname: 'image1',
-            display_name: name,
-            resource_id: newStyle.id,
-            min_scale_denom: null,
-            max_scale_denom: null
-          }
-        ]
+        layers
       }
     };
     return this.connector.post('resource.collection', { data: wmsData });
   }
 
-  @evented({ status: 'create-wms-connection', template: 'wms creation for resource ID {id}' })
+  @evented({ status: 'create-wms-connection', template: 'create wms connection' })
   createWmsConnection(options: CreateWmsConnectionOptions, name?: string) {
-    name = name || options.name || options.id;
+    name = name || options.name || String(options.id);
     const wmsData = {
       resource: {
         cls: 'wmsclient_connection',
@@ -261,6 +283,36 @@ export default class NgwUploader {
         password: options.password,
         version: options.version,
         capcache: options.capcache || 'query'
+      }
+    };
+    return this.connector.post('resource.collection', { data: wmsData });
+  }
+
+  @evented({ status: 'create-wms-connected-layer', template: 'create WMS layer for conected resource ID {id}' })
+  createWmsConnectedLayer(options: CreateWmsConnectedLayerOptions, name?: string) {
+    name = name || options.name || String(options.id);
+    const wmsData = {
+      resource: {
+        cls: 'wmsclient_layer',
+        parent: {
+          id: options.parendId || 0
+        },
+        display_name: options.name,
+        keyname: null,
+        description: null
+      },
+      resmeta: {
+        items: {}
+      },
+      wmsclient_layer: {
+        connection: {
+          id: options.id
+        },
+        srs: {
+          id: 3857
+        },
+        imgformat: options.imgformat || 'image/png',
+        wmslayers: options.wmslayers
       }
     };
     return this.connector.post('resource.collection', { data: wmsData });

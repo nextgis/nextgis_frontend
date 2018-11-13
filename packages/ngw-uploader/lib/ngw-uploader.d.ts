@@ -14,7 +14,8 @@ export interface UploadInputOptions {
 }
 interface ResourceCreateOptions {
     name?: string;
-    id?: string;
+    id?: number;
+    parendId?: number;
 }
 export interface CreateWmsConnectionOptions extends ResourceCreateOptions {
     url: string;
@@ -22,6 +23,16 @@ export interface CreateWmsConnectionOptions extends ResourceCreateOptions {
     password?: string;
     version?: string;
     capcache?: string;
+}
+export interface CreateWmsConnectedLayerOptions extends ResourceCreateOptions {
+    connection: {
+        id: 18;
+    };
+    srs?: {
+        id: number;
+    };
+    imgformat?: string;
+    wmslayers: string;
 }
 interface ResourceCreateResp {
     id: number;
@@ -71,7 +82,7 @@ export interface RespError {
     message: string;
     serializer: string;
 }
-export declare type AvailableStatus = 'upload' | 'create-resource' | 'create-style' | 'create-wms' | 'create-wms-connection';
+export declare type AvailableStatus = 'upload' | 'create-resource' | 'create-style' | 'create-wms' | 'create-wms-connection' | 'create-wms-connected-layer';
 export interface EmitterStatus {
     status: AvailableStatus;
     state: 'begin' | 'end' | 'progress' | 'error';
@@ -93,10 +104,13 @@ export default class NgwUploader {
     createStyle(newRes: any, name?: string): Promise<{
         [x: string]: any;
     }>;
-    createWms(newStyle: any, name?: string): Promise<{
+    createWms(options: any, name?: string): Promise<{
         [x: string]: any;
     }>;
     createWmsConnection(options: CreateWmsConnectionOptions, name?: string): Promise<{
+        [x: string]: any;
+    }>;
+    createWmsConnectedLayer(options: CreateWmsConnectedLayerOptions, name?: string): Promise<{
         [x: string]: any;
     }>;
     fileUpload(file: File, options?: RasterUploadOptions): Promise<any>;
