@@ -30,7 +30,7 @@
     >
       <v-toolbar-title class="ml-0 pl-0">
         <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-        <span class="">NextGIS Frontend Examples</span>
+        <span class="">NextGIS Frontend</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon large href="https://github.com/nextgis/nextgisweb_frontend" target="_blank">
