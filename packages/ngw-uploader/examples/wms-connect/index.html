@@ -129,7 +129,7 @@
                 })
               }
               ngwUploader.createWms({
-                name: 'custom',
+                name: 'custom_' + new Date().getTime(),
                 layers: layers
               }).then(function (newWmsService) {
                 ngwUploader.getResource(newWmsService.id).then(function (wmsService) {
