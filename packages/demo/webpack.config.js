@@ -46,7 +46,17 @@ module.exports = (env, argv) => {
           attrs: [':data-src']
         }
       }
-    }
+    },
+    {
+      test: /\.(png|woff|woff2|eot|ttf)$/,
+      use: {
+        loader: "url-loader",
+        options: {
+          limit: 50000,
+          name: "./fonts/[name].[ext]", // Output below ./fonts
+        },
+      },
+    },
   ].concat(utils.styleLoaders({
     sourceMap: true,
     extract: false

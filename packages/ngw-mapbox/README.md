@@ -1,8 +1,8 @@
-# ngw-mapbox
+# Ngw Mapbox
 
 One file bundle for building [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/) map interacting with NextGIS;
 
-## Usage
+## Installation
 
 ### Using directly in the browser
 
@@ -45,7 +45,7 @@ $ npm install @nextgis/ngw-mapbox
 ```
 
 ```js
-import NgwMapbox from 'ngw-mapbox';
+import NgwMapbox from '@nextgis/ngw-mapbox';
 
 const ngwMapbox = new NgwMapbox({
   baseUrl: 'https://demo.nextgis.com',
@@ -55,3 +55,9 @@ const ngwMapbox = new NgwMapbox({
 });
 
 ```
+
+## Commercial support
+
+Need to fix a bug or add a feature to NextGIS Web? We provide custom development and support for this software. [Contact us](http://nextgis.com/contact/) to discuss options!
+
+[![http://nextgis.com](http://nextgis.ru/img/nextgis.png)](http://nextgis.com)

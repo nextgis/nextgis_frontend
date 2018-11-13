@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-export { SendToCodepen as default } from "./SendToCodepen";
+export { SendToCodepen as default } from './SendToCodepen';
 </script>
 
 <style lang="scss">

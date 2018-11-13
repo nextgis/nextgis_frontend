@@ -15,6 +15,11 @@
       open-on-click
       transition
     >
+      <template slot="prepend" slot-scope="{ item, open, leaf }">
+        <v-icon v-if="item.icon">
+          {{item.icon}}
+        </v-icon>
+      </template>
     </v-treeview>
     </v-navigation-drawer>
     <v-toolbar
@@ -23,11 +28,14 @@
       app
       fixed
     >
-      <v-toolbar-title class="ml-0 pl-3">
+      <v-toolbar-title class="ml-0 pl-0">
         <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
         <span class="">NextGIS Frontend Examples</span>
       </v-toolbar-title>
-
+      <v-spacer></v-spacer>
+      <v-btn icon large href="https://github.com/nextgis/nextgisweb_frontend" target="_blank">
+        <v-icon large>mdi-github-circle</v-icon>
+      </v-btn>
 
     </v-toolbar>
     <v-content>
@@ -60,5 +68,13 @@ html,
 body {
   width: 100%;
   height: 100%;
+}
+
+code:after,
+kbd:after,
+code:before,
+kbd:before {
+  content: "" !important;
+  letter-spacing: 0 !important;
 }
 </style>

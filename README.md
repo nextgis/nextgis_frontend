@@ -1,4 +1,4 @@
-# ngw_frontend
+# NextGIS Frontend packages
 
 This repository under construction
 
@@ -18,9 +18,7 @@ This repository under construction
 - [ngw-mapbox](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/ngw-mapbox) – one file bundle for building [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/) map interacting with NextGIS;
 - [dialog](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/dialog) – utility for working with modal windows;
 
-### Base usage
-
-## Usage
+## Base usage
 
 ### Using directly in the browser
 
@@ -149,6 +147,10 @@ Useful VSCode plugins:
 - prograhammer.tslint-vue (Vue)
 - ritwickdey.LiveServer
 - wayou.vscode-todo-highlight
+
+## Commercial support
+
+Need to fix a bug or add a feature to NextGIS Web? We provide custom development and support for this software. [Contact us](http://nextgis.com/contact/) to discuss options!
 
 ## Commercial support
 
