@@ -1,4 +1,5 @@
-import EventEmitter from 'wolfy87-eventemitter';
+/// <reference types="node" />
+import { EventEmitter } from 'events';
 import { TreeHelper } from './TreeHelper';
 import { EntryProperties, IEntryPropertyConfig, IEntryPropertyTypes } from './properties/EntryProperties';
 export interface EntryOptions {

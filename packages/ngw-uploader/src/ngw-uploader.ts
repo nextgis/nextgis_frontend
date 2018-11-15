@@ -2,7 +2,7 @@
 import NgwConnector, { NgwConnectorOptions, AuthOptions } from '@nextgis/ngw-connector';
 import { EventEmitter } from 'events';
 import { evented, onLoad } from './decorators';
-import { Dialog } from '@nextgis/dialog';
+import Dialog from '@nextgis/dialog';
 import './ngw-uploader.css';
 
 export interface UploadInputOptions {

@@ -1,4 +1,4 @@
-import EventEmitter from 'wolfy87-eventemitter';
+import { EventEmitter } from 'events';
 import {Entry} from '../Entry';
 // import StrictEventEmitter from 'strict-event-emitter-types/types/src';
 

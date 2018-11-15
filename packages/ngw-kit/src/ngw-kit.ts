@@ -28,8 +28,7 @@ interface RequestOptions {
   geom: any;
   layers: string[];
 }
-
-export class NgwKit implements StarterKit {
+export default class NgwKit implements StarterKit {
 
   static updateWmsParams = (params, resourceId) => {
     const { bbox, width, height } = params;

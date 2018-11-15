@@ -20,7 +20,7 @@ export default class NgwConnector {
     makeClientId(): string;
     request<K extends keyof RequestItemsParamsMap>(name: K, params?: RequestItemsParamsMap[K] | {}, options?: RequestOptions): Promise<RequestItemsResponseMap[K]>;
     post<K extends keyof RequestItemsParamsMap>(name: K, options?: RequestOptions, params?: RequestItemsParamsMap[K] | {}): Promise<RequestItemsResponseMap[K]>;
-    makeQuery(url: string, params: Params, options: RequestOptions): Promise<any>;
+    makeQuery(url: string, params: Params, options?: RequestOptions): Promise<any>;
     _setLoadingQueue(name: any, resolve: any, reject: any): void;
     _executeLoadingQueue(name: any, data: any, isError?: any): void;
     _getJson(url: string, options: RequestOptions): Promise<any>;

@@ -1,7 +1,7 @@
 import { AppOptions, MapOptions } from './interfaces/WebMapApp';
 import { RuntimeParams } from './interfaces/RuntimeParams';
 import { deepmerge } from './utils/lang';
-import EventEmitter from 'wolfy87-eventemitter';
+import { EventEmitter } from 'events';
 import { WebLayerEntry } from './WebLayerEntry';
 import { Keys } from './components/keys/Keys';
 import { MapAdapter, MapClickEvent } from './interfaces/MapAdapter';
@@ -179,7 +179,7 @@ export default class WebMap<M = any> {
     if (this._extent) {
       this.map.fit(this._extent);
     } else {
-      const {center, zoom} = this.options;
+      const { center, zoom } = this.options;
 
       if (center) {
         this.map.setCenter(center);
@@ -193,10 +193,10 @@ export default class WebMap<M = any> {
   private async _addLayerProviders() {
     try {
 
-      for await(const kit of this._starterKits.filter((x) => x.getLayerAdapters)) {
+      for await (const kit of this._starterKits.filter((x) => x.getLayerAdapters)) {
         const adapters = await kit.getLayerAdapters.call(kit);
         if (adapters) {
-          for await(const adapter of adapters) {
+          for await (const adapter of adapters) {
             // this.map.layerAdapters[adapter.name] = adapter;
             const newAdapter = await adapter.createAdapter(this.map);
             if (newAdapter) {

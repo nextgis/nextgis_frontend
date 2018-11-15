@@ -9,7 +9,7 @@ import { ZoomControl } from './controls/ZoomControl';
 import { CompassControl } from './controls/CompassControl';
 import { AttributionControl } from './controls/AttributionControl';
 declare type positions = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
-export declare class MapboxglAdapter implements MapAdapter {
+export default class MapboxGlAdapter implements MapAdapter {
     static layerAdapters: {
         TILE: typeof TileAdapter;
         MVT: typeof MvtAdapter;
@@ -38,7 +38,7 @@ export declare class MapboxglAdapter implements MapAdapter {
     private orders;
     private _sourcedataloading;
     create(options: any): void;
-    getContainer(): HTMLElement;
+    getContainer(): any;
     setCenter(latLng: [number, number]): void;
     setZoom(zoom: number): void;
     fit(e: [number, number, number, number]): void;

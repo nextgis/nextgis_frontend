@@ -1,5 +1,5 @@
 import NgwMap, { MapOptions } from '@nextgis/ngw-map';
-import { LeafletMapAdapter } from '@nextgis/leaflet-map-adapter';
+import LeafletMapAdapter from '@nextgis/leaflet-map-adapter';
 import 'leaflet/dist/leaflet.css';
 
 // import NgwMap, { MapOptions } from '../../ngw-map/src/ngw-map';
