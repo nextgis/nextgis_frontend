@@ -1,5 +1,5 @@
 /// <reference types="node" />
-import { WebMap, MapAdapter, MapOptions as MO, ControlPositions } from '@nextgis/webmap';
+import WebMap, { MapAdapter, MapOptions as MO, ControlPositions } from '@nextgis/webmap';
 import NgwConnector from '@nextgis/ngw-connector';
 import 'leaflet/dist/leaflet.css';
 import { onMapLoad } from './decorators';

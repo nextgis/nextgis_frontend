@@ -1,5 +1,5 @@
 import NgwConnector from '@nextgis/ngw-connector';
-import { WebMap, StarterKit } from '@nextgis/webmap';
+import WebMap, { StarterKit } from '@nextgis/webmap';
 export interface NgwLayerOptions {
     id: number;
     adapter?: 'IMAGE' | 'TILE';

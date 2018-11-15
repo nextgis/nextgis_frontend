@@ -1,4 +1,4 @@
-import { WebLayerEntry } from '../entities/WebLayerEntry';
+import { WebLayerEntry } from '../WebLayerEntry';
 import { MapAdapter } from './MapAdapter';
 import { StarterKit } from './AppSettings';
 import { MapControl } from './MapControl';

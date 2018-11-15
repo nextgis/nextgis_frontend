@@ -7,11 +7,11 @@
   "dependencies": {
     "@nextgis/mapbox-gl-adapter": "^0.4.12",
     "@nextgis/ngw-map": "^0.4.14",
-    "mapbox-gl": "^0.51.0-beta.2"
+    "mapbox-gl": "^0.51.0"
   },
   "devDependencies": {
     "@types/events": "^1.2.0",
-    "@types/node": "^10.12.3",
+    "@types/node": "^10.12.8",
     "base64-inline-loader": "^1.1.1",
     "css-loader": "^1.0.1",
     "file-loader": "^2.0.0",

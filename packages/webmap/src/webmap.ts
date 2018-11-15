@@ -1,31 +1,232 @@
-import { WebMap } from './entities/WebMap';
 import { AppOptions, MapOptions } from './interfaces/WebMapApp';
-import { MapAdapter, ControlPositions } from './interfaces/MapAdapter';
-import { DialogAdapter, DialogAdapterOptions } from './interfaces/DialogAdapter';
-import { MapControl, MapControls, AttributionControlOptions, ZoomControlOptions } from './interfaces/MapControl';
+import { RuntimeParams } from './interfaces/RuntimeParams';
+import { deepmerge } from './utils/lang';
+import EventEmitter from 'wolfy87-eventemitter';
+import { WebLayerEntry } from './WebLayerEntry';
+import { Keys } from './components/keys/Keys';
+import { MapAdapter, MapClickEvent } from './interfaces/MapAdapter';
+import { Type } from './utils/Type';
+import { LayerAdapter, LayerAdapters } from './interfaces/LayerAdapter';
+import { StarterKit, AppSettings } from './interfaces/AppSettings';
+
+export { WebLayerEntry } from './WebLayerEntry';
+export * from './interfaces/WebMapApp';
+export * from './interfaces/MapAdapter';
+export * from './interfaces/DialogAdapter';
+export * from './interfaces/MapControl';
 export * from './interfaces/LayerAdapter';
 export * from './interfaces/AppSettings';
 
-export {
-  WebMap, AppOptions, MapOptions,
-  MapAdapter, ControlPositions,
-  DialogAdapter, DialogAdapterOptions,
-  MapControl, MapControls, AttributionControlOptions, ZoomControlOptions,
-};
+export default class WebMap<M = any> {
 
-// Composition root
-export async function buildWebMap(appOpt: AppOptions, mapOpt: MapOptions): Promise<WebMap> {
-  const webMap = new WebMap(appOpt);
-  await webMap.create(mapOpt);
-  return webMap;
+  options: MapOptions;
+
+  displayProjection = 'EPSG:3857';
+  lonlatProjection = 'EPSG:4326';
+
+  settings: AppSettings;
+
+  layers: WebLayerEntry;
+
+  emitter /** : StrictEventEmitter<EventEmitter, WebMapAppEvents> */ = new EventEmitter();
+
+  keys: Keys = new Keys(); // TODO: make injectable cashed
+
+  map: MapAdapter<M>;
+
+  runtimeParams: RuntimeParams[];
+  private _starterKits: StarterKit[];
+
+  private settingsIsLoading = false;
+
+  private _baseLayers: string[] = [];
+  private _extent: [number, number, number, number];
+
+  constructor(appOptions: AppOptions) {
+    this.map = appOptions.mapAdapter;
+    this._starterKits = appOptions.starterKits || [];
+
+    this._addEventsListeners();
+  }
+
+  async create(options: MapOptions): Promise<this> {
+
+    this.options = deepmerge(this.options || {}, options);
+
+    if (!this.settings && this._starterKits.length) {
+      await this.getSettings();
+    }
+
+    await this._setupMap();
+    return this;
+  }
+
+  async getSettings(): Promise<AppSettings> {
+    if (this.settings) {
+      return Promise.resolve(this.settings);
+    }
+    if (this.settingsIsLoading) {
+
+      return new Promise<AppSettings>((resolve) => {
+        const onLoad = (x) => {
+          resolve(x);
+          this.emitter.removeListener('load-settings', onLoad);
+        };
+        this.emitter.on('load-settings', onLoad);
+      });
+
+    } else {
+      this.settingsIsLoading = true;
+      let settings: AppSettings | boolean;
+      try {
+        settings = {};
+
+        for (const kit of this._starterKits.filter((x) => x.getSettings)) {
+          const setting = await kit.getSettings.call(kit);
+          if (setting) {
+            Object.assign(settings, setting);
+          }
+        }
+      } catch (er) {
+        this.settingsIsLoading = false;
+        throw new Error(er);
+      }
+      if (settings) {
+        this.settings = settings;
+        this.settingsIsLoading = false;
+        this.emitter.emit('load-settings', settings);
+        return settings;
+      }
+    }
+  }
+
+  addBaseLayer(
+    layerName: string,
+    provider: keyof LayerAdapters | Type<LayerAdapter>,
+    options?: any): Promise<LayerAdapter> {
+
+    return this.map.addLayer(provider, { ...options, ...{ id: layerName } }, true).then((layer) => {
+      if (layer) {
+        this._baseLayers.push(layer.name);
+      }
+      return layer;
+    });
+  }
+
+  isBaseLayer(layerName: string): boolean {
+    return this._baseLayers.indexOf(layerName) !== -1;
+  }
+
+  // region MAP
+  private async _setupMap() {
+    if (this.settings) {
+      const { extent_bottom, extent_left, extent_top, extent_right } = this.settings;
+      if (extent_bottom && extent_left && extent_top && extent_right) {
+        this._extent = [extent_left, extent_bottom, extent_right, extent_top];
+        const extent = this._extent;
+        if (extent[3] > 82) {
+          extent[3] = 82;
+        }
+        if (extent[1] < -82) {
+          extent[1] = -82;
+        }
+      }
+    }
+    this.map.displayProjection = this.displayProjection;
+    this.map.lonlatProjection = this.lonlatProjection;
+
+    this.map.create(this.options);
+
+    this._addTreeLayers();
+    await this._addLayerProviders();
+
+    this._zoomToInitialExtent();
+    this.emitter.emit('build-map', this.map);
+    return this;
+  }
+
+  private async _addTreeLayers() {
+    const settings = await this.getSettings();
+    if (settings) {
+      const rootLayer = settings.root_item;
+      if (rootLayer) {
+        this.layers = new WebLayerEntry(this.map, rootLayer);
+        this.emitter.emit('add-layers', this.layers);
+      }
+    }
+  }
+
+  private _zoomToInitialExtent() {
+    // const { lat, lon, zoom, angle } = this.runtimeParams.getParams();
+    // if (zoom && lon && lat) {
+    //   this.map.setCenter([
+    //     parseFloat(lon),
+    //     parseFloat(lat),
+    //   ],
+    //   );
+    //   this.map.setZoom(
+    //     parseInt(zoom, 10),
+    //   );
+
+    //   if (angle) {
+    //     this.map.setRotation(
+    //       parseFloat(angle),
+    //     );
+    //   }
+    // } else {
+    //   this.map.fit(this.options.displayConfig.extent);
+    // }
+    if (this._extent) {
+      this.map.fit(this._extent);
+    } else {
+      const {center, zoom} = this.options;
+
+      if (center) {
+        this.map.setCenter(center);
+      }
+      if (zoom) {
+        this.map.setZoom(zoom);
+      }
+    }
+  }
+
+  private async _addLayerProviders() {
+    try {
+
+      for await(const kit of this._starterKits.filter((x) => x.getLayerAdapters)) {
+        const adapters = await kit.getLayerAdapters.call(kit);
+        if (adapters) {
+          for await(const adapter of adapters) {
+            // this.map.layerAdapters[adapter.name] = adapter;
+            const newAdapter = await adapter.createAdapter(this.map);
+            if (newAdapter) {
+              this.map.layerAdapters[adapter.name] = newAdapter;
+            }
+          }
+        }
+      }
+    } catch (er) {
+      throw new Error(er);
+    }
+  }
+  // endregion
+
+  // region Events
+
+  private _addEventsListeners() {
+    // propagate map click event
+    this.map.emitter.on('click', (ev: MapClickEvent) => this._onMapClick(ev));
+  }
+
+  private _onMapClick(ev: MapClickEvent) {
+    this.emitter.emit('click', ev);
+    this._starterKits.forEach((x) => {
+      if (x.onMapClick) {
+        x.onMapClick(ev, this);
+      }
+    });
+  }
+
+  // endregion
+
 }
-
-// declare global {
-//   interface Window {
-//     WebMap: WebMap;
-//     buildWebMap: (options, config) => Promise<WebMap>;
-//   }
-// }
-
-// @ts-ignore
-window.buildWebMap = buildWebMap;

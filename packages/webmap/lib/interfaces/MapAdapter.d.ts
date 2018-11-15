@@ -1,9 +1,8 @@
-/// <reference types="node" />
 import { LayerAdapter, LayerAdapters } from './LayerAdapter';
 import { Type } from '../utils/Type';
-import { EventEmitter } from 'events';
-import { MapOptions } from '../webmap';
+import EventEmitter from 'wolfy87-eventemitter';
 import { MapControls, MapControl } from './MapControl';
+import { MapOptions } from './WebMapApp';
 interface LatLng {
     lat: number;
     lng: number;

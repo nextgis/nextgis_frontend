@@ -1,7 +1,7 @@
-import { Entry, EntryOptions } from './entry/Entry';
-import { TreeGroup, TreeLayer } from '../interfaces/AppSettings';
-import { MapAdapter } from '../interfaces/MapAdapter';
-import { LayerAdapters } from '../interfaces/LayerAdapter';
+import { Entry, EntryOptions } from './components/entry/Entry';
+import { TreeGroup, TreeLayer } from './interfaces/AppSettings';
+import { MapAdapter } from './interfaces/MapAdapter';
+import { LayerAdapters } from './interfaces/LayerAdapter';
 
 export class WebLayerEntry extends Entry<EntryOptions> {
   static options: EntryOptions = {

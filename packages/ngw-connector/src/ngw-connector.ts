@@ -119,7 +119,7 @@ export default class NgwConnector {
   makeQuery(
     url: string,
     params: Params,
-    options: RequestOptions): Promise<any> {
+    options: RequestOptions = {}): Promise<any> {
 
     url = (this.options.baseUrl ? this.options.baseUrl : '') + url;
     if (url) {
