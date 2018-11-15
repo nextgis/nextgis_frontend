@@ -1,9 +1,9 @@
-import { WebMap, MapAdapter, StarterKit, MapOptions as MO, ControlPositions } from '@nextgis/webmap';
+import WebMap, { MapAdapter, StarterKit, MapOptions as MO, ControlPositions } from '@nextgis/webmap';
 import NgwConnector from '@nextgis/ngw-connector';
 import { QmsKit } from '@nextgis/qms-kit';
 import { NgwKit } from '@nextgis/ngw-kit';
 
-// import { WebMap, MapAdapter, StarterKit } from '../webmap/src/webmap';
+// import WebMap, { MapAdapter, StarterKit } from '../webmap/src/webmap';
 // import NgwConnector from '../../ngw-connector/src/ngw-connector';
 // import { QmsKit } from '../qms-kit/src/QmsKit';
 // import { NgwKit } from '../ngw-kit/src/ngw-kit';

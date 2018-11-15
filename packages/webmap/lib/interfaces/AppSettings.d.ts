@@ -1,5 +1,5 @@
 import { MapClickEvent } from './MapAdapter';
-import { WebMap } from '../webmap';
+import WebMap from '../webmap';
 export interface TreeItem {
     item_type: 'root' | 'group' | 'layer';
     display_name?: string;
