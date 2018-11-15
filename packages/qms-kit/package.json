@@ -4,7 +4,9 @@
   "description": "",
   "main": "lib/qms-kit.js",
   "types": "lib/qms-kit.d.ts",
-  "dependencies": {},
+  "dependencies": {
+    "@nextgis/webmap": "^0.4.12"
+  },
   "devDependencies": {
     "@types/events": "^1.2.0",
     "@types/node": "^10.12.8",

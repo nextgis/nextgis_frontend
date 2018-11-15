@@ -16,7 +16,7 @@ const closeBtn = `
   </a>
 `;
 
-export class Dialog implements DialogAdapter {
+export default class Dialog implements DialogAdapter {
 
   static dialogs: Dialog[] = [];
 

@@ -1,10 +1,10 @@
 import NgwMap, { MapOptions, NgwLayerOptions } from '@nextgis/ngw-map';
-import { MapboxglAdapter } from '@nextgis/mapbox-gl-adapter';
+import MapboxGlAdapter from '@nextgis/mapbox-gl-adapter';
 // import { NgwKit } from '@nextgis/ngw-kit';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 // import NgwMap, { MapOptions, NgwLayerOptions } from '../../ngw-map/src/ngw-map';
-// import { MapboxglAdapter } from '../mapbox-gl-adapter/src/mapbox-gl-adapter';
+// import { MapboxGlAdapter } from '../mapbox-gl-adapter/src/mapbox-gl-adapter';
 // import { NgwKit } from '../ngw-kit/src/ngw-kit';
 
 // const addNgwLayer = function (options: NgwLayerOptions, webMap, baseUrl) {
@@ -15,7 +15,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 export default class NgwLeaflet extends NgwMap {
 
   constructor(options: MapOptions) {
-    super(new MapboxglAdapter(), options);
+    super(new MapboxGlAdapter(), options);
   }
 
   addNgwLayer(options: NgwLayerOptions) {

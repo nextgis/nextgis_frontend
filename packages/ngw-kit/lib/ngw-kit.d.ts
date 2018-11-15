@@ -19,7 +19,7 @@ export interface NgwKitOptions {
         password: string;
     };
 }
-export declare class NgwKit implements StarterKit {
+export default class NgwKit implements StarterKit {
     static updateWmsParams: (params: any, resourceId: any) => {
         resource: any;
         extent: any;

@@ -5,23 +5,29 @@
   "main": "lib/mapbox-gl-adapter.js",
   "types": "lib/mapbox-gl-adapter.d.ts",
   "dependencies": {
-    "mapbox-gl": "^0.51.0"
+    "mapbox-gl": "^0.51.0",
+    "events": "^3.0.0"
   },
   "devDependencies": {
-    "@nextgis/webmap": "^0.4.12",
-    "@types/mapbox-gl": "^0.49.1",
-    "rollup": "^0.67.1",
-    "rollup-plugin-commonjs": "^9.2.0",
-    "rollup-plugin-node-builtins": "^2.1.2",
-    "rollup-plugin-node-resolve": "^3.4.0",
-    "rollup-plugin-sourcemaps": "^0.4.2",
-    "rollup-plugin-typescript2": "^0.18.0",
-    "rollup-plugin-uglify": "^6.0.0",
-    "typescript": "^3.1.6"
+    "@types/events": "^1.2.0",
+    "@types/node": "^10.12.8",
+    "rimraf": "^2.6.2",
+    "ts-loader": "^5.3.0",
+    "tslint": "^5.11.0",
+    "tslint-loader": "^3.6.0",
+    "tslint-webpack-plugin": "^1.2.2",
+    "typescript": "^3.1.6",
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2"
   },
   "scripts": {
-    "build": "rollup -c rollup.config.js",
-    "watch": "rollup -c rollup.config.js -w",
+    "mjs": "tsc -d --outDir ./lib/modules",
+    "start": "webpack-dev-server --progress --open --hot",
+    "clean": "rimraf ./lib",
+    "dev": "npm run clean && webpack --config ./webpack.config.js --progress",
+    "build": "npm run dev -- --mode=production",
+    "prod": "npm run build",
+    "watch": "npm run dev -- --watch",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "repository": {

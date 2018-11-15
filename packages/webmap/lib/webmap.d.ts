@@ -1,6 +1,7 @@
+/// <reference types="node" />
 import { AppOptions, MapOptions } from './interfaces/WebMapApp';
 import { RuntimeParams } from './interfaces/RuntimeParams';
-import EventEmitter from 'wolfy87-eventemitter';
+import { EventEmitter } from 'events';
 import { WebLayerEntry } from './WebLayerEntry';
 import { Keys } from './components/keys/Keys';
 import { MapAdapter } from './interfaces/MapAdapter';

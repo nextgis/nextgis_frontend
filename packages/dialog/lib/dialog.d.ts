@@ -2,7 +2,7 @@ import { DialogAdapter, DialogAdapterOptions } from '@nextgis/webmap';
 import 'dialog-polyfill/dialog-polyfill.css';
 import './dialog.css';
 export { DialogAdapterOptions };
-export declare class Dialog implements DialogAdapter {
+export default class Dialog implements DialogAdapter {
     static dialogs: Dialog[];
     options: DialogAdapterOptions;
     private _dialog;

@@ -1,4 +1,5 @@
-import EventEmitter from 'wolfy87-eventemitter';
+/// <reference types="node" />
+import { EventEmitter } from 'events';
 import { Entry } from '../Entry';
 export interface IEntryBasePropertyOptions<V> {
     hierarchy?: boolean;
