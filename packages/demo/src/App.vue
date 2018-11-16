@@ -7,13 +7,14 @@
       fixed
       app
     >
-    <v-treeview v-if="items" v-model="tree"
+    <v-treeview v-if="items"
       :active.sync="active"
       :items="items"
       :open="open"
       activatable
       open-on-click
       transition
+      @update:open="onOpen"
     >
       <template slot="prepend" slot-scope="{ item, open, leaf }">
         <v-icon v-if="item.icon">
