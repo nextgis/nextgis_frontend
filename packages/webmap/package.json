@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/webmap",
-  "version": "0.4.12",
+  "version": "0.5.0",
   "description": "",
   "main": "lib/webmap.js",
   "types": "lib/webmap.d.ts",
