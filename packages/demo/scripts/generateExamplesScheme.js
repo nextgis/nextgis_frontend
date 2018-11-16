@@ -30,7 +30,7 @@ function generate(source = '../') {
             let pages = [];
 
             pages = pages.concat(getReadme(libPath));
-            pages = pages.concat(getExamples(libPath));
+            pages = pages.concat(getExamples(libPath, package));
 
             if (pages.length) {
               const item = {
@@ -45,7 +45,7 @@ function generate(source = '../') {
       }
     });
   const log = (item, n) => {
-    console.log(new Array(n+1).join('-') + item.name);
+    console.log(new Array(n + 1).join('-') + item.name);
     if (item.children && item.children.length) {
       n++
       item.children.forEach((x) => {
@@ -53,7 +53,7 @@ function generate(source = '../') {
       });
     }
   }
-  items.forEach((x) => log(x, 1) );
+  items.forEach((x) => log(x, 1));
   return items;
 }
 
@@ -73,7 +73,7 @@ function getReadme(libPath) {
   return readme;
 }
 
-function getExamples(libPath) {
+function getExamples(libPath, package) {
   const examplesPath = join(libPath, 'examples');
   const examples = [];
   if (existsSync(examplesPath) && isDirectory(examplesPath)) {
@@ -87,9 +87,10 @@ function getExamples(libPath) {
           const metaPath = join(examplePath, 'index.json');
           if (existsSync(htmlPath) && existsSync(metaPath)) {
             const meta = JSON.parse(readFileSync(metaPath, 'utf8'));
+            const html = prepareHtml(readFileSync(htmlPath, 'utf8'), package);
             const example = {
               id,
-              html: readFileSync(htmlPath, 'utf8'),
+              html,
               name: meta.name,
               description: meta.description,
               page: 'example'
@@ -107,6 +108,48 @@ function getIdFromPath(id) {
   id = id.replace(/[/\\\\]/g, '-');
   id = id.replace(/\./g, '');
   return id;
+}
+
+function prepareHtml(html, package) {
+  const newHtml = [];
+  let libReplace = false;
+  let cdnReplace = false;
+  // comment direct to lib script
+  html.split('\n').forEach((line) => {
+    let emptyCharsCount = line.search(/\S/);;
+
+    if (!libReplace) {
+      const libregexp = `<script src="../../${package.main}"></script>`;
+      const argRegEx = new RegExp(libregexp, 'i');
+      const isDirectLibLine = line.match(argRegEx);
+      if (isDirectLibLine) {
+        line = new Array(emptyCharsCount).join(' ') +  `<!-- ${libregexp} -->`;
+        libReplace = true;
+      }
+    }
+    if (!cdnReplace) {
+      const pathToLib = package.main.split('/');
+      const filename = pathToLib.pop();
+      const name = filename.replace('.js', '');
+      const cdnregexp = `<script src="https://unpkg.com/@nextgis/${name}@latest"></script>`;
+      const argRegEx = new RegExp(cdnregexp, 'g');
+      const isDirectLibLine = line.match(argRegEx);
+      if (isDirectLibLine) {
+        line = new Array(emptyCharsCount + 1).join(' ') +
+          `<script src="https://unpkg.com/@nextgis/${name}@${package.version}"></script>`;
+        cdnReplace = true;
+      }
+    }
+    newHtml.push(line);
+    console.log(line);
+
+  })
+
+
+
+
+
+  return newHtml;
 }
 
 module.exports = generate;
