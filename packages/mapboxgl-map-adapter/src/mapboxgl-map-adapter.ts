@@ -10,7 +10,7 @@ import { AttributionControl } from './controls/AttributionControl';
 
 type positions = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
 
-export default class MapboxGlAdapter implements MapAdapter {
+export default class MapboxglMapAdapter implements MapAdapter {
 
   static layerAdapters = {
     TILE: TileAdapter,
@@ -34,7 +34,7 @@ export default class MapboxGlAdapter implements MapAdapter {
 
   emitter = new EventEmitter();
 
-  layerAdapters = MapboxGlAdapter.layerAdapters;
+  layerAdapters = MapboxglMapAdapter.layerAdapters;
 
   _layers = {};
 
@@ -191,7 +191,7 @@ export default class MapboxGlAdapter implements MapAdapter {
   addControl(controlDef, position: positions, options) {
     let control;
     if (typeof controlDef === 'string') {
-      const engine = MapboxGlAdapter.controlAdapters[controlDef];
+      const engine = MapboxglMapAdapter.controlAdapters[controlDef];
       if (engine) {
         control = new engine(options);
       }
@@ -212,7 +212,7 @@ export default class MapboxGlAdapter implements MapAdapter {
   }
 
   private getLayerAdapter(name: string) {
-    return MapboxGlAdapter.layerAdapters[name];
+    return MapboxglMapAdapter.layerAdapters[name];
   }
 
   private _addEventsListeners() {

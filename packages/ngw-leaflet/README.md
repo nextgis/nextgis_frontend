@@ -32,7 +32,7 @@ Simply download and include with a script tag. NgwLeaflet will be registered as 
 We recommend linking to a specific version number that you can update manually:
 
 ```html
-<script src="https://unpkg.com/@nextgis/ngw-leaflet@0.4.2"></script>
+<script src="https://unpkg.com/@nextgis/ngw-leaflet@0.5.0"></script>
 ```
 
 ### NPM

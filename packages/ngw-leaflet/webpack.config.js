@@ -1,5 +1,4 @@
 const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TSLintPlugin = require('tslint-webpack-plugin');
 const package = require('./package.json');
 const path = require('path');
@@ -21,13 +20,6 @@ module.exports = (env, argv) => {
       test: /\.css$/,
       use: ['style-loader', 'css-loader']
     },
-    // {
-    //   test: /\.(png|jpg|gif|svg)$/,
-    //   loader: 'file-loader',
-    //   options: {
-    //     name: '[name].[ext]?[hash]'
-    //   }
-    // },
     {
       test: /\.(jpe?g|png|ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
       use: 'base64-inline-loader?limit=1000&name=[name].[ext]'
@@ -41,13 +33,7 @@ module.exports = (env, argv) => {
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(argv.mode || 'development')
-    }),
-
-    new HtmlWebpackPlugin({
-      template: 'src/index.html',
-      filename: 'index.html',
-      inject: 'head'
-    }),
+    })
   ];
 
   if (isProd) {
