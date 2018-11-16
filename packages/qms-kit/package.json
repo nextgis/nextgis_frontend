@@ -17,8 +17,7 @@
     "tslint-webpack-plugin": "^1.2.2",
     "typescript": "^3.1.6",
     "webpack": "^4.25.1",
-    "webpack-cli": "^3.1.2",
-    "webpack-node-externals": "^1.7.2"
+    "webpack-cli": "^3.1.2"
   },
   "scripts": {
     "mjs": "tsc -d --outDir ./lib/modules",
@@ -27,7 +26,7 @@
     "dev": "npm run clean && webpack --config ./webpack.config.js --progress",
     "build": "npm run dev -- --mode=production",
     "prod": "npm run build",
-    "watch": "npm run dev -- --watch",
+    "watch": "echo \"No watch for this app\" && exit 0",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "repository": {
