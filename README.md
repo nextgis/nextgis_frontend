@@ -1,4 +1,4 @@
-# NextGIS Frontend packages
+# NextGIS Frontend
 
 This repository under construction
 
