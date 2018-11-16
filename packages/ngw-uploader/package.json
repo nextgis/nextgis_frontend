@@ -26,12 +26,11 @@
     "webpack-cli": "^3.1.2"
   },
   "scripts": {
-    "start": "webpack-dev-server --progress --open --hot",
     "clean": "rimraf ./lib",
     "dev": "npm run clean && webpack --config ./webpack.config.js --progress",
     "build": "npm run dev -- --mode=production",
     "prod": "npm run build",
-    "watch": "echo \"No watch for this app\" && exit 0"
+    "watch": "npm run dev -- --watch"
   },
   "repository": {
     "type": "git",
