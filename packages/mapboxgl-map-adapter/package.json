@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/mapboxgl-map-adapter",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "",
   "main": "lib/mapboxgl-map-adapter.js",
   "types": "lib/mapboxgl-map-adapter.d.ts",
