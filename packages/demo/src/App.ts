@@ -19,7 +19,6 @@ interface Item {
 export class App extends Vue {
 
   active = [];
-  tree = [];
 
   open: string[] = [];
 
@@ -85,6 +84,10 @@ export class App extends Vue {
       return prepareItem(x);
     });
     this._setActive();
+  }
+
+  onOpen(data) {
+    this.open = data;
   }
 
   _setActive() {
