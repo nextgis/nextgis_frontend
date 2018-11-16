@@ -1,5 +1,4 @@
 const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TSLintPlugin = require('tslint-webpack-plugin');
 const package = require('./package.json');
 const path = require('path');
@@ -41,13 +40,7 @@ module.exports = (env, argv) => {
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(argv.mode || 'development')
-    }),
-
-    new HtmlWebpackPlugin({
-      template: 'src/index.html',
-      filename: 'index.html',
-      inject: 'head'
-    }),
+    })
   ];
 
   if (isProd) {

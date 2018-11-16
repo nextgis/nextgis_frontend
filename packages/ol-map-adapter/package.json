@@ -28,7 +28,7 @@
     "dev": "npm run clean && webpack --config ./webpack.config.js --progress",
     "build": "npm run dev -- --mode=production",
     "prod": "npm run build",
-    "watch": "npm run dev -- --watch",
+    "watch": "echo \"No watch for this app\" && exit 0",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "repository": {
