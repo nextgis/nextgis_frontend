@@ -1,5 +1,6 @@
 import { LayerAdapter } from '@nextgis/webmap';
-import wms from 'leaflet.wms/src/leaflet.wms.js';
+// import wms from 'leaflet.wms/src/leaflet.wms.js';
+import wms from './wms';
 
 let ID = 1;
 
