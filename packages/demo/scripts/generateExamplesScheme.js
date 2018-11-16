@@ -123,7 +123,7 @@ function prepareHtml(html, package) {
       const argRegEx = new RegExp(libregexp, 'i');
       const isDirectLibLine = line.match(argRegEx);
       if (isDirectLibLine) {
-        line = new Array(emptyCharsCount).join(' ') +  `<!-- ${libregexp} -->`;
+        line = new Array(emptyCharsCount + 1).join(' ') +  `<!-- ${libregexp} -->`;
         libReplace = true;
       }
     }
@@ -141,15 +141,8 @@ function prepareHtml(html, package) {
       }
     }
     newHtml.push(line);
-    console.log(line);
-
-  })
-
-
-
-
-
-  return newHtml;
+  });
+  return newHtml.join('\n');
 }
 
 module.exports = generate;
