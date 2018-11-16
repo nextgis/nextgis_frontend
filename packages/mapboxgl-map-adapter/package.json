@@ -1,9 +1,9 @@
 {
-  "name": "@nextgis/mapbox-gl-adapter",
+  "name": "@nextgis/mapboxgl-map-adapter",
   "version": "0.4.12",
   "description": "",
-  "main": "lib/mapbox-gl-adapter.js",
-  "types": "lib/mapbox-gl-adapter.d.ts",
+  "main": "lib/mapboxgl-map-adapter.js",
+  "types": "lib/mapboxgl-map-adapter.d.ts",
   "dependencies": {
     "mapbox-gl": "^0.51.0",
     "events": "^3.0.0"
@@ -27,7 +27,7 @@
     "dev": "npm run clean && webpack --config ./webpack.config.js --progress",
     "build": "npm run dev -- --mode=production",
     "prod": "npm run build",
-    "watch": "npm run dev -- --watch",
+    "watch": "echo \"No watch for this app\" && exit 0",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "repository": {

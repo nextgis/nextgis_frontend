@@ -7,7 +7,7 @@ This repository under construction
 - [webmap](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/webmap) – universal map constructor;
 - [leaflet-map-adapter](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/leaflet-map-adapter) – webmap adapter to use [Laeflet](https://leafletjs.com/) GIS framework;
 - [ol-map-adapter](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/ol-map-adapter) – webmap adapter to use [OpenLayers](https://openlayers.org/) GIS framework;
-- [mapbox-gl-adapter](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/mapbox-gl-adapter) – webmap adapter to use [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/) framework;
+- [mapboxgl-map-adapter](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/mapboxgl-map-adapter) – webmap adapter to use [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/) framework;
 - [qms-kit](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/qms-kit) – build webmap with [Nextgis QMS](https://qms.nextgis.com/) baselayer;
 - [ngw-connector](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/ngw-connector) – module for interaction with [NextGIS Web](http://docs.nextgis.ru/docs_ngweb_dev/doc/developer/toc.html) REST API;
 - [ngw-kit](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/ngw-kit) – build webmap with [NextGIS Web](http://nextgis.ru/nextgis-web/) instance;

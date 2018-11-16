@@ -1,13 +1,30 @@
 # Leaflet Map Adapter
 
-Webmap adapter to use Laeflet GIS framework
+Webmap adapter to use [Laeflet](https://leafletjs.com/) GIS framework.
 
-## Usage
+This library is not intended for using directly in the browser.
+
+Use LeafletMapAdapter with NPM installation method for building large scale applications. It pairs nicely with module bundlers such as [Webpack](https://webpack.js.org/)
+
+```bash
+# latest stable
+$ npm install --save-dev @nextgis/leaflet-map-adapter
+# or
+$ yarn add @nextgis/leaflet-map-adapter
+```
 
 ```js
-import { LeafletMapAdapter } from '@nextgis/leaflet-map-adapter';
+import WebMap from '@nextgis/webmap';
+import LeafletMapAdapter from '@nextgis/leaflet-map-adapter';
+// manually added styles
 
-// TODO: DEMONSTRATE API
+const webMap = new WebMap({
+  mapAdapter: new LeafletMapAdapter()
+});
+
+webMap.create(options).then(() => {
+  // on webmap create
+})
 ```
 
 ## Commercial support

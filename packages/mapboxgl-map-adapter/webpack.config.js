@@ -3,7 +3,7 @@ const TSLintPlugin = require('tslint-webpack-plugin');
 const package = require('./package.json');
 const path = require('path');
 
-const library = 'MapboxGlAdapter';
+const library = 'MapboxglMapAdapter';
 
 const pathToLib = package.main.split('/');
 const filename = pathToLib.pop();

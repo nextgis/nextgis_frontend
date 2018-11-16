@@ -5,7 +5,7 @@
   "main": "lib/ngw-mapbox.js",
   "types": "lib/ngw-mapbox.d.ts",
   "dependencies": {
-    "@nextgis/mapbox-gl-adapter": "^0.4.12",
+    "@nextgis/mapboxgl-map-adapter": "^0.4.12",
     "@nextgis/ngw-map": "^0.4.14",
     "mapbox-gl": "^0.51.0"
   },
