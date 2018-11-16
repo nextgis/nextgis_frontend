@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/ngw-uploader",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "",
   "main": "lib/ngw-uploader.js",
   "types": "lib/ngw-uploader.d.ts",
