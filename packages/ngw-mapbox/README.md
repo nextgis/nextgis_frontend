@@ -11,7 +11,7 @@ One file bundle for building [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/
 Simply download and include with a script tag. NgwMapbox will be registered as a global variable.
 
 ```html
-<script src="../lib/ngw-leaflet.js"></script>
+<script src="../lib/ngw-mapbox.js"></script>
 <div id='map'></div>
 <script>
   var ngwMap = new NgwMapbox({
