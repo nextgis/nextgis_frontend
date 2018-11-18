@@ -1,12 +1,12 @@
 {
   "name": "@nextgis/ngw-uploader",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "",
   "main": "lib/ngw-uploader.js",
   "types": "lib/ngw-uploader.d.ts",
   "dependencies": {
-    "@nextgis/dialog": "^0.5.0",
-    "@nextgis/ngw-connector": "^0.5.0",
+    "@nextgis/dialog": "^0.5.2",
+    "@nextgis/ngw-connector": "^0.5.2",
     "events": "^3.0.0"
   },
   "devDependencies": {
