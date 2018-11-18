@@ -1,7 +1,7 @@
 import { GeoJsonObject } from 'geojson';
 import { LatLng } from './BaseTypes';
 
-interface AdapterOptions {
+export interface AdapterOptions {
   id?: string;
   url?: string;
   transparency?: number;

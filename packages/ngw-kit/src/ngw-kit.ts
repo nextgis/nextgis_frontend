@@ -40,25 +40,35 @@ export default class NgwKit implements StarterKit {
     };
   }
 
-  static addNgwLayer(options: NgwLayerOptions, webMap: WebMap, baseUrl) {
-    const adapter = options.adapter || 'IMAGE';
-    if (adapter === 'IMAGE' || adapter === 'TILE') {
-      let url = baseUrl;
-      let addLayerPromise;
-      const isImageAllowed = webMap.map.layerAdapters ? webMap.map.layerAdapters.IMAGE : true;
-      if (adapter === 'IMAGE' && isImageAllowed) {
+  static getLayerAdapterOptions(options: NgwLayerOptions, webMap: WebMap, baseUrl) {
+    let adapter = options.adapter || 'IMAGE';
+    let url = baseUrl;
+    const isImageAllowed = webMap.map.layerAdapters ? webMap.map.layerAdapters.IMAGE : true;
+    if (adapter === 'IMAGE') {
+      if (isImageAllowed) {
         url += '/api/component/render/image';
-        addLayerPromise = webMap.map.addLayer(adapter, {
+        return {
           url,
           id: String(options.id),
           resourceId: options.id,
           updateWmsParams: (params) => NgwKit.updateWmsParams(params, options.id)
-        });
-      } else if (adapter === 'TILE') {
-        url += '/api/component/render/tile?z={z}&x={x}&y={y}&resource=' + options.id;
-        addLayerPromise = webMap.map.addLayer(adapter, { url, id: String(options.id) });
+        };
+      } else {
+        adapter = 'TILE';
       }
-      return addLayerPromise;
+    }
+    if (adapter === 'TILE') {
+      url += '/api/component/render/tile?z={z}&x={x}&y={y}&resource=' + options.id;
+      return { url, id: String(options.id), adapter, layer_adapter: adapter };
+    }
+  }
+
+  static addNgwLayer(options: NgwLayerOptions, webMap: WebMap, baseUrl) {
+    const adapter = options.adapter || 'IMAGE';
+    if (adapter === 'IMAGE' || adapter === 'TILE') {
+      return webMap.map.addLayer(adapter,
+        NgwKit.getLayerAdapterOptions(options, webMap, baseUrl)
+      );
     } else {
       throw new Error(adapter + ' not supported yet. Only TILE');
     }
@@ -83,12 +93,12 @@ export default class NgwKit implements StarterKit {
     this.connector = new NgwConnector({ baseUrl: this.url, auth: this.options.auth });
   }
 
-  getSettings() {
+  getSettings(webMap?: WebMap) {
     return new Promise((resolve) => {
       this.connector.request('resource.item', { id: this.resourceId }).then((data) => {
         const webmap = data.webmap;
         if (webmap) {
-          this._updateItemsParams(webmap.root_item);
+          this._updateItemsParams(webmap.root_item, webMap);
           resolve(data.webmap);
         }
       });
@@ -124,17 +134,25 @@ export default class NgwKit implements StarterKit {
     }
   }
 
-  private _updateItemsParams(item) {
+  private _updateItemsParams(item, webMap: WebMap) {
     if (item) {
       if (item.children) {
-        item.children.forEach((x) => this._updateItemsParams(x));
-      } else if (item.item_type === 'layer' && item.layer_adapter === 'image') {
+        item.children = item.children.map((x) => this._updateItemsParams(x, webMap));
+      } else if (item.item_type === 'layer') {
         const url = fixUrlStr(this.url + '/api/component/render/image');
         item.url = url;
         item.resourceId = item.layer_style_id;
         item.updateWmsParams = (params) => NgwKit.updateWmsParams(params, item.resourceId);
+        item = {
+          ...item,
+          ...NgwKit.getLayerAdapterOptions({
+            adapter: item.layer_adapter.toUpperCase(),
+            id: item.layer_style_id
+          }, webMap, this.options.baseUrl)
+        };
       }
     }
+    return item;
   }
 }
 

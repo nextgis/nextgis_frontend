@@ -35,7 +35,7 @@ export default class NgwMap {
     constructor(mapAdapter: MapAdapter, options: MapOptions);
     fit(): void;
     fitBounds(bounds: [number, number, number, number]): void;
-    addNgwLayer(options: NgwLayerOptions): any;
+    addNgwLayer(options: NgwLayerOptions): Promise<string>;
     zoomToLayer(id: string | number): Promise<void>;
     private _fitNgwLayerExtend;
     private _createWebMap;
