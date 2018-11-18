@@ -1,16 +1,10 @@
 import NgwMap, { MapOptions, NgwLayerOptions } from '@nextgis/ngw-map';
 import MapboxglMapAdapter from '@nextgis/mapboxgl-map-adapter';
-// import { NgwKit } from '@nextgis/ngw-kit';
-import 'mapbox-gl/dist/mapbox-gl.css';
 
 // import NgwMap, { MapOptions, NgwLayerOptions } from '../../ngw-map/src/ngw-map';
-// import { MapboxglMapAdapter } from '../mapboxgl-map-adapter/src/mapboxgl-map-adapter';
-// import { NgwKit } from '../ngw-kit/src/ngw-kit';
+// import MapboxglMapAdapter from '../../mapboxgl-map-adapter/src/mapboxgl-map-adapter';
 
-// const addNgwLayer = function (options: NgwLayerOptions, webMap, baseUrl) {
-//   options.adapter = 'TILE';
-//   return NgwKit.addNgwLayer(options, webMap, baseUrl);
-// };
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 export default class NgwLeaflet extends NgwMap {
 

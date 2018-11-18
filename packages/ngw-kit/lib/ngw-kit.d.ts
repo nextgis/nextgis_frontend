@@ -26,14 +26,34 @@ export default class NgwKit implements StarterKit {
         size: string;
         timestamp: number;
     };
-    static addNgwLayer(options: NgwLayerOptions, webMap: WebMap, baseUrl: any): any;
+    static getLayerAdapterOptions(options: NgwLayerOptions, webMap: WebMap, baseUrl: any): {
+        url: any;
+        id: string;
+        resourceId: number;
+        updateWmsParams: (params: any) => {
+            resource: any;
+            extent: any;
+            size: string;
+            timestamp: number;
+        };
+        adapter?: undefined;
+        layer_adapter?: undefined;
+    } | {
+        url: any;
+        id: string;
+        adapter: "TILE";
+        layer_adapter: "TILE";
+        resourceId?: undefined;
+        updateWmsParams?: undefined;
+    };
+    static addNgwLayer(options: NgwLayerOptions, webMap: WebMap, baseUrl: any): Promise<import("../../webmap/lib/interfaces/LayerAdapter").LayerAdapter<any, any>>;
     options: NgwKitOptions;
     url: string;
     resourceId: number;
     connector: NgwConnector;
     pixelRadius: number;
     constructor(options?: NgwKitOptions);
-    getSettings(): Promise<{}>;
+    getSettings(webMap?: WebMap): Promise<{}>;
     onMapClick(ev: any, webMap: WebMap): void;
     sendIdentifyRequest(ev: any, webMap: WebMap, options?: {
         layers?: string[];

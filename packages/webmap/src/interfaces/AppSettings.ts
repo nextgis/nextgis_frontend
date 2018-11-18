@@ -41,7 +41,7 @@ export interface AppSettings {
 }
 
 export interface StarterKit {
-  getSettings?(): Promise<AppSettings | false>;
+  getSettings?(webMap?: WebMap): Promise<AppSettings | false>;
   getLayerAdapters?(): Promise<any>;
   onMapClick?(evt: MapClickEvent, webMap?: WebMap);
 }

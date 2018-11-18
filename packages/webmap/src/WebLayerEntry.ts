@@ -1,7 +1,7 @@
 import { Entry, EntryOptions } from './components/entry/Entry';
 import { TreeGroup, TreeLayer } from './interfaces/AppSettings';
 import { MapAdapter } from './interfaces/MapAdapter';
-import { LayerAdapters } from './interfaces/LayerAdapter';
+import { LayerAdapters, AdapterOptions } from './interfaces/LayerAdapter';
 
 export class WebLayerEntry extends Entry<EntryOptions> {
   static options: EntryOptions = {
@@ -62,9 +62,9 @@ export class WebLayerEntry extends Entry<EntryOptions> {
       }
     } else if (item.item_type === 'layer') {
       const adapter = item.layer_adapter.toUpperCase() as keyof LayerAdapters;
-      newLayer = this.map.addLayer(adapter, Object.assign({
-        id: this.id,
-      }, item));
+      item.id = Number(this.id);
+      const options: any = {...item, ...{id: item.id}};
+      newLayer = this.map.addLayer(adapter, options);
     }
     if (newLayer) {
       item._layer = newLayer;
