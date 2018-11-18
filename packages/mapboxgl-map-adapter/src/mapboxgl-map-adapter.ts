@@ -80,7 +80,7 @@ export default class MapboxglMapAdapter implements MapAdapter {
   // [extent_left, extent_bottom, extent_right, extent_top];
   fit(e: [number, number, number, number]) {
     // top, left, bottom, right
-    this.map.fitBounds([[e[0], e[1]], [e[2], e[3]]]);
+    this.map.fitBounds([[e[0], e[1]], [e[2], e[3]]], {linear: true});
   }
 
   setRotation(angle: number) {

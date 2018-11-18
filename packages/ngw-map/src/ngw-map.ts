@@ -3,10 +3,11 @@ import NgwConnector from '@nextgis/ngw-connector';
 import QmsKit from '@nextgis/qms-kit';
 import NgwKit from '@nextgis/ngw-kit';
 
-// import WebMap, { MapAdapter, StarterKit } from '../webmap/src/webmap';
+// import WebMap, { MapAdapter, StarterKit, MapOptions as MO, ControlPositions } from '../../webmap/src/webmap';
 // import NgwConnector from '../../ngw-connector/src/ngw-connector';
-// import { QmsKit } from '../qms-kit/src/QmsKit';
-// import { NgwKit } from '../ngw-kit/src/ngw-kit';
+// import QmsKit from '../../qms-kit/src/qms-kit';
+// import NgwKit from '../../ngw-kit/src/ngw-kit';
+
 import 'leaflet/dist/leaflet.css';
 import { onMapLoad } from './decorators';
 import { fixUrlStr, deepmerge } from './utils';

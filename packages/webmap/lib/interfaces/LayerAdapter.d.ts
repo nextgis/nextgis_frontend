@@ -1,6 +1,6 @@
 import { GeoJsonObject } from 'geojson';
 import { LatLng } from './BaseTypes';
-interface AdapterOptions {
+export interface AdapterOptions {
     id?: string;
     url?: string;
     transparency?: number;
@@ -38,4 +38,3 @@ export interface LayerAdapter<M = any, O = any> {
     map?: M;
     addLayer(options: O): any;
 }
-export {};

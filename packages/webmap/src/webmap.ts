@@ -82,7 +82,7 @@ export default class WebMap<M = any> {
         settings = {};
 
         for (const kit of this._starterKits.filter((x) => x.getSettings)) {
-          const setting = await kit.getSettings.call(kit);
+          const setting = await kit.getSettings.call(kit, this);
           if (setting) {
             Object.assign(settings, setting);
           }
