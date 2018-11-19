@@ -3,7 +3,7 @@
   "version": "0.5.2",
   "description": "Module for interaction with NGW (NextGis Web) server API",
   "main": "lib/ngw-connector.js",
-  "types": "lib/ngw-connector.d.ts",
+  "types": "lib/index.d.ts",
   "devDependencies": {
     "@types/events": "^1.2.0",
     "@types/node": "^10.12.8",

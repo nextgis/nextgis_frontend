@@ -3,7 +3,7 @@
   "version": "0.5.2",
   "description": "",
   "main": "lib/qms-kit.js",
-  "types": "lib/qms-kit.d.ts",
+  "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/webmap": "^0.5.2"
   },
