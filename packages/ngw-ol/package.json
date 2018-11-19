@@ -3,7 +3,7 @@
   "version": "0.5.2",
   "description": "",
   "main": "lib/ngw-ol.js",
-  "types": "lib/ngw-ol.d.ts",
+  "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/ngw-map": "^0.5.2",
     "@nextgis/ol-map-adapter": "^0.5.2",

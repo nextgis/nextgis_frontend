@@ -3,7 +3,7 @@
   "version": "0.5.2",
   "description": "Modal window management",
   "main": "lib/dialog.js",
-  "types": "lib/dialog.d.ts",
+  "types": "lib/index.d.ts",
   "dependencies": {
     "dialog-polyfill": "^0.4.10"
   },

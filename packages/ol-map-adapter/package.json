@@ -3,7 +3,7 @@
   "version": "0.5.2",
   "description": "",
   "main": "lib/ol-map-adapter.js",
-  "types": "lib/ol-map-adapter.d.ts",
+  "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/webmap": "^0.5.2",
     "events": "^3.0.0",
