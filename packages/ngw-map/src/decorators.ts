@@ -1,4 +1,4 @@
-import NgwMap from './ngw-map';
+import NgwMap from './index';
 
 /**
  * decorator to run action only after map is created

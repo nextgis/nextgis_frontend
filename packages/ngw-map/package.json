@@ -3,7 +3,7 @@
   "version": "0.5.2",
   "description": "",
   "main": "lib/ngw-map.js",
-  "types": "lib/ngw-map.d.ts",
+  "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/ngw-connector": "^0.5.2",
     "@nextgis/ngw-kit": "^0.5.2",

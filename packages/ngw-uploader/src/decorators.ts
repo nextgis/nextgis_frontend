@@ -1,4 +1,4 @@
-import NgwUploader, { EmitterStatus, AvailableStatus } from './ngw-uploader';
+import NgwUploader, { EmitterStatus, AvailableStatus } from './index';
 import { template } from './utils';
 
 /**
