@@ -8,7 +8,7 @@
     "clean": "lerna run clean",
     "bootstrap": "lerna run bootstrap",
     "dev": "lerna run dev",
-    "prod": "lerna run build",
+    "prod": "cd ./packages/webmap/ && yarn run prod && lerna run build",
     "build": "lerna run build",
     "demo": "cd ./packages/demo/ && yarn run prod",
     "test": "echo \"Error: run tests from root\" && exit 1"

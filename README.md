@@ -77,9 +77,9 @@ npm i -g yarn lerna
 # Install dependencies
 yarn install
 # Prepare packages
-lerna bootstrap
+yarn run bootstrap
 # Build all packages
-lerna run build
+yarn run prod
 ```
 
 ### Instruction for each packages

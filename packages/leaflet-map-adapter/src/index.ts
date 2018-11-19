@@ -5,9 +5,6 @@ import { TileAdapter } from './layer-adapters/TileAdapter';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 import { AttributionControl } from './controls/Attribution';
 import { ImageAdapter } from './layer-adapters/ImageAdapter';
-// import { ImageAdapter } from './layer-adapters/ImageAdapter';
-// import { OsmAdapter } from './layer-adapters/OsmAdapter';
-// import { MarkerAdapter } from './layer-adapters/MarkerAdapter';
 
 interface LayerMem {
   layer: any;
