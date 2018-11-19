@@ -4,7 +4,7 @@ const common = require('../../build/webpack.config') ;
 module.exports = (env, argv) => {
   return common(env, argv, {
     library: 'OlMapAdapter',
-    externals: true,
+    externals: false,
     dirname: __dirname,
     package
   })

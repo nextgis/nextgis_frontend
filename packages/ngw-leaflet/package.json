@@ -30,7 +30,7 @@
     "mjs": "tsc -d --outDir ./lib/modules",
     "clean": "rimraf ./lib",
     "dev": "npm run clean && webpack --config ./webpack.config.js --progress",
-    "build": "npm run dev -- --mode=production && npm run mjs",
+    "build": "npm run dev -- --mode=production",
     "prod": "npm run build",
     "watch": "npm run dev -- --watch"
   },
