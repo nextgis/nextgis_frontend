@@ -20,6 +20,10 @@
     "sourceMap": true,
     "noImplicitReturns": false,
     "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "@nextgis/*": ["./packages/*/src/"]
+    }
   },
   "exclude": [
     "node_modules",

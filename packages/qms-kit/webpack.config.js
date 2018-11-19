@@ -2,12 +2,14 @@ const webpack = require('webpack')
 const TSLintPlugin = require('tslint-webpack-plugin');
 const package = require('./package.json');
 const path = require('path');
+const { getAliases } = require('../../build/aliases');
 
 const library = 'WebMap';
 
 const pathToLib = package.main.split('/');
 const filename = pathToLib.pop();
-const entry = './src/' + filename.replace('js', '') + 'ts';
+// const entry = './src/' + filename.replace('js', '') + 'ts';
+const entry = './src/index.ts';
 
 module.exports = (env, argv) => {
 
@@ -31,10 +33,14 @@ module.exports = (env, argv) => {
     })
   ];
 
+  let alias = {};
+
   if (isProd) {
     plugins = plugins.concat([
       // new BundleAnalyzerPlugin()
     ])
+  } else {
+    alias = getAliases()
   }
 
   return [{
@@ -46,6 +52,7 @@ module.exports = (env, argv) => {
 
     resolve: {
       extensions: ['.ts', '.js', '.json'],
+      alias
     },
 
     externals: [

@@ -7,7 +7,10 @@ const library = 'WebMap';
 
 const pathToLib = package.main.split('/');
 const filename = pathToLib.pop();
-const entry = './src/' + filename.replace('js', '') + 'ts';
+// const entryName = './src/' + filename.replace('.js', '');
+// const entry = entryName + '.ts';
+const entry = './src/index.ts';
+const outDir = path.resolve(__dirname, pathToLib.join('/'));
 
 module.exports = (env, argv) => {
 
@@ -58,7 +61,7 @@ module.exports = (env, argv) => {
           // Attempt to resolve the module via Node
           require.resolve(request);
           callback(null, request);
-        } catch(e) {
+        } catch (e) {
           // Node couldn't find it, so it must be user-aliased
           callback();
         }
@@ -66,7 +69,7 @@ module.exports = (env, argv) => {
     ],
 
     output: {
-      path: path.resolve(__dirname, pathToLib.join('/')),
+      path: outDir,
       filename,
       library,
       libraryTarget: 'umd',

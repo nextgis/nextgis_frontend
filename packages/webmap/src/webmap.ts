@@ -1,23 +1,15 @@
-import { AppOptions, MapOptions } from './interfaces/WebMapApp';
-import { RuntimeParams } from './interfaces/RuntimeParams';
-import { deepmerge } from './utils/lang';
-import { EventEmitter } from 'events';
+import { MapOptions, AppOptions } from './interfaces/WebMapApp';
+import { AppSettings, StarterKit } from './interfaces/AppSettings';
 import { WebLayerEntry } from './WebLayerEntry';
 import { Keys } from './components/keys/Keys';
+import { EventEmitter } from 'events';
 import { MapAdapter, MapClickEvent } from './interfaces/MapAdapter';
+import { RuntimeParams } from './interfaces/RuntimeParams';
+import { deepmerge } from './utils/lang';
+import { LayerAdapters, LayerAdapter } from './interfaces/LayerAdapter';
 import { Type } from './utils/Type';
-import { LayerAdapter, LayerAdapters } from './interfaces/LayerAdapter';
-import { StarterKit, AppSettings } from './interfaces/AppSettings';
 
-export { WebLayerEntry } from './WebLayerEntry';
-export * from './interfaces/WebMapApp';
-export * from './interfaces/MapAdapter';
-export * from './interfaces/DialogAdapter';
-export * from './interfaces/MapControl';
-export * from './interfaces/LayerAdapter';
-export * from './interfaces/AppSettings';
-
-export default class WebMap<M = any> {
+export class WebMap<M = any> {
 
   options: MapOptions;
 

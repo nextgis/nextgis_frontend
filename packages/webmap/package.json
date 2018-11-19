@@ -3,7 +3,7 @@
   "version": "0.5.2",
   "description": "",
   "main": "lib/webmap.js",
-  "types": "lib/webmap.d.ts",
+  "types": "lib/index.d.ts",
   "dependencies": {
     "@types/geojson": "^7946.0.4",
     "events": "^3.0.0"
