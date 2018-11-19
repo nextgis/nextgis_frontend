@@ -1,11 +1,11 @@
 {
   "name": "@nextgis/ngw-kit",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "",
   "main": "lib/ngw-kit.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/ngw-connector": "^0.6.0",
+    "@nextgis/ngw-connector": "^0.6.1",
     "@nextgis/webmap": "^0.6.0"
   },
   "devDependencies": {
