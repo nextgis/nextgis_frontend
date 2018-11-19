@@ -3,7 +3,7 @@
   "version": "0.5.2",
   "description": "",
   "main": "lib/leaflet-map-adapter.js",
-  "types": "lib/leaflet-map-adapter.d.ts",
+  "types": "lib/index.d.ts",
   "dependencies": {
     "@types/leaflet": "^1.2.14",
     "events": "^3.0.0",

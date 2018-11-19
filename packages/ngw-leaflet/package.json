@@ -3,7 +3,7 @@
   "version": "0.5.2",
   "description": "",
   "main": "lib/ngw-leaflet.js",
-  "types": "lib/ngw-leaflet.d.ts",
+  "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/leaflet-map-adapter": "^0.5.2",
     "@nextgis/ngw-map": "^0.5.2",
