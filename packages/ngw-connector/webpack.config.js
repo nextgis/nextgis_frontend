@@ -3,7 +3,7 @@ const TSLintPlugin = require('tslint-webpack-plugin');
 const package = require('./package.json');
 const path = require('path');
 
-const entry = './src/ngw-connector.ts';
+const entry = './src/index.ts';
 const library = 'NgwConnector';
 
 module.exports = (env, argv) => {
