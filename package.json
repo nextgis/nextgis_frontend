@@ -2,7 +2,10 @@
   "name": "root",
   "private": true,
   "devDependencies": {
-    "lerna": "^3.4.3"
+    "lerna": "^3.4.3",
+    "topological-sort": "^0.3.0",
+    "tslint-webpack-plugin": "^1.x.x",
+    "webpack": "^4.x.x"
   },
   "scripts": {
     "clean": "lerna run clean",
@@ -11,7 +14,8 @@
     "prod": "cd ./packages/webmap/ && yarn run prod && lerna run build",
     "build": "lerna run build",
     "demo": "cd ./packages/demo/ && yarn run prod",
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "aaa": "node ./webpack.config.js"
   },
   "workspaces": [
     "packages/*"
