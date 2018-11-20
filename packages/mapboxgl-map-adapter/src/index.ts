@@ -7,6 +7,7 @@ import { EventEmitter } from 'events';
 import { ZoomControl } from './controls/ZoomControl';
 import { CompassControl } from './controls/CompassControl';
 import { AttributionControl } from './controls/AttributionControl';
+import { GeoJSONAdapter } from './layer-adapters/GeoJSONAdapter';
 
 type positions = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
 
@@ -17,6 +18,7 @@ export default class MapboxglMapAdapter implements MapAdapter {
     // IMAGE: ImageAdapter,
     MVT: MvtAdapter,
     OSM: OsmAdapter,
+    GEOJSON: GeoJSONAdapter,
   };
 
   static controlAdapters = {
