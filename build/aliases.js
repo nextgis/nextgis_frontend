@@ -11,7 +11,6 @@ function generate(source = '../packages') {
   source = resolve(__dirname, source);
   const items = {};
 
-  // add global README
   readdirSync(source).forEach((name) => {
     const libPath = join(source, name);
 

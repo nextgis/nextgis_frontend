@@ -17,12 +17,11 @@
     "tslint-loader": "^3.6.0",
     "tslint-webpack-plugin": "^1.2.2",
     "typescript": "^3.1.6",
-    "webpack": "^4.25.1",
+    "webpack": "^4.x.x",
     "webpack-cli": "^3.1.2"
   },
   "scripts": {
     "mjs": "tsc -d --outDir ./lib/modules",
-    "start": "webpack-dev-server --progress --open --hot",
     "clean": "rimraf ./lib",
     "dev": "npm run clean && webpack --config ./webpack.config.js --progress",
     "build": "npm run dev -- --mode=production",
