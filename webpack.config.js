@@ -1,5 +1,5 @@
 const { join, resolve } = require('path');
-const { lstatSync, readdirSync, readFileSync, existsSync } = require('fs');
+const { lstatSync, readdirSync, readFileSync, existsSync, statSync, unlinkSync, rmdirSync } = require('fs');
 const webpack = require("webpack");
 const { TopologicalSort } = require('topological-sort');
 
@@ -19,18 +19,30 @@ for (const m in modules) {
   }
 }
 const sorted = sortOp.sort();
-// const sortedKeys = ['@nextgis/webmap'];
 const sortedKeys = [...sorted.keys()];
 
-const configs = sortedKeys.map((x) => require(modules[x].path));
-const compilers = configs.map((x) => x(null, { mode: 'production' })[0]);
+async function createOrderedBuild() {
 
-const compiler = webpack(compilers, (err, stats) => {
-  if (err || stats.hasErrors()) {
-    // Handle errors here
+  for (const s of sortedKeys) {
+    const module = modules[s];
+    const config = require(module.webpackPath);
+    const compileObj = config(null, { mode: 'production' })[0];
+    process.stdout.write('start build ' + s + '\n');
+    await new Promise((resolve, reject) => {
+
+      rmdir(join(module.path, './lib'));
+      webpack(compileObj, (err, stats) => {
+        if (err || stats.hasErrors()) {
+          process.stdout.write(stats.toString() + '\n');
+          reject();
+        }
+        resolve();
+      });
+    });
   }
-  process.stdout.write(stats.toString() + "\n");
-});
+  return true;
+}
+createOrderedBuild();
 
 // TODO: make parallel-webpack. https://webpack.js.org/api/node/#multicompiler
 // const builded = [];
@@ -76,7 +88,8 @@ function generate(source = './packages') {
               Object.keys(package.dependencies).filter((x) => x.indexOf('@nextgis') !== -1)
               : [];
             modules[package.name] = {
-              path: webpackPath,
+              path: libPath,
+              webpackPath,
               deps,
             };
           }
@@ -86,3 +99,24 @@ function generate(source = './packages') {
   });
   return modules;
 }
+
+function rmdir(dir) {
+  if (existsSync(dir) && isDirectory(dir)) {
+    const list = readdirSync(dir);
+    for (let i = 0; i < list.length; i++) {
+      const filename = join(dir, list[i]);
+      const stat = statSync(filename);
+
+      if (filename == "." || filename == "..") {
+        // pass these files
+      } else if (stat.isDirectory()) {
+        // rmdir recursively
+        rmdir(filename);
+      } else {
+        // rm filename
+        unlinkSync(filename);
+      }
+    }
+    rmdirSync(dir);
+  }
+};
