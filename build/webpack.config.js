@@ -5,9 +5,12 @@ const { getAliases } = require('./aliases');
 
 module.exports = (env, argv, opt = {}) => {
 
+  const relativePath = path.relative(process.cwd(), opt.dirname);
+
   const library = opt.library;
   const pathToLib = opt.package.main.split('/');
-  const entry = path.resolve(opt.dirname ,opt.entry || './src/index.ts');
+  const entry = './' + path.join(relativePath, './src/index.ts');
+
   const useExternals = opt.externals !== undefined ? opt.externals : true;
 
   const filename = pathToLib.pop();
@@ -17,12 +20,35 @@ module.exports = (env, argv, opt = {}) => {
 
   const isProd = argv.mode === 'production';
 
+  let externals = {};
+
+  if (!useExternals) {
+    externals = [
+      function (context, request, callback) {
+        // Absolute & Relative paths are not externals
+        if (request.match(/^(\.{0,2})\//)) {
+          return callback();
+        }
+        try {
+          // Attempt to resolve the module via Node
+          require.resolve(request);
+          callback(null, request);
+        } catch (e) {
+          // Node couldn't find it, so it must be user-aliased
+          callback();
+        }
+      }
+    ];
+  }
+
   const rules = [
     {
       test: /\.tsx?$/,
       loader: 'ts-loader',
       exclude: /node_modules/,
       options: {
+        // context: opt.dirname,
+        // configFile: path.join(opt.dirname , './tsconfig.json'),
         compilerOptions: {
           paths: {}
         }
@@ -58,12 +84,14 @@ module.exports = (env, argv, opt = {}) => {
     alias = getAliases()
   }
 
-  const config = {
+  return [{
     mode: argv.mode || 'development',
 
     devtool: isProd ? 'source-map' : 'inline-source-map',
 
     entry,
+
+    externals,
 
     resolve: {
       extensions: ['.ts', '.js', '.json'],
@@ -81,27 +109,5 @@ module.exports = (env, argv, opt = {}) => {
       rules
     },
     plugins
-  };
-
-
-  if (!useExternals) {
-    config.externals = [
-      function (context, request, callback) {
-        // Absolute & Relative paths are not externals
-        if (request.match(/^(\.{0,2})\//)) {
-          return callback();
-        }
-        try {
-          // Attempt to resolve the module via Node
-          require.resolve(request);
-          callback(null, request);
-        } catch (e) {
-          // Node couldn't find it, so it must be user-aliased
-          callback();
-        }
-      }
-    ];
-  }
-
-  return [config];
+  }];
 }
