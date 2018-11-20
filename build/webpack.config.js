@@ -44,15 +44,17 @@ module.exports = (env, argv, opt = {}) => {
   const rules = [
     {
       test: /\.tsx?$/,
-      loader: 'ts-loader',
-      exclude: /node_modules/,
-      options: {
-        // context: opt.dirname,
-        // configFile: path.join(opt.dirname , './tsconfig.json'),
-        compilerOptions: {
-          paths: {}
+      use: [
+        {
+          loader: 'ts-loader',
+          options: {
+            compilerOptions: {
+              paths: {}
+            }
+          }
         }
-      }
+      ],
+      exclude: /node_modules/,
     },
     {
       test: /\.css$/,
@@ -85,6 +87,8 @@ module.exports = (env, argv, opt = {}) => {
   }
 
   return [{
+    // context: opt.dirname,
+
     mode: argv.mode || 'development',
 
     devtool: isProd ? 'source-map' : 'inline-source-map',
