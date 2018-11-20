@@ -7,6 +7,7 @@ import 'leaflet/dist/leaflet.css';
 import { onMapLoad } from './decorators';
 import { fixUrlStr, deepmerge } from './utils';
 import { EventEmitter } from 'events';
+import { GeoJsonObject } from 'geojson';
 
 export interface ControlOptions {
   position?: ControlPositions;
@@ -96,6 +97,14 @@ export default class NgwMap {
   addNgwLayer(options: NgwLayerOptions) {
     return NgwKit.addNgwLayer(options, this.webMap, this.options.baseUrl).then((layer) => {
       this._ngwLayers[layer.name] = layer;
+      this.webMap.map.showLayer(layer.name);
+      return layer.name;
+    });
+  }
+
+  @onMapLoad()
+  addGeoJSONLayer(data: GeoJsonObject) {
+    return this.webMap.map.addLayer('GEOJSON', {data}).then((layer) => {
       this.webMap.map.showLayer(layer.name);
       return layer.name;
     });
