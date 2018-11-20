@@ -21,52 +21,41 @@ for (const m in modules) {
 const sorted = sortOp.sort();
 const sortedKeys = [...sorted.keys()];
 
+let builded = [];
 async function createOrderedBuild() {
 
-  for (const s of sortedKeys) {
-    const module = modules[s];
-    const config = require(module.webpackPath);
-    const compileObj = config(null, { mode: 'production' })[0];
-    process.stdout.write('start build ' + s + '\n');
-    await new Promise((resolve, reject) => {
-
-      rmdir(join(module.path, './lib'));
-      webpack(compileObj, (err, stats) => {
-        if (err || stats.hasErrors()) {
-          process.stdout.write(stats.toString() + '\n');
-          reject();
+  while (builded.length < sortedKeys.length) {
+    const forBuild = [];
+    sortedKeys.forEach((s) => {
+      if (builded.indexOf(s) === -1) {
+        const { node } = sorted.get(s);
+        const canBuild = node.deps.length === 0 || node.deps.filter((d) => builded.indexOf(d) === -1).length === 0;
+        if (canBuild) {
+          forBuild.push(node);
         }
-        resolve();
-      });
-    });
+      }
+    })
+    await createPromise(forBuild);
   }
-  return true;
 }
 createOrderedBuild();
 
-// TODO: make parallel-webpack. https://webpack.js.org/api/node/#multicompiler
-// const builded = [];
-// async function createOrderedBuild() {
-
-//   while (sortedKeys) {
-//     const compilers = [];
-//     sortedKeys.forEach((s) => {
-//       const { node, children } = sorted.get(s);
-//       const canBuild = node.deps.length === 0 || node.deps.filter((d) => builded.indexOf(d) !== -1).length === 0;
-//       if (canBuild) {
-//         compilers.push(require(node.path)(null, { mode: 'production' })[0]);
-//       }
-//     })
-
-//     await new Promise((resolve) => {
-//       console.log('start build ', compilers);
-//       webpack(compilers, (err, stats) => {
-//         process.stdout.write(stats.toString() + "\n");
-//       });
-//     })
-//   }
-// }
-// createOrderedBuild();
+async function createPromise(forBuild) {
+  const modules = forBuild.map((x) => x.name);
+  const compileObjs = forBuild.map((x) => require(x.webpackPath)(null, { mode: 'production' })[0]);
+  process.stdout.write('start build ' + modules + '\n');
+  forBuild.forEach((x) => rmdir(join(x.path, './lib')));
+  return new Promise((resolve, reject) => {
+    webpack(compileObjs, (err, stats) => {
+      if (err || stats.hasErrors()) {
+        process.stdout.write(stats.toString() + '\n');
+        reject();
+      }
+      builded = builded.concat(modules);
+      resolve();
+    });
+  });
+}
 
 
 function generate(source = './packages') {
@@ -91,6 +80,7 @@ function generate(source = './packages') {
               path: libPath,
               webpackPath,
               deps,
+              name: package.name
             };
           }
         }
