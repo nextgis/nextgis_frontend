@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "@types/events": "^1.2.0",
+    "@types/geojson": "^7946.0.4",
     "@types/node": "^10.12.8",
     "base64-inline-loader": "^1.1.1",
     "css-loader": "^1.0.1",
