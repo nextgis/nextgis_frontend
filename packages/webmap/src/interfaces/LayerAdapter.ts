@@ -19,8 +19,19 @@ export interface MvtAdapterOptions extends AdapterOptions {
   'source-layer'?: string;
 }
 
+export type GeoJsonAdapterLayerType = 'fill' | 'circle' | 'line';
+
+export interface GeoJsonAdapterLayerPaint {
+  color?: string;
+  opacity?: number;
+  weight?: number;
+  radius?: number;
+}
+
 export interface GeoJsonAdapterOptions extends AdapterOptions {
   data?: GeoJsonObject;
+  type?: GeoJsonAdapterLayerType;
+  paint?: GeoJsonAdapterLayerPaint;
 }
 
 export interface MarkerAdapterOptions extends AdapterOptions {
