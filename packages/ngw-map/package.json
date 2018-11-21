@@ -1,12 +1,12 @@
 {
   "name": "@nextgis/ngw-map",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "description": "",
   "main": "lib/ngw-map.js",
   "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/ngw-connector": "^0.6.3",
-    "@nextgis/ngw-kit": "^0.6.3",
+    "@nextgis/ngw-kit": "^0.6.4",
     "@nextgis/qms-kit": "^0.6.3",
     "@nextgis/webmap": "^0.6.3",
     "events": "^3.0.0",
