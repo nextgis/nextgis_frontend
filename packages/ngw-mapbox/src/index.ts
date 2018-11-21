@@ -12,11 +12,13 @@ export default class NgwLeaflet extends NgwMap {
     super(new MapboxglMapAdapter(), options);
   }
 
-  addNgwLayer(options: NgwLayerOptions) {
+  addNgwLayer(options: NgwLayerOptions, adapterOptions?) {
     // TODO: still no way to add NGW IMAGE to mapbox-gl
     // always use tile adapter
-    options.adapter = 'TILE';
-    return super.addNgwLayer(options);
+    if (options.adapter  === 'IMAGE') {
+      options.adapter = 'TILE';
+    }
+    return super.addNgwLayer(options, adapterOptions);
   }
 
 }

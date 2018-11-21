@@ -3,7 +3,7 @@ import WebMap, { StarterKit } from '@nextgis/webmap';
 
 export interface NgwLayerOptions {
   id: number;
-  adapter?: 'IMAGE' | 'TILE';
+  adapter?: 'IMAGE' | 'TILE' | 'GEOJSON';
 }
 
 export interface NgwConfig {
