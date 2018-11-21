@@ -2,6 +2,7 @@ const { join, resolve } = require('path');
 const { lstatSync, readdirSync, readFileSync, existsSync, statSync, unlinkSync, rmdirSync } = require('fs');
 const webpack = require("webpack");
 const { TopologicalSort } = require('topological-sort');
+const rimraf = require('rimraf');
 
 const isDirectory = (source) => lstatSync(source).isDirectory();
 
@@ -43,8 +44,13 @@ createOrderedBuild();
 async function createPromise(forBuild) {
   const modules = forBuild.map((x) => x.name);
   const compileObjs = forBuild.map((x) => require(x.webpackPath)(null, { mode: 'production' })[0]);
-  process.stdout.write('start build ' + modules + '\n');
-  forBuild.forEach((x) => rmdir(join(x.path, './lib')));
+  const names = modules.map((x) => x.replace('@nextgis/', '')).join(', ');
+  process.stdout.write('start build ' + names + '\n');
+  forBuild.forEach(async (x) => {
+    return await new Promise((resolve) => {
+      rimraf(join(x.path, './lib'), resolve);
+    })
+  });
   return new Promise((resolve, reject) => {
     webpack(compileObjs, (err, stats) => {
       if (err || stats.hasErrors()) {
@@ -89,24 +95,3 @@ function generate(source = './packages') {
   });
   return modules;
 }
-
-function rmdir(dir) {
-  if (existsSync(dir) && isDirectory(dir)) {
-    const list = readdirSync(dir);
-    for (let i = 0; i < list.length; i++) {
-      const filename = join(dir, list[i]);
-      const stat = statSync(filename);
-
-      if (filename == "." || filename == "..") {
-        // pass these files
-      } else if (stat.isDirectory()) {
-        // rmdir recursively
-        rmdir(filename);
-      } else {
-        // rm filename
-        unlinkSync(filename);
-      }
-    }
-    rmdirSync(dir);
-  }
-};
