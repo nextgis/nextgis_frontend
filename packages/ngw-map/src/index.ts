@@ -14,6 +14,12 @@ import { onMapLoad } from './decorators';
 import { fixUrlStr, deepmerge } from './utils';
 import { EventEmitter } from 'events';
 import { GeoJsonObject } from 'geojson';
+import { toWgs84 } from 'reproject';
+
+const epsg = {
+  // tslint:disable-next-line:max-line-length
+  'EPSG:3857': '+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext  +no_defs'
+};
 
 export interface ControlOptions {
   position?: ControlPositions;
@@ -29,7 +35,7 @@ export interface MapOptions extends MO {
 
 export interface NgwLayerOptions {
   id: number;
-  adapter?: 'IMAGE' | 'TILE';
+  adapter?: 'IMAGE' | 'TILE' | 'GEOJSON';
 }
 
 export default class NgwMap {
@@ -100,12 +106,20 @@ export default class NgwMap {
   }
 
   @onMapLoad()
-  addNgwLayer(options: NgwLayerOptions) {
-    return NgwKit.addNgwLayer(options, this.webMap, this.options.baseUrl).then((layer) => {
-      this._ngwLayers[layer.name] = layer;
-      this.webMap.map.showLayer(layer.name);
-      return layer.name;
-    });
+  async addNgwLayer(options: NgwLayerOptions, adapterOptions?) {
+    if (options.adapter === 'GEOJSON') {
+      let data = await this.connector.makeQuery('/api/resource/{id}/geojson', {
+        id: options.id
+      });
+      data = toWgs84(data, undefined, epsg);
+      return this.addGeoJsonLayer(data, adapterOptions);
+    } else {
+      return NgwKit.addNgwLayer(options, this.webMap, this.options.baseUrl).then((layer) => {
+        this._ngwLayers[layer.name] = layer;
+        this.webMap.map.showLayer(layer.name);
+        return layer.name;
+      });
+    }
   }
 
   @onMapLoad()
