@@ -69,7 +69,8 @@ module.exports = (env, argv, opt = {}) => {
   let plugins = [
 
     new TSLintPlugin({
-      files: ['./src/**/*.ts']
+      files: ['./src/**/*.ts'],
+      silent: true
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(argv.mode || 'development')
