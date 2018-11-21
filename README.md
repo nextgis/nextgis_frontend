@@ -80,6 +80,8 @@ yarn install
 yarn run bootstrap
 # Build all packages
 yarn run prod
+# Build demp app
+yarn run demo
 ```
 
 ### Instruction for each packages
