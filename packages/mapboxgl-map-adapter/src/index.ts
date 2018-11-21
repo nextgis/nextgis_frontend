@@ -7,7 +7,7 @@ import { EventEmitter } from 'events';
 import { ZoomControl } from './controls/ZoomControl';
 import { CompassControl } from './controls/CompassControl';
 import { AttributionControl } from './controls/AttributionControl';
-import { GeoJSONAdapter } from './layer-adapters/GeoJSONAdapter';
+import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 
 type positions = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
 
@@ -18,7 +18,7 @@ export default class MapboxglMapAdapter implements MapAdapter {
     // IMAGE: ImageAdapter,
     MVT: MvtAdapter,
     OSM: OsmAdapter,
-    GEOJSON: GeoJSONAdapter,
+    GEOJSON: GeoJsonAdapter,
   };
 
   static controlAdapters = {
@@ -72,11 +72,11 @@ export default class MapboxglMapAdapter implements MapAdapter {
   }
 
   setCenter(latLng: [number, number]) {
-    // ignore
+    this.map.setCenter(latLng);
   }
 
   setZoom(zoom: number) {
-    // ignore
+    this.map.setZoom(zoom);
   }
 
   // [extent_left, extent_bottom, extent_right, extent_top];

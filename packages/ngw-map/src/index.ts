@@ -1,4 +1,10 @@
-import WebMap, { MapAdapter, StarterKit, MapOptions as MO, ControlPositions } from '@nextgis/webmap';
+import WebMap, {
+  MapAdapter,
+  StarterKit,
+  MapOptions as MO,
+  ControlPositions,
+  GeoJsonAdapterLayerPaint
+} from '@nextgis/webmap';
 import NgwConnector from '@nextgis/ngw-connector';
 import QmsKit from '@nextgis/qms-kit';
 import NgwKit from '@nextgis/ngw-kit';
@@ -103,8 +109,8 @@ export default class NgwMap {
   }
 
   @onMapLoad()
-  addGeoJSONLayer(data: GeoJsonObject) {
-    return this.webMap.map.addLayer('GEOJSON', {data}).then((layer) => {
+  addGeoJsonLayer(data: GeoJsonObject, paint: GeoJsonAdapterLayerPaint) {
+    return this.webMap.map.addLayer('GEOJSON', { data, paint }).then((layer) => {
       this.webMap.map.showLayer(layer.name);
       return layer.name;
     });
@@ -157,11 +163,11 @@ export default class NgwMap {
 
   private _addControls() {
     this.options.controls.forEach((x) => {
-      let controlOptions: ControlOptions = {position: 'top-left'};
+      let controlOptions: ControlOptions = { position: 'top-left' };
       if (typeof x === 'string') {
         controlOptions = this.options.controlsOptions[x];
       }
-      const {position, ...options} = controlOptions;
+      const { position, ...options } = controlOptions;
       this.webMap.map.addControl(x, position, options);
     });
   }
