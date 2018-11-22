@@ -1,5 +1,6 @@
 import { MapOptions, AppOptions } from './interfaces/WebMapApp';
 import { AppSettings, StarterKit } from './interfaces/AppSettings';
+import { BaseMapAdapter } from './interfaces/MapAdapter';
 import { WebLayerEntry } from './WebLayerEntry';
 import { Keys } from './components/keys/Keys';
 import { EventEmitter } from 'events';
@@ -9,7 +10,14 @@ import { deepmerge } from './utils/lang';
 import { LayerAdapters, LayerAdapter } from './interfaces/LayerAdapter';
 import { Type } from './utils/Type';
 
-export class WebMap<M = any> {
+interface LayerMem {
+  layer: any;
+  onMap: boolean;
+  order?: number;
+  baseLayer?: boolean;
+}
+
+export class WebMap<M = any> implements BaseMapAdapter {
 
   options: MapOptions;
 
@@ -17,22 +25,17 @@ export class WebMap<M = any> {
   lonlatProjection = 'EPSG:4326';
 
   settings: AppSettings;
-
   layers: WebLayerEntry;
-
-  emitter /** : StrictEventEmitter<EventEmitter, WebMapAppEvents> */ = new EventEmitter();
-
+  emitter = new EventEmitter();
   keys: Keys = new Keys(); // TODO: make injectable cashed
-
   map: MapAdapter<M>;
-
   runtimeParams: RuntimeParams[];
-  private _starterKits: StarterKit[];
 
   private settingsIsLoading = false;
-
+  private _starterKits: StarterKit[];
   private _baseLayers: string[] = [];
   private _extent: [number, number, number, number];
+  private _layers: { [x: string]: LayerMem } = {};
 
   constructor(appOptions: AppOptions) {
     this.map = appOptions.mapAdapter;
@@ -46,14 +49,17 @@ export class WebMap<M = any> {
     this.options = deepmerge(this.options || {}, options);
 
     if (!this.settings && this._starterKits.length) {
-      await this.getSettings();
+      try {
+        await this.getSettings();
+      } catch (er) {
+        console.error(er);
+      }
     }
-
     await this._setupMap();
     return this;
   }
 
-  async getSettings(): Promise<AppSettings> {
+  async getSettings(): Promise<AppSettings | Error> {
     if (this.settings) {
       return Promise.resolve(this.settings);
     }
@@ -66,7 +72,6 @@ export class WebMap<M = any> {
         };
         this.emitter.on('load-settings', onLoad);
       });
-
     } else {
       this.settingsIsLoading = true;
       let settings: AppSettings | boolean;
@@ -92,22 +97,155 @@ export class WebMap<M = any> {
     }
   }
 
-  addBaseLayer(
+  async addBaseLayer(
     layerName: string,
     provider: keyof LayerAdapters | Type<LayerAdapter>,
     options?: any): Promise<LayerAdapter> {
 
-    return this.map.addLayer(provider, { ...options, ...{ id: layerName } }, true).then((layer) => {
-      if (layer) {
-        this._baseLayers.push(layer.name);
-      }
-      return layer;
-    });
+    const layer = await this.map.addLayer(provider, { ...options, ...{ id: layerName } }, true);
+    if (layer) {
+      this._baseLayers.push(layer.name);
+    }
+    return layer;
   }
 
   isBaseLayer(layerName: string): boolean {
     return this._baseLayers.indexOf(layerName) !== -1;
   }
+
+  // region MapAdapter methods
+  setCenter(lngLat: [number, number]): this {
+    this.map.setCenter(lngLat);
+    return this;
+  }
+
+  setZoom(zoom: number): this {
+    this.map.setZoom(zoom);
+    return this;
+  }
+
+  // [extent_left, extent_bottom, extent_right, extent_top];
+  fit(e: [number, number, number, number]): this {
+    this.map.fit(e);
+    return this;
+  }
+
+  getLayerAdapter(name: string): Type<LayerAdapter> {
+    return this.map.layerAdapters[name];
+  }
+
+  getLayer(layerName: string) {
+    return this._layers[layerName] !== undefined;
+  }
+
+  getLayers(): string[] {
+    return Object.keys(this._layers);
+  }
+
+  isLayerOnTheMap(layerName: string): boolean {
+    const layerMem = this._layers[layerName];
+    return layerMem.onMap;
+  }
+
+  addControl(controlDef, position, options) {
+    return this.map.addControl(controlDef, position, options);
+  }
+
+  addLayer(adapterDef, options?, baselayer?: boolean) {
+
+    let adapterEngine;
+    if (typeof adapterDef === 'string') {
+      adapterEngine = this.getLayerAdapter(adapterDef);
+    } else {
+      adapterEngine = adapterDef;
+    }
+    if (adapterEngine) {
+      const adapter = new adapterEngine(this.map, options);
+      const layer = adapter.addLayer(options);
+
+      const addlayerFun = adapter.addLayer(options);
+      const toResolve = (l) => {
+        const layerId = adapter.name;
+        const layerOpts: LayerMem = { layer: l, onMap: false };
+        if (baselayer) {
+          layerOpts.baseLayer = true;
+          this._baseLayers.push(layerId);
+        } else {
+          layerOpts.order = options.order || this._order++;
+        }
+        this._layers[layerId] = layerOpts;
+        // this._length++;
+
+        return adapter;
+      };
+      return addlayerFun.then ? addlayerFun.then((l) => toResolve(l)) : Promise.resolve(toResolve(layer));
+    }
+    return Promise.reject('No adapter');
+  }
+
+  removeLayer(layerName: string) {
+    // ignore
+  }
+
+  showLayer(layerName: string) {
+    this.toggleLayer(layerName, true);
+  }
+
+  hideLayer(layerName: string) {
+    this.toggleLayer(layerName, false);
+  }
+
+  setLayerOpacity(layerName: string, value: number) {
+    // ignore
+  }
+
+  getScaleForResolution(res, mpu) {
+    return parseFloat(res) * (mpu * this.IPM * this.DPI);
+  }
+
+  getResolutionForScale(scale, mpu) {
+    return parseFloat(scale) / (mpu * this.IPM * this.DPI);
+  }
+
+  toggleLayer(layerName: string, status: boolean) {
+    const action = (source: Map, l: LayerMem) => {
+      if (status) {
+        if (source instanceof Map) {
+          l.layer.addTo(source);
+          // TODO: set order for any layer
+          if (l.layer.setZIndex) {
+            const order = l.baseLayer ? 0 : this._length - l.order;
+            l.layer.setZIndex(order);
+          }
+        }
+      } else {
+        source.removeLayer(l.layer);
+      }
+      l.onMap = status;
+    };
+    const layer = this._layers[layerName];
+    if (layer && layer.onMap !== status) {
+      if (this.map) {
+        action(this.map, layer);
+      } else {
+        this.emitter.once('create', (data) => {
+          action(data.map, layer);
+        });
+      }
+    }
+  }
+
+  onMapClick(evt) {
+    const coord = evt.containerPoint;
+    const latLng = evt.latlng;
+    this.emitter.emit('click', {
+      latLng,
+      pixel: { left: coord.x, top: coord.y },
+      source: evt,
+    });
+  }
+
+  // endregion
 
   // region MAP
   private async _setupMap() {
@@ -138,36 +276,21 @@ export class WebMap<M = any> {
   }
 
   private async _addTreeLayers() {
-    const settings = await this.getSettings();
-    if (settings) {
-      const rootLayer = settings.root_item;
-      if (rootLayer) {
-        this.layers = new WebLayerEntry(this.map, rootLayer);
-        this.emitter.emit('add-layers', this.layers);
+    try {
+      const settings = await this.getSettings() as AppSettings;
+      if (settings) {
+        const rootLayer = settings.root_item;
+        if (rootLayer) {
+          this.layers = new WebLayerEntry(this.map, rootLayer);
+          this.emitter.emit('add-layers', this.layers);
+        }
       }
+    } catch (er) {
+      console.error(er);
     }
   }
 
   private _zoomToInitialExtent() {
-    // const { lat, lon, zoom, angle } = this.runtimeParams.getParams();
-    // if (zoom && lon && lat) {
-    //   this.map.setCenter([
-    //     parseFloat(lon),
-    //     parseFloat(lat),
-    //   ],
-    //   );
-    //   this.map.setZoom(
-    //     parseInt(zoom, 10),
-    //   );
-
-    //   if (angle) {
-    //     this.map.setRotation(
-    //       parseFloat(angle),
-    //     );
-    //   }
-    // } else {
-    //   this.map.fit(this.options.displayConfig.extent);
-    // }
     if (this._extent) {
       this.map.fit(this._extent);
     } else {
@@ -204,7 +327,6 @@ export class WebMap<M = any> {
   // endregion
 
   // region Events
-
   private _addEventsListeners() {
     // propagate map click event
     this.map.emitter.on('click', (ev: MapClickEvent) => this._onMapClick(ev));
@@ -218,7 +340,6 @@ export class WebMap<M = any> {
       }
     });
   }
-
   // endregion
 
 }
