@@ -96,8 +96,8 @@ export default class OlMapAdapter implements MapAdapter {
     });
   }
 
-  setCenter(latLng: [number, number]) {
-    this._olView.setCenter(fromLonLat(latLng));
+  setCenter(lonLat: [number, number]) {
+    this._olView.setCenter(fromLonLat(lonLat));
   }
 
   setZoom(zoom: number) {
