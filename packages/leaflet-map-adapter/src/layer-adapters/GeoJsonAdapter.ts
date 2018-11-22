@@ -54,13 +54,15 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
       const paint = preparePaint(options.paint);
       if (options.paint) {
         geoJsonOptions.style = (feature) => {
-          return preparePaint(paint);
+          return paint;
         };
       }
       if (type === 'circle') {
         geoJsonOptions.pointToLayer = (geoJsonPoint, latlng) => {
           return new CircleMarker(latlng, paint);
         };
+      } else if (type === 'line') {
+        paint.stroke = true;
       }
 
       const layer = new GeoJSON(data, geoJsonOptions);
