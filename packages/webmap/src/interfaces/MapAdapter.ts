@@ -16,18 +16,7 @@ export interface MapClickEvent {
 
 export type ControlPositions = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
 
-export interface MapAdapter<M = any> {
-
-  lonlatProjection?: string;
-  displayProjection?: string;
-  map: M;
-  emitter: EventEmitter;
-  layerAdapters: { [name: string]: Type<LayerAdapter> };
-
-  create(options?: MapOptions): void;
-
-  onMapLoad(cb?: () => void): Promise<any>;
-
+export interface BaseMapAdapter {
   addLayer<K extends keyof LayerAdapters>(
     layerAdapter: K | Type<LayerAdapter>,
     options?: LayerAdapters[K], baselayer?: boolean): Promise<LayerAdapter>;
@@ -51,6 +40,19 @@ export interface MapAdapter<M = any> {
     controlName: C | MapControl,
     position: ControlPositions,
     options?: MapControls[C]): any;
+}
+
+export interface MapAdapter<M = any> extends BaseMapAdapter {
+
+  lonlatProjection?: string;
+  displayProjection?: string;
+  map: M;
+  emitter: EventEmitter;
+  layerAdapters: { [name: string]: Type<LayerAdapter> };
+
+  create(options?: MapOptions): void;
+
+  onMapLoad(cb?: () => void): Promise<any>;
 
   getContainer(): HTMLElement;
 
