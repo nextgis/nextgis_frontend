@@ -80,6 +80,8 @@ module.exports = (env, argv, opt = {}) => {
   let alias = {};
 
   if (isProd) {
+
+    // const { BundleAnalyzerPlugin }= require('webpack-bundle-analyzer');
     plugins = plugins.concat([
       // new BundleAnalyzerPlugin()
     ])
