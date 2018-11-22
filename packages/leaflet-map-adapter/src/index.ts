@@ -71,8 +71,9 @@ export default class LeafletMapAdapter implements MapAdapter {
     });
   }
 
-  setCenter(latLng: [number, number]) {
-    this.map.setView(latLng, this.map.getZoom());
+  setCenter(lngLat: [number, number]) {
+    const [lng, lat] = lngLat;
+    this.map.setView([lat, lng], this.map.getZoom());
   }
 
   setZoom(zoom: number) {
