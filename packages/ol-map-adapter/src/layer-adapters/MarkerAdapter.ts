@@ -1,10 +1,10 @@
 import { LayerAdapter } from '@nextgis/webmap';
 import Point from 'ol/geom/Point';
 import Feature from 'ol/Feature';
-import { fromLonLat } from 'ol/proj';
 import {Vector as VectorLayer} from 'ol/layer';
-import {Icon, Style} from 'ol/style.js';
 import VectorSource from 'ol/source/Vector';
+// @ts-ignore
+import { fromLonLat } from 'ol/proj';
 
 let ID = 1;
 

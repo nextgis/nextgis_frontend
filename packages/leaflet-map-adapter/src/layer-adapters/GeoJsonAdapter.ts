@@ -4,7 +4,7 @@ import {
   GeoJsonAdapterLayerPaint,
   GeoJsonAdapterLayerType
 } from '@nextgis/webmap';
-import { GeoJSON, CircleMarker, GeoJSONOptions, PathOptions } from 'leaflet';
+import { GeoJSON, CircleMarker, GeoJSONOptions, PathOptions, CircleMarkerOptions } from 'leaflet';
 import { BaseAdapter } from './BaseAdapter';
 import { GeoJsonObject, GeoJsonGeometryTypes, FeatureCollection, Feature, GeometryCollection } from 'geojson';
 
@@ -73,7 +73,7 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
 }
 
 function preparePaint(paint: GeoJsonAdapterLayerPaint): PathOptions {
-  const path: PathOptions = { ...PAINT, ...paint };
+  const path: CircleMarkerOptions | PathOptions = { ...PAINT, ...paint };
   if (path.opacity) {
     path.fillOpacity = path.opacity;
   }
