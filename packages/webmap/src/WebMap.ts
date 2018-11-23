@@ -1,6 +1,5 @@
 import { MapOptions, AppOptions } from './interfaces/WebMapApp';
 import { AppSettings, StarterKit } from './interfaces/AppSettings';
-import { BaseMapAdapter } from './interfaces/MapAdapter';
 import { WebLayerEntry } from './WebLayerEntry';
 import { Keys } from './components/keys/Keys';
 import { EventEmitter } from 'events';
@@ -10,14 +9,14 @@ import { deepmerge } from './utils/lang';
 import { LayerAdapters, LayerAdapter } from './interfaces/LayerAdapter';
 import { Type } from './utils/Type';
 
-interface LayerMem {
+export interface LayerMem {
   layer: any;
   onMap: boolean;
   order?: number;
   baseLayer?: boolean;
 }
 
-export class WebMap<M = any> implements BaseMapAdapter {
+export class WebMap<M = any> {
 
   options: MapOptions;
 
@@ -28,17 +27,21 @@ export class WebMap<M = any> implements BaseMapAdapter {
   layers: WebLayerEntry;
   emitter = new EventEmitter();
   keys: Keys = new Keys(); // TODO: make injectable cashed
-  map: MapAdapter<M>;
+  mapAdapter: MapAdapter<M>;
   runtimeParams: RuntimeParams[];
+
+  private DPI = 1000 / 39.37 / 0.28;
+  private IPM = 39.37;
 
   private settingsIsLoading = false;
   private _starterKits: StarterKit[];
   private _baseLayers: string[] = [];
   private _extent: [number, number, number, number];
   private _layers: { [x: string]: LayerMem } = {};
+  private _layersIds: number = 0;
 
   constructor(appOptions: AppOptions) {
-    this.map = appOptions.mapAdapter;
+    this.mapAdapter = appOptions.mapAdapter;
     this._starterKits = appOptions.starterKits || [];
 
     this._addEventsListeners();
@@ -98,11 +101,10 @@ export class WebMap<M = any> implements BaseMapAdapter {
   }
 
   async addBaseLayer(
-    layerName: string,
     provider: keyof LayerAdapters | Type<LayerAdapter>,
     options?: any): Promise<LayerAdapter> {
 
-    const layer = await this.map.addLayer(provider, { ...options, ...{ id: layerName } }, true);
+    const layer = await this.addLayer(provider, { ...options }, true);
     if (layer) {
       this._baseLayers.push(layer.name);
     }
@@ -115,23 +117,27 @@ export class WebMap<M = any> implements BaseMapAdapter {
 
   // region MapAdapter methods
   setCenter(lngLat: [number, number]): this {
-    this.map.setCenter(lngLat);
+    this.mapAdapter.setCenter(lngLat);
     return this;
   }
 
   setZoom(zoom: number): this {
-    this.map.setZoom(zoom);
+    this.mapAdapter.setZoom(zoom);
     return this;
   }
 
   // [extent_left, extent_bottom, extent_right, extent_top];
   fit(e: [number, number, number, number]): this {
-    this.map.fit(e);
+    this.mapAdapter.fit(e);
     return this;
   }
 
+  getLayerAdapters(): { [name: string]: Type<LayerAdapter> } {
+    return this.mapAdapter.layerAdapters;
+  }
+
   getLayerAdapter(name: string): Type<LayerAdapter> {
-    return this.map.layerAdapters[name];
+    return this.mapAdapter.layerAdapters[name];
   }
 
   getLayer(layerName: string) {
@@ -148,43 +154,49 @@ export class WebMap<M = any> implements BaseMapAdapter {
   }
 
   addControl(controlDef, position, options) {
-    return this.map.addControl(controlDef, position, options);
+    return this.mapAdapter.addControl(controlDef, position, options);
   }
 
-  addLayer(adapterDef, options?, baselayer?: boolean) {
+  async addLayer<K extends keyof LayerAdapters>(
+    layerAdapter: K | Type<LayerAdapter>,
+    options?: LayerAdapters[K], baselayer?: boolean): Promise<LayerAdapter> {
 
     let adapterEngine;
-    if (typeof adapterDef === 'string') {
-      adapterEngine = this.getLayerAdapter(adapterDef);
+    if (typeof layerAdapter === 'string') {
+      adapterEngine = this.getLayerAdapter(layerAdapter);
     } else {
-      adapterEngine = adapterDef;
+      adapterEngine = layerAdapter;
     }
     if (adapterEngine) {
-      const adapter = new adapterEngine(this.map, options);
-      const layer = adapter.addLayer(options);
+      const adapter = new adapterEngine(this.mapAdapter.map, options);
+      if (this.mapAdapter.onMapLoad) {
+        await this.mapAdapter.onMapLoad();
+      }
+      const layer = await adapter.addLayer(options);
 
-      const addlayerFun = adapter.addLayer(options);
-      const toResolve = (l) => {
-        const layerId = adapter.name;
-        const layerOpts: LayerMem = { layer: l, onMap: false };
-        if (baselayer) {
-          layerOpts.baseLayer = true;
-          this._baseLayers.push(layerId);
-        } else {
-          layerOpts.order = options.order || this._order++;
-        }
-        this._layers[layerId] = layerOpts;
-        // this._length++;
+      const layerId = adapter.name;
+      const layerOpts: LayerMem = { layer, onMap: false };
+      if (baselayer) {
+        layerOpts.baseLayer = true;
+        layerOpts.order = 0;
+        this._baseLayers.push(layerId);
+      } else {
+        layerOpts.order = options.order || ++this._layersIds;
+      }
+      this._layers[layerId] = layerOpts;
 
-        return adapter;
-      };
-      return addlayerFun.then ? addlayerFun.then((l) => toResolve(l)) : Promise.resolve(toResolve(layer));
+      return adapter;
+
     }
     return Promise.reject('No adapter');
   }
 
   removeLayer(layerName: string) {
-    // ignore
+    const layerMem = this._layers[layerName];
+    if (layerMem) {
+      this.mapAdapter.removeLayer(layerMem.layer);
+      delete this._layers[layerName];
+    }
   }
 
   showLayer(layerName: string) {
@@ -208,31 +220,31 @@ export class WebMap<M = any> implements BaseMapAdapter {
   }
 
   toggleLayer(layerName: string, status: boolean) {
-    const action = (source: Map, l: LayerMem) => {
-      if (status) {
-        if (source instanceof Map) {
-          l.layer.addTo(source);
-          // TODO: set order for any layer
-          if (l.layer.setZIndex) {
-            const order = l.baseLayer ? 0 : this._length - l.order;
-            l.layer.setZIndex(order);
-          }
-        }
+    const action = (source, l: LayerMem) => {
+      l.onMap = status;
+      if (status && source) {
+        // this.mapAdapter.showLayer(l.layer);
+        const order = l.baseLayer ? 0 : l.order;
+
+        this.mapAdapter.setLayerOrder(l.layer, order, this._layers);
       } else {
         source.removeLayer(l.layer);
       }
-      l.onMap = status;
     };
     const layer = this._layers[layerName];
     if (layer && layer.onMap !== status) {
-      if (this.map) {
-        action(this.map, layer);
+      if (this.mapAdapter.map) {
+        action(this.mapAdapter, layer);
       } else {
-        this.emitter.once('create', (data) => {
+        this.mapAdapter.emitter.once('create', (data) => {
           action(data.map, layer);
         });
       }
     }
+  }
+
+  requestGeomString(pixel, pixelRadius) {
+    return this.mapAdapter.requestGeomString(pixel, pixelRadius);
   }
 
   onMapClick(evt) {
@@ -262,16 +274,16 @@ export class WebMap<M = any> implements BaseMapAdapter {
         }
       }
     }
-    this.map.displayProjection = this.displayProjection;
-    this.map.lonlatProjection = this.lonlatProjection;
+    this.mapAdapter.displayProjection = this.displayProjection;
+    this.mapAdapter.lonlatProjection = this.lonlatProjection;
 
-    this.map.create(this.options);
+    this.mapAdapter.create(this.options);
 
     this._addTreeLayers();
     await this._addLayerProviders();
 
     this._zoomToInitialExtent();
-    this.emitter.emit('build-map', this.map);
+    this.emitter.emit('build-map', this.mapAdapter);
     return this;
   }
 
@@ -281,7 +293,7 @@ export class WebMap<M = any> implements BaseMapAdapter {
       if (settings) {
         const rootLayer = settings.root_item;
         if (rootLayer) {
-          this.layers = new WebLayerEntry(this.map, rootLayer);
+          this.layers = new WebLayerEntry(this, rootLayer);
           this.emitter.emit('add-layers', this.layers);
         }
       }
@@ -292,15 +304,15 @@ export class WebMap<M = any> implements BaseMapAdapter {
 
   private _zoomToInitialExtent() {
     if (this._extent) {
-      this.map.fit(this._extent);
+      this.mapAdapter.fit(this._extent);
     } else {
       const { center, zoom } = this.options;
 
       if (center) {
-        this.map.setCenter(center);
+        this.mapAdapter.setCenter(center);
       }
       if (zoom) {
-        this.map.setZoom(zoom);
+        this.mapAdapter.setZoom(zoom);
       }
     }
   }
@@ -313,9 +325,9 @@ export class WebMap<M = any> implements BaseMapAdapter {
         if (adapters) {
           for await (const adapter of adapters) {
             // this.map.layerAdapters[adapter.name] = adapter;
-            const newAdapter = await adapter.createAdapter(this.map);
+            const newAdapter = await adapter.createAdapter(this.mapAdapter);
             if (newAdapter) {
-              this.map.layerAdapters[adapter.name] = newAdapter;
+              this.mapAdapter.layerAdapters[adapter.name] = newAdapter;
             }
           }
         }
@@ -329,7 +341,7 @@ export class WebMap<M = any> implements BaseMapAdapter {
   // region Events
   private _addEventsListeners() {
     // propagate map click event
-    this.map.emitter.on('click', (ev: MapClickEvent) => this._onMapClick(ev));
+    this.mapAdapter.emitter.on('click', (ev: MapClickEvent) => this._onMapClick(ev));
   }
 
   private _onMapClick(ev: MapClickEvent) {

@@ -1,5 +1,6 @@
-import { WebMap } from './WebMap';
+import { WebMap,  } from './WebMap';
 
+export { LayerMem } from './WebMap';
 export * from './WebLayerEntry';
 export * from './interfaces/WebMapApp';
 export * from './interfaces/MapAdapter';

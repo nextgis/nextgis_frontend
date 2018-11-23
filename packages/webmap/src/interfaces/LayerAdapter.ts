@@ -8,7 +8,7 @@ export interface AdapterOptions {
   // visibility: item.layer_enabled,
   minResolution?: number;
   maxResolution?: number;
-
+  order?: number;
   // move out of here
   styleId?: number;
 }

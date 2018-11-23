@@ -21,16 +21,16 @@ const webMap = new WebMap({
 webMap.create({
   target: 'map'
 }).then(() => {
-  webMap.map.addControl('ZOOM', 'top-left');
+  webMap.addControl('ZOOM', 'top-left');
   webMap.addBaseLayer('sputnik', 'QMS', {
     qmsid: 487
   }).then((layer) => {
-    webMap.map.showLayer(layer.name);
+    webMap.showLayer(layer.name);
   });
 });
 
 // webMap.addBaseLayer('osm', 'OSM').then((layer) => {
-//   webMap.map.showLayer(layer.name);
+//   webMap.showLayer(layer.name);
 // });
 
 
@@ -57,12 +57,12 @@ webMap.emitter.on('click', function (evt) {
   // Open layers click event data
   console.log('OL evt', evt.source);
 
-  webMap.map.addLayer('MARKER', {
+  webMap.addLayer('MARKER', {
     latLng: evt.latLng
   }).then((x) => {
-    webMap.map.showLayer(x.name);
+    webMap.showLayer(x.name);
     setTimeout(function () {
-      webMap.map.removeLayer(x.name);
+      webMap.removeLayer(x.name);
     }, 300);
   });
 
