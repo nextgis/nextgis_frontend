@@ -26,6 +26,7 @@ export interface GeoJsonAdapterLayerPaint {
   opacity?: number;
   weight?: number;
   radius?: number;
+  stroke?: boolean;
 }
 
 export interface GeoJsonAdapterOptions extends AdapterOptions {
