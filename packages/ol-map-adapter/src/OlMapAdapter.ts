@@ -1,22 +1,21 @@
 import { MapAdapter } from '@nextgis/webmap';
-import { Map, View } from 'ol';
-import { fromLonLat, transformExtent, transform } from 'ol/proj';
-import { Zoom, Attribution, defaults as defaultControls } from 'ol/control';
-import { boundingExtent } from 'ol/extent';
-import { WKT } from 'ol/format';
-import { fromExtent } from 'ol/geom/Polygon';
+import Map from 'ol/Map';
+import View from 'ol/View';
+import Zoom from 'ol/control/Zoom';
+import Polygon from 'ol/geom/Polygon';
+import Attribution from 'ol/control/Attribution';
+import WKT from 'ol/format/WKT';
 import { ImageAdapter } from './layer-adapters/ImageAdapter';
 import { EventEmitter } from 'events';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
 import { MarkerAdapter } from './layer-adapters/MarkerAdapter';
 import { TileAdapter } from './layer-adapters/TileAdapter';
+import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 
-interface LayerMem {
-  layer: any;
-  onMap: boolean;
-  order?: number;
-  baseLayer?: boolean;
-}
+// @ts-ignore
+import { fromLonLat, transformExtent, transform } from 'ol/proj';
+// @ts-ignore
+import { boundingExtent } from 'ol/extent';
 
 export class OlMapAdapter implements MapAdapter {
 
@@ -26,6 +25,7 @@ export class OlMapAdapter implements MapAdapter {
     // MVT: MvtAdapter,
     OSM: OsmAdapter,
     MARKER: MarkerAdapter,
+    GEOJSON: GeoJsonAdapter,
   };
 
   static controlAdapters = {
@@ -48,14 +48,11 @@ export class OlMapAdapter implements MapAdapter {
   private DPI = 1000 / 39.37 / 0.28;
   private IPM = 39.37;
 
-  // private _layers: {[name: string]: LayerMem} = {};
-
-  // create(options: MapOptions = {target: 'map'}) {
-  create(options = { target: 'map' }) {
+  create(options) {
     this.options = Object.assign({}, options);
     const view = new View({
-      center: [-9101767, 2822912],
-      zoom: 14,
+      center: options.center,
+      zoom: options.zoom,
       projection: this.displayProjection,
     });
 
@@ -180,7 +177,7 @@ export class OlMapAdapter implements MapAdapter {
     ]);
 
     return new WKT().writeGeometry(
-      fromExtent(bounds));
+      Polygon.fromExtent(bounds));
   }
 
   private _addMapListeners() {

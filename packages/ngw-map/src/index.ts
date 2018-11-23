@@ -31,6 +31,7 @@ export interface MapOptions extends MO {
   webmapId?: number;
   baseUrl: string;
   bounds?: [number, number, number, number];
+  geoJsonDefaultPaint?: GeoJsonAdapterLayerPaint;
 }
 
 export interface NgwLayerOptions {
@@ -55,6 +56,12 @@ export default class NgwMap {
           '<a href="http://nextgis.ru" target="_blank">©NextGIS</a>',
         ]
       }
+    },
+    geoJsonDefaultPaint: {
+      color: 'blue',
+      opacity: 1,
+      radius: 6,
+      stroke: false
     }
   };
 
@@ -124,6 +131,7 @@ export default class NgwMap {
 
   @onMapLoad()
   addGeoJsonLayer(data: GeoJsonObject, paint: GeoJsonAdapterLayerPaint) {
+    paint = {...this.options.geoJsonDefaultPaint, ...paint};
     return this.webMap.addLayer('GEOJSON', { data, paint }).then((layer) => {
       this.webMap.showLayer(layer.name);
       return layer.name;
