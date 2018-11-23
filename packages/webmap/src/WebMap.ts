@@ -195,6 +195,12 @@ export class WebMap<M = any> {
     const layerMem = this._layers[layerName];
     if (layerMem) {
       this.mapAdapter.removeLayer(layerMem.layer);
+      if (layerMem.baseLayer) {
+        const index = this._baseLayers.indexOf(layerName);
+        if (index) {
+          this._baseLayers.splice(index, 1);
+        }
+      }
       delete this._layers[layerName];
     }
   }
