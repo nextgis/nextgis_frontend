@@ -54,7 +54,7 @@ export class WebLayerEntry extends Entry<EntryOptions> {
     let newLayer = item._layer;
     if (item.item_type === 'group' || item.item_type === 'root') {
       if (item.children && item.children.length) {
-        item.children.forEach((x) => {
+        item.children.reverse().forEach((x) => {
           const children = new WebLayerEntry(this.webMap, x, this.options, this);
           this.tree.addChildren(children);
         });

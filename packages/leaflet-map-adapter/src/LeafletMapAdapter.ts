@@ -112,10 +112,6 @@ export class LeafletMapAdapter implements MapAdapter {
     const baseLayers = [];
 
     const orderedLayers = Object.keys(layers).filter((x) => {
-      if (!layers[x].onMap) {
-        return false;
-      }
-      layers[x].layer.remove();
       if (layers[x].baseLayer) {
         baseLayers.push(x);
         return false;
@@ -125,16 +121,18 @@ export class LeafletMapAdapter implements MapAdapter {
       return layers[a].order - layers[b].order;
     });
 
-    // normilize layer ordering
+    // normilize vector layer ordering
     baseLayers.forEach((x) => {
-      if (layers[x].onMap) {
-        this.map.addLayer(layers[x].layer);
-      }
+      layers[x].layer.bringToBack();
     });
     for (let fry = 0; fry < orderedLayers.length; fry++) {
       if (layers[orderedLayers[fry]].onMap) {
-        this.map.addLayer(layers[orderedLayers[fry]].layer);
+        layers[orderedLayers[fry]].layer.bringToFront();
       }
+    }
+    // set raser layer ordering
+    if (layer.setZIndex) {
+      layer.setZIndex(order);
     }
   }
 
