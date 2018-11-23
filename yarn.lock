@@ -663,6 +663,18 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.10.tgz#4fa76e6598b7de3f0cb6ec3abacc4f59e5b3a2ce"
   integrity sha512-8xZEYckCbUVgK8Eg7lf5Iy4COKJ5uXlnIOnePN0WUwSQggy9tolM+tDJf7wMOnT/JT/W9xDYIaYggt3mRV2O5w==
 
+"@types/ol@^4.6.2":
+  version "4.6.2"
+  resolved "https://registry.yarnpkg.com/@types/ol/-/ol-4.6.2.tgz#35c2b45268ff44bd6f8246a95d2fa4a8c9bc5ef7"
+  integrity sha512-nXmOOkNjrHpTLHIN6H1Y7q9u6s/uSSnUi1va9n37FFjtf8O6IYSAll/uzKv+jqNOoN9SFx/RYSyhRK8Hs460BA==
+  dependencies:
+    "@types/openlayers" "*"
+
+"@types/openlayers@*":
+  version "4.6.12"
+  resolved "https://registry.yarnpkg.com/@types/openlayers/-/openlayers-4.6.12.tgz#102c0c2e9ba64090ea0661a3983d7197f3aae37d"
+  integrity sha512-o1sGWwfkVbhx2dZ1L8VSOT9gu8vkPzqzoMGn4dMFS58nSYalmxTPLQs0opTko42BYn3dmghLc8C3vc8d8udZYA==
+
 "@vue/component-compiler-utils@^2.0.0":
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/@vue/component-compiler-utils/-/component-compiler-utils-2.3.0.tgz#4f580f1b28fc7685859d87ea0e92a1c0271c93da"
