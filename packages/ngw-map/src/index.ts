@@ -87,9 +87,9 @@ export default class NgwMap {
   fit() {
     const { center, zoom, bounds } = this.options;
     if (center) {
-      this.webMap.map.setCenter(center);
+      this.webMap.setCenter(center);
       if (zoom) {
-        this.webMap.map.setZoom(zoom);
+        this.webMap.setZoom(zoom);
       }
     } else if (bounds) {
       this.fitBounds(bounds);
@@ -102,7 +102,7 @@ export default class NgwMap {
   fitBounds(bounds: [number, number, number, number]) {
     const [top, left, bottom, right] = bounds;
     // [extent_left, extent_bottom, extent_right, extent_top];
-    this.webMap.map.fit([left, bottom, right, top]);
+    this.webMap.fit([left, bottom, right, top]);
   }
 
   @onMapLoad()
@@ -116,7 +116,7 @@ export default class NgwMap {
     } else {
       return NgwKit.addNgwLayer(options, this.webMap, this.options.baseUrl).then((layer) => {
         this._ngwLayers[layer.name] = layer;
-        this.webMap.map.showLayer(layer.name);
+        this.webMap.showLayer(layer.name);
         return layer.name;
       });
     }
@@ -124,8 +124,8 @@ export default class NgwMap {
 
   @onMapLoad()
   addGeoJsonLayer(data: GeoJsonObject, paint: GeoJsonAdapterLayerPaint) {
-    return this.webMap.map.addLayer('GEOJSON', { data, paint }).then((layer) => {
-      this.webMap.map.showLayer(layer.name);
+    return this.webMap.addLayer('GEOJSON', { data, paint }).then((layer) => {
+      this.webMap.showLayer(layer.name);
       return layer.name;
     });
   }
@@ -162,16 +162,17 @@ export default class NgwMap {
       this.isLoaded = true;
       this.emitter.emit('map:created');
       if (this.options.qmsId) {
-        this.webMap.addBaseLayer(String(this.options.qmsId), 'QMS', {
+        this.webMap.addBaseLayer('QMS', {
+          id: this.options.qmsId,
           qmsid: this.options.qmsId
         }).then((layer) => {
-          this.webMap.map.showLayer(layer.name);
+          this.webMap.showLayer(layer.name);
         });
       }
 
       this.fit();
       // @ts-ignore
-      // window.lmap = this.webMap.map.map;
+      // window.lmap = this.webMap.mapAdapter.map;
     });
   }
 
@@ -182,7 +183,7 @@ export default class NgwMap {
         controlOptions = this.options.controlsOptions[x];
       }
       const { position, ...options } = controlOptions;
-      this.webMap.map.addControl(x, position, options);
+      this.webMap.addControl(x, position, options);
     });
   }
 }

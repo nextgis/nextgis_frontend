@@ -43,7 +43,8 @@ export default class NgwKit implements StarterKit {
   static getLayerAdapterOptions(options: NgwLayerOptions, webMap: WebMap, baseUrl) {
     let adapter = options.adapter || 'IMAGE';
     let url = baseUrl;
-    const isImageAllowed = webMap.map.layerAdapters ? webMap.map.layerAdapters.IMAGE : true;
+    const layerAdapters = webMap.getLayerAdapters();
+    const isImageAllowed = layerAdapters ? layerAdapters.IMAGE : true;
     if (adapter === 'IMAGE') {
       if (isImageAllowed) {
         url += '/api/component/render/image';
@@ -64,9 +65,14 @@ export default class NgwKit implements StarterKit {
   }
 
   static addNgwLayer(options: NgwLayerOptions, webMap: WebMap, baseUrl) {
-    const adapter = options.adapter || 'IMAGE';
+    let adapter = options.adapter || 'IMAGE';
+    const layerAdapters = webMap.getLayerAdapters();
+    const isImageAllowed = layerAdapters ? layerAdapters.IMAGE : true;
+    if (!isImageAllowed) {
+      adapter = 'TILE';
+    }
     if (adapter === 'IMAGE' || adapter === 'TILE') {
-      return webMap.map.addLayer(adapter,
+      return webMap.addLayer(adapter,
         NgwKit.getLayerAdapterOptions(options, webMap, baseUrl)
       );
     } else {
@@ -112,26 +118,25 @@ export default class NgwKit implements StarterKit {
   // options is temporal to set list of layers id, because layers id is not item parameter now
   sendIdentifyRequest(ev, webMap: WebMap, options: { layers?: string[] } = {}) {
 
-    if (webMap.map.requestGeomString) {
-      webMap.emitter.emit('start-identify', { ev });
-      const geom = webMap.map.requestGeomString(ev.pixel, this.pixelRadius);
-      let layers: string[] = options.layers;
-      if (!layers) {
-        // TODO: layer_style_id - 1 is hardcode to get layers id for geonote.nextgis.com instant
-        layers = webMap.layers.tree.getDescendants().filter((x) => {
-          return x.item.item_type === 'layer' && x.properties.get('visibility');
-        }).map((x) => String(Number(x.item.layer_style_id) - 1));
-      }
-      const data: RequestOptions = {
-        geom,
-        srs: 3857,
-        layers,
-      };
-      return this.connector.post('feature_layer.identify', { data }).then((resp) => {
-        webMap.emitter.emit('identify', { ev, data: resp });
-        return resp;
-      });
+    webMap.emitter.emit('start-identify', { ev });
+    const geom = webMap.requestGeomString(ev.pixel, this.pixelRadius);
+    let layers: string[] = options.layers;
+    if (!layers) {
+      // TODO: layer_style_id - 1 is hardcode to get layers id for geonote.nextgis.com instant
+      layers = webMap.layers.tree.getDescendants().filter((x) => {
+        return x.item.item_type === 'layer' && x.properties.get('visibility');
+      }).map((x) => String(Number(x.item.layer_style_id) - 1));
     }
+    const data: RequestOptions = {
+      geom,
+      srs: 3857,
+      layers,
+    };
+    return this.connector.post('feature_layer.identify', { data }).then((resp) => {
+      webMap.emitter.emit('identify', { ev, data: resp });
+      return resp;
+    });
+
   }
 
   private _updateItemsParams(item, webMap: WebMap) {

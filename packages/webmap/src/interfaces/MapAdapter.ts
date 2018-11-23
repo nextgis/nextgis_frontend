@@ -3,6 +3,7 @@ import { Type } from '../utils/Type';
 import { EventEmitter } from 'events';
 import { MapControls, MapControl } from './MapControl';
 import { MapOptions } from './WebMapApp';
+import { LayerMem } from '../WebMap';
 
 interface LatLng {
   lat: number; lng: number;
@@ -17,29 +18,19 @@ export interface MapClickEvent {
 export type ControlPositions = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
 
 export interface BaseMapAdapter {
-  addLayer<K extends keyof LayerAdapters>(
-    layerAdapter: K | Type<LayerAdapter>,
-    options?: LayerAdapters[K], baselayer?: boolean): Promise<LayerAdapter>;
 
-  removeLayer(layerName: string): any;
-  getLayer(layerName: string): any;
-  isLayerOnTheMap(layerName: string): boolean;
-  setLayerOpacity(layerName: string, opacity: number): void;
-  getLayers(): string[];
-
-  showLayer(layerName: string): void;
-  hideLayer(layerName: string): void;
-  toggleLayer(layerName: string, status: boolean): void;
+  removeLayer(layer: any): any;
+  isLayerOnTheMap?(layer): boolean;
+  setLayerOpacity(layer, opacity: number): void;
+  showLayer(layer: any): void;
+  hideLayer(layer: any): void;
+  setLayerOrder(layer: any, order: number, layers?: {[name: string]: LayerMem}): void;
 
   setCenter(latLng: [number, number]): void;
   setZoom(zoom: number): void;
   fit(extent: [number, number, number, number]): void;
   setRotation?(angle: number): void;
 
-  addControl<C extends keyof MapControls>(
-    controlName: C | MapControl,
-    position: ControlPositions,
-    options?: MapControls[C]): any;
 }
 
 export interface MapAdapter<M = any> extends BaseMapAdapter {
@@ -55,6 +46,11 @@ export interface MapAdapter<M = any> extends BaseMapAdapter {
   onMapLoad(cb?: () => void): Promise<any>;
 
   getContainer(): HTMLElement;
+
+  addControl<C extends keyof MapControls>(
+    controlName: C | MapControl,
+    position: ControlPositions,
+    options?: MapControls[C]): any;
 
   onMapClick(evt: MapClickEvent): void;
 

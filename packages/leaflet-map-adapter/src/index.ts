@@ -1,3 +1,3 @@
-import { LeafletMapAdapter } from './LeafletMapAdapterOptions';
+import { LeafletMapAdapter } from './LeafletMapAdapter';
 
 export default LeafletMapAdapter;

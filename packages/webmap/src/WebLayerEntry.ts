@@ -2,6 +2,7 @@ import { Entry, EntryOptions } from './components/entry/Entry';
 import { TreeGroup, TreeLayer } from './interfaces/AppSettings';
 import { MapAdapter } from './interfaces/MapAdapter';
 import { LayerAdapters, AdapterOptions } from './interfaces/LayerAdapter';
+import WebMap from '.';
 
 export class WebLayerEntry extends Entry<EntryOptions> {
   static options: EntryOptions = {
@@ -24,9 +25,9 @@ export class WebLayerEntry extends Entry<EntryOptions> {
           const entry: WebLayerEntry = this.entry;
           if (entry.item.item_type === 'layer') {
             if (value) {
-              entry.map.showLayer(entry.id);
+              entry.webMap.showLayer(entry.id);
             } else {
-              entry.map.hideLayer(entry.id);
+              entry.webMap.hideLayer(entry.id);
             }
             entry.item.layer_enabled = value;
           }
@@ -35,14 +36,12 @@ export class WebLayerEntry extends Entry<EntryOptions> {
     ],
   };
 
-  map: MapAdapter<any>;
-
   item: TreeGroup | TreeLayer;
 
-  constructor(map: MapAdapter<any>,
+  constructor(public webMap: WebMap,
               item: TreeGroup | TreeLayer, options?: EntryOptions, parent?: WebLayerEntry) {
     super(Object.assign({}, WebLayerEntry.options, options));
-    this.map = map;
+
     this.item = item;
     if (parent) {
       this.tree.setParent(parent);
@@ -51,12 +50,12 @@ export class WebLayerEntry extends Entry<EntryOptions> {
     this.initItem(item);
   }
 
-  initItem(item: TreeGroup | TreeLayer) {
+  async initItem(item: TreeGroup | TreeLayer) {
     let newLayer = item._layer;
     if (item.item_type === 'group' || item.item_type === 'root') {
       if (item.children && item.children.length) {
         item.children.forEach((x) => {
-          const children = new WebLayerEntry(this.map, x, this.options, this);
+          const children = new WebLayerEntry(this.webMap, x, this.options, this);
           this.tree.addChildren(children);
         });
       }
@@ -64,7 +63,7 @@ export class WebLayerEntry extends Entry<EntryOptions> {
       const adapter = item.layer_adapter.toUpperCase() as keyof LayerAdapters;
       item.id = Number(this.id);
       const options: any = {...item, ...{id: item.id}};
-      newLayer = this.map.addLayer(adapter, options);
+      newLayer = await this.webMap.addLayer(adapter, options);
     }
     if (newLayer) {
       item._layer = newLayer;
