@@ -223,10 +223,9 @@ export class WebMap<M = any> {
     const action = (source, l: LayerMem) => {
       l.onMap = status;
       if (status && source) {
-        // this.mapAdapter.showLayer(l.layer);
         const order = l.baseLayer ? 0 : l.order;
-
         this.mapAdapter.setLayerOrder(l.layer, order, this._layers);
+        this.mapAdapter.showLayer(l.layer);
       } else {
         source.removeLayer(l.layer);
       }
