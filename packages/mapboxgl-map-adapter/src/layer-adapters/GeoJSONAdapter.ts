@@ -6,6 +6,7 @@ import {
 } from '@nextgis/webmap';
 import { BaseAdapter } from './BaseAdapter';
 import { GeoJsonObject, GeoJsonGeometryTypes, Feature, FeatureCollection, GeometryCollection } from 'geojson';
+import { GeoJSONSourceRaw } from 'mapbox-gl';
 
 let ID = 1;
 
@@ -44,7 +45,7 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
       type = typeAlias[detectedType];
     }
 
-    const data = filterGeometries(options.data, type);
+    const data = filterGeometries(options.data, type) as any;
     if (data) {
       this.map.addLayer({
         id: String(this.name),

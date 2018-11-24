@@ -1,4 +1,4 @@
-import { LayerAdapter, LayerAdapters } from './LayerAdapter';
+import { LayerAdapter } from './LayerAdapter';
 import { Type } from '../utils/Type';
 import { EventEmitter } from 'events';
 import { MapControls, MapControl } from './MapControl';
