@@ -3,11 +3,12 @@ import { AppSettings, StarterKit } from './interfaces/AppSettings';
 import { WebLayerEntry } from './WebLayerEntry';
 import { Keys } from './components/keys/Keys';
 import { EventEmitter } from 'events';
-import { MapAdapter, MapClickEvent } from './interfaces/MapAdapter';
+import { MapAdapter, MapClickEvent, ControlPositions } from './interfaces/MapAdapter';
 import { RuntimeParams } from './interfaces/RuntimeParams';
 import { deepmerge } from './utils/lang';
 import { LayerAdapters, LayerAdapter } from './interfaces/LayerAdapter';
 import { Type } from './utils/Type';
+import { MapControl, MapControls } from './interfaces/MapControl';
 
 export interface LayerMem {
   layer: any;
@@ -153,7 +154,11 @@ export class WebMap<M = any> {
     return layerMem.onMap;
   }
 
-  addControl(controlDef, position, options) {
+  addControl<C extends keyof MapControls>(
+    controlDef: C | MapControl,
+    position: ControlPositions,
+    options?: MapControls[C]) {
+
     return this.mapAdapter.addControl(controlDef, position, options);
   }
 
