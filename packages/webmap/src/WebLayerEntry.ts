@@ -1,7 +1,6 @@
 import { Entry, EntryOptions } from './components/entry/Entry';
 import { TreeGroup, TreeLayer } from './interfaces/AppSettings';
-import { MapAdapter } from './interfaces/MapAdapter';
-import { LayerAdapters, AdapterOptions } from './interfaces/LayerAdapter';
+import { LayerAdapters } from './interfaces/LayerAdapter';
 import WebMap from '.';
 
 export class WebLayerEntry extends Entry<EntryOptions> {
