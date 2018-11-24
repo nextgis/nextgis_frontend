@@ -110,7 +110,8 @@ module.exports = (env, argv, opt = {}) => {
       filename,
       library,
       libraryTarget: 'umd',
-      libraryExport: 'default'
+      libraryExport: 'default',
+      globalObject: 'typeof self !== \'undefined\' ? self : this', // https://github.com/webpack/webpack/issues/6522
     },
     module: {
       rules
