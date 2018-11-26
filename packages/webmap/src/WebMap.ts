@@ -101,6 +101,15 @@ export class WebMap<M = any> {
     }
   }
 
+  // region MapAdapter methods
+  onMapLoad(cb?: any): Promise<void> {
+    const mapAdapterOnLoad = this.mapAdapter.onMapLoad;
+    if (mapAdapterOnLoad) {
+      return mapAdapterOnLoad.call(this.mapAdapter, cb);
+    }
+    return Promise.resolve(cb);
+  }
+
   async addBaseLayer(
     provider: keyof LayerAdapters | Type<LayerAdapter>,
     options?: any): Promise<LayerAdapter> {
@@ -116,7 +125,6 @@ export class WebMap<M = any> {
     return this._baseLayers.indexOf(layerName) !== -1;
   }
 
-  // region MapAdapter methods
   setCenter(lngLat: [number, number]): this {
     this.mapAdapter.setCenter(lngLat);
     return this;
@@ -141,8 +149,8 @@ export class WebMap<M = any> {
     return this.mapAdapter.layerAdapters[name];
   }
 
-  getLayer(layerName: string) {
-    return this._layers[layerName] !== undefined;
+  getLayer(layerName: string): LayerMem {
+    return this._layers[layerName];
   }
 
   getLayers(): string[] {
@@ -168,7 +176,7 @@ export class WebMap<M = any> {
 
     let adapterEngine;
     if (typeof layerAdapter === 'string') {
-      adapterEngine = this.getLayerAdapter(layerAdapter);
+      adapterEngine = this.getLayerAdapter((layerAdapter as string));
     } else {
       adapterEngine = layerAdapter;
     }
