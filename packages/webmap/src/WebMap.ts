@@ -275,6 +275,10 @@ export class WebMap<M = any> {
     });
   }
 
+  async onMapLoad() {
+    return await this.mapAdapter.onMapLoad();
+  }
+
   // endregion
 
   // region MAP
