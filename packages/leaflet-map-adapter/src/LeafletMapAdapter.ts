@@ -50,9 +50,15 @@ export class LeafletMapAdapter implements MapAdapter {
     return this.map.getContainer();
   }
 
-  onMapLoad(cb?: any) {
+  onMapLoad(cb?: any): Promise<void> {
     return new Promise((resolve) => {
-      resolve(cb && cb());
+      if (this.map) {
+        resolve(cb && cb());
+      } else {
+        this.emitter.once('create', () => {
+          resolve(cb && cb());
+        });
+      }
     });
   }
 
