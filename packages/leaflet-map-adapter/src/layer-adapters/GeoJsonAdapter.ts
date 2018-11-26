@@ -51,13 +51,14 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
     const data = filterGeometries(options.data, type);
     if (data) {
       const geoJsonOptions: GeoJSONOptions = {};
+      const icon = options.paint && options.paint.icon;
       const paint = preparePaint(options.paint);
       if (options.paint) {
         geoJsonOptions.style = (feature) => {
           return paint;
         };
       }
-      if (type === 'circle') {
+      if (type === 'circle' && !icon) {
         geoJsonOptions.pointToLayer = (geoJsonPoint, latlng) => {
           return new CircleMarker(latlng, paint);
         };
@@ -72,7 +73,7 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
   }
 }
 
-function preparePaint(paint: GeoJsonAdapterLayerPaint): PathOptions {
+function preparePaint(paint): PathOptions {
   const path: CircleMarkerOptions | PathOptions = { ...PAINT, ...paint };
   if (path.opacity) {
     path.fillOpacity = path.opacity;
