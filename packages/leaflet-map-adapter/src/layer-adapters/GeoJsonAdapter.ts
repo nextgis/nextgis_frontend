@@ -38,8 +38,23 @@ for (const a in typeAlias) {
 export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
 
   name: string;
+  paint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
+  selectedPaint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
+  layer: GeoJSON;
+  type: GeoJsonAdapterLayerType;
+  selected = false;
 
   addLayer(options?: GeoJsonAdapterOptions) {
+    const isFunction = {}.toString.call(options.paint) === '[object Function]';
+
+    if (isFunction) {
+      this.paint = options.paint;
+    } else {
+      this.paint = { ...PAINT, ...options.paint };
+    }
+
+    this.selectedPaint = options.selectedPaint;
+    options.paint = this.paint;
 
     this.name = options.id || 'geojson-' + ID++;
 
@@ -49,21 +64,63 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
       const detectedType = detectType(options.data);
       type = typeAlias[detectedType];
     }
+    this.type = type;
 
     const data = filterGeometries(options.data, type);
     if (data) {
       const layer = new GeoJSON(data, this.getGeoJsonOptions(options, type));
+      this.layer = layer;
       return layer;
     }
   }
 
+  select() {
+    if (!this.selected) {
+      this.selected = true;
+      if (this.selectedPaint) {
+        this.setPaint(this.selectedPaint);
+      }
+    }
+  }
+
+  unselect() {
+    if (this.selected) {
+      this.selected = false;
+      this.setPaint(this.paint);
+    }
+  }
+
+  private setPaint(paint: GetPaintCallback | GeoJsonAdapterLayerPaint) {
+    const isFunction = {}.toString.call(paint) === '[object Function]';
+
+    this.layer.eachLayer((l) => {
+
+      if (this.type === 'circle') {
+        const marker = l as Marker;
+        let icon;
+        if (isFunction) {
+          icon = (paint as GetPaintCallback)(marker.feature).icon;
+        } else {
+          icon = paint;
+        }
+        const divIcon = this.createDivIcon(icon);
+        marker.setIcon(divIcon);
+      }
+    });
+
+  }
+
   private preparePaint(paint): PathOptions {
-    const path: CircleMarkerOptions | PathOptions = { ...PAINT, ...paint };
+    const path: CircleMarkerOptions | PathOptions = paint;
     if (path.opacity) {
       path.fillOpacity = path.opacity;
     }
     return path;
   }
+
+  // private getPaintOptions(paint: GetPaintCallback | GeoJsonAdapterLayerPaint) {
+  //   const isFunction = {}.toString.call(paint) === '[object Function]';
+  // }
 
   private getGeoJsonOptions(options: GeoJsonAdapterOptions, type: GeoJsonAdapterLayerType): GeoJSONOptions {
     const paint = options.paint;
@@ -71,7 +128,6 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
     if (isFunction) {
       const paintCallback = paint as GetPaintCallback;
       if (type === 'circle') {
-
         return {
           pointToLayer: (feature, latLng) => {
             const iconOpt = paintCallback(feature).icon;
@@ -91,12 +147,16 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
     }
   }
 
+  private createDivIcon(icon: IconOptions) {
+    return new DivIcon({ className: '', ...icon });
+  }
+
   private createPaintToLayer(icon: IconOptions) {
     const iconClassName = icon.className;
     const html = icon.html;
     if (iconClassName || html) {
       return (geoJsonPoint, latlng) => {
-        const divIcon = new DivIcon({className: '', ...icon});
+        const divIcon = this.createDivIcon(icon);
         return new Marker(latlng, { icon: divIcon });
       };
     }
@@ -125,7 +185,6 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
     return geoJsonOptions;
   }
 }
-
 
 function detectType(geojson: GeoJsonObject): GeoJsonGeometryTypes {
   let geometry: GeoJsonGeometryTypes;
