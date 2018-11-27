@@ -43,6 +43,7 @@ export interface GeoJsonAdapterOptions extends AdapterOptions {
   data?: GeoJsonObject;
   type?: GeoJsonAdapterLayerType;
   paint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
+  selectedPaint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
 }
 
 export interface MarkerAdapterOptions extends AdapterOptions {
@@ -68,5 +69,9 @@ export interface LayerAdapter<M = any, O = any> {
   name: string;
   layer?: any;
   map?: M;
+  selected?: boolean;
   addLayer(options: O): any;
+
+  select?(): void;
+  unselect?(): void;
 }
