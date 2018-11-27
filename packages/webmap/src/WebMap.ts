@@ -182,9 +182,9 @@ export class WebMap<M = any> {
     }
     if (adapterEngine) {
       const adapter = new adapterEngine(this.mapAdapter.map, options);
-      if (this.mapAdapter.onMapLoad) {
-        await this.mapAdapter.onMapLoad();
-      }
+
+      await this.onMapLoad();
+
       const layer = await adapter.addLayer(options);
 
       const layerId = adapter.name;
@@ -273,10 +273,6 @@ export class WebMap<M = any> {
       pixel: { left: coord.x, top: coord.y },
       source: evt,
     });
-  }
-
-  async onMapLoad() {
-    return await this.mapAdapter.onMapLoad();
   }
 
   // endregion
