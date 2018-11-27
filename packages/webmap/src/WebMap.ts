@@ -11,10 +11,12 @@ import { Type } from './utils/Type';
 import { MapControl, MapControls } from './interfaces/MapControl';
 
 export interface LayerMem {
+  id: string;
   layer: any;
   onMap: boolean;
   order?: number;
   baseLayer?: boolean;
+  adapter: LayerAdapter;
 }
 
 export class WebMap<M = any> {
@@ -40,6 +42,8 @@ export class WebMap<M = any> {
   private _extent: [number, number, number, number];
   private _layers: { [x: string]: LayerMem } = {};
   private _layersIds: number = 0;
+
+  private _selectedLayers: string[] = [];
 
   constructor(appOptions: AppOptions) {
     this.mapAdapter = appOptions.mapAdapter;
@@ -188,7 +192,7 @@ export class WebMap<M = any> {
       const layer = await adapter.addLayer(options);
 
       const layerId = adapter.name;
-      const layerOpts: LayerMem = { layer, onMap: false };
+      const layerOpts: LayerMem = { id: layerId, layer, adapter, onMap: false };
       if (baselayer) {
         layerOpts.baseLayer = true;
         layerOpts.order = 0;
@@ -275,6 +279,24 @@ export class WebMap<M = any> {
     });
   }
 
+  selectLayer(layerId: string) {
+    const layerMem = this.getLayer(layerId);
+    if (layerMem && layerMem.adapter.select) {
+      layerMem.adapter.select();
+    }
+    this._selectedLayers.push(layerId);
+  }
+
+  unSelectLayer(layerId: string) {
+    const layerMem = this.getLayer(layerId);
+    if (layerMem && layerMem.adapter.unselect) {
+      layerMem.adapter.unselect();
+    }
+    const index = this._selectedLayers.indexOf(layerId);
+    if (index !== -1) {
+      this._selectedLayers.splice(index, 1);
+    }
+  }
   // endregion
 
   // region MAP
