@@ -1,4 +1,4 @@
-import { GeoJsonObject } from 'geojson';
+import { GeoJsonObject, Feature } from 'geojson';
 import { LatLng } from './BaseTypes';
 
 export interface AdapterOptions {
@@ -21,19 +21,28 @@ export interface MvtAdapterOptions extends AdapterOptions {
 
 export type GeoJsonAdapterLayerType = 'fill' | 'circle' | 'line';
 
+export interface IconOptions {
+  className?: string;
+  html?: string;
+  iconSize?: [number, number];
+  iconAnchor?: [number, number];
+}
+
 export interface GeoJsonAdapterLayerPaint {
   color?: string;
   opacity?: number;
   weight?: number;
   radius?: number;
   stroke?: boolean;
-  icon?: boolean;
+  icon?: boolean | IconOptions;
 }
+
+export type GetPaintCallback = (feature: Feature<any>) => GeoJsonAdapterLayerPaint;
 
 export interface GeoJsonAdapterOptions extends AdapterOptions {
   data?: GeoJsonObject;
   type?: GeoJsonAdapterLayerType;
-  paint?: GeoJsonAdapterLayerPaint;
+  paint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
 }
 
 export interface MarkerAdapterOptions extends AdapterOptions {

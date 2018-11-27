@@ -2,9 +2,11 @@ import {
   LayerAdapter,
   GeoJsonAdapterOptions,
   GeoJsonAdapterLayerPaint,
-  GeoJsonAdapterLayerType
+  GeoJsonAdapterLayerType,
+  IconOptions,
+  GetPaintCallback
 } from '@nextgis/webmap';
-import { GeoJSON, CircleMarker, GeoJSONOptions, PathOptions, CircleMarkerOptions } from 'leaflet';
+import { GeoJSON, CircleMarker, GeoJSONOptions, PathOptions, CircleMarkerOptions, DivIcon, Marker } from 'leaflet';
 import { BaseAdapter } from './BaseAdapter';
 import { GeoJsonObject, GeoJsonGeometryTypes, FeatureCollection, Feature, GeometryCollection } from 'geojson';
 
@@ -50,36 +52,80 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
 
     const data = filterGeometries(options.data, type);
     if (data) {
-      const geoJsonOptions: GeoJSONOptions = {};
-      const icon = options.paint && options.paint.icon;
-      const paint = preparePaint(options.paint);
-      if (options.paint) {
-        geoJsonOptions.style = (feature) => {
-          return paint;
-        };
-      }
-      if (type === 'circle' && !icon) {
-        geoJsonOptions.pointToLayer = (geoJsonPoint, latlng) => {
-          return new CircleMarker(latlng, paint);
-        };
-      } else if (type === 'line') {
-        paint.stroke = true;
-      }
-
-      const layer = new GeoJSON(data, geoJsonOptions);
-
+      const layer = new GeoJSON(data, this.getGeoJsonOptions(options, type));
       return layer;
     }
   }
+
+  private preparePaint(paint): PathOptions {
+    const path: CircleMarkerOptions | PathOptions = { ...PAINT, ...paint };
+    if (path.opacity) {
+      path.fillOpacity = path.opacity;
+    }
+    return path;
+  }
+
+  private getGeoJsonOptions(options: GeoJsonAdapterOptions, type: GeoJsonAdapterLayerType): GeoJSONOptions {
+    const paint = options.paint;
+    const isFunction = {}.toString.call(paint) === '[object Function]';
+    if (isFunction) {
+      const paintCallback = paint as GetPaintCallback;
+      if (type === 'circle') {
+
+        return {
+          pointToLayer: (feature, latLng) => {
+            const iconOpt = paintCallback(feature).icon;
+            const pointToLayer = this.createPaintToLayer(iconOpt as IconOptions);
+            return pointToLayer(feature, latLng);
+          }
+        };
+      } else {
+        return {
+          style: (feature) => {
+            return paintCallback(feature);
+          }
+        };
+      }
+    } else {
+      return this.createPaintOptions((paint as GeoJsonAdapterLayerPaint), type);
+    }
+  }
+
+  private createPaintToLayer(icon: IconOptions) {
+    const iconClassName = icon.className;
+    const html = icon.html;
+    if (iconClassName || html) {
+      return (geoJsonPoint, latlng) => {
+        const divIcon = new DivIcon({className: '', ...icon});
+        return new Marker(latlng, { icon: divIcon });
+      };
+    }
+  }
+
+  private createPaintOptions(paintOptions: GeoJsonAdapterLayerPaint, type: GeoJsonAdapterLayerType): GeoJSONOptions {
+    const geoJsonOptions: GeoJSONOptions = {};
+    const paint = this.preparePaint(paintOptions);
+    const icon = paintOptions.icon;
+    if (paintOptions) {
+      geoJsonOptions.style = (feature) => {
+        return paint;
+      };
+    }
+    if (type === 'circle') {
+      if (!icon) {
+        geoJsonOptions.pointToLayer = (geoJsonPoint, latlng) => {
+          return new CircleMarker(latlng, paint);
+        };
+      } else if (Object.prototype.toString.call(icon) === '[object Object]') {
+        geoJsonOptions.pointToLayer = this.createPaintToLayer(icon as IconOptions);
+      }
+    } else if (type === 'line') {
+      paint.stroke = true;
+    }
+    return geoJsonOptions;
+  }
 }
 
-function preparePaint(paint): PathOptions {
-  const path: CircleMarkerOptions | PathOptions = { ...PAINT, ...paint };
-  if (path.opacity) {
-    path.fillOpacity = path.opacity;
-  }
-  return path;
-}
 
 function detectType(geojson: GeoJsonObject): GeoJsonGeometryTypes {
   let geometry: GeoJsonGeometryTypes;
