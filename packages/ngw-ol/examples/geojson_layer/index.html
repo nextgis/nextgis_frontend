@@ -40,32 +40,32 @@
         { "type": "Feature", "properties": {}, "geometry": { "type": "MultiLineString", "coordinates": [[[107.18377, 53.20700], [107.16699, 53.21248], [107.15270, 53.20581]]] } }
       ]
     };
-    var ngwMap = new NgwOl({
+    var ngwMap = new NgwLeaflet({
       baseUrl: 'https://demo.nextgis.com',
       target: 'map',
       qmsId: 465,
       center: [107.17, 53.22],
       zoom: 12
     });
-    ngwMap.addGeoJsonLayer(boat, { color: 'red' });
-    ngwMap.addGeoJsonLayer(waves, { color: 'blue', opacity: 0.8, 'weight': 3 });
-    ngwMap.addGeoJsonLayer(
-      {
+    ngwMap.addGeoJsonLayer({ data: boat, paint: { color: 'red' } });
+    ngwMap.addGeoJsonLayer({ data: waves, paint: { color: 'blue', opacity: 0.8, 'weight': 3 } });
+    ngwMap.addGeoJsonLayer({
+      data: {
         "type": "Feature",
         "properties": {}, "geometry": { "type": "Point", "coordinates": [107.19044, 53.25057] }
       },
-      { color: 'green', radius: 6}
-    );
-    ngwMap.addGeoJsonLayer(
-      { "type": "Point", "coordinates": [ 107.20615, 53.24343 ] },
-      { color: 'yellow', radius: 8}
-    );
-    ngwMap.addGeoJsonLayer(
-      { "type": "Point", "coordinates": [ 107.19401, 53.23390 ] },
-      { color: 'orange'}
-    );
-    // Add geosjon layer from NGW vector resource
-    ngwMap.addNgwLayer({id: 4038, adapter: 'GEOJSON'}, {color: '#7EC0EE'});
+      paint: { color: 'green', radius: 6 }
+    });
+    ngwMap.addGeoJsonLayer({
+      data: { "type": "Point", "coordinates": [107.20615, 53.24343] },
+      paint: { color: 'yellow', radius: 8 }
+    });
+    ngwMap.addGeoJsonLayer({
+      data: { "type": "Point", "coordinates": [107.19401, 53.23390] },
+      paint: { color: 'orange' }
+    });
+    // Add geojson layer from NGW vector resource
+    ngwMap.addNgwLayer({ id: 4038, adapter: 'GEOJSON' }, { paint: { color: '#7EC0EE' } });
   </script>
 </body>
 

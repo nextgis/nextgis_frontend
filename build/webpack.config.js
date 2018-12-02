@@ -7,16 +7,16 @@ module.exports = (env, argv, opt = {}) => {
 
   const relativePath = path.relative(process.cwd(), opt.dirname);
 
-  const library = opt.library;
   const pathToLib = opt.package.main.split('/');
   const entry = './' + path.join(relativePath, './src/index.ts');
 
-  const useExternals = opt.externals !== undefined ? opt.externals : true;
-
   const filename = pathToLib.pop();
-  // const entryName = './src/' + filename.replace('.js', '');
-  // const entry = entryName + '.ts';
   const outDir = path.resolve(opt.dirname, pathToLib.join('/'));
+
+  const library = opt.library;
+  const libraryExport = opt.libraryExport !== undefined ? opt.libraryExport : 'default';
+
+  const useExternals = opt.externals !== undefined ? opt.externals : true;
 
   const isProd = argv.mode === 'production';
 
@@ -109,8 +109,8 @@ module.exports = (env, argv, opt = {}) => {
       path: outDir,
       filename,
       library,
+      libraryExport,
       libraryTarget: 'umd',
-      libraryExport: 'default',
       globalObject: 'typeof self !== \'undefined\' ? self : this', // https://github.com/webpack/webpack/issues/6522
     },
     module: {

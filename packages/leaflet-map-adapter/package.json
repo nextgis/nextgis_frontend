@@ -5,6 +5,7 @@
   "main": "lib/leaflet-map-adapter.js",
   "types": "lib/index.d.ts",
   "dependencies": {
+    "@nextgis/webmap": "^0.7.0",
     "events": "*",
     "leaflet": "*",
     "leaflet.wms": "*"

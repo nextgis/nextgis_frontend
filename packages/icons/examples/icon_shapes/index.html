@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Ngw GeoJSON Layer | Leaflet Example</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body,
+    #map {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+  <script src="https://unpkg.com/@nextgis/ngw-leaflet@latest"></script>
+  <!-- <script src="../../../ngw-leaflet/lib/ngw-leaflet.js"></script> -->
+  <!-- <script src="https://unpkg.com/@nextgis/icons@latest"></script> -->
+  <script src="../../lib/icons.js"></script>
+</head>
+
+<body>
+  <div id='map'></div>
+  <script>
+    var ngwMap = new NgwLeaflet({
+      baseUrl: 'https://demo.nextgis.com',
+      target: 'map',
+      qmsId: 465,
+      center: [81.973, 53.026],
+      zoom: 13
+    });
+
+    var points = {
+      "type": "FeatureCollection",
+      "features": [
+        { "type": "Feature", "properties": { "color": "red", "shape": "circle" }, "geometry": { "type": "Point", "coordinates": [81.98876, 53.03788] } },
+        { "type": "Feature", "properties": { "color": "green", "shape": "brill" }, "geometry": { "type": "Point", "coordinates": [81.97024, 53.01107] } },
+        { "type": "Feature", "properties": { "color": "blue", "shape": "rect" }, "geometry": { "type": "Point", "coordinates": [81.98846, 53.02414] } },
+        { "type": "Feature", "properties": { "color": "yellow", "shape": "marker" }, "geometry": { "type": "Point", "coordinates": [81.95345, 53.02652] } },
+        { "type": "Feature", "properties": { "color": "pink", "shape": "star" }, "geometry": { "type": "Point", "coordinates": [81.977, 53.01427] } },
+        { "type": "Feature", "properties": { "color": "black", "shape": "asterisk" }, "geometry": { "type": "Point", "coordinates": [81.95883, 53.03041] } },
+        { "type": "Feature", "properties": { "color": "purple", "shape": "triangle" }, "geometry": { "type": "Point", "coordinates": [81.98281, 53.01874] } },
+        { "type": "Feature", "properties": { "color": "rgb(52,169,95)", "shape": "plus" }, "geometry": { "type": "Point", "coordinates": [81.97392, 53.03867] } },
+        { "type": "Feature", "properties": { "color": "#800000", "shape": "minus" }, "geometry": { "type": "Point", "coordinates": [81.96477, 53.03434] } }
+      ]
+    };
+
+    ngwMap.addGeoJsonLayer({
+      data: points,
+      paint: function (feature) {
+        var prop = feature.properties;
+        return Icons.getIcon({ color: prop.color, shape: prop.shape, size: 20 });
+      }
+    });
+
+  </script>
+</body>
+
+</html>

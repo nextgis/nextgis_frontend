@@ -5,12 +5,11 @@
   "main": "lib/ngw-connector.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "events": "^3.0.0"
+    "events": "*"
   },
   "devDependencies": {
     "@types/events": "^1.2.0",
     "@types/node": "^10.12.10",
-    "events": "^3.0.0",
     "rimraf": "^2.6.2",
     "ts-loader": "^5.3.0",
     "tslint": "^5.11.0",
