@@ -8,8 +8,9 @@
     "@nextgis/ngw-connector": "^0.7.0",
     "@nextgis/ngw-kit": "^0.7.0",
     "@nextgis/qms-kit": "^0.7.0",
+    "@nextgis/icons": "^0.7.0",
     "@nextgis/webmap": "^0.7.0",
-    "events": "^3.0.0",
+    "events": "*",
     "reproject": "^1.2.2"
   },
   "devDependencies": {

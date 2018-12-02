@@ -16,6 +16,7 @@ This repository under construction
 - [ngw-leaflet](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/ngw-leaflet) – one file bundle for building [Laeflet](https://leafletjs.com/) map interacting with NextGIS services;
 - [ngw-ol](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/ngw-ol) – one file bundle for building [OpenLayers](https://openlayers.org/) map interacting with NextGIS;
 - [ngw-mapbox](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/ngw-mapbox) – one file bundle for building [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/) map interacting with NextGIS;
+- [icons](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/icons) – simple svg icons pack to display on the map;
 - [dialog](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/dialog) – utility for working with modal windows;
 
 ## Base usage
