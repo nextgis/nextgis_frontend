@@ -99,7 +99,7 @@ export class LeafletMapAdapter implements MapAdapter {
   }
 
   removeLayer(layer: Layer) {
-    // ignore
+    layer.remove();
   }
 
   showLayer(layer: Layer) {
