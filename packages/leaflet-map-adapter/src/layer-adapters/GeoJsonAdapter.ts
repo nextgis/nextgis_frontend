@@ -6,17 +6,18 @@ import {
   IconOptions,
   GetPaintCallback
 } from '@nextgis/webmap';
-import { GeoJSON, CircleMarker, GeoJSONOptions, PathOptions, CircleMarkerOptions, DivIcon, Marker } from 'leaflet';
+import {
+  GeoJSON,
+  CircleMarker, GeoJSONOptions,
+  PathOptions,
+  CircleMarkerOptions,
+  DivIcon,
+  Marker
+} from 'leaflet';
 import { BaseAdapter } from './BaseAdapter';
 import { GeoJsonObject, GeoJsonGeometryTypes, FeatureCollection, Feature, GeometryCollection } from 'geojson';
 
 let ID = 1;
-
-const PAINT = {
-  color: 'blue',
-  opacity: 1,
-  stroke: false
-};
 
 const typeAlias: { [x: string]: GeoJsonAdapterLayerType } = {
   'Point': 'circle',
@@ -45,13 +46,7 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
   selected = false;
 
   addLayer(options?: GeoJsonAdapterOptions) {
-    const isFunction = {}.toString.call(options.paint) === '[object Function]';
-
-    if (isFunction) {
-      this.paint = options.paint;
-    } else {
-      this.paint = { ...PAINT, ...options.paint };
-    }
+    this.paint = options.paint;
 
     this.selectedPaint = options.selectedPaint;
     options.paint = this.paint;
@@ -99,7 +94,7 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
         const marker = l as Marker;
         let icon;
         if (isFunction) {
-          icon = (paint as GetPaintCallback)(marker.feature).icon;
+          icon = (paint as GetPaintCallback)(marker.feature);
         } else {
           icon = paint;
         }
@@ -118,10 +113,6 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
     return path;
   }
 
-  // private getPaintOptions(paint: GetPaintCallback | GeoJsonAdapterLayerPaint) {
-  //   const isFunction = {}.toString.call(paint) === '[object Function]';
-  // }
-
   private getGeoJsonOptions(options: GeoJsonAdapterOptions, type: GeoJsonAdapterLayerType): GeoJSONOptions {
     const paint = options.paint;
     const isFunction = {}.toString.call(paint) === '[object Function]';
@@ -130,7 +121,7 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
       if (type === 'circle') {
         return {
           pointToLayer: (feature, latLng) => {
-            const iconOpt = paintCallback(feature).icon;
+            const iconOpt = paintCallback(feature);
             const pointToLayer = this.createPaintToLayer(iconOpt as IconOptions);
             return pointToLayer(feature, latLng);
           }
@@ -148,7 +139,8 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
   }
 
   private createDivIcon(icon: IconOptions) {
-    return new DivIcon({ className: '', ...icon });
+    const { type, ...toLIconOpt } = icon;
+    return new DivIcon({ className: '', ...toLIconOpt });
   }
 
   private createPaintToLayer(icon: IconOptions) {
@@ -165,19 +157,19 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
   private createPaintOptions(paintOptions: GeoJsonAdapterLayerPaint, type: GeoJsonAdapterLayerType): GeoJSONOptions {
     const geoJsonOptions: GeoJSONOptions = {};
     const paint = this.preparePaint(paintOptions);
-    const icon = paintOptions.icon;
+    const isIcon = paintOptions.type === 'icon';
     if (paintOptions) {
       geoJsonOptions.style = (feature) => {
         return paint;
       };
     }
     if (type === 'circle') {
-      if (!icon) {
+      if (!isIcon) {
         geoJsonOptions.pointToLayer = (geoJsonPoint, latlng) => {
           return new CircleMarker(latlng, paint);
         };
-      } else if (Object.prototype.toString.call(icon) === '[object Object]') {
-        geoJsonOptions.pointToLayer = this.createPaintToLayer(icon as IconOptions);
+      } else if (Object.prototype.toString.call(paintOptions) === '[object Object]') {
+        geoJsonOptions.pointToLayer = this.createPaintToLayer(paintOptions as IconOptions);
       }
     } else if (type === 'line') {
       paint.stroke = true;
@@ -190,10 +182,10 @@ function detectType(geojson: GeoJsonObject): GeoJsonGeometryTypes {
   let geometry: GeoJsonGeometryTypes;
   if (geojson.type === 'FeatureCollection') {
     const featuresTypes = (geojson as FeatureCollection).features.map((f) => f.geometry.type);
-    geometry = fingMostFrequentGeomType(featuresTypes);
+    geometry = findMostFrequentGeomType(featuresTypes);
   } else if (geojson.type === 'GeometryCollection') {
     const geometryTypes = (geojson as GeometryCollection).geometries.map((g) => g.type);
-    geometry = fingMostFrequentGeomType(geometryTypes);
+    geometry = findMostFrequentGeomType(geometryTypes);
   } else if (geojson.type === 'Feature') {
     geometry = (geojson as Feature).geometry.type;
   } else {
@@ -202,7 +194,7 @@ function detectType(geojson: GeoJsonObject): GeoJsonGeometryTypes {
   return geometry;
 }
 
-function fingMostFrequentGeomType(arr: GeoJsonGeometryTypes[]): GeoJsonGeometryTypes {
+function findMostFrequentGeomType(arr: GeoJsonGeometryTypes[]): GeoJsonGeometryTypes {
   const counts: { [x: string]: number } = {};
   for (let fry = 0; fry < arr.length; fry++) {
     counts[arr[fry]] = 1 + (counts[arr[fry]] || 0);

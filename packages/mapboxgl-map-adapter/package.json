@@ -6,8 +6,8 @@
   "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/webmap": "^0.7.0",
-    "events": "^3.0.0",
-    "mapbox-gl": "^0.51.0"
+    "events": "*",
+    "mapbox-gl": "*"
   },
   "devDependencies": {
     "@types/events": "^1.2.0",

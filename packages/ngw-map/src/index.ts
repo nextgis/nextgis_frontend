@@ -3,22 +3,35 @@ import WebMap, {
   StarterKit,
   MapOptions as MO,
   ControlPositions,
-  GeoJsonAdapterLayerPaint
+  CirclePaint,
+  PathPaint,
+  IconOptions,
+  GeoJsonAdapterOptions,
+  GeoJsonAdapterLayerType
 } from '@nextgis/webmap';
 import NgwConnector from '@nextgis/ngw-connector';
 import QmsKit from '@nextgis/qms-kit';
 import NgwKit from '@nextgis/ngw-kit';
+import { getIcon } from '@nextgis/icons';
 
 import 'leaflet/dist/leaflet.css';
 import { onMapLoad } from './decorators';
-import { fixUrlStr, deepmerge } from './utils';
+import { fixUrlStr, deepmerge, detectGeometryType } from './utils';
 import { EventEmitter } from 'events';
-import { GeoJsonObject } from 'geojson';
 import { toWgs84 } from 'reproject';
 
 const epsg = {
   // tslint:disable-next-line:max-line-length
   'EPSG:3857': '+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext  +no_defs'
+};
+
+const typeAlias: { [x: string]: GeoJsonAdapterLayerType } = {
+  'Point': 'circle',
+  'LineString': 'line',
+  'MultiPoint': 'circle',
+  'Polygon': 'fill',
+  'MultiLineString': 'line',
+  'MultiPolygon': 'fill'
 };
 
 export interface ControlOptions {
@@ -31,7 +44,11 @@ export interface MapOptions extends MO {
   webmapId?: number;
   baseUrl: string;
   bounds?: [number, number, number, number];
-  geoJsonDefaultPaint?: GeoJsonAdapterLayerPaint;
+  geoJsonDefaultPaint?: {
+    circle: CirclePaint,
+    path: PathPaint,
+    icon: IconOptions
+  };
 }
 
 export interface NgwLayerOptions {
@@ -43,6 +60,7 @@ export default class NgwMap {
 
   static utils = { fixUrlStr };
   static decorators = { onMapLoad };
+  static getIcon = getIcon;
 
   options: MapOptions = {
     target: 'map',
@@ -58,10 +76,21 @@ export default class NgwMap {
       }
     },
     geoJsonDefaultPaint: {
-      color: 'blue',
-      opacity: 1,
-      radius: 6,
-      stroke: false
+      circle: {
+        type: 'circle',
+        color: 'blue',
+        opacity: 1,
+        radius: 6,
+        stroke: false
+      },
+      path: {
+        type: 'path',
+        color: 'blue',
+        opacity: 1,
+        stroke: false,
+        weight: 1
+      },
+      icon: getIcon({ shape: 'circle' })
     }
   };
 
@@ -119,7 +148,7 @@ export default class NgwMap {
         id: options.id
       });
       data = toWgs84(data, undefined, epsg);
-      return this.addGeoJsonLayer(data, adapterOptions);
+      return this.addGeoJsonLayer({ data, ...adapterOptions });
     } else {
       return NgwKit.addNgwLayer(options, this.webMap, this.options.baseUrl).then((layer) => {
         this._ngwLayers[layer.name] = layer;
@@ -130,9 +159,23 @@ export default class NgwMap {
   }
 
   @onMapLoad()
-  addGeoJsonLayer(data: GeoJsonObject, paint: GeoJsonAdapterLayerPaint) {
-    paint = {...this.options.geoJsonDefaultPaint, ...paint};
-    return this.webMap.addLayer('GEOJSON', { data, paint }).then((layer) => {
+  addGeoJsonLayer(opt: GeoJsonAdapterOptions) {
+    const geomType = typeAlias[detectGeometryType(opt.data)];
+    const p = opt.paint;
+    if (typeof p === 'object') {
+      if (!p.type) {
+        p.type = (geomType === 'fill' || geomType === 'line') ? 'path' :
+        ('html' in p || 'className' in p) ? 'icon' : geomType;
+      }
+      if (p.type === 'circle') {
+        opt.paint = {...this.options.geoJsonDefaultPaint.circle, ...p };
+      } else if (p.type === 'path') {
+        opt.paint = {...this.options.geoJsonDefaultPaint.path, ...p };
+      } else if (p.type === 'icon') {
+        opt.paint = {...this.options.geoJsonDefaultPaint.icon, ...p };
+      }
+    }
+    return this.webMap.addLayer('GEOJSON', {type: geomType, ...opt}).then((layer) => {
       this.webMap.showLayer(layer.name);
       return layer.name;
     });

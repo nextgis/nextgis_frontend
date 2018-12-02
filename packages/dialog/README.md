@@ -32,7 +32,7 @@ We recommend linking to a specific version number that you can update manually:
 
 ### NPM
 
-NPM is the recommended installation method when building large scale applications with NgwUploader. It pairs nicely with module bundlers such as [Webpack](https://webpack.js.org/)
+NPM is the recommended installation method when building large scale applications with Dialog. It pairs nicely with module bundlers such as [Webpack](https://webpack.js.org/)
 
 ```bash
 # latest stable

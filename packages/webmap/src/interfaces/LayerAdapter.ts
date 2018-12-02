@@ -21,29 +21,41 @@ export interface MvtAdapterOptions extends AdapterOptions {
 
 export type GeoJsonAdapterLayerType = 'fill' | 'circle' | 'line';
 
+export interface BasePaint {
+  type?: string;
+  color?: string;
+  opacity?: number;
+  stroke?: boolean;
+}
+
+export interface CirclePaint extends BasePaint {
+  type: 'circle';
+  radius?: number;
+}
+
+export interface PathPaint extends BasePaint {
+  type: 'path';
+  weight?: number;
+}
+
 export interface IconOptions {
+  type: 'icon';
   className?: string;
   html?: string;
   iconSize?: [number, number];
   iconAnchor?: [number, number];
 }
 
-export interface GeoJsonAdapterLayerPaint {
-  color?: string;
-  opacity?: number;
-  weight?: number;
-  radius?: number;
-  stroke?: boolean;
-  icon?: boolean | IconOptions;
-}
+export type GeoJsonAdapterLayerPaint = CirclePaint | PathPaint | IconOptions;
 
 export type GetPaintCallback = (feature: Feature<any>) => GeoJsonAdapterLayerPaint;
 
 export interface GeoJsonAdapterOptions extends AdapterOptions {
-  data?: GeoJsonObject;
+  data: GeoJsonObject;
   type?: GeoJsonAdapterLayerType;
   paint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
   selectedPaint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
+  selectedPaintDiff?: GeoJsonAdapterLayerPaint;
 }
 
 export interface MarkerAdapterOptions extends AdapterOptions {
