@@ -250,7 +250,7 @@ export class WebMap<M = any> {
         this.mapAdapter.setLayerOrder(l.layer, order, this._layers);
         this.mapAdapter.showLayer(l.layer);
       } else {
-        source.removeLayer(l.layer);
+        this.mapAdapter.hideLayer(l.layer);
       }
     };
     const layer = this._layers[layerName];
