@@ -1,23 +1,24 @@
 # NextGIS Frontend
 
-This repository under construction
+This repository is under construction.
 
 ## Packages `@nextgis/`
 
 - [webmap](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/webmap) – universal map constructor;
-- [leaflet-map-adapter](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/leaflet-map-adapter) – webmap adapter to use [Laeflet](https://leafletjs.com/) GIS framework;
+- [leaflet-map-adapter](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/leaflet-map-adapter) – webmap adapter to use [Leaflet](https://leafletjs.com/) GIS framework;
 - [ol-map-adapter](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/ol-map-adapter) – webmap adapter to use [OpenLayers](https://openlayers.org/) GIS framework;
 - [mapboxgl-map-adapter](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/mapboxgl-map-adapter) – webmap adapter to use [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/) framework;
-- [qms-kit](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/qms-kit) – build webmap with [Nextgis QMS](https://qms.nextgis.com/) baselayer;
-- [ngw-connector](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/ngw-connector) – module for interaction with [NextGIS Web](http://docs.nextgis.ru/docs_ngweb_dev/doc/developer/toc.html) REST API;
+- [qms-kit](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/qms-kit) – build webmap with [NextGIS QMS](https://qms.nextgis.com/) baselayer;
+- [ngw-connector](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/ngw-connector) – module to interact with [NextGIS Web](http://docs.nextgis.ru/docs_ngweb_dev/doc/developer/toc.html) REST API;
 - [ngw-kit](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/ngw-kit) – build webmap with [NextGIS Web](http://nextgis.ru/nextgis-web/) instance;
-- [ngw-uploader](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/ngw-uploader) – library providing tools for uploading data to the [NextGIS Web](http://nextgis.ru/nextgis-web/) cloud;
+- [ngw-uploader](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/ngw-uploader) – library providing tools for uploading data to [nextgis.com](http://nextgis.com/nextgis-com/) cloud;
 - [ngw-map](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/ngw-map) – abstract map to simplify work with NextGIS services;
-- [ngw-leaflet](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/ngw-leaflet) – one file bundle for building [Laeflet](https://leafletjs.com/) map interacting with NextGIS services;
+- [ngw-leaflet](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/ngw-leaflet) – one file bundle for building [Leaflet](https://leafletjs.com/) map interacting with NextGIS services;
 - [ngw-ol](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/ngw-ol) – one file bundle for building [OpenLayers](https://openlayers.org/) map interacting with NextGIS;
 - [ngw-mapbox](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/ngw-mapbox) – one file bundle for building [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/) map interacting with NextGIS;
 - [icons](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/icons) – simple svg icons pack to display on the map;
-- [dialog](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/dialog) – utility for working with modal windows;
+- [dialog](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/dialog) – utility to work with modal windows;
+
 
 ## Base usage
 
@@ -25,7 +26,7 @@ This repository under construction
 
 #### Include assets
 
-Simply download and include with a script tag. \[Package\] will be registered as a global variable.
+Download and include with a script tag. \[Package\] will be registered as a global variable.
 
 ```html
 <script src="./lib/[package].js"></script>
@@ -67,7 +68,7 @@ const package = new Package(options);
 
 ## For developers
 
-### Instruction for whole repository
+### Instructions for whole repository
 
 ```bash
 # Clone git through ssh
@@ -85,7 +86,7 @@ yarn run prod
 yarn run demo
 ```
 
-### Instruction for each packages
+### Instructions for a particular package
 
 ```bash
 # Go to package directory (for example webmap)
@@ -129,21 +130,21 @@ lerna bootstrap
 
 ---
 
-During the publication, an error may occur if the git is not connected via ssh, but via http[s]
+Currently an error may occur if the git is connected via http[s] instead of ssh.
 
 ---
 
 VSCode
 
-[Bug](https://github.com/Microsoft/vscode/issues/25312) Wen not finding symbolyc linked modules try to
+[Bug](https://github.com/Microsoft/vscode/issues/25312) When not finding symbolic linked modules try:
 
-1. `CTRL` + `SHIFT` + `P` & equivalent for MacOS (brings up the command palette)
+1. `CTRL` + `SHIFT` + `P` or equivalent for MacOS (brings up the command palette)
 2. Search something like "typescript"
 3. Select TypeScript: Restart TS server
 
 ---
 
-### Helpful information
+### Might be of help
 
 Some [lerna+yarn instruction](https://medium.com/trabe/monorepo-setup-with-lerna-and-yarn-workspaces-5d747d7c0e91)
 
