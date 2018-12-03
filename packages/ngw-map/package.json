@@ -1,11 +1,11 @@
 {
   "name": "@nextgis/ngw-map",
-  "version": "0.8.2",
+  "version": "0.8.3",
   "description": "",
   "main": "lib/ngw-map.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/icons": "^0.8.2",
+    "@nextgis/icons": "^0.8.3",
     "@nextgis/ngw-connector": "^0.8.2",
     "@nextgis/ngw-kit": "^0.8.2",
     "@nextgis/qms-kit": "^0.8.2",

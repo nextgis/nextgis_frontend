@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/ol-map-adapter",
-  "version": "0.8.2",
+  "version": "0.8.3",
   "description": "",
   "main": "lib/ol-map-adapter.js",
   "types": "lib/index.d.ts",
