@@ -13,7 +13,6 @@ import Fill from 'ol/style/Fill';
 import Stroke from 'ol/style/Stroke';
 import Style from 'ol/style/Style';
 import Icon from 'ol/style/Icon';
-import GeoJson from 'ol/format/GeoJson';
 import { Feature } from 'geojson';
 
 let ID = 1;
@@ -97,7 +96,7 @@ const typeAlias: { [x: string]: GeoJsonAdapterLayerType } = {
 
 function styleFunction(feature, paint: GeoJsonAdapterLayerPaint | GetPaintCallback) {
   if (typeof paint === 'function') {
-    const geojson = new GeoJson();
+    const geojson = new GeoJSON();
     // @ts-ignore writeFeatureObject return JSON type, need Feature
     const f: Feature = geojson.writeFeatureObject(feature);
     return styleFunction(feature, paint(f));
