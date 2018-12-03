@@ -14,6 +14,8 @@ export interface UploadInputOptions {
   error?: (er: Error) => void;
   createName?: (name: string) => string;
   element?: string | HTMLElement;
+  image?: boolean;
+  vector?: boolean;
 }
 
 interface ResourceCreateOptions {
@@ -111,6 +113,10 @@ export interface EmitterStatus {
   data?: any;
 }
 
+const imageTypesAccept = {
+  tiff: ['image/tif', 'image/tiff', '.tif']
+};
+
 export default class NgwUploader {
 
   options: NgwUploadOptions = {
@@ -128,27 +134,37 @@ export default class NgwUploader {
     this._initialize();
   }
 
-  createInput(options: UploadInputOptions = {}): HTMLElement {
-    options = { ...this.options.inputOptions, ...options };
+  createInput(opt: UploadInputOptions = {}): HTMLElement {
+    opt = { ...this.options.inputOptions, ...opt };
+    const allowImage = opt.image || true;
     const input = document.createElement('input');
     input.setAttribute('type', 'file');
-    input.innerHTML = options.html;
+    let accept = [];
+    if (allowImage) {
+      accept = accept.concat(
+        Object.keys(imageTypesAccept).reduce((a, b) => {
+          return a.concat(imageTypesAccept[b]);
+        }, [])
+      );
+    }
+    input.setAttribute('accept', accept.join(','));
+    input.innerHTML = opt.html;
 
     input.addEventListener('change', () => {
-      const uploadPromise = this.uploadRaster(input.files[0], options);
-      if (options.success) {
-        uploadPromise.then(options.success);
+      const uploadPromise = this.uploadRaster(input.files[0], opt);
+      if (opt.success) {
+        uploadPromise.then(opt.success);
       }
-      if (options.error) {
-        uploadPromise.then(options.error);
+      if (opt.error) {
+        uploadPromise.then(opt.error);
       }
     });
-    if (options.element) {
+    if (opt.element) {
       let element;
-      if (typeof options.element === 'string') {
-        element = document.getElementById(options.element);
-      } else if (options.element instanceof HTMLElement) {
-        element = options.element;
+      if (typeof opt.element === 'string') {
+        element = document.getElementById(opt.element);
+      } else if (opt.element instanceof HTMLElement) {
+        element = opt.element;
       }
       if (element) {
         element.appendChild(input);

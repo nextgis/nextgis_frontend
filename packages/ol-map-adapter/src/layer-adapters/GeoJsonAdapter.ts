@@ -1,4 +1,10 @@
-import { LayerAdapter, GeoJsonAdapterOptions } from '@nextgis/webmap';
+import {
+  LayerAdapter,
+  GeoJsonAdapterOptions,
+  GeoJsonAdapterLayerPaint,
+  GetPaintCallback,
+  GeoJsonAdapterLayerType
+} from '@nextgis/webmap';
 import GeoJSON from 'ol/format/GeoJSON';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
@@ -6,6 +12,8 @@ import CircleStyle from 'ol/style/Circle';
 import Fill from 'ol/style/Fill';
 import Stroke from 'ol/style/Stroke';
 import Style from 'ol/style/Style';
+import GeoJson from 'ol/format/GeoJson';
+import { Feature } from 'geojson';
 
 let ID = 1;
 
@@ -76,14 +84,38 @@ const getImage = (paint) => {
 //   }),
 // };
 
-function styleFunction(feature, paint) {
-  const type = feature.getGeometry().getType();
-  const style: {stroke?, fill, image} = {
-    fill: new Fill(paint),
-    image: getImage(paint)
-  };
-  if (paint.stroke || ['MultiLineString', 'LineString'].indexOf(type) !== -1) {
-    style.stroke = new Stroke(paint);
+const typeAlias: { [x: string]: GeoJsonAdapterLayerType } = {
+  'Point': 'circle',
+  'MultiPoint': 'circle',
+  'LineString': 'line',
+  'MultiLineString': 'line',
+  'Polygon': 'fill',
+  'MultiPolygon': 'fill',
+  'Circle': 'circle'
+};
+
+function styleFunction(feature, paint: GeoJsonAdapterLayerPaint | GetPaintCallback) {
+  if (typeof paint === 'function') {
+    const geojson = new GeoJson();
+    // @ts-ignore writeFeatureObject return JSON type, need Feature
+    const f: Feature = geojson.writeFeatureObject(feature);
+    return styleFunction(feature, paint(f));
+  } else {
+    const type = feature.getGeometry().getType();
+    const style: { stroke?: Stroke, fill?: Fill, image?} = {};
+    if (!paint.type) {
+      const ta = typeAlias[type];
+      paint.type = (ta === 'fill' || ta === 'line') ? 'path' :
+      ('html' in paint || 'className' in paint) ? 'icon' : ta;
+    }
+    if (paint.type === 'path') {
+      style.fill = new Fill(paint);
+      if (paint.stroke || ['MultiLineString', 'LineString'].indexOf(type) !== -1) {
+        style.stroke = new Stroke(paint);
+      }
+    } else if (paint.type === 'circle') {
+      style.image = getImage(paint);
+    }
+    return new Style(style);
   }
-  return new Style(style);
 }
