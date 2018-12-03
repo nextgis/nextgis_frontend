@@ -114,7 +114,7 @@ export interface EmitterStatus {
 }
 
 const imageTypesAccept = {
-  tiff: ['image/tif', 'image/tiff', '.tif']
+  tiff: ['image/tif', 'image/tiff', '.tif'],
 };
 
 export default class NgwUploader {
