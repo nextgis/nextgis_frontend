@@ -18,22 +18,23 @@ export interface IconOptions {
   shape?: 'circle' | 'brill' | 'rect' | 'marker' | 'star' | 'asterisk' | 'triangle' | 'plus' | 'minus';
   color?: string;
   size?: number;
+  stroke?: number;
   strokeColor?: string;
+  rotate?: number;
 }
 
 const STROKE = 0.8;
 
-function insertSvg(width, height, content?): SVGSVGElement {
-
-  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-  svg.setAttribute('width', String(width));
-  svg.setAttribute('height', String(height));
-  svg.setAttribute('version', '1.1');
-  svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
-  if (content) {
-    svg.innerHTML = content;
-  }
-  return svg;
+function insertSvg(width, height, stroke = 0, content?) {
+  const s = stroke / 2;
+  const svg = `<svg
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="-${s} -${s} ${width + stroke} ${height + stroke}"
+  >${content}</svg>`;
+  const oParser = new DOMParser();
+  const oDOM = oParser.parseFromString(svg, 'image/svg+xml');
+  return oDOM.documentElement;
 }
 
 const OPTIONS: IconOptions = {
@@ -50,24 +51,28 @@ export function getIcon(opt?: IconOptions): WebmapIcoOptions {
   const size = opt.size;
   const anchor = size / 2;
   const defSize = 12;
-  const stroke = STROKE; // size * (1 - STROKE);
+  const stroke = typeof opt.stroke === 'number' ? opt.stroke : STROKE;
+  const scale = opt.size / defSize;
 
   const pathAlias = svgPath[opt.shape] || 'circle';
 
   const path = typeof pathAlias === 'string' ? pathAlias : pathAlias(opt);
-  const svg = insertSvg(size, size, path);
+  const svg = insertSvg(size, size, stroke * scale, path);
   const fistChild = svg.firstChild as SVGElement;
-  const scale = opt.size / defSize;
+  // const transform = `scale(${scale})${opt.rotate ? ` rotate(${opt.rotate} -${anchor} -${anchor})` : ''}`;
+  const transform = `scale(${scale})`;
 
   fistChild.setAttribute('fill', opt.color);
-  fistChild.setAttribute('stroke', opt.strokeColor);
-  fistChild.setAttribute('stroke-width', String(stroke));
-  fistChild.setAttribute('transform', `scale(${scale})`);
-
+  if (stroke) {
+    fistChild.setAttribute('stroke', opt.strokeColor);
+    fistChild.setAttribute('stroke-width', String(stroke));
+  }
+  fistChild.setAttribute('transform', transform);
+  const s = new XMLSerializer();
   return {
     type: 'icon',
     iconSize: [size, size],
     iconAnchor: [anchor, anchor],
-    html: svg.outerHTML
+    html: s.serializeToString(svg)
   };
 }
