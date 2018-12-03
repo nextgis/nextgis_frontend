@@ -63,10 +63,16 @@
     });
     ngwMap.addGeoJsonLayer({
       data: { "type": "Point", "coordinates": [107.19401, 53.23390] },
+      // use the icon to paint the point geometry
       paint: NgwLeaflet.getIcon({color: 'orange'})
     });
     // Add geojson layer from NGW vector resource
-    ngwMap.addNgwLayer({ id: 4038, adapter: 'GEOJSON' }, { paint: { color: '#7EC0EE' } });
+    ngwMap.addNgwLayer({ id: 4038, adapter: 'GEOJSON' }, {
+      // use callback to set paint dynamically
+      paint: function (feature) {
+        return { color: 'rgb(126, 192, '+ Math.round(Math.random()*255) +')' }
+      }
+    });
   </script>
 </body>
 
