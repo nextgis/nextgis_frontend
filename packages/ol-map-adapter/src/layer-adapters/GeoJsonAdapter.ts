@@ -12,6 +12,7 @@ import CircleStyle from 'ol/style/Circle';
 import Fill from 'ol/style/Fill';
 import Stroke from 'ol/style/Stroke';
 import Style from 'ol/style/Style';
+import Icon from 'ol/style/Icon';
 import GeoJson from 'ol/format/GeoJson';
 import { Feature } from 'geojson';
 
@@ -106,15 +107,30 @@ function styleFunction(feature, paint: GeoJsonAdapterLayerPaint | GetPaintCallba
     if (!paint.type) {
       const ta = typeAlias[type];
       paint.type = (ta === 'fill' || ta === 'line') ? 'path' :
-      ('html' in paint || 'className' in paint) ? 'icon' : ta;
+        ('html' in paint || 'className' in paint) ? 'icon' : ta;
     }
     if (paint.type === 'path') {
       style.fill = new Fill(paint);
       if (paint.stroke || ['MultiLineString', 'LineString'].indexOf(type) !== -1) {
-        style.stroke = new Stroke(paint);
+        style.stroke = new Stroke({
+          width: paint.weight,
+          color: paint.color
+        });
       }
     } else if (paint.type === 'circle') {
       style.image = getImage(paint);
+    } else if (paint.type === 'icon') {
+
+      // const svg = paint.html;
+      const svg = paint.html;
+
+      style.image = new Icon({
+        src: 'data:image/svg+xml,' + escape(svg),
+        anchor: paint.iconAnchor,
+        imgSize: paint.iconSize,
+        anchorXUnits: 'pixels',
+        anchorYUnits: 'pixels',
+      });
     }
     return new Style(style);
   }
