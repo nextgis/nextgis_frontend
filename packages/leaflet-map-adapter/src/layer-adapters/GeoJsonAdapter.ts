@@ -28,6 +28,11 @@ const typeAlias: { [x: string]: GeoJsonAdapterLayerType } = {
   'MultiPolygon': 'fill'
 };
 
+const PAINT = {
+  stroke: false,
+  fillOpacity: 1
+};
+
 const backAliases = {};
 for (const a in typeAlias) {
   if (typeAlias.hasOwnProperty(a)) {
@@ -86,15 +91,13 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
   }
 
   private setPaint(paint: GetPaintCallback | GeoJsonAdapterLayerPaint) {
-    const isFunction = {}.toString.call(paint) === '[object Function]';
-
     this.layer.eachLayer((l) => {
 
       if (this.type === 'circle') {
         const marker = l as Marker;
         let icon;
-        if (isFunction) {
-          icon = (paint as GetPaintCallback)(marker.feature);
+        if (typeof paint === 'function') {
+          icon = paint(marker.feature);
         } else {
           icon = paint;
         }
@@ -115,13 +118,12 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
 
   private getGeoJsonOptions(options: GeoJsonAdapterOptions, type: GeoJsonAdapterLayerType): GeoJSONOptions {
     const paint = options.paint;
-    const isFunction = {}.toString.call(paint) === '[object Function]';
-    if (isFunction) {
-      const paintCallback = paint as GetPaintCallback;
+
+    if (typeof paint === 'function') {
       if (type === 'circle') {
         return {
           pointToLayer: (feature, latLng) => {
-            const iconOpt = paintCallback(feature);
+            const iconOpt = paint(feature);
             const pointToLayer = this.createPaintToLayer(iconOpt as IconOptions);
             return pointToLayer(feature, latLng);
           }
@@ -129,7 +131,7 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
       } else {
         return {
           style: (feature) => {
-            return paintCallback(feature);
+            return {...PAINT, ...paint(feature)};
           }
         };
       }
