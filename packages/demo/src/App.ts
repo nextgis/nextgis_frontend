@@ -1,6 +1,7 @@
 import { Vue, Component, Watch } from 'vue-property-decorator';
 import HtmlExample from './components/Examples/HtmlExample/HtmlExample.vue';
 import Readme from './components/Readme/Readme.vue';
+import Logo from './components/Logo/Logo.vue';
 
 interface Item {
   id: string;
@@ -15,7 +16,9 @@ interface Item {
   _parent?: Item;
 }
 
-@Component
+@Component({
+  components: {Logo}
+})
 export class App extends Vue {
 
   active = [];
