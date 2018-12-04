@@ -5,6 +5,8 @@
       :clipped="$vuetify.breakpoint.lgAndUp"
       :open="open"
       v-model="drawer"
+      dark
+      style="background:#0070c5"
       fixed
       app
     >
@@ -13,8 +15,6 @@
         :active.sync="active"
         :items="items"
         :open="open"
-        dark
-        style="background:#0070c5"
         activatable
         open-on-click
         transition
