@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/icons",
-  "version": "0.8.3",
+  "version": "0.8.4",
   "description": "Svg icon pack",
   "main": "lib/icons.js",
   "types": "lib/index.d.ts",
