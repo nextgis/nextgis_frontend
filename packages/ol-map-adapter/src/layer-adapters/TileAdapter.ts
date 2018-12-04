@@ -1,4 +1,4 @@
-import { LayerAdapter } from '@nextgis/webmap';
+import { LayerAdapter, LayerAdapters } from '@nextgis/webmap';
 import TileLayer from 'ol/layer/Tile';
 import XYZ from 'ol/source/XYZ';
 
@@ -14,6 +14,7 @@ export class TileAdapter implements LayerAdapter {
 
     const layer = new TileLayer({
       source: new XYZ({
+        attributions: options.attribution ? [options.attribution] : [],
         url: options.url,
       }),
     });
