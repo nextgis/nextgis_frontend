@@ -3,7 +3,7 @@ import Map from 'ol/Map';
 import View from 'ol/View';
 import Zoom from 'ol/control/Zoom';
 import Polygon from 'ol/geom/Polygon';
-import Attribution from 'ol/control/Attribution';
+
 import WKT from 'ol/format/WKT';
 import { ImageAdapter } from './layer-adapters/ImageAdapter';
 import { EventEmitter } from 'events';
@@ -16,6 +16,7 @@ import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 import { fromLonLat, transformExtent, transform } from 'ol/proj';
 // @ts-ignore
 import { boundingExtent } from 'ol/extent';
+import { Attribution } from './controls/Attribution';
 
 export class OlMapAdapter implements MapAdapter {
 
@@ -135,7 +136,7 @@ export class OlMapAdapter implements MapAdapter {
     if (typeof controlDef === 'string') {
       const engine = OlMapAdapter.controlAdapters[controlDef];
       if (engine) {
-        control = new engine(options);
+        control = new engine();
       }
     } else {
       control = controlDef;
