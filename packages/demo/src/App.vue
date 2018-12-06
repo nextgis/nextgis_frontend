@@ -29,7 +29,7 @@
     <v-toolbar :clipped-left="$vuetify.breakpoint.lgAndUp" color="#e5eef7" app fixed>
       <v-toolbar-title class="ml-0 pl-0">
         <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-        <logo></logo>
+        <router-link to="/"><logo></logo></router-link>
 
       </v-toolbar-title>
       <span class="title ml-3">Frontend</span>
