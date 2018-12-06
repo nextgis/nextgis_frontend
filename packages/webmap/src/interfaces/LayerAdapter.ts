@@ -56,6 +56,10 @@ export interface GeoJsonAdapterOptions extends AdapterOptions {
   paint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
   selectedPaint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
   selectedPaintDiff?: GeoJsonAdapterLayerPaint;
+
+  selectable?: boolean;
+  multipleSelection?: boolean;
+  unselectOnSecondClick?: boolean;
 }
 
 export interface MarkerAdapterOptions extends AdapterOptions {

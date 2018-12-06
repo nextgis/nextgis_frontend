@@ -12,7 +12,10 @@ import {
   PathOptions,
   CircleMarkerOptions,
   DivIcon,
-  Marker
+  Marker,
+  GridLayer,
+  Layer,
+  DomEvent
 } from 'leaflet';
 import { BaseAdapter } from './BaseAdapter';
 import { GeoJsonObject, GeoJsonGeometryTypes, FeatureCollection, Feature, GeometryCollection } from 'geojson';
@@ -42,7 +45,7 @@ for (const a in typeAlias) {
 }
 
 export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
-
+  options: GeoJsonAdapterOptions;
   name: string;
   paint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
   selectedPaint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
@@ -50,7 +53,10 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
   type: GeoJsonAdapterLayerType;
   selected = false;
 
+  private _selectedLayers: Layer[] = [];
+
   addLayer(options?: GeoJsonAdapterOptions) {
+    this.options = options;
     this.paint = options.paint;
 
     this.selectedPaint = options.selectedPaint;
@@ -78,7 +84,7 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
     if (!this.selected) {
       this.selected = true;
       if (this.selectedPaint) {
-        this.setPaint(this.selectedPaint);
+        this.setPaintEachLayer(this.selectedPaint);
       }
     }
   }
@@ -86,26 +92,30 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
   unselect() {
     if (this.selected) {
       this.selected = false;
-      this.setPaint(this.paint);
+      this.setPaintEachLayer(this.paint);
     }
   }
 
-  private setPaint(paint: GetPaintCallback | GeoJsonAdapterLayerPaint) {
+  private setPaintEachLayer(paint: GetPaintCallback | GeoJsonAdapterLayerPaint) {
     this.layer.eachLayer((l) => {
-
-      if (this.type === 'circle') {
-        const marker = l as Marker;
-        let icon;
-        if (typeof paint === 'function') {
-          icon = paint(marker.feature);
-        } else {
-          icon = paint;
-        }
-        const divIcon = this.createDivIcon(icon);
-        marker.setIcon(divIcon);
-      }
+      this.setPaint(l, paint);
     });
+  }
 
+  private setPaint(l, paint: GetPaintCallback | GeoJsonAdapterLayerPaint) {
+    let style: GeoJsonAdapterLayerPaint;
+    if (typeof paint === 'function') {
+      style = paint(l.feature);
+    } else {
+      style = paint;
+    }
+    if (this.type === 'circle' && style.type === 'icon') {
+      const marker = l as Marker;
+      const divIcon = this.createDivIcon(style);
+      marker.setIcon(divIcon);
+    } else if ('setStyle' in l) {
+      l.setStyle(style);
+    }
   }
 
   private preparePaint(paint): PathOptions {
@@ -118,10 +128,11 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
 
   private getGeoJsonOptions(options: GeoJsonAdapterOptions, type: GeoJsonAdapterLayerType): GeoJSONOptions {
     const paint = options.paint;
+    let lopt: GeoJSONOptions = {};
 
     if (typeof paint === 'function') {
       if (type === 'circle') {
-        return {
+        lopt = {
           pointToLayer: (feature, latLng) => {
             const iconOpt = paint(feature);
             const pointToLayer = this.createPaintToLayer(iconOpt as IconOptions);
@@ -129,15 +140,53 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
           }
         };
       } else {
-        return {
+        lopt = {
           style: (feature) => {
-            return {...PAINT, ...paint(feature)};
+            return { ...PAINT, ...paint(feature) };
           }
         };
       }
     } else {
-      return this.createPaintOptions((paint as GeoJsonAdapterLayerPaint), type);
+      lopt = this.createPaintOptions((paint as GeoJsonAdapterLayerPaint), type);
     }
+    if (options.selectable) {
+      lopt.onEachFeature = (feature, layer) => {
+        layer.on('click', this._onLayerClick, this);
+      };
+    }
+    return lopt;
+  }
+
+  private _onLayerClick(e) {
+    DomEvent.stopPropagation(e);
+    const layer = e.target as Layer;
+    const isSelected = this._selectedLayers.indexOf(layer) !== -1;
+    if (isSelected) {
+      if (this.options.unselectOnSecondClick) {
+        this._unselectLayer(layer);
+      }
+    } else {
+      this._selectLayer(layer);
+    }
+
+  }
+
+  private _selectLayer(layer) {
+    if (!this.options.multipleSelection) {
+      this._selectedLayers.forEach((x) => this._unselectLayer(x));
+    }
+    this._selectedLayers.push(layer);
+    if (this.options.selectedPaint) {
+      this.setPaint(layer, this.options.selectedPaint);
+    }
+  }
+
+  private _unselectLayer(layer) {
+    const index = this._selectedLayers.indexOf(layer);
+    if (index !== -1) {
+      this._selectedLayers.splice(index, 1);
+    }
+    this.setPaint(layer, this.options.paint);
   }
 
   private createDivIcon(icon: IconOptions) {
