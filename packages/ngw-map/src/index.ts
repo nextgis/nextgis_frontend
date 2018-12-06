@@ -175,6 +175,9 @@ export default class NgwMap {
         opt.paint = {...this.options.geoJsonDefaultPaint.icon, ...p };
       }
     }
+    opt.multipleSelection = opt.multipleSelection !== undefined ? opt.multipleSelection : false;
+    opt.unselectOnSecondClick = opt.unselectOnSecondClick !== undefined ? opt.unselectOnSecondClick : true;
+
     return this.webMap.addLayer('GEOJSON', {type: geomType, ...opt}).then((layer) => {
       this.webMap.showLayer(layer.name);
       return layer.name;
