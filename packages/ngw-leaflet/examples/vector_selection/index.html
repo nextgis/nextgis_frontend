@@ -37,7 +37,7 @@
     });
 
     // tree
-    ngwMap.addNgwLayer({ id: 4065, adapter: 'GEOJSON' }, {
+    ngwMap.addNgwLayer({ id: 4069, adapter: 'GEOJSON' }, {
       paint: function (feature) {
         return {color: feature.properties.color}
       },
@@ -76,9 +76,9 @@
 
       if (e.adapter.name === '4061') {
         var selected = e.adapter.getSelected();
-        var tree = ngwMap.webMap.getLayer('4065');
+        var tree = ngwMap.webMap.getLayer('4069');
         var treeSelected = tree.adapter.getSelected() || [];
-        if (selected.length >= 9 && treeSelected[0] && treeSelected[0].feature.properties.color === '#19e719') {
+        if (selected.length >= 9 && treeSelected[0] && treeSelected[0].feature.properties.color === '#25741f') {
           ngwMap.webMap.selectLayer('4059');
         } else {
           ngwMap.webMap.unSelectLayer('4059');
