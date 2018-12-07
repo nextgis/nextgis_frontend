@@ -27,46 +27,64 @@
 <body>
   <div id='map'></div>
   <script>
-    // generate random geojson points
-    var generatePoints = function (lng, lat, count) {
-      var points = {
-        "type": "FeatureCollection",
-        "features": []
-      };
-      for (var fry = 0; fry < count; fry++) {
-        var coordinates = [lng, lat];
-        for (var c = 0; c < coordinates.length; c++) {
-          coordinates[c] = coordinates[c] + Math.random() * 0.1;
-        }
-        points.features.push({
-          "type": "Feature",
-          "properties": {}, "geometry": { "type": "Point", "coordinates": coordinates }
-        })
-      }
-      return points;
-    }
+
     var ngwMap = new NgwLeaflet({
       baseUrl: 'https://demo.nextgis.com',
       target: 'map',
       qmsId: 465,
-      center: [107.17, 53.22],
-      zoom: 12
-    });
-    ngwMap.addGeoJsonLayer({
-      data: generatePoints(107.23, 53.18, 30),
-      paint: { color: 'red' },
-      selectedPaint: { color: 'green' },
-      selectable: true,
-      unselectOnSecondClick: false
-    });
-    ngwMap.addGeoJsonLayer({
-      data: generatePoints(107.11, 53.17, 30),
-      paint: NgwLeaflet.getIcon(),
-      selectedPaint: NgwLeaflet.getIcon({size: 20}),
-      selectable: true,
-      multipleSelection: true
+      center: [50.0113,19.9845],
+      zoom: 10
     });
 
+    // tree
+    ngwMap.addNgwLayer({ id: 4065, adapter: 'GEOJSON' }, {
+      paint: function (feature) {
+        return {color: feature.properties.color}
+      },
+      selectedPaint: function (feature) {
+        return {color: feature.properties.selcolor}
+      },
+      selectable: true,
+      unselectOnSecondClick: false,
+    });
+
+    // toys
+    ngwMap.addNgwLayer({ id: 4061, adapter: 'GEOJSON' }, {
+      paint: function (feature) {
+        return {color: feature.properties.color, opacity: 0.5}
+      },
+      selectedPaint: function (feature) {
+        return {color: feature.properties.selcolor, opacity: 1}
+      },
+      selectable: true,
+      multiselect: true
+    });
+
+    // star
+    ngwMap.addNgwLayer({ id: 4059, adapter: 'GEOJSON' }, {
+      paint: function (feature) {
+        return NgwLeaflet.getIcon({shape: 'star', color: 'darkred', strokeColor: 'darkred', size: 30});
+      },
+      selectedPaint: function (feature) {
+        return NgwLeaflet.getIcon({shape: 'star', color: 'red', strokeColor: 'orange', size: 60});
+      },
+      selectable: false
+    });
+
+    ngwMap.emitter.on('layer:click', function (e) {
+      console.log(e);
+
+      if (e.adapter.name === '4061') {
+        var selected = e.adapter.getSelected();
+        var tree = ngwMap.webMap.getLayer('4065');
+        var treeSelected = tree.adapter.getSelected() || [];
+        if (selected.length >= 9 && treeSelected[0] && treeSelected[0].feature.properties.color === '#19e719') {
+          ngwMap.webMap.selectLayer('4059');
+        } else {
+          ngwMap.webMap.unSelectLayer('4059');
+        }
+      }
+    });
   </script>
 </body>
 

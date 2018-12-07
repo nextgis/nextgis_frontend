@@ -6,9 +6,10 @@ import { EventEmitter } from 'events';
 import { MapAdapter, MapClickEvent, ControlPositions } from './interfaces/MapAdapter';
 import { RuntimeParams } from './interfaces/RuntimeParams';
 import { deepmerge } from './utils/lang';
-import { LayerAdapters, LayerAdapter } from './interfaces/LayerAdapter';
+import { LayerAdapters, LayerAdapter, OnLayerClickOptions } from './interfaces/LayerAdapter';
 import { Type } from './utils/Type';
 import { MapControl, MapControls } from './interfaces/MapControl';
+import { Resolver } from 'dns';
 
 export interface LayerMem {
   id: string;
@@ -185,8 +186,9 @@ export class WebMap<M = any> {
       adapterEngine = layerAdapter;
     }
     if (adapterEngine) {
+      options.onLayerClick = (e) => this._onLayerClick(e);
       const adapter = new adapterEngine(this.mapAdapter.map, options);
-
+      const order = this._layersIds++;
       await this.onMapLoad();
 
       const layer = await adapter.addLayer(options);
@@ -198,7 +200,7 @@ export class WebMap<M = any> {
         layerOpts.order = 0;
         this._baseLayers.push(layerId);
       } else {
-        layerOpts.order = options.order || ++this._layersIds;
+        layerOpts.order = options.order || order;
       }
       this._layers[layerId] = layerOpts;
 
@@ -379,6 +381,11 @@ export class WebMap<M = any> {
   // endregion
 
   // region Events
+  private async _onLayerClick(options: OnLayerClickOptions) {
+    this.emitter.emit('layer:click', options);
+    return Promise.resolve(options);
+  }
+
   private _addEventsListeners() {
     // propagate map click event
     this.mapAdapter.emitter.on('click', (ev: MapClickEvent) => this._onMapClick(ev));

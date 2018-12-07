@@ -53,7 +53,7 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
   type: GeoJsonAdapterLayerType;
   selected = false;
 
-  private _selectedLayers: Layer[] = [];
+  private _selectedLayers: any[] = [];
 
   addLayer(options?: GeoJsonAdapterOptions) {
     this.options = options;
@@ -96,6 +96,12 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
     }
   }
 
+  getSelected() {
+    return this._selectedLayers.map((x) => {
+      return { feature: x.feature, layer: x };
+    });
+  }
+
   private setPaintEachLayer(paint: GetPaintCallback | GeoJsonAdapterLayerPaint) {
     this.layer.eachLayer((l) => {
       this.setPaint(l, paint);
@@ -114,7 +120,7 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
       const divIcon = this.createDivIcon(style);
       marker.setIcon(divIcon);
     } else if ('setStyle' in l) {
-      l.setStyle(style);
+      l.setStyle(this.preparePaint(style));
     }
   }
 
@@ -159,20 +165,29 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
 
   private _onLayerClick(e) {
     DomEvent.stopPropagation(e);
-    const layer = e.target as Layer;
-    const isSelected = this._selectedLayers.indexOf(layer) !== -1;
+    const layer = e.target;
+    let isSelected = this._selectedLayers.indexOf(layer) !== -1;
     if (isSelected) {
       if (this.options.unselectOnSecondClick) {
         this._unselectLayer(layer);
+        isSelected = false;
       }
     } else {
       this._selectLayer(layer);
+      isSelected = true;
     }
-
+    if (this.onLayerClick) {
+      this.onLayerClick({
+        adapter: this,
+        layer,
+        feature: layer.feature,
+        selected: isSelected
+      });
+    }
   }
 
   private _selectLayer(layer) {
-    if (!this.options.multipleSelection) {
+    if (!this.options.multiselect) {
       this._selectedLayers.forEach((x) => this._unselectLayer(x));
     }
     this._selectedLayers.push(layer);
@@ -195,33 +210,32 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
   }
 
   private createPaintToLayer(icon: IconOptions) {
-    const iconClassName = icon.className;
-    const html = icon.html;
-    if (iconClassName || html) {
+    if (icon.type === 'icon') {
+      const iconClassName = icon.className;
+      const html = icon.html;
+      if (iconClassName || html) {
+        return (geoJsonPoint, latlng) => {
+          const divIcon = this.createDivIcon(icon);
+          return new Marker(latlng, { icon: divIcon });
+        };
+      }
+    } else {
       return (geoJsonPoint, latlng) => {
-        const divIcon = this.createDivIcon(icon);
-        return new Marker(latlng, { icon: divIcon });
+        return new CircleMarker(latlng, this.preparePaint({ ...PAINT, ...icon }));
       };
     }
   }
 
   private createPaintOptions(paintOptions: GeoJsonAdapterLayerPaint, type: GeoJsonAdapterLayerType): GeoJSONOptions {
     const geoJsonOptions: GeoJSONOptions = {};
-    const paint = this.preparePaint(paintOptions);
-    const isIcon = paintOptions.type === 'icon';
+    const paint = (paintOptions && this.preparePaint(paintOptions)) || {};
     if (paintOptions) {
       geoJsonOptions.style = (feature) => {
         return paint;
       };
     }
     if (type === 'circle') {
-      if (!isIcon) {
-        geoJsonOptions.pointToLayer = (geoJsonPoint, latlng) => {
-          return new CircleMarker(latlng, paint);
-        };
-      } else if (Object.prototype.toString.call(paintOptions) === '[object Object]') {
-        geoJsonOptions.pointToLayer = this.createPaintToLayer(paintOptions as IconOptions);
-      }
+      geoJsonOptions.pointToLayer = this.createPaintToLayer(paintOptions as IconOptions);
     } else if (type === 'line') {
       paint.stroke = true;
     }

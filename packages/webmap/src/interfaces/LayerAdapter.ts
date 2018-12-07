@@ -1,6 +1,14 @@
 import { GeoJsonObject, Feature } from 'geojson';
 import { LatLng } from './BaseTypes';
 
+export interface OnLayerClickOptions {
+  adapter: LayerAdapter;
+  layer: any;
+  selected?: boolean;
+
+  feature?: Feature;
+}
+
 export interface AdapterOptions {
   id?: string;
   url?: string;
@@ -11,6 +19,8 @@ export interface AdapterOptions {
   order?: number;
   // move out of here
   styleId?: number;
+
+  onLayerClick?(opt: OnLayerClickOptions): Promise<any>;
 }
 
 export interface MvtAdapterOptions extends AdapterOptions {
@@ -58,7 +68,7 @@ export interface GeoJsonAdapterOptions extends AdapterOptions {
   selectedPaintDiff?: GeoJsonAdapterLayerPaint;
 
   selectable?: boolean;
-  multipleSelection?: boolean;
+  multiselect?: boolean;
   unselectOnSecondClick?: boolean;
 }
 
@@ -90,4 +100,7 @@ export interface LayerAdapter<M = any, O = any> {
 
   select?(): void;
   unselect?(): void;
+  getSelected?(): Array<{layer, feature?: Feature}>;
+
+  onLayerClick?(opt: OnLayerClickOptions): Promise<any>;
 }
