@@ -72,8 +72,6 @@
     });
 
     ngwMap.emitter.on('layer:click', function (e) {
-      console.log(e);
-
       if (e.adapter.name === '4061') {
         var selected = e.adapter.getSelected();
         var tree = ngwMap.webMap.getLayer('4069');
