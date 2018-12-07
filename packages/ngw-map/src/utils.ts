@@ -1,4 +1,5 @@
 import { GeoJsonObject, GeoJsonGeometryTypes, FeatureCollection, GeometryCollection, Feature } from 'geojson';
+import { MapAdapter } from 'packages/webmap/src';
 
 export function fixUrlStr(url: string) {
   // remove double slash
@@ -78,4 +79,17 @@ export function findMostFrequentGeomType(arr: GeoJsonGeometryTypes[]): GeoJsonGe
     }
   }
   return maxName as GeoJsonGeometryTypes;
+}
+
+export function createAsyncAdapter (type: string, laodFunction: Promise<any>, map: MapAdapter) {
+
+  const webMapAdapter = map.layerAdapters[type];
+
+  return class Adapter extends webMapAdapter {
+    addLayer (options) {
+      return laodFunction.then((opt) => {
+        return super.addLayer({...options, ...opt});
+      });
+    }
+  };
 }

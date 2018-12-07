@@ -16,9 +16,10 @@ import { getIcon } from '@nextgis/icons';
 
 import 'leaflet/dist/leaflet.css';
 import { onMapLoad } from './decorators';
-import { fixUrlStr, deepmerge, detectGeometryType } from './utils';
+import { fixUrlStr, deepmerge, detectGeometryType, createAsyncAdapter } from './utils';
 import { EventEmitter } from 'events';
 import { toWgs84 } from 'reproject';
+import { geom } from 'openlayers';
 
 const epsg = {
   // tslint:disable-next-line:max-line-length
@@ -118,6 +119,7 @@ export default class NgwMap {
     this._createWebMap().then(() => {
       this._addControls();
     });
+    this._addEventsListeners();
   }
 
   fit() {
@@ -144,11 +146,20 @@ export default class NgwMap {
   @onMapLoad()
   async addNgwLayer(options: NgwLayerOptions, adapterOptions?) {
     if (options.adapter === 'GEOJSON') {
-      let data = await this.connector.makeQuery('/api/resource/{id}/geojson', {
+      const geojsonAdapterCb = this.connector.makeQuery('/api/resource/{id}/geojson', {
         id: options.id
+      }).then((data) => {
+        data = toWgs84(data, undefined, epsg);
+        return this._updateGeojsonAdapterOptions({data, id: String(options.id)});
       });
-      data = toWgs84(data, undefined, epsg);
-      return this.addGeoJsonLayer({ data, ...adapterOptions });
+      return this.addGeoJsonLayer(
+        adapterOptions,
+        createAsyncAdapter(
+          'GEOJSON',
+          geojsonAdapterCb,
+          this.webMap.mapAdapter
+        )
+      );
     } else {
       return NgwKit.addNgwLayer(options, this.webMap, this.options.baseUrl).then((layer) => {
         this._ngwLayers[layer.name] = layer;
@@ -159,26 +170,15 @@ export default class NgwMap {
   }
 
   @onMapLoad()
-  addGeoJsonLayer(opt: GeoJsonAdapterOptions) {
-    const geomType = typeAlias[detectGeometryType(opt.data)];
-    const p = opt.paint;
-    if (typeof p === 'object') {
-      if (!p.type) {
-        p.type = (geomType === 'fill' || geomType === 'line') ? 'path' :
-        ('html' in p || 'className' in p) ? 'icon' : geomType;
-      }
-      if (p.type === 'circle') {
-        opt.paint = {...this.options.geoJsonDefaultPaint.circle, ...p };
-      } else if (p.type === 'path') {
-        opt.paint = {...this.options.geoJsonDefaultPaint.path, ...p };
-      } else if (p.type === 'icon') {
-        opt.paint = {...this.options.geoJsonDefaultPaint.icon, ...p };
-      }
-    }
-    opt.multipleSelection = opt.multipleSelection !== undefined ? opt.multipleSelection : false;
-    opt.unselectOnSecondClick = opt.unselectOnSecondClick !== undefined ? opt.unselectOnSecondClick : true;
+  addGeoJsonLayer(opt: GeoJsonAdapterOptions, adapter?) {
 
-    return this.webMap.addLayer('GEOJSON', {type: geomType, ...opt}).then((layer) => {
+    opt.multiselect = opt.multiselect !== undefined ? opt.multiselect : false;
+    opt.unselectOnSecondClick = opt.unselectOnSecondClick !== undefined ? opt.unselectOnSecondClick : true;
+    if (!adapter) {
+      opt = this._updateGeojsonAdapterOptions(opt);
+    }
+
+    return this.webMap.addLayer<'GEOJSON'>(adapter || 'GEOJSON', opt).then((layer) => {
       this.webMap.showLayer(layer.name);
       return layer.name;
     });
@@ -200,6 +200,26 @@ export default class NgwMap {
         }
       });
     }
+  }
+
+  private _updateGeojsonAdapterOptions(opt: GeoJsonAdapterOptions): GeoJsonAdapterOptions {
+    const geomType = typeAlias[detectGeometryType(opt.data)];
+    const p = opt.paint;
+    if (typeof p === 'object') {
+      if (!p.type) {
+        p.type = (geomType === 'fill' || geomType === 'line') ? 'path' :
+          ('html' in p || 'className' in p) ? 'icon' : geomType;
+      }
+      if (p.type === 'circle') {
+        opt.paint = { ...this.options.geoJsonDefaultPaint.circle, ...p };
+      } else if (p.type === 'path') {
+        opt.paint = { ...this.options.geoJsonDefaultPaint.path, ...p };
+      } else if (p.type === 'icon') {
+        opt.paint = { ...this.options.geoJsonDefaultPaint.icon, ...p };
+      }
+    }
+    opt.type = geomType;
+    return opt;
   }
 
   private _fitNgwLayerExtend(id) {
@@ -239,5 +259,10 @@ export default class NgwMap {
       const { position, ...options } = controlOptions;
       this.webMap.addControl(x, position, options);
     });
+  }
+
+  private _addEventsListeners() {
+    this.webMap.emitter.on('click', (d) => this.emitter.emit('click', d));
+    this.webMap.emitter.on('layer:click', (d) => this.emitter.emit('layer:click', d));
   }
 }
