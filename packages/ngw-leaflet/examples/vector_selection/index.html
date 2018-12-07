@@ -32,17 +32,17 @@
       baseUrl: 'https://demo.nextgis.com',
       target: 'map',
       qmsId: 465,
-      center: [50.0113,19.9845],
+      center: [50.0113, 19.9845],
       zoom: 10
     });
 
     // tree
     ngwMap.addNgwLayer({ id: 4069, adapter: 'GEOJSON' }, {
       paint: function (feature) {
-        return {color: feature.properties.color}
+        return { color: feature.properties.color }
       },
       selectedPaint: function (feature) {
-        return {color: feature.properties.selcolor}
+        return { color: feature.properties.selcolor }
       },
       selectable: true,
       unselectOnSecondClick: false,
@@ -51,10 +51,10 @@
     // toys
     ngwMap.addNgwLayer({ id: 4061, adapter: 'GEOJSON' }, {
       paint: function (feature) {
-        return {color: feature.properties.color, opacity: 0.5}
+        return { color: feature.properties.color, opacity: 0.5 }
       },
       selectedPaint: function (feature) {
-        return {color: feature.properties.selcolor, opacity: 1}
+        return { color: feature.properties.selcolor, opacity: 1 }
       },
       selectable: true,
       multiselect: true
@@ -63,10 +63,10 @@
     // star
     ngwMap.addNgwLayer({ id: 4059, adapter: 'GEOJSON' }, {
       paint: function (feature) {
-        return NgwLeaflet.getIcon({shape: 'star', color: 'darkred', strokeColor: 'darkred', size: 30});
+        return NgwLeaflet.getIcon({ shape: 'star', color: 'darkred', strokeColor: 'darkred', size: 30 });
       },
       selectedPaint: function (feature) {
-        return NgwLeaflet.getIcon({shape: 'star', color: 'red', strokeColor: 'orange', size: 60});
+        return NgwLeaflet.getIcon({ shape: 'star', color: 'red', strokeColor: 'orange', size: 60 });
       },
       selectable: false
     });
@@ -75,9 +75,14 @@
       if (e.adapter.name === '4061') {
         var selected = e.adapter.getSelected();
         var tree = ngwMap.webMap.getLayer('4069');
-        var treeSelected = tree.adapter.getSelected() || [];
-        if (selected.length >= 9 && treeSelected[0] && treeSelected[0].feature.properties.color === '#25741f') {
-          ngwMap.webMap.selectLayer('4059');
+
+        if (selected.length >= 9) {
+          var treeSelected = tree.adapter.getSelected() || [];
+          // hint: make tree normal first
+          var treeIsNormal = treeSelected[0] && treeSelected[0].feature.properties.color === '#25741f';
+          if (treeIsNormal) {
+            ngwMap.webMap.selectLayer('4059');
+          }
         } else {
           ngwMap.webMap.unSelectLayer('4059');
         }
