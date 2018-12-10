@@ -98,8 +98,10 @@ export interface LayerAdapter<M = any, O = any> {
   selected?: boolean;
   addLayer(options: O): any;
 
-  select?(): void;
-  unselect?(): void;
+  getLayers?(): Array<{feature?: Feature, layer: any}>;
+
+  select?(findFeatureCb?: (opt: {layer, feature?: Feature }) => boolean): void;
+  unselect?(findFeatureCb?: (opt: {layer, feature?: Feature }) => boolean): void;
   getSelected?(): Array<{layer, feature?: Feature}>;
 
   filter?(cb: (opt: {layer, feature?: Feature }) => boolean): void;

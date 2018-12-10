@@ -54,7 +54,7 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
   type: GeoJsonAdapterLayerType;
   selected = false;
 
-  private _layers: Array<{feature, layer}> = [];
+  private _layers: Array<{ feature, layer }> = [];
   private _selectedLayers: any[] = [];
 
   addLayer(options?: GeoJsonAdapterOptions) {
@@ -81,8 +81,13 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
     }
   }
 
-  select() {
-    if (!this.selected) {
+  select(findFeatureFun?) {
+    if (findFeatureFun) {
+      const feature = this._layers.filter(findFeatureFun);
+      feature.forEach((x) => {
+        this._selectLayer(x.layer);
+      });
+    } else if (!this.selected) {
       this.selected = true;
       if (this.selectedPaint) {
         this.setPaintEachLayer(this.selectedPaint);
@@ -90,8 +95,13 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
     }
   }
 
-  unselect() {
-    if (this.selected) {
+  unselect(findFeatureFun?) {
+    if (findFeatureFun) {
+      const feature = this._layers.filter(findFeatureFun);
+      feature.forEach((x) => {
+        this._unselectLayer(x.layer);
+      });
+    } else if (this.selected) {
       this.selected = false;
       this.setPaintEachLayer(this.paint);
     }
@@ -104,16 +114,20 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
   }
 
   filter(fun) {
-    this._layers.forEach(({feature, layer}) => {
+    this._layers.forEach(({ feature, layer }) => {
       // Marker and a some more layers contain feature in types
       // but in real it may be in each geojson layers
-      const ok = fun({ feature, layer});
+      const ok = fun({ feature, layer });
       if (ok) {
         this.layer.addLayer(layer);
       } else {
         this.layer.removeLayer(layer);
       }
     });
+  }
+
+  getLayers() {
+    return this._layers;
   }
 
   private setPaintEachLayer(paint: GetPaintCallback | GeoJsonAdapterLayerPaint) {
@@ -171,7 +185,7 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
     }
 
     lopt.onEachFeature = (feature, layer) => {
-      this._layers.push({feature, layer});
+      this._layers.push({ feature, layer });
       this.layer.addLayer(layer);
       if (options.selectable) {
         layer.on('click', this._onLayerClick, this);
@@ -209,6 +223,7 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
       this._selectedLayers.forEach((x) => this._unselectLayer(x));
     }
     this._selectedLayers.push(layer);
+    this.selected = true;
     if (this.options.selectedPaint) {
       this.setPaint(layer, this.options.selectedPaint);
     }
@@ -219,6 +234,7 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
     if (index !== -1) {
       this._selectedLayers.splice(index, 1);
     }
+    this.selected = this._selectedLayers.length > 0;
     this.setPaint(layer, this.options.paint);
   }
 
