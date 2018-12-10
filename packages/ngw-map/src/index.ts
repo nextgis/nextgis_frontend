@@ -19,7 +19,6 @@ import { onMapLoad } from './decorators';
 import { fixUrlStr, deepmerge, detectGeometryType, createAsyncAdapter } from './utils';
 import { EventEmitter } from 'events';
 import { toWgs84 } from 'reproject';
-import { geom } from 'openlayers';
 
 const epsg = {
   // tslint:disable-next-line:max-line-length
