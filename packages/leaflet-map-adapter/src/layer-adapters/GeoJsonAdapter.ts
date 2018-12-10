@@ -13,8 +13,7 @@ import {
   CircleMarkerOptions,
   DivIcon,
   Marker,
-  GridLayer,
-  Layer,
+  FeatureGroup,
   DomEvent
 } from 'leaflet';
 import { BaseAdapter } from './BaseAdapter';
@@ -46,13 +45,16 @@ for (const a in typeAlias) {
 
 export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
   options: GeoJsonAdapterOptions;
+
+  layer = new FeatureGroup();
+
   name: string;
   paint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
   selectedPaint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
-  layer: GeoJSON;
   type: GeoJsonAdapterLayerType;
   selected = false;
 
+  private _layers: Array<{feature, layer}> = [];
   private _selectedLayers: any[] = [];
 
   addLayer(options?: GeoJsonAdapterOptions) {
@@ -75,8 +77,7 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
     const data = filterGeometries(options.data, type);
     if (data) {
       const layer = new GeoJSON(data, this.getGeoJsonOptions(options, type));
-      this.layer = layer;
-      return layer;
+      return this.layer;
     }
   }
 
@@ -99,6 +100,19 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
   getSelected() {
     return this._selectedLayers.map((x) => {
       return { feature: x.feature, layer: x };
+    });
+  }
+
+  filter(fun) {
+    this._layers.forEach(({feature, layer}) => {
+      // Marker and a some more layers contain feature in types
+      // but in real it may be in each geojson layers
+      const ok = fun({ feature, layer});
+      if (ok) {
+        this.layer.addLayer(layer);
+      } else {
+        this.layer.removeLayer(layer);
+      }
     });
   }
 
@@ -155,11 +169,15 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
     } else {
       lopt = this.createPaintOptions((paint as GeoJsonAdapterLayerPaint), type);
     }
-    if (options.selectable) {
-      lopt.onEachFeature = (feature, layer) => {
+
+    lopt.onEachFeature = (feature, layer) => {
+      this._layers.push({feature, layer});
+      this.layer.addLayer(layer);
+      if (options.selectable) {
         layer.on('click', this._onLayerClick, this);
-      };
-    }
+      }
+    };
+
     return lopt;
   }
 
