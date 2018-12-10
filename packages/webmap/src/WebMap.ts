@@ -299,6 +299,13 @@ export class WebMap<M = any> {
       this._selectedLayers.splice(index, 1);
     }
   }
+
+  filterLayer(layerId: string, filter: ({feature, layer}) => boolean) {
+    const layer = this.getLayer(layerId);
+    if (layer && layer.adapter.filter) {
+      layer.adapter.filter(filter);
+    }
+  }
   // endregion
 
   // region MAP

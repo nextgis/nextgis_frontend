@@ -102,5 +102,7 @@ export interface LayerAdapter<M = any, O = any> {
   unselect?(): void;
   getSelected?(): Array<{layer, feature?: Feature}>;
 
+  filter?(cb: (opt: {layer, feature?: Feature }) => boolean): void;
+
   onLayerClick?(opt: OnLayerClickOptions): Promise<any>;
 }
