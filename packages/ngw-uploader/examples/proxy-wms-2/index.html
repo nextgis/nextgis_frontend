@@ -158,13 +158,12 @@
     }
 
     function onWmsConectionCreated(newWmsConnection) {
+      // update DOM, show list of conected WMS resources
       resultBlock.style.display = 'block';
-
       wmsConnectBlock.style.display = 'none';
       wmsDataBlock.innerHTML = '';
       wmsLayersBlock.style.display = 'block';
       wmsDataBlock.appendChild(document.createElement('pre')).innerHTML = JSON.stringify(newWmsConnection, null, 2);
-
 
       createWmsLayersBtn.onclick = function () {
         var conectLayerPromises = []
@@ -176,7 +175,12 @@
             var proxyLayer = config.proxyLayers[f];
             var exist = layers.find(function (x) { return x.id === proxyLayer.id });
             if (exist) {
-              conectLayerPromises.push(createConectLayerPromise(wmsData, exist.id, proxyLayer.name, proxyLayer.vendorParams));
+              // Create conection with updating WMS parameters from config
+              conectLayerPromises.push(
+                createConectLayerPromise(
+                  wmsData, exist.id, proxyLayer.name, proxyLayer.vendorParams
+                )
+              );
             }
           }
         }
@@ -194,11 +198,13 @@
                 resource_id: layer.id,
               })
             }
+            // Create wms service with updated layers
             ngwUploader.createWms({
               name: 'custom',
               parentId: parentId,
               layers: layers
             }).then(function (newWmsService) {
+              // Update DOM with data from result WMS service
               ngwUploader.getResource(newWmsService.id).then(function (wmsService) {
                 wmsLayersBlock.style.display = 'none';
                 wmsDataBlock.innerHTML = '';

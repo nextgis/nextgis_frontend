@@ -1,4 +1,4 @@
 {
-  "name": "Update WMS layers params",
-  "description": ""
+  "name": "Vendor param in WMS Layer",
+  "description": "Create proxy WMS service from remote WMS layers with vendor parameters."
 }
