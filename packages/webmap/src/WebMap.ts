@@ -188,7 +188,7 @@ export class WebMap<M = any> {
     if (adapterEngine) {
       options.onLayerClick = (e) => this._onLayerClick(e);
       const adapter = new adapterEngine(this.mapAdapter.map, options);
-      const order = this._layersIds++;
+      const order = this._layersIds + 1;
       await this.onMapLoad();
 
       const layer = await adapter.addLayer(options);
