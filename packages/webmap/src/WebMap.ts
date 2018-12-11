@@ -42,7 +42,7 @@ export class WebMap<M = any> {
   private _baseLayers: string[] = [];
   private _extent: [number, number, number, number];
   private _layers: { [x: string]: LayerMem } = {};
-  private _layersIds: number = 0;
+  private _layersIds: number = 1;
 
   private _selectedLayers: string[] = [];
 
