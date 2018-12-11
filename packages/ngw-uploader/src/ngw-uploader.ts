@@ -221,6 +221,8 @@ export class NgwUploader {
   @evented({ status: 'create-wms-connected-layer', template: 'create WMS layer for conected resource ID {id}' })
   createWmsConnectedLayer(options: CreateWmsConnectedLayerOptions, name?: string) {
     name = name || options.name || String(options.id);
+    const wmslayers = options.wmslayers && Array.isArray(options.wmslayers) ?
+      options.wmslayers.join(',') : options.wmslayers;
     const wmsData = {
       resource: {
         cls: 'wmsclient_layer',
@@ -241,8 +243,8 @@ export class NgwUploader {
         srs: {
           id: 3857
         },
+        wmslayers,
         imgformat: options.imgformat || 'image/png',
-        wmslayers: options.wmslayers,
         vendor_params: options.vendor_params
       },
     };

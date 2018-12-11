@@ -44,7 +44,7 @@ export interface CreateWmsConnectedLayerOptions extends ResourceCreateOptions {
   srs?: {
     id: number // 3857
   };
-  wmslayers: string; // '1,2'
+  wmslayers: string | string[]; // '1,2'
   imgformat?: string; // 'image/png'
   vendor_params?: { [paramName: string]: string };
 }
