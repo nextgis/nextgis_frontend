@@ -123,7 +123,7 @@
 
     button.onclick = function () {
       // Create group for all new resources
-      ngwUploader.createGroup('wms_params_example_' + new Date().getTime()).then(function (group) {
+      ngwUploader.createGroup('wms_params_example_' + new Date().toISOString()).then(function (group) {
         parentId = group.id;
         var connectionPromises = [];
         for (var fry = 0; fry < configs.length; fry++) {
