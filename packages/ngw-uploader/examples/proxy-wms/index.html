@@ -65,12 +65,19 @@
       statusUpload.innerHTML = evt.message;
     });
 
+    var parentId = 0;
+
     button.onclick = function () {
-      ngwUploader.createWmsConnection({
-        name: 'custom_' + new Date().getTime(),
-        url: input.value,
-        version: "1.1.1"
-      }).then(onWmsConectionCreated);
+      // Create group for all new resources
+      ngwUploader.createGroup('wms_proxy_example_' + new Date().getTime()).then(function (group) {
+        parentId = group.id;
+        ngwUploader.createWmsConnection({
+          name: 'custom',
+          parentId: parentId,
+          url: input.value,
+          version: "1.1.1"
+        }).then(onWmsConectionCreated);
+      })
     };
 
     function onWmsConectionCreated(newWmsConnection) {
@@ -92,7 +99,7 @@
           return ngwUploader.createWmsConnectedLayer({
             id: wmsData.resource.id,
             parentId: wmsData.resource.parent.id,
-            name: layersToCreate[id] + '_' + new Date().getTime(),
+            name: layersToCreate[id],
             wmslayers: [id]
           }).then(function (newLayer) {
             newLayer.name = title;
@@ -126,12 +133,14 @@
                 var layer = values[fry];
                 layers.push({
                   keyname: 'image' + fry,
-                  display_name: layer.name + '_' + new Date().getTime(),
+                  display_name: layer.name,
+                  parentId: parentId,
                   resource_id: layer.id,
                 })
               }
               ngwUploader.createWms({
-                name: 'custom_' + new Date().getTime(),
+                name: 'proxy',
+                parentId: parentId,
                 layers: layers
               }).then(function (newWmsService) {
                 ngwUploader.getResource(newWmsService.id).then(function (wmsService) {
