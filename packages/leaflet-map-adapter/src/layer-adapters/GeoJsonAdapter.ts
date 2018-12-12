@@ -114,9 +114,14 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
   }
 
   filter(fun) {
+    // Some optimization
+    // @ts-ignore
+    const _map = this.layer._map;
+    if (_map) {
+      this.layer.remove();
+    }
+
     this._layers.forEach(({ feature, layer }) => {
-      // Marker and a some more layers contain feature in types
-      // but in real it may be in each geojson layers
       const ok = fun({ feature, layer });
       if (ok) {
         this.layer.addLayer(layer);
@@ -124,6 +129,9 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
         this.layer.removeLayer(layer);
       }
     });
+    if (_map) {
+      this.layer.addTo(_map);
+    }
   }
 
   getLayers() {
