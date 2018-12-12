@@ -74,7 +74,9 @@ module.exports = (env, argv) => {
 
     new HtmlWebpackPlugin({
       template: 'src/index.html',
-      filename: 'index.html'
+      filename: 'index.html',
+      title: 'NextGIS Frontend',
+      favicon: './src/images/favicon.ico',
     }),
 
     new VueLoaderPlugin(),
