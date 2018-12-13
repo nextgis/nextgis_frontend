@@ -164,7 +164,7 @@ export class WebMap<M = any> {
 
   isLayerOnTheMap(layerName: string): boolean {
     const layerMem = this._layers[layerName];
-    return layerMem.onMap;
+    return layerMem && layerMem.onMap;
   }
 
   addControl<C extends keyof MapControls>(
@@ -233,7 +233,12 @@ export class WebMap<M = any> {
   }
 
   setLayerOpacity(layerName: string, value: number) {
-    // ignore
+    if (this.mapAdapter.setLayerOpacity) {
+      const layer = this.getLayer(layerName);
+      if (layer) {
+        this.mapAdapter.setLayerOpacity(layer.layer, value);
+      }
+    }
   }
 
   getScaleForResolution(res, mpu) {
@@ -300,7 +305,7 @@ export class WebMap<M = any> {
     }
   }
 
-  filterLayer(layerId: string, filter: ({feature, layer}) => boolean) {
+  filterLayer(layerId: string, filter: ({ feature, layer }) => boolean) {
     const layer = this.getLayer(layerId);
     if (layer && layer.adapter.filter) {
       layer.adapter.filter(filter);
