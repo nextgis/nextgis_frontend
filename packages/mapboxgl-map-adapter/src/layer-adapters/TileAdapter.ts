@@ -32,7 +32,7 @@ export class TileAdapter extends BaseAdapter implements LayerAdapter {
         // show a "url" property. This only applies to tilesets with
         // corresponding TileJSON (such as mapbox tiles).
         tiles,
-        tileSize: opt && opt.tileSize || 1024,
+        tileSize: opt && opt.tileSize || 256,
       },
     }, options.before);
     return this.name;
