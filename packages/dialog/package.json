@@ -44,7 +44,7 @@
   "files": [
     "lib"
   ],
-  "license": "GPL-3.0",
+  "license": "LGPL 3.0",
   "publishConfig": {
     "registry": "http://registry.npmjs.org/"
   },

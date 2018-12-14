@@ -60,6 +60,6 @@ const ngwLeaflet = new NgwLeaflet({
 
 ## Commercial support
 
-Need to fix a bug or add a feature to NextGIS Web? We provide custom development and support for this software. [Contact us](http://nextgis.com/contact/) to discuss options!
+Need to fix a bug or add a feature to `@nextgis/ngw-leaflet`? We provide custom development and support for this software. [Contact us](http://nextgis.com/contact/) to discuss options!
 
 [![http://nextgis.com](http://nextgis.ru/img/nextgis.png)](http://nextgis.com)
