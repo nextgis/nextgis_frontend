@@ -30,7 +30,7 @@ export class WebMap<M = any> {
   settings: AppSettings;
   layers: WebLayerEntry;
   emitter = new EventEmitter();
-  keys: Keys = new Keys(); // TODO: make injectable cashed
+  keys: Keys = new Keys(); // TODO: make injectable cached
   mapAdapter: MapAdapter<M>;
   runtimeParams: RuntimeParams[];
 
