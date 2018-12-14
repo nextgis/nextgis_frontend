@@ -77,7 +77,7 @@ module.exports = (env, argv, opt = {}) => {
     })
   ];
 
-  let alias = {};
+  const alias = getAliases();
 
   if (isProd) {
 
@@ -85,8 +85,6 @@ module.exports = (env, argv, opt = {}) => {
     plugins = plugins.concat([
       // new BundleAnalyzerPlugin()
     ])
-  } else {
-    alias = getAliases()
   }
 
   return [{
