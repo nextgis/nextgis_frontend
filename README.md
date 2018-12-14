@@ -113,53 +113,6 @@ To publish a new package, run the following command in the package folder
 npm publish --access=public
 ```
 
-### Troubleshoot
-
-Sometimes there are problems of establishing dependencies between libraries.
-For example, between the ngw-kit and the ngw-connector.
-In this case, you need to execute commands from root directory
-
-```bash
-rm -rf ./node_modules
-# or
-del ./node_modules # for Windows
-lerna clean
-lerna bootstrap
-```
-
----
-
-Currently an error may occur if the git is connected via http[s] instead of ssh.
-
----
-
-VSCode
-
-[Bug](https://github.com/Microsoft/vscode/issues/25312) When not finding symbolic linked modules try:
-
-1. `CTRL` + `SHIFT` + `P` or equivalent for MacOS (brings up the command palette)
-2. Search something like "typescript"
-3. Select TypeScript: Restart TS server
-
----
-
-### Might be of help
-
-Some [lerna+yarn instruction](https://medium.com/trabe/monorepo-setup-with-lerna-and-yarn-workspaces-5d747d7c0e91)
-
-Useful VSCode plugins:
-
-- alefragnani.numbered-bookmarks
-- donjayamanne.githistory
-- eamodio.gitlens
-- EditorConfig.EditorConfig
-- eg2.tslint
-- k--kato.intellij-idea-keybindings (shortcuts like intellij)
-- octref.vetur (Vue for demo project)
-- prograhammer.tslint-vue (Vue)
-- ritwickdey.LiveServer
-- wayou.vscode-todo-highlight
-
 ## Commercial support
 
 Need to fix a bug or add a feature to NextGIS Frontend? We provide custom development and support for this software. [Contact us](http://nextgis.com/contact/) to discuss options!
