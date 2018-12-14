@@ -51,6 +51,6 @@
   "files": [
     "lib"
   ],
-  "license": "GPL-3.0",
+  "license": "LGPL 3.0",
   "gitHead": "b0ada99d132188e7dcc80b713b7b3017f38fc078"
 }
