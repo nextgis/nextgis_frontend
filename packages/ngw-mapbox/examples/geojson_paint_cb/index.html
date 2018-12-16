@@ -32,11 +32,11 @@
         "type": "FeatureCollection",
         "features": []
       };
-      for (var fry = 0; fry < 100; fry++) {
+      for (var fry = 0; fry < 1000; fry++) {
         points.features.push({
           "type": "Feature",
           "properties": {},
-          "geometry": { "type": "Point", "coordinates": [107.18 + (Math.random() * 0.1), 53.18 + (Math.random() * 0.1)] }
+          "geometry": { "type": "Point", "coordinates": [Math.ceil((Math.random() * 170)), Math.ceil((Math.random() * 80))] }
         });
       }
       return points;
@@ -47,8 +47,7 @@
       baseUrl: 'https://demo.nextgis.com',
       target: 'map',
       qmsId: 465,
-      center: [107.17, 53.22],
-      zoom: 10
+      bounds: [0, 0, 80, 170],
     });
     var colors = ['red', 'green', 'blue', 'purple', 'yellow', 'white'];
     ngwMap.addGeoJsonLayer({
