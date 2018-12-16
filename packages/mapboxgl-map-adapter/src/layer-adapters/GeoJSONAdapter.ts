@@ -155,10 +155,10 @@ function detectType(geojson: GeoJsonObject): GeoJsonGeometryTypes {
   let geometry: GeoJsonGeometryTypes;
   if (geojson.type === 'FeatureCollection') {
     const featuresTypes = (geojson as FeatureCollection).features.map((f) => f.geometry.type);
-    geometry = fingMostFrequentGeomType(featuresTypes);
+    geometry = findMostFrequentGeomType(featuresTypes);
   } else if (geojson.type === 'GeometryCollection') {
     const geometryTypes = (geojson as GeometryCollection).geometries.map((g) => g.type);
-    geometry = fingMostFrequentGeomType(geometryTypes);
+    geometry = findMostFrequentGeomType(geometryTypes);
   } else if (geojson.type === 'Feature') {
     geometry = (geojson as Feature).geometry.type;
   } else {
@@ -167,7 +167,7 @@ function detectType(geojson: GeoJsonObject): GeoJsonGeometryTypes {
   return geometry;
 }
 
-function fingMostFrequentGeomType(arr: GeoJsonGeometryTypes[]): GeoJsonGeometryTypes {
+function findMostFrequentGeomType(arr: GeoJsonGeometryTypes[]): GeoJsonGeometryTypes {
   const counts: { [x: string]: number } = {};
   for (let fry = 0; fry < arr.length; fry++) {
     counts[arr[fry]] = 1 + (counts[arr[fry]] || 0);
