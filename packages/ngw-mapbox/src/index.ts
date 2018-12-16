@@ -1,9 +1,6 @@
 import NgwMap, { MapOptions, NgwLayerOptions } from '@nextgis/ngw-map';
 import MapboxglMapAdapter from '@nextgis/mapboxgl-map-adapter';
 
-// import NgwMap, { MapOptions, NgwLayerOptions } from '../../ngw-map/src/ngw-map';
-// import MapboxglMapAdapter from '../../mapboxgl-map-adapter/src/mapboxgl-map-adapter';
-
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 export default class NgwLeaflet extends NgwMap {
