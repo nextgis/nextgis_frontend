@@ -3,7 +3,8 @@ import {
   GeoJsonAdapterOptions,
   GeoJsonAdapterLayerType,
   GeoJsonAdapterLayerPaint,
-  GetPaintCallback
+  GetPaintCallback,
+  IconOptions
 } from '@nextgis/webmap';
 import { BaseAdapter } from './BaseAdapter';
 import {
@@ -16,7 +17,8 @@ import {
   Geometry,
   GeoJsonProperties
 } from 'geojson';
-// import { GeoJSONSourceRaw } from 'mapbox-gl';
+
+import { getImage } from '../utils/image.icons';
 
 let ID = 1;
 
@@ -57,7 +59,7 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
 
   private _features: Feature[] = [];
 
-  addLayer(options?: GeoJsonAdapterOptions): string {
+  async addLayer(options?: GeoJsonAdapterOptions): Promise<string> {
     this.name = options.id || 'geojson-' + ID++;
     const opt = { ...this.options, ...(options || {}) };
 
@@ -73,9 +75,8 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
       x._paint_id = i;
     });
     if (data) {
-      this.map.addLayer({
+      const layerOpt: mapboxgl.Layer = {
         id: String(this.name),
-        type,
         source: {
           type: 'geojson',
           data
@@ -83,8 +84,17 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
         layout: {
           visibility: 'none',
         },
-        paint: this.createPaintForType(opt.paint, type)
-      });
+      };
+      const paint: any = await this.createPaintForType(opt.paint, type);
+      if ('icon-image' in paint) {
+        layerOpt.layout = { ...layerOpt.layout, ...paint };
+        layerOpt.type = 'symbol';
+      } else {
+        layerOpt.paint = paint;
+        layerOpt.type = type;
+
+      }
+      this.map.addLayer(layerOpt);
       return this.name;
     } else {
       throw new Error('No geometry for given type');
@@ -109,40 +119,71 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
     return data;
   }
 
-  private createPaintForType(paint: GeoJsonAdapterLayerPaint | GetPaintCallback, type: GeoJsonAdapterLayerType) {
+  private async createPaintForType(paint: GeoJsonAdapterLayerPaint | GetPaintCallback, type: GeoJsonAdapterLayerType) {
     if (typeof paint === 'function') {
-      const style = {};
-      this._features.forEach((x) => {
-        const _paint = paint(x);
-        for (const p in _paint) {
-          if (_paint.hasOwnProperty(p)) {
-            x.properties['_paint_' + p] = _paint[p];
-            style[p] = ['get', '_paint_' + p];
-          }
-        }
-      });
-      // @ts-ignore
-      const styleFromCb = this.createPaintForType(style, type);
-      return styleFromCb;
+      return await this._getPaintFromCallback(paint, type);
     } else {
       const mapboxPaint = {};
       const _paint = { ...PAINT, ...(paint || {}) };
-      for (const p in _paint) {
-        if (_paint.hasOwnProperty(p)) {
-          const allowedType = allowedByType[type].find((x) => {
-            if (typeof x === 'string') {
-              return x === p;
-            } else if (Array.isArray(x)) {
-              return x[0] === p;
+      if (paint.type === 'icon') {
+        this._registrateImage(paint);
+        return {
+          'icon-image': paint.html
+        };
+      } else {
+        for (const p in _paint) {
+          if (_paint.hasOwnProperty(p)) {
+            const allowedType = allowedByType[type].find((x) => {
+              if (typeof x === 'string') {
+                return x === p;
+              } else if (Array.isArray(x)) {
+                return x[0] === p;
+              }
+            });
+            if (allowedType) {
+              const paramName = Array.isArray(allowedType) ? allowedType[1] : allowedType;
+              mapboxPaint[type + '-' + paramName] = _paint[p];
             }
-          });
-          if (allowedType) {
-            const paramName = Array.isArray(allowedType) ? allowedType[1] : allowedType;
-            mapboxPaint[type + '-' + paramName] = _paint[p];
+          }
+        }
+        return mapboxPaint;
+      }
+    }
+  }
+
+  private async _getPaintFromCallback(paint: GetPaintCallback, type: GeoJsonAdapterLayerType) {
+    const style: any = {};
+    for (const feature of this._features) {
+      const _paint = paint(feature);
+      if (_paint.type === 'icon') {
+        await this._registrateImage(_paint);
+        feature.properties['_icon-image'] = _paint.html;
+        style['icon-image'] = '{_icon-image}';
+      } else {
+        for (const p in _paint) {
+          if (_paint.hasOwnProperty(p)) {
+            feature.properties['_paint_' + p] = _paint[p];
+            style[p] = ['get', '_paint_' + p];
           }
         }
       }
-      return mapboxPaint;
+    }
+    if ('icon-image' in style) {
+      return style;
+    }
+    const styleFromCb = this.createPaintForType(style, type);
+    return styleFromCb;
+  }
+
+  private async _registrateImage(paint: IconOptions) {
+    const imageExist = this.map.hasImage(paint.html);
+    if (!imageExist) {
+      const image = await getImage(paint.html, {
+        width: paint.iconSize[0],
+        height: paint.iconSize[1]
+      });
+
+      this.map.addImage(paint.html, image);
     }
   }
 }
