@@ -94,9 +94,9 @@ export interface LayerAdapters {
 export interface LayerAdapter<M = any, O = any> {
   name: string;
   layer?: any;
-  map?: M;
+  opt?: M;
   selected?: boolean;
-  addLayer(options: O): any;
+  addLayer(options: O): any | Promise<any>;
 
   getLayers?(): Array<{feature?: Feature, layer: any}>;
 
