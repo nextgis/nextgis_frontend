@@ -116,6 +116,8 @@ export default class NgwMap {
       starterKits: kits
     });
     this._createWebMap().then(() => {
+      const map = this.webMap.mapAdapter.map;
+      debugger;
       this._addControls();
     });
     this._addEventsListeners();

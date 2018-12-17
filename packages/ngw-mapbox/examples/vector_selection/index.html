@@ -63,10 +63,10 @@
     // star
     ngwMap.addNgwLayer({ id: 4059, adapter: 'GEOJSON' }, {
       paint: function (feature) {
-        return NgwLeaflet.getIcon({ shape: 'star', color: 'darkred', strokeColor: 'darkred', size: 30 });
+        return NgwMapbox.getIcon({ shape: 'star', color: 'darkred', strokeColor: 'darkred', size: 30 });
       },
       selectedPaint: function (feature) {
-        return NgwLeaflet.getIcon({ shape: 'star', color: 'red', strokeColor: 'orange', size: 60 });
+        return NgwMapbox.getIcon({ shape: 'star', color: 'red', strokeColor: 'orange', size: 60 });
       },
       selectable: false
     });
