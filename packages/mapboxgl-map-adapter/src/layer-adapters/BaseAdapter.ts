@@ -15,7 +15,7 @@ export abstract class BaseAdapter implements LayerAdapter {
     this.options = Object.assign({}, this.options, options);
   }
 
-  addLayer(options?): string {
+  addLayer(options?): any {
     return '';
   }
 }
