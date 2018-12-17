@@ -87,6 +87,8 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
       };
       const paint: any = await this.createPaintForType(opt.paint, type);
       if ('icon-image' in paint) {
+        // If true, the icon will be visible even if it collides with other previously drawn symbols.
+        paint['icon-allow-overlap'] = true;
         layerOpt.layout = { ...layerOpt.layout, ...paint };
         layerOpt.type = 'symbol';
       } else {
@@ -126,7 +128,7 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
       const mapboxPaint = {};
       const _paint = { ...PAINT, ...(paint || {}) };
       if (paint.type === 'icon') {
-        this._registrateImage(paint);
+        await this._registrateImage(paint);
         return {
           'icon-image': paint.html
         };
