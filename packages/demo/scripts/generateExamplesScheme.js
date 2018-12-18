@@ -136,7 +136,7 @@ function prepareHtml(html, package) {
       const isDirectLibLine = line.match(argRegEx);
       if (isDirectLibLine) {
         line = new Array(emptyCharsCount + 1).join(' ') +
-          `<script src="https://unpkg.com/@nextgis/${name}@${package.version}/${name}.js"></script>`;
+          `<script src="https://unpkg.com/@nextgis/${name}@${package.version}/lib/${name}.js"></script>`;
         cdnReplace = true;
       }
     }
