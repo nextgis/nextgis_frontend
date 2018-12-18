@@ -1,4 +1,4 @@
-import { LayerAdapter } from '@nextgis/webmap';
+import { LayerAdapter, OnLayerClickOptions } from '@nextgis/webmap';
 import {Map} from 'mapbox-gl';
 
 let ID = 1;
@@ -7,15 +7,21 @@ export abstract class BaseAdapter implements LayerAdapter {
 
   map: Map;
   name: string;
-  options;
+  options: any;
+  layer: string[];
 
-  constructor(map, options?) {
+  constructor(map: Map, options?: any) {
     this.map = map;
     this.name = options.id || String(ID++);
-    this.options = Object.assign({}, this.options, options);
+    this.options = {...this.options, ...options};
+    if (options.onLayerClick) {
+      this.onLayerClick = options.onLayerClick;
+    }
   }
 
-  addLayer(options?): any {
-    return '';
+  onLayerClick?(options: OnLayerClickOptions): Promise<any>;
+
+  addLayer(options?): string[] | Promise<string[]> {
+    return [''];
   }
 }

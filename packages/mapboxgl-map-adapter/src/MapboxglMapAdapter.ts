@@ -11,7 +11,7 @@ import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 
 type positions = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
 
-export class MapboxglMapAdapter implements MapAdapter {
+export class MapboxglMapAdapter implements MapAdapter<Map, string[]> {
 
   static layerAdapters = {
     TILE: TileAdapter,
@@ -84,48 +84,62 @@ export class MapboxglMapAdapter implements MapAdapter {
     // ignore
   }
 
-  showLayer(layerName: string) {
-    this._toggleLayer(layerName, true);
+  showLayer(layerIds: string[]) {
+    layerIds.forEach((layerId) => {
+      this._toggleLayer(layerId, true);
+    });
   }
 
-  hideLayer(layerName: string) {
-    this._toggleLayer(layerName, false);
+  hideLayer(layerIds: string[]) {
+    layerIds.forEach((layerId) => {
+      this._toggleLayer(layerId, false);
+    });
   }
 
-  removeLayer(layerId: string) {
-    this.map.removeLayer(layerId);
-    this.map.removeSource(layerId);
+  removeLayer(layerIds: string[]) {
+    layerIds.forEach((layerId) => {
+      this.map.removeLayer(layerId);
+      this.map.removeSource(layerId);
+    });
   }
 
-  setLayerOrder(layer, order, layers: { [x: string]: LayerMem }) {
-    const baseLayers = [];
-
-    const orderedLayers = Object.keys(layers).filter((x) => {
-      if (layers[x].baseLayer) {
-        baseLayers.push(x);
-        return false;
+  setLayerOrder(layerIds, order, layers: { [x: string]: LayerMem<string[]> }) {
+    const baseLayers: Array<LayerMem<string[]>> = [];
+    let orderedLayers: Array<LayerMem<string[]>> = [];
+    for (const l in layers) {
+      if (layers.hasOwnProperty(l)) {
+        const layer = layers[l];
+        if (layer.baseLayer) {
+          baseLayers.push(layer);
+        } else {
+          orderedLayers.push(layer);
+        }
       }
-      return true;
-    }).sort((a, b) => {
-      return layers[a].order - layers[b].order;
+    }
+
+    orderedLayers = orderedLayers.sort((a, b) => {
+      return a.order - b.order;
     });
 
     // normilize layer ordering
     baseLayers.forEach((x) => {
-      this.map.moveLayer(x, orderedLayers[0]);
+      x.layer.forEach((y) => this.map.moveLayer(y, orderedLayers[0].layer[0]));
     });
     for (let fry = 0; fry < orderedLayers.length; fry++) {
       const nextlayer = orderedLayers[fry + 1];
-      this.map.moveLayer(orderedLayers[fry], nextlayer);
+      const nextlayerId = nextlayer && nextlayer.layer[0] ;
+      orderedLayers[fry].layer.forEach((x) => this.map.moveLayer(x, nextlayerId));
     }
   }
 
-  setLayerOpacity(layerName: string, opacity: number) {
-    this.onMapLoad().then(() => {
-      const layer = this.map.getLayer(layerName);
-      if (layer) {
-        this.map.setPaintProperty(layerName, layer.type + '-opacity', opacity);
-      }
+  setLayerOpacity(layerIds: string[], opacity: number) {
+    layerIds.forEach((layerId) => {
+      this.onMapLoad().then(() => {
+        const layer = this.map.getLayer(layerId);
+        if (layer) {
+          this.map.setPaintProperty(layerId, layer.type + '-opacity', opacity);
+        }
+      });
     });
   }
 
@@ -165,7 +179,7 @@ export class MapboxglMapAdapter implements MapAdapter {
     this.emitter.emit('click', { latLng, pixel: { top: y, left: x } });
   }
 
-  private _toggleLayer(layerId, status) {
+  private _toggleLayer(layerId: string, status: boolean) {
     this.onMapLoad().then(() => {
       this.map.setLayoutProperty(layerId, 'visibility', status ? 'visible' : 'none');
     });

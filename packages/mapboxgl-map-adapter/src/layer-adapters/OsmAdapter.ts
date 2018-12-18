@@ -9,7 +9,7 @@ const OPTIONS = {
 
 export class OsmAdapter extends TileAdapter implements LayerAdapter {
 
-  addLayer(options?): string {
+  addLayer(options?): string[] {
     return super.addLayer(Object.assign({}, OPTIONS, options));
   }
 }

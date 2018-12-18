@@ -3,9 +3,8 @@ import { LatLng } from './BaseTypes';
 
 export interface OnLayerClickOptions {
   adapter: LayerAdapter;
-  layer: any;
   selected?: boolean;
-
+  layer?: any;
   feature?: Feature;
 }
 
@@ -91,20 +90,23 @@ export interface LayerAdapters {
   [name: string]: AdapterOptions;
 }
 
-export interface LayerAdapter<M = any, O = any> {
+export interface LayerAdapter<O = any, L = any, M = any> {
   name: string;
-  layer?: any;
+  layer?: L;
   opt?: M;
   selected?: boolean;
   addLayer(options: O): any | Promise<any>;
 
-  getLayers?(): Array<{feature?: Feature, layer: any}>;
+  showLayer?(layer: L): void;
+  hideLayer?(layer: L): void;
 
-  select?(findFeatureCb?: (opt: {layer, feature?: Feature }) => boolean): void;
-  unselect?(findFeatureCb?: (opt: {layer, feature?: Feature }) => boolean): void;
-  getSelected?(): Array<{layer, feature?: Feature}>;
+  getLayers?(): Array<{ feature?: Feature, layer: L }>;
 
-  filter?(cb: (opt: {layer, feature?: Feature }) => boolean): void;
+  select?(findFeatureCb?: (opt: { layer?: L, feature?: Feature }) => boolean): void;
+  unselect?(findFeatureCb?: (opt: { layer?: L, feature?: Feature }) => boolean): void;
+  getSelected?(): Array<{ layer?: L, feature?: Feature }>;
+
+  filter?(cb: (opt: { layer: L, feature?: Feature }) => boolean): void;
 
   onLayerClick?(opt: OnLayerClickOptions): Promise<any>;
 }

@@ -3,7 +3,7 @@ import { BaseAdapter } from './BaseAdapter';
 
 export class ImageAdapter extends BaseAdapter implements LayerAdapter {
 
-  addLayer(options?: ImageAdapterOptions): string {
+  addLayer(options?: ImageAdapterOptions): string[] {
 
     const opt = Object.assign({}, this.options, options || {});
 
@@ -32,6 +32,7 @@ export class ImageAdapter extends BaseAdapter implements LayerAdapter {
       paint: {}
     // @ts-ignore
     }, options.before);
-    return this.name;
+    this.layer = [this.name];
+    return this.layer;
   }
 }
