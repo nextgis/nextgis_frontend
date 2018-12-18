@@ -3,6 +3,7 @@
   "version": "0.9.1",
   "description": "Module for interaction with NGW (NextGis Web) server API",
   "main": "lib/ngw-connector.js",
+  "unpkg": "lib/ngw-connector.js",
   "types": "lib/index.d.ts",
   "dependencies": {
     "events": "*"

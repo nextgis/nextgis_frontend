@@ -3,6 +3,7 @@
   "version": "0.9.1",
   "description": "",
   "main": "lib/ngw-kit.js",
+  "unpkg": "lib/ngw-kit.js",
   "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/ngw-connector": "^0.9.1",
