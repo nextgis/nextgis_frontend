@@ -19,7 +19,6 @@ import { onMapLoad } from './decorators';
 import { fixUrlStr, deepmerge, detectGeometryType, createAsyncAdapter } from './utils';
 import { EventEmitter } from 'events';
 import { toWgs84 } from 'reproject';
-import { GeoJsonObject } from 'geojson';
 
 const epsg = {
   // tslint:disable-next-line:max-line-length
@@ -62,9 +61,6 @@ export default class NgwMap {
   static utils = { fixUrlStr };
   static decorators = { onMapLoad };
   static getIcon = getIcon;
-  static toWgs84 = (data: GeoJsonObject) => {
-    return toWgs84(data, epsg['EPSG:3857'], epsg);
-  }
 
   options: MapOptions = {
     target: 'map',
@@ -152,7 +148,7 @@ export default class NgwMap {
       const geojsonAdapterCb = this.connector.makeQuery('/api/resource/{id}/geojson', {
         id: options.id
       }).then((data) => {
-        data = NgwMap.toWgs84(data);
+        data = toWgs84(data, undefined, epsg);
         return this._updateGeojsonAdapterOptions({data, id: String(options.id)});
       });
       return this.addGeoJsonLayer(

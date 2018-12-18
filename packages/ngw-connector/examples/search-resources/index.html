@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Example</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.0.0/polyfill.js"></script>
+  <!-- <script src="https://unpkg.com/@nextgis/ngw-connector@latest"></script> -->
+  <script src="../../lib/ngw-connector.js"></script>
+</head>
+
+<body>
+
+  <label>Login: <input id="login" value="administrator" /></label>
+  <label>Password: <input id="password" value="administrator" type="password" /></label>
+
+  <button id="submit">Search resources</button>
+
+  <div id="result-wrap" style="display: none">
+    <p>Login status:</p>
+    <div id="login-status"></div>
+    <p>Resources:</p>
+    <div id="results"></div>
+  </div>
+
+  <script>
+    var login = document.getElementById('login');
+    var password = document.getElementById('password');
+    var submit = document.getElementById('submit');
+    var resultWrap = document.getElementById('result-wrap');
+    var resultElement = document.getElementById('results');
+    var loginStatusElement = document.getElementById('login-status');
+    // helper function to DOM update by json
+    var appendResponce = function (toElement, resp) {
+      toElement.innerHTML = '';
+      toElement.appendChild(document.createElement('pre')).innerHTML = JSON.stringify(resp, null, 2);
+    }
+    var connector = new NgwConnector({
+      baseUrl: 'http://dev.nextgis.com/sandbox',
+    });
+
+    submit.onclick = function () {
+      submit.disabled = true;
+      resultWrap.style.display = 'block';
+      loginStatusElement.innerHTML = 'Loading...';
+      resultElement.innerHTML = '';
+      // make authorization and get user info first
+      connector.getUserInfo({login: login.value, password: password.value}).then(function (userInfo) {
+        appendResponce(loginStatusElement, userInfo);
+        resultElement.innerHTML = 'Loading...';
+        connector.request('resource.search', {
+          cls: 'wmsserver_service',
+          owner_user__id: userInfo.id
+        }).then(function (data) {
+          // update DOM WITH search result
+          appendResponce(resultElement, data);
+          // make button activa again
+          submit.disabled = false;
+        });
+      }).catch(function (er) {
+        appendResponce(loginStatusElement, er);
+      });
+
+    }
+  </script>
+
+</body>
+
+</html>
