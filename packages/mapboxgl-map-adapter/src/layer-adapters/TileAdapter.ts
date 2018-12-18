@@ -5,7 +5,7 @@ let ID = 1;
 
 export class TileAdapter extends BaseAdapter implements LayerAdapter {
 
-  addLayer(options?): string {
+  addLayer(options?): string[] {
     this.name = options.id || 'tile-' + ID++;
     const opt = {...this.options, ...(options || {})};
 
@@ -35,6 +35,7 @@ export class TileAdapter extends BaseAdapter implements LayerAdapter {
         tileSize: opt && opt.tileSize || 256,
       },
     }, options.before);
-    return this.name;
+    this.layer = [this.name];
+    return this.layer;
   }
 }

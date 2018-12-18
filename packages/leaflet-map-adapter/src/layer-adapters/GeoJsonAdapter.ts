@@ -55,7 +55,7 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
   selected = false;
 
   private _layers: Array<{ feature, layer }> = [];
-  private _selectedLayers: any[] = [];
+  private _selectedLayers: Array<{ feature, layer }> = [];
 
   addLayer(options?: GeoJsonAdapterOptions) {
     this.options = options;

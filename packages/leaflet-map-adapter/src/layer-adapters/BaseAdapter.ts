@@ -12,7 +12,7 @@ export abstract class BaseAdapter implements LayerAdapter {
   constructor(map, options?) {
     this.map = map;
     this.name = options.id || String(ID++);
-    this.options = Object.assign({}, this.options, options);
+    this.options = {...this.options, ...options};
     if (options.onLayerClick) {
       this.onLayerClick = options.onLayerClick;
     }

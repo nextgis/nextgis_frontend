@@ -11,9 +11,9 @@ import { Type } from './utils/Type';
 import { MapControl, MapControls } from './interfaces/MapControl';
 import { Resolver } from 'dns';
 
-export interface LayerMem {
+export interface LayerMem<L = any> {
   id: string;
-  layer: any;
+  layer: L;
   onMap: boolean;
   order?: number;
   baseLayer?: boolean;
@@ -255,9 +255,17 @@ export class WebMap<M = any> {
       if (status && source) {
         const order = l.baseLayer ? 0 : l.order;
         this.mapAdapter.setLayerOrder(l.layer, order, this._layers);
-        this.mapAdapter.showLayer(l.layer);
+        if (l.adapter && l.adapter.showLayer) {
+          l.adapter.showLayer.call(l.adapter, l.layer);
+        } else {
+          this.mapAdapter.showLayer(l.layer);
+        }
       } else {
-        this.mapAdapter.hideLayer(l.layer);
+        if (l.adapter && l.adapter.hideLayer) {
+          l.adapter.hideLayer.call(l.adapter, l.layer);
+        } else {
+          this.mapAdapter.hideLayer(l.layer);
+        }
       }
     };
     const layer = this._layers[layerName];

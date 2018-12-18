@@ -23,7 +23,7 @@ import { getImage } from '../utils/image.icons';
 let ID = 1;
 
 interface Feature<G extends GeometryObject | null = Geometry, P = GeoJsonProperties> extends F<G, P> {
-  _paint_id?: number;
+  _rendrom_id?: number;
 }
 
 const allowedParams: Array<[string, string] | string> = ['color', 'opacity'];
@@ -52,16 +52,30 @@ for (const a in typeAlias) {
 
 const PAINT = {
   color: 'blue',
-  opacity: 1
+  opacity: 1,
+  radius: 10
 };
 
-export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
+export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter<GeoJsonAdapterOptions, string[]> {
 
+  selected: boolean;
+
+  private _selectionName?: string;
   private _features: Feature[] = [];
+  private _selectedFeatureIds: string[] = [];
+  private _data: Feature | FeatureCollection;
 
-  async addLayer(options?: GeoJsonAdapterOptions): Promise<string> {
+  private $onLayerClick?: () => void;
+
+  constructor(map, options?) {
+    super(map, options);
+    // bind methods for event listeners
+    this.$onLayerClick = this._onLayerClick.bind(this);
+  }
+
+  async addLayer(options?: GeoJsonAdapterOptions): Promise<string[]> {
     this.name = options.id || 'geojson-' + ID++;
-    const opt = { ...this.options, ...(options || {}) };
+    this.options = { ...this.options, ...(options || {}) };
 
     let type: GeoJsonAdapterLayerType = options.type;
 
@@ -70,37 +84,81 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
       type = typeAlias[detectedType];
     }
 
-    const data = this.filterGeometries(options.data, type) as any;
+    this._data = this.filterGeometries(options.data, type) as any;
     this._features.forEach((x, i) => {
-      x._paint_id = i;
+      x._rendrom_id = i;
+      x.properties._rendrom_id = i;
     });
-    if (data) {
-      const layerOpt: mapboxgl.Layer = {
-        id: String(this.name),
-        source: {
-          type: 'geojson',
-          data
-        },
-        layout: {
-          visibility: 'none',
-        },
-      };
-      const paint: any = await this.createPaintForType(opt.paint, type);
-      if ('icon-image' in paint) {
-        // If true, the icon will be visible even if it collides with other previously drawn symbols.
-        paint['icon-allow-overlap'] = true;
-        layerOpt.layout = { ...layerOpt.layout, ...paint };
-        layerOpt.type = 'symbol';
-      } else {
-        layerOpt.paint = paint;
-        layerOpt.type = type;
-
+    if (this._data) {
+      await this._getAddLayerOptions(this.name, this._data, options.paint, type);
+      this.layer = [this.name];
+      if (options.selectable || options.selectedPaint) {
+        this._selectionName = this.name + '-highlighted';
+        await this._getAddLayerOptions(this._selectionName, this._data, options.selectedPaint, type);
+        this.map.setFilter(this._selectionName, ['in', '_rendrom_id', '']);
+        this.layer.push(this._selectionName);
       }
-      this.map.addLayer(layerOpt);
-      return this.name;
+
+      this._addEventsListeners();
+
+      return this.layer;
     } else {
       throw new Error('No geometry for given type');
     }
+  }
+
+  getSelected() {
+    const features = [];
+    this._features.forEach((x) => {
+      if (this._selectedFeatureIds.indexOf(x.properties._rendrom_id) !== -1) {
+        features.push({ feature: x });
+      }
+    });
+    return features;
+  }
+
+  select(findFeatureFun?: (opt: { feature: Feature }) => boolean) {
+    if (findFeatureFun) {
+      const features = this._features.filter((x) => findFeatureFun({ feature: x }));
+      this._selectFeature(features);
+    } else if (!this.selected) {
+      this.selected = true;
+      this._selectFeature(this._features);
+    }
+  }
+
+  unselect(findFeatureFun?: (opt: { feature: Feature }) => boolean) {
+    if (findFeatureFun) {
+      const features = this._features.filter((x) => findFeatureFun({ feature: x }));
+      this._unselectFeature(features);
+    } else if (this.selected) {
+      this.selected = false;
+      this._unselectFeature(this._features);
+    }
+  }
+
+  private async _getAddLayerOptions(name: string, data: Feature | FeatureCollection, paint, type) {
+    const layerOpt: mapboxgl.Layer = {
+      id: String(name),
+      source: {
+        type: 'geojson',
+        data
+      },
+      layout: {
+        visibility: 'none',
+      },
+    };
+    const _paint: any = await this._createPaintForType(paint, type, name);
+    if ('icon-image' in _paint) {
+      // If true, the icon will be visible even if it collides with other previously drawn symbols.
+      _paint['icon-allow-overlap'] = true;
+      layerOpt.layout = { ...layerOpt.layout, ..._paint };
+      layerOpt.type = 'symbol';
+    } else {
+      layerOpt.paint = _paint;
+      layerOpt.type = type;
+    }
+    this.map.addLayer(layerOpt);
   }
 
   private filterGeometries(data: GeoJsonObject, type: GeoJsonAdapterLayerType): GeoJsonObject | boolean {
@@ -121,9 +179,13 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
     return data;
   }
 
-  private async createPaintForType(paint: GeoJsonAdapterLayerPaint | GetPaintCallback, type: GeoJsonAdapterLayerType) {
+  private async _createPaintForType(
+    paint: GeoJsonAdapterLayerPaint | GetPaintCallback,
+    type: GeoJsonAdapterLayerType,
+    name: string) {
+
     if (typeof paint === 'function') {
-      return await this._getPaintFromCallback(paint, type);
+      return await this._getPaintFromCallback(paint, type, name);
     } else {
       const mapboxPaint = {};
       const _paint = { ...PAINT, ...(paint || {}) };
@@ -153,19 +215,19 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
     }
   }
 
-  private async _getPaintFromCallback(paint: GetPaintCallback, type: GeoJsonAdapterLayerType) {
+  private async _getPaintFromCallback(paint: GetPaintCallback, type: GeoJsonAdapterLayerType, name: string) {
     const style: any = {};
     for (const feature of this._features) {
       const _paint = paint(feature);
       if (_paint.type === 'icon') {
         await this._registrateImage(_paint);
-        feature.properties['_icon-image'] = _paint.html;
-        style['icon-image'] = '{_icon-image}';
+        feature.properties['_icon-image-' + name] = _paint.html;
+        style['icon-image'] = `{_icon-image-${name}}`;
       } else {
         for (const p in _paint) {
           if (_paint.hasOwnProperty(p)) {
-            feature.properties['_paint_' + p] = _paint[p];
-            style[p] = ['get', '_paint_' + p];
+            feature.properties[`_paint_${p}_${name}`] = _paint[p];
+            style[p] = ['get', `_paint_${p}_${name}`];
           }
         }
       }
@@ -173,7 +235,7 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
     if ('icon-image' in style) {
       return style;
     }
-    const styleFromCb = this.createPaintForType(style, type);
+    const styleFromCb = this._createPaintForType(style, type, name);
     return styleFromCb;
   }
 
@@ -188,8 +250,68 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
       this.map.addImage(paint.html, image);
     }
   }
+
+  private _onLayerClick(e: mapboxgl.MapLayerMouseEvent) {
+    e.preventDefault();
+    const features = this.map.queryRenderedFeatures(e.point, { layers: this.layer }) as Feature[];
+    const feature = features[0];
+    if (feature) {
+      let isSelected = this._selectedFeatureIds.indexOf(feature.properties._rendrom_id) !== -1;
+      if (isSelected) {
+        if (this.options.unselectOnSecondClick) {
+          this._unselectFeature(feature);
+          isSelected = false;
+        }
+      } else {
+        this._selectFeature(feature);
+        isSelected = true;
+      }
+      if (this.onLayerClick) {
+        this.onLayerClick({
+          adapter: this,
+          feature,
+          selected: isSelected
+        });
+      }
+    }
+  }
+
+  private _selectFeature(feature: Feature | Feature[]) {
+    if (!this.options.multiselect) {
+      this._selectedFeatureIds = [];
+    }
+    [].concat(feature).forEach((f) => this._selectedFeatureIds.push(f.properties._rendrom_id));
+    this._setFiltered();
+  }
+
+  private _unselectFeature(feature: Feature | Feature[]) {
+    [].concat(feature).forEach((f) => {
+      const index = this._selectedFeatureIds.indexOf(f.properties._rendrom_id);
+      if (index !== -1) {
+        this._selectedFeatureIds.splice(index, 1);
+      }
+    });
+    this._setFiltered();
+  }
+
+  private _setFiltered() {
+    if (this._selectionName) {
+      const filterArray = ['_rendrom_id'].concat(this._selectedFeatureIds.length ? this._selectedFeatureIds : '');
+      this.map.setFilter(this._selectionName, ['in'].concat(filterArray));
+      this.map.setFilter(this.name, ['!in'].concat(filterArray));
+    }
+  }
+
+  private _addEventsListeners() {
+    if (this.options.selectable) {
+      this.layer.forEach((x) => {
+        this.map.on('click', x, this.$onLayerClick);
+      });
+    }
+  }
 }
 
+// Static functions
 function geometryFilter(geometry: GeoJsonGeometryTypes, type: GeoJsonAdapterLayerType): boolean {
   return backAliases[type].indexOf(geometry) !== -1;
 }
