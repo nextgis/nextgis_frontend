@@ -3,6 +3,7 @@
   "version": "0.9.1",
   "description": "",
   "main": "lib/ngw-map.js",
+  "unpkg": "lib/ngw-map.js",
   "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/icons": "^0.9.1",

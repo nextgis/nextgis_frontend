@@ -3,6 +3,7 @@
   "version": "0.9.1",
   "description": "",
   "main": "lib/ngw-ol.js",
+  "unpkg": "lib/ngw-ol.js",
   "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/ngw-map": "^0.9.1",
