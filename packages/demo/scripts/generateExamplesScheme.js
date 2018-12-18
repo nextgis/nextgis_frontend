@@ -45,7 +45,7 @@ function generate(source = '../') {
       }
     });
   const log = (item, n) => {
-    console.log(new Array(n + 1).join('-') + item.name);
+    // console.log(new Array(n + 1).join('-') + item.name);
     if (item.children && item.children.length) {
       n++
       item.children.forEach((x) => {
@@ -136,7 +136,7 @@ function prepareHtml(html, package) {
       const isDirectLibLine = line.match(argRegEx);
       if (isDirectLibLine) {
         line = new Array(emptyCharsCount + 1).join(' ') +
-          `<script src="https://unpkg.com/@nextgis/${name}@${package.version}"></script>`;
+          `<script src="https://unpkg.com/@nextgis/${name}@${package.version}/${name}.js"></script>`;
         cdnReplace = true;
       }
     }
