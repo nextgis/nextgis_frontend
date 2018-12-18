@@ -32,7 +32,7 @@ export interface BaseMapAdapter {
 
   setCenter(latLng: [number, number]): void;
   setZoom(zoom: number): void;
-  fit(extent: [number, number, number, number], options: FitOptions): void;
+  fit(extent: [number, number, number, number], options?: FitOptions): void;
   setRotation?(angle: number): void;
   setView?(lngLat: [number, number], zoom?: number): void;
 
