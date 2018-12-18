@@ -33,13 +33,13 @@ export interface BaseMapAdapter {
 
 }
 
-export interface MapAdapter<M = any> extends BaseMapAdapter {
+export interface MapAdapter<M = any, L = any> extends BaseMapAdapter {
 
   lonlatProjection?: string;
   displayProjection?: string;
   map: M;
   emitter: EventEmitter;
-  layerAdapters: { [name: string]: Type<LayerAdapter> };
+  layerAdapters: { [name: string]: Type<LayerAdapter<any, L, M>> };
 
   create(options?: MapOptions): void;
 
