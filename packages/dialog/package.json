@@ -3,6 +3,7 @@
   "version": "0.9.1",
   "description": "Modal window management",
   "main": "lib/dialog.js",
+  "unpkg": "lib/dialog.js",
   "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/webmap": "^0.9.1",

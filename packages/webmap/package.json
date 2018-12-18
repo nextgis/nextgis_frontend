@@ -3,6 +3,7 @@
   "version": "0.9.1",
   "description": "",
   "main": "lib/webmap.js",
+  "unpkg": "lib/webmap.js",
   "types": "lib/index.d.ts",
   "dependencies": {
     "@types/geojson": "^7946.0.4",

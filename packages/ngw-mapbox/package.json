@@ -3,6 +3,7 @@
   "version": "0.9.1",
   "description": "",
   "main": "lib/ngw-mapbox.js",
+  "unpkg": "lib/ngw-mapbox.js",
   "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/mapboxgl-map-adapter": "^0.9.1",
