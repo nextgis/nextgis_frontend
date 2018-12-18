@@ -3,7 +3,7 @@ import { AppSettings, StarterKit } from './interfaces/AppSettings';
 import { WebLayerEntry } from './WebLayerEntry';
 import { Keys } from './components/keys/Keys';
 import { EventEmitter } from 'events';
-import { MapAdapter, MapClickEvent, ControlPositions } from './interfaces/MapAdapter';
+import { MapAdapter, MapClickEvent, ControlPositions, FitOptions } from './interfaces/MapAdapter';
 import { RuntimeParams } from './interfaces/RuntimeParams';
 import { deepmerge } from './utils/lang';
 import { LayerAdapters, LayerAdapter, OnLayerClickOptions } from './interfaces/LayerAdapter';
@@ -140,9 +140,26 @@ export class WebMap<M = any> {
     return this;
   }
 
+  getZoom(): number {
+    return this.mapAdapter.getZoom();
+  }
+
+  setView(lngLat: [number, number], zoom) {
+    if (this.mapAdapter.setView) {
+      this.mapAdapter.setView(lngLat, zoom);
+    } else {
+      if (lngLat) {
+        this.mapAdapter.setCenter(lngLat);
+      }
+      if (zoom) {
+        this.mapAdapter.setZoom(zoom);
+      }
+    }
+  }
+
   // [extent_left, extent_bottom, extent_right, extent_top];
-  fit(e: [number, number, number, number]): this {
-    this.mapAdapter.fit(e);
+  fit(e: [number, number, number, number], options?: FitOptions): this {
+    this.mapAdapter.fit(e, options);
     return this;
   }
 
