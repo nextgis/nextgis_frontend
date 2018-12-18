@@ -1,4 +1,4 @@
-import { MapAdapter, LayerMem } from '@nextgis/webmap';
+import { MapAdapter, LayerMem, FitOptions } from '@nextgis/webmap';
 import { MvtAdapter } from './layer-adapters/MvtAdapter';
 import { Map } from 'mapbox-gl';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
@@ -74,10 +74,14 @@ export class MapboxglMapAdapter implements MapAdapter<Map, string[]> {
     this.map.setZoom(zoom);
   }
 
+  getZoom() {
+    return this.map.getZoom();
+  }
+
   // [extent_left, extent_bottom, extent_right, extent_top];
-  fit(e: [number, number, number, number]) {
+  fit(e: [number, number, number, number], options: FitOptions = {}) {
     // top, left, bottom, right
-    this.map.fitBounds([[e[0], e[1]], [e[2], e[3]]], { linear: true });
+    this.map.fitBounds([[e[0], e[1]], [e[2], e[3]]], { linear: true, ...options });
   }
 
   setRotation(angle: number) {

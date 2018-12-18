@@ -15,6 +15,10 @@ export interface MapClickEvent {
   source?: any;
 }
 
+export interface FitOptions {
+  maxZoom?: number;
+}
+
 export type ControlPositions = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
 
 export interface BaseMapAdapter {
@@ -28,8 +32,11 @@ export interface BaseMapAdapter {
 
   setCenter(latLng: [number, number]): void;
   setZoom(zoom: number): void;
-  fit(extent: [number, number, number, number]): void;
+  fit(extent: [number, number, number, number], options: FitOptions): void;
   setRotation?(angle: number): void;
+  setView?(lngLat: [number, number], zoom?: number): void;
+
+  getZoom(): number;
 
 }
 
