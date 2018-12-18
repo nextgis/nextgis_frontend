@@ -135,7 +135,11 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
   }
 
   getLayers() {
-    return this._layers;
+    return this._layers.map(({layer, feature}) => Object.create({
+      feature,
+      layer,
+      visible: layer._map
+    }));
   }
 
   private setPaintEachLayer(paint: GetPaintCallback | GeoJsonAdapterLayerPaint) {

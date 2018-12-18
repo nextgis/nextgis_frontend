@@ -71,6 +71,10 @@ export class LeafletMapAdapter implements MapAdapter {
     this.map.setZoom(zoom);
   }
 
+  getZoom() {
+    return this.map.getZoom();
+  }
+
   // [extent_left, extent_bottom, extent_right, extent_top];
   fit(e: [number, number, number, number]) {
     // top, left, bottom, right

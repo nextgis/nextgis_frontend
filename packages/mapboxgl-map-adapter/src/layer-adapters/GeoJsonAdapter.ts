@@ -63,6 +63,7 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter<GeoJsonA
   private _selectionName?: string;
   private _features: Feature[] = [];
   private _selectedFeatureIds: string[] = [];
+  private _filteredFeatureIds: string[] = [];
   private _data: Feature | FeatureCollection;
 
   private $onLayerClick?: () => void;
@@ -107,6 +108,25 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter<GeoJsonA
     }
   }
 
+  getLayers() {
+    const filtered = this._filteredFeatureIds.length;
+    return this._features.map((feature) => Object.create({
+      feature,
+      visible: filtered && this._filteredFeatureIds.indexOf(feature.properties._rendrom_id) !== -1
+    }));
+  }
+
+  filter(fun) {
+    this._filteredFeatureIds = [];
+    this._features.forEach((feature) => {
+      const ok = fun({ feature });
+      if (ok) {
+        this._filteredFeatureIds.push(feature.properties._rendrom_id);
+      }
+    });
+    this._updateFilter();
+  }
+
   getSelected() {
     const features = [];
     this._features.forEach((x) => {
@@ -122,9 +142,9 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter<GeoJsonA
       const features = this._features.filter((x) => findFeatureFun({ feature: x }));
       this._selectFeature(features);
     } else if (!this.selected) {
-      this.selected = true;
       this._selectFeature(this._features);
     }
+    this.selected = true;
   }
 
   unselect(findFeatureFun?: (opt: { feature: Feature }) => boolean) {
@@ -132,9 +152,9 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter<GeoJsonA
       const features = this._features.filter((x) => findFeatureFun({ feature: x }));
       this._unselectFeature(features);
     } else if (this.selected) {
-      this.selected = false;
       this._unselectFeature(this._features);
     }
+    this.selected = !!this._selectedFeatureIds.length;
   }
 
   private async _getAddLayerOptions(name: string, data: Feature | FeatureCollection, paint, type) {
@@ -281,7 +301,7 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter<GeoJsonA
       this._selectedFeatureIds = [];
     }
     [].concat(feature).forEach((f) => this._selectedFeatureIds.push(f.properties._rendrom_id));
-    this._setFiltered();
+    this._updateFilter();
   }
 
   private _unselectFeature(feature: Feature | Feature[]) {
@@ -291,14 +311,34 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter<GeoJsonA
         this._selectedFeatureIds.splice(index, 1);
       }
     });
-    this._setFiltered();
+    this._updateFilter();
   }
 
-  private _setFiltered() {
+  private _updateFilter() {
+    let selectionArray = [];
+    const filteredArray = [];
+
+    if (this._filteredFeatureIds.length) {
+      this._features.forEach((x) => {
+        const id = x.properties._rendrom_id;
+        if (this._filteredFeatureIds.indexOf(id) !== -1) {
+          if (this._selectedFeatureIds.indexOf(id) !== -1) {
+            selectionArray.push(id);
+          } else {
+            filteredArray.push(id);
+          }
+        }
+      });
+    } else {
+      selectionArray = this._selectedFeatureIds;
+    }
     if (this._selectionName) {
-      const filterArray = ['_rendrom_id'].concat(this._selectedFeatureIds.length ? this._selectedFeatureIds : '');
-      this.map.setFilter(this._selectionName, ['in'].concat(filterArray));
-      this.map.setFilter(this.name, ['!in'].concat(filterArray));
+      this.map.setFilter(this._selectionName, ['in', '_rendrom_id', ...selectionArray]);
+    }
+    if (this._filteredFeatureIds.length) {
+      this.map.setFilter(this.name, ['in', '_rendrom_id', ...filteredArray]);
+    } else {
+      this.map.setFilter(this.name, ['!in', '_rendrom_id', ...selectionArray]);
     }
   }
 

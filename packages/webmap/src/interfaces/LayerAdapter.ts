@@ -100,7 +100,7 @@ export interface LayerAdapter<O = any, L = any, M = any> {
   showLayer?(layer: L): void;
   hideLayer?(layer: L): void;
 
-  getLayers?(): Array<{ feature?: Feature, layer: L }>;
+  getLayers?(): Array<{ feature?: Feature, layer?: L, visible?: boolean }>;
 
   select?(findFeatureCb?: (opt: { layer?: L, feature?: Feature }) => boolean): void;
   unselect?(findFeatureCb?: (opt: { layer?: L, feature?: Feature }) => boolean): void;
