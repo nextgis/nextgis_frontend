@@ -1,4 +1,4 @@
-import NgwConnector, { AuthOptions } from '@nextgis/ngw-connector';
+import NgwConnector, { Credentials } from '@nextgis/ngw-connector';
 import { EventEmitter } from 'events';
 import { evented, onLoad } from './decorators';
 import Dialog from '@nextgis/dialog';
@@ -293,10 +293,10 @@ export class NgwUploader {
     this.emitter.emit('load');
   }
 
-  private _showLoginDialog(defAuth?: AuthOptions): Promise<AuthOptions> {
+  private _showLoginDialog(defAuth?: Credentials): Promise<Credentials> {
     return new Promise((resolve, reject) => {
       const dialog = new Dialog();
-      const onResolve = (auth: AuthOptions) => {
+      const onResolve = (auth: Credentials) => {
         dialog.close();
         resolve(auth);
       };
@@ -310,7 +310,7 @@ export class NgwUploader {
     });
   }
 
-  private _createDialogHtml(defAuth: AuthOptions = {}, resolve, reject): HTMLElement {
+  private _createDialogHtml(defAuth: Credentials = {}, resolve, reject): HTMLElement {
     const { login, password } = defAuth;
     const form = document.createElement('div');
     form.className = 'ngw-uploader__login-dialog--form';
@@ -329,7 +329,7 @@ export class NgwUploader {
     const passwordElement = form.getElementsByClassName('password')[0] as HTMLInputElement;
     const loginBtn = form.getElementsByClassName('login')[0] as HTMLButtonElement;
     const cancelBtn = form.getElementsByClassName('cancel')[0] as HTMLButtonElement;
-    const getAuthOpt: () => AuthOptions = () => {
+    const getAuthOpt: () => Credentials = () => {
       return {
         login: loginElement.value,
         password: passwordElement.value

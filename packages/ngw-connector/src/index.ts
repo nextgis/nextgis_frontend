@@ -5,7 +5,7 @@ import { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
 import {
   NgwConnectorOptions, Router,
   RequestItemsResponseMap, RequestOptions,
-  Params, LoadingQueue, UserInfo,
+  Params, LoadingQueue, UserInfo, Credentials
 } from './interfaces';
 import { loadJSON, template } from './utils';
 import { EventEmitter } from 'events';
@@ -38,7 +38,7 @@ export default class NgwConnector {
       if (this.options.auth) {
         const { login, password } = this.options.auth;
         if (login && password) {
-          await this.getUserInfo();
+          await this.getUserInfo({ login, password });
         }
       }
       return await this.makeQuery(this.options.route, {}, {}).then((route) => {
@@ -48,10 +48,13 @@ export default class NgwConnector {
     }
   }
 
-  getUserInfo(): Promise<any> {
-    // Do not use request('auth.current_user') to vaoid circular-references
+  getUserInfo(credentials: Credentials): Promise<UserInfo> {
+    if (credentials) {
+      this.options.auth = credentials;
+    }
+    // Do not use request('auth.current_user') to avoid circular-references
     return this.makeQuery('/api/component/auth/current_user', {}, {
-      headers: this.getAuthorizationHeaders(),
+      headers: this.getAuthorizationHeaders(credentials),
       withCredentials: true
     }).then((data: UserInfo) => {
       this.user = data;
@@ -63,15 +66,15 @@ export default class NgwConnector {
     });
   }
 
-  getAuthorizationHeaders() {
-    const client = this.makeClientId();
+  getAuthorizationHeaders(credentials?: Credentials) {
+    const client = this.makeClientId(credentials);
     return {
       'Authorization': 'Basic ' + client
     };
   }
 
-  makeClientId() {
-    const { login, password } = this.options.auth;
+  makeClientId(credentials?: Credentials) {
+    const { login, password } = credentials || this.options.auth;
     return window.btoa(unescape(encodeURIComponent(`${login}:${password}`)));
   }
 
@@ -97,6 +100,14 @@ export default class NgwConnector {
                 }
               }
               url = template(url, replaceParams);
+            } else if (params) {
+              const paramArray = [];
+              for (const p in params) {
+                if (params.hasOwnProperty(p)) {
+                  paramArray.push(`${p}=${params[p]}`);
+                }
+              }
+              url = url + '/?' + paramArray.join('&');
             }
             return this.makeQuery(url, params, options);
           }

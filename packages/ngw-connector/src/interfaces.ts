@@ -35,7 +35,7 @@ export interface RequestItemsResponseMap {
   [x: string]: { [x: string]: any };
 }
 
-export interface AuthOptions {
+export interface Credentials {
   login?: string;
   password?: string;
 }
@@ -43,7 +43,7 @@ export interface AuthOptions {
 export interface NgwConnectorOptions {
   route?: string;
   baseUrl?: string;
-  auth?: AuthOptions;
+  auth?: Credentials;
 }
 
 export interface RequestHeaders {

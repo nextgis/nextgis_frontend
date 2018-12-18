@@ -25,6 +25,7 @@ export interface RequestItemsParamsMap {
   'auth.group.delete': { id: number };
   'webmap.display': { id: number };
   'qgis.vector_style_qml': { id: number };
+  'resource.search': {[param: string]: string};
   'resource.create': { id: number };
   'auth.user.create': null;
   'render.image': null;
