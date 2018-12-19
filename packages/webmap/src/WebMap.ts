@@ -9,7 +9,6 @@ import { deepmerge } from './utils/lang';
 import { LayerAdapters, LayerAdapter, OnLayerClickOptions } from './interfaces/LayerAdapter';
 import { Type } from './utils/Type';
 import { MapControl, MapControls } from './interfaces/MapControl';
-import { Resolver } from 'dns';
 
 export interface LayerMem<L = any> {
   id: string;
@@ -20,7 +19,7 @@ export interface LayerMem<L = any> {
   adapter: LayerAdapter;
 }
 
-export class WebMap<M = any> {
+export class WebMap<M = any, L = any, C = any> {
 
   options: MapOptions;
 
@@ -184,10 +183,16 @@ export class WebMap<M = any> {
     return layerMem && layerMem.onMap;
   }
 
-  addControl<C extends keyof MapControls>(
-    controlDef: C | MapControl,
+  createControl(control: MapControl): C {
+    if (this.mapAdapter.createControl) {
+      return this.mapAdapter.createControl(control);
+    }
+  }
+
+  addControl<K extends keyof MapControls>(
+    controlDef: K | MapControl,
     position: ControlPositions,
-    options?: MapControls[C]) {
+    options?: MapControls[K]) {
 
     return this.mapAdapter.addControl(controlDef, position, options);
   }

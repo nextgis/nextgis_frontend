@@ -1,16 +1,17 @@
-import { MapAdapter, MapOptions, LayerMem } from '@nextgis/webmap';
+import { MapAdapter, MapOptions, LayerMem, MapControl } from '@nextgis/webmap';
 import { Map, Control, Layer, GridLayer } from 'leaflet';
 import { EventEmitter } from 'events';
 import { TileAdapter } from './layer-adapters/TileAdapter';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 import { AttributionControl } from './controls/Attribution';
 import { ImageAdapter } from './layer-adapters/ImageAdapter';
+import { createControl } from './controls/createControl';
 
 export interface LeafletMapAdapterOptions extends MapOptions {
   id?: string;
 }
 
-export class LeafletMapAdapter implements MapAdapter {
+export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
 
   static layerAdapters = {
     IMAGE: ImageAdapter,
@@ -85,7 +86,11 @@ export class LeafletMapAdapter implements MapAdapter {
     return LeafletMapAdapter.layerAdapters[name];
   }
 
-  addControl(controlDef, position, options) {
+  createControl(control: MapControl) {
+    return createControl(control);
+  }
+
+  addControl(controlDef, position: string, options?) {
     let control;
     if (typeof controlDef === 'string') {
       const engine = LeafletMapAdapter.controlAdapters[controlDef];
