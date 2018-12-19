@@ -346,6 +346,13 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter<GeoJsonA
     if (this.options.selectable) {
       this.layer.forEach((x) => {
         this.map.on('click', x, this.$onLayerClick);
+
+        this.map.on('mousemove', x, () => {
+          this.map.getCanvas().style.cursor = 'pointer';
+        });
+        this.map.on('mouseleave', x, () => {
+          this.map.getCanvas().style.cursor = '';
+        });
       });
     }
   }
