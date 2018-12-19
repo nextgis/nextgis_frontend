@@ -40,7 +40,7 @@ export interface BaseMapAdapter {
 
 }
 
-export interface MapAdapter<M = any, L = any> extends BaseMapAdapter {
+export interface MapAdapter<M = any, L = any, C = any> extends BaseMapAdapter {
 
   lonlatProjection?: string;
   displayProjection?: string;
@@ -54,10 +54,12 @@ export interface MapAdapter<M = any, L = any> extends BaseMapAdapter {
 
   getContainer(): HTMLElement;
 
-  addControl<C extends keyof MapControls>(
-    controlName: C | MapControl,
+  createControl?(control: MapControl): C;
+
+  addControl<K extends keyof MapControls>(
+    controlName: K | MapControl,
     position: ControlPositions,
-    options?: MapControls[C]): any;
+    options?: MapControls[K]): any;
 
   onMapClick(evt: MapClickEvent): void;
 
