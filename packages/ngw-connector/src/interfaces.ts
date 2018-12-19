@@ -7,8 +7,12 @@ export interface FileMeta {
   size: number;
 }
 
-interface FileUploadResp {
+export interface FileUploadResp {
   upload_meta: FileMeta[];
+}
+
+export interface PyramidRoute {
+  [requestItemName: string]: string[];
 }
 
 interface ResourceCreatedRest {
@@ -29,6 +33,7 @@ export interface Params {
 }
 
 export interface RequestItemsResponseMap {
+  'pyramid.route': PyramidRoute;
   'resource.item': ResourceItem;
   'resource.child': any;
   'file_upload.upload': FileUploadResp;

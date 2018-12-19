@@ -5,7 +5,7 @@ import { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
 import {
   NgwConnectorOptions, Router,
   RequestItemsResponseMap, RequestOptions,
-  Params, LoadingQueue, UserInfo, Credentials
+  Params, LoadingQueue, UserInfo, Credentials, PyramidRoute
 } from './interfaces';
 import { loadJSON, template } from './utils';
 import { EventEmitter } from 'events';
@@ -23,7 +23,7 @@ export default class NgwConnector {
 
   user: UserInfo;
   emitter = new EventEmitter();
-  private route;
+  private route: PyramidRoute;
   private _loadingQueue: { [name: string]: LoadingQueue } = {};
   private _loadingStatus = {};
 
@@ -55,7 +55,7 @@ export default class NgwConnector {
     // Do not use request('auth.current_user') to avoid circular-references
     return this.makeQuery('/api/component/auth/current_user', {}, {
       headers: this.getAuthorizationHeaders(credentials),
-      withCredentials: true
+      // withCredentials: true
     }).then((data: UserInfo) => {
       this.user = data;
       this.emitter.emit('login', data);
@@ -100,15 +100,21 @@ export default class NgwConnector {
                 }
               }
               url = template(url, replaceParams);
-            } else if (params) {
+            }
+
+            // Non-obvious way ti transfer part of the parameters from `params`
+            // to the URL string
+            // left for backward compatibility, need to be rewritten щ куьщмув
+            if (params) {
               const paramArray = [];
               for (const p in params) {
-                if (params.hasOwnProperty(p)) {
+                if (params.hasOwnProperty(p) && apiItem.indexOf(p) === -1 ) {
                   paramArray.push(`${p}=${params[p]}`);
                 }
               }
               url = url + '/?' + paramArray.join('&');
             }
+
             return this.makeQuery(url, params, options);
           }
         }
@@ -123,6 +129,17 @@ export default class NgwConnector {
 
     options = options || {};
     options.method = 'POST';
+    options.nocache = true;
+    return this.request(name, params, options);
+  }
+
+  get<K extends keyof RequestItemsParamsMap>(
+    name: K,
+    options?: RequestOptions,
+    params?: RequestItemsParamsMap[K] | {}): Promise<RequestItemsResponseMap[K]> {
+
+    options = options || {};
+    options.method = 'GET';
     options.nocache = true;
     return this.request(name, params, options);
   }
