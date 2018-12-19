@@ -30,6 +30,8 @@ function insertSvg(width, height, stroke = 0, content?) {
   const svg = `<svg
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
+    width="${width}"
+    height="${height}"
     viewBox="-${s} -${s} ${width + stroke} ${height + stroke}"
   >${content}</svg>`;
   const oParser = new DOMParser();
