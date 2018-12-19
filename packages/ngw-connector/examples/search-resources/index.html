@@ -24,7 +24,7 @@
   <label>Login: <input id="login" value="guest" /></label>
   <label>Password: <input id="password" value="" type="password" /></label>
   <label class="mb">Class:
-    <select id="select-type">
+    <select id="select-class">
       <option>resource_group</option>
       <option>postgis_layer</option>
       <option selected>wmsserver_service</option>
@@ -42,8 +42,10 @@
       <option>wmsclient_layer</option>
       <option>wmsclient_connection</option>
       <option>formbuilder_form</option>
-      </option>
     </select>
+  </label>
+  <label class="mb">Full serialization:
+    <input id="full-serialization" type="checkbox" checked/>
   </label>
 
   <button class="mb" id="submit">Search resources</button>
@@ -59,7 +61,8 @@
     var login = document.getElementById('login');
     var password = document.getElementById('password');
     var ngwUrl = document.getElementById('ngw-url');
-    var typeSelect = document.getElementById('select-type')
+    var classSelect = document.getElementById('select-class')
+    var fullSerialization = document.getElementById('full-serialization');
     var submit = document.getElementById('submit');
     var resultWrap = document.getElementById('result-wrap');
     var resultElement = document.getElementById('results');
@@ -83,8 +86,11 @@
         appendResponce(loginStatusElement, userInfo);
         resultElement.innerHTML = 'Loading...';
         connector.request('resource.search', {
-            cls: typeSelect.value,
-            owner_user__id: userInfo.id
+            cls: classSelect.value,
+            owner_user__id: userInfo.id,
+            // optional parameter to to control the number of parameters in the response
+            // may be full and resource, resource is default value
+            serialization: fullSerialization.checked ? 'full' : 'resource'
         }).then(function (data) {
           // update the DOM from the search result
           appendResponce(resultElement, data);
