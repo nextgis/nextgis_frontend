@@ -108,11 +108,13 @@ export default class NgwConnector {
             if (params) {
               const paramArray = [];
               for (const p in params) {
-                if (params.hasOwnProperty(p) && apiItem.indexOf(p) === -1 ) {
+                if (params.hasOwnProperty(p) && apiItem.indexOf(p) === -1) {
                   paramArray.push(`${p}=${params[p]}`);
                 }
               }
-              url = url + '/?' + paramArray.join('&');
+              if (paramArray.length) {
+                url = url + '/?' + paramArray.join('&');
+              }
             }
 
             return this.makeQuery(url, params, options);
