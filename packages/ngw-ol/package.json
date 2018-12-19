@@ -1,12 +1,12 @@
 {
   "name": "@nextgis/ngw-ol",
-  "version": "0.9.5",
+  "version": "0.9.6",
   "description": "",
   "main": "lib/ngw-ol.js",
   "unpkg": "lib/ngw-ol.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/ngw-map": "^0.9.5",
+    "@nextgis/ngw-map": "^0.9.6",
     "@nextgis/ol-map-adapter": "^0.9.2",
     "events": "*",
     "ol": "^5.3.0"
