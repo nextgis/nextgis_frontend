@@ -9,36 +9,44 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.0.0/polyfill.js"></script>
   <!-- <script src="https://unpkg.com/@nextgis/ngw-connector@latest"></script> -->
   <script src="../../lib/ngw-connector.js"></script>
+  <style>
+    .mb {
+      display: block;
+      margin: 10px 0;
+    }
+  </style>
 </head>
 
 <body>
 
+  <label class="mb">NGW URL: <input id="ngw-url" style="width: 300px" value="http://dev.nextgis.com/sandbox" disabled/></label>
+
   <label>Login: <input id="login" value="guest" /></label>
   <label>Password: <input id="password" value="" type="password" /></label>
-  <label>Type:
+  <label class="mb">Class:
     <select id="select-type">
-        <option>resource_group</option>
-        <option>postgis_layer</option>
-        <option selected>wmsserver_service</option>
-        <option>baselayers</option>
-        <option>postgis_connection</option>
-        <option>webmap</option>
-        <option>wfsserver_service</option>
-        <option>vector_layer</option>
-        <option>raster_layer</option>
-        <option>mapserver_style</option>
-        <option>qgis_vector_style</option>
-        <option>raster_style</option>
-        <option>file_bucket</option>
-        <option>lookup_table</option>
-        <option>wmsclient_layer</option>
-        <option>wmsclient_connection</option>
-        <option>formbuilder_form</option>
+      <option>resource_group</option>
+      <option>postgis_layer</option>
+      <option selected>wmsserver_service</option>
+      <option>baselayers</option>
+      <option>postgis_connection</option>
+      <option>webmap</option>
+      <option>wfsserver_service</option>
+      <option>vector_layer</option>
+      <option>raster_layer</option>
+      <option>mapserver_style</option>
+      <option>qgis_vector_style</option>
+      <option>raster_style</option>
+      <option>file_bucket</option>
+      <option>lookup_table</option>
+      <option>wmsclient_layer</option>
+      <option>wmsclient_connection</option>
+      <option>formbuilder_form</option>
       </option>
     </select>
   </label>
-  <button id="submit">Search resources</button>
 
+  <button class="mb" id="submit">Search resources</button>
 
   <div id="result-wrap" style="display: none">
     <p>Login status:</p>
@@ -50,18 +58,19 @@
   <script>
     var login = document.getElementById('login');
     var password = document.getElementById('password');
+    var ngwUrl = document.getElementById('ngw-url');
     var typeSelect = document.getElementById('select-type')
     var submit = document.getElementById('submit');
     var resultWrap = document.getElementById('result-wrap');
     var resultElement = document.getElementById('results');
     var loginStatusElement = document.getElementById('login-status');
-    // helper function to DOM update by json
+    // helper function for updating DOM from json
     var appendResponce = function (toElement, resp) {
       toElement.innerHTML = '';
       toElement.appendChild(document.createElement('pre')).innerHTML = JSON.stringify(resp, null, 2);
     }
     var connector = new NgwConnector({
-      baseUrl: 'http://dev.nextgis.com/sandbox',
+      baseUrl: ngwUrl.value,
     });
 
     submit.onclick = function () {
@@ -70,14 +79,16 @@
       loginStatusElement.innerHTML = 'Loading...';
       resultElement.innerHTML = '';
       // make authorization and get user info first
-      connector.getUserInfo({login: login.value, password: password.value}).then(function (userInfo) {
+      connector.getUserInfo({ login: login.value, password: password.value }).then(function (userInfo) {
         appendResponce(loginStatusElement, userInfo);
         resultElement.innerHTML = 'Loading...';
-        connector.request('resource.search', {
-          cls: typeSelect.value,
-          owner_user__id: userInfo.id
+        connector.get('resource.search', {
+          data: {
+            cls: typeSelect.value,
+            owner_user__id: userInfo.id
+          }
         }).then(function (data) {
-          // update DOM WITH search result
+          // update the DOM from the search result
           appendResponce(resultElement, data);
           // make button activa again
           submit.disabled = false;
