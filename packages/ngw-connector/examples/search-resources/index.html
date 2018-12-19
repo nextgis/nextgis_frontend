@@ -82,11 +82,9 @@
       connector.getUserInfo({ login: login.value, password: password.value }).then(function (userInfo) {
         appendResponce(loginStatusElement, userInfo);
         resultElement.innerHTML = 'Loading...';
-        connector.get('resource.search', {
-          data: {
+        connector.request('resource.search', {
             cls: typeSelect.value,
             owner_user__id: userInfo.id
-          }
         }).then(function (data) {
           // update the DOM from the search result
           appendResponce(resultElement, data);
