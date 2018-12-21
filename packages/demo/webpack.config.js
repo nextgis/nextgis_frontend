@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TSLintPlugin = require('tslint-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const generateExamples = require('./scripts/generateExamplesScheme');
 const utils = require('../../build/utils');
 
@@ -76,8 +77,9 @@ module.exports = (env, argv) => {
       template: 'src/index.html',
       filename: 'index.html',
       title: 'NextGIS Frontend',
-      favicon: './src/images/favicon.ico',
+      // favicon: './src/images/favicon.ico',
     }),
+    new FaviconsWebpackPlugin('./src/images/logo.png'),
 
     new VueLoaderPlugin(),
     new VuetifyLoaderPlugin(),
