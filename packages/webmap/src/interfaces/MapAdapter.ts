@@ -1,7 +1,7 @@
 import { LayerAdapter } from './LayerAdapter';
 import { Type } from '../utils/Type';
 import { EventEmitter } from 'events';
-import { MapControls, MapControl } from './MapControl';
+import { MapControls, MapControl, CreateControlOptions, CreateButtonControlOptions } from './MapControl';
 import { MapOptions } from './WebMapApp';
 import { LayerMem } from '../WebMap';
 
@@ -54,7 +54,8 @@ export interface MapAdapter<M = any, L = any, C = any> extends BaseMapAdapter {
 
   getContainer(): HTMLElement;
 
-  createControl?(control: MapControl): C;
+  createControl?(control: MapControl, options?: CreateControlOptions): C;
+  createButtonControl?(options: CreateButtonControlOptions): C;
 
   addControl<K extends keyof MapControls>(
     controlName: K | any,

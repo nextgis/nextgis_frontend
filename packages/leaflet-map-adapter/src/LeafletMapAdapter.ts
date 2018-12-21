@@ -1,4 +1,4 @@
-import { MapAdapter, MapOptions, LayerMem, MapControl } from '@nextgis/webmap';
+import { MapAdapter, MapOptions, LayerMem, MapControl, CreateControlOptions, CreateButtonControlOptions } from '@nextgis/webmap';
 import { Map, Control, Layer, GridLayer } from 'leaflet';
 import { EventEmitter } from 'events';
 import { TileAdapter } from './layer-adapters/TileAdapter';
@@ -6,6 +6,7 @@ import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 import { AttributionControl } from './controls/Attribution';
 import { ImageAdapter } from './layer-adapters/ImageAdapter';
 import { createControl } from './controls/createControl';
+import { createButtonControl } from './controls/createButtonControl';
 
 export interface LeafletMapAdapterOptions extends MapOptions {
   id?: string;
@@ -86,8 +87,12 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     return LeafletMapAdapter.layerAdapters[name];
   }
 
-  createControl(control: MapControl) {
-    return createControl(control);
+  createControl(control: MapControl, options: CreateControlOptions) {
+    return createControl(control, options);
+  }
+
+  createButtonControl(options: CreateButtonControlOptions) {
+    return createButtonControl(options);
   }
 
   addControl(controlDef, position: string, options?) {

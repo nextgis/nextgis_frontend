@@ -35,3 +35,12 @@ export interface MapControl<M extends any = any> {
   onRemove(map?: M): any;
 
 }
+
+export interface CreateButtonControlOptions {
+  html: string | HTMLElement;
+  onClick: () => void;
+}
+
+export interface CreateControlOptions {
+  bar?: boolean;
+}

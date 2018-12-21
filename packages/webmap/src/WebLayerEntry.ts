@@ -67,7 +67,7 @@ export class WebLayerEntry extends Entry<EntryOptions> {
     if (newLayer) {
       item._layer = newLayer;
       if (item.item_type === 'layer' && item.layer_enabled) {
-        this.properties.get('visibility').set(true);
+        this.properties.property('visibility').set(true);
       }
     } else {
       // this.properties.get('visibility').set(true);
