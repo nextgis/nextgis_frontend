@@ -1,6 +1,6 @@
-import { MapAdapter, LayerMem, FitOptions } from '@nextgis/webmap';
+import { MapAdapter, LayerMem, FitOptions, MapControl, ControlPositions } from '@nextgis/webmap';
 import { MvtAdapter } from './layer-adapters/MvtAdapter';
-import { Map } from 'mapbox-gl';
+import { Map, IControl, Control } from 'mapbox-gl';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
 import { TileAdapter } from './layer-adapters/TileAdapter';
 import { EventEmitter } from 'events';
@@ -8,10 +8,11 @@ import { ZoomControl } from './controls/ZoomControl';
 import { CompassControl } from './controls/CompassControl';
 import { AttributionControl } from './controls/AttributionControl';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
+import { createControl } from './controls/createControl';
 
-type positions = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
+type TControl = new (options?) => IControl;
 
-export class MapboxglMapAdapter implements MapAdapter<Map, string[]> {
+export class MapboxglMapAdapter implements MapAdapter<Map, string[], IControl> {
 
   static layerAdapters = {
     TILE: TileAdapter,
@@ -21,7 +22,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, string[]> {
     GEOJSON: GeoJsonAdapter,
   };
 
-  static controlAdapters = {
+  static controlAdapters: {[name: string]: any} = {
     ZOOM: ZoomControl,
     COMPASS: CompassControl,
     ATTRIBUTION: AttributionControl,
@@ -160,8 +161,12 @@ export class MapboxglMapAdapter implements MapAdapter<Map, string[]> {
     });
   }
 
-  addControl(controlDef, position: positions, options) {
-    let control;
+  createControl(control: MapControl) {
+    return createControl(control);
+  }
+
+  addControl(controlDef: string | IControl, position: ControlPositions, options) {
+    let control: IControl;
     if (typeof controlDef === 'string') {
       const engine = MapboxglMapAdapter.controlAdapters[controlDef];
       if (engine) {
