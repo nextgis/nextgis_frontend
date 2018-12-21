@@ -8,7 +8,7 @@ import { RuntimeParams } from './interfaces/RuntimeParams';
 import { deepmerge } from './utils/lang';
 import { LayerAdapters, LayerAdapter, OnLayerClickOptions } from './interfaces/LayerAdapter';
 import { Type } from './utils/Type';
-import { MapControl, MapControls } from './interfaces/MapControl';
+import { MapControl, MapControls, CreateControlOptions, CreateButtonControlOptions } from './interfaces/MapControl';
 
 export interface LayerMem<L = any> {
   id: string;
@@ -183,9 +183,15 @@ export class WebMap<M = any, L = any, C = any> {
     return layerMem && layerMem.onMap;
   }
 
-  createControl(control: MapControl): C {
+  createControl(control: MapControl, options: CreateControlOptions): C {
     if (this.mapAdapter.createControl) {
-      return this.mapAdapter.createControl(control);
+      return this.mapAdapter.createControl(control, options);
+    }
+  }
+
+  createButtonControl(options: CreateButtonControlOptions) {
+    if (this.mapAdapter.createControl) {
+      return this.mapAdapter.createButtonControl(options);
     }
   }
 
@@ -271,7 +277,11 @@ export class WebMap<M = any, L = any, C = any> {
     return parseFloat(scale) / (mpu * this.IPM * this.DPI);
   }
 
-  toggleLayer(layerName: string, status: boolean) {
+  toggleLayer(layerName: string, status?: boolean) {
+    const layer = this._layers[layerName];
+    if (status === undefined) {
+      status = !layer.onMap;
+    }
     const action = (source, l: LayerMem) => {
       l.onMap = status;
       if (status && source) {
@@ -290,7 +300,6 @@ export class WebMap<M = any, L = any, C = any> {
         }
       }
     };
-    const layer = this._layers[layerName];
     if (layer && layer.onMap !== status) {
       if (this.mapAdapter.map) {
         action(this.mapAdapter, layer);

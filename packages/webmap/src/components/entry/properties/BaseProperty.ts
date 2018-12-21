@@ -64,9 +64,9 @@ export class BaseProperty<V = any, O extends IEntryBasePropertyOptions<V> = IEnt
       const parents = this.entry.tree.getParents();
       if (parents) {
         const isBlocked = parents.find((x: Entry) => {
-          const parentProp = x.properties.get(this.name);
+          const parentProp = x.properties.property(this.name);
           if (parentProp) {
-            return !parentProp.value();
+            return !parentProp.get();
           }
         });
         this._blocked = !!isBlocked;
@@ -85,7 +85,7 @@ export class BaseProperty<V = any, O extends IEntryBasePropertyOptions<V> = IEnt
   }
 
   // shortcut for getValue
-  value(): V {
+  get(): V {
     return this.getValue();
   }
 
@@ -125,7 +125,7 @@ export class BaseProperty<V = any, O extends IEntryBasePropertyOptions<V> = IEnt
     this.emitter.emit('change', {value, options});
     const parents = this.entry.tree.getParents();
     parents.forEach((x) => {
-      const prop = x.properties.get(this.name);
+      const prop = x.properties.property(this.name);
       if (prop) {
         prop.emitter.emit('change-tree', {value, options, entry: this.entry});
       }

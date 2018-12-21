@@ -20,7 +20,7 @@ export class CheckProperty<V = boolean, O = ICheckOptions> extends BaseProperty<
 
   constructor(name, entry, options) {
     super(name, entry, Object.assign({}, CheckProperty.options, options));
-    this.set(this.value());
+    this.set(this.get());
   }
 
   update(value: boolean, options: ICheckOptions) {
@@ -29,7 +29,7 @@ export class CheckProperty<V = boolean, O = ICheckOptions> extends BaseProperty<
       if (bubble) {
         this.unBlock(options);
         const parent = this.getParent();
-        const property = parent && parent.properties.get(this.name);
+        const property = parent && parent.properties.property(this.name);
         if (property) {
           property.set(value, Object.assign({}, options, {bubble: true, propagation: false}));
         }
@@ -47,7 +47,7 @@ export class CheckProperty<V = boolean, O = ICheckOptions> extends BaseProperty<
   }
 
   getHierarchyValue() {
-    return this.value() && this.getParents().every((x) => {
+    return this.get() && this.getParents().every((x) => {
       const property = x.properties[this.name];
       return property && property.get();
     });
@@ -106,14 +106,14 @@ export class CheckProperty<V = boolean, O = ICheckOptions> extends BaseProperty<
   }
 
   _blockChild(options: ICheckOptions, entry: Entry) {
-    const prop = entry.properties.get(this.name) as CheckProperty;
+    const prop = entry.properties.property(this.name) as CheckProperty;
     if (prop.block) {
       prop.block(options);
     }
   }
 
   _unBlockChild(options: ICheckOptions, entry: Entry) {
-    const prop = entry.properties.get(this.name) as CheckProperty;
+    const prop = entry.properties.property(this.name) as CheckProperty;
     if (prop.unBlock) {
       prop.unBlock(options);
     }
@@ -124,7 +124,7 @@ export class CheckProperty<V = boolean, O = ICheckOptions> extends BaseProperty<
       const childs = this.entry.tree.getChildren();
       for (let fry = 0; fry < childs.length; fry++) {
         const child = childs[fry];
-        const property = child.properties.get(this.name) as CheckProperty;
+        const property = child.properties.property(this.name) as CheckProperty;
         if (property) {
           property.set(value, {...options, ...{
             propagation: true,

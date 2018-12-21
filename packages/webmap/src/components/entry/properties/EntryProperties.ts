@@ -81,10 +81,10 @@ export class EntryProperties {
     });
   }
 
-  value(name) {
-    const prop = this.get(name);
+  get(name: string) {
+    const prop = this.property(name);
     if (prop) {
-      return prop.value;
+      return prop.get();
     }
   }
 
@@ -92,13 +92,13 @@ export class EntryProperties {
     name: string,
     value: IEntryPropertyTypes[K],
     options?: IEntryBasePropertyOptions<IEntryPropertyTypes[K]>) {
-    const prop = this.get(name);
+    const prop = this.property(name);
     if (prop) {
       return prop.set(value, options);
     }
   }
 
-  get(name) {
+  property(name) {
     return this._properties[name];
   }
 
@@ -109,7 +109,7 @@ export class EntryProperties {
   destroy() {
     for (const p in this._properties) {
       if (this._properties.hasOwnProperty(p)) {
-        const prop = this.get(p);
+        const prop = this.property(p);
         if (prop && prop.destroy) {
           prop.destroy();
         }

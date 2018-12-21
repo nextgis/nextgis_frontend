@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Custom layers control | Leaflet Example</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body,
+    #map {
+      width: 100%;
+      height: 100%;
+    }
+
+    .ngw-layers {
+      background: white;
+      padding: 5px;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.0.0/polyfill.js"></script>
+  <!-- <script src="https://unpkg.com/@nextgis/ngw-leaflet@latest"></script> -->
+  <script src="../../lib/ngw-leaflet.js"></script>
+</head>
+
+<body>
+  <div id='map'></div>
+  <script>
+
+    var ngwMap = new NgwLeaflet({
+      baseUrl: 'https://demo.nextgis.com',
+      target: 'map',
+      qmsId: 487,
+      webmapId: 3985
+    });
+
+    var tobbleBaseLayerControl = ngwMap.webMap.createButtonControl({
+      html: 'B',
+      onClick: function () {
+        ngwMap.webMap.toggleLayer('487');
+      }
+    });
+
+    var toggleHeatMapControl = ngwMap.webMap.createButtonControl({
+      html: 'H',
+      onClick: function () {
+        var layer = ngwMap.webMap.layers.tree.getDescendants(function (x) {
+          return x.item.display_name === 'Плотность кофеен в Москве';
+        })[0];
+        layer.properties.set('visibility', !layer.properties.get('visibility'));
+      }
+    });
+
+    var ngwLayersControl = ngwMap.webMap.createControl({
+      onAdd: function () {
+        var list = document.createElement('div');
+        list.className = 'ngw-layers';
+        // find all layer from ngw webmap tree
+        ngwMap.webMap.layers.tree.getDescendants().forEach(function (layer) {
+          if (layer.item.item_type === 'layer') {
+            var layerElement = document.createElement('div');
+
+            var checkbox = document.createElement('input');
+            checkbox.id = 'layer-' + layer.item.id
+            checkbox.checked = layer.item.layer_enabled;
+            checkbox.setAttribute('type', 'checkbox');
+            checkbox.addEventListener('click', function () {
+              layer.properties.set('visibility', checkbox.checked);
+            })
+
+            var name = document.createElement('span');
+            name.innerHTML = layer.item.display_name
+
+            layerElement.appendChild(checkbox);
+            layerElement.appendChild(name);
+            list.appendChild(layerElement);
+          }
+        });
+        const visibility = ngwMap.webMap.layers.properties.property('visibility');
+        // listen any layer visibility change
+        visibility.emitter.on('change-tree', function (data) {
+          var itemId = data.entry.item.id;
+          var checkbox = list.querySelector('#layer-' + itemId);
+          checkbox.checked = data.value;
+        });
+        return list;
+      }
+    }, { bar: true })
+
+    ngwMap.addControl(tobbleBaseLayerControl, 'top-right');
+    ngwMap.addControl(toggleHeatMapControl, 'top-right');
+    ngwMap.addControl(ngwLayersControl, 'bottom-right');
+  </script>
+</body>
+
+</html>
