@@ -7,7 +7,9 @@ import WebMap, {
   PathPaint,
   IconOptions,
   GeoJsonAdapterOptions,
-  GeoJsonAdapterLayerType
+  GeoJsonAdapterLayerType,
+  MapControl,
+  MapControls
 } from '@nextgis/webmap';
 import NgwConnector from '@nextgis/ngw-connector';
 import QmsKit from '@nextgis/qms-kit';
@@ -15,7 +17,7 @@ import NgwKit from '@nextgis/ngw-kit';
 import { getIcon } from '@nextgis/icons';
 
 import 'leaflet/dist/leaflet.css';
-import { onMapLoad } from './decorators';
+import { onMapLoad, onLoad } from './decorators';
 import { fixUrlStr, deepmerge, detectGeometryType, createAsyncAdapter } from './utils';
 import { EventEmitter } from 'events';
 import { toWgs84 } from 'reproject';
@@ -98,9 +100,9 @@ export default class NgwMap {
 
   webMap: WebMap;
   emitter = new EventEmitter();
-  isLoaded: boolean = false;
   connector: NgwConnector;
   _ngwLayers = {};
+  _eventsStatus: {[eventName: string]: boolean} = {};
 
   constructor(mapAdapter: MapAdapter, options: MapOptions) {
     this.options = deepmerge(this.options, options);
@@ -142,6 +144,11 @@ export default class NgwMap {
     const [top, left, bottom, right] = bounds;
     // [extent_left, extent_bottom, extent_right, extent_top];
     this.webMap.fit([left, bottom, right, top]);
+  }
+
+  @onLoad('control:created')
+  addControl<K extends keyof MapControls>(control: MapControl, position: ControlPositions, options?: MapControls[K]) {
+    this.webMap.addControl(control, position, options);
   }
 
   @onMapLoad()
@@ -234,8 +241,7 @@ export default class NgwMap {
     return this.webMap.create({
       target: this.options.target
     }).then(() => {
-      this.isLoaded = true;
-      this.emitter.emit('map:created');
+      this._emitStatusEvent('map:created');
       if (this.options.qmsId) {
         this.webMap.addBaseLayer('QMS', {
           id: this.options.qmsId,
@@ -260,10 +266,16 @@ export default class NgwMap {
       const { position, ...options } = controlOptions;
       this.webMap.addControl(x, position, options);
     });
+    this._emitStatusEvent('control:created');
   }
 
   private _addEventsListeners() {
     this.webMap.emitter.on('click', (d) => this.emitter.emit('click', d));
     this.webMap.emitter.on('layer:click', (d) => this.emitter.emit('layer:click', d));
+  }
+
+  private _emitStatusEvent(event) {
+    this._eventsStatus[event] = true;
+    this.emitter.emit(event);
   }
 }
