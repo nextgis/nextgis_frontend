@@ -1,13 +1,23 @@
 import { CreateButtonControlOptions } from 'packages/webmap/src';
 import { createControl } from './createControl';
+import { DomEvent } from 'leaflet';
 
 export function createButtonControl(options: CreateButtonControlOptions) {
-  const element = document.createElement('a');
-  element.setAttribute('role', 'button');
+  const link = document.createElement('a');
+
+  link.href = '#';
+  link.title = options.title;
+
+  link.setAttribute('role', 'button');
+  link.setAttribute('aria-label', options.title);
+
+  DomEvent.disableClickPropagation(link);
+  DomEvent.on(link, 'click', DomEvent.stop);
+
   if (options.html instanceof HTMLElement) {
-    element.appendChild(options.html);
+    link.appendChild(options.html);
   } else {
-    element.innerHTML = options.html;
+    link.innerHTML = options.html;
   }
 
   const onClick = (e: Event) => {
@@ -15,22 +25,21 @@ export function createButtonControl(options: CreateButtonControlOptions) {
     options.onClick();
   };
   if (options.onClick) {
-    element.setAttribute('href', '#');
-    element.addEventListener('click', onClick);
+    link.addEventListener('click', onClick);
   }
 
   return createControl({
     onAdd() {
-      return element;
+      return link;
     },
     onRemove() {
-      const parent = element.parentNode;
+      const parent = link.parentNode;
       if (parent) {
-        parent.removeChild(element);
+        parent.removeChild(link);
       }
       if (options.onClick) {
-        element.removeEventListener('click', onClick);
+        link.removeEventListener('click', onClick);
       }
     }
-  }, {bar: true});
+  }, { bar: true });
 }

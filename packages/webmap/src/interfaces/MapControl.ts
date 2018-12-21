@@ -39,6 +39,7 @@ export interface MapControl<M extends any = any> {
 export interface CreateButtonControlOptions {
   html: string | HTMLElement;
   onClick: () => void;
+  title?: string;
 }
 
 export interface CreateControlOptions {
