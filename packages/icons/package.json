@@ -1,12 +1,12 @@
 {
   "name": "@nextgis/icons",
-  "version": "0.9.6",
+  "version": "0.9.7",
   "description": "Svg icon pack",
   "main": "lib/icons.js",
   "unpkg": "lib/icons.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/webmap": "^0.9.2"
+    "@nextgis/webmap": "^0.9.7"
   },
   "devDependencies": {
     "@types/events": "^1.2.0",
