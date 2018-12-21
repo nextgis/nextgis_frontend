@@ -19,6 +19,7 @@ const defAddImgOpt = {
 export function getImage(svgStr: string, opt?: GetImgOpt): Promise<ImageData> {
   return new Promise((resolve) => {
     const svgImage = new Image();
+    svgImage.crossOrigin = 'Anonymous';
     svgImage.src = 'data:image/svg+xml;base64,' + btoa(svgStr);
 
     svgImage.onload = () => {

@@ -30,8 +30,8 @@ export interface MapControls {
 
 export interface MapControl<M extends any = any> {
 
-  onAdd?(map?: M): any;
+  onAdd(map?: M): any;
 
-  onRemove?(map?: M): any;
+  onRemove(map?: M): any;
 
 }

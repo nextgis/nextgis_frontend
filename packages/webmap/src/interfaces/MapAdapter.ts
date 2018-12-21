@@ -57,7 +57,7 @@ export interface MapAdapter<M = any, L = any, C = any> extends BaseMapAdapter {
   createControl?(control: MapControl): C;
 
   addControl<K extends keyof MapControls>(
-    controlName: K | MapControl,
+    controlName: K | any,
     position: ControlPositions,
     options?: MapControls[K]): any;
 

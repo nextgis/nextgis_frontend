@@ -18,7 +18,7 @@ import {
   GeoJsonProperties
 } from 'geojson';
 
-import { getImage } from '../utils/image.icons';
+import { getImage } from '../utils/image_icons';
 
 let ID = 1;
 
