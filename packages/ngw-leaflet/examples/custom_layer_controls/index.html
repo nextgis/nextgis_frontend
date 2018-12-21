@@ -42,6 +42,7 @@
 
     var tobbleBaseLayerControl = ngwMap.webMap.createButtonControl({
       html: 'B',
+      title: 'Toggle base map',
       onClick: function () {
         ngwMap.webMap.toggleLayer('487');
       }
@@ -49,6 +50,7 @@
 
     var toggleHeatMapControl = ngwMap.webMap.createButtonControl({
       html: 'H',
+      title: 'Toggle heat map layer',
       onClick: function () {
         var layer = ngwMap.webMap.layers.tree.getDescendants(function (x) {
           return x.item.display_name === 'Плотность кофеен в Москве';
