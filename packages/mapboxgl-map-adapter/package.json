@@ -10,6 +10,9 @@
     "events": "*",
     "mapbox-gl": "*"
   },
+  "optionalDependencies": {
+    "canvg": "^1.5.3"
+  },
   "devDependencies": {
     "@types/events": "^1.2.0",
     "@types/node": "^10.12.12",
