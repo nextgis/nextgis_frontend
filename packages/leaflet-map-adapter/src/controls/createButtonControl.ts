@@ -1,4 +1,4 @@
-import { CreateButtonControlOptions } from 'packages/webmap/src';
+import { CreateButtonControlOptions } from '@nextgis/webmap';
 import { createControl } from './createControl';
 import { DomEvent } from 'leaflet';
 

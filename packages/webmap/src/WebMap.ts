@@ -183,7 +183,7 @@ export class WebMap<M = any, L = any, C = any> {
     return layerMem && layerMem.onMap;
   }
 
-  createControl(control: MapControl, options: CreateControlOptions): C {
+  createControl(control: MapControl, options?: CreateControlOptions): C {
     if (this.mapAdapter.createControl) {
       return this.mapAdapter.createControl(control, options);
     }
