@@ -76,7 +76,11 @@ export default class QmsKit implements StarterKit {
           const webMapAdapter = map.layerAdapters[type];
           if (webMapAdapter) {
             if (type === 'TILE') {
-              options.url = service.url;
+              const serviceUrl = service.url.replace(
+                /^(https?|ftp):\/\//,
+                (location.protocol === 'https:' ? 'https' : 'http') + '://'
+              );
+              options.url = serviceUrl;
               options.name = service.name;
               options.attribution = service.copyright_text;
               return webMapAdapter.prototype.addLayer.call(this, options);
