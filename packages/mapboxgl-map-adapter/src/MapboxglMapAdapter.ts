@@ -1,6 +1,13 @@
-import { MapAdapter, LayerMem, FitOptions, MapControl, ControlPositions } from '@nextgis/webmap';
+import {
+  MapAdapter,
+  LayerMem,
+  FitOptions,
+  MapControl,
+  ControlPositions,
+  CreateButtonControlOptions
+} from '@nextgis/webmap';
 import { MvtAdapter } from './layer-adapters/MvtAdapter';
-import { Map, IControl, Control } from 'mapbox-gl';
+import { Map, IControl } from 'mapbox-gl';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
 import { TileAdapter } from './layer-adapters/TileAdapter';
 import { EventEmitter } from 'events';
@@ -9,6 +16,7 @@ import { CompassControl } from './controls/CompassControl';
 import { AttributionControl } from './controls/AttributionControl';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 import { createControl } from './controls/createControl';
+import { createButtonControl } from './controls/createButtonControl';
 
 type TControl = new (options?) => IControl;
 
@@ -22,7 +30,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, string[], IControl> {
     GEOJSON: GeoJsonAdapter,
   };
 
-  static controlAdapters: {[name: string]: any} = {
+  static controlAdapters: { [name: string]: any } = {
     ZOOM: ZoomControl,
     COMPASS: CompassControl,
     ATTRIBUTION: AttributionControl,
@@ -129,12 +137,17 @@ export class MapboxglMapAdapter implements MapAdapter<Map, string[], IControl> {
 
     // normilize layer ordering
     baseLayers.forEach((x) => {
-      x.layer.forEach((y) => this.map.moveLayer(y, orderedLayers[0].layer[0]));
+
+      x.layer.forEach((y) => {
+        this.map.moveLayer(y, orderedLayers[0].layer[0]);
+      });
     });
     for (let fry = 0; fry < orderedLayers.length; fry++) {
       const nextlayer = orderedLayers[fry + 1];
-      const nextlayerId = nextlayer && nextlayer.layer[0] ;
-      orderedLayers[fry].layer.forEach((x) => this.map.moveLayer(x, nextlayerId));
+      const nextlayerId = nextlayer && nextlayer.layer[0];
+      orderedLayers[fry].layer.forEach((x) => {
+        this.map.moveLayer(x, nextlayerId);
+      });
     }
   }
 
@@ -164,6 +177,10 @@ export class MapboxglMapAdapter implements MapAdapter<Map, string[], IControl> {
 
   createControl(control: MapControl) {
     return createControl(control);
+  }
+
+  createButtonControl(options: CreateButtonControlOptions) {
+    return createButtonControl(options);
   }
 
   addControl(controlDef: string | IControl, position: ControlPositions, options) {

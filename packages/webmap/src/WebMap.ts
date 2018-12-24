@@ -286,12 +286,12 @@ export class WebMap<M = any, L = any, C = any> {
       l.onMap = status;
       if (status && source) {
         const order = l.baseLayer ? 0 : l.order;
-        this.mapAdapter.setLayerOrder(l.layer, order, this._layers);
         if (l.adapter && l.adapter.showLayer) {
           l.adapter.showLayer.call(l.adapter, l.layer);
         } else {
           this.mapAdapter.showLayer(l.layer);
         }
+        this.mapAdapter.setLayerOrder(l.layer, order, this._layers);
       } else {
         if (l.adapter && l.adapter.hideLayer) {
           l.adapter.hideLayer.call(l.adapter, l.layer);
