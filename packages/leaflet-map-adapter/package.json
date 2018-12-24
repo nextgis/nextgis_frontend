@@ -1,12 +1,12 @@
 {
   "name": "@nextgis/leaflet-map-adapter",
-  "version": "0.9.8",
+  "version": "0.9.9",
   "description": "",
   "main": "lib/leaflet-map-adapter.js",
   "unpkg": "lib/leaflet-map-adapter.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/webmap": "^0.9.8",
+    "@nextgis/webmap": "^0.9.9",
     "events": "*",
     "leaflet": "*",
     "leaflet.wms": "*"
