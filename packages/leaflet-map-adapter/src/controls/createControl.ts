@@ -1,5 +1,5 @@
 import { MapControl, CreateControlOptions } from '@nextgis/webmap';
-import { Control } from 'leaflet';
+import { Control, DomEvent } from 'leaflet';
 
 export function createControl(control: MapControl, options: CreateControlOptions = {}): Control  {
   const C = Control.extend({
@@ -11,6 +11,9 @@ export function createControl(control: MapControl, options: CreateControlOptions
         element.classList.add('leaflet-bar');
       }
       element.appendChild(content);
+
+      DomEvent.disableClickPropagation(element);
+
       return element;
     },
     onRemove () {

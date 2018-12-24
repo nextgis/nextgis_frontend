@@ -37,23 +37,23 @@
       baseUrl: 'https://demo.nextgis.com',
       target: 'map',
       qmsId: 487,
-      webmapId: 3985
+      webmapId: 4119
     });
 
     var tobbleBaseLayerControl = ngwMap.webMap.createButtonControl({
       html: 'B',
       title: 'Toggle base map',
       onClick: function () {
-        ngwMap.webMap.toggleLayer('487');
+        ngwMap.webMap.toggleLayer('qms-487');
       }
     });
 
     var toggleHeatMapControl = ngwMap.webMap.createButtonControl({
-      html: 'H',
-      title: 'Toggle heat map layer',
+      html: 'DEM',
+      title: 'Toggle DEM',
       onClick: function () {
         var layer = ngwMap.webMap.layers.tree.getDescendants(function (x) {
-          return x.item.display_name === 'Плотность кофеен в Москве';
+          return x.item.display_name === 'Digital Elevation Model (DEM)';
         })[0];
         layer.properties.set('visibility', !layer.properties.get('visibility'));
       }

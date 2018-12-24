@@ -1,4 +1,4 @@
-import { StarterKit } from '@nextgis/webmap';
+import WebMap, { StarterKit } from '@nextgis/webmap';
 
 export interface QmsOptions {
   url: string;
@@ -39,7 +39,7 @@ export default class QmsKit implements StarterKit {
   };
 
   url: string;
-  map;
+  map: WebMap;
 
   constructor(options?: QmsOptions) {
     this.options = { ...this.options, ...options };
@@ -64,9 +64,9 @@ export default class QmsKit implements StarterKit {
     const alias = {
       tms: 'TILE',
     };
-    const adapter = function(m, options) {
+    const adapter = function(m: WebMap, options) {
       this.map = m;
-      this.name = options.id;
+      this.name = (options.idPrefix ? options.idPrefix : 'qms-') + options.id;
     };
 
     adapter.prototype.addLayer = function(options) {
@@ -80,6 +80,7 @@ export default class QmsKit implements StarterKit {
                 /^(https?|ftp):\/\//,
                 (location.protocol === 'https:' ? 'https' : 'http') + '://'
               );
+              options.id = (options.idPrefix ? options.idPrefix : 'qms-') + options.id;
               options.url = serviceUrl;
               options.name = service.name;
               options.attribution = service.copyright_text;
