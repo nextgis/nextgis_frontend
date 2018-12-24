@@ -29,7 +29,6 @@ export function deepmerge(target, src, mergeArray = false) {
     } else { // Replace array. Do not merge by default
       dst = src;
     }
-
   } else {
     if (target && typeof target === 'object') {
       Object.keys(target).forEach(function (key) {
@@ -40,7 +39,7 @@ export function deepmerge(target, src, mergeArray = false) {
       if (typeof src[key] !== 'object' || !src[key]) {
         dst[key] = src[key];
       } else {
-        if (typeof target[key] === 'object' && src[key] === 'object') {
+        if (typeof target[key] === 'object' && typeof src[key] === 'object') {
           dst[key] = deepmerge(target[key], src[key], mergeArray);
         } else {
           dst[key] = src[key];

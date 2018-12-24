@@ -17,6 +17,10 @@ export function createControl(control: MapControl, options?): IControl {
     onRemove() {
       return control.onRemove();
     }
+
+    remove() {
+      this.onRemove();
+    }
   }
 
   return new Control();
