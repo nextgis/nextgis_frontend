@@ -7,7 +7,7 @@ let ID = 1;
 export class TileAdapter extends BaseAdapter implements LayerAdapter {
 
   addLayer(options?: AdapterOptions): string[] {
-    this.name = options.id || 'tile-' + ID++;
+    this.name = String(options.id || 'tile-' + ID++);
     const opt = { ...this.options, ...(options || {}) };
 
     let tiles: string[];
@@ -20,7 +20,6 @@ export class TileAdapter extends BaseAdapter implements LayerAdapter {
     } else {
       tiles = [opt.url];
     }
-    const strName = String(this.name);
 
     const sourceOptions: RasterSource = {
       type: 'raster',
@@ -35,7 +34,7 @@ export class TileAdapter extends BaseAdapter implements LayerAdapter {
     }
 
     this.map.addLayer({
-      id: strName,
+      id: this.name,
       type: 'raster',
       layout: {
         visibility: 'none',

@@ -1,4 +1,11 @@
-import { MapAdapter, MapOptions, LayerMem, MapControl, CreateControlOptions, CreateButtonControlOptions } from '@nextgis/webmap';
+import {
+  MapAdapter,
+  MapOptions,
+  LayerMem,
+  MapControl,
+  CreateControlOptions,
+  CreateButtonControlOptions
+} from '@nextgis/webmap';
 import { Map, Control, Layer, GridLayer } from 'leaflet';
 import { EventEmitter } from 'events';
 import { TileAdapter } from './layer-adapters/TileAdapter';

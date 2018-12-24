@@ -44,4 +44,5 @@ export interface CreateButtonControlOptions {
 
 export interface CreateControlOptions {
   bar?: boolean;
+  addClass?: string;
 }

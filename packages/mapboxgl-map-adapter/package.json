@@ -8,7 +8,7 @@
   "dependencies": {
     "@nextgis/webmap": "^0.9.8",
     "events": "*",
-    "mapbox-gl": "*"
+    "mapbox-gl": "0.52.0"
   },
   "optionalDependencies": {
     "canvg": "^1.5.3"
