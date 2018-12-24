@@ -51,6 +51,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, string[], IControl> {
         container: options.target,
         center: [96, 63], // initial map center in [lon, lat]
         zoom: 2,
+        attributionControl: false,
         style: {
           version: 8,
           name: 'Empty style',
