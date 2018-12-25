@@ -1,4 +1,4 @@
-import { MapAdapter } from '@nextgis/webmap';
+import { MapAdapter, ControlPositions, MapOptions } from '@nextgis/webmap';
 import Map from 'ol/Map';
 import View from 'ol/View';
 import Zoom from 'ol/control/Zoom';
@@ -17,7 +17,12 @@ import { fromLonLat, transformExtent, transform } from 'ol/proj';
 // @ts-ignore
 import { boundingExtent } from 'ol/extent';
 import { Attribution } from './controls/Attribution';
+import { olx } from 'openlayers';
 
+export type ForEachFeatureAtPixelCallback = (
+  feature: (ol.Feature | ol.render.Feature),
+  layer: ol.layer.Layer,
+  evt: ol.MapBrowserPointerEvent) => void;
 export class OlMapAdapter implements MapAdapter {
 
   static layerAdapters = {
@@ -45,27 +50,34 @@ export class OlMapAdapter implements MapAdapter {
   map: Map;
 
   private _olView: View;
+  private _mapClickEvents: Array<(evt: ol.MapBrowserPointerEvent) => void> = [];
+  private _forEachFeatureAtPixel: ForEachFeatureAtPixelCallback[] = [];
 
-  private DPI = 1000 / 39.37 / 0.28;
-  private IPM = 39.37;
-
-  create(options) {
-    this.options = Object.assign({}, options);
+  create(options: MapOptions) {
+    this.options = { ...options };
     const view = new View({
       center: options.center,
       zoom: options.zoom,
       projection: this.displayProjection,
     });
 
-    const defOpt = {
+    const defOpt: olx.MapOptions = {
       logo: false,
       controls: [],
       view,
       layers: [],
     };
-    const mapInitOptions = { ...defOpt, ...options };
+    const mapInitOptions: olx.MapOptions = {
+      ...defOpt,
+      target: options.target,
+      logo: options.logo,
+    };
 
     this.map = new Map(mapInitOptions);
+
+    this.map.set('_mapClickEvents', this._mapClickEvents);
+    this.map.set('_forEachFeatureAtPixel', this._forEachFeatureAtPixel);
+
     this.emitter.emit('create', { map: this.map });
     this._olView = this.map.getView();
 
@@ -127,15 +139,7 @@ export class OlMapAdapter implements MapAdapter {
     layer.setZIndex(order);
   }
 
-  getScaleForResolution(res, mpu) {
-    return parseFloat(res) * (mpu * this.IPM * this.DPI);
-  }
-
-  getResolutionForScale(scale, mpu) {
-    return parseFloat(scale) / (mpu * this.IPM * this.DPI);
-  }
-
-  addControl(controlDef, position?: string, options?) {
+  addControl(controlDef, position?: ControlPositions, options?) {
     let control;
     if (typeof controlDef === 'string') {
       const engine = OlMapAdapter.controlAdapters[controlDef];
@@ -151,7 +155,7 @@ export class OlMapAdapter implements MapAdapter {
     }
   }
 
-  onMapClick(evt) {
+  onMapClick(evt: ol.MapBrowserPointerEvent) {
     const [lng, lat] = transform(
       evt.coordinate,
       this.displayProjection,
@@ -160,6 +164,19 @@ export class OlMapAdapter implements MapAdapter {
     const latLng = {
       lat, lng,
     };
+
+    this._mapClickEvents.forEach((x) => {
+      x(evt);
+    });
+
+    if (this._forEachFeatureAtPixel.length) {
+      this.map.forEachFeatureAtPixel(evt.pixel, (feature, layer) => {
+        this._forEachFeatureAtPixel.forEach((x) => {
+          x(feature, layer, evt);
+        });
+      });
+    }
+
     this.emitter.emit('click', {
       latLng,
       pixel: { left: evt.pixel[0], top: evt.pixel[1] },
@@ -186,8 +203,6 @@ export class OlMapAdapter implements MapAdapter {
   }
 
   private _addMapListeners() {
-    this.map.on('click', (evt) => {
-      this.onMapClick(evt);
-    });
+    this.map.on('click', (evt: ol.MapBrowserPointerEvent) => this.onMapClick(evt), this);
   }
 }
