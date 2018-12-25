@@ -27,7 +27,7 @@ Simply download and include with a script tag. Dialog will be registered as a gl
 We recommend linking to a specific version number that you can update manually:
 
 ```html
-<script src="https://unpkg.com/@nextgis/dialog@0.5.0"></script>
+<script src="https://unpkg.com/@nextgis/dialog@0.10.0"></script>
 ```
 
 ### NPM

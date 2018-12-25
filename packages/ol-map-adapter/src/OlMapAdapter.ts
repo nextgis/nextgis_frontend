@@ -20,7 +20,7 @@ import { Attribution } from './controls/Attribution';
 import { olx } from 'openlayers';
 
 export type ForEachFeatureAtPixelCallback = (
-  feature: (ol.Feature | ol.render.Feature),
+  feature: ol.Feature,
   layer: ol.layer.Layer,
   evt: ol.MapBrowserPointerEvent) => void;
 export class OlMapAdapter implements MapAdapter {
@@ -170,7 +170,7 @@ export class OlMapAdapter implements MapAdapter {
     });
 
     if (this._forEachFeatureAtPixel.length) {
-      this.map.forEachFeatureAtPixel(evt.pixel, (feature, layer) => {
+      this.map.forEachFeatureAtPixel(evt.pixel, (feature: ol.Feature, layer) => {
         this._forEachFeatureAtPixel.forEach((x) => {
           x(feature, layer, evt);
         });
