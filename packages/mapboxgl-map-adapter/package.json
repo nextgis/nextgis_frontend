@@ -1,12 +1,12 @@
 {
   "name": "@nextgis/mapboxgl-map-adapter",
-  "version": "0.9.9",
+  "version": "0.10.0",
   "description": "",
   "main": "lib/mapboxgl-map-adapter.js",
   "unpkg": "lib/mapboxgl-map-adapter.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/webmap": "^0.9.9",
+    "@nextgis/webmap": "^0.10.0",
     "events": "*",
     "mapbox-gl": "0.52.0"
   },
