@@ -21,6 +21,7 @@ import { click } from 'ol/events/condition';
 import Select from 'ol/interaction/Select';
 import { Feature } from 'geojson';
 import { olx } from 'openlayers';
+import { ForEachFeatureAtPixelCallback } from '../OlMapAdapter';
 
 let ID = 1;
 
@@ -54,40 +55,46 @@ export class GeoJsonAdapter implements LayerAdapter {
       features
     });
 
-    const vectorLayer = new VectorLayer({
+    this.layer = new VectorLayer({
       source: vectorSource,
       style: (f: ol.Feature) => styleFunction(f, options.paint)
     });
-    this.layer = vectorLayer;
 
     if (options.selectable) {
       this._addSelectListener();
     }
 
-    return vectorLayer;
+    return this.layer;
   }
 
   private _addSelectListener() {
-    const selectOptions: olx.interaction.SelectOptions = {
-      condition: click,
-      layers: [this.layer],
-      features: this._selectedFeatures
-    };
-    if (this.selectedPaint) {
-      selectOptions.style = (f: ol.Feature) => styleFunction(f, this.options.selectedPaint);
-    }
-    if (this.options.multiselect) {
-      selectOptions.toggleCondition = click;
-    }
-    // if (this.options.unselectOnSecondClick) {
-    //   selectOptions.removeCondition = ;
-    // }
-    const select = new Select(selectOptions);
 
-    this.map.addInteraction(select);
-    select.on('select', function (e) {
-      console.log(e);
+    const _forEachFeatureAtPixel = this.map.get('_forEachFeatureAtPixel') as ForEachFeatureAtPixelCallback[];
+    _forEachFeatureAtPixel.push((feature, layer, evt) => {
+      if (layer === this.layer) {
+        console.log(layer);
+      }
     });
+    // const selectOptions: olx.interaction.SelectOptions = {
+    //   condition: click,
+    //   layers: [this.layer],
+    //   features: this._selectedFeatures
+    // };
+    // if (this.selectedPaint) {
+    //   selectOptions.style = (f: ol.Feature) => styleFunction(f, this.options.selectedPaint);
+    // }
+    // if (this.options.multiselect) {
+    //   selectOptions.toggleCondition = click;
+    // }
+    // // if (this.options.unselectOnSecondClick) {
+    // //   selectOptions.removeCondition = ;
+    // // }
+    // const select = new Select(selectOptions);
+
+    // this.map.addInteraction(select);
+    // select.on('select', function (e) {
+    //   console.log(e);
+    // });
   }
 }
 
