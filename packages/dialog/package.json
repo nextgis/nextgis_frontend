@@ -12,7 +12,7 @@
   "devDependencies": {
     "@types/events": "^1.2.0",
     "@types/node": "^10.12.18",
-    "css-loader": "^2.0.2",
+    "css-loader": "^2.1.0",
     "file-loader": "^3.0.1",
     "html-webpack-plugin": "^3.2.0",
     "rimraf": "^2.6.2",
@@ -23,7 +23,7 @@
     "typescript": "^3.2.2",
     "webpack": "^4.x.x",
     "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.13"
+    "webpack-dev-server": "^3.1.14"
   },
   "scripts": {
     "start": "webpack-dev-server --progress --open --hot",

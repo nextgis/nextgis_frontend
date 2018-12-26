@@ -9,6 +9,7 @@ import { deepmerge } from './utils/lang';
 import { LayerAdapters, LayerAdapter, OnLayerClickOptions } from './interfaces/LayerAdapter';
 import { Type } from './utils/Type';
 import { MapControl, MapControls, CreateControlOptions, CreateButtonControlOptions } from './interfaces/MapControl';
+import { onLoad } from './utils/decorators';
 
 export interface LayerMem<L = any> {
   id: string;
@@ -32,6 +33,8 @@ export class WebMap<M = any, L = any, C = any> {
   keys: Keys = new Keys(); // TODO: make injectable cached
   mapAdapter: MapAdapter<M>;
   runtimeParams: RuntimeParams[];
+
+  _eventsStatus: {[eventName: string]: boolean} = {};
 
   private DPI = 1000 / 39.37 / 0.28;
   private IPM = 39.37;
@@ -74,11 +77,11 @@ export class WebMap<M = any, L = any, C = any> {
     if (this.settingsIsLoading) {
 
       return new Promise<AppSettings>((resolve) => {
-        const onLoad = (x) => {
+        const onSetingLoad = (x) => {
           resolve(x);
-          this.emitter.removeListener('load-settings', onLoad);
+          this.emitter.removeListener('load-settings', onSetingLoad);
         };
-        this.emitter.on('load-settings', onLoad);
+        this.emitter.on('load-settings', onSetingLoad);
       });
     } else {
       this.settingsIsLoading = true;
@@ -183,12 +186,14 @@ export class WebMap<M = any, L = any, C = any> {
     return layerMem && layerMem.onMap;
   }
 
+  @onLoad('build-map')
   createControl(control: MapControl, options?: CreateControlOptions): C {
     if (this.mapAdapter.createControl) {
       return this.mapAdapter.createControl(control, options);
     }
   }
 
+  @onLoad('build-map')
   createButtonControl(options: CreateButtonControlOptions) {
     if (this.mapAdapter.createControl) {
       return this.mapAdapter.createButtonControl(options);
@@ -200,7 +205,8 @@ export class WebMap<M = any, L = any, C = any> {
     position: ControlPositions,
     options?: MapControls[K]) {
 
-    return this.mapAdapter.addControl(controlDef, position, options);
+    const control = controlDef;
+    return this.mapAdapter.addControl(control, position, options);
   }
 
   async addLayer<K extends keyof LayerAdapters>(

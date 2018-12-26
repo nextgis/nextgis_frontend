@@ -22,7 +22,7 @@
   "devDependencies": {
     "@mdi/font": "^3.2.89",
     "@types/lodash": "^4.14.119",
-    "css-loader": "^2.0.2",
+    "css-loader": "^2.1.0",
     "favicons-webpack-plugin": "^0.0.9",
     "file-loader": "^3.0.1",
     "html-loader": "^0.5.5",
@@ -45,7 +45,7 @@
     "webpack": "^4.x.x",
     "webpack-bundle-analyzer": "^3.0.3",
     "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.13"
+    "webpack-dev-server": "^3.1.14"
   },
   "scripts": {
     "start": "webpack-dev-server --progress --open --hot",
