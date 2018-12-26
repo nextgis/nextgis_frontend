@@ -1,5 +1,10 @@
 
-import canvg from 'canvg';
+let canvg;
+try {
+  canvg = require('canvg');
+} catch (er) {
+  // ignore
+}
 interface GetImgOpt {
   width?: number;
   height?: number;
