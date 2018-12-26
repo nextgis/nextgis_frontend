@@ -102,7 +102,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     return createButtonControl(options);
   }
 
-  addControl(controlDef, position: string, options?) {
+  async addControl(controlDef, position: string, options?) {
     let control;
     if (typeof controlDef === 'string') {
       const engine = LeafletMapAdapter.controlAdapters[controlDef];
@@ -113,9 +113,10 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
       control = controlDef;
     }
     if (control) {
-      control.options.position = position.replace('-', '');
-      this.map.addControl(control);
-      return control;
+      const _control = await control;
+      _control.options.position = position.replace('-', '');
+      this.map.addControl(_control);
+      return _control;
     }
   }
 
