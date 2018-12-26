@@ -183,7 +183,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, string[], IControl> {
     return createButtonControl(options);
   }
 
-  addControl(controlDef: string | IControl, position: ControlPositions, options) {
+  async addControl(controlDef: string | IControl, position: ControlPositions, options) {
     let control: IControl;
     if (typeof controlDef === 'string') {
       const engine = MapboxglMapAdapter.controlAdapters[controlDef];
@@ -194,7 +194,9 @@ export class MapboxglMapAdapter implements MapAdapter<Map, string[], IControl> {
       control = controlDef;
     }
     if (control) {
-      this.map.addControl(control, position);
+      const _control = await control;
+      this.map.addControl(_control, position);
+      return _control;
     }
   }
 
