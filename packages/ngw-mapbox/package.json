@@ -9,7 +9,8 @@
     "@nextgis/mapboxgl-map-adapter": "^0.10.0",
     "@nextgis/ngw-map": "^0.10.0",
     "@types/mapbox-gl": "^0.51.3",
-    "mapbox-gl": "^0.52.0"
+    "mapbox-gl": "^0.52.0",
+    "canvg": "^1.5.3"
   },
   "devDependencies": {
     "@types/events": "^1.2.0",
