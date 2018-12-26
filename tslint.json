@@ -39,6 +39,7 @@
       "named": "always",
       "asyncArrow": "always"
     }],
-    "object-literal-key-quotes": false
+    "object-literal-key-quotes": false,
+    "no-var-requires": false
   }
 }
