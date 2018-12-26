@@ -40,6 +40,7 @@ export interface CreateButtonControlOptions {
   html: string | HTMLElement;
   onClick: () => void;
   title?: string;
+  addClass?: string;
 }
 
 export interface CreateControlOptions {

@@ -1,4 +1,11 @@
-import { MapAdapter, ControlPositions, MapOptions } from '@nextgis/webmap';
+import {
+  MapAdapter,
+  ControlPositions,
+  MapOptions,
+  MapControl,
+  CreateControlOptions,
+  CreateButtonControlOptions
+} from '@nextgis/webmap';
 import Map from 'ol/Map';
 import View from 'ol/View';
 import Zoom from 'ol/control/Zoom';
@@ -18,6 +25,9 @@ import { fromLonLat, transformExtent, transform } from 'ol/proj';
 import { boundingExtent } from 'ol/extent';
 import { Attribution } from './controls/Attribution';
 import { olx } from 'openlayers';
+import { PanelControl } from './controls/PanelControl';
+import { createControl } from './controls/createControl';
+import { createButtonControl } from './controls/createButtonControl';
 
 export type ForEachFeatureAtPixelCallback = (
   feature: ol.Feature,
@@ -50,6 +60,7 @@ export class OlMapAdapter implements MapAdapter {
   map: Map;
 
   private _olView: View;
+  private _panelControl: PanelControl;
   private _mapClickEvents: Array<(evt: ol.MapBrowserPointerEvent) => void> = [];
   private _forEachFeatureAtPixel: ForEachFeatureAtPixelCallback[] = [];
 
@@ -74,6 +85,9 @@ export class OlMapAdapter implements MapAdapter {
     };
 
     this.map = new Map(mapInitOptions);
+
+    this._panelControl = new PanelControl();
+    this.map.addControl(this._panelControl);
 
     this.map.set('_mapClickEvents', this._mapClickEvents);
     this.map.set('_forEachFeatureAtPixel', this._forEachFeatureAtPixel);
@@ -139,6 +153,14 @@ export class OlMapAdapter implements MapAdapter {
     layer.setZIndex(order);
   }
 
+  createControl(control: MapControl, options: CreateControlOptions) {
+    return createControl(control, options);
+  }
+
+  createButtonControl(options: CreateButtonControlOptions) {
+    return createButtonControl(options);
+  }
+
   addControl(controlDef, position?: ControlPositions, options?) {
     let control;
     if (typeof controlDef === 'string') {
@@ -150,7 +172,7 @@ export class OlMapAdapter implements MapAdapter {
       control = controlDef;
     }
     if (control) {
-      this.map.addControl(control);
+      this._panelControl.addControl(control, position);
       return control;
     }
   }
