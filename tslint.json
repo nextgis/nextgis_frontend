@@ -34,11 +34,7 @@
       "node_modules/@types",
       "./custom_typings"
     ],
-    "space-before-function-paren": ["error", {
-      "anonymous": "always",
-      "named": "always",
-      "asyncArrow": "always"
-    }],
+    "space-before-function-paren": false,
     "object-literal-key-quotes": false,
     "no-var-requires": false
   }
