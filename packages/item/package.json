@@ -1,13 +1,10 @@
 {
-  "name": "@nextgis/node",
+  "name": "@nextgis/item",
   "version": "0.10.1",
   "description": "Hierarchical layers control",
-  "main": "lib/node.js",
-  "unpkg": "lib/node.js",
-  "types": "lib/node.d.ts",
-  "dependencies": {
-    "@nextgis/webmap": "^0.10.1"
-  },
+  "main": "lib/item.js",
+  "unpkg": "lib/item.js",
+  "types": "lib/item.d.ts",
   "devDependencies": {
     "@types/events": "^1.2.0",
     "@types/node": "^10.12.18",

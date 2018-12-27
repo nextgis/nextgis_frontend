@@ -1,13 +1,13 @@
-export function filterIn(node: any, filterFunc = (x: any) => x, relationFunc, _filtered = []) {
-  let children: Node[];
-  if (Array.isArray(node)) {
-    children = node;
+export function filterIn(item: any, filterFunc = (x: any) => x, relationFunc, _filtered = []) {
+  let children;
+  if (Array.isArray(item)) {
+    children = item;
   } else {
-    const filter = filterFunc(node);
+    const filter = filterFunc(item);
     if (filter) {
-      _filtered.push(node);
+      _filtered.push(item);
     }
-    const relChild = relationFunc(node);
+    const relChild = relationFunc(item);
     if (relChild) {
       children = [].concat(relChild);
     }
