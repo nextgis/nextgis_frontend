@@ -1,28 +1,8 @@
-import { BaseProperty, ItemBasePropertyOptions } from './BaseProperty';
+import { BaseProperty } from './BaseProperty';
 import { CheckProperty } from './CheckProperty';
 import { Item } from '../Item';
 
-type Type<T> = new (...args: any[]) => T;
-
-export interface ItemPropertyTypes {
-  'boolean': boolean;
-  'string': string;
-  'number': number;
-  'any': any;
-}
-
-interface ItemPropertyBaseConfig<K extends keyof ItemPropertyTypes = any> {
-  type?: ItemPropertyTypes[K];
-  name?: string;
-}
-export interface ItemPropertyConfig<K extends keyof ItemPropertyTypes> extends ItemPropertyBaseConfig<K> {
-  handler?: Type<BaseProperty<ItemPropertyTypes[K]>>;
-}
-
-export interface ItemPropertyConfig<K extends keyof ItemPropertyTypes> extends ItemPropertyBaseConfig<K> {
-  getProperty?(): ItemPropertyTypes[K];
-  onSet?(value: ItemPropertyTypes[K], options?: ItemBasePropertyOptions<ItemPropertyTypes[K]>): void;
-}
+import { ItemBasePropertyOptions, Type, ItemPropertyConfig, ItemPropertyTypes } from '../interfaces';
 
 export class ItemProperties {
 

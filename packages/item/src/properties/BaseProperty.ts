@@ -1,16 +1,7 @@
 import { EventEmitter } from 'events';
 import { Item } from '../Item';
+import { ItemBasePropertyOptions } from '../interfaces';
 // import StrictEventEmitter from 'strict-event-emitter-types/types/src';
-
-export interface ItemBasePropertyOptions<V> {
-  hierarchy?: boolean;
-  bubble?: boolean;
-  propagation?: boolean;
-  silent?: boolean;
-  value?: V;
-  getProperty?: () => V;
-  onSet?: (value: V, options?: ItemBasePropertyOptions<V>) => void;
-}
 
 // export interface BasePropertyEvents<V, O> {
 //   'change': {value: V, options: O};

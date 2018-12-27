@@ -1,12 +1,7 @@
-import {BaseProperty, ItemBasePropertyOptions} from './BaseProperty';
+import {BaseProperty} from './BaseProperty';
 import {Item} from '../Item';
 
-interface ICheckOptions extends ItemBasePropertyOptions<boolean> {
-  label?: string;
-
-  turnOff?: () => void;
-  turnOn?: () => void;
-}
+import { ICheckOptions } from '../interfaces';
 
 export class CheckProperty<V = boolean, O = ICheckOptions> extends BaseProperty<boolean, ICheckOptions> {
 
