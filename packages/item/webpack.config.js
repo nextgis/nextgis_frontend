@@ -1,4 +1,4 @@
-const library = 'Node';
+const library = 'Item';
 
 const package = require('./package.json');
 const common = require('../../build/webpack.config') ;
