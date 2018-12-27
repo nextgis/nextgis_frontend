@@ -1,6 +1,6 @@
 import { MapOptions, AppOptions } from './interfaces/WebMapApp';
 import { AppSettings, StarterKit } from './interfaces/AppSettings';
-import { WebLayerItem } from './WebLayerEntry';
+import { WebLayerItem } from './WebLayerItem';
 import { Keys } from './components/keys/Keys';
 import { EventEmitter } from 'events';
 import { MapAdapter, MapClickEvent, ControlPositions, FitOptions } from './interfaces/MapAdapter';
