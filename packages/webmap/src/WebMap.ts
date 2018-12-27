@@ -1,6 +1,6 @@
 import { MapOptions, AppOptions } from './interfaces/WebMapApp';
 import { AppSettings, StarterKit } from './interfaces/AppSettings';
-import { WebLayerEntry } from './WebLayerEntry';
+import { WebLayerItem } from './WebLayerEntry';
 import { Keys } from './components/keys/Keys';
 import { EventEmitter } from 'events';
 import { MapAdapter, MapClickEvent, ControlPositions, FitOptions } from './interfaces/MapAdapter';
@@ -28,7 +28,7 @@ export class WebMap<M = any, L = any, C = any> {
   lonlatProjection = 'EPSG:4326';
 
   settings: AppSettings;
-  layers: WebLayerEntry;
+  layers: WebLayerItem;
   emitter = new EventEmitter();
   keys: Keys = new Keys(); // TODO: make injectable cached
   mapAdapter: MapAdapter<M>;
@@ -392,7 +392,7 @@ export class WebMap<M = any, L = any, C = any> {
       if (settings) {
         const rootLayer = settings.root_item;
         if (rootLayer) {
-          this.layers = new WebLayerEntry(this, rootLayer);
+          this.layers = new WebLayerItem(this, rootLayer);
           this.emitter.emit('add-layers', this.layers);
         }
       }

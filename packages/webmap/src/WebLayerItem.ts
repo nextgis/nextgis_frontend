@@ -1,34 +1,34 @@
-import { Entry, EntryOptions } from './components/entry/Entry';
+import Item, { ItemOptions } from '@nextgis/item';
 import { TreeGroup, TreeLayer } from './interfaces/AppSettings';
 import { LayerAdapters } from './interfaces/LayerAdapter';
 import WebMap from '.';
 
-export class WebLayerEntry extends Entry<EntryOptions> {
-  static options: EntryOptions = {
+export class WebLayerItem extends Item<ItemOptions> {
+  static options: ItemOptions = {
     properties: [
       {
         type: 'boolean',
         name: 'visibility',
         getProperty() {
-          const entry: WebLayerEntry = this.entry;
-          if (entry.item.item_type === 'group') {
+          const item: WebLayerItem = this.item;
+          if (item.item.item_type === 'group') {
             return true;
-          } else if (entry.item.item_type === 'layer') {
-            return entry.item.layer_enabled;
-          } else if (entry.item.item_type === 'root') {
+          } else if (item.item.item_type === 'layer') {
+            return item.item.layer_enabled;
+          } else if (item.item.item_type === 'root') {
             return true;
           }
           return false;
         },
         onSet(value: boolean) {
-          const entry: WebLayerEntry = this.entry;
-          if (entry.item.item_type === 'layer') {
+          const item: WebLayerItem = this.item;
+          if (item.item.item_type === 'layer') {
             if (value) {
-              entry.webMap.showLayer(entry.id);
+              item.webMap.showLayer(item.id);
             } else {
-              entry.webMap.hideLayer(entry.id);
+              item.webMap.hideLayer(item.id);
             }
-            entry.item.layer_enabled = value;
+            item.item.layer_enabled = value;
           }
         },
       },
@@ -38,8 +38,8 @@ export class WebLayerEntry extends Entry<EntryOptions> {
   item: TreeGroup | TreeLayer;
 
   constructor(public webMap: WebMap,
-              item: TreeGroup | TreeLayer, options?: EntryOptions, parent?: WebLayerEntry) {
-    super(Object.assign({}, WebLayerEntry.options, options));
+              item: TreeGroup | TreeLayer, options?: ItemOptions, parent?: WebLayerItem) {
+    super(Object.assign({}, WebLayerItem.options, options));
 
     this.item = item;
     if (parent) {
@@ -54,7 +54,7 @@ export class WebLayerEntry extends Entry<EntryOptions> {
     if (item.item_type === 'group' || item.item_type === 'root') {
       if (item.children && item.children.length) {
         item.children.reverse().forEach((x) => {
-          const children = new WebLayerEntry(this.webMap, x, this.options, this);
+          const children = new WebLayerItem(this.webMap, x, this.options, this);
           this.tree.addChildren(children);
         });
       }

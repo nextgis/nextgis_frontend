@@ -1,4 +1,4 @@
-import { WebLayerEntry } from '../WebLayerEntry';
+import { WebLayerItem } from '../WebLayerEntry';
 import { MapAdapter } from './MapAdapter';
 import { StarterKit } from './AppSettings';
 import { MapControl } from './MapControl';
@@ -25,5 +25,5 @@ export interface AppOptions {
 
 export interface WebMapAppEvents {
   'build-map': MapAdapter;
-  'add-layers': WebLayerEntry;
+  'add-layers': WebLayerItem;
 }

@@ -1,10 +1,7 @@
 import { EventEmitter } from 'events';
 import { TreeHelper } from './TreeHelper';
-import { ItemProperties, ItemPropertyConfig, ItemPropertyTypes } from './properties/ItemProperties';
-
-export interface ItemOptions {
-  properties?: Array<ItemPropertyConfig<keyof ItemPropertyTypes>>;
-}
+import { ItemProperties } from './properties/ItemProperties';
+import { ItemOptions } from './interfaces';
 
 let ID = 0;
 
