@@ -1,44 +1,44 @@
-import { BaseProperty, NodeBasePropertyOptions } from './BaseProperty';
+import { BaseProperty, ItemBasePropertyOptions } from './BaseProperty';
 import { CheckProperty } from './CheckProperty';
-import { Node } from '../Node';
+import { Item } from '../Item';
 
 type Type<T> = new (...args: any[]) => T;
 
-export interface NodePropertyTypes {
+export interface ItemPropertyTypes {
   'boolean': boolean;
   'string': string;
   'number': number;
   'any': any;
 }
 
-interface NodePropertyBaseConfig<K extends keyof NodePropertyTypes = any> {
-  type?: NodePropertyTypes[K];
+interface ItemPropertyBaseConfig<K extends keyof ItemPropertyTypes = any> {
+  type?: ItemPropertyTypes[K];
   name?: string;
 }
-export interface NodePropertyConfig<K extends keyof NodePropertyTypes> extends NodePropertyBaseConfig<K> {
-  handler?: Type<BaseProperty<NodePropertyTypes[K]>>;
+export interface ItemPropertyConfig<K extends keyof ItemPropertyTypes> extends ItemPropertyBaseConfig<K> {
+  handler?: Type<BaseProperty<ItemPropertyTypes[K]>>;
 }
 
-export interface NodePropertyConfig<K extends keyof NodePropertyTypes> extends NodePropertyBaseConfig<K> {
-  getProperty?(): NodePropertyTypes[K];
-  onSet?(value: NodePropertyTypes[K], options?: NodeBasePropertyOptions<NodePropertyTypes[K]>): void;
+export interface ItemPropertyConfig<K extends keyof ItemPropertyTypes> extends ItemPropertyBaseConfig<K> {
+  getProperty?(): ItemPropertyTypes[K];
+  onSet?(value: ItemPropertyTypes[K], options?: ItemBasePropertyOptions<ItemPropertyTypes[K]>): void;
 }
 
-export class NodeProperties {
+export class ItemProperties {
 
   static handlers: { [name: string]: Type<BaseProperty> } = {
     CheckProperty,
   };
 
   options = {};
-  node: Node;
+  item: Item;
 
   private _properties: { [propName: string]: BaseProperty };
   private _propertiesList: string[];
 
-  constructor(node: Node, propertiesList?: Array<NodePropertyConfig<keyof NodePropertyTypes>>) {
+  constructor(item: Item, propertiesList?: Array<ItemPropertyConfig<keyof ItemPropertyTypes>>) {
 
-    this.node = node;
+    this.item = item;
     this._properties = {};
     this._propertiesList = []; // ordered list
     if (propertiesList) {
@@ -46,12 +46,12 @@ export class NodeProperties {
     }
   }
 
-  add(propOpt: NodePropertyConfig<keyof NodePropertyTypes>) {
+  add(propOpt: ItemPropertyConfig<keyof ItemPropertyTypes>) {
     this._setPropertyHandler(propOpt);
   }
 
-  _setPropertyHandler(propOpt: NodePropertyConfig<keyof NodePropertyTypes>) {
-    const handlers = NodeProperties.handlers;
+  _setPropertyHandler(propOpt: ItemPropertyConfig<keyof ItemPropertyTypes>) {
+    const handlers = ItemProperties.handlers;
     let handler = propOpt.handler;
     if (!handler && propOpt.type) {
       switch (propOpt.type) {
@@ -69,7 +69,7 @@ export class NodeProperties {
       const options = { ...propOpt || {} };
       this._properties[propOpt.name] = new handler(
         propOpt.name,
-        this.node,
+        this.item,
         options,
       );
       this._propertiesList.push(propOpt.name);
@@ -89,10 +89,10 @@ export class NodeProperties {
     }
   }
 
-  set<K extends keyof NodePropertyTypes>(
+  set<K extends keyof ItemPropertyTypes>(
     name: string,
-    value: NodePropertyTypes[K],
-    options?: NodeBasePropertyOptions<NodePropertyTypes[K]>) {
+    value: ItemPropertyTypes[K],
+    options?: ItemBasePropertyOptions<ItemPropertyTypes[K]>) {
     const prop = this.property(name);
     if (prop) {
       return prop.set(value, options);

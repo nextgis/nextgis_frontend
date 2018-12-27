@@ -1,23 +1,23 @@
 import { EventEmitter } from 'events';
-import { Node } from '../Node';
+import { Item } from '../Item';
 // import StrictEventEmitter from 'strict-event-emitter-types/types/src';
 
-export interface NodeBasePropertyOptions<V> {
+export interface ItemBasePropertyOptions<V> {
   hierarchy?: boolean;
   bubble?: boolean;
   propagation?: boolean;
   silent?: boolean;
   value?: V;
   getProperty?: () => V;
-  onSet?: (value: V, options?: NodeBasePropertyOptions<V>) => void;
+  onSet?: (value: V, options?: ItemBasePropertyOptions<V>) => void;
 }
 
 // export interface BasePropertyEvents<V, O> {
 //   'change': {value: V, options: O};
-//   'change-tree': {value: V, options: O, node: Node};
+//   'change-tree': {value: V, options: O, item: Item};
 // }
 
-export class BaseProperty<V = any, O extends NodeBasePropertyOptions<V> = NodeBasePropertyOptions<V>> {
+export class BaseProperty<V = any, O extends ItemBasePropertyOptions<V> = ItemBasePropertyOptions<V>> {
 
   options: O;
 
@@ -25,15 +25,15 @@ export class BaseProperty<V = any, O extends NodeBasePropertyOptions<V> = NodeBa
   emitter = new EventEmitter();
   name: string;
 
-  node: Node;
+  item: Item;
   _blocked: boolean;
 
   private _value: V;
   private _removeEventsListener?: () => void;
   private _container: HTMLElement;
 
-  constructor(name: string, node: Node, options: O) {
-    this.node = node;
+  constructor(name: string, item: Item, options: O) {
+    this.item = item;
     this.options = Object.assign({}, options);
     this.name = name;
     this._value = this.getProperty();
@@ -46,24 +46,24 @@ export class BaseProperty<V = any, O extends NodeBasePropertyOptions<V> = NodeBa
     return this.options.value;
   }
 
-  getParents(): Node[] {
-    return this.node.tree.getParents() || [];
+  getParents(): Item[] {
+    return this.item.tree.getParents() || [];
   }
 
   getParent() {
-    return this.node.tree.getParent();
+    return this.item.tree.getParent();
   }
 
   isGroup() {
-    const children = this.node.tree.getDescendants();
+    const children = this.item.tree.getDescendants();
     return children.length;
   }
 
   isBlocked() {
     if (this._blocked === undefined) {
-      const parents = this.node.tree.getParents();
+      const parents = this.item.tree.getParents();
       if (parents) {
-        const isBlocked = parents.find((x: Node) => {
+        const isBlocked = parents.find((x: Item) => {
           const parentProp = x.properties.property(this.name);
           if (parentProp) {
             return !parentProp.get();
@@ -123,11 +123,11 @@ export class BaseProperty<V = any, O extends NodeBasePropertyOptions<V> = NodeBa
   _fireChangeEvent(value: V, options: O) {
     value = value !== undefined ? value : this.getValue();
     this.emitter.emit('change', { value, options });
-    const parents = this.node.tree.getParents();
+    const parents = this.item.tree.getParents();
     parents.forEach((x) => {
       const prop = x.properties.property(this.name);
       if (prop) {
-        prop.emitter.emit('change-tree', { value, options, node: this.node });
+        prop.emitter.emit('change-tree', { value, options, item: this.item });
       }
     });
   }

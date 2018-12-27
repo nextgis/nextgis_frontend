@@ -1,7 +1,7 @@
-import {BaseProperty, NodeBasePropertyOptions} from './BaseProperty';
-import {Node} from '../Node';
+import {BaseProperty, ItemBasePropertyOptions} from './BaseProperty';
+import {Item} from '../Item';
 
-interface ICheckOptions extends NodeBasePropertyOptions<boolean> {
+interface ICheckOptions extends ItemBasePropertyOptions<boolean> {
   label?: string;
 
   turnOff?: () => void;
@@ -18,8 +18,8 @@ export class CheckProperty<V = boolean, O = ICheckOptions> extends BaseProperty<
     // PropertyContainer: IndicatorContainer
   };
 
-  constructor(name, entry, options) {
-    super(name, entry, Object.assign({}, CheckProperty.options, options));
+  constructor(name, item, options) {
+    super(name, item, Object.assign({}, CheckProperty.options, options));
     this.set(this.get());
   }
 
@@ -98,22 +98,22 @@ export class CheckProperty<V = boolean, O = ICheckOptions> extends BaseProperty<
   }
 
   blockChilds(options: ICheckOptions) {
-    this.node.tree.getDescendants().forEach(this._blockChild.bind(this, options));
+    this.item.tree.getDescendants().forEach(this._blockChild.bind(this, options));
   }
 
   unblockChilds(options: ICheckOptions) {
-    this.node.tree.getChildren().forEach(this._unBlockChild.bind(this, options));
+    this.item.tree.getChildren().forEach(this._unBlockChild.bind(this, options));
   }
 
-  _blockChild(options: ICheckOptions, entry: Node) {
-    const prop = entry.properties.property(this.name) as CheckProperty;
+  _blockChild(options: ICheckOptions, item: Item) {
+    const prop = item.properties.property(this.name) as CheckProperty;
     if (prop.block) {
       prop.block(options);
     }
   }
 
-  _unBlockChild(options: ICheckOptions, entry: Node) {
-    const prop = entry.properties.property(this.name) as CheckProperty;
+  _unBlockChild(options: ICheckOptions, item: Item) {
+    const prop = item.properties.property(this.name) as CheckProperty;
     if (prop.unBlock) {
       prop.unBlock(options);
     }
@@ -121,7 +121,7 @@ export class CheckProperty<V = boolean, O = ICheckOptions> extends BaseProperty<
 
   _propagation(value: boolean, options: ICheckOptions) {
     if (this.isGroup()) {
-      const childs = this.node.tree.getChildren();
+      const childs = this.item.tree.getChildren();
       for (let fry = 0; fry < childs.length; fry++) {
         const child = childs[fry];
         const property = child.properties.property(this.name) as CheckProperty;
