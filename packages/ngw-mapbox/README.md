@@ -32,7 +32,7 @@ Simply download and include with a script tag. NgwMapbox will be registered as a
 We recommend linking to a specific version number that you can update manually:
 
 ```html
-<script src="https://unpkg.com/@nextgis/ngw-mapbox@0.10.0"></script>
+<script src="https://unpkg.com/@nextgis/ngw-mapbox@0.11.0"></script>
 ```
 
 ### NPM
