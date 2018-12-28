@@ -1,16 +1,16 @@
 import Item, { ItemOptions } from '@nextgis/item';
-import { TreeGroup, TreeLayer } from './interfaces/AppSettings';
-import { LayerAdapters } from './interfaces/LayerAdapter';
-import WebMap from '.';
 
-export class WebLayerItem extends Item<ItemOptions> {
+import WebMap, { LayerAdapters, LayerAdapter } from '@nextgis/webmap';
+import { TreeGroup, TreeLayer } from './interfaces';
+
+export class WebMapLayerItem extends Item<ItemOptions> {
   static options: ItemOptions = {
     properties: [
       {
         type: 'boolean',
         name: 'visibility',
         getProperty() {
-          const item: WebLayerItem = this.item;
+          const item: WebMapLayerItem = this.item;
           if (item.item.item_type === 'group') {
             return true;
           } else if (item.item.item_type === 'layer') {
@@ -21,7 +21,7 @@ export class WebLayerItem extends Item<ItemOptions> {
           return false;
         },
         onSet(value: boolean) {
-          const item: WebLayerItem = this.item;
+          const item: WebMapLayerItem = this.item;
           if (item.item.item_type === 'layer') {
             if (value) {
               item.webMap.showLayer(item.id);
@@ -36,17 +36,18 @@ export class WebLayerItem extends Item<ItemOptions> {
   };
 
   item: TreeGroup | TreeLayer;
+  adapter?: LayerAdapter;
 
-  constructor(public webMap: WebMap,
-              item: TreeGroup | TreeLayer, options?: ItemOptions, parent?: WebLayerItem) {
-    super(Object.assign({}, WebLayerItem.options, options));
+  constructor(public webMap: WebMap, item: TreeGroup | TreeLayer, options?: ItemOptions, parent?: WebMapLayerItem) {
+
+    super(Object.assign({}, WebMapLayerItem.options, options));
 
     this.item = item;
     if (parent) {
       this.tree.setParent(parent);
     }
     this.initProperties();
-    this.initItem(item);
+    this._init(item);
   }
 
   async initItem(item: TreeGroup | TreeLayer) {
@@ -54,18 +55,19 @@ export class WebLayerItem extends Item<ItemOptions> {
     if (item.item_type === 'group' || item.item_type === 'root') {
       if (item.children && item.children.length) {
         item.children.reverse().forEach((x) => {
-          const children = new WebLayerItem(this.webMap, x, this.options, this);
+          const children = new WebMapLayerItem(this.webMap, x, this.options, this);
           this.tree.addChildren(children);
         });
       }
     } else if (item.item_type === 'layer') {
-      const adapter = item.layer_adapter.toUpperCase() as keyof LayerAdapters;
+      const adapter = (item.adapter || item.layer_adapter.toUpperCase()) as keyof LayerAdapters;
       item.id = Number(this.id);
-      const options: any = {...item, ...{id: item.id}};
+      const options: any = { ...item, ...{ id: item.id } };
       newLayer = await this.webMap.addLayer(adapter, options);
     }
     if (newLayer) {
       item._layer = newLayer;
+      this.adapter = newLayer;
       if (item.item_type === 'layer' && item.layer_enabled) {
         this.properties.property('visibility').set(true);
       }
@@ -75,10 +77,20 @@ export class WebLayerItem extends Item<ItemOptions> {
   }
 
   // region layer control
+  bringToFront() {
+    //
+  }
+
   fit(): void {
     if (this.item.item_type === 'layer') {
       console.log(this.item);
     }
   }
   //
+
+  private async _init (item) {
+    await this.initItem(item);
+    this.emitter.emit('init');
+  }
+
 }
