@@ -11,6 +11,7 @@ import { loadJSON, template } from './utils';
 import { EventEmitter } from 'events';
 
 export * from './interfaces';
+export * from './types/ResourceItem';
 
 const OPTIONS: NgwConnectorOptions = {
   route: '/api/component/pyramid/route',

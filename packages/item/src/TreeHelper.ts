@@ -35,6 +35,12 @@ export class TreeHelper {
   // endregion
 
   // region Child
+  find(filterFunc?: (item: Item) => boolean) {
+    return filterIn(this._children, filterFunc, (x) => {
+      return x.tree.getChildren();
+    })[0];
+  }
+
   getDescendants(filterFunc?: (item: Item) => boolean): any[] {
     return filterIn(this._children, filterFunc, (x) => {
       return x.tree.getChildren();

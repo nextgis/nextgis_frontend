@@ -150,7 +150,9 @@ export class OlMapAdapter implements MapAdapter {
   }
 
   setLayerOrder(layer, order, layers) {
-    layer.setZIndex(order);
+    if (layer.setZIndex) {
+      layer.setZIndex(order);
+    }
   }
 
   createControl(control: MapControl, options: CreateControlOptions) {

@@ -52,7 +52,8 @@
       html: 'DEM',
       title: 'Toggle DEM',
       onClick: function () {
-        var layer = ngwMap.webMap.layers.tree.getDescendants(function (x) {
+        var ngwmap = ngwMap.webMap.getLayer('webmap-4119');
+        var layer = ngwmap.layer.tree.getDescendants(function (x) {
           return x.item.display_name === 'Digital Elevation Model (DEM)';
         })[0];
         layer.properties.set('visibility', !layer.properties.get('visibility'));
@@ -64,7 +65,8 @@
         var list = document.createElement('div');
         list.className = 'ngw-layers';
         // find all layer from ngw webmap tree
-        ngwMap.webMap.layers.tree.getDescendants().forEach(function (layer) {
+        var ngwmap = ngwMap.webMap.getLayer('webmap-4119');
+        ngwmap.layer.tree.getDescendants().forEach(function (layer) {
           if (layer.item.item_type === 'layer') {
             var layerElement = document.createElement('div');
 
@@ -84,10 +86,10 @@
             list.appendChild(layerElement);
           }
         });
-        const visibility = ngwMap.webMap.layers.properties.property('visibility');
+        var visibility = ngwmap.layer.properties.property('visibility');
         // listen any layer visibility change
         visibility.emitter.on('change-tree', function (data) {
-          var itemId = data.entry.item.id;
+          var itemId = data.item.id;
           var checkbox = list.querySelector('#layer-' + itemId);
           checkbox.checked = data.value;
         });

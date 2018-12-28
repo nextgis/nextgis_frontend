@@ -134,18 +134,19 @@ export class MapboxglMapAdapter implements MapAdapter<Map, string[], IControl> {
     orderedLayers = orderedLayers.sort((a, b) => {
       return a.order - b.order;
     });
-
+    const firstLayerId = this._getLayerIds(orderedLayers[0])[0];
     // normilize layer ordering
     baseLayers.forEach((x) => {
-
       x.layer.forEach((y) => {
-        this.map.moveLayer(y, orderedLayers[0].layer[0]);
+        this.map.moveLayer(y, firstLayerId);
       });
     });
     for (let fry = 0; fry < orderedLayers.length; fry++) {
       const nextlayer = orderedLayers[fry + 1];
       const nextlayerId = nextlayer && nextlayer.layer[0];
-      orderedLayers[fry].layer.forEach((x) => {
+      const mem = orderedLayers[fry];
+      const _layers = this._getLayerIds(mem);
+      _layers.forEach((x) => {
         this.map.moveLayer(x, nextlayerId);
       });
     }
@@ -206,6 +207,20 @@ export class MapboxglMapAdapter implements MapAdapter<Map, string[], IControl> {
     const { x, y } = evt.point;
 
     this.emitter.emit('click', { latLng, pixel: { top: y, left: x } });
+  }
+
+  private _getLayerIds(mem: LayerMem): string[] {
+    let _layers = [];
+    if (Array.isArray(mem.layer)) {
+      _layers = mem.layer;
+    } else if (mem.adapter.getDependLayers) {
+      mem.adapter.getDependLayers().forEach((x) => {
+        x.forEach((y) => {
+          _layers.push(y);
+        });
+      });
+    }
+    return _layers;
   }
 
   private _toggleLayer(layerId: string, status: boolean) {

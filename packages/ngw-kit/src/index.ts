@@ -1,93 +1,27 @@
 import NgwConnector from '@nextgis/ngw-connector';
 import WebMap, { StarterKit } from '@nextgis/webmap';
+import { updateWmsParams, getLayerAdapterOptions, addNgwLayer } from './utils';
+import { NgwKitOptions, RequestOptions, WebMapAdapterOptions } from './interfaces';
+import { WebMapLayerAdapter } from './WebMapLayerAdapter';
 
-export interface NgwLayerOptions {
-  id: number;
-  adapter?: 'IMAGE' | 'TILE' | 'GEOJSON';
-}
-
-export interface NgwConfig {
-  applicationUrl: string;
-  assetUrl: string;
-  amdUrl: string;
-  id: number;
-}
-
-export interface NgwKitOptions {
-  baseUrl?: string;
-  pixelRadius?: number;
-  resourceId?: number;
-  auth?: {
-    login: string;
-    password: string;
-  };
-}
-
-interface RequestOptions {
-  srs: number;
-  geom: any;
-  layers: string[];
-}
 export default class NgwKit implements StarterKit {
 
-  static updateWmsParams = (params, resourceId) => {
-    const { bbox, width, height } = params;
-    return {
-      resource: resourceId,
-      extent: bbox,
-      size: width + ',' + height,
-      timestamp: Date.now(),
-    };
-  }
+  static updateWmsParams = updateWmsParams;
 
-  static getLayerAdapterOptions(options: NgwLayerOptions, webMap: WebMap, baseUrl) {
-    let adapter = options.adapter || 'IMAGE';
-    let url = baseUrl;
-    const layerAdapters = webMap.getLayerAdapters();
-    const isImageAllowed = layerAdapters ? layerAdapters.IMAGE : true;
-    if (adapter === 'IMAGE') {
-      if (isImageAllowed) {
-        url += '/api/component/render/image';
-        return {
-          url,
-          id: String(options.id),
-          resourceId: options.id,
-          updateWmsParams: (params) => NgwKit.updateWmsParams(params, options.id)
-        };
-      } else {
-        adapter = 'TILE';
-      }
-    }
-    if (adapter === 'TILE') {
-      url += '/api/component/render/tile?z={z}&x={x}&y={y}&resource=' + options.id;
-      return { url, id: String(options.id), adapter, layer_adapter: adapter };
-    }
-  }
+  static getLayerAdapterOptions = getLayerAdapterOptions;
 
-  static addNgwLayer(options: NgwLayerOptions, webMap: WebMap, baseUrl) {
-    let adapter = options.adapter || 'IMAGE';
-    const layerAdapters = webMap.getLayerAdapters();
-    const isImageAllowed = layerAdapters ? layerAdapters.IMAGE : true;
-    if (!isImageAllowed) {
-      adapter = 'TILE';
-    }
-    if (adapter === 'IMAGE' || adapter === 'TILE') {
-      return webMap.addLayer(adapter,
-        NgwKit.getLayerAdapterOptions(options, webMap, baseUrl)
-      );
-    } else {
-      throw new Error(adapter + ' not supported yet. Only TILE');
-    }
-  }
+  static addNgwLayer = addNgwLayer;
 
   options: NgwKitOptions = {};
-
+  webMap: WebMap;
   url: string;
-  resourceId: number;
+  resourceId: number | number[];
   connector: NgwConnector;
 
   // Radius for searching objects in pixels
   pixelRadius = 10; // webmapSettings.identify_radius,
+
+  private _adapter: WebMapLayerAdapter;
 
   constructor(options?: NgwKitOptions) {
     this.options = { ...this.options, ...options };
@@ -99,16 +33,25 @@ export default class NgwKit implements StarterKit {
     this.connector = new NgwConnector({ baseUrl: this.url, auth: this.options.auth });
   }
 
-  getSettings(webMap?: WebMap) {
-    return new Promise((resolve) => {
-      this.connector.request('resource.item', { id: this.resourceId }).then((data) => {
-        const webmap = data.webmap;
-        if (webmap) {
-          this._updateItemsParams(webmap.root_item, webMap);
-          resolve(data.webmap);
-        }
-      });
-    });
+  async onLoadSync(webMap: WebMap) {
+    const resourceIds = [].concat(this.resourceId);
+    if (resourceIds.length) {
+      for (const r of resourceIds) {
+        const layer = await webMap.addLayer<'WEBMAP', WebMapAdapterOptions>(WebMapLayerAdapter, {
+          id: r,
+          connector: this.connector,
+          baseUrl: this.options.baseUrl,
+          webMap
+        });
+        webMap.showLayer(layer.name);
+        const extent = await layer.getExtent();
+        webMap.fit(extent);
+      }
+    }
+  }
+
+  getLayerAdapters() {
+    return Promise.resolve([this._getlayerAdapter()]);
   }
 
   onMapClick(ev, webMap: WebMap) {
@@ -120,12 +63,12 @@ export default class NgwKit implements StarterKit {
 
     webMap.emitter.emit('start-identify', { ev });
     const geom = webMap.requestGeomString(ev.pixel, this.pixelRadius);
-    let layers: string[] = options.layers;
+    const layers: string[] = options.layers;
     if (!layers) {
-      // TODO: layer_style_id - 1 is hardcode to get layers id for geonote.nextgis.com instant
-      layers = webMap.layers.tree.getDescendants().filter((x) => {
-        return x.item.item_type === 'layer' && x.properties.get('visibility');
-      }).map((x) => String(Number(x.item.layer_style_id) - 1));
+      // TODO: layer_style_id - 1 is hardcode to get layers id for NGW webmap
+      // layers = webMap.layers.tree.getDescendants().filter((x) => {
+      //   return x.item.item_type === 'layer' && x.properties.get('visibility');
+      // }).map((x) => String(Number(x.item.layer_style_id) - 1));
     }
     const data: RequestOptions = {
       geom,
@@ -136,32 +79,25 @@ export default class NgwKit implements StarterKit {
       webMap.emitter.emit('identify', { ev, data: resp });
       return resp;
     });
-
   }
 
-  private _updateItemsParams(item, webMap: WebMap) {
-    if (item) {
-      if (item.children) {
-        item.children = item.children.map((x) => this._updateItemsParams(x, webMap));
-      } else if (item.item_type === 'layer') {
-        const url = fixUrlStr(this.url + '/api/component/render/image');
-        item.url = url;
-        item.resourceId = item.layer_style_id;
-        item.updateWmsParams = (params) => NgwKit.updateWmsParams(params, item.resourceId);
-        item = {
-          ...item,
-          ...NgwKit.getLayerAdapterOptions({
-            adapter: item.layer_adapter.toUpperCase(),
-            id: item.layer_style_id
-          }, webMap, this.options.baseUrl)
-        };
-      }
+  private _getlayerAdapter() {
+    return {
+      name: 'WEBMAP',
+      createAdapter: (webmap: WebMap) => Promise.resolve(this._createAdapter(webmap)),
+    };
+  }
+
+  private _createAdapter(webMap: WebMap) {
+    if (!this._adapter) {
+      this.webMap = webMap;
+      this._adapter = new WebMapLayerAdapter(this.webMap, {
+        connector: this.connector,
+        baseUrl: this.options.baseUrl,
+        webMap
+      });
     }
-    return item;
+    return this._adapter;
   }
-}
 
-export function fixUrlStr(url: string) {
-  // remove double slash
-  return url.replace(/([^:]\/)\/+/g, '$1');
 }

@@ -71,6 +71,11 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     });
   }
 
+  setView(lngLat: [number, number], zoom: number) {
+    const [lng, lat] = lngLat;
+    this.map.setView([lat, lng], zoom);
+  }
+
   setCenter(lngLat: [number, number]) {
     const [lng, lat] = lngLat;
     this.map.setView([lat, lng], this.map.getZoom());

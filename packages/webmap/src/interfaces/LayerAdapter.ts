@@ -1,5 +1,5 @@
 import { GeoJsonObject, Feature } from 'geojson';
-import { LatLng } from './BaseTypes';
+import { LatLng, LayerExtent } from './BaseTypes';
 
 export interface OnLayerClickOptions {
   adapter: LayerAdapter;
@@ -109,4 +109,8 @@ export interface LayerAdapter<O = any, L = any, M = any> {
   filter?(cb: (opt: { layer: L, feature?: Feature }) => boolean): void;
 
   onLayerClick?(opt: OnLayerClickOptions): Promise<any>;
+
+  getExtent?(): LayerExtent | Promise<LayerExtent>;
+
+  getDependLayers?(): L[];
 }
