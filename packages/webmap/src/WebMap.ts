@@ -1,6 +1,7 @@
 import { MapOptions, AppOptions } from './interfaces/WebMapApp';
-import { AppSettings, StarterKit } from './interfaces/AppSettings';
-import { WebLayerItem } from './WebLayerItem';
+import { LayerExtent } from './interfaces/BaseTypes';
+import { StarterKit } from './interfaces/StarterKit';
+import { AdapterOptions } from './interfaces/LayerAdapter';
 import { Keys } from './components/keys/Keys';
 import { EventEmitter } from 'events';
 import { MapAdapter, MapClickEvent, ControlPositions, FitOptions } from './interfaces/MapAdapter';
@@ -10,6 +11,7 @@ import { LayerAdapters, LayerAdapter, OnLayerClickOptions } from './interfaces/L
 import { Type } from './utils/Type';
 import { MapControl, MapControls, CreateControlOptions, CreateButtonControlOptions } from './interfaces/MapControl';
 import { onLoad } from './utils/decorators';
+import { Feature } from 'geojson';
 
 export interface LayerMem<L = any> {
   id: string;
@@ -27,14 +29,12 @@ export class WebMap<M = any, L = any, C = any> {
   displayProjection = 'EPSG:3857';
   lonlatProjection = 'EPSG:4326';
 
-  settings: AppSettings;
-  layers: WebLayerItem;
   emitter = new EventEmitter();
   keys: Keys = new Keys(); // TODO: make injectable cached
   mapAdapter: MapAdapter<M>;
   runtimeParams: RuntimeParams[];
 
-  _eventsStatus: {[eventName: string]: boolean} = {};
+  _eventsStatus: { [eventName: string]: boolean } = {};
 
   private DPI = 1000 / 39.37 / 0.28;
   private IPM = 39.37;
@@ -59,53 +59,8 @@ export class WebMap<M = any, L = any, C = any> {
 
     this.options = deepmerge(this.options || {}, options);
 
-    if (!this.settings && this._starterKits.length) {
-      try {
-        await this.getSettings();
-      } catch (er) {
-        console.error(er);
-      }
-    }
     await this._setupMap();
     return this;
-  }
-
-  async getSettings(): Promise<AppSettings | Error> {
-    if (this.settings) {
-      return Promise.resolve(this.settings);
-    }
-    if (this.settingsIsLoading) {
-
-      return new Promise<AppSettings>((resolve) => {
-        const onSetingLoad = (x) => {
-          resolve(x);
-          this.emitter.removeListener('load-settings', onSetingLoad);
-        };
-        this.emitter.on('load-settings', onSetingLoad);
-      });
-    } else {
-      this.settingsIsLoading = true;
-      let settings: AppSettings | boolean;
-      try {
-        settings = {};
-
-        for (const kit of this._starterKits.filter((x) => x.getSettings)) {
-          const setting = await kit.getSettings.call(kit, this);
-          if (setting) {
-            Object.assign(settings, setting);
-          }
-        }
-      } catch (er) {
-        this.settingsIsLoading = false;
-        throw new Error(er);
-      }
-      if (settings) {
-        this.settings = settings;
-        this.settingsIsLoading = false;
-        this.emitter.emit('load-settings', settings);
-        return settings;
-      }
-    }
   }
 
   // region MapAdapter methods
@@ -147,7 +102,7 @@ export class WebMap<M = any, L = any, C = any> {
   }
 
   setView(lngLat: [number, number], zoom) {
-    if (this.mapAdapter.setView) {
+    if (this.mapAdapter.setView && lngLat && zoom) {
       this.mapAdapter.setView(lngLat, zoom);
     } else {
       if (lngLat) {
@@ -160,9 +115,17 @@ export class WebMap<M = any, L = any, C = any> {
   }
 
   // [extent_left, extent_bottom, extent_right, extent_top];
-  fit(e: [number, number, number, number], options?: FitOptions): this {
+  fit(e: LayerExtent, options?: FitOptions): this {
     this.mapAdapter.fit(e, options);
     return this;
+  }
+
+  async fitLayer(layerId: string) {
+    const layer = this.getLayer(layerId);
+    if (layer && layer.adapter.getExtent) {
+      const extent = await layer.adapter.getExtent();
+      this.fit(extent);
+    }
   }
 
   getLayerAdapters(): { [name: string]: Type<LayerAdapter> } {
@@ -209,9 +172,9 @@ export class WebMap<M = any, L = any, C = any> {
     return this.mapAdapter.addControl(control, position, options);
   }
 
-  async addLayer<K extends keyof LayerAdapters>(
+  async addLayer<K extends keyof LayerAdapters, O extends AdapterOptions = AdapterOptions>(
     layerAdapter: K | Type<LayerAdapter>,
-    options?: LayerAdapters[K], baselayer?: boolean): Promise<LayerAdapter> {
+    options?: O | LayerAdapters[K], baselayer?: boolean): Promise<LayerAdapter> {
 
     let adapterEngine;
     if (typeof layerAdapter === 'string') {
@@ -350,7 +313,7 @@ export class WebMap<M = any, L = any, C = any> {
     }
   }
 
-  filterLayer(layerId: string, filter: ({ feature, layer }) => boolean) {
+  filterLayer(layerId: string, filter: (opt: { feature: Feature, layer: any }) => boolean) {
     const layer = this.getLayer(layerId);
     if (layer && layer.adapter.filter) {
       layer.adapter.filter(filter);
@@ -360,45 +323,18 @@ export class WebMap<M = any, L = any, C = any> {
 
   // region MAP
   private async _setupMap() {
-    if (this.settings) {
-      const { extent_bottom, extent_left, extent_top, extent_right } = this.settings;
-      if (extent_bottom && extent_left && extent_top && extent_right) {
-        this._extent = [extent_left, extent_bottom, extent_right, extent_top];
-        const extent = this._extent;
-        if (extent[3] > 82) {
-          extent[3] = 82;
-        }
-        if (extent[1] < -82) {
-          extent[1] = -82;
-        }
-      }
-    }
+
     this.mapAdapter.displayProjection = this.displayProjection;
     this.mapAdapter.lonlatProjection = this.lonlatProjection;
 
     this.mapAdapter.create(this.options);
-
-    this._addTreeLayers();
-    await this._addLayerProviders();
-
     this._zoomToInitialExtent();
+
+    await this._addLayerProviders();
+    await this._onLoadSync();
+
     this.emitter.emit('build-map', this.mapAdapter);
     return this;
-  }
-
-  private async _addTreeLayers() {
-    try {
-      const settings = await this.getSettings() as AppSettings;
-      if (settings) {
-        const rootLayer = settings.root_item;
-        if (rootLayer) {
-          this.layers = new WebLayerItem(this, rootLayer);
-          this.emitter.emit('add-layers', this.layers);
-        }
-      }
-    } catch (er) {
-      console.error(er);
-    }
   }
 
   private _zoomToInitialExtent() {
@@ -406,30 +342,33 @@ export class WebMap<M = any, L = any, C = any> {
       this.mapAdapter.fit(this._extent);
     } else {
       const { center, zoom } = this.options;
-
-      if (center) {
-        this.mapAdapter.setCenter(center);
-      }
-      if (zoom) {
-        this.mapAdapter.setZoom(zoom);
-      }
+      this.setView(center, zoom);
     }
   }
 
   private async _addLayerProviders() {
     try {
-
       for await (const kit of this._starterKits.filter((x) => x.getLayerAdapters)) {
         const adapters = await kit.getLayerAdapters.call(kit);
         if (adapters) {
           for await (const adapter of adapters) {
             // this.map.layerAdapters[adapter.name] = adapter;
-            const newAdapter = await adapter.createAdapter(this.mapAdapter);
+            const newAdapter = await adapter.createAdapter(this);
             if (newAdapter) {
               this.mapAdapter.layerAdapters[adapter.name] = newAdapter;
             }
           }
         }
+      }
+    } catch (er) {
+      throw new Error(er);
+    }
+  }
+
+  private async _onLoadSync() {
+    try {
+      for await (const kit of this._starterKits.filter((x) => x.onLoadSync)) {
+        await kit.onLoadSync.call(kit, this);
       }
     } catch (er) {
       throw new Error(er);

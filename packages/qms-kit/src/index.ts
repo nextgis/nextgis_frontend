@@ -49,18 +49,17 @@ export default class QmsKit implements StarterKit {
   getLayerAdapters() {
     return Promise.resolve([{
       name: 'QMS',
-      createAdapter: (webmap) => Promise.resolve(this._createAdapter(webmap)),
+      createAdapter: (webmap: WebMap) => Promise.resolve(this._createAdapter(webmap)),
     }]);
-
   }
 
   async getQmsServices() {
     return loadJSON<GeoserviceInList[]>(this.url + '/api/v1/geoservices/');
   }
 
-  private _createAdapter(map) {
+  private _createAdapter(webMap: WebMap) {
     const url = this.url;
-    this.map = map;
+    this.map = webMap;
     const alias = {
       tms: 'TILE',
     };
@@ -73,7 +72,7 @@ export default class QmsKit implements StarterKit {
       return loadJSON<Geoservice>(url + '/api/v1/geoservices/' + options.qmsid).then((service) => {
         if (service) {
           const type = alias[service.type];
-          const webMapAdapter = map.layerAdapters[type];
+          const webMapAdapter = webMap.mapAdapter.layerAdapters[type];
           if (webMapAdapter) {
             if (type === 'TILE') {
               const serviceUrl = service.url.replace(

@@ -7,7 +7,8 @@
   "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/ngw-connector": "^0.10.0",
-    "@nextgis/webmap": "^0.10.1"
+    "@nextgis/webmap": "^0.10.1",
+    "@nextgis/item": "^0.10.1"
   },
   "devDependencies": {
     "@types/events": "^1.2.0",
