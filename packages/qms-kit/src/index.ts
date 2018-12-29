@@ -1,7 +1,13 @@
-import WebMap, { StarterKit } from '@nextgis/webmap';
+import WebMap, { StarterKit, AdapterOptions } from '@nextgis/webmap';
 
 export interface QmsOptions {
   url: string;
+}
+
+export interface QmsAdapterOptions extends AdapterOptions {
+  name: string;
+  attribution: string;
+  qmsid?: number;
 }
 
 interface GeoserviceInList {
@@ -57,37 +63,47 @@ export default class QmsKit implements StarterKit {
     return loadJSON<GeoserviceInList[]>(this.url + '/api/v1/geoservices/');
   }
 
+  private _getNameFromOptions(options: QmsAdapterOptions) {
+    if (options.qmsid) {
+      return 'qms-' + (typeof options.qmsid === 'string' ? parseInt(options.qmsid, 10) : options.qmsid);
+    } else if (options.id) {
+      return options.id;
+    }
+  }
+
   private _createAdapter(webMap: WebMap) {
     const url = this.url;
     this.map = webMap;
     const alias = {
       tms: 'TILE',
     };
-    const adapter = function(m: WebMap, options) {
+
+    const getNameFromOptions = this._getNameFromOptions;
+
+    const adapter = function (m: WebMap, options: QmsAdapterOptions) {
       this.map = m;
-      this.name = (options.idPrefix ? options.idPrefix : 'qms-') + options.id;
+      this.name = getNameFromOptions(options);
     };
 
-    adapter.prototype.addLayer = function(options) {
-      return loadJSON<Geoservice>(url + '/api/v1/geoservices/' + options.qmsid).then((service) => {
-        if (service) {
-          const type = alias[service.type];
-          const webMapAdapter = webMap.mapAdapter.layerAdapters[type];
-          if (webMapAdapter) {
-            if (type === 'TILE') {
-              const serviceUrl = service.url.replace(
-                /^(https?|ftp):\/\//,
-                (location.protocol === 'https:' ? 'https' : 'http') + '://'
-              );
-              options.id = (options.idPrefix ? options.idPrefix : 'qms-') + options.id;
-              options.url = serviceUrl;
-              options.name = service.name;
-              options.attribution = service.copyright_text;
-              return webMapAdapter.prototype.addLayer.call(this, options);
-            }
+    adapter.prototype.addLayer = async function (options: QmsAdapterOptions) {
+
+      // qmsid for request, id for store
+      const service = await loadJSON<Geoservice>(url + '/api/v1/geoservices/' + (options.qmsid || options.id));
+      if (service) {
+        const type = alias[service.type];
+        const webMapAdapter = webMap.mapAdapter.layerAdapters[type];
+        if (webMapAdapter) {
+          if (type === 'TILE') {
+            const protocol = (location.protocol === 'https:' ? 'https' : 'http') + '://';
+            const serviceUrl = service.url.replace(/^(https?|ftp):\/\//, protocol);
+            options.id = getNameFromOptions(options);
+            options.url = serviceUrl;
+            options.name = service.name;
+            options.attribution = service.copyright_text;
+            return webMapAdapter.prototype.addLayer.call(this, options);
           }
         }
-      });
+      }
     };
     return adapter;
   }
