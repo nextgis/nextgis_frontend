@@ -30,11 +30,15 @@ export class WebMapLayerAdapter implements LayerAdapter {
   }
 
   showLayer() {
-    this.layer.properties.property('visibility').set(true);
+    if (this.layer.properties) {
+      this.layer.properties.property('visibility').set(true);
+    }
   }
 
   hideLayer() {
-    this.layer.properties.property('visibility').set(false);
+    if (this.layer.properties) {
+      this.layer.properties.property('visibility').set(false);
+    }
   }
 
   getExtent(): [number, number, number, number] {
@@ -67,11 +71,12 @@ export class WebMapLayerAdapter implements LayerAdapter {
 
   private async _getWebMapLayerItem(): Promise<WebMapLayerItem> {
     const webmap = await this.getWebMapConfig(parseInt(this.options.id, 10));
-
-    return new Promise((resolve) => {
-      const layer = new WebMapLayerItem(this.options.webMap, webmap.root_item);
-      layer.emitter.on('init', () => resolve(layer));
-    });
+    if (webmap && webmap.root_item) {
+      return new Promise<WebMapLayerItem>((resolve) => {
+        const layer = new WebMapLayerItem(this.options.webMap, webmap.root_item);
+        layer.emitter.on('init', () => resolve(layer));
+      });
+    }
   }
 
   private async getWebMapConfig(id: number) {
@@ -82,6 +87,8 @@ export class WebMapLayerAdapter implements LayerAdapter {
       if (webmap) {
         this._updateItemsParams(webmap.root_item, this.options.webMap);
         return webmap;
+      } else {
+        // TODO: resource is no webmap
       }
     } catch (er) {
       throw er;
