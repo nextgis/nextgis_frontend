@@ -6,7 +6,7 @@
   "unpkg": "lib/ngw-connector.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "events": "*"
+    "events": "^3.0.0"
   },
   "devDependencies": {
     "@types/events": "^1.2.0",
