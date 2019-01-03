@@ -8,7 +8,7 @@
   "dependencies": {
     "@nextgis/dialog": "^0.11.0",
     "@nextgis/ngw-connector": "^0.11.0",
-    "events": "*"
+    "events": "^3.0.0"
   },
   "devDependencies": {
     "@types/events": "^1.2.0",

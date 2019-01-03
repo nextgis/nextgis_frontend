@@ -8,7 +8,7 @@
   "dependencies": {
     "@nextgis/ngw-map": "^0.11.0",
     "@nextgis/ol-map-adapter": "^0.11.0",
-    "events": "*",
+    "events": "^3.0.0",
     "ol": "^5.3.0"
   },
   "devDependencies": {
