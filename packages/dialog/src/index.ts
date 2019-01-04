@@ -63,6 +63,10 @@ export default class Dialog implements DialogAdapter {
     this._addEventsListeners();
   }
 
+  getContainer() {
+    return this._dialog;
+  }
+
   show() {
     this._dialog.showModal();
   }
