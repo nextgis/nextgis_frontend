@@ -5,7 +5,9 @@ import {
   MapControl,
   ControlPositions,
   CreateButtonControlOptions,
-  MapControls
+  MapControls,
+  MapCenter,
+  MapOptions
 } from '@nextgis/webmap';
 import { MvtAdapter } from './layer-adapters/MvtAdapter';
 import { Map, IControl, MapEventType, EventData } from 'mapbox-gl';
@@ -18,7 +20,6 @@ import { AttributionControl } from './controls/AttributionControl';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 import { createControl } from './controls/createControl';
 import { createButtonControl } from './controls/createButtonControl';
-import { MapCenter } from 'packages/webmap/src/interfaces/BaseTypes';
 
 type TLayer = string[];
 
@@ -38,7 +39,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     ATTRIBUTION: AttributionControl,
   };
 
-  options: any;
+  options: MapOptions;
 
   displayProjection = 'EPSG:3857';
   lonlatProjection = 'EPSG:4326';
