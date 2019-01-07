@@ -13,13 +13,13 @@ import { MapControl, MapControls, CreateControlOptions, CreateButtonControlOptio
 import { onLoad } from './utils/decorators';
 import { Feature } from 'geojson';
 
-export interface LayerMem<L = any> {
+export interface LayerMem<L = any, M = any, O = any> {
   id: string;
   layer: L;
   onMap: boolean;
   order?: number;
   baseLayer?: boolean;
-  adapter: LayerAdapter;
+  adapter: LayerAdapter<O, L, M>;
 }
 
 export class WebMap<M = any, L = any, C = any> {
@@ -39,7 +39,6 @@ export class WebMap<M = any, L = any, C = any> {
   private DPI = 1000 / 39.37 / 0.28;
   private IPM = 39.37;
 
-  private settingsIsLoading = false;
   private _starterKits: StarterKit[];
   private _baseLayers: string[] = [];
   private _extent: [number, number, number, number];
@@ -61,6 +60,18 @@ export class WebMap<M = any, L = any, C = any> {
 
     await this._setupMap();
     return this;
+  }
+
+  getContainer(): HTMLElement {
+    if (this.mapAdapter.getContainer) {
+      return this.mapAdapter.getContainer();
+    } else if (this.options.target) {
+      if (this.options.target instanceof HTMLElement) {
+        return this.options.target;
+      } else if (typeof this.options.target === 'string') {
+        return document.getElementById(this.options.target);
+      }
+    }
   }
 
   // region MapAdapter methods
@@ -160,6 +171,14 @@ export class WebMap<M = any, L = any, C = any> {
   createButtonControl(options: CreateButtonControlOptions) {
     if (this.mapAdapter.createControl) {
       return this.mapAdapter.createButtonControl(options);
+    }
+  }
+
+  removeControl(control: any) {
+    if (control.remove) {
+      control.remove();
+    } else if (this.mapAdapter.removeControl) {
+      this.mapAdapter.removeControl(control);
     }
   }
 
