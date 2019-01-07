@@ -125,6 +125,10 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     }
   }
 
+  removeControl(control) {
+    this.map.removeControl(control);
+  }
+
   removeLayer(layer: Layer) {
     layer.remove();
   }
