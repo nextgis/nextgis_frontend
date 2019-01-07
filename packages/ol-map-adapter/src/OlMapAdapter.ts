@@ -179,6 +179,10 @@ export class OlMapAdapter implements MapAdapter {
     }
   }
 
+  removeControl(control) {
+    this._panelControl.removeControl(control);
+  }
+
   onMapClick(evt: ol.MapBrowserPointerEvent) {
     const [lng, lat] = transform(
       evt.coordinate,
