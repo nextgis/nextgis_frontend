@@ -4,10 +4,11 @@ import {
   FitOptions,
   MapControl,
   ControlPositions,
-  CreateButtonControlOptions
+  CreateButtonControlOptions,
+  MapControls
 } from '@nextgis/webmap';
 import { MvtAdapter } from './layer-adapters/MvtAdapter';
-import { Map, IControl } from 'mapbox-gl';
+import { Map, IControl, MapEventType, EventData } from 'mapbox-gl';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
 import { TileAdapter } from './layer-adapters/TileAdapter';
 import { EventEmitter } from 'events';
@@ -17,10 +18,11 @@ import { AttributionControl } from './controls/AttributionControl';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 import { createControl } from './controls/createControl';
 import { createButtonControl } from './controls/createButtonControl';
+import { MapCenter } from 'packages/webmap/src/interfaces/BaseTypes';
 
-type TControl = new (options?) => IControl;
+type TLayer = string[];
 
-export class MapboxglMapAdapter implements MapAdapter<Map, string[], IControl> {
+export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
 
   static layerAdapters = {
     TILE: TileAdapter,
@@ -76,48 +78,53 @@ export class MapboxglMapAdapter implements MapAdapter<Map, string[], IControl> {
     return this.map.getContainer();
   }
 
-  setCenter(latLng: [number, number]) {
+  setView(center: MapCenter, zoom: number) {
+    this.map.jumpTo({ center, zoom });
+  }
+
+  setCenter(latLng: [number, number]): void {
     this.map.setCenter(latLng);
   }
 
-  setZoom(zoom: number) {
+  setZoom(zoom: number): void {
     this.map.setZoom(zoom);
   }
 
-  getZoom() {
+  getZoom(): number {
     return this.map.getZoom();
   }
 
   // [extent_left, extent_bottom, extent_right, extent_top];
-  fit(e: [number, number, number, number], options: FitOptions = {}) {
+  fit(e: [number, number, number, number], options: FitOptions = {}): void {
     // top, left, bottom, right
     this.map.fitBounds([[e[0], e[1]], [e[2], e[3]]], { linear: true, ...options });
   }
 
-  setRotation(angle: number) {
+  setRotation(angle: number): void {
     // ignore
   }
 
-  showLayer(layerIds: string[]) {
+  showLayer(layerIds: string[]): void {
     layerIds.forEach((layerId) => {
       this._toggleLayer(layerId, true);
     });
   }
 
-  hideLayer(layerIds: string[]) {
+  hideLayer(layerIds: string[]): void {
     layerIds.forEach((layerId) => {
       this._toggleLayer(layerId, false);
     });
   }
 
-  removeLayer(layerIds: string[]) {
+  removeLayer(layerIds: string[]): void {
     layerIds.forEach((layerId) => {
       this.map.removeLayer(layerId);
       this.map.removeSource(layerId);
     });
   }
 
-  setLayerOrder(layerIds, order, layers: { [x: string]: LayerMem<string[]> }) {
+  // TODO: need optimization, something like throttle
+  setLayerOrder(layerIds, order, layers: { [x: string]: LayerMem<string[]> }): void {
     const baseLayers: Array<LayerMem<string[]>> = [];
     let orderedLayers: Array<LayerMem<string[]>> = [];
     for (const l in layers) {
@@ -152,7 +159,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, string[], IControl> {
     }
   }
 
-  setLayerOpacity(layerIds: string[], opacity: number) {
+  setLayerOpacity(layerIds: string[], opacity: number): void {
     layerIds.forEach((layerId) => {
       this.onMapLoad().then(() => {
         const layer = this.map.getLayer(layerId);
@@ -163,7 +170,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, string[], IControl> {
     });
   }
 
-  onMapLoad<K = any>(cb?): Promise<K> {
+  onMapLoad<K = any>(cb?: () => any): Promise<K> {
     return new Promise<K>((resolve) => {
       if (this.isLoaded) { // map.loaded()
         resolve(cb && cb());
@@ -176,15 +183,19 @@ export class MapboxglMapAdapter implements MapAdapter<Map, string[], IControl> {
     });
   }
 
-  createControl(control: MapControl) {
+  createControl(control: MapControl): IControl {
     return createControl(control);
   }
 
-  createButtonControl(options: CreateButtonControlOptions) {
+  createButtonControl(options: CreateButtonControlOptions): IControl {
     return createButtonControl(options);
   }
 
-  async addControl(controlDef: string | IControl, position: ControlPositions, options) {
+  async addControl<K extends keyof MapControls>(
+    controlDef: K | IControl,
+    position: ControlPositions,
+    options?: MapControls[K]): Promise<IControl> {
+
     let control: IControl;
     if (typeof controlDef === 'string') {
       const engine = MapboxglMapAdapter.controlAdapters[controlDef];
@@ -192,7 +203,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, string[], IControl> {
         control = new engine(options);
       }
     } else {
-      control = controlDef;
+      control = controlDef as IControl;
     }
     if (control) {
       const _control = await control;
@@ -201,7 +212,11 @@ export class MapboxglMapAdapter implements MapAdapter<Map, string[], IControl> {
     }
   }
 
-  onMapClick(evt) {
+  removeControl(control: IControl): void {
+    this.map.removeControl(control);
+  }
+
+  onMapClick(evt: MapEventType['click'] & EventData): void {
 
     const latLng = evt.lngLat;
     const { x, y } = evt.point;
@@ -209,7 +224,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, string[], IControl> {
     this.emitter.emit('click', { latLng, pixel: { top: y, left: x } });
   }
 
-  private _getLayerIds(mem: LayerMem): string[] {
+  private _getLayerIds(mem: LayerMem<TLayer, Map>): string[] {
     let _layers = [];
     if (Array.isArray(mem.layer)) {
       _layers = mem.layer;
@@ -223,13 +238,13 @@ export class MapboxglMapAdapter implements MapAdapter<Map, string[], IControl> {
     return _layers;
   }
 
-  private _toggleLayer(layerId: string, status: boolean) {
+  private _toggleLayer(layerId: string, status: boolean): void {
     this.onMapLoad().then(() => {
       this.map.setLayoutProperty(layerId, 'visibility', status ? 'visible' : 'none');
     });
   }
 
-  private _addEventsListeners() {
+  private _addEventsListeners(): void {
     // write mem for start loaded layers
     this.map.on('sourcedataloading', (data) => {
       this._sourcedataloading[data.sourceId] = this._sourcedataloading[data.sourceId] || [];

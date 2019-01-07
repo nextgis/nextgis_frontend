@@ -4,3 +4,5 @@ export interface LatLng {
 }
 
 export type LayerExtent = [number, number, number, number];
+
+export type MapCenter = [number, number];
