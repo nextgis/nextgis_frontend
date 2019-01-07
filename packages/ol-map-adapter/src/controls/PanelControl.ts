@@ -24,4 +24,9 @@ export class PanelControl extends Control {
     _control.setTarget(target);
     map.addControl(_control);
   }
+
+  removeControl(control) {
+    const map = this.getMap();
+    map.removeControl(control);
+  }
 }
