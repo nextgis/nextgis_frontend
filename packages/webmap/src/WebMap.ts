@@ -359,6 +359,8 @@ export class WebMap<M = any, L = any, C = any> {
   private _zoomToInitialExtent() {
     if (this._extent) {
       this.mapAdapter.fit(this._extent);
+    } else if (this.options.bounds) {
+      this.fit(this.options.bounds);
     } else {
       const { center, zoom } = this.options;
       this.setView(center, zoom);

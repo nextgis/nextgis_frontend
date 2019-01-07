@@ -1,6 +1,6 @@
 export interface RuntimeParams {
-  getParams(): {[paramName: string]: any};
-  getParam(name: string): any;
-  setParam(name: string, value: any): void;
-  removeParam(name: string): void;
+  params(): {[paramName: string]: any};
+  get(name: string): any;
+  set(name: string, value: any): void;
+  remove(name: string): void;
 }
