@@ -352,7 +352,7 @@ export class WebMap<M = any, L = any, C = any> {
     await this._addLayerProviders();
     await this._onLoadSync();
 
-    this.emitter.emit('build-map', this.mapAdapter);
+    this._emitLoadEvent('build-map', this.mapAdapter);
     return this;
   }
 
@@ -398,6 +398,11 @@ export class WebMap<M = any, L = any, C = any> {
   // endregion
 
   // region Events
+  private _emitLoadEvent(event: string, data: any) {
+    this._eventsStatus[event] = true;
+    this.emitter.emit(event, data);
+  }
+
   private async _onLayerClick(options: OnLayerClickOptions) {
     this.emitter.emit('layer:click', options);
     return Promise.resolve(options);

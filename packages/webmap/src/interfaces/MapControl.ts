@@ -36,12 +36,23 @@ export interface MapControl<M extends any = any> {
 
 }
 
-export interface CreateButtonControlOptions {
+interface CreateButtonControlFromHtmlOptions {
   html: string | HTMLElement;
-  onClick: () => void;
-  title?: string;
   addClass?: string;
 }
+
+interface CreateButtonControlFromClassOptions {
+  html?: string | HTMLElement;
+  addClass: string;
+}
+
+interface CreateButtonControlBaseOptions {
+  onClick: () => void;
+  title?: string;
+}
+
+export type CreateButtonControlOptions = CreateButtonControlBaseOptions &
+(CreateButtonControlFromHtmlOptions | CreateButtonControlFromClassOptions);
 
 export interface CreateControlOptions {
   bar?: boolean;
