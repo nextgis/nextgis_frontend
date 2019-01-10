@@ -4,6 +4,9 @@ import { IControl, Map } from 'mapbox-gl';
 export function createControl(control: MapControl, options: CreateControlOptions = {}): IControl {
 
   class Control implements IControl {
+
+    private _container: HTMLElement;
+
     getDefaultPosition() {
       return 'top-left';
     }
@@ -21,11 +24,17 @@ export function createControl(control: MapControl, options: CreateControlOptions
         element.classList.add(options.addClass);
       }
       element.appendChild(content);
-
-      return element;
+      this._container = element;
+      return this._container;
     }
 
     onRemove() {
+      if (this._container) {
+        const parent = this._container.parentNode;
+        if (parent) {
+          parent.removeChild(this._container);
+        }
+      }
       return control.onRemove();
     }
 
