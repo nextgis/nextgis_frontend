@@ -23,7 +23,7 @@ export class Item<O extends ItemOptions = ItemOptions> {
 
   emitter = EventEmitter && new EventEmitter();
 
-  constructor(options: ItemOptions) {
+  constructor(options?: ItemOptions) {
     this.options = { ...this.options, ...options };
     this.id = String(ID++);
     this.tree = new TreeHelper(this);

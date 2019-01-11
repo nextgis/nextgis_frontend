@@ -7,7 +7,7 @@
     "topological-sort": "^0.3.0",
     "tslint": "^5.12.0",
     "tslint-webpack-plugin": "^1.3.0",
-    "webpack": "^4.x.x"
+    "webpack": "^4.28.4"
   },
   "scripts": {
     "clean": "lerna run clean",
@@ -18,7 +18,7 @@
     "demo": "cd ./packages/demo/ && yarn run prod",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
-  "license": "LGPL 3.0",
+  "license": "LGPL-3.0",
   "workspaces": [
     "packages/*"
   ]
