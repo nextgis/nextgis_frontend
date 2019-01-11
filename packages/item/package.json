@@ -5,6 +5,9 @@
   "main": "lib/item.js",
   "unpkg": "lib/item.js",
   "types": "lib/item.d.ts",
+  "dependencies": {
+    "events": "^3.0.0"
+  },
   "devDependencies": {
     "@types/events": "^1.2.0",
     "@types/node": "^10.12.18",

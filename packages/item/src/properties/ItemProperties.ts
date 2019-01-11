@@ -79,7 +79,7 @@ export class ItemProperties {
     }
   }
 
-  property(name) {
+  property(name: string) {
     return this._properties[name];
   }
 

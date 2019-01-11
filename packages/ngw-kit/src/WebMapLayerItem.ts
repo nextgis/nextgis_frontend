@@ -40,7 +40,7 @@ export class WebMapLayerItem extends Item<ItemOptions> {
 
   constructor(public webMap: WebMap, item: TreeGroup | TreeLayer, options?: ItemOptions, parent?: WebMapLayerItem) {
 
-    super(Object.assign({}, WebMapLayerItem.options, options));
+    super({...WebMapLayerItem.options, ...options});
 
     this.item = item;
     if (parent) {
@@ -56,7 +56,7 @@ export class WebMapLayerItem extends Item<ItemOptions> {
       if (item.children && item.children.length) {
         item.children.reverse().forEach((x) => {
           const children = new WebMapLayerItem(this.webMap, x, this.options, this);
-          this.tree.addChildren(children);
+          this.tree.addChild(children);
         });
       }
     } else if (item.item_type === 'layer') {
