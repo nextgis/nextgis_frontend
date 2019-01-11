@@ -23,7 +23,7 @@
     "tslint": "^5.12.0",
     "tslint-webpack-plugin": "^2.0.1",
     "typescript": "^3.2.2",
-    "webpack": "^4.x.x",
+    "webpack": "^4.28.4",
     "webpack-bundle-analyzer": "^3.0.3",
     "webpack-cli": "^3.2.0"
   },
@@ -52,6 +52,6 @@
   "files": [
     "lib"
   ],
-  "license": "LGPL 3.0",
+  "license": "LGPL-3.0",
   "gitHead": "b0ada99d132188e7dcc80b713b7b3017f38fc078"
 }
