@@ -1,6 +1,15 @@
-import { EventEmitter } from 'events';
 import { Item } from '../Item';
 import { ItemBasePropertyOptions } from '../interfaces';
+
+let events;
+try {
+  events = require('events');
+} catch (er) {
+  // ignore
+}
+// tslint:disable-next-line:variable-name
+const EventEmitter = events && events.EventEmitter;
+
 // import StrictEventEmitter from 'strict-event-emitter-types/types/src';
 
 // export interface BasePropertyEvents<V, O> {
@@ -13,7 +22,7 @@ export class BaseProperty<V = any, O extends ItemBasePropertyOptions<V> = ItemBa
   options: O;
 
   // emitter: StrictEventEmitter<EventEmitter, BasePropertyEvents<V, O>> = new EventEmitter();
-  emitter = new EventEmitter();
+  emitter = EventEmitter && new EventEmitter();
   name: string;
 
   item: Item;
@@ -112,14 +121,16 @@ export class BaseProperty<V = any, O extends ItemBasePropertyOptions<V> = ItemBa
   }
 
   _fireChangeEvent(value: V, options: O) {
-    value = value !== undefined ? value : this.getValue();
-    this.emitter.emit('change', { value, options });
-    const parents = this.item.tree.getParents();
-    parents.forEach((x) => {
-      const prop = x.properties.property(this.name);
-      if (prop) {
-        prop.emitter.emit('change-tree', { value, options, item: this.item });
-      }
-    });
+    if (this.emitter) {
+      value = value !== undefined ? value : this.getValue();
+      this.emitter.emit('change', { value, options });
+      const parents = this.item.tree.getParents();
+      parents.forEach((x) => {
+        const prop = x.properties.property(this.name);
+        if (prop) {
+          prop.emitter.emit('change-tree', { value, options, item: this.item });
+        }
+      });
+    }
   }
 }

@@ -17,8 +17,8 @@ export class TreeHelper {
     this._parent = parent;
   }
 
-  addChildren(children: Item) {
-    this._children.push(children);
+  addChild(child: Item) {
+    this._children.push(child);
   }
 
   getParent(): Item {
@@ -39,6 +39,11 @@ export class TreeHelper {
     return filterIn(this._children, filterFunc, (x) => {
       return x.tree.getChildren();
     })[0];
+  }
+
+  // getDescendants shortcut
+  all(filterFunc?: (item: Item) => boolean): any[] {
+    return this.getDescendants(filterFunc);
   }
 
   getDescendants(filterFunc?: (item: Item) => boolean): any[] {

@@ -7,7 +7,7 @@ module.exports = (env, argv) => {
   return common(env, argv, {
     library,
     package,
-    externals: true,
+    externals: false,
     dirname: __dirname,
   })
 }
