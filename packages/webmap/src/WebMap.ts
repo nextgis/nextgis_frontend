@@ -13,8 +13,6 @@ import { MapControl, MapControls, CreateControlOptions, CreateButtonControlOptio
 import { onLoad } from './utils/decorators';
 import { Feature } from 'geojson';
 
-import Item from '@nextgis/item';
-
 export interface LayerMem<L = any, M = any, O = any> {
   id: string;
   layer: L;
@@ -54,8 +52,6 @@ export class WebMap<M = any, L = any, C = any> {
     this._starterKits = appOptions.starterKits || [];
 
     this._addEventsListeners();
-
-    const item = new Item();
   }
 
   async create(options: MapOptions): Promise<this> {

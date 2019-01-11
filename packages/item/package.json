@@ -4,7 +4,7 @@
   "description": "Hierarchical layers control",
   "main": "lib/item.js",
   "unpkg": "lib/item.js",
-  "types": "lib/item.d.ts",
+  "types": "lib/index.d.ts",
   "dependencies": {
     "events": "^3.0.0"
   },
