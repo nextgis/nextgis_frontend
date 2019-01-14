@@ -52,6 +52,7 @@ export class OlMapAdapter implements MapAdapter {
   options: any;
 
   layerAdapters = OlMapAdapter.layerAdapters;
+  controlAdapters = OlMapAdapter.controlAdapters;
 
   displayProjection = 'EPSG:3857';
   lonlatProjection = 'EPSG:4326';
@@ -163,20 +164,9 @@ export class OlMapAdapter implements MapAdapter {
     return createButtonControl(options);
   }
 
-  addControl(controlDef, position?: ControlPositions, options?) {
-    let control;
-    if (typeof controlDef === 'string') {
-      const engine = OlMapAdapter.controlAdapters[controlDef];
-      if (engine) {
-        control = new engine();
-      }
-    } else {
-      control = controlDef;
-    }
-    if (control) {
-      this._panelControl.addControl(control, position);
-      return control;
-    }
+  addControl(control, position?: ControlPositions) {
+    this._panelControl.addControl(control, position);
+    return control;
   }
 
   removeControl(control) {

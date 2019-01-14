@@ -49,6 +49,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   emitter = new EventEmitter();
 
   layerAdapters = MapboxglMapAdapter.layerAdapters;
+  controlAdapters = MapboxglMapAdapter.controlAdapters;
 
   private isLoaded = false;
 
@@ -192,25 +193,9 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     return createButtonControl(options);
   }
 
-  async addControl<K extends keyof MapControls>(
-    controlDef: K | IControl,
-    position: ControlPositions,
-    options?: MapControls[K]): Promise<IControl> {
-
-    let control: IControl;
-    if (typeof controlDef === 'string') {
-      const engine = MapboxglMapAdapter.controlAdapters[controlDef];
-      if (engine) {
-        control = new engine(options);
-      }
-    } else {
-      control = controlDef as IControl;
-    }
-    if (control) {
-      const _control = await control;
-      this.map.addControl(_control, position);
-      return _control;
-    }
+  addControl(control: IControl, position: ControlPositions): IControl {
+    this.map.addControl(control, position);
+    return control;
   }
 
   removeControl(control: IControl): void {
