@@ -38,6 +38,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   options: LeafletMapAdapterOptions = { target: 'map' };
 
   layerAdapters = LeafletMapAdapter.layerAdapters;
+  controlAdapters = LeafletMapAdapter.controlAdapters;
 
   displayProjection = 'EPSG:3857';
   lonlatProjection = 'EPSG:4326';
@@ -107,22 +108,10 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     return createButtonControl(options);
   }
 
-  async addControl(controlDef, position: string, options?) {
-    let control;
-    if (typeof controlDef === 'string') {
-      const engine = LeafletMapAdapter.controlAdapters[controlDef];
-      if (engine) {
-        control = new engine(options);
-      }
-    } else {
-      control = controlDef;
-    }
-    if (control) {
-      const _control = await control;
-      _control.options.position = position.replace('-', '');
-      this.map.addControl(_control);
-      return _control;
-    }
+  addControl(control: Control, position: string): Control {
+    control.options.position = position.replace('-', '');
+    this.map.addControl(control);
+    return control;
   }
 
   removeControl(control) {

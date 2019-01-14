@@ -182,13 +182,28 @@ export class WebMap<M = any, L = any, C = any> {
     }
   }
 
-  addControl<K extends keyof MapControls>(
-    controlDef: K | MapControl,
+  getControl<K extends keyof MapControls>(control: K, options?: MapControls[K]): C {
+    const engine = this.mapAdapter.controlAdapters[control];
+    if (engine) {
+      return new engine(options);
+    }
+  }
+
+  async addControl<K extends keyof MapControls>(
+    controlDef: K | C,
     position: ControlPositions,
     options?: MapControls[K]) {
 
-    const control = controlDef;
-    return this.mapAdapter.addControl(control, position, options);
+    let control: C;
+    if (typeof controlDef === 'string') {
+      control = this.getControl(controlDef, options);
+    } else {
+      control = controlDef as C;
+    }
+    if (control) {
+      const _control = await control;
+      return this.mapAdapter.addControl(_control, position);
+    }
   }
 
   async addLayer<K extends keyof LayerAdapters, O extends AdapterOptions = AdapterOptions>(

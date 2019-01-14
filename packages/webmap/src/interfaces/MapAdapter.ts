@@ -44,6 +44,7 @@ export interface MapAdapter<M = any, L = any, C = any> extends BaseMapAdapter<L>
   map: M;
   emitter: EventEmitter;
   layerAdapters: { [name: string]: Type<LayerAdapter<any, L, M>> };
+  controlAdapters: { [name: string]: Type<C> };
 
   create(options?: MapOptions): void;
 
