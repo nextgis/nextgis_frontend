@@ -53,7 +53,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
 
   private isLoaded = false;
 
-  private _sourcedataloading: { [name: string]: any[] } = {};
+  private _sourceDataLoading: { [name: string]: any[] } = {};
 
   // create(options: MapOptions = {target: 'map'}) {
   create(options) {
@@ -230,44 +230,61 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     });
   }
 
+  private _onMapSourceData(data: mapboxgl.MapSourceDataEvent & EventData) {
+    if (data.dataType === 'source') {
+      const isLoaded = data.isSourceLoaded;
+      const emit = (target: string) => {
+        this.emitter.emit('data-loaded', { target });
+      };
+      this._onDataLoad(data, isLoaded, emit);
+    }
+  }
+
+  private _onMapError(data: mapboxgl.ErrorEvent & mapboxgl.MapSourceDataEvent & EventData) {
+    if (this._sourceDataLoading[data.sourceId]) {
+      const isLoaded = data.isSourceLoaded;
+      const emit = (target: string) => {
+        this.emitter.emit('data-error', { target });
+      };
+      this._onDataLoad(data, isLoaded, emit);
+    }
+  }
+
+  private _onDataLoad(data: { sourceId: string, tile: any }, isLoaded = false, emit: (sourceId: string) => void) {
+    // if all sources is loaded emmit event for all and clean mem
+    if (isLoaded) {
+      Object.keys(this._sourceDataLoading).forEach((x) => {
+        emit(x);
+      });
+      this._sourceDataLoading = {};
+    } else {
+      // check if all tiles in layer is loaded
+      const tiles = this._sourceDataLoading[data.sourceId];
+      if (tiles && data.tile) {
+        const index = tiles.indexOf(data.tile);
+        if (index !== -1) {
+          this._sourceDataLoading[data.sourceId].splice(index, 1);
+        }
+        // if no more loaded tiles in layer emit event and clean mem only for this layer
+        if (!tiles.length) {
+          emit(data.sourceId);
+          delete this._sourceDataLoading[data.sourceId];
+        }
+      }
+    }
+  }
+
   private _addEventsListeners(): void {
     // write mem for start loaded layers
     this.map.on('sourcedataloading', (data) => {
-      this._sourcedataloading[data.sourceId] = this._sourcedataloading[data.sourceId] || [];
+      this._sourceDataLoading[data.sourceId] = this._sourceDataLoading[data.sourceId] || [];
       if (data.tile) {
-        this._sourcedataloading[data.sourceId].push(data.tile);
+        this._sourceDataLoading[data.sourceId].push(data.tile);
       }
     });
     // emmit data-loaded for each layer or all sources is loaded
-    this.map.on('sourcedata', (data) => {
-      if (data.dataType === 'source') {
-        const isLoaded = data.isSourceLoaded;
-        const emit = (target) => {
-          this.emitter.emit('data-loaded', { target });
-        };
-        // if all sources is loaded emmit event for all and clean mem
-        if (isLoaded) {
-          Object.keys(this._sourcedataloading).forEach((x) => {
-            emit(x);
-          });
-          this._sourcedataloading = {};
-        } else {
-          // check if all tiles in layer is loaded
-          const tiles = this._sourcedataloading[data.sourceId];
-          if (tiles && data.tile) {
-            const index = tiles.indexOf(data.tile);
-            if (index !== -1) {
-              this._sourcedataloading[data.sourceId].splice(index, 1);
-            }
-            // if no more loaded tiles in layer emit event and clean mem only for this layer
-            if (!tiles.length) {
-              emit(data.sourceId);
-              delete this._sourcedataloading[data.sourceId];
-            }
-          }
-        }
-      }
-    });
+    this.map.on('sourcedata', this._onMapSourceData.bind(this));
+    this.map.on('error', this._onMapError.bind(this));
     this.map.on('click', (evt) => {
       this.onMapClick(evt);
     });
