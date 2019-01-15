@@ -6,7 +6,7 @@ import {
   CreateControlOptions,
   CreateButtonControlOptions
 } from '@nextgis/webmap';
-import { Map, Control, Layer, GridLayer } from 'leaflet';
+import { Map, Control, Layer, GridLayer, ControlPosition } from 'leaflet';
 import { EventEmitter } from 'events';
 import { TileAdapter } from './layer-adapters/TileAdapter';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
@@ -109,7 +109,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   }
 
   addControl(control: Control, position: string): Control {
-    control.options.position = position.replace('-', '');
+    control.options.position = position.replace('-', '') as ControlPosition;
     this.map.addControl(control);
     return control;
   }
