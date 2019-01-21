@@ -11,7 +11,7 @@ import { LayerAdapters, LayerAdapter, OnLayerClickOptions } from './interfaces/L
 import { Type } from './utils/Type';
 import { MapControl, MapControls, CreateControlOptions, CreateButtonControlOptions } from './interfaces/MapControl';
 import { onLoad } from './utils/decorators';
-import { Feature } from 'geojson';
+import { Feature, GeoJsonObject } from 'geojson';
 
 export interface LayerMem<L = any, M = any, O = any> {
   id: string;
@@ -235,6 +235,10 @@ export class WebMap<M = any, L = any, C = any> {
       }
       this._layers[layerId] = layerOpts;
 
+      if (options.visibility) {
+        this.showLayer(layerId);
+      }
+
       return adapter;
 
     }
@@ -351,6 +355,13 @@ export class WebMap<M = any, L = any, C = any> {
     const layer = this.getLayer(layerId);
     if (layer && layer.adapter.filter) {
       layer.adapter.filter(filter);
+    }
+  }
+
+  setData(layerId: string, data: GeoJsonObject) {
+    const layer = this.getLayer(layerId);
+    if (layer && layer.adapter.setData) {
+      layer.adapter.setData(data);
     }
   }
   // endregion
