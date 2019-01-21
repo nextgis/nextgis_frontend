@@ -12,7 +12,7 @@ export interface AdapterOptions {
   id?: string;
   url?: string;
   transparency?: number;
-  // visibility: item.layer_enabled,
+  visibility?: boolean;
   minResolution?: number;
   maxResolution?: number;
   order?: number;
@@ -107,6 +107,9 @@ export interface LayerAdapter<O = any, L = any, M = any> {
   getSelected?(): Array<{ layer?: L, feature?: Feature }>;
 
   filter?(cb: (opt: { layer: L, feature?: Feature }) => boolean): void;
+
+  clearLayer?(): void;
+  setData?(data: GeoJsonObject): void;
 
   onLayerClick?(opt: OnLayerClickOptions): Promise<any>;
 
