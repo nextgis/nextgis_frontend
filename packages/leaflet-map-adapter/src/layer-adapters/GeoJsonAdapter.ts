@@ -66,19 +66,9 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
 
     this.name = options.id || 'geojson-' + ID++;
 
-    let type: GeoJsonAdapterLayerType = options.type;
+    this.addLayerData(options.data);
 
-    if (!type) {
-      const detectedType = detectType(options.data);
-      type = typeAlias[detectedType];
-    }
-    this.type = type;
-
-    const data = filterGeometries(options.data, type);
-    if (data) {
-      const layer = new GeoJSON(data, this.getGeoJsonOptions(options, type));
-      return this.layer;
-    }
+    return this.layer;
   }
 
   select(findFeatureFun?) {
@@ -135,11 +125,41 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
   }
 
   getLayers() {
-    return this._layers.map(({layer, feature}) => Object.create({
+    return this._layers.map(({ layer, feature }) => Object.create({
       feature,
       layer,
       visible: layer._map
     }));
+  }
+
+  clearLayer() {
+    this.layer.clearLayers();
+    this._layers = [];
+  }
+
+  setData(data: GeoJsonObject) {
+    this.clearLayer();
+    this.addLayerData(data);
+  }
+
+  private addLayerData(data: GeoJsonObject | false) {
+    const options = this.options;
+    let geoJsonOptions: GeoJSONOptions;
+    if (data) {
+      let type: GeoJsonAdapterLayerType = options.type;
+
+      if (!type) {
+        const detectedType = detectType(data);
+        type = typeAlias[detectedType];
+      }
+      this.type = type;
+
+      data = filterGeometries(data, type);
+      if (data) {
+        geoJsonOptions = this.getGeoJsonOptions(options, type);
+      }
+    }
+    const layer = new GeoJSON(data || null, geoJsonOptions);
   }
 
   private setPaintEachLayer(paint: GetPaintCallback | GeoJsonAdapterLayerPaint) {
