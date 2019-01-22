@@ -144,7 +144,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
       return a.order - b.order;
     });
     const firstLayerId = this._getLayerIds(orderedLayers[0])[0];
-    // normilize layer ordering
+    // normalize layer ordering
     baseLayers.forEach((x) => {
       x.layer.forEach((y) => {
         this.map.moveLayer(y, firstLayerId);
@@ -212,14 +212,16 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
 
   private _getLayerIds(mem: LayerMem<TLayer, Map>): string[] {
     let _layers = [];
-    if (Array.isArray(mem.layer)) {
-      _layers = mem.layer;
-    } else if (mem.adapter.getDependLayers) {
-      mem.adapter.getDependLayers().forEach((x) => {
-        x.forEach((y) => {
-          _layers.push(y);
+    if (mem) {
+      if (Array.isArray(mem.layer)) {
+        _layers = mem.layer;
+      } else if (mem.adapter.getDependLayers) {
+        mem.adapter.getDependLayers().forEach((x) => {
+          x.forEach((y) => {
+            _layers.push(y);
+          });
         });
-      });
+      }
     }
     return _layers;
   }
