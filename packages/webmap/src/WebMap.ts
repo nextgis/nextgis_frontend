@@ -13,6 +13,11 @@ import { MapControl, MapControls, CreateControlOptions, CreateButtonControlOptio
 import { onLoad } from './utils/decorators';
 import { Feature, GeoJsonObject } from 'geojson';
 
+interface Arglist {
+  [index: number]: any;
+  0: string;
+}
+
 export interface LayerMem<L = any, M = any, O = any> {
   id: string;
   layer: L;
@@ -55,9 +60,7 @@ export class WebMap<M = any, L = any, C = any> {
   }
 
   async create(options: MapOptions): Promise<this> {
-
     this.options = deepmerge(this.options || {}, options);
-
     await this._setupMap();
     return this;
   }
@@ -362,6 +365,20 @@ export class WebMap<M = any, L = any, C = any> {
     const layer = this.getLayer(layerId);
     if (layer && layer.adapter.setData) {
       layer.adapter.setData(data);
+    }
+  }
+
+  addData(layerId: string, data: GeoJsonObject) {
+    const layer = this.getLayer(layerId);
+    if (layer && layer.adapter.setData) {
+      layer.adapter.addData(data);
+    }
+  }
+
+  clearLayer(layerId: string, cb?: (feature: Feature) => boolean) {
+    const layer = this.getLayer(layerId);
+    if (layer && layer.adapter.setData) {
+      layer.adapter.clearLayer(cb);
     }
   }
   // endregion

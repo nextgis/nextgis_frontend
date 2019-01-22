@@ -108,8 +108,9 @@ export interface LayerAdapter<O = any, L = any, M = any> {
 
   filter?(cb: (opt: { layer: L, feature?: Feature }) => boolean): void;
 
-  clearLayer?(): void;
   setData?(data: GeoJsonObject): void;
+  addData?(data: GeoJsonObject): void;
+  clearLayer?(cb?: (feature: Feature) => boolean): void;
 
   onLayerClick?(opt: OnLayerClickOptions): Promise<any>;
 
