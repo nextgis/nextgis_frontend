@@ -66,7 +66,7 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
 
     this.name = options.id || 'geojson-' + ID++;
 
-    this.addLayerData(options.data);
+    this.addData(options.data);
 
     return this.layer;
   }
@@ -132,17 +132,28 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
     }));
   }
 
-  clearLayer() {
-    this.layer.clearLayers();
-    this._layers = [];
+  clearLayer(cb?: (feature: Feature) => boolean) {
+    if (cb) {
+      for (let fry = this._layers.length; fry--;) {
+        const layerMem = this._layers[fry];
+        const exist = cb(layerMem.feature);
+        if (exist) {
+          this.layer.removeLayer(layerMem.layer);
+          this._layers.splice(fry, 1);
+        }
+      }
+    } else {
+      this.layer.clearLayers();
+      this._layers = [];
+    }
   }
 
   setData(data: GeoJsonObject) {
     this.clearLayer();
-    this.addLayerData(data);
+    this.addData(data);
   }
 
-  private addLayerData(data: GeoJsonObject | false) {
+  addData(data: GeoJsonObject | false) {
     const options = this.options;
     let geoJsonOptions: GeoJSONOptions;
     if (data) {
