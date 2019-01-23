@@ -361,21 +361,21 @@ export class WebMap<M = any, L = any, C = any> {
     }
   }
 
-  setData(layerId: string, data: GeoJsonObject) {
+  setLayerData(layerId: string, data: GeoJsonObject) {
     const layer = this.getLayer(layerId);
     if (layer && layer.adapter.setData) {
       layer.adapter.setData(data);
     }
   }
 
-  addData(layerId: string, data: GeoJsonObject) {
+  addLayerData(layerId: string, data: GeoJsonObject) {
     const layer = this.getLayer(layerId);
     if (layer && layer.adapter.setData) {
       layer.adapter.addData(data);
     }
   }
 
-  clearLayer(layerId: string, cb?: (feature: Feature) => boolean) {
+  clearLayerData(layerId: string, cb?: (feature: Feature) => boolean) {
     const layer = this.getLayer(layerId);
     if (layer && layer.adapter.setData) {
       layer.adapter.clearLayer(cb);
