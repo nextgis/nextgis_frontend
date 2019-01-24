@@ -248,6 +248,15 @@ export class WebMap<M = any, L = any, C = any> {
     return Promise.reject('No adapter');
   }
 
+  removeLayers() {
+    for (const l in this._layers) {
+      if (this._layers.hasOwnProperty(l)) {
+        this.removeLayer(l);
+      }
+    }
+    this._layers = {};
+  }
+
   removeLayer(layerName: string) {
     const layerMem = this._layers[layerName];
     if (layerMem) {
