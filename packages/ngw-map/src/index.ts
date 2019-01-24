@@ -45,7 +45,7 @@ export interface MapOptions extends MO {
   target: string | HTMLElement;
   qmsId?: number;
   webmapId?: number;
-  baseUrl: string;
+  baseUrl?: string;
   bounds?: [number, number, number, number];
   geoJsonDefaultPaint?: {
     circle: CirclePaint,
