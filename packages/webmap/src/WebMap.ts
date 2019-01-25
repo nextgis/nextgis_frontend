@@ -1,7 +1,7 @@
 import { MapOptions, AppOptions } from './interfaces/WebMapApp';
 import { LayerExtent, Pixel } from './interfaces/BaseTypes';
 import { StarterKit } from './interfaces/StarterKit';
-import { AdapterOptions } from './interfaces/LayerAdapter';
+import { AdapterOptions, DataLayerFilter } from './interfaces/LayerAdapter';
 import { Keys } from './components/keys/Keys';
 import { EventEmitter } from 'events';
 import { MapAdapter, MapClickEvent, ControlPositions, FitOptions } from './interfaces/MapAdapter';
@@ -113,7 +113,7 @@ export class WebMap<M = any, L = any, C = any> {
     return this;
   }
 
-  getZoom(): number {
+  getZoom(): number | undefined {
     return this.mapAdapter.getZoom();
   }
 
@@ -364,7 +364,7 @@ export class WebMap<M = any, L = any, C = any> {
     }
   }
 
-  filterLayer(layerId: string, filter: (opt: { feature?: Feature, layer: any }) => boolean) {
+  filterLayer(layerId: string, filter: DataLayerFilter<L>) {
     const layer = this.getLayer(layerId);
     if (layer && layer.adapter.filter) {
       layer.adapter.filter(filter);

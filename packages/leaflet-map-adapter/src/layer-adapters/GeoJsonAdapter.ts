@@ -14,20 +14,23 @@ import {
   DivIcon,
   Marker,
   FeatureGroup,
-  DomEvent
+  DomEvent,
+  LatLngExpression,
+  LeafletEvent
 } from 'leaflet';
 import { BaseAdapter } from './BaseAdapter';
 import { GeoJsonObject, GeoJsonGeometryTypes, FeatureCollection, Feature, GeometryCollection } from 'geojson';
 
 let ID = 1;
 
-const typeAlias: { [x: string]: GeoJsonAdapterLayerType } = {
+const typeAlias: { [key in GeoJsonGeometryTypes]: GeoJsonAdapterLayerType } = {
   'Point': 'circle',
   'LineString': 'line',
   'MultiPoint': 'circle',
   'Polygon': 'fill',
   'MultiLineString': 'line',
-  'MultiPolygon': 'fill'
+  'MultiPolygon': 'fill',
+  'GeometryCollection': 'fill'
 };
 
 const PAINT = {
@@ -35,43 +38,52 @@ const PAINT = {
   fillOpacity: 1
 };
 
-const backAliases = {};
+const backAliases: { [key in GeoJsonAdapterLayerType]?: GeoJsonGeometryTypes[] } = {};
+
 for (const a in typeAlias) {
   if (typeAlias.hasOwnProperty(a)) {
-    backAliases[typeAlias[a]] = backAliases[typeAlias[a]] || [];
-    backAliases[typeAlias[a]].push(a);
+    const layerType = typeAlias[a as GeoJsonGeometryTypes];
+    const backAlias = backAliases[layerType] || [];
+    backAlias.push(a as GeoJsonGeometryTypes);
+    backAliases[layerType] = backAlias;
   }
 }
 
+interface LayerMem {
+  layer: any;
+  feature: Feature;
+}
+
 export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
-  options: GeoJsonAdapterOptions;
 
   layer = new FeatureGroup();
 
-  name: string;
   paint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
   selectedPaint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
-  type: GeoJsonAdapterLayerType;
   selected = false;
+  options?: GeoJsonAdapterOptions;
+  type?: GeoJsonAdapterLayerType;
 
-  private _layers: Array<{ feature, layer }> = [];
-  private _selectedLayers: Array<{ feature, layer }> = [];
+  private _layers: LayerMem[] = [];
+  private _selectedLayers: LayerMem[] = [];
 
   addLayer(options?: GeoJsonAdapterOptions) {
-    this.options = options;
-    this.paint = options.paint;
+    if (options) {
+      this.options = options;
+      this.paint = options.paint;
 
-    this.selectedPaint = options.selectedPaint;
-    options.paint = this.paint;
+      this.selectedPaint = options.selectedPaint;
+      options.paint = this.paint;
 
-    this.name = options.id || 'geojson-' + ID++;
+      this.name = options.id || 'geojson-' + ID++;
 
-    this.addData(options.data);
+      this.addData(options.data);
 
-    return this.layer;
+      return this.layer;
+    }
   }
 
-  select(findFeatureFun?) {
+  select(findFeatureFun?: (opt: LayerMem) => boolean) {
     if (findFeatureFun) {
       const feature = this._layers.filter(findFeatureFun);
       feature.forEach((x) => {
@@ -85,7 +97,7 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
     }
   }
 
-  unselect(findFeatureFun?) {
+  unselect(findFeatureFun?: (opt: LayerMem) => boolean) {
     if (findFeatureFun) {
       const feature = this._layers.filter(findFeatureFun);
       feature.forEach((x) => {
@@ -93,7 +105,9 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
       });
     } else if (this.selected) {
       this.selected = false;
-      this.setPaintEachLayer(this.paint);
+      if (this.paint) {
+        this.setPaintEachLayer(this.paint);
+      }
     }
   }
 
@@ -103,7 +117,7 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
     });
   }
 
-  filter(fun) {
+  filter(fun: (opt: LayerMem) => boolean) {
     // Some optimization
     // @ts-ignore
     const _map = this.layer._map;
@@ -155,22 +169,27 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
 
   addData(data: GeoJsonObject | false) {
     const options = this.options;
-    let geoJsonOptions: GeoJSONOptions;
-    if (data) {
-      let type: GeoJsonAdapterLayerType = options.type;
+    let geoJsonOptions: GeoJSONOptions | undefined;
+    if (options) {
 
-      if (!type) {
-        const detectedType = detectType(data);
-        type = typeAlias[detectedType];
-      }
-      this.type = type;
-
-      data = filterGeometries(data, type);
       if (data) {
-        geoJsonOptions = this.getGeoJsonOptions(options, type);
+        let type: GeoJsonAdapterLayerType;
+
+        if (!options.type) {
+          const detectedType = detectType(data);
+          type = typeAlias[detectedType];
+        } else {
+          type = options.type;
+        }
+        this.type = type;
+
+        data = filterGeometries(data, type);
+        if (data) {
+          geoJsonOptions = this.getGeoJsonOptions(options, type);
+        }
       }
+      const layer = new GeoJSON(data || undefined, geoJsonOptions);
     }
-    const layer = new GeoJSON(data || null, geoJsonOptions);
   }
 
   private setPaintEachLayer(paint: GetPaintCallback | GeoJsonAdapterLayerPaint) {
@@ -179,7 +198,7 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
     });
   }
 
-  private setPaint(l, paint: GetPaintCallback | GeoJsonAdapterLayerPaint) {
+  private setPaint(l: any, paint: GetPaintCallback | GeoJsonAdapterLayerPaint) {
     let style: GeoJsonAdapterLayerPaint;
     if (typeof paint === 'function') {
       style = paint(l.feature);
@@ -195,7 +214,7 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
     }
   }
 
-  private preparePaint(paint): PathOptions {
+  private preparePaint(paint: CircleMarkerOptions | PathOptions): PathOptions {
     const path: CircleMarkerOptions | PathOptions = paint;
     if (path.opacity) {
       path.fillOpacity = path.opacity;
@@ -214,12 +233,17 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
             const iconOpt = paint(feature);
             const pointToLayer = this.createPaintToLayer(iconOpt as IconOptions);
             return pointToLayer(feature, latLng);
+
           }
         };
       } else {
         lopt = {
           style: (feature) => {
-            return { ...PAINT, ...paint(feature) };
+            if (feature) {
+              return { ...PAINT, ...paint(feature) };
+            } else {
+              return { ...PAINT };
+            }
           }
         };
       }
@@ -227,7 +251,7 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
       lopt = this.createPaintOptions((paint as GeoJsonAdapterLayerPaint), type);
     }
 
-    lopt.onEachFeature = (feature, layer) => {
+    lopt.onEachFeature = (feature: Feature, layer) => {
       this._layers.push({ feature, layer });
       this.layer.addLayer(layer);
       if (options.selectable) {
@@ -238,12 +262,12 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
     return lopt;
   }
 
-  private _onLayerClick(e) {
-    DomEvent.stopPropagation(e);
+  private _onLayerClick(e: LeafletEvent) {
+    DomEvent.stopPropagation(e as Event);
     const layer = e.target;
     let isSelected = this._selectedLayers.indexOf(layer) !== -1;
     if (isSelected) {
-      if (this.options.unselectOnSecondClick) {
+      if (this.options && this.options.unselectOnSecondClick) {
         this._unselectLayer(layer);
         isSelected = false;
       }
@@ -261,24 +285,26 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
     }
   }
 
-  private _selectLayer(layer) {
-    if (!this.options.multiselect) {
+  private _selectLayer(layer: any) {
+    if (this.options && !this.options.multiselect) {
       this._selectedLayers.forEach((x) => this._unselectLayer(x));
     }
     this._selectedLayers.push(layer);
     this.selected = true;
-    if (this.options.selectedPaint) {
+    if (this.options && this.options.selectedPaint) {
       this.setPaint(layer, this.options.selectedPaint);
     }
   }
 
-  private _unselectLayer(layer) {
+  private _unselectLayer(layer: any) {
     const index = this._selectedLayers.indexOf(layer);
     if (index !== -1) {
       this._selectedLayers.splice(index, 1);
     }
     this.selected = this._selectedLayers.length > 0;
-    this.setPaint(layer, this.options.paint);
+    if (this.options && this.options.paint) {
+      this.setPaint(layer, this.options.paint);
+    }
   }
 
   private createDivIcon(icon: IconOptions) {
@@ -291,16 +317,17 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
       const iconClassName = icon.className;
       const html = icon.html;
       if (iconClassName || html) {
-        return (geoJsonPoint, latlng) => {
+        return (geoJsonPoint: any, latlng: LatLngExpression) => {
           const divIcon = this.createDivIcon(icon);
           return new Marker(latlng, { icon: divIcon });
         };
       }
-    } else {
-      return (geoJsonPoint, latlng) => {
-        return new CircleMarker(latlng, this.preparePaint({ ...PAINT, ...icon }));
-      };
     }
+
+    return (geoJsonPoint: any, latlng: LatLngExpression) => {
+      return new CircleMarker(latlng, this.preparePaint({ ...PAINT, ...icon }));
+    };
+
   }
 
   private createPaintOptions(paintOptions: GeoJsonAdapterLayerPaint, type: GeoJsonAdapterLayerType): GeoJSONOptions {
@@ -341,17 +368,21 @@ function findMostFrequentGeomType(arr: GeoJsonGeometryTypes[]): GeoJsonGeometryT
   for (let fry = 0; fry < arr.length; fry++) {
     counts[arr[fry]] = 1 + (counts[arr[fry]] || 0);
   }
-  let maxName: string;
+  let maxName: string = '';
   for (const c in counts) {
-    if (counts[c] > (counts[maxName] || 0)) {
-      maxName = c;
+    if (counts.hasOwnProperty(c)) {
+      const maxCount = maxName ? counts[maxName] : 0;
+      if (counts[c] > maxCount) {
+        maxName = c;
+      }
     }
   }
   return maxName as GeoJsonGeometryTypes;
 }
 
 function geometryFilter(geometry: GeoJsonGeometryTypes, type: GeoJsonAdapterLayerType): boolean {
-  return backAliases[type].indexOf(geometry) !== -1;
+  const geoJsonGeometry = backAliases[type] || [];
+  return geoJsonGeometry.indexOf(geometry) !== -1;
 }
 
 function filterGeometries(data: GeoJsonObject, type: GeoJsonAdapterLayerType): GeoJsonObject | false {

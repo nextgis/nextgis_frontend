@@ -33,7 +33,7 @@ export interface BaseMapAdapter<L = any> {
   setRotation?(angle: number): void;
   setView?(lngLat: MapCenter, zoom?: number): void;
 
-  getZoom(): number;
+  getZoom(): number | undefined;
 
 }
 
@@ -41,7 +41,7 @@ export interface MapAdapter<M = any, L = any, C = any> extends BaseMapAdapter<L>
 
   lonlatProjection?: string;
   displayProjection?: string;
-  map: M;
+  map?: M;
   emitter: EventEmitter;
   layerAdapters: { [name: string]: Type<LayerAdapter<any, L, M>> };
   controlAdapters: { [name: string]: Type<C> };
@@ -50,7 +50,7 @@ export interface MapAdapter<M = any, L = any, C = any> extends BaseMapAdapter<L>
 
   onMapLoad(cb?: () => void): Promise<any>;
 
-  getContainer(): HTMLElement;
+  getContainer(): HTMLElement | undefined;
 
   createControl?(control: MapControl, options?: CreateControlOptions): C;
   createButtonControl?(options: CreateButtonControlOptions): C;
