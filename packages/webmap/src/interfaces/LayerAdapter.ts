@@ -55,7 +55,15 @@ export interface IconOptions {
   iconAnchor?: [number, number];
 }
 
-export type GeoJsonAdapterLayerPaint = CirclePaint | PathPaint | IconOptions;
+export type GetPaintFunction = (opt?: any) => GeoJsonAdapterLayerPaint;
+
+export interface GetCustomPaintOptions {
+  type: 'get-paint';
+  from: string | GetPaintFunction;
+  options?: any;
+}
+
+export type GeoJsonAdapterLayerPaint = CirclePaint | PathPaint | IconOptions | GetCustomPaintOptions;
 
 export type GetPaintCallback = (feature: Feature<any>) => GeoJsonAdapterLayerPaint;
 
@@ -77,7 +85,7 @@ export interface MarkerAdapterOptions extends AdapterOptions {
 
 export interface ImageAdapterOptions extends AdapterOptions {
   resourceId: string | number;
-  updateWmsParams?: (obj: {[paramName: string]: any}) => object;
+  updateWmsParams?: (obj: { [paramName: string]: any }) => object;
   transparent?: boolean;
 }
 
@@ -94,10 +102,13 @@ export interface LayerAdapters {
 export type DataLayerFilter<L> = (opt: { layer?: L, feature?: Feature }) => boolean;
 
 export interface LayerAdapter<O = any, L = any, M = any> {
+  getPaintFunctions?: { [name: string]: GetPaintFunction };
+
   name: string;
   layer?: L;
   opt?: M;
   selected?: boolean;
+
   addLayer(options: O): any | Promise<any>;
 
   showLayer?(layer: L): void;
