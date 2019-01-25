@@ -4,11 +4,11 @@ import { EventEmitter } from 'events';
 import { MapControls, MapControl, CreateControlOptions, CreateButtonControlOptions } from './MapControl';
 import { MapOptions } from './WebMapApp';
 import { LayerMem } from '../WebMap';
-import { LatLng, MapCenter, LayerExtent } from './BaseTypes';
+import { LatLng, MapCenter, LayerExtent, Pixel } from './BaseTypes';
 
 export interface MapClickEvent {
   latLng: LatLng;
-  pixel: { top: number, left: number, right?: number, bottom?: number };
+  pixel: Pixel;
   source?: any;
 }
 
@@ -64,5 +64,5 @@ export interface MapAdapter<M = any, L = any, C = any> extends BaseMapAdapter<L>
   onMapClick(evt: any): void;
 
   // TODO: now return WKT geometry but need geojson
-  requestGeomString?(pixel: { top: number, left: number }, pixelRadius?: number): string;
+  requestGeomString?(pixel: Pixel, pixelRadius?: number): string;
 }

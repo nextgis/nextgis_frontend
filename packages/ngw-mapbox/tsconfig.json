@@ -4,6 +4,7 @@
     "outDir": "lib",
     "declaration": true, /* Generates corresponding '.d.ts' file. */
     "declarationDir": "lib",
+    "strict": false
   },
   "include": [
     "./src"

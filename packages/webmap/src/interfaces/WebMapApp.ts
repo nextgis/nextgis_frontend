@@ -3,7 +3,7 @@ import { StarterKit } from './StarterKit';
 import { MapControl } from './MapControl';
 
 export interface MapOptions {
-  target: string | HTMLElement;
+  target?: string | HTMLElement;
   logo?: string;
   controls?: Array<string | MapControl>;
   controlsOptions?: {[controlName: string]: any};
