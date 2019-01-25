@@ -7,9 +7,9 @@ export abstract class BaseAdapter implements LayerAdapter {
 
   map: Map;
   name: string;
-  options;
+  options?: any;
 
-  constructor(map, options?) {
+  constructor(map: Map, options?: any) {
     this.map = map;
     this.name = options.id || String(ID++);
     this.options = {...this.options, ...options};
@@ -20,7 +20,7 @@ export abstract class BaseAdapter implements LayerAdapter {
 
   onLayerClick?(options: OnLayerClickOptions): Promise<any>;
 
-  addLayer(options?): Layer {
+  addLayer(options?: any): any {
     return null;
   }
 }

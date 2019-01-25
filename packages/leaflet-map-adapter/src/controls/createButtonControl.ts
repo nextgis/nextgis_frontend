@@ -5,18 +5,19 @@ import { DomEvent } from 'leaflet';
 export function createButtonControl(options: CreateButtonControlOptions) {
   const link = document.createElement('a');
 
+  const title = options.title || '';
   link.href = '#';
-  link.title = options.title;
+  link.title = title;
 
   link.setAttribute('role', 'button');
-  link.setAttribute('aria-label', options.title);
+  link.setAttribute('aria-label', title);
 
   DomEvent.disableClickPropagation(link);
   DomEvent.on(link, 'click', DomEvent.stop);
 
   if (options.html instanceof HTMLElement) {
     link.appendChild(options.html);
-  } else {
+  } else if (typeof options.html === 'string') {
     link.innerHTML = options.html;
   }
 
