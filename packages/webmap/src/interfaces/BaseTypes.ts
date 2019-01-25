@@ -7,3 +7,5 @@ export interface LatLng {
 export type LayerExtent = [number, number, number, number];
 
 export type MapCenter = [number, number];
+
+export interface Pixel { top: number; left: number; right?: number; bottom?: number; }

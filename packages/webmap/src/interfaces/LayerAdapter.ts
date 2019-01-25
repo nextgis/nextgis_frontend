@@ -23,7 +23,7 @@ export interface AdapterOptions {
 }
 
 export interface MvtAdapterOptions extends AdapterOptions {
-  paint?;
+  paint?: any;
   type?: 'fill' | 'line' | 'circle' | 'point';
   'source-layer'?: string;
 }
@@ -77,7 +77,7 @@ export interface MarkerAdapterOptions extends AdapterOptions {
 
 export interface ImageAdapterOptions extends AdapterOptions {
   resourceId: string | number;
-  updateWmsParams?: (object) => object;
+  updateWmsParams?: (obj: {[paramName: string]: any}) => object;
 }
 
 export interface LayerAdapters {

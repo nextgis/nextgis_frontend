@@ -20,9 +20,9 @@ export class Keys {
 
   keys: {[keyCode: number]: boolean} = {};
 
-  private _windowOnFocus?: () => void;
-  private _keysPressed?: () => void;
-  private _keysReleased?: () => void;
+  private _windowOnFocus: () => void;
+  private _keysPressed: (e: KeyboardEvent) => void;
+  private _keysReleased: (e: KeyboardEvent) => void;
 
   constructor() {
     this._windowOnFocus = this.windowOnFocus.bind(this);
@@ -33,9 +33,7 @@ export class Keys {
 
   pressed(keyName: keyof KeyCodes): boolean {
     const code = this.keyCodeAlias[keyName];
-    if (code) {
-      return this.keys[code];
-    }
+    return !!code && this.keys[code];
   }
 
   addKeyboardEventsListener() {
@@ -50,14 +48,14 @@ export class Keys {
     window.removeEventListener('keyup', this._keysReleased, false);
   }
 
-  private keysPressed(e) {
+  private keysPressed(e: KeyboardEvent) {
     e.stopPropagation();
     if (!this.keys[e.keyCode]) {
       this.keys[e.keyCode] = true;
     }
   }
 
-  private keysReleased(e) {
+  private keysReleased(e: KeyboardEvent) {
     e.stopPropagation();
     this.keys[e.keyCode] = false;
   }

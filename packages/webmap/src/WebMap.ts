@@ -1,5 +1,5 @@
 import { MapOptions, AppOptions } from './interfaces/WebMapApp';
-import { LayerExtent } from './interfaces/BaseTypes';
+import { LayerExtent, Pixel } from './interfaces/BaseTypes';
 import { StarterKit } from './interfaces/StarterKit';
 import { AdapterOptions } from './interfaces/LayerAdapter';
 import { Keys } from './components/keys/Keys';
@@ -29,7 +29,7 @@ export interface LayerMem<L = any, M = any, O = any> {
 
 export class WebMap<M = any, L = any, C = any> {
 
-  options: MapOptions;
+  options: MapOptions = {};
 
   displayProjection = 'EPSG:3857';
   lonlatProjection = 'EPSG:4326';
@@ -37,7 +37,7 @@ export class WebMap<M = any, L = any, C = any> {
   emitter = new EventEmitter();
   keys: Keys = new Keys(); // TODO: make injectable cached
   mapAdapter: MapAdapter<M>;
-  runtimeParams: RuntimeParams[];
+  runtimeParams: RuntimeParams[] = [];
 
   _eventsStatus: { [eventName: string]: boolean } = {};
 
@@ -46,11 +46,10 @@ export class WebMap<M = any, L = any, C = any> {
 
   private _starterKits: StarterKit[];
   private _baseLayers: string[] = [];
-  private _extent: [number, number, number, number];
   private _layers: { [x: string]: LayerMem } = {};
   private _layersIds: number = 1;
-
   private _selectedLayers: string[] = [];
+  private _extent?: [number, number, number, number];
 
   constructor(appOptions: AppOptions) {
     this.mapAdapter = appOptions.mapAdapter;
@@ -65,14 +64,17 @@ export class WebMap<M = any, L = any, C = any> {
     return this;
   }
 
-  getContainer(): HTMLElement {
+  getContainer(): HTMLElement | undefined {
     if (this.mapAdapter.getContainer) {
       return this.mapAdapter.getContainer();
     } else if (this.options.target) {
       if (this.options.target instanceof HTMLElement) {
         return this.options.target;
       } else if (typeof this.options.target === 'string') {
-        return document.getElementById(this.options.target);
+        const element = document.getElementById(this.options.target);
+        if (element) {
+          return element;
+        }
       }
     }
   }
@@ -115,7 +117,7 @@ export class WebMap<M = any, L = any, C = any> {
     return this.mapAdapter.getZoom();
   }
 
-  setView(lngLat: [number, number], zoom) {
+  setView(lngLat?: [number, number], zoom?: number) {
     if (this.mapAdapter.setView && lngLat && zoom) {
       this.mapAdapter.setView(lngLat, zoom);
     } else {
@@ -164,7 +166,7 @@ export class WebMap<M = any, L = any, C = any> {
   }
 
   @onLoad('build-map')
-  createControl(control: MapControl, options?: CreateControlOptions): C {
+  createControl(control: MapControl, options?: CreateControlOptions): C | undefined {
     if (this.mapAdapter.createControl) {
       return this.mapAdapter.createControl(control, options);
     }
@@ -172,7 +174,7 @@ export class WebMap<M = any, L = any, C = any> {
 
   @onLoad('build-map')
   createButtonControl(options: CreateButtonControlOptions) {
-    if (this.mapAdapter.createControl) {
+    if (this.mapAdapter.createButtonControl) {
       return this.mapAdapter.createButtonControl(options);
     }
   }
@@ -185,7 +187,7 @@ export class WebMap<M = any, L = any, C = any> {
     }
   }
 
-  getControl<K extends keyof MapControls>(control: K, options?: MapControls[K]): C {
+  getControl<K extends keyof MapControls>(control: K, options?: MapControls[K]): C | undefined {
     const engine = this.mapAdapter.controlAdapters[control];
     if (engine) {
       return new engine(options);
@@ -197,7 +199,7 @@ export class WebMap<M = any, L = any, C = any> {
     position: ControlPositions,
     options?: MapControls[K]) {
 
-    let control: C;
+    let control: C | undefined;
     if (typeof controlDef === 'string') {
       control = this.getControl(controlDef, options);
     } else {
@@ -211,13 +213,14 @@ export class WebMap<M = any, L = any, C = any> {
 
   async addLayer<K extends keyof LayerAdapters, O extends AdapterOptions = AdapterOptions>(
     layerAdapter: K | Type<LayerAdapter>,
-    options?: O | LayerAdapters[K], baselayer?: boolean): Promise<LayerAdapter> {
+    options: O | LayerAdapters[K] = {},
+    baselayer?: boolean): Promise<LayerAdapter> {
 
-    let adapterEngine;
+    let adapterEngine: Type<LayerAdapter>;
     if (typeof layerAdapter === 'string') {
       adapterEngine = this.getLayerAdapter((layerAdapter as string));
     } else {
-      adapterEngine = layerAdapter;
+      adapterEngine = layerAdapter as Type<LayerAdapter>;
     }
     if (adapterEngine) {
       options.onLayerClick = (e) => this._onLayerClick(e);
@@ -288,29 +291,31 @@ export class WebMap<M = any, L = any, C = any> {
     }
   }
 
-  getScaleForResolution(res, mpu) {
-    return parseFloat(res) * (mpu * this.IPM * this.DPI);
+  getScaleForResolution(res: number, mpu: number): number {
+    return res * (mpu * this.IPM * this.DPI);
   }
 
-  getResolutionForScale(scale, mpu) {
-    return parseFloat(scale) / (mpu * this.IPM * this.DPI);
+  getResolutionForScale(scale: number, mpu: number): number {
+    return scale / (mpu * this.IPM * this.DPI);
   }
 
   toggleLayer(layerName: string, status?: boolean) {
     const layer = this._layers[layerName];
-    if (status === undefined) {
-      status = !layer.onMap;
-    }
-    const action = (source, l: LayerMem) => {
-      l.onMap = status;
-      if (status && source) {
+
+    const toStatus = status !== undefined ? status : !layer.onMap;
+
+    const action = (source: any, l: LayerMem) => {
+      l.onMap = toStatus;
+      if (toStatus && source) {
         const order = l.baseLayer ? 0 : l.order;
         if (l.adapter && l.adapter.showLayer) {
           l.adapter.showLayer.call(l.adapter, l.layer);
         } else {
           this.mapAdapter.showLayer(l.layer);
         }
-        this.mapAdapter.setLayerOrder(l.layer, order, this._layers);
+        if (order !== undefined) {
+          this.mapAdapter.setLayerOrder(l.layer, order, this._layers);
+        }
       } else {
         if (l.adapter && l.adapter.hideLayer) {
           l.adapter.hideLayer.call(l.adapter, l.layer);
@@ -319,7 +324,7 @@ export class WebMap<M = any, L = any, C = any> {
         }
       }
     };
-    if (layer && layer.onMap !== status) {
+    if (layer && layer.onMap !== toStatus) {
       if (this.mapAdapter.map) {
         action(this.mapAdapter, layer);
       } else {
@@ -330,18 +335,14 @@ export class WebMap<M = any, L = any, C = any> {
     }
   }
 
-  requestGeomString(pixel, pixelRadius) {
-    return this.mapAdapter.requestGeomString(pixel, pixelRadius);
+  requestGeomString(pixel: Pixel, pixelRadius: number) {
+    if (this.mapAdapter.requestGeomString) {
+      return this.mapAdapter.requestGeomString(pixel, pixelRadius);
+    }
   }
 
-  onMapClick(evt) {
-    const coord = evt.containerPoint;
-    const latLng = evt.latlng;
-    this.emitter.emit('click', {
-      latLng,
-      pixel: { left: coord.x, top: coord.y },
-      source: evt,
-    });
+  onMapClick(evt: MapClickEvent) {
+    this.emitter.emit('click', evt);
   }
 
   selectLayer(layerId: string) {
@@ -363,7 +364,7 @@ export class WebMap<M = any, L = any, C = any> {
     }
   }
 
-  filterLayer(layerId: string, filter: (opt: { feature: Feature, layer: any }) => boolean) {
+  filterLayer(layerId: string, filter: (opt: { feature?: Feature, layer: any }) => boolean) {
     const layer = this.getLayer(layerId);
     if (layer && layer.adapter.filter) {
       layer.adapter.filter(filter);
@@ -379,14 +380,14 @@ export class WebMap<M = any, L = any, C = any> {
 
   addLayerData(layerId: string, data: GeoJsonObject) {
     const layer = this.getLayer(layerId);
-    if (layer && layer.adapter.setData) {
+    if (layer && layer.adapter.addData) {
       layer.adapter.addData(data);
     }
   }
 
   clearLayerData(layerId: string, cb?: (feature: Feature) => boolean) {
     const layer = this.getLayer(layerId);
-    if (layer && layer.adapter.setData) {
+    if (layer && layer.adapter.clearLayer) {
       layer.adapter.clearLayer(cb);
     }
   }
@@ -421,14 +422,16 @@ export class WebMap<M = any, L = any, C = any> {
 
   private async _addLayerProviders() {
     try {
-      for await (const kit of this._starterKits.filter((x) => x.getLayerAdapters)) {
-        const adapters = await kit.getLayerAdapters.call(kit);
-        if (adapters) {
-          for await (const adapter of adapters) {
-            // this.map.layerAdapters[adapter.name] = adapter;
-            const newAdapter = await adapter.createAdapter(this);
-            if (newAdapter) {
-              this.mapAdapter.layerAdapters[adapter.name] = newAdapter;
+      for await (const kit of this._starterKits) {
+        if (kit.getLayerAdapters) {
+          const adapters = await kit.getLayerAdapters.call(kit);
+          if (adapters) {
+            for await (const adapter of adapters) {
+              // this.map.layerAdapters[adapter.name] = adapter;
+              const newAdapter = await adapter.createAdapter(this);
+              if (newAdapter) {
+                this.mapAdapter.layerAdapters[adapter.name] = newAdapter;
+              }
             }
           }
         }
@@ -440,8 +443,10 @@ export class WebMap<M = any, L = any, C = any> {
 
   private async _onLoadSync() {
     try {
-      for await (const kit of this._starterKits.filter((x) => x.onLoadSync)) {
-        await kit.onLoadSync.call(kit, this);
+      for await (const kit of this._starterKits) {
+        if (kit.onLoadSync) {
+          await kit.onLoadSync.call(kit, this);
+        }
       }
     } catch (er) {
       throw new Error(er);

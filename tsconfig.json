@@ -14,7 +14,7 @@
       "dom"
     ],
     /* Strict Type-Checking Options */
-    "strict": false, /* Enable all strict type-checking options. */
+    "strict": true, /* Enable all strict type-checking options. */
     /* Module Resolution Options */
     "esModuleInterop": true, /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */
     "sourceMap": true,

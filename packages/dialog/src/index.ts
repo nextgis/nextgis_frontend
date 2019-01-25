@@ -1,4 +1,5 @@
 import { DialogAdapter, DialogAdapterOptions } from '@nextgis/webmap';
+// @ts-ignore
 import dialogPolyfill from 'dialog-polyfill/dialog-polyfill';
 import 'dialog-polyfill/dialog-polyfill.css';
 
@@ -30,9 +31,9 @@ export default class Dialog implements DialogAdapter {
 
   private _dialog: HTMLDialogElement;
   private _isNativeDialog: boolean;
-  private _closeBtn: HTMLElement;
   private _content: HTMLElement;
   private _parent: Node;
+  private _closeBtn?: HTMLElement;
 
   constructor(options?: DialogAdapterOptions) {
     this._dialog = document.createElement('dialog') as HTMLDialogElement;
@@ -48,7 +49,7 @@ export default class Dialog implements DialogAdapter {
     }
 
     if (this.options.closeBtn) {
-      this._addCloseBtn();
+      this._closeBtn = this._createCloseBtn();
     }
 
     this._content = document.createElement('div');
@@ -75,8 +76,13 @@ export default class Dialog implements DialogAdapter {
     this._dialog.close();
   }
 
-  updateContent(content: string | Node = this.options.template) {
-    this._addContent(content, this._content);
+  updateContent(content?: string | Node) {
+    if (!content && this.options.template) {
+      content = this.options.template;
+    }
+    if (content) {
+      this._addContent(content, this._content);
+    }
   }
 
   // private _removeElement(element: HTMLElement) {
@@ -86,27 +92,29 @@ export default class Dialog implements DialogAdapter {
   //   }
   // }
 
-  private _addCloseBtn() {
+  private _createCloseBtn() {
     const template = this.options.closeBtnTemplate;
-    this._closeBtn = document.createElement('div');
-    this._closeBtn.className = 'dialog-component__close';
-    this._dialog.appendChild(this._closeBtn);
-    this._addContent(template, this._closeBtn);
+    if (template) {
+      const btn = document.createElement('div');
+      btn.className = 'dialog-component__close';
+      this._dialog.appendChild(btn);
+      this._addContent(template, btn);
 
-    this._closeBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      this.close();
-    });
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.close();
+      });
+      return btn;
+    }
   }
 
-  private _addContent(content: string | Node, parent: HTMLElement): Node {
+  private _addContent(content: string | Node, parent: HTMLElement) {
     if (typeof content === 'string') {
       parent.innerHTML = content;
     } else if (content instanceof HTMLElement) {
       parent.innerHTML = '';
       parent.appendChild(content);
     }
-    return parent.firstChild;
   }
 
   private _addEventsListeners() {
