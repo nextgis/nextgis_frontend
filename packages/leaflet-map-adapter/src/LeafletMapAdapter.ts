@@ -162,9 +162,12 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
       }
       return true;
     }).sort((a, b) => {
-      const layerAOrder = layers[a] && layer[a].order;
-      const layerBOrder = layers[b] && layer[b].order;
-      return layerAOrder - layerBOrder;
+      const layerAOrder = layers[a] && layers[a].order;
+      const layerBOrder = layers[b] && layers[b].order;
+      if (layerAOrder !== undefined && layerBOrder !== undefined) {
+        return layerAOrder - layerBOrder;
+      }
+      return 0;
     });
 
     // normilize vector layer ordering

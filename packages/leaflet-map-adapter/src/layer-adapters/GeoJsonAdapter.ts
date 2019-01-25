@@ -4,7 +4,8 @@ import {
   GeoJsonAdapterLayerPaint,
   GeoJsonAdapterLayerType,
   IconOptions,
-  GetPaintCallback
+  GetPaintCallback,
+  GetPaintFunction
 } from '@nextgis/webmap';
 import {
   GeoJSON,
@@ -56,6 +57,8 @@ interface LayerMem {
 
 export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
 
+  static getPaintFunctions?: { [name: string]: GetPaintFunction };
+
   layer = new FeatureGroup();
 
   paint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
@@ -63,6 +66,8 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
   selected = false;
   options?: GeoJsonAdapterOptions;
   type?: GeoJsonAdapterLayerType;
+
+  getPaintFunctions = GeoJsonAdapter.getPaintFunctions;
 
   private _layers: LayerMem[] = [];
   private _selectedLayers: LayerMem[] = [];
@@ -185,9 +190,20 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
 
         data = filterGeometries(data, type);
         if (data) {
+          if (typeof options.paint !== 'function' && options.paint.type === 'get-paint') {
+            if (typeof options.paint.from === 'function') {
+              options.paint = options.paint.from(options.paint.options);
+            } else if (typeof options.paint.from === 'string' && this.getPaintFunctions) {
+              const from = this.getPaintFunctions[options.paint.from];
+              if (from) {
+                options.paint = from(options.paint.options);
+              }
+            }
+          }
           geoJsonOptions = this.getGeoJsonOptions(options, type);
         }
       }
+
       const layer = new GeoJSON(data || undefined, geoJsonOptions);
     }
   }
@@ -214,12 +230,14 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
     }
   }
 
-  private preparePaint(paint: CircleMarkerOptions | PathOptions): PathOptions {
-    const path: CircleMarkerOptions | PathOptions = paint;
-    if (path.opacity) {
-      path.fillOpacity = path.opacity;
+  private preparePaint(paint: GeoJsonAdapterLayerPaint): PathOptions {
+    if (paint.type !== 'get-paint') {
+      const path: CircleMarkerOptions | PathOptions = paint as CircleMarkerOptions | PathOptions;
+      if (path.opacity) {
+        path.fillOpacity = path.opacity;
+      }
+      return path;
     }
-    return path;
   }
 
   private getGeoJsonOptions(options: GeoJsonAdapterOptions, type: GeoJsonAdapterLayerType): GeoJSONOptions {
