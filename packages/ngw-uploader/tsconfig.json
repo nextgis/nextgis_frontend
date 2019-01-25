@@ -3,7 +3,8 @@
   "compilerOptions": {
     "outDir": "lib",
     "declaration": true, /* Generates corresponding '.d.ts' file. */
-    "declarationDir": "lib"
+    "declarationDir": "lib",
+    "strict": false
   },
   "include": [
     "./src"

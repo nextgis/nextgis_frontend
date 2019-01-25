@@ -5,7 +5,7 @@ export function onLoad(event: string) {
     const originalMethod = descriptor.value;
 
     descriptor.value = function (...args: any[]) {
-      const self: WebMap = this;
+      const self = this as WebMap;
 
       return new Promise((resolve, reject) => {
         const _resolve = () => {

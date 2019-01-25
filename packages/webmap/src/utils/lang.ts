@@ -1,6 +1,6 @@
 const opts = Object.prototype.toString;
 
-export function isString(it) {
+export function isString(it: any) {
   return (typeof it === 'string' || it instanceof String); // Boolean
 }
 
@@ -8,11 +8,11 @@ export function isString(it) {
  * Return true if it is a Function
  * @param it Item to test.
  */
-export function isFunction(it) {
+export function isFunction(it: any) {
   return opts.call(it) === '[object Function]';
 }
 
-export function getProp(parts: any[], create: boolean, context: object) {
+export function getProp(parts: any[], create: boolean, context: any) {
   try {
     for (let i = 0; i < parts.length; i++) {
       const p = parts[i];
@@ -32,14 +32,14 @@ export function getProp(parts: any[], create: boolean, context: object) {
   }
 }
 
-export function setObject(name: string, value, context: object) {
+export function setObject(name: string, value: any, context: object) {
   const parts = name.split('.');
   const p = parts.pop();
   const obj = getProp(parts, true, context);
   return obj && p ? (obj[p] = value) : undefined; // Object
 }
 
-export function hitch(scope, method) {
+export function hitch(scope: any, method: any) {
 
   if (!method) {
     method = scope;
@@ -53,7 +53,7 @@ export function hitch(scope, method) {
   return !scope ? method : function() {return method.apply(scope, arguments || []); }; // Function
 }
 
-export function deepmerge(target, src, mergeArray = false) {
+export function deepmerge(target: any, src: any, mergeArray = false) {
   const array = Array.isArray(src);
   let dst: any = array && [] || {};
 
@@ -62,7 +62,7 @@ export function deepmerge(target, src, mergeArray = false) {
     if (mergeArray) {
       target = target || [];
       dst = dst.concat(target);
-      src.forEach(function(e, i) {
+      src.forEach(function(e: any, i: any) {
         if (typeof dst[i] === 'undefined') {
           dst[i] = e;
         } else if (typeof e === 'object') {
