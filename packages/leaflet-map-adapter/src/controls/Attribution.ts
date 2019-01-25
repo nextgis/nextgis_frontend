@@ -1,15 +1,19 @@
-import { Control } from 'leaflet';
-// import { AttributionControlOptions } from '@nextgis/webmap';
+import { Control, ControlOptions } from 'leaflet';
+import { AttributionControlOptions } from '@nextgis/webmap';
 
 export class AttributionControl extends Control.Attribution {
 
   // options: AttributionControlOptions
-  constructor(options) {
+  constructor(options: AttributionControlOptions & ControlOptions) {
     super(options);
-    if (options.customAttribution) {
-      const attributions = [].concat(options.customAttribution);
-      attributions.forEach((x) => this.addAttribution(x));
+    const customAttribution = options.customAttribution;
+    let attributions: string[] = [];
+    if (Array.isArray(customAttribution)) {
+      attributions = customAttribution;
+    } else if (customAttribution) {
+      attributions = [customAttribution];
     }
+    attributions.forEach((x) => this.addAttribution(x));
   }
 
 }

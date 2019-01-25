@@ -4,9 +4,10 @@ import {
   LayerMem,
   MapControl,
   CreateControlOptions,
-  CreateButtonControlOptions
+  CreateButtonControlOptions,
+  LayerAdapter
 } from '@nextgis/webmap';
-import { Map, Control, Layer, GridLayer, ControlPosition } from 'leaflet';
+import { Map, Control, Layer, GridLayer, ControlPosition, LeafletEvent, LeafletMouseEvent } from 'leaflet';
 import { EventEmitter } from 'events';
 import { TileAdapter } from './layer-adapters/TileAdapter';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
@@ -19,9 +20,11 @@ export interface LeafletMapAdapterOptions extends MapOptions {
   id?: string;
 }
 
+export type Type<T> = new (...args: any[]) => T;
+
 export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
 
-  static layerAdapters = {
+  static layerAdapters: { [name: string]: Type<LayerAdapter<any, any, Map>> } = {
     IMAGE: ImageAdapter,
     TILE: TileAdapter,
     GEOJSON: GeoJsonAdapter,
@@ -44,20 +47,21 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   lonlatProjection = 'EPSG:4326';
   emitter = new EventEmitter();
 
-  map: Map;
+  map?: Map;
 
   // create(options: MapOptions = {target: 'map'}) {
   create(options: LeafletMapAdapterOptions = { target: 'map' }) {
-    this.options = Object.assign({}, options);
+    this.options = { ...options };
+    if (this.options.target) {
+      this.map = new Map(this.options.target, { zoomControl: false, attributionControl: false });
+      this.emitter.emit('create', { map: this.map });
 
-    this.map = new Map(this.options.target, { zoomControl: false, attributionControl: false });
-    this.emitter.emit('create', { map: this.map });
-
-    this._addMapListeners();
+      this._addMapListeners();
+    }
   }
 
-  getContainer(): HTMLElement {
-    return this.map.getContainer();
+  getContainer(): HTMLElement | undefined {
+    return this.map && this.map.getContainer();
   }
 
   onMapLoad(cb?: any): Promise<void> {
@@ -74,26 +78,34 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
 
   setView(lngLat: [number, number], zoom: number) {
     const [lng, lat] = lngLat;
-    this.map.setView([lat, lng], zoom);
+    if (this.map) {
+      this.map.setView([lat, lng], zoom);
+    }
   }
 
   setCenter(lngLat: [number, number]) {
     const [lng, lat] = lngLat;
-    this.map.setView([lat, lng], this.map.getZoom());
+    if (this.map) {
+      this.map.setView([lat, lng], this.map.getZoom());
+    }
   }
 
   setZoom(zoom: number) {
-    this.map.setZoom(zoom);
+    if (this.map) {
+      this.map.setZoom(zoom);
+    }
   }
 
-  getZoom() {
-    return this.map.getZoom();
+  getZoom(): number | undefined {
+    return this.map && this.map.getZoom();
   }
 
   // [extent_left, extent_bottom, extent_right, extent_top];
   fit(e: [number, number, number, number]) {
-    // top, left, bottom, right
-    this.map.fitBounds([[e[3], e[0]], [e[1], e[2]]]);
+    if (this.map) {
+      // top, left, bottom, right
+      this.map.fitBounds([[e[3], e[0]], [e[1], e[2]]]);
+    }
   }
 
   getLayerAdapter(name: string) {
@@ -108,14 +120,18 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     return createButtonControl(options);
   }
 
-  addControl(control: Control, position: string): Control {
+  addControl(control: Control, position: string): Control | undefined {
     control.options.position = position.replace('-', '') as ControlPosition;
-    this.map.addControl(control);
-    return control;
+    if (this.map) {
+      this.map.addControl(control);
+      return control;
+    }
   }
 
-  removeControl(control) {
-    this.map.removeControl(control);
+  removeControl(control: Control) {
+    if (this.map) {
+      this.map.removeControl(control);
+    }
   }
 
   removeLayer(layer: Layer) {
@@ -123,7 +139,9 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   }
 
   showLayer(layer: Layer) {
-    layer.addTo(this.map);
+    if (this.map) {
+      layer.addTo(this.map);
+    }
   }
 
   hideLayer(layer: Layer) {
@@ -134,8 +152,8 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     // ignore
   }
 
-  setLayerOrder(layer, order, layers: { [x: string]: LayerMem }) {
-    const baseLayers = [];
+  setLayerOrder(layer: any, order: number, layers: { [x: string]: LayerMem }) {
+    const baseLayers: string[] = [];
 
     const orderedLayers = Object.keys(layers).filter((x) => {
       if (layers[x].baseLayer) {
@@ -144,7 +162,9 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
       }
       return true;
     }).sort((a, b) => {
-      return layers[a].order - layers[b].order;
+      const layerAOrder = layers[a] && layer[a].order;
+      const layerBOrder = layers[b] && layer[b].order;
+      return layerAOrder - layerBOrder;
     });
 
     // normilize vector layer ordering
@@ -162,7 +182,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     }
   }
 
-  onMapClick(evt) {
+  onMapClick(evt: LeafletMouseEvent) {
     const coord = evt.containerPoint;
     const latLng = evt.latlng;
     this.emitter.emit('click', {
@@ -173,9 +193,11 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   }
 
   private _addMapListeners() {
-    this.map.on('click', (evt) => {
-      this.onMapClick(evt);
-    });
+    if (this.map) {
+      this.map.on('click', (evt) => {
+        this.onMapClick(evt as LeafletMouseEvent);
+      });
+    }
   }
 
 }

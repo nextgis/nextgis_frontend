@@ -1,26 +1,31 @@
-import { LayerAdapter } from '@nextgis/webmap';
+import { LayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
 // import wms from 'leaflet.wms/src/leaflet.wms.js';
+// @ts-ignore
 import wms from './wms';
+import { BaseAdapter } from './BaseAdapter';
+import { Map } from 'leaflet';
 
 let ID = 1;
 
-export class ImageAdapter implements LayerAdapter {
+export class ImageAdapter extends BaseAdapter implements LayerAdapter {
 
-  name: string;
   layer: any;
 
-  addLayer(options?) {
-    options = { transparent: true, ...options };
-    const updateWmsParamsFromOpt = options.updateWmsParams;
-    this.name = options.id || 'image-' + ID++;
-    this.layer = wms.overlay(options.url, options);
-    if (updateWmsParamsFromOpt) {
-      const updateWmsParams = this.layer.updateWmsParams;
-      this.layer.updateWmsParams = function (map) {
-        updateWmsParams.call(this, map);
-        this.wmsParams = updateWmsParamsFromOpt(this.wmsParams);
-      };
+  addLayer(options?: ImageAdapterOptions) {
+    if (options) {
+      options = { transparent: true, ...options };
+      const updateWmsParamsFromOpt = options.updateWmsParams;
+      this.name = options.id || 'image-' + ID++;
+      this.layer = wms.overlay(options.url, options);
+      if (updateWmsParamsFromOpt) {
+        const updateWmsParams = this.layer.updateWmsParams;
+        this.layer.updateWmsParams = function (map: Map) {
+          updateWmsParams.call(this, map);
+          this.wmsParams = updateWmsParamsFromOpt(this.wmsParams);
+        };
+      }
+      return this.layer;
     }
-    return this.layer;
+
   }
 }

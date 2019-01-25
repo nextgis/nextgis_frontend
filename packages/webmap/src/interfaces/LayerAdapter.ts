@@ -78,6 +78,7 @@ export interface MarkerAdapterOptions extends AdapterOptions {
 export interface ImageAdapterOptions extends AdapterOptions {
   resourceId: string | number;
   updateWmsParams?: (obj: {[paramName: string]: any}) => object;
+  transparent?: boolean;
 }
 
 export interface LayerAdapters {
@@ -89,6 +90,8 @@ export interface LayerAdapters {
   'GEOJSON': GeoJsonAdapterOptions;
   [name: string]: AdapterOptions;
 }
+
+export type DataLayerFilter<L> = (opt: { layer?: L, feature?: Feature }) => boolean;
 
 export interface LayerAdapter<O = any, L = any, M = any> {
   name: string;
@@ -102,11 +105,11 @@ export interface LayerAdapter<O = any, L = any, M = any> {
 
   getLayers?(): Array<{ feature?: Feature, layer?: L, visible?: boolean }>;
 
-  select?(findFeatureCb?: (opt: { layer?: L, feature?: Feature }) => boolean): void;
-  unselect?(findFeatureCb?: (opt: { layer?: L, feature?: Feature }) => boolean): void;
+  select?(findFeatureCb?: DataLayerFilter<L>): void;
+  unselect?(findFeatureCb?: DataLayerFilter<L>): void;
   getSelected?(): Array<{ layer?: L, feature?: Feature }>;
 
-  filter?(cb: (opt: { layer: L, feature?: Feature }) => boolean): void;
+  filter?(cb: DataLayerFilter<L>): void;
 
   setData?(data: GeoJsonObject): void;
   addData?(data: GeoJsonObject): void;
