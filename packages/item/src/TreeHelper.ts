@@ -5,8 +5,8 @@ export class TreeHelper {
 
   item: Item;
 
+  private _children: Item[] = [];
   private _parent?: Item;
-  private _children?: Item[] = [];
 
   constructor(item: Item) {
     this.item = item;
@@ -21,14 +21,14 @@ export class TreeHelper {
     this._children.push(child);
   }
 
-  getParent(): Item {
+  getParent(): Item | undefined {
     return this._parent;
   }
 
   getParents(filterFunc?: (item: Item) => boolean): Item[] {
-    if (this.getParent()) {
-      const generator = filterIn(this._parent, filterFunc, (x: Item) => x.tree.getParent());
-      return generator;
+    const parent = this.getParent();
+    if (parent) {
+      return filterIn(parent, filterFunc, (x: Item) => x.tree.getParent());
     }
     return [];
   }

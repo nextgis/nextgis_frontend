@@ -17,7 +17,7 @@ const EventEmitter = events && events.EventEmitter;
 //   'change-tree': {value: V, options: O, item: Item};
 // }
 
-export class BaseProperty<V = any, O extends ItemBasePropertyOptions<V> = ItemBasePropertyOptions<V>> {
+export abstract class BaseProperty<V = any, O extends ItemBasePropertyOptions<V> = ItemBasePropertyOptions<V>> {
 
   options: O;
 
@@ -26,11 +26,11 @@ export class BaseProperty<V = any, O extends ItemBasePropertyOptions<V> = ItemBa
   name: string;
 
   item: Item;
-  _blocked: boolean;
+  protected _blocked: boolean = false;
+  protected _container?: HTMLElement;
+  protected _value?: V;
 
-  private _value: V;
   private _removeEventsListener?: () => void;
-  private _container: HTMLElement;
 
   constructor(name: string, item: Item, options: O) {
     this.item = item;
@@ -64,10 +64,11 @@ export class BaseProperty<V = any, O extends ItemBasePropertyOptions<V> = ItemBa
       const parents = this.item.tree.getParents();
       if (parents) {
         const isBlocked = parents.find((x: Item) => {
-          const parentProp = x.properties.property(this.name);
+          const parentProp = x.properties && x.properties.property(this.name);
           if (parentProp) {
             return !parentProp.get();
           }
+          return false;
         });
         this._blocked = !!isBlocked;
       } else {
@@ -77,7 +78,7 @@ export class BaseProperty<V = any, O extends ItemBasePropertyOptions<V> = ItemBa
     return this._blocked;
   }
 
-  set(value: V, options?: O) {
+  set(value?: V, options?: O) {
     this._value = this._prepareValue(value);
 
     this.update(this._value, options);
@@ -85,7 +86,7 @@ export class BaseProperty<V = any, O extends ItemBasePropertyOptions<V> = ItemBa
   }
 
   // shortcut for getValue
-  get(): V {
+  get(): V | undefined {
     return this.getValue();
   }
 
@@ -99,34 +100,37 @@ export class BaseProperty<V = any, O extends ItemBasePropertyOptions<V> = ItemBa
 
   destroy() {
     if (this._container) {
-      this._container.parentNode.removeChild(this._container);
+      const parentNode = this._container.parentNode;
+      if (parentNode) {
+      parentNode.removeChild(this._container);
+      }
     }
     if (this._removeEventsListener) {
       this._removeEventsListener();
     }
   }
 
-  getValue(): V {
+  getValue(): V | undefined {
     return this._value !== undefined ? this._value : this.getProperty();
   }
 
-  _prepareValue(value: V): V {
+  protected _prepareValue(value?: V): V | undefined {
     return value;
   }
 
-  _callOnSet(value: V, options: O) {
+  protected _callOnSet<W extends V = V>(value?: W, options?: O) {
     if (this.options.onSet) {
       this.options.onSet.call(this, value, options);
     }
   }
 
-  _fireChangeEvent(value: V, options: O) {
+  protected _fireChangeEvent(value?: V, options?: O) {
     if (this.emitter) {
       value = value !== undefined ? value : this.getValue();
       this.emitter.emit('change', { value, options });
       const parents = this.item.tree.getParents();
       parents.forEach((x) => {
-        const prop = x.properties.property(this.name);
+        const prop = x.properties && x.properties.property(this.name);
         if (prop) {
           prop.emitter.emit('change-tree', { value, options, item: this.item });
         }

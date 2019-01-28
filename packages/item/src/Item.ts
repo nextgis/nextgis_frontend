@@ -15,16 +15,16 @@ let ID = 0;
 
 export class Item<O extends ItemOptions = ItemOptions> {
 
-  options: O;
+  options: O = {} as O;
   id: string;
 
-  properties: ItemProperties;
+  properties: ItemProperties | undefined;
   tree: TreeHelper;
 
   emitter = EventEmitter && new EventEmitter();
 
-  constructor(options?: ItemOptions) {
-    this.options = { ...this.options, ...options };
+  constructor(options?: O) {
+    this.options = {  ...options } as O;
     this.id = String(ID++);
     this.tree = new TreeHelper(this);
   }
