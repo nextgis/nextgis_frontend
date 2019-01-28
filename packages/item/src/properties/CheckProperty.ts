@@ -1,9 +1,13 @@
-import {BaseProperty} from './BaseProperty';
-import {Item} from '../Item';
+import { BaseProperty } from './BaseProperty';
+import { Item } from '../Item';
 
 import { ICheckOptions } from '../interfaces';
 
-export class CheckProperty<V = boolean, O = ICheckOptions> extends BaseProperty<boolean, ICheckOptions> {
+type VAL = boolean;
+
+export class CheckProperty
+  <V extends VAL = VAL, O extends ICheckOptions<VAL> =  ICheckOptions<VAL>>
+  extends BaseProperty<VAL, ICheckOptions<VAL>> {
 
   static options: ICheckOptions = {
     hierarchy: true,
@@ -13,20 +17,20 @@ export class CheckProperty<V = boolean, O = ICheckOptions> extends BaseProperty<
     // PropertyContainer: IndicatorContainer
   };
 
-  constructor(name, item, options) {
-    super(name, item, Object.assign({}, CheckProperty.options, options));
+  constructor(name: string, item: Item, options: O) {
+    super(name, item, {...CheckProperty.options, ...options});
     this.set(this.get());
   }
 
-  update(value: boolean, options: ICheckOptions) {
+  update(value?: V, options?: O) {
     if (value) {
       const bubble = (options && options.bubble) || this.options.bubble;
       if (bubble) {
         this.unBlock(options);
         const parent = this.getParent();
-        const property = parent && parent.properties.property(this.name);
+        const property = parent &&  parent.properties && parent.properties.property(this.name);
         if (property) {
-          property.set(value, Object.assign({}, options, {bubble: true, propagation: false}));
+          property.set(value, Object.assign({}, options, { bubble: true, propagation: false }));
         }
       }
       if (!this.isBlocked()) {
@@ -43,16 +47,16 @@ export class CheckProperty<V = boolean, O = ICheckOptions> extends BaseProperty<
 
   getHierarchyValue() {
     return this.get() && this.getParents().every((x) => {
-      const property = x.properties[this.name];
+      const property = x.properties && x.properties.get(this.name);
       return property && property.get();
     });
   }
 
-  _prepareValue(value: boolean) {
-    return !!value;
+  _prepareValue(value?: any): V | undefined {
+    return value;
   }
 
-  _turnOff(options: ICheckOptions) {
+  _turnOff(options?: O) {
     if (this.options.turnOff) {
       this.options.turnOff.call(this, options);
     }
@@ -62,7 +66,7 @@ export class CheckProperty<V = boolean, O = ICheckOptions> extends BaseProperty<
     }
   }
 
-  _turnOn(options: ICheckOptions) {
+  _turnOn(options?: O) {
     if (this.options.turnOn) {
       this.options.turnOn.call(this, options);
     }
@@ -72,59 +76,61 @@ export class CheckProperty<V = boolean, O = ICheckOptions> extends BaseProperty<
     }
   }
 
-  block(options: ICheckOptions) {
+  block(options?: O) {
     this._blocked = true;
     this._block(options);
   }
 
-  _block(options: ICheckOptions) {
+  _block(options?: O) {
     this._turnOff(options);
   }
 
-  unBlock(options: ICheckOptions) {
+  unBlock(options?: O) {
     this._blocked = false;
     if (this.getValue()) {
       this._unBlock(options);
     }
   }
 
-  _unBlock(options: ICheckOptions) {
+  _unBlock(options?: O) {
     this._turnOn(options);
   }
 
-  blockChilds(options: ICheckOptions) {
-    this.item.tree.getDescendants().forEach(this._blockChild.bind(this, options));
+  blockChilds(options?: O) {
+    this.item.tree.getDescendants().forEach((x) => this._blockChild(x, options));
   }
 
-  unblockChilds(options: ICheckOptions) {
-    this.item.tree.getChildren().forEach(this._unBlockChild.bind(this, options));
+  unblockChilds(options?: O) {
+    this.item.tree.getChildren().forEach((x) => this._unBlockChild(x, options));
   }
 
-  _blockChild(options: ICheckOptions, item: Item) {
-    const prop = item.properties.property(this.name) as CheckProperty;
-    if (prop.block) {
+  _blockChild(item: Item, options?: O) {
+    const prop = item.properties && item.properties.property(this.name) as CheckProperty<V, O>;
+    if (prop && prop.block) {
       prop.block(options);
     }
   }
 
-  _unBlockChild(options: ICheckOptions, item: Item) {
-    const prop = item.properties.property(this.name) as CheckProperty;
-    if (prop.unBlock) {
+  _unBlockChild(item: Item, options?: O) {
+    const prop = item.properties && item.properties.property(this.name) as CheckProperty<V, O>;
+    if (prop && prop.unBlock) {
       prop.unBlock(options);
     }
   }
 
-  _propagation(value: boolean, options: ICheckOptions) {
+  _propagation(value?: V, options?: O) {
     if (this.isGroup()) {
       const childs = this.item.tree.getChildren();
       for (let fry = 0; fry < childs.length; fry++) {
         const child = childs[fry];
-        const property = child.properties.property(this.name) as CheckProperty;
+        const property = child.properties && child.properties.property(this.name) as CheckProperty<V, O>;
         if (property) {
-          property.set(value, {...options, ...{
-            propagation: true,
-            bubble: false,
-          }});
+          property.set(value, {
+            ...options, ...{
+              propagation: true,
+              bubble: false,
+            }
+          });
         }
       }
     }

@@ -9,7 +9,7 @@ export interface ItemBasePropertyOptions<V> {
   silent?: boolean;
   value?: V;
   getProperty?: () => V;
-  onSet?: (value: V, options?: ItemBasePropertyOptions<V>) => void;
+  onSet?: (value?: V, options?: ItemBasePropertyOptions<V>) => void;
 }
 
 export interface ItemPropertyTypes {
@@ -32,11 +32,11 @@ export interface ItemPropertyConfig<K extends keyof ItemPropertyTypes> extends I
   onSet?(value: ItemPropertyTypes[K], options?: ItemBasePropertyOptions<ItemPropertyTypes[K]>): void;
 }
 
-export interface ICheckOptions extends ItemBasePropertyOptions<boolean> {
+export interface ICheckOptions<V = boolean> extends ItemBasePropertyOptions<V> {
   label?: string;
 
-  turnOff?: () => void;
-  turnOn?: () => void;
+  turnOff?: <O = ICheckOptions>(options?: O) => void;
+  turnOn?: <O = ICheckOptions>(options?: O) => void;
 }
 
 export interface ItemOptions {

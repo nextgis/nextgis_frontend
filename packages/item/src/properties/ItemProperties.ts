@@ -11,15 +11,12 @@ export class ItemProperties {
   };
 
   options = {};
-  item: Item;
 
-  private _properties: { [propName: string]: BaseProperty };
+  private _properties: { [propName: string]: BaseProperty } = {};
   private _propertiesList: string[];
 
-  constructor(item: Item, propertiesList?: Array<ItemPropertyConfig<keyof ItemPropertyTypes>>) {
+  constructor(public item: Item, propertiesList?: Array<ItemPropertyConfig<keyof ItemPropertyTypes>>) {
 
-    this.item = item;
-    this._properties = {};
     this._propertiesList = []; // ordered list
     if (propertiesList) {
       propertiesList.forEach(this._setPropertyHandler.bind(this));
@@ -45,7 +42,7 @@ export class ItemProperties {
           handler = handlers.BaseProperty;
       }
     }
-    if (handler) {
+    if (handler && propOpt.name) {
       const options = { ...propOpt || {} };
       this._properties[propOpt.name] = new handler(
         propOpt.name,
@@ -96,7 +93,7 @@ export class ItemProperties {
         }
       }
     }
-    this._properties = null;
+    this._properties = {};
     this._propertiesList = [];
   }
 }
