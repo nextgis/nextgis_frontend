@@ -57,16 +57,16 @@
       target: 'map',
       webmapId: 10,
       qmsId: 465,
-      // center: [81.973, 53.026],
-      // zoom: 13
     });
 
+    // add layer with cameras
     ngwMap.addNgwLayer({ id: 3, adapter: 'GEOJSON' }, {
       paint: { color: 'red', radius: 5 },
       selectedPaint: { color: 'green', radius: 5 },
       selectable: true,
     });
 
+    // create camera panel control
     var cameraPanel = document.createElement('div');
     cameraPanel.className = 'camera-panel';
     cameraPanel.innerHTML = '<div class="camera-wrapper" style="display: none;">' +
@@ -83,12 +83,13 @@
 
     ngwMap.addControl(cameraPanelControl, 'bottom-right');
 
+    // define some element after the panel is added to dom the DOM
     var wrapper = cameraPanel.querySelector('.camera-wrapper')
     var title = cameraPanel.querySelector('.camera-title')
     var player = videojs(cameraPanel.querySelector('#vid1'));
 
-    function updateCameraPanel(id) {
 
+    function updateCameraPanel(id) {
       if (id) {
         wrapper.style.display = 'block';
         title.innerHTML = 'Camera #' + id;
@@ -110,7 +111,7 @@
       }
     };
 
-    ngwMap.emitter.on('layer:click', function (e, a) {
+    ngwMap.emitter.on('layer:click', function (e) {
       if (e.adapter.name === '3') {
         if (e.selected) {
           updateCameraPanel(e.feature.id);
