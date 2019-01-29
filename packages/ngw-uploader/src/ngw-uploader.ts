@@ -310,11 +310,12 @@ export class NgwUploader {
     });
   }
 
-  private _createDialogHtml(defAuth: Credentials = {}, resolve, reject): HTMLElement {
-    const { login, password } = defAuth;
-    const form = document.createElement('div');
-    form.className = 'ngw-uploader__login-dialog--form';
-    const formHtml = `
+  private _createDialogHtml(defAuth: Credentials, resolve, reject): HTMLElement {
+    if (defAuth && defAuth.login && defAuth.password) {
+      const { login, password } = defAuth;
+      const form = document.createElement('div');
+      form.className = 'ngw-uploader__login-dialog--form';
+      const formHtml = `
       <div><label><div>Name:</div>
         <input value=${login} class="ngw-uploader__login-dialog--input name"></input>
       </label></div>
@@ -324,49 +325,50 @@ export class NgwUploader {
       <button class="ngw-uploader__login-dialog--button login">Login</button>
       <button class="ngw-uploader__login-dialog--button cancel">Cancel</button>
     `;
-    form.innerHTML = formHtml;
-    const loginElement = form.getElementsByClassName('name')[0] as HTMLInputElement;
-    const passwordElement = form.getElementsByClassName('password')[0] as HTMLInputElement;
-    const loginBtn = form.getElementsByClassName('login')[0] as HTMLButtonElement;
-    const cancelBtn = form.getElementsByClassName('cancel')[0] as HTMLButtonElement;
-    const getAuthOpt: () => Credentials = () => {
-      return {
-        login: loginElement.value,
-        password: passwordElement.value
+      form.innerHTML = formHtml;
+      const loginElement = form.getElementsByClassName('name')[0] as HTMLInputElement;
+      const passwordElement = form.getElementsByClassName('password')[0] as HTMLInputElement;
+      const loginBtn = form.getElementsByClassName('login')[0] as HTMLButtonElement;
+      const cancelBtn = form.getElementsByClassName('cancel')[0] as HTMLButtonElement;
+      const getAuthOpt: () => Credentials = () => {
+        return {
+          login: loginElement.value,
+          password: passwordElement.value
+        };
       };
-    };
-    const onInputChange = () => {
+      const onInputChange = () => {
+        validate();
+      };
+      const validate = () => {
+        const auth = getAuthOpt();
+        if (auth.login && auth.password) {
+          loginBtn.disabled = false;
+        } else {
+          loginBtn.disabled = true;
+        }
+      };
+      const addEventListener = () => {
+        [loginElement, passwordElement].forEach((x) => {
+          ['change', 'input'].forEach((y) => x.addEventListener(y, onInputChange));
+        });
+      };
+      const removeEventListener = () => {
+        [loginElement, passwordElement].forEach((x) => {
+          ['change', 'input'].forEach((y) => x.removeEventListener(y, onInputChange));
+        });
+      };
+      loginBtn.onclick = () => {
+        removeEventListener();
+        resolve(getAuthOpt());
+      };
+      cancelBtn.onclick = () => {
+        removeEventListener();
+        reject('Login cancel');
+      };
       validate();
-    };
-    const validate = () => {
-      const auth = getAuthOpt();
-      if (auth.login && auth.password) {
-        loginBtn.disabled = false;
-      } else {
-        loginBtn.disabled = true;
-      }
-    };
-    const addEventListener = () => {
-      [loginElement, passwordElement].forEach((x) => {
-        ['change', 'input'].forEach((y) => x.addEventListener(y, onInputChange));
-      });
-    };
-    const removeEventListener = () => {
-      [loginElement, passwordElement].forEach((x) => {
-        ['change', 'input'].forEach((y) => x.removeEventListener(y, onInputChange));
-      });
-    };
-    loginBtn.onclick = () => {
-      removeEventListener();
-      resolve(getAuthOpt());
-    };
-    cancelBtn.onclick = () => {
-      removeEventListener();
-      reject('Login cancel');
-    };
-    validate();
-    addEventListener();
-    return form;
+      addEventListener();
+      return form;
+    }
   }
 
 }

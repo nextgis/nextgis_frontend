@@ -189,7 +189,7 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
         this.type = type;
 
         data = filterGeometries(data, type);
-        if (data) {
+        if (data && options.paint) {
           if (typeof options.paint !== 'function' && options.paint.type === 'get-paint') {
             if (typeof options.paint.from === 'function') {
               options.paint = options.paint.from(options.paint.options);
@@ -230,7 +230,7 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
     }
   }
 
-  private preparePaint(paint: GeoJsonAdapterLayerPaint): PathOptions {
+  private preparePaint(paint: GeoJsonAdapterLayerPaint): PathOptions | undefined {
     if (paint.type !== 'get-paint') {
       const path: CircleMarkerOptions | PathOptions = paint as CircleMarkerOptions | PathOptions;
       if (path.opacity) {
