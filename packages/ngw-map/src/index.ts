@@ -194,7 +194,7 @@ export default class NgwMap {
 
   zoomToLayer(id: string | number) {
     if (this._ngwLayers[id]) {
-      return this.connector.request('resource.item', { id }).then((resp) => {
+      return this.connector.request('resource.item', { id: Number(id) }).then((resp) => {
         if (resp) {
           if (resp.resource.cls === 'raster_style') {
             return this.connector.request('resource.item', {

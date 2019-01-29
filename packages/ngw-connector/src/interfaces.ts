@@ -41,8 +41,8 @@ export interface RequestItemsResponseMap {
 }
 
 export interface Credentials {
-  login?: string;
-  password?: string;
+  login: string;
+  password: string;
 }
 
 export interface NgwConnectorOptions {
@@ -53,9 +53,10 @@ export interface NgwConnectorOptions {
 
 export interface RequestHeaders {
   Authorization?: string;
-  Accept?: string | '*/*';
-  'Access-Control-Allow-Origin'?: string | '*';
-  'Access-Control-Allow-Headers'?: string | '*';
+  Accept?: string;
+  'Access-Control-Allow-Origin'?: string;
+  'Access-Control-Allow-Headers'?: string;
+  [header: string]: string | undefined;
 }
 
 export interface RequestOptions {
@@ -71,8 +72,8 @@ export interface RequestOptions {
 export interface LoadingQueue {
   name: string;
   waiting: Array<{
-    resolve: (data) => Promise<any>,
-    reject: () => Promise<Error>,
+    resolve: (...args: any[]) => Promise<any>,
+    reject: (...args: any[]) => Promise<Error>,
     timestamp: Date;
   }>;
 }

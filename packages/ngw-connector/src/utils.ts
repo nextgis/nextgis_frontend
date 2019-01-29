@@ -16,7 +16,12 @@
 
 import { RequestOptions } from './interfaces';
 
-export function loadJSON(url, callback, options: RequestOptions = {}, error) {
+export function loadJSON(
+  url: string,
+  callback: (...args: any[]) => any,
+  options: RequestOptions = {},
+  error: (reason?: any) => void) {
+
   options.method = options.method || 'GET';
   let xhr: XMLHttpRequest;
 
@@ -64,13 +69,18 @@ export function loadJSON(url, callback, options: RequestOptions = {}, error) {
   if (headers) {
     for (const h in headers) {
       if (headers.hasOwnProperty(h)) {
-        xhr.setRequestHeader(h, headers[h]);
+        const header = headers[h];
+        if (typeof header === 'string') {
+          xhr.setRequestHeader(h, header);
+        }
       }
     }
   }
-  xhr.withCredentials = options.withCredentials;
+  if (options.withCredentials !== undefined) {
+    xhr.withCredentials = options.withCredentials;
+  }
 
-  let data;
+  let data: FormData | any;
   if (options.file) {
     data = new FormData();
     data.append('file', options.file);
@@ -91,13 +101,12 @@ export function loadJSON(url, callback, options: RequestOptions = {}, error) {
 // https://github.com/Leaflet/Leaflet/blob/b507e21c510b53cd704fb8d3f89bb46ea925c8eb/src/core/Util.js#L165
 const templateRe = /\{ *([\w_-]+) *\}/g;
 
-export function template(str, data) {
+export function template(str: string, data: { [param: string]: any }) {
   return str.replace(templateRe, (s, key) => {
     let value = data[key];
 
     if (value === undefined) {
       throw new Error('No value provided for letiable ' + s);
-
     } else if (typeof value === 'function') {
       value = value(data);
     }
