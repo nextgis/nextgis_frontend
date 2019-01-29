@@ -5,7 +5,7 @@ import { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
 import {
   NgwConnectorOptions, Router,
   RequestItemsResponseMap, RequestOptions,
-  Params, LoadingQueue, UserInfo, Credentials, PyramidRoute
+  Params, LoadingQueue, UserInfo, Credentials, PyramidRoute, RequestHeaders
 } from './interfaces';
 import { loadJSON, template } from './utils';
 import { EventEmitter } from 'events';
@@ -13,23 +13,19 @@ import { EventEmitter } from 'events';
 export * from './interfaces';
 export * from './types/ResourceItem';
 
-const OPTIONS: NgwConnectorOptions = {
-  route: '/api/component/pyramid/route',
-  // baseUrl: 'http://'
-};
-
 export default class NgwConnector {
 
-  options: NgwConnectorOptions = {};
-
-  user: UserInfo;
   emitter = new EventEmitter();
-  private route: PyramidRoute;
+  user?: UserInfo;
+  private routeStr = '/api/component/pyramid/route';
+  private route?: PyramidRoute;
   private _loadingQueue: { [name: string]: LoadingQueue } = {};
-  private _loadingStatus = {};
+  private _loadingStatus: { [url: string]: boolean } = {};
 
-  constructor(options: NgwConnectorOptions) {
-    this.options = { ...OPTIONS, ...(options || {}) };
+  constructor(public options: NgwConnectorOptions = {}) {
+    if (this.options.route) {
+      this.routeStr = this.options.route;
+    }
   }
 
   async connect(): Promise<Router> {
@@ -42,7 +38,8 @@ export default class NgwConnector {
           await this.getUserInfo({ login, password });
         }
       }
-      return await this.makeQuery(this.options.route, {}, {}).then((route) => {
+
+      return await this.makeQuery(this.routeStr, {}, {}).then((route: PyramidRoute) => {
         this.route = route;
         return route;
       });
@@ -67,7 +64,7 @@ export default class NgwConnector {
     });
   }
 
-  getAuthorizationHeaders(credentials?: Credentials) {
+  getAuthorizationHeaders(credentials?: Credentials): RequestHeaders {
     const client = this.makeClientId(credentials);
     return {
       'Authorization': 'Basic ' + client
@@ -75,60 +72,67 @@ export default class NgwConnector {
   }
 
   makeClientId(credentials?: Credentials) {
-    const { login, password } = credentials || this.options.auth;
-    return window.btoa(unescape(encodeURIComponent(`${login}:${password}`)));
+    credentials = credentials || this.options.auth;
+    if (credentials) {
+      const { login, password } = credentials;
+      return window.btoa(unescape(encodeURIComponent(`${login}:${password}`)));
+    }
   }
 
-  request<K extends keyof RequestItemsParamsMap>(
+  async request<K extends keyof RequestItemsParamsMap>(
     name: K,
-    params?: RequestItemsParamsMap[K] | {},
+    params: RequestItemsParamsMap[K] & { [name: string]: any } = {},
     options?: RequestOptions): Promise<RequestItemsResponseMap[K]> {
 
-    return this.connect().then((apiItems) => {
-      for (const a in apiItems) {
-        if (apiItems.hasOwnProperty(a)) {
-          if (a === name) {
-            const apiItem = apiItems[a].slice();
-            let url = apiItem.shift();
-            if (apiItem.length) {
-              params = params || {};
-              const replaceParams = {};
-              for (let fry = 0; fry < apiItem.length; fry++) {
-                const arg = apiItem[fry];
-                replaceParams[fry] = '{' + arg + '}';
-                if (params[arg] === undefined) {
-                  throw new Error('`' + arg + '`' + ' url api argument is not specified');
-                }
+    const apiItems = await this.connect();
+    for (const a in apiItems) {
+      if (apiItems.hasOwnProperty(a)) {
+        if (a === name) {
+          const apiItem = apiItems[a].slice();
+          let url = apiItem.shift();
+          if (apiItem.length) {
+            const replaceParams: {
+              [num: number]: string;
+            } = {};
+            for (let fry = 0; fry < apiItem.length; fry++) {
+              const arg = apiItem[fry];
+              replaceParams[fry] = '{' + arg + '}';
+              if (params[arg] === undefined) {
+                throw new Error('`' + arg + '`' + ' url api argument is not specified');
               }
+            }
+            if (url) {
               url = template(url, replaceParams);
             }
-
-            // Non-obvious way ti transfer part of the parameters from `params`
-            // to the URL string
-            // left for backward compatibility, need to be rewritten щ куьщмув
-            if (params) {
-              const paramArray = [];
-              for (const p in params) {
-                if (params.hasOwnProperty(p) && apiItem.indexOf(p) === -1) {
-                  paramArray.push(`${p}=${params[p]}`);
-                }
-              }
-              if (paramArray.length) {
-                url = url + '/?' + paramArray.join('&');
+          }
+          // Non-obvious way ti transfer part of the parameters from `params`
+          // to the URL string
+          // left for backward compatibility, need to be rewritten щ куьщмув
+          if (params) {
+            const paramArray = [];
+            for (const p in params) {
+              if (params.hasOwnProperty(p) && apiItem.indexOf(p) === -1) {
+                paramArray.push(`${p}=${params[p]}`);
               }
             }
-
+            if (paramArray.length) {
+              url = url + '/?' + paramArray.join('&');
+            }
+          }
+          if (url) {
             return this.makeQuery(url, params, options);
+          } else {
+            throw new Error('request url is not set');
           }
         }
       }
-    });
+    }
   }
 
   post<K extends keyof RequestItemsParamsMap>(
     name: K,
     options?: RequestOptions,
-    params?: RequestItemsParamsMap[K] | {}): Promise<RequestItemsResponseMap[K]> {
+    params?: RequestItemsParamsMap[K] & { [name: string]: any }): Promise<RequestItemsResponseMap[K]> {
 
     options = options || {};
     options.method = 'POST';
@@ -139,7 +143,7 @@ export default class NgwConnector {
   get<K extends keyof RequestItemsParamsMap>(
     name: K,
     options?: RequestOptions,
-    params?: RequestItemsParamsMap[K] | {}): Promise<RequestItemsResponseMap[K]> {
+    params?: RequestItemsParamsMap[K] & { [name: string]: any }): Promise<RequestItemsResponseMap[K]> {
 
     options = options || {};
     options.method = 'GET';
@@ -185,7 +189,7 @@ export default class NgwConnector {
 
   }
 
-  _setLoadingQueue(name, resolve, reject) {
+  _setLoadingQueue(name: string, resolve: (...args: any[]) => any, reject: (...args: any[]) => any) {
     this._loadingQueue[name] = this._loadingQueue[name] || {
       name,
       waiting: [],
@@ -197,7 +201,7 @@ export default class NgwConnector {
     });
   }
 
-  _executeLoadingQueue(name, data, isError?) {
+  _executeLoadingQueue(name: string, data: any, isError?: boolean) {
     const queue = this._loadingQueue[name];
     if (queue) {
       for (let fry = 0; fry < queue.waiting.length; fry++) {
