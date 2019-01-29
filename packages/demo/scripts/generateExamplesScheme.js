@@ -26,21 +26,21 @@ function generate(source = '../') {
         const packagePath = join(libPath, 'package.json');
         if (existsSync(packagePath)) {
           const package = JSON.parse(readFileSync(packagePath, 'utf8'));
-          if (!package.private) {
-            let pages = [];
 
-            pages = pages.concat(getReadme(libPath));
-            pages = pages.concat(getExamples(libPath, package));
+          let pages = [];
 
-            if (pages.length) {
-              const item = {
-                name,
-                id: libPath,
-                children: pages
-              };
-              items.push(item);
-            }
+          pages = pages.concat(getReadme(libPath));
+          pages = pages.concat(getExamples(libPath, package));
+
+          if (pages.length) {
+            const item = {
+              name,
+              id: libPath,
+              children: pages
+            };
+            items.push(item);
           }
+
         }
       }
     });
@@ -123,11 +123,11 @@ function prepareHtml(html, package) {
       const argRegEx = new RegExp(libregexp, 'i');
       const isDirectLibLine = line.match(argRegEx);
       if (isDirectLibLine) {
-        line = new Array(emptyCharsCount + 1).join(' ') +  `<!-- ${libregexp} -->`;
+        line = new Array(emptyCharsCount + 1).join(' ') + `<!-- ${libregexp} -->`;
         libReplace = true;
       }
     }
-    if (!cdnReplace) {
+    if (!cdnReplace && package.main) {
       const pathToLib = package.main.split('/');
       const filename = pathToLib.pop();
       const name = filename.replace('.js', '');
@@ -136,7 +136,8 @@ function prepareHtml(html, package) {
       const isDirectLibLine = line.match(argRegEx);
       if (isDirectLibLine) {
         line = new Array(emptyCharsCount + 1).join(' ') +
-          `<script src="https://unpkg.com/@nextgis/${name}@${package.version}/lib/${name}.js"></script>`;
+          // `<script src="https://unpkg.com/@nextgis/${name}@${package.version}/lib/${name}.js"></script>`;
+          `<script src="https://unpkg.com/@nextgis/${name}@${package.version}"></script>`;
         cdnReplace = true;
       }
     }
