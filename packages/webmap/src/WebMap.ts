@@ -453,7 +453,7 @@ export class WebMap<M = any, L = any, C = any> {
         }
       }
     } catch (er) {
-      throw new Error(er);
+      console.error(er);
     }
   }
   // endregion
