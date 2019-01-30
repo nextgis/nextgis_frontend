@@ -92,7 +92,11 @@ export class WebMap<M = any, L = any, C = any> {
     provider: keyof LayerAdapters | Type<LayerAdapter>,
     options?: any): Promise<LayerAdapter> {
 
-    const layer = await this.addLayer(provider, { ...options }, true);
+    const layer = await this.addLayer(provider, {
+      maxZoom: this.options.maxZoom,
+      minZoom: this.options.minZoom,
+      ...options
+    }, true);
     if (layer) {
       this._baseLayers.push(layer.name);
     }

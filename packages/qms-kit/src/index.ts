@@ -100,6 +100,9 @@ export default class QmsKit implements StarterKit {
             options.url = serviceUrl;
             options.name = service.name;
             options.attribution = service.copyright_text;
+
+            options.maxZoom = this.map.options.maxZoom;
+            options.minZoom = this.map.options.minZoom;
             return webMapAdapter.prototype.addLayer.call(this, options);
           }
         }

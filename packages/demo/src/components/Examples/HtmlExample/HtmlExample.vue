@@ -1,11 +1,25 @@
 <template>
-  <div class="content ma-3">
-    <h3 class="title pb-3">{{ text }}</h3>
+  <div v-if="fullScrean" class="example-iframe fullscrean" id="example-iframe">
+  </div>
+  <div v-else class="content ma-3">
+    <h3 class="title pb-3">
+      {{ text }}
+      <v-tooltip bottom>
+        <v-btn
+          slot="activator"
+          flat
+          icon
+          @click="openFullPage"
+        >
+          <v-icon dark>mdi-fullscreen</v-icon>
+        </v-btn>
+        <span>Open exampe in fullscrean</span>
+      </v-tooltip>
+
+    </h3>
     <p>{{ description }}</p>
 
-    <div class="example-iframe" id="example-iframe">
-
-    </div>
+    <div class="example-iframe" id="example-iframe"></div>
 
     <div>
       <send-to-codepen :html="html"></send-to-codepen>
@@ -23,8 +37,12 @@ export { HtmlExample as default } from './HtmlExample';
   .example-iframe {
     width: 100%;
     height: 400px;
-
   }
+  .example-iframe.fullscrean {
+    height: 100%;
+  }
+
+
   .example-iframe iframe {
     width: 100%;
     height: 100%;

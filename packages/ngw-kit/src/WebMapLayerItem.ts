@@ -40,7 +40,7 @@ export class WebMapLayerItem extends Item<ItemOptions> {
 
   constructor(public webMap: WebMap, item: TreeGroup | TreeLayer, options?: ItemOptions, parent?: WebMapLayerItem) {
 
-    super({...WebMapLayerItem.options, ...options});
+    super({ ...WebMapLayerItem.options, ...options });
 
     this.item = item;
     if (parent) {
@@ -62,7 +62,12 @@ export class WebMapLayerItem extends Item<ItemOptions> {
     } else if (item.item_type === 'layer') {
       const adapter = (item.adapter || item.layer_adapter.toUpperCase()) as keyof LayerAdapters;
       item.id = Number(this.id);
-      const options: any = { ...item, ...{ id: item.id } };
+      const options: any = {
+        maxZoom: this.webMap.options.maxZoom,
+        minZoom: this.webMap.options.minZoom,
+        ...item,
+        ...{ id: item.id }
+      };
       newLayer = await this.webMap.addLayer(adapter, options);
     }
     if (newLayer) {
@@ -88,7 +93,7 @@ export class WebMapLayerItem extends Item<ItemOptions> {
   }
   //
 
-  private async _init (item) {
+  private async _init(item) {
     await this.initItem(item);
     this.emitter.emit('init');
   }
