@@ -9,6 +9,8 @@ export class HtmlExample extends Vue {
   @Prop() html: string;
   @Prop() text: string;
   @Prop() description: string;
+  @Prop() fullScrean: boolean;
+  @Prop() currentItemId: string;
 
   mounted() {
     this._writeIFrame(this.html);
@@ -17,7 +19,13 @@ export class HtmlExample extends Vue {
     });
   }
 
-  private _writeIFrame(html) {
+  openFullPage() {
+    if (this.currentItemId) {
+      this.$router.push('/page/' + this.currentItemId);
+    }
+  }
+
+  private _writeIFrame(html: string) {
     const wrapper = document.getElementById('example-iframe') as HTMLFrameElement;
     wrapper.innerHTML = '';
     const iframe = document.createElement('iframe');
