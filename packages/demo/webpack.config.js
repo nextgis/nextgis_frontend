@@ -9,6 +9,8 @@ const utils = require('../../build/utils');
 
 const entry = './src/index.ts';
 
+const ASSET_PATH = process.env.ASSET_PATH || '/';
+
 module.exports = (env, argv) => {
 
   const isProd = argv.mode === 'production';
@@ -108,7 +110,8 @@ module.exports = (env, argv) => {
     },
 
     output: {
-      filename: '[name]-[hash:7].js'
+      filename: '[name]-[hash:7].js',
+      publicPath: ASSET_PATH
     },
 
     resolve: {
