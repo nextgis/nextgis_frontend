@@ -42,7 +42,7 @@ function insertSvg(width: number, height: number, stroke = 0, content?: string) 
 type GetPathCallback = (opt?: IconOptions) => string;
 
 export function getIcon(opt: IconOptions = {}): WebmapIcoOptions {
-  // default vaalues
+  // default values
   const shape = opt.shape || 'circle';
   const color = opt.color || 'blue';
   const strokeColor = opt.color || 'white';
@@ -58,7 +58,7 @@ export function getIcon(opt: IconOptions = {}): WebmapIcoOptions {
   const path = typeof pathAlias === 'string' ? pathAlias : pathAlias(opt);
   const svg = insertSvg(size, size, stroke * scale, path);
   const fistChild = svg.firstChild as SVGElement;
-  // const transform = `scale(${scale})${opt.rotate ? ` rotate(${opt.rotate} -${anchor} -${anchor})` : ''}`;
+
   const transform = `scale(${scale})`;
 
   fistChild.setAttribute('fill', color);

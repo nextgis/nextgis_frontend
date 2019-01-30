@@ -101,8 +101,8 @@ export default class NgwMap {
   webMap: WebMap;
   emitter = new EventEmitter();
   connector: NgwConnector;
-  _ngwLayers = {};
   _eventsStatus: {[eventName: string]: boolean} = {};
+  protected _ngwLayers = {};
 
   constructor(mapAdapter: MapAdapter, options: MapOptions) {
     this.options = deepmerge(this.options, options);
@@ -239,7 +239,7 @@ export default class NgwMap {
 
   private _createWebMap() {
     return this.webMap.create({
-      target: this.options.target
+      ...this.options
     }).then(() => {
       this._emitStatusEvent('map:created');
       if (this.options.qmsId) {

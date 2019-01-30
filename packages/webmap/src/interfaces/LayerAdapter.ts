@@ -13,6 +13,8 @@ export interface AdapterOptions {
   url?: string;
   transparency?: number;
   visibility?: boolean;
+  maxZoom?: number;
+  minZoom?: number;
   minResolution?: number;
   maxResolution?: number;
   order?: number;

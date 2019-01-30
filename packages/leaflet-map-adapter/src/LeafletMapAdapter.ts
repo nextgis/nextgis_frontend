@@ -53,7 +53,11 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   create(options: LeafletMapAdapterOptions = { target: 'map' }) {
     this.options = { ...options };
     if (this.options.target) {
-      this.map = new Map(this.options.target, { zoomControl: false, attributionControl: false });
+      this.map = new Map(this.options.target, {
+        zoomControl: false,
+        attributionControl: false,
+        ...this.options
+      });
       this.emitter.emit('create', { map: this.map });
 
       this._addMapListeners();

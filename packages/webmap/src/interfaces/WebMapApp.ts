@@ -8,6 +8,7 @@ export interface MapOptions {
   controls?: Array<string | MapControl>;
   controlsOptions?: {[controlName: string]: any};
   minZoom?: number;
+  maxZoom?: number;
   /** lat lng */
   center?: [number, number];
   /** top, left, bottom, right */

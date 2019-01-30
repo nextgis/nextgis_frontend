@@ -16,6 +16,7 @@ export class ImageAdapter extends BaseAdapter implements LayerAdapter {
       options = { transparent: true, ...options };
       const updateWmsParamsFromOpt = options.updateWmsParams;
       this.name = options.id || 'image-' + ID++;
+      // @ts-ignore
       this.layer = wms.overlay(options.url, options);
       if (updateWmsParamsFromOpt) {
         const updateWmsParams = this.layer.updateWmsParams;

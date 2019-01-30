@@ -1,9 +1,11 @@
 import VueRouter from 'vue-router';
-import App from './App.vue';
+import MainPage from './MainPage.vue';
+import ExamplePage from './ExamplePage.vue';
 
 export const router = new VueRouter({
-  mode: 'history',
+  // mode: 'history',
   routes: [
-    { path: '/:id', component: App }
+    { path: '/page/:id', component: ExamplePage },
+    { path: '/:id?', component: MainPage },
   ]
 });
