@@ -25,7 +25,7 @@ export interface IconOptions {
 
 const STROKE = 0.8;
 
-function insertSvg(width, height, stroke = 0, content?) {
+function insertSvg(width: number, height: number, stroke = 0, content?: string) {
   const s = stroke / 2;
   const svg = `<svg
     version="1.1"
@@ -39,24 +39,21 @@ function insertSvg(width, height, stroke = 0, content?) {
   return oDOM.documentElement;
 }
 
-const OPTIONS: IconOptions = {
-  shape: 'circle',
-  color: 'blue',
-  strokeColor: 'white',
-  size: 12
-};
-
 type GetPathCallback = (opt?: IconOptions) => string;
 
-export function getIcon(opt?: IconOptions): WebmapIcoOptions {
-  opt = { ...OPTIONS, ...opt };
-  const size = opt.size;
+export function getIcon(opt: IconOptions = {}): WebmapIcoOptions {
+  // default vaalues
+  const shape = opt.shape || 'circle';
+  const color = opt.color || 'blue';
+  const strokeColor = opt.color || 'white';
+  const size = opt.size || 12;
+
   const anchor = size / 2;
   const defSize = 12;
   const stroke = typeof opt.stroke === 'number' ? opt.stroke : STROKE;
-  const scale = opt.size / defSize;
+  const scale = size / defSize;
 
-  const pathAlias = svgPath[opt.shape] || 'circle';
+  const pathAlias = svgPath[shape] || 'circle';
 
   const path = typeof pathAlias === 'string' ? pathAlias : pathAlias(opt);
   const svg = insertSvg(size, size, stroke * scale, path);
@@ -64,9 +61,9 @@ export function getIcon(opt?: IconOptions): WebmapIcoOptions {
   // const transform = `scale(${scale})${opt.rotate ? ` rotate(${opt.rotate} -${anchor} -${anchor})` : ''}`;
   const transform = `scale(${scale})`;
 
-  fistChild.setAttribute('fill', opt.color);
+  fistChild.setAttribute('fill', color);
   if (stroke) {
-    fistChild.setAttribute('stroke', opt.strokeColor);
+    fistChild.setAttribute('stroke', strokeColor);
     fistChild.setAttribute('stroke-width', String(stroke));
   }
   fistChild.setAttribute('transform', transform);
