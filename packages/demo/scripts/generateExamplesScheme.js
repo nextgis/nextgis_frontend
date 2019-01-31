@@ -17,6 +17,10 @@ function generate(source = '../') {
   readmeItem.id = 'readme';
   items.push(readmeItem);
 
+  const packages = [
+    // { libPath, package }
+  ];
+
   readdirSync(source)
     .forEach((name) => {
       const libPath = join(source, name);
@@ -26,24 +30,29 @@ function generate(source = '../') {
         const packagePath = join(libPath, 'package.json');
         if (existsSync(packagePath)) {
           const package = JSON.parse(readFileSync(packagePath, 'utf8'));
-
-          let pages = [];
-
-          pages = pages.concat(getReadme(libPath));
-          pages = pages.concat(getExamples(libPath, package));
-
-          if (pages.length) {
-            const item = {
-              name,
-              id: libPath,
-              children: pages
-            };
-            items.push(item);
-          }
-
+          packages.push({
+            libPath, package, name
+          })
         }
       }
     });
+
+  packages.forEach(({ libPath, package, name }) => {
+    let pages = [];
+
+    pages = pages.concat(getReadme(libPath));
+    pages = pages.concat(getExamples(libPath, package, packages));
+
+    if (pages.length) {
+      const item = {
+        name,
+        id: libPath,
+        children: pages
+      };
+      items.push(item);
+    }
+  })
+
   const log = (item, n) => {
     // console.log(new Array(n + 1).join('-') + item.name);
     if (item.children && item.children.length) {
@@ -73,7 +82,7 @@ function getReadme(libPath) {
   return readme;
 }
 
-function getExamples(libPath, package) {
+function getExamples(libPath, package, packages) {
   const examplesPath = join(libPath, 'examples');
   const examples = [];
   if (existsSync(examplesPath) && isDirectory(examplesPath)) {
@@ -87,7 +96,7 @@ function getExamples(libPath, package) {
           const metaPath = join(examplePath, 'index.json');
           if (existsSync(htmlPath) && existsSync(metaPath)) {
             const meta = JSON.parse(readFileSync(metaPath, 'utf8'));
-            const html = prepareHtml(readFileSync(htmlPath, 'utf8'), package);
+            const html = prepareHtml(readFileSync(htmlPath, 'utf8'), package, packages);
             const example = {
               id,
               html,
@@ -110,40 +119,49 @@ function getIdFromPath(id) {
   return id;
 }
 
-function prepareHtml(html, package) {
+function prepareHtml(html, package, packages) {
   const newHtml = [];
-  let libReplace = false;
-  let cdnReplace = false;
+
   // comment direct to lib script
   html.split('\n').forEach((line) => {
-    let emptyCharsCount = line.search(/\S/);;
-
-    if (!libReplace) {
-      const libregexp = `<script src="../../${package.main}"></script>`;
-      const argRegEx = new RegExp(libregexp, 'i');
-      const isDirectLibLine = line.match(argRegEx);
-      if (isDirectLibLine) {
-        line = new Array(emptyCharsCount + 1).join(' ') + `<!-- ${libregexp} -->`;
-        libReplace = true;
-      }
-    }
-    if (!cdnReplace && package.main) {
-      const pathToLib = package.main.split('/');
-      const filename = pathToLib.pop();
-      const name = filename.replace('.js', '');
-      const cdnregexp = `<script src="https://unpkg.com/@nextgis/${name}@latest"></script>`;
-      const argRegEx = new RegExp(cdnregexp, 'g');
-      const isDirectLibLine = line.match(argRegEx);
-      if (isDirectLibLine) {
-        line = new Array(emptyCharsCount + 1).join(' ') +
-          // `<script src="https://unpkg.com/@nextgis/${name}@${package.version}/lib/${name}.js"></script>`;
-          `<script src="https://unpkg.com/@nextgis/${name}@${package.version}"></script>`;
-        cdnReplace = true;
-      }
-    }
+    line = replaceAbsolutePathToCdn(line, packages);
     newHtml.push(line);
   });
   return newHtml.join('\n');
+}
+
+function replaceAbsolutePathToCdn(line, packages) {
+
+
+  if (line && packages && packages.length) {
+    let newLine = line;
+    const emptyCharsCount = line.search(/\S/);
+
+    const isLibPath = line.match(/(?:src|href)=("|').*?(lib\/).*?([-\w.]+)\.((?:js|css))/);
+
+    if (isLibPath) {
+      newLine = '';
+      const lineLibName = isLibPath[3];
+
+      if (lineLibName) {
+        for (let fry = 0; fry < packages.length; fry++) {
+          const package = packages[fry] && packages[fry].package;
+          const matchMain = package.main && package.main.match(/([-\w.]+)\.(?:js|css)/)
+          if (matchMain) {
+            const packageLibName = matchMain[1]
+
+            if (packageLibName === lineLibName) {
+              newLine = new Array(emptyCharsCount + 1).join(' ') +
+                `<script src="https://unpkg.com/@nextgis/${packageLibName}@${package.version}/${package.main}"></script>`;
+            }
+          }
+        }
+      }
+    }
+
+    line = newLine;
+  }
+  return line
 }
 
 module.exports = generate;

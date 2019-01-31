@@ -26,7 +26,7 @@ Simply download and include with a script tag. NgwLeaflet will be registered as 
 #### CDN
 
 ```html
-<script src="https://unpkg.com/@nextgis/ngw-uploader@latest"></script>
+<script src="https://unpkg.com/@nextgis/ngw-uploader"></script>
 ```
 
 We recommend linking to a specific version number that you can update manually:

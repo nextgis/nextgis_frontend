@@ -23,7 +23,7 @@ Simply download and include with a script tag. NgwConnector will be registered a
 #### CDN
 
 ```html
-<script src="https://unpkg.com/@nextgis/ngw-connector@latest"></script>
+<script src="https://unpkg.com/@nextgis/ngw-connector"></script>
 ```
 
 We recommend linking to a specific version number that you can update manually:

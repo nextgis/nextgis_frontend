@@ -37,7 +37,7 @@ Download and include with a script tag. \[Package\] will be registered as a glob
 #### CDN
 
 ```html
-<script src="https://unpkg.com/@nextgis/[package]@latest"></script>
+<script src="https://unpkg.com/@nextgis/[package]"></script>
 ```
 
 We recommend linking to a specific version number that you can update manually:
