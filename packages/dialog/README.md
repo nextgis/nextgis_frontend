@@ -21,7 +21,7 @@ Simply download and include with a script tag. Dialog will be registered as a gl
 #### CDN
 
 ```html
-<script src="https://unpkg.com/@nextgis/dialog@latest"></script>
+<script src="https://unpkg.com/@nextgis/dialog"></script>
 ```
 
 We recommend linking to a specific version number that you can update manually:

@@ -26,7 +26,7 @@ Simply download and include with a script tag. NgwOl will be registered as a glo
 #### CDN
 
 ```html
-<script src="https://unpkg.com/@nextgis/ngw-ol@latest"></script>
+<script src="https://unpkg.com/@nextgis/ngw-ol"></script>
 ```
 
 We recommend linking to a specific version number that you can update manually:
