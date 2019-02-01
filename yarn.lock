@@ -651,10 +651,10 @@
   resolved "https://registry.yarnpkg.com/@mapbox/whoots-js/-/whoots-js-3.1.0.tgz#497c67a1cef50d1a2459ba60f315e448d2ad87fe"
   integrity sha512-Es6WcD0nO5l+2BOQS4uLfNPYQaNDfbot3X1XUoloz+x0mPDS3eeORZJl06HXjwBG1fOGwCRnzK88LMdxKRrd6Q==
 
-"@mdi/font@^3.3.92":
-  version "3.3.92"
-  resolved "https://registry.yarnpkg.com/@mdi/font/-/font-3.3.92.tgz#9434b92f9810e41d34dd7936e8e1578cd46bebfd"
-  integrity sha512-Ux6iPfRjT9gHtejfss7aHBjgedLx8OrnX7Q+DuqgGYVkr9Amhi7cWFd745znrj7Y74pnjrs+uAbpohPK3ue5Ew==
+"@mdi/font@^3.4.93":
+  version "3.4.93"
+  resolved "https://registry.yarnpkg.com/@mdi/font/-/font-3.4.93.tgz#48f738c28aa49a5711811e03c59766a56844d119"
+  integrity sha512-iXNInmV6Xlmq8SA1zvYxp4uUA7/Z3cNgiK+Ps8UmHZNn1FLD6KDgeg0XE5RCraK+9qPWl8jsiBMpmbs+RFxI4Q==
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
@@ -8605,17 +8605,17 @@ vue@^2.5.22:
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.22.tgz#3bf88041af08b8539c37b268b70ca79245e9cc30"
   integrity sha512-pxY3ZHlXNJMFQbkjEgGVMaMMkSV1ONpz+4qB55kZuJzyJOhn6MSy/YZdzhdnumegNzVTL/Dn3Pp4UrVBYt1j/g==
 
-vuetify-loader@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/vuetify-loader/-/vuetify-loader-1.1.1.tgz#3e3a553c9be038d642092cd87715b5bc10602c6d"
-  integrity sha512-ham+JNmVY7L+nSJSY8DeMLhLZq4ognl4db6sm8j5aKVbeaZTDPNmmoeFxogSfSpRQ5Ly50rWwO6gPbSOvCoodg==
+vuetify-loader@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/vuetify-loader/-/vuetify-loader-1.2.0.tgz#2db23b368516d23a39dddec71ecb43452447edc2"
+  integrity sha512-hxdUnfDty5nHFT1G3AbqWU1PD3P5DA6Bq6ZMzw65gwfvShYyoF/l/zMnsFoHKXeU8fFFGnnNhAFtYDQ/U+2e0w==
   dependencies:
     loader-utils "^1.1.0"
 
-vuetify@^1.4.3:
-  version "1.4.3"
-  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-1.4.3.tgz#dfa187a2bd37427c352bdd194837430a06b45735"
-  integrity sha512-BRTETa3rQ016OOkL1Y28vOYPPJFU0TwSr9nwjT/M840bnk0A9znk1mGvdk1W+qb9IbtWJ9RUk2W1+7l9RcKa8A==
+vuetify@^1.4.4:
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-1.4.4.tgz#0a08d98e685a875e3d7fd035235932d9abf3fd5b"
+  integrity sha512-i0fNciTrzP+U6NinB2kmNMC5vWXtrTy5QcVFLOxv4dhhqTiMTyHj7rV1B2lwBTZYoDhimmSAYRfqHeKdCMx+Gg==
 
 vuex-class@^0.3.1:
   version "0.3.1"
