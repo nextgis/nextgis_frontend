@@ -131,7 +131,7 @@ export interface LayerAdapter<O = any, L = any, M = any> {
 
   onLayerClick?(opt: OnLayerClickOptions): Promise<any>;
 
-  getExtent?(): LayerExtent | Promise<LayerExtent>;
+  getExtent?(): LayerExtent | Promise<LayerExtent> | undefined;
 
   getDependLayers?(): L[];
 }
