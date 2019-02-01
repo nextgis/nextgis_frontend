@@ -5,7 +5,6 @@ import {
   MapControl,
   ControlPositions,
   CreateButtonControlOptions,
-  MapControls,
   MapCenter,
   MapOptions
 } from '@nextgis/webmap';

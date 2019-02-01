@@ -13,6 +13,7 @@ export interface AdapterOptions {
   url?: string;
   transparency?: number;
   visibility?: boolean;
+  attribution?: string;
   maxZoom?: number;
   minZoom?: number;
   minResolution?: number;
@@ -20,7 +21,6 @@ export interface AdapterOptions {
   order?: number;
   // move out of here
   styleId?: number;
-
   onLayerClick?(opt: OnLayerClickOptions): Promise<any>;
 }
 
@@ -106,9 +106,10 @@ export type DataLayerFilter<L> = (opt: { layer?: L, feature?: Feature }) => bool
 export interface LayerAdapter<O = any, L = any, M = any> {
   getPaintFunctions?: { [name: string]: GetPaintFunction };
 
+  options: O;
   name: string;
   layer?: L;
-  opt?: M;
+  map?: M;
   selected?: boolean;
 
   addLayer(options: O): any | Promise<any>;

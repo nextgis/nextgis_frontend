@@ -395,6 +395,22 @@ export class WebMap<M = any, L = any, C = any> {
       layer.adapter.clearLayer(cb);
     }
   }
+
+  getAttributions(onlyVisible = true): string[] {
+    const layers = this.getLayers();
+    const attributions: string[] = [];
+    for (const l in this._layers) {
+      if (this._layers.hasOwnProperty(l)) {
+        const layerMeme = this._layers[l];
+        const useLayerAttr = onlyVisible ? layerMeme.onMap : true;
+        if (useLayerAttr) {
+          const attributions = layerMeme.adapter.options && layerMeme.adapter.options.attributions;
+        }
+      }
+    }
+
+    return attributions;
+  }
   // endregion
 
   // region MAP
