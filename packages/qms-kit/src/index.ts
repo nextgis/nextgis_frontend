@@ -82,6 +82,7 @@ export default class QmsKit implements StarterKit {
     const adapter = function (m: WebMap, options: QmsAdapterOptions) {
       this.map = m;
       this.name = getNameFromOptions(options);
+      this.options = options;
     };
 
     adapter.prototype.addLayer = async function (options: QmsAdapterOptions) {
@@ -102,6 +103,7 @@ export default class QmsKit implements StarterKit {
 
             options.maxZoom = webMap.options.maxZoom;
             options.minZoom = webMap.options.minZoom;
+            this.options = { ...this.options, ...options };
             return webMapAdapter.prototype.addLayer.call(this, options);
           }
         }
