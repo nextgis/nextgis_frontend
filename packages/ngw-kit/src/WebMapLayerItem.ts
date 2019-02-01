@@ -9,20 +9,20 @@ export class WebMapLayerItem extends Item<ItemOptions> {
       {
         type: 'boolean',
         name: 'visibility',
-        getProperty() {
-          const item: WebMapLayerItem = this.item;
-          if (item.item.item_type === 'group') {
-            return true;
-          } else if (item.item.item_type === 'layer') {
-            return item.item.layer_enabled;
-          } else if (item.item.item_type === 'root') {
-            return true;
+        getProperty(item?: WebMapLayerItem) {
+          if (item) {
+            if (item.item.item_type === 'group') {
+              return true;
+            } else if (item.item.item_type === 'layer') {
+              return item.item.layer_enabled;
+            } else if (item.item.item_type === 'root') {
+              return true;
+            }
           }
           return false;
         },
-        onSet(value: boolean) {
-          const item: WebMapLayerItem = this.item;
-          if (item.item.item_type === 'layer') {
+        onSet(value: boolean, options?: any, item?: WebMapLayerItem) {
+          if (item && item.item.item_type === 'layer') {
             if (value) {
               item.webMap.showLayer(item.id);
             } else {
@@ -73,7 +73,7 @@ export class WebMapLayerItem extends Item<ItemOptions> {
     if (newLayer) {
       item._layer = newLayer;
       this.adapter = newLayer;
-      if (item.item_type === 'layer' && item.layer_enabled) {
+      if (this.properties && item.item_type === 'layer' && item.layer_enabled) {
         this.properties.property('visibility').set(true);
       }
     } else {
@@ -93,7 +93,7 @@ export class WebMapLayerItem extends Item<ItemOptions> {
   }
   //
 
-  private async _init(item) {
+  private async _init(item: TreeGroup | TreeLayer) {
     await this.initItem(item);
     this.emitter.emit('init');
   }
