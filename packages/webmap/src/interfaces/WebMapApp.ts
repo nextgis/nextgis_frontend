@@ -26,3 +26,8 @@ export interface AppOptions {
 export interface WebMapAppEvents {
   'build-map': MapAdapter;
 }
+
+export interface GetAttributionsOptions {
+  onlyVisible?: boolean;
+  onlyBasemap?: boolean;
+}

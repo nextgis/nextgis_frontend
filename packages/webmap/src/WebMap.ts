@@ -1,4 +1,4 @@
-import { MapOptions, AppOptions } from './interfaces/WebMapApp';
+import { MapOptions, AppOptions, GetAttributionsOptions } from './interfaces/WebMapApp';
 import { LayerExtent, Pixel } from './interfaces/BaseTypes';
 import { StarterKit } from './interfaces/StarterKit';
 import { AdapterOptions, DataLayerFilter } from './interfaces/LayerAdapter';
@@ -398,19 +398,21 @@ export class WebMap<M = any, L = any, C = any> {
     }
   }
 
-  getAttributions(onlyVisible = true): string[] {
-    const layers = this.getLayers();
+  getAttributions(options: GetAttributionsOptions): string[] {
     const attributions: string[] = [];
     for (const l in this._layers) {
       if (this._layers.hasOwnProperty(l)) {
         const layerMeme = this._layers[l];
+        const onlyVisible = options.onlyVisible !== undefined ? options.onlyVisible : true;
         const useLayerAttr = onlyVisible ? layerMeme.onMap : true;
         if (useLayerAttr) {
-          const attributions = layerMeme.adapter.options && layerMeme.adapter.options.attributions;
+          const attr = layerMeme.adapter.options && layerMeme.adapter.options.attribution;
+          if (attr) {
+            attributions.push(attr);
+          }
         }
       }
     }
-
     return attributions;
   }
   // endregion
