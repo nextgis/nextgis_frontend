@@ -6,7 +6,7 @@ export function fixUrlStr(url: string) {
   return url.replace(/([^:]\/)\/+/g, '$1');
 }
 
-export function updateWmsParams(params, resourceId) {
+export function updateWmsParams(params: any, resourceId: number) {
   const { bbox, width, height } = params;
   return {
     resource: resourceId,
@@ -28,7 +28,7 @@ export function getLayerAdapterOptions(options: NgwLayerOptions, webMap: WebMap,
         url,
         id: options.id,
         resourceId: options.id,
-        updateWmsParams: (params) => updateWmsParams(params, options.id)
+        updateWmsParams: (params: any) => updateWmsParams(params, options.id)
       };
     } else {
       adapter = 'TILE';
@@ -49,8 +49,10 @@ export function addNgwLayer(options: NgwLayerOptions, webMap: WebMap, baseUrl: s
   }
   if (adapter === 'IMAGE' || adapter === 'TILE') {
     const opt = getLayerAdapterOptions(options, webMap, baseUrl);
-    const layerAdapterOptions = {...opt, id: String(opt.id)};
-    return webMap.addLayer(adapter, layerAdapterOptions);
+    if (opt) {
+      const layerAdapterOptions = { ...opt, id: String(opt.id) };
+      return webMap.addLayer(adapter, layerAdapterOptions);
+    }
   } else {
     throw new Error(adapter + ' not supported yet. Only TILE');
   }

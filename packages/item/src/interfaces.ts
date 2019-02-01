@@ -1,4 +1,5 @@
 import { BaseProperty } from './properties/BaseProperty';
+import { Item } from './Item';
 
 export type Type<T> = new (...args: any[]) => T;
 
@@ -8,8 +9,8 @@ export interface ItemBasePropertyOptions<V> {
   propagation?: boolean;
   silent?: boolean;
   value?: V;
-  getProperty?: () => V;
-  onSet?: (value?: V, options?: ItemBasePropertyOptions<V>) => void;
+  getProperty?: (item?: Item) => V;
+  onSet?: (value?: V, options?: ItemBasePropertyOptions<V>, item?: Item) => void;
 }
 
 export interface ItemPropertyTypes {

@@ -144,7 +144,9 @@ export class WebMap<M = any, L = any, C = any> {
     const layer = this.getLayer(layerId);
     if (layer && layer.adapter.getExtent) {
       const extent = await layer.adapter.getExtent();
-      this.fit(extent);
+      if (extent) {
+        this.fit(extent);
+      }
     }
   }
 

@@ -41,7 +41,7 @@ export abstract class BaseProperty<V = any, O extends ItemBasePropertyOptions<V>
 
   getProperty() {
     if (typeof this.options.getProperty === 'function') {
-      return this.options.getProperty.call(this);
+      return this.options.getProperty.call(this, this.item);
     }
     return this.options.value;
   }
@@ -120,7 +120,7 @@ export abstract class BaseProperty<V = any, O extends ItemBasePropertyOptions<V>
 
   protected _callOnSet<W extends V = V>(value?: W, options?: O) {
     if (this.options.onSet) {
-      this.options.onSet.call(this, value, options);
+      this.options.onSet.call(this, value, options, this.item);
     }
   }
 
