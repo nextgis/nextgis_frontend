@@ -6,7 +6,6 @@ export interface QmsOptions {
 
 export interface QmsAdapterOptions extends AdapterOptions {
   name: string;
-  attribution: string;
   qmsid?: number;
 }
 
