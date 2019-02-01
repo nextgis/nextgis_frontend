@@ -1,4 +1,4 @@
-import WebMap, { LayerAdapter } from '@nextgis/webmap';
+import WebMap, { LayerAdapter, LayerExtent } from '@nextgis/webmap';
 import { ResourceItem } from '@nextgis/ngw-connector';
 import { fixUrlStr, getLayerAdapterOptions, updateWmsParams } from './utils';
 import { WebMapLayerItem } from './WebMapLayerItem';
@@ -10,42 +10,44 @@ export class WebMapLayerAdapter implements LayerAdapter {
 
   name: string;
   options: WebMapAdapterOptions;
-  layer: WebMapLayerItem;
+  layer?: WebMapLayerItem;
 
-  private _dependsLayers: any[];
+  private _dependsLayers: any[] = [];
+  private response?: ResourceItem;
 
-  private responce: ResourceItem;
-
-  constructor(map: any, options?: WebMapAdapterOptions) {
-    this.name = 'webmap-' + (options.id || String(ID++));
-    this.options = { ...this.options, ...options };
+  constructor(map: any, options: WebMapAdapterOptions) {
+    const id = (options && options.id) ? options.id : String(ID++);
+    this.name = 'webmap-' + id;
+    this.options = options;
+    this.options.id = id;
   }
 
   async addLayer(options?: WebMapAdapterOptions): Promise<any> {
     this.options = { ...this.options, ...options };
-    this.name = 'webmap-' + options.id;
+
+    this.name = 'webmap-' + this.options.id;
 
     this.layer = await this._getWebMapLayerItem();
     return this.layer;
   }
 
   showLayer() {
-    if (this.layer.properties) {
+    if (this.layer && this.layer.properties) {
       this.layer.properties.property('visibility').set(true);
     }
   }
 
   hideLayer() {
-    if (this.layer.properties) {
+    if (this.layer && this.layer.properties) {
       this.layer.properties.property('visibility').set(false);
     }
   }
 
-  getExtent(): [number, number, number, number] {
-    if (this.responce) {
-      const { extent_bottom, extent_left, extent_top, extent_right } = this.responce.webmap;
+  getExtent(): LayerExtent | undefined {
+    if (this.response) {
+      const { extent_bottom, extent_left, extent_top, extent_right } = this.response.webmap;
       if (extent_bottom && extent_left && extent_top && extent_right) {
-        const extent: [number, number, number, number] = [extent_left, extent_bottom, extent_right, extent_top];
+        const extent: LayerExtent = [extent_left, extent_bottom, extent_right, extent_top];
         if (extent[3] > 82) {
           extent[3] = 82;
         }
@@ -58,7 +60,7 @@ export class WebMapLayerAdapter implements LayerAdapter {
   }
 
   getDependLayers() {
-    if (!this._dependsLayers) {
+    if (!this._dependsLayers && this.layer) {
       this._dependsLayers = [];
       this.layer.tree.getDescendants().forEach((x) => {
         if (x.adapter) {
@@ -69,20 +71,22 @@ export class WebMapLayerAdapter implements LayerAdapter {
     return this._dependsLayers;
   }
 
-  private async _getWebMapLayerItem(): Promise<WebMapLayerItem> {
-    const webmap = await this.getWebMapConfig(parseInt(this.options.id, 10));
-    if (webmap && webmap.root_item) {
-      return new Promise<WebMapLayerItem>((resolve) => {
-        const layer = new WebMapLayerItem(this.options.webMap, webmap.root_item);
-        layer.emitter.on('init', () => resolve(layer));
-      });
+  private async _getWebMapLayerItem(): Promise<WebMapLayerItem | undefined> {
+    if (this.options.id) {
+      const webmap = await this.getWebMapConfig(parseInt(this.options.id, 10));
+      if (webmap && webmap.root_item) {
+        return new Promise<WebMapLayerItem>((resolve) => {
+          const layer = new WebMapLayerItem(this.options.webMap, webmap.root_item);
+          layer.emitter.on('init', () => resolve(layer));
+        });
+      }
     }
   }
 
   private async getWebMapConfig(id: number) {
     try {
       const data = await this.options.connector.request('resource.item', { id });
-      this.responce = data;
+      this.response = data;
       const webmap = data.webmap;
       if (webmap) {
         this._updateItemsParams(webmap.root_item, this.options.webMap);
