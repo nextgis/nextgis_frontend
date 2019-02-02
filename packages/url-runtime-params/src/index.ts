@@ -5,9 +5,11 @@ interface StateData {
   url: string;
 }
 
+interface Params { [paramName: string]: any; }
+
 export default class UrlRuntimeParams implements RuntimeParams {
 
-  private _params: { [paramName: string]: any };
+  private _params: Params = {};
 
   get(name: string): any {
     return this.params()[name];
@@ -17,7 +19,7 @@ export default class UrlRuntimeParams implements RuntimeParams {
     if (this._params) {
       return this._params;
     }
-    const params = {};
+    const params: Params = {};
     window.location.href.replace(/[?&]+(\w+)([^&]*)/gi, function (m, key) {
       params[key] = true;
       return ''; // does not matter
@@ -43,7 +45,7 @@ export default class UrlRuntimeParams implements RuntimeParams {
       } else {
         search = '?' + name + '=' + urlComponent;
       }
-      const params = {};
+      const params: Params = {};
       params[name] = value;
       this._params[name] = value;
       const data: StateData = { state: { url: search, params }, url: search };
