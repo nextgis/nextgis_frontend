@@ -1,8 +1,10 @@
-import WebMap, { StarterKit, AdapterOptions } from '@nextgis/webmap';
+import WebMap, { StarterKit, AdapterOptions, LayerAdapters, LayerAdapter } from '@nextgis/webmap';
 
 export interface QmsOptions {
   url: string;
 }
+
+type QmsLayerType = 'tms';
 
 export interface QmsAdapterOptions extends AdapterOptions {
   name: string;
@@ -23,7 +25,7 @@ interface Geoservice {
   guid: string;
   name: string;
   desc: string;
-  type: string;
+  type: QmsLayerType;
   epsg: number;
   license_name: string;
   license_url: string;
@@ -44,7 +46,7 @@ export default class QmsKit implements StarterKit {
   };
 
   url: string;
-  map: WebMap;
+  map?: WebMap;
 
   constructor(options?: QmsOptions) {
     this.options = { ...this.options, ...options };
@@ -73,15 +75,18 @@ export default class QmsKit implements StarterKit {
   private _createAdapter(webMap: WebMap) {
     const url = this.url;
     this.map = webMap;
-    const alias = {
+    const alias: { [key in QmsLayerType]: keyof LayerAdapters } = {
       tms: 'TILE',
     };
 
     const getNameFromOptions = this._getNameFromOptions;
 
-    const adapter = function (m: WebMap, options: QmsAdapterOptions) {
+    const adapter = function (this: LayerAdapter, m: WebMap, options: QmsAdapterOptions) {
       this.map = m;
-      this.name = getNameFromOptions(options);
+      const name = getNameFromOptions(options);
+      if (name) {
+        this.name = name;
+      }
       this.options = options;
     };
 
@@ -113,7 +118,7 @@ export default class QmsKit implements StarterKit {
   }
 }
 
-function loadJSON<T = any>(url): Promise<T> {
+function loadJSON<T = any>(url: string): Promise<T> {
   return new Promise<T>((resolve, reject) => {
     const xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = () => {
@@ -128,7 +133,7 @@ function loadJSON<T = any>(url): Promise<T> {
       }
     };
     xmlHttp.open('GET', fixUrlStr(url), true); // true for asynchronous
-    xmlHttp.send(null);
+    xmlHttp.send();
   });
 }
 
