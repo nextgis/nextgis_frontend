@@ -106,7 +106,7 @@ export type DataLayerFilter<L> = (opt: { layer?: L, feature?: Feature }) => bool
 export interface LayerAdapter<O = any, L = any, M = any> {
   getPaintFunctions?: { [name: string]: GetPaintFunction };
 
-  options: O;
+  options?: O;
   name: string;
   layer?: L;
   map?: M;

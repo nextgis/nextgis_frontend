@@ -341,9 +341,9 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
         };
       }
     }
-
     return (geoJsonPoint: any, latlng: LatLngExpression) => {
-      return new CircleMarker(latlng, this.preparePaint({ ...PAINT, ...icon }));
+      const p: any = PAINT;
+      return new CircleMarker(latlng, this.preparePaint({ ...p, ...icon }));
     };
 
   }
