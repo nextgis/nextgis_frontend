@@ -1,12 +1,12 @@
 import { GeoJsonObject, GeoJsonGeometryTypes, FeatureCollection, GeometryCollection, Feature } from 'geojson';
-import { MapAdapter, LayerAdapters } from '@nextgis/webmap';
+import { MapAdapter, LayerAdapters, Type, LayerAdapter } from '@nextgis/webmap';
 
 export function fixUrlStr(url: string) {
   // remove double slash
   return url.replace(/([^:]\/)\/+/g, '$1');
 }
 
-export function deepmerge(target, src, mergeArray = false) {
+export function deepmerge(target: any, src: any, mergeArray = false) {
   const array = Array.isArray(src);
   let dst: any = array && [] || {};
 
@@ -15,7 +15,7 @@ export function deepmerge(target, src, mergeArray = false) {
     if (mergeArray) {
       target = target || [];
       dst = dst.concat(target);
-      src.forEach(function (e, i) {
+      src.forEach(function (e: any, i: any) {
         if (typeof dst[i] === 'undefined') {
           dst[i] = e;
         } else if (typeof e === 'object') {
@@ -71,24 +71,27 @@ export function findMostFrequentGeomType(arr: GeoJsonGeometryTypes[]): GeoJsonGe
   for (let fry = 0; fry < arr.length; fry++) {
     counts[arr[fry]] = 1 + (counts[arr[fry]] || 0);
   }
-  let maxName: string;
+  let maxName;
   for (const c in counts) {
-    if (counts[c] > (counts[maxName] || 0)) {
-      maxName = c;
+    if (counts.hasOwnProperty(c)) {
+      const count = maxName !== undefined ? counts[maxName] : 0;
+      if (counts[c] > (count || 0)) {
+        maxName = c;
+      }
     }
   }
   return maxName as GeoJsonGeometryTypes;
 }
 
 export function createAsyncAdapter<T extends string = string>(
-  type: T, laodFunction: Promise<any>, map: MapAdapter): new (...args: any[]) => LayerAdapters[T] {
+  type: T, laodFunction: Promise<any>, map: MapAdapter): Type<LayerAdapter> {
 
   const webMapAdapter = map.layerAdapters[type];
 
   return class Adapter extends webMapAdapter {
-    addLayer(options) {
+    addLayer(options: any) {
       return laodFunction.then((opt) => {
-        return super.addLayer({...options, ...opt});
+        return super.addLayer({ ...options, ...opt });
       });
     }
   };

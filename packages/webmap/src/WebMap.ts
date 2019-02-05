@@ -1,5 +1,5 @@
 import { MapOptions, AppOptions, GetAttributionsOptions } from './interfaces/WebMapApp';
-import { LayerExtent, Pixel } from './interfaces/BaseTypes';
+import { LayerExtent, Pixel, Type } from './interfaces/BaseTypes';
 import { StarterKit } from './interfaces/StarterKit';
 import { AdapterOptions, DataLayerFilter } from './interfaces/LayerAdapter';
 import { Keys } from './components/keys/Keys';
@@ -8,7 +8,6 @@ import { MapAdapter, MapClickEvent, ControlPositions, FitOptions } from './inter
 import { RuntimeParams } from './interfaces/RuntimeParams';
 import { deepmerge } from './utils/lang';
 import { LayerAdapters, LayerAdapter, OnLayerClickOptions } from './interfaces/LayerAdapter';
-import { Type } from './utils/Type';
 import { MapControl, MapControls, CreateControlOptions, CreateButtonControlOptions } from './interfaces/MapControl';
 import { onLoad } from './utils/decorators';
 import { Feature, GeoJsonObject } from 'geojson';
@@ -218,26 +217,26 @@ export class WebMap<M = any, L = any, C = any> {
   }
 
   async addLayer<K extends keyof LayerAdapters, O extends AdapterOptions = AdapterOptions>(
-    layerAdapter: K | Type<LayerAdapter>,
+    adapter: K | Type<LayerAdapter>,
     options: O | LayerAdapters[K] = {},
     baselayer?: boolean): Promise<LayerAdapter> {
 
     let adapterEngine: Type<LayerAdapter>;
-    if (typeof layerAdapter === 'string') {
-      adapterEngine = this.getLayerAdapter((layerAdapter as string));
+    if (typeof adapter === 'string') {
+      adapterEngine = this.getLayerAdapter((adapter as string));
     } else {
-      adapterEngine = layerAdapter as Type<LayerAdapter>;
+      adapterEngine = adapter as Type<LayerAdapter>;
     }
     if (adapterEngine) {
       options.onLayerClick = (e) => this._onLayerClick(e);
-      const adapter = new adapterEngine(this.mapAdapter.map, options);
+      const _adapter = new adapterEngine(this.mapAdapter.map, options);
       const order = this._layersIds++;
       await this.onMapLoad();
 
-      const layer = await adapter.addLayer(options);
+      const layer = await _adapter.addLayer(options);
 
-      const layerId = adapter.name;
-      const layerOpts: LayerMem = { id: layerId, layer, adapter, onMap: false };
+      const layerId = _adapter.name;
+      const layerOpts: LayerMem = { id: layerId, layer, adapter: _adapter, onMap: false };
       if (baselayer) {
         layerOpts.baseLayer = true;
         layerOpts.order = 0;
@@ -251,7 +250,7 @@ export class WebMap<M = any, L = any, C = any> {
         this.showLayer(layerId);
       }
 
-      return adapter;
+      return _adapter;
 
     }
     return Promise.reject('No adapter');
