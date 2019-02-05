@@ -45,7 +45,7 @@ export function getIcon(opt: IconOptions = {}): WebmapIcoOptions {
   // default values
   const shape = opt.shape || 'circle';
   const color = opt.color || 'blue';
-  const strokeColor = opt.color || 'white';
+  const strokeColor = opt.strokeColor || 'white';
   const size = opt.size || 12;
 
   const anchor = size / 2;
