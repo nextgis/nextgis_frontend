@@ -1,5 +1,5 @@
 import { LayerAdapter } from './LayerAdapter';
-import { Type } from '../utils/Type';
+import { Type } from './BaseTypes';
 import { EventEmitter } from 'events';
 import { MapControls, MapControl, CreateControlOptions, CreateButtonControlOptions } from './MapControl';
 import { MapOptions } from './WebMapApp';

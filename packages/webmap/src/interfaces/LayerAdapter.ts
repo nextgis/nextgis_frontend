@@ -70,7 +70,7 @@ export type GeoJsonAdapterLayerPaint = CirclePaint | PathPaint | IconOptions | G
 export type GetPaintCallback = (feature: Feature<any>) => GeoJsonAdapterLayerPaint;
 
 export interface GeoJsonAdapterOptions extends AdapterOptions {
-  data: GeoJsonObject;
+  data?: GeoJsonObject;
   type?: GeoJsonAdapterLayerType;
   paint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
   selectedPaint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
