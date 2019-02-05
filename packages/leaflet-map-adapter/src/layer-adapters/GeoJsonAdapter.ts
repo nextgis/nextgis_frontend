@@ -81,9 +81,9 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
       options.paint = this.paint;
 
       this.name = options.id || 'geojson-' + ID++;
-
-      this.addData(options.data);
-
+      if (options.data) {
+        this.addData(options.data);
+      }
       return this.layer;
     }
   }

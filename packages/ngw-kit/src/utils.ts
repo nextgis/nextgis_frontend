@@ -1,4 +1,4 @@
-import WebMap from '@nextgis/webmap';
+import WebMap, { LayerAdapter } from '@nextgis/webmap';
 import { NgwLayerOptions } from './interfaces';
 
 export function fixUrlStr(url: string) {
@@ -40,7 +40,11 @@ export function getLayerAdapterOptions(options: NgwLayerOptions, webMap: WebMap,
   }
 }
 
-export function addNgwLayer(options: NgwLayerOptions, webMap: WebMap, baseUrl: string) {
+export function addNgwLayer(
+  options: NgwLayerOptions,
+  webMap: WebMap,
+  baseUrl: string): Promise<LayerAdapter | undefined> | undefined {
+
   let adapter = options.adapter || 'IMAGE';
   const layerAdapters = webMap.getLayerAdapters();
   const isImageAllowed = layerAdapters ? layerAdapters.IMAGE : true;

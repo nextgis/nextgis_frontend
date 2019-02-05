@@ -9,7 +9,11 @@ import WebMap, {
   GeoJsonAdapterOptions,
   GeoJsonAdapterLayerType,
   MapControl,
-  MapControls
+  MapControls,
+  LayerAdapters,
+  Type,
+  LayerAdapter,
+  AdapterOptions
 } from '@nextgis/webmap';
 import NgwConnector from '@nextgis/ngw-connector';
 import QmsKit from '@nextgis/qms-kit';
@@ -20,6 +24,7 @@ import 'leaflet/dist/leaflet.css';
 import { onMapLoad, onLoad } from './decorators';
 import { fixUrlStr, deepmerge, detectGeometryType, createAsyncAdapter } from './utils';
 import { EventEmitter } from 'events';
+// @ts-ignore
 import { toWgs84 } from 'reproject';
 import { GeoJsonObject } from 'geojson';
 
@@ -101,8 +106,8 @@ export default class NgwMap {
   webMap: WebMap;
   emitter = new EventEmitter();
   connector: NgwConnector;
-  _eventsStatus: {[eventName: string]: boolean} = {};
-  protected _ngwLayers = {};
+  _eventsStatus: { [eventName: string]: boolean } = {};
+  protected _ngwLayers: { [layerName: string]: LayerAdapter } = {};
 
   constructor(mapAdapter: MapAdapter, options: MapOptions) {
     this.options = deepmerge(this.options, options);
@@ -152,43 +157,54 @@ export default class NgwMap {
   }
 
   @onMapLoad()
-  async addNgwLayer(options: NgwLayerOptions, adapterOptions?) {
+  async addNgwLayer(
+    options: NgwLayerOptions,
+    adapterOptions?: AdapterOptions): Promise<LayerAdapter | undefined> {
+
     if (options.adapter === 'GEOJSON') {
       const geojsonAdapterCb = this.connector.makeQuery('/api/resource/{id}/geojson', {
         id: options.id
       }).then((data) => {
         data = NgwMap.toWgs84(data);
-        return this._updateGeojsonAdapterOptions({data, id: String(options.id)});
+        return this._updateGeojsonAdapterOptions({ data, id: String(options.id) });
       });
-      return this.addGeoJsonLayer(
-        adapterOptions,
-        createAsyncAdapter(
-          'GEOJSON',
-          geojsonAdapterCb,
-          this.webMap.mapAdapter
-        )
+      const adapter = createAsyncAdapter(
+        'GEOJSON',
+        geojsonAdapterCb,
+        this.webMap.mapAdapter
       );
-    } else {
-      return NgwKit.addNgwLayer(options, this.webMap, this.options.baseUrl).then((layer) => {
-        this._ngwLayers[layer.name] = layer;
-        this.webMap.showLayer(layer.name);
-        return layer.name;
-      });
+      return this.addGeoJsonLayer(
+        adapterOptions || {},
+        adapter
+      );
+    } else if (this.options.baseUrl) {
+      const adapter = NgwKit.addNgwLayer(options, this.webMap, this.options.baseUrl);
+      if (adapter) {
+        return adapter.then((layer) => {
+          if (layer) {
+            this._ngwLayers[layer.name] = layer;
+            this.webMap.showLayer(layer.name);
+            return layer;
+          }
+        });
+      }
     }
   }
 
   @onMapLoad()
-  addGeoJsonLayer(opt: GeoJsonAdapterOptions, adapter?) {
+  addGeoJsonLayer<K extends keyof LayerAdapters>(
+    opt: GeoJsonAdapterOptions,
+    adapter?: K | Type<LayerAdapter>) {
 
+    opt = opt || {};
     opt.multiselect = opt.multiselect !== undefined ? opt.multiselect : false;
     opt.unselectOnSecondClick = opt.unselectOnSecondClick !== undefined ? opt.unselectOnSecondClick : true;
     if (!adapter) {
       opt = this._updateGeojsonAdapterOptions(opt);
     }
-
-    return this.webMap.addLayer<'GEOJSON'>(adapter || 'GEOJSON', opt).then((layer) => {
+    return this.webMap.addLayer(adapter || 'GEOJSON', opt).then((layer) => {
       this.webMap.showLayer(layer.name);
-      return layer.name;
+      return layer;
     });
   }
 
@@ -203,7 +219,7 @@ export default class NgwMap {
               return this._fitNgwLayerExtend(res.resource.id);
             });
           } else {
-            return this._fitNgwLayerExtend(id);
+            return this._fitNgwLayerExtend(Number(id));
           }
         }
       });
@@ -211,26 +227,34 @@ export default class NgwMap {
   }
 
   private _updateGeojsonAdapterOptions(opt: GeoJsonAdapterOptions): GeoJsonAdapterOptions {
-    const geomType = typeAlias[detectGeometryType(opt.data)];
-    const p = opt.paint;
-    if (typeof p === 'object') {
-      if (!p.type) {
-        p.type = (geomType === 'fill' || geomType === 'line') ? 'path' :
-          ('html' in p || 'className' in p) ? 'icon' : geomType;
+    if (opt.data) {
+      const geomType = typeAlias[detectGeometryType(opt.data)];
+      const p = opt.paint;
+      if (typeof p === 'object') {
+        // define parameter if not specified
+        p.type = p.type ||
+          (geomType === 'fill' || geomType === 'line') ?
+          'path' :
+          ('html' in p || 'className' in p) ?
+            'icon' :
+            geomType;
+
+        if (this.options.geoJsonDefaultPaint) {
+          if (p.type === 'circle') {
+            opt.paint = { ...this.options.geoJsonDefaultPaint.circle, ...p };
+          } else if (p.type === 'path') {
+            opt.paint = { ...this.options.geoJsonDefaultPaint.path, ...p };
+          } else if (p.type === 'icon') {
+            opt.paint = { ...this.options.geoJsonDefaultPaint.icon, ...p };
+          }
+        }
       }
-      if (p.type === 'circle') {
-        opt.paint = { ...this.options.geoJsonDefaultPaint.circle, ...p };
-      } else if (p.type === 'path') {
-        opt.paint = { ...this.options.geoJsonDefaultPaint.path, ...p };
-      } else if (p.type === 'icon') {
-        opt.paint = { ...this.options.geoJsonDefaultPaint.icon, ...p };
-      }
+      opt.type = geomType;
     }
-    opt.type = geomType;
     return opt;
   }
 
-  private _fitNgwLayerExtend(id) {
+  private _fitNgwLayerExtend(id: number) {
     return this.connector.request('layer.extent', { id }).then((resp) => {
       const { maxLat, maxLon, minLat, minLon } = resp.extent;
       this.fitBounds([maxLat, maxLon, minLat, minLon]);
@@ -252,20 +276,20 @@ export default class NgwMap {
       }
 
       this.fit();
-      // @ts-ignore
-      // window.lmap = this.webMap.mapAdapter.map;
     });
   }
 
   private _addControls() {
-    this.options.controls.forEach((x) => {
-      let controlOptions: ControlOptions = { position: 'top-left' };
-      if (typeof x === 'string') {
-        controlOptions = this.options.controlsOptions[x];
-      }
-      const { position, ...options } = controlOptions;
-      this.webMap.addControl(x, position, options);
-    });
+    if (this.options.controls) {
+      this.options.controls.forEach((x) => {
+        let controlOptions: ControlOptions = {};
+        if (typeof x === 'string' && this.options.controlsOptions) {
+          controlOptions = this.options.controlsOptions[x];
+        }
+        const { position, ...options } = controlOptions;
+        this.webMap.addControl(x, position || 'top-left', options);
+      });
+    }
     this._emitStatusEvent('control:created');
   }
 
@@ -274,7 +298,7 @@ export default class NgwMap {
     this.webMap.emitter.on('layer:click', (d) => this.emitter.emit('layer:click', d));
   }
 
-  private _emitStatusEvent(event) {
+  private _emitStatusEvent(event: string) {
     this._eventsStatus[event] = true;
     this.emitter.emit(event);
   }
