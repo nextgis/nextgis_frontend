@@ -10,15 +10,15 @@
   },
   "devDependencies": {
     "@types/events": "^3.0.0",
-    "@types/node": "^10.12.18",
+    "@types/node": "^10.12.21",
     "rimraf": "^2.6.3",
     "style-loader": "^0.23.1",
     "ts-loader": "^5.3.3",
     "tslint": "^5.12.1",
     "tslint-webpack-plugin": "^2.0.2",
-    "typescript": "^3.2.4",
-    "webpack": "^4.29.0",
-    "webpack-cli": "^3.2.1",
+    "typescript": "^3.3.1",
+    "webpack": "^4.29.1",
+    "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.1.14"
   },
   "scripts": {
