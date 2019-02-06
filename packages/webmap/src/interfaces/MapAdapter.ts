@@ -1,7 +1,13 @@
 import { LayerAdapter } from './LayerAdapter';
 import { Type } from './BaseTypes';
 import { EventEmitter } from 'events';
-import { MapControls, MapControl, CreateControlOptions, CreateButtonControlOptions } from './MapControl';
+import {
+  MapControls,
+  MapControl,
+  CreateControlOptions,
+  CreateButtonControlOptions,
+  CreateToggleControlOptions
+} from './MapControl';
 import { MapOptions } from './WebMapApp';
 import { LayerMem } from '../WebMap';
 import { LatLng, MapCenter, LayerExtent, Pixel } from './BaseTypes';
@@ -25,7 +31,7 @@ export interface BaseMapAdapter<L = any> {
   setLayerOpacity(layer: L, opacity: number): void;
   showLayer(layer: L): void;
   hideLayer(layer: L): void;
-  setLayerOrder(layer: L, order: number, layers?: {[name: string]: LayerMem}): void;
+  setLayerOrder(layer: L, order: number, layers?: { [name: string]: LayerMem }): void;
 
   setCenter(latLng: MapCenter): void;
   setZoom(zoom: number): void;
@@ -52,8 +58,11 @@ export interface MapAdapter<M = any, L = any, C = any> extends BaseMapAdapter<L>
 
   getContainer(): HTMLElement | undefined;
 
+  setCursor?(cursor: string): void;
+
   createControl?(control: MapControl, options?: CreateControlOptions): C;
   createButtonControl?(options: CreateButtonControlOptions): C;
+  createToggleControl?(options: CreateToggleControlOptions): C;
 
   addControl<K extends keyof MapControls>(
     controlName: K | any,

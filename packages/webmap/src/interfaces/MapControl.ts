@@ -36,12 +36,12 @@ export interface MapControl<M extends any = any> {
 
 }
 
-interface CreateButtonControlFromHtmlOptions {
+export interface CreateButtonControlFromHtmlOptions extends CreateButtonControlBaseOptions {
   html: string | HTMLElement;
   addClass?: string;
 }
 
-interface CreateButtonControlFromClassOptions {
+export interface CreateButtonControlFromClassOptions extends CreateButtonControlBaseOptions {
   html?: string | HTMLElement;
   addClass: string;
 }
@@ -51,8 +51,32 @@ interface CreateButtonControlBaseOptions {
   title?: string;
 }
 
-export type CreateButtonControlOptions = CreateButtonControlBaseOptions &
-(CreateButtonControlFromHtmlOptions | CreateButtonControlFromClassOptions);
+export type CreateButtonControlOptions = CreateButtonControlFromHtmlOptions | CreateButtonControlFromClassOptions;
+
+type HtmlDef = string | HTMLElement;
+
+export interface HtmlToggle {
+  on: HtmlDef;
+  off: HtmlDef;
+}
+
+export interface TitleToggle {
+  on: string;
+  off: string;
+}
+
+export interface CreateToggleControlOptions {
+  status: boolean;
+  html?: HtmlDef | HtmlToggle;
+
+  addClass?: string;
+  addClassOn?: string;
+  addClassOff?: string;
+
+  title?: string | TitleToggle;
+
+  onClick: (status: boolean) => void;
+}
 
 export interface CreateControlOptions {
   bar?: boolean;

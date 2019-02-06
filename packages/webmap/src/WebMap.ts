@@ -1,5 +1,5 @@
 import { MapOptions, AppOptions, GetAttributionsOptions } from './interfaces/WebMapApp';
-import { LayerExtent, Pixel, Type } from './interfaces/BaseTypes';
+import { LayerExtent, Pixel, Type, Cursor } from './interfaces/BaseTypes';
 import { StarterKit } from './interfaces/StarterKit';
 import { AdapterOptions, DataLayerFilter } from './interfaces/LayerAdapter';
 import { Keys } from './components/keys/Keys';
@@ -8,7 +8,13 @@ import { MapAdapter, MapClickEvent, ControlPositions, FitOptions } from './inter
 import { RuntimeParams } from './interfaces/RuntimeParams';
 import { deepmerge } from './utils/lang';
 import { LayerAdapters, LayerAdapter, OnLayerClickOptions } from './interfaces/LayerAdapter';
-import { MapControl, MapControls, CreateControlOptions, CreateButtonControlOptions } from './interfaces/MapControl';
+import {
+  MapControl,
+  MapControls,
+  CreateControlOptions,
+  CreateButtonControlOptions,
+  CreateToggleControlOptions
+} from './interfaces/MapControl';
 import { onLoad } from './utils/decorators';
 import { Feature, GeoJsonObject } from 'geojson';
 
@@ -75,6 +81,12 @@ export class WebMap<M = any, L = any, C = any> {
           return element;
         }
       }
+    }
+  }
+
+  setCursor(cursor: Cursor) {
+    if (this.mapAdapter.setCursor) {
+      this.mapAdapter.setCursor(cursor);
     }
   }
 
@@ -181,6 +193,13 @@ export class WebMap<M = any, L = any, C = any> {
   createButtonControl(options: CreateButtonControlOptions) {
     if (this.mapAdapter.createButtonControl) {
       return this.mapAdapter.createButtonControl(options);
+    }
+  }
+
+  @onLoad('build-map')
+  createToggleControl(options: CreateToggleControlOptions) {
+    if (this.mapAdapter.createButtonControl) {
+      return this.mapAdapter.createToggleControl(options);
     }
   }
 

@@ -190,15 +190,9 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
 
         data = filterGeometries(data, type);
         if (data && options.paint) {
-          if (typeof options.paint !== 'function' && options.paint.type === 'get-paint') {
-            if (typeof options.paint.from === 'function') {
-              options.paint = options.paint.from(options.paint.options);
-            } else if (typeof options.paint.from === 'string' && this.getPaintFunctions) {
-              const from = this.getPaintFunctions[options.paint.from];
-              if (from) {
-                options.paint = from(options.paint.options);
-              }
-            }
+          options.paint = this._updatePaintOptionFromCallback(options.paint);
+          if (options.selectedPaint) {
+            options.selectedPaint = this._updatePaintOptionFromCallback(options.selectedPaint);
           }
           geoJsonOptions = this.getGeoJsonOptions(options, type);
         }
@@ -206,6 +200,20 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
 
       const layer = new GeoJSON(data || undefined, geoJsonOptions);
     }
+  }
+
+  private _updatePaintOptionFromCallback(paint: GeoJsonAdapterLayerPaint | GetPaintCallback) {
+    if (typeof paint !== 'function' && paint.type === 'get-paint') {
+      if (typeof paint.from === 'function') {
+        paint = paint.from(paint.options);
+      } else if (typeof paint.from === 'string' && this.getPaintFunctions) {
+        const from = this.getPaintFunctions[paint.from];
+        if (from) {
+          paint = from(paint.options);
+        }
+      }
+    }
+    return paint;
   }
 
   private setPaintEachLayer(paint: GetPaintCallback | GeoJsonAdapterLayerPaint) {
