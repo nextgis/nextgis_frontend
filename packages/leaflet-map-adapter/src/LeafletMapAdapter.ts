@@ -5,7 +5,8 @@ import {
   MapControl,
   CreateControlOptions,
   CreateButtonControlOptions,
-  LayerAdapter
+  LayerAdapter,
+  CreateToggleControlOptions
 } from '@nextgis/webmap';
 import { Map, Control, Layer, GridLayer, ControlPosition, LeafletEvent, LeafletMouseEvent } from 'leaflet';
 import { EventEmitter } from 'events';
@@ -15,6 +16,7 @@ import { AttributionControl } from './controls/Attribution';
 import { ImageAdapter } from './layer-adapters/ImageAdapter';
 import { createControl } from './controls/createControl';
 import { createButtonControl } from './controls/createButtonControl';
+import { createToggleControl } from './controls/createToggleControl';
 
 export interface LeafletMapAdapterOptions extends MapOptions {
   id?: string;
@@ -68,6 +70,10 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
 
   getContainer(): HTMLElement | undefined {
     return this.map && this.map.getContainer();
+  }
+
+  setCursor(cursor: string) {
+    this.map.getContainer().style.cursor = cursor;
   }
 
   onMapLoad(cb?: any): Promise<void> {
@@ -124,6 +130,10 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
 
   createButtonControl(options: CreateButtonControlOptions) {
     return createButtonControl(options);
+  }
+
+  createToggleControl(options: CreateToggleControlOptions) {
+    return createToggleControl(options);
   }
 
   addControl(control: Control, position: string): Control | undefined {
