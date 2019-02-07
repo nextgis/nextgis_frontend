@@ -38,12 +38,11 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     ATTRIBUTION: AttributionControl,
   };
 
-  options: MapOptions;
-
   displayProjection = 'EPSG:3857';
   lonlatProjection = 'EPSG:4326';
 
-  map: Map;
+  options: MapOptions = {};
+  map?: Map;
 
   emitter = new EventEmitter();
 
@@ -55,50 +54,62 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   private _sourceDataLoading: { [name: string]: any[] } = {};
 
   // create(options: MapOptions = {target: 'map'}) {
-  create(options) {
+  create(options: MapOptions) {
     if (!this.map) {
       this.options = options;
-      this.map = new Map({
-        container: options.target,
-        center: [96, 63], // initial map center in [lon, lat]
-        zoom: 2,
-        attributionControl: false,
-        style: {
-          version: 8,
-          name: 'Empty style',
-          sources: {},
-          layers: [],
-        },
-      });
-      this._addEventsListeners();
-      this.onMapLoad();
+      if (options.target) {
+        this.map = new Map({
+          container: options.target,
+          center: [96, 63], // initial map center in [lon, lat]
+          zoom: 2,
+          attributionControl: false,
+          style: {
+            version: 8,
+            name: 'Empty style',
+            sources: {},
+            layers: [],
+          },
+        });
+        this._addEventsListeners();
+        this.onMapLoad();
+      }
     }
   }
 
   getContainer() {
-    return this.map.getContainer();
+    return this.map && this.map.getContainer();
   }
 
   setView(center: MapCenter, zoom: number) {
-    this.map.jumpTo({ center, zoom });
+    if (this.map) {
+      this.map.jumpTo({ center, zoom });
+    }
   }
 
   setCenter(latLng: [number, number]): void {
-    this.map.setCenter(latLng);
+    if (this.map) {
+      this.map.setCenter(latLng);
+    }
   }
 
   setZoom(zoom: number): void {
-    this.map.setZoom(zoom);
+    if (this.map) {
+      this.map.setZoom(zoom);
+    }
   }
 
-  getZoom(): number {
-    return this.map.getZoom();
+  getZoom(): number | undefined {
+    if (this.map) {
+      return this.map.getZoom();
+    }
   }
 
   // [extent_left, extent_bottom, extent_right, extent_top];
   fit(e: [number, number, number, number], options: FitOptions = {}): void {
-    // top, left, bottom, right
-    this.map.fitBounds([[e[0], e[1]], [e[2], e[3]]], { linear: true, ...options });
+    if (this.map) {
+      // top, left, bottom, right
+      this.map.fitBounds([[e[0], e[1]], [e[2], e[3]]], { linear: true, ...options });
+    }
   }
 
   setRotation(angle: number): void {
@@ -118,67 +129,84 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   }
 
   removeLayer(layerIds: string[]): void {
-    layerIds.forEach((layerId) => {
-      this.map.removeLayer(layerId);
-      this.map.removeSource(layerId);
-    });
+    if (this.map) {
+      const map = this.map;
+      layerIds.forEach((layerId) => {
+        map.removeLayer(layerId);
+        map.removeSource(layerId);
+      });
+    }
   }
 
   // TODO: need optimization, something like throttle
-  setLayerOrder(layerIds, order, layers: { [x: string]: LayerMem<string[]> }): void {
-    const baseLayers: Array<LayerMem<string[]>> = [];
-    let orderedLayers: Array<LayerMem<string[]>> = [];
-    for (const l in layers) {
-      if (layers.hasOwnProperty(l)) {
-        const layer = layers[l];
-        if (layer.baseLayer) {
-          baseLayers.push(layer);
-        } else {
-          orderedLayers.push(layer);
+  setLayerOrder(layerIds: string[], order: number, layers: { [x: string]: LayerMem<string[]> }): void {
+    const map = this.map;
+    if (map) {
+      const baseLayers: Array<LayerMem<string[]>> = [];
+      let orderedLayers: Array<LayerMem<string[]>> = [];
+      for (const l in layers) {
+        if (layers.hasOwnProperty(l)) {
+          const layer = layers[l];
+          if (layer.baseLayer) {
+            baseLayers.push(layer);
+          } else {
+            orderedLayers.push(layer);
+          }
         }
       }
-    }
 
-    orderedLayers = orderedLayers.sort((a, b) => {
-      return a.order - b.order;
-    });
-    const firstLayerId = this._getLayerIds(orderedLayers[0])[0];
-    // normalize layer ordering
-    baseLayers.forEach((x) => {
-      x.layer.forEach((y) => {
-        this.map.moveLayer(y, firstLayerId);
+      orderedLayers = orderedLayers.sort((a, b) => {
+        return a.order !== undefined && b.order !== undefined ? a.order - b.order : 0;
       });
-    });
-    for (let fry = 0; fry < orderedLayers.length; fry++) {
-      const nextlayer = orderedLayers[fry + 1];
-      const nextlayerId = nextlayer && nextlayer.layer[0];
-      const mem = orderedLayers[fry];
-      const _layers = this._getLayerIds(mem);
-      _layers.forEach((x) => {
-        this.map.moveLayer(x, nextlayerId);
+      const firstLayerId = this._getLayerIds(orderedLayers[0])[0];
+      // normalize layer ordering
+      baseLayers.forEach((x) => {
+        x.layer.forEach((y) => {
+          map.moveLayer(y, firstLayerId);
+        });
       });
+      for (let fry = 0; fry < orderedLayers.length; fry++) {
+        const nextlayer = orderedLayers[fry + 1];
+        const nextlayerId = nextlayer && nextlayer.layer[0];
+        const mem = orderedLayers[fry];
+        const _layers = this._getLayerIds(mem);
+        _layers.forEach((x) => {
+          map.moveLayer(x, nextlayerId);
+        });
+      }
     }
   }
 
   setLayerOpacity(layerIds: string[], opacity: number): void {
-    layerIds.forEach((layerId) => {
-      this.onMapLoad().then(() => {
-        const layer = this.map.getLayer(layerId);
-        if (layer) {
-          this.map.setPaintProperty(layerId, layer.type + '-opacity', opacity);
-        }
+    const map = this.map;
+    if (map) {
+      layerIds.forEach((layerId) => {
+        this.onMapLoad().then(() => {
+          const layer = map.getLayer(layerId);
+          if (layer) {
+            map.setPaintProperty(layerId, layer.type + '-opacity', opacity);
+          }
+        });
       });
-    });
+    }
   }
 
-  onMapLoad<K = any>(cb?: () => any): Promise<K> {
-    return new Promise<K>((resolve) => {
+  onMapLoad(cb?: () => any): Promise<Map> {
+    return new Promise<Map>((resolve) => {
+      const _resolve = () => {
+        if (cb) {
+          cb();
+        }
+        if (this.map) {
+          resolve(this.map);
+        }
+      };
       if (this.isLoaded) { // map.loaded()
-        resolve(cb && cb());
-      } else {
+        _resolve();
+      } else if (this.map) {
         this.map.once('load', () => {
           this.isLoaded = true;
-          resolve(cb && cb());
+          _resolve();
         });
       }
     });
@@ -192,13 +220,17 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     return createButtonControl(options);
   }
 
-  addControl(control: IControl, position: ControlPositions): IControl {
-    this.map.addControl(control, position);
-    return control;
+  addControl(control: IControl, position: ControlPositions): IControl | undefined {
+    if (this.map) {
+      this.map.addControl(control, position);
+      return control;
+    }
   }
 
   removeControl(control: IControl): void {
-    this.map.removeControl(control);
+    if (this.map) {
+      this.map.removeControl(control);
+    }
   }
 
   onMapClick(evt: MapEventType['click'] & EventData): void {
@@ -210,7 +242,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   }
 
   private _getLayerIds(mem: LayerMem<TLayer, Map>): string[] {
-    let _layers = [];
+    let _layers: TLayer = [];
     if (mem) {
       if (Array.isArray(mem.layer)) {
         _layers = mem.layer;
@@ -226,8 +258,8 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   }
 
   private _toggleLayer(layerId: string, status: boolean): void {
-    this.onMapLoad().then(() => {
-      this.map.setLayoutProperty(layerId, 'visibility', status ? 'visible' : 'none');
+    this.onMapLoad().then((map) => {
+      map.setLayoutProperty(layerId, 'visibility', status ? 'visible' : 'none');
     });
   }
 
@@ -276,18 +308,20 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   }
 
   private _addEventsListeners(): void {
-    // write mem for start loaded layers
-    this.map.on('sourcedataloading', (data) => {
-      this._sourceDataLoading[data.sourceId] = this._sourceDataLoading[data.sourceId] || [];
-      if (data.tile) {
-        this._sourceDataLoading[data.sourceId].push(data.tile);
-      }
-    });
-    // emmit data-loaded for each layer or all sources is loaded
-    this.map.on('sourcedata', this._onMapSourceData.bind(this));
-    this.map.on('error', this._onMapError.bind(this));
-    this.map.on('click', (evt) => {
-      this.onMapClick(evt);
-    });
+    if (this.map) {
+      // write mem for start loaded layers
+      this.map.on('sourcedataloading', (data) => {
+        this._sourceDataLoading[data.sourceId] = this._sourceDataLoading[data.sourceId] || [];
+        if (data.tile) {
+          this._sourceDataLoading[data.sourceId].push(data.tile);
+        }
+      });
+      // emmit data-loaded for each layer or all sources is loaded
+      this.map.on('sourcedata', this._onMapSourceData.bind(this));
+      this.map.on('error', this._onMapError.bind(this));
+      this.map.on('click', (evt) => {
+        this.onMapClick(evt);
+      });
+    }
   }
 }

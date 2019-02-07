@@ -5,7 +5,7 @@ export function createControl(control: MapControl, options: CreateControlOptions
 
   class Control implements IControl {
 
-    private _container: HTMLElement;
+    private _container?: HTMLElement;
 
     getDefaultPosition() {
       return 'top-left';

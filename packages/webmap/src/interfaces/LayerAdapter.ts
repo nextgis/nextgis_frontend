@@ -85,25 +85,38 @@ export interface MarkerAdapterOptions extends AdapterOptions {
   latLng: LatLng;
 }
 
+export interface TileAdapterOptions extends AdapterOptions {
+  url: string;
+  tileSize: number;
+  subdomains?: string;
+}
+
 export interface ImageAdapterOptions extends AdapterOptions {
   resourceId: string | number;
   updateWmsParams?: (obj: { [paramName: string]: any }) => object;
   transparent?: boolean;
+  subdomains?: string;
 }
 
 export interface LayerAdapters {
   'MVT': MvtAdapterOptions;
   'IMAGE': ImageAdapterOptions;
   'OSM': AdapterOptions;
-  'TILE': AdapterOptions;
+  'TILE': TileAdapterOptions;
   'MARKER': MarkerAdapterOptions;
   'GEOJSON': GeoJsonAdapterOptions;
   [name: string]: AdapterOptions;
 }
 
-export type DataLayerFilter<L> = (opt: { layer?: L, feature?: Feature }) => boolean;
+export interface LayerDefinition<F extends Feature = Feature, L = any> {
+  layer?: L;
+  feature?: F;
+  visible?: boolean;
+}
 
-export interface LayerAdapter<O = any, L = any, M = any> {
+export type DataLayerFilter<F extends Feature = Feature, L = any> = (opt: LayerDefinition<F, L>) => boolean;
+
+export interface LayerAdapter<O = any, L = any, M = any, F extends Feature = Feature> {
   getPaintFunctions?: { [name: string]: GetPaintFunction };
 
   options?: O;
@@ -117,13 +130,13 @@ export interface LayerAdapter<O = any, L = any, M = any> {
   showLayer?(layer: L): void;
   hideLayer?(layer: L): void;
 
-  getLayers?(): Array<{ feature?: Feature, layer?: L, visible?: boolean }>;
+  getLayers?(): Array<LayerDefinition<F, L>>;
 
-  select?(findFeatureCb?: DataLayerFilter<L>): void;
-  unselect?(findFeatureCb?: DataLayerFilter<L>): void;
+  select?(findFeatureCb?: DataLayerFilter<F, L>): void;
+  unselect?(findFeatureCb?: DataLayerFilter<F, L>): void;
   getSelected?(): Array<{ layer?: L, feature?: Feature }>;
 
-  filter?(cb: DataLayerFilter<L>): void;
+  filter?(cb: DataLayerFilter<F, L>): void;
 
   setData?(data: GeoJsonObject): void;
   addData?(data: GeoJsonObject): void;

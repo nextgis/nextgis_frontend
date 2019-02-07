@@ -1,4 +1,4 @@
-import NgwMap, { MapOptions } from '@nextgis/ngw-map';
+import NgwMap, { NgwMapOptions } from '@nextgis/ngw-map';
 import LeafletMapAdapter from '@nextgis/leaflet-map-adapter';
 import 'leaflet/dist/leaflet.css';
 
@@ -7,7 +7,7 @@ import 'leaflet/dist/leaflet.css';
 
 export default class NgwLeaflet extends NgwMap {
 
-  constructor(options: MapOptions) {
+  constructor(options: NgwMapOptions) {
     super(new LeafletMapAdapter(), options);
   }
 
