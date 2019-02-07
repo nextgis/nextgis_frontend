@@ -4,7 +4,9 @@ import {
   GeoJsonAdapterLayerType,
   GeoJsonAdapterLayerPaint,
   GetPaintCallback,
-  IconOptions
+  IconOptions,
+  DataLayerFilter,
+  LayerDefinition,
 } from '@nextgis/webmap';
 import { BaseAdapter } from './BaseAdapter';
 import {
@@ -17,14 +19,25 @@ import {
   Geometry,
   GeoJsonProperties
 } from 'geojson';
+import {
+  Map, MapLayerMouseEvent,
+  // BackgroundPaint, FillPaint, FillExtrusionPaint, LinePaint, SymbolPaint,
+  // RasterPaint, CirclePaint, HeatmapPaint, HillshadePaint,
+} from 'mapbox-gl';
 
 import { getImage } from '../utils/image_icons';
 
 let ID = 1;
 
+// interface Feature<G extends GeometryObject | null = Geometry, P = GeoJsonProperties> extends F<G, P> {
+//   _rendrom_id: string;
+// }
+
 interface Feature<G extends GeometryObject | null = Geometry, P = GeoJsonProperties> extends F<G, P> {
-  _rendrom_id?: number;
 }
+
+// type MapboxPaint = BackgroundPaint | FillPaint | FillExtrusionPaint | LinePaint | SymbolPaint |
+//   RasterPaint | CirclePaint | HeatmapPaint | HillshadePaint;
 
 const allowedParams: Array<[string, string] | string> = ['color', 'opacity'];
 const allowedByType = {
@@ -33,20 +46,24 @@ const allowedByType = {
   fill: allowedParams.concat([])
 };
 
-const typeAlias: { [x: string]: GeoJsonAdapterLayerType } = {
+const typeAlias: { [key in GeoJsonGeometryTypes]: GeoJsonAdapterLayerType } = {
   'Point': 'circle',
   'LineString': 'line',
   'MultiPoint': 'circle',
   'Polygon': 'fill',
   'MultiLineString': 'line',
-  'MultiPolygon': 'fill'
+  'MultiPolygon': 'fill',
+  'GeometryCollection': 'fill'
 };
 
-const backAliases = {};
+const backAliases: { [key in GeoJsonAdapterLayerType]?: GeoJsonGeometryTypes[] } = {};
+
 for (const a in typeAlias) {
   if (typeAlias.hasOwnProperty(a)) {
-    backAliases[typeAlias[a]] = backAliases[typeAlias[a]] || [];
-    backAliases[typeAlias[a]].push(a);
+    const layerType = typeAlias[a as GeoJsonGeometryTypes];
+    const backAlias = backAliases[layerType] || [];
+    backAlias.push(a as GeoJsonGeometryTypes);
+    backAliases[layerType] = backAlias;
   }
 }
 
@@ -56,48 +73,60 @@ const PAINT = {
   radius: 10
 };
 
-export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter<GeoJsonAdapterOptions, string[]> {
+type Layer = string[];
 
-  selected: boolean;
+export class GeoJsonAdapter
+  extends BaseAdapter<GeoJsonAdapterOptions>
+  implements LayerAdapter<GeoJsonAdapterOptions, Layer, Map, Feature> {
+
+  selected: boolean = false;
 
   private _selectionName?: string;
   private _features: Feature[] = [];
   private _selectedFeatureIds: string[] = [];
   private _filteredFeatureIds: string[] = [];
-  private _data: Feature | FeatureCollection;
+  private _data?: Feature | FeatureCollection;
 
-  private $onLayerClick?: () => void;
+  private $onLayerClick?: (e: MapLayerMouseEvent) => void;
 
-  constructor(map, options?) {
+  constructor(map: Map, options?: GeoJsonAdapterOptions) {
     super(map, options);
     // bind methods for event listeners
     this.$onLayerClick = this._onLayerClick.bind(this);
   }
 
-  async addLayer(options?: GeoJsonAdapterOptions): Promise<string[]> {
+  async addLayer(options: GeoJsonAdapterOptions): Promise<string[]> {
     this.name = options.id || 'geojson-' + ID++;
-    this.options = { ...this.options, ...(options || {}) };
-
-    let type: GeoJsonAdapterLayerType = options.type;
-
-    if (!type) {
-      const detectedType = detectType(options.data);
+    options = this.options = { ...this.options, ...(options || {}) };
+    const data = options.data;
+    let type: GeoJsonAdapterLayerType | undefined;
+    if (options.type) {
+      type = options.type;
+    }
+    if (!type && data) {
+      const detectedType = detectType(data);
       type = typeAlias[detectedType];
     }
 
-    this._data = this.filterGeometries(options.data, type) as any;
-    this._features.forEach((x, i) => {
-      x._rendrom_id = i;
-      x.properties._rendrom_id = i;
-    });
-    if (this._data) {
-      await this._getAddLayerOptions(this.name, this._data, options.paint, type);
+    if (data && type) {
+      this._data = this.filterGeometries(data, type) as any;
+      this._features.forEach((x, i) => {
+        // @ts-ignore
+        x._rendrom_id = String(i);
+        if (x.properties) {
+          x.properties._rendrom_id = i;
+        }
+      });
+      const features = data as Feature | FeatureCollection;
       this.layer = [this.name];
-      if (options.selectable || options.selectedPaint) {
-        this._selectionName = this.name + '-highlighted';
-        await this._getAddLayerOptions(this._selectionName, this._data, options.selectedPaint, type);
-        this.map.setFilter(this._selectionName, ['in', '_rendrom_id', '']);
-        this.layer.push(this._selectionName);
+      if (options.paint) {
+        await this._getAddLayerOptions(this.name, features, options.paint, type);
+        if (options.selectedPaint) {
+          this._selectionName = this.name + '-highlighted';
+          await this._getAddLayerOptions(this._selectionName, features, options.selectedPaint, type);
+          this.map.setFilter(this._selectionName, ['in', '_rendrom_id', '']);
+          this.layer.push(this._selectionName);
+        }
       }
 
       this._addEventsListeners();
@@ -110,27 +139,38 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter<GeoJsonA
 
   getLayers() {
     const filtered = this._filteredFeatureIds.length;
-    return this._features.map((feature) => Object.create({
-      feature,
-      visible: filtered && this._filteredFeatureIds.indexOf(feature.properties._rendrom_id) !== -1
-    }));
+    return this._features.map((feature) => {
+      let visible: boolean = false;
+      if (filtered) {
+        const id = this._getRendromId(feature);
+        if (id) {
+          visible = this._filteredFeatureIds.indexOf(id) !== -1;
+        }
+      }
+      return {
+        feature,
+        visible
+      };
+    });
   }
 
-  filter(fun) {
+  filter(fun: DataLayerFilter<Feature, Layer>) {
     this._filteredFeatureIds = [];
     this._features.forEach((feature) => {
       const ok = fun({ feature });
-      if (ok) {
-        this._filteredFeatureIds.push(feature.properties._rendrom_id);
+      const id = this._getRendromId(feature);
+      if (ok && id) {
+        this._filteredFeatureIds.push(id);
       }
     });
     this._updateFilter();
   }
 
   getSelected() {
-    const features = [];
+    const features: Array<LayerDefinition<Feature, Layer>> = [];
     this._features.forEach((x) => {
-      if (this._selectedFeatureIds.indexOf(x.properties._rendrom_id) !== -1) {
+      const id = this._getRendromId(x);
+      if (id && this._selectedFeatureIds.indexOf(id) !== -1) {
         features.push({ feature: x });
       }
     });
@@ -157,7 +197,12 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter<GeoJsonA
     this.selected = !!this._selectedFeatureIds.length;
   }
 
-  private async _getAddLayerOptions(name: string, data: Feature | FeatureCollection, paint, type) {
+  private async _getAddLayerOptions(
+    name: string,
+    data: Feature | FeatureCollection,
+    paint: GeoJsonAdapterLayerPaint | GetPaintCallback,
+    type: GeoJsonAdapterLayerType) {
+
     const layerOpt: mapboxgl.Layer = {
       id: String(name),
       source: {
@@ -184,7 +229,7 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter<GeoJsonA
   private filterGeometries(data: GeoJsonObject, type: GeoJsonAdapterLayerType): GeoJsonObject | boolean {
     if (data.type === 'FeatureCollection') {
       const features = (data as FeatureCollection).features = (data as FeatureCollection).features
-        .filter((f) => geometryFilter(f.geometry.type, type));
+        .filter((f) => geometryFilter(f.geometry.type, type)) as Feature[];
       this._features = features;
     } else if (data.type === 'Feature') {
       const allow = geometryFilter((data as Feature).geometry.type, type);
@@ -202,14 +247,14 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter<GeoJsonA
   private async _createPaintForType(
     paint: GeoJsonAdapterLayerPaint | GetPaintCallback,
     type: GeoJsonAdapterLayerType,
-    name: string) {
+    name: string): Promise<any> {
 
     if (typeof paint === 'function') {
       return await this._getPaintFromCallback(paint, type, name);
     } else {
-      const mapboxPaint = {};
+      const mapboxPaint: any = {};
       const _paint = { ...PAINT, ...(paint || {}) };
-      if (paint.type === 'icon') {
+      if (paint.type === 'icon' && paint.html) {
         await this._registrateImage(paint);
         return {
           'icon-image': paint.html
@@ -217,15 +262,18 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter<GeoJsonA
       } else {
         for (const p in _paint) {
           if (_paint.hasOwnProperty(p)) {
-            const allowedType = allowedByType[type].find((x) => {
-              if (typeof x === 'string') {
-                return x === p;
-              } else if (Array.isArray(x)) {
-                return x[0] === p;
-              }
-            });
-            if (allowedType) {
+            const allowed = allowedByType[type];
+            if (allowed) {
+              const allowedType = allowed.find((x) => {
+                if (typeof x === 'string') {
+                  return x === p;
+                } else if (Array.isArray(x)) {
+                  return x[0] === p;
+                }
+                return false;
+              });
               const paramName = Array.isArray(allowedType) ? allowedType[1] : allowedType;
+              // @ts-ignore
               mapboxPaint[type + '-' + paramName] = _paint[p];
             }
           }
@@ -241,12 +289,18 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter<GeoJsonA
       const _paint = paint(feature);
       if (_paint.type === 'icon') {
         await this._registrateImage(_paint);
-        feature.properties['_icon-image-' + name] = _paint.html;
+        if (feature.properties) {
+          feature.properties['_icon-image-' + name] = _paint.html;
+        }
         style['icon-image'] = `{_icon-image-${name}}`;
       } else {
         for (const p in _paint) {
           if (_paint.hasOwnProperty(p)) {
-            feature.properties[`_paint_${p}_${name}`] = _paint[p];
+            // @ts-ignore
+            const toSave = _paint[p];
+            if (feature.properties) {
+              feature.properties[`_paint_${p}_${name}`] = toSave;
+            }
             style[p] = ['get', `_paint_${p}_${name}`];
           }
         }
@@ -260,25 +314,35 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter<GeoJsonA
   }
 
   private async _registrateImage(paint: IconOptions) {
-    const imageExist = this.map.hasImage(paint.html);
-    if (!imageExist) {
-      const image = await getImage(paint.html, {
-        width: paint.iconSize[0],
-        height: paint.iconSize[1]
-      });
+    if (paint.html) {
+      const imageExist = this.map.hasImage(paint.html);
+      if (!imageExist) {
+        let width = 12;
+        let height = 12;
+        if (paint.iconSize) {
+          width = paint.iconSize[0];
+          height = paint.iconSize[1];
+        }
+        const image = await getImage(paint.html, {
+          width,
+          height
+        });
 
-      this.map.addImage(paint.html, image);
+        this.map.addImage(paint.html, image);
+      }
     }
   }
 
   private _onLayerClick(e: mapboxgl.MapLayerMouseEvent) {
     e.preventDefault();
-    const features = this.map.queryRenderedFeatures(e.point, { layers: this.layer }) as Feature[];
-    const feature = features[0];
-    if (feature) {
-      let isSelected = this._selectedFeatureIds.indexOf(feature.properties._rendrom_id) !== -1;
+    const features = this.map.queryRenderedFeatures(e.point, { layers: this.layer });
+    const feature = features[0] as Feature;
+    const id = this._getRendromId(feature);
+    if (feature && id) {
+
+      let isSelected = this._selectedFeatureIds.indexOf(id) !== -1;
       if (isSelected) {
-        if (this.options.unselectOnSecondClick) {
+        if (this.options && this.options.unselectOnSecondClick) {
           this._unselectFeature(feature);
           isSelected = false;
         }
@@ -297,31 +361,51 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter<GeoJsonA
   }
 
   private _selectFeature(feature: Feature | Feature[]) {
-    if (!this.options.multiselect) {
+    if (this.options && !this.options.multiselect) {
       this._selectedFeatureIds = [];
     }
-    [].concat(feature).forEach((f) => this._selectedFeatureIds.push(f.properties._rendrom_id));
+    let features: Feature[] = [];
+    if (Array.isArray(feature)) {
+      features = feature;
+    } else {
+      features = [feature];
+    }
+    features.forEach((f) => {
+      const id = this._getRendromId(f);
+      if (id) {
+        this._selectedFeatureIds.push(id);
+      }
+    });
     this._updateFilter();
   }
 
   private _unselectFeature(feature: Feature | Feature[]) {
-    [].concat(feature).forEach((f) => {
-      const index = this._selectedFeatureIds.indexOf(f.properties._rendrom_id);
-      if (index !== -1) {
-        this._selectedFeatureIds.splice(index, 1);
+    let features: Feature[] = [];
+    if (Array.isArray(feature)) {
+      features = feature;
+    } else {
+      features = [feature];
+    }
+    features.forEach((f) => {
+      const id = this._getRendromId(f);
+      if (id) {
+        const index = this._selectedFeatureIds.indexOf(id);
+        if (index !== -1) {
+          this._selectedFeatureIds.splice(index, 1);
+        }
       }
     });
     this._updateFilter();
   }
 
   private _updateFilter() {
-    let selectionArray = [];
-    const filteredArray = [];
+    let selectionArray: string[] = [];
+    const filteredArray: string[] = [];
 
     if (this._filteredFeatureIds.length) {
       this._features.forEach((x) => {
-        const id = x.properties._rendrom_id;
-        if (this._filteredFeatureIds.indexOf(id) !== -1) {
+        const id = this._getRendromId(x);
+        if (id && this._filteredFeatureIds.indexOf(id) !== -1) {
           if (this._selectedFeatureIds.indexOf(id) !== -1) {
             selectionArray.push(id);
           } else {
@@ -343,9 +427,14 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter<GeoJsonA
   }
 
   private _addEventsListeners() {
-    if (this.options.selectable) {
+    if (this.layer && this.options && this.options.selectable) {
       this.layer.forEach((x) => {
-        this.map.on('click', x, this.$onLayerClick);
+        if (this.$onLayerClick) {
+          const onLayerClick = this.$onLayerClick;
+          this.map.on('click', x, (e: MapLayerMouseEvent) => {
+            onLayerClick(e);
+          });
+        }
 
         this.map.on('mousemove', x, () => {
           this.map.getCanvas().style.cursor = 'pointer';
@@ -356,11 +445,23 @@ export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter<GeoJsonA
       });
     }
   }
+
+  private _getRendromId(feature: any): string | undefined {
+    if (feature._rendrom_id) {
+      return feature._rendrom_id;
+    } else if (feature.properties && feature.properties._rendrom_id) {
+      return feature.properties._rendrom_id;
+    }
+  }
 }
 
 // Static functions
 function geometryFilter(geometry: GeoJsonGeometryTypes, type: GeoJsonAdapterLayerType): boolean {
-  return backAliases[type].indexOf(geometry) !== -1;
+  const backType = backAliases[type];
+  if (backType) {
+    return backType.indexOf(geometry) !== -1;
+  }
+  return false;
 }
 
 function detectType(geojson: GeoJsonObject): GeoJsonGeometryTypes {
@@ -384,10 +485,13 @@ function findMostFrequentGeomType(arr: GeoJsonGeometryTypes[]): GeoJsonGeometryT
   for (let fry = 0; fry < arr.length; fry++) {
     counts[arr[fry]] = 1 + (counts[arr[fry]] || 0);
   }
-  let maxName: string;
+  let maxName: string = '';
   for (const c in counts) {
-    if (counts[c] > (counts[maxName] || 0)) {
-      maxName = c;
+    if (counts.hasOwnProperty(c)) {
+      const maxCount = maxName ? counts[maxName] : 0;
+      if (counts[c] > maxCount) {
+        maxName = c;
+      }
     }
   }
   return maxName as GeoJsonGeometryTypes;

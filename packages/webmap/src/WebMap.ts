@@ -198,7 +198,7 @@ export class WebMap<M = any, L = any, C = any> {
 
   @onLoad('build-map')
   createToggleControl(options: CreateToggleControlOptions) {
-    if (this.mapAdapter.createButtonControl) {
+    if (this.mapAdapter.createToggleControl) {
       return this.mapAdapter.createToggleControl(options);
     }
   }
@@ -388,7 +388,7 @@ export class WebMap<M = any, L = any, C = any> {
     }
   }
 
-  filterLayer(layerId: string, filter: DataLayerFilter<L>) {
+  filterLayer(layerId: string, filter: DataLayerFilter<Feature, L>) {
     const layer = this.getLayer(layerId);
     if (layer && layer.adapter.filter) {
       layer.adapter.filter(filter);

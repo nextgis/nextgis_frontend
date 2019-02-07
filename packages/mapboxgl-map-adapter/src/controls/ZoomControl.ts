@@ -13,7 +13,7 @@ export class ZoomControl extends NavigationControl {
   _createButton(className: string, ariaLabel: string, fn: () => any) {
     // @ts-ignore
     const element = super._createButton(className, ariaLabel, fn);
-    const aliases = {
+    const aliases: any = {
       'Zoom in': 'zoomInTitle',
       'Zoom out': 'zoomOutTitle'
     };

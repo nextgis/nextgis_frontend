@@ -121,7 +121,7 @@ export class NgwMap {
    * top, left, bottom, right
    */
   fitBounds(bounds: [number, number, number, number]) {
-    const [top, left, bottom, right] = bounds;
+    const [left, bottom, right, top] = bounds;
     // [extent_left, extent_bottom, extent_right, extent_top];
     this.webMap.fit([left, bottom, right, top]);
   }
