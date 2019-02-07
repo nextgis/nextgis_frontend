@@ -1,13 +1,13 @@
 
-let canvg;
+let canvg: any;
 try {
   canvg = require('canvg');
 } catch (er) {
   // ignore
 }
 interface GetImgOpt {
-  width?: number;
-  height?: number;
+  width: number;
+  height: number;
   x?: number;
   y?: number;
   sdf?: string;
@@ -23,7 +23,7 @@ const defAddImgOpt = {
   pixelRatio: 2
 };
 
-export function getImage(svgStr: string, opt?: GetImgOpt): Promise<ImageData> {
+export function getImage(svgStr: string, opt: GetImgOpt): Promise<ImageData> {
   return new Promise((resolve) => {
     if (canvg) {
       resolve(getImageData(svgStr, opt));
@@ -41,7 +41,7 @@ export function getImage(svgStr: string, opt?: GetImgOpt): Promise<ImageData> {
 }
 
 // // from /mapbox-gl/src/util/browser.js
-export function getImageData(img: string | HTMLImageElement, opt?: GetImgOpt): ImageData {
+export function getImageData(img: string | HTMLImageElement, opt: GetImgOpt): ImageData {
   const canvas = window.document.createElement('canvas');
   const context = canvas.getContext('2d');
   if (!context) {

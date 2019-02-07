@@ -55,7 +55,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   create(options: LeafletMapAdapterOptions = { target: 'map' }) {
     this.options = { ...options };
     if (this.options.target) {
-      const {maxZoom, minZoom } = this.options;
+      const { maxZoom, minZoom } = this.options;
       this.map = new Map(this.options.target, {
         zoomControl: false,
         attributionControl: false,
@@ -73,7 +73,9 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   }
 
   setCursor(cursor: string) {
-    this.map.getContainer().style.cursor = cursor;
+    if (this.map) {
+      this.map.getContainer().style.cursor = cursor;
+    }
   }
 
   onMapLoad(cb?: any): Promise<void> {

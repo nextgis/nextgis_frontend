@@ -1,4 +1,4 @@
-import { LayerAdapter } from '@nextgis/webmap';
+import { LayerAdapter, TileAdapterOptions } from '@nextgis/webmap';
 import { TileAdapter } from './TileAdapter';
 
 const OPTIONS = {
@@ -9,7 +9,7 @@ const OPTIONS = {
 
 export class OsmAdapter extends TileAdapter implements LayerAdapter {
 
-  addLayer(options?): string[] {
+  addLayer(options: TileAdapterOptions): string[] {
     return super.addLayer(Object.assign({}, OPTIONS, options));
   }
 }

@@ -1,14 +1,14 @@
-import { LayerAdapter, AdapterOptions } from '@nextgis/webmap';
+import { LayerAdapter, TileAdapterOptions } from '@nextgis/webmap';
 import { BaseAdapter } from './BaseAdapter';
 import { RasterSource } from 'mapbox-gl';
 
 let ID = 1;
 
-export class TileAdapter extends BaseAdapter implements LayerAdapter {
+export class TileAdapter extends BaseAdapter<TileAdapterOptions> implements LayerAdapter {
 
-  addLayer(options?: AdapterOptions): string[] {
+  addLayer(options: TileAdapterOptions): string[] {
     this.name = String(options.id || 'tile-' + ID++);
-    const opt = { ...this.options, ...(options || {}) };
+    const opt: TileAdapterOptions = { ...this.options, ...(options || {}) };
 
     let tiles: string[];
     if (opt && opt.subdomains) {
@@ -27,7 +27,7 @@ export class TileAdapter extends BaseAdapter implements LayerAdapter {
       // show a "url" property. This only applies to tilesets with
       // corresponding TileJSON (such as mapbox tiles).
       tiles,
-      tileSize: opt && opt.tileSize || 256,
+      tileSize: 256, // opt && opt.tileSize ||
     };
     if (opt.attribution) {
       sourceOptions.attribution = opt.attribution;
