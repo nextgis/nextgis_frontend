@@ -5,7 +5,7 @@ export function createControl(control: MapControl, options: CreateControlOptions
 
   const newControl = (function (C) {
 
-    function NewControl() {
+    function NewControl(this: Control) {
 
       const element = document.createElement('div');
       element.className = (options.addClass ? options.addClass + ' ' : '') +
@@ -31,7 +31,7 @@ export function createControl(control: MapControl, options: CreateControlOptions
 
     return NewControl;
   }(Control));
-
+  // @ts-ignore
   return new newControl();
   // return control;
 }

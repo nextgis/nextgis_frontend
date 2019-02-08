@@ -5,12 +5,12 @@ export function createButtonControl(options: CreateButtonControlOptions): Contro
 
   const newControl = (function (C) {
 
-    function NewControl() {
+    function NewControl(this: Control) {
 
       const button = document.createElement('button');
       if (typeof options.html === 'string') {
-      button.innerHTML = options.html;
-      } else {
+        button.innerHTML = options.html;
+      } else if (options.html) {
         button.appendChild(options.html);
       }
 
@@ -18,9 +18,7 @@ export function createButtonControl(options: CreateButtonControlOptions): Contro
       element.className = (options.addClass ? options.addClass + ' ' : '') + 'ol-unselectable ol-control';
       element.appendChild(button);
 
-      C.call(this, {
-        element,
-      });
+      C.call(this, { element });
 
       button.addEventListener('click', () => options.onClick(), false);
     }
@@ -38,6 +36,7 @@ export function createButtonControl(options: CreateButtonControlOptions): Contro
     return NewControl;
   }(Control));
 
+  // @ts-ignore
   return new newControl();
 
 }

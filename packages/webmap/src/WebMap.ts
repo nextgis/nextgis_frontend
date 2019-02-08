@@ -108,7 +108,7 @@ export class WebMap<M = any, L = any, C = any> {
       minZoom: this.options.minZoom,
       ...options
     }, true);
-    if (layer) {
+    if (layer && layer.name) {
       this._baseLayers.push(layer.name);
     }
     return layer;
@@ -255,18 +255,20 @@ export class WebMap<M = any, L = any, C = any> {
       const layer = await _adapter.addLayer(options);
 
       const layerId = _adapter.name;
-      const layerOpts: LayerMem = { id: layerId, layer, adapter: _adapter, onMap: false };
-      if (baselayer) {
-        layerOpts.baseLayer = true;
-        layerOpts.order = 0;
-        this._baseLayers.push(layerId);
-      } else {
-        layerOpts.order = options.order || order;
-      }
-      this._layers[layerId] = layerOpts;
+      if (layerId) {
+        const layerOpts: LayerMem = { id: layerId, layer, adapter: _adapter, onMap: false };
+        if (baselayer) {
+          layerOpts.baseLayer = true;
+          layerOpts.order = 0;
+          this._baseLayers.push(layerId);
+        } else {
+          layerOpts.order = options.order || order;
+        }
+        this._layers[layerId] = layerOpts;
 
-      if (options.visibility) {
-        this.showLayer(layerId);
+        if (options.visibility) {
+          this.showLayer(layerId);
+        }
       }
 
       return _adapter;
@@ -298,12 +300,20 @@ export class WebMap<M = any, L = any, C = any> {
     }
   }
 
-  showLayer(layerName: string) {
-    this.toggleLayer(layerName, true);
+  showLayer(layer: string | LayerAdapter) {
+    if (typeof layer === 'string') {
+      this.toggleLayer(layer, true);
+    } else if (layer.name) {
+      this.toggleLayer(layer.name, true);
+    }
   }
 
-  hideLayer(layerName: string) {
-    this.toggleLayer(layerName, false);
+  hideLayer(layer: string | LayerAdapter) {
+    if (typeof layer === 'string') {
+      this.toggleLayer(layer, false);
+    } else if (layer.name) {
+      this.toggleLayer(layer.name, false);
+    }
   }
 
   setLayerOpacity(layerName: string, value: number) {

@@ -73,5 +73,5 @@ export interface MapAdapter<M = any, L = any, C = any> extends BaseMapAdapter<L>
   onMapClick(evt: any): void;
 
   // TODO: now return WKT geometry but need geojson
-  requestGeomString?(pixel: Pixel, pixelRadius?: number): string;
+  requestGeomString?(pixel: Pixel, pixelRadius?: number): string | undefined;
 }

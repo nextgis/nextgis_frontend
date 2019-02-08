@@ -51,11 +51,13 @@ export default class NgwKit implements StarterKit {
             baseUrl: this.options.baseUrl,
             webMap
           });
-          webMap.showLayer(layer.name);
-          if (layer.getExtent) {
-            const extent = await layer.getExtent();
-            if (extent) {
-              webMap.fit(extent);
+          if (layer && layer.name) {
+            webMap.showLayer(layer.name);
+            if (layer.getExtent) {
+              const extent = await layer.getExtent();
+              if (extent) {
+                webMap.fit(extent);
+              }
             }
           }
         }

@@ -18,54 +18,60 @@ import Icon from 'ol/style/Icon';
 // @ts-ignore
 import { asArray } from 'ol/color';
 // @ts-ignore
-import { click } from 'ol/events/condition';
-import Select from 'ol/interaction/Select';
 import { Feature } from 'geojson';
-import { olx } from 'openlayers';
 import { ForEachFeatureAtPixelCallback } from '../OlMapAdapter';
 
 let ID = 1;
+type Layer = ol.layer.Base;
+type OlStyle = ol.style.Style | ol.style.Style[] | null;
 
-export class GeoJsonAdapter implements LayerAdapter {
+export class GeoJsonAdapter implements LayerAdapter<GeoJsonAdapterOptions, Layer, Map> {
 
-  name: string;
   map: Map;
-  layer: VectorLayer;
-  options: GeoJsonAdapterOptions;
+  name: string;
+  layer?: VectorLayer;
+  options?: GeoJsonAdapterOptions;
   paint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
   selectedPaint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
   selected: boolean = false;
 
   private _selectedFeatures: ol.Feature[] = [];
 
-  constructor(map: Map, options) {
+  constructor(map: Map, options: GeoJsonAdapterOptions) {
     this.map = map;
     if (options.onLayerClick) {
       this.onLayerClick = options.onLayerClick;
     }
+    this.name = options.id || 'geojson-' + String(ID++);
   }
 
   onLayerClick?(opt: OnLayerClickOptions): Promise<any>;
 
-  addLayer(options?: GeoJsonAdapterOptions) {
+  addLayer(options: GeoJsonAdapterOptions) {
     this.options = options;
     this.paint = options.paint;
 
     this.selectedPaint = options.selectedPaint;
     this.name = options.id || 'geojson-' + ID++;
 
-    const features = (new GeoJSON()).readFeatures(options.data, {
-      dataProjection: 'EPSG:4326',
-      featureProjection: 'EPSG:3857'
-    });
-
-    const vectorSource = new VectorSource({
-      features
-    });
+    const vectorSource = new VectorSource();
+    const data = options.data;
+    if (data) {
+      const features = (new GeoJSON()).readFeatures(data, {
+        dataProjection: 'EPSG:4326',
+        featureProjection: 'EPSG:3857'
+      });
+      vectorSource.addFeatures(features);
+    }
 
     this.layer = new VectorLayer({
       source: vectorSource,
-      style: (f: ol.Feature) => styleFunction(f, options.paint)
+      style: (f) => {
+        if (options.paint) {
+          return styleFunction(f as ol.Feature, options.paint);
+        }
+        return null;
+      }
     });
 
     if (options.selectable) {
@@ -77,7 +83,7 @@ export class GeoJsonAdapter implements LayerAdapter {
 
   select(findFeatureFun?: (opt: { feature: Feature }) => boolean) {
     if (findFeatureFun) {
-      const feature = this._selectedFeatures.filter((x) => Object.create({feature: x}));
+      const feature = this._selectedFeatures.filter((x) => Object.create({ feature: x }));
       feature.forEach((x) => {
         this._selectFeature(x);
       });
@@ -91,28 +97,32 @@ export class GeoJsonAdapter implements LayerAdapter {
 
   unselect(findFeatureFun?: (opt: { feature: Feature }) => boolean) {
     if (findFeatureFun) {
-      const feature = this._selectedFeatures.filter((x) => Object.create({feature: x}));
+      const feature = this._selectedFeatures.filter((x) => Object.create({ feature: x }));
       feature.forEach((x) => {
         this._unselectFeature(x);
       });
     } else if (this.selected) {
       this.selected = false;
-      this.setPaintEachLayer(this.paint);
+      if (this.paint) {
+        this.setPaintEachLayer(this.paint);
+      }
     }
   }
 
   getSelected() {
     return this._selectedFeatures.map((x) => {
-      return { feature: getFeature(x)};
+      return { feature: getFeature(x) };
     });
   }
 
   private setPaintEachLayer(paint: GetPaintCallback | GeoJsonAdapterLayerPaint) {
-    const source = this.layer.getSource();
-    const features = source.getFeatures();
-    features.forEach((f) => {
-      f.setStyle(styleFunction(f, paint));
-    });
+    if (this.layer) {
+      const source = this.layer.getSource();
+      const features = source.getFeatures();
+      features.forEach((f) => {
+        f.setStyle(styleFunction(f, paint));
+      });
+    }
   }
 
   private _addSelectListener() {
@@ -129,7 +139,7 @@ export class GeoJsonAdapter implements LayerAdapter {
 
     let isSelected = this._selectedFeatures.indexOf(feature) !== -1;
     if (isSelected) {
-      if (this.options.unselectOnSecondClick) {
+      if (this.options && this.options.unselectOnSecondClick) {
         this._unselectFeature(feature);
         isSelected = false;
       }
@@ -148,13 +158,14 @@ export class GeoJsonAdapter implements LayerAdapter {
   }
 
   private _selectFeature(feature: ol.Feature) {
-    if (!this.options.multiselect) {
+    const options = this.options;
+    if (options && !options.multiselect) {
       this._selectedFeatures.forEach((x) => this._unselectFeature(x));
     }
     this._selectedFeatures.push(feature);
     this.selected = true;
-    if (this.options.selectedPaint) {
-      feature.setStyle(styleFunction(feature, this.options.selectedPaint));
+    if (options && options.selectedPaint) {
+      feature.setStyle(styleFunction(feature, options.selectedPaint));
     }
   }
 
@@ -164,7 +175,9 @@ export class GeoJsonAdapter implements LayerAdapter {
       this._selectedFeatures.splice(index, 1);
     }
     this.selected = this._selectedFeatures.length > 0;
-    feature.setStyle(styleFunction(feature, this.options.paint));
+    if (this.options && this.options.paint) {
+      feature.setStyle(styleFunction(feature, this.options.paint));
+    }
   }
 }
 
@@ -174,7 +187,7 @@ function getFeature(feature: ol.Feature): Feature {
   return geojson.writeFeatureObject(feature);
 }
 
-const getImage = (paint) => {
+const getImage = (paint: any) => {
   return new CircleStyle({ radius: 6, ...paint, stroke: new Stroke(paint), fill: new Fill(paint), });
 };
 
@@ -188,13 +201,13 @@ const typeAlias: { [x: string]: GeoJsonAdapterLayerType } = {
   'Circle': 'circle'
 };
 
-function styleFunction(feature: ol.Feature, paint: GeoJsonAdapterLayerPaint | GetPaintCallback) {
+function styleFunction(feature: ol.Feature, paint: GeoJsonAdapterLayerPaint | GetPaintCallback): OlStyle {
   if (typeof paint === 'function') {
     const f: Feature = getFeature(feature);
     return styleFunction(feature, paint(f));
   } else {
     const type = feature.getGeometry().getType();
-    const style: { stroke?: Stroke, fill?: Fill, image?} = {};
+    const style: { stroke?: Stroke, fill?: Fill, image?: any} = {};
     if ('opacity' in paint) {
       const color = asArray(paint.color);
       const colorArray = color.slice();
@@ -202,7 +215,8 @@ function styleFunction(feature: ol.Feature, paint: GeoJsonAdapterLayerPaint | Ge
       // @ts-ignore
       paint.color = colorArray;
     }
-    if (!paint.type) {
+    const _type = paint.type;
+    if (!_type) {
       const ta = typeAlias[type];
       paint.type = (ta === 'fill' || ta === 'line') ? 'path' :
         ('html' in paint || 'className' in paint) ? 'icon' : ta;
@@ -220,52 +234,16 @@ function styleFunction(feature: ol.Feature, paint: GeoJsonAdapterLayerPaint | Ge
     } else if (paint.type === 'icon') {
 
       const svg = paint.html;
-
-      style.image = new Icon({
-        src: 'data:image/svg+xml,' + escape(svg),
-        anchor: paint.iconAnchor,
-        imgSize: paint.iconSize,
-        anchorXUnits: 'pixels',
-        anchorYUnits: 'pixels',
-      });
+      if (svg) {
+        style.image = new Icon({
+          src: 'data:image/svg+xml,' + escape(svg),
+          anchor: paint.iconAnchor,
+          imgSize: paint.iconSize,
+          anchorXUnits: 'pixels',
+          anchorYUnits: 'pixels',
+        });
+      }
     }
     return new Style(style);
   }
-
 }
-
-// const styles = {
-//   'Point': (paint) => {
-//     return new Style({
-//       image: getImage(paint)
-//     });
-//   },
-//   'LineString': (paint) => new Style({
-//     stroke: new Stroke(paint)
-//   }),
-//   'MultiLineString': (paint) => new Style({
-//     stroke: new Stroke(paint)
-//   }),
-//   'MultiPoint': (paint) => {
-//     return new Style({
-//       image: getImage(paint)
-//     });
-//   },
-//   'MultiPolygon': (paint) => new Style({
-//     stroke: new Stroke(paint),
-//     fill: new Fill(paint)
-//   }),
-//   'Polygon': (paint) => new Style({
-//     stroke: new Stroke(paint),
-//     fill: new Fill(paint)
-//   }),
-//   'GeometryCollection': (paint) => new Style({
-//     stroke: new Stroke(paint),
-//     fill: new Fill(paint),
-//     image: getImage(paint)
-//   }),
-//   'Circle': (paint) => new Style({
-//     stroke: new Stroke(paint),
-//     fill: new Fill(paint)
-//   }),
-// };
