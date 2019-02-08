@@ -156,7 +156,7 @@ export class NgwMap {
       const adapter = NgwKit.addNgwLayer(options, this.webMap, this.options.baseUrl);
       if (adapter) {
         return adapter.then((layer) => {
-          if (layer) {
+          if (layer && layer.name) {
             this._ngwLayers[layer.name] = layer;
             this.webMap.showLayer(layer.name);
             return layer;
@@ -178,7 +178,7 @@ export class NgwMap {
       opt = this._updateGeojsonAdapterOptions(opt);
     }
     return this.webMap.addLayer(adapter || 'GEOJSON', opt).then((layer) => {
-      this.webMap.showLayer(layer.name);
+      this.webMap.showLayer(layer);
       return layer;
     });
   }
@@ -246,7 +246,7 @@ export class NgwMap {
           id: this.options.qmsId,
           qmsid: this.options.qmsId
         }).then((layer) => {
-          this.webMap.showLayer(layer.name);
+          this.webMap.showLayer(layer);
         });
       }
 

@@ -4,7 +4,8 @@ import {
   MapOptions,
   MapControl,
   CreateControlOptions,
-  CreateButtonControlOptions
+  CreateButtonControlOptions,
+  LayerMem
 } from '@nextgis/webmap';
 import Map from 'ol/Map';
 import View from 'ol/View';
@@ -29,11 +30,14 @@ import { PanelControl } from './controls/PanelControl';
 import { createControl } from './controls/createControl';
 import { createButtonControl } from './controls/createButtonControl';
 
+type Layer = ol.layer.Base;
+type Control = ol.control.Control;
+
 export type ForEachFeatureAtPixelCallback = (
   feature: ol.Feature,
   layer: ol.layer.Layer,
   evt: ol.MapBrowserPointerEvent) => void;
-export class OlMapAdapter implements MapAdapter {
+export class OlMapAdapter implements MapAdapter<Map, Layer> {
 
   static layerAdapters = {
     IMAGE: ImageAdapter,
@@ -58,12 +62,12 @@ export class OlMapAdapter implements MapAdapter {
   lonlatProjection = 'EPSG:4326';
   emitter = new EventEmitter();
 
-  map: Map;
+  map?: Map;
 
-  private _olView: View;
-  private _panelControl: PanelControl;
   private _mapClickEvents: Array<(evt: ol.MapBrowserPointerEvent) => void> = [];
   private _forEachFeatureAtPixel: ForEachFeatureAtPixelCallback[] = [];
+  private _olView?: View;
+  private _panelControl?: PanelControl;
 
   create(options: MapOptions) {
     this.options = { ...options };
@@ -99,8 +103,16 @@ export class OlMapAdapter implements MapAdapter {
     this._addMapListeners();
   }
 
-  getContainer(): HTMLElement {
-    return document.getElementById(this.options.target);
+  getContainer(): HTMLElement | undefined {
+    if (this.options.target) {
+      let element;
+      if (typeof this.options.target === 'string') {
+        element = document.getElementById(this.options.target);
+      } else if (this.options.target instanceof HTMLElement) {
+        element = this.options.target;
+      }
+      return element;
+    }
   }
 
   onMapLoad(cb?: any) {
@@ -110,47 +122,63 @@ export class OlMapAdapter implements MapAdapter {
   }
 
   setCenter(lonLat: [number, number]) {
-    this._olView.setCenter(fromLonLat(lonLat));
+    if (this._olView) {
+      this._olView.setCenter(fromLonLat(lonLat));
+    }
   }
 
   setZoom(zoom: number) {
-    this._olView.setZoom(zoom);
+    if (this._olView) {
+      this._olView.setZoom(zoom);
+    }
   }
 
   getZoom() {
-    return this._olView.getZoom();
+    if (this._olView) {
+      return this._olView.getZoom();
+    }
   }
 
   fit(e: [number, number, number, number]) {
-    const toExtent = transformExtent(
-      e,
-      this.lonlatProjection,
-      this.displayProjection,
-    );
-    this._olView.fit(toExtent);
+    if (this._olView) {
+      const toExtent = transformExtent(
+        e,
+        this.lonlatProjection,
+        this.displayProjection,
+      );
+      this._olView.fit(toExtent);
+    }
   }
 
   setRotation(angle: number) {
-    this._olView.setRotation(angle);
+    if (this._olView) {
+      this._olView.setRotation(angle);
+    }
   }
 
-  removeLayer(layer) {
-    this.map.removeLayer(layer);
+  removeLayer(layer: Layer) {
+    if (this.map) {
+      this.map.removeLayer(layer);
+    }
   }
 
-  showLayer(layer) {
-    this.map.addLayer(layer);
+  showLayer(layer: Layer) {
+    if (this.map) {
+      this.map.addLayer(layer);
+    }
   }
 
-  hideLayer(layer) {
-    this.map.removeLayer(layer);
+  hideLayer(layer: Layer) {
+    if (this.map) {
+      this.map.removeLayer(layer);
+    }
   }
 
-  setLayerOpacity(layerName: string, value: number) {
+  setLayerOpacity(layer: Layer, value: number) {
     // ignore
   }
 
-  setLayerOrder(layer, order, layers) {
+  setLayerOrder(layer: Layer, order: number, layers?: { [name: string]: LayerMem }) {
     if (layer.setZIndex) {
       layer.setZIndex(order);
     }
@@ -164,13 +192,17 @@ export class OlMapAdapter implements MapAdapter {
     return createButtonControl(options);
   }
 
-  addControl(control, position?: ControlPositions) {
-    this._panelControl.addControl(control, position);
-    return control;
+  addControl(control: Control, position: ControlPositions) {
+    if (this._panelControl) {
+      this._panelControl.addControl(control, position);
+      return control;
+    }
   }
 
-  removeControl(control) {
-    this._panelControl.removeControl(control);
+  removeControl(control: Control) {
+    if (this._panelControl) {
+      this._panelControl.removeControl(control);
+    }
   }
 
   onMapClick(evt: ol.MapBrowserPointerEvent) {
@@ -188,11 +220,13 @@ export class OlMapAdapter implements MapAdapter {
     });
 
     if (this._forEachFeatureAtPixel.length) {
-      this.map.forEachFeatureAtPixel(evt.pixel, (feature: ol.Feature, layer) => {
-        this._forEachFeatureAtPixel.forEach((x) => {
-          x(feature, layer, evt);
+      if (this.map) {
+        this.map.forEachFeatureAtPixel(evt.pixel, (feature, layer) => {
+          this._forEachFeatureAtPixel.forEach((x) => {
+            x(feature as ol.Feature, layer, evt);
+          });
         });
-      });
+      }
     }
 
     this.emitter.emit('click', {
@@ -205,22 +239,27 @@ export class OlMapAdapter implements MapAdapter {
   requestGeomString(pixel: { top: number, left: number }, pixelRadius = 5) {
     const { top, left } = pixel;
     const olMap = this.map;
-    const bounds = boundingExtent([
-      olMap.getCoordinateFromPixel([
-        left - pixelRadius,
-        top - pixelRadius,
-      ]),
-      olMap.getCoordinateFromPixel([
-        left + pixelRadius,
-        top + pixelRadius,
-      ]),
-    ]);
+    if (olMap) {
+      const bounds = boundingExtent([
+        olMap.getCoordinateFromPixel([
+          left - pixelRadius,
+          top - pixelRadius,
+        ]),
+        olMap.getCoordinateFromPixel([
+          left + pixelRadius,
+          top + pixelRadius,
+        ]),
+      ]);
 
-    return new WKT().writeGeometry(
-      Polygon.fromExtent(bounds));
+      return new WKT().writeGeometry(
+        Polygon.fromExtent(bounds)
+      );
+    }
   }
 
   private _addMapListeners() {
-    this.map.on('click', (evt: ol.MapBrowserPointerEvent) => this.onMapClick(evt), this);
+    if (this.map) {
+      this.map.on('click', (evt) => this.onMapClick(evt as ol.MapBrowserPointerEvent), this);
+    }
   }
 }

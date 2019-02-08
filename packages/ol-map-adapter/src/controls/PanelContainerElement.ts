@@ -4,7 +4,7 @@ import './PanelContainerElement.css';
 export class PanelContainerElement {
 
   private _container: HTMLElement;
-  private _positionsContainers: { [key in ControlPositions]: HTMLElement } = {
+  private _positionsContainers: { [key in ControlPositions]: HTMLElement | null } = {
     'bottom-left': null,
     'bottom-right': null,
     'top-left': null,
@@ -19,24 +19,26 @@ export class PanelContainerElement {
     return this._container;
   }
 
-  getPositionContainer(position?: ControlPositions): HTMLElement {
+  getPositionContainer(position: ControlPositions): HTMLElement | undefined {
     const positionContainer = this._positionsContainers[position];
     if (positionContainer) {
       return positionContainer;
     }
   }
 
-  newPositionContainer(position?: ControlPositions): HTMLElement {
+  newPositionContainer(position: ControlPositions): HTMLElement | undefined {
     const positionContainer = this.getPositionContainer(position);
-    const newContainer = document.createElement('div');
-    newContainer.className = 'openlayers-ctrl';
-    // reserve place for async loaded containers
-    if (position.indexOf('bottom') !== -1 && positionContainer.childElementCount) {
-      positionContainer.insertBefore(newContainer, positionContainer.firstChild);
-    } else {
-      positionContainer.appendChild(newContainer);
+    if (positionContainer) {
+      const newContainer = document.createElement('div');
+      newContainer.className = 'openlayers-ctrl';
+      // reserve place for async loaded containers
+      if (position.indexOf('bottom') !== -1 && positionContainer.childElementCount) {
+        positionContainer.insertBefore(newContainer, positionContainer.firstChild);
+      } else {
+        positionContainer.appendChild(newContainer);
+      }
+      return newContainer;
     }
-    return newContainer;
   }
 
   append(position: ControlPositions, element: HTMLElement) {

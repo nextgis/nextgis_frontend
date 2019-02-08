@@ -1,44 +1,42 @@
 import { LayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
 import ImageWMS from 'ol/source/ImageWMS';
 import ImageLayer from 'ol/layer/Image';
+import { olx } from 'openlayers';
 
 let ID = 1;
 
 export class ImageAdapter implements LayerAdapter {
 
-  name: string;
   layer: any;
+  name?: string;
 
-  addLayer(options?: ImageAdapterOptions) {
+  addLayer(options: ImageAdapterOptions) {
 
     this.name = options.id || 'image-' + ID++;
 
-    const imageOptions: any = {
+    const imageOptions: olx.source.ImageWMSOptions = {
       url: options.url,
       params: {
         resource: options.resourceId || options.id,
       },
       ratio: 1,
+      projection: undefined
     };
 
-    if (options.updateWmsParams) {
+    const updateWmsParams = options.updateWmsParams;
+    if (updateWmsParams) {
       imageOptions.imageLoadFunction = (image, src) => {
         const url = src.split('?')[0];
         const query = src.split('?')[1];
         const { resource, BBOX, WIDTH, HEIGHT } = queryToObject(query);
-        const queryString = objectToQuery(options.updateWmsParams({
+        const queryString = objectToQuery(updateWmsParams({
           resource,
           bbox: BBOX,
           width: WIDTH,
           height: HEIGHT
         }));
+        // @ts-ignore
         image.getImage().src = url + '?' + queryString;
-
-        // image.getImage().src = url
-        //   + '?resource=' + queryObject.resource
-        //   + '&extent=' + queryObject.BBOX
-        //   + '&size=' + queryObject.WIDTH + ',' + queryObject.HEIGHT
-        //   + '#' + Date.now(); // in-memory cachтe busting
       };
     }
 
@@ -83,7 +81,7 @@ function queryToObject(str: string) {
   return ret; // Object
 }
 
-function objectToQuery(obj: object, prefix?: string): string {
+function objectToQuery(obj: {[x: string]: any}, prefix?: string): string {
   const str = [];
   let p;
   for (p in obj) {

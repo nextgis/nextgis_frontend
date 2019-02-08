@@ -1,4 +1,4 @@
-import { LayerAdapter } from '@nextgis/webmap';
+import { LayerAdapter, AdapterOptions } from '@nextgis/webmap';
 import OSM from 'ol/source/OSM';
 // @ts-ignore
 import { ATTRIBUTION } from 'ol/source/OSM';
@@ -8,7 +8,7 @@ export class OsmAdapter implements LayerAdapter {
 
   name = 'osm';
 
-  addLayer(options?) {
+  addLayer(options?: AdapterOptions) {
     const attributions = [ATTRIBUTION];
     const layer = new TileLayer({
       source: new OSM({

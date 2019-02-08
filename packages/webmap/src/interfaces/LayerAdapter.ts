@@ -120,7 +120,7 @@ export interface LayerAdapter<O = any, L = any, M = any, F extends Feature = Fea
   getPaintFunctions?: { [name: string]: GetPaintFunction };
 
   options?: O;
-  name: string;
+  name?: string;
   layer?: L;
   map?: M;
   selected?: boolean;
