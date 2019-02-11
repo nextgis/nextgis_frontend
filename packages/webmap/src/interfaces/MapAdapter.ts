@@ -49,7 +49,7 @@ export interface MapAdapter<M = any, L = any, C = any> extends BaseMapAdapter<L>
   displayProjection?: string;
   map?: M;
   emitter: EventEmitter;
-  layerAdapters: { [name: string]: Type<LayerAdapter<any, L, M>> };
+  layerAdapters: { [name: string]: Type<LayerAdapter<M, L, any>> };
   controlAdapters: { [name: string]: Type<C> };
 
   create(options?: MapOptions): void;

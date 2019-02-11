@@ -1,4 +1,4 @@
-import WebMap, { StarterKit, AdapterOptions, LayerAdapters, LayerAdapter } from '@nextgis/webmap';
+import WebMap, { StarterKit, AdapterOptions, LayerAdaptersOptions, LayerAdapter } from '@nextgis/webmap';
 
 export interface QmsOptions {
   url: string;
@@ -75,7 +75,7 @@ export default class QmsKit implements StarterKit {
   private _createAdapter(webMap: WebMap) {
     const url = this.url;
     this.map = webMap;
-    const alias: { [key in QmsLayerType]: keyof LayerAdapters } = {
+    const alias: { [key in QmsLayerType]: keyof LayerAdaptersOptions } = {
       tms: 'TILE',
     };
 

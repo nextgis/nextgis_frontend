@@ -1,10 +1,10 @@
-import { LayerAdapter, LayerAdapters, TileAdapterOptions } from '@nextgis/webmap';
+import { BaseLayerAdapter, TileAdapterOptions } from '@nextgis/webmap';
 import TileLayer from 'ol/layer/Tile';
 import XYZ from 'ol/source/XYZ';
 
 let ID = 1;
 
-export class TileAdapter implements LayerAdapter {
+export class TileAdapter implements BaseLayerAdapter {
 
   name?: string;
 

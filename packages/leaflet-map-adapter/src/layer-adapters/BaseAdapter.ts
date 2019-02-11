@@ -1,9 +1,9 @@
-import { LayerAdapter, OnLayerClickOptions } from '@nextgis/webmap';
+import { BaseLayerAdapter, OnLayerClickOptions } from '@nextgis/webmap';
 import {Map, Layer} from 'leaflet';
 
 let ID = 1;
 
-export abstract class BaseAdapter implements LayerAdapter {
+export abstract class BaseAdapter implements BaseLayerAdapter {
 
   map: Map;
   name: string;

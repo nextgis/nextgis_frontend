@@ -6,7 +6,7 @@ import WebMap, {
   GeoJsonAdapterLayerType,
   MapControl,
   MapControls,
-  LayerAdapters,
+  LayerAdaptersOptions,
   Type,
   LayerAdapter,
   AdapterOptions
@@ -167,7 +167,7 @@ export class NgwMap {
   }
 
   @onMapLoad()
-  addGeoJsonLayer<K extends keyof LayerAdapters>(
+  addGeoJsonLayer<K extends keyof LayerAdaptersOptions>(
     opt: GeoJsonAdapterOptions,
     adapter?: K | Type<LayerAdapter>) {
 
