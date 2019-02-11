@@ -1,7 +1,7 @@
-import { LayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
+import { BaseLayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
 import { BaseAdapter } from './BaseAdapter';
 
-export class ImageAdapter extends BaseAdapter<ImageAdapterOptions> implements LayerAdapter {
+export class ImageAdapter extends BaseAdapter<ImageAdapterOptions> implements BaseLayerAdapter {
 
   addLayer(options: ImageAdapterOptions): string[] | undefined {
     if (this.options) {

@@ -1,8 +1,8 @@
-import { LayerAdapter, AdapterOptions } from '@nextgis/webmap';
+import { BaseLayerAdapter } from '@nextgis/webmap';
 import { BaseAdapter } from './BaseAdapter';
 import { Layer } from 'mapbox-gl';
 
-export class MvtAdapter extends BaseAdapter implements LayerAdapter {
+export class MvtAdapter extends BaseAdapter implements BaseLayerAdapter {
 
   addLayer(options: any): string[] {
     options = Object.assign({}, this.options, options || {});

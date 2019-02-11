@@ -1,4 +1,4 @@
-import WebMap, { LayerAdapter, LayerExtent } from '@nextgis/webmap';
+import WebMap, { BaseLayerAdapter, LayerExtent } from '@nextgis/webmap';
 import { ResourceItem } from '@nextgis/ngw-connector';
 import { fixUrlStr, getLayerAdapterOptions, updateWmsParams } from './utils';
 import { WebMapLayerItem } from './WebMapLayerItem';
@@ -6,7 +6,7 @@ import { TreeGroup, TreeLayer, Adapter, WebMapAdapterOptions } from './interface
 
 let ID = 1;
 
-export class WebMapLayerAdapter implements LayerAdapter {
+export class WebMapLayerAdapter implements BaseLayerAdapter {
 
   name: string;
   options: WebMapAdapterOptions;

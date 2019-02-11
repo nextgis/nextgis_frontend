@@ -7,6 +7,7 @@ import {
   IconOptions,
   DataLayerFilter,
   LayerDefinition,
+  VectorLayerAdapter,
 } from '@nextgis/webmap';
 import { BaseAdapter } from './BaseAdapter';
 import {
@@ -77,7 +78,7 @@ type Layer = string[];
 
 export class GeoJsonAdapter
   extends BaseAdapter<GeoJsonAdapterOptions>
-  implements LayerAdapter<GeoJsonAdapterOptions, Layer, Map, Feature> {
+  implements VectorLayerAdapter<Map, Layer, GeoJsonAdapterOptions, Feature> {
 
   selected: boolean = false;
 

@@ -1,4 +1,4 @@
-import { LayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
+import { BaseLayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
 // import wms from 'leaflet.wms/src/leaflet.wms.js';
 // @ts-ignore
 import wms from './wms';
@@ -7,7 +7,7 @@ import { Map } from 'leaflet';
 
 let ID = 1;
 
-export class ImageAdapter extends BaseAdapter implements LayerAdapter {
+export class ImageAdapter extends BaseAdapter implements BaseLayerAdapter {
 
   layer: any;
 

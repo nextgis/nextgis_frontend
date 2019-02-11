@@ -74,7 +74,7 @@ export interface GeoJsonAdapterOptions extends AdapterOptions {
   type?: GeoJsonAdapterLayerType;
   paint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
   selectedPaint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
-  selectedPaintDiff?: GeoJsonAdapterLayerPaint;
+  // selectedPaintDiff?: GeoJsonAdapterLayerPaint;
 
   selectable?: boolean;
   multiselect?: boolean;
@@ -99,6 +99,16 @@ export interface ImageAdapterOptions extends AdapterOptions {
 }
 
 export interface LayerAdapters {
+  'MVT': LayerAdapter;
+  'IMAGE': LayerAdapter;
+  'OSM': LayerAdapter;
+  'TILE': LayerAdapter;
+  'MARKER': LayerAdapter;
+  'GEOJSON': VectorLayerAdapter;
+  [name: string]: LayerAdapter;
+}
+
+export interface LayerAdaptersOptions {
   'MVT': MvtAdapterOptions;
   'IMAGE': ImageAdapterOptions;
   'OSM': AdapterOptions;
@@ -116,19 +126,34 @@ export interface LayerDefinition<F extends Feature = Feature, L = any> {
 
 export type DataLayerFilter<F extends Feature = Feature, L = any> = (opt: LayerDefinition<F, L>) => boolean;
 
-export interface LayerAdapter<O = any, L = any, M = any, F extends Feature = Feature> {
-  getPaintFunctions?: { [name: string]: GetPaintFunction };
+export type LayerAdapter<M = any, L = any, O extends AdapterOptions = AdapterOptions> =
+  BaseLayerAdapter<M, L, O> |
+  VectorLayerAdapter<M, L, O>;
+
+export interface BaseLayerAdapter<M = any, L = any, O = any> {
 
   options?: O;
   name?: string;
   layer?: L;
   map?: M;
-  selected?: boolean;
 
   addLayer(options: O): any | Promise<any>;
 
   showLayer?(layer: L): void;
   hideLayer?(layer: L): void;
+
+  getExtent?(): LayerExtent | Promise<LayerExtent> | undefined;
+
+  getDependLayers?(): L[];
+}
+
+export interface VectorLayerAdapter<
+  M = any, L = any, O extends GeoJsonAdapterOptions = GeoJsonAdapterOptions, F extends Feature = Feature>
+  extends BaseLayerAdapter<M, L, O> {
+
+  getPaintFunctions?: { [name: string]: GetPaintFunction };
+
+  selected?: boolean;
 
   getLayers?(): Array<LayerDefinition<F, L>>;
 
@@ -143,8 +168,4 @@ export interface LayerAdapter<O = any, L = any, M = any, F extends Feature = Fea
   clearLayer?(cb?: (feature: Feature) => boolean): void;
 
   onLayerClick?(opt: OnLayerClickOptions): Promise<any>;
-
-  getExtent?(): LayerExtent | Promise<LayerExtent> | undefined;
-
-  getDependLayers?(): L[];
 }

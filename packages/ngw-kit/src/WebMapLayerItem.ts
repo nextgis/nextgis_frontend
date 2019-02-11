@@ -1,6 +1,6 @@
 import Item, { ItemOptions } from '@nextgis/item';
 
-import WebMap, { LayerAdapters, LayerAdapter } from '@nextgis/webmap';
+import WebMap, { LayerAdaptersOptions, LayerAdapter } from '@nextgis/webmap';
 import { TreeGroup, TreeLayer } from './interfaces';
 
 export class WebMapLayerItem extends Item<ItemOptions> {
@@ -60,7 +60,7 @@ export class WebMapLayerItem extends Item<ItemOptions> {
         });
       }
     } else if (item.item_type === 'layer') {
-      const adapter = (item.adapter || item.layer_adapter.toUpperCase()) as keyof LayerAdapters;
+      const adapter = (item.adapter || item.layer_adapter.toUpperCase()) as keyof LayerAdaptersOptions;
       item.id = Number(this.id);
       const options: any = {
         maxZoom: this.webMap.options.maxZoom,
