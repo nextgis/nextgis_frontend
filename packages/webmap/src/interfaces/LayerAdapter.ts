@@ -130,10 +130,16 @@ export type LayerAdapter<M = any, L = any, O extends AdapterOptions = AdapterOpt
   BaseLayerAdapter<M, L, O> |
   VectorLayerAdapter<M, L, O>;
 
-export interface BaseLayerAdapter<M = any, L = any, O = any> {
+export interface BaseLayerAdapter<M = any, L = any, O extends AdapterOptions = AdapterOptions> {
+
+  id?: string;
+  onMap?: boolean;
+  baseLayer?: boolean;
+  order?: number;
+  // name?: string;
 
   options?: O;
-  name?: string;
+
   layer?: L;
   map?: M;
 

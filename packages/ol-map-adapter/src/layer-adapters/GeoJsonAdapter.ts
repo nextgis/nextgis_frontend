@@ -21,29 +21,19 @@ import { asArray } from 'ol/color';
 import { Feature } from 'geojson';
 import { ForEachFeatureAtPixelCallback } from '../OlMapAdapter';
 
-let ID = 1;
 type Layer = ol.layer.Base;
 type OlStyle = ol.style.Style | ol.style.Style[] | null;
 
 export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAdapterOptions> {
 
-  map: Map;
-  name: string;
   layer?: VectorLayer;
-  options?: GeoJsonAdapterOptions;
   paint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
   selectedPaint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
   selected: boolean = false;
 
   private _selectedFeatures: ol.Feature[] = [];
 
-  constructor(map: Map, options: GeoJsonAdapterOptions) {
-    this.map = map;
-    if (options.onLayerClick) {
-      this.onLayerClick = options.onLayerClick;
-    }
-    this.name = options.id || 'geojson-' + String(ID++);
-  }
+  constructor(public map: Map, public options: GeoJsonAdapterOptions) {}
 
   onLayerClick?(opt: OnLayerClickOptions): Promise<any>;
 
@@ -52,7 +42,6 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
     this.paint = options.paint;
 
     this.selectedPaint = options.selectedPaint;
-    this.name = options.id || 'geojson-' + ID++;
 
     const vectorSource = new VectorSource();
     const data = options.data;

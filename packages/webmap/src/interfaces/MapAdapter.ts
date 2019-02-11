@@ -9,7 +9,6 @@ import {
   CreateToggleControlOptions
 } from './MapControl';
 import { MapOptions } from './WebMapApp';
-import { LayerMem } from '../WebMap';
 import { LatLng, MapCenter, LayerExtent, Pixel } from './BaseTypes';
 
 export interface MapClickEvent {
@@ -31,7 +30,7 @@ export interface BaseMapAdapter<L = any> {
   setLayerOpacity(layer: L, opacity: number): void;
   showLayer(layer: L): void;
   hideLayer(layer: L): void;
-  setLayerOrder(layer: L, order: number, layers?: { [name: string]: LayerMem }): void;
+  setLayerOrder(layer: L, order: number, layers?: { [name: string]: LayerAdapter }): void;
 
   setCenter(latLng: MapCenter): void;
   setZoom(zoom: number): void;

@@ -1,27 +1,18 @@
-import { BaseLayerAdapter, OnLayerClickOptions, AdapterOptions } from '@nextgis/webmap';
+import { BaseLayerAdapter, AdapterOptions } from '@nextgis/webmap';
 import { Map } from 'mapbox-gl';
+import { TLayer } from '../MapboxglMapAdapter';
 
-let ID = 1;
+let ID = 0;
 
-export abstract class BaseAdapter<O extends AdapterOptions = AdapterOptions> implements BaseLayerAdapter {
+export abstract class BaseAdapter<O extends AdapterOptions = AdapterOptions>
+  implements BaseLayerAdapter<Map, TLayer, O> {
 
-  map: Map;
-  name: string;
-  options?: O;
-  layer?: string[];
+  id: string;
+  layer?: TLayer;
 
-  constructor(map: Map, options?: O) {
-    this.map = map;
-    this.name = (options && options.id) || String(ID++);
-    if (options) {
-      this.options = { ...options };
-    }
-    if (options && options.onLayerClick) {
-      this.onLayerClick = options.onLayerClick;
-    }
+  constructor(public map: Map, public options: O) {
+    this.id = this.options.id || `layer-${ID++}`;
   }
-
-  onLayerClick?(options: OnLayerClickOptions): Promise<any>;
 
   addLayer(options?: any): string[] | Promise<string[]> | undefined {
     return [''];

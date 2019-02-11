@@ -6,15 +6,11 @@ import VectorSource from 'ol/source/Vector';
 // @ts-ignore
 import { fromLonLat } from 'ol/proj';
 
-let ID = 1;
-
 export class MarkerAdapter implements BaseLayerAdapter {
 
-  name?: string;
+  layer?: VectorLayer;
 
   addLayer(options: MarkerAdapterOptions) {
-
-    this.name = options.id || 'marker-' + ID++;
 
     const { lat, lng } = options.latLng;
 

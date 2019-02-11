@@ -1,5 +1,4 @@
 import {
-  LayerAdapter,
   GeoJsonAdapterOptions,
   GeoJsonAdapterLayerType,
   GeoJsonAdapterLayerPaint,
@@ -9,7 +8,6 @@ import {
   LayerDefinition,
   VectorLayerAdapter,
 } from '@nextgis/webmap';
-import { BaseAdapter } from './BaseAdapter';
 import {
   GeoJsonObject,
   GeoJsonGeometryTypes,
@@ -26,19 +24,15 @@ import {
   // RasterPaint, CirclePaint, HeatmapPaint, HillshadePaint,
 } from 'mapbox-gl';
 
+// type MapboxPaint = BackgroundPaint | FillPaint | FillExtrusionPaint | LinePaint | SymbolPaint |
+//   RasterPaint | CirclePaint | HeatmapPaint | HillshadePaint;
+
 import { getImage } from '../utils/image_icons';
-
-let ID = 1;
-
-// interface Feature<G extends GeometryObject | null = Geometry, P = GeoJsonProperties> extends F<G, P> {
-//   _rendrom_id: string;
-// }
+import { TLayer } from '../MapboxglMapAdapter';
+import { BaseAdapter } from './BaseAdapter';
 
 interface Feature<G extends GeometryObject | null = Geometry, P = GeoJsonProperties> extends F<G, P> {
 }
-
-// type MapboxPaint = BackgroundPaint | FillPaint | FillExtrusionPaint | LinePaint | SymbolPaint |
-//   RasterPaint | CirclePaint | HeatmapPaint | HillshadePaint;
 
 const allowedParams: Array<[string, string] | string> = ['color', 'opacity'];
 const allowedByType = {
@@ -74,11 +68,8 @@ const PAINT = {
   radius: 10
 };
 
-type Layer = string[];
-
-export class GeoJsonAdapter
-  extends BaseAdapter<GeoJsonAdapterOptions>
-  implements VectorLayerAdapter<Map, Layer, GeoJsonAdapterOptions, Feature> {
+export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
+  implements VectorLayerAdapter<Map, TLayer, GeoJsonAdapterOptions, Feature> {
 
   selected: boolean = false;
 
@@ -90,14 +81,12 @@ export class GeoJsonAdapter
 
   private $onLayerClick?: (e: MapLayerMouseEvent) => void;
 
-  constructor(map: Map, options?: GeoJsonAdapterOptions) {
+  constructor(public map: Map, public options: GeoJsonAdapterOptions) {
     super(map, options);
-    // bind methods for event listeners
     this.$onLayerClick = this._onLayerClick.bind(this);
   }
 
   async addLayer(options: GeoJsonAdapterOptions): Promise<string[]> {
-    this.name = options.id || 'geojson-' + ID++;
     options = this.options = { ...this.options, ...(options || {}) };
     const data = options.data;
     let type: GeoJsonAdapterLayerType | undefined;
@@ -119,11 +108,11 @@ export class GeoJsonAdapter
         }
       });
       const features = data as Feature | FeatureCollection;
-      this.layer = [this.name];
+      this.layer = [this.id];
       if (options.paint) {
-        await this._getAddLayerOptions(this.name, features, options.paint, type);
+        await this._getAddLayerOptions(this.id, features, options.paint, type);
         if (options.selectedPaint) {
-          this._selectionName = this.name + '-highlighted';
+          this._selectionName = this.id + '-highlighted';
           await this._getAddLayerOptions(this._selectionName, features, options.selectedPaint, type);
           this.map.setFilter(this._selectionName, ['in', '_rendrom_id', '']);
           this.layer.push(this._selectionName);
@@ -155,7 +144,7 @@ export class GeoJsonAdapter
     });
   }
 
-  filter(fun: DataLayerFilter<Feature, Layer>) {
+  filter(fun: DataLayerFilter<Feature, TLayer>) {
     this._filteredFeatureIds = [];
     this._features.forEach((feature) => {
       const ok = fun({ feature });
@@ -168,7 +157,7 @@ export class GeoJsonAdapter
   }
 
   getSelected() {
-    const features: Array<LayerDefinition<Feature, Layer>> = [];
+    const features: Array<LayerDefinition<Feature, TLayer>> = [];
     this._features.forEach((x) => {
       const id = this._getRendromId(x);
       if (id && this._selectedFeatureIds.indexOf(id) !== -1) {
@@ -351,8 +340,8 @@ export class GeoJsonAdapter
         this._selectFeature(feature);
         isSelected = true;
       }
-      if (this.onLayerClick) {
-        this.onLayerClick({
+      if (this.options.onLayerClick) {
+        this.options.onLayerClick({
           adapter: this,
           feature,
           selected: isSelected
@@ -421,9 +410,9 @@ export class GeoJsonAdapter
       this.map.setFilter(this._selectionName, ['in', '_rendrom_id', ...selectionArray]);
     }
     if (this._filteredFeatureIds.length) {
-      this.map.setFilter(this.name, ['in', '_rendrom_id', ...filteredArray]);
+      this.map.setFilter(this.id, ['in', '_rendrom_id', ...filteredArray]);
     } else {
-      this.map.setFilter(this.name, ['!in', '_rendrom_id', ...selectionArray]);
+      this.map.setFilter(this.id, ['!in', '_rendrom_id', ...selectionArray]);
     }
   }
 

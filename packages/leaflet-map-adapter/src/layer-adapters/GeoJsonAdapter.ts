@@ -5,7 +5,9 @@ import {
   GeoJsonAdapterLayerType,
   IconOptions,
   GetPaintCallback,
-  GetPaintFunction
+  GetPaintFunction,
+  LayerDefinition,
+  DataLayerFilter
 } from '@nextgis/webmap';
 import {
   GeoJSON,
@@ -17,12 +19,11 @@ import {
   FeatureGroup,
   DomEvent,
   LatLngExpression,
-  LeafletEvent
+  LeafletEvent,
+  Map,
+  Layer
 } from 'leaflet';
-import { BaseAdapter } from './BaseAdapter';
 import { GeoJsonObject, GeoJsonGeometryTypes, FeatureCollection, Feature, GeometryCollection } from 'geojson';
-
-let ID = 1;
 
 const typeAlias: { [key in GeoJsonGeometryTypes]: GeoJsonAdapterLayerType } = {
   'Point': 'circle',
@@ -50,27 +51,25 @@ for (const a in typeAlias) {
   }
 }
 
-interface LayerMem {
-  layer: any;
-  feature: Feature;
-}
+type LayerMem = LayerDefinition<Feature>;
 
-export class GeoJsonAdapter extends BaseAdapter implements VectorLayerAdapter {
+export class GeoJsonAdapter implements VectorLayerAdapter<Map> {
 
   static getPaintFunctions?: { [name: string]: GetPaintFunction };
 
   layer = new FeatureGroup();
-
-  paint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
-  selectedPaint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
   selected = false;
-  options?: GeoJsonAdapterOptions;
-  type?: GeoJsonAdapterLayerType;
 
   getPaintFunctions = GeoJsonAdapter.getPaintFunctions;
 
+  private paint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
+  private selectedPaint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
+  private type?: GeoJsonAdapterLayerType;
+
   private _layers: LayerMem[] = [];
   private _selectedLayers: LayerMem[] = [];
+
+  constructor(public map: any, public options: GeoJsonAdapterOptions) { }
 
   addLayer(options?: GeoJsonAdapterOptions) {
     if (options) {
@@ -80,7 +79,6 @@ export class GeoJsonAdapter extends BaseAdapter implements VectorLayerAdapter {
       this.selectedPaint = options.selectedPaint;
       options.paint = this.paint;
 
-      this.name = options.id || 'geojson-' + ID++;
       if (options.data) {
         this.addData(options.data);
       }
@@ -88,7 +86,7 @@ export class GeoJsonAdapter extends BaseAdapter implements VectorLayerAdapter {
     }
   }
 
-  select(findFeatureFun?: (opt: LayerMem) => boolean) {
+  select(findFeatureFun?: DataLayerFilter) {
     if (findFeatureFun) {
       const feature = this._layers.filter(findFeatureFun);
       feature.forEach((x) => {
@@ -102,7 +100,7 @@ export class GeoJsonAdapter extends BaseAdapter implements VectorLayerAdapter {
     }
   }
 
-  unselect(findFeatureFun?: (opt: LayerMem) => boolean) {
+  unselect(findFeatureFun?: DataLayerFilter) {
     if (findFeatureFun) {
       const feature = this._layers.filter(findFeatureFun);
       feature.forEach((x) => {
@@ -122,7 +120,7 @@ export class GeoJsonAdapter extends BaseAdapter implements VectorLayerAdapter {
     });
   }
 
-  filter(fun: (opt: LayerMem) => boolean) {
+  filter(fun: DataLayerFilter) {
     // Some optimization
     // @ts-ignore
     const _map = this.layer._map;
@@ -132,10 +130,12 @@ export class GeoJsonAdapter extends BaseAdapter implements VectorLayerAdapter {
 
     this._layers.forEach(({ feature, layer }) => {
       const ok = fun({ feature, layer });
-      if (ok) {
-        this.layer.addLayer(layer);
-      } else {
-        this.layer.removeLayer(layer);
+      if (layer) {
+        if (ok) {
+          this.layer.addLayer(layer);
+        } else {
+          this.layer.removeLayer(layer);
+        }
       }
     });
     if (_map) {
@@ -144,18 +144,22 @@ export class GeoJsonAdapter extends BaseAdapter implements VectorLayerAdapter {
   }
 
   getLayers() {
-    return this._layers.map(({ layer, feature }) => Object.create({
-      feature,
-      layer,
-      visible: layer._map
-    }));
+    return this._layers.map(({ layer, feature }) => {
+      // @ts-ignore
+      const visible = layer && layer._map;
+      return {
+        feature,
+        layer,
+        visible
+      };
+    });
   }
 
   clearLayer(cb?: (feature: Feature) => boolean) {
     if (cb) {
       for (let fry = this._layers.length; fry--;) {
         const layerMem = this._layers[fry];
-        const exist = cb(layerMem.feature);
+        const exist = layerMem.feature && cb(layerMem.feature);
         if (exist) {
           this.layer.removeLayer(layerMem.layer);
           this._layers.splice(fry, 1);
@@ -301,8 +305,8 @@ export class GeoJsonAdapter extends BaseAdapter implements VectorLayerAdapter {
       this._selectLayer(layer);
       isSelected = true;
     }
-    if (this.onLayerClick) {
-      this.onLayerClick({
+    if (this.options.onLayerClick) {
+      this.options.onLayerClick({
         adapter: this,
         layer,
         feature: layer.feature,

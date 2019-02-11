@@ -5,9 +5,9 @@ import { Layer } from 'mapbox-gl';
 export class MvtAdapter extends BaseAdapter implements BaseLayerAdapter {
 
   addLayer(options: any): string[] {
-    options = Object.assign({}, this.options, options || {});
+    options = this.options = { ...this.options, ...(options || {}) };
     // read about https://blog.mapbox.com/vector-tile-specification-version-2-whats-changed-259d4cd73df6
-    const idString = String(this.name);
+    const idString = String(this.id);
 
     const layerOptions: Layer = {
       'id': idString,
@@ -27,7 +27,7 @@ export class MvtAdapter extends BaseAdapter implements BaseLayerAdapter {
     }
 
     this.map.addLayer(layerOptions, options.before);
-    this.layer = [this.name];
+    this.layer = [this.id];
     return this.layer;
   }
 }

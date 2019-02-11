@@ -1,7 +1,6 @@
 import {
   MapAdapter,
   MapOptions,
-  LayerMem,
   MapControl,
   CreateControlOptions,
   CreateButtonControlOptions,
@@ -170,7 +169,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     // ignore
   }
 
-  setLayerOrder(layer: any, order: number, layers: { [x: string]: LayerMem }) {
+  setLayerOrder(layer: any, order: number, layers: { [x: string]: LayerAdapter }) {
     const baseLayers: string[] = [];
 
     const orderedLayers = Object.keys(layers).filter((x) => {
