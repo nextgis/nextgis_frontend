@@ -59,7 +59,7 @@ export interface NgwConfig {
 }
 
 export interface NgwKitOptions {
-  baseUrl?: string;
+  baseUrl: string;
   pixelRadius?: number;
   resourceId?: number;
   auth?: {
@@ -76,6 +76,7 @@ export interface RequestOptions {
 
 export interface WebMapAdapterOptions extends AdapterOptions {
   baseUrl: string;
+  resourceId?: number;
   webMap: WebMap;
   connector: NgwConnector;
 }

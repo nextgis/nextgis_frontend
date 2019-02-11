@@ -23,14 +23,18 @@ interface Arglist {
   0: string;
 }
 
-export interface LayerMem<L = any, M = any, O extends AdapterOptions = AdapterOptions> {
-  id: string;
-  layer: L;
-  onMap: boolean;
-  order?: number;
-  baseLayer?: boolean;
-  adapter: LayerAdapter<M, L, O>;
-}
+type LayerDef = string | LayerAdapter;
+
+let LAYER_ID = 0;
+
+// export interface LayerMem<L = any, M = any, O extends AdapterOptions = AdapterOptions> {
+//   id: string;
+//   layer: L;
+//   onMap: boolean;
+//   order?: number;
+//   baseLayer?: boolean;
+//   adapter: LayerAdapter<M, L, O>;
+// }
 
 export class WebMap<M = any, L = any, C = any> {
 
@@ -51,7 +55,7 @@ export class WebMap<M = any, L = any, C = any> {
 
   private _starterKits: StarterKit[];
   private _baseLayers: string[] = [];
-  private _layers: { [x: string]: LayerMem } = {};
+  private _layers: { [x: string]: LayerAdapter } = {};
   private _layersIds: number = 1;
   private _selectedLayers: string[] = [];
   private _extent?: [number, number, number, number];
@@ -108,8 +112,8 @@ export class WebMap<M = any, L = any, C = any> {
       minZoom: this.options.minZoom,
       ...options
     }, true);
-    if (layer && layer.name) {
-      this._baseLayers.push(layer.name);
+    if (layer && layer.id) {
+      this._baseLayers.push(layer.id);
     }
     return layer;
   }
@@ -151,10 +155,10 @@ export class WebMap<M = any, L = any, C = any> {
     return this;
   }
 
-  async fitLayer(layerId: string) {
-    const layer = this.getLayer(layerId);
-    if (layer && layer.adapter.getExtent) {
-      const extent = await layer.adapter.getExtent();
+  async fitLayer(layerDef: LayerDef) {
+    const layer = this.getLayer(layerDef);
+    if (layer && layer.getExtent) {
+      const extent = await layer.getExtent();
       if (extent) {
         this.fit(extent);
       }
@@ -169,17 +173,29 @@ export class WebMap<M = any, L = any, C = any> {
     return this.mapAdapter.layerAdapters[name];
   }
 
-  getLayer(layerName: string): LayerMem {
-    return this._layers[layerName];
+  getLayer(layerDef: LayerDef): LayerAdapter | undefined {
+    if (typeof layerDef === 'string') {
+      return this._layers[layerDef];
+    }
+    return layerDef;
+  }
+
+  getLayerId(layerDef: LayerDef): string | undefined {
+    const layer = this.getLayer(layerDef);
+    if (layer && layer.options) {
+      return layer.options.id;
+    } else {
+      throw new Error('No id for layer');
+    }
   }
 
   getLayers(): string[] {
     return Object.keys(this._layers);
   }
 
-  isLayerOnTheMap(layerName: string): boolean {
-    const layerMem = this._layers[layerName];
-    return layerMem && layerMem.onMap;
+  isLayerOnTheMap(layerDef: LayerDef): boolean {
+    const layer = this.getLayer(layerDef);
+    return layer && layer.onMap !== undefined ? layer.onMap : false;
   }
 
   @onLoad('build-map')
@@ -237,34 +253,37 @@ export class WebMap<M = any, L = any, C = any> {
 
   async addLayer<K extends keyof LayerAdapters, O extends AdapterOptions = AdapterOptions>(
     adapter: K | Type<LayerAdapters[K]>,
-    options: O | LayerAdaptersOptions[K] = {},
-    baselayer?: boolean): Promise<LayerAdapter> {
+    options: O | LayerAdaptersOptions[K],
+    baseLayer?: boolean): Promise<LayerAdapter> {
 
     let adapterEngine: Type<LayerAdapter>;
     if (typeof adapter === 'string') {
-      adapterEngine = this.getLayerAdapter((adapter as string));
+      adapterEngine = this.getLayerAdapter(adapter);
     } else {
       adapterEngine = adapter as Type<LayerAdapter>;
     }
     if (adapterEngine) {
       options.onLayerClick = (e) => this._onLayerClick(e);
+
+      options.id = options.id || String(LAYER_ID++);
+
       const _adapter = new adapterEngine(this.mapAdapter.map, options);
+      _adapter.id = options.id;
+      _adapter.onMap = false;
       const order = this._layersIds++;
       await this.onMapLoad();
+      await _adapter.addLayer(options);
 
-      const layer = await _adapter.addLayer(options);
-
-      const layerId = _adapter.name;
+      const layerId = _adapter.id;
       if (layerId) {
-        const layerOpts: LayerMem = { id: layerId, layer, adapter: _adapter, onMap: false };
-        if (baselayer) {
-          layerOpts.baseLayer = true;
-          layerOpts.order = 0;
+        if (baseLayer) {
+          _adapter.baseLayer = true;
+          _adapter.order = 0;
           this._baseLayers.push(layerId);
         } else {
-          layerOpts.order = options.order || order;
+          _adapter.order = options.order || order;
         }
-        this._layers[layerId] = layerOpts;
+        this._layers[layerId] = _adapter;
 
         if (options.visibility) {
           this.showLayer(layerId);
@@ -286,34 +305,27 @@ export class WebMap<M = any, L = any, C = any> {
     this._layers = {};
   }
 
-  removeLayer(layerName: string) {
-    const layerMem = this._layers[layerName];
-    if (layerMem) {
+  removeLayer(layerDef: LayerDef) {
+    const layerMem = this.getLayer(layerDef);
+    const layerId = layerMem && this.getLayerId(layerMem);
+    if (layerMem && layerId) {
       this.mapAdapter.removeLayer(layerMem.layer);
       if (layerMem.baseLayer) {
-        const index = this._baseLayers.indexOf(layerName);
+        const index = this._baseLayers.indexOf(layerId);
         if (index) {
           this._baseLayers.splice(index, 1);
         }
       }
-      delete this._layers[layerName];
+      delete this._layers[layerId];
     }
   }
 
-  showLayer(layer: string | LayerAdapter) {
-    if (typeof layer === 'string') {
-      this.toggleLayer(layer, true);
-    } else if (layer.name) {
-      this.toggleLayer(layer.name, true);
-    }
+  showLayer(layerDef: LayerDef) {
+    this.toggleLayer(layerDef, true);
   }
 
-  hideLayer(layer: string | LayerAdapter) {
-    if (typeof layer === 'string') {
-      this.toggleLayer(layer, false);
-    } else if (layer.name) {
-      this.toggleLayer(layer.name, false);
-    }
+  hideLayer(layerDef: LayerDef) {
+    this.toggleLayer(layerDef, false);
   }
 
   setLayerOpacity(layerName: string, value: number) {
@@ -333,17 +345,17 @@ export class WebMap<M = any, L = any, C = any> {
     return scale / (mpu * this.IPM * this.DPI);
   }
 
-  toggleLayer(layerName: string, status?: boolean) {
-    const layer = this._layers[layerName];
+  toggleLayer(layerDef: LayerDef, status?: boolean) {
+    const layer = this.getLayer(layerDef);
+    const onMap = layer && layer.onMap;
+    const toStatus = status !== undefined ? status : !onMap;
 
-    const toStatus = status !== undefined ? status : !layer.onMap;
-
-    const action = (source: any, l: LayerMem) => {
+    const action = (source: any, l: LayerAdapter) => {
       l.onMap = toStatus;
       if (toStatus && source) {
         const order = l.baseLayer ? 0 : l.order;
-        if (l.adapter && l.adapter.showLayer) {
-          l.adapter.showLayer.call(l.adapter, l.layer);
+        if (l.showLayer) {
+          l.showLayer.call(l, l.layer);
         } else {
           this.mapAdapter.showLayer(l.layer);
         }
@@ -351,8 +363,8 @@ export class WebMap<M = any, L = any, C = any> {
           this.mapAdapter.setLayerOrder(l.layer, order, this._layers);
         }
       } else {
-        if (l.adapter && l.adapter.hideLayer) {
-          l.adapter.hideLayer.call(l.adapter, l.layer);
+        if (l.hideLayer) {
+          l.hideLayer.call(l, l.layer);
         } else {
           this.mapAdapter.hideLayer(l.layer);
         }
@@ -379,54 +391,64 @@ export class WebMap<M = any, L = any, C = any> {
     this.emitter.emit('click', evt);
   }
 
-  selectLayer(layerId: string) {
-    const layerMem = this.getLayer(layerId);
-    const adapter = layerMem && layerMem.adapter as VectorLayerAdapter;
-    if (adapter && adapter.select) {
-      adapter.select();
-    }
-    this._selectedLayers.push(layerId);
-  }
-
-  unSelectLayer(layerId: string) {
-    const layerMem = this.getLayer(layerId);
-    const adapter = layerMem && layerMem.adapter as VectorLayerAdapter;
-    if (adapter.unselect) {
-      adapter.unselect();
-    }
-    const index = this._selectedLayers.indexOf(layerId);
-    if (index !== -1) {
-      this._selectedLayers.splice(index, 1);
+  selectLayer(layerDef: LayerDef) {
+    const layerMem = this.getLayer(layerDef);
+    if (layerMem) {
+      const adapter = layerMem as VectorLayerAdapter;
+      if (adapter && adapter.select) {
+        adapter.select();
+      }
+      const layerId = this.getLayerId(layerMem);
+      if (layerId) {
+        this._selectedLayers.push(layerId);
+      }
     }
   }
 
-  filterLayer(layerId: string, filter: DataLayerFilter<Feature, L>) {
-    const layerMem = this.getLayer(layerId);
-    const adapter = layerMem && layerMem.adapter as VectorLayerAdapter;
+  unSelectLayer(layerDef: LayerDef) {
+    const layerMem = this.getLayer(layerDef);
+    if (layerMem) {
+      const adapter = layerMem && layerMem as VectorLayerAdapter;
+      if (adapter.unselect) {
+        adapter.unselect();
+      }
+      const layerId = this.getLayerId(layerMem);
+      if (layerId) {
+        const index = this._selectedLayers.indexOf(layerId);
+        if (index !== -1) {
+          this._selectedLayers.splice(index, 1);
+        }
+      }
+    }
+  }
+
+  filterLayer(layerDef: LayerDef, filter: DataLayerFilter<Feature, L>) {
+    const layerMem = this.getLayer(layerDef);
+    const adapter = layerMem as VectorLayerAdapter;
     if (adapter.filter) {
       adapter.filter(filter);
     }
   }
 
-  setLayerData(layerId: string, data: GeoJsonObject) {
-    const layerMem = this.getLayer(layerId);
-    const adapter = layerMem && layerMem.adapter as VectorLayerAdapter;
+  setLayerData(layerDef: LayerDef, data: GeoJsonObject) {
+    const layerMem = this.getLayer(layerDef);
+    const adapter = layerMem as VectorLayerAdapter;
     if (adapter.setData) {
       adapter.setData(data);
     }
   }
 
-  addLayerData(layerId: string, data: GeoJsonObject) {
-    const layerMem = this.getLayer(layerId);
-    const adapter = layerMem && layerMem.adapter as VectorLayerAdapter;
+  addLayerData(layerDef: LayerDef, data: GeoJsonObject) {
+    const layerMem = this.getLayer(layerDef);
+    const adapter = layerMem as VectorLayerAdapter;
     if (adapter.addData) {
       adapter.addData(data);
     }
   }
 
-  clearLayerData(layerId: string, cb?: (feature: Feature) => boolean) {
-    const layerMem = this.getLayer(layerId);
-    const adapter = layerMem && layerMem.adapter as VectorLayerAdapter;
+  clearLayerData(layerDef: LayerDef, cb?: (feature: Feature) => boolean) {
+    const layerMem = this.getLayer(layerDef);
+    const adapter = layerMem as VectorLayerAdapter;
     if (adapter.clearLayer) {
       adapter.clearLayer(cb);
     }
@@ -436,11 +458,11 @@ export class WebMap<M = any, L = any, C = any> {
     const attributions: string[] = [];
     for (const l in this._layers) {
       if (this._layers.hasOwnProperty(l)) {
-        const layerMeme = this._layers[l];
+        const layerMem = this._layers[l];
         const onlyVisible = options.onlyVisible !== undefined ? options.onlyVisible : true;
-        const useLayerAttr = onlyVisible ? layerMeme.onMap : true;
+        const useLayerAttr = onlyVisible ? layerMem.onMap : true;
         if (useLayerAttr) {
-          const attr = layerMeme.adapter.options && layerMeme.adapter.options.attribution;
+          const attr = layerMem.options && layerMem.options.attribution;
           if (attr) {
             attributions.push(attr);
           }

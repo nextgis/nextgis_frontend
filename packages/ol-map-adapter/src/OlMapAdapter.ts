@@ -5,7 +5,7 @@ import {
   MapControl,
   CreateControlOptions,
   CreateButtonControlOptions,
-  LayerMem
+  LayerAdapter
 } from '@nextgis/webmap';
 import Map from 'ol/Map';
 import View from 'ol/View';
@@ -32,6 +32,8 @@ import { createButtonControl } from './controls/createButtonControl';
 
 type Layer = ol.layer.Base;
 type Control = ol.control.Control;
+
+type TLayerAdapter = LayerAdapter<Map, Layer>;
 
 export type ForEachFeatureAtPixelCallback = (
   feature: ol.Feature,
@@ -178,7 +180,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     // ignore
   }
 
-  setLayerOrder(layer: Layer, order: number, layers?: { [name: string]: LayerMem }) {
+  setLayerOrder(layer: Layer, order: number, layers?: { [name: string]: TLayerAdapter }) {
     if (layer.setZIndex) {
       layer.setZIndex(order);
     }

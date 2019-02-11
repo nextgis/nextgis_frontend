@@ -4,28 +4,22 @@ import { fixUrlStr, getLayerAdapterOptions, updateWmsParams } from './utils';
 import { WebMapLayerItem } from './WebMapLayerItem';
 import { TreeGroup, TreeLayer, Adapter, WebMapAdapterOptions } from './interfaces';
 
-let ID = 1;
-
 export class WebMapLayerAdapter implements BaseLayerAdapter {
 
-  name: string;
-  options: WebMapAdapterOptions;
   layer?: WebMapLayerItem;
-
+  private resourceId?: number;
   private _dependsLayers: any[] = [];
   private response?: ResourceItem;
 
-  constructor(map: any, options: WebMapAdapterOptions) {
-    const id = (options && options.id) ? options.id : String(ID++);
-    this.name = 'webmap-' + id;
-    this.options = options;
-    this.options.id = id;
+  constructor(public map: any, public options: WebMapAdapterOptions) {
+    this.resourceId = options.resourceId;
+    if (!this.resourceId) {
+      throw new Error('No NGW resouce id defined');
+    }
   }
 
-  async addLayer(options?: WebMapAdapterOptions): Promise<any> {
+  async addLayer(options: WebMapAdapterOptions): Promise<any> {
     this.options = { ...this.options, ...options };
-
-    this.name = 'webmap-' + this.options.id;
 
     this.layer = await this._getWebMapLayerItem();
     return this.layer;
@@ -72,8 +66,8 @@ export class WebMapLayerAdapter implements BaseLayerAdapter {
   }
 
   private async _getWebMapLayerItem(): Promise<WebMapLayerItem | undefined> {
-    if (this.options.id) {
-      const webmap = await this.getWebMapConfig(parseInt(this.options.id, 10));
+    if (this.resourceId) {
+      const webmap = await this.getWebMapConfig(this.resourceId);
       if (webmap && webmap.root_item) {
         return new Promise<WebMapLayerItem>((resolve) => {
           const layer = new WebMapLayerItem(this.options.webMap, webmap.root_item);

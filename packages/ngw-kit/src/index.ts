@@ -1,6 +1,6 @@
 import NgwConnector from '@nextgis/ngw-connector';
-import WebMap, { StarterKit, MapClickEvent } from '@nextgis/webmap';
-import { updateWmsParams, getLayerAdapterOptions, addNgwLayer } from './utils';
+import WebMap, { StarterKit, MapClickEvent, Type } from '@nextgis/webmap';
+import { updateWmsParams, getLayerAdapterOptions, addNgwLayer, extendWebMapLayerAdapter } from './utils';
 import { NgwKitOptions, RequestOptions, WebMapAdapterOptions } from './interfaces';
 import { WebMapLayerAdapter } from './WebMapLayerAdapter';
 
@@ -12,7 +12,6 @@ export default class NgwKit implements StarterKit {
 
   static addNgwLayer = addNgwLayer;
 
-  options: NgwKitOptions = {};
   url: string;
   connector: NgwConnector;
   webMap?: WebMap;
@@ -20,10 +19,8 @@ export default class NgwKit implements StarterKit {
   // Radius for searching objects in pixels
   pixelRadius = 10; // webmapSettings.identify_radius,
 
-  private _adapter?: WebMapLayerAdapter;
+  constructor(public options: NgwKitOptions) {
 
-  constructor(options?: NgwKitOptions) {
-    this.options = { ...this.options, ...options };
     if (this.options.pixelRadius) {
       this.pixelRadius = this.options.pixelRadius;
     }
@@ -45,14 +42,16 @@ export default class NgwKit implements StarterKit {
       }
       if (resourceIds.length) {
         for (const r of resourceIds) {
-          const layer = await webMap.addLayer(WebMapLayerAdapter, {
-            id: String(r),
+          const options: WebMapAdapterOptions = {
+            id: `webmap-${r}`,
+            resourceId: r,
             connector: this.connector,
             baseUrl: this.options.baseUrl,
             webMap
-          });
-          if (layer && layer.name) {
-            webMap.showLayer(layer.name);
+          };
+          const layer = await webMap.addLayer(WebMapLayerAdapter, options);
+          if (layer) {
+            webMap.showLayer(layer);
             if (layer.getExtent) {
               const extent = await layer.getExtent();
               if (extent) {
@@ -66,7 +65,7 @@ export default class NgwKit implements StarterKit {
   }
 
   getLayerAdapters() {
-    return Promise.resolve([this._getlayerAdapter()]);
+    return Promise.resolve([this._getLayerAdapter()]);
   }
 
   onMapClick(ev: MapClickEvent, webMap: WebMap) {
@@ -98,23 +97,19 @@ export default class NgwKit implements StarterKit {
     }
   }
 
-  private _getlayerAdapter() {
+  private _getLayerAdapter() {
     return {
       name: 'WEBMAP',
       createAdapter: (webmap: WebMap) => Promise.resolve(this._createAdapter(webmap)),
     };
   }
 
-  private _createAdapter(webMap: WebMap) {
-    if (!this._adapter && this.options.baseUrl) {
-      this.webMap = webMap;
-      this._adapter = new WebMapLayerAdapter(this.webMap, {
-        connector: this.connector,
-        baseUrl: this.options.baseUrl,
-        webMap
-      });
-    }
-    return this._adapter;
+  private _createAdapter(webMap: WebMap): Type<WebMapLayerAdapter> {
+    const connector = this.connector;
+    const baseUrl = this.options.baseUrl;
+    return extendWebMapLayerAdapter({
+      webMap, connector, baseUrl
+    });
   }
 
 }

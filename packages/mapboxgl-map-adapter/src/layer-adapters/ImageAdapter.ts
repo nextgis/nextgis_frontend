@@ -1,7 +1,10 @@
 import { BaseLayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
+import { Map } from 'mapbox-gl';
+import { TLayer } from '../MapboxglMapAdapter';
 import { BaseAdapter } from './BaseAdapter';
 
-export class ImageAdapter extends BaseAdapter<ImageAdapterOptions> implements BaseLayerAdapter {
+export class ImageAdapter extends BaseAdapter<ImageAdapterOptions>
+  implements BaseLayerAdapter<Map, TLayer, ImageAdapterOptions> {
 
   addLayer(options: ImageAdapterOptions): string[] | undefined {
     if (this.options) {
@@ -21,7 +24,7 @@ export class ImageAdapter extends BaseAdapter<ImageAdapterOptions> implements Ba
       }
 
       this.map.addLayer({
-        id: String(this.name),
+        id: String(this.id),
         type: 'raster',
         layout: {
           visibility: 'none',
@@ -34,7 +37,7 @@ export class ImageAdapter extends BaseAdapter<ImageAdapterOptions> implements Ba
         paint: {}
         // @ts-ignore
       }, options.before);
-      this.layer = [this.name];
+      this.layer = [this.id];
       return this.layer;
     }
   }

@@ -89,7 +89,7 @@ export class NgwMap {
     this.connector = new NgwConnector({ baseUrl: this.options.baseUrl });
     const kits: StarterKit[] = [new QmsKit()];
     // const kits: any[] = [new QmsKit()];
-    if (this.options.webmapId) {
+    if (this.options.baseUrl && this.options.webmapId) {
       kits.push(new NgwKit({
         baseUrl: this.options.baseUrl,
         resourceId: this.options.webmapId
@@ -156,9 +156,9 @@ export class NgwMap {
       const adapter = NgwKit.addNgwLayer(options, this.webMap, this.options.baseUrl);
       if (adapter) {
         return adapter.then((layer) => {
-          if (layer && layer.name) {
-            this._ngwLayers[layer.name] = layer;
-            this.webMap.showLayer(layer.name);
+          if (layer && layer.id) {
+            this._ngwLayers[layer.id] = layer;
+            this.webMap.showLayer(layer);
             return layer;
           }
         });

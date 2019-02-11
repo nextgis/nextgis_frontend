@@ -2,23 +2,20 @@ import { BaseLayerAdapter, TileAdapterOptions } from '@nextgis/webmap';
 import { BaseAdapter } from './BaseAdapter';
 import { RasterSource } from 'mapbox-gl';
 
-let ID = 1;
-
 export class TileAdapter extends BaseAdapter<TileAdapterOptions> implements BaseLayerAdapter {
 
   addLayer(options: TileAdapterOptions): string[] {
-    this.name = String(options.id || 'tile-' + ID++);
-    const opt: TileAdapterOptions = { ...this.options, ...(options || {}) };
+    options = { ...this.options, ...(options || {}) };
 
     let tiles: string[];
-    if (opt && opt.subdomains) {
-      tiles = opt.subdomains.split('').map((x) => {
-        const subUrl = opt.url.replace('{s}', x);
+    if (options && options.subdomains) {
+      tiles = options.subdomains.split('').map((x) => {
+        const subUrl = options.url.replace('{s}', x);
         return subUrl;
       },
       );
     } else {
-      tiles = [opt.url];
+      tiles = [options.url];
     }
 
     const sourceOptions: RasterSource = {
@@ -29,12 +26,12 @@ export class TileAdapter extends BaseAdapter<TileAdapterOptions> implements Base
       tiles,
       tileSize: 256, // opt && opt.tileSize ||
     };
-    if (opt.attribution) {
-      sourceOptions.attribution = opt.attribution;
+    if (options.attribution) {
+      sourceOptions.attribution = options.attribution;
     }
 
     this.map.addLayer({
-      id: this.name,
+      id: this.id,
       type: 'raster',
       layout: {
         visibility: 'none',
@@ -43,7 +40,7 @@ export class TileAdapter extends BaseAdapter<TileAdapterOptions> implements Base
       // TODO: clean remove before options from all existing apps
       // @ts-ignore
     }, options.before);
-    this.layer = [this.name];
+    this.layer = [this.id];
     return this.layer;
   }
 }
