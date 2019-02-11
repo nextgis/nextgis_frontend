@@ -1,10 +1,10 @@
-import { LayerAdapter, TileAdapterOptions } from '@nextgis/webmap';
+import { BaseLayerAdapter, TileAdapterOptions } from '@nextgis/webmap';
 import { BaseAdapter } from './BaseAdapter';
 import { RasterSource } from 'mapbox-gl';
 
 let ID = 1;
 
-export class TileAdapter extends BaseAdapter<TileAdapterOptions> implements LayerAdapter {
+export class TileAdapter extends BaseAdapter<TileAdapterOptions> implements BaseLayerAdapter {
 
   addLayer(options: TileAdapterOptions): string[] {
     this.name = String(options.id || 'tile-' + ID++);

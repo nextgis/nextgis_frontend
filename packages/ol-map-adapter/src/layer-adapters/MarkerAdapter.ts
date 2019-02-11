@@ -1,4 +1,4 @@
-import { LayerAdapter, MarkerAdapterOptions } from '@nextgis/webmap';
+import { BaseLayerAdapter, MarkerAdapterOptions } from '@nextgis/webmap';
 import Point from 'ol/geom/Point';
 import Feature from 'ol/Feature';
 import VectorLayer from 'ol/layer/Vector';
@@ -8,7 +8,7 @@ import { fromLonLat } from 'ol/proj';
 
 let ID = 1;
 
-export class MarkerAdapter implements LayerAdapter {
+export class MarkerAdapter implements BaseLayerAdapter {
 
   name?: string;
 

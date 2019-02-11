@@ -235,7 +235,7 @@ export class WebMap<M = any, L = any, C = any> {
     }
   }
 
-  async addLayer<K extends keyof LayerAdaptersOptions, O extends AdapterOptions = AdapterOptions>(
+  async addLayer<K extends keyof LayerAdapters, O extends AdapterOptions = AdapterOptions>(
     adapter: K | Type<LayerAdapters[K]>,
     options: O | LayerAdaptersOptions[K] = {},
     baselayer?: boolean): Promise<LayerAdapter> {

@@ -1,11 +1,11 @@
-import { LayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
+import { BaseLayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
 import ImageWMS from 'ol/source/ImageWMS';
 import ImageLayer from 'ol/layer/Image';
 import { olx } from 'openlayers';
 
 let ID = 1;
 
-export class ImageAdapter implements LayerAdapter {
+export class ImageAdapter implements BaseLayerAdapter {
 
   layer: any;
   name?: string;

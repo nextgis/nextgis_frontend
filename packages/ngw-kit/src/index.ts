@@ -45,7 +45,7 @@ export default class NgwKit implements StarterKit {
       }
       if (resourceIds.length) {
         for (const r of resourceIds) {
-          const layer = await webMap.addLayer<'WEBMAP', WebMapAdapterOptions>(WebMapLayerAdapter, {
+          const layer = await webMap.addLayer(WebMapLayerAdapter, {
             id: String(r),
             connector: this.connector,
             baseUrl: this.options.baseUrl,
