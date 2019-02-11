@@ -272,7 +272,8 @@ export class WebMap<M = any, L = any, C = any> {
       _adapter.onMap = false;
       const order = this._layersIds++;
       await this.onMapLoad();
-      await _adapter.addLayer(options);
+      const layer = await _adapter.addLayer(options);
+      _adapter.layer = layer;
 
       const layerId = _adapter.id;
       if (layerId) {

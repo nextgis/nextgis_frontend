@@ -1,7 +1,7 @@
 import WebMap, { LayerAdapter, Type } from '@nextgis/webmap';
 import { NgwLayerOptions, WebMapAdapterOptions } from './interfaces';
 import { WebMapLayerAdapter } from './WebMapLayerAdapter';
-import NgwConnector from 'packages/ngw-connector/src';
+import NgwConnector from '@nextgis/ngw-connector';
 
 export function fixUrlStr(url: string) {
   // remove double slash
