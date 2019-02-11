@@ -99,13 +99,13 @@ export interface ImageAdapterOptions extends AdapterOptions {
 }
 
 export interface LayerAdapters {
-  'MVT': LayerAdapter;
-  'IMAGE': LayerAdapter;
-  'OSM': LayerAdapter;
-  'TILE': LayerAdapter;
-  'MARKER': LayerAdapter;
+  'MVT': BaseLayerAdapter;
+  'IMAGE': BaseLayerAdapter;
+  'OSM': BaseLayerAdapter;
+  'TILE': BaseLayerAdapter;
+  'MARKER': BaseLayerAdapter;
   'GEOJSON': VectorLayerAdapter;
-  [name: string]: LayerAdapter;
+  [name: string]: BaseLayerAdapter;
 }
 
 export interface LayerAdaptersOptions {
