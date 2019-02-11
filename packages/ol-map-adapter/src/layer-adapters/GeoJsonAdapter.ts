@@ -4,7 +4,8 @@ import {
   GeoJsonAdapterLayerPaint,
   GetPaintCallback,
   GeoJsonAdapterLayerType,
-  OnLayerClickOptions
+  OnLayerClickOptions,
+  VectorLayerAdapter
 } from '@nextgis/webmap';
 import Map from 'ol/Map';
 import GeoJSON from 'ol/format/GeoJSON';
@@ -25,7 +26,7 @@ let ID = 1;
 type Layer = ol.layer.Base;
 type OlStyle = ol.style.Style | ol.style.Style[] | null;
 
-export class GeoJsonAdapter implements LayerAdapter<GeoJsonAdapterOptions, Layer, Map> {
+export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAdapterOptions> {
 
   map: Map;
   name: string;

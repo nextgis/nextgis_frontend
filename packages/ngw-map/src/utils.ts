@@ -1,5 +1,5 @@
 import { GeoJsonObject, GeoJsonGeometryTypes, FeatureCollection, GeometryCollection, Feature } from 'geojson';
-import { MapAdapter, LayerAdapters, Type, LayerAdapter } from '@nextgis/webmap';
+import { MapAdapter, LayerAdaptersOptions, Type, LayerAdapter, BaseLayerAdapter } from '@nextgis/webmap';
 
 export function fixUrlStr(url: string) {
   // remove double slash
@@ -86,7 +86,7 @@ export function findMostFrequentGeomType(arr: GeoJsonGeometryTypes[]): GeoJsonGe
 export function createAsyncAdapter<T extends string = string>(
   type: T, laodFunction: Promise<any>, map: MapAdapter): Type<LayerAdapter> {
 
-  const webMapAdapter = map.layerAdapters[type];
+  const webMapAdapter = map.layerAdapters[type] as Type<BaseLayerAdapter>;
 
   return class Adapter extends webMapAdapter {
     addLayer(options: any) {

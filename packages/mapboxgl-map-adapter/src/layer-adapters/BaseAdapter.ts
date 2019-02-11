@@ -1,9 +1,9 @@
-import { LayerAdapter, OnLayerClickOptions, AdapterOptions } from '@nextgis/webmap';
+import { BaseLayerAdapter, OnLayerClickOptions, AdapterOptions } from '@nextgis/webmap';
 import { Map } from 'mapbox-gl';
 
 let ID = 1;
 
-export abstract class BaseAdapter<O extends AdapterOptions = AdapterOptions> implements LayerAdapter {
+export abstract class BaseAdapter<O extends AdapterOptions = AdapterOptions> implements BaseLayerAdapter {
 
   map: Map;
   name: string;

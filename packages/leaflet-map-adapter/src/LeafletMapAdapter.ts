@@ -26,7 +26,7 @@ export type Type<T> = new (...args: any[]) => T;
 
 export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
 
-  static layerAdapters: { [name: string]: Type<LayerAdapter<any, any, Map>> } = {
+  static layerAdapters: { [name: string]: Type<LayerAdapter<Map, any, any>> } = {
     IMAGE: ImageAdapter,
     TILE: TileAdapter,
     GEOJSON: GeoJsonAdapter,

@@ -1,13 +1,13 @@
 import { MapOptions, AppOptions, GetAttributionsOptions } from './interfaces/WebMapApp';
 import { LayerExtent, Pixel, Type, Cursor } from './interfaces/BaseTypes';
 import { StarterKit } from './interfaces/StarterKit';
-import { AdapterOptions, DataLayerFilter } from './interfaces/LayerAdapter';
+import { AdapterOptions, DataLayerFilter, VectorLayerAdapter, LayerAdapters } from './interfaces/LayerAdapter';
 import { Keys } from './components/keys/Keys';
 import { EventEmitter } from 'events';
 import { MapAdapter, MapClickEvent, ControlPositions, FitOptions } from './interfaces/MapAdapter';
 import { RuntimeParams } from './interfaces/RuntimeParams';
 import { deepmerge } from './utils/lang';
-import { LayerAdapters, LayerAdapter, OnLayerClickOptions } from './interfaces/LayerAdapter';
+import { LayerAdaptersOptions, LayerAdapter, OnLayerClickOptions } from './interfaces/LayerAdapter';
 import {
   MapControl,
   MapControls,
@@ -23,13 +23,13 @@ interface Arglist {
   0: string;
 }
 
-export interface LayerMem<L = any, M = any, O = any> {
+export interface LayerMem<L = any, M = any, O extends AdapterOptions = AdapterOptions> {
   id: string;
   layer: L;
   onMap: boolean;
   order?: number;
   baseLayer?: boolean;
-  adapter: LayerAdapter<O, L, M>;
+  adapter: LayerAdapter<M, L, O>;
 }
 
 export class WebMap<M = any, L = any, C = any> {
@@ -100,7 +100,7 @@ export class WebMap<M = any, L = any, C = any> {
   }
 
   async addBaseLayer(
-    provider: keyof LayerAdapters | Type<LayerAdapter>,
+    provider: keyof LayerAdaptersOptions | Type<LayerAdapter>,
     options?: any): Promise<LayerAdapter> {
 
     const layer = await this.addLayer(provider, {
@@ -235,9 +235,9 @@ export class WebMap<M = any, L = any, C = any> {
     }
   }
 
-  async addLayer<K extends keyof LayerAdapters, O extends AdapterOptions = AdapterOptions>(
-    adapter: K | Type<LayerAdapter>,
-    options: O | LayerAdapters[K] = {},
+  async addLayer<K extends keyof LayerAdaptersOptions, O extends AdapterOptions = AdapterOptions>(
+    adapter: K | Type<LayerAdapters[K]>,
+    options: O | LayerAdaptersOptions[K] = {},
     baselayer?: boolean): Promise<LayerAdapter> {
 
     let adapterEngine: Type<LayerAdapter>;
@@ -381,16 +381,18 @@ export class WebMap<M = any, L = any, C = any> {
 
   selectLayer(layerId: string) {
     const layerMem = this.getLayer(layerId);
-    if (layerMem && layerMem.adapter.select) {
-      layerMem.adapter.select();
+    const adapter = layerMem && layerMem.adapter as VectorLayerAdapter;
+    if (adapter && adapter.select) {
+      adapter.select();
     }
     this._selectedLayers.push(layerId);
   }
 
   unSelectLayer(layerId: string) {
     const layerMem = this.getLayer(layerId);
-    if (layerMem && layerMem.adapter.unselect) {
-      layerMem.adapter.unselect();
+    const adapter = layerMem && layerMem.adapter as VectorLayerAdapter;
+    if (adapter.unselect) {
+      adapter.unselect();
     }
     const index = this._selectedLayers.indexOf(layerId);
     if (index !== -1) {
@@ -399,30 +401,34 @@ export class WebMap<M = any, L = any, C = any> {
   }
 
   filterLayer(layerId: string, filter: DataLayerFilter<Feature, L>) {
-    const layer = this.getLayer(layerId);
-    if (layer && layer.adapter.filter) {
-      layer.adapter.filter(filter);
+    const layerMem = this.getLayer(layerId);
+    const adapter = layerMem && layerMem.adapter as VectorLayerAdapter;
+    if (adapter.filter) {
+      adapter.filter(filter);
     }
   }
 
   setLayerData(layerId: string, data: GeoJsonObject) {
-    const layer = this.getLayer(layerId);
-    if (layer && layer.adapter.setData) {
-      layer.adapter.setData(data);
+    const layerMem = this.getLayer(layerId);
+    const adapter = layerMem && layerMem.adapter as VectorLayerAdapter;
+    if (adapter.setData) {
+      adapter.setData(data);
     }
   }
 
   addLayerData(layerId: string, data: GeoJsonObject) {
-    const layer = this.getLayer(layerId);
-    if (layer && layer.adapter.addData) {
-      layer.adapter.addData(data);
+    const layerMem = this.getLayer(layerId);
+    const adapter = layerMem && layerMem.adapter as VectorLayerAdapter;
+    if (adapter.addData) {
+      adapter.addData(data);
     }
   }
 
   clearLayerData(layerId: string, cb?: (feature: Feature) => boolean) {
-    const layer = this.getLayer(layerId);
-    if (layer && layer.adapter.clearLayer) {
-      layer.adapter.clearLayer(cb);
+    const layerMem = this.getLayer(layerId);
+    const adapter = layerMem && layerMem.adapter as VectorLayerAdapter;
+    if (adapter.clearLayer) {
+      adapter.clearLayer(cb);
     }
   }
 

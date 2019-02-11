@@ -1,5 +1,5 @@
 import {
-  LayerAdapter,
+  VectorLayerAdapter,
   GeoJsonAdapterOptions,
   GeoJsonAdapterLayerPaint,
   GeoJsonAdapterLayerType,
@@ -55,7 +55,7 @@ interface LayerMem {
   feature: Feature;
 }
 
-export class GeoJsonAdapter extends BaseAdapter implements LayerAdapter {
+export class GeoJsonAdapter extends BaseAdapter implements VectorLayerAdapter {
 
   static getPaintFunctions?: { [name: string]: GetPaintFunction };
 
