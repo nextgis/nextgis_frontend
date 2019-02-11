@@ -1,5 +1,5 @@
 import { BaseLayerAdapter, OnLayerClickOptions } from '@nextgis/webmap';
-import {Map, Layer} from 'leaflet';
+import {Map} from 'leaflet';
 
 let ID = 1;
 

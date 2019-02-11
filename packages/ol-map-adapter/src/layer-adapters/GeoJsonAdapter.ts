@@ -1,5 +1,4 @@
 import {
-  LayerAdapter,
   GeoJsonAdapterOptions,
   GeoJsonAdapterLayerPaint,
   GetPaintCallback,

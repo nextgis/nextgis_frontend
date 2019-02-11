@@ -15,7 +15,6 @@ import {
 
 type ImageTypes = 'image/tif' | 'image/tiff' | '.tif';
 
-
 const imageTypesAccept: { [format: string]: ImageTypes[] } = {
   tiff: ['image/tif', 'image/tiff', '.tif'],
 };
@@ -47,7 +46,7 @@ export class NgwUploader {
       accept = Object.keys(imageTypesAccept).reduce((a: ImageTypes[], b) => {
         const imageTypes = imageTypesAccept[b];
         return a.concat(imageTypes);
-      }, [])
+      }, []);
     }
     input.setAttribute('accept', accept.join(','));
     if (opt.html) {
