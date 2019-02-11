@@ -117,9 +117,6 @@ export class NgwMap {
     }
   }
 
-  /**
-   * top, left, bottom, right
-   */
   fitBounds(bounds: [number, number, number, number]) {
     const [left, bottom, right, top] = bounds;
     // [extent_left, extent_bottom, extent_right, extent_top];
@@ -232,7 +229,7 @@ export class NgwMap {
   private _fitNgwLayerExtend(id: number) {
     return this.connector.request('layer.extent', { id }).then((resp) => {
       const { maxLat, maxLon, minLat, minLon } = resp.extent;
-      this.fitBounds([maxLat, maxLon, minLat, minLon]);
+      this.fitBounds([minLon, minLat, maxLon, maxLat]);
     });
   }
 
