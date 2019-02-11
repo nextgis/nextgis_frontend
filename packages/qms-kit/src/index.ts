@@ -1,4 +1,4 @@
-import WebMap, { StarterKit, AdapterOptions, LayerAdaptersOptions, LayerAdapter } from '@nextgis/webmap';
+import WebMap, { StarterKit, AdapterOptions, LayerAdaptersOptions, LayerAdapter, Type } from '@nextgis/webmap';
 
 export interface QmsOptions {
   url: string;
@@ -65,14 +65,14 @@ export default class QmsKit implements StarterKit {
   }
 
   private _getNameFromOptions(options: QmsAdapterOptions) {
-    if (options.qmsid) {
-      return 'qms-' + (typeof options.qmsid === 'string' ? parseInt(options.qmsid, 10) : options.qmsid);
-    } else if (options.id) {
+    if (options.id) {
       return options.id;
+    } else if (options.qmsid) {
+      return 'qms-' + options.qmsid;
     }
   }
 
-  private _createAdapter(webMap: WebMap) {
+  private _createAdapter(webMap: WebMap): Type<LayerAdapter> {
     const url = this.url;
     this.map = webMap;
     const alias: { [key in QmsLayerType]: keyof LayerAdaptersOptions } = {
@@ -85,7 +85,7 @@ export default class QmsKit implements StarterKit {
       this.map = m;
       const name = getNameFromOptions(options);
       if (name) {
-        this.name = name;
+        this.id = name;
       }
       this.options = options;
     };
@@ -101,7 +101,10 @@ export default class QmsKit implements StarterKit {
           if (type === 'TILE') {
             const protocol = (location.protocol === 'https:' ? 'https' : 'http') + '://';
             const serviceUrl = service.url.replace(/^(https?|ftp):\/\//, protocol);
-            options.id = getNameFromOptions(options);
+            const id = getNameFromOptions(options);
+            if (id) {
+              options.id = id;
+            }
             options.url = serviceUrl;
             options.name = service.name;
             options.attribution = service.copyright_text;
@@ -114,6 +117,7 @@ export default class QmsKit implements StarterKit {
         }
       }
     };
+    // @ts-ignore
     return adapter;
   }
 }

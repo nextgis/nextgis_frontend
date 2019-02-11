@@ -1,5 +1,7 @@
-import WebMap, { LayerAdapter } from '@nextgis/webmap';
-import { NgwLayerOptions } from './interfaces';
+import WebMap, { LayerAdapter, Type } from '@nextgis/webmap';
+import { NgwLayerOptions, WebMapAdapterOptions } from './interfaces';
+import { WebMapLayerAdapter } from './WebMapLayerAdapter';
+import NgwConnector from 'packages/ngw-connector/src';
 
 export function fixUrlStr(url: string) {
   // remove double slash
@@ -60,4 +62,20 @@ export function addNgwLayer(
   } else {
     throw new Error(adapter + ' not supported yet. Only TILE');
   }
+}
+
+interface ExtendWebMapLayerAdapterOptions {
+  webMap: WebMap;
+  connector: NgwConnector;
+  baseUrl: string;
+}
+
+export function extendWebMapLayerAdapter(opt: ExtendWebMapLayerAdapterOptions): Type<WebMapLayerAdapter> {
+  class A extends WebMapLayerAdapter {
+    constructor(map: any, options: WebMapAdapterOptions) {
+      options = {...opt, ...options};
+      super(map, options);
+    }
+  }
+  return A;
 }

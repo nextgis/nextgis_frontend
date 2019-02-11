@@ -3,16 +3,11 @@ import ImageWMS from 'ol/source/ImageWMS';
 import ImageLayer from 'ol/layer/Image';
 import { olx } from 'openlayers';
 
-let ID = 1;
-
 export class ImageAdapter implements BaseLayerAdapter {
 
   layer: any;
-  name?: string;
 
   addLayer(options: ImageAdapterOptions) {
-
-    this.name = options.id || 'image-' + ID++;
 
     const imageOptions: olx.source.ImageWMSOptions = {
       url: options.url,

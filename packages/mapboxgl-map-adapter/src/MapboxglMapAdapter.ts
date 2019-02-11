@@ -1,12 +1,12 @@
 import {
   MapAdapter,
-  LayerMem,
   FitOptions,
   MapControl,
   ControlPositions,
   CreateButtonControlOptions,
   MapCenter,
-  MapOptions
+  MapOptions,
+  LayerAdapter
 } from '@nextgis/webmap';
 import { MvtAdapter } from './layer-adapters/MvtAdapter';
 import { Map, IControl, MapEventType, EventData } from 'mapbox-gl';
@@ -20,7 +20,8 @@ import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 import { createControl } from './controls/createControl';
 import { createButtonControl } from './controls/createButtonControl';
 
-type TLayer = string[];
+export type TLayer = string[];
+type TLayerAdapter = LayerAdapter<Map, TLayer>;
 
 export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
 
@@ -37,9 +38,6 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     COMPASS: CompassControl,
     ATTRIBUTION: AttributionControl,
   };
-
-  displayProjection = 'EPSG:3857';
-  lonlatProjection = 'EPSG:4326';
 
   options: MapOptions = {};
   map?: Map;
@@ -139,11 +137,11 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   }
 
   // TODO: need optimization, something like throttle
-  setLayerOrder(layerIds: string[], order: number, layers: { [x: string]: LayerMem<string[]> }): void {
+  setLayerOrder(layerIds: string[], order: number, layers: { [x: string]: TLayerAdapter }): void {
     const map = this.map;
     if (map) {
-      const baseLayers: Array<LayerMem<string[]>> = [];
-      let orderedLayers: Array<LayerMem<string[]>> = [];
+      const baseLayers: TLayerAdapter[] = [];
+      let orderedLayers: TLayerAdapter[] = [];
       for (const l in layers) {
         if (layers.hasOwnProperty(l)) {
           const layer = layers[l];
@@ -161,17 +159,19 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
       const firstLayerId = this._getLayerIds(orderedLayers[0])[0];
       // normalize layer ordering
       baseLayers.forEach((x) => {
-        x.layer.forEach((y) => {
-          map.moveLayer(y, firstLayerId);
-        });
+        if (x.layer) {
+          x.layer.forEach((y) => {
+            map.moveLayer(y, firstLayerId);
+          });
+        }
       });
       for (let fry = 0; fry < orderedLayers.length; fry++) {
-        const nextlayer = orderedLayers[fry + 1];
-        const nextlayerId = nextlayer && nextlayer.layer[0];
+        const nextLayer = orderedLayers[fry + 1];
+        const nextLayerId = nextLayer && nextLayer.layer && nextLayer.layer[0];
         const mem = orderedLayers[fry];
         const _layers = this._getLayerIds(mem);
         _layers.forEach((x) => {
-          map.moveLayer(x, nextlayerId);
+          map.moveLayer(x, nextLayerId);
         });
       }
     }
@@ -241,13 +241,13 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     this.emitter.emit('click', { latLng, pixel: { top: y, left: x } });
   }
 
-  private _getLayerIds(mem: LayerMem<TLayer, Map>): string[] {
+  private _getLayerIds(mem: TLayerAdapter): string[] {
     let _layers: TLayer = [];
     if (mem) {
       if (Array.isArray(mem.layer)) {
         _layers = mem.layer;
-      } else if (mem.adapter.getDependLayers) {
-        mem.adapter.getDependLayers().forEach((x) => {
+      } else if (mem.getDependLayers) {
+        mem.getDependLayers().forEach((x) => {
           x.forEach((y) => {
             _layers.push(y);
           });
