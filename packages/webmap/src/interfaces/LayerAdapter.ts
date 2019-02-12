@@ -2,24 +2,27 @@ import { GeoJsonObject, Feature } from 'geojson';
 import { LatLng, LayerExtent } from './BaseTypes';
 
 export interface OnLayerClickOptions {
-  adapter: LayerAdapter;
+  layer: LayerAdapter;
   selected?: boolean;
-  layer?: any;
   feature?: Feature;
 }
 
 export interface AdapterOptions {
   id?: string;
-  url?: string;
-  transparency?: number;
+  // is on the map
   visibility?: boolean;
+  baseLayer?: boolean;
+  order?: number;
+
   attribution?: string;
   maxZoom?: number;
   minZoom?: number;
-  minResolution?: number;
-  maxResolution?: number;
-  order?: number;
+
   // move out of here
+  maxResolution?: number;
+  minResolution?: number;
+  transparency?: number;
+  url?: string;
   styleId?: number;
   onLayerClick?(opt: OnLayerClickOptions): Promise<any>;
 }
@@ -132,24 +135,19 @@ export type LayerAdapter<M = any, L = any, O extends AdapterOptions = AdapterOpt
 
 export interface BaseLayerAdapter<M = any, L = any, O extends AdapterOptions = AdapterOptions> {
 
+  options: O;
   id?: string;
-  onMap?: boolean;
-  baseLayer?: boolean;
-  order?: number;
-  // name?: string;
-
-  options?: O;
-
   layer?: L;
   map?: M;
 
-  addLayer(options: O): any | Promise<any>;
+  addLayer(options: O): L | Promise<L> | undefined;
 
   showLayer?(layer: L): void;
   hideLayer?(layer: L): void;
 
   getExtent?(): LayerExtent | Promise<LayerExtent> | undefined;
 
+  // remove from this place
   getDependLayers?(): L[];
 }
 

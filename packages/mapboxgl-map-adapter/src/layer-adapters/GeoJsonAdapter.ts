@@ -110,10 +110,10 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
       const features = data as Feature | FeatureCollection;
       this.layer = [this.id];
       if (options.paint) {
-        await this._getAddLayerOptions(this.id, features, options.paint, type);
+        await this._addLayer(this.id, features, options.paint, type);
         if (options.selectedPaint) {
           this._selectionName = this.id + '-highlighted';
-          await this._getAddLayerOptions(this._selectionName, features, options.selectedPaint, type);
+          await this._addLayer(this._selectionName, features, options.selectedPaint, type);
           this.map.setFilter(this._selectionName, ['in', '_rendrom_id', '']);
           this.layer.push(this._selectionName);
         }
@@ -187,7 +187,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     this.selected = !!this._selectedFeatureIds.length;
   }
 
-  private async _getAddLayerOptions(
+  private async _addLayer(
     name: string,
     data: Feature | FeatureCollection,
     paint: GeoJsonAdapterLayerPaint | GetPaintCallback,
@@ -342,7 +342,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
       }
       if (this.options.onLayerClick) {
         this.options.onLayerClick({
-          adapter: this,
+          layer: this,
           feature,
           selected: isSelected
         });

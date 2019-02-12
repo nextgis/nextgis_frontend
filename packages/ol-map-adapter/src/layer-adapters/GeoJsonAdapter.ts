@@ -35,8 +35,6 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
 
   constructor(public map: Map, public options: GeoJsonAdapterOptions) {}
 
-  onLayerClick?(opt: OnLayerClickOptions): Promise<any>;
-
   addLayer(options: GeoJsonAdapterOptions) {
     this.options = options;
     this.paint = options.paint;
@@ -137,9 +135,9 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
       isSelected = true;
     }
 
-    if (this.onLayerClick) {
-      this.onLayerClick({
-        adapter: this,
+    if (this.options.onLayerClick) {
+      this.options.onLayerClick({
+        layer: this,
         feature: getFeature(feature),
         selected: isSelected
       });

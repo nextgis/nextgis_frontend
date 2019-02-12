@@ -10,4 +10,5 @@ export * from './interfaces/LayerAdapter';
 export * from './interfaces/StarterKit';
 export * from './interfaces/RuntimeParams';
 
+export { WebMap };
 export default WebMap;

@@ -5,10 +5,13 @@ import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 // @ts-ignore
 import { fromLonLat } from 'ol/proj';
+import Map from 'ol/Map';
 
 export class MarkerAdapter implements BaseLayerAdapter {
 
   layer?: VectorLayer;
+
+  constructor(public map: Map, public options: MarkerAdapterOptions) { }
 
   addLayer(options: MarkerAdapterOptions) {
 

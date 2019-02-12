@@ -1,7 +1,7 @@
 import WebMap, { AdapterOptions } from '@nextgis/webmap';
 import NgwConnector from '@nextgis/ngw-connector';
 
-export type Adapter = 'IMAGE' | 'TILE' | 'GEOJSON';
+export type NgwLayerAdapterType = 'IMAGE' | 'TILE' | 'GEOJSON';
 
 export interface AppSettings {
   extent_left?: number;
@@ -16,8 +16,7 @@ export interface AppSettings {
 export interface TreeItem {
   item_type: 'root' | 'group' | 'layer';
   display_name?: string;
-  id?: number;
-
+  resourceId?: number;
   _layer?: any;
 }
 
@@ -40,15 +39,16 @@ export interface TreeLayer extends TreeItem {
 
   layer_url?: string;
 
-  adapter?: Adapter;
+  adapter?: NgwLayerAdapterType;
   url?: string;
-  resourceId?: number;
+
   updateWmsParams?: (parans: any) => any;
 }
 
 export interface NgwLayerOptions {
-  id: number;
-  adapter?: Adapter;
+  resourceId: number;
+  adapter?: NgwLayerAdapterType;
+  id?: string;
 }
 
 export interface NgwConfig {
@@ -58,10 +58,12 @@ export interface NgwConfig {
   id: number;
 }
 
+export type ResourceDef = number | [number, string];
+
 export interface NgwKitOptions {
   baseUrl: string;
   pixelRadius?: number;
-  resourceId?: number;
+  resourceId?: ResourceDef;
   auth?: {
     login: string;
     password: string;
@@ -76,7 +78,7 @@ export interface RequestOptions {
 
 export interface WebMapAdapterOptions extends AdapterOptions {
   baseUrl: string;
-  resourceId?: number;
+  resourceId: number | [number, string];
   webMap: WebMap;
   connector: NgwConnector;
 }

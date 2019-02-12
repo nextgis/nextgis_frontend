@@ -32,19 +32,21 @@
 <body>
   <div id='map'></div>
   <script>
+    var webMapName = 'webmap';
+    var qmsBaseLayerName = 'qmsbasemap';
 
     var ngwMap = new NgwOl({
       baseUrl: 'https://demo.nextgis.com',
       target: 'map',
-      qmsId: 487,
-      webmapId: 4119
+      qmsId: [487, qmsBaseLayerName],
+      webmapId: [4119, webMapName]
     });
 
     var toggleBaseLayerControl = ngwMap.webMap.createButtonControl({
       html: 'B',
       title: 'Toggle base map',
       onClick: function () {
-        ngwMap.webMap.toggleLayer('qms-487');
+        ngwMap.webMap.toggleLayer(qmsBaseLayerName);
       }
     });
 
@@ -52,7 +54,7 @@
       html: 'D',
       title: 'Toggle DEM',
       onClick: function () {
-        var ngwmap = ngwMap.webMap.getLayer('webmap-4119');
+        var ngwmap = ngwMap.webMap.getLayer(webMapName);
         var layer = ngwmap.layer.tree.getDescendants(function (x) {
           return x.item.display_name === 'Digital Elevation Model (DEM)';
         })[0];
@@ -65,21 +67,21 @@
         var list = document.createElement('div');
         list.className = 'ngw-layers';
         // find all layer from ngw webmap tree
-        var ngwmap = ngwMap.webMap.getLayer('webmap-4119');
-        ngwmap.layer.tree.getDescendants().forEach(function (layer) {
-          if (layer.item.item_type === 'layer') {
+        var ngwmap = ngwMap.webMap.getLayer(webMapName);
+        ngwmap.layer.tree.getDescendants().forEach(function (node) {
+          if (node.item.item_type === 'layer') {
             var layerElement = document.createElement('div');
 
             var checkbox = document.createElement('input');
-            checkbox.id = 'layer-' + layer.item.id
-            checkbox.checked = layer.item.layer_enabled;
+            checkbox.id = 'layer-' + node.layer.id
+            checkbox.checked = node.item.layer_enabled;
             checkbox.setAttribute('type', 'checkbox');
             checkbox.addEventListener('click', function () {
-              layer.properties.set('visibility', checkbox.checked);
+              node.properties.set('visibility', checkbox.checked);
             })
 
             var name = document.createElement('span');
-            name.innerHTML = layer.item.display_name
+            name.innerHTML = node.item.display_name
 
             layerElement.appendChild(checkbox);
             layerElement.appendChild(name);

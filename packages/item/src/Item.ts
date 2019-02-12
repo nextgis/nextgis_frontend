@@ -16,7 +16,6 @@ let ID = 0;
 export class Item<O extends ItemOptions = ItemOptions> {
 
   options: O = {} as O;
-  id: string;
 
   properties: ItemProperties | undefined;
   tree: TreeHelper;
@@ -25,7 +24,6 @@ export class Item<O extends ItemOptions = ItemOptions> {
 
   constructor(options?: O) {
     this.options = {  ...options } as O;
-    this.id = String(ID++);
     this.tree = new TreeHelper(this);
   }
 
