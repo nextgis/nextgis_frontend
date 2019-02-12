@@ -173,14 +173,14 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     const baseLayers: string[] = [];
 
     const orderedLayers = Object.keys(layers).filter((x) => {
-      if (layers[x].baseLayer) {
+      if (layers[x].options.baseLayer) {
         baseLayers.push(x);
         return false;
       }
       return true;
     }).sort((a, b) => {
-      const layerAOrder = layers[a] && layers[a].order;
-      const layerBOrder = layers[b] && layers[b].order;
+      const layerAOrder = layers[a] && layers[a].options.order;
+      const layerBOrder = layers[b] && layers[b].options.order;
       if (layerAOrder !== undefined && layerBOrder !== undefined) {
         return layerAOrder - layerBOrder;
       }
@@ -192,7 +192,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
       layers[x].layer.bringToBack();
     });
     for (let fry = 0; fry < orderedLayers.length; fry++) {
-      if (layers[orderedLayers[fry]].onMap) {
+      if (layers[orderedLayers[fry]].options.visibility) {
         layers[orderedLayers[fry]].layer.bringToFront();
       }
     }

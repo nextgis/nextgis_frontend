@@ -31,12 +31,11 @@
       baseUrl: 'https://demo.nextgis.com',
       target: 'map',
       qmsId: 487,
-      bounds: [71, 182, 46, 14]
     });
     ngwMap.addNgwLayer({
-      id: 4005,
-    }).then(function () {
-      ngwMap.zoomToLayer(4005);
+      resourceId: 4005,
+    }).then(function (layer) {
+      ngwMap.zoomToLayer(layer);
     });
   </script>
 </body>

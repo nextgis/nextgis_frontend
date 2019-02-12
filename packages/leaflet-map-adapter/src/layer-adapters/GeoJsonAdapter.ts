@@ -24,6 +24,7 @@ import {
   Layer
 } from 'leaflet';
 import { GeoJsonObject, GeoJsonGeometryTypes, FeatureCollection, Feature, GeometryCollection } from 'geojson';
+import { BaseAdapter } from './BaseAdapter';
 
 const typeAlias: { [key in GeoJsonGeometryTypes]: GeoJsonAdapterLayerType } = {
   'Point': 'circle',
@@ -53,7 +54,7 @@ for (const a in typeAlias) {
 
 type LayerMem = LayerDefinition<Feature>;
 
-export class GeoJsonAdapter implements VectorLayerAdapter<Map> {
+export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implements VectorLayerAdapter<Map> {
 
   static getPaintFunctions?: { [name: string]: GetPaintFunction };
 
@@ -69,9 +70,7 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map> {
   private _layers: LayerMem[] = [];
   private _selectedLayers: LayerMem[] = [];
 
-  constructor(public map: any, public options: GeoJsonAdapterOptions) { }
-
-  addLayer(options?: GeoJsonAdapterOptions) {
+  addLayer(options: GeoJsonAdapterOptions) {
     if (options) {
       this.options = options;
       this.paint = options.paint;
@@ -307,8 +306,7 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map> {
     }
     if (this.options.onLayerClick) {
       this.options.onLayerClick({
-        adapter: this,
-        layer,
+        layer: this,
         feature: layer.feature,
         selected: isSelected
       });

@@ -12,8 +12,8 @@ import WebMap, {
   AdapterOptions
 } from '@nextgis/webmap';
 import NgwConnector from '@nextgis/ngw-connector';
-import QmsKit from '@nextgis/qms-kit';
-import NgwKit from '@nextgis/ngw-kit';
+import QmsKit, { QmsAdapterOptions } from '@nextgis/qms-kit';
+import NgwKit, { NgwLayerOptions } from '@nextgis/ngw-kit';
 import { getIcon } from '@nextgis/icons';
 
 import 'leaflet/dist/leaflet.css';
@@ -23,7 +23,7 @@ import { EventEmitter } from 'events';
 // @ts-ignore
 import { toWgs84 } from 'reproject';
 import { GeoJsonObject } from 'geojson';
-import { NgwMapOptions, NgwLayerOptions, ControlOptions } from './interfaces';
+import { NgwMapOptions, ControlOptions } from './interfaces';
 
 const epsg = {
   // tslint:disable-next-line:max-line-length
@@ -82,7 +82,10 @@ export class NgwMap {
   emitter = new EventEmitter();
   connector: NgwConnector;
   _eventsStatus: { [eventName: string]: boolean } = {};
-  protected _ngwLayers: { [layerName: string]: LayerAdapter } = {};
+  protected _ngwLayers: { [layerName: string]: {
+    layer: LayerAdapter,
+    resourceId: number
+  } } = {};
 
   constructor(mapAdapter: MapAdapter, options: NgwMapOptions) {
     this.options = deepmerge(this.options, options);
@@ -90,9 +93,11 @@ export class NgwMap {
     const kits: StarterKit[] = [new QmsKit()];
     // const kits: any[] = [new QmsKit()];
     if (this.options.baseUrl && this.options.webmapId) {
+      const resourceId = this.options.webmapId;
+
       kits.push(new NgwKit({
         baseUrl: this.options.baseUrl,
-        resourceId: this.options.webmapId
+        resourceId,
       }));
     }
     this.webMap = new WebMap({
@@ -135,10 +140,16 @@ export class NgwMap {
 
     if (options.adapter === 'GEOJSON') {
       const geojsonAdapterCb = this.connector.makeQuery('/api/resource/{id}/geojson', {
-        id: options.id
+        id: options.resourceId
       }).then((data) => {
         data = NgwMap.toWgs84(data);
-        return this._updateGeojsonAdapterOptions({ data, id: String(options.id) });
+        const geoJsonOptions: GeoJsonAdapterOptions = {
+          data,
+        };
+        if (options.id) {
+          geoJsonOptions.id = options.id;
+        }
+        return this._updateGeojsonAdapterOptions(geoJsonOptions);
       });
       const adapter = createAsyncAdapter(
         'GEOJSON',
@@ -153,8 +164,9 @@ export class NgwMap {
       const adapter = NgwKit.addNgwLayer(options, this.webMap, this.options.baseUrl);
       if (adapter) {
         return adapter.then((layer) => {
-          if (layer && layer.id) {
-            this._ngwLayers[layer.id] = layer;
+          const id = layer && this.webMap.getLayerId(layer);
+          if (layer && id) {
+            this._ngwLayers[id] = {layer, resourceId: options.resourceId};
             this.webMap.showLayer(layer);
             return layer;
           }
@@ -180,9 +192,17 @@ export class NgwMap {
     });
   }
 
-  zoomToLayer(id: string | number) {
-    if (this._ngwLayers[id]) {
-      return this.connector.request('resource.item', { id: Number(id) }).then((resp) => {
+  zoomToLayer(layerDef: string | number | LayerAdapter) {
+    let id: string | undefined;
+    if (typeof layerDef === 'string' || typeof layerDef === 'number') {
+      id = String(id);
+    } else {
+      id = layerDef.id;
+    }
+    const ngwLayer = id && this._ngwLayers[id];
+    if (ngwLayer) {
+      const resourceId = ngwLayer.resourceId;
+      return this.connector.request('resource.item', { id: resourceId }).then((resp) => {
         if (resp) {
           if (resp.resource.cls === 'raster_style') {
             return this.connector.request('resource.item', {
@@ -191,7 +211,7 @@ export class NgwMap {
               return this._fitNgwLayerExtend(res.resource.id);
             });
           } else {
-            return this._fitNgwLayerExtend(Number(id));
+            return this._fitNgwLayerExtend(resourceId);
           }
         }
       });
@@ -239,10 +259,22 @@ export class NgwMap {
     }).then(() => {
       this._emitStatusEvent('map:created');
       if (this.options.qmsId) {
-        this.webMap.addBaseLayer('QMS', {
-          id: this.options.qmsId,
-          qmsid: this.options.qmsId
-        }).then((layer) => {
+        let qmsId: number;
+        let qmsLayerName: string | undefined;
+        if (Array.isArray(this.options.qmsId)) {
+          qmsId = this.options.qmsId[0];
+          qmsLayerName = this.options.qmsId[1];
+        } else {
+          qmsId = this.options.qmsId;
+        }
+        const qmsLayerOptions: QmsAdapterOptions = {
+          qmsId,
+        };
+        if (qmsLayerName) {
+          qmsLayerOptions.id = qmsLayerName;
+        }
+
+        this.webMap.addBaseLayer('QMS', qmsLayerOptions).then((layer) => {
           this.webMap.showLayer(layer);
         });
       }

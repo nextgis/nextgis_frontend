@@ -1,13 +1,11 @@
+import { AdapterOptions, DataLayerFilter, VectorLayerAdapter, LayerAdapters } from './interfaces/LayerAdapter';
+import { LayerAdaptersOptions, LayerAdapter, OnLayerClickOptions } from './interfaces/LayerAdapter';
+import { MapAdapter, MapClickEvent, ControlPositions, FitOptions } from './interfaces/MapAdapter';
 import { MapOptions, AppOptions, GetAttributionsOptions } from './interfaces/WebMapApp';
 import { LayerExtent, Pixel, Type, Cursor } from './interfaces/BaseTypes';
-import { StarterKit } from './interfaces/StarterKit';
-import { AdapterOptions, DataLayerFilter, VectorLayerAdapter, LayerAdapters } from './interfaces/LayerAdapter';
-import { Keys } from './components/keys/Keys';
-import { EventEmitter } from 'events';
-import { MapAdapter, MapClickEvent, ControlPositions, FitOptions } from './interfaces/MapAdapter';
 import { RuntimeParams } from './interfaces/RuntimeParams';
-import { deepmerge } from './utils/lang';
-import { LayerAdaptersOptions, LayerAdapter, OnLayerClickOptions } from './interfaces/LayerAdapter';
+import { StarterKit } from './interfaces/StarterKit';
+import { Keys } from './components/keys/Keys';
 import {
   MapControl,
   MapControls,
@@ -15,27 +13,18 @@ import {
   CreateButtonControlOptions,
   CreateToggleControlOptions
 } from './interfaces/MapControl';
-import { onLoad } from './utils/decorators';
-import { Feature, GeoJsonObject } from 'geojson';
 
-interface Arglist {
-  [index: number]: any;
-  0: string;
-}
+import { Feature, GeoJsonObject } from 'geojson';
+import { EventEmitter } from 'events';
+
+import { onLoad } from './utils/decorators';
+import { deepmerge } from './utils/lang';
 
 type LayerDef = string | LayerAdapter;
 
-let LAYER_ID = 0;
-
-// export interface LayerMem<L = any, M = any, O extends AdapterOptions = AdapterOptions> {
-//   id: string;
-//   layer: L;
-//   onMap: boolean;
-//   order?: number;
-//   baseLayer?: boolean;
-//   adapter: LayerAdapter<M, L, O>;
-// }
-
+/**
+ * @class WebMap
+ */
 export class WebMap<M = any, L = any, C = any> {
 
   options: MapOptions = {};
@@ -58,7 +47,7 @@ export class WebMap<M = any, L = any, C = any> {
   private _layers: { [x: string]: LayerAdapter } = {};
   private _layersIds: number = 1;
   private _selectedLayers: string[] = [];
-  private _extent?: [number, number, number, number];
+  private _extent?: LayerExtent;
 
   constructor(appOptions: AppOptions) {
     this.mapAdapter = appOptions.mapAdapter;
@@ -94,7 +83,6 @@ export class WebMap<M = any, L = any, C = any> {
     }
   }
 
-  // region MapAdapter methods
   onMapLoad(cb?: any): Promise<void> {
     const mapAdapterOnLoad = this.mapAdapter.onMapLoad;
     if (mapAdapterOnLoad) {
@@ -110,10 +98,12 @@ export class WebMap<M = any, L = any, C = any> {
     const layer = await this.addLayer(provider, {
       maxZoom: this.options.maxZoom,
       minZoom: this.options.minZoom,
-      ...options
-    }, true);
-    if (layer && layer.id) {
-      this._baseLayers.push(layer.id);
+      ...options,
+      baseLayer: true
+    });
+    const id = this.getLayerId(layer);
+    if (layer && id) {
+      this._baseLayers.push(id);
     }
     return layer;
   }
@@ -195,7 +185,7 @@ export class WebMap<M = any, L = any, C = any> {
 
   isLayerOnTheMap(layerDef: LayerDef): boolean {
     const layer = this.getLayer(layerDef);
-    return layer && layer.onMap !== undefined ? layer.onMap : false;
+    return layer && layer.options.visibility !== undefined ? layer.options.visibility : false;
   }
 
   @onLoad('build-map')
@@ -253,8 +243,7 @@ export class WebMap<M = any, L = any, C = any> {
 
   async addLayer<K extends keyof LayerAdapters, O extends AdapterOptions = AdapterOptions>(
     adapter: K | Type<LayerAdapters[K]>,
-    options: O | LayerAdaptersOptions[K],
-    baseLayer?: boolean): Promise<LayerAdapter> {
+    options: O | LayerAdaptersOptions[K]): Promise<LayerAdapter> {
 
     let adapterEngine: Type<LayerAdapter>;
     if (typeof adapter === 'string') {
@@ -263,26 +252,39 @@ export class WebMap<M = any, L = any, C = any> {
       adapterEngine = adapter as Type<LayerAdapter>;
     }
     if (adapterEngine) {
-      options.onLayerClick = (e) => this._onLayerClick(e);
+      const onLayerClickFromOpt = options.onLayerClick;
+      options.onLayerClick = (e) => {
+        if (onLayerClickFromOpt) {
+          onLayerClickFromOpt(e);
+        }
+        return this._onLayerClick(e);
+      };
+      const order = this._layersIds++;
 
-      options.id = options.id || String(LAYER_ID++);
+      options = {
+        id: String(order),
+        visibility: false,
+        order,
+        ...options
+      };
+      if (options.baseLayer) {
+        options.order = 0;
+      }
 
       const _adapter = new adapterEngine(this.mapAdapter.map, options);
-      _adapter.id = options.id;
-      _adapter.onMap = false;
-      const order = this._layersIds++;
+
       await this.onMapLoad();
       const layer = await _adapter.addLayer(options);
+      // checking that the original layer was inserted into the adapter anyway
       _adapter.layer = layer;
+      // think about how to move `id` to the adapter's constructor,
+      // but that it is not required in the options
+      _adapter.id = _adapter.options.id;
 
-      const layerId = _adapter.id;
+      const layerId = _adapter.options.id;
       if (layerId) {
-        if (baseLayer) {
-          _adapter.baseLayer = true;
-          _adapter.order = 0;
+        if (options.baseLayer) {
           this._baseLayers.push(layerId);
-        } else {
-          _adapter.order = options.order || order;
         }
         this._layers[layerId] = _adapter;
 
@@ -307,11 +309,11 @@ export class WebMap<M = any, L = any, C = any> {
   }
 
   removeLayer(layerDef: LayerDef) {
-    const layerMem = this.getLayer(layerDef);
-    const layerId = layerMem && this.getLayerId(layerMem);
-    if (layerMem && layerId) {
-      this.mapAdapter.removeLayer(layerMem.layer);
-      if (layerMem.baseLayer) {
+    const layer = this.getLayer(layerDef);
+    const layerId = layer && this.getLayerId(layer);
+    if (layer && layerId) {
+      this.mapAdapter.removeLayer(layer.layer);
+      if (layer.options.baseLayer) {
         const index = this._baseLayers.indexOf(layerId);
         if (index) {
           this._baseLayers.splice(index, 1);
@@ -348,13 +350,13 @@ export class WebMap<M = any, L = any, C = any> {
 
   toggleLayer(layerDef: LayerDef, status?: boolean) {
     const layer = this.getLayer(layerDef);
-    const onMap = layer && layer.onMap;
+    const onMap = layer && layer.options.visibility;
     const toStatus = status !== undefined ? status : !onMap;
 
     const action = (source: any, l: LayerAdapter) => {
-      l.onMap = toStatus;
+      l.options.visibility = toStatus;
       if (toStatus && source) {
-        const order = l.baseLayer ? 0 : l.order;
+        const order = l.options.baseLayer ? 0 : l.options.order;
         if (l.showLayer) {
           l.showLayer.call(l, l.layer);
         } else {
@@ -371,7 +373,7 @@ export class WebMap<M = any, L = any, C = any> {
         }
       }
     };
-    if (layer && layer.onMap !== toStatus) {
+    if (layer && layer.options.visibility !== toStatus) {
       if (this.mapAdapter.map) {
         action(this.mapAdapter, layer);
       } else {
@@ -461,7 +463,7 @@ export class WebMap<M = any, L = any, C = any> {
       if (this._layers.hasOwnProperty(l)) {
         const layerMem = this._layers[l];
         const onlyVisible = options.onlyVisible !== undefined ? options.onlyVisible : true;
-        const useLayerAttr = onlyVisible ? layerMem.onMap : true;
+        const useLayerAttr = onlyVisible ? layerMem.options.visibility : true;
         if (useLayerAttr) {
           const attr = layerMem.options && layerMem.options.attribution;
           if (attr) {
@@ -472,9 +474,7 @@ export class WebMap<M = any, L = any, C = any> {
     }
     return attributions;
   }
-  // endregion
 
-  // region MAP
   private async _setupMap() {
 
     this.mapAdapter.displayProjection = this.displayProjection;
@@ -508,7 +508,6 @@ export class WebMap<M = any, L = any, C = any> {
           const adapters = await kit.getLayerAdapters.call(kit);
           if (adapters) {
             for await (const adapter of adapters) {
-              // this.map.layerAdapters[adapter.name] = adapter;
               const newAdapter = await adapter.createAdapter(this);
               if (newAdapter) {
                 this.mapAdapter.layerAdapters[adapter.name] = newAdapter;
@@ -533,9 +532,7 @@ export class WebMap<M = any, L = any, C = any> {
       console.error(er);
     }
   }
-  // endregion
 
-  // region Events
   private _emitLoadEvent(event: string, data: any) {
     this._eventsStatus[event] = true;
     this.emitter.emit(event, data);
@@ -559,6 +556,5 @@ export class WebMap<M = any, L = any, C = any> {
       }
     });
   }
-  // endregion
 
 }

@@ -4,8 +4,9 @@ import { BaseLayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
 import wms from './wms';
 
 import { Map } from 'leaflet';
+import { BaseAdapter } from './BaseAdapter';
 
-export class ImageAdapter implements BaseLayerAdapter<Map> {
+export class ImageAdapter extends BaseAdapter<ImageAdapterOptions> implements BaseLayerAdapter<Map> {
 
   layer: any;
 

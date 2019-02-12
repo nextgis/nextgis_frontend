@@ -2,10 +2,13 @@ import { BaseLayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
 import ImageWMS from 'ol/source/ImageWMS';
 import ImageLayer from 'ol/layer/Image';
 import { olx } from 'openlayers';
+import Map from 'ol/Map';
 
 export class ImageAdapter implements BaseLayerAdapter {
 
   layer: any;
+
+  constructor(public map: Map, public options: ImageAdapterOptions) { }
 
   addLayer(options: ImageAdapterOptions) {
 
@@ -76,7 +79,7 @@ function queryToObject(str: string) {
   return ret; // Object
 }
 
-function objectToQuery(obj: {[x: string]: any}, prefix?: string): string {
+function objectToQuery(obj: { [x: string]: any }, prefix?: string): string {
   const str = [];
   let p;
   for (p in obj) {

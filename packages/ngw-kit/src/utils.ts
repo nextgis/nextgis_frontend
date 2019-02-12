@@ -28,17 +28,16 @@ export function getLayerAdapterOptions(options: NgwLayerOptions, webMap: WebMap,
       url = baseUrl + '/api/component/render/image';
       return {
         url,
-        id: options.id,
-        resourceId: options.id,
-        updateWmsParams: (params: any) => updateWmsParams(params, options.id)
+        resourceId: options.resourceId,
+        updateWmsParams: (params: any) => updateWmsParams(params, options.resourceId)
       };
     } else {
       adapter = 'TILE';
     }
   }
   if (adapter === 'TILE') {
-    url = baseUrl + '/api/component/render/tile?z={z}&x={x}&y={y}&resource=' + options.id;
-    return { url, id: options.id, adapter };
+    url = baseUrl + '/api/component/render/tile?z={z}&x={x}&y={y}&resource=' + options.resourceId;
+    return { url, adapter };
   }
 }
 
@@ -56,7 +55,8 @@ export function addNgwLayer(
   if (adapter === 'IMAGE' || adapter === 'TILE') {
     const opt = getLayerAdapterOptions(options, webMap, baseUrl);
     if (opt) {
-      const layerAdapterOptions = { ...opt, id: String(opt.id) };
+      const layerAdapterOptions = { ...opt, resourceId: opt.resourceId };
+
       return webMap.addLayer(adapter, layerAdapterOptions);
     }
   } else {
