@@ -22,11 +22,11 @@ export class WebMapLayerItem extends Item<ItemOptions> {
           return false;
         },
         onSet(value: boolean, options?: any, item?: WebMapLayerItem) {
-          if (item && item.item.item_type === 'layer') {
+          if (item && item.layer && item.item.item_type === 'layer') {
             if (value) {
-              item.webMap.showLayer(item.id);
+              item.webMap.showLayer(item.layer);
             } else {
-              item.webMap.hideLayer(item.id);
+              item.webMap.hideLayer(item.layer);
             }
             item.item.layer_enabled = value;
           }
@@ -36,7 +36,7 @@ export class WebMapLayerItem extends Item<ItemOptions> {
   };
 
   item: TreeGroup | TreeLayer;
-  adapter?: LayerAdapter;
+  layer?: LayerAdapter;
 
   constructor(public webMap: WebMap, item: TreeGroup | TreeLayer, options?: ItemOptions, parent?: WebMapLayerItem) {
 
@@ -61,18 +61,16 @@ export class WebMapLayerItem extends Item<ItemOptions> {
       }
     } else if (item.item_type === 'layer') {
       const adapter = (item.adapter || item.layer_adapter.toUpperCase()) as keyof LayerAdaptersOptions;
-      item.id = Number(this.id);
       const options: any = {
         maxZoom: this.webMap.options.maxZoom,
         minZoom: this.webMap.options.minZoom,
         ...item,
-        ...{ id: item.id }
       };
       newLayer = await this.webMap.addLayer(adapter, options);
     }
     if (newLayer) {
       item._layer = newLayer;
-      this.adapter = newLayer;
+      this.layer = newLayer;
       if (this.properties && item.item_type === 'layer' && item.layer_enabled) {
         this.properties.property('visibility').set(true);
       }

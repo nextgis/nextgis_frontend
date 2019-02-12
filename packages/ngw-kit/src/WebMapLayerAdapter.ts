@@ -2,7 +2,7 @@ import WebMap, { BaseLayerAdapter, LayerExtent } from '@nextgis/webmap';
 import { ResourceItem } from '@nextgis/ngw-connector';
 import { fixUrlStr, getLayerAdapterOptions, updateWmsParams } from './utils';
 import { WebMapLayerItem } from './WebMapLayerItem';
-import { TreeGroup, TreeLayer, Adapter, WebMapAdapterOptions } from './interfaces';
+import { TreeGroup, TreeLayer, NgwLayerAdapterType, WebMapAdapterOptions } from './interfaces';
 
 export class WebMapLayerAdapter implements BaseLayerAdapter {
 
@@ -12,7 +12,14 @@ export class WebMapLayerAdapter implements BaseLayerAdapter {
   private response?: ResourceItem;
 
   constructor(public map: any, public options: WebMapAdapterOptions) {
-    this.resourceId = options.resourceId;
+    const r = options.resourceId;
+    if (Array.isArray(r)) {
+      this.resourceId = r[0];
+      this.options.id = r[1];
+    } else {
+      this.resourceId = r;
+    }
+
     if (!this.resourceId) {
       throw new Error('No NGW resouce id defined');
     }
@@ -108,8 +115,8 @@ export class WebMapLayerAdapter implements BaseLayerAdapter {
         item = {
           ...item,
           ...getLayerAdapterOptions({
-            adapter: item.layer_adapter.toUpperCase() as Adapter,
-            id: resourceId
+            adapter: item.layer_adapter.toUpperCase() as NgwLayerAdapterType,
+            resourceId,
           }, webMap, this.options.baseUrl)
         };
       }

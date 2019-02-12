@@ -145,7 +145,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
       for (const l in layers) {
         if (layers.hasOwnProperty(l)) {
           const layer = layers[l];
-          if (layer.baseLayer) {
+          if (layer.options.baseLayer) {
             baseLayers.push(layer);
           } else {
             orderedLayers.push(layer);
@@ -154,17 +154,20 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
       }
 
       orderedLayers = orderedLayers.sort((a, b) => {
-        return a.order !== undefined && b.order !== undefined ? a.order - b.order : 0;
+        return a.options.order !== undefined && b.options.order !== undefined ? a.options.order - b.options.order : 0;
       });
-      const firstLayerId = this._getLayerIds(orderedLayers[0])[0];
-      // normalize layer ordering
-      baseLayers.forEach((x) => {
-        if (x.layer) {
-          x.layer.forEach((y) => {
-            map.moveLayer(y, firstLayerId);
-          });
-        }
-      });
+      const firstRealLayer = orderedLayers.find((x) => Array.isArray(x.layer));
+      if (firstRealLayer) {
+        const firstLayerId = this._getLayerIds(firstRealLayer)[0];
+        // normalize layer ordering
+        baseLayers.forEach((x) => {
+          if (x.layer) {
+            x.layer.forEach((y) => {
+              map.moveLayer(y, firstLayerId);
+            });
+          }
+        });
+      }
       for (let fry = 0; fry < orderedLayers.length; fry++) {
         const nextLayer = orderedLayers[fry + 1];
         const nextLayerId = nextLayer && nextLayer.layer && nextLayer.layer[0];

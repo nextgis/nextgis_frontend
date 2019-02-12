@@ -37,7 +37,7 @@
     });
 
     // tree
-    ngwMap.addNgwLayer({ id: 4069, adapter: 'GEOJSON' }, {
+    ngwMap.addNgwLayer({ id: 'tree', resourceId: 4069, adapter: 'GEOJSON' }, {
       paint: function (feature) {
         return { color: feature.properties.color }
       },
@@ -49,7 +49,7 @@
     });
 
     // toys
-    ngwMap.addNgwLayer({ id: 4061, adapter: 'GEOJSON' }, {
+    ngwMap.addNgwLayer({ id: 'toys', resourceId: 4061, adapter: 'GEOJSON' }, {
       paint: function (feature) {
         return { color: feature.properties.color, opacity: 0.5 }
       },
@@ -61,7 +61,7 @@
     });
 
     // star
-    ngwMap.addNgwLayer({ id: 4059, adapter: 'GEOJSON' }, {
+    ngwMap.addNgwLayer({ id: 'star', resourceId: 4059, adapter: 'GEOJSON' }, {
       paint: function (feature) {
         return NgwOl.getIcon({ shape: 'star', color: 'darkred', strokeColor: 'darkred', size: 30 });
       },
@@ -72,19 +72,19 @@
     });
 
     ngwMap.emitter.on('layer:click', function (e) {
-      if (e.adapter.name === '4061') {
-        var selected = e.adapter.getSelected();
-        var tree = ngwMap.webMap.getLayer('4069');
+      if (e.layer.id === 'toys') {
+        var selected = e.layer.getSelected();
+        var tree = ngwMap.webMap.getLayer('tree');
 
         if (selected.length >= 9) {
-          var treeSelected = tree.adapter.getSelected() || [];
+          var treeSelected = tree.getSelected() || [];
           // hint: make tree normal first
           var treeIsNormal = treeSelected[0] && treeSelected[0].feature.properties.color === '#25741f';
           if (treeIsNormal) {
-            ngwMap.webMap.selectLayer('4059');
+            ngwMap.webMap.selectLayer('star');
           }
         } else {
-          ngwMap.webMap.unSelectLayer('4059');
+          ngwMap.webMap.unSelectLayer('star');
         }
       }
     });

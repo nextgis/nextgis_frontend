@@ -1,10 +1,9 @@
-import NgwMap, { NgwLayerOptions, NgwMapOptions, AdapterOptions } from '@nextgis/ngw-map';
-import MapboxglMapAdapter from '@nextgis/mapboxgl-map-adapter';
-// import { RGBAImage } from 'mapbox-gl/src/util/browser';
-
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-export default class NgwLeaflet extends NgwMap {
+import NgwMap, { NgwLayerOptions, NgwMapOptions, AdapterOptions } from '@nextgis/ngw-map';
+import MapboxglMapAdapter from '@nextgis/mapboxgl-map-adapter';
+
+export class NgwMapbox extends NgwMap {
 
   constructor(options: NgwMapOptions) {
     super(new MapboxglMapAdapter(), options);
@@ -18,5 +17,6 @@ export default class NgwLeaflet extends NgwMap {
     }
     return super.addNgwLayer(options, adapterOptions);
   }
-
 }
+
+export default NgwMapbox;

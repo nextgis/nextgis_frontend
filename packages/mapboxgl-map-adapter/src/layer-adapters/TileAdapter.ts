@@ -40,7 +40,7 @@ export class TileAdapter extends BaseAdapter<TileAdapterOptions> implements Base
       // TODO: clean remove before options from all existing apps
       // @ts-ignore
     }, options.before);
-    this.layer = [this.id];
-    return this.layer;
+    const layer = this.layer = [this.id];
+    return layer;
   }
 }

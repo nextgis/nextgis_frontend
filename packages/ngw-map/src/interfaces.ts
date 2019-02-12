@@ -4,8 +4,10 @@ import {
   CirclePaint,
   PathPaint,
   IconOptions,
+  LayerExtent,
 
 } from '@nextgis/webmap';
+import { NgwLayerOptions } from '@nextgis/ngw-kit';
 
 export interface ControlOptions {
   position?: ControlPositions;
@@ -13,10 +15,10 @@ export interface ControlOptions {
 
 export interface NgwMapOptions extends MapOptions {
   target: string | HTMLElement;
-  qmsId?: number;
-  webmapId?: number;
+  qmsId?: number | [number, string];
+  webmapId?: number | [number, string];
   baseUrl?: string;
-  bounds?: [number, number, number, number];
+  bounds?: LayerExtent;
   geoJsonDefaultPaint?: {
     circle: CirclePaint,
     path: PathPaint,
@@ -24,7 +26,4 @@ export interface NgwMapOptions extends MapOptions {
   };
 }
 
-export interface NgwLayerOptions {
-  id: number;
-  adapter?: 'IMAGE' | 'TILE' | 'GEOJSON';
-}
+export { NgwLayerOptions };
