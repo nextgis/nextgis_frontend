@@ -12,3 +12,6 @@ export class NgwLeaflet extends NgwMap {
 }
 
 export default NgwLeaflet;
+
+// @ts-ignore
+if (window && !window.NgwMap) { window.NgwMap = NgwLeaflet; }

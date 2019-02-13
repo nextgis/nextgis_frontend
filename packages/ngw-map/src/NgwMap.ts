@@ -82,10 +82,12 @@ export class NgwMap {
   emitter = new EventEmitter();
   connector: NgwConnector;
   _eventsStatus: { [eventName: string]: boolean } = {};
-  protected _ngwLayers: { [layerName: string]: {
-    layer: LayerAdapter,
-    resourceId: number
-  } } = {};
+  protected _ngwLayers: {
+    [layerName: string]: {
+      layer: LayerAdapter,
+      resourceId: number
+    }
+  } = {};
 
   constructor(mapAdapter: MapAdapter, options: NgwMapOptions) {
     this.options = deepmerge(this.options, options);
@@ -138,6 +140,10 @@ export class NgwMap {
     options: NgwLayerOptions,
     adapterOptions?: AdapterOptions): Promise<LayerAdapter | undefined> {
 
+    if (!options.resourceId) {
+      throw new Error('resourceId is required parameter to add NGW layer');
+    }
+
     if (options.adapter === 'GEOJSON') {
       const geojsonAdapterCb = this.connector.makeQuery('/api/resource/{id}/geojson', {
         id: options.resourceId
@@ -161,12 +167,13 @@ export class NgwMap {
         adapter
       );
     } else if (this.options.baseUrl) {
+
       const adapter = NgwKit.addNgwLayer(options, this.webMap, this.options.baseUrl);
       if (adapter) {
         return adapter.then((layer) => {
           const id = layer && this.webMap.getLayerId(layer);
           if (layer && id) {
-            this._ngwLayers[id] = {layer, resourceId: options.resourceId};
+            this._ngwLayers[id] = { layer, resourceId: options.resourceId };
             this.webMap.showLayer(layer);
             return layer;
           }
@@ -224,7 +231,7 @@ export class NgwMap {
       const p = opt.paint;
       if (typeof p === 'object') {
         // define parameter if not specified
-        p.type = p.type ||
+        p.type = p.type ? p.type :
           (geomType === 'fill' || geomType === 'line') ?
           'path' :
           ('html' in p || 'className' in p) ?

@@ -101,10 +101,12 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     if (data && type) {
       this._data = this.filterGeometries(data, type) as any;
       this._features.forEach((x, i) => {
+        // to avaoid id = 0 is false
+        const rendromId = '_' + i;
         // @ts-ignore
-        x._rendrom_id = String(i);
+        x._rendrom_id = rendromId;
         if (x.properties) {
-          x.properties._rendrom_id = i;
+          x.properties._rendrom_id = rendromId;
         }
       });
       const features = data as Feature | FeatureCollection;
@@ -133,7 +135,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
       let visible: boolean = false;
       if (filtered) {
         const id = this._getRendromId(feature);
-        if (id) {
+        if (id !== undefined) {
           visible = this._filteredFeatureIds.indexOf(id) !== -1;
         }
       }
@@ -262,9 +264,11 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
                 }
                 return false;
               });
-              const paramName = Array.isArray(allowedType) ? allowedType[1] : allowedType;
-              // @ts-ignore
-              mapboxPaint[type + '-' + paramName] = _paint[p];
+              if (allowedType) {
+                const paramName = Array.isArray(allowedType) ? allowedType[1] : allowedType;
+                // @ts-ignore
+                mapboxPaint[type + '-' + paramName] = _paint[p];
+              }
             }
           }
         }
@@ -328,7 +332,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     const features = this.map.queryRenderedFeatures(e.point, { layers: this.layer });
     const feature = features[0] as Feature;
     const id = this._getRendromId(feature);
-    if (feature && id) {
+    if (feature && id !== undefined) {
 
       let isSelected = this._selectedFeatureIds.indexOf(id) !== -1;
       if (isSelected) {
@@ -362,7 +366,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     }
     features.forEach((f) => {
       const id = this._getRendromId(f);
-      if (id) {
+      if (id !== undefined) {
         this._selectedFeatureIds.push(id);
       }
     });
@@ -378,7 +382,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     }
     features.forEach((f) => {
       const id = this._getRendromId(f);
-      if (id) {
+      if (id !== undefined) {
         const index = this._selectedFeatureIds.indexOf(id);
         if (index !== -1) {
           this._selectedFeatureIds.splice(index, 1);
@@ -395,7 +399,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     if (this._filteredFeatureIds.length) {
       this._features.forEach((x) => {
         const id = this._getRendromId(x);
-        if (id && this._filteredFeatureIds.indexOf(id) !== -1) {
+        if (id !== undefined && this._filteredFeatureIds.indexOf(id) !== -1) {
           if (this._selectedFeatureIds.indexOf(id) !== -1) {
             selectionArray.push(id);
           } else {
@@ -436,10 +440,12 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     }
   }
 
-  private _getRendromId(feature: any): string | undefined {
-    if (feature._rendrom_id) {
-      return feature._rendrom_id;
-    } else if (feature.properties && feature.properties._rendrom_id) {
+  private _getRendromId(feature: Feature): string | undefined {
+    // @ts-ignore
+    const id = feature._rendrom_id;
+    if (id !== undefined) {
+      return id;
+    } else if (feature.properties && feature.properties._rendrom_id !== undefined) {
       return feature.properties._rendrom_id;
     }
   }
