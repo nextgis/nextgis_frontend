@@ -86,7 +86,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     this.$onLayerClick = this._onLayerClick.bind(this);
   }
 
-  async addLayer(options: GeoJsonAdapterOptions): Promise<string[]> {
+  async addLayer(options: GeoJsonAdapterOptions): Promise<any> {
     options = this.options = { ...this.options, ...(options || {}) };
     const data = options.data;
     let type: GeoJsonAdapterLayerType | undefined;
@@ -108,11 +108,11 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
         }
       });
       const features = data as Feature | FeatureCollection;
-      this.layer = [this.id];
+      this.layer = [this._layerId];
       if (options.paint) {
-        await this._addLayer(this.id, features, options.paint, type);
+        await this._addLayer(this._layerId, features, options.paint, type);
         if (options.selectedPaint) {
-          this._selectionName = this.id + '-highlighted';
+          this._selectionName = this._layerId + '-highlighted';
           await this._addLayer(this._selectionName, features, options.selectedPaint, type);
           this.map.setFilter(this._selectionName, ['in', '_rendrom_id', '']);
           this.layer.push(this._selectionName);
@@ -410,9 +410,9 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
       this.map.setFilter(this._selectionName, ['in', '_rendrom_id', ...selectionArray]);
     }
     if (this._filteredFeatureIds.length) {
-      this.map.setFilter(this.id, ['in', '_rendrom_id', ...filteredArray]);
+      this.map.setFilter(this._layerId, ['in', '_rendrom_id', ...filteredArray]);
     } else {
-      this.map.setFilter(this.id, ['!in', '_rendrom_id', ...selectionArray]);
+      this.map.setFilter(this._layerId, ['!in', '_rendrom_id', ...selectionArray]);
     }
   }
 
