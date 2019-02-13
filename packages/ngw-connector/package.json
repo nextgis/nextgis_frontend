@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/ngw-connector",
-  "version": "0.11.7",
+  "version": "0.12.0",
   "description": "Module for interaction with NGW (NextGis Web) server API",
   "main": "lib/ngw-connector.js",
   "unpkg": "lib/ngw-connector.js",
