@@ -7,7 +7,7 @@ export class MvtAdapter extends BaseAdapter implements BaseLayerAdapter {
   addLayer(options: any): string[] {
     options = this.options = { ...this.options, ...(options || {}) };
     // read about https://blog.mapbox.com/vector-tile-specification-version-2-whats-changed-259d4cd73df6
-    const idString = String(this.id);
+    const idString = this._layerId;
 
     const layerOptions: Layer = {
       'id': idString,
@@ -27,7 +27,7 @@ export class MvtAdapter extends BaseAdapter implements BaseLayerAdapter {
     }
 
     this.map.addLayer(layerOptions, options.before);
-    this.layer = [this.id];
+    this.layer = [this._layerId];
     return this.layer;
   }
 }
