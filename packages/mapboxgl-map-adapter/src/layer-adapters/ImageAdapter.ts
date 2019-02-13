@@ -24,7 +24,7 @@ export class ImageAdapter extends BaseAdapter<ImageAdapterOptions>
       }
 
       this.map.addLayer({
-        id: String(this.id),
+        id: this._layerId,
         type: 'raster',
         layout: {
           visibility: 'none',
@@ -37,7 +37,7 @@ export class ImageAdapter extends BaseAdapter<ImageAdapterOptions>
         paint: {}
         // @ts-ignore
       }, options.before);
-      this.layer = [this.id];
+      this.layer = [this._layerId];
       return this.layer;
     }
   }

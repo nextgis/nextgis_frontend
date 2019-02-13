@@ -31,7 +31,7 @@ export class TileAdapter extends BaseAdapter<TileAdapterOptions> implements Base
     }
 
     this.map.addLayer({
-      id: this.id,
+      id: this._layerId,
       type: 'raster',
       layout: {
         visibility: 'none',
@@ -40,7 +40,7 @@ export class TileAdapter extends BaseAdapter<TileAdapterOptions> implements Base
       // TODO: clean remove before options from all existing apps
       // @ts-ignore
     }, options.before);
-    const layer = this.layer = [this.id];
+    const layer = this.layer = [this._layerId];
     return layer;
   }
 }

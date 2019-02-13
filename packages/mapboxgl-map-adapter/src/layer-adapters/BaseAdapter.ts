@@ -7,11 +7,11 @@ let ID = 0;
 export abstract class BaseAdapter<O extends AdapterOptions = AdapterOptions>
   implements BaseLayerAdapter<Map, TLayer, O> {
 
-  id: string;
   layer?: TLayer;
+  protected _layerId: string;
 
   constructor(public map: Map, public options: O) {
-    this.id = this.options.id || `layer-${ID++}`;
+    this._layerId = `layer-${ID++}`;
   }
 
   addLayer(options?: any): string[] | Promise<string[]> | undefined {
