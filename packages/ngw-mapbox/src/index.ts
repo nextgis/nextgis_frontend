@@ -20,3 +20,6 @@ export class NgwMapbox extends NgwMap {
 }
 
 export default NgwMapbox;
+
+// @ts-ignore
+if (window && !window.NgwMap) { window.NgwMap = NgwMapbox; }

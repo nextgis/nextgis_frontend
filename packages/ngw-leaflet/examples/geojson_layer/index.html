@@ -41,7 +41,7 @@
         { "type": "Feature", "properties": {}, "geometry": { "type": "MultiLineString", "coordinates": [[[107.18377, 53.20700], [107.16699, 53.21248], [107.15270, 53.20581]]] } }
       ]
     };
-    var ngwMap = new NgwLeaflet({
+    var ngwMap = new NgwMap({
       baseUrl: 'https://demo.nextgis.com',
       target: 'map',
       qmsId: 465,
@@ -64,10 +64,10 @@
     ngwMap.addGeoJsonLayer({
       data: { "type": "Point", "coordinates": [107.19401, 53.23390] },
       // use the icon to paint the point geometry
-      paint: NgwLeaflet.getIcon({color: 'orange'})
+      paint: NgwMap.getIcon({color: 'orange'})
     });
     // Add geojson layer from NGW vector resource
-    ngwMap.addNgwLayer({ id: 4038, adapter: 'GEOJSON' }, {
+    ngwMap.addNgwLayer({ resourceId: 4038, adapter: 'GEOJSON' }, {
       // use callback to set paint dynamically
       paint: function (feature) {
         return { color: 'rgb(126, 192, '+ Math.round(Math.random()*255) +')' }

@@ -53,7 +53,7 @@
 
   <script>
     // initialize webmap
-    var ngwMap = new NgwLeaflet({
+    var ngwMap = new NgwMap({
       baseUrl: 'http://kazahstan.nextgis.com',
       target: 'map',
       webmapId: 10,
@@ -62,7 +62,7 @@
     });
 
     // add layer with cameras
-    ngwMap.addNgwLayer({ id: 3, adapter: 'GEOJSON' }, {
+    ngwMap.addNgwLayer({ resourceId: 3, id: 'cameras', adapter: 'GEOJSON' }, {
       paint: { color: 'red', radius: 5 },
       selectedPaint: { color: 'green', radius: 5 },
       selectable: true,
