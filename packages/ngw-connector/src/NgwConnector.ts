@@ -99,9 +99,7 @@ export class NgwConnector {
           url = template(url, replaceParams);
         }
       }
-      // Non-obvious way to transfer part of the parameters from `params`
-      // to the URL string
-      // left for backward compatibility, need to be rewritten щ куьщмув
+      // Transfer part of the parameters from `params` to the URL string
       if (params) {
         const paramArray = [];
         for (const p in params) {
