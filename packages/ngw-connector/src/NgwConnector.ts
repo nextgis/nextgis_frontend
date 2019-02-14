@@ -81,48 +81,45 @@ export class NgwConnector {
     options?: RequestOptions): Promise<RequestItemsResponseMap[K]> {
 
     const apiItems = await this.connect();
-    for (const a in apiItems) {
-      if (apiItems.hasOwnProperty(a)) {
-        if (a === name) {
-          const apiItem = apiItems[a].slice();
-          let url = apiItem.shift();
-          if (apiItem.length) {
-            const replaceParams: {
-              [num: number]: string;
-            } = {};
-            for (let fry = 0; fry < apiItem.length; fry++) {
-              const arg = apiItem[fry];
-              replaceParams[fry] = '{' + arg + '}';
-              if (params[arg] === undefined) {
-                throw new Error('`' + arg + '`' + ' url api argument is not specified');
-              }
-            }
-            if (url) {
-              url = template(url, replaceParams);
-            }
-          }
-          // Non-obvious way ti transfer part of the parameters from `params`
-          // to the URL string
-          // left for backward compatibility, need to be rewritten щ куьщмув
-          if (params) {
-            const paramArray = [];
-            for (const p in params) {
-              if (params.hasOwnProperty(p) && apiItem.indexOf(p) === -1) {
-                paramArray.push(`${p}=${params[p]}`);
-              }
-            }
-            if (paramArray.length) {
-              url = url + '/?' + paramArray.join('&');
-            }
-          }
-          if (url) {
-            return this.makeQuery(url, params, options);
-          } else {
-            throw new Error('request url is not set');
+    if (apiItems && apiItems[name]) {
+      const apiItem = apiItems[name];
+      let url = apiItem.shift();
+      if (apiItem.length) {
+        const replaceParams: {
+          [num: number]: string;
+        } = {};
+        for (let fry = 0; fry < apiItem.length; fry++) {
+          const arg = apiItem[fry];
+          replaceParams[fry] = '{' + arg + '}';
+          if (params[arg] === undefined) {
+            throw new Error('`' + arg + '`' + ' url api argument is not specified');
           }
         }
+        if (url) {
+          url = template(url, replaceParams);
+        }
+      }
+      // Non-obvious way to transfer part of the parameters from `params`
+      // to the URL string
+      // left for backward compatibility, need to be rewritten щ куьщмув
+      if (params) {
+        const paramArray = [];
+        for (const p in params) {
+          if (params.hasOwnProperty(p) && apiItem.indexOf(p) === -1) {
+            paramArray.push(`${p}=${params[p]}`);
+          }
+        }
+        if (paramArray.length) {
+          url = url + '/?' + paramArray.join('&');
+        }
+      }
+      if (url) {
+        return this.makeQuery(url, params, options);
+      } else {
+        throw new Error('request url is not set');
       }
     }
+
   }
 
   post<K extends keyof RequestItemsParamsMap>(
