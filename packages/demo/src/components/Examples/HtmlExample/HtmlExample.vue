@@ -25,6 +25,7 @@
       <send-to-codepen :html="html"></send-to-codepen>
       <pre v-highlightjs="html"><code class="html"></code></pre>
     </div>
+
   </div>
 </template>
 

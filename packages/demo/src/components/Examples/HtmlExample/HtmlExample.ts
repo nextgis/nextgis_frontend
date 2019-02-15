@@ -11,6 +11,7 @@ export class HtmlExample extends Vue {
   @Prop() description: string;
   @Prop() fullScrean: boolean;
   @Prop() currentItemId: string;
+  @Prop() api: any;
 
   mounted() {
     this._writeIFrame(this.html);

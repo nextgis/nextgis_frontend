@@ -46,6 +46,7 @@
         :description="current.description"
         :html="current.html"
         :currentItemId="currentItemId"
+        :api="current.api"
       ></component>
     </v-content>
   </div>
