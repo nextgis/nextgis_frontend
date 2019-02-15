@@ -1,23 +1,33 @@
 import { Vue, Component, Watch } from 'vue-property-decorator';
 import HtmlExample from './components/Examples/HtmlExample/HtmlExample.vue';
 import Readme from './components/Readme/Readme.vue';
+import ApiComponent from './components/ApiComponent/ApiComponent.vue';
 import Logo from './components/Logo/Logo.vue';
+import { ApiItem } from './components/ApiComponent/ApiItem';
+
+let api: ApiItem | undefined;
+try {
+  api = require('./api.json');
+} catch (er) {
+  // ignore
+}
 
 export interface Item {
   id: string;
   name: string;
-  page?: 'example' | 'readme';
+  page?: 'example' | 'readme' | 'api';
   description?: string;
   html?: string;
   children?: Item[];
   model?: boolean;
   component?: any;
   icon?: string;
+  api?: ApiItem;
   _parent?: Item;
 }
 
 @Component({
-  components: {Logo}
+  components: { Logo }
 })
 export class MainPage extends Vue {
 
@@ -26,6 +36,8 @@ export class MainPage extends Vue {
   open: string[] = [];
 
   drawer = null;
+
+  api = api;
 
   items: Item[] = null;
   currentItemId: string;
@@ -69,6 +81,17 @@ export class MainPage extends Vue {
       if (conf.children) {
         item.model = true;
         item.children = conf.children.map((i) => prepareItem(i, item));
+        const apiModule = api && this._findApiModule(item.name);
+        if (apiModule) {
+          item.children.push({
+            name: 'API',
+            id: item.id + '-api',
+            page: 'api',
+            component: ApiComponent,
+            icon: 'mdi-information-outline',
+            api: apiModule,
+          });
+        }
       } else {
         item._parent = _parent;
       }
@@ -77,6 +100,9 @@ export class MainPage extends Vue {
         item.icon = 'mdi-code-tags';
       } else if (item.page === 'readme') {
         item.component = Readme;
+        item.icon = 'mdi-information-outline';
+      } else if (item.page === 'api') {
+        item.component = ApiComponent;
         item.icon = 'mdi-information-outline';
       }
       item.html = conf.html;
@@ -87,6 +113,7 @@ export class MainPage extends Vue {
     this.items = config.map((x) => {
       return prepareItem(x);
     });
+
     this._setActive();
   }
 
@@ -131,5 +158,27 @@ export class MainPage extends Vue {
       this.$router.push(path + id);
     }
     this.currentItemId = id;
+  }
+
+  _findApiModule(name: string): ApiItem {
+    const modules = api.children;
+    return modules.find((x) => {
+      return x.name.indexOf(name) !== -1;
+    });
+  }
+
+  _findInApi(cb: (item: ApiItem) => boolean, item: ApiItem = api): ApiItem | undefined {
+    const isItem = cb(item);
+    if (isItem) {
+      return item;
+    } else if (item.children) {
+      for (let fry = 0; fry < item.children.length; fry++) {
+        const c = item.children[fry];
+        const childItem = this._findInApi(cb, c);
+        if (childItem) {
+          return childItem;
+        }
+      }
+    }
   }
 }
