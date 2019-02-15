@@ -16,7 +16,8 @@
     "build": "lerna run build",
     "prod": "node ./webpack.config.js",
     "demo": "cd ./packages/demo/ && yarn run prod",
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "doc": "typedoc --json ./packages/demo/src/api.json --exclude **/packages/demo/**/* ./packages"
   },
   "license": "LGPL-3.0",
   "workspaces": [
