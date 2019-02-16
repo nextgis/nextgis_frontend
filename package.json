@@ -22,5 +22,8 @@
   "license": "LGPL-3.0",
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "css-loader": "^2.1.0"
+  }
 }

@@ -5,5 +5,9 @@ export interface ApiItem {
   flags: {};
   children: ApiItem[];
 
-  kindString?: 'Class';
+  kindString?: 'Class' | 'Property' | 'Method';
+}
+
+export interface ClassItem {
+
 }
