@@ -1,5 +1,5 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
-import ClassItem from './ClassItem.vue';
+import ClassItem from './ItemKinds/ClassItem.vue';
 
 @Component({
   components: { ClassItem }
