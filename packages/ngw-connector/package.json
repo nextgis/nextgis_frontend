@@ -10,12 +10,12 @@
   },
   "devDependencies": {
     "@types/events": "^3.0.0",
-    "@types/node": "^11.9.3",
+    "@types/node": "^11.9.4",
     "rimraf": "^2.6.3",
     "ts-loader": "^5.3.3",
     "tslint": "^5.12.1",
     "typescript": "^3.3.3",
-    "webpack": "^4.29.3",
+    "webpack": "^4.29.4",
     "webpack-cli": "^3.2.3"
   },
   "scripts": {
