@@ -2,7 +2,7 @@
   <div>
     <div v-for="item in api.children" :key="item.id">
       <div v-if="item.kindString === 'Class'">
-        <class-item :api="item"></class-item>
+        <class-item :item="item"></class-item>
       </div>
     </div>
   </div>
