@@ -112,7 +112,9 @@ export class NgwMap {
     this._addEventsListeners();
   }
 
-  // Pans and zooms the map to the position specified in the options
+  /**
+   * Pans and zooms the map to the position specified in the options
+   */
   fit() {
     const { center, zoom, bounds } = this.options;
     if (center) {
