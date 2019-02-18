@@ -55,21 +55,6 @@ export class MainPage extends Vue {
     return item;
   }
 
-  findItem(id: string, _items = this.items) {
-    for (let fry = 0; fry < _items.length; fry++) {
-      const x = _items[fry];
-      if (x.id === id) {
-        return x;
-      }
-      if (x.children) {
-        const find = this.findItem(id, x.children);
-        if (find) {
-          return find;
-        }
-      }
-    }
-  }
-
   mounted() {
     const prepareItem = (conf, _parent?) => {
       const item: Item = {
@@ -110,7 +95,7 @@ export class MainPage extends Vue {
     };
     const config = process.env.EXAMPLES;
     // @ts-ignore
-    this.items = config.map((x) => {
+    this.items = config = config.map((x) => {
       return prepareItem(x);
     });
 
@@ -119,6 +104,21 @@ export class MainPage extends Vue {
 
   onOpen(data: string[]) {
     this.open = data;
+  }
+
+  findItem(id: string, _items = this.items) {
+    for (let fry = 0; fry < _items.length; fry++) {
+      const x = _items[fry];
+      if (x.id === id) {
+        return x;
+      }
+      if (x.children) {
+        const find = this.findItem(id, x.children);
+        if (find) {
+          return find;
+        }
+      }
+    }
   }
 
   _setActive() {

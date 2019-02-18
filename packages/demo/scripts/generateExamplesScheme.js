@@ -46,7 +46,7 @@ function generate(source = '../') {
     if (pages.length) {
       const item = {
         name,
-        id: libPath,
+        id: getIdFromPath(libPath),
         children: pages
       };
       items.push(item);
