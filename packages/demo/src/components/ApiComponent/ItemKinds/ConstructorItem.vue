@@ -2,8 +2,8 @@
   <div>
     <!-- {{item}} -->
 
-    <div v-for="s in getSignaturesStr(item)" :key="s">
-      {{s}}
+    <div v-for="s in utility.getSignaturesStr(item)" :key="s">
+      <pre><code class="javascript">{{s}}</code></pre>
     </div>
 
   </div>
