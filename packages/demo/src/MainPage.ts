@@ -5,13 +5,6 @@ import ApiComponent from './components/ApiComponent/ApiComponent.vue';
 import Logo from './components/Logo/Logo.vue';
 import { ApiItem } from './components/ApiComponent/ApiItem';
 
-let api: ApiItem | undefined;
-try {
-  api = require('./api.json');
-} catch (er) {
-  // ignore
-}
-
 export interface Item {
   id: string;
   name: string;
@@ -37,7 +30,7 @@ export class MainPage extends Vue {
 
   drawer = null;
 
-  api = api;
+  api?: ApiItem;
 
   items: Item[] = null;
   currentItemId: string;
@@ -56,6 +49,7 @@ export class MainPage extends Vue {
   }
 
   mounted() {
+    this.api = this.$store.state.api.api;
     const prepareItem = (conf, _parent?) => {
       const item: Item = {
         id: conf.id,
@@ -66,7 +60,7 @@ export class MainPage extends Vue {
       if (conf.children) {
         item.model = true;
         item.children = conf.children.map((i) => prepareItem(i, item));
-        const apiModule = api && this._findApiModule(item.name);
+        const apiModule = this.$store.getters['api/getApiModule'](item.name);
         if (apiModule) {
           item.children.push({
             name: 'API',
@@ -158,27 +152,5 @@ export class MainPage extends Vue {
       this.$router.push(path + id);
     }
     this.currentItemId = id;
-  }
-
-  _findApiModule(name: string): ApiItem {
-    const modules = api.children;
-    return modules.find((x) => {
-      return x.name.indexOf(name) !== -1;
-    });
-  }
-
-  _findInApi(cb: (item: ApiItem) => boolean, item: ApiItem = api): ApiItem | undefined {
-    const isItem = cb(item);
-    if (isItem) {
-      return item;
-    } else if (item.children) {
-      for (let fry = 0; fry < item.children.length; fry++) {
-        const c = item.children[fry];
-        const childItem = this._findInApi(cb, c);
-        if (childItem) {
-          return childItem;
-        }
-      }
-    }
   }
 }
