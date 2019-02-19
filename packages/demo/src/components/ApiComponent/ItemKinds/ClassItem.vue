@@ -11,14 +11,14 @@
       class="item-comment"
       v-if="item.comment && item.comment.shortText"
     >
-      <pre v-highlightjs="item.comment.shortText"><code class="markdown"></code></pre>
+      <comment :text="item.comment.shortText"></comment>
     </div>
 
     <constructor-item-component :classItem="item"></constructor-item-component>
 
     <!-- {{item}} -->
     <v-expansion-panel>
-      <v-expansion-panel-content v-for="p in getAllowedMemders(item)" :key="p.id">
+      <v-expansion-panel-content v-for="p in getAllowedMembers(item)" :key="p.id">
         <div slot="header">
           {{ p.name }}
           <!-- <p v-if="p.kindString === 'Property'"></p> -->
