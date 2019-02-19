@@ -6,7 +6,6 @@
       <a :href="g" target="_blank">github</a>
     </div>
 
-
     <div
       class="item-comment"
       v-if="item.comment && item.comment.shortText"

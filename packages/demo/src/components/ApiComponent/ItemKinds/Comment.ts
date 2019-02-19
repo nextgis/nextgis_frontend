@@ -12,7 +12,7 @@ export class Comment extends Vue {
     // `code` > <span>code</span>
     text = text.replace(/`(.+)`/g, '<span class="code">$1</span>');
     // {@link url | name}
-    text = text.replace(/{@link (.+) \| (.+)}/g, '<a href="$1">$2</a>');
+    text = text.replace(/{@link (.+) \| (.+)}/g, '<a href="$1" target="_blank">$2</a>');
     return text;
   }
 
