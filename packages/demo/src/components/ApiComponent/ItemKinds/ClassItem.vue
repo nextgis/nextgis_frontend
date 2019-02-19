@@ -1,21 +1,19 @@
 <template>
   <v-container>
-    <h3 class="pb-3">{{item.name}}</h3>
+    <h3 class="">{{item.name}}</h3>
 
-    <div v-for="g in getGithubSourceLinks(item)" :key="g">
-      <a :href="g" target="_blank">github</a>
-    </div>
+    <div class="subheader pb-3" v-for="g in getGithubSourceLinks(item)" :key="g" v-html="g"></div>
 
     <div
-      class="item-comment"
+      class="item-comment pb-3"
       v-if="item.comment && item.comment.shortText"
     >
       <comment :text="item.comment.shortText"></comment>
     </div>
 
-    <constructor-item-component :classItem="item"></constructor-item-component>
+    <constructor-item-component :classItem="item" class="pb-3"></constructor-item-component>
 
-    <!-- {{item}} -->
+    <h4>Members</h4>
     <v-expansion-panel>
       <v-expansion-panel-content v-for="p in getAllowedMembers(item)" :key="p.id">
         <div slot="header">
