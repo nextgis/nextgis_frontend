@@ -7,6 +7,8 @@
     "topological-sort": "^0.3.0",
     "tslint": "^5.12.1",
     "tslint-webpack-plugin": "^2.0.2",
+    "typedoc": "^0.14.2",
+    "typescript": "^3.3.3",
     "webpack": "^4.29.3"
   },
   "scripts": {
