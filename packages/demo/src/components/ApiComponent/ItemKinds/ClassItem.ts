@@ -25,7 +25,8 @@ export class ClassItemComponent extends Vue {
 
   getGithubSourceLinks(item: ApiItem) {
     return item.sources.map((x) => {
-      return `https://github.com/nextgis/nextgisweb_frontend/blob/master/packages/${x.fileName}#L${x.line}`;
+      const link = `https://github.com/nextgis/nextgisweb_frontend/blob/master/packages/${x.fileName}#L${x.line}`;
+      return `<a href="${link}" target="_blank">${x.fileName}</a>`;
     });
   }
 }

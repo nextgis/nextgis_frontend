@@ -1,10 +1,17 @@
 <template>
   <div>
-    <div v-for="item in api.children" :key="item.id">
-      <div v-if="item.kindString === 'Class'">
-        <class-item :item="item"></class-item>
-      </div>
-    </div>
+
+    <v-data-table
+      :items="properties"
+      class="elevation-1"
+      hide-actions
+      hide-headers
+    >
+      <template slot="items" slot-scope="props">
+        <td>{{ props.item.name }}{{props.item.flags.isOptional ? '?' : ''}}</td>
+        <td>{{ getOptionType(props.item.type) }}</td>
+      </template>
+    </v-data-table>
   </div>
 </template>
 
