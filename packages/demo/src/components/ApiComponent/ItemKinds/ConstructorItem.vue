@@ -3,7 +3,7 @@
     <!-- {{item}} -->
 
     <div v-for="s in utility.getSignaturesStr(item)" :key="s">
-      <pre><code class="javascript">{{s}}</code></pre>
+      <pre v-highlightjs="s"><code class="javascript"></code></pre>
     </div>
 
   </div>

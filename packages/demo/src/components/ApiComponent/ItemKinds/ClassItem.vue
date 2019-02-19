@@ -11,7 +11,7 @@
       class="item-comment"
       v-if="item.comment && item.comment.shortText"
     >
-      <pre><code class="markdown">{{item.comment.shortText}}</code></pre>
+      <pre v-highlightjs="item.comment.shortText"><code class="markdown"></code></pre>
     </div>
 
     <constructor-item-component :classItem="item"></constructor-item-component>

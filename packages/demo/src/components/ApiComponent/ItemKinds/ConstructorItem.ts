@@ -12,7 +12,6 @@ export class ConstructorItemComponent extends Vue {
 
   mounted() {
     this.item = this.classItem.children.find((x) => {
-      console.log(x);
       return x.kindString === 'Constructor';
     }) as ConstructorItem;
   }

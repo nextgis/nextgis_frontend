@@ -8,4 +8,9 @@ export class ApiComponent extends Vue {
 
   @Prop() api: any;
   @Prop() package: string;
+
+  created() {
+    // @ts-ignore
+    hljs.initHighlightingOnLoad();
+  }
 }
