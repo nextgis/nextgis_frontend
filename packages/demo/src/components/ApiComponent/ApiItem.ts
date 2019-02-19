@@ -31,12 +31,20 @@ export interface ApiItem {
   'Method' |
   'Parameter' |
   'Call signature' |
-  'Constructor signature';
+  'Constructor signature' |
+  'Interface'
+  ;
 
+  type?: Property;
 }
 
 export interface ClassItem extends ApiItem {
   kindString: 'Class';
+}
+
+export interface InterfaceItem extends ApiItem {
+  kindString: 'Interface';
+  children: Parameter[];
 }
 
 export interface Parameter extends ApiItem {
@@ -53,4 +61,31 @@ export interface ConstructorItem extends ApiItem {
   kindString: 'Constructor';
 
   signatures: ConstructorSignature[];
+}
+
+export type Property = IntrinsicPropertyType | PropertyUnionType | ReferencePropertyType | TuplePropertyType;
+
+export interface PropertyType {
+  type: string;
+}
+
+export interface IntrinsicPropertyType extends PropertyType {
+  type: 'intrinsic';
+  name: 'undefined' | 'string' | 'number';
+}
+
+export interface TuplePropertyType extends PropertyType {
+  type: 'tuple';
+  elements: Property[];
+}
+
+export interface ReferencePropertyType extends PropertyType {
+  type: 'reference';
+  id: number;
+  name: string;
+}
+
+export interface PropertyUnionType extends PropertyType {
+  type: 'union';
+  types: Property[];
 }
