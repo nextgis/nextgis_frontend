@@ -4,7 +4,9 @@ import NgwMap, { NgwMapOptions } from '@nextgis/ngw-map';
 import LeafletMapAdapter from '@nextgis/leaflet-map-adapter';
 
 /**
- * The `NgwLeaflet` responsible for displaying the [NgwMap](ngw-map) using the [LeafletMapAdapter](leaflet-map-adapter)
+ * The `NgwLeaflet` responsible for displaying the {@link http://code.nextgis.com/ngw-map-api | NgwMap}
+ * using the  {@link http://code.nextgis.com/leaflet-map-adapter-api | LeafletMapAdapter}
+ *
  * @example
  * ```javascript
  * import NgwLeaflet from '@nextgis/ngw-leaflet';

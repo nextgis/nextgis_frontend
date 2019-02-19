@@ -2,9 +2,10 @@ import { Vue, Component, Prop } from 'vue-property-decorator';
 import { ClassItem, ApiItem } from '../ApiItem';
 
 import ConstructorItemComponent from './ConstructorItem.vue';
+import Comment from './Comment.vue';
 
 @Component({
-  components: {ConstructorItemComponent}
+  components: {ConstructorItemComponent, Comment}
 })
 export class ClassItemComponent extends Vue {
   @Prop() item: ClassItem;
@@ -18,7 +19,7 @@ export class ClassItemComponent extends Vue {
     return allowedByKind;
   }
 
-  getAllowedMemders(item: ApiItem): ApiItem[] {
+  getAllowedMembers(item: ApiItem): ApiItem[] {
     return item.children.filter(this.isItemAllow);
   }
 

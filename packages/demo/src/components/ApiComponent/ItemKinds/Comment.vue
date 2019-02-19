@@ -1,0 +1,14 @@
+<template>
+  <div class="comment" v-html="str"></div>
+</template>
+
+<script lang="ts">
+export { Comment as default } from './Comment';
+</script>
+
+<style lang="scss">
+  .comment .code {
+    // color: rgb(0, 112, 197);
+    font-weight: bold;
+  }
+</style>
