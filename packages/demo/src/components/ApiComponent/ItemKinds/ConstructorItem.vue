@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for="s in utility.getSignaturesStr(item)" :key="s">
+    <div v-for="s in getSignaturesStr(item)" :key="s">
       <pre v-highlightjs="s"><code class="javascript"></code></pre>
     </div>
 

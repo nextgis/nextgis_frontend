@@ -2,12 +2,15 @@ import { Vue, Component, Prop } from 'vue-property-decorator';
 import ClassItem from './ItemKinds/ClassItem.vue';
 import Comment from './ItemKinds/Comment.vue';
 import { ApiItem, InterfaceItem, Parameter, Property } from './ApiItem';
+import * as utility from './utility';
 
 @Component({
   components: { ClassItem, Comment }
 })
 export class ApiOption extends Vue {
   @Prop() id: number;
+
+  utility = utility;
 
   get indexes(): { [id: number]: ApiItem } {
     return this.$store.state.api.indexes;
@@ -26,39 +29,7 @@ export class ApiOption extends Vue {
   }
 
   getOptionType(option: Property): string {
-    let str = '';
-    if (option.type === 'union') {
-      str += option.types.map((x) => this.getOptionType(x)).filter((x) => !!x).join(' | ');
-    } else if (option.type === 'intrinsic') {
-      if (option.name !== 'undefined') {
-        str += option.name;
-      }
-    } else if (option.type === 'tuple') {
-      str += `[${option.elements.map((x) => this.getOptionType(x)).filter((x) => !!x).join(', ')}]`;
-    } else if (option.type === 'reference') {
-      str += this.createReference(option);
-    } else if (option.type === 'reflection') {
-      // IG
-    }
-
-    return str;
+    return this.utility.getOptionType(option, this.indexes);
   }
 
-  createReference(option) {
-    let str = '';
-    const refOption = this.indexes[option.id];
-    if (refOption && refOption.type && refOption.type) {
-      str += this.getOptionType(refOption.type);
-    } else if (option.typeArguments) {
-      const args = option.typeArguments.map((x) => this.getOptionType(x)).filter((x) => !!x).join(' | ');
-      str += `${option.name}<${args}>`;
-    } else {
-      str += option.name;
-    }
-    return str;
-  }
-
-  createDeclarationStr(option) {
-    // ignore
-  }
 }
