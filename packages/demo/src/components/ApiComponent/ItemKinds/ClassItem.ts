@@ -1,14 +1,22 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
-import { ClassItem, ApiItem } from '../ApiItem';
+import { ClassItem, ApiItem, Parameter, MethodItem } from '../ApiItem';
 
 import ConstructorItemComponent from './ConstructorItem.vue';
 import Comment from './Comment.vue';
+import * as utility from '../utility';
+import { Indexes } from 'packages/demo/src/store/modules/api';
 
 @Component({
-  components: {ConstructorItemComponent, Comment}
+  components: { ConstructorItemComponent, Comment }
 })
 export class ClassItemComponent extends Vue {
   @Prop() item: ClassItem;
+  indexes: Indexes;
+  utility = utility;
+
+  beforeCreate() {
+    this.indexes = this.$store.state.api.indexes;
+  }
 
   isItemAllow(item: ApiItem): boolean {
     const allowedByFlags = item.flags.isPrivate !== undefined ? !item.flags.isPrivate : true;
@@ -24,9 +32,10 @@ export class ClassItemComponent extends Vue {
   }
 
   getGithubSourceLinks(item: ApiItem) {
-    return item.sources.map((x) => {
-      const link = `https://github.com/nextgis/nextgisweb_frontend/blob/master/packages/${x.fileName}#L${x.line}`;
-      return `<a href="${link}" target="_blank">${x.fileName}</a>`;
-    });
+    return utility.getSourceLink(item);
+  }
+
+  createMethodString(methodItem: MethodItem) {
+    return this.utility.createMethodString(methodItem, this.indexes);
   }
 }

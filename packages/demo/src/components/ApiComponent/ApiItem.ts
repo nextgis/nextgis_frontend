@@ -20,7 +20,7 @@ export interface ApiItem {
   kind: number;
   flags: Flags;
 
-  children: ApiItem[];
+  children?: ApiItem[];
 
   sources?: Source[];
   kindString?: 'Class' |
@@ -32,14 +32,27 @@ export interface ApiItem {
   'Constructor signature' |
   'Interface' |
   'Type literal' |
-  'Index signature'
+  'Index signature' |
+  'Variable'
   ;
 
   type?: Property;
 }
 
+export type Parameter = ParameterItem | VariableItem;
+
 export interface ClassItem extends ApiItem {
   kindString: 'Class';
+}
+
+export interface VariableItem extends ApiItem {
+  kindString: 'Variable';
+  type: Property;
+}
+
+export interface CallSignatureItem extends ApiItem {
+  kindString: 'Call signature';
+  type: Property;
 }
 
 export interface InterfaceItem extends ApiItem {
@@ -52,7 +65,7 @@ export interface PropertyItem extends ApiItem {
   type: Property;
   name: string;
 }
-export interface Parameter extends ApiItem {
+export interface ParameterItem extends ApiItem {
   kindString: 'Parameter';
   type: Property;
   comment: ApiComment;
@@ -67,6 +80,12 @@ export interface ConstructorItem extends ApiItem {
   kindString: 'Constructor';
 
   signatures: ConstructorSignature[];
+}
+
+export interface MethodItem extends ApiItem {
+  kindString: 'Method';
+  implementationOf: ReferencePropertyType;
+  signatures: Signatures[];
 }
 
 export type Property = IntrinsicPropertyType |
@@ -110,11 +129,14 @@ interface IndexSignature extends ApiItem {
 
 interface Declaration extends ApiItem {
   kindString: 'Type literal';
-  indexSignature: IndexSignature[];
+  indexSignature?: IndexSignature[];
+  children?: VariableItem[];
+  name: '__type';
 }
 
 export interface ReflectionType extends PropertyType {
   type: 'reflection';
-  name: '__type';
   declaration: Declaration;
 }
+
+export type Signatures = IndexSignature | ConstructorSignature | CallSignatureItem;
