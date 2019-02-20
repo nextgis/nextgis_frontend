@@ -1,11 +1,14 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
+import { ApiComment } from '../ApiItem';
 
 @Component
 export class Comment extends Vue {
   @Prop() text: string;
+  @Prop() comment: ApiComment;
 
   get str() {
-    return this._prepareStr(this.text);
+    const text = this.comment ? this.comment.shortText : this.text;
+    return this._prepareStr(text);
   }
 
   _prepareStr(text: string): string {

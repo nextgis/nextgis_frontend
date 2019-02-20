@@ -18,7 +18,6 @@
       <v-expansion-panel-content v-for="p in getAllowedMembers(item)" :key="p.id">
         <div slot="header">
           {{ p.name }}
-          <!-- <p v-if="p.kindString === 'Property'"></p> -->
           <span v-if="p.kindString === 'Method'">
             (
             <span v-for="s in p.signatures" :key="s.id">
