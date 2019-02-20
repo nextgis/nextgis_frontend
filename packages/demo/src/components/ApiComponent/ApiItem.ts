@@ -47,6 +47,11 @@ export interface InterfaceItem extends ApiItem {
   children: Parameter[];
 }
 
+export interface PropertyItem extends ApiItem {
+  kindString: 'Property';
+  type: Property;
+  name: string;
+}
 export interface Parameter extends ApiItem {
   kindString: 'Parameter';
   type: Property;
@@ -64,7 +69,11 @@ export interface ConstructorItem extends ApiItem {
   signatures: ConstructorSignature[];
 }
 
-export type Property = IntrinsicPropertyType | PropertyUnionType | ReferencePropertyType | TuplePropertyType;
+export type Property = IntrinsicPropertyType |
+  PropertyUnionType |
+  ReferencePropertyType |
+  TuplePropertyType |
+  ReflectionType;
 
 export interface PropertyType {
   type: string;
@@ -104,7 +113,7 @@ interface Declaration extends ApiItem {
   indexSignature: IndexSignature[];
 }
 
-export interface DeclarationReflectionType extends PropertyType {
+export interface ReflectionType extends PropertyType {
   type: 'reflection';
   name: '__type';
   declaration: Declaration;

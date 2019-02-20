@@ -21,7 +21,8 @@ export class ApiOption extends Vue {
   }
 
   get properties(): Parameter[] {
-    return this.option.children;
+    const children  = this.option.children.filter((x) => !!x.type);
+    return children;
   }
 
   getOptionType(option: Property): string {
@@ -35,21 +36,25 @@ export class ApiOption extends Vue {
     } else if (option.type === 'tuple') {
       str += `[${option.elements.map((x) => this.getOptionType(x)).filter((x) => !!x).join(', ')}]`;
     } else if (option.type === 'reference') {
-      const refOption = this.indexes[option.id];
-      if (refOption && refOption.type && refOption.type) {
-        str += this.getOptionType(refOption.type);
-      } else if (option.typeArguments) {
-        const args = option.typeArguments.map((x) => this.getOptionType(x)).filter((x) => !!x).join(' | ');
-        str += `${option.name}<${args}>`;
-      } else {
-        str += option.name;
-      }
-    }
-    // @ts-ignore
-    if (!str && option.name !== 'undefined') {
-      console.log(option);
+      str += this.createReference(option);
+    } else if (option.type === 'reflection') {
+      // IG
     }
 
+    return str;
+  }
+
+  createReference(option) {
+    let str = '';
+    const refOption = this.indexes[option.id];
+    if (refOption && refOption.type && refOption.type) {
+      str += this.getOptionType(refOption.type);
+    } else if (option.typeArguments) {
+      const args = option.typeArguments.map((x) => this.getOptionType(x)).filter((x) => !!x).join(' | ');
+      str += `${option.name}<${args}>`;
+    } else {
+      str += option.name;
+    }
     return str;
   }
 
