@@ -1,10 +1,11 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import { ConstructorItem, ClassItem } from '../ApiItem';
-import ApiOption from '../ApiOption.vue';
+
+import ApiParameters from '../ApiParameters.vue';
 import * as utility from '../utility';
 
 @Component({
-  components: {ApiOption}
+  components: {ApiParameters}
 })
 export class ConstructorItemComponent extends Vue {
 
