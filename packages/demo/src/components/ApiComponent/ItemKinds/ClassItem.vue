@@ -17,17 +17,17 @@
     <v-expansion-panel>
       <v-expansion-panel-content v-for="p in getAllowedMembers(item)" :key="p.id">
         <div slot="header">
-          {{ p.name }}
           <span v-if="p.kindString === 'Method'">
-            (
-            <span v-for="s in p.signatures" :key="s.id">
-              <span v-for="p in s.parameters" :key="p.id">{{p.name}}</span>
-            </span>
-            )
+            {{ createMethodString(p) }}
+          </span>
+          <span v-else>
+            {{ p.name }}
           </span>
         </div>
         <v-card>
-          <v-card-text>{{p}}</v-card-text>
+          <v-card-text>
+            <div class="subheader pb-1" v-for="g in getGithubSourceLinks(p)" :key="g" v-html="g"></div>
+          </v-card-text>
         </v-card>
       </v-expansion-panel-content>
     </v-expansion-panel>

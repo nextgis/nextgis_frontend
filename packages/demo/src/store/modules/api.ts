@@ -1,7 +1,9 @@
 import { ApiItem } from '../../components/ApiComponent/ApiItem';
 
+export interface Indexes { [id: number]: ApiItem; }
+
 let api: ApiItem | undefined;
-let indexes: { [id: number]: ApiItem };
+let indexes: Indexes;
 try {
   api = require('../../api.json');
   indexes = createIndexes(api);
