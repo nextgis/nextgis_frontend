@@ -1,9 +1,10 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import ClassItem from './ItemKinds/ClassItem.vue';
+import Comment from './ItemKinds/Comment.vue';
 import { ApiItem, InterfaceItem, Parameter, Property } from './ApiItem';
 
 @Component({
-  components: { ClassItem }
+  components: { ClassItem, Comment }
 })
 export class ApiOption extends Vue {
   @Prop() id: number;
@@ -37,9 +38,22 @@ export class ApiOption extends Vue {
       const refOption = this.indexes[option.id];
       if (refOption && refOption.type && refOption.type) {
         str += this.getOptionType(refOption.type);
+      } else if (option.typeArguments) {
+        const args = option.typeArguments.map((x) => this.getOptionType(x)).filter((x) => !!x).join(' | ');
+        str += `${option.name}<${args}>`;
+      } else {
+        str += option.name;
       }
+    }
+    // @ts-ignore
+    if (!str && option.name !== 'undefined') {
+      console.log(option);
     }
 
     return str;
+  }
+
+  createDeclarationStr(option) {
+    // ignore
   }
 }

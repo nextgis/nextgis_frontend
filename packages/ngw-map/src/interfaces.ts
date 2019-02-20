@@ -14,6 +14,10 @@ export interface ControlOptions {
 }
 
 export interface NgwMapOptions extends MapOptions {
+  /**
+   * The HTML element in which NgwMap will render the map,
+   * or the element's string  id. The specified element must have no children.
+   */
   target: string | HTMLElement;
   qmsId?: number | [number, string];
   webmapId?: number | [number, string];

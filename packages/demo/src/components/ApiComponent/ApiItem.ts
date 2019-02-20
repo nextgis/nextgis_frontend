@@ -10,10 +10,8 @@ export interface Source {
   character: number;
 }
 
-export interface ReferenceType {
-  type: 'reference';
-  name: string;
-  id: number;
+export interface ApiComment {
+  shortText?: string;
 }
 
 export interface ApiItem {
@@ -32,7 +30,9 @@ export interface ApiItem {
   'Parameter' |
   'Call signature' |
   'Constructor signature' |
-  'Interface'
+  'Interface' |
+  'Type literal' |
+  'Index signature'
   ;
 
   type?: Property;
@@ -49,7 +49,8 @@ export interface InterfaceItem extends ApiItem {
 
 export interface Parameter extends ApiItem {
   kindString: 'Parameter';
-  type: ReferenceType;
+  type: Property;
+  comment: ApiComment;
 }
 
 export interface ConstructorSignature extends ApiItem {
@@ -71,7 +72,7 @@ export interface PropertyType {
 
 export interface IntrinsicPropertyType extends PropertyType {
   type: 'intrinsic';
-  name: 'undefined' | 'string' | 'number';
+  name: 'undefined' | 'string' | 'number' | 'any';
 }
 
 export interface TuplePropertyType extends PropertyType {
@@ -83,9 +84,28 @@ export interface ReferencePropertyType extends PropertyType {
   type: 'reference';
   id: number;
   name: string;
+  typeArguments: Property[];
 }
 
 export interface PropertyUnionType extends PropertyType {
   type: 'union';
   types: Property[];
+}
+
+interface IndexSignature extends ApiItem {
+  name: '__index';
+  kindString: 'Index signature';
+  parameters: Parameter[];
+  type: Property;
+}
+
+interface Declaration extends ApiItem {
+  kindString: 'Type literal';
+  indexSignature: IndexSignature[];
+}
+
+export interface DeclarationReflectionType extends PropertyType {
+  type: 'reflection';
+  name: '__type';
+  declaration: Declaration;
 }
