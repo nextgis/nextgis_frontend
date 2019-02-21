@@ -1,4 +1,8 @@
-import { NgwUploader } from './ngw-uploader';
+/**
+ * @module ngw-uploader
+ */
+
+import { NgwUploader } from './NgwUploader';
 
 export * from './interfaces';
 

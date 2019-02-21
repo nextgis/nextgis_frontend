@@ -1,3 +1,7 @@
+/**
+ * @module webmap
+ */
+
 import { MapClickEvent } from './MapAdapter';
 import { MapOptions} from './WebMapApp';
 import WebMap, { Type, LayerAdapter } from '../index';

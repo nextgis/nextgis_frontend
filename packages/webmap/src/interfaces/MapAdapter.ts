@@ -1,3 +1,7 @@
+/**
+ * @module webmap
+ */
+
 import { LayerAdapter } from './LayerAdapter';
 import { Type } from './BaseTypes';
 import { EventEmitter } from 'events';

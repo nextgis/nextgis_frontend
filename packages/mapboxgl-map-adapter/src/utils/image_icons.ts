@@ -1,4 +1,3 @@
-
 let canvg: any;
 try {
   canvg = require('canvg');

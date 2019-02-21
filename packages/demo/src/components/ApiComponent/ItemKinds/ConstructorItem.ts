@@ -17,12 +17,19 @@ export class ConstructorItemComponent extends Vue {
 
   mounted() {
     this.indexes = this.$store.state.api.indexes;
-    this.item = this.classItem.children.find((x) => {
-      return x.kindString === 'Constructor';
-    }) as ConstructorItem;
+    if (this.classItem.children) {
+      this.item = this.classItem.children.find((x) => {
+        return x.kindString === 'Constructor';
+      }) as ConstructorItem;
+    }
   }
 
   getSignaturesStr(item: ConstructorItem, ) {
-    return this.utility.getConstructorSignatureStr(item, this.indexes);
+    const str = this.utility.getConstructorSignatureStr(item, this.indexes);
+    return !str ? [] : str.map((x) => {
+      const tmp = document.createElement('div');
+      tmp.innerHTML = x;
+      return tmp.innerText;
+    });
   }
 }

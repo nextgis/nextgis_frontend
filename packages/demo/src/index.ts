@@ -20,7 +20,14 @@ const app = new Vue({
   el: '#app',
   router,
   store,
-  render: (h) => h(App)
+  render: (h) => h(App),
+  methods: {
+    goTo(elementId: string, options?: any) {
+      // @ts-ignore
+      this.$vuetify.goTo('#' + elementId.replace('#', ''), options);
+      window.location.hash = elementId;
+    }
+  }
 });
 
 // declare global {

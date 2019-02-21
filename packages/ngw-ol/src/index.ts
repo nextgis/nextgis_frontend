@@ -1,3 +1,7 @@
+/**
+ * @module ngw-ol
+ */
+
 import 'ol/ol.css';
 import NgwMap, { NgwMapOptions } from '@nextgis/ngw-map';
 import OlMapAdapter from '@nextgis/ol-map-adapter';

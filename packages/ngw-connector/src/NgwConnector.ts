@@ -1,3 +1,7 @@
+/**
+ * @module ngw-connector
+ */
+
 import './polyfills';
 
 import { RequestItemsParamsMap } from './types/RequestItemsParamsMap';

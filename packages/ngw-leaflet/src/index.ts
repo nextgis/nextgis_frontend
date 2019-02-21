@@ -1,3 +1,7 @@
+/**
+ * @module ngw-leaflet
+ */
+
 import 'leaflet/dist/leaflet.css';
 
 import NgwMap, { NgwMapOptions } from '@nextgis/ngw-map';

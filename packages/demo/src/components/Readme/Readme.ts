@@ -5,4 +5,9 @@ export class Readme extends Vue {
 
   @Prop() html: string;
 
+  mounted() {
+    // @ts-ignore
+    this.$vuetify.goTo(0, {duration: 0});
+  }
+
 }

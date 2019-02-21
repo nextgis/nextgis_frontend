@@ -1,7 +1,7 @@
 import { NgwMap } from './NgwMap';
 
 /**
- * decorator to run action only after map is created
+ * Decorator to run action only after map is created
  */
 export function onMapLoad() {
   return onLoad('map:created');

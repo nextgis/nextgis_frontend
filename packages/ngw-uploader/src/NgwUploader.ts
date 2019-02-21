@@ -1,3 +1,7 @@
+/**
+ * @module ngw-uploader
+ */
+
 import NgwConnector, { Credentials } from '@nextgis/ngw-connector';
 import { EventEmitter } from 'events';
 import { evented, onLoad } from './decorators';

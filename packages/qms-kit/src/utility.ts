@@ -14,7 +14,7 @@ export function createQmsAdapter(webMap: WebMap, url: string): Type<BaseLayerAda
 
     async addLayer(options: QmsAdapterOptions) {
 
-      // qmsid for request, id for store
+      // qmsId for request, id for store
       const service = await loadJSON<Geoservice>(url + '/api/v1/geoservices/' + options.qmsId);
       if (service) {
         const type = alias[service.type];

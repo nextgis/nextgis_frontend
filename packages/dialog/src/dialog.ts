@@ -1,3 +1,7 @@
+/**
+ * @module dialog
+ */
+
 import { DialogAdapter, DialogAdapterOptions } from '@nextgis/webmap';
 // @ts-ignore
 import dialogPolyfill from 'dialog-polyfill/dialog-polyfill';
@@ -43,7 +47,7 @@ export class Dialog implements DialogAdapter {
 
     if (!this._isNativeDialog) {
       dialogPolyfill.registerDialog(this._dialog);
-      this._dialog.classList.add('polifilled');
+      this._dialog.classList.add('polyfilled');
     }
 
     if (this.options.closeBtn) {

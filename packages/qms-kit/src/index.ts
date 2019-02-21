@@ -1,3 +1,7 @@
+/**
+ * @module qms-kit
+ */
+
 import { QmsKit } from './QmsKit';
 
 export * from './interfaces';

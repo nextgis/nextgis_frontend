@@ -1,3 +1,7 @@
+/**
+ * @module item
+ */
+
 import { TreeHelper } from './TreeHelper';
 import { ItemProperties } from './properties/ItemProperties';
 import { ItemOptions } from './interfaces';
@@ -10,8 +14,6 @@ try {
 }
 // tslint:disable-next-line:variable-name
 const EventEmitter = events && events.EventEmitter;
-
-let ID = 0;
 
 export class Item<O extends ItemOptions = ItemOptions> {
 

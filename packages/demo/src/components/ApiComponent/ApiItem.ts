@@ -15,6 +15,9 @@ export interface ApiComment {
 }
 
 export interface ApiItem {
+
+  module?: ApiItem;
+
   id: number;
   name: string;
   kind: number;
@@ -23,7 +26,8 @@ export interface ApiItem {
   children?: ApiItem[];
 
   sources?: Source[];
-  kindString?: 'Class' |
+  kindString?: 'External module' |
+  'Class' |
   'Constructor' |
   'Property' |
   'Method' |

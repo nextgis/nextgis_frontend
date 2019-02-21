@@ -1,3 +1,7 @@
+/**
+ * @module leaflet-map-adapter
+ */
+
 import {
   MapAdapter,
   MapOptions,
