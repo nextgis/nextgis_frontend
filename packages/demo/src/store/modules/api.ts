@@ -13,8 +13,15 @@ try {
 
 function createIndexes(item: ApiItem) {
   const idx = {};
-  forEachApi((i) => {
+  forEachApi((i, p) => {
     idx[i.id] = i;
+    if (p) {
+      if (p.kindString === 'External module') {
+        i.module = p;
+      } else if (p.module) {
+        i.module = p.module;
+      }
+    }
   }, item);
   return idx;
 }
@@ -34,12 +41,13 @@ function findInApi(cb: (item: ApiItem) => boolean, item?: ApiItem): ApiItem | un
   }
 }
 
-function forEachApi(cb: (item: ApiItem) => void, item: ApiItem = api): ApiItem | undefined {
-  cb(item);
+function forEachApi(
+  cb: (item: ApiItem, parent?: ApiItem) => void, item: ApiItem = api, parent?: ApiItem): ApiItem | undefined {
+  cb(item, parent);
   if (item.children) {
     for (let fry = 0; fry < item.children.length; fry++) {
       const c = item.children[fry];
-      const childItem = forEachApi(cb, c);
+      const childItem = forEachApi(cb, c, item);
       if (childItem) {
         return childItem;
       }
@@ -51,7 +59,7 @@ function findApiModule(name: string, item: ApiItem): ApiItem {
   if (item && item.children) {
     const modules = item.children;
     return modules.find((x) => {
-      return x.name.indexOf(name) !== -1;
+      return x.name === name;
     });
   }
 }

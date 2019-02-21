@@ -1,3 +1,7 @@
+/**
+ * @module ngw-kit
+ */
+
 import WebMap, { AdapterOptions } from '@nextgis/webmap';
 import NgwConnector from '@nextgis/ngw-connector';
 

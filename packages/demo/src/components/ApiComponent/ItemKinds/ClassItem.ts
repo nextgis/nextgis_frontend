@@ -28,11 +28,17 @@ export class ClassItemComponent extends Vue {
   }
 
   getAllowedMembers(item: ApiItem): ApiItem[] {
-    return item.children.filter(this.isItemAllow);
+    return item.children ? item.children.filter(this.isItemAllow) : [];
   }
 
   getGithubSourceLinks(item: ApiItem) {
     return utility.getSourceLink(item);
+  }
+
+  createTypedName(item: Parameter) {
+    const type = this.utility.getOptionType(item.type, this.indexes);
+    const name = this.utility.getParameterName(item);
+    return `${name}${type ? ': ' + type : ''}`;
   }
 
   createMethodString(methodItem: MethodItem) {

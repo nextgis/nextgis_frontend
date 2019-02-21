@@ -1,3 +1,7 @@
+/**
+ * @module webmap
+ */
+
 import { GeoJsonObject, Feature } from 'geojson';
 import { LatLng, LayerExtent } from './BaseTypes';
 

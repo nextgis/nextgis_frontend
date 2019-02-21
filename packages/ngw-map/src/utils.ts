@@ -1,5 +1,5 @@
 import { GeoJsonObject, GeoJsonGeometryTypes, FeatureCollection, GeometryCollection, Feature } from 'geojson';
-import { MapAdapter, LayerAdaptersOptions, Type, LayerAdapter, BaseLayerAdapter } from '@nextgis/webmap';
+import { MapAdapter, Type, LayerAdapter, BaseLayerAdapter } from '@nextgis/webmap';
 
 export function fixUrlStr(url: string) {
   // remove double slash

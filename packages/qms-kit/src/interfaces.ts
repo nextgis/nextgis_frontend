@@ -1,3 +1,7 @@
+/**
+ * @module qms-kit
+ */
+
 import { AdapterOptions } from '@nextgis/webmap';
 export interface QmsOptions {
   url: string;

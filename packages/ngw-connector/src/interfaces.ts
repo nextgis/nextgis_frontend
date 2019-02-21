@@ -1,3 +1,7 @@
+/**
+ * @module ngw-connector
+ */
+
 import { ResourceItem } from './types/ResourceItem';
 
 export interface FileMeta {

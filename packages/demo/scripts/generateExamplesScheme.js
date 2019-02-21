@@ -73,7 +73,7 @@ function getReadme(libPath) {
     const readmeMd = readFileSync(readmePath, 'utf8');
     const id = getIdFromPath(libPath);
     readme.push({
-      id,
+      id: id + '-readme',
       html: converter.makeHtml(readmeMd),
       name: 'README',
       page: 'readme'

@@ -1,3 +1,7 @@
+/**
+ * @module ngw-mapbox
+ */
+
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 import NgwMap, { NgwLayerOptions, NgwMapOptions, AdapterOptions } from '@nextgis/ngw-map';

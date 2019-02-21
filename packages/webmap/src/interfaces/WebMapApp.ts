@@ -1,3 +1,7 @@
+/**
+ * @module webmap
+ */
+
 import { MapAdapter } from './MapAdapter';
 import { StarterKit } from './StarterKit';
 import { MapControl } from './MapControl';

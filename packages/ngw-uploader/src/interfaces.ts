@@ -1,3 +1,7 @@
+/**
+ * @module ngw-uploader
+ */
+
 import { NgwConnectorOptions } from '@nextgis/ngw-connector';
 
 export interface UploadInputOptions {

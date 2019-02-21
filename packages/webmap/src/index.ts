@@ -1,3 +1,7 @@
+/**
+ * @module webmap
+ */
+
 import { WebMap } from './WebMap';
 
 export * from './WebMap';

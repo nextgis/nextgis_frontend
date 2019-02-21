@@ -1,3 +1,7 @@
+/**
+ * @module webmap
+ */
+
 export interface DialogAdapterOptions {
   template?: string | Node;
   openers?: HTMLElement[];

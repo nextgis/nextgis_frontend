@@ -1,3 +1,7 @@
+/**
+ * @module item
+ */
+
 import { Item } from './Item';
 
 export * from './interfaces';
