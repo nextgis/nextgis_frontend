@@ -64,13 +64,13 @@ export function getOptionType(option: Property, indexes: Indexes): string {
 export function createReference(option: ReferencePropertyType, indexes: Indexes) {
   let str = '';
   const refOption = indexes[option.id];
-  if (refOption && refOption.type && refOption.type) {
+  if (refOption && refOption.type) {
     str += getOptionType(refOption.type, indexes);
   } else if (option.typeArguments) {
     const args = option.typeArguments.map((x) => getOptionType(x, indexes)).filter((x) => !!x).join(' | ');
     str += `${option.name}<${args}>`;
-  } else {
-    str += option.name;
+  } else if (refOption && refOption.kindString === 'Interface') {
+    return `<a href="${refOption.module.name}-api#${option.name}">${option.name}</a>`;
   }
   return str;
 }

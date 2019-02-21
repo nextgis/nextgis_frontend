@@ -1,3 +1,7 @@
+/**
+ * @module ngw-map
+ */
+
 import WebMap, {
   MapAdapter,
   StarterKit,

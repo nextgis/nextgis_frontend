@@ -1,3 +1,7 @@
+/**
+ * @module url-runtime-params
+ */
+
 import { RuntimeParams } from '@nextgis/webmap';
 import { Params, StateData } from './interfaces';
 

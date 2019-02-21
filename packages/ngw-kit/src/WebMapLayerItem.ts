@@ -1,3 +1,7 @@
+/**
+ * @module ngw-kit
+ */
+
 import Item, { ItemOptions } from '@nextgis/item';
 
 import WebMap, { LayerAdaptersOptions, LayerAdapter } from '@nextgis/webmap';

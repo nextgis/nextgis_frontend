@@ -1,3 +1,7 @@
+/**
+ * @module webmap
+ */
+
 import { AdapterOptions, DataLayerFilter, VectorLayerAdapter, LayerAdapters } from './interfaces/LayerAdapter';
 import { LayerAdaptersOptions, LayerAdapter, OnLayerClickOptions } from './interfaces/LayerAdapter';
 import { MapAdapter, MapClickEvent, ControlPositions, FitOptions } from './interfaces/MapAdapter';

@@ -1,3 +1,7 @@
+/**
+ * @module ngw-connector
+ */
+
 import { NgwConnector } from './NgwConnector';
 
 export * from './interfaces';

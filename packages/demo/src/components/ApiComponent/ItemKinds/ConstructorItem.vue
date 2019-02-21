@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div v-for="s in getSignaturesStr(item)" :key="s">
-      <pre v-highlightjs="s"><code class="javascript"></code></pre>
+    <div v-for="s in getSignaturesStr(item)" :key="s" >
+      <pre v-highlightjs="s"><code class="typescript"></code></pre>
     </div>
 
     <api-parameters :item="item"></api-parameters>

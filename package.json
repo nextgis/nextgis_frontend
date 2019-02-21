@@ -26,6 +26,7 @@
     "packages/*"
   ],
   "dependencies": {
-    "css-loader": "^2.1.0"
+    "css-loader": "^2.1.0",
+    "typedoc-plugin-external-module-name": "^2.0.0"
   }
 }

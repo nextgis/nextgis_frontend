@@ -18,6 +18,8 @@ export class HtmlExample extends Vue {
     this.$watch('html', (newVal) => {
       this._writeIFrame(newVal);
     });
+    // @ts-ignore
+    this.$vuetify.goTo(0, {duration: 0});
   }
 
   openFullPage() {

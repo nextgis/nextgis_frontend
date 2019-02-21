@@ -9,7 +9,7 @@
     >
       <template slot="items" slot-scope="props">
         <td>{{ props.item.name }}{{props.item.flags.isOptional ? '?' : ''}}</td>
-        <td>{{ getOptionType(props.item.type) }}</td>
+        <td v-html="getOptionType(props.item.type)"></td>
         <td><comment :comment="props.item.comment"></comment></td>
       </template>
     </v-data-table>

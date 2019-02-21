@@ -1,3 +1,7 @@
+/**
+ * @module ol-map-adapter
+ */
+
 import {
   MapAdapter,
   ControlPositions,

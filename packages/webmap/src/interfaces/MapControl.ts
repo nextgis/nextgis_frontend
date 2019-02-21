@@ -1,3 +1,7 @@
+/**
+ * @module webmap
+ */
+
 // like in https://leafletjs.com/reference-1.3.4.html#control-zoom
 export interface ZoomControlOptions {
   /** The text set on the 'zoom in' button. */
