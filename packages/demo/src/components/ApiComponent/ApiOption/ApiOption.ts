@@ -1,8 +1,8 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
-import ClassItem from './ItemKinds/ClassItem.vue';
-import Comment from './ItemKinds/Comment.vue';
-import { ApiItem, InterfaceItem, Parameter, Property } from './ApiItem';
-import * as utility from './utility';
+import ClassItem from '../ClassItem/ClassItem.vue';
+import Comment from '../Comment/Comment.vue';
+import { ApiItem, InterfaceItem, Parameter, Property } from '../ApiItem';
+import * as utility from '../utility';
 
 @Component({
   components: { ClassItem, Comment }

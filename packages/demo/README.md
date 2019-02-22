@@ -1,3 +1,3 @@
 # DEMO
 
-Сollection of examples
+Collection of examples
