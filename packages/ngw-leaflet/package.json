@@ -1,5 +1,6 @@
 {
   "name": "@nextgis/ngw-leaflet",
+  "_priority": 10,
   "version": "0.12.0",
   "description": "",
   "main": "lib/ngw-leaflet.js",

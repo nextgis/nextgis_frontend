@@ -1,6 +1,7 @@
 {
   "name": "@nextgis/demo-app",
   "version": "0.12.0",
+  "_priority": 1,
   "description": "",
   "private": true,
   "dependencies": {

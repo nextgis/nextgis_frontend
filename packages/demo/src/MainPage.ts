@@ -16,6 +16,7 @@ export interface Item {
   component?: any;
   icon?: string;
   api?: ApiItem;
+  priority?: number;
   _parent?: Item;
 }
 
@@ -55,21 +56,29 @@ export class MainPage extends Vue {
         id: conf.id,
         name: conf.name,
         description: conf.description,
-        page: conf.page
+        page: conf.page,
+        priority: conf.priority
       };
       if (conf.children) {
         item.model = true;
         item.children = conf.children.map((i) => prepareItem(i, item));
+
         const apiModule = this.$store.getters['api/getApiModule'](item.name);
         if (apiModule) {
-          item.children.push({
+          const apiItem: Item = {
             name: 'API',
             id: item.id + '-api',
             page: 'api',
             component: ApiComponent,
-            icon: 'mdi-information-outline',
+            icon: 'mdi-power-plug',
             api: apiModule,
-          });
+          };
+          const readmeIndex = item.children.findIndex((x) => x.page === 'readme');
+          if (readmeIndex !== -1) {
+            item.children.splice(readmeIndex + 1, 0, apiItem);
+          } else {
+            item.children.unshift(apiItem);
+          }
         }
       } else {
         item._parent = _parent;
@@ -79,9 +88,6 @@ export class MainPage extends Vue {
         item.icon = 'mdi-code-tags';
       } else if (item.page === 'readme') {
         item.component = Readme;
-        item.icon = 'mdi-information-outline';
-      } else if (item.page === 'api') {
-        item.component = ApiComponent;
         item.icon = 'mdi-information-outline';
       }
       item.html = conf.html;
@@ -104,6 +110,12 @@ export class MainPage extends Vue {
     for (let fry = 0; fry < _items.length; fry++) {
       const x = _items[fry];
       if (x.id === id) {
+        if (x.children) {
+          const readme = x.children.find((y) => y.page === 'readme');
+          if (readme) {
+            return readme;
+          }
+        }
         return x;
       }
       if (x.children) {
