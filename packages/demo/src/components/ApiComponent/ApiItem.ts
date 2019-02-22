@@ -2,7 +2,22 @@ export interface Flags {
   isPrivate: boolean;
   isExported: boolean;
   isOptional: boolean;
+  isStatic: boolean;
 }
+
+export type KindString = 'External module' |
+  'Class' |
+  'Constructor' |
+  'Property' |
+  'Method' |
+  'Parameter' |
+  'Function' |
+  'Call signature' |
+  'Constructor signature' |
+  'Interface' |
+  'Type literal' |
+  'Index signature' |
+  'Variable';
 
 export interface Source {
   fileName: string;
@@ -26,18 +41,7 @@ export interface ApiItem {
   children?: ApiItem[];
 
   sources?: Source[];
-  kindString?: 'External module' |
-  'Class' |
-  'Constructor' |
-  'Property' |
-  'Method' |
-  'Parameter' |
-  'Call signature' |
-  'Constructor signature' |
-  'Interface' |
-  'Type literal' |
-  'Index signature' |
-  'Variable'
+  kindString?: KindString
   ;
 
   type?: Property;
@@ -84,6 +88,12 @@ export interface ConstructorItem extends ApiItem {
   kindString: 'Constructor';
 
   signatures: ConstructorSignature[];
+}
+
+export interface FunctionItem extends ApiItem {
+  kindString: 'Function';
+  implementationOf: ReferencePropertyType;
+  signatures: Signatures[];
 }
 
 export interface MethodItem extends ApiItem {
