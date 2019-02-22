@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h2 :id="item.name" class="pt-4" >
+  <div class="pb-4">
+    <h2 :id="item.name" >
       <v-btn flat icon small color="" @click="$root.goTo(item.name)">
         <v-icon>mdi-pound</v-icon>
       </v-btn>
@@ -13,7 +13,7 @@
       class="item-comment"
       v-if="item.comment && item.comment.shortText"
     >
-      <comment :text="item.comment.shortText"></comment>
+      <comment :text="item.comment.shortText" class="pb-3"></comment>
     </div>
 
     <constructor-item-component :classItem="item"></constructor-item-component>
