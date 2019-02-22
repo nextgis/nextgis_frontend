@@ -9,6 +9,8 @@ const converter = new showdown.Converter({
 
 const isDirectory = (source) => lstatSync(source).isDirectory();
 
+const getPriority = (package) => package._priority !== undefined ? package._priority : 100;
+
 function generate(source = '../') {
   const items = [];
 
@@ -37,21 +39,26 @@ function generate(source = '../') {
       }
     });
 
-  packages.forEach(({ libPath, package, name }) => {
-    let pages = [];
+  packages.sort((a, b) => {
 
-    pages = pages.concat(getReadme(libPath));
-    pages = pages.concat(getExamples(libPath, package, packages));
-
-    if (pages.length) {
-      const item = {
-        name,
-        id: getIdFromPath(libPath),
-        children: pages
-      };
-      items.push(item);
-    }
+    return getPriority(a.package) - getPriority(b.package);
   })
+    .forEach(({ libPath, package, name }) => {
+      let pages = [];
+
+      pages = pages.concat(getReadme(libPath));
+      pages = pages.concat(getExamples(libPath, package, packages));
+
+      if (pages.length) {
+        const item = {
+          name,
+          id: getIdFromPath(libPath),
+          children: pages,
+          priority: getPriority(package)
+        };
+        items.push(item);
+      }
+    })
 
   const log = (item, n) => {
     // console.log(new Array(n + 1).join('-') + item.name);

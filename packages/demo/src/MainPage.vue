@@ -23,6 +23,9 @@
         <template slot="prepend" slot-scope="{ item }">
           <v-icon v-if="item.icon">{{item.icon}}</v-icon>
         </template>
+        <template slot="label" slot-scope="{ item }">
+          <span :class="[item.priority <= 10 ? 'main-page' : '']">{{item.name}}</span>
+        </template>
       </v-treeview>
     </v-navigation-drawer>
 
@@ -85,5 +88,9 @@ export { MainPage as default } from './MainPage';
       white-space: nowrap;
       width: 100%;
       z-index: 40;
+  }
+
+  .main-page {
+    font-weight: bold;
   }
 </style>
