@@ -1,9 +1,9 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
-import { ConstructorItem, ClassItem, ApiItem, Parameter } from '../ApiItem';
+import { ConstructorItem, ClassItem } from '../ApiItem';
 
-import ApiParameters from '../ApiParameters.vue';
+import ApiParameters from '../ApiParameters/ApiParameters.vue';
 import * as utility from '../utility';
-import { Indexes } from 'packages/demo/src/store/modules/api';
+import { Indexes } from '../../../store/modules/api';
 
 @Component({
   components: { ApiParameters }

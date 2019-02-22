@@ -6,7 +6,9 @@ import {
   Signatures,
   Parameter,
   MethodItem,
-  ApiItem
+  FunctionItem,
+  ApiItem,
+  KindString
 } from './ApiItem';
 import { Indexes } from '../../store/modules/api';
 
@@ -63,14 +65,17 @@ export function getOptionType(option: Property, indexes: Indexes): string {
 
 export function createReference(option: ReferencePropertyType, indexes: Indexes) {
   let str = '';
+  const kindStringToLink: KindString[] = ['Interface', 'Class'];
   const refOption = indexes[option.id];
   if (refOption && refOption.type) {
     str += getOptionType(refOption.type, indexes);
   } else if (option.typeArguments) {
     const args = option.typeArguments.map((x) => getOptionType(x, indexes)).filter((x) => !!x).join(' | ');
     str += `${option.name}<${args}>`;
-  } else if (refOption && refOption.kindString === 'Interface') {
+  } else if (refOption && kindStringToLink.indexOf(refOption.kindString) !== -1) {
     return `<a href="${refOption.module.name}-api#${option.name}">${option.name}</a>`;
+  } else if (refOption && refOption.kindString === 'Function') {
+    return createMethodString(refOption as FunctionItem, indexes);
   }
   return str;
 }
@@ -103,7 +108,7 @@ export function createDeclarationStr(option: ReflectionType, indexes: Indexes) {
   return str;
 }
 
-export function createMethodString(methodItem: MethodItem, indexes: Indexes): string {
+export function createMethodString(methodItem: MethodItem | FunctionItem, indexes: Indexes): string {
   const signatures = methodItem.signatures.map((x) => {
     if ('parameters' in x) {
       const args = getSignatureParameters(x.parameters, indexes).join(', ');

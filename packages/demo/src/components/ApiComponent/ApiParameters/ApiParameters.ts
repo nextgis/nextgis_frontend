@@ -1,6 +1,6 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
-import { ApiItem } from './ApiItem';
-import ApiOption from './ApiOption.vue';
+import { ApiItem } from '../ApiItem';
+import ApiOption from '../ApiOption/ApiOption.vue';
 
 @Component({
   components: {ApiOption}

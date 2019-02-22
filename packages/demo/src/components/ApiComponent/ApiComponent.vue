@@ -1,20 +1,25 @@
 <template>
   <v-container>
+    <h3>Content</h3>
     <v-layout row wrap>
-        <v-flex v-for="item in api.children" :key="item.name + item.id" xs4>
-          <a @click="$root.goTo(item.name)">{{item.name}}</a>
-        </v-flex>
+      <v-flex class="go-to" v-for="item in allowedChildren" :key="item.name + item.id" xs12 sm6 md4>
+        <a  @click="$root.goTo(item.name)">{{item.name}}</a>
+      </v-flex>
     </v-layout>
 
-    <div v-for="item in api.children" :key="item.id">
+    <div v-for="item in allowedChildren" :key="item.id">
       <class-item :item="item"></class-item>
     </div>
   </v-container>
 </template>
 
 <script lang="ts">
-export { ApiComponent as default } from './ApiComponent';
+export { ApiComponent as default } from "./ApiComponent";
 </script>
 
 <style lang="scss">
+.go-to {
+  overflow: ellipsis;
+  white-space: nowrap;
+}
 </style>
