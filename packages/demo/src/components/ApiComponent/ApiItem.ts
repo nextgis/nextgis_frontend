@@ -25,8 +25,20 @@ export interface Source {
   character: number;
 }
 
+export interface Tag {
+  tag: string;
+}
+
+export interface ExampleTag extends Tag {
+  tag: 'example';
+  text: string;
+}
+
+type Tags = ExampleTag;
+
 export interface ApiComment {
   shortText?: string;
+  tags?: Tags[];
 }
 
 export interface ApiItem {
@@ -41,8 +53,7 @@ export interface ApiItem {
   children?: ApiItem[];
 
   sources?: Source[];
-  kindString?: KindString
-  ;
+  kindString?: KindString;
 
   type?: Property;
 }
