@@ -25,7 +25,11 @@ export class ApiOption extends Vue {
 
   get properties(): Parameter[] {
     const children  = this.option.children.filter((x) => !!x.type);
-    return children;
+    return children.sort((a, b) => {
+      const x = a.flags.isOptional;
+      const y = b.flags.isOptional;
+      return (x === y) ? 0 : x ? 1 : -1;
+    });
   }
 
   getOptionType(option: Property): string {

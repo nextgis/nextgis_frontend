@@ -8,11 +8,20 @@ import { MapControl } from './MapControl';
 import { LatLngArray, LngLatBoundsArray } from './BaseTypes';
 
 export interface MapOptions {
+  /**
+   * The HTML element in which NgwMap will render the map,
+   * or the element's string  id. The specified element must have no children.
+   */
   target?: string | HTMLElement;
-  logo?: string;
-  controls?: Array<string | MapControl>;
-  controlsOptions?: {[controlName: string]: any};
+  // logo?: string;
+
+  /**
+   * The minimum zoom level of the map (0-24).
+   */
   minZoom?: number;
+  /**
+   * The maximum zoom level of the map (0-24).
+   */
   maxZoom?: number;
   /** lat lng */
   center?: LatLngArray;

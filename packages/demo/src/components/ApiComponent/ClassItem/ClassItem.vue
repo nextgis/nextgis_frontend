@@ -33,6 +33,8 @@
             <v-card>
               <v-card-text>
                 <div class="subheader pb-1" v-for="g in getGithubSourceLinks(p)" :key="g" v-html="g"></div>
+                <comment :comment="p.comment"></comment>
+                <example :item="p"></example>
               </v-card-text>
             </v-card>
           </v-expansion-panel-content>

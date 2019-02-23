@@ -92,7 +92,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     const mapInitOptions: olx.MapOptions = {
       ...defOpt,
       target: options.target,
-      logo: options.logo,
+      // logo: options.logo,
     };
 
     this.map = new Map(mapInitOptions);
