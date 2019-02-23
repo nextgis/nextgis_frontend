@@ -5,7 +5,7 @@
 import { MapAdapter } from './MapAdapter';
 import { StarterKit } from './StarterKit';
 import { MapControl } from './MapControl';
-import { MapCenter, LayerExtent } from './BaseTypes';
+import { LatLngArray, LngLatBoundsArray } from './BaseTypes';
 
 export interface MapOptions {
   target?: string | HTMLElement;
@@ -15,9 +15,9 @@ export interface MapOptions {
   minZoom?: number;
   maxZoom?: number;
   /** lat lng */
-  center?: MapCenter;
+  center?: LatLngArray;
   /** top, left, bottom, right */
-  bounds?: LayerExtent;
+  bounds?: LngLatBoundsArray;
   zoom?: number;
 }
 
