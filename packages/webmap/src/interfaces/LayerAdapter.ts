@@ -3,7 +3,7 @@
  */
 
 import { GeoJsonObject, Feature } from 'geojson';
-import { LatLng, LayerExtent } from './BaseTypes';
+import { LatLng, LngLatBoundsArray } from './BaseTypes';
 
 export interface OnLayerClickOptions {
   layer: LayerAdapter;
@@ -149,7 +149,7 @@ export interface BaseLayerAdapter<M = any, L = any, O extends AdapterOptions = A
   showLayer?(layer: L): void;
   hideLayer?(layer: L): void;
 
-  getExtent?(): LayerExtent | Promise<LayerExtent> | undefined;
+  getExtent?(): LngLatBoundsArray | Promise<LngLatBoundsArray> | undefined;
 
   // remove from this place
   getDependLayers?(): L[];

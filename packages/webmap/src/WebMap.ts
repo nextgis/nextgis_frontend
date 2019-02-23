@@ -6,7 +6,7 @@ import { AdapterOptions, DataLayerFilter, VectorLayerAdapter, LayerAdapters } fr
 import { LayerAdaptersOptions, LayerAdapter, OnLayerClickOptions } from './interfaces/LayerAdapter';
 import { MapAdapter, MapClickEvent, ControlPositions, FitOptions } from './interfaces/MapAdapter';
 import { MapOptions, AppOptions, GetAttributionsOptions } from './interfaces/WebMapApp';
-import { LayerExtent, Pixel, Type, Cursor } from './interfaces/BaseTypes';
+import { LngLatBoundsArray, Pixel, Type, Cursor } from './interfaces/BaseTypes';
 import { RuntimeParams } from './interfaces/RuntimeParams';
 import { StarterKit } from './interfaces/StarterKit';
 import { Keys } from './components/keys/Keys';
@@ -51,7 +51,7 @@ export class WebMap<M = any, L = any, C = any> {
   private _layers: { [x: string]: LayerAdapter } = {};
   private _layersIds: number = 1;
   private _selectedLayers: string[] = [];
-  private _extent?: LayerExtent;
+  private _extent?: LngLatBoundsArray;
 
   constructor(appOptions: AppOptions) {
     this.mapAdapter = appOptions.mapAdapter;
@@ -144,7 +144,7 @@ export class WebMap<M = any, L = any, C = any> {
   }
 
   // [extent_left, extent_bottom, extent_right, extent_top];
-  fit(e: LayerExtent, options?: FitOptions): this {
+  fit(e: LngLatBoundsArray, options?: FitOptions): this {
     this.mapAdapter.fit(e, options);
     return this;
   }

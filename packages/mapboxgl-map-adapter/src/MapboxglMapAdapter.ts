@@ -8,7 +8,7 @@ import {
   MapControl,
   ControlPositions,
   CreateButtonControlOptions,
-  MapCenter,
+  LatLngArray,
   MapOptions,
   LayerAdapter
 } from '@nextgis/webmap';
@@ -82,7 +82,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     return this.map && this.map.getContainer();
   }
 
-  setView(center: MapCenter, zoom: number) {
+  setView(center: LatLngArray, zoom: number) {
     if (this.map) {
       this.map.jumpTo({ center, zoom });
     }
