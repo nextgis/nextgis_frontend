@@ -63,7 +63,7 @@ export class NgwMap {
         ]
       }
     },
-    geoJsonDefaultPaint: {
+    VectorLayersDefaultPaint: {
       circle: {
         type: 'circle',
         color: 'blue',
@@ -245,13 +245,13 @@ export class NgwMap {
             'icon' :
             geomType;
 
-        if (this.options.geoJsonDefaultPaint) {
+        if (this.options.VectorLayersDefaultPaint) {
           if (p.type === 'circle') {
-            opt.paint = { ...this.options.geoJsonDefaultPaint.circle, ...p };
+            opt.paint = { ...this.options.VectorLayersDefaultPaint.circle, ...p };
           } else if (p.type === 'path') {
-            opt.paint = { ...this.options.geoJsonDefaultPaint.path, ...p };
+            opt.paint = { ...this.options.VectorLayersDefaultPaint.path, ...p };
           } else if (p.type === 'icon') {
-            opt.paint = { ...this.options.geoJsonDefaultPaint.icon, ...p };
+            opt.paint = { ...this.options.VectorLayersDefaultPaint.icon, ...p };
           }
         }
       }

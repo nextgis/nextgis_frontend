@@ -1,14 +1,14 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
-import { ClassItem, ApiItem, Parameter, MethodItem } from '../ApiItem';
+import { ClassItem, ApiItem, Parameter, MethodItem, ParameterItem } from '../ApiItem';
 
 import ConstructorItemComponent from '../ConstructorItem/ConstructorItem.vue';
 import Comment from '../Comment/Comment.vue';
+import Example from '../Example/Example.vue';
 import * as utility from '../utility';
 import { Indexes } from '../../../store/modules/api';
-import { pushd } from 'shelljs';
 
 @Component({
-  components: { ConstructorItemComponent, Comment }
+  components: { ConstructorItemComponent, Comment, Example }
 })
 export class ClassItemComponent extends Vue {
   @Prop() item: ClassItem;
