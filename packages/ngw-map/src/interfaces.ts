@@ -8,7 +8,7 @@ import {
   CirclePaint,
   PathPaint,
   IconOptions,
-  LayerExtent,
+  LngLatBoundsArray,
 
 } from '@nextgis/webmap';
 import { NgwLayerOptions } from '@nextgis/ngw-kit';
@@ -26,7 +26,7 @@ export interface NgwMapOptions extends MapOptions {
   qmsId?: number | [number, string];
   webmapId?: number | [number, string];
   baseUrl?: string;
-  bounds?: LayerExtent;
+  bounds?: LngLatBoundsArray;
   geoJsonDefaultPaint?: {
     circle: CirclePaint,
     path: PathPaint,

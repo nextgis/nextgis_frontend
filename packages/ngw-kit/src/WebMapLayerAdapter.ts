@@ -1,4 +1,4 @@
-import WebMap, { BaseLayerAdapter, LayerExtent } from '@nextgis/webmap';
+import WebMap, { BaseLayerAdapter, LngLatBoundsArray } from '@nextgis/webmap';
 import { ResourceItem } from '@nextgis/ngw-connector';
 import { fixUrlStr, getLayerAdapterOptions, updateWmsParams } from './utils';
 import { WebMapLayerItem } from './WebMapLayerItem';
@@ -44,11 +44,11 @@ export class WebMapLayerAdapter implements BaseLayerAdapter {
     }
   }
 
-  getExtent(): LayerExtent | undefined {
+  getExtent(): LngLatBoundsArray | undefined {
     if (this.response) {
       const { extent_bottom, extent_left, extent_top, extent_right } = this.response.webmap;
       if (extent_bottom && extent_left && extent_top && extent_right) {
-        const extent: LayerExtent = [extent_left, extent_bottom, extent_right, extent_top];
+        const extent: LngLatBoundsArray = [extent_left, extent_bottom, extent_right, extent_top];
         if (extent[3] > 82) {
           extent[3] = 82;
         }
