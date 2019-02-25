@@ -44,12 +44,8 @@
     <v-content>
       <component
         v-if="current"
-        v-bind:is="current.component"
-        :text="current.name"
-        :description="current.description"
-        :html="current.html"
-        :currentItemId="currentItemId"
-        :api="current.api"
+        :is="current.component"
+        :item="current"
       ></component>
     </v-content>
   </div>

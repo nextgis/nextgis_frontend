@@ -5,5 +5,5 @@ import { MainPage } from './MainPage';
 @Component({
   mixins: [MainPage]
 })
-export class ExamplePage extends Vue {
+export class ExampleOutsidePage extends Vue {
 }

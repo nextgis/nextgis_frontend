@@ -17,6 +17,7 @@ export interface Item {
   icon?: string;
   api?: ApiItem;
   priority?: number;
+  mapAdapters?: string[];
   _parent?: Item;
 }
 

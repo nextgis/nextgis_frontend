@@ -1,6 +1,6 @@
 import VueRouter from 'vue-router';
 import MainPage from './MainPage.vue';
-import ExamplePage from './ExamplePage.vue';
+import ExampleOutsidePage from './ExampleOutsidePage.vue';
 
 export const router = new VueRouter({
   mode: 'history',
@@ -13,7 +13,7 @@ export const router = new VueRouter({
   //   }
   // },
   routes: [
-    { path: '/page/:id', component: ExamplePage },
+    { path: '/page/:id', component: ExampleOutsidePage },
     { path: '/:id?', component: MainPage },
   ]
 });

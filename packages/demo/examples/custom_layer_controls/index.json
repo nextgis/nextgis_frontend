@@ -1,0 +1,4 @@
+{
+  "name": "Custom layers control",
+  "mapAdapters": ["leaflet-map-adapter", "ol-map-adapter", "mapbox-map-adapter"]
+}

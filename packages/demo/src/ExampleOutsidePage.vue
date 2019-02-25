@@ -2,17 +2,15 @@
   <div class="example-page-wrapper">
     <component
       v-if="current"
-      v-bind:is="current.component"
-      fullScrean="true"
-      :text="current.name"
-      :description="current.description"
-      :html="current.html"
+      fullScreen="true"
+      :is="current.component"
+      :item="current"
     ></component>
   </div>
 </template>
 
 <script lang="ts">
-export { ExamplePage as default } from './ExamplePage';
+export { ExampleOutsidePage as default } from './ExampleOutsidePage';
 </script>
 
 <style lang="scss">
