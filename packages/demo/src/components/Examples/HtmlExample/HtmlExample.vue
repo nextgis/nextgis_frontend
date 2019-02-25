@@ -1,9 +1,9 @@
 <template>
-  <div v-if="fullScrean" class="example-iframe fullscrean" id="example-iframe">
+  <div v-if="fullScreen" class="example-iframe fullscrean" id="example-iframe">
   </div>
   <div v-else class="content ma-3">
     <h3 class="title pb-3">
-      {{ text }}
+      {{ item.name }}
       <v-tooltip bottom>
         <v-btn
           slot="activator"
@@ -17,13 +17,13 @@
       </v-tooltip>
 
     </h3>
-    <p>{{ description }}</p>
+    <p>{{ item.description }}</p>
 
     <div class="example-iframe" id="example-iframe"></div>
 
     <div>
-      <send-to-codepen :html="html"></send-to-codepen>
-      <pre v-highlightjs="html"><code class="html"></code></pre>
+      <send-to-codepen :html="item.html"></send-to-codepen>
+      <pre v-highlightjs="item.html"><code class="html"></code></pre>
     </div>
 
   </div>
