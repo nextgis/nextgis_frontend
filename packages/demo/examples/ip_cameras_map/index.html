@@ -114,7 +114,7 @@
     };
 
     ngwMap.emitter.on('layer:click', function (e) {
-      if (e.adapter.name === '3') {
+      if (e.layer.id === 'cameras') {
         if (e.selected) {
           updateCameraPanel(e.feature.id);
         } else {
