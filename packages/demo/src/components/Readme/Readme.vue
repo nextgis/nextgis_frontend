@@ -1,5 +1,5 @@
 <template>
-  <div class="readme content ma-3" v-html="html">
+  <div class="readme content ma-3" v-html="item.html">
   </div>
 </template>
 

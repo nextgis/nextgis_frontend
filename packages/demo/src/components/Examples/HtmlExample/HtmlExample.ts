@@ -1,20 +1,17 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import SendToCodepen from '../../SendToCodepen/SendToCodepen.vue';
+import { Item } from 'packages/demo/src/MainPage';
 
 @Component({
   components: { SendToCodepen },
 })
 export class HtmlExample extends Vue {
 
-  @Prop() html: string;
-  @Prop() text: string;
-  @Prop() description: string;
-  @Prop() fullScrean: boolean;
-  @Prop() currentItemId: string;
-  @Prop() api: any;
+  @Prop() item: Item;
+  @Prop() fullScreen?: boolean;
 
   mounted() {
-    this._writeIFrame(this.html);
+    this._writeIFrame(this.item.html);
     this.$watch('html', (newVal) => {
       this._writeIFrame(newVal);
     });
@@ -23,8 +20,8 @@ export class HtmlExample extends Vue {
   }
 
   openFullPage() {
-    if (this.currentItemId) {
-      this.$router.push('/page/' + this.currentItemId);
+    if (this.item.id) {
+      this.$router.push('/page/' + this.item.id);
     }
   }
 
