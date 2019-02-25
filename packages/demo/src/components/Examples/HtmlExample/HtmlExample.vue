@@ -19,6 +19,12 @@
     </h3>
     <p>{{ item.description }}</p>
 
+    <div v-if="item.ngwMaps">
+      <v-radio-group v-model="ngwMap" row>
+        <v-radio v-for="a in item.ngwMaps" :key="a.name" :label="a.name" :value="a.name"></v-radio>
+      </v-radio-group>
+    </div>
+
     <div class="example-iframe" id="example-iframe"></div>
 
     <div>
