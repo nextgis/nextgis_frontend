@@ -1,17 +1,17 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import ClassItem from './ClassItem/ClassItem.vue';
 import { ApiItem } from './ApiItem';
+import { Item } from '../../MainPage';
 
 @Component({
   components: { ClassItem }
 })
 export class ApiComponent extends Vue {
 
-  @Prop() api: any;
-  @Prop() package: string;
+  @Prop() item: Item;
 
   get allowedChildren() {
-    return this.getAllowedChildren(this.api);
+    return this.getAllowedChildren(this.item.api);
   }
 
   mounted() {

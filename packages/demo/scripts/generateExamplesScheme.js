@@ -104,12 +104,24 @@ function getExamples(libPath, package, packages) {
           if (existsSync(htmlPath) && existsSync(metaPath)) {
             const meta = JSON.parse(readFileSync(metaPath, 'utf8'));
             const html = prepareHtml(readFileSync(htmlPath, 'utf8'), package, packages);
+
+            const filteredPackages = !meta.ngwMaps ? [] : packages.filter((x) => {
+              return meta.ngwMaps.indexOf(x.name.replace('@nextgis/', '')) !== -1;
+            });
+            const ngwMaps = filteredPackages.map((x) => {
+              return {
+                name: x.package.name.replace('@nextgis/', ''),
+                version: x.package.version,
+                main: x.package.main
+              }
+            });
             const example = {
               id,
               html,
+              page: 'example',
               name: meta.name,
               description: meta.description,
-              page: 'example'
+              ngwMaps,
             }
             examples.push(example)
           }

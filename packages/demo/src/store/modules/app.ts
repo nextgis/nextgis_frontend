@@ -1,15 +1,9 @@
-// initial state
-// shape: [{ id, quantity }]
-
-export type AppPages = string;
 export interface AppState {
-  drawer?: boolean;
-  page?: AppPages;
-  center?: [number, number];
+  defaultNgwMap: string;
 }
 
 const _state: AppState = {
-  page: 'main',
+  defaultNgwMap: 'ngw-leaflet',
 };
 
 // getters
@@ -18,8 +12,8 @@ const _getters = {};
 // actions
 const actions = {
 
-  setPage({commit}, page: AppPages) {
-    commit('setPage', page);
+  setDefaultNgwMap({commit}, ngwMap: string) {
+    commit('setDefaultNgwMap', ngwMap);
   },
 
 };
@@ -27,13 +21,9 @@ const actions = {
 // mutations
 const mutations = {
 
-  setPage(state, page: AppPages) {
-    state.page = page;
+  setDefaultNgwMap(state: AppState, ngwMap: string) {
+    state.defaultNgwMap = ngwMap;
   },
-
-  setCenter(state, id: number) {
-    state.center = id;
-  }
 
 };
 

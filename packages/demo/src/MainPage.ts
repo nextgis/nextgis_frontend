@@ -5,6 +5,12 @@ import ApiComponent from './components/ApiComponent/ApiComponent.vue';
 import Logo from './components/Logo/Logo.vue';
 import { ApiItem } from './components/ApiComponent/ApiItem';
 
+export interface Package {
+  name: string;
+  version: string;
+  main: string;
+}
+
 export interface Item {
   id: string;
   name: string;
@@ -17,7 +23,7 @@ export interface Item {
   icon?: string;
   api?: ApiItem;
   priority?: number;
-  mapAdapters?: string[];
+  ngwMaps?: Package[];
   _parent?: Item;
 }
 
@@ -58,7 +64,8 @@ export class MainPage extends Vue {
         name: conf.name,
         description: conf.description,
         page: conf.page,
-        priority: conf.priority
+        priority: conf.priority,
+        ngwMaps: conf.ngwMaps
       };
       if (conf.children) {
         item.model = true;

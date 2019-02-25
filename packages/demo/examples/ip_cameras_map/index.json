@@ -1,4 +1,5 @@
 {
   "name": "IP cameras map",
-  "description": "Display the stream from the ip camera in the location"
+  "description": "Display the stream from the ip camera in the location",
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
 }
