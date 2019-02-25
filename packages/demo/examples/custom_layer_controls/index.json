@@ -1,4 +1,4 @@
 {
   "name": "Custom layers control",
-  "mapAdapters": ["leaflet-map-adapter", "ol-map-adapter", "mapbox-map-adapter"]
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
 }
