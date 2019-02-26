@@ -1,17 +1,22 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import { ApiItem, ConstructorItem, Parameter } from '../ApiItem';
 import ApiOption from '../ApiOption/ApiOption.vue';
+import Reference from '../Reference/Reference.vue';
 
 @Component({
-  components: { ApiOption }
+  components: { ApiOption, Reference }
 })
 export class ApiParameters extends Vue {
   @Prop() item: ConstructorItem;
 
-  get parameters() {
-    if (this.item) {
+  get parameters(): Parameter[] {
+    if (this.item && this.item.signatures) {
       const parameters: Parameter[] = [];
-      this.item.signatures.forEach((x) => x.parameters.forEach((y) => parameters.push(y)));
+      this.item.signatures.forEach((x) => {
+        if (x.parameters) {
+          x.parameters.forEach((y) => parameters.push(y));
+        }
+      });
       return parameters.sort((a, b) => {
         const x = a.flags.isOptional;
         const y = b.flags.isOptional;

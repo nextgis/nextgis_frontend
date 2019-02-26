@@ -38,7 +38,10 @@ export function getConstructorSignatureStr(item: ConstructorItem, indexes: Index
 
 export function getSignatureStrForConstructor(signatures: Signatures, indexes: Indexes) {
   if ('parameters' in signatures) {
-    const parameters = getSignatureParameters(signatures.parameters, indexes);
+    // const parameters = getSignatureParameters(signatures.parameters, indexes);
+    const parameters = signatures.parameters.map((p) => {
+      return `${getParameterName(p)}`;
+    });
     const str = `${signatures.name}(${parameters.join(', ')})`;
     return str;
   }
