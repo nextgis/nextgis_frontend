@@ -18,18 +18,31 @@ export class ApiOption extends Vue {
 
   get option(): InterfaceItem {
     const option = this.indexes[this.id];
-    if (option.kindString === 'Interface') {
+    if (option && option.kindString === 'Interface') {
       return option as InterfaceItem;
     }
   }
 
   get properties(): Parameter[] {
-    const children  = this.option.children.filter((x) => !!x.type);
-    return children.sort((a, b) => {
-      const x = a.flags.isOptional;
-      const y = b.flags.isOptional;
-      return (x === y) ? 0 : x ? 1 : -1;
-    });
+    const option = this.option;
+    if (option) {
+      const children = option.children.filter((x) => !!x.type);
+      return children.sort((a, b) => {
+        const x = a.flags.isOptional;
+        const y = b.flags.isOptional;
+        return (x === y) ? 0 : x ? 1 : -1;
+      });
+    }
+  }
+
+  mounted() {
+    // @ts-ignore
+    this.$root.updateLinks(this.$el);
+  }
+
+  updated() {
+    // @ts-ignore
+    utility.updateLinks(this.$el);
   }
 
   getOptionType(option: Property): string {

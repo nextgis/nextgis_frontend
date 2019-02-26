@@ -4,11 +4,13 @@ import { ClassItem, ApiItem, Parameter, MethodItem, ParameterItem } from '../Api
 import ConstructorItemComponent from '../ConstructorItem/ConstructorItem.vue';
 import Comment from '../Comment/Comment.vue';
 import Example from '../Example/Example.vue';
+import Class from './ClassItem.vue';
 import * as utility from '../utility';
 import { Indexes } from '../../../store/modules/api';
 
 @Component({
-  components: { ConstructorItemComponent, Comment, Example }
+  name: 'Class',
+  components: { ConstructorItemComponent, Comment, Example, Class }
 })
 export class ClassItemComponent extends Vue {
   @Prop() item: ClassItem;
@@ -21,6 +23,16 @@ export class ClassItemComponent extends Vue {
 
   beforeCreate() {
     this.indexes = this.$store.state.api.indexes;
+  }
+
+  mounted() {
+    // @ts-ignore
+    this.$root.updateLinks(this.$el);
+  }
+
+  updated() {
+    // @ts-ignore
+    this.$root.updateLinks(this.$el);
   }
 
   isItemAllow(item: ApiItem): boolean {
@@ -65,4 +77,5 @@ export class ClassItemComponent extends Vue {
   createMethodString(methodItem: MethodItem) {
     return this.utility.createMethodString(methodItem, this.indexes);
   }
+
 }

@@ -1,11 +1,13 @@
 <template>
   <div>
-    <div v-for="s in getSignaturesStr(item)" :key="s" >
+    <div v-for="s in getSignaturesStr(constructorItem)" :key="s" >
+      <div v-if="constructorItem.kindString === 'Constructor'">
       <h4 class="pb-3">Constructor</h4>
       <pre v-highlightjs="s"><code class="typescript"></code></pre>
+      </div>
     </div>
 
-    <api-parameters :item="item"></api-parameters>
+    <api-parameters :item="constructorItem"></api-parameters>
 
   </div>
 </template>

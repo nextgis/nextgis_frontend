@@ -2,8 +2,10 @@
   <div>
     <div v-for="p in parameters" :key="p.id">
       <h5 class="pb-1 pt-3">{{p.name}}</h5>
-      <api-option v-if="p.type.type === 'reference'" :id="p.type.id"></api-option>
 
+      <div v-if="p.type.type === 'reference'">
+        <reference :parameter="p"></reference>
+      </div>
     </div>
   </div>
 </template>

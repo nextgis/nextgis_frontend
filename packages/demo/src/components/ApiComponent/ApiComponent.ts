@@ -15,16 +15,11 @@ export class ApiComponent extends Vue {
   }
 
   mounted() {
-    // @ts-ignore
-    hljs.initHighlightingOnLoad();
-    const hash = window.location.hash;
-    if (hash) {
-      // @ts-ignore
-      this.$root.goTo(hash, {duration: 0});
-    } else {
-      // @ts-ignore
-      this.$vuetify.goTo(0, {duration: 0});
-    }
+    this._refresh();
+  }
+
+  updated() {
+    this._refresh();
   }
 
   getAllowedItem(item: ApiItem) {
@@ -33,5 +28,22 @@ export class ApiComponent extends Vue {
 
   getAllowedChildren(item: ApiItem) {
     return item.children.filter((x) => this.getAllowedItem(x));
+  }
+
+  private _refresh() {
+    // @ts-ignore
+    hljs.initHighlightingOnLoad();
+    this._goTo();
+  }
+
+  private _goTo() {
+    const hash = window.location.hash;
+    if (hash) {
+      // @ts-ignore
+      this.$root.goTo(hash, { duration: 0 });
+    } else {
+      // @ts-ignore
+      this.$vuetify.goTo(0, { duration: 0 });
+    }
   }
 }

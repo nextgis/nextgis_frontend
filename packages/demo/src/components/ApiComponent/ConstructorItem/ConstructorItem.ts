@@ -1,5 +1,5 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
-import { ConstructorItem, ClassItem } from '../ApiItem';
+import { ConstructorItem, ClassItem, PropertyItem, MethodItem } from '../ApiItem';
 
 import ApiParameters from '../ApiParameters/ApiParameters.vue';
 import * as utility from '../utility';
@@ -10,17 +10,19 @@ import { Indexes } from '../../../store/modules/api';
 })
 export class ConstructorItemComponent extends Vue {
 
-  @Prop() classItem: ClassItem;
-  item: ConstructorItem = null;
+  @Prop() item: ClassItem | PropertyItem | MethodItem;
+  constructorItem: ConstructorItem | PropertyItem | MethodItem = null;
   indexes: Indexes;
   utility = utility;
 
   mounted() {
     this.indexes = this.$store.state.api.indexes;
-    if (this.classItem.children) {
-      this.item = this.classItem.children.find((x) => {
+    if (this.item.children) {
+      this.constructorItem = this.item.children.find((x) => {
         return x.kindString === 'Constructor';
       }) as ConstructorItem;
+    } else if (this.item.kindString === 'Method') {
+      this.constructorItem = this.item;
     }
   }
 
