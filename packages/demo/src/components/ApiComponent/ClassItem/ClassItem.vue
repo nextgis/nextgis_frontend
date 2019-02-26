@@ -1,11 +1,5 @@
 <template>
   <div class="pb-4">
-    <h2 :id="item.name" >
-      <v-btn flat icon small color="" @click="$root.goTo(item.name)">
-        <v-icon>mdi-pound</v-icon>
-      </v-btn>
-      {{item.name}}
-    </h2>
 
     <div class="subheader pb-2" v-for="g in getGithubSourceLinks(item)" :key="g" v-html="g"></div>
 
@@ -15,8 +9,7 @@
     >
       <comment :text="item.comment.shortText" class="pb-3"></comment>
     </div>
-
-    <constructor-item-component :classItem="item"></constructor-item-component>
+    <constructor-item-component :item="item"></constructor-item-component>
 
     <div v-for="m in getAllowedMembers(item)" :key="m.name">
       <div v-if="m.members.length" class="pt-3">
@@ -32,9 +25,10 @@
             </div>
             <v-card>
               <v-card-text>
-                <div class="subheader pb-1" v-for="g in getGithubSourceLinks(p)" :key="g" v-html="g"></div>
+                <!-- <div class="subheader pb-1" v-for="g in getGithubSourceLinks(p)" :key="g" v-html="g"></div>
                 <comment :comment="p.comment"></comment>
-                <example :item="p"></example>
+                <example :item="p"></example> -->
+                <class :item="p"></class>
               </v-card-text>
             </v-card>
           </v-expansion-panel-content>
