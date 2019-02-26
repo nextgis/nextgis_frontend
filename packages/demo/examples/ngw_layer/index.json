@@ -1,5 +1,5 @@
 {
   "name": "Add layer from NGW Cloud",
-  "description": "Example showing how to create ngw-leaflet map and add some image layer from cloud",
+  "description": "Load image layer from NGW cloud to the map",
   "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
 }

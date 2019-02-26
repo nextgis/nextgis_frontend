@@ -1,4 +1,1 @@
-{
-  "name": "Add GeoJSON data",
-  "description": ""
-}
+{"name":"GeoJSON data","description":"","_copiedFrom":"packages\\demo\\examples\\geojson_layer"}

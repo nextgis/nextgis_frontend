@@ -1,5 +1,5 @@
 {
-  "name": "Add GeoJSON data",
+  "name": "GeoJSON data",
   "description": "",
   "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
 }

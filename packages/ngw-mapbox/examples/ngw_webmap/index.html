@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Ngw WebMap | Mapbox Example</title>
+  <title>Ngw WebMap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     * {
@@ -19,19 +19,19 @@
       height: 100%;
     }
   </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.0.0/polyfill.js"></script>
-    <!-- <script src="https://unpkg.com/@nextgis/ngw-mapbox"></script> -->
-    <script src="../../lib/ngw-mapbox.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.0.0/polyfill.js"></script>
+  <!-- <script src="https://unpkg.com/@nextgis/ngw-mapbox"></script> -->
+  <script src="../../lib/ngw-mapbox.js"></script>
 </head>
 
 <body>
   <div id='map'></div>
   <script>
-    var ngwMap = new NgwMapbox({
+    var ngwMap = new NgwMap({
       baseUrl: 'https://demo.nextgis.com',
       target: 'map',
       qmsId: 487,
-      webmapId: 464
+      webmapId: 3985
     });
   </script>
 </body>
