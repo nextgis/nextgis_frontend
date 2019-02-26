@@ -1,4 +1,5 @@
 {
   "name": "Custom layers control",
+  "description": "Creating and applying map controls",
   "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
 }

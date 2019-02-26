@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Custom layers control | Openlayers Example</title>
+  <title>Custom layers control</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     * {
@@ -91,7 +91,7 @@
         var visibility = ngwmap.layer.properties.property('visibility');
         // listen any layer visibility change
         visibility.emitter.on('change-tree', function (data) {
-          var itemId = data.item.id;
+          var itemId = data.item.layer.id;
           var checkbox = list.querySelector('#layer-' + itemId);
           checkbox.checked = data.value;
         });
