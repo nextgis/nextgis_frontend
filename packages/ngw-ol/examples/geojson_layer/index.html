@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>GeoJson Layer | Openlayer Example</title>
+  <title>Ngw GeoJSON Layer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     * {
@@ -44,7 +44,7 @@
     var ngwMap = new NgwMap({
       baseUrl: 'https://demo.nextgis.com',
       target: 'map',
-      qmsId: 487,
+      qmsId: 465,
       center: [107.17, 53.22],
       zoom: 12
     });
@@ -63,7 +63,8 @@
     });
     ngwMap.addGeoJsonLayer({
       data: { "type": "Point", "coordinates": [107.19401, 53.23390] },
-      paint: { color: 'orange' }
+      // use the icon to paint the point geometry
+      paint: NgwMap.getIcon({color: 'orange'})
     });
     // Add geojson layer from NGW vector resource
     ngwMap.addNgwLayer({ resourceId: 4038, adapter: 'GEOJSON' }, {

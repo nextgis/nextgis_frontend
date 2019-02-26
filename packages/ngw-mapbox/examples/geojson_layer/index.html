@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>GeoJson Layer | Mapbox Example</title>
+  <title>Ngw GeoJSON Layer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     * {
@@ -41,12 +41,12 @@
         { "type": "Feature", "properties": {}, "geometry": { "type": "MultiLineString", "coordinates": [[[107.18377, 53.20700], [107.16699, 53.21248], [107.15270, 53.20581]]] } }
       ]
     };
-    var ngwMap = new NgwMapbox({
+    var ngwMap = new NgwMap({
       baseUrl: 'https://demo.nextgis.com',
       target: 'map',
-      qmsId: 487,
+      qmsId: 465,
       center: [107.17, 53.22],
-      zoom: 10
+      zoom: 12
     });
     ngwMap.addGeoJsonLayer({ data: boat, paint: { color: 'red' } });
     ngwMap.addGeoJsonLayer({ data: waves, paint: { color: 'blue', opacity: 0.8, 'weight': 3 } });
@@ -63,10 +63,16 @@
     });
     ngwMap.addGeoJsonLayer({
       data: { "type": "Point", "coordinates": [107.19401, 53.23390] },
-      paint: { color: 'orange' }
+      // use the icon to paint the point geometry
+      paint: NgwMap.getIcon({color: 'orange'})
     });
     // Add geojson layer from NGW vector resource
-    ngwMap.addNgwLayer({ resourceId: 4038, adapter: 'GEOJSON' }, { paint: { color: '#7EC0EE' } });
+    ngwMap.addNgwLayer({ resourceId: 4038, adapter: 'GEOJSON' }, {
+      // use callback to set paint dynamically
+      paint: function (feature) {
+        return { color: 'rgb(126, 192, '+ Math.round(Math.random()*255) +')' }
+      }
+    });
   </script>
 </body>
 
