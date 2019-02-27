@@ -17,6 +17,7 @@ export interface Item {
   page?: 'example' | 'readme' | 'api';
   description?: string;
   html?: string;
+  md?: string;
   children?: Item[];
   model?: boolean;
   component?: any;
@@ -58,15 +59,8 @@ export class MainPage extends Vue {
 
   mounted() {
     this.api = this.$store.state.api.api;
-    const prepareItem = (conf, _parent?) => {
-      const item: Item = {
-        id: conf.id,
-        name: conf.name,
-        description: conf.description,
-        page: conf.page,
-        priority: conf.priority,
-        ngwMaps: conf.ngwMaps
-      };
+    const prepareItem = (conf: Item, _parent?) => {
+      const item: Item = {...conf};
       if (conf.children) {
         item.model = true;
         item.children = conf.children.map((i) => prepareItem(i, item));
@@ -98,7 +92,6 @@ export class MainPage extends Vue {
         item.component = Readme;
         item.icon = 'mdi-information-outline';
       }
-      item.html = conf.html;
       return item;
     };
     const config = process.env.EXAMPLES;

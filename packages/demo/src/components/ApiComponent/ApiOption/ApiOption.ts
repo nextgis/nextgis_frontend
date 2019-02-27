@@ -40,10 +40,10 @@ export class ApiOption extends Vue {
     this.$root.updateLinks(this.$el);
   }
 
-  updated() {
-    // @ts-ignore
-    utility.updateLinks(this.$el);
-  }
+  // updated() {
+  //   // @ts-ignore
+  //   utility.updateLinks(this.$el);
+  // }
 
   getOptionType(option: Property): string {
     return this.utility.getOptionType(option, this.indexes);

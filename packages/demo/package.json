@@ -23,6 +23,7 @@
   "devDependencies": {
     "@mdi/font": "^3.5.95",
     "@types/lodash": "^4.14.121",
+    "@types/showdown": "^1.9.2",
     "css-loader": "^2.1.0",
     "favicons-webpack-plugin": "^0.0.9",
     "file-loader": "^3.0.1",

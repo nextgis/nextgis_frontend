@@ -53147,7 +53147,7 @@
 								"isOptional": true
 							},
 							"comment": {
-								"shortText": "List of controls that will be initialized when creating a map instance.\nIt can be defined as a string, then points to the corresponding entry in the\n[MapAdapter.controlAdapters](webmap#MapAdapter).",
+								"shortText": "List of controls that will be initialized when creating a map instance.\nIt can be defined as a string, then points to the corresponding entry in the\n[controlAdapters](webmap-api#MapAdapter).",
 								"tags": [
 									{
 										"tag": "default",

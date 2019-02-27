@@ -7,9 +7,15 @@
       class="item-comment"
       v-if="item.comment && item.comment.shortText"
     >
-      <comment :text="item.comment.shortText" class="pb-3"></comment>
+      <comment :text="item.comment.shortText"></comment>
     </div>
-    <constructor-item-component :item="item"></constructor-item-component>
+    <constructor-item-component :item="item" class="constructor-item"></constructor-item-component>
+
+    <example :item="item">
+      <template v-slot:header>
+        <h4>Examples</h4>
+      </template>
+    </example>
 
     <div v-for="m in getAllowedMembers(item)" :key="m.name">
       <div v-if="m.members.length" class="pt-3">
@@ -25,9 +31,6 @@
             </div>
             <v-card>
               <v-card-text>
-                <!-- <div class="subheader pb-1" v-for="g in getGithubSourceLinks(p)" :key="g" v-html="g"></div>
-                <comment :comment="p.comment"></comment>
-                <example :item="p"></example> -->
                 <class :item="p"></class>
               </v-card-text>
             </v-card>
@@ -48,5 +51,13 @@ export { ClassItemComponent as default } from './ClassItem';
 }
 .subheader {
   font-size: 0.9rem;
+}
+
+.constructor-item > div {
+  padding-bottom: 16px;
+}
+
+.constructor-item > div:empty {
+  padding: 0;
 }
 </style>
