@@ -31,8 +31,6 @@ export class ApiComponent extends Vue {
   }
 
   private _refresh() {
-    // @ts-ignore
-    hljs.initHighlightingOnLoad();
     this._goTo();
   }
 

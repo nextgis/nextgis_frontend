@@ -30,10 +30,10 @@ export class ClassItemComponent extends Vue {
     this.$root.updateLinks(this.$el);
   }
 
-  updated() {
-    // @ts-ignore
-    this.$root.updateLinks(this.$el);
-  }
+  // updated() {
+  //   // @ts-ignore
+  //   this.$root.updateLinks(this.$el);
+  // }
 
   isItemAllow(item: ApiItem): boolean {
     const checkAllowedList: Array<() => boolean> = [

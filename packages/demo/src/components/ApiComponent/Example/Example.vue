@@ -1,6 +1,7 @@
 <template>
-  <div class="api-example">
-    <div v-for="(e, i) in example" :key="'example-' + i">
+  <div v-if="example.length">
+    <slot name="header"></slot>
+    <div v-for="(e, i) in example" :key="'example-' + i" class="api-example">
       <pre v-highlightjs="e.code"><code :class="e.language"></code></pre>
     </div>
   </div>
@@ -12,5 +13,6 @@ export { Example as default } from './Example';
 
 <style lang="scss">
   .api-example {
+    padding: .7rem 0;
   }
 </style>
