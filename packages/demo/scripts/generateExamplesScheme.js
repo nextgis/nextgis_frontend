@@ -1,11 +1,11 @@
 const { lstatSync, readdirSync, readFileSync, existsSync } = require('fs');
 const { join } = require('path');
-const showdown = require('showdown');
-const showdownHighlight = require("showdown-highlight");
+// const showdown = require('showdown');
+// const showdownHighlight = require("showdown-highlight");
 
-const converter = new showdown.Converter({
-  extensions: [showdownHighlight]
-});
+// const converter = new showdown.Converter({
+//   extensions: [showdownHighlight]
+// });
 
 const isDirectory = (source) => lstatSync(source).isDirectory();
 
@@ -81,7 +81,8 @@ function getReadme(libPath) {
     const id = getIdFromPath(libPath);
     readme.push({
       id: id + '-readme',
-      html: converter.makeHtml(readmeMd),
+      // html: converter.makeHtml(readmeMd),
+      md: readmeMd,
       name: 'README',
       page: 'readme'
     });
