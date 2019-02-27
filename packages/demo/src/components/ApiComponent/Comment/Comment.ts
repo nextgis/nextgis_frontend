@@ -1,24 +1,28 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
-import { ApiComment } from '../ApiItem';
+import { ApiComment, ParameterItem } from '../ApiItem';
+import { mdToHtml } from '../../../services/mdToHtml';
 
 @Component
 export class Comment extends Vue {
   @Prop() text: string;
   @Prop() comment: ApiComment;
+  @Prop() item: ParameterItem;
 
   get str() {
-    const text = this.comment ? this.comment.shortText : this.text;
+    const comment = this.comment || (this.item && this.item.type && this.item.comment);
+    const text =  comment ? comment.shortText : this.text;
     return this._prepareStr(text);
   }
 
   _prepareStr(text: string): string {
     if (text) {
       // `code` > <span>code</span>
-      text = text.replace(/`(.+)`/g, '<span class="code">$1</span>');
+      // text = text.replace(/`(.+)`/g, '<span class="code">$1</span>');
       // {@link url | name}
-      text = text.replace(/{@link (.+) \| (.+)}/g, '<a href="$1">$2</a>');
+      // text = text.replace(/{@link (.+) \| (.+)}/g, '<a href="$1">$2</a>');
+      text = text.replace(/{@link (.+) \| (.+)}/g, '[$2]($1)');
     }
-    return text;
+    return mdToHtml(text);
   }
 
 }

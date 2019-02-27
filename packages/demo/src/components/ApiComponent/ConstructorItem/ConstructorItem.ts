@@ -2,11 +2,12 @@ import { Vue, Component, Prop } from 'vue-property-decorator';
 import { ConstructorItem, ClassItem, PropertyItem, MethodItem } from '../ApiItem';
 
 import ApiParameters from '../ApiParameters/ApiParameters.vue';
+import Example from '../Example/Example.vue';
 import * as utility from '../utility';
 import { Indexes } from '../../../store/modules/api';
 
 @Component({
-  components: { ApiParameters }
+  components: { ApiParameters, Example }
 })
 export class ConstructorItemComponent extends Vue {
 

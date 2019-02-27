@@ -60,7 +60,7 @@ export interface NgwMapOptions extends MapOptions {
   /**
    * List of controls that will be initialized when creating a map instance.
    * It can be defined as a string, then points to the corresponding entry in the
-   * [MapAdapter.controlAdapters](webmap#MapAdapter).
+   * [controlAdapters](webmap-api#MapAdapter).
    *
    * @default ['ZOOM', 'ATTRIBUTION']
    *
