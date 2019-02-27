@@ -141,16 +141,17 @@ export class MainPage extends Vue {
       this.open = this.open.concat(parents);
       this.active = [treeItem.id];
     } else {
-      const getFirstHtmlItem = (items: Item[]) => {
+      const getFirstPageItem = (items: Item[]) => {
         return items.find((i) => {
-          if (i.html) {
-            return i.html;
+          const pageContent = i.html || i.md;
+          if (pageContent) {
+            return pageContent;
           } else if (i.children) {
-            return getFirstHtmlItem(i.children);
+            return getFirstPageItem(i.children);
           }
         });
       };
-      const item = getFirstHtmlItem(this.items);
+      const item = getFirstPageItem(this.items);
       const slug = item ? item.id : '';
       this._setPath(slug);
     }
