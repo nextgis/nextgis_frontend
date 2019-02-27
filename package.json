@@ -2,14 +2,14 @@
   "name": "root",
   "private": true,
   "devDependencies": {
-    "lerna": "^3.11.1",
+    "lerna": "^3.13.1",
     "rimraf": "^2.6.3",
     "topological-sort": "^0.3.0",
-    "tslint": "^5.12.1",
+    "tslint": "^5.13.0",
     "tslint-webpack-plugin": "^2.0.2",
     "typedoc": "^0.14.2",
-    "typescript": "^3.3.3",
-    "webpack": "^4.29.3"
+    "typescript": "^3.3.3333",
+    "webpack": "^4.29.5"
   },
   "scripts": {
     "clean": "lerna run clean",

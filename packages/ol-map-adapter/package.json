@@ -8,18 +8,18 @@
   "dependencies": {
     "@nextgis/webmap": "^0.12.0",
     "events": "^3.0.0",
-    "ol": "^5.3.0"
+    "ol": "^5.3.1"
   },
   "devDependencies": {
     "@types/events": "^3.0.0",
-    "@types/node": "^11.9.4",
+    "@types/node": "^11.9.5",
     "@types/ol": "^4.6.4",
     "css-loader": "^2.1.0",
     "style-loader": "^0.23.1",
     "ts-loader": "^5.3.3",
-    "tslint": "^5.12.1",
+    "tslint": "^5.13.0",
     "tslint-webpack-plugin": "^2.0.2",
-    "typescript": "^3.3.3",
+    "typescript": "^3.3.3333",
     "webpack": "^4.29.5",
     "webpack-cli": "^3.2.3"
   },
