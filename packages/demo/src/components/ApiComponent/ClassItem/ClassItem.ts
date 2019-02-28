@@ -14,6 +14,7 @@ import { Indexes } from '../../../store/modules/api';
 })
 export class ClassItemComponent extends Vue {
   @Prop() item: ClassItem;
+  @Prop() showMembers: boolean;
   indexes: Indexes;
   utility = utility;
 
