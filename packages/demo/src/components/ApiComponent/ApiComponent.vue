@@ -22,13 +22,20 @@
         </v-btn>
         {{item.name}}
       </h2>
-      <class-item :item="item"></class-item>
+      <class-item :item="item" :showMembers="isMembersShowed(item.name)">
+        <template v-if="!isMembersShowed(item.name)" v-slot:footer>
+          <v-btn small primary @click="showItemMembers(item.name)">
+            Show members
+          </v-btn>
+        </template>
+      </class-item>
+
     </div>
   </v-container>
 </template>
 
 <script lang="ts">
-export { ApiComponent as default } from "./ApiComponent";
+export { ApiComponent as default } from './ApiComponent';
 </script>
 
 <style lang="scss">

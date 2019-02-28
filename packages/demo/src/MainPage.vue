@@ -19,6 +19,7 @@
         open-on-click
         transition
         @update:open="onOpen"
+        class="pt-3 pb-3"
       >
         <template slot="prepend" slot-scope="{ item }">
           <v-icon v-if="item.icon">{{item.icon}}</v-icon>

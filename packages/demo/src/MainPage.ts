@@ -169,4 +169,5 @@ export class MainPage extends Vue {
     }
     this.currentItemId = id;
   }
+
 }
