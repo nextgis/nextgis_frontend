@@ -24679,7 +24679,7 @@
 										"type": "intrinsic",
 										"name": "string"
 									},
-									"defaultValue": " `\r\n      <p>This is dialog!</p>\r\n    `"
+									"defaultValue": " `\n      <p>This is dialog!</p>\n    `"
 								}
 							],
 							"groups": [
@@ -24778,7 +24778,7 @@
 						"type": "stringLiteral",
 						"value": "\n  <a href=\"#\">\n    <svg height=\"24\" viewBox=\"0 0 24 24\" width=\"24\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path d=\"M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z\">\n      </path>\n      <path d=\"M0 0h24v24H0z\" fill=\"none\"></path>\n    </svg>\n  </a>\n"
 					},
-					"defaultValue": " `\r\n  <a href=\"#\">\r\n    <svg height=\"24\" viewBox=\"0 0 24 24\" width=\"24\" xmlns=\"http://www.w3.org/2000/svg\">\r\n      <path d=\"M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z\">\r\n      </path>\r\n      <path d=\"M0 0h24v24H0z\" fill=\"none\"></path>\r\n    </svg>\r\n  </a>\r\n`"
+					"defaultValue": " `\n  <a href=\"#\">\n    <svg height=\"24\" viewBox=\"0 0 24 24\" width=\"24\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path d=\"M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z\">\n      </path>\n      <path d=\"M0 0h24v24H0z\" fill=\"none\"></path>\n    </svg>\n  </a>\n`"
 				}
 			],
 			"groups": [
@@ -41649,7 +41649,7 @@
 											}
 										}
 									},
-									"defaultValue": " [\r\n      {\r\n        type: 'boolean',\r\n        name: 'visibility',\r\n        getProperty(item?: WebMapLayerItem) {\r\n          if (item) {\r\n            if (item.item.item_type === 'group') {\r\n              return true;\r\n            } else if (item.item.item_type === 'layer') {\r\n              return item.item.layer_enabled;\r\n            } else if (item.item.item_type === 'root') {\r\n              return true;\r\n            }\r\n          }\r\n          return false;\r\n        },\r\n        onSet(value: boolean, options?: any, item?: WebMapLayerItem) {\r\n          if (item && item.layer && item.item.item_type === 'layer') {\r\n            if (value) {\r\n              item.webMap.showLayer(item.layer);\r\n            } else {\r\n              item.webMap.hideLayer(item.layer);\r\n            }\r\n            item.item.layer_enabled = value;\r\n          }\r\n        },\r\n      },\r\n    ]"
+									"defaultValue": " [\n      {\n        type: 'boolean',\n        name: 'visibility',\n        getProperty(item?: WebMapLayerItem) {\n          if (item) {\n            if (item.item.item_type === 'group') {\n              return true;\n            } else if (item.item.item_type === 'layer') {\n              return item.item.layer_enabled;\n            } else if (item.item.item_type === 'root') {\n              return true;\n            }\n          }\n          return false;\n        },\n        onSet(value: boolean, options?: any, item?: WebMapLayerItem) {\n          if (item && item.layer && item.item.item_type === 'layer') {\n            if (value) {\n              item.webMap.showLayer(item.layer);\n            } else {\n              item.webMap.hideLayer(item.layer);\n            }\n            item.item.layer_enabled = value;\n          }\n        },\n      },\n    ]"
 								}
 							],
 							"groups": [
@@ -45137,7 +45137,7 @@
 															"name": "string"
 														}
 													},
-													"defaultValue": " [\n          '<a href=\"http://nextgis.ru\" target=\"_blank\">©NextGIS</a>',\n        ]"
+													"defaultValue": " [\r\n          '<a href=\"http://nextgis.ru\" target=\"_blank\">©NextGIS</a>',\r\n        ]"
 												},
 												{
 													"id": 2729,
@@ -46819,7 +46819,7 @@
 															"name": "string"
 														}
 													},
-													"defaultValue": " [\n          '<a href=\"http://nextgis.ru\" target=\"_blank\">©NextGIS</a>',\n        ]"
+													"defaultValue": " [\r\n          '<a href=\"http://nextgis.ru\" target=\"_blank\">©NextGIS</a>',\r\n        ]"
 												},
 												{
 													"id": 2645,
@@ -49575,7 +49575,7 @@
 															"name": "string"
 														}
 													},
-													"defaultValue": " [\n          '<a href=\"http://nextgis.ru\" target=\"_blank\">©NextGIS</a>',\n        ]"
+													"defaultValue": " [\r\n          '<a href=\"http://nextgis.ru\" target=\"_blank\">©NextGIS</a>',\r\n        ]"
 												},
 												{
 													"id": 2806,
@@ -51347,7 +51347,7 @@
 															"name": "string"
 														}
 													},
-													"defaultValue": " [\n          '<a href=\"http://nextgis.ru\" target=\"_blank\">©NextGIS</a>',\n        ]"
+													"defaultValue": " [\r\n          '<a href=\"http://nextgis.ru\" target=\"_blank\">©NextGIS</a>',\r\n        ]"
 												},
 												{
 													"id": 3273,
