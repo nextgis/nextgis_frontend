@@ -20,7 +20,7 @@
     "demo": "yarn run examples && cd ./packages/demo/ && yarn run prod",
     "examples": "node ./build/updateExamples.js",
     "test": "echo \"Error: run tests from root\" && exit 1",
-    "doc": "typedoc --json ./packages/demo/src/api.json --exclude **/packages/demo/**/* ./packages"
+    "doc": "typedoc --json ./packages/demo/src/api.json --excludePrivate --excludeProtected --exclude **/packages/demo/**/* ./packages"
   },
   "license": "LGPL-3.0",
   "workspaces": [
