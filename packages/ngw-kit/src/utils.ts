@@ -79,3 +79,12 @@ export function extendWebMapLayerAdapter(opt: ExtendWebMapLayerAdapterOptions): 
   }
   return A;
 }
+
+export function pixelsInMeterWidth() {
+  const div = document.createElement('div');
+  div.style.cssText = 'position: absolute;  left: -100%;  top: -100%;  width: 100cm;';
+  document.body.appendChild(div);
+  const px = div.offsetWidth;
+  document.body.removeChild(div);
+  return px;
+}
