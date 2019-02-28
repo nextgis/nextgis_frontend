@@ -21,7 +21,7 @@ export class WebMapLayerAdapter implements BaseLayerAdapter {
     }
 
     if (!this.resourceId) {
-      throw new Error('No NGW resouce id defined');
+      throw new Error('NGW `resourceId` is not defined');
     }
   }
 

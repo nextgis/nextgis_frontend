@@ -58,7 +58,13 @@ export class WebMapLayerItem extends Item<ItemOptions> {
     let newLayer = item._layer;
     if (item.item_type === 'group' || item.item_type === 'root') {
       if (item.children && item.children.length) {
-        item.children.reverse().forEach((x) => {
+
+        item.children.reverse().sort((a, b) => {
+          if (a.item_type === 'layer' && b.item_type === 'layer') {
+            return b.draw_order_position - a.draw_order_position;
+          }
+          return 0;
+        }).forEach((x) => {
           const children = new WebMapLayerItem(this.webMap, x, this.options, this);
           this.tree.addChild(children);
         });
