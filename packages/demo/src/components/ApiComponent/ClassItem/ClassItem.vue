@@ -19,7 +19,7 @@
 
     <div v-if="showMembers">
       <div v-for="m in getAllowedMembers(item)" :key="m.name">
-        <div v-if="m.members.length" class="pt-3">
+        <div v-if="m.members.length" class="pb-2">
           <h4>{{m.name}}</h4>
           <v-expansion-panel>
             <v-expansion-panel-content v-for="p in m.members" :key="p.id">
@@ -59,10 +59,14 @@ export { ClassItemComponent as default } from './ClassItem';
 }
 
 .constructor-item > div {
-  padding-bottom: 16px;
+  padding-bottom: 0px;
 }
 
 .constructor-item > div:empty {
   padding: 0;
+}
+
+.constructor-item code {
+  margin-bottom: 16px;
 }
 </style>

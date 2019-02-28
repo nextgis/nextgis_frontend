@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <v-data-table
+    <v-data-table v-if="properties.length"
       :items="properties"
       class="elevation-1"
       hide-actions
@@ -9,7 +9,7 @@
     >
       <template slot="items" slot-scope="props">
         <td>{{ props.item.name }}{{props.item.flags.isOptional ? '?' : ''}}</td>
-        <td v-html="getOptionType(props.item.type)"></td>
+        <td v-html="getOptionType(props.item)"></td>
         <td><comment :comment="props.item.comment"></comment></td>
       </template>
     </v-data-table>

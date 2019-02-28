@@ -52,7 +52,7 @@ export interface NgwMapOptions extends MapOptions {
   /**
    * Set default paint for vector layers geometry objects.
    */
-  VectorLayersDefaultPaint?: {
+  vectorLayersDefaultPaint?: {
     circle: CirclePaint,
     path: PathPaint,
     icon: IconOptions

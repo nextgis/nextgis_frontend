@@ -13,7 +13,7 @@ import {
   CreateToggleControlOptions
 } from './MapControl';
 import { MapOptions } from './WebMapApp';
-import { LatLng, LatLngArray, LngLatBoundsArray, Pixel } from './BaseTypes';
+import { LatLng, LngLatArray, LngLatBoundsArray, Pixel } from './BaseTypes';
 
 export interface MapClickEvent {
   latLng: LatLng;
@@ -36,11 +36,11 @@ export interface BaseMapAdapter<L = any> {
   hideLayer(layer: L): void;
   setLayerOrder(layer: L, order: number, layers?: { [name: string]: LayerAdapter }): void;
 
-  setCenter(latLng: LatLngArray): void;
+  setCenter(latLng: LngLatArray): void;
   setZoom(zoom: number): void;
   fit(extent: LngLatBoundsArray, options?: FitOptions): void;
   setRotation?(angle: number): void;
-  setView?(lngLat: LatLngArray, zoom?: number): void;
+  setView?(lngLat: LngLatArray, zoom?: number): void;
 
   getZoom(): number | undefined;
 
