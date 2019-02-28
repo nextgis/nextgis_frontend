@@ -3,6 +3,7 @@
  */
 
 import 'leaflet/dist/leaflet.css';
+import './leaflet-style-override.css';
 
 import NgwMap, { NgwMapOptions } from '@nextgis/ngw-map';
 import LeafletMapAdapter from '@nextgis/leaflet-map-adapter';

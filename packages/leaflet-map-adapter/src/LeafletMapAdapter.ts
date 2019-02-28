@@ -9,7 +9,9 @@ import {
   CreateControlOptions,
   CreateButtonControlOptions,
   LayerAdapter,
-  CreateToggleControlOptions
+  CreateToggleControlOptions,
+  LngLatArray,
+  LngLatBoundsArray
 } from '@nextgis/webmap';
 import { Map, Control, Layer, GridLayer, ControlPosition, LeafletEvent, LeafletMouseEvent } from 'leaflet';
 import { EventEmitter } from 'events';
@@ -93,17 +95,26 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     });
   }
 
-  setView(lngLat: [number, number], zoom: number) {
+  setView(lngLat: LngLatArray, zoom: number) {
     const [lng, lat] = lngLat;
     if (this.map) {
       this.map.setView([lat, lng], zoom);
     }
   }
 
-  setCenter(lngLat: [number, number]) {
+  setCenter(lngLat: LngLatArray) {
     const [lng, lat] = lngLat;
     if (this.map) {
       this.map.setView([lat, lng], this.map.getZoom());
+    }
+  }
+
+  getCenter(): LngLatArray | undefined {
+    const map = this.map;
+    if (map) {
+      const bounds = map.getBounds();
+      const center = bounds.getCenter();
+      return [center.lng, center.lat];
     }
   }
 
@@ -118,7 +129,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   }
 
   // [extent_left, extent_bottom, extent_right, extent_top];
-  fit(e: [number, number, number, number]) {
+  fit(e: LngLatBoundsArray) {
     if (this.map) {
       // top, left, bottom, right
       this.map.fitBounds([[e[3], e[0]], [e[1], e[2]]]);

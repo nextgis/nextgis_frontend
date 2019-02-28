@@ -114,7 +114,12 @@ export class NgwMap {
       mapAdapter,
       starterKits: kits
     });
+
     this._createWebMap().then(() => {
+      const container = this.webMap.getContainer();
+      if (container) {
+        container.classList.add('ngw-map-container');
+      }
       this._addControls();
     });
     this._addEventsListeners();

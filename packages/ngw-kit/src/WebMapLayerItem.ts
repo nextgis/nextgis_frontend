@@ -6,6 +6,9 @@ import Item, { ItemOptions } from '@nextgis/item';
 
 import WebMap, { LayerAdaptersOptions, LayerAdapter } from '@nextgis/webmap';
 import { TreeGroup, TreeLayer } from './interfaces';
+import { pixelsInMeterWidth } from './utils';
+
+const pixelsInMeter = pixelsInMeterWidth();
 
 export class WebMapLayerItem extends Item<ItemOptions> {
   static options: ItemOptions = {
@@ -71,9 +74,13 @@ export class WebMapLayerItem extends Item<ItemOptions> {
       }
     } else if (item.item_type === 'layer') {
       const adapter = (item.adapter || item.layer_adapter.toUpperCase()) as keyof LayerAdaptersOptions;
+      const maxZoom = item.layer_max_scale_denom ?
+        this._mapScaleToZoomLevel(item.layer_max_scale_denom) : this.webMap.options.maxZoom;
+      const minZoom = item.layer_min_scale_denom ?
+        this._mapScaleToZoomLevel(item.layer_min_scale_denom) : this.webMap.options.minZoom;
       const options: any = {
-        maxZoom: this.webMap.options.maxZoom,
-        minZoom: this.webMap.options.minZoom,
+        maxZoom,
+        minZoom,
         ...item,
       };
       newLayer = await this.webMap.addLayer(adapter, options);
@@ -89,7 +96,6 @@ export class WebMapLayerItem extends Item<ItemOptions> {
     }
   }
 
-  // region layer control
   bringToFront() {
     //
   }
@@ -99,7 +105,36 @@ export class WebMapLayerItem extends Item<ItemOptions> {
       console.log(this.item);
     }
   }
-  //
+
+  private _mapScaleToZoomLevel(scale: number) {
+
+    return this._setScaleRatio(scale);
+    // return this.webMap.getResolutionForScale(scale);
+  }
+
+  // Returns width of map in meters on specified latitude.
+  private _getMapWidthForLanInMeters(lat: number): number {
+    return 6378137 * 2 * Math.PI * Math.cos(lat * Math.PI / 180);
+  }
+
+  private zoom(scale: number) {
+    return Math.log(scale / 256) / Math.LN2;
+  }
+
+  private _setScaleRatio(scale: number) {
+
+    // TODO: get real center
+    // webmap does not contain center yet
+    const center = [104, 45]; // this.webMap.getCenter();
+    if (center) {
+      const centerLat = center[1];
+      const crsScale = pixelsInMeter * this._getMapWidthForLanInMeters(centerLat) / scale;
+      const zoom = this.zoom(crsScale);
+      return zoom;
+    }
+    return Math.round(Math.log(591657550.500000 / (scale / 2)) / Math.log(2));
+
+  }
 
   private async _init(item: TreeGroup | TreeLayer) {
     await this.initItem(item);
