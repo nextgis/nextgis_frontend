@@ -29,7 +29,7 @@ export type LngLatBoundsArray = [number, number, number, number];
 /**
  * Array of two numbers representing longitude and latitude.
  */
-export type LatLngArray = [number, number];
+export type LngLatArray = [number, number];
 
 /**
  * Screen coordinates in pixels.

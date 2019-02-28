@@ -43,6 +43,9 @@ const typeAlias: { [x: string]: GeoJsonAdapterLayerType } = {
   'MultiPolygon': 'fill'
 };
 
+/**
+ * Base class containing the logic of interaction WebMap with NextGIS services.
+ */
 export class NgwMap {
 
   static utils = { fixUrlStr };
@@ -63,7 +66,7 @@ export class NgwMap {
         ]
       }
     },
-    VectorLayersDefaultPaint: {
+    vectorLayersDefaultPaint: {
       circle: {
         type: 'circle',
         color: 'blue',
@@ -85,6 +88,7 @@ export class NgwMap {
   webMap: WebMap;
   emitter = new EventEmitter();
   connector: NgwConnector;
+
   _eventsStatus: { [eventName: string]: boolean } = {};
   protected _ngwLayers: {
     [layerName: string]: {
@@ -137,6 +141,19 @@ export class NgwMap {
     this.webMap.fit([left, bottom, right, top]);
   }
 
+  /**
+   * Organized addition to the map design and controls elements
+   * @param control - object with onAdd and onRemove methods
+   *                or a string value indicating the name of the control installed in the map adapter
+   * @param position - position relative to the map angles
+   * @param [options] - initialization parameters if the control is set as a string value
+   *
+   * @example
+   * ```javascript
+   * ngwMap.addControl(new CustomControl(), 'bottom-left');
+   * ngwMap.addControl('ZOOM', {position: 'top-right'})
+   * ```
+   */
   @onLoad('control:created')
   addControl<K extends keyof MapControls>(control: MapControl, position: ControlPositions, options?: MapControls[K]) {
     this.webMap.addControl(control, position, options);
@@ -245,13 +262,13 @@ export class NgwMap {
             'icon' :
             geomType;
 
-        if (this.options.VectorLayersDefaultPaint) {
+        if (this.options.vectorLayersDefaultPaint) {
           if (p.type === 'circle') {
-            opt.paint = { ...this.options.VectorLayersDefaultPaint.circle, ...p };
+            opt.paint = { ...this.options.vectorLayersDefaultPaint.circle, ...p };
           } else if (p.type === 'path') {
-            opt.paint = { ...this.options.VectorLayersDefaultPaint.path, ...p };
+            opt.paint = { ...this.options.vectorLayersDefaultPaint.path, ...p };
           } else if (p.type === 'icon') {
-            opt.paint = { ...this.options.VectorLayersDefaultPaint.icon, ...p };
+            opt.paint = { ...this.options.vectorLayersDefaultPaint.icon, ...p };
           }
         }
       }

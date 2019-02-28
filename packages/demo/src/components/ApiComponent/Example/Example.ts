@@ -1,15 +1,26 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
-import { ApiComment, ParameterItem, ApiItem } from '../ApiItem';
+import { ApiComment, ParameterItem, ApiItem, SignaturedItem } from '../ApiItem';
 
 @Component
 export class Example extends Vue {
-  @Prop() item: ParameterItem;
+  @Prop() item: ParameterItem | SignaturedItem;
   @Prop() comment: ApiComment;
 
   get example() {
     if (this.comment) {
       return this.getExamples(this.comment);
     } else if (this.item) {
+      if ('signatures' in this.item) {
+        const examples = [];
+        this.item.signatures.forEach((x) => {
+          if ('comment' in x) {
+            this.getExamples(x.comment).forEach((y) => {
+              examples.push(y);
+            });
+          }
+        });
+        return examples;
+      }
       return this.getExamples(this.item.comment);
     }
   }

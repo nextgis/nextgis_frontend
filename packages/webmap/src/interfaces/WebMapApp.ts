@@ -5,12 +5,13 @@
 import { MapAdapter } from './MapAdapter';
 import { StarterKit } from './StarterKit';
 import { MapControl } from './MapControl';
-import { LatLngArray, LngLatBoundsArray } from './BaseTypes';
+import { LngLatArray, LngLatBoundsArray } from './BaseTypes';
 
 export interface MapOptions {
   /**
    * The HTML element in which NgwMap will render the map,
-   * or the element's string  id. The specified element must have no children.
+   * or the element's string  id.
+   * The specified element must have no children.
    */
   target?: string | HTMLElement;
   // logo?: string;
@@ -23,11 +24,22 @@ export interface MapOptions {
    * The maximum zoom level of the map (0-24).
    */
   maxZoom?: number;
-  /** lat lng */
-  center?: LatLngArray;
-  /** top, left, bottom, right */
-  bounds?: LngLatBoundsArray;
+  /**
+   * The initial zoom level of the map (0-24).
+   */
   zoom?: number;
+  /**
+   * Initial position of the map, array of two degrees [longitude, latitude].
+   * [LngLatArray](webmap-api#LngLatArray)
+   */
+  center?: LngLatArray;
+  /**
+   * Initial extent of the map, array of degrees in [_west_, _south_, _east_, _north_] order.
+   * Overrides the `center` and  `zoom` parameters.
+   * [LngLatBoundsArray](webmap-api#LngLatBoundsArray)
+   */
+  bounds?: LngLatBoundsArray;
+
 }
 
 export interface AppOptions {

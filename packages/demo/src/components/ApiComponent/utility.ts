@@ -120,3 +120,13 @@ export function createMethodString(methodItem: MethodItem | FunctionItem, indexe
   }).join(', ');
   return `${methodItem.name}${signatures || '()'}`;
 }
+
+export function createMethodTypeString(methodItem: MethodItem | FunctionItem, indexes: Indexes): string {
+  const signatures = methodItem.signatures.map((x) => {
+    if ('parameters' in x) {
+      const args = getSignatureParameters(x.parameters, indexes).join(', ');
+      return `(${args}): ${getOptionType(x.type, indexes)}`;
+    }
+  }).join(', ');
+  return `${signatures || '()'}`;
+}

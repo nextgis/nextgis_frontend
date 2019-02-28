@@ -58,7 +58,7 @@ export interface ApiItem {
   type?: Property;
 }
 
-export type Parameter = ParameterItem | VariableItem;
+export type Parameter = ParameterItem | VariableItem | MethodItem;
 
 export interface ClassItem extends ApiItem {
   kindString: 'Class';
@@ -72,6 +72,7 @@ export interface VariableItem extends ApiItem {
 export interface CallSignatureItem extends ApiItem {
   kindString: 'Call signature';
   type: Property;
+  comment: ApiComment;
 }
 
 export interface InterfaceItem extends ApiItem {
@@ -95,22 +96,23 @@ export interface ConstructorSignature extends ApiItem {
   parameters: Parameter[];
 }
 
+export interface SignaturedItem extends ApiItem {
+  signatures: Signatures[];
+}
+
 export interface ConstructorItem extends ApiItem {
   kindString: 'Constructor';
-
   signatures: ConstructorSignature[];
 }
 
-export interface FunctionItem extends ApiItem {
+export interface FunctionItem extends SignaturedItem {
   kindString: 'Function';
   implementationOf: ReferencePropertyType;
-  signatures: Signatures[];
 }
 
-export interface MethodItem extends ApiItem {
+export interface MethodItem extends SignaturedItem {
   kindString: 'Method';
   implementationOf: ReferencePropertyType;
-  signatures: Signatures[];
 }
 
 export type Property = IntrinsicPropertyType |
