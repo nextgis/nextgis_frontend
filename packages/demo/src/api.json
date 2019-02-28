@@ -30559,7 +30559,7 @@
 					},
 					"children": [
 						{
-							"id": 1427,
+							"id": 1428,
 							"name": "bounds",
 							"kind": 1024,
 							"kindString": "Property",
@@ -30568,12 +30568,12 @@
 								"isOptional": true
 							},
 							"comment": {
-								"shortText": "top, left, bottom, right"
+								"shortText": "Initial extent of the map, array of degrees in [_west_, _south_, _east_, _north_] order.\nOverrides the `center` and  `zoom` parameters.\n[LngLatBoundsArray](webmap-api#LngLatBoundsArray)"
 							},
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/WebMapApp.ts",
-									"line": 29,
+									"line": 41,
 									"character": 8
 								}
 							],
@@ -30585,11 +30585,11 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "MapOptions.bounds",
-								"id": 379
+								"id": 380
 							}
 						},
 						{
-							"id": 1426,
+							"id": 1427,
 							"name": "center",
 							"kind": 1024,
 							"kindString": "Property",
@@ -30598,24 +30598,24 @@
 								"isOptional": true
 							},
 							"comment": {
-								"shortText": "lat lng"
+								"shortText": "Initial position of the map, array of two degrees [longitude, latitude].\n[LngLatArray](webmap-api#LngLatArray)"
 							},
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/WebMapApp.ts",
-									"line": 27,
+									"line": 35,
 									"character": 8
 								}
 							],
 							"type": {
 								"type": "reference",
-								"name": "LatLngArray",
+								"name": "LngLatArray",
 								"id": 14
 							},
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "MapOptions.center",
-								"id": 378
+								"id": 379
 							}
 						},
 						{
@@ -30663,7 +30663,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/WebMapApp.ts",
-									"line": 25,
+									"line": 26,
 									"character": 9
 								}
 							],
@@ -30701,7 +30701,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/WebMapApp.ts",
-									"line": 21,
+									"line": 22,
 									"character": 9
 								}
 							],
@@ -30734,12 +30734,12 @@
 								"isOptional": true
 							},
 							"comment": {
-								"shortText": "The HTML element in which NgwMap will render the map,\nor the element's string  id. The specified element must have no children."
+								"shortText": "The HTML element in which NgwMap will render the map,\nor the element's string  id.\nThe specified element must have no children."
 							},
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/WebMapApp.ts",
-									"line": 15,
+									"line": 16,
 									"character": 8
 								}
 							],
@@ -30763,13 +30763,16 @@
 							}
 						},
 						{
-							"id": 1428,
+							"id": 1426,
 							"name": "zoom",
 							"kind": 1024,
 							"kindString": "Property",
 							"flags": {
 								"isExported": true,
 								"isOptional": true
+							},
+							"comment": {
+								"shortText": "The initial zoom level of the map (0-24)."
 							},
 							"sources": [
 								{
@@ -30794,7 +30797,7 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "MapOptions.zoom",
-								"id": 380
+								"id": 378
 							}
 						}
 					],
@@ -30803,13 +30806,13 @@
 							"title": "Properties",
 							"kind": 1024,
 							"children": [
+								1428,
 								1427,
-								1426,
 								1422,
 								1425,
 								1424,
 								1423,
-								1428
+								1426
 							]
 						}
 					],
@@ -32173,7 +32176,7 @@
 											"flags": {},
 											"type": {
 												"type": "reference",
-												"name": "LatLngArray",
+												"name": "LngLatArray",
 												"id": 14
 											}
 										},
@@ -44063,11 +44066,11 @@
 						"isExported": true
 					},
 					"comment": {
-						"shortText": "The `NgwLeaflet` responsible for displaying the {@link ngw-map-api | NgwMap}\nusing the  {@link leaflet-map-adapter-api | LeafletMapAdapter}",
+						"shortText": "Displaying the {@link ngw-map-api | NgwMap}\nusing the  {@link leaflet-map-adapter-api | LeafletMapAdapter}",
 						"tags": [
 							{
 								"tag": "example",
-								"text": "\n```javascript\nimport NgwLeaflet from '@nextgis/ngw-leaflet';\nconst ngwMap = new NgwLeaflet({\n   baseUrl: 'https://demo.nextgis.com',\n    target: 'map',\n    qmsId: 487,\n    webmapId: 3985\n  });\n```\n"
+								"text": "\n```javascript\n// Base initialization\nimport NgwLeaflet from '@nextgis/ngw-leaflet';\n\nconst ngwMap = new NgwLeaflet({\n  target: 'map',\n  qmsId: 487,\n  baseUrl: 'https://demo.nextgis.com',\n  webmapId: 3985\n});\n```\n"
 							}
 						]
 					},
@@ -44116,7 +44119,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-leaflet/src/index.ts",
-									"line": 25,
+									"line": 27,
 									"character": 40
 								}
 							],
@@ -44137,7 +44140,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 88,
+									"line": 92,
 									"character": 15
 								}
 							],
@@ -44180,7 +44183,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 88,
+											"line": 92,
 											"character": 16
 										}
 									]
@@ -44203,7 +44206,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 87,
+									"line": 90,
 									"character": 11
 								}
 							],
@@ -44229,7 +44232,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 86,
+									"line": 89,
 									"character": 9
 								}
 							],
@@ -44255,7 +44258,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 85,
+									"line": 88,
 									"character": 8
 								}
 							],
@@ -44282,7 +44285,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 50,
+									"line": 53,
 									"character": 16
 								}
 							],
@@ -44326,6 +44329,15 @@
 									"kind": 4096,
 									"kindString": "Call signature",
 									"flags": {},
+									"comment": {
+										"shortText": "Organized addition to the map design and controls elements",
+										"tags": [
+											{
+												"tag": "example",
+												"text": "\n```javascript\nngwMap.addControl(new CustomControl(), 'bottom-left');\nngwMap.addControl('ZOOM', {position: 'top-right'})\n```\n"
+											}
+										]
+									},
 									"typeParameter": [
 										{
 											"id": 2759,
@@ -44350,6 +44362,9 @@
 											"kind": 32768,
 											"kindString": "Parameter",
 											"flags": {},
+											"comment": {
+												"text": "object with onAdd and onRemove methods\n               or a string value indicating the name of the control installed in the map adapter"
+											},
 											"type": {
 												"type": "reference",
 												"name": "MapControl",
@@ -44362,6 +44377,9 @@
 											"kind": 32768,
 											"kindString": "Parameter",
 											"flags": {},
+											"comment": {
+												"text": "position relative to the map angles"
+											},
 											"type": {
 												"type": "reference",
 												"name": "ControlPositions",
@@ -44405,7 +44423,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 141,
+									"line": 158,
 									"character": 12
 								}
 							],
@@ -44655,7 +44673,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 193,
+									"line": 210,
 									"character": 17
 								}
 							],
@@ -44749,7 +44767,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 146,
+									"line": 163,
 									"character": 19
 								}
 							],
@@ -44791,7 +44809,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 122,
+									"line": 126,
 									"character": 5
 								}
 							],
@@ -44860,7 +44878,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 134,
+									"line": 138,
 									"character": 11
 								}
 							],
@@ -44941,7 +44959,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 209,
+									"line": 226,
 									"character": 13
 								}
 							],
@@ -44994,7 +45012,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 51,
+									"line": 54,
 									"character": 16
 								}
 							],
@@ -45024,7 +45042,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 55,
+											"line": 58,
 											"character": 11
 										}
 									],
@@ -45045,7 +45063,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 56,
+											"line": 59,
 											"character": 12
 										}
 									],
@@ -45069,7 +45087,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 54,
+											"line": 57,
 											"character": 10
 										}
 									],
@@ -45078,347 +45096,6 @@
 										"name": "string"
 									},
 									"defaultValue": "\"map\""
-								},
-								{
-									"id": 2731,
-									"name": "VectorLayersDefaultPaint",
-									"kind": 2097152,
-									"kindString": "Object literal",
-									"flags": {
-										"isExported": true
-									},
-									"children": [
-										{
-											"id": 2744,
-											"name": "icon",
-											"kind": 32,
-											"kindString": "Variable",
-											"flags": {
-												"isExported": true
-											},
-											"sources": [
-												{
-													"fileName": "ngw-map/src/NgwMap.ts",
-													"line": 81,
-													"character": 10
-												}
-											],
-											"type": {
-												"type": "reference",
-												"name": "IconOptions",
-												"id": 73
-											},
-											"defaultValue": " getIcon({ shape: 'circle' })"
-										},
-										{
-											"id": 2732,
-											"name": "circle",
-											"kind": 2097152,
-											"kindString": "Object literal",
-											"flags": {
-												"isExported": true
-											},
-											"children": [
-												{
-													"id": 2734,
-													"name": "color",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 69,
-															"character": 13
-														}
-													],
-													"type": {
-														"type": "intrinsic",
-														"name": "string"
-													},
-													"defaultValue": "\"blue\""
-												},
-												{
-													"id": 2735,
-													"name": "opacity",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 70,
-															"character": 15
-														}
-													],
-													"type": {
-														"type": "intrinsic",
-														"name": "number"
-													},
-													"defaultValue": "1"
-												},
-												{
-													"id": 2736,
-													"name": "radius",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 71,
-															"character": 14
-														}
-													],
-													"type": {
-														"type": "intrinsic",
-														"name": "number"
-													},
-													"defaultValue": "6"
-												},
-												{
-													"id": 2737,
-													"name": "stroke",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 72,
-															"character": 14
-														}
-													],
-													"type": {
-														"type": "intrinsic",
-														"name": "false"
-													},
-													"defaultValue": "false"
-												},
-												{
-													"id": 2733,
-													"name": "type",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 68,
-															"character": 12
-														}
-													],
-													"type": {
-														"type": "stringLiteral",
-														"value": "circle"
-													},
-													"defaultValue": "\"circle\""
-												}
-											],
-											"groups": [
-												{
-													"title": "Variables",
-													"kind": 32,
-													"children": [
-														2734,
-														2735,
-														2736,
-														2737,
-														2733
-													]
-												}
-											],
-											"sources": [
-												{
-													"fileName": "ngw-map/src/NgwMap.ts",
-													"line": 67,
-													"character": 12
-												}
-											],
-											"type": {
-												"type": "intrinsic",
-												"name": "object"
-											}
-										},
-										{
-											"id": 2738,
-											"name": "path",
-											"kind": 2097152,
-											"kindString": "Object literal",
-											"flags": {
-												"isExported": true
-											},
-											"children": [
-												{
-													"id": 2740,
-													"name": "color",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 76,
-															"character": 13
-														}
-													],
-													"type": {
-														"type": "intrinsic",
-														"name": "string"
-													},
-													"defaultValue": "\"blue\""
-												},
-												{
-													"id": 2741,
-													"name": "opacity",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 77,
-															"character": 15
-														}
-													],
-													"type": {
-														"type": "intrinsic",
-														"name": "number"
-													},
-													"defaultValue": "1"
-												},
-												{
-													"id": 2742,
-													"name": "stroke",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 78,
-															"character": 14
-														}
-													],
-													"type": {
-														"type": "intrinsic",
-														"name": "false"
-													},
-													"defaultValue": "false"
-												},
-												{
-													"id": 2739,
-													"name": "type",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 75,
-															"character": 12
-														}
-													],
-													"type": {
-														"type": "stringLiteral",
-														"value": "path"
-													},
-													"defaultValue": "\"path\""
-												},
-												{
-													"id": 2743,
-													"name": "weight",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 79,
-															"character": 14
-														}
-													],
-													"type": {
-														"type": "intrinsic",
-														"name": "number"
-													},
-													"defaultValue": "1"
-												}
-											],
-											"groups": [
-												{
-													"title": "Variables",
-													"kind": 32,
-													"children": [
-														2740,
-														2741,
-														2742,
-														2739,
-														2743
-													]
-												}
-											],
-											"sources": [
-												{
-													"fileName": "ngw-map/src/NgwMap.ts",
-													"line": 74,
-													"character": 10
-												}
-											],
-											"type": {
-												"type": "intrinsic",
-												"name": "object"
-											}
-										}
-									],
-									"groups": [
-										{
-											"title": "Variables",
-											"kind": 32,
-											"children": [
-												2744
-											]
-										},
-										{
-											"title": "Object literals",
-											"kind": 2097152,
-											"children": [
-												2732,
-												2738
-											]
-										}
-									],
-									"sources": [
-										{
-											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 66,
-											"character": 28
-										}
-									],
-									"type": {
-										"type": "intrinsic",
-										"name": "object"
-									}
 								},
 								{
 									"id": 2725,
@@ -45449,7 +45126,7 @@
 													"sources": [
 														{
 															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 61,
+															"line": 64,
 															"character": 25
 														}
 													],
@@ -45460,7 +45137,7 @@
 															"name": "string"
 														}
 													},
-													"defaultValue": " [\r\n          '<a href=\"http://nextgis.ru\" target=\"_blank\">©NextGIS</a>',\r\n        ]"
+													"defaultValue": " [\n          '<a href=\"http://nextgis.ru\" target=\"_blank\">©NextGIS</a>',\n        ]"
 												},
 												{
 													"id": 2729,
@@ -45473,7 +45150,7 @@
 													"sources": [
 														{
 															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 60,
+															"line": 63,
 															"character": 16
 														}
 													],
@@ -45497,7 +45174,7 @@
 											"sources": [
 												{
 													"fileName": "ngw-map/src/NgwMap.ts",
-													"line": 59,
+													"line": 62,
 													"character": 17
 												}
 											],
@@ -45526,7 +45203,7 @@
 													"sources": [
 														{
 															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 58,
+															"line": 61,
 															"character": 22
 														}
 													],
@@ -45549,7 +45226,7 @@
 											"sources": [
 												{
 													"fileName": "ngw-map/src/NgwMap.ts",
-													"line": 58,
+													"line": 61,
 													"character": 10
 												}
 											],
@@ -45572,8 +45249,349 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 57,
+											"line": 60,
 											"character": 19
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "object"
+									}
+								},
+								{
+									"id": 2731,
+									"name": "vectorLayersDefaultPaint",
+									"kind": 2097152,
+									"kindString": "Object literal",
+									"flags": {
+										"isExported": true
+									},
+									"children": [
+										{
+											"id": 2744,
+											"name": "icon",
+											"kind": 32,
+											"kindString": "Variable",
+											"flags": {
+												"isExported": true
+											},
+											"sources": [
+												{
+													"fileName": "ngw-map/src/NgwMap.ts",
+													"line": 84,
+													"character": 10
+												}
+											],
+											"type": {
+												"type": "reference",
+												"name": "IconOptions",
+												"id": 73
+											},
+											"defaultValue": " getIcon({ shape: 'circle' })"
+										},
+										{
+											"id": 2732,
+											"name": "circle",
+											"kind": 2097152,
+											"kindString": "Object literal",
+											"flags": {
+												"isExported": true
+											},
+											"children": [
+												{
+													"id": 2734,
+													"name": "color",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 72,
+															"character": 13
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "string"
+													},
+													"defaultValue": "\"blue\""
+												},
+												{
+													"id": 2735,
+													"name": "opacity",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 73,
+															"character": 15
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													},
+													"defaultValue": "1"
+												},
+												{
+													"id": 2736,
+													"name": "radius",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 74,
+															"character": 14
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													},
+													"defaultValue": "6"
+												},
+												{
+													"id": 2737,
+													"name": "stroke",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 75,
+															"character": 14
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "false"
+													},
+													"defaultValue": "false"
+												},
+												{
+													"id": 2733,
+													"name": "type",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 71,
+															"character": 12
+														}
+													],
+													"type": {
+														"type": "stringLiteral",
+														"value": "circle"
+													},
+													"defaultValue": "\"circle\""
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														2734,
+														2735,
+														2736,
+														2737,
+														2733
+													]
+												}
+											],
+											"sources": [
+												{
+													"fileName": "ngw-map/src/NgwMap.ts",
+													"line": 70,
+													"character": 12
+												}
+											],
+											"type": {
+												"type": "intrinsic",
+												"name": "object"
+											}
+										},
+										{
+											"id": 2738,
+											"name": "path",
+											"kind": 2097152,
+											"kindString": "Object literal",
+											"flags": {
+												"isExported": true
+											},
+											"children": [
+												{
+													"id": 2740,
+													"name": "color",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 79,
+															"character": 13
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "string"
+													},
+													"defaultValue": "\"blue\""
+												},
+												{
+													"id": 2741,
+													"name": "opacity",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 80,
+															"character": 15
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													},
+													"defaultValue": "1"
+												},
+												{
+													"id": 2742,
+													"name": "stroke",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 81,
+															"character": 14
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "false"
+													},
+													"defaultValue": "false"
+												},
+												{
+													"id": 2739,
+													"name": "type",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 78,
+															"character": 12
+														}
+													],
+													"type": {
+														"type": "stringLiteral",
+														"value": "path"
+													},
+													"defaultValue": "\"path\""
+												},
+												{
+													"id": 2743,
+													"name": "weight",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 82,
+															"character": 14
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													},
+													"defaultValue": "1"
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														2740,
+														2741,
+														2742,
+														2739,
+														2743
+													]
+												}
+											],
+											"sources": [
+												{
+													"fileName": "ngw-map/src/NgwMap.ts",
+													"line": 77,
+													"character": 10
+												}
+											],
+											"type": {
+												"type": "intrinsic",
+												"name": "object"
+											}
+										}
+									],
+									"groups": [
+										{
+											"title": "Variables",
+											"kind": 32,
+											"children": [
+												2744
+											]
+										},
+										{
+											"title": "Object literals",
+											"kind": 2097152,
+											"children": [
+												2732,
+												2738
+											]
+										}
+									],
+									"sources": [
+										{
+											"fileName": "ngw-map/src/NgwMap.ts",
+											"line": 69,
+											"character": 28
 										}
 									],
 									"type": {
@@ -45596,15 +45614,15 @@
 									"title": "Object literals",
 									"kind": 2097152,
 									"children": [
-										2731,
-										2725
+										2725,
+										2731
 									]
 								}
 							],
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 53,
+									"line": 56,
 									"character": 9
 								}
 							],
@@ -45639,7 +45657,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 49,
+											"line": 52,
 											"character": 33
 										}
 									],
@@ -45662,7 +45680,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 49,
+									"line": 52,
 									"character": 19
 								}
 							],
@@ -45697,7 +45715,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 48,
+											"line": 51,
 											"character": 28
 										}
 									],
@@ -45720,7 +45738,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 48,
+									"line": 51,
 									"character": 14
 								}
 							],
@@ -45780,7 +45798,7 @@
 					"sources": [
 						{
 							"fileName": "ngw-leaflet/src/index.ts",
-							"line": 25,
+							"line": 27,
 							"character": 23
 						}
 					],
@@ -45827,6 +45845,9 @@
 					"kindString": "Class",
 					"flags": {
 						"isExported": true
+					},
+					"comment": {
+						"shortText": "Base class containing the logic of interaction WebMap with NextGIS services."
 					},
 					"children": [
 						{
@@ -45880,7 +45901,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 94,
+									"line": 98,
 									"character": 9
 								}
 							]
@@ -45896,7 +45917,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 88,
+									"line": 92,
 									"character": 15
 								}
 							],
@@ -45939,7 +45960,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 88,
+											"line": 92,
 											"character": 16
 										}
 									]
@@ -45957,7 +45978,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 87,
+									"line": 90,
 									"character": 11
 								}
 							],
@@ -45978,7 +45999,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 86,
+									"line": 89,
 									"character": 9
 								}
 							],
@@ -45999,7 +46020,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 85,
+									"line": 88,
 									"character": 8
 								}
 							],
@@ -46021,7 +46042,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 50,
+									"line": 53,
 									"character": 16
 								}
 							],
@@ -46060,6 +46081,15 @@
 									"kind": 4096,
 									"kindString": "Call signature",
 									"flags": {},
+									"comment": {
+										"shortText": "Organized addition to the map design and controls elements",
+										"tags": [
+											{
+												"tag": "example",
+												"text": "\n```javascript\nngwMap.addControl(new CustomControl(), 'bottom-left');\nngwMap.addControl('ZOOM', {position: 'top-right'})\n```\n"
+											}
+										]
+									},
 									"typeParameter": [
 										{
 											"id": 2679,
@@ -46084,6 +46114,9 @@
 											"kind": 32768,
 											"kindString": "Parameter",
 											"flags": {},
+											"comment": {
+												"text": "object with onAdd and onRemove methods\n               or a string value indicating the name of the control installed in the map adapter"
+											},
 											"type": {
 												"type": "reference",
 												"name": "MapControl",
@@ -46096,6 +46129,9 @@
 											"kind": 32768,
 											"kindString": "Parameter",
 											"flags": {},
+											"comment": {
+												"text": "position relative to the map angles"
+											},
 											"type": {
 												"type": "reference",
 												"name": "ControlPositions",
@@ -46134,7 +46170,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 141,
+									"line": 158,
 									"character": 12
 								}
 							]
@@ -46374,7 +46410,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 193,
+									"line": 210,
 									"character": 17
 								}
 							]
@@ -46458,7 +46494,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 146,
+									"line": 163,
 									"character": 19
 								}
 							]
@@ -46490,7 +46526,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 122,
+									"line": 126,
 									"character": 5
 								}
 							]
@@ -46549,7 +46585,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 134,
+									"line": 138,
 									"character": 11
 								}
 							]
@@ -46620,7 +46656,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 209,
+									"line": 226,
 									"character": 13
 								}
 							]
@@ -46663,7 +46699,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 51,
+									"line": 54,
 									"character": 16
 								}
 							]
@@ -46688,7 +46724,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 55,
+											"line": 58,
 											"character": 11
 										}
 									],
@@ -46709,7 +46745,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 56,
+											"line": 59,
 											"character": 12
 										}
 									],
@@ -46733,7 +46769,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 54,
+											"line": 57,
 											"character": 10
 										}
 									],
@@ -46742,347 +46778,6 @@
 										"name": "string"
 									},
 									"defaultValue": "\"map\""
-								},
-								{
-									"id": 2647,
-									"name": "VectorLayersDefaultPaint",
-									"kind": 2097152,
-									"kindString": "Object literal",
-									"flags": {
-										"isExported": true
-									},
-									"children": [
-										{
-											"id": 2660,
-											"name": "icon",
-											"kind": 32,
-											"kindString": "Variable",
-											"flags": {
-												"isExported": true
-											},
-											"sources": [
-												{
-													"fileName": "ngw-map/src/NgwMap.ts",
-													"line": 81,
-													"character": 10
-												}
-											],
-											"type": {
-												"type": "reference",
-												"name": "IconOptions",
-												"id": 73
-											},
-											"defaultValue": " getIcon({ shape: 'circle' })"
-										},
-										{
-											"id": 2648,
-											"name": "circle",
-											"kind": 2097152,
-											"kindString": "Object literal",
-											"flags": {
-												"isExported": true
-											},
-											"children": [
-												{
-													"id": 2650,
-													"name": "color",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 69,
-															"character": 13
-														}
-													],
-													"type": {
-														"type": "intrinsic",
-														"name": "string"
-													},
-													"defaultValue": "\"blue\""
-												},
-												{
-													"id": 2651,
-													"name": "opacity",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 70,
-															"character": 15
-														}
-													],
-													"type": {
-														"type": "intrinsic",
-														"name": "number"
-													},
-													"defaultValue": "1"
-												},
-												{
-													"id": 2652,
-													"name": "radius",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 71,
-															"character": 14
-														}
-													],
-													"type": {
-														"type": "intrinsic",
-														"name": "number"
-													},
-													"defaultValue": "6"
-												},
-												{
-													"id": 2653,
-													"name": "stroke",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 72,
-															"character": 14
-														}
-													],
-													"type": {
-														"type": "intrinsic",
-														"name": "false"
-													},
-													"defaultValue": "false"
-												},
-												{
-													"id": 2649,
-													"name": "type",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 68,
-															"character": 12
-														}
-													],
-													"type": {
-														"type": "stringLiteral",
-														"value": "circle"
-													},
-													"defaultValue": "\"circle\""
-												}
-											],
-											"groups": [
-												{
-													"title": "Variables",
-													"kind": 32,
-													"children": [
-														2650,
-														2651,
-														2652,
-														2653,
-														2649
-													]
-												}
-											],
-											"sources": [
-												{
-													"fileName": "ngw-map/src/NgwMap.ts",
-													"line": 67,
-													"character": 12
-												}
-											],
-											"type": {
-												"type": "intrinsic",
-												"name": "object"
-											}
-										},
-										{
-											"id": 2654,
-											"name": "path",
-											"kind": 2097152,
-											"kindString": "Object literal",
-											"flags": {
-												"isExported": true
-											},
-											"children": [
-												{
-													"id": 2656,
-													"name": "color",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 76,
-															"character": 13
-														}
-													],
-													"type": {
-														"type": "intrinsic",
-														"name": "string"
-													},
-													"defaultValue": "\"blue\""
-												},
-												{
-													"id": 2657,
-													"name": "opacity",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 77,
-															"character": 15
-														}
-													],
-													"type": {
-														"type": "intrinsic",
-														"name": "number"
-													},
-													"defaultValue": "1"
-												},
-												{
-													"id": 2658,
-													"name": "stroke",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 78,
-															"character": 14
-														}
-													],
-													"type": {
-														"type": "intrinsic",
-														"name": "false"
-													},
-													"defaultValue": "false"
-												},
-												{
-													"id": 2655,
-													"name": "type",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 75,
-															"character": 12
-														}
-													],
-													"type": {
-														"type": "stringLiteral",
-														"value": "path"
-													},
-													"defaultValue": "\"path\""
-												},
-												{
-													"id": 2659,
-													"name": "weight",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 79,
-															"character": 14
-														}
-													],
-													"type": {
-														"type": "intrinsic",
-														"name": "number"
-													},
-													"defaultValue": "1"
-												}
-											],
-											"groups": [
-												{
-													"title": "Variables",
-													"kind": 32,
-													"children": [
-														2656,
-														2657,
-														2658,
-														2655,
-														2659
-													]
-												}
-											],
-											"sources": [
-												{
-													"fileName": "ngw-map/src/NgwMap.ts",
-													"line": 74,
-													"character": 10
-												}
-											],
-											"type": {
-												"type": "intrinsic",
-												"name": "object"
-											}
-										}
-									],
-									"groups": [
-										{
-											"title": "Variables",
-											"kind": 32,
-											"children": [
-												2660
-											]
-										},
-										{
-											"title": "Object literals",
-											"kind": 2097152,
-											"children": [
-												2648,
-												2654
-											]
-										}
-									],
-									"sources": [
-										{
-											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 66,
-											"character": 28
-										}
-									],
-									"type": {
-										"type": "intrinsic",
-										"name": "object"
-									}
 								},
 								{
 									"id": 2641,
@@ -47113,7 +46808,7 @@
 													"sources": [
 														{
 															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 61,
+															"line": 64,
 															"character": 25
 														}
 													],
@@ -47124,7 +46819,7 @@
 															"name": "string"
 														}
 													},
-													"defaultValue": " [\r\n          '<a href=\"http://nextgis.ru\" target=\"_blank\">©NextGIS</a>',\r\n        ]"
+													"defaultValue": " [\n          '<a href=\"http://nextgis.ru\" target=\"_blank\">©NextGIS</a>',\n        ]"
 												},
 												{
 													"id": 2645,
@@ -47137,7 +46832,7 @@
 													"sources": [
 														{
 															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 60,
+															"line": 63,
 															"character": 16
 														}
 													],
@@ -47161,7 +46856,7 @@
 											"sources": [
 												{
 													"fileName": "ngw-map/src/NgwMap.ts",
-													"line": 59,
+													"line": 62,
 													"character": 17
 												}
 											],
@@ -47190,7 +46885,7 @@
 													"sources": [
 														{
 															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 58,
+															"line": 61,
 															"character": 22
 														}
 													],
@@ -47213,7 +46908,7 @@
 											"sources": [
 												{
 													"fileName": "ngw-map/src/NgwMap.ts",
-													"line": 58,
+													"line": 61,
 													"character": 10
 												}
 											],
@@ -47236,8 +46931,349 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 57,
+											"line": 60,
 											"character": 19
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "object"
+									}
+								},
+								{
+									"id": 2647,
+									"name": "vectorLayersDefaultPaint",
+									"kind": 2097152,
+									"kindString": "Object literal",
+									"flags": {
+										"isExported": true
+									},
+									"children": [
+										{
+											"id": 2660,
+											"name": "icon",
+											"kind": 32,
+											"kindString": "Variable",
+											"flags": {
+												"isExported": true
+											},
+											"sources": [
+												{
+													"fileName": "ngw-map/src/NgwMap.ts",
+													"line": 84,
+													"character": 10
+												}
+											],
+											"type": {
+												"type": "reference",
+												"name": "IconOptions",
+												"id": 73
+											},
+											"defaultValue": " getIcon({ shape: 'circle' })"
+										},
+										{
+											"id": 2648,
+											"name": "circle",
+											"kind": 2097152,
+											"kindString": "Object literal",
+											"flags": {
+												"isExported": true
+											},
+											"children": [
+												{
+													"id": 2650,
+													"name": "color",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 72,
+															"character": 13
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "string"
+													},
+													"defaultValue": "\"blue\""
+												},
+												{
+													"id": 2651,
+													"name": "opacity",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 73,
+															"character": 15
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													},
+													"defaultValue": "1"
+												},
+												{
+													"id": 2652,
+													"name": "radius",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 74,
+															"character": 14
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													},
+													"defaultValue": "6"
+												},
+												{
+													"id": 2653,
+													"name": "stroke",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 75,
+															"character": 14
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "false"
+													},
+													"defaultValue": "false"
+												},
+												{
+													"id": 2649,
+													"name": "type",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 71,
+															"character": 12
+														}
+													],
+													"type": {
+														"type": "stringLiteral",
+														"value": "circle"
+													},
+													"defaultValue": "\"circle\""
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														2650,
+														2651,
+														2652,
+														2653,
+														2649
+													]
+												}
+											],
+											"sources": [
+												{
+													"fileName": "ngw-map/src/NgwMap.ts",
+													"line": 70,
+													"character": 12
+												}
+											],
+											"type": {
+												"type": "intrinsic",
+												"name": "object"
+											}
+										},
+										{
+											"id": 2654,
+											"name": "path",
+											"kind": 2097152,
+											"kindString": "Object literal",
+											"flags": {
+												"isExported": true
+											},
+											"children": [
+												{
+													"id": 2656,
+													"name": "color",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 79,
+															"character": 13
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "string"
+													},
+													"defaultValue": "\"blue\""
+												},
+												{
+													"id": 2657,
+													"name": "opacity",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 80,
+															"character": 15
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													},
+													"defaultValue": "1"
+												},
+												{
+													"id": 2658,
+													"name": "stroke",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 81,
+															"character": 14
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "false"
+													},
+													"defaultValue": "false"
+												},
+												{
+													"id": 2655,
+													"name": "type",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 78,
+															"character": 12
+														}
+													],
+													"type": {
+														"type": "stringLiteral",
+														"value": "path"
+													},
+													"defaultValue": "\"path\""
+												},
+												{
+													"id": 2659,
+													"name": "weight",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 82,
+															"character": 14
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													},
+													"defaultValue": "1"
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														2656,
+														2657,
+														2658,
+														2655,
+														2659
+													]
+												}
+											],
+											"sources": [
+												{
+													"fileName": "ngw-map/src/NgwMap.ts",
+													"line": 77,
+													"character": 10
+												}
+											],
+											"type": {
+												"type": "intrinsic",
+												"name": "object"
+											}
+										}
+									],
+									"groups": [
+										{
+											"title": "Variables",
+											"kind": 32,
+											"children": [
+												2660
+											]
+										},
+										{
+											"title": "Object literals",
+											"kind": 2097152,
+											"children": [
+												2648,
+												2654
+											]
+										}
+									],
+									"sources": [
+										{
+											"fileName": "ngw-map/src/NgwMap.ts",
+											"line": 69,
+											"character": 28
 										}
 									],
 									"type": {
@@ -47260,15 +47296,15 @@
 									"title": "Object literals",
 									"kind": 2097152,
 									"children": [
-										2647,
-										2641
+										2641,
+										2647
 									]
 								}
 							],
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 53,
+									"line": 56,
 									"character": 9
 								}
 							],
@@ -47298,7 +47334,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 49,
+											"line": 52,
 											"character": 33
 										}
 									],
@@ -47321,7 +47357,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 49,
+									"line": 52,
 									"character": 19
 								}
 							],
@@ -47351,7 +47387,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 48,
+											"line": 51,
 											"character": 28
 										}
 									],
@@ -47374,7 +47410,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 48,
+									"line": 51,
 									"character": 14
 								}
 							],
@@ -47429,7 +47465,7 @@
 					"sources": [
 						{
 							"fileName": "ngw-map/src/NgwMap.ts",
-							"line": 46,
+							"line": 49,
 							"character": 19
 						}
 					],
@@ -47510,115 +47546,6 @@
 					},
 					"children": [
 						{
-							"id": 2611,
-							"name": "VectorLayersDefaultPaint",
-							"kind": 1024,
-							"kindString": "Property",
-							"flags": {
-								"isExported": true,
-								"isOptional": true
-							},
-							"comment": {
-								"shortText": "Set default paint for vector layers geometry objects."
-							},
-							"sources": [
-								{
-									"fileName": "ngw-map/src/interfaces.ts",
-									"line": 55,
-									"character": 26
-								}
-							],
-							"type": {
-								"type": "union",
-								"types": [
-									{
-										"type": "intrinsic",
-										"name": "undefined"
-									},
-									{
-										"type": "reflection",
-										"declaration": {
-											"id": 2612,
-											"name": "__type",
-											"kind": 65536,
-											"kindString": "Type literal",
-											"flags": {},
-											"children": [
-												{
-													"id": 2613,
-													"name": "circle",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/interfaces.ts",
-															"line": 56,
-															"character": 10
-														}
-													],
-													"type": {
-														"type": "reference",
-														"name": "CirclePaint",
-														"id": 61
-													}
-												},
-												{
-													"id": 2615,
-													"name": "icon",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/interfaces.ts",
-															"line": 58,
-															"character": 8
-														}
-													],
-													"type": {
-														"type": "reference",
-														"name": "IconOptions",
-														"id": 73
-													}
-												},
-												{
-													"id": 2614,
-													"name": "path",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/interfaces.ts",
-															"line": 57,
-															"character": 8
-														}
-													],
-													"type": {
-														"type": "reference",
-														"name": "PathPaint",
-														"id": 67
-													}
-												}
-											],
-											"groups": [
-												{
-													"title": "Variables",
-													"kind": 32,
-													"children": [
-														2613,
-														2615,
-														2614
-													]
-												}
-											]
-										}
-									}
-								]
-							}
-						},
-						{
 							"id": 2608,
 							"name": "baseUrl",
 							"kind": 1024,
@@ -47652,7 +47579,7 @@
 							}
 						},
 						{
-							"id": 2625,
+							"id": 2626,
 							"name": "bounds",
 							"kind": 1024,
 							"kindString": "Property",
@@ -47661,12 +47588,12 @@
 								"isOptional": true
 							},
 							"comment": {
-								"shortText": "top, left, bottom, right"
+								"shortText": "Initial extent of the map, array of degrees in [_west_, _south_, _east_, _north_] order.\nOverrides the `center` and  `zoom` parameters.\n[LngLatBoundsArray](webmap-api#LngLatBoundsArray)"
 							},
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/WebMapApp.ts",
-									"line": 29,
+									"line": 41,
 									"character": 8
 								}
 							],
@@ -47678,11 +47605,11 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "MapOptions.bounds",
-								"id": 379
+								"id": 380
 							}
 						},
 						{
-							"id": 2624,
+							"id": 2625,
 							"name": "center",
 							"kind": 1024,
 							"kindString": "Property",
@@ -47691,24 +47618,24 @@
 								"isOptional": true
 							},
 							"comment": {
-								"shortText": "lat lng"
+								"shortText": "Initial position of the map, array of two degrees [longitude, latitude].\n[LngLatArray](webmap-api#LngLatArray)"
 							},
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/WebMapApp.ts",
-									"line": 27,
+									"line": 35,
 									"character": 8
 								}
 							],
 							"type": {
 								"type": "reference",
-								"name": "LatLngArray",
+								"name": "LngLatArray",
 								"id": 14
 							},
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "MapOptions.center",
-								"id": 378
+								"id": 379
 							}
 						},
 						{
@@ -47847,7 +47774,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/WebMapApp.ts",
-									"line": 25,
+									"line": 26,
 									"character": 9
 								}
 							],
@@ -47885,7 +47812,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/WebMapApp.ts",
-									"line": 21,
+									"line": 22,
 									"character": 9
 								}
 							],
@@ -47966,12 +47893,12 @@
 								"isOptional": true
 							},
 							"comment": {
-								"shortText": "The HTML element in which NgwMap will render the map,\nor the element's string  id. The specified element must have no children."
+								"shortText": "The HTML element in which NgwMap will render the map,\nor the element's string  id.\nThe specified element must have no children."
 							},
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/WebMapApp.ts",
-									"line": 15,
+									"line": 16,
 									"character": 8
 								}
 							],
@@ -47992,6 +47919,115 @@
 								"type": "reference",
 								"name": "MapOptions.target",
 								"id": 375
+							}
+						},
+						{
+							"id": 2611,
+							"name": "vectorLayersDefaultPaint",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true,
+								"isOptional": true
+							},
+							"comment": {
+								"shortText": "Set default paint for vector layers geometry objects."
+							},
+							"sources": [
+								{
+									"fileName": "ngw-map/src/interfaces.ts",
+									"line": 55,
+									"character": 26
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 2612,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"children": [
+												{
+													"id": 2613,
+													"name": "circle",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/interfaces.ts",
+															"line": 56,
+															"character": 10
+														}
+													],
+													"type": {
+														"type": "reference",
+														"name": "CirclePaint",
+														"id": 61
+													}
+												},
+												{
+													"id": 2615,
+													"name": "icon",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/interfaces.ts",
+															"line": 58,
+															"character": 8
+														}
+													],
+													"type": {
+														"type": "reference",
+														"name": "IconOptions",
+														"id": 73
+													}
+												},
+												{
+													"id": 2614,
+													"name": "path",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/interfaces.ts",
+															"line": 57,
+															"character": 8
+														}
+													],
+													"type": {
+														"type": "reference",
+														"name": "PathPaint",
+														"id": 67
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														2613,
+														2615,
+														2614
+													]
+												}
+											]
+										}
+									}
+								]
 							}
 						},
 						{
@@ -48043,13 +48079,16 @@
 							}
 						},
 						{
-							"id": 2626,
+							"id": 2624,
 							"name": "zoom",
 							"kind": 1024,
 							"kindString": "Property",
 							"flags": {
 								"isExported": true,
 								"isOptional": true
+							},
+							"comment": {
+								"shortText": "The initial zoom level of the map (0-24)."
 							},
 							"sources": [
 								{
@@ -48074,7 +48113,7 @@
 							"inheritedFrom": {
 								"type": "reference",
 								"name": "MapOptions.zoom",
-								"id": 380
+								"id": 378
 							}
 						}
 					],
@@ -48083,18 +48122,18 @@
 							"title": "Properties",
 							"kind": 1024,
 							"children": [
-								2611,
 								2608,
+								2626,
 								2625,
-								2624,
 								2616,
 								2617,
 								2623,
 								2622,
 								2610,
 								2621,
+								2611,
 								2609,
-								2626
+								2624
 							]
 						}
 					],
@@ -48431,7 +48470,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 88,
+									"line": 92,
 									"character": 15
 								}
 							],
@@ -48474,7 +48513,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 88,
+											"line": 92,
 											"character": 16
 										}
 									]
@@ -48497,7 +48536,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 87,
+									"line": 90,
 									"character": 11
 								}
 							],
@@ -48523,7 +48562,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 86,
+									"line": 89,
 									"character": 9
 								}
 							],
@@ -48549,7 +48588,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 85,
+									"line": 88,
 									"character": 8
 								}
 							],
@@ -48576,7 +48615,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 50,
+									"line": 53,
 									"character": 16
 								}
 							],
@@ -48620,6 +48659,15 @@
 									"kind": 4096,
 									"kindString": "Call signature",
 									"flags": {},
+									"comment": {
+										"shortText": "Organized addition to the map design and controls elements",
+										"tags": [
+											{
+												"tag": "example",
+												"text": "\n```javascript\nngwMap.addControl(new CustomControl(), 'bottom-left');\nngwMap.addControl('ZOOM', {position: 'top-right'})\n```\n"
+											}
+										]
+									},
 									"typeParameter": [
 										{
 											"id": 2836,
@@ -48644,6 +48692,9 @@
 											"kind": 32768,
 											"kindString": "Parameter",
 											"flags": {},
+											"comment": {
+												"text": "object with onAdd and onRemove methods\n               or a string value indicating the name of the control installed in the map adapter"
+											},
 											"type": {
 												"type": "reference",
 												"name": "MapControl",
@@ -48656,6 +48707,9 @@
 											"kind": 32768,
 											"kindString": "Parameter",
 											"flags": {},
+											"comment": {
+												"text": "position relative to the map angles"
+											},
 											"type": {
 												"type": "reference",
 												"name": "ControlPositions",
@@ -48699,7 +48753,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 141,
+									"line": 158,
 									"character": 12
 								}
 							],
@@ -48949,7 +49003,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 193,
+									"line": 210,
 									"character": 17
 								}
 							],
@@ -49193,7 +49247,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 122,
+									"line": 126,
 									"character": 5
 								}
 							],
@@ -49262,7 +49316,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 134,
+									"line": 138,
 									"character": 11
 								}
 							],
@@ -49343,7 +49397,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 209,
+									"line": 226,
 									"character": 13
 								}
 							],
@@ -49396,7 +49450,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 51,
+									"line": 54,
 									"character": 16
 								}
 							],
@@ -49426,7 +49480,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 55,
+											"line": 58,
 											"character": 11
 										}
 									],
@@ -49447,7 +49501,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 56,
+											"line": 59,
 											"character": 12
 										}
 									],
@@ -49471,7 +49525,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 54,
+											"line": 57,
 											"character": 10
 										}
 									],
@@ -49480,347 +49534,6 @@
 										"name": "string"
 									},
 									"defaultValue": "\"map\""
-								},
-								{
-									"id": 2808,
-									"name": "VectorLayersDefaultPaint",
-									"kind": 2097152,
-									"kindString": "Object literal",
-									"flags": {
-										"isExported": true
-									},
-									"children": [
-										{
-											"id": 2821,
-											"name": "icon",
-											"kind": 32,
-											"kindString": "Variable",
-											"flags": {
-												"isExported": true
-											},
-											"sources": [
-												{
-													"fileName": "ngw-map/src/NgwMap.ts",
-													"line": 81,
-													"character": 10
-												}
-											],
-											"type": {
-												"type": "reference",
-												"name": "IconOptions",
-												"id": 73
-											},
-											"defaultValue": " getIcon({ shape: 'circle' })"
-										},
-										{
-											"id": 2809,
-											"name": "circle",
-											"kind": 2097152,
-											"kindString": "Object literal",
-											"flags": {
-												"isExported": true
-											},
-											"children": [
-												{
-													"id": 2811,
-													"name": "color",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 69,
-															"character": 13
-														}
-													],
-													"type": {
-														"type": "intrinsic",
-														"name": "string"
-													},
-													"defaultValue": "\"blue\""
-												},
-												{
-													"id": 2812,
-													"name": "opacity",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 70,
-															"character": 15
-														}
-													],
-													"type": {
-														"type": "intrinsic",
-														"name": "number"
-													},
-													"defaultValue": "1"
-												},
-												{
-													"id": 2813,
-													"name": "radius",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 71,
-															"character": 14
-														}
-													],
-													"type": {
-														"type": "intrinsic",
-														"name": "number"
-													},
-													"defaultValue": "6"
-												},
-												{
-													"id": 2814,
-													"name": "stroke",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 72,
-															"character": 14
-														}
-													],
-													"type": {
-														"type": "intrinsic",
-														"name": "false"
-													},
-													"defaultValue": "false"
-												},
-												{
-													"id": 2810,
-													"name": "type",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 68,
-															"character": 12
-														}
-													],
-													"type": {
-														"type": "stringLiteral",
-														"value": "circle"
-													},
-													"defaultValue": "\"circle\""
-												}
-											],
-											"groups": [
-												{
-													"title": "Variables",
-													"kind": 32,
-													"children": [
-														2811,
-														2812,
-														2813,
-														2814,
-														2810
-													]
-												}
-											],
-											"sources": [
-												{
-													"fileName": "ngw-map/src/NgwMap.ts",
-													"line": 67,
-													"character": 12
-												}
-											],
-											"type": {
-												"type": "intrinsic",
-												"name": "object"
-											}
-										},
-										{
-											"id": 2815,
-											"name": "path",
-											"kind": 2097152,
-											"kindString": "Object literal",
-											"flags": {
-												"isExported": true
-											},
-											"children": [
-												{
-													"id": 2817,
-													"name": "color",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 76,
-															"character": 13
-														}
-													],
-													"type": {
-														"type": "intrinsic",
-														"name": "string"
-													},
-													"defaultValue": "\"blue\""
-												},
-												{
-													"id": 2818,
-													"name": "opacity",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 77,
-															"character": 15
-														}
-													],
-													"type": {
-														"type": "intrinsic",
-														"name": "number"
-													},
-													"defaultValue": "1"
-												},
-												{
-													"id": 2819,
-													"name": "stroke",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 78,
-															"character": 14
-														}
-													],
-													"type": {
-														"type": "intrinsic",
-														"name": "false"
-													},
-													"defaultValue": "false"
-												},
-												{
-													"id": 2816,
-													"name": "type",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 75,
-															"character": 12
-														}
-													],
-													"type": {
-														"type": "stringLiteral",
-														"value": "path"
-													},
-													"defaultValue": "\"path\""
-												},
-												{
-													"id": 2820,
-													"name": "weight",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 79,
-															"character": 14
-														}
-													],
-													"type": {
-														"type": "intrinsic",
-														"name": "number"
-													},
-													"defaultValue": "1"
-												}
-											],
-											"groups": [
-												{
-													"title": "Variables",
-													"kind": 32,
-													"children": [
-														2817,
-														2818,
-														2819,
-														2816,
-														2820
-													]
-												}
-											],
-											"sources": [
-												{
-													"fileName": "ngw-map/src/NgwMap.ts",
-													"line": 74,
-													"character": 10
-												}
-											],
-											"type": {
-												"type": "intrinsic",
-												"name": "object"
-											}
-										}
-									],
-									"groups": [
-										{
-											"title": "Variables",
-											"kind": 32,
-											"children": [
-												2821
-											]
-										},
-										{
-											"title": "Object literals",
-											"kind": 2097152,
-											"children": [
-												2809,
-												2815
-											]
-										}
-									],
-									"sources": [
-										{
-											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 66,
-											"character": 28
-										}
-									],
-									"type": {
-										"type": "intrinsic",
-										"name": "object"
-									}
 								},
 								{
 									"id": 2802,
@@ -49851,7 +49564,7 @@
 													"sources": [
 														{
 															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 61,
+															"line": 64,
 															"character": 25
 														}
 													],
@@ -49862,7 +49575,7 @@
 															"name": "string"
 														}
 													},
-													"defaultValue": " [\r\n          '<a href=\"http://nextgis.ru\" target=\"_blank\">©NextGIS</a>',\r\n        ]"
+													"defaultValue": " [\n          '<a href=\"http://nextgis.ru\" target=\"_blank\">©NextGIS</a>',\n        ]"
 												},
 												{
 													"id": 2806,
@@ -49875,7 +49588,7 @@
 													"sources": [
 														{
 															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 60,
+															"line": 63,
 															"character": 16
 														}
 													],
@@ -49899,7 +49612,7 @@
 											"sources": [
 												{
 													"fileName": "ngw-map/src/NgwMap.ts",
-													"line": 59,
+													"line": 62,
 													"character": 17
 												}
 											],
@@ -49928,7 +49641,7 @@
 													"sources": [
 														{
 															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 58,
+															"line": 61,
 															"character": 22
 														}
 													],
@@ -49951,7 +49664,7 @@
 											"sources": [
 												{
 													"fileName": "ngw-map/src/NgwMap.ts",
-													"line": 58,
+													"line": 61,
 													"character": 10
 												}
 											],
@@ -49974,8 +49687,349 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 57,
+											"line": 60,
 											"character": 19
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "object"
+									}
+								},
+								{
+									"id": 2808,
+									"name": "vectorLayersDefaultPaint",
+									"kind": 2097152,
+									"kindString": "Object literal",
+									"flags": {
+										"isExported": true
+									},
+									"children": [
+										{
+											"id": 2821,
+											"name": "icon",
+											"kind": 32,
+											"kindString": "Variable",
+											"flags": {
+												"isExported": true
+											},
+											"sources": [
+												{
+													"fileName": "ngw-map/src/NgwMap.ts",
+													"line": 84,
+													"character": 10
+												}
+											],
+											"type": {
+												"type": "reference",
+												"name": "IconOptions",
+												"id": 73
+											},
+											"defaultValue": " getIcon({ shape: 'circle' })"
+										},
+										{
+											"id": 2809,
+											"name": "circle",
+											"kind": 2097152,
+											"kindString": "Object literal",
+											"flags": {
+												"isExported": true
+											},
+											"children": [
+												{
+													"id": 2811,
+													"name": "color",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 72,
+															"character": 13
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "string"
+													},
+													"defaultValue": "\"blue\""
+												},
+												{
+													"id": 2812,
+													"name": "opacity",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 73,
+															"character": 15
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													},
+													"defaultValue": "1"
+												},
+												{
+													"id": 2813,
+													"name": "radius",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 74,
+															"character": 14
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													},
+													"defaultValue": "6"
+												},
+												{
+													"id": 2814,
+													"name": "stroke",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 75,
+															"character": 14
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "false"
+													},
+													"defaultValue": "false"
+												},
+												{
+													"id": 2810,
+													"name": "type",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 71,
+															"character": 12
+														}
+													],
+													"type": {
+														"type": "stringLiteral",
+														"value": "circle"
+													},
+													"defaultValue": "\"circle\""
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														2811,
+														2812,
+														2813,
+														2814,
+														2810
+													]
+												}
+											],
+											"sources": [
+												{
+													"fileName": "ngw-map/src/NgwMap.ts",
+													"line": 70,
+													"character": 12
+												}
+											],
+											"type": {
+												"type": "intrinsic",
+												"name": "object"
+											}
+										},
+										{
+											"id": 2815,
+											"name": "path",
+											"kind": 2097152,
+											"kindString": "Object literal",
+											"flags": {
+												"isExported": true
+											},
+											"children": [
+												{
+													"id": 2817,
+													"name": "color",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 79,
+															"character": 13
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "string"
+													},
+													"defaultValue": "\"blue\""
+												},
+												{
+													"id": 2818,
+													"name": "opacity",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 80,
+															"character": 15
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													},
+													"defaultValue": "1"
+												},
+												{
+													"id": 2819,
+													"name": "stroke",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 81,
+															"character": 14
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "false"
+													},
+													"defaultValue": "false"
+												},
+												{
+													"id": 2816,
+													"name": "type",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 78,
+															"character": 12
+														}
+													],
+													"type": {
+														"type": "stringLiteral",
+														"value": "path"
+													},
+													"defaultValue": "\"path\""
+												},
+												{
+													"id": 2820,
+													"name": "weight",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 82,
+															"character": 14
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													},
+													"defaultValue": "1"
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														2817,
+														2818,
+														2819,
+														2816,
+														2820
+													]
+												}
+											],
+											"sources": [
+												{
+													"fileName": "ngw-map/src/NgwMap.ts",
+													"line": 77,
+													"character": 10
+												}
+											],
+											"type": {
+												"type": "intrinsic",
+												"name": "object"
+											}
+										}
+									],
+									"groups": [
+										{
+											"title": "Variables",
+											"kind": 32,
+											"children": [
+												2821
+											]
+										},
+										{
+											"title": "Object literals",
+											"kind": 2097152,
+											"children": [
+												2809,
+												2815
+											]
+										}
+									],
+									"sources": [
+										{
+											"fileName": "ngw-map/src/NgwMap.ts",
+											"line": 69,
+											"character": 28
 										}
 									],
 									"type": {
@@ -49998,15 +50052,15 @@
 									"title": "Object literals",
 									"kind": 2097152,
 									"children": [
-										2808,
-										2802
+										2802,
+										2808
 									]
 								}
 							],
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 53,
+									"line": 56,
 									"character": 9
 								}
 							],
@@ -50041,7 +50095,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 49,
+											"line": 52,
 											"character": 33
 										}
 									],
@@ -50064,7 +50118,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 49,
+									"line": 52,
 									"character": 19
 								}
 							],
@@ -50099,7 +50153,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 48,
+											"line": 51,
 											"character": 28
 										}
 									],
@@ -50122,7 +50176,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 48,
+									"line": 51,
 									"character": 14
 								}
 							],
@@ -50296,7 +50350,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 88,
+									"line": 92,
 									"character": 15
 								}
 							],
@@ -50339,7 +50393,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 88,
+											"line": 92,
 											"character": 16
 										}
 									]
@@ -50362,7 +50416,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 87,
+									"line": 90,
 									"character": 11
 								}
 							],
@@ -50388,7 +50442,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 86,
+									"line": 89,
 									"character": 9
 								}
 							],
@@ -50414,7 +50468,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 85,
+									"line": 88,
 									"character": 8
 								}
 							],
@@ -50441,7 +50495,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 50,
+									"line": 53,
 									"character": 16
 								}
 							],
@@ -50485,6 +50539,15 @@
 									"kind": 4096,
 									"kindString": "Call signature",
 									"flags": {},
+									"comment": {
+										"shortText": "Organized addition to the map design and controls elements",
+										"tags": [
+											{
+												"tag": "example",
+												"text": "\n```javascript\nngwMap.addControl(new CustomControl(), 'bottom-left');\nngwMap.addControl('ZOOM', {position: 'top-right'})\n```\n"
+											}
+										]
+									},
 									"typeParameter": [
 										{
 											"id": 3303,
@@ -50509,6 +50572,9 @@
 											"kind": 32768,
 											"kindString": "Parameter",
 											"flags": {},
+											"comment": {
+												"text": "object with onAdd and onRemove methods\n               or a string value indicating the name of the control installed in the map adapter"
+											},
 											"type": {
 												"type": "reference",
 												"name": "MapControl",
@@ -50521,6 +50587,9 @@
 											"kind": 32768,
 											"kindString": "Parameter",
 											"flags": {},
+											"comment": {
+												"text": "position relative to the map angles"
+											},
 											"type": {
 												"type": "reference",
 												"name": "ControlPositions",
@@ -50564,7 +50633,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 141,
+									"line": 158,
 									"character": 12
 								}
 							],
@@ -50814,7 +50883,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 193,
+									"line": 210,
 									"character": 17
 								}
 							],
@@ -50908,7 +50977,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 146,
+									"line": 163,
 									"character": 19
 								}
 							],
@@ -50950,7 +51019,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 122,
+									"line": 126,
 									"character": 5
 								}
 							],
@@ -51019,7 +51088,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 134,
+									"line": 138,
 									"character": 11
 								}
 							],
@@ -51100,7 +51169,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 209,
+									"line": 226,
 									"character": 13
 								}
 							],
@@ -51153,7 +51222,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 51,
+									"line": 54,
 									"character": 16
 								}
 							],
@@ -51183,7 +51252,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 55,
+											"line": 58,
 											"character": 11
 										}
 									],
@@ -51204,7 +51273,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 56,
+											"line": 59,
 											"character": 12
 										}
 									],
@@ -51228,7 +51297,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 54,
+											"line": 57,
 											"character": 10
 										}
 									],
@@ -51237,347 +51306,6 @@
 										"name": "string"
 									},
 									"defaultValue": "\"map\""
-								},
-								{
-									"id": 3275,
-									"name": "VectorLayersDefaultPaint",
-									"kind": 2097152,
-									"kindString": "Object literal",
-									"flags": {
-										"isExported": true
-									},
-									"children": [
-										{
-											"id": 3288,
-											"name": "icon",
-											"kind": 32,
-											"kindString": "Variable",
-											"flags": {
-												"isExported": true
-											},
-											"sources": [
-												{
-													"fileName": "ngw-map/src/NgwMap.ts",
-													"line": 81,
-													"character": 10
-												}
-											],
-											"type": {
-												"type": "reference",
-												"name": "IconOptions",
-												"id": 73
-											},
-											"defaultValue": " getIcon({ shape: 'circle' })"
-										},
-										{
-											"id": 3276,
-											"name": "circle",
-											"kind": 2097152,
-											"kindString": "Object literal",
-											"flags": {
-												"isExported": true
-											},
-											"children": [
-												{
-													"id": 3278,
-													"name": "color",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 69,
-															"character": 13
-														}
-													],
-													"type": {
-														"type": "intrinsic",
-														"name": "string"
-													},
-													"defaultValue": "\"blue\""
-												},
-												{
-													"id": 3279,
-													"name": "opacity",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 70,
-															"character": 15
-														}
-													],
-													"type": {
-														"type": "intrinsic",
-														"name": "number"
-													},
-													"defaultValue": "1"
-												},
-												{
-													"id": 3280,
-													"name": "radius",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 71,
-															"character": 14
-														}
-													],
-													"type": {
-														"type": "intrinsic",
-														"name": "number"
-													},
-													"defaultValue": "6"
-												},
-												{
-													"id": 3281,
-													"name": "stroke",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 72,
-															"character": 14
-														}
-													],
-													"type": {
-														"type": "intrinsic",
-														"name": "false"
-													},
-													"defaultValue": "false"
-												},
-												{
-													"id": 3277,
-													"name": "type",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 68,
-															"character": 12
-														}
-													],
-													"type": {
-														"type": "stringLiteral",
-														"value": "circle"
-													},
-													"defaultValue": "\"circle\""
-												}
-											],
-											"groups": [
-												{
-													"title": "Variables",
-													"kind": 32,
-													"children": [
-														3278,
-														3279,
-														3280,
-														3281,
-														3277
-													]
-												}
-											],
-											"sources": [
-												{
-													"fileName": "ngw-map/src/NgwMap.ts",
-													"line": 67,
-													"character": 12
-												}
-											],
-											"type": {
-												"type": "intrinsic",
-												"name": "object"
-											}
-										},
-										{
-											"id": 3282,
-											"name": "path",
-											"kind": 2097152,
-											"kindString": "Object literal",
-											"flags": {
-												"isExported": true
-											},
-											"children": [
-												{
-													"id": 3284,
-													"name": "color",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 76,
-															"character": 13
-														}
-													],
-													"type": {
-														"type": "intrinsic",
-														"name": "string"
-													},
-													"defaultValue": "\"blue\""
-												},
-												{
-													"id": 3285,
-													"name": "opacity",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 77,
-															"character": 15
-														}
-													],
-													"type": {
-														"type": "intrinsic",
-														"name": "number"
-													},
-													"defaultValue": "1"
-												},
-												{
-													"id": 3286,
-													"name": "stroke",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 78,
-															"character": 14
-														}
-													],
-													"type": {
-														"type": "intrinsic",
-														"name": "false"
-													},
-													"defaultValue": "false"
-												},
-												{
-													"id": 3283,
-													"name": "type",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 75,
-															"character": 12
-														}
-													],
-													"type": {
-														"type": "stringLiteral",
-														"value": "path"
-													},
-													"defaultValue": "\"path\""
-												},
-												{
-													"id": 3287,
-													"name": "weight",
-													"kind": 32,
-													"kindString": "Variable",
-													"flags": {
-														"isExported": true
-													},
-													"sources": [
-														{
-															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 79,
-															"character": 14
-														}
-													],
-													"type": {
-														"type": "intrinsic",
-														"name": "number"
-													},
-													"defaultValue": "1"
-												}
-											],
-											"groups": [
-												{
-													"title": "Variables",
-													"kind": 32,
-													"children": [
-														3284,
-														3285,
-														3286,
-														3283,
-														3287
-													]
-												}
-											],
-											"sources": [
-												{
-													"fileName": "ngw-map/src/NgwMap.ts",
-													"line": 74,
-													"character": 10
-												}
-											],
-											"type": {
-												"type": "intrinsic",
-												"name": "object"
-											}
-										}
-									],
-									"groups": [
-										{
-											"title": "Variables",
-											"kind": 32,
-											"children": [
-												3288
-											]
-										},
-										{
-											"title": "Object literals",
-											"kind": 2097152,
-											"children": [
-												3276,
-												3282
-											]
-										}
-									],
-									"sources": [
-										{
-											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 66,
-											"character": 28
-										}
-									],
-									"type": {
-										"type": "intrinsic",
-										"name": "object"
-									}
 								},
 								{
 									"id": 3269,
@@ -51608,7 +51336,7 @@
 													"sources": [
 														{
 															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 61,
+															"line": 64,
 															"character": 25
 														}
 													],
@@ -51619,7 +51347,7 @@
 															"name": "string"
 														}
 													},
-													"defaultValue": " [\r\n          '<a href=\"http://nextgis.ru\" target=\"_blank\">©NextGIS</a>',\r\n        ]"
+													"defaultValue": " [\n          '<a href=\"http://nextgis.ru\" target=\"_blank\">©NextGIS</a>',\n        ]"
 												},
 												{
 													"id": 3273,
@@ -51632,7 +51360,7 @@
 													"sources": [
 														{
 															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 60,
+															"line": 63,
 															"character": 16
 														}
 													],
@@ -51656,7 +51384,7 @@
 											"sources": [
 												{
 													"fileName": "ngw-map/src/NgwMap.ts",
-													"line": 59,
+													"line": 62,
 													"character": 17
 												}
 											],
@@ -51685,7 +51413,7 @@
 													"sources": [
 														{
 															"fileName": "ngw-map/src/NgwMap.ts",
-															"line": 58,
+															"line": 61,
 															"character": 22
 														}
 													],
@@ -51708,7 +51436,7 @@
 											"sources": [
 												{
 													"fileName": "ngw-map/src/NgwMap.ts",
-													"line": 58,
+													"line": 61,
 													"character": 10
 												}
 											],
@@ -51731,8 +51459,349 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 57,
+											"line": 60,
 											"character": 19
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "object"
+									}
+								},
+								{
+									"id": 3275,
+									"name": "vectorLayersDefaultPaint",
+									"kind": 2097152,
+									"kindString": "Object literal",
+									"flags": {
+										"isExported": true
+									},
+									"children": [
+										{
+											"id": 3288,
+											"name": "icon",
+											"kind": 32,
+											"kindString": "Variable",
+											"flags": {
+												"isExported": true
+											},
+											"sources": [
+												{
+													"fileName": "ngw-map/src/NgwMap.ts",
+													"line": 84,
+													"character": 10
+												}
+											],
+											"type": {
+												"type": "reference",
+												"name": "IconOptions",
+												"id": 73
+											},
+											"defaultValue": " getIcon({ shape: 'circle' })"
+										},
+										{
+											"id": 3276,
+											"name": "circle",
+											"kind": 2097152,
+											"kindString": "Object literal",
+											"flags": {
+												"isExported": true
+											},
+											"children": [
+												{
+													"id": 3278,
+													"name": "color",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 72,
+															"character": 13
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "string"
+													},
+													"defaultValue": "\"blue\""
+												},
+												{
+													"id": 3279,
+													"name": "opacity",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 73,
+															"character": 15
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													},
+													"defaultValue": "1"
+												},
+												{
+													"id": 3280,
+													"name": "radius",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 74,
+															"character": 14
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													},
+													"defaultValue": "6"
+												},
+												{
+													"id": 3281,
+													"name": "stroke",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 75,
+															"character": 14
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "false"
+													},
+													"defaultValue": "false"
+												},
+												{
+													"id": 3277,
+													"name": "type",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 71,
+															"character": 12
+														}
+													],
+													"type": {
+														"type": "stringLiteral",
+														"value": "circle"
+													},
+													"defaultValue": "\"circle\""
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														3278,
+														3279,
+														3280,
+														3281,
+														3277
+													]
+												}
+											],
+											"sources": [
+												{
+													"fileName": "ngw-map/src/NgwMap.ts",
+													"line": 70,
+													"character": 12
+												}
+											],
+											"type": {
+												"type": "intrinsic",
+												"name": "object"
+											}
+										},
+										{
+											"id": 3282,
+											"name": "path",
+											"kind": 2097152,
+											"kindString": "Object literal",
+											"flags": {
+												"isExported": true
+											},
+											"children": [
+												{
+													"id": 3284,
+													"name": "color",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 79,
+															"character": 13
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "string"
+													},
+													"defaultValue": "\"blue\""
+												},
+												{
+													"id": 3285,
+													"name": "opacity",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 80,
+															"character": 15
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													},
+													"defaultValue": "1"
+												},
+												{
+													"id": 3286,
+													"name": "stroke",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 81,
+															"character": 14
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "false"
+													},
+													"defaultValue": "false"
+												},
+												{
+													"id": 3283,
+													"name": "type",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 78,
+															"character": 12
+														}
+													],
+													"type": {
+														"type": "stringLiteral",
+														"value": "path"
+													},
+													"defaultValue": "\"path\""
+												},
+												{
+													"id": 3287,
+													"name": "weight",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {
+														"isExported": true
+													},
+													"sources": [
+														{
+															"fileName": "ngw-map/src/NgwMap.ts",
+															"line": 82,
+															"character": 14
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													},
+													"defaultValue": "1"
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														3284,
+														3285,
+														3286,
+														3283,
+														3287
+													]
+												}
+											],
+											"sources": [
+												{
+													"fileName": "ngw-map/src/NgwMap.ts",
+													"line": 77,
+													"character": 10
+												}
+											],
+											"type": {
+												"type": "intrinsic",
+												"name": "object"
+											}
+										}
+									],
+									"groups": [
+										{
+											"title": "Variables",
+											"kind": 32,
+											"children": [
+												3288
+											]
+										},
+										{
+											"title": "Object literals",
+											"kind": 2097152,
+											"children": [
+												3276,
+												3282
+											]
+										}
+									],
+									"sources": [
+										{
+											"fileName": "ngw-map/src/NgwMap.ts",
+											"line": 69,
+											"character": 28
 										}
 									],
 									"type": {
@@ -51755,15 +51824,15 @@
 									"title": "Object literals",
 									"kind": 2097152,
 									"children": [
-										3275,
-										3269
+										3269,
+										3275
 									]
 								}
 							],
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 53,
+									"line": 56,
 									"character": 9
 								}
 							],
@@ -51798,7 +51867,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 49,
+											"line": 52,
 											"character": 33
 										}
 									],
@@ -51821,7 +51890,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 49,
+									"line": 52,
 									"character": 19
 								}
 							],
@@ -51856,7 +51925,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 48,
+											"line": 51,
 											"character": 28
 										}
 									],
@@ -51879,7 +51948,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 48,
+									"line": 51,
 									"character": 14
 								}
 							],
@@ -63889,7 +63958,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/WebMapApp.ts",
-									"line": 34,
+									"line": 46,
 									"character": 12
 								}
 							],
@@ -63911,7 +63980,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/WebMapApp.ts",
-									"line": 35,
+									"line": 47,
 									"character": 13
 								}
 							],
@@ -63938,7 +64007,7 @@
 					"sources": [
 						{
 							"fileName": "webmap/src/interfaces/WebMapApp.ts",
-							"line": 33,
+							"line": 45,
 							"character": 27
 						}
 					]
@@ -64831,7 +64900,7 @@
 											"flags": {},
 											"type": {
 												"type": "reference",
-												"name": "LatLngArray",
+												"name": "LngLatArray",
 												"id": 14
 											}
 										}
@@ -65079,7 +65148,7 @@
 											"flags": {},
 											"type": {
 												"type": "reference",
-												"name": "LatLngArray",
+												"name": "LngLatArray",
 												"id": 14
 											}
 										},
@@ -67611,7 +67680,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/WebMapApp.ts",
-									"line": 46,
+									"line": 58,
 									"character": 13
 								}
 							],
@@ -67645,7 +67714,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/WebMapApp.ts",
-									"line": 45,
+									"line": 57,
 									"character": 13
 								}
 							],
@@ -67681,7 +67750,7 @@
 					"sources": [
 						{
 							"fileName": "webmap/src/interfaces/WebMapApp.ts",
-							"line": 44,
+							"line": 56,
 							"character": 39
 						}
 					]
@@ -70614,7 +70683,7 @@
 											"flags": {},
 											"type": {
 												"type": "reference",
-												"name": "LatLngArray",
+												"name": "LngLatArray",
 												"id": 14
 											}
 										}
@@ -70945,7 +71014,7 @@
 											"flags": {},
 											"type": {
 												"type": "reference",
-												"name": "LatLngArray",
+												"name": "LngLatArray",
 												"id": 14
 											}
 										},
@@ -71511,7 +71580,7 @@
 					},
 					"children": [
 						{
-							"id": 379,
+							"id": 380,
 							"name": "bounds",
 							"kind": 1024,
 							"kindString": "Property",
@@ -71520,12 +71589,12 @@
 								"isOptional": true
 							},
 							"comment": {
-								"shortText": "top, left, bottom, right"
+								"shortText": "Initial extent of the map, array of degrees in [_west_, _south_, _east_, _north_] order.\nOverrides the `center` and  `zoom` parameters.\n[LngLatBoundsArray](webmap-api#LngLatBoundsArray)"
 							},
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/WebMapApp.ts",
-									"line": 29,
+									"line": 41,
 									"character": 8
 								}
 							],
@@ -71536,7 +71605,7 @@
 							}
 						},
 						{
-							"id": 378,
+							"id": 379,
 							"name": "center",
 							"kind": 1024,
 							"kindString": "Property",
@@ -71545,18 +71614,18 @@
 								"isOptional": true
 							},
 							"comment": {
-								"shortText": "lat lng"
+								"shortText": "Initial position of the map, array of two degrees [longitude, latitude].\n[LngLatArray](webmap-api#LngLatArray)"
 							},
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/WebMapApp.ts",
-									"line": 27,
+									"line": 35,
 									"character": 8
 								}
 							],
 							"type": {
 								"type": "reference",
-								"name": "LatLngArray",
+								"name": "LngLatArray",
 								"id": 14
 							}
 						},
@@ -71575,7 +71644,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/WebMapApp.ts",
-									"line": 25,
+									"line": 26,
 									"character": 9
 								}
 							],
@@ -71608,7 +71677,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/WebMapApp.ts",
-									"line": 21,
+									"line": 22,
 									"character": 9
 								}
 							],
@@ -71636,12 +71705,12 @@
 								"isOptional": true
 							},
 							"comment": {
-								"shortText": "The HTML element in which NgwMap will render the map,\nor the element's string  id. The specified element must have no children."
+								"shortText": "The HTML element in which NgwMap will render the map,\nor the element's string  id.\nThe specified element must have no children."
 							},
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/WebMapApp.ts",
-									"line": 15,
+									"line": 16,
 									"character": 8
 								}
 							],
@@ -71660,13 +71729,16 @@
 							}
 						},
 						{
-							"id": 380,
+							"id": 378,
 							"name": "zoom",
 							"kind": 1024,
 							"kindString": "Property",
 							"flags": {
 								"isExported": true,
 								"isOptional": true
+							},
+							"comment": {
+								"shortText": "The initial zoom level of the map (0-24)."
 							},
 							"sources": [
 								{
@@ -71695,12 +71767,12 @@
 							"title": "Properties",
 							"kind": 1024,
 							"children": [
+								380,
 								379,
-								378,
 								377,
 								376,
 								375,
-								380
+								378
 							]
 						}
 					],
@@ -75705,7 +75777,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/WebMapApp.ts",
-									"line": 41,
+									"line": 53,
 									"character": 13
 								}
 							],
@@ -75728,7 +75800,7 @@
 					"sources": [
 						{
 							"fileName": "webmap/src/interfaces/WebMapApp.ts",
-							"line": 40,
+							"line": 52,
 							"character": 32
 						}
 					]
@@ -76288,38 +76360,6 @@
 					}
 				},
 				{
-					"id": 14,
-					"name": "LatLngArray",
-					"kind": 4194304,
-					"kindString": "Type alias",
-					"flags": {
-						"isExported": true
-					},
-					"comment": {
-						"shortText": "Array of two numbers representing longitude and latitude."
-					},
-					"sources": [
-						{
-							"fileName": "webmap/src/interfaces/BaseTypes.ts",
-							"line": 32,
-							"character": 23
-						}
-					],
-					"type": {
-						"type": "tuple",
-						"elements": [
-							{
-								"type": "intrinsic",
-								"name": "number"
-							},
-							{
-								"type": "intrinsic",
-								"name": "number"
-							}
-						]
-					}
-				},
-				{
 					"id": 286,
 					"name": "LayerAdapter",
 					"kind": 4194304,
@@ -76445,6 +76485,38 @@
 					}
 				},
 				{
+					"id": 14,
+					"name": "LngLatArray",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "Array of two numbers representing longitude and latitude."
+					},
+					"sources": [
+						{
+							"fileName": "webmap/src/interfaces/BaseTypes.ts",
+							"line": 32,
+							"character": 23
+						}
+					],
+					"type": {
+						"type": "tuple",
+						"elements": [
+							{
+								"type": "intrinsic",
+								"name": "number"
+							},
+							{
+								"type": "intrinsic",
+								"name": "number"
+							}
+						]
+					}
+				},
+				{
 					"id": 13,
 					"name": "LngLatBoundsArray",
 					"kind": 4194304,
@@ -76554,9 +76626,9 @@
 						276,
 						271,
 						352,
-						14,
 						286,
 						844,
+						14,
 						13
 					]
 				}

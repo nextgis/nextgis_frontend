@@ -1,7 +1,7 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import ClassItem from '../ClassItem/ClassItem.vue';
 import Comment from '../Comment/Comment.vue';
-import { ApiItem, InterfaceItem, Parameter, Property } from '../ApiItem';
+import { ApiItem, InterfaceItem, Parameter, Property, MethodItem } from '../ApiItem';
 import * as utility from '../utility';
 
 @Component({
@@ -26,13 +26,16 @@ export class ApiOption extends Vue {
   get properties(): Parameter[] {
     const option = this.option;
     if (option) {
-      const children = option.children.filter((x) => !!x.type);
+      const children = option.children.filter((x) => {
+        return x.type ? true : x.kindString === 'Method';
+      });
       return children.sort((a, b) => {
         const x = a.flags.isOptional;
         const y = b.flags.isOptional;
         return (x === y) ? 0 : x ? 1 : -1;
       });
     }
+    return [];
   }
 
   mounted() {
@@ -45,8 +48,12 @@ export class ApiOption extends Vue {
   //   utility.updateLinks(this.$el);
   // }
 
-  getOptionType(option: Property): string {
-    return this.utility.getOptionType(option, this.indexes);
+  getOptionType(item: ApiItem): string {
+    if (item.type) {
+      return this.utility.getOptionType(item.type, this.indexes);
+    } else if (item.kindString === 'Method') {
+      return this.utility.createMethodTypeString(item as MethodItem, this.indexes);
+    }
   }
 
 }

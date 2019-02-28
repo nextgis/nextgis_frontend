@@ -233,6 +233,6 @@ bower_components
 dist
 lib
 docs
-#packages/demo/src/api.json
+packages/demo/src/api.json
 
 *.tgz
