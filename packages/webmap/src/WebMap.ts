@@ -6,7 +6,7 @@ import { AdapterOptions, DataLayerFilter, VectorLayerAdapter, LayerAdapters } fr
 import { LayerAdaptersOptions, LayerAdapter, OnLayerClickOptions } from './interfaces/LayerAdapter';
 import { MapAdapter, MapClickEvent, ControlPositions, FitOptions } from './interfaces/MapAdapter';
 import { MapOptions, AppOptions, GetAttributionsOptions } from './interfaces/WebMapApp';
-import { LngLatBoundsArray, Pixel, Type, Cursor } from './interfaces/BaseTypes';
+import { LngLatBoundsArray, Pixel, Type, Cursor, LngLatArray } from './interfaces/BaseTypes';
 import { RuntimeParams } from './interfaces/RuntimeParams';
 import { StarterKit } from './interfaces/StarterKit';
 import { Keys } from './components/keys/Keys';
@@ -116,9 +116,13 @@ export class WebMap<M = any, L = any, C = any> {
     return this._baseLayers.indexOf(layerName) !== -1;
   }
 
-  setCenter(lngLat: [number, number]): this {
+  setCenter(lngLat: LngLatArray): this {
     this.mapAdapter.setCenter(lngLat);
     return this;
+  }
+
+  getCenter(): LngLatArray | undefined {
+    return this.mapAdapter.getCenter();
   }
 
   setZoom(zoom: number): this {
@@ -130,7 +134,7 @@ export class WebMap<M = any, L = any, C = any> {
     return this.mapAdapter.getZoom();
   }
 
-  setView(lngLat?: [number, number], zoom?: number) {
+  setView(lngLat?: LngLatArray, zoom?: number) {
     if (this.mapAdapter.setView && lngLat && zoom) {
       this.mapAdapter.setView(lngLat, zoom);
     } else {
@@ -344,11 +348,11 @@ export class WebMap<M = any, L = any, C = any> {
     }
   }
 
-  getScaleForResolution(res: number, mpu: number): number {
+  getScaleForResolution(res: number, mpu: number = 1): number {
     return res * (mpu * this.IPM * this.DPI);
   }
 
-  getResolutionForScale(scale: number, mpu: number): number {
+  getResolutionForScale(scale: number, mpu: number = 1): number {
     return scale / (mpu * this.IPM * this.DPI);
   }
 
