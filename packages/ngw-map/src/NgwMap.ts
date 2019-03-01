@@ -147,7 +147,8 @@ export class NgwMap {
   }
 
   /**
-   * Organized addition to the map design and controls elements
+   * Organized addition to the map design and controls elements,
+   * calling `control.onAdd(this.webMap.mapAdapter)`
    * @param control - object with onAdd and onRemove methods
    *                or a string value indicating the name of the control installed in the map adapter
    * @param position - position relative to the map angles
@@ -164,6 +165,25 @@ export class NgwMap {
     this.webMap.addControl(control, position, options);
   }
 
+  /**
+   * Add raster layer by NGW style id or vector data layer by recource id.
+   * @param options - set layer identification parameters and render method.
+   * @param [adapterOptions] - parameters for the choised adapter
+   *
+   * @example
+   * ```javascript
+   * var ngwMap = new NgwMap({ baseUrl: 'https://demo.nextgis.com', target: 'map'});
+   * // add raster layer resourceId is the style of 4004 layer
+   * ngwMap.addNgwLayer({resourceId: 4005});
+   * // add vector data from layer GEOJSON source
+   * ngwMap.addNgwLayer({
+   *   resourceId: 4038,
+   *   adapter: 'GEOJSON'
+   * }, {
+   *   paint: { color: 'red' }
+   * });
+   * ```
+   */
   @onMapLoad()
   async addNgwLayer(
     options: NgwLayerOptions,
