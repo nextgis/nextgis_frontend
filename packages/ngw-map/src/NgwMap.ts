@@ -187,7 +187,7 @@ export class NgwMap {
   @onMapLoad()
   async addNgwLayer(
     options: NgwLayerOptions,
-    adapterOptions?: AdapterOptions): Promise<LayerAdapter | undefined> {
+    adapterOptions?: any): Promise<LayerAdapter | undefined> {
 
     if (!options.resourceId) {
       throw new Error('resourceId is required parameter to add NGW layer');
@@ -211,10 +211,13 @@ export class NgwMap {
         geojsonAdapterCb,
         this.webMap.mapAdapter
       );
-      return this.addGeoJsonLayer(
+      const layer = await this.addGeoJsonLayer(
         adapterOptions || {},
         adapter
       );
+      const id = layer && this.webMap.getLayerId(layer);
+      this._ngwLayers[id] = { layer, resourceId: options.resourceId };
+      return layer;
     } else if (this.options.baseUrl) {
 
       const adapter = NgwKit.addNgwLayer(options, this.webMap, this.options.baseUrl);
@@ -282,10 +285,10 @@ export class NgwMap {
         // define parameter if not specified
         p.type = p.type ? p.type :
           (geomType === 'fill' || geomType === 'line') ?
-          'path' :
-          ('html' in p || 'className' in p) ?
-            'icon' :
-            geomType;
+            'path' :
+            ('html' in p || 'className' in p) ?
+              'icon' :
+              geomType;
 
         if (this.options.vectorLayersDefaultPaint) {
           if (p.type === 'circle') {
