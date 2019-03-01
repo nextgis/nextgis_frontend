@@ -202,19 +202,27 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
       return 0;
     });
 
-    // normilize vector layer ordering
     baseLayers.forEach((x) => {
       layers[x].layer.bringToBack();
     });
-    for (let fry = 0; fry < orderedLayers.length; fry++) {
-      if (layers[orderedLayers[fry]].options.visibility) {
-        layers[orderedLayers[fry]].layer.bringToFront();
-      }
-    }
-    // set raser layer ordering
+
     if (layer.setZIndex) {
       layer.setZIndex(order);
+    } else {
+      for (let fry = 0; fry < orderedLayers.length; fry++) {
+        if (layers[orderedLayers[fry]].options.visibility) {
+          layers[orderedLayers[fry]].layer.bringToFront();
+        }
+      }
     }
+    // orderedLayers.forEach((x) => {
+    //   const l = layers[x];
+    //   const map = l.layer._map;
+    //   if (l.options.visibility && map) {
+    //     l.layer.remove();
+    //     l.layer.addTo(map);
+    //   }
+    // });
   }
 
   onMapClick(evt: LeafletMouseEvent) {
