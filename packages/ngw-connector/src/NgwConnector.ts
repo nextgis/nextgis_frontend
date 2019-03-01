@@ -85,8 +85,9 @@ export class NgwConnector {
     options?: RequestOptions): Promise<RequestItemsResponseMap[K]> {
 
     const apiItems = await this.connect();
-    if (apiItems && apiItems[name]) {
-      const apiItem = apiItems[name];
+    let apiItem = apiItems && apiItems[name];
+    if (apiItem) {
+      apiItem = [...apiItem];
       let url = apiItem.shift();
       if (apiItem.length) {
         const replaceParams: {
