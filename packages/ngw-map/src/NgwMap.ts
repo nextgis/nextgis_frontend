@@ -216,8 +216,10 @@ export class NgwMap {
         adapter
       );
       const id = layer && this.webMap.getLayerId(layer);
-      this._ngwLayers[id] = { layer, resourceId: options.resourceId };
-      return layer;
+      if (id) {
+        this._ngwLayers[id] = { layer, resourceId: options.resourceId };
+        return layer;
+      }
     } else if (this.options.baseUrl) {
 
       const adapter = NgwKit.addNgwLayer(options, this.webMap, this.options.baseUrl);
@@ -234,6 +236,9 @@ export class NgwMap {
     }
   }
 
+ /**
+  * Create layer from data. Set style and behavior for selection.
+  */
   @onMapLoad()
   addGeoJsonLayer<K extends keyof LayerAdaptersOptions>(
     opt: GeoJsonAdapterOptions,
@@ -251,6 +256,10 @@ export class NgwMap {
     });
   }
 
+  /**
+   * Move map to layer. If the layer is NGW resource, extent will be received from the server
+   * @param layerDef
+   */
   zoomToLayer(layerDef: string | number | LayerAdapter) {
     let id: string | undefined;
     if (typeof layerDef === 'string' || typeof layerDef === 'number') {
