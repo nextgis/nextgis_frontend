@@ -15,7 +15,7 @@ export class ImageAdapter extends BaseAdapter<ImageAdapterOptions> implements Ba
     if (url) {
       options = { transparent: true, ...options };
       const updateWmsParamsFromOpt = options.updateWmsParams;
-      this.layer = new ImageLayer(url, options);
+      this.layer = new ImageLayer(url, { pane: this.pane, ...options });
       if (updateWmsParamsFromOpt) {
         const updateWmsParams = this.layer.updateWmsParams;
         this.layer.updateWmsParams = function (map: Map) {

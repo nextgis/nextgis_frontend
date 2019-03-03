@@ -8,7 +8,7 @@ export class TileAdapter extends BaseAdapter<TileAdapterOptions, TileLayer> impl
     if (options) {
       const { url, ...opt } = options;
       if (url) {
-        const layer = new TileLayer(url);
+        const layer = new TileLayer(url, { pane: this.pane });
         return layer;
       }
     }
