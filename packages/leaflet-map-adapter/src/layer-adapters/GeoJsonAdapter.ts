@@ -58,7 +58,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
 
   static getPaintFunctions?: { [name: string]: GetPaintFunction };
 
-  layer = new FeatureGroup();
+  layer: FeatureGroup;
   selected = false;
 
   getPaintFunctions = GeoJsonAdapter.getPaintFunctions;
@@ -69,6 +69,11 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
 
   private _layers: LayerMem[] = [];
   private _selectedLayers: LayerMem[] = [];
+
+  constructor(map: L.Map, options: GeoJsonAdapterOptions) {
+    super(map, options);
+    this.layer = new FeatureGroup([], { pane: this.pane });
+  }
 
   addLayer(options: GeoJsonAdapterOptions) {
     if (options) {
