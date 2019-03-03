@@ -8,8 +8,6 @@ import WebMap, { LayerAdaptersOptions, LayerAdapter } from '@nextgis/webmap';
 import { TreeGroup, TreeLayer } from './interfaces';
 import { pixelsInMeterWidth } from './utils';
 
-const pixelsInMeter = pixelsInMeterWidth();
-
 export class WebMapLayerItem extends Item<ItemOptions> {
   static options: ItemOptions = {
     properties: [
@@ -44,6 +42,7 @@ export class WebMapLayerItem extends Item<ItemOptions> {
 
   item: TreeGroup | TreeLayer;
   layer?: LayerAdapter;
+  private _pixelsInMeter: number = pixelsInMeterWidth();
 
   constructor(public webMap: WebMap, item: TreeGroup | TreeLayer, options?: ItemOptions, parent?: WebMapLayerItem) {
 
@@ -128,7 +127,7 @@ export class WebMapLayerItem extends Item<ItemOptions> {
     const center = [104, 45]; // this.webMap.getCenter();
     if (center) {
       const centerLat = center[1];
-      const crsScale = pixelsInMeter * this._getMapWidthForLanInMeters(centerLat) / scale;
+      const crsScale = this._pixelsInMeter * this._getMapWidthForLanInMeters(centerLat) / scale;
       const zoom = this.zoom(crsScale);
       return zoom;
     }

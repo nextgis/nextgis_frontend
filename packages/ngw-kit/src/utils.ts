@@ -73,18 +73,23 @@ interface ExtendWebMapLayerAdapterOptions {
 export function extendWebMapLayerAdapter(opt: ExtendWebMapLayerAdapterOptions): Type<WebMapLayerAdapter> {
   class A extends WebMapLayerAdapter {
     constructor(map: any, options: WebMapAdapterOptions) {
-      options = {...opt, ...options};
+      options = { ...opt, ...options };
       super(map, options);
     }
   }
   return A;
 }
 
+let _pixelsInMeter: number;
+
 export function pixelsInMeterWidth() {
-  const div = document.createElement('div');
-  div.style.cssText = 'position: absolute;  left: -100%;  top: -100%;  width: 100cm;';
-  document.body.appendChild(div);
-  const px = div.offsetWidth;
-  document.body.removeChild(div);
-  return px;
+  if (_pixelsInMeter === undefined) {
+    const div = document.createElement('div');
+    div.style.cssText = 'position: absolute;  left: -100%;  top: -100%;  width: 100cm;';
+    document.body.appendChild(div);
+    const px = div.offsetWidth;
+    document.body.removeChild(div);
+    _pixelsInMeter = px;
+  }
+  return _pixelsInMeter;
 }
