@@ -10,7 +10,8 @@ import {
   CreateButtonControlOptions,
   LngLatArray,
   MapOptions,
-  LayerAdapter
+  LayerAdapter,
+  LngLatBoundsArray
 } from '@nextgis/webmap';
 import { MvtAdapter } from './layer-adapters/MvtAdapter';
 import { Map, IControl, MapEventType, EventData } from 'mapbox-gl';
@@ -88,9 +89,16 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     }
   }
 
-  setCenter(latLng: [number, number]): void {
+  setCenter(latLng: LngLatArray): void {
     if (this.map) {
       this.map.setCenter(latLng);
+    }
+  }
+
+  getCenter(): LngLatArray | undefined {
+    if (this.map) {
+      const center = this.map.getCenter();
+      return [center.lng, center.lat];
     }
   }
 
@@ -107,7 +115,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   }
 
   // [extent_left, extent_bottom, extent_right, extent_top];
-  fit(e: [number, number, number, number], options: FitOptions = {}): void {
+  fit(e: LngLatBoundsArray, options: FitOptions = {}): void {
     if (this.map) {
       // top, left, bottom, right
       this.map.fitBounds([[e[0], e[1]], [e[2], e[3]]], { linear: true, ...options });

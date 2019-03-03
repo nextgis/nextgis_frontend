@@ -9,7 +9,9 @@ import {
   MapControl,
   CreateControlOptions,
   CreateButtonControlOptions,
-  LayerAdapter
+  LayerAdapter,
+  LngLatArray,
+  LngLatBoundsArray
 } from '@nextgis/webmap';
 import Map from 'ol/Map';
 import View from 'ol/View';
@@ -127,9 +129,15 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     });
   }
 
-  setCenter(lonLat: [number, number]) {
+  setCenter(lonLat: LngLatArray) {
     if (this._olView) {
       this._olView.setCenter(fromLonLat(lonLat));
+    }
+  }
+
+  getCenter(): LngLatArray | undefined {
+    if (this._olView) {
+      return this._olView.getCenter();
     }
   }
 
@@ -145,7 +153,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     }
   }
 
-  fit(e: [number, number, number, number]) {
+  fit(e: LngLatBoundsArray) {
     if (this._olView) {
       const toExtent = transformExtent(
         e,
