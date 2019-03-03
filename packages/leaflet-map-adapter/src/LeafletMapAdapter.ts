@@ -68,7 +68,8 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
         minZoom
       });
       this.emitter.emit('create', { map: this.map });
-
+      // create default pane
+      this.map.createPane('order-0');
       this._addMapListeners();
     }
   }
@@ -185,36 +186,36 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   }
 
   setLayerOrder(layer: any, order: number, layers: { [x: string]: LayerAdapter }) {
-    const baseLayers: string[] = [];
+    // const baseLayers: string[] = [];
 
-    const orderedLayers = Object.keys(layers).filter((x) => {
-      if (layers[x].options.baseLayer) {
-        baseLayers.push(x);
-        return false;
-      }
-      return true;
-    }).sort((a, b) => {
-      const layerAOrder = layers[a] && layers[a].options.order;
-      const layerBOrder = layers[b] && layers[b].options.order;
-      if (layerAOrder !== undefined && layerBOrder !== undefined) {
-        return layerAOrder - layerBOrder;
-      }
-      return 0;
-    });
+    // const orderedLayers = Object.keys(layers).filter((x) => {
+    //   if (layers[x].options.baseLayer) {
+    //     baseLayers.push(x);
+    //     return false;
+    //   }
+    //   return true;
+    // }).sort((a, b) => {
+    //   const layerAOrder = layers[a] && layers[a].options.order;
+    //   const layerBOrder = layers[b] && layers[b].options.order;
+    //   if (layerAOrder !== undefined && layerBOrder !== undefined) {
+    //     return layerAOrder - layerBOrder;
+    //   }
+    //   return 0;
+    // });
 
-    baseLayers.forEach((x) => {
-      layers[x].layer.bringToBack();
-    });
+    // baseLayers.forEach((x) => {
+    //   layers[x].layer.bringToBack();
+    // });
 
-    if (layer.setZIndex) {
-      layer.setZIndex(order);
-    } else {
-      for (let fry = 0; fry < orderedLayers.length; fry++) {
-        if (layers[orderedLayers[fry]].options.visibility) {
-          layers[orderedLayers[fry]].layer.bringToFront();
-        }
-      }
-    }
+    // if (layer.setZIndex) {
+    //   layer.setZIndex(order);
+    // } else {
+    //   for (let fry = 0; fry < orderedLayers.length; fry++) {
+    //     if (layers[orderedLayers[fry]].options.visibility) {
+    //       layers[orderedLayers[fry]].layer.bringToFront();
+    //     }
+    //   }
+    // }
     // orderedLayers.forEach((x) => {
     //   const l = layers[x];
     //   const map = l.layer._map;
