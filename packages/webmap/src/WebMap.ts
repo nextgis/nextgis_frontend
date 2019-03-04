@@ -280,10 +280,13 @@ export class WebMap<M = any, L = any, C = any> {
 
       options = {
         id: String(order),
-        visibility: false,
         order,
         ...options
       };
+      // options.visibility is a layer global state, but each layer on init is not visible
+      const visibility = options.visibility;
+      options.visibility = false;
+
       if (options.baseLayer) {
         options.order = 0;
       }
@@ -305,7 +308,7 @@ export class WebMap<M = any, L = any, C = any> {
         }
         this._layers[layerId] = _adapter;
 
-        if (options.visibility) {
+        if (visibility) {
           this.showLayer(layerId);
         }
       }
