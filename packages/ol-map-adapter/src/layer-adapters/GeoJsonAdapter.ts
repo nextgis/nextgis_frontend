@@ -75,7 +75,7 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
         }
       }
     } else {
-      this.vectorSource.clearLayers();
+      this.vectorSource.clear();
     }
   }
 
@@ -84,7 +84,7 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
     this.addData(data);
   }
 
-  addData(data: GeoJsonObject | false) {
+  addData(data: GeoJsonObject) {
     const features = (new GeoJSON()).readFeatures(data, {
       dataProjection: 'EPSG:4326',
       featureProjection: 'EPSG:3857'
