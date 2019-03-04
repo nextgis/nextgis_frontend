@@ -3894,7 +3894,7 @@
 									"flags": {},
 									"type": {
 										"type": "reference",
-										"name": "CreateButtonControlOptions",
+										"name": "ButtonControlOptions",
 										"id": 351
 									}
 								}
@@ -8577,7 +8577,7 @@
 									"flags": {},
 									"type": {
 										"type": "reference",
-										"name": "CreateButtonControlOptions",
+										"name": "ButtonControlOptions",
 										"id": 351
 									}
 								}
@@ -19018,7 +19018,7 @@
 									"flags": {},
 									"type": {
 										"type": "reference",
-										"name": "CreateButtonControlOptions",
+										"name": "ButtonControlOptions",
 										"id": 351
 									}
 								}
@@ -29203,7 +29203,7 @@
 											"flags": {},
 											"type": {
 												"type": "reference",
-												"name": "CreateButtonControlOptions",
+												"name": "ButtonControlOptions",
 												"id": 351
 											}
 										}
@@ -31333,7 +31333,7 @@
 											"flags": {},
 											"type": {
 												"type": "reference",
-												"name": "CreateButtonControlOptions",
+												"name": "ButtonControlOptions",
 												"id": 351
 											}
 										}
@@ -56877,7 +56877,7 @@
 											"flags": {},
 											"type": {
 												"type": "reference",
-												"name": "CreateButtonControlOptions",
+												"name": "ButtonControlOptions",
 												"id": 351
 											}
 										}
@@ -61529,7 +61529,7 @@
 											"flags": {},
 											"type": {
 												"type": "reference",
-												"name": "CreateButtonControlOptions",
+												"name": "ButtonControlOptions",
 												"id": 351
 											}
 										}
@@ -69991,7 +69991,7 @@
 											"flags": {},
 											"type": {
 												"type": "reference",
-												"name": "CreateButtonControlOptions",
+												"name": "ButtonControlOptions",
 												"id": 351
 											}
 										}
@@ -76007,7 +76007,7 @@
 				},
 				{
 					"id": 351,
-					"name": "CreateButtonControlOptions",
+					"name": "ButtonControlOptions",
 					"kind": 4194304,
 					"kindString": "Type alias",
 					"flags": {

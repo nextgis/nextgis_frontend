@@ -7,7 +7,7 @@ import {
   FitOptions,
   MapControl,
   ControlPositions,
-  CreateButtonControlOptions,
+  ButtonControlOptions,
   LngLatArray,
   MapOptions,
   LayerAdapter,
@@ -231,7 +231,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     return createControl(control);
   }
 
-  createButtonControl(options: CreateButtonControlOptions): IControl {
+  createButtonControl(options: ButtonControlOptions): IControl {
     return createButtonControl(options);
   }
 
