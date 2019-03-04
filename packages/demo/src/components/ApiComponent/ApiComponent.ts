@@ -22,6 +22,7 @@ export class ApiComponent extends Vue {
   onPathChange() {
     // @ts-ignore
     this.$vuetify.goTo(0, { duration: 0 });
+    this._refresh();
   }
 
   mounted() {
@@ -33,13 +34,13 @@ export class ApiComponent extends Vue {
     const exist = this.showedMembers.indexOf(itemName) !== -1;
     if (!exist) {
       // clean url hash to disable goTo on update
-      history.pushState('', document.title, window.location.pathname);
+      // history.pushState('', document.title, window.location.pathname);
       this.showedMembers.push(itemName);
     }
   }
 
   updated() {
-    this._refresh();
+    // this._refresh();
   }
 
   getAllowedItem(item: ApiItem) {
