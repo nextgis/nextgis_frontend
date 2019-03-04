@@ -7,13 +7,13 @@ import {
   MapOptions,
   MapControl,
   CreateControlOptions,
-  CreateButtonControlOptions,
+  ButtonControlOptions,
   LayerAdapter,
-  CreateToggleControlOptions,
+  ToggleControlOptions,
   LngLatArray,
   LngLatBoundsArray
 } from '@nextgis/webmap';
-import { Map, Control, Layer, GridLayer, ControlPosition, LeafletEvent, LeafletMouseEvent } from 'leaflet';
+import { Map, Control, Layer, ControlPosition, LeafletMouseEvent } from 'leaflet';
 import { EventEmitter } from 'events';
 import { TileAdapter } from './layer-adapters/TileAdapter';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
@@ -21,7 +21,6 @@ import { AttributionControl } from './controls/Attribution';
 import { ImageAdapter } from './layer-adapters/ImageAdapter';
 import { createControl } from './controls/createControl';
 import { createButtonControl } from './controls/createButtonControl';
-import { createToggleControl } from './controls/createToggleControl';
 
 export interface LeafletMapAdapterOptions extends MapOptions {
   id?: string;
@@ -146,12 +145,8 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     return createControl(control, options);
   }
 
-  createButtonControl(options: CreateButtonControlOptions) {
+  createButtonControl(options: ButtonControlOptions) {
     return createButtonControl(options);
-  }
-
-  createToggleControl(options: CreateToggleControlOptions) {
-    return createToggleControl(options);
   }
 
   addControl(control: Control, position: string): Control | undefined {

@@ -1,13 +1,16 @@
-import { CreateButtonControlOptions } from '@nextgis/webmap';
+import './createButtonControl.css';
+
+import { ButtonControlOptions } from '@nextgis/webmap';
 import Control from 'ol/control/Control';
 
-export function createButtonControl(options: CreateButtonControlOptions): Control {
+export function createButtonControl(options: ButtonControlOptions): Control {
 
   const newControl = (function (C) {
 
     function NewControl(this: Control) {
 
       const button = document.createElement('button');
+      button.className = 'custom-button-control';
       if (typeof options.html === 'string') {
         button.innerHTML = options.html;
       } else if (options.html) {

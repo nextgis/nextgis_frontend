@@ -1,7 +1,7 @@
-import { CreateButtonControlOptions } from '@nextgis/webmap';
+import { ButtonControlOptions } from '@nextgis/webmap';
 import { createControl } from './createControl';
 
-export function createButtonControl(options: CreateButtonControlOptions) {
+export function createButtonControl(options: ButtonControlOptions) {
   const link = document.createElement('button');
   link.className = 'mapboxgl-ctrl-icon';
 

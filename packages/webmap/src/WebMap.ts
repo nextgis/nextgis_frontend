@@ -14,8 +14,8 @@ import {
   MapControl,
   MapControls,
   CreateControlOptions,
-  CreateButtonControlOptions,
-  CreateToggleControlOptions
+  ButtonControlOptions,
+  ToggleControlOptions
 } from './interfaces/MapControl';
 
 import { Feature, GeoJsonObject } from 'geojson';
@@ -23,6 +23,8 @@ import { EventEmitter } from 'events';
 
 import { onLoad } from './utils/decorators';
 import { deepmerge } from './utils/lang';
+import { createButtonControl } from './components/controls/ButtonControl';
+import { createToggleControl } from './components/controls/ToggleControl';
 
 type LayerDef = string | LayerAdapter;
 
@@ -211,16 +213,16 @@ export class WebMap<M = any, L = any, C = any> {
   }
 
   @onLoad('build-map')
-  createButtonControl(options: CreateButtonControlOptions) {
-    if (this.mapAdapter.createButtonControl) {
-      return this.mapAdapter.createButtonControl(options);
-    }
+  createButtonControl(options: ButtonControlOptions): C | undefined {
+    return createButtonControl(this, options);
   }
 
   @onLoad('build-map')
-  createToggleControl(options: CreateToggleControlOptions) {
+  createToggleControl(options: ToggleControlOptions) {
     if (this.mapAdapter.createToggleControl) {
       return this.mapAdapter.createToggleControl(options);
+    } else {
+      return createToggleControl(this, options);
     }
   }
 
