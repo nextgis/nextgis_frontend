@@ -193,11 +193,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
         this.type = type;
 
         data = filterGeometries(data, type);
-        if (data && options.paint) {
-          options.paint = this._updatePaintOptionFromCallback(options.paint);
-          if (options.selectedPaint) {
-            options.selectedPaint = this._updatePaintOptionFromCallback(options.selectedPaint);
-          }
+        if (data) {
           geoJsonOptions = this.getGeoJsonOptions(options, type);
         }
       }
