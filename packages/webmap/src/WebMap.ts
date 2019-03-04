@@ -2,7 +2,16 @@
  * @module webmap
  */
 
-import { AdapterOptions, DataLayerFilter, VectorLayerAdapter, LayerAdapters } from './interfaces/LayerAdapter';
+import {
+  AdapterOptions,
+  DataLayerFilter,
+  VectorLayerAdapter,
+  LayerAdapters,
+  GetPaintFunction,
+  GeoJsonAdapterLayerPaint,
+  GetPaintCallback,
+  GeoJsonAdapterOptions
+} from './interfaces/LayerAdapter';
 import { LayerAdaptersOptions, LayerAdapter, OnLayerClickOptions } from './interfaces/LayerAdapter';
 import { MapAdapter, MapClickEvent, ControlPositions, FitOptions } from './interfaces/MapAdapter';
 import { MapOptions, AppOptions, GetAttributionsOptions } from './interfaces/WebMapApp';
@@ -33,6 +42,8 @@ type LayerDef = string | LayerAdapter;
  */
 export class WebMap<M = any, L = any, C = any> {
 
+  static getPaintFunctions?: { [name: string]: GetPaintFunction };
+
   options: MapOptions = {};
 
   displayProjection = 'EPSG:3857';
@@ -42,6 +53,8 @@ export class WebMap<M = any, L = any, C = any> {
   keys: Keys = new Keys(); // TODO: make injectable cached
   mapAdapter: MapAdapter<M>;
   runtimeParams: RuntimeParams[] = [];
+
+  getPaintFunctions = WebMap.getPaintFunctions;
 
   _eventsStatus: { [eventName: string]: boolean } = {};
 
@@ -277,6 +290,8 @@ export class WebMap<M = any, L = any, C = any> {
         return this._onLayerClick(e);
       };
       const order = this._layersIds++;
+
+      this._updateGeoJsonOptions(options as GeoJsonAdapterOptions);
 
       options = {
         id: String(order),
@@ -551,6 +566,29 @@ export class WebMap<M = any, L = any, C = any> {
     } catch (er) {
       console.error(er);
     }
+  }
+
+  private _updateGeoJsonOptions(options: GeoJsonAdapterOptions) {
+    if (options.paint) {
+      options.paint = this._updatePaintOptionFromCallback(options.paint);
+    }
+    if (options.selectedPaint) {
+      options.selectedPaint = this._updatePaintOptionFromCallback(options.selectedPaint);
+    }
+  }
+
+  private _updatePaintOptionFromCallback(paint: GeoJsonAdapterLayerPaint | GetPaintCallback) {
+    if (typeof paint !== 'function' && paint.type === 'get-paint') {
+      if (typeof paint.from === 'function') {
+        paint = paint.from(paint.options);
+      } else if (typeof paint.from === 'string' && this.getPaintFunctions) {
+        const from = this.getPaintFunctions[paint.from];
+        if (from) {
+          paint = from(paint.options);
+        }
+      }
+    }
+    return paint;
   }
 
   private _emitLoadEvent(event: string, data: any) {
