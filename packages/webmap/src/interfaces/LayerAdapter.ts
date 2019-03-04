@@ -159,8 +159,6 @@ export interface VectorLayerAdapter<
   M = any, L = any, O extends GeoJsonAdapterOptions = GeoJsonAdapterOptions, F extends Feature = Feature>
   extends BaseLayerAdapter<M, L, O> {
 
-  getPaintFunctions?: { [name: string]: GetPaintFunction };
-
   selected?: boolean;
 
   getLayers?(): Array<LayerDefinition<F, L>>;
