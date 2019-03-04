@@ -18,7 +18,7 @@ import Icon from 'ol/style/Icon';
 // @ts-ignore
 import { asArray } from 'ol/color';
 // @ts-ignore
-import { Feature } from 'geojson';
+import { Feature, GeoJsonObject } from 'geojson';
 import { ForEachFeatureAtPixelCallback } from '../OlMapAdapter';
 
 type Layer = ol.layer.Base;
@@ -31,9 +31,10 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
   selectedPaint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
   selected: boolean = false;
 
+  private vectorSource = new VectorSource();
   private _selectedFeatures: ol.Feature[] = [];
 
-  constructor(public map: Map, public options: GeoJsonAdapterOptions) {}
+  constructor(public map: Map, public options: GeoJsonAdapterOptions) { }
 
   addLayer(options: GeoJsonAdapterOptions) {
     this.options = options;
@@ -41,18 +42,13 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
 
     this.selectedPaint = options.selectedPaint;
 
-    const vectorSource = new VectorSource();
     const data = options.data;
     if (data) {
-      const features = (new GeoJSON()).readFeatures(data, {
-        dataProjection: 'EPSG:4326',
-        featureProjection: 'EPSG:3857'
-      });
-      vectorSource.addFeatures(features);
+      this.addData(data);
     }
 
     this.layer = new VectorLayer({
-      source: vectorSource,
+      source: this.vectorSource,
       style: (f) => {
         if (options.paint) {
           return styleFunction(f as ol.Feature, options.paint);
@@ -66,6 +62,34 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
     }
 
     return this.layer;
+  }
+
+  clearLayer(cb?: (feature: Feature) => boolean) {
+    if (cb) {
+      const features = this.vectorSource.getFeatures().values();
+      let entry;
+      while (!(entry = features.next()).done) {
+        const feature = getFeature(entry.value);
+        if (cb(feature)) {
+          this.vectorSource.removeFeature(entry.value);
+        }
+      }
+    } else {
+      this.vectorSource.clearLayers();
+    }
+  }
+
+  setData(data: GeoJsonObject) {
+    this.clearLayer();
+    this.addData(data);
+  }
+
+  addData(data: GeoJsonObject | false) {
+    const features = (new GeoJSON()).readFeatures(data, {
+      dataProjection: 'EPSG:4326',
+      featureProjection: 'EPSG:3857'
+    });
+    this.vectorSource.addFeatures(features);
   }
 
   select(findFeatureFun?: (opt: { feature: Feature }) => boolean) {
@@ -194,7 +218,7 @@ function styleFunction(feature: ol.Feature, paint: GeoJsonAdapterLayerPaint | Ge
     return styleFunction(feature, paint(f));
   } else {
     const type = feature.getGeometry().getType();
-    const style: { stroke?: Stroke, fill?: Fill, image?: any} = {};
+    const style: { stroke?: Stroke, fill?: Fill, image?: any } = {};
     if ('opacity' in paint) {
       const color = asArray(paint.color);
       const colorArray = color.slice();
