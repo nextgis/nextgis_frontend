@@ -9,8 +9,8 @@ import {
   MapControls,
   MapControl,
   CreateControlOptions,
-  CreateButtonControlOptions,
-  CreateToggleControlOptions
+  ButtonControlOptions,
+  ToggleControlOptions
 } from './MapControl';
 import { MapOptions } from './WebMapApp';
 import { LatLng, LngLatArray, LngLatBoundsArray, Pixel } from './BaseTypes';
@@ -66,8 +66,8 @@ export interface MapAdapter<M = any, L = any, C = any> extends BaseMapAdapter<L>
   setCursor?(cursor: string): void;
 
   createControl?(control: MapControl, options?: CreateControlOptions): C;
-  createButtonControl?(options: CreateButtonControlOptions): C;
-  createToggleControl?(options: CreateToggleControlOptions): C;
+  createButtonControl?(options: ButtonControlOptions): C;
+  createToggleControl?(options: ToggleControlOptions): C;
 
   addControl<K extends keyof MapControls>(
     controlName: K | any,

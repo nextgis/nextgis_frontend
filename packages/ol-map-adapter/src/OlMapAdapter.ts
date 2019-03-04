@@ -8,7 +8,7 @@ import {
   MapOptions,
   MapControl,
   CreateControlOptions,
-  CreateButtonControlOptions,
+  ButtonControlOptions,
   LayerAdapter,
   LngLatArray,
   LngLatBoundsArray
@@ -202,7 +202,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     return createControl(control, options);
   }
 
-  createButtonControl(options: CreateButtonControlOptions) {
+  createButtonControl(options: ButtonControlOptions) {
     return createButtonControl(options);
   }
 
