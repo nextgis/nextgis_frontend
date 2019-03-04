@@ -78,6 +78,6 @@ export class HtmlExample extends Vue {
     if (exist) {
       return exist.name;
     }
-    return this.item.ngwMaps[0].name;
+    return this.item.ngwMaps[0] && this.item.ngwMaps[0].name;
   }
 }
