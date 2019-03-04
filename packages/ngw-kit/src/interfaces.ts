@@ -2,7 +2,7 @@
  * @module ngw-kit
  */
 
-import WebMap, { AdapterOptions } from '@nextgis/webmap';
+import WebMap, { AdapterOptions, LayerAdaptersOptions } from '@nextgis/webmap';
 import NgwConnector from '@nextgis/ngw-connector';
 
 export type NgwLayerAdapterType = 'IMAGE' | 'TILE' | 'GEOJSON';
@@ -49,10 +49,11 @@ export interface TreeLayer extends TreeItem {
   updateWmsParams?: (parans: any) => any;
 }
 
-export interface NgwLayerOptions {
+export interface NgwLayerOptions<A extends NgwLayerAdapterType = NgwLayerAdapterType> {
   resourceId: number;
-  adapter?: NgwLayerAdapterType;
   id?: string;
+  adapter?: A;
+  adapterOptions?: LayerAdaptersOptions[A];
 }
 
 export interface NgwConfig {
