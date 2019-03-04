@@ -56,12 +56,8 @@ type LayerMem = LayerDefinition<Feature>;
 
 export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implements VectorLayerAdapter<Map> {
 
-  static getPaintFunctions?: { [name: string]: GetPaintFunction };
-
   layer: FeatureGroup;
   selected = false;
-
-  getPaintFunctions = GeoJsonAdapter.getPaintFunctions;
 
   private paint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
   private selectedPaint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
@@ -208,20 +204,6 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
 
       const layer = new GeoJSON(data || undefined, geoJsonOptions);
     }
-  }
-
-  private _updatePaintOptionFromCallback(paint: GeoJsonAdapterLayerPaint | GetPaintCallback) {
-    if (typeof paint !== 'function' && paint.type === 'get-paint') {
-      if (typeof paint.from === 'function') {
-        paint = paint.from(paint.options);
-      } else if (typeof paint.from === 'string' && this.getPaintFunctions) {
-        const from = this.getPaintFunctions[paint.from];
-        if (from) {
-          paint = from(paint.options);
-        }
-      }
-    }
-    return paint;
   }
 
   private setPaintEachLayer(paint: GetPaintCallback | GeoJsonAdapterLayerPaint) {
