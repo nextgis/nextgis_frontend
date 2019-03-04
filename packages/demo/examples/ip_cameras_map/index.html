@@ -62,10 +62,15 @@
     });
 
     // add layer with cameras
-    ngwMap.addNgwLayer({ resourceId: 3, id: 'cameras', adapter: 'GEOJSON' }, {
-      paint: { color: 'red', radius: 5 },
-      selectedPaint: { color: 'green', radius: 5 },
-      selectable: true,
+    ngwMap.addNgwLayer({
+      resourceId: 3,
+      id: 'cameras',
+      adapter: 'GEOJSON',
+      adapterOptions: {
+        paint: { color: 'red', radius: 5 },
+        selectedPaint: { color: 'green', radius: 5 },
+        selectable: true,
+      }
     });
 
     // create camera panel control

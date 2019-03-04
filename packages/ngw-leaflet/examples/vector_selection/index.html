@@ -37,38 +37,44 @@
     });
 
     // tree
-    ngwMap.addNgwLayer({ id: 'tree', resourceId: 4069, adapter: 'GEOJSON' }, {
-      paint: function (feature) {
-        return { color: feature.properties.color }
-      },
-      selectedPaint: function (feature) {
-        return { color: feature.properties.selcolor }
-      },
-      selectable: true,
-      unselectOnSecondClick: false,
+    ngwMap.addNgwLayer({
+      id: 'tree', resourceId: 4069, adapter: 'GEOJSON', adapterOptions: {
+        paint: function (feature) {
+          return { color: feature.properties.color }
+        },
+        selectedPaint: function (feature) {
+          return { color: feature.properties.selcolor }
+        },
+        selectable: true,
+        unselectOnSecondClick: false,
+      }
     });
 
     // toys
-    ngwMap.addNgwLayer({ id: 'toys', resourceId: 4061, adapter: 'GEOJSON' }, {
-      paint: function (feature) {
-        return { color: feature.properties.color, opacity: 0.5 }
-      },
-      selectedPaint: function (feature) {
-        return { color: feature.properties.selcolor, opacity: 1 }
-      },
-      selectable: true,
-      multiselect: true
+    ngwMap.addNgwLayer({
+      id: 'toys', resourceId: 4061, adapter: 'GEOJSON', adapterOptions: {
+        paint: function (feature) {
+          return { color: feature.properties.color, opacity: 0.5 }
+        },
+        selectedPaint: function (feature) {
+          return { color: feature.properties.selcolor, opacity: 1 }
+        },
+        selectable: true,
+        multiselect: true
+      }
     });
 
     // star
-    ngwMap.addNgwLayer({ id: 'star', resourceId: 4059, adapter: 'GEOJSON' }, {
-      paint: function (feature) {
-        return NgwMap.getIcon({ shape: 'star', color: 'darkred', strokeColor: 'darkred', size: 30 });
-      },
-      selectedPaint: function (feature) {
-        return NgwMap.getIcon({ shape: 'star', color: 'red', strokeColor: 'orange', size: 60 });
-      },
-      selectable: false
+    ngwMap.addNgwLayer({
+      id: 'star', resourceId: 4059, adapter: 'GEOJSON', adapterOptions: {
+        paint: function (feature) {
+          return NgwMap.getIcon({ shape: 'star', color: 'darkred', strokeColor: 'darkred', size: 30 });
+        },
+        selectedPaint: function (feature) {
+          return NgwMap.getIcon({ shape: 'star', color: 'red', strokeColor: 'orange', size: 60 });
+        },
+        selectable: false
+      }
     });
 
     ngwMap.emitter.on('layer:click', function (e) {
