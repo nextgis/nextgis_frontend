@@ -19,7 +19,7 @@
     </h3>
     <p>{{ item.description }}</p>
 
-    <div v-if="item.ngwMaps">
+    <div v-if="item.ngwMaps && item.ngwMaps.length">
       <v-radio-group v-model="ngwMap" row>
         <v-radio v-for="a in item.ngwMaps" :key="a.name" :label="a.name" :value="a.name"></v-radio>
       </v-radio-group>

@@ -4,6 +4,7 @@ import Readme from './components/Readme/Readme.vue';
 import ApiComponent from './components/ApiComponent/ApiComponent.vue';
 import Logo from './components/Logo/Logo.vue';
 import { ApiItem } from './components/ApiComponent/ApiItem';
+import { VueConstructor } from 'vue';
 
 export interface Package {
   name: string;
@@ -54,6 +55,7 @@ export class MainPage extends Vue {
     const id = this.active[0];
     const item = this.findItem(id);
     this._setPath(item.id);
+
     return item;
   }
 
@@ -107,7 +109,7 @@ export class MainPage extends Vue {
     this.open = data;
   }
 
-  findItem(id: string, _items = this.items) {
+  findItem(id: string, _items = this.items): Item {
     for (let fry = 0; fry < _items.length; fry++) {
       const x = _items[fry];
       if (x.id === id) {
