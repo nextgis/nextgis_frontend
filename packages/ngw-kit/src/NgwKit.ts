@@ -56,7 +56,7 @@ export class NgwKit implements StarterKit {
             if (layer.getExtent) {
               const extent = await layer.getExtent();
               if (extent) {
-                webMap.fit(extent);
+                webMap.fitBounds(extent);
               }
             }
           }

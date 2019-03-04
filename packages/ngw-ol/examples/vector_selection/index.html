@@ -31,7 +31,7 @@
     var ngwMap = new NgwMap({
       baseUrl: 'https://demo.nextgis.com',
       target: 'map',
-      qmsId: 465,
+      qmsId: 487,
       center: [50.0113, 19.9845],
       zoom: 10
     });
@@ -74,17 +74,17 @@
     ngwMap.emitter.on('layer:click', function (e) {
       if (e.layer.id === 'toys') {
         var selected = e.layer.getSelected();
-        var tree = ngwMap.webMap.getLayer('tree');
+        var tree = ngwMap.getLayer('tree');
 
         if (selected.length >= 9) {
           var treeSelected = tree.getSelected() || [];
           // hint: make tree normal first
           var treeIsNormal = treeSelected[0] && treeSelected[0].feature.properties.color === '#25741f';
           if (treeIsNormal) {
-            ngwMap.webMap.selectLayer('star');
+            ngwMap.selectLayer('star');
           }
         } else {
-          ngwMap.webMap.unSelectLayer('star');
+          ngwMap.unSelectLayer('star');
         }
       }
     });

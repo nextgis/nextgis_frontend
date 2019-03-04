@@ -5,7 +5,12 @@ import { DomEvent } from 'leaflet';
 export function createToggleControl(options: CreateToggleControlOptions) {
   const link = document.createElement('a');
 
-  let status = options.status;
+  let status = false;
+  if (options.getStatus) {
+    status = options.getStatus();
+  } else if (options.status) {
+    status = options.status;
+  }
 
   const title = options.title || '';
   const html = options.html;
@@ -63,7 +68,7 @@ export function createToggleControl(options: CreateToggleControlOptions) {
       _setClass(options.addClassOn, status);
     }
     if (options.addClassOff) {
-      _setClass(options.addClassOff, status);
+      _setClass(options.addClassOff, !status);
     }
   }
 

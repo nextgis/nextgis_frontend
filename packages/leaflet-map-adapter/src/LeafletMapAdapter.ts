@@ -69,7 +69,8 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
       });
       this.emitter.emit('create', { map: this.map });
       // create default pane
-      this.map.createPane('order-0');
+      const defPane = this.map.createPane('order-0');
+      defPane.style.zIndex = String(0);
       this._addMapListeners();
     }
   }

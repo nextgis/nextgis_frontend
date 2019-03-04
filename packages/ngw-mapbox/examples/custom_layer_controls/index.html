@@ -42,19 +42,19 @@
       webmapId: [4119, webMapName]
     });
 
-    var toggleBaseLayerControl = ngwMap.webMap.createButtonControl({
+    var toggleBaseLayerControl = ngwMap.createButtonControl({
       html: 'B',
       title: 'Toggle base map',
       onClick: function () {
-        ngwMap.webMap.toggleLayer(qmsBaseLayerName);
+        ngwMap.toggleLayer(qmsBaseLayerName);
       }
     });
 
-    var toggleHeatMapControl = ngwMap.webMap.createButtonControl({
+    var toggleHeatMapControl = ngwMap.createButtonControl({
       html: 'D',
       title: 'Toggle DEM',
       onClick: function () {
-        var ngwmap = ngwMap.webMap.getLayer(webMapName);
+        var ngwmap = ngwMap.getLayer(webMapName);
         var layer = ngwmap.layer.tree.getDescendants(function (x) {
           return x.item.display_name === 'Digital Elevation Model (DEM)';
         })[0];
@@ -62,12 +62,12 @@
       }
     });
 
-    var ngwLayersControl = ngwMap.webMap.createControl({
+    var ngwLayersControl = ngwMap.createControl({
       onAdd: function () {
         var list = document.createElement('div');
         list.className = 'ngw-layers';
         // find all layer from ngw webmap tree
-        var ngwmap = ngwMap.webMap.getLayer(webMapName);
+        var ngwmap = ngwMap.getLayer(webMapName);
         ngwmap.layer.tree.getDescendants().forEach(function (node) {
           if (node.item.item_type === 'layer') {
             var layerElement = document.createElement('div');

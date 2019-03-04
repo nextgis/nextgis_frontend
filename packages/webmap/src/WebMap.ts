@@ -147,8 +147,8 @@ export class WebMap<M = any, L = any, C = any> {
     }
   }
 
-  // [extent_left, extent_bottom, extent_right, extent_top];
-  fit(e: LngLatBoundsArray, options?: FitOptions): this {
+  // [west, south, east, north];
+  fitBounds(e: LngLatBoundsArray, options?: FitOptions): this {
     this.mapAdapter.fit(e, options);
     return this;
   }
@@ -158,7 +158,7 @@ export class WebMap<M = any, L = any, C = any> {
     if (layer && layer.getExtent) {
       const extent = await layer.getExtent();
       if (extent) {
-        this.fit(extent);
+        this.fitBounds(extent);
       }
     }
   }
@@ -191,9 +191,16 @@ export class WebMap<M = any, L = any, C = any> {
     return Object.keys(this._layers);
   }
 
-  isLayerOnTheMap(layerDef: LayerDef): boolean {
+  isLayerVisible(layerDef: LayerDef): boolean {
     const layer = this.getLayer(layerDef);
     return layer && layer.options.visibility !== undefined ? layer.options.visibility : false;
+  }
+
+  /**
+   * @deprecated use isLayerVisible instead
+   */
+  isLayerOnTheMap(layerDef: LayerDef): boolean {
+    return this.isLayerVisible(layerDef);
   }
 
   @onLoad('build-map')
@@ -502,7 +509,7 @@ export class WebMap<M = any, L = any, C = any> {
     if (this._extent) {
       this.mapAdapter.fit(this._extent);
     } else if (this.options.bounds) {
-      this.fit(this.options.bounds);
+      this.fitBounds(this.options.bounds);
     } else {
       const { center, zoom } = this.options;
       this.setView(center, zoom);
