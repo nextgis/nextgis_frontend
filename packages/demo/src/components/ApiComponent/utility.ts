@@ -114,7 +114,10 @@ export function createDeclarationStr(option: ReflectionType, indexes: Indexes) {
 export function createMethodString(methodItem: MethodItem | FunctionItem, indexes: Indexes): string {
   const signatures = methodItem.signatures.map((x) => {
     if ('parameters' in x) {
-      const args = getSignatureParameters(x.parameters, indexes).join(', ');
+      // const args = getSignatureParameters(x.parameters, indexes).join(', ');
+      const args = x.parameters.map((p) => {
+        return `${getParameterName(p)}`;
+      }).join(', ');
       return `(${args})`; // : ${getOptionType(x.type, indexes)}`;
     }
   }).join(', ');
