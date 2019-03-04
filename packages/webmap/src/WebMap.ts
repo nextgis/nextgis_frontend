@@ -37,6 +37,11 @@ import { createToggleControl } from './components/controls/ToggleControl';
 
 type LayerDef = string | LayerAdapter;
 
+const OPTIONS: MapOptions = {
+  minZoom: 0,
+  maxZoom: 21
+};
+
 /**
  * @class WebMap
  */
@@ -44,7 +49,7 @@ export class WebMap<M = any, L = any, C = any> {
 
   static getPaintFunctions?: { [name: string]: GetPaintFunction };
 
-  options: MapOptions = {};
+  options: MapOptions = OPTIONS;
 
   displayProjection = 'EPSG:3857';
   lonlatProjection = 'EPSG:4326';
@@ -76,7 +81,7 @@ export class WebMap<M = any, L = any, C = any> {
   }
 
   async create(options: MapOptions): Promise<this> {
-    this.options = deepmerge(this.options || {}, options);
+    this.options = deepmerge(OPTIONS || {}, options);
     await this._setupMap();
     return this;
   }
