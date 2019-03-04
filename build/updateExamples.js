@@ -1,23 +1,23 @@
-const { lstatSync, readdirSync, readFileSync, existsSync, writeFileSync } = require('fs');
+const fs = require('fs');
 const { join } = require('path');
 const changeHtmlMapAdapter = require('../packages/demo/scripts/changeHtmlMapAdapter');
 
 const packagesPath = './packages';
 
-const isDirectory = (source) => existsSync(source) && lstatSync(source).isDirectory();
+const isDirectory = (source) => fs.existsSync(source) && fs.lstatSync(source).isDirectory();
 
 function updateExamples() {
 
   // find demo examples folder
   const demoExamplesPath = join(packagesPath, 'demo', 'examples');
-  if (existsSync(demoExamplesPath)) {
-    readdirSync(demoExamplesPath).forEach((name) => {
+  if (fs.existsSync(demoExamplesPath)) {
+    fs.readdirSync(demoExamplesPath).forEach((name) => {
       const examplePath = join(demoExamplesPath, name);
       if (isDirectory(examplePath)) {
         const metaPath = join(examplePath, 'index.json');
         const htmlPath = join(examplePath, 'index.html');
-        if (existsSync(metaPath) && existsSync(htmlPath)) {
-          const meta = JSON.parse(readFileSync(metaPath, 'utf8'));
+        if (fs.existsSync(metaPath) && fs.existsSync(htmlPath)) {
+          const meta = JSON.parse(fs.readFileSync(metaPath, 'utf8'));
           if (meta.ngwMaps) {
             meta.ngwMaps.forEach((x) => {
               copyExampleToLib(x, examplePath, name);
@@ -35,14 +35,18 @@ function copyExampleToLib(packageName, exampleFolderPath, exampleName) {
   const metaPath = join(exampleFolderPath, 'index.json');
   const htmlPath = join(exampleFolderPath, 'index.html');
 
+  if (!fs.existsSync(libExamplesPath)) {
+    fs.mkdirSync(libExamplesPath);
+  }
+
   // copy index.json
-  const meta = JSON.parse(readFileSync(metaPath, 'utf8'));
+  const meta = JSON.parse(fs.readFileSync(metaPath, 'utf8'));
   const { ngwMaps, ...opts } = meta;
   const newMeta = { ...opts, _copiedFrom: exampleFolderPath };
-  writeFileSync(join(libExamplesPath, 'index.json'), JSON.stringify(newMeta));
+  fs.writeFileSync(join(libExamplesPath, 'index.json'), JSON.stringify(newMeta));
 
   // copy html
-  const html = readFileSync(htmlPath, 'utf8');
+  const html = fs.readFileSync(htmlPath, 'utf8');
   let newHtml = changeHtmlMapAdapter(html, packageName, ngwMaps);
 
   newHtml = newHtml.replace(/..\/..\/..\/([a-zA-Z\-]+)\//g, (m, g) => {
@@ -53,7 +57,7 @@ function copyExampleToLib(packageName, exampleFolderPath, exampleName) {
   })
 
 
-  writeFileSync(join(libExamplesPath, 'index.html'), newHtml);
+  fs.writeFileSync(join(libExamplesPath, 'index.html'), newHtml);
 
 }
 

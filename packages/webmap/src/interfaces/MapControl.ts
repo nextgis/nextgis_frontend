@@ -70,7 +70,7 @@ export interface TitleToggle {
 }
 
 export interface CreateToggleControlOptions {
-  status: boolean;
+  status?: boolean;
   html?: HtmlDef | HtmlToggle;
 
   addClass?: string;
@@ -80,6 +80,7 @@ export interface CreateToggleControlOptions {
   title?: string | TitleToggle;
 
   onClick: (status: boolean) => void;
+  getStatus?: () => boolean;
 }
 
 export interface CreateControlOptions {

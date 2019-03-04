@@ -10,6 +10,7 @@ import {
   IconOptions,
   LngLatBoundsArray,
   MapControl,
+  MapControls,
 
 } from '@nextgis/webmap';
 import { NgwLayerOptions } from '@nextgis/ngw-kit';
@@ -18,7 +19,7 @@ export interface ControlOptions {
   position?: ControlPositions;
 }
 
-export interface NgwMapOptions extends MapOptions {
+export interface NgwMapOptions<C = any> extends MapOptions {
   /**
    * Url of NGW server like this https://demo.nextgis.com
    */
@@ -32,7 +33,7 @@ export interface NgwMapOptions extends MapOptions {
    * @example
    * ```javascript
    *   var ngwMap = new NgwMap({webmapId: [3985, 'my-webmap']});
-   *   ngwMap.webMap.hideLayer('my-webmap');
+   *   ngwMap.hideLayer('my-webmap');
    * ```
    */
   webmapId?: number | [number, string];
@@ -45,7 +46,7 @@ export interface NgwMapOptions extends MapOptions {
    * @example
    * ```javascript
    *   var ngwMap = new NgwMap({qmsId: [465, 'qms-basemap']});
-   *   ngwMap.webMap.hideLayer('qms-basemap');
+   *   ngwMap.hideLayer('qms-basemap');
    * ```
    */
   qmsId?: number | [number, string];
@@ -74,7 +75,7 @@ export interface NgwMapOptions extends MapOptions {
    * }
    * ```
    */
-  controls?: Array<string | MapControl>;
+  controls?: Array<keyof MapControls | C>;
   /**
    * Set options for those controls that are specified by name.
    *

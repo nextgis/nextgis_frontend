@@ -1,0 +1,5 @@
+{
+  "name": "Toggle butoon control",
+  "description": "This is a two-state control button. Useful for switching certain modes of operation with the card.",
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
+}
