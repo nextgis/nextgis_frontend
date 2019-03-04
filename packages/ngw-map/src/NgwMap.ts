@@ -167,9 +167,9 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C> {
   }
 
   /**
-   * Add raster layer by NGW style id or vector data layer by recource id.
+   * Add raster layer by NGW style id or vector data layer by resource id.
    * @param options - set layer identification parameters and render method.
-   * @param [adapterOptions] - parameters for the choised adapter
+   * @param [adapterOptions] - parameters for the selected adapter
    *
    * @example
    * ```javascript
@@ -180,15 +180,13 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C> {
    * ngwMap.addNgwLayer({
    *   resourceId: 4038,
    *   adapter: 'GEOJSON'
-   * }, {
-   *   paint: { color: 'red' }
+   *   adapterOptions: { paint: { color: 'red' } }
    * });
    * ```
    */
   @onMapLoad()
   async addNgwLayer(
-    options: NgwLayerOptions,
-    adapterOptions?: any): Promise<LayerAdapter | undefined> {
+    options: NgwLayerOptions): Promise<LayerAdapter | undefined> {
 
     if (!options.resourceId) {
       throw new Error('resourceId is required parameter to add NGW layer');
@@ -213,7 +211,7 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C> {
         this.mapAdapter
       );
       const layer = await this.addGeoJsonLayer(
-        adapterOptions || {},
+        options.adapterOptions || {},
         adapter
       );
       const id = layer && this.getLayerId(layer);
