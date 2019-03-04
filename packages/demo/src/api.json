@@ -44269,7 +44269,7 @@
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "NgwMap.webMap",
+								"name": "ngwMap",
 								"id": 2661
 							}
 						},
@@ -47849,7 +47849,7 @@
 								"tags": [
 									{
 										"tag": "example",
-										"text": "\n```javascript\n  var ngwMap = new NgwMap({qmsId: [465, 'qms-basemap']});\n  ngwMap.webMap.hideLayer('qms-basemap');\n```\n"
+										"text": "\n```javascript\n  var ngwMap = new NgwMap({qmsId: [465, 'qms-basemap']});\n  ngwMap.hideLayer('qms-basemap');\n```\n"
 									}
 								]
 							},
@@ -48044,7 +48044,7 @@
 								"tags": [
 									{
 										"tag": "example",
-										"text": "\n```javascript\n  var ngwMap = new NgwMap({webmapId: [3985, 'my-webmap']});\n  ngwMap.webMap.hideLayer('my-webmap');\n```\n"
+										"text": "\n```javascript\n  var ngwMap = new NgwMap({webmapId: [3985, 'my-webmap']});\n  ngwMap.hideLayer('my-webmap');\n```\n"
 									}
 								]
 							},
@@ -48599,7 +48599,7 @@
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "NgwMap.webMap",
+								"name": "ngwMap",
 								"id": 2661
 							}
 						},
@@ -50479,7 +50479,7 @@
 							},
 							"inheritedFrom": {
 								"type": "reference",
-								"name": "NgwMap.webMap",
+								"name": "ngwMap",
 								"id": 2661
 							}
 						},

@@ -43,53 +43,70 @@ const typeAlias: { [x: string]: GeoJsonAdapterLayerType } = {
   'MultiPolygon': 'fill'
 };
 
+const OPTIONS: NgwMapOptions = {
+  target: 'map',
+  baseUrl: 'http://dev.nextgis.com/sandbox',
+  controls: ['ZOOM', 'ATTRIBUTION'],
+  controlsOptions: {
+    ZOOM: { position: 'top-left' },
+    ATTRIBUTION: {
+      position: 'bottom-right',
+      customAttribution: [
+        '<a href="http://nextgis.ru" target="_blank">©NextGIS</a>',
+      ]
+    }
+  },
+  vectorLayersDefaultPaint: {
+    circle: {
+      type: 'circle',
+      color: 'blue',
+      opacity: 1,
+      radius: 6,
+      stroke: false
+    },
+    path: {
+      type: 'path',
+      color: 'blue',
+      opacity: 1,
+      stroke: false,
+      weight: 1
+    },
+    icon: getIcon({ shape: 'circle' })
+  }
+};
+
+function prepareWebMapOptions(mapAdapter: MapAdapter, options: NgwMapOptions) {
+  const opt = deepmerge(OPTIONS, options);
+  const kits: StarterKit[] = [new QmsKit()];
+  // const kits: any[] = [new QmsKit()];
+  if (opt.baseUrl && opt.webmapId) {
+    const resourceId = opt.webmapId;
+
+    kits.push(new NgwKit({
+      baseUrl: opt.baseUrl,
+      resourceId,
+    }));
+  }
+  return {
+    mapAdapter,
+    starterKits: kits
+  };
+}
+
 /**
  * Base class containing the logic of interaction WebMap with NextGIS services.
  */
-export class NgwMap {
+export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C> {
 
   static utils = { fixUrlStr };
   static decorators = { onMapLoad };
   static getIcon = getIcon;
   static toWgs84 = (geojson: GeoJsonObject) => toWgs84(geojson, epsg['EPSG:3857'], epsg);
 
-  options: NgwMapOptions = {
-    target: 'map',
-    baseUrl: 'http://dev.nextgis.com/sandbox',
-    controls: ['ZOOM', 'ATTRIBUTION'],
-    controlsOptions: {
-      ZOOM: { position: 'top-left' },
-      ATTRIBUTION: {
-        position: 'bottom-right',
-        customAttribution: [
-          '<a href="http://nextgis.ru" target="_blank">©NextGIS</a>',
-        ]
-      }
-    },
-    vectorLayersDefaultPaint: {
-      circle: {
-        type: 'circle',
-        color: 'blue',
-        opacity: 1,
-        radius: 6,
-        stroke: false
-      },
-      path: {
-        type: 'path',
-        color: 'blue',
-        opacity: 1,
-        stroke: false,
-        weight: 1
-      },
-      icon: getIcon({ shape: 'circle' })
-    }
-  };
-
-  webMap: WebMap;
-  emitter = new EventEmitter();
+  options: NgwMapOptions<C> = {};
   connector: NgwConnector;
-
   _eventsStatus: { [eventName: string]: boolean } = {};
+
   protected _ngwLayers: {
     [layerName: string]: {
       layer: LayerAdapter,
@@ -97,32 +114,19 @@ export class NgwMap {
     }
   } = {};
 
-  constructor(mapAdapter: MapAdapter, options: NgwMapOptions) {
-    this.options = deepmerge(this.options, options);
-    this.connector = new NgwConnector({ baseUrl: this.options.baseUrl });
-    const kits: StarterKit[] = [new QmsKit()];
-    // const kits: any[] = [new QmsKit()];
-    if (this.options.baseUrl && this.options.webmapId) {
-      const resourceId = this.options.webmapId;
+  constructor(mapAdapter: MapAdapter, options: NgwMapOptions<C>) {
+    super(prepareWebMapOptions(mapAdapter, options));
 
-      kits.push(new NgwKit({
-        baseUrl: this.options.baseUrl,
-        resourceId,
-      }));
-    }
-    this.webMap = new WebMap({
-      mapAdapter,
-      starterKits: kits
-    });
+    this.options = deepmerge(OPTIONS, options);
+    this.connector = new NgwConnector({ baseUrl: this.options.baseUrl });
 
     this._createWebMap().then(() => {
-      const container = this.webMap.getContainer();
+      const container = this.getContainer();
       if (container) {
         container.classList.add('ngw-map-container');
       }
       this._addControls();
     });
-    this._addEventsListeners();
   }
 
   /**
@@ -131,19 +135,13 @@ export class NgwMap {
   fit() {
     const { center, zoom, bounds } = this.options;
     if (center) {
-      this.webMap.setCenter(center);
+      this.setCenter(center);
       if (zoom) {
-        this.webMap.setZoom(zoom);
+        this.setZoom(zoom);
       }
     } else if (bounds) {
       this.fitBounds(bounds);
     }
-  }
-
-  fitBounds(bounds: [number, number, number, number]) {
-    const [left, bottom, right, top] = bounds;
-    // [extent_left, extent_bottom, extent_right, extent_top];
-    this.webMap.fit([left, bottom, right, top]);
   }
 
   /**
@@ -161,8 +159,11 @@ export class NgwMap {
    * ```
    */
   @onLoad('control:created')
-  addControl<K extends keyof MapControls>(control: MapControl, position: ControlPositions, options?: MapControls[K]) {
-    this.webMap.addControl(control, position, options);
+  async addControl<K extends keyof MapControls>(
+    controlDef: K | C,
+    position: ControlPositions,
+    options?: MapControls[K]) {
+    super.addControl(controlDef, position, options);
   }
 
   /**
@@ -209,26 +210,26 @@ export class NgwMap {
       const adapter = createAsyncAdapter(
         'GEOJSON',
         geojsonAdapterCb,
-        this.webMap.mapAdapter
+        this.mapAdapter
       );
       const layer = await this.addGeoJsonLayer(
         adapterOptions || {},
         adapter
       );
-      const id = layer && this.webMap.getLayerId(layer);
+      const id = layer && this.getLayerId(layer);
       if (id) {
         this._ngwLayers[id] = { layer, resourceId: options.resourceId };
         return layer;
       }
     } else if (this.options.baseUrl) {
 
-      const adapter = NgwKit.addNgwLayer(options, this.webMap, this.options.baseUrl);
+      const adapter = NgwKit.addNgwLayer(options, this, this.options.baseUrl);
       if (adapter) {
         return adapter.then((layer) => {
-          const id = layer && this.webMap.getLayerId(layer);
+          const id = layer && this.getLayerId(layer);
           if (layer && id) {
             this._ngwLayers[id] = { layer, resourceId: options.resourceId };
-            this.webMap.showLayer(layer);
+            this.showLayer(layer);
             return layer;
           }
         });
@@ -250,8 +251,8 @@ export class NgwMap {
     if (!adapter) {
       opt = this._updateGeojsonAdapterOptions(opt);
     }
-    return this.webMap.addLayer(adapter || 'GEOJSON', opt).then((layer) => {
-      this.webMap.showLayer(layer);
+    return this.addLayer(adapter || 'GEOJSON', opt).then((layer) => {
+      this.showLayer(layer);
       return layer;
     });
   }
@@ -322,7 +323,7 @@ export class NgwMap {
   }
 
   private _createWebMap() {
-    return this.webMap.create({
+    return this.create({
       ...this.options
     }).then(() => {
       this._emitStatusEvent('map:created');
@@ -342,8 +343,8 @@ export class NgwMap {
           qmsLayerOptions.id = qmsLayerName;
         }
 
-        this.webMap.addBaseLayer('QMS', qmsLayerOptions).then((layer) => {
-          this.webMap.showLayer(layer);
+        this.addBaseLayer('QMS', qmsLayerOptions).then((layer) => {
+          this.showLayer(layer);
         });
       }
 
@@ -359,15 +360,10 @@ export class NgwMap {
           controlOptions = this.options.controlsOptions[x];
         }
         const { position, ...options } = controlOptions;
-        this.webMap.addControl(x, position || 'top-left', options);
+        this.addControl(x, position || 'top-left', options);
       });
     }
     this._emitStatusEvent('control:created');
-  }
-
-  private _addEventsListeners() {
-    this.webMap.emitter.on('click', (d) => this.emitter.emit('click', d));
-    this.webMap.emitter.on('layer:click', (d) => this.emitter.emit('layer:click', d));
   }
 
   private _emitStatusEvent(event: string) {
