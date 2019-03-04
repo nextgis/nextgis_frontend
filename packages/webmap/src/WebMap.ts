@@ -218,7 +218,7 @@ export class WebMap<M = any, L = any, C = any> {
   }
 
   @onLoad('build-map')
-  createToggleControl(options: ToggleControlOptions) {
+  createToggleControl(options: ToggleControlOptions): C | undefined {
     if (this.mapAdapter.createToggleControl) {
       return this.mapAdapter.createToggleControl(options);
     } else {
