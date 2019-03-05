@@ -2,9 +2,10 @@ import { Vue, Component, Prop } from 'vue-property-decorator';
 import { ApiItem, ConstructorItem, Parameter } from '../ApiItem';
 import ApiOption from '../ApiOption/ApiOption.vue';
 import Reference from '../Reference/Reference.vue';
+import Property from '../Property/Property.vue';
 
 @Component({
-  components: { ApiOption, Reference }
+  components: { ApiOption, Reference, Property }
 })
 export class ApiParameters extends Vue {
   @Prop() item: ConstructorItem;

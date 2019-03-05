@@ -1,9 +1,9 @@
 <template>
   <div>
     <div v-if="link">
-      type: <a @click="goTo">{{ parameter.type.name }}</a>
+      type: <a @click.prevent="goTo">{{ parameter.type.name }}</a>
     </div>
-    <api-option :id="parameter.type.id"></api-option>
+    <api-option :id="parameter.type.id" v-if="!isNoApi()"></api-option>
   </div>
 </template>
 

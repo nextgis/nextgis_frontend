@@ -23,7 +23,14 @@ export class Reference extends Vue {
     }
   }
 
+  isNoApi() {
+    const p = this.parameter;
+    const text = p.comment && p.comment.shortText;
+    return text && text.indexOf('#noapi') !== -1;
+  }
+
   goTo() {
+
     const reference = this.reference;
     if (reference && 'name' in this.parameter.type) {
       const name = this.parameter.type.name;

@@ -10,7 +10,6 @@
         <pre v-highlightjs="s"><code class="typescript"></code></pre>
       </div>
     </div>
-
     <api-parameters :item="constructorItem"></api-parameters>
 
   </div>

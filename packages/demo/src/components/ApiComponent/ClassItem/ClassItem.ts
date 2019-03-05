@@ -4,13 +4,14 @@ import { ClassItem, ApiItem, Parameter, MethodItem, ParameterItem } from '../Api
 import ConstructorItemComponent from '../ConstructorItem/ConstructorItem.vue';
 import Comment from '../Comment/Comment.vue';
 import Example from '../Example/Example.vue';
+import Property from '../Property/Property.vue';
 import Class from './ClassItem.vue';
 import * as utility from '../utility';
 import { Indexes } from '../../../store/modules/api';
 
 @Component({
   name: 'Class',
-  components: { ConstructorItemComponent, Comment, Example, Class }
+  components: { ConstructorItemComponent, Comment, Example, Class, Property }
 })
 export class ClassItemComponent extends Vue {
   @Prop() item: ClassItem;

@@ -4,7 +4,8 @@
   "exclude": [
       "**/node_modules/**/*",
       "**/**/*.js",
-      "**/packages/demo/**/*"
+      "**/packages/demo/**/*",
+      "**/lib/**/*"
   ],
   "excludeProtected": true,
   "excludePrivate": true
