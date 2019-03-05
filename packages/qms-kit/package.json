@@ -1,6 +1,7 @@
 {
   "name": "@nextgis/qms-kit",
   "version": "0.13.0",
+  "_priority": 20,
   "description": "",
   "main": "lib/qms-kit.js",
   "unpkg": "lib/qms-kit.js",
