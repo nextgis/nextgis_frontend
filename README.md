@@ -4,18 +4,18 @@ This repository is under construction.
 
 ## Packages `@nextgis/`
 
+- [ngw-leaflet](http://code.nextgis.com/ngw-leaflet) – one file bundle for building [Leaflet](https://leafletjs.com/) map interacting with NextGIS services;
+- [ngw-ol](http://code.nextgis.com/ngw-ol) – one file bundle for building [OpenLayers](https://openlayers.org/) map interacting with NextGIS;
+- [ngw-mapbox](http://code.nextgis.com/ngw-mapbox) – one file bundle for building [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/) map interacting with NextGIS;
+- [ngw-map](http://code.nextgis.com/ngw-map) – abstract map to simplify work with NextGIS services;
+- [ngw-connector](http://code.nextgis.com/ngw-connector) – module to interact with [NextGIS Web](http://docs.nextgis.ru/docs_ngweb_dev/doc/developer/toc.html) REST API;
+- [ngw-uploader](http://code.nextgis.com/ngw-uploader) – library providing tools for uploading data to [nextgis.com](http://nextgis.com/nextgis-com/) cloud;
 - [webmap](http://code.nextgis.com/webmap) – universal map constructor;
 - [leaflet-map-adapter](http://code.nextgis.com/leaflet-map-adapter) – webmap adapter to use [Leaflet](https://leafletjs.com/) GIS framework;
 - [ol-map-adapter](http://code.nextgis.com/ol-map-adapter) – webmap adapter to use [OpenLayers](https://openlayers.org/) GIS framework;
 - [mapboxgl-map-adapter](http://code.nextgis.com/mapboxgl-map-adapter) – webmap adapter to use [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/) framework;
-- [qms-kit](http://code.nextgis.com/qms-kit) – build webmap with [NextGIS QMS](https://qms.nextgis.com/) baselayer;
-- [ngw-connector](http://code.nextgis.com/ngw-connector) – module to interact with [NextGIS Web](http://docs.nextgis.ru/docs_ngweb_dev/doc/developer/toc.html) REST API;
 - [ngw-kit](http://code.nextgis.com/ngw-kit) – build webmap with [NextGIS Web](http://nextgis.ru/nextgis-web/) instance;
-- [ngw-uploader](http://code.nextgis.com/ngw-uploader) – library providing tools for uploading data to [nextgis.com](http://nextgis.com/nextgis-com/) cloud;
-- [ngw-map](http://code.nextgis.com/ngw-map) – abstract map to simplify work with NextGIS services;
-- [ngw-leaflet](http://code.nextgis.com/ngw-leaflet) – one file bundle for building [Leaflet](https://leafletjs.com/) map interacting with NextGIS services;
-- [ngw-ol](http://code.nextgis.com/ngw-ol) – one file bundle for building [OpenLayers](https://openlayers.org/) map interacting with NextGIS;
-- [ngw-mapbox](http://code.nextgis.com/ngw-mapbox) – one file bundle for building [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/) map interacting with NextGIS;
+- [qms-kit](http://code.nextgis.com/qms-kit) – build webmap with [NextGIS QMS](https://qms.nextgis.com/) baselayer;
 - [icons](http://code.nextgis.com/icons) – simple svg icons pack to display on the map;
 - [dialog](http://code.nextgis.com/dialog) – utility to work with modal windows;
 
