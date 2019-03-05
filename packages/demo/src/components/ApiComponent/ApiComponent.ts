@@ -14,6 +14,8 @@ export class ApiComponent extends Vue {
   showedMembers: string[] = [];
   showMembersOnInit = 5;
 
+  private _pageChanged = true;
+
   get allowedChildren() {
     return this.getAllowedChildren(this.item.api);
   }
@@ -22,25 +24,26 @@ export class ApiComponent extends Vue {
   onPathChange() {
     // @ts-ignore
     this.$vuetify.goTo(0, { duration: 0 });
-    this._refresh();
+    this._pageChanged = true;
   }
 
   mounted() {
     this._refresh();
-
   }
 
   showItemMembers(itemName: string) {
     const exist = this.showedMembers.indexOf(itemName) !== -1;
     if (!exist) {
-      // clean url hash to disable goTo on update
-      // history.pushState('', document.title, window.location.pathname);
       this.showedMembers.push(itemName);
     }
   }
 
   updated() {
-    // this._refresh();
+    if (this._pageChanged) {
+      this._refresh();
+      this._pageChanged = false;
+    }
+
   }
 
   getAllowedItem(item: ApiItem) {
@@ -56,7 +59,6 @@ export class ApiComponent extends Vue {
   }
 
   private _refresh() {
-    this._goTo();
 
     // open first allowed members count
     const children = this.allowedChildren;
@@ -65,14 +67,17 @@ export class ApiComponent extends Vue {
     for (let fry = 0; fry < length; fry++) {
       this.showItemMembers(children[fry].name);
     }
+
+    this._goTo();
   }
 
   private _goTo() {
     const hash = window.location.hash;
     if (hash) {
-      this.showItemMembers(hash.replace('#', ''));
+      const id = hash.replace('#', '');
+      this.showItemMembers(id);
       // @ts-ignore
-      this.$root.goTo(hash, { duration: 0 });
+      this.$root.goTo(id, { duration: 0 });
     }
   }
 }
