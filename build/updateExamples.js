@@ -42,7 +42,7 @@ function copyExampleToLib(packageName, exampleFolderPath, exampleName) {
   // copy index.json
   const meta = JSON.parse(fs.readFileSync(metaPath, 'utf8'));
   const { ngwMaps, ...opts } = meta;
-  const newMeta = { ...opts, _copiedFrom: exampleFolderPath };
+  const newMeta = { ...opts, _copiedFrom: join(exampleFolderPath) };
   fs.writeFileSync(join(libExamplesPath, 'index.json'), JSON.stringify(newMeta));
 
   // copy html

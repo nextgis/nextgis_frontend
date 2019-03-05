@@ -1,5 +1,5 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
-import { ApiItem, Parameter } from '../ApiItem';
+import { ApiItem, Parameter, MethodItem } from '../ApiItem';
 import Reference from '../Reference/Reference.vue';
 import * as utility from '../utility';
 
