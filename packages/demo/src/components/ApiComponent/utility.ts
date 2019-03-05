@@ -48,37 +48,53 @@ export function getSignatureStrForConstructor(signatures: Signatures, indexes: I
 }
 
 export function getOptionType(option: Property, indexes: Indexes): string {
-  let str = '';
   if (option.type === 'union') {
-    str += option.types.map((x) => getOptionType(x, indexes)).filter((x) => !!x).join(' | ');
+    return option.types.map((x) => getOptionType(x, indexes)).filter((x) => !!x).join(' | ');
   } else if (option.type === 'intrinsic') {
     if (option.name !== 'undefined') {
-      str += option.name;
+      return option.name;
     }
   } else if (option.type === 'tuple') {
-    str += `[${option.elements.map((x) => getOptionType(x, indexes)).filter((x) => !!x).join(', ')}]`;
+    return `[${option.elements.map((x) => getOptionType(x, indexes)).filter((x) => !!x).join(', ')}]`;
   } else if (option.type === 'reference') {
-    str += createReference(option, indexes);
+    return createReference(option, indexes);
   } else if (option.type === 'reflection') {
-    str += createDeclarationStr(option, indexes);
+    return createDeclarationStr(option, indexes);
+  } else if (option.type === 'typeOperator') {
+    return `keyof ${getOptionType(option.target, indexes)}`;
   }
 
-  return str;
+  return '';
 }
 
 export function createReference(option: ReferencePropertyType, indexes: Indexes) {
   let str = '';
   const kindStringToLink: KindString[] = ['Interface', 'Class'];
   const refOption = indexes[option.id];
+
+  const isHref = (ref) => {
+    return ref && kindStringToLink.indexOf(ref.kindString) !== -1;
+  };
+
+  const createHref = (ref) => {
+    return `<a href="${ref.module.name}-api#${option.name}">${option.name}</a>`;
+  };
+
   if (refOption && refOption.type) {
     str += getOptionType(refOption.type, indexes);
   } else if (option.typeArguments) {
+    let name = option.name;
+    if (option.type === 'reference' && isHref(refOption)) {
+      name = createHref(refOption);
+    }
     const args = option.typeArguments.map((x) => getOptionType(x, indexes)).filter((x) => !!x).join(' | ');
-    str += `${option.name}<${args}>`;
-  } else if (refOption && kindStringToLink.indexOf(refOption.kindString) !== -1) {
-    return `<a href="${refOption.module.name}-api#${option.name}">${option.name}</a>`;
+    str += `${name}${args ? `< ${args} >` : ''}`;
+  } else if (isHref(refOption)) {
+    return createHref(refOption);
   } else if (refOption && refOption.kindString === 'Function') {
     return createMethodString(refOption as FunctionItem, indexes);
+  } else {
+    return option.name;
   }
   return str;
 }

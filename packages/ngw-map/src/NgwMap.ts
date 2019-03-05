@@ -114,6 +114,10 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C> {
     }
   } = {};
 
+  /**
+   * @param mapAdapter #noapi
+   * @param options
+   */
   constructor(mapAdapter: MapAdapter, options: NgwMapOptions<C>) {
     super(prepareWebMapOptions(mapAdapter, options));
 
@@ -130,7 +134,7 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C> {
   }
 
   /**
-   * Pans and zooms the map to the position specified in the options
+   * Pans and zooms the map to the initial position specified in the options
    */
   fit() {
     const { center, zoom, bounds } = this.options;

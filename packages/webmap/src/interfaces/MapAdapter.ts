@@ -27,7 +27,19 @@ export interface FitOptions {
 
 export type ControlPositions = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
 
-export interface BaseMapAdapter<L = any> {
+/**
+ * @typeparam M WEB-GIS framework map interface
+ * @typeparam M WEB-GIS framework layer interface
+ * @typeparam M WEB-GIS framework control interface
+ */
+export interface MapAdapter<M = any, L = any, C = any> {
+
+  lonlatProjection?: string;
+  displayProjection?: string;
+  map?: M;
+  emitter: EventEmitter;
+  layerAdapters: { [name: string]: Type<LayerAdapter<M, L, any>> };
+  controlAdapters: { [name: string]: Type<C> };
 
   removeLayer(layer: L): any;
   isLayerOnTheMap?(layer: L): boolean;
@@ -45,17 +57,6 @@ export interface BaseMapAdapter<L = any> {
 
   getCenter(): LngLatArray | undefined;
   setCenter(latLng: LngLatArray): void;
-
-}
-
-export interface MapAdapter<M = any, L = any, C = any> extends BaseMapAdapter<L> {
-
-  lonlatProjection?: string;
-  displayProjection?: string;
-  map?: M;
-  emitter: EventEmitter;
-  layerAdapters: { [name: string]: Type<LayerAdapter<M, L, any>> };
-  controlAdapters: { [name: string]: Type<C> };
 
   create(options?: MapOptions): void;
 

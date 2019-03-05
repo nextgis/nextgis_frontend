@@ -56,6 +56,7 @@ export interface ApiItem {
   kindString?: KindString;
 
   type?: Property;
+  comment?: ApiComment;
 }
 
 export type Parameter = ParameterItem | VariableItem | MethodItem;
@@ -119,6 +120,7 @@ export type Property = IntrinsicPropertyType |
   PropertyUnionType |
   ReferencePropertyType |
   TuplePropertyType |
+  TypeOperatorPropertyType |
   ReflectionType;
 
 export interface PropertyType {
@@ -135,10 +137,16 @@ export interface TuplePropertyType extends PropertyType {
   elements: Property[];
 }
 
+export interface TypeOperatorPropertyType extends PropertyType {
+  type: 'typeOperator';
+  operator: 'keyof';
+  target: Property;
+}
+
 export interface ReferencePropertyType extends PropertyType {
   type: 'reference';
-  id: number;
   name: string;
+  id: number;
   typeArguments: Property[];
 }
 

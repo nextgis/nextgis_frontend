@@ -41,7 +41,9 @@ const app = new Vue({
 
     _onLinkClick(element: Element, link: HTMLAnchorElement) {
       const returnEvent = () => {
-        window.open(link.href, link.target);
+        if (link.href) {
+          window.open(link.href, link.target);
+        }
       };
       const href = link.href.replace(document.location.origin, '');
       const match = href.match(/^\/?([a-zA-Z\-]+)(#([a-zA-Z]+))?$/);
