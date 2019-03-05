@@ -43,11 +43,6 @@ export class ApiOption extends Vue {
     this.$root.updateLinks(this.$el);
   }
 
-  // updated() {
-  //   // @ts-ignore
-  //   utility.updateLinks(this.$el);
-  // }
-
   getOptionType(item: ApiItem): string {
     if (item.type) {
       return this.utility.getOptionType(item.type, this.indexes);
