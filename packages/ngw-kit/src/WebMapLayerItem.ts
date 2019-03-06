@@ -44,7 +44,10 @@ export class WebMapLayerItem extends Item<ItemOptions> {
   layer?: LayerAdapter;
   private _pixelsInMeter: number = pixelsInMeterWidth();
 
-  constructor(public webMap: WebMap, item: TreeGroup | TreeLayer, options?: ItemOptions, parent?: WebMapLayerItem) {
+  constructor(public webMap: WebMap,
+              item: TreeGroup | TreeLayer,
+              options?: ItemOptions,
+              parent?: WebMapLayerItem) {
 
     super({ ...WebMapLayerItem.options, ...options });
 
@@ -80,7 +83,9 @@ export class WebMapLayerItem extends Item<ItemOptions> {
       const options: any = {
         maxZoom,
         minZoom,
+        headers: this.options.headers,
         ...item,
+
       };
       newLayer = await this.webMap.addLayer(adapter, options);
     }

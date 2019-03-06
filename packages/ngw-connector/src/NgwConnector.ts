@@ -50,25 +50,30 @@ export class NgwConnector {
     if (credentials) {
       this.options.auth = credentials;
     }
-    // Do not use request('auth.current_user') to avoid circular-references
-    return this.makeQuery('/api/component/auth/current_user', {}, {
-      headers: this.getAuthorizationHeaders(credentials),
+    const options: RequestOptions = {
+      headers: this.getAuthorizationHeaders(credentials)
       // withCredentials: true
-    }).then((data: UserInfo) => {
-      this.user = data;
-      this.emitter.emit('login', data);
-      return data;
-    }).catch((er) => {
-      this.emitter.emit('login:error', er);
-      throw er;
-    });
+    };
+
+    // Do not use request('auth.current_user') to avoid circular-references
+    return this.makeQuery('/api/component/auth/current_user', {}, options)
+      .then((data: UserInfo) => {
+        this.user = data;
+        this.emitter.emit('login', data);
+        return data;
+      }).catch((er) => {
+        this.emitter.emit('login:error', er);
+        throw er;
+      });
   }
 
   getAuthorizationHeaders(credentials?: Credentials): RequestHeaders {
     const client = this.makeClientId(credentials);
-    return {
-      'Authorization': 'Basic ' + client
-    };
+    if (client) {
+      return {
+        'Authorization': 'Basic ' + client
+      };
+    }
   }
 
   makeClientId(credentials?: Credentials) {

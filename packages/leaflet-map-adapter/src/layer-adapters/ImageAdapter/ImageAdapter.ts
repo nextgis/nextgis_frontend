@@ -4,7 +4,7 @@ import { BaseLayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
 import { ImageLayer } from './ImageLayer';
 
 import { Map } from 'leaflet';
-import { BaseAdapter } from './BaseAdapter';
+import { BaseAdapter } from '../BaseAdapter';
 
 export class ImageAdapter extends BaseAdapter<ImageAdapterOptions> implements BaseLayerAdapter<Map> {
 
@@ -15,7 +15,11 @@ export class ImageAdapter extends BaseAdapter<ImageAdapterOptions> implements Ba
     if (url) {
       options = { transparent: true, ...options };
       const updateWmsParamsFromOpt = options.updateWmsParams;
-      this.layer = new ImageLayer(url, { pane: this.pane, ...options });
+      this.layer = new ImageLayer(url, {
+        pane: this.pane,
+        headers: options.headers,
+        ...options,
+      });
       if (updateWmsParamsFromOpt) {
         const updateWmsParams = this.layer.updateWmsParams;
         this.layer.updateWmsParams = function (map: Map) {
