@@ -7,7 +7,7 @@ export class BaseAdapter<O extends AdapterOptions = AdapterOptions, L = any> imp
   protected pane: string = 'order-0';
 
   constructor(public map: L.Map, public options: O) {
-    if (options.order) {
+    if (options.order !== undefined) {
       const pane = 'order-' + options.order;
       let exist = map.getPane(pane);
       if (!exist) {

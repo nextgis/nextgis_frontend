@@ -2,6 +2,7 @@ import WebMap, { BaseLayerAdapter, LngLatBoundsArray } from '@nextgis/webmap';
 import { ResourceItem } from '@nextgis/ngw-connector';
 import { fixUrlStr, getLayerAdapterOptions, updateWmsParams } from './utils';
 import { WebMapLayerItem } from './WebMapLayerItem';
+import { ItemOptions } from '@nextgis/item';
 import { TreeGroup, TreeLayer, NgwLayerAdapterType, WebMapAdapterOptions } from './interfaces';
 
 export class WebMapLayerAdapter implements BaseLayerAdapter {
@@ -77,7 +78,15 @@ export class WebMapLayerAdapter implements BaseLayerAdapter {
       const webmap = await this.getWebMapConfig(this.resourceId);
       if (webmap && webmap.root_item) {
         return new Promise<WebMapLayerItem>((resolve) => {
-          const layer = new WebMapLayerItem(this.options.webMap, webmap.root_item);
+          const options: ItemOptions = {};
+          if (this.options.connector && this.options.connector.options.auth) {
+            const headers = this.options.connector.getAuthorizationHeaders();
+            if (headers) {
+              options.headers = headers;
+            }
+          }
+
+          const layer = new WebMapLayerItem(this.options.webMap, webmap.root_item, options);
           layer.emitter.on('init', () => resolve(layer));
         });
       }
