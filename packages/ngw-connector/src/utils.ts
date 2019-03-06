@@ -48,6 +48,10 @@ export function loadJSON(
       processingResponce();
     } else if (xhr.readyState === 4 && xhr.status === 500) {
       processingResponce();
+    } else if (xhr.readyState === 4 && xhr.status === 401) {
+      error(xhr.statusText);
+    } else if (xhr.readyState === 4) {
+      error('request error');
     }
   };
 
