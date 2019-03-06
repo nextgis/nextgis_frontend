@@ -46,4 +46,5 @@ export interface ICheckOptions<V = boolean> extends ItemBasePropertyOptions<V> {
 
 export interface ItemOptions {
   properties?: Array<ItemPropertyConfig<keyof ItemPropertyTypes>>;
+  headers?: any;
 }

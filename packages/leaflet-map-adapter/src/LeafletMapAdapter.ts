@@ -15,10 +15,10 @@ import {
 } from '@nextgis/webmap';
 import { Map, Control, Layer, ControlPosition, LeafletMouseEvent } from 'leaflet';
 import { EventEmitter } from 'events';
-import { TileAdapter } from './layer-adapters/TileAdapter';
+import { TileAdapter } from './layer-adapters/TileAdapter/TileAdapter';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 import { AttributionControl } from './controls/Attribution';
-import { ImageAdapter } from './layer-adapters/ImageAdapter';
+import { ImageAdapter } from './layer-adapters/ImageAdapter/ImageAdapter';
 import { createControl } from './controls/createControl';
 import { createButtonControl } from './controls/createButtonControl';
 

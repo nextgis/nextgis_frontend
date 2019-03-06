@@ -6,6 +6,7 @@
  */
 
 import L from 'leaflet';
+import { ImageOverlay } from './ImageOverlay';
 
 interface OverlayOptions {
   crs?: null;
@@ -17,6 +18,7 @@ interface OverlayOptions {
   maxZoom?: number;
   zIndex?: number;
   pane?: string;
+  headers?: any;
 }
 
 /*
@@ -44,7 +46,8 @@ export class ImageLayer extends L.Layer {
     isBack: false,
     minZoom: 0,
     maxZoom: 18,
-    pane: 'tilePane'
+    pane: 'tilePane',
+    headers: null
   };
 
   private wmsParams: any;
@@ -116,7 +119,11 @@ export class ImageLayer extends L.Layer {
     // Keep current image overlay in place until new one loads
     // (inspired by esri.leaflet)
     const bounds = this._map.getBounds();
-    const overlay = L.imageOverlay(url, bounds, { 'opacity': 0, pane: this.options.pane });
+    const overlay = new ImageOverlay(url, bounds, {
+      opacity: 0,
+      pane: this.options.pane,
+      headers: this.options.headers
+    });
     overlay.addTo(this._map);
     overlay.once('load', () => {
       if (!this._map) {

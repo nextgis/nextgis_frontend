@@ -92,17 +92,22 @@ export interface MarkerAdapterOptions extends AdapterOptions {
   latLng: LatLng;
 }
 
-export interface TileAdapterOptions extends AdapterOptions {
+interface RasterAdapterOptions extends AdapterOptions {
   url: string;
+  subdomains?: string;
+  headers?: any;
+}
+
+export interface TileAdapterOptions extends RasterAdapterOptions {
+
   tileSize: number;
   subdomains?: string;
 }
 
-export interface ImageAdapterOptions extends AdapterOptions {
+export interface ImageAdapterOptions extends RasterAdapterOptions {
   resourceId: string | number;
   updateWmsParams?: (obj: { [paramName: string]: any }) => object;
   transparent?: boolean;
-  subdomains?: string;
 }
 
 export interface LayerAdapters {
