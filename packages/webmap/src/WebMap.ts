@@ -562,15 +562,17 @@ export class WebMap<M = any, L = any, C = any> {
   }
 
   private async _onLoadSync() {
-    try {
-      for await (const kit of this._starterKits) {
-        if (kit.onLoadSync) {
+
+    for await (const kit of this._starterKits) {
+      if (kit.onLoadSync) {
+        try {
           await kit.onLoadSync.call(kit, this);
+        } catch (er) {
+          console.error(er);
         }
       }
-    } catch (er) {
-      console.error(er);
     }
+
   }
 
   private _updateGeoJsonOptions(options: GeoJsonAdapterOptions) {
