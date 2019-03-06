@@ -14,6 +14,7 @@ import {
 
 } from '@nextgis/webmap';
 import { NgwLayerOptions } from '@nextgis/ngw-kit';
+import { Credentials } from '@nextgis/ngw-connector';
 
 export interface ControlOptions {
   position?: ControlPositions;
@@ -24,6 +25,7 @@ export interface NgwMapOptions<C = any> extends MapOptions {
    * Url of NGW server like this https://demo.nextgis.com
    */
   baseUrl?: string;
+  auth?: Credentials;
   /**
    * Id number of webmap resource from NGW cloud.
    * If specified through an array,
