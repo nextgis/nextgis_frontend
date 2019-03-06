@@ -67,7 +67,7 @@ export class NgwConnector {
       });
   }
 
-  getAuthorizationHeaders(credentials?: Credentials): RequestHeaders {
+  getAuthorizationHeaders(credentials?: Credentials): RequestHeaders | undefined {
     const client = this.makeClientId(credentials);
     if (client) {
       return {
