@@ -25,6 +25,10 @@ export interface NgwMapOptions<C = any> extends MapOptions {
    * Url of NGW server like this https://demo.nextgis.com
    */
   baseUrl?: string;
+  /**
+   * User credentials for authorization in NGW.
+   * Provides the ability to display protected resources
+   */
   auth?: Credentials;
   /**
    * Id number of webmap resource from NGW cloud.
