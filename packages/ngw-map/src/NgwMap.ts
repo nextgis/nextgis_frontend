@@ -76,7 +76,7 @@ const OPTIONS: NgwMapOptions = {
 };
 
 function prepareWebMapOptions(mapAdapter: MapAdapter, options: NgwMapOptions) {
-  const opt = deepmerge(OPTIONS, options);
+  const opt: NgwMapOptions = deepmerge(OPTIONS, options);
   const kits: StarterKit[] = [new QmsKit()];
   // const kits: any[] = [new QmsKit()];
   if (opt.baseUrl && opt.webmapId) {
@@ -84,6 +84,7 @@ function prepareWebMapOptions(mapAdapter: MapAdapter, options: NgwMapOptions) {
 
     kits.push(new NgwKit({
       baseUrl: opt.baseUrl,
+      auth: opt.auth,
       resourceId,
     }));
   }
@@ -122,7 +123,7 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C> {
     super(prepareWebMapOptions(mapAdapter, options));
 
     this.options = deepmerge(OPTIONS, options);
-    this.connector = new NgwConnector({ baseUrl: this.options.baseUrl });
+    this.connector = new NgwConnector({ baseUrl: this.options.baseUrl, auth: this.options.auth });
 
     this._createWebMap().then(() => {
       const container = this.getContainer();
