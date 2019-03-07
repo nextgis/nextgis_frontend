@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "@types/events": "^3.0.0",
-    "@types/node": "^11.10.4",
+    "@types/node": "^11.10.5",
     "rimraf": "^2.6.3",
     "ts-loader": "^5.3.3",
     "tslint": "^5.13.1",

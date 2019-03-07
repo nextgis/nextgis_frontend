@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for="p in parameters" :key="p.id" class="pb-3">
+    <div v-for="p in parameters" :key="p.id" class="">
       <h5 class="pb-1">{{p.name}}</h5>
       <property :item="p"></property>
     </div>

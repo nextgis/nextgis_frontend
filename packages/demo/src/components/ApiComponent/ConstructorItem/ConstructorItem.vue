@@ -11,7 +11,6 @@
       </div>
     </div>
     <api-parameters :item="constructorItem"></api-parameters>
-
   </div>
 </template>
 

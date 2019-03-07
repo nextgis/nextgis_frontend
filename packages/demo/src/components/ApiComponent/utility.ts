@@ -8,7 +8,8 @@ import {
   MethodItem,
   FunctionItem,
   ApiItem,
-  KindString
+  KindString,
+  Declaration
 } from './ApiItem';
 import { Indexes } from '../../store/modules/api';
 
@@ -26,7 +27,7 @@ export function getParameterName(parameter: Parameter) {
 export function getSignatureParameters(parameters: Parameter[], indexes: Indexes): string[] {
   return parameters.map((p) => {
     const typeName = getOptionType(p.type, indexes);
-    return `${getParameterName(p)}${typeName ? ': ' + typeName : ''}`;
+    return `${getParameterName(p)}${typeName ? `<span class="nowrap">: ${typeName}</span>` : ''}`;
   });
 }
 
@@ -88,7 +89,7 @@ export function createReference(option: ReferencePropertyType, indexes: Indexes)
       name = createHref(refOption);
     }
     const args = option.typeArguments.map((x) => getOptionType(x, indexes)).filter((x) => !!x).join(' | ');
-    str += `${name}${args ? `< ${args} >` : ''}`;
+    str += `${name}${args ? `&lt;${args}&gt;` : ''}`;
   } else if (isHref(refOption)) {
     return createHref(refOption);
   } else if (refOption && refOption.kindString === 'Function') {
@@ -102,15 +103,15 @@ export function createReference(option: ReferencePropertyType, indexes: Indexes)
 export function getDeclarationSignatureStr(signatures: Signatures, indexes: Indexes) {
   if ('parameters' in signatures) {
     const parameters = getSignatureParameters(signatures.parameters, indexes);
-    const str = `{ [${parameters.join(', ')}]: ${getOptionType(signatures.type, indexes)} }`;
+    const str = `{[${parameters.join(', ')}]<span class="nowrap">: ${getOptionType(signatures.type, indexes)}</span>}`;
     return str;
   }
 }
 
 export function createDeclarationStr(option: ReflectionType, indexes: Indexes) {
   let str = '';
-  if (option.declaration.name === '__type') {
-    if (option.declaration) {
+  if (option.declaration) {
+    if (option.declaration.name === '__type') {
       if (option.declaration.indexSignature) {
         const signatures = option.declaration.indexSignature;
         str += signatures.map((x) => {
@@ -118,16 +119,18 @@ export function createDeclarationStr(option: ReflectionType, indexes: Indexes) {
         });
       } else if (option.declaration.children) {
         const defs = option.declaration.children.map((x) => {
-          return `${getParameterName(x)}: ${getOptionType(x.type, indexes)}`;
+          return `<span class="nowrap">${getParameterName(x)}: ${getOptionType(x.type, indexes)}</span>`;
         });
-        str += `{ ${defs.join(', ')} }`;
+        str += `{${defs.join(', ')}}`;
+      } else if (option.declaration.signatures) {
+        str += createMethodTypeString(option.declaration, indexes);
       }
     }
   }
   return str;
 }
 
-export function createMethodString(methodItem: MethodItem | FunctionItem, indexes: Indexes): string {
+export function createMethodString(methodItem: MethodItem | FunctionItem | Declaration, indexes: Indexes): string {
   const signatures = methodItem.signatures.map((x) => {
     if ('parameters' in x) {
       // const args = getSignatureParameters(x.parameters, indexes).join(', ');
@@ -140,12 +143,30 @@ export function createMethodString(methodItem: MethodItem | FunctionItem, indexe
   return `${methodItem.name}${signatures || '()'}`;
 }
 
-export function createMethodTypeString(methodItem: MethodItem | FunctionItem, indexes: Indexes): string {
+export function createMethodTypeString(methodItem: MethodItem | FunctionItem | Declaration, indexes: Indexes): string {
   const signatures = methodItem.signatures.map((x) => {
+    let str = '(';
     if ('parameters' in x) {
       const args = getSignatureParameters(x.parameters, indexes).join(', ');
-      return `(${args}): ${getOptionType(x.type, indexes)}`;
+      str += args;
     }
+    str += ')';
+    const toReturn = getOptionType(x.type, indexes);
+    if (toReturn) {
+      str += `<span class="nowrap">: ${toReturn}</span>`;
+    }
+    return str;
   }).join(', ');
-  return `${signatures || '()'}`;
+  return `${signatures}`;
+}
+
+export function createMethodReturn(methodItem: MethodItem | FunctionItem | Declaration, indexes: Indexes): string {
+  const signatures = methodItem.signatures.map((x) => {
+    const toReturn = getOptionType(x.type, indexes);
+    if (toReturn) {
+      return toReturn;
+    }
+    return '';
+  }).filter((x) => !!x).join('| ');
+  return `${signatures}`;
 }

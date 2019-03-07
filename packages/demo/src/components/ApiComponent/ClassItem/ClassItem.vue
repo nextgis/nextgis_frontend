@@ -16,6 +16,10 @@
       <property :item="item"></property>
     </div>
 
+    <div v-if="toReturn">
+      <span class="key-name to-return">return:</span> <code v-html="toReturn"></code>
+    </div>
+
     <example :item="item">
       <template v-slot:header>
         <h4>Examples</h4>
@@ -61,6 +65,14 @@ export { ClassItemComponent as default } from './ClassItem';
 }
 .subheader {
   font-size: 0.9rem;
+}
+
+.constructor-item {
+  font-size: 90%;
+  background: rgba(31, 51, 73, 0.03);
+  border-radius: 3px;
+  padding: 2px 4px;
+  box-shadow: none;
 }
 
 .constructor-item > div {

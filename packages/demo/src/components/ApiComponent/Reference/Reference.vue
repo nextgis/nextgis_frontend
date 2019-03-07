@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="link">
+    <div v-if="link" class="pb-2">
       <span class="key-name">type:</span> <code><a @click.prevent="goTo">{{ parameter.type.name }}</a></code>
     </div>
     <api-option :id="parameter.type.id" v-if="!isNoApi()"></api-option>
