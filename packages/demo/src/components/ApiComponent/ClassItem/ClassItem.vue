@@ -71,7 +71,7 @@ export { ClassItemComponent as default } from './ClassItem';
   padding: 0;
 }
 
-.constructor-item code {
-  margin-bottom: 16px;
-}
+// .constructor-item code {
+//   margin-bottom: 16px;
+// }
 </style>

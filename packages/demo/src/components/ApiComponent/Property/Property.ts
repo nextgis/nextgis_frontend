@@ -1,5 +1,5 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
-import { ApiItem, Parameter, MethodItem } from '../ApiItem';
+import { ApiItem, Parameter, MethodItem, Property as PropertyItem } from '../ApiItem';
 import Reference from '../Reference/Reference.vue';
 import * as utility from '../utility';
 
@@ -7,12 +7,20 @@ import * as utility from '../utility';
   components: { Reference }
 })
 export class Property extends Vue {
-  @Prop() item: Property;
+  @Prop() item: PropertyItem;
 
   utility = utility;
 
   get indexes(): { [id: number]: ApiItem } {
     return this.$store.state.api.indexes;
+  }
+
+  get defaultValue() {
+    const tags = this.item.comment && this.item.comment.tags;
+    const defTag = tags && tags.find((x) => x.tag === 'default');
+    if (defTag) {
+      return defTag.text;
+    }
   }
 
   getOptionType(item: ApiItem): string {

@@ -5,8 +5,8 @@
     </div>
 
     <div v-for="s in getSignaturesStr(constructorItem)" :key="s" >
-      <div v-if="constructorItem.kindString === 'Constructor'">
-        <h4 class="pb-3">Constructor</h4>
+      <div v-if="constructorItem.kindString === 'Constructor'" class="pb-2">
+        <h4 class="pb-2">Constructor</h4>
         <pre v-highlightjs="s"><code class="typescript"></code></pre>
       </div>
     </div>

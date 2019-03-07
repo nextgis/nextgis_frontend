@@ -43,4 +43,15 @@ export { ApiComponent as default } from './ApiComponent';
   overflow: ellipsis;
   white-space: nowrap;
 }
+
+code {
+    white-space: pre-wrap;
+    font-size: 90%;
+    line-height: 1.5em;
+    background: rgba(31,51,73,.05);
+    border-radius: 3px;
+    padding: 2px 4px;
+    color: #5b7897!important;
+    box-shadow: none;
+}
 </style>
