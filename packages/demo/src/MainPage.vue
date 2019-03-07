@@ -90,4 +90,19 @@ export { MainPage as default } from './MainPage';
   .main-page {
     font-weight: bold;
   }
+
+  .nowrap {
+    white-space: nowrap!important;
+  }
+
+  code {
+    white-space: pre-wrap!important;
+    font-size: 90%!important;
+    line-height: 1.5em!important;
+    background: rgba(31,51,73,.05)!important;
+    border-radius: 3px!important;
+    padding: 2px 4px!important;
+    color: #5b7897!important;
+    box-shadow: none!important;
+}
 </style>

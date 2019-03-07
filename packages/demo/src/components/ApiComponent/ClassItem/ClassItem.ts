@@ -14,13 +14,21 @@ import { Indexes } from '../../../store/modules/api';
   components: { ConstructorItemComponent, Comment, Example, Class, Property }
 })
 export class ClassItemComponent extends Vue {
-  @Prop() item: ClassItem;
+  @Prop() item: ClassItem | MethodItem;
   @Prop() showMembers: boolean;
   indexes: Indexes;
   utility = utility;
 
   get allowedMembers() {
     return this.getAllowedMembers(this.item);
+  }
+
+  get toReturn() {
+
+    if (this.item.kindString === 'Method') {
+      return this.utility.createMethodReturn(this.item, this.indexes);
+    }
+    return '';
   }
 
   beforeCreate() {
