@@ -26,19 +26,15 @@ export interface Source {
 }
 
 export interface Tag {
-  tag: string;
-}
-
-export interface ExampleTag extends Tag {
-  tag: 'example';
+  tag: 'example' | 'default';
   text: string;
 }
 
-type Tags = ExampleTag;
+type Tags = Tag[];
 
 export interface ApiComment {
   shortText?: string;
-  tags?: Tags[];
+  tags?: Tags;
 }
 
 export interface ApiItem {
@@ -125,6 +121,7 @@ export type Property = IntrinsicPropertyType |
 
 export interface PropertyType {
   type: string;
+  comment?: ApiComment;
 }
 
 export interface IntrinsicPropertyType extends PropertyType {
