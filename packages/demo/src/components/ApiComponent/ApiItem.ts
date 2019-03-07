@@ -159,9 +159,10 @@ interface IndexSignature extends ApiItem {
   type: Property;
 }
 
-interface Declaration extends ApiItem {
+export interface Declaration extends ApiItem {
   kindString: 'Type literal';
   indexSignature?: IndexSignature[];
+  signatures?: Signatures[];
   children?: VariableItem[];
   name: '__type';
 }
