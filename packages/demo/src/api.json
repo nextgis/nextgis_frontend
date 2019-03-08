@@ -40827,7 +40827,7 @@
 							"sources": [
 								{
 									"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-									"line": 50,
+									"line": 49,
 									"character": 17
 								}
 							],
@@ -40853,7 +40853,7 @@
 											"sources": [
 												{
 													"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-													"line": 44,
+													"line": 43,
 													"character": 15
 												}
 											],
@@ -40875,7 +40875,7 @@
 											"sources": [
 												{
 													"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-													"line": 43,
+													"line": 42,
 													"character": 8
 												}
 											],
@@ -40916,7 +40916,7 @@
 							"sources": [
 								{
 									"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-									"line": 52,
+									"line": 51,
 									"character": 19
 								}
 							],
@@ -40942,7 +40942,7 @@
 							"sources": [
 								{
 									"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-									"line": 54,
+									"line": 53,
 									"character": 9
 								}
 							],
@@ -40968,7 +40968,7 @@
 							"sources": [
 								{
 									"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-									"line": 49,
+									"line": 48,
 									"character": 15
 								}
 							],
@@ -41050,7 +41050,7 @@
 							"sources": [
 								{
 									"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-									"line": 53,
+									"line": 52,
 									"character": 18
 								}
 							],
@@ -41077,7 +41077,7 @@
 							"sources": [
 								{
 									"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-									"line": 56,
+									"line": 55,
 									"character": 5
 								}
 							],
@@ -41148,7 +41148,7 @@
 							"sources": [
 								{
 									"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-									"line": 152,
+									"line": 151,
 									"character": 12
 								}
 							],
@@ -41197,7 +41197,7 @@
 							"sources": [
 								{
 									"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-									"line": 59,
+									"line": 58,
 									"character": 8
 								}
 							],
@@ -41250,7 +41250,7 @@
 							"sources": [
 								{
 									"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-									"line": 148,
+									"line": 147,
 									"character": 21
 								}
 							],
@@ -41310,7 +41310,7 @@
 							"sources": [
 								{
 									"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-									"line": 144,
+									"line": 143,
 									"character": 15
 								}
 							],
@@ -41358,7 +41358,7 @@
 							"sources": [
 								{
 									"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-									"line": 133,
+									"line": 132,
 									"character": 5
 								}
 							],
@@ -41407,7 +41407,7 @@
 							"sources": [
 								{
 									"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-									"line": 113,
+									"line": 112,
 									"character": 11
 								}
 							],
@@ -41455,7 +41455,7 @@
 							"sources": [
 								{
 									"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-									"line": 77,
+									"line": 76,
 									"character": 14
 								}
 							],
@@ -41510,7 +41510,7 @@
 							"sources": [
 								{
 									"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-									"line": 140,
+									"line": 139,
 									"character": 17
 								}
 							]
@@ -41553,7 +41553,7 @@
 							"sources": [
 								{
 									"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-									"line": 128,
+									"line": 127,
 									"character": 9
 								}
 							],
@@ -41600,7 +41600,7 @@
 							"sources": [
 								{
 									"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-									"line": 176,
+									"line": 175,
 									"character": 11
 								}
 							],
@@ -41647,7 +41647,7 @@
 							"sources": [
 								{
 									"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-									"line": 225,
+									"line": 224,
 									"character": 12
 								}
 							],
@@ -41702,7 +41702,7 @@
 							"sources": [
 								{
 									"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-									"line": 87,
+									"line": 86,
 									"character": 11
 								}
 							],
@@ -41749,7 +41749,7 @@
 							"sources": [
 								{
 									"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-									"line": 160,
+									"line": 159,
 									"character": 15
 								}
 							],
@@ -41796,7 +41796,7 @@
 							"sources": [
 								{
 									"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-									"line": 166,
+									"line": 165,
 									"character": 13
 								}
 							],
@@ -41849,7 +41849,7 @@
 							"sources": [
 								{
 									"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-									"line": 106,
+									"line": 105,
 									"character": 11
 								}
 							],
@@ -41901,7 +41901,7 @@
 							"sources": [
 								{
 									"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-									"line": 81,
+									"line": 80,
 									"character": 11
 								}
 							],
@@ -41959,7 +41959,7 @@
 							"sources": [
 								{
 									"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-									"line": 180,
+									"line": 179,
 									"character": 17
 								}
 							],
@@ -42053,7 +42053,7 @@
 													"sources": [
 														{
 															"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-															"line": 184,
+															"line": 183,
 															"character": 50
 														}
 													]
@@ -42070,7 +42070,7 @@
 							"sources": [
 								{
 									"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-									"line": 184,
+									"line": 183,
 									"character": 15
 								}
 							],
@@ -42129,7 +42129,7 @@
 							"sources": [
 								{
 									"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-									"line": 99,
+									"line": 98,
 									"character": 9
 								}
 							],
@@ -42181,7 +42181,7 @@
 							"sources": [
 								{
 									"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-									"line": 122,
+									"line": 121,
 									"character": 9
 								}
 							],
@@ -42228,7 +42228,7 @@
 							"sources": [
 								{
 									"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-									"line": 170,
+									"line": 169,
 									"character": 11
 								}
 							],
@@ -42258,7 +42258,7 @@
 									"sources": [
 										{
 											"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-											"line": 47,
+											"line": 46,
 											"character": 46
 										}
 									],
@@ -42281,7 +42281,7 @@
 							"sources": [
 								{
 									"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-									"line": 47,
+									"line": 46,
 									"character": 9
 								}
 							],
@@ -42311,7 +42311,7 @@
 									"sources": [
 										{
 											"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-											"line": 44,
+											"line": 43,
 											"character": 15
 										}
 									],
@@ -42333,7 +42333,7 @@
 									"sources": [
 										{
 											"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-											"line": 43,
+											"line": 42,
 											"character": 8
 										}
 									],
@@ -42357,7 +42357,7 @@
 							"sources": [
 								{
 									"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-									"line": 42,
+									"line": 41,
 									"character": 24
 								}
 							],
@@ -42387,7 +42387,7 @@
 									"sources": [
 										{
 											"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-											"line": 36,
+											"line": 35,
 											"character": 11
 										}
 									],
@@ -42409,7 +42409,7 @@
 									"sources": [
 										{
 											"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-											"line": 34,
+											"line": 33,
 											"character": 9
 										}
 									],
@@ -42431,7 +42431,7 @@
 									"sources": [
 										{
 											"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-											"line": 35,
+											"line": 34,
 											"character": 8
 										}
 									],
@@ -42457,7 +42457,7 @@
 							"sources": [
 								{
 									"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-									"line": 33,
+									"line": 32,
 									"character": 22
 								}
 							],
@@ -42520,7 +42520,7 @@
 					"sources": [
 						{
 							"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-							"line": 31,
+							"line": 30,
 							"character": 30
 						}
 					],
@@ -42627,7 +42627,7 @@
 							"sources": [
 								{
 									"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-									"line": 26,
+									"line": 25,
 									"character": 4
 								}
 							],
@@ -42816,7 +42816,7 @@
 					"sources": [
 						{
 							"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-							"line": 25,
+							"line": 24,
 							"character": 41
 						}
 					],
@@ -42848,7 +42848,7 @@
 					"sources": [
 						{
 							"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-							"line": 29,
+							"line": 28,
 							"character": 16
 						}
 					],
@@ -42863,7 +42863,7 @@
 							"sources": [
 								{
 									"fileName": "leaflet-map-adapter/src/LeafletMapAdapter.ts",
-									"line": 29,
+									"line": 28,
 									"character": 21
 								}
 							]
@@ -56148,11 +56148,11 @@
 						"isExported": true
 					},
 					"comment": {
-						"shortText": "Displaying the {@link ngw-map-api | NgwMap}\nusing the  {@link leaflet-map-adapter-api | LeafletMapAdapter}",
+						"shortText": "Displaying the [NgwMap](ngw-map-api)\nusing the  [LeafletMapAdapter](leaflet-map-adapter-api)",
 						"tags": [
 							{
 								"tag": "example",
-								"text": "\n```javascript\n// Base initialization\nimport NgwLeaflet from '@nextgis/ngw-leaflet';\n\nconst ngwMap = new NgwLeaflet({\n  target: 'map',\n  qmsId: 487,\n  baseUrl: 'https://demo.nextgis.com',\n  webmapId: 3985\n});\n```\n"
+								"text": "\n```javascript\n// Base initialization\n// [live demo](http://code.nextgis.com/ngw-leaflet-examples-ngw_webmap)\nimport NgwMap from '@nextgis/ngw-leaflet';\n\nconst ngwMap = new NgwMap({\n  target: 'map',\n  qmsId: 487,\n  baseUrl: 'https://demo.nextgis.com',\n  webmapId: 3985\n});\n```\n"
 							}
 						]
 					},
@@ -56224,7 +56224,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-leaflet/src/index.ts",
-									"line": 28,
+									"line": 29,
 									"character": 40
 								}
 							],
@@ -56245,7 +56245,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 109,
+									"line": 119,
 									"character": 15
 								}
 							],
@@ -56288,7 +56288,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 109,
+											"line": 119,
 											"character": 16
 										}
 									]
@@ -56316,7 +56316,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 108,
+									"line": 118,
 									"character": 11
 								}
 							],
@@ -56547,7 +56547,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 107,
+									"line": 117,
 									"character": 9
 								}
 							],
@@ -56615,7 +56615,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 104,
+									"line": 114,
 									"character": 16
 								}
 							],
@@ -56920,7 +56920,7 @@
 										"typeArguments": [
 											{
 												"type": "intrinsic",
-												"name": "void"
+												"name": "any"
 											}
 										]
 									},
@@ -56939,7 +56939,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 167,
+									"line": 177,
 									"character": 18
 								}
 							],
@@ -56981,7 +56981,13 @@
 									"kindString": "Call signature",
 									"flags": {},
 									"comment": {
-										"shortText": "Create layer from data. Set style and behavior for selection."
+										"shortText": "Create layer from GeoJson data. Set style and behavior for selection.",
+										"tags": [
+											{
+												"tag": "example",
+												"text": "\n```javascript\n// Add simple layer\nngwMap.addGeoJsonLayer({ data: geojson, paint: { color: 'red' } });\n\n// Add styled by feature property layer with selection behavior\nngwMap.addGeoJsonLayer({\n  data: geojson,\n  paint: function (feature) {\n    return { color: feature.properties.color, opacity: 0.5 }\n  },\n selectedPaint: function (feature) {\n   return { color: feature.properties.selcolor, opacity: 1 }\n },\n selectable: true,\n multiselect: true\n});\n\n// Add marker layer styled with use [Icons](icons)\nngwMap.addGeoJsonLayer({ data: geojson, paint: NgwMap.getIcon({ color: 'orange' })});\n\n// work with added layer\nconst layer = ngwMap.addGeoJsonLayer({ data: geojson, id: 'my_layer_name'});\n// access layer by id\nngwMap.showLayer('my_layer_name');\n// or access layer by instance\nngwMap.showLayer(layer);\n```\n"
+											}
+										]
 									},
 									"typeParameter": [
 										{
@@ -57197,7 +57203,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 247,
+									"line": 286,
 									"character": 17
 								}
 							],
@@ -57439,7 +57445,7 @@
 										"tags": [
 											{
 												"tag": "example",
-												"text": "\n```javascript\nvar ngwMap = new NgwMap({ baseUrl: 'https://demo.nextgis.com', target: 'map'});\n// add raster layer resourceId is the style of 4004 layer\nngwMap.addNgwLayer({resourceId: 4005});\n// add vector data from layer GEOJSON source\nngwMap.addNgwLayer({\n  resourceId: 4038,\n  adapter: 'GEOJSON'\n  adapterOptions: { paint: { color: 'red' } }\n});\n```\n"
+												"text": "\n```javascript\nvar ngwMap = new NgwMap({ baseUrl: 'https://demo.nextgis.com', target: 'map' });\n// add raster layer resourceId is the style of 4004 layer\nngwMap.addNgwLayer({ resourceId: 4005 });\n// add vector data from layer GEOJSON source\nngwMap.addNgwLayer({\n  resourceId: 4038,\n  adapter: 'GEOJSON',\n  adapterOptions: { paint: { color: 'red' } }\n});\n```\n"
 											}
 										]
 									},
@@ -57490,7 +57496,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 193,
+									"line": 203,
 									"character": 19
 								}
 							],
@@ -58012,7 +58018,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 140,
+									"line": 150,
 									"character": 5
 								}
 							],
@@ -60064,7 +60070,13 @@
 									"kindString": "Call signature",
 									"flags": {},
 									"comment": {
-										"shortText": "Move map to layer. If the layer is NGW resource, extent will be received from the server"
+										"shortText": "Move map to layer. If the layer is NGW resource, extent will be received from the server",
+										"tags": [
+											{
+												"tag": "example",
+												"text": "\n```javascript\nconst ngwLayer = ngwMap.addNgwLayer({ id: 'ngw_layer_name', resourceId: 4005 });\nngwMap.zoomToLayer(ngwLayer);\nngwMap.zoomToLayer('ngw_layer_name');\n```\n"
+											}
+										]
 									},
 									"parameters": [
 										{
@@ -60082,10 +60094,6 @@
 													{
 														"type": "intrinsic",
 														"name": "string"
-													},
-													{
-														"type": "intrinsic",
-														"name": "number"
 													},
 													{
 														"type": "reference",
@@ -60125,7 +60133,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 267,
+									"line": 313,
 									"character": 13
 								}
 							],
@@ -60178,7 +60186,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 105,
+									"line": 115,
 									"character": 16
 								}
 							],
@@ -60209,7 +60217,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 103,
+											"line": 113,
 											"character": 33
 										}
 									],
@@ -60232,7 +60240,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 103,
+									"line": 113,
 									"character": 19
 								}
 							],
@@ -60267,7 +60275,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 102,
+											"line": 112,
 											"character": 28
 										}
 									],
@@ -60290,7 +60298,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 102,
+									"line": 112,
 									"character": 14
 								}
 							],
@@ -60398,7 +60406,7 @@
 					"sources": [
 						{
 							"fileName": "ngw-leaflet/src/index.ts",
-							"line": 28,
+							"line": 29,
 							"character": 23
 						}
 					],
@@ -60447,7 +60455,13 @@
 						"isExported": true
 					},
 					"comment": {
-						"shortText": "Base class containing the logic of interaction WebMap with NextGIS services."
+						"shortText": "Base class containing the logic of interaction WebMap with NextGIS services.",
+						"tags": [
+							{
+								"tag": "example",
+								"text": "\n```javascript\nimport NgwMap from '@nextgis/ngw-map';\nimport MapAdapter from '@nextgis/leaflet-map-adapter';\n// styles are not included in the leaflet-map-adapter\nimport 'leaflet/dist/leaflet.css';\n\nconst ngwMap = new NgwMap(new MapAdapter(), {\n  target: 'map',\n  qmsId: 487,\n  baseUrl: 'https://demo.nextgis.com',\n  webmapId: 3985\n});\n```\n"
+							}
+						]
 					},
 					"typeParameter": [
 						{
@@ -60543,7 +60557,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 116,
+									"line": 126,
 									"character": 9
 								}
 							],
@@ -60564,7 +60578,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 109,
+									"line": 119,
 									"character": 15
 								}
 							],
@@ -60607,7 +60621,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 109,
+											"line": 119,
 											"character": 16
 										}
 									]
@@ -60630,7 +60644,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 108,
+									"line": 118,
 									"character": 11
 								}
 							],
@@ -60856,7 +60870,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 107,
+									"line": 117,
 									"character": 9
 								}
 							],
@@ -60919,7 +60933,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 104,
+									"line": 114,
 									"character": 16
 								}
 							],
@@ -61219,7 +61233,7 @@
 										"typeArguments": [
 											{
 												"type": "intrinsic",
-												"name": "void"
+												"name": "any"
 											}
 										]
 									},
@@ -61233,7 +61247,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 167,
+									"line": 177,
 									"character": 18
 								}
 							],
@@ -61270,7 +61284,13 @@
 									"kindString": "Call signature",
 									"flags": {},
 									"comment": {
-										"shortText": "Create layer from data. Set style and behavior for selection."
+										"shortText": "Create layer from GeoJson data. Set style and behavior for selection.",
+										"tags": [
+											{
+												"tag": "example",
+												"text": "\n```javascript\n// Add simple layer\nngwMap.addGeoJsonLayer({ data: geojson, paint: { color: 'red' } });\n\n// Add styled by feature property layer with selection behavior\nngwMap.addGeoJsonLayer({\n  data: geojson,\n  paint: function (feature) {\n    return { color: feature.properties.color, opacity: 0.5 }\n  },\n selectedPaint: function (feature) {\n   return { color: feature.properties.selcolor, opacity: 1 }\n },\n selectable: true,\n multiselect: true\n});\n\n// Add marker layer styled with use [Icons](icons)\nngwMap.addGeoJsonLayer({ data: geojson, paint: NgwMap.getIcon({ color: 'orange' })});\n\n// work with added layer\nconst layer = ngwMap.addGeoJsonLayer({ data: geojson, id: 'my_layer_name'});\n// access layer by id\nngwMap.showLayer('my_layer_name');\n// or access layer by instance\nngwMap.showLayer(layer);\n```\n"
+											}
+										]
 									},
 									"typeParameter": [
 										{
@@ -61481,7 +61501,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 247,
+									"line": 286,
 									"character": 17
 								}
 							]
@@ -61718,7 +61738,7 @@
 										"tags": [
 											{
 												"tag": "example",
-												"text": "\n```javascript\nvar ngwMap = new NgwMap({ baseUrl: 'https://demo.nextgis.com', target: 'map'});\n// add raster layer resourceId is the style of 4004 layer\nngwMap.addNgwLayer({resourceId: 4005});\n// add vector data from layer GEOJSON source\nngwMap.addNgwLayer({\n  resourceId: 4038,\n  adapter: 'GEOJSON'\n  adapterOptions: { paint: { color: 'red' } }\n});\n```\n"
+												"text": "\n```javascript\nvar ngwMap = new NgwMap({ baseUrl: 'https://demo.nextgis.com', target: 'map' });\n// add raster layer resourceId is the style of 4004 layer\nngwMap.addNgwLayer({ resourceId: 4005 });\n// add vector data from layer GEOJSON source\nngwMap.addNgwLayer({\n  resourceId: 4038,\n  adapter: 'GEOJSON',\n  adapterOptions: { paint: { color: 'red' } }\n});\n```\n"
 											}
 										]
 									},
@@ -61764,7 +61784,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 193,
+									"line": 203,
 									"character": 19
 								}
 							]
@@ -62276,7 +62296,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 140,
+									"line": 150,
 									"character": 5
 								}
 							]
@@ -64323,7 +64343,13 @@
 									"kindString": "Call signature",
 									"flags": {},
 									"comment": {
-										"shortText": "Move map to layer. If the layer is NGW resource, extent will be received from the server"
+										"shortText": "Move map to layer. If the layer is NGW resource, extent will be received from the server",
+										"tags": [
+											{
+												"tag": "example",
+												"text": "\n```javascript\nconst ngwLayer = ngwMap.addNgwLayer({ id: 'ngw_layer_name', resourceId: 4005 });\nngwMap.zoomToLayer(ngwLayer);\nngwMap.zoomToLayer('ngw_layer_name');\n```\n"
+											}
+										]
 									},
 									"parameters": [
 										{
@@ -64341,10 +64367,6 @@
 													{
 														"type": "intrinsic",
 														"name": "string"
-													},
-													{
-														"type": "intrinsic",
-														"name": "number"
 													},
 													{
 														"type": "reference",
@@ -64379,7 +64401,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 267,
+									"line": 313,
 									"character": 13
 								}
 							]
@@ -64422,7 +64444,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 105,
+									"line": 115,
 									"character": 16
 								}
 							]
@@ -64448,7 +64470,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 103,
+											"line": 113,
 											"character": 33
 										}
 									],
@@ -64471,7 +64493,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 103,
+									"line": 113,
 									"character": 19
 								}
 							],
@@ -64501,7 +64523,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 102,
+											"line": 112,
 											"character": 28
 										}
 									],
@@ -64524,7 +64546,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 102,
+									"line": 112,
 									"character": 14
 								}
 							],
@@ -64627,7 +64649,7 @@
 					"sources": [
 						{
 							"fileName": "ngw-map/src/NgwMap.ts",
-							"line": 100,
+							"line": 110,
 							"character": 19
 						}
 					],
@@ -65430,7 +65452,7 @@
 											"sources": [
 												{
 													"fileName": "ngw-map/src/NgwMap.ts",
-													"line": 92,
+													"line": 87,
 													"character": 14
 												}
 											],
@@ -65463,7 +65485,7 @@
 											"sources": [
 												{
 													"fileName": "ngw-map/src/NgwMap.ts",
-													"line": 93,
+													"line": 88,
 													"character": 15
 												}
 											],
@@ -65495,7 +65517,7 @@
 					"sources": [
 						{
 							"fileName": "ngw-map/src/NgwMap.ts",
-							"line": 78,
+							"line": 73,
 							"character": 29
 						}
 					]
@@ -65518,7 +65540,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 48,
+									"line": 43,
 									"character": 9
 								}
 							],
@@ -65537,7 +65559,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 49,
+									"line": 44,
 									"character": 10
 								}
 							],
@@ -65559,7 +65581,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 47,
+									"line": 42,
 									"character": 8
 								}
 							],
@@ -65592,7 +65614,7 @@
 											"sources": [
 												{
 													"fileName": "ngw-map/src/NgwMap.ts",
-													"line": 54,
+													"line": 49,
 													"character": 23
 												}
 											],
@@ -65614,7 +65636,7 @@
 											"sources": [
 												{
 													"fileName": "ngw-map/src/NgwMap.ts",
-													"line": 53,
+													"line": 48,
 													"character": 14
 												}
 											],
@@ -65638,7 +65660,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 52,
+											"line": 47,
 											"character": 15
 										}
 									],
@@ -65663,7 +65685,7 @@
 											"sources": [
 												{
 													"fileName": "ngw-map/src/NgwMap.ts",
-													"line": 51,
+													"line": 46,
 													"character": 20
 												}
 											],
@@ -65686,7 +65708,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 51,
+											"line": 46,
 											"character": 8
 										}
 									],
@@ -65709,7 +65731,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 50,
+									"line": 45,
 									"character": 17
 								}
 							],
@@ -65734,7 +65756,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 74,
+											"line": 69,
 											"character": 8
 										}
 									],
@@ -65761,7 +65783,7 @@
 											"sources": [
 												{
 													"fileName": "ngw-map/src/NgwMap.ts",
-													"line": 62,
+													"line": 57,
 													"character": 11
 												}
 											],
@@ -65780,7 +65802,7 @@
 											"sources": [
 												{
 													"fileName": "ngw-map/src/NgwMap.ts",
-													"line": 63,
+													"line": 58,
 													"character": 13
 												}
 											],
@@ -65799,7 +65821,7 @@
 											"sources": [
 												{
 													"fileName": "ngw-map/src/NgwMap.ts",
-													"line": 64,
+													"line": 59,
 													"character": 12
 												}
 											],
@@ -65818,7 +65840,7 @@
 											"sources": [
 												{
 													"fileName": "ngw-map/src/NgwMap.ts",
-													"line": 65,
+													"line": 60,
 													"character": 12
 												}
 											],
@@ -65837,7 +65859,7 @@
 											"sources": [
 												{
 													"fileName": "ngw-map/src/NgwMap.ts",
-													"line": 61,
+													"line": 56,
 													"character": 10
 												}
 											],
@@ -65864,7 +65886,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 60,
+											"line": 55,
 											"character": 10
 										}
 									],
@@ -65889,7 +65911,7 @@
 											"sources": [
 												{
 													"fileName": "ngw-map/src/NgwMap.ts",
-													"line": 69,
+													"line": 64,
 													"character": 11
 												}
 											],
@@ -65908,7 +65930,7 @@
 											"sources": [
 												{
 													"fileName": "ngw-map/src/NgwMap.ts",
-													"line": 70,
+													"line": 65,
 													"character": 13
 												}
 											],
@@ -65927,7 +65949,7 @@
 											"sources": [
 												{
 													"fileName": "ngw-map/src/NgwMap.ts",
-													"line": 71,
+													"line": 66,
 													"character": 12
 												}
 											],
@@ -65946,7 +65968,7 @@
 											"sources": [
 												{
 													"fileName": "ngw-map/src/NgwMap.ts",
-													"line": 68,
+													"line": 63,
 													"character": 10
 												}
 											],
@@ -65965,7 +65987,7 @@
 											"sources": [
 												{
 													"fileName": "ngw-map/src/NgwMap.ts",
-													"line": 72,
+													"line": 67,
 													"character": 12
 												}
 											],
@@ -65992,7 +66014,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 67,
+											"line": 62,
 											"character": 8
 										}
 									],
@@ -66022,7 +66044,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 59,
+									"line": 54,
 									"character": 26
 								}
 							],
@@ -66054,7 +66076,7 @@
 					"sources": [
 						{
 							"fileName": "ngw-map/src/NgwMap.ts",
-							"line": 46,
+							"line": 41,
 							"character": 13
 						}
 					],
@@ -66081,7 +66103,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 34,
+									"line": 29,
 									"character": 13
 								}
 							],
@@ -66104,7 +66126,7 @@
 					"sources": [
 						{
 							"fileName": "ngw-map/src/NgwMap.ts",
-							"line": 32,
+							"line": 27,
 							"character": 10
 						}
 					],
@@ -66131,7 +66153,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 39,
+									"line": 34,
 									"character": 14
 								}
 							],
@@ -66150,7 +66172,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 42,
+									"line": 37,
 									"character": 19
 								}
 							],
@@ -66169,7 +66191,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 40,
+									"line": 35,
 									"character": 14
 								}
 							],
@@ -66188,7 +66210,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 43,
+									"line": 38,
 									"character": 16
 								}
 							],
@@ -66207,7 +66229,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 38,
+									"line": 33,
 									"character": 9
 								}
 							],
@@ -66226,7 +66248,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 41,
+									"line": 36,
 									"character": 11
 								}
 							],
@@ -66254,7 +66276,7 @@
 					"sources": [
 						{
 							"fileName": "ngw-map/src/NgwMap.ts",
-							"line": 37,
+							"line": 32,
 							"character": 15
 						}
 					],
@@ -66412,7 +66434,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 109,
+									"line": 119,
 									"character": 15
 								}
 							],
@@ -66455,7 +66477,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 109,
+											"line": 119,
 											"character": 16
 										}
 									]
@@ -66483,7 +66505,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 108,
+									"line": 118,
 									"character": 11
 								}
 							],
@@ -66714,7 +66736,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 107,
+									"line": 117,
 									"character": 9
 								}
 							],
@@ -66782,7 +66804,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 104,
+									"line": 114,
 									"character": 16
 								}
 							],
@@ -67087,7 +67109,7 @@
 										"typeArguments": [
 											{
 												"type": "intrinsic",
-												"name": "void"
+												"name": "any"
 											}
 										]
 									},
@@ -67106,7 +67128,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 167,
+									"line": 177,
 									"character": 18
 								}
 							],
@@ -67148,7 +67170,13 @@
 									"kindString": "Call signature",
 									"flags": {},
 									"comment": {
-										"shortText": "Create layer from data. Set style and behavior for selection."
+										"shortText": "Create layer from GeoJson data. Set style and behavior for selection.",
+										"tags": [
+											{
+												"tag": "example",
+												"text": "\n```javascript\n// Add simple layer\nngwMap.addGeoJsonLayer({ data: geojson, paint: { color: 'red' } });\n\n// Add styled by feature property layer with selection behavior\nngwMap.addGeoJsonLayer({\n  data: geojson,\n  paint: function (feature) {\n    return { color: feature.properties.color, opacity: 0.5 }\n  },\n selectedPaint: function (feature) {\n   return { color: feature.properties.selcolor, opacity: 1 }\n },\n selectable: true,\n multiselect: true\n});\n\n// Add marker layer styled with use [Icons](icons)\nngwMap.addGeoJsonLayer({ data: geojson, paint: NgwMap.getIcon({ color: 'orange' })});\n\n// work with added layer\nconst layer = ngwMap.addGeoJsonLayer({ data: geojson, id: 'my_layer_name'});\n// access layer by id\nngwMap.showLayer('my_layer_name');\n// or access layer by instance\nngwMap.showLayer(layer);\n```\n"
+											}
+										]
 									},
 									"typeParameter": [
 										{
@@ -67364,7 +67392,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 247,
+									"line": 286,
 									"character": 17
 								}
 							],
@@ -68275,7 +68303,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 140,
+									"line": 150,
 									"character": 5
 								}
 							],
@@ -70327,7 +70355,13 @@
 									"kindString": "Call signature",
 									"flags": {},
 									"comment": {
-										"shortText": "Move map to layer. If the layer is NGW resource, extent will be received from the server"
+										"shortText": "Move map to layer. If the layer is NGW resource, extent will be received from the server",
+										"tags": [
+											{
+												"tag": "example",
+												"text": "\n```javascript\nconst ngwLayer = ngwMap.addNgwLayer({ id: 'ngw_layer_name', resourceId: 4005 });\nngwMap.zoomToLayer(ngwLayer);\nngwMap.zoomToLayer('ngw_layer_name');\n```\n"
+											}
+										]
 									},
 									"parameters": [
 										{
@@ -70345,10 +70379,6 @@
 													{
 														"type": "intrinsic",
 														"name": "string"
-													},
-													{
-														"type": "intrinsic",
-														"name": "number"
 													},
 													{
 														"type": "reference",
@@ -70388,7 +70418,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 267,
+									"line": 313,
 									"character": 13
 								}
 							],
@@ -70441,7 +70471,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 105,
+									"line": 115,
 									"character": 16
 								}
 							],
@@ -70472,7 +70502,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 103,
+											"line": 113,
 											"character": 33
 										}
 									],
@@ -70495,7 +70525,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 103,
+									"line": 113,
 									"character": 19
 								}
 							],
@@ -70530,7 +70560,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 102,
+											"line": 112,
 											"character": 28
 										}
 									],
@@ -70553,7 +70583,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 102,
+									"line": 112,
 									"character": 14
 								}
 							],
@@ -70798,7 +70828,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 109,
+									"line": 119,
 									"character": 15
 								}
 							],
@@ -70841,7 +70871,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 109,
+											"line": 119,
 											"character": 16
 										}
 									]
@@ -70869,7 +70899,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 108,
+									"line": 118,
 									"character": 11
 								}
 							],
@@ -71100,7 +71130,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 107,
+									"line": 117,
 									"character": 9
 								}
 							],
@@ -71168,7 +71198,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 104,
+									"line": 114,
 									"character": 16
 								}
 							],
@@ -71473,7 +71503,7 @@
 										"typeArguments": [
 											{
 												"type": "intrinsic",
-												"name": "void"
+												"name": "any"
 											}
 										]
 									},
@@ -71492,7 +71522,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 167,
+									"line": 177,
 									"character": 18
 								}
 							],
@@ -71534,7 +71564,13 @@
 									"kindString": "Call signature",
 									"flags": {},
 									"comment": {
-										"shortText": "Create layer from data. Set style and behavior for selection."
+										"shortText": "Create layer from GeoJson data. Set style and behavior for selection.",
+										"tags": [
+											{
+												"tag": "example",
+												"text": "\n```javascript\n// Add simple layer\nngwMap.addGeoJsonLayer({ data: geojson, paint: { color: 'red' } });\n\n// Add styled by feature property layer with selection behavior\nngwMap.addGeoJsonLayer({\n  data: geojson,\n  paint: function (feature) {\n    return { color: feature.properties.color, opacity: 0.5 }\n  },\n selectedPaint: function (feature) {\n   return { color: feature.properties.selcolor, opacity: 1 }\n },\n selectable: true,\n multiselect: true\n});\n\n// Add marker layer styled with use [Icons](icons)\nngwMap.addGeoJsonLayer({ data: geojson, paint: NgwMap.getIcon({ color: 'orange' })});\n\n// work with added layer\nconst layer = ngwMap.addGeoJsonLayer({ data: geojson, id: 'my_layer_name'});\n// access layer by id\nngwMap.showLayer('my_layer_name');\n// or access layer by instance\nngwMap.showLayer(layer);\n```\n"
+											}
+										]
 									},
 									"typeParameter": [
 										{
@@ -71750,7 +71786,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 247,
+									"line": 286,
 									"character": 17
 								}
 							],
@@ -71992,7 +72028,7 @@
 										"tags": [
 											{
 												"tag": "example",
-												"text": "\n```javascript\nvar ngwMap = new NgwMap({ baseUrl: 'https://demo.nextgis.com', target: 'map'});\n// add raster layer resourceId is the style of 4004 layer\nngwMap.addNgwLayer({resourceId: 4005});\n// add vector data from layer GEOJSON source\nngwMap.addNgwLayer({\n  resourceId: 4038,\n  adapter: 'GEOJSON'\n  adapterOptions: { paint: { color: 'red' } }\n});\n```\n"
+												"text": "\n```javascript\nvar ngwMap = new NgwMap({ baseUrl: 'https://demo.nextgis.com', target: 'map' });\n// add raster layer resourceId is the style of 4004 layer\nngwMap.addNgwLayer({ resourceId: 4005 });\n// add vector data from layer GEOJSON source\nngwMap.addNgwLayer({\n  resourceId: 4038,\n  adapter: 'GEOJSON',\n  adapterOptions: { paint: { color: 'red' } }\n});\n```\n"
 											}
 										]
 									},
@@ -72043,7 +72079,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 193,
+									"line": 203,
 									"character": 19
 								}
 							],
@@ -72565,7 +72601,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 140,
+									"line": 150,
 									"character": 5
 								}
 							],
@@ -74617,7 +74653,13 @@
 									"kindString": "Call signature",
 									"flags": {},
 									"comment": {
-										"shortText": "Move map to layer. If the layer is NGW resource, extent will be received from the server"
+										"shortText": "Move map to layer. If the layer is NGW resource, extent will be received from the server",
+										"tags": [
+											{
+												"tag": "example",
+												"text": "\n```javascript\nconst ngwLayer = ngwMap.addNgwLayer({ id: 'ngw_layer_name', resourceId: 4005 });\nngwMap.zoomToLayer(ngwLayer);\nngwMap.zoomToLayer('ngw_layer_name');\n```\n"
+											}
+										]
 									},
 									"parameters": [
 										{
@@ -74635,10 +74677,6 @@
 													{
 														"type": "intrinsic",
 														"name": "string"
-													},
-													{
-														"type": "intrinsic",
-														"name": "number"
 													},
 													{
 														"type": "reference",
@@ -74678,7 +74716,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 267,
+									"line": 313,
 									"character": 13
 								}
 							],
@@ -74731,7 +74769,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 105,
+									"line": 115,
 									"character": 16
 								}
 							],
@@ -74762,7 +74800,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 103,
+											"line": 113,
 											"character": 33
 										}
 									],
@@ -74785,7 +74823,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 103,
+									"line": 113,
 									"character": 19
 								}
 							],
@@ -74820,7 +74858,7 @@
 									"sources": [
 										{
 											"fileName": "ngw-map/src/NgwMap.ts",
-											"line": 102,
+											"line": 112,
 											"character": 28
 										}
 									],
@@ -74843,7 +74881,7 @@
 							"sources": [
 								{
 									"fileName": "ngw-map/src/NgwMap.ts",
-									"line": 102,
+									"line": 112,
 									"character": 14
 								}
 							],
@@ -87364,7 +87402,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 148,
+									"line": 214,
 									"character": 4
 								}
 							],
@@ -87394,7 +87432,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 149,
+									"line": 215,
 									"character": 7
 								}
 							],
@@ -87416,7 +87454,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 150,
+									"line": 216,
 									"character": 5
 								}
 							],
@@ -87437,7 +87475,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 147,
+									"line": 213,
 									"character": 9
 								}
 							],
@@ -87512,7 +87550,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 152,
+									"line": 218,
 									"character": 10
 								}
 							]
@@ -87545,7 +87583,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 160,
+									"line": 226,
 									"character": 17
 								}
 							]
@@ -87596,7 +87634,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 157,
+									"line": 223,
 									"character": 11
 								}
 							]
@@ -87639,7 +87677,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 155,
+									"line": 221,
 									"character": 11
 								}
 							]
@@ -87682,7 +87720,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 154,
+									"line": 220,
 									"character": 11
 								}
 							]
@@ -87714,7 +87752,7 @@
 					"sources": [
 						{
 							"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-							"line": 145,
+							"line": 211,
 							"character": 33
 						}
 					],
@@ -88875,6 +88913,9 @@
 					"flags": {
 						"isExported": true
 					},
+					"comment": {
+						"shortText": "Options to crateing styling and defining selection behavior"
+					},
 					"children": [
 						{
 							"id": 95,
@@ -88959,10 +89000,13 @@
 								"isExported": true,
 								"isOptional": true
 							},
+							"comment": {
+								"shortText": "Geojson data"
+							},
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 80,
+									"line": 84,
 									"character": 6
 								}
 							],
@@ -89155,10 +89199,19 @@
 								"isExported": true,
 								"isOptional": true
 							},
+							"comment": {
+								"shortText": "Indicates whether several objects can be selected in one layer",
+								"tags": [
+									{
+										"tag": "example",
+										"text": "\n// multiselect: false\nlayer.select(({ feature }) => feature.properties.color === 'green'); // one feature will be selected\n// multiselect: true\nlayer.select(({ feature }) => feature.properties.color === 'green'); // all 'green' features will be selected\n"
+									}
+								]
+							},
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 87,
+									"line": 150,
 									"character": 13
 								}
 							],
@@ -89224,10 +89277,23 @@
 								"isExported": true,
 								"isOptional": true
 							},
+							"comment": {
+								"shortText": "Determine the appearance of the vector data geometries",
+								"tags": [
+									{
+										"tag": "example",
+										"text": "\n```javascript\nconst circlePaint = { paint: { color: 'green', radius: 6 } };\nconst paintCb = (feature) => {\n return { color: 'red', opacity: feature.properties.opacity }\n}\n```"
+									},
+									{
+										"tag": "example",
+										"text": "\n```javascript\n// Use global paint function\n// set paint function inside WebMap static property\nWebMap.getPaintFunctions.customPaintFunction = customIconPaintFunction\n\nwebMap.addLayer('GEOJSON', {\n  paint: {\n    type: 'get-paint',\n    from: 'customPaintFunction',\n    options: {}\n  }\n}\n```\n"
+									}
+								]
+							},
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 82,
+									"line": 112,
 									"character": 7
 								}
 							],
@@ -89256,10 +89322,19 @@
 								"isExported": true,
 								"isOptional": true
 							},
+							"comment": {
+								"shortText": "Determines whether objects are selected by mouse click",
+								"tags": [
+									{
+										"tag": "example",
+										"text": "\n```javascript\nconst layer = webMap.addLayer('GEOJSON', {\n  paint: { color: 'red' },\n  selectedPaint: { color: 'green' },\n  selectable: false\n});\n// programmatically selection - ok, but not on mouse click\nlayer.select(({ feature }) => feature.properties.id === ID_FOR_SELECT);\n```\n"
+									}
+								]
+							},
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 86,
+									"line": 140,
 									"character": 12
 								}
 							],
@@ -89290,10 +89365,19 @@
 								"isExported": true,
 								"isOptional": true
 							},
+							"comment": {
+								"shortText": "The paint that applies to the features after it becomes selected",
+								"tags": [
+									{
+										"tag": "example",
+										"text": "\n```javascript\nwebMap.addLayer('GEOJSON', {\n  paint: { color: 'red' },\n  selectedPaint: { color: 'green' }\n});\n```\n"
+									}
+								]
+							},
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 83,
+									"line": 124,
 									"character": 15
 								}
 							],
@@ -89392,10 +89476,13 @@
 								"isExported": true,
 								"isOptional": true
 							},
+							"comment": {
+								"shortText": "Type for geometries painting, for each layer may be only one of: `fill`, `circle` or `line`"
+							},
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 81,
+									"line": 86,
 									"character": 6
 								}
 							],
@@ -89414,10 +89501,13 @@
 								"isExported": true,
 								"isOptional": true
 							},
+							"comment": {
+								"shortText": "Deselects layer feature by second click"
+							},
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 88,
+									"line": 154,
 									"character": 23
 								}
 							],
@@ -89611,7 +89701,7 @@
 					"sources": [
 						{
 							"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-							"line": 79,
+							"line": 82,
 							"character": 38
 						}
 					],
@@ -90155,7 +90245,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 98,
+									"line": 164,
 									"character": 9
 								}
 							],
@@ -90390,7 +90480,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 108,
+									"line": 174,
 									"character": 12
 								}
 							],
@@ -90455,7 +90545,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 97,
+									"line": 163,
 									"character": 12
 								}
 							],
@@ -90525,7 +90615,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 110,
+									"line": 176,
 									"character": 13
 								}
 							],
@@ -90559,7 +90649,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 109,
+									"line": 175,
 									"character": 17
 								}
 							],
@@ -90629,7 +90719,7 @@
 																	"sources": [
 																		{
 																			"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-																			"line": 109,
+																			"line": 175,
 																			"character": 25
 																		}
 																	]
@@ -90659,7 +90749,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 96,
+									"line": 162,
 									"character": 5
 								}
 							],
@@ -90813,7 +90903,7 @@
 					"sources": [
 						{
 							"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-							"line": 107,
+							"line": 173,
 							"character": 36
 						}
 					],
@@ -91071,7 +91161,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 119,
+									"line": 185,
 									"character": 11
 								}
 							],
@@ -91092,7 +91182,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 115,
+									"line": 181,
 									"character": 9
 								}
 							],
@@ -91113,7 +91203,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 118,
+									"line": 184,
 									"character": 10
 								}
 							],
@@ -91134,7 +91224,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 114,
+									"line": 180,
 									"character": 7
 								}
 							],
@@ -91155,7 +91245,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 116,
+									"line": 182,
 									"character": 7
 								}
 							],
@@ -91176,7 +91266,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 117,
+									"line": 183,
 									"character": 8
 								}
 							],
@@ -91204,7 +91294,7 @@
 					"sources": [
 						{
 							"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-							"line": 113,
+							"line": 179,
 							"character": 30
 						}
 					]
@@ -91256,7 +91346,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 129,
+									"line": 195,
 									"character": 11
 								}
 							],
@@ -91277,7 +91367,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 125,
+									"line": 191,
 									"character": 9
 								}
 							],
@@ -91298,7 +91388,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 128,
+									"line": 194,
 									"character": 10
 								}
 							],
@@ -91319,7 +91409,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 124,
+									"line": 190,
 									"character": 7
 								}
 							],
@@ -91340,7 +91430,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 126,
+									"line": 192,
 									"character": 7
 								}
 							],
@@ -91361,7 +91451,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 127,
+									"line": 193,
 									"character": 8
 								}
 							],
@@ -91389,7 +91479,7 @@
 					"sources": [
 						{
 							"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-							"line": 123,
+							"line": 189,
 							"character": 37
 						}
 					]
@@ -91435,7 +91525,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 135,
+									"line": 201,
 									"character": 9
 								}
 							],
@@ -91457,7 +91547,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 134,
+									"line": 200,
 									"character": 7
 								}
 							],
@@ -91479,7 +91569,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 136,
+									"line": 202,
 									"character": 9
 								}
 							],
@@ -91516,7 +91606,7 @@
 					"sources": [
 						{
 							"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-							"line": 133,
+							"line": 199,
 							"character": 32
 						}
 					]
@@ -93840,7 +93930,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 92,
+									"line": 158,
 									"character": 8
 								}
 							],
@@ -94261,7 +94351,7 @@
 					"sources": [
 						{
 							"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-							"line": 91,
+							"line": 157,
 							"character": 37
 						}
 					],
@@ -95237,7 +95327,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/BaseTypes.ts",
-									"line": 41,
+									"line": 42,
 									"character": 8
 								}
 							],
@@ -95266,7 +95356,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/BaseTypes.ts",
-									"line": 39,
+									"line": 40,
 									"character": 6
 								}
 							],
@@ -95287,7 +95377,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/BaseTypes.ts",
-									"line": 40,
+									"line": 41,
 									"character": 7
 								}
 							],
@@ -95316,7 +95406,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/BaseTypes.ts",
-									"line": 38,
+									"line": 39,
 									"character": 5
 								}
 							],
@@ -95341,7 +95431,7 @@
 					"sources": [
 						{
 							"fileName": "webmap/src/interfaces/BaseTypes.ts",
-							"line": 37,
+							"line": 38,
 							"character": 22
 						}
 					]
@@ -95436,7 +95526,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 98,
+									"line": 164,
 									"character": 9
 								}
 							],
@@ -95694,7 +95784,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 97,
+									"line": 163,
 									"character": 12
 								}
 							],
@@ -95755,7 +95845,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 96,
+									"line": 162,
 									"character": 5
 								}
 							],
@@ -95899,7 +95989,7 @@
 					"sources": [
 						{
 							"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-							"line": 95,
+							"line": 161,
 							"character": 30
 						}
 					],
@@ -96504,7 +96594,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 98,
+									"line": 164,
 									"character": 9
 								}
 							],
@@ -96775,7 +96865,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 104,
+									"line": 170,
 									"character": 12
 								}
 							],
@@ -96809,7 +96899,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 103,
+									"line": 169,
 									"character": 10
 								}
 							],
@@ -96864,7 +96954,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 96,
+									"line": 162,
 									"character": 5
 								}
 							],
@@ -97016,7 +97106,7 @@
 					"sources": [
 						{
 							"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-							"line": 101,
+							"line": 167,
 							"character": 35
 						}
 					],
@@ -97485,7 +97575,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 148,
+									"line": 214,
 									"character": 4
 								}
 							],
@@ -97520,7 +97610,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 149,
+									"line": 215,
 									"character": 7
 								}
 							],
@@ -97547,7 +97637,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 150,
+									"line": 216,
 									"character": 5
 								}
 							],
@@ -97573,7 +97663,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 147,
+									"line": 213,
 									"character": 9
 								}
 							],
@@ -97604,7 +97694,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 167,
+									"line": 233,
 									"character": 10
 								}
 							],
@@ -97664,7 +97754,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 178,
+									"line": 244,
 									"character": 9
 								}
 							]
@@ -97735,7 +97825,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 152,
+									"line": 218,
 									"character": 10
 								}
 							],
@@ -97826,7 +97916,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 179,
+									"line": 245,
 									"character": 12
 								}
 							]
@@ -97884,7 +97974,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 175,
+									"line": 241,
 									"character": 8
 								}
 							]
@@ -97922,7 +98012,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 160,
+									"line": 226,
 									"character": 17
 								}
 							],
@@ -97983,7 +98073,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 157,
+									"line": 223,
 									"character": 11
 								}
 							],
@@ -98039,7 +98129,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 169,
+									"line": 235,
 									"character": 11
 								}
 							]
@@ -98084,7 +98174,7 @@
 															"sources": [
 																{
 																	"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-																	"line": 173,
+																	"line": 239,
 																	"character": 44
 																}
 															],
@@ -98105,7 +98195,7 @@
 															"sources": [
 																{
 																	"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-																	"line": 173,
+																	"line": 239,
 																	"character": 31
 																}
 															],
@@ -98129,7 +98219,7 @@
 													"sources": [
 														{
 															"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-															"line": 173,
+															"line": 239,
 															"character": 24
 														}
 													]
@@ -98142,7 +98232,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 173,
+									"line": 239,
 									"character": 13
 								}
 							]
@@ -98190,7 +98280,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 155,
+									"line": 221,
 									"character": 11
 								}
 							],
@@ -98245,7 +98335,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 181,
+									"line": 247,
 									"character": 14
 								}
 							]
@@ -98305,7 +98395,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 171,
+									"line": 237,
 									"character": 8
 								}
 							]
@@ -98348,7 +98438,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 177,
+									"line": 243,
 									"character": 9
 								}
 							]
@@ -98396,7 +98486,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 154,
+									"line": 220,
 									"character": 11
 								}
 							],
@@ -98461,7 +98551,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 172,
+									"line": 238,
 									"character": 10
 								}
 							]
@@ -98503,7 +98593,7 @@
 					"sources": [
 						{
 							"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-							"line": 163,
+							"line": 229,
 							"character": 35
 						}
 					],
@@ -98830,7 +98920,7 @@
 					"sources": [
 						{
 							"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-							"line": 139,
+							"line": 205,
 							"character": 27
 						}
 					],
@@ -98886,7 +98976,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-									"line": 139,
+									"line": 205,
 									"character": 67
 								}
 							]
@@ -99161,7 +99251,7 @@
 					"sources": [
 						{
 							"fileName": "webmap/src/interfaces/LayerAdapter.ts",
-							"line": 141,
+							"line": 207,
 							"character": 24
 						}
 					],
@@ -99261,7 +99351,7 @@
 					"sources": [
 						{
 							"fileName": "webmap/src/interfaces/BaseTypes.ts",
-							"line": 32,
+							"line": 33,
 							"character": 23
 						}
 					],
@@ -99288,12 +99378,12 @@
 						"isExported": true
 					},
 					"comment": {
-						"shortText": "Array of coordinates, measured in degrees, in [west, south, east, north] order."
+						"shortText": "Array of coordinates, measured in degrees, in [west, south, east, north] order.\nhttps://tools.ietf.org/html/rfc7946#section-5"
 					},
 					"sources": [
 						{
 							"fileName": "webmap/src/interfaces/BaseTypes.ts",
-							"line": 27,
+							"line": 28,
 							"character": 29
 						}
 					],
