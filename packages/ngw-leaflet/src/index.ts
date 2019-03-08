@@ -9,15 +9,16 @@ import NgwMap, { NgwMapOptions } from '@nextgis/ngw-map';
 import LeafletMapAdapter from '@nextgis/leaflet-map-adapter';
 
 /**
- * Displaying the {@link ngw-map-api | NgwMap}
- * using the  {@link leaflet-map-adapter-api | LeafletMapAdapter}
+ * Displaying the [NgwMap](ngw-map-api)
+ * using the  [LeafletMapAdapter](leaflet-map-adapter-api)
  *
  * @example
  * ```javascript
  * // Base initialization
- * import NgwLeaflet from '@nextgis/ngw-leaflet';
+ * // [live demo](http://code.nextgis.com/ngw-leaflet-examples-ngw_webmap)
+ * import NgwMap from '@nextgis/ngw-leaflet';
  *
- * const ngwMap = new NgwLeaflet({
+ * const ngwMap = new NgwMap({
  *   target: 'map',
  *   qmsId: 487,
  *   baseUrl: 'https://demo.nextgis.com',
