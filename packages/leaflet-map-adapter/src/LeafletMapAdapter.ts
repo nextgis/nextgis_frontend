@@ -9,7 +9,6 @@ import {
   CreateControlOptions,
   ButtonControlOptions,
   LayerAdapter,
-  ToggleControlOptions,
   LngLatArray,
   LngLatBoundsArray
 } from '@nextgis/webmap';
@@ -129,7 +128,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     return this.map && this.map.getZoom();
   }
 
-  // [extent_left, extent_bottom, extent_right, extent_top];
+  // [west, south, east, north]
   fit(e: LngLatBoundsArray) {
     if (this.map) {
       // top, left, bottom, right
