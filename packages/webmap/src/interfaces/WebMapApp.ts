@@ -37,6 +37,12 @@ export interface MapOptions {
    * Initial extent of the map, array of degrees in [_west_, _south_, _east_, _north_] order.
    * Overrides the `center` and  `zoom` parameters.
    * [LngLatBoundsArray](webmap-api#LngLatBoundsArray)
+   *
+   * @example
+   * ```javascript
+   * // whole world
+   * bounds: [0, -90, 180, 90]
+   * ```
    */
   bounds?: LngLatBoundsArray;
 

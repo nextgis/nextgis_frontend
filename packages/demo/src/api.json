@@ -42565,12 +42565,18 @@
 								"isOptional": true
 							},
 							"comment": {
-								"shortText": "Initial extent of the map, array of degrees in [_west_, _south_, _east_, _north_] order.\nOverrides the `center` and  `zoom` parameters.\n[LngLatBoundsArray](webmap-api#LngLatBoundsArray)"
+								"shortText": "Initial extent of the map, array of degrees in [_west_, _south_, _east_, _north_] order.\nOverrides the `center` and  `zoom` parameters.\n[LngLatBoundsArray](webmap-api#LngLatBoundsArray)",
+								"tags": [
+									{
+										"tag": "example",
+										"text": "\n```javascript\n// whole world\nbounds: [0, -90, 180, 90]\n```\n"
+									}
+								]
 							},
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/WebMapApp.ts",
-									"line": 41,
+									"line": 47,
 									"character": 8
 								}
 							],
@@ -64827,12 +64833,18 @@
 								"isOptional": true
 							},
 							"comment": {
-								"shortText": "Initial extent of the map, array of degrees in [_west_, _south_, _east_, _north_] order.\nOverrides the `center` and  `zoom` parameters.\n[LngLatBoundsArray](webmap-api#LngLatBoundsArray)"
+								"shortText": "Initial extent of the map, array of degrees in [_west_, _south_, _east_, _north_] order.\nOverrides the `center` and  `zoom` parameters.\n[LngLatBoundsArray](webmap-api#LngLatBoundsArray)",
+								"tags": [
+									{
+										"tag": "example",
+										"text": "\n```javascript\n// whole world\nbounds: [0, -90, 180, 90]\n```\n"
+									}
+								]
 							},
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/WebMapApp.ts",
-									"line": 41,
+									"line": 47,
 									"character": 8
 								}
 							],
@@ -87198,7 +87210,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/WebMapApp.ts",
-									"line": 46,
+									"line": 52,
 									"character": 12
 								}
 							],
@@ -87220,7 +87232,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/WebMapApp.ts",
-									"line": 47,
+									"line": 53,
 									"character": 13
 								}
 							],
@@ -87247,7 +87259,7 @@
 					"sources": [
 						{
 							"fileName": "webmap/src/interfaces/WebMapApp.ts",
-							"line": 45,
+							"line": 51,
 							"character": 27
 						}
 					]
@@ -89734,7 +89746,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/WebMapApp.ts",
-									"line": 58,
+									"line": 64,
 									"character": 13
 								}
 							],
@@ -89768,7 +89780,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/WebMapApp.ts",
-									"line": 57,
+									"line": 63,
 									"character": 13
 								}
 							],
@@ -89804,7 +89816,7 @@
 					"sources": [
 						{
 							"fileName": "webmap/src/interfaces/WebMapApp.ts",
-							"line": 56,
+							"line": 62,
 							"character": 39
 						}
 					]
@@ -93594,12 +93606,18 @@
 								"isOptional": true
 							},
 							"comment": {
-								"shortText": "Initial extent of the map, array of degrees in [_west_, _south_, _east_, _north_] order.\nOverrides the `center` and  `zoom` parameters.\n[LngLatBoundsArray](webmap-api#LngLatBoundsArray)"
+								"shortText": "Initial extent of the map, array of degrees in [_west_, _south_, _east_, _north_] order.\nOverrides the `center` and  `zoom` parameters.\n[LngLatBoundsArray](webmap-api#LngLatBoundsArray)",
+								"tags": [
+									{
+										"tag": "example",
+										"text": "\n```javascript\n// whole world\nbounds: [0, -90, 180, 90]\n```\n"
+									}
+								]
 							},
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/WebMapApp.ts",
-									"line": 41,
+									"line": 47,
 									"character": 8
 								}
 							],
@@ -98661,7 +98679,7 @@
 							"sources": [
 								{
 									"fileName": "webmap/src/interfaces/WebMapApp.ts",
-									"line": 53,
+									"line": 59,
 									"character": 13
 								}
 							],
@@ -98684,7 +98702,7 @@
 					"sources": [
 						{
 							"fileName": "webmap/src/interfaces/WebMapApp.ts",
-							"line": 52,
+							"line": 58,
 							"character": 32
 						}
 					]
