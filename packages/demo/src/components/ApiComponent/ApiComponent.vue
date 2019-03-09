@@ -22,13 +22,14 @@
         </v-btn>
         {{item.name}}
       </h2>
-      <class-item :item="item" :showMembers="isMembersShowed(item.name)">
+      <class-item :item="item" :showMembers="true"></class-item>
+      <!-- <class-item :item="item" :showMembers="isMembersShowed(item.name)">
         <template v-if="!isMembersShowed(item.name)" v-slot:footer>
           <v-btn small primary @click="showItemMembers(item.name)">
             Show members
           </v-btn>
         </template>
-      </class-item>
+      </class-item> -->
 
     </div>
   </v-container>
