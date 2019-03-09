@@ -28,7 +28,7 @@
     <div class="example-iframe" id="example-iframe"></div>
 
     <div>
-      <send-to-codepen :html="item.html"></send-to-codepen>
+      <send-to-codepen :item="item"></send-to-codepen>
       <pre v-highlightjs="item.html"><code class="html"></code></pre>
     </div>
 
