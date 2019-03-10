@@ -287,13 +287,6 @@ export class WebMap<M = any, L = any, C = any> {
       adapterEngine = adapter as Type<LayerAdapter>;
     }
     if (adapterEngine) {
-      const onLayerClickFromOpt = options.onLayerClick;
-      options.onLayerClick = (e) => {
-        if (onLayerClickFromOpt) {
-          onLayerClickFromOpt(e);
-        }
-        return this._onLayerClick(e);
-      };
       const order = this._layersIds++;
 
       this._updateGeoJsonOptions(options as GeoJsonAdapterOptions);
@@ -576,6 +569,13 @@ export class WebMap<M = any, L = any, C = any> {
   }
 
   private _updateGeoJsonOptions(options: GeoJsonAdapterOptions) {
+    const onLayerClickFromOpt = options.onLayerClick;
+    options.onLayerClick = (e) => {
+      if (onLayerClickFromOpt) {
+        onLayerClickFromOpt(e);
+      }
+      return this._onLayerClick(e);
+    };
     if (options.paint) {
       options.paint = this._updatePaintOptionFromCallback(options.paint);
     }
