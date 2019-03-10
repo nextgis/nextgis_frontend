@@ -1,4 +1,4 @@
-import WebMap, { LayerAdapter, Type } from '@nextgis/webmap';
+import WebMap, { LayerAdapter, Type, ImageAdapterOptions } from '@nextgis/webmap';
 import { NgwLayerOptions, WebMapAdapterOptions } from './interfaces';
 import { WebMapLayerAdapter } from './WebMapLayerAdapter';
 import NgwConnector from '@nextgis/ngw-connector';
@@ -54,9 +54,8 @@ export function addNgwLayer(
   }
   if (adapter === 'IMAGE' || adapter === 'TILE') {
     const opt = getLayerAdapterOptions(options, webMap, baseUrl);
-    if (opt) {
-      const layerAdapterOptions = { ...opt, resourceId: opt.resourceId };
-
+    if (opt && opt.resourceId) {
+      const layerAdapterOptions: ImageAdapterOptions = { ...opt, resourceId: opt.resourceId };
       return webMap.addLayer(adapter, layerAdapterOptions);
     }
   } else {
