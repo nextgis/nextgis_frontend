@@ -4,7 +4,6 @@
 
 import { MapAdapter } from './MapAdapter';
 import { StarterKit } from './StarterKit';
-import { MapControl } from './MapControl';
 import { LngLatArray, LngLatBoundsArray } from './BaseTypes';
 
 export interface MapOptions {

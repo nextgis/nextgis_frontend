@@ -13,25 +13,20 @@ export interface OnLayerClickOptions {
 
 export interface AdapterOptions {
   id?: string;
-  // is on the map
+  /**
+   * Show layer on the map immediately after adding
+   * @default false
+   */
   visibility?: boolean;
   baseLayer?: boolean;
   order?: number;
-
   attribution?: string;
   maxZoom?: number;
   minZoom?: number;
-
-  // move out of here
-  maxResolution?: number;
-  minResolution?: number;
-  transparency?: number;
-  url?: string;
-  styleId?: number;
-  onLayerClick?(opt: OnLayerClickOptions): Promise<any>;
 }
 
 export interface MvtAdapterOptions extends AdapterOptions {
+  url?: string;
   paint?: any;
   type?: 'fill' | 'line' | 'circle' | 'point';
   'source-layer'?: string;
@@ -152,6 +147,8 @@ export interface GeoJsonAdapterOptions extends AdapterOptions {
    * Deselects layer feature by second click
    */
   unselectOnSecondClick?: boolean;
+
+  onLayerClick?(opt: OnLayerClickOptions): Promise<any>;
 }
 
 export interface MarkerAdapterOptions extends AdapterOptions {
@@ -165,7 +162,6 @@ interface RasterAdapterOptions extends AdapterOptions {
 }
 
 export interface TileAdapterOptions extends RasterAdapterOptions {
-
   tileSize: number;
   subdomains?: string;
 }
@@ -189,7 +185,7 @@ export interface LayerAdapters {
 export interface LayerAdaptersOptions {
   'MVT': MvtAdapterOptions;
   'IMAGE': ImageAdapterOptions;
-  'OSM': AdapterOptions;
+  'OSM': RasterAdapterOptions;
   'TILE': TileAdapterOptions;
   'MARKER': MarkerAdapterOptions;
   'GEOJSON': GeoJsonAdapterOptions;
