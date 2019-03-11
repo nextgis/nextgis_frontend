@@ -27,7 +27,7 @@ import {
 // type MapboxPaint = BackgroundPaint | FillPaint | FillExtrusionPaint | LinePaint | SymbolPaint |
 //   RasterPaint | CirclePaint | HeatmapPaint | HillshadePaint;
 
-import { getImage } from '../utils/image_icons';
+import { getImage } from '../util/image_icons';
 import { TLayer } from '../MapboxglMapAdapter';
 import { BaseAdapter } from './BaseAdapter';
 

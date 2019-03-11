@@ -15,7 +15,7 @@ import {
 import { LayerAdaptersOptions, LayerAdapter, OnLayerClickOptions } from './interfaces/LayerAdapter';
 import { MapAdapter, MapClickEvent, ControlPositions, FitOptions } from './interfaces/MapAdapter';
 import { MapOptions, AppOptions, GetAttributionsOptions } from './interfaces/WebMapApp';
-import { LngLatBoundsArray, Pixel, Type, Cursor, LngLatArray } from './interfaces/BaseTypes';
+import { LngLatBoundsArray, Type, Cursor, LngLatArray, LayerDef } from './interfaces/BaseTypes';
 import { RuntimeParams } from './interfaces/RuntimeParams';
 import { StarterKit } from './interfaces/StarterKit';
 import { Keys } from './components/keys/Keys';
@@ -30,12 +30,10 @@ import {
 import { Feature, GeoJsonObject } from 'geojson';
 import { EventEmitter } from 'events';
 
-import { onLoad } from './utils/decorators';
-import { deepmerge } from './utils/lang';
+import { onLoad } from './util/decorators';
+import { deepmerge } from './util/lang';
 import { createButtonControl } from './components/controls/ButtonControl';
 import { createToggleControl } from './components/controls/ToggleControl';
-
-type LayerDef = string | LayerAdapter;
 
 const OPTIONS: MapOptions = {
   minZoom: 0,
@@ -89,12 +87,18 @@ export class WebMap<M = any, L = any, C = any> {
    * ```
    */
   async create(options?: MapOptions): Promise<this> {
-    this.options = deepmerge(OPTIONS || {}, options);
-    await this._setupMap();
-    this._emitStatusEvent('create', this);
+    if (!this.getEventStatus('create')) {
+      this.options = deepmerge(OPTIONS || {}, options);
+      await this._setupMap();
+      this._emitStatusEvent('create', this);
+    }
     return this;
   }
 
+  /**
+   * Returns the HTML element that contains the map.
+   * @returns The map's container
+   */
   getContainer(): HTMLElement | undefined {
     if (this.mapAdapter.getContainer) {
       return this.mapAdapter.getContainer();
@@ -110,55 +114,73 @@ export class WebMap<M = any, L = any, C = any> {
     }
   }
 
+  /**
+   * Set the cursor icon to be displayed when hoverion on the map container.
+   * @param cursor available cursor name from https://developer.mozilla.org/ru/docs/Web/CSS/cursor
+   */
   setCursor(cursor: Cursor) {
     if (this.mapAdapter.setCursor) {
       this.mapAdapter.setCursor(cursor);
     }
   }
 
-  onMapLoad(cb?: any): Promise<void> {
-    const mapAdapterOnLoad = this.mapAdapter.onMapLoad;
-    if (mapAdapterOnLoad) {
-      return mapAdapterOnLoad.call(this.mapAdapter, cb);
-    }
-    return Promise.resolve(cb);
-  }
-
-  async addBaseLayer(
-    provider: keyof LayerAdaptersOptions | Type<LayerAdapter>,
-    options?: any): Promise<LayerAdapter> {
-
-    const layer = await this.addLayer(provider, {
-      maxZoom: this.options.maxZoom,
-      minZoom: this.options.minZoom,
-      ...options,
-      baseLayer: true
-    });
-    const id = this.getLayerId(layer);
-    if (layer && id) {
-      this._baseLayers.push(id);
-    }
-    return layer;
-  }
-
+  /**
+   * Set the center of the current view.
+   * @param lngLat Array of two numbers representing longitude and latitude of the center of the map view.
+   *
+   * @example
+   * ```javascript
+   * // Mount Everest 27° 59′ 17″ N, 86° 55′ 31″ E
+   * webMap.setCenter([86.925278, 27.988056]);
+   * ```
+   */
   setCenter(lngLat: LngLatArray): this {
     this.mapAdapter.setCenter(lngLat);
     return this;
   }
 
+  /**
+   * Returns the map's geographical centerpoint.
+   * @return lngLat Array of two numbers representing longitude and latitude of the center of the map view.
+   *
+   * @example
+   * ```javascript
+   * // Mount Everest 27° 59′ 17″ N, 86° 55′ 31″ E
+   * webMap.getCenter(); // [86.925278, 27.988056]
+   * ```
+   */
   getCenter(): LngLatArray | undefined {
     return this.mapAdapter.getCenter();
   }
 
+  /**
+   * Zoom to a specific zoom level.
+   * @param zoom The zoom level to set (0-24).
+   */
   setZoom(zoom: number): this {
     this.mapAdapter.setZoom(zoom);
     return this;
   }
 
+  /**
+   * Returns the map's current zoom level.
+   * @return The map's current zoom level (0-24).
+   */
   getZoom(): number | undefined {
     return this.mapAdapter.getZoom();
   }
 
+  /**
+   * Sets the view of the map geographical center and zoom
+   * @param lngLat Array of two numbers representing longitude and latitude of the center of the map view.
+   * @param zoom The zoom level to set (0-24).
+   *
+   * @example
+   * ```javascript
+   * // Mount Everest 27° 59′ 17″ N, 86° 55′ 31″ E
+   * webMap.setView([86.925278, 27.988056], 12)
+   * ```
+   */
   setView(lngLat?: LngLatArray, zoom?: number) {
     if (this.mapAdapter.setView && lngLat && zoom) {
       this.mapAdapter.setView(lngLat, zoom);
@@ -173,11 +195,27 @@ export class WebMap<M = any, L = any, C = any> {
   }
 
   // [west, south, east, north];
-  fitBounds(e: LngLatBoundsArray, options?: FitOptions): this {
-    this.mapAdapter.fit(e, options);
+  /**
+   * Sets a map view that contains the given geographical bounds.
+   * @param bounds Array of coordinates, measured in degrees, in [west, south, east, north] order.
+   * @param options
+   *
+   * @example
+   * ```javascript
+   * // Whall world
+   * webMap.fitBounds([0, -90, 180, 90]);
+   * ```
+   */
+  fitBounds(bounds: LngLatBoundsArray, options?: FitOptions): this {
+    this.mapAdapter.fit(bounds, options);
     return this;
   }
 
+  /**
+   * Try to fit map view by given layer bounds.
+   * But not all layers have borders
+   * @param layerDef
+   */
   async fitLayer(layerDef: LayerDef) {
     const layer = this.getLayer(layerDef);
     if (layer && layer.getExtent) {
@@ -188,8 +226,16 @@ export class WebMap<M = any, L = any, C = any> {
     }
   }
 
-  isBaseLayer(layerName: string): boolean {
-    return this._baseLayers.indexOf(layerName) !== -1;
+  /**
+   * Check if given layer is baselayer
+   * @param layerName Check
+   */
+  isBaseLayer(layerDef: LayerDef): boolean | undefined {
+    const layer = this.getLayer(layerDef);
+    if (layer && layer.id) {
+      return this._baseLayers.indexOf(layer.id) !== -1;
+    }
+    return undefined;
   }
 
   getLayerAdapters(): { [name: string]: Type<LayerAdapter> } {
@@ -200,6 +246,9 @@ export class WebMap<M = any, L = any, C = any> {
     return this.mapAdapter.layerAdapters[name];
   }
 
+  /**
+   * Helper method to return added layer object by any definition type.
+   */
   getLayer(layerDef: LayerDef): LayerAdapter | undefined {
     if (typeof layerDef === 'string') {
       return this._layers[layerDef];
@@ -207,6 +256,9 @@ export class WebMap<M = any, L = any, C = any> {
     return layerDef;
   }
 
+  /**
+   * Helper method to return added layer identificator by any definition type.
+   */
   getLayerId(layerDef: LayerDef): string | undefined {
     const layer = this.getLayer(layerDef);
     if (layer && layer.options) {
@@ -216,6 +268,9 @@ export class WebMap<M = any, L = any, C = any> {
     }
   }
 
+  /**
+   * Return array of all added layer identificators.
+   */
   getLayers(): string[] {
     return Object.keys(this._layers);
   }
@@ -228,6 +283,36 @@ export class WebMap<M = any, L = any, C = any> {
     return layer && layer.options.visibility !== undefined ? layer.options.visibility : false;
   }
 
+  /**
+   * Shortcut method to create base layer
+   * @param adapter
+   * @param options
+   */
+  async addBaseLayer<K extends keyof LayerAdapters, O extends AdapterOptions = AdapterOptions>(
+    adapter: K | Type<LayerAdapters[K]>,
+    options: O | LayerAdaptersOptions[K]): Promise<LayerAdapter> {
+
+    const layer = await this.addLayer(adapter, {
+      ...options,
+      baseLayer: true
+    });
+
+    return layer;
+  }
+
+  /**
+   * Registration of map layer.
+   *
+   * @param adapter The name of layer adapter from [MapAdapter.layerAdapters](webmap#MapAdapter.layerAdapters).
+   *                May be custom object or class implemented by [BaseLayerAdapter](webmap#BaseLayerAdapter).
+   * @param options Specific options for given adapter
+   *
+   * @example
+   * ```javascript
+   * webMap.addLayer('TILE', options);
+   * webMap.addLayer(CustomLayerAdapter, options);
+   * ```
+   */
   async addLayer<K extends keyof LayerAdapters, O extends AdapterOptions = AdapterOptions>(
     adapter: K | Type<LayerAdapters[K]>,
     options: O | LayerAdaptersOptions[K]): Promise<LayerAdapter> {
@@ -243,9 +328,13 @@ export class WebMap<M = any, L = any, C = any> {
 
       this._updateGeoJsonOptions(options as GeoJsonAdapterOptions);
 
+      const { maxZoom, minZoom } = this.options;
+
       options = {
         id: String(order),
         order,
+        maxZoom,
+        minZoom,
         ...options
       };
       // options.visibility is a layer global state, but each layer on init is not visible
@@ -277,13 +366,16 @@ export class WebMap<M = any, L = any, C = any> {
           this.showLayer(layerId);
         }
       }
-
+      this.emitter.emit('layer:add', {id: layerId, layer: _adapter});
       return _adapter;
 
     }
     return Promise.reject('No adapter');
   }
 
+  /**
+   * Remove all layer from map and memory.
+   */
   removeLayers() {
     for (const l in this._layers) {
       if (this._layers.hasOwnProperty(l)) {
@@ -293,6 +385,10 @@ export class WebMap<M = any, L = any, C = any> {
     }
   }
 
+  /**
+   * Remove specific layer from map and memory by its definition.
+   * @param layerDef
+   */
   removeLayer(layerDef: LayerDef) {
     const layer = this.getLayer(layerDef);
     const layerId = layer && this.getLayerId(layer);
@@ -308,23 +404,33 @@ export class WebMap<M = any, L = any, C = any> {
     }
   }
 
+  /**
+   * Show added layer on the map by it definition.
+   */
   showLayer(layerDef: LayerDef) {
     this.toggleLayer(layerDef, true);
   }
 
+  /**
+   * Hide added layer on the map by it definition.
+   */
   hideLayer(layerDef: LayerDef) {
     this.toggleLayer(layerDef, false);
   }
 
-  setLayerOpacity(layerName: string, value: number) {
-    if (this.mapAdapter.setLayerOpacity) {
-      const layer = this.getLayer(layerName);
-      if (layer) {
-        this.mapAdapter.setLayerOpacity(layer.layer, value);
-      }
-    }
-  }
-
+  /**
+   * Change added layer visibility on the map by given status or inverse current status.
+   *
+   * @example
+   * ```javascript
+   * webMap.addLayer('TILE', {id: 'my_layer', url: ''}).then((layer) => {
+   *   webMap.toggleLayer(layer, true);
+   *   webMap.toggleLayer('my_layer', false);
+   *   webMap.toggleLayer('my_layer');
+   *   webMap.isLayerVisible(layer); // true
+   * });
+   * ```
+   */
   toggleLayer(layerDef: LayerDef, status?: boolean) {
     const layer = this.getLayer(layerDef);
     const onMap = layer && layer.options.visibility;
@@ -357,6 +463,15 @@ export class WebMap<M = any, L = any, C = any> {
         this.mapAdapter.emitter.once('create', (data) => {
           action(data.map, layer);
         });
+      }
+    }
+  }
+
+  setLayerOpacity(layerName: string, value: number) {
+    if (this.mapAdapter.setLayerOpacity) {
+      const layer = this.getLayer(layerName);
+      if (layer) {
+        this.mapAdapter.setLayerOpacity(layer.layer, value);
       }
     }
   }
@@ -513,6 +628,14 @@ export class WebMap<M = any, L = any, C = any> {
   protected _emitStatusEvent(event: string, data?: any) {
     this._eventsStatus[event] = true;
     this.emitter.emit(event, data);
+  }
+
+  protected onMapLoad(cb?: any): Promise<void> {
+    const mapAdapterOnLoad = this.mapAdapter.onMapLoad;
+    if (mapAdapterOnLoad) {
+      return mapAdapterOnLoad.call(this.mapAdapter, cb);
+    }
+    return Promise.resolve(cb);
   }
 
   private async _setupMap() {
