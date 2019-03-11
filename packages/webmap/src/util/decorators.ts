@@ -1,10 +1,11 @@
 import { WebMap } from '../WebMap';
+import { WebMapEvents } from '../interfaces/Events';
 
-export function onLoad(event: string) {
+export function onLoad<E extends WebMapEvents = WebMapEvents>(event: keyof E) {
   return function (target: WebMap, propertyKey: string, descriptor: PropertyDescriptor) {
     const originalMethod = descriptor.value;
 
-    descriptor.value = function (this: WebMap, ...args: any[]) {
+    descriptor.value = function (this: WebMap<any, any, any, E>, ...args: any[]) {
 
       return new Promise((resolve, reject) => {
         const _resolve = () => {
@@ -15,7 +16,7 @@ export function onLoad(event: string) {
         if (isLoaded) {
           _resolve();
         } else {
-          this.emitter.once(event, () => {
+          this.emitter.once(event as keyof WebMapEvents, () => {
             _resolve();
           });
         }

@@ -8,7 +8,8 @@
   "types": "lib/index.d.ts",
   "dependencies": {
     "@types/geojson": "^7946.0.6",
-    "events": "^3.0.0"
+    "events": "^3.0.0",
+    "strict-event-emitter-types": "^2.0.0"
   },
   "devDependencies": {
     "@types/events": "^3.0.0",
