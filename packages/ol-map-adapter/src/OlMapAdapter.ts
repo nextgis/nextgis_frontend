@@ -66,11 +66,12 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
   layerAdapters = OlMapAdapter.layerAdapters;
   controlAdapters = OlMapAdapter.controlAdapters;
 
-  displayProjection = 'EPSG:3857';
-  lonlatProjection = 'EPSG:4326';
   emitter = new EventEmitter();
 
   map?: Map;
+
+  private displayProjection = 'EPSG:3857';
+  private lonlatProjection = 'EPSG:4326';
 
   private _mapClickEvents: Array<(evt: ol.MapBrowserPointerEvent) => void> = [];
   private _forEachFeatureAtPixel: ForEachFeatureAtPixelCallback[] = [];
@@ -250,26 +251,26 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     });
   }
 
-  requestGeomString(pixel: { top: number, left: number }, pixelRadius = 5) {
-    const { top, left } = pixel;
-    const olMap = this.map;
-    if (olMap) {
-      const bounds = boundingExtent([
-        olMap.getCoordinateFromPixel([
-          left - pixelRadius,
-          top - pixelRadius,
-        ]),
-        olMap.getCoordinateFromPixel([
-          left + pixelRadius,
-          top + pixelRadius,
-        ]),
-      ]);
+  // requestGeomString(pixel: { top: number, left: number }, pixelRadius = 5) {
+  //   const { top, left } = pixel;
+  //   const olMap = this.map;
+  //   if (olMap) {
+  //     const bounds = boundingExtent([
+  //       olMap.getCoordinateFromPixel([
+  //         left - pixelRadius,
+  //         top - pixelRadius,
+  //       ]),
+  //       olMap.getCoordinateFromPixel([
+  //         left + pixelRadius,
+  //         top + pixelRadius,
+  //       ]),
+  //     ]);
 
-      return new WKT().writeGeometry(
-        Polygon.fromExtent(bounds)
-      );
-    }
-  }
+  //     return new WKT().writeGeometry(
+  //       Polygon.fromExtent(bounds)
+  //     );
+  //   }
+  // }
 
   private _addMapListeners() {
     if (this.map) {

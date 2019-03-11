@@ -51,38 +51,47 @@ export class WebMap<M = any, L = any, C = any> {
 
   options: MapOptions = OPTIONS;
 
-  displayProjection = 'EPSG:3857';
-  lonlatProjection = 'EPSG:4326';
-
-  emitter = new EventEmitter();
-  keys: Keys = new Keys(); // TODO: make injectable cached
-  mapAdapter: MapAdapter<M>;
+  readonly emitter = new EventEmitter();
+  readonly keys: Keys = new Keys(); // TODO: make injectable cached
+  readonly mapAdapter: MapAdapter<M>;
   runtimeParams: RuntimeParams[] = [];
 
   getPaintFunctions = WebMap.getPaintFunctions;
 
-  _eventsStatus: { [eventName: string]: boolean } = {};
+  private readonly _eventsStatus: { [eventName: string]: boolean } = {};
 
-  private DPI = 1000 / 39.37 / 0.28;
-  private IPM = 39.37;
-
-  private _starterKits: StarterKit[];
-  private _baseLayers: string[] = [];
-  private _layers: { [x: string]: LayerAdapter } = {};
+  private readonly _starterKits: StarterKit[];
+  private readonly _baseLayers: string[] = [];
+  private readonly _layers: { [x: string]: LayerAdapter } = {};
   private _layersIds: number = 1;
-  private _selectedLayers: string[] = [];
+  private readonly _selectedLayers: string[] = [];
   private _extent?: LngLatBoundsArray;
 
   constructor(appOptions: AppOptions) {
     this.mapAdapter = appOptions.mapAdapter;
     this._starterKits = appOptions.starterKits || [];
-
+    if (appOptions.mapOptions) {
+      this.options = deepmerge(OPTIONS || {}, appOptions.mapOptions);
+    }
     this._addEventsListeners();
+    if (appOptions.create) {
+      this.create(this.options);
+    }
   }
 
-  async create(options: MapOptions): Promise<this> {
+  /**
+   * Manual way to create a map. On default
+   * @example
+   * ```javascript
+   * const webMap = new WebMap(options);
+   * // options.create === false
+   * webMap.create(mapOptions).then(() => doSomething());
+   * ```
+   */
+  async create(options?: MapOptions): Promise<this> {
     this.options = deepmerge(OPTIONS || {}, options);
     await this._setupMap();
+    this._emitStatusEvent('create', this);
     return this;
   }
 
@@ -132,10 +141,6 @@ export class WebMap<M = any, L = any, C = any> {
     return layer;
   }
 
-  isBaseLayer(layerName: string): boolean {
-    return this._baseLayers.indexOf(layerName) !== -1;
-  }
-
   setCenter(lngLat: LngLatArray): this {
     this.mapAdapter.setCenter(lngLat);
     return this;
@@ -183,6 +188,10 @@ export class WebMap<M = any, L = any, C = any> {
     }
   }
 
+  isBaseLayer(layerName: string): boolean {
+    return this._baseLayers.indexOf(layerName) !== -1;
+  }
+
   getLayerAdapters(): { [name: string]: Type<LayerAdapter> } {
     return this.mapAdapter.layerAdapters;
   }
@@ -211,69 +220,12 @@ export class WebMap<M = any, L = any, C = any> {
     return Object.keys(this._layers);
   }
 
+  /**
+   * Check if the given layer on the map
+   */
   isLayerVisible(layerDef: LayerDef): boolean {
     const layer = this.getLayer(layerDef);
     return layer && layer.options.visibility !== undefined ? layer.options.visibility : false;
-  }
-
-  /**
-   * @deprecated use isLayerVisible instead
-   */
-  isLayerOnTheMap(layerDef: LayerDef): boolean {
-    return this.isLayerVisible(layerDef);
-  }
-
-  @onLoad('build-map')
-  createControl(control: MapControl, options?: CreateControlOptions): C | undefined {
-    if (this.mapAdapter.createControl) {
-      return this.mapAdapter.createControl(control, options);
-    }
-  }
-
-  @onLoad('build-map')
-  createButtonControl(options: ButtonControlOptions): C | undefined {
-    return createButtonControl(this, options);
-  }
-
-  @onLoad('build-map')
-  createToggleControl(options: ToggleControlOptions): C | undefined {
-    if (this.mapAdapter.createToggleControl) {
-      return this.mapAdapter.createToggleControl(options);
-    } else {
-      return createToggleControl(this, options);
-    }
-  }
-
-  removeControl(control: any) {
-    if (control.remove) {
-      control.remove();
-    } else if (this.mapAdapter.removeControl) {
-      this.mapAdapter.removeControl(control);
-    }
-  }
-
-  getControl<K extends keyof MapControls>(control: K, options?: MapControls[K]): C | undefined {
-    const engine = this.mapAdapter.controlAdapters[control];
-    if (engine) {
-      return new engine(options);
-    }
-  }
-
-  async addControl<K extends keyof MapControls>(
-    controlDef: K | C,
-    position: ControlPositions,
-    options?: MapControls[K]) {
-
-    let control: C | undefined;
-    if (typeof controlDef === 'string') {
-      control = this.getControl(controlDef, options);
-    } else {
-      control = controlDef as C;
-    }
-    if (control) {
-      const _control = await control;
-      return this.mapAdapter.addControl(_control, position);
-    }
   }
 
   async addLayer<K extends keyof LayerAdapters, O extends AdapterOptions = AdapterOptions>(
@@ -336,9 +288,9 @@ export class WebMap<M = any, L = any, C = any> {
     for (const l in this._layers) {
       if (this._layers.hasOwnProperty(l)) {
         this.removeLayer(l);
+        delete this._layers[l];
       }
     }
-    this._layers = {};
   }
 
   removeLayer(layerDef: LayerDef) {
@@ -371,14 +323,6 @@ export class WebMap<M = any, L = any, C = any> {
         this.mapAdapter.setLayerOpacity(layer.layer, value);
       }
     }
-  }
-
-  getScaleForResolution(res: number, mpu: number = 1): number {
-    return res * (mpu * this.IPM * this.DPI);
-  }
-
-  getResolutionForScale(scale: number, mpu: number = 1): number {
-    return scale / (mpu * this.IPM * this.DPI);
   }
 
   toggleLayer(layerDef: LayerDef, status?: boolean) {
@@ -417,15 +361,11 @@ export class WebMap<M = any, L = any, C = any> {
     }
   }
 
-  requestGeomString(pixel: Pixel, pixelRadius: number) {
-    if (this.mapAdapter.requestGeomString) {
-      return this.mapAdapter.requestGeomString(pixel, pixelRadius);
-    }
-  }
-
-  onMapClick(evt: MapClickEvent) {
-    this.emitter.emit('click', evt);
-  }
+  // requestGeomString(pixel: Pixel, pixelRadius: number) {
+  //   if (this.mapAdapter.requestGeomString) {
+  //     return this.mapAdapter.requestGeomString(pixel, pixelRadius);
+  //   }
+  // }
 
   selectLayer(layerDef: LayerDef) {
     const layerMem = this.getLayer(layerDef);
@@ -490,6 +430,59 @@ export class WebMap<M = any, L = any, C = any> {
     }
   }
 
+  @onLoad('build-map')
+  createControl(control: MapControl, options?: CreateControlOptions): C | undefined {
+    if (this.mapAdapter.createControl) {
+      return this.mapAdapter.createControl(control, options);
+    }
+  }
+
+  @onLoad('build-map')
+  createButtonControl(options: ButtonControlOptions): C | undefined {
+    return createButtonControl(this, options);
+  }
+
+  @onLoad('build-map')
+  createToggleControl(options: ToggleControlOptions): C | undefined {
+    if (this.mapAdapter.createToggleControl) {
+      return this.mapAdapter.createToggleControl(options);
+    } else {
+      return createToggleControl(this, options);
+    }
+  }
+
+  removeControl(control: any) {
+    if (control.remove) {
+      control.remove();
+    } else if (this.mapAdapter.removeControl) {
+      this.mapAdapter.removeControl(control);
+    }
+  }
+
+  getControl<K extends keyof MapControls>(control: K, options?: MapControls[K]): C | undefined {
+    const engine = this.mapAdapter.controlAdapters[control];
+    if (engine) {
+      return new engine(options);
+    }
+  }
+
+  async addControl<K extends keyof MapControls>(
+    controlDef: K | C,
+    position: ControlPositions,
+    options?: MapControls[K]) {
+
+    let control: C | undefined;
+    if (typeof controlDef === 'string') {
+      control = this.getControl(controlDef, options);
+    } else {
+      control = controlDef as C;
+    }
+    if (control) {
+      const _control = await control;
+      return this.mapAdapter.addControl(_control, position);
+    }
+  }
+
   getAttributions(options: GetAttributionsOptions): string[] {
     const attributions: string[] = [];
     for (const l in this._layers) {
@@ -508,10 +501,21 @@ export class WebMap<M = any, L = any, C = any> {
     return attributions;
   }
 
-  private async _setupMap() {
+  getEventStatus(eventName: string): boolean {
+    const status = this._eventsStatus[eventName];
+    return status !== undefined ? status : false;
+  }
 
-    this.mapAdapter.displayProjection = this.displayProjection;
-    this.mapAdapter.lonlatProjection = this.lonlatProjection;
+  onMapClick(evt: MapClickEvent) {
+    this.emitter.emit('click', evt);
+  }
+
+  protected _emitStatusEvent(event: string, data?: any) {
+    this._eventsStatus[event] = true;
+    this.emitter.emit(event, data);
+  }
+
+  private async _setupMap() {
 
     this.mapAdapter.create(this.options);
     this._zoomToInitialExtent();
@@ -519,7 +523,7 @@ export class WebMap<M = any, L = any, C = any> {
     await this._addLayerProviders();
     await this._onLoadSync();
 
-    this._emitLoadEvent('build-map', this.mapAdapter);
+    this._emitStatusEvent('build-map', this.mapAdapter);
     return this;
   }
 
@@ -596,11 +600,6 @@ export class WebMap<M = any, L = any, C = any> {
       }
     }
     return paint;
-  }
-
-  private _emitLoadEvent(event: string, data: any) {
-    this._eventsStatus[event] = true;
-    this.emitter.emit(event, data);
   }
 
   private async _onLayerClick(options: OnLayerClickOptions) {

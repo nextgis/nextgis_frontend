@@ -76,26 +76,26 @@ export class NgwKit implements StarterKit {
   // options is temporal to set list of layers id, because layers id is not item parameter now
   sendIdentifyRequest(ev: MapClickEvent, webMap: WebMap, options: { layers?: string[] } = {}) {
 
-    webMap.emitter.emit('start-identify', { ev });
-    const geom = webMap.requestGeomString(ev.pixel, this.pixelRadius);
-    if (options.layers) {
-      const layers: string[] = options.layers;
-      if (!layers) {
-        // TODO: layer_style_id - 1 is hardcode to get layers id for NGW webmap
-        // layers = webMap.layers.tree.getDescendants().filter((x) => {
-        //   return x.item.item_type === 'layer' && x.properties.get('visibility');
-        // }).map((x) => String(Number(x.item.layer_style_id) - 1));
-      }
-      const data: RequestOptions = {
-        geom,
-        srs: 3857,
-        layers,
-      };
-      return this.connector.post('feature_layer.identify', { data }).then((resp) => {
-        webMap.emitter.emit('identify', { ev, data: resp });
-        return resp;
-      });
-    }
+    // webMap.emitter.emit('start-identify', { ev });
+    // const geom = webMap.requestGeomString(ev.pixel, this.pixelRadius);
+    // if (options.layers) {
+    //   const layers: string[] = options.layers;
+    //   if (!layers) {
+    //     // TODO: layer_style_id - 1 is hardcode to get layers id for NGW webmap
+    //     // layers = webMap.layers.tree.getDescendants().filter((x) => {
+    //     //   return x.item.item_type === 'layer' && x.properties.get('visibility');
+    //     // }).map((x) => String(Number(x.item.layer_style_id) - 1));
+    //   }
+    //   const data: RequestOptions = {
+    //     geom,
+    //     srs: 3857,
+    //     layers,
+    //   };
+    //   return this.connector.post('feature_layer.identify', { data }).then((resp) => {
+    //     webMap.emitter.emit('identify', { ev, data: resp });
+    //     return resp;
+    //   });
+    // }
   }
 
   private _getLayerAdapter() {

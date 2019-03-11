@@ -5,6 +5,7 @@
 import { MapAdapter } from './MapAdapter';
 import { StarterKit } from './StarterKit';
 import { LngLatArray, LngLatBoundsArray } from './BaseTypes';
+import { WebMap } from '../WebMap';
 
 export interface MapOptions {
   /**
@@ -48,13 +49,37 @@ export interface MapOptions {
 }
 
 export interface AppOptions {
+  /**
+   * The main initialization property of WebMap.
+   * Determines the way of interaction with the selected GIS framework.
+   * Available: [Leaflet](leaflet-map-adapter); [Openlayers](ol-map-adapter); [MapboxGL](mapboxgl-map-adapter)
+   */
   mapAdapter: MapAdapter;
+  /**
+   * One way to extend WebMap functionality with the help of kits.
+   */
   starterKits?: StarterKit[];
+  mapOptions?: MapOptions;
+  /**
+   * Аutomatic creation of a map from the constructor
+   * @default false
+   *
+   * @example
+   * ```javascript
+   * const webMap = new WebMap(options);
+   * // create: false
+   * webMap.create().then(() => doSomething());
+   * // create: true
+   * webMap.emitter.on('created', () => doSomething());
+   * ```
+   */
+  create?: boolean;
   // displayConfig?: DisplayConfig;
   // [configName: string]: any;
 }
 
 export interface WebMapAppEvents {
+  'create': WebMap;
   'build-map': MapAdapter;
 }
 
