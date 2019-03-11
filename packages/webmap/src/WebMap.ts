@@ -18,7 +18,7 @@ import { MapOptions, AppOptions, GetAttributionsOptions } from './interfaces/Web
 import { LngLatBoundsArray, Type, Cursor, LngLatArray, LayerDef } from './interfaces/BaseTypes';
 import { RuntimeParams } from './interfaces/RuntimeParams';
 import { StarterKit } from './interfaces/StarterKit';
-import { Keys } from './components/keys/Keys';
+
 import {
   MapControl,
   MapControls,
@@ -27,13 +27,17 @@ import {
   ToggleControlOptions
 } from './interfaces/MapControl';
 
+import { Keys } from './components/keys/Keys';
 import { Feature, GeoJsonObject } from 'geojson';
+
+import StrictEventEmitter from 'strict-event-emitter-types';
 import { EventEmitter } from 'events';
 
 import { onLoad } from './util/decorators';
 import { deepmerge } from './util/lang';
 import { createButtonControl } from './components/controls/ButtonControl';
 import { createToggleControl } from './components/controls/ToggleControl';
+import { WebMapEvents } from './interfaces/Events';
 
 const OPTIONS: MapOptions = {
   minZoom: 0,
@@ -43,20 +47,20 @@ const OPTIONS: MapOptions = {
 /**
  * @class WebMap
  */
-export class WebMap<M = any, L = any, C = any> {
+export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEvents> {
 
   static getPaintFunctions?: { [name: string]: GetPaintFunction };
 
   options: MapOptions = OPTIONS;
 
-  readonly emitter = new EventEmitter();
+  readonly emitter: StrictEventEmitter<EventEmitter, WebMapEvents> = new EventEmitter();
   readonly keys: Keys = new Keys(); // TODO: make injectable cached
   readonly mapAdapter: MapAdapter<M>;
   runtimeParams: RuntimeParams[] = [];
 
   getPaintFunctions = WebMap.getPaintFunctions;
 
-  private readonly _eventsStatus: { [eventName: string]: boolean } = {};
+  private readonly _eventsStatus: { [key in keyof E]?: boolean } = {};
 
   private readonly _starterKits: StarterKit[];
   private readonly _baseLayers: string[] = [];
@@ -366,7 +370,7 @@ export class WebMap<M = any, L = any, C = any> {
           this.showLayer(layerId);
         }
       }
-      this.emitter.emit('layer:add', {id: layerId, layer: _adapter});
+      this.emitter.emit('layer:add', _adapter);
       return _adapter;
 
     }
@@ -616,8 +620,10 @@ export class WebMap<M = any, L = any, C = any> {
     return attributions;
   }
 
-  getEventStatus(eventName: string): boolean {
-    const status = this._eventsStatus[eventName];
+  getEventStatus(eventName: keyof E): boolean {
+    // ugly hack to disable type checking error
+    const _eventName = eventName as keyof WebMapEvents;
+    const status = this._eventsStatus[_eventName];
     return status !== undefined ? status : false;
   }
 
@@ -625,9 +631,11 @@ export class WebMap<M = any, L = any, C = any> {
     this.emitter.emit('click', evt);
   }
 
-  protected _emitStatusEvent(event: string, data?: any) {
-    this._eventsStatus[event] = true;
-    this.emitter.emit(event, data);
+  protected _emitStatusEvent(eventName: keyof E, data?: any) {
+    // ugly hack to disable type checking error
+    const _eventName = eventName as keyof WebMapEvents;
+    this._eventsStatus[_eventName] = true;
+    this.emitter.emit(_eventName, data);
   }
 
   protected onMapLoad(cb?: any): Promise<void> {

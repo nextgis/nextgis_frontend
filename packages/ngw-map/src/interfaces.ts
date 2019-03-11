@@ -8,13 +8,14 @@ import {
   CirclePaint,
   PathPaint,
   IconOptions,
-  LngLatBoundsArray,
-  MapControl,
   MapControls,
+  WebMapEvents,
 
 } from '@nextgis/webmap';
 import { NgwLayerOptions } from '@nextgis/ngw-kit';
 import { Credentials } from '@nextgis/ngw-connector';
+
+export { NgwLayerOptions };
 
 export interface ControlOptions {
   position?: ControlPositions;
@@ -98,4 +99,6 @@ export interface NgwMapOptions<C = any> extends MapOptions {
   controlsOptions?: { [controlName: string]: any };
 }
 
-export { NgwLayerOptions };
+export interface NgwMapEvents extends WebMapEvents {
+  'controls:create': any;
+}

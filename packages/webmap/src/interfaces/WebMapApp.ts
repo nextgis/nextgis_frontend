@@ -5,7 +5,6 @@
 import { MapAdapter } from './MapAdapter';
 import { StarterKit } from './StarterKit';
 import { LngLatArray, LngLatBoundsArray } from './BaseTypes';
-import { WebMap } from '../WebMap';
 
 export interface MapOptions {
   /**
@@ -76,11 +75,6 @@ export interface AppOptions {
   create?: boolean;
   // displayConfig?: DisplayConfig;
   // [configName: string]: any;
-}
-
-export interface WebMapAppEvents {
-  'create': WebMap;
-  'build-map': MapAdapter;
 }
 
 export interface GetAttributionsOptions {

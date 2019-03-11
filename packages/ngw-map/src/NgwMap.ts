@@ -10,19 +10,20 @@ import WebMap, {
   MapControls,
   LayerAdaptersOptions,
   Type,
-  LayerAdapter
+  LayerAdapter,
+  onLoad
 } from '@nextgis/webmap';
 import NgwConnector from '@nextgis/ngw-connector';
 import QmsKit, { QmsAdapterOptions } from '@nextgis/qms-kit';
 import NgwKit, { NgwLayerOptions } from '@nextgis/ngw-kit';
 import { getIcon } from '@nextgis/icons';
 
-import { onMapLoad, onLoad } from './decorators';
+import { onMapLoad } from './decorators';
 import { fixUrlStr, deepmerge, detectGeometryType, createAsyncAdapter } from './utils';
 // @ts-ignore
 import { toWgs84 } from 'reproject';
 import { GeoJsonObject } from 'geojson';
-import { NgwMapOptions, ControlOptions } from './interfaces';
+import { NgwMapOptions, ControlOptions, NgwMapEvents } from './interfaces';
 
 const epsg = {
   // tslint:disable-next-line:max-line-length
@@ -107,7 +108,7 @@ function prepareWebMapOptions(mapAdapter: MapAdapter, options: NgwMapOptions) {
  * });
  * ```
  */
-export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C> {
+export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEvents> {
 
   static utils = { fixUrlStr };
   static decorators = { onMapLoad };
@@ -172,7 +173,7 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C> {
    * ngwMap.addControl('ZOOM', {position: 'top-right'})
    * ```
    */
-  @onLoad('control:created')
+  @onLoad<NgwMapEvents>('controls:create')
   async addControl<K extends keyof MapControls>(
     controlDef: K | C,
     position: ControlPositions,
@@ -374,7 +375,6 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C> {
     return this.create({
       ...this.options
     }).then(() => {
-      this._emitStatusEvent('map:created');
       if (this.options.qmsId) {
         let qmsId: number;
         let qmsLayerName: string | undefined;
@@ -411,6 +411,6 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C> {
         this.addControl(x, position || 'top-left', options);
       });
     }
-    this._emitStatusEvent('control:created');
+    this._emitStatusEvent('controls:create');
   }
 }
