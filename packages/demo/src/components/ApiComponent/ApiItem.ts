@@ -33,6 +33,7 @@ export interface Tag {
 type Tags = Tag[];
 
 export interface ApiComment {
+  text?: string;
   shortText?: string;
   tags?: Tags;
 }

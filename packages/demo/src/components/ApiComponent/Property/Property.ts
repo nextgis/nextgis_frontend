@@ -1,10 +1,11 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import { ApiItem, Parameter, MethodItem, Property as PropertyItem } from '../ApiItem';
 import Reference from '../Reference/Reference.vue';
+import Comment from '../Comment/Comment.vue';
 import * as utility from '../utility';
 
 @Component({
-  components: { Reference }
+  components: { Reference, Comment }
 })
 export class Property extends Vue {
   @Prop() item: PropertyItem;
