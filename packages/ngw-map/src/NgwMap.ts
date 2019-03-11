@@ -116,7 +116,6 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C> {
 
   options: NgwMapOptions<C> = {};
   connector: NgwConnector;
-  _eventsStatus: { [eventName: string]: boolean } = {};
 
   protected _ngwLayers: {
     [layerName: string]: {
@@ -413,10 +412,5 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C> {
       });
     }
     this._emitStatusEvent('control:created');
-  }
-
-  private _emitStatusEvent(event: string) {
-    this._eventsStatus[event] = true;
-    this.emitter.emit(event);
   }
 }

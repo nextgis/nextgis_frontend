@@ -18,7 +18,7 @@ export function onLoad(event: string) {
           const origin = originalMethod.apply(this, args);
           origin && origin.then ? origin.then(resolve).catch(reject) : resolve(origin);
         };
-        const isLoaded = this._eventsStatus[event] !== undefined ? this._eventsStatus[event] : false;
+        const isLoaded = this.getEventStatus(event);
         if (isLoaded) {
           _resolve();
         } else {
