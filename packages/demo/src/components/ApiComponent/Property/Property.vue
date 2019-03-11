@@ -1,5 +1,6 @@
 <template>
   <div>
+    <comment :item="item"></comment>
     <div v-if="item.type.type === 'reference'">
       <reference :parameter="item"></reference>
     </div>

@@ -1,8 +1,8 @@
-import { LayerAdapter } from './LayerAdapter';
-
 /**
  * @module webmap
  */
+
+import { LayerAdapter } from './LayerAdapter';
 
  /**
   * @ignore

@@ -1,6 +1,7 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import { ApiItem, Parameter } from '../ApiItem';
 import ApiOption from '../ApiOption/ApiOption.vue';
+import { createHref } from '../utility';
 
 @Component({
   components: { ApiOption }
@@ -25,7 +26,7 @@ export class Reference extends Vue {
 
   isNoApi() {
     const p = this.parameter;
-    const text = p.comment && p.comment.shortText;
+    const text = p.comment && (p.comment.text || p.comment.shortText);
     return text && text.indexOf('#noapi') !== -1;
   }
 
@@ -39,7 +40,7 @@ export class Reference extends Vue {
         // @ts-ignore
         this.$root.goTo(name);
       } else {
-        this.$router.push(`${reference.module.name}-api#${name}`);
+        this.$router.push(createHref(reference, name));
       }
     }
   }

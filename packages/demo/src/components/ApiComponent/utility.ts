@@ -68,6 +68,14 @@ export function getOptionType(option: Property, indexes: Indexes): string {
   return '';
 }
 
+export function createHref(ref: ApiItem, name: string) {
+  return `${ref.module.name}-api#${name}`;
+}
+
+export function createLink(ref: ApiItem, name: string) {
+  return `<a href="${createHref(ref, name)}">${name}</a>`;
+}
+
 export function createReference(option: ReferencePropertyType, indexes: Indexes) {
   let str = '';
   const kindStringToLink: KindString[] = ['Interface', 'Class'];
@@ -77,21 +85,17 @@ export function createReference(option: ReferencePropertyType, indexes: Indexes)
     return ref && kindStringToLink.indexOf(ref.kindString) !== -1;
   };
 
-  const createHref = (ref) => {
-    return `<a href="${ref.module.name}-api#${option.name}">${option.name}</a>`;
-  };
-
   if (refOption && refOption.type) {
     str += getOptionType(refOption.type, indexes);
   } else if (option.typeArguments) {
     let name = option.name;
     if (option.type === 'reference' && isHref(refOption)) {
-      name = createHref(refOption);
+      name = createLink(refOption, option.name);
     }
     const args = option.typeArguments.map((x) => getOptionType(x, indexes)).filter((x) => !!x).join(' | ');
     str += `${name}${args ? `&lt;${args}&gt;` : ''}`;
   } else if (isHref(refOption)) {
-    return createHref(refOption);
+    return createLink(refOption, option.name);
   } else if (refOption && refOption.kindString === 'Function') {
     return createMethodString(refOption as FunctionItem, indexes);
   } else {
