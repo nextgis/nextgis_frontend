@@ -48,8 +48,6 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   layerAdapters = LeafletMapAdapter.layerAdapters;
   controlAdapters = LeafletMapAdapter.controlAdapters;
 
-  displayProjection = 'EPSG:3857';
-  lonlatProjection = 'EPSG:4326';
   emitter = new EventEmitter();
 
   map?: Map;

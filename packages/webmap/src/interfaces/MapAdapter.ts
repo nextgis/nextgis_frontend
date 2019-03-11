@@ -53,8 +53,6 @@ export type ControlPositions = 'top-right' | 'top-left' | 'bottom-right' | 'bott
  */
 export interface MapAdapter<M = any, L = any, C = any> {
 
-  lonlatProjection?: string;
-  displayProjection?: string;
   /**
    * Original map object of GIS framework (Leaflet.Map, Openlayers.Map, Mapboxgl.Map or other)
    */
@@ -79,11 +77,7 @@ export interface MapAdapter<M = any, L = any, C = any> {
    * @param layer
    */
   removeLayer(layer: L): any;
-  /**
-   * Check if the given layer on the map
-   * @param layer
-   */
-  isLayerOnTheMap?(layer: L): boolean;
+
   /**
    * Set the transparency of given layer.
    * @param layer
@@ -123,5 +117,5 @@ export interface MapAdapter<M = any, L = any, C = any> {
   onMapClick(evt: any): void;
 
   // TODO: now return WKT geometry but need geojson
-  requestGeomString?(pixel: Pixel, pixelRadius?: number): string | undefined;
+  // requestGeomString?(pixel: Pixel, pixelRadius?: number): string | undefined;
 }
