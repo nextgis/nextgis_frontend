@@ -32,12 +32,12 @@ import { Feature, GeoJsonObject } from 'geojson';
 
 import StrictEventEmitter from 'strict-event-emitter-types';
 import { EventEmitter } from 'events';
+import { WebMapEvents } from './interfaces/Events';
 
 import { onLoad } from './util/decorators';
 import { deepmerge } from './util/lang';
 import { createButtonControl } from './components/controls/ButtonControl';
 import { createToggleControl } from './components/controls/ToggleControl';
-import { WebMapEvents } from './interfaces/Events';
 
 const OPTIONS: MapOptions = {
   minZoom: 0,
@@ -350,7 +350,7 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
       }
 
       const _adapter = new adapterEngine(this.mapAdapter.map, options);
-
+      this.emitter.emit('layer:pre-add', {adapter: _adapter, options});
       await this.onMapLoad();
       const layer = await _adapter.addLayer(options);
       // checking that the original layer was inserted into the adapter anyway
@@ -397,6 +397,7 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
     const layer = this.getLayer(layerDef);
     const layerId = layer && this.getLayerId(layer);
     if (layer && layerId) {
+      this.emitter.emit('layer:pre-remove', layer);
       this.mapAdapter.removeLayer(layer.layer);
       if (layer.options.baseLayer) {
         const index = this._baseLayers.indexOf(layerId);
@@ -405,6 +406,7 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
         }
       }
       delete this._layers[layerId];
+      this.emitter.emit('layer:remove', layer);
     }
   }
 
@@ -442,6 +444,11 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
 
     const action = (source: any, l: LayerAdapter) => {
       l.options.visibility = toStatus;
+
+      const preEventName = toStatus ? 'layer:pre-show' : 'layer:pre-hide';
+      const eventName = toStatus ? 'layer:show' : 'layer:hide';
+
+      this.emitter.emit(preEventName, l);
       if (toStatus && source) {
         const order = l.options.baseLayer ? 0 : l.options.order;
         if (l.showLayer) {
@@ -459,6 +466,7 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
           this.mapAdapter.hideLayer(l.layer);
         }
       }
+      this.emitter.emit(eventName, l);
     };
     if (layer && layer.options.visibility !== toStatus) {
       if (this.mapAdapter.map) {
