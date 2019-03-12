@@ -1,0 +1,5 @@
+{
+  "name": "Events",
+  "description": "",
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
+}
