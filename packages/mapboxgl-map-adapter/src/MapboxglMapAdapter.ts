@@ -74,7 +74,10 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
           },
         });
         this._addEventsListeners();
-        this.onMapLoad();
+        this.map.once('load', () => {
+          this.isLoaded = true;
+          this.emitter.emit('create', { map: this.map });
+        });
       }
     }
   }
@@ -196,7 +199,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     const map = this.map;
     if (map) {
       layerIds.forEach((layerId) => {
-        this.onMapLoad().then(() => {
+        this._onMapLoad().then(() => {
           const layer = map.getLayer(layerId);
           if (layer) {
             map.setPaintProperty(layerId, layer.type + '-opacity', opacity);
@@ -204,27 +207,6 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
         });
       });
     }
-  }
-
-  onMapLoad(cb?: () => any): Promise<Map> {
-    return new Promise<Map>((resolve) => {
-      const _resolve = () => {
-        if (cb) {
-          cb();
-        }
-        if (this.map) {
-          resolve(this.map);
-        }
-      };
-      if (this.isLoaded) { // map.loaded()
-        _resolve();
-      } else if (this.map) {
-        this.map.once('load', () => {
-          this.isLoaded = true;
-          _resolve();
-        });
-      }
-    });
   }
 
   createControl(control: MapControl): IControl {
@@ -256,6 +238,26 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     this.emitter.emit('click', { latLng, pixel: { top: y, left: x } });
   }
 
+  private _onMapLoad(cb?: () => any): Promise<Map> {
+    return new Promise<Map>((resolve) => {
+      const _resolve = () => {
+        if (cb) {
+          cb();
+        }
+        if (this.map) {
+          resolve(this.map);
+        }
+      };
+      if (this.isLoaded) { // map.loaded()
+        _resolve();
+      } else if (this.map) {
+        this.emitter.once('create', () => {
+          _resolve();
+        });
+      }
+    });
+  }
+
   private _getLayerIds(mem: TLayerAdapter): string[] {
     let _layers: TLayer = [];
     if (mem) {
@@ -273,7 +275,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   }
 
   private _toggleLayer(layerId: string, status: boolean): void {
-    this.onMapLoad().then((map) => {
+    this._onMapLoad().then((map) => {
       map.setLayoutProperty(layerId, 'visibility', status ? 'visible' : 'none');
     });
   }
