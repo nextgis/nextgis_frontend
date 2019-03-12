@@ -124,12 +124,6 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     }
   }
 
-  onMapLoad(cb?: any) {
-    return new Promise((resolve) => {
-      resolve(cb && cb());
-    });
-  }
-
   setCenter(lonLat: LngLatArray) {
     if (this._olView) {
       this._olView.setCenter(fromLonLat(lonLat));

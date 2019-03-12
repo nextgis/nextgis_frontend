@@ -52,22 +52,22 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
   static getPaintFunctions?: { [name: string]: GetPaintFunction };
 
   options: MapOptions = OPTIONS;
-
+  // `WebMapEvents` must be `E` but its not work correct
   readonly emitter: StrictEventEmitter<EventEmitter, WebMapEvents> = new EventEmitter();
   readonly keys: Keys = new Keys(); // TODO: make injectable cached
   readonly mapAdapter: MapAdapter<M>;
-  runtimeParams: RuntimeParams[] = [];
+  readonly runtimeParams: RuntimeParams[] = [];
 
   getPaintFunctions = WebMap.getPaintFunctions;
 
   private readonly _eventsStatus: { [key in keyof E]?: boolean } = {};
 
+  private _layersIds: number = 1;
+  private _extent?: LngLatBoundsArray;
   private readonly _starterKits: StarterKit[];
   private readonly _baseLayers: string[] = [];
   private readonly _layers: { [x: string]: LayerAdapter } = {};
-  private _layersIds: number = 1;
   private readonly _selectedLayers: string[] = [];
-  private _extent?: LngLatBoundsArray;
 
   constructor(appOptions: AppOptions) {
     this.mapAdapter = appOptions.mapAdapter;
@@ -646,12 +646,25 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
     this.emitter.emit(_eventName, data);
   }
 
-  protected onMapLoad(cb?: any): Promise<void> {
-    const mapAdapterOnLoad = this.mapAdapter.onMapLoad;
-    if (mapAdapterOnLoad) {
-      return mapAdapterOnLoad.call(this.mapAdapter, cb);
-    }
-    return Promise.resolve(cb);
+  protected onMapLoad(cb?: (mapAdapter: MapAdapter) => void): Promise<MapAdapter> {
+    return new Promise((resolve) => {
+      const _resolve = () => {
+        const mapAdapter = this.mapAdapter;
+        if (cb) {
+          cb(mapAdapter);
+        }
+        if (mapAdapter) {
+          resolve(mapAdapter);
+        }
+      };
+      if (this.mapAdapter.map) {
+        _resolve();
+      } else {
+        this.mapAdapter.emitter.once('create', () => {
+          _resolve();
+        });
+      }
+    });
   }
 
   private async _setupMap() {

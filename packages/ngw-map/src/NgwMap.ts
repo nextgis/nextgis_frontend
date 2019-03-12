@@ -20,7 +20,7 @@ import { getIcon } from '@nextgis/icons';
 
 import { onMapLoad } from './decorators';
 import { fixUrlStr, deepmerge, detectGeometryType, createAsyncAdapter } from './utils';
-
+// @ts-ignore
 import { toWgs84 } from 'reproject';
 import { GeoJsonObject } from 'geojson';
 import { NgwMapOptions, ControlOptions, NgwMapEvents } from './interfaces';
