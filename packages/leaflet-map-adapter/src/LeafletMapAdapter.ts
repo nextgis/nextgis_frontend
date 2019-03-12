@@ -81,18 +81,6 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     }
   }
 
-  onMapLoad(cb?: any): Promise<void> {
-    return new Promise((resolve) => {
-      if (this.map) {
-        resolve(cb && cb());
-      } else {
-        this.emitter.once('create', () => {
-          resolve(cb && cb());
-        });
-      }
-    });
-  }
-
   setView(lngLat: LngLatArray, zoom: number) {
     const [lng, lat] = lngLat;
     if (this.map) {

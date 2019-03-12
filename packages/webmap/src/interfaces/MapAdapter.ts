@@ -98,8 +98,6 @@ export interface MapAdapter<M = any, L = any, C = any> {
   getCenter(): LngLatArray | undefined;
   setCenter(latLng: LngLatArray): void;
 
-  onMapLoad(cb?: () => void): Promise<any>;
-
   getContainer(): HTMLElement | undefined;
 
   setCursor?(cursor: string): void;
