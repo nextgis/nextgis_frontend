@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Events</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body,
+    #map {
+      width: 100%;
+      height: 100%;
+    }
+
+    .log {
+      background: white;
+      padding: 4px;
+    }
+
+    .event-log {
+      color: red;
+    }
+
+    .event-log.ok {
+      color: green;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.0.0/polyfill.js"></script>
+  <script src="../../../ngw-leaflet/lib/ngw-leaflet.js"></script>
+</head>
+
+<body>
+  <div id='map'></div>
+  <script>
+
+    var ngwMap = new NgwMap({
+      baseUrl: 'https://demo.nextgis.com',
+      target: 'map',
+    });
+
+    var log = document.createElement('div');
+    log.className = 'log';
+    var eventControl = ngwMap.createControl({
+      onAdd: function () { return log }
+    }, { bar: true });
+
+    var addLayerControl = ngwMap.createButtonControl({
+      html: 'A',
+      onClick: function () {
+        var plusOrMinus = Math.random() < 0.5 ? -1 : 1;
+        ngwMap.addLayer('GEOJSON', {
+          data: {
+            "type": "Point", "coordinates": [
+              Math.round(Math.random() * 180),
+              Math.round(Math.random() * 90 * plusOrMinus)
+            ]
+          },
+          paint: function (feature) {
+            return { color: randomRgb() }
+          },
+          visibility: true
+        });
+      }
+    });
+    var removeLayersControl = ngwMap.createButtonControl({
+      html: 'R',
+      onClick: function () {
+        ngwMap.removeLayers();
+      }
+    });
+
+    var hideLayersControl = ngwMap.createButtonControl({
+      html: 'H',
+      onClick: function () { toggleLayers(false); }
+    });
+
+    var showLayersControl = ngwMap.createButtonControl({
+      html: 'S',
+      onClick: function () { toggleLayers(true); }
+    })
+
+    ngwMap.addControl(addLayerControl, 'top-left');
+    ngwMap.addControl(hideLayersControl, 'top-left');
+    ngwMap.addControl(showLayersControl, 'top-left');
+    ngwMap.addControl(removeLayersControl, 'top-left');
+
+    ngwMap.addControl(eventControl, 'top-right');
+
+    var events = [
+      'create',
+      'pre-zoom',
+      'zoom',
+      'pre-move',
+      'move',
+      'click',
+      'layer:pre-add',
+      'layer:add',
+      'layer:pre-remove',
+      'layer:remove',
+      'layer:pre-show',
+      'layer:show',
+      'layer:pre-hide',
+      'layer:hide',
+    ];
+    for (var fry = 0; fry < events.length; fry++) {
+      var event = events[fry];
+      var element = document.createElement('div');
+      element.innerHTML = event;
+      element.id = event;
+      element.className = 'event-log';
+      log.appendChild(element);
+      addListener(event, element);
+    }
+
+    ngwMap.setCenter([0, 0]);
+    ngwMap.setZoom(0);
+
+    function addListener(event, el) {
+      ngwMap.emitter.on(event, function (data) {
+        el.classList.add('ok');
+        console.log(event, data)
+      })
+    }
+
+    function toggleLayers(status) {
+      var layers = ngwMap.getLayers();
+      for (var l = 0; l < layers.length; l++) {
+        ngwMap.toggleLayer(layers[l], status);
+      }
+    }
+
+    function randomRgb() {
+      var o = Math.round, r = Math.random, s = 255;
+      return 'rgb(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ')';
+    }
+  </script>
+</body>
+
+</html>
