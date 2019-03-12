@@ -45,6 +45,9 @@
       target: 'map',
     });
 
+    ngwMap.setCenter([0, 0]);
+    ngwMap.setZoom(0);
+
     var log = document.createElement('div');
     log.className = 'log';
     var eventControl = ngwMap.createControl({
@@ -95,10 +98,8 @@
 
     var events = [
       'create',
-      'pre-zoom',
-      'zoom',
-      'pre-move',
-      'move',
+      'zoom-end',
+      'move-end',
       'click',
       'layer:pre-add',
       'layer:add',
@@ -118,9 +119,6 @@
       log.appendChild(element);
       addListener(event, element);
     }
-
-    ngwMap.setCenter([0, 0]);
-    ngwMap.setZoom(0);
 
     function addListener(event, el) {
       ngwMap.emitter.on(event, function (data) {
