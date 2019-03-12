@@ -761,15 +761,12 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
 
   private _addEventsListeners() {
     // propagate map click event
-    this.mapAdapter.emitter.on('click', (ev: MapClickEvent) => this._onMapClick(ev));
-  }
+    const events: Array<keyof WebMapEvents> = ['click', 'zoom-end', 'move-end'];
 
-  private _onMapClick(ev: MapClickEvent) {
-    this.emitter.emit('click', ev);
-    this._starterKits.forEach((x) => {
-      if (x.onMapClick) {
-        x.onMapClick(ev, this);
-      }
+    events.forEach((x) => {
+      this.mapAdapter.emitter.on(x, (data) => {
+        this.emitter.emit(x, data);
+      });
     });
   }
 

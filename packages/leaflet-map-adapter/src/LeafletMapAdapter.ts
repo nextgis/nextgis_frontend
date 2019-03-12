@@ -222,6 +222,18 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
       this.map.on('click', (evt) => {
         this.onMapClick(evt as LeafletMouseEvent);
       });
+
+      const events: Array<[string, string, (...args: any) => any]> = [
+        ['zoomend', 'zoom-end', (z: number) => z],
+        ['moveend', 'move-end', (c: any) => c]
+      ];
+      events.forEach(([n, w, c]) => {
+        if (this.map) {
+          this.map.on(n, (data) => {
+            this.emitter.emit(w, this);
+          });
+        }
+      });
     }
   }
 
