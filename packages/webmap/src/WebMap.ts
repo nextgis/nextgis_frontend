@@ -351,7 +351,7 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
       }
 
       const _adapter = new adapterEngine(this.mapAdapter.map, options);
-      this.emitter.emit('layer:pre-add', _adapter);
+      this.emitter.emit('layer:preadd', _adapter);
       await this.onMapLoad();
       const layer = await _adapter.addLayer(options);
       // checking that the original layer was inserted into the adapter anyway
@@ -404,7 +404,7 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
     const layer = this.getLayer(layerDef);
     const layerId = layer && this.getLayerId(layer);
     if (layer && layerId) {
-      this.emitter.emit('layer:pre-remove', layer);
+      this.emitter.emit('layer:preremove', layer);
       this.mapAdapter.removeLayer(layer.layer);
       if (layer.options.baseLayer) {
         const index = this._baseLayers.indexOf(layerId);
@@ -452,7 +452,7 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
     const action = (source: any, l: LayerAdapter) => {
       l.options.visibility = toStatus;
 
-      const preEventName = toStatus ? 'layer:pre-show' : 'layer:pre-hide';
+      const preEventName = toStatus ? 'layer:preshow' : 'layer:prehide';
       const eventName = toStatus ? 'layer:show' : 'layer:hide';
 
       this.emitter.emit(preEventName, l);
