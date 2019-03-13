@@ -5,17 +5,20 @@
 import { WebMap } from '../WebMap';
 import { MapAdapter, MapClickEvent } from './MapAdapter';
 import { LayerAdapter, OnLayerClickOptions } from './LayerAdapter';
-import { LngLatArray } from './BaseTypes';
 
 export interface WebMapEvents {
   'build-map': MapAdapter;
   'create': WebMap;
 
   'click': MapClickEvent;
-  'zoom-end': MapAdapter;
-  'move-end': MapAdapter;
+  'zoomstart': MapAdapter;
+  'zoom': MapAdapter;
+  'zoomend': MapAdapter;
+  'movestart': MapAdapter;
+  'move': MapAdapter;
+  'moveend': MapAdapter;
 
-  'layer:pre-add': {adapter: LayerAdapter, options: any};
+  'layer:pre-add': LayerAdapter;
   'layer:add': LayerAdapter;
 
   'layer:pre-remove': LayerAdapter;

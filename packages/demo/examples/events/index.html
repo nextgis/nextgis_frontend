@@ -31,9 +31,17 @@
     .event-log.ok {
       color: green;
     }
+
+    .event-log.action {
+      background: greenyellow;
+      color: black;
+      transition: background 0.7s;
+    }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.0.0/polyfill.js"></script>
   <script src="../../../ngw-leaflet/lib/ngw-leaflet.js"></script>
+  <!-- <script src="../../../ngw-ol/lib/ngw-ol.js"></script> -->
+  <!-- <script src="../../../ngw-mapbox/lib/ngw-mapbox.js"></script> -->
 </head>
 
 <body>
@@ -43,6 +51,7 @@
     var ngwMap = new NgwMap({
       baseUrl: 'https://demo.nextgis.com',
       target: 'map',
+      qmsId: [487, 'baselayer'],
     });
 
     ngwMap.setCenter([0, 0]);
@@ -72,20 +81,25 @@
         });
       }
     });
+
     var removeLayersControl = ngwMap.createButtonControl({
       html: 'R',
+      title: 'Remove all layer',
       onClick: function () {
-        ngwMap.removeLayers();
+        // Use callback to disallow remove base layer
+        ngwMap.removeLayers(function (x) { return x !== 'baselayer';});
       }
     });
 
     var hideLayersControl = ngwMap.createButtonControl({
       html: 'H',
+      title: 'Hide all layers',
       onClick: function () { toggleLayers(false); }
     });
 
     var showLayersControl = ngwMap.createButtonControl({
       html: 'S',
+      title: 'Show all hidden layers',
       onClick: function () { toggleLayers(true); }
     })
 
@@ -98,8 +112,12 @@
 
     var events = [
       'create',
-      'zoom-end',
-      'move-end',
+      'zoomstart',
+      'zoom',
+      'zoomend',
+      'movestart',
+      'move',
+      'moveend',
       'click',
       'layer:pre-add',
       'layer:add',
@@ -119,10 +137,18 @@
       log.appendChild(element);
       addListener(event, element);
     }
-
+    var timeout = {};
     function addListener(event, el) {
       ngwMap.emitter.on(event, function (data) {
         el.classList.add('ok');
+        el.classList.add('action');
+        var timeoutId = timeout[event];
+        if (timeoutId) {
+          clearTimeout(timeoutId);
+        }
+        timeout[event] = setTimeout(function () {
+          el.classList.remove('action');
+        }, 750);
         console.log(event, data)
       })
     }
@@ -130,7 +156,10 @@
     function toggleLayers(status) {
       var layers = ngwMap.getLayers();
       for (var l = 0; l < layers.length; l++) {
-        ngwMap.toggleLayer(layers[l], status);
+        // Base layer is always ON
+        if (layers[l] !== 'baselayer') {
+          ngwMap.toggleLayer(layers[l], status);
+        }
       }
     }
 

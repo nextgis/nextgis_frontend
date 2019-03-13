@@ -339,6 +339,10 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
       this.map.on('click', (evt) => {
         this.onMapClick(evt);
       });
+
+      this.map.on('zoomend', (evt) => {
+        console.log('zoomend');
+      });
     }
   }
 }
