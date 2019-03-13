@@ -14,17 +14,18 @@ import {
 } from './MapControl';
 import { MapOptions } from './WebMapApp';
 import { LatLng, LngLatArray, LngLatBoundsArray, Pixel } from './BaseTypes';
+import { WebMapEvents } from './Events';
 
 /**
  * Parameters passed to the arguments of the callback function when clicking on the map
  */
 export interface MapClickEvent {
   /**
-   * The geographical point where the mouse event occured.
+   * The geographical point where the mouse event occurred.
    */
   latLng: LatLng;
   /**
-   * Pixel coordinates of the point where the mouse event occured relative to the map сontainer.
+   * Pixel coordinates of the point where the mouse event occurred relative to the map container.
    */
   pixel: Pixel;
   /**
@@ -44,6 +45,7 @@ export interface FitOptions {
 }
 
 export type ControlPositions = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
+export type EventsAlias = Array<keyof WebMapEvents | [string, keyof WebMapEvents]>;
 
 /**
  * Parameters and methods that control the behavior of the map and the layers on it.
@@ -69,6 +71,9 @@ export interface MapAdapter<M = any, L = any, C = any> {
    * Named map controls specific for each framework.
    */
   controlAdapters: { [name: string]: Type<C> };
+
+  universalEvents?: EventsAlias;
+  specialEvents?: Array<keyof WebMapEvents>;
 
   create(options?: MapOptions): void;
 

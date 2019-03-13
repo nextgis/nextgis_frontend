@@ -13,7 +13,7 @@ import {
   GeoJsonAdapterOptions
 } from './interfaces/LayerAdapter';
 import { LayerAdaptersOptions, LayerAdapter, OnLayerClickOptions } from './interfaces/LayerAdapter';
-import { MapAdapter, MapClickEvent, ControlPositions, FitOptions } from './interfaces/MapAdapter';
+import { MapAdapter, MapClickEvent, ControlPositions, FitOptions, EventsAlias } from './interfaces/MapAdapter';
 import { MapOptions, AppOptions, GetAttributionsOptions } from './interfaces/WebMapApp';
 import { LngLatBoundsArray, Type, Cursor, LngLatArray, LayerDef } from './interfaces/BaseTypes';
 import { RuntimeParams } from './interfaces/RuntimeParams';
@@ -350,7 +350,7 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
       }
 
       const _adapter = new adapterEngine(this.mapAdapter.map, options);
-      this.emitter.emit('layer:pre-add', {adapter: _adapter, options});
+      this.emitter.emit('layer:pre-add', _adapter);
       await this.onMapLoad();
       const layer = await _adapter.addLayer(options);
       // checking that the original layer was inserted into the adapter anyway
@@ -380,11 +380,17 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
   /**
    * Remove all layer from map and memory.
    */
-  removeLayers() {
+  removeLayers(cb?: (layer: string) => boolean) {
     for (const l in this._layers) {
       if (this._layers.hasOwnProperty(l)) {
-        this.removeLayer(l);
-        delete this._layers[l];
+        let allow = true;
+        if (cb) {
+          allow = cb(l);
+        }
+        if (allow) {
+          this.removeLayer(l);
+          delete this._layers[l];
+        }
       }
     }
   }
@@ -761,11 +767,41 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
 
   private _addEventsListeners() {
     // propagate map click event
-    const events: Array<keyof WebMapEvents> = ['click', 'zoom-end', 'move-end'];
+    const specialEvents: Array<keyof WebMapEvents> = this.mapAdapter.specialEvents || ['click'];
 
-    events.forEach((x) => {
+    specialEvents.forEach((x) => {
       this.mapAdapter.emitter.on(x, (data) => {
         this.emitter.emit(x, data);
+      });
+    });
+    this.onMapLoad().then(() => {
+      // universal events
+      const events: EventsAlias = this.mapAdapter.universalEvents || [
+        'zoomstart',
+        'zoom',
+        'zoomend',
+        'movestart',
+        'move',
+        'moveend',
+      ];
+      events.forEach((e) => {
+        let nativeName: string;
+        let webMapName: keyof WebMapEvents;
+        if (Array.isArray(e)) {
+          nativeName = e[0];
+          webMapName = e[1];
+        } else {
+          nativeName = webMapName = e;
+        }
+        const map = this.mapAdapter.map && this.mapAdapter.map;
+        // @ts-ignore
+        const mapEmitter = map && map.on;
+
+        if (mapEmitter) {
+          mapEmitter.call(map, nativeName, (data: any) => {
+            this.emitter.emit(webMapName, this);
+          });
+        }
       });
     });
   }
