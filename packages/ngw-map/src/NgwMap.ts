@@ -10,8 +10,7 @@ import WebMap, {
   MapControls,
   LayerAdaptersOptions,
   Type,
-  LayerAdapter,
-  onLoad
+  LayerAdapter
 } from '@nextgis/webmap';
 import NgwConnector from '@nextgis/ngw-connector';
 import QmsKit, { QmsAdapterOptions } from '@nextgis/qms-kit';
@@ -173,7 +172,7 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
    * ngwMap.addControl('ZOOM', {position: 'top-right'})
    * ```
    */
-  @onLoad<NgwMapEvents>('controls:create')
+  @WebMap.onLoad<NgwMapEvents>('controls:create')
   async addControl<K extends keyof MapControls>(
     controlDef: K | C,
     position: ControlPositions,
