@@ -16,7 +16,5 @@ export * from './interfaces/StarterKit';
 export * from './interfaces/RuntimeParams';
 export * from './interfaces/Events';
 
-export * from './util/decorators';
-
 export { WebMap };
 export default WebMap;
