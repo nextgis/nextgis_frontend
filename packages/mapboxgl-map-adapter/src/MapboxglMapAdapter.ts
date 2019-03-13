@@ -11,7 +11,8 @@ import {
   LngLatArray,
   MapOptions,
   LayerAdapter,
-  LngLatBoundsArray
+  LngLatBoundsArray,
+  WebMapEvents
 } from '@nextgis/webmap';
 import { MvtAdapter } from './layer-adapters/MvtAdapter';
 import { Map, IControl, MapEventType, EventData } from 'mapbox-gl';
@@ -52,6 +53,14 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   layerAdapters = MapboxglMapAdapter.layerAdapters;
   controlAdapters = MapboxglMapAdapter.controlAdapters;
 
+  private _universalEvents: Array<keyof WebMapEvents> = [
+    'zoomstart',
+    'zoom',
+    'zoomend',
+    'movestart',
+    'move',
+    'moveend',
+  ];
   private isLoaded = false;
 
   private _sourceDataLoading: { [name: string]: any[] } = {};
@@ -325,23 +334,24 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   }
 
   private _addEventsListeners(): void {
-    if (this.map) {
+    const map = this.map;
+    if (map) {
       // write mem for start loaded layers
-      this.map.on('sourcedataloading', (data) => {
+      map.on('sourcedataloading', (data) => {
         this._sourceDataLoading[data.sourceId] = this._sourceDataLoading[data.sourceId] || [];
         if (data.tile) {
           this._sourceDataLoading[data.sourceId].push(data.tile);
         }
       });
       // emmit data-loaded for each layer or all sources is loaded
-      this.map.on('sourcedata', this._onMapSourceData.bind(this));
-      this.map.on('error', this._onMapError.bind(this));
-      this.map.on('click', (evt) => {
+      map.on('sourcedata', this._onMapSourceData.bind(this));
+      map.on('error', this._onMapError.bind(this));
+      map.on('click', (evt) => {
         this.onMapClick(evt);
       });
 
-      this.map.on('zoomend', (evt) => {
-        console.log('zoomend');
+      this._universalEvents.forEach((e) => {
+        map.on(e, () => this.emitter.emit(e, this));
       });
     }
   }

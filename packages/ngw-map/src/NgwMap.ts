@@ -10,7 +10,8 @@ import WebMap, {
   MapControls,
   LayerAdaptersOptions,
   Type,
-  LayerAdapter
+  LayerAdapter,
+  WebMapEvents
 } from '@nextgis/webmap';
 import NgwConnector from '@nextgis/ngw-connector';
 import QmsKit, { QmsAdapterOptions } from '@nextgis/qms-kit';
@@ -110,7 +111,7 @@ function prepareWebMapOptions(mapAdapter: MapAdapter, options: NgwMapOptions) {
 export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEvents> {
 
   static utils = { fixUrlStr };
-  static decorators = { onMapLoad };
+  static decorators = { onMapLoad, onLoad: WebMap.decorators.onLoad };
   static getIcon = getIcon;
   static toWgs84 = (geojson: GeoJsonObject) => toWgs84(geojson, epsg['EPSG:3857'], epsg);
 
@@ -172,7 +173,7 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
    * ngwMap.addControl('ZOOM', {position: 'top-right'})
    * ```
    */
-  @WebMap.onLoad<NgwMapEvents>('controls:create')
+  @WebMap.decorators.onLoad<NgwMapEvents>('controls:create')
   async addControl<K extends keyof MapControls>(
     controlDef: K | C,
     position: ControlPositions,
@@ -335,6 +336,10 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
     }
   }
 
+  onLoad(event: keyof NgwMapEvents = 'ngw-map:create'): Promise<this> {
+    return super.onLoad(event as keyof WebMapEvents);
+  }
+
   private _updateGeojsonAdapterOptions(opt: GeoJsonAdapterOptions): GeoJsonAdapterOptions {
     if (opt.data) {
       const geomType = typeAlias[detectGeometryType(opt.data)];
@@ -370,33 +375,31 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
     });
   }
 
-  private _createWebMap() {
-    return this.create({
-      ...this.options
-    }).then(() => {
-      if (this.options.qmsId) {
-        let qmsId: number;
-        let qmsLayerName: string | undefined;
-        if (Array.isArray(this.options.qmsId)) {
-          qmsId = this.options.qmsId[0];
-          qmsLayerName = this.options.qmsId[1];
-        } else {
-          qmsId = this.options.qmsId;
-        }
-        const qmsLayerOptions: QmsAdapterOptions = {
-          qmsId,
-        };
-        if (qmsLayerName) {
-          qmsLayerOptions.id = qmsLayerName;
-        }
-
-        this.addBaseLayer('QMS', qmsLayerOptions).then((layer) => {
-          this.showLayer(layer);
-        });
+  private async _createWebMap() {
+    await this.create({...this.options});
+    if (this.options.qmsId) {
+      let qmsId: number;
+      let qmsLayerName: string | undefined;
+      if (Array.isArray(this.options.qmsId)) {
+        qmsId = this.options.qmsId[0];
+        qmsLayerName = this.options.qmsId[1];
+      } else {
+        qmsId = this.options.qmsId;
+      }
+      const qmsLayerOptions: QmsAdapterOptions = {
+        qmsId,
+      };
+      if (qmsLayerName) {
+        qmsLayerOptions.id = qmsLayerName;
       }
 
-      this.fit();
-    });
+      await this.addBaseLayer('QMS', qmsLayerOptions).then((layer) => {
+        this.showLayer(layer);
+      });
+    }
+
+    this.fit();
+    this._emitStatusEvent('ngw-map:create', this);
   }
 
   private _addControls() {

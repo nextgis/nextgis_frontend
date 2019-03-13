@@ -12,7 +12,6 @@ import {
   LayerAdapter,
   LngLatArray,
   LngLatBoundsArray,
-  EventsAlias,
   WebMapEvents,
 } from '@nextgis/webmap';
 import Map from 'ol/Map';
@@ -72,19 +71,6 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
   emitter = new EventEmitter();
 
   map?: Map;
-
-  universalEvents: EventsAlias = [
-  ];
-
-  specialEvents: Array<keyof WebMapEvents> = [
-    'click',
-    'zoomstart',
-    'zoom',
-    'zoomend',
-    'movestart',
-    'move',
-    'moveend',
-  ];
 
   private displayProjection = 'EPSG:3857';
   private lonlatProjection = 'EPSG:4326';
