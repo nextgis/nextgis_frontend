@@ -101,7 +101,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     if (data && type) {
       this._data = this.filterGeometries(data, type) as any;
       this._features.forEach((x, i) => {
-        // to avaoid id = 0 is false
+        // to avoid id = 0 is false
         const rendromId = '_' + i;
         // @ts-ignore
         x._rendrom_id = rendromId;

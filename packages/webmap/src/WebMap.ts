@@ -50,6 +50,7 @@ const OPTIONS: MapOptions = {
 export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEvents> {
 
   static getPaintFunctions?: { [name: string]: GetPaintFunction };
+  static onLoad = onLoad;
 
   options: MapOptions = OPTIONS;
   // `WebMapEvents` must be `E` but its not work correct

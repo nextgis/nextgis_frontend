@@ -264,6 +264,8 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
     }
 
     lopt.onEachFeature = (feature: Feature, layer) => {
+      // @ts-ignore
+      layer.options.pane = this.pane;
       this._layers.push({ feature, layer });
       this.layer.addLayer(layer);
       if (options.selectable) {
