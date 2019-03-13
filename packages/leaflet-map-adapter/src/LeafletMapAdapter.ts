@@ -12,7 +12,6 @@ import {
   LngLatArray,
   LngLatBoundsArray,
   WebMapEvents,
-  EventsAlias
 } from '@nextgis/webmap';
 import { Map, Control, Layer, ControlPosition, LeafletMouseEvent } from 'leaflet';
 import { EventEmitter } from 'events';
@@ -49,8 +48,10 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
 
   layerAdapters = LeafletMapAdapter.layerAdapters;
   controlAdapters = LeafletMapAdapter.controlAdapters;
+  emitter = new EventEmitter();
+  map?: Map;
 
-  universalEvents: EventsAlias = [
+  private _universalEvents: Array<keyof WebMapEvents> = [
     'zoomstart',
     'zoom',
     'zoomend',
@@ -58,12 +59,6 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     'move',
     'moveend',
   ];
-
-  specialEvents: Array<keyof WebMapEvents> = ['click'];
-
-  emitter = new EventEmitter();
-
-  map?: Map;
 
   // create(options: MapOptions = {target: 'map'}) {
   create(options: LeafletMapAdapterOptions = { target: 'map' }) {
@@ -231,9 +226,13 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   }
 
   private _addMapListeners() {
-    if (this.map) {
-      this.map.on('click', (evt) => {
+    const map = this.map;
+    if (map) {
+      map.on('click', (evt) => {
         this.onMapClick(evt as LeafletMouseEvent);
+      });
+      this._universalEvents.forEach((e) => {
+        map.on(e, () => this.emitter.emit(e, this), map);
       });
     }
   }
