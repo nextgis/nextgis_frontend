@@ -109,7 +109,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
           x.properties._rendrom_id = rendromId;
         }
       });
-      const features = data as Feature | FeatureCollection;
+      const features = this._data as Feature | FeatureCollection;
       this.layer = [this._layerId];
       if (options.paint) {
         await this._addLayer(this._layerId, features, options.paint, type);
@@ -232,6 +232,10 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     } else if (data.type === 'GeometryCollection') {
       (data as GeometryCollection).geometries = (data as GeometryCollection).geometries
         .filter((g) => geometryFilter(g.type, type));
+    } else if (typeAlias[data.type]) {
+      const obj: Feature = {type: 'Feature', geometry: data as GeometryObject, properties: {}};
+      this._features = [obj];
+      return obj;
     }
     return data;
   }
