@@ -13,7 +13,7 @@ import {
   GeoJsonAdapterOptions
 } from './interfaces/LayerAdapter';
 import { LayerAdaptersOptions, LayerAdapter, OnLayerClickOptions } from './interfaces/LayerAdapter';
-import { MapAdapter, MapClickEvent, ControlPositions, FitOptions, EventsAlias } from './interfaces/MapAdapter';
+import { MapAdapter, MapClickEvent, ControlPositions, FitOptions } from './interfaces/MapAdapter';
 import { MapOptions, AppOptions, GetAttributionsOptions } from './interfaces/WebMapApp';
 import { LngLatBoundsArray, Type, Cursor, LngLatArray, LayerDef } from './interfaces/BaseTypes';
 import { RuntimeParams } from './interfaces/RuntimeParams';
@@ -50,7 +50,7 @@ const OPTIONS: MapOptions = {
 export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEvents> {
 
   static getPaintFunctions?: { [name: string]: GetPaintFunction };
-  static onLoad = onLoad;
+  static decorators = { onLoad };
 
   options: MapOptions = OPTIONS;
   // `WebMapEvents` must be `E` but its not work correct
@@ -646,6 +646,18 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
     this.emitter.emit('click', evt);
   }
 
+  onLoad(event: keyof WebMapEvents = 'create'): Promise<this> {
+    return new Promise((res) => {
+      if (this.getEventStatus(event)) {
+        res(this);
+      } else {
+        this.emitter.once(event, () => {
+          res(this);
+        });
+      }
+    });
+  }
+
   protected _emitStatusEvent(eventName: keyof E, data?: any) {
     // ugly hack to disable type checking error
     const _eventName = eventName as keyof WebMapEvents;
@@ -654,14 +666,14 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
   }
 
   protected onMapLoad(cb?: (mapAdapter: MapAdapter) => void): Promise<MapAdapter> {
-    return new Promise((resolve) => {
+    return new Promise((res) => {
       const _resolve = () => {
         const mapAdapter = this.mapAdapter;
         if (cb) {
           cb(mapAdapter);
         }
         if (mapAdapter) {
-          resolve(mapAdapter);
+          res(mapAdapter);
         }
       };
       if (this.mapAdapter.map) {
@@ -768,42 +780,24 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
 
   private _addEventsListeners() {
     // propagate map click event
-    const specialEvents: Array<keyof WebMapEvents> = this.mapAdapter.specialEvents || ['click'];
+    const events: Array<keyof WebMapEvents> = [
+      'click',
+      'zoomstart',
+      'zoom',
+      'zoomend',
+      'movestart',
+      'move',
+      'moveend'
+    ];
 
-    specialEvents.forEach((x) => {
+    events.forEach((x) => {
       this.mapAdapter.emitter.on(x, (data) => {
         this.emitter.emit(x, data);
       });
     });
     this.onMapLoad().then(() => {
       // universal events
-      const events: EventsAlias = this.mapAdapter.universalEvents || [
-        'zoomstart',
-        'zoom',
-        'zoomend',
-        'movestart',
-        'move',
-        'moveend',
-      ];
-      events.forEach((e) => {
-        let nativeName: string;
-        let webMapName: keyof WebMapEvents;
-        if (Array.isArray(e)) {
-          nativeName = e[0];
-          webMapName = e[1];
-        } else {
-          nativeName = webMapName = e;
-        }
-        const map = this.mapAdapter.map && this.mapAdapter.map;
-        // @ts-ignore
-        const mapEmitter = map && map.on;
 
-        if (mapEmitter) {
-          mapEmitter.call(map, nativeName, (data: any) => {
-            this.emitter.emit(webMapName, this);
-          });
-        }
-      });
     });
   }
 

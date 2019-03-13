@@ -45,7 +45,6 @@ export interface FitOptions {
 }
 
 export type ControlPositions = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
-export type EventsAlias = Array<keyof WebMapEvents | [string, keyof WebMapEvents]>;
 
 /**
  * Parameters and methods that control the behavior of the map and the layers on it.
@@ -71,9 +70,6 @@ export interface MapAdapter<M = any, L = any, C = any> {
    * Named map controls specific for each framework.
    */
   controlAdapters: { [name: string]: Type<C> };
-
-  universalEvents?: EventsAlias;
-  specialEvents?: Array<keyof WebMapEvents>;
 
   create(options?: MapOptions): void;
 
