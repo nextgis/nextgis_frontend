@@ -18,16 +18,16 @@ export interface WebMapEvents {
   'move': MapAdapter;
   'moveend': MapAdapter;
 
-  'layer:pre-add': LayerAdapter;
+  'layer:preadd': LayerAdapter;
   'layer:add': LayerAdapter;
 
-  'layer:pre-remove': LayerAdapter;
+  'layer:preremove': LayerAdapter;
   'layer:remove': LayerAdapter;
 
-  'layer:pre-show': LayerAdapter;
+  'layer:preshow': LayerAdapter;
   'layer:show': LayerAdapter;
 
-  'layer:pre-hide': LayerAdapter;
+  'layer:prehide': LayerAdapter;
   'layer:hide': LayerAdapter;
 
   'layer:click': OnLayerClickOptions;
