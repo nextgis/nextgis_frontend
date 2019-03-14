@@ -1,0 +1,5 @@
+{
+  "name": "Data management in the vector layer",
+  "description": "",
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
+}
