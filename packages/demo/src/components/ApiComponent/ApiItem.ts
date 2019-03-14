@@ -17,7 +17,8 @@ export type KindString = 'External module' |
   'Interface' |
   'Type literal' |
   'Index signature' |
-  'Variable';
+  'Variable' |
+  'Event';
 
 export interface Source {
   fileName: string;
@@ -56,7 +57,7 @@ export interface ApiItem {
   comment?: ApiComment;
 }
 
-export type Parameter = ParameterItem | VariableItem | MethodItem;
+export type Parameter = ParameterItem | VariableItem | MethodItem | TypedItem;
 
 export interface ClassItem extends ApiItem {
   kindString: 'Class';
@@ -83,6 +84,10 @@ export interface PropertyItem extends ApiItem {
   type: Property;
   name: string;
 }
+export interface TypedItem extends ApiItem {
+  type: Property;
+}
+
 export interface ParameterItem extends ApiItem {
   kindString: 'Parameter';
   type: Property;
@@ -121,6 +126,7 @@ export type Property = IntrinsicPropertyType |
   ReflectionType;
 
 export interface PropertyType {
+  name?: string;
   type: string;
   comment?: ApiComment;
 }
