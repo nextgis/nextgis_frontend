@@ -8,7 +8,12 @@
 .openlayers-ctrl-bottom-left  { bottom: 0; left: 0; }
 .openlayers-ctrl-bottom-right { right: 0; bottom: 0; }
 
-.ol-control { clear: both; pointer-events: auto; }
+.ol-control, .openlayers-ctrl { clear: both; pointer-events: auto; }
+.openlayers-ctrl-top-left .ol-control-margin     { margin: 10px 0 0 10px; float: left; }
+.openlayers-ctrl-top-right .ol-control-margin    { margin: 10px 10px 0 0; float: right; }
+.openlayers-ctrl-bottom-left .ol-control-margin  { margin: 0 0 10px 10px; float: left; }
+.openlayers-ctrl-bottom-right .ol-control-margin { margin: 0 10px 10px 0; float: right; }
+
 .openlayers-ctrl-top-left .ol-control     { margin: 10px 0 0 10px; float: left; }
 .openlayers-ctrl-top-right .ol-control    { margin: 10px 10px 0 0; float: right; }
 .openlayers-ctrl-bottom-left .ol-control  { margin: 0 0 10px 10px; float: left; }

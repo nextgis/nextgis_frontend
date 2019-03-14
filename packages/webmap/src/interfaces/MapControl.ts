@@ -75,5 +75,6 @@ export interface ToggleControlOptions {
 
 export interface CreateControlOptions {
   bar?: boolean;
+  margin?: boolean;
   addClass?: string;
 }

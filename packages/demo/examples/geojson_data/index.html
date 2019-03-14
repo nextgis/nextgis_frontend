@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Ngw WebMap</title>
+  <title>GeoJson Data</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     * {
@@ -21,7 +21,8 @@
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.0.0/polyfill.js"></script>
   <!-- <script src="https://unpkg.com/@nextgis/ngw-leaflet"></script> -->
-  <script src="../../../ngw-leaflet/lib/ngw-leaflet.js"></script>
+  <!-- <script src="../../../ngw-leaflet/lib/ngw-leaflet.js"></script> -->
+  <script src="../../../ngw-ol/lib/ngw-ol.js"></script>
 </head>
 
 <body>
@@ -45,7 +46,7 @@
       onAdd: function () {
         return list;
       }
-    });
+    }, {margin: true});
     ngwMap.addControl(dataControl, 'top-right');
     createItem();
     var ID = 0;
@@ -75,7 +76,7 @@
             ngwMap.addLayerData('data', {
               'type': 'Feature',
               'id': item.id,
-              'geometry': { 'type': 'Point', 'coordinates': [v[0], v[1]] },
+              'geometry': { 'type': 'Point', 'coordinates': [Number(v[0]), Number(v[1])] },
               'properties': { 'color': v[2] }
             });
           } else {
