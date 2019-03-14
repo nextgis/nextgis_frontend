@@ -1,11 +1,11 @@
 <template>
   <div>
     <comment :item="item"></comment>
-    <div v-if="item.type.type === 'reference'">
-      <reference :parameter="item"></reference>
+    <div v-if="item.type && item.type.type === 'reference'">
+      <reference :item="item"></reference>
     </div>
-    <div v-else>
-       <span class="key-name">type:</span> <code v-html="getOptionType(item)"></code>
+    <div v-else-if="optionType">
+       <span class="key-name">type:</span> <code v-html="optionType"></code>
     </div>
     <div v-if="defaultValue">
       <span class="key-name">default:</span> <code v-html="defaultValue"></code>
