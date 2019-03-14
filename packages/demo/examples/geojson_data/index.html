@@ -21,8 +21,8 @@
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.0.0/polyfill.js"></script>
   <!-- <script src="https://unpkg.com/@nextgis/ngw-leaflet"></script> -->
-  <!-- <script src="../../../ngw-leaflet/lib/ngw-leaflet.js"></script> -->
-  <script src="../../../ngw-ol/lib/ngw-ol.js"></script>
+  <script src="../../../ngw-leaflet/lib/ngw-leaflet.js"></script>
+  <!-- <script src="../../../ngw-ol/lib/ngw-ol.js"></script> -->
 </head>
 
 <body>
@@ -46,7 +46,7 @@
       onAdd: function () {
         return list;
       }
-    }, {margin: true});
+    }, { margin: true });
     ngwMap.addControl(dataControl, 'top-right');
     createItem();
     var ID = 0;
