@@ -7,7 +7,21 @@ import { createHref } from '../utility';
   components: { ApiOption }
 })
 export class Reference extends Vue {
-  @Prop() parameter: Parameter;
+  @Prop() item: Parameter;
+
+  get parameter(): Parameter {
+    // hardcode to extract events from emitter
+    if (this.item.type.name === 'StrictEventEmitter') {
+      if (this.item.type.type === 'reference') {
+        const typeArgs = this.item.type.typeArguments[1];
+        if (typeArgs.type === 'reference') {
+          // @ts-ignore
+          return { type: typeArgs };
+        }
+      }
+    }
+    return this.item;
+  }
 
   get reference(): ApiItem {
 
@@ -21,6 +35,12 @@ export class Reference extends Vue {
     const reference = this.reference;
     if (reference && 'name' in this.parameter.type) {
       return `${reference.module.name}-api#${this.parameter.type.name}`;
+    }
+  }
+
+  get referenceId() {
+    if ('id' in this.parameter.type) {
+      return this.parameter.type.id;
     }
   }
 

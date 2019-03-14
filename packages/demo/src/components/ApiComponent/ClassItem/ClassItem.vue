@@ -1,7 +1,6 @@
 <template>
   <div class="pb-4">
     <div class="subheader pb-2" v-for="g in getGithubSourceLinks(item)" :key="g" v-html="g"></div>
-
     <div v-if="['Type alias', 'Property'].indexOf(item.kindString) !== -1">
       <property :item="item"></property>
     </div>

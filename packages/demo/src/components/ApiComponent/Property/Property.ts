@@ -8,12 +8,16 @@ import * as utility from '../utility';
   components: { Reference, Comment }
 })
 export class Property extends Vue {
-  @Prop() item: PropertyItem;
+  @Prop() item: PropertyItem | ApiItem;
 
   utility = utility;
 
   get indexes(): { [id: number]: ApiItem } {
     return this.$store.state.api.indexes;
+  }
+
+  get optionType() {
+    return this.getOptionType(this.item);
   }
 
   get defaultValue() {
@@ -24,11 +28,13 @@ export class Property extends Vue {
     }
   }
 
-  getOptionType(item: ApiItem): string {
-    if (item.type) {
-      return this.utility.getOptionType(item.type, this.indexes);
-    } else if (item.kindString === 'Method') {
-      return this.utility.createMethodTypeString(item as MethodItem, this.indexes);
+  getOptionType(item: ApiItem | PropertyItem): string {
+    if ('kindString' in item) {
+      if (item.type) {
+        return this.utility.getOptionType(item.type, this.indexes);
+      } else if (item.kindString === 'Method') {
+        return this.utility.createMethodTypeString(item as MethodItem, this.indexes);
+      }
     }
   }
 
