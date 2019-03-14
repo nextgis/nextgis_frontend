@@ -10,7 +10,8 @@ export function createControl(control: MapControl, options: CreateControlOptions
       const element = document.createElement('div');
       element.className = (options.addClass ? options.addClass + ' ' : '') +
       'ol-unselectable' +
-      (options.bar ? ' ol-control' : '');
+      (options.bar ? ' ol-control' : '') +
+      (options.margin ? ' ol-control-margin' : '');
       element.appendChild(control.onAdd());
 
       C.call(this, {
