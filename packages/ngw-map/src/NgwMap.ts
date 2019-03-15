@@ -282,7 +282,7 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
   * ngwMap.showLayer(layer);
   * ```
   */
-  @onMapLoad()
+  // @onMapLoad()
   addGeoJsonLayer<K extends keyof LayerAdaptersOptions>(
     opt: GeoJsonAdapterOptions,
     adapter?: K | Type<LayerAdapter>) {
