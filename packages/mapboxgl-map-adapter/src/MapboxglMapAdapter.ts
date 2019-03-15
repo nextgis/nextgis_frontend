@@ -52,6 +52,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
 
   layerAdapters = MapboxglMapAdapter.layerAdapters;
   controlAdapters = MapboxglMapAdapter.controlAdapters;
+  isLoaded = false;
 
   private _universalEvents: Array<keyof WebMapEvents> = [
     'zoomstart',
@@ -61,9 +62,9 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     'move',
     'moveend',
   ];
-  private isLoaded = false;
 
   private _sourceDataLoading: { [name: string]: any[] } = {};
+  private _sortTimerId?: number;
 
   // create(options: MapOptions = {target: 'map'}) {
   create(options: MapOptions) {
@@ -162,46 +163,10 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
 
   // TODO: need optimization, something like throttle
   setLayerOrder(layerIds: string[], order: number, layers: { [x: string]: TLayerAdapter }): void {
-    const map = this.map;
-    if (map) {
-      const baseLayers: TLayerAdapter[] = [];
-      let orderedLayers: TLayerAdapter[] = [];
-      for (const l in layers) {
-        if (layers.hasOwnProperty(l)) {
-          const layer = layers[l];
-          if (layer.options.baseLayer) {
-            baseLayers.push(layer);
-          } else {
-            orderedLayers.push(layer);
-          }
-        }
-      }
-
-      orderedLayers = orderedLayers.sort((a, b) => {
-        return a.options.order !== undefined && b.options.order !== undefined ? a.options.order - b.options.order : 0;
-      });
-      const firstRealLayer = orderedLayers.find((x) => Array.isArray(x.layer));
-      if (firstRealLayer) {
-        const firstLayerId = this._getLayerIds(firstRealLayer)[0];
-        // normalize layer ordering
-        baseLayers.forEach((x) => {
-          if (x.layer) {
-            x.layer.forEach((y) => {
-              map.moveLayer(y, firstLayerId);
-            });
-          }
-        });
-      }
-      for (let fry = 0; fry < orderedLayers.length; fry++) {
-        const nextLayer = orderedLayers[fry + 1];
-        const nextLayerId = nextLayer && nextLayer.layer && nextLayer.layer[0];
-        const mem = orderedLayers[fry];
-        const _layers = this._getLayerIds(mem);
-        _layers.forEach((x) => {
-          map.moveLayer(x, nextLayerId);
-        });
-      }
+    if (this._sortTimerId) {
+      window.clearTimeout(this._sortTimerId);
     }
+    this._sortTimerId = window.setTimeout(() => this._setLayerOrder(layers), 10);
   }
 
   setLayerOpacity(layerIds: string[], opacity: number): void {
@@ -265,6 +230,49 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
         });
       }
     });
+  }
+
+  private _setLayerOrder(layers: { [x: string]: TLayerAdapter }): void {
+    const map = this.map;
+    if (map) {
+      const baseLayers: TLayerAdapter[] = [];
+      let orderedLayers: TLayerAdapter[] = [];
+      for (const l in layers) {
+        if (layers.hasOwnProperty(l)) {
+          const layer = layers[l];
+          if (layer.options.baseLayer) {
+            baseLayers.push(layer);
+          } else {
+            orderedLayers.push(layer);
+          }
+        }
+      }
+
+      orderedLayers = orderedLayers.sort((a, b) => {
+        return a.options.order !== undefined && b.options.order !== undefined ? a.options.order - b.options.order : 0;
+      });
+      const firstRealLayer = orderedLayers.find((x) => Array.isArray(x.layer));
+      if (firstRealLayer) {
+        const firstLayerId = this._getLayerIds(firstRealLayer)[0];
+        // normalize layer ordering
+        baseLayers.forEach((x) => {
+          if (x.layer) {
+            x.layer.forEach((y) => {
+              map.moveLayer(y, firstLayerId);
+            });
+          }
+        });
+      }
+      for (let fry = 0; fry < orderedLayers.length; fry++) {
+        const nextLayer = orderedLayers[fry + 1];
+        const nextLayerId = nextLayer && nextLayer.layer && nextLayer.layer[0];
+        const mem = orderedLayers[fry];
+        const _layers = this._getLayerIds(mem);
+        _layers.forEach((x) => {
+          map.moveLayer(x, nextLayerId);
+        });
+      }
+    }
   }
 
   private _getLayerIds(mem: TLayerAdapter): string[] {

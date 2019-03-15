@@ -53,7 +53,11 @@ export type ControlPositions = 'top-right' | 'top-left' | 'bottom-right' | 'bott
  * @typeparam M WEB-GIS framework control interface
  */
 export interface MapAdapter<M = any, L = any, C = any> {
-
+  /**
+   * State of readiness of the card for use.
+   * @default true
+   */
+  isLoaded?: boolean;
   /**
    * Original map object of GIS framework (Leaflet.Map, Openlayers.Map, Mapboxgl.Map or other)
    */
