@@ -73,8 +73,6 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
       if (options.target) {
         this.map = new Map({
           container: options.target,
-          center: [96, 63], // initial map center in [lon, lat]
-          zoom: 2,
           attributionControl: false,
           style: {
             version: 8,
@@ -98,7 +96,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
 
   setView(center: LngLatArray, zoom: number) {
     if (this.map) {
-      this.map.jumpTo({ center, zoom });
+      this.map.jumpTo({ center, zoom: zoom - 1 });
     }
   }
 
@@ -117,13 +115,14 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
 
   setZoom(zoom: number): void {
     if (this.map) {
-      this.map.setZoom(zoom);
+      this.map.setZoom(zoom - 1);
     }
   }
 
   getZoom(): number | undefined {
     if (this.map) {
-      return this.map.getZoom();
+      const zoom = this.map.getZoom();
+      return zoom + 1;
     }
   }
 
