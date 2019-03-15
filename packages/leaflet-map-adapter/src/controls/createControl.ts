@@ -10,7 +10,7 @@ export function createControl(control: MapControl, options: CreateControlOptions
       if (options.bar) {
         element.classList.add('leaflet-bar');
       }
-      if (!options.margin && !options.margin) {
+      if (!options.margin && !options.bar) {
         element.style.marginBottom = '0px';
         element.style.marginTop = '0px';
         element.style.marginLeft = '0px';
