@@ -1,6 +1,10 @@
 # NextGIS Frontend
 
-This repository is under construction.
+Suite of frontend JavaScript-libraries that allow you to speed up building your own web-gis apps using Nextgis software and services as a backend.
+
+NextGIS Frontend support various GIS frameworks.
+
+Read more in the [article](http://nextgis.com/blog/nextgis-frontend/).
 
 ## Packages `@nextgis/`
 
