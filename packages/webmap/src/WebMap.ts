@@ -676,7 +676,8 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
           res(mapAdapter);
         }
       };
-      if (this.mapAdapter.map) {
+      const isLoaded = this.mapAdapter.isLoaded !== undefined ? this.mapAdapter.isLoaded : true;
+      if (this.mapAdapter.map && isLoaded) {
         _resolve();
       } else {
         this.mapAdapter.emitter.once('create', () => {
