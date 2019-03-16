@@ -2,7 +2,7 @@
 
 Suite of frontend JavaScript-libraries that allow you to speed up building your own web-gis apps using Nextgis software and services as a backend.
 
-NextGIS Frontend support various GIS frameworks.
+NextGIS Frontend support three main open-source GIS frameworks with common interfaces.
 
 Read more in the [article](http://nextgis.com/blog/nextgis-frontend/).
 
@@ -85,8 +85,20 @@ yarn install
 yarn run bootstrap
 # Build all packages
 yarn run prod
-# Build demp app
+# Build demo app
 yarn run demo
+```
+
+To generate json schema for build API pages run
+
+```bash
+yarn run doc
+```
+
+To copy the pages of universal examples from the demo/examples into the corresponding examples of frontend libraries run
+
+```bash
+yarn run examples
 ```
 
 ### Instructions for a particular package
