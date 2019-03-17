@@ -8,7 +8,7 @@ export abstract class BaseAdapter<O extends AdapterOptions = AdapterOptions>
   implements BaseLayerAdapter<Map, TLayer, O> {
 
   layer?: TLayer;
-  protected _layerId: string;
+  protected readonly _layerId: string;
 
   constructor(public map: Map, public options: O) {
     this._layerId = `layer-${ID++}`;
