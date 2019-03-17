@@ -32,7 +32,7 @@ export interface MvtAdapterOptions extends AdapterOptions {
   'source-layer'?: string;
 }
 
-export type GeoJsonAdapterLayerType = 'fill' | 'circle' | 'line';
+export type GeoJsonAdapterLayerType = 'fill' | 'circle' | 'line' | 'symbol';
 
 export interface BasePaint {
   type?: string;
