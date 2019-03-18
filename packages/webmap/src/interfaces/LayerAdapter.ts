@@ -212,6 +212,7 @@ export interface BaseLayerAdapter<M = any, L = any, O extends AdapterOptions = A
   map?: M;
 
   addLayer(options: O): L | Promise<L> | undefined;
+  removeLayer?(): void;
 
   showLayer?(layer: L): void;
   hideLayer?(layer: L): void;
@@ -236,9 +237,9 @@ export interface VectorLayerAdapter<
 
   filter?(cb: DataLayerFilter<F, L>): void;
 
+  addData(data: GeoJsonObject): void;
+  clearLayer(cb?: (feature: Feature) => boolean): void;
   setData?(data: GeoJsonObject): void;
-  addData?(data: GeoJsonObject): void;
-  clearLayer?(cb?: (feature: Feature) => boolean): void;
 
   onLayerClick?(opt: OnLayerClickOptions): Promise<any>;
 }

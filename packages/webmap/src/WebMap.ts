@@ -405,7 +405,11 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
     const layerId = layer && this.getLayerId(layer);
     if (layer && layerId) {
       this.emitter.emit('layer:preremove', layer);
-      this.mapAdapter.removeLayer(layer.layer);
+      if (layer.removeLayer) {
+        layer.removeLayer();
+      } else {
+        this.mapAdapter.removeLayer(layer.layer);
+      }
       if (layer.options.baseLayer) {
         const index = this._baseLayers.indexOf(layerId);
         if (index) {
@@ -545,6 +549,9 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
     const adapter = layerMem as VectorLayerAdapter;
     if (adapter.setData) {
       adapter.setData(data);
+    } else if (adapter.clearLayer && adapter.addData) {
+      adapter.clearLayer();
+      adapter.addData(data);
     }
   }
 

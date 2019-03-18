@@ -3,7 +3,6 @@ import {
   GeoJsonAdapterLayerPaint,
   GetPaintCallback,
   GeoJsonAdapterLayerType,
-  OnLayerClickOptions,
   VectorLayerAdapter
 } from '@nextgis/webmap';
 import Map from 'ol/Map';
