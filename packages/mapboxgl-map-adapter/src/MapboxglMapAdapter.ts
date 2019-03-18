@@ -165,7 +165,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     if (this._sortTimerId) {
       window.clearTimeout(this._sortTimerId);
     }
-    this._sortTimerId = window.setTimeout(() => this._setLayerOrder(layers), 10);
+    this._sortTimerId = window.setTimeout(() => this._setLayerOrder(layers));
   }
 
   setLayerOpacity(layerIds: string[], opacity: number): void {
@@ -250,6 +250,16 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
       orderedLayers = orderedLayers.sort((a, b) => {
         return a.options.order !== undefined && b.options.order !== undefined ? a.options.order - b.options.order : 0;
       });
+
+      for (let fry = 0; fry < orderedLayers.length; fry++) {
+        const nextLayer = orderedLayers[fry + 1];
+        const nextLayerId = nextLayer && nextLayer.layer && nextLayer.layer[0];
+        const mem = orderedLayers[fry];
+        const _layers = this._getLayerIds(mem);
+        _layers.forEach((x) => {
+          map.moveLayer(x, nextLayerId);
+        });
+      }
       const firstRealLayer = orderedLayers.find((x) => Array.isArray(x.layer));
       if (firstRealLayer) {
         const firstLayerId = this._getLayerIds(firstRealLayer)[0];
@@ -260,15 +270,6 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
               map.moveLayer(y, firstLayerId);
             });
           }
-        });
-      }
-      for (let fry = 0; fry < orderedLayers.length; fry++) {
-        const nextLayer = orderedLayers[fry + 1];
-        const nextLayerId = nextLayer && nextLayer.layer && nextLayer.layer[0];
-        const mem = orderedLayers[fry];
-        const _layers = this._getLayerIds(mem);
-        _layers.forEach((x) => {
-          map.moveLayer(x, nextLayerId);
         });
       }
     }
