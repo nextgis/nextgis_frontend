@@ -1,14 +1,9 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "baseUrl": ".",
-    "paths": { "*": ["types/*"] },
-    "baseUrl": ".",
-    "paths": { "*": ["types/*"] },
     "outDir": "lib",
     "declaration": true, /* Generates corresponding '.d.ts' file. */
-    "declarationDir": "lib",
-    "typeRoots": ["types"]
+    "declarationDir": "lib"
   },
   "include": [
     "./src"
