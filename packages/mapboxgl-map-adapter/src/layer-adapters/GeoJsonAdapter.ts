@@ -118,7 +118,6 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     for (const t of types) {
       if (options.paint) {
 
-        const layer = this._getLayerNameFromType(t);
         const geomType = typeAliasForFilter[t];
         if (geomType) {
           let type = t;
@@ -128,11 +127,12 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
               type = 'icon';
             }
           }
+          const layer = this._getLayerNameFromType(t);
           const geomFilter = ['==', '$type', geomType];
           await this._addLayer(layer, type, geomFilter);
           this.layer.push(layer);
           if (options.selectedPaint) {
-            const selectionLayer = this._getSelectionLayerNameFromType(type);
+            const selectionLayer = this._getSelectionLayerNameFromType(t);
             await this._addLayer(selectionLayer, type, ['all', geomFilter, ['in', '_rendrom_id', '']]);
             this.layer.push(selectionLayer);
           }
@@ -168,7 +168,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     source.setData({ type: 'FeatureCollection', features });
   }
 
-  addData(data: GeoJsonObject) {
+  async addData(data: GeoJsonObject) {
     let type: GeoJsonAdapterLayerType | undefined;
     if (this.options.type) {
       type = this.options.type;
@@ -187,7 +187,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
           x.properties._rendrom_id = rendromId;
         }
       });
-      this._updateLayerPaint(type);
+      await this._updateLayerPaint(type);
       const source = this.map.getSource(this._sourceId) as GeoJSONSource;
       source.setData({ type: 'FeatureCollection', features: this._features });
     }
@@ -295,8 +295,8 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
 
       for (const [name, paint] of layers) {
         const _paint: any = await this._createPaintForType(paint, type, name);
+
         if ('icon-image' in _paint) {
-          // If true, the icon will be visible even if it collides with other previously drawn symbols.
           // If true, the icon will be visible even if it collides with other previously drawn symbols.
           _paint['icon-allow-overlap'] = true;
           for (const p in _paint) {
