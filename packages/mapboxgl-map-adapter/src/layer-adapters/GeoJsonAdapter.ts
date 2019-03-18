@@ -126,7 +126,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
           this.layer.push(layer);
           if (options.selectedPaint) {
             const selectionLayer = this._getSelectionLayerNameFromType(type);
-            await this._addLayer(selectionLayer, type, [geomFilter, ['in', '_rendrom_id', '']]);
+            await this._addLayer(selectionLayer, type, ['all', geomFilter, ['in', '_rendrom_id', '']]);
             this.layer.push(selectionLayer);
           }
         }
@@ -431,25 +431,26 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     e.preventDefault();
     const features = this.map.queryRenderedFeatures(e.point, { layers: this.layer });
     const feature = features[0] as Feature;
-    const id = this._getRendromId(feature);
-    if (feature && id !== undefined) {
-
-      let isSelected = this._selectedFeatureIds.indexOf(id) !== -1;
-      if (isSelected) {
-        if (this.options && this.options.unselectOnSecondClick) {
-          this._unselectFeature(feature);
-          isSelected = false;
+    if (feature) {
+      const id = this._getRendromId(feature);
+      if (id !== undefined) {
+        let isSelected = this._selectedFeatureIds.indexOf(id) !== -1;
+        if (isSelected) {
+          if (this.options && this.options.unselectOnSecondClick) {
+            this._unselectFeature(feature);
+            isSelected = false;
+          }
+        } else {
+          this._selectFeature(feature);
+          isSelected = true;
         }
-      } else {
-        this._selectFeature(feature);
-        isSelected = true;
-      }
-      if (this.options.onLayerClick) {
-        this.options.onLayerClick({
-          layer: this,
-          feature,
-          selected: isSelected
-        });
+        if (this.options.onLayerClick) {
+          this.options.onLayerClick({
+            layer: this,
+            feature,
+            selected: isSelected
+          });
+        }
       }
     }
   }
@@ -524,7 +525,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     if ('type' in paint) {
       return paint.type;
     } else if (typeof paint === 'function') {
-      const falsePaint = paint({type: 'Feature', properties: {}, geometry: {}});
+      const falsePaint = paint({ type: 'Feature', properties: {}, geometry: {} });
       return this._detectPaintType(falsePaint);
     }
   }

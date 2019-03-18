@@ -1,4 +1,4 @@
-import WebMap, { LayerAdapter, Type, ImageAdapterOptions } from '@nextgis/webmap';
+import WebMap, { LayerAdapter, Type, ImageAdapterOptions, TileAdapterOptions } from '@nextgis/webmap';
 import { NgwLayerOptions, WebMapAdapterOptions } from './interfaces';
 import { WebMapLayerAdapter } from './WebMapLayerAdapter';
 import NgwConnector from '@nextgis/ngw-connector';
@@ -54,9 +54,13 @@ export function addNgwLayer(
   }
   if (adapter === 'IMAGE' || adapter === 'TILE') {
     const opt = getLayerAdapterOptions(options, webMap, baseUrl);
-    if (opt && opt.resourceId) {
-      const layerAdapterOptions: ImageAdapterOptions = { ...opt, resourceId: opt.resourceId };
-      return webMap.addLayer(adapter, layerAdapterOptions);
+    if (opt) {
+      if (opt.resourceId) {
+        const layerAdapterOptions: ImageAdapterOptions = { ...opt, resourceId: opt.resourceId };
+        return webMap.addLayer(adapter, layerAdapterOptions);
+      }
+      const tileAdapterOptions: TileAdapterOptions = opt;
+      return webMap.addLayer(adapter, tileAdapterOptions);
     }
   } else {
     throw new Error(adapter + ' not supported yet. Only TILE');

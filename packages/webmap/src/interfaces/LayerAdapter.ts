@@ -162,7 +162,7 @@ interface RasterAdapterOptions extends AdapterOptions {
 }
 
 export interface TileAdapterOptions extends RasterAdapterOptions {
-  tileSize: number;
+  tileSize?: number;
   subdomains?: string;
 }
 
