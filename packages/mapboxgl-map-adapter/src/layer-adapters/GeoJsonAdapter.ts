@@ -53,6 +53,13 @@ const typeAlias: { [key in GeoJsonGeometryTypes]: GeoJsonAdapterLayerType } = {
   'GeometryCollection': 'fill'
 };
 
+const typeAliasForFilter: { [key in GeoJsonAdapterLayerType]: GeoJsonGeometryTypes } = {
+  circle: 'Point',
+  line: 'LineString',
+  fill: 'Polygon',
+  icon: 'Point'
+};
+
 const backAliases: { [key in GeoJsonAdapterLayerType]?: GeoJsonGeometryTypes[] } = {
   'icon': ['Point']
 };
@@ -107,13 +114,13 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
       }
     });
     this.layer = [];
-    const types = options.type ? [options.type] : this._types;
+    const types = this._types = options.type ? [options.type] : this._types;
     for (const t of types) {
       if (options.paint) {
 
         const layer = this._getLayerNameFromType(t);
-        const geomTypes = backAliases[t];
-        if (geomTypes && geomTypes.length) {
+        const geomType = typeAliasForFilter[t];
+        if (geomType) {
           let type = t;
           if (t === 'circle') {
             const paintType = this._detectPaintType(options.paint);
@@ -121,7 +128,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
               type = 'icon';
             }
           }
-          const geomFilter = ['==', '$type', geomTypes[0]];
+          const geomFilter = ['==', '$type', geomType];
           await this._addLayer(layer, type, geomFilter);
           this.layer.push(layer);
           if (options.selectedPaint) {
@@ -284,12 +291,12 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
       if (this.options.selectedPaint) {
         const selName = this._getSelectionLayerNameFromType(type);
         layers.push([selName, this.options.selectedPaint]);
-
       }
 
       for (const [name, paint] of layers) {
         const _paint: any = await this._createPaintForType(paint, type, name);
         if ('icon-image' in _paint) {
+          // If true, the icon will be visible even if it collides with other previously drawn symbols.
           // If true, the icon will be visible even if it collides with other previously drawn symbols.
           _paint['icon-allow-overlap'] = true;
           for (const p in _paint) {
@@ -297,7 +304,6 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
               this.map.setLayoutProperty(name, p, _paint[p]);
             }
           }
-
         } else {
           for (const p in _paint) {
             if (_paint.hasOwnProperty(p)) {
@@ -511,13 +517,29 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     } else {
       selectionArray = this._selectedFeatureIds;
     }
-    if (this._selectionName) {
-      this.map.setFilter(this._selectionName, ['in', '_rendrom_id', ...selectionArray]);
-    }
-    if (this._filteredFeatureIds.length) {
-      this.map.setFilter(this._layerId, ['in', '_rendrom_id', ...filteredArray]);
-    } else {
-      this.map.setFilter(this._layerId, ['!in', '_rendrom_id', ...selectionArray]);
+
+    const layers = this.layer;
+    if (layers) {
+      this._types.forEach((t) => {
+        const geomType = typeAliasForFilter[t];
+        if (geomType) {
+          const geomFilter = ['==', '$type', geomType];
+          const layerName = this._getLayerNameFromType(t);
+          const selLayerName = this._getSelectionLayerNameFromType(t);
+          if (layers.indexOf(selLayerName) !== -1) {
+            if (this._selectionName) {
+              this.map.setFilter(selLayerName, ['all', geomFilter, ['in', '_rendrom_id', ...selectionArray]]);
+            }
+          }
+          if (layers.indexOf(layerName) !== -1) {
+            if (this._filteredFeatureIds.length) {
+              this.map.setFilter(layerName, ['all', geomFilter, ['in', '_rendrom_id', ...filteredArray]]);
+            } else {
+              this.map.setFilter(layerName, ['all', geomFilter, ['!in', '_rendrom_id', ...selectionArray]]);
+            }
+          }
+        }
+      });
     }
   }
 
