@@ -6,6 +6,17 @@ NextGIS Frontend support three main open-source GIS frameworks with common inter
 
 Read more in the [article](http://nextgis.com/blog/nextgis-frontend/).
 
+Some universal examples:
+
+- [Custom layers control](http://code.nextgis.com/demo-examples-custom_layer_controls)
+- [Events](http://code.nextgis.com/demo-examples-events)
+- [Data management in the vector layer](http://code.nextgis.com/demo-examples-geojson_data)
+- [GeoJSON data](http://code.nextgis.com/demo-examples-geojson_layer)
+- [Add layer from NGW Cloud](http://code.nextgis.com/demo-examples-ngw_layer)
+- [Add webmap from NGW Cloud](http://code.nextgis.com/demo-examples-ngw_webmap)
+- [Toggle button control](http://code.nextgis.com/demo-examples-toggle%20control)
+- [Vector selection](http://code.nextgis.com/demo-examples-vector_selection)
+
 ## Packages `@nextgis/`
 
 - [ngw-leaflet](http://code.nextgis.com/ngw-leaflet) – one file bundle for building [Leaflet](https://leafletjs.com/) map interacting with NextGIS services;
