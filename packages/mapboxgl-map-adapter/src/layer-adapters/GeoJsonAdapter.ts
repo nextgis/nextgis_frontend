@@ -40,7 +40,7 @@ const allowedByType = {
   circle: allowedParams.concat(['radius']),
   line: allowedParams.concat([['weight', 'width']]),
   fill: allowedParams.concat([]),
-  symbol: allowedParams.concat([])
+  icon: allowedParams.concat([])
 };
 
 const typeAlias: { [key in GeoJsonGeometryTypes]: GeoJsonAdapterLayerType } = {
@@ -70,6 +70,8 @@ const PAINT = {
   radius: 10
 };
 
+type MapboxLayerType = 'fill' | 'line' | 'symbol' | 'circle';
+
 export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
   implements VectorLayerAdapter<Map, TLayer, GeoJsonAdapterOptions, Feature> {
 
@@ -96,19 +98,25 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
   async addLayer(options: GeoJsonAdapterOptions): Promise<any> {
     options = this.options = { ...this.options, ...(options || {}) };
 
-    this.map.addSource(this._sourceId, { type: 'geojson' });
-
+    // this.map.addSource(this._sourceId, { type: 'geojson' });
+    this.map.addSource(this._sourceId, {
+      'type': 'geojson',
+      'data': {
+        'type': 'FeatureCollection',
+        'features': []
+      }
+    });
     this.layer = [];
     for (const t of this._types) {
       const layer = this._getLayerNameFromType(t);
       if (options.paint) {
-        await this._addLayer(layer);
+        await this._addLayer(layer, t);
         const geomFilter = ['==', '$type', 'Point'];
         this.map.setFilter(layer, geomFilter);
         this.layer.push(layer);
         if (options.selectedPaint) {
           const selectionLayer = this._getSelectionLayerNameFromType(t);
-          await this._addLayer(selectionLayer);
+          await this._addLayer(selectionLayer, t);
           this.map.setFilter(selectionLayer, [geomFilter, ['in', '_rendrom_id', '']]);
           this.layer.push(selectionLayer);
         }
@@ -134,6 +142,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
       type = typeAlias[detectedType];
     }
     if (data && type) {
+
       const features = this.filterGeometries(data, type);
       features.forEach((x, i) => {
         // to avoid id = 0 is false
@@ -143,10 +152,10 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
           x.properties._rendrom_id = rendromId;
         }
       });
-      const source = this.map.getSource(this._sourceId) as GeoJSONSource;
-      source.setData({ type: 'FeatureCollection', features });
-
       this._updateLayerPaint(type);
+      const source = this.map.getSource(this._sourceId) as GeoJSONSource;
+      source.setData({ type: 'FeatureCollection', features: this._features });
+
     }
   }
 
@@ -218,14 +227,24 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     return type + '-' + this._selectionName;
   }
 
-  private async _addLayer(name: string) {
+  private async _addLayer(name: string, type: GeoJsonAdapterLayerType) {
+    let mType: MapboxLayerType;
+    if (type === 'icon') {
+      mType = 'symbol';
+    } else {
+      mType = type;
+    }
 
     const layerOpt: mapboxgl.Layer = {
-      id: String(name),
+      id: name,
+      type: mType,
       source: this._sourceId,
-      layout: {
-        visibility: 'none',
+
+      'paint': {
+        'circle-radius': 6,
+        'circle-color': '#B42222'
       },
+      'filter': ['==', '$type', 'Point'],
     };
 
     this.map.addLayer(layerOpt);
@@ -239,7 +258,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
       const layers: Array<[string, GeoJsonAdapterLayerPaint | GetPaintCallback]> = [[layerName, this.options.paint]];
       if (this.options.selectedPaint) {
         const selName = this._getSelectionLayerNameFromType(type);
-        layers.push([selName, this.options.selectedPaint])
+        layers.push([selName, this.options.selectedPaint]);
 
       }
 

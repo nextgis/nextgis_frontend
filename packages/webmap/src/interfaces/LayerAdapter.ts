@@ -32,7 +32,7 @@ export interface MvtAdapterOptions extends AdapterOptions {
   'source-layer'?: string;
 }
 
-export type GeoJsonAdapterLayerType = 'fill' | 'circle' | 'line' | 'symbol';
+export type GeoJsonAdapterLayerType = 'fill' | 'circle' | 'line' | 'icon';
 
 export interface BasePaint {
   type?: string;
@@ -52,7 +52,7 @@ export interface PathPaint extends BasePaint {
 }
 
 export interface IconOptions {
-  type: 'icon' | 'symbol';
+  type: 'icon';
   className?: string;
   html?: string;
   iconSize?: [number, number];
