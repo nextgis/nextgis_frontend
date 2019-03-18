@@ -52,7 +52,7 @@ export interface PathPaint extends BasePaint {
 }
 
 export interface IconOptions {
-  type: 'icon';
+  type: 'icon' | 'symbol';
   className?: string;
   html?: string;
   iconSize?: [number, number];
