@@ -314,7 +314,8 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
    *
    * @example
    * ```javascript
-   * webMap.addLayer('TILE', options);
+   * webMap.addLayer('TILE', options).then((layer) => webMap.showLayer(layer));
+   *
    * webMap.addLayer(CustomLayerAdapter, options);
    * ```
    */
@@ -490,11 +491,16 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
     }
   }
 
-  setLayerOpacity(layerName: string, value: number) {
-    if (this.mapAdapter.setLayerOpacity) {
-      const layer = this.getLayer(layerName);
-      if (layer) {
-        this.mapAdapter.setLayerOpacity(layer.layer, value);
+  /**
+   * Set transparency for a given layer by number from 0 to 1
+   */
+  setLayerOpacity(layerDef: LayerDef, value: number) {
+    const layer = this.getLayer(layerDef);
+    if (layer) {
+      if (this.mapAdapter.setLayerOpacity) {
+        if (layer) {
+          this.mapAdapter.setLayerOpacity(layer.layer, value);
+        }
       }
     }
   }
@@ -505,28 +511,57 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
   //   }
   // }
 
-  selectLayer(layerDef: LayerDef) {
-    const layerMem = this.getLayer(layerDef);
-    if (layerMem) {
-      const adapter = layerMem as VectorLayerAdapter;
+  /**
+   * Mark the layer as selected.
+   * If the adapter is a vector layer and supports data selection,
+   * you can pass a callback function to specify which data will be selected.
+   *
+   * @example
+   * ```javascript
+   * const layer = webMap.addLayer('GEOJSON', {data: geojson}).then((layer) => {
+   *   webMap.selectLayer(layer, ({feature}) => feature.id === '42');
+   * });
+   * ```
+   * @param layerDef
+   * @param findFeatureFun
+   */
+  selectLayer(layerDef: LayerDef, findFeatureFun?: DataLayerFilter) {
+    const layer = this.getLayer(layerDef);
+    if (layer) {
+      const adapter = layer as VectorLayerAdapter;
       if (adapter && adapter.select) {
-        adapter.select();
+        adapter.select(findFeatureFun);
       }
-      const layerId = this.getLayerId(layerMem);
+      const layerId = this.getLayerId(layer);
       if (layerId) {
         this._selectedLayers.push(layerId);
       }
     }
   }
 
-  unSelectLayer(layerDef: LayerDef) {
-    const layerMem = this.getLayer(layerDef);
-    if (layerMem) {
-      const adapter = layerMem && layerMem as VectorLayerAdapter;
+  /**
+   * Unselect the given layer.
+   * If the adapter is a vector layer and supports data selection,
+   * you can pass a callback function to specify which data will be unselected.
+   *
+   * @example
+   * ```javascript
+   * const layer = webMap.addLayer('GEOJSON', {data: geojson}).then((layer) => {
+   *   webMap.unSelectLayer(layer, ({feature}) => feature.id === '42');
+   * });
+   * ```
+   *
+   * @param layerDef
+   * @param findFeatureFun
+   */
+  unSelectLayer(layerDef: LayerDef, findFeatureFun?: DataLayerFilter) {
+    const layer = this.getLayer(layerDef);
+    if (layer) {
+      const adapter = layer && layer as VectorLayerAdapter;
       if (adapter.unselect) {
-        adapter.unselect();
+        adapter.unselect(findFeatureFun);
       }
-      const layerId = this.getLayerId(layerMem);
+      const layerId = this.getLayerId(layer);
       if (layerId) {
         const index = this._selectedLayers.indexOf(layerId);
         if (index !== -1) {
@@ -536,6 +571,19 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
     }
   }
 
+  /**
+   * Hide features from a vector layer using a callback function.
+   *
+   * @example
+   * ```javascript
+   * const layer = webMap.addLayer('GEOJSON', {data: geojson}).then((layer) => {
+   *   webMap.filterLayer(layer, ({feature}) => feature.id === '42');
+   * });
+   * ```
+   *
+   * @param layerDef
+   * @param filter
+   */
   filterLayer(layerDef: LayerDef, filter: DataLayerFilter<Feature, L>) {
     const layerMem = this.getLayer(layerDef);
     const adapter = layerMem as VectorLayerAdapter;
@@ -544,6 +592,16 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
     }
   }
 
+  /**
+   * Sets the GeoJSON data for given vector layer.
+   *
+   * @example
+   * ```javascript
+   * const layer = webMap.addLayer('GEOJSON').then((layer) => {
+   *   webMap.setLayerData(layer, geojson);
+   * });
+   * ```
+   */
   setLayerData(layerDef: LayerDef, data: GeoJsonObject) {
     const layerMem = this.getLayer(layerDef);
     const adapter = layerMem as VectorLayerAdapter;
@@ -555,6 +613,18 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
     }
   }
 
+  /**
+   * Push new the GeoJSON features into given vector layer.
+   *
+   * @example
+   * ```javascript
+   * const layer = webMap.addLayer('GEOJSON', {data: geojson_features_5}).then((layer) => {
+   *   console.log(layer.getLayers().length) // > 5;
+   *   webMap.addLayerData(layer, geojson_features_3);
+   *   console.log(layer.getLayers().length) // > 8;
+   * });
+   * ```
+   */
   addLayerData(layerDef: LayerDef, data: GeoJsonObject) {
     const layerMem = this.getLayer(layerDef);
     const adapter = layerMem as VectorLayerAdapter;
@@ -563,6 +633,18 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
     }
   }
 
+  /**
+   * Remove from vector layer all features.
+   * it is possible to remove only some objects if you specify a callback function.
+   *
+   * @example
+   * ```javascript
+   * const layer = webMap.addLayer('GEOJSON', {data: geojson}).then((layer) => {
+   *   webMap.clearLayerData(layer, (feture) => feture.id === 42);
+   *   webMap.clearLayerData(layer);
+   * });
+   * ```
+   */
   clearLayerData(layerDef: LayerDef, cb?: (feature: Feature) => boolean) {
     const layerMem = this.getLayer(layerDef);
     const adapter = layerMem as VectorLayerAdapter;
