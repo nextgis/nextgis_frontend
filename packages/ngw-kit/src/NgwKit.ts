@@ -5,7 +5,7 @@
 import NgwConnector from '@nextgis/ngw-connector';
 import WebMap, { StarterKit, MapClickEvent, Type } from '@nextgis/webmap';
 import { updateWmsParams, getLayerAdapterOptions, addNgwLayer, extendWebMapLayerAdapter } from './utils';
-import { NgwKitOptions, RequestOptions, WebMapAdapterOptions } from './interfaces';
+import { NgwKitOptions, WebMapAdapterOptions } from './interfaces';
 import { WebMapLayerAdapter } from './WebMapLayerAdapter';
 
 export class NgwKit implements StarterKit {
