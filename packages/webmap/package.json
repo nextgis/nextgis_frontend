@@ -7,20 +7,20 @@
   "unpkg": "lib/webmap.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@types/geojson": "^7946.0.6",
+    "@types/geojson": "^7946.0.7",
     "events": "^3.0.0",
     "strict-event-emitter-types": "^2.0.0"
   },
   "devDependencies": {
     "@types/events": "^3.0.0",
-    "@types/node": "^11.11.0",
+    "@types/node": "^11.11.4",
     "rimraf": "^2.6.3",
     "ts-loader": "^5.3.3",
-    "tslint": "^5.13.1",
-    "tslint-webpack-plugin": "^2.0.3",
-    "typescript": "^3.3.3333",
+    "tslint": "^5.14.0",
+    "tslint-webpack-plugin": "^2.0.4",
+    "typescript": "^3.3.4000",
     "webpack": "^4.29.6",
-    "webpack-cli": "^3.2.3"
+    "webpack-cli": "^3.3.0"
   },
   "scripts": {
     "mjs": "tsc -d --outDir ./lib/modules",

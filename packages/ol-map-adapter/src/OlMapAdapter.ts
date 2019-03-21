@@ -12,7 +12,6 @@ import {
   LayerAdapter,
   LngLatArray,
   LngLatBoundsArray,
-  WebMapEvents,
 } from '@nextgis/webmap';
 import Map from 'ol/Map';
 import View from 'ol/View';

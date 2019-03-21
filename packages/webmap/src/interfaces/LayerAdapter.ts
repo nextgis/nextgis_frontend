@@ -74,7 +74,7 @@ export type GetPaintCallback = (feature: Feature<any>) => GeoJsonAdapterLayerPai
 /**
  * Options to crateing styling and defining selection behavior
  */
-export interface GeoJsonAdapterOptions extends AdapterOptions {
+export interface GeoJsonAdapterOptions<F extends Feature = Feature, L = any> extends AdapterOptions {
   /** Geojson data */
   data?: GeoJsonObject;
   /** Type for geometries painting, for each layer may be only one of: `fill`, `circle` or `line` */
@@ -147,7 +147,7 @@ export interface GeoJsonAdapterOptions extends AdapterOptions {
    * Deselects layer feature by second click
    */
   unselectOnSecondClick?: boolean;
-
+  filter?: DataLayerFilter;
   onLayerClick?(opt: OnLayerClickOptions): Promise<any>;
 }
 

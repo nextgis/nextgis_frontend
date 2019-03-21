@@ -11,13 +11,13 @@
   },
   "devDependencies": {
     "@types/events": "^3.0.0",
-    "@types/node": "^11.11.0",
+    "@types/node": "^11.11.4",
     "rimraf": "^2.6.3",
     "ts-loader": "^5.3.3",
-    "tslint": "^5.13.1",
-    "typescript": "^3.3.3333",
+    "tslint": "^5.14.0",
+    "typescript": "^3.3.4000",
     "webpack": "^4.29.6",
-    "webpack-cli": "^3.2.3"
+    "webpack-cli": "^3.3.0"
   },
   "scripts": {
     "mjs": "tsc -d --outDir ./lib/modules",
