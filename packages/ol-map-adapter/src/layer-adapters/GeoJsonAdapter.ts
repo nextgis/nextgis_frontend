@@ -3,7 +3,8 @@ import {
   GeoJsonAdapterLayerPaint,
   GetPaintCallback,
   GeoJsonAdapterLayerType,
-  VectorLayerAdapter
+  VectorLayerAdapter,
+  DataLayerFilter
 } from '@nextgis/webmap';
 import Map from 'ol/Map';
 import GeoJSON from 'ol/format/GeoJSON';
@@ -31,6 +32,7 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
   selected: boolean = false;
 
   private vectorSource = new VectorSource();
+  private _features: ol.Feature[] = [];
   private _selectedFeatures: ol.Feature[] = [];
 
   constructor(public map: Map, public options: GeoJsonAdapterOptions) { }
@@ -89,6 +91,7 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
       featureProjection: 'EPSG:3857'
     });
     this.vectorSource.addFeatures(features);
+    this._features = this.vectorSource.getFeatures();
   }
 
   select(findFeatureFun?: (opt: { feature: Feature }) => boolean) {
@@ -123,6 +126,18 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
     return this._selectedFeatures.map((x) => {
       return { feature: getFeature(x) };
     });
+  }
+
+  filter(fun: DataLayerFilter<Feature, Layer>) {
+    const features = this._features;
+    const filtered = features.filter((feature) => {
+      return fun({feature: getFeature(feature)});
+    });
+    this.vectorSource.clear();
+    const length = filtered.length;
+    for (let fry = 0; fry < length; fry++) {
+      this.vectorSource.addFeature(filtered[fry]);
+    }
   }
 
   private setPaintEachLayer(paint: GetPaintCallback | GeoJsonAdapterLayerPaint) {

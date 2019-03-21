@@ -4,7 +4,7 @@
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-import NgwMap, { NgwLayerOptions, NgwMapOptions, AdapterOptions } from '@nextgis/ngw-map';
+import NgwMap, { NgwLayerOptions, NgwMapOptions, LayerAdapter } from '@nextgis/ngw-map';
 import MapboxglMapAdapter from '@nextgis/mapboxgl-map-adapter';
 
 export class NgwMapbox extends NgwMap {
@@ -13,7 +13,7 @@ export class NgwMapbox extends NgwMap {
     super(new MapboxglMapAdapter(), options);
   }
 
-  addNgwLayer(options: NgwLayerOptions) {
+  addNgwLayer(options: NgwLayerOptions): Promise<LayerAdapter | undefined> {
     // TODO: still no way to add NGW IMAGE to mapbox-gl
     // always use tile adapter
     if (options.adapter === 'IMAGE') {
