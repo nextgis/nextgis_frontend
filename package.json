@@ -5,10 +5,10 @@
     "lerna": "^3.13.1",
     "rimraf": "^2.6.3",
     "topological-sort": "^0.3.0",
-    "tslint": "^5.13.1",
-    "tslint-webpack-plugin": "^2.0.3",
+    "tslint": "^5.14.0",
+    "tslint-webpack-plugin": "^2.0.4",
     "typedoc": "^0.14.2",
-    "typescript": "^3.3.3333",
+    "typescript": "^3.3.4000",
     "webpack": "^4.29.6"
   },
   "scripts": {
