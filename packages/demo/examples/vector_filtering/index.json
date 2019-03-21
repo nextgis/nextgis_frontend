@@ -1,0 +1,5 @@
+{
+  "name": "Vector layer filtering",
+  "description": "",
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
+}
