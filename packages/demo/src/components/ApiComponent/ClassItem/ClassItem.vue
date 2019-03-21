@@ -53,7 +53,7 @@
 </template>
 
 <script lang="ts">
-export { ClassItemComponent as default } from "./ClassItem";
+export { ClassItemComponent as default } from './ClassItem';
 </script>
 
 <style lang="scss">
@@ -66,7 +66,7 @@ export { ClassItemComponent as default } from "./ClassItem";
 
 .constructor-item {
   font-size: 90%;
-  background: rgba(31, 51, 73, 0.03);
+  // background: rgba(31, 51, 73, 0.03);
   border-radius: 3px;
   padding: 2px 4px;
   box-shadow: none;
