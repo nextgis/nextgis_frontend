@@ -79,6 +79,8 @@ const PAINT = {
   radius: 10
 };
 
+let ID = 0;
+
 type MapboxLayerType = 'fill' | 'line' | 'symbol' | 'circle';
 
 export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
@@ -92,7 +94,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
   private _selectedFeatureIds: string[] = [];
   private _filteredFeatureIds: string[] = [];
   private _types: GeoJsonAdapterLayerType[] = ['fill', 'circle', 'line'];
-  // private _layersByType: { [key in GeoJsonAdapterLayerType]?: string } = {};
+  private _filterFun?: DataLayerFilter<Feature>;
   private $onLayerClick?: (e: MapLayerMouseEvent) => void;
 
   constructor(public map: Map, public options: GeoJsonAdapterOptions) {
@@ -178,14 +180,17 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     }
     if (data && type) {
       const features = this.filterGeometries(data, type);
-      features.forEach((x, i) => {
+      features.forEach((x) => {
         // to avoid id = 0 is false
-        const rendromId = '_' + i;
+        const rendromId = '_' + ID++;
         x._rendrom_id = rendromId;
         if (x.properties) {
           x.properties._rendrom_id = rendromId;
         }
       });
+      if (this._filterFun) {
+        this._filter(this._filterFun);
+      }
       await this._updateLayerPaint(type);
       const source = this.map.getSource(this._sourceId) as GeoJSONSource;
       source.setData({ type: 'FeatureCollection', features: this._features });
@@ -210,14 +215,13 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
   }
 
   filter(fun: DataLayerFilter<Feature, TLayer>) {
+    this._filterFun = fun;
+    this._filter(fun);
+  }
+
+  removeFilter() {
+    this._filterFun = undefined;
     this._filteredFeatureIds = [];
-    this._features.forEach((feature) => {
-      const ok = fun({ feature });
-      const id = this._getRendromId(feature);
-      if (ok && id) {
-        this._filteredFeatureIds.push(id);
-      }
-    });
     this._updateFilter();
   }
 
@@ -250,6 +254,18 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
       this._unselectFeature(this._features);
     }
     this.selected = !!this._selectedFeatureIds.length;
+  }
+
+  private _filter(fun: DataLayerFilter<Feature, TLayer>) {
+    this._filteredFeatureIds = [];
+    this._features.forEach((feature) => {
+      const ok = fun({ feature });
+      const id = this._getRendromId(feature);
+      if (ok && id) {
+        this._filteredFeatureIds.push(id);
+      }
+    });
+    this._updateFilter();
   }
 
   private _getLayerNameFromType(type: GeoJsonAdapterLayerType) {
