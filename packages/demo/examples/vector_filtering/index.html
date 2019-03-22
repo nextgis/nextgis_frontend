@@ -56,8 +56,8 @@
       return value === 'all' ? true : e.feature.properties.color === value;
     };
 
-    function setLayerFilter(value) {
-      if (value === 'all') {
+    function setLayerFilter() {
+      if (filterInput.value === 'all') {
         ngwMap.removeLayerFilter('geojson');
       } else {
         ngwMap.filterLayer('geojson', filterFunction);
