@@ -1,5 +1,7 @@
 # NextGIS Frontend
 
+[![http://code.nextgis.com](https://raw.githubusercontent.com/nextgis/nextgisweb_frontend/master/packages/demo/src/images/logo_96x96.png)](http://code.nextgis.com)
+
 Suite of frontend JavaScript-libraries that allow you to speed up building your own web-gis apps using Nextgis software and services as a backend.
 
 NextGIS Frontend support three main open-source GIS frameworks with common interfaces.
