@@ -93,7 +93,6 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
   private _filteredFeatureIds: string[] = [];
   private _types: GeoJsonAdapterLayerType[] = ['fill', 'circle', 'line'];
   // private _layersByType: { [key in GeoJsonAdapterLayerType]?: string } = {};
-
   private $onLayerClick?: (e: MapLayerMouseEvent) => void;
 
   constructor(public map: Map, public options: GeoJsonAdapterOptions) {

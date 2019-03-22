@@ -236,6 +236,7 @@ export interface VectorLayerAdapter<
   getSelected?(): Array<{ layer?: L, feature?: Feature }>;
 
   filter?(cb: DataLayerFilter<F, L>): void;
+  removeFilter?(): void;
 
   addData(data: GeoJsonObject): void;
   clearLayer(cb?: (feature: Feature) => boolean): void;
