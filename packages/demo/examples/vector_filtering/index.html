@@ -20,49 +20,33 @@
     }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.0.0/polyfill.js"></script>
-  <!-- <script src="../../../ngw-leaflet/lib/ngw-leaflet.js"></script> -->
-  <script src="../../../ngw-ol/lib/ngw-ol.js"></script>
+  <script src="../../../ngw-leaflet/lib/ngw-leaflet.js"></script>
+
 </head>
 
 <body>
   <div id='map'></div>
   <script>
+    var amenityList = [];
+
     var ngwMap = new NgwMap({
+      baseUrl: 'https://demo.nextgis.com/',
       target: 'map',
-      qmsId: 487,
-      bounds: [0, -90, 180, 90]
+      qmsId: 487
     });
 
-    var colors = ['red', 'green', 'blue'];
     var filterInput = document.createElement('select');
-
     var filterLabel = document.createElement('label');
     filterLabel.appendChild(document.createTextNode('Filter: '));
     filterLabel.appendChild(filterInput);
-
-    var options = ['all'].concat(colors);
-    for (var fry = 0; fry < options.length; fry++) {
-      var option = document.createElement('option');
-      option.innerHTML = options[fry];
-      filterInput.appendChild(option);
-    }
 
     filterInput.onchange = function () {
       setLayerFilter();
     }
 
     var filterFunction = function (e) {
-      var value = filterInput.value;
-      return value === 'all' ? true : e.feature.properties.color === value;
+      return e.feature.properties.AMENITY === filterInput.value;
     };
-
-    function setLayerFilter() {
-      if (filterInput.value === 'all') {
-        ngwMap.removeLayerFilter('geojson');
-      } else {
-        ngwMap.filterLayer('geojson', filterFunction);
-      }
-    }
 
     var filterControl = ngwMap.createControl({
       onAdd: function () {
@@ -72,49 +56,37 @@
 
     ngwMap.addControl(filterControl, 'top-right');
 
-    var features = [];
-    for (var fry = 0; fry < 100; fry++) {
-      var color = colors[Math.floor(Math.random() * colors.length)];
-      features.push(craeteFeature(color));
-    }
-    for (var c = 0; c < colors.length; c++) {
-      var color = colors[c];
-      var addColorControl = ngwMap.createButtonControl({
-        html: '<div style="background:' + color + '" title="Add one ' + color + ' color point">+</div>',
-        onClick: (function (c) {
-          return function () {
-            ngwMap.addLayerData('geojson', craeteFeature(c))
-          };
-        })(color)
-      });
-      ngwMap.addControl(addColorControl, 'top-left');
-    }
-
-    ngwMap.addLayer('GEOJSON', {
+    ngwMap.addNgwLayer({
       id: 'geojson',
-      data: { type: 'FeatureCollection', features: features },
-      visibility: true,
-      filter: filterFunction,
-      paint: function (feature) {
-        return { color: feature.properties.color };
+      resourceId: 1733,
+      adapter: 'GEOJSON',
+      adapterOptions: {
+        paint: { color: 'blue', radius: 4 }
       }
+    }).then((layer) => {
+      ngwMap.zoomToLayer(layer);
+      var features = layer.getLayers();
+      for (var f = 0; f < features.length; f++) {
+        var amenity = features[f].feature.properties.AMENITY;
+        if (amenityList.indexOf(amenity) === -1) {
+          amenityList.push(amenity);
+        }
+      }
+      updateSelectOptions();
+      setLayerFilter();
+      ngwMap.showLayer(layer);
     });
 
-    function craeteFeature(color) {
-      return {
-        type: 'Feature',
-        geometry: { type: 'Point', coordinates: getRandomPointCoord() },
-        properties: { color: color }
-      };
+    function setLayerFilter() {
+      ngwMap.filterLayer('geojson', filterFunction);
     }
 
-
-    function getRandomPointCoord() {
-      var plusOrMinus = Math.random() < 0.5 ? -1 : 1;
-      return [
-        Math.round(Math.random() * 180),
-        Math.round(Math.random() * 90 * plusOrMinus)
-      ]
+    function updateSelectOptions() {
+      for (var fry = 0; fry < amenityList.length; fry++) {
+        var option = document.createElement('option');
+        option.innerHTML = amenityList[fry];
+        filterInput.appendChild(option);
+      }
     }
   </script>
 </body>

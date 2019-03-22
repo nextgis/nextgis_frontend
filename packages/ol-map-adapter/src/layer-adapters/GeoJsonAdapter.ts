@@ -127,6 +127,12 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
     }
   }
 
+  getLayers() {
+    return this._features.map((x) => {
+      return { feature: getFeature(x) };
+    });
+  }
+
   getSelected() {
     return this._selectedFeatures.map((x) => {
       return { feature: getFeature(x) };
