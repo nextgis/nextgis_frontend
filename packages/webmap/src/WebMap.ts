@@ -588,10 +588,20 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
    * @param filter
    */
   filterLayer(layerDef: LayerDef, filter: DataLayerFilter<Feature, L>) {
-    const layerMem = this.getLayer(layerDef);
-    const adapter = layerMem as VectorLayerAdapter;
+    const layer = this.getLayer(layerDef);
+    const adapter = layer as VectorLayerAdapter;
     if (adapter.filter) {
       adapter.filter(filter);
+    }
+  }
+
+  removeLayerFilter(layerDef: LayerDef) {
+    const layer = this.getLayer(layerDef);
+    const adapter = layer as VectorLayerAdapter;
+    if (adapter.removeFilter) {
+      adapter.removeFilter();
+    } else if (adapter.filter) {
+      adapter.filter(function () { return true; });
     }
   }
 

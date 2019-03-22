@@ -34,9 +34,15 @@
 
     var colors = ['red', 'green', 'blue'];
     var filterInput = document.createElement('select');
-    for (var fry = 0; fry < colors.length; fry++) {
+
+    var filterLabel = document.createElement('label');
+    filterLabel.appendChild(document.createTextNode('Filter: '));
+    filterLabel.appendChild(filterInput);
+
+    var options = ['all'].concat(colors);
+    for (var fry = 0; fry < options.length; fry++) {
       var option = document.createElement('option');
-      option.innerHTML = colors[fry];
+      option.innerHTML = options[fry];
       filterInput.appendChild(option);
     }
 
@@ -45,28 +51,42 @@
     }
 
     var filterFunction = function (e) {
-      return e.feature.properties.color === filterInput.value;
+      var value = filterInput.value;
+      return value === 'all' ? true : e.feature.properties.color === value;
     };
 
     function setLayerFilter(value) {
-      ngwMap.filterLayer('geojson', filterFunction);
+      if (value === 'all') {
+        ngwMap.removeLayerFilter('geojson');
+      } else {
+        ngwMap.filterLayer('geojson', filterFunction);
+      }
     }
 
     var filterControl = ngwMap.createControl({
       onAdd: function () {
-        return filterInput;
+        return filterLabel;
       }
     }, { margin: true });
+
     ngwMap.addControl(filterControl, 'top-right');
 
     var features = [];
     for (var fry = 0; fry < 100; fry++) {
       var color = colors[Math.floor(Math.random() * colors.length)];
-      features.push({
-        type: 'Feature',
-        geometry: { type: 'Point', coordinates: getRandomPointCoord() },
-        properties: { color: color }
+      features.push(craeteFeature(color));
+    }
+    for (var c = 0; c < colors.length; c++) {
+      var color = colors[c];
+      var addColorControl = ngwMap.createButtonControl({
+        html: '<div style="background:' + color + '" title="Add one ' + color + ' color point">+</div>',
+        onClick: (function (c) {
+          return function () {
+            ngwMap.addLayerData('geojson', craeteFeature(c))
+          };
+        })(color)
       });
+      ngwMap.addControl(addColorControl, 'top-left');
     }
 
     ngwMap.addLayer('GEOJSON', {
@@ -77,7 +97,16 @@
       paint: function (feature) {
         return { color: feature.properties.color };
       }
-    })
+    });
+
+    function craeteFeature(color) {
+      return {
+        type: 'Feature',
+        geometry: { type: 'Point', coordinates: getRandomPointCoord() },
+        properties: { color: color }
+      };
+    }
+
 
     function getRandomPointCoord() {
       var plusOrMinus = Math.random() < 0.5 ? -1 : 1;
