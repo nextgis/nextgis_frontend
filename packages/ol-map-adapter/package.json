@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "@types/events": "^3.0.0",
-    "@types/node": "^11.11.4",
+    "@types/node": "^11.11.6",
     "@types/ol": "^4.6.5",
     "css-loader": "^2.1.1",
     "style-loader": "^0.23.1",
