@@ -82,6 +82,7 @@ function prepareWebMapOptions(mapAdapter: MapAdapter, options: NgwMapOptions) {
       baseUrl: opt.baseUrl,
       auth: opt.auth,
       resourceId,
+      identification: opt.identification
     }));
   }
   return {

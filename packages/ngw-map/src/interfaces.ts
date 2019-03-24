@@ -98,6 +98,12 @@ export interface NgwMapOptions<C = any> extends MapOptions {
    * ```
    */
   controlsOptions?: { [controlName: string]: any };
+  /**
+   * Get information from NGW webmap layers by click.
+   *
+   * @default false
+   */
+  identification?: boolean;
 }
 
 export interface NgwMapEvents extends WebMapEvents {

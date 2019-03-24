@@ -73,12 +73,12 @@ export interface NgwKitOptions {
     login: string;
     password: string;
   };
-}
-
-export interface RequestOptions {
-  srs: number;
-  geom: any;
-  layers: string[];
+  /**
+   * Get information from NGW webmap layers by click.
+   *
+   * @default false
+   */
+  identification?: boolean;
 }
 
 export interface WebMapAdapterOptions extends AdapterOptions {
@@ -86,4 +86,13 @@ export interface WebMapAdapterOptions extends AdapterOptions {
   resourceId: number | [number, string];
   webMap: WebMap;
   connector: NgwConnector;
+}
+
+export interface IdentifyRequestOptions {
+  /**
+   * WKT Polygon geometry
+   */
+  geom: string;
+  srs: 3857;
+  layers: string[];
 }

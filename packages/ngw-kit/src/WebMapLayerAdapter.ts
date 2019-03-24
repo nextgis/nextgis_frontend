@@ -9,7 +9,7 @@ export class WebMapLayerAdapter implements BaseLayerAdapter {
 
   layer?: WebMapLayerItem;
   private resourceId?: number;
-  private _dependsLayers: any[] = [];
+  private _dependsLayers: Array<TreeGroup | TreeLayer> = [];
   private response?: ResourceItem;
 
   constructor(public map: any, public options: WebMapAdapterOptions) {
