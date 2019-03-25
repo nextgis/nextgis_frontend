@@ -1,28 +1,28 @@
 {
   "name": "@nextgis/ol-map-adapter",
-  "version": "0.13.2",
+  "version": "0.14.10",
   "_priority": 16,
   "description": "",
   "main": "lib/ol-map-adapter.js",
   "unpkg": "lib/ol-map-adapter.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/webmap": "^0.13.2",
+    "@nextgis/webmap": "^0.14.10",
     "events": "^3.0.0",
     "ol": "^5.3.1"
   },
   "devDependencies": {
     "@types/events": "^3.0.0",
-    "@types/node": "^11.10.4",
-    "@types/ol": "^4.6.4",
-    "css-loader": "^2.1.0",
+    "@types/node": "^11.11.6",
+    "@types/ol": "^4.6.5",
+    "css-loader": "^2.1.1",
     "style-loader": "^0.23.1",
     "ts-loader": "^5.3.3",
-    "tslint": "^5.13.1",
-    "tslint-webpack-plugin": "^2.0.3",
-    "typescript": "^3.3.3333",
+    "tslint": "^5.14.0",
+    "tslint-webpack-plugin": "^2.0.4",
+    "typescript": "^3.3.4000",
     "webpack": "^4.29.6",
-    "webpack-cli": "^3.2.3"
+    "webpack-cli": "^3.3.0"
   },
   "scripts": {
     "mjs": "tsc -d --outDir ./lib/modules",

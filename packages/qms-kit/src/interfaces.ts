@@ -10,6 +10,7 @@ export interface QmsOptions {
 export type QmsLayerType = 'tms';
 
 export interface QmsAdapterOptions extends AdapterOptions {
+  url?: string;
   qmsId: number;
   name?: string;
 }

@@ -9,9 +9,9 @@ import {
   CreateControlOptions,
   ButtonControlOptions,
   LayerAdapter,
-  ToggleControlOptions,
   LngLatArray,
-  LngLatBoundsArray
+  LngLatBoundsArray,
+  WebMapEvents,
 } from '@nextgis/webmap';
 import { Map, Control, Layer, ControlPosition, LeafletMouseEvent } from 'leaflet';
 import { EventEmitter } from 'events';
@@ -48,12 +48,17 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
 
   layerAdapters = LeafletMapAdapter.layerAdapters;
   controlAdapters = LeafletMapAdapter.controlAdapters;
-
-  displayProjection = 'EPSG:3857';
-  lonlatProjection = 'EPSG:4326';
   emitter = new EventEmitter();
-
   map?: Map;
+
+  private _universalEvents: Array<keyof WebMapEvents> = [
+    'zoomstart',
+    'zoom',
+    'zoomend',
+    'movestart',
+    'move',
+    'moveend',
+  ];
 
   // create(options: MapOptions = {target: 'map'}) {
   create(options: LeafletMapAdapterOptions = { target: 'map' }) {
@@ -82,18 +87,6 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     if (this.map) {
       this.map.getContainer().style.cursor = cursor;
     }
-  }
-
-  onMapLoad(cb?: any): Promise<void> {
-    return new Promise((resolve) => {
-      if (this.map) {
-        resolve(cb && cb());
-      } else {
-        this.emitter.once('create', () => {
-          resolve(cb && cb());
-        });
-      }
-    });
   }
 
   setView(lngLat: LngLatArray, zoom: number) {
@@ -129,7 +122,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     return this.map && this.map.getZoom();
   }
 
-  // [extent_left, extent_bottom, extent_right, extent_top];
+  // [west, south, east, north]
   fit(e: LngLatBoundsArray) {
     if (this.map) {
       // top, left, bottom, right
@@ -233,9 +226,13 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   }
 
   private _addMapListeners() {
-    if (this.map) {
-      this.map.on('click', (evt) => {
+    const map = this.map;
+    if (map) {
+      map.on('click', (evt) => {
         this.onMapClick(evt as LeafletMouseEvent);
+      });
+      this._universalEvents.forEach((e) => {
+        map.on(e, () => this.emitter.emit(e, this), map);
       });
     }
   }

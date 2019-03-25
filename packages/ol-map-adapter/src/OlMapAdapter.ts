@@ -11,14 +11,12 @@ import {
   ButtonControlOptions,
   LayerAdapter,
   LngLatArray,
-  LngLatBoundsArray
+  LngLatBoundsArray,
 } from '@nextgis/webmap';
 import Map from 'ol/Map';
 import View from 'ol/View';
 import Zoom from 'ol/control/Zoom';
-import Polygon from 'ol/geom/Polygon';
 
-import WKT from 'ol/format/WKT';
 import { ImageAdapter } from './layer-adapters/ImageAdapter';
 import { EventEmitter } from 'events';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
@@ -28,8 +26,6 @@ import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 
 // @ts-ignore
 import { fromLonLat, transformExtent, transform } from 'ol/proj';
-// @ts-ignore
-import { boundingExtent } from 'ol/extent';
 import { Attribution } from './controls/Attribution';
 import { olx } from 'openlayers';
 import { PanelControl } from './controls/PanelControl';
@@ -40,6 +36,11 @@ type Layer = ol.layer.Base;
 type Control = ol.control.Control;
 
 type TLayerAdapter = LayerAdapter<Map, Layer>;
+
+interface PositionMem {
+  center: LngLatArray | undefined;
+  zoom: number | undefined;
+}
 
 export type ForEachFeatureAtPixelCallback = (
   feature: ol.Feature,
@@ -66,16 +67,19 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
   layerAdapters = OlMapAdapter.layerAdapters;
   controlAdapters = OlMapAdapter.controlAdapters;
 
-  displayProjection = 'EPSG:3857';
-  lonlatProjection = 'EPSG:4326';
   emitter = new EventEmitter();
 
   map?: Map;
+
+  private displayProjection = 'EPSG:3857';
+  private lonlatProjection = 'EPSG:4326';
 
   private _mapClickEvents: Array<(evt: ol.MapBrowserPointerEvent) => void> = [];
   private _forEachFeatureAtPixel: ForEachFeatureAtPixelCallback[] = [];
   private _olView?: View;
   private _panelControl?: PanelControl;
+
+  private _positionMem: { [key in 'movestart' | 'moveend']?: PositionMem } = {};
 
   create(options: MapOptions) {
     this.options = { ...options };
@@ -121,12 +125,6 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
       }
       return element;
     }
-  }
-
-  onMapLoad(cb?: any) {
-    return new Promise((resolve) => {
-      resolve(cb && cb());
-    });
   }
 
   setCenter(lonLat: LngLatArray) {
@@ -250,30 +248,80 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     });
   }
 
-  requestGeomString(pixel: { top: number, left: number }, pixelRadius = 5) {
-    const { top, left } = pixel;
-    const olMap = this.map;
-    if (olMap) {
-      const bounds = boundingExtent([
-        olMap.getCoordinateFromPixel([
-          left - pixelRadius,
-          top - pixelRadius,
-        ]),
-        olMap.getCoordinateFromPixel([
-          left + pixelRadius,
-          top + pixelRadius,
-        ]),
-      ]);
+  // requestGeomString(pixel: { top: number, left: number }, pixelRadius = 5) {
+  //   const { top, left } = pixel;
+  //   const olMap = this.map;
+  //   if (olMap) {
+  //     const bounds = boundingExtent([
+  //       olMap.getCoordinateFromPixel([
+  //         left - pixelRadius,
+  //         top - pixelRadius,
+  //       ]),
+  //       olMap.getCoordinateFromPixel([
+  //         left + pixelRadius,
+  //         top + pixelRadius,
+  //       ]),
+  //     ]);
 
-      return new WKT().writeGeometry(
-        Polygon.fromExtent(bounds)
-      );
+  //     return new WKT().writeGeometry(
+  //       Polygon.fromExtent(bounds)
+  //     );
+  //   }
+  // }
+
+  private _addMapListeners() {
+    const map = this.map;
+    if (map) {
+      map.on('click', (evt) => this.onMapClick(evt as ol.MapBrowserPointerEvent), this);
+
+      const center = this.getCenter();
+      const zoom = this.getZoom();
+
+      const events: ['movestart', 'moveend'] = ['movestart', 'moveend'];
+      events.forEach((x) => {
+        this._positionMem[x] = { center, zoom };
+        map.on(x, (evt) => {
+          this._emitPositionChangeEvent(x);
+        });
+      });
+
+      if (this._olView) {
+        this._olView.on('change:resolution', (evt) => {
+          this.emitter.emit('zoom', this);
+        });
+
+        this._olView.on('change:center', (evt) => {
+          this.emitter.emit('move', this);
+        });
+      }
+
     }
   }
 
-  private _addMapListeners() {
-    if (this.map) {
-      this.map.on('click', (evt) => this.onMapClick(evt as ol.MapBrowserPointerEvent), this);
+  private _emitPositionChangeEvent(eventName: 'movestart' | 'moveend') {
+    const mem = this._positionMem[eventName];
+    let memCenter: LngLatArray | undefined;
+    let memZoom: number | undefined;
+    if (mem) {
+      memCenter = mem.center;
+      memZoom = mem.zoom;
     }
+    const center = this.getCenter();
+    const zoom = this.getZoom();
+    if (memZoom !== zoom) {
+      const zoomEventName = eventName === 'movestart' ? 'zoomstart' : 'zoomend';
+      this.emitter.emit(zoomEventName, this);
+    }
+    if (memCenter && center) {
+      const [cLng, cLat] = center;
+      const [lng, lat] = memCenter;
+      if (cLng !== lng || cLat !== lat) {
+        this.emitter.emit(eventName, this);
+      }
+      // type self query for undefined case
+    } else if (memCenter !== center) {
+      this.emitter.emit(eventName, this);
+    }
+    this._positionMem[eventName] = { center, zoom };
   }
 }

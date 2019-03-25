@@ -8,7 +8,8 @@ import {
   MethodItem,
   FunctionItem,
   ApiItem,
-  KindString
+  KindString,
+  Declaration
 } from './ApiItem';
 import { Indexes } from '../../store/modules/api';
 
@@ -26,7 +27,7 @@ export function getParameterName(parameter: Parameter) {
 export function getSignatureParameters(parameters: Parameter[], indexes: Indexes): string[] {
   return parameters.map((p) => {
     const typeName = getOptionType(p.type, indexes);
-    return `${getParameterName(p)}${typeName ? ': ' + typeName : ''}`;
+    return `${getParameterName(p)}${typeName ? `<span class="nowrap">: ${typeName}</span>` : ''}`;
   });
 }
 
@@ -67,6 +68,14 @@ export function getOptionType(option: Property, indexes: Indexes): string {
   return '';
 }
 
+export function createHref(ref: ApiItem, name: string) {
+  return `${ref.module.name}-api#${name}`;
+}
+
+export function createLink(ref: ApiItem, name: string) {
+  return `<a href="${createHref(ref, name)}">${name}</a>`;
+}
+
 export function createReference(option: ReferencePropertyType, indexes: Indexes) {
   let str = '';
   const kindStringToLink: KindString[] = ['Interface', 'Class'];
@@ -76,21 +85,17 @@ export function createReference(option: ReferencePropertyType, indexes: Indexes)
     return ref && kindStringToLink.indexOf(ref.kindString) !== -1;
   };
 
-  const createHref = (ref) => {
-    return `<a href="${ref.module.name}-api#${option.name}">${option.name}</a>`;
-  };
-
   if (refOption && refOption.type) {
     str += getOptionType(refOption.type, indexes);
   } else if (option.typeArguments) {
     let name = option.name;
     if (option.type === 'reference' && isHref(refOption)) {
-      name = createHref(refOption);
+      name = createLink(refOption, option.name);
     }
     const args = option.typeArguments.map((x) => getOptionType(x, indexes)).filter((x) => !!x).join(' | ');
-    str += `${name}${args ? `< ${args} >` : ''}`;
+    str += `${name}${args ? `&lt;${args}&gt;` : ''}`;
   } else if (isHref(refOption)) {
-    return createHref(refOption);
+    return createLink(refOption, option.name);
   } else if (refOption && refOption.kindString === 'Function') {
     return createMethodString(refOption as FunctionItem, indexes);
   } else {
@@ -102,15 +107,15 @@ export function createReference(option: ReferencePropertyType, indexes: Indexes)
 export function getDeclarationSignatureStr(signatures: Signatures, indexes: Indexes) {
   if ('parameters' in signatures) {
     const parameters = getSignatureParameters(signatures.parameters, indexes);
-    const str = `{ [${parameters.join(', ')}]: ${getOptionType(signatures.type, indexes)} }`;
+    const str = `{[${parameters.join(', ')}]<span class="nowrap">: ${getOptionType(signatures.type, indexes)}</span>}`;
     return str;
   }
 }
 
 export function createDeclarationStr(option: ReflectionType, indexes: Indexes) {
   let str = '';
-  if (option.declaration.name === '__type') {
-    if (option.declaration) {
+  if (option.declaration) {
+    if (option.declaration.name === '__type') {
       if (option.declaration.indexSignature) {
         const signatures = option.declaration.indexSignature;
         str += signatures.map((x) => {
@@ -118,16 +123,18 @@ export function createDeclarationStr(option: ReflectionType, indexes: Indexes) {
         });
       } else if (option.declaration.children) {
         const defs = option.declaration.children.map((x) => {
-          return `${getParameterName(x)}: ${getOptionType(x.type, indexes)}`;
+          return `<span class="nowrap">${getParameterName(x)}: ${getOptionType(x.type, indexes)}</span>`;
         });
-        str += `{ ${defs.join(', ')} }`;
+        str += `{${defs.join(', ')}}`;
+      } else if (option.declaration.signatures) {
+        str += createMethodTypeString(option.declaration, indexes);
       }
     }
   }
   return str;
 }
 
-export function createMethodString(methodItem: MethodItem | FunctionItem, indexes: Indexes): string {
+export function createMethodString(methodItem: MethodItem | FunctionItem | Declaration, indexes: Indexes): string {
   const signatures = methodItem.signatures.map((x) => {
     if ('parameters' in x) {
       // const args = getSignatureParameters(x.parameters, indexes).join(', ');
@@ -140,12 +147,30 @@ export function createMethodString(methodItem: MethodItem | FunctionItem, indexe
   return `${methodItem.name}${signatures || '()'}`;
 }
 
-export function createMethodTypeString(methodItem: MethodItem | FunctionItem, indexes: Indexes): string {
+export function createMethodTypeString(methodItem: MethodItem | FunctionItem | Declaration, indexes: Indexes): string {
   const signatures = methodItem.signatures.map((x) => {
+    let str = '(';
     if ('parameters' in x) {
       const args = getSignatureParameters(x.parameters, indexes).join(', ');
-      return `(${args}): ${getOptionType(x.type, indexes)}`;
+      str += args;
     }
+    str += ')';
+    const toReturn = getOptionType(x.type, indexes);
+    if (toReturn) {
+      str += `<span class="nowrap">: ${toReturn}</span>`;
+    }
+    return str;
   }).join(', ');
-  return `${signatures || '()'}`;
+  return `${signatures}`;
+}
+
+export function createMethodReturn(methodItem: MethodItem | FunctionItem | Declaration, indexes: Indexes): string {
+  const signatures = methodItem.signatures.map((x) => {
+    const toReturn = getOptionType(x.type, indexes);
+    if (toReturn) {
+      return toReturn;
+    }
+    return '';
+  }).filter((x) => !!x).join('| ');
+  return `${signatures}`;
 }
