@@ -14,7 +14,6 @@ import {
 } from './MapControl';
 import { MapOptions } from './WebMapApp';
 import { LatLng, LngLatArray, LngLatBoundsArray, Pixel } from './BaseTypes';
-import { WebMapEvents } from './Events';
 
 /**
  * Parameters passed to the arguments of the callback function when clicking on the map
