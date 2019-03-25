@@ -7,8 +7,12 @@ export { Comment as default } from './Comment';
 </script>
 
 <style lang="scss">
-  .comment .code {
-    // color: rgb(0, 112, 197);
-    font-weight: bold;
-  }
+.comment .code {
+  // color: rgb(0, 112, 197);
+  font-weight: bold;
+}
+
+.comment p {
+  margin-bottom: 4px;
+}
 </style>

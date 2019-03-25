@@ -36,6 +36,12 @@
     ],
     "space-before-function-paren": false,
     "object-literal-key-quotes": false,
-    "no-var-requires": false
+    "no-var-requires": false,
+    "align": [
+      "arguments",
+      "elements",
+      "members",
+      "statements"
+    ]
   }
 }
