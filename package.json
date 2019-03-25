@@ -5,18 +5,19 @@
     "lerna": "^3.13.1",
     "rimraf": "^2.6.3",
     "topological-sort": "^0.3.0",
-    "tslint": "^5.13.0",
-    "tslint-webpack-plugin": "^2.0.2",
+    "tslint": "^5.14.0",
+    "tslint-webpack-plugin": "^2.0.4",
     "typedoc": "^0.14.2",
-    "typescript": "^3.3.3333",
-    "webpack": "^4.29.5"
+    "typescript": "^3.3.4000",
+    "webpack": "^4.29.6"
   },
   "scripts": {
     "clean": "lerna run clean",
     "bootstrap": "lerna run bootstrap",
     "dev": "lerna run dev",
     "build": "lerna run build",
-    "prod": "node ./webpack.config.js",
+    "prod": "lerna run prod",
+    "prod_script": "node ./webpack.config.js",
     "demo": "yarn run examples && cd ./packages/demo/ && yarn run prod",
     "examples": "node ./build/updateExamples.js",
     "test": "echo \"Error: run tests from root\" && exit 1",
@@ -27,7 +28,7 @@
     "packages/*"
   ],
   "dependencies": {
-    "css-loader": "^2.1.0",
+    "css-loader": "^2.1.1",
     "typedoc-plugin-external-module-name": "^2.0.0"
   }
 }

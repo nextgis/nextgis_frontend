@@ -43,7 +43,6 @@ export class ApiComponent extends Vue {
       this._refresh();
       this._pageChanged = false;
     }
-
   }
 
   getAllowedItem(item: ApiItem) {

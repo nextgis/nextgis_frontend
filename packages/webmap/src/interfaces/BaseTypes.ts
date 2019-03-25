@@ -2,6 +2,8 @@
  * @module webmap
  */
 
+import { LayerAdapter } from './LayerAdapter';
+
  /**
   * @ignore
   */
@@ -23,6 +25,7 @@ export interface LatLng {
 
 /**
  * Array of coordinates, measured in degrees, in [west, south, east, north] order.
+ * https://tools.ietf.org/html/rfc7946#section-5
  */
 export type LngLatBoundsArray = [number, number, number, number];
 
@@ -42,6 +45,21 @@ export interface Pixel {
 }
 
 /**
+ * Available argument types for methods with map layers identification.
+ *
+ * @example
+ * ```geojson
+ * webMap.addLayer('GEOJSON', { id: 'my_layer' }).then((layer) =>{
+ *   webMap.addLayerData(layer, geojson);
+ *   webMap.addLayerData('my_layer', geojson);
+ * });
+ * ```
+ */
+export type LayerDef = string | LayerAdapter;
+
+/**
+ * Available cursor names from
+ * https://developer.mozilla.org/ru/docs/Web/CSS/cursor
  * @ignore
  */
 export type Cursor = 'auto' | 'crosshair' | 'default' | 'e-resize' | 'help' | 'move' |

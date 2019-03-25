@@ -111,9 +111,7 @@ export class WebMapLayerItem extends Item<ItemOptions> {
   }
 
   private _mapScaleToZoomLevel(scale: number) {
-
     return this._setScaleRatio(scale);
-    // return this.webMap.getResolutionForScale(scale);
   }
 
   // Returns width of map in meters on specified latitude.

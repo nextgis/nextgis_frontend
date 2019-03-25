@@ -1,33 +1,29 @@
 /**
  * @module ngw-map
  */
-
 import WebMap, {
   MapAdapter,
   StarterKit,
   ControlPositions,
   GeoJsonAdapterOptions,
   GeoJsonAdapterLayerType,
-  MapControl,
   MapControls,
   LayerAdaptersOptions,
   Type,
   LayerAdapter,
-  AdapterOptions
+  WebMapEvents
 } from '@nextgis/webmap';
 import NgwConnector from '@nextgis/ngw-connector';
 import QmsKit, { QmsAdapterOptions } from '@nextgis/qms-kit';
 import NgwKit, { NgwLayerOptions } from '@nextgis/ngw-kit';
 import { getIcon } from '@nextgis/icons';
 
-import 'leaflet/dist/leaflet.css';
-import { onMapLoad, onLoad } from './decorators';
+import { onMapLoad } from './decorators';
 import { fixUrlStr, deepmerge, detectGeometryType, createAsyncAdapter } from './utils';
-import { EventEmitter } from 'events';
 // @ts-ignore
 import { toWgs84 } from 'reproject';
 import { GeoJsonObject } from 'geojson';
-import { NgwMapOptions, ControlOptions } from './interfaces';
+import { NgwMapOptions, ControlOptions, NgwMapEvents } from './interfaces';
 
 const epsg = {
   // tslint:disable-next-line:max-line-length
@@ -86,6 +82,7 @@ function prepareWebMapOptions(mapAdapter: MapAdapter, options: NgwMapOptions) {
       baseUrl: opt.baseUrl,
       auth: opt.auth,
       resourceId,
+      identification: opt.identification
     }));
   }
   return {
@@ -96,17 +93,31 @@ function prepareWebMapOptions(mapAdapter: MapAdapter, options: NgwMapOptions) {
 
 /**
  * Base class containing the logic of interaction WebMap with NextGIS services.
+ *
+ * @example
+ * ```javascript
+ * import NgwMap from '@nextgis/ngw-map';
+ * import MapAdapter from '@nextgis/leaflet-map-adapter';
+ * // styles are not included in the leaflet-map-adapter
+ * import 'leaflet/dist/leaflet.css';
+ *
+ * const ngwMap = new NgwMap(new MapAdapter(), {
+ *   target: 'map',
+ *   qmsId: 487,
+ *   baseUrl: 'https://demo.nextgis.com',
+ *   webmapId: 3985
+ * });
+ * ```
  */
-export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C> {
+export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEvents> {
 
   static utils = { fixUrlStr };
-  static decorators = { onMapLoad };
+  static decorators = { onMapLoad, onLoad: WebMap.decorators.onLoad };
   static getIcon = getIcon;
   static toWgs84 = (geojson: GeoJsonObject) => toWgs84(geojson, epsg['EPSG:3857'], epsg);
 
   options: NgwMapOptions<C> = {};
   connector: NgwConnector;
-  _eventsStatus: { [eventName: string]: boolean } = {};
 
   protected _ngwLayers: {
     [layerName: string]: {
@@ -163,12 +174,12 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C> {
    * ngwMap.addControl('ZOOM', {position: 'top-right'})
    * ```
    */
-  @onLoad('control:created')
+  @WebMap.decorators.onLoad<NgwMapEvents>('controls:create')
   async addControl<K extends keyof MapControls>(
     controlDef: K | C,
     position: ControlPositions,
     options?: MapControls[K]) {
-    super.addControl(controlDef, position, options);
+    return super.addControl(controlDef, position, options);
   }
 
   /**
@@ -178,13 +189,13 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C> {
    *
    * @example
    * ```javascript
-   * var ngwMap = new NgwMap({ baseUrl: 'https://demo.nextgis.com', target: 'map'});
+   * var ngwMap = new NgwMap({ baseUrl: 'https://demo.nextgis.com', target: 'map' });
    * // add raster layer resourceId is the style of 4004 layer
-   * ngwMap.addNgwLayer({resourceId: 4005});
+   * ngwMap.addNgwLayer({ resourceId: 4005 });
    * // add vector data from layer GEOJSON source
    * ngwMap.addNgwLayer({
    *   resourceId: 4038,
-   *   adapter: 'GEOJSON'
+   *   adapter: 'GEOJSON',
    *   adapterOptions: { paint: { color: 'red' } }
    * });
    * ```
@@ -241,9 +252,38 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C> {
   }
 
  /**
-  * Create layer from data. Set style and behavior for selection.
+  * Create layer from GeoJson data. Set style and behavior for selection.
+  *
+  * @example
+  * ```javascript
+  * // Add simple layer
+  * ngwMap.addGeoJsonLayer({ data: geojson, paint: { color: 'red' } });
+  *
+  * // Add styled by feature property layer with selection behavior
+  * ngwMap.addGeoJsonLayer({
+  *   data: geojson,
+  *   paint: function (feature) {
+  *     return { color: feature.properties.color, opacity: 0.5 }
+  *   },
+  *  selectedPaint: function (feature) {
+  *    return { color: feature.properties.selcolor, opacity: 1 }
+  *  },
+  *  selectable: true,
+  *  multiselect: true
+  * });
+  *
+  * // Add marker layer styled with use [Icons](icons)
+  * ngwMap.addGeoJsonLayer({ data: geojson, paint: NgwMap.getIcon({ color: 'orange' })});
+  *
+  * // work with added layer
+  * const layer = ngwMap.addGeoJsonLayer({ data: geojson, id: 'my_layer_name'});
+  * // access layer by id
+  * ngwMap.showLayer('my_layer_name');
+  * // or access layer by instance
+  * ngwMap.showLayer(layer);
+  * ```
   */
-  @onMapLoad()
+  // @onMapLoad()
   addGeoJsonLayer<K extends keyof LayerAdaptersOptions>(
     opt: GeoJsonAdapterOptions,
     adapter?: K | Type<LayerAdapter>) {
@@ -263,8 +303,15 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C> {
   /**
    * Move map to layer. If the layer is NGW resource, extent will be received from the server
    * @param layerDef
+   *
+   * @example
+   * ```javascript
+   * const ngwLayer = ngwMap.addNgwLayer({ id: 'ngw_layer_name', resourceId: 4005 });
+   * ngwMap.zoomToLayer(ngwLayer);
+   * ngwMap.zoomToLayer('ngw_layer_name');
+   * ```
    */
-  zoomToLayer(layerDef: string | number | LayerAdapter) {
+  zoomToLayer(layerDef: string | LayerAdapter) {
     let id: string | undefined;
     if (typeof layerDef === 'string' || typeof layerDef === 'number') {
       id = String(id);
@@ -288,6 +335,10 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C> {
         }
       });
     }
+  }
+
+  onLoad(event: keyof NgwMapEvents = 'ngw-map:create'): Promise<this> {
+    return super.onLoad(event as keyof WebMapEvents);
   }
 
   private _updateGeojsonAdapterOptions(opt: GeoJsonAdapterOptions): GeoJsonAdapterOptions {
@@ -325,34 +376,31 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C> {
     });
   }
 
-  private _createWebMap() {
-    return this.create({
-      ...this.options
-    }).then(() => {
-      this._emitStatusEvent('map:created');
-      if (this.options.qmsId) {
-        let qmsId: number;
-        let qmsLayerName: string | undefined;
-        if (Array.isArray(this.options.qmsId)) {
-          qmsId = this.options.qmsId[0];
-          qmsLayerName = this.options.qmsId[1];
-        } else {
-          qmsId = this.options.qmsId;
-        }
-        const qmsLayerOptions: QmsAdapterOptions = {
-          qmsId,
-        };
-        if (qmsLayerName) {
-          qmsLayerOptions.id = qmsLayerName;
-        }
-
-        this.addBaseLayer('QMS', qmsLayerOptions).then((layer) => {
-          this.showLayer(layer);
-        });
+  private async _createWebMap() {
+    await this.create({...this.options});
+    if (this.options.qmsId) {
+      let qmsId: number;
+      let qmsLayerName: string | undefined;
+      if (Array.isArray(this.options.qmsId)) {
+        qmsId = this.options.qmsId[0];
+        qmsLayerName = this.options.qmsId[1];
+      } else {
+        qmsId = this.options.qmsId;
+      }
+      const qmsLayerOptions: QmsAdapterOptions = {
+        qmsId,
+      };
+      if (qmsLayerName) {
+        qmsLayerOptions.id = qmsLayerName;
       }
 
-      this.fit();
-    });
+      await this.addBaseLayer('QMS', qmsLayerOptions).then((layer) => {
+        this.showLayer(layer);
+      });
+    }
+
+    this.fit();
+    this._emitStatusEvent('ngw-map:create', this);
   }
 
   private _addControls() {
@@ -366,11 +414,6 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C> {
         this.addControl(x, position || 'top-left', options);
       });
     }
-    this._emitStatusEvent('control:created');
-  }
-
-  private _emitStatusEvent(event: string) {
-    this._eventsStatus[event] = true;
-    this.emitter.emit(event);
+    this._emitStatusEvent('controls:create');
   }
 }

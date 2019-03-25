@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Events</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body,
+    #map {
+      width: 100%;
+      height: 100%;
+    }
+
+    .log {
+      background: white;
+      padding: 4px;
+    }
+
+    .event-log {
+      color: red;
+    }
+
+    .event-log.ok {
+      color: green;
+    }
+
+    .event-log.action {
+      background: greenyellow;
+      color: black;
+      transition: background 0.7s;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.0.0/polyfill.js"></script>
+  <script src="../../../ngw-leaflet/lib/ngw-leaflet.js"></script>
+</head>
+
+<body>
+  <div id='map'></div>
+  <script>
+
+    var ngwMap = new NgwMap({
+      baseUrl: 'https://demo.nextgis.com',
+      target: 'map',
+      qmsId: [487, 'baselayer'],
+    });
+
+    ngwMap.setCenter([0, 0]);
+    ngwMap.setZoom(0);
+
+    var log = document.createElement('div');
+    log.className = 'log';
+    var eventControl = ngwMap.createControl({
+      onAdd: function () { return log }
+    }, { bar: true });
+
+    var addLayerControl = ngwMap.createButtonControl({
+      html: 'A',
+      onClick: function () {
+        var plusOrMinus = Math.random() < 0.5 ? -1 : 1;
+        ngwMap.addLayer('GEOJSON', {
+          data: {
+            "type": "Point", "coordinates": [
+              Math.round(Math.random() * 180),
+              Math.round(Math.random() * 90 * plusOrMinus)
+            ]
+          },
+          paint: function (feature) {
+            return { color: randomRgb() }
+          },
+          visibility: true
+        });
+      }
+    });
+
+    var removeLayersControl = ngwMap.createButtonControl({
+      html: 'R',
+      title: 'Remove all layer',
+      onClick: function () {
+        // Use callback to disallow remove base layer
+        ngwMap.removeLayers(function (x) { return x !== 'baselayer'; });
+      }
+    });
+
+    var hideLayersControl = ngwMap.createButtonControl({
+      html: 'H',
+      title: 'Hide all layers',
+      onClick: function () { toggleLayers(false); }
+    });
+
+    var showLayersControl = ngwMap.createButtonControl({
+      html: 'S',
+      title: 'Show all hidden layers',
+      onClick: function () { toggleLayers(true); }
+    })
+
+    ngwMap.addControl(addLayerControl, 'top-left');
+    ngwMap.addControl(hideLayersControl, 'top-left');
+    ngwMap.addControl(showLayersControl, 'top-left');
+    ngwMap.addControl(removeLayersControl, 'top-left');
+
+    ngwMap.addControl(eventControl, 'top-right');
+
+    var events = [
+      'create',
+      'zoomstart',
+      'zoom',
+      'zoomend',
+      'movestart',
+      'move',
+      'moveend',
+      'click',
+      'layer:preadd',
+      'layer:add',
+      'layer:preremove',
+      'layer:remove',
+      'layer:preshow',
+      'layer:show',
+      'layer:prehide',
+      'layer:hide',
+    ];
+
+    for (var fry = 0; fry < events.length; fry++) {
+      var event = events[fry];
+      var element = document.createElement('div');
+      element.innerHTML = event;
+      element.id = event;
+      element.className = 'event-log';
+      log.appendChild(element);
+      addListener(event, element);
+    }
+
+
+    var timeout = {};
+    function addListener(event, el) {
+      ngwMap.emitter.on(event, function (data) {
+        el.classList.add('ok');
+        el.classList.add('action');
+        var timeoutId = timeout[event];
+        if (timeoutId) {
+          clearTimeout(timeoutId);
+        }
+        timeout[event] = setTimeout(function () {
+          el.classList.remove('action');
+        }, 750);
+        console.log(event, data)
+      })
+    }
+
+    function toggleLayers(status) {
+      var layers = ngwMap.getLayers();
+      for (var l = 0; l < layers.length; l++) {
+        // Base layer is always ON
+        if (layers[l] !== 'baselayer') {
+          ngwMap.toggleLayer(layers[l], status);
+        }
+      }
+    }
+
+    function randomRgb() {
+      var o = Math.round, r = Math.random, s = 255;
+      return 'rgb(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ')';
+    }
+  </script>
+</body>
+
+</html>

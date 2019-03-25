@@ -1,6 +1,23 @@
 # NextGIS Frontend
 
-This repository is under construction.
+[![http://code.nextgis.com](https://raw.githubusercontent.com/nextgis/nextgisweb_frontend/master/packages/demo/src/images/logo_96x96.png)](http://code.nextgis.com)
+
+Suite of frontend JavaScript-libraries that allow you to speed up building your own web-gis apps using Nextgis software and services as a backend.
+
+NextGIS Frontend support three main open-source GIS frameworks with common interfaces.
+
+Read more in the [article](http://nextgis.com/blog/nextgis-frontend/).
+
+Some universal examples:
+
+- [Custom layers control](http://code.nextgis.com/demo-examples-custom_layer_controls)
+- [Events](http://code.nextgis.com/demo-examples-events)
+- [Data management in the vector layer](http://code.nextgis.com/demo-examples-geojson_data)
+- [GeoJSON data](http://code.nextgis.com/demo-examples-geojson_layer)
+- [Add layer from NGW Cloud](http://code.nextgis.com/demo-examples-ngw_layer)
+- [Add webmap from NGW Cloud](http://code.nextgis.com/demo-examples-ngw_webmap)
+- [Toggle button control](http://code.nextgis.com/demo-examples-toggle%20control)
+- [Vector selection](http://code.nextgis.com/demo-examples-vector_selection)
 
 ## Packages `@nextgis/`
 
@@ -43,7 +60,7 @@ Download and include with a script tag. \[Package\] will be registered as a glob
 We recommend linking to a specific version number that you can update manually:
 
 ```html
-<script src="https://unpkg.com/@nextgis/[package]@0.11.0"></script>
+<script src="https://unpkg.com/@nextgis/[package]@0.14.0"></script>
 ```
 
 ### NPM/YARN
@@ -81,8 +98,20 @@ yarn install
 yarn run bootstrap
 # Build all packages
 yarn run prod
-# Build demp app
+# Build demo app
 yarn run demo
+```
+
+To generate json schema for build API pages run
+
+```bash
+yarn run doc
+```
+
+To copy the pages of universal examples from the demo/examples into the corresponding examples of frontend libraries run
+
+```bash
+yarn run examples
 ```
 
 ### Instructions for a particular package

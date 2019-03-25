@@ -15,10 +15,10 @@ import {
 import { LayerAdaptersOptions, LayerAdapter, OnLayerClickOptions } from './interfaces/LayerAdapter';
 import { MapAdapter, MapClickEvent, ControlPositions, FitOptions } from './interfaces/MapAdapter';
 import { MapOptions, AppOptions, GetAttributionsOptions } from './interfaces/WebMapApp';
-import { LngLatBoundsArray, Pixel, Type, Cursor, LngLatArray } from './interfaces/BaseTypes';
+import { LngLatBoundsArray, Type, Cursor, LngLatArray, LayerDef } from './interfaces/BaseTypes';
 import { RuntimeParams } from './interfaces/RuntimeParams';
 import { StarterKit } from './interfaces/StarterKit';
-import { Keys } from './components/keys/Keys';
+
 import {
   MapControl,
   MapControls,
@@ -27,15 +27,17 @@ import {
   ToggleControlOptions
 } from './interfaces/MapControl';
 
+import { Keys } from './components/keys/Keys';
 import { Feature, GeoJsonObject } from 'geojson';
-import { EventEmitter } from 'events';
 
-import { onLoad } from './utils/decorators';
-import { deepmerge } from './utils/lang';
+import StrictEventEmitter from 'strict-event-emitter-types';
+import { EventEmitter } from 'events';
+import { WebMapEvents } from './interfaces/Events';
+
+import { onLoad } from './util/decorators';
+import { deepmerge } from './util/lang';
 import { createButtonControl } from './components/controls/ButtonControl';
 import { createToggleControl } from './components/controls/ToggleControl';
-
-type LayerDef = string | LayerAdapter;
 
 const OPTIONS: MapOptions = {
   minZoom: 0,
@@ -45,47 +47,63 @@ const OPTIONS: MapOptions = {
 /**
  * @class WebMap
  */
-export class WebMap<M = any, L = any, C = any> {
+export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEvents> {
 
   static getPaintFunctions?: { [name: string]: GetPaintFunction };
+  static decorators = { onLoad };
 
   options: MapOptions = OPTIONS;
-
-  displayProjection = 'EPSG:3857';
-  lonlatProjection = 'EPSG:4326';
-
-  emitter = new EventEmitter();
-  keys: Keys = new Keys(); // TODO: make injectable cached
-  mapAdapter: MapAdapter<M>;
-  runtimeParams: RuntimeParams[] = [];
+  // `WebMapEvents` must be `E` but its not work correct
+  readonly emitter: StrictEventEmitter<EventEmitter, WebMapEvents> = new EventEmitter();
+  readonly keys: Keys = new Keys(); // TODO: make injectable cached
+  readonly mapAdapter: MapAdapter<M>;
+  readonly runtimeParams: RuntimeParams[] = [];
 
   getPaintFunctions = WebMap.getPaintFunctions;
 
-  _eventsStatus: { [eventName: string]: boolean } = {};
+  private readonly _eventsStatus: { [key in keyof E]?: boolean } = {};
 
-  private DPI = 1000 / 39.37 / 0.28;
-  private IPM = 39.37;
-
-  private _starterKits: StarterKit[];
-  private _baseLayers: string[] = [];
-  private _layers: { [x: string]: LayerAdapter } = {};
   private _layersIds: number = 1;
-  private _selectedLayers: string[] = [];
   private _extent?: LngLatBoundsArray;
+  private readonly _starterKits: StarterKit[];
+  private readonly _baseLayers: string[] = [];
+  private readonly _layers: { [x: string]: LayerAdapter } = {};
+  private readonly _selectedLayers: string[] = [];
 
   constructor(appOptions: AppOptions) {
     this.mapAdapter = appOptions.mapAdapter;
     this._starterKits = appOptions.starterKits || [];
-
+    if (appOptions.mapOptions) {
+      this.options = deepmerge(OPTIONS || {}, appOptions.mapOptions);
+    }
     this._addEventsListeners();
+    if (appOptions.create) {
+      this.create(this.options);
+    }
   }
 
-  async create(options: MapOptions): Promise<this> {
-    this.options = deepmerge(OPTIONS || {}, options);
-    await this._setupMap();
+  /**
+   * Manual way to create a map. On default
+   * @example
+   * ```javascript
+   * const webMap = new WebMap(options);
+   * // options.create === false
+   * webMap.create(mapOptions).then(() => doSomething());
+   * ```
+   */
+  async create(options?: MapOptions): Promise<this> {
+    if (!this.getEventStatus('create')) {
+      this.options = deepmerge(OPTIONS || {}, options);
+      await this._setupMap();
+      this._emitStatusEvent('create', this);
+    }
     return this;
   }
 
+  /**
+   * Returns the HTML element that contains the map.
+   * @returns The map's container
+   */
   getContainer(): HTMLElement | undefined {
     if (this.mapAdapter.getContainer) {
       return this.mapAdapter.getContainer();
@@ -101,59 +119,73 @@ export class WebMap<M = any, L = any, C = any> {
     }
   }
 
+  /**
+   * Set the cursor icon to be displayed when hoverion on the map container.
+   * @param cursor available cursor name from https://developer.mozilla.org/ru/docs/Web/CSS/cursor
+   */
   setCursor(cursor: Cursor) {
     if (this.mapAdapter.setCursor) {
       this.mapAdapter.setCursor(cursor);
     }
   }
 
-  onMapLoad(cb?: any): Promise<void> {
-    const mapAdapterOnLoad = this.mapAdapter.onMapLoad;
-    if (mapAdapterOnLoad) {
-      return mapAdapterOnLoad.call(this.mapAdapter, cb);
-    }
-    return Promise.resolve(cb);
-  }
-
-  async addBaseLayer(
-    provider: keyof LayerAdaptersOptions | Type<LayerAdapter>,
-    options?: any): Promise<LayerAdapter> {
-
-    const layer = await this.addLayer(provider, {
-      maxZoom: this.options.maxZoom,
-      minZoom: this.options.minZoom,
-      ...options,
-      baseLayer: true
-    });
-    const id = this.getLayerId(layer);
-    if (layer && id) {
-      this._baseLayers.push(id);
-    }
-    return layer;
-  }
-
-  isBaseLayer(layerName: string): boolean {
-    return this._baseLayers.indexOf(layerName) !== -1;
-  }
-
+  /**
+   * Set the center of the current view.
+   * @param lngLat Array of two numbers representing longitude and latitude of the center of the map view.
+   *
+   * @example
+   * ```javascript
+   * // Mount Everest 27° 59′ 17″ N, 86° 55′ 31″ E
+   * webMap.setCenter([86.925278, 27.988056]);
+   * ```
+   */
   setCenter(lngLat: LngLatArray): this {
     this.mapAdapter.setCenter(lngLat);
     return this;
   }
 
+  /**
+   * Returns the map's geographical centerpoint.
+   * @return lngLat Array of two numbers representing longitude and latitude of the center of the map view.
+   *
+   * @example
+   * ```javascript
+   * // Mount Everest 27° 59′ 17″ N, 86° 55′ 31″ E
+   * webMap.getCenter(); // [86.925278, 27.988056]
+   * ```
+   */
   getCenter(): LngLatArray | undefined {
     return this.mapAdapter.getCenter();
   }
 
+  /**
+   * Zoom to a specific zoom level.
+   * @param zoom The zoom level to set (0-24).
+   */
   setZoom(zoom: number): this {
     this.mapAdapter.setZoom(zoom);
     return this;
   }
 
+  /**
+   * Returns the map's current zoom level.
+   * @return The map's current zoom level (0-24).
+   */
   getZoom(): number | undefined {
     return this.mapAdapter.getZoom();
   }
 
+  /**
+   * Sets the view of the map geographical center and zoom
+   * @param lngLat Array of two numbers representing longitude and latitude of the center of the map view.
+   * @param zoom The zoom level to set (0-24).
+   *
+   * @example
+   * ```javascript
+   * // Mount Everest 27° 59′ 17″ N, 86° 55′ 31″ E
+   * webMap.setView([86.925278, 27.988056], 12)
+   * ```
+   */
   setView(lngLat?: LngLatArray, zoom?: number) {
     if (this.mapAdapter.setView && lngLat && zoom) {
       this.mapAdapter.setView(lngLat, zoom);
@@ -168,11 +200,27 @@ export class WebMap<M = any, L = any, C = any> {
   }
 
   // [west, south, east, north];
-  fitBounds(e: LngLatBoundsArray, options?: FitOptions): this {
-    this.mapAdapter.fit(e, options);
+  /**
+   * Sets a map view that contains the given geographical bounds.
+   * @param bounds Array of coordinates, measured in degrees, in [west, south, east, north] order.
+   * @param options
+   *
+   * @example
+   * ```javascript
+   * // Whall world
+   * webMap.fitBounds([0, -90, 180, 90]);
+   * ```
+   */
+  fitBounds(bounds: LngLatBoundsArray, options?: FitOptions): this {
+    this.mapAdapter.fit(bounds, options);
     return this;
   }
 
+  /**
+   * Try to fit map view by given layer bounds.
+   * But not all layers have borders
+   * @param layerDef
+   */
   async fitLayer(layerDef: LayerDef) {
     const layer = this.getLayer(layerDef);
     if (layer && layer.getExtent) {
@@ -183,6 +231,18 @@ export class WebMap<M = any, L = any, C = any> {
     }
   }
 
+  /**
+   * Check if given layer is baselayer
+   * @param layerName Check
+   */
+  isBaseLayer(layerDef: LayerDef): boolean | undefined {
+    const layer = this.getLayer(layerDef);
+    if (layer && layer.id) {
+      return this._baseLayers.indexOf(layer.id) !== -1;
+    }
+    return undefined;
+  }
+
   getLayerAdapters(): { [name: string]: Type<LayerAdapter> } {
     return this.mapAdapter.layerAdapters;
   }
@@ -191,6 +251,9 @@ export class WebMap<M = any, L = any, C = any> {
     return this.mapAdapter.layerAdapters[name];
   }
 
+  /**
+   * Helper method to return added layer object by any definition type.
+   */
   getLayer(layerDef: LayerDef): LayerAdapter | undefined {
     if (typeof layerDef === 'string') {
       return this._layers[layerDef];
@@ -198,6 +261,9 @@ export class WebMap<M = any, L = any, C = any> {
     return layerDef;
   }
 
+  /**
+   * Helper method to return added layer identificator by any definition type.
+   */
   getLayerId(layerDef: LayerDef): string | undefined {
     const layer = this.getLayer(layerDef);
     if (layer && layer.options) {
@@ -207,20 +273,397 @@ export class WebMap<M = any, L = any, C = any> {
     }
   }
 
+  /**
+   * Return array of all added layer identificators.
+   */
   getLayers(): string[] {
     return Object.keys(this._layers);
   }
 
+  /**
+   * Check if the given layer on the map
+   */
   isLayerVisible(layerDef: LayerDef): boolean {
     const layer = this.getLayer(layerDef);
     return layer && layer.options.visibility !== undefined ? layer.options.visibility : false;
   }
 
   /**
-   * @deprecated use isLayerVisible instead
+   * Shortcut method to create base layer
+   * @param adapter
+   * @param options
    */
-  isLayerOnTheMap(layerDef: LayerDef): boolean {
-    return this.isLayerVisible(layerDef);
+  async addBaseLayer<K extends keyof LayerAdapters, O extends AdapterOptions = AdapterOptions>(
+    adapter: K | Type<LayerAdapters[K]>,
+    options: O | LayerAdaptersOptions[K]): Promise<LayerAdapter> {
+
+    const layer = await this.addLayer(adapter, {
+      ...options,
+      baseLayer: true
+    });
+
+    return layer;
+  }
+
+  /**
+   * Registration of map layer.
+   *
+   * @param adapter The name of layer adapter from [MapAdapter.layerAdapters](webmap#MapAdapter.layerAdapters).
+   *                May be custom object or class implemented by [BaseLayerAdapter](webmap#BaseLayerAdapter).
+   * @param options Specific options for given adapter
+   *
+   * @example
+   * ```javascript
+   * webMap.addLayer('TILE', options).then((layer) => webMap.showLayer(layer));
+   *
+   * webMap.addLayer(CustomLayerAdapter, options);
+   * ```
+   */
+  async addLayer<K extends keyof LayerAdapters, O extends AdapterOptions = AdapterOptions>(
+    adapter: K | Type<LayerAdapters[K]>,
+    options: O | LayerAdaptersOptions[K]): Promise<LayerAdapter> {
+
+    let adapterEngine: Type<LayerAdapter>;
+    if (typeof adapter === 'string') {
+      adapterEngine = this.getLayerAdapter(adapter);
+    } else {
+      adapterEngine = adapter as Type<LayerAdapter>;
+    }
+    if (adapterEngine) {
+      const order = this._layersIds++;
+      const geojsonOptions = options as GeoJsonAdapterOptions;
+      this._updateGeoJsonOptions(geojsonOptions);
+
+      const { maxZoom, minZoom } = this.options;
+
+      options = {
+        id: String(order),
+        order,
+        maxZoom,
+        minZoom,
+        ...options
+      };
+      // options.visibility is a layer global state, but each layer on init is not visible
+      const visibility = options.visibility;
+      options.visibility = false;
+
+      if (options.baseLayer) {
+        options.order = 0;
+      }
+
+      const _adapter = new adapterEngine(this.mapAdapter.map, options);
+      this.emitter.emit('layer:preadd', _adapter);
+      await this.onMapLoad();
+      const layer = await _adapter.addLayer(options);
+      // checking that the original layer was inserted into the adapter anyway
+      _adapter.layer = layer;
+      // think about how to move `id` to the adapter's constructor,
+      // but that it is not required in the options
+      _adapter.id = _adapter.options.id;
+
+      const layerId = _adapter.options.id;
+      if (layerId) {
+        if (geojsonOptions.filter) {
+          this.filterLayer(_adapter, geojsonOptions.filter);
+        }
+        if (options.baseLayer) {
+          this._baseLayers.push(layerId);
+        }
+        this._layers[layerId] = _adapter;
+
+        if (visibility) {
+          this.showLayer(layerId);
+        }
+      }
+      this.emitter.emit('layer:add', _adapter);
+      return _adapter;
+
+    }
+    return Promise.reject('No adapter');
+  }
+
+  /**
+   * Remove all layer from map and memory.
+   */
+  removeLayers(cb?: (layer: string) => boolean) {
+    for (const l in this._layers) {
+      if (this._layers.hasOwnProperty(l)) {
+        let allow = true;
+        if (cb) {
+          allow = cb(l);
+        }
+        if (allow) {
+          this.removeLayer(l);
+          delete this._layers[l];
+        }
+      }
+    }
+  }
+
+  /**
+   * Remove specific layer from map and memory by its definition.
+   * @param layerDef
+   */
+  removeLayer(layerDef: LayerDef) {
+    const layer = this.getLayer(layerDef);
+    const layerId = layer && this.getLayerId(layer);
+    if (layer && layerId) {
+      this.emitter.emit('layer:preremove', layer);
+      if (layer.removeLayer) {
+        layer.removeLayer();
+      } else {
+        this.mapAdapter.removeLayer(layer.layer);
+      }
+      if (layer.options.baseLayer) {
+        const index = this._baseLayers.indexOf(layerId);
+        if (index) {
+          this._baseLayers.splice(index, 1);
+        }
+      }
+      delete this._layers[layerId];
+      this.emitter.emit('layer:remove', layer);
+    }
+  }
+
+  /**
+   * Show added layer on the map by it definition.
+   */
+  showLayer(layerDef: LayerDef) {
+    this.toggleLayer(layerDef, true);
+  }
+
+  /**
+   * Hide added layer on the map by it definition.
+   */
+  hideLayer(layerDef: LayerDef) {
+    this.toggleLayer(layerDef, false);
+  }
+
+  /**
+   * Change added layer visibility on the map by given status or inverse current status.
+   *
+   * @example
+   * ```javascript
+   * webMap.addLayer('TILE', {id: 'my_layer', url: ''}).then((layer) => {
+   *   webMap.toggleLayer(layer, true);
+   *   webMap.toggleLayer('my_layer', false);
+   *   webMap.toggleLayer('my_layer');
+   *   webMap.isLayerVisible(layer); // true
+   * });
+   * ```
+   */
+  toggleLayer(layerDef: LayerDef, status?: boolean) {
+    const layer = this.getLayer(layerDef);
+    const onMap = layer && layer.options.visibility;
+    const toStatus = status !== undefined ? status : !onMap;
+
+    const action = (source: any, l: LayerAdapter) => {
+      l.options.visibility = toStatus;
+
+      const preEventName = toStatus ? 'layer:preshow' : 'layer:prehide';
+      const eventName = toStatus ? 'layer:show' : 'layer:hide';
+
+      this.emitter.emit(preEventName, l);
+      if (toStatus && source) {
+        const order = l.options.baseLayer ? 0 : l.options.order;
+        if (l.showLayer) {
+          l.showLayer.call(l, l.layer);
+        } else {
+          this.mapAdapter.showLayer(l.layer);
+        }
+        if (order !== undefined) {
+          this.mapAdapter.setLayerOrder(l.layer, order, this._layers);
+        }
+      } else {
+        if (l.hideLayer) {
+          l.hideLayer.call(l, l.layer);
+        } else {
+          this.mapAdapter.hideLayer(l.layer);
+        }
+      }
+      this.emitter.emit(eventName, l);
+    };
+    if (layer && layer.options.visibility !== toStatus) {
+      if (this.mapAdapter.map) {
+        action(this.mapAdapter, layer);
+      } else {
+        this.mapAdapter.emitter.once('create', (data) => {
+          action(data.map, layer);
+        });
+      }
+    }
+  }
+
+  /**
+   * Set transparency for a given layer by number from 0 to 1
+   */
+  setLayerOpacity(layerDef: LayerDef, value: number) {
+    const layer = this.getLayer(layerDef);
+    if (layer) {
+      if (this.mapAdapter.setLayerOpacity) {
+        if (layer) {
+          this.mapAdapter.setLayerOpacity(layer.layer, value);
+        }
+      }
+    }
+  }
+
+  // requestGeomString(pixel: Pixel, pixelRadius: number) {
+  //   if (this.mapAdapter.requestGeomString) {
+  //     return this.mapAdapter.requestGeomString(pixel, pixelRadius);
+  //   }
+  // }
+
+  /**
+   * Mark the layer as selected.
+   * If the adapter is a vector layer and supports data selection,
+   * you can pass a callback function to specify which data will be selected.
+   *
+   * @example
+   * ```javascript
+   * const layer = webMap.addLayer('GEOJSON', {data: geojson}).then((layer) => {
+   *   webMap.selectLayer(layer, ({feature}) => feature.id === '42');
+   * });
+   * ```
+   * @param layerDef
+   * @param findFeatureFun
+   */
+  selectLayer(layerDef: LayerDef, findFeatureFun?: DataLayerFilter) {
+    const layer = this.getLayer(layerDef);
+    if (layer) {
+      const adapter = layer as VectorLayerAdapter;
+      if (adapter && adapter.select) {
+        adapter.select(findFeatureFun);
+      }
+      const layerId = this.getLayerId(layer);
+      if (layerId) {
+        this._selectedLayers.push(layerId);
+      }
+    }
+  }
+
+  /**
+   * Unselect the given layer.
+   * If the adapter is a vector layer and supports data selection,
+   * you can pass a callback function to specify which data will be unselected.
+   *
+   * @example
+   * ```javascript
+   * const layer = webMap.addLayer('GEOJSON', {data: geojson}).then((layer) => {
+   *   webMap.unSelectLayer(layer, ({feature}) => feature.id === '42');
+   * });
+   * ```
+   *
+   * @param layerDef
+   * @param findFeatureFun
+   */
+  unSelectLayer(layerDef: LayerDef, findFeatureFun?: DataLayerFilter) {
+    const layer = this.getLayer(layerDef);
+    if (layer) {
+      const adapter = layer && layer as VectorLayerAdapter;
+      if (adapter.unselect) {
+        adapter.unselect(findFeatureFun);
+      }
+      const layerId = this.getLayerId(layer);
+      if (layerId) {
+        const index = this._selectedLayers.indexOf(layerId);
+        if (index !== -1) {
+          this._selectedLayers.splice(index, 1);
+        }
+      }
+    }
+  }
+
+  /**
+   * Hide features from a vector layer using a callback function.
+   *
+   * @example
+   * ```javascript
+   * const layer = webMap.addLayer('GEOJSON', {data: geojson}).then((layer) => {
+   *   webMap.filterLayer(layer, ({feature}) => feature.id === '42');
+   * });
+   * ```
+   *
+   * @param layerDef
+   * @param filter
+   */
+  filterLayer(layerDef: LayerDef, filter: DataLayerFilter<Feature, L>) {
+    const layer = this.getLayer(layerDef);
+    const adapter = layer as VectorLayerAdapter;
+    if (adapter.filter) {
+      adapter.filter(filter);
+    }
+  }
+
+  removeLayerFilter(layerDef: LayerDef) {
+    const layer = this.getLayer(layerDef);
+    const adapter = layer as VectorLayerAdapter;
+    if (adapter.removeFilter) {
+      adapter.removeFilter();
+    } else if (adapter.filter) {
+      adapter.filter(function () { return true; });
+    }
+  }
+
+  /**
+   * Sets the GeoJSON data for given vector layer.
+   *
+   * @example
+   * ```javascript
+   * const layer = webMap.addLayer('GEOJSON').then((layer) => {
+   *   webMap.setLayerData(layer, geojson);
+   * });
+   * ```
+   */
+  setLayerData(layerDef: LayerDef, data: GeoJsonObject) {
+    const layerMem = this.getLayer(layerDef);
+    const adapter = layerMem as VectorLayerAdapter;
+    if (adapter.setData) {
+      adapter.setData(data);
+    } else if (adapter.clearLayer && adapter.addData) {
+      adapter.clearLayer();
+      adapter.addData(data);
+    }
+  }
+
+  /**
+   * Push new the GeoJSON features into given vector layer.
+   *
+   * @example
+   * ```javascript
+   * const layer = webMap.addLayer('GEOJSON', {data: geojson_features_5}).then((layer) => {
+   *   console.log(layer.getLayers().length) // > 5;
+   *   webMap.addLayerData(layer, geojson_features_3);
+   *   console.log(layer.getLayers().length) // > 8;
+   * });
+   * ```
+   */
+  addLayerData(layerDef: LayerDef, data: GeoJsonObject) {
+    const layerMem = this.getLayer(layerDef);
+    const adapter = layerMem as VectorLayerAdapter;
+    if (adapter.addData) {
+      adapter.addData(data);
+    }
+  }
+
+  /**
+   * Remove from vector layer all features.
+   * it is possible to remove only some objects if you specify a callback function.
+   *
+   * @example
+   * ```javascript
+   * const layer = webMap.addLayer('GEOJSON', {data: geojson}).then((layer) => {
+   *   webMap.clearLayerData(layer, (feture) => feture.id === 42);
+   *   webMap.clearLayerData(layer);
+   * });
+   * ```
+   */
+  clearLayerData(layerDef: LayerDef, cb?: (feature: Feature) => boolean) {
+    const layerMem = this.getLayer(layerDef);
+    const adapter = layerMem as VectorLayerAdapter;
+    if (adapter.clearLayer) {
+      adapter.clearLayer(cb);
+    }
   }
 
   @onLoad('build-map')
@@ -276,227 +719,6 @@ export class WebMap<M = any, L = any, C = any> {
     }
   }
 
-  async addLayer<K extends keyof LayerAdapters, O extends AdapterOptions = AdapterOptions>(
-    adapter: K | Type<LayerAdapters[K]>,
-    options: O | LayerAdaptersOptions[K]): Promise<LayerAdapter> {
-
-    let adapterEngine: Type<LayerAdapter>;
-    if (typeof adapter === 'string') {
-      adapterEngine = this.getLayerAdapter(adapter);
-    } else {
-      adapterEngine = adapter as Type<LayerAdapter>;
-    }
-    if (adapterEngine) {
-      const onLayerClickFromOpt = options.onLayerClick;
-      options.onLayerClick = (e) => {
-        if (onLayerClickFromOpt) {
-          onLayerClickFromOpt(e);
-        }
-        return this._onLayerClick(e);
-      };
-      const order = this._layersIds++;
-
-      this._updateGeoJsonOptions(options as GeoJsonAdapterOptions);
-
-      options = {
-        id: String(order),
-        order,
-        ...options
-      };
-      // options.visibility is a layer global state, but each layer on init is not visible
-      const visibility = options.visibility;
-      options.visibility = false;
-
-      if (options.baseLayer) {
-        options.order = 0;
-      }
-
-      const _adapter = new adapterEngine(this.mapAdapter.map, options);
-
-      await this.onMapLoad();
-      const layer = await _adapter.addLayer(options);
-      // checking that the original layer was inserted into the adapter anyway
-      _adapter.layer = layer;
-      // think about how to move `id` to the adapter's constructor,
-      // but that it is not required in the options
-      _adapter.id = _adapter.options.id;
-
-      const layerId = _adapter.options.id;
-      if (layerId) {
-        if (options.baseLayer) {
-          this._baseLayers.push(layerId);
-        }
-        this._layers[layerId] = _adapter;
-
-        if (visibility) {
-          this.showLayer(layerId);
-        }
-      }
-
-      return _adapter;
-
-    }
-    return Promise.reject('No adapter');
-  }
-
-  removeLayers() {
-    for (const l in this._layers) {
-      if (this._layers.hasOwnProperty(l)) {
-        this.removeLayer(l);
-      }
-    }
-    this._layers = {};
-  }
-
-  removeLayer(layerDef: LayerDef) {
-    const layer = this.getLayer(layerDef);
-    const layerId = layer && this.getLayerId(layer);
-    if (layer && layerId) {
-      this.mapAdapter.removeLayer(layer.layer);
-      if (layer.options.baseLayer) {
-        const index = this._baseLayers.indexOf(layerId);
-        if (index) {
-          this._baseLayers.splice(index, 1);
-        }
-      }
-      delete this._layers[layerId];
-    }
-  }
-
-  showLayer(layerDef: LayerDef) {
-    this.toggleLayer(layerDef, true);
-  }
-
-  hideLayer(layerDef: LayerDef) {
-    this.toggleLayer(layerDef, false);
-  }
-
-  setLayerOpacity(layerName: string, value: number) {
-    if (this.mapAdapter.setLayerOpacity) {
-      const layer = this.getLayer(layerName);
-      if (layer) {
-        this.mapAdapter.setLayerOpacity(layer.layer, value);
-      }
-    }
-  }
-
-  getScaleForResolution(res: number, mpu: number = 1): number {
-    return res * (mpu * this.IPM * this.DPI);
-  }
-
-  getResolutionForScale(scale: number, mpu: number = 1): number {
-    return scale / (mpu * this.IPM * this.DPI);
-  }
-
-  toggleLayer(layerDef: LayerDef, status?: boolean) {
-    const layer = this.getLayer(layerDef);
-    const onMap = layer && layer.options.visibility;
-    const toStatus = status !== undefined ? status : !onMap;
-
-    const action = (source: any, l: LayerAdapter) => {
-      l.options.visibility = toStatus;
-      if (toStatus && source) {
-        const order = l.options.baseLayer ? 0 : l.options.order;
-        if (l.showLayer) {
-          l.showLayer.call(l, l.layer);
-        } else {
-          this.mapAdapter.showLayer(l.layer);
-        }
-        if (order !== undefined) {
-          this.mapAdapter.setLayerOrder(l.layer, order, this._layers);
-        }
-      } else {
-        if (l.hideLayer) {
-          l.hideLayer.call(l, l.layer);
-        } else {
-          this.mapAdapter.hideLayer(l.layer);
-        }
-      }
-    };
-    if (layer && layer.options.visibility !== toStatus) {
-      if (this.mapAdapter.map) {
-        action(this.mapAdapter, layer);
-      } else {
-        this.mapAdapter.emitter.once('create', (data) => {
-          action(data.map, layer);
-        });
-      }
-    }
-  }
-
-  requestGeomString(pixel: Pixel, pixelRadius: number) {
-    if (this.mapAdapter.requestGeomString) {
-      return this.mapAdapter.requestGeomString(pixel, pixelRadius);
-    }
-  }
-
-  onMapClick(evt: MapClickEvent) {
-    this.emitter.emit('click', evt);
-  }
-
-  selectLayer(layerDef: LayerDef) {
-    const layerMem = this.getLayer(layerDef);
-    if (layerMem) {
-      const adapter = layerMem as VectorLayerAdapter;
-      if (adapter && adapter.select) {
-        adapter.select();
-      }
-      const layerId = this.getLayerId(layerMem);
-      if (layerId) {
-        this._selectedLayers.push(layerId);
-      }
-    }
-  }
-
-  unSelectLayer(layerDef: LayerDef) {
-    const layerMem = this.getLayer(layerDef);
-    if (layerMem) {
-      const adapter = layerMem && layerMem as VectorLayerAdapter;
-      if (adapter.unselect) {
-        adapter.unselect();
-      }
-      const layerId = this.getLayerId(layerMem);
-      if (layerId) {
-        const index = this._selectedLayers.indexOf(layerId);
-        if (index !== -1) {
-          this._selectedLayers.splice(index, 1);
-        }
-      }
-    }
-  }
-
-  filterLayer(layerDef: LayerDef, filter: DataLayerFilter<Feature, L>) {
-    const layerMem = this.getLayer(layerDef);
-    const adapter = layerMem as VectorLayerAdapter;
-    if (adapter.filter) {
-      adapter.filter(filter);
-    }
-  }
-
-  setLayerData(layerDef: LayerDef, data: GeoJsonObject) {
-    const layerMem = this.getLayer(layerDef);
-    const adapter = layerMem as VectorLayerAdapter;
-    if (adapter.setData) {
-      adapter.setData(data);
-    }
-  }
-
-  addLayerData(layerDef: LayerDef, data: GeoJsonObject) {
-    const layerMem = this.getLayer(layerDef);
-    const adapter = layerMem as VectorLayerAdapter;
-    if (adapter.addData) {
-      adapter.addData(data);
-    }
-  }
-
-  clearLayerData(layerDef: LayerDef, cb?: (feature: Feature) => boolean) {
-    const layerMem = this.getLayer(layerDef);
-    const adapter = layerMem as VectorLayerAdapter;
-    if (adapter.clearLayer) {
-      adapter.clearLayer(cb);
-    }
-  }
-
   getAttributions(options: GetAttributionsOptions): string[] {
     const attributions: string[] = [];
     for (const l in this._layers) {
@@ -515,10 +737,59 @@ export class WebMap<M = any, L = any, C = any> {
     return attributions;
   }
 
-  private async _setupMap() {
+  getEventStatus(eventName: keyof E): boolean {
+    // ugly hack to disable type checking error
+    const _eventName = eventName as keyof WebMapEvents;
+    const status = this._eventsStatus[_eventName];
+    return status !== undefined ? status : false;
+  }
 
-    this.mapAdapter.displayProjection = this.displayProjection;
-    this.mapAdapter.lonlatProjection = this.lonlatProjection;
+  onMapClick(evt: MapClickEvent) {
+    this.emitter.emit('click', evt);
+  }
+
+  onLoad(event: keyof WebMapEvents = 'create'): Promise<this> {
+    return new Promise((res) => {
+      if (this.getEventStatus(event)) {
+        res(this);
+      } else {
+        this.emitter.once(event, () => {
+          res(this);
+        });
+      }
+    });
+  }
+
+  protected _emitStatusEvent(eventName: keyof E, data?: any) {
+    // ugly hack to disable type checking error
+    const _eventName = eventName as keyof WebMapEvents;
+    this._eventsStatus[_eventName] = true;
+    this.emitter.emit(_eventName, data);
+  }
+
+  protected onMapLoad(cb?: (mapAdapter: MapAdapter) => void): Promise<MapAdapter> {
+    return new Promise((res) => {
+      const _resolve = () => {
+        const mapAdapter = this.mapAdapter;
+        if (cb) {
+          cb(mapAdapter);
+        }
+        if (mapAdapter) {
+          res(mapAdapter);
+        }
+      };
+      const isLoaded = this.mapAdapter.isLoaded !== undefined ? this.mapAdapter.isLoaded : true;
+      if (this.mapAdapter.map && isLoaded) {
+        _resolve();
+      } else {
+        this.mapAdapter.emitter.once('create', () => {
+          _resolve();
+        });
+      }
+    });
+  }
+
+  private async _setupMap() {
 
     this.mapAdapter.create(this.options);
     this._zoomToInitialExtent();
@@ -526,7 +797,7 @@ export class WebMap<M = any, L = any, C = any> {
     await this._addLayerProviders();
     await this._onLoadSync();
 
-    this._emitLoadEvent('build-map', this.mapAdapter);
+    this._emitStatusEvent('build-map', this.mapAdapter);
     return this;
   }
 
@@ -576,6 +847,13 @@ export class WebMap<M = any, L = any, C = any> {
   }
 
   private _updateGeoJsonOptions(options: GeoJsonAdapterOptions) {
+    const onLayerClickFromOpt = options.onLayerClick;
+    options.onLayerClick = (e) => {
+      if (onLayerClickFromOpt) {
+        onLayerClickFromOpt(e);
+      }
+      return this._onLayerClick(e);
+    };
     if (options.paint) {
       options.paint = this._updatePaintOptionFromCallback(options.paint);
     }
@@ -598,11 +876,6 @@ export class WebMap<M = any, L = any, C = any> {
     return paint;
   }
 
-  private _emitLoadEvent(event: string, data: any) {
-    this._eventsStatus[event] = true;
-    this.emitter.emit(event, data);
-  }
-
   private async _onLayerClick(options: OnLayerClickOptions) {
     this.emitter.emit('layer:click', options);
     return Promise.resolve(options);
@@ -610,15 +883,24 @@ export class WebMap<M = any, L = any, C = any> {
 
   private _addEventsListeners() {
     // propagate map click event
-    this.mapAdapter.emitter.on('click', (ev: MapClickEvent) => this._onMapClick(ev));
-  }
+    const events: Array<keyof WebMapEvents> = [
+      'click',
+      'zoomstart',
+      'zoom',
+      'zoomend',
+      'movestart',
+      'move',
+      'moveend'
+    ];
 
-  private _onMapClick(ev: MapClickEvent) {
-    this.emitter.emit('click', ev);
-    this._starterKits.forEach((x) => {
-      if (x.onMapClick) {
-        x.onMapClick(ev, this);
-      }
+    events.forEach((x) => {
+      this.mapAdapter.emitter.on(x, (data) => {
+        this.emitter.emit(x, data);
+      });
+    });
+    this.onMapLoad().then(() => {
+      // universal events
+
     });
   }
 

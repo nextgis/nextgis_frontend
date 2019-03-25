@@ -5,7 +5,6 @@ import {
   GeoJsonAdapterLayerType,
   IconOptions,
   GetPaintCallback,
-  GetPaintFunction,
   LayerDefinition,
   DataLayerFilter
 } from '@nextgis/webmap';
@@ -65,6 +64,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
 
   private _layers: LayerMem[] = [];
   private _selectedLayers: LayerMem[] = [];
+  private _filterFun?: DataLayerFilter<Feature>;
 
   constructor(map: L.Map, options: GeoJsonAdapterOptions) {
     super(map, options);
@@ -120,8 +120,9 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
     });
   }
 
-  filter(fun: DataLayerFilter) {
+  filter(fun?: DataLayerFilter) {
     // Some optimization
+    this._filterFun = fun;
     // @ts-ignore
     const _map = this.layer._map;
     if (_map) {
@@ -129,8 +130,8 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
     }
 
     this._layers.forEach(({ feature, layer }) => {
-      const ok = fun({ feature, layer });
       if (layer) {
+        const ok = fun ? fun({ feature, layer }) : true;
         if (ok) {
           this.layer.addLayer(layer);
         } else {
@@ -141,6 +142,10 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
     if (_map) {
       this.layer.addTo(_map);
     }
+  }
+
+  cleanFilter() {
+    this.filter();
   }
 
   getLayers() {
@@ -264,10 +269,18 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
     }
 
     lopt.onEachFeature = (feature: Feature, layer) => {
+      // @ts-ignore
+      layer.options.pane = this.pane;
       this._layers.push({ feature, layer });
-      this.layer.addLayer(layer);
-      if (options.selectable) {
-        layer.on('click', this._onLayerClick, this);
+      let ok = true;
+      if (this._filterFun) {
+        ok = this._filterFun({ feature, layer });
+      }
+      if (ok) {
+        this.layer.addLayer(layer);
+        if (options.selectable) {
+          layer.on('click', this._onLayerClick, this);
+        }
       }
     };
 

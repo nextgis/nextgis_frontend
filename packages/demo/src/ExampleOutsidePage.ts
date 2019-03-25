@@ -1,9 +1,7 @@
-import { Vue, Component, Watch } from 'vue-property-decorator';
+import { mixins } from 'vue-class-component';
+// import { Vue, Component, Watch } from 'vue-property-decorator';
 
 import { MainPage } from './MainPage';
 
-@Component({
-  mixins: [MainPage]
-})
-export class ExampleOutsidePage extends Vue {
+export class ExampleOutsidePage extends mixins(MainPage) {
 }

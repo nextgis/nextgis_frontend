@@ -19,7 +19,7 @@ import {
   GeoJsonProperties
 } from 'geojson';
 import {
-  Map, MapLayerMouseEvent,
+  Map, MapLayerMouseEvent, GeoJSONSource,
   // BackgroundPaint, FillPaint, FillExtrusionPaint, LinePaint, SymbolPaint,
   // RasterPaint, CirclePaint, HeatmapPaint, HillshadePaint,
 } from 'mapbox-gl';
@@ -27,18 +27,20 @@ import {
 // type MapboxPaint = BackgroundPaint | FillPaint | FillExtrusionPaint | LinePaint | SymbolPaint |
 //   RasterPaint | CirclePaint | HeatmapPaint | HillshadePaint;
 
-import { getImage } from '../utils/image_icons';
+import { getImage } from '../util/image_icons';
 import { TLayer } from '../MapboxglMapAdapter';
 import { BaseAdapter } from './BaseAdapter';
 
 interface Feature<G extends GeometryObject | null = Geometry, P = GeoJsonProperties> extends F<G, P> {
+  _rendrom_id?: string;
 }
 
 const allowedParams: Array<[string, string] | string> = ['color', 'opacity'];
 const allowedByType = {
   circle: allowedParams.concat(['radius']),
   line: allowedParams.concat([['weight', 'width']]),
-  fill: allowedParams.concat([])
+  fill: allowedParams.concat([]),
+  icon: allowedParams.concat([])
 };
 
 const typeAlias: { [key in GeoJsonGeometryTypes]: GeoJsonAdapterLayerType } = {
@@ -51,7 +53,16 @@ const typeAlias: { [key in GeoJsonGeometryTypes]: GeoJsonAdapterLayerType } = {
   'GeometryCollection': 'fill'
 };
 
-const backAliases: { [key in GeoJsonAdapterLayerType]?: GeoJsonGeometryTypes[] } = {};
+const typeAliasForFilter: { [key in GeoJsonAdapterLayerType]: GeoJsonGeometryTypes } = {
+  circle: 'Point',
+  line: 'LineString',
+  fill: 'Polygon',
+  icon: 'Point'
+};
+
+const backAliases: { [key in GeoJsonAdapterLayerType]?: GeoJsonGeometryTypes[] } = {
+  'icon': ['Point']
+};
 
 for (const a in typeAlias) {
   if (typeAlias.hasOwnProperty(a)) {
@@ -68,64 +79,121 @@ const PAINT = {
   radius: 10
 };
 
+let ID = 0;
+
+type MapboxLayerType = 'fill' | 'line' | 'symbol' | 'circle';
+
 export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
   implements VectorLayerAdapter<Map, TLayer, GeoJsonAdapterOptions, Feature> {
 
   selected: boolean = false;
 
-  private _selectionName?: string;
   private _features: Feature[] = [];
+  private readonly _sourceId: string;
+  private readonly _selectionName: string;
   private _selectedFeatureIds: string[] = [];
   private _filteredFeatureIds: string[] = [];
-  private _data?: Feature | FeatureCollection;
-
+  private _types: GeoJsonAdapterLayerType[] = ['fill', 'circle', 'line'];
+  private _filterFun?: DataLayerFilter<Feature>;
   private $onLayerClick?: (e: MapLayerMouseEvent) => void;
 
   constructor(public map: Map, public options: GeoJsonAdapterOptions) {
     super(map, options);
+    this._sourceId = `source-${this._layerId}`;
+    this._selectionName = this._layerId + '-highlighted';
     this.$onLayerClick = this._onLayerClick.bind(this);
   }
 
   async addLayer(options: GeoJsonAdapterOptions): Promise<any> {
     options = this.options = { ...this.options, ...(options || {}) };
-    const data = options.data;
+
+    this.map.addSource(this._sourceId, {
+      'type': 'geojson',
+      'data': {
+        'type': 'FeatureCollection',
+        'features': []
+      }
+    });
+    this.layer = [];
+    const types = this._types = options.type ? [options.type] : this._types;
+    for (const t of types) {
+      if (options.paint) {
+
+        const geomType = typeAliasForFilter[t];
+        if (geomType) {
+          let type = t;
+          if (t === 'circle') {
+            const paintType = this._detectPaintType(options.paint);
+            if (paintType === 'icon') {
+              type = 'icon';
+            }
+          }
+          const layer = this._getLayerNameFromType(t);
+          const geomFilter = ['==', '$type', geomType];
+          await this._addLayer(layer, type, geomFilter);
+          this.layer.push(layer);
+          if (options.selectedPaint) {
+            const selectionLayer = this._getSelectionLayerNameFromType(t);
+            await this._addLayer(selectionLayer, type, ['all', geomFilter, ['in', '_rendrom_id', '']]);
+            this.layer.push(selectionLayer);
+          }
+        }
+      }
+    }
+
+    if (this.options.data) {
+      this.addData(this.options.data);
+    }
+
+    this._addEventsListeners();
+
+    return this.layer;
+  }
+
+  removeLayer() {
+    const map = this.map;
+    if (this.layer) {
+      this.layer.forEach((layerId) => {
+        map.removeLayer(layerId);
+      });
+      map.removeSource(this._sourceId);
+    }
+  }
+
+  clearLayer(cb?: (feature: Feature) => boolean) {
+    let features: Feature[] = [];
+    const source = this.map.getSource(this._sourceId) as GeoJSONSource;
+    if (cb) {
+      features = this._features = this._features.filter((x) => !cb(x));
+    }
+    source.setData({ type: 'FeatureCollection', features });
+  }
+
+  async addData(data: GeoJsonObject) {
     let type: GeoJsonAdapterLayerType | undefined;
-    if (options.type) {
-      type = options.type;
+    if (this.options.type) {
+      type = this.options.type;
     }
     if (!type && data) {
       const detectedType = detectType(data);
       type = typeAlias[detectedType];
     }
-
     if (data && type) {
-      this._data = this.filterGeometries(data, type) as any;
-      this._features.forEach((x, i) => {
-        // to avaoid id = 0 is false
-        const rendromId = '_' + i;
-        // @ts-ignore
+      const features = this.filterGeometries(data, type);
+      features.forEach((x) => {
+        // to avoid id = 0 is false
+        const rendromId = '_' + ID++;
         x._rendrom_id = rendromId;
         if (x.properties) {
           x.properties._rendrom_id = rendromId;
         }
       });
-      const features = data as Feature | FeatureCollection;
-      this.layer = [this._layerId];
-      if (options.paint) {
-        await this._addLayer(this._layerId, features, options.paint, type);
-        if (options.selectedPaint) {
-          this._selectionName = this._layerId + '-highlighted';
-          await this._addLayer(this._selectionName, features, options.selectedPaint, type);
-          this.map.setFilter(this._selectionName, ['in', '_rendrom_id', '']);
-          this.layer.push(this._selectionName);
-        }
+      if (this._filterFun) {
+        this._filter(this._filterFun);
       }
-
-      this._addEventsListeners();
-
-      return this.layer;
-    } else {
-      throw new Error('No geometry for given type');
+      await this._updateLayerPaint(type);
+      const source = this.map.getSource(this._sourceId) as GeoJSONSource;
+      source.setData({ type: 'FeatureCollection', features: this._features });
     }
   }
 
@@ -147,14 +215,13 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
   }
 
   filter(fun: DataLayerFilter<Feature, TLayer>) {
+    this._filterFun = fun;
+    this._filter(fun);
+  }
+
+  removeFilter() {
+    this._filterFun = undefined;
     this._filteredFeatureIds = [];
-    this._features.forEach((feature) => {
-      const ok = fun({ feature });
-      const id = this._getRendromId(feature);
-      if (ok && id) {
-        this._filteredFeatureIds.push(id);
-      }
-    });
     this._updateFilter();
   }
 
@@ -189,51 +256,105 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     this.selected = !!this._selectedFeatureIds.length;
   }
 
-  private async _addLayer(
-    name: string,
-    data: Feature | FeatureCollection,
-    paint: GeoJsonAdapterLayerPaint | GetPaintCallback,
-    type: GeoJsonAdapterLayerType) {
+  private _filter(fun: DataLayerFilter<Feature, TLayer>) {
+    this._filteredFeatureIds = [];
+    this._features.forEach((feature) => {
+      const ok = fun({ feature });
+      const id = this._getRendromId(feature);
+      if (ok && id) {
+        this._filteredFeatureIds.push(id);
+      }
+    });
+    this._updateFilter();
+  }
+
+  private _getLayerNameFromType(type: GeoJsonAdapterLayerType) {
+    return type + '-' + this._layerId;
+  }
+
+  private _getSelectionLayerNameFromType(type: GeoJsonAdapterLayerType) {
+    return type + '-' + this._selectionName;
+  }
+
+  private async _addLayer(name: string, type: GeoJsonAdapterLayerType, filter?: any) {
+    let mType: MapboxLayerType;
+    if (type === 'icon') {
+      mType = 'symbol';
+    } else {
+      mType = type;
+    }
 
     const layerOpt: mapboxgl.Layer = {
-      id: String(name),
-      source: {
-        type: 'geojson',
-        data
-      },
+      id: name,
+      type: mType,
+      source: this._sourceId,
       layout: {
         visibility: 'none',
       },
+      filter
     };
-    const _paint: any = await this._createPaintForType(paint, type, name);
-    if ('icon-image' in _paint) {
-      // If true, the icon will be visible even if it collides with other previously drawn symbols.
-      _paint['icon-allow-overlap'] = true;
-      layerOpt.layout = { ...layerOpt.layout, ..._paint };
-      layerOpt.type = 'symbol';
-    } else {
-      layerOpt.paint = _paint;
-      layerOpt.type = type;
-    }
+
     this.map.addLayer(layerOpt);
   }
 
-  private filterGeometries(data: GeoJsonObject, type: GeoJsonAdapterLayerType): GeoJsonObject | boolean {
+  private async _updateLayerPaint(type: GeoJsonAdapterLayerType) {
+
+    const layerName = this._getLayerNameFromType(type);
+
+    if (this.options.paint) {
+      const layers: Array<[string, GeoJsonAdapterLayerPaint | GetPaintCallback]> = [[layerName, this.options.paint]];
+      if (this.options.selectedPaint) {
+        const selName = this._getSelectionLayerNameFromType(type);
+        layers.push([selName, this.options.selectedPaint]);
+      }
+
+      for (const [name, paint] of layers) {
+        const _paint: any = await this._createPaintForType(paint, type, name);
+
+        if ('icon-image' in _paint) {
+          // If true, the icon will be visible even if it collides with other previously drawn symbols.
+          _paint['icon-allow-overlap'] = true;
+          for (const p in _paint) {
+            if (_paint.hasOwnProperty(p)) {
+              this.map.setLayoutProperty(name, p, _paint[p]);
+            }
+          }
+        } else {
+          for (const p in _paint) {
+            if (_paint.hasOwnProperty(p)) {
+              this.map.setPaintProperty(name, p, _paint[p]);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  private filterGeometries(data: GeoJsonObject, type: GeoJsonAdapterLayerType): Feature[] {
+    let newFeatures: Feature[] = [];
     if (data.type === 'FeatureCollection') {
       const features = (data as FeatureCollection).features = (data as FeatureCollection).features
         .filter((f) => geometryFilter(f.geometry.type, type)) as Feature[];
-      this._features = features;
+      newFeatures = features;
     } else if (data.type === 'Feature') {
       const allow = geometryFilter((data as Feature).geometry.type, type);
       if (!allow) {
-        return false;
+        return [];
       }
-      this._features.push((data as Feature));
+      newFeatures.push((data as Feature));
     } else if (data.type === 'GeometryCollection') {
-      (data as GeometryCollection).geometries = (data as GeometryCollection).geometries
-        .filter((g) => geometryFilter(g.type, type));
+      const geomCollection = data as GeometryCollection;
+      geomCollection.geometries = geomCollection.geometries.filter((g) => geometryFilter(g.type, type));
+      newFeatures = geomCollection.geometries.map((x) => {
+        const f: Feature = { type: 'Feature', geometry: x as GeometryObject, properties: {} };
+        return f;
+      });
+    } else if (typeAlias[data.type]) {
+      const obj: Feature = { type: 'Feature', geometry: data as GeometryObject, properties: {} };
+      newFeatures = [obj];
     }
-    return data;
+    this._features = this._features.concat(newFeatures);
+    return newFeatures;
   }
 
   private async _createPaintForType(
@@ -331,25 +452,26 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     e.preventDefault();
     const features = this.map.queryRenderedFeatures(e.point, { layers: this.layer });
     const feature = features[0] as Feature;
-    const id = this._getRendromId(feature);
-    if (feature && id !== undefined) {
-
-      let isSelected = this._selectedFeatureIds.indexOf(id) !== -1;
-      if (isSelected) {
-        if (this.options && this.options.unselectOnSecondClick) {
-          this._unselectFeature(feature);
-          isSelected = false;
+    if (feature) {
+      const id = this._getRendromId(feature);
+      if (id !== undefined) {
+        let isSelected = this._selectedFeatureIds.indexOf(id) !== -1;
+        if (isSelected) {
+          if (this.options && this.options.unselectOnSecondClick) {
+            this._unselectFeature(feature);
+            isSelected = false;
+          }
+        } else {
+          this._selectFeature(feature);
+          isSelected = true;
         }
-      } else {
-        this._selectFeature(feature);
-        isSelected = true;
-      }
-      if (this.options.onLayerClick) {
-        this.options.onLayerClick({
-          layer: this,
-          feature,
-          selected: isSelected
-        });
+        if (this.options.onLayerClick) {
+          this.options.onLayerClick({
+            layer: this,
+            feature,
+            selected: isSelected
+          });
+        }
       }
     }
   }
@@ -410,13 +532,38 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     } else {
       selectionArray = this._selectedFeatureIds;
     }
-    if (this._selectionName) {
-      this.map.setFilter(this._selectionName, ['in', '_rendrom_id', ...selectionArray]);
+
+    const layers = this.layer;
+    if (layers) {
+      this._types.forEach((t) => {
+        const geomType = typeAliasForFilter[t];
+        if (geomType) {
+          const geomFilter = ['==', '$type', geomType];
+          const layerName = this._getLayerNameFromType(t);
+          const selLayerName = this._getSelectionLayerNameFromType(t);
+          if (layers.indexOf(selLayerName) !== -1) {
+            if (this._selectionName) {
+              this.map.setFilter(selLayerName, ['all', geomFilter, ['in', '_rendrom_id', ...selectionArray]]);
+            }
+          }
+          if (layers.indexOf(layerName) !== -1) {
+            if (this._filteredFeatureIds.length) {
+              this.map.setFilter(layerName, ['all', geomFilter, ['in', '_rendrom_id', ...filteredArray]]);
+            } else {
+              this.map.setFilter(layerName, ['all', geomFilter, ['!in', '_rendrom_id', ...selectionArray]]);
+            }
+          }
+        }
+      });
     }
-    if (this._filteredFeatureIds.length) {
-      this.map.setFilter(this._layerId, ['in', '_rendrom_id', ...filteredArray]);
-    } else {
-      this.map.setFilter(this._layerId, ['!in', '_rendrom_id', ...selectionArray]);
+  }
+
+  private _detectPaintType(paint: GeoJsonAdapterLayerPaint | GetPaintCallback): string | undefined {
+    if ('type' in paint) {
+      return paint.type;
+    } else if (typeof paint === 'function') {
+      const falsePaint = paint({ type: 'Feature', properties: {}, geometry: {} });
+      return this._detectPaintType(falsePaint);
     }
   }
 

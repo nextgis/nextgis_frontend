@@ -3,8 +3,8 @@ import {
   GeoJsonAdapterLayerPaint,
   GetPaintCallback,
   GeoJsonAdapterLayerType,
-  OnLayerClickOptions,
-  VectorLayerAdapter
+  VectorLayerAdapter,
+  DataLayerFilter
 } from '@nextgis/webmap';
 import Map from 'ol/Map';
 import GeoJSON from 'ol/format/GeoJSON';
@@ -32,7 +32,9 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
   selected: boolean = false;
 
   private vectorSource = new VectorSource();
+  private _features: ol.Feature[] = [];
   private _selectedFeatures: ol.Feature[] = [];
+  private _filterFun?: DataLayerFilter<Feature>;
 
   constructor(public map: Map, public options: GeoJsonAdapterOptions) { }
 
@@ -89,7 +91,12 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
       dataProjection: 'EPSG:4326',
       featureProjection: 'EPSG:3857'
     });
-    this.vectorSource.addFeatures(features);
+    this._features = this._features.concat(features);
+    if (this._filterFun) {
+      this.filter(this._filterFun);
+    } else {
+      this.vectorSource.addFeatures(features);
+    }
   }
 
   select(findFeatureFun?: (opt: { feature: Feature }) => boolean) {
@@ -120,10 +127,33 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
     }
   }
 
+  getLayers() {
+    return this._features.map((x) => {
+      return { feature: getFeature(x) };
+    });
+  }
+
   getSelected() {
     return this._selectedFeatures.map((x) => {
       return { feature: getFeature(x) };
     });
+  }
+
+  filter(fun?: DataLayerFilter<Feature, Layer>) {
+    this._filterFun = fun;
+    const features = this._features;
+    const filtered = fun ? features.filter((feature) => {
+      return fun({ feature: getFeature(feature) });
+    }) : features;
+    this.vectorSource.clear();
+    const length = filtered.length;
+    for (let fry = 0; fry < length; fry++) {
+      this.vectorSource.addFeature(filtered[fry]);
+    }
+  }
+
+  cleanFilter() {
+    this.filter();
   }
 
   private setPaintEachLayer(paint: GetPaintCallback | GeoJsonAdapterLayerPaint) {
