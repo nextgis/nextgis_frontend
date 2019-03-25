@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/item",
-  "version": "0.14.8",
+  "version": "0.14.11",
   "description": "Hierarchical layers control",
   "main": "lib/item.js",
   "unpkg": "lib/item.js",
