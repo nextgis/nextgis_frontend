@@ -38,8 +38,10 @@ export interface BasePaint {
   type?: string;
   color?: string;
   opacity?: number;
+  fill?: boolean;
   stroke?: boolean;
   strokeColor?: string;
+  strokeOpacity?: number;
 }
 
 export interface CirclePaint extends BasePaint {
