@@ -6,7 +6,8 @@ import {
   IconOptions,
   GetPaintCallback,
   LayerDefinition,
-  DataLayerFilter
+  DataLayerFilter,
+  PathPaint
 } from '@nextgis/webmap';
 import {
   GeoJSON,
@@ -20,7 +21,6 @@ import {
   LatLngExpression,
   LeafletEvent,
   Map,
-  Layer
 } from 'leaflet';
 import { GeoJsonObject, GeoJsonGeometryTypes, FeatureCollection, Feature, GeometryCollection } from 'geojson';
 import { BaseAdapter } from './BaseAdapter';
@@ -37,7 +37,7 @@ const typeAlias: { [key in GeoJsonGeometryTypes]: GeoJsonAdapterLayerType } = {
 
 const PAINT = {
   stroke: false,
-  fillOpacity: 1
+  opacity: 1
 };
 
 const backAliases: { [key in GeoJsonAdapterLayerType]?: GeoJsonGeometryTypes[] } = {};
@@ -229,14 +229,27 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
     }
   }
 
-  private preparePaint(paint: GeoJsonAdapterLayerPaint): PathOptions | undefined {
+  private preparePaint(paint: GeoJsonAdapterLayerPaint): PathOptions {
     if (paint.type !== 'get-paint') {
       const path: CircleMarkerOptions | PathOptions = paint as CircleMarkerOptions | PathOptions;
       if (path.opacity) {
         path.fillOpacity = path.opacity;
       }
-      return path;
+      const aliases: Array<[keyof PathOptions, keyof PathPaint]> = [
+        ['color', 'strokeColor'],
+        ['opacity', 'strokeOpacity'],
+        ['stroke', 'stroke'],
+        ['fillColor', 'color'],
+        ['fillOpacity', 'opacity'],
+        ['fill', 'fill']
+      ];
+      const readyPaint: PathOptions = {};
+      aliases.forEach(([to, from ]: [keyof PathOptions, keyof PathPaint]) => {
+        readyPaint[to] = (paint as any)[from];
+      });
+      return readyPaint;
     }
+    return PAINT;
   }
 
   private getGeoJsonOptions(options: GeoJsonAdapterOptions, type: GeoJsonAdapterLayerType): GeoJSONOptions {
@@ -257,9 +270,9 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
         lopt = {
           style: (feature) => {
             if (feature) {
-              return { ...PAINT, ...paint(feature) };
+              return this.preparePaint({ ...PAINT, ...paint(feature) });
             } else {
-              return { ...PAINT };
+              return this.preparePaint({ ...PAINT, type: 'path' });
             }
           }
         };
