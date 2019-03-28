@@ -27,12 +27,43 @@
   <div id='map'></div>
   <script>
     var ngwMap = new NgwMap({
-      baseUrl: 'https://demo.nextgis.com',
       target: 'map',
-      qmsId: 487,
-      center: [50.0113, 19.9845],
+      center: [76.1, 25.4],
       zoom: 10
     });
+
+    var points = {
+      "type": "FeatureCollection",
+      "features": [
+        { "type": "Feature", "properties": { "id": 1, "color": "red", "radius": 15 }, "geometry": { "type": "Point", "coordinates": [ 75.9, 25.5 ] } },
+        { "type": "Feature", "properties": { "id": 2, "color": "red",  "stroke": true }, "geometry": { "type": "Point", "coordinates": [ 76.1, 25.5 ] } },
+        { "type": "Feature", "properties": { "id": 3, "color": "red",  "strokeColor": "black" }, "geometry": { "type": "Point", "coordinates": [ 76.3, 25.5 ] } },
+        { "type": "Feature", "properties": { "id": 4, "color": "red", "opacity": 1, "strokeColor": "black", "strokeOpacity": "0.5" }, "geometry": { "type": "Point", "coordinates": [ 76.5, 25.5 ] } },
+        { "type": "Feature", "properties": { "id": 5, "color": "red",  "stroke": true, "weight": "6" }, "geometry": { "type": "Point", "coordinates": [ 76.7, 25.5 ] } }
+      ]
+    };
+
+    var lines = {
+      "type": "FeatureCollection",
+      "features": [
+        { "type": "Feature", "properties": { "id": 1, "color": "blue", "weight": 3, }, "geometry": { "type": "LineString", "coordinates": [ [ 76.4, 25.3 ], [ 76.5, 25.4 ], [ 76.6, 25.3 ] ] } },
+        { "type": "Feature", "properties": { "id": 2, "color": "red" }, "geometry": { "type": "LineString", "coordinates": [ [ 76.6, 25.4 ], [ 76.7, 25.3 ], [ 76.8, 25.4 ] ] } },
+        { "type": "Feature", "properties": { "id": 3, "color": "blue", "opacity": 0.5 },  "geometry": { "type": "LineString", "coordinates": [ [ 76.0, 25.3 ], [ 76.1, 25.4 ], [ 76.2, 25.3 ] ] } },
+        { "type": "Feature", "properties": { "id": 4, "color": "black", "weight": 3 },  "geometry": { "type": "LineString", "coordinates": [ [ 75.8, 25.4 ], [ 75.9, 25.3 ], [ 76.0, 25.4 ] ] } },
+        { "type": "Feature", "properties": { "id": 5, "color": "red", "weight": 3, "opacity": 0.5 }, "geometry": { "type": "LineString", "coordinates": [ [ 76.2, 25.4 ], [ 76.3, 25.3 ], [ 76.4, 25.4 ] ] } }
+      ]
+    };
+
+    ngwMap.addGeoJsonLayer({
+      data: points,
+      visibility: true,
+      paint: function (f) {return f.properties}
+    });
+    // ngwMap.addGeoJsonLayer({
+    //   data: lines,
+    //   visibility: true,
+    //   paint: function (f) {return f.properties}
+    // });
   </script>
 </body>
 
