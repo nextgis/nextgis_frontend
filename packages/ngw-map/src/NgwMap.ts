@@ -19,7 +19,7 @@ import NgwKit, { NgwLayerOptions } from '@nextgis/ngw-kit';
 import { getIcon } from '@nextgis/icons';
 
 import { onMapLoad } from './decorators';
-import { fixUrlStr, deepmerge, detectGeometryType, createAsyncAdapter, preparePaint } from './utils';
+import { fixUrlStr, deepmerge, detectGeometryType, createAsyncAdapter } from './utils';
 // @ts-ignore
 import { toWgs84 } from 'reproject';
 import { GeoJsonObject } from 'geojson';
@@ -51,23 +51,6 @@ const OPTIONS: NgwMapOptions = {
         '<a href="http://nextgis.ru" target="_blank">©NextGIS</a>',
       ]
     }
-  },
-  vectorLayersDefaultPaint: {
-    circle: {
-      type: 'circle',
-      color: 'blue',
-      opacity: 1,
-      radius: 6,
-      stroke: false
-    },
-    path: {
-      type: 'path',
-      color: 'blue',
-      opacity: 1,
-      stroke: false,
-      weight: 1
-    },
-    icon: getIcon({ shape: 'circle' })
   }
 };
 
@@ -251,38 +234,38 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
     }
   }
 
- /**
-  * Create layer from GeoJson data. Set style and behavior for selection.
-  *
-  * @example
-  * ```javascript
-  * // Add simple layer
-  * ngwMap.addGeoJsonLayer({ data: geojson, paint: { color: 'red' } });
-  *
-  * // Add styled by feature property layer with selection behavior
-  * ngwMap.addGeoJsonLayer({
-  *   data: geojson,
-  *   paint: function (feature) {
-  *     return { color: feature.properties.color, opacity: 0.5 }
-  *   },
-  *  selectedPaint: function (feature) {
-  *    return { color: feature.properties.selcolor, opacity: 1 }
-  *  },
-  *  selectable: true,
-  *  multiselect: true
-  * });
-  *
-  * // Add marker layer styled with use [Icons](icons)
-  * ngwMap.addGeoJsonLayer({ data: geojson, paint: NgwMap.getIcon({ color: 'orange' })});
-  *
-  * // work with added layer
-  * const layer = ngwMap.addGeoJsonLayer({ data: geojson, id: 'my_layer_name'});
-  * // access layer by id
-  * ngwMap.showLayer('my_layer_name');
-  * // or access layer by instance
-  * ngwMap.showLayer(layer);
-  * ```
-  */
+  /**
+   * Create layer from GeoJson data. Set style and behavior for selection.
+   *
+   * @example
+   * ```javascript
+   * // Add simple layer
+   * ngwMap.addGeoJsonLayer({ data: geojson, paint: { color: 'red' } });
+   *
+   * // Add styled by feature property layer with selection behavior
+   * ngwMap.addGeoJsonLayer({
+   *   data: geojson,
+   *   paint: function (feature) {
+   *     return { color: feature.properties.color, opacity: 0.5 }
+   *   },
+   *  selectedPaint: function (feature) {
+   *    return { color: feature.properties.selcolor, opacity: 1 }
+   *  },
+   *  selectable: true,
+   *  multiselect: true
+   * });
+   *
+   * // Add marker layer styled with use [Icons](icons)
+   * ngwMap.addGeoJsonLayer({ data: geojson, paint: NgwMap.getIcon({ color: 'orange' })});
+   *
+   * // work with added layer
+   * const layer = ngwMap.addGeoJsonLayer({ data: geojson, id: 'my_layer_name'});
+   * // access layer by id
+   * ngwMap.showLayer('my_layer_name');
+   * // or access layer by instance
+   * ngwMap.showLayer(layer);
+   * ```
+   */
   // @onMapLoad()
   addGeoJsonLayer<K extends keyof LayerAdaptersOptions>(
     opt: GeoJsonAdapterOptions,
@@ -294,7 +277,8 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
     if (!adapter) {
       opt = this._updateGeojsonAdapterOptions(opt);
     }
-    opt.paint = preparePaint(opt.paint);
+    opt.paint = opt.paint || {};
+    opt.selectedPaint = opt.selectedPaint || {};
     return this.addLayer(adapter || 'GEOJSON', opt).then((layer) => {
       this.showLayer(layer);
       return layer;
@@ -354,16 +338,6 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
             ('html' in p || 'className' in p) ?
               'icon' :
               geomType;
-
-        if (this.options.vectorLayersDefaultPaint) {
-          if (p.type === 'circle') {
-            opt.paint = { ...this.options.vectorLayersDefaultPaint.circle, ...p };
-          } else if (p.type === 'path') {
-            opt.paint = { ...this.options.vectorLayersDefaultPaint.path, ...p };
-          } else if (p.type === 'icon') {
-            opt.paint = { ...this.options.vectorLayersDefaultPaint.icon, ...p };
-          }
-        }
       }
       opt.type = geomType;
     }
@@ -378,7 +352,7 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
   }
 
   private async _createWebMap() {
-    await this.create({...this.options});
+    await this.create({ ...this.options });
     if (this.options.qmsId) {
       let qmsId: number;
       let qmsLayerName: string | undefined;
