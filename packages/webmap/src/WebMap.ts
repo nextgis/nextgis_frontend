@@ -35,7 +35,7 @@ import { EventEmitter } from 'events';
 import { WebMapEvents } from './interfaces/Events';
 
 import { onLoad } from './util/decorators';
-import { deepmerge } from './util/lang';
+import { deepmerge } from './util/deepmerge';
 import { createButtonControl } from './components/controls/ButtonControl';
 import { createToggleControl } from './components/controls/ToggleControl';
 
