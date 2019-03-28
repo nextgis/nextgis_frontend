@@ -5,6 +5,7 @@
 import { MapAdapter } from './MapAdapter';
 import { StarterKit } from './StarterKit';
 import { LngLatArray, LngLatBoundsArray } from './BaseTypes';
+import { GeometryPaint } from './LayerAdapter';
 
 export interface MapOptions {
   /**
@@ -44,6 +45,9 @@ export interface MapOptions {
    * ```
    */
   bounds?: LngLatBoundsArray;
+
+  paint?: GeometryPaint;
+  selectedPaint?: GeometryPaint;
 
 }
 
