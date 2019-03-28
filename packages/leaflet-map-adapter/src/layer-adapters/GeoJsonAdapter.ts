@@ -195,6 +195,10 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
         } else {
           type = options.type;
         }
+        if (this.type && this.type !== type) {
+          console.warn('no other data type than layer can be added');
+          return false;
+        }
         this.type = type;
 
         data = filterGeometries(data, type);
@@ -231,22 +235,36 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
 
   private preparePaint(paint: GeoJsonAdapterLayerPaint): PathOptions {
     if (paint.type !== 'get-paint') {
-      const path: CircleMarkerOptions | PathOptions = paint as CircleMarkerOptions | PathOptions;
-      if (path.opacity) {
-        path.fillOpacity = path.opacity;
+      // const path: CircleMarkerOptions | PathOptions = paint as CircleMarkerOptions | PathOptions;
+      // if (path.opacity) {
+      //   path.fillOpacity = path.opacity;
+      // }
+      const aliases: Array<[keyof PathOptions, keyof PathPaint]> = this.type === 'line' ? [
+        ['color', 'color'],
+        ['opacity', 'opacity'],
+        ['weight', 'weight'],
+      ] : [
+          ['color', 'strokeColor'],
+          ['opacity', 'strokeOpacity'],
+          ['stroke', 'stroke'],
+          ['fillColor', 'color'],
+          ['fillOpacity', 'opacity'],
+          ['fill', 'fill'],
+          ['weight', 'weight'],
+        ];
+
+      const readyPaint: PathOptions & CircleMarkerOptions = {};
+
+      if ('radius' in paint) {
+        readyPaint.radius = paint.radius;
       }
-      const aliases: Array<[keyof PathOptions, keyof PathPaint]> = [
-        ['color', 'strokeColor'],
-        ['opacity', 'strokeOpacity'],
-        ['stroke', 'stroke'],
-        ['fillColor', 'color'],
-        ['fillOpacity', 'opacity'],
-        ['fill', 'fill']
-      ];
-      const readyPaint: PathOptions = {};
-      aliases.forEach(([to, from ]: [keyof PathOptions, keyof PathPaint]) => {
-        readyPaint[to] = (paint as any)[from];
+      aliases.forEach(([to, from]: [keyof PathOptions, keyof PathPaint]) => {
+        const paintProp = (paint as PathPaint)[from];
+        if (paintProp) {
+          readyPaint[to] = paintProp;
+        }
       });
+
       return readyPaint;
     }
     return PAINT;

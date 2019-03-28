@@ -45,12 +45,12 @@ export interface BasePaint {
 }
 
 export interface CirclePaint extends BasePaint {
-  type: 'circle';
+  type?: 'circle';
   radius?: number;
 }
 
 export interface PathPaint extends BasePaint {
-  type: 'path';
+  type?: 'path';
   weight?: number;
 }
 
@@ -73,6 +73,8 @@ export interface GetCustomPaintOptions {
 export type GeoJsonAdapterLayerPaint = CirclePaint | PathPaint | IconOptions | GetCustomPaintOptions;
 
 export type GetPaintCallback = (feature: Feature<any>) => GeoJsonAdapterLayerPaint;
+
+export type Paint = GeoJsonAdapterLayerPaint | GetPaintCallback;
 
 /**
  * Options to crateing styling and defining selection behavior
