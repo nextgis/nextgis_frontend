@@ -8,8 +8,6 @@ import {
   VectorLayerAdapter,
   LayerAdapters,
   GetPaintFunction,
-  GeoJsonAdapterLayerPaint,
-  GetPaintCallback,
   GeoJsonAdapterOptions
 } from './interfaces/LayerAdapter';
 import { LayerAdaptersOptions, LayerAdapter, OnLayerClickOptions } from './interfaces/LayerAdapter';
@@ -36,12 +34,23 @@ import { WebMapEvents } from './interfaces/Events';
 
 import { onLoad } from './util/decorators';
 import { deepmerge } from './util/deepmerge';
+import { preparePaint } from './util/preparePaint';
 import { createButtonControl } from './components/controls/ButtonControl';
 import { createToggleControl } from './components/controls/ToggleControl';
 
 const OPTIONS: MapOptions = {
   minZoom: 0,
-  maxZoom: 21
+  maxZoom: 21,
+  paint: {
+    color: 'blue',
+    radius: 8,
+    weight: 1
+  },
+  selectedPaint: {
+    color: 'darkblue',
+    radius: 12,
+    weight: 1
+  }
 };
 
 /**
@@ -49,7 +58,7 @@ const OPTIONS: MapOptions = {
  */
 export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEvents> {
 
-  static getPaintFunctions?: { [name: string]: GetPaintFunction };
+  static getPaintFunctions: { [name: string]: GetPaintFunction };
   static decorators = { onLoad };
 
   options: MapOptions = OPTIONS;
@@ -854,26 +863,14 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
       }
       return this._onLayerClick(e);
     };
-    if (options.paint) {
-      options.paint = this._updatePaintOptionFromCallback(options.paint);
+    if (options.paint && this.options.paint) {
+      options.paint = preparePaint(options.paint, this.options.paint, this.getPaintFunctions);
     }
-    if (options.selectedPaint) {
-      options.selectedPaint = this._updatePaintOptionFromCallback(options.selectedPaint);
+    if (options.selectedPaint && this.options.selectedPaint) {
+      options.selectedPaint = preparePaint(
+        options.selectedPaint, this.options.selectedPaint, this.getPaintFunctions
+      );
     }
-  }
-
-  private _updatePaintOptionFromCallback(paint: GeoJsonAdapterLayerPaint | GetPaintCallback) {
-    if (typeof paint !== 'function' && paint.type === 'get-paint') {
-      if (typeof paint.from === 'function') {
-        paint = paint.from(paint.options);
-      } else if (typeof paint.from === 'string' && this.getPaintFunctions) {
-        const from = this.getPaintFunctions[paint.from];
-        if (from) {
-          paint = from(paint.options);
-        }
-      }
-    }
-    return paint;
   }
 
   private async _onLayerClick(options: OnLayerClickOptions) {

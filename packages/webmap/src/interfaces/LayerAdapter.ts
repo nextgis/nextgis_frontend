@@ -54,6 +54,8 @@ export interface PathPaint extends BasePaint {
   weight?: number;
 }
 
+export type GeometryPaint = PathPaint & CirclePaint;
+
 export interface IconOptions {
   type: 'icon';
   className?: string;

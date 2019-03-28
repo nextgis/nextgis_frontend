@@ -36,10 +36,10 @@
       "type": "FeatureCollection",
       "features": [
         { "type": "Feature", "properties": { "id": 1, "color": "red", "radius": 15 }, "geometry": { "type": "Point", "coordinates": [ 75.9, 25.5 ] } },
-        { "type": "Feature", "properties": { "id": 2, "color": "red",  "stroke": true }, "geometry": { "type": "Point", "coordinates": [ 76.1, 25.5 ] } },
-        { "type": "Feature", "properties": { "id": 3, "color": "red",  "strokeColor": "black" }, "geometry": { "type": "Point", "coordinates": [ 76.3, 25.5 ] } },
-        { "type": "Feature", "properties": { "id": 4, "color": "red", "opacity": 1, "strokeColor": "black", "strokeOpacity": "0.5" }, "geometry": { "type": "Point", "coordinates": [ 76.5, 25.5 ] } },
-        { "type": "Feature", "properties": { "id": 5, "color": "red",  "stroke": true, "weight": "6" }, "geometry": { "type": "Point", "coordinates": [ 76.7, 25.5 ] } }
+        { "type": "Feature", "properties": { "id": 2, "color": "green", "opacity": 0.3, "stroke": true }, "geometry": { "type": "Point", "coordinates": [ 76.1, 25.5 ] } },
+        { "type": "Feature", "properties": { "id": 3, "color": "pink", "strokeColor": "black" }, "geometry": { "type": "Point", "coordinates": [ 76.3, 25.5 ] } },
+        { "type": "Feature", "properties": { "id": 4, "color": "orange", "opacity": 0.1, "strokeColor": "black", "strokeOpacity": 0.5 }, "geometry": { "type": "Point", "coordinates": [ 76.5, 25.5 ] } },
+        { "type": "Feature", "properties": { "id": 5, "color": "black", "stroke": true, "weight": 3 }, "geometry": { "type": "Point", "coordinates": [ 76.7, 25.5 ] } }
       ]
     };
 
@@ -59,11 +59,11 @@
       visibility: true,
       paint: function (f) {return f.properties}
     });
-    // ngwMap.addGeoJsonLayer({
-    //   data: lines,
-    //   visibility: true,
-    //   paint: function (f) {return f.properties}
-    // });
+    ngwMap.addGeoJsonLayer({
+      data: lines,
+      visibility: true,
+      paint: function (f) {return f.properties}
+    });
   </script>
 </body>
 

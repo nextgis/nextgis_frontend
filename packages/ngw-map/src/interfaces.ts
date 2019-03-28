@@ -61,11 +61,11 @@ export interface NgwMapOptions<C = any> extends MapOptions {
   /**
    * Set default paint for vector layers geometry objects.
    */
-  vectorLayersDefaultPaint?: {
-    circle: CirclePaint,
-    path: PathPaint,
-    icon: IconOptions
-  };
+  // vectorLayersDefaultPaint?: {
+  //   circle: CirclePaint,
+  //   path: PathPaint,
+  //   icon: IconOptions
+  // };
   /**
    * List of controls that will be initialized when creating a map instance.
    * It can be defined as a string, then points to the corresponding entry in the
