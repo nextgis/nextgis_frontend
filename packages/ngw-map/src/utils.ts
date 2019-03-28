@@ -1,5 +1,15 @@
 import { GeoJsonObject, GeoJsonGeometryTypes, FeatureCollection, GeometryCollection, Feature } from 'geojson';
-import { MapAdapter, Type, LayerAdapter, BaseLayerAdapter } from '@nextgis/webmap';
+import {
+  MapAdapter,
+  Type,
+  LayerAdapter,
+  BaseLayerAdapter,
+  GeoJsonAdapterLayerPaint,
+  PathPaint,
+  CirclePaint,
+  Paint
+} from '@nextgis/webmap';
+import { icon } from 'leaflet';
 
 export function fixUrlStr(url: string) {
   // remove double slash
@@ -95,4 +105,25 @@ export function createAsyncAdapter<T extends string = string>(
       });
     }
   };
+}
+
+export function preparePaint(
+  paint?: Paint): Paint {
+  if (paint) {
+    if (typeof paint === 'function') {
+      return (opt: any) => {
+        return preparePaint(paint(opt)) as GeoJsonAdapterLayerPaint;
+      };
+    } else if (paint.type === 'get-paint') {
+      return paint;
+    } else if (paint.type === 'icon') {
+      return paint;
+    } else {
+      const newPaint: PathPaint | CirclePaint = { ...paint };
+      newPaint.stroke = !!(newPaint.strokeColor || newPaint.strokeOpacity || newPaint.stroke);
+      return newPaint;
+    }
+  } else {
+    return { color: 'blue' };
+  }
 }

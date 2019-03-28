@@ -19,7 +19,7 @@ import NgwKit, { NgwLayerOptions } from '@nextgis/ngw-kit';
 import { getIcon } from '@nextgis/icons';
 
 import { onMapLoad } from './decorators';
-import { fixUrlStr, deepmerge, detectGeometryType, createAsyncAdapter } from './utils';
+import { fixUrlStr, deepmerge, detectGeometryType, createAsyncAdapter, preparePaint } from './utils';
 // @ts-ignore
 import { toWgs84 } from 'reproject';
 import { GeoJsonObject } from 'geojson';
@@ -294,6 +294,7 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
     if (!adapter) {
       opt = this._updateGeojsonAdapterOptions(opt);
     }
+    opt.paint = preparePaint(opt.paint);
     return this.addLayer(adapter || 'GEOJSON', opt).then((layer) => {
       this.showLayer(layer);
       return layer;
