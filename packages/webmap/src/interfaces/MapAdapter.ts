@@ -41,6 +41,8 @@ export interface FitOptions {
    * The maximum possible zoom to use.
    */
   maxZoom?: number;
+  offset?: [number, number];
+  padding?: number;
 }
 
 export type ControlPositions = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';

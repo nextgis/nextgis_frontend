@@ -15,7 +15,7 @@ import {
   WebMapEvents
 } from '@nextgis/webmap';
 import { MvtAdapter } from './layer-adapters/MvtAdapter';
-import { Map, IControl, MapEventType, EventData } from 'mapbox-gl';
+import { Map, IControl, MapEventType, EventData, MapboxOptions } from 'mapbox-gl';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
 import { TileAdapter } from './layer-adapters/TileAdapter';
 import { EventEmitter } from 'events';
@@ -25,9 +25,14 @@ import { AttributionControl } from './controls/AttributionControl';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 import { createControl } from './controls/createControl';
 import { createButtonControl } from './controls/createButtonControl';
+import { map } from 'leaflet';
 
 export type TLayer = string[];
 type TLayerAdapter = LayerAdapter<Map, TLayer>;
+
+const fitBoundsOptions: FitOptions = {
+  padding: 100
+};
 
 export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
 
@@ -46,7 +51,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   };
 
   options: MapOptions = {};
-  map?: Map;
+  map!: Map;
 
   emitter = new EventEmitter();
 
@@ -71,16 +76,28 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     if (!this.map) {
       this.options = options;
       if (options.target) {
-        this.map = new Map({
+        const mapOpt: MapboxOptions = {
           container: options.target,
           attributionControl: false,
+          // @ts-ignore
+          bounds: options.bounds,
+          fitBoundsOptions: {...options.fitOptions, ...fitBoundsOptions},
+          // center: options.center,
+          // zoom: options.zoom,
           style: {
             version: 8,
             name: 'Empty style',
             sources: {},
             layers: [],
           },
-        });
+        };
+        if (options.center !== undefined) {
+          mapOpt.center = options.center;
+        }
+        if (options.zoom) {
+          mapOpt.zoom = options.zoom;
+        }
+        this.map = new Map(mapOpt);
         this._addEventsListeners();
         this.map.once('load', () => {
           this.isLoaded = true;
@@ -129,8 +146,12 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   // [extent_left, extent_bottom, extent_right, extent_top];
   fit(e: LngLatBoundsArray, options: FitOptions = {}): void {
     if (this.map) {
-      // top, left, bottom, right
-      this.map.fitBounds([[e[0], e[1]], [e[2], e[3]]], { linear: true, ...options });
+      this.map.fitBounds(
+        [[e[0], e[1]], [e[2], e[3]]], {
+          linear: true,
+          ...options,
+          ...fitBoundsOptions
+        });
     }
   }
 
@@ -152,10 +173,10 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
 
   removeLayer(layerIds: string[]): void {
     if (this.map) {
-      const map = this.map;
+      const _map = this.map;
       layerIds.forEach((layerId) => {
-        map.removeLayer(layerId);
-        map.removeSource(layerId);
+        _map.removeLayer(layerId);
+        _map.removeSource(layerId);
       });
     }
   }
@@ -169,13 +190,13 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   }
 
   setLayerOpacity(layerIds: string[], opacity: number): void {
-    const map = this.map;
-    if (map) {
+    const _map = this.map;
+    if (_map) {
       layerIds.forEach((layerId) => {
         this._onMapLoad().then(() => {
-          const layer = map.getLayer(layerId);
+          const layer = _map.getLayer(layerId);
           if (layer) {
-            map.setPaintProperty(layerId, layer.type + '-opacity', opacity);
+            _map.setPaintProperty(layerId, layer.type + '-opacity', opacity);
           }
         });
       });
@@ -232,8 +253,8 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   }
 
   private _setLayerOrder(layers: { [x: string]: TLayerAdapter }): void {
-    const map = this.map;
-    if (map) {
+    const _map = this.map;
+    if (_map) {
       const baseLayers: TLayerAdapter[] = [];
       let orderedLayers: TLayerAdapter[] = [];
       for (const l in layers) {
@@ -257,7 +278,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
         const mem = orderedLayers[fry];
         const _layers = this._getLayerIds(mem);
         _layers.forEach((x) => {
-          map.moveLayer(x, nextLayerId);
+          _map.moveLayer(x, nextLayerId);
         });
       }
       const firstRealLayer = orderedLayers.find((x) => Array.isArray(x.layer));
@@ -267,7 +288,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
         baseLayers.forEach((x) => {
           if (x.layer) {
             x.layer.forEach((y) => {
-              map.moveLayer(y, firstLayerId);
+              _map.moveLayer(y, firstLayerId);
             });
           }
         });
@@ -292,8 +313,8 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   }
 
   private _toggleLayer(layerId: string, status: boolean): void {
-    this._onMapLoad().then((map) => {
-      map.setLayoutProperty(layerId, 'visibility', status ? 'visible' : 'none');
+    this._onMapLoad().then((_map) => {
+      _map.setLayoutProperty(layerId, 'visibility', status ? 'visible' : 'none');
     });
   }
 
@@ -342,24 +363,24 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   }
 
   private _addEventsListeners(): void {
-    const map = this.map;
-    if (map) {
+    const _map = this.map;
+    if (_map) {
       // write mem for start loaded layers
-      map.on('sourcedataloading', (data) => {
+      _map.on('sourcedataloading', (data) => {
         this._sourceDataLoading[data.sourceId] = this._sourceDataLoading[data.sourceId] || [];
         if (data.tile) {
           this._sourceDataLoading[data.sourceId].push(data.tile);
         }
       });
       // emmit data-loaded for each layer or all sources is loaded
-      map.on('sourcedata', this._onMapSourceData.bind(this));
-      map.on('error', this._onMapError.bind(this));
-      map.on('click', (evt) => {
+      _map.on('sourcedata', this._onMapSourceData.bind(this));
+      _map.on('error', this._onMapError.bind(this));
+      _map.on('click', (evt) => {
         this.onMapClick(evt);
       });
 
       this._universalEvents.forEach((e) => {
-        map.on(e, () => this.emitter.emit(e, this));
+        _map.on(e, () => this.emitter.emit(e, this));
       });
     }
   }

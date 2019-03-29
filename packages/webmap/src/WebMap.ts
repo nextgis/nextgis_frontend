@@ -802,7 +802,7 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
 
   private async _setupMap() {
 
-    this.mapAdapter.create(this.options);
+    await this.mapAdapter.create(this.options);
     this._zoomToInitialExtent();
 
     await this._addLayerProviders();
