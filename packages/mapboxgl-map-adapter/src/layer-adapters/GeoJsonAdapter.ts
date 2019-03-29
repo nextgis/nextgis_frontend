@@ -37,9 +37,16 @@ interface Feature<G extends GeometryObject | null = Geometry, P = GeoJsonPropert
 
 const allowedParams: Array<[string, string] | string> = ['color', 'opacity'];
 const allowedByType = {
-  circle: allowedParams.concat(['radius']),
-  line: allowedParams.concat([['weight', 'width']]),
-  fill: allowedParams.concat([]),
+  circle: [
+    ['fillColor', 'color'],
+    ['fillOpacity', 'opacity'],
+    ['strokeColor', 'stroke-color'],
+    ['strokeOpacity', 'stroke-opacity'],
+    ['weight', 'stroke-width'],
+    'radius'
+  ],
+  line: [['strokeColor', 'color'], ['strokeOpacity', 'opacity'], ['weight', 'width']],
+  fill: [['fillColor', 'color'], ['fillOpacity', 'opacity']],
   icon: allowedParams.concat([])
 };
 
@@ -116,6 +123,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     });
     this.layer = [];
     const types = this._types = options.type ? [options.type] : this._types;
+    // const types = this._types;
     for (const t of types) {
       if (options.paint) {
 
@@ -368,7 +376,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
       const mapboxPaint: any = {};
       const _paint = { ...PAINT, ...(paint || {}) };
       if (paint.type === 'icon' && paint.html) {
-        await this._registrateImage(paint);
+        await this._registerImage(paint);
         return {
           'icon-image': paint.html
         };
@@ -403,7 +411,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     for (const feature of this._features) {
       const _paint = paint(feature);
       if (_paint.type === 'icon') {
-        await this._registrateImage(_paint);
+        await this._registerImage(_paint);
         if (feature.properties) {
           feature.properties['_icon-image-' + name] = _paint.html;
         }
@@ -428,7 +436,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     return styleFromCb;
   }
 
-  private async _registrateImage(paint: IconOptions) {
+  private async _registerImage(paint: IconOptions) {
     if (paint.html) {
       const imageExist = this.map.hasImage(paint.html);
       if (!imageExist) {
