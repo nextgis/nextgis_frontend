@@ -20,8 +20,8 @@
     }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.4.0/polyfill.min.js"></script>
-  <!-- <script src="../../../ngw-leaflet/lib/ngw-leaflet.js"></script> -->
-  <script src="../../../ngw-ol/lib/ngw-ol.js"></script>
+  <script src="../../../ngw-leaflet/lib/ngw-leaflet.js"></script>
+  <!-- <script src="../../../ngw-mapbox/lib/ngw-mapbox.js"></script> -->
 </head>
 
 <body>
@@ -29,6 +29,7 @@
   <script>
     var ngwMap = new NgwMap({
       target: 'map',
+      qmsId: 487,
       bounds: [75.8, 25.1, 76.7, 25.5]
     });
 
@@ -38,7 +39,7 @@
       { id: 3, color: 'red', stroke: true, fillOpacity: 0.5, fillColor: 'yellow' },
       { id: 4, color: 'purple', strokeColor: '#c98b51', weight: 5 },
       { id: 5, weight: 4, radius: 30, fill: false, strokeColor: 'rgb(10,150,100, 0.8)' }
-    ]
+    ];
 
     var layers = [
     [
