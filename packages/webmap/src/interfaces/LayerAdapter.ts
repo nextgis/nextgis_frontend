@@ -39,6 +39,8 @@ export interface BasePaint {
   color?: string;
   opacity?: number;
   fill?: boolean;
+  fillColor?: string;
+  fillOpacity?: number;
   stroke?: boolean;
   strokeColor?: string;
   strokeOpacity?: number;

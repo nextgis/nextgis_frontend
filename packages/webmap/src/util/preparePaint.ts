@@ -26,8 +26,8 @@ export function preparePaint(
   } else {
     newPaint = { ...paint };
     newPaint.stroke = newPaint.stroke !== undefined ?
-      newPaint.stroke :
-      !!(newPaint.strokeColor || newPaint.strokeOpacity);
+      newPaint.stroke : (newPaint.fill !== undefined && newPaint.fill === false) ? true :
+        !!(newPaint.strokeColor || newPaint.strokeOpacity);
   }
   if (newPaint) {
     if (typeof newPaint === 'function') {
@@ -39,9 +39,24 @@ export function preparePaint(
   } else {
     newPaint = { ...defaultPaint };
   }
-  if ('stroke' in newPaint && !newPaint.strokeColor) {
-    newPaint.strokeColor = newPaint.color;
+
+  if ('color' in newPaint) {
+    if (!newPaint.strokeColor) {
+      newPaint.strokeColor = newPaint.color;
+    }
+    if (!newPaint.fillColor) {
+      newPaint.fillColor = newPaint.color;
+    }
   }
+  if ('opacity' in newPaint) {
+    if (newPaint.strokeOpacity === undefined) {
+      newPaint.strokeOpacity = newPaint.opacity;
+    }
+    if (newPaint.fillOpacity === undefined) {
+      newPaint.fillOpacity = newPaint.opacity;
+    }
+  }
+
   return newPaint;
 }
 

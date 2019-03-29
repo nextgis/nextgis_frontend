@@ -278,7 +278,6 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
       opt = this._updateGeojsonAdapterOptions(opt);
     }
     opt.paint = opt.paint || {};
-    opt.selectedPaint = opt.selectedPaint || {};
     return this.addLayer(adapter || 'GEOJSON', opt).then((layer) => {
       this.showLayer(layer);
       return layer;

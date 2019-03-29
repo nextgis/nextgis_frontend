@@ -43,11 +43,13 @@ const OPTIONS: MapOptions = {
   maxZoom: 21,
   paint: {
     color: 'blue',
+    opacity: 1,
     radius: 8,
     weight: 1
   },
   selectedPaint: {
     color: 'darkblue',
+    opacity: 1,
     radius: 12,
     weight: 1
   }
