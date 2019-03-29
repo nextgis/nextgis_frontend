@@ -4,7 +4,8 @@ import {
   GetPaintCallback,
   GeoJsonAdapterLayerType,
   VectorLayerAdapter,
-  DataLayerFilter
+  DataLayerFilter,
+  GeometryPaint
 } from '@nextgis/webmap';
 import Map from 'ol/Map';
 import GeoJSON from 'ol/format/GeoJSON';
@@ -23,6 +24,16 @@ import { ForEachFeatureAtPixelCallback } from '../OlMapAdapter';
 
 type Layer = ol.layer.Base;
 type OlStyle = ol.style.Style | ol.style.Style[] | null;
+
+const typeAlias: { [x: string]: GeoJsonAdapterLayerType } = {
+  'Point': 'circle',
+  'MultiPoint': 'circle',
+  'LineString': 'line',
+  'MultiLineString': 'line',
+  'Polygon': 'fill',
+  'MultiPolygon': 'fill',
+  'Circle': 'circle'
+};
 
 export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAdapterOptions> {
 
@@ -228,50 +239,38 @@ function getFeature(feature: ol.Feature): Feature {
   return geojson.writeFeatureObject(feature);
 }
 
-const getImage = (paint: any) => {
-  return new CircleStyle({ radius: 6, ...paint, stroke: new Stroke(paint), fill: new Fill(paint), });
-};
-
-const typeAlias: { [x: string]: GeoJsonAdapterLayerType } = {
-  'Point': 'circle',
-  'MultiPoint': 'circle',
-  'LineString': 'line',
-  'MultiLineString': 'line',
-  'Polygon': 'fill',
-  'MultiPolygon': 'fill',
-  'Circle': 'circle'
-};
-
 function styleFunction(feature: ol.Feature, paint: GeoJsonAdapterLayerPaint | GetPaintCallback): OlStyle {
   if (typeof paint === 'function') {
     const f: Feature = getFeature(feature);
     return styleFunction(feature, paint(f));
   } else {
+
     const type = feature.getGeometry().getType();
     const style: { stroke?: Stroke, fill?: Fill, image?: any } = {};
-    if ('opacity' in paint) {
-      const color = asArray(paint.color);
-      const colorArray = color.slice();
-      colorArray[3] = paint.opacity;
-      // @ts-ignore
-      paint.color = colorArray;
-    }
+
     const _type = paint.type;
     if (!_type) {
       const ta = typeAlias[type];
       paint.type = (ta === 'fill' || ta === 'line') ? 'path' :
         ('html' in paint || 'className' in paint) ? 'icon' : ta;
     }
-    if (paint.type === 'path') {
-      style.fill = new Fill(paint);
-      if (paint.stroke || ['MultiLineString', 'LineString'].indexOf(type) !== -1) {
-        style.stroke = new Stroke({
-          width: paint.weight,
-          color: paint.color,
+    if (paint.type === 'path' || paint.type === 'circle') {
+      const geomPaint = { ...paint } as GeometryPaint;
+      if (geomPaint.fill) {
+        style.fill = new Fill({
+          color: getColor(geomPaint.fillColor!, geomPaint.fillOpacity)
         });
       }
-    } else if (paint.type === 'circle') {
-      style.image = getImage(paint);
+      if (geomPaint.stroke || ['MultiLineString', 'LineString'].indexOf(type) !== -1) {
+        style.stroke = new Stroke({
+          width: geomPaint.weight,
+          color: getColor(geomPaint.strokeColor!, geomPaint.strokeOpacity)
+        });
+      }
+
+      if (paint.type === 'circle') {
+        style.image = new CircleStyle({ radius: geomPaint.radius!, ...style });
+      }
     } else if (paint.type === 'icon') {
 
       const svg = paint.html;
@@ -287,4 +286,11 @@ function styleFunction(feature: ol.Feature, paint: GeoJsonAdapterLayerPaint | Ge
     }
     return new Style(style);
   }
+}
+
+function getColor(colorStr: string, opacity?: number): ol.Color {
+  const color = asArray(colorStr);
+  const colorArray = color.slice() as [number, number, number, number];
+  colorArray[3] = opacity !== undefined ? opacity : 1;
+  return colorArray;
 }
