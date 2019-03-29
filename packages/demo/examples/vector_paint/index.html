@@ -28,42 +28,60 @@
   <script>
     var ngwMap = new NgwMap({
       target: 'map',
-      center: [76.1, 25.4],
-      zoom: 10
+      bounds: [75.8, 25.1, 76.7, 25.5]
     });
 
-    var points = {
-      "type": "FeatureCollection",
-      "features": [
-        { "type": "Feature", "properties": { "id": 1, "color": "red", "radius": 15 }, "geometry": { "type": "Point", "coordinates": [ 75.9, 25.5 ] } },
-        { "type": "Feature", "properties": { "id": 2, "color": "green", "opacity": 0.3, "stroke": true }, "geometry": { "type": "Point", "coordinates": [ 76.1, 25.5 ] } },
-        { "type": "Feature", "properties": { "id": 3, "color": "pink", "strokeColor": "black" }, "geometry": { "type": "Point", "coordinates": [ 76.3, 25.5 ] } },
-        { "type": "Feature", "properties": { "id": 4, "color": "orange", "opacity": 0.1, "strokeColor": "black", "strokeOpacity": 0.5 }, "geometry": { "type": "Point", "coordinates": [ 76.5, 25.5 ] } },
-        { "type": "Feature", "properties": { "id": 5, "color": "black", "stroke": true, "weight": 3 }, "geometry": { "type": "Point", "coordinates": [ 76.7, 25.5 ] } }
-      ]
-    };
+    var properties = [
+      { id: 1 },
+      { id: 2, color: 'green', opacity: 0.5 },
+      { id: 3, color: 'red', stroke: true, fillOpacity: 0.5, fillColor: 'yellow' },
+      { id: 4, color: 'purple', strokeColor: '#c98b51', weight: 5 },
+      { id: 5, weight: 4, radius: 30, fill: false, strokeColor: 'rgb(10,150,100, 0.8)' }
+    ]
 
-    var lines = {
-      "type": "FeatureCollection",
-      "features": [
-        { "type": "Feature", "properties": { "id": 1, "color": "blue", "weight": 3, }, "geometry": { "type": "LineString", "coordinates": [ [ 76.4, 25.3 ], [ 76.5, 25.4 ], [ 76.6, 25.3 ] ] } },
-        { "type": "Feature", "properties": { "id": 2, "color": "red" }, "geometry": { "type": "LineString", "coordinates": [ [ 76.6, 25.4 ], [ 76.7, 25.3 ], [ 76.8, 25.4 ] ] } },
-        { "type": "Feature", "properties": { "id": 3, "color": "blue", "opacity": 0.5 },  "geometry": { "type": "LineString", "coordinates": [ [ 76.0, 25.3 ], [ 76.1, 25.4 ], [ 76.2, 25.3 ] ] } },
-        { "type": "Feature", "properties": { "id": 4, "color": "black", "weight": 3 },  "geometry": { "type": "LineString", "coordinates": [ [ 75.8, 25.4 ], [ 75.9, 25.3 ], [ 76.0, 25.4 ] ] } },
-        { "type": "Feature", "properties": { "id": 5, "color": "red", "weight": 3, "opacity": 0.5 }, "geometry": { "type": "LineString", "coordinates": [ [ 76.2, 25.4 ], [ 76.3, 25.3 ], [ 76.4, 25.4 ] ] } }
-      ]
-    };
+    var layers = [
+    [
+      { type: 'Point', coordinates: [ 75.9, 25.5 ] },
+      { type: 'Point', coordinates: [ 76.1, 25.5 ] },
+      { type: 'Point', coordinates: [ 76.3, 25.5 ] },
+      { type: 'Point', coordinates: [ 76.5, 25.5 ] },
+      { type: 'Point', coordinates: [ 76.7, 25.5 ] }
+    ],
+    [
+      { type: 'LineString', coordinates: [ [ 75.8, 25.4 ], [ 75.9, 25.3 ], [ 76.0, 25.4 ] ] },
+      { type: 'LineString', coordinates: [ [ 76.0, 25.3 ], [ 76.1, 25.4 ], [ 76.2, 25.3 ] ] },
+      { type: 'LineString', coordinates: [ [ 76.2, 25.4 ], [ 76.3, 25.3 ], [ 76.4, 25.4 ] ] },
+      { type: 'LineString', coordinates: [ [ 76.4, 25.3 ], [ 76.5, 25.4 ], [ 76.6, 25.3 ] ] },
+      { type: 'LineString', coordinates: [ [ 76.6, 25.4 ], [ 76.7, 25.3 ], [ 76.8, 25.4 ] ] },
+    ],
+    [
+      { type: 'Polygon', coordinates: [ [ [ 75.8, 25.1 ], [ 75.9, 25.2 ], [ 76.0, 25.1 ], [ 75.8, 25.1 ] ] ] },
+      { type: 'Polygon', coordinates: [ [ [ 76.0, 25.2 ], [ 76.1, 25.1 ], [ 76.2, 25.2 ], [ 76.0, 25.2 ] ] ] },
+      { type: 'Polygon', coordinates: [ [ [ 76.2, 25.1 ], [ 76.3, 25.2 ], [ 76.4, 25.1 ], [ 76.2, 25.1 ] ] ] },
+      { type: 'Polygon', coordinates: [ [ [ 76.4, 25.2 ], [ 76.5, 25.1 ], [ 76.6, 25.2 ], [ 76.4, 25.2 ] ] ] },
+      { type: 'Polygon', coordinates: [ [ [ 76.6, 25.1 ], [ 76.7, 25.2 ], [ 76.8, 25.1 ], [ 76.6, 25.1 ] ] ] }
+    ]
+    ];
 
+  for (var fry = 0; fry < layers.length; fry++) {
+    var geometries = layers[fry];
+    var features = [];
+    for (var f = 0; f < geometries.length; f++) {
+      features.push({
+        type: 'Feature',
+        properties: properties[f],
+        geometry: geometries[f]
+      });
+    }
     ngwMap.addGeoJsonLayer({
-      data: points,
+      data: {
+        type: 'FeatureCollection',
+        features: features
+      },
       visibility: true,
       paint: function (f) {return f.properties}
     });
-    ngwMap.addGeoJsonLayer({
-      data: lines,
-      visibility: true,
-      paint: function (f) {return f.properties}
-    });
+  }
   </script>
 </body>
 
