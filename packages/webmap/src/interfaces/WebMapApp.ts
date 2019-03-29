@@ -2,7 +2,7 @@
  * @module webmap
  */
 
-import { MapAdapter } from './MapAdapter';
+import { MapAdapter, FitOptions } from './MapAdapter';
 import { StarterKit } from './StarterKit';
 import { LngLatArray, LngLatBoundsArray } from './BaseTypes';
 import { GeometryPaint } from './LayerAdapter';
@@ -45,6 +45,7 @@ export interface MapOptions {
    * ```
    */
   bounds?: LngLatBoundsArray;
+  fitOptions?: FitOptions;
 
   paint?: GeometryPaint;
   selectedPaint?: GeometryPaint;
