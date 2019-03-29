@@ -25,9 +25,9 @@ export function preparePaint(
     return paint;
   } else {
     newPaint = { ...paint };
+    newPaint.fill = newPaint.fill !== undefined ? newPaint.fill : true;
     newPaint.stroke = newPaint.stroke !== undefined ?
-      newPaint.stroke : (newPaint.fill !== undefined && newPaint.fill === false) ? true :
-        !!(newPaint.strokeColor || newPaint.strokeOpacity);
+      newPaint.stroke : !newPaint.fill || !!(newPaint.strokeColor || newPaint.strokeOpacity);
   }
   if (newPaint) {
     if (typeof newPaint === 'function') {
