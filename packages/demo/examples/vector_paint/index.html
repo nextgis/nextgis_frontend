@@ -20,8 +20,8 @@
     }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.4.0/polyfill.min.js"></script>
-  <script src="../../../ngw-leaflet/lib/ngw-leaflet.js"></script>
-  <!-- <script src="../../../ngw-mapbox/lib/ngw-mapbox.js"></script> -->
+  <!-- <script src="../../../ngw-leaflet/lib/ngw-leaflet.js"></script> -->
+  <script src="../../../ngw-mapbox/lib/ngw-mapbox.js"></script>
 </head>
 
 <body>
@@ -29,8 +29,8 @@
   <script>
     var ngwMap = new NgwMap({
       target: 'map',
-      qmsId: 487,
-      bounds: [75.8, 25.1, 76.7, 25.5]
+      // qmsId: 487,
+      bounds: [76.0, 25.1, 77.0, 25.5]
     });
 
     var properties = [
@@ -38,30 +38,30 @@
       { id: 2, color: 'green', opacity: 0.5 },
       { id: 3, color: 'red', stroke: true, fillOpacity: 0.5, fillColor: 'yellow' },
       { id: 4, color: 'purple', strokeColor: '#c98b51', weight: 5 },
-      { id: 5, weight: 4, radius: 30, fill: false, strokeColor: 'rgb(10,150,100, 0.8)' }
+      { id: 5, weight: 4, radius: 30, fill: false, strokeColor: 'rgba(10,150,100, 0.8)' }
     ];
 
     var layers = [
     [
-      { type: 'Point', coordinates: [ 75.9, 25.5 ] },
       { type: 'Point', coordinates: [ 76.1, 25.5 ] },
       { type: 'Point', coordinates: [ 76.3, 25.5 ] },
       { type: 'Point', coordinates: [ 76.5, 25.5 ] },
-      { type: 'Point', coordinates: [ 76.7, 25.5 ] }
+      { type: 'Point', coordinates: [ 76.7, 25.5 ] },
+      { type: 'Point', coordinates: [ 76.9, 25.5 ] }
     ],
     [
-      { type: 'LineString', coordinates: [ [ 75.8, 25.4 ], [ 75.9, 25.3 ], [ 76.0, 25.4 ] ] },
-      { type: 'LineString', coordinates: [ [ 76.0, 25.3 ], [ 76.1, 25.4 ], [ 76.2, 25.3 ] ] },
-      { type: 'LineString', coordinates: [ [ 76.2, 25.4 ], [ 76.3, 25.3 ], [ 76.4, 25.4 ] ] },
-      { type: 'LineString', coordinates: [ [ 76.4, 25.3 ], [ 76.5, 25.4 ], [ 76.6, 25.3 ] ] },
-      { type: 'LineString', coordinates: [ [ 76.6, 25.4 ], [ 76.7, 25.3 ], [ 76.8, 25.4 ] ] },
+      { type: 'LineString', coordinates: [ [ 76.0, 25.4 ], [ 76.1, 25.3 ], [ 76.2, 25.4 ] ] },
+      { type: 'LineString', coordinates: [ [ 76.2, 25.3 ], [ 76.3, 25.4 ], [ 76.4, 25.3 ] ] },
+      { type: 'LineString', coordinates: [ [ 76.4, 25.4 ], [ 76.5, 25.3 ], [ 76.6, 25.4 ] ] },
+      { type: 'LineString', coordinates: [ [ 76.6, 25.3 ], [ 76.7, 25.4 ], [ 76.8, 25.3 ] ] },
+      { type: 'LineString', coordinates: [ [ 76.8, 25.4 ], [ 76.9, 25.3 ], [ 77.0, 25.4 ] ] },
     ],
     [
-      { type: 'Polygon', coordinates: [ [ [ 75.8, 25.1 ], [ 75.9, 25.2 ], [ 76.0, 25.1 ], [ 75.8, 25.1 ] ] ] },
-      { type: 'Polygon', coordinates: [ [ [ 76.0, 25.2 ], [ 76.1, 25.1 ], [ 76.2, 25.2 ], [ 76.0, 25.2 ] ] ] },
-      { type: 'Polygon', coordinates: [ [ [ 76.2, 25.1 ], [ 76.3, 25.2 ], [ 76.4, 25.1 ], [ 76.2, 25.1 ] ] ] },
-      { type: 'Polygon', coordinates: [ [ [ 76.4, 25.2 ], [ 76.5, 25.1 ], [ 76.6, 25.2 ], [ 76.4, 25.2 ] ] ] },
-      { type: 'Polygon', coordinates: [ [ [ 76.6, 25.1 ], [ 76.7, 25.2 ], [ 76.8, 25.1 ], [ 76.6, 25.1 ] ] ] }
+      { type: 'Polygon', coordinates: [ [ [ 76.0, 25.1 ], [ 76.1, 25.2 ], [ 76.2, 25.1 ], [ 76.0, 25.1 ] ] ] },
+      { type: 'Polygon', coordinates: [ [ [ 76.2, 25.2 ], [ 76.3, 25.1 ], [ 76.4, 25.2 ], [ 76.2, 25.2 ] ] ] },
+      { type: 'Polygon', coordinates: [ [ [ 76.4, 25.1 ], [ 76.5, 25.2 ], [ 76.6, 25.1 ], [ 76.4, 25.1 ] ] ] },
+      { type: 'Polygon', coordinates: [ [ [ 76.6, 25.2 ], [ 76.7, 25.1 ], [ 76.8, 25.2 ], [ 76.6, 25.2 ] ] ] },
+      { type: 'Polygon', coordinates: [ [ [ 76.8, 25.1 ], [ 76.9, 25.2 ], [ 77.0, 25.1 ], [ 76.8, 25.1 ] ] ] }
     ]
     ];
 
