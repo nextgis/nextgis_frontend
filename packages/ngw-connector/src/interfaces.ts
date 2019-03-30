@@ -3,6 +3,7 @@
  */
 
 import { ResourceItem } from './types/ResourceItem';
+import { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
 
 export interface FileMeta {
   id: string;
@@ -36,12 +37,15 @@ export interface Params {
   [name: string]: simple | cbParams;
 }
 
-export interface RequestItemsResponseMap {
+type RequestItemKeys = { readonly [T in keyof RequestItemsParamsMap]?: { [x: string]: any } };
+
+export interface RequestItemsResponseMap extends RequestItemKeys {
   'pyramid.route': PyramidRoute;
   'resource.item': ResourceItem;
   'resource.child': any;
+  'resource.collection': ResourceItem[];
   'file_upload.upload': FileUploadResp;
-  [x: string]: { [x: string]: any };
+  // [x: string]: { [x: string]: any };
 }
 
 export interface Credentials {

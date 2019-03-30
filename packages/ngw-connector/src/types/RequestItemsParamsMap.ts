@@ -29,7 +29,7 @@ export interface RequestItemsParamsMap {
   'auth.group.delete': { id: number };
   'webmap.display': { id: number };
   'qgis.vector_style_qml': { id: number };
-  'resource.search': {[param: string]: string};
+  'resource.search': { [param: string]: string };
   'resource.create': { id: number };
   'auth.user.create': null;
   'render.image': null;
@@ -59,7 +59,7 @@ export interface RequestItemsParamsMap {
   'feature_layer.feature.count': { id: number };
   'auth.user.collection': null;
   'wmsserver.wms': { id: number };
-  'resource.collection': null;
+  'resource.collection': { parent?: number };
   'feature_layer.geojson': { id: number };
   'feature_layer.csv': { id: number };
   'feature_layer.field': { id: number };
