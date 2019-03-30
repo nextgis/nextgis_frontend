@@ -28,6 +28,17 @@ export interface TreeLayer extends TreeItem {
   layer_transparency: any;
 }
 
+export interface Permission {
+  action: string;
+  principal: {
+    id: number;
+  };
+  identity: string;
+  scope: string;
+  permission: string;
+  propagate: boolean;
+}
+
 // Ngw api settings
 export interface ResourceItem {
   resource: {
@@ -42,7 +53,7 @@ export interface ResourceItem {
     owner_user: {
       id: number;
     };
-    permissions: any[];
+    permissions: Permission[];
     keyname: any;
     display_name: string;
     description: string;
@@ -53,7 +64,7 @@ export interface ResourceItem {
   resmeta: {
     items: {};
   };
-  webmap: {
+  webmap?: {
     extent_left: number;
     extent_right: number;
     extent_bottom: number;
