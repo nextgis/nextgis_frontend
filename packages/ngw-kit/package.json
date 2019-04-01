@@ -1,15 +1,15 @@
 {
   "name": "@nextgis/ngw-kit",
-  "version": "0.14.11",
+  "version": "0.14.12",
   "_priority": 20,
   "description": "",
   "main": "lib/ngw-kit.js",
   "unpkg": "lib/ngw-kit.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/item": "^0.14.11",
-    "@nextgis/ngw-connector": "^0.14.11",
-    "@nextgis/webmap": "^0.14.11",
+    "@nextgis/item": "^0.14.12",
+    "@nextgis/ngw-connector": "^0.14.12",
+    "@nextgis/webmap": "^0.14.12",
     "@types/events": "^3.0.0"
   },
   "devDependencies": {
