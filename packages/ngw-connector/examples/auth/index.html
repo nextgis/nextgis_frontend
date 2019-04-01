@@ -31,7 +31,7 @@
         password: 'test123'
       }
     });
-    connector.request('resource.item', {
+    connector.get('resource.item', null, {
       id: 4011
     }).then(function (data) {
       appendResponce(resultElement, data)

@@ -16,7 +16,7 @@
   <script>
     var element = document.getElementById('results');
     var connector = new NgwConnector({ baseUrl: 'https://demo.nextgis.com' });
-    connector.request('resource.item', { id: 485 }).then(function (data) {
+    connector.get('resource.item', null, { id: 485 }).then(function (data) {
       console.log(data);
       document.body.appendChild(document.createElement('pre')).innerHTML = JSON.stringify(data, null, 2);
     });

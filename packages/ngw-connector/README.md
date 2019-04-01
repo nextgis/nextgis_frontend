@@ -50,7 +50,7 @@ const ngwConnector = new NgwConnector({
   baseUrl: 'https://demo.nextgis.com'
 });
 
-ngwConnector.request('resource.item', { id: 485 }).then((data) => {
+ngwConnector.get('resource.item', null, { id: 485 }).then((data) => {
   console.log(data);
 });
 

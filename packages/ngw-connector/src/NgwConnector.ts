@@ -7,8 +7,8 @@ import './polyfills';
 import { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
 import {
   NgwConnectorOptions, Router,
-  RequestItemsResponseMap, RequestOptions,
-  Params, LoadingQueue, UserInfo, Credentials, PyramidRoute, RequestHeaders
+  GetRequestItemsResponseMap, RequestOptions,
+  Params, LoadingQueue, UserInfo, Credentials, PyramidRoute, RequestHeaders, PostRequestItemsResponseMap, RequestItemsResponseMap
 } from './interfaces';
 import { loadJSON, template } from './utils';
 import { EventEmitter } from 'events';
@@ -87,7 +87,7 @@ export class NgwConnector {
   async request<K extends keyof RequestItemsParamsMap>(
     name: K,
     params: RequestItemsParamsMap[K] & { [name: string]: any } = {},
-    options?: RequestOptions): Promise<RequestItemsResponseMap[K]> {
+    options?: RequestOptions): Promise<GetRequestItemsResponseMap[K] | PostRequestItemsResponseMap[K]> {
 
     const apiItems = await this.connect();
     let apiItem = apiItems && apiItems[name];
@@ -133,7 +133,7 @@ export class NgwConnector {
   post<K extends keyof RequestItemsParamsMap>(
     name: K,
     options?: RequestOptions,
-    params?: RequestItemsParamsMap[K] & { [name: string]: any }): Promise<RequestItemsResponseMap[K]> {
+    params?: RequestItemsParamsMap[K] & { [name: string]: any }): Promise<PostRequestItemsResponseMap[K]> {
 
     options = options || {};
     options.method = 'POST';
@@ -144,7 +144,7 @@ export class NgwConnector {
   get<K extends keyof RequestItemsParamsMap>(
     name: K,
     options: RequestOptions | undefined | null,
-    params?: RequestItemsParamsMap[K] & { [name: string]: any }): Promise<RequestItemsResponseMap[K]> {
+    params?: RequestItemsParamsMap[K] & { [name: string]: any }): Promise<GetRequestItemsResponseMap[K]> {
 
     options = options || {};
     options.method = 'GET';
