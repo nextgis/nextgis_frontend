@@ -14,7 +14,7 @@ export interface OnLayerClickOptions {
 export interface AdapterOptions {
   id?: string;
   /**
-   * Show layer on the map immediately after adding
+   * Show layer on the map immediately after adding.
    * @default false
    */
   visibility?: boolean;
@@ -80,16 +80,20 @@ export type GetPaintCallback = (feature: Feature<any>) => GeoJsonAdapterLayerPai
 
 export type Paint = GeoJsonAdapterLayerPaint | GetPaintCallback;
 
+export interface PopupOptions {
+  createPopupContent?: (layerDef: LayerDefinition) => HTMLElement | string;
+}
+
 /**
- * Options to crateing styling and defining selection behavior
+ * Options to crateing styling and defining selection behavior.
  */
 export interface GeoJsonAdapterOptions<F extends Feature = Feature, L = any> extends AdapterOptions {
   /** Geojson data */
   data?: GeoJsonObject;
-  /** Type for geometries painting, for each layer may be only one of: `fill`, `circle` or `line` */
+  /** Type for geometries painting, for each layer may be only one of: `fill`, `circle` or `line`. */
   type?: GeoJsonAdapterLayerType;
   /**
-   * Determine the appearance of the vector data geometries
+   * Determine the appearance of the vector data geometries.
    *
    * @example
    * ```javascript
@@ -115,7 +119,7 @@ export interface GeoJsonAdapterOptions<F extends Feature = Feature, L = any> ext
    */
   paint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
   /**
-   * The paint that applies to the features after it becomes selected
+   * The paint that applies to the features after it becomes selected.
    *
    * @example
    * ```javascript
@@ -128,7 +132,7 @@ export interface GeoJsonAdapterOptions<F extends Feature = Feature, L = any> ext
   selectedPaint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
   // selectedPaintDiff?: GeoJsonAdapterLayerPaint;
   /**
-   * Determines whether objects are selected by mouse click
+   * Determines whether objects are selected by mouse click.
    *
    * @example
    * ```javascript
@@ -143,7 +147,7 @@ export interface GeoJsonAdapterOptions<F extends Feature = Feature, L = any> ext
    */
   selectable?: boolean;
   /**
-   * Indicates whether several objects can be selected in one layer
+   * Indicates whether several objects can be selected in one layer.
    *
    * @example
    * // multiselect: false
@@ -153,9 +157,15 @@ export interface GeoJsonAdapterOptions<F extends Feature = Feature, L = any> ext
    */
   multiselect?: boolean;
   /**
-   * Deselects layer feature by second click
+   * Deselects layer feature by second click.
    */
   unselectOnSecondClick?: boolean;
+  /**
+   * Make the feature selected while mouseover.
+   */
+  selectOnHover?: boolean;
+  popupOnSelect?: boolean;
+  popupOptions?: PopupOptions;
   filter?: DataLayerFilter;
   onLayerClick?(opt: OnLayerClickOptions): Promise<any>;
 }
@@ -252,4 +262,7 @@ export interface VectorLayerAdapter<
   setData?(data: GeoJsonObject): void;
 
   onLayerClick?(opt: OnLayerClickOptions): Promise<any>;
+
+  openPopup?(findFeatureCb?: DataLayerFilter<F, L>, options?: PopupOptions): void;
+  closePopup?(findFeatureCb?: DataLayerFilter<F, L>): void;
 }

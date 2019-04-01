@@ -7,7 +7,8 @@ import {
   GetPaintCallback,
   LayerDefinition,
   DataLayerFilter,
-  PathPaint
+  PathPaint,
+  PopupOptions
 } from '@nextgis/webmap';
 import {
   GeoJSON,
@@ -21,6 +22,7 @@ import {
   LatLngExpression,
   LeafletEvent,
   Map,
+  Layer,
 } from 'leaflet';
 import { GeoJsonObject, GeoJsonGeometryTypes, FeatureCollection, Feature, GeometryCollection } from 'geojson';
 import { BaseAdapter } from './BaseAdapter';
@@ -104,7 +106,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
     if (findFeatureFun) {
       const feature = this._layers.filter(findFeatureFun);
       feature.forEach((x) => {
-        this._unselectLayer(x.layer);
+        this._unSelectLayer(x.layer);
       });
     } else if (this.selected) {
       this.selected = false;
@@ -211,6 +213,35 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
     }
   }
 
+  openPopup(findFeatureFun: DataLayerFilter, options?: PopupOptions) {
+    if (findFeatureFun) {
+      const feature = this._layers.filter(findFeatureFun);
+      feature.forEach((x) => {
+        this._openPopup(x.layer, options);
+      });
+    }
+  }
+
+  closePopup(findFeatureFun?: DataLayerFilter) {
+    const featuresToClosePopup = findFeatureFun ? this._layers.filter(findFeatureFun) : this._layers;
+
+    featuresToClosePopup.forEach((x) => {
+      this._closePopup(x.layer);
+    });
+  }
+
+  private _openPopup(layer: Layer, options?: PopupOptions) {
+    // @ts-ignore
+    const feature = layer.feature;
+    const content = (options && options.createPopupContent) ?
+      options.createPopupContent({ layer, feature }) : '';
+    layer.bindPopup(content).openPopup();
+  }
+
+  private _closePopup(layer: Layer) {
+    layer.closePopup().unbindPopup();
+  }
+
   private setPaintEachLayer(paint: GetPaintCallback | GeoJsonAdapterLayerPaint) {
     this.layer.eachLayer((l) => {
       this.setPaint(l, paint);
@@ -310,7 +341,16 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
       if (ok) {
         this.layer.addLayer(layer);
         if (options.selectable) {
-          layer.on('click', this._onLayerClick, this);
+          if (options.selectOnHover) {
+            layer.on('mouseover', () => {
+              this._selectLayer(layer);
+            });
+            layer.on('mouseout', () => {
+              this._unSelectLayer(layer);
+            });
+          } else {
+            layer.on('click', this._onLayerClick, this);
+          }
         }
       }
     };
@@ -324,7 +364,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
     let isSelected = this._selectedLayers.indexOf(layer) !== -1;
     if (isSelected) {
       if (this.options && this.options.unselectOnSecondClick) {
-        this._unselectLayer(layer);
+        this._unSelectLayer(layer);
         isSelected = false;
       }
     } else {
@@ -342,23 +382,34 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
 
   private _selectLayer(layer: any) {
     if (this.options && !this.options.multiselect) {
-      this._selectedLayers.forEach((x) => this._unselectLayer(x));
+      this._selectedLayers.forEach((x) => this._unSelectLayer(x));
     }
     this._selectedLayers.push(layer);
     this.selected = true;
-    if (this.options && this.options.selectedPaint) {
-      this.setPaint(layer, this.options.selectedPaint);
+    if (this.options) {
+      if (this.options.selectedPaint) {
+        this.setPaint(layer, this.options.selectedPaint);
+      }
+      if (this.options.popupOnSelect) {
+        this._openPopup(layer, this.options.popupOptions);
+      }
     }
   }
 
-  private _unselectLayer(layer: any) {
+  private _unSelectLayer(layer: any) {
     const index = this._selectedLayers.indexOf(layer);
     if (index !== -1) {
       this._selectedLayers.splice(index, 1);
     }
     this.selected = this._selectedLayers.length > 0;
-    if (this.options && this.options.paint) {
-      this.setPaint(layer, this.options.paint);
+    if (this.options) {
+      if (this.options.paint) {
+        this.setPaint(layer, this.options.paint);
+      }
+
+      if (this.options.popupOnSelect) {
+        this._closePopup(layer);
+      }
     }
   }
 
