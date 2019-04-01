@@ -39,13 +39,29 @@ export interface Params {
 
 type RequestItemKeys = { readonly [T in keyof RequestItemsParamsMap]?: { [x: string]: any } };
 
-export interface RequestItemsResponseMap extends RequestItemKeys {
+export interface RequestItemsResponseMap {
+  'GET': GetRequestItemsResponseMap;
+  POST: PostRequestItemsResponseMap;
+}
+
+export interface GetRequestItemsResponseMap extends RequestItemKeys {
   'pyramid.route': PyramidRoute;
   'resource.item': ResourceItem;
   'resource.child': any;
   'resource.collection': ResourceItem[];
   'file_upload.upload': FileUploadResp;
   // [x: string]: { [x: string]: any };
+}
+
+export interface CreatedResource {
+  id: number;
+  parent: {
+    id: number;
+  };
+}
+
+export interface PostRequestItemsResponseMap extends RequestItemKeys {
+  'resource.collection': CreatedResource;
 }
 
 export interface Credentials {

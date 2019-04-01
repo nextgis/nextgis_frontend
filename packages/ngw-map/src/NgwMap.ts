@@ -305,10 +305,10 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
     const ngwLayer = id && this._ngwLayers[id];
     if (ngwLayer) {
       const resourceId = ngwLayer.resourceId;
-      return this.connector.request('resource.item', { id: resourceId }).then((resp) => {
+      return this.connector.get('resource.item', null, { id: resourceId }).then((resp) => {
         if (resp) {
           if (resp.resource.cls === 'raster_style') {
-            return this.connector.request('resource.item', {
+            return this.connector.get('resource.item', null, {
               id: resp.resource.parent.id
             }).then((res) => {
               return this._fitNgwLayerExtend(res.resource.id);
@@ -344,9 +344,11 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
   }
 
   private _fitNgwLayerExtend(id: number) {
-    return this.connector.request('layer.extent', { id }).then((resp) => {
-      const { maxLat, maxLon, minLat, minLon } = resp.extent;
-      this.fitBounds([minLon, minLat, maxLon, maxLat]);
+    return this.connector.get('layer.extent', name, { id }).then((resp) => {
+      if (resp) {
+        const { maxLat, maxLon, minLat, minLon } = resp.extent;
+        this.fitBounds([minLon, minLat, maxLon, maxLat]);
+      }
     });
   }
 

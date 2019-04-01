@@ -85,7 +85,7 @@
       connector.getUserInfo({ login: login.value, password: password.value }).then(function (userInfo) {
         appendResponce(loginStatusElement, userInfo);
         resultElement.innerHTML = 'Loading...';
-        connector.request('resource.search', {
+        connector.get('resource.search', null, {
             cls: classSelect.value,
             owner_user__id: userInfo.id,
             // optional parameter to to control the number of parameters in the response

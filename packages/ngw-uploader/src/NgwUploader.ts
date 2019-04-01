@@ -87,7 +87,7 @@ export class NgwUploader {
   }
 
   getResource(id: number) {
-    return this.connector && this.connector.request('resource.item', { id });
+    return this.connector && this.connector.get('resource.item', null, { id });
   }
 
   @onLoad()
@@ -105,7 +105,7 @@ export class NgwUploader {
           options.name = name;
           const createResource = this.createResource(meta, name, options);
           if (createResource) {
-            return createResource.then<any>((newRes) => {
+            return createResource.then<any>((newRes: any) => {
               if (newRes) {
                 newRes.name = newRes.name || options.name;
                 return this.createStyle(newRes);
@@ -171,8 +171,12 @@ export class NgwUploader {
       },
     };
     return this.connector && this.connector.post('resource.collection', { data: styleData }).then((newStyle) => {
-      newStyle.name = newStyle.name || name;
-      return newStyle;
+      // newStyle.name = newStyle.name || name;
+      return {
+        ...newStyle,
+        // FIXME: check `name` exist in responce for all resource created
+        name: (newStyle as any).name || name
+      };
     });
   }
 

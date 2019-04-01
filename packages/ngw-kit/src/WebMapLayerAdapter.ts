@@ -46,8 +46,9 @@ export class WebMapLayerAdapter implements BaseLayerAdapter {
   }
 
   getExtent(): LngLatBoundsArray | undefined {
-    if (this.response) {
-      const { extent_bottom, extent_left, extent_top, extent_right } = this.response.webmap;
+    const webmap = this.response && this.response.webmap;
+    if (webmap) {
+      const { extent_bottom, extent_left, extent_top, extent_right } = webmap;
       if (extent_bottom && extent_left && extent_top && extent_right) {
         const extent: LngLatBoundsArray = [extent_left, extent_bottom, extent_right, extent_top];
         if (extent[3] > 82) {
@@ -95,7 +96,7 @@ export class WebMapLayerAdapter implements BaseLayerAdapter {
 
   private async getWebMapConfig(id: number) {
     try {
-      const data = await this.options.connector.request('resource.item', { id });
+      const data = await this.options.connector.get('resource.item', null, { id });
       this.response = data;
       const webmap = data.webmap;
       if (webmap) {
