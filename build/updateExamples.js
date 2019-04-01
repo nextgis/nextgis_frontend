@@ -18,7 +18,7 @@ function updateExamples() {
         const htmlPath = join(examplePath, 'index.html');
         if (fs.existsSync(metaPath) && fs.existsSync(htmlPath)) {
           const meta = JSON.parse(fs.readFileSync(metaPath, 'utf8'));
-          if (meta.ngwMaps) {
+          if (meta.ngwMaps && !meta.onlyForDemo) {
             meta.ngwMaps.forEach((x) => {
               copyExampleToLib(x, examplePath, name);
             });
