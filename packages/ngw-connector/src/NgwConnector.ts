@@ -8,7 +8,8 @@ import { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
 import {
   NgwConnectorOptions, Router,
   GetRequestItemsResponseMap, RequestOptions,
-  Params, LoadingQueue, UserInfo, Credentials, PyramidRoute, RequestHeaders, PostRequestItemsResponseMap, RequestItemsResponseMap
+  Params, LoadingQueue, UserInfo, Credentials,
+  PyramidRoute, RequestHeaders, PostRequestItemsResponseMap
 } from './interfaces';
 import { loadJSON, template } from './utils';
 import { EventEmitter } from 'events';

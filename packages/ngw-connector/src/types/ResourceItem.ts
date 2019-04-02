@@ -39,28 +39,30 @@ export interface Permission {
   propagate: boolean;
 }
 
+export interface Resource {
+  id: number;
+  cls: string;
+  parent: {
+    id: number;
+    parent: {
+      id: any;
+    };
+  };
+  owner_user: {
+    id: number;
+  };
+  permissions: Permission[];
+  keyname: any;
+  display_name: string;
+  description: string;
+  children: boolean;
+  interfaces: any[];
+  scopes: string[];
+}
+
 // Ngw api settings
 export interface ResourceItem {
-  resource: {
-    id: number;
-    cls: string;
-    parent: {
-      id: number;
-      parent: {
-        id: any;
-      };
-    };
-    owner_user: {
-      id: number;
-    };
-    permissions: Permission[];
-    keyname: any;
-    display_name: string;
-    description: string;
-    children: boolean;
-    interfaces: any[];
-    scopes: string[];
-  };
+  resource: ResourceItem;
   resmeta: {
     items: {};
   };
