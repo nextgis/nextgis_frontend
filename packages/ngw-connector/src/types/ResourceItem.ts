@@ -62,7 +62,7 @@ export interface Resource {
 
 // Ngw api settings
 export interface ResourceItem {
-  resource: ResourceItem;
+  resource: Resource;
   resmeta: {
     items: {};
   };
