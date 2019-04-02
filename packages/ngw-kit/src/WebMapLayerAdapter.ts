@@ -33,6 +33,13 @@ export class WebMapLayerAdapter implements BaseLayerAdapter {
     return this.layer;
   }
 
+  removeLayer() {
+    const mapAdapter = this.options.webMap.mapAdapter;
+    this.getDependLayers().forEach((x) => {
+      mapAdapter.removeLayer(x._layer);
+    });
+  }
+
   showLayer() {
     if (this.layer && this.layer.properties) {
       this.layer.properties.property('visibility').set(true);
