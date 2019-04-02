@@ -39,9 +39,28 @@ export interface Permission {
   propagate: boolean;
 }
 
+export type ResourceCls = 'vector_layer' |
+  'resource_group' |
+  'postgis_layer' |
+  'wmsserver_service' |
+  'basemap_layer' |
+  'postgis_connection' |
+  'webmap' |
+  'wfsserver_service' |
+  'vector_layer' |
+  'raster_layer' |
+  'mapserver_style' |
+  'qgis_vector_style' |
+  'raster_style' |
+  'file_bucket' |
+  'lookup_table' |
+  'wmsclient_layer' |
+  'wmsclient_connection' |
+  'formbuilder_form';
+
 export interface Resource {
   id: number;
-  cls: string;
+  cls: ResourceCls;
   parent: {
     id: number;
     parent: {
