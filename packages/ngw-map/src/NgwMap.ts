@@ -117,7 +117,8 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
     super(prepareWebMapOptions(mapAdapter, options));
 
     this.options = deepmerge(OPTIONS, options);
-    this.connector = new NgwConnector({ baseUrl: this.options.baseUrl, auth: this.options.auth });
+    this.connector = options.connector ||
+      new NgwConnector({ baseUrl: this.options.baseUrl, auth: this.options.auth });
 
     this._createWebMap().then(() => {
       const container = this.getContainer();
@@ -307,7 +308,7 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
       const resourceId = ngwLayer.resourceId;
       return this.connector.get('resource.item', null, { id: resourceId }).then((resp) => {
         if (resp) {
-          if (resp.resource.cls === 'raster_style') {
+          if (resp.resource.cls.indexOf('style') !== -1) {
             return this.connector.get('resource.item', null, {
               id: resp.resource.parent.id
             }).then((res) => {

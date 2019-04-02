@@ -5,15 +5,15 @@
 import {
   MapOptions,
   ControlPositions,
-  CirclePaint,
-  PathPaint,
-  IconOptions,
+  // CirclePaint,
+  // PathPaint,
+  // IconOptions,
   MapControls,
   WebMapEvents,
 
 } from '@nextgis/webmap';
 import { NgwLayerOptions } from '@nextgis/ngw-kit';
-import { Credentials } from '@nextgis/ngw-connector';
+import NgwConnector, { Credentials } from '@nextgis/ngw-connector';
 import { NgwMap } from './NgwMap';
 
 export { NgwLayerOptions };
@@ -104,6 +104,8 @@ export interface NgwMapOptions<C = any> extends MapOptions {
    * @default false
    */
   identification?: boolean;
+
+  connector?: NgwConnector;
 }
 
 export interface NgwMapEvents extends WebMapEvents {
