@@ -29,6 +29,7 @@ export function getLayerAdapterOptions(options: NgwLayerOptions, webMap: WebMap,
       return {
         url,
         resourceId: options.resourceId,
+        headers: options.headers,
         updateWmsParams: (params: any) => updateWmsParams(params, options.resourceId)
       };
     } else {

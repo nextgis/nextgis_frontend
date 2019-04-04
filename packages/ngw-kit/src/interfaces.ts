@@ -54,6 +54,7 @@ export interface NgwLayerOptions<A extends NgwLayerAdapterType = NgwLayerAdapter
   id?: string;
   adapter?: A;
   adapterOptions?: LayerAdaptersOptions[A];
+  headers?: any;
 }
 
 export interface NgwConfig {
