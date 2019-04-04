@@ -396,12 +396,12 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
   /**
    * Remove all layer from map and memory.
    */
-  removeLayers(cb?: (layer: string) => boolean) {
+  removeLayers(allowCb?: (layer: string, adapter: LayerAdapter) => boolean) {
     for (const l in this._layers) {
       if (this._layers.hasOwnProperty(l)) {
         let allow = true;
-        if (cb) {
-          allow = cb(l);
+        if (allowCb) {
+          allow = allowCb(l, this._layers[l]);
         }
         if (allow) {
           this.removeLayer(l);
@@ -409,6 +409,13 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
         }
       }
     }
+  }
+
+  /**
+   * Remove all layers but not remove basemap.
+   */
+  removeOverlays() {
+    this.removeLayers((layerId, layer) => !layer.options.baseLayer);
   }
 
   /**
