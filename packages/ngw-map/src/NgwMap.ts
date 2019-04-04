@@ -221,6 +221,10 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
       }
     } else if (this.options.baseUrl) {
 
+      const headers = this.connector.getAuthorizationHeaders();
+      if (headers) {
+        options.headers = headers;
+      }
       const adapter = NgwKit.addNgwLayer(options, this, this.options.baseUrl);
       if (adapter) {
         return adapter.then((layer) => {
