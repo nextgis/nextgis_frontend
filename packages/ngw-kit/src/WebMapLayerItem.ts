@@ -83,8 +83,8 @@ export class WebMapLayerItem extends Item<ItemOptions> {
       const options: any = {
         maxZoom,
         minZoom,
-        headers: this.options.headers,
         ...item,
+        headers: this.options.headers,
 
       };
       newLayer = await this.webMap.addLayer(adapter, options);
