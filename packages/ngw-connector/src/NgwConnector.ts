@@ -144,7 +144,7 @@ export class NgwConnector {
 
   get<K extends keyof RequestItemsParamsMap>(
     name: K,
-    options: RequestOptions | undefined | null,
+    options?: RequestOptions | undefined | null,
     params?: RequestItemsParamsMap[K] & { [name: string]: any }): Promise<GetRequestItemsResponseMap[K]> {
 
     options = options || {};
