@@ -46,7 +46,6 @@ export class ImageAdapter implements BaseLayerAdapter {
   }
 }
 
-// TODO: move to utils or rewrite with native js methods
 function queryToObject(str: string) {
 
   const dec = decodeURIComponent;

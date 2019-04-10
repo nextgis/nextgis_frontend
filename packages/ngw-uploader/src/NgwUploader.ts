@@ -174,7 +174,7 @@ export class NgwUploader {
       // newStyle.name = newStyle.name || name;
       return {
         ...newStyle,
-        // FIXME: check `name` exist in responce for all resource created
+        // FIXME: check `name` exist in response for all resource created
         name: (newStyle as any).name || name
       };
     });

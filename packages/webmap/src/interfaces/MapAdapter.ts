@@ -119,7 +119,4 @@ export interface MapAdapter<M = any, L = any, C = any> {
   removeControl(control: any): void;
 
   onMapClick(evt: any): void;
-
-  // TODO: now return WKT geometry but need geojson
-  // requestGeomString?(pixel: Pixel, pixelRadius?: number): string | undefined;
 }
