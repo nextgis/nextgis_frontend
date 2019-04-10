@@ -66,7 +66,7 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
   options: MapOptions = OPTIONS;
   // `WebMapEvents` must be `E` but its not work correct
   readonly emitter: StrictEventEmitter<EventEmitter, WebMapEvents> = new EventEmitter();
-  readonly keys: Keys = new Keys(); // TODO: make injectable cached
+  readonly keys: Keys = new Keys();
   readonly mapAdapter: MapAdapter<M>;
   readonly runtimeParams: RuntimeParams[] = [];
 
@@ -131,7 +131,7 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
   }
 
   /**
-   * Set the cursor icon to be displayed when hoverion on the map container.
+   * Set the cursor icon to be displayed when hover icon on the map container.
    * @param cursor available cursor name from https://developer.mozilla.org/ru/docs/Web/CSS/cursor
    */
   setCursor(cursor: Cursor) {
