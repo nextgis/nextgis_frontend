@@ -155,7 +155,7 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
    * @example
    * ```javascript
    * ngwMap.addControl(new CustomControl(), 'bottom-left');
-   * ngwMap.addControl('ZOOM', {position: 'top-right'})
+   * ngwMap.addControl('ZOOM', 'top-right')
    * ```
    */
   @WebMap.decorators.onLoad<NgwMapEvents>('controls:create')
