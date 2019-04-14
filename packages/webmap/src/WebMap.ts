@@ -427,6 +427,9 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
     const layerId = layer && this.getLayerId(layer);
     if (layer && layerId) {
       this.emitter.emit('layer:preremove', layer);
+      if (layer.beforeRemove) {
+        layer.beforeRemove();
+      }
       if (layer.removeLayer) {
         layer.removeLayer();
       } else {

@@ -4,12 +4,8 @@ import {
   Type,
   LayerAdapter,
   BaseLayerAdapter,
-  GeoJsonAdapterLayerPaint,
-  PathPaint,
-  CirclePaint,
-  Paint
 } from '@nextgis/webmap';
-import { icon } from 'leaflet';
+import { PCancelable } from '@nextgis/ngw-connector';
 
 export function fixUrlStr(url: string) {
   // remove double slash
@@ -94,15 +90,18 @@ export function findMostFrequentGeomType(arr: GeoJsonGeometryTypes[]): GeoJsonGe
 }
 
 export function createAsyncAdapter<T extends string = string>(
-  type: T, laodFunction: Promise<any>, map: MapAdapter): Type<LayerAdapter> {
+  type: T, loadFunction: PCancelable<any>, map: MapAdapter, onLoad: (data: any) => any): Type<LayerAdapter> {
 
   const webMapAdapter = map.layerAdapters[type] as Type<BaseLayerAdapter>;
 
   return class Adapter extends webMapAdapter {
     addLayer(options: any) {
-      return laodFunction.then((opt) => {
+      return loadFunction.then((data) => onLoad(data)).then((opt) => {
         return super.addLayer({ ...options, ...opt });
       });
+    }
+    beforeRemove() {
+      loadFunction.cancel();
     }
   };
 }

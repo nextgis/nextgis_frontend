@@ -13,7 +13,7 @@ import WebMap, {
   LayerAdapter,
   WebMapEvents
 } from '@nextgis/webmap';
-import NgwConnector from '@nextgis/ngw-connector';
+import NgwConnector, { PCancelable } from '@nextgis/ngw-connector';
 import QmsKit, { QmsAdapterOptions } from '@nextgis/qms-kit';
 import NgwKit, { NgwLayerOptions } from '@nextgis/ngw-kit';
 import { getIcon } from '@nextgis/icons';
@@ -195,21 +195,21 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
     if (options.adapter === 'GEOJSON') {
       const geojsonAdapterCb = this.connector.makeQuery('/api/resource/{id}/geojson', {
         id: options.resourceId
-      }).then((data) => {
-        data = NgwMap.toWgs84(data);
-        const geoJsonOptions: GeoJsonAdapterOptions = {
-          data,
-        };
-        if (options.id) {
-          geoJsonOptions.id = options.id;
-        }
-        return this._updateGeojsonAdapterOptions(geoJsonOptions);
       });
       const adapter = createAsyncAdapter(
         'GEOJSON',
         geojsonAdapterCb,
-        this.mapAdapter
-      );
+        this.mapAdapter,
+        (data) => {
+          data = NgwMap.toWgs84(data);
+          const geoJsonOptions: GeoJsonAdapterOptions = {
+            data,
+          };
+          if (options.id) {
+            geoJsonOptions.id = options.id;
+          }
+          return this._updateGeojsonAdapterOptions(geoJsonOptions);
+        });
       const layer = await this.addGeoJsonLayer(
         options.adapterOptions || {},
         adapter

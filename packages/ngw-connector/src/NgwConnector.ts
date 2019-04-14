@@ -1,7 +1,7 @@
 /**
  * @module ngw-connector
  */
-
+import PCancelable from 'p-cancelable';
 import './polyfills';
 
 import { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
@@ -29,7 +29,7 @@ export class NgwConnector {
     }
   }
 
-  async connect(): Promise<Router> {
+  async connect(): PCancelable<Router> {
     if (this.route) {
       return Promise.resolve(this.route);
     } else {
@@ -47,7 +47,7 @@ export class NgwConnector {
     }
   }
 
-  getUserInfo(credentials: Credentials): Promise<UserInfo> {
+  getUserInfo(credentials: Credentials): PCancelable<UserInfo> {
     if (credentials) {
       this.options.auth = credentials;
     }
@@ -57,15 +57,16 @@ export class NgwConnector {
     };
 
     // Do not use request('auth.current_user') to avoid circular-references
-    return this.makeQuery('/api/component/auth/current_user', {}, options)
-      .then((data: UserInfo) => {
-        this.user = data;
-        this.emitter.emit('login', data);
-        return data;
-      }).catch((er) => {
-        this.emitter.emit('login:error', er);
-        throw er;
-      });
+    const promise = this.makeQuery('/api/component/auth/current_user', {}, options);
+    promise.then((data: UserInfo) => {
+      this.user = data;
+      this.emitter.emit('login', data);
+      return data;
+    }).catch((er) => {
+      this.emitter.emit('login:error', er);
+      throw er;
+    });
+    return promise;
   }
 
   getAuthorizationHeaders(credentials?: Credentials): RequestHeaders | undefined {
@@ -88,7 +89,7 @@ export class NgwConnector {
   async request<K extends keyof RequestItemsParamsMap>(
     name: K,
     params: RequestItemsParamsMap[K] & { [name: string]: any } = {},
-    options?: RequestOptions): Promise<GetRequestItemsResponseMap[K] | PostRequestItemsResponseMap[K]> {
+    options?: RequestOptions): PCancelable<GetRequestItemsResponseMap[K] | PostRequestItemsResponseMap[K]> {
 
     const apiItems = await this.connect();
     let apiItem = apiItems && apiItems[name];
@@ -134,7 +135,7 @@ export class NgwConnector {
   post<K extends keyof RequestItemsParamsMap>(
     name: K,
     options?: RequestOptions,
-    params?: RequestItemsParamsMap[K] & { [name: string]: any }): Promise<PostRequestItemsResponseMap[K]> {
+    params?: RequestItemsParamsMap[K] & { [name: string]: any }): PCancelable<PostRequestItemsResponseMap[K]> {
 
     options = options || {};
     options.method = 'POST';
@@ -145,7 +146,7 @@ export class NgwConnector {
   get<K extends keyof RequestItemsParamsMap>(
     name: K,
     options?: RequestOptions | undefined | null,
-    params?: RequestItemsParamsMap[K] & { [name: string]: any }): Promise<GetRequestItemsResponseMap[K]> {
+    params?: RequestItemsParamsMap[K] & { [name: string]: any }): PCancelable<GetRequestItemsResponseMap[K]> {
 
     options = options || {};
     options.method = 'GET';
@@ -156,7 +157,7 @@ export class NgwConnector {
   makeQuery(
     url: string,
     params: Params,
-    options: RequestOptions = {}): Promise<any> {
+    options: RequestOptions = {}): PCancelable<any> {
 
     url = (this.options.baseUrl ? this.options.baseUrl : '') + url;
     if (url) {
@@ -168,7 +169,8 @@ export class NgwConnector {
       if (!this._loadingStatus[url] || options.nocache) {
         this._loadingStatus[url] = true;
 
-        return this._getJson(url, options).then((data) => {
+        const promise = this._getJson(url, options);
+        promise.then((data) => {
           this._loadingStatus[url] = false;
           this._executeLoadingQueue(url, data);
           return data;
@@ -178,9 +180,10 @@ export class NgwConnector {
           this.emitter.emit('error', er);
           throw er;
         });
+        return promise;
       } else {
         this._loadingStatus[url] = false;
-        const promise = new Promise((resolve, reject) => {
+        const promise = new PCancelable((resolve, reject) => {
           this._setLoadingQueue(url, resolve, reject);
         });
         return promise;
@@ -220,14 +223,21 @@ export class NgwConnector {
     }
   }
 
-  _getJson(url: string, options: RequestOptions): Promise<any> {
-    return new Promise((resolve, reject) => {
+  _getJson(url: string, options: RequestOptions): PCancelable<any> {
+    const cancelablePromise = new PCancelable((resolve, reject, onCancel) => {
       if (this.user) {
         options = options || {};
         // options.withCredentials = true;
         options.headers = this.getAuthorizationHeaders();
       }
-      loadJSON(url, resolve, options, reject);
+      loadJSON(url, resolve, options, reject, onCancel);
     });
+    cancelablePromise.catch((er) => {
+      if (cancelablePromise.isCanceled) {
+        return;
+      }
+      throw er;
+    });
+    return cancelablePromise;
   }
 }

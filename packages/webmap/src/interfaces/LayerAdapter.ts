@@ -232,6 +232,8 @@ export interface BaseLayerAdapter<M = any, L = any, O extends AdapterOptions = A
   addLayer(options: O): L | Promise<L> | undefined;
   removeLayer?(): void;
 
+  beforeRemove?(): void;
+
   showLayer?(layer: L): void;
   hideLayer?(layer: L): void;
 
