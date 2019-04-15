@@ -13,7 +13,7 @@ import WebMap, {
   LayerAdapter,
   WebMapEvents
 } from '@nextgis/webmap';
-import NgwConnector, { PCancelable } from '@nextgis/ngw-connector';
+import NgwConnector from '@nextgis/ngw-connector';
 import QmsKit, { QmsAdapterOptions } from '@nextgis/qms-kit';
 import NgwKit, { NgwLayerOptions } from '@nextgis/ngw-kit';
 import { getIcon } from '@nextgis/icons';
