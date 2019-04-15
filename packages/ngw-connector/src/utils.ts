@@ -20,8 +20,7 @@ export function loadJSON(
   url: string,
   callback: (...args: any[]) => any,
   options: RequestOptions = {},
-  error: (reason?: any) => void,
-  onCancel: (...args: any[]) => void) {
+  error: (reason?: any) => void) {
 
   options.method = options.method || 'GET';
   let xhr: XMLHttpRequest;
@@ -101,12 +100,6 @@ export function loadJSON(
   }
 
   xhr.send(data);
-
-  if (onCancel) {
-    onCancel(() => {
-      xhr.abort();
-    });
-  }
 }
 
 // https://github.com/Leaflet/Leaflet/blob/b507e21c510b53cd704fb8d3f89bb46ea925c8eb/src/core/Util.js#L165
