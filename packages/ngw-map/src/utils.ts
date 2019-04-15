@@ -5,7 +5,6 @@ import {
   LayerAdapter,
   BaseLayerAdapter,
 } from '@nextgis/webmap';
-import { PCancelable } from '@nextgis/ngw-connector';
 
 export function fixUrlStr(url: string) {
   // remove double slash
@@ -90,7 +89,7 @@ export function findMostFrequentGeomType(arr: GeoJsonGeometryTypes[]): GeoJsonGe
 }
 
 export function createAsyncAdapter<T extends string = string>(
-  type: T, loadFunction: PCancelable<any>, map: MapAdapter, onLoad: (data: any) => any): Type<LayerAdapter> {
+  type: T, loadFunction: Promise<any>, map: MapAdapter, onLoad: (data: any) => any): Type<LayerAdapter> {
 
   const webMapAdapter = map.layerAdapters[type] as Type<BaseLayerAdapter>;
 
@@ -101,7 +100,7 @@ export function createAsyncAdapter<T extends string = string>(
       });
     }
     beforeRemove() {
-      loadFunction.cancel();
+      // loadFunction.cancel();
     }
   };
 }
