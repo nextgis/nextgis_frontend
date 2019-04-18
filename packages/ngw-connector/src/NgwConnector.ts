@@ -3,6 +3,8 @@
  */
 import './polyfills';
 
+import { CancelablePromise } from './CancelablePromise';
+
 import { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
 import {
   NgwConnectorOptions, Router,
@@ -28,7 +30,7 @@ export class NgwConnector {
     }
   }
 
-  async connect(): Promise<Router> {
+  async connect(): CancelablePromise<Router> {
     if (this.route) {
       return Promise.resolve(this.route);
     } else {
@@ -46,7 +48,7 @@ export class NgwConnector {
     }
   }
 
-  getUserInfo(credentials: Credentials): Promise<UserInfo> {
+  getUserInfo(credentials: Credentials): CancelablePromise<UserInfo> {
     if (credentials) {
       this.options.auth = credentials;
     }
@@ -86,7 +88,7 @@ export class NgwConnector {
   async request<K extends keyof RequestItemsParamsMap>(
     name: K,
     params: RequestItemsParamsMap[K] & { [name: string]: any } = {},
-    options?: RequestOptions): Promise<GetRequestItemsResponseMap[K] | PostRequestItemsResponseMap[K]> {
+    options?: RequestOptions): CancelablePromise<GetRequestItemsResponseMap[K] | PostRequestItemsResponseMap[K]> {
 
     const apiItems = await this.connect();
     let apiItem = apiItems && apiItems[name];
@@ -132,7 +134,7 @@ export class NgwConnector {
   post<K extends keyof RequestItemsParamsMap>(
     name: K,
     options?: RequestOptions,
-    params?: RequestItemsParamsMap[K] & { [name: string]: any }): Promise<PostRequestItemsResponseMap[K]> {
+    params?: RequestItemsParamsMap[K] & { [name: string]: any }): CancelablePromise<PostRequestItemsResponseMap[K]> {
 
     options = options || {};
     options.method = 'POST';
@@ -143,7 +145,7 @@ export class NgwConnector {
   get<K extends keyof RequestItemsParamsMap>(
     name: K,
     options?: RequestOptions | undefined | null,
-    params?: RequestItemsParamsMap[K] & { [name: string]: any }): Promise<GetRequestItemsResponseMap[K]> {
+    params?: RequestItemsParamsMap[K] & { [name: string]: any }): CancelablePromise<GetRequestItemsResponseMap[K]> {
 
     options = options || {};
     options.method = 'GET';
@@ -154,7 +156,7 @@ export class NgwConnector {
   makeQuery(
     url: string,
     params: Params,
-    options: RequestOptions = {}): Promise<any> {
+    options: RequestOptions = {}): CancelablePromise<any> {
 
     url = (this.options.baseUrl ? this.options.baseUrl : '') + url;
     if (url) {
@@ -178,10 +180,9 @@ export class NgwConnector {
         });
       } else {
         this._loadingStatus[url] = false;
-        const promise = new Promise((resolve, reject) => {
+        return new CancelablePromise((resolve, reject) => {
           this._setLoadingQueue(url, resolve, reject);
         });
-        return promise;
       }
     } else {
       throw new Error('No `url` parameter set for option ' + name);
@@ -218,8 +219,8 @@ export class NgwConnector {
     }
   }
 
-  _getJson(url: string, options: RequestOptions): Promise<any> {
-    return new Promise((resolve, reject) => {
+  _getJson(url: string, options: RequestOptions): CancelablePromise<any> {
+    return new CancelablePromise((resolve, reject) => {
       if (this.user) {
         options = options || {};
         // options.withCredentials = true;
