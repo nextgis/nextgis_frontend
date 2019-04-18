@@ -220,13 +220,16 @@ export class NgwConnector {
   }
 
   _getJson(url: string, options: RequestOptions): CancelablePromise<any> {
+    const onCancel: Array<() => void> = [];
     return new CancelablePromise((resolve, reject) => {
       if (this.user) {
         options = options || {};
         // options.withCredentials = true;
         options.headers = this.getAuthorizationHeaders();
       }
-      loadJSON(url, resolve, options, reject);
+      loadJSON(url, resolve, options, reject, onCancel);
+    }, () => {
+      onCancel.forEach((x) => x());
     });
   }
 }
