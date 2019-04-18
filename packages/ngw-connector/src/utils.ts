@@ -20,7 +20,8 @@ export function loadJSON(
   url: string,
   callback: (...args: any[]) => any,
   options: RequestOptions = {},
-  error: (reason?: any) => void) {
+  error: (reason?: any) => void,
+  onCancel: Array<() => void>) {
 
   options.method = options.method || 'GET';
   let xhr: XMLHttpRequest;
@@ -98,7 +99,11 @@ export function loadJSON(
   } else {
     data = options.data ? JSON.stringify(options.data) : null;
   }
-
+  if (onCancel) {
+    onCancel.push(() => {
+      xhr.abort();
+    });
+  }
   xhr.send(data);
 }
 
