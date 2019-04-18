@@ -363,16 +363,21 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
       }
 
       const _adapter = new adapterEngine(this.mapAdapter.map, options);
+      let layerId = _adapter.options.id;
+      if (layerId) {
+        this._layers[layerId] = _adapter;
+      }
       this.emitter.emit('layer:preadd', _adapter);
       await this.onMapLoad();
       const layer = await _adapter.addLayer(options);
+
       // checking that the original layer was inserted into the adapter anyway
       _adapter.layer = layer;
       // think about how to move `id` to the adapter's constructor,
       // but that it is not required in the options
       _adapter.id = _adapter.options.id;
 
-      const layerId = _adapter.options.id;
+      layerId = _adapter.options.id;
       if (layerId) {
         if (geojsonOptions.filter) {
           this.filterLayer(_adapter, geojsonOptions.filter);
@@ -427,6 +432,9 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
     const layerId = layer && this.getLayerId(layer);
     if (layer && layerId) {
       this.emitter.emit('layer:preremove', layer);
+      if (layer.beforeRemove) {
+        layer.beforeRemove();
+      }
       if (layer.beforeRemove) {
         layer.beforeRemove();
       }

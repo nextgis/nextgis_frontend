@@ -83,6 +83,7 @@ export interface MapAdapter<M = any, L = any, C = any> {
    * @param layer
    */
   removeLayer(layer: L): any;
+  beforeRemove?(): void;
 
   /**
    * Set the transparency of given layer.
