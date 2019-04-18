@@ -2,7 +2,7 @@
  * @module ngw-kit
  */
 
-import NgwConnector from '@nextgis/ngw-connector';
+import NgwConnector, { CancelablePromise } from '@nextgis/ngw-connector';
 import WebMap, { StarterKit, MapClickEvent, Type } from '@nextgis/webmap';
 import {
   updateWmsParams,
@@ -117,7 +117,7 @@ export class NgwKit implements StarterKit {
     const webMapItem = layer.layer;
     if (webMapItem && webMapItem.item.item_type === 'root') {
       const layers = webMapItem.item.children;
-      const promises: Array<Promise<any>> = [];
+      const promises: Array<CancelablePromise<any>> = [];
       layers.forEach((x) => {
         if (x.item_type === 'layer') {
           const id = x.layer_style_id;

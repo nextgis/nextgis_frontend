@@ -4,6 +4,8 @@
 
 import { NgwConnector } from './NgwConnector';
 
+export { CancelablePromise } from './CancelablePromise';
+
 export * from './interfaces';
 export * from './types/ResourceItem';
 
