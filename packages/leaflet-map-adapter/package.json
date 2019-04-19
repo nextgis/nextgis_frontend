@@ -1,20 +1,20 @@
 {
   "name": "@nextgis/leaflet-map-adapter",
-  "version": "0.14.12",
+  "version": "0.14.13",
   "_priority": 15,
   "description": "",
   "main": "lib/leaflet-map-adapter.js",
   "unpkg": "lib/leaflet-map-adapter.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/webmap": "^0.14.12",
-    "events": "^3.0.0",
-    "leaflet": "^1.4.0",
-    "leaflet.wms": "^0.2.0",
-    "@types/leaflet": "^1.4.4",
+    "@nextgis/webmap": "^0.14.13",
     "@types/events": "^3.0.0",
+    "@types/leaflet": "^1.4.4",
     "@types/node": "^11.13.5",
-    "geojson": "^0.5.0"
+    "events": "^3.0.0",
+    "geojson": "^0.5.0",
+    "leaflet": "^1.4.0",
+    "leaflet.wms": "^0.2.0"
   },
   "devDependencies": {
     "rimraf": "^2.6.3",
