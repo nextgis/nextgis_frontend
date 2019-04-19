@@ -90,6 +90,7 @@ export class CancelablePromise<T> implements Promise<T> {
   }
 
   private _destroy() {
+    this.onCancel = undefined;
     this._promise = undefined;
   }
 }
