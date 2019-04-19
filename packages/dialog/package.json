@@ -1,12 +1,12 @@
 {
   "name": "@nextgis/dialog",
-  "version": "0.14.12",
+  "version": "0.14.13",
   "description": "Modal window management",
   "main": "lib/dialog.js",
   "unpkg": "lib/dialog.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/webmap": "^0.14.12",
+    "@nextgis/webmap": "^0.14.13",
     "dialog-polyfill": "*"
   },
   "devDependencies": {
