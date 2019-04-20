@@ -695,6 +695,16 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
     }
   }
 
+  /**
+   * Creating a universal map layout control element. Can be used with any map adapter.
+   *
+   * @example
+   * const control = webMap.createControl({
+   *   onAdd() {
+   *     return document.createElement('div');
+   *   }
+   * });
+   */
   @onLoad('build-map')
   createControl(control: MapControl, options?: CreateControlOptions): C | undefined {
     if (this.mapAdapter.createControl) {
