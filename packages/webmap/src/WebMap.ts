@@ -22,7 +22,8 @@ import {
   MapControls,
   CreateControlOptions,
   ButtonControlOptions,
-  ToggleControlOptions
+  ToggleControlOptions,
+  ToggleControl
 } from './interfaces/MapControl';
 
 import { Keys } from './components/keys/Keys';
@@ -718,11 +719,11 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
   }
 
   @onLoad('build-map')
-  createToggleControl(options: ToggleControlOptions): C | undefined {
+  createToggleControl(options: ToggleControlOptions): (C & ToggleControl) | undefined {
     if (this.mapAdapter.createToggleControl) {
       return this.mapAdapter.createToggleControl(options);
     } else {
-      return createToggleControl(this, options);
+      return createToggleControl<C>(this, options);
     }
   }
 
