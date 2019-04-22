@@ -1,8 +1,8 @@
 import { WebMap } from '../../WebMap';
-import { ToggleControlOptions } from '../../interfaces/MapControl';
+import { ToggleControlOptions, ToggleControl } from '../../interfaces/MapControl';
 import { createButtonControl } from './ButtonControl';
 
-export function createToggleControl(webMap: WebMap, options: ToggleControlOptions) {
+export function createToggleControl<C = any>(webMap: WebMap, options: ToggleControlOptions): (C & ToggleControl) {
 
   const link = document.createElement('div');
 
@@ -75,17 +75,18 @@ export function createToggleControl(webMap: WebMap, options: ToggleControlOption
   }
   setClass();
 
-  const onClick = () => {
-    status = !status;
+  const onClick = (_status?: boolean) => {
+    status = _status !== undefined ? _status : !status;
     setHtml();
     setTitle();
     setClass();
     options.onClick(status);
   };
 
-  return createButtonControl(webMap, {
+  const buttonControl = createButtonControl(webMap, {
     html: link,
     onClick
   });
-
+  buttonControl.onClick = onClick;
+  return buttonControl;
 }
