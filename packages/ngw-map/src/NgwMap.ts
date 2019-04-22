@@ -58,16 +58,16 @@ function prepareWebMapOptions(mapAdapter: MapAdapter, options: NgwMapOptions) {
   const opt: NgwMapOptions = deepmerge(OPTIONS, options);
   const kits: StarterKit[] = [new QmsKit()];
   // const kits: any[] = [new QmsKit()];
-  if (opt.baseUrl && opt.webmapId) {
-    const resourceId = opt.webmapId;
+  // if (opt.baseUrl && opt.webmapId) {
+  const resourceId = opt.webmapId;
 
-    kits.push(new NgwKit({
-      baseUrl: opt.baseUrl,
-      auth: opt.auth,
-      resourceId,
-      identification: opt.identification
-    }));
-  }
+  kits.push(new NgwKit({
+    baseUrl: opt.baseUrl,
+    auth: opt.auth,
+    resourceId,
+    identification: opt.identification
+  }));
+  // }
   return {
     mapAdapter,
     starterKits: kits
