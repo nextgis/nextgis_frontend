@@ -78,3 +78,7 @@ export interface CreateControlOptions {
   margin?: boolean;
   addClass?: string;
 }
+
+export interface ToggleControl {
+  onClick: (status: boolean) => void;
+}
