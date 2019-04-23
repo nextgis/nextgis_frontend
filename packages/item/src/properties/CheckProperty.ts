@@ -120,9 +120,9 @@ export class CheckProperty
 
   _propagation(value?: V, options?: O) {
     if (this.isGroup()) {
-      const childs = this.item.tree.getChildren();
-      for (let fry = 0; fry < childs.length; fry++) {
-        const child = childs[fry];
+      const children = this.item.tree.getChildren();
+      for (let fry = 0; fry < children.length; fry++) {
+        const child = children[fry];
         const property = child.properties && child.properties.property(this.name) as CheckProperty<V, O>;
         if (property) {
           property.set(value, {

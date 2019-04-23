@@ -61,13 +61,15 @@ const OPTIONS: MapOptions = {
  */
 export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEvents> {
 
+  static keys: Keys = new Keys();
+
   static getPaintFunctions: { [name: string]: GetPaintFunction };
   static decorators = { onLoad };
 
   options: MapOptions = OPTIONS;
   // `WebMapEvents` must be `E` but its not work correct
   readonly emitter: StrictEventEmitter<EventEmitter, WebMapEvents> = new EventEmitter();
-  readonly keys: Keys = new Keys();
+  readonly keys = WebMap.keys;
   readonly mapAdapter: MapAdapter<M>;
   readonly runtimeParams: RuntimeParams[] = [];
 
