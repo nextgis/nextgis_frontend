@@ -394,6 +394,12 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
           this.showLayer(layerId);
         }
       }
+      if (options.fit && _adapter.getExtent) {
+        const extent = await _adapter.getExtent();
+        if (extent) {
+          this.fitBounds(extent);
+        }
+      }
       this.emitter.emit('layer:add', _adapter);
       return _adapter;
 

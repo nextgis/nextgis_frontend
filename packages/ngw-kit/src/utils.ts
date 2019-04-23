@@ -101,7 +101,7 @@ export function degrees2meters(lng: number, lat: number): [number, number] {
 interface ExtendWebMapLayerAdapterOptions {
   webMap: WebMap;
   connector: NgwConnector;
-  baseUrl: string;
+  baseUrl?: string;
 }
 
 export function extendWebMapLayerAdapter(opt: ExtendWebMapLayerAdapterOptions): Type<WebMapLayerAdapter> {
