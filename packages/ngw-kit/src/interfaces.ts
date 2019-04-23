@@ -67,7 +67,7 @@ export interface NgwConfig {
 export type ResourceDef = number | [number, string];
 
 export interface NgwKitOptions {
-  baseUrl: string;
+  baseUrl?: string;
   pixelRadius?: number;
   resourceId?: ResourceDef;
   auth?: {
