@@ -23,6 +23,11 @@ export interface AdapterOptions {
   attribution?: string;
   maxZoom?: number;
   minZoom?: number;
+  /**
+   * Fit map for layer extent
+   * @default false
+   */
+  fit?: boolean;
 }
 
 export interface MvtAdapterOptions extends AdapterOptions {

@@ -1,0 +1,5 @@
+{
+  "name": "Webmap layers tree",
+  "description": "Create tree control to show and hide layers from webmap",
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
+}
