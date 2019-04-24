@@ -74,7 +74,7 @@
       elem.className = 'tree-container__item-children';
       layers.forEach((x) => {
         if (x.item) {
-          const item = createTreeItem(x);
+          var item = createTreeItem(x);
           elem.appendChild(item);
         }
       });
@@ -91,7 +91,7 @@
         var value = item.item_type === 'layer' ? item.layer_enabled : true;
         input.checked = value;
 
-        const visibility = layer.properties.property('visibility');
+        var visibility = layer.properties.property('visibility');
         if (visibility) {
           visibility.emitter.on('change', function (ev) {
             input.checked = ev.value;
