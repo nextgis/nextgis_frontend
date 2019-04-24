@@ -68,6 +68,7 @@ export type ResourceDef = number | [number, string];
 
 export interface NgwKitOptions {
   baseUrl?: string;
+  /** Radius for searching objects in pixels */
   pixelRadius?: number;
   resourceId?: ResourceDef;
   auth?: {
@@ -76,7 +77,6 @@ export interface NgwKitOptions {
   };
   /**
    * Get information from NGW webmap layers by click.
-   *
    * @default false
    */
   identification?: boolean;
@@ -87,6 +87,13 @@ export interface WebMapAdapterOptions extends AdapterOptions {
   resourceId: number | [number, string];
   webMap: WebMap;
   connector: NgwConnector;
+  /**
+   * Get information from NGW webmap layers by click.
+   * @default false
+   */
+  identification?: boolean;
+  /** Radius for searching objects in pixels */
+  pixelRadius?: number;
 }
 
 export interface IdentifyRequestOptions {
