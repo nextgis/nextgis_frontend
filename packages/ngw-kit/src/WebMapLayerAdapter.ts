@@ -1,16 +1,31 @@
-import WebMap, { BaseLayerAdapter, LngLatBoundsArray } from '@nextgis/webmap';
-import { ResourceItem } from '@nextgis/ngw-connector';
-import { fixUrlStr, getLayerAdapterOptions, updateWmsParams } from './utils';
+import WebMap, { BaseLayerAdapter, LngLatBoundsArray, MapClickEvent } from '@nextgis/webmap';
+import { ResourceItem, CancelablePromise } from '@nextgis/ngw-connector';
+import {
+  fixUrlStr,
+  getLayerAdapterOptions,
+  updateWmsParams,
+  getCirclePoly,
+  degrees2meters
+} from './utils';
 import { WebMapLayerItem } from './WebMapLayerItem';
 import { ItemOptions } from '@nextgis/item';
-import { TreeGroup, TreeLayer, NgwLayerAdapterType, WebMapAdapterOptions } from './interfaces';
+import { TreeGroup, TreeLayer, NgwLayerAdapterType, WebMapAdapterOptions, IdentifyRequestOptions } from './interfaces';
 
 export class WebMapLayerAdapter implements BaseLayerAdapter {
 
   layer?: WebMapLayerItem;
+
+  /**
+   * Radius for searching objects in pixels
+   */
+  pixelRadius = 10; // webmapSettings.identify_radius,
+
   private resourceId?: number;
   private _dependsLayers: Array<TreeGroup | TreeLayer> = [];
   private response?: ResourceItem;
+  private _webmapLayersIds: { isLoading: boolean, ids: string[] } = { isLoading: false, ids: [] };
+
+  private $$onMapClick?: (ev: MapClickEvent) => void;
 
   constructor(public map: any, public options: WebMapAdapterOptions) {
     const r = options.resourceId;
@@ -30,14 +45,33 @@ export class WebMapLayerAdapter implements BaseLayerAdapter {
     this.options = { ...this.options, ...options };
 
     this.layer = await this._getWebMapLayerItem();
+
+    if (this.options.identification) {
+      const ids = await this._getWebmapIds();
+      if (ids) {
+        this._webmapLayersIds.ids = ids.filter((x) => x !== undefined).map((x) => x.resource.parent.id);
+        this.$$onMapClick = (ev: MapClickEvent) => this._onMapClick(ev, this.options.webMap);
+        this.options.webMap.emitter.on('click', this.$$onMapClick);
+      }
+    }
     return this.layer;
   }
 
   removeLayer() {
     const mapAdapter = this.options.webMap.mapAdapter;
+    if (this.$$onMapClick) {
+      this.options.webMap.emitter.off('click', this.$$onMapClick);
+    }
     this.getDependLayers().forEach((x) => {
       mapAdapter.removeLayer(x._layer);
     });
+    this.$$onMapClick = undefined;
+    delete this.options;
+    delete this.layer;
+    this._dependsLayers = [];
+    delete this.response;
+    delete this._webmapLayersIds;
+
   }
 
   showLayer() {
@@ -139,5 +173,53 @@ export class WebMapLayerAdapter implements BaseLayerAdapter {
       }
     }
     return item;
+  }
+
+  private async _getWebmapIds() {
+    const webMapItem = this.layer;
+    if (webMapItem && webMapItem.item.item_type === 'root') {
+      const layers = webMapItem.item.children;
+      const promises: Array<CancelablePromise<any>> = [];
+      layers.forEach((x) => {
+        if (x.item_type === 'layer') {
+          const id = x.layer_style_id;
+          promises.push(this.options.connector.get('resource.item', {}, { id }));
+        }
+      });
+      return Promise.all(promises);
+      // const id = item['layer_style_id']
+    }
+  }
+
+  // options is temporal to set list of layers id, because layers id is not item parameter now
+  private async _sendIdentifyRequest(ev: MapClickEvent, webMap: WebMap, options: { layers?: string[] } = {}) {
+
+    // webMap.emitter.emit('start-identify', { ev });
+    const geom = getCirclePoly(ev.latLng.lng, ev.latLng.lat, this.pixelRadius);
+    const polygon: number[] = [];
+
+    geom.forEach(([lng, lat]) => {
+      const [x, y] = degrees2meters(lng, lat);
+      polygon.push(y);
+      polygon.push(x);
+    });
+
+    const wkt = `POLYGON((${polygon.join(' ')}))`;
+
+    const layers: string[] = options.layers ? options.layers : this._webmapLayersIds.ids;
+
+    const data: IdentifyRequestOptions = {
+      geom: wkt,
+      srs: 3857,
+      layers,
+    };
+    return this.options.connector.post('feature_layer.identify', { data }).then((resp) => {
+      // webMap.emitter.emit('identify', { ev, data: resp });
+      return resp;
+    });
+  }
+
+  private _onMapClick(ev: MapClickEvent, webMap: WebMap) {
+    this._sendIdentifyRequest(ev, webMap);
   }
 }

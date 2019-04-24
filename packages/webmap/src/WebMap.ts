@@ -345,8 +345,8 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
     }
     if (adapterEngine) {
       const order = this._layersIds++;
-      const geojsonOptions = options as GeoJsonAdapterOptions;
-      this._updateGeoJsonOptions(geojsonOptions);
+      const geoJsonOptions = options as GeoJsonAdapterOptions;
+      this._updateGeoJsonOptions(geoJsonOptions);
 
       const { maxZoom, minZoom } = this.options;
 
@@ -382,8 +382,8 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
 
       layerId = _adapter.options.id;
       if (layerId) {
-        if (geojsonOptions.filter) {
-          this.filterLayer(_adapter, geojsonOptions.filter);
+        if (geoJsonOptions.filter) {
+          this.filterLayer(_adapter, geoJsonOptions.filter);
         }
         if (options.baseLayer) {
           this._baseLayers.push(layerId);
