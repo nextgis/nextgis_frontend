@@ -50,7 +50,7 @@ export class WebMapLayerAdapter implements BaseLayerAdapter {
       const ids = await this._getWebmapIds();
       if (ids) {
         this._webmapLayersIds.ids = ids.filter((x) => x !== undefined).map((x) => x.resource.parent.id);
-        this.$$onMapClick = (ev: MapClickEvent) => this._onMapClick(ev, this.options.webMap);
+        this.$$onMapClick = (ev: MapClickEvent) => this._onMapClick(ev);
         this.options.webMap.emitter.on('click', this.$$onMapClick);
       }
     }
@@ -192,19 +192,18 @@ export class WebMapLayerAdapter implements BaseLayerAdapter {
   }
 
   // options is temporal to set list of layers id, because layers id is not item parameter now
-  private async _sendIdentifyRequest(ev: MapClickEvent, webMap: WebMap, options: { layers?: string[] } = {}) {
+  private async _sendIdentifyRequest(ev: MapClickEvent, options: { layers?: string[] } = {}) {
 
     // webMap.emitter.emit('start-identify', { ev });
     const geom = getCirclePoly(ev.latLng.lng, ev.latLng.lat, this.pixelRadius);
-    const polygon: number[] = [];
+    const polygon: string[] = [];
 
     geom.forEach(([lng, lat]) => {
       const [x, y] = degrees2meters(lng, lat);
-      polygon.push(y);
-      polygon.push(x);
+      polygon.push(x + ' ' + y);
     });
 
-    const wkt = `POLYGON((${polygon.join(' ')}))`;
+    const wkt = `POLYGON((${polygon.join(', ')}))`;
 
     const layers: string[] = options.layers ? options.layers : this._webmapLayersIds.ids;
 
@@ -213,13 +212,17 @@ export class WebMapLayerAdapter implements BaseLayerAdapter {
       srs: 3857,
       layers,
     };
-    return this.options.connector.post('feature_layer.identify', { data }).then((resp) => {
-      // webMap.emitter.emit('identify', { ev, data: resp });
-      return resp;
-    });
+
+    return this.options.connector.post(
+      'feature_layer.identify',
+      { data }).then((resp) => {
+        // webMap.emitter.emit('identify', { ev, data: resp });
+        return resp;
+      });
+
   }
 
-  private _onMapClick(ev: MapClickEvent, webMap: WebMap) {
-    this._sendIdentifyRequest(ev, webMap);
+  private _onMapClick(ev: MapClickEvent) {
+    this._sendIdentifyRequest(ev);
   }
 }
