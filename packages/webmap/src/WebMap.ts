@@ -68,6 +68,7 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
 
   options: MapOptions = OPTIONS;
   // `WebMapEvents` must be `E` but its not work correct
+  // readonly emitter: StrictEventEmitter<EventEmitter, WebMapEvents> = new EventEmitter();
   readonly emitter: StrictEventEmitter<EventEmitter, WebMapEvents> = new EventEmitter();
   readonly keys = WebMap.keys;
   readonly mapAdapter: MapAdapter<M>;

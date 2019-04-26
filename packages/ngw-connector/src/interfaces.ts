@@ -4,6 +4,7 @@
 
 import { ResourceItem } from './types/ResourceItem';
 import { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
+import { FeatureLayersIdentify } from './types/FeatureLayer';
 
 export interface FileMeta {
   id: string;
@@ -62,6 +63,7 @@ export interface CreatedResource {
 
 export interface PostRequestItemsResponseMap extends RequestItemKeys {
   'resource.collection': CreatedResource;
+  'feature_layer.identify': FeatureLayersIdentify;
 }
 
 export interface Credentials {
