@@ -2,7 +2,7 @@
  * @module ngw-kit
  */
 
-import WebMap, { AdapterOptions, LayerAdaptersOptions } from '@nextgis/webmap';
+import WebMap, { AdapterOptions, LayerAdaptersOptions, WebMapEvents, MapClickEvent } from '@nextgis/webmap';
 import NgwConnector from '@nextgis/ngw-connector';
 
 export type NgwLayerAdapterType = 'IMAGE' | 'TILE' | 'GEOJSON';
@@ -103,4 +103,13 @@ export interface IdentifyRequestOptions {
   geom: string;
   srs: 3857;
   layers: string[];
+}
+
+export interface IdentifyEvent {
+  ev: MapClickEvent;
+  data:
+}
+
+export interface WebMapLayerAdapterEvents extends WebMapEvents {
+  identify: IdentifyEvent;
 }
