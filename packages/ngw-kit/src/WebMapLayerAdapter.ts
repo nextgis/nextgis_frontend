@@ -9,7 +9,18 @@ import {
 } from './utils';
 import { WebMapLayerItem } from './WebMapLayerItem';
 import { ItemOptions } from '@nextgis/item';
-import { TreeGroup, TreeLayer, NgwLayerAdapterType, WebMapAdapterOptions, IdentifyRequestOptions } from './interfaces';
+
+import StrictEventEmitter from 'strict-event-emitter-types';
+import { EventEmitter } from 'events';
+
+import {
+  TreeGroup,
+  TreeLayer,
+  NgwLayerAdapterType,
+  WebMapAdapterOptions,
+  IdentifyRequestOptions,
+  WebMapLayerAdapterEvents
+} from './interfaces';
 
 export class WebMapLayerAdapter implements BaseLayerAdapter {
 
@@ -19,7 +30,7 @@ export class WebMapLayerAdapter implements BaseLayerAdapter {
    * Radius for searching objects in pixels
    */
   pixelRadius = 10; // webmapSettings.identify_radius,
-
+  readonly emitter: StrictEventEmitter<EventEmitter, WebMapLayerAdapterEvents> = new EventEmitter();
   private resourceId?: number;
   private _dependsLayers: Array<TreeGroup | TreeLayer> = [];
   private response?: ResourceItem;
@@ -192,17 +203,17 @@ export class WebMapLayerAdapter implements BaseLayerAdapter {
   }
 
   // options is temporal to set list of layers id, because layers id is not item parameter now
-  private async _sendIdentifyRequest(ev: MapClickEvent, options: { layers?: string[] } = {}) {
+  private _sendIdentifyRequest(ev: MapClickEvent, options: { layers?: string[] } = {}) {
 
     // webMap.emitter.emit('start-identify', { ev });
     const geom = getCirclePoly(ev.latLng.lng, ev.latLng.lat, this.pixelRadius);
-    const polygon: string[] = [];
 
+    // create wkt string
+    const polygon: string[] = [];
     geom.forEach(([lng, lat]) => {
       const [x, y] = degrees2meters(lng, lat);
       polygon.push(x + ' ' + y);
     });
-
     const wkt = `POLYGON((${polygon.join(', ')}))`;
 
     const layers: string[] = options.layers ? options.layers : this._webmapLayersIds.ids;
@@ -213,13 +224,10 @@ export class WebMapLayerAdapter implements BaseLayerAdapter {
       layers,
     };
 
-    return this.options.connector.post(
-      'feature_layer.identify',
-      { data }).then((resp) => {
-        // webMap.emitter.emit('identify', { ev, data: resp });
-        return resp;
-      });
-
+    return this.options.connector.post('feature_layer.identify', { data }).then((resp) => {
+      this.emitter.emit('identify', { ev, data: resp });
+      return resp;
+    });
   }
 
   private _onMapClick(ev: MapClickEvent) {
