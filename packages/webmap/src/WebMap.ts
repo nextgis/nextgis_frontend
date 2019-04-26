@@ -8,7 +8,8 @@ import {
   VectorLayerAdapter,
   LayerAdapters,
   GetPaintFunction,
-  GeoJsonAdapterOptions
+  GeoJsonAdapterOptions,
+  GeoJsonAdapterLayerType
 } from './interfaces/LayerAdapter';
 import { LayerAdaptersOptions, LayerAdapter, OnLayerClickOptions } from './interfaces/LayerAdapter';
 import { MapAdapter, MapClickEvent, ControlPositions, FitOptions } from './interfaces/MapAdapter';
@@ -36,6 +37,8 @@ import { WebMapEvents } from './interfaces/Events';
 import { onLoad } from './util/decorators';
 import { deepmerge } from './util/deepmerge';
 import { preparePaint } from './util/preparePaint';
+import { detectGeometryType, findMostFrequentGeomType } from './util/geometryTypes';
+
 import { createButtonControl } from './components/controls/ButtonControl';
 import { createToggleControl } from './components/controls/ToggleControl';
 
@@ -56,13 +59,25 @@ const OPTIONS: MapOptions = {
   }
 };
 
+const typeAlias: { [x: string]: GeoJsonAdapterLayerType } = {
+  'Point': 'circle',
+  'LineString': 'line',
+  'MultiPoint': 'circle',
+  'Polygon': 'fill',
+  'MultiLineString': 'line',
+  'MultiPolygon': 'fill'
+};
+
 /**
  * @class WebMap
  */
 export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEvents> {
 
   static keys: Keys = new Keys();
-
+  static utils = {
+    detectGeometryType,
+    findMostFrequentGeomType
+  };
   static getPaintFunctions: { [name: string]: GetPaintFunction };
   static decorators = { onLoad };
 
@@ -838,6 +853,24 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
     });
   }
 
+  protected _updateGeojsonAdapterOptions(opt: GeoJsonAdapterOptions): GeoJsonAdapterOptions {
+    if (opt.data) {
+      const geomType = typeAlias[detectGeometryType(opt.data)];
+      const p = opt.paint;
+      if (typeof p === 'object') {
+        // define parameter if not specified
+        p.type = p.type ? p.type :
+          (geomType === 'fill' || geomType === 'line') ?
+            'path' :
+            ('html' in p || 'className' in p) ?
+              'icon' :
+              geomType;
+      }
+      opt.type = geomType;
+    }
+    return opt;
+  }
+
   private async _setupMap() {
 
     await this.mapAdapter.create(this.options);
@@ -882,7 +915,6 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
   }
 
   private async _onLoadSync() {
-
     for await (const kit of this._starterKits) {
       if (kit.onLoadSync) {
         try {
