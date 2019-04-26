@@ -6,7 +6,6 @@ import WebMap, {
   StarterKit,
   ControlPositions,
   GeoJsonAdapterOptions,
-  GeoJsonAdapterLayerType,
   MapControls,
   LayerAdaptersOptions,
   Type,
@@ -19,7 +18,7 @@ import NgwKit, { NgwLayerOptions } from '@nextgis/ngw-kit';
 import { getIcon } from '@nextgis/icons';
 
 import { onMapLoad } from './decorators';
-import { fixUrlStr, deepmerge, detectGeometryType, createAsyncAdapter } from './utils';
+import { fixUrlStr, deepmerge, createAsyncAdapter } from './utils';
 // @ts-ignore
 import { toWgs84 } from 'reproject';
 import { GeoJsonObject } from 'geojson';
@@ -28,15 +27,6 @@ import { NgwMapOptions, ControlOptions, NgwMapEvents } from './interfaces';
 const epsg = {
   // tslint:disable-next-line:max-line-length
   'EPSG:3857': '+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext  +no_defs'
-};
-
-const typeAlias: { [x: string]: GeoJsonAdapterLayerType } = {
-  'Point': 'circle',
-  'LineString': 'line',
-  'MultiPoint': 'circle',
-  'Polygon': 'fill',
-  'MultiLineString': 'line',
-  'MultiPolygon': 'fill'
 };
 
 const OPTIONS: NgwMapOptions = {
@@ -90,8 +80,8 @@ function prepareWebMapOptions(mapAdapter: MapAdapter, options: NgwMapOptions) {
  */
 export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEvents> {
 
-  static utils = { fixUrlStr };
-  static decorators = { onMapLoad, onLoad: WebMap.decorators.onLoad };
+  static utils = { ...WebMap.utils, fixUrlStr };
+  static decorators = { onMapLoad, ...WebMap.decorators };
   static getIcon = getIcon;
   static toWgs84 = (geojson: GeoJsonObject) => toWgs84(geojson, epsg['EPSG:3857'], epsg);
 
@@ -268,7 +258,7 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
    * ```
    */
   // @onMapLoad()
-  addGeoJsonLayer<K extends keyof LayerAdaptersOptions>(
+  async addGeoJsonLayer<K extends keyof LayerAdaptersOptions>(
     opt: GeoJsonAdapterOptions,
     adapter?: K | Type<LayerAdapter>) {
 
@@ -279,10 +269,9 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
       opt = this._updateGeojsonAdapterOptions(opt);
     }
     opt.paint = opt.paint || {};
-    return this.addLayer(adapter || 'GEOJSON', opt).then((layer) => {
-      this.showLayer(layer);
-      return layer;
-    });
+    const layer = await this.addLayer(adapter || 'GEOJSON', opt);
+    this.showLayer(layer);
+    return layer;
   }
 
   /**
@@ -324,24 +313,6 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
 
   onLoad(event: keyof NgwMapEvents = 'ngw-map:create'): Promise<this> {
     return super.onLoad(event as keyof WebMapEvents);
-  }
-
-  private _updateGeojsonAdapterOptions(opt: GeoJsonAdapterOptions): GeoJsonAdapterOptions {
-    if (opt.data) {
-      const geomType = typeAlias[detectGeometryType(opt.data)];
-      const p = opt.paint;
-      if (typeof p === 'object') {
-        // define parameter if not specified
-        p.type = p.type ? p.type :
-          (geomType === 'fill' || geomType === 'line') ?
-            'path' :
-            ('html' in p || 'className' in p) ?
-              'icon' :
-              geomType;
-      }
-      opt.type = geomType;
-    }
-    return opt;
   }
 
   private _fitNgwLayerExtend(id: number) {
