@@ -480,6 +480,73 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
   }
 
   /**
+   * Create layer from GeoJson data. Set style and behavior for selection.
+   *
+   * @example
+   * ```javascript
+   * // Add simple layer
+   * ngwMap.addGeoJsonLayer({ data: geojson, paint: { color: 'red' } });
+   *
+   * // Add styled by feature property layer with selection behavior
+   * ngwMap.addGeoJsonLayer({
+   *   data: geojson,
+   *   paint: function (feature) {
+   *     return { color: feature.properties.color, opacity: 0.5 }
+   *   },
+   *  selectedPaint: function (feature) {
+   *    return { color: feature.properties.selcolor, opacity: 1 }
+   *  },
+   *  selectable: true,
+   *  multiselect: true
+   * });
+   *
+   * // Add marker layer styled with use [Icons](icons)
+   * ngwMap.addGeoJsonLayer({ data: geojson, paint: NgwMap.getIcon({ color: 'orange' })});
+   *
+   * // work with added layer
+   * const layer = ngwMap.addGeoJsonLayer({ data: geojson, id: 'my_layer_name'});
+   * // access layer by id
+   * ngwMap.showLayer('my_layer_name');
+   * // or access layer by instance
+   * ngwMap.showLayer(layer);
+   * ```
+   */
+  // @onMapLoad()
+  async addGeoJsonLayer<K extends keyof LayerAdaptersOptions>(
+    opt: GeoJsonAdapterOptions,
+    adapter?: K | Type<LayerAdapter>) {
+
+    opt = opt || {};
+    opt.multiselect = opt.multiselect !== undefined ? opt.multiselect : false;
+    opt.unselectOnSecondClick = opt.unselectOnSecondClick !== undefined ? opt.unselectOnSecondClick : true;
+    if (!adapter) {
+      opt = this._updateGeojsonAdapterOptions(opt);
+    }
+    opt.paint = opt.paint || {};
+    const layer = await this.addLayer(adapter || 'GEOJSON', opt);
+    this.showLayer(layer);
+    return layer;
+  }
+
+  _updateGeojsonAdapterOptions(opt: GeoJsonAdapterOptions): GeoJsonAdapterOptions {
+    if (opt.data) {
+      const geomType = typeAlias[detectGeometryType(opt.data)];
+      const p = opt.paint;
+      if (typeof p === 'object') {
+        // define parameter if not specified
+        p.type = p.type ? p.type :
+          (geomType === 'fill' || geomType === 'line') ?
+            'path' :
+            ('html' in p || 'className' in p) ?
+              'icon' :
+              geomType;
+      }
+      opt.type = geomType;
+    }
+    return opt;
+  }
+
+  /**
    * Show added layer on the map by it definition.
    */
   showLayer(layerDef: LayerDef) {
@@ -851,24 +918,6 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
         });
       }
     });
-  }
-
-  protected _updateGeojsonAdapterOptions(opt: GeoJsonAdapterOptions): GeoJsonAdapterOptions {
-    if (opt.data) {
-      const geomType = typeAlias[detectGeometryType(opt.data)];
-      const p = opt.paint;
-      if (typeof p === 'object') {
-        // define parameter if not specified
-        p.type = p.type ? p.type :
-          (geomType === 'fill' || geomType === 'line') ?
-            'path' :
-            ('html' in p || 'className' in p) ?
-              'icon' :
-              geomType;
-      }
-      opt.type = geomType;
-    }
-    return opt;
   }
 
   private async _setupMap() {

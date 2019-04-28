@@ -18,16 +18,9 @@ import NgwKit, { NgwLayerOptions } from '@nextgis/ngw-kit';
 import { getIcon } from '@nextgis/icons';
 
 import { onMapLoad } from './decorators';
-import { fixUrlStr, deepmerge, createAsyncAdapter } from './utils';
-// @ts-ignore
-import { toWgs84 } from 'reproject';
-import { GeoJsonObject } from 'geojson';
-import { NgwMapOptions, ControlOptions, NgwMapEvents } from './interfaces';
+import { fixUrlStr, deepmerge } from './utils';
 
-const epsg = {
-  // tslint:disable-next-line:max-line-length
-  'EPSG:3857': '+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext  +no_defs'
-};
+import { NgwMapOptions, ControlOptions, NgwMapEvents } from './interfaces';
 
 const OPTIONS: NgwMapOptions = {
   target: 'map',
@@ -83,7 +76,7 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
   static utils = { ...WebMap.utils, fixUrlStr };
   static decorators = { onMapLoad, ...WebMap.decorators };
   static getIcon = getIcon;
-  static toWgs84 = (geojson: GeoJsonObject) => toWgs84(geojson, epsg['EPSG:3857'], epsg);
+  static toWgs84 = NgwKit.utils.toWgs84;
 
   options: NgwMapOptions<C> = {};
   connector: NgwConnector;
@@ -177,101 +170,15 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
     if (!options.resourceId) {
       throw new Error('resourceId is required parameter to add NGW layer');
     }
-
-    if (options.adapter === 'GEOJSON') {
-      const geojsonAdapterCb = this.connector.makeQuery('/api/resource/{id}/geojson', {
-        id: options.resourceId
-      });
-      const adapter = createAsyncAdapter(
-        'GEOJSON',
-        geojsonAdapterCb,
-        this.mapAdapter,
-        (data) => {
-          data = NgwMap.toWgs84(data);
-          const geoJsonOptions: GeoJsonAdapterOptions = {
-            data,
-          };
-          if (options.id) {
-            geoJsonOptions.id = options.id;
-          }
-          return this._updateGeojsonAdapterOptions(geoJsonOptions);
-        });
-      const layer = await this.addGeoJsonLayer(
-        options.adapterOptions || {},
-        adapter
-      );
+    if (this.options.baseUrl) {
+      const layer = await NgwKit.utils.addNgwLayer(options, this, this.options.baseUrl, this.connector);
       const id = layer && this.getLayerId(layer);
-      if (id) {
+      if (layer && id) {
         this._ngwLayers[id] = { layer, resourceId: options.resourceId };
-        return layer;
+        this.showLayer(layer);
       }
-    } else if (this.options.baseUrl) {
-
-      const headers = this.connector.getAuthorizationHeaders();
-      if (headers) {
-        options.headers = headers;
-      }
-      const adapter = NgwKit.addNgwLayer(options, this, this.options.baseUrl);
-      if (adapter) {
-        return adapter.then((layer) => {
-          const id = layer && this.getLayerId(layer);
-          if (layer && id) {
-            this._ngwLayers[id] = { layer, resourceId: options.resourceId };
-            this.showLayer(layer);
-            return layer;
-          }
-        });
-      }
+      return layer;
     }
-  }
-
-  /**
-   * Create layer from GeoJson data. Set style and behavior for selection.
-   *
-   * @example
-   * ```javascript
-   * // Add simple layer
-   * ngwMap.addGeoJsonLayer({ data: geojson, paint: { color: 'red' } });
-   *
-   * // Add styled by feature property layer with selection behavior
-   * ngwMap.addGeoJsonLayer({
-   *   data: geojson,
-   *   paint: function (feature) {
-   *     return { color: feature.properties.color, opacity: 0.5 }
-   *   },
-   *  selectedPaint: function (feature) {
-   *    return { color: feature.properties.selcolor, opacity: 1 }
-   *  },
-   *  selectable: true,
-   *  multiselect: true
-   * });
-   *
-   * // Add marker layer styled with use [Icons](icons)
-   * ngwMap.addGeoJsonLayer({ data: geojson, paint: NgwMap.getIcon({ color: 'orange' })});
-   *
-   * // work with added layer
-   * const layer = ngwMap.addGeoJsonLayer({ data: geojson, id: 'my_layer_name'});
-   * // access layer by id
-   * ngwMap.showLayer('my_layer_name');
-   * // or access layer by instance
-   * ngwMap.showLayer(layer);
-   * ```
-   */
-  // @onMapLoad()
-  async addGeoJsonLayer<K extends keyof LayerAdaptersOptions>(
-    opt: GeoJsonAdapterOptions,
-    adapter?: K | Type<LayerAdapter>) {
-
-    opt = opt || {};
-    opt.multiselect = opt.multiselect !== undefined ? opt.multiselect : false;
-    opt.unselectOnSecondClick = opt.unselectOnSecondClick !== undefined ? opt.unselectOnSecondClick : true;
-    if (!adapter) {
-      opt = this._updateGeojsonAdapterOptions(opt);
-    }
-    opt.paint = opt.paint || {};
-    const layer = await this.addLayer(adapter || 'GEOJSON', opt);
-    this.showLayer(layer);
-    return layer;
   }
 
   /**
