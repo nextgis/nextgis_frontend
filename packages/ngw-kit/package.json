@@ -11,6 +11,7 @@
     "@nextgis/ngw-connector": "^0.14.14",
     "@nextgis/webmap": "^0.14.14",
     "@types/events": "^3.0.0",
+    "reproject": "^1.2.4",
     "strict-event-emitter-types": "^2.0.0"
   },
   "devDependencies": {

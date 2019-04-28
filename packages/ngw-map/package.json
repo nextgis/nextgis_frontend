@@ -12,8 +12,7 @@
     "@nextgis/ngw-kit": "^0.14.14",
     "@nextgis/qms-kit": "^0.14.14",
     "@nextgis/webmap": "^0.14.14",
-    "events": "^3.0.0",
-    "reproject": "^1.2.4"
+    "events": "^3.0.0"
   },
   "devDependencies": {
     "@types/events": "^3.0.0",
