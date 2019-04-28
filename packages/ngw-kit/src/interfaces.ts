@@ -4,6 +4,7 @@
 
 import WebMap, { AdapterOptions, LayerAdaptersOptions, WebMapEvents, MapClickEvent } from '@nextgis/webmap';
 import NgwConnector from '@nextgis/ngw-connector';
+import { FeatureLayersIdentify } from '@nextgis/ngw-connector';
 
 export type NgwLayerAdapterType = 'IMAGE' | 'TILE' | 'GEOJSON';
 
@@ -107,7 +108,7 @@ export interface IdentifyRequestOptions {
 
 export interface IdentifyEvent {
   ev: MapClickEvent;
-  data:
+  data: FeatureLayersIdentify;
 }
 
 export interface WebMapLayerAdapterEvents extends WebMapEvents {

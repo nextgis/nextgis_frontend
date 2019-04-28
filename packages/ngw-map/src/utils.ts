@@ -55,20 +55,3 @@ export function deepmerge(target: any, src: any, mergeArray = false) {
   }
   return dst;
 }
-
-export function createAsyncAdapter<T extends string = string>(
-  type: T, loadFunction: CancelablePromise<any>, map: MapAdapter, onLoad: (data: any) => any): Type<LayerAdapter> {
-
-  const webMapAdapter = map.layerAdapters[type] as Type<BaseLayerAdapter>;
-
-  return class Adapter extends webMapAdapter {
-    addLayer(options: any) {
-      return loadFunction.then((data) => onLoad(data)).then((opt) => {
-        return super.addLayer({ ...options, ...opt });
-      });
-    }
-    beforeRemove() {
-      loadFunction.cancel();
-    }
-  };
-}

@@ -1,7 +1,26 @@
-import WebMap, { LayerAdapter, Type, ImageAdapterOptions, TileAdapterOptions } from '@nextgis/webmap';
+import WebMap, {
+  LayerAdapter,
+  Type,
+  ImageAdapterOptions,
+  TileAdapterOptions,
+  GeoJsonAdapterOptions
+} from '@nextgis/webmap';
+import { createAsyncAdapter } from './createAsyncAdapter';
 import { NgwLayerOptions, WebMapAdapterOptions } from './interfaces';
 import { WebMapLayerAdapter } from './WebMapLayerAdapter';
-import NgwConnector from '@nextgis/ngw-connector';
+import NgwConnector, { ResourceCls } from '@nextgis/ngw-connector';
+// @ts-ignore
+import { toWgs84 as WGS84 } from 'reproject';
+import { GeoJsonObject } from 'geojson';
+
+const epsg = {
+  // tslint:disable-next-line:max-line-length
+  'EPSG:3857': '+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext  +no_defs'
+};
+
+export function toWgs84(geojson: GeoJsonObject) {
+  return WGS84(geojson, epsg['EPSG:3857'], epsg);
+}
 
 export function fixUrlStr(url: string) {
   // remove double slash
@@ -42,10 +61,24 @@ export function getLayerAdapterOptions(options: NgwLayerOptions, webMap: WebMap,
   }
 }
 
-export function addNgwLayer(
+const styles: ResourceCls[] = ['mapserver_style', 'qgis_vector_style', 'raster_style'];
+
+async function _getLayerAdapter(
   options: NgwLayerOptions,
   webMap: WebMap,
-  baseUrl: string): Promise<LayerAdapter | undefined> | undefined {
+  baseUrl: string,
+  connector: NgwConnector): Promise<LayerAdapter | undefined> {
+
+  const item = await connector.get('resource.item', null, { id: options.resourceId });
+  if (item.webmap) {
+    // TODO: add webmap adapter
+    return undefined;
+  } else if (styles.indexOf(item.resource.cls) !== -1) {
+    if (options.adapter === 'GEOJSON') {
+      // TODO: get style parent vector layer with geojson data
+      return undefined;
+    }
+  }
 
   let adapter = options.adapter || 'IMAGE';
   const layerAdapters = webMap.getLayerAdapters();
@@ -65,6 +98,46 @@ export function addNgwLayer(
     }
   } else {
     throw new Error(adapter + ' not supported yet. Only TILE');
+  }
+}
+
+export async function addNgwLayer(options: NgwLayerOptions,
+  webMap: WebMap,
+  baseUrl: string,
+  connector: NgwConnector): Promise<LayerAdapter | undefined> {
+  if (options.adapter === 'GEOJSON') {
+    const geojsonAdapterCb = connector.makeQuery('/api/resource/{id}/geojson', {
+      id: options.resourceId
+    });
+    const adapter = createAsyncAdapter(
+      'GEOJSON',
+      geojsonAdapterCb,
+      webMap.mapAdapter,
+      (data) => {
+        data = toWgs84(data);
+        const geoJsonOptions: GeoJsonAdapterOptions = {
+          data,
+        };
+        if (options.id) {
+          geoJsonOptions.id = options.id;
+        }
+        return webMap._updateGeojsonAdapterOptions(geoJsonOptions);
+      });
+    const layer = await webMap.addGeoJsonLayer(
+      options.adapterOptions || {},
+      adapter
+    );
+    return layer;
+  } else if (baseUrl) {
+
+    const headers = connector.getAuthorizationHeaders();
+    if (headers) {
+      options.headers = headers;
+    }
+    const adapter = _getLayerAdapter(options, webMap, baseUrl, connector);
+    if (adapter) {
+      return adapter;
+    }
   }
 }
 
