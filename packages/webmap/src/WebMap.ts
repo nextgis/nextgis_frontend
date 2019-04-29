@@ -9,7 +9,8 @@ import {
   LayerAdapters,
   GetPaintFunction,
   GeoJsonAdapterOptions,
-  GeoJsonAdapterLayerType
+  GeoJsonAdapterLayerType,
+  AdapterConstructor
 } from './interfaces/LayerAdapter';
 import { LayerAdaptersOptions, LayerAdapter, OnLayerClickOptions } from './interfaces/LayerAdapter';
 import { MapAdapter, MapClickEvent, ControlPositions, FitOptions } from './interfaces/MapAdapter';
@@ -350,16 +351,22 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
    * ```
    */
   async addLayer<K extends keyof LayerAdapters, O extends AdapterOptions = AdapterOptions>(
-    adapter: K | Type<LayerAdapters[K]>,
+    adapter: K | Type<LayerAdapters[K]> | AdapterConstructor,
     options: O | LayerAdaptersOptions[K]): Promise<LayerAdapter> {
 
-    let adapterEngine: Type<LayerAdapter>;
+    let adapterEngine: Type<LayerAdapter> | undefined;
     if (typeof adapter === 'string') {
       adapterEngine = this.getLayerAdapter(adapter);
-    } else {
-      adapterEngine = adapter as Type<LayerAdapter>;
+    } else if (typeof adapter === 'function') {
+      try {
+        const adapterConstructor = adapter as AdapterConstructor;
+        const adapterConstructorPromise = adapterConstructor();
+        adapterEngine = await adapterConstructorPromise;
+      } catch (er) {
+        adapterEngine = adapter as Type<LayerAdapter>;
+      }
     }
-    if (adapterEngine) {
+    if (adapterEngine !== undefined) {
       const order = this._layersIds++;
       const geoJsonOptions = options as GeoJsonAdapterOptions;
       this._updateGeoJsonOptions(geoJsonOptions);

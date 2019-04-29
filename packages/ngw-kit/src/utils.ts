@@ -1,14 +1,11 @@
 import WebMap, {
-  LayerAdapter,
   Type,
-  ImageAdapterOptions,
-  TileAdapterOptions,
-  GeoJsonAdapterOptions
+  AdapterConstructor
 } from '@nextgis/webmap';
+import NgwConnector from '@nextgis/ngw-connector';
 import { createAsyncAdapter } from './createAsyncAdapter';
 import { NgwLayerOptions, WebMapAdapterOptions } from './interfaces';
 import { WebMapLayerAdapter } from './WebMapLayerAdapter';
-import NgwConnector, { ResourceCls } from '@nextgis/ngw-connector';
 // @ts-ignore
 import { toWgs84 as WGS84 } from 'reproject';
 import { GeoJsonObject } from 'geojson';
@@ -61,84 +58,17 @@ export function getLayerAdapterOptions(options: NgwLayerOptions, webMap: WebMap,
   }
 }
 
-const styles: ResourceCls[] = ['mapserver_style', 'qgis_vector_style', 'raster_style'];
-
-async function _getLayerAdapter(
-  options: NgwLayerOptions,
+export function addNgwLayer(options: NgwLayerOptions,
   webMap: WebMap,
   baseUrl: string,
-  connector: NgwConnector): Promise<LayerAdapter | undefined> {
+  connector: NgwConnector): AdapterConstructor {
 
-  const item = await connector.get('resource.item', null, { id: options.resourceId });
-  if (item.webmap) {
-    // TODO: add webmap adapter
-    return undefined;
-  } else if (styles.indexOf(item.resource.cls) !== -1) {
-    if (options.adapter === 'GEOJSON') {
-      // TODO: get style parent vector layer with geojson data
-      return undefined;
-    }
+  const headers = connector.getAuthorizationHeaders();
+  if (headers) {
+    options.headers = headers;
   }
 
-  let adapter = options.adapter || 'IMAGE';
-  const layerAdapters = webMap.getLayerAdapters();
-  const isImageAllowed = layerAdapters ? layerAdapters.IMAGE : true;
-  if (!isImageAllowed) {
-    adapter = 'TILE';
-  }
-  if (adapter === 'IMAGE' || adapter === 'TILE') {
-    const opt = getLayerAdapterOptions(options, webMap, baseUrl);
-    if (opt) {
-      if (opt.resourceId) {
-        const layerAdapterOptions: ImageAdapterOptions = { ...opt, resourceId: opt.resourceId };
-        return webMap.addLayer(adapter, layerAdapterOptions);
-      }
-      const tileAdapterOptions: TileAdapterOptions = opt;
-      return webMap.addLayer(adapter, tileAdapterOptions);
-    }
-  } else {
-    throw new Error(adapter + ' not supported yet. Only TILE');
-  }
-}
-
-export async function addNgwLayer(options: NgwLayerOptions,
-  webMap: WebMap,
-  baseUrl: string,
-  connector: NgwConnector): Promise<LayerAdapter | undefined> {
-  if (options.adapter === 'GEOJSON') {
-    const geojsonAdapterCb = connector.makeQuery('/api/resource/{id}/geojson', {
-      id: options.resourceId
-    });
-    const adapter = createAsyncAdapter(
-      'GEOJSON',
-      geojsonAdapterCb,
-      webMap.mapAdapter,
-      (data) => {
-        data = toWgs84(data);
-        const geoJsonOptions: GeoJsonAdapterOptions = {
-          data,
-        };
-        if (options.id) {
-          geoJsonOptions.id = options.id;
-        }
-        return webMap._updateGeojsonAdapterOptions(geoJsonOptions);
-      });
-    const layer = await webMap.addGeoJsonLayer(
-      options.adapterOptions || {},
-      adapter
-    );
-    return layer;
-  } else if (baseUrl) {
-
-    const headers = connector.getAuthorizationHeaders();
-    if (headers) {
-      options.headers = headers;
-    }
-    const adapter = _getLayerAdapter(options, webMap, baseUrl, connector);
-    if (adapter) {
-      return adapter;
-    }
-  }
+  return () => createAsyncAdapter(options, webMap, baseUrl, connector);
 }
 
 const d2r = Math.PI / 180; // degrees to radians
