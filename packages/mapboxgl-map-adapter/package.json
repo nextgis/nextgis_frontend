@@ -9,16 +9,16 @@
   "dependencies": {
     "@nextgis/webmap": "^0.14.14",
     "events": "^3.0.0",
-    "mapbox-gl": "0.53.1"
+    "mapbox-gl": "0.54.0"
   },
   "optionalDependencies": {
     "canvg": "^1.5.3"
   },
   "devDependencies": {
     "@types/events": "^3.0.0",
-    "@types/node": "^11.13.7",
+    "@types/node": "^11.13.8",
     "rimraf": "^2.6.3",
-    "ts-loader": "^5.4.3",
+    "ts-loader": "^5.4.4",
     "tslint": "^5.16.0",
     "tslint-webpack-plugin": "^2.0.4",
     "typescript": "^3.4.5",
