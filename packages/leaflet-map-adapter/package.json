@@ -10,7 +10,7 @@
     "@nextgis/webmap": "^0.14.14",
     "@types/events": "^3.0.0",
     "@types/leaflet": "^1.4.4",
-    "@types/node": "^11.13.7",
+    "@types/node": "^11.13.8",
     "events": "^3.0.0",
     "geojson": "^0.5.0",
     "leaflet": "^1.4.0",
@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "rimraf": "^2.6.3",
-    "ts-loader": "^5.4.3",
+    "ts-loader": "^5.4.4",
     "tslint": "^5.16.0",
     "tslint-webpack-plugin": "^2.0.4",
     "typescript": "^3.4.5",
