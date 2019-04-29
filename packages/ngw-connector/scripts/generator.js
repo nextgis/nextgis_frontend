@@ -4,8 +4,8 @@
 const index = require('../lib/ngw-connector');
 const args = require('minimist')(process.argv.slice(2));
 const Ngw = index.Ngw;
-// TODO: use something like http://api.nextgis.com to get all awailabe data
-//       from current version on instelled NGW Server API
+// TODO: use something like http://api.nextgis.com to get all available data
+//       from current version on installed NGW Server API
 let baseUrl = 'http://geonote.nextgis.com';
 
 const typePath = 'src/types/RequestItemsParamsMap.ts';
