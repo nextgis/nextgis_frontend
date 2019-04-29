@@ -180,7 +180,6 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     }
   }
 
-  // TODO: need optimization, something like throttle
   setLayerOrder(layerIds: string[], order: number, layers: { [x: string]: TLayerAdapter }): void {
     if (this._sortTimerId) {
       window.clearTimeout(this._sortTimerId);
