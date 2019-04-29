@@ -1,8 +1,8 @@
 import NgwConnector, { ResourceCls } from '@nextgis/ngw-connector';
-import WebMap, { LayerAdapter, Type, GeoJsonAdapterOptions, VectorLayerAdapter } from '@nextgis/webmap';
+import WebMap, { LayerAdapter, Type } from '@nextgis/webmap';
 import { NgwLayerOptions } from './interfaces';
-import { toWgs84 } from './utils';
-import { GeoJsonObject } from 'geojson';
+
+import { createGeoJsonAdapter } from './createGeoJsonAdapter';
 import { createRasterAdapter } from './createRasterAdapter';
 
 const styles: ResourceCls[] = ['mapserver_style', 'qgis_vector_style', 'raster_style'];
@@ -33,37 +33,4 @@ export async function createAsyncAdapter(
     return createGeoJsonAdapter(options, webMap, connector);
   }
 
-}
-
-async function createGeoJsonAdapter(
-  options: NgwLayerOptions,
-  webMap: WebMap,
-  connector: NgwConnector) {
-
-  const adapter = webMap.mapAdapter.layerAdapters['GEOJSON'] as Type<VectorLayerAdapter>;
-
-  const geoJsonAdapterCb = connector.makeQuery('/api/resource/{id}/geojson', {
-    id: options.resourceId
-  });
-
-  const onLoad = (data: GeoJsonObject) => {
-    data = toWgs84(data);
-    const geoJsonOptions: GeoJsonAdapterOptions = {
-      data,
-    };
-    if (options.id) {
-      geoJsonOptions.id = options.id;
-    }
-    return webMap._updateGeojsonAdapterOptions(geoJsonOptions);
-  };
-  return class Adapter extends adapter {
-    async addLayer(options: any) {
-      const data = await geoJsonAdapterCb;
-      const opt = onLoad(data);
-      return super.addLayer({ ...options, ...opt });
-    }
-    beforeRemove() {
-      geoJsonAdapterCb.cancel();
-    }
-  };
 }

@@ -13,11 +13,11 @@
   },
   "devDependencies": {
     "@types/events": "^3.0.0",
-    "@types/node": "^11.13.7",
+    "@types/node": "^11.13.8",
     "@types/ol": "^4.6.5",
     "css-loader": "^2.1.1",
     "style-loader": "^0.23.1",
-    "ts-loader": "^5.4.3",
+    "ts-loader": "^5.4.4",
     "tslint": "^5.16.0",
     "tslint-webpack-plugin": "^2.0.4",
     "typescript": "^3.4.5",
