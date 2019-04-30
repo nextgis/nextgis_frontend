@@ -1,6 +1,7 @@
 import WebMap, {
   Type,
-  AdapterConstructor
+  AdapterConstructor,
+  LayerAdapter
 } from '@nextgis/webmap';
 import NgwConnector from '@nextgis/ngw-connector';
 import { createAsyncAdapter } from './createAsyncAdapter';
@@ -61,14 +62,14 @@ export function getLayerAdapterOptions(options: NgwLayerOptions, webMap: WebMap,
 export function addNgwLayer(options: NgwLayerOptions,
   webMap: WebMap,
   baseUrl: string,
-  connector: NgwConnector): AdapterConstructor {
+  connector: NgwConnector): Promise<Type<LayerAdapter> | undefined> {
 
   const headers = connector.getAuthorizationHeaders();
   if (headers) {
     options.headers = headers;
   }
 
-  return () => createAsyncAdapter(options, webMap, baseUrl, connector);
+  return createAsyncAdapter(options, webMap, baseUrl, connector);
 }
 
 const d2r = Math.PI / 180; // degrees to radians
