@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/webmap",
-  "version": "0.14.14",
+  "version": "0.15.0",
   "_priority": 14,
   "description": "",
   "main": "lib/webmap.js",
@@ -13,9 +13,9 @@
   },
   "devDependencies": {
     "@types/events": "^3.0.0",
-    "@types/node": "^11.13.7",
+    "@types/node": "^11.13.8",
     "rimraf": "^2.6.3",
-    "ts-loader": "^5.4.3",
+    "ts-loader": "^5.4.4",
     "tslint": "^5.16.0",
     "tslint-webpack-plugin": "^2.0.4",
     "typescript": "^3.4.5",

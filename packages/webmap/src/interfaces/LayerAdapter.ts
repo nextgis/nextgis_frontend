@@ -3,7 +3,9 @@
  */
 
 import { GeoJsonObject, Feature } from 'geojson';
-import { LatLng, LngLatBoundsArray } from './BaseTypes';
+import { LatLng, LngLatBoundsArray, Type } from './BaseTypes';
+
+export type AdapterConstructor = () => Promise<Type<LayerAdapter> | undefined>;
 
 export interface OnLayerClickOptions {
   layer: LayerAdapter;

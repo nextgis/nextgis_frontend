@@ -9,7 +9,8 @@ import {
   LayerAdapters,
   GetPaintFunction,
   GeoJsonAdapterOptions,
-  GeoJsonAdapterLayerType
+  GeoJsonAdapterLayerType,
+  AdapterConstructor
 } from './interfaces/LayerAdapter';
 import { LayerAdaptersOptions, LayerAdapter, OnLayerClickOptions } from './interfaces/LayerAdapter';
 import { MapAdapter, MapClickEvent, ControlPositions, FitOptions } from './interfaces/MapAdapter';
@@ -351,24 +352,25 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
    */
   async addLayer<K extends keyof LayerAdapters, O extends AdapterOptions = AdapterOptions>(
     adapter: K | Type<LayerAdapters[K]>,
-    options: O | LayerAdaptersOptions[K]): Promise<LayerAdapter> {
+    options: O | LayerAdaptersOptions[K],
+    order?: number): Promise<LayerAdapter> {
 
-    let adapterEngine: Type<LayerAdapter>;
+    const _order = order || this._layersIds++;
+    let adapterEngine: Type<LayerAdapter> | undefined;
     if (typeof adapter === 'string') {
       adapterEngine = this.getLayerAdapter(adapter);
-    } else {
+    } else if (typeof adapter === 'function') {
       adapterEngine = adapter as Type<LayerAdapter>;
     }
-    if (adapterEngine) {
-      const order = this._layersIds++;
+    if (adapterEngine !== undefined) {
       const geoJsonOptions = options as GeoJsonAdapterOptions;
       this._updateGeoJsonOptions(geoJsonOptions);
 
       const { maxZoom, minZoom } = this.options;
 
       options = {
-        id: String(order),
-        order,
+        id: String(_order),
+        order: _order,
         maxZoom,
         minZoom,
         ...options
@@ -419,6 +421,21 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
       this.emitter.emit('layer:add', _adapter);
       return _adapter;
 
+    }
+    return Promise.reject('No adapter');
+  }
+
+  async addLayerFromAsyncAdapter<K extends keyof LayerAdapters, O extends AdapterOptions = AdapterOptions>(
+    adapter: AdapterConstructor,
+    options: O | LayerAdaptersOptions[K],
+    order?: number
+  ): Promise<LayerAdapter>  {
+    const _order = order || this._layersIds++;
+    const adapterConstructor = adapter as AdapterConstructor;
+    const adapterConstructorPromise = adapterConstructor();
+    const adapterEngine = await adapterConstructorPromise;
+    if (adapterEngine) {
+      return this.addLayer(adapterEngine, options, _order);
     }
     return Promise.reject('No adapter');
   }
