@@ -171,8 +171,8 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
       throw new Error('resourceId is required parameter to add NGW layer');
     }
     if (this.options.baseUrl) {
-      const adapter = await NgwKit.utils.addNgwLayer(options, this, this.options.baseUrl, this.connector);
-      const layer = await this.addLayerFromAsyncAdapter(adapter, options.adapterOptions || {});
+      const adapter = NgwKit.utils.addNgwLayer(options, this, this.options.baseUrl, this.connector);
+      const layer = await this.addLayer(adapter, options.adapterOptions || {});
       const id = layer && this.getLayerId(layer);
       if (layer && id) {
         this._ngwLayers[id] = { layer, resourceId: options.resourceId };
