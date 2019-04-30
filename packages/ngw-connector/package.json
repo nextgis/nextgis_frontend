@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/ngw-connector",
-  "version": "0.14.14",
+  "version": "0.15.0",
   "_priority": 12,
   "description": "Module for interaction with NGW (NextGis Web) server API",
   "main": "lib/ngw-connector.js",
@@ -11,9 +11,9 @@
   },
   "devDependencies": {
     "@types/events": "^3.0.0",
-    "@types/node": "^11.13.7",
+    "@types/node": "^11.13.8",
     "rimraf": "^2.6.3",
-    "ts-loader": "^5.4.3",
+    "ts-loader": "^5.4.4",
     "tslint": "^5.16.0",
     "typescript": "^3.4.5",
     "webpack": "^4.30.0",

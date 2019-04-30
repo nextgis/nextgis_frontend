@@ -1,12 +1,3 @@
-import { GeoJsonObject, GeoJsonGeometryTypes, FeatureCollection, GeometryCollection, Feature } from 'geojson';
-import {
-  MapAdapter,
-  Type,
-  LayerAdapter,
-  BaseLayerAdapter,
-} from '@nextgis/webmap';
-import { CancelablePromise } from '@nextgis/ngw-connector';
-
 export function fixUrlStr(url: string) {
   // remove double slash
   return url.replace(/([^:]\/)\/+/g, '$1');
