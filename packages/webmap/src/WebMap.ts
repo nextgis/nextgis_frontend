@@ -351,7 +351,7 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
    * ```
    */
   async addLayer<K extends keyof LayerAdapters, O extends AdapterOptions = AdapterOptions>(
-    adapter: K | Type<LayerAdapters[K]>,
+    adapter: K | Type<LayerAdapters[K]> | Promise<Type<LayerAdapters[K]> | undefined>,
     options: O | LayerAdaptersOptions[K],
     order?: number): Promise<LayerAdapter> {
 
@@ -361,6 +361,8 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
       adapterEngine = this.getLayerAdapter(adapter);
     } else if (typeof adapter === 'function') {
       adapterEngine = adapter as Type<LayerAdapter>;
+    } else if ('then' in adapter) {
+      adapterEngine = await adapter;
     }
     if (adapterEngine !== undefined) {
       const geoJsonOptions = options as GeoJsonAdapterOptions;
