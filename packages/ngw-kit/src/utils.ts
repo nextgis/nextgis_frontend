@@ -1,6 +1,5 @@
 import WebMap, {
   Type,
-  AdapterConstructor,
   LayerAdapter
 } from '@nextgis/webmap';
 import NgwConnector from '@nextgis/ngw-connector';
