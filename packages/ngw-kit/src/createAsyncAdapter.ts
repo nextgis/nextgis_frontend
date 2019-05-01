@@ -4,6 +4,7 @@ import { NgwLayerOptions } from './interfaces';
 
 import { createGeoJsonAdapter } from './createGeoJsonAdapter';
 import { createRasterAdapter } from './createRasterAdapter';
+import { createWebMapAdapter } from './createWebMapAdapter';
 
 const styles: ResourceCls[] = ['mapserver_style', 'qgis_vector_style', 'raster_style'];
 
@@ -16,15 +17,16 @@ export async function createAsyncAdapter(
   const item = await connector.get('resource.item', null, { id: options.resourceId });
 
   if (item.webmap) {
-    // TODO: add webmap adapter
-    return undefined;
+    return createWebMapAdapter(options, webMap, baseUrl, connector);
   } else if (styles.indexOf(item.resource.cls) !== -1) {
     if (options.adapter === 'GEOJSON') {
-      // TODO: get style parent vector layer with geojson data
-      return undefined;
+      const parentOptions: NgwLayerOptions = {
+        ...options,
+        resourceId: item.resource.parent.id,
+      };
+      return createGeoJsonAdapter(parentOptions, webMap, connector);
     }
-    const rasterAdapter = createRasterAdapter(options, webMap, baseUrl);
-    return rasterAdapter;
+    return createRasterAdapter(options, webMap, baseUrl);
   } else if (item.resource.cls === 'vector_layer') {
     if (options.adapter && options.adapter !== 'GEOJSON') {
       // TODO: get first vector layer style if it exist
