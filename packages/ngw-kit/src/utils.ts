@@ -1,8 +1,9 @@
 import WebMap, {
   Type,
-  LayerAdapter
+  LayerAdapter,
+  LngLatBoundsArray
 } from '@nextgis/webmap';
-import NgwConnector from '@nextgis/ngw-connector';
+import NgwConnector, { WebmapResource, ResourceItem } from '@nextgis/ngw-connector';
 import { createAsyncAdapter } from './createAsyncAdapter';
 import { NgwLayerOptions, WebMapAdapterOptions } from './interfaces';
 import { WebMapLayerAdapter } from './WebMapLayerAdapter';
@@ -69,6 +70,46 @@ export function addNgwLayer(options: NgwLayerOptions,
   }
 
   return createAsyncAdapter(options, webMap, baseUrl, connector);
+}
+
+export function getWebMapExtent(webmap: WebmapResource): LngLatBoundsArray | undefined {
+  const { extent_bottom, extent_left, extent_top, extent_right } = webmap;
+  if (extent_bottom && extent_left && extent_top && extent_right) {
+    const extent: LngLatBoundsArray = [extent_left, extent_bottom, extent_right, extent_top];
+    if (extent[3] > 82) {
+      extent[3] = 82;
+    }
+    if (extent[1] < -82) {
+      extent[1] = -82;
+    }
+    return extent;
+  }
+}
+
+export function getNgwLayerExtent(id: number, connector: NgwConnector) {
+  return connector.get('layer.extent', name, { id }).then((resp) => {
+    if (resp) {
+      const { maxLat, maxLon, minLat, minLon } = resp.extent;
+     return [minLon, minLat, maxLon, maxLat];
+    }
+  });
+}
+
+export async function getNgwResourceExtent(item: ResourceItem, connector: NgwConnector) {
+  if (item.webmap) {
+    return getWebMapExtent(item.webmap);
+  } else {
+    const resource = item.resource;
+    if (resource.cls.indexOf('style') !== -1) {
+      return connector.get('resource.item', null, {
+        id: resource.parent.id
+      }).then((res) => {
+        return getNgwLayerExtent(res.resource.id, connector);
+      });
+    } else {
+      return getNgwLayerExtent(resource.id, connector);
+    }
+  }
 }
 
 const d2r = Math.PI / 180; // degrees to radians

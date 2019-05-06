@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Ngw Layer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body,
+    #wrapper,
+    #map {
+      width: 100%;
+      height: 100%;
+    }
+
+    #wrapper {
+      display: flex;
+    }
+
+    #layers {
+      min-width: 200px;
+      line-height: 30px;
+      margin: 10px;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.4.0/polyfill.min.js"></script>
+  <!-- <script src="https://unpkg.com/@nextgis/ngw-leaflet"></script> -->
+  <script src="../../../ngw-leaflet/lib/ngw-leaflet.js"></script>
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="layers"></div>
+    <div id='map'></div>
+  </div>
+  <script>
+
+    var layers = [
+      [4119, 'Webmap resource ID'],
+      [4110, 'Vector resource ID'],
+      [4110, 'First style of vector resource ID', { adapter: 'IMAGE' }],
+      [4111, 'Style resource ID'],
+      [4111, 'Vector layer from parent of style resource ID', { adapter: 'GEOJSON' }],
+      [4114, 'First style from image resource ID'],
+      [4115, 'Image style resource ID']
+    ]
+
+    var layersBlock = document.getElementById('layers');
+    var ngwMap = new NgwMap({
+      baseUrl: 'https://demo.nextgis.com',
+      target: 'map',
+      qmsId: 487,
+    });
+
+    for (var f = 0; f < layers.length; f++) {
+      var wrap = document.createElement('div');
+      layersBlock.appendChild(wrap);
+      var layer = layers[f];
+      var radio = document.createElement('input');
+      radio.id = layer[0] + layer[1];
+      radio.setAttribute('name', 'layers');
+      radio.setAttribute('type', 'radio');
+      var label = document.createElement('label');
+      label.innerHTML = layer[1];
+      label.setAttribute('for', radio.id);
+      wrap.appendChild(radio);
+      wrap.appendChild(label);
+
+      radio.onchange = onRadioChange;
+    }
+
+    function onRadioChange(ev) {
+      var element = ev.target;
+      ngwMap.removeOverlays();
+      var layer = layers.find(function (x) {
+        return x[0] + x[1] === element.id;
+      });
+      var options = layer[2] || {};
+      options.resourceId = layer[0];
+      ngwMap.addNgwLayer(options).then(function (layer) {
+        layer.getExtent().then(function (extent) {
+          ngwMap.fitBounds(extent);
+        });
+      });
+    }
+
+
+  </script>
+</body>
+
+</html>
