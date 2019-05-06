@@ -1,13 +1,13 @@
 {
   "name": "@nextgis/ol-map-adapter",
-  "version": "0.15.1",
+  "version": "0.15.2",
   "_priority": 16,
   "description": "",
   "main": "lib/ol-map-adapter.js",
   "unpkg": "lib/ol-map-adapter.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/webmap": "^0.15.1",
+    "@nextgis/webmap": "^0.15.2",
     "events": "^3.0.0",
     "ol": "^5.3.2"
   },
