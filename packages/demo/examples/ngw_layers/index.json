@@ -1,0 +1,5 @@
+{
+  "name": "Add different NGW layers",
+  "description": "",
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
+}
