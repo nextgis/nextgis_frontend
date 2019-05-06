@@ -79,19 +79,21 @@ export interface Resource {
   scopes: string[];
 }
 
+export interface WebmapResource {
+  extent_left: number;
+  extent_right: number;
+  extent_bottom: number;
+  extent_top: number;
+  draw_order_enabled: any;
+  bookmark_resource: any;
+  root_item: TreeGroup;
+}
+
 // Ngw api settings
 export interface ResourceItem {
   resource: Resource;
   resmeta: {
     items: {};
   };
-  webmap?: {
-    extent_left: number;
-    extent_right: number;
-    extent_bottom: number;
-    extent_top: number;
-    draw_order_enabled: any;
-    bookmark_resource: any;
-    root_item: TreeGroup;
-  };
+  webmap?: WebmapResource;
 }

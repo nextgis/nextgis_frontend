@@ -487,7 +487,7 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
       } else {
         this.mapAdapter.removeLayer(layer.layer);
       }
-      if (layer.options.baseLayer) {
+      if (layer.options && layer.options.baseLayer) {
         const index = this._baseLayers.indexOf(layerId);
         if (index) {
           this._baseLayers.splice(index, 1);

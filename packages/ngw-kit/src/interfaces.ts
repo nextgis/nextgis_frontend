@@ -2,8 +2,15 @@
  * @module ngw-kit
  */
 
-import WebMap, { AdapterOptions, LayerAdaptersOptions, WebMapEvents, MapClickEvent } from '@nextgis/webmap';
-import NgwConnector from '@nextgis/ngw-connector';
+import WebMap, {
+  AdapterOptions,
+  LayerAdaptersOptions,
+  WebMapEvents,
+  MapClickEvent,
+  BaseLayerAdapter,
+  LngLatBoundsArray
+} from '@nextgis/webmap';
+import NgwConnector, { ResourceItem } from '@nextgis/ngw-connector';
 import { FeatureLayersIdentify } from '@nextgis/ngw-connector';
 
 export type NgwLayerAdapterType = 'IMAGE' | 'TILE' | 'GEOJSON';
@@ -113,4 +120,10 @@ export interface IdentifyEvent {
 
 export interface WebMapLayerAdapterEvents extends WebMapEvents {
   identify: IdentifyEvent;
+}
+
+export interface ResourceAdapter extends BaseLayerAdapter {
+  item: ResourceItem;
+
+  getExtent(): LngLatBoundsArray | undefined;
 }
