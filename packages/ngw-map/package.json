@@ -1,17 +1,17 @@
 {
   "name": "@nextgis/ngw-map",
-  "version": "0.15.2",
+  "version": "0.15.3",
   "_priority": 11,
   "description": "",
   "main": "lib/ngw-map.js",
   "unpkg": "lib/ngw-map.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/icons": "^0.15.2",
+    "@nextgis/icons": "^0.15.3",
     "@nextgis/ngw-connector": "^0.15.1",
-    "@nextgis/ngw-kit": "^0.15.2",
-    "@nextgis/qms-kit": "^0.15.2",
-    "@nextgis/webmap": "^0.15.2",
+    "@nextgis/ngw-kit": "^0.15.3",
+    "@nextgis/qms-kit": "^0.15.3",
+    "@nextgis/webmap": "^0.15.3",
     "events": "^3.0.0"
   },
   "devDependencies": {
