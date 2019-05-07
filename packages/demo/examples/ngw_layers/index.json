@@ -1,5 +1,9 @@
 {
-  "name": "Add different NGW layers",
-  "description": "",
-  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
+  "name": "Add different NGW resource",
+  "description": "Click on radio button in order to show on the map NGW resources by their ID. If the layer with adapter, related resource will be displayed  automatic.",
+  "ngwMaps": [
+    "ngw-leaflet",
+    "ngw-ol",
+    "ngw-mapbox"
+  ]
 }

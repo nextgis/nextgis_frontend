@@ -504,10 +504,10 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
    * @example
    * ```javascript
    * // Add simple layer
-   * ngwMap.addGeoJsonLayer({ data: geojson, paint: { color: 'red' } });
+   * webMap.addGeoJsonLayer({ data: geojson, paint: { color: 'red' } });
    *
    * // Add styled by feature property layer with selection behavior
-   * ngwMap.addGeoJsonLayer({
+   * webMap.addGeoJsonLayer({
    *   data: geojson,
    *   paint: function (feature) {
    *     return { color: feature.properties.color, opacity: 0.5 }
@@ -520,14 +520,14 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
    * });
    *
    * // Add marker layer styled with use [Icons](icons)
-   * ngwMap.addGeoJsonLayer({ data: geojson, paint: NgwMap.getIcon({ color: 'orange' })});
+   * webMap.addGeoJsonLayer({ data: geojson, paint: webMap.getIcon({ color: 'orange' })});
    *
    * // work with added layer
-   * const layer = ngwMap.addGeoJsonLayer({ data: geojson, id: 'my_layer_name'});
+   * const layer = webMap.addGeoJsonLayer({ data: geojson, id: 'my_layer_name'});
    * // access layer by id
-   * ngwMap.showLayer('my_layer_name');
+   * webMap.showLayer('my_layer_name');
    * // or access layer by instance
-   * ngwMap.showLayer(layer);
+   * webMap.showLayer(layer);
    * ```
    */
   // @onMapLoad()
@@ -1003,8 +1003,8 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
       }
       return this._onLayerClick(e);
     };
-    if (options.paint && this.options.paint) {
-      options.paint = preparePaint(options.paint, this.options.paint, this.getPaintFunctions);
+    if (this.options.paint) {
+      options.paint = preparePaint(options.paint || {}, this.options.paint, this.getPaintFunctions);
     }
     if (options.selectedPaint && this.options.selectedPaint) {
       options.selectedPaint = preparePaint(
