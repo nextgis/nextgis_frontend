@@ -26,7 +26,7 @@
 
     #layers {
       min-width: 280px;
-      line-height: 30px;
+      /* line-height: 10px; */
       overflow: auto;
     }
 
@@ -86,9 +86,9 @@
       radio.onchange = function () { onRadioChange(layer) };
       setRadioListener(radio, layer);
       var label = document.createElement('label');
-      label.innerHTML = 'resourceId: ' + layer.resourceId;
+      label.innerHTML = 'id: ' + layer.resourceId;
       if (layer.adapter) {
-        label.innerHTML += ', adapter:' + layer.adapter;
+        label.innerHTML += ', adapter: ' + layer.adapter;
       }
       label.setAttribute('for', radio.id);
 
