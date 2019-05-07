@@ -5,10 +5,7 @@ import WebMap, {
   MapAdapter,
   StarterKit,
   ControlPositions,
-  GeoJsonAdapterOptions,
   MapControls,
-  LayerAdaptersOptions,
-  Type,
   LayerAdapter,
   WebMapEvents
 } from '@nextgis/webmap';
