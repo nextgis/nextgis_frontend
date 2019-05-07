@@ -25,9 +25,26 @@
     }
 
     #layers {
-      min-width: 200px;
+      min-width: 280px;
       line-height: 30px;
-      margin: 10px;
+      overflow: auto;
+    }
+
+    #layers>div {
+      padding: 10px;
+    }
+
+    #layers> :nth-child(odd) {
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    #layers label {
+      font-weight: 700;
+      margin-left: 3px;
+    }
+
+    .description {
+      margin-left: 13px;
     }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.4.0/polyfill.min.js"></script>
@@ -41,15 +58,15 @@
     <div id='map'></div>
   </div>
   <script>
-
+    // ngwMap.addNgwLayer({resourceId...});
     var layers = [
-      [4119, 'Webmap resource ID'],
-      [4110, 'Vector resource ID'],
-      [4110, 'First style of vector resource ID', { adapter: 'IMAGE' }],
-      [4111, 'Style resource ID'],
-      [4111, 'Vector layer from parent of style resource ID', { adapter: 'GEOJSON' }],
-      [4114, 'First style from image resource ID'],
-      [4115, 'Image style resource ID']
+      { resourceId: 4119, description: 'Webmap resource' },
+      { resourceId: 4110, description: 'Vector resource' },
+      { resourceId: 4110, description: 'First style of vector resource', adapter: 'IMAGE' },
+      { resourceId: 4111, description: 'Style resource' },
+      { resourceId: 4111, description: 'Vector resource from style resource parent', adapter: 'GEOJSON' },
+      { resourceId: 4114, description: 'First style from image resource' },
+      { resourceId: 4115, description: 'Image style resource' }
     ]
 
     var layersBlock = document.getElementById('layers');
@@ -61,37 +78,43 @@
 
     for (var f = 0; f < layers.length; f++) {
       var wrap = document.createElement('div');
-      layersBlock.appendChild(wrap);
       var layer = layers[f];
       var radio = document.createElement('input');
-      radio.id = layer[0] + layer[1];
+      radio.id = layer.resourceId;
       radio.setAttribute('name', 'layers');
       radio.setAttribute('type', 'radio');
+      radio.onchange = function () { onRadioChange(layer) };
+      setRadioListener(radio, layer);
       var label = document.createElement('label');
-      label.innerHTML = layer[1];
+      label.innerHTML = 'resourceId: ' + layer.resourceId;
+      if (layer.adapter) {
+        label.innerHTML += ', adapter:' + layer.adapter;
+      }
       label.setAttribute('for', radio.id);
+
+      var description = document.createElement('div');
+      description.className = 'description';
+      description.innerHTML = layer.description;
+
       wrap.appendChild(radio);
       wrap.appendChild(label);
+      wrap.appendChild(description);
 
-      radio.onchange = onRadioChange;
+      layersBlock.appendChild(wrap);
     }
 
-    function onRadioChange(ev) {
-      var element = ev.target;
+    function setRadioListener(radio, layer) {
+      radio.onchange = function () { onRadioChange(layer) };
+    }
+
+    function onRadioChange(options) {
       ngwMap.removeOverlays();
-      var layer = layers.find(function (x) {
-        return x[0] + x[1] === element.id;
-      });
-      var options = layer[2] || {};
-      options.resourceId = layer[0];
       ngwMap.addNgwLayer(options).then(function (layer) {
         layer.getExtent().then(function (extent) {
           ngwMap.fitBounds(extent);
         });
       });
     }
-
-
   </script>
 </body>
 
