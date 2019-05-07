@@ -570,8 +570,12 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     if ('type' in paint) {
       return paint.type;
     } else if (typeof paint === 'function') {
-      const falsePaint = paint({ type: 'Feature', properties: {}, geometry: {} });
-      return this._detectPaintType(falsePaint);
+      try {
+        const falsePaint = paint({ type: 'Feature', properties: {}, geometry: {} });
+        return this._detectPaintType(falsePaint);
+      } catch (er) {
+        //
+      }
     }
   }
 
