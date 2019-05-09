@@ -5,7 +5,9 @@ import {
   getLayerAdapterOptions,
   updateWmsParams,
   getCirclePoly,
-  degrees2meters
+  degrees2meters,
+  sendIdentifyRequest,
+  getWebMapExtent
 } from './utils';
 import { WebMapLayerItem } from './WebMapLayerItem';
 import { ItemOptions } from '@nextgis/item';
@@ -100,17 +102,7 @@ export class WebMapLayerAdapter implements BaseLayerAdapter {
   getExtent(): LngLatBoundsArray | undefined {
     const webmap = this.response && this.response.webmap;
     if (webmap) {
-      const { extent_bottom, extent_left, extent_top, extent_right } = webmap;
-      if (extent_bottom && extent_left && extent_top && extent_right) {
-        const extent: LngLatBoundsArray = [extent_left, extent_bottom, extent_right, extent_top];
-        if (extent[3] > 82) {
-          extent[3] = 82;
-        }
-        if (extent[1] < -82) {
-          extent[1] = -82;
-        }
-        return extent;
-      }
+      return getWebMapExtent(webmap);
     }
   }
 
@@ -205,26 +197,11 @@ export class WebMapLayerAdapter implements BaseLayerAdapter {
   // options is temporal to set list of layers id, because layers id is not item parameter now
   private _sendIdentifyRequest(ev: MapClickEvent, options: { layers?: string[] } = {}) {
 
-    // webMap.emitter.emit('start-identify', { ev });
-    const geom = getCirclePoly(ev.latLng.lng, ev.latLng.lat, this.pixelRadius);
-
-    // create wkt string
-    const polygon: string[] = [];
-    geom.forEach(([lng, lat]) => {
-      const [x, y] = degrees2meters(lng, lat);
-      polygon.push(x + ' ' + y);
-    });
-    const wkt = `POLYGON((${polygon.join(', ')}))`;
-
-    const layers: string[] = options.layers ? options.layers : this._webmapLayersIds.ids;
-
-    const data: IdentifyRequestOptions = {
-      geom: wkt,
-      srs: 3857,
-      layers,
-    };
-
-    return this.options.connector.post('feature_layer.identify', { data }).then((resp) => {
+    return sendIdentifyRequest(ev, {
+      layers: this._webmapLayersIds.ids,
+      connector: this.options.connector,
+      pixelRadius: this.pixelRadius
+    }).then((resp) => {
       this.emitter.emit('identify', { ev, data: resp });
       return resp;
     });

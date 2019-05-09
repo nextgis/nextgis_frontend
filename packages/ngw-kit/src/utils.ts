@@ -1,11 +1,12 @@
 import WebMap, {
   Type,
   LayerAdapter,
-  LngLatBoundsArray
+  LngLatBoundsArray,
+  MapClickEvent
 } from '@nextgis/webmap';
-import NgwConnector, { WebmapResource, ResourceItem } from '@nextgis/ngw-connector';
+import NgwConnector, { WebmapResource, ResourceItem, FeatureLayersIdentify } from '@nextgis/ngw-connector';
 import { createAsyncAdapter } from './createAsyncAdapter';
-import { NgwLayerOptions, WebMapAdapterOptions } from './interfaces';
+import { NgwLayerOptions, WebMapAdapterOptions, IdentifyRequestOptions } from './interfaces';
 import { WebMapLayerAdapter } from './WebMapLayerAdapter';
 // @ts-ignore
 import { toWgs84 as WGS84 } from 'reproject';
@@ -90,7 +91,7 @@ export function getNgwLayerExtent(id: number, connector: NgwConnector) {
   return connector.get('layer.extent', name, { id }).then((resp) => {
     if (resp) {
       const { maxLat, maxLon, minLat, minLon } = resp.extent;
-     return [minLon, minLat, maxLon, maxLat];
+      return [minLon, minLat, maxLon, maxLat];
     }
   });
 }
@@ -110,6 +111,41 @@ export async function getNgwResourceExtent(item: ResourceItem, connector: NgwCon
       return getNgwLayerExtent(resource.id, connector);
     }
   }
+}
+
+interface FeatureIdentifyRequestOptions {
+  /**
+   * WKT Polygon geometry
+   */
+  geom: string;
+  srs: 3857;
+  layers: string[];
+}
+
+export function sendIdentifyRequest(
+  ev: MapClickEvent,
+  options: IdentifyRequestOptions): Promise<FeatureLayersIdentify> {
+
+  // webMap.emitter.emit('start-identify', { ev });
+  const geom = getCirclePoly(ev.latLng.lng, ev.latLng.lat, options.pixelRadius);
+
+  // create wkt string
+  const polygon: string[] = [];
+  geom.forEach(([lng, lat]) => {
+    const [x, y] = degrees2meters(lng, lat);
+    polygon.push(x + ' ' + y);
+  });
+  const wkt = `POLYGON((${polygon.join(', ')}))`;
+
+  const layers: string[] = options.layers;
+
+  const data: FeatureIdentifyRequestOptions = {
+    geom: wkt,
+    srs: 3857,
+    layers,
+  };
+
+  return options.connector.post('feature_layer.identify', { data });
 }
 
 const d2r = Math.PI / 180; // degrees to radians
@@ -170,4 +206,15 @@ export function pixelsInMeterWidth() {
     _pixelsInMeter = px;
   }
   return _pixelsInMeter;
+}
+
+export function applyMixins(derivedCtor: any, baseCtors: any[]) {
+  baseCtors.forEach((baseCtor) => {
+    Object.getOwnPropertyNames(baseCtor.prototype).forEach((name) => {
+      const descriptor = Object.getOwnPropertyDescriptor(baseCtor.prototype, name);
+      if (descriptor) {
+        Object.defineProperty(derivedCtor.prototype, name, descriptor);
+      }
+    });
+  });
 }
