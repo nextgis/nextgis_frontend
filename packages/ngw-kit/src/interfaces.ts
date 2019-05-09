@@ -105,12 +105,9 @@ export interface WebMapAdapterOptions extends AdapterOptions {
 }
 
 export interface IdentifyRequestOptions {
-  /**
-   * WKT Polygon geometry
-   */
-  geom: string;
-  srs: 3857;
   layers: string[];
+  connector: NgwConnector;
+  pixelRadius?: number;
 }
 
 export interface IdentifyEvent {
