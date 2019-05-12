@@ -11,13 +11,14 @@ import WebMap, {
 } from '@nextgis/webmap';
 import NgwConnector from '@nextgis/ngw-connector';
 import QmsKit, { QmsAdapterOptions } from '@nextgis/qms-kit';
-import NgwKit, { NgwLayerOptions } from '@nextgis/ngw-kit';
+import NgwKit, { NgwLayerOptions, ResourceAdapter } from '@nextgis/ngw-kit';
 import { getIcon } from '@nextgis/icons';
 
 import { onMapLoad } from './decorators';
 import { fixUrlStr, deepmerge } from './utils';
 
 import { NgwMapOptions, ControlOptions, NgwMapEvents } from './interfaces';
+
 
 const OPTIONS: NgwMapOptions = {
   target: 'map',
@@ -80,7 +81,7 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
 
   protected _ngwLayers: {
     [layerName: string]: {
-      layer: LayerAdapter,
+      layer: ResourceAdapter,
       resourceId: number
     }
   } = {};
@@ -169,11 +170,17 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
     }
     if (this.options.baseUrl) {
       const adapter = NgwKit.utils.addNgwLayer(options, this, this.options.baseUrl, this.connector);
-      const layer = await this.addLayer(adapter, options.adapterOptions || {});
+      const layer = await this.addLayer(adapter, options.adapterOptions || {}) as ResourceAdapter;
       const id = layer && this.getLayerId(layer);
       if (layer && id) {
         this._ngwLayers[id] = { layer, resourceId: options.resourceId };
         this.showLayer(layer);
+      }
+      if (options.fit && layer.getExtent) {
+        const extent = await layer.getExtent();
+        if (extent) {
+          this.fitBounds(extent);
+        }
       }
       return layer;
     }
@@ -190,7 +197,7 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
    * ngwMap.zoomToLayer('ngw_layer_name');
    * ```
    */
-  zoomToLayer(layerDef: string | LayerAdapter) {
+  zoomToLayer(layerDef: string | ResourceAdapter) {
     let id: string | undefined;
     if (typeof layerDef === 'string' || typeof layerDef === 'number') {
       id = String(id);
@@ -199,34 +206,25 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
     }
     const ngwLayer = id && this._ngwLayers[id];
     if (ngwLayer) {
-      const resourceId = ngwLayer.resourceId;
-      return this.connector.get('resource.item', null, { id: resourceId }).then((resp) => {
-        if (resp) {
-          if (resp.resource.cls.indexOf('style') !== -1) {
-            return this.connector.get('resource.item', null, {
-              id: resp.resource.parent.id
-            }).then((res) => {
-              return this._fitNgwLayerExtend(res.resource.id);
+      if (ngwLayer.layer.getExtent) {
+
+      } else {
+        const resourceId = ngwLayer.resourceId;
+        return this.connector.get('resource.item', null, { id: resourceId }).then((resp) => {
+          if (resp) {
+            NgwKit.utils.getNgwResourceExtent(resp, this.connector).then((extent) => {
+              if (extent) {
+                this.fitBounds(extent);
+              }
             });
-          } else {
-            return this._fitNgwLayerExtend(resourceId);
           }
-        }
-      });
+        });
+      }
     }
   }
 
   onLoad(event: keyof NgwMapEvents = 'ngw-map:create'): Promise<this> {
     return super.onLoad(event as keyof WebMapEvents);
-  }
-
-  private _fitNgwLayerExtend(id: number) {
-    return this.connector.get('layer.extent', name, { id }).then((resp) => {
-      if (resp) {
-        const { maxLat, maxLon, minLat, minLon } = resp.extent;
-        this.fitBounds([minLon, minLat, maxLon, maxLat]);
-      }
-    });
   }
 
   private async _createWebMap() {
