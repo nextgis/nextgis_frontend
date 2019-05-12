@@ -163,7 +163,7 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
    */
   @onMapLoad()
   async addNgwLayer(
-    options: NgwLayerOptions): Promise<LayerAdapter | undefined> {
+    options: NgwLayerOptions): Promise<ResourceAdapter | undefined> {
 
     if (!options.resourceId) {
       throw new Error('resourceId is required parameter to add NGW layer');
