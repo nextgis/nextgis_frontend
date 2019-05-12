@@ -6,7 +6,7 @@ import WebMap, {
 } from '@nextgis/webmap';
 import NgwConnector, { WebmapResource, ResourceItem, FeatureLayersIdentify } from '@nextgis/ngw-connector';
 import { createAsyncAdapter } from './createAsyncAdapter';
-import { NgwLayerOptions, WebMapAdapterOptions, IdentifyRequestOptions } from './interfaces';
+import { NgwLayerOptions, WebMapAdapterOptions, IdentifyRequestOptions, ResourceAdapter } from './interfaces';
 import { WebMapLayerAdapter } from './WebMapLayerAdapter';
 // @ts-ignore
 import { toWgs84 as WGS84 } from 'reproject';
@@ -63,7 +63,7 @@ export function getLayerAdapterOptions(options: NgwLayerOptions, webMap: WebMap,
 export function addNgwLayer(options: NgwLayerOptions,
   webMap: WebMap,
   baseUrl: string,
-  connector: NgwConnector): Promise<Type<LayerAdapter> | undefined> {
+  connector: NgwConnector): Promise<Type<ResourceAdapter> | undefined> {
 
   const headers = connector.getAuthorizationHeaders();
   if (headers) {
@@ -87,16 +87,17 @@ export function getWebMapExtent(webmap: WebmapResource): LngLatBoundsArray | und
   }
 }
 
-export function getNgwLayerExtent(id: number, connector: NgwConnector) {
+export function getNgwLayerExtent(id: number, connector: NgwConnector): Promise<LngLatBoundsArray | undefined> {
   return connector.get('layer.extent', name, { id }).then((resp) => {
     if (resp) {
       const { maxLat, maxLon, minLat, minLon } = resp.extent;
-      return [minLon, minLat, maxLon, maxLat];
+      const extenrArray: LngLatBoundsArray =  [minLon, minLat, maxLon, maxLat];
+      return extenrArray;
     }
   });
 }
 
-export async function getNgwResourceExtent(item: ResourceItem, connector: NgwConnector) {
+export async function getNgwResourceExtent(item: ResourceItem, connector: NgwConnector): Promise<LngLatBoundsArray | undefined> {
   if (item.webmap) {
     return getWebMapExtent(item.webmap);
   } else {
