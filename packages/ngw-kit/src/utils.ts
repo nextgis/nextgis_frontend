@@ -97,7 +97,8 @@ export function getNgwLayerExtent(id: number, connector: NgwConnector): Promise<
   });
 }
 
-export async function getNgwResourceExtent(item: ResourceItem, connector: NgwConnector): Promise<LngLatBoundsArray | undefined> {
+export async function getNgwResourceExtent(
+  item: ResourceItem, connector: NgwConnector): Promise<LngLatBoundsArray | undefined> {
   if (item.webmap) {
     return getWebMapExtent(item.webmap);
   } else {
