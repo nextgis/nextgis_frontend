@@ -6,10 +6,10 @@ import WebMap, {
   StarterKit,
   ControlPositions,
   MapControls,
-  LayerAdapter,
-  WebMapEvents
+  WebMapEvents,
+  LayerDef
 } from '@nextgis/webmap';
-import NgwConnector from '@nextgis/ngw-connector';
+import NgwConnector, { ResourceItem } from '@nextgis/ngw-connector';
 import QmsKit, { QmsAdapterOptions } from '@nextgis/qms-kit';
 import NgwKit, { NgwLayerOptions, ResourceAdapter } from '@nextgis/ngw-kit';
 import { getIcon } from '@nextgis/icons';
@@ -18,7 +18,6 @@ import { onMapLoad } from './decorators';
 import { fixUrlStr, deepmerge } from './utils';
 
 import { NgwMapOptions, ControlOptions, NgwMapEvents } from './interfaces';
-
 
 const OPTIONS: NgwMapOptions = {
   target: 'map',
@@ -197,7 +196,7 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
    * ngwMap.zoomToLayer('ngw_layer_name');
    * ```
    */
-  zoomToLayer(layerDef: string | ResourceAdapter) {
+  async zoomToLayer(layerDef: string | ResourceAdapter) {
     let id: string | undefined;
     if (typeof layerDef === 'string' || typeof layerDef === 'number') {
       id = String(id);
@@ -207,16 +206,22 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
     const ngwLayer = id && this._ngwLayers[id];
     if (ngwLayer) {
       if (ngwLayer.layer.getExtent) {
-
+        const extent = await ngwLayer.layer.getExtent();
+        if (extent) {
+          this.fitBounds(extent);
+        }
       } else {
-        const resourceId = ngwLayer.resourceId;
-        return this.connector.get('resource.item', null, { id: resourceId }).then((resp) => {
-          if (resp) {
-            NgwKit.utils.getNgwResourceExtent(resp, this.connector).then((extent) => {
-              if (extent) {
-                this.fitBounds(extent);
-              }
-            });
+        let item: ResourceItem;
+        if (ngwLayer.layer.item) {
+          item = ngwLayer.layer.item;
+        } else {
+          const resourceId = ngwLayer.resourceId;
+          item = await this.connector.get('resource.item', null, { id: resourceId });
+        }
+
+        NgwKit.utils.getNgwResourceExtent(item, this.connector).then((extent) => {
+          if (extent) {
+            this.fitBounds(extent);
           }
         });
       }
@@ -225,6 +230,17 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
 
   onLoad(event: keyof NgwMapEvents = 'ngw-map:create'): Promise<this> {
     return super.onLoad(event as keyof WebMapEvents);
+  }
+
+  removeLayer(layerDef: LayerDef) {
+    const layer = this.getLayer(layerDef);
+    if (layer) {
+      const layerId = this.getLayerId(layer);
+      if (layerId) {
+        delete this._ngwLayers[layerId];
+      }
+      super.removeLayer(layer);
+    }
   }
 
   private async _createWebMap() {
