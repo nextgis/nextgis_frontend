@@ -105,6 +105,7 @@ export interface NgwMapOptions<C = any> extends MapOptions {
    */
   identification?: boolean;
 
+  pixelRadius?: number;
   connector?: NgwConnector;
 }
 
