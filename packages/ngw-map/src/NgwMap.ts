@@ -7,7 +7,8 @@ import WebMap, {
   ControlPositions,
   MapControls,
   WebMapEvents,
-  LayerDef
+  LayerDef,
+  MapClickEvent
 } from '@nextgis/webmap';
 import NgwConnector, { ResourceItem } from '@nextgis/ngw-connector';
 import QmsKit, { QmsAdapterOptions } from '@nextgis/qms-kit';
@@ -31,7 +32,8 @@ const OPTIONS: NgwMapOptions = {
         '<a href="http://nextgis.ru" target="_blank">©NextGIS</a>',
       ]
     }
-  }
+  },
+  pixelRadius: 10
 };
 
 function prepareWebMapOptions(mapAdapter: MapAdapter, options: NgwMapOptions) {
@@ -268,6 +270,8 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
 
     this.fit();
     this._emitStatusEvent('ngw-map:create', this);
+
+    // this.emitter.on('click', (ev: MapClickEvent) => this._selectFromNgw(ev));
   }
 
   private _addControls() {
@@ -282,5 +286,33 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
       });
     }
     this._emitStatusEvent('controls:create');
+  }
+
+  private async _selectFromNgw(ev: MapClickEvent) {
+    const promises: Array<Promise<number[] | undefined>> = [];
+    for (const nl in this._ngwLayers) {
+      if (this._ngwLayers.hasOwnProperty(nl)) {
+        const layer = this._ngwLayers[nl].layer;
+        if (layer.getIdentificationIds) {
+          promises.push(layer.getIdentificationIds());
+        }
+      }
+    }
+    const getIds = await Promise.all(promises);
+    const ids: number[] = [];
+    getIds.forEach((x) => {
+      if (x) {
+        x.forEach((y) => ids.push(y));
+      }
+    });
+    if (ids.length) {
+      return NgwKit.utils.sendIdentifyRequest(ev, {
+        layers: ids,
+        connector: this.connector,
+        pixelRadius: this.options.pixelRadius
+      }).then((resp) => {
+        return resp;
+      });
+    }
   }
 }

@@ -106,7 +106,7 @@ export interface WebMapAdapterOptions extends AdapterOptions {
 }
 
 export interface IdentifyRequestOptions {
-  layers: string[];
+  layers: number[];
   connector: NgwConnector;
   pixelRadius?: number;
 }
@@ -121,7 +121,8 @@ export interface WebMapLayerAdapterEvents extends WebMapEvents {
 }
 
 export interface ResourceAdapter extends BaseLayerAdapter {
-  item: ResourceItem;
+  item?: ResourceItem;
 
   getExtent(): LngLatBoundsArray | undefined;
+  getIdentificationIds(): Promise<number[] | undefined>;
 }

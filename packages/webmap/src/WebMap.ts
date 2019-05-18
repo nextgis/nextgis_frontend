@@ -894,10 +894,6 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
     return status !== undefined ? status : false;
   }
 
-  onMapClick(evt: MapClickEvent) {
-    this.emitter.emit('click', evt);
-  }
-
   onLoad(event: keyof WebMapEvents = 'create'): Promise<this> {
     return new Promise((res) => {
       if (this.getEventStatus(event)) {

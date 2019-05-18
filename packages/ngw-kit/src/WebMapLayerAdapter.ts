@@ -4,8 +4,6 @@ import {
   fixUrlStr,
   getLayerAdapterOptions,
   updateWmsParams,
-  getCirclePoly,
-  degrees2meters,
   sendIdentifyRequest,
   getWebMapExtent
 } from './utils';
@@ -20,11 +18,11 @@ import {
   TreeLayer,
   NgwLayerAdapterType,
   WebMapAdapterOptions,
-  IdentifyRequestOptions,
-  WebMapLayerAdapterEvents
+  WebMapLayerAdapterEvents,
+  ResourceAdapter
 } from './interfaces';
 
-export class WebMapLayerAdapter implements BaseLayerAdapter {
+export class WebMapLayerAdapter implements ResourceAdapter {
 
   layer?: WebMapLayerItem;
 
@@ -36,7 +34,7 @@ export class WebMapLayerAdapter implements BaseLayerAdapter {
   private resourceId?: number;
   private _dependsLayers: Array<TreeGroup | TreeLayer> = [];
   private response?: ResourceItem;
-  private _webmapLayersIds: { isLoading: boolean, ids: string[] } = { isLoading: false, ids: [] };
+  private _webmapLayersIds?: number[];
 
   private $$onMapClick?: (ev: MapClickEvent) => void;
 
@@ -62,7 +60,7 @@ export class WebMapLayerAdapter implements BaseLayerAdapter {
     if (this.options.identification) {
       const ids = await this._getWebmapIds();
       if (ids) {
-        this._webmapLayersIds.ids = ids.filter((x) => x !== undefined).map((x) => x.resource.parent.id);
+        this._webmapLayersIds = ids;
         this.$$onMapClick = (ev: MapClickEvent) => this._onMapClick(ev);
         this.options.webMap.emitter.on('click', this.$$onMapClick);
       }
@@ -116,6 +114,14 @@ export class WebMapLayerAdapter implements BaseLayerAdapter {
       });
     }
     return this._dependsLayers;
+  }
+
+  async getIdentificationIds() {
+    if (this._webmapLayersIds) {
+      return this._webmapLayersIds;
+    } else {
+      return await this._getWebmapIds();
+    }
   }
 
   private async _getWebMapLayerItem(): Promise<WebMapLayerItem | undefined> {
@@ -178,7 +184,7 @@ export class WebMapLayerAdapter implements BaseLayerAdapter {
     return item;
   }
 
-  private async _getWebmapIds() {
+  private async _getWebmapIds(): Promise<number[] | undefined> {
     const webMapItem = this.layer;
     if (webMapItem && webMapItem.item.item_type === 'root') {
       const layers = webMapItem.item.children;
@@ -189,22 +195,24 @@ export class WebMapLayerAdapter implements BaseLayerAdapter {
           promises.push(this.options.connector.get('resource.item', {}, { id }));
         }
       });
-      return Promise.all(promises);
+      const ids = await Promise.all(promises);
+      return ids.filter((x) => x !== undefined).map((x) => Number(x.resource.parent.id));
       // const id = item['layer_style_id']
     }
   }
 
   // options is temporal to set list of layers id, because layers id is not item parameter now
   private _sendIdentifyRequest(ev: MapClickEvent, options: { layers?: string[] } = {}) {
-
-    return sendIdentifyRequest(ev, {
-      layers: this._webmapLayersIds.ids,
-      connector: this.options.connector,
-      pixelRadius: this.pixelRadius
-    }).then((resp) => {
-      this.emitter.emit('identify', { ev, data: resp });
-      return resp;
-    });
+    if (this._webmapLayersIds) {
+      return sendIdentifyRequest(ev, {
+        layers: this._webmapLayersIds,
+        connector: this.options.connector,
+        pixelRadius: this.pixelRadius
+      }).then((resp) => {
+        this.emitter.emit('identify', { ev, data: resp });
+        return resp;
+      });
+    }
   }
 
   private _onMapClick(ev: MapClickEvent) {
