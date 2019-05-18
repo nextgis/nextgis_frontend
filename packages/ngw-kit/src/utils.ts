@@ -121,7 +121,7 @@ interface FeatureIdentifyRequestOptions {
    */
   geom: string;
   srs: 3857;
-  layers: string[];
+  layers: number[];
 }
 
 export function sendIdentifyRequest(
@@ -139,7 +139,7 @@ export function sendIdentifyRequest(
   });
   const wkt = `POLYGON((${polygon.join(', ')}))`;
 
-  const layers: string[] = options.layers;
+  const layers: number[] = options.layers;
 
   const data: FeatureIdentifyRequestOptions = {
     geom: wkt,
