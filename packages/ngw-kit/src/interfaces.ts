@@ -108,7 +108,7 @@ export interface WebMapAdapterOptions extends AdapterOptions {
 export interface IdentifyRequestOptions {
   layers: number[];
   connector: NgwConnector;
-  pixelRadius?: number;
+  radius?: number;
 }
 
 export interface IdentifyEvent {

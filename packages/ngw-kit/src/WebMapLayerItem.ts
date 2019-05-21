@@ -6,7 +6,7 @@ import Item, { ItemOptions } from '@nextgis/item';
 
 import WebMap, { LayerAdaptersOptions, LayerAdapter } from '@nextgis/webmap';
 import { TreeGroup, TreeLayer } from './interfaces';
-import { pixelsInMeterWidth } from './utils';
+import { pixelsInMeterWidth, setScaleRatio } from './utils';
 
 export class WebMapLayerItem extends Item<ItemOptions> {
   static options: ItemOptions = {
@@ -42,7 +42,6 @@ export class WebMapLayerItem extends Item<ItemOptions> {
 
   item: TreeGroup | TreeLayer;
   layer?: LayerAdapter;
-  private _pixelsInMeter: number = pixelsInMeterWidth();
 
   constructor(public webMap: WebMap,
               item: TreeGroup | TreeLayer,
@@ -111,31 +110,7 @@ export class WebMapLayerItem extends Item<ItemOptions> {
   }
 
   private _mapScaleToZoomLevel(scale: number) {
-    return this._setScaleRatio(scale);
-  }
-
-  // Returns width of map in meters on specified latitude.
-  private _getMapWidthForLanInMeters(lat: number): number {
-    return 6378137 * 2 * Math.PI * Math.cos(lat * Math.PI / 180);
-  }
-
-  private zoom(scale: number) {
-    return Math.log(scale / 256) / Math.LN2;
-  }
-
-  private _setScaleRatio(scale: number) {
-
-    // TODO: get real center
-    // webmap does not contain center yet
-    const center = [104, 45]; // this.webMap.getCenter();
-    if (center) {
-      const centerLat = center[1];
-      const crsScale = this._pixelsInMeter * this._getMapWidthForLanInMeters(centerLat) / scale;
-      const zoom = this.zoom(crsScale);
-      return zoom;
-    }
-    return Math.round(Math.log(591657550.500000 / (scale / 2)) / Math.log(2));
-
+    return setScaleRatio(scale);
   }
 
   private async _init(item: TreeGroup | TreeLayer) {

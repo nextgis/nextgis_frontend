@@ -1,4 +1,4 @@
-import WebMap, { BaseLayerAdapter, LngLatBoundsArray, MapClickEvent } from '@nextgis/webmap';
+import WebMap, { LngLatBoundsArray, MapClickEvent } from '@nextgis/webmap';
 import { ResourceItem, CancelablePromise } from '@nextgis/ngw-connector';
 import {
   fixUrlStr,
@@ -207,7 +207,7 @@ export class WebMapLayerAdapter implements ResourceAdapter {
       return sendIdentifyRequest(ev, {
         layers: this._webmapLayersIds,
         connector: this.options.connector,
-        pixelRadius: this.pixelRadius
+        radius: this.pixelRadius
       }).then((resp) => {
         this.emitter.emit('identify', { ev, data: resp });
         return resp;
