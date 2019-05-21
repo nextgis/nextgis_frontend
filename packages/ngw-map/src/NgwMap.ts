@@ -306,13 +306,21 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
       }
     });
     if (ids.length) {
-      return NgwKit.utils.sendIdentifyRequest(ev, {
-        layers: ids,
-        connector: this.connector,
-        pixelRadius: this.options.pixelRadius
-      }).then((resp) => {
-        return resp;
-      });
+      const pixelRadius = this.options.pixelRadius || 10;
+      const center = this.getCenter();
+      const zoom = this.getZoom();
+      if (center && zoom) {
+        const metresPerPixel = 40075016.686 * Math.abs(Math.cos(center[1] * 180 / Math.PI)) / Math.pow(2, zoom + 8);
+        // FIXME: understand the circle creation function
+        const radius = pixelRadius * metresPerPixel * 0.0005;
+        return NgwKit.utils.sendIdentifyRequest(ev, {
+          layers: ids,
+          connector: this.connector,
+          radius,
+        }).then((resp) => {
+          return resp;
+        });
+      }
     }
   }
 }

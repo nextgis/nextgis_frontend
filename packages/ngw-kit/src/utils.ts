@@ -91,7 +91,7 @@ export function getNgwLayerExtent(id: number, connector: NgwConnector): Promise<
   return connector.get('layer.extent', name, { id }).then((resp) => {
     if (resp) {
       const { maxLat, maxLon, minLat, minLon } = resp.extent;
-      const extenrArray: LngLatBoundsArray =  [minLon, minLat, maxLon, maxLat];
+      const extenrArray: LngLatBoundsArray = [minLon, minLat, maxLon, maxLat];
       return extenrArray;
     }
   });
@@ -126,17 +126,33 @@ interface FeatureIdentifyRequestOptions {
 
 export function sendIdentifyRequest(
   ev: MapClickEvent,
-  options: IdentifyRequestOptions): Promise<FeatureLayersIdentify> {
+  options: IdentifyRequestOptions,
+  // webMap: WebMap
+): Promise<FeatureLayersIdentify> {
 
   // webMap.emitter.emit('start-identify', { ev });
-  const geom = getCirclePoly(ev.latLng.lng, ev.latLng.lat, options.pixelRadius);
+  const geom = getCirclePoly(ev.latLng.lng, ev.latLng.lat, options.radius);
 
   // create wkt string
   const polygon: string[] = [];
+
+  // webMap.addLayer('GEOJSON', {
+  //   visibility: true,
+  //   data: {
+  //     type: 'Feature',
+  //     geometry: {
+  //       type: 'Polygon',
+  //       coordinates: [geom]
+  //     }
+  //   }
+  // })
+
   geom.forEach(([lng, lat]) => {
     const [x, y] = degrees2meters(lng, lat);
     polygon.push(x + ' ' + y);
   });
+
+
   const wkt = `POLYGON((${polygon.join(', ')}))`;
 
   const layers: number[] = options.layers;
@@ -219,4 +235,28 @@ export function applyMixins(derivedCtor: any, baseCtors: any[]) {
       }
     });
   });
+}
+
+// Returns width of map in meters on specified latitude.
+export function getMapWidthForLanInMeters(lat: number): number {
+  return 6378137 * 2 * Math.PI * Math.cos(lat * Math.PI / 180);
+}
+
+export function getZoomFromScale(scale: number) {
+  return Math.log(scale / 256) / Math.LN2;
+}
+
+export function setScaleRatio(scale: number) {
+
+  // TODO: get real center
+  // webmap does not contain center yet
+  const center = [104, 45]; // this.webMap.getCenter();
+  if (center) {
+    const centerLat = center[1];
+    const crsScale = pixelsInMeterWidth() * getMapWidthForLanInMeters(centerLat) / scale;
+    const zoom = getZoomFromScale(crsScale);
+    return zoom;
+  }
+  return Math.round(Math.log(591657550.500000 / (scale / 2)) / Math.log(2));
+
 }

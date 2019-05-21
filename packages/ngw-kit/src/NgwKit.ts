@@ -4,7 +4,7 @@
 
 import NgwConnector from '@nextgis/ngw-connector';
 import WebMap, { StarterKit, Type } from '@nextgis/webmap';
-import { toWgs84, getNgwResourceExtent, sendIdentifyRequest } from './utils';
+import { toWgs84, getNgwResourceExtent, sendIdentifyRequest, pixelsInMeterWidth } from './utils';
 import {
   updateWmsParams,
   getLayerAdapterOptions,
@@ -20,7 +20,8 @@ export class NgwKit implements StarterKit {
     toWgs84,
     addNgwLayer,
     getNgwResourceExtent,
-    sendIdentifyRequest
+    sendIdentifyRequest,
+    pixelsInMeterWidth
   };
 
   static updateWmsParams = updateWmsParams;
