@@ -627,8 +627,8 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
       if (this.mapAdapter.map) {
         action(this.mapAdapter, layer);
       } else {
-        this.mapAdapter.emitter.once('create', (data) => {
-          action(data.map, layer);
+        this.mapAdapter.emitter.once('create', (adapter) => {
+          action(adapter.map, layer);
         });
       }
     }

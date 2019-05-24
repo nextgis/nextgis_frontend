@@ -109,7 +109,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     this.map.set('_mapClickEvents', this._mapClickEvents);
     this.map.set('_forEachFeatureAtPixel', this._forEachFeatureAtPixel);
 
-    this.emitter.emit('create', { map: this.map });
+    this.emitter.emit('create', this);
     this._olView = this.map.getView();
 
     this._addMapListeners();
