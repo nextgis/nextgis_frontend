@@ -71,7 +71,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
         maxZoom,
         minZoom
       });
-      this.emitter.emit('create', { map: this.map });
+      this.emitter.emit('create', this);
       // create default pane
       const defPane = this.map.createPane('order-0');
       defPane.style.zIndex = String(0);

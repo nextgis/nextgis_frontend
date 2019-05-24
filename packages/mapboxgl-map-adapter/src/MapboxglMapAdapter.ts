@@ -100,7 +100,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
         this._addEventsListeners();
         this.map.once('load', () => {
           this.isLoaded = true;
-          this.emitter.emit('create', { map: this.map });
+          this.emitter.emit('create', this);
         });
       }
     }
