@@ -4,9 +4,9 @@
 
 import { LayerAdapter } from './LayerAdapter';
 
- /**
-  * @ignore
-  */
+/**
+ * @ignore
+ */
 export type Type<T> = new (...args: any[]) => T;
 
 /**
