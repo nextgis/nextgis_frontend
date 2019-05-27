@@ -265,8 +265,8 @@ export interface VectorLayerAdapter<
   filter?(cb: DataLayerFilter<F, L>): void;
   removeFilter?(): void;
 
-  addData(data: GeoJsonObject): void;
-  clearLayer(cb?: (feature: Feature) => boolean): void;
+  addData?(data: GeoJsonObject): void;
+  clearLayer?(cb?: (feature: Feature) => boolean): void;
   setData?(data: GeoJsonObject): void;
 
   onLayerClick?(opt: OnLayerClickOptions): Promise<any>;
