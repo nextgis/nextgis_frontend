@@ -8,7 +8,8 @@ import WebMap, {
   WebMapEvents,
   MapClickEvent,
   BaseLayerAdapter,
-  LngLatBoundsArray
+  LngLatBoundsArray,
+  VectorLayerAdapter
 } from '@nextgis/webmap';
 import NgwConnector, { ResourceItem } from '@nextgis/ngw-connector';
 import { FeatureLayersIdentify } from '@nextgis/ngw-connector';
@@ -120,7 +121,7 @@ export interface WebMapLayerAdapterEvents extends WebMapEvents {
   identify: IdentifyEvent;
 }
 
-export interface ResourceAdapter extends BaseLayerAdapter {
+export interface ResourceAdapter extends VectorLayerAdapter {
   item?: ResourceItem;
 
   getExtent(): LngLatBoundsArray | undefined;
