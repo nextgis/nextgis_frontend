@@ -1,6 +1,9 @@
 /**
  * @module ngw-map
  */
+import StrictEventEmitter from 'strict-event-emitter-types';
+import { EventEmitter } from 'events';
+
 import WebMap, {
   MapAdapter,
   StarterKit,
@@ -76,6 +79,8 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
   static decorators = { onMapLoad, ...WebMap.decorators };
   static getIcon = getIcon;
   static toWgs84 = NgwKit.utils.toWgs84;
+
+  readonly emitter: StrictEventEmitter<EventEmitter, NgwMapEvents> = new EventEmitter();
 
   options: NgwMapOptions<C> = {};
   connector: NgwConnector;
@@ -268,10 +273,10 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
       });
     }
 
-    this.fit();
+    // this.fit();
     this._emitStatusEvent('ngw-map:create', this);
 
-    // this.emitter.on('click', (ev: MapClickEvent) => this._selectFromNgw(ev));
+    this.emitter.on('click', (ev: MapClickEvent) => this._selectFromNgw(ev));
   }
 
   private _addControls() {
@@ -293,7 +298,7 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
     for (const nl in this._ngwLayers) {
       if (this._ngwLayers.hasOwnProperty(nl)) {
         const layer = this._ngwLayers[nl].layer;
-        if (layer.getIdentificationIds) {
+        if (layer.getIdentificationIds && layer.options.selectable) {
           promises.push(layer.getIdentificationIds());
         }
       }
@@ -318,6 +323,7 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
           connector: this.connector,
           radius,
         }).then((resp) => {
+          this._emitStatusEvent('ngw:select', resp);
           return resp;
         });
       }

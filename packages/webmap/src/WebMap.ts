@@ -13,7 +13,7 @@ import {
   AdapterConstructor
 } from './interfaces/LayerAdapter';
 import { LayerAdaptersOptions, LayerAdapter, OnLayerClickOptions } from './interfaces/LayerAdapter';
-import { MapAdapter, MapClickEvent, ControlPositions, FitOptions } from './interfaces/MapAdapter';
+import { MapAdapter, ControlPositions, FitOptions } from './interfaces/MapAdapter';
 import { MapOptions, AppOptions, GetAttributionsOptions } from './interfaces/WebMapApp';
 import { LngLatBoundsArray, Type, Cursor, LngLatArray, LayerDef } from './interfaces/BaseTypes';
 import { RuntimeParams } from './interfaces/RuntimeParams';
