@@ -13,7 +13,7 @@ import {
 
 } from '@nextgis/webmap';
 import { NgwLayerOptions } from '@nextgis/ngw-kit';
-import NgwConnector, { Credentials } from '@nextgis/ngw-connector';
+import NgwConnector, { Credentials, FeatureLayersIdentify } from '@nextgis/ngw-connector';
 import { NgwMap } from './NgwMap';
 
 export { NgwLayerOptions };
@@ -112,4 +112,5 @@ export interface NgwMapOptions<C = any> extends MapOptions {
 export interface NgwMapEvents extends WebMapEvents {
   'controls:create': any;
   'ngw-map:create': NgwMap;
+  'ngw:select': FeatureLayersIdentify;
 }
