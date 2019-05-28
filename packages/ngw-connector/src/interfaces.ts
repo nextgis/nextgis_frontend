@@ -4,7 +4,7 @@
 
 import { ResourceItem } from './types/ResourceItem';
 import { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
-import { FeatureLayersIdentify } from './types/FeatureLayer';
+import { FeatureLayersIdentify, FeatureItem } from './types/FeatureLayer';
 
 export interface FileMeta {
   id: string;
@@ -51,6 +51,7 @@ export interface GetRequestItemsResponseMap extends RequestItemKeys {
   'resource.child': any;
   'resource.collection': ResourceItem[];
   'file_upload.upload': FileUploadResp;
+  'feature_layer.feature.item': FeatureItem;
   // [x: string]: { [x: string]: any };
 }
 

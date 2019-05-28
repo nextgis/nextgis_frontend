@@ -19,3 +19,22 @@ export interface FeatureLayersIdentify {
   [layerName: number]: FeatureLayersIdentify;
   featureCount: number;
 }
+
+export interface FeatureItemAttachment {
+  id: number;
+  name: string;
+  size: number;
+  mime_type: string;
+  description: null;
+  is_image: boolean;
+}
+
+export interface FeatureItem {
+  id: number;
+  geom: string;
+  fields: {[field: string]: number | string | boolean};
+  extensions: {
+    description?: string;
+    attachment?: FeatureItemAttachment[];
+  };
+}
