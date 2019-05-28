@@ -7,7 +7,6 @@ import WebMap, {
   LayerAdaptersOptions,
   WebMapEvents,
   MapClickEvent,
-  BaseLayerAdapter,
   LngLatBoundsArray,
   VectorLayerAdapter
 } from '@nextgis/webmap';
@@ -30,6 +29,7 @@ export interface TreeItem {
   item_type: 'root' | 'group' | 'layer';
   display_name?: string;
   resourceId?: number;
+  parentId?: number;
   _layer?: any;
 }
 
@@ -122,8 +122,8 @@ export interface WebMapLayerAdapterEvents extends WebMapEvents {
 }
 
 export interface ResourceAdapter extends VectorLayerAdapter {
+  resourceId: number;
   item?: ResourceItem;
-
   getExtent(): LngLatBoundsArray | undefined;
   getIdentificationIds(): Promise<number[] | undefined>;
 }

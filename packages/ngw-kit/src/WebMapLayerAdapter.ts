@@ -30,9 +30,8 @@ export class WebMapLayerAdapter implements ResourceAdapter {
    * Radius for searching objects in pixels
    */
   pixelRadius = 10; // webmapSettings.identify_radius,
+  resourceId!: number;
   readonly emitter: StrictEventEmitter<EventEmitter, WebMapLayerAdapterEvents> = new EventEmitter();
-  private resourceId?: number;
-  private _dependsLayers: Array<TreeGroup | TreeLayer> = [];
   private response?: ResourceItem;
   private _webmapLayersIds?: number[];
 
@@ -79,7 +78,6 @@ export class WebMapLayerAdapter implements ResourceAdapter {
     this.$$onMapClick = undefined;
     delete this.options;
     delete this.layer;
-    this._dependsLayers = [];
     delete this.response;
     delete this._webmapLayersIds;
 
@@ -104,16 +102,8 @@ export class WebMapLayerAdapter implements ResourceAdapter {
     }
   }
 
-  getDependLayers() {
-    if (!this._dependsLayers && this.layer) {
-      this._dependsLayers = [];
-      this.layer.tree.getDescendants().forEach((x) => {
-        if (x.adapter) {
-          this._dependsLayers.push(x.adapter.layer);
-        }
-      });
-    }
-    return this._dependsLayers;
+  getDependLayers(): Array<TreeGroup | TreeLayer> {
+    return this.layer.tree.getDescendants();
   }
 
   async getIdentificationIds() {
@@ -192,11 +182,18 @@ export class WebMapLayerAdapter implements ResourceAdapter {
       layers.forEach((x) => {
         if (x.item_type === 'layer') {
           const id = x.layer_style_id;
-          promises.push(this.options.connector.get('resource.item', {}, { id }));
+          const promise = this.options.connector.get('resource.item', {}, { id }).then((y) => {
+            if (y) {
+              const parentId = Number(y.resource.parent.id);
+              x.parentId = parentId;
+              return parentId
+            }
+          })
+          promises.push(promise);
         }
       });
       const ids = await Promise.all(promises);
-      return ids.filter((x) => x !== undefined).map((x) => Number(x.resource.parent.id));
+      return ids.filter((x) => x !== undefined);
       // const id = item['layer_style_id']
     }
   }
