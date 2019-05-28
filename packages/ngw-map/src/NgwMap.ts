@@ -11,17 +11,18 @@ import WebMap, {
   MapControls,
   WebMapEvents,
   LayerDef,
-  MapClickEvent
+  MapClickEvent,
+  LayerAdapter
 } from '@nextgis/webmap';
 import NgwConnector, { ResourceItem } from '@nextgis/ngw-connector';
 import QmsKit, { QmsAdapterOptions } from '@nextgis/qms-kit';
-import NgwKit, { NgwLayerOptions, ResourceAdapter } from '@nextgis/ngw-kit';
+import NgwKit, { NgwLayerOptions, ResourceAdapter, WebMapLayerItem } from '@nextgis/ngw-kit';
 import { getIcon } from '@nextgis/icons';
 
 import { onMapLoad } from './decorators';
 import { fixUrlStr, deepmerge } from './utils';
 
-import { NgwMapOptions, ControlOptions, NgwMapEvents } from './interfaces';
+import { NgwMapOptions, ControlOptions, NgwMapEvents, NgwLayersMem } from './interfaces';
 
 const OPTIONS: NgwMapOptions = {
   target: 'map',
@@ -86,10 +87,7 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
   connector: NgwConnector;
 
   protected _ngwLayers: {
-    [layerName: string]: {
-      layer: ResourceAdapter,
-      resourceId: number
-    }
+    [layerName: string]: NgwLayersMem
   } = {};
 
   /**
@@ -189,6 +187,26 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
         }
       }
       return layer;
+    }
+  }
+
+  getNgwLayerByResourceId(id: number): LayerAdapter | undefined {
+    for (const n in  this._ngwLayers) {
+      if (this._ngwLayers.hasOwnProperty(n)) {
+        const mem = this._ngwLayers[n];
+        if (mem.resourceId === id) {
+          return mem && mem.layer;
+        }
+        if (mem.layer.getDependLayers) {
+          const dependLayers = mem.layer.getDependLayers() as WebMapLayerItem[];
+          const dependFit = dependLayers.find((x) => {
+            return x.item && x.item.parentId === id;
+          });
+          if (dependFit) {
+            return dependFit.layer;
+          }
+        }
+      }
     }
   }
 

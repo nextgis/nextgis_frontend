@@ -311,6 +311,18 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
     return Object.keys(this._layers);
   }
 
+  findLayer<T extends LayerAdapter = LayerAdapter>(filter: (adapter: T) => boolean): T | undefined {
+    for (const l in this._layers) {
+      if (this._layers.hasOwnProperty(l)) {
+        const layerAdapter = this._layers[l] as T;
+        const isFit = filter(layerAdapter);
+        if (isFit) {
+          return layerAdapter;
+        }
+      }
+    }
+  }
+
   /**
    * Check if the given layer on the map
    */
