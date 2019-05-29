@@ -73,7 +73,8 @@ export class WebMapLayerAdapter implements ResourceAdapter {
       this.options.webMap.emitter.off('click', this.$$onMapClick);
     }
     this.getDependLayers().forEach((x) => {
-      mapAdapter.removeLayer(x._layer);
+      // @ts-ignore Update x interface
+      mapAdapter.removeLayer(x.layer.layer);
     });
     this.$$onMapClick = undefined;
     delete this.options;
@@ -103,7 +104,7 @@ export class WebMapLayerAdapter implements ResourceAdapter {
   }
 
   getDependLayers(): Array<TreeGroup | TreeLayer> {
-    return this.layer.tree.getDescendants();
+    return (this.layer && this.layer.tree.getDescendants()) || [];
   }
 
   async getIdentificationIds() {
