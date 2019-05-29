@@ -8,10 +8,12 @@ import WebMap, {
   WebMapEvents,
   MapClickEvent,
   LngLatBoundsArray,
-  VectorLayerAdapter
+  VectorLayerAdapter,
+  GeoJsonAdapterOptions
 } from '@nextgis/webmap';
 import NgwConnector, { ResourceItem } from '@nextgis/ngw-connector';
 import { FeatureLayersIdentify } from '@nextgis/ngw-connector';
+import { Feature } from 'geojson';
 
 export type NgwLayerAdapterType = 'IMAGE' | 'TILE' | 'GEOJSON';
 
@@ -28,7 +30,7 @@ export interface AppSettings {
 export interface TreeItem {
   item_type: 'root' | 'group' | 'layer';
   display_name?: string;
-  resourceId?: number;
+  resourceId?: number | [number, string];
   parentId?: number;
   _layer?: any;
 }
@@ -92,7 +94,9 @@ export interface NgwKitOptions {
   identification?: boolean;
 }
 
-export interface WebMapAdapterOptions extends AdapterOptions {
+type A = AdapterOptions & TreeLayer & TreeGroup;
+
+export interface WebMapAdapterOptions extends A {
   baseUrl: string;
   resourceId: number | [number, string];
   webMap: WebMap;
@@ -121,7 +125,11 @@ export interface WebMapLayerAdapterEvents extends WebMapEvents {
   identify: IdentifyEvent;
 }
 
-export interface ResourceAdapter extends VectorLayerAdapter {
+export interface ResourceAdapter<
+  M = any,
+  L = any,
+  O extends GeoJsonAdapterOptions = GeoJsonAdapterOptions,
+  F extends Feature = Feature> extends VectorLayerAdapter<M, L, O, F> {
   resourceId: number;
   item?: ResourceItem;
   getExtent(): LngLatBoundsArray | undefined;
