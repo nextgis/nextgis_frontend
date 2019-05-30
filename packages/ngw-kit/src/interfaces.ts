@@ -94,7 +94,7 @@ export interface NgwKitOptions {
   identification?: boolean;
 }
 
-type A = AdapterOptions & TreeLayer & TreeGroup;
+type A = AdapterOptions; // & TreeLayer & TreeGroup;
 
 export interface WebMapAdapterOptions extends A {
   baseUrl: string;
