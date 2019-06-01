@@ -87,7 +87,7 @@ export class NgwConnector {
 
   async request<K extends keyof RequestItemsParamsMap>(
     name: K,
-    params: RequestItemsParamsMap[K] & { [name: string]: any } = {},
+    params: (RequestItemsParamsMap[K] | {} ) & { [name: string]: any } = {},
     options?: RequestOptions): CancelablePromise<GetRequestItemsResponseMap[K] | PostRequestItemsResponseMap[K]> {
 
     const apiItems = await this.connect();
