@@ -27,13 +27,16 @@ import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 // @ts-ignore
 import { fromLonLat, transformExtent, transform } from 'ol/proj';
 import { Attribution } from './controls/Attribution';
-import { olx } from 'openlayers';
+
+import * as ol from 'ol';
+import Base from 'ol/layer/Base';
+import Control from 'ol/control/Control';
+
 import { PanelControl } from './controls/PanelControl';
 import { createControl } from './controls/createControl';
 import { createButtonControl } from './controls/createButtonControl';
 
-type Layer = ol.layer.Base;
-type Control = ol.control.Control;
+type Layer = Base;
 
 type TLayerAdapter = LayerAdapter<Map, Layer>;
 
@@ -44,7 +47,7 @@ interface PositionMem {
 
 export type ForEachFeatureAtPixelCallback = (
   feature: ol.Feature,
-  layer: ol.layer.Layer,
+  layer: Layer,
   evt: ol.MapBrowserPointerEvent) => void;
 export class OlMapAdapter implements MapAdapter<Map, Layer> {
 
@@ -272,7 +275,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
   private _addMapListeners() {
     const map = this.map;
     if (map) {
-      map.on('click', (evt) => this.onMapClick(evt as ol.MapBrowserPointerEvent), this);
+      map.on('click', (evt: ol.MapBrowserEvent) => this.onMapClick(evt as ol.MapBrowserPointerEvent));
 
       const center = this.getCenter();
       const zoom = this.getZoom();
