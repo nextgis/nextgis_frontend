@@ -32,7 +32,7 @@ export type LngLatBoundsArray = [number, number, number, number];
 /**
  * Array of two numbers representing longitude and latitude.
  */
-export type LngLatArray = [number, number];
+export type LngLatArray = [number, number] | number[];
 
 /**
  * Screen coordinates in pixels.
