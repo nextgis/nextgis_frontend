@@ -15,15 +15,19 @@ import CircleStyle from 'ol/style/Circle';
 import Fill from 'ol/style/Fill';
 import Stroke from 'ol/style/Stroke';
 import Style from 'ol/style/Style';
-import Icon from 'ol/style/Icon';
-// @ts-ignore
-import { asArray } from 'ol/color';
-// @ts-ignore
+import Icon, { Options as IconOptions} from 'ol/style/Icon';
+import IconAnchorUnits from 'ol/style/IconAnchorUnits';
+
+import { asArray, Color } from 'ol/color';
 import { Feature, GeoJsonObject } from 'geojson';
 import { ForEachFeatureAtPixelCallback } from '../OlMapAdapter';
 
-type Layer = ol.layer.Base;
-type OlStyle = ol.style.Style | ol.style.Style[] | null;
+import * as ol from 'ol';
+import Base from 'ol/layer/Base';
+
+type Layer = Base;
+
+type OlStyle = Style | Style[];
 
 const typeAlias: { [x: string]: GeoJsonAdapterLayerType } = {
   'Point': 'circle',
@@ -63,10 +67,8 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
     this.layer = new VectorLayer({
       source: this.vectorSource,
       style: (f) => {
-        if (options.paint) {
-          return styleFunction(f as ol.Feature, options.paint);
-        }
-        return null;
+        const style =  styleFunction(f as ol.Feature, options.paint);
+        return style;
       }
     });
 
@@ -239,7 +241,7 @@ function getFeature(feature: ol.Feature): Feature {
   return geojson.writeFeatureObject(feature);
 }
 
-function styleFunction(feature: ol.Feature, paint: GeoJsonAdapterLayerPaint | GetPaintCallback): OlStyle {
+function styleFunction(feature: ol.Feature, paint: GeoJsonAdapterLayerPaint | GetPaintCallback = {}): OlStyle {
   if (typeof paint === 'function') {
     const f: Feature = getFeature(feature);
     return styleFunction(feature, paint(f));
@@ -247,7 +249,6 @@ function styleFunction(feature: ol.Feature, paint: GeoJsonAdapterLayerPaint | Ge
 
     const type = feature.getGeometry().getType();
     const style: { stroke?: Stroke, fill?: Fill, image?: any } = {};
-
     const _type = paint.type;
     if (!_type) {
       const ta = typeAlias[type];
@@ -275,20 +276,21 @@ function styleFunction(feature: ol.Feature, paint: GeoJsonAdapterLayerPaint | Ge
 
       const svg = paint.html;
       if (svg) {
-        style.image = new Icon({
+        const iconOptions: IconOptions = {
           src: 'data:image/svg+xml,' + escape(svg),
+          anchorXUnits: IconAnchorUnits.PIXELS,
+          anchorYUnits: IconAnchorUnits.PIXELS,
           anchor: paint.iconAnchor,
-          imgSize: paint.iconSize,
-          anchorXUnits: 'pixels',
-          anchorYUnits: 'pixels',
-        });
+          imgSize: paint.iconSize
+        };
+        style.image = new Icon(iconOptions);
       }
     }
     return new Style(style);
   }
 }
 
-function getColor(colorStr: string, opacity?: number): ol.Color {
+function getColor(colorStr: string, opacity?: number): Color {
   const color = asArray(colorStr);
   const colorArray = color.slice() as [number, number, number, number];
   colorArray[3] = opacity !== undefined ? opacity : 1;

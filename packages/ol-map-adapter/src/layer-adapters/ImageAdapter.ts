@@ -1,7 +1,6 @@
 import { BaseLayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
-import ImageWMS from 'ol/source/ImageWMS';
+import ImageWMS, { Options as ImageWMSOptions} from 'ol/source/ImageWMS';
 import ImageLayer from 'ol/layer/Image';
-import { olx } from 'openlayers';
 import Map from 'ol/Map';
 
 export class ImageAdapter implements BaseLayerAdapter {
@@ -12,7 +11,7 @@ export class ImageAdapter implements BaseLayerAdapter {
 
   addLayer(options: ImageAdapterOptions) {
 
-    const imageOptions: olx.source.ImageWMSOptions = {
+    const imageOptions: ImageWMSOptions = {
       url: options.url,
       params: {
         resource: options.resourceId || options.id,
