@@ -31,6 +31,7 @@ import { Attribution } from './controls/Attribution';
 import * as ol from 'ol';
 import Base from 'ol/layer/Base';
 import Control from 'ol/control/Control';
+import { MapOptions as OlMapOptions } from 'ol/PluggableMap';
 
 import { PanelControl } from './controls/PanelControl';
 import { createControl } from './controls/createControl';
@@ -92,13 +93,13 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
       projection: this.displayProjection,
     });
 
-    const defOpt: olx.MapOptions = {
-      logo: false,
+    const defOpt: OlMapOptions = {
+      // logo: false,
       controls: [],
       view,
       layers: [],
     };
-    const mapInitOptions: olx.MapOptions = {
+    const mapInitOptions: OlMapOptions = {
       ...defOpt,
       target: options.target,
       // logo: options.logo,
@@ -138,7 +139,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
 
   getCenter(): LngLatArray | undefined {
     if (this._olView) {
-      return this._olView.getCenter();
+      return this._olView.getCenter() as [number, number];
     }
   }
 
