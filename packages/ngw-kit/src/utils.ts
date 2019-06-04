@@ -10,6 +10,8 @@ import { NgwLayerOptions, WebMapAdapterOptions, IdentifyRequestOptions, Resource
 import { WebMapLayerAdapter } from './WebMapLayerAdapter';
 // @ts-ignore
 import { toWgs84 as WGS84 } from 'reproject';
+// @ts-ignore
+import { parse } from 'wellknown';
 import { GeoJsonObject } from 'geojson';
 
 const epsg = {
@@ -19,6 +21,11 @@ const epsg = {
 
 export function toWgs84(geojson: GeoJsonObject) {
   return WGS84(geojson, epsg['EPSG:3857'], epsg);
+}
+
+export function wktToGeoJson(geom: string) {
+  const geojson = parse(geom);
+  return toWgs84(geojson);
 }
 
 export function fixUrlStr(url: string) {
