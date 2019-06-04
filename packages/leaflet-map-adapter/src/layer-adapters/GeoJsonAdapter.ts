@@ -292,7 +292,10 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
       aliases.forEach(([to, from]: [keyof PathOptions, keyof PathPaint]) => {
         const paintProp = (paint as PathPaint)[from];
         if (paintProp !== undefined) {
-          Object.defineProperty(readyPaint, to, paintProp);
+          Object.defineProperty(readyPaint, to, {
+            enumerable: true,
+            value: paintProp
+          });
         }
       });
 
