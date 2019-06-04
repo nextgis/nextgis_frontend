@@ -111,7 +111,9 @@
       ngwMap.removeOverlays();
       ngwMap.addNgwLayer(options).then(function (layer) {
         layer.getExtent().then(function (extent) {
-          ngwMap.fitBounds(extent);
+          if (extent) {
+            ngwMap.fitBounds(extent);
+          }
         });
       });
     }

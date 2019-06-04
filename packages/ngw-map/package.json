@@ -12,7 +12,8 @@
     "@nextgis/ngw-kit": "^0.15.3",
     "@nextgis/qms-kit": "^0.15.3",
     "@nextgis/webmap": "^0.15.3",
-    "events": "^3.0.0"
+    "events": "^3.0.0",
+    "strict-event-emitter-types": "^2.0.0"
   },
   "devDependencies": {
     "@types/events": "^3.0.0",
