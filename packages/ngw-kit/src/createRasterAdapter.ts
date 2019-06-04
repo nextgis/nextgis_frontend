@@ -1,6 +1,8 @@
-import { NgwLayerOptions } from './interfaces';
+import { NgwLayerOptions, ResourceAdapter } from './interfaces';
 import WebMap, { BaseLayerAdapter, Type, ImageAdapterOptions, TileAdapterOptions } from '@nextgis/webmap';
 import { getLayerAdapterOptions } from './utils';
+import { ResourceItem } from '@nextgis/ngw-connector';
+import { Options } from 'ol/style/Style';
 
 export async function createRasterAdapter(
   options: NgwLayerOptions,
@@ -17,9 +19,11 @@ export async function createRasterAdapter(
 
     const adapterClass = webMap.mapAdapter.layerAdapters[adapter] as Type<BaseLayerAdapter>;
 
-    return class Adapter extends adapterClass {
+    return class Adapter extends adapterClass implements ResourceAdapter{
 
       // options = {};
+      item?: ResourceItem;
+      resourceId = options.resourceId;
 
       constructor(public map: any, _options: any) {
         super(map, _options);
@@ -36,6 +40,13 @@ export async function createRasterAdapter(
       }
       addLayer(addOptions: any) {
         return super.addLayer({...this.options, ...addOptions});
+      }
+
+      async getIdentificationIds() {
+        const id = this.item && this.item.resource.parent.id;
+        if (id) {
+          return [id];
+        }
       }
       // beforeRemove() {
 

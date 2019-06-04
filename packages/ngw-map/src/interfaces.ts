@@ -22,6 +22,8 @@ export interface ControlOptions {
   position?: ControlPositions;
 }
 
+export type NgwResourceDefinition = number | [number, string] | NgwLayerOptions;
+
 export interface NgwMapOptions<C = any> extends MapOptions {
   /**
    * Url of NGW server like this https://demo.nextgis.com
@@ -44,7 +46,7 @@ export interface NgwMapOptions<C = any> extends MapOptions {
    *   ngwMap.hideLayer('my-webmap');
    * ```
    */
-  webmapId?: number | [number, string];
+  webmapId?: NgwResourceDefinition;
   /**
    * Id number of resource from [QMS](https://qms.nextgis.com/).
    * If specified through an array,
@@ -57,6 +59,9 @@ export interface NgwMapOptions<C = any> extends MapOptions {
    *   ngwMap.hideLayer('qms-basemap');
    * ```
    */
+
+  resources?: NgwResourceDefinition[];
+
   qmsId?: number | [number, string];
   /**
    * Set default paint for vector layers geometry objects.

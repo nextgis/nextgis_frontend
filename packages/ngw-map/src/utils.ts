@@ -1,3 +1,5 @@
+import { NgwResourceDefinition, NgwLayerOptions } from './interfaces';
+
 export function fixUrlStr(url: string) {
   // remove double slash
   return url.replace(/([^:]\/)\/+/g, '$1');
@@ -45,4 +47,17 @@ export function deepmerge(target: any, src: any, mergeArray = false) {
     });
   }
   return dst;
+}
+
+export function appendNgwResources(options: NgwLayerOptions[], resource?: NgwResourceDefinition) {
+  if (typeof resource === 'number') {
+    options.push({
+      resourceId: resource
+    });
+  } else if (Array.isArray(resource)) {
+    const [resourceId, id] = resource;
+    options.push({resourceId, id});
+  } else if (typeof resource === 'object') {
+    options.push(resource);
+  }
 }

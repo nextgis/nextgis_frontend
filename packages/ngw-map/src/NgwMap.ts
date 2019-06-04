@@ -20,7 +20,7 @@ import NgwKit, { NgwLayerOptions, ResourceAdapter, WebMapLayerItem } from '@next
 import { getIcon } from '@nextgis/icons';
 
 import { onMapLoad } from './decorators';
-import { fixUrlStr, deepmerge } from './utils';
+import { fixUrlStr, deepmerge, appendNgwResources } from './utils';
 
 import { NgwMapOptions, ControlOptions, NgwMapEvents, NgwLayersMem } from './interfaces';
 
@@ -43,11 +43,9 @@ const OPTIONS: NgwMapOptions = {
 function prepareWebMapOptions(mapAdapter: MapAdapter, options: NgwMapOptions) {
   const opt: NgwMapOptions = deepmerge(OPTIONS, options);
   const kits: StarterKit[] = [new QmsKit()];
-  const resourceId = opt.webmapId;
   kits.push(new NgwKit({
     baseUrl: opt.baseUrl,
     auth: opt.auth,
-    resourceId,
     identification: opt.identification
   }));
   return {
@@ -80,6 +78,7 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
   static decorators = { onMapLoad, ...WebMap.decorators };
   static getIcon = getIcon;
   static toWgs84 = NgwKit.utils.toWgs84;
+  static wktToGeoJson = NgwKit.utils.wktToGeoJson;
 
   readonly emitter: StrictEventEmitter<EventEmitter, NgwMapEvents> = new EventEmitter();
 
@@ -174,7 +173,11 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
     }
     if (this.options.baseUrl) {
       const adapter = NgwKit.utils.addNgwLayer(options, this, this.options.baseUrl, this.connector);
-      const layer = await this.addLayer(adapter, options.adapterOptions || {}) as ResourceAdapter;
+      const layer = await this.addLayer(adapter, {
+        // TODO: all options into one object
+        ...options,
+        ...options.adapterOptions
+      }) as ResourceAdapter;
       const id = layer && this.getLayerId(layer);
       if (layer && id) {
         this._ngwLayers[id] = { layer, resourceId: options.resourceId };
@@ -190,12 +193,17 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
     }
   }
 
-  getNgwLayerByResourceId(id: number): LayerAdapter | undefined {
-    for (const n in  this._ngwLayers) {
+  async getNgwLayerByResourceId(id: number): Promise<LayerAdapter | undefined> {
+    for (const n in this._ngwLayers) {
       if (this._ngwLayers.hasOwnProperty(n)) {
         const mem = this._ngwLayers[n];
         if (mem.resourceId === id) {
           return mem && mem.layer;
+        } else if (mem.layer.getIdentificationIds) {
+          const ids = await mem.layer.getIdentificationIds();
+          if (ids && ids.some((x) => x === id)) {
+            return mem.layer;
+          }
         }
         if (mem.layer.getDependLayers) {
           const dependLayers = mem.layer.getDependLayers() as WebMapLayerItem[];
@@ -288,6 +296,18 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
 
       await this.addBaseLayer('QMS', qmsLayerOptions).then((layer) => {
         this.showLayer(layer);
+      });
+
+      const resources: NgwLayerOptions[] = [];
+      appendNgwResources(resources, this.options.webmapId);
+      if (this.options.resources && Array.isArray(this.options.resources)) {
+        this.options.resources.forEach((x) => {
+          appendNgwResources(resources, x);
+        });
+      }
+
+      resources.forEach((x) => {
+        this.addNgwLayer(x);
       });
     }
 

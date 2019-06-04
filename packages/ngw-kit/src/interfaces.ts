@@ -132,6 +132,6 @@ export interface ResourceAdapter<
   F extends Feature = Feature> extends VectorLayerAdapter<M, L, O, F> {
   resourceId: number;
   item?: ResourceItem;
-  getExtent(): LngLatBoundsArray | undefined;
+  getExtent?(): LngLatBoundsArray | Promise<LngLatBoundsArray> | undefined;
   getIdentificationIds(): Promise<number[] | undefined>;
 }
