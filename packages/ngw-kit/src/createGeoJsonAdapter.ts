@@ -23,7 +23,7 @@ export async function createGeoJsonAdapter(
     if (options.id) {
       geoJsonOptions.id = options.id;
     }
-    return webMap._updateGeojsonAdapterOptions(geoJsonOptions);
+    return WebMap.utils.updateGeojsonAdapterOptions(geoJsonOptions);
   };
   return class Adapter extends adapter {
     async addLayer(_opt: any) {
