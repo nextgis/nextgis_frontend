@@ -60,13 +60,20 @@ export interface TreeLayer extends TreeItem {
   updateWmsParams?: (parans: any) => any;
 }
 
-export interface NgwLayerOptions<A extends NgwLayerAdapterType = NgwLayerAdapterType> {
-  resourceId: number;
+export interface NgwLayerOptionsAdditional<AA extends NgwLayerAdapterType = NgwLayerAdapterType> {
   id?: string;
-  adapter?: A;
-  adapterOptions?: LayerAdaptersOptions[A];
+  adapter?: AA;
+  adapterOptions?: LayerAdaptersOptions[AA];
   headers?: any;
   fit?: boolean;
+}
+
+export interface NgwLayerOptions<
+  AA extends NgwLayerAdapterType = NgwLayerAdapterType
+  > extends NgwLayerOptionsAdditional<AA> {
+
+  resourceId: number;
+
 }
 
 export interface NgwConfig {
