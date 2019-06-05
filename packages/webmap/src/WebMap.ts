@@ -26,6 +26,8 @@ import {
   ToggleControl
 } from './interfaces/MapControl';
 
+import { createToggleControl } from './components/controls/ToggleControl';
+
 import { Keys } from './components/keys/Keys';
 import { Feature, GeoJsonObject } from 'geojson';
 
@@ -39,8 +41,8 @@ import { deepmerge } from './util/deepmerge';
 import { detectGeometryType, findMostFrequentGeomType } from './util/geometryTypes';
 import { updateGeojsonAdapterOptions } from './util/updateGeojsonAdapterOptions';
 
-import { WebMapLayers } from './managers/WebMapLayers';
-import { WebMapControls } from './managers/WebMapControls';
+import { WebMapLayers } from './WebMapLayers';
+import { WebMapControls } from './WebMapControls';
 
 const OPTIONS: MapOptions = {
   minZoom: 0,
@@ -68,7 +70,8 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
   static utils = {
     detectGeometryType,
     findMostFrequentGeomType,
-    updateGeojsonAdapterOptions
+    updateGeojsonAdapterOptions,
+    createToggleControl
   };
   static getPaintFunctions: { [name: string]: GetPaintFunction };
   static decorators = { onLoad };

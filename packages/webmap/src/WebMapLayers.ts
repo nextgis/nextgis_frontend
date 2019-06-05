@@ -11,14 +11,14 @@ import {
   VectorLayerAdapter,
   DataLayerFilter,
   OnLayerClickOptions
-} from '../interfaces/LayerAdapter';
-import { LayerDef, Type } from '../interfaces/BaseTypes';
-import { WebMap } from '../WebMap';
+} from './interfaces/LayerAdapter';
+import { LayerDef, Type } from './interfaces/BaseTypes';
+import { WebMap } from './WebMap';
 
 import { Feature, GeoJsonObject } from 'geojson';
-import { preparePaint } from '../util/preparePaint';
-import { updateGeojsonAdapterOptions } from '../util/updateGeojsonAdapterOptions';
-import { GetAttributionsOptions } from '../interfaces/WebMapApp';
+import { preparePaint } from './util/preparePaint';
+import { updateGeojsonAdapterOptions } from './util/updateGeojsonAdapterOptions';
+import { GetAttributionsOptions } from './interfaces/WebMapApp';
 
 export class WebMapLayers<L = any> {
   private _layersIds: number = 1;
