@@ -9,7 +9,7 @@
     "tslint-webpack-plugin": "^2.0.4",
     "typedoc": "^0.14.2",
     "typescript": "^3.5.1",
-    "webpack": "^4.32.2"
+    "webpack": "^4.33.0"
   },
   "scripts": {
     "clean": "lerna run clean",
