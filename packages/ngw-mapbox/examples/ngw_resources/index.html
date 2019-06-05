@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+
+  <title>Ngw resources</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body,
+    #map {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.4.0/polyfill.min.js"></script>
+  <!-- <script src="https://unpkg.com/@nextgis/ngw-mapbox"></script> -->
+  <script src="../../lib/ngw-mapbox.js"></script>
+</head>
+
+<body>
+  <div id='map'></div>
+  <script>
+    var ngwMap = new NgwMap({
+      baseUrl: 'https://demo.nextgis.com',
+      target: 'map',
+      qmsId: 487,
+      resources: [
+        { resourceId: 4354, id: 'frame', fit: true, adapter: 'GEOJSON', paint: { fillOpacity: 0.3, stroke: true } },
+        [4334, 'Faults'],
+        { resourceId: 4338, id: 'q4', selectable: true },
+        // 4340,
+        // 4342,
+        // 4344,
+        // 4346,
+        // 4348,
+        // 4350,
+        // 4352,
+      ]
+    });
+    ngwMap.emitter.on('ngw:select', function (resp) {
+      var feature;
+
+      for (var l in resp) {
+        if (resp.hasOwnProperty(l)) {
+          if (l !== 'featureCount') {
+            var layerFeatures = resp[l].features;
+            var resourceId = Number(l);
+            var feature = layerFeatures[0];
+            if (feature) {
+              // select only one feature from first layer
+              feature = {
+                fid: feature.id,
+                id: l
+              };
+            }
+          }
+        }
+      }
+      info(feature);
+    });
+
+    var getFeaturePromise;
+
+    var clean = function () {
+      if (getFeaturePromise) {
+        getFeaturePromise.cancel();
+      }
+      ngwMap.removeLayer('highlight');
+    }
+
+    var info = function (item) {
+      clean();
+      if (item) {
+        getFeaturePromise = ngwMap.connector.get('feature_layer.feature.item', null, {
+          id: item.id,
+          fid: item.fid
+        }).then(function (selected) {
+          var geojson = NgwMap.wktToGeoJson(selected.geom);
+          ngwMap.addLayer('GEOJSON', {
+            id: 'highlight',
+            data: geojson,
+            visibility: true,
+            paint: { color: 'red', stroke: true, fillOpacity: '0.5' }
+          });
+          console.log(selected);
+        });
+      }
+    }
+
+  </script>
+</body>
+
+</html>

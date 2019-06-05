@@ -1,4 +1,5 @@
 import { NgwResourceDefinition, NgwLayerOptions } from './interfaces';
+import { NgwLayerOptionsAdditional } from '@nextgis/ngw-kit';
 
 export function fixUrlStr(url: string) {
   // remove double slash
@@ -49,15 +50,20 @@ export function deepmerge(target: any, src: any, mergeArray = false) {
   return dst;
 }
 
-export function appendNgwResources(options: NgwLayerOptions[], resource?: NgwResourceDefinition) {
+export function appendNgwResources(
+  options: NgwLayerOptions[],
+  resource?: NgwResourceDefinition,
+  defOptions?: NgwLayerOptionsAdditional) {
+
   if (typeof resource === 'number') {
     options.push({
-      resourceId: resource
+      ...defOptions,
+      resourceId: resource,
     });
   } else if (Array.isArray(resource)) {
     const [resourceId, id] = resource;
-    options.push({resourceId, id});
+    options.push({ ...defOptions, resourceId, id});
   } else if (typeof resource === 'object') {
-    options.push(resource);
+    options.push({ ...defOptions, ...resource});
   }
 }
