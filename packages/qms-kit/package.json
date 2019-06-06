@@ -1,13 +1,13 @@
 {
   "name": "@nextgis/qms-kit",
-  "version": "0.15.4",
+  "version": "0.15.6",
   "_priority": 20,
   "description": "",
   "main": "lib/qms-kit.js",
   "unpkg": "lib/qms-kit.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/webmap": "^0.15.4"
+    "@nextgis/webmap": "^0.15.6"
   },
   "devDependencies": {
     "@types/events": "^3.0.0",
