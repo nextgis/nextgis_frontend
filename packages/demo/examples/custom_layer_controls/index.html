@@ -39,14 +39,18 @@
       baseUrl: 'https://demo.nextgis.com',
       target: 'map',
       qmsId: [487, qmsBaseLayerName],
-      webmapId: [4119, webMapName]
-    });
-
-    var toggleBaseLayerControl = ngwMap.createButtonControl({
-      html: 'B',
-      title: 'Toggle base map',
-      onClick: function () {
-        ngwMap.toggleLayer(qmsBaseLayerName);
+      webmapId: [4119, webMapName],
+      controls: ['ZOOM', 'ATTRIBUTION', 'ToggleBaseMap'],
+      controlsOptions: {
+        ToggleBaseMap: {
+          control: 'BUTTON',
+          position: 'top-right',
+          html: 'B',
+          title: 'Toggle base map',
+          onClick: function () {
+            ngwMap.toggleLayer(qmsBaseLayerName);
+          }
+        }
       }
     });
 
@@ -62,9 +66,8 @@
       }
     });
 
-    // ngwMap.addControl('TOGGLE', 'top-right', options) 
-    // ngwMap.addControl('BUTTON', 'top-right', options) 
-    ngwMap.addControl(toggleBaseLayerControl, 'top-right');
+    // ngwMap.addControl('TOGGLE', 'top-right', options)
+    // ngwMap.addControl('BUTTON', 'top-right', options)
     ngwMap.addControl(toggleHeatMapControl, 'top-right');
 
     // 'CONTROL' is same as ngwMap.createControl(control, options)
