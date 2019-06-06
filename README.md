@@ -142,6 +142,36 @@ To publish a new package, run the following command in the package folder
 npm publish --access=public
 ```
 
+## VSCode
+
+### Debugging with Chrome, LiveServer and Watch
+
+Example for ngw-leaflet:
+
+Run webpack building with watch
+
+```bash
+cd ./packages/ngw-leaflet
+yarn run watch
+```
+
+Run LiveServer for some example index.html
+
+Set configuration for Chrome Debugger
+
+```json
+{
+    "type": "chrome",
+    "request": "launch",
+    "name": "NgwLeaflet debug",
+    "url": "http://127.0.0.1:5500",
+    "webRoot": "${workspaceFolder}/http://127.0.0.1:5500/packages/demo/examples",
+    "sourceMapPathOverrides": {
+      "webpack://NgwLeaflet/../*": "${webRoot}/packages/*"
+  }
+}
+```
+
 ## Commercial support
 
 Need to fix a bug or add a feature to NextGIS Frontend? We provide custom development and support for this software. [Contact us](http://nextgis.com/contact/) to discuss options!
