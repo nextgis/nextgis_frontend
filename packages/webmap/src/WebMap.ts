@@ -75,6 +75,7 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
   };
   static getPaintFunctions: { [name: string]: GetPaintFunction };
   static decorators = { onLoad };
+  static controls = WebMapControls.controls;
 
   options: MapOptions = OPTIONS;
   // `WebMapEvents` must be `E` but its not work correct

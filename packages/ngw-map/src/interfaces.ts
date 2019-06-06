@@ -20,9 +20,15 @@ export { NgwLayerOptions };
 
 export interface ControlOptions {
   position?: ControlPositions;
+  control?: string;
+  [param: string]: any;
 }
 
 export type NgwResourceDefinition = number | [number, string] | NgwLayerOptions;
+
+interface ControlsOptions {
+  [control: string]: ControlOptions;
+}
 
 export interface NgwMapOptions<C = any> extends MapOptions {
   /**
@@ -95,14 +101,16 @@ export interface NgwMapOptions<C = any> extends MapOptions {
    * @example
    * ```javascript
    * {
-   *   controls: ['ZOOM'],
+   *   controls: ['ZOOM', 'button1', 'button2'],
    *   controlsOptions: {
-   *     'ZOOM': { position: 'top-right' }
+   *     'ZOOM': { position: 'top-right' },
+   *     'button1': { control: 'BUTTON', position: 'top-left' },
+   *     'button2': { control: 'BUTTON' },
    *   }
    * }
    * ```
    */
-  controlsOptions?: { [controlName: string]: any };
+  controlsOptions?: ControlsOptions;
   /**
    * Get information from NGW webmap layers by click.
    *
