@@ -34,7 +34,7 @@
       resources: [
         { resourceId: 4354, id: 'frame', fit: true, adapter: 'GEOJSON', paint: { fillOpacity: 0.3, stroke: true } },
         [4334, 'Faults'],
-        { resourceId: 4338, id: 'q4', selectable: true },
+        { resourceId: 4338, id: 'q4', selectable: true, opacity: 0.8 },
         // 4340,
         // 4342,
         // 4344,
@@ -46,24 +46,25 @@
     });
     ngwMap.emitter.on('ngw:select', function (resp) {
       var promises = [];
-
+      var params;
       for (var l in resp) {
         if (resp.hasOwnProperty(l)) {
           if (l !== 'featureCount') {
             var layerFeatures = resp[l].features;
             var resourceId = Number(l);
-            var feature = layerFeatures[0];
-            if (feature) {
+            f = layerFeatures[0];
+            if (f) {
               // select only one feature from first layer
-              info({
-                fid: feature.id,
+              params = {
+                fid: f.id,
                 id: l
-              });
+              }
               break;
             }
           }
         }
       }
+      info(params);
     });
 
     var getFeaturePromise;

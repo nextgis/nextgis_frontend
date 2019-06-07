@@ -36,7 +36,7 @@ export class WebMapLayerItem extends Item<ItemOptions> {
             item.item.layer_enabled = value;
           }
         },
-      },
+      }
     ],
   };
 
@@ -44,9 +44,9 @@ export class WebMapLayerItem extends Item<ItemOptions> {
   layer?: LayerAdapter;
 
   constructor(public webMap: WebMap,
-              item: TreeGroup | TreeLayer,
-              options?: ItemOptions,
-              parent?: WebMapLayerItem) {
+    item: TreeGroup | TreeLayer,
+    options?: ItemOptions,
+    parent?: WebMapLayerItem) {
 
     super({ ...WebMapLayerItem.options, ...options });
 
@@ -84,7 +84,6 @@ export class WebMapLayerItem extends Item<ItemOptions> {
         minZoom,
         ...item,
         headers: this.options.headers,
-
       };
       newLayer = await this.webMap.addLayer(adapter, options);
     }
@@ -93,6 +92,11 @@ export class WebMapLayerItem extends Item<ItemOptions> {
       this.layer = newLayer;
       if (this.properties && item.item_type === 'layer' && item.layer_enabled) {
         this.properties.property('visibility').set(true);
+      }
+      const transparency = item.item_type === 'layer' && item.layer_transparency;
+      if (transparency !== undefined) {
+        const opacity = (100 - transparency) / 100;
+        this.webMap.setLayerOpacity(newLayer, opacity);
       }
     } else {
       // this.properties.get('visibility').set(true);

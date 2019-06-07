@@ -204,6 +204,10 @@ export class WebMapLayers<L = any> {
           this.webMap.fitBounds(extent);
         }
       }
+      const opacity = options.opacity;
+      if (opacity !== undefined && opacity <= 1) {
+        this.setLayerOpacity(_adapter, opacity);
+      }
       this.webMap.emitter.emit('layer:add', _adapter);
       return _adapter;
 
