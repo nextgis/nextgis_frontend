@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/ngw-map",
-  "version": "0.15.7",
+  "version": "0.15.8",
   "_priority": 11,
   "description": "",
   "main": "lib/ngw-map.js",
