@@ -26,6 +26,11 @@ export interface AdapterOptions {
   maxZoom?: number;
   minZoom?: number;
   /**
+   * from 0-transparent to 1-visible
+   * @default 1
+   */
+  opacity?: number;
+  /**
    * Fit map for layer extent
    * @default false
    */

@@ -161,13 +161,13 @@ Set configuration for Chrome Debugger
 
 ```json
 {
-    "type": "chrome",
-    "request": "launch",
-    "name": "NgwLeaflet debug",
-    "url": "http://127.0.0.1:5500",
-    "webRoot": "${workspaceFolder}/http://127.0.0.1:5500/packages/demo/examples",
-    "sourceMapPathOverrides": {
-      "webpack://NgwLeaflet/../*": "${webRoot}/packages/*"
+  "type": "chrome",
+  "request": "launch",
+  "name": "NgwLeaflet debug",
+  "url": "http://127.0.0.1:5500",
+  "webRoot": "${workspaceFolder}/http://127.0.0.1:5500/packages/demo/examples",
+  "sourceMapPathOverrides": {
+    "webpack://NgwLeaflet/../*": "${webRoot}/packages/*"
   }
 }
 ```
