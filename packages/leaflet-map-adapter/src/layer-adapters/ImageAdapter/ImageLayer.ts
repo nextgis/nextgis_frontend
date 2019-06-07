@@ -138,7 +138,7 @@ export class ImageLayer extends L.Layer {
       }
       this._currentOverlay = overlay;
       overlay.setOpacity(
-        this.options.opacity ? this.options.opacity : 1
+        this.options.opacity !== undefined ? this.options.opacity : 1
       );
       if (this.options.isBack === true) {
         overlay.bringToBack();
