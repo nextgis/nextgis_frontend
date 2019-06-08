@@ -3,5 +3,5 @@
 const ngwUploader = require('..');
 
 describe('ngw-uploader', () => {
-    it('needs tests');
+    // it('needs tests');
 });
