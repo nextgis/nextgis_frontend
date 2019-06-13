@@ -183,14 +183,23 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
         const id = layer && this.getLayerId(layer);
         if (layer && id) {
           this._ngwLayers[id] = { layer, resourceId: options.resourceId };
+
+          if (layer.options.baseLayer) {
+            const visibleLayerBaseLayer = this.getActiveBaseLayer();
+            if (visibleLayerBaseLayer) {
+              return layer;
+            }
+          }
+
           this.showLayer(layer);
-        }
-        if (options.fit && layer.getExtent) {
-          const extent = await layer.getExtent();
-          if (extent) {
-            this.fitBounds(extent);
+          if (options.fit && layer.getExtent) {
+            const extent = await layer.getExtent();
+            if (extent) {
+              this.fitBounds(extent);
+            }
           }
         }
+
         return layer;
       } catch (er) {
         console.error('can\'t add ngw layer', er);
