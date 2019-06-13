@@ -172,24 +172,29 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
       throw new Error('resourceId is required parameter to add NGW layer');
     }
     if (this.options.baseUrl) {
-      const adapter = NgwKit.utils.addNgwLayer(options, this, this.options.baseUrl, this.connector);
-      const layer = await this.addLayer(adapter, {
-        // TODO: all options into one object
-        ...options,
-        ...options.adapterOptions
-      }) as ResourceAdapter;
-      const id = layer && this.getLayerId(layer);
-      if (layer && id) {
-        this._ngwLayers[id] = { layer, resourceId: options.resourceId };
-        this.showLayer(layer);
-      }
-      if (options.fit && layer.getExtent) {
-        const extent = await layer.getExtent();
-        if (extent) {
-          this.fitBounds(extent);
+      try {
+        const adapter = NgwKit.utils.addNgwLayer(options, this, this.options.baseUrl, this.connector);
+
+        const layer = await this.addLayer(adapter, {
+          // TODO: all options into one object
+          ...options,
+          ...options.adapterOptions
+        }) as ResourceAdapter;
+        const id = layer && this.getLayerId(layer);
+        if (layer && id) {
+          this._ngwLayers[id] = { layer, resourceId: options.resourceId };
+          this.showLayer(layer);
         }
+        if (options.fit && layer.getExtent) {
+          const extent = await layer.getExtent();
+          if (extent) {
+            this.fitBounds(extent);
+          }
+        }
+        return layer;
+      } catch (er) {
+        console.error('can\'t add ngw layer', er);
       }
-      return layer;
     }
   }
 

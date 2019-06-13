@@ -35,6 +35,7 @@ export interface AdapterOptions {
    * @default false
    */
   fit?: boolean;
+  name?: string;
 }
 
 export interface MvtAdapterOptions extends AdapterOptions {

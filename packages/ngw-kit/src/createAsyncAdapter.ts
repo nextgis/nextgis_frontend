@@ -1,5 +1,6 @@
 import NgwConnector, { ResourceCls, ResourceItem } from '@nextgis/ngw-connector';
 import WebMap, { LayerAdapter, Type } from '@nextgis/webmap';
+import QmsKit, { QmsAdapter } from '@nextgis/qms-kit';
 import { NgwLayerOptions, ResourceAdapter } from './interfaces';
 
 import { createGeoJsonAdapter } from './createGeoJsonAdapter';
@@ -40,6 +41,14 @@ export async function createAsyncAdapter(
       }
     } else if (item.resource.cls === 'raster_layer') {
       return createAdapterFromFirstStyle(item.resource.id, options, webMap, baseUrl, connector);
+    } else if (item.basemap_layer && item.basemap_layer.qms) {
+      adapter = Promise.resolve(QmsKit.utils.createQmsAdapter(webMap));
+      adapter.then((x) => {
+        if (x && item.basemap_layer && item.basemap_layer.qms) {
+          const qms = JSON.parse(item.basemap_layer.qms);
+          x.prototype.qms = qms;
+        }
+      });
     }
   } catch (er) {
     if (options.adapter === 'GEOJSON') {

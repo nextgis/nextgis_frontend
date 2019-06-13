@@ -2,7 +2,7 @@
  * @module qms-kit
  */
 
-import { AdapterOptions } from '@nextgis/webmap';
+import { AdapterOptions, BaseLayerAdapter } from '@nextgis/webmap';
 export interface QmsOptions {
   url: string;
 }
@@ -11,8 +11,10 @@ export type QmsLayerType = 'tms';
 
 export interface QmsAdapterOptions extends AdapterOptions {
   url?: string;
-  qmsId: number;
+  qmsId?: number;
   name?: string;
+
+  qms?: QmsBasemap;
 }
 
 export interface GeoserviceInList {
@@ -24,7 +26,11 @@ export interface GeoserviceInList {
   epsg: number;
 }
 
-export interface Geoservice {
+export interface QmsAdapter extends BaseLayerAdapter {
+  qms?: QmsBasemap;
+}
+
+export interface QmsBasemap {
   id: number;
   guid: string;
   name: string;
@@ -41,4 +47,26 @@ export interface Geoservice {
   z_max: any;
   y_origin_top: boolean;
   icon: number;
+
+
+  alt_urls?: string[];
+  boundary?: any;
+  boundary_area?: any;
+
+  created_at?: Date; // "2016-11-14T18:08:04.486371Z";
+  cumulative_status?: string; // "works";
+
+  extent?: number[];
+
+  last_status?: number;
+
+  origin_url?: string;
+  source?: string;
+  source_url?: string;
+  submitter?: string;
+
+  updated_at?: Date;
+
 }
+
+
