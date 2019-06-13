@@ -3,5 +3,5 @@
 const leafletMapAdapter = require('..');
 
 describe('leaflet-map-adapter', () => {
-    it('needs tests');
+  // it('needs tests');
 });
