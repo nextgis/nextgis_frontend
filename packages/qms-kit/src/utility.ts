@@ -1,13 +1,15 @@
-import { WebMap, BaseLayerAdapter, LayerAdaptersOptions, Type } from '@nextgis/webmap';
-import { QmsAdapterOptions, Geoservice, QmsLayerType } from './interfaces';
+import { WebMap, BaseLayerAdapter, LayerAdaptersOptions, Type, AdapterOptions } from '@nextgis/webmap';
+import { QmsAdapterOptions, QmsBasemap, QmsLayerType, QmsAdapter as QA} from './interfaces';
 
 const alias: { [key in QmsLayerType]: keyof LayerAdaptersOptions } = {
   tms: 'TILE',
 };
 
-export function createQmsAdapter(webMap: WebMap, url: string): Type<BaseLayerAdapter> {
+export function createQmsAdapter(webMap: WebMap, url = 'https://qms.nextgis.com'): Type<BaseLayerAdapter> {
 
-  class QmsAdapter implements BaseLayerAdapter {
+  class QmsAdapter implements BaseLayerAdapter, QA {
+    qms?: QmsBasemap;
+
     constructor(public map: any, public options: QmsAdapterOptions) {
       this.options = options;
     }
@@ -15,22 +17,23 @@ export function createQmsAdapter(webMap: WebMap, url: string): Type<BaseLayerAda
     async addLayer(options: QmsAdapterOptions) {
 
       // qmsId for request, id for store
-      const service = await loadJSON<Geoservice>(url + '/api/v1/geoservices/' + options.qmsId);
-      if (service) {
-        const type = alias[service.type];
+      if (!this.qms && options.qmsId) {
+        this.qms = await loadJSON<QmsBasemap>(url + '/api/v1/geoservices/' + options.qmsId);
+      }
+      const qms = this.qms;
+      if (qms) {
+        const type = alias[qms.type || 'tms'];
         const webMapAdapter = webMap.mapAdapter.layerAdapters[type];
         if (webMapAdapter) {
           if (type === 'TILE') {
-            const protocol = (location.protocol === 'https:' ? 'https' : 'http') + '://';
-            const serviceUrl = service.url.replace(/^(https?|ftp):\/\//, protocol);
 
-            options.url = serviceUrl;
-            options.name = service.name;
-            options.attribution = service.copyright_text;
-
-            options.maxZoom = webMap.options.maxZoom;
-            options.minZoom = webMap.options.minZoom;
-            this.options = { ...this.options, ...options, baseLayer: true };
+            options = {
+              maxZoom: webMap.options.maxZoom,
+              minZoom: webMap.options.minZoom,
+              ...this.options,
+              ...updateQmsOptions(qms),
+              baseLayer: true
+            };
             const adapter = new webMapAdapter(this.map, options);
             return adapter.addLayer(options);
           }
@@ -39,6 +42,18 @@ export function createQmsAdapter(webMap: WebMap, url: string): Type<BaseLayerAda
     }
   }
   return QmsAdapter;
+}
+
+export function updateQmsOptions(qms: QmsBasemap): AdapterOptions & { url: string } {
+  const protocol = (location.protocol === 'https:' ? 'https' : 'http') + '://';
+  const serviceUrl = qms.url.replace(/^(https?|ftp):\/\//, protocol);
+  return {
+    url: serviceUrl,
+    name: qms.name,
+    attribution: qms.copyright_text,
+    maxZoom: qms.z_max,
+    minZoom: qms.z_min
+  }
 }
 
 export function loadJSON<T = any>(url: string): Promise<T> {

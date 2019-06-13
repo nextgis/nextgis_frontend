@@ -89,6 +89,14 @@ export interface WebmapResource {
   root_item: TreeGroup;
 }
 
+export interface BasemapResource {
+  url: string;
+  /**
+   * Parse to qms-kit.BasemapQms
+   */
+  qms: string;
+}
+
 // Ngw api settings
 export interface ResourceItem {
   resource: Resource;
@@ -96,4 +104,5 @@ export interface ResourceItem {
     items: {};
   };
   webmap?: WebmapResource;
+  basemap_layer?: BasemapResource;
 }

@@ -22,9 +22,9 @@
   },
   "devDependencies": {
     "@mdi/font": "^3.6.95",
-    "@types/lodash": "^4.14.133",
+    "@types/lodash": "^4.14.134",
     "@types/showdown": "^1.9.3",
-    "css-loader": "^2.1.1",
+    "css-loader": "^3.0.0",
     "favicons-webpack-plugin": "^0.0.9",
     "file-loader": "^4.0.0",
     "html-loader": "^0.5.5",
@@ -44,10 +44,10 @@
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.6.10",
     "vuetify-loader": "^1.2.2",
-    "webpack": "^4.33.0",
+    "webpack": "^4.34.0",
     "webpack-bundle-analyzer": "^3.3.2",
-    "webpack-cli": "^3.3.2",
-    "webpack-dev-server": "^3.6.0"
+    "webpack-cli": "^3.3.4",
+    "webpack-dev-server": "^3.7.1"
   },
   "scripts": {
     "start": "webpack-dev-server --progress --open --hot",
