@@ -47,6 +47,7 @@ export async function createAsyncAdapter(
         if (x && item.basemap_layer && item.basemap_layer.qms) {
           const qms = JSON.parse(item.basemap_layer.qms);
           x.prototype.qms = qms;
+          x.prototype.baseLayer = true;
         }
       });
     }

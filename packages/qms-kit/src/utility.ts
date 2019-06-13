@@ -12,6 +12,7 @@ export function createQmsAdapter(webMap: WebMap, url = 'https://qms.nextgis.com'
 
     constructor(public map: any, public options: QmsAdapterOptions) {
       this.options = options;
+      this.options.baseLayer = true;
     }
 
     async addLayer(options: QmsAdapterOptions) {
@@ -31,9 +32,9 @@ export function createQmsAdapter(webMap: WebMap, url = 'https://qms.nextgis.com'
               maxZoom: webMap.options.maxZoom,
               minZoom: webMap.options.minZoom,
               ...this.options,
-              ...updateQmsOptions(qms),
-              baseLayer: true
+              ...updateQmsOptions(qms)
             };
+            this.options = options;
             const adapter = new webMapAdapter(this.map, options);
             return adapter.addLayer(options);
           }

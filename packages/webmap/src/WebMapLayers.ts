@@ -54,6 +54,10 @@ export class WebMapLayers<L = any> {
     return undefined;
   }
 
+  getBaseLayers() {
+    return this._baseLayers;
+  }
+
   /**
    * Helper method to return added layer object by any definition type.
    */
@@ -162,14 +166,21 @@ export class WebMapLayers<L = any> {
         ...options
       };
       // options.visibility is a layer global state, but each layer on init is not visible
-      const visibility = options.visibility;
+      let visibility = options.visibility;
       options.visibility = false;
 
+      // TODO: check usage in adapter constructor and safe remove
       if (options.baseLayer) {
         options.order = 0;
       }
 
       const _adapter = new adapterEngine(this.webMap.mapAdapter.map, options);
+
+      if (_adapter.options.baseLayer) {
+        options.baseLayer = true;
+        options.order = 0;
+      }
+
       let layerId = _adapter.options.id;
       if (layerId) {
         this._layers[layerId] = _adapter;
@@ -376,6 +387,17 @@ export class WebMapLayers<L = any> {
       this.webMap.emitter.emit(preEventName, l);
       if (toStatus && source) {
         const order = l.options.baseLayer ? 0 : l.options.order;
+
+        // do not show baselayer if another on the map
+        if (order === 0 && this._baseLayers.length) {
+          const anotherVisibleLayerBaseLayer = this._baseLayers.find((x) => {
+            return x !== l.id && this.isLayerVisible(x) ;
+          });
+          if (anotherVisibleLayerBaseLayer) {
+            this.hideLayer(anotherVisibleLayerBaseLayer);
+          }
+        }
+
         if (l.showLayer) {
           l.showLayer.call(l, l.layer);
         } else {
