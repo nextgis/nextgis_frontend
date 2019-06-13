@@ -3,8 +3,11 @@
   "private": true,
   "devDependencies": {
     "lerna": "^3.15.0",
+    "@types/jest": "^24.0.13",
+    "jest": "^24.8.0",
     "rimraf": "^2.6.3",
     "topological-sort": "^0.3.0",
+    "ts-jest": "^24.0.2",
     "tslint": "^5.17.0",
     "tslint-webpack-plugin": "^2.0.4",
     "typedoc": "^0.14.2",
@@ -20,7 +23,7 @@
     "prod_script": "node ./webpack.config.js",
     "demo": "yarn run examples && cd ./packages/demo/ && yarn run prod",
     "examples": "node ./build/updateExamples.js",
-    "test": "echo \"Error: run tests from root\" && exit 1",
+    "test": "jest",
     "doc": "typedoc --options ./typedoc.json ./packages"
   },
   "license": "LGPL-3.0",
