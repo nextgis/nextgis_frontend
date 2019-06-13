@@ -8,6 +8,10 @@ import { createQmsAdapter } from './utility';
 
 export class QmsKit implements StarterKit {
 
+  static utils = {
+    createQmsAdapter
+  };
+
   options: QmsOptions = {
     url: 'https://qms.nextgis.com',
   };
@@ -25,10 +29,6 @@ export class QmsKit implements StarterKit {
       createAdapter: (webmap: WebMap) => Promise.resolve(this._createAdapter(webmap)),
     }]);
   }
-
-  // async getQmsServices() {
-  //   return loadJSON<GeoserviceInList[]>(this.url + '/api/v1/geoservices/');
-  // }
 
   private _createAdapter(webMap: WebMap): Type<BaseLayerAdapter> {
     return createQmsAdapter(webMap, this.url);

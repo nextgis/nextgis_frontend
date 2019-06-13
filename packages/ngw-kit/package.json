@@ -9,6 +9,7 @@
   "dependencies": {
     "@nextgis/item": "^0.15.6",
     "@nextgis/ngw-connector": "^0.15.6",
+    "@nextgis/qms-kit": "^0.15.7",
     "@nextgis/webmap": "^0.15.7",
     "@types/events": "^3.0.0",
     "reproject": "^1.2.4",
@@ -16,14 +17,14 @@
     "wellknown": "^0.5.0"
   },
   "devDependencies": {
-    "@types/node": "^12.0.5",
+    "@types/node": "^12.0.8",
     "rimraf": "^2.6.3",
     "ts-loader": "^6.0.2",
     "tslint": "^5.17.0",
     "tslint-webpack-plugin": "^2.0.4",
     "typescript": "^3.5.1",
-    "webpack": "^4.33.0",
-    "webpack-cli": "^3.3.2"
+    "webpack": "^4.34.0",
+    "webpack-cli": "^3.3.4"
   },
   "scripts": {
     "mjs": "tsc -d --outDir ./lib/modules",

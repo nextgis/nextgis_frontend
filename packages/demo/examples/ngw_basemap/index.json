@@ -1,0 +1,5 @@
+{
+  "name": "NGW basemap resource",
+  "description": "Connect basemap resource from NGW",
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
+}
