@@ -299,6 +299,19 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
     return this.layers.isBaseLayer(layerDef);
   }
 
+  getActiveBaseLayer() {
+    const visibleLayerBaseLayer = this.getBaseLayers().find((x) => {
+      return this.isLayerVisible(x);
+    });
+    if (visibleLayerBaseLayer) {
+      return this.getLayer(visibleLayerBaseLayer);
+    }
+  }
+
+  getBaseLayers() {
+    return this.layers.getBaseLayers();
+  }
+
   getLayerAdapters(): { [name: string]: Type<LayerAdapter> } {
     return this.mapAdapter.layerAdapters;
   }
