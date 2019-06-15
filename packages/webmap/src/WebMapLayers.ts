@@ -166,7 +166,7 @@ export class WebMapLayers<L = any> {
         ...options
       };
       // options.visibility is a layer global state, but each layer on init is not visible
-      let visibility = options.visibility;
+      const visibility = options.visibility;
       options.visibility = false;
 
       // TODO: check usage in adapter constructor and safe remove
