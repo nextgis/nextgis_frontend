@@ -48,7 +48,6 @@ export interface QmsBasemap {
   y_origin_top: boolean;
   icon: number;
 
-
   alt_urls?: string[];
   boundary?: any;
   boundary_area?: any;
@@ -68,5 +67,3 @@ export interface QmsBasemap {
   updated_at?: Date;
 
 }
-
-

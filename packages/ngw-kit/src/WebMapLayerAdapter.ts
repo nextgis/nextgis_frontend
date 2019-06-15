@@ -187,9 +187,9 @@ export class WebMapLayerAdapter implements ResourceAdapter {
             if (y) {
               const parentId = Number(y.resource.parent.id);
               x.parentId = parentId;
-              return parentId
+              return parentId;
             }
-          })
+          });
           promises.push(promise);
         }
       });
