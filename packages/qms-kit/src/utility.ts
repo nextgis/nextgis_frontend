@@ -54,7 +54,7 @@ export function updateQmsOptions(qms: QmsBasemap): AdapterOptions & { url: strin
     attribution: qms.copyright_text,
     maxZoom: qms.z_max,
     minZoom: qms.z_min
-  }
+  };
 }
 
 export function loadJSON<T = any>(url: string): Promise<T> {

@@ -24,7 +24,7 @@ export function toWgs84(geojson: GeoJsonObject) {
 }
 
 export function wktToGeoJson(geom: string) {
-  const geojson = parse(geom);
+  const geojson = parse(geom) as GeoJsonObject;
   return toWgs84(geojson);
 }
 
@@ -158,7 +158,6 @@ export function sendIdentifyRequest(
     const [x, y] = degrees2meters(lng, lat);
     polygon.push(x + ' ' + y);
   });
-
 
   const wkt = `POLYGON((${polygon.join(', ')}))`;
 

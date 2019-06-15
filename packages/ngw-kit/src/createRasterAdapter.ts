@@ -19,7 +19,7 @@ export async function createRasterAdapter(
 
     const adapterClass = webMap.mapAdapter.layerAdapters[adapter] as Type<BaseLayerAdapter>;
 
-    return class Adapter extends adapterClass implements ResourceAdapter{
+    return class Adapter extends adapterClass implements ResourceAdapter {
 
       // options = {};
       item?: ResourceItem;
