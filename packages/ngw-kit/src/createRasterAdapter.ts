@@ -2,7 +2,6 @@ import { NgwLayerOptions, ResourceAdapter } from './interfaces';
 import WebMap, { BaseLayerAdapter, Type, ImageAdapterOptions, TileAdapterOptions } from '@nextgis/webmap';
 import { getLayerAdapterOptions } from './utils';
 import { ResourceItem } from '@nextgis/ngw-connector';
-import { Options } from 'ol/style/Style';
 
 export async function createRasterAdapter(
   options: NgwLayerOptions,
@@ -10,12 +9,15 @@ export async function createRasterAdapter(
   baseUrl: string): Promise<Type<BaseLayerAdapter> | undefined> {
 
   let adapter = options.adapter || 'IMAGE';
-  const layerAdapters = webMap.getLayerAdapters();
-  const isImageAllowed = layerAdapters ? layerAdapters.IMAGE : true;
-  if (!isImageAllowed) {
-    adapter = 'TILE';
+
+  if (adapter === 'IMAGE') {
+    const layerAdapters = webMap.getLayerAdapters();
+    const isImageAllowed = layerAdapters ? layerAdapters.IMAGE : true;
+    if (!isImageAllowed) {
+      adapter = 'TILE';
+    }
   }
-  if (adapter === 'IMAGE' || adapter === 'TILE') {
+  if (adapter === 'IMAGE' || adapter === 'TILE' || adapter === 'MVT') {
 
     const adapterClass = webMap.mapAdapter.layerAdapters[adapter] as Type<BaseLayerAdapter>;
 

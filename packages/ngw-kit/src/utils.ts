@@ -61,6 +61,15 @@ export function getLayerAdapterOptions(options: NgwLayerOptions, webMap: WebMap,
       adapter = 'TILE';
     }
   }
+  if (adapter === 'MVT') {
+    url = baseUrl + '/api/component/feature_layer/mvt?x={x}&y={y}&z={z}&' +
+    'resource=' + options.resourceId +
+      '&simplification=' + (options.simplification || 0);
+    // url = baseUrl + '/api/resource/' + options.resourceId + '/{z}/{x}/{y}.mvt';
+    return {
+      url
+    };
+  }
   if (adapter === 'TILE') {
     url = baseUrl + '/api/component/render/tile?z={z}&x={x}&y={y}&resource=' + options.resourceId;
     return { url, adapter };
