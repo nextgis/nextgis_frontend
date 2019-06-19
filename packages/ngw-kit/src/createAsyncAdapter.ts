@@ -35,7 +35,12 @@ export async function createAsyncAdapter(
       }
     } else if (item.resource.cls === 'vector_layer') {
       if (options.adapter && options.adapter !== 'GEOJSON') {
-        return createAdapterFromFirstStyle(item.resource.id, options, webMap, baseUrl, connector);
+        if (options.adapter === 'MVT') {
+          adapter = createRasterAdapter(options, webMap, baseUrl);
+          // adapter = Promise.resolve(webMap.mapAdapter.layerAdapters.MVT);
+        } else {
+          return createAdapterFromFirstStyle(item.resource.id, options, webMap, baseUrl, connector);
+        }
       } else {
         adapter = createGeoJsonAdapter(options, webMap, connector);
       }
