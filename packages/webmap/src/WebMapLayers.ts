@@ -18,7 +18,7 @@ import { WebMap } from './WebMap';
 import { Feature, GeoJsonObject } from 'geojson';
 import { preparePaint } from './util/preparePaint';
 import { updateGeojsonAdapterOptions } from './util/updateGeojsonAdapterOptions';
-import { GetAttributionsOptions } from './interfaces/WebMapApp';
+import { GetAttributionsOptions, ToggleLayerOptions } from './interfaces/WebMapApp';
 
 export class WebMapLayers<L = any> {
   private _layersIds: number = 1;
@@ -349,15 +349,15 @@ export class WebMapLayers<L = any> {
   /**
    * Show added layer on the map by it definition.
    */
-  showLayer(layerDef: LayerDef) {
-    this.toggleLayer(layerDef, true);
+  showLayer(layerDef: LayerDef, options: ToggleLayerOptions = {}) {
+    this.toggleLayer(layerDef, true, options);
   }
 
   /**
    * Hide added layer on the map by it definition.
    */
-  hideLayer(layerDef: LayerDef) {
-    this.toggleLayer(layerDef, false);
+  hideLayer(layerDef: LayerDef, options: ToggleLayerOptions = {}) {
+    this.toggleLayer(layerDef, false, options);
   }
 
   /**
@@ -373,25 +373,26 @@ export class WebMapLayers<L = any> {
    * });
    * ```
    */
-  toggleLayer(layerDef: LayerDef, status?: boolean) {
+  toggleLayer(layerDef: LayerDef, status?: boolean, options: ToggleLayerOptions = {}) {
     const layer = this.getLayer(layerDef);
     const onMap = layer && layer.options.visibility;
     const toStatus = status !== undefined ? status : !onMap;
-
+    const silent = options.silent !== undefined ? options.silent : false;
     const action = (source: any, l: LayerAdapter) => {
       l.options.visibility = toStatus;
 
       const preEventName = toStatus ? 'layer:preshow' : 'layer:prehide';
       const eventName = toStatus ? 'layer:show' : 'layer:hide';
-
-      this.webMap.emitter.emit(preEventName, l);
+      if (!silent) {
+        this.webMap.emitter.emit(preEventName, l);
+      }
       if (toStatus && source) {
         const order = l.options.baseLayer ? 0 : l.options.order;
 
         // do not show baselayer if another on the map
         if (order === 0 && this._baseLayers.length) {
           const anotherVisibleLayerBaseLayer = this._baseLayers.find((x) => {
-            return x !== l.id && this.isLayerVisible(x) ;
+            return x !== l.id && this.isLayerVisible(x);
           });
           if (anotherVisibleLayerBaseLayer) {
             this.hideLayer(anotherVisibleLayerBaseLayer);
@@ -413,7 +414,9 @@ export class WebMapLayers<L = any> {
           this.webMap.mapAdapter.hideLayer(l.layer);
         }
       }
-      this.webMap.emitter.emit(eventName, l);
+      if (!silent) {
+        this.webMap.emitter.emit(eventName, l);
+      }
     };
     if (layer && layer.options.visibility !== toStatus) {
       if (this.webMap.mapAdapter.map) {
@@ -423,6 +426,14 @@ export class WebMapLayers<L = any> {
           action(adapter.map, layer);
         });
       }
+    }
+  }
+
+  updateLayer(layerDef: LayerDef) {
+    const layer = this.getLayer(layerDef);
+    if (layer && this.isLayerVisible(layer)) {
+      this.hideLayer(layer, { silent: true });
+      this.showLayer(layer, { silent: true });
     }
   }
 

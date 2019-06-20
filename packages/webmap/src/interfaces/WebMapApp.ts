@@ -82,6 +82,10 @@ export interface AppOptions {
   // [configName: string]: any;
 }
 
+export interface ToggleLayerOptions {
+  silent?: boolean;
+}
+
 export interface GetAttributionsOptions {
   onlyVisible?: boolean;
   onlyBasemap?: boolean;
