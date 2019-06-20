@@ -132,3 +132,7 @@ export interface NgwLayersMem {
   layer: ResourceAdapter;
   resourceId: number;
 }
+
+export interface NgwLayers {
+  [layerName: string]: NgwLayersMem;
+}

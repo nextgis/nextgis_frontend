@@ -487,6 +487,10 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
     this.layers.toggleLayer(layerDef, status);
   }
 
+  updateLayer(layerDef: LayerDef, status?: boolean) {
+    this.layers.toggleLayer(layerDef, status);
+  }
+
   /**
    * Set transparency for a given layer by number from 0 to 1
    */

@@ -22,7 +22,7 @@ import { getIcon } from '@nextgis/icons';
 import { onMapLoad } from './decorators';
 import { fixUrlStr, deepmerge, appendNgwResources } from './utils';
 
-import { NgwMapOptions, ControlOptions, NgwMapEvents, NgwLayersMem } from './interfaces';
+import { NgwMapOptions, ControlOptions, NgwMapEvents, NgwLayersMem, NgwLayers } from './interfaces';
 
 const OPTIONS: NgwMapOptions = {
   target: 'map',
@@ -74,7 +74,7 @@ function prepareWebMapOptions(mapAdapter: MapAdapter, options: NgwMapOptions) {
  */
 export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEvents> {
 
-  static utils = { ...WebMap.utils, fixUrlStr };
+  static utils = { ...WebMap.utils, fixUrlStr, deepmerge };
   static decorators = { onMapLoad, ...WebMap.decorators };
   static getIcon = getIcon;
   static toWgs84 = NgwKit.utils.toWgs84;
@@ -85,9 +85,7 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
   options: NgwMapOptions<C> = {};
   connector: NgwConnector;
 
-  protected _ngwLayers: {
-    [layerName: string]: NgwLayersMem
-  } = {};
+  protected _ngwLayers: NgwLayers = {};
 
   /**
    * @param mapAdapter #noapi
@@ -205,6 +203,11 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
         console.error('can\'t add ngw layer', er);
       }
     }
+  }
+
+  async getNgwLayers(): Promise<NgwLayers> {
+    await this.onLoad();
+    return this._ngwLayers;
   }
 
   async getNgwLayerByResourceId(id: number): Promise<LayerAdapter | undefined> {
