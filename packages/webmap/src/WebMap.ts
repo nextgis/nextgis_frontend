@@ -487,8 +487,8 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
     this.layers.toggleLayer(layerDef, status);
   }
 
-  updateLayer(layerDef: LayerDef, status?: boolean) {
-    this.layers.toggleLayer(layerDef, status);
+  updateLayer(layerDef: LayerDef) {
+    this.layers.updateLayer(layerDef);
   }
 
   /**
