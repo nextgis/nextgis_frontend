@@ -317,7 +317,8 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
   }
 
   getLayerAdapter(name: string): Type<LayerAdapter> {
-    return this.mapAdapter.layerAdapters[name];
+    const adapter = this.mapAdapter.layerAdapters[name];
+    return adapter;
   }
 
   /**
