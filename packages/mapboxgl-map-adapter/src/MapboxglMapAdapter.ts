@@ -24,7 +24,6 @@ import { AttributionControl } from './controls/AttributionControl';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 import { createControl } from './controls/createControl';
 import { createButtonControl } from './controls/createButtonControl';
-import { map } from 'leaflet';
 
 export type TLayer = string[];
 type TLayerAdapter = LayerAdapter<Map, TLayer>;
