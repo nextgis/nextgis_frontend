@@ -7,10 +7,10 @@ export class MvtAdapter extends BaseAdapter implements BaseLayerAdapter {
   addLayer(options: any): string[] {
     options = this.options = { ...this.options, ...(options || {}) };
     // read about https://blog.mapbox.com/vector-tile-specification-version-2-whats-changed-259d4cd73df6
-    const idString = options.id;
+    const idString = String(options.id);
 
     const layerOptions: Layer = {
-      'id': this._layerId,
+      'id': idString,
       'type': options.type || 'fill',
       'source-layer': options['source-layer'] || idString,
       'source': {
@@ -20,6 +20,7 @@ export class MvtAdapter extends BaseAdapter implements BaseLayerAdapter {
       'layout': {
         visibility: 'none',
       },
+      // paint: {'fill-color': 'red'}
     };
 
     if (options.paint) {
@@ -27,7 +28,7 @@ export class MvtAdapter extends BaseAdapter implements BaseLayerAdapter {
     }
 
     this.map.addLayer(layerOptions);
-    this.layer = [this._layerId];
+    this.layer = [idString];
     return this.layer;
   }
 }
