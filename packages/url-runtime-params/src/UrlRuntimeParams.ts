@@ -14,9 +14,9 @@ export class UrlRuntimeParams implements RuntimeParams {
   }
 
   params() {
-    if (this._params) {
-      return this._params;
-    }
+    // if (this._params) {
+    //   return this._params;
+    // }
     const params: Params = {};
     window.location.href.replace(/[?&]+(\w+)([^&]*)/gi, function (m, key) {
       params[key] = true;
