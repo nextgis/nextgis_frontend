@@ -23,6 +23,10 @@ export class Dialog implements DialogAdapter {
 
   static dialogs: Dialog[] = [];
 
+  static clean = () => {
+    Dialog.dialogs.forEach((x) => x.destroy());
+  }
+
   options: DialogAdapterOptions = {
     template: `
       <p>This is dialog!</p>
@@ -39,6 +43,9 @@ export class Dialog implements DialogAdapter {
 
   constructor(options?: DialogAdapterOptions) {
     this._dialog = document.createElement('dialog') as HTMLDialogElement;
+
+    Dialog.dialogs.push(this);
+
     this._dialog.className = 'dialog-component';
     this.options = { ...this.options, ...options };
     this._parent = this.options.parent || document.body;
@@ -78,6 +85,11 @@ export class Dialog implements DialogAdapter {
     this._dialog.close();
   }
 
+  destroy() {
+    this.close();
+    this._dialog.remove();
+  }
+
   updateContent(content?: string | Node) {
     if (!content && this.options.template) {
       content = this.options.template;
@@ -86,13 +98,6 @@ export class Dialog implements DialogAdapter {
       this._addContent(content, this._content);
     }
   }
-
-  // private _removeElement(element: HTMLElement) {
-  //   const parent = element.parentNode;
-  //   if (parent) {
-  //     parent.removeChild(element);
-  //   }
-  // }
 
   private _createCloseBtn() {
     const template = this.options.closeBtnTemplate;
