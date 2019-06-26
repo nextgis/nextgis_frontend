@@ -1,10 +1,9 @@
 {
-  "name": "@nextgis/qms-kit",
+  "name": "@nextgis/utils",
   "version": "0.15.9",
-  "_priority": 20,
-  "description": "",
-  "main": "lib/qms-kit.js",
-  "unpkg": "lib/qms-kit.js",
+  "description": "Development tools",
+  "main": "lib/utils.js",
+  "unpkg": "lib/utils.js",
   "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/webmap": "^0.15.9"
@@ -12,7 +11,10 @@
   "devDependencies": {
     "@types/events": "^3.0.0",
     "@types/node": "^12.0.10",
+    "css-loader": "^3.0.0",
+    "file-loader": "^4.0.0",
     "rimraf": "^2.6.3",
+    "style-loader": "^0.23.1",
     "ts-loader": "^6.0.4",
     "tslint": "^5.18.0",
     "tslint-webpack-plugin": "^2.1.0",
@@ -21,17 +23,11 @@
     "webpack-cli": "^3.3.5"
   },
   "scripts": {
-    "mjs": "tsc -d --outDir ./lib/modules",
     "clean": "rimraf ./lib",
     "dev": "npm run clean && webpack --config ./webpack.config.js --progress",
     "build": "npm run dev -- --mode=production",
     "prod": "npm run build",
-    "watch": "npm run dev -- --watch",
-    "test": "echo \"Error: run tests from root\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/nextgis/nextgisweb_frontend.git"
+    "watch": "npm run dev -- --watch"
   },
   "keywords": [
     "NextGIS",
@@ -39,11 +35,21 @@
   ],
   "author": "NextGIS",
   "directories": {
-    "lib": "lib"
+    "lib": "lib",
+    "test": "__tests__"
   },
   "files": [
     "lib"
   ],
   "license": "LGPL-3.0",
-  "gitHead": "16ddb8f791196f047deb0e0ac17310e97e78ab19"
+  "publishConfig": {
+    "registry": "http://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nextgis/nextgisweb_frontend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nextgis/nextgisweb_frontend/issues"
+  }
 }
