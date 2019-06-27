@@ -48,6 +48,19 @@ export class NgwConnector {
     }
   }
 
+  async login(credentials: Credentials) {
+    this.logout();
+    return this.getUserInfo(credentials);
+  }
+
+  logout() {
+    this._rejectLoadingQueue();
+    this._loadingStatus = {};
+    this.options.auth = null;
+    this.route = null;
+    this.user = null;
+  }
+
   getUserInfo(credentials: Credentials): CancelablePromise<UserInfo> {
     if (credentials) {
       this.options.auth = credentials;
@@ -200,6 +213,18 @@ export class NgwConnector {
       reject,
       timestamp: new Date(),
     });
+  }
+
+  _rejectLoadingQueue() {
+    for (const q in this._loadingQueue) {
+      if (this._loadingQueue.hasOwnProperty(q)) {
+        const queue = this._loadingQueue[q];
+        queue.waiting.forEach((x) => {
+          x.reject();
+        });
+        delete this._setLoadingQueue[q];
+      }
+    }
   }
 
   _executeLoadingQueue(name: string, data: any, isError?: boolean) {
