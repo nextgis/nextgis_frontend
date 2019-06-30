@@ -56,9 +56,9 @@ export class NgwConnector {
   logout() {
     this._rejectLoadingQueue();
     this._loadingStatus = {};
-    this.options.auth = null;
-    this.route = null;
-    this.user = null;
+    this.options.auth = undefined;
+    this.route = undefined;
+    this.user = undefined;
   }
 
   getUserInfo(credentials: Credentials): CancelablePromise<UserInfo> {
@@ -222,7 +222,7 @@ export class NgwConnector {
         queue.waiting.forEach((x) => {
           x.reject();
         });
-        delete this._setLoadingQueue[q];
+        delete this._loadingQueue[q];
       }
     }
   }
