@@ -37,9 +37,10 @@ import { WebMapEvents } from './interfaces/Events';
 
 import { onLoad } from './util/decorators';
 import { deepmerge } from './util/deepmerge';
+import { propertiesFilter } from './util/propertiesFilter';
 
 import { detectGeometryType, findMostFrequentGeomType } from './util/geometryTypes';
-import { updateGeojsonAdapterOptions } from './util/updateGeojsonAdapterOptions';
+import { updateGeoJsonAdapterOptions } from './util/updateGeoJsonAdapterOptions';
 
 import { WebMapLayers } from './WebMapLayers';
 import { WebMapControls } from './WebMapControls';
@@ -70,7 +71,8 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
   static utils = {
     detectGeometryType,
     findMostFrequentGeomType,
-    updateGeojsonAdapterOptions,
+    updateGeoJsonAdapterOptions,
+    propertiesFilter,
     createToggleControl
   };
   static getPaintFunctions: { [name: string]: GetPaintFunction };
