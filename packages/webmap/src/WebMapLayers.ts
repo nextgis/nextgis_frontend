@@ -10,15 +10,17 @@ import {
   GeoJsonAdapterOptions,
   VectorLayerAdapter,
   DataLayerFilter,
-  OnLayerClickOptions
+  OnLayerClickOptions,
+  PropertiesFilter
 } from './interfaces/LayerAdapter';
 import { LayerDef, Type } from './interfaces/BaseTypes';
 import { WebMap } from './WebMap';
 
 import { Feature, GeoJsonObject } from 'geojson';
 import { preparePaint } from './util/preparePaint';
-import { updateGeojsonAdapterOptions } from './util/updateGeojsonAdapterOptions';
+import { updateGeoJsonAdapterOptions } from './util/updateGeoJsonAdapterOptions';
 import { GetAttributionsOptions, ToggleLayerOptions } from './interfaces/WebMapApp';
+import { propertiesFilter } from './util/propertiesFilter';
 
 export class WebMapLayers<L = any> {
   private _layersIds: number = 1;
@@ -339,7 +341,7 @@ export class WebMapLayers<L = any> {
     opt.multiselect = opt.multiselect !== undefined ? opt.multiselect : false;
     opt.unselectOnSecondClick = opt.unselectOnSecondClick !== undefined ? opt.unselectOnSecondClick : true;
     if (!adapter) {
-      opt = updateGeojsonAdapterOptions(opt);
+      opt = updateGeoJsonAdapterOptions(opt);
     }
     opt.paint = opt.paint || {};
     const layer = await this.addLayer(adapter || 'GEOJSON', opt);
@@ -536,6 +538,21 @@ export class WebMapLayers<L = any> {
     const adapter = layer as VectorLayerAdapter;
     if (adapter.filter) {
       adapter.filter(filter);
+    }
+  }
+
+  propertiesFilter(layerDef: LayerDef, filters: PropertiesFilter) {
+    const layer = this.getLayer(layerDef);
+    const adapter = layer as VectorLayerAdapter;
+    if (adapter.propertiesFilter) {
+      adapter.propertiesFilter(filters);
+    } else if (adapter.filter) {
+      this.filterLayer(adapter, (e) => {
+        if (e.feature && e.feature.properties) {
+          return propertiesFilter(e.feature.properties, filters);
+        }
+        return true;
+      });
     }
   }
 

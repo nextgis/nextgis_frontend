@@ -10,7 +10,7 @@ export const typeAlias: { [x: string]: GeoJsonAdapterLayerType } = {
   'MultiPolygon': 'fill'
 };
 
-export function updateGeojsonAdapterOptions(opt: GeoJsonAdapterOptions): GeoJsonAdapterOptions {
+export function updateGeoJsonAdapterOptions(opt: GeoJsonAdapterOptions): GeoJsonAdapterOptions {
   if (opt.data) {
     const geomType = typeAlias[detectGeometryType(opt.data)];
     const p = opt.paint;

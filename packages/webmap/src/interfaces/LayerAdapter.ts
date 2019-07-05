@@ -181,6 +181,7 @@ export interface GeoJsonAdapterOptions<F extends Feature = Feature, L = any> ext
   popupOnSelect?: boolean;
   popupOptions?: PopupOptions;
   filter?: DataLayerFilter;
+  propertiesFilter?: PropertiesFilter;
   onLayerClick?(opt: OnLayerClickOptions): Promise<any>;
 }
 
@@ -230,7 +231,30 @@ export interface LayerDefinition<F extends Feature = Feature, L = any> {
   visible?: boolean;
 }
 
-export type DataLayerFilter<F extends Feature = Feature, L = any> = (opt: LayerDefinition<F, L>) => boolean;
+export type CallbackFilter<F extends Feature = Feature, L = any> = (opt: LayerDefinition<F, L>) => boolean;
+
+/**
+ * gt - greater (>)
+ * lt - lower (<)
+ * ge - greater or equal (>=)
+ * le - lower or equal (<=)
+ * eq - equal (=)
+ * ne - not equal (!=)
+ * like - LIKE SQL statement (for strings compare)
+ * ilike - ILIKE SQL statement (for strings compare)
+ */
+export type Operations = 'gt' | 'lt' | 'ge' | 'le' | 'eq' | 'ne' | 'like' | 'ilike';
+
+/**
+ * field, operation, value
+ * ['foo', 'eq', 'bar']
+ * ['count', 'ge', 20]
+ */
+export type PropertyFilter = [string, Operations, any];
+
+export type PropertiesFilter = PropertyFilter[];
+
+export type DataLayerFilter<F extends Feature = Feature, L = any> = CallbackFilter<F, L>;
 
 export type LayerAdapter<M = any, L = any, O extends AdapterOptions = AdapterOptions> =
   BaseLayerAdapter<M, L, O> |
@@ -270,6 +294,7 @@ export interface VectorLayerAdapter<
   getSelected?(): Array<{ layer?: L, feature?: Feature }>;
 
   filter?(cb: DataLayerFilter<F, L>): void;
+  propertiesFilter?(filters: PropertiesFilter): void;
   removeFilter?(): void;
 
   addData?(data: GeoJsonObject): void;
