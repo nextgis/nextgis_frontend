@@ -143,3 +143,5 @@ export interface ResourceAdapter<
   getExtent?(): LngLatBoundsArray | Promise<LngLatBoundsArray> | undefined;
   getIdentificationIds(): Promise<number[] | undefined>;
 }
+
+export type VectorResourceAdapter = ResourceAdapter & VectorLayerAdapter;
