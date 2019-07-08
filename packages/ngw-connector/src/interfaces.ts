@@ -52,6 +52,7 @@ export interface GetRequestItemsResponseMap extends RequestItemKeys {
   'resource.collection': ResourceItem[];
   'file_upload.upload': FileUploadResp;
   'feature_layer.feature.item': FeatureItem;
+  'feature_layer.feature.collection': FeatureItem[];
   // [x: string]: { [x: string]: any };
 }
 

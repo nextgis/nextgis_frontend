@@ -12,7 +12,7 @@ import WebMap, {
   WebMapEvents,
   LayerDef,
   MapClickEvent,
-  LayerAdapter
+  LayerAdapter,
 } from '@nextgis/webmap';
 import NgwConnector, { ResourceItem } from '@nextgis/ngw-connector';
 import QmsKit, { QmsAdapterOptions } from '@nextgis/qms-kit';
@@ -22,7 +22,7 @@ import { getIcon } from '@nextgis/icons';
 import { onMapLoad } from './decorators';
 import { fixUrlStr, deepmerge, appendNgwResources } from './utils';
 
-import { NgwMapOptions, ControlOptions, NgwMapEvents, NgwLayersMem, NgwLayers } from './interfaces';
+import { NgwMapOptions, ControlOptions, NgwMapEvents, NgwLayers } from './interfaces';
 
 const OPTIONS: NgwMapOptions = {
   target: 'map',

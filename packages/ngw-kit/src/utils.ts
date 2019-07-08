@@ -2,9 +2,10 @@ import WebMap, {
   Type,
   LayerAdapter,
   LngLatBoundsArray,
-  MapClickEvent
+  MapClickEvent,
+  PropertiesFilter
 } from '@nextgis/webmap';
-import NgwConnector, { WebmapResource, ResourceItem, FeatureLayersIdentify } from '@nextgis/ngw-connector';
+import NgwConnector, { WebmapResource, ResourceItem, FeatureLayersIdentify, FeatureItem } from '@nextgis/ngw-connector';
 import { createAsyncAdapter } from './createAsyncAdapter';
 import { NgwLayerOptions, WebMapAdapterOptions, IdentifyRequestOptions, ResourceAdapter } from './interfaces';
 import { WebMapLayerAdapter } from './WebMapLayerAdapter';
@@ -12,7 +13,7 @@ import { WebMapLayerAdapter } from './WebMapLayerAdapter';
 import { toWgs84 as WGS84 } from 'reproject';
 // @ts-ignore
 import { parse } from 'wellknown';
-import { GeoJsonObject } from 'geojson';
+import { GeoJsonObject, Geometry, FeatureCollection, Feature } from 'geojson';
 
 const epsg = {
   // tslint:disable-next-line:max-line-length
@@ -63,7 +64,7 @@ export function getLayerAdapterOptions(options: NgwLayerOptions, webMap: WebMap,
   }
   if (adapter === 'MVT') {
     url = baseUrl + '/api/component/feature_layer/mvt?x={x}&y={y}&z={z}&' +
-    'resource=' + options.resourceId +
+      'resource=' + options.resourceId +
       '&simplification=' + (options.simplification || 0);
     // url = baseUrl + '/api/resource/' + options.resourceId + '/{z}/{x}/{y}.mvt';
     return {
@@ -274,4 +275,40 @@ export function setScaleRatio(scale: number) {
   }
   return Math.round(Math.log(591657550.500000 / (scale / 2)) / Math.log(2));
 
+}
+
+export function getNgwLayerGeoJson<G extends Geometry | null = Geometry>(
+  resourceId: number, options: {
+    connector: NgwConnector
+    filters?: PropertiesFilter[],
+  }) {
+
+  const params: {[name: string]: any} = {
+    srs: 4326,
+    geom_format: 'geojson'
+  };
+  if (options.filters) {
+    options.filters.forEach(([field, operation, value]) => {
+      params[`fld_${field}__${operation}`] = `${value}`;
+    });
+  }
+  // return options.connector.makeQuery(url + '?' + params.join('&'), {
+  return options.connector.get('feature_layer.feature.collection', null, {
+    id: resourceId,
+    ...params
+  }).then((x: FeatureItem[]) => {
+    const features: Array<Feature<G>> = x.map((y) => {
+      const geometry = y.geom as G;
+      return {
+        type: 'Feature',
+        properties: y.fields,
+        geometry
+      };
+    });
+
+    return {
+      type: 'FeatureCollection',
+      features
+    };
+  });
 }
