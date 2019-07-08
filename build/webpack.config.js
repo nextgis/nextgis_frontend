@@ -1,5 +1,6 @@
 const webpack = require('webpack')
 const TSLintPlugin = require('tslint-webpack-plugin');
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const path = require('path');
 const { getAliases } = require('./aliases');
 
@@ -75,7 +76,8 @@ module.exports = (env, argv, opt = {}) => {
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(argv.mode || 'development')
-    })
+    }),
+    // new BundleAnalyzerPlugin()
   ];
 
   let alias = {};
