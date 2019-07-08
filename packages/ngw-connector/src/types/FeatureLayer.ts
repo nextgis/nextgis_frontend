@@ -1,3 +1,5 @@
+import { GeometryObject } from 'geojson';
+
 /**
  * @module ngw-connector
  */
@@ -31,7 +33,7 @@ export interface FeatureItemAttachment {
 
 export interface FeatureItem {
   id: number;
-  geom: string;
+  geom: string | GeometryObject;
   fields: {[field: string]: number | string | boolean};
   extensions: {
     description?: string;
