@@ -5,9 +5,9 @@ import WebMap, {
   GeoJsonAdapterOptions,
   PropertiesFilter
 } from '@nextgis/webmap';
-import NgwConnector, { CancelablePromise, FeatureItem } from '@nextgis/ngw-connector';
-import { GeoJsonObject, FeatureCollection, Point, Feature } from 'geojson';
-import { toWgs84, getNgwLayerGeoJson } from './utils';
+import NgwConnector, { CancelablePromise } from '@nextgis/ngw-connector';
+import { GeoJsonObject } from 'geojson';
+import { getNgwLayerGeoJson } from './utils';
 
 export async function createGeoJsonAdapter(
   options: NgwLayerOptions,
