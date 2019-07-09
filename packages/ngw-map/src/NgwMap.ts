@@ -77,8 +77,6 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
   static utils = { ...WebMap.utils, fixUrlStr, deepmerge };
   static decorators = { onMapLoad, ...WebMap.decorators };
   static getIcon = getIcon;
-  static toWgs84 = NgwKit.utils.toWgs84;
-  static wktToGeoJson = NgwKit.utils.wktToGeoJson;
 
   readonly emitter: StrictEventEmitter<EventEmitter, NgwMapEvents> = new EventEmitter();
 
