@@ -5,12 +5,10 @@
 import NgwConnector from '@nextgis/ngw-connector';
 import WebMap, { StarterKit, Type } from '@nextgis/webmap';
 import {
-  toWgs84,
   getNgwResourceExtent,
   sendIdentifyRequest,
   pixelsInMeterWidth,
   updateWmsParams,
-  wktToGeoJson,
   getLayerAdapterOptions,
   addNgwLayer,
   extendWebMapLayerAdapter
@@ -22,8 +20,6 @@ import { WebMapLayerAdapter } from './WebMapLayerAdapter';
 export class NgwKit implements StarterKit {
 
   static utils = {
-    toWgs84,
-    wktToGeoJson,
     addNgwLayer,
     getNgwResourceExtent,
     sendIdentifyRequest,
