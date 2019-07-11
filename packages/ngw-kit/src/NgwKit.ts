@@ -11,7 +11,9 @@ import {
   updateWmsParams,
   getLayerAdapterOptions,
   addNgwLayer,
-  extendWebMapLayerAdapter
+  extendWebMapLayerAdapter,
+  getNgwLayerFeatures,
+  getNgwLayerFeature
 } from './utils';
 
 import { NgwKitOptions, WebMapAdapterOptions } from './interfaces';
@@ -23,7 +25,9 @@ export class NgwKit implements StarterKit {
     addNgwLayer,
     getNgwResourceExtent,
     sendIdentifyRequest,
-    pixelsInMeterWidth
+    pixelsInMeterWidth,
+    getNgwLayerFeature,
+    getNgwLayerFeatures
   };
 
   static updateWmsParams = updateWmsParams;
