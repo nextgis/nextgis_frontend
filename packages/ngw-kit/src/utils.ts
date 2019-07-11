@@ -282,11 +282,12 @@ export function getNgwLayerFeature<G extends Geometry | null = Geometry>(
     ...params
   }).then((item) => {
     const geometry = item.geom as G;
-    return {
+    const feature: Feature<G> ={
       type: 'Feature',
       properties: item.fields,
       geometry
     };
+    return feature;
   });
 }
 
@@ -313,11 +314,12 @@ export function getNgwLayerFeatures<G extends Geometry | null = Geometry>(
     const features: Array<Feature<G>> = [];
     x.forEach((y) => {
       const geometry = y.geom as G;
-      features.push({
+      const feature: Feature<G> = {
         type: 'Feature',
         properties: y.fields,
         geometry
-      });
+      };
+      features.push(feature);
     });
 
     const featureCollection: FeatureCollection<G> = {
