@@ -132,7 +132,7 @@ export class NgwConnector {
           }
         }
         if (paramArray.length) {
-          url = url + '/?' + paramArray.join('&');
+          url = url + '?' + paramArray.join('&');
         }
       }
       if (url) {

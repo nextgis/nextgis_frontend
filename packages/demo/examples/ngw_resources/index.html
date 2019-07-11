@@ -79,18 +79,17 @@
     var info = function (item) {
       clean();
       if (item) {
-        getFeaturePromise = ngwMap.connector.get('feature_layer.feature.item', null, {
-          id: item.id,
-          fid: item.fid
-        }).then(function (selected) {
-          var geojson = NgwMap.wktToGeoJson(selected.geom);
+        ngwMap.getNgwLayerFeature({
+          resourceId: item.id,
+          featureId: item.fid
+        }).then(function (geojson) {
           ngwMap.addLayer('GEOJSON', {
             id: 'highlight',
             data: geojson,
             visibility: true,
             paint: { color: 'red', stroke: true, fillOpacity: '0.5' }
           });
-          console.log(selected);
+          console.log(geojson);
         });
       }
     }

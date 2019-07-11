@@ -7,7 +7,7 @@ import WebMap, {
 } from '@nextgis/webmap';
 import NgwConnector, { CancelablePromise } from '@nextgis/ngw-connector';
 import { GeoJsonObject } from 'geojson';
-import { getNgwLayerGeoJson } from './utils';
+import { getNgwLayerFeatures } from './utils';
 
 export async function createGeoJsonAdapter(
   options: NgwLayerOptions,
@@ -20,7 +20,7 @@ export async function createGeoJsonAdapter(
   const _fullDataLoad = false;
 
   const geoJsonAdapterCb = async (filters?: PropertiesFilter[]) => {
-    _dataPromise = getNgwLayerGeoJson(options.resourceId, { filters, connector });
+    _dataPromise = getNgwLayerFeatures({resourceId: options.resourceId, filters, connector });
     return await _dataPromise;
   };
 

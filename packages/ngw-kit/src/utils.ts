@@ -4,16 +4,17 @@ import WebMap, {
   MapClickEvent,
   PropertiesFilter
 } from '@nextgis/webmap';
-import NgwConnector, { WebmapResource, ResourceItem, FeatureLayersIdentify, FeatureItem } from '@nextgis/ngw-connector';
+import NgwConnector, {
+  WebmapResource,
+  ResourceItem,
+  FeatureLayersIdentify,
+  FeatureItem,
+  CancelablePromise
+} from '@nextgis/ngw-connector';
 import { createAsyncAdapter } from './createAsyncAdapter';
 import { NgwLayerOptions, WebMapAdapterOptions, IdentifyRequestOptions, ResourceAdapter } from './interfaces';
 import { WebMapLayerAdapter } from './WebMapLayerAdapter';
-import { Geometry, Feature } from 'geojson';
-
-const epsg = {
-  // tslint:disable-next-line:max-line-length
-  'EPSG:3857': '+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext  +no_defs'
-};
+import { Geometry, Feature, FeatureCollection } from 'geojson';
 
 export function fixUrlStr(url: string) {
   // remove double slash
@@ -260,16 +261,43 @@ export function setScaleRatio(scale: number) {
     return zoom;
   }
   return Math.round(Math.log(591657550.500000 / (scale / 2)) / Math.log(2));
-
 }
 
-export function getNgwLayerGeoJson<G extends Geometry | null = Geometry>(
-  resourceId: number, options: {
+export function getNgwLayerFeature<G extends Geometry | null = Geometry>(
+  options: {
+    resourceId: number,
+    featureId: number,
+    connector: NgwConnector
+  }
+): CancelablePromise<Feature<G>> {
+
+  const params: { [name: string]: any } = {
+    srs: 4326,
+    geom_format: 'geojson'
+  };
+
+  return options.connector.get('feature_layer.feature.item', null, {
+    id: options.resourceId,
+    fid: options.featureId,
+    ...params
+  }).then((item) => {
+    const geometry = item.geom as G;
+    return {
+      type: 'Feature',
+      properties: item.fields,
+      geometry
+    };
+  });
+}
+
+export function getNgwLayerFeatures<G extends Geometry | null = Geometry>(
+  options: {
+    resourceId: number,
     connector: NgwConnector
     filters?: PropertiesFilter[],
-  }) {
+  }): CancelablePromise<FeatureCollection<G>> {
 
-  const params: {[name: string]: any} = {
+  const params: { [name: string]: any } = {
     srs: 4326,
     geom_format: 'geojson'
   };
@@ -278,23 +306,24 @@ export function getNgwLayerGeoJson<G extends Geometry | null = Geometry>(
       params[`fld_${field}__${operation}`] = `${value}`;
     });
   }
-  // return options.connector.makeQuery(url + '?' + params.join('&'), {
   return options.connector.get('feature_layer.feature.collection', null, {
-    id: resourceId,
+    id: options.resourceId,
     ...params
   }).then((x: FeatureItem[]) => {
-    const features: Array<Feature<G>> = x.map((y) => {
+    const features: Array<Feature<G>> = [];
+    x.forEach((y) => {
       const geometry = y.geom as G;
-      return {
+      features.push({
         type: 'Feature',
         properties: y.fields,
         geometry
-      };
+      });
     });
 
-    return {
+    const featureCollection: FeatureCollection<G> = {
       type: 'FeatureCollection',
       features
     };
+    return featureCollection;
   });
 }
