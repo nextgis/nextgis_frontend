@@ -1,12 +1,12 @@
 {
   "name": "@nextgis/utils",
-  "version": "0.15.9",
+  "version": "0.16.0",
   "description": "Development tools",
   "main": "lib/utils.js",
   "unpkg": "lib/utils.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/webmap": "^0.15.9"
+    "@nextgis/webmap": "^0.16.0"
   },
   "devDependencies": {
     "@types/events": "^3.0.0",
