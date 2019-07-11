@@ -13,8 +13,9 @@ import WebMap, {
   LayerDef,
   MapClickEvent,
   LayerAdapter,
+  PropertiesFilter,
 } from '@nextgis/webmap';
-import NgwConnector, { ResourceItem } from '@nextgis/ngw-connector';
+import NgwConnector, { ResourceItem, CancelablePromise } from '@nextgis/ngw-connector';
 import QmsKit, { QmsAdapterOptions } from '@nextgis/qms-kit';
 import NgwKit, { NgwLayerOptions, ResourceAdapter, WebMapLayerItem } from '@nextgis/ngw-kit';
 import { getIcon } from '@nextgis/icons';
@@ -23,6 +24,7 @@ import { onMapLoad } from './decorators';
 import { fixUrlStr, deepmerge, appendNgwResources } from './utils';
 
 import { NgwMapOptions, ControlOptions, NgwMapEvents, NgwLayers } from './interfaces';
+import { Geometry, Feature, FeatureCollection } from 'geojson';
 
 const OPTIONS: NgwMapOptions = {
   target: 'map',
@@ -74,7 +76,12 @@ function prepareWebMapOptions(mapAdapter: MapAdapter, options: NgwMapOptions) {
  */
 export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEvents> {
 
-  static utils = { ...WebMap.utils, fixUrlStr, deepmerge };
+  static utils = {
+    ...WebMap.utils,
+    ...NgwKit.utils,
+    fixUrlStr,
+    deepmerge
+  };
   static decorators = { onMapLoad, ...WebMap.decorators };
   static getIcon = getIcon;
 
@@ -201,6 +208,22 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
         console.error('can\'t add ngw layer', er);
       }
     }
+  }
+
+  async getNgwLayerFeature<G extends Geometry | null = Geometry>(options: {
+    resourceId: number, featureId: number}): CancelablePromise<Feature<G>> {
+    return NgwKit.utils.getNgwLayerFeature<G>({
+      connector: this.connector,
+      ...options
+    });
+  }
+
+  async getNgwLayerFeatures<G extends Geometry | null = Geometry>(options: {
+    resourceId: number, filter?: PropertiesFilter[]}): CancelablePromise<FeatureCollection<G>>  {
+    return NgwKit.utils.getNgwLayerFeatures({
+      connector: this.connector,
+      ...options
+    });
   }
 
   async getNgwLayers(): Promise<NgwLayers> {
