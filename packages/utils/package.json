@@ -6,7 +6,6 @@
   "unpkg": "lib/utils.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/webmap": "^0.16.0"
   },
   "devDependencies": {
     "@types/events": "^3.0.0",
