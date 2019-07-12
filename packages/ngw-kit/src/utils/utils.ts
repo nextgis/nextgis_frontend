@@ -2,20 +2,15 @@ import WebMap, {
   Type,
   LngLatBoundsArray,
   MapClickEvent,
-  PropertiesFilter
 } from '@nextgis/webmap';
 import NgwConnector, {
   WebmapResource,
   ResourceItem,
-  FeatureLayersIdentify,
-  FeatureItem,
-  CancelablePromise
+  FeatureLayersIdentify
 } from '@nextgis/ngw-connector';
-import { createAsyncAdapter } from './createAsyncAdapter';
-import { NgwLayerOptions, WebMapAdapterOptions, IdentifyRequestOptions, ResourceAdapter } from './interfaces';
-import { WebMapLayerAdapter } from './WebMapLayerAdapter';
-import { Geometry, Feature, FeatureCollection } from 'geojson';
-
+import { createAsyncAdapter } from '../createAsyncAdapter';
+import { NgwLayerOptions, WebMapAdapterOptions, IdentifyRequestOptions, ResourceAdapter } from '../interfaces';
+import { WebMapLayerAdapter } from '../WebMapLayerAdapter';
 
 export function updateWmsParams(params: any, resourceId: number) {
   const { bbox, width, height } = params;
@@ -257,71 +252,4 @@ export function setScaleRatio(scale: number) {
     return zoom;
   }
   return Math.round(Math.log(591657550.500000 / (scale / 2)) / Math.log(2));
-}
-
-export function getNgwLayerFeature<G extends Geometry | null = Geometry>(
-  options: {
-    resourceId: number,
-    featureId: number,
-    connector: NgwConnector
-  }
-): CancelablePromise<Feature<G>> {
-
-  const params: { [name: string]: any } = {
-    srs: 4326,
-    geom_format: 'geojson'
-  };
-
-  return options.connector.get('feature_layer.feature.item', null, {
-    id: options.resourceId,
-    fid: options.featureId,
-    ...params
-  }).then((item) => {
-    const geometry = item.geom as G;
-    const feature: Feature<G> = {
-      type: 'Feature',
-      properties: item.fields,
-      geometry
-    };
-    return feature;
-  });
-}
-
-export function getNgwLayerFeatures<G extends Geometry | null = Geometry>(
-  options: {
-    resourceId: number,
-    connector: NgwConnector
-    filters?: PropertiesFilter[],
-  }): CancelablePromise<FeatureCollection<G>> {
-
-  const params: { [name: string]: any } = {
-    srs: 4326,
-    geom_format: 'geojson'
-  };
-  if (options.filters) {
-    options.filters.forEach(([field, operation, value]) => {
-      params[`fld_${field}__${operation}`] = `${value}`;
-    });
-  }
-  return options.connector.get('feature_layer.feature.collection', null, {
-    id: options.resourceId,
-    ...params
-  }).then((x: FeatureItem[]) => {
-    const features: Array<Feature<G>> = [];
-    x.forEach((y) => {
-      const geometry = y.geom as G;
-      const feature: Feature<G> = {
-        type: 'Feature',
-        properties: y.fields,
-        geometry
-      };
-      features.push(feature);
-    });
-
-    const featureCollection: FeatureCollection<G> = {
-      type: 'FeatureCollection',
-      features
-    };
-    return featureCollection;
-  });
 }

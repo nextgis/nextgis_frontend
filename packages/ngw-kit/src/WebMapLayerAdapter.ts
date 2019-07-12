@@ -6,7 +6,7 @@ import {
   updateWmsParams,
   sendIdentifyRequest,
   getWebMapExtent
-} from './utils';
+} from './utils/utils';
 import { WebMapLayerItem } from './WebMapLayerItem';
 import { ItemOptions } from '@nextgis/item';
 

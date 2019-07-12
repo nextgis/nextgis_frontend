@@ -1,5 +1,5 @@
 import NgwConnector, { ResourceItem } from '@nextgis/ngw-connector';
-import { getNgwResourceExtent } from './utils';
+import { getNgwResourceExtent } from './utils/utils';
 
 export class NgwResource {
   item!: ResourceItem;

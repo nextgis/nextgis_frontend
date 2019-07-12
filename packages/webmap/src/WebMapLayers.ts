@@ -11,7 +11,8 @@ import {
   VectorLayerAdapter,
   DataLayerFilter,
   OnLayerClickOptions,
-  PropertiesFilter
+  PropertiesFilter,
+  FilterOptions
 } from './interfaces/LayerAdapter';
 import { LayerDef, Type } from './interfaces/BaseTypes';
 import { WebMap } from './WebMap';
@@ -541,11 +542,11 @@ export class WebMapLayers<L = any> {
     }
   }
 
-  propertiesFilter(layerDef: LayerDef, filters: PropertiesFilter) {
+  propertiesFilter(layerDef: LayerDef, filters: PropertiesFilter, options?: FilterOptions) {
     const layer = this.getLayer(layerDef);
     const adapter = layer as VectorLayerAdapter;
     if (adapter.propertiesFilter) {
-      adapter.propertiesFilter(filters);
+      adapter.propertiesFilter(filters, options);
     } else if (adapter.filter) {
       this.filterLayer(adapter, (e) => {
         if (e.feature && e.feature.properties) {

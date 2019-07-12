@@ -19,7 +19,7 @@
       height: 100%;
     }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.4.0/polyfill.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.6.9/core.min.js"></script>
   <!-- <script src="https://unpkg.com/@nextgis/ngw-ol"></script> -->
   <script src="../../lib/ngw-ol.js"></script>
 </head>
@@ -43,6 +43,31 @@
         selectedPaint: { color: 'red' }
       }
     });
+
+    var getFeaturePromise;
+
+    var clean = function () {
+      if (getFeaturePromise) {
+        getFeaturePromise.cancel();
+      }
+      ngwMap.removeLayer('highlight');
+    }
+
+    var drawLayer = function (identify) {
+      clean();
+      getFeaturePromise = ngwMap.getIdentifyGeoJson(identify).then(function (geojson) {
+        getFeaturePromise = null;
+        ngwMap.addLayer('GEOJSON', {
+          id: 'highlight',
+          data: geojson,
+          visibility: true,
+          paint: { color: 'green', stroke: true, fillOpacity: '0.8' }
+        });
+        console.log(geojson);
+      });
+    }
+
+    ngwMap.emitter.on('ngw:select', drawLayer);
   </script>
 </body>
 

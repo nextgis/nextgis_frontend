@@ -16,7 +16,7 @@ import WebMap, {
   LayerAdapter,
   PropertiesFilter,
 } from '@nextgis/webmap';
-import NgwConnector, { ResourceItem, CancelablePromise } from '@nextgis/ngw-connector';
+import NgwConnector, { ResourceItem, CancelablePromise, FeatureLayersIdentify } from '@nextgis/ngw-connector';
 import QmsKit, { QmsAdapterOptions } from '@nextgis/qms-kit';
 import NgwKit, { NgwLayerOptions, ResourceAdapter, WebMapLayerItem } from '@nextgis/ngw-kit';
 import { getIcon } from '@nextgis/icons';
@@ -226,6 +226,12 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
     return NgwKit.utils.getNgwLayerFeatures({
       connector: this.connector,
       ...options
+    });
+  }
+
+  async getIdentifyGeoJson(identify: FeatureLayersIdentify) {
+    return NgwKit.utils.getIdentifyGeoJson({
+      identify, connector: this.connector
     });
   }
 
