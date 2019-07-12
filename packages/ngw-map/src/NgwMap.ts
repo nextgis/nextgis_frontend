@@ -4,6 +4,7 @@
 import StrictEventEmitter from 'strict-event-emitter-types';
 import { EventEmitter } from 'events';
 
+import { fixUrlStr, deepmerge } from '@nextgis/utils';
 import WebMap, {
   MapAdapter,
   StarterKit,
@@ -21,7 +22,7 @@ import NgwKit, { NgwLayerOptions, ResourceAdapter, WebMapLayerItem } from '@next
 import { getIcon } from '@nextgis/icons';
 
 import { onMapLoad } from './decorators';
-import { fixUrlStr, deepmerge, appendNgwResources } from './utils';
+import { appendNgwResources } from './utils';
 
 import { NgwMapOptions, ControlOptions, NgwMapEvents, NgwLayers } from './interfaces';
 import { Geometry, Feature, FeatureCollection } from 'geojson';
@@ -211,7 +212,8 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
   }
 
   async getNgwLayerFeature<G extends Geometry | null = Geometry>(options: {
-    resourceId: number, featureId: number}): CancelablePromise<Feature<G>> {
+    resourceId: number, featureId: number
+  }): CancelablePromise<Feature<G>> {
     return NgwKit.utils.getNgwLayerFeature<G>({
       connector: this.connector,
       ...options
@@ -219,7 +221,8 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
   }
 
   async getNgwLayerFeatures<G extends Geometry | null = Geometry>(options: {
-    resourceId: number, filter?: PropertiesFilter[]}): CancelablePromise<FeatureCollection<G>>  {
+    resourceId: number, filter?: PropertiesFilter[]
+  }): CancelablePromise<FeatureCollection<G>> {
     return NgwKit.utils.getNgwLayerFeatures({
       connector: this.connector,
       ...options

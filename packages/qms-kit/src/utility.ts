@@ -1,4 +1,5 @@
 import { WebMap, BaseLayerAdapter, LayerAdaptersOptions, Type, AdapterOptions } from '@nextgis/webmap';
+import { fixUrlStr } from '@nextgis/utils';
 import { QmsAdapterOptions, QmsBasemap, QmsLayerType, QmsAdapter as QA} from './interfaces';
 
 const alias: { [key in QmsLayerType]: keyof LayerAdaptersOptions } = {
@@ -74,9 +75,4 @@ export function loadJSON<T = any>(url: string): Promise<T> {
     xmlHttp.open('GET', fixUrlStr(url), true); // true for asynchronous
     xmlHttp.send();
   });
-}
-
-export function fixUrlStr(url: string): string {
-  // remove double slash
-  return url.replace(/([^:]\/)\/+/g, '$1');
 }
