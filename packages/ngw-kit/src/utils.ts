@@ -16,10 +16,6 @@ import { NgwLayerOptions, WebMapAdapterOptions, IdentifyRequestOptions, Resource
 import { WebMapLayerAdapter } from './WebMapLayerAdapter';
 import { Geometry, Feature, FeatureCollection } from 'geojson';
 
-export function fixUrlStr(url: string) {
-  // remove double slash
-  return url.replace(/([^:]\/)\/+/g, '$1');
-}
 
 export function updateWmsParams(params: any, resourceId: number) {
   const { bbox, width, height } = params;
@@ -282,7 +278,7 @@ export function getNgwLayerFeature<G extends Geometry | null = Geometry>(
     ...params
   }).then((item) => {
     const geometry = item.geom as G;
-    const feature: Feature<G> ={
+    const feature: Feature<G> = {
       type: 'Feature',
       properties: item.fields,
       geometry

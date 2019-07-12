@@ -11,6 +11,7 @@
     "@nextgis/ngw-connector": "^0.16.0",
     "@nextgis/ngw-kit": "^0.16.0",
     "@nextgis/qms-kit": "^0.16.0",
+    "@nextgis/utils": "^0.16.0",
     "@nextgis/webmap": "^0.16.0",
     "events": "^3.0.0",
     "strict-event-emitter-types": "^2.0.0"

@@ -1,7 +1,7 @@
 /**
  * @module webmap
  */
-
+import { deepmerge } from '@nextgis/utils';
 import {
   AdapterOptions,
   DataLayerFilter,
@@ -36,7 +36,6 @@ import { EventEmitter } from 'events';
 import { WebMapEvents } from './interfaces/Events';
 
 import { onLoad } from './util/decorators';
-import { deepmerge } from './util/deepmerge';
 import { propertiesFilter } from './util/propertiesFilter';
 
 import { detectGeometryType, findMostFrequentGeomType } from './util/geometryTypes';
