@@ -8,7 +8,9 @@ import {
   LayerAdapters,
   GetPaintFunction,
   GeoJsonAdapterOptions,
-  AdapterConstructor
+  AdapterConstructor,
+  PropertiesFilter,
+  FilterOptions
 } from './interfaces/LayerAdapter';
 import { LayerAdaptersOptions, LayerAdapter } from './interfaces/LayerAdapter';
 import { MapAdapter, ControlPositions, FitOptions } from './interfaces/MapAdapter';
@@ -558,6 +560,10 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
    */
   filterLayer(layerDef: LayerDef, filter: DataLayerFilter<Feature, L>) {
     this.layers.filterLayer(layerDef, filter);
+  }
+
+  propertiesFilter(layerDef: LayerDef, filters: PropertiesFilter, options: FilterOptions) {
+    this.layers.propertiesFilter(layerDef, filters, options);
   }
 
   removeLayerFilter(layerDef: LayerDef) {

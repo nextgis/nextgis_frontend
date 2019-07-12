@@ -19,7 +19,7 @@
       height: 100%;
     }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.4.0/polyfill.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.6.9/core.min.js"></script>
   <!-- <script src="https://unpkg.com/@nextgis/ngw-leaflet"></script> -->
   <script src="../../lib/ngw-leaflet.js"></script>
 </head>
@@ -44,28 +44,6 @@
         // 4352,
       ]
     });
-    ngwMap.emitter.on('ngw:select', function (resp) {
-      var promises = [];
-      var params;
-      for (var l in resp) {
-        if (resp.hasOwnProperty(l)) {
-          if (l !== 'featureCount') {
-            var layerFeatures = resp[l].features;
-            var resourceId = Number(l);
-            f = layerFeatures[0];
-            if (f) {
-              // select only one feature from first layer
-              params = {
-                fid: f.id,
-                id: l
-              }
-              break;
-            }
-          }
-        }
-      }
-      info(params);
-    });
 
     var getFeaturePromise;
 
@@ -76,23 +54,22 @@
       ngwMap.removeLayer('highlight');
     }
 
-    var info = function (item) {
+    var drawLayer = function (identify) {
       clean();
-      if (item) {
-        ngwMap.getNgwLayerFeature({
-          resourceId: item.id,
-          featureId: item.fid
-        }).then(function (geojson) {
-          ngwMap.addLayer('GEOJSON', {
-            id: 'highlight',
-            data: geojson,
-            visibility: true,
-            paint: { color: 'red', stroke: true, fillOpacity: '0.5' }
-          });
-          console.log(geojson);
+      getFeaturePromise = ngwMap.getIdentifyGeoJson(identify).then(function (geojson) {
+        getFeaturePromise = null;
+        ngwMap.addLayer('GEOJSON', {
+          id: 'highlight',
+          data: geojson,
+          visibility: true,
+          paint: { color: 'red', stroke: true, fillOpacity: '0.5' }
         });
-      }
+        console.log(geojson);
+      });
     }
+
+    ngwMap.emitter.on('ngw:select', drawLayer);
+
 
   </script>
 </body>

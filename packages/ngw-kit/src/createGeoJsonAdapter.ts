@@ -3,11 +3,12 @@ import WebMap, {
   VectorLayerAdapter,
   Type,
   GeoJsonAdapterOptions,
-  PropertiesFilter
+  PropertiesFilter,
+  FilterOptions
 } from '@nextgis/webmap';
 import NgwConnector, { CancelablePromise } from '@nextgis/ngw-connector';
 import { GeoJsonObject } from 'geojson';
-import { getNgwLayerFeatures } from './utils';
+import { getNgwLayerFeatures } from './utils/featureLayerUtils';
 
 export async function createGeoJsonAdapter(
   options: NgwLayerOptions,
@@ -19,8 +20,8 @@ export async function createGeoJsonAdapter(
   let _dataPromise: CancelablePromise<any> | undefined;
   const _fullDataLoad = false;
 
-  const geoJsonAdapterCb = async (filters?: PropertiesFilter[]) => {
-    _dataPromise = getNgwLayerFeatures({resourceId: options.resourceId, filters, connector });
+  const geoJsonAdapterCb = async (filters?: PropertiesFilter[], opt?: FilterOptions) => {
+    _dataPromise = getNgwLayerFeatures({ resourceId: options.resourceId, filters, connector, ...opt });
     return await _dataPromise;
   };
 
@@ -52,7 +53,7 @@ export async function createGeoJsonAdapter(
       abort();
     }
 
-    async propertiesFilter(filters: PropertiesFilter) {
+    async propertiesFilter(filters: PropertiesFilter, opt?: FilterOptions) {
       abort();
       if (this.filter && _fullDataLoad) {
         this.filter((e) => {
@@ -62,7 +63,10 @@ export async function createGeoJsonAdapter(
           return true;
         });
       } else if (this.setData) {
-        const data = await geoJsonAdapterCb(filters);
+        if (this.clearLayer) {
+          this.clearLayer();
+        }
+        const data = await geoJsonAdapterCb(filters, opt);
         this.setData(data);
       }
     }

@@ -245,6 +245,10 @@ export type CallbackFilter<F extends Feature = Feature, L = any> = (opt: LayerDe
  */
 export type Operations = 'gt' | 'lt' | 'ge' | 'le' | 'eq' | 'ne' | 'like' | 'ilike';
 
+export interface FilterOptions {
+  limit?: number;
+}
+
 /**
  * field, operation, value
  * ['foo', 'eq', 'bar']
@@ -294,7 +298,7 @@ export interface VectorLayerAdapter<
   getSelected?(): Array<{ layer?: L, feature?: Feature }>;
 
   filter?(cb: DataLayerFilter<F, L>): void;
-  propertiesFilter?(filters: PropertiesFilter): void;
+  propertiesFilter?(filters: PropertiesFilter, options?: FilterOptions): void;
   removeFilter?(): void;
 
   addData?(data: GeoJsonObject): void;
