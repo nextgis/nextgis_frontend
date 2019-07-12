@@ -1,12 +1,10 @@
 {
   "name": "@nextgis/utils",
-  "version": "0.16.0",
+  "version": "0.16.2",
   "description": "Development tools",
   "main": "lib/utils.js",
   "unpkg": "lib/utils.js",
   "types": "lib/index.d.ts",
-  "dependencies": {
-  },
   "devDependencies": {
     "@types/events": "^3.0.0",
     "@types/node": "^12.0.12",
