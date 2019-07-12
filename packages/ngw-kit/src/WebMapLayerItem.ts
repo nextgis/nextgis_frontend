@@ -6,7 +6,7 @@ import Item, { ItemOptions } from '@nextgis/item';
 
 import WebMap, { LayerAdaptersOptions, LayerAdapter } from '@nextgis/webmap';
 import { TreeGroup, TreeLayer } from './interfaces';
-import { pixelsInMeterWidth, setScaleRatio } from './utils';
+import { pixelsInMeterWidth, setScaleRatio } from './utils/utils';
 
 export class WebMapLayerItem extends Item<ItemOptions> {
   static options: ItemOptions = {

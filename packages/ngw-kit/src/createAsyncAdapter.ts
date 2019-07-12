@@ -6,7 +6,7 @@ import { NgwLayerOptions, ResourceAdapter } from './interfaces';
 import { createGeoJsonAdapter } from './createGeoJsonAdapter';
 import { createRasterAdapter } from './createRasterAdapter';
 import { createWebMapAdapter } from './createWebMapAdapter';
-import { applyMixins } from './utils';
+import { applyMixins } from './utils/utils';
 import { NgwResource } from './NgwResource';
 
 const styles: ResourceCls[] = ['mapserver_style', 'qgis_vector_style', 'raster_style'];
