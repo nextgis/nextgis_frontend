@@ -229,9 +229,9 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
     });
   }
 
-  async getIdentifyGeoJson(identify: FeatureLayersIdentify) {
+  async getIdentifyGeoJson(identify: FeatureLayersIdentify, multiple = false) {
     return NgwKit.utils.getIdentifyGeoJson({
-      identify, connector: this.connector
+      identify, connector: this.connector, multiple
     });
   }
 
