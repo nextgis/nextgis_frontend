@@ -256,7 +256,7 @@ export class WebMapLayers<L = any> {
           allow = allowCb(l, this._layers[l]);
         }
         if (allow) {
-          this.removeLayer(l);
+          this.webMap.removeLayer(l);
           delete this._layers[l];
         }
       }
@@ -267,7 +267,7 @@ export class WebMapLayers<L = any> {
    * Remove all layers but not remove basemap.
    */
   removeOverlays() {
-    this.removeLayers((layerId, layer) => !layer.options.baseLayer);
+    this.webMap.removeLayers((layerId, layer) => !layer.options.baseLayer);
   }
 
   /**

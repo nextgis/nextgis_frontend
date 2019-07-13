@@ -6,6 +6,7 @@
 import { WebMap } from './WebMap';
 
 export * from './WebMap';
+export * from './WebMapLayers';
 export * from './interfaces/BaseTypes';
 export * from './interfaces/WebMapApp';
 export * from './interfaces/MapAdapter';

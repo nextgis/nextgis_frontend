@@ -88,8 +88,8 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
   readonly runtimeParams: RuntimeParams[] = [];
 
   getPaintFunctions = WebMap.getPaintFunctions;
-
-  private readonly layers: WebMapLayers<L>;
+  LAYERS: Type<WebMapLayers<L>> = WebMapLayers;
+  private layers: WebMapLayers<L>;
   private readonly controls: WebMapControls<C>;
 
   private _extent?: LngLatBoundsArray;
@@ -97,7 +97,7 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
   private readonly _starterKits: StarterKit[];
 
   constructor(appOptions: AppOptions) {
-    this.layers = new WebMapLayers<L>(this);
+    this.layers = new this.LAYERS(this);
     this.controls = new WebMapControls<C>(this);
     this.mapAdapter = appOptions.mapAdapter;
     this._starterKits = appOptions.starterKits || [];
