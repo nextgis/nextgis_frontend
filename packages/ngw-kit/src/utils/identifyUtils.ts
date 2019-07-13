@@ -3,7 +3,8 @@ import { getNgwLayerFeature } from './featureLayerUtils';
 
 export function getIdentifyGeoJson(options: {
   identify: FeatureLayersIdentify,
-  connector: NgwConnector
+  connector: NgwConnector,
+  multiple?: boolean
 }) {
 
   const { identify, connector } = options;
