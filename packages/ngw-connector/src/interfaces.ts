@@ -93,6 +93,7 @@ export interface RequestOptions {
   headers?: RequestHeaders;
   withCredentials?: boolean;
   file?: File;
+  responseType?: 'json' | 'blob';
   onProgress?: (percentComplete: number) => void;
   nocache?: boolean;
 }
