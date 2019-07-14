@@ -246,6 +246,7 @@ export class NgwConnector {
 
   _getJson(url: string, options: RequestOptions): CancelablePromise<any> {
     const onCancel: Array<() => void> = [];
+    options.responseType = options.responseType || 'json';
     return new CancelablePromise((resolve, reject) => {
       if (this.user) {
         options = options || {};

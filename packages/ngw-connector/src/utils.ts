@@ -29,16 +29,24 @@ export function loadJSON(
   xhr = new XMLHttpRequest();
   xhr.open(options.method || 'GET', url, true); // true for asynchronous
 
+  if (options.responseType === 'blob') {
+    xhr.responseType = options.responseType;
+  }
+
   const processingResponce = (forError: boolean = false) => {
     const cb = forError ? error : callback;
-    if (xhr.responseText) {
-      try {
-        cb(JSON.parse(xhr.responseText));
-      } catch (er) {
+    if (options.responseType === 'blob') {
+      cb(xhr.response);
+    } else {
+      if (xhr.responseText) {
+        try {
+          cb(JSON.parse(xhr.responseText));
+        } catch (er) {
+          cb(xhr.responseText);
+        }
+      } else {
         error({ message: '' });
       }
-    } else {
-      error({ message: '' });
     }
   };
 
