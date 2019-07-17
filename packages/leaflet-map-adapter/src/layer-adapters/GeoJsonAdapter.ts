@@ -1,8 +1,8 @@
 import {
   VectorLayerAdapter,
   GeoJsonAdapterOptions,
-  GeoJsonAdapterLayerPaint,
-  GeoJsonAdapterLayerType,
+  VectorAdapterLayerPaint,
+  VectorAdapterLayerType,
   IconOptions,
   GetPaintCallback,
   LayerDefinition,
@@ -27,7 +27,7 @@ import {
 import { GeoJsonObject, GeoJsonGeometryTypes, FeatureCollection, Feature, GeometryCollection } from 'geojson';
 import { BaseAdapter } from './BaseAdapter';
 
-const typeAlias: { [key in GeoJsonGeometryTypes]: GeoJsonAdapterLayerType } = {
+const typeAlias: { [key in GeoJsonGeometryTypes]: VectorAdapterLayerType } = {
   'Point': 'circle',
   'LineString': 'line',
   'MultiPoint': 'circle',
@@ -42,7 +42,7 @@ const PAINT = {
   opacity: 1
 };
 
-const backAliases: { [key in GeoJsonAdapterLayerType]?: GeoJsonGeometryTypes[] } = {};
+const backAliases: { [key in VectorAdapterLayerType]?: GeoJsonGeometryTypes[] } = {};
 
 for (const a in typeAlias) {
   if (typeAlias.hasOwnProperty(a)) {
@@ -60,9 +60,9 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
   layer: FeatureGroup;
   selected = false;
 
-  private paint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
-  private selectedPaint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
-  private type?: GeoJsonAdapterLayerType;
+  private paint?: VectorAdapterLayerPaint | GetPaintCallback;
+  private selectedPaint?: VectorAdapterLayerPaint | GetPaintCallback;
+  private type?: VectorAdapterLayerType;
 
   private _layers: LayerMem[] = [];
   private _selectedLayers: LayerMem[] = [];
@@ -189,7 +189,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
     if (options) {
 
       if (data) {
-        let type: GeoJsonAdapterLayerType;
+        let type: VectorAdapterLayerType;
 
         if (!options.type) {
           const detectedType = detectType(data);
@@ -242,14 +242,14 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
     layer.closePopup().unbindPopup();
   }
 
-  private setPaintEachLayer(paint: GetPaintCallback | GeoJsonAdapterLayerPaint) {
+  private setPaintEachLayer(paint: GetPaintCallback | VectorAdapterLayerPaint) {
     this.layer.eachLayer((l) => {
       this.setPaint(l, paint);
     });
   }
 
-  private setPaint(l: any, paint: GetPaintCallback | GeoJsonAdapterLayerPaint) {
-    let style: GeoJsonAdapterLayerPaint;
+  private setPaint(l: any, paint: GetPaintCallback | VectorAdapterLayerPaint) {
+    let style: VectorAdapterLayerPaint;
     if (typeof paint === 'function') {
       style = paint(l.feature);
     } else {
@@ -264,7 +264,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
     }
   }
 
-  private preparePaint(paint: GeoJsonAdapterLayerPaint): PathOptions {
+  private preparePaint(paint: VectorAdapterLayerPaint): PathOptions {
     if (paint.type !== 'get-paint') {
       // const path: CircleMarkerOptions | PathOptions = paint as CircleMarkerOptions | PathOptions;
       // if (path.opacity) {
@@ -304,7 +304,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
     return PAINT;
   }
 
-  private getGeoJsonOptions(options: GeoJsonAdapterOptions, type: GeoJsonAdapterLayerType): GeoJSONOptions {
+  private getGeoJsonOptions(options: GeoJsonAdapterOptions, type: VectorAdapterLayerType): GeoJSONOptions {
     const paint = options.paint;
     let lopt: GeoJSONOptions = {};
 
@@ -330,7 +330,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
         };
       }
     } else {
-      lopt = this.createPaintOptions((paint as GeoJsonAdapterLayerPaint), type);
+      lopt = this.createPaintOptions((paint as VectorAdapterLayerPaint), type);
     }
 
     lopt.onEachFeature = (feature: Feature, layer) => {
@@ -439,7 +439,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
 
   }
 
-  private createPaintOptions(paintOptions: GeoJsonAdapterLayerPaint, type: GeoJsonAdapterLayerType): GeoJSONOptions {
+  private createPaintOptions(paintOptions: VectorAdapterLayerPaint, type: VectorAdapterLayerType): GeoJSONOptions {
     const geoJsonOptions: GeoJSONOptions = {};
     const paint = (paintOptions && this.preparePaint(paintOptions)) || {};
     if (paintOptions) {
@@ -489,12 +489,12 @@ function findMostFrequentGeomType(arr: GeoJsonGeometryTypes[]): GeoJsonGeometryT
   return maxName as GeoJsonGeometryTypes;
 }
 
-function geometryFilter(geometry: GeoJsonGeometryTypes, type: GeoJsonAdapterLayerType): boolean {
+function geometryFilter(geometry: GeoJsonGeometryTypes, type: VectorAdapterLayerType): boolean {
   const geoJsonGeometry = backAliases[type] || [];
   return geoJsonGeometry.indexOf(geometry) !== -1;
 }
 
-function filterGeometries(data: GeoJsonObject, type: GeoJsonAdapterLayerType): GeoJsonObject | false {
+function filterGeometries(data: GeoJsonObject, type: VectorAdapterLayerType): GeoJsonObject | false {
   if (data.type === 'FeatureCollection') {
     (data as FeatureCollection).features = (data as FeatureCollection).features
       .filter((f) => geometryFilter(f.geometry.type, type));

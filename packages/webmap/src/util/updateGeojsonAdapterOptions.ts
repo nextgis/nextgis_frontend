@@ -1,7 +1,7 @@
-import { GeoJsonAdapterOptions, GeoJsonAdapterLayerType } from '../interfaces/LayerAdapter';
+import { GeoJsonAdapterOptions, VectorAdapterLayerType } from '../interfaces/LayerAdapter';
 import { detectGeometryType } from './geometryTypes';
 
-export const typeAlias: { [x: string]: GeoJsonAdapterLayerType } = {
+export const typeAlias: { [x: string]: VectorAdapterLayerType } = {
   'Point': 'circle',
   'LineString': 'line',
   'MultiPoint': 'circle',

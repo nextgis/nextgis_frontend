@@ -1,6 +1,6 @@
 import {
   Paint,
-  GeoJsonAdapterLayerPaint,
+  VectorAdapterLayerPaint,
   GeometryPaint,
   GetPaintFunction,
   GetCustomPaintOptions
@@ -14,7 +14,7 @@ export function preparePaint(
   let newPaint: Paint | undefined;
   if (typeof paint === 'function') {
     return (opt: any) => {
-      return preparePaint(paint(opt), defaultPaint, getPaintFunctions) as GeoJsonAdapterLayerPaint;
+      return preparePaint(paint(opt), defaultPaint, getPaintFunctions) as VectorAdapterLayerPaint;
     };
   } else if (paint.type === 'get-paint') {
     const getPaint = updatePaintOptionFromCallback(paint, getPaintFunctions);
@@ -62,7 +62,7 @@ export function preparePaint(
 
 function updatePaintOptionFromCallback(
   paint: GetCustomPaintOptions,
-  getPaintFunctions: { [name: string]: GetPaintFunction }): GeoJsonAdapterLayerPaint | undefined {
+  getPaintFunctions: { [name: string]: GetPaintFunction }): VectorAdapterLayerPaint | undefined {
 
   if (typeof paint.from === 'function') {
     return paint.from(paint.options);
