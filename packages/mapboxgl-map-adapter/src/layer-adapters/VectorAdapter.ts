@@ -43,6 +43,7 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
 
   selected: boolean = false;
 
+  protected featureIdName = 'id';
   protected _types: VectorAdapterLayerType[] = ['fill', 'circle', 'line'];
   protected readonly _sourceId: string;
   protected readonly _selectionName: string;
@@ -81,7 +82,8 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
           this.layer.push(layer);
           if (options.selectedPaint) {
             const selectionLayer = this._getSelectionLayerNameFromType(t);
-            await this._addLayer(selectionLayer, type, ['all', geomFilter, ['in', '_rendrom_id', '']]);
+            await this._addLayer(selectionLayer, type,
+              ['all', geomFilter, ['in', this.featureIdName, '']]);
             this.layer.push(selectionLayer);
           }
         }

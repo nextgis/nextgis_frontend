@@ -18,6 +18,9 @@ export const operationsAliases: { [key in Operations]: (a: any, b: any) => boole
   eq: (a: any, b: any) => a === b,
   //  not equal(!=)
   ne: (a: any, b: any) => a !== b,
+
+  in: (a: any, b: any[]) => b.indexOf(a) !== -1,
+  notin: (a: any, b: any[]) => b.indexOf(a) === -1,
   // LIKE SQL statement(for strings compare)
   like: (a: string, b: string) => {
     return like(a, b);
