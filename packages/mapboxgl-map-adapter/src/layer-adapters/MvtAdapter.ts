@@ -1,34 +1,24 @@
-import { BaseLayerAdapter } from '@nextgis/webmap';
-import { BaseAdapter } from './BaseAdapter';
-import { Layer } from 'mapbox-gl';
+import { MvtAdapterOptions } from '@nextgis/webmap';
+import { VectorAdapter } from './VectorAdapter';
+import { TLayer } from '../MapboxglMapAdapter';
 
-export class MvtAdapter extends BaseAdapter implements BaseLayerAdapter {
+import { Map } from 'mapbox-gl';
 
-  addLayer(options: any): string[] {
-    options = this.options = { ...this.options, ...(options || {}) };
-    // read about https://blog.mapbox.com/vector-tile-specification-version-2-whats-changed-259d4cd73df6
-    const idString = String(options.id);
+export class MvtAdapter extends VectorAdapter<MvtAdapterOptions> {
 
-    const layerOptions: Layer = {
-      'id': idString,
-      'type': options.type || 'fill',
-      'source-layer': options['source-layer'] || idString,
+  async addLayer(options: MvtAdapterOptions): Promise<TLayer> {
+    const layer = super.addLayer(options);
+    this._updateLayerPaint(this.options.type || 'fill');
+    return layer;
+  }
+
+  protected _getAdditionalLayerOptions() {
+    return {
       'source': {
         type: 'vector',
-        tiles: [options.url],
+        tiles: [this.options.url],
       },
-      'layout': {
-        visibility: 'none',
-      },
-      // paint: {'fill-color': 'red'}
+      'source-layer': this.options['source-layer']
     };
-
-    if (options.paint) {
-      layerOptions.paint = options.paint;
-    }
-
-    this.map.addLayer(layerOptions);
-    this.layer = [idString];
-    return this.layer;
   }
 }

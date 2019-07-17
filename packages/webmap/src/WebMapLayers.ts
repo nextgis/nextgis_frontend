@@ -157,9 +157,9 @@ export class WebMapLayers<L = any> {
     }
     if (adapterEngine !== undefined) {
       const geoJsonOptions = options as GeoJsonAdapterOptions;
-      if (!options.strongOptions) {
-        this._updateGeoJsonOptions(geoJsonOptions);
-      }
+
+      this._updateGeoJsonOptions(geoJsonOptions);
+
       const { maxZoom, minZoom } = this.webMap.options;
 
       options = {

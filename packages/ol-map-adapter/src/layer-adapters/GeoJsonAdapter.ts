@@ -1,8 +1,8 @@
 import {
   GeoJsonAdapterOptions,
-  GeoJsonAdapterLayerPaint,
+  VectorAdapterLayerPaint,
   GetPaintCallback,
-  GeoJsonAdapterLayerType,
+  VectorAdapterLayerType,
   VectorLayerAdapter,
   DataLayerFilter,
   GeometryPaint
@@ -29,7 +29,7 @@ type Layer = Base;
 
 type OlStyle = Style | Style[];
 
-const typeAlias: { [x: string]: GeoJsonAdapterLayerType } = {
+const typeAlias: { [x: string]: VectorAdapterLayerType } = {
   'Point': 'circle',
   'MultiPoint': 'circle',
   'LineString': 'line',
@@ -42,8 +42,8 @@ const typeAlias: { [x: string]: GeoJsonAdapterLayerType } = {
 export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAdapterOptions> {
 
   layer?: VectorLayer;
-  paint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
-  selectedPaint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
+  paint?: VectorAdapterLayerPaint | GetPaintCallback;
+  selectedPaint?: VectorAdapterLayerPaint | GetPaintCallback;
   selected: boolean = false;
 
   private vectorSource = new VectorSource();
@@ -169,7 +169,7 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
     this.filter();
   }
 
-  private setPaintEachLayer(paint: GetPaintCallback | GeoJsonAdapterLayerPaint) {
+  private setPaintEachLayer(paint: GetPaintCallback | VectorAdapterLayerPaint) {
     if (this.layer) {
       const source = this.layer.getSource();
       const features = source.getFeatures();
@@ -241,7 +241,7 @@ function getFeature(feature: ol.Feature): Feature {
   return geojson.writeFeatureObject(feature);
 }
 
-function styleFunction(feature: ol.Feature, paint: GeoJsonAdapterLayerPaint | GetPaintCallback = {}): OlStyle {
+function styleFunction(feature: ol.Feature, paint: VectorAdapterLayerPaint | GetPaintCallback = {}): OlStyle {
   if (typeof paint === 'function') {
     const f: Feature = getFeature(feature);
     return styleFunction(feature, paint(f));

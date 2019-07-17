@@ -36,17 +36,15 @@ export interface AdapterOptions {
    */
   fit?: boolean;
   name?: string;
-  strongOptions?: boolean;
 }
 
-export interface MvtAdapterOptions extends AdapterOptions {
-  url?: string;
-  paint?: any;
-  type?: 'fill' | 'line' | 'circle' | 'point';
+export interface MvtAdapterOptions<F extends Feature = Feature> extends VectorAdapterOptions<F> {
+  url: string;
+  // type?: 'fill' | 'line' | 'circle' | 'point';
   'source-layer'?: string;
 }
 
-export type GeoJsonAdapterLayerType = 'fill' | 'circle' | 'line' | 'icon';
+export type VectorAdapterLayerType = 'fill' | 'circle' | 'line' | 'icon';
 
 export interface BasePaint {
   type?: string;
@@ -80,7 +78,7 @@ export interface IconOptions {
   iconAnchor?: [number, number];
 }
 
-export type GetPaintFunction = (opt?: any) => GeoJsonAdapterLayerPaint;
+export type GetPaintFunction = (opt?: any) => VectorAdapterLayerPaint;
 
 export interface GetCustomPaintOptions {
   type: 'get-paint';
@@ -88,24 +86,19 @@ export interface GetCustomPaintOptions {
   options?: any;
 }
 
-export type GeoJsonAdapterLayerPaint = CirclePaint | PathPaint | IconOptions | GetCustomPaintOptions;
+export type VectorAdapterLayerPaint = CirclePaint | PathPaint | IconOptions | GetCustomPaintOptions;
 
-export type GetPaintCallback = (feature: Feature<any>) => GeoJsonAdapterLayerPaint;
+export type GetPaintCallback = (feature: Feature<any>) => VectorAdapterLayerPaint;
 
-export type Paint = GeoJsonAdapterLayerPaint | GetPaintCallback;
+export type Paint = VectorAdapterLayerPaint | GetPaintCallback;
 
 export interface PopupOptions {
   createPopupContent?: (layerDef: LayerDefinition) => HTMLElement | string;
 }
 
-/**
- * Options to crateing styling and defining selection behavior.
- */
-export interface GeoJsonAdapterOptions<F extends Feature = Feature, L = any> extends AdapterOptions {
-  /** Geojson data */
-  data?: GeoJsonObject;
+export interface VectorAdapterOptions<F extends Feature = Feature, L = any> extends AdapterOptions {
   /** Type for geometries painting, for each layer may be only one of: `fill`, `circle` or `line`. */
-  type?: GeoJsonAdapterLayerType;
+  type?: VectorAdapterLayerType;
   /**
    * Determine the appearance of the vector data geometries.
    *
@@ -131,7 +124,7 @@ export interface GeoJsonAdapterOptions<F extends Feature = Feature, L = any> ext
    * }
    * ```
    */
-  paint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
+  paint?: VectorAdapterLayerPaint | GetPaintCallback;
   /**
    * The paint that applies to the features after it becomes selected.
    *
@@ -143,8 +136,8 @@ export interface GeoJsonAdapterOptions<F extends Feature = Feature, L = any> ext
    * });
    * ```
    */
-  selectedPaint?: GeoJsonAdapterLayerPaint | GetPaintCallback;
-  // selectedPaintDiff?: GeoJsonAdapterLayerPaint;
+  selectedPaint?: VectorAdapterLayerPaint | GetPaintCallback;
+  // selectedPaintDiff?: VectorAdapterLayerPaint;
   /**
    * Determines whether objects are selected by mouse click.
    *
@@ -183,6 +176,14 @@ export interface GeoJsonAdapterOptions<F extends Feature = Feature, L = any> ext
   filter?: DataLayerFilter;
   propertiesFilter?: PropertiesFilter;
   onLayerClick?(opt: OnLayerClickOptions): Promise<any>;
+}
+
+/**
+ * Options to crateing styling and defining selection behavior.
+ */
+export interface GeoJsonAdapterOptions<F extends Feature = Feature, L = any> extends VectorAdapterOptions<F, L> {
+  /** Geojson data */
+  data?: GeoJsonObject;
 }
 
 export interface MarkerAdapterOptions extends AdapterOptions {
@@ -268,6 +269,7 @@ export interface BaseLayerAdapter<M = any, L = any, O extends AdapterOptions = A
 
   options: O;
   id?: string;
+  name?: string;
   layer?: L;
   map?: M;
 
@@ -286,7 +288,7 @@ export interface BaseLayerAdapter<M = any, L = any, O extends AdapterOptions = A
 }
 
 export interface VectorLayerAdapter<
-  M = any, L = any, O extends GeoJsonAdapterOptions = GeoJsonAdapterOptions, F extends Feature = Feature>
+  M = any, L = any, O extends VectorAdapterOptions = VectorAdapterOptions, F extends Feature = Feature>
   extends BaseLayerAdapter<M, L, O> {
 
   selected?: boolean;
