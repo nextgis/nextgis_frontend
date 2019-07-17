@@ -31,7 +31,7 @@ let ID = 0;
 export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
 
   selected: boolean = false;
-
+  protected featureIdName = '_rendrom_id';
   private _features: Feature[] = [];
   // private readonly _sourceId: string;
   // private readonly _selectionName: string;
@@ -70,7 +70,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
         const rendromId = '_' + ID++;
         x._rendrom_id = rendromId;
         if (x.properties) {
-          x.properties._rendrom_id = rendromId;
+          x.properties[this.featureIdName] = rendromId;
         }
       });
       if (this._filterFun) {
@@ -309,14 +309,14 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
           const selLayerName = this._getSelectionLayerNameFromType(t);
           if (layers.indexOf(selLayerName) !== -1) {
             if (this._selectionName) {
-              this.map.setFilter(selLayerName, ['all', geomFilter, ['in', '_rendrom_id', ...selectionArray]]);
+              this.map.setFilter(selLayerName, ['all', geomFilter, ['in', this.featureIdName, ...selectionArray]]);
             }
           }
           if (layers.indexOf(layerName) !== -1) {
             if (this._filteredFeatureIds.length) {
-              this.map.setFilter(layerName, ['all', geomFilter, ['in', '_rendrom_id', ...filteredArray]]);
+              this.map.setFilter(layerName, ['all', geomFilter, ['in', this.featureIdName, ...filteredArray]]);
             } else {
-              this.map.setFilter(layerName, ['all', geomFilter, ['!in', '_rendrom_id', ...selectionArray]]);
+              this.map.setFilter(layerName, ['all', geomFilter, ['!in', this.featureIdName, ...selectionArray]]);
             }
           }
         }

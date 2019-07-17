@@ -207,7 +207,7 @@ export interface ImageAdapterOptions extends RasterAdapterOptions {
 }
 
 export interface LayerAdapters {
-  'MVT': BaseLayerAdapter;
+  'MVT': VectorLayerAdapter;
   'IMAGE': BaseLayerAdapter;
   'OSM': BaseLayerAdapter;
   'TILE': BaseLayerAdapter;
@@ -244,7 +244,7 @@ export type CallbackFilter<F extends Feature = Feature, L = any> = (opt: LayerDe
  * like - LIKE SQL statement (for strings compare)
  * ilike - ILIKE SQL statement (for strings compare)
  */
-export type Operations = 'gt' | 'lt' | 'ge' | 'le' | 'eq' | 'ne' | 'like' | 'ilike';
+export type Operations = 'gt' | 'lt' | 'ge' | 'le' | 'eq' | 'ne' | 'in' | 'notin' | 'like' | 'ilike';
 
 export interface FilterOptions {
   limit?: number;
@@ -295,8 +295,8 @@ export interface VectorLayerAdapter<
 
   getLayers?(): Array<LayerDefinition<F, L>>;
 
-  select?(findFeatureCb?: DataLayerFilter<F, L>): void;
-  unselect?(findFeatureCb?: DataLayerFilter<F, L>): void;
+  select?(findFeatureCb?: DataLayerFilter<F, L> | PropertiesFilter): void;
+  unselect?(findFeatureCb?: DataLayerFilter<F, L> | PropertiesFilter): void;
   getSelected?(): Array<{ layer?: L, feature?: Feature }>;
 
   filter?(cb: DataLayerFilter<F, L>): void;
