@@ -183,6 +183,7 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
             }
           }
         }
+        mapboxPaint[type + '-opacity-transition'] = { duration: 0 };
         return mapboxPaint;
       }
     }
