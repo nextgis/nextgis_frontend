@@ -79,7 +79,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
           attributionControl: false,
           // @ts-ignore
           bounds: options.bounds,
-          fitBoundsOptions: {...options.fitOptions, ...fitBoundsOptions},
+          fitBoundsOptions: { ...options.fitOptions, ...fitBoundsOptions },
           // center: options.center,
           // zoom: options.zoom,
           style: {
@@ -174,7 +174,10 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
       const _map = this.map;
       layerIds.forEach((layerId) => {
         _map.removeLayer(layerId);
-        _map.removeSource(layerId);
+        const source = _map.getSource(layerId);
+        if (source) {
+          _map.removeSource(layerId);
+        }
       });
     }
   }
@@ -299,8 +302,11 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
       if (Array.isArray(mem.layer)) {
         _layers = mem.layer;
       } else if (mem.getDependLayers) {
-        mem.getDependLayers().forEach((x) => {
-          x.forEach((y) => {
+        const dependLayers = mem.getDependLayers();
+        dependLayers.forEach((x) => {
+          // @ts-ignore Update x interface
+          const layer: TLayer = (x.layer && x.layer.layer) || x;
+          layer.forEach((y) => {
             _layers.push(y);
           });
         });
