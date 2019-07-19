@@ -18,9 +18,11 @@ export function createButtonControl(options: ButtonControlOptions) {
       link.innerHTML = options.html;
     }
     const child = link.firstElementChild as HTMLElement;
-    child.style.width = '100%';
-    child.style.height = '100%';
-    child.style.lineHeight = (link.offsetHeight || 30) + 'px';
+    if (child) {
+      child.style.width = '100%';
+      child.style.height = '100%';
+      child.style.lineHeight = (link.offsetHeight || 30) + 'px';
+    }
   }
   if (options.addClass) {
     options.addClass.split(' ').forEach((x) => link.classList.add(x));

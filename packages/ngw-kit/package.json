@@ -7,8 +7,8 @@
   "unpkg": "lib/ngw-kit.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/item": "^0.16.0",
-    "@nextgis/ngw-connector": "^0.16.0",
+    "@nextgis/item": "^0.16.1",
+    "@nextgis/ngw-connector": "^0.16.1",
     "@nextgis/qms-kit": "^0.16.2",
     "@nextgis/utils": "^0.16.2",
     "@nextgis/webmap": "^0.16.2",
@@ -16,14 +16,14 @@
     "strict-event-emitter-types": "^2.0.0"
   },
   "devDependencies": {
-    "@types/node": "^12.0.12",
+    "@types/node": "^12.6.8",
     "rimraf": "^2.6.3",
     "ts-loader": "^6.0.4",
     "tslint": "^5.18.0",
     "tslint-webpack-plugin": "^2.1.0",
-    "typescript": "^3.5.2",
-    "webpack": "^4.35.2",
-    "webpack-cli": "^3.3.5"
+    "typescript": "^3.5.3",
+    "webpack": "^4.36.1",
+    "webpack-cli": "^3.3.6"
   },
   "scripts": {
     "mjs": "tsc -d --outDir ./lib/modules",

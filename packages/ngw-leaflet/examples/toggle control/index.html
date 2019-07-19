@@ -18,12 +18,13 @@
       width: 100%;
       height: 100%;
     }
+
     .toggle-button--on {
-      background-color: green!important;
+      background-color: green !important;
     }
 
     .toggle-button--off {
-      background-color: red!important;
+      background-color: red !important;
     }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.6.9/core.min.js"></script>
@@ -41,40 +42,42 @@
       webmapId: [146, 'webmap']
     });
 
-    var toggleControl = ngwMap.createToggleControl({
+    ngwMap.onLoad().then(function () {
+      var toggleControl = ngwMap.createToggleControl({
 
-      getStatus: function () {
-        return ngwMap.isLayerVisible('webmap')
-      },
+        getStatus: function () {
+          return ngwMap.isLayerVisible('webmap')
+        },
 
-      onClick: function(status) {
-        ngwMap.toggleLayer('webmap', status);
-      },
+        onClick: function (status) {
+          ngwMap.toggleLayer('webmap', status);
+        },
 
-      html: {
-        on: 'ON',
-        off: 'OFF'
-      },
+        html: {
+          on: 'ON',
+          off: 'OFF'
+        },
 
-      // html: 'W'
+        // html: 'W'
 
-      // html: {
-      //   on: '<span style="color:green;">ON</span>',
-      //   off: '<span style="color: red">OFF</span>'
-      // },
+        // html: {
+        //   on: '<span style="color:green;">ON</span>',
+        //   off: '<span style="color: red">OFF</span>'
+        // },
 
-      title: {
-        on: 'Turn webmap off',
-        off: 'Turn webmap on'
-      },
+        title: {
+          on: 'Turn webmap off',
+          off: 'Turn webmap on'
+        },
 
-      // title: 'Toggle webmap visibility'
+        // title: 'Toggle webmap visibility'
 
-      addClassOn: 'toggle-button--on',
-      addClassOff: 'toggle-button--off'
+        addClassOn: 'toggle-button--on',
+        addClassOff: 'toggle-button--off'
+      });
+
+      ngwMap.addControl(toggleControl, 'top-right');
     });
-
-    ngwMap.addControl(toggleControl, 'top-right');
   </script>
 </body>
 

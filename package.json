@@ -2,7 +2,7 @@
   "name": "root",
   "private": true,
   "devDependencies": {
-    "lerna": "^3.15.0",
+    "lerna": "^3.16.0",
     "@types/jest": "^24.0.15",
     "jest": "^24.8.0",
     "rimraf": "^2.6.3",
@@ -11,8 +11,8 @@
     "tslint": "^5.18.0",
     "tslint-webpack-plugin": "^2.1.0",
     "typedoc": "^0.14.2",
-    "typescript": "^3.5.2",
-    "webpack": "^4.35.0"
+    "typescript": "^3.5.3",
+    "webpack": "^4.36.1"
   },
   "scripts": {
     "clean": "lerna run clean",
@@ -31,7 +31,7 @@
     "packages/*"
   ],
   "dependencies": {
-    "css-loader": "^3.0.0",
+    "css-loader": "^3.1.0",
     "typedoc-plugin-external-module-name": "^2.1.0"
   }
 }

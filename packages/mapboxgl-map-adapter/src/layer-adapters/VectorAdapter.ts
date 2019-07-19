@@ -63,10 +63,10 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
 
     this.layer = [];
     const types = this._types = options.type ? [options.type] : this._types;
-    // const types = this._types;
-    for (const t of types) {
-      if (options.paint) {
-        this._onAddLayer(this._sourceId);
+    if (options.paint) {
+      this._onAddLayer(this._sourceId);
+      // const types = this._types;
+      for (const t of types) {
         const geomType = typeAliasForFilter[t];
         if (geomType) {
           let type = t;
