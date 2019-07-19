@@ -5,7 +5,8 @@ import {
   VectorAdapterLayerType,
   VectorLayerAdapter,
   DataLayerFilter,
-  GeometryPaint
+  GeometryPaint,
+  PropertiesFilter
 } from '@nextgis/webmap';
 import Map from 'ol/Map';
 import GeoJSON from 'ol/format/GeoJSON';
@@ -112,8 +113,8 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
     }
   }
 
-  select(findFeatureFun?: (opt: { feature: Feature }) => boolean) {
-    if (findFeatureFun) {
+  select(findFeatureCb?: DataLayerFilter<Feature> | PropertiesFilter) {
+    if (findFeatureCb) {
       const feature = this._selectedFeatures.filter((x) => Object.create({ feature: x }));
       feature.forEach((x) => {
         this._selectFeature(x);
@@ -126,8 +127,8 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
     }
   }
 
-  unselect(findFeatureFun?: (opt: { feature: Feature }) => boolean) {
-    if (findFeatureFun) {
+  unselect(findFeatureCb?: DataLayerFilter<Feature> | PropertiesFilter) {
+    if (findFeatureCb) {
       const feature = this._selectedFeatures.filter((x) => Object.create({ feature: x }));
       feature.forEach((x) => {
         this._unselectFeature(x);
