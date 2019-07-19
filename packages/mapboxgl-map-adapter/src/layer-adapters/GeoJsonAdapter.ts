@@ -13,14 +13,7 @@ import {
   GeometryCollection,
   GeometryObject,
 } from 'geojson';
-import {
-  Map, GeoJSONSource,
-  // BackgroundPaint, FillPaint, FillExtrusionPaint, LinePaint, SymbolPaint,
-  // RasterPaint, CirclePaint, HeatmapPaint, HillshadePaint,
-} from 'mapbox-gl';
-
-// type MapboxPaint = BackgroundPaint | FillPaint | FillExtrusionPaint | LinePaint | SymbolPaint |
-//   RasterPaint | CirclePaint | HeatmapPaint | HillshadePaint;
+import { GeoJSONSource } from 'mapbox-gl';
 
 import { TLayer } from '../MapboxglMapAdapter';
 import { VectorAdapter, Feature } from './VectorAdapter';
@@ -33,12 +26,16 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   selected: boolean = false;
   protected featureIdName = '_rendrom_id';
   private _features: Feature[] = [];
-  // private readonly _sourceId: string;
-  // private readonly _selectionName: string;
-  // private _selectedFeatureIds: string[] = [];
   private _filteredFeatureIds: string[] = [];
-  // private _types: VectorAdapterLayerType[] = ['fill', 'circle', 'line'];
   private _filterFun?: DataLayerFilter<Feature>;
+
+  async addLayer(options: GeoJsonAdapterOptions): Promise<TLayer> {
+    const layer = await super.addLayer(options);
+    if (this.options.data) {
+      this.addData(this.options.data);
+    }
+    return layer;
+  }
 
   removeLayer() {
     super.removeLayer();

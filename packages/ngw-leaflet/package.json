@@ -14,19 +14,19 @@
   },
   "devDependencies": {
     "@types/events": "^3.0.0",
-    "@types/node": "^12.0.12",
+    "@types/node": "^12.6.8",
     "base64-inline-loader": "^1.1.1",
-    "css-loader": "^3.0.0",
-    "file-loader": "^4.0.0",
+    "css-loader": "^3.1.0",
+    "file-loader": "^4.1.0",
     "rimraf": "^2.6.3",
     "style-loader": "^0.23.1",
     "ts-loader": "^6.0.4",
     "tslint": "^5.18.0",
     "tslint-webpack-plugin": "^2.1.0",
-    "typescript": "^3.5.2",
-    "webpack": "^4.35.2",
+    "typescript": "^3.5.3",
+    "webpack": "^4.36.1",
     "webpack-bundle-analyzer": "^3.3.2",
-    "webpack-cli": "^3.3.5"
+    "webpack-cli": "^3.3.6"
   },
   "scripts": {
     "mjs": "tsc -d --outDir ./lib/modules",
