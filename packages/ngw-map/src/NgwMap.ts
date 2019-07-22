@@ -151,7 +151,7 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
   }
 
   /**
-   * Add raster layer by NGW style id or vector data layer by resource id.
+   * Add any (style, vector, webmap) NGW layer by resource id.
    * @param options - set layer identification parameters and render method.
    * @param [adapterOptions] - parameters for the selected adapter
    *
