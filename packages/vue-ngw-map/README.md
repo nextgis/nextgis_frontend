@@ -1,7 +1,10 @@
-# Utils
+# Vue ngw map component
 
-Development tools
+Plugin to integrate NGW maps into vue.js
 
+```html
+<vue-ngw-map fullFilling baseUrl="https://demo.nextgis.com" webmapId="4251" qmsId="487"></vue-ngw-map>
+```
 
 ## Commercial support
 
