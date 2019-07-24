@@ -347,7 +347,7 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
     }
 
     const resources: NgwLayerOptions[] = [];
-    appendNgwResources(resources, Number(this.options.webmapId), { fit: true });
+    appendNgwResources(resources, this.options.webmapId, { fit: true });
     if (this.options.resources && Array.isArray(this.options.resources)) {
       this.options.resources.forEach((x) => {
         appendNgwResources(resources, x);

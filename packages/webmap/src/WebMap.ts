@@ -39,6 +39,7 @@ import { WebMapEvents } from './interfaces/Events';
 
 import { onLoad } from './util/decorators';
 import { propertiesFilter } from './util/propertiesFilter';
+import { clearObject } from './util/clearObject';
 
 import { detectGeometryType, findMostFrequentGeomType } from './util/geometryTypes';
 import { updateGeoJsonAdapterOptions } from './util/updateGeoJsonAdapterOptions';
@@ -126,6 +127,11 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
       this._emitStatusEvent('create', this);
     }
     return this;
+  }
+
+  destroy() {
+    clearObject(this._emitStatusEvent);
+
   }
 
   /**
