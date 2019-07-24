@@ -6,7 +6,8 @@ export function appendNgwResources(
   resource?: NgwResourceDefinition,
   defOptions?: NgwLayerOptionsAdditional) {
 
-  if (typeof resource === 'number') {
+  if (typeof resource === 'number' || typeof resource === 'string') {
+    resource = Number(resource);
     options.push({
       ...defOptions,
       resourceId: resource,

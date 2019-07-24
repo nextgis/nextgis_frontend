@@ -1,57 +1,41 @@
-// Styles
-
-// Types
-import Vue, { VNode, VNodeData } from 'vue';
+import Vue, { VNode, VNodeData, CreateElement } from 'vue';
+import Component from 'vue-class-component'
 import NgwMap, { NgwMapOptions } from '@nextgis/ngw-map';
 import MapAdapter from '@nextgis/leaflet-map-adapter';
 
 import 'leaflet/dist/leaflet.css';
 
-interface Data {
-  ngwMap?: NgwMap;
-}
-
-interface Props extends NgwMapOptions {
-  fullFilling?: boolean;
-}
-
-const vueNgwMap = Vue.extend<Data, any, any, Props>({
-  name: 'vue-ngw-map',
-
+@Component({
   props: {
     fullFilling: Boolean,
     baseUrl: {
       type: String,
       default: ''
     },
-    qmsId: undefined,
-    webmapId: undefined
-  },
+    qmsId: String,
+    webmapId: String
+  }
+})
+export class VueNgwMap extends Vue {
+  name = 'vue-ngw-map';
 
-  // data: {
-  //   ngwMap: undefined
-  // },
+  fullFilling!: boolean;
+  ngwMap!: NgwMap;
+  ready = false;
 
-  computed: {
-    //
-  },
-
-  watch: {
-    // '$route': 'onRouteChange'
-  },
-
-  mounted() {
-    this.ngwMap = new NgwMap(new MapAdapter(), {
-      target: this.$el,
+  async mounted() {
+    this.ngwMap = await new NgwMap(new MapAdapter(), {
+      target: this.$el as HTMLElement,
       ...this.$props
     });
-  },
+    this.ready = true;
+  }
 
-  methods: {
-    //
-  },
+  beforeDestroy() {
+    this.ngwMap.destroy();
+  }
 
-  render(h): VNode {
+  render(h: CreateElement): VNode {
     const staticStyle: { [param: string]: string } = {
       zIndex: '0'
     };
@@ -68,8 +52,6 @@ const vueNgwMap = Vue.extend<Data, any, any, Props>({
       // domProps: { id: this.id }
     };
 
-    return h('div', data, this.$slots.default);
+    return this.ready ? h('div', data, this.$slots.default) : h('div', data);
   }
-});
-
-export default vueNgwMap;
+}
