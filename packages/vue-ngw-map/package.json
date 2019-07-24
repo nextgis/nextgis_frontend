@@ -7,6 +7,7 @@
   "types": "lib/index.d.ts",
   "dependencies": {
     "vue": "^2.6.10",
+    "vue-class-component": "^7.1.0",
     "@nextgis/ngw-map": "^0.17.0",
     "@nextgis/leaflet-map-adapter": "^0.17.0"
   },
