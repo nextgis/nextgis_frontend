@@ -17,45 +17,15 @@ import WebMap, {
   PropertiesFilter,
 } from '@nextgis/webmap';
 import NgwConnector, { ResourceItem, CancelablePromise, FeatureLayersIdentify } from '@nextgis/ngw-connector';
-import QmsKit, { QmsAdapterOptions } from '@nextgis/qms-kit';
+import { QmsAdapterOptions } from '@nextgis/qms-kit';
 import NgwKit, { NgwLayerOptions, ResourceAdapter, WebMapLayerItem } from '@nextgis/ngw-kit';
 import { getIcon } from '@nextgis/icons';
 
 import { onMapLoad } from './decorators';
-import { appendNgwResources } from './utils';
+import { appendNgwResources, prepareWebMapOptions, OPTIONS } from './utils';
 
 import { NgwMapOptions, ControlOptions, NgwMapEvents, NgwLayers } from './interfaces';
 import { Geometry, Feature, FeatureCollection } from 'geojson';
-
-const OPTIONS: NgwMapOptions = {
-  target: 'map',
-  baseUrl: 'http://dev.nextgis.com/sandbox',
-  controls: ['ZOOM', 'ATTRIBUTION'],
-  controlsOptions: {
-    ZOOM: { position: 'top-left' },
-    ATTRIBUTION: {
-      position: 'bottom-right',
-      customAttribution: [
-        '<a href="http://nextgis.ru" target="_blank">©NextGIS</a>',
-      ]
-    }
-  },
-  pixelRadius: 10
-};
-
-function prepareWebMapOptions(mapAdapter: MapAdapter, options: NgwMapOptions) {
-  const opt: NgwMapOptions = deepmerge(OPTIONS, options);
-  const kits: StarterKit[] = [new QmsKit()];
-  kits.push(new NgwKit({
-    baseUrl: opt.baseUrl,
-    auth: opt.auth,
-    identification: opt.identification
-  }));
-  return {
-    mapAdapter,
-    starterKits: kits
-  };
-}
 
 /**
  * Base class containing the logic of interaction WebMap with NextGIS services.
@@ -89,7 +59,7 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
   readonly emitter: StrictEventEmitter<EventEmitter, NgwMapEvents> = new EventEmitter();
 
   options: NgwMapOptions<C> = {};
-  connector: NgwConnector;
+  connector!: NgwConnector;
 
   protected _ngwLayers: NgwLayers = {};
 
@@ -99,11 +69,13 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
    */
   constructor(mapAdapter: MapAdapter, options: NgwMapOptions<C>) {
     super(prepareWebMapOptions(mapAdapter, options));
-
+    if (options.connector) {
+      this.connector = options.connector;
+    } else {
+      throw Error('No options to NGW connection');
+    }
     this.options = deepmerge(OPTIONS, options);
-    this.connector = options.connector ||
-      new NgwConnector({ baseUrl: this.options.baseUrl, auth: this.options.auth });
-
+    this.options.baseUrl = this.connector.options.baseUrl;
     this._createWebMap().then(() => {
       const container = this.getContainer();
       if (container) {
@@ -347,7 +319,9 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
     }
 
     const resources: NgwLayerOptions[] = [];
-    appendNgwResources(resources, this.options.webmapId, { fit: true });
+    if (this.options.webmapId) {
+      appendNgwResources(resources, this.options.webmapId, { fit: true });
+    }
     if (this.options.resources && Array.isArray(this.options.resources)) {
       this.options.resources.forEach((x) => {
         appendNgwResources(resources, x);

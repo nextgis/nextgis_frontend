@@ -4,8 +4,8 @@
     <v-data-table v-if="properties.length"
       :items="properties"
       class="elevation-1"
-      hide-actions
-      hide-headers
+      hide-default-footer
+      hide-default-header
     >
       <template slot="items" slot-scope="props">
         <td>{{ props.item.name }}{{props.item.flags.isOptional ? '?' : ''}}</td>

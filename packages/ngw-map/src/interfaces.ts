@@ -35,6 +35,7 @@ export interface NgwMapOptions<C = any> extends MapOptions {
    * Url of NGW server like this https://demo.nextgis.com
    */
   baseUrl?: string;
+  connector?: NgwConnector;
   /**
    * User credentials for authorization in NGW.
    * Provides the ability to display protected resources
@@ -119,7 +120,6 @@ export interface NgwMapOptions<C = any> extends MapOptions {
   identification?: boolean;
 
   pixelRadius?: number;
-  connector?: NgwConnector;
 }
 
 export interface NgwMapEvents extends WebMapEvents {

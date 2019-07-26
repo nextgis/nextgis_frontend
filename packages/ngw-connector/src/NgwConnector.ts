@@ -24,10 +24,15 @@ export class NgwConnector {
   private _loadingQueue: { [name: string]: LoadingQueue } = {};
   private _loadingStatus: { [url: string]: boolean } = {};
 
-  constructor(public options: NgwConnectorOptions = {}) {
+  constructor(public options: NgwConnectorOptions) {
     if (this.options.route) {
       this.routeStr = this.options.route;
     }
+  }
+
+  setNextGisWeb(url: string) {
+    this.logout();
+    this.options.baseUrl = url;
   }
 
   async connect(): CancelablePromise<Router> {
@@ -59,6 +64,7 @@ export class NgwConnector {
     this.options.auth = undefined;
     this.route = undefined;
     this.user = undefined;
+    this.emitter.emit('logout');
   }
 
   getUserInfo(credentials: Credentials): CancelablePromise<UserInfo> {

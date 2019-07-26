@@ -77,6 +77,7 @@ export interface MapAdapter<M = any, L = any, C = any> {
   controlAdapters: { [name: string]: Type<C> };
 
   create(options?: MapOptions): void;
+  destroy(): void;
 
   /**
    * Remove layer from Map
