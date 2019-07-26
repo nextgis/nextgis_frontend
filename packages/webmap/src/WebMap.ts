@@ -131,7 +131,9 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
 
   destroy() {
     clearObject(this._emitStatusEvent);
-
+    if (this.mapAdapter.destroy) {
+      this.mapAdapter.destroy();
+    }
   }
 
   /**

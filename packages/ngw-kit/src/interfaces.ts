@@ -87,6 +87,7 @@ export type ResourceDef = number | [number, string];
 
 export interface NgwKitOptions {
   baseUrl?: string;
+  connector?: NgwConnector;
   /** Radius for searching objects in pixels */
   pixelRadius?: number;
   resourceId?: ResourceDef;

@@ -4,16 +4,27 @@ import NgwMap, { NgwMapOptions } from '@nextgis/ngw-map';
 import MapAdapter from '@nextgis/leaflet-map-adapter';
 
 import 'leaflet/dist/leaflet.css';
+import { propsBinder } from './utils';
 
 @Component({
   props: {
     fullFilling: Boolean,
+    connector: {
+      type: Object,
+      default: () => ({})
+    },
     baseUrl: {
       type: String,
       default: ''
     },
-    qmsId: String,
-    webmapId: String
+    qmsId: {
+      type: String,
+      default: ''
+    },
+    webmapId: {
+      type: String,
+      default: ''
+    }
   }
 })
 export class VueNgwMap extends Vue {
@@ -24,11 +35,7 @@ export class VueNgwMap extends Vue {
   ready = false;
 
   async mounted() {
-    this.ngwMap = await new NgwMap(new MapAdapter(), {
-      target: this.$el as HTMLElement,
-      ...this.$props
-    });
-    this.ready = true;
+    await this._setNgwMap();
   }
 
   beforeDestroy() {
@@ -53,5 +60,13 @@ export class VueNgwMap extends Vue {
     };
 
     return this.ready ? h('div', data, this.$slots.default) : h('div', data);
+  }
+
+  private async _setNgwMap() {
+    this.ngwMap = await new NgwMap(new MapAdapter(), {
+      target: this.$el as HTMLElement,
+      ...this.$props
+    });
+    this.ready = true;
   }
 }

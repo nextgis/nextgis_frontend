@@ -79,6 +79,12 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     }
   }
 
+  destroy() {
+    if (this.map) {
+      this.map.remove();
+    }
+  }
+
   getContainer(): HTMLElement | undefined {
     return this.map && this.map.getContainer();
   }

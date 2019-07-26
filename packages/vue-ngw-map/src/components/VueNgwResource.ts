@@ -1,14 +1,21 @@
 import Vue from 'vue';
 import Component from 'vue-class-component'
 
-import { findNgwMapParent } from '../utils';
+import { findNgwMapParent, propsBinder } from '../utils';
 import { ResourceAdapter } from '@nextgis/ngw-kit';
 import { VueNgwMap } from '../VueNgwMap';
+import { AdapterOptions } from 'nextgisweb_frontend/packages/webmap/src';
 
 @Component({
   props: {
-    resourceId: Number,
-    fit: Boolean,
+    resourceId: {
+      type: String,
+      default: null
+    },
+    fit: {
+      type: Boolean,
+      default: false
+    },
     adapterOptions: {
       type: Object,
       default: () => ({})
@@ -28,16 +35,37 @@ export class VueNgwResource extends Vue {
     }
   }
 
+  async setResourceId(resourceId: string, oldId?: number) {
+    const ngwMap = this.parentContainer.ngwMap;
+    const layer = this.layer;
+    let order: number | undefined;
+    if (ngwMap) {
+      if (layer) {
+        order = layer.options.order;
+        ngwMap.removeLayer(layer);
+      }
+      const adapterOptions: AdapterOptions = { ...this.$props.adapterOptions };
+      if (order) {
+        adapterOptions.order = order;
+      }
+      if (resourceId) {
+        const fit = this.$props.fit ? !oldId : false;
+        this.layer = await ngwMap.addNgwLayer({
+          resourceId: Number(resourceId),
+          adapter: this.$props.adapter,
+          fit,
+          adapterOptions
+        });
+      }
+    }
+  }
+
   async mounted() {
     this.parentContainer = findNgwMapParent(this.$parent);
-    const ngwMap = this.parentContainer.ngwMap;
 
-    this.layer = await ngwMap.addNgwLayer({
-      resourceId: this.$props.resourceId,
-      adapter: this.$props.adapter,
-      fit: this.$props.fit,
-      adapterOptions: this.$props.adapterOptions
-    });
+    await this.setResourceId(this.$props.resourceId);
+
+    propsBinder(this, this.$props);
 
     this.$nextTick(() => {
       this.$emit('ready', this.layer);
