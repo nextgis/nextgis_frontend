@@ -47,17 +47,21 @@ export class NgwKit implements StarterKit {
   webMap?: WebMap;
 
   constructor(public options: NgwKitOptions) {
-
-    if (this.options.baseUrl) {
-      this.url = this.options.baseUrl;
+    if (this.options.connector) {
+      this.url = this.options.connector.options.baseUrl;
+      this.connector = this.options.connector;
     } else {
-      throw new Error('url is not defined');
+      if (this.options.baseUrl) {
+        this.url = this.options.baseUrl;
+      } else {
+        throw new Error('url is not defined');
+      }
+      this.connector = new NgwConnector({ baseUrl: this.url, auth: this.options.auth });
     }
-    this.connector = new NgwConnector({ baseUrl: this.url, auth: this.options.auth });
   }
 
   async onLoadSync(webMap: WebMap) {
-    if (this.options.resourceId && this.options.baseUrl) {
+    if (this.options.resourceId && this.url) {
       // TODO: resources from array
       const resourceIds = [this.options.resourceId];
 
@@ -66,7 +70,7 @@ export class NgwKit implements StarterKit {
           const options: WebMapAdapterOptions = {
             resourceId: r,
             connector: this.connector,
-            baseUrl: this.options.baseUrl,
+            baseUrl: this.url,
             webMap
           };
           const layer = await webMap.addLayer(WebMapLayerAdapter, {
@@ -94,7 +98,7 @@ export class NgwKit implements StarterKit {
 
   private _createAdapter(webMap: WebMap): Type<WebMapLayerAdapter> {
     const connector = this.connector;
-    const baseUrl = this.options.baseUrl;
+    const baseUrl = this.url;
     return extendWebMapLayerAdapter({
       webMap, connector, baseUrl
     });
