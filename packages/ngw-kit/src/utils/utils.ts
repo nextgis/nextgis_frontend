@@ -69,9 +69,12 @@ export function addNgwLayer(options: NgwLayerOptions,
 }
 
 export function getWebMapExtent(webmap: WebmapResource): LngLatBoundsArray | undefined {
-  const { extent_bottom, extent_left, extent_top, extent_right } = webmap;
-  if (extent_bottom && extent_left && extent_top && extent_right) {
-    const extent: LngLatBoundsArray = [extent_left, extent_bottom, extent_right, extent_top];
+  const bottom = webmap['extent_bottom'];
+  const left = webmap['extent_left'];
+  const top = webmap['extent_top'];
+  const right = webmap['extent_bottom'];
+  if (bottom && left && top && right) {
+    const extent: LngLatBoundsArray = [left, bottom, right, top];
     if (extent[3] > 82) {
       extent[3] = 82;
     }
@@ -119,6 +122,36 @@ interface FeatureIdentifyRequestOptions {
   layers: number[];
 }
 
+const d2r = Math.PI / 180; // degrees to radians
+const r2d = 180 / Math.PI; // radians to degrees
+const earthsradius = 3963; // 3963 is the radius of the earth in miles
+
+export function getCirclePoly(lng: number, lat: number, radius = 10, points = 6) {
+
+  // find the radius in lat/lon
+  const rlat = (radius / earthsradius) * r2d;
+  const rlng = rlat / Math.cos(lat * d2r);
+
+  const extp = [];
+  for (let i = 0; i < points + 1; i++) {// one extra here makes sure we connect the
+
+    const theta = Math.PI * (i / (points / 2));
+    const ex = lng + (rlng * Math.cos(theta)); // center a + radius x * cos(theta)
+    const ey = lat + (rlat * Math.sin(theta)); // center b + radius y * sin(theta)
+    extp.push([ex, ey]);
+  }
+
+  // add the circle to the map
+  return extp;
+}
+
+export function degrees2meters(lng: number, lat: number): [number, number] {
+  const x = lng * 20037508.34 / 180;
+  let y = Math.log(Math.tan((90 + lat) * Math.PI / 360)) / (Math.PI / 180);
+  y = y * 20037508.34 / 180;
+  return [x, y];
+}
+
 export function sendIdentifyRequest(
   ev: MapClickEvent,
   options: IdentifyRequestOptions,
@@ -158,36 +191,6 @@ export function sendIdentifyRequest(
   };
 
   return options.connector.post('feature_layer.identify', { data });
-}
-
-const d2r = Math.PI / 180; // degrees to radians
-const r2d = 180 / Math.PI; // radians to degrees
-const earthsradius = 3963; // 3963 is the radius of the earth in miles
-
-export function getCirclePoly(lng: number, lat: number, radius = 10, points = 6) {
-
-  // find the radius in lat/lon
-  const rlat = (radius / earthsradius) * r2d;
-  const rlng = rlat / Math.cos(lat * d2r);
-
-  const extp = [];
-  for (let i = 0; i < points + 1; i++) {// one extra here makes sure we connect the
-
-    const theta = Math.PI * (i / (points / 2));
-    const ex = lng + (rlng * Math.cos(theta)); // center a + radius x * cos(theta)
-    const ey = lat + (rlat * Math.sin(theta)); // center b + radius y * sin(theta)
-    extp.push([ex, ey]);
-  }
-
-  // add the circle to the map
-  return extp;
-}
-
-export function degrees2meters(lng: number, lat: number): [number, number] {
-  const x = lng * 20037508.34 / 180;
-  let y = Math.log(Math.tan((90 + lat) * Math.PI / 360)) / (Math.PI / 180);
-  y = y * 20037508.34 / 180;
-  return [x, y];
 }
 
 interface ExtendWebMapLayerAdapterOptions {

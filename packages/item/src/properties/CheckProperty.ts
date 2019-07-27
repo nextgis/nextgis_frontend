@@ -5,8 +5,7 @@ import { ICheckOptions } from '../interfaces';
 
 type VAL = boolean;
 
-export class CheckProperty
-  <V extends VAL = VAL, O extends ICheckOptions<VAL> =  ICheckOptions<VAL>>
+export class CheckProperty<V extends VAL = VAL, O extends ICheckOptions<VAL> = ICheckOptions<VAL>>
   extends BaseProperty<VAL, ICheckOptions<VAL>> {
 
   static options: ICheckOptions = {
@@ -18,7 +17,7 @@ export class CheckProperty
   };
 
   constructor(name: string, item: Item, options: O) {
-    super(name, item, {...CheckProperty.options, ...options});
+    super(name, item, { ...CheckProperty.options, ...options });
     this.set(this.get());
   }
 
@@ -28,7 +27,7 @@ export class CheckProperty
       if (bubble) {
         this.unBlock(options);
         const parent = this.getParent();
-        const property = parent &&  parent.properties && parent.properties.property(this.name);
+        const property = parent && parent.properties && parent.properties.property(this.name);
         if (property) {
           property.set(value, Object.assign({}, options, { bubble: true, propagation: false }));
         }

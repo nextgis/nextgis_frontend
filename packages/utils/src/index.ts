@@ -17,12 +17,12 @@ export function bindAll(fns: string[], context: { [method: string]: (...args: an
   });
 }
 
-export function fixUrlStr(url: string) {
+export function fixUrlStr(url: string): string {
   // remove double slash
   return url.replace(/([^:]\/)\/+/g, '$1');
 }
 
-export function deepmerge(target: any, src: any, mergeArray = false) {
+export function deepmerge(target: any, src: any, mergeArray = false): any {
   const array = Array.isArray(src);
   let dst: any = array && [] || {};
 

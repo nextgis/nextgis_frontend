@@ -2,43 +2,23 @@ import {
   GeoJsonAdapterOptions,
   VectorAdapterLayerPaint,
   GetPaintCallback,
-  VectorAdapterLayerType,
   VectorLayerAdapter,
   DataLayerFilter,
-  GeometryPaint,
   PropertiesFilter
 } from '@nextgis/webmap';
 import Map from 'ol/Map';
 import GeoJSON from 'ol/format/GeoJSON';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
-import CircleStyle from 'ol/style/Circle';
-import Fill from 'ol/style/Fill';
-import Stroke from 'ol/style/Stroke';
-import Style from 'ol/style/Style';
-import Icon, { Options as IconOptions} from 'ol/style/Icon';
-import IconAnchorUnits from 'ol/style/IconAnchorUnits';
 
-import { asArray, Color } from 'ol/color';
 import { Feature, GeoJsonObject } from 'geojson';
 import { ForEachFeatureAtPixelCallback } from '../OlMapAdapter';
 
 import * as ol from 'ol';
 import Base from 'ol/layer/Base';
+import { styleFunction, getFeature } from '../utils/utils';
 
 type Layer = Base;
-
-type OlStyle = Style | Style[];
-
-const typeAlias: { [x: string]: VectorAdapterLayerType } = {
-  'Point': 'circle',
-  'MultiPoint': 'circle',
-  'LineString': 'line',
-  'MultiLineString': 'line',
-  'Polygon': 'fill',
-  'MultiPolygon': 'fill',
-  'Circle': 'circle'
-};
 
 export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAdapterOptions> {
 
@@ -52,7 +32,8 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
   private _selectedFeatures: ol.Feature[] = [];
   private _filterFun?: DataLayerFilter<Feature>;
 
-  constructor(public map: Map, public options: GeoJsonAdapterOptions) { }
+  constructor(public map: Map, public options: GeoJsonAdapterOptions) {
+  }
 
   addLayer(options: GeoJsonAdapterOptions) {
     this.options = options;
@@ -68,7 +49,7 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
     this.layer = new VectorLayer({
       source: this.vectorSource,
       style: (f) => {
-        const style =  styleFunction(f as ol.Feature, options.paint);
+        const style = styleFunction(f as ol.Feature, options.paint);
         return style;
       }
     });
@@ -183,7 +164,7 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
   private _addSelectListener() {
 
     const _forEachFeatureAtPixel = this.map.get('_forEachFeatureAtPixel') as ForEachFeatureAtPixelCallback[];
-    _forEachFeatureAtPixel.push((feature, layer, evt) => {
+    _forEachFeatureAtPixel.push((feature, layer) => {
       if (layer === this.layer) {
         this._onFeatureClick(feature);
       }
@@ -236,64 +217,4 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
   }
 }
 
-function getFeature(feature: ol.Feature): Feature {
-  const geojson = new GeoJSON();
-  // @ts-ignore writeFeatureObject return JSON type, need Feature
-  return geojson.writeFeatureObject(feature);
-}
 
-function styleFunction(feature: ol.Feature, paint: VectorAdapterLayerPaint | GetPaintCallback = {}): OlStyle {
-  if (typeof paint === 'function') {
-    const f: Feature = getFeature(feature);
-    return styleFunction(feature, paint(f));
-  } else {
-
-    const type = feature.getGeometry().getType();
-    const style: { stroke?: Stroke, fill?: Fill, image?: any } = {};
-    const _type = paint.type;
-    if (!_type) {
-      const ta = typeAlias[type];
-      paint.type = (ta === 'fill' || ta === 'line') ? 'path' :
-        ('html' in paint || 'className' in paint) ? 'icon' : ta;
-    }
-    if (paint.type === 'path' || paint.type === 'circle') {
-      const geomPaint = { ...paint } as GeometryPaint;
-      if (geomPaint.fill) {
-        style.fill = new Fill({
-          color: getColor(geomPaint.fillColor!, geomPaint.fillOpacity)
-        });
-      }
-      if (geomPaint.stroke || ['MultiLineString', 'LineString'].indexOf(type) !== -1) {
-        style.stroke = new Stroke({
-          width: geomPaint.weight,
-          color: getColor(geomPaint.strokeColor!, geomPaint.strokeOpacity)
-        });
-      }
-
-      if (paint.type === 'circle') {
-        style.image = new CircleStyle({ radius: geomPaint.radius!, ...style });
-      }
-    } else if (paint.type === 'icon') {
-
-      const svg = paint.html;
-      if (svg) {
-        const iconOptions: IconOptions = {
-          src: 'data:image/svg+xml,' + escape(svg),
-          anchorXUnits: IconAnchorUnits.PIXELS,
-          anchorYUnits: IconAnchorUnits.PIXELS,
-          anchor: paint.iconAnchor,
-          imgSize: paint.iconSize
-        };
-        style.image = new Icon(iconOptions);
-      }
-    }
-    return new Style(style);
-  }
-}
-
-function getColor(colorStr: string, opacity?: number): Color {
-  const color = asArray(colorStr);
-  const colorArray = color.slice() as [number, number, number, number];
-  colorArray[3] = opacity !== undefined ? opacity : 1;
-  return colorArray;
-}

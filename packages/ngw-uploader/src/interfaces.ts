@@ -43,10 +43,10 @@ export interface CreateWmsConnectionOptions extends ResourceCreateOptions {
 
 export interface CreateWmsConnectedLayerOptions extends ResourceCreateOptions {
   connection: {
-    id: 18
+    id: 18;
   };
   srs?: {
-    id: number // 3857
+    id: number; // 3857
   };
   wmslayers: string | string[]; // '1,2'
   imgformat?: string; // 'image/png'
@@ -104,13 +104,8 @@ export interface RespError {
   serializer: string;
 }
 
-export type AvailableStatus = 'upload' |
-  'create-resource' |
-  'create-style' |
-  'create-wms' |
-  'create-wms-connection' |
-  'create-wms-connected-layer' |
-  'create-group';
+export type AvailableStatus = 'upload' | 'create-resource' | 'create-style' |
+'create-wms' | 'create-wms-connection' | 'create-wms-connected-layer' | 'create-group';
 
 export interface EmitterStatus {
   status: AvailableStatus;

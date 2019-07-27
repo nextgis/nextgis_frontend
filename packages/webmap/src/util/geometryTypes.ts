@@ -6,6 +6,21 @@ import {
   Feature
 } from 'geojson';
 
+export function findMostFrequentGeomType(arr: GeoJsonGeometryTypes[]): GeoJsonGeometryTypes {
+  const counts: { [x: string]: number } = {};
+  for (let fry = 0; fry < arr.length; fry++) {
+    counts[arr[fry]] = 1 + (counts[arr[fry]] || 0);
+  }
+  let maxName;
+  for (const c in counts) {
+    const count = maxName !== undefined ? counts[maxName] : 0;
+    if (counts[c] > (count || 0)) {
+      maxName = c;
+    }
+  }
+  return maxName as GeoJsonGeometryTypes;
+}
+
 export function detectGeometryType(geojson: GeoJsonObject): GeoJsonGeometryTypes {
   let geometry: GeoJsonGeometryTypes;
   if (geojson.type === 'FeatureCollection') {
@@ -22,19 +37,3 @@ export function detectGeometryType(geojson: GeoJsonObject): GeoJsonGeometryTypes
   return geometry;
 }
 
-export function findMostFrequentGeomType(arr: GeoJsonGeometryTypes[]): GeoJsonGeometryTypes {
-  const counts: { [x: string]: number } = {};
-  for (let fry = 0; fry < arr.length; fry++) {
-    counts[arr[fry]] = 1 + (counts[arr[fry]] || 0);
-  }
-  let maxName;
-  for (const c in counts) {
-    if (counts.hasOwnProperty(c)) {
-      const count = maxName !== undefined ? counts[maxName] : 0;
-      if (counts[c] > (count || 0)) {
-        maxName = c;
-      }
-    }
-  }
-  return maxName as GeoJsonGeometryTypes;
-}

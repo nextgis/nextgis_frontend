@@ -7,7 +7,6 @@ import { EventEmitter } from 'events';
 import { fixUrlStr, deepmerge } from '@nextgis/utils';
 import WebMap, {
   MapAdapter,
-  StarterKit,
   ControlPositions,
   MapControls,
   WebMapEvents,
@@ -184,7 +183,7 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
   }
 
   async getNgwLayerFeature<G extends Geometry | null = Geometry>(options: {
-    resourceId: number, featureId: number
+    resourceId: number; featureId: number;
   }): CancelablePromise<Feature<G>> {
     return NgwKit.utils.getNgwLayerFeature<G>({
       connector: this.connector,
@@ -193,7 +192,7 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
   }
 
   async getNgwLayerFeatures<G extends Geometry | null = Geometry>(options: {
-    resourceId: number, filter?: PropertiesFilter[]
+    resourceId: number; filter?: PropertiesFilter[];
   }): CancelablePromise<FeatureCollection<G>> {
     return NgwKit.utils.getNgwLayerFeatures({
       connector: this.connector,
@@ -214,26 +213,25 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
 
   async getNgwLayerByResourceId(id: number): Promise<LayerAdapter | undefined> {
     for (const n in this._ngwLayers) {
-      if (this._ngwLayers.hasOwnProperty(n)) {
-        const mem = this._ngwLayers[n];
-        if (mem.resourceId === id) {
-          return mem && mem.layer;
-        } else if (mem.layer.getIdentificationIds) {
-          const ids = await mem.layer.getIdentificationIds();
-          if (ids && ids.some((x) => x === id)) {
-            return mem.layer;
-          }
-        }
-        if (mem.layer.getDependLayers) {
-          const dependLayers = mem.layer.getDependLayers() as WebMapLayerItem[];
-          const dependFit = dependLayers.find((x) => {
-            return x.item && x.item.parentId === id;
-          });
-          if (dependFit) {
-            return dependFit.layer;
-          }
+      const mem = this._ngwLayers[n];
+      if (mem.resourceId === id) {
+        return mem && mem.layer;
+      } else if (mem.layer.getIdentificationIds) {
+        const ids = await mem.layer.getIdentificationIds();
+        if (ids && ids.some((x) => x === id)) {
+          return mem.layer;
         }
       }
+      if (mem.layer.getDependLayers) {
+        const dependLayers = mem.layer.getDependLayers() as WebMapLayerItem[];
+        const dependFit = dependLayers.find((x) => {
+          return x.item && x.item.parentId === id;
+        });
+        if (dependFit) {
+          return dependFit.layer;
+        }
+      }
+
     }
   }
 
@@ -361,12 +359,11 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
   private async _selectFromNgw(ev: MapClickEvent) {
     const promises: Array<Promise<number[] | undefined>> = [];
     for (const nl in this._ngwLayers) {
-      if (this._ngwLayers.hasOwnProperty(nl)) {
-        const layer = this._ngwLayers[nl].layer;
-        if (layer.getIdentificationIds && layer.options.selectable) {
-          promises.push(layer.getIdentificationIds());
-        }
+      const layer = this._ngwLayers[nl].layer;
+      if (layer.getIdentificationIds && layer.options.selectable) {
+        promises.push(layer.getIdentificationIds());
       }
+
     }
     const getIds = await Promise.all(promises);
     const ids: number[] = [];

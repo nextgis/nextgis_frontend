@@ -409,14 +409,14 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
   /**
    * Remove all layer from map and memory.
    */
-  removeLayers(allowCb?: (layer: string, adapter: LayerAdapter) => boolean) {
+  removeLayers(allowCb?: (layer: string, adapter: LayerAdapter) => boolean): void {
     this.layers.removeLayers(allowCb);
   }
 
   /**
    * Remove all layers but not remove basemap.
    */
-  removeOverlays() {
+  removeOverlays(): void {
     this.layers.removeOverlays();
   }
 
@@ -424,7 +424,7 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
    * Remove specific layer from map and memory by its definition.
    * @param layerDef
    */
-  removeLayer(layerDef: LayerDef) {
+  removeLayer(layerDef: LayerDef): void {
     this.layers.removeLayer(layerDef);
   }
 
@@ -696,7 +696,7 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
     }
   }
 
-  private async _addLayerProviders() {
+  private async _addLayerProviders(): Promise<void> {
     try {
       for await (const kit of this._starterKits) {
         if (kit.getLayerAdapters) {
@@ -716,7 +716,7 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
     }
   }
 
-  private async _onLoadSync() {
+  private async _onLoadSync(): Promise<void> {
     for await (const kit of this._starterKits) {
       if (kit.onLoadSync) {
         try {
@@ -729,7 +729,7 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
 
   }
 
-  private _addEventsListeners() {
+  private _addEventsListeners(): void {
     // propagate map click event
     const events: Array<keyof WebMapEvents> = [
       'click',

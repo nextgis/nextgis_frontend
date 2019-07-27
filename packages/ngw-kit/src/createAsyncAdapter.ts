@@ -1,6 +1,6 @@
 import NgwConnector, { ResourceCls, ResourceItem } from '@nextgis/ngw-connector';
 import WebMap, { LayerAdapter, Type } from '@nextgis/webmap';
-import QmsKit, { QmsAdapter } from '@nextgis/qms-kit';
+import QmsKit from '@nextgis/qms-kit';
 import { NgwLayerOptions, ResourceAdapter } from './interfaces';
 
 import { createGeoJsonAdapter } from './createGeoJsonAdapter';
@@ -10,6 +10,23 @@ import { applyMixins } from './utils/utils';
 import { NgwResource } from './NgwResource';
 
 const styles: ResourceCls[] = ['mapserver_style', 'qgis_vector_style', 'raster_style'];
+
+async function createAdapterFromFirstStyle(
+  parent: number,
+  options: NgwLayerOptions,
+  webMap: WebMap,
+  baseUrl: string,
+  connector: NgwConnector) {
+  const childrenStyles = await connector.get('resource.collection', null, { parent });
+  const firstStyle = childrenStyles && childrenStyles[0];
+  if (firstStyle) {
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
+    return createAsyncAdapter(
+      { ...options, resourceId: firstStyle.resource.id },
+      webMap, baseUrl, connector
+    );
+  }
+}
 
 export async function createAsyncAdapter(
   options: NgwLayerOptions,
@@ -75,21 +92,5 @@ export async function createAsyncAdapter(
         return resourceAdapter;
       }
     });
-  }
-}
-
-async function createAdapterFromFirstStyle(
-  parent: number,
-  options: NgwLayerOptions,
-  webMap: WebMap,
-  baseUrl: string,
-  connector: NgwConnector) {
-  const childrenStyles = await connector.get('resource.collection', null, { parent });
-  const firstStyle = childrenStyles && childrenStyles[0];
-  if (firstStyle) {
-    return createAsyncAdapter(
-      { ...options, resourceId: firstStyle.resource.id },
-      webMap, baseUrl, connector
-    );
   }
 }

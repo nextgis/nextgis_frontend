@@ -199,8 +199,7 @@ export class WebMapLayerAdapter implements ResourceAdapter {
     }
   }
 
-  // options is temporal to set list of layers id, because layers id is not item parameter now
-  private _sendIdentifyRequest(ev: MapClickEvent, options: { layers?: string[] } = {}) {
+  private _sendIdentifyRequest(ev: MapClickEvent) {
     if (this._webmapLayersIds) {
       return sendIdentifyRequest(ev, {
         layers: this._webmapLayersIds,

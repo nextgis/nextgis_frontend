@@ -85,7 +85,7 @@ export class MvtAdapter extends VectorAdapter<MvtAdapterOptions> {
           }
           if (layers.indexOf(layerName) !== -1) {
             const filters = properties ?
-                this._createFilterDefinitions(properties, reversOperations) : [];
+              this._createFilterDefinitions(properties, reversOperations) : [];
             this.map.setFilter(layerName, [
               'all',
               geomFilter,

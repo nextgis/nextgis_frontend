@@ -102,7 +102,7 @@ export abstract class BaseProperty<V = any, O extends ItemBasePropertyOptions<V>
     if (this._container) {
       const parentNode = this._container.parentNode;
       if (parentNode) {
-      parentNode.removeChild(this._container);
+        parentNode.removeChild(this._container);
       }
     }
     if (this._removeEventsListener) {
