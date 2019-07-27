@@ -13,7 +13,7 @@ export class UrlRuntimeParams implements RuntimeParams {
     return this.params()[name];
   }
 
-  params() {
+  params(): Record<string, string> {
     // if (this._params) {
     //   return this._params;
     // }
@@ -30,7 +30,7 @@ export class UrlRuntimeParams implements RuntimeParams {
     return params;
   }
 
-  set(name: string, value: string) {
+  set(name: string, value: string): StateData {
     if (value) {
       let search: string;
       const urlComponent = encodeURIComponent(value);
@@ -54,7 +54,7 @@ export class UrlRuntimeParams implements RuntimeParams {
     }
   }
 
-  remove(name: string) {
+  remove(name: string): StateData {
     const sourceUrl = location.search;
     let rtn = sourceUrl.split('?')[0];
     let param: string;
@@ -73,13 +73,13 @@ export class UrlRuntimeParams implements RuntimeParams {
 
     delete this._params[name];
 
-    const data = { state: { url: rtn, type: 'remove' }, url: rtn };
+    const data: StateData = { state: { url: rtn, type: 'remove' }, url: rtn };
     this._pushState(data);
 
     return data;
   }
 
-  private _pushState(data: any) {
+  private _pushState(data: any): void {
     if (history) {
       history.replaceState(data.state, document.title, data.url);
     }

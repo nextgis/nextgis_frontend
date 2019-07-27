@@ -297,7 +297,7 @@ export interface VectorLayerAdapter<
 
   select?(findFeatureCb?: DataLayerFilter<F, L> | PropertiesFilter): void;
   unselect?(findFeatureCb?: DataLayerFilter<F, L> | PropertiesFilter): void;
-  getSelected?(): Array<{ layer?: L, feature?: Feature }>;
+  getSelected?(): Array<{ layer?: L; feature?: Feature }>;
 
   filter?(cb: DataLayerFilter<F, L>): void;
   propertiesFilter?(filters: PropertiesFilter, options?: FilterOptions): void;

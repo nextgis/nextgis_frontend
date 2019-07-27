@@ -3,7 +3,7 @@
  */
 
 import { MapClickEvent } from './MapAdapter';
-import { MapOptions} from './WebMapApp';
+import { MapOptions } from './WebMapApp';
 import WebMap, { Type, LayerAdapter } from '../index';
 
 export interface LayerAdapterCreators {
@@ -13,7 +13,7 @@ export interface LayerAdapterCreators {
 
 export interface StarterKit {
 
-  onLoadSync?(webMap: WebMap): Promise<void>;
+  onLoadSync?(webMap: WebMap): Promise<any>;
 
   getSettings?(webMap?: WebMap): Promise<MapOptions>;
   getLayerAdapters?(): Promise<LayerAdapterCreators[]>;

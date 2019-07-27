@@ -1,20 +1,8 @@
-import { GeoJsonGeometryTypes, GeoJsonObject, FeatureCollection, Feature, GeometryCollection } from 'geojson';
-import { VectorAdapterLayerType } from '@nextgis/webmap';
+import {
+  VectorAdapterLayerType
+} from '@nextgis/webmap';
+import { GeoJsonObject, GeoJsonGeometryTypes, FeatureCollection, Feature, GeometryCollection } from 'geojson';
 
-export const allowedParams: Array<[string, string] | string> = ['color', 'opacity'];
-export const allowedByType = {
-  circle: [
-    ['fillColor', 'color'],
-    ['fillOpacity', 'opacity'],
-    ['strokeColor', 'stroke-color'],
-    ['strokeOpacity', 'stroke-opacity'],
-    ['weight', 'stroke-width'],
-    'radius'
-  ],
-  line: [['strokeColor', 'color'], ['strokeOpacity', 'opacity'], ['weight', 'width']],
-  fill: [['fillColor', 'color'], ['fillOpacity', 'opacity']],
-  icon: allowedParams.concat([])
-};
 
 export const typeAlias: { [key in GeoJsonGeometryTypes]: VectorAdapterLayerType } = {
   'Point': 'circle',
@@ -26,16 +14,12 @@ export const typeAlias: { [key in GeoJsonGeometryTypes]: VectorAdapterLayerType 
   'GeometryCollection': 'fill'
 };
 
-export const typeAliasForFilter: { [key in VectorAdapterLayerType]: GeoJsonGeometryTypes } = {
-  circle: 'Point',
-  line: 'LineString',
-  fill: 'Polygon',
-  icon: 'Point'
+export const PAINT = {
+  stroke: false,
+  opacity: 1
 };
 
-export const backAliases: { [key in VectorAdapterLayerType]?: GeoJsonGeometryTypes[] } = {
-  'icon': ['Point']
-};
+export const backAliases: { [key in VectorAdapterLayerType]?: GeoJsonGeometryTypes[] } = {};
 
 for (const a in typeAlias) {
 
@@ -53,7 +37,6 @@ export function findMostFrequentGeomType(arr: GeoJsonGeometryTypes[]): GeoJsonGe
   }
   let maxName = '';
   for (const c in counts) {
-
     const maxCount = maxName ? counts[maxName] : 0;
     if (counts[c] > maxCount) {
       maxName = c;
@@ -79,11 +62,23 @@ export function detectType(geojson: GeoJsonObject): GeoJsonGeometryTypes {
   return geometry;
 }
 
-// Static functions
 export function geometryFilter(geometry: GeoJsonGeometryTypes, type: VectorAdapterLayerType): boolean {
-  const backType = backAliases[type];
-  if (backType) {
-    return backType.indexOf(geometry) !== -1;
+  const geoJsonGeometry = backAliases[type] || [];
+  return geoJsonGeometry.indexOf(geometry) !== -1;
+}
+
+export function filterGeometries(data: GeoJsonObject, type: VectorAdapterLayerType): GeoJsonObject | false {
+  if (data.type === 'FeatureCollection') {
+    (data as FeatureCollection).features = (data as FeatureCollection).features
+      .filter((f) => geometryFilter(f.geometry.type, type));
+  } else if (data.type === 'Feature') {
+    const allow = geometryFilter((data as Feature).geometry.type, type);
+    if (!allow) {
+      return false;
+    }
+  } else if (data.type === 'GeometryCollection') {
+    (data as GeometryCollection).geometries = (data as GeometryCollection).geometries
+      .filter((g) => geometryFilter(g.type, type));
   }
-  return false;
+  return data;
 }

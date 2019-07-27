@@ -1,7 +1,8 @@
 import { BaseLayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
-import ImageWMS, { Options as ImageWMSOptions} from 'ol/source/ImageWMS';
+import ImageWMS, { Options as ImageWMSOptions } from 'ol/source/ImageWMS';
 import ImageLayer from 'ol/layer/Image';
 import Map from 'ol/Map';
+import { queryToObject, objectToQuery } from '../utils/utils';
 
 export class ImageAdapter implements BaseLayerAdapter {
 
@@ -43,51 +44,4 @@ export class ImageAdapter implements BaseLayerAdapter {
     this.layer = layer;
     return layer;
   }
-}
-
-function queryToObject(str: string) {
-
-  const dec = decodeURIComponent;
-  const qp = str.split('&');
-  const ret: { [name: string]: any } = {};
-  let name;
-  let val;
-  for (let i = 0, l = qp.length, item; i < l; ++i) {
-    item = qp[i];
-    if (item.length) {
-      const s = item.indexOf('=');
-      if (s < 0) {
-        name = dec(item);
-        val = '';
-      } else {
-        name = dec(item.slice(0, s));
-        val = dec(item.slice(s + 1));
-      }
-      if (typeof ret[name] === 'string') { // inline'd type check
-        ret[name] = [ret[name]];
-      }
-
-      if (Array.isArray(ret[name])) {
-        ret[name].push(val);
-      } else {
-        ret[name] = val;
-      }
-    }
-  }
-  return ret; // Object
-}
-
-function objectToQuery(obj: { [x: string]: any }, prefix?: string): string {
-  const str = [];
-  let p;
-  for (p in obj) {
-    if (obj.hasOwnProperty(p)) {
-      const k = prefix ? prefix + '[' + p + ']' : p;
-      const v = obj[p];
-      str.push((v !== null && typeof v === 'object') ?
-        objectToQuery(v, k) :
-        encodeURIComponent(k) + '=' + encodeURIComponent(v));
-    }
-  }
-  return str.join('&');
 }

@@ -105,6 +105,12 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     }
   }
 
+  destroy() {
+    if (this.map) {
+      this.map.remove();
+    }
+  }
+
   getContainer() {
     return this.map && this.map.getContainer();
   }
@@ -258,14 +264,13 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
       const baseLayers: TLayerAdapter[] = [];
       let orderedLayers: TLayerAdapter[] = [];
       for (const l in layers) {
-        if (layers.hasOwnProperty(l)) {
-          const layer = layers[l];
-          if (layer.options.baseLayer) {
-            baseLayers.push(layer);
-          } else {
-            orderedLayers.push(layer);
-          }
+        const layer = layers[l];
+        if (layer.options.baseLayer) {
+          baseLayers.push(layer);
+        } else {
+          orderedLayers.push(layer);
         }
+
       }
 
       orderedLayers = orderedLayers.sort((a, b) => {
@@ -341,7 +346,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     }
   }
 
-  private _onDataLoad(data: { sourceId: string, tile: any }, isLoaded = false, emit: (sourceId: string) => void) {
+  private _onDataLoad(data: { sourceId: string; tile: any }, isLoaded = false, emit: (sourceId: string) => void) {
     // if all sources is loaded emmit event for all and clean mem
     if (isLoaded) {
       Object.keys(this._sourceDataLoading).forEach((x) => {

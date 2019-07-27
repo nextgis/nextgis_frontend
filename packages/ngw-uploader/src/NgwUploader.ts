@@ -26,6 +26,7 @@ const imageTypesAccept: { [format: string]: ImageTypes[] } = {
 export class NgwUploader {
 
   options: NgwUploadOptions = {
+    baseUrl: '',
     inputOptions: {
       html: 'Upload file',
     },
@@ -125,7 +126,7 @@ export class NgwUploader {
       resource: {
         cls: 'resource_group',
         parent: { id: options.parentId !== undefined ? options.parentId : 0 },
-        display_name: name,
+        'display_name': name,
         keyname: options.keyname,
         description: options.description
       }
@@ -140,13 +141,13 @@ export class NgwUploader {
     const data = {
       resource: {
         cls: 'raster_layer',
-        display_name: name,
+        'display_name': name,
         parent: { id: options.parentId !== undefined ? options.parentId : 0 },
       },
-      raster_layer: {
+      'raster_layer': {
         source: {
           id: meta.id,
-          mime_type: meta.mime_type,
+          'mime_type': meta.mime_type,
           size: meta.size,
         },
         srs: { id: 3857 },
@@ -163,7 +164,7 @@ export class NgwUploader {
       resource: {
         cls: 'raster_style',
         description: null,
-        display_name: name + '_style',
+        'display_name': name + '_style',
         keyname: null,
         parent: {
           id: newRes.id,
@@ -185,14 +186,14 @@ export class NgwUploader {
     name = name || options.name || options.id;
     let layers = options.layers || [{
       keyname: 'image1',
-      display_name: name,
-      resource_id: options.id,
+      'display_name': name,
+      'resource_id': options.id,
     }];
     layers = layers.map((x: any) => {
       return {
         ...{
-          min_scale_denom: null,
-          max_scale_denom: null
+          'min_scale_denom': null,
+          'max_scale_denom': null
         }, ...x
       };
     });
@@ -202,14 +203,14 @@ export class NgwUploader {
         parent: {
           id: options.parentId || 0
         },
-        display_name: 'WMS_' + name,
+        'display_name': 'WMS_' + name,
         keyname: null,
         description: null
       },
       resmeta: {
         items: {}
       },
-      wmsserver_service: {
+      'wmsserver_service': {
         layers
       }
     };
@@ -223,14 +224,14 @@ export class NgwUploader {
       resource: {
         cls: 'wmsclient_connection',
         parent: { id: options.parentId !== undefined ? options.parentId : 0 },
-        display_name: name,
+        'display_name': name,
         keyname: null,
         description: null
       },
       resmeta: {
         items: {}
       },
-      wmsclient_connection: {
+      'wmsclient_connection': {
         url: options.url,
         username: options.password,
         password: options.password,
@@ -252,14 +253,14 @@ export class NgwUploader {
         parent: {
           id: options.parentId || 0
         },
-        display_name: options.name,
+        'display_name': options.name,
         keyname: null,
         description: null
       },
       resmeta: {
         items: {}
       },
-      wmsclient_layer: {
+      'wmsclient_layer': {
         connection: {
           id: options.id
         },
@@ -268,7 +269,7 @@ export class NgwUploader {
         },
         wmslayers,
         imgformat: options.imgformat || 'image/png',
-        vendor_params: options.vendor_params
+        'vendor_params': options.vendor_params
       },
     };
     return this.connector && this.connector.post('resource.collection', { data: wmsData });
@@ -365,9 +366,6 @@ export class NgwUploader {
           password: passwordElement.value
         };
       };
-      const onInputChange = () => {
-        validate();
-      };
       const validate = () => {
         const auth = getAuthOpt();
         if (auth.login && auth.password) {
@@ -376,6 +374,10 @@ export class NgwUploader {
           loginBtn.disabled = true;
         }
       };
+      const onInputChange = () => {
+        validate();
+      };
+
       const addEventListener = () => {
         [loginElement, passwordElement].forEach((x) => {
           ['change', 'input'].forEach((y) => x.addEventListener(y, onInputChange));

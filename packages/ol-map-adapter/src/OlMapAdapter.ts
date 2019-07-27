@@ -119,6 +119,12 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     this._addMapListeners();
   }
 
+  destroy() {
+    if (this.map) {
+      // ignore
+    }
+  }
+
   getContainer(): HTMLElement | undefined {
     if (this.options.target) {
       let element;
@@ -190,11 +196,11 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     }
   }
 
-  setLayerOpacity(layer: Layer, value: number) {
+  setLayerOpacity() {
     // ignore
   }
 
-  setLayerOrder(layer: Layer, order: number, layers?: { [name: string]: TLayerAdapter }) {
+  setLayerOrder(layer: Layer, order: number) {
     if (layer.setZIndex) {
       layer.setZIndex(order);
     }
@@ -284,17 +290,17 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
       const events: ['movestart', 'moveend'] = ['movestart', 'moveend'];
       events.forEach((x) => {
         this._positionMem[x] = { center, zoom };
-        map.on(x, (evt) => {
+        map.on(x, () => {
           this._emitPositionChangeEvent(x);
         });
       });
 
       if (this._olView) {
-        this._olView.on('change:resolution', (evt) => {
+        this._olView.on('change:resolution', () => {
           this.emitter.emit('zoom', this);
         });
 
-        this._olView.on('change:center', (evt) => {
+        this._olView.on('change:center', () => {
           this.emitter.emit('move', this);
         });
       }

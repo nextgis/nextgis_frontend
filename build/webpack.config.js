@@ -45,6 +45,12 @@ module.exports = (env, argv, opt = {}) => {
 
   const rules = [
     {
+      enforce: "pre",
+      test: /\.tsx?$/,
+      exclude: /node_modules/,
+      loader: "eslint-loader"
+    },
+    {
       test: /\.tsx?$/,
       use: [
         {

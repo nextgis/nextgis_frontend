@@ -8,7 +8,6 @@ import {
 } from '@nextgis/webmap';
 import {
   GeoJsonObject,
-  GeoJsonGeometryTypes,
   FeatureCollection,
   GeometryCollection,
   GeometryObject,
@@ -17,14 +16,14 @@ import { GeoJSONSource } from 'mapbox-gl';
 
 import { TLayer } from '../MapboxglMapAdapter';
 import { VectorAdapter, Feature } from './VectorAdapter';
-import { detectType, typeAlias, typeAliasForFilter, backAliases } from '../util/geom_type';
+import { detectType, typeAlias, typeAliasForFilter, geometryFilter } from '../util/geom_type';
 
 let ID = 0;
 
 export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
 
   selected: boolean = false;
-  protected featureIdName = '_rendrom_id';
+  protected featureIdName = '_rendromId';
   private _features: Feature[] = [];
   private _filteredFeatureIds: string[] = [];
   private _filterFun?: DataLayerFilter<Feature>;
@@ -65,7 +64,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
       features.forEach((x) => {
         // to avoid id = 0 is false
         const rendromId = '_' + ID++;
-        x._rendrom_id = rendromId;
+        x._rendromId = rendromId;
         if (x.properties) {
           x.properties[this.featureIdName] = rendromId;
         }
@@ -82,7 +81,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   getLayers() {
     const filtered = this._filteredFeatureIds.length;
     return this._features.map((feature) => {
-      let visible: boolean = false;
+      let visible = false;
       if (filtered) {
         const id = this._getRendromId(feature);
         if (id !== undefined) {
@@ -150,11 +149,11 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
 
   protected _getRendromId(feature: Feature): string | undefined {
     // @ts-ignore
-    const id = feature._rendrom_id;
+    const id = feature._rendromId;
     if (id !== undefined) {
       return id;
-    } else if (feature.properties && feature.properties._rendrom_id !== undefined) {
-      return feature.properties._rendrom_id;
+    } else if (feature.properties && feature.properties._rendromId !== undefined) {
+      return feature.properties._rendromId;
     }
   }
 
@@ -259,15 +258,15 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
         style['icon-image'] = `{_icon-image-${name}}`;
       } else {
         for (const p in _paint) {
-          if (_paint.hasOwnProperty(p)) {
-            // @ts-ignore
-            const toSave = _paint[p];
-            if (feature.properties) {
-              feature.properties[`_paint_${p}_${name}`] = toSave;
-            }
-            style[p] = ['get', `_paint_${p}_${name}`];
+
+          // @ts-ignore
+          const toSave = _paint[p];
+          if (feature.properties) {
+            feature.properties[`_paint_${p}_${name}`] = toSave;
           }
+          style[p] = ['get', `_paint_${p}_${name}`];
         }
+
       }
     }
     if ('icon-image' in style) {
@@ -322,11 +321,3 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   }
 }
 
-// Static functions
-function geometryFilter(geometry: GeoJsonGeometryTypes, type: VectorAdapterLayerType): boolean {
-  const backType = backAliases[type];
-  if (backType) {
-    return backType.indexOf(geometry) !== -1;
-  }
-  return false;
-}

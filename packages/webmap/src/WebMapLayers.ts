@@ -92,12 +92,10 @@ export class WebMapLayers<L = any> {
 
   findLayer<T extends LayerAdapter = LayerAdapter>(filter: (adapter: T) => boolean): T | undefined {
     for (const l in this._layers) {
-      if (this._layers.hasOwnProperty(l)) {
-        const layerAdapter = this._layers[l] as T;
-        const isFit = filter(layerAdapter);
-        if (isFit) {
-          return layerAdapter;
-        }
+      const layerAdapter = this._layers[l] as T;
+      const isFit = filter(layerAdapter);
+      if (isFit) {
+        return layerAdapter;
       }
     }
   }
@@ -250,15 +248,13 @@ export class WebMapLayers<L = any> {
    */
   removeLayers(allowCb?: (layer: string, adapter: LayerAdapter) => boolean) {
     for (const l in this._layers) {
-      if (this._layers.hasOwnProperty(l)) {
-        let allow = true;
-        if (allowCb) {
-          allow = allowCb(l, this._layers[l]);
-        }
-        if (allow) {
-          this.webMap.removeLayer(l);
-          delete this._layers[l];
-        }
+      let allow = true;
+      if (allowCb) {
+        allow = allowCb(l, this._layers[l]);
+      }
+      if (allow) {
+        this.webMap.removeLayer(l);
+        delete this._layers[l];
       }
     }
   }
@@ -631,18 +627,17 @@ export class WebMapLayers<L = any> {
   getAttributions(options: GetAttributionsOptions): string[] {
     const attributions: string[] = [];
     for (const l in this._layers) {
-      if (this._layers.hasOwnProperty(l)) {
-        const layerMem = this._layers[l];
-        const onlyVisible = options.onlyVisible !== undefined ? options.onlyVisible : true;
-        const useLayerAttr = onlyVisible ? layerMem.options.visibility : true;
-        if (useLayerAttr) {
-          const attr = layerMem.options && layerMem.options.attribution;
-          if (attr) {
-            attributions.push(attr);
-          }
+      const layerMem = this._layers[l];
+      const onlyVisible = options.onlyVisible !== undefined ? options.onlyVisible : true;
+      const useLayerAttr = onlyVisible ? layerMem.options.visibility : true;
+      if (useLayerAttr) {
+        const attr = layerMem.options && layerMem.options.attribution;
+        if (attr) {
+          attributions.push(attr);
         }
       }
     }
+
     return attributions;
   }
 

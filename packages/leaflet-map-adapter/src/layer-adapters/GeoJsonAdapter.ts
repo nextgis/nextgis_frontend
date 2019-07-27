@@ -24,34 +24,9 @@ import {
   Map,
   Layer,
 } from 'leaflet';
-import { GeoJsonObject, GeoJsonGeometryTypes, FeatureCollection, Feature, GeometryCollection } from 'geojson';
+import { GeoJsonObject, Feature } from 'geojson';
 import { BaseAdapter } from './BaseAdapter';
-
-const typeAlias: { [key in GeoJsonGeometryTypes]: VectorAdapterLayerType } = {
-  'Point': 'circle',
-  'LineString': 'line',
-  'MultiPoint': 'circle',
-  'Polygon': 'fill',
-  'MultiLineString': 'line',
-  'MultiPolygon': 'fill',
-  'GeometryCollection': 'fill'
-};
-
-const PAINT = {
-  stroke: false,
-  opacity: 1
-};
-
-const backAliases: { [key in VectorAdapterLayerType]?: GeoJsonGeometryTypes[] } = {};
-
-for (const a in typeAlias) {
-  if (typeAlias.hasOwnProperty(a)) {
-    const layerType = typeAlias[a as GeoJsonGeometryTypes];
-    const backAlias = backAliases[layerType] || [];
-    backAlias.push(a as GeoJsonGeometryTypes);
-    backAliases[layerType] = backAlias;
-  }
-}
+import { detectType, typeAlias, filterGeometries, PAINT } from '../utils/utils';
 
 type LayerMem = LayerDefinition<Feature>;
 
@@ -208,8 +183,8 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
           geoJsonOptions = this.getGeoJsonOptions(options, type);
         }
       }
-
       const layer = new GeoJSON(data || undefined, geoJsonOptions);
+      return layer;
     }
   }
 
@@ -270,19 +245,21 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
       // if (path.opacity) {
       //   path.fillOpacity = path.opacity;
       // }
+
+      const paintAliases: Array<[keyof PathOptions, keyof PathPaint]> = [
+        ['color', 'strokeColor'],
+        ['opacity', 'strokeOpacity'],
+        ['stroke', 'stroke'],
+        ['fillColor', 'fillColor'],
+        ['fillOpacity', 'fillOpacity'],
+        ['fill', 'fill'],
+        ['weight', 'weight'],
+      ];
       const aliases: Array<[keyof PathOptions, keyof PathPaint]> = this.type === 'line' ? [
         ['color', 'strokeColor'],
         ['opacity', 'strokeOpacity'],
         ['weight', 'weight'],
-      ] : [
-          ['color', 'strokeColor'],
-          ['opacity', 'strokeOpacity'],
-          ['stroke', 'stroke'],
-          ['fillColor', 'fillColor'],
-          ['fillOpacity', 'fillOpacity'],
-          ['fill', 'fill'],
-          ['weight', 'weight'],
-        ];
+      ] : paintAliases;
 
       const readyPaint: PathOptions & CircleMarkerOptions = {};
 
@@ -417,7 +394,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
   }
 
   private createDivIcon(icon: IconOptions) {
-    const { type, ...toLIconOpt } = icon;
+    const { ...toLIconOpt } = icon;
     return new DivIcon({ className: '', ...toLIconOpt });
   }
 
@@ -443,7 +420,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
     const geoJsonOptions: GeoJSONOptions = {};
     const paint = (paintOptions && this.preparePaint(paintOptions)) || {};
     if (paintOptions) {
-      geoJsonOptions.style = (feature) => {
+      geoJsonOptions.style = () => {
         return paint;
       };
     }
@@ -454,58 +431,4 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
     }
     return geoJsonOptions;
   }
-}
-
-function detectType(geojson: GeoJsonObject): GeoJsonGeometryTypes {
-  let geometry: GeoJsonGeometryTypes;
-  if (geojson.type === 'FeatureCollection') {
-    const featuresTypes = (geojson as FeatureCollection).features.map((f) => f.geometry.type);
-    geometry = findMostFrequentGeomType(featuresTypes);
-  } else if (geojson.type === 'GeometryCollection') {
-    const geometryTypes = (geojson as GeometryCollection).geometries.map((g) => g.type);
-    geometry = findMostFrequentGeomType(geometryTypes);
-  } else if (geojson.type === 'Feature') {
-    geometry = (geojson as Feature).geometry.type;
-  } else {
-    geometry = geojson.type;
-  }
-  return geometry;
-}
-
-function findMostFrequentGeomType(arr: GeoJsonGeometryTypes[]): GeoJsonGeometryTypes {
-  const counts: { [x: string]: number } = {};
-  for (let fry = 0; fry < arr.length; fry++) {
-    counts[arr[fry]] = 1 + (counts[arr[fry]] || 0);
-  }
-  let maxName: string = '';
-  for (const c in counts) {
-    if (counts.hasOwnProperty(c)) {
-      const maxCount = maxName ? counts[maxName] : 0;
-      if (counts[c] > maxCount) {
-        maxName = c;
-      }
-    }
-  }
-  return maxName as GeoJsonGeometryTypes;
-}
-
-function geometryFilter(geometry: GeoJsonGeometryTypes, type: VectorAdapterLayerType): boolean {
-  const geoJsonGeometry = backAliases[type] || [];
-  return geoJsonGeometry.indexOf(geometry) !== -1;
-}
-
-function filterGeometries(data: GeoJsonObject, type: VectorAdapterLayerType): GeoJsonObject | false {
-  if (data.type === 'FeatureCollection') {
-    (data as FeatureCollection).features = (data as FeatureCollection).features
-      .filter((f) => geometryFilter(f.geometry.type, type));
-  } else if (data.type === 'Feature') {
-    const allow = geometryFilter((data as Feature).geometry.type, type);
-    if (!allow) {
-      return false;
-    }
-  } else if (data.type === 'GeometryCollection') {
-    (data as GeometryCollection).geometries = (data as GeometryCollection).geometries
-      .filter((g) => geometryFilter(g.type, type));
-  }
-  return data;
 }

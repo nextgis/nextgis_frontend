@@ -11,7 +11,7 @@ export class OsmAdapter implements BaseLayerAdapter {
 
   constructor(public map: Map, public options: AdapterOptions) { }
 
-  addLayer(options?: AdapterOptions) {
+  addLayer() {
     const attributions = [ATTRIBUTION];
     const layer = new TileLayer({
       source: new OSM({
