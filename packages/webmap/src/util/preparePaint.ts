@@ -6,6 +6,21 @@ import {
   GetCustomPaintOptions
 } from '../interfaces/LayerAdapter';
 
+function updatePaintOptionFromCallback(
+  paint: GetCustomPaintOptions,
+  getPaintFunctions: { [name: string]: GetPaintFunction }): VectorAdapterLayerPaint | undefined {
+
+  if (typeof paint.from === 'function') {
+    return paint.from(paint.options);
+  } else if (typeof paint.from === 'string' && getPaintFunctions) {
+    const from = getPaintFunctions[paint.from];
+    if (from) {
+      return from(paint.options);
+    }
+  }
+
+}
+
 export function preparePaint(
   paint: Paint,
   defaultPaint: GeometryPaint,
@@ -58,19 +73,4 @@ export function preparePaint(
   }
 
   return newPaint;
-}
-
-function updatePaintOptionFromCallback(
-  paint: GetCustomPaintOptions,
-  getPaintFunctions: { [name: string]: GetPaintFunction }): VectorAdapterLayerPaint | undefined {
-
-  if (typeof paint.from === 'function') {
-    return paint.from(paint.options);
-  } else if (typeof paint.from === 'string' && getPaintFunctions) {
-    const from = getPaintFunctions[paint.from];
-    if (from) {
-      return from(paint.options);
-    }
-  }
-
 }

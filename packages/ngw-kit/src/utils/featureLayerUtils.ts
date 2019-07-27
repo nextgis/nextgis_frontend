@@ -9,14 +9,25 @@ export interface FeatureRequestParams {
 
 const featureRequestParams: FeatureRequestParams = {
   srs: 4326,
-  geom_format: 'geojson'
+  'geom_format': 'geojson'
 };
+
+function _createGeojsonFeature<G extends Geometry | null = Geometry>(item: FeatureItem): Feature<G> {
+  const geometry = item.geom as G;
+  const feature: Feature<G> = {
+    id: item.id,
+    type: 'Feature',
+    properties: item.fields,
+    geometry
+  };
+  return feature;
+}
 
 export function getNgwLayerFeature<G extends Geometry | null = Geometry>(
   options: {
-    resourceId: number,
-    featureId: number,
-    connector: NgwConnector
+    resourceId: number;
+    featureId: number;
+    connector: NgwConnector;
   } & FilterOptions
 ): CancelablePromise<Feature<G>> {
 
@@ -38,9 +49,9 @@ export function getNgwLayerFeature<G extends Geometry | null = Geometry>(
 
 export function getNgwLayerFeatures<G extends Geometry | null = Geometry>(
   options: {
-    resourceId: number,
-    connector: NgwConnector
-    filters?: PropertiesFilter[],
+    resourceId: number;
+    connector: NgwConnector;
+    filters?: PropertiesFilter[];
   } & FilterOptions): CancelablePromise<FeatureCollection<G>> {
 
   const params: FeatureRequestParams & FilterOptions & { [name: string]: any } = {
@@ -71,13 +82,3 @@ export function getNgwLayerFeatures<G extends Geometry | null = Geometry>(
   });
 }
 
-function _createGeojsonFeature<G extends Geometry | null = Geometry>(item: FeatureItem): Feature<G> {
-  const geometry = item.geom as G;
-  const feature: Feature<G> = {
-    id: item.id,
-    type: 'Feature',
-    properties: item.fields,
-    geometry
-  };
-  return feature;
-}

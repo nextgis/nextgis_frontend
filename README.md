@@ -144,6 +144,38 @@ npm publish --access=public
 
 ## VSCode
 
+### Eslint for typescript configuration
+
+Open VSCode `File > Preferences > Settings` JSON view and add this to config:
+
+```bash
+$ mkdir .vscode && touch .vscode/settings.json
+```
+
+```json
+  "editor.formatOnSave": true,
+  "eslint.autoFixOnSave": true,
+  "eslint.validate": [
+    {
+      "language": "javascript",
+      "autoFix": true
+    },
+    {
+      "language": "javascriptreact",
+      "autoFix": true
+    },
+    {
+      "language": "typescript",
+      "autoFix": true
+    },
+    {
+      "language": "typescriptreact",
+      "autoFix": true
+    }
+  ],
+  "tslint.enable": false
+```
+
 ### Debugging with Chrome, LiveServer and Watch
 
 Example for ngw-leaflet:

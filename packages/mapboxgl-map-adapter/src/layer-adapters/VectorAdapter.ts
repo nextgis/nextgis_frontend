@@ -27,7 +27,7 @@ import { BaseAdapter } from './BaseAdapter';
 import { typeAliasForFilter, allowedByType } from '../util/geom_type';
 
 export interface Feature<G extends GeometryObject | null = Geometry, P = GeoJsonProperties> extends F<G, P> {
-  _rendrom_id?: string;
+  _rendromId?: string;
 }
 
 const PAINT = {
@@ -120,21 +120,17 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
       }
 
       for (const [name, paint] of layers) {
-        const _paint: any = await this._createPaintForType(paint, type, name);
+        const _paint: any = await this._createPaintForType(paint, type);
 
         if ('icon-image' in _paint) {
           // If true, the icon will be visible even if it collides with other previously drawn symbols.
           _paint['icon-allow-overlap'] = true;
           for (const p in _paint) {
-            if (_paint.hasOwnProperty(p)) {
-              this.map.setLayoutProperty(name, p, _paint[p]);
-            }
+            this.map.setLayoutProperty(name, p, _paint[p]);
           }
         } else {
           for (const p in _paint) {
-            if (_paint.hasOwnProperty(p)) {
-              this.map.setPaintProperty(name, p, _paint[p]);
-            }
+            this.map.setPaintProperty(name, p, _paint[p]);
           }
         }
       }
@@ -151,8 +147,7 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
 
   protected async _createPaintForType(
     paint: VectorAdapterLayerPaint | GetPaintCallback,
-    type: VectorAdapterLayerType,
-    name: string): Promise<any> {
+    type: VectorAdapterLayerType, name?: string): Promise<any> {
 
     if (typeof paint !== 'function') {
       const mapboxPaint: any = {};
@@ -164,24 +159,23 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
         };
       } else {
         for (const p in _paint) {
-          if (_paint.hasOwnProperty(p)) {
-            const allowed = allowedByType[type];
-            if (allowed) {
-              const allowedType = allowed.find((x) => {
-                if (typeof x === 'string') {
-                  return x === p;
-                } else if (Array.isArray(x)) {
-                  return x[0] === p;
-                }
-                return false;
-              });
-              if (allowedType) {
-                const paramName = Array.isArray(allowedType) ? allowedType[1] : allowedType;
-                // @ts-ignore
-                mapboxPaint[type + '-' + paramName] = _paint[p];
+          const allowed = allowedByType[type];
+          if (allowed) {
+            const allowedType = allowed.find((x) => {
+              if (typeof x === 'string') {
+                return x === p;
+              } else if (Array.isArray(x)) {
+                return x[0] === p;
               }
+              return false;
+            });
+            if (allowedType) {
+              const paramName = Array.isArray(allowedType) ? allowedType[1] : allowedType;
+              // @ts-ignore
+              mapboxPaint[type + '-' + paramName] = _paint[p];
             }
           }
+
         }
         mapboxPaint[type + '-opacity-transition'] = { duration: 0 };
         return mapboxPaint;

@@ -8,9 +8,7 @@ export function callAjax(url: string, callback: (resp: any) => any, headers: any
   };
   xmlhttp.open('GET', url, true);
   for (const h in headers) {
-    if (headers.hasOwnProperty(h)) {
-      xmlhttp.setRequestHeader(h, headers[h]);
-    }
+    xmlhttp.setRequestHeader(h, headers[h]);
   }
   xmlhttp.send();
 }

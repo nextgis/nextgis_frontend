@@ -1,4 +1,4 @@
-import {KeyCodes} from './KeysCodes';
+import { KeyCodes } from './KeysCodes';
 
 /**
  * @param {string} key - key symbol
@@ -6,9 +6,9 @@ import {KeyCodes} from './KeysCodes';
  * @param {number} [keyCode] - key code for special button like tab
  *
  * @export
- * @interface IKeyControl
+ * @interface KeyControl
  */
-export interface IKeyControl {
+export interface KeyControl {
   key?: string;
   keyCode?: number;
   func: () => void;
@@ -18,7 +18,7 @@ export class Keys {
 
   keyCodeAlias = new KeyCodes();
 
-  keys: {[keyCode: number]: boolean} = {};
+  keys: { [keyCode: number]: boolean } = {};
 
   private _windowOnFocus: () => void;
   private _keysPressed: (e: KeyboardEvent) => void;

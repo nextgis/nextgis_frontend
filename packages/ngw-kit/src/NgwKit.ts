@@ -80,6 +80,7 @@ export class NgwKit implements StarterKit {
             pixelRadius: this.options.pixelRadius,
             ...options
           }) as WebMapLayerAdapter;
+          return layer;
         }
       }
     }

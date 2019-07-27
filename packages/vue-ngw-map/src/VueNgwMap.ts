@@ -1,10 +1,9 @@
 import Vue, { VNode, VNodeData, CreateElement } from 'vue';
 import Component from 'vue-class-component'
-import NgwMap, { NgwMapOptions } from '@nextgis/ngw-map';
+import NgwMap from '@nextgis/ngw-map';
 import MapAdapter from '@nextgis/leaflet-map-adapter';
 
 import 'leaflet/dist/leaflet.css';
-import { propsBinder } from './utils';
 
 @Component({
   props: {

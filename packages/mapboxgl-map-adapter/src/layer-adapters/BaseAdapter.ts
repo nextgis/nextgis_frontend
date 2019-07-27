@@ -4,8 +4,8 @@ import { TLayer } from '../MapboxglMapAdapter';
 
 let ID = 0;
 
-export abstract class BaseAdapter<O extends AdapterOptions = AdapterOptions>
-  implements BaseLayerAdapter<Map, TLayer, O> {
+export abstract class BaseAdapter<
+  O extends AdapterOptions = AdapterOptions> implements BaseLayerAdapter<Map, TLayer, O> {
 
   layer?: TLayer;
   protected readonly _layerId: string;
@@ -14,7 +14,7 @@ export abstract class BaseAdapter<O extends AdapterOptions = AdapterOptions>
     this._layerId = `layer-${ID++}`;
   }
 
-  addLayer(options?: any): string[] | Promise<string[]> | undefined {
+  addLayer(options: O): TLayer | Promise<TLayer> | undefined {
     return [''];
   }
 }

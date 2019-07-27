@@ -1,8 +1,6 @@
 /**
  * @module ngw-connector
  */
-import './polyfills';
-
 import { CancelablePromise } from './CancelablePromise';
 
 import { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
@@ -106,7 +104,7 @@ export class NgwConnector {
 
   async request<K extends keyof RequestItemsParamsMap>(
     name: K,
-    params: (RequestItemsParamsMap[K] | {} ) & { [name: string]: any } = {},
+    params: (RequestItemsParamsMap[K] | {}) & { [name: string]: any } = {},
     options?: RequestOptions): CancelablePromise<GetRequestItemsResponseMap[K] | PostRequestItemsResponseMap[K]> {
 
     const apiItems = await this.connect();
@@ -133,7 +131,7 @@ export class NgwConnector {
       if (params) {
         const paramArray = [];
         for (const p in params) {
-          if (params.hasOwnProperty(p) && apiItem.indexOf(p) === -1) {
+          if (apiItem.indexOf(p) === -1) {
             paramArray.push(`${p}=${params[p]}`);
           }
         }
@@ -223,13 +221,12 @@ export class NgwConnector {
 
   _rejectLoadingQueue() {
     for (const q in this._loadingQueue) {
-      if (this._loadingQueue.hasOwnProperty(q)) {
-        const queue = this._loadingQueue[q];
-        queue.waiting.forEach((x) => {
-          x.reject();
-        });
-        delete this._loadingQueue[q];
-      }
+      const queue = this._loadingQueue[q];
+      queue.waiting.forEach((x) => {
+        x.reject();
+      });
+      delete this._loadingQueue[q];
+
     }
   }
 

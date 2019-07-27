@@ -6,7 +6,7 @@ import Item, { ItemOptions } from '@nextgis/item';
 
 import WebMap, { LayerAdaptersOptions, LayerAdapter } from '@nextgis/webmap';
 import { TreeGroup, TreeLayer } from './interfaces';
-import { pixelsInMeterWidth, setScaleRatio } from './utils/utils';
+import { setScaleRatio } from './utils/utils';
 
 export class WebMapLayerItem extends Item<ItemOptions> {
   static options: ItemOptions = {
@@ -33,7 +33,7 @@ export class WebMapLayerItem extends Item<ItemOptions> {
             } else {
               item.webMap.hideLayer(item.layer);
             }
-            item.item.layer_enabled = value;
+            item.item['layer_enabled'] = value;
           }
         },
       }
@@ -60,6 +60,7 @@ export class WebMapLayerItem extends Item<ItemOptions> {
 
   async initItem(item: TreeGroup | TreeLayer) {
     let newLayer = item._layer;
+    const i = item;
     if (item.item_type === 'group' || item.item_type === 'root') {
       if (item.children && item.children.length) {
 
@@ -88,7 +89,7 @@ export class WebMapLayerItem extends Item<ItemOptions> {
       newLayer = await this.webMap.addLayer(adapter, options);
     }
     if (newLayer) {
-      item._layer = newLayer;
+      i._layer = newLayer;
       this.layer = newLayer;
       if (this.properties && item.item_type === 'layer' && item.layer_enabled) {
         this.properties.property('visibility').set(true);

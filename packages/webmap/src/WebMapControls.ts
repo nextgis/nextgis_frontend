@@ -17,8 +17,8 @@ export class WebMapControls<C = any> {
 
   static controls: { [name: string]: (webMap: WebMap, options?: any) => any } = {
     'CONTROL': (webMap: WebMap, options: {
-      control: MapControl,
-      options?: CreateControlOptions
+      control: MapControl;
+      options?: CreateControlOptions;
     }) => {
       return webMap.createControl(options.control, options.options);
     },

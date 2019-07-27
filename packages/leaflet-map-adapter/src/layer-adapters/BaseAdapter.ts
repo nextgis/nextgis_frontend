@@ -16,7 +16,7 @@ export class BaseAdapter<O extends AdapterOptions = AdapterOptions, L = any> imp
       exist.style.zIndex = String(options.order);
       this.pane = pane;
     }
-   }
+  }
 
   addLayer(options: O): L | Promise<L> | undefined {
     return undefined;

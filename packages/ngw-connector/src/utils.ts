@@ -81,11 +81,9 @@ export function loadJSON(
   const headers = options.headers;
   if (headers) {
     for (const h in headers) {
-      if (headers.hasOwnProperty(h)) {
-        const header = headers[h];
-        if (typeof header === 'string') {
-          xhr.setRequestHeader(h, header);
-        }
+      const header = headers[h];
+      if (typeof header === 'string') {
+        xhr.setRequestHeader(h, header);
       }
     }
   }
@@ -99,9 +97,8 @@ export function loadJSON(
     data.append('file', options.file);
     if (options.data) {
       for (const d in data) {
-        if (data.hasOwnProperty(d)) {
-          data.append(d, data[d]);
-        }
+        data.append(d, data[d]);
+
       }
     }
   } else {

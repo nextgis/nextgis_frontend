@@ -1,7 +1,5 @@
-export function clearObject(obj: Record<any, any>) {
+export function clearObject(obj: Record<any, any>): void {
   for (const member in obj) {
-    if (obj.hasOwnProperty(member)) {
-      delete obj[member];
-    }
+    delete obj[member];
   }
 }

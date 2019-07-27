@@ -90,12 +90,11 @@ export class ItemProperties {
 
   destroy() {
     for (const p in this._properties) {
-      if (this._properties.hasOwnProperty(p)) {
-        const prop = this.property(p);
-        if (prop && prop.destroy) {
-          prop.destroy();
-        }
+      const prop = this.property(p);
+      if (prop && prop.destroy) {
+        prop.destroy();
       }
+
     }
     this._properties = {};
     this._propertiesList = [];

@@ -70,7 +70,7 @@ export interface NgwLayerOptionsAdditional<AA extends NgwLayerAdapterType = NgwL
 
 export interface NgwLayerOptions<
   AA extends NgwLayerAdapterType = NgwLayerAdapterType
-  > extends NgwLayerOptionsAdditional<AA> {
+> extends NgwLayerOptionsAdditional<AA> {
 
   resourceId: number;
   simplification?: number;
