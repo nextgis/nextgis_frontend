@@ -9,9 +9,8 @@ import { Item } from '../Item';
 import { ItemBasePropertyOptions, Type, ItemPropertyConfig, ItemPropertyTypes } from '../interfaces';
 
 export class ItemProperties {
-
   static handlers: { [name: string]: Type<BaseProperty> } = {
-    CheckProperty,
+    CheckProperty
   };
 
   options = {};
@@ -20,7 +19,6 @@ export class ItemProperties {
   private _propertiesList: string[];
 
   constructor(public item: Item, propertiesList?: Array<ItemPropertyConfig<keyof ItemPropertyTypes>>) {
-
     this._propertiesList = []; // ordered list
     if (propertiesList) {
       propertiesList.forEach(this._setPropertyHandler.bind(this));
@@ -47,18 +45,14 @@ export class ItemProperties {
       }
     }
     if (handler && propOpt.name) {
-      const options = { ...propOpt || {} };
-      this._properties[propOpt.name] = new handler(
-        propOpt.name,
-        this.item,
-        options,
-      );
+      const options = { ...(propOpt || {}) };
+      this._properties[propOpt.name] = new handler(propOpt.name, this.item, options);
       this._propertiesList.push(propOpt.name);
     }
   }
 
   update() {
-    this.list().forEach((x) => {
+    this.list().forEach(x => {
       x.update();
     });
   }
@@ -73,7 +67,8 @@ export class ItemProperties {
   set<K extends keyof ItemPropertyTypes>(
     name: string,
     value: ItemPropertyTypes[K],
-    options?: ItemBasePropertyOptions<ItemPropertyTypes[K]>) {
+    options?: ItemBasePropertyOptions<ItemPropertyTypes[K]>
+  ) {
     const prop = this.property(name);
     if (prop) {
       return prop.set(value, options);
@@ -85,7 +80,7 @@ export class ItemProperties {
   }
 
   list() {
-    return this._propertiesList.map((x) => this._properties[x]);
+    return this._propertiesList.map(x => this._properties[x]);
   }
 
   destroy() {
@@ -94,7 +89,6 @@ export class ItemProperties {
       if (prop && prop.destroy) {
         prop.destroy();
       }
-
     }
     this._properties = {};
     this._propertiesList = [];

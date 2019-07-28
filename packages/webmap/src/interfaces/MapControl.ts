@@ -27,17 +27,14 @@ export interface AttributionControlOptions {
 }
 
 export interface MapControls {
-  'ZOOM': ZoomControlOptions;
-  'ATTRIBUTION': AttributionControlOptions;
+  ZOOM: ZoomControlOptions;
+  ATTRIBUTION: AttributionControlOptions;
   [name: string]: {};
 }
 
 export interface MapControl<M extends any = any> {
-
   onAdd(map?: M): any;
-
   onRemove(map?: M): any;
-
 }
 
 export interface ButtonControlOptions {

@@ -207,22 +207,22 @@ export interface ImageAdapterOptions extends RasterAdapterOptions {
 }
 
 export interface LayerAdapters {
-  'MVT': VectorLayerAdapter;
-  'IMAGE': BaseLayerAdapter;
-  'OSM': BaseLayerAdapter;
-  'TILE': BaseLayerAdapter;
-  'MARKER': BaseLayerAdapter;
-  'GEOJSON': VectorLayerAdapter;
+  MVT: VectorLayerAdapter;
+  IMAGE: BaseLayerAdapter;
+  OSM: BaseLayerAdapter;
+  TILE: BaseLayerAdapter;
+  MARKER: BaseLayerAdapter;
+  GEOJSON: VectorLayerAdapter;
   [name: string]: BaseLayerAdapter;
 }
 
 export interface LayerAdaptersOptions {
-  'MVT': MvtAdapterOptions;
-  'IMAGE': ImageAdapterOptions;
-  'OSM': RasterAdapterOptions;
-  'TILE': TileAdapterOptions;
-  'MARKER': MarkerAdapterOptions;
-  'GEOJSON': GeoJsonAdapterOptions;
+  MVT: MvtAdapterOptions;
+  IMAGE: ImageAdapterOptions;
+  OSM: RasterAdapterOptions;
+  TILE: TileAdapterOptions;
+  MARKER: MarkerAdapterOptions;
+  GEOJSON: GeoJsonAdapterOptions;
   [name: string]: AdapterOptions;
 }
 
@@ -262,11 +262,10 @@ export type PropertiesFilter = PropertyFilter[];
 export type DataLayerFilter<F extends Feature = Feature, L = any> = CallbackFilter<F, L>;
 
 export type LayerAdapter<M = any, L = any, O extends AdapterOptions = AdapterOptions> =
-  BaseLayerAdapter<M, L, O> |
-  VectorLayerAdapter<M, L, O>;
+  | BaseLayerAdapter<M, L, O>
+  | VectorLayerAdapter<M, L, O>;
 
 export interface BaseLayerAdapter<M = any, L = any, O extends AdapterOptions = AdapterOptions> {
-
   options: O;
   id?: string;
   name?: string;
@@ -288,9 +287,11 @@ export interface BaseLayerAdapter<M = any, L = any, O extends AdapterOptions = A
 }
 
 export interface VectorLayerAdapter<
-  M = any, L = any, O extends VectorAdapterOptions = VectorAdapterOptions, F extends Feature = Feature>
-  extends BaseLayerAdapter<M, L, O> {
-
+  M = any,
+  L = any,
+  O extends VectorAdapterOptions = VectorAdapterOptions,
+  F extends Feature = Feature
+> extends BaseLayerAdapter<M, L, O> {
   selected?: boolean;
 
   getLayers?(): Array<LayerDefinition<F, L>>;

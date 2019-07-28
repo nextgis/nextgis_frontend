@@ -3,7 +3,7 @@ import { fixUrlStr } from '@nextgis/utils';
 import { QmsAdapterOptions, QmsBasemap, QmsLayerType, QmsAdapter as QA } from './interfaces';
 
 const alias: { [key in QmsLayerType]: keyof LayerAdaptersOptions } = {
-  tms: 'TILE',
+  tms: 'TILE'
 };
 
 export function updateQmsOptions(qms: QmsBasemap): AdapterOptions & { url: string } {
@@ -38,7 +38,6 @@ export function loadJSON<T = any>(url: string): Promise<T> {
 }
 
 export function createQmsAdapter(webMap: WebMap, url = 'https://qms.nextgis.com'): Type<BaseLayerAdapter> {
-
   class QmsAdapter<M = any> implements BaseLayerAdapter<M>, QA {
     qms?: QmsBasemap;
 
@@ -52,7 +51,6 @@ export function createQmsAdapter(webMap: WebMap, url = 'https://qms.nextgis.com'
     }
 
     async addLayer(options: QmsAdapterOptions): Promise<any> {
-
       // qmsId for request, id for store
       if (!this.qms && options.qmsId) {
         this.qms = await loadJSON<QmsBasemap>(url + '/api/v1/geoservices/' + options.qmsId);
@@ -63,7 +61,6 @@ export function createQmsAdapter(webMap: WebMap, url = 'https://qms.nextgis.com'
         const webMapAdapter = webMap.mapAdapter.layerAdapters[type];
         if (webMapAdapter) {
           if (type === 'TILE') {
-
             options = {
               maxZoom: webMap.options.maxZoom,
               minZoom: webMap.options.minZoom,

@@ -49,7 +49,6 @@ export interface MapOptions {
 
   paint?: GeometryPaint;
   selectedPaint?: GeometryPaint;
-
 }
 
 export interface AppOptions {

@@ -25,7 +25,7 @@ export function createButtonControl(options: ButtonControlOptions) {
     }
   }
   if (options.addClass) {
-    options.addClass.split(' ').forEach((x) => link.classList.add(x));
+    options.addClass.split(' ').forEach(x => link.classList.add(x));
   }
 
   const onClick = (e: Event) => {
@@ -36,18 +36,21 @@ export function createButtonControl(options: ButtonControlOptions) {
     link.addEventListener('click', onClick);
   }
 
-  return createControl({
-    onAdd() {
-      return link;
+  return createControl(
+    {
+      onAdd() {
+        return link;
+      },
+      onRemove() {
+        const parent = link.parentNode;
+        if (parent) {
+          parent.removeChild(link);
+        }
+        if (options.onClick) {
+          link.removeEventListener('click', onClick);
+        }
+      }
     },
-    onRemove() {
-      const parent = link.parentNode;
-      if (parent) {
-        parent.removeChild(link);
-      }
-      if (options.onClick) {
-        link.removeEventListener('click', onClick);
-      }
-    }
-  }, { bar: true, addClass: 'mapboxgl-ctrl-group' });
+    { bar: true, addClass: 'mapboxgl-ctrl-group' }
+  );
 }

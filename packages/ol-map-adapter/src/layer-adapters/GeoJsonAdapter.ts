@@ -21,7 +21,6 @@ import { styleFunction, getFeature } from '../utils/utils';
 type Layer = Base;
 
 export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAdapterOptions> {
-
   layer?: VectorLayer;
   paint?: VectorAdapterLayerPaint | GetPaintCallback;
   selectedPaint?: VectorAdapterLayerPaint | GetPaintCallback;
@@ -32,8 +31,7 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
   private _selectedFeatures: ol.Feature[] = [];
   private _filterFun?: DataLayerFilter<Feature>;
 
-  constructor(public map: Map, public options: GeoJsonAdapterOptions) {
-  }
+  constructor(public map: Map, public options: GeoJsonAdapterOptions) {}
 
   addLayer(options: GeoJsonAdapterOptions) {
     this.options = options;
@@ -48,7 +46,7 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
 
     this.layer = new VectorLayer({
       source: this.vectorSource,
-      style: (f) => {
+      style: f => {
         const style = styleFunction(f as ol.Feature, options.paint);
         return style;
       }
@@ -82,7 +80,7 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
   }
 
   addData(data: GeoJsonObject) {
-    const features = (new GeoJSON()).readFeatures(data, {
+    const features = new GeoJSON().readFeatures(data, {
       dataProjection: 'EPSG:4326',
       featureProjection: 'EPSG:3857'
     });
@@ -96,8 +94,8 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
 
   select(findFeatureCb?: DataLayerFilter<Feature> | PropertiesFilter) {
     if (findFeatureCb) {
-      const feature = this._selectedFeatures.filter((x) => Object.create({ feature: x }));
-      feature.forEach((x) => {
+      const feature = this._selectedFeatures.filter(x => Object.create({ feature: x }));
+      feature.forEach(x => {
         this._selectFeature(x);
       });
     } else if (!this.selected) {
@@ -110,8 +108,8 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
 
   unselect(findFeatureCb?: DataLayerFilter<Feature> | PropertiesFilter) {
     if (findFeatureCb) {
-      const feature = this._selectedFeatures.filter((x) => Object.create({ feature: x }));
-      feature.forEach((x) => {
+      const feature = this._selectedFeatures.filter(x => Object.create({ feature: x }));
+      feature.forEach(x => {
         this._unselectFeature(x);
       });
     } else if (this.selected) {
@@ -123,13 +121,13 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
   }
 
   getLayers() {
-    return this._features.map((x) => {
+    return this._features.map(x => {
       return { feature: getFeature(x) };
     });
   }
 
   getSelected() {
-    return this._selectedFeatures.map((x) => {
+    return this._selectedFeatures.map(x => {
       return { feature: getFeature(x) };
     });
   }
@@ -137,9 +135,11 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
   filter(fun?: DataLayerFilter<Feature, Layer>) {
     this._filterFun = fun;
     const features = this._features;
-    const filtered = fun ? features.filter((feature) => {
-      return fun({ feature: getFeature(feature) });
-    }) : features;
+    const filtered = fun
+      ? features.filter(feature => {
+          return fun({ feature: getFeature(feature) });
+        })
+      : features;
     this.vectorSource.clear();
     const length = filtered.length;
     for (let fry = 0; fry < length; fry++) {
@@ -155,14 +155,13 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
     if (this.layer) {
       const source = this.layer.getSource();
       const features = source.getFeatures();
-      features.forEach((f) => {
+      features.forEach(f => {
         f.setStyle(styleFunction(f, paint));
       });
     }
   }
 
   private _addSelectListener() {
-
     const _forEachFeatureAtPixel = this.map.get('_forEachFeatureAtPixel') as ForEachFeatureAtPixelCallback[];
     _forEachFeatureAtPixel.push((feature, layer) => {
       if (layer === this.layer) {
@@ -172,7 +171,6 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
   }
 
   private _onFeatureClick(feature: ol.Feature) {
-
     let isSelected = this._selectedFeatures.indexOf(feature) !== -1;
     if (isSelected) {
       if (this.options && this.options.unselectOnSecondClick) {
@@ -196,7 +194,7 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
   private _selectFeature(feature: ol.Feature) {
     const options = this.options;
     if (options && !options.multiselect) {
-      this._selectedFeatures.forEach((x) => this._unselectFeature(x));
+      this._selectedFeatures.forEach(x => this._unselectFeature(x));
     }
     this._selectedFeatures.push(feature);
     this.selected = true;
@@ -216,5 +214,3 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
     }
   }
 }
-
-

@@ -5,7 +5,6 @@ import { BaseAdapter } from './BaseAdapter';
 
 export class ImageAdapter extends BaseAdapter<ImageAdapterOptions>
   implements BaseLayerAdapter<Map, TLayer, ImageAdapterOptions> {
-
   addLayer(options: ImageAdapterOptions): string[] | undefined {
     if (this.options) {
       options = { ...this.options, ...options };
@@ -14,29 +13,31 @@ export class ImageAdapter extends BaseAdapter<ImageAdapterOptions>
     const url = options.url;
     if (url) {
       if (options.subdomains) {
-        tiles = options.subdomains.split('').map((x) => {
+        tiles = options.subdomains.split('').map(x => {
           const subUrl = url.replace('{s}', x);
           return subUrl;
-        },
-        );
+        });
       } else {
         tiles = [url];
       }
 
-      this.map.addLayer({
-        id: this._layerId,
-        type: 'raster',
-        layout: {
-          visibility: 'none',
-        },
-        source: {
+      this.map.addLayer(
+        {
+          id: this._layerId,
           type: 'raster',
-          tiles,
-          tileSize: 1024,
+          layout: {
+            visibility: 'none'
+          },
+          source: {
+            type: 'raster',
+            tiles,
+            tileSize: 1024
+          },
+          paint: {}
         },
-        paint: {}
         // @ts-ignore
-      }, options.before);
+        options.before
+      );
       this.layer = [this._layerId];
       return this.layer;
     }

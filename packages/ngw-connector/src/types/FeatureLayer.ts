@@ -34,7 +34,7 @@ export interface FeatureItemAttachment {
 export interface FeatureItem {
   id: number;
   geom: string | GeometryObject;
-  fields: {[field: string]: number | string | boolean};
+  fields: { [field: string]: number | string | boolean };
   extensions: {
     description?: string;
     attachment?: FeatureItemAttachment[];

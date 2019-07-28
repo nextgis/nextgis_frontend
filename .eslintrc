@@ -1,7 +1,9 @@
 {
   "extends": [
     "eslint:recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "prettier/@typescript-eslint",
+    "plugin:prettier/recommended"
   ],
   "env": {
     "browser": true,
@@ -16,7 +18,8 @@
     "project": "./tsconfig.json"
   },
   "plugins": [
-    "@typescript-eslint/eslint-plugin"
+    "@typescript-eslint/eslint-plugin",
+    "prettier"
   ],
   "rules": {
     "indent": "off",
@@ -32,9 +35,18 @@
         "ignoreTemplateLiterals": true,
       }
     ],
-    "@typescript-eslint/indent": [
+    "camelcase": "off",
+    "@typescript-eslint/no-unused-vars": [
+      1,
+      {
+        "args": "none"
+      }
+    ],
+    "@typescript-eslint/camelcase": [
       "error",
-      2
+      {
+        "properties": "never"
+      }
     ],
     "@typescript-eslint/explicit-member-accessibility": [
       "error",

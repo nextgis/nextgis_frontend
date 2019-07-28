@@ -7,7 +7,6 @@ import { Map } from 'leaflet';
 import { BaseAdapter } from '../BaseAdapter';
 
 export class ImageAdapter extends BaseAdapter<ImageAdapterOptions> implements BaseLayerAdapter<Map> {
-
   layer: any;
 
   addLayer(options: ImageAdapterOptions) {
@@ -18,17 +17,16 @@ export class ImageAdapter extends BaseAdapter<ImageAdapterOptions> implements Ba
       this.layer = new ImageLayer(url, {
         pane: this.pane,
         headers: options.headers,
-        ...options,
+        ...options
       });
       if (updateWmsParamsFromOpt) {
         const updateWmsParams = this.layer.updateWmsParams;
-        this.layer.updateWmsParams = function (map: Map) {
+        this.layer.updateWmsParams = function(map: Map) {
           updateWmsParams.call(this, map);
           this.wmsParams = updateWmsParamsFromOpt(this.wmsParams);
         };
       }
       return this.layer;
     }
-
   }
 }

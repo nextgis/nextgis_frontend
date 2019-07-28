@@ -41,7 +41,7 @@ export interface Params {
 type RequestItemKeys = { readonly [T in keyof RequestItemsParamsMap]?: { [x: string]: any } };
 
 export interface RequestItemsResponseMap {
-  'GET': GetRequestItemsResponseMap;
+  GET: GetRequestItemsResponseMap;
   POST: PostRequestItemsResponseMap;
 }
 
@@ -101,8 +101,8 @@ export interface RequestOptions {
 export interface LoadingQueue {
   name: string;
   waiting: Array<{
-    resolve: (...args: any[]) => Promise<any>,
-    reject: (...args: any[]) => Promise<Error>,
+    resolve: (...args: any[]) => Promise<any>;
+    reject: (...args: any[]) => Promise<Error>;
     timestamp: Date;
   }>;
 }

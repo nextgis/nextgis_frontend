@@ -35,19 +35,15 @@ export class WebMapLayerItem extends Item<ItemOptions> {
             }
             item.item['layer_enabled'] = value;
           }
-        },
+        }
       }
-    ],
+    ]
   };
 
   item: TreeGroup | TreeLayer;
   layer?: LayerAdapter;
 
-  constructor(public webMap: WebMap,
-    item: TreeGroup | TreeLayer,
-    options?: ItemOptions,
-    parent?: WebMapLayerItem) {
-
+  constructor(public webMap: WebMap, item: TreeGroup | TreeLayer, options?: ItemOptions, parent?: WebMapLayerItem) {
     super({ ...WebMapLayerItem.options, ...options });
 
     this.item = item;
@@ -63,28 +59,32 @@ export class WebMapLayerItem extends Item<ItemOptions> {
     const i = item;
     if (item.item_type === 'group' || item.item_type === 'root') {
       if (item.children && item.children.length) {
-
-        item.children.reverse().sort((a, b) => {
-          if (a.item_type === 'layer' && b.item_type === 'layer') {
-            return b.draw_order_position - a.draw_order_position;
-          }
-          return 0;
-        }).forEach((x) => {
-          const children = new WebMapLayerItem(this.webMap, x, this.options, this);
-          this.tree.addChild(children);
-        });
+        item.children
+          .reverse()
+          .sort((a, b) => {
+            if (a.item_type === 'layer' && b.item_type === 'layer') {
+              return b.draw_order_position - a.draw_order_position;
+            }
+            return 0;
+          })
+          .forEach(x => {
+            const children = new WebMapLayerItem(this.webMap, x, this.options, this);
+            this.tree.addChild(children);
+          });
       }
     } else if (item.item_type === 'layer') {
       const adapter = (item.adapter || item.layer_adapter.toUpperCase()) as keyof LayerAdaptersOptions;
-      const maxZoom = item.layer_max_scale_denom ?
-        this._mapScaleToZoomLevel(item.layer_max_scale_denom) : this.webMap.options.maxZoom;
-      const minZoom = item.layer_min_scale_denom ?
-        this._mapScaleToZoomLevel(item.layer_min_scale_denom) : this.webMap.options.minZoom;
+      const maxZoom = item.layer_max_scale_denom
+        ? this._mapScaleToZoomLevel(item.layer_max_scale_denom)
+        : this.webMap.options.maxZoom;
+      const minZoom = item.layer_min_scale_denom
+        ? this._mapScaleToZoomLevel(item.layer_min_scale_denom)
+        : this.webMap.options.minZoom;
       const options: any = {
         maxZoom,
         minZoom,
         ...item,
-        headers: this.options.headers,
+        headers: this.options.headers
       };
       newLayer = await this.webMap.addLayer(adapter, options);
     }
@@ -122,5 +122,4 @@ export class WebMapLayerItem extends Item<ItemOptions> {
     await this.initItem(item);
     this.emitter.emit('init');
   }
-
 }

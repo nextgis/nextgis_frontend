@@ -62,6 +62,22 @@ export type LayerDef = string | LayerAdapter;
  * https://developer.mozilla.org/ru/docs/Web/CSS/cursor
  * @ignore
  */
-export type Cursor = 'auto' | 'crosshair' | 'default' | 'e-resize' | 'help' | 'move' |
-  'n-resize' | 'ne-resize' | 'nw-resize' | 'pointer' | 'progress' | 's-resize' |
-  'se-resize' | 'sw-resize' | 'text' | 'w-resize' | 'wait' | 'inherit';
+export type Cursor =
+  | 'auto'
+  | 'crosshair'
+  | 'default'
+  | 'e-resize'
+  | 'help'
+  | 'move'
+  | 'n-resize'
+  | 'ne-resize'
+  | 'nw-resize'
+  | 'pointer'
+  | 'progress'
+  | 's-resize'
+  | 'se-resize'
+  | 'sw-resize'
+  | 'text'
+  | 'w-resize'
+  | 'wait'
+  | 'inherit';

@@ -2,7 +2,6 @@ import { Control, ControlOptions } from 'leaflet';
 import { AttributionControlOptions } from '@nextgis/webmap';
 
 export class AttributionControl extends Control.Attribution {
-
   // options: AttributionControlOptions
   constructor(options: AttributionControlOptions & ControlOptions) {
     super(options);
@@ -14,7 +13,7 @@ export class AttributionControl extends Control.Attribution {
       } else if (customAttribution) {
         attributions = [customAttribution];
       }
-      attributions.forEach((x) => this.addAttribution(x));
+      attributions.forEach(x => this.addAttribution(x));
     }
   }
 }

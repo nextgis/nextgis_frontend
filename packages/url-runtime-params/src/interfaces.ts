@@ -7,4 +7,6 @@ export interface StateData {
   url: string;
 }
 
-export interface Params { [paramName: string]: any }
+export interface Params {
+  [paramName: string]: any;
+}
