@@ -2,7 +2,6 @@ import { ControlPositions } from '@nextgis/webmap';
 import './PanelContainerElement.css';
 
 export class PanelContainerElement {
-
   private _container: HTMLElement;
   private _positionsContainers: { [key in ControlPositions]: HTMLElement | null } = {
     'bottom-left': null,
@@ -53,7 +52,7 @@ export class PanelContainerElement {
     element.className = 'openlayers-control-container';
 
     const positions: ControlPositions[] = ['top-right', 'top-left', 'bottom-right', 'bottom-left'];
-    positions.forEach((x) => {
+    positions.forEach(x => {
       const positionContainer = this._createPositionContainer(x);
       this._positionsContainers[x] = positionContainer;
       element.appendChild(positionContainer);

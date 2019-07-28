@@ -117,7 +117,8 @@ export interface MapAdapter<M = any, L = any, C = any> {
   addControl<K extends keyof MapControls>(
     controlName: K | any,
     position: ControlPositions,
-    options?: MapControls[K]): any;
+    options?: MapControls[K]
+  ): any;
   removeControl(control: any): void;
 
   onMapClick(evt: any): void;

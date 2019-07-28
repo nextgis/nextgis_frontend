@@ -68,7 +68,6 @@ const OPTIONS: MapOptions = {
  * @class WebMap
  */
 export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEvents> {
-
   static keys: Keys = new Keys();
   static utils = {
     detectGeometryType,
@@ -260,7 +259,7 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
   }
 
   onLoad(event: keyof WebMapEvents = 'create'): Promise<this> {
-    return new Promise((res) => {
+    return new Promise(res => {
       if (this.getEventStatus(event)) {
         res(this);
       } else {
@@ -272,7 +271,7 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
   }
 
   onMapLoad(cb?: (mapAdapter: MapAdapter) => void): Promise<MapAdapter> {
-    return new Promise((res) => {
+    return new Promise(res => {
       const _resolve = () => {
         const mapAdapter = this.mapAdapter;
         if (cb) {
@@ -311,7 +310,7 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
   }
 
   getActiveBaseLayer() {
-    const visibleLayerBaseLayer = this.getBaseLayers().find((x) => {
+    const visibleLayerBaseLayer = this.getBaseLayers().find(x => {
       return this.isLayerVisible(x);
     });
     if (visibleLayerBaseLayer) {
@@ -371,8 +370,8 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
    */
   async addBaseLayer<K extends keyof LayerAdapters, O extends AdapterOptions = AdapterOptions>(
     adapter: K | Type<LayerAdapters[K]>,
-    options: O | LayerAdaptersOptions[K]): Promise<LayerAdapter> {
-
+    options: O | LayerAdaptersOptions[K]
+  ): Promise<LayerAdapter> {
     return this.layers.addBaseLayer<K, O>(adapter, options);
   }
 
@@ -393,8 +392,8 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
   async addLayer<K extends keyof LayerAdapters, O extends AdapterOptions = AdapterOptions>(
     adapter: K | Type<LayerAdapters[K]> | Promise<Type<LayerAdapters[K]> | undefined>,
     options: O | LayerAdaptersOptions[K],
-    order?: number): Promise<LayerAdapter> {
-
+    order?: number
+  ): Promise<LayerAdapter> {
     return this.layers.addLayer<K, O>(adapter, options, order);
   }
 
@@ -463,8 +462,8 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
   // @onMapLoad()
   async addGeoJsonLayer<K extends keyof LayerAdaptersOptions>(
     opt: GeoJsonAdapterOptions,
-    adapter?: K | Type<LayerAdapter>) {
-
+    adapter?: K | Type<LayerAdapter>
+  ) {
     return this.layers.addGeoJsonLayer(opt, adapter);
   }
 
@@ -661,8 +660,8 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
   async addControl<K extends keyof MapControls>(
     controlDef: K | C,
     position: ControlPositions,
-    options?: MapControls[K]) {
-
+    options?: MapControls[K]
+  ) {
     return this.controls.addControl<K>(controlDef, position, options);
   }
 
@@ -674,7 +673,6 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
   }
 
   private async _setupMap() {
-
     await this.mapAdapter.create(this.options);
     this._zoomToInitialExtent();
 
@@ -726,23 +724,14 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
         }
       }
     }
-
   }
 
   private _addEventsListeners(): void {
     // propagate map click event
-    const events: Array<keyof WebMapEvents> = [
-      'click',
-      'zoomstart',
-      'zoom',
-      'zoomend',
-      'movestart',
-      'move',
-      'moveend'
-    ];
+    const events: Array<keyof WebMapEvents> = ['click', 'zoomstart', 'zoom', 'zoomend', 'movestart', 'move', 'moveend'];
 
-    events.forEach((x) => {
-      this.mapAdapter.emitter.on(x, (data) => {
+    events.forEach(x => {
+      this.mapAdapter.emitter.on(x, data => {
         this.emitter.emit(x, data);
       });
     });
@@ -750,5 +739,4 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
       // universal events
     });
   }
-
 }

@@ -21,8 +21,8 @@ export function loadJSON(
   callback: (...args: any[]) => any,
   options: RequestOptions = {},
   error: (reason?: any) => void,
-  onCancel: Array<() => void>) {
-
+  onCancel: Array<() => void>
+) {
   options.method = options.method || 'GET';
   let xhr: XMLHttpRequest;
 
@@ -64,11 +64,11 @@ export function loadJSON(
     }
   };
 
-  xhr.onerror = (er) => {
+  xhr.onerror = er => {
     error(er);
   };
 
-  xhr.upload.onprogress = function (e) {
+  xhr.upload.onprogress = function(e) {
     if (e.lengthComputable) {
       const percentComplete = (e.loaded / e.total) * 100;
       if (options.onProgress) {
@@ -98,7 +98,6 @@ export function loadJSON(
     if (options.data) {
       for (const d in data) {
         data.append(d, data[d]);
-
       }
     }
   } else {

@@ -4,7 +4,6 @@ import { TileLayer as TL } from './TileLayer';
 import { BaseAdapter } from '../BaseAdapter';
 
 export class TileAdapter extends BaseAdapter<TileAdapterOptions, TileLayer> implements BaseLayerAdapter {
-
   addLayer(options: TileAdapterOptions) {
     if (options) {
       const { url, ...opt } = options;
@@ -17,7 +16,7 @@ export class TileAdapter extends BaseAdapter<TileAdapterOptions, TileLayer> impl
         };
         let layer;
         if (opt.headers) {
-          layer = new TL(url, {...tileLayerOptions, headers: opt.headers});
+          layer = new TL(url, { ...tileLayerOptions, headers: opt.headers });
         } else {
           layer = new TileLayer(url, tileLayerOptions);
         }

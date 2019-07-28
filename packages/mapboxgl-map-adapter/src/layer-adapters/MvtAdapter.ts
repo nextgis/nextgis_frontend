@@ -33,7 +33,6 @@ const reversOperations: { [key in Operations]: string } = {
 };
 
 export class MvtAdapter extends VectorAdapter<MvtAdapterOptions> {
-
   select(properties: PropertiesFilter) {
     if (typeof properties !== 'function') {
       this._updateFilter(properties);
@@ -54,19 +53,18 @@ export class MvtAdapter extends VectorAdapter<MvtAdapterOptions> {
 
   protected _getAdditionalLayerOptions() {
     return {
-      'source': {
+      source: {
         type: 'vector',
-        tiles: [this.options.url],
+        tiles: [this.options.url]
       },
       'source-layer': this.options['source-layer']
     };
   }
 
   private _updateFilter(properties?: PropertiesFilter) {
-
     const layers = this.layer;
     if (layers) {
-      this._types.forEach((t) => {
+      this._types.forEach(t => {
         const geomType = typeAliasForFilter[t];
         if (geomType) {
           const geomFilter = ['==', '$type', geomType];
@@ -74,32 +72,21 @@ export class MvtAdapter extends VectorAdapter<MvtAdapterOptions> {
           const selLayerName = this._getSelectionLayerNameFromType(t);
           if (layers.indexOf(selLayerName) !== -1) {
             if (this._selectionName) {
-              const filters = properties ?
-                this._createFilterDefinitions(properties, operationsAliases) : [];
-              this.map.setFilter(selLayerName, [
-                'all',
-                geomFilter,
-                ...filters
-              ]);
+              const filters = properties ? this._createFilterDefinitions(properties, operationsAliases) : [];
+              this.map.setFilter(selLayerName, ['all', geomFilter, ...filters]);
             }
           }
           if (layers.indexOf(layerName) !== -1) {
-            const filters = properties ?
-              this._createFilterDefinitions(properties, reversOperations) : [];
-            this.map.setFilter(layerName, [
-              'all',
-              geomFilter,
-              ...filters
-            ]);
+            const filters = properties ? this._createFilterDefinitions(properties, reversOperations) : [];
+            this.map.setFilter(layerName, ['all', geomFilter, ...filters]);
           }
         }
       });
     }
   }
 
-  private _createFilterDefinitions(
-    filters: PropertiesFilter, _operationsAliases: { [key in Operations]: string }) {
-    return filters.map((x) => {
+  private _createFilterDefinitions(filters: PropertiesFilter, _operationsAliases: { [key in Operations]: string }) {
+    return filters.map(x => {
       const [field, operation, value] = x;
       const operationAlias = _operationsAliases[operation];
       if (operation === 'in' || operation === 'notin') {

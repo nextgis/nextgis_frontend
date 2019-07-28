@@ -13,7 +13,7 @@ import WebMap, {
   LayerDef,
   MapClickEvent,
   LayerAdapter,
-  PropertiesFilter,
+  PropertiesFilter
 } from '@nextgis/webmap';
 import NgwConnector, { ResourceItem, CancelablePromise, FeatureLayersIdentify } from '@nextgis/ngw-connector';
 import { QmsAdapterOptions } from '@nextgis/qms-kit';
@@ -45,7 +45,6 @@ import { Geometry, Feature, FeatureCollection } from 'geojson';
  * ```
  */
 export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEvents> {
-
   static utils = {
     ...WebMap.utils,
     ...NgwKit.utils,
@@ -70,11 +69,8 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
     super(prepareWebMapOptions(mapAdapter, options));
     if (options.connector) {
       this.connector = options.connector;
-    } else {
-      throw Error('No options to NGW connection');
     }
     this.options = deepmerge(OPTIONS, options);
-    this.options.baseUrl = this.connector.options.baseUrl;
     this._createWebMap().then(() => {
       const container = this.getContainer();
       if (container) {
@@ -117,7 +113,8 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
   async addControl<K extends keyof MapControls>(
     controlDef: K | C,
     position: ControlPositions,
-    options?: MapControls[K]) {
+    options?: MapControls[K]
+  ) {
     return super.addControl(controlDef, position, options);
   }
 
@@ -140,9 +137,7 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
    * ```
    */
   @onMapLoad()
-  async addNgwLayer(
-    options: NgwLayerOptions): Promise<ResourceAdapter | undefined> {
-
+  async addNgwLayer(options: NgwLayerOptions): Promise<ResourceAdapter | undefined> {
     if (!options.resourceId) {
       throw new Error('resourceId is required parameter to add NGW layer');
     }
@@ -150,11 +145,11 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
       try {
         const adapter = NgwKit.utils.addNgwLayer(options, this, this.options.baseUrl, this.connector);
 
-        const layer = await this.addLayer(adapter, {
+        const layer = (await this.addLayer(adapter, {
           // TODO: all options into one object
           ...options,
           ...options.adapterOptions
-        }) as ResourceAdapter;
+        })) as ResourceAdapter;
         const id = layer && this.getLayerId(layer);
         if (layer && id) {
           this._ngwLayers[id] = { layer, resourceId: options.resourceId };
@@ -165,25 +160,25 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
               return layer;
             }
           }
-
           this.showLayer(layer);
-          if (options.fit && layer.getExtent) {
-            const extent = await layer.getExtent();
-            if (extent) {
-              this.fitBounds(extent);
-            }
-          }
+          // if (options.fit && layer.getExtent) {
+          //   const extent = await layer.getExtent();
+          //   if (extent) {
+          //     this.fitBounds(extent);
+          //   }
+          // }
         }
 
         return layer;
       } catch (er) {
-        console.error('can\'t add ngw layer', er);
+        console.error("can't add ngw layer", er);
       }
     }
   }
 
   async getNgwLayerFeature<G extends Geometry | null = Geometry>(options: {
-    resourceId: number; featureId: number;
+    resourceId: number;
+    featureId: number;
   }): CancelablePromise<Feature<G>> {
     return NgwKit.utils.getNgwLayerFeature<G>({
       connector: this.connector,
@@ -192,7 +187,8 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
   }
 
   async getNgwLayerFeatures<G extends Geometry | null = Geometry>(options: {
-    resourceId: number; filter?: PropertiesFilter[];
+    resourceId: number;
+    filter?: PropertiesFilter[];
   }): CancelablePromise<FeatureCollection<G>> {
     return NgwKit.utils.getNgwLayerFeatures({
       connector: this.connector,
@@ -202,7 +198,9 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
 
   async getIdentifyGeoJson(identify: FeatureLayersIdentify, multiple = false) {
     return NgwKit.utils.getIdentifyGeoJson({
-      identify, connector: this.connector, multiple
+      identify,
+      connector: this.connector,
+      multiple
     });
   }
 
@@ -218,20 +216,19 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
         return mem && mem.layer;
       } else if (mem.layer.getIdentificationIds) {
         const ids = await mem.layer.getIdentificationIds();
-        if (ids && ids.some((x) => x === id)) {
+        if (ids && ids.some(x => x === id)) {
           return mem.layer;
         }
       }
       if (mem.layer.getDependLayers) {
         const dependLayers = mem.layer.getDependLayers() as WebMapLayerItem[];
-        const dependFit = dependLayers.find((x) => {
+        const dependFit = dependLayers.find(x => {
           return x.item && x.item.parentId === id;
         });
         if (dependFit) {
           return dependFit.layer;
         }
       }
-
     }
   }
 
@@ -269,7 +266,7 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
           item = await this.connector.get('resource.item', null, { id: resourceId });
         }
 
-        NgwKit.utils.getNgwResourceExtent(item, this.connector).then((extent) => {
+        NgwKit.utils.getNgwResourceExtent(item, this.connector).then(extent => {
           if (extent) {
             this.fitBounds(extent);
           }
@@ -305,13 +302,13 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
         qmsId = Number(this.options.qmsId);
       }
       const qmsLayerOptions: QmsAdapterOptions = {
-        qmsId,
+        qmsId
       };
       if (qmsLayerName) {
         qmsLayerOptions.id = qmsLayerName;
       }
 
-      await this.addBaseLayer('QMS', qmsLayerOptions).then((layer) => {
+      await this.addBaseLayer('QMS', qmsLayerOptions).then(layer => {
         this.showLayer(layer);
       });
     }
@@ -321,7 +318,7 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
       appendNgwResources(resources, this.options.webmapId, { fit: true });
     }
     if (this.options.resources && Array.isArray(this.options.resources)) {
-      this.options.resources.forEach((x) => {
+      this.options.resources.forEach(x => {
         appendNgwResources(resources, x);
       });
     }
@@ -338,7 +335,7 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
 
   private _addControls() {
     if (this.options.controls) {
-      this.options.controls.forEach((x) => {
+      this.options.controls.forEach(x => {
         let controlAdapterName = x;
         let controlOptions: ControlOptions = {};
         if (typeof x === 'string' && this.options.controlsOptions) {
@@ -363,13 +360,12 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
       if (layer.getIdentificationIds && layer.options.selectable) {
         promises.push(layer.getIdentificationIds());
       }
-
     }
     const getIds = await Promise.all(promises);
     const ids: number[] = [];
-    getIds.forEach((x) => {
+    getIds.forEach(x => {
       if (x) {
-        x.forEach((y) => ids.push(y));
+        x.forEach(y => ids.push(y));
       }
     });
     if (ids.length) {
@@ -377,17 +373,19 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
       const center = this.getCenter();
       const zoom = this.getZoom();
       if (center && zoom) {
-        const metresPerPixel = 40075016.686 * Math.abs(Math.cos(center[1] * 180 / Math.PI)) / Math.pow(2, zoom + 8);
+        const metresPerPixel = (40075016.686 * Math.abs(Math.cos((center[1] * 180) / Math.PI))) / Math.pow(2, zoom + 8);
         // FIXME: understand the circle creation function
         const radius = pixelRadius * metresPerPixel * 0.0005;
-        return NgwKit.utils.sendIdentifyRequest(ev, {
-          layers: ids,
-          connector: this.connector,
-          radius,
-        }).then((resp) => {
-          this._emitStatusEvent('ngw:select', resp);
-          return resp;
-        });
+        return NgwKit.utils
+          .sendIdentifyRequest(ev, {
+            layers: ids,
+            connector: this.connector,
+            radius
+          })
+          .then(resp => {
+            this._emitStatusEvent('ngw:select', resp);
+            return resp;
+          });
       }
     }
   }

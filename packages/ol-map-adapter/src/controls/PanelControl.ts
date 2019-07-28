@@ -11,7 +11,6 @@ const OPTIONS: PanelControlOptions = {
 };
 
 export class PanelControl extends Control {
-
   private panelContainer: PanelContainerElement;
 
   constructor(options?: PanelControlOptions) {

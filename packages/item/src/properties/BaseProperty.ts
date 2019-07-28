@@ -18,7 +18,6 @@ const EventEmitter = events && events.EventEmitter;
 // }
 
 export abstract class BaseProperty<V = any, O extends ItemBasePropertyOptions<V> = ItemBasePropertyOptions<V>> {
-
   options: O;
 
   // emitter: StrictEventEmitter<EventEmitter, BasePropertyEvents<V, O>> = new EventEmitter();
@@ -129,7 +128,7 @@ export abstract class BaseProperty<V = any, O extends ItemBasePropertyOptions<V>
       value = value !== undefined ? value : this.getValue();
       this.emitter.emit('change', { value, options });
       const parents = this.item.tree.getParents();
-      parents.forEach((x) => {
+      parents.forEach(x => {
         const prop = x.properties && x.properties.property(this.name);
         if (prop) {
           prop.emitter.emit('change-tree', { value, options, item: this.item });

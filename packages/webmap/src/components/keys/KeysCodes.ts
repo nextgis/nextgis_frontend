@@ -60,5 +60,5 @@ export class KeyCodes {
   '[' = 219; // "open bracket";
   '\\' = 220; // "back slash";
   ']' = 221; // "close braket";
-  '\'' = 222; // "single quote"
+  "'" = 222; // "single quote"
 }

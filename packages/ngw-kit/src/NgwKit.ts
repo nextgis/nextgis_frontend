@@ -16,16 +16,12 @@ import {
 
 import { getIdentifyGeoJson } from './utils/identifyUtils';
 
-import {
-  getNgwLayerFeatures,
-  getNgwLayerFeature
-} from './utils/featureLayerUtils';
+import { getNgwLayerFeatures, getNgwLayerFeature } from './utils/featureLayerUtils';
 
 import { NgwKitOptions, WebMapAdapterOptions } from './interfaces';
 import { WebMapLayerAdapter } from './WebMapLayerAdapter';
 
 export class NgwKit implements StarterKit {
-
   static utils = {
     addNgwLayer,
     getNgwResourceExtent,
@@ -73,13 +69,13 @@ export class NgwKit implements StarterKit {
             baseUrl: this.url,
             webMap
           };
-          const layer = await webMap.addLayer(WebMapLayerAdapter, {
+          const layer = (await webMap.addLayer(WebMapLayerAdapter, {
             visibility: true,
             fit: true,
             identification: this.options.identification,
             pixelRadius: this.options.pixelRadius,
             ...options
-          }) as WebMapLayerAdapter;
+          })) as WebMapLayerAdapter;
           return layer;
         }
       }
@@ -93,7 +89,7 @@ export class NgwKit implements StarterKit {
   private _getLayerAdapter() {
     return {
       name: 'WEBMAP',
-      createAdapter: (webmap: WebMap) => Promise.resolve(this._createAdapter(webmap)),
+      createAdapter: (webmap: WebMap) => Promise.resolve(this._createAdapter(webmap))
     };
   }
 
@@ -101,8 +97,9 @@ export class NgwKit implements StarterKit {
     const connector = this.connector;
     const baseUrl = this.url;
     return extendWebMapLayerAdapter({
-      webMap, connector, baseUrl
+      webMap,
+      connector,
+      baseUrl
     });
   }
-
 }

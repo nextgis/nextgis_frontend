@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import Component from 'vue-class-component'
+import Component from 'vue-class-component';
 
 import { findNgwMapParent, propsBinder } from '../utils';
 import { ResourceAdapter } from '@nextgis/ngw-kit';
@@ -20,7 +20,7 @@ import { AdapterOptions } from '@nextgis/webmap';
       type: Object,
       default: () => ({})
     }
-  },
+  }
 })
 export class VueNgwResource extends Vue {
   name = 'vue-ngw-resource';
@@ -70,13 +70,11 @@ export class VueNgwResource extends Vue {
     this.$nextTick(() => {
       this.$emit('ready', this.layer);
     });
-
   }
 
   render() {
     return null;
   }
-
 }
 
 export default VueNgwResource;

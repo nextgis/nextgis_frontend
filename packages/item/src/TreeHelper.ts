@@ -6,7 +6,6 @@ import { Item } from './Item';
 import { filterIn } from './TreeUtil';
 
 export class TreeHelper {
-
   item: Item;
 
   private _children: Item[] = [];
@@ -40,7 +39,7 @@ export class TreeHelper {
 
   // region Child
   find(filterFunc?: (item: Item) => boolean) {
-    return filterIn(this._children, filterFunc, (x) => {
+    return filterIn(this._children, filterFunc, x => {
       return x.tree.getChildren();
     })[0];
   }
@@ -51,7 +50,7 @@ export class TreeHelper {
   }
 
   getDescendants(filterFunc?: (item: Item) => boolean): any[] {
-    return filterIn(this._children, filterFunc, (x) => {
+    return filterIn(this._children, filterFunc, x => {
       return x.tree.getChildren();
     });
   }

@@ -16,15 +16,13 @@ async function createAdapterFromFirstStyle(
   options: NgwLayerOptions,
   webMap: WebMap,
   baseUrl: string,
-  connector: NgwConnector) {
+  connector: NgwConnector
+) {
   const childrenStyles = await connector.get('resource.collection', null, { parent });
   const firstStyle = childrenStyles && childrenStyles[0];
   if (firstStyle) {
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
-    return createAsyncAdapter(
-      { ...options, resourceId: firstStyle.resource.id },
-      webMap, baseUrl, connector
-    );
+    return createAsyncAdapter({ ...options, resourceId: firstStyle.resource.id }, webMap, baseUrl, connector);
   }
 }
 
@@ -32,8 +30,8 @@ export async function createAsyncAdapter(
   options: NgwLayerOptions,
   webMap: WebMap,
   baseUrl: string,
-  connector: NgwConnector): Promise<Type<ResourceAdapter> | undefined> {
-
+  connector: NgwConnector
+): Promise<Type<ResourceAdapter> | undefined> {
   let adapter: Promise<Type<LayerAdapter> | undefined> | undefined;
   let item: ResourceItem;
   try {
@@ -44,7 +42,7 @@ export async function createAsyncAdapter(
       if (options.adapter === 'GEOJSON') {
         const parentOptions: NgwLayerOptions = {
           ...options,
-          resourceId: item.resource.parent.id,
+          resourceId: item.resource.parent.id
         };
         adapter = createGeoJsonAdapter(parentOptions, webMap, connector);
       } else {
@@ -65,7 +63,7 @@ export async function createAsyncAdapter(
       return createAdapterFromFirstStyle(item.resource.id, options, webMap, baseUrl, connector);
     } else if (item.basemap_layer && item.basemap_layer.qms) {
       adapter = Promise.resolve(QmsKit.utils.createQmsAdapter(webMap));
-      adapter.then((x) => {
+      adapter.then(x => {
         if (x && item.basemap_layer && item.basemap_layer.qms) {
           const qms = JSON.parse(item.basemap_layer.qms);
           x.prototype.qms = qms;
@@ -81,7 +79,7 @@ export async function createAsyncAdapter(
     }
   }
   if (adapter) {
-    return adapter.then((x) => {
+    return adapter.then(x => {
       if (x) {
         const resourceAdapter = x as Type<ResourceAdapter>;
         resourceAdapter.prototype.item = item;

@@ -2,22 +2,19 @@ import { MapControl, CreateControlOptions } from '@nextgis/webmap';
 import Control from 'ol/control/Control';
 
 export function createControl(control: MapControl, options: CreateControlOptions = {}): Control {
-
-  const newControl = (function (C) {
-
+  const newControl = (function(C) {
     function NewControl(this: Control) {
-
       const element = document.createElement('div');
-      element.className = (options.addClass ? options.addClass + ' ' : '') +
-      'ol-unselectable' +
-      (options.bar ? ' ol-control' : '') +
-      (options.margin ? ' ol-control-margin' : '');
+      element.className =
+        (options.addClass ? options.addClass + ' ' : '') +
+        'ol-unselectable' +
+        (options.bar ? ' ol-control' : '') +
+        (options.margin ? ' ol-control-margin' : '');
       element.appendChild(control.onAdd());
 
       C.call(this, {
-        element,
+        element
       });
-
     }
 
     if (C) {
@@ -27,11 +24,13 @@ export function createControl(control: MapControl, options: CreateControlOptions
     NewControl.prototype.constructor = NewControl;
 
     NewControl.prototype.handleRotateNorth = function handleRotateNorth() {
-      this.getMap().getView().setRotation(0);
+      this.getMap()
+        .getView()
+        .setRotation(0);
     };
 
     return NewControl;
-  }(Control));
+  })(Control);
   // @ts-ignore
   return new newControl();
   // return control;

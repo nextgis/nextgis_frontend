@@ -7,10 +7,9 @@ export async function createWebMapAdapter(
   options: NgwLayerOptions,
   webMap: WebMap,
   baseUrl: string,
-  connector: NgwConnector): Promise<Type<WebMapLayerAdapter>> {
-
+  connector: NgwConnector
+): Promise<Type<WebMapLayerAdapter>> {
   return class Adapter extends WebMapLayerAdapter {
-
     constructor(map: any) {
       super(map, {
         webMap,

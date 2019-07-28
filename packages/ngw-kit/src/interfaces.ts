@@ -39,7 +39,6 @@ export interface TreeGroup extends TreeItem {
   item_type: 'root' | 'group';
   group_expanded?: boolean;
   children: Array<TreeLayer | TreeGroup>;
-
 }
 
 export interface TreeLayer extends TreeItem {
@@ -68,10 +67,8 @@ export interface NgwLayerOptionsAdditional<AA extends NgwLayerAdapterType = NgwL
   fit?: boolean;
 }
 
-export interface NgwLayerOptions<
-  AA extends NgwLayerAdapterType = NgwLayerAdapterType
-> extends NgwLayerOptionsAdditional<AA> {
-
+export interface NgwLayerOptions<AA extends NgwLayerAdapterType = NgwLayerAdapterType>
+  extends NgwLayerOptionsAdditional<AA> {
   resourceId: number;
   simplification?: number;
 }
@@ -137,7 +134,8 @@ export interface ResourceAdapter<
   M = any,
   L = any,
   O extends GeoJsonAdapterOptions = GeoJsonAdapterOptions,
-  F extends Feature = Feature> extends VectorLayerAdapter<M, L, O, F> {
+  F extends Feature = Feature
+> extends VectorLayerAdapter<M, L, O, F> {
   resourceId: number;
   item?: ResourceItem;
   baseLayer?: boolean;

@@ -104,8 +104,14 @@ export interface RespError {
   serializer: string;
 }
 
-export type AvailableStatus = 'upload' | 'create-resource' | 'create-style' |
-'create-wms' | 'create-wms-connection' | 'create-wms-connected-layer' | 'create-group';
+export type AvailableStatus =
+  | 'upload'
+  | 'create-resource'
+  | 'create-style'
+  | 'create-wms'
+  | 'create-wms-connection'
+  | 'create-wms-connected-layer'
+  | 'create-group';
 
 export interface EmitterStatus {
   status: AvailableStatus;

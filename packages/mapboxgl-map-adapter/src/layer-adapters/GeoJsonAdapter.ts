@@ -4,14 +4,9 @@ import {
   VectorAdapterLayerPaint,
   GetPaintCallback,
   DataLayerFilter,
-  LayerDefinition,
+  LayerDefinition
 } from '@nextgis/webmap';
-import {
-  GeoJsonObject,
-  FeatureCollection,
-  GeometryCollection,
-  GeometryObject,
-} from 'geojson';
+import { GeoJsonObject, FeatureCollection, GeometryCollection, GeometryObject } from 'geojson';
 import { GeoJSONSource } from 'mapbox-gl';
 
 import { TLayer } from '../MapboxglMapAdapter';
@@ -21,7 +16,6 @@ import { detectType, typeAlias, typeAliasForFilter, geometryFilter } from '../ut
 let ID = 0;
 
 export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
-
   selected: boolean = false;
   protected featureIdName = '_rendromId';
   private _features: Feature[] = [];
@@ -45,7 +39,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     let features: Feature[] = [];
     const source = this.map.getSource(this._sourceId) as GeoJSONSource;
     if (cb) {
-      features = this._features = this._features.filter((x) => !cb(x));
+      features = this._features = this._features.filter(x => !cb(x));
     }
     source.setData({ type: 'FeatureCollection', features });
   }
@@ -61,7 +55,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     }
     if (data && type) {
       const features = this.filterGeometries(data, type);
-      features.forEach((x) => {
+      features.forEach(x => {
         // to avoid id = 0 is false
         const rendromId = '_' + ID++;
         x._rendromId = rendromId;
@@ -80,7 +74,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
 
   getLayers() {
     const filtered = this._filteredFeatureIds.length;
-    return this._features.map((feature) => {
+    return this._features.map(feature => {
       let visible = false;
       if (filtered) {
         const id = this._getRendromId(feature);
@@ -108,7 +102,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
 
   getSelected() {
     const features: Array<LayerDefinition<Feature, TLayer>> = [];
-    this._features.forEach((x) => {
+    this._features.forEach(x => {
       const id = this._getRendromId(x);
       if (id && this._selectedFeatureIds.indexOf(id) !== -1) {
         features.push({ feature: x });
@@ -119,7 +113,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
 
   select(findFeatureFun?: (opt: { feature: Feature }) => boolean) {
     if (findFeatureFun) {
-      const features = this._features.filter((x) => findFeatureFun({ feature: x }));
+      const features = this._features.filter(x => findFeatureFun({ feature: x }));
       this._selectFeature(features);
     } else if (!this.selected) {
       this._selectFeature(this._features);
@@ -129,7 +123,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
 
   unselect(findFeatureFun?: (opt: { feature: Feature }) => boolean) {
     if (findFeatureFun) {
-      const features = this._features.filter((x) => findFeatureFun({ feature: x }));
+      const features = this._features.filter(x => findFeatureFun({ feature: x }));
       this._unselectFeature(features);
     } else if (this.selected) {
       this._unselectFeature(this._features);
@@ -139,10 +133,10 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
 
   protected _onAddLayer(sourceId: string) {
     this.map.addSource(sourceId, {
-      'type': 'geojson',
-      'data': {
-        'type': 'FeatureCollection',
-        'features': []
+      type: 'geojson',
+      data: {
+        type: 'FeatureCollection',
+        features: []
       }
     });
   }
@@ -160,8 +154,8 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   protected async _createPaintForType(
     paint: VectorAdapterLayerPaint | GetPaintCallback,
     type: VectorAdapterLayerType,
-    name: string): Promise<any> {
-
+    name: string
+  ): Promise<any> {
     if (typeof paint === 'function') {
       return await this._getPaintFromCallback(paint, type, name);
     } else {
@@ -179,7 +173,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     } else {
       features = [feature];
     }
-    features.forEach((f) => {
+    features.forEach(f => {
       const id = this._getRendromId(f);
       if (id !== undefined) {
         this._selectedFeatureIds.push(id);
@@ -195,7 +189,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     } else {
       features = [feature];
     }
-    features.forEach((f) => {
+    features.forEach(f => {
       const id = this._getRendromId(f);
       if (id !== undefined) {
         const index = this._selectedFeatureIds.indexOf(id);
@@ -209,7 +203,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
 
   private _filter(fun: DataLayerFilter<Feature, TLayer>) {
     this._filteredFeatureIds = [];
-    this._features.forEach((feature) => {
+    this._features.forEach(feature => {
       const ok = fun({ feature });
       const id = this._getRendromId(feature);
       if (ok && id) {
@@ -222,19 +216,20 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   private filterGeometries(data: GeoJsonObject, type: VectorAdapterLayerType): Feature[] {
     let newFeatures: Feature[] = [];
     if (data.type === 'FeatureCollection') {
-      const features = (data as FeatureCollection).features = (data as FeatureCollection).features
-        .filter((f) => geometryFilter(f.geometry.type, type)) as Feature[];
+      const features = ((data as FeatureCollection).features = (data as FeatureCollection).features.filter(f =>
+        geometryFilter(f.geometry.type, type)
+      ) as Feature[]);
       newFeatures = features;
     } else if (data.type === 'Feature') {
       const allow = geometryFilter((data as Feature).geometry.type, type);
       if (!allow) {
         return [];
       }
-      newFeatures.push((data as Feature));
+      newFeatures.push(data as Feature);
     } else if (data.type === 'GeometryCollection') {
       const geomCollection = data as GeometryCollection;
-      geomCollection.geometries = geomCollection.geometries.filter((g) => geometryFilter(g.type, type));
-      newFeatures = geomCollection.geometries.map((x) => {
+      geomCollection.geometries = geomCollection.geometries.filter(g => geometryFilter(g.type, type));
+      newFeatures = geomCollection.geometries.map(x => {
         const f: Feature = { type: 'Feature', geometry: x as GeometryObject, properties: {} };
         return f;
       });
@@ -258,7 +253,6 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
         style['icon-image'] = `{_icon-image-${name}}`;
       } else {
         for (const p in _paint) {
-
           // @ts-ignore
           const toSave = _paint[p];
           if (feature.properties) {
@@ -266,7 +260,6 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
           }
           style[p] = ['get', `_paint_${p}_${name}`];
         }
-
       }
     }
     if ('icon-image' in style) {
@@ -281,7 +274,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     const filteredArray: string[] = [];
 
     if (this._filteredFeatureIds.length) {
-      this._features.forEach((x) => {
+      this._features.forEach(x => {
         const id = this._getRendromId(x);
         if (id !== undefined && this._filteredFeatureIds.indexOf(id) !== -1) {
           if (this._selectedFeatureIds.indexOf(id) !== -1) {
@@ -297,7 +290,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
 
     const layers = this.layer;
     if (layers) {
-      this._types.forEach((t) => {
+      this._types.forEach(t => {
         const geomType = typeAliasForFilter[t];
         if (geomType) {
           const geomFilter = ['==', '$type', geomType];
@@ -320,4 +313,3 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     }
   }
 }
-

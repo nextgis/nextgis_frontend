@@ -20,7 +20,7 @@ export class ImageOverlay extends L.ImageOverlay {
       img.src = '';
       callAjax(
         src,
-        (response) => {
+        response => {
           img.src = URL.createObjectURL(response);
         },
         headers

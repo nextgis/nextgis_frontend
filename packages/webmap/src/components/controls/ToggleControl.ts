@@ -2,8 +2,8 @@ import { ToggleControlOptions, ToggleControl, ButtonControlOptions } from '../..
 
 export function createToggleControl<C = any>(
   createButtonControl: (options: ButtonControlOptions) => C,
-  options: ToggleControlOptions): (C & ToggleControl) {
-
+  options: ToggleControlOptions
+): C & ToggleControl {
   const link = document.createElement('div');
 
   let status = false;
@@ -52,7 +52,7 @@ export function createToggleControl<C = any>(
   setHtml();
 
   function _setClass(addClass: string, impact: boolean) {
-    addClass.split(' ').forEach((x) => {
+    addClass.split(' ').forEach(x => {
       if (impact) {
         link.classList.add(x);
       } else {

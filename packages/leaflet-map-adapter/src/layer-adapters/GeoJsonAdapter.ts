@@ -12,7 +12,8 @@ import {
 } from '@nextgis/webmap';
 import {
   GeoJSON,
-  CircleMarker, GeoJSONOptions,
+  CircleMarker,
+  GeoJSONOptions,
   PathOptions,
   CircleMarkerOptions,
   DivIcon,
@@ -22,7 +23,7 @@ import {
   LatLngExpression,
   LeafletEvent,
   Map,
-  Layer,
+  Layer
 } from 'leaflet';
 import { GeoJsonObject, Feature } from 'geojson';
 import { BaseAdapter } from './BaseAdapter';
@@ -31,7 +32,6 @@ import { detectType, typeAlias, filterGeometries, PAINT } from '../utils/utils';
 type LayerMem = LayerDefinition<Feature>;
 
 export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implements VectorLayerAdapter<Map> {
-
   layer: FeatureGroup;
   selected = false;
 
@@ -66,7 +66,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
   select(findFeatureFun?: DataLayerFilter) {
     if (findFeatureFun) {
       const feature = this._layers.filter(findFeatureFun);
-      feature.forEach((x) => {
+      feature.forEach(x => {
         this._selectLayer(x.layer);
       });
     } else if (!this.selected) {
@@ -80,7 +80,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
   unselect(findFeatureFun?: DataLayerFilter) {
     if (findFeatureFun) {
       const feature = this._layers.filter(findFeatureFun);
-      feature.forEach((x) => {
+      feature.forEach(x => {
         this._unSelectLayer(x.layer);
       });
     } else if (this.selected) {
@@ -92,7 +92,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
   }
 
   getSelected() {
-    return this._selectedLayers.map((x) => {
+    return this._selectedLayers.map(x => {
       return { feature: x.feature, layer: x };
     });
   }
@@ -139,7 +139,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
 
   clearLayer(cb?: (feature: Feature) => boolean) {
     if (cb) {
-      for (let fry = this._layers.length; fry--;) {
+      for (let fry = this._layers.length; fry--; ) {
         const layerMem = this._layers[fry];
         const exist = layerMem.feature && cb(layerMem.feature);
         if (exist) {
@@ -162,7 +162,6 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
     const options = this.options;
     let geoJsonOptions: GeoJSONOptions | undefined;
     if (options) {
-
       if (data) {
         let type: VectorAdapterLayerType;
 
@@ -183,15 +182,14 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
           geoJsonOptions = this.getGeoJsonOptions(options, type);
         }
       }
-      const layer = new GeoJSON(data || undefined, geoJsonOptions);
-      return layer;
+      new GeoJSON(data || undefined, geoJsonOptions);
     }
   }
 
   openPopup(findFeatureFun: DataLayerFilter, options?: PopupOptions) {
     if (findFeatureFun) {
       const feature = this._layers.filter(findFeatureFun);
-      feature.forEach((x) => {
+      feature.forEach(x => {
         this._openPopup(x.layer, options);
       });
     }
@@ -200,7 +198,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
   closePopup(findFeatureFun?: DataLayerFilter) {
     const featuresToClosePopup = findFeatureFun ? this._layers.filter(findFeatureFun) : this._layers;
 
-    featuresToClosePopup.forEach((x) => {
+    featuresToClosePopup.forEach(x => {
       this._closePopup(x.layer);
     });
   }
@@ -208,8 +206,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
   private _openPopup(layer: Layer, options?: PopupOptions) {
     // @ts-ignore
     const feature = layer.feature;
-    const content = (options && options.createPopupContent) ?
-      options.createPopupContent({ layer, feature }) : '';
+    const content = options && options.createPopupContent ? options.createPopupContent({ layer, feature }) : '';
     layer.bindPopup(content).openPopup();
   }
 
@@ -218,7 +215,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
   }
 
   private setPaintEachLayer(paint: GetPaintCallback | VectorAdapterLayerPaint) {
-    this.layer.eachLayer((l) => {
+    this.layer.eachLayer(l => {
       this.setPaint(l, paint);
     });
   }
@@ -253,13 +250,12 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
         ['fillColor', 'fillColor'],
         ['fillOpacity', 'fillOpacity'],
         ['fill', 'fill'],
-        ['weight', 'weight'],
+        ['weight', 'weight']
       ];
-      const aliases: Array<[keyof PathOptions, keyof PathPaint]> = this.type === 'line' ? [
-        ['color', 'strokeColor'],
-        ['opacity', 'strokeOpacity'],
-        ['weight', 'weight'],
-      ] : paintAliases;
+      const aliases: Array<[keyof PathOptions, keyof PathPaint]> =
+        this.type === 'line'
+          ? [['color', 'strokeColor'], ['opacity', 'strokeOpacity'], ['weight', 'weight']]
+          : paintAliases;
 
       const readyPaint: PathOptions & CircleMarkerOptions = {};
 
@@ -292,12 +288,11 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
             const iconOpt = paint(feature);
             const pointToLayer = this.createPaintToLayer(iconOpt as IconOptions);
             return pointToLayer(feature, latLng);
-
           }
         };
       } else {
         lopt = {
-          style: (feature) => {
+          style: feature => {
             if (feature) {
               return this.preparePaint({ ...PAINT, ...paint(feature) });
             } else {
@@ -307,7 +302,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
         };
       }
     } else {
-      lopt = this.createPaintOptions((paint as VectorAdapterLayerPaint), type);
+      lopt = this.createPaintOptions(paint as VectorAdapterLayerPaint, type);
     }
 
     lopt.onEachFeature = (feature: Feature, layer) => {
@@ -362,7 +357,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
 
   private _selectLayer(layer: any) {
     if (this.options && !this.options.multiselect) {
-      this._selectedLayers.forEach((x) => this._unSelectLayer(x));
+      this._selectedLayers.forEach(x => this._unSelectLayer(x));
     }
     this._selectedLayers.push(layer);
     this.selected = true;
@@ -413,7 +408,6 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
       const p: any = PAINT;
       return new CircleMarker(latlng, this.preparePaint({ ...p, ...icon }));
     };
-
   }
 
   private createPaintOptions(paintOptions: VectorAdapterLayerPaint, type: VectorAdapterLayerType): GeoJSONOptions {

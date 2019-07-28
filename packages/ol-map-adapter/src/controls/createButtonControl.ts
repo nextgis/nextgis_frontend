@@ -4,11 +4,8 @@ import { ButtonControlOptions } from '@nextgis/webmap';
 import Control from 'ol/control/Control';
 
 export function createButtonControl(options: ButtonControlOptions): Control {
-
-  const newControl = (function (C) {
-
+  const newControl = (function(C) {
     function NewControl(this: Control) {
-
       const button = document.createElement('button');
       button.className = 'custom-button-control';
       if (typeof options.html === 'string') {
@@ -33,13 +30,14 @@ export function createButtonControl(options: ButtonControlOptions): Control {
     NewControl.prototype.constructor = NewControl;
 
     NewControl.prototype.handleRotateNorth = function handleRotateNorth() {
-      this.getMap().getView().setRotation(0);
+      this.getMap()
+        .getView()
+        .setRotation(0);
     };
 
     return NewControl;
-  }(Control));
+  })(Control);
 
   // @ts-ignore
   return new newControl();
-
 }

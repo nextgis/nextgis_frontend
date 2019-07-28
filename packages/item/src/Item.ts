@@ -16,7 +16,6 @@ try {
 const EventEmitter = events && events.EventEmitter;
 
 export class Item<O extends ItemOptions = ItemOptions> {
-
   options: O = {} as O;
 
   properties: ItemProperties | undefined;
@@ -25,7 +24,7 @@ export class Item<O extends ItemOptions = ItemOptions> {
   emitter = EventEmitter && new EventEmitter();
 
   constructor(options?: O) {
-    this.options = {  ...options } as O;
+    this.options = { ...options } as O;
     this.tree = new TreeHelper(this);
   }
 

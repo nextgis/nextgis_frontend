@@ -65,5 +65,4 @@ export interface QmsBasemap {
   submitter?: string;
 
   updated_at?: Date;
-
 }

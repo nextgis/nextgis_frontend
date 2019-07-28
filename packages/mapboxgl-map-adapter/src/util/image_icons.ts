@@ -13,31 +13,14 @@ interface GetImgOpt {
   pixelRatio?: number;
 }
 
-const defAddImgOpt = {
-  width: 12,
-  height: 12,
-  x: 0,
-  y: 0,
-  sdf: undefined,
-  pixelRatio: 2
-};
-
-export function getImage(svgStr: string, opt: GetImgOpt): Promise<ImageData> {
-  return new Promise((resolve) => {
-    if (canvg) {
-      resolve(getImageData(svgStr, opt));
-    } else {
-      const svgImage = new Image();
-      svgImage.crossOrigin = 'Anonymous';
-      svgImage.src = 'data:image/svg+xml;base64,' + btoa(svgStr);
-
-      svgImage.onload = () => {
-        const imageData = getImageData(svgImage, opt);
-        resolve(imageData);
-      };
-    }
-  });
-}
+// const defAddImgOpt = {
+//   width: 12,
+//   height: 12,
+//   x: 0,
+//   y: 0,
+//   sdf: undefined,
+//   pixelRatio: 2
+// };
 
 // // from /mapbox-gl/src/util/browser.js
 export function getImageData(img: string | HTMLImageElement, opt: GetImgOpt): ImageData {
@@ -54,4 +37,21 @@ export function getImageData(img: string | HTMLImageElement, opt: GetImgOpt): Im
     canvg(canvas, img);
   }
   return context.getImageData(0, 0, opt.width, opt.height);
+}
+
+export function getImage(svgStr: string, opt: GetImgOpt): Promise<ImageData> {
+  return new Promise(resolve => {
+    if (canvg) {
+      resolve(getImageData(svgStr, opt));
+    } else {
+      const svgImage = new Image();
+      svgImage.crossOrigin = 'Anonymous';
+      svgImage.src = 'data:image/svg+xml;base64,' + btoa(svgStr);
+
+      svgImage.onload = () => {
+        const imageData = getImageData(svgImage, opt);
+        resolve(imageData);
+      };
+    }
+  });
 }
