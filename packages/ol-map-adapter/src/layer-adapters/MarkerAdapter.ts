@@ -8,17 +8,15 @@ import { fromLonLat } from 'ol/proj';
 import Map from 'ol/Map';
 
 export class MarkerAdapter implements BaseLayerAdapter {
-
   layer?: VectorLayer;
 
-  constructor(public map: Map, public options: MarkerAdapterOptions) { }
+  constructor(public map: Map, public options: MarkerAdapterOptions) {}
 
   addLayer(options: MarkerAdapterOptions) {
-
     const { lat, lng } = options.latLng;
 
     const point = new Feature({
-      geometry: new Point(fromLonLat([lng, lat])),
+      geometry: new Point(fromLonLat([lng, lat]))
     });
 
     // const icon = new Icon({
@@ -32,11 +30,11 @@ export class MarkerAdapter implements BaseLayerAdapter {
     // }));
 
     const source = new VectorSource({
-      features: [point],
+      features: [point]
     });
 
     const layer = new VectorLayer({
-      source,
+      source
     });
 
     return layer;

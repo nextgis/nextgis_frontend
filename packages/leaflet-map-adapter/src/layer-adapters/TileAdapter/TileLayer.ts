@@ -4,7 +4,6 @@ import { callAjax } from '../layersUtility';
 type TLOptions = TileLayerOptions & { headers: any };
 
 export class TileLayer extends TL {
-
   constructor(urlTemplate: string, options?: TLOptions) {
     super(urlTemplate, options);
   }
@@ -16,7 +15,7 @@ export class TileLayer extends TL {
     const tile = document.createElement('img');
     callAjax(
       url,
-      (response) => {
+      response => {
         tile.src = URL.createObjectURL(response);
         done(null, tile);
       },

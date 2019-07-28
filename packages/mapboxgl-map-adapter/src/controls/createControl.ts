@@ -1,18 +1,15 @@
 import { MapControl, CreateControlOptions } from '@nextgis/webmap';
-import { IControl, Map } from 'mapbox-gl';
+import { IControl } from 'mapbox-gl';
 
 export function createControl(control: MapControl, options: CreateControlOptions = {}): IControl {
-
   class Control implements IControl {
-
     private _container?: HTMLElement;
 
     getDefaultPosition() {
       return 'top-left';
     }
 
-    onAdd(map: Map) {
-
+    onAdd() {
       const element = document.createElement('div');
       const content: HTMLElement = control.onAdd();
       element.classList.add('mapboxgl-ctrl');

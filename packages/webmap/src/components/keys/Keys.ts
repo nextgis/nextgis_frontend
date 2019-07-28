@@ -15,7 +15,6 @@ export interface KeyControl {
 }
 
 export class Keys {
-
   keyCodeAlias = new KeyCodes();
 
   keys: { [keyCode: number]: boolean } = {};

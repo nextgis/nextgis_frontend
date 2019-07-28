@@ -18,10 +18,10 @@ export interface ItemBasePropertyOptions<V> {
 }
 
 export interface ItemPropertyTypes {
-  'boolean': boolean;
-  'string': string;
-  'number': number;
-  'any': any;
+  boolean: boolean;
+  string: string;
+  number: number;
+  any: any;
 }
 
 export interface ItemPropertyBaseConfig<K extends keyof ItemPropertyTypes = any> {
@@ -37,11 +37,11 @@ export interface ItemPropertyConfig<K extends keyof ItemPropertyTypes> extends I
   onSet?(value: ItemPropertyTypes[K], options?: ItemBasePropertyOptions<ItemPropertyTypes[K]>): void;
 }
 
-export interface ICheckOptions<V = boolean> extends ItemBasePropertyOptions<V> {
+export interface CheckOptions<V = boolean> extends ItemBasePropertyOptions<V> {
   label?: string;
 
-  turnOff?: <O = ICheckOptions>(options?: O) => void;
-  turnOn?: <O = ICheckOptions>(options?: O) => void;
+  turnOff?: <O = CheckOptions>(options?: O) => void;
+  turnOn?: <O = CheckOptions>(options?: O) => void;
 }
 
 export interface ItemOptions {
@@ -53,5 +53,3 @@ export interface ChangeEvent<V = any, O extends ItemBasePropertyOptions<V> = Ite
   value: V;
   options: O;
 }
-
-export interface CheckChangeEvent extends ChangeEvent<boolean, ICheckOptions<boolean>> {}

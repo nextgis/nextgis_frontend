@@ -10,11 +10,7 @@ import NgwConnector, { CancelablePromise } from '@nextgis/ngw-connector';
 import { GeoJsonObject } from 'geojson';
 import { getNgwLayerFeatures } from './utils/featureLayerUtils';
 
-export async function createGeoJsonAdapter(
-  options: NgwLayerOptions,
-  webMap: WebMap,
-  connector: NgwConnector) {
-
+export async function createGeoJsonAdapter(options: NgwLayerOptions, webMap: WebMap, connector: NgwConnector) {
   const adapter = webMap.mapAdapter.layerAdapters.GEOJSON as Type<VectorLayerAdapter>;
 
   let _dataPromise: CancelablePromise<any> | undefined;
@@ -34,7 +30,7 @@ export async function createGeoJsonAdapter(
 
   const onLoad = (data: GeoJsonObject) => {
     const geoJsonOptions: GeoJsonAdapterOptions = {
-      data,
+      data
     };
     if (options.id) {
       geoJsonOptions.id = options.id;
@@ -42,7 +38,6 @@ export async function createGeoJsonAdapter(
     return WebMap.utils.updateGeoJsonAdapterOptions(geoJsonOptions);
   };
   return class Adapter extends adapter {
-
     async addLayer(_opt: GeoJsonAdapterOptions) {
       const data = await geoJsonAdapterCb(_opt.propertiesFilter);
       const opt = onLoad(data);
@@ -56,7 +51,7 @@ export async function createGeoJsonAdapter(
     async propertiesFilter(filters: PropertiesFilter, opt?: FilterOptions) {
       abort();
       if (this.filter && _fullDataLoad) {
-        this.filter((e) => {
+        this.filter(e => {
           if (e.feature && e.feature.properties) {
             return WebMap.utils.propertiesFilter(e.feature.properties, filters);
           }
@@ -74,7 +69,9 @@ export async function createGeoJsonAdapter(
     removeFilter() {
       this.propertiesFilter([]);
       if (this.filter) {
-        this.filter(function () { return true; });
+        this.filter(function() {
+          return true;
+        });
       }
     }
   };

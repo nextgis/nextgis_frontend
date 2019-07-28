@@ -14,22 +14,21 @@ import {
   CreateWmsConnectionOptions,
   CreateWmsConnectedLayerOptions,
   EmitterStatus,
-  GroupOptions,
+  GroupOptions
 } from './interfaces';
 
 type ImageTypes = 'image/tif' | 'image/tiff' | '.tif';
 
 const imageTypesAccept: { [format: string]: ImageTypes[] } = {
-  tiff: ['image/tif', 'image/tiff', '.tif'],
+  tiff: ['image/tif', 'image/tiff', '.tif']
 };
 
 export class NgwUploader {
-
   options: NgwUploadOptions = {
     baseUrl: '',
     inputOptions: {
-      html: 'Upload file',
-    },
+      html: 'Upload file'
+    }
   };
 
   emitter = new EventEmitter();
@@ -95,7 +94,7 @@ export class NgwUploader {
   uploadRaster(file: File, options: RasterUploadOptions): Promise<any> | undefined {
     const fileUpload = this.fileUpload(file, options);
     if (fileUpload) {
-      return fileUpload.then((meta) => {
+      return fileUpload.then(meta => {
         if (meta) {
           let name = options.name || meta.name;
           if (options.createName) {
@@ -121,12 +120,11 @@ export class NgwUploader {
 
   @evented({ status: 'create-group', template: 'group creation' })
   createGroup(name: string, options: GroupOptions = {}) {
-
     const data = {
       resource: {
         cls: 'resource_group',
         parent: { id: options.parentId !== undefined ? options.parentId : 0 },
-        'display_name': name,
+        display_name: name,
         keyname: options.keyname,
         description: options.description
       }
@@ -137,21 +135,20 @@ export class NgwUploader {
 
   @evented({ status: 'create-resource', template: 'resource creation' })
   createResource(meta: any, name: string, options: RasterUploadOptions) {
-
     const data = {
       resource: {
         cls: 'raster_layer',
-        'display_name': name,
-        parent: { id: options.parentId !== undefined ? options.parentId : 0 },
+        display_name: name,
+        parent: { id: options.parentId !== undefined ? options.parentId : 0 }
       },
-      'raster_layer': {
+      raster_layer: {
         source: {
           id: meta.id,
-          'mime_type': meta.mime_type,
-          size: meta.size,
+          mime_type: meta.mime_type,
+          size: meta.size
         },
-        srs: { id: 3857 },
-      },
+        srs: { id: 3857 }
+      }
     };
 
     return this.connector && this.connector.post('resource.collection', { data, headers: { Accept: '*/*' } });
@@ -164,37 +161,43 @@ export class NgwUploader {
       resource: {
         cls: 'raster_style',
         description: null,
-        'display_name': name + '_style',
+        display_name: name + '_style',
         keyname: null,
         parent: {
-          id: newRes.id,
-        },
-      },
+          id: newRes.id
+        }
+      }
     };
-    return this.connector && this.connector.post('resource.collection', { data: styleData }).then((newStyle) => {
-      // newStyle.name = newStyle.name || name;
-      return {
-        ...newStyle,
-        // FIXME: check `name` exist in response for all resource created
-        name: (newStyle as any).name || name
-      };
-    });
+    return (
+      this.connector &&
+      this.connector.post('resource.collection', { data: styleData }).then(newStyle => {
+        // newStyle.name = newStyle.name || name;
+        return {
+          ...newStyle,
+          // FIXME: check `name` exist in response for all resource created
+          name: (newStyle as any).name || name
+        };
+      })
+    );
   }
 
   @evented({ status: 'create-wms', template: 'wms creation for resource ID {id}' })
   createWms(options: any, name?: string) {
     name = name || options.name || options.id;
-    let layers = options.layers || [{
-      keyname: 'image1',
-      'display_name': name,
-      'resource_id': options.id,
-    }];
+    let layers = options.layers || [
+      {
+        keyname: 'image1',
+        display_name: name,
+        resource_id: options.id
+      }
+    ];
     layers = layers.map((x: any) => {
       return {
         ...{
-          'min_scale_denom': null,
-          'max_scale_denom': null
-        }, ...x
+          min_scale_denom: null,
+          max_scale_denom: null
+        },
+        ...x
       };
     });
     const wmsData = {
@@ -203,14 +206,14 @@ export class NgwUploader {
         parent: {
           id: options.parentId || 0
         },
-        'display_name': 'WMS_' + name,
+        display_name: 'WMS_' + name,
         keyname: null,
         description: null
       },
       resmeta: {
         items: {}
       },
-      'wmsserver_service': {
+      wmsserver_service: {
         layers
       }
     };
@@ -224,14 +227,14 @@ export class NgwUploader {
       resource: {
         cls: 'wmsclient_connection',
         parent: { id: options.parentId !== undefined ? options.parentId : 0 },
-        'display_name': name,
+        display_name: name,
         keyname: null,
         description: null
       },
       resmeta: {
         items: {}
       },
-      'wmsclient_connection': {
+      wmsclient_connection: {
         url: options.url,
         username: options.password,
         password: options.password,
@@ -245,22 +248,22 @@ export class NgwUploader {
   @evented({ status: 'create-wms-connected-layer', template: 'create WMS layer for conected resource ID {id}' })
   createWmsConnectedLayer(options: CreateWmsConnectedLayerOptions, name?: string) {
     name = name || options.name || String(options.id);
-    const wmslayers = options.wmslayers && Array.isArray(options.wmslayers) ?
-      options.wmslayers.join(',') : options.wmslayers;
+    const wmslayers =
+      options.wmslayers && Array.isArray(options.wmslayers) ? options.wmslayers.join(',') : options.wmslayers;
     const wmsData = {
       resource: {
         cls: 'wmsclient_layer',
         parent: {
           id: options.parentId || 0
         },
-        'display_name': options.name,
+        display_name: options.name,
         keyname: null,
         description: null
       },
       resmeta: {
         items: {}
       },
-      'wmsclient_layer': {
+      wmsclient_layer: {
         connection: {
           id: options.id
         },
@@ -269,38 +272,43 @@ export class NgwUploader {
         },
         wmslayers,
         imgformat: options.imgformat || 'image/png',
-        'vendor_params': options.vendor_params
-      },
+        vendor_params: options.vendor_params
+      }
     };
     return this.connector && this.connector.post('resource.collection', { data: wmsData });
   }
 
   @evented({ status: 'upload', template: 'file upload' })
   fileUpload(file: File, options: RasterUploadOptions = {}) {
-    return this.connector && this.connector.post('file_upload.upload', {
-      file,
-      onProgress: (percentComplete) => {
-        const message = percentComplete.toFixed(2) + '% uploaded';
-        if (options.onProgress) {
-          options.onProgress(percentComplete);
-        }
-        const eventProgress: EmitterStatus = {
-          status: 'upload',
-          state: 'progress',
-          message,
-          data: {
-            percentComplete
+    return (
+      this.connector &&
+      this.connector
+        .post('file_upload.upload', {
+          file,
+          onProgress: percentComplete => {
+            const message = percentComplete.toFixed(2) + '% uploaded';
+            if (options.onProgress) {
+              options.onProgress(percentComplete);
+            }
+            const eventProgress: EmitterStatus = {
+              status: 'upload',
+              state: 'progress',
+              message,
+              data: {
+                percentComplete
+              }
+            };
+            this.emitter.emit('status:change', eventProgress);
           }
-        };
-        this.emitter.emit('status:change', eventProgress);
-      },
-    }).then((resp) => {
-      let meta;
-      if (resp && resp.upload_meta) {
-        meta = resp.upload_meta[0];
-      }
-      return meta;
-    });
+        })
+        .then(resp => {
+          let meta;
+          if (resp && resp.upload_meta) {
+            meta = resp.upload_meta[0];
+          }
+          return meta;
+        })
+    );
   }
 
   private async _initialize() {
@@ -339,8 +347,8 @@ export class NgwUploader {
   private _createDialogHtml(
     defAuth: Credentials,
     resolve: (cred: Credentials) => void,
-    reject: (...args: any[]) => void): HTMLElement | undefined {
-
+    reject: (...args: any[]) => void
+  ): HTMLElement | undefined {
     if (defAuth && defAuth.login && defAuth.password) {
       const { login, password } = defAuth;
       const form = document.createElement('div');
@@ -379,13 +387,13 @@ export class NgwUploader {
       };
 
       const addEventListener = () => {
-        [loginElement, passwordElement].forEach((x) => {
-          ['change', 'input'].forEach((y) => x.addEventListener(y, onInputChange));
+        [loginElement, passwordElement].forEach(x => {
+          ['change', 'input'].forEach(y => x.addEventListener(y, onInputChange));
         });
       };
       const removeEventListener = () => {
-        [loginElement, passwordElement].forEach((x) => {
-          ['change', 'input'].forEach((y) => x.removeEventListener(y, onInputChange));
+        [loginElement, passwordElement].forEach(x => {
+          ['change', 'input'].forEach(y => x.removeEventListener(y, onInputChange));
         });
       };
       loginBtn.onclick = () => {
@@ -401,5 +409,4 @@ export class NgwUploader {
       return form;
     }
   }
-
 }

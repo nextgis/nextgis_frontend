@@ -5,16 +5,22 @@ import { CancelablePromise } from './CancelablePromise';
 
 import { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
 import {
-  NgwConnectorOptions, Router,
-  GetRequestItemsResponseMap, RequestOptions,
-  Params, LoadingQueue, UserInfo, Credentials,
-  PyramidRoute, RequestHeaders, PostRequestItemsResponseMap
+  NgwConnectorOptions,
+  Router,
+  GetRequestItemsResponseMap,
+  RequestOptions,
+  Params,
+  LoadingQueue,
+  UserInfo,
+  Credentials,
+  PyramidRoute,
+  RequestHeaders,
+  PostRequestItemsResponseMap
 } from './interfaces';
 import { loadJSON, template } from './utils';
 import { EventEmitter } from 'events';
 
 export class NgwConnector {
-
   emitter = new EventEmitter();
   user?: UserInfo;
   private routeStr = '/api/component/pyramid/route';
@@ -75,21 +81,23 @@ export class NgwConnector {
     };
 
     // Do not use request('auth.current_user') to avoid circular-references
-    return this.makeQuery('/api/component/auth/current_user', {}, options).then((data: UserInfo) => {
-      this.user = data;
-      this.emitter.emit('login', data);
-      return data;
-    }).catch((er) => {
-      this.emitter.emit('login:error', er);
-      throw er;
-    });
+    return this.makeQuery('/api/component/auth/current_user', {}, options)
+      .then((data: UserInfo) => {
+        this.user = data;
+        this.emitter.emit('login', data);
+        return data;
+      })
+      .catch(er => {
+        this.emitter.emit('login:error', er);
+        throw er;
+      });
   }
 
   getAuthorizationHeaders(credentials?: Credentials): RequestHeaders | undefined {
     const client = this.makeClientId(credentials);
     if (client) {
       return {
-        'Authorization': 'Basic ' + client
+        Authorization: 'Basic ' + client
       };
     }
   }
@@ -105,8 +113,8 @@ export class NgwConnector {
   async request<K extends keyof RequestItemsParamsMap>(
     name: K,
     params: (RequestItemsParamsMap[K] | {}) & { [name: string]: any } = {},
-    options?: RequestOptions): CancelablePromise<GetRequestItemsResponseMap[K] | PostRequestItemsResponseMap[K]> {
-
+    options?: RequestOptions
+  ): CancelablePromise<GetRequestItemsResponseMap[K] | PostRequestItemsResponseMap[K]> {
     const apiItems = await this.connect();
     let apiItem = apiItems && apiItems[name];
     if (apiItem) {
@@ -145,14 +153,13 @@ export class NgwConnector {
         throw new Error('request url is not set');
       }
     }
-
   }
 
   post<K extends keyof RequestItemsParamsMap>(
     name: K,
     options?: RequestOptions,
-    params?: RequestItemsParamsMap[K] & { [name: string]: any }): CancelablePromise<PostRequestItemsResponseMap[K]> {
-
+    params?: RequestItemsParamsMap[K] & { [name: string]: any }
+  ): CancelablePromise<PostRequestItemsResponseMap[K]> {
     options = options || {};
     options.method = 'POST';
     options.nocache = true;
@@ -162,19 +169,15 @@ export class NgwConnector {
   get<K extends keyof RequestItemsParamsMap>(
     name: K,
     options?: RequestOptions | undefined | null,
-    params?: RequestItemsParamsMap[K] & { [name: string]: any }): CancelablePromise<GetRequestItemsResponseMap[K]> {
-
+    params?: RequestItemsParamsMap[K] & { [name: string]: any }
+  ): CancelablePromise<GetRequestItemsResponseMap[K]> {
     options = options || {};
     options.method = 'GET';
     options.nocache = true;
     return this.request(name, params, options);
   }
 
-  makeQuery(
-    url: string,
-    params: Params,
-    options: RequestOptions = {}): CancelablePromise<any> {
-
+  makeQuery(url: string, params: Params, options: RequestOptions = {}): CancelablePromise<any> {
     url = (this.options.baseUrl ? this.options.baseUrl : '') + url;
     if (url) {
       if (params) {
@@ -185,16 +188,18 @@ export class NgwConnector {
       if (!this._loadingStatus[url] || options.nocache) {
         this._loadingStatus[url] = true;
 
-        return this._getJson(url, options).then((data) => {
-          this._loadingStatus[url] = false;
-          this._executeLoadingQueue(url, data);
-          return data;
-        }).catch((er) => {
-          this._loadingStatus[url] = false;
-          this._executeLoadingQueue(url, er, true);
-          this.emitter.emit('error', er);
-          throw er;
-        });
+        return this._getJson(url, options)
+          .then(data => {
+            this._loadingStatus[url] = false;
+            this._executeLoadingQueue(url, data);
+            return data;
+          })
+          .catch(er => {
+            this._loadingStatus[url] = false;
+            this._executeLoadingQueue(url, er, true);
+            this.emitter.emit('error', er);
+            throw er;
+          });
       } else {
         this._loadingStatus[url] = false;
         return new CancelablePromise((resolve, reject) => {
@@ -204,29 +209,27 @@ export class NgwConnector {
     } else {
       throw new Error('No `url` parameter set for option ' + name);
     }
-
   }
 
   _setLoadingQueue(name: string, resolve: (...args: any[]) => any, reject: (...args: any[]) => any) {
     this._loadingQueue[name] = this._loadingQueue[name] || {
       name,
-      waiting: [],
+      waiting: []
     };
     this._loadingQueue[name].waiting.push({
       resolve,
       reject,
-      timestamp: new Date(),
+      timestamp: new Date()
     });
   }
 
   _rejectLoadingQueue() {
     for (const q in this._loadingQueue) {
       const queue = this._loadingQueue[q];
-      queue.waiting.forEach((x) => {
+      queue.waiting.forEach(x => {
         x.reject();
       });
       delete this._loadingQueue[q];
-
     }
   }
 
@@ -250,15 +253,18 @@ export class NgwConnector {
   _getJson(url: string, options: RequestOptions): CancelablePromise<any> {
     const onCancel: Array<() => void> = [];
     options.responseType = options.responseType || 'json';
-    return new CancelablePromise((resolve, reject) => {
-      if (this.user) {
-        options = options || {};
-        // options.withCredentials = true;
-        options.headers = this.getAuthorizationHeaders();
+    return new CancelablePromise(
+      (resolve, reject) => {
+        if (this.user) {
+          options = options || {};
+          // options.withCredentials = true;
+          options.headers = this.getAuthorizationHeaders();
+        }
+        loadJSON(url, resolve, options, reject, onCancel);
+      },
+      () => {
+        onCancel.forEach(x => x());
       }
-      loadJSON(url, resolve, options, reject, onCancel);
-    }, () => {
-      onCancel.forEach((x) => x());
-    });
+    );
   }
 }

@@ -8,8 +8,8 @@ import {
 
 function updatePaintOptionFromCallback(
   paint: GetCustomPaintOptions,
-  getPaintFunctions: { [name: string]: GetPaintFunction }): VectorAdapterLayerPaint | undefined {
-
+  getPaintFunctions: { [name: string]: GetPaintFunction }
+): VectorAdapterLayerPaint | undefined {
   if (typeof paint.from === 'function') {
     return paint.from(paint.options);
   } else if (typeof paint.from === 'string' && getPaintFunctions) {
@@ -18,14 +18,13 @@ function updatePaintOptionFromCallback(
       return from(paint.options);
     }
   }
-
 }
 
 export function preparePaint(
   paint: Paint,
   defaultPaint: GeometryPaint,
-  getPaintFunctions: { [name: string]: GetPaintFunction }): Paint {
-
+  getPaintFunctions: { [name: string]: GetPaintFunction }
+): Paint {
   let newPaint: Paint | undefined;
   if (typeof paint === 'function') {
     return (opt: any) => {
@@ -41,15 +40,16 @@ export function preparePaint(
   } else {
     newPaint = { ...paint };
     newPaint.fill = newPaint.fill !== undefined ? newPaint.fill : true;
-    newPaint.stroke = newPaint.stroke !== undefined ?
-      newPaint.stroke : !newPaint.fill || !!(newPaint.strokeColor || newPaint.strokeOpacity);
+    newPaint.stroke =
+      newPaint.stroke !== undefined
+        ? newPaint.stroke
+        : !newPaint.fill || !!(newPaint.strokeColor || newPaint.strokeOpacity);
   }
   if (newPaint) {
     if (typeof newPaint === 'function') {
       return newPaint;
     } else {
       newPaint = { ...defaultPaint, ...newPaint };
-
     }
   } else {
     newPaint = { ...defaultPaint };

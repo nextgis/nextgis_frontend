@@ -6,7 +6,6 @@ export function getIdentifyGeoJson(options: {
   connector: NgwConnector;
   multiple?: boolean;
 }) {
-
   const { identify, connector } = options;
   let params: { resourceId: number; featureId: number } | undefined;
   for (const l in identify) {
@@ -22,7 +21,6 @@ export function getIdentifyGeoJson(options: {
         };
         break;
       }
-
     }
   }
   if (params) {

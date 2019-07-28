@@ -3,17 +3,15 @@ import { BaseAdapter } from './BaseAdapter';
 import { RasterSource } from 'mapbox-gl';
 
 export class TileAdapter extends BaseAdapter<TileAdapterOptions> implements BaseLayerAdapter {
-
   addLayer(options: TileAdapterOptions): string[] {
     options = { ...this.options, ...(options || {}) };
 
     let tiles: string[];
     if (options && options.subdomains) {
-      tiles = options.subdomains.split('').map((x) => {
+      tiles = options.subdomains.split('').map(x => {
         const subUrl = options.url.replace('{s}', x);
         return subUrl;
-      },
-      );
+      });
     } else {
       tiles = [options.url];
     }
@@ -24,23 +22,26 @@ export class TileAdapter extends BaseAdapter<TileAdapterOptions> implements Base
       // show a "url" property. This only applies to tilesets with
       // corresponding TileJSON (such as mapbox tiles).
       tiles,
-      tileSize: 256, // opt && opt.tileSize ||
+      tileSize: 256 // opt && opt.tileSize ||
     };
     if (options.attribution) {
       sourceOptions.attribution = options.attribution;
     }
 
-    this.map.addLayer({
-      id: this._layerId,
-      type: 'raster',
-      layout: {
-        visibility: 'none',
+    this.map.addLayer(
+      {
+        id: this._layerId,
+        type: 'raster',
+        layout: {
+          visibility: 'none'
+        },
+        source: sourceOptions
+        // TODO: clean remove before options from all existing apps
       },
-      source: sourceOptions,
-      // TODO: clean remove before options from all existing apps
       // @ts-ignore
-    }, options.before);
-    const layer = this.layer = [this._layerId];
+      options.before
+    );
+    const layer = (this.layer = [this._layerId]);
     return layer;
   }
 }

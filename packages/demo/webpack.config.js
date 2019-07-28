@@ -1,4 +1,4 @@
-const webpack = require('webpack')
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TSLintPlugin = require('tslint-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
@@ -12,7 +12,6 @@ const entry = './src/index.ts';
 const ASSET_PATH = process.env.ASSET_PATH || '/';
 
 module.exports = (env, argv) => {
-
   const isProd = argv.mode === 'production';
 
   const rules = [
@@ -31,7 +30,7 @@ module.exports = (env, argv) => {
       loader: 'ts-loader',
       exclude: /node_modules/,
       options: {
-        appendTsSuffixTo: [/\.vue$/],
+        appendTsSuffixTo: [/\.vue$/]
       }
     },
     {
@@ -53,38 +52,39 @@ module.exports = (env, argv) => {
     {
       test: /\.(png|woff|woff2|eot|ttf)$/,
       use: {
-        loader: "url-loader",
+        loader: 'url-loader',
         options: {
           limit: 50000,
-          name: "./fonts/[name].[ext]", // Output below ./fonts
-        },
-      },
-    },
-  ].concat(utils.styleLoaders({
-    sourceMap: true,
-    extract: false
-  }));;
+          name: './fonts/[name].[ext]' // Output below ./fonts
+        }
+      }
+    }
+  ].concat(
+    utils.styleLoaders({
+      sourceMap: true,
+      extract: false
+    })
+  );
 
   let plugins = [
-
     new TSLintPlugin({
       files: ['./src/**/*.ts']
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(argv.mode || 'development'),
-      'process.env.EXAMPLES':  JSON.stringify(generateExamples('../'))
+      'process.env.EXAMPLES': JSON.stringify(generateExamples('../'))
     }),
 
     new HtmlWebpackPlugin({
       template: 'src/index.html',
       filename: 'index.html',
-      title: 'NextGIS Frontend',
+      title: 'NextGIS Frontend'
       // favicon: './src/images/favicon.ico',
     }),
     new FaviconsWebpackPlugin('./src/images/logo.png'),
 
     new VueLoaderPlugin(),
-    new VuetifyLoaderPlugin(),
+    new VuetifyLoaderPlugin()
   ];
 
   if (isProd) {
@@ -93,62 +93,64 @@ module.exports = (env, argv) => {
       //   test: /\.js(\?.*)?$/i
       // }),
       // new BundleAnalyzerPlugin()
-    ])
+    ]);
   }
 
-  return [{
-    mode: argv.mode || 'development',
+  return [
+    {
+      mode: argv.mode || 'development',
 
-    devtool: isProd ? '#source-map' : 'eval-source-map',
+      devtool: isProd ? '#source-map' : 'eval-source-map',
 
-    entry,
+      entry,
 
-    plugins,
+      plugins,
 
-    module: {
-      rules
-    },
-
-    output: {
-      filename: '[name]-[hash:7].js',
-      publicPath: ASSET_PATH
-    },
-
-    resolve: {
-      extensions: ['.ts', '.js', '.vue', '.json'],
-      alias: {
-        'vue$': 'vue/dist/vue.esm.js'
-      }
-    },
-    devServer: {
-      contentBase: './dist',
-      historyApiFallback: true,
-      noInfo: true
-    },
-    performance: {
-      hints: false
-    },
-
-    optimization: {
-      runtimeChunk: 'single',
-      splitChunks: {
-        chunks: 'all',
-        maxInitialRequests: Infinity,
-        minSize: 0,
-        cacheGroups: {
-          vendor: {
-            test: /[\\/]node_modules[\\/]/,
-            name(module) {
-              // get the name. E.g. node_modules/packageName/not/this/part.js
-              // or node_modules/packageName
-              const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
-
-              // npm package names are URL-safe, but some servers don't like @ symbols
-              return `npm.${packageName.replace('@', '')}`;
-            },
-          },
-        },
+      module: {
+        rules
       },
-    },
-  }]
-}
+
+      output: {
+        filename: '[name]-[hash:7].js',
+        publicPath: ASSET_PATH
+      },
+
+      resolve: {
+        extensions: ['.ts', '.js', '.vue', '.json'],
+        alias: {
+          vue$: 'vue/dist/vue.esm.js'
+        }
+      },
+      devServer: {
+        contentBase: './dist',
+        historyApiFallback: true,
+        noInfo: true
+      },
+      performance: {
+        hints: false
+      },
+
+      optimization: {
+        runtimeChunk: 'single',
+        splitChunks: {
+          chunks: 'all',
+          maxInitialRequests: Infinity,
+          minSize: 0,
+          cacheGroups: {
+            vendor: {
+              test: /[\\/]node_modules[\\/]/,
+              name(module) {
+                // get the name. E.g. node_modules/packageName/not/this/part.js
+                // or node_modules/packageName
+                const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+
+                // npm package names are URL-safe, but some servers don't like @ symbols
+                return `npm.${packageName.replace('@', '')}`;
+              }
+            }
+          }
+        }
+      }
+    }
+  ];
+};

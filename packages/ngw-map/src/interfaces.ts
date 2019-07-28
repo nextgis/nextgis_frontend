@@ -9,8 +9,7 @@ import {
   // PathPaint,
   // IconOptions,
   MapControls,
-  WebMapEvents,
-
+  WebMapEvents
 } from '@nextgis/webmap';
 import { NgwLayerOptions, ResourceAdapter } from '@nextgis/ngw-kit';
 import NgwConnector, { Credentials, FeatureLayersIdentify } from '@nextgis/ngw-connector';

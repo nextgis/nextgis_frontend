@@ -1,5 +1,5 @@
 import Vue, { VNode, VNodeData, CreateElement } from 'vue';
-import Component from 'vue-class-component'
+import Component from 'vue-class-component';
 import NgwMap from '@nextgis/ngw-map';
 import MapAdapter from '@nextgis/leaflet-map-adapter';
 
@@ -54,7 +54,7 @@ export class VueNgwMap extends Vue {
       staticClass: 'vue-ngw-map',
       staticStyle,
       // 'class': this.classes,
-      attrs: { 'data-app': true },
+      attrs: { 'data-app': true }
       // domProps: { id: this.id }
     };
 

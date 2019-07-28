@@ -2,11 +2,10 @@ import { NavigationControl } from 'mapbox-gl';
 import { ZoomControlOptions } from '@nextgis/webmap';
 
 export class ZoomControl extends NavigationControl {
-
   options: ZoomControlOptions & any;
 
   constructor(options: ZoomControlOptions & any = {}) {
-    options = {...options, showCompass: false };
+    options = { ...options, showCompass: false };
     super(options);
   }
 

@@ -14,29 +14,31 @@ import {
 import { ControlPositions } from './interfaces/MapAdapter';
 
 export class WebMapControls<C = any> {
-
   static controls: { [name: string]: (webMap: WebMap, options?: any) => any } = {
-    'CONTROL': (webMap: WebMap, options: {
-      control: MapControl;
-      options?: CreateControlOptions;
-    }) => {
+    CONTROL: (
+      webMap: WebMap,
+      options: {
+        control: MapControl;
+        options?: CreateControlOptions;
+      }
+    ) => {
       return webMap.createControl(options.control, options.options);
     },
-    'BUTTON': (webMap: WebMap, options: ButtonControlOptions) => {
+    BUTTON: (webMap: WebMap, options: ButtonControlOptions) => {
       return webMap.createButtonControl(options);
     },
-    'TOGGLE': (webMap: WebMap, options: ToggleControlOptions) => {
+    TOGGLE: (webMap: WebMap, options: ToggleControlOptions) => {
       return webMap.createToggleControl(options);
     }
   };
 
-  constructor(private webMap: WebMap) { }
+  constructor(private webMap: WebMap) {}
 
   async addControl<K extends keyof MapControls>(
     controlDef: K | C,
     position: ControlPositions,
-    options?: MapControls[K]) {
-
+    options?: MapControls[K]
+  ) {
     let control: C | undefined;
     if (typeof controlDef === 'string') {
       control = this.getControl(controlDef, options);

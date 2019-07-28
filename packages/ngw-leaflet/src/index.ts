@@ -27,14 +27,15 @@ import LeafletMapAdapter from '@nextgis/leaflet-map-adapter';
  * ```
  */
 export class NgwLeaflet extends NgwMap {
-
   constructor(options: NgwMapOptions) {
     super(new LeafletMapAdapter(), options);
   }
-
 }
 
 export default NgwLeaflet;
 
 // @ts-ignore
-if (window && !window.NgwMap) { window.NgwMap = NgwLeaflet; }
+if (window && !window.NgwMap) {
+  // @ts-ignore
+  window.NgwMap = NgwLeaflet;
+}

@@ -9,7 +9,7 @@ export interface FeatureRequestParams {
 
 const featureRequestParams: FeatureRequestParams = {
   srs: 4326,
-  'geom_format': 'geojson'
+  geom_format: 'geojson'
 };
 
 function _createGeojsonFeature<G extends Geometry | null = Geometry>(item: FeatureItem): Feature<G> {
@@ -30,7 +30,6 @@ export function getNgwLayerFeature<G extends Geometry | null = Geometry>(
     connector: NgwConnector;
   } & FilterOptions
 ): CancelablePromise<Feature<G>> {
-
   const params: FeatureRequestParams & FilterOptions & { [name: string]: any } = {
     ...featureRequestParams
   };
@@ -38,13 +37,15 @@ export function getNgwLayerFeature<G extends Geometry | null = Geometry>(
     params.limit = options.limit;
   }
 
-  return options.connector.get('feature_layer.feature.item', null, {
-    id: options.resourceId,
-    fid: options.featureId,
-    ...params
-  }).then((item) => {
-    return _createGeojsonFeature<G>(item);
-  });
+  return options.connector
+    .get('feature_layer.feature.item', null, {
+      id: options.resourceId,
+      fid: options.featureId,
+      ...params
+    })
+    .then(item => {
+      return _createGeojsonFeature<G>(item);
+    });
 }
 
 export function getNgwLayerFeatures<G extends Geometry | null = Geometry>(
@@ -52,8 +53,8 @@ export function getNgwLayerFeatures<G extends Geometry | null = Geometry>(
     resourceId: number;
     connector: NgwConnector;
     filters?: PropertiesFilter[];
-  } & FilterOptions): CancelablePromise<FeatureCollection<G>> {
-
+  } & FilterOptions
+): CancelablePromise<FeatureCollection<G>> {
   const params: FeatureRequestParams & FilterOptions & { [name: string]: any } = {
     ...featureRequestParams
   };
@@ -65,20 +66,21 @@ export function getNgwLayerFeatures<G extends Geometry | null = Geometry>(
   if (options.limit) {
     params.limit = options.limit;
   }
-  return options.connector.get('feature_layer.feature.collection', null, {
-    id: options.resourceId,
-    ...params
-  }).then((x: FeatureItem[]) => {
-    const features: Array<Feature<G>> = [];
-    x.forEach((y) => {
-      features.push(_createGeojsonFeature(y));
+  return options.connector
+    .get('feature_layer.feature.collection', null, {
+      id: options.resourceId,
+      ...params
+    })
+    .then((x: FeatureItem[]) => {
+      const features: Array<Feature<G>> = [];
+      x.forEach(y => {
+        features.push(_createGeojsonFeature(y));
+      });
+
+      const featureCollection: FeatureCollection<G> = {
+        type: 'FeatureCollection',
+        features
+      };
+      return featureCollection;
     });
-
-    const featureCollection: FeatureCollection<G> = {
-      type: 'FeatureCollection',
-      features
-    };
-    return featureCollection;
-  });
 }
-

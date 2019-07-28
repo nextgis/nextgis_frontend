@@ -1,9 +1,4 @@
-import {
-  VectorAdapterLayerPaint,
-  GetPaintCallback,
-  GeometryPaint,
-  VectorAdapterLayerType
-} from '@nextgis/webmap';
+import { VectorAdapterLayerPaint, GetPaintCallback, GeometryPaint, VectorAdapterLayerType } from '@nextgis/webmap';
 import GeoJSON from 'ol/format/GeoJSON';
 import CircleStyle from 'ol/style/Circle';
 import Fill from 'ol/style/Fill';
@@ -20,13 +15,13 @@ import * as ol from 'ol';
 type OlStyle = Style | Style[];
 
 const typeAlias: { [x: string]: VectorAdapterLayerType } = {
-  'Point': 'circle',
-  'MultiPoint': 'circle',
-  'LineString': 'line',
-  'MultiLineString': 'line',
-  'Polygon': 'fill',
-  'MultiPolygon': 'fill',
-  'Circle': 'circle'
+  Point: 'circle',
+  MultiPoint: 'circle',
+  LineString: 'line',
+  MultiLineString: 'line',
+  Polygon: 'fill',
+  MultiPolygon: 'fill',
+  Circle: 'circle'
 };
 
 export function getFeature(feature: ol.Feature): Feature {
@@ -47,26 +42,18 @@ export function styleFunction(feature: ol.Feature, paint: VectorAdapterLayerPain
     const f: Feature = getFeature(feature);
     return styleFunction(feature, paint(f));
   } else {
-
     const type = feature.getGeometry().getType();
     const style: { stroke?: Stroke; fill?: Fill; image?: any } = {};
     const _type = paint.type;
     if (!_type) {
       const ta = typeAlias[type];
-      paint.type = (ta === 'fill' || ta === 'line') ? 'path' :
-        ('html' in paint || 'className' in paint) ? 'icon' : ta;
+      paint.type = ta === 'fill' || ta === 'line' ? 'path' : 'html' in paint || 'className' in paint ? 'icon' : ta;
     }
     if (paint.type === 'path' || paint.type === 'circle') {
       // const geomPaint = ;
-      const {
-        radius,
-        fill,
-        fillColor,
-        fillOpacity,
-        strokeColor,
-        stroke,
-        strokeOpacity
-      } = { ...paint } as GeometryPaint;
+      const { radius, fill, fillColor, fillOpacity, strokeColor, stroke, strokeOpacity } = {
+        ...paint
+      } as GeometryPaint;
 
       if (fill && fillColor) {
         style.fill = new Fill({
@@ -85,7 +72,6 @@ export function styleFunction(feature: ol.Feature, paint: VectorAdapterLayerPain
         style.image = new CircleStyle({ radius, ...style });
       }
     } else if (paint.type === 'icon') {
-
       const svg = paint.html;
       if (svg) {
         const iconOptions: IconOptions = {
@@ -103,7 +89,6 @@ export function styleFunction(feature: ol.Feature, paint: VectorAdapterLayerPain
 }
 
 export function queryToObject(str: string) {
-
   const dec = decodeURIComponent;
   const qp = str.split('&');
   const ret: { [name: string]: any } = {};
@@ -120,7 +105,8 @@ export function queryToObject(str: string) {
         name = dec(item.slice(0, s));
         val = dec(item.slice(s + 1));
       }
-      if (typeof ret[name] === 'string') { // inline'd type check
+      if (typeof ret[name] === 'string') {
+        // inline'd type check
         ret[name] = [ret[name]];
       }
 
@@ -140,10 +126,9 @@ export function objectToQuery(obj: { [x: string]: any }, prefix?: string): strin
   for (p in obj) {
     const k = prefix ? prefix + '[' + p + ']' : p;
     const v = obj[p];
-    str.push((v !== null && typeof v === 'object') ?
-      objectToQuery(v, k) :
-      encodeURIComponent(k) + '=' + encodeURIComponent(v));
-
+    str.push(
+      v !== null && typeof v === 'object' ? objectToQuery(v, k) : encodeURIComponent(k) + '=' + encodeURIComponent(v)
+    );
   }
   return str.join('&');
 }

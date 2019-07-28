@@ -6,7 +6,6 @@ import { RuntimeParams } from '@nextgis/webmap';
 import { Params, StateData } from './interfaces';
 
 export class UrlRuntimeParams implements RuntimeParams {
-
   private _params: Params = {};
 
   get(name: string): any {
@@ -18,11 +17,11 @@ export class UrlRuntimeParams implements RuntimeParams {
     //   return this._params;
     // }
     const params: Params = {};
-    window.location.href.replace(/[?&]+(\w+)([^&]*)/gi, function (m, key) {
+    window.location.href.replace(/[?&]+(\w+)([^&]*)/gi, function(m, key) {
       params[key] = true;
       return ''; // does not matter
     });
-    window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+    window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
       params[key] = decodeURIComponent(value);
       return ''; // does not matter
     });
@@ -36,8 +35,7 @@ export class UrlRuntimeParams implements RuntimeParams {
       const urlComponent = encodeURIComponent(value);
       const existUrlParam = this.get(name);
       if (existUrlParam) {
-        search = location.search.replace(new RegExp('([?|&]' + name + '=)' + '(.+?)(&|$)'),
-          '$1' + urlComponent + '$3');
+        search = location.search.replace(new RegExp('([?|&]' + name + '=)' + '(.+?)(&|$)'), '$1' + urlComponent + '$3');
       } else if (location.search.length) {
         search = location.search + '&' + name + '=' + urlComponent;
       } else {
@@ -59,7 +57,7 @@ export class UrlRuntimeParams implements RuntimeParams {
     let rtn = sourceUrl.split('?')[0];
     let param: string;
     let paramsArr: string[];
-    const queryString = (sourceUrl.indexOf('?') !== -1) ? sourceUrl.split('?')[1] : '';
+    const queryString = sourceUrl.indexOf('?') !== -1 ? sourceUrl.split('?')[1] : '';
     if (queryString !== '') {
       paramsArr = queryString.split('&');
       for (let i = paramsArr.length - 1; i >= 0; i -= 1) {

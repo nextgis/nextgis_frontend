@@ -5,8 +5,8 @@ export function filterIn<F extends any = any>(
   item: F | F[],
   filterFunc: SelfFilter<F> = (x: F) => !!x,
   relationFunc: RelationFunction<F>,
-  _filtered: F[] = []): F[] {
-
+  _filtered: F[] = []
+): F[] {
   let children: F[] = [];
   if (Array.isArray(item)) {
     children = item;

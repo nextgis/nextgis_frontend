@@ -11,7 +11,7 @@ import {
   ButtonControlOptions,
   LayerAdapter,
   LngLatArray,
-  LngLatBoundsArray,
+  LngLatBoundsArray
 } from '@nextgis/webmap';
 import Map from 'ol/Map';
 import View from 'ol/View';
@@ -46,24 +46,20 @@ interface PositionMem {
   zoom: number | undefined;
 }
 
-export type ForEachFeatureAtPixelCallback = (
-  feature: ol.Feature,
-  layer: Layer,
-  evt: ol.MapBrowserPointerEvent) => void;
+export type ForEachFeatureAtPixelCallback = (feature: ol.Feature, layer: Layer, evt: ol.MapBrowserPointerEvent) => void;
 export class OlMapAdapter implements MapAdapter<Map, Layer> {
-
   static layerAdapters = {
     IMAGE: ImageAdapter,
     TILE: TileAdapter,
     // MVT: MvtAdapter,
     OSM: OsmAdapter,
     MARKER: MarkerAdapter,
-    GEOJSON: GeoJsonAdapter,
+    GEOJSON: GeoJsonAdapter
   };
 
   static controlAdapters = {
     ZOOM: Zoom,
-    ATTRIBUTION: Attribution,
+    ATTRIBUTION: Attribution
   };
 
   options: any;
@@ -90,18 +86,18 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     const view = new View({
       center: options.center,
       zoom: options.zoom,
-      projection: this.displayProjection,
+      projection: this.displayProjection
     });
 
     const defOpt: OlMapOptions = {
       // logo: false,
       controls: [],
       view,
-      layers: [],
+      layers: []
     };
     const mapInitOptions: OlMapOptions = {
       ...defOpt,
-      target: options.target,
+      target: options.target
       // logo: options.logo,
     };
 
@@ -163,11 +159,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
 
   fit(e: LngLatBoundsArray) {
     if (this._olView) {
-      const toExtent = transformExtent(
-        e,
-        this.lonlatProjection,
-        this.displayProjection,
-      );
+      const toExtent = transformExtent(e, this.lonlatProjection, this.displayProjection);
       this._olView.fit(toExtent);
     }
   }
@@ -228,23 +220,20 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
   }
 
   onMapClick(evt: ol.MapBrowserPointerEvent) {
-    const [lng, lat] = transform(
-      evt.coordinate,
-      this.displayProjection,
-      this.lonlatProjection,
-    );
+    const [lng, lat] = transform(evt.coordinate, this.displayProjection, this.lonlatProjection);
     const latLng = {
-      lat, lng,
+      lat,
+      lng
     };
 
-    this._mapClickEvents.forEach((x) => {
+    this._mapClickEvents.forEach(x => {
       x(evt);
     });
 
     if (this._forEachFeatureAtPixel.length) {
       if (this.map) {
         this.map.forEachFeatureAtPixel(evt.pixel, (feature, layer) => {
-          this._forEachFeatureAtPixel.forEach((x) => {
+          this._forEachFeatureAtPixel.forEach(x => {
             x(feature as ol.Feature, layer, evt);
           });
         });
@@ -254,7 +243,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     this.emitter.emit('click', {
       latLng,
       pixel: { left: evt.pixel[0], top: evt.pixel[1] },
-      source: evt,
+      source: evt
     });
   }
 
@@ -288,7 +277,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
       const zoom = this.getZoom();
 
       const events: ['movestart', 'moveend'] = ['movestart', 'moveend'];
-      events.forEach((x) => {
+      events.forEach(x => {
         this._positionMem[x] = { center, zoom };
         map.on(x, () => {
           this._emitPositionChangeEvent(x);
@@ -304,7 +293,6 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
           this.emitter.emit('move', this);
         });
       }
-
     }
   }
 

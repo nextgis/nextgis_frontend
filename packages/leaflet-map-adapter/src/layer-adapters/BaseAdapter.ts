@@ -2,7 +2,6 @@ import { BaseLayerAdapter, AdapterOptions } from '@nextgis/webmap';
 import { Map } from 'leaflet';
 
 export class BaseAdapter<O extends AdapterOptions = AdapterOptions, L = any> implements BaseLayerAdapter<Map, L, O> {
-
   layer?: L;
   protected pane: string = 'order-0';
 
@@ -18,7 +17,7 @@ export class BaseAdapter<O extends AdapterOptions = AdapterOptions, L = any> imp
     }
   }
 
-  addLayer(options: O): L | Promise<L> | undefined {
+  addLayer(_options: O): L | Promise<L> | undefined {
     return undefined;
   }
 }

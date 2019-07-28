@@ -11,7 +11,7 @@ import {
   LayerAdapter,
   LngLatArray,
   LngLatBoundsArray,
-  WebMapEvents,
+  WebMapEvents
 } from '@nextgis/webmap';
 import { Map, Control, Layer, ControlPosition, LeafletMouseEvent, GridLayer } from 'leaflet';
 import { EventEmitter } from 'events';
@@ -29,11 +29,10 @@ export interface LeafletMapAdapterOptions extends MapOptions {
 export type Type<T> = new (...args: any[]) => T;
 
 export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
-
   static layerAdapters: { [name: string]: Type<LayerAdapter<Map, any, any>> } = {
     IMAGE: ImageAdapter,
     TILE: TileAdapter,
-    GEOJSON: GeoJsonAdapter,
+    GEOJSON: GeoJsonAdapter
     // // MVT: MvtAdapter,
     // OSM: OsmAdapter,
     // MARKER: MarkerAdapter,
@@ -41,7 +40,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
 
   static controlAdapters = {
     ZOOM: Control.Zoom,
-    ATTRIBUTION: AttributionControl,
+    ATTRIBUTION: AttributionControl
   };
 
   options: LeafletMapAdapterOptions = { target: 'map' };
@@ -57,7 +56,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     'zoomend',
     'movestart',
     'move',
-    'moveend',
+    'moveend'
   ];
 
   // create(options: MapOptions = {target: 'map'}) {
@@ -184,7 +183,6 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
 
   setLayerOrder(layer: any, order: number, layers: { [x: string]: LayerAdapter }) {
     // const baseLayers: string[] = [];
-
     // const orderedLayers = Object.keys(layers).filter((x) => {
     //   if (layers[x].options.baseLayer) {
     //     baseLayers.push(x);
@@ -199,11 +197,9 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     //   }
     //   return 0;
     // });
-
     // baseLayers.forEach((x) => {
     //   layers[x].layer.bringToBack();
     // });
-
     // if (layer.setZIndex) {
     //   layer.setZIndex(order);
     // } else {
@@ -229,20 +225,19 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     this.emitter.emit('click', {
       latLng,
       pixel: { left: coord.x, top: coord.y },
-      source: evt,
+      source: evt
     });
   }
 
   private _addMapListeners() {
     const map = this.map;
     if (map) {
-      map.on('click', (evt) => {
+      map.on('click', evt => {
         this.onMapClick(evt as LeafletMouseEvent);
       });
-      this._universalEvents.forEach((e) => {
+      this._universalEvents.forEach(e => {
         map.on(e, () => this.emitter.emit(e, this), map);
       });
     }
   }
-
 }

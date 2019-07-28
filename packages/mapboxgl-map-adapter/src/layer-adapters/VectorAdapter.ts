@@ -4,16 +4,13 @@ import {
   GetPaintCallback,
   IconOptions,
   VectorLayerAdapter,
-  VectorAdapterOptions,
+  VectorAdapterOptions
 } from '@nextgis/webmap';
+import { Feature as F, GeometryObject, Geometry, GeoJsonProperties } from 'geojson';
 import {
-  Feature as F,
-  GeometryObject,
-  Geometry,
-  GeoJsonProperties
-} from 'geojson';
-import {
-  Map, MapLayerMouseEvent, AnySourceData,
+  Map,
+  MapLayerMouseEvent,
+  AnySourceData
   // BackgroundPaint, FillPaint, FillExtrusionPaint, LinePaint, SymbolPaint,
   // RasterPaint, CirclePaint, HeatmapPaint, HillshadePaint,
 } from 'mapbox-gl';
@@ -40,7 +37,6 @@ type MapboxLayerType = 'fill' | 'line' | 'symbol' | 'circle';
 
 export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapterOptions> extends BaseAdapter<O>
   implements VectorLayerAdapter<Map, TLayer, O, Feature> {
-
   selected: boolean = false;
 
   protected featureIdName = 'id';
@@ -62,7 +58,7 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
     options = this.options = { ...this.options, ...(options || {}) };
 
     this.layer = [];
-    const types = this._types = options.type ? [options.type] : this._types;
+    const types = (this._types = options.type ? [options.type] : this._types);
     if (options.paint) {
       this._onAddLayer(this._sourceId);
       // const types = this._types;
@@ -82,8 +78,7 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
           this.layer.push(layer);
           if (options.selectedPaint) {
             const selectionLayer = this._getSelectionLayerNameFromType(t);
-            await this._addLayer(selectionLayer, type,
-              ['all', geomFilter, ['in', this.featureIdName, '']]);
+            await this._addLayer(selectionLayer, type, ['all', geomFilter, ['in', this.featureIdName, '']]);
             this.layer.push(selectionLayer);
           }
         }
@@ -98,7 +93,7 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
   removeLayer() {
     const map = this.map;
     if (this.layer) {
-      this.layer.forEach((layerId) => {
+      this.layer.forEach(layerId => {
         map.removeLayer(layerId);
       });
     }
@@ -109,7 +104,6 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
   }
 
   protected async _updateLayerPaint(type: VectorAdapterLayerType) {
-
     const layerName = this._getLayerNameFromType(type);
 
     if (this.options.paint) {
@@ -147,8 +141,9 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
 
   protected async _createPaintForType(
     paint: VectorAdapterLayerPaint | GetPaintCallback,
-    type: VectorAdapterLayerType, name?: string): Promise<any> {
-
+    type: VectorAdapterLayerType,
+    name?: string
+  ): Promise<any> {
     if (typeof paint !== 'function') {
       const mapboxPaint: any = {};
       const _paint = { ...PAINT, ...(paint || {}) };
@@ -161,7 +156,7 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
         for (const p in _paint) {
           const allowed = allowedByType[type];
           if (allowed) {
-            const allowedType = allowed.find((x) => {
+            const allowedType = allowed.find(x => {
               if (typeof x === 'string') {
                 return x === p;
               } else if (Array.isArray(x)) {
@@ -175,7 +170,6 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
               mapboxPaint[type + '-' + paramName] = _paint[p];
             }
           }
-
         }
         mapboxPaint[type + '-opacity-transition'] = { duration: 0 };
         return mapboxPaint;
@@ -233,7 +227,7 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
       type: mType,
       source: this._sourceId,
       layout: {
-        visibility: 'none',
+        visibility: 'none'
       },
       filter,
       ...this._getAdditionalLayerOptions()
@@ -285,7 +279,7 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
 
   private _addEventsListeners() {
     if (this.layer && this.options && this.options.selectable) {
-      this.layer.forEach((x) => {
+      this.layer.forEach(x => {
         if (this.$onLayerClick) {
           const onLayerClick = this.$onLayerClick;
           this.map.on('click', x, (e: MapLayerMouseEvent) => {
@@ -302,5 +296,4 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
       });
     }
   }
-
 }

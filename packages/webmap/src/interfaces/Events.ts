@@ -14,35 +14,35 @@ export interface WebMapEvents {
   /**
    * @event
    */
-  'create': WebMap;
+  create: WebMap;
   /**
    * @event
    */
-  'click': MapClickEvent;
+  click: MapClickEvent;
   /**
    * @event
    */
-  'zoomstart': MapAdapter;
+  zoomstart: MapAdapter;
   /**
    * @event
    */
-  'zoom': MapAdapter;
+  zoom: MapAdapter;
   /**
    * @event
    */
-  'zoomend': MapAdapter;
+  zoomend: MapAdapter;
   /**
    * @event
    */
-  'movestart': MapAdapter;
+  movestart: MapAdapter;
   /**
    * @event
    */
-  'move': MapAdapter;
+  move: MapAdapter;
   /**
    * @event
    */
-  'moveend': MapAdapter;
+  moveend: MapAdapter;
   /**
    * @event
    */
