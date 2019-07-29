@@ -44,7 +44,7 @@ export interface ButtonControlOptions {
   title?: string;
 }
 
-type HtmlDef = string | HTMLElement;
+export type HtmlDef = string | HTMLElement;
 
 export interface HtmlToggle {
   on: HtmlDef;
@@ -66,7 +66,7 @@ export interface ToggleControlOptions {
 
   title?: string | TitleToggle;
 
-  onClick: (status: boolean) => void;
+  onClick?: (status: boolean) => void;
   getStatus?: () => boolean;
 }
 
