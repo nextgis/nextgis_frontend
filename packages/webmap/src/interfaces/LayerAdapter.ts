@@ -88,7 +88,7 @@ export interface GetCustomPaintOptions {
 
 export type VectorAdapterLayerPaint = CirclePaint | PathPaint | IconOptions | GetCustomPaintOptions;
 
-export type GetPaintCallback = (feature: Feature<any>) => VectorAdapterLayerPaint;
+export type GetPaintCallback<F = Feature> = (feature: F) => VectorAdapterLayerPaint;
 
 export type Paint = VectorAdapterLayerPaint | GetPaintCallback;
 
@@ -291,7 +291,7 @@ export interface VectorLayerAdapter<
   L = any,
   O extends VectorAdapterOptions = VectorAdapterOptions,
   F extends Feature = Feature
-> extends BaseLayerAdapter<M, L, O> {
+  > extends BaseLayerAdapter<M, L, O> {
   selected?: boolean;
 
   getLayers?(): Array<LayerDefinition<F, L>>;
