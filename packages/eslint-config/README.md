@@ -50,15 +50,20 @@ module.exports = {
     rules: [
       {
         enforce: "pre",
-        test: /\.js$/,
-        exclude: /node_modules/,
+        test: /\.(t|j)sx?$/,
         loader: "eslint-loader"
+        exclude: /node_modules/,
       },
       {
         test: /\.js$/,
+        loader: "babel-loader",
         exclude: /node_modules/,
-        loader: "babel-loader"
-      }
+      },
+      {
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/,
+      },
     ]
   }
   // ...
