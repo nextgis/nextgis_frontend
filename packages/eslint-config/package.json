@@ -1,0 +1,36 @@
+{
+  "name": "@nextgis/eslint-config",
+  "version": "0.17.0",
+  "description": "ESLint config for Nextgis Frontend TS and JS projects",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nextgis/nextgisweb_frontend.git"
+  },
+  "keywords": [
+    "eslint",
+    "config"
+  ],
+  "author": "NextGIS",
+  "license": "LGPL-3.0",
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^1.13.0",
+    "@typescript-eslint/parser": "^1.13.0",
+    "eslint": "^6.1.0",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "prettier": "^1.18.2"
+  },
+  "eslintConfig": {
+    "extends": "./index.js"
+  },
+  "scripts": {
+    "mjs": "exit 0",
+    "clean": "exit 0",
+    "dev": "exit 0",
+    "build": "exit 0",
+    "prod": "exit 0",
+    "watch": "exit 0",
+    "test": "eslint index.js"
+  }
+}
