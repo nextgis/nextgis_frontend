@@ -1,74 +1,68 @@
 module.exports = {
-  "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "prettier/@typescript-eslint",
-    "plugin:prettier/recommended"
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'prettier/@typescript-eslint',
+    'plugin:prettier/recommended'
   ],
-  "env": {
-    "browser": true,
-    "node": true,
-    "amd": true,
-    "es6": true
+  env: {
+    browser: true,
+    node: true,
+    amd: true,
+    es6: true
   },
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaVersion": 2017,
-    "sourceType": "module",
-    "project": "./tsconfig.json"
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 2017,
+    sourceType: 'module',
+    project: './tsconfig.json'
   },
-  "plugins": [
-    "@typescript-eslint/eslint-plugin",
-    "prettier"
-  ],
-  "rules": {
-    "indent": "off",
-    "no-useless-catch": "off",
-    "max-len": [
-      "error",
+  plugins: ['@typescript-eslint/eslint-plugin', 'prettier'],
+  rules: {
+    indent: 'off',
+    'no-useless-catch': 'off',
+    'max-len': [
+      'error',
       {
-        "code": 120,
-        "ignoreComments": true,
-        "ignoreTrailingComments": true,
-        "ignoreUrls": true,
-        "ignoreStrings": true,
-        "ignoreTemplateLiterals": true,
+        code: 120,
+        ignoreComments: true,
+        ignoreTrailingComments: true,
+        ignoreUrls: true,
+        ignoreStrings: true,
+        ignoreTemplateLiterals: true
       }
     ],
-    "camelcase": "off",
-    "@typescript-eslint/no-unused-vars": [
+    camelcase: 'off',
+    '@typescript-eslint/no-unused-vars': [
       1,
       {
-        "args": "none"
+        args: 'none'
       }
     ],
-    "@typescript-eslint/camelcase": [
-      "error",
+    '@typescript-eslint/camelcase': [
+      'error',
       {
-        "properties": "never"
+        properties: 'never'
       }
     ],
-    "@typescript-eslint/explicit-member-accessibility": [
-      "error",
+    '@typescript-eslint/explicit-member-accessibility': [
+      'error',
       {
-        "accessibility": "off"
+        accessibility: 'off'
       }
     ],
-    "@typescript-eslint/array-type": [
-      "error",
-      "array-simple"
-    ],
-    "@typescript-eslint/no-explicit-any": 0,
-    "@typescript-eslint/no-var-requires": 0,
-    "@typescript-eslint/no-parameter-properties": 0,
-    "@typescript-eslint/no-object-literal-type-assertion": 0,
-    "@typescript-eslint/explicit-function-return-type": [
+    '@typescript-eslint/array-type': ['error', 'array-simple'],
+    '@typescript-eslint/no-explicit-any': 0,
+    '@typescript-eslint/no-var-requires': 0,
+    '@typescript-eslint/no-parameter-properties': 0,
+    '@typescript-eslint/no-object-literal-type-assertion': 0,
+    '@typescript-eslint/explicit-function-return-type': [
       0,
       {
-        "allowExpressions": true,
-        "allowTypedFunctionExpressions": true,
-        "allowHigherOrderFunctions": true
+        allowExpressions: true,
+        allowTypedFunctionExpressions: true,
+        allowHigherOrderFunctions: true
       }
     ]
   }
-}
+};
