@@ -149,7 +149,7 @@ npm publish --access=public
 Open VSCode `File > Preferences > Settings` JSON view and add this to config:
 
 ```bash
-$ mkdir .vscode && touch .vscode/settings.json
+mkdir .vscode && touch .vscode/settings.json
 ```
 
 ```json
