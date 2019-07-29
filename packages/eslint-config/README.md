@@ -51,18 +51,18 @@ module.exports = {
       {
         enforce: "pre",
         test: /\.(t|j)sx?$/,
-        loader: "eslint-loader"
-        exclude: /node_modules/,
+        loader: "eslint-loader",
+        exclude: /node_modules/
       },
       {
         test: /\.js$/,
         loader: "babel-loader",
-        exclude: /node_modules/,
+        exclude: /node_modules/
       },
       {
         test: /\.tsx?$/,
         loader: 'ts-loader',
-        exclude: /node_modules/,
+        exclude: /node_modules/
       },
     ]
   }
