@@ -1,5 +1,6 @@
-import { VectorAdapterLayerType } from '@nextgis/webmap';
+import { VectorAdapterLayerType, MapClickEvent } from '@nextgis/webmap';
 import { GeoJsonObject, GeoJsonGeometryTypes, FeatureCollection, Feature, GeometryCollection } from 'geojson';
+import { LeafletMouseEvent } from 'leaflet';
 
 export const typeAlias: { [key in GeoJsonGeometryTypes]: VectorAdapterLayerType } = {
   Point: 'circle',
@@ -77,4 +78,14 @@ export function filterGeometries(data: GeoJsonObject, type: VectorAdapterLayerTy
     );
   }
   return data;
+}
+
+export function convertMapClickEvent(evt: LeafletMouseEvent): MapClickEvent {
+  const coord = evt.containerPoint;
+  const latLng = evt.latlng;
+  return {
+    latLng,
+    pixel: { left: coord.x, top: coord.y },
+    source: evt
+  };
 }

@@ -4,6 +4,7 @@
 
 import { GeoJsonObject, Feature } from 'geojson';
 import { LatLng, LngLatBoundsArray, Type } from './BaseTypes';
+import { MapClickEvent } from './MapAdapter';
 
 export type AdapterConstructor = () => Promise<Type<LayerAdapter> | undefined>;
 
@@ -11,6 +12,8 @@ export interface OnLayerClickOptions {
   layer: LayerAdapter;
   selected?: boolean;
   feature?: Feature;
+  event?: MapClickEvent;
+  source?: any;
 }
 
 export interface AdapterOptions {
@@ -291,16 +294,17 @@ export interface VectorLayerAdapter<
   L = any,
   O extends VectorAdapterOptions = VectorAdapterOptions,
   F extends Feature = Feature
-  > extends BaseLayerAdapter<M, L, O> {
+> extends BaseLayerAdapter<M, L, O> {
   selected?: boolean;
 
   getLayers?(): Array<LayerDefinition<F, L>>;
 
   select?(findFeatureCb?: DataLayerFilter<F, L> | PropertiesFilter): void;
   unselect?(findFeatureCb?: DataLayerFilter<F, L> | PropertiesFilter): void;
-  getSelected?(): Array<{ layer?: L; feature?: Feature }>;
+  getSelected?(): Array<LayerDefinition<Feature, L>>;
 
-  filter?(cb: DataLayerFilter<F, L>): void;
+  getFiltered?(): Array<LayerDefinition<Feature, L>>;
+  filter?(cb: DataLayerFilter<F, L>): Array<LayerDefinition<Feature, L>>;
   propertiesFilter?(filters: PropertiesFilter, options?: FilterOptions): void;
   removeFilter?(): void;
 

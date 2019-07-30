@@ -298,7 +298,7 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
    * @param layerDef
    */
   async fitLayer(layerDef: LayerDef) {
-    this.layers.fitLayer(layerDef);
+    return this.layers.fitLayer(layerDef);
   }
 
   /**
@@ -334,8 +334,8 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
   /**
    * Helper method to return added layer object by any definition type.
    */
-  getLayer(layerDef: LayerDef): LayerAdapter | undefined {
-    return this.layers.getLayer(layerDef);
+  getLayer<LA extends LayerAdapter = LayerAdapter>(layerDef: LayerDef): LA | undefined {
+    return this.layers.getLayer<LA>(layerDef);
   }
 
   /**
@@ -566,7 +566,7 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
    * @param filter
    */
   filterLayer(layerDef: LayerDef, filter: DataLayerFilter<Feature, L>) {
-    this.layers.filterLayer(layerDef, filter);
+    return this.layers.filterLayer(layerDef, filter);
   }
 
   propertiesFilter(layerDef: LayerDef, filters: PropertiesFilter, options: FilterOptions) {
