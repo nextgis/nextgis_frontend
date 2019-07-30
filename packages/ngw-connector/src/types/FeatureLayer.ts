@@ -4,12 +4,16 @@ import { GeometryObject } from 'geojson';
  * @module ngw-connector
  */
 
+export interface FeatureLayerFields {
+  [field: string]: string | number | Date | boolean;
+}
+
 export interface LayerFeature {
   id: number;
   label: string;
   layerId: number;
   parent: string;
-  fields: { [field: string]: string | number | Date | boolean };
+  fields: FeatureLayerFields;
 }
 
 export interface FeatureLayersIdentify {
@@ -34,7 +38,7 @@ export interface FeatureItemAttachment {
 export interface FeatureItem {
   id: number;
   geom: string | GeometryObject;
-  fields: { [field: string]: number | string | boolean };
+  fields: FeatureLayerFields;
   extensions: {
     description?: string;
     attachment?: FeatureItemAttachment[];

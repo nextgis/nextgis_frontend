@@ -98,6 +98,20 @@ export interface BasemapResource {
   qms: string;
 }
 
+export interface FeatureLayerField {
+  datatype: 'STRING' | 'REAL';
+  display_name: string;
+  grid_visibility: boolean;
+  id: number;
+  keyname: string;
+  label_field: boolean;
+  typemod?: unknown;
+}
+
+export interface FeatureResource {
+  fields: FeatureLayerField[];
+}
+
 // Ngw api settings
 export interface ResourceItem {
   resource: Resource;
@@ -105,5 +119,6 @@ export interface ResourceItem {
     items: {};
   };
   webmap?: WebmapResource;
+  feature_layer?: FeatureResource;
   basemap_layer?: BasemapResource;
 }

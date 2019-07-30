@@ -21,13 +21,13 @@ import {
   FeatureGroup,
   DomEvent,
   LatLngExpression,
-  LeafletEvent,
   Map,
-  Layer
+  Layer,
+  LeafletMouseEvent
 } from 'leaflet';
 import { GeoJsonObject, Feature } from 'geojson';
 import { BaseAdapter } from './BaseAdapter';
-import { detectType, typeAlias, filterGeometries, PAINT } from '../utils/utils';
+import { detectType, typeAlias, filterGeometries, PAINT, convertMapClickEvent } from '../utils/utils';
 
 type LayerMem = LayerDefinition<Feature>;
 
@@ -41,6 +41,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
 
   private _layers: LayerMem[] = [];
   private _selectedLayers: LayerMem[] = [];
+  private _filteredLayers: LayerMem[] = [];
   private _filterFun?: DataLayerFilter<Feature>;
 
   constructor(map: L.Map, options: GeoJsonAdapterOptions) {
@@ -97,6 +98,10 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
     });
   }
 
+  getFiltered() {
+    return this._filteredLayers;
+  }
+
   filter(fun?: DataLayerFilter) {
     // Some optimization
     this._filterFun = fun;
@@ -105,20 +110,23 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
     if (_map) {
       this.layer.remove();
     }
-
+    const filteredLayers: LayerMem[] = [];
     this._layers.forEach(({ feature, layer }) => {
       if (layer) {
         const ok = fun ? fun({ feature, layer }) : true;
         if (ok) {
           this.layer.addLayer(layer);
+          filteredLayers.push({ feature, layer });
         } else {
           this.layer.removeLayer(layer);
         }
       }
     });
+    this._filteredLayers = filteredLayers;
     if (_map) {
       this.layer.addTo(_map);
     }
+    return this._filteredLayers;
   }
 
   cleanFilter() {
@@ -333,8 +341,9 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
     return lopt;
   }
 
-  private _onLayerClick(e: LeafletEvent) {
-    DomEvent.stopPropagation(e as Event);
+  private _onLayerClick(e: LeafletMouseEvent) {
+    // @ts-ignore
+    DomEvent.stopPropagation(e);
     const layer = e.target;
     let isSelected = this._selectedLayers.indexOf(layer) !== -1;
     if (isSelected) {
@@ -350,7 +359,9 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
       this.options.onLayerClick({
         layer: this,
         feature: layer.feature,
-        selected: isSelected
+        selected: isSelected,
+        event: convertMapClickEvent(e),
+        source: e
       });
     }
   }

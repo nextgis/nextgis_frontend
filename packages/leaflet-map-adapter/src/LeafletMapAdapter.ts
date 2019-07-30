@@ -21,6 +21,7 @@ import { AttributionControl } from './controls/Attribution';
 import { ImageAdapter } from './layer-adapters/ImageAdapter/ImageAdapter';
 import { createControl } from './controls/createControl';
 import { createButtonControl } from './controls/createButtonControl';
+import { convertMapClickEvent } from './utils/utils';
 
 export interface LeafletMapAdapterOptions extends MapOptions {
   id?: string;
@@ -220,13 +221,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   }
 
   onMapClick(evt: LeafletMouseEvent) {
-    const coord = evt.containerPoint;
-    const latLng = evt.latlng;
-    this.emitter.emit('click', {
-      latLng,
-      pixel: { left: coord.x, top: coord.y },
-      source: evt
-    });
+    this.emitter.emit('click', convertMapClickEvent(evt));
   }
 
   private _addMapListeners() {
