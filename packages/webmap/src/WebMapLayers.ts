@@ -12,7 +12,8 @@ import {
   DataLayerFilter,
   OnLayerClickOptions,
   PropertiesFilter,
-  FilterOptions
+  FilterOptions,
+  LayerDefinition
 } from './interfaces/LayerAdapter';
 import { LayerDef, Type } from './interfaces/BaseTypes';
 import { WebMap } from './WebMap';
@@ -64,11 +65,11 @@ export class WebMapLayers<L = any> {
   /**
    * Helper method to return added layer object by any definition type.
    */
-  getLayer(layerDef: LayerDef): LayerAdapter | undefined {
+  getLayer<LA extends LayerAdapter = LayerAdapter>(layerDef: LayerDef): LA | undefined {
     if (typeof layerDef === 'string') {
-      return this._layers[layerDef];
+      return this._layers[layerDef] as LA;
     }
-    return layerDef;
+    return layerDef as LA;
   }
 
   /**
@@ -211,15 +212,15 @@ export class WebMapLayers<L = any> {
           this.showLayer(layerId);
         }
       }
-      if (options.fit && _adapter.getExtent) {
-        const extent = await _adapter.getExtent();
-        if (extent) {
-          this.webMap.fitBounds(extent);
-        }
-      }
       const opacity = options.opacity;
       if (opacity !== undefined && opacity <= 1) {
         this.setLayerOpacity(_adapter, opacity);
+      }
+      if (options.fit && _adapter.getExtent) {
+        const extent = await _adapter.getExtent();
+        if (extent) {
+          await this.webMap.fitBounds(extent);
+        }
       }
       this.webMap.emitter.emit('layer:add', _adapter);
       return _adapter;
@@ -529,12 +530,13 @@ export class WebMapLayers<L = any> {
    * @param layerDef
    * @param filter
    */
-  filterLayer(layerDef: LayerDef, filter: DataLayerFilter<Feature, L>) {
+  filterLayer(layerDef: LayerDef, filter: DataLayerFilter<Feature, L>): Array<LayerDefinition<Feature, L>> {
     const layer = this.getLayer(layerDef);
     const adapter = layer as VectorLayerAdapter;
     if (adapter.filter) {
-      adapter.filter(filter);
+      return adapter.filter(filter);
     }
+    return [];
   }
 
   propertiesFilter(layerDef: LayerDef, filters: PropertiesFilter, options?: FilterOptions) {

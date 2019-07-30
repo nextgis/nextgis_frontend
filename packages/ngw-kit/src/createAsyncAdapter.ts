@@ -72,11 +72,11 @@ export async function createAsyncAdapter(
       });
     }
   } catch (er) {
-    if (options.adapter === 'GEOJSON') {
-      adapter = createGeoJsonAdapter(options, webMap, connector);
-    } else {
-      adapter = createRasterAdapter(options, webMap, baseUrl);
-    }
+    // if (options.adapter === 'GEOJSON') {
+    //   adapter = createGeoJsonAdapter(options, webMap, connector);
+    // } else {
+    //   adapter = createRasterAdapter(options, webMap, baseUrl);
+    // }
   }
   if (adapter) {
     return adapter.then(x => {
