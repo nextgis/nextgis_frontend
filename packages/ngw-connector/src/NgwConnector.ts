@@ -177,7 +177,7 @@ export class NgwConnector {
     return this.request(name, params, options);
   }
 
-  makeQuery(url: string, params: Params, options: RequestOptions = {}): CancelablePromise<any> {
+  makeQuery(url: string, params?: Params, options: RequestOptions = {}): CancelablePromise<any> {
     url = (this.options.baseUrl ? this.options.baseUrl : '') + url;
     if (url) {
       if (params) {
