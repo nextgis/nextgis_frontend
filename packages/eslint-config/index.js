@@ -19,6 +19,7 @@ module.exports = {
   },
   plugins: ['@typescript-eslint/eslint-plugin', 'prettier'],
   rules: {
+    'prefer-const': 2,
     indent: 'off',
     'no-useless-catch': 'off',
     'max-len': [
