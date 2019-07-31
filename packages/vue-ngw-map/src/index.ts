@@ -1,4 +1,4 @@
-import { VueNgwMap } from './VueNgwMap';
+import { VueNgwMap } from './components/VueNgwMap';
 export * from './components/VueNgwResource';
 
 export { VueNgwMap };

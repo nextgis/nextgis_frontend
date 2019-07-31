@@ -2,9 +2,10 @@
  * @module ngw-connector
  */
 
-import { ResourceItem } from './types/ResourceItem';
+import { ResourceItem, FeatureLayerField } from './types/ResourceItem';
 import { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
 import { FeatureLayersIdentify, FeatureItem } from './types/FeatureLayer';
+import { ResourceStoreItem } from './types/ResourceStore';
 
 export interface FileMeta {
   id: string;
@@ -53,7 +54,8 @@ export interface GetRequestItemsResponseMap extends RequestItemKeys {
   'file_upload.upload': FileUploadResp;
   'feature_layer.feature.item': FeatureItem;
   'feature_layer.feature.collection': FeatureItem[];
-  // [x: string]: { [x: string]: any };
+  'feature_layer.store': ResourceStoreItem[];
+  'feature_layer.field': FeatureLayerField[];
 }
 
 export interface CreatedResource {

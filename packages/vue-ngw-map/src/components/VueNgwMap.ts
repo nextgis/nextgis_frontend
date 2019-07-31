@@ -17,12 +17,12 @@ import 'leaflet/dist/leaflet.css';
       default: ''
     },
     qmsId: {
-      type: String,
-      default: ''
+      type: Number,
+      default: null
     },
     webmapId: {
-      type: String,
-      default: ''
+      type: Number,
+      default: null
     }
   }
 })
