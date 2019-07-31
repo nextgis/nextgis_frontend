@@ -80,7 +80,9 @@ export function createToggleControl<C = any>(
     setHtml();
     setTitle();
     setClass();
-    options.onClick(status);
+    if (options.onClick) {
+      options.onClick(status);
+    }
   };
 
   const buttonControl = createButtonControl({

@@ -332,7 +332,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
               this._unSelectLayer(layer);
             });
           } else {
-            layer.on('click', this._onLayerClick, this);
+            layer.on('click', e => this._onLayerClick(e as LeafletMouseEvent), this);
           }
         }
       }

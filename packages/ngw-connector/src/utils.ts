@@ -24,9 +24,8 @@ export function loadJSON(
   onCancel: Array<() => void>
 ) {
   options.method = options.method || 'GET';
-  let xhr: XMLHttpRequest;
 
-  xhr = new XMLHttpRequest();
+  const xhr = new XMLHttpRequest();
   xhr.open(options.method || 'GET', url, true); // true for asynchronous
 
   if (options.responseType === 'blob') {
