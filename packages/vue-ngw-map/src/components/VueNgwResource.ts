@@ -3,13 +3,13 @@ import Component from 'vue-class-component';
 
 import { findNgwMapParent, propsBinder } from '../utils';
 import { ResourceAdapter } from '@nextgis/ngw-kit';
-import { VueNgwMap } from '../VueNgwMap';
+import { VueNgwMap } from './VueNgwMap';
 import { AdapterOptions } from '@nextgis/webmap';
 
 @Component({
   props: {
     resourceId: {
-      type: String,
+      type: Number,
       default: null
     },
     fit: {

@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { VueNgwMap } from './VueNgwMap';
+import { VueNgwMap } from './components/VueNgwMap';
 
 export const capitalizeFirstLetter = (str: string) => {
   if (!str || typeof str.charAt !== 'function') {
