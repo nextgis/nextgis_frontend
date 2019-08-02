@@ -1,40 +1,25 @@
 import Vue, { VNode, VNodeData, CreateElement } from 'vue';
+import { Prop } from 'vue-property-decorator';
 import Component from 'vue-class-component';
 import NgwMap from '@nextgis/ngw-map';
 import MapAdapter from '@nextgis/leaflet-map-adapter';
 
 import 'leaflet/dist/leaflet.css';
+import NgwConnector from '@nextgis/ngw-connector';
 
-@Component({
-  props: {
-    fullFilling: Boolean,
-    connector: {
-      type: Object,
-      default: () => ({})
-    },
-    baseUrl: {
-      type: String,
-      default: ''
-    },
-    qmsId: {
-      type: Number,
-      default: null
-    },
-    webmapId: {
-      type: Number,
-      default: null
-    }
-  }
-})
+@Component
 export class VueNgwMap extends Vue {
+  @Prop({ type: Boolean }) fullFilling!: boolean;
+  @Prop({ type: NgwConnector }) connector!: NgwConnector;
+  @Prop({ type: String }) baseUrl!: string;
+  @Prop({ type: Number }) qmsId!: string;
+  @Prop({ type: String }) webMapId!: string;
   name = 'vue-ngw-map';
-
-  fullFilling!: boolean;
   ngwMap!: NgwMap;
   ready = false;
 
-  async mounted() {
-    await this._setNgwMap();
+  mounted() {
+    this._setNgwMap();
   }
 
   beforeDestroy() {
@@ -61,8 +46,8 @@ export class VueNgwMap extends Vue {
     return this.ready ? h('div', data, this.$slots.default) : h('div', data);
   }
 
-  private async _setNgwMap() {
-    this.ngwMap = await new NgwMap(new MapAdapter(), {
+  private _setNgwMap() {
+    this.ngwMap = new NgwMap(new MapAdapter(), {
       target: this.$el as HTMLElement,
       ...this.$props
     });
