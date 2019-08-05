@@ -48,6 +48,7 @@ export class MvtAdapter extends VectorAdapter<MvtAdapterOptions> {
   async addLayer(options: MvtAdapterOptions): Promise<TLayer> {
     const layer = super.addLayer(options);
     this._updateLayerPaint(this.options.type || 'fill');
+
     return layer;
   }
 
@@ -57,7 +58,7 @@ export class MvtAdapter extends VectorAdapter<MvtAdapterOptions> {
         type: 'vector',
         tiles: [this.options.url]
       },
-      'source-layer': this.options['source-layer']
+      'source-layer': this.options.sourceLayer || this.options['source-layer']
     };
   }
 

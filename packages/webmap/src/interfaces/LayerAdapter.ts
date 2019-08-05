@@ -44,7 +44,7 @@ export interface AdapterOptions {
 export interface MvtAdapterOptions<F extends Feature = Feature> extends VectorAdapterOptions<F> {
   url: string;
   // type?: 'fill' | 'line' | 'circle' | 'point';
-  'source-layer'?: string;
+  sourceLayer?: string;
 }
 
 export type VectorAdapterLayerType = 'fill' | 'circle' | 'line' | 'icon';
@@ -140,6 +140,7 @@ export interface VectorAdapterOptions<F extends Feature = Feature, L = any> exte
    * ```
    */
   selectedPaint?: VectorAdapterLayerPaint | GetPaintCallback;
+  nativePaint?: boolean;
   // selectedPaintDiff?: VectorAdapterLayerPaint;
   /**
    * Determines whether objects are selected by mouse click.
