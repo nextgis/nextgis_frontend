@@ -114,7 +114,12 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
       }
 
       for (const [name, paint] of layers) {
-        const _paint: any = await this._createPaintForType(paint, type);
+        let _paint: any;
+        if (this.options.nativePaint) {
+          _paint = paint;
+        } else {
+          _paint = await this._createPaintForType(paint, type);
+        }
 
         if ('icon-image' in _paint) {
           // If true, the icon will be visible even if it collides with other previously drawn symbols.
@@ -269,7 +274,7 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
       return paint.type;
     } else if (typeof paint === 'function') {
       try {
-        const falsePaint = paint({ type: 'Feature', properties: {}, geometry: {} });
+        const falsePaint = paint({ type: 'Feature', properties: {}, geometry: {} as Geometry });
         return this._detectPaintType(falsePaint);
       } catch (er) {
         //
