@@ -657,15 +657,17 @@ export class WebMapLayers<L = any> {
       }
       return this._onLayerClick(e);
     };
-    if (this.webMap.options.paint) {
-      options.paint = preparePaint(options.paint || {}, this.webMap.options.paint, this.webMap.getPaintFunctions);
-    }
-    if (options.selectedPaint && this.webMap.options.selectedPaint) {
-      options.selectedPaint = preparePaint(
-        options.selectedPaint,
-        this.webMap.options.selectedPaint,
-        this.webMap.getPaintFunctions
-      );
+    if (!options.nativePaint) {
+      if (this.webMap.options.paint) {
+        options.paint = preparePaint(options.paint || {}, this.webMap.options.paint, this.webMap.getPaintFunctions);
+      }
+      if (options.selectedPaint && this.webMap.options.selectedPaint) {
+        options.selectedPaint = preparePaint(
+          options.selectedPaint,
+          this.webMap.options.selectedPaint,
+          this.webMap.getPaintFunctions
+        );
+      }
     }
   }
 }
