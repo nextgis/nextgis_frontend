@@ -21,11 +21,6 @@ const closeBtn = `
 
 export class Dialog implements DialogAdapter {
   static dialogs: Dialog[] = [];
-
-  static clean = () => {
-    Dialog.dialogs.forEach(x => x.destroy());
-  };
-
   options: DialogAdapterOptions = {
     template: `
       <p>This is dialog!</p>
@@ -71,6 +66,10 @@ export class Dialog implements DialogAdapter {
 
     this._addEventsListeners();
   }
+
+  static clean = () => {
+    Dialog.dialogs.forEach(x => x.destroy());
+  };
 
   getContainer() {
     return this._dialog;
