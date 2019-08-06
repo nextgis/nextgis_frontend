@@ -46,7 +46,7 @@ export class MvtAdapter extends VectorAdapter<MvtAdapterOptions> {
   }
 
   async addLayer(options: MvtAdapterOptions): Promise<TLayer> {
-    const layer = super.addLayer(options);
+    const layer = await super.addLayer(options);
     this._updateLayerPaint(this.options.type || 'fill');
 
     return layer;
