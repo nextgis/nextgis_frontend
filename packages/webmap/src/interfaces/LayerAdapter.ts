@@ -179,6 +179,9 @@ export interface VectorAdapterOptions<F extends Feature = Feature, L = any> exte
   popupOptions?: PopupOptions;
   filter?: DataLayerFilter;
   propertiesFilter?: PropertiesFilter;
+
+  labelField?: string;
+
   onLayerClick?(opt: OnLayerClickOptions): Promise<any>;
 }
 
