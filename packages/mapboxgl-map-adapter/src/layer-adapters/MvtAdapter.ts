@@ -58,7 +58,7 @@ export class MvtAdapter extends VectorAdapter<MvtAdapterOptions> {
         type: 'vector',
         tiles: [this.options.url]
       },
-      'source-layer': this.options.sourceLayer || this.options['source-layer']
+      'source-layer': this.options.sourceLayer
     };
   }
 
