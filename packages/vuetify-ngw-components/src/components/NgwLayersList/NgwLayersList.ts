@@ -20,14 +20,16 @@ export class NgwLayersList extends Vue {
 
   selection: string[] = [];
 
+  private _layers: ResourceAdapter[] = [];
   private __updateItems?: () => Promise<void>;
 
   @Watch('selection')
   setVisibleLayers() {
-    const layers = this.ngwMap.getLayers();
-    for (const l in layers) {
-      this.ngwMap.toggleLayer(l, this.selection.indexOf(l) !== -1);
-    }
+    this._layers.forEach(x => {
+      if (x.id) {
+        this.ngwMap.toggleLayer(x, this.selection.indexOf(x.id) !== -1);
+      }
+    });
   }
 
   mounted() {
@@ -66,6 +68,7 @@ export class NgwLayersList extends Vue {
 
   private async updateItems() {
     this.selection = [];
+    this._layers = [];
     const ngwLayers = await this.ngwMap.getNgwLayers();
     this.items = Object.keys(ngwLayers)
       .map(x => ngwLayers[x])
@@ -87,9 +90,10 @@ export class NgwLayersList extends Vue {
         if (webMap) {
           item.children = this._craeteWebMapTree(webMap.root_item.children);
         }
-        if (this.ngwMap.isLayerVisible(x.layer)) {
+        if (this.ngwMap.isLayerVisible(layer)) {
           this.selection.push(item.id);
         }
+        this._layers.push(layer);
         return item;
       });
   }
