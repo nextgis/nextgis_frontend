@@ -2,6 +2,9 @@ import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 import NgwMap from '@nextgis/ngw-map';
 import { ResourceAdapter } from '@nextgis/ngw-kit';
 import { TreeGroup, TreeLayer } from '@nextgis/ngw-connector';
+import { CreateElement, VNode, VNodeData } from 'vue';
+// @ts-ignore
+import { VTreeview } from 'vuetify/lib';
 
 interface VueTreeItem {
   id: string;
@@ -43,6 +46,22 @@ export class NgwLayersList extends Vue {
       this.ngwMap.emitter.off('layer:add', this.__updateItems);
       this.ngwMap.emitter.off('layer:remove', this.__updateItems);
     }
+  }
+
+  render(h: CreateElement): VNode {
+    const data: VNodeData = {
+      props: {
+        value: this.selection
+      },
+      on: {
+        input: (event: any) => {
+          this.selection = event;
+        }
+      },
+      attrs: { items: this.items, selectable: true }
+      // domProps: { id: this.id }
+    };
+    return h(VTreeview, data, this.$slots.default);
   }
 
   private async updateItems() {
