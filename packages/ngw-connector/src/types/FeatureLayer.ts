@@ -5,7 +5,7 @@ import { GeometryObject } from 'geojson';
  */
 
 export interface FeatureLayerFields {
-  [field: string]: string | number | Date | boolean;
+  [field: string]: string | number | Date | boolean | null;
 }
 
 export interface LayerFeature {

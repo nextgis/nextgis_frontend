@@ -15,7 +15,8 @@ import {
   Credentials,
   PyramidRoute,
   RequestHeaders,
-  PostRequestItemsResponseMap
+  PostRequestItemsResponseMap,
+  PatchRequestItemsResponseMap
 } from './interfaces';
 import { loadJSON, template } from './utils';
 import { EventEmitter } from 'events';
@@ -114,7 +115,9 @@ export class NgwConnector {
     name: K,
     params: (RequestItemsParamsMap[K] | {}) & { [name: string]: any } = {},
     options?: RequestOptions
-  ): CancelablePromise<GetRequestItemsResponseMap[K] | PostRequestItemsResponseMap[K]> {
+  ): CancelablePromise<
+    GetRequestItemsResponseMap[K] | PostRequestItemsResponseMap[K] | PatchRequestItemsResponseMap[K]
+  > {
     const apiItems = await this.connect();
     let apiItem = apiItems && apiItems[name];
     if (apiItem) {
@@ -173,6 +176,17 @@ export class NgwConnector {
   ): CancelablePromise<GetRequestItemsResponseMap[K]> {
     options = options || {};
     options.method = 'GET';
+    options.nocache = true;
+    return this.request(name, params, options);
+  }
+
+  patch<K extends keyof RequestItemsParamsMap>(
+    name: K,
+    options?: RequestOptions,
+    params?: RequestItemsParamsMap[K] & { [name: string]: any }
+  ): CancelablePromise<PatchRequestItemsResponseMap[K]> {
+    options = options || {};
+    options.method = 'PATCH';
     options.nocache = true;
     return this.request(name, params, options);
   }

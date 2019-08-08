@@ -70,6 +70,10 @@ export interface PostRequestItemsResponseMap extends RequestItemKeys {
   'feature_layer.identify': FeatureLayersIdentify;
 }
 
+export interface PatchRequestItemsResponseMap extends RequestItemKeys {
+  'feature_layer.feature.collection': FeatureItem;
+}
+
 export interface Credentials {
   login: string;
   password: string;
@@ -90,7 +94,7 @@ export interface RequestHeaders {
 }
 
 export interface RequestOptions {
-  method?: 'POST' | 'GET';
+  method?: 'POST' | 'GET' | 'PATCH';
   data?: any;
   headers?: RequestHeaders;
   withCredentials?: boolean;
