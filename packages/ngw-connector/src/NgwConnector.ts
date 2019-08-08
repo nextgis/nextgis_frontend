@@ -16,7 +16,9 @@ import {
   PyramidRoute,
   RequestHeaders,
   PostRequestItemsResponseMap,
-  PatchRequestItemsResponseMap
+  PatchRequestItemsResponseMap,
+  RequestMethods,
+  RequestItemKeys
 } from './interfaces';
 import { loadJSON, template } from './utils';
 import { EventEmitter } from 'events';
@@ -111,13 +113,11 @@ export class NgwConnector {
     }
   }
 
-  async request<K extends keyof RequestItemsParamsMap>(
+  async request<K extends keyof RequestItemsParamsMap, P extends RequestItemKeys = RequestItemKeys>(
     name: K,
     params: (RequestItemsParamsMap[K] | {}) & { [name: string]: any } = {},
     options?: RequestOptions
-  ): CancelablePromise<
-    GetRequestItemsResponseMap[K] | PostRequestItemsResponseMap[K] | PatchRequestItemsResponseMap[K]
-  > {
+  ): CancelablePromise<P[K]> {
     const apiItems = await this.connect();
     let apiItem = apiItems && apiItems[name];
     if (apiItem) {
@@ -160,13 +160,13 @@ export class NgwConnector {
 
   post<K extends keyof RequestItemsParamsMap>(
     name: K,
-    options?: RequestOptions,
+    options?: RequestOptions<'POST'>,
     params?: RequestItemsParamsMap[K] & { [name: string]: any }
   ): CancelablePromise<PostRequestItemsResponseMap[K]> {
     options = options || {};
     options.method = 'POST';
     options.nocache = true;
-    return this.request(name, params, options);
+    return this.request<K, PostRequestItemsResponseMap>(name, params, options);
   }
 
   get<K extends keyof RequestItemsParamsMap>(
@@ -177,7 +177,7 @@ export class NgwConnector {
     options = options || {};
     options.method = 'GET';
     options.nocache = true;
-    return this.request(name, params, options);
+    return this.request<K, GetRequestItemsResponseMap>(name, params, options);
   }
 
   patch<K extends keyof RequestItemsParamsMap>(
@@ -188,7 +188,7 @@ export class NgwConnector {
     options = options || {};
     options.method = 'PATCH';
     options.nocache = true;
-    return this.request(name, params, options);
+    return this.request<K, PatchRequestItemsResponseMap>(name, params, options);
   }
 
   makeQuery(url: string, params?: Params, options: RequestOptions = {}): CancelablePromise<any> {
