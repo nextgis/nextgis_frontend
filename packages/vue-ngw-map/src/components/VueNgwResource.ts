@@ -1,29 +1,20 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
-
+import { Prop } from 'vue-property-decorator';
 import { findNgwMapParent, propsBinder } from '../utils';
-import { ResourceAdapter } from '@nextgis/ngw-kit';
+import { ResourceAdapter, NgwLayerAdapterType } from '@nextgis/ngw-kit';
 import { VueNgwMap } from './VueNgwMap';
 import { AdapterOptions } from '@nextgis/webmap';
 
-@Component({
-  props: {
-    resourceId: {
-      type: Number,
-      default: null
-    },
-    fit: {
-      type: Boolean,
-      default: false
-    },
-    adapterOptions: {
-      type: Object,
-      default: () => ({})
-    }
-  }
-})
+@Component
 export class VueNgwResource extends Vue {
   name = 'vue-ngw-resource';
+
+  @Prop({ type: Number }) resourceId!: string;
+  @Prop({ type: Boolean, default: false }) fit!: boolean;
+  @Prop({ type: String }) adapter!: NgwLayerAdapterType;
+  @Prop({ type: Object, default: () => ({}) }) adapterOptions!: AdapterOptions;
+
   parentContainer!: VueNgwMap;
 
   layer?: ResourceAdapter;
