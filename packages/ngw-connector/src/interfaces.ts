@@ -39,7 +39,7 @@ export interface Params {
   [name: string]: simple | cbParams;
 }
 
-type RequestItemKeys = { readonly [T in keyof RequestItemsParamsMap]?: { [x: string]: any } };
+export type RequestItemKeys = { readonly [T in keyof RequestItemsParamsMap]?: { [x: string]: any } };
 
 export interface RequestItemsResponseMap {
   GET: GetRequestItemsResponseMap;
@@ -93,8 +93,10 @@ export interface RequestHeaders {
   [header: string]: string | undefined;
 }
 
-export interface RequestOptions {
-  method?: 'POST' | 'GET' | 'PATCH';
+export type RequestMethods = 'POST' | 'GET' | 'PATCH';
+
+export interface RequestOptions<M = RequestMethods> {
+  method?: M;
   data?: any;
   headers?: RequestHeaders;
   withCredentials?: boolean;
