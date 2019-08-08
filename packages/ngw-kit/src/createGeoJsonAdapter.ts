@@ -39,7 +39,10 @@ export async function createGeoJsonAdapter(options: NgwLayerOptions, webMap: Web
   };
   return class Adapter extends adapter {
     async addLayer(_opt: GeoJsonAdapterOptions) {
-      const data = await geoJsonAdapterCb(_opt.propertiesFilter);
+      let data = [];
+      if (!_opt.data) {
+        data = await geoJsonAdapterCb(_opt.propertiesFilter);
+      }
       const opt = onLoad(data);
       return super.addLayer({ ..._opt, ...opt });
     }
