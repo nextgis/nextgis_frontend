@@ -15,9 +15,9 @@ interface VueElement extends Vue {
 export function propsBinder(vueElement: VueElement, props: Record<string, any>) {
   for (const key in props) {
     const setMethodName = 'set' + capitalizeFirstLetter(key);
-    const prop = props[key];
-    const deepValue = prop.type === Object || prop.type === Array || Array.isArray(prop.type);
-    if (prop && vueElement[setMethodName]) {
+    if (key in props && vueElement[setMethodName]) {
+      const prop = props[key];
+      const deepValue = (prop && prop.type === Object) || prop.type === Array || Array.isArray(prop.type);
       vueElement.$watch(
         key,
         (newVal, oldVal) => {
