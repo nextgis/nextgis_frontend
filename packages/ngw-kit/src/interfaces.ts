@@ -147,4 +147,9 @@ export interface ResourceAdapter<
   getIdentificationIds(): Promise<number[] | undefined>;
 }
 
-export type VectorResourceAdapter = ResourceAdapter & VectorLayerAdapter;
+export type VectorResourceAdapter<
+  M = any,
+  L = any,
+  O extends GeoJsonAdapterOptions = GeoJsonAdapterOptions,
+  F extends Feature = Feature
+> = ResourceAdapter<M, L, O, F> & VectorLayerAdapter<M, L, O, F>;
