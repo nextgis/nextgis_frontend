@@ -35,7 +35,10 @@ export class UrlRuntimeParams implements RuntimeParams {
       const urlComponent = encodeURIComponent(value);
       const existUrlParam = this.get(name);
       if (existUrlParam) {
-        search = location.search.replace(new RegExp('([?|&]' + name + '=)' + '(.+?)(&|$)'), '$1' + urlComponent + '$3');
+        search = location.search.replace(
+          new RegExp('([?|&]' + name + '=)' + '(.+?)(&|$)'),
+          '$1' + urlComponent + '$3'
+        );
       } else if (location.search.length) {
         search = location.search + '&' + name + '=' + urlComponent;
       } else {

@@ -17,7 +17,6 @@ import {
   RequestHeaders,
   PostRequestItemsResponseMap,
   PatchRequestItemsResponseMap,
-  RequestMethods,
   RequestItemKeys
 } from './interfaces';
 import { loadJSON, template } from './utils';
@@ -225,7 +224,11 @@ export class NgwConnector {
     }
   }
 
-  _setLoadingQueue(name: string, resolve: (...args: any[]) => any, reject: (...args: any[]) => any) {
+  _setLoadingQueue(
+    name: string,
+    resolve: (...args: any[]) => any,
+    reject: (...args: any[]) => any
+  ) {
     this._loadingQueue[name] = this._loadingQueue[name] || {
       name,
       waiting: []

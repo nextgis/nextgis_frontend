@@ -17,7 +17,10 @@ export class CancelablePromise<T> implements Promise<T> {
   private _promise?: Promise<T>;
 
   constructor(
-    executor: (resolve: (value?: T | PromiseLike<T>) => void, reject: (reason?: any) => void) => void,
+    executor: (
+      resolve: (value?: T | PromiseLike<T>) => void,
+      reject: (reason?: any) => void
+    ) => void,
     private onCancel?: (...args: any[]) => void
   ) {
     this._promise = new Promise(executor);

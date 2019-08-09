@@ -10,14 +10,23 @@ import NgwConnector, { CancelablePromise } from '@nextgis/ngw-connector';
 import { GeoJsonObject } from 'geojson';
 import { getNgwLayerFeatures } from './utils/featureLayerUtils';
 
-export async function createGeoJsonAdapter(options: NgwLayerOptions, webMap: WebMap, connector: NgwConnector) {
+export async function createGeoJsonAdapter(
+  options: NgwLayerOptions,
+  webMap: WebMap,
+  connector: NgwConnector
+) {
   const adapter = webMap.mapAdapter.layerAdapters.GEOJSON as Type<VectorLayerAdapter>;
 
   let _dataPromise: CancelablePromise<any> | undefined;
   const _fullDataLoad = false;
 
   const geoJsonAdapterCb = async (filters?: PropertiesFilter[], opt?: FilterOptions) => {
-    _dataPromise = getNgwLayerFeatures({ resourceId: options.resourceId, filters, connector, ...opt });
+    _dataPromise = getNgwLayerFeatures({
+      resourceId: options.resourceId,
+      filters,
+      connector,
+      ...opt
+    });
     return await _dataPromise;
   };
 

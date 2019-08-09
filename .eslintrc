@@ -1,5 +1,5 @@
 {
   "extends": [
-    "@nextgis/eslint-config"
+    "./packages/eslint-config/index.js"
   ]
 }

@@ -1,4 +1,8 @@
-import { ToggleControlOptions, ToggleControl, ButtonControlOptions } from '../../interfaces/MapControl';
+import {
+  ToggleControlOptions,
+  ToggleControl,
+  ButtonControlOptions
+} from '../../interfaces/MapControl';
 
 export function createToggleControl<C = any>(
   createButtonControl: (options: ButtonControlOptions) => C,

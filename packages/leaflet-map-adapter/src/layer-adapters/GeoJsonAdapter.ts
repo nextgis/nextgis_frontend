@@ -27,11 +27,18 @@ import {
 } from 'leaflet';
 import { GeoJsonObject, Feature } from 'geojson';
 import { BaseAdapter } from './BaseAdapter';
-import { detectType, typeAlias, filterGeometries, PAINT, convertMapClickEvent } from '../utils/utils';
+import {
+  detectType,
+  typeAlias,
+  filterGeometries,
+  PAINT,
+  convertMapClickEvent
+} from '../utils/utils';
 
 type LayerMem = LayerDefinition<Feature>;
 
-export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implements VectorLayerAdapter<Map> {
+export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
+  implements VectorLayerAdapter<Map> {
   layer: FeatureGroup;
   selected = false;
 
@@ -204,7 +211,9 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
   }
 
   closePopup(findFeatureFun?: DataLayerFilter) {
-    const featuresToClosePopup = findFeatureFun ? this._layers.filter(findFeatureFun) : this._layers;
+    const featuresToClosePopup = findFeatureFun
+      ? this._layers.filter(findFeatureFun)
+      : this._layers;
 
     featuresToClosePopup.forEach(x => {
       this._closePopup(x.layer);
@@ -214,7 +223,8 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
   private _openPopup(layer: Layer, options?: PopupOptions) {
     // @ts-ignore
     const feature = layer.feature;
-    const content = options && options.createPopupContent ? options.createPopupContent({ layer, feature }) : '';
+    const content =
+      options && options.createPopupContent ? options.createPopupContent({ layer, feature }) : '';
     layer.bindPopup(content).openPopup();
   }
 
@@ -285,7 +295,10 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
     return PAINT;
   }
 
-  private getGeoJsonOptions(options: GeoJsonAdapterOptions, type: VectorAdapterLayerType): GeoJSONOptions {
+  private getGeoJsonOptions(
+    options: GeoJsonAdapterOptions,
+    type: VectorAdapterLayerType
+  ): GeoJSONOptions {
     const paint = options.paint;
     let lopt: GeoJSONOptions = {};
 
@@ -421,7 +434,10 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions> implement
     };
   }
 
-  private createPaintOptions(paintOptions: VectorAdapterLayerPaint, type: VectorAdapterLayerType): GeoJSONOptions {
+  private createPaintOptions(
+    paintOptions: VectorAdapterLayerPaint,
+    type: VectorAdapterLayerType
+  ): GeoJSONOptions {
     const geoJsonOptions: GeoJSONOptions = {};
     const paint = (paintOptions && this.preparePaint(paintOptions)) || {};
     if (paintOptions) {

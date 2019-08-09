@@ -5,20 +5,21 @@ export interface Flags {
   isStatic: boolean;
 }
 
-export type KindString = 'External module' |
-  'Class' |
-  'Constructor' |
-  'Property' |
-  'Method' |
-  'Parameter' |
-  'Function' |
-  'Call signature' |
-  'Constructor signature' |
-  'Interface' |
-  'Type literal' |
-  'Index signature' |
-  'Variable' |
-  'Event';
+export type KindString =
+  | 'External module'
+  | 'Class'
+  | 'Constructor'
+  | 'Property'
+  | 'Method'
+  | 'Parameter'
+  | 'Function'
+  | 'Call signature'
+  | 'Constructor signature'
+  | 'Interface'
+  | 'Type literal'
+  | 'Index signature'
+  | 'Variable'
+  | 'Event';
 
 export interface Source {
   fileName: string;
@@ -40,7 +41,6 @@ export interface ApiComment {
 }
 
 export interface ApiItem {
-
   module?: ApiItem;
 
   id: number;
@@ -118,12 +118,13 @@ export interface MethodItem extends SignaturedItem {
   implementationOf: ReferencePropertyType;
 }
 
-export type Property = IntrinsicPropertyType |
-  PropertyUnionType |
-  ReferencePropertyType |
-  TuplePropertyType |
-  TypeOperatorPropertyType |
-  ReflectionType;
+export type Property =
+  | IntrinsicPropertyType
+  | PropertyUnionType
+  | ReferencePropertyType
+  | TuplePropertyType
+  | TypeOperatorPropertyType
+  | ReflectionType;
 
 export interface PropertyType {
   name?: string;

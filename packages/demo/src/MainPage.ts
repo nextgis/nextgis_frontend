@@ -33,7 +33,6 @@ export interface Item {
   components: { Logo }
 })
 export class MainPage extends Vue {
-
   active = [];
 
   open: string[] = [];
@@ -51,7 +50,9 @@ export class MainPage extends Vue {
   }
 
   get current() {
-    if (!this.active.length) { return undefined; }
+    if (!this.active.length) {
+      return undefined;
+    }
     const id = this.active[0];
     const item = this.findItem(id);
     this._setPath(item.id);
@@ -62,10 +63,10 @@ export class MainPage extends Vue {
   mounted() {
     this.api = this.$store.state.api.api;
     const prepareItem = (conf: Item, _parent?) => {
-      const item: Item = {...conf};
+      const item: Item = { ...conf };
       if (conf.children) {
         item.model = true;
-        item.children = conf.children.map((i) => prepareItem(i, item));
+        item.children = conf.children.map(i => prepareItem(i, item));
 
         const apiModule = this.$store.getters['api/getApiModule'](item.name);
         if (apiModule) {
@@ -75,9 +76,9 @@ export class MainPage extends Vue {
             page: 'api',
             component: ApiComponent,
             icon: 'mdi-power-plug',
-            api: apiModule,
+            api: apiModule
           };
-          const readmeIndex = item.children.findIndex((x) => x.page === 'readme');
+          const readmeIndex = item.children.findIndex(x => x.page === 'readme');
           if (readmeIndex !== -1) {
             item.children.splice(readmeIndex + 1, 0, apiItem);
           } else {
@@ -98,7 +99,7 @@ export class MainPage extends Vue {
     };
     const config = process.env.EXAMPLES;
     // @ts-ignore
-    this.items = config = config.map((x) => {
+    this.items = config = config.map(x => {
       return prepareItem(x);
     });
 
@@ -114,7 +115,7 @@ export class MainPage extends Vue {
       const x = _items[fry];
       if (x.id === id) {
         if (x.children) {
-          const readme = x.children.find((y) => y.page === 'readme');
+          const readme = x.children.find(y => y.page === 'readme');
           if (readme) {
             return readme;
           }
@@ -144,7 +145,7 @@ export class MainPage extends Vue {
       this.active = [treeItem.id];
     } else {
       const getFirstPageItem = (items: Item[]) => {
-        return items.find((i) => {
+        return items.find(i => {
           const pageContent = i.html || i.md;
           if (pageContent) {
             return pageContent;
@@ -171,5 +172,4 @@ export class MainPage extends Vue {
     }
     this.currentItemId = id;
   }
-
 }

@@ -1,4 +1,10 @@
-import { GeoJsonObject, GeoJsonGeometryTypes, FeatureCollection, GeometryCollection, Feature } from 'geojson';
+import {
+  GeoJsonObject,
+  GeoJsonGeometryTypes,
+  FeatureCollection,
+  GeometryCollection,
+  Feature
+} from 'geojson';
 
 export function findMostFrequentGeomType(arr: GeoJsonGeometryTypes[]): GeoJsonGeometryTypes {
   const counts: { [x: string]: number } = {};

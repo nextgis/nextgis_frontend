@@ -1,6 +1,8 @@
 import { ApiItem } from '../../components/ApiComponent/ApiItem';
 
-export interface Indexes { [id: number]: ApiItem; }
+export interface Indexes {
+  [id: number]: ApiItem;
+}
 
 let api: ApiItem | undefined;
 let indexes: Indexes;
@@ -42,7 +44,10 @@ function findInApi(cb: (item: ApiItem) => boolean, item?: ApiItem): ApiItem | un
 }
 
 function forEachApi(
-  cb: (item: ApiItem, parent?: ApiItem) => void, item: ApiItem = api, parent?: ApiItem): ApiItem | undefined {
+  cb: (item: ApiItem, parent?: ApiItem) => void,
+  item: ApiItem = api,
+  parent?: ApiItem
+): ApiItem | undefined {
   cb(item, parent);
   if (item.children) {
     for (let fry = 0; fry < item.children.length; fry++) {
@@ -58,7 +63,7 @@ function forEachApi(
 function findApiModule(name: string, item: ApiItem): ApiItem {
   if (item && item.children) {
     const modules = item.children;
-    return modules.find((x) => {
+    return modules.find(x => {
       return x.name === name;
     });
   }
@@ -71,28 +76,24 @@ const _state = {
 
 // getters
 const _getters = {
-  getApiItemById: (state) => (id: number) => {
+  getApiItemById: state => (id: number) => {
     return state.api[id];
   },
 
-  getApiModule: (state) => (name: string, item?: ApiItem) => {
+  getApiModule: state => (name: string, item?: ApiItem) => {
     item = item || state.api;
     return findApiModule(name, item);
   },
 
-  findInApi: (state) => (cb: (item: ApiItem) => boolean, item: ApiItem = api) => {
+  findInApi: state => (cb: (item: ApiItem) => boolean, item: ApiItem = api) => {
     item = item || state.api;
     return findInApi(cb, item);
   }
 };
 
-const actions = {
+const actions = {};
 
-};
-
-const mutations = {
-
-};
+const mutations = {};
 
 export default {
   namespaced: true,

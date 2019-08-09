@@ -1,5 +1,10 @@
 import { NgwLayerOptions, ResourceAdapter } from './interfaces';
-import WebMap, { BaseLayerAdapter, Type, ImageAdapterOptions, TileAdapterOptions } from '@nextgis/webmap';
+import WebMap, {
+  BaseLayerAdapter,
+  Type,
+  ImageAdapterOptions,
+  TileAdapterOptions
+} from '@nextgis/webmap';
 import { getLayerAdapterOptions } from './utils/utils';
 import { ResourceItem } from '@nextgis/ngw-connector';
 

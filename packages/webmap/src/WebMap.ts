@@ -397,7 +397,10 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
     return this.layers.addLayer<K, O>(adapter, options, order);
   }
 
-  async addLayerFromAsyncAdapter<K extends keyof LayerAdapters, O extends AdapterOptions = AdapterOptions>(
+  async addLayerFromAsyncAdapter<
+    K extends keyof LayerAdapters,
+    O extends AdapterOptions = AdapterOptions
+  >(
     adapter: AdapterConstructor,
     options: O | LayerAdaptersOptions[K],
     order?: number
@@ -645,7 +648,9 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
     return this.controls.createButtonControl(options);
   }
 
-  async createToggleControl(options: ToggleControlOptions): Promise<(C & ToggleControl) | undefined> {
+  async createToggleControl(
+    options: ToggleControlOptions
+  ): Promise<(C & ToggleControl) | undefined> {
     return this.controls.createToggleControl(options);
   }
 
@@ -728,7 +733,15 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
 
   private _addEventsListeners(): void {
     // propagate map click event
-    const events: Array<keyof WebMapEvents> = ['click', 'zoomstart', 'zoom', 'zoomend', 'movestart', 'move', 'moveend'];
+    const events: Array<keyof WebMapEvents> = [
+      'click',
+      'zoomstart',
+      'zoom',
+      'zoomend',
+      'movestart',
+      'move',
+      'moveend'
+    ];
 
     events.forEach(x => {
       this.mapAdapter.emitter.on(x, data => {

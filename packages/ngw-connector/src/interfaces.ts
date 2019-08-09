@@ -39,7 +39,9 @@ export interface Params {
   [name: string]: simple | cbParams;
 }
 
-export type RequestItemKeys = { readonly [T in keyof RequestItemsParamsMap]?: { [x: string]: any } };
+export type RequestItemKeys = {
+  readonly [T in keyof RequestItemsParamsMap]?: { [x: string]: any }
+};
 
 export interface RequestItemsResponseMap {
   GET: GetRequestItemsResponseMap;

@@ -3,7 +3,8 @@ import { TileLayer, TileLayerOptions } from 'leaflet';
 import { TileLayer as TL } from './TileLayer';
 import { BaseAdapter } from '../BaseAdapter';
 
-export class TileAdapter extends BaseAdapter<TileAdapterOptions, TileLayer> implements BaseLayerAdapter {
+export class TileAdapter extends BaseAdapter<TileAdapterOptions, TileLayer>
+  implements BaseLayerAdapter {
   addLayer(options: TileAdapterOptions) {
     if (options) {
       const { url, ...opt } = options;

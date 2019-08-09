@@ -75,13 +75,18 @@ export class WebMapControls<C = any> {
     }
   }
 
-  async createToggleControl(options: ToggleControlOptions): Promise<(C & ToggleControl) | undefined> {
+  async createToggleControl(
+    options: ToggleControlOptions
+  ): Promise<(C & ToggleControl) | undefined> {
     await this.webMap.onLoad('build-map');
     if (this.webMap.mapAdapter.createToggleControl) {
       return this.webMap.mapAdapter.createToggleControl(options);
     } else {
       if (this.webMap.mapAdapter.createButtonControl) {
-        return WebMap.utils.createToggleControl<C>(this.webMap.mapAdapter.createButtonControl, options);
+        return WebMap.utils.createToggleControl<C>(
+          this.webMap.mapAdapter.createButtonControl,
+          options
+        );
       }
     }
   }

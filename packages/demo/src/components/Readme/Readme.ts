@@ -4,7 +4,6 @@ import { mdToHtml } from '../../services/mdToHtml';
 
 @Component
 export class Readme extends Vue {
-
   @Prop() item: Item;
 
   get html(): string {
@@ -20,5 +19,4 @@ export class Readme extends Vue {
     // @ts-ignore
     this.$vuetify.goTo(0, { duration: 0 });
   }
-
 }
