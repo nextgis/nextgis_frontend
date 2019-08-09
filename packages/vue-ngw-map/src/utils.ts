@@ -17,7 +17,8 @@ export function propsBinder(vueElement: VueElement, props: Record<string, any>) 
     const setMethodName = 'set' + capitalizeFirstLetter(key);
     if (key in props && vueElement[setMethodName]) {
       const prop = props[key];
-      const deepValue = (prop && prop.type === Object) || prop.type === Array || Array.isArray(prop.type);
+      const deepValue =
+        (prop && prop.type === Object) || prop.type === Array || Array.isArray(prop.type);
       vueElement.$watch(
         key,
         (newVal, oldVal) => {

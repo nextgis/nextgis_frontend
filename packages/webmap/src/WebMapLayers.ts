@@ -228,7 +228,10 @@ export class WebMapLayers<L = any> {
     return Promise.reject('No adapter');
   }
 
-  async addLayerFromAsyncAdapter<K extends keyof LayerAdapters, O extends AdapterOptions = AdapterOptions>(
+  async addLayerFromAsyncAdapter<
+    K extends keyof LayerAdapters,
+    O extends AdapterOptions = AdapterOptions
+  >(
     adapter: AdapterConstructor,
     options: O | LayerAdaptersOptions[K],
     order?: number
@@ -336,7 +339,8 @@ export class WebMapLayers<L = any> {
   ) {
     opt = opt || {};
     opt.multiselect = opt.multiselect !== undefined ? opt.multiselect : false;
-    opt.unselectOnSecondClick = opt.unselectOnSecondClick !== undefined ? opt.unselectOnSecondClick : true;
+    opt.unselectOnSecondClick =
+      opt.unselectOnSecondClick !== undefined ? opt.unselectOnSecondClick : true;
     if (!adapter) {
       opt = updateGeoJsonAdapterOptions(opt);
     }
@@ -530,7 +534,10 @@ export class WebMapLayers<L = any> {
    * @param layerDef
    * @param filter
    */
-  filterLayer(layerDef: LayerDef, filter: DataLayerFilter<Feature, L>): Array<LayerDefinition<Feature, L>> {
+  filterLayer(
+    layerDef: LayerDef,
+    filter: DataLayerFilter<Feature, L>
+  ): Array<LayerDefinition<Feature, L>> {
     const layer = this.getLayer(layerDef);
     const adapter = layer as VectorLayerAdapter;
     if (adapter.filter) {
@@ -659,7 +666,11 @@ export class WebMapLayers<L = any> {
     };
     if (!options.nativePaint) {
       if (this.webMap.options.paint) {
-        options.paint = preparePaint(options.paint || {}, this.webMap.options.paint, this.webMap.getPaintFunctions);
+        options.paint = preparePaint(
+          options.paint || {},
+          this.webMap.options.paint,
+          this.webMap.getPaintFunctions
+        );
       }
       if (options.selectedPaint && this.webMap.options.selectedPaint) {
         options.selectedPaint = preparePaint(

@@ -1,4 +1,10 @@
-import { WebMap, BaseLayerAdapter, LayerAdaptersOptions, Type, AdapterOptions } from '@nextgis/webmap';
+import {
+  WebMap,
+  BaseLayerAdapter,
+  LayerAdaptersOptions,
+  Type,
+  AdapterOptions
+} from '@nextgis/webmap';
 import { fixUrlStr } from '@nextgis/utils';
 import { QmsAdapterOptions, QmsBasemap, QmsLayerType, QmsAdapter as QA } from './interfaces';
 
@@ -37,7 +43,10 @@ export function loadJSON<T = any>(url: string): Promise<T> {
   });
 }
 
-export function createQmsAdapter(webMap: WebMap, url = 'https://qms.nextgis.com'): Type<BaseLayerAdapter> {
+export function createQmsAdapter(
+  webMap: WebMap,
+  url = 'https://qms.nextgis.com'
+): Type<BaseLayerAdapter> {
   class QmsAdapter<M = any> implements BaseLayerAdapter<M>, QA {
     qms?: QmsBasemap;
 

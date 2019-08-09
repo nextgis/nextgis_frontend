@@ -19,12 +19,10 @@ interface PenData {
   css_external?: string;
   js_external?: string;
   template?: boolean;
-
 }
 
 @Component
 export class SendToCodepen extends Vue {
-
   @Prop() item: Item;
 
   @Watch('item.html')
@@ -60,13 +58,13 @@ export class SendToCodepen extends Vue {
     }
     const minEmptyChars = Math.min(...emptyCharsCounts);
     if (minEmptyChars) {
-      newTextArr = newTextArr.map((x) => x.substring(minEmptyChars));
+      newTextArr = newTextArr.map(x => x.substring(minEmptyChars));
     }
     return newTextArr.join('\n');
   }
 
   _parseHtml(html: string): PenData {
-    const parseTag = (tag) => {
+    const parseTag = tag => {
       const re = new RegExp(`<${tag}>((.|[\n\r])*)<\/${tag}>`, 'i');
       const match = html.match(re);
       if (match && match.length) {

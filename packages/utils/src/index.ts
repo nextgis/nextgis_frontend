@@ -13,7 +13,10 @@ export const dom = Dom;
  * the `this` value always.
  * Taken from: https://github.com/mapbox/mapbox-gl-js/blob/v1.0.0/src/util/util.js#L243
  */
-export function bindAll(fns: string[], context: { [method: string]: (...args: any[]) => any }): void {
+export function bindAll(
+  fns: string[],
+  context: { [method: string]: (...args: any[]) => any }
+): void {
   fns.forEach(fn => {
     if (!context[fn]) {
       return;

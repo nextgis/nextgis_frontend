@@ -23,7 +23,8 @@ import { TLayer } from '../MapboxglMapAdapter';
 import { BaseAdapter } from './BaseAdapter';
 import { typeAliasForFilter, allowedByType } from '../util/geom_type';
 
-export interface Feature<G extends GeometryObject | null = Geometry, P = GeoJsonProperties> extends F<G, P> {
+export interface Feature<G extends GeometryObject | null = Geometry, P = GeoJsonProperties>
+  extends F<G, P> {
   _rendromId?: string;
 }
 
@@ -35,7 +36,8 @@ const PAINT = {
 
 type MapboxLayerType = 'fill' | 'line' | 'symbol' | 'circle';
 
-export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapterOptions> extends BaseAdapter<O>
+export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapterOptions>
+  extends BaseAdapter<O>
   implements VectorLayerAdapter<Map, TLayer, O, Feature> {
   selected: boolean = false;
 
@@ -78,7 +80,11 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
           this.layer.push(layer);
           if (options.selectedPaint) {
             const selectionLayer = this._getSelectionLayerNameFromType(t);
-            await this._addLayer(selectionLayer, type, ['all', geomFilter, ['in', this.featureIdName, '']]);
+            await this._addLayer(selectionLayer, type, [
+              'all',
+              geomFilter,
+              ['in', this.featureIdName, '']
+            ]);
             this.layer.push(selectionLayer);
           }
         }
@@ -107,7 +113,9 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
     const layerName = this._getLayerNameFromType(type);
 
     if (this.options.paint) {
-      const layers: Array<[string, VectorAdapterLayerPaint | GetPaintCallback]> = [[layerName, this.options.paint]];
+      const layers: Array<[string, VectorAdapterLayerPaint | GetPaintCallback]> = [
+        [layerName, this.options.paint]
+      ];
       if (this.options.selectedPaint) {
         const selName = this._getSelectionLayerNameFromType(type);
         layers.push([selName, this.options.selectedPaint]);

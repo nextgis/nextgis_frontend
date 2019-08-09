@@ -14,6 +14,6 @@ export const router = new VueRouter({
   // },
   routes: [
     { path: '/page/:id', component: ExampleOutsidePage },
-    { path: '/:id?', component: MainPage },
+    { path: '/:id?', component: MainPage }
   ]
 });

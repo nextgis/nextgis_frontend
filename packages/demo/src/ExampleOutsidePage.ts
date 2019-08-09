@@ -3,5 +3,4 @@ import { mixins } from 'vue-class-component';
 
 import { MainPage } from './MainPage';
 
-export class ExampleOutsidePage extends mixins(MainPage) {
-}
+export class ExampleOutsidePage extends mixins(MainPage) {}

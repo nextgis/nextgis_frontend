@@ -31,7 +31,10 @@ export const operationsAliases: { [key in Operations]: (a: any, b: any) => boole
   }
 };
 
-export function propertiesFilter(properties: { [field: string]: any }, filters: PropertiesFilter): boolean {
+export function propertiesFilter(
+  properties: { [field: string]: any },
+  filters: PropertiesFilter
+): boolean {
   return filters.every(([field, operation, value]) => {
     const operationExec = operationsAliases[operation];
     const property = properties[field];

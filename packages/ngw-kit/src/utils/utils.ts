@@ -1,7 +1,16 @@
 import WebMap, { Type, LngLatBoundsArray, MapClickEvent } from '@nextgis/webmap';
-import NgwConnector, { WebmapResource, ResourceItem, FeatureLayersIdentify } from '@nextgis/ngw-connector';
+import NgwConnector, {
+  WebmapResource,
+  ResourceItem,
+  FeatureLayersIdentify
+} from '@nextgis/ngw-connector';
 import { createAsyncAdapter } from '../createAsyncAdapter';
-import { NgwLayerOptions, WebMapAdapterOptions, IdentifyRequestOptions, ResourceAdapter } from '../interfaces';
+import {
+  NgwLayerOptions,
+  WebMapAdapterOptions,
+  IdentifyRequestOptions,
+  ResourceAdapter
+} from '../interfaces';
 import { WebMapLayerAdapter } from '../WebMapLayerAdapter';
 
 export function updateWmsParams(params: any, resourceId: number) {
@@ -82,7 +91,10 @@ export function getWebMapExtent(webmap: WebmapResource): LngLatBoundsArray | und
   }
 }
 
-export function getNgwLayerExtent(id: number, connector: NgwConnector): Promise<LngLatBoundsArray | undefined> {
+export function getNgwLayerExtent(
+  id: number,
+  connector: NgwConnector
+): Promise<LngLatBoundsArray | undefined> {
   return connector.get('layer.extent', name, { id }).then(resp => {
     if (resp) {
       const { maxLat, maxLon, minLat, minLon } = resp.extent;
@@ -199,7 +211,9 @@ interface ExtendWebMapLayerAdapterOptions {
   baseUrl?: string;
 }
 
-export function extendWebMapLayerAdapter(opt: ExtendWebMapLayerAdapterOptions): Type<WebMapLayerAdapter> {
+export function extendWebMapLayerAdapter(
+  opt: ExtendWebMapLayerAdapterOptions
+): Type<WebMapLayerAdapter> {
   class A extends WebMapLayerAdapter {
     constructor(map: any, options: WebMapAdapterOptions) {
       options = { ...opt, ...options };

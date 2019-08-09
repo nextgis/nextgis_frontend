@@ -20,7 +20,7 @@ const app = new Vue({
   el: '#app',
   router,
   store,
-  render: (h) => h(App),
+  render: h => h(App),
   methods: {
     goTo(elementId: string, options?: any) {
       // @ts-ignore
@@ -32,7 +32,7 @@ const app = new Vue({
       const links = element.getElementsByTagName('a');
       for (let fry = 0; fry < links.length; fry++) {
         const link = links[fry];
-        link.onclick = (e) => {
+        link.onclick = e => {
           e.preventDefault();
           this._onLinkClick(element, link);
         };

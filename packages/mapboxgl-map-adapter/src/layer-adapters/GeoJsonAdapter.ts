@@ -216,9 +216,10 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   private filterGeometries(data: GeoJsonObject, type: VectorAdapterLayerType): Feature[] {
     let newFeatures: Feature[] = [];
     if (data.type === 'FeatureCollection') {
-      const features = ((data as FeatureCollection).features = (data as FeatureCollection).features.filter(f =>
+      const features = (data as FeatureCollection).features.filter(f =>
         geometryFilter(f.geometry.type, type)
-      ) as Feature[]);
+      ) as Feature[];
+      (data as FeatureCollection).features = features;
       newFeatures = features;
     } else if (data.type === 'Feature') {
       const allow = geometryFilter((data as Feature).geometry.type, type);
@@ -228,7 +229,9 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
       newFeatures.push(data as Feature);
     } else if (data.type === 'GeometryCollection') {
       const geomCollection = data as GeometryCollection;
-      geomCollection.geometries = geomCollection.geometries.filter(g => geometryFilter(g.type, type));
+      geomCollection.geometries = geomCollection.geometries.filter(g =>
+        geometryFilter(g.type, type)
+      );
       newFeatures = geomCollection.geometries.map(x => {
         const f: Feature = { type: 'Feature', geometry: x as GeometryObject, properties: {} };
         return f;
@@ -241,7 +244,11 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     return newFeatures;
   }
 
-  private async _getPaintFromCallback(paint: GetPaintCallback, type: VectorAdapterLayerType, name: string) {
+  private async _getPaintFromCallback(
+    paint: GetPaintCallback,
+    type: VectorAdapterLayerType,
+    name: string
+  ) {
     const style: any = {};
     for (const feature of this._features) {
       const _paint = paint(feature);
@@ -298,14 +305,26 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
           const selLayerName = this._getSelectionLayerNameFromType(t);
           if (layers.indexOf(selLayerName) !== -1) {
             if (this._selectionName) {
-              this.map.setFilter(selLayerName, ['all', geomFilter, ['in', this.featureIdName, ...selectionArray]]);
+              this.map.setFilter(selLayerName, [
+                'all',
+                geomFilter,
+                ['in', this.featureIdName, ...selectionArray]
+              ]);
             }
           }
           if (layers.indexOf(layerName) !== -1) {
             if (this._filteredFeatureIds.length) {
-              this.map.setFilter(layerName, ['all', geomFilter, ['in', this.featureIdName, ...filteredArray]]);
+              this.map.setFilter(layerName, [
+                'all',
+                geomFilter,
+                ['in', this.featureIdName, ...filteredArray]
+              ]);
             } else {
-              this.map.setFilter(layerName, ['all', geomFilter, ['!in', this.featureIdName, ...selectionArray]]);
+              this.map.setFilter(layerName, [
+                'all',
+                geomFilter,
+                ['!in', this.featureIdName, ...selectionArray]
+              ]);
             }
           }
         }

@@ -1,7 +1,12 @@
 import WebMap, { LngLatBoundsArray, MapClickEvent } from '@nextgis/webmap';
 import { ResourceItem, CancelablePromise } from '@nextgis/ngw-connector';
 import { fixUrlStr } from '@nextgis/utils';
-import { getLayerAdapterOptions, updateWmsParams, sendIdentifyRequest, getWebMapExtent } from './utils/utils';
+import {
+  getLayerAdapterOptions,
+  updateWmsParams,
+  sendIdentifyRequest,
+  getWebMapExtent
+} from './utils/utils';
 import { WebMapLayerItem } from './WebMapLayerItem';
 import { ItemOptions } from '@nextgis/item';
 

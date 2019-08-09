@@ -130,7 +130,10 @@ export class NgwUploader {
       }
     };
 
-    return this.connector && this.connector.post('resource.collection', { data, headers: { Accept: '*/*' } });
+    return (
+      this.connector &&
+      this.connector.post('resource.collection', { data, headers: { Accept: '*/*' } })
+    );
   }
 
   @evented({ status: 'create-resource', template: 'resource creation' })
@@ -151,7 +154,10 @@ export class NgwUploader {
       }
     };
 
-    return this.connector && this.connector.post('resource.collection', { data, headers: { Accept: '*/*' } });
+    return (
+      this.connector &&
+      this.connector.post('resource.collection', { data, headers: { Accept: '*/*' } })
+    );
   }
 
   @evented({ status: 'create-style', template: 'style creation for resource ID {id}' })
@@ -245,11 +251,16 @@ export class NgwUploader {
     return this.connector && this.connector.post('resource.collection', { data: wmsData });
   }
 
-  @evented({ status: 'create-wms-connected-layer', template: 'create WMS layer for conected resource ID {id}' })
+  @evented({
+    status: 'create-wms-connected-layer',
+    template: 'create WMS layer for conected resource ID {id}'
+  })
   createWmsConnectedLayer(options: CreateWmsConnectedLayerOptions, name?: string) {
     name = name || options.name || String(options.id);
     const wmslayers =
-      options.wmslayers && Array.isArray(options.wmslayers) ? options.wmslayers.join(',') : options.wmslayers;
+      options.wmslayers && Array.isArray(options.wmslayers)
+        ? options.wmslayers.join(',')
+        : options.wmslayers;
     const wmsData = {
       resource: {
         cls: 'wmsclient_layer',

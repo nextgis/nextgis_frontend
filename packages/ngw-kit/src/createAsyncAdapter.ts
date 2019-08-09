@@ -22,7 +22,12 @@ async function createAdapterFromFirstStyle(
   const firstStyle = childrenStyles && childrenStyles[0];
   if (firstStyle) {
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
-    return createAsyncAdapter({ ...options, resourceId: firstStyle.resource.id }, webMap, baseUrl, connector);
+    return createAsyncAdapter(
+      { ...options, resourceId: firstStyle.resource.id },
+      webMap,
+      baseUrl,
+      connector
+    );
   }
 }
 

@@ -271,7 +271,9 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
       }
 
       orderedLayers = orderedLayers.sort((a, b) => {
-        return a.options.order !== undefined && b.options.order !== undefined ? a.options.order - b.options.order : 0;
+        return a.options.order !== undefined && b.options.order !== undefined
+          ? a.options.order - b.options.order
+          : 0;
       });
 
       for (let fry = 0; fry < orderedLayers.length; fry++) {
@@ -343,7 +345,11 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     }
   }
 
-  private _onDataLoad(data: { sourceId: string; tile: any }, isLoaded = false, emit: (sourceId: string) => void) {
+  private _onDataLoad(
+    data: { sourceId: string; tile: any },
+    isLoaded = false,
+    emit: (sourceId: string) => void
+  ) {
     // if all sources is loaded emmit event for all and clean mem
     if (isLoaded) {
       Object.keys(this._sourceDataLoading).forEach(x => {

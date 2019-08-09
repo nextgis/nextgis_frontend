@@ -15,7 +15,11 @@ import WebMap, {
   LayerAdapter,
   PropertiesFilter
 } from '@nextgis/webmap';
-import NgwConnector, { ResourceItem, CancelablePromise, FeatureLayersIdentify } from '@nextgis/ngw-connector';
+import NgwConnector, {
+  ResourceItem,
+  CancelablePromise,
+  FeatureLayersIdentify
+} from '@nextgis/ngw-connector';
 import { QmsAdapterOptions } from '@nextgis/qms-kit';
 import NgwKit, { NgwLayerOptions, ResourceAdapter, WebMapLayerItem } from '@nextgis/ngw-kit';
 import { getIcon } from '@nextgis/icons';
@@ -143,7 +147,12 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
     }
     if (this.options.baseUrl) {
       try {
-        const adapter = NgwKit.utils.addNgwLayer(options, this, this.options.baseUrl, this.connector);
+        const adapter = NgwKit.utils.addNgwLayer(
+          options,
+          this,
+          this.options.baseUrl,
+          this.connector
+        );
 
         const layer = (await this.addLayer(adapter, {
           // TODO: all options into one object
@@ -373,7 +382,8 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
       const center = this.getCenter();
       const zoom = this.getZoom();
       if (center && zoom) {
-        const metresPerPixel = (40075016.686 * Math.abs(Math.cos((center[1] * 180) / Math.PI))) / Math.pow(2, zoom + 8);
+        const metresPerPixel =
+          (40075016.686 * Math.abs(Math.cos((center[1] * 180) / Math.PI))) / Math.pow(2, zoom + 8);
         // FIXME: understand the circle creation function
         const radius = pixelRadius * metresPerPixel * 0.0005;
         return NgwKit.utils

@@ -5,10 +5,10 @@ import { CheckOptions } from '../interfaces';
 
 type VAL = boolean;
 
-export class CheckProperty<V extends VAL = VAL, O extends CheckOptions<VAL> = CheckOptions<VAL>> extends BaseProperty<
-  VAL,
-  CheckOptions<VAL>
-> {
+export class CheckProperty<
+  V extends VAL = VAL,
+  O extends CheckOptions<VAL> = CheckOptions<VAL>
+> extends BaseProperty<VAL, CheckOptions<VAL>> {
   static options: CheckOptions = {
     hierarchy: true,
     bubble: false,
@@ -126,7 +126,8 @@ export class CheckProperty<V extends VAL = VAL, O extends CheckOptions<VAL> = Ch
       const children = this.item.tree.getChildren();
       for (let fry = 0; fry < children.length; fry++) {
         const child = children[fry];
-        const property = child.properties && (child.properties.property(this.name) as CheckProperty<V, O>);
+        const property =
+          child.properties && (child.properties.property(this.name) as CheckProperty<V, O>);
         if (property) {
           property.set(value, {
             ...options,
