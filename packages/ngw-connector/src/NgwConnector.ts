@@ -17,7 +17,8 @@ import {
   RequestHeaders,
   PostRequestItemsResponseMap,
   PatchRequestItemsResponseMap,
-  RequestItemKeys
+  RequestItemKeys,
+  DeleteRequestItemsResponseMap
 } from './interfaces';
 import { loadJSON, template } from './utils';
 import { EventEmitter } from 'events';
@@ -188,6 +189,17 @@ export class NgwConnector {
     options.method = 'PATCH';
     options.nocache = true;
     return this.request<K, PatchRequestItemsResponseMap>(name, params, options);
+  }
+
+  delete<K extends keyof RequestItemsParamsMap>(
+    name: K,
+    options?: RequestOptions | undefined | null,
+    params?: RequestItemsParamsMap[K] & { [name: string]: any }
+  ): CancelablePromise<DeleteRequestItemsResponseMap[K]> {
+    options = options || {};
+    options.method = 'DELETE';
+    options.nocache = true;
+    return this.request<K, DeleteRequestItemsResponseMap>(name, params, options);
   }
 
   makeQuery(url: string, params?: Params, options: RequestOptions = {}): CancelablePromise<any> {
