@@ -1,5 +1,11 @@
 import { VectorAdapterLayerType, MapClickEvent } from '@nextgis/webmap';
-import { GeoJsonObject, GeoJsonGeometryTypes, FeatureCollection, Feature, GeometryCollection } from 'geojson';
+import {
+  GeoJsonObject,
+  GeoJsonGeometryTypes,
+  FeatureCollection,
+  Feature,
+  GeometryCollection
+} from 'geojson';
 import { LeafletMouseEvent } from 'leaflet';
 
 export const typeAlias: { [key in GeoJsonGeometryTypes]: VectorAdapterLayerType } = {
@@ -57,12 +63,18 @@ export function detectType(geojson: GeoJsonObject): GeoJsonGeometryTypes {
   return geometry;
 }
 
-export function geometryFilter(geometry: GeoJsonGeometryTypes, type: VectorAdapterLayerType): boolean {
+export function geometryFilter(
+  geometry: GeoJsonGeometryTypes,
+  type: VectorAdapterLayerType
+): boolean {
   const geoJsonGeometry = backAliases[type] || [];
   return geoJsonGeometry.indexOf(geometry) !== -1;
 }
 
-export function filterGeometries(data: GeoJsonObject, type: VectorAdapterLayerType): GeoJsonObject | false {
+export function filterGeometries(
+  data: GeoJsonObject,
+  type: VectorAdapterLayerType
+): GeoJsonObject | false {
   if (data.type === 'FeatureCollection') {
     (data as FeatureCollection).features = (data as FeatureCollection).features.filter(f =>
       geometryFilter(f.geometry.type, type)

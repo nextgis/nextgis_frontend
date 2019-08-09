@@ -11,7 +11,8 @@ const svgPath: { [name: string]: string | GetPathCallback } = {
   rect: '<rect width="12" height="12"/>',
   marker:
     '<path d="m6 0c-1.85 0-4 1.19-4 4.22 0 2.05 3.08 6.59 4 7.78 0.821-1.19 4-5.62 4-7.78 0-3.03-2.15-4.22-4-4.22z"/>',
-  cross: '<path d="M 2.4,12 6,8.4 9.6,12 12,9.6 8.4,6 12,2.4 9.6,0 6,3.6 2.4,0 0,2.4 3.6,6 0,9.6 Z"/>',
+  cross:
+    '<path d="M 2.4,12 6,8.4 9.6,12 12,9.6 8.4,6 12,2.4 9.6,0 6,3.6 2.4,0 0,2.4 3.6,6 0,9.6 Z"/>',
   star:
     '<path d="m6 0.25 1.71 4.18 4.29-1.04e-4 -3.43 3.14 0.857 4.18-3.43-3.14-3.43 3.14 0.857-4.18-3.43-3.14 4.29-0.209z"/>',
   triangle: '<path d="m12 11.7h-12l6-11.2z"/>',
@@ -22,7 +23,16 @@ const svgPath: { [name: string]: string | GetPathCallback } = {
 };
 
 export interface IconOptions {
-  shape?: 'circle' | 'brill' | 'rect' | 'marker' | 'star' | 'asterisk' | 'triangle' | 'plus' | 'minus';
+  shape?:
+    | 'circle'
+    | 'brill'
+    | 'rect'
+    | 'marker'
+    | 'star'
+    | 'asterisk'
+    | 'triangle'
+    | 'plus'
+    | 'minus';
   color?: string;
   size?: number;
   stroke?: number;

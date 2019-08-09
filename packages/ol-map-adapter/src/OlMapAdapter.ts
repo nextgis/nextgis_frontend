@@ -46,7 +46,11 @@ interface PositionMem {
   zoom: number | undefined;
 }
 
-export type ForEachFeatureAtPixelCallback = (feature: ol.Feature, layer: Layer, evt: ol.MapBrowserPointerEvent) => void;
+export type ForEachFeatureAtPixelCallback = (
+  feature: ol.Feature,
+  layer: Layer,
+  evt: ol.MapBrowserPointerEvent
+) => void;
 export class OlMapAdapter implements MapAdapter<Map, Layer> {
   static layerAdapters = {
     IMAGE: ImageAdapter,
@@ -271,7 +275,9 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
   private _addMapListeners() {
     const map = this.map;
     if (map) {
-      map.on('click', (evt: ol.MapBrowserEvent) => this.onMapClick(evt as ol.MapBrowserPointerEvent));
+      map.on('click', (evt: ol.MapBrowserEvent) =>
+        this.onMapClick(evt as ol.MapBrowserPointerEvent)
+      );
 
       const center = this.getCenter();
       const zoom = this.getZoom();

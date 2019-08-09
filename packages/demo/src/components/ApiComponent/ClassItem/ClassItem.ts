@@ -24,7 +24,6 @@ export class ClassItemComponent extends Vue {
   }
 
   get toReturn() {
-
     if (this.item.kindString === 'Method') {
       return this.utility.createMethodReturn(this.item, this.indexes);
     }
@@ -50,11 +49,11 @@ export class ClassItemComponent extends Vue {
       // name not start from underscore `_`
       () => item.name.trim().slice()[0] !== '_',
       // item is not private
-      () => item.flags.isPrivate !== undefined ? !item.flags.isPrivate : true,
+      () => (item.flags.isPrivate !== undefined ? !item.flags.isPrivate : true),
       // item is Property or Method only
       () => ['Property', 'Method', 'Event'].indexOf(item.kindString) !== -1
     ];
-    return checkAllowedList.every((x) => x());
+    return checkAllowedList.every(x => x());
   }
 
   getAllowedMembers(item: ApiItem): Array<{ name: string; members: ApiItem[] }> {
@@ -62,7 +61,7 @@ export class ClassItemComponent extends Vue {
     const members = [];
     const staticMembers = [];
     const events = [];
-    children.forEach((x) => {
+    children.forEach(x => {
       if (x.flags.isStatic) {
         staticMembers.push(x);
       } else if (x.kindString === 'Event') {
@@ -74,7 +73,7 @@ export class ClassItemComponent extends Vue {
     return [
       { name: 'Members', members },
       { name: 'Events', members: events },
-      { name: 'Static', members: staticMembers },
+      { name: 'Static', members: staticMembers }
     ];
   }
 
@@ -91,5 +90,4 @@ export class ClassItemComponent extends Vue {
   createMethodString(methodItem: MethodItem) {
     return this.utility.createMethodString(methodItem, this.indexes);
   }
-
 }

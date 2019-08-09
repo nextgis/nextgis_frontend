@@ -162,7 +162,9 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
   }
 
   private _addSelectListener() {
-    const _forEachFeatureAtPixel = this.map.get('_forEachFeatureAtPixel') as ForEachFeatureAtPixelCallback[];
+    const _forEachFeatureAtPixel = this.map.get(
+      '_forEachFeatureAtPixel'
+    ) as ForEachFeatureAtPixelCallback[];
     _forEachFeatureAtPixel.push((feature, layer) => {
       if (layer === this.layer) {
         this._onFeatureClick(feature);

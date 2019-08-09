@@ -1,4 +1,9 @@
-import { VectorAdapterLayerPaint, GetPaintCallback, GeometryPaint, VectorAdapterLayerType } from '@nextgis/webmap';
+import {
+  VectorAdapterLayerPaint,
+  GetPaintCallback,
+  GeometryPaint,
+  VectorAdapterLayerType
+} from '@nextgis/webmap';
 import GeoJSON from 'ol/format/GeoJSON';
 import CircleStyle from 'ol/style/Circle';
 import Fill from 'ol/style/Fill';
@@ -37,7 +42,10 @@ export function getColor(colorStr: string, opacity?: number): Color {
   return colorArray;
 }
 
-export function styleFunction(feature: ol.Feature, paint: VectorAdapterLayerPaint | GetPaintCallback = {}): OlStyle {
+export function styleFunction(
+  feature: ol.Feature,
+  paint: VectorAdapterLayerPaint | GetPaintCallback = {}
+): OlStyle {
   if (typeof paint === 'function') {
     const f: Feature = getFeature(feature);
     return styleFunction(feature, paint(f));
@@ -47,7 +55,12 @@ export function styleFunction(feature: ol.Feature, paint: VectorAdapterLayerPain
     const _type = paint.type;
     if (!_type) {
       const ta = typeAlias[type];
-      paint.type = ta === 'fill' || ta === 'line' ? 'path' : 'html' in paint || 'className' in paint ? 'icon' : ta;
+      paint.type =
+        ta === 'fill' || ta === 'line'
+          ? 'path'
+          : 'html' in paint || 'className' in paint
+          ? 'icon'
+          : ta;
     }
     if (paint.type === 'path' || paint.type === 'circle') {
       // const geomPaint = ;
@@ -127,7 +140,9 @@ export function objectToQuery(obj: { [x: string]: any }, prefix?: string): strin
     const k = prefix ? prefix + '[' + p + ']' : p;
     const v = obj[p];
     str.push(
-      v !== null && typeof v === 'object' ? objectToQuery(v, k) : encodeURIComponent(k) + '=' + encodeURIComponent(v)
+      v !== null && typeof v === 'object'
+        ? objectToQuery(v, k)
+        : encodeURIComponent(k) + '=' + encodeURIComponent(v)
     );
   }
   return str.join('&');

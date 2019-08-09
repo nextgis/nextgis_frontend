@@ -13,18 +13,17 @@ export class ApiParameters extends Vue {
   get parameters(): Parameter[] {
     if (this.item && this.item.signatures) {
       const parameters: Parameter[] = [];
-      this.item.signatures.forEach((x) => {
+      this.item.signatures.forEach(x => {
         if (x.parameters) {
-          x.parameters.forEach((y) => parameters.push(y));
+          x.parameters.forEach(y => parameters.push(y));
         }
       });
       return parameters.sort((a, b) => {
         const x = a.flags.isOptional;
         const y = b.flags.isOptional;
-        return (x === y) ? 0 : x ? 1 : -1;
+        return x === y ? 0 : x ? 1 : -1;
       });
     }
     return [];
   }
-
 }

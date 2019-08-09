@@ -12,7 +12,9 @@ const featureRequestParams: FeatureRequestParams = {
   geom_format: 'geojson'
 };
 
-function _createGeojsonFeature<G extends Geometry | null = Geometry>(item: FeatureItem): Feature<G> {
+function _createGeojsonFeature<G extends Geometry | null = Geometry>(
+  item: FeatureItem
+): Feature<G> {
   const geometry = item.geom as G;
   const feature: Feature<G> = {
     id: item.id,

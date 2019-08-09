@@ -6,7 +6,12 @@ import { BaseProperty } from './BaseProperty';
 import { CheckProperty } from './CheckProperty';
 import { Item } from '../Item';
 
-import { ItemBasePropertyOptions, Type, ItemPropertyConfig, ItemPropertyTypes } from '../interfaces';
+import {
+  ItemBasePropertyOptions,
+  Type,
+  ItemPropertyConfig,
+  ItemPropertyTypes
+} from '../interfaces';
 
 export class ItemProperties {
   static handlers: { [name: string]: Type<BaseProperty> } = {
@@ -18,7 +23,10 @@ export class ItemProperties {
   private _properties: { [propName: string]: BaseProperty } = {};
   private _propertiesList: string[];
 
-  constructor(public item: Item, propertiesList?: Array<ItemPropertyConfig<keyof ItemPropertyTypes>>) {
+  constructor(
+    public item: Item,
+    propertiesList?: Array<ItemPropertyConfig<keyof ItemPropertyTypes>>
+  ) {
     this._propertiesList = []; // ordered list
     if (propertiesList) {
       propertiesList.forEach(this._setPropertyHandler.bind(this));

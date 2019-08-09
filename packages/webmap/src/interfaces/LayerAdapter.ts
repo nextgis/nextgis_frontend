@@ -188,7 +188,8 @@ export interface VectorAdapterOptions<F extends Feature = Feature, L = any> exte
 /**
  * Options to crateing styling and defining selection behavior.
  */
-export interface GeoJsonAdapterOptions<F extends Feature = Feature, L = any> extends VectorAdapterOptions<F, L> {
+export interface GeoJsonAdapterOptions<F extends Feature = Feature, L = any>
+  extends VectorAdapterOptions<F, L> {
   /** Geojson data */
   data?: GeoJsonObject;
 }
@@ -239,7 +240,9 @@ export interface LayerDefinition<F extends Feature = Feature, L = any> {
   visible?: boolean;
 }
 
-export type CallbackFilter<F extends Feature = Feature, L = any> = (opt: LayerDefinition<F, L>) => boolean;
+export type CallbackFilter<F extends Feature = Feature, L = any> = (
+  opt: LayerDefinition<F, L>
+) => boolean;
 
 /**
  * gt - greater (>)
@@ -251,7 +254,17 @@ export type CallbackFilter<F extends Feature = Feature, L = any> = (opt: LayerDe
  * like - LIKE SQL statement (for strings compare)
  * ilike - ILIKE SQL statement (for strings compare)
  */
-export type Operations = 'gt' | 'lt' | 'ge' | 'le' | 'eq' | 'ne' | 'in' | 'notin' | 'like' | 'ilike';
+export type Operations =
+  | 'gt'
+  | 'lt'
+  | 'ge'
+  | 'le'
+  | 'eq'
+  | 'ne'
+  | 'in'
+  | 'notin'
+  | 'like'
+  | 'ilike';
 
 export interface FilterOptions {
   limit?: number;

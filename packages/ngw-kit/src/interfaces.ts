@@ -71,8 +71,10 @@ export interface NgwLayerOptionsAdditional<
   meta?: P;
 }
 
-export interface NgwLayerOptions<T extends NgwLayerAdapterType = NgwLayerAdapterType, P = { [name: string]: any }>
-  extends NgwLayerOptionsAdditional<T, P> {
+export interface NgwLayerOptions<
+  T extends NgwLayerAdapterType = NgwLayerAdapterType,
+  P = { [name: string]: any }
+> extends NgwLayerOptionsAdditional<T, P> {
   resourceId: number;
   simplification?: number;
 }

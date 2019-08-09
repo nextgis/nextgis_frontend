@@ -12,9 +12,9 @@ export class Example extends Vue {
     } else if (this.item) {
       if ('signatures' in this.item) {
         const examples = [];
-        this.item.signatures.forEach((x) => {
+        this.item.signatures.forEach(x => {
           if ('comment' in x) {
-            this.getExamples(x.comment).forEach((y) => {
+            this.getExamples(x.comment).forEach(y => {
               examples.push(y);
             });
           }
@@ -25,25 +25,26 @@ export class Example extends Vue {
     }
   }
 
-  getExamples(comment: ApiComment): Array<{ language: string, code: string }> {
+  getExamples(comment: ApiComment): Array<{ language: string; code: string }> {
     if (comment && comment.tags) {
-      return comment.tags.filter((x) => x.tag === 'example').map((x) => {
-        let language = 'javascript';
-        let code = x.text.replace(/```(\w+)/, (e, m) => {
-          if (m && e !== m) {
-            language = m;
-          }
-          return '';
+      return comment.tags
+        .filter(x => x.tag === 'example')
+        .map(x => {
+          let language = 'javascript';
+          let code = x.text.replace(/```(\w+)/, (e, m) => {
+            if (m && e !== m) {
+              language = m;
+            }
+            return '';
+          });
+          code = code.replace(/```/g, '');
+          code = code.replace(/^\s*[\r\n]/gm, '');
+          return {
+            language,
+            code
+          };
         });
-        code = code.replace(/```/g, '');
-        code = code.replace(/^\s*[\r\n]/gm, '');
-        return {
-          language,
-          code
-        };
-      });
     }
     return [];
   }
-
 }

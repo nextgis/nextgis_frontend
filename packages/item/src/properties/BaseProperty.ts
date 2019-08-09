@@ -17,7 +17,10 @@ const EventEmitter = events && events.EventEmitter;
 //   'change-tree': {value: V, options: O, item: Item};
 // }
 
-export abstract class BaseProperty<V = any, O extends ItemBasePropertyOptions<V> = ItemBasePropertyOptions<V>> {
+export abstract class BaseProperty<
+  V = any,
+  O extends ItemBasePropertyOptions<V> = ItemBasePropertyOptions<V>
+> {
   options: O;
 
   // emitter: StrictEventEmitter<EventEmitter, BasePropertyEvents<V, O>> = new EventEmitter();

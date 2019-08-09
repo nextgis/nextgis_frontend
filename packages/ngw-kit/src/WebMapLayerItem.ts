@@ -43,7 +43,12 @@ export class WebMapLayerItem extends Item<ItemOptions> {
   item: TreeGroup | TreeLayer;
   layer?: LayerAdapter;
 
-  constructor(public webMap: WebMap, item: TreeGroup | TreeLayer, options?: ItemOptions, parent?: WebMapLayerItem) {
+  constructor(
+    public webMap: WebMap,
+    item: TreeGroup | TreeLayer,
+    options?: ItemOptions,
+    parent?: WebMapLayerItem
+  ) {
     super({ ...WebMapLayerItem.options, ...options });
 
     this.item = item;
@@ -73,7 +78,8 @@ export class WebMapLayerItem extends Item<ItemOptions> {
           });
       }
     } else if (item.item_type === 'layer') {
-      const adapter = (item.adapter || item.layer_adapter.toUpperCase()) as keyof LayerAdaptersOptions;
+      const adapter = (item.adapter ||
+        item.layer_adapter.toUpperCase()) as keyof LayerAdaptersOptions;
       const maxZoom = item.layer_max_scale_denom
         ? this._mapScaleToZoomLevel(item.layer_max_scale_denom)
         : this.webMap.options.maxZoom;

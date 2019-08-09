@@ -28,13 +28,18 @@ export interface ItemPropertyBaseConfig<K extends keyof ItemPropertyTypes = any>
   type?: ItemPropertyTypes[K];
   name?: string;
 }
-export interface ItemPropertyConfig<K extends keyof ItemPropertyTypes> extends ItemPropertyBaseConfig<K> {
+export interface ItemPropertyConfig<K extends keyof ItemPropertyTypes>
+  extends ItemPropertyBaseConfig<K> {
   handler?: Type<BaseProperty<ItemPropertyTypes[K]>>;
 }
 
-export interface ItemPropertyConfig<K extends keyof ItemPropertyTypes> extends ItemPropertyBaseConfig<K> {
+export interface ItemPropertyConfig<K extends keyof ItemPropertyTypes>
+  extends ItemPropertyBaseConfig<K> {
   getProperty?(): ItemPropertyTypes[K];
-  onSet?(value: ItemPropertyTypes[K], options?: ItemBasePropertyOptions<ItemPropertyTypes[K]>): void;
+  onSet?(
+    value: ItemPropertyTypes[K],
+    options?: ItemBasePropertyOptions<ItemPropertyTypes[K]>
+  ): void;
 }
 
 export interface CheckOptions<V = boolean> extends ItemBasePropertyOptions<V> {
@@ -49,7 +54,10 @@ export interface ItemOptions {
   headers?: any;
 }
 
-export interface ChangeEvent<V = any, O extends ItemBasePropertyOptions<V> = ItemBasePropertyOptions<V>> {
+export interface ChangeEvent<
+  V = any,
+  O extends ItemBasePropertyOptions<V> = ItemBasePropertyOptions<V>
+> {
   value: V;
   options: O;
 }

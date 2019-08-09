@@ -24,7 +24,6 @@ export class Reference extends Vue {
   }
 
   get reference(): ApiItem {
-
     const indexes = this.$store.state.api.indexes;
     if (indexes && 'id' in this.parameter.type) {
       return indexes[this.parameter.type.id];
@@ -51,7 +50,6 @@ export class Reference extends Vue {
   }
 
   goTo() {
-
     const reference = this.reference;
     if (reference && 'name' in this.parameter.type) {
       const name = this.parameter.type.name;

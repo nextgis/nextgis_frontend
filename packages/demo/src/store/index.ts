@@ -18,6 +18,6 @@ export default new Vuex.Store({
     api,
     app
   },
-  strict: debug,
+  strict: debug
   // plugins: debug ? [createLogger()] : []
 });

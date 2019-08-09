@@ -50,7 +50,10 @@ export function loadJSON(
   };
 
   xhr.onreadystatechange = () => {
-    if ((xhr.readyState === 4 && xhr.status === 200) || (xhr.readyState === 3 && xhr.status === 201)) {
+    if (
+      (xhr.readyState === 4 && xhr.status === 200) ||
+      (xhr.readyState === 3 && xhr.status === 201)
+    ) {
       processingResponce();
     } else if (xhr.readyState === 3 && xhr.status === 400) {
       processingResponce();

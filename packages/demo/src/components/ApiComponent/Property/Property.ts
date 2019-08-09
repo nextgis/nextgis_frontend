@@ -22,7 +22,7 @@ export class Property extends Vue {
 
   get defaultValue() {
     const tags = this.item.comment && this.item.comment.tags;
-    const defTag = tags && tags.find((x) => x.tag === 'default');
+    const defTag = tags && tags.find(x => x.tag === 'default');
     if (defTag) {
       return defTag.text;
     }
@@ -37,5 +37,4 @@ export class Property extends Vue {
       }
     }
   }
-
 }

@@ -1,4 +1,10 @@
-import { GeoJsonGeometryTypes, GeoJsonObject, FeatureCollection, Feature, GeometryCollection } from 'geojson';
+import {
+  GeoJsonGeometryTypes,
+  GeoJsonObject,
+  FeatureCollection,
+  Feature,
+  GeometryCollection
+} from 'geojson';
 import { VectorAdapterLayerType } from '@nextgis/webmap';
 
 export const allowedParams: Array<[string, string] | string> = ['color', 'opacity'];
@@ -76,7 +82,10 @@ export function detectType(geojson: GeoJsonObject): GeoJsonGeometryTypes {
 }
 
 // Static functions
-export function geometryFilter(geometry: GeoJsonGeometryTypes, type: VectorAdapterLayerType): boolean {
+export function geometryFilter(
+  geometry: GeoJsonGeometryTypes,
+  type: VectorAdapterLayerType
+): boolean {
   const backType = backAliases[type];
   if (backType) {
     return backType.indexOf(geometry) !== -1;

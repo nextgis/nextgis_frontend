@@ -3,7 +3,7 @@ export interface AppState {
 }
 
 const _state: AppState = {
-  defaultNgwMap: 'ngw-leaflet',
+  defaultNgwMap: 'ngw-leaflet'
 };
 
 // getters
@@ -11,20 +11,16 @@ const _getters = {};
 
 // actions
 const actions = {
-
-  setDefaultNgwMap({commit}, ngwMap: string) {
+  setDefaultNgwMap({ commit }, ngwMap: string) {
     commit('setDefaultNgwMap', ngwMap);
-  },
-
+  }
 };
 
 // mutations
 const mutations = {
-
   setDefaultNgwMap(state: AppState, ngwMap: string) {
     state.defaultNgwMap = ngwMap;
-  },
-
+  }
 };
 
 export default {

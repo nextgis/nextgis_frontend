@@ -7,7 +7,6 @@ import { Item } from '../../MainPage';
   components: { ClassItem }
 })
 export class ApiComponent extends Vue {
-
   @Prop() item: Item;
 
   // These two parameters are used to increase the speed of page rendering.
@@ -50,7 +49,7 @@ export class ApiComponent extends Vue {
   }
 
   getAllowedChildren(item: ApiItem) {
-    return item.children.filter((x) => this.getAllowedItem(x));
+    return item.children.filter(x => this.getAllowedItem(x));
   }
 
   isMembersShowed(itemName: string): boolean {
@@ -58,11 +57,10 @@ export class ApiComponent extends Vue {
   }
 
   private _refresh() {
-
     // open first allowed members count
     const children = this.allowedChildren;
-    const length = children.length < this.showMembersOnInit ?
-      children.length : this.showMembersOnInit;
+    const length =
+      children.length < this.showMembersOnInit ? children.length : this.showMembersOnInit;
     for (let fry = 0; fry < length; fry++) {
       this.showItemMembers(children[fry].name);
     }

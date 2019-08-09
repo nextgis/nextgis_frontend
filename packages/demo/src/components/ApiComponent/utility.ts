@@ -14,8 +14,10 @@ import {
 import { Indexes } from '../../store/modules/api';
 
 export function getSourceLink(item: ApiItem) {
-  return item.sources.map((x) => {
-    const link = `https://github.com/nextgis/nextgisweb_frontend/blob/master/packages/${x.fileName}#L${x.line}`;
+  return item.sources.map(x => {
+    const link = `https://github.com/nextgis/nextgisweb_frontend/blob/master/packages/${
+      x.fileName
+    }#L${x.line}`;
     return `<a href="${link}" target="_blank">${x.fileName}#L${x.line}</a>`;
   });
 }
@@ -25,22 +27,25 @@ export function getParameterName(parameter: Parameter) {
 }
 
 export function getSignatureParameters(parameters: Parameter[], indexes: Indexes): string[] {
-  return parameters.map((p) => {
+  return parameters.map(p => {
     const typeName = getOptionType(p.type, indexes);
     return `${getParameterName(p)}${typeName ? `<span class="nowrap">: ${typeName}</span>` : ''}`;
   });
 }
 
 export function getConstructorSignatureStr(item: ConstructorItem, indexes: Indexes) {
-  return item && item.signatures.map((x) => {
-    return getSignatureStrForConstructor(x, indexes);
-  });
+  return (
+    item &&
+    item.signatures.map(x => {
+      return getSignatureStrForConstructor(x, indexes);
+    })
+  );
 }
 
 export function getSignatureStrForConstructor(signatures: Signatures, indexes: Indexes) {
   if ('parameters' in signatures) {
     // const parameters = getSignatureParameters(signatures.parameters, indexes);
-    const parameters = signatures.parameters.map((p) => {
+    const parameters = signatures.parameters.map(p => {
       return `${getParameterName(p)}`;
     });
     const str = `${signatures.name}(${parameters.join(', ')})`;
@@ -50,13 +55,19 @@ export function getSignatureStrForConstructor(signatures: Signatures, indexes: I
 
 export function getOptionType(option: Property, indexes: Indexes): string {
   if (option.type === 'union') {
-    return option.types.map((x) => getOptionType(x, indexes)).filter((x) => !!x).join(' | ');
+    return option.types
+      .map(x => getOptionType(x, indexes))
+      .filter(x => !!x)
+      .join(' | ');
   } else if (option.type === 'intrinsic') {
     if (option.name !== 'undefined') {
       return option.name;
     }
   } else if (option.type === 'tuple') {
-    return `[${option.elements.map((x) => getOptionType(x, indexes)).filter((x) => !!x).join(', ')}]`;
+    return `[${option.elements
+      .map(x => getOptionType(x, indexes))
+      .filter(x => !!x)
+      .join(', ')}]`;
   } else if (option.type === 'reference') {
     return createReference(option, indexes);
   } else if (option.type === 'reflection') {
@@ -81,7 +92,7 @@ export function createReference(option: ReferencePropertyType, indexes: Indexes)
   const kindStringToLink: KindString[] = ['Interface', 'Class'];
   const refOption = indexes[option.id];
 
-  const isHref = (ref) => {
+  const isHref = ref => {
     return ref && kindStringToLink.indexOf(ref.kindString) !== -1;
   };
 
@@ -92,7 +103,10 @@ export function createReference(option: ReferencePropertyType, indexes: Indexes)
     if (option.type === 'reference' && isHref(refOption)) {
       name = createLink(refOption, option.name);
     }
-    const args = option.typeArguments.map((x) => getOptionType(x, indexes)).filter((x) => !!x).join(' | ');
+    const args = option.typeArguments
+      .map(x => getOptionType(x, indexes))
+      .filter(x => !!x)
+      .join(' | ');
     str += `${name}${args ? `&lt;${args}&gt;` : ''}`;
   } else if (isHref(refOption)) {
     return createLink(refOption, option.name);
@@ -107,7 +121,10 @@ export function createReference(option: ReferencePropertyType, indexes: Indexes)
 export function getDeclarationSignatureStr(signatures: Signatures, indexes: Indexes) {
   if ('parameters' in signatures) {
     const parameters = getSignatureParameters(signatures.parameters, indexes);
-    const str = `{[${parameters.join(', ')}]<span class="nowrap">: ${getOptionType(signatures.type, indexes)}</span>}`;
+    const str = `{[${parameters.join(', ')}]<span class="nowrap">: ${getOptionType(
+      signatures.type,
+      indexes
+    )}</span>}`;
     return str;
   }
 }
@@ -118,12 +135,15 @@ export function createDeclarationStr(option: ReflectionType, indexes: Indexes) {
     if (option.declaration.name === '__type') {
       if (option.declaration.indexSignature) {
         const signatures = option.declaration.indexSignature;
-        str += signatures.map((x) => {
+        str += signatures.map(x => {
           return getDeclarationSignatureStr(x, indexes);
         });
       } else if (option.declaration.children) {
-        const defs = option.declaration.children.map((x) => {
-          return `<span class="nowrap">${getParameterName(x)}: ${getOptionType(x.type, indexes)}</span>`;
+        const defs = option.declaration.children.map(x => {
+          return `<span class="nowrap">${getParameterName(x)}: ${getOptionType(
+            x.type,
+            indexes
+          )}</span>`;
         });
         str += `{${defs.join(', ')}}`;
       } else if (option.declaration.signatures) {
@@ -134,43 +154,61 @@ export function createDeclarationStr(option: ReflectionType, indexes: Indexes) {
   return str;
 }
 
-export function createMethodString(methodItem: MethodItem | FunctionItem | Declaration, indexes: Indexes): string {
-  const signatures = methodItem.signatures.map((x) => {
-    if ('parameters' in x) {
-      // const args = getSignatureParameters(x.parameters, indexes).join(', ');
-      const args = x.parameters.map((p) => {
-        return `${getParameterName(p)}`;
-      }).join(', ');
-      return `(${args})`; // : ${getOptionType(x.type, indexes)}`;
-    }
-  }).join(', ');
+export function createMethodString(
+  methodItem: MethodItem | FunctionItem | Declaration,
+  indexes: Indexes
+): string {
+  const signatures = methodItem.signatures
+    .map(x => {
+      if ('parameters' in x) {
+        // const args = getSignatureParameters(x.parameters, indexes).join(', ');
+        const args = x.parameters
+          .map(p => {
+            return `${getParameterName(p)}`;
+          })
+          .join(', ');
+        return `(${args})`; // : ${getOptionType(x.type, indexes)}`;
+      }
+    })
+    .join(', ');
   return `${methodItem.name}${signatures || '()'}`;
 }
 
-export function createMethodTypeString(methodItem: MethodItem | FunctionItem | Declaration, indexes: Indexes): string {
-  const signatures = methodItem.signatures.map((x) => {
-    let str = '(';
-    if ('parameters' in x) {
-      const args = getSignatureParameters(x.parameters, indexes).join(', ');
-      str += args;
-    }
-    str += ')';
-    const toReturn = getOptionType(x.type, indexes);
-    if (toReturn) {
-      str += `<span class="nowrap">: ${toReturn}</span>`;
-    }
-    return str;
-  }).join(', ');
+export function createMethodTypeString(
+  methodItem: MethodItem | FunctionItem | Declaration,
+  indexes: Indexes
+): string {
+  const signatures = methodItem.signatures
+    .map(x => {
+      let str = '(';
+      if ('parameters' in x) {
+        const args = getSignatureParameters(x.parameters, indexes).join(', ');
+        str += args;
+      }
+      str += ')';
+      const toReturn = getOptionType(x.type, indexes);
+      if (toReturn) {
+        str += `<span class="nowrap">: ${toReturn}</span>`;
+      }
+      return str;
+    })
+    .join(', ');
   return `${signatures}`;
 }
 
-export function createMethodReturn(methodItem: MethodItem | FunctionItem | Declaration, indexes: Indexes): string {
-  const signatures = methodItem.signatures.map((x) => {
-    const toReturn = getOptionType(x.type, indexes);
-    if (toReturn) {
-      return toReturn;
-    }
-    return '';
-  }).filter((x) => !!x).join('| ');
+export function createMethodReturn(
+  methodItem: MethodItem | FunctionItem | Declaration,
+  indexes: Indexes
+): string {
+  const signatures = methodItem.signatures
+    .map(x => {
+      const toReturn = getOptionType(x.type, indexes);
+      if (toReturn) {
+        return toReturn;
+      }
+      return '';
+    })
+    .filter(x => !!x)
+    .join('| ');
   return `${signatures}`;
 }
