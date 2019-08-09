@@ -76,6 +76,10 @@ export interface PatchRequestItemsResponseMap extends RequestItemKeys {
   'feature_layer.feature.collection': FeatureItem;
 }
 
+export interface DeleteRequestItemsResponseMap extends RequestItemKeys {
+  'feature_layer.feature.item': any;
+}
+
 export interface Credentials {
   login: string;
   password: string;
@@ -95,7 +99,7 @@ export interface RequestHeaders {
   [header: string]: string | undefined;
 }
 
-export type RequestMethods = 'POST' | 'GET' | 'PATCH';
+export type RequestMethods = 'POST' | 'GET' | 'PATCH' | 'DELETE';
 
 export interface RequestOptions<M = RequestMethods> {
   method?: M;
