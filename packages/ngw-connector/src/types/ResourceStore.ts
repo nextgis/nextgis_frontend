@@ -5,5 +5,5 @@
 export interface ResourceStoreItem {
   id: string;
   label: string;
-  [field: string]: string | number | boolean;
+  [field: string]: string | number | boolean | null | Date;
 }
