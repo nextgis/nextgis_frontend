@@ -15,6 +15,7 @@ interface VueTreeItem {
 @Component
 export class NgwLayersList extends Vue {
   @Prop({ type: NgwMap }) ngwMap!: NgwMap;
+  @Prop({ type: Array }) include!: Array<ResourceAdapter | string>;
 
   items: VueTreeItem[] = [];
 
@@ -66,18 +67,20 @@ export class NgwLayersList extends Vue {
     return h(VTreeview, data, this.$slots.default);
   }
 
+  @Watch('include')
   private async updateItems() {
     this.selection = [];
     this._layers = [];
     const ngwLayers = await this.ngwMap.getNgwLayers();
-    this.items = Object.keys(ngwLayers)
-      .map(x => ngwLayers[x])
+    const ngwLayersList = Object.keys(ngwLayers).map(x => ngwLayers[x]);
+    this.items = [];
+    ngwLayersList
       .sort((a, b) => {
         const aOrder = (a.layer.options && a.layer.options.order) || 0;
         const bOrder = (b.layer.options && b.layer.options.order) || 0;
         return aOrder - bOrder;
       })
-      .map(x => {
+      .forEach(x => {
         const layer: ResourceAdapter = x.layer;
         const name = (layer.item && layer.item.resource.display_name) || String(layer.id);
         const item: VueTreeItem = {
@@ -85,7 +88,18 @@ export class NgwLayersList extends Vue {
           name,
           children: []
         };
-
+        if (this.include) {
+          const isInclude = this.include.find(x => {
+            if (typeof x === 'string') {
+              return item.id === x;
+            } else {
+              return layer === x;
+            }
+          });
+          if (!isInclude) {
+            return;
+          }
+        }
         const webMap = layer.item && layer.item.webmap;
         if (webMap) {
           item.children = this._craeteWebMapTree(webMap.root_item.children);
@@ -94,7 +108,7 @@ export class NgwLayersList extends Vue {
           this.selection.push(item.id);
         }
         this._layers.push(layer);
-        return item;
+        this.items.push(item);
       });
   }
 
