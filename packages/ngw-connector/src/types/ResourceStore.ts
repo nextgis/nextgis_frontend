@@ -3,7 +3,7 @@
  */
 
 export interface ResourceStoreItem {
-  id: string;
+  id: number;
   label: string;
   [field: string]: string | number | boolean | null | Date;
 }
