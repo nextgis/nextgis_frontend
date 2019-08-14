@@ -7,12 +7,12 @@ export interface FeatureRequestParams {
   geom_format?: string;
 }
 
-const featureRequestParams: FeatureRequestParams = {
+const FEATURE_REQUEST_PARAMS: FeatureRequestParams = {
   srs: 4326,
   geom_format: 'geojson'
 };
 
-function _createGeojsonFeature<G extends Geometry | null = Geometry>(
+function _createGeoJsonFeature<G extends Geometry | null = Geometry>(
   item: FeatureItem
 ): Feature<G> {
   const geometry = item.geom as G;
@@ -33,11 +33,8 @@ export function getNgwLayerFeature<G extends Geometry | null = Geometry>(
   } & FilterOptions
 ): CancelablePromise<Feature<G>> {
   const params: FeatureRequestParams & FilterOptions & { [name: string]: any } = {
-    ...featureRequestParams
+    ...FEATURE_REQUEST_PARAMS
   };
-  if (options.limit) {
-    params.limit = options.limit;
-  }
 
   return options.connector
     .get('feature_layer.feature.item', null, {
@@ -46,7 +43,7 @@ export function getNgwLayerFeature<G extends Geometry | null = Geometry>(
       ...params
     })
     .then(item => {
-      return _createGeojsonFeature<G>(item);
+      return _createGeoJsonFeature<G>(item);
     });
 }
 
@@ -54,29 +51,48 @@ export function getNgwLayerFeatures<G extends Geometry | null = Geometry>(
   options: {
     resourceId: number;
     connector: NgwConnector;
-    filters?: PropertiesFilter[];
+    filters?: PropertiesFilter;
   } & FilterOptions
 ): CancelablePromise<FeatureCollection<G>> {
   const params: FeatureRequestParams & FilterOptions & { [name: string]: any } = {
-    ...featureRequestParams
+    ...FEATURE_REQUEST_PARAMS
   };
-  if (options.filters) {
-    options.filters.forEach(([field, operation, value]) => {
+  const { connector, filters, limit, resourceId } = options;
+  if (filters) {
+    const filterById = filters.find(x => x[0] === 'id');
+    if (filterById) {
+      if (filterById[1] === 'eq') {
+        return getNgwLayerFeature<G>({
+          connector,
+          resourceId,
+          featureId: filterById[2]
+        }).then(feature => {
+          const featureCollection: FeatureCollection<G> = {
+            type: 'FeatureCollection',
+            features: [feature]
+          };
+          return featureCollection;
+        });
+      } else {
+        throw new Error('Unable to filter by object id except `eq` operator');
+      }
+    }
+    filters.forEach(([field, operation, value]) => {
       params[`fld_${field}__${operation}`] = `${value}`;
     });
   }
-  if (options.limit) {
-    params.limit = options.limit;
+  if (limit) {
+    params.limit = limit;
   }
-  return options.connector
+  return connector
     .get('feature_layer.feature.collection', null, {
-      id: options.resourceId,
+      id: resourceId,
       ...params
     })
     .then((x: FeatureItem[]) => {
       const features: Array<Feature<G>> = [];
       x.forEach(y => {
-        features.push(_createGeojsonFeature(y));
+        features.push(_createGeoJsonFeature(y));
       });
 
       const featureCollection: FeatureCollection<G> = {

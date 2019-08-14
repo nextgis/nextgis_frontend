@@ -73,7 +73,11 @@ export interface PostRequestItemsResponseMap extends RequestItemKeys {
 }
 
 export interface PatchRequestItemsResponseMap extends RequestItemKeys {
-  'feature_layer.feature.collection': FeatureItem;
+  'feature_layer.feature.collection': Array<{ id: number }>;
+}
+
+export interface PutRequestItemsResponseMap extends RequestItemKeys {
+  'feature_layer.feature.item': { id: number };
 }
 
 export interface DeleteRequestItemsResponseMap extends RequestItemKeys {
@@ -99,7 +103,7 @@ export interface RequestHeaders {
   [header: string]: string | undefined;
 }
 
-export type RequestMethods = 'POST' | 'GET' | 'PATCH' | 'DELETE';
+export type RequestMethods = 'POST' | 'GET' | 'PATCH' | 'DELETE' | 'PUT';
 
 export interface RequestOptions<M = RequestMethods> {
   method?: M;
@@ -125,6 +129,6 @@ export interface UserInfo {
   display_name: string;
   id: number;
   // @default 'guest'
-  keyname: string;
+  keyname: 'guest' | string;
   clientId?: string;
 }

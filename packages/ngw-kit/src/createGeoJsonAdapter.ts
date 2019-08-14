@@ -20,7 +20,7 @@ export async function createGeoJsonAdapter(
   let _dataPromise: CancelablePromise<any> | undefined;
   const _fullDataLoad = false;
 
-  const geoJsonAdapterCb = async (filters?: PropertiesFilter[], opt?: FilterOptions) => {
+  const geoJsonAdapterCb = async (filters?: PropertiesFilter, opt?: FilterOptions) => {
     _dataPromise = getNgwLayerFeatures({
       resourceId: options.resourceId,
       filters,
