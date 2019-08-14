@@ -51,6 +51,7 @@ export interface RequestItemsResponseMap {
 export interface GetRequestItemsResponseMap extends RequestItemKeys {
   'pyramid.route': PyramidRoute;
   'resource.item': ResourceItem;
+  'resource.search': ResourceItem[];
   'resource.child': any;
   'resource.collection': ResourceItem[];
   'file_upload.upload': FileUploadResp;
