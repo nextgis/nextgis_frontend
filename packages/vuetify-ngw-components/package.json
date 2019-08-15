@@ -1,24 +1,24 @@
 {
   "name": "@nextgis/vuetify-ngw-components",
-  "version": "0.17.0",
+  "version": "0.18.0",
   "description": "Development tools",
   "main": "lib/vuetify-ngw-components.js",
   "unpkg": "lib/vuetify-ngw-components.js",
   "types": "lib/index.d.ts",
   "dependencies": {
+    "@nextgis/leaflet-map-adapter": "^0.18.0",
+    "@nextgis/ngw-map": "^0.18.0",
     "vue": "^2.6.10",
     "vue-class-component": "^7.1.0",
     "vue-property-decorator": "^8.2.1",
-    "vuetify": "^2.0.7",
-    "@nextgis/ngw-map": "^0.17.0",
-    "@nextgis/leaflet-map-adapter": "^0.17.0"
+    "vuetify": "^2.0.7"
   },
   "devDependencies": {
+    "@nextgis/eslint-config": "^0.18.0",
     "@types/events": "^3.0.0",
     "@types/node": "^12.7.2",
-    "@nextgis/eslint-config": "^0.17.0",
-    "eslint-loader": "^2.2.1",
     "css-loader": "^3.2.0",
+    "eslint-loader": "^2.2.1",
     "file-loader": "^4.2.0",
     "rimraf": "^3.0.0",
     "style-loader": "^1.0.0",

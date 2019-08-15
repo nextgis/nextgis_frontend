@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/ngw-connector",
-  "version": "0.17.0",
+  "version": "0.18.0",
   "_priority": 12,
   "description": "Module for interaction with NGW (NextGis Web) server API",
   "main": "lib/ngw-connector.js",
@@ -10,12 +10,12 @@
     "events": "^3.0.0"
   },
   "devDependencies": {
+    "@nextgis/eslint-config": "^0.18.0",
     "@types/events": "^3.0.0",
     "@types/node": "^12.7.2",
+    "eslint-loader": "^2.2.1",
     "rimraf": "^3.0.0",
     "ts-loader": "^6.0.4",
-    "@nextgis/eslint-config": "^0.17.0",
-    "eslint-loader": "^2.2.1",
     "typescript": "^3.5.3",
     "webpack": "^4.39.2",
     "webpack-cli": "^3.3.6"
