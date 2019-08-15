@@ -3,6 +3,5 @@
  */
 
 import { MapboxglMapAdapter } from './MapboxglMapAdapter';
-
-export { MapboxglMapAdapter };
+export * from './MapboxglMapAdapter';
 export default MapboxglMapAdapter;

@@ -28,7 +28,7 @@ export abstract class BaseProperty<
   name: string;
 
   item: Item;
-  protected _blocked: boolean = false;
+  protected _blocked = false;
   protected _container?: HTMLElement;
   protected _value?: V;
 

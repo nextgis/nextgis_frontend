@@ -39,7 +39,7 @@ type MapboxLayerType = 'fill' | 'line' | 'symbol' | 'circle';
 export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapterOptions>
   extends BaseAdapter<O>
   implements VectorLayerAdapter<Map, TLayer, O, Feature> {
-  selected: boolean = false;
+  selected = false;
 
   protected featureIdName = 'id';
   protected _types: VectorAdapterLayerType[] = ['fill', 'circle', 'line'];

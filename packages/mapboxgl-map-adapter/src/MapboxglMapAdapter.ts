@@ -14,7 +14,7 @@ import {
   WebMapEvents
 } from '@nextgis/webmap';
 import { MvtAdapter } from './layer-adapters/MvtAdapter';
-import { Map, IControl, MapEventType, EventData, MapboxOptions } from 'mapbox-gl';
+import mapboxgl, { Map, IControl, MapEventType, EventData, MapboxOptions } from 'mapbox-gl';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
 import { TileAdapter } from './layer-adapters/TileAdapter';
 import { EventEmitter } from 'events';
@@ -32,6 +32,11 @@ const fitBoundsOptions: FitOptions = {
   padding: 100
 };
 
+export interface MapboxglMapAdapterOptions extends MapOptions {
+  style?: mapboxgl.Style | string;
+  accessToken?: string;
+}
+
 export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   static layerAdapters = {
     TILE: TileAdapter,
@@ -47,7 +52,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     ATTRIBUTION: AttributionControl
   };
 
-  options: MapOptions = {};
+  options: MapboxglMapAdapterOptions = {};
   map!: Map;
 
   emitter = new EventEmitter();
@@ -69,25 +74,35 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   private _sortTimerId?: number;
 
   // create(options: MapOptions = {target: 'map'}) {
-  create(options: MapOptions) {
+  create(options: MapboxglMapAdapterOptions) {
     if (!this.map) {
       this.options = options;
+      if (options.accessToken) {
+        mapboxgl.accessToken = options.accessToken;
+      }
       if (options.target) {
         const mapOpt: MapboxOptions = {
           container: options.target,
           attributionControl: false,
           // @ts-ignore
           bounds: options.bounds,
-          fitBoundsOptions: { ...options.fitOptions, ...fitBoundsOptions },
+          fitBoundsOptions: { ...options.fitOptions, ...fitBoundsOptions }
           // center: options.center,
           // zoom: options.zoom,
-          style: {
-            version: 8,
-            name: 'Empty style',
-            sources: {},
-            layers: []
-          }
         };
+        if (typeof options.style === 'string') {
+          mapOpt.style = options.style;
+        } else {
+          mapOpt.style = {
+            ...{
+              version: 8,
+              name: 'Empty style',
+              sources: {},
+              layers: []
+            },
+            ...options.style
+          };
+        }
         if (options.center !== undefined) {
           mapOpt.center = options.center;
         }

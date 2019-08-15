@@ -16,7 +16,7 @@ import { detectType, typeAlias, typeAliasForFilter, geometryFilter } from '../ut
 let ID = 0;
 
 export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
-  selected: boolean = false;
+  selected = false;
   protected featureIdName = '_rendromId';
   private _features: Feature[] = [];
   private _filteredFeatureIds: string[] = [];

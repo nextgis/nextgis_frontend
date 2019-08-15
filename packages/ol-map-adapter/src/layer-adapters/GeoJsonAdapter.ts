@@ -24,7 +24,7 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
   layer?: VectorLayer;
   paint?: VectorAdapterLayerPaint | GetPaintCallback;
   selectedPaint?: VectorAdapterLayerPaint | GetPaintCallback;
-  selected: boolean = false;
+  selected = false;
 
   private vectorSource = new VectorSource();
   private _features: ol.Feature[] = [];
@@ -145,6 +145,9 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
     for (let fry = 0; fry < length; fry++) {
       this.vectorSource.addFeature(filtered[fry]);
     }
+    return filtered.map(x => {
+      return { feature: getFeature(x) };
+    });
   }
 
   cleanFilter() {

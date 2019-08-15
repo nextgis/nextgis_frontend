@@ -9,24 +9,24 @@
   "dependencies": {
     "@nextgis/mapboxgl-map-adapter": "^0.17.0",
     "@nextgis/ngw-map": "^0.17.0",
-    "@types/mapbox-gl": "^0.51.11",
+    "@types/mapbox-gl": "^0.54.1",
     "canvg": "^2.0.0",
-    "mapbox-gl": "^1.1.1"
+    "mapbox-gl": "^1.2.1"
   },
   "devDependencies": {
     "@types/events": "^3.0.0",
     "@types/geojson": "^7946.0.7",
-    "@types/node": "^12.6.8",
+    "@types/node": "^12.7.2",
     "base64-inline-loader": "^1.1.1",
-    "css-loader": "^3.1.0",
-    "file-loader": "^4.1.0",
-    "rimraf": "^2.6.3",
-    "style-loader": "^0.23.1",
+    "css-loader": "^3.2.0",
+    "file-loader": "^4.2.0",
+    "rimraf": "^3.0.0",
+    "style-loader": "^1.0.0",
     "ts-loader": "^6.0.4",
     "@nextgis/eslint-config": "^0.17.0",
     "eslint-loader": "^2.2.1",
     "typescript": "^3.5.3",
-    "webpack": "^4.36.1",
+    "webpack": "^4.39.2",
     "webpack-cli": "^3.3.6"
   },
   "scripts": {

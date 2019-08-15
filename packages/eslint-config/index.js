@@ -9,7 +9,7 @@ module.exports = {
     browser: true,
     node: true,
     amd: true,
-    es6: true
+    es6: true,
   },
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -53,9 +53,10 @@ module.exports = {
         accessibility: 'off'
       }
     ],
-    '@typescript-eslint/array-type': ['error', 'array-simple'],
+    '@typescript-eslint/array-type': ['error', { default: 'array-simple' }],
     '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/no-var-requires': 0,
+    '@typescript-eslint/ban-ts-ignore': 0,
     '@typescript-eslint/no-parameter-properties': 0,
     '@typescript-eslint/no-object-literal-type-assertion': 0,
     '@typescript-eslint/explicit-function-return-type': [

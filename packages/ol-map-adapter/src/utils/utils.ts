@@ -50,7 +50,9 @@ export function styleFunction(
     const f: Feature = getFeature(feature);
     return styleFunction(feature, paint(f));
   } else {
-    const type = feature.getGeometry().getType();
+    const geometry = feature.getGeometry();
+    const geomType = geometry && geometry.getType();
+    const type = geomType || 'Point';
     const style: { stroke?: Stroke; fill?: Fill; image?: any } = {};
     const _type = paint.type;
     if (!_type) {

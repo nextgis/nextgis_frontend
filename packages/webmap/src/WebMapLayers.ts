@@ -25,7 +25,7 @@ import { GetAttributionsOptions, ToggleLayerOptions } from './interfaces/WebMapA
 import { propertiesFilter } from './util/propertiesFilter';
 
 export class WebMapLayers<L = any> {
-  private _layersIds: number = 1;
+  private _layersIds = 1;
   private readonly _baseLayers: string[] = [];
   private readonly _layers: { [id: string]: LayerAdapter } = {};
   private readonly _selectedLayers: string[] = [];
