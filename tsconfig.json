@@ -22,11 +22,21 @@
     "resolveJsonModule": true,
     "baseUrl": ".",
     "paths": {
-      "@nextgis/*": ["./packages/*/src/"]
+      "@nextgis/*": [
+        "./packages/*/src/"
+      ]
     }
   },
+  "includes": [
+    "src",
+    "**/*.tsx",
+    "**/*.ts",
+    "**/*.js",
+    "next-env.d.ts"
+  ],
   "exclude": [
     "node_modules",
+    "dist",
     "**/*.spec.ts"
   ]
 }

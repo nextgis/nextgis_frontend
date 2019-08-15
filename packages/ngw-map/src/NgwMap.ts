@@ -48,7 +48,7 @@ import { Geometry, Feature, FeatureCollection } from 'geojson';
  * });
  * ```
  */
-export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEvents> {
+export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<M, L, C, NgwMapEvents> {
   static utils = {
     ...WebMap.utils,
     ...NgwKit.utils,
@@ -60,7 +60,7 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
 
   readonly emitter: StrictEventEmitter<EventEmitter, NgwMapEvents> = new EventEmitter();
 
-  options: NgwMapOptions<C> = {};
+  options: NgwMapOptions<C> & O = {} as NgwMapOptions<C> & O;
   connector!: NgwConnector;
 
   protected _ngwLayers: NgwLayers = {};
@@ -69,7 +69,7 @@ export class NgwMap<M = any, L = any, C = any> extends WebMap<M, L, C, NgwMapEve
    * @param mapAdapter #noapi
    * @param options
    */
-  constructor(mapAdapter: MapAdapter, options: NgwMapOptions<C>) {
+  constructor(mapAdapter: MapAdapter, options: NgwMapOptions<C> & O) {
     super(prepareWebMapOptions(mapAdapter, options));
     if (options.connector) {
       this.connector = options.connector;
