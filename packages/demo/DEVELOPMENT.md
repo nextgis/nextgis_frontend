@@ -1,4 +1,4 @@
-## Docker
+# Docker
 
 ```bash
 docker build -t registry.nextgis.com/code-nextgis:0.14.12 .

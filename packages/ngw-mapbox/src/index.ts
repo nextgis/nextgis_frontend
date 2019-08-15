@@ -7,8 +7,10 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import NgwMap, { NgwLayerOptions, NgwMapOptions } from '@nextgis/ngw-map';
 import MapboxglMapAdapter from '@nextgis/mapboxgl-map-adapter';
 import { ResourceAdapter } from '@nextgis/ngw-kit';
+import { MapboxglMapAdapterOptions } from '@nextgis/mapboxgl-map-adapter';
+import { Map } from 'mapbox-gl';
 
-export class NgwMapbox extends NgwMap {
+export class NgwMapbox extends NgwMap<Map, string[], any, MapboxglMapAdapterOptions> {
   constructor(options: NgwMapOptions) {
     super(new MapboxglMapAdapter(), options);
   }

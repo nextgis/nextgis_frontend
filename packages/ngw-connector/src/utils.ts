@@ -32,7 +32,7 @@ export function loadJSON(
     xhr.responseType = options.responseType;
   }
 
-  const processingResponce = (forError: boolean = false) => {
+  const processingResponce = (forError = false) => {
     const cb = forError ? error : callback;
     if (options.responseType === 'blob') {
       cb(xhr.response);

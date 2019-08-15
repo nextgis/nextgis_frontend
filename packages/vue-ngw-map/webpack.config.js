@@ -8,7 +8,7 @@ module.exports = (env, argv) => {
     library,
     package,
     libraryExport: '',
-    externals: true,
+    externals: false,
     dirname: __dirname
   });
 };

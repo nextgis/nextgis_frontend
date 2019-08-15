@@ -32,7 +32,7 @@ export class NgwUploader {
   };
 
   emitter = new EventEmitter();
-  isLoaded: boolean = false;
+  isLoaded = false;
   connector?: NgwConnector;
 
   constructor(options: NgwUploadOptions) {

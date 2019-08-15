@@ -1,6 +1,5 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const TSLintPlugin = require('tslint-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
@@ -67,9 +66,6 @@ module.exports = (env, argv) => {
   );
 
   let plugins = [
-    new TSLintPlugin({
-      files: ['./src/**/*.ts']
-    }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(argv.mode || 'development'),
       'process.env.EXAMPLES': JSON.stringify(generateExamples('../'))

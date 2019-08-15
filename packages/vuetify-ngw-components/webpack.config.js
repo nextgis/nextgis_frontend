@@ -1,4 +1,4 @@
-const library = 'VueNgwMap';
+const library = 'VuetifyNgwComponents';
 
 const package = require('./package.json');
 const common = require('../../build/webpack.config');
@@ -8,7 +8,7 @@ module.exports = (env, argv) => {
     library,
     package,
     libraryExport: '',
-    externals: true,
+    externals: false,
     dirname: __dirname
   });
 };

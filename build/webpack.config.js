@@ -1,5 +1,5 @@
 const webpack = require('webpack');
-const TSLintPlugin = require('tslint-webpack-plugin');
+
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const path = require('path');
 const { getAliases } = require('./aliases');
@@ -24,7 +24,7 @@ module.exports = (env, argv, opt = {}) => {
 
   if (!useExternals) {
     externals = [
-      function(context, request, callback) {
+      function (context, request, callback) {
         // Absolute & Relative paths are not externals
         if (request.match(/^(\.{0,2})\//)) {
           return callback();
@@ -46,7 +46,10 @@ module.exports = (env, argv, opt = {}) => {
       enforce: 'pre',
       test: /\.tsx?$/,
       exclude: /node_modules/,
-      loader: 'eslint-loader'
+      loader: 'eslint-loader',
+      options: {
+        fix: true
+      }
     },
     {
       test: /\.tsx?$/,
@@ -73,10 +76,6 @@ module.exports = (env, argv, opt = {}) => {
   ];
 
   let plugins = [
-    new TSLintPlugin({
-      files: ['./src/**/*.ts'],
-      silent: true
-    }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(argv.mode || 'development')
     })
