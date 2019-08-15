@@ -1,13 +1,13 @@
 {
   "name": "@nextgis/mapboxgl-map-adapter",
-  "version": "0.17.0",
+  "version": "0.18.0",
   "_priority": 16,
   "description": "",
   "main": "lib/mapboxgl-map-adapter.js",
   "unpkg": "lib/mapboxgl-map-adapter.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/webmap": "^0.17.0",
+    "@nextgis/webmap": "^0.18.0",
     "events": "^3.0.0",
     "mapbox-gl": "1.2.1"
   },
@@ -15,12 +15,12 @@
     "canvg": "^2.0.0"
   },
   "devDependencies": {
+    "@nextgis/eslint-config": "^0.18.0",
     "@types/events": "^3.0.0",
     "@types/node": "^12.7.2",
+    "eslint-loader": "^2.2.1",
     "rimraf": "^3.0.0",
     "ts-loader": "^6.0.4",
-    "@nextgis/eslint-config": "^0.17.0",
-    "eslint-loader": "^2.2.1",
     "typescript": "^3.5.3",
     "webpack": "^4.39.2",
     "webpack-cli": "^3.3.6"
