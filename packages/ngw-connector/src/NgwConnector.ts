@@ -76,6 +76,9 @@ export class NgwConnector {
   }
 
   getUserInfo(credentials: Credentials): CancelablePromise<UserInfo> {
+    if (this.user && this.user.id) {
+      return CancelablePromise.resolve(this.user);
+    }
     if (credentials) {
       this.options.auth = credentials;
     }
