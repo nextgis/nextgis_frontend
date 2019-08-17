@@ -32,13 +32,13 @@ export class WebMapControls<C = any> {
     }
   };
 
-  constructor(private webMap: WebMap) {}
+  webMap!: WebMap;
 
   async addControl<K extends keyof MapControls>(
     controlDef: K | C,
     position: ControlPositions,
     options?: MapControls[K]
-  ) {
+  ): Promise<any> {
     let control: C | undefined;
     if (typeof controlDef === 'string') {
       control = this.getControl(controlDef, options);
