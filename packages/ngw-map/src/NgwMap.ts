@@ -363,7 +363,7 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<M, L, C, N
   }
 
   private async _selectFromNgw(ev: MapClickEvent) {
-    const promises: Array<Promise<number[] | undefined>> = [];
+    const promises: Promise<number[] | undefined>[] = [];
     for (const nl in this._ngwLayers) {
       const layer = this._ngwLayers[nl].layer;
       if (layer.getIdentificationIds && layer.options.selectable) {
