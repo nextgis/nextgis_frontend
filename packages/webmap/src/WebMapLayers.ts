@@ -16,21 +16,22 @@ import {
   LayerDefinition
 } from './interfaces/LayerAdapter';
 import { LayerDef, Type } from './interfaces/BaseTypes';
-import { WebMap } from './WebMap';
 
 import { Feature, GeoJsonObject } from 'geojson';
 import { preparePaint } from './util/preparePaint';
 import { updateGeoJsonAdapterOptions } from './util/updateGeoJsonAdapterOptions';
 import { GetAttributionsOptions, ToggleLayerOptions } from './interfaces/WebMapApp';
 import { propertiesFilter } from './util/propertiesFilter';
+import WebMap from '.';
 
 export class WebMapLayers<L = any> {
+  webMap!: WebMap;
+
   private _layersIds = 1;
   private readonly _baseLayers: string[] = [];
   private readonly _layers: { [id: string]: LayerAdapter } = {};
   private readonly _selectedLayers: string[] = [];
 
-  constructor(private webMap: WebMap) {}
   /**
    * Try to fit map view by given layer bounds.
    * But not all layers have borders
@@ -256,7 +257,7 @@ export class WebMapLayers<L = any> {
         allow = allowCb(l, this._layers[l]);
       }
       if (allow) {
-        this.webMap.removeLayer(l);
+        this.removeLayer(l);
         delete this._layers[l];
       }
     }
@@ -266,7 +267,7 @@ export class WebMapLayers<L = any> {
    * Remove all layers but not remove basemap.
    */
   removeOverlays() {
-    this.webMap.removeLayers((layerId, layer) => !layer.options.baseLayer);
+    this.removeLayers((layerId, layer) => !layer.options.baseLayer);
   }
 
   /**
@@ -537,7 +538,7 @@ export class WebMapLayers<L = any> {
   filterLayer(
     layerDef: LayerDef,
     filter: DataLayerFilter<Feature, L>
-  ): Array<LayerDefinition<Feature, L>> {
+  ): LayerDefinition<Feature, L>[] {
     const layer = this.getLayer(layerDef);
     const adapter = layer as VectorLayerAdapter;
     if (adapter.filter) {
@@ -567,7 +568,7 @@ export class WebMapLayers<L = any> {
     if (adapter.removeFilter) {
       adapter.removeFilter();
     } else if (adapter.filter) {
-      adapter.filter(function() {
+      adapter.filter(() => {
         return true;
       });
     }
