@@ -35,7 +35,7 @@ export interface FeatureItemAttachment {
   is_image: boolean;
 }
 
-export interface FeatureItem<F extends FeatureLayerFields = FeatureLayerFields> {
+export interface FeatureItem<F = FeatureLayerFields> {
   id: number;
   geom: string | GeometryObject;
   fields: F;
