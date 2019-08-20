@@ -96,6 +96,7 @@ export type GetPaintCallback<F = Feature> = (feature: F) => VectorAdapterLayerPa
 export type Paint = VectorAdapterLayerPaint | GetPaintCallback;
 
 export interface PopupOptions {
+  minWidth?: number;
   createPopupContent?: (layerDef: LayerDefinition) => HTMLElement | string;
 }
 
@@ -175,6 +176,7 @@ export interface VectorAdapterOptions<F extends Feature = Feature, L = any> exte
    * Make the feature selected while mouseover.
    */
   selectOnHover?: boolean;
+  popup?: boolean;
   popupOnSelect?: boolean;
   popupOptions?: PopupOptions;
   filter?: DataLayerFilter;
