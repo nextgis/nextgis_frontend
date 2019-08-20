@@ -223,9 +223,10 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
   private _openPopup(layer: Layer, options?: PopupOptions) {
     // @ts-ignore
     const feature = layer.feature;
+    const { minWidth } = options || { minWidth: 300 };
     const content =
       options && options.createPopupContent ? options.createPopupContent({ layer, feature }) : '';
-    layer.bindPopup(content).openPopup();
+    layer.bindPopup(content, { minWidth }).openPopup();
   }
 
   private _closePopup(layer: Layer) {
@@ -347,6 +348,9 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
           } else {
             layer.on('click', e => this._onLayerClick(e as LeafletMouseEvent), this);
           }
+        }
+        if (this.options.popup) {
+          this._openPopup(layer, this.options.popupOptions);
         }
         if (this.options.labelField && feature && feature.properties) {
           const message = feature.properties[this.options.labelField];
