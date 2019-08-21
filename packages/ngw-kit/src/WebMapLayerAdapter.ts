@@ -101,7 +101,7 @@ export class WebMapLayerAdapter implements ResourceAdapter {
     }
   }
 
-  getDependLayers(): Array<TreeGroup | TreeLayer> {
+  getDependLayers(): Array<WebMapLayerItem> {
     return (this.layer && this.layer.tree.getDescendants()) || [];
   }
 
@@ -125,7 +125,7 @@ export class WebMapLayerAdapter implements ResourceAdapter {
               options.headers = headers;
             }
           }
-
+          options.order = this.options.order;
           const layer = new WebMapLayerItem(this.options.webMap, webmap.root_item, options);
           layer.emitter.on('init', () => resolve(layer));
         });
