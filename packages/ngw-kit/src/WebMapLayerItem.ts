@@ -92,6 +92,9 @@ export class WebMapLayerItem extends Item<ItemOptions> {
         ...item,
         headers: this.options.headers
       };
+      if (this.options.order) {
+        options.order = this.options.order + Number(0 + '.' + this.id);
+      }
       newLayer = await this.webMap.addLayer(adapter, options);
     }
     if (newLayer) {

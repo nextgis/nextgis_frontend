@@ -52,6 +52,7 @@ export interface CheckOptions<V = boolean> extends ItemBasePropertyOptions<V> {
 export interface ItemOptions {
   properties?: Array<ItemPropertyConfig<keyof ItemPropertyTypes>>;
   headers?: any;
+  order?: number;
 }
 
 export interface ChangeEvent<
