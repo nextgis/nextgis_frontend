@@ -585,13 +585,15 @@ export class WebMapLayers<L = any> {
    * ```
    */
   setLayerData(layerDef: LayerDef, data: GeoJsonObject) {
-    const layerMem = this.getLayer(layerDef);
-    const adapter = layerMem as VectorLayerAdapter;
-    if (adapter.setData) {
-      adapter.setData(data);
-    } else if (adapter.clearLayer && adapter.addData) {
-      adapter.clearLayer();
-      adapter.addData(data);
+    const vectorAdapter = this.getLayer(layerDef);
+    const adapter = vectorAdapter as VectorLayerAdapter;
+    if (adapter) {
+      if (adapter.setData) {
+        adapter.setData(data);
+      } else if (adapter.clearLayer && adapter.addData) {
+        adapter.clearLayer();
+        adapter.addData(data);
+      }
     }
   }
 
