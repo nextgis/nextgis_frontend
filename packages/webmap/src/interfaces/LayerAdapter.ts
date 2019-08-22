@@ -73,13 +73,19 @@ export interface PathPaint extends BasePaint {
 
 export type GeometryPaint = PathPaint & CirclePaint;
 
-export interface IconOptions {
+export interface IconPaint {
   type: 'icon';
   className?: string;
   html?: string;
   iconSize?: [number, number];
   iconAnchor?: [number, number];
 }
+
+/**
+ * @deprecated use IconPaint instead
+ */
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface IconOptions extends IconPaint {}
 
 export type GetPaintFunction = (opt?: any) => VectorAdapterLayerPaint;
 

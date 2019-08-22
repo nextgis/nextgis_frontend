@@ -354,7 +354,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
         }
         if (this.options.labelField && feature && feature.properties) {
           const message = feature.properties[this.options.labelField];
-          if (message) {
+          if (message !== undefined) {
             layer.bindTooltip(String(message), { permanent: true }).openTooltip();
           }
         }
