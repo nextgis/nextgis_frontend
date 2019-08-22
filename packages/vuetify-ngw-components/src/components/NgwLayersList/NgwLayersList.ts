@@ -1,11 +1,9 @@
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 import NgwMap, { NgwLayersMem } from '@nextgis/ngw-map';
 import { ResourceAdapter, WebMapLayerAdapter, WebMapLayerItem } from '@nextgis/ngw-kit';
-import { TreeGroup, TreeLayer } from '@nextgis/ngw-connector';
 import { CreateElement, VNode, VNodeData } from 'vue';
 // @ts-ignore
 import { VTreeview } from 'vuetify/lib';
-import { layerGroup } from 'leaflet';
 
 interface VueTreeItem {
   id: string;
