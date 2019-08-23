@@ -85,7 +85,7 @@ export interface IconPaint {
  * @deprecated use IconPaint instead
  */
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface IconOptions extends IconPaint {}
+export interface IconOptions extends IconPaint { }
 
 export type GetPaintFunction = (opt?: any) => VectorAdapterLayerPaint;
 
@@ -164,6 +164,7 @@ export interface VectorAdapterOptions<F extends Feature = Feature, L = any> exte
    * ```
    */
   selectable?: boolean;
+  interactive?: boolean;
   /**
    * Indicates whether several objects can be selected in one layer.
    *
@@ -319,7 +320,7 @@ export interface VectorLayerAdapter<
   L = any,
   O extends VectorAdapterOptions = VectorAdapterOptions,
   F extends Feature = Feature
-> extends BaseLayerAdapter<M, L, O> {
+  > extends BaseLayerAdapter<M, L, O> {
   selected?: boolean;
 
   getLayers?(): Array<LayerDefinition<F, L>>;
