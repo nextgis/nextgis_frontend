@@ -336,6 +336,8 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
         ok = this._filterFun({ feature, layer });
       }
       if (ok) {
+        // @ts-ignore
+        layer.options.interactive = this.options.selectable || this.options.interactive;
         this.layer.addLayer(layer);
         if (options.selectable) {
           if (options.selectOnHover) {
