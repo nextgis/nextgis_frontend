@@ -4,6 +4,7 @@ import { ResourceAdapter, WebMapLayerAdapter, WebMapLayerItem } from '@nextgis/n
 import { CreateElement, VNode, VNodeData } from 'vue';
 // @ts-ignore
 import { VTreeview } from 'vuetify/lib';
+import { reverse } from 'dns';
 
 interface VueTreeItem {
   id: string;
@@ -90,6 +91,7 @@ export class NgwLayersList extends Vue {
         const bOrder = (b.layer.options && b.layer.options.order) || 0;
         return aOrder - bOrder;
       })
+      .reverse()
       .forEach(x => {
         this._createTreeItem(x);
       });
@@ -134,6 +136,7 @@ export class NgwLayersList extends Vue {
   private _createWebMapTree(items: WebMapLayerItem[]) {
     return items
       .filter(x => x.layer && x.layer.id)
+      .reverse()
       .map(x => {
         const _id = x.layer && x.layer.id;
         const id = String(_id);
