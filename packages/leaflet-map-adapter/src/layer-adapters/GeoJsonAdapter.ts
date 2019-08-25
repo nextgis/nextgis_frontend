@@ -220,6 +220,25 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     });
   }
 
+  updateTooltip(layerDef?: LayerDefinition) {
+    if (layerDef) {
+      this._updateTooltip(layerDef);
+    } else {
+      this.getLayers().forEach(x => this._updateTooltip(x));
+    }
+  }
+
+  private _updateTooltip(layerDef: LayerDefinition) {
+    const { feature, layer } = layerDef;
+    if (this.options.labelField && feature && feature.properties) {
+      layer.unbindTooltip();
+      const message = feature.properties[this.options.labelField];
+      if (message !== undefined) {
+        layer.bindTooltip(String(message), { permanent: true }).openTooltip();
+      }
+    }
+  }
+
   private _openPopup(layer: Layer, options?: PopupOptions) {
     // @ts-ignore
     const feature = layer.feature;
@@ -354,12 +373,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
         if (this.options.popup) {
           this._openPopup(layer, this.options.popupOptions);
         }
-        if (this.options.labelField && feature && feature.properties) {
-          const message = feature.properties[this.options.labelField];
-          if (message !== undefined) {
-            layer.bindTooltip(String(message), { permanent: true }).openTooltip();
-          }
-        }
+        this._updateTooltip({ layer, feature });
       }
     };
 
