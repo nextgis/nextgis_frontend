@@ -190,6 +190,7 @@ export interface VectorAdapterOptions<F extends Feature = Feature, L = any> exte
   propertiesFilter?: PropertiesFilter;
 
   labelField?: string;
+  label?: (e: LayerDefinition<F, L>) => void | string;
 
   onLayerClick?(opt: OnLayerClickOptions): Promise<any>;
 }
@@ -342,4 +343,6 @@ export interface VectorLayerAdapter<
 
   openPopup?(findFeatureCb?: DataLayerFilter<F, L>, options?: PopupOptions): void;
   closePopup?(findFeatureCb?: DataLayerFilter<F, L>): void;
+
+  updateTooltip?(layerDef?: LayerDefinition<F, L>): void;
 }
