@@ -4,9 +4,11 @@
     <h3 class="title pb-3">
       {{ item.name }}
       <v-tooltip bottom>
-        <v-btn slot="activator" text icon @click="openFullPage">
-          <v-icon dark>mdi-fullscreen</v-icon>
-        </v-btn>
+        <template v-slot:activator="{ on }">
+          <v-btn text icon @click="openFullPage">
+            <v-icon dark>mdi-fullscreen</v-icon>
+          </v-btn>
+        </template>
         <span>Open exampe in fullscrean</span>
       </v-tooltip>
     </h3>

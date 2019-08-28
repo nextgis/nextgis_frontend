@@ -160,6 +160,7 @@ export class NgwConnector {
         throw new Error('request url is not set');
       }
     }
+    return CancelablePromise.resolve({} as P[K]);
   }
 
   post<K extends keyof RequestItemsParamsMap>(
