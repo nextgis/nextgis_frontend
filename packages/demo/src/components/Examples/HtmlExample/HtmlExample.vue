@@ -1,21 +1,14 @@
 <template>
-  <div v-if="fullScreen" class="example-iframe fullscrean" id="example-iframe">
-  </div>
+  <div v-if="fullScreen" class="example-iframe fullscrean" id="example-iframe"></div>
   <div v-else class="content ma-3">
     <h3 class="title pb-3">
       {{ item.name }}
       <v-tooltip bottom>
-        <v-btn
-          slot="activator"
-          flat
-          icon
-          @click="openFullPage"
-        >
+        <v-btn slot="activator" text icon @click="openFullPage">
           <v-icon dark>mdi-fullscreen</v-icon>
         </v-btn>
         <span>Open exampe in fullscrean</span>
       </v-tooltip>
-
     </h3>
     <p>{{ item.description }}</p>
 
@@ -31,29 +24,25 @@
       <send-to-codepen :item="item"></send-to-codepen>
       <pre v-highlightjs="item.html"><code class="html"></code></pre>
     </div>
-
   </div>
 </template>
 
 <script lang="ts">
-export { HtmlExample as default } from './HtmlExample';
+export { HtmlExample as default } from "./HtmlExample";
 </script>
 
-<style lang="scss">
+<style>
+.example-iframe {
+  width: 100%;
+  height: 400px;
+}
+.example-iframe.fullscrean {
+  height: 100%;
+}
 
-  .example-iframe {
-    width: 100%;
-    height: 400px;
-  }
-  .example-iframe.fullscrean {
-    height: 100%;
-  }
-
-
-  .example-iframe iframe {
-    width: 100%;
-    height: 100%;
-    border: 1px solid rgba(0,0,0,.3);
-  }
-
+.example-iframe iframe {
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
 </style>

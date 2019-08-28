@@ -1,5 +1,5 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
-import { ApiItem, Parameter, MethodItem, Property as PropertyItem } from '../ApiItem';
+import { ApiItem, MethodItem, Property as PropertyItem } from '../ApiItem';
 import Reference from '../Reference/Reference.vue';
 import Comment from '../Comment/Comment.vue';
 import * as utility from '../utility';
@@ -26,6 +26,7 @@ export class Property extends Vue {
     if (defTag) {
       return defTag.text;
     }
+    return undefined;
   }
 
   getOptionType(item: ApiItem | PropertyItem): string {

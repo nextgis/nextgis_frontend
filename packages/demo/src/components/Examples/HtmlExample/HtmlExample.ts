@@ -26,6 +26,7 @@ export class HtmlExample extends Vue {
         return this._ngwMap.name;
       }
     }
+    return undefined;
   }
 
   set ngwMap(value: string) {

@@ -2,16 +2,16 @@
   "name": "root",
   "private": true,
   "devDependencies": {
-    "@types/jest": "^24.0.17",
-    "@nextgis/eslint-config": "^0.17.0",
-    "jest": "^24.8.0",
+    "@types/jest": "^24.0.18",
+    "@nextgis/eslint-config": "^0.18.0",
+    "jest": "^24.9.0",
     "lerna": "^3.16.4",
     "rimraf": "^3.0.0",
     "topological-sort": "^0.3.0",
     "ts-jest": "^24.0.2",
     "typedoc": "^0.15.0",
     "typescript": "^3.5.3",
-    "webpack": "^4.39.2"
+    "webpack": "^4.39.3"
   },
   "scripts": {
     "clean": "lerna run clean",

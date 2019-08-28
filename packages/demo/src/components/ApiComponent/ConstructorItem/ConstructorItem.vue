@@ -4,7 +4,7 @@
       <comment :item="s"></comment>
     </div>
 
-    <div v-for="s in getSignaturesStr(constructorItem)" :key="s" >
+    <div v-for="s in getSignaturesStr(constructorItem)" :key="s">
       <div v-if="constructorItem.kindString === 'Constructor'" class="pb-2">
         <h4 class="pb-2">Constructor</h4>
         <pre v-highlightjs="s"><code class="typescript"></code></pre>
@@ -15,8 +15,8 @@
 </template>
 
 <script lang="ts">
-export { ConstructorItemComponent as default } from './ConstructorItem';
+export { ConstructorItemComponent as default } from "./ConstructorItem";
 </script>
 
-<style lang="scss">
+<style>
 </style>

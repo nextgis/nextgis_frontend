@@ -10,18 +10,33 @@ const entry = './src/index.ts';
 
 const ASSET_PATH = process.env.ASSET_PATH || '/';
 
+const sassLoaderOptions = {
+  implementation: require('sass'),
+  indentedSyntax: true // optional
+};
+
+try {
+  const Fiber = require('fibers');
+  sassLoaderOptions.fiber = Fiber;
+} catch (er) {
+  // ignore
+}
+
 module.exports = (env, argv) => {
   const isProd = argv.mode === 'production';
 
   const rules = [
     {
       test: /\.vue$/,
-      loader: 'vue-loader',
+      loader: 'vue-loader'
+    },
+    {
+      enforce: 'pre',
+      test: /\.(t|j)sx?$/,
+      loader: 'eslint-loader',
+      exclude: /node_modules/,
       options: {
-        loaders: utils.cssLoaders({
-          sourceMap: isProd ? false : true,
-          extract: false
-        })
+        fix: true
       }
     },
     {
@@ -57,13 +72,23 @@ module.exports = (env, argv) => {
           name: './fonts/[name].[ext]' // Output below ./fonts
         }
       }
+    },
+    {
+      test: /\.css$/i,
+      use: ['style-loader', 'css-loader']
+    },
+    {
+      test: /\.s(c|a)ss$/,
+      use: [
+        'vue-style-loader',
+        'css-loader',
+        {
+          loader: 'sass-loader',
+          options: sassLoaderOptions
+        }
+      ]
     }
-  ].concat(
-    utils.styleLoaders({
-      sourceMap: true,
-      extract: false
-    })
-  );
+  ];
 
   let plugins = [
     new webpack.DefinePlugin({
@@ -85,9 +110,6 @@ module.exports = (env, argv) => {
 
   if (isProd) {
     plugins = plugins.concat([
-      // new CompressionPlugin({
-      //   test: /\.js(\?.*)?$/i
-      // }),
       // new BundleAnalyzerPlugin()
     ]);
   }
@@ -130,21 +152,8 @@ module.exports = (env, argv) => {
         runtimeChunk: 'single',
         splitChunks: {
           chunks: 'all',
-          maxInitialRequests: Infinity,
-          minSize: 0,
-          cacheGroups: {
-            vendor: {
-              test: /[\\/]node_modules[\\/]/,
-              name(module) {
-                // get the name. E.g. node_modules/packageName/not/this/part.js
-                // or node_modules/packageName
-                const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
-
-                // npm package names are URL-safe, but some servers don't like @ symbols
-                return `npm.${packageName.replace('@', '')}`;
-              }
-            }
-          }
+          minSize: 10000,
+          maxSize: 250000
         }
       }
     }

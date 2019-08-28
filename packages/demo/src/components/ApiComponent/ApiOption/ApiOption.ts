@@ -1,7 +1,7 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import ClassItem from '../ClassItem/ClassItem.vue';
 import Comment from '../Comment/Comment.vue';
-import { ApiItem, InterfaceItem, Parameter, Property, MethodItem } from '../ApiItem';
+import { ApiItem, InterfaceItem, Parameter, MethodItem } from '../ApiItem';
 import * as utility from '../utility';
 
 @Component({
@@ -21,6 +21,7 @@ export class ApiOption extends Vue {
     if (option && option.kindString === 'Interface') {
       return option as InterfaceItem;
     }
+    return undefined;
   }
 
   get properties(): Parameter[] {

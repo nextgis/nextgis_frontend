@@ -17,7 +17,7 @@
     </div>
     <div v-for="item in allowedChildren" :key="item.id">
       <h2 :id="item.name">
-        <v-btn flat icon small color @click="$root.goTo(item.name)">
+        <v-btn text icon small color @click="$root.goTo(item.name)">
           <v-icon>mdi-pound</v-icon>
         </v-btn>
         {{item.name}}
@@ -29,17 +29,16 @@
             Show members
           </v-btn>
         </template>
-      </class-item> -->
-
+      </class-item>-->
     </div>
   </v-container>
 </template>
 
 <script lang="ts">
-export { ApiComponent as default } from './ApiComponent';
+export { ApiComponent as default } from "./ApiComponent";
 </script>
 
-<style lang="scss">
+<style>
 .go-to {
   overflow: ellipsis;
   white-space: nowrap;

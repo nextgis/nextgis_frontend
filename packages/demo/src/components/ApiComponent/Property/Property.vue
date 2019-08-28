@@ -5,22 +5,22 @@
       <reference :item="item"></reference>
     </div>
     <div v-else-if="optionType">
-       <span class="key-name">type:</span> <code v-html="optionType"></code>
+      <span class="key-name">type:</span>
+      <code v-html="optionType"></code>
     </div>
     <div v-if="defaultValue">
-      <span class="key-name">default:</span> <code v-html="defaultValue"></code>
+      <span class="key-name">default:</span>
+      <code v-html="defaultValue"></code>
     </div>
-
   </div>
 </template>
 
 <script lang="ts">
-export { Property as default } from './Property';
+export { Property as default } from "./Property";
 </script>
 
-<style lang="scss">
+<style>
 .key-name {
-
 }
 .key-name.to-return {
   font-weight: bold;
