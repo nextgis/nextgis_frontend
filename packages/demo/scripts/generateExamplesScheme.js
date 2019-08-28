@@ -6,71 +6,59 @@ const { join } = require('path');
 // const converter = new showdown.Converter({
 //   extensions: [showdownHighlight]
 // });
+const isDirectory = source => lstatSync(source).isDirectory();
 
-const isDirectory = (source) => lstatSync(source).isDirectory();
+const getPriority = package => (package._priority !== undefined ? package._priority : 100);
 
-const getPriority = (package) => package._priority !== undefined ? package._priority : 100;
+function getIdFromPath(id) {
+  id = id.replace(/\.[/\\\\]/g, '');
+  id = id.replace(/[/\\\\]/g, '-');
+  id = id.replace(/\./g, '');
+  return id;
+}
 
-function generate(source = '../') {
-  const items = [];
+function replaceAbsolutePathToCdn(line, packages) {
+  if (line && packages && packages.length) {
+    let newLine = line;
+    const emptyCharsCount = line.search(/\S/);
 
-  // add global README
-  const readmeItem = getReadme(join(source, '../'))[0];
-  readmeItem.id = 'readme';
-  items.push(readmeItem);
+    const isLibPath = line.match(/(?:src|href)=("|').*?(lib\/).*?([-\w.]+)\.((?:js|css))/);
 
-  const packages = [
-    // { libPath, package }
-  ];
+    if (isLibPath) {
+      newLine = '';
+      const lineLibName = isLibPath[3];
 
-  readdirSync(source)
-    .forEach((name) => {
-      const libPath = join(source, name);
+      if (lineLibName) {
+        for (let fry = 0; fry < packages.length; fry++) {
+          const package = packages[fry] && packages[fry].package;
+          const matchMain = package.main && package.main.match(/([-\w.]+)\.(?:js|css)/);
+          if (matchMain) {
+            const packageLibName = matchMain[1];
 
-      // find packages
-      if (isDirectory(libPath)) {
-        const packagePath = join(libPath, 'package.json');
-        if (existsSync(packagePath)) {
-          const package = JSON.parse(readFileSync(packagePath, 'utf8'));
-          packages.push({
-            libPath, package, name
-          })
+            if (packageLibName === lineLibName) {
+              newLine =
+                new Array(emptyCharsCount + 1).join(' ') +
+                `<script src="https://unpkg.com/@nextgis/${packageLibName}@${package.version}/${package.main}"></script>`;
+            }
+          }
         }
       }
-    });
-
-  packages.sort((a, b) => {
-
-    return getPriority(a.package) - getPriority(b.package);
-  })
-    .forEach(({ libPath, package, name }) => {
-      let pages = [];
-
-      pages = pages.concat(getReadme(libPath));
-      pages = pages.concat(getExamples(libPath, package, packages));
-
-      if (pages.length) {
-        const item = {
-          name,
-          id: getIdFromPath(libPath),
-          children: pages,
-          priority: getPriority(package)
-        };
-        items.push(item);
-      }
-    })
-
-  const log = (item, n) => {
-    // console.log(new Array(n + 1).join('-') + item.name);
-    if (item.children && item.children.length) {
-      n++
-      item.children.forEach((x) => {
-        log(x, n);
-      });
     }
+
+    line = newLine;
   }
-  items.forEach((x) => log(x, 1));
-  return items;
+  return line;
+}
+
+function prepareHtml(html, package, packages) {
+  const newHtml = [];
+
+  // comment direct to lib script
+  html.split('\n').forEach(line => {
+    line = replaceAbsolutePathToCdn(line, packages);
+    newHtml.push(line);
+  });
+  return newHtml.join('\n');
 }
 
 function getReadme(libPath) {
@@ -97,7 +85,7 @@ function getExamples(libPath, package, packages) {
     readdirSync(examplesPath)
       .map(name => join(examplesPath, name))
       .filter(isDirectory)
-      .forEach((examplePath) => {
+      .forEach(examplePath => {
         const id = getIdFromPath(examplePath);
         if (existsSync(examplePath) && isDirectory(examplePath)) {
           const htmlPath = join(examplePath, 'index.html');
@@ -106,15 +94,17 @@ function getExamples(libPath, package, packages) {
             const meta = JSON.parse(readFileSync(metaPath, 'utf8'));
             const html = prepareHtml(readFileSync(htmlPath, 'utf8'), package, packages);
 
-            const filteredPackages = !meta.ngwMaps ? [] : packages.filter((x) => {
-              return meta.ngwMaps.indexOf(x.name.replace('@nextgis/', '')) !== -1;
-            });
-            const ngwMaps = filteredPackages.map((x) => {
+            const filteredPackages = !meta.ngwMaps
+              ? []
+              : packages.filter(x => {
+                  return meta.ngwMaps.indexOf(x.name.replace('@nextgis/', '')) !== -1;
+                });
+            const ngwMaps = filteredPackages.map(x => {
               return {
                 name: x.package.name.replace('@nextgis/', ''),
                 version: x.package.version,
                 main: x.package.main
-              }
+              };
             });
             const example = {
               id,
@@ -122,9 +112,9 @@ function getExamples(libPath, package, packages) {
               page: 'example',
               name: meta.name,
               description: meta.description,
-              ngwMaps,
-            }
-            examples.push(example)
+              ngwMaps
+            };
+            examples.push(example);
           }
         }
       });
@@ -132,56 +122,67 @@ function getExamples(libPath, package, packages) {
   return examples;
 }
 
-function getIdFromPath(id) {
-  id = id.replace(/\.[/\\\\]/g, '');
-  id = id.replace(/[/\\\\]/g, '-');
-  id = id.replace(/\./g, '');
-  return id;
-}
+function generate(source = '../') {
+  const items = [];
 
-function prepareHtml(html, package, packages) {
-  const newHtml = [];
+  // add global READMEs
+  const readmeItem = getReadme(join(source, '../'))[0];
+  readmeItem.id = 'readme';
+  items.push(readmeItem);
 
-  // comment direct to lib script
-  html.split('\n').forEach((line) => {
-    line = replaceAbsolutePathToCdn(line, packages);
-    newHtml.push(line);
-  });
-  return newHtml.join('\n');
-}
+  const packages = [
+    // { libPath, package }
+  ];
 
-function replaceAbsolutePathToCdn(line, packages) {
+  readdirSync(source).forEach(name => {
+    const libPath = join(source, name);
 
-
-  if (line && packages && packages.length) {
-    let newLine = line;
-    const emptyCharsCount = line.search(/\S/);
-
-    const isLibPath = line.match(/(?:src|href)=("|').*?(lib\/).*?([-\w.]+)\.((?:js|css))/);
-
-    if (isLibPath) {
-      newLine = '';
-      const lineLibName = isLibPath[3];
-
-      if (lineLibName) {
-        for (let fry = 0; fry < packages.length; fry++) {
-          const package = packages[fry] && packages[fry].package;
-          const matchMain = package.main && package.main.match(/([-\w.]+)\.(?:js|css)/)
-          if (matchMain) {
-            const packageLibName = matchMain[1]
-
-            if (packageLibName === lineLibName) {
-              newLine = new Array(emptyCharsCount + 1).join(' ') +
-                `<script src="https://unpkg.com/@nextgis/${packageLibName}@${package.version}/${package.main}"></script>`;
-            }
-          }
-        }
+    // find packages
+    if (isDirectory(libPath)) {
+      const packagePath = join(libPath, 'package.json');
+      if (existsSync(packagePath)) {
+        const package = JSON.parse(readFileSync(packagePath, 'utf8'));
+        packages.push({
+          libPath,
+          package,
+          name
+        });
       }
     }
+  });
 
-    line = newLine;
-  }
-  return line
+  packages
+    .sort((a, b) => {
+      return getPriority(a.package) - getPriority(b.package);
+    })
+    .forEach(({ libPath, package, name }) => {
+      let pages = [];
+
+      pages = pages.concat(getReadme(libPath));
+      pages = pages.concat(getExamples(libPath, package, packages));
+
+      if (pages.length) {
+        const item = {
+          name,
+          id: getIdFromPath(libPath),
+          children: pages,
+          priority: getPriority(package)
+        };
+        items.push(item);
+      }
+    });
+
+  const log = (item, n) => {
+    // console.log(new Array(n + 1).join('-') + item.name);
+    if (item.children && item.children.length) {
+      n++;
+      item.children.forEach(x => {
+        log(x, n);
+      });
+    }
+  };
+  items.forEach(x => log(x, 1));
+  return items;
 }
 
 module.exports = generate;
