@@ -1,16 +1,23 @@
 import { ApiItem } from '../../components/ApiComponent/ApiItem';
 
-export interface Indexes {
-  [id: number]: ApiItem;
-}
-
 let api: ApiItem | undefined;
 let indexes: Indexes;
-try {
-  api = require('../../api.json');
-  indexes = createIndexes(api);
-} catch (er) {
-  // ignore
+
+function forEachApi(
+  cb: (item: ApiItem, parent?: ApiItem) => void,
+  item: ApiItem = api,
+  parent?: ApiItem
+): ApiItem | undefined {
+  cb(item, parent);
+  if (item.children) {
+    for (let fry = 0; fry < item.children.length; fry++) {
+      const c = item.children[fry];
+      const childItem = forEachApi(cb, c, item);
+      if (childItem) {
+        return childItem;
+      }
+    }
+  }
 }
 
 function createIndexes(item: ApiItem) {
@@ -28,6 +35,17 @@ function createIndexes(item: ApiItem) {
   return idx;
 }
 
+try {
+  api = require('../../api.json');
+  indexes = createIndexes(api);
+} catch (er) {
+  // ignore
+}
+
+export interface Indexes {
+  [id: number]: ApiItem;
+}
+
 function findInApi(cb: (item: ApiItem) => boolean, item?: ApiItem): ApiItem | undefined {
   const isItem = cb(item);
   if (isItem) {
@@ -36,23 +54,6 @@ function findInApi(cb: (item: ApiItem) => boolean, item?: ApiItem): ApiItem | un
     for (let fry = 0; fry < item.children.length; fry++) {
       const c = item.children[fry];
       const childItem = findInApi(cb, c);
-      if (childItem) {
-        return childItem;
-      }
-    }
-  }
-}
-
-function forEachApi(
-  cb: (item: ApiItem, parent?: ApiItem) => void,
-  item: ApiItem = api,
-  parent?: ApiItem
-): ApiItem | undefined {
-  cb(item, parent);
-  if (item.children) {
-    for (let fry = 0; fry < item.children.length; fry++) {
-      const c = item.children[fry];
-      const childItem = forEachApi(cb, c, item);
       if (childItem) {
         return childItem;
       }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import {
   ConstructorItem,
   Property,
@@ -15,9 +16,7 @@ import { Indexes } from '../../store/modules/api';
 
 export function getSourceLink(item: ApiItem) {
   return item.sources.map(x => {
-    const link = `https://github.com/nextgis/nextgisweb_frontend/blob/master/packages/${
-      x.fileName
-    }#L${x.line}`;
+    const link = `https://github.com/nextgis/nextgisweb_frontend/blob/master/packages/${x.fileName}#L${x.line}`;
     return `<a href="${link}" target="_blank">${x.fileName}#L${x.line}</a>`;
   });
 }
@@ -26,61 +25,27 @@ export function getParameterName(parameter: Parameter) {
   return `${parameter.name}${parameter.flags.isOptional ? '?' : ''}`;
 }
 
-export function getSignatureParameters(parameters: Parameter[], indexes: Indexes): string[] {
-  return parameters.map(p => {
-    const typeName = getOptionType(p.type, indexes);
-    return `${getParameterName(p)}${typeName ? `<span class="nowrap">: ${typeName}</span>` : ''}`;
-  });
-}
-
-export function getConstructorSignatureStr(item: ConstructorItem, indexes: Indexes) {
-  return (
-    item &&
-    item.signatures.map(x => {
-      return getSignatureStrForConstructor(x, indexes);
-    })
-  );
-}
-
-export function getSignatureStrForConstructor(signatures: Signatures, indexes: Indexes) {
-  if ('parameters' in signatures) {
-    // const parameters = getSignatureParameters(signatures.parameters, indexes);
-    const parameters = signatures.parameters.map(p => {
-      return `${getParameterName(p)}`;
-    });
-    const str = `${signatures.name}(${parameters.join(', ')})`;
-    return str;
-  }
-}
-
-export function getOptionType(option: Property, indexes: Indexes): string {
-  if (option.type === 'union') {
-    return option.types
-      .map(x => getOptionType(x, indexes))
-      .filter(x => !!x)
-      .join(' | ');
-  } else if (option.type === 'intrinsic') {
-    if (option.name !== 'undefined') {
-      return option.name;
-    }
-  } else if (option.type === 'tuple') {
-    return `[${option.elements
-      .map(x => getOptionType(x, indexes))
-      .filter(x => !!x)
-      .join(', ')}]`;
-  } else if (option.type === 'reference') {
-    return createReference(option, indexes);
-  } else if (option.type === 'reflection') {
-    return createDeclarationStr(option, indexes);
-  } else if (option.type === 'typeOperator') {
-    return `keyof ${getOptionType(option.target, indexes)}`;
-  }
-
-  return '';
-}
-
 export function createHref(ref: ApiItem, name: string) {
   return `${ref.module.name}-api#${name}`;
+}
+export function createMethodString(
+  methodItem: MethodItem | FunctionItem | Declaration,
+  indexes: Indexes
+): string {
+  const signatures = methodItem.signatures
+    .map(x => {
+      if ('parameters' in x) {
+        // const args = getSignatureParameters(x.parameters, indexes).join(', ');
+        const args = x.parameters
+          .map(p => {
+            return `${getParameterName(p)}`;
+          })
+          .join(', ');
+        return `(${args})`; // : ${getOptionType(x.type, indexes)}`;
+      }
+    })
+    .join(', ');
+  return `${methodItem.name}${signatures || '()'}`;
 }
 
 export function createLink(ref: ApiItem, name: string) {
@@ -116,6 +81,32 @@ export function createReference(option: ReferencePropertyType, indexes: Indexes)
     return option.name;
   }
   return str;
+}
+
+export function getOptionType(option: Property, indexes: Indexes): string {
+  if (option.type === 'union') {
+    return option.types
+      .map(x => getOptionType(x, indexes))
+      .filter(x => !!x)
+      .join(' | ');
+  } else if (option.type === 'intrinsic') {
+    if (option.name !== 'undefined') {
+      return option.name;
+    }
+  } else if (option.type === 'tuple') {
+    return `[${option.elements
+      .map(x => getOptionType(x, indexes))
+      .filter(x => !!x)
+      .join(', ')}]`;
+  } else if (option.type === 'reference') {
+    return createReference(option, indexes);
+  } else if (option.type === 'reflection') {
+    return createDeclarationStr(option, indexes);
+  } else if (option.type === 'typeOperator') {
+    return `keyof ${getOptionType(option.target, indexes)}`;
+  }
+
+  return '';
 }
 
 export function getDeclarationSignatureStr(signatures: Signatures, indexes: Indexes) {
@@ -154,24 +145,31 @@ export function createDeclarationStr(option: ReflectionType, indexes: Indexes) {
   return str;
 }
 
-export function createMethodString(
-  methodItem: MethodItem | FunctionItem | Declaration,
-  indexes: Indexes
-): string {
-  const signatures = methodItem.signatures
-    .map(x => {
-      if ('parameters' in x) {
-        // const args = getSignatureParameters(x.parameters, indexes).join(', ');
-        const args = x.parameters
-          .map(p => {
-            return `${getParameterName(p)}`;
-          })
-          .join(', ');
-        return `(${args})`; // : ${getOptionType(x.type, indexes)}`;
-      }
+export function getSignatureParameters(parameters: Parameter[], indexes: Indexes): string[] {
+  return parameters.map(p => {
+    const typeName = getOptionType(p.type, indexes);
+    return `${getParameterName(p)}${typeName ? `<span class="nowrap">: ${typeName}</span>` : ''}`;
+  });
+}
+
+export function getConstructorSignatureStr(item: ConstructorItem, indexes: Indexes) {
+  return (
+    item &&
+    item.signatures.map(x => {
+      return getSignatureStrForConstructor(x, indexes);
     })
-    .join(', ');
-  return `${methodItem.name}${signatures || '()'}`;
+  );
+}
+
+export function getSignatureStrForConstructor(signatures: Signatures, indexes: Indexes) {
+  if ('parameters' in signatures) {
+    // const parameters = getSignatureParameters(signatures.parameters, indexes);
+    const parameters = signatures.parameters.map(p => {
+      return `${getParameterName(p)}`;
+    });
+    const str = `${signatures.name}(${parameters.join(', ')})`;
+    return str;
+  }
 }
 
 export function createMethodTypeString(

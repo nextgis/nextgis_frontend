@@ -8,11 +8,11 @@
 </template>
 
 <script lang="ts">
-export { Example as default } from './Example';
+export { Example as default } from "./Example";
 </script>
 
-<style lang="scss">
-  .api-example {
-    padding: .7rem 0;
-  }
+<style>
+.api-example {
+  padding: 0.7rem 0;
+}
 </style>
