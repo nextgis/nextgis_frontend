@@ -1,5 +1,5 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
-import { ClassItem, ApiItem, Parameter, MethodItem, ParameterItem, PropertyItem } from '../ApiItem';
+import { ClassItem, ApiItem, Parameter, MethodItem } from '../ApiItem';
 
 import ConstructorItemComponent from '../ConstructorItem/ConstructorItem.vue';
 import Comment from '../Comment/Comment.vue';

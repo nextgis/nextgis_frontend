@@ -1,5 +1,5 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
-import { ApiComment, ParameterItem, ApiItem, SignaturedItem } from '../ApiItem';
+import { ApiComment, ParameterItem, SignaturedItem } from '../ApiItem';
 
 @Component
 export class Example extends Vue {
@@ -23,6 +23,7 @@ export class Example extends Vue {
       }
       return this.getExamples(this.item.comment);
     }
+    return undefined;
   }
 
   getExamples(comment: ApiComment): Array<{ language: string; code: string }> {

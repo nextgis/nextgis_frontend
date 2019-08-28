@@ -4,7 +4,6 @@ import Readme from './components/Readme/Readme.vue';
 import ApiComponent from './components/ApiComponent/ApiComponent.vue';
 import Logo from './components/Logo/Logo.vue';
 import { ApiItem } from './components/ApiComponent/ApiItem';
-import { VueConstructor } from 'vue';
 
 export interface Package {
   name: string;
@@ -97,7 +96,7 @@ export class MainPage extends Vue {
       }
       return item;
     };
-    const config = process.env.EXAMPLES;
+    let config = process.env.EXAMPLES;
     // @ts-ignore
     this.items = config = config.map(x => {
       return prepareItem(x);

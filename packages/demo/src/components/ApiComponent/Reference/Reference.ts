@@ -28,6 +28,7 @@ export class Reference extends Vue {
     if (indexes && 'id' in this.parameter.type) {
       return indexes[this.parameter.type.id];
     }
+    return undefined;
   }
 
   get link(): string {
@@ -35,12 +36,14 @@ export class Reference extends Vue {
     if (reference && 'name' in this.parameter.type) {
       return `${reference.module.name}-api#${this.parameter.type.name}`;
     }
+    return undefined;
   }
 
   get referenceId() {
     if ('id' in this.parameter.type) {
       return this.parameter.type.id;
     }
+    return undefined;
   }
 
   isNoApi() {

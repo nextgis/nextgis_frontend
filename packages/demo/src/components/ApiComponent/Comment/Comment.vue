@@ -3,12 +3,11 @@
 </template>
 
 <script lang="ts">
-export { Comment as default } from './Comment';
+export { Comment as default } from "./Comment";
 </script>
 
-<style lang="scss">
+<style>
 .comment .code {
-  // color: rgb(0, 112, 197);
   font-weight: bold;
 }
 

@@ -6,18 +6,16 @@ import App from './App.vue';
 import VueRouter from 'vue-router';
 
 import VueHighlightJS from 'vue-highlightjs';
-import Vuetify from 'vuetify/lib';
-import 'vuetify/src/stylus/app.styl';
+import vuetify from './plugins/vuetify';
 import '@mdi/font/css/materialdesignicons.css';
+import 'highlight.js/styles/default.css';
 
 Vue.use(VueHighlightJS);
-Vue.use(Vuetify, {
-  iconfont: 'mdi'
-});
+
 Vue.use(VueRouter);
 
 const app = new Vue({
-  el: '#app',
+  vuetify,
   router,
   store,
   render: h => h(App),
@@ -46,9 +44,10 @@ const app = new Vue({
         }
       };
       const href = link.href.replace(document.location.origin, '');
-      const match = href.match(/^\/?([a-zA-Z\-]+)(#([a-zA-Z]+))?$/);
+      const match = href.match(/^\/?([a-zA-Z-]+)(#([a-zA-Z]+))?$/);
       if (match) {
-        const [fullLink, module, hashName, name] = match;
+        const module = match[1];
+        const name = match[3];
         if (name) {
           element = document.getElementById(name);
           if (element) {
@@ -67,6 +66,7 @@ const app = new Vue({
     }
   }
 });
+app.$mount('#app');
 
 // declare global {
 //   interface Window {

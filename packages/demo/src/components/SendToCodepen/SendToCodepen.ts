@@ -1,5 +1,5 @@
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 import './images/codepen.svg';
+import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 import { Item } from '../../MainPage';
 
 interface PenData {
@@ -65,7 +65,7 @@ export class SendToCodepen extends Vue {
 
   _parseHtml(html: string): PenData {
     const parseTag = tag => {
-      const re = new RegExp(`<${tag}>((.|[\n\r])*)<\/${tag}>`, 'i');
+      const re = new RegExp(`<${tag}>((.|[\n\r])*)</${tag}>`, 'i');
       const match = html.match(re);
       if (match && match.length) {
         html = html.replace(match[0], '');

@@ -10,21 +10,21 @@
     "@nextgis/ngw-map": "^0.18.0",
     "vue": "^2.6.10",
     "vue-class-component": "^7.1.0",
-    "vue-property-decorator": "^8.2.1"
+    "vue-property-decorator": "^8.2.2"
   },
   "devDependencies": {
     "@nextgis/eslint-config": "^0.18.0",
     "@types/events": "^3.0.0",
     "@types/node": "^12.7.2",
     "css-loader": "^3.2.0",
-    "eslint-loader": "^2.2.1",
+    "eslint-loader": "^3.0.0",
     "file-loader": "^4.2.0",
     "rimraf": "^3.0.0",
     "style-loader": "^1.0.0",
     "ts-loader": "^6.0.4",
     "typescript": "^3.5.3",
-    "webpack": "^4.39.2",
-    "webpack-cli": "^3.3.6"
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.7"
   },
   "scripts": {
     "clean": "rimraf ./lib",
