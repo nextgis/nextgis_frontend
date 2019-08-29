@@ -1,3 +1,6 @@
+/**
+ * @module mapboxgl-map-adapter
+ */
 import { BaseLayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
 import { Map } from 'mapbox-gl';
 import { TLayer } from '../MapboxglMapAdapter';

@@ -1,3 +1,6 @@
+/**
+ * @module mapboxgl-map-adapter
+ */
 import {
   VectorAdapterLayerType,
   VectorAdapterLayerPaint,
@@ -113,7 +116,7 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
     const layerName = this._getLayerNameFromType(type);
 
     if (this.options.paint) {
-      const layers: Array<[string, VectorAdapterLayerPaint | GetPaintCallback]> = [
+      const layers: [string, VectorAdapterLayerPaint | GetPaintCallback][] = [
         [layerName, this.options.paint]
       ];
       if (this.options.selectedPaint) {
