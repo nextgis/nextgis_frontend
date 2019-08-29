@@ -9,6 +9,7 @@ import VueHighlightJS from 'vue-highlightjs';
 import vuetify from './plugins/vuetify';
 import '@mdi/font/css/materialdesignicons.css';
 import 'highlight.js/styles/default.css';
+import 'highlight.js/lib/languages/javascript';
 
 Vue.use(VueHighlightJS);
 

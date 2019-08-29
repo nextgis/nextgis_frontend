@@ -2,7 +2,7 @@
   <v-container>
     <div v-if="allowedChildren.length > 1">
       <h3>Content</h3>
-      <v-layout row wrap>
+      <v-layout row wrap class="pa-3">
         <v-flex
           class="go-to"
           v-for="item in allowedChildren"

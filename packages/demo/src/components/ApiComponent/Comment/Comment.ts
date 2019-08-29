@@ -21,6 +21,7 @@ export class Comment extends Vue {
       // {@link url | name}
       // text = text.replace(/{@link (.+) \| (.+)}/g, '<a href="$1">$2</a>');
       text = text.replace(/{@link (.+) \| (.+)}/g, '[$2]($1)');
+      text = text.replace(/#noapi/g, '');
     }
     return mdToHtml(text);
   }

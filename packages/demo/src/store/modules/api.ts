@@ -1,11 +1,8 @@
 import { ApiItem } from '../../components/ApiComponent/ApiItem';
 
-let api: ApiItem | undefined;
-let indexes: Indexes;
-
 function forEachApi(
   cb: (item: ApiItem, parent?: ApiItem) => void,
-  item: ApiItem = api,
+  item: ApiItem,
   parent?: ApiItem
 ): ApiItem | undefined {
   cb(item, parent);
@@ -33,13 +30,6 @@ function createIndexes(item: ApiItem) {
     }
   }, item);
   return idx;
-}
-
-try {
-  api = require('../../api.json');
-  indexes = createIndexes(api);
-} catch (er) {
-  // ignore
 }
 
 export interface Indexes {
@@ -71,8 +61,8 @@ function findApiModule(name: string, item: ApiItem): ApiItem {
 }
 
 const _state = {
-  api,
-  indexes
+  api: {},
+  indexes: {}
 };
 
 // getters
@@ -86,15 +76,30 @@ const _getters = {
     return findApiModule(name, item);
   },
 
-  findInApi: state => (cb: (item: ApiItem) => boolean, item: ApiItem = api) => {
+  findInApi: state => (cb: (item: ApiItem) => boolean, item: ApiItem) => {
     item = item || state.api;
     return findInApi(cb, item);
   }
 };
 
-const actions = {};
+const actions = {
+  loadApi: async ({ commit }, ngwMap: string) => {
+    try {
+      const api = await import('../../api.json');
+      commit('updateApi', api);
+      return api;
+    } catch (er) {
+      // ignore
+    }
+  }
+};
 
-const mutations = {};
+const mutations = {
+  updateApi(state: any, api: any) {
+    state.api = api;
+    state.indexes = createIndexes(api);
+  }
+};
 
 export default {
   namespaced: true,

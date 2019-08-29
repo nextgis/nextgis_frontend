@@ -1,3 +1,6 @@
+/**
+ * @module item
+ */
 import { BaseProperty } from './BaseProperty';
 import { Item } from '../Item';
 
