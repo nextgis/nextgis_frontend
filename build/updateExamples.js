@@ -4,30 +4,7 @@ const changeHtmlMapAdapter = require('../packages/demo/scripts/changeHtmlMapAdap
 
 const packagesPath = './packages';
 
-const isDirectory = (source) => fs.existsSync(source) && fs.lstatSync(source).isDirectory();
-
-function updateExamples() {
-
-  // find demo examples folder
-  const demoExamplesPath = join(packagesPath, 'demo', 'examples');
-  if (fs.existsSync(demoExamplesPath)) {
-    fs.readdirSync(demoExamplesPath).forEach((name) => {
-      const examplePath = join(demoExamplesPath, name);
-      if (isDirectory(examplePath)) {
-        const metaPath = join(examplePath, 'index.json');
-        const htmlPath = join(examplePath, 'index.html');
-        if (fs.existsSync(metaPath) && fs.existsSync(htmlPath)) {
-          const meta = JSON.parse(fs.readFileSync(metaPath, 'utf8'));
-          if (meta.ngwMaps && !meta.onlyForDemo) {
-            meta.ngwMaps.forEach((x) => {
-              copyExampleToLib(x, examplePath, name);
-            });
-          }
-        }
-      }
-    });
-  }
-}
+const isDirectory = source => fs.existsSync(source) && fs.lstatSync(source).isDirectory();
 
 function copyExampleToLib(packageName, exampleFolderPath, exampleName) {
   const libExamplesPath = join(packagesPath, packageName, 'examples', exampleName);
@@ -49,16 +26,36 @@ function copyExampleToLib(packageName, exampleFolderPath, exampleName) {
   const html = fs.readFileSync(htmlPath, 'utf8');
   let newHtml = changeHtmlMapAdapter(html, packageName, ngwMaps);
 
-  newHtml = newHtml.replace(/..\/..\/..\/([a-zA-Z\-]+)\//g, (m, g) => {
+  newHtml = newHtml.replace(/..\/..\/..\/([a-zA-Z-]+)\//g, (m, g) => {
     if (g === packageName) {
       return '../../';
     }
     return m;
-  })
-
+  });
 
   fs.writeFileSync(join(libExamplesPath, 'index.html'), newHtml);
+}
 
+function updateExamples() {
+  // find demo examples folder
+  const demoExamplesPath = join(packagesPath, 'demo', 'examples');
+  if (fs.existsSync(demoExamplesPath)) {
+    fs.readdirSync(demoExamplesPath).forEach(name => {
+      const examplePath = join(demoExamplesPath, name);
+      if (isDirectory(examplePath)) {
+        const metaPath = join(examplePath, 'index.json');
+        const htmlPath = join(examplePath, 'index.html');
+        if (fs.existsSync(metaPath) && fs.existsSync(htmlPath)) {
+          const meta = JSON.parse(fs.readFileSync(metaPath, 'utf8'));
+          if (meta.ngwMaps && !meta.onlyForDemo) {
+            meta.ngwMaps.forEach(x => {
+              copyExampleToLib(x, examplePath, name);
+            });
+          }
+        }
+      }
+    });
+  }
 }
 
 module.exports = updateExamples;
