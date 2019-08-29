@@ -60,7 +60,7 @@ Download and include with a script tag. \[Package\] will be registered as a glob
 We recommend linking to a specific version number that you can update manually:
 
 ```html
-<script src="https://unpkg.com/@nextgis/[package]@0.14.0"></script>
+<script src="https://unpkg.com/@nextgis/[package]@0.19.0"></script>
 ```
 
 ### NPM/YARN
