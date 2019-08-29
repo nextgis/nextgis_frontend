@@ -1,3 +1,6 @@
+/**
+ * @module mapboxgl-map-adapter
+ */
 import { BaseLayerAdapter, TileAdapterOptions } from '@nextgis/webmap';
 import { TileAdapter } from './TileAdapter';
 
