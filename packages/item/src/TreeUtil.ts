@@ -1,3 +1,6 @@
+/**
+ * @module item
+ */
 export type SelfFilter<X extends any> = (x: X) => boolean;
 export type RelationFunction<X extends any> = (x: X) => X | X[] | undefined;
 

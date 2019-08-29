@@ -22,11 +22,6 @@ export interface PyramidRoute {
   [requestItemName: string]: string[];
 }
 
-interface ResourceCreatedRest {
-  id: number;
-  parent: { id: number };
-}
-
 type simple = string | number | boolean;
 
 type cbParams = (params: Params) => simple;
@@ -40,7 +35,7 @@ export interface Params {
 }
 
 export type RequestItemKeys = {
-  readonly [T in keyof RequestItemsParamsMap]?: { [x: string]: any }
+  readonly [T in keyof RequestItemsParamsMap]?: { [x: string]: any };
 };
 
 export interface RequestItemsResponseMap {

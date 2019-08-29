@@ -1,3 +1,6 @@
+/**
+ * @module item
+ */
 import { Item } from '../Item';
 import { ItemBasePropertyOptions } from '../interfaces';
 

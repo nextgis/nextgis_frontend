@@ -1,3 +1,6 @@
+/**
+ * @module leaflet-map-adapter
+ */
 export function callAjax(url: string, callback: (resp: any) => any, headers: any) {
   const xmlhttp = new XMLHttpRequest();
   xmlhttp.responseType = 'blob';

@@ -60,49 +60,7 @@ export class MainPage extends Vue {
   }
 
   mounted() {
-    this.api = this.$store.state.api.api;
-    const prepareItem = (conf: Item, _parent?) => {
-      const item: Item = { ...conf };
-      if (conf.children) {
-        item.model = true;
-        item.children = conf.children.map(i => prepareItem(i, item));
-
-        const apiModule = this.$store.getters['api/getApiModule'](item.name);
-        if (apiModule) {
-          const apiItem: Item = {
-            name: 'API',
-            id: item.id + '-api',
-            page: 'api',
-            component: ApiComponent,
-            icon: 'mdi-power-plug',
-            api: apiModule
-          };
-          const readmeIndex = item.children.findIndex(x => x.page === 'readme');
-          if (readmeIndex !== -1) {
-            item.children.splice(readmeIndex + 1, 0, apiItem);
-          } else {
-            item.children.unshift(apiItem);
-          }
-        }
-      } else {
-        item._parent = _parent;
-      }
-      if (item.page === 'example') {
-        item.component = HtmlExample;
-        item.icon = 'mdi-code-tags';
-      } else if (item.page === 'readme') {
-        item.component = Readme;
-        item.icon = 'mdi-information-outline';
-      }
-      return item;
-    };
-    let config = process.env.EXAMPLES;
-    // @ts-ignore
-    this.items = config = config.map(x => {
-      return prepareItem(x);
-    });
-
-    this._setActive();
+    this._build();
   }
 
   onOpen(data: string[]) {
@@ -170,5 +128,53 @@ export class MainPage extends Vue {
       this.$router.push(path + id);
     }
     this.currentItemId = id;
+  }
+
+  private async _build() {
+    // this.api = this.$store.state.api.api;
+    const api = await this.$store.dispatch('api/loadApi');
+    this.api = api as ApiItem;
+    const prepareItem = (conf: Item, _parent?) => {
+      const item: Item = { ...conf };
+      if (conf.children) {
+        item.model = true;
+        item.children = conf.children.map(i => prepareItem(i, item));
+
+        const apiModule = this.$store.getters['api/getApiModule'](item.name);
+        if (apiModule) {
+          const apiItem: Item = {
+            name: 'API',
+            id: item.id + '-api',
+            page: 'api',
+            component: ApiComponent,
+            icon: 'mdi-power-plug',
+            api: apiModule
+          };
+          const readmeIndex = item.children.findIndex(x => x.page === 'readme');
+          if (readmeIndex !== -1) {
+            item.children.splice(readmeIndex + 1, 0, apiItem);
+          } else {
+            item.children.unshift(apiItem);
+          }
+        }
+      } else {
+        item._parent = _parent;
+      }
+      if (item.page === 'example') {
+        item.component = HtmlExample;
+        item.icon = 'mdi-code-tags';
+      } else if (item.page === 'readme') {
+        item.component = Readme;
+        item.icon = 'mdi-information-outline';
+      }
+      return item;
+    };
+    let config = process.env.EXAMPLES;
+    // @ts-ignore
+    this.items = config = config.map(x => {
+      return prepareItem(x);
+    });
+
+    this._setActive();
   }
 }

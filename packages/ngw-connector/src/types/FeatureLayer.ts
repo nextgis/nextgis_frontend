@@ -1,8 +1,8 @@
-import { GeometryObject } from 'geojson';
-
 /**
  * @module ngw-connector
  */
+
+import { GeometryObject } from 'geojson';
 
 export interface FeatureLayerFields {
   [field: string]: string | number | Date | boolean | null;
