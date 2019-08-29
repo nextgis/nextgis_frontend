@@ -1,3 +1,6 @@
+/**
+ * @module mapboxgl-map-adapter
+ */
 import {
   GeoJsonAdapterOptions,
   VectorAdapterLayerType,
@@ -101,7 +104,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   }
 
   getSelected() {
-    const features: Array<LayerDefinition<Feature, TLayer>> = [];
+    const features: LayerDefinition<Feature, TLayer>[] = [];
     this._features.forEach(x => {
       const id = this._getRendromId(x);
       if (id && this._selectedFeatureIds.indexOf(id) !== -1) {
