@@ -1,3 +1,6 @@
+/**
+ * @module leaflet-map-adapter
+ */
 import { VectorAdapterLayerType, MapClickEvent } from '@nextgis/webmap';
 import {
   GeoJsonObject,

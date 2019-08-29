@@ -1,3 +1,6 @@
+/**
+ * @module leaflet-map-adapter
+ */
 import {
   VectorLayerAdapter,
   GeoJsonAdapterOptions,

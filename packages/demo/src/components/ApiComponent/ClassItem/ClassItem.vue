@@ -30,20 +30,22 @@
       <div v-for="m in getAllowedMembers(item)" :key="m.name">
         <div v-if="m.members.length" class="pb-2">
           <h4>{{m.name}}</h4>
-          <v-expansion-panel>
-            <v-expansion-panel-content v-for="p in m.members" :key="p.id" lazy>
-              <div slot="header">
+          <v-expansion-panels>
+            <v-expansion-panel v-for="p in m.members" :key="p.id" lazy>
+              <v-expansion-panel-header>
                 <!-- <span v-if="p.flags.isStatic" class="static-member">{{item.name}}.</span> -->
                 <span v-if="p.kindString === 'Method'" v-html="createMethodString(p)"></span>
                 <span v-else v-html="p.name"></span>
-              </div>
-              <v-card>
-                <v-card-text>
-                  <class :item="p"></class>
-                </v-card-text>
-              </v-card>
-            </v-expansion-panel-content>
-          </v-expansion-panel>
+              </v-expansion-panel-header>
+              <v-expansion-panel-content>
+                <v-card>
+                  <v-card-text>
+                    <class :item="p"></class>
+                  </v-card-text>
+                </v-card>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+          </v-expansion-panels>
         </div>
       </div>
     </div>
