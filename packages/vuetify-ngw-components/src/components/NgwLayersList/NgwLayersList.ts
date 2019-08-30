@@ -4,7 +4,6 @@ import { ResourceAdapter, WebMapLayerAdapter, WebMapLayerItem } from '@nextgis/n
 import { CreateElement, VNode, VNodeData } from 'vue';
 // @ts-ignore
 import { VTreeview } from 'vuetify/lib';
-import { reverse } from 'dns';
 
 interface VueTreeItem {
   id: string;
