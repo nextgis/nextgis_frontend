@@ -98,6 +98,10 @@ export interface BasemapResource {
   qms: string;
 }
 
+export interface LookupTableResource {
+  items: Record<string, string>;
+}
+
 export interface FeatureLayerField {
   datatype: 'STRING' | 'REAL';
   display_name: string;
@@ -121,4 +125,5 @@ export interface ResourceItem {
   webmap?: WebmapResource;
   feature_layer?: FeatureResource;
   basemap_layer?: BasemapResource;
+  lookup_table?: LookupTableResource;
 }
