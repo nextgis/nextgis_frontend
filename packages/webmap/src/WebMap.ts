@@ -51,7 +51,7 @@ const OPTIONS: MapOptions = {
  */
 export interface WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEvents>
   extends WebMapLayers<L>,
-    WebMapControls<C> {}
+  WebMapControls<C> { }
 /**
  * @class WebMap
  */
@@ -102,7 +102,6 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
    * @example
    * ```javascript
    * const webMap = new WebMap(options);
-   * // options.create === false
    * webMap.create(mapOptions).then(() => doSomething());
    * ```
    */
@@ -115,6 +114,9 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
     return this;
   }
 
+  /**
+   * Destroys WebMap, MapAdapter, clears all layers and turn off all event listeners
+   */
   destroy() {
     clearObject(this._emitStatusEvent);
     if (this.mapAdapter.destroy) {
@@ -221,7 +223,6 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
     }
   }
 
-  // [west, south, east, north];
   /**
    * Sets a map view that contains the given geographical bounds.
    * @param bounds Array of coordinates, measured in degrees, in [west, south, east, north] order.
@@ -238,13 +239,45 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
     return this;
   }
 
-  getEventStatus(eventName: keyof E): boolean {
+  /**
+   * Checking the status of any asynchronous operation
+   * @param event The name of the event whose status is checked
+   *
+   * @example
+   * ```javascript
+   * var webMap = new WebMap(options);
+   * webMap.getEventStatus('create'); // false
+   * webMap.emitter.on('create', function () {
+   *   webMap.getEventStatus('create'); // true
+   * })
+   * ```
+   */
+  getEventStatus(event: keyof E): boolean {
     // ugly hack to disable type checking error
-    const _eventName = eventName as keyof WebMapEvents;
+    const _eventName = event as keyof WebMapEvents;
     const status = this._eventsStatus[_eventName];
     return status !== undefined ? status : false;
   }
 
+  /**
+   * helper method to wait for events to load. By default, card creation is tracked
+   * @param event The name of the event whose status is checked
+   *
+   * @example
+   * ```javascript
+   * var webMap = new WebMap(options);
+   * webMap.onLoad().then(function () {
+   *   webMap.getEventStatus('create'); // true
+   * })
+   *
+   * // use async/await syntax
+   * async function () {
+   *   await webMap.onLoad();
+   *   doSomething();
+   * }
+   *
+   * ```
+   */
   onLoad(event: keyof WebMapEvents = 'create'): Promise<this> {
     return new Promise(res => {
       if (this.getEventStatus(event)) {
