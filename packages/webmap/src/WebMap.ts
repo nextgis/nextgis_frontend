@@ -51,7 +51,7 @@ const OPTIONS: MapOptions = {
  */
 export interface WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEvents>
   extends WebMapLayers<L>,
-  WebMapControls<C> { }
+    WebMapControls<C> {}
 /**
  * @class WebMap
  */
