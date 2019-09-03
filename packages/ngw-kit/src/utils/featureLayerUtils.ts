@@ -12,7 +12,7 @@ const FEATURE_REQUEST_PARAMS: FeatureRequestParams = {
   geom_format: 'geojson'
 };
 
-function _createGeoJsonFeature<G extends Geometry | null = Geometry>(
+export function createGeoJsonFeature<G extends Geometry | null = Geometry>(
   item: FeatureItem
 ): Feature<G> {
   const geometry = item.geom as G;
@@ -43,7 +43,7 @@ export function getNgwLayerFeature<G extends Geometry | null = Geometry>(
       ...params
     })
     .then(item => {
-      return _createGeoJsonFeature<G>(item);
+      return createGeoJsonFeature<G>(item);
     });
 }
 
@@ -92,7 +92,7 @@ export function getNgwLayerFeatures<G extends Geometry | null = Geometry>(
     .then((x: FeatureItem[]) => {
       const features: Array<Feature<G>> = [];
       x.forEach(y => {
-        features.push(_createGeoJsonFeature(y));
+        features.push(createGeoJsonFeature(y));
       });
 
       const featureCollection: FeatureCollection<G> = {
