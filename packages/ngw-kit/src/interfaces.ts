@@ -117,6 +117,7 @@ export interface WebMapAdapterOptions extends A {
    * @default false
    */
   identification?: boolean;
+  selectable?: boolean;
   /** Radius for searching objects in pixels */
   pixelRadius?: number;
 }

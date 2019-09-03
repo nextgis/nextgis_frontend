@@ -56,7 +56,7 @@ export class WebMapLayerAdapter implements ResourceAdapter {
     this.layer = await this._getWebMapLayerItem();
 
     if (this.options.identification) {
-      const ids = await this._getWebmapIds();
+      const ids = await this._getWebMapIds();
       if (ids) {
         this._webmapLayersIds = ids;
         this.$$onMapClick = (ev: MapClickEvent) => this._onMapClick(ev);
@@ -106,11 +106,28 @@ export class WebMapLayerAdapter implements ResourceAdapter {
   }
 
   async getIdentificationIds() {
-    if (this._webmapLayersIds) {
-      return this._webmapLayersIds;
-    } else {
-      return await this._getWebmapIds();
+    const visibleLayers: number[] = [];
+    let ids = this._webmapLayersIds;
+    if (!ids) {
+      ids = await this._getWebMapIds();
+      this._webmapLayersIds = ids;
     }
+    if (ids && ids.length) {
+      let deps = this.getDependLayers();
+      deps = deps.sort((a, b) => a.id - b.id);
+      deps.forEach(x => {
+        const item = x.item;
+        const parentId = item.parentId;
+        if (parentId !== undefined && item.item_type === 'layer') {
+          const visible = x.properties.property('visibility');
+          const isVisible = visible.get() && !visible.isBlocked();
+          if (isVisible) {
+            visibleLayers.push(parentId);
+          }
+        }
+      });
+    }
+    return visibleLayers;
   }
 
   private async _getWebMapLayerItem(): Promise<WebMapLayerItem | undefined> {
@@ -177,18 +194,19 @@ export class WebMapLayerAdapter implements ResourceAdapter {
     return item;
   }
 
-  private async _getWebmapIds(): Promise<number[] | undefined> {
+  private async _getWebMapIds(): Promise<number[] | undefined> {
     const webMapItem = this.layer;
     if (webMapItem && webMapItem.item.item_type === 'root') {
-      const layers = webMapItem.item.children;
+      const layers = webMapItem.tree.getDescendants();
       const promises: Array<CancelablePromise<any>> = [];
-      layers.forEach(x => {
-        if (x.item_type === 'layer') {
-          const id = x.layer_style_id;
+      layers.forEach((x: WebMapLayerItem) => {
+        const item = x.item;
+        if (item.item_type === 'layer') {
+          const id = item.layer_style_id;
           const promise = this.options.connector.get('resource.item', {}, { id }).then(y => {
             if (y) {
               const parentId = Number(y.resource.parent.id);
-              x.parentId = parentId;
+              item.parentId = parentId;
               return parentId;
             }
           });
