@@ -1,12 +1,16 @@
-import { FeatureLayersIdentify, NgwConnector, LayerFeature } from '@nextgis/ngw-connector';
+import { LayerFeature } from '@nextgis/ngw-connector';
 import { getNgwLayerFeature } from './featureLayerUtils';
+import { GetIdentifyGeoJsonOptions, GeoJsonIdentify } from '../interfaces';
 
-export function getIdentifyGeoJson(options: {
-  identify: FeatureLayersIdentify & { resources?: number[] };
-  connector: NgwConnector;
-  multiple?: boolean;
-}) {
-  const { identify, connector } = options;
+export function getIdentifyGeoJson(options: GetIdentifyGeoJsonOptions) {
+  const { connector, identify } = options;
+  const params = getIdentifyGeoJsonParams(identify);
+  if (params) {
+    return getNgwLayerFeature({ connector, ...params });
+  }
+}
+
+export function getIdentifyGeoJsonParams(identify: GeoJsonIdentify) {
   let params: { resourceId: number; featureId: number } | undefined;
   const resources = [];
   for (const l in identify) {
@@ -35,8 +39,5 @@ export function getIdentifyGeoJson(options: {
       break;
     }
   }
-
-  if (params) {
-    return getNgwLayerFeature({ connector, ...params });
-  }
+  return params;
 }
