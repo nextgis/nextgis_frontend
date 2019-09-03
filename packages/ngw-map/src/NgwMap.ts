@@ -205,7 +205,10 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<M, L, C, N
     });
   }
 
-  async getIdentifyGeoJson(identify: FeatureLayersIdentify, multiple = false) {
+  async getIdentifyGeoJson(
+    identify: FeatureLayersIdentify,
+    multiple = false
+  ): CancelablePromise<Feature> {
     return NgwKit.utils.getIdentifyGeoJson({
       identify,
       connector: this.connector,
@@ -393,7 +396,7 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<M, L, C, N
             radius
           })
           .then(resp => {
-            this._emitStatusEvent('ngw:select', resp);
+            this._emitStatusEvent('ngw:select', { ...resp, resources: ids });
             return resp;
           });
       }
