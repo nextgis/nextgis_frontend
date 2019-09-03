@@ -2,14 +2,6 @@ import { LayerFeature } from '@nextgis/ngw-connector';
 import { getNgwLayerFeature } from './featureLayerUtils';
 import { GetIdentifyGeoJsonOptions, GeoJsonIdentify } from '../interfaces';
 
-export function getIdentifyGeoJson(options: GetIdentifyGeoJsonOptions) {
-  const { connector, identify } = options;
-  const params = getIdentifyGeoJsonParams(identify);
-  if (params) {
-    return getNgwLayerFeature({ connector, ...params });
-  }
-}
-
 export function getIdentifyGeoJsonParams(identify: GeoJsonIdentify) {
   let params: { resourceId: number; featureId: number } | undefined;
   const resources = [];
@@ -40,4 +32,12 @@ export function getIdentifyGeoJsonParams(identify: GeoJsonIdentify) {
     }
   }
   return params;
+}
+
+export function getIdentifyGeoJson(options: GetIdentifyGeoJsonOptions) {
+  const { connector, identify } = options;
+  const params = getIdentifyGeoJsonParams(identify);
+  if (params) {
+    return getNgwLayerFeature({ connector, ...params });
+  }
 }
