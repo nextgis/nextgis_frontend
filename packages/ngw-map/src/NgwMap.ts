@@ -208,7 +208,7 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<M, L, C, N
   async getIdentifyGeoJson(
     identify: FeatureLayersIdentify,
     multiple = false
-  ): CancelablePromise<Feature> {
+  ): CancelablePromise<Feature | undefined> {
     return NgwKit.utils.getIdentifyGeoJson({
       identify,
       connector: this.connector,
