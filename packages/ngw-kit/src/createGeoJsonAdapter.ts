@@ -48,7 +48,7 @@ export async function createGeoJsonAdapter(
   };
   return class Adapter extends adapter {
     async addLayer(_opt: GeoJsonAdapterOptions) {
-      let data = [];
+      let data = {} as GeoJsonObject;
       if (!_opt.data) {
         data = await geoJsonAdapterCb(_opt.propertiesFilter);
       }
