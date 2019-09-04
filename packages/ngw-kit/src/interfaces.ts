@@ -117,6 +117,7 @@ export interface WebMapAdapterOptions extends A {
    * @default false
    */
   identification?: boolean;
+  selectable?: boolean;
   /** Radius for searching objects in pixels */
   pixelRadius?: number;
 }
@@ -155,3 +156,11 @@ export type VectorResourceAdapter<
   O extends GeoJsonAdapterOptions = GeoJsonAdapterOptions,
   F extends Feature = Feature
 > = ResourceAdapter<M, L, O, F> & VectorLayerAdapter<M, L, O, F>;
+
+export type GeoJsonIdentify = FeatureLayersIdentify & { resources?: number[] };
+
+export interface GetIdentifyGeoJsonOptions {
+  identify: GeoJsonIdentify;
+  connector: NgwConnector;
+  multiple?: boolean;
+}
