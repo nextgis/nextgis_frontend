@@ -1,8 +1,8 @@
 const { join, resolve } = require('path');
 const { lstatSync, readdirSync, readFileSync, existsSync } = require('fs');
 
-exports.getAliases = function () {
-  return generate();
+exports.getAliases = function (source) {
+  return generate(source);
 };
 
 const isDirectory = (source) => lstatSync(source).isDirectory();
