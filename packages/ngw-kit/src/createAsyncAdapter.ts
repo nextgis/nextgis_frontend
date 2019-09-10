@@ -40,11 +40,12 @@ export async function createAsyncAdapter(
   let adapter: Promise<Type<LayerAdapter> | undefined> | undefined;
   let item: ResourceItem;
   try {
+    const adapterType = options.adapter;
     item = await connector.get('resource.item', null, { id: options.resourceId });
     if (item.webmap) {
       adapter = createWebMapAdapter(options, webMap, baseUrl, connector);
     } else if (styles.indexOf(item.resource.cls) !== -1) {
-      if (options.adapter === 'GEOJSON') {
+      if (adapterType === 'GEOJSON') {
         const parentOptions: NgwLayerOptions = {
           ...options,
           resourceId: item.resource.parent.id
@@ -54,10 +55,9 @@ export async function createAsyncAdapter(
         adapter = createRasterAdapter(options, webMap, baseUrl);
       }
     } else if (item.resource.cls === 'vector_layer') {
-      if (options.adapter && options.adapter !== 'GEOJSON') {
-        if (options.adapter === 'MVT') {
+      if (adapterType !== undefined && adapterType !== 'GEOJSON') {
+        if (adapterType === 'MVT') {
           adapter = createRasterAdapter(options, webMap, baseUrl);
-          // adapter = Promise.resolve(webMap.mapAdapter.layerAdapters.MVT);
         } else {
           return createAdapterFromFirstStyle(item.resource.id, options, webMap, baseUrl, connector);
         }
