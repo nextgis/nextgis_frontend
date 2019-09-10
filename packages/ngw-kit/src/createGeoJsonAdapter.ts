@@ -53,6 +53,7 @@ export async function createGeoJsonAdapter(
         data = await geoJsonAdapterCb(_opt.propertiesFilter);
       }
       const opt = onLoad(data);
+
       return super.addLayer({ ..._opt, ...opt });
     }
 
