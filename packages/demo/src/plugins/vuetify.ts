@@ -1,7 +1,7 @@
 import Vue from 'vue';
 // @ts-ignore
 import Vuetify from 'vuetify/lib';
-import { VuetifyObject } from 'vuetify';
+import { Framework } from 'vuetify';
 // import '@mdi/font/css/materialdesignicons.css';
 
 Vue.use(Vuetify);
@@ -25,6 +25,6 @@ export default new Vuetify({
 
 declare module 'vue/types/vue' {
   export interface Vue {
-    $vuetify: VuetifyObject;
+    $vuetify: Framework;
   }
 }

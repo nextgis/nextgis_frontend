@@ -15,6 +15,7 @@ interface VueTreeItem {
 export class NgwLayersList extends Vue {
   @Prop({ type: NgwMap }) ngwMap!: NgwMap;
   @Prop({ type: Array }) include!: Array<ResourceAdapter | string>;
+  @Prop({ type: Boolean, default: false }) hideWebmapRoot!: boolean;
 
   items: VueTreeItem[] = [];
 
@@ -28,6 +29,9 @@ export class NgwLayersList extends Vue {
     this._layers.forEach(x => {
       if (x.layer && x.layer.properties) {
         const layer = x.layer as WebMapLayerItem;
+        if (this.hideWebmapRoot && layer.item.item_type === 'root') {
+          layer.properties.set('visibility', true);
+        }
         const desc = layer.tree.getDescendants() as WebMapLayerItem[];
         desc.forEach(d => {
           const id = d.layer && d.layer.id;
@@ -118,18 +122,30 @@ export class NgwLayersList extends Vue {
     }
     let visible = false;
     const webMap = layer.item && layer.item.webmap;
+    const webMapLayer = layer as WebMapLayerAdapter;
     if (webMap) {
-      const webMapLayer = layer as WebMapLayerAdapter;
       item.children = this._createWebMapTree(webMapLayer.getDependLayers());
       visible = true;
     } else {
       visible = this.ngwMap.isLayerVisible(layer);
     }
-    if (visible) {
-      this.selection.push(item.id);
-    }
+
     this._layers.push(layer);
-    this.items.push(item);
+    if (
+      item.children &&
+      this.hideWebmapRoot &&
+      webMapLayer.layer &&
+      webMapLayer.layer.item &&
+      webMapLayer.layer.item.item_type === 'root'
+    ) {
+      item.children.forEach(x => this.items.push(x));
+      webMapLayer.layer && webMapLayer.layer.properties.set('visibility', true);
+    } else {
+      if (visible) {
+        this.selection.push(item.id);
+      }
+      this.items.push(item);
+    }
   }
 
   private _createWebMapTree(items: WebMapLayerItem[]) {
