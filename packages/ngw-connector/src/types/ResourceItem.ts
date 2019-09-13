@@ -59,15 +59,17 @@ export type ResourceCls =
   | 'wmsclient_connection'
   | 'formbuilder_form';
 
-export interface Resource {
-  id: number;
-  cls: ResourceCls;
-  parent: {
+export interface ResourceHierarchy {
     id: number;
     parent: {
       id: any;
     };
-  };
+  }
+
+export interface Resource {
+  id: number;
+  cls: ResourceCls;
+  parent: ResourceHierarchy;
   owner_user: {
     id: number;
   };
@@ -80,13 +82,18 @@ export interface Resource {
   scopes: string[];
 }
 
+export interface BookmarkProperties {
+  name: string;
+  place: string;
+}
+
 export interface WebmapResource {
   extent_left: number;
   extent_right: number;
   extent_bottom: number;
   extent_top: number;
   draw_order_enabled: any;
-  bookmark_resource: any;
+  bookmark_resource: ResourceHierarchy;
   root_item: TreeGroup;
 }
 
