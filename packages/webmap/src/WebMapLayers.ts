@@ -632,7 +632,7 @@ export class WebMapLayers<L = any> {
   clearLayerData(layerDef: LayerDef, cb?: (feature: Feature) => boolean) {
     const layerMem = this.getLayer(layerDef);
     const adapter = layerMem as VectorLayerAdapter;
-    if (adapter.clearLayer) {
+    if (adapter && adapter.clearLayer) {
       adapter.clearLayer(cb);
     }
   }

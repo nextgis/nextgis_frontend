@@ -11,7 +11,8 @@ import {
   updateWmsParams,
   getLayerAdapterOptions,
   addNgwLayer,
-  extendWebMapLayerAdapter
+  extendWebMapLayerAdapter,
+  setScaleRatio
 } from './utils/utils';
 
 import { getIdentifyGeoJson, getIdentifyGeoJsonParams } from './utils/identifyUtils';
@@ -35,7 +36,8 @@ export class NgwKit implements StarterKit {
     getNgwLayerFeatures,
     getIdentifyGeoJson,
     getIdentifyGeoJsonParams,
-    createGeoJsonFeature
+    createGeoJsonFeature,
+    setScaleRatio
   };
 
   static updateWmsParams = updateWmsParams;
