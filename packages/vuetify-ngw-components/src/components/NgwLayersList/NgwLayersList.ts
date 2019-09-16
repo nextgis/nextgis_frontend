@@ -75,7 +75,18 @@ export class NgwLayersList extends Vue {
           this.selection = event;
         }
       },
-      attrs: { items: this.items, selectable: true }
+      attrs: { items: this.items, selectable: true },
+      scopedSlots: {
+        label: props => {
+          const name = props.item.name;
+          return h('span', {
+            domProps: {
+              innerHTML: name,
+              title: name
+            }
+          });
+        }
+      }
       // domProps: { id: this.id }
     };
     return h(VTreeview, data, this.$slots.default);
