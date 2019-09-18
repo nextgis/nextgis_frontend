@@ -147,7 +147,7 @@ export interface VectorAdapterOptions<F extends Feature = Feature, L = any> exte
    * ```
    */
   selectedPaint?: VectorAdapterLayerPaint | GetPaintCallback;
-  nativePaint?: boolean;
+  nativePaint?: boolean | Record<string, any>;
   // selectedPaintDiff?: VectorAdapterLayerPaint;
   /**
    * Determines whether objects are selected by mouse click.
