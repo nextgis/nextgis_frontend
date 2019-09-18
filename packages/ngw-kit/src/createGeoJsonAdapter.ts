@@ -50,7 +50,7 @@ export async function createGeoJsonAdapter(
     async addLayer(_opt: GeoJsonAdapterOptions) {
       let data = {} as GeoJsonObject;
       if (!_opt.data) {
-        data = await geoJsonAdapterCb(_opt.propertiesFilter);
+        data = await geoJsonAdapterCb(_opt.propertiesFilter, { limit: _opt.limit });
       }
       const opt = onLoad(data);
       const addLayerOptions = { ..._opt, ...opt };
