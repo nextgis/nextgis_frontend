@@ -19,7 +19,7 @@ interface OverlayOptions {
   zIndex?: number;
   pane?: string;
   headers?: any;
-  viewPortBuffer: number;
+  viewPortBuffer?: number;
 }
 
 /*
