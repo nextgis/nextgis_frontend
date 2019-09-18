@@ -34,7 +34,7 @@ export class NgwLayersList extends Vue {
         }
         const desc = layer.tree.getDescendants() as WebMapLayerItem[];
         desc.forEach(d => {
-          const id = d.layer && d.layer.id;
+          const id = String(d.id);
           if (id) {
             d.properties.set('visibility', this.selection.indexOf(id) !== -1);
           }
@@ -134,8 +134,9 @@ export class NgwLayersList extends Vue {
     let visible = false;
     const webMap = layer.item && layer.item.webmap;
     const webMapLayer = layer as WebMapLayerAdapter;
-    if (webMap) {
-      item.children = this._createWebMapTree(webMapLayer.getDependLayers());
+    if (webMap && webMapLayer.layer) {
+      const children = webMapLayer.layer.tree.getChildren() as WebMapLayerItem[];
+      item.children = this._createWebMapTree(children);
       visible = true;
     } else {
       visible = this.ngwMap.isLayerVisible(layer);
@@ -149,7 +150,7 @@ export class NgwLayersList extends Vue {
       webMapLayer.layer.item &&
       webMapLayer.layer.item.item_type === 'root'
     ) {
-      item.children.forEach(x => this.items.push(x));
+      item.children.reverse().forEach(x => this.items.push(x));
       webMapLayer.layer && webMapLayer.layer.properties.set('visibility', true);
     } else {
       if (visible) {
@@ -160,25 +161,22 @@ export class NgwLayersList extends Vue {
   }
 
   private _createWebMapTree(items: WebMapLayerItem[]) {
-    return items
-      .filter(x => x.layer && x.layer.id)
-      .reverse()
-      .map(x => {
-        const _id = x.layer && x.layer.id;
-        const id = String(_id);
-        const item: VueTreeItem = {
-          id,
-          name: x.item.display_name || id
-        };
-        const children = x.tree.getChildren<WebMapLayerItem>();
-        if (children) {
-          item.children = this._createWebMapTree(children);
-        }
-        const visible = x.properties.get('visibility');
-        if (visible) {
-          this.selection.push(id);
-        }
-        return item;
-      });
+    return items.map(x => {
+      const _id = x.id;
+      const id = String(_id);
+      const item: VueTreeItem = {
+        id,
+        name: x.item.display_name || id
+      };
+      const children = x.tree.getChildren<WebMapLayerItem>();
+      if (children && children.length) {
+        item.children = this._createWebMapTree(children);
+      }
+      const visible = x.properties.get('visibility');
+      if (visible) {
+        this.selection.push(id);
+      }
+      return item;
+    });
   }
 }
