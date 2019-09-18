@@ -127,7 +127,7 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
       for (const [name, paint] of layers) {
         let _paint: any;
         if (this.options.nativePaint) {
-          _paint = paint;
+          _paint = typeof this.options.nativePaint === 'boolean' ? paint : this.options.nativePaint;
         } else {
           _paint = await this._createPaintForType(paint, type);
         }
