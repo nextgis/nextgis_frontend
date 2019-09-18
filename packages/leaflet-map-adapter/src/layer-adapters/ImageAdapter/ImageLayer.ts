@@ -19,6 +19,7 @@ interface OverlayOptions {
   zIndex?: number;
   pane?: string;
   headers?: any;
+  viewPortBuffer: number;
 }
 
 /*
@@ -47,7 +48,8 @@ export class ImageLayer extends L.Layer {
     minZoom: 0,
     maxZoom: 18,
     pane: 'tilePane',
-    headers: null
+    headers: null,
+    viewPortBuffer: 0
   };
 
   private wmsParams: any;
@@ -118,7 +120,8 @@ export class ImageLayer extends L.Layer {
 
     // Keep current image overlay in place until new one loads
     // (inspired by esri.leaflet)
-    const bounds = this._map.getBounds();
+    const bounds = this._map.getBounds().pad(this.options.viewPortBuffer);
+
     const overlay = new ImageOverlay(url, bounds, {
       opacity: 0,
       pane: this.options.pane,
@@ -192,8 +195,13 @@ export class ImageLayer extends L.Layer {
       map = this._map;
     }
     // Compute WMS options
-    const bounds = map.getBounds();
+    const bounds = map.getBounds().pad(this.options.viewPortBuffer);
     const size = map.getSize();
+    if (this.options.viewPortBuffer !== 0) {
+      const factor = this.options.viewPortBuffer + 1;
+      size.x = Math.ceil(size.x * factor);
+      size.y = Math.ceil(size.y * factor);
+    }
     const wmsVersion = parseFloat(this.wmsParams.version);
     const crs = this.options.crs || map.options.crs;
     const projectionKey = wmsVersion >= 1.3 ? 'crs' : 'srs';
