@@ -103,7 +103,7 @@ export type Paint = VectorAdapterLayerPaint | GetPaintCallback;
 
 export interface PopupOptions {
   minWidth?: number;
-  createPopupContent?: (layerDef: LayerDefinition) => HTMLElement | string;
+  createPopupContent?: (layerDef: LayerDefinition) => HTMLElement | string | undefined;
 }
 
 export interface VectorAdapterOptions<F extends Feature = Feature, L = any> extends AdapterOptions {
@@ -147,7 +147,8 @@ export interface VectorAdapterOptions<F extends Feature = Feature, L = any> exte
    * ```
    */
   selectedPaint?: VectorAdapterLayerPaint | GetPaintCallback;
-  nativePaint?: boolean;
+  nativePaint?: boolean | Record<string, any>;
+  limit?: number;
   // selectedPaintDiff?: VectorAdapterLayerPaint;
   /**
    * Determines whether objects are selected by mouse click.

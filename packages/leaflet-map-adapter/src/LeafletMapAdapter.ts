@@ -13,7 +13,7 @@ import {
   LngLatBoundsArray,
   WebMapEvents
 } from '@nextgis/webmap';
-import { Map, Control, Layer, ControlPosition, LeafletMouseEvent, GridLayer } from 'leaflet';
+import L, { Map, Control, Layer, ControlPosition, LeafletMouseEvent, GridLayer } from 'leaflet';
 import { EventEmitter } from 'events';
 import { TileAdapter } from './layer-adapters/TileAdapter/TileAdapter';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
@@ -43,6 +43,8 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     ZOOM: Control.Zoom,
     ATTRIBUTION: AttributionControl
   };
+
+  static Map = L;
 
   options: LeafletMapAdapterOptions = { target: 'map' };
 

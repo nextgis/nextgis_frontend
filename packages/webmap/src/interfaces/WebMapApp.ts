@@ -4,8 +4,8 @@
 
 import { MapAdapter, FitOptions } from './MapAdapter';
 import { StarterKit } from './StarterKit';
-import { LngLatArray, LngLatBoundsArray } from './BaseTypes';
-import { GeometryPaint } from './LayerAdapter';
+import { LngLatArray, LngLatBoundsArray, Type } from './BaseTypes';
+import { GeometryPaint, LayerAdapters, LayerAdapter, AdapterOptions } from './LayerAdapter';
 
 export interface MapOptions {
   /**
@@ -49,7 +49,17 @@ export interface MapOptions {
 
   paint?: GeometryPaint;
   selectedPaint?: GeometryPaint;
+
+  /**
+   * The callback function is calling before adding each layer
+   */
+  onBeforeAddLayer?: OnBeforeLayerAdd;
 }
+
+export type OnBeforeLayerAdd = (e: {
+  adapter?: Type<LayerAdapter>;
+  options: AdapterOptions & Record<string, any>;
+}) => { adapter?: Type<LayerAdapter>; options?: AdapterOptions } | undefined;
 
 export interface AppOptions {
   /**
@@ -77,8 +87,6 @@ export interface AppOptions {
    * ```
    */
   create?: boolean;
-  // displayConfig?: DisplayConfig;
-  // [configName: string]: any;
 }
 
 export interface ToggleLayerOptions {

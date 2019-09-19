@@ -155,29 +155,40 @@ export class WebMapLayers<L = any> {
     } else if ((adapter as Promise<Type<LayerAdapters[K]> | undefined>).then) {
       adapterEngine = (await adapter) as Type<LayerAdapters[K]>;
     }
-    if (adapterEngine !== undefined) {
-      const geoJsonOptions = options as GeoJsonAdapterOptions;
 
-      this._updateGeoJsonOptions(geoJsonOptions);
+    const geoJsonOptions = options as GeoJsonAdapterOptions;
 
-      const { maxZoom, minZoom } = this.webMap.options;
+    this._updateGeoJsonOptions(geoJsonOptions);
 
-      options = {
-        id: String(_order),
-        order: _order,
-        maxZoom,
-        minZoom,
-        ...options
-      };
-      // options.visibility is a layer global state, but each layer on init is not visible
-      const visibility = options.visibility;
-      options.visibility = false;
+    const { maxZoom, minZoom } = this.webMap.options;
 
-      // TODO: check usage in adapter constructor and safe remove
-      if (options.baseLayer) {
-        options.order = 0;
+    options = {
+      id: String(_order),
+      order: _order,
+      maxZoom,
+      minZoom,
+      ...options
+    };
+    // options.visibility is a layer global state, but each layer on init is not visible
+    const visibility = options.visibility;
+    options.visibility = false;
+
+    // TODO: check usage in adapter constructor and safe remove
+    if (options.baseLayer) {
+      options.order = 0;
+    }
+    if (this.webMap.options.onBeforeAddLayer) {
+      const modified = this.webMap.options.onBeforeAddLayer({ options, adapter: adapterEngine });
+      if (modified) {
+        if (modified.options) {
+          options = modified.options;
+        }
+        if (modified.adapter) {
+          adapterEngine = modified.adapter;
+        }
       }
-
+    }
+    if (adapterEngine !== undefined) {
       const _adapter = new adapterEngine(this.webMap.mapAdapter.map, options);
 
       if (_adapter.options.baseLayer) {
@@ -632,7 +643,7 @@ export class WebMapLayers<L = any> {
   clearLayerData(layerDef: LayerDef, cb?: (feature: Feature) => boolean) {
     const layerMem = this.getLayer(layerDef);
     const adapter = layerMem as VectorLayerAdapter;
-    if (adapter.clearLayer) {
+    if (adapter && adapter.clearLayer) {
       adapter.clearLayer(cb);
     }
   }
