@@ -120,7 +120,8 @@ export class ImageLayer extends L.Layer {
 
     // Keep current image overlay in place until new one loads
     // (inspired by esri.leaflet)
-    const bounds = this._map.getBounds().pad(this.options.viewPortBuffer);
+    const viewPortBuffer = this.options.viewPortBuffer || 0;
+    const bounds = this._map.getBounds().pad(viewPortBuffer);
 
     const overlay = new ImageOverlay(url, bounds, {
       opacity: 0,
@@ -195,10 +196,11 @@ export class ImageLayer extends L.Layer {
       map = this._map;
     }
     // Compute WMS options
-    const bounds = map.getBounds().pad(this.options.viewPortBuffer);
+    const viewPortBuffer = this.options.viewPortBuffer || 0;
+    const bounds = map.getBounds().pad(viewPortBuffer);
     const size = map.getSize();
     if (this.options.viewPortBuffer !== 0) {
-      const factor = this.options.viewPortBuffer + 1;
+      const factor = viewPortBuffer + 1;
       size.x = Math.ceil(size.x * factor);
       size.y = Math.ceil(size.y * factor);
     }
