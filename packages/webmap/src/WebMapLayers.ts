@@ -178,13 +178,13 @@ export class WebMapLayers<L = any> {
       options.order = 0;
     }
     if (this.webMap.options.onBeforeAddLayer) {
-      const modifed = this.webMap.options.onBeforeAddLayer({ options, adapter: adapterEngine });
-      if (modifed) {
-        if (modifed.options) {
-          options = modifed.options;
+      const modified = this.webMap.options.onBeforeAddLayer({ options, adapter: adapterEngine });
+      if (modified) {
+        if (modified.options) {
+          options = modified.options;
         }
-        if (modifed.adapter) {
-          adapterEngine = modifed.adapter;
+        if (modified.adapter) {
+          adapterEngine = modified.adapter;
         }
       }
     }
