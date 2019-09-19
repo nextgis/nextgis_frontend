@@ -51,13 +51,14 @@ export interface MapOptions {
   selectedPaint?: GeometryPaint;
 
   /**
-   *
+   * The callback function is calling before adding each layer
    */
   onBeforeAddLayer?: OnBeforeLayerAdd;
 }
 
 export type OnBeforeLayerAdd = (e: {
-  adapter?: Type<LayerAdapter>, options: AdapterOptions & Record<string, any>
+  adapter?: Type<LayerAdapter>;
+  options: AdapterOptions & Record<string, any>;
 }) => { adapter?: Type<LayerAdapter>; options?: AdapterOptions } | undefined;
 
 export interface AppOptions {
