@@ -6,7 +6,7 @@ import { deepmerge } from '@nextgis/utils';
 import { GetPaintFunction } from './interfaces/LayerAdapter';
 import { LayerAdapter } from './interfaces/LayerAdapter';
 import { MapAdapter, FitOptions } from './interfaces/MapAdapter';
-import { MapOptions, AppOptions } from './interfaces/WebMapApp';
+import { MapOptions, AppOptions, OnBeforeLayerAdd } from './interfaces/WebMapApp';
 import { LngLatBoundsArray, Type, Cursor, LngLatArray } from './interfaces/BaseTypes';
 import { RuntimeParams } from './interfaces/RuntimeParams';
 import { StarterKit } from './interfaces/StarterKit';
