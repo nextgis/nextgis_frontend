@@ -14,7 +14,15 @@ import {
   WebMapEvents
 } from '@nextgis/webmap';
 import { MvtAdapter } from './layer-adapters/MvtAdapter';
-import mapboxgl, { Map, IControl, MapEventType, EventData, MapboxOptions } from 'mapbox-gl';
+import mapboxgl, {
+  Map,
+  IControl,
+  MapEventType,
+  EventData,
+  MapboxOptions,
+  RequestParameters,
+  ResourceType
+} from 'mapbox-gl';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
 import { TileAdapter } from './layer-adapters/TileAdapter';
 import { EventEmitter } from 'events';
@@ -86,7 +94,17 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
           attributionControl: false,
           // @ts-ignore
           bounds: options.bounds,
-          fitBoundsOptions: { ...options.fitOptions, ...fitBoundsOptions }
+          fitBoundsOptions: { ...options.fitOptions, ...fitBoundsOptions },
+          transformRequest: (url, resourceType) => {
+            const transformed = this._transformRequest(url, resourceType);
+            if (transformed) {
+              return transformed;
+            } else {
+              return {
+                url
+              };
+            }
+          }
           // center: options.center,
           // zoom: options.zoom,
         };
@@ -110,6 +128,9 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
           mapOpt.zoom = options.zoom;
         }
         this.map = new Map(mapOpt);
+        // @ts-ignore
+        this.map.transformRequests = [];
+
         this._addEventsListeners();
         this.map.once('load', () => {
           this.isLoaded = true;
@@ -388,6 +409,21 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
         }
       }
     }
+  }
+
+  private _transformRequest(
+    url: string,
+    resourceType: ResourceType
+  ): RequestParameters | undefined {
+    // @ts-ignore
+    const transformRequests = this.map.transformRequests;
+    for (const r of transformRequests) {
+      const params = r(url, resourceType) as RequestParameters;
+      if (params) {
+        return params;
+      }
+    }
+    return undefined;
   }
 
   private _addEventsListeners(): void {

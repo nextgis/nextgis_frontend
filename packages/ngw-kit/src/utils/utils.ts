@@ -257,12 +257,12 @@ export function getZoomFromScale(scale: number) {
   return Math.log(scale / 256) / Math.LN2;
 }
 
-export function setScaleRatio(scale: number) {
+export function setScaleRatio(scale: number, lat = 104) {
   // TODO: get real center
   // webmap does not contain center yet
-  const center = [104, 45]; // this.webMap.getCenter();
-  if (center) {
-    const centerLat = center[1];
+  // const center = [104, 45]; // this.webMap.getCenter();
+  if (lat) {
+    const centerLat = lat;
     const crsScale = (pixelsInMeterWidth() * getMapWidthForLanInMeters(centerLat)) / scale;
     const zoom = getZoomFromScale(crsScale);
     return zoom;

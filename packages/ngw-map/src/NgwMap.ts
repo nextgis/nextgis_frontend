@@ -155,6 +155,7 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<M, L, C, N
         );
 
         const layer = (await this.addLayer(adapter, {
+          visibility: true,
           // TODO: all options into one object
           ...options,
           ...options.adapterOptions
@@ -169,13 +170,6 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<M, L, C, N
               return layer;
             }
           }
-          this.showLayer(layer);
-          // if (options.fit && layer.getExtent) {
-          //   const extent = await layer.getExtent();
-          //   if (extent) {
-          //     this.fitBounds(extent);
-          //   }
-          // }
         }
 
         return layer;
