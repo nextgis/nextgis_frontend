@@ -325,9 +325,11 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
         dependLayers.forEach(x => {
           // @ts-ignore Update x interface
           const layer: TLayer = (x.layer && x.layer.layer) || x;
-          layer.forEach(y => {
-            _layers.push(y);
-          });
+          if (Array.isArray(layer)) {
+            layer.forEach(y => {
+              _layers.push(y);
+            });
+          }
         });
       }
     }
