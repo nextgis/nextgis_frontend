@@ -3,7 +3,7 @@
  */
 import { BaseLayerAdapter, TileAdapterOptions } from '@nextgis/webmap';
 import { BaseAdapter } from './BaseAdapter';
-import { RasterSource } from 'mapbox-gl';
+import { RasterSource, ResourceType } from 'mapbox-gl';
 
 export class TileAdapter extends BaseAdapter<TileAdapterOptions> implements BaseLayerAdapter {
   addLayer(options: TileAdapterOptions): string[] {
@@ -17,6 +17,22 @@ export class TileAdapter extends BaseAdapter<TileAdapterOptions> implements Base
       });
     } else {
       tiles = [options.url];
+    }
+    if (options.headers) {
+      // @ts-ignore
+      const transformRequests = this.map.transformRequests;
+      transformRequests.push((url: string, resourceType: ResourceType) => {
+        let staticUrl = url;
+        staticUrl = staticUrl.replace(/(z=\d+)/, 'z={z}');
+        staticUrl = staticUrl.replace(/(x=\d+)/, 'x={x}');
+        staticUrl = staticUrl.replace(/(y=\d+)/, 'y={y}');
+        if (staticUrl === options.url) {
+          return {
+            url,
+            headers: options.headers
+          };
+        }
+      });
     }
 
     const sourceOptions: RasterSource = {

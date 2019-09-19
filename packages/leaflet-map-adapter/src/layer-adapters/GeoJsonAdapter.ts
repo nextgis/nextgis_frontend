@@ -248,10 +248,12 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     const minWidth = (options && options.minWidth) || 300;
     const content =
       options && options.createPopupContent ? options.createPopupContent({ layer, feature }) : '';
-    const popup = layer.bindPopup(content, { minWidth });
-    setTimeout(() => {
-      popup.openPopup();
-    }, 0);
+    if (content) {
+      const popup = layer.bindPopup(content, { minWidth });
+      setTimeout(() => {
+        popup.openPopup();
+      }, 0);
+    }
   }
 
   private _closePopup(layer: Layer) {
