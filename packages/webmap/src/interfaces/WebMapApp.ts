@@ -5,7 +5,7 @@
 import { MapAdapter, FitOptions } from './MapAdapter';
 import { StarterKit } from './StarterKit';
 import { LngLatArray, LngLatBoundsArray, Type } from './BaseTypes';
-import { GeometryPaint, LayerAdapters, LayerAdapter, AdapterOptions } from './LayerAdapter';
+import { GeometryPaint, LayerAdapter, AdapterOptions } from './LayerAdapter';
 
 export interface MapOptions {
   /**
