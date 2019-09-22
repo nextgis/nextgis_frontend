@@ -1,4 +1,5 @@
 import { VuexModule, Mutation, Action } from 'vuex-module-decorators';
+import { FeatureItem } from '@nextgis/ngw-connector';
 
 import NgwConnector, { ResourceStoreItem, FeatureLayerField } from '@nextgis/ngw-connector';
 
@@ -43,7 +44,7 @@ export class ResourceStore extends VuexModule {
     }
   }
 
-  @Action({ commit: 'UPDATE_STORE' })
+  @Action({ commit: 'SET_STORE' })
   async getStore() {
     await this.context.dispatch('getResources');
     const id = this.resources[this.keyname];
@@ -112,8 +113,24 @@ export class ResourceStore extends VuexModule {
   }
 
   @Mutation
-  private UPDATE_STORE(plotsStore: ResourceStoreItem[]) {
+  private SET_STORE(plotsStore: ResourceStoreItem[]) {
     this.store = plotsStore;
+  }
+
+  @Mutation
+  private UPDATE_STORE(item?: FeatureItem) {
+    if (item) {
+      const storeItems = [...this.store];
+      const index = storeItems.findIndex(x => x.id === item.id);
+      if (index !== -1) {
+        const oldPlot = storeItems[index];
+        const newPlot = { ...oldPlot, ...item.fields };
+        storeItems.splice(index, 1, newPlot);
+      } else {
+        storeItems.push({ id: item.id, label: `#${item.id}`, ...item.fields });
+      }
+      this.store = storeItems;
+    }
   }
 
   @Mutation
