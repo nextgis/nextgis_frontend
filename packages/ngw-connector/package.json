@@ -12,13 +12,13 @@
   "devDependencies": {
     "@nextgis/eslint-config": "^0.19.0",
     "@types/events": "^3.0.0",
-    "@types/node": "^12.7.2",
+    "@types/node": "^12.7.5",
     "eslint-loader": "^3.0.0",
     "rimraf": "^3.0.0",
-    "ts-loader": "^6.0.4",
-    "typescript": "^3.5.3",
-    "webpack": "^4.39.3",
-    "webpack-cli": "^3.3.7"
+    "ts-loader": "^6.1.2",
+    "typescript": "^3.6.3",
+    "webpack": "^4.40.2",
+    "webpack-cli": "^3.3.9"
   },
   "scripts": {
     "mjs": "tsc -d --outDir ./lib/modules",
