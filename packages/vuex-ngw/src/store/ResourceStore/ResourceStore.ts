@@ -45,14 +45,14 @@ export class ResourceStore extends VuexModule {
   }
 
   @Action({ commit: 'SET_STORE' })
-  async getStore() {
+  async getStore(): Promise<ResourceStoreItem[] | undefined> {
     await this.context.dispatch('getResources');
     const id = this.resources[this.keyname];
     if (id) {
-      const plotsStore = await this.connector.get('feature_layer.store', null, {
+      const store = await this.connector.get('feature_layer.store', null, {
         id
       });
-      return plotsStore;
+      return store;
     }
   }
 
