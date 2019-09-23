@@ -1,13 +1,11 @@
 {
-  "name": "@nextgis/vue-ngw-map",
+  "name": "@nextgis/vuex-ngw",
   "version": "0.19.1",
   "description": "Development tools",
-  "main": "lib/vue-ngw-map.js",
-  "unpkg": "lib/vue-ngw-map.js",
+  "main": "lib/vuex-ngw.js",
+  "unpkg": "lib/vue-ngw.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/leaflet-map-adapter": "^0.19.1",
-    "@nextgis/ngw-map": "^0.19.1",
     "vue": "^2.6.10",
     "vue-class-component": "^7.1.0",
     "vue-property-decorator": "^8.2.2",
