@@ -1,0 +1,7 @@
+{
+  "name": "Nextgis Map Vector tiles",
+  "description": "",
+  "ngwMaps": [
+    "ngw-mapbox"
+  ]
+}
