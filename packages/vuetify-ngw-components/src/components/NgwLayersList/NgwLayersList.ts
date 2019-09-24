@@ -34,14 +34,15 @@ export class NgwLayersList extends Vue {
         }
         const desc = layer.tree.getDescendants() as WebMapLayerItem[];
         desc.forEach(d => {
-          const id = String(d.id);
+          const id = this._getLayerId(d);
           if (id) {
             d.properties.set('visibility', this.selection.indexOf(id) !== -1);
           }
         });
       }
       if (x.id) {
-        this.ngwMap.toggleLayer(x, this.selection.indexOf(x.id) !== -1);
+        const id = this._getLayerId(x);
+        this.ngwMap.toggleLayer(x, this.selection.indexOf(id) !== -1);
       }
     });
   }
@@ -162,8 +163,8 @@ export class NgwLayersList extends Vue {
 
   private _createWebMapTree(items: WebMapLayerItem[]) {
     return items.map(x => {
-      const _id = x.id;
-      const id = String(_id);
+      const id = this._getLayerId(x);
+
       const item: VueTreeItem = {
         id,
         name: x.item.display_name || id
@@ -178,5 +179,17 @@ export class NgwLayersList extends Vue {
       }
       return item;
     });
+  }
+
+  private _getLayerId(layer: ResourceAdapter | WebMapLayerItem): string {
+    const webMap = layer as WebMapLayerItem;
+    const webMapTree = webMap.tree;
+    if (webMapTree) {
+      const parents = webMap.tree.getParents<WebMapLayerItem>().map(x => x.item.display_name);
+      const id = [...parents, webMap.item.display_name].join('-');
+      return id;
+    } else {
+      return String(layer.id);
+    }
   }
 }

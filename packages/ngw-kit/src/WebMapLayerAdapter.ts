@@ -156,7 +156,7 @@ export class WebMapLayerAdapter implements ResourceAdapter {
       this.response = data;
       const webmap = data.webmap;
       if (webmap) {
-        this._updateItemsParams(webmap.root_item, this.options.webMap);
+        this._updateItemsParams(webmap.root_item, this.options.webMap, data);
         return webmap;
       } else {
         // TODO: resource is no webmap
@@ -166,11 +166,14 @@ export class WebMapLayerAdapter implements ResourceAdapter {
     }
   }
 
-  private _updateItemsParams(item: TreeGroup | TreeLayer, webMap: WebMap) {
+  private _updateItemsParams(item: TreeGroup | TreeLayer, webMap: WebMap, data: ResourceItem) {
     if (item) {
       if (item.item_type === 'group' || item.item_type === 'root') {
         if (item.children) {
-          item.children = item.children.map(x => this._updateItemsParams(x, webMap));
+          item.children = item.children.map(x => this._updateItemsParams(x, webMap, data));
+        }
+        if (item.item_type === 'root') {
+          item.display_name = data.resource.display_name;
         }
       } else if (item.item_type === 'layer') {
         const url = fixUrlStr(this.options.baseUrl + '/api/component/render/image');
