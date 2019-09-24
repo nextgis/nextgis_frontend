@@ -21,7 +21,7 @@ export class ResourceStore<P extends Record<string, any> = Record<string, any>> 
   lookupTableResourceGroupId?: number;
   lookupTables: LookupTables = {};
 
-  store: ResourceStoreItem[] = [];
+  store: ResourceStoreItem<P>[] = [];
   fields: FeatureLayerField[] = [];
 
   _promises: Record<string, Promise<any>> = {};
@@ -47,11 +47,14 @@ export class ResourceStore<P extends Record<string, any> = Record<string, any>> 
   @Action({ commit: 'SET_STORE' })
   async getStore(): Promise<ResourceStoreItem<P>[] | undefined> {
     await this.context.dispatch('getResources');
+    if (this.store && this.store.length) {
+      return this.store;
+    }
     const id = this.resources[this.keyname];
     if (id) {
-      const store = await this.connector.get('feature_layer.store', null, {
+      const store = (await this.connector.get('feature_layer.store', null, {
         id
-      });
+      })) as ResourceStoreItem<P>[];
       return store;
     }
   }
@@ -113,12 +116,12 @@ export class ResourceStore<P extends Record<string, any> = Record<string, any>> 
   }
 
   @Mutation
-  private SET_STORE(plotsStore: ResourceStoreItem[]) {
+  private SET_STORE(plotsStore: ResourceStoreItem<P>[]) {
     this.store = plotsStore;
   }
 
   @Mutation
-  private UPDATE_STORE(item?: FeatureItem) {
+  private UPDATE_STORE(item?: FeatureItem<P>) {
     if (item) {
       const storeItems = [...this.store];
       const index = storeItems.findIndex(x => x.id === item.id);

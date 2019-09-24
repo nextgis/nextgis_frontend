@@ -28,10 +28,10 @@ export class TreeHelper {
     return this._parent;
   }
 
-  getParents(filterFunc?: (item: Item) => boolean): Item[] {
-    const parent = this.getParent();
+  getParents<I extends Item = Item>(filterFunc?: (item: I) => boolean): I[] {
+    const parent = this.getParent() as I;
     if (parent) {
-      return filterIn(parent, filterFunc, (x: Item) => x.tree.getParent());
+      return filterIn(parent, filterFunc, (x: I) => x.tree.getParent() as I);
     }
     return [];
   }
