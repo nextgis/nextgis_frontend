@@ -8,7 +8,7 @@ import { Type } from '@nextgis/webmap';
 
 type KeyName = string;
 
-export class ResourceStore extends VuexModule {
+export class ResourceStore<P extends Record<string, any> = Record<string, any>> extends VuexModule {
   keyname!: string;
   connector!: NgwConnector;
   resources: { [key in KeyName]?: number } = {};
@@ -45,7 +45,7 @@ export class ResourceStore extends VuexModule {
   }
 
   @Action({ commit: 'SET_STORE' })
-  async getStore(): Promise<ResourceStoreItem[] | undefined> {
+  async getStore(): Promise<ResourceStoreItem<P>[] | undefined> {
     await this.context.dispatch('getResources');
     const id = this.resources[this.keyname];
     if (id) {
