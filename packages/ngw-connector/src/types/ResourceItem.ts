@@ -60,11 +60,11 @@ export type ResourceCls =
   | 'formbuilder_form';
 
 export interface ResourceHierarchy {
-    id: number;
-    parent: {
-      id: any;
-    };
-  }
+  id: number;
+  parent: {
+    id: any;
+  };
+}
 
 export interface Resource {
   id: number;
