@@ -279,6 +279,7 @@ export type Operations =
 
 export interface FilterOptions {
   limit?: number;
+  intersects?: string;
 }
 
 /**

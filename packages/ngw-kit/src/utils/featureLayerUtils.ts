@@ -64,7 +64,7 @@ export function getNgwLayerFeatures<
   const params: FeatureRequestParams & FilterOptions & { [name: string]: any } = {
     ...FEATURE_REQUEST_PARAMS
   };
-  const { connector, filters, limit, resourceId } = options;
+  const { connector, filters, limit, intersects, resourceId } = options;
   if (filters) {
     const filterById = filters.find(x => x[0] === 'id');
     if (filterById) {
@@ -90,6 +90,9 @@ export function getNgwLayerFeatures<
   }
   if (limit) {
     params.limit = limit;
+  }
+  if (intersects) {
+    params.intersects = intersects;
   }
   return connector
     .get('feature_layer.feature.collection', null, {
