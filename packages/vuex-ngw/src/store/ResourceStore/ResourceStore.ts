@@ -5,18 +5,18 @@ import NgwConnector, { ResourceStoreItem, FeatureLayerField } from '@nextgis/ngw
 
 import { LookupTables, ForeignResource } from './interfaces';
 import { Type } from '@nextgis/webmap';
+import { Geometry, GeoJsonProperties, Feature } from 'geojson';
 
 type KeyName = string;
 
-export class ResourceStore<P extends Record<string, any> = Record<string, any>> extends VuexModule {
+export abstract class ResourceStore<
+  P extends GeoJsonProperties = GeoJsonProperties
+> extends VuexModule {
   keyname!: string;
   connector!: NgwConnector;
   resources: { [key in KeyName]?: number } = {};
 
   foreignResources: { [keyname: string]: ForeignResource } = {};
-
-  turnPointToPlotForeignField = 'plotid';
-  turnPointIdField = 'idpnt';
 
   lookupTableResourceGroupId?: number;
   lookupTables: LookupTables = {};
@@ -56,6 +56,24 @@ export class ResourceStore<P extends Record<string, any> = Record<string, any>> 
         id
       })) as ResourceStoreItem<P>[];
       return store;
+    }
+  }
+
+  @Action({ commit: 'SET_STORE' })
+  async updateStore(opt: { item: FeatureItem<P> }): Promise<ResourceStoreItem<P>[] | undefined> {
+    await this.context.dispatch('getStore');
+    const item = opt.item;
+    if (item) {
+      const storeItems = [...this.store];
+      const index = storeItems.findIndex(x => x.id === item.id);
+      if (index !== -1) {
+        const oldItem = storeItems[index];
+        const newItem = { ...oldItem, ...item.fields };
+        storeItems.splice(index, 1, newItem);
+      } else {
+        storeItems.push({ id: item.id, label: `#${item.id}`, ...item.fields });
+      }
+      return storeItems;
     }
   }
 
@@ -105,6 +123,78 @@ export class ResourceStore<P extends Record<string, any> = Record<string, any>> 
     return lookupTables;
   }
 
+  @Action({ commit: '' })
+  async prepareFeatureToNgw<G extends Geometry | null = Geometry, P = GeoJsonProperties>(opt: {
+    item: Feature<G, P>;
+  }) {
+    // const { prepareGeomToNgw } = await import('?prepareGeomToNgw');
+    // const geom = prepareGeomToNgw(opt.item)
+    const feature: Partial<FeatureItem<P>> = {
+      fields: opt.item.properties,
+      geom: '' // WKT in EPSG:3857
+    };
+    return feature;
+  }
+
+  @Action({ commit: '' })
+  async patch<G extends Geometry | null = Geometry>(opt: {
+    item: Feature<G, P>;
+    fid?: number;
+  }): Promise<FeatureItem<P> | undefined> {
+    await this.context.dispatch('getResources');
+    const id = this.resources[this.keyname];
+    if (id) {
+      // const { prepareGeomToNgw } = await import('../../../../plot/src/utils/prepareFeatureToNgw');
+      const feature: Partial<FeatureItem<P>> = await this.context.dispatch(
+        'prepareFeatureToNgw',
+        opt
+      );
+      try {
+        const { fid } = opt;
+        if (fid) {
+          feature.id = Number(fid);
+        }
+        const plot = await this.connector.patch(
+          'feature_layer.feature.collection',
+          { data: [feature] },
+          { id }
+        );
+        const newFeature = feature as FeatureItem<P>;
+        const newPlot = plot && plot[0];
+        if (newPlot) {
+          newFeature.id = newPlot.id;
+        } else {
+          throw new Error('Error on save');
+        }
+        await this.context.dispatch('updateStore', { item: newFeature });
+        return newFeature;
+      } catch (er) {
+        throw new Error(er);
+      }
+    }
+  }
+
+  @Action({ commit: 'SET_STORE' })
+  async delete(fid: number) {
+    await this.context.dispatch('getResources');
+    const id = this.resources[this.keyname];
+    if (id) {
+      try {
+        await this.connector.delete('feature_layer.feature.item', null, {
+          id,
+          fid
+        });
+        const store = [...this.store];
+        const index = store.findIndex(x => Number(x.id) === fid);
+        store.splice(index, 1);
+        return store;
+      } catch (er) {
+        console.error(er);
+      }
+    }
+    return this.store;
+  }
+
   @Mutation
   private UPDATE_LOOKUP_TABLES(lookupTables: LookupTables) {
     this.lookupTables = lookupTables;
@@ -116,29 +206,13 @@ export class ResourceStore<P extends Record<string, any> = Record<string, any>> 
   }
 
   @Mutation
-  private SET_STORE(plotsStore: ResourceStoreItem<P>[]) {
-    this.store = plotsStore;
+  private SET_STORE(store: ResourceStoreItem<P>[]) {
+    this.store = store;
   }
 
   @Mutation
-  private UPDATE_STORE(item?: FeatureItem<P>) {
-    if (item) {
-      const storeItems = [...this.store];
-      const index = storeItems.findIndex(x => x.id === item.id);
-      if (index !== -1) {
-        const oldPlot = storeItems[index];
-        const newPlot = { ...oldPlot, ...item.fields };
-        storeItems.splice(index, 1, newPlot);
-      } else {
-        storeItems.push({ id: item.id, label: `#${item.id}`, ...item.fields });
-      }
-      this.store = storeItems;
-    }
-  }
-
-  @Mutation
-  private UPDATE_FIELDS(plotsFields: FeatureLayerField[]) {
-    this.fields = plotsFields;
+  private UPDATE_FIELDS(fields: FeatureLayerField[]) {
+    this.fields = fields;
   }
 }
 
