@@ -2,11 +2,9 @@
  * @module ngw-connector
  */
 
-import { GeometryObject } from 'geojson';
+import { GeometryObject, GeoJsonProperties } from 'geojson';
 
-export interface FeatureLayerFields {
-  [field: string]: string | number | Date | boolean | null;
-}
+export type FeatureLayerFields = GeoJsonProperties;
 
 export interface LayerFeature {
   id: number;
