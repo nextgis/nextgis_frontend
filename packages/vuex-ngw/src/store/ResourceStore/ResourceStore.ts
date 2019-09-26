@@ -141,11 +141,14 @@ export abstract class ResourceStore<
     item: Feature<G, P>;
     fid?: number;
   }): Promise<FeatureItem<P> | undefined> {
-    await this.getResources();
+    await this.context.dispatch('getResources');
     const id = this.resources[this.keyname];
     if (id) {
       // const { prepareGeomToNgw } = await import('../../../../plot/src/utils/prepareFeatureToNgw');
-      const feature: Partial<FeatureItem<P>> = await this.context.dispatch('prepareFeatureToNgw');
+      const feature: Partial<FeatureItem<P>> = await this.context.dispatch(
+        'prepareFeatureToNgw',
+        opt
+      );
       try {
         const { fid } = opt;
         if (fid) {
@@ -163,7 +166,7 @@ export abstract class ResourceStore<
         } else {
           throw new Error('Error on save');
         }
-        this.updateStore({ item: newFeature });
+        await this.context.dispatch('updateStore', { item: newFeature });
         return newFeature;
       } catch (er) {
         throw new Error(er);
@@ -173,7 +176,7 @@ export abstract class ResourceStore<
 
   @Action({ commit: 'SET_STORE' })
   async delete(fid: number) {
-    await this.getResources();
+    await this.context.dispatch('getResources');
     const id = this.resources[this.keyname];
     if (id) {
       try {
