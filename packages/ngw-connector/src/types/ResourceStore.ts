@@ -2,8 +2,10 @@
  * @module ngw-connector
  */
 
+export type ResourceStoreItemProperties = { [name: string]: any } | null;
+
 export type ResourceStoreItem<
-  P extends Record<string, any> = Record<string, any>
+  P extends ResourceStoreItemProperties = ResourceStoreItemProperties
 > = ResourceStoreItemDefault & P;
 
 export interface ResourceStoreItemDefault {
