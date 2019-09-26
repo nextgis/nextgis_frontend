@@ -15,9 +15,6 @@ export class ResourceStore<P extends Record<string, any> = Record<string, any>> 
 
   foreignResources: { [keyname: string]: ForeignResource } = {};
 
-  turnPointToPlotForeignField = 'plotid';
-  turnPointIdField = 'idpnt';
-
   lookupTableResourceGroupId?: number;
   lookupTables: LookupTables = {};
 
@@ -56,6 +53,24 @@ export class ResourceStore<P extends Record<string, any> = Record<string, any>> 
         id
       })) as ResourceStoreItem<P>[];
       return store;
+    }
+  }
+
+  @Action({ commit: 'SET_STORE' })
+  async updateStore(opt: { item: FeatureItem<P> }): Promise<ResourceStoreItem<P>[] | undefined> {
+    await this.context.dispatch('getStore');
+    const item = opt.item;
+    if (item) {
+      const storeItems = [...this.store];
+      const index = storeItems.findIndex(x => x.id === item.id);
+      if (index !== -1) {
+        const oldItem = storeItems[index];
+        const newItem = { ...oldItem, ...item.fields };
+        storeItems.splice(index, 1, newItem);
+      } else {
+        storeItems.push({ id: item.id, label: `#${item.id}`, ...item.fields });
+      }
+      return storeItems;
     }
   }
 
@@ -116,29 +131,13 @@ export class ResourceStore<P extends Record<string, any> = Record<string, any>> 
   }
 
   @Mutation
-  private SET_STORE(plotsStore: ResourceStoreItem<P>[]) {
-    this.store = plotsStore;
+  private SET_STORE(store: ResourceStoreItem<P>[]) {
+    this.store = store;
   }
 
   @Mutation
-  private UPDATE_STORE(item?: FeatureItem<P>) {
-    if (item) {
-      const storeItems = [...this.store];
-      const index = storeItems.findIndex(x => x.id === item.id);
-      if (index !== -1) {
-        const oldPlot = storeItems[index];
-        const newPlot = { ...oldPlot, ...item.fields };
-        storeItems.splice(index, 1, newPlot);
-      } else {
-        storeItems.push({ id: item.id, label: `#${item.id}`, ...item.fields });
-      }
-      this.store = storeItems;
-    }
-  }
-
-  @Mutation
-  private UPDATE_FIELDS(plotsFields: FeatureLayerField[]) {
-    this.fields = plotsFields;
+  private UPDATE_FIELDS(fields: FeatureLayerField[]) {
+    this.fields = fields;
   }
 }
 
