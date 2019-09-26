@@ -5,10 +5,13 @@ import NgwConnector, { ResourceStoreItem, FeatureLayerField } from '@nextgis/ngw
 
 import { LookupTables, ForeignResource } from './interfaces';
 import { Type } from '@nextgis/webmap';
+import { Geometry, GeoJsonProperties, Feature } from 'geojson';
 
 type KeyName = string;
 
-export class ResourceStore<P extends Record<string, any> = Record<string, any>> extends VuexModule {
+export abstract class ResourceStore<
+  P extends GeoJsonProperties = GeoJsonProperties
+> extends VuexModule {
   keyname!: string;
   connector!: NgwConnector;
   resources: { [key in KeyName]?: number } = {};
@@ -118,6 +121,75 @@ export class ResourceStore<P extends Record<string, any> = Record<string, any>> 
       });
     }
     return lookupTables;
+  }
+
+  @Action({ commit: '' })
+  async prepareFeatureToNgw<G extends Geometry | null = Geometry, P = GeoJsonProperties>(opt: {
+    item: Feature<G, P>;
+  }) {
+    // const { prepareGeomToNgw } = await import('?prepareGeomToNgw');
+    // const geom = prepareGeomToNgw(opt.item)
+    const feature: Partial<FeatureItem<P>> = {
+      fields: opt.item.properties,
+      geom: '' // WKT in EPSG:3857
+    };
+    return feature;
+  }
+
+  @Action({ commit: '' })
+  async patch<G extends Geometry | null = Geometry>(opt: {
+    item: Feature<G, P>;
+    fid?: number;
+  }): Promise<FeatureItem<P> | undefined> {
+    await this.getResources();
+    const id = this.resources[this.keyname];
+    if (id) {
+      // const { prepareGeomToNgw } = await import('../../../../plot/src/utils/prepareFeatureToNgw');
+      const feature: Partial<FeatureItem<P>> = await this.context.dispatch('prepareFeatureToNgw');
+      try {
+        const { fid } = opt;
+        if (fid) {
+          feature.id = Number(fid);
+        }
+        const plot = await this.connector.patch(
+          'feature_layer.feature.collection',
+          { data: [feature] },
+          { id }
+        );
+        const newFeature = feature as FeatureItem<P>;
+        const newPlot = plot && plot[0];
+        if (newPlot) {
+          newFeature.id = newPlot.id;
+        } else {
+          throw new Error('Error on save');
+        }
+        this.updateStore({ item: newFeature });
+        return newFeature;
+      } catch (er) {
+        throw new Error(er);
+      }
+    }
+  }
+
+  @Action({ commit: 'SET_STORE' })
+  async delete(fid: number) {
+    await this.getResources();
+    const id = this.resources[this.keyname];
+    if (id) {
+      try {
+        await this.connector.delete('feature_layer.feature.item', null, {
+          id,
+          fid
+        });
+        const store = [...this.store];
+        const index = store.findIndex(x => Number(x.id) === fid);
+        store.splice(index, 1);
+        return store;
+      } catch (er) {
+        console.error(er);
+      }
+    }
+    return this.store;
   }
 
   @Mutation
