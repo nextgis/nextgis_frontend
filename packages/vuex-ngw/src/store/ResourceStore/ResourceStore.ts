@@ -1,16 +1,18 @@
-import { VuexModule, Mutation, Action } from 'vuex-module-decorators';
+import { VuexModule, Mutation, Action, Module } from 'vuex-module-decorators';
 import { FeatureItem } from '@nextgis/ngw-connector';
 
 import NgwConnector, { ResourceStoreItem, FeatureLayerField } from '@nextgis/ngw-connector';
 
-import { LookupTables, ForeignResource } from './interfaces';
+import { LookupTables, ForeignResource, PatchOptions } from '../../interfaces';
 import { Type } from '@nextgis/webmap';
 import { Geometry, GeoJsonProperties, Feature } from 'geojson';
+import { Store } from 'vuex';
 
 type KeyName = string;
 
 export abstract class ResourceStore<
-  P extends GeoJsonProperties = GeoJsonProperties
+  P extends GeoJsonProperties = GeoJsonProperties,
+  G extends Geometry | null = Geometry
 > extends VuexModule {
   keyname!: string;
   connector!: NgwConnector;
@@ -25,6 +27,11 @@ export abstract class ResourceStore<
   fields: FeatureLayerField[] = [];
 
   _promises: Record<string, Promise<any>> = {};
+
+  events: {
+    onNewItem?: (opt: PatchOptions<G, P>) => Promise<void>;
+    onBeforeDelete?: (opt: { fid: number }) => void;
+  } = {};
 
   @Action({ commit: 'UPDATE_FIELDS' })
   async getFields() {
@@ -124,27 +131,30 @@ export abstract class ResourceStore<
   }
 
   @Action({ commit: '' })
+  async prepareGeomToNgw<G extends Geometry | null = Geometry, P = GeoJsonProperties>(opt: {
+    item: Feature<G, P>;
+  }) {
+    const { prepareGeomToNgw } = await import('../../utils/prepareGeomToNgw');
+    return prepareGeomToNgw(opt.item);
+  }
+
+  @Action({ commit: '' })
   async prepareFeatureToNgw<G extends Geometry | null = Geometry, P = GeoJsonProperties>(opt: {
     item: Feature<G, P>;
   }) {
-    // const { prepareGeomToNgw } = await import('?prepareGeomToNgw');
-    // const geom = prepareGeomToNgw(opt.item)
+    const geom = await this.context.dispatch('prepareGeomToNgw', opt);
     const feature: Partial<FeatureItem<P>> = {
       fields: opt.item.properties,
-      geom: '' // WKT in EPSG:3857
+      geom
     };
     return feature;
   }
 
   @Action({ commit: '' })
-  async patch<G extends Geometry | null = Geometry>(opt: {
-    item: Feature<G, P>;
-    fid?: number;
-  }): Promise<FeatureItem<P> | undefined> {
+  async patch(opt: PatchOptions<G, P>): Promise<FeatureItem<P> | undefined> {
     await this.context.dispatch('getResources');
     const id = this.resources[this.keyname];
     if (id) {
-      // const { prepareGeomToNgw } = await import('../../../../plot/src/utils/prepareFeatureToNgw');
       const feature: Partial<FeatureItem<P>> = await this.context.dispatch(
         'prepareFeatureToNgw',
         opt
@@ -154,15 +164,18 @@ export abstract class ResourceStore<
         if (fid) {
           feature.id = Number(fid);
         }
-        const plot = await this.connector.patch(
+        const item = await this.connector.patch(
           'feature_layer.feature.collection',
           { data: [feature] },
           { id }
         );
         const newFeature = feature as FeatureItem<P>;
-        const newPlot = plot && plot[0];
-        if (newPlot) {
-          newFeature.id = newPlot.id;
+        const newItem = item && item[0];
+        if (newItem) {
+          newFeature.id = newItem.id;
+          if (this.events.onNewItem) {
+            await this.events.onNewItem({ ...opt, fid: newItem.id });
+          }
         } else {
           throw new Error('Error on save');
         }
@@ -180,6 +193,9 @@ export abstract class ResourceStore<
     const id = this.resources[this.keyname];
     if (id) {
       try {
+        if (this.events.onBeforeDelete) {
+          await this.events.onBeforeDelete({ fid });
+        }
         await this.connector.delete('feature_layer.feature.item', null, {
           id,
           fid
@@ -219,7 +235,9 @@ export abstract class ResourceStore<
 export function createResourceStore(options: {
   connector: NgwConnector;
   keyname: string;
+  store: Store<any>;
 }): Type<ResourceStore> {
+  @Module({ dynamic: true, store: options.store, name: options.keyname })
   class RS extends ResourceStore {
     get connector() {
       return options.connector;

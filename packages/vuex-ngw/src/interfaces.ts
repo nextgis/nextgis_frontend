@@ -1,7 +1,7 @@
 import { Polygon as LPolygon } from 'leaflet';
 import { VectorResourceAdapter } from '@nextgis/ngw-kit';
 import { LayerDefinition } from '@nextgis/webmap';
-import { Feature, Polygon, Point } from 'geojson';
+import { Feature, Polygon, Point, Geometry, GeoJsonProperties } from 'geojson';
 
 export type PlotFeature = Feature<Polygon, PlotProperties>;
 export type PlotLayerDefinition = LayerDefinition<PlotFeature>;
@@ -31,4 +31,13 @@ export type LookupTables = { [field: string]: Record<string, string> };
 
 export interface ForeignResource {
   relationField?: string;
+}
+
+export interface PatchOptions<
+  G extends Geometry | null = Geometry,
+  P extends GeoJsonProperties = GeoJsonProperties
+> {
+  item: Feature<G, P>;
+  fid?: number;
+  [options: string]: any;
 }
