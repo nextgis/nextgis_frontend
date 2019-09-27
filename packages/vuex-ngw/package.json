@@ -9,7 +9,9 @@
     "vue": "^2.6.10",
     "vue-class-component": "^7.1.0",
     "vue-property-decorator": "^8.2.2",
-    "vuex-module-decorators": "^0.10.1"
+    "vuex-module-decorators": "^0.10.1",
+    "reproject": "^1.2.5",
+    "wellknown": "^0.5.0"
   },
   "devDependencies": {
     "@nextgis/eslint-config": "^0.19.0",

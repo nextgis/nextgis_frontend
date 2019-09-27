@@ -3,9 +3,10 @@
   "compilerOptions": {
     "outDir": "lib",
     "declaration": true, /* Generates corresponding '.d.ts' file. */
-    "declarationDir": "lib"
+    "declarationDir": "lib",
+    "module": "esNext"
   },
   "include": [
     "./src"
   ]
- }
+}
