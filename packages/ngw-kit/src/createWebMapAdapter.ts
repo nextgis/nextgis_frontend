@@ -18,14 +18,5 @@ export async function createWebMapAdapter(
         connector
       });
     }
-
-    // async addLayer(_opt: any) {
-    //   const data = await geoJsonAdapterCb;
-    //   const opt = onLoad(data);
-    //   return super.addLayer({ ..._opt, ...opt });
-    // }
-    // beforeRemove() {
-    //   geoJsonAdapterCb.cancel();
-    // }
   };
 }
