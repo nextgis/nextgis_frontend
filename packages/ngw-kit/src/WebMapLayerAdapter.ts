@@ -72,6 +72,7 @@ export class WebMapLayerAdapter implements ResourceAdapter {
       this.options.webMap.emitter.off('click', this.$$onMapClick);
     }
     this.getDependLayers().forEach(x => {
+      if (!('layer' in x)) return;
       // @ts-ignore Update x interface
       mapAdapter.removeLayer(x.layer.layer);
     });
