@@ -23,6 +23,7 @@ import {
 } from './interfaces';
 import { loadJSON, template } from './utils';
 import { EventEmitter } from 'events';
+import { ResourceItem } from './types/ResourceItem';
 
 export class NgwConnector {
   emitter = new EventEmitter();
@@ -31,6 +32,7 @@ export class NgwConnector {
   private route?: PyramidRoute;
   private _loadingQueue: { [name: string]: LoadingQueue } = {};
   private _loadingStatus: { [url: string]: boolean } = {};
+  private _keynames: Record<string, ResourceItem> = {};
 
   constructor(public options: NgwConnectorOptions) {
     if (this.options.route) {
@@ -115,6 +117,18 @@ export class NgwConnector {
       const { login, password } = credentials;
       return window.btoa(unescape(encodeURIComponent(`${login}:${password}`)));
     }
+  }
+
+  async getResourceByKeyname(keyname: string) {
+    let resource: ResourceItem = this._keynames['keyname'];
+    if (!resource) {
+      const resources = await this.get('resource.search', null, { keyname });
+      resource = resources[0];
+      if (resource) {
+        this._keynames[keyname] = resource;
+      }
+    }
+    return resource;
   }
 
   async request<K extends keyof RequestItemsParamsMap, P extends RequestItemKeys = RequestItemKeys>(

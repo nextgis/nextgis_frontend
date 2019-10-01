@@ -1,7 +1,7 @@
 import NgwConnector, { ResourceCls, ResourceItem } from '@nextgis/ngw-connector';
 import WebMap, { LayerAdapter, Type } from '@nextgis/webmap';
 import QmsKit from '@nextgis/qms-kit';
-import { NgwLayerOptions, ResourceAdapter } from './interfaces';
+import { NgwLayerOptions, ResourceAdapter, AddNgwLayerOptions } from './interfaces';
 
 import { createGeoJsonAdapter } from './createGeoJsonAdapter';
 import { createRasterAdapter } from './createRasterAdapter';
@@ -32,49 +32,74 @@ async function createAdapterFromFirstStyle(
 }
 
 export async function createAsyncAdapter(
-  options: NgwLayerOptions,
+  options: AddNgwLayerOptions,
   webMap: WebMap,
   baseUrl: string,
   connector: NgwConnector
 ): Promise<Type<ResourceAdapter> | undefined> {
   let adapter: Promise<Type<LayerAdapter> | undefined> | undefined;
-  let item: ResourceItem;
+  let item: ResourceItem | undefined;
   try {
     const adapterType = options.adapter;
-    item = await connector.get('resource.item', null, { id: options.resourceId });
-    if (item.webmap) {
-      adapter = createWebMapAdapter(options, webMap, baseUrl, connector);
-    } else if (styles.indexOf(item.resource.cls) !== -1) {
-      if (adapterType === 'GEOJSON') {
-        const parentOptions: NgwLayerOptions = {
-          ...options,
-          resourceId: item.resource.parent.id
-        };
-        adapter = createGeoJsonAdapter(parentOptions, webMap, connector);
-      } else {
-        adapter = createRasterAdapter(options, webMap, baseUrl);
-      }
-    } else if (item.resource.cls === 'vector_layer') {
-      if (adapterType !== undefined && adapterType !== 'GEOJSON') {
-        if (adapterType === 'MVT') {
-          adapter = createRasterAdapter(options, webMap, baseUrl);
-        } else {
-          return createAdapterFromFirstStyle(item.resource.id, options, webMap, baseUrl, connector);
+    let resourceId = options.resourceId;
+    if (!resourceId && options.keyname) {
+      const resourceItem = await connector.getResourceByKeyname(options.keyname);
+      resourceId = resourceItem.resource.id;
+    }
+    if (resourceId) {
+      item = await connector.get('resource.item', null, { id: resourceId });
+
+      if (item) {
+        const _options: NgwLayerOptions = { ...options, resourceId };
+        if (item.webmap) {
+          adapter = createWebMapAdapter(_options, webMap, baseUrl, connector);
+        } else if (styles.indexOf(item.resource.cls) !== -1) {
+          if (adapterType === 'GEOJSON') {
+            const parentOptions: NgwLayerOptions = {
+              ...options,
+              resourceId: item.resource.parent.id
+            };
+            adapter = createGeoJsonAdapter(parentOptions, webMap, connector);
+          } else {
+            adapter = createRasterAdapter(_options, webMap, baseUrl);
+          }
+        } else if (item.resource.cls === 'vector_layer') {
+          if (adapterType !== undefined && adapterType !== 'GEOJSON') {
+            if (adapterType === 'MVT') {
+              adapter = createRasterAdapter(_options, webMap, baseUrl);
+            } else {
+              return createAdapterFromFirstStyle(
+                item.resource.id,
+                _options,
+                webMap,
+                baseUrl,
+                connector
+              );
+            }
+          } else {
+            adapter = createGeoJsonAdapter(_options, webMap, connector);
+          }
+        } else if (item.resource.cls === 'raster_layer') {
+          return createAdapterFromFirstStyle(
+            item.resource.id,
+            _options,
+            webMap,
+            baseUrl,
+            connector
+          );
+        } else if (item.basemap_layer && item.basemap_layer.qms) {
+          adapter = Promise.resolve(QmsKit.utils.createQmsAdapter(webMap));
+          adapter.then(x => {
+            if (x && item && item.basemap_layer && item.basemap_layer.qms) {
+              const qms = JSON.parse(item.basemap_layer.qms);
+              x.prototype.qms = qms;
+              x.prototype.baseLayer = true;
+            }
+          });
         }
       } else {
-        adapter = createGeoJsonAdapter(options, webMap, connector);
+        throw new Error("Can't add NGW layer because Resource item is not found");
       }
-    } else if (item.resource.cls === 'raster_layer') {
-      return createAdapterFromFirstStyle(item.resource.id, options, webMap, baseUrl, connector);
-    } else if (item.basemap_layer && item.basemap_layer.qms) {
-      adapter = Promise.resolve(QmsKit.utils.createQmsAdapter(webMap));
-      adapter.then(x => {
-        if (x && item.basemap_layer && item.basemap_layer.qms) {
-          const qms = JSON.parse(item.basemap_layer.qms);
-          x.prototype.qms = qms;
-          x.prototype.baseLayer = true;
-        }
-      });
     }
   } catch (er) {
     // if (options.adapter === 'GEOJSON') {
