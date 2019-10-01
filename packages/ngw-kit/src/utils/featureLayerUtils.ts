@@ -60,7 +60,7 @@ export function getNgwLayerFeatures<
     connector: NgwConnector;
     filters?: PropertiesFilter;
   } & FilterOptions
-): CancelablePromise<FeatureCollection<G, P>> {
+): Promise<FeatureCollection<G, P>> {
   const params: FeatureRequestParams & FilterOptions & { [name: string]: any } = {
     ...FEATURE_REQUEST_PARAMS
   };
@@ -68,21 +68,26 @@ export function getNgwLayerFeatures<
   if (filters) {
     const filterById = filters.find(x => x[0] === 'id');
     if (filterById) {
-      if (filterById[1] === 'eq') {
+      const value = filterById[2];
+      const featureIds: number[] =
+        typeof value === 'number' ? [value] : value.split(',').map((x: string) => Number(x));
+      if (filterById[1] !== 'eq' && filterById[1] !== 'in') {
+        throw new Error('Unable to filter by object id. Except `eq` or `in` operator');
+      }
+      const promises: Promise<Feature<G, P>>[] = featureIds.map(featureId => {
         return getNgwLayerFeature<G, P>({
           connector,
           resourceId,
-          featureId: filterById[2]
-        }).then(feature => {
-          const featureCollection: FeatureCollection<G, P> = {
-            type: 'FeatureCollection',
-            features: [feature]
-          };
-          return featureCollection;
+          featureId
         });
-      } else {
-        throw new Error('Unable to filter by object id except `eq` operator');
-      }
+      });
+      return Promise.all(promises).then(features => {
+        const featureCollection: FeatureCollection<G, P> = {
+          type: 'FeatureCollection',
+          features
+        };
+        return featureCollection;
+      });
     }
     filters.forEach(([field, operation, value]) => {
       params[`fld_${field}__${operation}`] = `${value}`;
