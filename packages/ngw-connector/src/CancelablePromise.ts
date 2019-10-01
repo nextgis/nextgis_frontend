@@ -37,6 +37,14 @@ export class CancelablePromise<T> implements Promise<T> {
     return new CancelablePromise((resolve, reject) => reject(value));
   }
 
+  static all<T>(values: (T | PromiseLike<T>)[]): CancelablePromise<T[]> {
+    return new CancelablePromise((resolve, reject) => {
+      Promise.all(values)
+        .then(resolve)
+        .catch(reject);
+    });
+  }
+
   then<TResult1 = T, TResult2 = never>(
     onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
     onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null

@@ -60,7 +60,7 @@ export function getNgwLayerFeatures<
     connector: NgwConnector;
     filters?: PropertiesFilter;
   } & FilterOptions
-): Promise<FeatureCollection<G, P>> {
+): CancelablePromise<FeatureCollection<G, P>> {
   const params: FeatureRequestParams & FilterOptions & { [name: string]: any } = {
     ...FEATURE_REQUEST_PARAMS
   };
@@ -81,7 +81,7 @@ export function getNgwLayerFeatures<
           featureId
         });
       });
-      return Promise.all(promises).then(features => {
+      return CancelablePromise.all(promises).then(features => {
         const featureCollection: FeatureCollection<G, P> = {
           type: 'FeatureCollection',
           features
