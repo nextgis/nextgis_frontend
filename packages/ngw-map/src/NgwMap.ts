@@ -21,7 +21,12 @@ import NgwConnector, {
   FeatureLayersIdentify
 } from '@nextgis/ngw-connector';
 import { QmsAdapterOptions } from '@nextgis/qms-kit';
-import NgwKit, { NgwLayerOptions, ResourceAdapter, WebMapLayerItem } from '@nextgis/ngw-kit';
+import NgwKit, {
+  NgwLayerOptions,
+  ResourceAdapter,
+  WebMapLayerItem,
+  AddNgwLayerOptions
+} from '@nextgis/ngw-kit';
 import { getIcon } from '@nextgis/icons';
 
 import { onMapLoad } from './decorators';
@@ -141,9 +146,9 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<M, L, C, N
    * ```
    */
   @onMapLoad()
-  async addNgwLayer(options: NgwLayerOptions): Promise<ResourceAdapter | undefined> {
-    if (!options.resourceId) {
-      throw new Error('resourceId is required parameter to add NGW layer');
+  async addNgwLayer(options: AddNgwLayerOptions): Promise<ResourceAdapter | undefined> {
+    if (!options.resourceId && !options.keyname) {
+      throw new Error('resourceId or keyname is required parameter to add NGW layer');
     }
     if (this.options.baseUrl) {
       try {
@@ -162,7 +167,7 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<M, L, C, N
         })) as ResourceAdapter;
         const id = layer && this.getLayerId(layer);
         if (layer && id) {
-          this._ngwLayers[id] = { layer, resourceId: options.resourceId };
+          this._ngwLayers[id] = { layer, resourceId: layer.resourceId };
 
           if (layer.options.baseLayer) {
             const visibleLayerBaseLayer = this.getActiveBaseLayer();

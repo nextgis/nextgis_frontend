@@ -9,7 +9,8 @@ import {
   NgwLayerOptions,
   WebMapAdapterOptions,
   IdentifyRequestOptions,
-  ResourceAdapter
+  ResourceAdapter,
+  AddNgwLayerOptions
 } from '../interfaces';
 import { WebMapLayerAdapter } from '../WebMapLayerAdapter';
 
@@ -61,7 +62,7 @@ export function getLayerAdapterOptions(options: NgwLayerOptions, webMap: WebMap,
 }
 
 export function addNgwLayer(
-  options: NgwLayerOptions,
+  options: AddNgwLayerOptions,
   webMap: WebMap,
   baseUrl: string,
   connector: NgwConnector
