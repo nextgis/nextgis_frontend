@@ -69,6 +69,7 @@ export interface NgwLayerOptionsAdditional<
   headers?: any;
   fit?: boolean;
   meta?: P;
+  simplification?: number;
 }
 
 export interface NgwLayerOptions<
@@ -76,7 +77,14 @@ export interface NgwLayerOptions<
   P = { [name: string]: any }
 > extends NgwLayerOptionsAdditional<T, P> {
   resourceId: number;
-  simplification?: number;
+}
+
+export interface AddNgwLayerOptions<
+  T extends NgwLayerAdapterType = NgwLayerAdapterType,
+  P = { [name: string]: any }
+> extends NgwLayerOptionsAdditional<T, P> {
+  keyname?: string;
+  resourceId?: number;
 }
 
 export interface NgwConfig {

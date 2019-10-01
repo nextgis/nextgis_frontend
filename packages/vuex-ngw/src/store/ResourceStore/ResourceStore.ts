@@ -1,4 +1,5 @@
 import { VuexModule, Mutation, Action, Module } from 'vuex-module-decorators';
+import { Store } from 'vuex';
 import { FeatureItem } from '@nextgis/ngw-connector';
 
 import NgwConnector, { ResourceStoreItem, FeatureLayerField } from '@nextgis/ngw-connector';
@@ -6,7 +7,6 @@ import NgwConnector, { ResourceStoreItem, FeatureLayerField } from '@nextgis/ngw
 import { LookupTables, ForeignResource, PatchOptions } from '../../interfaces';
 import { Type } from '@nextgis/webmap';
 import { Geometry, GeoJsonProperties, Feature } from 'geojson';
-import { Store } from 'vuex';
 
 type KeyName = string;
 
@@ -91,8 +91,7 @@ export abstract class ResourceStore<
     if (!this._promises.getResources) {
       keyNames.forEach(keyname => {
         if (!(keyname in this.resources)) {
-          const promise = this.connector.get('resource.search', null, { keyname }).then(x => {
-            const item = x[0];
+          const promise = this.connector.getResourceByKeyname(keyname).then(item => {
             if (item) {
               this.resources[keyname] = item.resource.id;
             }
