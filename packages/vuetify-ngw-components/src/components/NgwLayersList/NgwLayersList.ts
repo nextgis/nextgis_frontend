@@ -16,6 +16,8 @@ export class NgwLayersList extends Vue {
   @Prop({ type: NgwMap }) ngwMap!: NgwMap;
   @Prop({ type: Array }) include!: Array<ResourceAdapter | string>;
   @Prop({ type: Boolean, default: false }) hideWebmapRoot!: boolean;
+  @Prop({ type: Function }) showLayer!: (layer: WebMapLayerItem) => boolean;
+  @Prop({ type: Function }) showResourceAdapter!: (adapter: ResourceAdapter) => boolean;
 
   items: VueTreeItem[] = [];
 
@@ -114,6 +116,12 @@ export class NgwLayersList extends Vue {
 
   private _createTreeItem(layerMem: NgwLayersMem) {
     const layer: ResourceAdapter = layerMem.layer;
+
+    if (this.showResourceAdapter) {
+      const adapterEnabled = this.showResourceAdapter(layer);
+      if (!adapterEnabled) return;
+    }
+
     const name = (layer.item && layer.item.resource.display_name) || String(layer.id);
     const item: VueTreeItem = {
       id: layer.id || '',
@@ -162,8 +170,15 @@ export class NgwLayersList extends Vue {
   }
 
   private _createWebMapTree(items: WebMapLayerItem[]) {
-    return items.map(x => {
+    const treeItems: VueTreeItem[] = [];
+
+    items.forEach(x => {
       const id = this._getLayerId(x);
+
+      if (this.showLayer) {
+        const checked = this.showLayer(x);
+        if (!checked) return;
+      }
 
       const item: VueTreeItem = {
         id,
@@ -177,8 +192,10 @@ export class NgwLayersList extends Vue {
       if (visible) {
         this.selection.push(id);
       }
-      return item;
+      treeItems.push(item);
     });
+
+    return treeItems;
   }
 
   private _getLayerId(layer: ResourceAdapter | WebMapLayerItem): string {
