@@ -28,6 +28,8 @@ export interface AdapterOptions {
   attribution?: string;
   maxZoom?: number;
   minZoom?: number;
+  minScale?: number;
+  maxScale?: number;
   /**
    * from 0-transparent to 1-visible
    * @default 1

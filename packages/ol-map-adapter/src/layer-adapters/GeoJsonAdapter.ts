@@ -17,6 +17,7 @@ import { ForEachFeatureAtPixelCallback } from '../OlMapAdapter';
 import * as ol from 'ol';
 import Base from 'ol/layer/Base';
 import { styleFunction, getFeature } from '../utils/utils';
+import { getResolution } from '../utils/gerResolution';
 
 type Layer = Base;
 
@@ -31,7 +32,7 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
   private _selectedFeatures: ol.Feature[] = [];
   private _filterFun?: DataLayerFilter<Feature>;
 
-  constructor(public map: Map, public options: GeoJsonAdapterOptions) {}
+  constructor(public map: Map, public options: GeoJsonAdapterOptions) { }
 
   addLayer(options: GeoJsonAdapterOptions) {
     this.options = options;
@@ -49,7 +50,9 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
       style: f => {
         const style = styleFunction(f as ol.Feature, options.paint);
         return style;
-      }
+      },
+      minResolution: getResolution(this.map, this.options.maxScale),
+      maxResolution: getResolution(this.map, this.options.minScale)
     });
 
     if (options.selectable) {
@@ -137,8 +140,8 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
     const features = this._features;
     const filtered = fun
       ? features.filter(feature => {
-          return fun({ feature: getFeature(feature) });
-        })
+        return fun({ feature: getFeature(feature) });
+      })
       : features;
     this.vectorSource.clear();
     const length = filtered.length;
