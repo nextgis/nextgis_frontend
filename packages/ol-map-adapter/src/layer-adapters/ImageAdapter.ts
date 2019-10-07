@@ -3,6 +3,7 @@ import ImageWMS, { Options as ImageWMSOptions } from 'ol/source/ImageWMS';
 import ImageLayer from 'ol/layer/Image';
 import Map from 'ol/Map';
 import { queryToObject, objectToQuery } from '../utils/utils';
+import { setTileLoadFunction } from '../utils/setTileLoadFunction';
 
 export class ImageAdapter implements BaseLayerAdapter {
   layer: any;
@@ -33,8 +34,14 @@ export class ImageAdapter implements BaseLayerAdapter {
             height: HEIGHT
           })
         );
-        // @ts-ignore
-        image.getImage().src = url + '?' + queryString;
+        const headers = options.headers;
+        const _src = url + '?' + queryString;
+        if (headers) {
+          setTileLoadFunction(image, _src, headers);
+        } else {
+          // @ts-ignore
+          image.getImage().src = _src;
+        }
       };
     }
 
