@@ -11,9 +11,7 @@ export class TileAdapter implements BaseLayerAdapter {
   addLayer(options: TileAdapterOptions) {
     const source = new XYZ({
       attributions: options.attribution ? [options.attribution] : [],
-      url: options.url,
-      minZoom: options.minZoom,
-      maxZoom: options.maxZoom
+      url: options.url
     });
     const headers = options.headers;
     if (headers) {
