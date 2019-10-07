@@ -14,4 +14,5 @@ export function callAjax(url: string, callback: (resp: any) => any, headers: any
     xmlhttp.setRequestHeader(h, headers[h]);
   }
   xmlhttp.send();
+  return xmlhttp;
 }
