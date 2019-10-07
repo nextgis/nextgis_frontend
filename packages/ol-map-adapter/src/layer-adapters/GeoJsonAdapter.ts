@@ -32,7 +32,7 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
   private _selectedFeatures: ol.Feature[] = [];
   private _filterFun?: DataLayerFilter<Feature>;
 
-  constructor(public map: Map, public options: GeoJsonAdapterOptions) { }
+  constructor(public map: Map, public options: GeoJsonAdapterOptions) {}
 
   addLayer(options: GeoJsonAdapterOptions) {
     this.options = options;
@@ -140,8 +140,8 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
     const features = this._features;
     const filtered = fun
       ? features.filter(feature => {
-        return fun({ feature: getFeature(feature) });
-      })
+          return fun({ feature: getFeature(feature) });
+        })
       : features;
     this.vectorSource.clear();
     const length = filtered.length;

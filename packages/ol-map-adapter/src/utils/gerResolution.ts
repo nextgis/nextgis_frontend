@@ -8,11 +8,13 @@ function getResolutionForScale(scale: number, metersPerUnit: number) {
 }
 
 export function getResolution(map: Map, scale: number) {
-  return getResolutionForScale(
-    scale,
-    map
-      .getView()
-      .getProjection()
-      .getMetersPerUnit() || 0
-  );
+  if (scale) {
+    return getResolutionForScale(
+      scale,
+      map
+        .getView()
+        .getProjection()
+        .getMetersPerUnit() || 1
+    );
+  }
 }
