@@ -89,6 +89,8 @@ export class WebMapLayerItem extends Item<ItemOptions> {
       const options: any = {
         maxZoom,
         minZoom,
+        minScale: item.layer_min_scale_denom,
+        maxScale: item.layer_max_scale_denom,
         ...item,
         headers: this.options.headers
       };

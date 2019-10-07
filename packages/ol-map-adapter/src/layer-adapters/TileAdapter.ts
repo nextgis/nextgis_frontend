@@ -3,6 +3,7 @@ import TileLayer from 'ol/layer/Tile';
 import XYZ from 'ol/source/XYZ';
 import Map from 'ol/Map';
 import { setTileLoadFunction } from '../utils/setTileLoadFunction';
+import { getResolution } from '../utils/gerResolution';
 
 export class TileAdapter implements BaseLayerAdapter {
   constructor(public map: Map, public options: TileAdapterOptions) {}
@@ -10,7 +11,9 @@ export class TileAdapter implements BaseLayerAdapter {
   addLayer(options: TileAdapterOptions) {
     const source = new XYZ({
       attributions: options.attribution ? [options.attribution] : [],
-      url: options.url
+      url: options.url,
+      minZoom: options.minZoom,
+      maxZoom: options.maxZoom
     });
     const headers = options.headers;
     if (headers) {
@@ -19,7 +22,9 @@ export class TileAdapter implements BaseLayerAdapter {
       });
     }
     const layer = new TileLayer({
-      source
+      source,
+      minResolution: getResolution(this.map, this.options.maxScale),
+      maxResolution: getResolution(this.map, this.options.minScale)
     });
     return layer;
   }

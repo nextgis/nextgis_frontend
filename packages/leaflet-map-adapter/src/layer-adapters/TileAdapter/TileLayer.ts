@@ -23,7 +23,7 @@ export class TileLayer extends TL {
     callAjax(
       url,
       response => {
-        tile.src = URL.createObjectURL(response);
+        tile.src = response;
         done(null, tile);
       },
       // @ts-ignore
