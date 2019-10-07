@@ -4,6 +4,7 @@ import ImageLayer from 'ol/layer/Image';
 import Map from 'ol/Map';
 import { queryToObject, objectToQuery } from '../utils/utils';
 import { setTileLoadFunction } from '../utils/setTileLoadFunction';
+import { getResolution } from '../utils/gerResolution';
 
 export class ImageAdapter implements BaseLayerAdapter {
   layer: any;
@@ -47,7 +48,11 @@ export class ImageAdapter implements BaseLayerAdapter {
 
     const source = new ImageWMS(imageOptions);
 
-    const layer = new ImageLayer({ source });
+    const layer = new ImageLayer({
+      source,
+      minResolution: getResolution(this.map, this.options.maxScale),
+      maxResolution: getResolution(this.map, this.options.minScale)
+    });
     this.layer = layer;
     return layer;
   }

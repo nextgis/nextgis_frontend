@@ -1,18 +1,20 @@
 /**
  * @module leaflet-map-adapter
  */
-export function callAjax(url: string, callback: (resp: any) => any, headers: any) {
-  const xmlhttp = new XMLHttpRequest();
-  xmlhttp.responseType = 'blob';
-  xmlhttp.onreadystatechange = () => {
-    if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-      callback(xmlhttp.response);
-    }
-  };
-  xmlhttp.open('GET', url, true);
+export function callAjax(src: string, callback: (resp: any) => any, headers: any) {
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', src);
+  xhr.responseType = 'arraybuffer';
   for (const h in headers) {
-    xmlhttp.setRequestHeader(h, headers[h]);
+    xhr.setRequestHeader(h, headers[h]);
   }
-  xmlhttp.send();
-  return xmlhttp;
+
+  xhr.onload = function () {
+    const arrayBufferView = new Uint8Array(this.response);
+    const blob = new Blob([arrayBufferView], { type: 'image/png' });
+    const urlCreator = window.URL || window.webkitURL;
+    const imageUrl = urlCreator.createObjectURL(blob);
+    callback(imageUrl);
+  };
+  xhr.send();
 }
