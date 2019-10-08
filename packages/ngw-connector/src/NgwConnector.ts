@@ -317,7 +317,7 @@ export class NgwConnector {
         if (this.user) {
           options = options || {};
           // options.withCredentials = true;
-          options.headers = this.getAuthorizationHeaders();
+          options.headers = { ...this.getAuthorizationHeaders(), ...options.headers };
         }
         loadJSON(url, resolve, options, reject, onCancel);
       },
