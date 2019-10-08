@@ -103,7 +103,11 @@ export function loadJSON(
       }
     }
   } else {
-    data = options.data ? JSON.stringify(options.data) : null;
+    data = options.data
+      ? typeof options.data === 'string'
+        ? options.data
+        : JSON.stringify(options.data)
+      : null;
   }
   if (onCancel) {
     onCancel.push(() => {
