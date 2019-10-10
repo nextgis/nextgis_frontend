@@ -5,6 +5,7 @@
     "**/node_modules/**/*",
     "**/**/*.js",
     "**/packages/utils/**/*",
+    "**/packages/vuex-ngw/**/*",
     "**/packages/vue-ngw-map/**/*",
     "**/packages/vuetify-ngw-components/**/*",
     "**/packages/demo/**/*",
