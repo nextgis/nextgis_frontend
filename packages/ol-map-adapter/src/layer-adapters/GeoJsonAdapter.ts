@@ -51,8 +51,10 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
         const style = styleFunction(f as ol.Feature, options.paint);
         return style;
       },
-      minResolution: getResolution(this.map, this.options.maxScale),
-      maxResolution: getResolution(this.map, this.options.minScale)
+      minResolution:
+        (this.options.maxScale && getResolution(this.map, this.options.maxScale)) || undefined,
+      maxResolution:
+        (this.options.minScale && getResolution(this.map, this.options.minScale)) || undefined
     });
 
     if (options.selectable) {
