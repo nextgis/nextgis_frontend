@@ -36,6 +36,16 @@ Some universal examples:
 - [icons](http://code.nextgis.com/icons) – simple svg icons pack to display on the map;
 - [dialog](http://code.nextgis.com/dialog) – utility to work with modal windows;
 
+## Example project
+
+- [Clear horizon frontend](https://github.com/nextgis/clear_horizon_frontend)
+- [russia-history](https://github.com/nextgis/russia-history) Russia history live web map. [LIVE](https://map.runivers.ru)
+- [ngw_frontend_boilerplate](https://github.com/nextgis/ngw_frontend_boilerplate)
+- [Emergency situations with oil spills](https://github.com/nextgis/wwf-oilspill) [DEMO](http://nextgis.ru/demo/oilspill/build/)
+- [nextgisweb_viewer](https://github.com/nextgis/nextgisweb_viewer) Service for viewing map resources from NextGIS WEB. [DEMO](http://viewer.nextgis.com)
+- [oralhistory](https://github.com/nextgis/oralhistory) [DEMO](https://nextgis.ru/demo/oralhistory/dist/)
+- [petro2020](https://github.com/rendrom/petro2020) [DEMO](http://petro2020.igc.irk.ru/)
+
 ## Base usage
 
 ### Using directly in the browser
