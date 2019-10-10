@@ -28,6 +28,8 @@ export interface AdapterOptions {
   attribution?: string;
   maxZoom?: number;
   minZoom?: number;
+  minScale?: number;
+  maxScale?: number;
   /**
    * from 0-transparent to 1-visible
    * @default 1
@@ -85,7 +87,7 @@ export interface IconPaint {
  * @deprecated use IconPaint instead
  */
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface IconOptions extends IconPaint {}
+export interface IconOptions extends IconPaint { }
 
 export type GetPaintFunction = (opt?: any) => VectorAdapterLayerPaint;
 
@@ -212,7 +214,7 @@ export interface MarkerAdapterOptions extends AdapterOptions {
 interface RasterAdapterOptions extends AdapterOptions {
   url: string;
   subdomains?: string;
-  headers?: any;
+  headers?: Record<string, any>;
 }
 
 export interface TileAdapterOptions extends RasterAdapterOptions {
@@ -323,7 +325,7 @@ export interface VectorLayerAdapter<
   L = any,
   O extends VectorAdapterOptions = VectorAdapterOptions,
   F extends Feature = Feature
-> extends BaseLayerAdapter<M, L, O> {
+  > extends BaseLayerAdapter<M, L, O> {
   selected?: boolean;
 
   getLayers?(): Array<LayerDefinition<F, L>>;
