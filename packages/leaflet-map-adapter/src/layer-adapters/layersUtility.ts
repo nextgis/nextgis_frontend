@@ -12,6 +12,7 @@ export function callAjax(src: string, callback: (resp: any) => any, headers: any
   xhr.onload = function() {
     const arrayBufferView = new Uint8Array(this.response);
     const blob = new Blob([arrayBufferView], { type: 'image/png' });
+    // @ts-ignore for typedoc
     const urlCreator = window.URL || window.webkitURL;
     const imageUrl = urlCreator.createObjectURL(blob);
     callback(imageUrl);
