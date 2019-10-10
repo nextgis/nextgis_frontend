@@ -6,6 +6,13 @@ type TLOptions = TileLayerOptions & { headers: any };
 export class TileLayer extends TL {
   constructor(urlTemplate: string, options?: TLOptions) {
     super(urlTemplate, options);
+    this.on('tileunload', e => console.log(e));
+  }
+
+  _removeTile(key: any) {
+    console.log(key);
+    // @ts-ignore
+    super._removeTile(key);
   }
 
   createTile(coords: object, done: (error: any, tile: HTMLImageElement) => void) {
@@ -16,7 +23,7 @@ export class TileLayer extends TL {
     callAjax(
       url,
       response => {
-        tile.src = URL.createObjectURL(response);
+        tile.src = response;
         done(null, tile);
       },
       // @ts-ignore

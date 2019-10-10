@@ -1,7 +1,11 @@
-/**
- * @module leaflet-map-adapter
- */
-export function callAjax(src: string, callback: (resp: any) => any, headers: any) {
+import { Tile } from 'ol';
+import ImageWrapper from 'ol/Image';
+
+export function setTileLoadFunction(
+  tile: Tile | ImageWrapper,
+  src: string,
+  headers: Record<string, any>
+) {
   const xhr = new XMLHttpRequest();
   xhr.open('GET', src);
   xhr.responseType = 'arraybuffer';
@@ -9,12 +13,13 @@ export function callAjax(src: string, callback: (resp: any) => any, headers: any
     xhr.setRequestHeader(h, headers[h]);
   }
 
-  xhr.onload = function () {
+  xhr.onload = function() {
     const arrayBufferView = new Uint8Array(this.response);
     const blob = new Blob([arrayBufferView], { type: 'image/png' });
     const urlCreator = window.URL || window.webkitURL;
     const imageUrl = urlCreator.createObjectURL(blob);
-    callback(imageUrl);
+    // @ts-ignore
+    tile.getImage().src = imageUrl;
   };
   xhr.send();
 }
