@@ -231,13 +231,16 @@ export abstract class ResourceStore<
   }
 }
 
-export function createResourceStore(options: {
+export function createResourceStore<
+  P extends GeoJsonProperties = GeoJsonProperties,
+  G extends Geometry | null = Geometry
+>(options: {
   connector: NgwConnector;
   keyname: string;
   store: Store<any>;
-}): Type<ResourceStore> {
+}): Type<ResourceStore<P, G>> {
   @Module({ dynamic: true, store: options.store, name: options.keyname })
-  class RS extends ResourceStore {
+  class RS extends ResourceStore<P, G> {
     get connector() {
       return options.connector;
     }
