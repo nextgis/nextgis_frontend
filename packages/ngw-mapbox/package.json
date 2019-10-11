@@ -1,23 +1,23 @@
 {
   "name": "@nextgis/ngw-mapbox",
   "_priority": 10,
-  "version": "0.19.1",
+  "version": "0.20.0",
   "description": "",
   "main": "lib/ngw-mapbox.js",
   "unpkg": "lib/ngw-mapbox.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/mapboxgl-map-adapter": "^0.19.1",
-    "@nextgis/ngw-map": "^0.19.1",
+    "@nextgis/mapboxgl-map-adapter": "^0.20.0",
+    "@nextgis/ngw-map": "^0.20.0",
     "@types/mapbox-gl": "^0.54.4",
     "canvg": "^2.0.0",
     "mapbox-gl": "^1.4.0"
   },
   "devDependencies": {
-    "@nextgis/eslint-config": "^0.19.0",
+    "@nextgis/eslint-config": "^0.20.0",
     "@types/events": "^3.0.0",
     "@types/geojson": "^7946.0.7",
-    "@types/node": "^12.7.9",
+    "@types/node": "^12.7.12",
     "base64-inline-loader": "^1.1.1",
     "css-loader": "^3.2.0",
     "eslint-loader": "^3.0.2",
@@ -25,7 +25,7 @@
     "rimraf": "^3.0.0",
     "style-loader": "^1.0.0",
     "ts-loader": "^6.2.0",
-    "typescript": "^3.6.3",
+    "typescript": "^3.6.4",
     "webpack": "^4.41.0",
     "webpack-cli": "^3.3.9"
   },
