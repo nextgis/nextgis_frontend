@@ -131,6 +131,23 @@ export class NgwConnector {
     return resource;
   }
 
+  async getResourceChildren(opt: {
+    keyname?: string;
+    resourceId?: number;
+  }): Promise<ResourceItem[]> {
+    let parent = opt.resourceId;
+    if (!opt.keyname && !opt.resourceId) {
+      throw new Error('No keyname or resourceId is set');
+    }
+    if (opt.keyname) {
+      const item = await this.getResourceByKeyname(opt.keyname);
+      parent = item.resource.id;
+    }
+    return await this.get('resource.collection', null, {
+      parent
+    });
+  }
+
   async request<K extends keyof RequestItemsParamsMap, P extends RequestItemKeys = RequestItemKeys>(
     name: K,
     params: (RequestItemsParamsMap[K] | {}) & { [name: string]: any } = {},
