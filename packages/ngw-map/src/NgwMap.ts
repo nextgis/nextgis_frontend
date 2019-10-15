@@ -13,7 +13,8 @@ import WebMap, {
   LayerDef,
   MapClickEvent,
   LayerAdapter,
-  PropertiesFilter
+  PropertiesFilter,
+  FilterOptions
 } from '@nextgis/webmap';
 import NgwConnector, {
   ResourceItem,
@@ -194,10 +195,16 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<M, L, C, N
     });
   }
 
-  async getNgwLayerFeatures<G extends Geometry | null = Geometry>(options: {
-    resourceId: number;
-    filter?: PropertiesFilter[];
-  }): CancelablePromise<FeatureCollection<G>> {
+  async getNgwLayerFeatures<
+    G extends Geometry | null = Geometry,
+    P extends Record<string, any> = Record<string, any>
+  >(
+    options: {
+      resourceId: number;
+      connector?: NgwConnector;
+      filters?: PropertiesFilter;
+    } & FilterOptions
+  ): CancelablePromise<FeatureCollection<G, P>> {
     return NgwKit.utils.getNgwLayerFeatures({
       connector: this.connector,
       ...options
