@@ -6,6 +6,7 @@
   "unpkg": "lib/vue-ngw.js",
   "types": "lib/index.d.ts",
   "dependencies": {
+    "@types/wellknown": "^0.5.0",
     "reproject": "^1.2.5",
     "vue": "^2.6.10",
     "vue-class-component": "^7.1.0",
