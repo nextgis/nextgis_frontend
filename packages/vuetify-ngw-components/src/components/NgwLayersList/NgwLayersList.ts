@@ -122,7 +122,8 @@ export class NgwLayersList extends Vue {
       if (!adapterEnabled) return;
     }
 
-    const name = (layer.item && layer.item.resource.display_name) || String(layer.id);
+    const name =
+      layer.options.name || (layer.item && layer.item.resource.display_name) || String(layer.id);
     const item: VueTreeItem = {
       id: layer.id || '',
       name,
