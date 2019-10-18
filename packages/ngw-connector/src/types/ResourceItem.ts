@@ -117,14 +117,12 @@ export interface LookupTableResource {
 
 export type ResourceItemDatatype = 'STRING' | 'REAL' | 'DATE' | 'BIGINT';
 
-export interface FeatureLayerField<
-  K extends { [name: string]: any } | null = { [name: string]: any }
-> {
+export interface FeatureLayerField {
   datatype: ResourceItemDatatype;
   display_name: string;
   grid_visibility: boolean;
   id: number;
-  keyname: keyof K;
+  keyname: string;
   label_field: boolean;
   typemod?: unknown;
 }
