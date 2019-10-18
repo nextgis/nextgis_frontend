@@ -24,7 +24,7 @@ export abstract class ResourceStore<
   lookupTables: LookupTables = {};
 
   store: ResourceStoreItem<P>[] = [];
-  fields: FeatureLayerField[] = [];
+  fields: FeatureLayerField<P>[] = [];
 
   _promises: Record<string, Promise<any>> = {};
 
@@ -142,8 +142,44 @@ export abstract class ResourceStore<
     item: Feature<G, P>;
   }) {
     const geom = await this.context.dispatch('prepareGeomToNgw', opt);
+    const featureFields = await this.fields;
+    const fields: P = {} as P;
+    featureFields.forEach(x => {
+      // @ts-ignore
+      const property = opt.item.properties[x.keyname];
+      let value: any;
+      if (property) {
+        if (x.datatype === 'STRING') {
+          value = String(property);
+        } else if (x.datatype === 'BIGINT') {
+          value = parseInt(property, 10);
+        } else if (x.datatype === 'REAL') {
+          value = parseFloat(property);
+        } else if (x.datatype === 'DATE') {
+          let dt: Date | undefined;
+          if (typeof property === 'object') {
+            value = property;
+          } else {
+            if (property instanceof Date) {
+              dt = property;
+            } else {
+              const parse = Date.parse(property);
+              if (parse) {
+                dt = new Date(parse);
+              }
+            }
+            if (dt) {
+              value = { year: dt.getFullYear(), month: dt.getMonth(), day: dt.getDay() };
+            }
+          }
+        }
+      }
+      // @ts-ignore
+      fields[x.keyname] = value || null;
+    });
+
     const feature: Partial<FeatureItem<P>> = {
-      fields: opt.item.properties,
+      fields,
       geom
     };
     return feature;
@@ -226,7 +262,7 @@ export abstract class ResourceStore<
   }
 
   @Mutation
-  private UPDATE_FIELDS(fields: FeatureLayerField[]) {
+  private UPDATE_FIELDS(fields: FeatureLayerField<P>[]) {
     this.fields = fields;
   }
 }
