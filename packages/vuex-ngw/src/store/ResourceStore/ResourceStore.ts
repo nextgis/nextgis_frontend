@@ -24,7 +24,7 @@ export abstract class ResourceStore<
   lookupTables: LookupTables = {};
 
   store: ResourceStoreItem<P>[] = [];
-  fields: FeatureLayerField<P>[] = [];
+  fields: FeatureLayerField[] = [];
 
   _promises: Record<string, Promise<any>> = {};
 
@@ -262,7 +262,7 @@ export abstract class ResourceStore<
   }
 
   @Mutation
-  private UPDATE_FIELDS(fields: FeatureLayerField<P>[]) {
+  private UPDATE_FIELDS(fields: FeatureLayerField[]) {
     this.fields = fields;
   }
 }
