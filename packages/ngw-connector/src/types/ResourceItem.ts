@@ -87,6 +87,12 @@ export interface BookmarkProperties {
   place: string;
 }
 
+export interface NgwDateFormat {
+  year: number;
+  month: number;
+  day: number;
+}
+
 export interface WebmapResource {
   extent_left: number;
   extent_right: number;
@@ -109,12 +115,16 @@ export interface LookupTableResource {
   items: Record<string, string>;
 }
 
-export interface FeatureLayerField {
-  datatype: 'STRING' | 'REAL';
+export type ResourceItemDatatype = 'STRING' | 'REAL' | 'DATE' | 'BIGINT';
+
+export interface FeatureLayerField<
+  K extends { [name: string]: any } | null = { [name: string]: any }
+> {
+  datatype: ResourceItemDatatype;
   display_name: string;
   grid_visibility: boolean;
   id: number;
-  keyname: string;
+  keyname: keyof K;
   label_field: boolean;
   typemod?: unknown;
 }
