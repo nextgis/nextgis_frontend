@@ -151,7 +151,7 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<M, L, C, N
     if (!options.resourceId && !options.keyname) {
       throw new Error('resourceId or keyname is required parameter to add NGW layer');
     }
-    if (this.options.baseUrl) {
+    if (this.options.baseUrl || this.options.baseUrl === '') {
       try {
         const adapter = NgwKit.utils.addNgwLayer(
           options,
