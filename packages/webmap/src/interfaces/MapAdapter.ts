@@ -3,7 +3,7 @@
  */
 
 import { LayerAdapter } from './LayerAdapter';
-import { Type } from './BaseTypes';
+import { Type, ZoomLevel } from './BaseTypes';
 import { EventEmitter } from 'events';
 import {
   MapControls,
@@ -46,6 +46,29 @@ export interface FitOptions {
 }
 
 export type ControlPositions = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
+
+export interface Locate {
+  stop: () => void;
+}
+
+export interface LocationEvent {
+  lngLat: LngLatArray;
+  bounds?: LngLatBoundsArray;
+}
+
+export interface LocateOptions {
+  // watch?: boolean;
+  setView?: boolean;
+  maxZoom?: ZoomLevel;
+  // timeout?: number;
+  // maximumAge?: number;
+  // enableHighAccuracy?: boolean;
+}
+
+export interface LocationEvents {
+  locationfound: (e: LocationEvent) => void;
+  locationerror?: () => void;
+}
 
 /**
  * Parameters and methods that control the behavior of the map and the layers on it.
@@ -100,6 +123,8 @@ export interface MapAdapter<M = any, L = any, C = any> {
   // setRotation?(angle: number): void;
   setView?(lngLat: LngLatArray, zoom?: number): void;
 
+  getBounds?(): LngLatBoundsArray;
+
   getZoom(): number | undefined;
   setZoom(zoom: number): void;
 
@@ -122,4 +147,15 @@ export interface MapAdapter<M = any, L = any, C = any> {
   removeControl(control: any): void;
 
   onMapClick(evt: any): void;
+
+  /**
+   * Tries to locate the user using the Geolocation API,
+   * firing a locationfound event with location data on success
+   * or a locationerror event on failure,
+   * and optionally sets the map view to the user's location with
+   * respect to detection accuracy (or to the world view if geolocation failed).
+   * Note that, if your page doesn't use HTTPS, this method will fail in modern browsers (Chrome 50 and newer)
+   * See Locate options for more details.
+   */
+  locate?(opt: LocateOptions, events?: LocationEvents): Locate;
 }
