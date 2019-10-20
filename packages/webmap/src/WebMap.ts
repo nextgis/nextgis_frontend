@@ -5,7 +5,13 @@ import { mix } from 'ts-mixer';
 import { deepmerge } from '@nextgis/utils';
 import { GetPaintFunction } from './interfaces/LayerAdapter';
 import { LayerAdapter } from './interfaces/LayerAdapter';
-import { MapAdapter, FitOptions } from './interfaces/MapAdapter';
+import {
+  MapAdapter,
+  FitOptions,
+  LocateOptions,
+  LocationEvents,
+  Locate
+} from './interfaces/MapAdapter';
 import { MapOptions, AppOptions } from './interfaces/WebMapApp';
 import { LngLatBoundsArray, Type, Cursor, LngLatArray } from './interfaces/BaseTypes';
 import { RuntimeParams } from './interfaces/RuntimeParams';
@@ -182,6 +188,12 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
     return this.mapAdapter.getCenter();
   }
 
+  getBounds(): LngLatBoundsArray | undefined {
+    if (this.mapAdapter.getBounds) {
+      return this.mapAdapter.getBounds();
+    }
+  }
+
   /**
    * Zoom to a specific zoom level.
    * @param zoom The zoom level to set (0-24).
@@ -328,6 +340,14 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
   getLayerAdapter(name: string): Type<LayerAdapter> {
     const adapter = this.mapAdapter.layerAdapters[name];
     return adapter;
+  }
+
+  locate(opt: LocateOptions, events?: LocationEvents): Locate {
+    if (this.mapAdapter && this.mapAdapter.locate) {
+      return this.mapAdapter.locate(opt, events);
+    }
+    const stop = () => {};
+    return { stop };
   }
 
   protected _emitStatusEvent(eventName: keyof E, data?: any) {

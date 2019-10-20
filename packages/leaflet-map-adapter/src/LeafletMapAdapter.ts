@@ -11,7 +11,10 @@ import {
   LayerAdapter,
   LngLatArray,
   LngLatBoundsArray,
-  WebMapEvents
+  WebMapEvents,
+  LocateOptions,
+  LocationEvents,
+  Locate
 } from '@nextgis/webmap';
 import L, { Map, Control, Layer, ControlPosition, LeafletMouseEvent, GridLayer } from 'leaflet';
 import { EventEmitter } from 'events';
@@ -130,6 +133,13 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     return this.map && this.map.getZoom();
   }
 
+  getBounds(): LngLatBoundsArray {
+    const b = this.map.getBounds();
+    const sw = b.getSouthWest();
+    const ne = b.getNorthEast();
+    return [sw.lng, sw.lat, ne.lng, ne.lat];
+  }
+
   // [west, south, east, north]
   fit(e: LngLatBoundsArray) {
     if (this.map) {
@@ -224,6 +234,37 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
 
   onMapClick(evt: LeafletMouseEvent) {
     this.emitter.emit('click', convertMapClickEvent(evt));
+  }
+
+  locate(opt: LocateOptions, events?: LocationEvents): Locate {
+    const map = this.map;
+    if (map) {
+      map.locate(opt);
+      if (events) {
+        const { locationfound, locationerror } = events;
+        const locationFound = (e: L.LocationEvent) => {
+          const lngLat: [number, number] = [e.latlng.lng, e.latlng.lat];
+          locationfound({ lngLat });
+        };
+        if (locationfound) {
+          map.on('locationfound', locationFound, this);
+        }
+        if (locationerror) {
+          map.on('locationerror', locationerror, this);
+        }
+        const stop = () => {
+          if (locationfound) {
+            map.off('locationfound', locationFound);
+          }
+          if (locationerror) {
+            map.off('locationerror', locationerror);
+          }
+        };
+        return { stop };
+      }
+    }
+    const stop = () => {};
+    return { stop };
   }
 
   private _addMapListeners() {
