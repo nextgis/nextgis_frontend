@@ -1,6 +1,6 @@
 import { Geometry, Feature, FeatureCollection } from 'geojson';
-import NgwConnector, { CancelablePromise, FeatureItem } from '@nextgis/ngw-connector';
 import { PropertiesFilter, FilterOptions } from '@nextgis/webmap';
+import NgwConnector, { CancelablePromise, FeatureItem } from '@nextgis/ngw-connector';
 
 export interface FeatureRequestParams {
   srs?: number;
@@ -26,6 +26,26 @@ export function createGeoJsonFeature<
   return feature;
 }
 
+export function getNgwLayerItem<
+  G extends Geometry | null = Geometry,
+  P extends Record<string, any> = Record<string, any>
+>(
+  options: {
+    resourceId: number;
+    featureId: number;
+    connector: NgwConnector;
+  } & FilterOptions
+): CancelablePromise<FeatureItem> {
+  const params: FeatureRequestParams & FilterOptions & { [name: string]: any } = {
+    ...FEATURE_REQUEST_PARAMS
+  };
+  return options.connector.get('feature_layer.feature.item', null, {
+    id: options.resourceId,
+    fid: options.featureId,
+    ...params
+  });
+}
+
 export function getNgwLayerFeature<
   G extends Geometry | null = Geometry,
   P extends Record<string, any> = Record<string, any>
@@ -36,19 +56,64 @@ export function getNgwLayerFeature<
     connector: NgwConnector;
   } & FilterOptions
 ): CancelablePromise<Feature<G, P>> {
+  return getNgwLayerItem(options).then(item => {
+    return createGeoJsonFeature<G, P>(item);
+  });
+}
+
+function idFilterWorkAround<
+  G extends Geometry | null = Geometry,
+  P extends Record<string, any> = Record<string, any>
+>({ filterById, connector, resourceId }) {
+  const value = filterById[2];
+  const featureIds: number[] =
+    typeof value === 'number' ? [value] : value.split(',').map((x: string) => Number(x));
+  if (filterById[1] !== 'eq' && filterById[1] !== 'in') {
+    throw new Error('Unable to filter by object id. Except `eq` or `in` operator');
+  }
+  const promises: Promise<FeatureItem>[] = featureIds.map(featureId => {
+    return getNgwLayerItem<G, P>({
+      connector,
+      resourceId,
+      featureId
+    });
+  });
+  return CancelablePromise.all(promises);
+}
+
+export function getNgwLayerItems<
+  G extends Geometry | null = Geometry,
+  P extends Record<string, any> = Record<string, any>
+>(
+  options: {
+    resourceId: number;
+    connector: NgwConnector;
+    filters?: PropertiesFilter;
+  } & FilterOptions
+): CancelablePromise<FeatureItem[]> {
   const params: FeatureRequestParams & FilterOptions & { [name: string]: any } = {
     ...FEATURE_REQUEST_PARAMS
   };
-
-  return options.connector
-    .get('feature_layer.feature.item', null, {
-      id: options.resourceId,
-      fid: options.featureId,
-      ...params
-    })
-    .then(item => {
-      return createGeoJsonFeature<G, P>(item);
+  const { connector, filters, limit, intersects, resourceId } = options;
+  if (filters) {
+    const filterById = filters.find(x => x[0] === 'id');
+    if (filterById) {
+      return idFilterWorkAround({ filterById, connector, resourceId });
+    }
+    filters.forEach(([field, operation, value]) => {
+      params[`fld_${field}__${operation}`] = `${value}`;
     });
+  }
+  if (limit) {
+    params.limit = limit;
+  }
+  if (intersects) {
+    params.intersects = intersects;
+  }
+  return connector.get('feature_layer.feature.collection', null, {
+    id: resourceId,
+    ...params
+  });
 }
 
 export function getNgwLayerFeatures<
@@ -61,59 +126,16 @@ export function getNgwLayerFeatures<
     filters?: PropertiesFilter;
   } & FilterOptions
 ): CancelablePromise<FeatureCollection<G, P>> {
-  const params: FeatureRequestParams & FilterOptions & { [name: string]: any } = {
-    ...FEATURE_REQUEST_PARAMS
-  };
-  const { connector, filters, limit, intersects, resourceId } = options;
-  if (filters) {
-    const filterById = filters.find(x => x[0] === 'id');
-    if (filterById) {
-      const value = filterById[2];
-      const featureIds: number[] =
-        typeof value === 'number' ? [value] : value.split(',').map((x: string) => Number(x));
-      if (filterById[1] !== 'eq' && filterById[1] !== 'in') {
-        throw new Error('Unable to filter by object id. Except `eq` or `in` operator');
-      }
-      const promises: Promise<Feature<G, P>>[] = featureIds.map(featureId => {
-        return getNgwLayerFeature<G, P>({
-          connector,
-          resourceId,
-          featureId
-        });
-      });
-      return CancelablePromise.all(promises).then(features => {
-        const featureCollection: FeatureCollection<G, P> = {
-          type: 'FeatureCollection',
-          features
-        };
-        return featureCollection;
-      });
-    }
-    filters.forEach(([field, operation, value]) => {
-      params[`fld_${field}__${operation}`] = `${value}`;
+  return getNgwLayerItems(options).then((x: FeatureItem[]) => {
+    const features: Array<Feature<G, P>> = [];
+    x.forEach(y => {
+      features.push(createGeoJsonFeature(y));
     });
-  }
-  if (limit) {
-    params.limit = limit;
-  }
-  if (intersects) {
-    params.intersects = intersects;
-  }
-  return connector
-    .get('feature_layer.feature.collection', null, {
-      id: resourceId,
-      ...params
-    })
-    .then((x: FeatureItem[]) => {
-      const features: Array<Feature<G, P>> = [];
-      x.forEach(y => {
-        features.push(createGeoJsonFeature(y));
-      });
 
-      const featureCollection: FeatureCollection<G, P> = {
-        type: 'FeatureCollection',
-        features
-      };
-      return featureCollection;
-    });
+    const featureCollection: FeatureCollection<G, P> = {
+      type: 'FeatureCollection',
+      features
+    };
+    return featureCollection;
+  });
 }

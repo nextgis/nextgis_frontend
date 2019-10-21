@@ -19,7 +19,8 @@ import WebMap, {
 import NgwConnector, {
   ResourceItem,
   CancelablePromise,
-  FeatureLayersIdentify
+  FeatureLayersIdentify,
+  FeatureItem
 } from '@nextgis/ngw-connector';
 import { QmsAdapterOptions } from '@nextgis/qms-kit';
 import NgwKit, {
@@ -185,11 +186,34 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<M, L, C, N
     }
   }
 
-  async getNgwLayerFeature<G extends Geometry | null = Geometry>(options: {
+  async getNgwLayerItem(options: {
     resourceId: number;
     featureId: number;
-  }): CancelablePromise<Feature<G>> {
-    return NgwKit.utils.getNgwLayerFeature<G>({
+  }): CancelablePromise<FeatureItem> {
+    return NgwKit.utils.getNgwLayerItem({
+      connector: this.connector,
+      ...options
+    });
+  }
+
+  async getNgwLayerItems(
+    options: {
+      resourceId: number;
+      connector?: NgwConnector;
+      filters?: PropertiesFilter;
+    } & FilterOptions
+  ): CancelablePromise<FeatureItem[]> {
+    return NgwKit.utils.getNgwLayerItems({
+      connector: this.connector,
+      ...options
+    });
+  }
+
+  async getNgwLayerFeature<
+    G extends Geometry | null = Geometry,
+    P extends Record<string, any> = Record<string, any>
+  >(options: { resourceId: number; featureId: number }): CancelablePromise<Feature<G, P>> {
+    return NgwKit.utils.getNgwLayerFeature<G, P>({
       connector: this.connector,
       ...options
     });
