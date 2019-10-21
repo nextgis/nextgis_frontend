@@ -9,7 +9,8 @@ import {
   // PathPaint,
   // IconOptions,
   MapControls,
-  WebMapEvents
+  WebMapEvents,
+  RuntimeParams
 } from '@nextgis/webmap';
 import { NgwLayerOptions, ResourceAdapter } from '@nextgis/ngw-kit';
 import NgwConnector, { Credentials, FeatureLayersIdentify } from '@nextgis/ngw-connector';
@@ -119,6 +120,8 @@ export interface NgwMapOptions<C = any> extends MapOptions {
   identification?: boolean;
 
   pixelRadius?: number;
+
+  runtimeParams?: RuntimeParams[];
 }
 
 export interface NgwMapEvents extends WebMapEvents {

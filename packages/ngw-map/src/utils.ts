@@ -12,7 +12,8 @@ import { NgwMapOptions } from './interfaces';
 export function appendNgwResources(
   options: NgwLayerOptions[],
   resource?: NgwResourceDefinition,
-  defOptions?: NgwLayerOptionsAdditional
+  defOptions?: NgwLayerOptionsAdditional,
+  overwriteOptions?: NgwLayerOptionsAdditional
 ) {
   if (typeof resource === 'number' || typeof resource === 'string') {
     resource = Number(resource);
@@ -22,9 +23,9 @@ export function appendNgwResources(
     });
   } else if (Array.isArray(resource)) {
     const [resourceId, id] = resource;
-    options.push({ ...defOptions, resourceId, id });
+    options.push({ ...defOptions, resourceId, id, ...overwriteOptions });
   } else if (typeof resource === 'object') {
-    options.push({ ...defOptions, ...resource });
+    options.push({ ...defOptions, ...resource, ...overwriteOptions });
   }
 }
 
@@ -62,6 +63,7 @@ export function prepareWebMapOptions(mapAdapter: MapAdapter, options: NgwMapOpti
   }
   return {
     mapAdapter,
-    starterKits: kits
+    starterKits: kits,
+    runtimeParams: options.runtimeParams
   };
 }
