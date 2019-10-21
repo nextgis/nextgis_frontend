@@ -27,7 +27,8 @@ import NgwKit, {
   NgwLayerOptions,
   ResourceAdapter,
   WebMapLayerItem,
-  AddNgwLayerOptions
+  AddNgwLayerOptions,
+  NgwLayerOptionsAdditional
 } from '@nextgis/ngw-kit';
 import { getIcon } from '@nextgis/icons';
 
@@ -332,6 +333,14 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<M, L, C, N
     }
   }
 
+  private _isFitFromResource() {
+    // const params = this.getRuntimeParams();
+    // if (params.zoom && params.center) {
+    //   return false;
+    // }
+    return true;
+  }
+
   private async _createWebMap() {
     await this.create({ ...this.options });
     if (this.options.qmsId) {
@@ -356,12 +365,17 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<M, L, C, N
     }
 
     const resources: NgwLayerOptions[] = [];
+    const layerFitAllowed = this._isFitFromResource();
     if (this.options.webmapId) {
-      appendNgwResources(resources, this.options.webmapId, { fit: true });
+      appendNgwResources(resources, this.options.webmapId, { fit: layerFitAllowed });
     }
     if (this.options.resources && Array.isArray(this.options.resources)) {
       this.options.resources.forEach(x => {
-        appendNgwResources(resources, x);
+        const overwriteOptions = {} as NgwLayerOptionsAdditional;
+        if (!layerFitAllowed) {
+          overwriteOptions.fit = false;
+        }
+        appendNgwResources(resources, x, {}, overwriteOptions);
       });
     }
 
