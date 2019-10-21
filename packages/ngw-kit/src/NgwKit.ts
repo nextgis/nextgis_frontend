@@ -18,6 +18,8 @@ import {
 import { getIdentifyGeoJson, getIdentifyGeoJsonParams } from './utils/identifyUtils';
 
 import {
+  getNgwLayerItems,
+  getNgwLayerItem,
   getNgwLayerFeatures,
   getNgwLayerFeature,
   createGeoJsonFeature
@@ -34,6 +36,8 @@ export class NgwKit implements StarterKit {
     pixelsInMeterWidth,
     getNgwLayerFeature,
     getNgwLayerFeatures,
+    getNgwLayerItems,
+    getNgwLayerItem,
     getIdentifyGeoJson,
     getIdentifyGeoJsonParams,
     createGeoJsonFeature,
