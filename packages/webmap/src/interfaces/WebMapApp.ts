@@ -6,6 +6,7 @@ import { MapAdapter, FitOptions } from './MapAdapter';
 import { StarterKit } from './StarterKit';
 import { LngLatArray, LngLatBoundsArray, Type } from './BaseTypes';
 import { GeometryPaint, LayerAdapter, AdapterOptions } from './LayerAdapter';
+import { RuntimeParams } from './RuntimeParams';
 
 export interface MapOptions {
   /**
@@ -73,6 +74,7 @@ export interface AppOptions {
    */
   starterKits?: StarterKit[];
   mapOptions?: MapOptions;
+  runtimeParams?: RuntimeParams[];
   /**
    * Аutomatic creation of a map from the constructor
    * @default false

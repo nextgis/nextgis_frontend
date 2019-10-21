@@ -35,6 +35,10 @@ import { updateGeoJsonAdapterOptions } from './util/updateGeoJsonAdapterOptions'
 import { WebMapLayers } from './WebMapLayers';
 import { WebMapControls } from './WebMapControls';
 
+import { CenterState } from './components/mapStates/CenterState';
+import { ZoomState } from './components/mapStates/ZoomState';
+import { StateItem } from './components/mapStates/StateItem';
+
 const OPTIONS: MapOptions = {
   minZoom: 0,
   maxZoom: 21,
@@ -86,16 +90,22 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
   readonly runtimeParams: RuntimeParams[] = [];
 
   getPaintFunctions = WebMap.getPaintFunctions;
+  mapState: Array<Type<StateItem>> = [CenterState, ZoomState];
 
+  private _mapState: StateItem[] = [];
   private _extent?: LngLatBoundsArray;
   private readonly _eventsStatus: { [key in keyof E]?: boolean } = {};
   private readonly _starterKits: StarterKit[];
+  private readonly _mapEvents: Record<string, (...args: any[]) => void> = {};
 
   constructor(appOptions: AppOptions) {
     this.mapAdapter = appOptions.mapAdapter;
     this._starterKits = appOptions.starterKits || [];
     if (appOptions.mapOptions) {
       this.options = deepmerge(OPTIONS || {}, appOptions.mapOptions);
+    }
+    if (appOptions.runtimeParams) {
+      this.runtimeParams = appOptions.runtimeParams;
     }
     this._addEventsListeners();
     if (appOptions.create) {
@@ -114,20 +124,48 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
   async create(options?: MapOptions): Promise<this> {
     if (!this.getEventStatus('create')) {
       this.options = deepmerge(OPTIONS || {}, options);
+      await this._setMapState(this.mapState);
       await this._setupMap();
       this._emitStatusEvent('create', this);
     }
     return this;
   }
 
+  setRuntimeParams(params: RuntimeParams) {
+    this.runtimeParams.push(params);
+  }
+
   /**
    * Destroys WebMap, MapAdapter, clears all layers and turn off all event listeners
    */
   destroy() {
+    this._removeEventsListeners();
     clearObject(this._emitStatusEvent);
     if (this.mapAdapter.destroy) {
       this.mapAdapter.destroy();
     }
+  }
+
+  getState(): Record<string, any> {
+    const state: Record<string, any> = {};
+    this._mapState.forEach(x => {
+      state[x.name] = x.getValue();
+    });
+    return state;
+  }
+
+  getRuntimeParams(): Record<string, any> {
+    const state: Record<string, any> = {};
+    this._mapState.forEach(x => {
+      for (const r of this.runtimeParams) {
+        const val = r.get(x.name);
+        if (val !== undefined) {
+          state[x.name] = x.parse(val);
+          break;
+        }
+      }
+    });
+    return state;
   }
 
   /**
@@ -369,13 +407,13 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
   }
 
   private _zoomToInitialExtent() {
+    const { center, zoom, bounds } = this.options;
     if (this._extent) {
       this.mapAdapter.fit(this._extent);
-    } else if (this.options.bounds) {
-      this.fitBounds(this.options.bounds);
-    } else {
-      const { center, zoom } = this.options;
+    } else if (center && bounds) {
       this.setView(center, zoom);
+    } else if (bounds) {
+      this.fitBounds(bounds);
     }
   }
 
@@ -411,8 +449,23 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
     }
   }
 
+  private _setMapState(states: Type<StateItem>[]) {
+    for (const X of states) {
+      const state = new X(this);
+      this._mapState.push(state);
+      for (const r of this.runtimeParams) {
+        const str = r.get(state.name);
+        if (str !== undefined) {
+          const val = state.parse(str);
+          // state.setValue(val);
+          this.options[state.name] = val;
+          break;
+        }
+      }
+    }
+  }
+
   private _addEventsListeners(): void {
-    // propagate map click event
     const events: (keyof WebMapEvents)[] = [
       'click',
       'zoomstart',
@@ -424,12 +477,25 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
     ];
 
     events.forEach(x => {
-      this.mapAdapter.emitter.on(x, data => {
-        this.emitter.emit(x, data);
-      });
+      this._mapEvents[x] = data => {
+        if (this.runtimeParams.length) {
+          const mapStatusEvent = this._mapState.find(y => y.event === x);
+          if (mapStatusEvent) {
+            const value = mapStatusEvent.toString(mapStatusEvent.getValue());
+            this.runtimeParams.forEach(r => {
+              r.set(mapStatusEvent.name, value);
+            });
+          }
+        }
+        if (this._eventsStatus) this.emitter.emit(x, data);
+      };
+      this.mapAdapter.emitter.on(x, this._mapEvents[x]);
     });
-    this.onMapLoad().then(() => {
-      // universal events
+  }
+
+  private _removeEventsListeners(): void {
+    Object.entries(this._mapEvents).forEach(([x, event]) => {
+      this.mapAdapter.emitter.off(x, event);
     });
   }
 }
