@@ -92,6 +92,10 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
   getPaintFunctions = WebMap.getPaintFunctions;
   mapState: Array<Type<StateItem>> = [CenterState, ZoomState];
 
+  /**
+   * From runtime params
+   */
+  protected _initMapState: Record<string, any> = {};
   private _mapState: StateItem[] = [];
   private _extent?: LngLatBoundsArray;
   private readonly _eventsStatus: { [key in keyof E]?: boolean } = {};
@@ -124,7 +128,7 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
   async create(options?: MapOptions): Promise<this> {
     if (!this.getEventStatus('create')) {
       this.options = deepmerge(OPTIONS || {}, options);
-      await this._setMapState(this.mapState);
+      await this._setInitMapState(this.mapState);
       await this._setupMap();
       this._emitStatusEvent('create', this);
     }
@@ -449,7 +453,7 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
     }
   }
 
-  private _setMapState(states: Type<StateItem>[]) {
+  private _setInitMapState(states: Type<StateItem>[]) {
     for (const X of states) {
       const state = new X(this);
       this._mapState.push(state);
@@ -458,6 +462,7 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
         if (str !== undefined) {
           const val = state.parse(str);
           // state.setValue(val);
+          this._initMapState[state.name] = val;
           this.options[state.name] = val;
           break;
         }
