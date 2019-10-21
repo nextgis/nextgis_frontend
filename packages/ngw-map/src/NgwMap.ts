@@ -72,6 +72,7 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<M, L, C, N
   connector!: NgwConnector;
 
   protected _ngwLayers: NgwLayers = {};
+  private __selectFromNgw?: (ev: MapClickEvent) => void;
 
   /**
    * @param mapAdapter #noapi
@@ -333,6 +334,20 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<M, L, C, N
     }
   }
 
+  enableSelection() {
+    if (!this.__selectFromNgw) {
+      this.__selectFromNgw = (ev: MapClickEvent) => this._selectFromNgw(ev);
+      this.emitter.on('click', this.__selectFromNgw);
+    }
+  }
+
+  disableSelection() {
+    if (this.__selectFromNgw) {
+      this.emitter.off('click', this.__selectFromNgw);
+      this.__selectFromNgw = undefined;
+    }
+  }
+
   private _isFitFromResource() {
     // const params = this.getRuntimeParams();
     const params = this._initMapState;
@@ -384,10 +399,9 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<M, L, C, N
       await this.addNgwLayer(r);
     }
 
-    // this.fit();
     this._emitStatusEvent('ngw-map:create', this);
 
-    this.emitter.on('click', (ev: MapClickEvent) => this._selectFromNgw(ev));
+    this.enableSelection();
   }
 
   private _addControls() {
