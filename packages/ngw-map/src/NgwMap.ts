@@ -335,9 +335,10 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<M, L, C, N
 
   private _isFitFromResource() {
     // const params = this.getRuntimeParams();
-    // if (params.zoom && params.center) {
-    //   return false;
-    // }
+    const params = this._initMapState;
+    if (params.zoom && params.center) {
+      return false;
+    }
     return true;
   }
 
