@@ -105,6 +105,7 @@ export type Paint = VectorAdapterLayerPaint | GetPaintCallback;
 
 export interface PopupOptions {
   minWidth?: number;
+  autoPan?: boolean;
   createPopupContent?: (layerDef: LayerDefinition) => HTMLElement | string | undefined;
 }
 
