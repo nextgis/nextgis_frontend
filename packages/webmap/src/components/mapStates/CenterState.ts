@@ -1,9 +1,10 @@
 import { StateItem } from './StateItem';
 import { WebMapEvents } from '../../interfaces/Events';
 import { LngLatArray } from '../../interfaces/BaseTypes';
+import { MapOptions } from '../../interfaces/WebMapApp';
 
 export class CenterState extends StateItem<LngLatArray> {
-  name = 'center';
+  name: keyof MapOptions = 'center';
   event: keyof WebMapEvents = 'moveend';
 
   getValue() {
