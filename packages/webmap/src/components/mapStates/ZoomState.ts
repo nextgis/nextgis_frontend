@@ -1,8 +1,9 @@
 import { StateItem } from './StateItem';
 import { WebMapEvents } from '../../interfaces/Events';
+import { MapOptions } from '../../interfaces/WebMapApp';
 
 export class ZoomState extends StateItem<number> {
-  name = 'zoom';
+  name: keyof MapOptions = 'zoom';
   event: keyof WebMapEvents = 'zoomend';
   getValue() {
     return this.webMap.getZoom();
