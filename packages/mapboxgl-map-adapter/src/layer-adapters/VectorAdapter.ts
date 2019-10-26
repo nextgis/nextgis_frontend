@@ -78,16 +78,17 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
             }
           }
           const layer = this._getLayerNameFromType(t);
-          const geomFilter = ['==', '$type', geomType];
+          // const geomFilter = ['==', '$type', geomType];
+          const geomFilter = types.length > 1 ? ['==', '$type', geomType] : undefined;
           await this._addLayer(layer, type, geomFilter);
           this.layer.push(layer);
           if (options.selectedPaint) {
             const selectionLayer = this._getSelectionLayerNameFromType(t);
-            await this._addLayer(selectionLayer, type, [
-              'all',
-              geomFilter,
-              ['in', this.featureIdName, '']
-            ]);
+            await this._addLayer(
+              selectionLayer,
+              type,
+              ['all', geomFilter, ['in', this.featureIdName, '']].filter(x => x)
+            );
             this.layer.push(selectionLayer);
           }
         }
@@ -245,9 +246,11 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
       layout: {
         visibility: 'none'
       },
-      filter,
       ...this._getAdditionalLayerOptions()
     };
+    if (filter) {
+      layerOpt.filter = filter;
+    }
 
     this.map.addLayer(layerOpt);
   }
