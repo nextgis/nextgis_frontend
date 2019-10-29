@@ -133,7 +133,8 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     return this.map && this.map.getZoom();
   }
 
-  getBounds(): LngLatBoundsArray {
+  getBounds(): LngLatBoundsArray | undefined {
+    if (!this.map) return undefined;
     const b = this.map.getBounds();
     const sw = b.getSouthWest();
     const ne = b.getNorthEast();
@@ -242,8 +243,9 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
       map.locate(opt);
       if (events) {
         const { locationfound, locationerror } = events;
-        const locationFound = (e: L.LocationEvent) => {
-          const lngLat: [number, number] = [e.latlng.lng, e.latlng.lat];
+        const locationFound = (e: L.LeafletEvent) => {
+          const event = e as L.LocationEvent;
+          const lngLat: [number, number] = [event.latlng.lng, event.latlng.lat];
           locationfound({ lngLat });
         };
         if (locationfound) {

@@ -123,7 +123,7 @@ export interface MapAdapter<M = any, L = any, C = any> {
   // setRotation?(angle: number): void;
   setView?(lngLat: LngLatArray, zoom?: number): void;
 
-  getBounds?(): LngLatBoundsArray;
+  getBounds?(): LngLatBoundsArray | undefined;
 
   getZoom(): number | undefined;
   setZoom(zoom: number): void;
