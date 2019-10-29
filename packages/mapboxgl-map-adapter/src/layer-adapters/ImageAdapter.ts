@@ -31,10 +31,12 @@ export class ImageAdapter extends BaseAdapter<ImageAdapterOptions>
           layout: {
             visibility: 'none'
           },
+          minzoom: this.options.minZoom,
+          maxzoom: this.options.maxZoom,
           source: {
             type: 'raster',
             tiles,
-            tileSize: 1024
+            tileSize: 256
           },
           paint: {}
         },

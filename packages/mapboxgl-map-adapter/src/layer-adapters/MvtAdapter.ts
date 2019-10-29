@@ -56,13 +56,14 @@ export class MvtAdapter extends VectorAdapter<MvtAdapterOptions> {
   }
 
   protected _getAdditionalLayerOptions() {
-    return {
+    const mvtLayerOptions: Partial<mapboxgl.Layer> = {
       source: {
         type: 'vector',
         tiles: [this.options.url]
       },
       'source-layer': this.options.sourceLayer
     };
+    return mvtLayerOptions;
   }
 
   private _updateFilter(properties?: PropertiesFilter) {
