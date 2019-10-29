@@ -64,17 +64,17 @@ export function getNgwLayerFeature<
 function idFilterWorkAround<
   G extends Geometry | null = Geometry,
   P extends Record<string, any> = Record<string, any>
->({ filterById, connector, resourceId }) {
-  const value = filterById[2];
+>(options: { filterById: any; resourceId: number; connector: NgwConnector }) {
+  const value = options.filterById[2];
   const featureIds: number[] =
     typeof value === 'number' ? [value] : value.split(',').map((x: string) => Number(x));
-  if (filterById[1] !== 'eq' && filterById[1] !== 'in') {
+  if (options.filterById[1] !== 'eq' && options.filterById[1] !== 'in') {
     throw new Error('Unable to filter by object id. Except `eq` or `in` operator');
   }
   const promises: Promise<FeatureItem>[] = featureIds.map(featureId => {
     return getNgwLayerItem<G, P>({
-      connector,
-      resourceId,
+      connector: options.connector,
+      resourceId: options.resourceId,
       featureId
     });
   });
