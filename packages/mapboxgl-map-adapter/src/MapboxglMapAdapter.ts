@@ -95,7 +95,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
           // @ts-ignore
           bounds: options.bounds,
           fitBoundsOptions: { ...options.fitOptions, ...fitBoundsOptions },
-          transformRequest: (url, resourceType) => {
+          transformRequest: (url: string, resourceType: ResourceType) => {
             const transformed = this._transformRequest(url, resourceType);
             if (transformed) {
               return transformed;
