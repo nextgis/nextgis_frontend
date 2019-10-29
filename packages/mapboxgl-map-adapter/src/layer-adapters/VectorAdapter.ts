@@ -243,6 +243,8 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
       id: name,
       type: mType,
       source: this._sourceId,
+      minzoom: this.options.minZoom,
+      maxzoom: this.options.maxZoom,
       layout: {
         visibility: 'none'
       },
