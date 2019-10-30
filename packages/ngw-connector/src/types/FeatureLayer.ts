@@ -45,3 +45,5 @@ export interface FeatureItem<
     attachment?: FeatureItemAttachment[];
   };
 }
+
+export type FeatureItemToNgw<F = FeatureLayerFields> = FeatureItem<F, string>;
