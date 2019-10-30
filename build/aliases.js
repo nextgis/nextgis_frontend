@@ -1,17 +1,13 @@
 const { join, resolve } = require('path');
 const { lstatSync, readdirSync, readFileSync, existsSync } = require('fs');
 
-exports.getAliases = function (source) {
-  return generate(source);
-};
-
-const isDirectory = (source) => lstatSync(source).isDirectory();
+const isDirectory = source => lstatSync(source).isDirectory();
 
 function generate(source = '../packages') {
   source = resolve(__dirname, source);
   const items = {};
 
-  readdirSync(source).forEach((name) => {
+  readdirSync(source).forEach(name => {
     const libPath = join(source, name);
 
     // find packages
@@ -20,10 +16,14 @@ function generate(source = '../packages') {
       if (existsSync(packagePath)) {
         const package = JSON.parse(readFileSync(packagePath, 'utf8'));
         if (!package.private) {
-          items[package.name] = join(libPath, '/src/index.ts');
+          items[package.name + '$'] = join(libPath, '/src/index.ts');
         }
       }
     }
   });
   return items;
 }
+
+exports.getAliases = function(source) {
+  return generate(source);
+};
