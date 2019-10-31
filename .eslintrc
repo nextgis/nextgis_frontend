@@ -1,13 +1,13 @@
 {
   "env": {
-    "jest/globals": true
+    // "jest/globals": true
   },
   "extends": [
-    "plugin:jest/recommended",
-    "plugin:jest/style",
+    // "plugin:jest/recommended",
+    // "plugin:jest/style",
     "./packages/eslint-config/index.js"
   ],
   "plugins": [
-    "jest"
+    // "jest"
   ]
 }
