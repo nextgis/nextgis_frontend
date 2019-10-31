@@ -1,10 +1,10 @@
 const fs = require('fs');
 const path = require('path');
-const html = fs.readFileSync(path.resolve(__dirname, './index.html'), 'utf8');
+const html = fs.readFileSync(path.resolve(__dirname, '../../../tests/index.html'), 'utf8');
 
-import { WebMap } from '../packages/webmap/src/WebMap';
-import { LeafletMapAdapter as MapAdapter } from '../packages/leaflet-map-adapter/src/LeafletMapAdapter';
-import { AppOptions } from '../packages/webmap/src/interfaces/WebMapApp';
+import { WebMap, AppOptions } from '../src';
+
+import { LeafletMapAdapter as MapAdapter } from '../../leaflet-map-adapter/src/LeafletMapAdapter';
 
 jest.dontMock('fs');
 
@@ -14,7 +14,6 @@ const createWebMap = (options?: AppOptions) => {
 };
 
 describe('Initialize WebMap', () => {
-
   beforeEach(() => {
     document.documentElement.innerHTML = html.toString();
   });
@@ -32,7 +31,7 @@ describe('Initialize WebMap', () => {
 
   it('Manual create', () => {
     const webMap = createWebMap();
-    const spy = new Promise((resolve) => {
+    const spy = new Promise(resolve => {
       webMap.emitter.on('create', () => {
         resolve();
       });
@@ -42,5 +41,4 @@ describe('Initialize WebMap', () => {
       expect(document.getElementById('map1')).toBeTruthy();
     });
   });
-
 });
