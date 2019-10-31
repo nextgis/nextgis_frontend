@@ -1,10 +1,34 @@
+// const base = require("./jest.config.base.js");
+
+// module.exports = {
+//   ...base,
+//   projects:
+//     [
+//       "<rootDir>/packages/*/jest.config.js"
+//     ],
+//   coverageDirectory: "<rootDir>/coverage/"
+// };
+
+
 module.exports = {
-  "roots": [
-    "<rootDir>"
+  collectCoverageFrom: [
+    '**/packages/*/**/*.js',
+    '**/packages/*/**/*.ts',
+    '!**/__tests__/**', ,
   ],
-  "transform": {
-    "^.+\\.tsx?$": "ts-jest"
+  modulePathIgnorePatterns: [
+
+  ],
+  projects: ['<rootDir>'],
+  testPathIgnorePatterns: [
+    '/node_modules/',
+    '\\.snap$'
+  ],
+  transform: {
+    '^.+\\.tsx?$': 'ts-jest'
   },
-  "testRegex": '(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$',
-  "moduleFileExtensions": ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
-}
+  watchPlugins: [
+    // 'jest-watch-typeahead/filename',
+    // 'jest-watch-typeahead/testname',
+  ],
+};

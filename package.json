@@ -2,16 +2,17 @@
   "name": "root",
   "private": true,
   "devDependencies": {
-    "@types/jest": "^24.0.18",
-    "@nextgis/eslint-config": "^0.18.0",
+    "@nextgis/eslint-config": "^0.20.0",
+    "@types/jest": "^24.0.21",
+    "eslint": "^6.6.0",
+    "eslint-plugin-jest": "^23.0.2",
     "jest": "^24.9.0",
-    "lerna": "^3.16.4",
+    "lerna": "^3.18.3",
     "rimraf": "^3.0.0",
     "topological-sort": "^0.3.0",
-    "ts-jest": "^24.0.2",
+    "ts-jest": "^24.1.0",
     "typedoc": "^0.14.2",
-    "typescript": "^3.6.0",
-    "webpack": "^4.39.3"
+    "typescript": "^3.6.0"
   },
   "scripts": {
     "clean": "lerna run clean",
@@ -23,6 +24,7 @@
     "demo": "yarn run examples && cd ./packages/demo/ && yarn run prod",
     "examples": "node ./build/updateExamples.js",
     "test": "jest",
+    "test_packages": "lerna run test --stream",
     "doc": "typedoc --options ./typedoc.json ./packages"
   },
   "license": "LGPL-3.0",

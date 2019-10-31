@@ -24,7 +24,7 @@ module.exports = (env, argv, opt = {}) => {
 
   if (!useExternals) {
     externals = [
-      function (context, request, callback) {
+      function(context, request, callback) {
         // Absolute & Relative paths are not externals
         if (request.match(/^(\.{0,2})\//)) {
           return callback();
@@ -40,6 +40,7 @@ module.exports = (env, argv, opt = {}) => {
       }
     ];
   }
+  const configFile = path.join(__dirname, '../packages/eslint-config/index.js');
 
   const rules = [
     {
@@ -48,7 +49,8 @@ module.exports = (env, argv, opt = {}) => {
       exclude: /node_modules/,
       loader: 'eslint-loader',
       options: {
-        fix: true
+        fix: true,
+        configFile
       }
     },
     {
