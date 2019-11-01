@@ -41,6 +41,7 @@ export interface AdapterOptions {
    */
   fit?: boolean;
   name?: string;
+  adapter?: string;
 }
 
 export interface MvtAdapterOptions<F extends Feature = Feature> extends VectorAdapterOptions<F> {
