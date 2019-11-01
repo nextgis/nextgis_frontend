@@ -6,6 +6,8 @@
   "unpkg": "lib/vue-ngw.js",
   "types": "lib/index.d.ts",
   "dependencies": {
+    "@nextgis/ngw-connector": "^0.20.0",
+    "@nextgis/webmap": "^0.20.0",
     "@types/wellknown": "^0.5.0",
     "reproject": "^1.2.5",
     "vue": "^2.6.10",
