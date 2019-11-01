@@ -1,4 +1,4 @@
-import { LayerFeature, FeatureLayersIdentifyItems } from '@nextgis/ngw-connector';
+import { LayerFeature } from '@nextgis/ngw-connector';
 import { getNgwLayerFeature, createGeoJsonFeature } from './featureLayerUtils';
 import { GetIdentifyGeoJsonOptions, NgwIdentify } from '../interfaces';
 import { Geometry } from 'geojson';
