@@ -14,13 +14,16 @@ import WebMap, {
   MapClickEvent,
   LayerAdapter,
   PropertiesFilter,
-  FilterOptions
+  FilterOptions,
+  OnLayerClickOptions
 } from '@nextgis/webmap';
 import NgwConnector, {
   ResourceItem,
   CancelablePromise,
   FeatureLayersIdentify,
-  FeatureItem
+  FeatureItem,
+  FeatureLayersIdentifyItems,
+  LayerFeature
 } from '@nextgis/ngw-connector';
 import { QmsAdapterOptions } from '@nextgis/qms-kit';
 import NgwKit, {
@@ -28,7 +31,8 @@ import NgwKit, {
   ResourceAdapter,
   WebMapLayerItem,
   AddNgwLayerOptions,
-  NgwLayerOptionsAdditional
+  NgwLayerOptionsAdditional,
+  NgwIdentify
 } from '@nextgis/ngw-kit';
 import { getIcon } from '@nextgis/icons';
 
@@ -72,7 +76,8 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<M, L, C, N
   connector!: NgwConnector;
 
   protected _ngwLayers: NgwLayers = {};
-  private __selectFromNgw?: (ev: MapClickEvent) => void;
+  private __selectFromNgwRaster?: (ev: MapClickEvent) => void;
+  private __selectFromNgwVector?: (ev: OnLayerClickOptions) => void;
 
   /**
    * @param mapAdapter #noapi
@@ -238,7 +243,7 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<M, L, C, N
   }
 
   async getIdentifyGeoJson(
-    identify: FeatureLayersIdentify,
+    identify: NgwIdentify,
     multiple = false
   ): CancelablePromise<Feature | undefined> {
     return NgwKit.utils.getIdentifyGeoJson({
@@ -335,16 +340,20 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<M, L, C, N
   }
 
   enableSelection() {
-    if (!this.__selectFromNgw) {
-      this.__selectFromNgw = (ev: MapClickEvent) => this._selectFromNgw(ev);
-      this.emitter.on('click', this.__selectFromNgw);
+    if (!this.__selectFromNgwRaster) {
+      this.__selectFromNgwRaster = (ev: MapClickEvent) => this._selectFromNgwRaster(ev);
+      this.__selectFromNgwVector = (ev: OnLayerClickOptions) => this._selectFromNgwVector(ev);
+      this.emitter.on('click', this.__selectFromNgwRaster);
+      this.emitter.on('layer:click', this.__selectFromNgwVector);
     }
   }
 
   disableSelection() {
-    if (this.__selectFromNgw) {
-      this.emitter.off('click', this.__selectFromNgw);
-      this.__selectFromNgw = undefined;
+    if (this.__selectFromNgwRaster) {
+      this.emitter.off('click', this.__selectFromNgwRaster);
+      this.emitter.off('click', this._selectFromNgwVector);
+      this.__selectFromNgwRaster = undefined;
+      this.__selectFromNgwVector = undefined;
     }
   }
 
@@ -423,7 +432,40 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<M, L, C, N
     this._emitStatusEvent('controls:create');
   }
 
-  private async _selectFromNgw(ev: MapClickEvent) {
+  private async _selectFromNgwVector(
+    ev: OnLayerClickOptions
+  ): Promise<FeatureLayersIdentify | undefined> {
+    const layer: ResourceAdapter = ev.layer as ResourceAdapter;
+    // item property means layer is NgwResource
+    const id = layer.item && layer.item.resource.id;
+    const feature = ev.feature;
+
+    if (id !== undefined && feature) {
+      const featureId = feature.id;
+      if (featureId) {
+        const identifyFeature: LayerFeature = {
+          id: Number(featureId),
+          fields: feature.properties,
+          label: `#${id}`,
+          layerId: Number(id),
+          parent: '',
+          geom: feature.geometry
+        };
+        const items: FeatureLayersIdentifyItems = {
+          featureCount: 1,
+          features: [identifyFeature]
+        };
+        const identify: FeatureLayersIdentify = {
+          featureCount: 1,
+          [id]: items
+        };
+        this._emitStatusEvent('ngw:select', { ...identify, resources: [id], sourceType: 'vector' });
+        return identify;
+      }
+    }
+  }
+
+  private async _selectFromNgwRaster(ev: MapClickEvent) {
     const promises: Promise<number[] | undefined>[] = [];
     for (const nl in this._ngwLayers) {
       const layer = this._ngwLayers[nl].layer;
@@ -454,7 +496,12 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<M, L, C, N
             radius
           })
           .then(resp => {
-            this._emitStatusEvent('ngw:select', { ...resp, resources: ids });
+            this._emitStatusEvent('ngw:select', {
+              ...resp,
+              resources: ids,
+              sourceType: 'raster',
+              event: ev
+            });
             return resp;
           });
       }

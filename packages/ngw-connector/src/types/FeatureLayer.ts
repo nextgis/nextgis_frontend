@@ -2,7 +2,7 @@
  * @module ngw-connector
  */
 
-import { GeometryObject, GeoJsonProperties } from 'geojson';
+import { GeometryObject, GeoJsonProperties, GeoJsonObject } from 'geojson';
 
 export type FeatureLayerFields = GeoJsonProperties;
 
@@ -12,16 +12,17 @@ export interface LayerFeature {
   layerId: number;
   parent: string;
   fields: FeatureLayerFields;
+  geom?: GeoJsonObject;
 }
 
-export interface FeatureLayersIdentify {
+export interface FeatureLayersIdentifyItems {
   featureCount: number;
   features: LayerFeature[];
 }
 
 export interface FeatureLayersIdentify {
   featureCount: number;
-  [layerName: number]: FeatureLayersIdentify;
+  [layerId: number]: FeatureLayersIdentifyItems;
 }
 
 export interface FeatureItemAttachment {

@@ -9,7 +9,8 @@ import WebMap, {
   MapClickEvent,
   LngLatBoundsArray,
   VectorLayerAdapter,
-  GeoJsonAdapterOptions
+  GeoJsonAdapterOptions,
+  OnLayerClickOptions
 } from '@nextgis/webmap';
 import NgwConnector, { ResourceItem } from '@nextgis/ngw-connector';
 import { FeatureLayersIdentify } from '@nextgis/ngw-connector';
@@ -165,10 +166,22 @@ export type VectorResourceAdapter<
   F extends Feature = Feature
 > = ResourceAdapter<M, L, O, F> & VectorLayerAdapter<M, L, O, F>;
 
-export type GeoJsonIdentify = FeatureLayersIdentify & { resources?: number[] };
+interface NgwVectorIdentify {
+  resources?: number[];
+  sourceType: 'vector';
+  event: OnLayerClickOptions;
+}
+
+interface NgwRasterIdentify {
+  resources?: number[];
+  sourceType: 'raster';
+  event: MapClickEvent;
+}
+
+export type NgwIdentify = FeatureLayersIdentify & (NgwVectorIdentify | NgwRasterIdentify);
 
 export interface GetIdentifyGeoJsonOptions {
-  identify: GeoJsonIdentify;
+  identify: NgwIdentify;
   connector: NgwConnector;
   multiple?: boolean;
 }

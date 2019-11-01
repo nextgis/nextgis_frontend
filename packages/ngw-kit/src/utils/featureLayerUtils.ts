@@ -15,7 +15,7 @@ const FEATURE_REQUEST_PARAMS: FeatureRequestParams = {
 export function createGeoJsonFeature<
   G extends Geometry | null = Geometry,
   P extends Record<string, any> = Record<string, any>
->(item: FeatureItem): Feature<G, P> {
+>(item: Pick<FeatureItem, 'id' | 'geom' | 'fields'>): Feature<G, P> {
   const geometry = item.geom as G;
   const feature: Feature<G, P> = {
     id: item.id,
