@@ -1,16 +1,16 @@
 {
-  "env": {
-    "jest/globals": true
-  },
+  // "env": {
+  //   "jest/globals": true
+  // },
   "extends": [
-    "plugin:jest/recommended",
-    "plugin:jest/style",
+    // "plugin:jest/recommended",
+    // "plugin:jest/style",
     "./packages/eslint-config/index.js"
-  ],
-  "plugins": [
-    "jest"
-  ],
-  "rules": {
-    "jest/no-export": 0
-  }
+  ]
+  // "plugins": [
+  //   "jest"
+  // ],
+  // "rules": {
+  //   "jest/no-export": 0
+  // }
 }
