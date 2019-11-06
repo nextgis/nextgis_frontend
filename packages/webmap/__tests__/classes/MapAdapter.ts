@@ -5,10 +5,10 @@ import {
   LocateOptions,
   Locate,
   LocationEvents
-} from '../interfaces/MapAdapter';
+} from '../../src/interfaces/MapAdapter';
 
-import { LayerAdapter } from '../interfaces/LayerAdapter';
-import { Type } from '../interfaces/BaseTypes';
+import { LayerAdapter } from '../../src/interfaces/LayerAdapter';
+import { Type } from '../../src/interfaces/BaseTypes';
 import { EventEmitter } from 'events';
 import {
   MapControls,
@@ -16,9 +16,9 @@ import {
   CreateControlOptions,
   ButtonControlOptions,
   ToggleControlOptions
-} from '../interfaces/MapControl';
-import { MapOptions } from '../interfaces/WebMapApp';
-import { LngLatArray, LngLatBoundsArray } from '../interfaces/BaseTypes';
+} from '../../src/interfaces/MapControl';
+import { MapOptions } from '../../src/interfaces/WebMapApp';
+import { LngLatArray, LngLatBoundsArray } from '../../src/interfaces/BaseTypes';
 
 export class MapAdapter<M = any, L = any, C extends any = any> implements MA {
   // isLoaded?: boolean = true;
@@ -32,10 +32,17 @@ export class MapAdapter<M = any, L = any, C extends any = any> implements MA {
   private _bounds?: LngLatBoundsArray;
   private _zoom?: number;
   private _center?: LngLatArray;
-  private _container = document.createElement('div');
+  private _container?: HTMLElement;
 
-  create(options?: MapOptions): void {
-    //
+  create(options: MapOptions): void {
+    if (typeof options.target === 'string') {
+      const elem = document.getElementById(options.target) as HTMLElement;
+      if (elem) {
+        this._container = elem;
+      }
+    } else if (options.target instanceof HTMLElement) {
+      this._container = options.target;
+    }
   }
 
   destroy(): void {
@@ -114,7 +121,9 @@ export class MapAdapter<M = any, L = any, C extends any = any> implements MA {
     controlName: K | any,
     position: ControlPositions,
     options?: MapControls[K]
-  ): any {}
+  ): any {
+    //
+  }
 
   removeControl(control: any): void {
     //

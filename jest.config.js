@@ -1,13 +1,18 @@
 module.exports = {
-  collectCoverageFrom: ['**/packages/*/**/*.js', '**/packages/*/**/*.ts', '!**/__tests__/**'],
+  collectCoverageFrom: [
+    'packages/*/src/**/*.ts',
+    '!packages/demo/**',
+    '!packages/eslint-config/**'
+  ],
   modulePathIgnorePatterns: [],
   projects: ['<rootDir>'],
   testPathIgnorePatterns: ['/node_modules/', '\\.snap$'],
   transform: {
     '^.+\\.tsx?$': 'ts-jest'
   },
-  watchPlugins: [
-    // 'jest-watch-typeahead/filename',
-    // 'jest-watch-typeahead/testname',
-  ]
+
+  watchPathIgnorePatterns: ['/node_modules/'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'json'],
+  rootDir: __dirname,
+  testMatch: ['<rootDir>/packages/**/__tests__/**/*spec.[jt]s?(x)']
 };
