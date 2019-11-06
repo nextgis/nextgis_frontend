@@ -6,6 +6,7 @@
     "declarationDir": "lib",
   },
   "include": [
-    "./src"
+    "./src",
+    "__tests__/classes"
   ]
- }
+}
