@@ -34,7 +34,7 @@ export class MapAdapter<M = any, L = any, C extends any = any> implements MA {
   private _center?: LngLatArray;
   private _container?: HTMLElement;
 
-  create(options: MapOptions): void {
+  create(options: MapOptions = { target: 'map' }): void {
     if (typeof options.target === 'string') {
       const elem = document.getElementById(options.target) as HTMLElement;
       if (elem) {
@@ -43,6 +43,10 @@ export class MapAdapter<M = any, L = any, C extends any = any> implements MA {
     } else if (options.target instanceof HTMLElement) {
       this._container = options.target;
     }
+    if (this._container) {
+      this._container.innerHTML = '<div></div>';
+    }
+    this.emitter.emit('create');
   }
 
   destroy(): void {
