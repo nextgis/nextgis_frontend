@@ -4,9 +4,11 @@
   "devDependencies": {
     "@nextgis/eslint-config": "^0.20.0",
     "@types/jest": "^24.0.21",
+    "babel-jest": "^24.9.0",
     "eslint": "^6.6.0",
     "eslint-plugin-jest": "^23.0.2",
     "jest": "^24.9.0",
+    "jest-canvas-mock": "^2.2.0",
     "lerna": "^3.18.3",
     "rimraf": "^3.0.0",
     "topological-sort": "^0.3.0",

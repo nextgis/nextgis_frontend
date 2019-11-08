@@ -17,11 +17,11 @@
   "devDependencies": {
     "@nextgis/eslint-config": "^0.20.1",
     "@types/events": "^3.0.0",
-    "@types/node": "^12.12.3",
+    "@types/node": "^12.12.6",
     "eslint-loader": "^3.0.2",
     "rimraf": "^3.0.0",
     "ts-loader": "^6.2.1",
-    "typescript": "^3.6.4",
+    "typescript": "^3.7.2",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
   },
