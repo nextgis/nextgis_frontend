@@ -26,10 +26,6 @@ import { createControl } from './controls/createControl';
 import { createButtonControl } from './controls/createButtonControl';
 import { convertMapClickEvent } from './utils/utils';
 
-export interface LeafletMapAdapterOptions extends MapOptions {
-  id?: string;
-}
-
 export type Type<T> = new (...args: any[]) => T;
 
 export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
@@ -49,7 +45,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
 
   static Map = L;
 
-  options: LeafletMapAdapterOptions = { target: 'map' };
+  options: MapOptions = { target: 'map' };
 
   layerAdapters = LeafletMapAdapter.layerAdapters;
   controlAdapters = LeafletMapAdapter.controlAdapters;
@@ -65,8 +61,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     'moveend'
   ];
 
-  // create(options: MapOptions = {target: 'map'}) {
-  create(options: LeafletMapAdapterOptions = { target: 'map' }) {
+  create(options: MapOptions = { target: 'map' }) {
     this.options = { ...options };
     if (this.options.target) {
       const { maxZoom, minZoom } = this.options;

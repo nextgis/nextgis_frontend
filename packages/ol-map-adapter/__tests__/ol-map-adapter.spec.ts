@@ -1,6 +1,6 @@
 import { mapAdapterTests } from '../../../tests/mapAdapterTests';
 import { webMapTests } from '../../../tests/webMapTests';
-import { MapAdapter } from './classes/MapAdapter';
+import { OlMapAdapter as MapAdapter } from '../src/OlMapAdapter';
 
 mapAdapterTests(MapAdapter);
 webMapTests(MapAdapter);

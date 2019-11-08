@@ -1,6 +1,6 @@
 import { mapAdapterTests } from '../../../tests/mapAdapterTests';
 import { webMapTests } from '../../../tests/webMapTests';
-import { MapAdapter } from './classes/MapAdapter';
+import { LeafletMapAdapter as MapAdapter } from '../src/LeafletMapAdapter';
 
 mapAdapterTests(MapAdapter);
 webMapTests(MapAdapter);
