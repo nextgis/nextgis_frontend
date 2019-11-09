@@ -1,13 +1,6 @@
-import { expect } from 'chai';
-import { WebMap } from '../packages/webmap/src/WebMap';
-import { LeafletMapAdapter } from '../packages/leaflet-map-adapter/src/LeafletMapAdapter';
+const testsContext = require.context('./specs', true, /\.spec\.ts$/);
 
-describe('Hello', () => {
-  it('Renders header', () => {
-    const webMap = new WebMap({ mapAdapter: new LeafletMapAdapter() });
-    expect(1).to.eq(1);
-  });
-});
+testsContext.keys().forEach(testsContext);
 
 // const testsContext = require.context('.', true, /\.spec.ts$/);
 // testsContext.keys().forEach(testsContext);
