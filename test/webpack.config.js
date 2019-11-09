@@ -1,0 +1,47 @@
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// let HtmlWebpackPlugin = require('html-webpack-plugin');
+// let FaviconsWebpackPlugin = require('favicons-webpack-plugin')
+const path = require('path');
+
+let alias = {};
+try {
+  const { getAliases } = require('../build/aliases');
+  alias = getAliases();
+} catch (er) {
+  // ignore
+}
+
+module.exports = {
+  mode: 'development',
+
+  devtool: 'inline-source-map',
+
+  resolve: {
+    extensions: ['.js', '.ts', '.json'],
+    alias
+  },
+
+  module: {
+    rules: [
+      {
+        test: /\.ts$/,
+        use: 'ts-loader',
+        exclude: path.resolve('node_modules/'),
+        include: path.resolve('packages/webmap/src/')
+      }
+      // {
+      //   test: /\.ts$/,
+      //   exclude: [path.resolve(__dirname, 'test')],
+      //   enforce: 'post',
+      //   use: {
+      //     loader: 'istanbul-instrumenter-loader',
+      //     options: { esModules: true }
+      //   }
+      // },
+      // {
+      //   test: /\.css$/,
+      //   use: [{ loader: 'css-loader', options: { sourceMap: true } }]
+      // }
+    ]
+  }
+};
