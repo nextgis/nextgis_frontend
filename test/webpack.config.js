@@ -27,7 +27,7 @@ module.exports = {
         test: /\.ts$/,
         use: 'ts-loader',
         exclude: path.resolve('node_modules/'),
-        include: path.resolve('packages/webmap/src/')
+        include: [path.resolve('packages/webmap/src/'), path.resolve('packages/utils/src/')]
       }
       // {
       //   test: /\.ts$/,
