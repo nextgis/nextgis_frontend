@@ -1,5 +1,1 @@
-{
-  "extends": [
-    "../../eslint-config/jest.js"
-  ]
-}
+

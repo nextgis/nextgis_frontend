@@ -8,4 +8,4 @@ module.exports = (env, argv) => {
     dirname: __dirname,
     package
   });
-}
+};
