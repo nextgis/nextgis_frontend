@@ -152,7 +152,7 @@ export class WebMapLayers<L = any> {
       adapterEngine = this.webMap.getLayerAdapter(adapter);
     } else if (typeof adapter === 'function') {
       adapterEngine = adapter as Type<LayerAdapter>;
-    } else if ((adapter as Promise<Type<LayerAdapters[K]> | undefined>).then) {
+    } else if ('then' in (adapter as Promise<Type<LayerAdapters[K]> | undefined>)) {
       adapterEngine = (await adapter) as Type<LayerAdapters[K]>;
     }
 

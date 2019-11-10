@@ -5,10 +5,10 @@ import {
   LocateOptions,
   Locate,
   LocationEvents
-} from '../../src/interfaces/MapAdapter';
+} from '../interfaces/MapAdapter';
 
-import { LayerAdapter } from '../../src/interfaces/LayerAdapter';
-import { Type } from '../../src/interfaces/BaseTypes';
+import { LayerAdapter } from '../interfaces/LayerAdapter';
+import { Type } from '../interfaces/BaseTypes';
 import { EventEmitter } from 'events';
 import {
   MapControls,
@@ -16,11 +16,11 @@ import {
   CreateControlOptions,
   ButtonControlOptions,
   ToggleControlOptions
-} from '../../src/interfaces/MapControl';
-import { MapOptions } from '../../src/interfaces/WebMapApp';
-import { LngLatArray, LngLatBoundsArray } from '../../src/interfaces/BaseTypes';
+} from '../interfaces/MapControl';
+import { MapOptions } from '../interfaces/WebMapApp';
+import { LngLatArray, LngLatBoundsArray } from '../interfaces/BaseTypes';
 
-export class MapAdapter<M = any, L = any, C extends any = any> implements MA {
+export class FakeMapAdapter<M = any, L = any, C extends any = any> implements MA {
   // isLoaded?: boolean = true;
   map?: M;
   emitter = new EventEmitter();

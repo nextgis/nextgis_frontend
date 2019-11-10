@@ -1,4 +1,7 @@
 {
+  "env": {
+    "mocha": true
+  },
   "extends": [
     "../packages/eslint-config/index.js"
   ]
