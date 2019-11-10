@@ -3,16 +3,20 @@ const path = require('path');
 
 module.exports = config => {
   config.set({
-    browsers: ['PhantomJS'],
+    browsers: ['Chrome'],
     // frameworks: ['mocha', 'sinon-chai', 'phantomjs-shim'],
     frameworks: ['mocha'],
-    reporters: ['spec', 'coverage-istanbul'],
+    reporters: ['dots', 'coverage-istanbul'],
     // files: ['./test/index.ts'],
     files: [
       {
         pattern: path.resolve(__dirname, './test/index.ts'),
         watched: false
       },
+      // {
+      //   pattern: path.resolve(__dirname, './test/helpers/'),
+      //   watched: false
+      // },
       {
         pattern: '**/*',
         included: false,
@@ -21,7 +25,7 @@ module.exports = config => {
     ],
     exclude: ['**/*.spec.ts'],
     preprocessors: {
-      'test/index.ts': ['webpack']
+      'test/index.ts': ['webpack', 'sourcemap']
     },
     // mime: {
     //   'text/x-typescript': ['ts', 'tsx']
@@ -29,14 +33,11 @@ module.exports = config => {
     webpack,
     webpackMiddleware: {
       noInfo: true
+    },
+    coverageIstanbulReporter: {
+      reports: ['text-summary', 'html'],
+      dir: path.resolve(__dirname, '../coverage/'),
+      fixWebpackSourcePaths: true
     }
-    // coverageIstanbulReporter: {
-    //   reports: ['html', 'text-summary', 'lcovonly'],
-    //   dir: path.join(__dirname, 'coverage'),
-    //   fixWebpackSourcePaths: true,
-    //   'report-config': {
-    //     html: { outdir: 'html' }
-    //   }
-    // }
   });
 };

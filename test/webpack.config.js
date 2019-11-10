@@ -11,6 +11,8 @@ try {
   // ignore
 }
 
+const include = [path.resolve('packages/webmap/src/'), path.resolve('packages/utils/src/')];
+
 module.exports = {
   mode: 'development',
 
@@ -27,7 +29,7 @@ module.exports = {
         test: /\.ts$/,
         use: 'ts-loader',
         exclude: path.resolve('node_modules/'),
-        include: [path.resolve('packages/webmap/src/'), path.resolve('packages/utils/src/')]
+        include
       }
       // {
       //   test: /\.ts$/,
