@@ -14,7 +14,7 @@ import {
   LngLatBoundsArray
 } from '@nextgis/webmap';
 import Map from 'ol/Map';
-import View from 'ol/View';
+import View, { ViewOptions } from 'ol/View';
 import Zoom from 'ol/control/Zoom';
 
 import { ImageAdapter } from './layer-adapters/ImageAdapter';
@@ -87,11 +87,12 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
 
   create(options: MapOptions) {
     this.options = { ...options };
-    const view = new View({
-      center: options.center,
-      zoom: options.zoom,
+    const viewOptions: ViewOptions = {
+      center: this.options.center,
+      zoom: this.options.zoom,
       projection: this.displayProjection
-    });
+    };
+    const view = new View(viewOptions);
 
     const defOpt: OlMapOptions = {
       // logo: false,
@@ -101,7 +102,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     };
     const mapInitOptions: OlMapOptions = {
       ...defOpt,
-      target: options.target
+      target: this.options.target || 'map'
       // logo: options.logo,
     };
 
