@@ -11,7 +11,11 @@ try {
   // ignore
 }
 
-const include = [path.resolve('packages/webmap/src/'), path.resolve('packages/utils/src/')];
+// const include = [
+//   path.resolve('packages/webmap/src/'),
+//   path.resolve('packages/utils/src/'),
+//   path.resolve('test/specs/')
+// ];
 
 module.exports = {
   mode: 'development',
@@ -27,10 +31,17 @@ module.exports = {
     rules: [
       {
         test: /\.ts$/,
-        use: 'ts-loader',
-        exclude: path.resolve('node_modules/'),
-        include
-      }
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true
+            }
+          }
+        ],
+        exclude: [/node_modules/]
+        // include
+      },
       // {
       //   test: /\.ts$/,
       //   exclude: [path.resolve(__dirname, 'test')],
@@ -40,10 +51,10 @@ module.exports = {
       //     options: { esModules: true }
       //   }
       // },
-      // {
-      //   test: /\.css$/,
-      //   use: [{ loader: 'css-loader', options: { sourceMap: true } }]
-      // }
+      {
+        test: /\.css$/,
+        use: [{ loader: 'css-loader', options: { sourceMap: true } }]
+      }
     ]
   }
 };
