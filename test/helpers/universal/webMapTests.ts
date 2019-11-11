@@ -9,7 +9,7 @@ export const webMapTests = (MA: Type<MapAdapter>) => {
     return new WebMap({ mapAdapter: new MA(), ...options });
   };
 
-  describe(`Initialize WebMap with ${adapterName}.`, () => {
+  describe(`WebMap with ${adapterName}.`, () => {
     beforeEach(() => {
       document.documentElement.innerHTML = mapHtml;
     });

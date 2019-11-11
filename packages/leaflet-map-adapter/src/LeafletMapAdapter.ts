@@ -125,7 +125,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   }
 
   getZoom(): number | undefined {
-    return this.map && this.map.getZoom();
+    return (this.map && this.map.getZoom()) || undefined;
   }
 
   getBounds(): LngLatBoundsArray | undefined {
@@ -243,14 +243,14 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
           const lngLat: [number, number] = [event.latlng.lng, event.latlng.lat];
           locationfound({ lngLat });
         };
-        if (locationfound) {
+        if (locationfound !== undefined) {
           map.on('locationfound', locationFound, this);
         }
         if (locationerror) {
           map.on('locationerror', locationerror, this);
         }
         const stop = () => {
-          if (locationfound) {
+          if (locationfound !== undefined) {
             map.off('locationfound', locationFound);
           }
           if (locationerror) {
