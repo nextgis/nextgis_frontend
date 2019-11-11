@@ -4,6 +4,7 @@
 
 import * as Dom from './dom';
 export const dom = Dom;
+export * from './clipboard';
 
 /**
  * Given an array of member function names as strings, replace all of them
