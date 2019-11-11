@@ -92,7 +92,7 @@ export function createToggleControl<C = any>(
   const buttonControl = createButtonControl({
     html: link,
     onClick
-  }) as (C & ToggleControl);
+  }) as C & ToggleControl;
   buttonControl.onClick = onClick;
   return buttonControl;
 }
