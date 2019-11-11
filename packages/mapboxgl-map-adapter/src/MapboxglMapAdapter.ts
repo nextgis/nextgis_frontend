@@ -82,7 +82,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   private _sortTimerId?: number;
 
   // create(options: MapOptions = {target: 'map'}) {
-  create(options: MapboxglMapAdapterOptions) {
+  create(options: MapboxglMapAdapterOptions = {}) {
     if (!this.map) {
       this.options = options;
       if (options.accessToken) {

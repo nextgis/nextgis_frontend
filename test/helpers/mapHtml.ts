@@ -1,6 +1,5 @@
-<!DOCTYPE html>
+export const mapHtml = `<!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,7 +10,6 @@
       margin: 0;
       padding: 0;
     }
-
     html,
     body,
     #wrapper,
@@ -20,13 +18,8 @@
       height: 100%;
     }
   </style>
-
 </head>
-
 <body>
-
   <div id='map'></div>
-
 </body>
-
-</html>
+</html>`;
