@@ -30,8 +30,10 @@ export const mapAdapterTests = (MA: Type<MapAdapter>) => {
         expect(mapAdapter instanceof MA).to.equal(true);
       });
 
-      it('Create map container with null options. Should target DOM element with id="map".', async () => {
+      it('Create map container with null options, should target DOM element with id="map".', async () => {
+        const timer = new Date().getTime();
         await mapAdapterCreate(MA);
+        console.log(new Date().getTime() - timer);
         const mapContainer = document.getElementById('map') as HTMLElement;
         expect(mapContainer.childElementCount).greaterThan(0);
       });
