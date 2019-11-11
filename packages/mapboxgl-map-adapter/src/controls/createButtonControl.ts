@@ -32,7 +32,7 @@ export function createButtonControl(options: ButtonControlOptions) {
     e.stopPropagation();
     options.onClick();
   };
-  if (options.onClick) {
+  if (options.onClick !== undefined) {
     link.addEventListener('click', onClick);
   }
 
@@ -46,7 +46,7 @@ export function createButtonControl(options: ButtonControlOptions) {
         if (parent) {
           parent.removeChild(link);
         }
-        if (options.onClick) {
+        if (options.onClick !== undefined) {
           link.removeEventListener('click', onClick);
         }
       }

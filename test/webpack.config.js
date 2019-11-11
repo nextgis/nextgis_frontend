@@ -42,15 +42,15 @@ module.exports = {
         exclude: [/node_modules/]
         // include
       },
-      // {
-      //   test: /\.ts$/,
-      //   exclude: [path.resolve(__dirname, 'test')],
-      //   enforce: 'post',
-      //   use: {
-      //     loader: 'istanbul-instrumenter-loader',
-      //     options: { esModules: true }
-      //   }
-      // },
+      {
+        test: /\.ts$/,
+        exclude: [/node_modules/],
+        enforce: 'post',
+        use: {
+          loader: 'istanbul-instrumenter-loader',
+          options: { esModules: true }
+        }
+      },
       {
         test: /\.css$/,
         use: [{ loader: 'css-loader', options: { sourceMap: true } }]

@@ -6,7 +6,6 @@ module.exports = config => {
     basePath: '../',
     browsers: ['Chrome'],
     frameworks: ['mocha'],
-    reporters: ['progress'],
     files: ['test/specs/*.ts'],
     preprocessors: {
       'test/specs/*.spec.ts': ['webpack', 'sourcemap']
@@ -14,11 +13,12 @@ module.exports = config => {
     webpack,
     webpackMiddleware: {
       noInfo: true
+    },
+    reporters: ['dots', 'coverage-istanbul'],
+    coverageIstanbulReporter: {
+      reports: ['text-summary', 'html'],
+      dir: path.resolve(__dirname, '../coverage/'),
+      fixWebpackSourcePaths: true
     }
-    // coverageIstanbulReporter: {
-    //   reports: ['text-summary', 'html'],
-    //   dir: path.resolve(__dirname, '../coverage/'),
-    //   fixWebpackSourcePaths: true
-    // }
   });
 };
