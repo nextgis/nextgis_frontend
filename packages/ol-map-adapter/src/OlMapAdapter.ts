@@ -66,7 +66,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     ATTRIBUTION: Attribution
   };
 
-  options: any;
+  options: any = { target: 'map' };
 
   layerAdapters = OlMapAdapter.layerAdapters;
   controlAdapters = OlMapAdapter.controlAdapters;
@@ -86,7 +86,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
   private _positionMem: { [key in 'movestart' | 'moveend']?: PositionMem } = {};
 
   create(options: MapOptions) {
-    this.options = { ...options };
+    this.options = { target: 'map', ...options };
     const viewOptions: ViewOptions = {
       center: this.options.center,
       zoom: this.options.zoom,

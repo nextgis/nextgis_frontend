@@ -79,7 +79,8 @@ export class FakeMapAdapter<M = any, L = any, C extends any = any> implements MA
   }
 
   setView(lngLat: LngLatArray, zoom?: number): void {
-    //
+    this._center = lngLat;
+    this._zoom = zoom;
   }
 
   getBounds(): LngLatBoundsArray | undefined {

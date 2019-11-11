@@ -105,8 +105,6 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
               };
             }
           }
-          // center: options.center,
-          // zoom: options.zoom,
         };
         if (typeof options.style === 'string') {
           mapOpt.style = options.style;
@@ -124,7 +122,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
         if (options.center !== undefined) {
           mapOpt.center = options.center;
         }
-        if (options.zoom) {
+        if (options.zoom !== undefined) {
           mapOpt.zoom = options.zoom;
         }
         this.map = new Map(mapOpt);
@@ -150,9 +148,13 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     return this.map && this.map.getContainer();
   }
 
-  setView(center: LngLatArray, zoom: number) {
+  setView(center: LngLatArray, zoom?: number) {
     if (this.map) {
-      this.map.jumpTo({ center, zoom: zoom - 1 });
+      const options: mapboxgl.CameraOptions = { center };
+      if (zoom) {
+        options.zoom = zoom - 1;
+      }
+      this.map.jumpTo(options);
     }
   }
 
@@ -178,7 +180,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   getZoom(): number | undefined {
     if (this.map) {
       const zoom = this.map.getZoom();
-      return zoom + 1;
+      return zoom ? zoom + 1 : undefined;
     }
   }
 
