@@ -1144,6 +1144,13 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
     return attributions;
   }
 
+  protected _emitStatusEvent(eventName: keyof E, data?: any) {
+    // ugly hack to disable type checking error
+    const _eventName = eventName as keyof WebMapEvents;
+    this._eventsStatus[_eventName] = true;
+    this.emitter.emit(_eventName, data);
+  }
+
   private async _onLayerClick(options: OnLayerClickOptions) {
     this.webMap.emitter.emit('layer:click', options);
     return Promise.resolve(options);
@@ -1173,13 +1180,6 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
         );
       }
     }
-  }
-
-  protected _emitStatusEvent(eventName: keyof E, data?: any) {
-    // ugly hack to disable type checking error
-    const _eventName = eventName as keyof WebMapEvents;
-    this._eventsStatus[_eventName] = true;
-    this.emitter.emit(_eventName, data);
   }
 
   private async _setupMap() {
