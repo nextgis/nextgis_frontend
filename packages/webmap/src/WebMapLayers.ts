@@ -22,11 +22,15 @@ import { preparePaint } from './util/preparePaint';
 import { updateGeoJsonAdapterOptions } from './util/updateGeoJsonAdapterOptions';
 import { GetAttributionsOptions, ToggleLayerOptions } from './interfaces/WebMapApp';
 import { propertiesFilter } from './util/propertiesFilter';
-import WebMap from '.';
+import { BaseWebMap } from './BaseWebMap';
+import { WebMapEvents } from './interfaces/Events';
 
-export class WebMapLayers<L = any> {
-  webMap!: WebMap;
-
+export class WebMapLayers<
+  M = any,
+  L = any,
+  C = any,
+  E extends WebMapEvents = WebMapEvents
+> extends BaseWebMap<M, L, C, E> {
   private _layersIds = 1;
   private readonly _baseLayers: string[] = [];
   private readonly _layers: { [id: string]: LayerAdapter } = {};
@@ -42,7 +46,7 @@ export class WebMapLayers<L = any> {
     if (layer && layer.getExtent) {
       const extent = await layer.getExtent();
       if (extent) {
-        this.webMap.fitBounds(extent);
+        this.fitBounds(extent);
       }
     }
   }
@@ -149,7 +153,7 @@ export class WebMapLayers<L = any> {
     const _order = order || this._layersIds++;
     let adapterEngine: Type<LayerAdapter> | undefined;
     if (typeof adapter === 'string') {
-      adapterEngine = this.webMap.getLayerAdapter(adapter);
+      adapterEngine = this.getLayerAdapter(adapter);
     } else if (typeof adapter === 'function') {
       adapterEngine = adapter as Type<LayerAdapter>;
     } else if ('then' in (adapter as Promise<Type<LayerAdapters[K]> | undefined>)) {
@@ -160,7 +164,7 @@ export class WebMapLayers<L = any> {
 
     this._updateGeoJsonOptions(geoJsonOptions);
 
-    const { maxZoom, minZoom } = this.webMap.options;
+    const { maxZoom, minZoom } = this.options;
 
     options = {
       id: String(_order),
@@ -177,8 +181,8 @@ export class WebMapLayers<L = any> {
     if (options.baseLayer) {
       options.order = 0;
     }
-    if (this.webMap.options.onBeforeAddLayer) {
-      const modified = this.webMap.options.onBeforeAddLayer({ options, adapter: adapterEngine });
+    if (this.options.onBeforeAddLayer) {
+      const modified = this.options.onBeforeAddLayer({ options, adapter: adapterEngine });
       if (modified) {
         if (modified.options) {
           options = modified.options;
@@ -189,7 +193,7 @@ export class WebMapLayers<L = any> {
       }
     }
     if (adapterEngine !== undefined) {
-      const _adapter = new adapterEngine(this.webMap.mapAdapter.map, options);
+      const _adapter = new adapterEngine(this.mapAdapter.map, options);
 
       if (_adapter.options.baseLayer) {
         options.baseLayer = true;
@@ -200,8 +204,8 @@ export class WebMapLayers<L = any> {
       if (layerId) {
         this._layers[layerId] = _adapter;
       }
-      this.webMap.emitter.emit('layer:preadd', _adapter);
-      await this.webMap.onMapLoad();
+      this.emitter.emit('layer:preadd', _adapter);
+      await this.onMapLoad();
       const layer = await _adapter.addLayer(options);
 
       // checking that the original layer was inserted into the adapter anyway
@@ -231,10 +235,10 @@ export class WebMapLayers<L = any> {
       if (options.fit && _adapter.getExtent) {
         const extent = await _adapter.getExtent();
         if (extent) {
-          await this.webMap.fitBounds(extent);
+          await this.fitBounds(extent);
         }
       }
-      this.webMap.emitter.emit('layer:add', _adapter);
+      this.emitter.emit('layer:add', _adapter);
       return _adapter;
     }
     return Promise.reject('No adapter');
@@ -289,7 +293,7 @@ export class WebMapLayers<L = any> {
     const layer = this.getLayer(layerDef);
     const layerId = layer && this.getLayerId(layer);
     if (layer && layerId) {
-      this.webMap.emitter.emit('layer:preremove', layer);
+      this.emitter.emit('layer:preremove', layer);
       if (layer.beforeRemove) {
         layer.beforeRemove();
       }
@@ -299,7 +303,7 @@ export class WebMapLayers<L = any> {
       if (layer.removeLayer) {
         layer.removeLayer();
       } else {
-        this.webMap.mapAdapter.removeLayer(layer.layer);
+        this.mapAdapter.removeLayer(layer.layer);
       }
       if (layer.options && layer.options.baseLayer) {
         const index = this._baseLayers.indexOf(layerId);
@@ -308,7 +312,7 @@ export class WebMapLayers<L = any> {
         }
       }
       delete this._layers[layerId];
-      this.webMap.emitter.emit('layer:remove', layer);
+      this.emitter.emit('layer:remove', layer);
     }
   }
 
@@ -400,7 +404,7 @@ export class WebMapLayers<L = any> {
       const preEventName = toStatus ? 'layer:preshow' : 'layer:prehide';
       const eventName = toStatus ? 'layer:show' : 'layer:hide';
       if (!silent) {
-        this.webMap.emitter.emit(preEventName, l);
+        this.emitter.emit(preEventName, l);
       }
       if (toStatus && source) {
         const order = l.options.baseLayer ? 0 : l.options.order;
@@ -418,27 +422,27 @@ export class WebMapLayers<L = any> {
         if (l.showLayer) {
           l.showLayer.call(l, l.layer);
         } else {
-          this.webMap.mapAdapter.showLayer(l.layer);
+          this.mapAdapter.showLayer(l.layer);
         }
         if (order !== undefined) {
-          this.webMap.mapAdapter.setLayerOrder(l.layer, order, this._layers);
+          this.mapAdapter.setLayerOrder(l.layer, order, this._layers);
         }
       } else {
         if (l.hideLayer) {
           l.hideLayer.call(l, l.layer);
         } else {
-          this.webMap.mapAdapter.hideLayer(l.layer);
+          this.mapAdapter.hideLayer(l.layer);
         }
       }
       if (!silent) {
-        this.webMap.emitter.emit(eventName, l);
+        this.emitter.emit(eventName, l);
       }
     };
     if (layer && layer.options.visibility !== toStatus) {
-      if (this.webMap.mapAdapter.map) {
-        action(this.webMap.mapAdapter, layer);
+      if (this.mapAdapter.map) {
+        action(this.mapAdapter, layer);
       } else {
-        this.webMap.mapAdapter.emitter.once('create', adapter => {
+        this.mapAdapter.emitter.once('create', adapter => {
           action(adapter.map, layer);
         });
       }
@@ -459,9 +463,9 @@ export class WebMapLayers<L = any> {
   setLayerOpacity(layerDef: LayerDef, value: number) {
     const layer = this.getLayer(layerDef);
     if (layer) {
-      if (this.webMap.mapAdapter.setLayerOpacity) {
+      if (this.mapAdapter.setLayerOpacity) {
         if (layer) {
-          this.webMap.mapAdapter.setLayerOpacity(layer.layer, value);
+          this.mapAdapter.setLayerOpacity(layer.layer, value);
         }
       }
     }
@@ -665,8 +669,17 @@ export class WebMapLayers<L = any> {
     return attributions;
   }
 
+  getActiveBaseLayer() {
+    const visibleLayerBaseLayer = this.getBaseLayers().find(x => {
+      return this.isLayerVisible(x);
+    });
+    if (visibleLayerBaseLayer) {
+      return this.getLayer(visibleLayerBaseLayer);
+    }
+  }
+
   private async _onLayerClick(options: OnLayerClickOptions) {
-    this.webMap.emitter.emit('layer:click', options);
+    this.emitter.emit('layer:click', options);
     return Promise.resolve(options);
   }
 
@@ -679,18 +692,18 @@ export class WebMapLayers<L = any> {
       return this._onLayerClick(e);
     };
     if (!options.nativePaint) {
-      if (this.webMap.options.paint) {
+      if (this.options.paint) {
         options.paint = preparePaint(
           options.paint || {},
-          this.webMap.options.paint,
-          this.webMap.getPaintFunctions
+          this.options.paint,
+          this.getPaintFunctions
         );
       }
-      if (options.selectedPaint && this.webMap.options.selectedPaint) {
+      if (options.selectedPaint && this.options.selectedPaint) {
         options.selectedPaint = preparePaint(
           options.selectedPaint,
-          this.webMap.options.selectedPaint,
-          this.webMap.getPaintFunctions
+          this.options.selectedPaint,
+          this.getPaintFunctions
         );
       }
     }

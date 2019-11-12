@@ -17,8 +17,15 @@ export const allowedByType = {
     ['weight', 'stroke-width'],
     'radius'
   ],
-  line: [['strokeColor', 'color'], ['strokeOpacity', 'opacity'], ['weight', 'width']],
-  fill: [['fillColor', 'color'], ['fillOpacity', 'opacity']],
+  line: [
+    ['strokeColor', 'color'],
+    ['strokeOpacity', 'opacity'],
+    ['weight', 'width']
+  ],
+  fill: [
+    ['fillColor', 'color'],
+    ['fillOpacity', 'opacity']
+  ],
   icon: allowedParams.concat([])
 };
 
