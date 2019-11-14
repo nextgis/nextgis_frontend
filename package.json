@@ -33,14 +33,14 @@
   },
   "scripts": {
     "clean": "lerna run clean",
-    "bootstrap": "lerna run bootstrap",
+    "bootstrap": "lerna bootstrap",
     "dev": "lerna run dev",
     "build": "lerna run build",
     "prod": "lerna run prod",
     "prod_script": "node ./webpack.conf.js",
     "demo": "yarn run examples && cd ./packages/demo/ && yarn run prod",
     "examples": "node ./build/updateExamples.js",
-    "test": "npm run karma -- --single-run",
+    "test": "npm run karma -- --single-run --coverage",
     "karma": "karma start test/karma.conf.js",
     "doc": "typedoc --options ./typedoc.json ./packages"
   },
