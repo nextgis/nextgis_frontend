@@ -34,6 +34,7 @@ export class FakeMapAdapter<M = any, L = any, C extends any = any> implements MA
   private _container?: HTMLElement;
 
   create(options: MapOptions = {}): void {
+    this.options = options;
     if (typeof options.target === 'string') {
       const elem = document.getElementById(options.target) as HTMLElement;
       if (elem) {
@@ -80,7 +81,9 @@ export class FakeMapAdapter<M = any, L = any, C extends any = any> implements MA
 
   setView(lngLat: LngLatArray, zoom?: number): void {
     this.options.center = lngLat;
-    this.options.zoom = zoom;
+    if (zoom) {
+      this.setZoom(zoom);
+    }
   }
 
   getBounds(): LngLatBoundsArray | undefined {
@@ -92,6 +95,9 @@ export class FakeMapAdapter<M = any, L = any, C extends any = any> implements MA
   }
 
   setZoom(zoom: number): void {
+    if (this.options.maxZoom !== undefined) {
+      zoom = zoom < this.options.maxZoom ? zoom : this.options.maxZoom;
+    }
     this.options.zoom = zoom;
   }
 
