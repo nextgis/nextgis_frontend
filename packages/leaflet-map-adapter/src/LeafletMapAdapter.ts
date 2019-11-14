@@ -61,7 +61,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     'moveend'
   ];
 
-  create(options: MapOptions = { target: 'map' }) {
+  create(options: MapOptions) {
     this.options = { ...options };
     if (this.options.target) {
       const { maxZoom, minZoom } = this.options;
@@ -95,17 +95,21 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     }
   }
 
-  setView(lngLat: LngLatArray, zoom: number) {
+  setView(lngLat: LngLatArray, zoom?: number) {
     const [lng, lat] = lngLat;
     if (this.map) {
-      this.map.setView([lat, lng], zoom);
+      if (zoom) {
+        this.map.setView([lat, lng], zoom, { animate: false });
+      } else {
+        this.setCenter([lat, lng]);
+      }
     }
   }
 
   setCenter(lngLat: LngLatArray) {
     const [lng, lat] = lngLat;
     if (this.map) {
-      this.map.setView([lat, lng], this.map.getZoom());
+      this.map.panTo([lat, lng]);
     }
   }
 
@@ -140,10 +144,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   fit(e: LngLatBoundsArray) {
     if (this.map) {
       // top, left, bottom, right
-      this.map.fitBounds([
-        [e[3], e[0]],
-        [e[1], e[2]]
-      ]);
+      this.map.fitBounds([[e[3], e[0]], [e[1], e[2]]]);
     }
   }
 

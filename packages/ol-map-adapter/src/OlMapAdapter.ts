@@ -86,7 +86,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
   private _positionMem: { [key in 'movestart' | 'moveend']?: PositionMem } = {};
 
   create(options: MapOptions) {
-    this.options = { target: 'map', ...options };
+    this.options = { ...options };
     const viewOptions: ViewOptions = {
       center: this.options.center,
       zoom: this.options.zoom,

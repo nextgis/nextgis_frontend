@@ -5,10 +5,10 @@ import {
   LocateOptions,
   Locate,
   LocationEvents
-} from '../interfaces/MapAdapter';
+} from '../../../packages/webmap/src/interfaces/MapAdapter';
 
-import { LayerAdapter } from '../interfaces/LayerAdapter';
-import { Type } from '../interfaces/BaseTypes';
+import { LayerAdapter } from '../../../packages/webmap/src/interfaces/LayerAdapter';
+import { Type } from '../../../packages/webmap/src/interfaces/BaseTypes';
 import { EventEmitter } from 'events';
 import {
   MapControls,
@@ -16,9 +16,9 @@ import {
   CreateControlOptions,
   ButtonControlOptions,
   ToggleControlOptions
-} from '../interfaces/MapControl';
-import { MapOptions } from '../interfaces/WebMapApp';
-import { LngLatArray, LngLatBoundsArray } from '../interfaces/BaseTypes';
+} from '../../../packages/webmap/src/interfaces/MapControl';
+import { MapOptions } from '../../../packages/webmap/src/interfaces/WebMapApp';
+import { LngLatArray, LngLatBoundsArray } from '../../../packages/webmap/src/interfaces/BaseTypes';
 
 export class FakeMapAdapter<M = any, L = any, C extends any = any> implements MA {
   // isLoaded?: boolean = true;
@@ -29,12 +29,11 @@ export class FakeMapAdapter<M = any, L = any, C extends any = any> implements MA
 
   controlAdapters: { [name: string]: Type<C> } = {};
 
-  private _bounds?: LngLatBoundsArray;
-  private _zoom?: number;
-  private _center?: LngLatArray;
+  private options: MapOptions = {};
+
   private _container?: HTMLElement;
 
-  create(options: MapOptions = { target: 'map' }): void {
+  create(options: MapOptions = {}): void {
     if (typeof options.target === 'string') {
       const elem = document.getElementById(options.target) as HTMLElement;
       if (elem) {
@@ -46,6 +45,7 @@ export class FakeMapAdapter<M = any, L = any, C extends any = any> implements MA
     if (this._container) {
       this._container.innerHTML = '<div></div>';
     }
+
     this.emitter.emit('create');
   }
 
@@ -79,28 +79,28 @@ export class FakeMapAdapter<M = any, L = any, C extends any = any> implements MA
   }
 
   setView(lngLat: LngLatArray, zoom?: number): void {
-    this._center = lngLat;
-    this._zoom = zoom;
+    this.options.center = lngLat;
+    this.options.zoom = zoom;
   }
 
   getBounds(): LngLatBoundsArray | undefined {
-    return this._bounds;
+    return this.options.bounds;
   }
 
   getZoom(): number | undefined {
-    return this._zoom;
+    return this.options.zoom;
   }
 
   setZoom(zoom: number): void {
-    this._zoom = zoom;
+    this.options.zoom = zoom;
   }
 
   getCenter(): LngLatArray | undefined {
-    return this._center;
+    return this.options.center;
   }
 
   setCenter(lngLat: LngLatArray): void {
-    this._center = lngLat;
+    this.options.center = lngLat;
   }
 
   getContainer(): HTMLElement | undefined {

@@ -1,6 +1,6 @@
-import { FakeMapAdapter } from '../../packages/webmap/src/test/FakeMapAdapter';
-import { webMapTests } from '../helpers/universal/webMapTests';
-import { mapAdapterTests } from '../helpers/universal/mapAdapterTests';
+import { FakeMapAdapter } from '../helpers/classes/FakeMapAdapter';
+import { webMapTests } from '../helpers/universalTestCases/webMapTests';
+import { mapAdapterTests } from '../helpers/universalTestCases/mapAdapterTests';
 
 webMapTests(FakeMapAdapter);
 mapAdapterTests(FakeMapAdapter);

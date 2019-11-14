@@ -14,7 +14,7 @@ module.exports = config => {
     frameworks: ['mocha'],
     files: ['test/specs/*.ts'],
     preprocessors: {
-      'test/specs/*.spec.ts': ['webpack', 'sourcemap']
+      'test/specs/*.spec.ts': ['webpack'] // 'sourcemap'
     },
     webpack: createWebpack({ coverage }),
     webpackMiddleware: {
