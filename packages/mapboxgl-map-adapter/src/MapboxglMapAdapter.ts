@@ -123,7 +123,13 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
           mapOpt.center = options.center;
         }
         if (options.zoom !== undefined) {
-          mapOpt.zoom = options.zoom;
+          mapOpt.zoom = options.zoom - 1;
+        }
+        if (options.maxZoom) {
+          mapOpt.maxZoom = options.maxZoom - 1;
+        }
+        if (options.minZoom) {
+          mapOpt.minZoom = options.minZoom - 1;
         }
         this.map = new Map(mapOpt);
         // @ts-ignore

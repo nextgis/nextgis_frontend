@@ -90,6 +90,8 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     const viewOptions: ViewOptions = {
       center: this.options.center,
       zoom: this.options.zoom,
+      minZoom: this.options.minZoom,
+      maxZoom: this.options.maxZoom,
       projection: this.displayProjection
     };
     const view = new View(viewOptions);
@@ -146,7 +148,11 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
 
   getCenter(): LngLatArray | undefined {
     if (this._olView) {
-      return this._olView.getCenter() as [number, number];
+      const center = this._olView.getCenter();
+      if (center) {
+        const transformedCenter = transform(center, this.displayProjection, this.lonlatProjection);
+        return transformedCenter as [number, number];
+      }
     }
   }
 
