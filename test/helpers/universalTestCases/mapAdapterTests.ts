@@ -1,6 +1,7 @@
 import { expect } from 'chai';
-import { MapAdapter, Type, MapOptions } from '../../../packages/webmap/src';
+import { MapAdapter, Type, MapOptions, LngLatArray } from '../../../packages/webmap/src';
 import { mapHtml } from '../mapHtml';
+import asyncTimeout from '../utils/asyncTimeout';
 
 const mapAdapterCreate = async (MA: Type<MapAdapter>, opt?: MapOptions): Promise<MapAdapter> => {
   const mapAdapter = new MA();
@@ -8,27 +9,23 @@ const mapAdapterCreate = async (MA: Type<MapAdapter>, opt?: MapOptions): Promise
     mapAdapter.emitter.on('create', () => {
       resolve(mapAdapter);
     });
-    mapAdapter.create(opt);
+    mapAdapter.create({ target: 'map', ...opt });
   });
 };
 
 export const mapAdapterTests = (MA: Type<MapAdapter>) => {
   const adapterName = MA.name;
-  let ma: MapAdapter;
-  beforeEach(async () => {
+  let mapAdapter: MapAdapter;
+  beforeEach(() => {
     document.documentElement.innerHTML = mapHtml;
-    ma = await mapAdapterCreate(MA);
+    // mapAdapter = await mapAdapterCreate(MA);
   });
 
   describe(`${adapterName}.`, () => {
     describe('#create', () => {
       it('Should emit "create" event.', async () => {
-        expect(ma instanceof MA).to.equal(true);
-      });
-
-      it('Create map container with null options, should target HTMLElement with id="map".', async () => {
-        const mapContainer = document.getElementById('map') as HTMLElement;
-        expect(mapContainer.childElementCount).greaterThan(0);
+        const mapAdapter = await mapAdapterCreate(MA);
+        expect(mapAdapter instanceof MA).to.equal(true);
       });
 
       it('Set custom target HTMLElement as ID.', async () => {
@@ -50,10 +47,11 @@ export const mapAdapterTests = (MA: Type<MapAdapter>) => {
 
     describe('#setView', () => {
       it('Sets the view of the map', async () => {
-        if (ma && ma.setView) {
-          ma.setView([104, 52], 13);
-          expect(ma.getZoom()).to.eq(13);
-          const center = ma.getCenter();
+        const mapAdapter = await mapAdapterCreate(MA);
+        if (mapAdapter.setView) {
+          mapAdapter.setView([104, 52], 13);
+          expect(mapAdapter.getZoom()).to.eq(13);
+          const center = mapAdapter.getCenter();
           if (center) {
             // TODO: check Leaflet getCenter
             expect(center.map(Math.round)).to.eql([104, 52].map(Math.round));
@@ -63,25 +61,31 @@ export const mapAdapterTests = (MA: Type<MapAdapter>) => {
         }
       });
 
+      it('Limits initial zoom when no zoom specified', async () => {
+        const mapAdapter = await mapAdapterCreate(MA, { maxZoom: 20 });
+        mapAdapter.setZoom(100);
+        mapAdapter.setCenter([104, 52]);
+        expect(mapAdapter.getZoom()).to.equal(20);
+        await asyncTimeout();
+        const center = mapAdapter.getCenter() as LngLatArray;
+        expect(center.map(Math.round)).to.eql([104, 52].map(Math.round));
+      });
+
       // it('Can be passed without a zoom specified', async () => {
-      //   if (ma && ma.setView) {
-      //     ma.setView([104, 52]);
+      //   const mapAdapter = await mapAdapterCreate(MA);
+      //   if (mapAdapter.setView) {
+      //     mapAdapter.setView([104, 52]);
+
       //     // expect(ma.getZoom()).to.be.undefined;
-      //     const center = ma.getCenter();
-      //     if (center) {
-      //       expect(center.map(Math.round)).to.eql([104, 52].map(Math.round));
-      //     }
+      //     setTimeout(() => {
+      //       const center = mapAdapter.getCenter();
+      //       if (center) {
+      //         expect(center.map(Math.round)).to.eql([104, 52].map(Math.round));
+      //       }
+      //     }, 0);
       //   } else {
       //     expect(1).to.be.ok;
       //   }
-      // });
-
-      // it('limits initial zoom when no zoom specified', function() {
-      //   map.options.maxZoom = 20;
-      //   map.setZoom(100);
-      //   expect(map.setView([51.605, -0.11])).to.be(map);
-      //   expect(map.getZoom()).to.be(20);
-      //   expect(map.getCenter().distanceTo([51.605, -0.11])).to.be.lessThan(5);
       // });
 
       // it('defaults to zoom passed as map option', function() {

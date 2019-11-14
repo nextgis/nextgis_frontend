@@ -82,7 +82,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   private _sortTimerId?: number;
 
   // create(options: MapOptions = {target: 'map'}) {
-  create(options: MapboxglMapAdapterOptions = { target: 'map' }) {
+  create(options: MapboxglMapAdapterOptions) {
     if (!this.map) {
       this.options = options;
       if (options.accessToken) {
@@ -187,17 +187,11 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   // [extent_left, extent_bottom, extent_right, extent_top];
   fit(e: LngLatBoundsArray, options: FitOptions = {}): void {
     if (this.map) {
-      this.map.fitBounds(
-        [
-          [e[0], e[1]],
-          [e[2], e[3]]
-        ],
-        {
-          linear: true,
-          ...options,
-          ...fitBoundsOptions
-        }
-      );
+      this.map.fitBounds([[e[0], e[1]], [e[2], e[3]]], {
+        linear: true,
+        ...options,
+        ...fitBoundsOptions
+      });
     }
   }
 
