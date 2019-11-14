@@ -48,9 +48,9 @@ export class VueNgwMapBase extends Vue {
 
   private _setNgwMap() {
     this.ngwMap = new NgwMap(this.mapAdapter, {
+      ...this.$props,
       ...this.mapOptions,
-      target: this.$el as HTMLElement,
-      ...this.$props
+      target: this.$el as HTMLElement
     });
     this.ready = true;
   }
