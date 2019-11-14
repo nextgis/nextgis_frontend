@@ -64,12 +64,13 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   create(options: MapOptions) {
     this.options = { ...options };
     if (this.options.target) {
-      const { maxZoom, minZoom } = this.options;
+      const { maxZoom, minZoom, zoom } = this.options;
       this.map = new Map(this.options.target, {
         zoomControl: false,
         attributionControl: false,
         maxZoom,
-        minZoom
+        minZoom,
+        zoom
       });
       this.emitter.emit('create', this);
       // create default pane
@@ -101,7 +102,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
       if (zoom) {
         this.map.setView([lat, lng], zoom, { animate: false });
       } else {
-        this.setCenter([lat, lng]);
+        this.setCenter([lng, lat]);
       }
     }
   }
