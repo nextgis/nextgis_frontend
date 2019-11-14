@@ -5787,11 +5787,6 @@ is-ci@^2.0.0:
   dependencies:
     ci-info "^2.0.0"
 
-is-class@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/is-class/-/is-class-0.0.8.tgz#31b0514e4afde32dee9c6a60b1dc371211081f19"
-  integrity sha512-IdV2OjQu9FjFTnMovaPHlHAaFzJs0aWCL+2BhlTh6pP5J6EvSQ7d+7mgUG0g7xC4hTvqCl54ksNLU4VwdGYvsw==
-
 is-data-descriptor@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/is-data-descriptor/-/is-data-descriptor-0.1.4.tgz#0b5ee648388e2c860282e793f1856fec3f301b56"
@@ -10205,13 +10200,6 @@ ts-loader@^6.2.1:
     loader-utils "^1.0.2"
     micromatch "^4.0.0"
     semver "^6.0.0"
-
-ts-mixer@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/ts-mixer/-/ts-mixer-4.0.0.tgz#b9491c4dc36fa5385283957713f236739af05313"
-  integrity sha512-OLgrSuUa5idkJw6v8Qki6uspCCeS/Ycb+r92CQRsNYMd44sBKkrwD9WS/j1PtlhUcgYqznGbEsYlGer9BtIO9g==
-  dependencies:
-    is-class "^0.0.8"
 
 tslib@^1.8.1, tslib@^1.9.0:
   version "1.10.0"

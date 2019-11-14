@@ -1,7 +1,13 @@
-const webpack = require('./webpack.config');
+const createWebpack = require('./webpack.config');
 const path = require('path');
 
 module.exports = config => {
+  const coverage = config.coverage !== undefined ? true : false;
+
+  const reporters = ['dots'];
+  if (coverage) {
+    reporters.push('coverage-istanbul');
+  }
   config.set({
     basePath: '../',
     browsers: ['Chrome'],
@@ -10,11 +16,11 @@ module.exports = config => {
     preprocessors: {
       'test/specs/*.spec.ts': ['webpack', 'sourcemap']
     },
-    webpack,
+    webpack: createWebpack({ coverage }),
     webpackMiddleware: {
       noInfo: true
     },
-    reporters: ['dots', 'coverage-istanbul'],
+    reporters,
     coverageIstanbulReporter: {
       reports: ['text-summary', 'html'],
       dir: path.resolve(__dirname, '../coverage/'),
