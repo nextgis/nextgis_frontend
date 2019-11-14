@@ -96,12 +96,12 @@ const package = new Package(options);
 
 ### Instructions for whole repository
 
+First install [Yarn](https://yarnpkg.com/lang/en/docs/install/)
+
 ```bash
 # Clone git through ssh
 git clone git@github.com:nextgis/nextgisweb_frontend.git
 cd ./nextgisweb_frontend
-# Install yarn and lerna global
-npm i -g yarn lerna
 # Install dependencies
 yarn install
 # Prepare packages
@@ -150,6 +150,15 @@ To publish a new package, run the following command in the package folder
 
 ```bash
 npm publish --access=public
+```
+
+## Testing
+
+The tests are launched from the root project directory. Testing is performed for all packages.
+
+```bash
+npm t # run all test with coverage
+npm run karma # run karma test in watch mode for development
 ```
 
 ## VSCode
