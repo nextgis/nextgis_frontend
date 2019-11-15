@@ -43,6 +43,8 @@ export class WebMapLayerItem extends Item<ItemOptions> {
   item: TreeGroup | TreeLayer;
   layer?: LayerAdapter;
 
+  _rootDescendantsCount = 0;
+
   constructor(
     public webMap: WebMap,
     item: TreeGroup | TreeLayer,
@@ -50,11 +52,19 @@ export class WebMapLayerItem extends Item<ItemOptions> {
     parent?: WebMapLayerItem
   ) {
     super({ ...WebMapLayerItem.options, ...options });
-
-    this.item = item;
     if (parent) {
       this.tree.setParent(parent);
     }
+    this.item = item;
+    if (this.item.item_type === 'root') {
+      this._rootDescendantsCount = this._sumUp(this.item.children);
+    } else {
+      const root = this.tree.getRoot<this>();
+      if (root) {
+        this._rootDescendantsCount = root._rootDescendantsCount;
+      }
+    }
+
     this.initProperties();
     this._init(item);
   }
@@ -64,18 +74,10 @@ export class WebMapLayerItem extends Item<ItemOptions> {
     const i = item;
     if (item.item_type === 'group' || item.item_type === 'root') {
       if (item.children && item.children.length) {
-        item.children
-          .reverse()
-          .sort((a, b) => {
-            if (a.item_type === 'layer' && b.item_type === 'layer') {
-              return b.draw_order_position - a.draw_order_position;
-            }
-            return 0;
-          })
-          .forEach(x => {
-            const children = new WebMapLayerItem(this.webMap, x, this.options, this);
-            this.tree.addChild(children);
-          });
+        item.children.reverse().forEach(x => {
+          const children = new WebMapLayerItem(this.webMap, x, this.options, this);
+          this.tree.addChild(children);
+        });
       }
     } else if (item.item_type === 'layer') {
       const adapter = (item.adapter ||
@@ -95,7 +97,9 @@ export class WebMapLayerItem extends Item<ItemOptions> {
         headers: this.options.headers
       };
       if (this.options.order) {
-        options.order = this.options.order + Number(0 + '.' + this.id);
+        const subOrder = this._rootDescendantsCount - item.draw_order_position;
+        console.log(subOrder);
+        options.order = this.options.order + subOrder * 0.1;
       }
       newLayer = await this.webMap.addLayer(adapter, options);
     }
@@ -106,7 +110,7 @@ export class WebMapLayerItem extends Item<ItemOptions> {
         this.properties.property('visibility').set(true);
       }
       const transparency = item.item_type === 'layer' && item.layer_transparency;
-      if (transparency !== undefined) {
+      if (typeof transparency === 'number') {
         const opacity = (100 - transparency) / 100;
         this.webMap.setLayerOpacity(newLayer, opacity);
       }
@@ -132,5 +136,18 @@ export class WebMapLayerItem extends Item<ItemOptions> {
   private async _init(item: TreeGroup | TreeLayer) {
     await this.initItem(item);
     this.emitter.emit('init');
+  }
+
+  private _sumUp(children: Array<TreeGroup | TreeLayer>) {
+    let totalValue = 0;
+    for (const child of children) {
+      if (child.item_type === 'layer') {
+        totalValue += 1;
+        child.draw_order_position = child.draw_order_position || totalValue;
+      } else if (child.item_type === 'group') {
+        totalValue += this._sumUp(child.children);
+      }
+    }
+    return totalValue;
   }
 }
