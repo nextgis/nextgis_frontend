@@ -138,14 +138,13 @@ export class WebMapLayerItem extends Item<ItemOptions> {
     this.emitter.emit('init');
   }
 
-  private _sumUp(children: Array<TreeGroup | TreeLayer>) {
-    let totalValue = 0;
+  private _sumUp(children: Array<TreeGroup | TreeLayer>, totalValue = 0) {
     for (const child of children) {
       if (child.item_type === 'layer') {
         totalValue += 1;
         child.draw_order_position = child.draw_order_position || totalValue;
       } else if (child.item_type === 'group') {
-        totalValue += this._sumUp(child.children);
+        totalValue = this._sumUp(child.children, totalValue);
       }
     }
     return totalValue;

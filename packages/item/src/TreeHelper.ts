@@ -38,7 +38,7 @@ export class TreeHelper {
 
   getRoot<I extends Item = Item>(): I | undefined {
     let parent = this.getParent() as I;
-    let toReturn: I | undefined;
+    let toReturn = parent;
     while (parent) {
       parent = parent.tree.getParent() as I;
       if (parent) {
