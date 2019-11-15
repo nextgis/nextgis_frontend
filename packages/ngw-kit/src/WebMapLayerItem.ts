@@ -98,7 +98,6 @@ export class WebMapLayerItem extends Item<ItemOptions> {
       };
       if (this.options.order) {
         const subOrder = this._rootDescendantsCount - item.draw_order_position;
-        console.log(subOrder);
         options.order = this.options.order + subOrder * 0.1;
       }
       newLayer = await this.webMap.addLayer(adapter, options);
