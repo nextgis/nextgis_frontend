@@ -96,7 +96,7 @@ export class WebMapLayerItem extends Item<ItemOptions> {
         ...item,
         headers: this.options.headers
       };
-      if (this.options.order) {
+      if (this.options.order && this.options.drawOrderEnabled) {
         const subOrder = this._rootDescendantsCount - item.draw_order_position;
         options.order = this.options.order + subOrder * 0.1;
       }
