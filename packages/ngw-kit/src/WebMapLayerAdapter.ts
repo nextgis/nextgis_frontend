@@ -144,6 +144,7 @@ export class WebMapLayerAdapter implements ResourceAdapter {
             }
           }
           options.order = this.options.order;
+          options.drawOrderEnabled = webmap.draw_order_enabled;
           const layer = new WebMapLayerItem(this.options.webMap, webmap.root_item, options);
           layer.emitter.on('init', () => resolve(layer));
         });
