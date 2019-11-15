@@ -46,11 +46,11 @@ export interface TreeLayer extends TreeItem {
   item_type: 'layer';
   layer_adapter: string;
   layer_enabled: boolean;
-  draw_order_position: any;
-  layer_max_scale_denom: any;
-  layer_min_scale_denom: any;
+  draw_order_position: number;
+  layer_max_scale_denom: number;
+  layer_min_scale_denom: number;
   layer_style_id: number;
-  layer_transparency: any;
+  layer_transparency: number;
 
   layer_url?: string;
 
