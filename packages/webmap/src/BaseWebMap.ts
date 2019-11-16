@@ -22,7 +22,7 @@ import { Keys } from './components/keys/Keys';
 
 import StrictEventEmitter from 'strict-event-emitter-types';
 import { EventEmitter } from 'events';
-import { WebMapEvents } from './interfaces/Events';
+import { WebMapEvents, MapAdapterEvents } from './interfaces/Events';
 
 import { onLoad } from './util/decorators';
 import { propertiesFilter } from './util/propertiesFilter';
@@ -276,7 +276,7 @@ export class BaseWebMap<M = any, L = any, C = any, E extends WebMapEvents = WebM
    * ```
    */
   fitBounds(bounds: LngLatBoundsArray, options?: FitOptions): this {
-    this.mapAdapter.fit(bounds, options);
+    this.mapAdapter.fitBounds(bounds, options);
     return this;
   }
 
@@ -399,7 +399,7 @@ export class BaseWebMap<M = any, L = any, C = any, E extends WebMapEvents = WebM
   private _zoomToInitialExtent() {
     const { center, zoom, bounds } = this.options;
     if (this._extent) {
-      this.mapAdapter.fit(this._extent);
+      this.fitBounds(this._extent);
     } else if (center && bounds) {
       this.setView(center, zoom);
     } else if (bounds) {
@@ -425,7 +425,7 @@ export class BaseWebMap<M = any, L = any, C = any, E extends WebMapEvents = WebM
   }
 
   private _addEventsListeners(): void {
-    const events: Array<keyof WebMapEvents> = [
+    const events: Array<keyof MapAdapterEvents> = [
       'click',
       'zoomstart',
       'zoom',
