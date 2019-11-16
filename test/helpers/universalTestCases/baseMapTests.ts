@@ -11,30 +11,29 @@ export const baseMapTests = (
   MA: Type<MapAdapter>,
   mapAdapterCreate: (MA: Type<MapAdapter>, opt?: MapOptions) => Promise<MapAdapter | WebMap>
 ) => {
-  const adapterName = MA.name;
-  // let mapAdapter: MapAdapter;
+  // let map: MapAdapter;
   beforeEach(() => {
     document.documentElement.innerHTML = mapHtml;
-    // mapAdapter = await mapAdapterCreate(MA);
+    // map = await mapAdapterCreate(MA);
   });
 
-  describe(`${adapterName}.`, () => {
+  describe(`Map base.`, () => {
     describe('#getContainer', () => {
       it('Should return HTMLElement equal target', async () => {
-        const mapAdapter = await mapAdapterCreate(MA);
+        const map = await mapAdapterCreate(MA);
         const domContainer = document.getElementById('map') as HTMLElement;
-        const mapContainer = mapAdapter.getContainer();
+        const mapContainer = map.getContainer();
         expect(domContainer).to.equal(mapContainer);
       });
     });
 
     describe('#setView', () => {
       it('Sets the view of the map', async () => {
-        const mapAdapter = await mapAdapterCreate(MA);
-        if (mapAdapter.setView) {
-          mapAdapter.setView([104, 52], 13);
-          expect(mapAdapter.getZoom()).to.eq(13);
-          const center = mapAdapter.getCenter();
+        const map = await mapAdapterCreate(MA);
+        if (map.setView) {
+          map.setView([104, 52], 13);
+          expect(map.getZoom()).to.eq(13);
+          const center = map.getCenter();
           if (center) {
             // TODO: check Leaflet getCenter
             expect(center.map(Math.round)).to.eql([104, 52].map(Math.round));
@@ -45,13 +44,13 @@ export const baseMapTests = (
       });
 
       it('Limits initial zoom when no zoom specified', async () => {
-        const mapAdapter = await mapAdapterCreate(MA, { maxZoom: 20 });
-        mapAdapter.setZoom(100);
-        if (mapAdapter.setView) {
-          mapAdapter.setView([104, 52]);
+        const map = await mapAdapterCreate(MA, { maxZoom: 20 });
+        map.setZoom(100);
+        if (map.setView) {
+          map.setView([104, 52]);
           await asyncTimeout(100);
-          expect(mapAdapter.getZoom()).to.equal(20);
-          const center = mapAdapter.getCenter() as LngLatArray;
+          expect(map.getZoom()).to.equal(20);
+          const center = map.getCenter() as LngLatArray;
           expect(center.map(Math.round)).to.eql([104, 52].map(Math.round));
         } else {
           expect(1).to.be.ok;
@@ -59,16 +58,47 @@ export const baseMapTests = (
       });
 
       it('Can be passed without a zoom specified', async () => {
-        const mapAdapter = await mapAdapterCreate(MA, { zoom: 10 });
-        if (mapAdapter.setView) {
-          mapAdapter.setView([104, 52]);
+        const map = await mapAdapterCreate(MA, { zoom: 10 });
+        if (map.setView) {
+          map.setView([104, 52]);
           await asyncTimeout(100);
-          const center = mapAdapter.getCenter() as LngLatArray;
-          expect(mapAdapter.getZoom()).to.equal(10);
+          const center = map.getCenter() as LngLatArray;
+          expect(map.getZoom()).to.equal(10);
           expect(center.map(Math.round)).to.eql([104, 52].map(Math.round));
         } else {
           expect(1).to.be.ok;
         }
+      });
+    });
+
+    describe('#fitBounds', () => {
+      const bounds = [102, 51, 104, 53];
+      const boundsCenter = [103, 52];
+
+      it('The center of the map should be correct', async () => {
+        const map = await mapAdapterCreate(MA, { zoom: 9 });
+        map.fitBounds(bounds);
+        const center = map.getCenter() as LngLatArray;
+        expect(center.map(Math.round)).to.eql(boundsCenter);
+      });
+
+      it('The map zoom should be correct', async () => {
+        const map = await mapAdapterCreate(MA, { zoom: 9 });
+        map.fitBounds(bounds);
+        const zoom = map.getZoom() as number;
+        expect(Math.round(zoom)).to.eql(8);
+      });
+
+      it('Snaps zoom level to integer by default', done => {
+        mapAdapterCreate(MA, { zoom: 21 }).then(map => {
+          (map as WebMap).emitter.on('zoomend', () => {
+            expect(Math.round(map.getZoom() as number)).to.eql(8);
+            const center = map.getCenter() as LngLatArray;
+            expect(center.map(Math.round)).to.eql(boundsCenter);
+            done();
+          });
+          map.fitBounds(bounds);
+        });
       });
     });
   });
