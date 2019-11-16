@@ -11,10 +11,10 @@ import {
   LayerAdapter,
   LngLatArray,
   LngLatBoundsArray,
-  WebMapEvents,
   LocateOptions,
   LocationEvents,
-  Locate
+  Locate,
+  BaseMapEvents
 } from '@nextgis/webmap';
 import L, { Map, Control, Layer, ControlPosition, LeafletMouseEvent, GridLayer } from 'leaflet';
 import { EventEmitter } from 'events';
@@ -52,7 +52,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   emitter = new EventEmitter();
   map?: Map;
 
-  private _universalEvents: Array<keyof WebMapEvents> = [
+  private _universalEvents: Array<keyof BaseMapEvents> = [
     'zoomstart',
     'zoom',
     'zoomend',
@@ -72,10 +72,10 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
         minZoom,
         zoom
       });
-      this.emitter.emit('create', this);
       // create default pane
       const defPane = this.map.createPane('order-0');
       defPane.style.zIndex = String(0);
+      this.emitter.emit('create', this);
       this._addMapListeners();
     }
   }
@@ -142,7 +142,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   }
 
   // [west, south, east, north]
-  fit(e: LngLatBoundsArray) {
+  fitBounds(e: LngLatBoundsArray) {
     if (this.map) {
       // top, left, bottom, right
       this.map.fitBounds([

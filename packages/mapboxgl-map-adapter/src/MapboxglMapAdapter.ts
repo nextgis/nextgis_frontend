@@ -83,65 +83,68 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
 
   // create(options: MapOptions = {target: 'map'}) {
   create(options: MapboxglMapAdapterOptions) {
-    if (!this.map) {
-      this.options = options;
-      if (options.accessToken) {
-        mapboxgl.accessToken = options.accessToken;
-      }
-      if (options.target) {
-        const mapOpt: MapboxOptions = {
-          container: options.target,
-          attributionControl: false,
-          // @ts-ignore
-          bounds: options.bounds,
-          fitBoundsOptions: { ...options.fitOptions, ...fitBoundsOptions },
-          transformRequest: (url: string, resourceType: ResourceType) => {
-            const transformed = this._transformRequest(url, resourceType);
-            if (transformed) {
-              return transformed;
-            } else {
-              return {
-                url
-              };
+    return new Promise((resolve, reject) => {
+      if (!this.map) {
+        this.options = options;
+        if (options.accessToken) {
+          mapboxgl.accessToken = options.accessToken;
+        }
+        if (options.target) {
+          const mapOpt: MapboxOptions = {
+            container: options.target,
+            attributionControl: false,
+            // @ts-ignore
+            bounds: options.bounds,
+            fitBoundsOptions: { ...options.fitOptions, ...fitBoundsOptions },
+            transformRequest: (url: string, resourceType: ResourceType) => {
+              const transformed = this._transformRequest(url, resourceType);
+              if (transformed) {
+                return transformed;
+              } else {
+                return {
+                  url
+                };
+              }
             }
-          }
-        };
-        if (typeof options.style === 'string') {
-          mapOpt.style = options.style;
-        } else {
-          mapOpt.style = {
-            ...{
-              version: 8,
-              name: 'Empty style',
-              sources: {},
-              layers: []
-            },
-            ...options.style
           };
-        }
-        if (options.center !== undefined) {
-          mapOpt.center = options.center;
-        }
-        if (options.zoom !== undefined) {
-          mapOpt.zoom = options.zoom - 1;
-        }
-        if (options.maxZoom) {
-          mapOpt.maxZoom = options.maxZoom - 1;
-        }
-        if (options.minZoom) {
-          mapOpt.minZoom = options.minZoom - 1;
-        }
-        this.map = new Map(mapOpt);
-        // @ts-ignore
-        this.map.transformRequests = [];
+          if (typeof options.style === 'string') {
+            mapOpt.style = options.style;
+          } else {
+            mapOpt.style = {
+              ...{
+                version: 8,
+                name: 'Empty style',
+                sources: {},
+                layers: []
+              },
+              ...options.style
+            };
+          }
+          if (options.center !== undefined) {
+            mapOpt.center = options.center;
+          }
+          if (options.zoom !== undefined) {
+            mapOpt.zoom = options.zoom - 1;
+          }
+          if (options.maxZoom) {
+            mapOpt.maxZoom = options.maxZoom - 1;
+          }
+          if (options.minZoom) {
+            mapOpt.minZoom = options.minZoom - 1;
+          }
+          this.map = new Map(mapOpt);
+          // @ts-ignore
+          this.map.transformRequests = [];
 
-        this._addEventsListeners();
-        this.isLoaded = true;
-        this.map.once('load', () => {
-          this.emitter.emit('create', this);
-        });
+          this.map.once('load', () => {
+            this.isLoaded = true;
+            this.emitter.emit('create', this);
+            resolve(this);
+          });
+          this._addEventsListeners();
+        }
       }
-    }
+    });
   }
 
   destroy() {
@@ -191,13 +194,19 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   }
 
   // [extent_left, extent_bottom, extent_right, extent_top];
-  fit(e: LngLatBoundsArray, options: FitOptions = {}): void {
+  fitBounds(e: LngLatBoundsArray, options: FitOptions = {}): void {
     if (this.map) {
-      this.map.fitBounds([[e[0], e[1]], [e[2], e[3]]], {
-        linear: true,
-        ...options,
-        ...fitBoundsOptions
-      });
+      this.map.fitBounds(
+        [
+          [e[0], e[1]],
+          [e[2], e[3]]
+        ],
+        {
+          linear: true,
+          ...options,
+          ...fitBoundsOptions
+        }
+      );
     }
   }
 

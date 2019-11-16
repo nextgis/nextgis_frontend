@@ -1,7 +1,6 @@
 import { expect } from 'chai';
-import { MapAdapter, Type, MapOptions, LngLatArray } from '../../../packages/webmap/src';
+import { MapAdapter, Type, MapOptions } from '../../../packages/webmap/src';
 import { mapHtml } from '../mapHtml';
-import asyncTimeout from '../utils/asyncTimeout';
 import { baseMapTests } from './baseMapTests';
 
 const mapAdapterCreate = async (MA: Type<MapAdapter>, opt?: MapOptions): Promise<MapAdapter> => {

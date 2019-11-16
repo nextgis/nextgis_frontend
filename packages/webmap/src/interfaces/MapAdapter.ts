@@ -1,7 +1,7 @@
 /**
  * @module webmap
  */
-
+import StrictEventEmitter from 'strict-event-emitter-types';
 import { LayerAdapter } from './LayerAdapter';
 import { Type, ZoomLevel } from './BaseTypes';
 import { EventEmitter } from 'events';
@@ -14,6 +14,7 @@ import {
 } from './MapControl';
 import { MapOptions } from './WebMapApp';
 import { LatLng, LngLatArray, LngLatBoundsArray, Pixel } from './BaseTypes';
+import { MapAdapterEvents } from './Events';
 
 /**
  * Parameters passed to the arguments of the callback function when clicking on the map
@@ -89,7 +90,7 @@ export interface MapAdapter<M = any, L = any, C = any> {
   /**
    * An instance of the EventEmitter class for listen and emit events
    */
-  emitter: EventEmitter;
+  readonly emitter: StrictEventEmitter<EventEmitter, MapAdapterEvents>;
   /**
    * Named adapters for map layers through a generic interface.
    */
@@ -119,7 +120,9 @@ export interface MapAdapter<M = any, L = any, C = any> {
   hideLayer(layer: L): void;
   setLayerOrder(layer: L, order: number, layers?: { [name: string]: LayerAdapter }): void;
 
-  fit(extent: LngLatBoundsArray, options?: FitOptions): void;
+  /** @deprecated use fitBounds instead */
+  fit?(extent: LngLatBoundsArray, options?: FitOptions): void;
+  fitBounds(extent: LngLatBoundsArray, options?: FitOptions): void;
   // setRotation?(angle: number): void;
   setView?(lngLat: LngLatArray, zoom?: number): void;
 

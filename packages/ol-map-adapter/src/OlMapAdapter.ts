@@ -82,7 +82,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
   private _forEachFeatureAtPixel: ForEachFeatureAtPixelCallback[] = [];
   private _olView?: View;
   private _panelControl?: PanelControl;
-
+  private _isLoaded = false;
   private _positionMem: { [key in 'movestart' | 'moveend']?: PositionMem } = {};
 
   create(options: MapOptions) {
@@ -118,7 +118,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
 
     this.emitter.emit('create', this);
     this._olView = this.map.getView();
-
+    this._isLoaded = true;
     this._addMapListeners();
   }
 
@@ -168,10 +168,12 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     }
   }
 
-  fit(e: LngLatBoundsArray) {
+  fitBounds(e: LngLatBoundsArray) {
     if (this._olView) {
+      const zoom = this.getZoom();
       const toExtent = transformExtent(e, this.lonlatProjection, this.displayProjection);
       this._olView.fit(toExtent);
+      this._emitMoveEndEvents({ zoom });
     }
   }
 
@@ -278,6 +280,15 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
   //     );
   //   }
   // }
+
+  private _emitMoveEndEvents(from: { zoom: number | undefined }) {
+    if (this._isLoaded) {
+      const zoom = this.getZoom();
+      if (from.zoom !== zoom) {
+        this.emitter.emit('zoomend');
+      }
+    }
+  }
 
   private _addMapListeners() {
     const map = this.map;

@@ -75,8 +75,12 @@ export class FakeMapAdapter<M = any, L = any, C extends any = any> implements MA
     //
   }
 
-  fit(extent: LngLatBoundsArray, options?: FitOptions): void {
-    //
+  fitBounds(e: LngLatBoundsArray, options?: FitOptions): void {
+    this.options.center = [e[2] - (e[2] - e[0]) / 2, e[3] - (e[3] - e[1]) / 2];
+    this.options.zoom = 8; // for [102, 51, 104, 53]
+    this.emitter.emit('zoomstart');
+    this.emitter.emit('zoom');
+    this.emitter.emit('zoomend');
   }
 
   setView(lngLat: LngLatArray, zoom?: number): void {
