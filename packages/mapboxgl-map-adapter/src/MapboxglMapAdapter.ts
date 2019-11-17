@@ -37,7 +37,7 @@ export type TLayer = string[];
 type TLayerAdapter = LayerAdapter<Map, TLayer>;
 
 const fitBoundsOptions: FitOptions = {
-  padding: 100
+  // padding: 100
 };
 
 export interface MapboxglMapAdapterOptions extends MapOptions {
