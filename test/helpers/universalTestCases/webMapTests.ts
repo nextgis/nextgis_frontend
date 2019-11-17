@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import { mapHtml } from '../mapHtml';
 import { MapAdapter, AppOptions, Type, MapOptions } from '../../../packages/webmap/src';
 import { WebMap } from '../../../packages/webmap/src/WebMap';
-import { baseMapTests } from './baseMapTests';
+import { baseMapTests, MapAdapterCreateOptions } from './baseMapTests';
 
 export const webMapTests = (MA: Type<MapAdapter>) => {
   const adapterName = MA.name;
@@ -11,9 +11,13 @@ export const webMapTests = (MA: Type<MapAdapter>) => {
     return new WebMap({ mapAdapter: new MA(), ...options });
   };
 
-  const buildWebMap = (mapOptions: MapOptions, options?: AppOptions): Promise<WebMap> => {
-    const webMap = createWebMap(options);
-    return webMap.create({ target: 'map', ...mapOptions });
+  const buildWebMap = async (
+    mapOptions: MapOptions,
+    appOpt?: AppOptions,
+    opt?: MapAdapterCreateOptions
+  ): Promise<WebMap> => {
+    const webMap = createWebMap(appOpt);
+    return opt && opt.noCreate ? webMap : webMap.create({ target: 'map', ...mapOptions });
   };
 
   describe(`WebMap with ${adapterName}.`, () => {
@@ -42,5 +46,11 @@ export const webMapTests = (MA: Type<MapAdapter>) => {
     });
 
     baseMapTests(MA, (MA: Type<MapAdapter>, opt: MapOptions = {}) => buildWebMap(opt));
+
+    it('returns undefined if map not initialized but layers added', async () => {
+      const map = await buildWebMap({}, undefined, { noCreate: true });
+      map.addLayer('TILE', { url: 'file:///dev/null' });
+      expect(map.getZoom()).to.be.undefined;
+    });
   });
 };
