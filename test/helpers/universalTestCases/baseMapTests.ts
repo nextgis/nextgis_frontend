@@ -7,9 +7,17 @@ import { MapAdapter, Type, MapOptions, LngLatArray, WebMap } from '../../../pack
 import { mapHtml } from '../mapHtml';
 import asyncTimeout from '../utils/asyncTimeout';
 
+export interface MapAdapterCreateOptions {
+  noCreate?: boolean;
+}
+
 export const baseMapTests = (
   MA: Type<MapAdapter>,
-  mapAdapterCreate: (MA: Type<MapAdapter>, opt?: MapOptions) => Promise<MapAdapter | WebMap>
+  mapAdapterCreate: (
+    MA: Type<MapAdapter>,
+    opt?: MapOptions,
+    param?: MapAdapterCreateOptions
+  ) => Promise<MapAdapter | WebMap>
 ) => {
   // let map: MapAdapter;
   beforeEach(() => {
@@ -99,6 +107,13 @@ export const baseMapTests = (
           });
           map.fitBounds(bounds);
         });
+      });
+    });
+
+    describe('#getZoom', () => {
+      it('returns undefined if map not initialized', async () => {
+        const map = await mapAdapterCreate(MA, {}, { noCreate: true });
+        expect(map.getZoom()).to.be.undefined;
       });
     });
   });
