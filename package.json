@@ -28,6 +28,8 @@
     "ts-loader": "^6.2.1",
     "typedoc": "^0.15.2",
     "typescript": "^3.7.2",
+    "@types/sinon": "^7.5.0",
+    "typedoc-plugin-external-module-name": "^2.1.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
   },
@@ -48,7 +50,5 @@
   "workspaces": [
     "packages/*"
   ],
-  "dependencies": {
-    "typedoc-plugin-external-module-name": "^2.1.0"
-  }
+  "dependencies": {}
 }
