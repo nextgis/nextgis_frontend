@@ -194,7 +194,6 @@ export class WebMapLayers<
     }
     if (adapterEngine !== undefined) {
       const _adapter = new adapterEngine(this.mapAdapter.map, options);
-
       if (_adapter.options.baseLayer) {
         options.baseLayer = true;
         options.order = 0;
@@ -207,7 +206,6 @@ export class WebMapLayers<
       this.emitter.emit('layer:preadd', _adapter);
       await this.onMapLoad();
       const layer = await _adapter.addLayer(options);
-
       // checking that the original layer was inserted into the adapter anyway
       _adapter.layer = layer;
       // think about how to move `id` to the adapter's constructor,
