@@ -20,7 +20,7 @@ import {
 import { MapOptions } from '../../../packages/webmap/src/interfaces/WebMapApp';
 import { LngLatArray, LngLatBoundsArray } from '../../../packages/webmap/src/interfaces/BaseTypes';
 
-export class FakeMapAdapter<M = any, L = any, C extends any = any> implements MA {
+export class FakeMapAdapter<M extends any = {}, L = any, C extends any = any> implements MA {
   // isLoaded?: boolean = true;
   map?: M;
   emitter = new EventEmitter();
@@ -46,7 +46,7 @@ export class FakeMapAdapter<M = any, L = any, C extends any = any> implements MA
     if (this._container) {
       this._container.innerHTML = '<div></div>';
     }
-
+    this.map = {} as any;
     this.emitter.emit('create');
   }
 
