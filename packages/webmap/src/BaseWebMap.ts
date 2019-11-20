@@ -22,7 +22,7 @@ import { Keys } from './components/keys/Keys';
 
 import StrictEventEmitter from 'strict-event-emitter-types';
 import { EventEmitter } from 'events';
-import { WebMapEvents, MapAdapterEvents } from './interfaces/Events';
+import { WebMapEvents, MapAdapterEvents, BaseMapEvents } from './interfaces/Events';
 
 import { onLoad } from './util/decorators';
 import { propertiesFilter } from './util/propertiesFilter';
@@ -425,7 +425,7 @@ export class BaseWebMap<M = any, L = any, C = any, E extends WebMapEvents = WebM
   }
 
   private _addEventsListeners(): void {
-    const events: Array<keyof MapAdapterEvents> = [
+    const events: Array<keyof BaseMapEvents> = [
       'click',
       'zoomstart',
       'zoom',

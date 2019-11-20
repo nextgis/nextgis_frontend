@@ -66,6 +66,10 @@ export interface LocateOptions {
   // enableHighAccuracy?: boolean;
 }
 
+export interface DataLoadError {
+  target: string;
+}
+
 export interface LocationEvents {
   locationfound: (e: LocationEvent) => void;
   locationerror?: () => void;

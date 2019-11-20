@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import Vue, { CreateElement, VNode, VNodeData } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import { findNgwMapParent, propsBinder } from '../utils';
@@ -11,7 +11,7 @@ export class VueNgwControl extends Vue {
   name = 'vue-ngw-control';
 
   @Prop({ type: String }) position!: NgwLayerAdapterType;
-  @Prop({ type: Object }) controlOptions!: CreateControlOptions;
+  @Prop({ type: Object, default: () => ({}) }) controlOptions!: CreateControlOptions;
 
   parentContainer!: VueNgwMap;
 
@@ -56,8 +56,20 @@ export class VueNgwControl extends Vue {
     });
   }
 
-  render() {
-    return null;
+  render(h: CreateElement): VNode {
+    const staticStyle: { [param: string]: string } = {
+      zIndex: '0'
+    };
+
+    const data: VNodeData = {
+      staticClass: 'vue-ngw-control',
+      staticStyle,
+      // 'class': this.classes,
+      attrs: { 'data-app': true }
+      // domProps: { id: this.id }
+    };
+
+    return h('div', data, this.$slots.default);
   }
 }
 
