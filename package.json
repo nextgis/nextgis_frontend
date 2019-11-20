@@ -40,7 +40,7 @@
     "build": "lerna run build",
     "prod": "lerna run prod",
     "prod_script": "node ./webpack.conf.js",
-    "demo": "yarn run examples && cd ./packages/demo/ && yarn run prod",
+    "demo": "yarn run examples && cd ./packages/demo/ && yarn run build",
     "examples": "node ./build/updateExamples.js",
     "test": "npm run karma -- --single-run --coverage",
     "karma": "karma start test/karma.conf.js",
