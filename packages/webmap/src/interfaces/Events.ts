@@ -3,7 +3,7 @@
  */
 
 import { WebMap } from '../WebMap';
-import { MapAdapter, MapClickEvent } from './MapAdapter';
+import { MapAdapter, MapClickEvent, DataLoadError } from './MapAdapter';
 import { LayerAdapter, OnLayerClickOptions } from './LayerAdapter';
 
 export interface WebMapEvents extends BaseMapEvents {
@@ -32,6 +32,10 @@ export interface WebMapEvents extends BaseMapEvents {
 }
 
 export interface MapAdapterEvents extends BaseMapEvents {
+  /** @event */
+  'data-loaded': DataLoadError;
+  /** @event */
+  'data-error': DataLoadError;
   /** @event */
   create: MapAdapter;
 }
