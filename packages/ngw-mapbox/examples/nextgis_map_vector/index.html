@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Webmap identification</title>
+  <title>Ngw Layer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     * {
@@ -20,20 +20,23 @@
     }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.6.9/core.min.js"></script>
-  <script src="../../../ngw-leaflet/lib/ngw-leaflet.js"></script>
+  <!-- <script src="https://unpkg.com/@nextgis/ngw-mapbox"></script> -->
+  <script src="../../lib/ngw-mapbox.js"></script>
 </head>
 
 <body>
   <div id='map'></div>
   <script>
-
     var ngwMap = new NgwMap({
       baseUrl: 'https://demo.nextgis.com',
       target: 'map',
       qmsId: 487,
-      resources: [{ resourceId: 4226, fit: true, selectable: true }]
     });
-    ngwMap.emitter.on('ngw:select', function (e) { console.log(e) })
+    ngwMap.addNgwLayer({
+      resourceId: 4005
+    }).then(function (layer) {
+      ngwMap.zoomToLayer(layer);
+    });
   </script>
 </body>
 
