@@ -400,7 +400,7 @@ export class BaseWebMap<M = any, L = any, C = any, E extends WebMapEvents = WebM
     const { center, zoom, bounds } = this.options;
     if (this._extent) {
       this.fitBounds(this._extent);
-    } else if (center && bounds) {
+    } else if (center && zoom) {
       this.setView(center, zoom);
     } else if (bounds) {
       this.fitBounds(bounds);

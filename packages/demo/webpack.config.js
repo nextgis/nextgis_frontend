@@ -4,20 +4,20 @@ const { VueLoaderPlugin } = require('vue-loader');
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const generateExamples = require('./scripts/generateExamplesScheme');
-const utils = require('../../build/utils');
+// const utils = require('../../build/utils');
 
 const entry = './src/index.ts';
 
 const ASSET_PATH = process.env.ASSET_PATH || '/';
 
 const sassLoaderOptions = {
-  implementation: require('sass'),
-  indentedSyntax: true // optional
+  implementation: require('sass')
+  // indentedSyntax: true // optional
 };
 
 try {
-  const Fiber = require('fibers');
-  sassLoaderOptions.fiber = Fiber;
+  // const Fiber = require('fibers');
+  // sassLoaderOptions.fiber = Fiber;
 } catch (er) {
   // ignore
 }
