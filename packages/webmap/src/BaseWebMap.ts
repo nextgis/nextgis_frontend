@@ -22,7 +22,7 @@ import { Keys } from './components/keys/Keys';
 
 import StrictEventEmitter from 'strict-event-emitter-types';
 import { EventEmitter } from 'events';
-import { WebMapEvents, MapAdapterEvents, BaseMapEvents } from './interfaces/Events';
+import { WebMapEvents, BaseMapEvents } from './interfaces/Events';
 
 import { onLoad } from './util/decorators';
 import { propertiesFilter } from './util/propertiesFilter';
@@ -366,7 +366,7 @@ export class BaseWebMap<M = any, L = any, C = any, E extends WebMapEvents = WebM
     if (this.mapAdapter && this.mapAdapter.locate) {
       return this.mapAdapter.locate(opt, events);
     }
-    const stop = () => {};
+    const stop = () => ({});
     return { stop };
   }
 
