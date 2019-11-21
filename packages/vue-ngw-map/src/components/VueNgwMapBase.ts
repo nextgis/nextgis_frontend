@@ -55,3 +55,5 @@ export class VueNgwMapBase extends Vue {
     this.ready = true;
   }
 }
+
+export default VueNgwMapBase;

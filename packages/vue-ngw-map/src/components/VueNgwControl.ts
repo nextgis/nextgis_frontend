@@ -1,21 +1,23 @@
 import Vue, { CreateElement, VNode, VNodeData } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
+import { MapControl, CreateControlOptions, ControlPositions } from '@nextgis/webmap';
 import { findNgwMapParent, propsBinder } from '../utils';
-import { NgwLayerAdapterType } from '@nextgis/ngw-kit';
-import { VueNgwMap } from './VueNgwMap';
-import { MapControl, CreateControlOptions } from '@nextgis/webmap';
+import VueNgwMap from './VueNgwMapBase';
 
 @Component
 export class VueNgwControl extends Vue {
   name = 'vue-ngw-control';
 
-  @Prop({ type: String }) position!: NgwLayerAdapterType;
+  @Prop({ type: String }) position!: ControlPositions;
+  @Prop({ type: Boolean }) bar!: boolean;
+  @Prop({ type: Boolean }) margin!: boolean;
+  @Prop({ type: String }) addClass!: string;
   @Prop({ type: Object, default: () => ({}) }) controlOptions!: CreateControlOptions;
 
   parentContainer!: VueNgwMap;
 
-  control?: MapControl;
+  control?: unknown;
 
   beforeDestroy() {
     if (this.parentContainer.ngwMap && this.control) {
@@ -31,7 +33,10 @@ export class VueNgwControl extends Vue {
       if (control) {
         ngwMap.removeControl(control);
       }
-      const adcontrolOptions: CreateControlOptions = { ...this.$props.controlOptions };
+      const adcontrolOptions: CreateControlOptions = {
+        ...this.$props,
+        ...this.$props.controlOptions
+      };
       const controlObject: MapControl = {
         onAdd: () => {
           return element;
@@ -40,7 +45,8 @@ export class VueNgwControl extends Vue {
           // ignore
         }
       };
-      this.control = await ngwMap.createControl(controlObject, adcontrolOptions);
+      const _control = await ngwMap.createControl(controlObject, adcontrolOptions);
+      this.control = ngwMap.addControl(_control, this.position);
     }
   }
 
@@ -58,7 +64,7 @@ export class VueNgwControl extends Vue {
 
   render(h: CreateElement): VNode {
     const staticStyle: { [param: string]: string } = {
-      zIndex: '0'
+      // zIndex: '0'
     };
 
     const data: VNodeData = {
