@@ -466,6 +466,8 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<M, L, C, N
   }
 
   private async _selectFromNgwRaster(ev: MapClickEvent) {
+    this._emitStatusEvent('ngw:preselect');
+
     const promises: Promise<number[] | undefined>[] = [];
     for (const nl in this._ngwLayers) {
       const layer = this._ngwLayers[nl].layer;
@@ -480,31 +482,37 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<M, L, C, N
         x.forEach(y => ids.push(y));
       }
     });
-    if (ids.length) {
-      const pixelRadius = this.options.pixelRadius || 10;
-      const center = this.getCenter();
-      const zoom = this.getZoom();
-      if (center && zoom) {
-        const metresPerPixel =
-          (40075016.686 * Math.abs(Math.cos((center[1] * 180) / Math.PI))) / Math.pow(2, zoom + 8);
-        // FIXME: understand the circle creation function
-        const radius = pixelRadius * metresPerPixel * 0.0005;
-        return NgwKit.utils
-          .sendIdentifyRequest(ev, {
-            layers: ids,
-            connector: this.connector,
-            radius
-          })
-          .then(resp => {
-            this._emitStatusEvent('ngw:select', {
-              ...resp,
-              resources: ids,
-              sourceType: 'raster',
-              event: ev
-            });
-            return resp;
-          });
-      }
+
+    if (!ids.length) {
+      this._emitStatusEvent('ngw:select', null);
+      return;
     }
+
+    const pixelRadius = this.options.pixelRadius || 10;
+    const center = this.getCenter();
+    const zoom = this.getZoom();
+    if (!center || !zoom) {
+      this._emitStatusEvent('ngw:select', null);
+      return;
+    }
+    const metresPerPixel =
+      (40075016.686 * Math.abs(Math.cos((center[1] * 180) / Math.PI))) / Math.pow(2, zoom + 8);
+    // FIXME: understand the circle creation function
+    const radius = pixelRadius * metresPerPixel * 0.0005;
+    return NgwKit.utils
+      .sendIdentifyRequest(ev, {
+        layers: ids,
+        connector: this.connector,
+        radius
+      })
+      .then(resp => {
+        this._emitStatusEvent('ngw:select', {
+          ...resp,
+          resources: ids,
+          sourceType: 'raster',
+          event: ev
+        });
+        return resp;
+      });
   }
 }
