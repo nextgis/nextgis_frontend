@@ -434,7 +434,6 @@ export class BaseWebMap<M = any, L = any, C = any, E extends WebMapEvents = WebM
       'move',
       'moveend'
     ];
-
     events.forEach(x => {
       this._mapEvents[x] = data => {
         if (this.runtimeParams.length) {
@@ -446,7 +445,9 @@ export class BaseWebMap<M = any, L = any, C = any, E extends WebMapEvents = WebM
             });
           }
         }
-        if (this._eventsStatus) this.emitter.emit(x, data);
+        if (this._eventsStatus) {
+          this.emitter.emit(x, data);
+        }
       };
       this.mapAdapter.emitter.on(x, this._mapEvents[x]);
     });
