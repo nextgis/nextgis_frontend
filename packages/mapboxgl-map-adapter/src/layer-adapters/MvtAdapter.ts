@@ -35,9 +35,11 @@ const reversOperations: { [key in Operations]: string } = {
   ilike: operationsAliases.ne
 };
 
-const SOURCES: string[] = [];
-
 export class MvtAdapter extends VectorAdapter<MvtAdapterOptions> {
+  static sources: string[] = [];
+
+  source?: string;
+
   select(properties: PropertiesFilter) {
     if (typeof properties !== 'function') {
       this._updateFilter(properties);
@@ -58,13 +60,14 @@ export class MvtAdapter extends VectorAdapter<MvtAdapterOptions> {
   }
 
   protected _getAdditionalLayerOptions() {
-    const exist = SOURCES.includes(this.options.url);
+    const exist = MvtAdapter.sources.includes(this.options.url);
     if (!exist) {
       this.map.addSource(this.options.url, {
         type: 'vector',
         tiles: [this.options.url]
       });
-      SOURCES.push(this.options.url);
+      this.source = this.options.url;
+      MvtAdapter.sources.push(this.options.url);
     }
     const mvtLayerOptions: Partial<mapboxgl.Layer> = {
       source: this.options.url,

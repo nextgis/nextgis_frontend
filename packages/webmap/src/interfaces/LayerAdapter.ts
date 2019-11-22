@@ -329,6 +329,7 @@ export interface VectorLayerAdapter<
   F extends Feature = Feature
 > extends BaseLayerAdapter<M, L, O> {
   selected?: boolean;
+  source?: unknown;
 
   getLayers?(): Array<LayerDefinition<F, L>>;
 
