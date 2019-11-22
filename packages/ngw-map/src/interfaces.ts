@@ -127,7 +127,8 @@ export interface NgwMapOptions<C = any> extends MapOptions {
 export interface NgwMapEvents extends WebMapEvents {
   'controls:create': any;
   'ngw-map:create': NgwMap;
-  'ngw:select': NgwIdentify;
+  'ngw:select': NgwIdentify | null;
+  'ngw:preselect': void;
 }
 
 export interface NgwLayersMem {
