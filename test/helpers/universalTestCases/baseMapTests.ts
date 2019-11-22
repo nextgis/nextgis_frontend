@@ -94,13 +94,13 @@ export const baseMapTests = (
         const map = await mapAdapterCreate(MA, { zoom: 9 });
         map.fitBounds(bounds);
         const zoom = map.getZoom() as number;
-        expect(Math.round(zoom)).to.eql(8);
+        expect(Math.floor(zoom)).to.eql(8);
       });
 
       it('Snaps zoom level to integer by default', done => {
         mapAdapterCreate(MA, { zoom: 21 }).then(map => {
-          (map as WebMap).emitter.on('zoomend', () => {
-            expect(Math.round(map.getZoom() as number)).to.eql(8);
+          (map as WebMap).emitter.once('zoomend', () => {
+            expect(Math.floor(map.getZoom() as number)).to.eql(8);
             const center = map.getCenter() as LngLatArray;
             expect(center.map(Math.round)).to.eql(boundsCenter);
             done();
