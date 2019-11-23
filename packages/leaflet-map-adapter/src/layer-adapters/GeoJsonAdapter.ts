@@ -301,11 +301,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
       ];
       const aliases: Array<[keyof PathOptions, keyof PathPaint]> =
         this.type === 'line'
-          ? [
-              ['color', 'strokeColor'],
-              ['opacity', 'strokeOpacity'],
-              ['weight', 'weight']
-            ]
+          ? [['color', 'strokeColor'], ['opacity', 'strokeOpacity'], ['weight', 'weight']]
           : paintAliases;
 
       const readyPaint: PathOptions & CircleMarkerOptions = {};
