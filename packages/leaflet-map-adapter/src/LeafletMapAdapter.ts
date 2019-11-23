@@ -146,10 +146,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   fitBounds(e: LngLatBoundsArray) {
     if (this.map) {
       // top, left, bottom, right
-      this.map.fitBounds([
-        [e[3], e[0]],
-        [e[1], e[2]]
-      ]);
+      this.map.fitBounds([[e[3], e[0]], [e[1], e[2]]]);
     }
   }
 
