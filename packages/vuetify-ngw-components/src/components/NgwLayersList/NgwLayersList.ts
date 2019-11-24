@@ -146,7 +146,7 @@ export class NgwLayersList extends Vue {
     const webMapLayer = layer as WebMapLayerAdapter;
     if (webMap && webMapLayer.layer) {
       const children = webMapLayer.layer.tree.getChildren() as WebMapLayerItem[];
-      item.children = this._createWebMapTree(children);
+      item.children = this._createWebMapTree(children).reverse();
       visible = true;
     } else {
       visible = this.ngwMap.isLayerVisible(layer);
