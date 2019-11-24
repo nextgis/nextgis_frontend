@@ -1,12 +1,10 @@
+import { Geometry, GeoJsonProperties, Feature } from 'geojson';
 import { VuexModule, Mutation, Action, Module } from 'vuex-module-decorators';
 import { Store } from 'vuex';
 import { FeatureItem } from '@nextgis/ngw-connector';
-
 import NgwConnector, { ResourceStoreItem, FeatureLayerField } from '@nextgis/ngw-connector';
-
-import { LookupTables, ForeignResource, PatchOptions } from '../../interfaces';
 import { Type } from '@nextgis/webmap';
-import { Geometry, GeoJsonProperties, Feature } from 'geojson';
+import { LookupTables, ForeignResource, PatchOptions } from '../../interfaces';
 
 type KeyName = string;
 
