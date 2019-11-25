@@ -243,7 +243,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     if (this._sortTimerId) {
       window.clearTimeout(this._sortTimerId);
     }
-    this._sortTimerId = window.setTimeout(() => this._setLayerOrder(layers), 0);
+    this._sortTimerId = window.setTimeout(() => this._setLayerOrder(layers));
   }
 
   setLayerOpacity(layerIds: string[], opacity: number): void {
