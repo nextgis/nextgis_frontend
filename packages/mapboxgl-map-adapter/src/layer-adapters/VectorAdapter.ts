@@ -238,7 +238,7 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
     } else {
       mType = type;
     }
-
+    const layout = (this.options.layout || {}) as mapboxgl.AnyLayout;
     const layerOpt: mapboxgl.Layer = {
       id: name,
       type: mType,
@@ -246,7 +246,8 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
       minzoom: this.options.minZoom,
       maxzoom: this.options.maxZoom,
       layout: {
-        visibility: 'none'
+        visibility: 'none',
+        ...layout
       },
       ...this._getAdditionalLayerOptions()
     };
