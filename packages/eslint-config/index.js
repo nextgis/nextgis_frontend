@@ -19,6 +19,16 @@ module.exports = {
   },
   plugins: ['@typescript-eslint/eslint-plugin', 'prettier'],
   rules: {
+    // 'comma-dangle': [
+    //   'error',
+    //   {
+    //     arrays: 'ignore',
+    //     objects: 'ignore',
+    //     imports: 'never',
+    //     exports: 'never',
+    //     functions: 'never',
+    //   }
+    // ],
     'prefer-const': 2,
     indent: 'off',
     'no-useless-catch': 'off',

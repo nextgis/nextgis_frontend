@@ -41,7 +41,7 @@ const fitBoundsOptions: FitOptions = {
 };
 
 export interface MapboxglMapAdapterOptions extends MapOptions {
-  style?: mapboxgl.Style | string;
+  style?: Partial<mapboxgl.Style> | string;
   accessToken?: string;
 }
 
@@ -252,7 +252,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
       layerIds.forEach(layerId => {
         this._onMapLoad().then(() => {
           const layer = _map.getLayer(layerId);
-          if (layer) {
+          if (layer && layer.type !== 'symbol') {
             _map.setPaintProperty(layerId, layer.type + '-opacity', opacity);
           }
         });
