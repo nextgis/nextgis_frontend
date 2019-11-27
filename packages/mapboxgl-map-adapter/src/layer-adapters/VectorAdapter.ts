@@ -54,7 +54,9 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
 
   constructor(public map: Map, public options: O) {
     super(map, options);
-    this._sourceId = `source-${this._layerId}`;
+    this._sourceId = this.options.source
+      ? (this.options.source as string)
+      : `source-${this._layerId}`;
     this._selectionName = this._layerId + '-highlighted';
     this.$onLayerClick = this._onLayerClick.bind(this);
   }
@@ -84,11 +86,10 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
           this.layer.push(layer);
           if (options.selectedPaint) {
             const selectionLayer = this._getSelectionLayerNameFromType(t);
-            await this._addLayer(
-              selectionLayer,
-              type,
-              ['all', geomFilter, ['in', this.featureIdName, '']].filter(x => x)
-            );
+            await this._addLayer(selectionLayer, type, [
+              geomFilter,
+              ['in', this.featureIdName, '']
+            ]);
             this.layer.push(selectionLayer);
           }
         }
@@ -231,7 +232,7 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
     return {};
   }
 
-  protected async _addLayer(name: string, type: VectorAdapterLayerType, filter?: any) {
+  protected async _addLayer(name: string, type: VectorAdapterLayerType, filter?: any[]) {
     let mType: MapboxLayerType;
     if (type === 'icon') {
       mType = 'symbol';
@@ -251,8 +252,10 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
       },
       ...this._getAdditionalLayerOptions()
     };
-    if (filter) {
-      layerOpt.filter = filter;
+    const filters = ['all', ...(filter || []), this.options.nativeFilter].filter(x => x);
+
+    if (filters.length > 1) {
+      layerOpt.filter = filters;
     }
 
     this.map.addLayer(layerOpt);
