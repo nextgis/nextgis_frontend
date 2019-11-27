@@ -195,6 +195,17 @@ export interface VectorAdapterOptions<F extends Feature = Feature, L = any> exte
   filter?: DataLayerFilter;
   propertiesFilter?: PropertiesFilter;
 
+  cluster?: boolean;
+  /**
+   * Max zoom to cluster points on
+   */
+  clusterMaxZoom?: number;
+  /**
+   * Radius of each cluster when clustering points
+   * @defaults 50
+   */
+  clusterRadius?: number;
+
   labelField?: string;
   label?: (e: LayerDefinition<F, L>) => void | string;
 
