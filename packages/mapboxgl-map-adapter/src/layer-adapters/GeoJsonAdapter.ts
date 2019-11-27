@@ -1,6 +1,7 @@
 /**
  * @module mapboxgl-map-adapter
  */
+import { Map, GeoJSONSource } from 'mapbox-gl';
 import {
   GeoJsonAdapterOptions,
   VectorAdapterLayerType,
@@ -10,8 +11,6 @@ import {
   LayerDefinition
 } from '@nextgis/webmap';
 import { GeoJsonObject, FeatureCollection, GeometryCollection, GeometryObject } from 'geojson';
-import { GeoJSONSource } from 'mapbox-gl';
-
 import { TLayer } from '../MapboxglMapAdapter';
 import { VectorAdapter, Feature } from './VectorAdapter';
 import { detectType, typeAlias, typeAliasForFilter, geometryFilter } from '../util/geom_type';
@@ -20,10 +19,16 @@ let ID = 0;
 
 export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   selected = false;
+  source?: string;
   protected featureIdName = '_rendromId';
   private _features: Feature[] = [];
   private _filteredFeatureIds: string[] = [];
   private _filterFun?: DataLayerFilter<Feature>;
+
+  constructor(public map: Map, public options: GeoJsonAdapterOptions) {
+    super(map, options);
+    this.source = this._sourceId;
+  }
 
   async addLayer(options: GeoJsonAdapterOptions): Promise<TLayer> {
     const layer = await super.addLayer(options);

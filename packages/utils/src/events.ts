@@ -5,6 +5,10 @@ export class Events<E = any> {
 
   constructor(private emitter: EventEmitter) {}
 
+  setEventStatus(event: keyof E, status: boolean) {
+    this._eventsStatus[event] = status;
+  }
+
   onLoad(event: keyof E): Promise<this> {
     return new Promise(res => {
       if (this.getEventStatus(event)) {
@@ -12,6 +16,7 @@ export class Events<E = any> {
       } else {
         const e = event as string | symbol;
         this.emitter.once(e, () => {
+          this.setEventStatus(event, true);
           res(this);
         });
       }
