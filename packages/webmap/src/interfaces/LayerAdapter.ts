@@ -152,6 +152,7 @@ export interface VectorAdapterOptions<F extends Feature = Feature, L = any> exte
    */
   selectedPaint?: VectorAdapterLayerPaint | GetPaintCallback;
   nativePaint?: boolean | Record<string, any>;
+  nativeFilter?: unknown;
   layout?: any;
   limit?: number;
   // selectedPaintDiff?: VectorAdapterLayerPaint;
@@ -205,6 +206,8 @@ export interface VectorAdapterOptions<F extends Feature = Feature, L = any> exte
    * @defaults 50
    */
   clusterRadius?: number;
+
+  source?: unknown;
 
   labelField?: string;
   label?: (e: LayerDefinition<F, L>) => void | string;

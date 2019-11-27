@@ -1,7 +1,7 @@
 /**
  * @module mapboxgl-map-adapter
  */
-import { Map, GeoJSONSource } from 'mapbox-gl';
+import { Map, GeoJSONSource, GeoJSONSourceRaw } from 'mapbox-gl';
 import {
   GeoJsonAdapterOptions,
   VectorAdapterLayerType,
@@ -24,6 +24,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   private _features: Feature[] = [];
   private _filteredFeatureIds: string[] = [];
   private _filterFun?: DataLayerFilter<Feature>;
+  private _sources: Record<string, GeoJSONSource> = {};
 
   constructor(public map: Map, public options: GeoJsonAdapterOptions) {
     super(map, options);
@@ -40,7 +41,10 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
 
   removeLayer() {
     super.removeLayer();
-    this.map.removeSource(this._sourceId);
+    const source = this.map.getSource(this._sourceId);
+    if (source) {
+      this.map.removeSource(this._sourceId);
+    }
   }
 
   clearLayer(cb?: (feature: Feature) => boolean) {
@@ -140,13 +144,34 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   }
 
   protected _onAddLayer(sourceId: string) {
-    this.map.addSource(sourceId, {
-      type: 'geojson',
-      data: {
-        type: 'FeatureCollection',
-        features: []
-      }
-    });
+    let source = this.map.getSource(sourceId) as GeoJSONSource;
+    if (!source) {
+      const sourceOpt: GeoJSONSourceRaw = {
+        type: 'geojson',
+        data: {
+          type: 'FeatureCollection',
+          features: []
+        }
+      };
+      const _opts: Array<keyof GeoJsonAdapterOptions> = [
+        'cluster',
+        'clusterMaxZoom',
+        'clusterRadius'
+      ];
+      _opts.forEach(x => {
+        const opt = this.options[x] as GeoJsonAdapterOptions;
+        if (opt !== undefined) {
+          //@ts-ignore
+          sourceOpt[x] = opt;
+        }
+      });
+      this.map.addSource(sourceId, sourceOpt);
+      source = this.map.getSource(sourceId) as GeoJSONSource;
+    }
+    this._sources[sourceId] = source;
+    if (this.options.type) {
+      this._updateLayerPaint(this.options.type);
+    }
   }
 
   protected _getRendromId(feature: Feature): string | undefined {

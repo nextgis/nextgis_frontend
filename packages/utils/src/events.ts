@@ -9,18 +9,23 @@ export class Events<E = any> {
     this._eventsStatus[event] = status;
   }
 
-  onLoad(event: keyof E): Promise<this> {
-    return new Promise(res => {
-      if (this.getEventStatus(event)) {
-        res(this);
-      } else {
-        const e = event as string | symbol;
-        this.emitter.once(e, () => {
-          this.setEventStatus(event, true);
-          res(this);
-        });
-      }
-    });
+  onLoad(event: keyof E | Array<keyof E>): Promise<this> {
+    const events: Array<keyof E> = Array.isArray(event) ? event : [event];
+    const promises = events.map(
+      x =>
+        new Promise(res => {
+          if (this.getEventStatus(x)) {
+            res(this);
+          } else {
+            const e = x as string | symbol;
+            this.emitter.once(e, () => {
+              this.setEventStatus(x, true);
+              res(this);
+            });
+          }
+        })
+    );
+    return Promise.all(promises).then(() => this);
   }
 
   getEventStatus(event: keyof E): boolean {
