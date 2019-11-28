@@ -79,13 +79,21 @@ export function createToggleControl<C = any>(
   }
   setClass();
 
-  const onClick = (_status?: boolean) => {
-    status = _status !== undefined ? _status : !status;
+  const changeStatus = () => {
     setHtml();
     setTitle();
     setClass();
+  };
+
+  const onClick = (_status?: boolean) => {
+    status = _status !== undefined ? _status : !status;
     if (options.onClick) {
-      options.onClick(status);
+      const afterClick = options.onClick(status);
+      Promise.resolve(afterClick)
+        .then(() => changeStatus())
+        .catch(() => (status = !status));
+    } else {
+      changeStatus();
     }
   };
 

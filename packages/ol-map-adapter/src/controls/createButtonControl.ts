@@ -13,6 +13,9 @@ export function createButtonControl(options: ButtonControlOptions): Control {
       } else if (options.html) {
         button.appendChild(options.html);
       }
+      if (typeof options.title === 'string') {
+        button.title = options.title;
+      }
 
       const element = document.createElement('div');
       element.className =
