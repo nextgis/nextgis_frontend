@@ -33,7 +33,7 @@ export class WebMapLayers<
   L = any,
   C = any,
   E extends WebMapEvents = WebMapEvents
-> extends BaseWebMap<M, L, C, E> {
+  > extends BaseWebMap<M, L, C, E> {
   private _layersIds = 1;
   private readonly _baseLayers: string[] = [];
   private readonly _layers: { [id: string]: LayerAdapter } = {};
@@ -478,9 +478,13 @@ export class WebMapLayers<
 
   updateLayer(layerDef: LayerDef) {
     const layer = this.getLayer(layerDef);
-    if (layer && this.isLayerVisible(layer)) {
-      this.hideLayer(layer, { silent: true });
-      this.showLayer(layer, { silent: true });
+    if (layer) {
+      if (layer.updateLayer) {
+        layer.updateLayer();
+      } else if (this.isLayerVisible(layer)) {
+        this.hideLayer(layer, { silent: true });
+        this.showLayer(layer, { silent: true });
+      }
     }
   }
 
