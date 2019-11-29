@@ -66,7 +66,15 @@ export function styleFunction(
     }
     if (paint.type === 'path' || paint.type === 'circle') {
       // const geomPaint = ;
-      const { radius, fill, fillColor, fillOpacity, strokeColor, stroke, strokeOpacity } = {
+      const {
+        radius,
+        fill,
+        fillColor,
+        fillOpacity,
+        strokeColor,
+        stroke,
+        strokeOpacity
+      } = {
         ...paint
       } as GeometryPaint;
 
@@ -75,7 +83,10 @@ export function styleFunction(
           color: getColor(fillColor, fillOpacity)
         });
       }
-      if (strokeColor && (stroke || ['MultiLineString', 'LineString'].indexOf(type) !== -1)) {
+      if (
+        strokeColor &&
+        (stroke || ['MultiLineString', 'LineString'].indexOf(type) !== -1)
+      ) {
         style.stroke = new Stroke({
           // @ts-ignore
           width: paint.weight,
@@ -135,7 +146,10 @@ export function queryToObject(str: string) {
   return ret; // Object
 }
 
-export function objectToQuery(obj: { [x: string]: any }, prefix?: string): string {
+export function objectToQuery(
+  obj: { [x: string]: any },
+  prefix?: string
+): string {
   const str = [];
   let p;
   for (p in obj) {

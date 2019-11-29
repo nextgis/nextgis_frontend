@@ -150,7 +150,11 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     if (this._olView) {
       const center = this._olView.getCenter();
       if (center) {
-        const transformedCenter = transform(center, this.displayProjection, this.lonlatProjection);
+        const transformedCenter = transform(
+          center,
+          this.displayProjection,
+          this.lonlatProjection
+        );
         return transformedCenter as [number, number];
       }
     }
@@ -171,7 +175,11 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
   fitBounds(e: LngLatBoundsArray) {
     if (this._olView) {
       const zoom = this.getZoom();
-      const toExtent = transformExtent(e, this.lonlatProjection, this.displayProjection);
+      const toExtent = transformExtent(
+        e,
+        this.lonlatProjection,
+        this.displayProjection
+      );
       this._olView.fit(toExtent);
       this._emitMoveEndEvents({ zoom });
     }
@@ -233,7 +241,11 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
   }
 
   onMapClick(evt: ol.MapBrowserPointerEvent) {
-    const [lng, lat] = transform(evt.coordinate, this.displayProjection, this.lonlatProjection);
+    const [lng, lat] = transform(
+      evt.coordinate,
+      this.displayProjection,
+      this.lonlatProjection
+    );
     const latLng = {
       lat,
       lng

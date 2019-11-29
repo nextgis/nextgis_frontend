@@ -15,12 +15,17 @@ export async function createGeoJsonAdapter(
   webMap: WebMap,
   connector: NgwConnector
 ) {
-  const adapter = webMap.mapAdapter.layerAdapters.GEOJSON as Type<VectorLayerAdapter>;
+  const adapter = webMap.mapAdapter.layerAdapters.GEOJSON as Type<
+    VectorLayerAdapter
+  >;
 
   let _dataPromise: CancelablePromise<any> | undefined;
   const _fullDataLoad = false;
 
-  const geoJsonAdapterCb = async (filters?: PropertiesFilter, opt?: FilterOptions) => {
+  const geoJsonAdapterCb = async (
+    filters?: PropertiesFilter,
+    opt?: FilterOptions
+  ) => {
     _dataPromise = getNgwLayerFeatures({
       resourceId: options.resourceId,
       filters,
@@ -50,11 +55,16 @@ export async function createGeoJsonAdapter(
     async addLayer(_opt: GeoJsonAdapterOptions) {
       let data = {} as GeoJsonObject;
       if (!_opt.data) {
-        data = await geoJsonAdapterCb(_opt.propertiesFilter, { limit: _opt.limit });
+        data = await geoJsonAdapterCb(_opt.propertiesFilter, {
+          limit: _opt.limit
+        });
       }
       const opt = onLoad(data);
       const addLayerOptions = { ..._opt, ...opt };
-      if (addLayerOptions.data && Object.keys(addLayerOptions.data).length === 0) {
+      if (
+        addLayerOptions.data &&
+        Object.keys(addLayerOptions.data).length === 0
+      ) {
         addLayerOptions.data = undefined;
       }
       return super.addLayer(addLayerOptions);

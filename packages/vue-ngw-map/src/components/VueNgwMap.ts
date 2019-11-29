@@ -16,5 +16,6 @@ L.Icon.Default.mergeOptions({
 
 @Component
 export class VueNgwMap extends Mixins(VueNgwMapBase) {
-  @Prop({ type: Object, default: () => new MapAdapter() }) mapAdapter!: MapAdapter;
+  @Prop({ type: Object, default: () => new MapAdapter() })
+  mapAdapter!: MapAdapter;
 }

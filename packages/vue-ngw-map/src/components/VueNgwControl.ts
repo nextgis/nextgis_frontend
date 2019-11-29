@@ -1,7 +1,11 @@
 import Vue, { CreateElement, VNode, VNodeData } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import { MapControl, CreateControlOptions, ControlPositions } from '@nextgis/webmap';
+import {
+  MapControl,
+  CreateControlOptions,
+  ControlPositions
+} from '@nextgis/webmap';
 import { findNgwMapParent, propsBinder } from '../utils';
 import VueNgwMap from './VueNgwMapBase';
 
@@ -13,7 +17,8 @@ export class VueNgwControl extends Vue {
   @Prop({ type: Boolean }) bar!: boolean;
   @Prop({ type: Boolean }) margin!: boolean;
   @Prop({ type: String }) addClass!: string;
-  @Prop({ type: Object, default: () => ({}) }) controlOptions!: CreateControlOptions;
+  @Prop({ type: Object, default: () => ({}) })
+  controlOptions!: CreateControlOptions;
 
   parentContainer!: VueNgwMap;
 
@@ -45,7 +50,10 @@ export class VueNgwControl extends Vue {
           // ignore
         }
       };
-      const _control = await ngwMap.createControl(controlObject, adcontrolOptions);
+      const _control = await ngwMap.createControl(
+        controlObject,
+        adcontrolOptions
+      );
       this.control = ngwMap.addControl(_control, this.position);
     }
   }
