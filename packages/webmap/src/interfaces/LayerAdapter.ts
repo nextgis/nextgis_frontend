@@ -1,7 +1,6 @@
 /**
  * @module webmap
  */
-
 import { GeoJsonObject, Feature } from 'geojson';
 import { LatLng, LngLatBoundsArray, Type } from './BaseTypes';
 import { MapClickEvent } from './MapAdapter';
@@ -44,7 +43,8 @@ export interface AdapterOptions {
   adapter?: string;
 }
 
-export interface MvtAdapterOptions<F extends Feature = Feature> extends VectorAdapterOptions<F> {
+export interface MvtAdapterOptions<F extends Feature = Feature>
+  extends VectorAdapterOptions<F> {
   url: string;
   // type?: 'fill' | 'line' | 'circle' | 'point';
   sourceLayer?: string;
@@ -88,7 +88,7 @@ export interface IconPaint {
  * @deprecated use IconPaint instead
  */
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface IconOptions extends IconPaint { }
+export interface IconOptions extends IconPaint {}
 
 export type GetPaintFunction = (opt?: any) => VectorAdapterLayerPaint;
 
@@ -98,19 +98,28 @@ export interface GetCustomPaintOptions {
   options?: any;
 }
 
-export type VectorAdapterLayerPaint = CirclePaint | PathPaint | IconOptions | GetCustomPaintOptions;
+export type VectorAdapterLayerPaint =
+  | CirclePaint
+  | PathPaint
+  | IconOptions
+  | GetCustomPaintOptions;
 
-export type GetPaintCallback<F = Feature> = (feature: F) => VectorAdapterLayerPaint;
+export type GetPaintCallback<F = Feature> = (
+  feature: F
+) => VectorAdapterLayerPaint;
 
 export type Paint = VectorAdapterLayerPaint | GetPaintCallback;
 
 export interface PopupOptions {
   minWidth?: number;
   autoPan?: boolean;
-  createPopupContent?: (layerDef: LayerDefinition) => HTMLElement | string | undefined;
+  createPopupContent?: (
+    layerDef: LayerDefinition
+  ) => HTMLElement | string | undefined;
 }
 
-export interface VectorAdapterOptions<F extends Feature = Feature, L = any> extends AdapterOptions {
+export interface VectorAdapterOptions<F extends Feature = Feature, L = any>
+  extends AdapterOptions {
   /** Type for geometries painting, for each layer may be only one of: `fill`, `circle` or `line`. */
   type?: VectorAdapterLayerType;
   /**
@@ -310,13 +319,22 @@ export type PropertyFilter = [string, Operations, any];
 
 export type PropertiesFilter = PropertyFilter[];
 
-export type DataLayerFilter<F extends Feature = Feature, L = any> = CallbackFilter<F, L>;
+export type DataLayerFilter<
+  F extends Feature = Feature,
+  L = any
+> = CallbackFilter<F, L>;
 
-export type LayerAdapter<M = any, L = any, O extends AdapterOptions = AdapterOptions> =
-  | BaseLayerAdapter<M, L, O>
-  | VectorLayerAdapter<M, L, O>;
+export type LayerAdapter<
+  M = any,
+  L = any,
+  O extends AdapterOptions = AdapterOptions
+> = BaseLayerAdapter<M, L, O> | VectorLayerAdapter<M, L, O>;
 
-export interface BaseLayerAdapter<M = any, L = any, O extends AdapterOptions = AdapterOptions> {
+export interface BaseLayerAdapter<
+  M = any,
+  L = any,
+  O extends AdapterOptions = AdapterOptions
+> {
   options: O;
   id?: string;
   name?: string;
@@ -342,7 +360,7 @@ export interface VectorLayerAdapter<
   L = any,
   O extends VectorAdapterOptions = VectorAdapterOptions,
   F extends Feature = Feature
-  > extends BaseLayerAdapter<M, L, O> {
+> extends BaseLayerAdapter<M, L, O> {
   selected?: boolean;
   source?: unknown;
 
@@ -363,7 +381,10 @@ export interface VectorLayerAdapter<
 
   onLayerClick?(opt: OnLayerClickOptions): Promise<any>;
 
-  openPopup?(findFeatureCb?: DataLayerFilter<F, L>, options?: PopupOptions): void;
+  openPopup?(
+    findFeatureCb?: DataLayerFilter<F, L>,
+    options?: PopupOptions
+  ): void;
   closePopup?(findFeatureCb?: DataLayerFilter<F, L>): void;
 
   updateTooltip?(layerDef?: LayerDefinition<F, L>): void;

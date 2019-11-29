@@ -52,8 +52,7 @@ export async function createGeoJsonAdapter(
     return WebMap.utils.updateGeoJsonAdapterOptions(geoJsonOptions);
   };
   return class Adapter extends adapter {
-
-    _lastFilterArgs?: { filters: PropertiesFilter, options?: FilterOptions };
+    _lastFilterArgs?: { filters: PropertiesFilter; options?: FilterOptions };
 
     async addLayer(_opt: GeoJsonAdapterOptions) {
       let data = {} as GeoJsonObject;
@@ -108,7 +107,7 @@ export async function createGeoJsonAdapter(
       this._lastFilterArgs = undefined;
       this.propertiesFilter([]);
       if (this.filter) {
-        this.filter(function () {
+        this.filter(function() {
           return true;
         });
       }

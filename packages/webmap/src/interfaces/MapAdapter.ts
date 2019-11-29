@@ -46,7 +46,11 @@ export interface FitOptions {
   padding?: number;
 }
 
-export type ControlPositions = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
+export type ControlPositions =
+  | 'top-right'
+  | 'top-left'
+  | 'bottom-right'
+  | 'bottom-left';
 
 export interface Locate {
   stop: () => void;
@@ -122,7 +126,11 @@ export interface MapAdapter<M = any, L = any, C = any> {
   setLayerOpacity(layer: L, opacity: number): void;
   showLayer(layer: L): void;
   hideLayer(layer: L): void;
-  setLayerOrder(layer: L, order: number, layers?: { [name: string]: LayerAdapter }): void;
+  setLayerOrder(
+    layer: L,
+    order: number,
+    layers?: { [name: string]: LayerAdapter }
+  ): void;
 
   /** @deprecated use fitBounds instead */
   fit?(extent: LngLatBoundsArray, options?: FitOptions): void;

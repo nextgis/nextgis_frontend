@@ -9,7 +9,7 @@
   "dependencies": {
     "@nextgis/webmap": "^0.20.3",
     "events": "^3.0.0",
-    "mapbox-gl": "1.5.0"
+    "mapbox-gl": "1.5.1"
   },
   "optionalDependencies": {
     "canvg": "^2.0.0"
