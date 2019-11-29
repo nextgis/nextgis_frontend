@@ -256,8 +256,12 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
       layerIds.forEach(layerId => {
         this._onMapLoad().then(() => {
           const layer = _map.getLayer(layerId);
-          if (layer && layer.type !== 'symbol') {
-            _map.setPaintProperty(layerId, layer.type + '-opacity', opacity);
+          if (layer) {
+            if (layer.type === 'symbol') {
+              _map.setPaintProperty(layerId, 'text-opacity', opacity);
+            } else {
+              _map.setPaintProperty(layerId, layer.type + '-opacity', opacity);
+            }
           }
         });
       });
