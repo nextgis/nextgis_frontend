@@ -9,7 +9,12 @@ import {
   VectorLayerAdapter,
   VectorAdapterOptions
 } from '@nextgis/webmap';
-import { Feature as F, GeometryObject, Geometry, GeoJsonProperties } from 'geojson';
+import {
+  Feature as F,
+  GeometryObject,
+  Geometry,
+  GeoJsonProperties
+} from 'geojson';
 import {
   Map,
   MapLayerMouseEvent,
@@ -26,8 +31,10 @@ import { TLayer } from '../MapboxglMapAdapter';
 import { BaseAdapter } from './BaseAdapter';
 import { typeAliasForFilter, allowedByType } from '../util/geom_type';
 
-export interface Feature<G extends GeometryObject | null = Geometry, P = GeoJsonProperties>
-  extends F<G, P> {
+export interface Feature<
+  G extends GeometryObject | null = Geometry,
+  P = GeoJsonProperties
+> extends F<G, P> {
   _rendromId?: string;
 }
 
@@ -39,8 +46,9 @@ const PAINT = {
 
 type MapboxLayerType = 'fill' | 'line' | 'symbol' | 'circle';
 
-export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapterOptions>
-  extends BaseAdapter<O>
+export abstract class VectorAdapter<
+  O extends VectorAdapterOptions = VectorAdapterOptions
+> extends BaseAdapter<O>
   implements VectorLayerAdapter<Map, TLayer, O, Feature> {
   selected = false;
 
@@ -81,7 +89,8 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
           }
           const layer = this._getLayerNameFromType(t);
           // const geomFilter = ['==', '$type', geomType];
-          const geomFilter = types.length > 1 ? ['==', '$type', geomType] : undefined;
+          const geomFilter =
+            types.length > 1 ? ['==', '$type', geomType] : undefined;
           await this._addLayer(layer, type, geomFilter);
           this.layer.push(layer);
           if (options.selectedPaint) {
@@ -129,7 +138,10 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
       for (const [name, paint] of layers) {
         let _paint: any;
         if (this.options.nativePaint) {
-          _paint = typeof this.options.nativePaint === 'boolean' ? paint : this.options.nativePaint;
+          _paint =
+            typeof this.options.nativePaint === 'boolean'
+              ? paint
+              : this.options.nativePaint;
         } else {
           _paint = await this._createPaintForType(paint, type);
         }
@@ -183,7 +195,9 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
               return false;
             });
             if (allowedType) {
-              const paramName = Array.isArray(allowedType) ? allowedType[1] : allowedType;
+              const paramName = Array.isArray(allowedType)
+                ? allowedType[1]
+                : allowedType;
               // @ts-ignore
               mapboxPaint[type + '-' + paramName] = _paint[p];
             }
@@ -232,7 +246,11 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
     return {};
   }
 
-  protected async _addLayer(name: string, type: VectorAdapterLayerType, filter?: any[]) {
+  protected async _addLayer(
+    name: string,
+    type: VectorAdapterLayerType,
+    filter?: any[]
+  ) {
     let mType: MapboxLayerType;
     if (type === 'icon') {
       mType = 'symbol';
@@ -252,7 +270,11 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
       },
       ...this._getAdditionalLayerOptions()
     };
-    const filters = ['all', ...(filter || []), this.options.nativeFilter].filter(x => x);
+    const filters = [
+      'all',
+      ...(filter || []),
+      this.options.nativeFilter
+    ].filter(x => x);
 
     if (filters.length > 1) {
       layerOpt.filter = filters;
@@ -263,7 +285,9 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
 
   private _onLayerClick(e: mapboxgl.MapLayerMouseEvent) {
     e.preventDefault();
-    const features = this.map.queryRenderedFeatures(e.point, { layers: this.layer });
+    const features = this.map.queryRenderedFeatures(e.point, {
+      layers: this.layer
+    });
     const feature = features[0] as Feature;
     if (feature) {
       const id = this._getRendromId(feature);
@@ -289,12 +313,18 @@ export abstract class VectorAdapter<O extends VectorAdapterOptions = VectorAdapt
     }
   }
 
-  private _detectPaintType(paint: VectorAdapterLayerPaint | GetPaintCallback): string | undefined {
+  private _detectPaintType(
+    paint: VectorAdapterLayerPaint | GetPaintCallback
+  ): string | undefined {
     if ('type' in paint) {
       return paint.type;
     } else if (typeof paint === 'function') {
       try {
-        const falsePaint = paint({ type: 'Feature', properties: {}, geometry: {} as Geometry });
+        const falsePaint = paint({
+          type: 'Feature',
+          properties: {},
+          geometry: {} as Geometry
+        });
         return this._detectPaintType(falsePaint);
       } catch (er) {
         //

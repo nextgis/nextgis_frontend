@@ -37,17 +37,25 @@ export const OPTIONS: NgwMapOptions = {
     ZOOM: { position: 'top-left' },
     ATTRIBUTION: {
       position: 'bottom-right',
-      customAttribution: ['<a href="http://nextgis.ru" target="_blank">©NextGIS</a>']
+      customAttribution: [
+        '<a href="http://nextgis.ru" target="_blank">©NextGIS</a>'
+      ]
     }
   },
   pixelRadius: 10
 };
 
-export function prepareWebMapOptions(mapAdapter: MapAdapter, options: NgwMapOptions) {
+export function prepareWebMapOptions(
+  mapAdapter: MapAdapter,
+  options: NgwMapOptions
+) {
   const kits: StarterKit[] = [new QmsKit()];
 
   if (!options.connector && options.baseUrl) {
-    options.connector = new NgwConnector({ baseUrl: options.baseUrl, auth: options.auth });
+    options.connector = new NgwConnector({
+      baseUrl: options.baseUrl,
+      auth: options.auth
+    });
   } else if (options.connector) {
     options.baseUrl = options.connector.options.baseUrl;
   }

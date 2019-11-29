@@ -51,9 +51,13 @@ export class ImageAdapter implements BaseLayerAdapter {
     const layer = new ImageLayer({
       source,
       minResolution:
-        (this.options.maxScale && getResolution(this.map, this.options.maxScale)) || undefined,
+        (this.options.maxScale &&
+          getResolution(this.map, this.options.maxScale)) ||
+        undefined,
       maxResolution:
-        (this.options.minScale && getResolution(this.map, this.options.minScale)) || undefined
+        (this.options.minScale &&
+          getResolution(this.map, this.options.minScale)) ||
+        undefined
     });
     this.layer = layer;
     return layer;

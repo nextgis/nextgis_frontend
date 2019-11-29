@@ -26,7 +26,8 @@ export class QmsKit implements StarterKit {
     return Promise.resolve([
       {
         name: 'QMS',
-        createAdapter: (webmap: WebMap) => Promise.resolve(this._createAdapter(webmap))
+        createAdapter: (webmap: WebMap) =>
+          Promise.resolve(this._createAdapter(webmap))
       }
     ]);
   }

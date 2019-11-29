@@ -5,8 +5,15 @@ import { template } from './utils';
  * decorator to emit events on start end and error for async methods
  * @param options
  */
-export function evented(options?: { status: AvailableStatus; template?: string }) {
-  return function(target: NgwUploader, propertyKey: string, descriptor: PropertyDescriptor) {
+export function evented(options?: {
+  status: AvailableStatus;
+  template?: string;
+}) {
+  return function(
+    target: NgwUploader,
+    propertyKey: string,
+    descriptor: PropertyDescriptor
+  ) {
     const originalMethod = descriptor.value;
 
     descriptor.value = function(this: NgwUploader, ...args: any[]) {
@@ -56,7 +63,11 @@ export function evented(options?: { status: AvailableStatus; template?: string }
  * decorator to run action only after application is load
  */
 export function onLoad() {
-  return function(target: NgwUploader, propertyKey: string, descriptor: PropertyDescriptor) {
+  return function(
+    target: NgwUploader,
+    propertyKey: string,
+    descriptor: PropertyDescriptor
+  ) {
     const originalMethod = descriptor.value;
 
     descriptor.value = function(this: NgwUploader, ...args: any[]) {

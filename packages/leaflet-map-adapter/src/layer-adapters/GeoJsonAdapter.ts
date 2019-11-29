@@ -248,7 +248,9 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     options = options || {};
     const { minWidth, autoPan } = { minWidth: 300, ...options };
     const content =
-      options && options.createPopupContent ? options.createPopupContent({ layer, feature }) : '';
+      options && options.createPopupContent
+        ? options.createPopupContent({ layer, feature })
+        : '';
     if (content) {
       const popup = layer.bindPopup(content, { minWidth, autoPan });
       setTimeout(() => {
@@ -340,7 +342,9 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
         lopt = {
           pointToLayer: (feature, latLng) => {
             const iconOpt = paint(feature);
-            const pointToLayer = this.createPaintToLayer(iconOpt as IconOptions);
+            const pointToLayer = this.createPaintToLayer(
+              iconOpt as IconOptions
+            );
             return pointToLayer(feature, latLng);
           }
         };
@@ -369,7 +373,8 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
       }
       if (ok) {
         // @ts-ignore
-        layer.options.interactive = this.options.selectable || this.options.interactive;
+        layer.options.interactive =
+          this.options.selectable || this.options.interactive;
         this.layer.addLayer(layer);
         if (options.selectable) {
           if (options.selectOnHover) {
@@ -380,7 +385,11 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
               this._unSelectLayer(layer);
             });
           } else {
-            layer.on('click', e => this._onLayerClick(e as LeafletMouseEvent), this);
+            layer.on(
+              'click',
+              e => this._onLayerClick(e as LeafletMouseEvent),
+              this
+            );
           }
         }
         if (this.options.popup) {
@@ -485,7 +494,9 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
       };
     }
     if (type === 'circle') {
-      geoJsonOptions.pointToLayer = this.createPaintToLayer(paintOptions as IconOptions);
+      geoJsonOptions.pointToLayer = this.createPaintToLayer(
+        paintOptions as IconOptions
+      );
     } else if (type === 'line') {
       paint.stroke = true;
     }

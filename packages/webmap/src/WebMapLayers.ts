@@ -20,7 +20,10 @@ import { LayerDef, Type } from './interfaces/BaseTypes';
 import { Feature, GeoJsonObject } from 'geojson';
 import { preparePaint } from './util/preparePaint';
 import { updateGeoJsonAdapterOptions } from './util/updateGeoJsonAdapterOptions';
-import { GetAttributionsOptions, ToggleLayerOptions } from './interfaces/WebMapApp';
+import {
+  GetAttributionsOptions,
+  ToggleLayerOptions
+} from './interfaces/WebMapApp';
 import { propertiesFilter } from './util/propertiesFilter';
 import { BaseWebMap } from './BaseWebMap';
 import { WebMapEvents } from './interfaces/Events';
@@ -70,7 +73,9 @@ export class WebMapLayers<
   /**
    * Helper method to return added layer object by any definition type.
    */
-  getLayer<LA extends LayerAdapter = LayerAdapter>(layerDef: LayerDef): LA | undefined {
+  getLayer<LA extends LayerAdapter = LayerAdapter>(
+    layerDef: LayerDef
+  ): LA | undefined {
     if (typeof layerDef === 'string') {
       return this._layers[layerDef] as LA;
     }
@@ -96,7 +101,9 @@ export class WebMapLayers<
     return Object.keys(this._layers);
   }
 
-  findLayer<T extends LayerAdapter = LayerAdapter>(filter: (adapter: T) => boolean): T | undefined {
+  findLayer<T extends LayerAdapter = LayerAdapter>(
+    filter: (adapter: T) => boolean
+  ): T | undefined {
     for (const l in this._layers) {
       const layerAdapter = this._layers[l] as T;
       const isFit = filter(layerAdapter);
@@ -111,7 +118,9 @@ export class WebMapLayers<
    */
   isLayerVisible(layerDef: LayerDef): boolean {
     const layer = this.getLayer(layerDef);
-    return layer && layer.options.visibility !== undefined ? layer.options.visibility : false;
+    return layer && layer.options.visibility !== undefined
+      ? layer.options.visibility
+      : false;
   }
 
   /**
@@ -119,7 +128,10 @@ export class WebMapLayers<
    * @param adapter
    * @param options
    */
-  async addBaseLayer<K extends keyof LayerAdapters, O extends AdapterOptions = AdapterOptions>(
+  async addBaseLayer<
+    K extends keyof LayerAdapters,
+    O extends AdapterOptions = AdapterOptions
+  >(
     adapter: K | Type<LayerAdapters[K]>,
     options: O | LayerAdaptersOptions[K]
   ): Promise<LayerAdapter> {
@@ -145,8 +157,14 @@ export class WebMapLayers<
    * webMap.addLayer(CustomLayerAdapter, options);
    * ```
    */
-  async addLayer<K extends keyof LayerAdapters, O extends AdapterOptions = AdapterOptions>(
-    adapter: K | Type<LayerAdapters[K]> | Promise<Type<LayerAdapters[K]> | undefined>,
+  async addLayer<
+    K extends keyof LayerAdapters,
+    O extends AdapterOptions = AdapterOptions
+  >(
+    adapter:
+      | K
+      | Type<LayerAdapters[K]>
+      | Promise<Type<LayerAdapters[K]> | undefined>,
     options: O | LayerAdaptersOptions[K],
     order?: number
   ): Promise<LayerAdapter> {
@@ -156,7 +174,9 @@ export class WebMapLayers<
       adapterEngine = this.getLayerAdapter(adapter);
     } else if (typeof adapter === 'function') {
       adapterEngine = adapter as Type<LayerAdapter>;
-    } else if ('then' in (adapter as Promise<Type<LayerAdapters[K]> | undefined>)) {
+    } else if (
+      'then' in (adapter as Promise<Type<LayerAdapters[K]> | undefined>)
+    ) {
       adapterEngine = (await adapter) as Type<LayerAdapters[K]>;
     }
 
@@ -182,7 +202,10 @@ export class WebMapLayers<
       options.order = 0;
     }
     if (this.options.onBeforeAddLayer) {
-      const modified = this.options.onBeforeAddLayer({ options, adapter: adapterEngine });
+      const modified = this.options.onBeforeAddLayer({
+        options,
+        adapter: adapterEngine
+      });
       if (modified) {
         if (modified.options) {
           options = modified.options;
@@ -354,7 +377,9 @@ export class WebMapLayers<
     opt = opt || {};
     opt.multiselect = opt.multiselect !== undefined ? opt.multiselect : false;
     opt.unselectOnSecondClick =
-      opt.unselectOnSecondClick !== undefined ? opt.unselectOnSecondClick : true;
+      opt.unselectOnSecondClick !== undefined
+        ? opt.unselectOnSecondClick
+        : true;
     if (!adapter) {
       opt = updateGeoJsonAdapterOptions(opt);
     }
@@ -391,7 +416,11 @@ export class WebMapLayers<
    * });
    * ```
    */
-  toggleLayer(layerDef: LayerDef, status?: boolean, options: ToggleLayerOptions = {}) {
+  toggleLayer(
+    layerDef: LayerDef,
+    status?: boolean,
+    options: ToggleLayerOptions = {}
+  ) {
     const layer = this.getLayer(layerDef);
     const onMap = layer && layer.options.visibility;
     const toStatus = status !== undefined ? status : !onMap;
@@ -560,7 +589,11 @@ export class WebMapLayers<
     return [];
   }
 
-  propertiesFilter(layerDef: LayerDef, filters: PropertiesFilter, options?: FilterOptions) {
+  propertiesFilter(
+    layerDef: LayerDef,
+    filters: PropertiesFilter,
+    options?: FilterOptions
+  ) {
     const layer = this.getLayer(layerDef);
     const adapter = layer as VectorLayerAdapter;
     if (adapter.propertiesFilter) {
@@ -654,7 +687,8 @@ export class WebMapLayers<
     const attributions: string[] = [];
     for (const l in this._layers) {
       const layerMem = this._layers[l];
-      const onlyVisible = options.onlyVisible !== undefined ? options.onlyVisible : true;
+      const onlyVisible =
+        options.onlyVisible !== undefined ? options.onlyVisible : true;
       const useLayerAttr = onlyVisible ? layerMem.options.visibility : true;
       if (useLayerAttr) {
         const attr = layerMem.options && layerMem.options.attribution;

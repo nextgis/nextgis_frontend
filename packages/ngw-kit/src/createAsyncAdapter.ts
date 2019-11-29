@@ -1,7 +1,14 @@
-import NgwConnector, { ResourceCls, ResourceItem } from '@nextgis/ngw-connector';
+import NgwConnector, {
+  ResourceCls,
+  ResourceItem
+} from '@nextgis/ngw-connector';
 import WebMap, { LayerAdapter, Type } from '@nextgis/webmap';
 import QmsKit from '@nextgis/qms-kit';
-import { NgwLayerOptions, ResourceAdapter, AddNgwLayerOptions } from './interfaces';
+import {
+  NgwLayerOptions,
+  ResourceAdapter,
+  AddNgwLayerOptions
+} from './interfaces';
 
 import { createGeoJsonAdapter } from './createGeoJsonAdapter';
 import { createRasterAdapter } from './createRasterAdapter';
@@ -9,7 +16,11 @@ import { createWebMapAdapter } from './createWebMapAdapter';
 import { applyMixins } from './utils/utils';
 import { NgwResource } from './NgwResource';
 
-const styles: ResourceCls[] = ['mapserver_style', 'qgis_vector_style', 'raster_style'];
+const styles: ResourceCls[] = [
+  'mapserver_style',
+  'qgis_vector_style',
+  'raster_style'
+];
 
 async function createAdapterFromFirstStyle(
   parent: number,
@@ -18,7 +29,9 @@ async function createAdapterFromFirstStyle(
   baseUrl: string,
   connector: NgwConnector
 ) {
-  const childrenStyles = await connector.get('resource.collection', null, { parent });
+  const childrenStyles = await connector.get('resource.collection', null, {
+    parent
+  });
   const firstStyle = childrenStyles && childrenStyles[0];
   if (firstStyle) {
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
@@ -43,7 +56,9 @@ export async function createAsyncAdapter(
     const adapterType = options.adapter;
     let resourceId = options.resourceId;
     if (!resourceId && options.keyname) {
-      const resourceItem = await connector.getResourceByKeyname(options.keyname);
+      const resourceItem = await connector.getResourceByKeyname(
+        options.keyname
+      );
       resourceId = resourceItem.resource.id;
     }
     if (resourceId) {
@@ -98,7 +113,9 @@ export async function createAsyncAdapter(
           });
         }
       } else {
-        throw new Error("Can't add NGW layer because Resource item is not found");
+        throw new Error(
+          "Can't add NGW layer because Resource item is not found"
+        );
       }
     }
   } catch (er) {

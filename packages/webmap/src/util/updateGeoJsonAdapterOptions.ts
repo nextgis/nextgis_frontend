@@ -1,4 +1,7 @@
-import { GeoJsonAdapterOptions, VectorAdapterLayerType } from '../interfaces/LayerAdapter';
+import {
+  GeoJsonAdapterOptions,
+  VectorAdapterLayerType
+} from '../interfaces/LayerAdapter';
 import { detectGeometryType } from './geometryTypes';
 
 export const typeAlias: { [x: string]: VectorAdapterLayerType } = {
@@ -10,7 +13,9 @@ export const typeAlias: { [x: string]: VectorAdapterLayerType } = {
   MultiPolygon: 'fill'
 };
 
-export function updateGeoJsonAdapterOptions(opt: GeoJsonAdapterOptions): GeoJsonAdapterOptions {
+export function updateGeoJsonAdapterOptions(
+  opt: GeoJsonAdapterOptions
+): GeoJsonAdapterOptions {
   if (opt.data) {
     const geomType = typeAlias[detectGeometryType(opt.data)];
     const p = opt.paint;

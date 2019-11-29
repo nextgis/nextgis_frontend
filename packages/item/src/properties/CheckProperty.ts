@@ -31,9 +31,13 @@ export class CheckProperty<
       if (bubble) {
         this.unBlock(options);
         const parent = this.getParent();
-        const property = parent && parent.properties && parent.properties.property(this.name);
+        const property =
+          parent && parent.properties && parent.properties.property(this.name);
         if (property) {
-          property.set(value, Object.assign({}, options, { bubble: true, propagation: false }));
+          property.set(
+            value,
+            Object.assign({}, options, { bubble: true, propagation: false })
+          );
         }
       }
       if (!this.isBlocked()) {
@@ -42,7 +46,8 @@ export class CheckProperty<
     } else {
       this._turnOff(options);
     }
-    const propagation = (options && options.propagation) || this.options.propagation;
+    const propagation =
+      (options && options.propagation) || this.options.propagation;
     if (propagation) {
       this._propagation(value, options);
     }
@@ -111,14 +116,18 @@ export class CheckProperty<
   }
 
   _blockChild(item: Item, options?: O) {
-    const prop = item.properties && (item.properties.property(this.name) as CheckProperty<V, O>);
+    const prop =
+      item.properties &&
+      (item.properties.property(this.name) as CheckProperty<V, O>);
     if (prop && prop.block) {
       prop.block(options);
     }
   }
 
   _unBlockChild(item: Item, options?: O) {
-    const prop = item.properties && (item.properties.property(this.name) as CheckProperty<V, O>);
+    const prop =
+      item.properties &&
+      (item.properties.property(this.name) as CheckProperty<V, O>);
     if (prop && prop.unBlock) {
       prop.unBlock(options);
     }
@@ -130,7 +139,8 @@ export class CheckProperty<
       for (let fry = 0; fry < children.length; fry++) {
         const child = children[fry];
         const property =
-          child.properties && (child.properties.property(this.name) as CheckProperty<V, O>);
+          child.properties &&
+          (child.properties.property(this.name) as CheckProperty<V, O>);
         if (property) {
           property.set(value, {
             ...options,

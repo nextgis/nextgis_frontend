@@ -21,7 +21,8 @@ import { getResolution } from '../utils/gerResolution';
 
 type Layer = Base;
 
-export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAdapterOptions> {
+export class GeoJsonAdapter
+  implements VectorLayerAdapter<Map, Layer, GeoJsonAdapterOptions> {
   layer?: VectorLayer;
   paint?: VectorAdapterLayerPaint | GetPaintCallback;
   selectedPaint?: VectorAdapterLayerPaint | GetPaintCallback;
@@ -52,9 +53,13 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
         return style;
       },
       minResolution:
-        (this.options.maxScale && getResolution(this.map, this.options.maxScale)) || undefined,
+        (this.options.maxScale &&
+          getResolution(this.map, this.options.maxScale)) ||
+        undefined,
       maxResolution:
-        (this.options.minScale && getResolution(this.map, this.options.minScale)) || undefined
+        (this.options.minScale &&
+          getResolution(this.map, this.options.minScale)) ||
+        undefined
     });
 
     if (options.selectable) {
@@ -99,7 +104,9 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
 
   select(findFeatureCb?: DataLayerFilter<Feature> | PropertiesFilter) {
     if (findFeatureCb) {
-      const feature = this._selectedFeatures.filter(x => Object.create({ feature: x }));
+      const feature = this._selectedFeatures.filter(x =>
+        Object.create({ feature: x })
+      );
       feature.forEach(x => {
         this._selectFeature(x);
       });
@@ -113,7 +120,9 @@ export class GeoJsonAdapter implements VectorLayerAdapter<Map, Layer, GeoJsonAda
 
   unselect(findFeatureCb?: DataLayerFilter<Feature> | PropertiesFilter) {
     if (findFeatureCb) {
-      const feature = this._selectedFeatures.filter(x => Object.create({ feature: x }));
+      const feature = this._selectedFeatures.filter(x =>
+        Object.create({ feature: x })
+      );
       feature.forEach(x => {
         this._unselectFeature(x);
       });

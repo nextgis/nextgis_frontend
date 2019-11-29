@@ -1,6 +1,10 @@
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 import NgwMap, { NgwLayersMem } from '@nextgis/ngw-map';
-import { ResourceAdapter, WebMapLayerAdapter, WebMapLayerItem } from '@nextgis/ngw-kit';
+import {
+  ResourceAdapter,
+  WebMapLayerAdapter,
+  WebMapLayerItem
+} from '@nextgis/ngw-kit';
 import { CreateElement, VNode, VNodeData } from 'vue';
 // @ts-ignore
 import { VTreeview } from 'vuetify/lib';
@@ -17,7 +21,9 @@ export class NgwLayersList extends Vue {
   @Prop({ type: Array }) include!: Array<ResourceAdapter | string>;
   @Prop({ type: Boolean, default: false }) hideWebmapRoot!: boolean;
   @Prop({ type: Function }) showLayer!: (layer: WebMapLayerItem) => boolean;
-  @Prop({ type: Function }) showResourceAdapter!: (adapter: ResourceAdapter) => boolean;
+  @Prop({ type: Function }) showResourceAdapter!: (
+    adapter: ResourceAdapter
+  ) => boolean;
 
   items: VueTreeItem[] = [];
 
@@ -123,7 +129,9 @@ export class NgwLayersList extends Vue {
     }
 
     const name =
-      layer.options.name || (layer.item && layer.item.resource.display_name) || String(layer.id);
+      layer.options.name ||
+      (layer.item && layer.item.resource.display_name) ||
+      String(layer.id);
     const item: VueTreeItem = {
       id: layer.id || '',
       name,
@@ -145,7 +153,8 @@ export class NgwLayersList extends Vue {
     const webMap = layer.item && layer.item.webmap;
     const webMapLayer = layer as WebMapLayerAdapter;
     if (webMap && webMapLayer.layer) {
-      const children = webMapLayer.layer.tree.getChildren() as WebMapLayerItem[];
+      const tree = webMapLayer.layer.tree;
+      const children = tree.getChildren() as WebMapLayerItem[];
       item.children = this._createWebMapTree(children).reverse();
       visible = true;
     } else {
@@ -203,7 +212,9 @@ export class NgwLayersList extends Vue {
     const webMap = layer as WebMapLayerItem;
     const webMapTree = webMap.tree;
     if (webMapTree) {
-      const parents = webMap.tree.getParents<WebMapLayerItem>().map(x => x.item.display_name);
+      const parents = webMap.tree
+        .getParents<WebMapLayerItem>()
+        .map(x => x.item.display_name);
       const id = [...parents, webMap.item.display_name].join('-');
       return id;
     } else {

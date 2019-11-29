@@ -239,7 +239,11 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     }
   }
 
-  setLayerOrder(layerIds: string[], order: number, layers: { [x: string]: TLayerAdapter }): void {
+  setLayerOrder(
+    layerIds: string[],
+    order: number,
+    layers: { [x: string]: TLayerAdapter }
+  ): void {
     if (this._sortTimerId) {
       window.clearTimeout(this._sortTimerId);
     }
@@ -268,7 +272,10 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     return createButtonControl(options);
   }
 
-  addControl(control: IControl, position: ControlPositions): IControl | undefined {
+  addControl(
+    control: IControl,
+    position: ControlPositions
+  ): IControl | undefined {
     if (this.map) {
       this.map.addControl(control, position);
       return control;
@@ -376,7 +383,11 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
 
   private _toggleLayer(layerId: string, status: boolean): void {
     this._onMapLoad().then(_map => {
-      _map.setLayoutProperty(layerId, 'visibility', status ? 'visible' : 'none');
+      _map.setLayoutProperty(
+        layerId,
+        'visibility',
+        status ? 'visible' : 'none'
+      );
     });
   }
 
@@ -390,7 +401,9 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     }
   }
 
-  private _onMapError(data: mapboxgl.ErrorEvent & mapboxgl.MapSourceDataEvent & EventData) {
+  private _onMapError(
+    data: mapboxgl.ErrorEvent & mapboxgl.MapSourceDataEvent & EventData
+  ) {
     if (this._sourceDataLoading[data.sourceId]) {
       const isLoaded = data.isSourceLoaded;
       const emit = (target: string) => {
@@ -448,7 +461,8 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     if (_map) {
       // write mem for start loaded layers
       _map.on('sourcedataloading', data => {
-        this._sourceDataLoading[data.sourceId] = this._sourceDataLoading[data.sourceId] || [];
+        this._sourceDataLoading[data.sourceId] =
+          this._sourceDataLoading[data.sourceId] || [];
         if (data.tile) {
           this._sourceDataLoading[data.sourceId].push(data.tile);
         }

@@ -22,9 +22,13 @@ export class TileAdapter implements BaseLayerAdapter {
     const layer = new TileLayer({
       source,
       minResolution:
-        (this.options.maxScale && getResolution(this.map, this.options.maxScale)) || undefined,
+        (this.options.maxScale &&
+          getResolution(this.map, this.options.maxScale)) ||
+        undefined,
       maxResolution:
-        (this.options.minScale && getResolution(this.map, this.options.minScale)) || undefined
+        (this.options.minScale &&
+          getResolution(this.map, this.options.minScale)) ||
+        undefined
     });
     return layer;
   }
