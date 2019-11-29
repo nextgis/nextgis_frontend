@@ -9,7 +9,7 @@
   "dependencies": {
     "@nextgis/leaflet-map-adapter": "^0.20.3",
     "@nextgis/ngw-map": "^0.20.3",
-    "leaflet": "^1.5.1",
+    "leaflet": "1.6.0",
     "leaflet.wms": "^0.2.0"
   },
   "devDependencies": {

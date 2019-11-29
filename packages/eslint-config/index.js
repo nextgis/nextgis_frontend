@@ -17,7 +17,7 @@ module.exports = {
     sourceType: 'module'
     // project: './tsconfig.json'
   },
-  plugins: ['@typescript-eslint/eslint-plugin', 'prettier'],
+  plugins: ['@typescript-eslint', 'prettier'],
   rules: {
     // 'comma-dangle': [
     //   'error',
