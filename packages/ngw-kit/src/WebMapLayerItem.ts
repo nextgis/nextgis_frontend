@@ -75,7 +75,12 @@ export class WebMapLayerItem extends Item<ItemOptions> {
     if (item.item_type === 'group' || item.item_type === 'root') {
       if (item.children && item.children.length) {
         item.children.reverse().forEach(x => {
-          const children = new WebMapLayerItem(this.webMap, x, this.options, this);
+          const children = new WebMapLayerItem(
+            this.webMap,
+            x,
+            this.options,
+            this
+          );
           this.tree.addChild(children);
         });
       }
@@ -108,7 +113,8 @@ export class WebMapLayerItem extends Item<ItemOptions> {
       if (this.properties && item.item_type === 'layer' && item.layer_enabled) {
         this.properties.property('visibility').set(true);
       }
-      const transparency = item.item_type === 'layer' && item.layer_transparency;
+      const transparency =
+        item.item_type === 'layer' && item.layer_transparency;
       if (typeof transparency === 'number') {
         const opacity = (100 - transparency) / 100;
         this.webMap.setLayerOpacity(newLayer, opacity);

@@ -4,7 +4,10 @@
 import { MapControl, CreateControlOptions } from '@nextgis/webmap';
 import { Control, DomEvent } from 'leaflet';
 
-export function createControl(control: MapControl, options: CreateControlOptions = {}): Control {
+export function createControl(
+  control: MapControl,
+  options: CreateControlOptions = {}
+): Control {
   const C = Control.extend({
     onAdd() {
       const element = document.createElement('div');

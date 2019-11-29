@@ -23,7 +23,9 @@ export async function createRasterAdapter(
     }
   }
   if (adapter === 'IMAGE' || adapter === 'TILE' || adapter === 'MVT') {
-    const adapterClass = webMap.mapAdapter.layerAdapters[adapter] as Type<BaseLayerAdapter>;
+    const adapterClass = webMap.mapAdapter.layerAdapters[adapter] as Type<
+      BaseLayerAdapter
+    >;
 
     return class Adapter extends adapterClass implements ResourceAdapter {
       // options = {};
@@ -35,7 +37,10 @@ export async function createRasterAdapter(
         const opt = getLayerAdapterOptions(options, webMap, baseUrl);
         if (opt) {
           if (opt.resourceId) {
-            const layerAdapterOptions: ImageAdapterOptions = { ...opt, resourceId: opt.resourceId };
+            const layerAdapterOptions: ImageAdapterOptions = {
+              ...opt,
+              resourceId: opt.resourceId
+            };
             this.options = { ...this.options, ...layerAdapterOptions };
           } else {
             const tileAdapterOptions: TileAdapterOptions = opt;

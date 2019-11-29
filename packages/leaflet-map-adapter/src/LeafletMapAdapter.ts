@@ -16,7 +16,14 @@ import {
   Locate,
   BaseMapEvents
 } from '@nextgis/webmap';
-import L, { Map, Control, Layer, ControlPosition, LeafletMouseEvent, GridLayer } from 'leaflet';
+import L, {
+  Map,
+  Control,
+  Layer,
+  ControlPosition,
+  LeafletMouseEvent,
+  GridLayer
+} from 'leaflet';
 import { EventEmitter } from 'events';
 import { TileAdapter } from './layer-adapters/TileAdapter/TileAdapter';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
@@ -29,7 +36,9 @@ import { convertMapClickEvent } from './utils/utils';
 export type Type<T> = new (...args: any[]) => T;
 
 export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
-  static layerAdapters: { [name: string]: Type<LayerAdapter<Map, any, any>> } = {
+  static layerAdapters: {
+    [name: string]: Type<LayerAdapter<Map, any, any>>;
+  } = {
     IMAGE: ImageAdapter,
     TILE: TileAdapter,
     GEOJSON: GeoJsonAdapter
@@ -199,7 +208,11 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     }
   }
 
-  setLayerOrder(layer: any, order: number, layers: { [x: string]: LayerAdapter }) {
+  setLayerOrder(
+    layer: any,
+    order: number,
+    layers: { [x: string]: LayerAdapter }
+  ) {
     // const baseLayers: string[] = [];
     // const orderedLayers = Object.keys(layers).filter((x) => {
     //   if (layers[x].options.baseLayer) {

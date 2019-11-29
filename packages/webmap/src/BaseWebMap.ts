@@ -12,7 +12,12 @@ import {
   Locate
 } from './interfaces/MapAdapter';
 import { MapOptions, AppOptions } from './interfaces/WebMapApp';
-import { LngLatBoundsArray, Type, Cursor, LngLatArray } from './interfaces/BaseTypes';
+import {
+  LngLatBoundsArray,
+  Type,
+  Cursor,
+  LngLatArray
+} from './interfaces/BaseTypes';
 import { RuntimeParams } from './interfaces/RuntimeParams';
 import { StarterKit } from './interfaces/StarterKit';
 
@@ -28,7 +33,10 @@ import { onLoad } from './util/decorators';
 import { propertiesFilter } from './util/propertiesFilter';
 import { clearObject } from './util/clearObject';
 
-import { detectGeometryType, findMostFrequentGeomType } from './util/geometryTypes';
+import {
+  detectGeometryType,
+  findMostFrequentGeomType
+} from './util/geometryTypes';
 import { updateGeoJsonAdapterOptions } from './util/updateGeoJsonAdapterOptions';
 
 import { CenterState } from './components/mapStates/CenterState';
@@ -55,7 +63,12 @@ const OPTIONS: MapOptions = {
 /**
  * @class WebMap
  */
-export class BaseWebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEvents> {
+export class BaseWebMap<
+  M = any,
+  L = any,
+  C = any,
+  E extends WebMapEvents = WebMapEvents
+> {
   static keys: Keys = new Keys();
   static utils = {
     detectGeometryType,
@@ -69,7 +82,10 @@ export class BaseWebMap<M = any, L = any, C = any, E extends WebMapEvents = WebM
 
   options: MapOptions = OPTIONS;
   // `WebMapEvents` must be `E` but its not work correct
-  readonly emitter: StrictEventEmitter<EventEmitter, WebMapEvents> = new EventEmitter();
+  readonly emitter: StrictEventEmitter<
+    EventEmitter,
+    WebMapEvents
+  > = new EventEmitter();
   readonly keys = BaseWebMap.keys;
 
   readonly mapAdapter: MapAdapter<M>;
@@ -342,7 +358,10 @@ export class BaseWebMap<M = any, L = any, C = any, E extends WebMapEvents = WebM
           res(mapAdapter);
         }
       };
-      const isLoaded = this.mapAdapter.isLoaded !== undefined ? this.mapAdapter.isLoaded : true;
+      const isLoaded =
+        this.mapAdapter.isLoaded !== undefined
+          ? this.mapAdapter.isLoaded
+          : true;
       if (this.mapAdapter.map && isLoaded) {
         _resolve();
       } else {

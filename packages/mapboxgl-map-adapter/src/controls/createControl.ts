@@ -1,7 +1,10 @@
 import { MapControl, CreateControlOptions } from '@nextgis/webmap';
 import { IControl } from 'mapbox-gl';
 
-export function createControl(control: MapControl, options: CreateControlOptions = {}): IControl {
+export function createControl(
+  control: MapControl,
+  options: CreateControlOptions = {}
+): IControl {
   class Control implements IControl {
     private _container?: HTMLElement;
 

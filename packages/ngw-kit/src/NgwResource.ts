@@ -13,7 +13,10 @@ export class NgwResource {
       return this._extent;
     }
     if (this.item) {
-      this._extent = await getNgwResourceExtent(this.item, this.connector).then();
+      this._extent = await getNgwResourceExtent(
+        this.item,
+        this.connector
+      ).then();
       return this._extent;
     }
   }

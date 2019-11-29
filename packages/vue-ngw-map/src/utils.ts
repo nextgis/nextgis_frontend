@@ -12,13 +12,18 @@ interface VueElement extends Vue {
   [prop: string]: any;
 }
 
-export function propsBinder(vueElement: VueElement, props: Record<string, any>) {
+export function propsBinder(
+  vueElement: VueElement,
+  props: Record<string, any>
+) {
   for (const key in props) {
     const setMethodName = 'set' + capitalizeFirstLetter(key);
     if (key in props && vueElement[setMethodName]) {
       const prop = props[key];
       const deepValue =
-        (prop && prop.type === Object) || prop.type === Array || Array.isArray(prop.type);
+        (prop && prop.type === Object) ||
+        prop.type === Array ||
+        Array.isArray(prop.type);
       vueElement.$watch(
         key,
         (newVal, oldVal) => {
@@ -32,7 +37,9 @@ export function propsBinder(vueElement: VueElement, props: Record<string, any>) 
   }
 }
 
-export const findNgwMapParent = (firstVueParent: Vue | VueNgwMap): VueNgwMap => {
+export const findNgwMapParent = (
+  firstVueParent: Vue | VueNgwMap
+): VueNgwMap => {
   let found = false;
   while (firstVueParent && !found) {
     if (!('ngwMap' in firstVueParent)) {
