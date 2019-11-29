@@ -88,7 +88,7 @@ export interface IconPaint {
  * @deprecated use IconPaint instead
  */
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface IconOptions extends IconPaint {}
+export interface IconOptions extends IconPaint { }
 
 export type GetPaintFunction = (opt?: any) => VectorAdapterLayerPaint;
 
@@ -324,8 +324,8 @@ export interface BaseLayerAdapter<M = any, L = any, O extends AdapterOptions = A
   map?: M;
 
   addLayer(options: O): L | Promise<L> | undefined;
+  updateLayer?(): void;
   removeLayer?(): void;
-
   beforeRemove?(): void;
 
   showLayer?(layer: L): void;
@@ -342,7 +342,7 @@ export interface VectorLayerAdapter<
   L = any,
   O extends VectorAdapterOptions = VectorAdapterOptions,
   F extends Feature = Feature
-> extends BaseLayerAdapter<M, L, O> {
+  > extends BaseLayerAdapter<M, L, O> {
   selected?: boolean;
   source?: unknown;
 
