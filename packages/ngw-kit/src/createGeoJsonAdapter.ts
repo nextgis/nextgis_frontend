@@ -21,7 +21,9 @@ export async function createGeoJsonAdapter(
 
   let _dataPromise: CancelablePromise<any> | undefined;
   const _fullDataLoad = false;
-  let _lastFilterArgs: { filters: PropertiesFilter; options?: FilterOptions };
+  let _lastFilterArgs:
+    | { filters?: PropertiesFilter; options?: FilterOptions }
+    | undefined;
 
   const geoJsonAdapterCb = async (
     filters?: PropertiesFilter,
