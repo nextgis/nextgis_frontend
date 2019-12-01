@@ -259,6 +259,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
           if (layer) {
             if (layer.type === 'symbol') {
               _map.setPaintProperty(layerId, 'text-opacity', opacity);
+              _map.setPaintProperty(layerId, 'icon-opacity', opacity);
             } else {
               _map.setPaintProperty(layerId, layer.type + '-opacity', opacity);
             }
