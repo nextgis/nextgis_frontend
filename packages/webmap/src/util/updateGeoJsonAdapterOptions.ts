@@ -24,12 +24,12 @@ export function updateGeoJsonAdapterOptions(
       p.type = p.type
         ? p.type
         : geomType === 'fill' || geomType === 'line'
-        ? 'path'
-        : 'html' in p || 'className' in p
-        ? 'icon'
-        : geomType;
+          ? 'path'
+          : 'html' in p || 'className' in p
+            ? 'icon'
+            : geomType;
     }
-    opt.type = geomType;
+    opt.type = opt.type || geomType;
   }
   return opt;
 }
