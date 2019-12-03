@@ -1,6 +1,11 @@
 import { expect } from 'chai';
 import { mapHtml } from '../mapHtml';
-import { MapAdapter, AppOptions, Type, MapOptions } from '../../../packages/webmap/src';
+import {
+  MapAdapter,
+  AppOptions,
+  Type,
+  MapOptions
+} from '../../../packages/webmap/src';
 import { WebMap } from '../../../packages/webmap/src/WebMap';
 import { baseMapTests, MapAdapterCreateOptions } from './baseMapTests';
 import sinon from 'sinon';
@@ -10,28 +15,35 @@ export function createWebMap(MA: Type<MapAdapter>, options?: AppOptions) {
   return new WebMap({ mapAdapter: new MA(), ...options });
 }
 
-export async function buildWebMap(
+export async function buildWebMap<W extends WebMap = WebMap>(
   MA: Type<MapAdapter>,
   mapOptions: MapOptions,
   appOpt?: AppOptions,
-  opt?: MapAdapterCreateOptions
-): Promise<WebMap> {
-  const webMap = createWebMap(MA, appOpt);
-  return opt && opt.noCreate ? webMap : webMap.create({ target: 'map', ...mapOptions });
+  opt?: MapAdapterCreateOptions,
+  createWebMap_ = createWebMap
+): Promise<W> {
+  const webMap = createWebMap_(MA, appOpt) as W;
+  return opt && opt.noCreate
+    ? webMap
+    : webMap.create({ target: 'map', ...mapOptions });
 }
 
-export const webMapTests = (MA: Type<MapAdapter>) => {
+export const webMapTests = <W extends WebMap = WebMap>(
+  MA: Type<MapAdapter>,
+  webMapName = 'WebMap',
+  createWebMap_?: (MA: Type<MapAdapter>, options?: AppOptions) => W
+) => {
   const adapterName = MA.name;
 
   const _buildWebMap = async (
     mapOptions: MapOptions,
     appOpt?: AppOptions,
     opt?: MapAdapterCreateOptions
-  ): Promise<WebMap> => {
-    return buildWebMap(MA, mapOptions, appOpt, opt);
+  ): Promise<W> => {
+    return buildWebMap(MA, mapOptions, appOpt, opt, createWebMap_);
   };
 
-  describe(`WebMap with ${adapterName}.`, () => {
+  describe(`${webMapName} with ${adapterName}.`, () => {
     beforeEach(() => {
       document.documentElement.innerHTML = mapHtml;
     });
@@ -56,7 +68,9 @@ export const webMapTests = (MA: Type<MapAdapter>) => {
       });
     });
 
-    baseMapTests(MA, (MA: Type<MapAdapter>, opt: MapOptions = {}) => _buildWebMap(opt));
+    baseMapTests(MA, (MA: Type<MapAdapter>, opt: MapOptions = {}) =>
+      _buildWebMap(opt)
+    );
 
     it('returns undefined if map not initialized but layers added', async () => {
       const map = await _buildWebMap({}, undefined, { noCreate: true });
