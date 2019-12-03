@@ -3,7 +3,10 @@ import { MapAdapter, Type, MapOptions } from '../../../packages/webmap/src';
 import { mapHtml } from '../mapHtml';
 import { baseMapTests } from './baseMapTests';
 
-const mapAdapterCreate = async (MA: Type<MapAdapter>, opt?: MapOptions): Promise<MapAdapter> => {
+const mapAdapterCreate = async (
+  MA: Type<MapAdapter>,
+  opt?: MapOptions
+): Promise<MapAdapter> => {
   const mapAdapter = new MA();
   return new Promise(resolve => {
     mapAdapter.emitter.on('create', () => {
@@ -31,7 +34,9 @@ export const mapAdapterTests = (MA: Type<MapAdapter>) => {
       it('Set custom target HTMLElement as ID', async () => {
         document.body.innerHTML = '<div id="custom-map"></div>';
         await mapAdapterCreate(MA, { target: 'custom-map' });
-        const mapContainer = document.getElementById('custom-map') as HTMLElement;
+        const mapContainer = document.getElementById(
+          'custom-map'
+        ) as HTMLElement;
         expect(mapContainer.childElementCount).greaterThan(0);
       });
     });
