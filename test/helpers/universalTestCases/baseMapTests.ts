@@ -3,7 +3,13 @@
  */
 
 import { expect } from 'chai';
-import { MapAdapter, Type, MapOptions, LngLatArray, WebMap } from '../../../packages/webmap/src';
+import {
+  MapAdapter,
+  Type,
+  MapOptions,
+  LngLatArray,
+  WebMap
+} from '../../../packages/webmap/src';
 import { mapHtml } from '../mapHtml';
 import asyncTimeout from '../utils/asyncTimeout';
 
