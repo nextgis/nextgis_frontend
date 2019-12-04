@@ -82,4 +82,5 @@ export interface CreateControlOptions {
 
 export interface ToggleControl {
   onClick: OnClick;
+  changeStatus: OnClickSync;
 }
