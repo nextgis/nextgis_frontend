@@ -37,7 +37,14 @@ export function getImageData(
   if (!canvg && img instanceof HTMLImageElement) {
     context.drawImage(img, 0, 0, opt.width, opt.height);
   } else if (typeof img === 'string') {
-    canvg(canvas, img);
+    if (canvg.Canvg) {
+      // for canvg v.3.x.x
+      const v = canvg.Canvg.fromString(context, img);
+      v.start();
+    } else {
+      // for canvg v.2.x.x
+      canvg(canvas, img);
+    }
   }
   return context.getImageData(0, 0, opt.width, opt.height);
 }
