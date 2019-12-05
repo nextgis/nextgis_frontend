@@ -38,7 +38,7 @@ export class VueNgwControl extends Vue {
       if (control) {
         ngwMap.removeControl(control);
       }
-      const adcontrolOptions: CreateControlOptions = {
+      const adControlOptions: CreateControlOptions = {
         ...this.$props,
         ...this.$props.controlOptions
       };
@@ -52,7 +52,7 @@ export class VueNgwControl extends Vue {
       };
       const _control = await ngwMap.createControl(
         controlObject,
-        adcontrolOptions
+        adControlOptions
       );
       this.control = ngwMap.addControl(_control, this.position);
     }
