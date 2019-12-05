@@ -11,7 +11,8 @@ import {
   MapOptions,
   LayerAdapter,
   LngLatBoundsArray,
-  WebMapEvents
+  WebMapEvents,
+  CreateControlOptions
 } from '@nextgis/webmap';
 import { MvtAdapter } from './layer-adapters/MvtAdapter';
 import mapboxgl, {
@@ -269,8 +270,8 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     }
   }
 
-  createControl(control: MapControl): IControl {
-    return createControl(control);
+  createControl(control: MapControl, options?: CreateControlOptions): IControl {
+    return createControl(control, options);
   }
 
   createButtonControl(options: ButtonControlOptions): IControl {
