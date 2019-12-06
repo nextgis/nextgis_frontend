@@ -94,6 +94,7 @@ export function getIcon(opt: IconOptions = {}): WebmapIcoOptions {
     type: 'icon',
     iconSize: [size, size],
     iconAnchor: [anchor, anchor],
-    html: s.serializeToString(svg)
+    html: s.serializeToString(svg),
+    svg
   };
 }

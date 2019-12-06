@@ -80,6 +80,7 @@ export interface IconPaint {
   type: 'icon';
   className?: string;
   html?: string;
+  svg?: HTMLElement;
   iconSize?: [number, number];
   iconAnchor?: [number, number];
 }
