@@ -7,7 +7,10 @@ import NgwConnector, {
 
 export interface FeatureRequestParams {
   srs?: number;
+  fields?: string;
   geom_format?: string;
+  limit?: number;
+  intersects?: string;
 }
 
 const FEATURE_REQUEST_PARAMS: FeatureRequestParams = {
@@ -39,8 +42,7 @@ export function getNgwLayerItem<
     connector: NgwConnector;
   } & FilterOptions
 ): CancelablePromise<FeatureItem> {
-  const params: FeatureRequestParams &
-    FilterOptions & { [name: string]: any } = {
+  const params: FeatureRequestParams & { [name: string]: any } = {
     ...FEATURE_REQUEST_PARAMS
   };
   return options.connector.get('feature_layer.feature.item', null, {
@@ -99,11 +101,10 @@ export function getNgwLayerItems<
     filters?: PropertiesFilter;
   } & FilterOptions
 ): CancelablePromise<FeatureItem[]> {
-  const params: FeatureRequestParams &
-    FilterOptions & { [name: string]: any } = {
+  const params: FeatureRequestParams & { [name: string]: any } = {
     ...FEATURE_REQUEST_PARAMS
   };
-  const { connector, filters, limit, intersects, resourceId } = options;
+  const { connector, filters, limit, fields, intersects, resourceId } = options;
   if (filters) {
     const filterById = filters.find(x => x[0] === 'id');
     if (filterById) {
@@ -115,6 +116,9 @@ export function getNgwLayerItems<
   }
   if (limit) {
     params.limit = limit;
+  }
+  if (fields) {
+    params.fields = fields.join();
   }
   if (intersects) {
     params.intersects = intersects;
