@@ -308,6 +308,7 @@ export type Operations =
 
 export interface FilterOptions {
   limit?: number;
+  fields?: string[];
   intersects?: string;
 }
 
