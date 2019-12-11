@@ -199,6 +199,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     ) {
       return feature.properties._rendromId;
     }
+    return '' + feature.id;
   }
 
   protected async _createPaintForType(
