@@ -91,17 +91,35 @@ export class MvtAdapter extends VectorAdapter<MvtAdapterOptions> {
           const selLayerName = this._getSelectionLayerNameFromType(t);
           if (layers.indexOf(selLayerName) !== -1) {
             if (this._selectionName) {
-              const filters = properties
-                ? this._createFilterDefinitions(properties, operationsAliases)
-                : [];
-              this.map.setFilter(selLayerName, ['all', geomFilter, ...filters]);
+              if (properties) {
+                const filters = this._createFilterDefinitions(
+                  operationsAliases,
+                  properties
+                );
+                this.map.setFilter(selLayerName, [
+                  'all',
+                  geomFilter,
+                  ...filters
+                ]);
+              } else {
+                this.map.setFilter(selLayerName, [
+                  'all',
+                  geomFilter,
+                  ['in', this.featureIdName, '']
+                ]);
+              }
             }
           }
           if (layers.indexOf(layerName) !== -1) {
-            const filters = properties
-              ? this._createFilterDefinitions(properties, reversOperations)
-              : [];
-            this.map.setFilter(layerName, ['all', geomFilter, ...filters]);
+            if (properties) {
+              const filters = this._createFilterDefinitions(
+                reversOperations,
+                properties
+              );
+              this.map.setFilter(layerName, ['all', geomFilter, ...filters]);
+            } else {
+              this.map.setFilter(layerName, ['all', geomFilter]);
+            }
           }
         }
       });
@@ -109,8 +127,8 @@ export class MvtAdapter extends VectorAdapter<MvtAdapterOptions> {
   }
 
   private _createFilterDefinitions(
-    filters: PropertiesFilter,
-    _operationsAliases: { [key in Operations]: string }
+    _operationsAliases: { [key in Operations]: string },
+    filters: PropertiesFilter
   ) {
     return filters.map(x => {
       const [field, operation, value] = x;
