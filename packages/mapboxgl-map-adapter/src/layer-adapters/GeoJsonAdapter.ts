@@ -32,13 +32,16 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   source?: string;
   protected featureIdName = '_rendromId';
   private _features: Feature[] = [];
-  private _filteredFeatureIds: string[] = [];
+  private _filteredFeatureIds: Array<string | number> = [];
   private _filterFun?: DataLayerFilter<Feature>;
   private _sources: Record<string, GeoJSONSource> = {};
 
   constructor(public map: Map, public options: GeoJsonAdapterOptions) {
     super(map, options);
     this.source = this._sourceId;
+    if (this.options.source) {
+      // this.featureIdName = '$id';
+    }
   }
 
   async addLayer(options: GeoJsonAdapterOptions): Promise<TLayer> {
@@ -188,7 +191,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     }
   }
 
-  protected _getRendromId(feature: Feature): string | undefined {
+  protected _getRendromId(feature: Feature): string | number | undefined {
     // @ts-ignore
     const id = feature._rendromId;
     if (id !== undefined) {
@@ -199,7 +202,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     ) {
       return feature.properties._rendromId;
     }
-    return '' + feature.id;
+    return feature.id;
   }
 
   protected async _createPaintForType(
@@ -339,8 +342,8 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   }
 
   private _updateFilter() {
-    let selectionArray: string[] = [];
-    const filteredArray: string[] = [];
+    let selectionArray: Array<string | number> = [];
+    const filteredArray: Array<string | number> = [];
 
     if (this._filteredFeatureIds.length) {
       this._features.forEach(x => {

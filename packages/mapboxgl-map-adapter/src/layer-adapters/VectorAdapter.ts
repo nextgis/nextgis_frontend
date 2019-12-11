@@ -18,7 +18,10 @@ import {
 import {
   Map,
   MapLayerMouseEvent,
-  AnySourceData
+  AnySourceData,
+  AnyLayout,
+  Layer,
+  MapboxGeoJSONFeature
   // BackgroundPaint, FillPaint, FillExtrusionPaint, LinePaint, SymbolPaint,
   // RasterPaint, CirclePaint, HeatmapPaint, HillshadePaint,
 } from 'mapbox-gl';
@@ -56,7 +59,7 @@ export abstract class VectorAdapter<
   protected _types: VectorAdapterLayerType[] = ['fill', 'circle', 'line'];
   protected readonly _sourceId: string;
   protected readonly _selectionName: string;
-  protected _selectedFeatureIds: string[] = [];
+  protected _selectedFeatureIds: Array<number | string> = [];
 
   private $onLayerClick?: (e: MapLayerMouseEvent) => void;
 
@@ -95,10 +98,12 @@ export abstract class VectorAdapter<
           this.layer.push(layer);
           if (options.selectedPaint) {
             const selectionLayer = this._getSelectionLayerNameFromType(t);
-            await this._addLayer(selectionLayer, type, [
-              geomFilter,
-              ['in', this.featureIdName, '']
-            ]);
+            await this._addLayer(
+              selectionLayer,
+              type,
+              [geomFilter, ['in', this.featureIdName, '']],
+              this.options.selectedLayout
+            );
             this.layer.push(selectionLayer);
           }
         }
@@ -209,7 +214,7 @@ export abstract class VectorAdapter<
     }
   }
 
-  protected _getRendromId(feature: Feature): string | undefined {
+  protected _getRendromId(feature: Feature): string | number | undefined {
     // @ts-ignore
     return feature.id;
   }
@@ -249,7 +254,8 @@ export abstract class VectorAdapter<
   protected async _addLayer(
     name: string,
     type: VectorAdapterLayerType,
-    filter?: any[]
+    filter?: any[],
+    layout?: AnyLayout
   ) {
     let mType: MapboxLayerType;
     if (type === 'icon') {
@@ -257,8 +263,8 @@ export abstract class VectorAdapter<
     } else {
       mType = type;
     }
-    const layout = (this.options.layout || {}) as mapboxgl.AnyLayout;
-    const layerOpt: mapboxgl.Layer = {
+    layout = (layout || this.options.layout || {}) as AnyLayout;
+    const layerOpt: Layer = {
       id: name,
       type: mType,
       source: this._sourceId,
@@ -270,11 +276,10 @@ export abstract class VectorAdapter<
       },
       ...this._getAdditionalLayerOptions()
     };
-    const filters = [
-      'all',
-      ...(filter || []),
-      this.options.nativeFilter
-    ].filter(x => x);
+    const nativeFilter = this.options.nativeFilter
+      ? (this.options.nativeFilter as any[])
+      : [];
+    const filters = ['all', ...(filter || []), ...nativeFilter].filter(x => x);
 
     if (filters.length > 1) {
       layerOpt.filter = filters;
@@ -283,31 +288,40 @@ export abstract class VectorAdapter<
     this.map.addLayer(layerOpt);
   }
 
-  private _onLayerClick(e: mapboxgl.MapLayerMouseEvent) {
+  private _onLayerClick(e: MapLayerMouseEvent) {
     e.preventDefault();
-    const features = this.map.queryRenderedFeatures(e.point, {
-      layers: this.layer
-    });
-    const feature = features[0] as Feature;
-    if (feature) {
-      const id = this._getRendromId(feature);
-      if (id !== undefined) {
-        let isSelected = this._selectedFeatureIds.indexOf(id) !== -1;
-        if (isSelected) {
-          if (this.options && this.options.unselectOnSecondClick) {
-            this._unselectFeature(feature);
-            isSelected = false;
+    // const features = this.map.queryRenderedFeatures(e.point, {
+    //   layers: this.layer
+    // });
+    if (this.layer) {
+      const features = this.layer.reduce((a, b) => {
+        const features_ = this.map.queryRenderedFeatures(e.point, {
+          layers: [b]
+        });
+        const c = a.concat(features_);
+        return c;
+      }, [] as MapboxGeoJSONFeature[]);
+      const feature = features[0] as Feature;
+      if (feature) {
+        const id = this._getRendromId(feature);
+        if (id !== undefined) {
+          let isSelected = this._selectedFeatureIds.indexOf(id) !== -1;
+          if (isSelected) {
+            if (this.options && this.options.unselectOnSecondClick) {
+              this._unselectFeature(feature);
+              isSelected = false;
+            }
+          } else {
+            this._selectFeature(feature);
+            isSelected = true;
           }
-        } else {
-          this._selectFeature(feature);
-          isSelected = true;
-        }
-        if (this.options.onLayerClick) {
-          this.options.onLayerClick({
-            layer: this,
-            feature,
-            selected: isSelected
-          });
+          if (this.options.onLayerClick) {
+            this.options.onLayerClick({
+              layer: this,
+              feature,
+              selected: isSelected
+            });
+          }
         }
       }
     }
