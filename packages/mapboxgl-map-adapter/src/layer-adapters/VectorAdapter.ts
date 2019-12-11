@@ -34,7 +34,7 @@ import { typeAliasForFilter, allowedByType } from '../util/geom_type';
 export interface Feature<
   G extends GeometryObject | null = Geometry,
   P = GeoJsonProperties
-  > extends F<G, P> {
+> extends F<G, P> {
   _rendromId?: string;
 }
 
@@ -48,7 +48,7 @@ type MapboxLayerType = 'fill' | 'line' | 'symbol' | 'circle';
 
 export abstract class VectorAdapter<
   O extends VectorAdapterOptions = VectorAdapterOptions
-  > extends BaseAdapter<O>
+> extends BaseAdapter<O>
   implements VectorLayerAdapter<Map, TLayer, O, Feature> {
   selected = false;
 
