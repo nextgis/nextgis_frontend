@@ -164,6 +164,7 @@ export interface VectorAdapterOptions<F extends Feature = Feature, L = any>
   nativePaint?: boolean | Record<string, any>;
   nativeFilter?: unknown;
   layout?: any;
+  selectedLayout?: any;
   limit?: number;
   // selectedPaintDiff?: VectorAdapterLayerPaint;
   /**
