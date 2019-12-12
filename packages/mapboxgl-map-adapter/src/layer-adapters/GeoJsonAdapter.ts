@@ -145,7 +145,6 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     } else if (!this.selected) {
       this._selectFeature(this._features);
     }
-    this.selected = true;
   }
 
   unselect(findFeatureFun?: (opt: { feature: Feature }) => boolean) {
@@ -155,7 +154,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
       );
       this._unselectFeature(features);
     } else if (this.selected) {
-      this._unselectFeature(this._features);
+      this._unselectFeature();
     }
     this.selected = !!this._selectedFeatureIds.length;
   }
@@ -236,22 +235,28 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     this._updateFilter();
   }
 
-  protected _unselectFeature(feature: Feature | Feature[]) {
-    let features: Feature[] = [];
-    if (Array.isArray(feature)) {
-      features = feature;
-    } else {
-      features = [feature];
-    }
-    features.forEach(f => {
-      const id = this._getRendromId(f);
-      if (id !== undefined) {
-        const index = this._selectedFeatureIds.indexOf(id);
-        if (index !== -1) {
-          this._selectedFeatureIds.splice(index, 1);
-        }
+  protected _unselectFeature(feature?: Feature | Feature[]) {
+    if (feature) {
+      let features: Feature[] = [];
+      if (Array.isArray(feature)) {
+        features = feature;
+      } else {
+        features = [feature];
       }
-    });
+      if (features.length) {
+        features.forEach(f => {
+          const id = this._getRendromId(f);
+          if (id !== undefined) {
+            const index = this._selectedFeatureIds.indexOf(id);
+            if (index !== -1) {
+              this._selectedFeatureIds.splice(index, 1);
+            }
+          }
+        });
+      }
+    } else {
+      this._selectedFeatureIds = [];
+    }
     this._updateFilter();
   }
 
@@ -359,7 +364,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     } else {
       selectionArray = this._selectedFeatureIds;
     }
-
+    this.selected = this._selectedFeatureIds.length > 0;
     const layers = this.layer;
     if (layers) {
       this._types.forEach(t => {
