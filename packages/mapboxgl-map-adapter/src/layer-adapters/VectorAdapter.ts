@@ -91,10 +91,13 @@ export abstract class VectorAdapter<
             }
           }
           const layer = this._getLayerNameFromType(t);
-          // const geomFilter = ['==', '$type', geomType];
           const geomFilter =
             types.length > 1 ? ['==', '$type', geomType] : undefined;
-          await this._addLayer(layer, type, geomFilter);
+          const nativeFilter = this.options.nativeFilter
+            ? (this.options.nativeFilter as any[])
+            : [];
+
+          await this._addLayer(layer, type, [geomFilter, nativeFilter]);
           this.layer.push(layer);
           if (options.selectedPaint) {
             const selectionLayer = this._getSelectionLayerNameFromType(t);
@@ -121,6 +124,40 @@ export abstract class VectorAdapter<
       this.layer.forEach(layerId => {
         map.removeLayer(layerId);
       });
+    }
+  }
+
+  protected async _addLayer(
+    name: string,
+    type: VectorAdapterLayerType,
+    filter?: any[],
+    layout?: AnyLayout
+  ) {
+    let mType: MapboxLayerType;
+    if (type === 'icon') {
+      mType = 'symbol';
+    } else {
+      mType = type;
+    }
+    layout = (layout || this.options.layout || {}) as AnyLayout;
+    const layerOpt: Layer = {
+      id: name,
+      type: mType,
+      source: this._sourceId,
+      minzoom: this.options.minZoom,
+      maxzoom: this.options.maxZoom,
+      layout: {
+        visibility: 'none',
+        ...layout
+      },
+      ...this._getAdditionalLayerOptions()
+    };
+
+    this.map.addLayer(layerOpt);
+
+    const filters = ['all', ...(filter || [])].filter(x => x);
+    if (filters.length > 1) {
+      this.map.setFilter(layerOpt.id, filters);
     }
   }
 
@@ -249,43 +286,6 @@ export abstract class VectorAdapter<
 
   protected _getAdditionalLayerOptions() {
     return {};
-  }
-
-  protected async _addLayer(
-    name: string,
-    type: VectorAdapterLayerType,
-    filter?: any[],
-    layout?: AnyLayout
-  ) {
-    let mType: MapboxLayerType;
-    if (type === 'icon') {
-      mType = 'symbol';
-    } else {
-      mType = type;
-    }
-    layout = (layout || this.options.layout || {}) as AnyLayout;
-    const layerOpt: Layer = {
-      id: name,
-      type: mType,
-      source: this._sourceId,
-      minzoom: this.options.minZoom,
-      maxzoom: this.options.maxZoom,
-      layout: {
-        visibility: 'none',
-        ...layout
-      },
-      ...this._getAdditionalLayerOptions()
-    };
-    const nativeFilter = this.options.nativeFilter
-      ? (this.options.nativeFilter as any[])
-      : [];
-    const filters = ['all', ...(filter || []), ...nativeFilter].filter(x => x);
-
-    if (filters.length > 1) {
-      layerOpt.filter = filters;
-    }
-
-    this.map.addLayer(layerOpt);
   }
 
   private _onLayerClick(e: MapLayerMouseEvent) {
