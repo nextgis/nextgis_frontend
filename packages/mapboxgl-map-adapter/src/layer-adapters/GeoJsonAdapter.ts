@@ -40,7 +40,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     super(map, options);
     this.source = this._sourceId;
     if (this.options.source) {
-      // this.featureIdName = '$id';
+      this.featureIdName = '$id';
     }
   }
 
