@@ -1,7 +1,11 @@
 /**
  * @module leaflet-map-adapter
  */
-export function callAjax(src: string, callback: (resp: any) => any, headers: any) {
+export function callAjax(
+  src: string,
+  callback: (resp: any) => any,
+  headers: any
+) {
   const xhr = new XMLHttpRequest();
   xhr.open('GET', src);
   xhr.responseType = 'arraybuffer';

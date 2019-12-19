@@ -39,7 +39,12 @@ import { getIcon } from '@nextgis/icons';
 import { onMapLoad } from './decorators';
 import { appendNgwResources, prepareWebMapOptions, OPTIONS } from './utils';
 
-import { NgwMapOptions, ControlOptions, NgwMapEvents, NgwLayers } from './interfaces';
+import {
+  NgwMapOptions,
+  ControlOptions,
+  NgwMapEvents,
+  NgwLayers
+} from './interfaces';
 import { Geometry, Feature, FeatureCollection } from 'geojson';
 
 /**
@@ -60,7 +65,12 @@ import { Geometry, Feature, FeatureCollection } from 'geojson';
  * });
  * ```
  */
-export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<M, L, C, NgwMapEvents> {
+export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<
+  M,
+  L,
+  C,
+  NgwMapEvents
+> {
   static utils = {
     ...WebMap.utils,
     ...NgwKit.utils,
@@ -70,7 +80,10 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<M, L, C, N
   static decorators = { onMapLoad, ...WebMap.decorators };
   static getIcon = getIcon;
 
-  readonly emitter: StrictEventEmitter<EventEmitter, NgwMapEvents> = new EventEmitter();
+  readonly emitter: StrictEventEmitter<
+    EventEmitter,
+    NgwMapEvents
+  > = new EventEmitter();
 
   options: NgwMapOptions<C> & O = {} as NgwMapOptions<C> & O;
   connector!: NgwConnector;
@@ -155,9 +168,13 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<M, L, C, N
    * ```
    */
   @onMapLoad()
-  async addNgwLayer(options: AddNgwLayerOptions): Promise<ResourceAdapter | undefined> {
+  async addNgwLayer(
+    options: AddNgwLayerOptions
+  ): Promise<ResourceAdapter | undefined> {
     if (!options.resourceId && !options.keyname) {
-      throw new Error('resourceId or keyname is required parameter to add NGW layer');
+      throw new Error(
+        'resourceId or keyname is required parameter to add NGW layer'
+      );
     }
     if (this.options.baseUrl || this.options.baseUrl === '') {
       try {
@@ -219,7 +236,10 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<M, L, C, N
   async getNgwLayerFeature<
     G extends Geometry | null = Geometry,
     P extends Record<string, any> = Record<string, any>
-  >(options: { resourceId: number; featureId: number }): CancelablePromise<Feature<G, P>> {
+  >(options: {
+    resourceId: number;
+    featureId: number;
+  }): CancelablePromise<Feature<G, P>> {
     return NgwKit.utils.getNgwLayerFeature<G, P>({
       connector: this.connector,
       ...options
@@ -312,7 +332,9 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<M, L, C, N
           item = ngwLayer.layer.item;
         } else {
           const resourceId = ngwLayer.resourceId;
-          item = await this.connector.get('resource.item', null, { id: resourceId });
+          item = await this.connector.get('resource.item', null, {
+            id: resourceId
+          });
         }
 
         NgwKit.utils.getNgwResourceExtent(item, this.connector).then(extent => {
@@ -341,8 +363,10 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<M, L, C, N
 
   enableSelection() {
     if (!this.__selectFromNgwRaster) {
-      this.__selectFromNgwRaster = (ev: MapClickEvent) => this._selectFromNgwRaster(ev);
-      this.__selectFromNgwVector = (ev: OnLayerClickOptions) => this._selectFromNgwVector(ev);
+      this.__selectFromNgwRaster = (ev: MapClickEvent) =>
+        this._selectFromNgwRaster(ev);
+      this.__selectFromNgwVector = (ev: OnLayerClickOptions) =>
+        this._selectFromNgwVector(ev);
       this.emitter.on('click', this.__selectFromNgwRaster);
       this.emitter.on('layer:click', this.__selectFromNgwVector);
     }
@@ -391,7 +415,9 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<M, L, C, N
     const resources: NgwLayerOptions[] = [];
     const layerFitAllowed = this._isFitFromResource();
     if (this.options.webmapId) {
-      appendNgwResources(resources, this.options.webmapId, { fit: layerFitAllowed });
+      appendNgwResources(resources, this.options.webmapId, {
+        fit: layerFitAllowed
+      });
     }
     if (this.options.resources && Array.isArray(this.options.resources)) {
       this.options.resources.forEach(x => {
@@ -459,13 +485,19 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<M, L, C, N
           featureCount: 1,
           [id]: items
         };
-        this._emitStatusEvent('ngw:select', { ...identify, resources: [id], sourceType: 'vector' });
+        this._emitStatusEvent('ngw:select', {
+          ...identify,
+          resources: [id],
+          sourceType: 'vector'
+        });
         return identify;
       }
     }
   }
 
   private async _selectFromNgwRaster(ev: MapClickEvent) {
+    this._emitStatusEvent('ngw:preselect');
+
     const promises: Promise<number[] | undefined>[] = [];
     for (const nl in this._ngwLayers) {
       const layer = this._ngwLayers[nl].layer;
@@ -480,31 +512,38 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<M, L, C, N
         x.forEach(y => ids.push(y));
       }
     });
-    if (ids.length) {
-      const pixelRadius = this.options.pixelRadius || 10;
-      const center = this.getCenter();
-      const zoom = this.getZoom();
-      if (center && zoom) {
-        const metresPerPixel =
-          (40075016.686 * Math.abs(Math.cos((center[1] * 180) / Math.PI))) / Math.pow(2, zoom + 8);
-        // FIXME: understand the circle creation function
-        const radius = pixelRadius * metresPerPixel * 0.0005;
-        return NgwKit.utils
-          .sendIdentifyRequest(ev, {
-            layers: ids,
-            connector: this.connector,
-            radius
-          })
-          .then(resp => {
-            this._emitStatusEvent('ngw:select', {
-              ...resp,
-              resources: ids,
-              sourceType: 'raster',
-              event: ev
-            });
-            return resp;
-          });
-      }
+
+    if (!ids.length) {
+      this._emitStatusEvent('ngw:select', null);
+      return;
     }
+
+    const pixelRadius = this.options.pixelRadius || 10;
+    const center = this.getCenter();
+    const zoom = this.getZoom();
+    if (!center || !zoom) {
+      this._emitStatusEvent('ngw:select', null);
+      return;
+    }
+    const metresPerPixel =
+      (40075016.686 * Math.abs(Math.cos((center[1] * 180) / Math.PI))) /
+      Math.pow(2, zoom + 8);
+    // FIXME: understand the circle creation function
+    const radius = pixelRadius * metresPerPixel * 0.0005;
+    return NgwKit.utils
+      .sendIdentifyRequest(ev, {
+        layers: ids,
+        connector: this.connector,
+        radius
+      })
+      .then(resp => {
+        this._emitStatusEvent('ngw:select', {
+          ...resp,
+          resources: ids,
+          sourceType: 'raster',
+          event: ev
+        });
+        return resp;
+      });
   }
 }

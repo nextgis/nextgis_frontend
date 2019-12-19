@@ -6,7 +6,7 @@ import NgwMap, { NgwMapOptions, MapAdapter } from '@nextgis/ngw-map';
 import NgwConnector from '@nextgis/ngw-connector';
 
 @Component
-export class VueNgwMapBase extends Vue {
+export class VueNgwMapBase<M = any> extends Vue {
   @Prop({ type: Object }) mapAdapter!: MapAdapter;
   @Prop({ type: Boolean }) fullFilling!: boolean;
   @Prop({ type: NgwConnector }) connector!: NgwConnector;
@@ -15,7 +15,7 @@ export class VueNgwMapBase extends Vue {
   @Prop({ type: String }) webMapId!: string;
   @Prop({ type: Object }) mapOptions!: NgwMapOptions;
   name = 'vue-ngw-map';
-  ngwMap!: NgwMap;
+  ngwMap!: NgwMap<M>;
   ready = false;
 
   mounted() {
@@ -48,10 +48,12 @@ export class VueNgwMapBase extends Vue {
 
   private _setNgwMap() {
     this.ngwMap = new NgwMap(this.mapAdapter, {
+      ...this.$props,
       ...this.mapOptions,
-      target: this.$el as HTMLElement,
-      ...this.$props
+      target: this.$el as HTMLElement
     });
     this.ready = true;
   }
 }
+
+export default VueNgwMapBase;

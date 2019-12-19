@@ -4,7 +4,12 @@
 type Reject = (reason?: any) => void;
 type Resolve = (value?: any) => void;
 
-const handleCallback = <T = never>(resolve: Resolve, reject: Reject, callback: Resolve, r: T) => {
+const handleCallback = <T = never>(
+  resolve: Resolve,
+  reject: Reject,
+  callback: Resolve,
+  r: T
+) => {
   try {
     resolve(callback(r));
   } catch (e) {
@@ -46,8 +51,14 @@ export class CancelablePromise<T> implements Promise<T> {
   }
 
   then<TResult1 = T, TResult2 = never>(
-    onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
-    onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
+    onfulfilled?:
+      | ((value: T) => TResult1 | PromiseLike<TResult1>)
+      | undefined
+      | null,
+    onrejected?:
+      | ((reason: any) => TResult2 | PromiseLike<TResult2>)
+      | undefined
+      | null
   ): CancelablePromise<TResult1 | TResult2> {
     const p = new CancelablePromise(
       (resolve, reject) => {
@@ -84,7 +95,10 @@ export class CancelablePromise<T> implements Promise<T> {
   }
 
   catch<TResult = never>(
-    onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null
+    onrejected?:
+      | ((reason: any) => TResult | PromiseLike<TResult>)
+      | undefined
+      | null
   ): CancelablePromise<T | TResult> {
     return this.then(undefined, onrejected);
   }

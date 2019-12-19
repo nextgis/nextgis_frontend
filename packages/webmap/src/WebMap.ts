@@ -68,7 +68,9 @@ export class WebMap<
   C = any,
   E extends WebMapEvents = WebMapEvents
 > extends WebMapLayers<M, L, C, E> {
-  static controls: { [name: string]: (webMap: WebMap, options?: any) => any } = {
+  static controls: {
+    [name: string]: (webMap: WebMap, options?: any) => any;
+  } = {
     CONTROL: (
       webMap: WebMap,
       options: {
@@ -113,14 +115,19 @@ export class WebMap<
    *   }
    * });
    */
-  async createControl(control: MapControl, options?: CreateControlOptions): Promise<C | undefined> {
+  async createControl(
+    control: MapControl,
+    options?: CreateControlOptions
+  ): Promise<C | undefined> {
     await this.onLoad('build-map');
     if (this.mapAdapter.createControl) {
       return this.mapAdapter.createControl(control, options);
     }
   }
 
-  async createButtonControl(options: ButtonControlOptions): Promise<C | undefined> {
+  async createButtonControl(
+    options: ButtonControlOptions
+  ): Promise<C | undefined> {
     await this.onLoad('build-map');
     if (this.mapAdapter.createButtonControl) {
       return this.mapAdapter.createButtonControl(options);
@@ -135,7 +142,10 @@ export class WebMap<
       return this.mapAdapter.createToggleControl(options);
     } else {
       if (this.mapAdapter.createButtonControl) {
-        return WebMap.utils.createToggleControl<C>(this.mapAdapter.createButtonControl, options);
+        return WebMap.utils.createToggleControl<C>(
+          this.mapAdapter.createButtonControl,
+          options
+        );
       }
     }
   }
@@ -148,7 +158,10 @@ export class WebMap<
     }
   }
 
-  getControl<K extends keyof MapControls>(control: K, options?: MapControls[K]): C | undefined {
+  getControl<K extends keyof MapControls>(
+    control: K,
+    options?: MapControls[K]
+  ): C | undefined {
     const engine = this.mapAdapter.controlAdapters[control];
     if (engine) {
       return new engine(options);

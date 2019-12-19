@@ -11,12 +11,19 @@ import {
   LayerAdapter,
   LngLatArray,
   LngLatBoundsArray,
-  WebMapEvents,
   LocateOptions,
   LocationEvents,
-  Locate
+  Locate,
+  BaseMapEvents
 } from '@nextgis/webmap';
-import L, { Map, Control, Layer, ControlPosition, LeafletMouseEvent, GridLayer } from 'leaflet';
+import L, {
+  Map,
+  Control,
+  Layer,
+  ControlPosition,
+  LeafletMouseEvent,
+  GridLayer
+} from 'leaflet';
 import { EventEmitter } from 'events';
 import { TileAdapter } from './layer-adapters/TileAdapter/TileAdapter';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
@@ -29,7 +36,9 @@ import { convertMapClickEvent } from './utils/utils';
 export type Type<T> = new (...args: any[]) => T;
 
 export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
-  static layerAdapters: { [name: string]: Type<LayerAdapter<Map, any, any>> } = {
+  static layerAdapters: {
+    [name: string]: Type<LayerAdapter<Map, any, any>>;
+  } = {
     IMAGE: ImageAdapter,
     TILE: TileAdapter,
     GEOJSON: GeoJsonAdapter
@@ -52,7 +61,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   emitter = new EventEmitter();
   map?: Map;
 
-  private _universalEvents: Array<keyof WebMapEvents> = [
+  private _universalEvents: Array<keyof BaseMapEvents> = [
     'zoomstart',
     'zoom',
     'zoomend',
@@ -64,18 +73,19 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   create(options: MapOptions) {
     this.options = { ...options };
     if (this.options.target) {
-      const { maxZoom, minZoom, zoom } = this.options;
+      const { maxZoom, minZoom, zoom, center } = this.options;
       this.map = new Map(this.options.target, {
         zoomControl: false,
         attributionControl: false,
         maxZoom,
         minZoom,
-        zoom
+        zoom,
+        center
       });
-      this.emitter.emit('create', this);
       // create default pane
       const defPane = this.map.createPane('order-0');
       defPane.style.zIndex = String(0);
+      this.emitter.emit('create', this);
       this._addMapListeners();
     }
   }
@@ -142,10 +152,13 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   }
 
   // [west, south, east, north]
-  fit(e: LngLatBoundsArray) {
+  fitBounds(e: LngLatBoundsArray) {
     if (this.map) {
       // top, left, bottom, right
-      this.map.fitBounds([[e[3], e[0]], [e[1], e[2]]]);
+      this.map.fitBounds([
+        [e[3], e[0]],
+        [e[1], e[2]]
+      ]);
     }
   }
 
@@ -195,7 +208,11 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     }
   }
 
-  setLayerOrder(layer: any, order: number, layers: { [x: string]: LayerAdapter }) {
+  setLayerOrder(
+    layer: any,
+    order: number,
+    layers: { [x: string]: LayerAdapter }
+  ) {
     // const baseLayers: string[] = [];
     // const orderedLayers = Object.keys(layers).filter((x) => {
     //   if (layers[x].options.baseLayer) {

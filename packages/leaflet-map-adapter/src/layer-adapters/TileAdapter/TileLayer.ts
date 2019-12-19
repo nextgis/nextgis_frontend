@@ -13,7 +13,10 @@ export class TileLayer extends TL {
     super._removeTile(key);
   }
 
-  createTile(coords: object, done: (error: any, tile: HTMLImageElement) => void) {
+  createTile(
+    coords: object,
+    done: (error: any, tile: HTMLImageElement) => void
+  ) {
     // @ts-ignore
     const url = this.getTileUrl(coords);
 
@@ -29,7 +32,8 @@ export class TileLayer extends TL {
     );
 
     if (this.options.crossOrigin || this.options.crossOrigin === '') {
-      tile.crossOrigin = this.options.crossOrigin === true ? '' : this.options.crossOrigin;
+      tile.crossOrigin =
+        this.options.crossOrigin === true ? '' : this.options.crossOrigin;
     }
 
     tile.alt = '';

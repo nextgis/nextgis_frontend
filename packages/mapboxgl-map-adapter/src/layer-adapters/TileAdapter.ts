@@ -5,7 +5,8 @@ import { BaseLayerAdapter, TileAdapterOptions } from '@nextgis/webmap';
 import { BaseAdapter } from './BaseAdapter';
 import { RasterSource, ResourceType } from 'mapbox-gl';
 
-export class TileAdapter extends BaseAdapter<TileAdapterOptions> implements BaseLayerAdapter {
+export class TileAdapter extends BaseAdapter<TileAdapterOptions>
+  implements BaseLayerAdapter {
   addLayer(options: TileAdapterOptions): string[] {
     options = { ...this.options, ...(options || {}) };
 

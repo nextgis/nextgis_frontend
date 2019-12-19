@@ -31,9 +31,9 @@
       baseUrl: 'https://demo.nextgis.com',
       target: 'map',
       qmsId: 487,
-      webmapId: 4226,
-      identification: true
+      resources: [{ resourceId: 4226, fit: true, selectable: true }]
     });
+    ngwMap.emitter.on('ngw:select', function (e) { console.log(e) })
   </script>
 </body>
 

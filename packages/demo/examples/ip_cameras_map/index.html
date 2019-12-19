@@ -53,79 +53,80 @@
 
   <script>
     // initialize webmap
-    var ngwMap = new NgwMap({
+    NgwMap.create({
       baseUrl: 'http://kazahstan.nextgis.com',
       target: 'map',
       webmapId: 10,
       qmsId: 487,
       maxZoom: 22
-    });
+    }).then(function (ngwMap) {
 
-    // add layer with cameras
-    ngwMap.addNgwLayer({
-      resourceId: 3,
-      id: 'cameras',
-      adapter: 'GEOJSON',
-      adapterOptions: {
-        paint: { color: 'red', radius: 5 },
-        selectedPaint: { color: 'green', radius: 5 },
-        selectable: true,
-      }
-    });
-
-    // create camera panel control
-    var cameraPanel = document.createElement('div');
-    cameraPanel.className = 'camera-panel';
-    cameraPanel.innerHTML = '<div class="camera-wrapper" style="display: none;">' +
-      '<p class="camera-title"></p>' +
-      '<video-js id="vid1" width="250" height="250" class="vjs-default-skin" controls></video-js>' +
-      '</div>' +
-      '<div class="no-active-camera-block">Select camera</div>';
-
-    var cameraPanelControl = ngwMap.createControl({
-      onAdd: function () {
-        return cameraPanel;
-      }
-    }, { bar: true });
-
-    ngwMap.addControl(cameraPanelControl, 'bottom-right');
-
-    // define some element after the panel is added to dom the DOM
-    var wrapper = cameraPanel.querySelector('.camera-wrapper')
-    var title = cameraPanel.querySelector('.camera-title')
-    var player = videojs(cameraPanel.querySelector('#vid1'));
-
-
-    function updateCameraPanel(id) {
-      if (id) {
-        wrapper.style.display = 'block';
-        title.innerHTML = 'Camera #' + id;
-        // random cameras
-        var cameraSrcs = [
-          'https://cdn-003.whatsupcams.com/hls/hr_zgzoo03.m3u8',
-          'https://videos3.earthcam.com/fecnetwork/4798.flv/chunklist_w1157489744.m3u8',
-          'https://ngx.cr6.streamzilla.xlcdn.com/session/f6dcb457ed14d63375aee687d4b0d50a/sz/streamdays/wowza4/live/paigntonzoo-blackmacaques/chunklist.m3u8'
-        ]
-        player.src({
-          src: cameraSrcs[id % cameraSrcs.length],
-          type: 'application/x-mpegURL',
-          overrideNative: true
-        });
-        player.play();
-      } else {
-        wrapper.style.display = 'none';
-        player.pause();
-      }
-    };
-
-    ngwMap.emitter.on('layer:click', function (e) {
-      if (e.layer.id === 'cameras') {
-        if (e.selected) {
-          updateCameraPanel(e.feature.id);
-        } else {
-          updateCameraPanel();
+      // add layer with cameras
+      ngwMap.addNgwLayer({
+        resourceId: 3,
+        id: 'cameras',
+        adapter: 'GEOJSON',
+        adapterOptions: {
+          paint: { color: 'red', radius: 5 },
+          selectedPaint: { color: 'green', radius: 5 },
+          selectable: true,
         }
-      }
+      });
+
+      // create camera panel control
+      var cameraPanel = document.createElement('div');
+      cameraPanel.className = 'camera-panel';
+      cameraPanel.innerHTML = '<div class="camera-wrapper" style="display: none;">' +
+        '<p class="camera-title"></p>' +
+        '<video-js id="vid1" width="250" height="250" class="vjs-default-skin" controls></video-js>' +
+        '</div>' +
+        '<div class="no-active-camera-block">Select camera</div>';
+
+      var cameraPanelControl = ngwMap.createControl({
+        onAdd: function () {
+          return cameraPanel;
+        }
+      }, { bar: true });
+
+      ngwMap.addControl(cameraPanelControl, 'bottom-right');
+
+      // define some element after the panel is added to dom the DOM
+      var wrapper = cameraPanel.querySelector('.camera-wrapper')
+      var title = cameraPanel.querySelector('.camera-title')
+      var player = videojs(cameraPanel.querySelector('#vid1'));
+
+
+      function updateCameraPanel(id) {
+        if (id) {
+          wrapper.style.display = 'block';
+          title.innerHTML = 'Camera #' + id;
+          // random cameras
+          var cameraSrcs = [
+            'https://cdn-003.whatsupcams.com/hls/hr_zgzoo03.m3u8',
+            'https://videos3.earthcam.com/fecnetwork/4798.flv/chunklist_w1157489744.m3u8',
+            'https://ngx.cr6.streamzilla.xlcdn.com/session/f6dcb457ed14d63375aee687d4b0d50a/sz/streamdays/wowza4/live/paigntonzoo-blackmacaques/chunklist.m3u8'
+          ]
+          player.src({
+            src: cameraSrcs[id % cameraSrcs.length],
+            type: 'application/x-mpegURL',
+            overrideNative: true
+          });
+          player.play();
+        } else {
+          wrapper.style.display = 'none';
+          player.pause();
+        }
+      };
+
+      ngwMap.emitter.on('layer:click', function (e) {
+        if (e.layer.id === 'cameras') {
+          if (e.selected) {
+            updateCameraPanel(e.feature.id);
+          } else {
+            updateCameraPanel();
+          }
+        }
+      });
     });
 
   </script>

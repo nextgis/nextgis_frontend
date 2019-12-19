@@ -21,7 +21,11 @@ export class UrlRuntimeParams implements RuntimeParams {
       params[key] = true;
       return ''; // does not matter
     });
-    window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
+    window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(
+      m,
+      key,
+      value
+    ) {
       params[key] = decodeURIComponent(value);
       return ''; // does not matter
     });
@@ -60,7 +64,8 @@ export class UrlRuntimeParams implements RuntimeParams {
     let rtn = sourceUrl.split('?')[0];
     let param: string;
     let paramsArr: string[];
-    const queryString = sourceUrl.indexOf('?') !== -1 ? sourceUrl.split('?')[1] : '';
+    const queryString =
+      sourceUrl.indexOf('?') !== -1 ? sourceUrl.split('?')[1] : '';
     if (queryString !== '') {
       paramsArr = queryString.split('&');
       for (let i = paramsArr.length - 1; i >= 0; i -= 1) {

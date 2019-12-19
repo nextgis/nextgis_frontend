@@ -42,7 +42,12 @@ export interface IconOptions {
 
 const STROKE = 0.8;
 
-function insertSvg(width: number, height: number, stroke = 0, content?: string) {
+function insertSvg(
+  width: number,
+  height: number,
+  stroke = 0,
+  content?: string
+) {
   const s = stroke / 2;
   const svg = `<svg
     version="1.1"
@@ -89,6 +94,7 @@ export function getIcon(opt: IconOptions = {}): WebmapIcoOptions {
     type: 'icon',
     iconSize: [size, size],
     iconAnchor: [anchor, anchor],
-    html: s.serializeToString(svg)
+    html: s.serializeToString(svg),
+    svg
   };
 }

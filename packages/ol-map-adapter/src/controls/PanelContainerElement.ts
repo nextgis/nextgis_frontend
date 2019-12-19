@@ -3,7 +3,9 @@ import './PanelContainerElement.css';
 
 export class PanelContainerElement {
   private _container: HTMLElement;
-  private _positionsContainers: { [key in ControlPositions]: HTMLElement | null } = {
+  private _positionsContainers: {
+    [key in ControlPositions]: HTMLElement | null;
+  } = {
     'bottom-left': null,
     'bottom-right': null,
     'top-left': null,
@@ -31,8 +33,14 @@ export class PanelContainerElement {
       const newContainer = document.createElement('div');
       newContainer.className = 'openlayers-ctrl';
       // reserve place for async loaded containers
-      if (position.indexOf('bottom') !== -1 && positionContainer.childElementCount) {
-        positionContainer.insertBefore(newContainer, positionContainer.firstChild);
+      if (
+        position.indexOf('bottom') !== -1 &&
+        positionContainer.childElementCount
+      ) {
+        positionContainer.insertBefore(
+          newContainer,
+          positionContainer.firstChild
+        );
       } else {
         positionContainer.appendChild(newContainer);
       }
@@ -51,7 +59,12 @@ export class PanelContainerElement {
     const element = document.createElement('div');
     element.className = 'openlayers-control-container';
 
-    const positions: ControlPositions[] = ['top-right', 'top-left', 'bottom-right', 'bottom-left'];
+    const positions: ControlPositions[] = [
+      'top-right',
+      'top-left',
+      'bottom-right',
+      'bottom-left'
+    ];
     positions.forEach(x => {
       const positionContainer = this._createPositionContainer(x);
       this._positionsContainers[x] = positionContainer;

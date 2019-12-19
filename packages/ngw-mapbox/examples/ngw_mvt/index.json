@@ -1,1 +1,4 @@
-{"name":"Add different NGW resource","description":"Click on radio button in order to show on the map NGW resources by their ID. If the layer with adapter, related resource will be displayed  automatic."}
+{
+  "name": "Add MVT NGW resource",
+  "description": ""
+}

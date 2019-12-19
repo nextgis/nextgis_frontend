@@ -28,7 +28,11 @@ export function preparePaint(
   let newPaint: Paint | undefined;
   if (typeof paint === 'function') {
     return (opt: any) => {
-      return preparePaint(paint(opt), defaultPaint, getPaintFunctions) as VectorAdapterLayerPaint;
+      return preparePaint(
+        paint(opt),
+        defaultPaint,
+        getPaintFunctions
+      ) as VectorAdapterLayerPaint;
     };
   } else if (paint.type === 'get-paint') {
     const getPaint = updatePaintOptionFromCallback(paint, getPaintFunctions);

@@ -5,7 +5,9 @@ function like(a: string, b: string, iLike?: boolean) {
   return new RegExp(re, iLike ? 'i' : '').exec(b) !== null;
 }
 
-export const operationsAliases: { [key in Operations]: (a: any, b: any) => boolean } = {
+export const operationsAliases: {
+  [key in Operations]: (a: any, b: any) => boolean;
+} = {
   // greater(>)
   gt: (a: any, b: any) => a > b,
   // lower(<)

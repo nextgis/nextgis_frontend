@@ -35,6 +35,18 @@ export class TreeHelper {
     }
     return [];
   }
+
+  getRoot<I extends Item = Item>(): I | undefined {
+    let parent = this.getParent() as I;
+    let toReturn = parent;
+    while (parent) {
+      parent = parent.tree.getParent() as I;
+      if (parent) {
+        toReturn = parent;
+      }
+    }
+    return toReturn;
+  }
   // endregion
 
   // region Child

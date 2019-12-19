@@ -15,12 +15,21 @@ export async function createGeoJsonAdapter(
   webMap: WebMap,
   connector: NgwConnector
 ) {
-  const adapter = webMap.mapAdapter.layerAdapters.GEOJSON as Type<VectorLayerAdapter>;
+  const adapter = webMap.mapAdapter.layerAdapters.GEOJSON as Type<
+    VectorLayerAdapter
+  >;
 
   let _dataPromise: CancelablePromise<any> | undefined;
   const _fullDataLoad = false;
+  let _lastFilterArgs:
+    | { filters?: PropertiesFilter; options?: FilterOptions }
+    | undefined;
 
-  const geoJsonAdapterCb = async (filters?: PropertiesFilter, opt?: FilterOptions) => {
+  const geoJsonAdapterCb = async (
+    filters?: PropertiesFilter,
+    opt?: FilterOptions
+  ) => {
+    _lastFilterArgs = { filters, options: opt };
     _dataPromise = getNgwLayerFeatures({
       resourceId: options.resourceId,
       filters,
@@ -50,11 +59,16 @@ export async function createGeoJsonAdapter(
     async addLayer(_opt: GeoJsonAdapterOptions) {
       let data = {} as GeoJsonObject;
       if (!_opt.data) {
-        data = await geoJsonAdapterCb(_opt.propertiesFilter, { limit: _opt.limit });
+        data = await geoJsonAdapterCb(_opt.propertiesFilter, {
+          limit: _opt.limit
+        });
       }
       const opt = onLoad(data);
       const addLayerOptions = { ..._opt, ...opt };
-      if (addLayerOptions.data && Object.keys(addLayerOptions.data).length === 0) {
+      if (
+        addLayerOptions.data &&
+        Object.keys(addLayerOptions.data).length === 0
+      ) {
         addLayerOptions.data = undefined;
       }
       return super.addLayer(addLayerOptions);
@@ -62,6 +76,14 @@ export async function createGeoJsonAdapter(
 
     beforeRemove() {
       abort();
+    }
+
+    async updateLayer() {
+      const { filters, options } = _lastFilterArgs || {};
+      const data = await geoJsonAdapterCb(filters, options);
+      if (this.setData) {
+        this.setData(data);
+      }
     }
 
     async propertiesFilter(filters: PropertiesFilter, opt?: FilterOptions) {
@@ -83,6 +105,7 @@ export async function createGeoJsonAdapter(
     }
 
     removeFilter() {
+      _lastFilterArgs = undefined;
       this.propertiesFilter([]);
       if (this.filter) {
         this.filter(function() {
