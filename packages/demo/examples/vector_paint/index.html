@@ -26,12 +26,6 @@
 <body>
   <div id='map'></div>
   <script>
-    var ngwMap = new NgwMap({
-      target: 'map',
-      // qmsId: 487,
-      bounds: [76.0, 25.1, 77.0, 25.5]
-    });
-
     var properties = [
       { id: 1 },
       { id: 2, color: 'green', opacity: 0.5 },
@@ -41,48 +35,55 @@
     ];
 
     var layers = [
-    [
-      { type: 'Point', coordinates: [ 76.1, 25.5 ] },
-      { type: 'Point', coordinates: [ 76.3, 25.5 ] },
-      { type: 'Point', coordinates: [ 76.5, 25.5 ] },
-      { type: 'Point', coordinates: [ 76.7, 25.5 ] },
-      { type: 'Point', coordinates: [ 76.9, 25.5 ] }
-    ],
-    [
-      { type: 'LineString', coordinates: [ [ 76.0, 25.4 ], [ 76.1, 25.3 ], [ 76.2, 25.4 ] ] },
-      { type: 'LineString', coordinates: [ [ 76.2, 25.3 ], [ 76.3, 25.4 ], [ 76.4, 25.3 ] ] },
-      { type: 'LineString', coordinates: [ [ 76.4, 25.4 ], [ 76.5, 25.3 ], [ 76.6, 25.4 ] ] },
-      { type: 'LineString', coordinates: [ [ 76.6, 25.3 ], [ 76.7, 25.4 ], [ 76.8, 25.3 ] ] },
-      { type: 'LineString', coordinates: [ [ 76.8, 25.4 ], [ 76.9, 25.3 ], [ 77.0, 25.4 ] ] },
-    ],
-    [
-      { type: 'Polygon', coordinates: [ [ [ 76.0, 25.1 ], [ 76.1, 25.2 ], [ 76.2, 25.1 ], [ 76.0, 25.1 ] ] ] },
-      { type: 'Polygon', coordinates: [ [ [ 76.2, 25.2 ], [ 76.3, 25.1 ], [ 76.4, 25.2 ], [ 76.2, 25.2 ] ] ] },
-      { type: 'Polygon', coordinates: [ [ [ 76.4, 25.1 ], [ 76.5, 25.2 ], [ 76.6, 25.1 ], [ 76.4, 25.1 ] ] ] },
-      { type: 'Polygon', coordinates: [ [ [ 76.6, 25.2 ], [ 76.7, 25.1 ], [ 76.8, 25.2 ], [ 76.6, 25.2 ] ] ] },
-      { type: 'Polygon', coordinates: [ [ [ 76.8, 25.1 ], [ 76.9, 25.2 ], [ 77.0, 25.1 ], [ 76.8, 25.1 ] ] ] }
-    ]
+      [
+        { type: 'Point', coordinates: [76.1, 25.5] },
+        { type: 'Point', coordinates: [76.3, 25.5] },
+        { type: 'Point', coordinates: [76.5, 25.5] },
+        { type: 'Point', coordinates: [76.7, 25.5] },
+        { type: 'Point', coordinates: [76.9, 25.5] }
+      ],
+      [
+        { type: 'LineString', coordinates: [[76.0, 25.4], [76.1, 25.3], [76.2, 25.4]] },
+        { type: 'LineString', coordinates: [[76.2, 25.3], [76.3, 25.4], [76.4, 25.3]] },
+        { type: 'LineString', coordinates: [[76.4, 25.4], [76.5, 25.3], [76.6, 25.4]] },
+        { type: 'LineString', coordinates: [[76.6, 25.3], [76.7, 25.4], [76.8, 25.3]] },
+        { type: 'LineString', coordinates: [[76.8, 25.4], [76.9, 25.3], [77.0, 25.4]] },
+      ],
+      [
+        { type: 'Polygon', coordinates: [[[76.0, 25.1], [76.1, 25.2], [76.2, 25.1], [76.0, 25.1]]] },
+        { type: 'Polygon', coordinates: [[[76.2, 25.2], [76.3, 25.1], [76.4, 25.2], [76.2, 25.2]]] },
+        { type: 'Polygon', coordinates: [[[76.4, 25.1], [76.5, 25.2], [76.6, 25.1], [76.4, 25.1]]] },
+        { type: 'Polygon', coordinates: [[[76.6, 25.2], [76.7, 25.1], [76.8, 25.2], [76.6, 25.2]]] },
+        { type: 'Polygon', coordinates: [[[76.8, 25.1], [76.9, 25.2], [77.0, 25.1], [76.8, 25.1]]] }
+      ]
     ];
 
-  for (var fry = 0; fry < layers.length; fry++) {
-    var geometries = layers[fry];
-    var features = [];
-    for (var f = 0; f < geometries.length; f++) {
-      features.push({
-        type: 'Feature',
-        properties: properties[f],
-        geometry: geometries[f]
-      });
-    }
-    ngwMap.addGeoJsonLayer({
-      data: {
-        type: 'FeatureCollection',
-        features: features
-      },
-      visibility: true,
-      paint: function (f) {return f.properties}
+    NgwMap.create({
+      target: 'map',
+      // qmsId: 487,
+      bounds: [76.0, 25.1, 77.0, 25.5]
+    }).then(function (ngwMap) {
+
+      for (var fry = 0; fry < layers.length; fry++) {
+        var geometries = layers[fry];
+        var features = [];
+        for (var f = 0; f < geometries.length; f++) {
+          features.push({
+            type: 'Feature',
+            properties: properties[f],
+            geometry: geometries[f]
+          });
+        }
+        ngwMap.addGeoJsonLayer({
+          data: {
+            type: 'FeatureCollection',
+            features: features
+          },
+          visibility: true,
+          paint: function (f) { return f.properties }
+        });
+      }
     });
-  }
   </script>
 </body>
 

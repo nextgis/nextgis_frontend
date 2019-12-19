@@ -20,7 +20,7 @@ import {
 import { MapOptions } from '../../../packages/webmap/src/interfaces/WebMapApp';
 import { LngLatArray, LngLatBoundsArray } from '../../../packages/webmap/src/interfaces/BaseTypes';
 
-export class FakeMapAdapter<M = any, L = any, C extends any = any> implements MA {
+export class FakeMapAdapter<M extends any = {}, L = any, C extends any = any> implements MA {
   // isLoaded?: boolean = true;
   map?: M;
   emitter = new EventEmitter();
@@ -46,7 +46,7 @@ export class FakeMapAdapter<M = any, L = any, C extends any = any> implements MA
     if (this._container) {
       this._container.innerHTML = '<div></div>';
     }
-
+    this.map = {} as any;
     this.emitter.emit('create');
   }
 
@@ -75,8 +75,12 @@ export class FakeMapAdapter<M = any, L = any, C extends any = any> implements MA
     //
   }
 
-  fit(extent: LngLatBoundsArray, options?: FitOptions): void {
-    //
+  fitBounds(e: LngLatBoundsArray, options?: FitOptions): void {
+    this.options.center = [e[2] - (e[2] - e[0]) / 2, e[3] - (e[3] - e[1]) / 2];
+    this.options.zoom = 8; // for [102, 51, 104, 53]
+    this.emitter.emit('zoomstart');
+    this.emitter.emit('zoom');
+    this.emitter.emit('zoomend');
   }
 
   setView(lngLat: LngLatArray, zoom?: number): void {

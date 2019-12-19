@@ -3,80 +3,56 @@
  */
 
 import { WebMap } from '../WebMap';
-import { MapAdapter, MapClickEvent } from './MapAdapter';
+import { MapAdapter, MapClickEvent, DataLoadError } from './MapAdapter';
 import { LayerAdapter, OnLayerClickOptions } from './LayerAdapter';
 
-export interface WebMapEvents {
-  /**
-   * @event
-   */
-  'build-map': MapAdapter;
-  /**
-   * @event
-   */
+export interface WebMapEvents extends BaseMapEvents {
+  /** @event */
   create: WebMap;
-  /**
-   * @event
-   */
-  click: MapClickEvent;
-  /**
-   * @event
-   */
-  zoomstart: MapAdapter;
-  /**
-   * @event
-   */
-  zoom: MapAdapter;
-  /**
-   * @event
-   */
-  zoomend: MapAdapter;
-  /**
-   * @event
-   */
-  movestart: MapAdapter;
-  /**
-   * @event
-   */
-  move: MapAdapter;
-  /**
-   * @event
-   */
-  moveend: MapAdapter;
-  /**
-   * @event
-   */
+  /** @event */
+  'build-map': MapAdapter;
+  /** @event */
   'layer:preadd': LayerAdapter;
-  /**
-   * @event
-   */
+  /** @event */
   'layer:add': LayerAdapter;
-  /**
-   * @event
-   */
+  /** @event */
   'layer:preremove': LayerAdapter;
-  /**
-   * @event
-   */
+  /** @event */
   'layer:remove': LayerAdapter;
-  /**
-   * @event
-   */
+  /** @event */
   'layer:preshow': LayerAdapter;
-  /**
-   * @event
-   */
+  /** @event */
   'layer:show': LayerAdapter;
-  /**
-   * @event
-   */
+  /** @event */
   'layer:prehide': LayerAdapter;
-  /**
-   * @event
-   */
+  /** @event */
   'layer:hide': LayerAdapter;
-  /**
-   * @event
-   */
+  /** @event */
   'layer:click': OnLayerClickOptions;
+}
+
+export interface MapAdapterEvents extends BaseMapEvents {
+  /** @event */
+  'data-loaded': DataLoadError;
+  /** @event */
+  'data-error': DataLoadError;
+  /** @event */
+  create: MapAdapter;
+}
+
+export interface BaseMapEvents {
+  /** @event */
+  click: MapClickEvent;
+  /** @event */
+  zoomstart: MapAdapter;
+  /** @event */
+  zoom: MapAdapter;
+  /** @event */
+  zoomend: MapAdapter;
+  /** @event */
+  movestart: MapAdapter;
+  /** @event */
+  move: MapAdapter;
+  /** @event */
+  moveend: MapAdapter;
 }

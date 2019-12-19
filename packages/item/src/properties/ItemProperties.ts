@@ -54,7 +54,11 @@ export class ItemProperties {
     }
     if (handler && propOpt.name) {
       const options = { ...(propOpt || {}) };
-      this._properties[propOpt.name] = new handler(propOpt.name, this.item, options);
+      this._properties[propOpt.name] = new handler(
+        propOpt.name,
+        this.item,
+        options
+      );
       this._propertiesList.push(propOpt.name);
     }
   }

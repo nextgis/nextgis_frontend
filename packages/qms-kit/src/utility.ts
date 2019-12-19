@@ -6,13 +6,20 @@ import {
   AdapterOptions
 } from '@nextgis/webmap';
 import { fixUrlStr } from '@nextgis/utils';
-import { QmsAdapterOptions, QmsBasemap, QmsLayerType, QmsAdapter as QA } from './interfaces';
+import {
+  QmsAdapterOptions,
+  QmsBasemap,
+  QmsLayerType,
+  QmsAdapter as QA
+} from './interfaces';
 
 const alias: { [key in QmsLayerType]: keyof LayerAdaptersOptions } = {
   tms: 'TILE'
 };
 
-export function updateQmsOptions(qms: QmsBasemap): AdapterOptions & { url: string } {
+export function updateQmsOptions(
+  qms: QmsBasemap
+): AdapterOptions & { url: string } {
   const protocol = (location.protocol === 'https:' ? 'https' : 'http') + '://';
   const serviceUrl = qms.url.replace(/^(https?|ftp):\/\//, protocol);
   return {
@@ -62,7 +69,9 @@ export function createQmsAdapter(
     async addLayer(options: QmsAdapterOptions): Promise<any> {
       // qmsId for request, id for store
       if (!this.qms && options.qmsId) {
-        this.qms = await loadJSON<QmsBasemap>(url + '/api/v1/geoservices/' + options.qmsId);
+        this.qms = await loadJSON<QmsBasemap>(
+          url + '/api/v1/geoservices/' + options.qmsId
+        );
       }
       const qms = this.qms;
       if (qms) {

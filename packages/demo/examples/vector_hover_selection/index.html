@@ -49,83 +49,84 @@
     var _intervalId;
 
     // initialize webmap
-    var ngwMap = new NgwMap({
+    NgwMap.create({
       baseUrl: 'https://demo.nextgis.com',
       target: 'map',
       qmsId: 487,
       center: [50.0113, 19.9845],
       zoom: 10
-    });
+    }).then(function (ngwMap) {
 
-    // tree
-    ngwMap.addNgwLayer({
-      id: 'tree', resourceId: 4069, adapter: 'GEOJSON', adapterOptions: {
-        paint: function (feature) {
-          return { color: feature.properties.color }
+      // tree
+      ngwMap.addNgwLayer({
+        id: 'tree', resourceId: 4069, adapter: 'GEOJSON', adapterOptions: {
+          paint: function (feature) {
+            return { color: feature.properties.color }
+          }
         }
-      }
-    });
+      });
 
-    // toys
-    ngwMap.addNgwLayer({
-      id: 'toys', resourceId: 4061, adapter: 'GEOJSON', adapterOptions: {
-        paint: function (feature) {
-          return { color: feature.properties.color, opacity: 0.5 }
+      // toys
+      ngwMap.addNgwLayer({
+        id: 'toys', resourceId: 4061, adapter: 'GEOJSON', adapterOptions: {
+          paint: function (feature) {
+            return { color: feature.properties.color, opacity: 0.5 }
+          },
+          selectedPaint: function (feature) {
+            return { color: feature.properties.selcolor, opacity: 1 }
+          },
+          selectable: true,
+          selectOnHover: true,
+          popupOnSelect: true,
+          popupOptions: {
+            createPopupContent: createPopupContent
+          }
+        }
+      });
+
+      // star
+      ngwMap.addNgwLayer({
+        id: 'star', resourceId: 4059, adapter: 'GEOJSON', adapterOptions: {
+          paint: NgwMap.getIcon({ shape: 'star', color: 'darkred', strokeColor: 'darkred', size: 30 }),
+          selectedPaint: NgwMap.getIcon({ shape: 'star', color: 'red', strokeColor: 'orange', size: 60 }),
+          selectable: true,
+        }
+      });
+
+      // Animation control craeation
+      var animationControl = ngwMap.createToggleControl({
+        onClick: function (status) {
+          if (status) {
+            startRandomSelection();
+          } else {
+            stopRandomSelection();
+          }
         },
-        selectedPaint: function (feature) {
-          return { color: feature.properties.selcolor, opacity: 1 }
+
+        html: {
+          on: '<i class="material-icons">pause</i>',
+          off: '<i class="material-icons">play_arrow</i>'
         },
-        selectable: true,
-        selectOnHover: true,
-        popupOnSelect: true,
-        popupOptions: {
-          createPopupContent: createPopupContent
+      });
+      ngwMap.addControl(animationControl, 'top-left');
+
+      // Create configuration control
+      var configElement = document.createElement('div');
+      configElement.className = 'config-panel';
+      configElement.innerHTML = '<label>Animation delay: <input type="number" name="interval"></input></label>';
+      var intervalInput = configElement.querySelector('input');
+      intervalInput.value = config.interval.value;
+      intervalInput.addEventListener('change', onConfigUpdate);
+      intervalInput.addEventListener('input', onConfigUpdate);
+
+      var configControl = ngwMap.createControl({
+        onAdd: function () {
+          return configElement;
         }
-      }
-    });
+      }, { bar: true });
 
-    // star
-    ngwMap.addNgwLayer({
-      id: 'star', resourceId: 4059, adapter: 'GEOJSON', adapterOptions: {
-        paint: NgwMap.getIcon({ shape: 'star', color: 'darkred', strokeColor: 'darkred', size: 30 }),
-        selectedPaint: NgwMap.getIcon({ shape: 'star', color: 'red', strokeColor: 'orange', size: 60 }),
-        selectable: true,
-      }
-    });
-
-    // Animation control craeation
-    var animationControl = ngwMap.createToggleControl({
-      onClick: function (status) {
-        if (status) {
-          startRandomSelection();
-        } else {
-          stopRandomSelection();
-        }
-      },
-
-      html: {
-        on: '<i class="material-icons">pause</i>',
-        off: '<i class="material-icons">play_arrow</i>'
-      },
-    });
-    ngwMap.addControl(animationControl, 'top-left');
-
-    // Create configuration control
-    var configElement = document.createElement('div');
-    configElement.className = 'config-panel';
-    configElement.innerHTML = '<label>Animation delay: <input type="number" name="interval"></input></label>';
-    var intervalInput = configElement.querySelector('input');
-    intervalInput.value = config.interval.value;
-    intervalInput.addEventListener('change', onConfigUpdate);
-    intervalInput.addEventListener('input', onConfigUpdate);
-
-    var configControl = ngwMap.createControl({
-      onAdd: function () {
-        return configElement;
-      }
-    }, { bar: true });
-
-    ngwMap.addControl(configControl, 'top-right');
+      ngwMap.addControl(configControl, 'top-right');
+    })
 
     // helper functions
 

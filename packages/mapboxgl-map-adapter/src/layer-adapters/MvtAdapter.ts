@@ -1,7 +1,11 @@
 /**
  * @module mapboxgl-map-adapter
  */
-import { MvtAdapterOptions, PropertiesFilter, Operations } from '@nextgis/webmap';
+import {
+  MvtAdapterOptions,
+  PropertiesFilter,
+  Operations
+} from '@nextgis/webmap';
 import { VectorAdapter } from './VectorAdapter';
 import { TLayer } from '../MapboxglMapAdapter';
 
@@ -36,6 +40,10 @@ const reversOperations: { [key in Operations]: string } = {
 };
 
 export class MvtAdapter extends VectorAdapter<MvtAdapterOptions> {
+  static sources: string[] = [];
+
+  source?: string;
+
   select(properties: PropertiesFilter) {
     if (typeof properties !== 'function') {
       this._updateFilter(properties);
@@ -56,11 +64,17 @@ export class MvtAdapter extends VectorAdapter<MvtAdapterOptions> {
   }
 
   protected _getAdditionalLayerOptions() {
-    const mvtLayerOptions: Partial<mapboxgl.Layer> = {
-      source: {
+    const exist = MvtAdapter.sources.includes(this.options.url);
+    if (!exist) {
+      this.map.addSource(this.options.url, {
         type: 'vector',
         tiles: [this.options.url]
-      },
+      });
+      this.source = this.options.url;
+      MvtAdapter.sources.push(this.options.url);
+    }
+    const mvtLayerOptions: Partial<mapboxgl.Layer> = {
+      source: this.options.url,
       'source-layer': this.options.sourceLayer
     };
     return mvtLayerOptions;
@@ -77,17 +91,35 @@ export class MvtAdapter extends VectorAdapter<MvtAdapterOptions> {
           const selLayerName = this._getSelectionLayerNameFromType(t);
           if (layers.indexOf(selLayerName) !== -1) {
             if (this._selectionName) {
-              const filters = properties
-                ? this._createFilterDefinitions(properties, operationsAliases)
-                : [];
-              this.map.setFilter(selLayerName, ['all', geomFilter, ...filters]);
+              if (properties) {
+                const filters = this._createFilterDefinitions(
+                  operationsAliases,
+                  properties
+                );
+                this.map.setFilter(selLayerName, [
+                  'all',
+                  geomFilter,
+                  ...filters
+                ]);
+              } else {
+                this.map.setFilter(selLayerName, [
+                  'all',
+                  geomFilter,
+                  ['in', this.featureIdName, '']
+                ]);
+              }
             }
           }
           if (layers.indexOf(layerName) !== -1) {
-            const filters = properties
-              ? this._createFilterDefinitions(properties, reversOperations)
-              : [];
-            this.map.setFilter(layerName, ['all', geomFilter, ...filters]);
+            if (properties) {
+              const filters = this._createFilterDefinitions(
+                reversOperations,
+                properties
+              );
+              this.map.setFilter(layerName, ['all', geomFilter, ...filters]);
+            } else {
+              this.map.setFilter(layerName, ['all', geomFilter]);
+            }
           }
         }
       });
@@ -95,8 +127,8 @@ export class MvtAdapter extends VectorAdapter<MvtAdapterOptions> {
   }
 
   private _createFilterDefinitions(
-    filters: PropertiesFilter,
-    _operationsAliases: { [key in Operations]: string }
+    _operationsAliases: { [key in Operations]: string },
+    filters: PropertiesFilter
   ) {
     return filters.map(x => {
       const [field, operation, value] = x;

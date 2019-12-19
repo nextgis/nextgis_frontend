@@ -41,9 +41,9 @@ export class HtmlExample extends Vue {
     }
   }
 
-  beforeMount() {
-    this.ngwMap = this.ngwMap;
-  }
+  // beforeMount() {
+  //   this.ngwMap = this.ngwMap;
+  // }
 
   updated() {
     this.ngwMap = this._getDefaultNgwMap();

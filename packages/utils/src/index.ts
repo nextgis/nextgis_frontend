@@ -5,7 +5,7 @@
 import * as Dom from './dom';
 export const dom = Dom;
 export * from './clipboard';
-
+export * from './events';
 /**
  * Given an array of member function names as strings, replace all of them
  * with bound versions that will always refer to `context` as `this`. This

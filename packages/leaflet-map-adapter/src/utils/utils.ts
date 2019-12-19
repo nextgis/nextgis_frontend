@@ -11,7 +11,9 @@ import {
 } from 'geojson';
 import { LeafletMouseEvent } from 'leaflet';
 
-export const typeAlias: { [key in GeoJsonGeometryTypes]: VectorAdapterLayerType } = {
+export const typeAlias: {
+  [key in GeoJsonGeometryTypes]: VectorAdapterLayerType;
+} = {
   Point: 'circle',
   LineString: 'line',
   MultiPoint: 'circle',
@@ -26,7 +28,9 @@ export const PAINT = {
   opacity: 1
 };
 
-export const backAliases: { [key in VectorAdapterLayerType]?: GeoJsonGeometryTypes[] } = {};
+export const backAliases: {
+  [key in VectorAdapterLayerType]?: GeoJsonGeometryTypes[];
+} = {};
 
 for (const a in typeAlias) {
   const layerType = typeAlias[a as GeoJsonGeometryTypes];
@@ -35,7 +39,9 @@ for (const a in typeAlias) {
   backAliases[layerType] = backAlias;
 }
 
-export function findMostFrequentGeomType(arr: GeoJsonGeometryTypes[]): GeoJsonGeometryTypes {
+export function findMostFrequentGeomType(
+  arr: GeoJsonGeometryTypes[]
+): GeoJsonGeometryTypes {
   const counts: { [x: string]: number } = {};
   for (let fry = 0; fry < arr.length; fry++) {
     counts[arr[fry]] = 1 + (counts[arr[fry]] || 0);
@@ -53,10 +59,14 @@ export function findMostFrequentGeomType(arr: GeoJsonGeometryTypes[]): GeoJsonGe
 export function detectType(geojson: GeoJsonObject): GeoJsonGeometryTypes {
   let geometry: GeoJsonGeometryTypes;
   if (geojson.type === 'FeatureCollection') {
-    const featuresTypes = (geojson as FeatureCollection).features.map(f => f.geometry.type);
+    const featuresTypes = (geojson as FeatureCollection).features.map(
+      f => f.geometry.type
+    );
     geometry = findMostFrequentGeomType(featuresTypes);
   } else if (geojson.type === 'GeometryCollection') {
-    const geometryTypes = (geojson as GeometryCollection).geometries.map(g => g.type);
+    const geometryTypes = (geojson as GeometryCollection).geometries.map(
+      g => g.type
+    );
     geometry = findMostFrequentGeomType(geometryTypes);
   } else if (geojson.type === 'Feature') {
     geometry = (geojson as Feature).geometry.type;
@@ -79,7 +89,8 @@ export function filterGeometries(
   type: VectorAdapterLayerType
 ): GeoJsonObject | false {
   if (data.type === 'FeatureCollection') {
-    (data as FeatureCollection).features = (data as FeatureCollection).features.filter(f =>
+    const _data = data as FeatureCollection;
+    _data.features = _data.features.filter(f =>
       geometryFilter(f.geometry.type, type)
     );
   } else if (data.type === 'Feature') {
@@ -88,7 +99,8 @@ export function filterGeometries(
       return false;
     }
   } else if (data.type === 'GeometryCollection') {
-    (data as GeometryCollection).geometries = (data as GeometryCollection).geometries.filter(g =>
+    const _data = data as GeometryCollection;
+    _data.geometries = _data.geometries.filter(g =>
       geometryFilter(g.type, type)
     );
   }

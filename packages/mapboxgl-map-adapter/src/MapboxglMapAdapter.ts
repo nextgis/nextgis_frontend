@@ -11,7 +11,8 @@ import {
   MapOptions,
   LayerAdapter,
   LngLatBoundsArray,
-  WebMapEvents
+  WebMapEvents,
+  CreateControlOptions
 } from '@nextgis/webmap';
 import { MvtAdapter } from './layer-adapters/MvtAdapter';
 import mapboxgl, {
@@ -37,11 +38,11 @@ export type TLayer = string[];
 type TLayerAdapter = LayerAdapter<Map, TLayer>;
 
 const fitBoundsOptions: FitOptions = {
-  padding: 100
+  // padding: 100
 };
 
 export interface MapboxglMapAdapterOptions extends MapOptions {
-  style?: mapboxgl.Style | string;
+  style?: Partial<mapboxgl.Style> | string;
   accessToken?: string;
 }
 
@@ -83,65 +84,68 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
 
   // create(options: MapOptions = {target: 'map'}) {
   create(options: MapboxglMapAdapterOptions) {
-    if (!this.map) {
-      this.options = options;
-      if (options.accessToken) {
-        mapboxgl.accessToken = options.accessToken;
-      }
-      if (options.target) {
-        const mapOpt: MapboxOptions = {
-          container: options.target,
-          attributionControl: false,
-          // @ts-ignore
-          bounds: options.bounds,
-          fitBoundsOptions: { ...options.fitOptions, ...fitBoundsOptions },
-          transformRequest: (url: string, resourceType: ResourceType) => {
-            const transformed = this._transformRequest(url, resourceType);
-            if (transformed) {
-              return transformed;
-            } else {
-              return {
-                url
-              };
+    return new Promise((resolve, reject) => {
+      if (!this.map) {
+        this.options = options;
+        if (options.accessToken) {
+          mapboxgl.accessToken = options.accessToken;
+        }
+        if (options.target) {
+          const mapOpt: MapboxOptions = {
+            container: options.target,
+            attributionControl: false,
+            // @ts-ignore
+            bounds: options.bounds,
+            fitBoundsOptions: { ...options.fitOptions, ...fitBoundsOptions },
+            transformRequest: (url: string, resourceType: ResourceType) => {
+              const transformed = this._transformRequest(url, resourceType);
+              if (transformed) {
+                return transformed;
+              } else {
+                return {
+                  url
+                };
+              }
             }
-          }
-        };
-        if (typeof options.style === 'string') {
-          mapOpt.style = options.style;
-        } else {
-          mapOpt.style = {
-            ...{
-              version: 8,
-              name: 'Empty style',
-              sources: {},
-              layers: []
-            },
-            ...options.style
           };
-        }
-        if (options.center !== undefined) {
-          mapOpt.center = options.center;
-        }
-        if (options.zoom !== undefined) {
-          mapOpt.zoom = options.zoom - 1;
-        }
-        if (options.maxZoom) {
-          mapOpt.maxZoom = options.maxZoom - 1;
-        }
-        if (options.minZoom) {
-          mapOpt.minZoom = options.minZoom - 1;
-        }
-        this.map = new Map(mapOpt);
-        // @ts-ignore
-        this.map.transformRequests = [];
+          if (typeof options.style === 'string') {
+            mapOpt.style = options.style;
+          } else {
+            mapOpt.style = {
+              ...{
+                version: 8,
+                name: 'Empty style',
+                sources: {},
+                layers: []
+              },
+              ...options.style
+            };
+          }
+          if (options.center !== undefined) {
+            mapOpt.center = options.center;
+          }
+          if (options.zoom !== undefined) {
+            mapOpt.zoom = options.zoom - 1;
+          }
+          if (options.maxZoom) {
+            mapOpt.maxZoom = options.maxZoom - 1;
+          }
+          if (options.minZoom) {
+            mapOpt.minZoom = options.minZoom - 1;
+          }
+          this.map = new Map(mapOpt);
+          // @ts-ignore
+          this.map.transformRequests = [];
 
-        this._addEventsListeners();
-        this.isLoaded = true;
-        this.map.once('load', () => {
-          this.emitter.emit('create', this);
-        });
+          this.map.once('load', () => {
+            this.isLoaded = true;
+            this.emitter.emit('create', this);
+            resolve(this);
+          });
+          this._addEventsListeners();
+        }
       }
-    }
+    });
   }
 
   destroy() {
@@ -191,13 +195,19 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   }
 
   // [extent_left, extent_bottom, extent_right, extent_top];
-  fit(e: LngLatBoundsArray, options: FitOptions = {}): void {
+  fitBounds(e: LngLatBoundsArray, options: FitOptions = {}): void {
     if (this.map) {
-      this.map.fitBounds([[e[0], e[1]], [e[2], e[3]]], {
-        linear: true,
-        ...options,
-        ...fitBoundsOptions
-      });
+      this.map.fitBounds(
+        [
+          [e[0], e[1]],
+          [e[2], e[3]]
+        ],
+        {
+          linear: true,
+          ...options,
+          ...fitBoundsOptions
+        }
+      );
     }
   }
 
@@ -230,7 +240,11 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     }
   }
 
-  setLayerOrder(layerIds: string[], order: number, layers: { [x: string]: TLayerAdapter }): void {
+  setLayerOrder(
+    layerIds: string[],
+    order: number,
+    layers: { [x: string]: TLayerAdapter }
+  ): void {
     if (this._sortTimerId) {
       window.clearTimeout(this._sortTimerId);
     }
@@ -244,22 +258,30 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
         this._onMapLoad().then(() => {
           const layer = _map.getLayer(layerId);
           if (layer) {
-            _map.setPaintProperty(layerId, layer.type + '-opacity', opacity);
+            if (layer.type === 'symbol') {
+              _map.setPaintProperty(layerId, 'text-opacity', opacity);
+              _map.setPaintProperty(layerId, 'icon-opacity', opacity);
+            } else {
+              _map.setPaintProperty(layerId, layer.type + '-opacity', opacity);
+            }
           }
         });
       });
     }
   }
 
-  createControl(control: MapControl): IControl {
-    return createControl(control);
+  createControl(control: MapControl, options?: CreateControlOptions): IControl {
+    return createControl(control, options);
   }
 
   createButtonControl(options: ButtonControlOptions): IControl {
     return createButtonControl(options);
   }
 
-  addControl(control: IControl, position: ControlPositions): IControl | undefined {
+  addControl(
+    control: IControl,
+    position: ControlPositions
+  ): IControl | undefined {
     if (this.map) {
       this.map.addControl(control, position);
       return control;
@@ -367,7 +389,11 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
 
   private _toggleLayer(layerId: string, status: boolean): void {
     this._onMapLoad().then(_map => {
-      _map.setLayoutProperty(layerId, 'visibility', status ? 'visible' : 'none');
+      _map.setLayoutProperty(
+        layerId,
+        'visibility',
+        status ? 'visible' : 'none'
+      );
     });
   }
 
@@ -381,7 +407,9 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     }
   }
 
-  private _onMapError(data: mapboxgl.ErrorEvent & mapboxgl.MapSourceDataEvent & EventData) {
+  private _onMapError(
+    data: mapboxgl.ErrorEvent & mapboxgl.MapSourceDataEvent & EventData
+  ) {
     if (this._sourceDataLoading[data.sourceId]) {
       const isLoaded = data.isSourceLoaded;
       const emit = (target: string) => {
@@ -439,7 +467,8 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     if (_map) {
       // write mem for start loaded layers
       _map.on('sourcedataloading', data => {
-        this._sourceDataLoading[data.sourceId] = this._sourceDataLoading[data.sourceId] || [];
+        this._sourceDataLoading[data.sourceId] =
+          this._sourceDataLoading[data.sourceId] || [];
         if (data.tile) {
           this._sourceDataLoading[data.sourceId].push(data.tile);
         }

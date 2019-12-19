@@ -1,10 +1,16 @@
 import { Geometry, Feature, FeatureCollection } from 'geojson';
 import { PropertiesFilter, FilterOptions } from '@nextgis/webmap';
-import NgwConnector, { CancelablePromise, FeatureItem } from '@nextgis/ngw-connector';
+import NgwConnector, {
+  CancelablePromise,
+  FeatureItem
+} from '@nextgis/ngw-connector';
 
 export interface FeatureRequestParams {
   srs?: number;
+  fields?: string;
   geom_format?: string;
+  limit?: number;
+  intersects?: string;
 }
 
 const FEATURE_REQUEST_PARAMS: FeatureRequestParams = {
@@ -36,7 +42,7 @@ export function getNgwLayerItem<
     connector: NgwConnector;
   } & FilterOptions
 ): CancelablePromise<FeatureItem> {
-  const params: FeatureRequestParams & FilterOptions & { [name: string]: any } = {
+  const params: FeatureRequestParams & { [name: string]: any } = {
     ...FEATURE_REQUEST_PARAMS
   };
   return options.connector.get('feature_layer.feature.item', null, {
@@ -67,9 +73,13 @@ function idFilterWorkAround<
 >(options: { filterById: any; resourceId: number; connector: NgwConnector }) {
   const value = options.filterById[2];
   const featureIds: number[] =
-    typeof value === 'number' ? [value] : value.split(',').map((x: string) => Number(x));
+    typeof value === 'number'
+      ? [value]
+      : value.split(',').map((x: string) => Number(x));
   if (options.filterById[1] !== 'eq' && options.filterById[1] !== 'in') {
-    throw new Error('Unable to filter by object id. Except `eq` or `in` operator');
+    throw new Error(
+      'Unable to filter by object id. Except `eq` or `in` operator'
+    );
   }
   const promises: Promise<FeatureItem>[] = featureIds.map(featureId => {
     return getNgwLayerItem<G, P>({
@@ -91,10 +101,10 @@ export function getNgwLayerItems<
     filters?: PropertiesFilter;
   } & FilterOptions
 ): CancelablePromise<FeatureItem[]> {
-  const params: FeatureRequestParams & FilterOptions & { [name: string]: any } = {
+  const params: FeatureRequestParams & { [name: string]: any } = {
     ...FEATURE_REQUEST_PARAMS
   };
-  const { connector, filters, limit, intersects, resourceId } = options;
+  const { connector, filters, limit, fields, intersects, resourceId } = options;
   if (filters) {
     const filterById = filters.find(x => x[0] === 'id');
     if (filterById) {
@@ -106,6 +116,9 @@ export function getNgwLayerItems<
   }
   if (limit) {
     params.limit = limit;
+  }
+  if (fields) {
+    params.fields = fields.join();
   }
   if (intersects) {
     params.intersects = intersects;
