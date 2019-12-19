@@ -1,4 +1,4 @@
-import L from 'leaflet';
+import L, { Map } from 'leaflet';
 import { Mixins, Prop } from 'vue-property-decorator';
 import Component from 'vue-class-component';
 import MapAdapter from '@nextgis/leaflet-map-adapter';
@@ -15,7 +15,7 @@ L.Icon.Default.mergeOptions({
 });
 
 @Component
-export class VueNgwMap extends Mixins(VueNgwMapBase) {
+export class VueNgwMap extends Mixins<VueNgwMapBase<Map>>(VueNgwMapBase) {
   @Prop({ type: Object, default: () => new MapAdapter() })
   mapAdapter!: MapAdapter;
 }
