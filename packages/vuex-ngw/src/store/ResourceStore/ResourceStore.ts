@@ -24,7 +24,7 @@ export abstract class ResourceStore<
   lookupTableResourceGroupId?: number;
   lookupTables: LookupTables = {};
 
-  store: ResourceStoreItem<P>[] = [];
+  resourceItem: ResourceStoreItem<P>[] = [];
   fields: FeatureLayerField[] = [];
 
   _promises: Record<string, Promise<any>> = {};
@@ -55,8 +55,8 @@ export abstract class ResourceStore<
   @Action({ commit: 'SET_STORE' })
   async getStore(): Promise<ResourceStoreItem<P>[] | undefined> {
     await this.context.dispatch('getResources');
-    if (this.store && this.store.length) {
-      return this.store;
+    if (this.resourceItem && this.resourceItem.length) {
+      return this.resourceItem;
     }
     const id = this.resources[this.keyname];
     if (id) {
@@ -74,7 +74,7 @@ export abstract class ResourceStore<
     await this.context.dispatch('getStore');
     const item = opt.item;
     if (item) {
-      const storeItems = [...this.store];
+      const storeItems = [...this.resourceItem];
       const index = storeItems.findIndex(x => x.id === item.id);
       if (index !== -1) {
         const oldItem = storeItems[index];
@@ -250,7 +250,7 @@ export abstract class ResourceStore<
           id,
           fid
         });
-        const store = [...this.store];
+        const store = [...this.resourceItem];
         const index = store.findIndex(x => Number(x.id) === fid);
         store.splice(index, 1);
         return store;
@@ -258,7 +258,7 @@ export abstract class ResourceStore<
         console.error(er);
       }
     }
-    return this.store;
+    return this.resourceItem;
   }
 
   @Mutation
@@ -273,7 +273,7 @@ export abstract class ResourceStore<
 
   @Mutation
   private SET_STORE(store: ResourceStoreItem<P>[]) {
-    this.store = store;
+    this.resourceItem = store;
   }
 
   @Mutation
