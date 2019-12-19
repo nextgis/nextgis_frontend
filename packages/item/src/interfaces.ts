@@ -53,12 +53,13 @@ export interface ItemOptions {
   properties?: Array<ItemPropertyConfig<keyof ItemPropertyTypes>>;
   headers?: any;
   order?: number;
+  drawOrderEnabled?: boolean
 }
 
 export interface ChangeEvent<
   V = any,
   O extends ItemBasePropertyOptions<V> = ItemBasePropertyOptions<V>
-> {
+  > {
   value: V;
   options: O;
 }

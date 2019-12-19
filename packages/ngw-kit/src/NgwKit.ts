@@ -15,7 +15,10 @@ import {
   setScaleRatio
 } from './utils/utils';
 
-import { getIdentifyGeoJson, getIdentifyGeoJsonParams } from './utils/identifyUtils';
+import {
+  getIdentifyGeoJson,
+  getIdentifyGeoJsonParams
+} from './utils/identifyUtils';
 
 import {
   getNgwLayerItems,
@@ -64,7 +67,10 @@ export class NgwKit implements StarterKit {
       } else {
         throw new Error('url is not defined');
       }
-      this.connector = new NgwConnector({ baseUrl: this.url, auth: this.options.auth });
+      this.connector = new NgwConnector({
+        baseUrl: this.url,
+        auth: this.options.auth
+      });
     }
   }
 
@@ -101,7 +107,8 @@ export class NgwKit implements StarterKit {
   private _getLayerAdapter() {
     return {
       name: 'WEBMAP',
-      createAdapter: (webmap: WebMap) => Promise.resolve(this._createAdapter(webmap))
+      createAdapter: (webmap: WebMap) =>
+        Promise.resolve(this._createAdapter(webmap))
     };
   }
 

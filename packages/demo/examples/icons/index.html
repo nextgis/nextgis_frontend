@@ -29,14 +29,6 @@
 <body>
   <div id='map'></div>
   <script>
-    var ngwMap = new NgwMap({
-      baseUrl: 'https://demo.nextgis.com',
-      target: 'map',
-      qmsId: 465,
-      center: [81.973, 53.026],
-      zoom: 13
-    });
-
     var data = [
       [{ "color": "red", "shape": "circle" }, [81.9833, 53.0426]],
       [{ "color": "red", "shape": "circle", "size": 20 }, [81.9883, 53.0385]],
@@ -53,35 +45,44 @@
       [{ "color": "purple", "shape": "triangle" }, [81.9828, 53.0187]],
       [{ "color": "rgb(52,169,95)", "shape": "plus" }, [81.9739, 53.0387]],
       [{ "color": "#800000", "shape": "minus" }, [81.9648, 53.0343]]
-    ]
+    ];
 
-    // create geojson features from data
-    var features = [];
-    for (var fry = 0; fry < data.length; fry++) {
-      features.push({
-        type: 'Feature',
-        properties: data[fry][0],
-        geometry: { type: 'Point', coordinates: data[fry][1] }
-      })
-    }
-    var geojson = {
-      "type": "FeatureCollection",
-      "features": features,
-    };
+    NgwMap.create({
+      baseUrl: 'https://demo.nextgis.com',
+      target: 'map',
+      qmsId: 465,
+      center: [81.973, 53.026],
+      zoom: 13
+    }).then(function (ngwMap) {
 
-    ngwMap.addGeoJsonLayer({
-      data: geojson,
-      paint: function (feature) {
-        var prop = feature.properties;
-        return Icons.getIcon({
-          color: prop.color || 'blue',
-          shape: prop.shape || 'rect',
-          size: prop.size || 30,
-          stroke: prop.stroke,
-          strokeColor: prop.strokeColor || 'white',
-          rotate: prop.rotate
-        });
+      // create geojson features from data
+      var features = [];
+      for (var fry = 0; fry < data.length; fry++) {
+        features.push({
+          type: 'Feature',
+          properties: data[fry][0],
+          geometry: { type: 'Point', coordinates: data[fry][1] }
+        })
       }
+      var geojson = {
+        "type": "FeatureCollection",
+        "features": features,
+      };
+
+      ngwMap.addGeoJsonLayer({
+        data: geojson,
+        paint: function (feature) {
+          var prop = feature.properties;
+          return Icons.getIcon({
+            color: prop.color || 'blue',
+            shape: prop.shape || 'rect',
+            size: prop.size || 30,
+            stroke: prop.stroke,
+            strokeColor: prop.strokeColor || 'white',
+            rotate: prop.rotate
+          });
+        }
+      });
     });
 
   </script>

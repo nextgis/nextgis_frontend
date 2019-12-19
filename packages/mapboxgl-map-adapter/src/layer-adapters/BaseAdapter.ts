@@ -1,8 +1,8 @@
 /**
  * @module mapboxgl-map-adapter
  */
-import { BaseLayerAdapter, AdapterOptions } from '@nextgis/webmap';
 import { Map } from 'mapbox-gl';
+import { BaseLayerAdapter, AdapterOptions } from '@nextgis/webmap';
 import { TLayer } from '../MapboxglMapAdapter';
 
 let ID = 0;

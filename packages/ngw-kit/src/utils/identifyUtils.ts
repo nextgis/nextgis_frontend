@@ -3,7 +3,10 @@ import { getNgwLayerFeature, createGeoJsonFeature } from './featureLayerUtils';
 import { GetIdentifyGeoJsonOptions, NgwIdentify } from '../interfaces';
 import { Geometry } from 'geojson';
 
-export function getIdentifyGeoJsonParams(identify: NgwIdentify, multiple = false) {
+export function getIdentifyGeoJsonParams(
+  identify: NgwIdentify,
+  multiple = false
+) {
   let params: { resourceId: number; featureId: number } | undefined;
   const resources = [];
   const paramsList = [];

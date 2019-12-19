@@ -56,10 +56,12 @@ export class NgwConnector {
         }
       }
 
-      return await this.makeQuery(this.routeStr, {}, {}).then((route: PyramidRoute) => {
-        this.route = route;
-        return route;
-      });
+      return await this.makeQuery(this.routeStr, {}, {}).then(
+        (route: PyramidRoute) => {
+          this.route = route;
+          return route;
+        }
+      );
     }
   }
 
@@ -102,7 +104,9 @@ export class NgwConnector {
       });
   }
 
-  getAuthorizationHeaders(credentials?: Credentials): RequestHeaders | undefined {
+  getAuthorizationHeaders(
+    credentials?: Credentials
+  ): RequestHeaders | undefined {
     const client = this.makeClientId(credentials);
     if (client) {
       return {
@@ -148,7 +152,10 @@ export class NgwConnector {
     });
   }
 
-  async request<K extends keyof RequestItemsParamsMap, P extends RequestItemKeys = RequestItemKeys>(
+  async request<
+    K extends keyof RequestItemsParamsMap,
+    P extends RequestItemKeys = RequestItemKeys
+  >(
     name: K,
     params: (RequestItemsParamsMap[K] | {}) & { [name: string]: any } = {},
     options?: RequestOptions
@@ -166,7 +173,9 @@ export class NgwConnector {
           const arg = apiItem[fry];
           replaceParams[fry] = '{' + arg + '}';
           if (params[arg] === undefined) {
-            throw new Error('`' + arg + '`' + ' url api argument is not specified');
+            throw new Error(
+              '`' + arg + '`' + ' url api argument is not specified'
+            );
           }
         }
         if (url) {
@@ -246,10 +255,18 @@ export class NgwConnector {
     options = options || {};
     options.method = 'DELETE';
     options.nocache = true;
-    return this.request<K, DeleteRequestItemsResponseMap>(name, params, options);
+    return this.request<K, DeleteRequestItemsResponseMap>(
+      name,
+      params,
+      options
+    );
   }
 
-  makeQuery(url: string, params?: Params, options: RequestOptions = {}): CancelablePromise<any> {
+  makeQuery(
+    url: string,
+    params?: Params,
+    options: RequestOptions = {}
+  ): CancelablePromise<any> {
     url = (this.options.baseUrl ? this.options.baseUrl : '') + url;
     if (url) {
       if (params) {
@@ -334,7 +351,10 @@ export class NgwConnector {
         if (this.user) {
           options = options || {};
           // options.withCredentials = true;
-          options.headers = { ...this.getAuthorizationHeaders(), ...options.headers };
+          options.headers = {
+            ...this.getAuthorizationHeaders(),
+            ...options.headers
+          };
         }
         loadJSON(url, resolve, options, reject, onCancel);
       },

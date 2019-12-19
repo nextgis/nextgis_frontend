@@ -1,4 +1,8 @@
-import WebMap, { Type, LngLatBoundsArray, MapClickEvent } from '@nextgis/webmap';
+import WebMap, {
+  Type,
+  LngLatBoundsArray,
+  MapClickEvent
+} from '@nextgis/webmap';
 import NgwConnector, {
   WebmapResource,
   ResourceItem,
@@ -24,7 +28,11 @@ export function updateWmsParams(params: any, resourceId: number) {
   };
 }
 
-export function getLayerAdapterOptions(options: NgwLayerOptions, webMap: WebMap, baseUrl: string) {
+export function getLayerAdapterOptions(
+  options: NgwLayerOptions,
+  webMap: WebMap,
+  baseUrl: string
+) {
   let adapter = options.adapter || 'IMAGE';
   let url: string;
   const layerAdapters = webMap.getLayerAdapters();
@@ -36,7 +44,8 @@ export function getLayerAdapterOptions(options: NgwLayerOptions, webMap: WebMap,
         url,
         resourceId: options.resourceId,
         headers: options.headers,
-        updateWmsParams: (params: any) => updateWmsParams(params, options.resourceId)
+        updateWmsParams: (params: any) =>
+          updateWmsParams(params, options.resourceId)
       };
     } else {
       adapter = 'TILE';
@@ -56,7 +65,10 @@ export function getLayerAdapterOptions(options: NgwLayerOptions, webMap: WebMap,
     };
   }
   if (adapter === 'TILE') {
-    url = baseUrl + '/api/component/render/tile?z={z}&x={x}&y={y}&resource=' + options.resourceId;
+    url =
+      baseUrl +
+      '/api/component/render/tile?z={z}&x={x}&y={y}&resource=' +
+      options.resourceId;
     return { url, adapter };
   }
 }
@@ -75,7 +87,9 @@ export function addNgwLayer(
   return createAsyncAdapter(options, webMap, baseUrl, connector);
 }
 
-export function getWebMapExtent(webmap: WebmapResource): LngLatBoundsArray | undefined {
+export function getWebMapExtent(
+  webmap: WebmapResource
+): LngLatBoundsArray | undefined {
   const bottom = webmap['extent_bottom'];
   const left = webmap['extent_left'];
   const top = webmap['extent_top'];
@@ -140,7 +154,12 @@ const d2r = Math.PI / 180; // degrees to radians
 const r2d = 180 / Math.PI; // radians to degrees
 const earthsradius = 3963; // 3963 is the radius of the earth in miles
 
-export function getCirclePoly(lng: number, lat: number, radius = 10, points = 6) {
+export function getCirclePoly(
+  lng: number,
+  lat: number,
+  radius = 10,
+  points = 6
+) {
   // find the radius in lat/lon
   const rlat = (radius / earthsradius) * r2d;
   const rlng = rlat / Math.cos(lat * d2r);
@@ -229,7 +248,8 @@ let _pixelsInMeter: number;
 export function pixelsInMeterWidth() {
   if (_pixelsInMeter === undefined) {
     const div = document.createElement('div');
-    div.style.cssText = 'position: absolute;  left: -100%;  top: -100%;  width: 100cm;';
+    div.style.cssText =
+      'position: absolute;  left: -100%;  top: -100%;  width: 100cm;';
     document.body.appendChild(div);
     const px = div.offsetWidth;
     document.body.removeChild(div);
@@ -241,7 +261,10 @@ export function pixelsInMeterWidth() {
 export function applyMixins(derivedCtor: any, baseCtors: any[]) {
   baseCtors.forEach(baseCtor => {
     Object.getOwnPropertyNames(baseCtor.prototype).forEach(name => {
-      const descriptor = Object.getOwnPropertyDescriptor(baseCtor.prototype, name);
+      const descriptor = Object.getOwnPropertyDescriptor(
+        baseCtor.prototype,
+        name
+      );
       if (descriptor) {
         Object.defineProperty(derivedCtor.prototype, name, descriptor);
       }
@@ -264,7 +287,8 @@ export function setScaleRatio(scale: number, lat = 104) {
   // const center = [104, 45]; // this.webMap.getCenter();
   if (lat) {
     const centerLat = lat;
-    const crsScale = (pixelsInMeterWidth() * getMapWidthForLanInMeters(centerLat)) / scale;
+    const crsScale =
+      (pixelsInMeterWidth() * getMapWidthForLanInMeters(centerLat)) / scale;
     const zoom = getZoomFromScale(crsScale);
     return zoom;
   }

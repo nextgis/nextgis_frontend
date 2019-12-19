@@ -143,7 +143,9 @@ export class ImageLayer extends L.Layer {
           this._map.removeLayer(this._currentOverlay);
         }
         this._currentOverlay = overlay;
-        overlay.setOpacity(this.options.opacity !== undefined ? this.options.opacity : 1);
+        overlay.setOpacity(
+          this.options.opacity !== undefined ? this.options.opacity : 1
+        );
         if (this.options.isBack === true) {
           overlay.bringToBack();
         }
@@ -157,7 +159,10 @@ export class ImageLayer extends L.Layer {
       this
     );
     const { minZoom, maxZoom } = this.options;
-    if ((minZoom && this._map.getZoom() < minZoom) || (maxZoom && this._map.getZoom() > maxZoom)) {
+    if (
+      (minZoom && this._map.getZoom() < minZoom) ||
+      (maxZoom && this._map.getZoom() > maxZoom)
+    ) {
       this._map.removeLayer(overlay);
     }
   }

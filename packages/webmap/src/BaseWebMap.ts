@@ -12,7 +12,12 @@ import {
   Locate
 } from './interfaces/MapAdapter';
 import { MapOptions, AppOptions } from './interfaces/WebMapApp';
-import { LngLatBoundsArray, Type, Cursor, LngLatArray } from './interfaces/BaseTypes';
+import {
+  LngLatBoundsArray,
+  Type,
+  Cursor,
+  LngLatArray
+} from './interfaces/BaseTypes';
 import { RuntimeParams } from './interfaces/RuntimeParams';
 import { StarterKit } from './interfaces/StarterKit';
 
@@ -22,13 +27,16 @@ import { Keys } from './components/keys/Keys';
 
 import StrictEventEmitter from 'strict-event-emitter-types';
 import { EventEmitter } from 'events';
-import { WebMapEvents } from './interfaces/Events';
+import { WebMapEvents, BaseMapEvents } from './interfaces/Events';
 
 import { onLoad } from './util/decorators';
 import { propertiesFilter } from './util/propertiesFilter';
 import { clearObject } from './util/clearObject';
 
-import { detectGeometryType, findMostFrequentGeomType } from './util/geometryTypes';
+import {
+  detectGeometryType,
+  findMostFrequentGeomType
+} from './util/geometryTypes';
 import { updateGeoJsonAdapterOptions } from './util/updateGeoJsonAdapterOptions';
 
 import { CenterState } from './components/mapStates/CenterState';
@@ -55,7 +63,12 @@ const OPTIONS: MapOptions = {
 /**
  * @class WebMap
  */
-export class BaseWebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEvents> {
+export class BaseWebMap<
+  M = any,
+  L = any,
+  C = any,
+  E extends WebMapEvents = WebMapEvents
+> {
   static keys: Keys = new Keys();
   static utils = {
     detectGeometryType,
@@ -69,7 +82,10 @@ export class BaseWebMap<M = any, L = any, C = any, E extends WebMapEvents = WebM
 
   options: MapOptions = OPTIONS;
   // `WebMapEvents` must be `E` but its not work correct
-  readonly emitter: StrictEventEmitter<EventEmitter, WebMapEvents> = new EventEmitter();
+  readonly emitter: StrictEventEmitter<
+    EventEmitter,
+    WebMapEvents
+  > = new EventEmitter();
   readonly keys = BaseWebMap.keys;
 
   readonly mapAdapter: MapAdapter<M>;
@@ -276,7 +292,7 @@ export class BaseWebMap<M = any, L = any, C = any, E extends WebMapEvents = WebM
    * ```
    */
   fitBounds(bounds: LngLatBoundsArray, options?: FitOptions): this {
-    this.mapAdapter.fit(bounds, options);
+    this.mapAdapter.fitBounds(bounds, options);
     return this;
   }
 
@@ -342,7 +358,10 @@ export class BaseWebMap<M = any, L = any, C = any, E extends WebMapEvents = WebM
           res(mapAdapter);
         }
       };
-      const isLoaded = this.mapAdapter.isLoaded !== undefined ? this.mapAdapter.isLoaded : true;
+      const isLoaded =
+        this.mapAdapter.isLoaded !== undefined
+          ? this.mapAdapter.isLoaded
+          : true;
       if (this.mapAdapter.map && isLoaded) {
         _resolve();
       } else {
@@ -366,7 +385,7 @@ export class BaseWebMap<M = any, L = any, C = any, E extends WebMapEvents = WebM
     if (this.mapAdapter && this.mapAdapter.locate) {
       return this.mapAdapter.locate(opt, events);
     }
-    const stop = () => {};
+    const stop = () => ({});
     return { stop };
   }
 
@@ -399,8 +418,8 @@ export class BaseWebMap<M = any, L = any, C = any, E extends WebMapEvents = WebM
   private _zoomToInitialExtent() {
     const { center, zoom, bounds } = this.options;
     if (this._extent) {
-      this.mapAdapter.fit(this._extent);
-    } else if (center && bounds) {
+      this.fitBounds(this._extent);
+    } else if (center && zoom) {
       this.setView(center, zoom);
     } else if (bounds) {
       this.fitBounds(bounds);
@@ -425,7 +444,7 @@ export class BaseWebMap<M = any, L = any, C = any, E extends WebMapEvents = WebM
   }
 
   private _addEventsListeners(): void {
-    const events: Array<keyof WebMapEvents> = [
+    const events: Array<keyof BaseMapEvents> = [
       'click',
       'zoomstart',
       'zoom',
@@ -434,7 +453,6 @@ export class BaseWebMap<M = any, L = any, C = any, E extends WebMapEvents = WebM
       'move',
       'moveend'
     ];
-
     events.forEach(x => {
       this._mapEvents[x] = data => {
         if (this.runtimeParams.length) {
@@ -446,7 +464,9 @@ export class BaseWebMap<M = any, L = any, C = any, E extends WebMapEvents = WebM
             });
           }
         }
-        if (this._eventsStatus) this.emitter.emit(x, data);
+        if (this._eventsStatus) {
+          this.emitter.emit(x, data);
+        }
       };
       this.mapAdapter.emitter.on(x, this._mapEvents[x]);
     });

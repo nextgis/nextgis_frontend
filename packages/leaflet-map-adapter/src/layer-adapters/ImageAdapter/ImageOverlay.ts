@@ -7,7 +7,11 @@ import { callAjax } from '../layersUtility';
 type IOptions = ImageOverlayOptions & { headers?: any };
 
 export class ImageOverlay extends L.ImageOverlay {
-  constructor(imageUrl: string, bounds: LatLngBoundsExpression, options?: IOptions) {
+  constructor(
+    imageUrl: string,
+    bounds: LatLngBoundsExpression,
+    options?: IOptions
+  ) {
     super(imageUrl, bounds, options);
   }
 

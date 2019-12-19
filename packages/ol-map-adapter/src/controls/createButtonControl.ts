@@ -13,10 +13,14 @@ export function createButtonControl(options: ButtonControlOptions): Control {
       } else if (options.html) {
         button.appendChild(options.html);
       }
+      if (typeof options.title === 'string') {
+        button.title = options.title;
+      }
 
       const element = document.createElement('div');
       element.className =
-        (options.addClass ? options.addClass + ' ' : '') + 'ol-unselectable ol-control';
+        (options.addClass ? options.addClass + ' ' : '') +
+        'ol-unselectable ol-control';
       element.appendChild(button);
 
       C.call(this, { element });

@@ -3,7 +3,7 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import { findNgwMapParent, propsBinder } from '../utils';
 import { ResourceAdapter, NgwLayerAdapterType } from '@nextgis/ngw-kit';
-import { VueNgwMap } from './VueNgwMap';
+import VueNgwMap from './VueNgwMapBase';
 import { AdapterOptions } from '@nextgis/webmap';
 
 @Component

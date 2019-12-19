@@ -1,7 +1,10 @@
 import { MapControl, CreateControlOptions } from '@nextgis/webmap';
 import Control from 'ol/control/Control';
 
-export function createControl(control: MapControl, options: CreateControlOptions = {}): Control {
+export function createControl(
+  control: MapControl,
+  options: CreateControlOptions = {}
+): Control {
   const newControl = (function(C) {
     function NewControl(this: Control) {
       const element = document.createElement('div');

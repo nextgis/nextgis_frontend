@@ -2,6 +2,10 @@
  * @module webmap
  */
 
+type OnClickSync = (status?: boolean) => void;
+type onClickAsync = (status?: boolean) => Promise<void>;
+export type OnClick = OnClickSync | onClickAsync;
+
 // like in https://leafletjs.com/reference-1.3.4.html#control-zoom
 export interface ZoomControlOptions {
   /** The text set on the 'zoom in' button. */
@@ -40,7 +44,7 @@ export interface MapControl<M extends any = any> {
 export interface ButtonControlOptions {
   html?: string | HTMLElement;
   addClass?: string;
-  onClick: () => void;
+  onClick: OnClick;
   title?: string;
 }
 
@@ -66,7 +70,7 @@ export interface ToggleControlOptions {
 
   title?: string | TitleToggle;
 
-  onClick?: (status: boolean) => void;
+  onClick?: OnClick;
   getStatus?: () => boolean;
 }
 
@@ -77,5 +81,6 @@ export interface CreateControlOptions {
 }
 
 export interface ToggleControl {
-  onClick: (status: boolean) => void;
+  onClick: OnClick;
+  changeStatus: OnClickSync;
 }

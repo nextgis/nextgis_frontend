@@ -23,7 +23,10 @@ interface GetImgOpt {
 // };
 
 // // from /mapbox-gl/src/util/browser.js
-export function getImageData(img: string | HTMLImageElement, opt: GetImgOpt): ImageData {
+export function getImageData(
+  img: string | HTMLImageElement,
+  opt: GetImgOpt
+): ImageData {
   const canvas = window.document.createElement('canvas');
   const context = canvas.getContext('2d');
   if (!context) {
@@ -34,7 +37,14 @@ export function getImageData(img: string | HTMLImageElement, opt: GetImgOpt): Im
   if (!canvg && img instanceof HTMLImageElement) {
     context.drawImage(img, 0, 0, opt.width, opt.height);
   } else if (typeof img === 'string') {
-    canvg(canvas, img);
+    if (canvg.Canvg) {
+      // for canvg v.3.x.x
+      const v = canvg.Canvg.fromString(context, img);
+      v.start();
+    } else {
+      // for canvg v.2.x.x
+      canvg(canvas, img);
+    }
   }
   return context.getImageData(0, 0, opt.width, opt.height);
 }

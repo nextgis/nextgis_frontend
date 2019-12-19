@@ -30,7 +30,10 @@ export class WebMapLayerAdapter implements ResourceAdapter {
    */
   pixelRadius = 10; // webmapSettings.identify_radius,
   resourceId!: number;
-  readonly emitter: StrictEventEmitter<EventEmitter, WebMapLayerAdapterEvents> = new EventEmitter();
+  readonly emitter: StrictEventEmitter<
+    EventEmitter,
+    WebMapLayerAdapterEvents
+  > = new EventEmitter();
   private response?: ResourceItem;
   private _webmapLayersIds?: number[];
 
@@ -144,7 +147,12 @@ export class WebMapLayerAdapter implements ResourceAdapter {
             }
           }
           options.order = this.options.order;
-          const layer = new WebMapLayerItem(this.options.webMap, webmap.root_item, options);
+          options.drawOrderEnabled = webmap.draw_order_enabled;
+          const layer = new WebMapLayerItem(
+            this.options.webMap,
+            webmap.root_item,
+            options
+          );
           layer.emitter.on('init', () => resolve(layer));
         });
       }
@@ -153,7 +161,9 @@ export class WebMapLayerAdapter implements ResourceAdapter {
 
   private async getWebMapConfig(id: number) {
     try {
-      const data = await this.options.connector.get('resource.item', null, { id });
+      const data = await this.options.connector.get('resource.item', null, {
+        id
+      });
       this.response = data;
       const webmap = data.webmap;
       if (webmap) {
@@ -167,17 +177,25 @@ export class WebMapLayerAdapter implements ResourceAdapter {
     }
   }
 
-  private _updateItemsParams(item: TreeGroup | TreeLayer, webMap: WebMap, data: ResourceItem) {
+  private _updateItemsParams(
+    item: TreeGroup | TreeLayer,
+    webMap: WebMap,
+    data: ResourceItem
+  ) {
     if (item) {
       if (item.item_type === 'group' || item.item_type === 'root') {
         if (item.children) {
-          item.children = item.children.map(x => this._updateItemsParams(x, webMap, data));
+          item.children = item.children.map(x =>
+            this._updateItemsParams(x, webMap, data)
+          );
         }
         if (item.item_type === 'root') {
           item.display_name = data.resource.display_name;
         }
       } else if (item.item_type === 'layer') {
-        const url = fixUrlStr(this.options.baseUrl + '/api/component/render/image');
+        const url = fixUrlStr(
+          this.options.baseUrl + '/api/component/render/image'
+        );
         const resourceId = item.layer_style_id;
         item.url = url;
         item.resourceId = resourceId;
@@ -207,13 +225,15 @@ export class WebMapLayerAdapter implements ResourceAdapter {
         const item = x.item;
         if (item.item_type === 'layer') {
           const id = item.layer_style_id;
-          const promise = this.options.connector.get('resource.item', {}, { id }).then(y => {
-            if (y) {
-              const parentId = Number(y.resource.parent.id);
-              item.parentId = parentId;
-              return parentId;
-            }
-          });
+          const promise = this.options.connector
+            .get('resource.item', {}, { id })
+            .then(y => {
+              if (y) {
+                const parentId = Number(y.resource.parent.id);
+                item.parentId = parentId;
+                return parentId;
+              }
+            });
           promises.push(promise);
         }
       });

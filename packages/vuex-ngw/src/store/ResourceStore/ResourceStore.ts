@@ -1,11 +1,12 @@
-import { VuexModule, Mutation, Action, Module } from 'vuex-module-decorators';
 import { Geometry, GeoJsonProperties, Feature } from 'geojson';
+import { VuexModule, Mutation, Action, Module } from 'vuex-module-decorators';
 import { Store } from 'vuex';
-
-import { Type } from '@nextgis/webmap';
 import { FeatureItem } from '@nextgis/ngw-connector';
-import NgwConnector, { ResourceStoreItem, FeatureLayerField } from '@nextgis/ngw-connector';
-
+import NgwConnector, {
+  ResourceStoreItem,
+  FeatureLayerField
+} from '@nextgis/ngw-connector';
+import { Type } from '@nextgis/webmap';
 import { LookupTables, ForeignResource, PatchOptions } from '../../interfaces';
 
 type KeyName = string;
@@ -67,7 +68,9 @@ export abstract class ResourceStore<
   }
 
   @Action({ commit: 'SET_STORE' })
-  async updateStore(opt: { item: FeatureItem<P> }): Promise<ResourceStoreItem<P>[] | undefined> {
+  async updateStore(opt: {
+    item: FeatureItem<P>;
+  }): Promise<ResourceStoreItem<P>[] | undefined> {
     await this.context.dispatch('getStore');
     const item = opt.item;
     if (item) {
@@ -91,11 +94,13 @@ export abstract class ResourceStore<
     if (!this._promises.getResources) {
       keyNames.forEach(keyname => {
         if (!(keyname in this.resources)) {
-          const promise = this.connector.getResourceByKeyname(keyname).then(item => {
-            if (item) {
-              this.resources[keyname] = item.resource.id;
-            }
-          });
+          const promise = this.connector
+            .getResourceByKeyname(keyname)
+            .then(item => {
+              if (item) {
+                this.resources[keyname] = item.resource.id;
+              }
+            });
           promises.push(promise);
         }
       });
@@ -113,9 +118,13 @@ export abstract class ResourceStore<
       if (Object.keys(this.lookupTables).length) {
         return this.lookupTables;
       }
-      const lookupTableResources = await this.connector.get('resource.collection', null, {
-        parent: this.lookupTableResourceGroupId
-      });
+      const lookupTableResources = await this.connector.get(
+        'resource.collection',
+        null,
+        {
+          parent: this.lookupTableResourceGroupId
+        }
+      );
 
       lookupTableResources.forEach(x => {
         const lookupTable = x.lookup_table;
@@ -130,17 +139,19 @@ export abstract class ResourceStore<
   }
 
   @Action({ commit: '' })
-  async prepareGeomToNgw<G extends Geometry | null = Geometry, P = GeoJsonProperties>(opt: {
-    item: Feature<G, P>;
-  }) {
+  async prepareGeomToNgw<
+    G extends Geometry | null = Geometry,
+    P = GeoJsonProperties
+  >(opt: { item: Feature<G, P> }) {
     const { prepareGeomToNgw } = await import('../../utils/prepareGeomToNgw');
     return prepareGeomToNgw(opt.item);
   }
 
   @Action({ commit: '' })
-  async prepareFeatureToNgw<G extends Geometry | null = Geometry, P = GeoJsonProperties>(opt: {
-    item: Feature<G, P>;
-  }) {
+  async prepareFeatureToNgw<
+    G extends Geometry | null = Geometry,
+    P = GeoJsonProperties
+  >(opt: { item: Feature<G, P> }) {
     const geom = await this.context.dispatch('prepareGeomToNgw', opt);
     const featureFields = await this.fields;
     const fields: P = {} as P;
@@ -169,7 +180,11 @@ export abstract class ResourceStore<
               }
             }
             if (dt) {
-              value = { year: dt.getFullYear(), month: dt.getMonth(), day: dt.getDay() };
+              value = {
+                year: dt.getFullYear(),
+                month: dt.getMonth(),
+                day: dt.getDay()
+              };
             }
           }
         }
