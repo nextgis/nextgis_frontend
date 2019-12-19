@@ -172,27 +172,14 @@ mkdir .vscode && touch .vscode/settings.json
 ```
 
 ```json
-  "editor.formatOnSave": true,
-  "eslint.autoFixOnSave": true,
-  "eslint.validate": [
-    {
-      "language": "javascript",
-      "autoFix": true
-    },
-    {
-      "language": "javascriptreact",
-      "autoFix": true
-    },
-    {
-      "language": "typescript",
-      "autoFix": true
-    },
-    {
-      "language": "typescriptreact",
-      "autoFix": true
-    }
-  ],
-  "tslint.enable": false
+{
+  "editor.formatOnSave": false,
+  "tslint.enable": false,
+  "eslint.enable": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
+}
 ```
 
 ### Debugging with Chrome, LiveServer and Watch
