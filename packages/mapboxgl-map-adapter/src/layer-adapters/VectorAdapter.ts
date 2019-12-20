@@ -38,7 +38,7 @@ export interface Feature<
   G extends GeometryObject | null = Geometry,
   P = GeoJsonProperties
 > extends F<G, P> {
-  _rendromId?: string;
+  _featureFilterId?: string;
 }
 
 const PAINT = {
@@ -251,7 +251,7 @@ export abstract class VectorAdapter<
     }
   }
 
-  protected _getRendromId(feature: Feature): string | number | undefined {
+  protected _getFeatureFilterId(feature: Feature): string | number | undefined {
     // @ts-ignore
     return feature.id;
   }
@@ -303,7 +303,7 @@ export abstract class VectorAdapter<
       }, [] as MapboxGeoJSONFeature[]);
       const feature = features[0] as Feature;
       if (feature) {
-        const id = this._getRendromId(feature);
+        const id = this._getFeatureFilterId(feature);
         if (id !== undefined) {
           let isSelected = this._selectedFeatureIds.indexOf(id) !== -1;
           if (isSelected) {
