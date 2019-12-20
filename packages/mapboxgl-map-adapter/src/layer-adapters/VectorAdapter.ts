@@ -144,14 +144,8 @@ export abstract class VectorAdapter<
       id: name,
       type: mType,
       source: this._sourceId,
-      minzoom:
-        this.options.minZoom !== undefined
-          ? this.options.minZoom - 1
-          : undefined,
-      maxzoom:
-        this.options.maxZoom !== undefined
-          ? this.options.maxZoom - 1
-          : undefined,
+      minzoom: this.options.minZoom ? this.options.minZoom - 1 : undefined,
+      maxzoom: this.options.maxZoom ? this.options.maxZoom - 1 : undefined,
       layout: {
         visibility: 'none',
         ...layout
