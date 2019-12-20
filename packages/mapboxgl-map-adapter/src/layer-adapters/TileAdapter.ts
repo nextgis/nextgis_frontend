@@ -55,8 +55,14 @@ export class TileAdapter extends BaseAdapter<TileAdapterOptions>
         layout: {
           visibility: 'none'
         },
-        minzoom: this.options.minZoom,
-        maxzoom: this.options.maxZoom,
+        minzoom:
+          this.options.minZoom !== undefined
+            ? this.options.minZoom - 1
+            : undefined,
+        maxzoom:
+          this.options.maxZoom !== undefined
+            ? this.options.maxZoom - 1
+            : undefined,
         source: sourceOptions
         // TODO: clean remove before options from all existing apps
       },
