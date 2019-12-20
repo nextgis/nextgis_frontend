@@ -3,13 +3,13 @@
  */
 import { BaseLayerAdapter, TileAdapterOptions } from '@nextgis/webmap';
 import { BaseAdapter } from './BaseAdapter';
-import { RasterSource, ResourceType } from 'mapbox-gl';
+import { RasterSource, ResourceType, Layer } from 'mapbox-gl';
 
 export class TileAdapter extends BaseAdapter<TileAdapterOptions>
   implements BaseLayerAdapter {
   addLayer(options: TileAdapterOptions): string[] {
     options = { ...this.options, ...(options || {}) };
-
+    const { minZoom, maxZoom } = options;
     let tiles: string[];
     if (options && options.subdomains) {
       tiles = options.subdomains.split('').map(x => {
@@ -47,25 +47,27 @@ export class TileAdapter extends BaseAdapter<TileAdapterOptions>
     if (options.attribution) {
       sourceOptions.attribution = options.attribution;
     }
+    const layerOptions: Layer = {
+      id: this._layerId,
+      type: 'raster',
+      layout: {
+        visibility: 'none'
+      },
+      minzoom: this.options.minZoom,
+      maxzoom: this.options.maxZoom,
+      source: sourceOptions
+      // TODO: clean remove before options from all existing apps
+    };
+
+    if (minZoom) {
+      layerOptions.minzoom = minZoom - 1;
+    }
+    if (maxZoom) {
+      layerOptions.maxzoom = maxZoom;
+    }
 
     this.map.addLayer(
-      {
-        id: this._layerId,
-        type: 'raster',
-        layout: {
-          visibility: 'none'
-        },
-        minzoom:
-          this.options.minZoom !== undefined
-            ? this.options.minZoom - 1
-            : undefined,
-        maxzoom:
-          this.options.maxZoom !== undefined
-            ? this.options.maxZoom - 1
-            : undefined,
-        source: sourceOptions
-        // TODO: clean remove before options from all existing apps
-      },
+      layerOptions,
       // @ts-ignore
       options.before
     );
