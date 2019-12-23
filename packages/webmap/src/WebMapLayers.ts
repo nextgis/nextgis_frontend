@@ -95,10 +95,15 @@ export class WebMapLayers<
   }
 
   /**
-   * Return array of all added layer identificators.
+   * Return array of all added layer identifications.
    */
   getLayers(): string[] {
     return Object.keys(this._layers);
+  }
+
+  // TODO: rename to getLayers, getLayers rename to getLayersIds
+  allLayers() {
+    return this._layers;
   }
 
   findLayer<T extends LayerAdapter = LayerAdapter>(
