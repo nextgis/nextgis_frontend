@@ -178,7 +178,8 @@ interface NgwRasterIdentify {
   event: MapClickEvent;
 }
 
-export type NgwIdentify = FeatureLayersIdentify & (NgwVectorIdentify | NgwRasterIdentify);
+export type NgwIdentify = FeatureLayersIdentify &
+  (NgwVectorIdentify | NgwRasterIdentify);
 
 export interface GetIdentifyGeoJsonOptions {
   identify: NgwIdentify;
