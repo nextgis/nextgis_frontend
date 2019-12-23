@@ -10,7 +10,8 @@ import {
   VectorAdapterOptions,
   PropertiesFilter,
   Operations,
-  DataLayerFilter
+  DataLayerFilter,
+  PropertyFilter
 } from '@nextgis/webmap';
 import {
   Feature as F,
@@ -179,10 +180,18 @@ export abstract class VectorAdapter<
     }
   }
 
+  protected _updateWithNativeFilter(filter: any[]) {
+    const nativeFilter = this._getNativeFilter();
+    if (nativeFilter.length) {
+      filter.push(nativeFilter);
+    }
+    return filter;
+  }
+
   protected _getNativeFilter() {
-    return this.options.nativeFilter
-      ? (this.options.nativeFilter as any[])
-      : [];
+    return (this.options.nativeFilter
+      ? this.options.nativeFilter
+      : []) as PropertyFilter;
   }
 
   protected async _addLayer(
@@ -355,7 +364,6 @@ export abstract class VectorAdapter<
           const geomFilter = ['==', '$type', geomType];
           const layerName = this._getLayerNameFromType(t);
           const selLayerName = this._getSelectionLayerNameFromType(t);
-          const nativeFilter = this._getNativeFilter();
           if (layers.indexOf(selLayerName) !== -1) {
             if (this._selectionName) {
               if (properties) {
@@ -369,12 +377,7 @@ export abstract class VectorAdapter<
                   ...filters
                 ]);
               } else {
-                this.map.setFilter(selLayerName, [
-                  'all',
-                  geomFilter,
-                  nativeFilter,
-                  ['in', this.featureIdName, '']
-                ]);
+                this.map.setFilter(selLayerName, ['in', '$id', '']);
               }
             }
           }
@@ -384,14 +387,13 @@ export abstract class VectorAdapter<
                 reversOperations,
                 properties
               );
-              this.map.setFilter(layerName, [
-                'all',
-                geomFilter,
-                nativeFilter,
-                ...filters
-              ]);
+              this.map.setFilter(layerName, ['all', geomFilter, ...filters]);
             } else {
-              this.map.setFilter(layerName, ['all', geomFilter, nativeFilter]);
+              const mapFilter = this._updateWithNativeFilter([
+                'all',
+                geomFilter
+              ]);
+              this.map.setFilter(layerName, mapFilter);
             }
           }
         }
