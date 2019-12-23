@@ -8,7 +8,8 @@ import {
   VectorAdapterLayerPaint,
   GetPaintCallback,
   DataLayerFilter,
-  LayerDefinition
+  LayerDefinition,
+  PropertiesFilter
 } from '@nextgis/webmap';
 import {
   GeoJsonObject,
@@ -30,7 +31,6 @@ let ID = 0;
 export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   selected = false;
   source?: string;
-  protected featureIdName = '_rendromId';
   private _features: Feature[] = [];
   private _filteredFeatureIds: Array<string | number> = [];
   private _filterFun?: DataLayerFilter<Feature>;
@@ -39,9 +39,6 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   constructor(public map: Map, public options: GeoJsonAdapterOptions) {
     super(map, options);
     this.source = this._sourceId;
-    if (this.options.source) {
-      this.featureIdName = '$id';
-    }
   }
 
   async addLayer(options: GeoJsonAdapterOptions): Promise<TLayer> {
@@ -82,10 +79,10 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
       const features = this.filterGeometries(data, type);
       features.forEach(x => {
         // to avoid id = 0 is false
-        const rendromId = '_' + ID++;
-        x._featureFilterId = rendromId;
+        const fid = '_' + ID++;
+        x._featureFilterId = fid;
         if (x.properties) {
-          x.properties[this.featureIdName] = rendromId;
+          x.properties[this.featureIdName] = fid;
         }
       });
       if (this._filterFun) {
@@ -136,25 +133,31 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     return features;
   }
 
-  select(findFeatureFun?: (opt: { feature: Feature }) => boolean) {
+  select(findFeatureFun?: DataLayerFilter<Feature, TLayer> | PropertiesFilter) {
     if (findFeatureFun) {
       if (typeof findFeatureFun === 'function') {
         const features = this._getFeatures().filter(x =>
           findFeatureFun({ feature: x })
         );
         this._selectFeature(features);
+      } else {
+        super._updateFilter(findFeatureFun);
       }
     } else if (!this.selected) {
       this._selectFeature(this._getFeatures());
     }
   }
 
-  unselect(findFeatureFun?: (opt: { feature: Feature }) => boolean) {
+  unselect(
+    findFeatureFun?: DataLayerFilter<Feature, TLayer> | PropertiesFilter
+  ) {
     if (findFeatureFun) {
-      const features = this._getFeatures().filter(x =>
-        findFeatureFun({ feature: x })
-      );
-      this._unselectFeature(features);
+      if (typeof findFeatureFun === 'function') {
+        const features = this._getFeatures().filter(x =>
+          findFeatureFun({ feature: x })
+        );
+        this._unselectFeature(features);
+      }
     } else if (this.selected) {
       this._unselectFeature();
     }
@@ -199,9 +202,9 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
       return id;
     } else if (
       feature.properties &&
-      feature.properties._rendromId !== undefined
+      feature.properties[this.featureIdName] !== undefined
     ) {
-      return feature.properties._rendromId;
+      return feature.properties[this.featureIdName];
     }
     return feature.id;
   }
@@ -260,6 +263,62 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
       this._selectedFeatureIds = [];
     }
     this._updateFilter();
+  }
+
+  protected _updateFilter() {
+    let selectionArray: Array<string | number> = [];
+    const filteredArray: Array<string | number> = [];
+
+    if (this._filteredFeatureIds.length) {
+      this._getFeatures().forEach(x => {
+        const id = this._getFeatureFilterId(x);
+        if (id !== undefined && this._filteredFeatureIds.indexOf(id) !== -1) {
+          if (this._selectedFeatureIds.indexOf(id) !== -1) {
+            selectionArray.push(id);
+          } else {
+            filteredArray.push(id);
+          }
+        }
+      });
+    } else {
+      selectionArray = this._selectedFeatureIds;
+    }
+    this.selected = this._selectedFeatureIds.length > 0;
+    const layers = this.layer;
+    if (layers) {
+      this._types.forEach(t => {
+        const geomType = typeAliasForFilter[t];
+        if (geomType) {
+          const geomFilter = ['==', '$type', geomType];
+          const layerName = this._getLayerNameFromType(t);
+          const selLayerName = this._getSelectionLayerNameFromType(t);
+          if (layers.indexOf(selLayerName) !== -1) {
+            if (this._selectionName) {
+              this.map.setFilter(selLayerName, [
+                'all',
+                geomFilter,
+                ['in', this.featureIdName, ...selectionArray]
+              ]);
+            }
+          }
+          if (layers.indexOf(layerName) !== -1) {
+            if (this._filteredFeatureIds.length) {
+              this.map.setFilter(layerName, [
+                'all',
+                geomFilter,
+                ['in', this.featureIdName, ...filteredArray]
+              ]);
+            } else {
+              this.map.setFilter(layerName, [
+                'all',
+                geomFilter,
+                ['!in', this.featureIdName, ...selectionArray]
+              ]);
+            }
+          }
+        }
+      });
+    }
   }
 
   private _getFeatures(): Feature[] {
@@ -354,61 +413,5 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     }
     const styleFromCb = this._createPaintForType(style, type, name);
     return styleFromCb;
-  }
-
-  private _updateFilter() {
-    let selectionArray: Array<string | number> = [];
-    const filteredArray: Array<string | number> = [];
-
-    if (this._filteredFeatureIds.length) {
-      this._getFeatures().forEach(x => {
-        const id = this._getFeatureFilterId(x);
-        if (id !== undefined && this._filteredFeatureIds.indexOf(id) !== -1) {
-          if (this._selectedFeatureIds.indexOf(id) !== -1) {
-            selectionArray.push(id);
-          } else {
-            filteredArray.push(id);
-          }
-        }
-      });
-    } else {
-      selectionArray = this._selectedFeatureIds;
-    }
-    this.selected = this._selectedFeatureIds.length > 0;
-    const layers = this.layer;
-    if (layers) {
-      this._types.forEach(t => {
-        const geomType = typeAliasForFilter[t];
-        if (geomType) {
-          const geomFilter = ['==', '$type', geomType];
-          const layerName = this._getLayerNameFromType(t);
-          const selLayerName = this._getSelectionLayerNameFromType(t);
-          if (layers.indexOf(selLayerName) !== -1) {
-            if (this._selectionName) {
-              this.map.setFilter(selLayerName, [
-                'all',
-                geomFilter,
-                ['in', this.featureIdName, ...selectionArray]
-              ]);
-            }
-          }
-          if (layers.indexOf(layerName) !== -1) {
-            if (this._filteredFeatureIds.length) {
-              this.map.setFilter(layerName, [
-                'all',
-                geomFilter,
-                ['in', this.featureIdName, ...filteredArray]
-              ]);
-            } else {
-              this.map.setFilter(layerName, [
-                'all',
-                geomFilter,
-                ['!in', this.featureIdName, ...selectionArray]
-              ]);
-            }
-          }
-        }
-      });
-    }
   }
 }
