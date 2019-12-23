@@ -17,7 +17,5 @@ export abstract class BaseAdapter<O extends AdapterOptions = AdapterOptions>
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  addLayer(options: O): TLayer | Promise<TLayer> | undefined {
-    return [''];
-  }
+  abstract addLayer(options: O): TLayer | Promise<TLayer> | undefined;
 }
