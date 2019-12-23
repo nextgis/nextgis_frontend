@@ -14,7 +14,11 @@ export interface ItemBasePropertyOptions<V> {
   silent?: boolean;
   value?: V;
   getProperty?: (item?: Item) => V;
-  onSet?: (value?: V, options?: ItemBasePropertyOptions<V>, item?: Item) => void;
+  onSet?: (
+    value?: V,
+    options?: ItemBasePropertyOptions<V>,
+    item?: Item
+  ) => void;
 }
 
 export interface ItemPropertyTypes {
@@ -24,7 +28,9 @@ export interface ItemPropertyTypes {
   any: any;
 }
 
-export interface ItemPropertyBaseConfig<K extends keyof ItemPropertyTypes = any> {
+export interface ItemPropertyBaseConfig<
+  K extends keyof ItemPropertyTypes = any
+> {
   type?: ItemPropertyTypes[K];
   name?: string;
 }
@@ -53,13 +59,13 @@ export interface ItemOptions {
   properties?: Array<ItemPropertyConfig<keyof ItemPropertyTypes>>;
   headers?: any;
   order?: number;
-  drawOrderEnabled?: boolean
+  drawOrderEnabled?: boolean;
 }
 
 export interface ChangeEvent<
   V = any,
   O extends ItemBasePropertyOptions<V> = ItemBasePropertyOptions<V>
-  > {
+> {
   value: V;
   options: O;
 }
