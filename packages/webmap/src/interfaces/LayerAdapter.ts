@@ -206,7 +206,7 @@ export interface VectorAdapterOptions<F extends Feature = Feature, L = any>
   popupOptions?: PopupOptions;
   filter?: DataLayerFilter;
   propertiesFilter?: PropertiesFilter;
-
+  featureIdName?: string;
   cluster?: boolean;
   /**
    * Max zoom to cluster points on
@@ -256,23 +256,23 @@ export interface ImageAdapterOptions extends RasterAdapterOptions {
 }
 
 export interface LayerAdapters {
+  [name: string]: BaseLayerAdapter;
   MVT: VectorLayerAdapter;
   IMAGE: BaseLayerAdapter;
   OSM: BaseLayerAdapter;
   TILE: BaseLayerAdapter;
   MARKER: BaseLayerAdapter;
   GEOJSON: VectorLayerAdapter;
-  [name: string]: BaseLayerAdapter;
 }
 
 export interface LayerAdaptersOptions {
+  [name: string]: AdapterOptions;
   MVT: MvtAdapterOptions;
   IMAGE: ImageAdapterOptions;
   OSM: RasterAdapterOptions;
   TILE: TileAdapterOptions;
   MARKER: MarkerAdapterOptions;
   GEOJSON: GeoJsonAdapterOptions;
-  [name: string]: AdapterOptions;
 }
 
 export interface LayerDefinition<F extends Feature = Feature, L = any> {

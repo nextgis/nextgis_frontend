@@ -7,7 +7,10 @@ import {
   GetPaintCallback,
   IconOptions,
   VectorLayerAdapter,
-  VectorAdapterOptions
+  VectorAdapterOptions,
+  PropertiesFilter,
+  Operations,
+  DataLayerFilter
 } from '@nextgis/webmap';
 import {
   Feature as F,
@@ -33,6 +36,34 @@ import { getImage } from '../util/image_icons';
 import { TLayer } from '../MapboxglMapAdapter';
 import { BaseAdapter } from './BaseAdapter';
 import { typeAliasForFilter, allowedByType } from '../util/geom_type';
+
+export const operationsAliases: { [key in Operations]: string } = {
+  gt: '>',
+  lt: '<',
+  ge: '>=',
+  le: '<=',
+  eq: '==',
+  ne: '!=',
+  in: 'in',
+  notin: '!in',
+  // NOT SUPPORTED
+  like: '==',
+  // NOT SUPPORTED
+  ilike: '=='
+};
+
+const reversOperations: { [key in Operations]: string } = {
+  gt: operationsAliases.le,
+  lt: operationsAliases.ge,
+  ge: operationsAliases.lt,
+  le: operationsAliases.gt,
+  eq: operationsAliases.ne,
+  ne: operationsAliases.eq,
+  in: operationsAliases.notin,
+  notin: operationsAliases.in,
+  like: operationsAliases.ne,
+  ilike: operationsAliases.ne
+};
 
 export interface Feature<
   G extends GeometryObject | null = Geometry,
@@ -68,6 +99,15 @@ export abstract class VectorAdapter<
     this._sourceId = this.options.source
       ? (this.options.source as string)
       : `source-${this._layerId}`;
+
+    if (this.options.featureIdName) {
+      this.featureIdName = this.options.featureIdName;
+    } else if (this.options.source) {
+      this.featureIdName = '$id';
+    } else {
+      this.featureIdName = '_fid';
+    }
+
     this._selectionName = this._layerId + '-highlighted';
     this.$onLayerClick = this._onLayerClick.bind(this);
   }
@@ -93,11 +133,11 @@ export abstract class VectorAdapter<
           const layer = this._getLayerNameFromType(t);
           const geomFilter =
             types.length > 1 ? ['==', '$type', geomType] : undefined;
-          const nativeFilter = this.options.nativeFilter
-            ? (this.options.nativeFilter as any[])
-            : [];
 
-          await this._addLayer(layer, type, [geomFilter, nativeFilter]);
+          await this._addLayer(layer, type, [
+            geomFilter,
+            this._getNativeFilter()
+          ]);
           this.layer.push(layer);
           if (options.selectedPaint) {
             const selectionLayer = this._getSelectionLayerNameFromType(t);
@@ -118,6 +158,18 @@ export abstract class VectorAdapter<
     return this.layer;
   }
 
+  select(properties?: DataLayerFilter<F, TLayer> | PropertiesFilter) {
+    if (typeof properties !== 'function') {
+      this._updateFilter(properties);
+    }
+    this.selected = true;
+  }
+
+  unselect(properties?: DataLayerFilter<F, TLayer> | PropertiesFilter) {
+    this._updateFilter();
+    this.selected = false;
+  }
+
   removeLayer() {
     const map = this.map;
     if (this.layer) {
@@ -125,6 +177,12 @@ export abstract class VectorAdapter<
         map.removeLayer(layerId);
       });
     }
+  }
+
+  protected _getNativeFilter() {
+    return this.options.nativeFilter
+      ? (this.options.nativeFilter as any[])
+      : [];
   }
 
   protected async _addLayer(
@@ -286,6 +344,73 @@ export abstract class VectorAdapter<
 
   protected _getAdditionalLayerOptions() {
     return {};
+  }
+
+  protected _updateFilter(properties?: PropertiesFilter) {
+    const layers = this.layer;
+    if (layers) {
+      this._types.forEach(t => {
+        const geomType = typeAliasForFilter[t];
+        if (geomType) {
+          const geomFilter = ['==', '$type', geomType];
+          const layerName = this._getLayerNameFromType(t);
+          const selLayerName = this._getSelectionLayerNameFromType(t);
+          const nativeFilter = this._getNativeFilter();
+          if (layers.indexOf(selLayerName) !== -1) {
+            if (this._selectionName) {
+              if (properties) {
+                const filters = this._createFilterDefinitions(
+                  operationsAliases,
+                  properties
+                );
+                this.map.setFilter(selLayerName, [
+                  'all',
+                  geomFilter,
+                  ...filters
+                ]);
+              } else {
+                this.map.setFilter(selLayerName, [
+                  'all',
+                  geomFilter,
+                  nativeFilter,
+                  ['in', this.featureIdName, '']
+                ]);
+              }
+            }
+          }
+          if (layers.indexOf(layerName) !== -1) {
+            if (properties) {
+              const filters = this._createFilterDefinitions(
+                reversOperations,
+                properties
+              );
+              this.map.setFilter(layerName, [
+                'all',
+                geomFilter,
+                nativeFilter,
+                ...filters
+              ]);
+            } else {
+              this.map.setFilter(layerName, ['all', geomFilter, nativeFilter]);
+            }
+          }
+        }
+      });
+    }
+  }
+
+  private _createFilterDefinitions(
+    _operationsAliases: { [key in Operations]: string },
+    filters: PropertiesFilter
+  ) {
+    return filters.map(x => {
+      const [field, operation, value] = x;
+      const operationAlias = _operationsAliases[operation];
+      if (operation === 'in' || operation === 'notin') {
+        return [operationAlias, field, ...value];
+      }
+      return [operationAlias, field, value];
+    });
   }
 
   private _onLayerClick(e: MapLayerMouseEvent) {
