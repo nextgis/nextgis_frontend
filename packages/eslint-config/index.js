@@ -29,6 +29,7 @@ module.exports = {
     //     functions: 'never',
     //   }
     // ],
+    // 'arrow-parens': 'always',
     'prefer-const': 2,
     indent: 'off',
     'no-useless-catch': 'off',
