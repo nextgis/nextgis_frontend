@@ -1,5 +1,5 @@
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
-import NgwMap, { NgwLayersMem } from '@nextgis/ngw-map';
+import NgwMap, { LayerAdapter } from '@nextgis/ngw-map';
 import {
   ResourceAdapter,
   WebMapLayerAdapter,
@@ -20,16 +20,17 @@ export class NgwLayersList extends Vue {
   @Prop({ type: NgwMap }) ngwMap!: NgwMap;
   @Prop({ type: Array }) include!: Array<ResourceAdapter | string>;
   @Prop({ type: Boolean, default: false }) hideWebmapRoot!: boolean;
+  @Prop({ type: Boolean, default: false }) notOnlyNgwLayer!: boolean;
   @Prop({ type: Function }) showLayer!: (layer: WebMapLayerItem) => boolean;
   @Prop({ type: Function }) showResourceAdapter!: (
-    adapter: ResourceAdapter
+    adapter: LayerAdapter | ResourceAdapter
   ) => boolean;
 
   items: VueTreeItem[] = [];
 
   selection: string[] = [];
 
-  private _layers: ResourceAdapter[] = [];
+  private _layers: Array<LayerAdapter | ResourceAdapter> = [];
   private __updateItems?: () => Promise<void>;
 
   @Watch('selection')
@@ -105,24 +106,31 @@ export class NgwLayersList extends Vue {
   private async updateItems() {
     this.selection = [];
     this._layers = [];
-    const ngwLayers = await this.ngwMap.getNgwLayers();
-    const ngwLayersList = Object.keys(ngwLayers).map(x => ngwLayers[x]);
+    let layersList: LayerAdapter[] | undefined;
+    if (this.notOnlyNgwLayer) {
+      await this.ngwMap.onLoad();
+      const layers = this.ngwMap.allLayers();
+      layersList = Object.keys(layers).map(x => layers[x]);
+    } else {
+      const ngwLayers = await this.ngwMap.getNgwLayers();
+      layersList = Object.keys(ngwLayers).map(x => ngwLayers[x].layer);
+    }
     this.items = [];
-    ngwLayersList
-      .sort((a, b) => {
-        const aOrder = (a.layer.options && a.layer.options.order) || 0;
-        const bOrder = (b.layer.options && b.layer.options.order) || 0;
-        return aOrder - bOrder;
-      })
-      .reverse()
-      .forEach(x => {
-        this._createTreeItem(x);
-      });
+    if (layersList) {
+      layersList
+        .sort((a, b) => {
+          const aOrder = (a.options && a.options.order) || 0;
+          const bOrder = (b.options && b.options.order) || 0;
+          return aOrder - bOrder;
+        })
+        .reverse()
+        .forEach(x => {
+          this._createTreeItem(x);
+        });
+    }
   }
 
-  private _createTreeItem(layerMem: NgwLayersMem) {
-    const layer: ResourceAdapter = layerMem.layer;
-
+  private _createTreeItem(layer: LayerAdapter | ResourceAdapter) {
     if (this.showResourceAdapter) {
       const adapterEnabled = this.showResourceAdapter(layer);
       if (!adapterEnabled) return;
@@ -130,7 +138,10 @@ export class NgwLayersList extends Vue {
 
     const name =
       layer.options.name ||
-      (layer.item && layer.item.resource.display_name) ||
+      ('item' in layer &&
+        layer.item &&
+        layer.item.resource &&
+        layer.item.resource.display_name) ||
       String(layer.id);
     const item: VueTreeItem = {
       id: layer.id || '',
@@ -150,7 +161,7 @@ export class NgwLayersList extends Vue {
       }
     }
     let visible = false;
-    const webMap = layer.item && layer.item.webmap;
+    const webMap = 'item' in layer && layer.item && layer.item.webmap;
     const webMapLayer = layer as WebMapLayerAdapter;
     if (webMap && webMapLayer.layer) {
       const tree = webMapLayer.layer.tree;
@@ -208,7 +219,9 @@ export class NgwLayersList extends Vue {
     return treeItems;
   }
 
-  private _getLayerId(layer: ResourceAdapter | WebMapLayerItem): string {
+  private _getLayerId(
+    layer: LayerAdapter | ResourceAdapter | WebMapLayerItem
+  ): string {
     const webMap = layer as WebMapLayerItem;
     const webMapTree = webMap.tree;
     if (webMapTree) {
