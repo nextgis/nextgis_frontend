@@ -7,7 +7,7 @@ import {
 } from 'geojson';
 import { VectorAdapterLayerType } from '@nextgis/webmap';
 
-export const allowedParams: Array<[string, string] | string> = [
+export const allowedParams: ([string, string] | string)[] = [
   'color',
   'opacity'
 ];
@@ -25,10 +25,7 @@ export const allowedByType = {
     ['strokeOpacity', 'opacity'],
     ['weight', 'width']
   ],
-  fill: [
-    ['fillColor', 'color'],
-    ['fillOpacity', 'opacity']
-  ],
+  fill: [['fillColor', 'color'], ['fillOpacity', 'opacity']],
   icon: allowedParams.concat([])
 };
 
