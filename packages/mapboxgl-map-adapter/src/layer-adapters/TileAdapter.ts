@@ -53,8 +53,6 @@ export class TileAdapter extends BaseAdapter<TileAdapterOptions>
       layout: {
         visibility: 'none'
       },
-      minzoom: this.options.minZoom,
-      maxzoom: this.options.maxZoom,
       source: sourceOptions
       // TODO: clean remove before options from all existing apps
     };
@@ -63,7 +61,7 @@ export class TileAdapter extends BaseAdapter<TileAdapterOptions>
       layerOptions.minzoom = minZoom - 1;
     }
     if (maxZoom) {
-      layerOptions.maxzoom = maxZoom;
+      layerOptions.maxzoom = maxZoom - 1;
     }
 
     this.map.addLayer(

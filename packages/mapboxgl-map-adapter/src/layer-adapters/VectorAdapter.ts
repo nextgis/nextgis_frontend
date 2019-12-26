@@ -200,6 +200,7 @@ export abstract class VectorAdapter<
     filter?: any[],
     layout?: AnyLayout
   ) {
+    const { minZoom, maxZoom } = this.options;
     let mType: MapboxLayerType;
     if (type === 'icon') {
       mType = 'symbol';
@@ -211,14 +212,18 @@ export abstract class VectorAdapter<
       id: name,
       type: mType,
       source: this._sourceId,
-      minzoom: this.options.minZoom ? this.options.minZoom - 1 : undefined,
-      maxzoom: this.options.maxZoom ? this.options.maxZoom - 1 : undefined,
       layout: {
         visibility: 'none',
         ...layout
       },
       ...this._getAdditionalLayerOptions()
     };
+    if (minZoom) {
+      layerOpt.minzoom = minZoom - 1;
+    }
+    if (maxZoom) {
+      layerOpt.maxzoom = maxZoom - 1;
+    }
 
     this.map.addLayer(layerOpt);
 
