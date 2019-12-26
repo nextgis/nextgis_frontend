@@ -92,7 +92,7 @@ export class BaseWebMap<
   readonly runtimeParams: RuntimeParams[] = [];
 
   getPaintFunctions = BaseWebMap.getPaintFunctions;
-  mapState: Array<Type<StateItem>> = [CenterState, ZoomState];
+  mapState: Type<StateItem>[] = [CenterState, ZoomState];
 
   /**
    * From runtime params
@@ -444,7 +444,7 @@ export class BaseWebMap<
   }
 
   private _addEventsListeners(): void {
-    const events: Array<keyof BaseMapEvents> = [
+    const events: (keyof BaseMapEvents)[] = [
       'click',
       'zoomstart',
       'zoom',

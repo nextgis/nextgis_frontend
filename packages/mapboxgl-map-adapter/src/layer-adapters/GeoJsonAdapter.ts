@@ -32,7 +32,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   selected = false;
   source?: string;
   private _features: Feature[] = [];
-  private _filteredFeatureIds: Array<string | number> = [];
+  private _filteredFeatureIds: (string | number)[] = [];
   private _filterFun?: DataLayerFilter<Feature>;
   private _sources: Record<string, GeoJSONSource> = {};
 
@@ -174,7 +174,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
           features: []
         }
       };
-      const _opts: Array<keyof GeoJsonAdapterOptions> = [
+      const _opts: (keyof GeoJsonAdapterOptions)[] = [
         'cluster',
         'clusterMaxZoom',
         'clusterRadius'
@@ -266,8 +266,8 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   }
 
   protected _updateFilter() {
-    let selectionArray: Array<string | number> = [];
-    const filteredArray: Array<string | number> = [];
+    let selectionArray: (string | number)[] = [];
+    const filteredArray: (string | number)[] = [];
 
     if (this._filteredFeatureIds.length) {
       this._getFeatures().forEach(x => {

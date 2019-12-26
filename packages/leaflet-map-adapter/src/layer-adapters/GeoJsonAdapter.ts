@@ -292,7 +292,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
       //   path.fillOpacity = path.opacity;
       // }
 
-      const paintAliases: Array<[keyof PathOptions, keyof PathPaint]> = [
+      const paintAliases: [keyof PathOptions, keyof PathPaint][] = [
         ['color', 'strokeColor'],
         ['opacity', 'strokeOpacity'],
         ['stroke', 'stroke'],
@@ -301,7 +301,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
         ['fill', 'fill'],
         ['weight', 'weight']
       ];
-      const aliases: Array<[keyof PathOptions, keyof PathPaint]> =
+      const aliases: [keyof PathOptions, keyof PathPaint][] =
         this.type === 'line'
           ? [
               ['color', 'strokeColor'],

@@ -25,7 +25,7 @@ export class ItemProperties {
 
   constructor(
     public item: Item,
-    propertiesList?: Array<ItemPropertyConfig<keyof ItemPropertyTypes>>
+    propertiesList?: ItemPropertyConfig<keyof ItemPropertyTypes>[]
   ) {
     this._propertiesList = []; // ordered list
     if (propertiesList) {

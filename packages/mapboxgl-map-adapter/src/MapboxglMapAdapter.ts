@@ -70,7 +70,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   controlAdapters = MapboxglMapAdapter.controlAdapters;
   isLoaded = false;
 
-  private _universalEvents: Array<keyof WebMapEvents> = [
+  private _universalEvents: (keyof WebMapEvents)[] = [
     'zoomstart',
     'zoom',
     'zoomend',
@@ -197,17 +197,11 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   // [extent_left, extent_bottom, extent_right, extent_top];
   fitBounds(e: LngLatBoundsArray, options: FitOptions = {}): void {
     if (this.map) {
-      this.map.fitBounds(
-        [
-          [e[0], e[1]],
-          [e[2], e[3]]
-        ],
-        {
-          linear: true,
-          ...options,
-          ...fitBoundsOptions
-        }
-      );
+      this.map.fitBounds([[e[0], e[1]], [e[2], e[3]]], {
+        linear: true,
+        ...options,
+        ...fitBoundsOptions
+      });
     }
   }
 

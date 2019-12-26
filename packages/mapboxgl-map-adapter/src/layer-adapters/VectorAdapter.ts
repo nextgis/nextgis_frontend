@@ -91,7 +91,7 @@ export abstract class VectorAdapter<
   protected _types: VectorAdapterLayerType[] = ['fill', 'circle', 'line'];
   protected readonly _sourceId: string;
   protected readonly _selectionName: string;
-  protected _selectedFeatureIds: Array<number | string> = [];
+  protected _selectedFeatureIds: (number | string)[] = [];
 
   private $onLayerClick?: (e: MapLayerMouseEvent) => void;
 
@@ -426,13 +426,16 @@ export abstract class VectorAdapter<
     //   layers: this.layer
     // });
     if (this.layer) {
-      const features = this.layer.reduce((a, b) => {
-        const features_ = this.map.queryRenderedFeatures(e.point, {
-          layers: [b]
-        });
-        const c = a.concat(features_);
-        return c;
-      }, [] as MapboxGeoJSONFeature[]);
+      const features = this.layer.reduce(
+        (a, b) => {
+          const features_ = this.map.queryRenderedFeatures(e.point, {
+            layers: [b]
+          });
+          const c = a.concat(features_);
+          return c;
+        },
+        [] as MapboxGeoJSONFeature[]
+      );
       const feature = features[0] as Feature;
       if (feature) {
         const id = this._getFeatureFilterId(feature);
