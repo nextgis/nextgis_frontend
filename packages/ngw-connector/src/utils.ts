@@ -21,7 +21,7 @@ export function loadJSON(
   callback: (...args: any[]) => any,
   options: RequestOptions = {},
   error: (reason?: any) => void,
-  onCancel: Array<() => void>
+  onCancel: (() => void)[]
 ) {
   options.method = options.method || 'GET';
 
