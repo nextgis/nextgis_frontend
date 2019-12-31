@@ -7,7 +7,7 @@ import {
   ControlPositions
 } from '@nextgis/webmap';
 import { findNgwMapParent, propsBinder } from '../utils';
-import VueNgwMap from './VueNgwMapBase';
+import VueNgwMap from './VueNgwMap';
 
 @Component
 export class VueNgwControl extends Vue {

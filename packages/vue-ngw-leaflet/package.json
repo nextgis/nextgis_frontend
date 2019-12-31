@@ -1,0 +1,60 @@
+{
+  "name": "@nextgis/vue-ngw-leaflet",
+  "version": "0.22.0",
+  "description": "Development tools",
+  "main": "lib/vue-ngw-leaflet.js",
+  "unpkg": "lib/vue-ngw-leaflet.js",
+  "types": "lib/index.d.ts",
+  "dependencies": {
+    "@nextgis/leaflet-map-adapter": "^0.22.0",
+    "@nextgis/vue-ngw-map": "^0.22.0",
+    "vue": "^2.6.11",
+    "vue-class-component": "^7.1.0",
+    "vue-property-decorator": "^8.3.0",
+    "vuex-module-decorators": "^0.11.0"
+  },
+  "devDependencies": {
+    "@nextgis/eslint-config": "^0.22.0",
+    "@types/events": "^3.0.0",
+    "@types/node": "^12.12.21",
+    "css-loader": "^3.4.0",
+    "eslint-loader": "^3.0.3",
+    "file-loader": "^5.0.2",
+    "rimraf": "^3.0.0",
+    "style-loader": "^1.1.1",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.4",
+    "webpack": "^4.41.4",
+    "webpack-cli": "^3.3.10"
+  },
+  "scripts": {
+    "clean": "rimraf ./lib",
+    "dev": "npm run clean && webpack --config ./webpack.config.js --progress",
+    "build": "npm run dev -- --mode=production",
+    "prod": "npm run build",
+    "watch": "npm run dev -- --watch"
+  },
+  "keywords": [
+    "NextGIS",
+    "MAP"
+  ],
+  "author": "NextGIS",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "license": "LGPL-3.0",
+  "publishConfig": {
+    "registry": "http://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nextgis/nextgisweb_frontend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nextgis/nextgisweb_frontend/issues"
+  }
+}
