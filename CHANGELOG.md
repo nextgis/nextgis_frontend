@@ -1,3 +1,17 @@
+# [](https://github.com/nextgis/nextgisweb_frontend/compare/v0.15.4...v) (2020-01-09)
+
+
+### Documentation
+
+* update changelog ([b8fe281](https://github.com/nextgis/nextgisweb_frontend/commit/b8fe281078b5db6593fe4a91214021ecbd5c5c2f))
+
+
+### BREAKING CHANGES
+
+* Сhanged approach to writing commit messages. Read [convention](https://github.com/nextgis/nextgisweb_frontend/blob/master/.github/commit-convention.md)
+
+
+
 ## [0.15.4](https://github.com/nextgis/nextgisweb_frontend/compare/v0.15.3...v0.15.4) (2019-06-04)
 
 
