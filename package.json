@@ -51,7 +51,7 @@
     "yorkie": "^2.0.0"
   },
   "gitHooks": {
-    "pre-commit": "lint-staged",
+    "#pre-commit": "lint-staged",
     "commit-msg": "node scripts/verifyCommit.js"
   },
   "lint-staged": {

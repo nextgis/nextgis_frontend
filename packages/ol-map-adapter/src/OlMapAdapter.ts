@@ -36,6 +36,7 @@ import { MapOptions as OlMapOptions } from 'ol/PluggableMap';
 import { PanelControl } from './controls/PanelControl';
 import { createControl } from './controls/createControl';
 import { createButtonControl } from './controls/createButtonControl';
+import { Extent } from 'ol/extent';
 
 type Layer = Base;
 
@@ -175,8 +176,9 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
   fitBounds(e: LngLatBoundsArray) {
     if (this._olView) {
       const zoom = this.getZoom();
+      const extent = e as Extent;
       const toExtent = transformExtent(
-        e,
+        extent,
         this.lonlatProjection,
         this.displayProjection
       );
