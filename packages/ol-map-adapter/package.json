@@ -8,6 +8,7 @@
   "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/webmap": "^0.22.0",
+    "@types/ol": "^5.3.6",
     "events": "^3.0.0",
     "ol": "^6.1.1"
   },
@@ -15,7 +16,6 @@
     "@nextgis/eslint-config": "^0.22.0",
     "@types/events": "^3.0.0",
     "@types/node": "^12.12.21",
-    "@types/ol": "^5.3.6",
     "css-loader": "^3.4.0",
     "eslint-loader": "^3.0.3",
     "style-loader": "^1.1.1",
