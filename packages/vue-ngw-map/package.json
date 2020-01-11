@@ -9,22 +9,22 @@
     "@nextgis/leaflet-map-adapter": "^0.22.0",
     "@nextgis/ngw-map": "^0.22.0",
     "vue": "^2.6.11",
-    "vue-class-component": "^7.1.0",
+    "vue-class-component": "^7.2.0",
     "vue-property-decorator": "^8.3.0",
     "vuex-module-decorators": "^0.11.0"
   },
   "devDependencies": {
     "@nextgis/eslint-config": "^0.22.0",
     "@types/events": "^3.0.0",
-    "@types/node": "^12.12.21",
-    "css-loader": "^3.4.0",
+    "@types/node": "^13.1.6",
+    "css-loader": "^3.4.2",
     "eslint-loader": "^3.0.3",
     "file-loader": "^5.0.2",
     "rimraf": "^3.0.0",
-    "style-loader": "^1.1.1",
+    "style-loader": "^1.1.2",
     "ts-loader": "^6.2.1",
     "typescript": "^3.7.4",
-    "webpack": "^4.41.4",
+    "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10"
   },
   "scripts": {

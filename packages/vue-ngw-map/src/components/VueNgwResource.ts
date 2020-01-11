@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import Vue, { VNode, CreateElement } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import { findNgwMapParent, propsBinder } from '../utils';
@@ -63,8 +63,8 @@ export class VueNgwResource extends Vue {
     });
   }
 
-  render() {
-    return null;
+  render(h: CreateElement): VNode {
+    return h('div', {});
   }
 }
 

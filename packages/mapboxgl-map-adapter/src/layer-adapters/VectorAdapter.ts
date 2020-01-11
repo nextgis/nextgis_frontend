@@ -426,16 +426,13 @@ export abstract class VectorAdapter<
     //   layers: this.layer
     // });
     if (this.layer) {
-      const features = this.layer.reduce(
-        (a, b) => {
-          const features_ = this.map.queryRenderedFeatures(e.point, {
-            layers: [b]
-          });
-          const c = a.concat(features_);
-          return c;
-        },
-        [] as MapboxGeoJSONFeature[]
-      );
+      const features = this.layer.reduce((a, b) => {
+        const features_ = this.map.queryRenderedFeatures(e.point, {
+          layers: [b]
+        });
+        const c = a.concat(features_);
+        return c;
+      }, [] as MapboxGeoJSONFeature[]);
       const feature = features[0] as Feature;
       if (feature) {
         const id = this._getFeatureFilterId(feature);
