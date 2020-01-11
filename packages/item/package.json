@@ -6,18 +6,18 @@
   "unpkg": "lib/item.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "events": "^3.0.0"
+    "events": "^3.1.0"
   },
   "devDependencies": {
     "@nextgis/eslint-config": "^0.22.0",
     "@types/events": "^3.0.0",
-    "@types/node": "^12.12.21",
+    "@types/node": "^13.1.6",
     "eslint-loader": "^3.0.3",
     "rimraf": "^3.0.0",
-    "style-loader": "^1.1.1",
+    "style-loader": "^1.1.2",
     "ts-loader": "^6.2.1",
     "typescript": "^3.7.4",
-    "webpack": "^4.41.4",
+    "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10"
   },
   "scripts": {

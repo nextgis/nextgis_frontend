@@ -2,7 +2,8 @@ const createWebpack = require('./webpack.config');
 const path = require('path');
 
 module.exports = config => {
-  const coverage = config.coverage !== undefined ? true : false;
+  const coverage = false;
+  // const coverage = config.coverage !== undefined ? true : false;
 
   const reporters = ['dots'];
   if (coverage) {
