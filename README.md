@@ -79,9 +79,9 @@ NPM/YARN is the recommended installation method when building large scale applic
 
 ```bash
 # latest stable
-$ npm i -S @nextgis/[package]
+npm i -S @nextgis/[package]
 # or with yarn
-$ yarn add @nextgis/[package]
+yarn add @nextgis/[package]
 ```
 
 then import the \[package\] in the project modules

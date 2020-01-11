@@ -25,7 +25,10 @@ export const allowedByType = {
     ['strokeOpacity', 'opacity'],
     ['weight', 'width']
   ],
-  fill: [['fillColor', 'color'], ['fillOpacity', 'opacity']],
+  fill: [
+    ['fillColor', 'color'],
+    ['fillOpacity', 'opacity']
+  ],
   icon: allowedParams.concat([])
 };
 
