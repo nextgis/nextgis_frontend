@@ -53,9 +53,9 @@ export class GeoJsonAdapter
         const style = [vectorStyle];
         const labelField = this.options.labelField;
         if (labelField) {
-          const text = f.get(labelField);
+          const text = String(f.get(labelField));
           if (text) {
-            const labelStyle = labelStyleFunction(f as ol.Feature, labelField);
+            const labelStyle = labelStyleFunction(options.type || 'fill');
             labelStyle.getText().setText(text);
             style.push(labelStyle);
           }
