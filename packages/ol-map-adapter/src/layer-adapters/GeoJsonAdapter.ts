@@ -16,7 +16,7 @@ import { ForEachFeatureAtPixelCallback } from '../OlMapAdapter';
 
 import * as ol from 'ol';
 import Base from 'ol/layer/Base';
-import { styleFunction, getFeature } from '../utils/utils';
+import { styleFunction, labelStyleFunction, getFeature } from '../utils/utils';
 import { getResolution } from '../utils/gerResolution';
 
 type Layer = Base;
@@ -49,7 +49,14 @@ export class GeoJsonAdapter
     this.layer = new VectorLayer({
       source: this.vectorSource,
       style: f => {
-        const style = styleFunction(f as ol.Feature, options.paint);
+        const vectorStyle = styleFunction(f as ol.Feature, options.paint);
+        const style = [vectorStyle];
+        const labelField = this.options.labelField;
+        if (labelField) {
+          const labelStyle = labelStyleFunction(f as ol.Feature, labelField);
+          labelStyle.getText().setText(f.get(labelField));
+          style.push(labelStyle);
+        }
         return style;
       },
       minResolution:
