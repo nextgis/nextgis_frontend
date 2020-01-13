@@ -187,6 +187,17 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     }
   }
 
+  getBounds(): LngLatBoundsArray | undefined {
+    if (!this._olView) return undefined;
+    const mapExtent = this._olView.calculateExtent();
+    const extent = transformExtent(
+      mapExtent,
+      this.displayProjection,
+      this.lonlatProjection
+    );
+    return extent as LngLatBoundsArray;
+  }
+
   setRotation(angle: number) {
     if (this._olView) {
       this._olView.setRotation(angle);
