@@ -53,9 +53,12 @@ export class GeoJsonAdapter
         const style = [vectorStyle];
         const labelField = this.options.labelField;
         if (labelField) {
-          const labelStyle = labelStyleFunction(f as ol.Feature, labelField);
-          labelStyle.getText().setText(f.get(labelField));
-          style.push(labelStyle);
+          const text = f.get(labelField);
+          if (text) {
+            const labelStyle = labelStyleFunction(f as ol.Feature, labelField);
+            labelStyle.getText().setText(text);
+            style.push(labelStyle);
+          }
         }
         return style;
       },
