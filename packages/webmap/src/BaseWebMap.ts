@@ -32,6 +32,7 @@ import { WebMapEvents, BaseMapEvents } from './interfaces/Events';
 import { onLoad } from './util/decorators';
 import { propertiesFilter } from './util/propertiesFilter';
 import { clearObject } from './util/clearObject';
+import { getBoundsPolygon } from './util/getBoundsPolygon';
 
 import {
   detectGeometryType,
@@ -42,6 +43,7 @@ import { updateGeoJsonAdapterOptions } from './util/updateGeoJsonAdapterOptions'
 import { CenterState } from './components/mapStates/CenterState';
 import { ZoomState } from './components/mapStates/ZoomState';
 import { StateItem } from './components/mapStates/StateItem';
+import { Feature, Polygon } from 'geojson';
 
 const OPTIONS: MapOptions = {
   minZoom: 0,
@@ -75,7 +77,8 @@ export class BaseWebMap<
     findMostFrequentGeomType,
     updateGeoJsonAdapterOptions,
     propertiesFilter,
-    createToggleControl
+    createToggleControl,
+    getBoundsPolygon
   };
   static getPaintFunctions: { [name: string]: GetPaintFunction };
   static decorators = { onLoad };
@@ -236,6 +239,14 @@ export class BaseWebMap<
   getBounds(): LngLatBoundsArray | undefined {
     if (this.mapAdapter.getBounds) {
       return this.mapAdapter.getBounds();
+    }
+  }
+
+  getBoundsPolygon(): Feature<Polygon> | undefined {
+    const bounds = this.getBounds();
+    if (bounds) {
+      const feature = getBoundsPolygon(bounds);
+      return feature;
     }
   }
 
