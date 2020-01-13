@@ -7,6 +7,7 @@ import {
 import GeoJSON from 'ol/format/GeoJSON';
 import CircleStyle from 'ol/style/Circle';
 import { Fill, Stroke, Style, Text } from 'ol/style';
+import { Options as TextOptions } from 'ol/style/Text';
 import Icon, { Options as IconOptions } from 'ol/style/Icon';
 import IconAnchorUnits from 'ol/style/IconAnchorUnits';
 
@@ -112,19 +113,28 @@ export function styleFunction(
   }
 }
 
-export function labelStyleFunction(feature: ol.Feature, field: string) {
-  return new Style({
-    text: new Text({
-      font: '12px Calibri,sans-serif',
-      overflow: true,
-      fill: new Fill({
-        color: '#000'
-      }),
-      stroke: new Stroke({
-        color: '#fff',
-        width: 3
-      })
+export function labelStyleFunction(type: VectorAdapterLayerType) {
+  let options: TextOptions = {
+    font: '12px Calibri,sans-serif',
+    overflow: true,
+    fill: new Fill({
+      color: '#000'
+    }),
+    stroke: new Stroke({
+      color: '#fff',
+      width: 3
     })
+  };
+  if (type === 'circle') {
+    options = {
+      ...options,
+      placement: 'point',
+      textBaseline: 'bottom',
+      offsetY: 20
+    };
+  }
+  return new Style({
+    text: new Text(options)
   });
 }
 
