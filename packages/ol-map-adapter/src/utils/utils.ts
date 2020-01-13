@@ -6,9 +6,7 @@ import {
 } from '@nextgis/webmap';
 import GeoJSON from 'ol/format/GeoJSON';
 import CircleStyle from 'ol/style/Circle';
-import Fill from 'ol/style/Fill';
-import Stroke from 'ol/style/Stroke';
-import Style from 'ol/style/Style';
+import { Fill, Stroke, Style, Text } from 'ol/style';
 import Icon, { Options as IconOptions } from 'ol/style/Icon';
 import IconAnchorUnits from 'ol/style/IconAnchorUnits';
 
@@ -45,7 +43,7 @@ export function getColor(colorStr: string, opacity?: number): Color {
 export function styleFunction(
   feature: ol.Feature,
   paint: VectorAdapterLayerPaint | GetPaintCallback = {}
-): OlStyle {
+): Style {
   if (typeof paint === 'function') {
     const f: Feature = getFeature(feature);
     return styleFunction(feature, paint(f));
@@ -112,6 +110,22 @@ export function styleFunction(
     }
     return new Style(style);
   }
+}
+
+export function labelStyleFunction(feature: ol.Feature, field: string) {
+  return new Style({
+    text: new Text({
+      font: '12px Calibri,sans-serif',
+      overflow: true,
+      fill: new Fill({
+        color: '#000'
+      }),
+      stroke: new Stroke({
+        color: '#fff',
+        width: 3
+      })
+    })
+  });
 }
 
 export function queryToObject(str: string) {
