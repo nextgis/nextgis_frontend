@@ -452,14 +452,16 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     resourceType: ResourceType
   ): RequestParameters | undefined {
     // @ts-ignore
-    const transformRequests = this.map.transformRequests;
-    for (const r of transformRequests) {
-      const params = r(url, resourceType) as RequestParameters;
-      if (params) {
-        return params;
+    const transformRequests = this.map && this.map.transformRequests;
+    if (transformRequests) {
+      for (const r of transformRequests) {
+        const params = r(url, resourceType) as RequestParameters;
+        if (params) {
+          return params;
+        }
       }
+      return undefined;
     }
-    return undefined;
   }
 
   private _addEventsListeners(): void {
