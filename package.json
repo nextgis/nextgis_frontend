@@ -13,7 +13,8 @@
     "test": "npm run karma -- --single-run --coverage",
     "karma": "karma start test/karma.conf.js",
     "doc": "typedoc --options ./typedoc.json ./packages",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
+    "patch": "lerna version patch --conventional-commits -m \"chore(release): publish %s\" --no-changelog --no-push"
   },
   "devDependencies": {
     "@nextgis/eslint-config": "^0.22.0",
