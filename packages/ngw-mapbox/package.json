@@ -1,13 +1,13 @@
 {
   "name": "@nextgis/ngw-mapbox",
   "_priority": 10,
-  "version": "0.24.1",
+  "version": "0.24.2",
   "description": "",
   "main": "lib/ngw-mapbox.js",
   "unpkg": "lib/ngw-mapbox.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/mapboxgl-map-adapter": "^0.24.1",
+    "@nextgis/mapboxgl-map-adapter": "^0.24.2",
     "@nextgis/ngw-map": "^0.24.1",
     "@types/mapbox-gl": "^1.6.2",
     "canvg": "^3.0.4",
