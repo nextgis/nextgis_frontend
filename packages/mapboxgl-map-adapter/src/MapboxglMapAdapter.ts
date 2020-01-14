@@ -134,10 +134,10 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
             mapOpt.minZoom = options.minZoom - 1;
           }
           this.map = new Map(mapOpt);
-          // @ts-ignore
-          this.map.transformRequests = [];
 
           this.map.once('load', () => {
+            // @ts-ignore
+            this.map.transformRequests = [];
             this.isLoaded = true;
             this.emitter.emit('create', this);
             resolve(this);
