@@ -1,7 +1,6 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 
 # [0.24.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.22.0...v0.24.0) (2020-01-11)
 
@@ -19,7 +18,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### BREAKING CHANGES
 
 * Сhanged approach to writing commit messages. Read [convention](https://github.com/nextgis/nextgisweb_frontend/blob/master/.github/commit-convention.md)
-
+* Use import VueNgwMap from '@nextgis/vue-ngw-leaflet' instead of @nextgis/vue-ngw-map, vue-ngw-map is now has only abstract class for export (without any map framework). Also you can importVueNgwMap component from @nextgis/vue-ngw-mapbox and @nextgis/vue-ngw-ol.
 
 
 
