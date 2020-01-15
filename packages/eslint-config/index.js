@@ -45,6 +45,7 @@ module.exports = {
       }
     ],
     camelcase: 'off',
+    '@typescript-eslint/no-use-before-define': 0,
     '@typescript-eslint/member-ordering': 2,
     '@typescript-eslint/no-unused-vars': [
       1,
