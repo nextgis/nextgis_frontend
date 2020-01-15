@@ -1,0 +1,38 @@
+{
+  "name": "@nextgis/build-tools",
+  "version": "0.24.1",
+  "description": "",
+  "dependencies": {
+    "@nextgis/eslint-config": "^0.24.1",
+    "eslint-loader": "^3.0.3",
+    "rimraf": "^3.0.0",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.4",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
+  },
+  "scripts": {
+    "clean": "exit 0",
+    "dev": "exit 0",
+    "build": "exit 0",
+    "prod": "exit 0",
+    "watch": "exit 0",
+    "test": "exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nextgis/nextgisweb_frontend.git"
+  },
+  "keywords": [
+    "NextGIS",
+    "MAP"
+  ],
+  "author": "NextGIS",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib"
+  ],
+  "license": "LGPL-3.0"
+}

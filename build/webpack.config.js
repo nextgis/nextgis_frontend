@@ -14,7 +14,8 @@ module.exports = (env, argv, opt = {}) => {
   const outDir = path.resolve(opt.dirname, pathToLib.join('/'));
 
   const library = opt.library;
-  const libraryExport = opt.libraryExport !== undefined ? opt.libraryExport : 'default';
+  const libraryExport =
+    opt.libraryExport !== undefined ? opt.libraryExport : 'default';
 
   const useExternals = opt.externals !== undefined ? opt.externals : true;
 
