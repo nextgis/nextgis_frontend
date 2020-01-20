@@ -404,7 +404,7 @@ export abstract class VectorAdapter<
     }
   }
 
-  private _convertToMapboxFilter(filters: PropertiesFilter, reverse = false) {
+  protected _convertToMapboxFilter(filters: PropertiesFilter, reverse = false) {
     const _operationsAliases = reverse ? reversOperations : operationsAliases;
     return filters.map(x => {
       const [field, operation, value] = x;
