@@ -11,7 +11,8 @@ import {
   PropertiesFilter,
   Operations,
   DataLayerFilter,
-  PropertyFilter
+  PropertyFilter,
+  FilterOptions
 } from '@nextgis/webmap';
 import {
   Feature as F,
@@ -93,6 +94,9 @@ export abstract class VectorAdapter<
   protected readonly _selectionName: string;
   protected _selectedFeatureIds: (number | string)[] = [];
 
+  protected _selectProperties?: PropertiesFilter;
+  protected _filterProperties?: PropertiesFilter;
+
   private $onLayerClick?: (e: MapLayerMouseEvent) => void;
 
   constructor(public map: Map, public options: O) {
@@ -159,14 +163,26 @@ export abstract class VectorAdapter<
     return this.layer;
   }
 
+  propertiesFilter(filters: PropertiesFilter, options?: FilterOptions) {
+    this._filterProperties = filters;
+    this._updateFilter();
+  }
+
+  removeFilter() {
+    this._filterProperties = undefined;
+    this._updateFilter();
+  }
+
   select(properties?: DataLayerFilter<F, TLayer> | PropertiesFilter) {
     if (typeof properties !== 'function') {
-      this._updateFilter(properties);
+      this._selectProperties = properties;
+      this._updateFilter();
     }
     this.selected = true;
   }
 
-  unselect(properties?: DataLayerFilter<F, TLayer> | PropertiesFilter) {
+  unselect() {
+    this._selectProperties = undefined;
     this._updateFilter();
     this.selected = false;
   }
@@ -360,20 +376,21 @@ export abstract class VectorAdapter<
     return {};
   }
 
-  protected _updateFilter(properties?: PropertiesFilter) {
+  protected _updateFilter() {
     const layers = this.layer;
     if (layers) {
-      const nativeFilter = this.options.nativeFilter as PropertyFilter;
       this._types.forEach(t => {
         const geomType = typeAliasForFilter[t];
         if (geomType) {
           const geomFilter = ['==', '$type', geomType];
           const layerName = this._getLayerNameFromType(t);
           const selLayerName = this._getSelectionLayerNameFromType(t);
+          const selectProperties = this._selectProperties;
+          const filterProperties = this._filterProperties;
           if (layers.indexOf(selLayerName) !== -1) {
             if (this._selectionName) {
-              if (properties) {
-                const filters = this._convertToMapboxFilter(properties);
+              if (selectProperties) {
+                const filters = this._convertToMapboxFilter(selectProperties);
                 this.map.setFilter(selLayerName, [
                   'all',
                   geomFilter,
@@ -385,19 +402,23 @@ export abstract class VectorAdapter<
             }
           }
           if (layers.indexOf(layerName) !== -1) {
-            if (properties) {
-              const filters = this._convertToMapboxFilter(properties, true);
-              if (nativeFilter) {
-                filters.push(this._convertToMapboxFilter(nativeFilter));
-              }
-              this.map.setFilter(layerName, ['all', geomFilter, ...filters]);
-            } else {
-              const mapFilter = this._updateWithNativeFilter([
-                'all',
-                geomFilter
-              ]);
-              this.map.setFilter(layerName, mapFilter);
+            const filters_: any[] = ['all', geomFilter];
+            this._updateWithNativeFilter(filters_);
+            if (selectProperties) {
+              const selectFilters = this._convertToMapboxFilter(
+                selectProperties,
+                true
+              );
+              selectFilters.forEach(x => filters_.push(x));
             }
+            if (filterProperties) {
+              const propertyFilters = this._convertToMapboxFilter(
+                filterProperties
+              );
+              propertyFilters.forEach(x => filters_.push(x));
+            }
+
+            this.map.setFilter(layerName, filters_);
           }
         }
       });
@@ -416,6 +437,11 @@ export abstract class VectorAdapter<
     });
   }
 
+  protected isFeatureSelected(feature: Feature) {
+    // TODO: mvt implement
+    return false;
+  }
+
   private _onLayerClick(e: MapLayerMouseEvent) {
     e.preventDefault();
     // const features = this.map.queryRenderedFeatures(e.point, {
@@ -431,25 +457,20 @@ export abstract class VectorAdapter<
       }, [] as MapboxGeoJSONFeature[]);
       const feature = features[0] as Feature;
       if (feature) {
-        const id = this._getFeatureFilterId(feature);
-        if (id !== undefined) {
-          let isSelected = this._selectedFeatureIds.indexOf(id) !== -1;
-          if (isSelected) {
-            if (this.options && this.options.unselectOnSecondClick) {
-              this._unselectFeature(feature);
-              isSelected = false;
-            }
-          } else {
-            this._selectFeature(feature);
-            isSelected = true;
+        const isSelected = this.isFeatureSelected(feature);
+        if (isSelected) {
+          if (this.options && this.options.unselectOnSecondClick) {
+            this._unselectFeature(feature);
           }
-          if (this.options.onLayerClick) {
-            this.options.onLayerClick({
-              layer: this,
-              feature,
-              selected: isSelected
-            });
-          }
+        } else {
+          this._selectFeature(feature);
+        }
+        if (this.options.onLayerClick) {
+          this.options.onLayerClick({
+            layer: this,
+            feature,
+            selected: isSelected
+          });
         }
       }
     }
