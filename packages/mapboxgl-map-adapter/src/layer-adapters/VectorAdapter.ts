@@ -363,6 +363,7 @@ export abstract class VectorAdapter<
   protected _updateFilter(properties?: PropertiesFilter) {
     const layers = this.layer;
     if (layers) {
+      const nativeFilter = this.options.nativeFilter as PropertyFilter;
       this._types.forEach(t => {
         const geomType = typeAliasForFilter[t];
         if (geomType) {
@@ -372,10 +373,7 @@ export abstract class VectorAdapter<
           if (layers.indexOf(selLayerName) !== -1) {
             if (this._selectionName) {
               if (properties) {
-                const filters = this._createFilterDefinitions(
-                  operationsAliases,
-                  properties
-                );
+                const filters = this._convertToMapboxFilter(properties);
                 this.map.setFilter(selLayerName, [
                   'all',
                   geomFilter,
@@ -388,10 +386,10 @@ export abstract class VectorAdapter<
           }
           if (layers.indexOf(layerName) !== -1) {
             if (properties) {
-              const filters = this._createFilterDefinitions(
-                reversOperations,
-                properties
-              );
+              const filters = this._convertToMapboxFilter(properties, true);
+              if (nativeFilter) {
+                filters.push(this._convertToMapboxFilter(nativeFilter));
+              }
               this.map.setFilter(layerName, ['all', geomFilter, ...filters]);
             } else {
               const mapFilter = this._updateWithNativeFilter([
@@ -406,10 +404,8 @@ export abstract class VectorAdapter<
     }
   }
 
-  private _createFilterDefinitions(
-    _operationsAliases: { [key in Operations]: string },
-    filters: PropertiesFilter
-  ) {
+  private _convertToMapboxFilter(filters: PropertiesFilter, reverse = false) {
+    const _operationsAliases = reverse ? reversOperations : operationsAliases;
     return filters.map(x => {
       const [field, operation, value] = x;
       const operationAlias = _operationsAliases[operation];
