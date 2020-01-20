@@ -2,14 +2,16 @@
  * @module mapboxgl-map-adapter
  */
 import { Map, GeoJSONSource, GeoJSONSourceRaw } from 'mapbox-gl';
-import {
+import WebMap, {
   GeoJsonAdapterOptions,
   VectorAdapterLayerType,
   VectorAdapterLayerPaint,
   GetPaintCallback,
   DataLayerFilter,
   LayerDefinition,
-  PropertiesFilter
+  PropertiesFilter,
+  FilterOptions,
+  PropertyFilter
 } from '@nextgis/webmap';
 import {
   GeoJsonObject,
@@ -117,9 +119,17 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   }
 
   removeFilter() {
-    this._filterFun = undefined;
-    this._filteredFeatureIds = [];
+    this._cleanFilterParams();
     this._updateFilter();
+  }
+
+  propertiesFilter(filters: PropertiesFilter, options?: FilterOptions) {
+    this.filter(({ feature }) => {
+      if (feature && feature.properties) {
+        return WebMap.utils.propertiesFilter(feature.properties, filters);
+      }
+      return false;
+    });
   }
 
   getSelected() {
@@ -268,7 +278,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   protected _updateFilter() {
     let selectionArray: (string | number)[] = [];
     const filteredArray: (string | number)[] = [];
-
+    const nativeFilter = this.options.nativeFilter as PropertyFilter;
     if (this._filteredFeatureIds.length) {
       this._getFeatures().forEach(x => {
         const id = this._getFeatureFilterId(x);
@@ -302,28 +312,34 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
             }
           }
           if (layers.indexOf(layerName) !== -1) {
+            const filters: any[] = ['all', geomFilter];
             if (this._filteredFeatureIds.length) {
-              this.map.setFilter(layerName, [
-                'all',
-                geomFilter,
-                ['in', this.featureIdName, ...filteredArray]
-              ]);
+              filters.push(['in', this.featureIdName, ...filteredArray]);
             } else {
-              this.map.setFilter(layerName, [
-                'all',
-                geomFilter,
-                ['!in', this.featureIdName, ...selectionArray]
-              ]);
+              filters.push(['!in', this.featureIdName, ...selectionArray]);
             }
+            if (nativeFilter) {
+              filters.push(this._convertToMapboxFilter(nativeFilter));
+            }
+            this.map.setFilter(layerName, ...filters);
           }
         }
       });
     }
   }
 
+  private _cleanFilterParams() {
+    this._filterFun = undefined;
+    // this._propertiesFilter = undefined;
+    this._filteredFeatureIds = [];
+  }
+
   private _getFeatures(): Feature[] {
     if (this.source) {
-      const features = this.map.querySourceFeatures(this.source);
+      const source = this.map.getSource(this.source);
+      // @ts-ignore
+      const features = source._data.features as Feature[];
+      // const features = this.map.querySourceFeatures(this.source);
       return features;
     }
     return this._features;
