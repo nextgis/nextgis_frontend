@@ -387,10 +387,15 @@ export abstract class VectorAdapter<
           const selLayerName = this._getSelectionLayerNameFromType(t);
           const selectProperties = this._selectProperties;
           const filterProperties = this._filterProperties;
+          const propertyFilters =
+            filterProperties && this._convertToMapboxFilter(filterProperties);
           if (layers.indexOf(selLayerName) !== -1) {
             if (this._selectionName) {
               if (selectProperties) {
                 const filters = this._convertToMapboxFilter(selectProperties);
+                if (propertyFilters) {
+                  propertyFilters.forEach(x => filters.push(x));
+                }
                 this.map.setFilter(selLayerName, [
                   'all',
                   geomFilter,
@@ -411,10 +416,7 @@ export abstract class VectorAdapter<
               );
               selectFilters.forEach(x => filters_.push(x));
             }
-            if (filterProperties) {
-              const propertyFilters = this._convertToMapboxFilter(
-                filterProperties
-              );
+            if (propertyFilters) {
               propertyFilters.forEach(x => filters_.push(x));
             }
 
