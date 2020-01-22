@@ -2,7 +2,6 @@
  * @module leaflet-map-adapter
  */
 import { BaseLayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
-// import wms from 'leaflet.wms/src/leaflet.wms.js';
 // @ts-ignore
 import { ImageLayer } from './ImageLayer';
 
