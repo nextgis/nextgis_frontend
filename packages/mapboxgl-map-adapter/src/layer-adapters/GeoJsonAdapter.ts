@@ -2,16 +2,14 @@
  * @module mapboxgl-map-adapter
  */
 import { Map, GeoJSONSource, GeoJSONSourceRaw } from 'mapbox-gl';
-import WebMap, {
+import {
   GeoJsonAdapterOptions,
   VectorAdapterLayerType,
   VectorAdapterLayerPaint,
   GetPaintCallback,
   DataLayerFilter,
   LayerDefinition,
-  PropertiesFilter,
-  FilterOptions,
-  PropertyFilter
+  PropertiesFilter
 } from '@nextgis/webmap';
 import {
   GeoJsonObject,
@@ -34,7 +32,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   selected = false;
   source?: string;
   private _features: Feature[] = [];
-  private _filteredFeatureIds: (string | number)[] | false = [];
+  private _filteredFeatureIds?: (string | number)[] | undefined;
   private _filterFun?: DataLayerFilter<Feature>;
   private _sources: Record<string, GeoJSONSource> = {};
 
@@ -119,7 +117,8 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   }
 
   removeFilter() {
-    this._cleanFilterParams();
+    this._filterFun = undefined;
+    this._filteredFeatureIds = undefined;
     this._updateFilter();
   }
 
@@ -134,15 +133,17 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     return features;
   }
 
-  select(selectDef?: DataLayerFilter<Feature, TLayer> | PropertiesFilter) {
-    if (selectDef) {
-      if (typeof selectDef === 'function') {
+  select(findFeatureFun?: DataLayerFilter<Feature, TLayer> | PropertiesFilter) {
+    if (findFeatureFun) {
+      if (typeof findFeatureFun === 'function') {
         const features = this._getFeatures().filter(x =>
-          selectDef({ feature: x })
+          findFeatureFun({ feature: x })
         );
         this._selectFeature(features);
       } else {
-        super.select(selectDef);
+        this.selected = true;
+        this._selectProperties = findFeatureFun;
+        super._updateFilter();
       }
     } else if (!this.selected) {
       this._selectFeature(this._getFeatures());
@@ -222,14 +223,6 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     }
   }
 
-  protected isFeatureSelected(feature: Feature) {
-    const id = this._getFeatureFilterId(feature);
-    if (id !== undefined) {
-      return this._selectedFeatureIds.indexOf(id) !== -1;
-    }
-    return false;
-  }
-
   protected _selectFeature(feature: Feature | Feature[]) {
     if (this.options && !this.options.multiselect) {
       this._selectedFeatureIds = [];
@@ -275,22 +268,13 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   }
 
   protected _updateFilter() {
-    if (this._selectProperties || this._filterProperties) {
-      super._updateFilter();
-    } else {
-      this._updateCallbackFilter();
-    }
-  }
-
-  private _updateCallbackFilter() {
     let selectionArray: (string | number)[] = [];
     const filteredArray: (string | number)[] = [];
-    // const nativeFilter = this.options.nativeFilter as PropertyFilter;
-    const filteredFeatureIds = this._filteredFeatureIds;
-    if (filteredFeatureIds) {
+    const filtered = this._filteredFeatureIds;
+    if (filtered) {
       this._getFeatures().forEach(x => {
         const id = this._getFeatureFilterId(x);
-        if (id !== undefined && filteredFeatureIds.indexOf(id) !== -1) {
+        if (id !== undefined && filtered.indexOf(id) !== -1) {
           if (this._selectedFeatureIds.indexOf(id) !== -1) {
             selectionArray.push(id);
           } else {
@@ -320,51 +304,38 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
             }
           }
           if (layers.indexOf(layerName) !== -1) {
-            const filters: any[] = ['all', geomFilter];
-            if (filteredFeatureIds) {
-              filters.push(['in', this.featureIdName, ...filteredArray]);
+            const filter_: any[] = ['all', geomFilter];
+            if (filtered) {
+              filter_.push(['in', this.featureIdName, ...filteredArray]);
             } else {
-              filters.push(['!in', this.featureIdName, ...selectionArray]);
+              filter_.push(['!in', this.featureIdName, ...selectionArray]);
+              this._updateWithNativeFilter(filter_);
             }
-            // if (nativeFilter) {
-            //   filters.push(nativeFilter);
-            // }
-            this.map.setFilter(layerName, ...filters);
+            this.map.setFilter(layerName, filter_);
           }
         }
       });
     }
   }
 
-  private _cleanFilterParams() {
-    this._filterFun = undefined;
-    // this._propertiesFilter = undefined;
-    this._filteredFeatureIds = false;
-  }
-
   private _getFeatures(): Feature[] {
     if (this.source) {
-      const source = this.map.getSource(this.source);
-      // @ts-ignore
-      const features = source._data.features as Feature[];
-      // const features = this.map.querySourceFeatures(this.source);
+      const features = this.map.querySourceFeatures(this.source);
       return features;
     }
     return this._features;
   }
 
   private _filter(fun: DataLayerFilter<Feature, TLayer>) {
-    const filteredFeatureIds: (string | number)[] = [];
+    const filtered: (string | number)[] = [];
     this._getFeatures().forEach(feature => {
       const ok = fun({ feature });
-      if (ok) {
-        const id = this._getFeatureFilterId(feature);
-        if (id) {
-          filteredFeatureIds.push(id);
-        }
+      const id = this._getFeatureFilterId(feature);
+      if (ok && id) {
+        filtered.push(id);
       }
     });
-    this._filteredFeatureIds = filteredFeatureIds;
+    this._filteredFeatureIds = filtered;
     this._updateFilter();
   }
 
