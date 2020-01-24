@@ -5,9 +5,10 @@ import NgwConnector, {
 import WebMap, { LayerAdapter, Type } from '@nextgis/webmap';
 import QmsKit from '@nextgis/qms-kit';
 import {
-  NgwLayerOptions,
   ResourceAdapter,
-  AddNgwLayerOptions
+  NgwLayerOptions,
+  KeynamedNgwLayerOptions,
+  ResourceIdNgwLayerOptions
 } from './interfaces';
 
 import { createGeoJsonAdapter } from './createGeoJsonAdapter';
@@ -15,6 +16,7 @@ import { createRasterAdapter } from './createRasterAdapter';
 import { createWebMapAdapter } from './createWebMapAdapter';
 import { applyMixins } from './utils/utils';
 import { NgwResource } from './NgwResource';
+import { resourceIdFromLayerOptions } from './utils/resourceIdFromLayerOptions';
 
 const styles: ResourceCls[] = [
   'mapserver_style',
@@ -45,7 +47,7 @@ async function createAdapterFromFirstStyle(
 }
 
 export async function createAsyncAdapter(
-  options: AddNgwLayerOptions,
+  options: NgwLayerOptions,
   webMap: WebMap,
   baseUrl: string,
   connector: NgwConnector
@@ -54,13 +56,7 @@ export async function createAsyncAdapter(
   let item: ResourceItem | undefined;
   try {
     const adapterType = options.adapter;
-    let resourceId = options.resourceId;
-    if (!resourceId && options.keyname) {
-      const resourceItem = await connector.getResourceByKeyname(
-        options.keyname
-      );
-      resourceId = resourceItem.resource.id;
-    }
+    const resourceId = await resourceIdFromLayerOptions(options, connector);
     if (resourceId) {
       item = await connector.get('resource.item', null, { id: resourceId });
 
@@ -76,12 +72,17 @@ export async function createAsyncAdapter(
             };
             adapter = createGeoJsonAdapter(parentOptions, webMap, connector);
           } else {
-            adapter = createRasterAdapter(_options, webMap, baseUrl);
+            adapter = createRasterAdapter(_options, webMap, baseUrl, connector);
           }
         } else if (item.resource.cls === 'vector_layer') {
           if (adapterType !== undefined && adapterType !== 'GEOJSON') {
             if (adapterType === 'MVT') {
-              adapter = createRasterAdapter(_options, webMap, baseUrl);
+              adapter = createRasterAdapter(
+                _options,
+                webMap,
+                baseUrl,
+                connector
+              );
             } else {
               return createAdapterFromFirstStyle(
                 item.resource.id,
