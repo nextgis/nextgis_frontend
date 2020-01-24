@@ -6,12 +6,14 @@ import WebMap, {
   TileAdapterOptions
 } from '@nextgis/webmap';
 import { getLayerAdapterOptions } from './utils/utils';
-import { ResourceItem } from '@nextgis/ngw-connector';
+import NgwConnector, { ResourceItem } from '@nextgis/ngw-connector';
+import { resourceIdFromLayerOptions } from './utils/resourceIdFromLayerOptions';
 
 export async function createRasterAdapter(
   options: NgwLayerOptions,
   webMap: WebMap,
-  baseUrl: string
+  baseUrl: string,
+  connector: NgwConnector
 ): Promise<Type<BaseLayerAdapter> | undefined> {
   let adapter = options.adapter || 'IMAGE';
 
@@ -26,11 +28,11 @@ export async function createRasterAdapter(
     const adapterClass = webMap.mapAdapter.layerAdapters[adapter] as Type<
       BaseLayerAdapter
     >;
-
+    const resourceId = await resourceIdFromLayerOptions(options, connector);
     return class Adapter extends adapterClass implements ResourceAdapter {
       // options = {};
       item?: ResourceItem;
-      resourceId = options.resourceId;
+      resourceId = resourceId;
 
       constructor(public map: any, _options: any) {
         super(map, _options);

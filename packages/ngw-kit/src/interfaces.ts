@@ -73,20 +73,30 @@ export interface NgwLayerOptionsAdditional<
   simplification?: number;
 }
 
-export interface NgwLayerOptions<
+export interface ResourceIdNgwLayerOptions<
   T extends NgwLayerAdapterType = NgwLayerAdapterType,
   P = { [name: string]: any }
 > extends NgwLayerOptionsAdditional<T, P> {
   resourceId: number;
 }
-
-export interface AddNgwLayerOptions<
+export interface KeynamedNgwLayerOptions<
   T extends NgwLayerAdapterType = NgwLayerAdapterType,
   P = { [name: string]: any }
 > extends NgwLayerOptionsAdditional<T, P> {
-  keyname?: string;
-  resourceId?: number;
+  keyname: string;
 }
+
+export type NgwLayerOptions =
+  | ResourceIdNgwLayerOptions
+  | KeynamedNgwLayerOptions;
+
+// export interface AddNgwLayerOptions<
+//   T extends NgwLayerAdapterType = NgwLayerAdapterType,
+//   P = { [name: string]: any }
+// > extends NgwLayerOptionsAdditional<T, P> {
+//   keyname?: string;
+//   resourceId?: number;
+// }
 
 export interface NgwConfig {
   applicationUrl: string;

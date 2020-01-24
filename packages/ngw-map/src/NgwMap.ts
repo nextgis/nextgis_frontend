@@ -30,9 +30,10 @@ import NgwKit, {
   NgwLayerOptions,
   ResourceAdapter,
   WebMapLayerItem,
-  AddNgwLayerOptions,
   NgwLayerOptionsAdditional,
-  NgwIdentify
+  NgwIdentify,
+  KeynamedNgwLayerOptions,
+  ResourceIdNgwLayerOptions
 } from '@nextgis/ngw-kit';
 import { getIcon } from '@nextgis/icons';
 
@@ -169,9 +170,11 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<
    */
   @onMapLoad()
   async addNgwLayer(
-    options: AddNgwLayerOptions
+    options: NgwLayerOptions
   ): Promise<ResourceAdapter | undefined> {
-    if (!options.resourceId && !options.keyname) {
+    const keyname = (options as KeynamedNgwLayerOptions).keyname;
+    const resourceId = (options as ResourceIdNgwLayerOptions).resourceId;
+    if (!keyname && !resourceId) {
       throw new Error(
         'resourceId or keyname is required parameter to add NGW layer'
       );
