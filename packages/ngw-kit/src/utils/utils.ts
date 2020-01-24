@@ -14,7 +14,7 @@ import {
   WebMapAdapterOptions,
   IdentifyRequestOptions,
   ResourceAdapter,
-  AddNgwLayerOptions
+  ResourceIdNgwLayerOptions
 } from '../interfaces';
 import { WebMapLayerAdapter } from '../WebMapLayerAdapter';
 
@@ -37,44 +37,54 @@ export function getLayerAdapterOptions(
   let url: string;
   const layerAdapters = webMap.getLayerAdapters();
   const isImageAllowed = layerAdapters ? layerAdapters.IMAGE : true;
-  if (adapter === 'IMAGE') {
-    if (isImageAllowed) {
-      url = baseUrl + '/api/component/render/image';
-      return {
-        url,
-        resourceId: options.resourceId,
-        headers: options.headers,
-        updateWmsParams: (params: any) =>
-          updateWmsParams(params, options.resourceId)
-      };
-    } else {
-      adapter = 'TILE';
+
+  // const keyname = (options as KeynamedNgwLayerOptions).keyname;
+  const resourceId = (options as ResourceIdNgwLayerOptions).resourceId;
+  // if (!resourceId && keyname) {
+  //   const resourceItem = await connector.getResourceByKeyname(keyname);
+  //   resourceId = resourceItem.resource.id;
+  // }
+  if (resourceId) {
+    if (adapter === 'IMAGE') {
+      if (isImageAllowed) {
+        url = baseUrl + '/api/component/render/image';
+        return {
+          url,
+          resourceId,
+          headers: options.headers,
+          updateWmsParams: (params: any) => updateWmsParams(params, resourceId)
+        };
+      } else {
+        adapter = 'TILE';
+      }
     }
-  }
-  if (adapter === 'MVT') {
-    url =
-      baseUrl +
-      '/api/component/feature_layer/mvt?x={x}&y={y}&z={z}&' +
-      'resource=' +
-      options.resourceId +
-      '&simplification=' +
-      (options.simplification || 0);
-    // url = baseUrl + '/api/resource/' + options.resourceId + '/{z}/{x}/{y}.mvt';
-    return {
-      url
-    };
-  }
-  if (adapter === 'TILE') {
-    url =
-      baseUrl +
-      '/api/component/render/tile?z={z}&x={x}&y={y}&resource=' +
-      options.resourceId;
-    return { url, adapter };
+    if (adapter === 'MVT') {
+      url =
+        baseUrl +
+        '/api/component/feature_layer/mvt?x={x}&y={y}&z={z}&' +
+        'resource=' +
+        resourceId +
+        '&simplification=' +
+        (options.simplification || 0);
+      // url = baseUrl + '/api/resource/' + options.resourceId + '/{z}/{x}/{y}.mvt';
+      return {
+        url
+      };
+    }
+    if (adapter === 'TILE') {
+      url =
+        baseUrl +
+        '/api/component/render/tile?z={z}&x={x}&y={y}&resource=' +
+        resourceId;
+      return { url, adapter };
+    }
+  } else {
+    console.log('Options `resourceId` not set');
   }
 }
 
 export function addNgwLayer(
-  options: AddNgwLayerOptions,
+  options: NgwLayerOptions,
   webMap: WebMap,
   baseUrl: string,
   connector: NgwConnector

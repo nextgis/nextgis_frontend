@@ -23,9 +23,9 @@ import { NgwMap } from './NgwMap';
 export { NgwLayerOptions };
 
 export interface ControlOptions {
+  [param: string]: any;
   position?: ControlPositions;
   control?: string;
-  [param: string]: any;
 }
 
 export type NgwResourceDefinition = number | [number, string] | NgwLayerOptions;
@@ -70,7 +70,6 @@ export interface NgwMapOptions<C = any> extends MapOptions {
    *   ngwMap.hideLayer('qms-basemap');
    * ```
    */
-
   resources?: NgwResourceDefinition[];
 
   qmsId?: number | [number, string];
