@@ -35,7 +35,7 @@ export class WebMapLayers<
   E extends WebMapEvents = WebMapEvents
 > extends BaseWebMap<M, L, C, E> {
   private _layersIds = 1;
-  private _layersOrders = 0;
+  private _layersOrders = 1;
   private readonly _baseLayers: string[] = [];
   private readonly _layers: { [id: string]: LayerAdapter } = {};
   private readonly _selectedLayers: string[] = [];
