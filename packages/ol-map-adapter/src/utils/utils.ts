@@ -31,7 +31,10 @@ const typeAlias: { [x: string]: VectorAdapterLayerType } = {
 export function getFeature(feature: ol.Feature): Feature {
   const geojson = new GeoJSON();
   // @ts-ignore writeFeatureObject return JSON type, need Feature
-  return geojson.writeFeatureObject(feature);
+  return geojson.writeFeatureObject(feature, {
+    dataProjection: 'EPSG:4326',
+    featureProjection: 'EPSG:3857'
+  });
 }
 
 export function getColor(colorStr: string, opacity?: number): Color {
