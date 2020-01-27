@@ -32,6 +32,7 @@ export class NgwLayersList extends Vue {
 
   private _layers: Array<LayerAdapter | ResourceAdapter> = [];
   private __updateItems?: () => Promise<void>;
+  private __onNgwMapLoad?: Promise<NgwMap>;
 
   @Watch('selection')
   setVisibleLayers() {
@@ -56,22 +57,19 @@ export class NgwLayersList extends Vue {
     });
   }
 
-  mounted() {
-    const __updateItems = () => this.updateItems();
-    this.__updateItems = __updateItems;
-    this.ngwMap.onLoad().then(() => {
-      this.updateItems();
+  @Watch('ngwMap')
+  updateNgwMap() {
+    console.log(1234);
+    this.destroy();
+    this.create();
+  }
 
-      this.ngwMap.emitter.on('layer:add', __updateItems);
-      this.ngwMap.emitter.on('layer:remove', __updateItems);
-    });
+  mounted() {
+    this.create();
   }
 
   beforeDestroy() {
-    if (this.__updateItems) {
-      this.ngwMap.emitter.off('layer:add', this.__updateItems);
-      this.ngwMap.emitter.off('layer:remove', this.__updateItems);
-    }
+    this.destroy();
   }
 
   render(h: CreateElement): VNode {
@@ -100,6 +98,30 @@ export class NgwLayersList extends Vue {
       // domProps: { id: this.id }
     };
     return h(VTreeview, data, this.$slots.default);
+  }
+
+  private create() {
+    this.__onNgwMapLoad = this.ngwMap.onLoad();
+    setTimeout(() => {
+      if (this.__onNgwMapLoad) {
+        this.__onNgwMapLoad.then(() => {
+          this.destroy();
+          this.updateItems();
+          const __updateItems = () => this.updateItems();
+          this.__updateItems = __updateItems;
+
+          this.ngwMap.emitter.on('layer:add', __updateItems);
+          this.ngwMap.emitter.on('layer:remove', __updateItems);
+        });
+      }
+    });
+  }
+
+  private destroy() {
+    if (this.__updateItems) {
+      this.ngwMap.emitter.off('layer:add', this.__updateItems);
+      this.ngwMap.emitter.off('layer:remove', this.__updateItems);
+    }
   }
 
   @Watch('include')
