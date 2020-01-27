@@ -35,6 +35,7 @@ export class WebMapLayers<
   E extends WebMapEvents = WebMapEvents
 > extends BaseWebMap<M, L, C, E> {
   private _layersIds = 1;
+  private _layersOrders = 0;
   private readonly _baseLayers: string[] = [];
   private readonly _layers: { [id: string]: LayerAdapter } = {};
   private readonly _selectedLayers: string[] = [];
@@ -173,7 +174,11 @@ export class WebMapLayers<
     options: O | LayerAdaptersOptions[K],
     order?: number
   ): Promise<LayerAdapter> {
-    const _order = order || this._layersIds++;
+    const id = this._layersIds++;
+    const _order =
+      order || options.order !== undefined
+        ? options.order
+        : 0 || this._layersOrders++;
     let adapterEngine: Type<LayerAdapter> | undefined;
     if (typeof adapter === 'string') {
       adapterEngine = this.getLayerAdapter(adapter);
@@ -192,7 +197,7 @@ export class WebMapLayers<
     const { maxZoom, minZoom } = this.options;
 
     options = {
-      id: String(_order),
+      id: String(id),
       order: _order,
       maxZoom,
       minZoom,
