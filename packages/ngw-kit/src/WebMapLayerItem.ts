@@ -101,9 +101,11 @@ export class WebMapLayerItem extends Item<ItemOptions> {
         ...item,
         headers: this.options.headers
       };
-      if (this.options.order && this.options.drawOrderEnabled) {
-        const subOrder = this._rootDescendantsCount - item.draw_order_position;
-        options.order = this.options.order + subOrder * 0.1;
+      if (this.options.order) {
+        const subOrder = this.options.drawOrderEnabled
+          ? this._rootDescendantsCount - item.draw_order_position
+          : this.id;
+        options.order = Number((this.options.order | 0) + '.' + subOrder);
       }
       newLayer = await this.webMap.addLayer(adapter, options);
     }

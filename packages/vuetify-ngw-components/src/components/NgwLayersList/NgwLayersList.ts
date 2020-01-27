@@ -59,7 +59,6 @@ export class NgwLayersList extends Vue {
 
   @Watch('ngwMap')
   updateNgwMap() {
-    console.log(1234);
     this.destroy();
     this.create();
   }
@@ -198,9 +197,7 @@ export class NgwLayersList extends Vue {
     if (
       item.children &&
       this.hideWebmapRoot &&
-      webMapLayer.layer &&
-      webMapLayer.layer.item &&
-      webMapLayer.layer.item.item_type === 'root'
+      webMapLayer.layer?.item.item_type === 'root'
     ) {
       item.children.reverse().forEach(x => this.items.push(x));
       webMapLayer.layer && webMapLayer.layer.properties.set('visibility', true);
