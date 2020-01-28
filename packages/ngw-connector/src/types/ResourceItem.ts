@@ -52,6 +52,7 @@ export type ResourceCls =
   | 'raster_layer'
   | 'mapserver_style'
   | 'qgis_vector_style'
+  | 'qgis_raster_style'
   | 'raster_style'
   | 'file_bucket'
   | 'lookup_table'
