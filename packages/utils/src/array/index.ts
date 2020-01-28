@@ -1,0 +1,1 @@
+export { arrayCompare } from './arrayCompare';
