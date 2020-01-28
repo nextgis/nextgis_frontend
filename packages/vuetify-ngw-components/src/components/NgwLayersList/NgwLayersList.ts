@@ -32,6 +32,7 @@ export class NgwLayersList extends Vue {
   selection: string[] = [];
 
   private _layers: Array<LayerAdapter | ResourceAdapter> = [];
+  private addedWebMap: Record<string, boolean> = {};
   private __updateItems?: () => Promise<void>;
   private __onNgwMapLoad?: Promise<NgwMap>;
 
@@ -200,7 +201,17 @@ export class NgwLayersList extends Vue {
       const tree = webMapLayer.layer.tree;
       const children = tree.getChildren() as WebMapLayerItem[];
       item.children = this._createWebMapTree(children, selection).reverse();
-      visible = true;
+      const id = webMapLayer.options.id;
+      // webmap do not have their `visibility` status.
+      // Therefore, to save state, an `addedWebMap` property is used
+      if (id) {
+        if (this.addedWebMap[id]) {
+          visible = this.selection.indexOf(id) !== -1;
+        } else {
+          visible = true;
+          this.addedWebMap[id] = true;
+        }
+      }
     } else {
       visible = this.ngwMap.isLayerVisible(layer);
     }
