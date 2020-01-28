@@ -4,12 +4,7 @@ import NgwConnector, {
 } from '@nextgis/ngw-connector';
 import WebMap, { LayerAdapter, Type } from '@nextgis/webmap';
 import QmsKit from '@nextgis/qms-kit';
-import {
-  ResourceAdapter,
-  NgwLayerOptions,
-  KeynamedNgwLayerOptions,
-  ResourceIdNgwLayerOptions
-} from './interfaces';
+import { ResourceAdapter, NgwLayerOptions } from './interfaces';
 
 import { createGeoJsonAdapter } from './createGeoJsonAdapter';
 import { createRasterAdapter } from './createRasterAdapter';
@@ -21,6 +16,7 @@ import { resourceIdFromLayerOptions } from './utils/resourceIdFromLayerOptions';
 const styles: ResourceCls[] = [
   'mapserver_style',
   'qgis_vector_style',
+  'qgis_raster_style',
   'raster_style'
 ];
 
