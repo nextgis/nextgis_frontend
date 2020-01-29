@@ -430,12 +430,16 @@ export abstract class VectorAdapter<
   protected _convertToMapboxFilter(filters: PropertiesFilter, reverse = false) {
     const _operationsAliases = reverse ? reversOperations : operationsAliases;
     return filters.map(x => {
-      const [field, operation, value] = x;
-      const operationAlias = _operationsAliases[operation];
-      if (operation === 'in' || operation === 'notin') {
-        return [operationAlias, field, ...value];
+      if (typeof x === 'string') {
+        return x;
+      } else {
+        const [field, operation, value] = x;
+        const operationAlias = _operationsAliases[operation];
+        if (operation === 'in' || operation === 'notin') {
+          return [operationAlias, field, ...value];
+        }
+        return [operationAlias, field, value];
       }
-      return [operationAlias, field, value];
     });
   }
 
