@@ -1,4 +1,8 @@
-import { PropertiesFilter, Operations } from '../interfaces/LayerAdapter';
+import {
+  PropertiesFilter,
+  Operations,
+  PropertyFilter
+} from '../interfaces/LayerAdapter';
 
 function like(a: string, b: string, iLike?: boolean) {
   const re = `^${a}$`.replace(/%/g, '.*').replace('_', '.');
@@ -37,12 +41,17 @@ export function propertiesFilter(
   properties: { [field: string]: any },
   filters: PropertiesFilter
 ): boolean {
-  return filters.every(([field, operation, value]) => {
+  const logic = typeof filters[0] === 'string' ? filters[0] : 'all';
+  const filters_ = filters.filter(x => Array.isArray(x)) as PropertyFilter[];
+  const filterFunction = ([field, operation, value]: PropertyFilter) => {
     const operationExec = operationsAliases[operation];
     const property = properties[field];
     if (operationExec && property) {
       return operationExec(property, value);
     }
     return true;
-  });
+  };
+  return logic === 'any'
+    ? filters_.some(filterFunction)
+    : filters_.every(filterFunction);
 }

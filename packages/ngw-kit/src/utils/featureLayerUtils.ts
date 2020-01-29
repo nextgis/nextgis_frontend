@@ -1,5 +1,9 @@
 import { Geometry, Feature, FeatureCollection } from 'geojson';
-import { PropertiesFilter, FilterOptions } from '@nextgis/webmap';
+import {
+  PropertiesFilter,
+  FilterOptions,
+  PropertyFilter
+} from '@nextgis/webmap';
 import NgwConnector, {
   CancelablePromise,
   FeatureItem
@@ -106,11 +110,12 @@ export function getNgwLayerItems<
   };
   const { connector, filters, limit, fields, intersects, resourceId } = options;
   if (filters) {
-    const filterById = filters.find(x => x[0] === 'id');
+    const filters_ = filters.filter(x => Array.isArray(x)) as PropertyFilter[];
+    const filterById = filters_.find(x => x[0] === 'id');
     if (filterById) {
       return idFilterWorkAround({ filterById, connector, resourceId });
     }
-    filters.forEach(([field, operation, value]) => {
+    filters_.forEach(([field, operation, value]) => {
       params[`fld_${field}__${operation}`] = `${value}`;
     });
   }

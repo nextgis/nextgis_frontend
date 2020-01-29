@@ -320,7 +320,7 @@ export interface FilterOptions {
  */
 export type PropertyFilter = [string, Operations, any];
 
-export type PropertiesFilter = PropertyFilter[];
+export type PropertiesFilter = ('all' | 'any' | PropertyFilter)[];
 
 export type DataLayerFilter<
   F extends Feature = Feature,
