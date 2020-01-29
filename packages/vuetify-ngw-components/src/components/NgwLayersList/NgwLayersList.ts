@@ -1,6 +1,5 @@
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 import NgwMap, { LayerAdapter } from '@nextgis/ngw-map';
-import { debounce, arrayCompare } from '@nextgis/utils';
 import {
   ResourceAdapter,
   WebMapLayerAdapter,
@@ -9,6 +8,7 @@ import {
 import { CreateElement, VNode, VNodeData } from 'vue';
 // @ts-ignore
 import { VTreeview } from 'vuetify/lib';
+import { arrayCompare, debounce } from '@nextgis/utils';
 
 interface VueTreeItem {
   id: string;
@@ -32,7 +32,6 @@ export class NgwLayersList extends Vue {
   selection: string[] = [];
 
   private _layers: Array<LayerAdapter | ResourceAdapter> = [];
-  private addedWebMap: Record<string, boolean> = {};
   private __updateItems?: () => Promise<void>;
   private __onNgwMapLoad?: Promise<NgwMap>;
 
@@ -83,7 +82,7 @@ export class NgwLayersList extends Vue {
         'selection-type': 'independent'
       },
       on: {
-        input: (event: string[]) => {
+        input: (event: any) => {
           this.selection = event;
         }
       },
@@ -104,6 +103,13 @@ export class NgwLayersList extends Vue {
     return h(VTreeview, data, this.$slots.default);
   }
 
+  @Watch('include')
+  async updateItems() {
+    if (this.__updateItems) {
+      this.__updateItems();
+    }
+  }
+
   private create() {
     this.__onNgwMapLoad = this.ngwMap.onLoad();
     setTimeout(() => {
@@ -111,7 +117,7 @@ export class NgwLayersList extends Vue {
         this.__onNgwMapLoad.then(() => {
           this.destroy();
           this.updateItems();
-          const __updateItems = debounce(() => this.updateItems());
+          const __updateItems = debounce(() => this._updateItems());
           this.__updateItems = __updateItems;
 
           this.ngwMap.emitter.on('layer:add', __updateItems);
@@ -128,10 +134,8 @@ export class NgwLayersList extends Vue {
     }
   }
 
-  @Watch('include')
-  private async updateItems() {
-    const selection: string[] = [];
-    const items: VueTreeItem[] = [];
+  private async _updateItems() {
+    this.selection = [];
     this._layers = [];
     let layersList: LayerAdapter[] | undefined;
     if (this.notOnlyNgwLayer) {
@@ -142,6 +146,7 @@ export class NgwLayersList extends Vue {
       const ngwLayers = await this.ngwMap.getNgwLayers();
       layersList = Object.keys(ngwLayers).map(x => ngwLayers[x].layer);
     }
+    this.items = [];
     if (layersList) {
       layersList
         .sort((a, b) => {
@@ -151,20 +156,12 @@ export class NgwLayersList extends Vue {
         })
         .reverse()
         .forEach(x => {
-          this._createTreeItem(x, items, selection);
+          this._createTreeItem(x);
         });
-      this.items = items;
-      setTimeout(() => {
-        this.selection = selection;
-      });
     }
   }
 
-  private _createTreeItem(
-    layer: LayerAdapter | ResourceAdapter,
-    items: VueTreeItem[],
-    selection: string[]
-  ) {
+  private _createTreeItem(layer: LayerAdapter | ResourceAdapter) {
     if (this.showResourceAdapter) {
       const adapterEnabled = this.showResourceAdapter(layer);
       if (!adapterEnabled) return;
@@ -200,18 +197,9 @@ export class NgwLayersList extends Vue {
     if (webMap && webMapLayer.layer) {
       const tree = webMapLayer.layer.tree;
       const children = tree.getChildren() as WebMapLayerItem[];
-      item.children = this._createWebMapTree(children, selection).reverse();
-      const id = webMapLayer.options.id;
-      // webmap do not have their `visibility` status.
-      // Therefore, to save state, an `addedWebMap` property is used
-      if (id) {
-        if (this.addedWebMap[id]) {
-          visible = this.selection.indexOf(id) !== -1;
-        } else {
-          visible = true;
-          this.addedWebMap[id] = true;
-        }
-      }
+      item.children = this._createWebMapTree(children).reverse();
+      const webMapLayerVisible = webMapLayer.layer.properties.get('visibility');
+      visible = webMapLayerVisible ?? true;
     } else {
       visible = this.ngwMap.isLayerVisible(layer);
     }
@@ -222,17 +210,17 @@ export class NgwLayersList extends Vue {
       this.hideWebmapRoot &&
       webMapLayer.layer?.item.item_type === 'root'
     ) {
-      item.children.reverse().forEach(x => items.push(x));
+      item.children.reverse().forEach(x => this.items.push(x));
       webMapLayer.layer && webMapLayer.layer.properties.set('visibility', true);
     } else {
       if (visible) {
-        selection.push(item.id);
+        this.selection.push(item.id);
       }
-      items.push(item);
+      this.items.push(item);
     }
   }
 
-  private _createWebMapTree(items: WebMapLayerItem[], selection: string[]) {
+  private _createWebMapTree(items: WebMapLayerItem[]) {
     const treeItems: VueTreeItem[] = [];
 
     items.forEach(x => {
@@ -249,11 +237,11 @@ export class NgwLayersList extends Vue {
       };
       const children = x.tree.getChildren<WebMapLayerItem>();
       if (children && children.length) {
-        item.children = this._createWebMapTree(children, selection);
+        item.children = this._createWebMapTree(children);
       }
       const visible = x.properties.get('visibility');
       if (visible) {
-        selection.push(id);
+        this.selection.push(id);
       }
       treeItems.push(item);
     });
