@@ -25,13 +25,13 @@ export type Operations =
  * ['foo', 'eq', 'bar']
  * ['count', 'ge', 20]
  */
-export type PropertyFilter = [string, Operations, any];
+export type PropertyFilter<T extends any = any> = [string, Operations, T];
 
-export type PropertiesFilter = (
+export type PropertiesFilter<T extends any = any> = (
   | 'all'
   | 'any'
-  | PropertyFilter
-  | PropertiesFilter
+  | PropertyFilter<T>
+  | PropertiesFilter<T>
 )[];
 
 function like(a: string, b: string, iLike?: boolean) {
