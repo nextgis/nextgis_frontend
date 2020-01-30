@@ -41,21 +41,42 @@ export const operationsAliases: {
   }
 };
 
+export function checkIfPropertyFilter(
+  filter: PropertyFilter | PropertiesFilter
+): filter is PropertyFilter {
+  const pf = filter as PropertyFilter;
+  if (
+    pf.length === 3 &&
+    typeof pf[0] === 'string' &&
+    typeof pf[1] === 'string'
+  ) {
+    return true;
+  }
+  return false;
+}
+
 export function propertiesFilter(
   properties: { [field: string]: any },
   filters: PropertiesFilter
 ): boolean {
   const logic = typeof filters[0] === 'string' ? filters[0] : 'all';
-  const filters_ = filters.filter(x => Array.isArray(x)) as PropertyFilter[];
-  const filterFunction = ([field, operation, value]: PropertyFilter) => {
-    const operationExec = operationsAliases[operation];
-
-    if (operationExec) {
-      const property = properties[field];
-      return operationExec(property, value);
+  const filterFunction = (p: PropertyFilter | PropertiesFilter) => {
+    if (checkIfPropertyFilter(p)) {
+      const [field, operation, value] = p;
+      const operationExec = operationsAliases[operation];
+      if (operationExec) {
+        const property = properties[field];
+        return operationExec(property, value);
+      }
+      return true;
+    } else {
+      return propertiesFilter(properties, p);
     }
-    return true;
   };
+  const filters_ = filters.filter(x => Array.isArray(x)) as (
+    | PropertyFilter
+    | PropertiesFilter
+  )[];
   return logic === 'any'
     ? filters_.some(filterFunction)
     : filters_.every(filterFunction);
