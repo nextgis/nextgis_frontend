@@ -12,7 +12,8 @@ import {
   Operations,
   DataLayerFilter,
   PropertyFilter,
-  FilterOptions
+  FilterOptions,
+  checkIfPropertyFilter
 } from '@nextgis/webmap';
 import {
   Feature as F,
@@ -432,7 +433,7 @@ export abstract class VectorAdapter<
     return filters.map(x => {
       if (typeof x === 'string') {
         return x;
-      } else {
+      } else if (checkIfPropertyFilter(x)) {
         const [field, operation, value] = x;
         const operationAlias = _operationsAliases[operation];
         if (operation === 'in' || operation === 'notin') {
