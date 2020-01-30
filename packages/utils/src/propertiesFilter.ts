@@ -72,7 +72,7 @@ export const operationsAliases: {
 };
 
 export function checkIfPropertyFilter(
-  filter: PropertyFilter | PropertiesFilter
+  filter: PropertyFilter | PropertiesFilter | string
 ): filter is PropertyFilter {
   const pf = filter as PropertyFilter;
   if (
