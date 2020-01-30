@@ -4,10 +4,15 @@
 import { GeoJsonObject, Feature } from 'geojson';
 import { LatLng, LngLatBoundsArray, Type } from './BaseTypes';
 import { MapClickEvent } from './MapAdapter';
-import { PropertiesFilter, Operations, PropertyFilter } from '@nextgis/utils';
+import {
+  PropertiesFilter,
+  Operations,
+  PropertyFilter,
+  checkIfPropertyFilter
+} from '@nextgis/utils';
 
 // backward compatibility
-export { PropertiesFilter, Operations, PropertyFilter };
+export { PropertiesFilter, Operations, PropertyFilter, checkIfPropertyFilter };
 
 export type AdapterConstructor = () => Promise<Type<LayerAdapter> | undefined>;
 
