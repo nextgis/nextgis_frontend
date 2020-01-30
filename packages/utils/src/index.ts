@@ -7,6 +7,7 @@ export const dom = Dom;
 export * from './clipboard';
 export * from './events';
 export * from './array';
+export * from './propertiesFilter';
 export { deepmerge } from './deepmerge';
 export { debounce } from './debounce';
 /**
