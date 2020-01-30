@@ -12,6 +12,14 @@ const prop = {
   false: false
 };
 
+const props = [
+  { a: 10, b: true },
+  { a: 100, b: true },
+  { a: 15, b: false },
+  { a: -2, b: true },
+  { a: 3, b: false }
+];
+
 const pf = WebMap.utils.propertiesFilter;
 
 describe(`WebMap.utils`, () => {
@@ -162,5 +170,66 @@ describe(`WebMap.utils`, () => {
     });
     expect(toBeTrue.every(x => x === true)).to.be.true;
     expect(toBeFalse.every(x => x === false)).to.be.true;
+  });
+
+  it(`all`, () => {
+    expect(
+      pf(prop, [
+        ['str', 'eq', 'Str'],
+        ['two', 'in', [1, 2, 3]]
+      ])
+    ).to.be.true;
+    expect(
+      pf(prop, [
+        ['str', 'eq', 'str'],
+        ['two', 'in', [1, 2, 3]]
+      ])
+    ).to.be.false;
+    expect(
+      pf(prop, [
+        ['str', 'eq', 'Str'],
+        ['str$', 'like', 'String'],
+        ['two', 'in', [1, 2, 3]]
+      ])
+    ).to.be.true;
+    expect(pf(prop, ['all', ['str', 'eq', 'Str'], ['two', 'eq', 2]])).to.be
+      .true;
+  });
+
+  it(`any`, () => {
+    expect(pf(prop, ['any', ['two', 'eq', 2]])).to.be.true;
+    expect(pf(prop, ['any', ['two', 'eq', 2], ['two', 'ne', 2]])).to.be.true;
+    expect(pf(prop, ['any', ['str', 'eq', 's'], ['two', 'eq', 3]])).to.be.false;
+    expect(pf(prop, ['any', ['str', 'eq', 's'], ['two', 'eq', 3]])).to.be.false;
+    expect(
+      pf(prop, [
+        'any',
+        ['str', 'eq', 'str'],
+        ['str$', 'like', 'myString'],
+        ['two', 'in', [1, 2, 3]]
+      ])
+    ).to.be.true;
+  });
+
+  it(`nesting`, () => {
+    const filtered = props.filter(p =>
+      pf(p, [
+        'any',
+        [
+          ['b', 'eq', true],
+          ['a', 'le', 10]
+        ],
+        ['b', 'eq', false]
+      ])
+    );
+    const filtered2 = props.filter(p =>
+      pf(p, [
+        'any',
+        ['all', ['b', 'eq', true], ['any', ['a', 'eq', 10], ['a', 'eq', -2]]],
+        ['b', 'eq', false]
+      ])
+    );
+    expect(filtered.length).to.be.eq(4);
+    expect(filtered2.length).to.be.eq(4);
   });
 });
