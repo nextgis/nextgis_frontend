@@ -5,6 +5,10 @@ import {
 } from '../interfaces/LayerAdapter';
 
 function like(a: string, b: string, iLike?: boolean) {
+  a = String(a);
+  b = String(b);
+  if (a === b) return true;
+  if (iLike && a.toUpperCase() === b.toUpperCase()) return true;
   const re = `^${a}$`.replace(/%/g, '.*').replace('_', '.');
   return new RegExp(re, iLike ? 'i' : '').exec(b) !== null;
 }
@@ -45,8 +49,9 @@ export function propertiesFilter(
   const filters_ = filters.filter(x => Array.isArray(x)) as PropertyFilter[];
   const filterFunction = ([field, operation, value]: PropertyFilter) => {
     const operationExec = operationsAliases[operation];
-    const property = properties[field];
-    if (operationExec && property) {
+
+    if (operationExec) {
+      const property = properties[field];
       return operationExec(property, value);
     }
     return true;
