@@ -1,4 +1,38 @@
-import { PropertiesFilter, Operations, PropertyFilter } from '@nextgis/webmap';
+/**
+ * gt - greater (>)
+ * lt - lower (<)
+ * ge - greater or equal (>=)
+ * le - lower or equal (<=)
+ * eq - equal (=)
+ * ne - not equal (!=)
+ * like - LIKE SQL statement (for strings compare)
+ * ilike - ILIKE SQL statement (for strings compare)
+ */
+export type Operations =
+  | 'gt'
+  | 'lt'
+  | 'ge'
+  | 'le'
+  | 'eq'
+  | 'ne'
+  | 'in'
+  | 'notin'
+  | 'like'
+  | 'ilike';
+
+/**
+ * field, operation, value
+ * ['foo', 'eq', 'bar']
+ * ['count', 'ge', 20]
+ */
+export type PropertyFilter = [string, Operations, any];
+
+export type PropertiesFilter = (
+  | 'all'
+  | 'any'
+  | PropertyFilter
+  | PropertiesFilter
+)[];
 
 function like(a: string, b: string, iLike?: boolean) {
   a = String(a);

@@ -4,6 +4,10 @@
 import { GeoJsonObject, Feature } from 'geojson';
 import { LatLng, LngLatBoundsArray, Type } from './BaseTypes';
 import { MapClickEvent } from './MapAdapter';
+import { PropertiesFilter, Operations, PropertyFilter } from '@nextgis/utils';
+
+// backward compatibility
+export { PropertiesFilter, Operations, PropertyFilter };
 
 export type AdapterConstructor = () => Promise<Type<LayerAdapter> | undefined>;
 
@@ -285,47 +289,11 @@ export type CallbackFilter<F extends Feature = Feature, L = any> = (
   opt: LayerDefinition<F, L>
 ) => boolean;
 
-/**
- * gt - greater (>)
- * lt - lower (<)
- * ge - greater or equal (>=)
- * le - lower or equal (<=)
- * eq - equal (=)
- * ne - not equal (!=)
- * like - LIKE SQL statement (for strings compare)
- * ilike - ILIKE SQL statement (for strings compare)
- */
-export type Operations =
-  | 'gt'
-  | 'lt'
-  | 'ge'
-  | 'le'
-  | 'eq'
-  | 'ne'
-  | 'in'
-  | 'notin'
-  | 'like'
-  | 'ilike';
-
 export interface FilterOptions {
   limit?: number;
   fields?: string[];
   intersects?: string;
 }
-
-/**
- * field, operation, value
- * ['foo', 'eq', 'bar']
- * ['count', 'ge', 20]
- */
-export type PropertyFilter = [string, Operations, any];
-
-export type PropertiesFilter = (
-  | 'all'
-  | 'any'
-  | PropertyFilter
-  | PropertiesFilter
-)[];
 
 export type DataLayerFilter<
   F extends Feature = Feature,
