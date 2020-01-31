@@ -328,9 +328,6 @@ export class WebMapLayers<
       if (layer.beforeRemove) {
         layer.beforeRemove();
       }
-      if (layer.beforeRemove) {
-        layer.beforeRemove();
-      }
       if (layer.removeLayer) {
         layer.removeLayer();
       } else {

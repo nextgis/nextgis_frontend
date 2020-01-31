@@ -11,7 +11,7 @@ import {
   WebMap
 } from '../../../packages/webmap/src';
 import { mapHtml } from '../mapHtml';
-import asyncTimeout from '../utils/asyncTimeout';
+import sleep from '../utils/asyncTimeout';
 
 export interface MapAdapterCreateOptions {
   noCreate?: boolean;
@@ -62,7 +62,7 @@ export const baseMapTests = (
         map.setZoom(100);
         if (map.setView) {
           map.setView([104, 52]);
-          await asyncTimeout(100);
+          await sleep(100);
           expect(map.getZoom()).to.equal(20);
           const center = map.getCenter() as LngLatArray;
           expect(center.map(Math.round)).to.eql([104, 52].map(Math.round));
@@ -75,7 +75,7 @@ export const baseMapTests = (
         const map = await mapAdapterCreate(MA, { zoom: 10 });
         if (map.setView) {
           map.setView([104, 52]);
-          await asyncTimeout(100);
+          await sleep(100);
           const center = map.getCenter() as LngLatArray;
           expect(map.getZoom()).to.equal(10);
           expect(center.map(Math.round)).to.eql([104, 52].map(Math.round));
