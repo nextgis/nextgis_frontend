@@ -1,5 +1,5 @@
-export function asyncTimeout(delay = 0): Promise<void> {
+export function sleep(delay = 0): Promise<void> {
   return new Promise<void>(resolve => setTimeout(resolve, delay));
 }
 
-export default asyncTimeout;
+export default sleep;

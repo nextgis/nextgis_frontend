@@ -18,14 +18,27 @@ import {
   ToggleControlOptions
 } from '../../../packages/webmap/src/interfaces/MapControl';
 import { MapOptions } from '../../../packages/webmap/src/interfaces/WebMapApp';
-import { LngLatArray, LngLatBoundsArray } from '../../../packages/webmap/src/interfaces/BaseTypes';
+import {
+  LngLatArray,
+  LngLatBoundsArray
+} from '../../../packages/webmap/src/interfaces/BaseTypes';
+import { FakeGeoJsonLayerAdapter } from './FakeGeojsonLayerAdapter';
+import { FakeLayerAdapter } from './FakeLayerAdapter';
 
-export class FakeMapAdapter<M extends any = {}, L = any, C extends any = any> implements MA {
-  // isLoaded?: boolean = true;
+export class FakeMapAdapter<M extends any = {}, L = any, C extends any = any>
+  implements MA {
+  static layerAdapters = {
+    TILE: FakeLayerAdapter,
+    IMAGE: FakeLayerAdapter,
+    // MVT: MvtAdapter,
+    // OSM: OsmAdapter,
+    GEOJSON: FakeGeoJsonLayerAdapter
+  };
+
+  layerAdapters = FakeMapAdapter.layerAdapters;
+
   map?: M;
   emitter = new EventEmitter();
-
-  layerAdapters: { [name: string]: Type<LayerAdapter<M, L, any>> } = {};
 
   controlAdapters: { [name: string]: Type<C> } = {};
 
@@ -71,7 +84,11 @@ export class FakeMapAdapter<M extends any = {}, L = any, C extends any = any> im
   hideLayer(layer: L): void {
     //
   }
-  setLayerOrder(layer: L, order: number, layers?: { [name: string]: LayerAdapter }): void {
+  setLayerOrder(
+    layer: L,
+    order: number,
+    layers?: { [name: string]: LayerAdapter }
+  ): void {
     //
   }
 
