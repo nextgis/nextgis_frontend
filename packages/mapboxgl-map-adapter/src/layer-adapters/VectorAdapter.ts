@@ -93,7 +93,7 @@ export abstract class VectorAdapter<
   protected _types: VectorAdapterLayerType[] = ['fill', 'circle', 'line'];
   protected readonly _sourceId: string;
   protected readonly _selectionName: string;
-  protected _selectedFeatureIds: (number | string)[] = [];
+  protected _selectedFeatureIds: (number | string)[] | false = [];
 
   protected _selectProperties?: PropertiesFilter;
   protected _filterProperties?: PropertiesFilter;
@@ -166,7 +166,7 @@ export abstract class VectorAdapter<
 
   propertiesFilter(filters: PropertiesFilter, options?: FilterOptions) {
     this._filterProperties = filters;
-    this._updateFilter();
+    this._updatePropertiesFilter();
   }
 
   removeFilter() {
@@ -342,6 +342,15 @@ export abstract class VectorAdapter<
 
   protected _getFeatureFilterId(feature: Feature): string | number | undefined {
     // @ts-ignore
+    const id = feature._featureFilterId;
+    if (id !== undefined) {
+      return id;
+    } else if (
+      feature.properties &&
+      feature.properties[this.featureIdName] !== undefined
+    ) {
+      return feature.properties[this.featureIdName];
+    }
     return feature.id;
   }
 
@@ -378,6 +387,10 @@ export abstract class VectorAdapter<
   }
 
   protected _updateFilter() {
+    this._updatePropertiesFilter();
+  }
+
+  protected _updatePropertiesFilter() {
     const layers = this.layer;
     if (layers) {
       this._types.forEach(t => {
@@ -392,8 +405,15 @@ export abstract class VectorAdapter<
             filterProperties && this._convertToMapboxFilter(filterProperties);
           if (layers.indexOf(selLayerName) !== -1) {
             if (this._selectionName) {
-              if (selectProperties) {
-                const filters = this._convertToMapboxFilter(selectProperties);
+              let filters: any[] = [];
+              if (selectProperties || this._selectedFeatureIds) {
+                if (selectProperties) {
+                  filters = this._convertToMapboxFilter(selectProperties) || [];
+                } else if (this._selectedFeatureIds) {
+                  filters = [
+                    ['in', this.featureIdName, ...this._selectedFeatureIds]
+                  ];
+                }
                 if (propertyFilters) {
                   propertyFilters.forEach(x => filters.push(x));
                 }
@@ -403,7 +423,8 @@ export abstract class VectorAdapter<
                   ...filters
                 ]);
               } else {
-                this.map.setFilter(selLayerName, ['in', '$id', '']);
+                filters = ['in', '$id', ''];
+                this.map.setFilter(selLayerName, filters);
               }
             }
           }
@@ -416,11 +437,16 @@ export abstract class VectorAdapter<
                 true
               );
               selectFilters.forEach(x => filters_.push(x));
+            } else if (this._selectedFeatureIds) {
+              filters_.push([
+                '!in',
+                this.featureIdName,
+                ...this._selectedFeatureIds
+              ]);
             }
             if (propertyFilters) {
               propertyFilters.forEach(x => filters_.push(x));
             }
-
             this.map.setFilter(layerName, filters_);
           }
         }
@@ -430,7 +456,7 @@ export abstract class VectorAdapter<
 
   protected _convertToMapboxFilter(filters: PropertiesFilter, reverse = false) {
     const _operationsAliases = reverse ? reversOperations : operationsAliases;
-    return filters.map(x => {
+    const filter = filters.map(x => {
       if (typeof x === 'string') {
         return x;
       } else if (checkIfPropertyFilter(x)) {
@@ -442,10 +468,16 @@ export abstract class VectorAdapter<
         return [operationAlias, field, value];
       }
     });
+    return filter;
   }
 
   protected isFeatureSelected(feature: Feature) {
-    // TODO: mvt implement
+    if (this._selectedFeatureIds) {
+      const filterId = this._getFeatureFilterId(feature);
+      if (filterId) {
+        return this._selectedFeatureIds.indexOf(filterId) !== -1;
+      }
+    }
     return false;
   }
 
@@ -464,7 +496,7 @@ export abstract class VectorAdapter<
       }, [] as MapboxGeoJSONFeature[]);
       const feature = features[0] as Feature;
       if (feature) {
-        const isSelected = this.isFeatureSelected(feature);
+        let isSelected = this.isFeatureSelected(feature);
         if (isSelected) {
           if (this.options && this.options.unselectOnSecondClick) {
             this._unselectFeature(feature);
@@ -472,6 +504,7 @@ export abstract class VectorAdapter<
         } else {
           this._selectFeature(feature);
         }
+        isSelected = this.isFeatureSelected(feature);
         if (this.options.onLayerClick) {
           this.options.onLayerClick({
             layer: this,
