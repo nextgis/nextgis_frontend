@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { WebMap } from '../../packages/webmap/src';
+import { propertiesFilter as pf } from '../../packages/utils/src';
 
 const prop = {
   zero: 0,
@@ -19,8 +19,6 @@ const props = [
   { a: -2, b: true },
   { a: 3, b: false }
 ];
-
-const pf = WebMap.utils.propertiesFilter;
 
 describe(`WebMap.utils`, () => {
   describe('#propertiesFilter', () => {
