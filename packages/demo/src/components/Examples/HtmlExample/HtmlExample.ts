@@ -36,7 +36,11 @@ export class HtmlExample extends Vue {
       const exist = ngwMaps.find(x => x.name === value);
       if (exist) {
         this._ngwMap = exist;
-        this.item.html = changeHtmlMapAdapter(this.item.html, exist, this.item.ngwMaps);
+        this.item.html = changeHtmlMapAdapter(
+          this.item.html,
+          exist,
+          this.item.ngwMaps
+        );
       }
     }
   }
@@ -65,7 +69,9 @@ export class HtmlExample extends Vue {
   }
 
   private _writeIFrame(html: string) {
-    const wrapper = document.getElementById('example-iframe') as HTMLFrameElement;
+    const wrapper = document.getElementById(
+      'example-iframe'
+    ) as HTMLFrameElement;
     wrapper.innerHTML = '';
     const iframe = document.createElement('iframe');
     wrapper.appendChild(iframe);
@@ -78,7 +84,9 @@ export class HtmlExample extends Vue {
   private _getDefaultNgwMap(): string {
     const fromStorage = this.$store.state.app.defaultNgwMap;
     const exist =
-      fromStorage && this.item.ngwMaps && this.item.ngwMaps.find(x => x.name === fromStorage);
+      fromStorage &&
+      this.item.ngwMaps &&
+      this.item.ngwMaps.find(x => x.name === fromStorage);
     if (exist) {
       return exist.name;
     }

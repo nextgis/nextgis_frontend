@@ -52,7 +52,10 @@ export function createLink(ref: ApiItem, name: string) {
   return `<a href="${createHref(ref, name)}">${name}</a>`;
 }
 
-export function createReference(option: ReferencePropertyType, indexes: Indexes) {
+export function createReference(
+  option: ReferencePropertyType,
+  indexes: Indexes
+) {
   let str = '';
   const kindStringToLink: KindString[] = ['Interface', 'Class'];
   const refOption = indexes[option.id];
@@ -109,10 +112,15 @@ export function getOptionType(option: Property, indexes: Indexes): string {
   return '';
 }
 
-export function getDeclarationSignatureStr(signatures: Signatures, indexes: Indexes) {
+export function getDeclarationSignatureStr(
+  signatures: Signatures,
+  indexes: Indexes
+) {
   if ('parameters' in signatures) {
     const parameters = getSignatureParameters(signatures.parameters, indexes);
-    const str = `{[${parameters.join(', ')}]<span class="nowrap">: ${getOptionType(
+    const str = `{[${parameters.join(
+      ', '
+    )}]<span class="nowrap">: ${getOptionType(
       signatures.type,
       indexes
     )}</span>}`;
@@ -145,14 +153,22 @@ export function createDeclarationStr(option: ReflectionType, indexes: Indexes) {
   return str;
 }
 
-export function getSignatureParameters(parameters: Parameter[], indexes: Indexes): string[] {
+export function getSignatureParameters(
+  parameters: Parameter[],
+  indexes: Indexes
+): string[] {
   return parameters.map(p => {
     const typeName = getOptionType(p.type, indexes);
-    return `${getParameterName(p)}${typeName ? `<span class="nowrap">: ${typeName}</span>` : ''}`;
+    return `${getParameterName(p)}${
+      typeName ? `<span class="nowrap">: ${typeName}</span>` : ''
+    }`;
   });
 }
 
-export function getConstructorSignatureStr(item: ConstructorItem, indexes: Indexes) {
+export function getConstructorSignatureStr(
+  item: ConstructorItem,
+  indexes: Indexes
+) {
   return (
     item &&
     item.signatures.map(x => {
@@ -161,7 +177,10 @@ export function getConstructorSignatureStr(item: ConstructorItem, indexes: Index
   );
 }
 
-export function getSignatureStrForConstructor(signatures: Signatures, indexes: Indexes) {
+export function getSignatureStrForConstructor(
+  signatures: Signatures,
+  indexes: Indexes
+) {
   if ('parameters' in signatures) {
     // const parameters = getSignatureParameters(signatures.parameters, indexes);
     const parameters = signatures.parameters.map(p => {

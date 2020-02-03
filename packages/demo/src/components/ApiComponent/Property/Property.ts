@@ -34,7 +34,10 @@ export class Property extends Vue {
       if (item.type) {
         return this.utility.getOptionType(item.type, this.indexes);
       } else if (item.kindString === 'Method') {
-        return this.utility.createMethodTypeString(item as MethodItem, this.indexes);
+        return this.utility.createMethodTypeString(
+          item as MethodItem,
+          this.indexes
+        );
       }
     }
   }

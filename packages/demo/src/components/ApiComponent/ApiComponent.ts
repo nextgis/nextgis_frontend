@@ -60,7 +60,9 @@ export class ApiComponent extends Vue {
     // open first allowed members count
     const children = this.allowedChildren;
     const length =
-      children.length < this.showMembersOnInit ? children.length : this.showMembersOnInit;
+      children.length < this.showMembersOnInit
+        ? children.length
+        : this.showMembersOnInit;
     for (let fry = 0; fry < length; fry++) {
       this.showItemMembers(children[fry].name);
     }

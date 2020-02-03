@@ -56,8 +56,12 @@ export class ClassItemComponent extends Vue {
     return checkAllowedList.every(x => x());
   }
 
-  getAllowedMembers(item: ApiItem): Array<{ name: string; members: ApiItem[] }> {
-    const children: ApiItem[] = item.children ? item.children.filter(this.isItemAllow) : [];
+  getAllowedMembers(
+    item: ApiItem
+  ): Array<{ name: string; members: ApiItem[] }> {
+    const children: ApiItem[] = item.children
+      ? item.children.filter(this.isItemAllow)
+      : [];
     const members = [];
     const staticMembers = [];
     const events = [];

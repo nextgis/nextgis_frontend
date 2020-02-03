@@ -122,7 +122,10 @@ export class MainPage extends Vue {
     if (paramsId !== id) {
       let path = this.$router.currentRoute.fullPath;
       path = path.replace(this.$router.currentRoute.hash, '');
-      if (this.$router.currentRoute.params && this.$router.currentRoute.params.id) {
+      if (
+        this.$router.currentRoute.params &&
+        this.$router.currentRoute.params.id
+      ) {
         path = path.replace(this.$router.currentRoute.params.id, '');
       }
       this.$router.push(path + id);
