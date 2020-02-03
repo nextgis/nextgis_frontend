@@ -14,10 +14,10 @@
     "karma": "karma start test/karma.conf.js",
     "doc": "typedoc --options ./typedoc.json ./packages",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "patch": "lerna version patch --conventional-commits -m \"chore(release): publish %s\" --no-push"
+    "patch": "lerna version patch --conventional-commits -m \"chore(release): publish %s\" --no-push",
+    "minor": "lerna version minor --conventional-commits -m \"chore(release): publish %s\" --no-push"
   },
   "devDependencies": {
-    "@nextgis/eslint-config": "^0.22.0",
     "@types/chai": "^4.2.7",
     "@types/mocha": "^5.2.7",
     "@types/sinon": "^7.5.1",
