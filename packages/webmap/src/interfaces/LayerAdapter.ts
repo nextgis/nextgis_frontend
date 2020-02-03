@@ -318,6 +318,7 @@ export interface BaseLayerAdapter<
 > {
   options: O;
   id?: string;
+  order?: number;
   name?: string;
   layer?: L;
   map?: M;

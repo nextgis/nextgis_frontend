@@ -13,7 +13,7 @@ module.exports = config => {
     basePath: '../',
     browsers: ['Chrome'],
     frameworks: ['mocha'],
-    files: ['test/specs/*.ts'],
+    files: [{ pattern: 'test/specs/*.ts', type: 'ts' }],
     preprocessors: {
       'test/specs/*.spec.ts': ['webpack'] // 'sourcemap'
     },

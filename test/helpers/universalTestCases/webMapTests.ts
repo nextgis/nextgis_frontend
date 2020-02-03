@@ -76,7 +76,7 @@ export const webMapTests = <W extends WebMap = WebMap>(
     webMapLayersTests('GEOJSON', _buildWebMap);
     webMapLayersTests('TILE', _buildWebMap);
     webMapLayersTests('IMAGE', _buildWebMap);
-    // webMapLayersTests(FakeLayerAdapter, _buildWebMap);
+    webMapLayersTests(FakeLayerAdapter, _buildWebMap);
 
     it('returns undefined if map not initialized but layers added', async () => {
       const map = await _buildWebMap({}, undefined, { noCreate: true });
