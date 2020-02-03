@@ -4,5 +4,5 @@ import { MapboxglMapAdapter } from '../../packages/mapboxgl-map-adapter/src/Mapb
 import { webMapTests } from '../helpers/universalTestCases/webMapTests';
 import { mapAdapterTests } from '../helpers/universalTestCases/mapAdapterTests';
 
-// webMapTests(MapboxglMapAdapter);
-// mapAdapterTests(MapboxglMapAdapter);
+webMapTests(MapboxglMapAdapter);
+mapAdapterTests(MapboxglMapAdapter);

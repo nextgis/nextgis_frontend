@@ -14,6 +14,7 @@ import {
   WebMapEvents,
   CreateControlOptions
 } from '@nextgis/webmap';
+import { sleep } from '@nextgis/utils';
 import { MvtAdapter } from './layer-adapters/MvtAdapter';
 import mapboxgl, {
   Map,
@@ -22,7 +23,8 @@ import mapboxgl, {
   EventData,
   MapboxOptions,
   RequestParameters,
-  ResourceType
+  ResourceType,
+  FitBoundsOptions
 } from 'mapbox-gl';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
 import { TileAdapter } from './layer-adapters/TileAdapter';
@@ -49,7 +51,7 @@ export interface MapboxglMapAdapterOptions extends MapOptions {
 export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   static layerAdapters = {
     TILE: TileAdapter,
-    // IMAGE: ImageAdapter,
+    IMAGE: TileAdapter,
     MVT: MvtAdapter,
     OSM: OsmAdapter,
     GEOJSON: GeoJsonAdapter
@@ -190,24 +192,33 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   getZoom(): number | undefined {
     if (this.map) {
       const zoom = this.map.getZoom();
+      if (zoom < 1) {
+        return undefined;
+      }
       return zoom ? zoom + 1 : undefined;
     }
   }
 
   // [extent_left, extent_bottom, extent_right, extent_top];
-  fitBounds(e: LngLatBoundsArray, options: FitOptions = {}): void {
+  async fitBounds(
+    e: LngLatBoundsArray,
+    options: FitOptions = {}
+  ): Promise<void> {
     if (this.map) {
+      const fitBoundOptions: FitBoundsOptions = {
+        linear: true,
+        duration: 0,
+        ...options,
+        ...fitBoundsOptions
+      };
       this.map.fitBounds(
         [
           [e[0], e[1]],
           [e[2], e[3]]
         ],
-        {
-          linear: true,
-          ...options,
-          ...fitBoundsOptions
-        }
+        fitBoundOptions
       );
+      sleep(fitBoundOptions.duration);
     }
   }
 
@@ -216,20 +227,22 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   }
 
   showLayer(layerIds: string[]): void {
-    layerIds.forEach(layerId => {
-      this._toggleLayer(layerId, true);
-    });
+    layerIds &&
+      layerIds.forEach(layerId => {
+        this._toggleLayer(layerId, true);
+      });
   }
 
   hideLayer(layerIds: string[]): void {
-    layerIds.forEach(layerId => {
-      this._toggleLayer(layerId, false);
-    });
+    layerIds &&
+      layerIds.forEach(layerId => {
+        this._toggleLayer(layerId, false);
+      });
   }
 
   removeLayer(layerIds: string[]): void {
-    if (this.map) {
-      const _map = this.map;
+    const _map = this.map;
+    if (_map && layerIds && Array.isArray(layerIds)) {
       layerIds.forEach(layerId => {
         _map.removeLayer(layerId);
         const source = _map.getSource(layerId);

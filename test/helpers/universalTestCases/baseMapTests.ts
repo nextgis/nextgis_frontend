@@ -98,7 +98,8 @@ export const baseMapTests = (
 
       it('The map zoom should be correct', async () => {
         const map = await mapAdapterCreate(MA, { zoom: 9 });
-        map.fitBounds(bounds);
+        await map.fitBounds(bounds);
+        await sleep(0);
         const zoom = map.getZoom() as number;
         expect(Math.floor(zoom)).to.eql(8);
       });

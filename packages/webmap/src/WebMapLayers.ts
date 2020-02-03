@@ -34,10 +34,11 @@ export class WebMapLayers<
   C = any,
   E extends WebMapEvents = WebMapEvents
 > extends BaseWebMap<M, L, C, E> {
-  private _layersIds = 1;
-  private _layersOrders = 1;
+  private _layersIdCounter = 1;
+  private _layersOrderCounter = 1;
   private readonly _baseLayers: string[] = [];
   private readonly _layers: { [id: string]: LayerAdapter } = {};
+  private readonly _layersOrderList: number[] = [];
   private readonly _selectedLayers: string[] = [];
 
   /**
@@ -174,11 +175,13 @@ export class WebMapLayers<
     options: O | LayerAdaptersOptions[K],
     order?: number
   ): Promise<LayerAdapter> {
-    const id = this._layersIds++;
+    const id = this._layersIdCounter++;
     const _order =
-      order || options.order !== undefined
+      order !== undefined
+        ? order
+        : options.order !== undefined
         ? options.order
-        : 0 || this._layersOrders++;
+        : this._layersOrderCounter++;
     let adapterEngine: Type<LayerAdapter> | undefined;
     if (typeof adapter === 'string') {
       adapterEngine = this.getLayerAdapter(adapter);
@@ -243,7 +246,8 @@ export class WebMapLayers<
       _adapter.layer = layer;
       // think about how to move `id` to the adapter's constructor,
       // but that it is not required in the options
-      _adapter.id = _adapter.options.id;
+      _adapter.id = _adapter.options.id || String(id);
+      _adapter.order = _adapter.options.order || _order;
 
       layerId = _adapter.options.id;
       if (layerId) {
@@ -283,7 +287,10 @@ export class WebMapLayers<
     options: O | LayerAdaptersOptions[K],
     order?: number
   ): Promise<LayerAdapter> {
-    const _order = order || this._layersIds++;
+    const _order =
+      order || options.order !== undefined
+        ? options.order
+        : 0 || this._layersOrderCounter++;
     const adapterConstructor = adapter as AdapterConstructor;
     const adapterConstructorPromise = adapterConstructor();
     const adapterEngine = await adapterConstructorPromise;
