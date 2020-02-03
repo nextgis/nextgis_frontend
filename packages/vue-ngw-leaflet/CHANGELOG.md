@@ -5,12 +5,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [0.25.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.24.0...v0.25.0) (2020-02-03)
 
-**Note:** Version bump only for package @nextgis/ngw-mapbox
 
+### Bug Fixes
 
-
-
-
-## [0.24.2](https://github.com/nextgis/nextgisweb_frontend/compare/v0.24.1...v0.24.2) (2020-01-14)
-
-**Note:** Version bump only for package @nextgis/ngw-mapbox
+* **vue:** VueNgwLeaflet default icons for FF ([713d29e](https://github.com/nextgis/nextgisweb_frontend/commit/713d29e1054bdc21912b7b6b4a68456ca6845bdc))
