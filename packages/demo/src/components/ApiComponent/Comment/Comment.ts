@@ -9,7 +9,8 @@ export class Comment extends Vue {
   @Prop() item: ParameterItem;
 
   get str() {
-    const comment = this.comment || (this.item && this.item.type && this.item.comment);
+    const comment =
+      this.comment || (this.item && this.item.type && this.item.comment);
     const text = comment ? comment.text || comment.shortText : this.text;
     return this._prepareStr(text);
   }

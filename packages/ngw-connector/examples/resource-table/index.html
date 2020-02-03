@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Example</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.6.9/core.min.js"></script>
+  <!-- <script src="https://unpkg.com/@nextgis/ngw-connector"></script> -->
+  <script src="../../lib/ngw-connector.js"></script>
+  <style>
+    .mb {
+      display: block;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <table id="table"></table>
+
+  <script>
+    var table = document.getElementById('table');
+    var connector = new NgwConnector({ baseUrl: 'https://demo.nextgis.com' });
+    var item = connector.get('resource.item', null, { id: 3988 });
+    var store = connector.get('feature_layer.store', { headers: { Range: 'items=0-10' } }, {
+      id: 3988
+    });
+    Promise.all([item, store]).then(function (data) {
+      var itemData = data[0];
+      var storeData = data[1];
+      var fields = itemData.feature_layer.fields;
+
+      var str = '<caption>' + itemData.resource.display_name + '</caption>';
+      str += '<thead><tr>';
+      fields.forEach(function(field) {
+        if (field.grid_visibility) {
+          str += '<th>' + field.display_name + '</th>';
+        }
+      });
+      str += '</tr></thead>';
+      str += '<tbody>';
+      storeData.forEach(function(row) {
+        str += '<tr>';
+        fields.forEach(function(field) {
+          if (field.grid_visibility) {
+            str += '<td>' + row[field.keyname] + '</td>';
+          }
+        })
+        str += '</tr>';
+      });
+      str += '</tbody>';
+      table.innerHTML = str;
+    });
+  </script>
+
+</body>
+
+</html>

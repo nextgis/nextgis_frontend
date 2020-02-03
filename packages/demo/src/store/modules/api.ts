@@ -36,7 +36,10 @@ export interface Indexes {
   [id: number]: ApiItem;
 }
 
-function findInApi(cb: (item: ApiItem) => boolean, item?: ApiItem): ApiItem | undefined {
+function findInApi(
+  cb: (item: ApiItem) => boolean,
+  item?: ApiItem
+): ApiItem | undefined {
   const isItem = cb(item);
   if (isItem) {
     return item;
@@ -85,9 +88,9 @@ const _getters = {
 const actions = {
   loadApi: async ({ commit }, ngwMap: string) => {
     try {
-      const api = await import('../../api.json');
-      commit('updateApi', api);
-      return api;
+      // const api = await import('../../api.json');
+      // commit('updateApi', api);
+      // return api;
     } catch (er) {
       // ignore
     }
