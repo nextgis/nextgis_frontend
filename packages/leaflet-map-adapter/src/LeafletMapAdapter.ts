@@ -189,7 +189,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   }
 
   removeLayer(layer: Layer) {
-    layer && layer.remove();
+    layer && layer.remove && layer.remove();
   }
 
   showLayer(layer: Layer) {

@@ -8,6 +8,7 @@ export * from './clipboard';
 export * from './events';
 export * from './array';
 export * from './propertiesFilter';
+export * from './sleep';
 export { deepmerge } from './deepmerge';
 export { debounce } from './debounce';
 /**
