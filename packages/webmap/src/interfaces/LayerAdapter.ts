@@ -2,7 +2,7 @@
  * @module webmap
  */
 import { GeoJsonObject, Feature } from 'geojson';
-import { LatLng, LngLatBoundsArray, Type } from './BaseTypes';
+import { LngLatBoundsArray, Type } from './BaseTypes';
 import { MapClickEvent } from './MapAdapter';
 import {
   PropertiesFilter,
