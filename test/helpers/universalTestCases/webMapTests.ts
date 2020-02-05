@@ -4,8 +4,7 @@ import {
   MapAdapter,
   AppOptions,
   Type,
-  MapOptions,
-  LayerAdapters
+  MapOptions
 } from '../../../packages/webmap/src';
 import { WebMap } from '../../../packages/webmap/src/WebMap';
 import { baseMapTests, MapAdapterCreateOptions } from './baseMapTests';
@@ -73,9 +72,13 @@ export const webMapTests = <W extends WebMap = WebMap>(
       _buildWebMap(opt)
     );
 
-    webMapLayersTests('GEOJSON', _buildWebMap);
-    webMapLayersTests('TILE', _buildWebMap);
-    webMapLayersTests('IMAGE', _buildWebMap);
+    const layerAdapters: string[] =
+      // @ts-ignore
+      ('layerAdapters' in MA && Object.keys(MA.layerAdapters)) || [];
+    layerAdapters.forEach(x => {
+      webMapLayersTests(x, _buildWebMap);
+    });
+
     webMapLayersTests(FakeLayerAdapter, _buildWebMap);
 
     it('returns undefined if map not initialized but layers added', async () => {
