@@ -14,7 +14,7 @@
     "karma": "karma start test/karma.conf.js",
     "doc": "typedoc --options ./typedoc.json ./packages",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "publish": "lerna publish from-package",
+    "publish": "npm run prod && lerna publish from-package",
     "patch": "lerna version patch --conventional-commits -m \"chore(release): publish %s\" --no-push --create-release github",
     "minor": "lerna version minor --conventional-commits -m \"chore(release): publish %s\" --no-push --create-release github"
   },
