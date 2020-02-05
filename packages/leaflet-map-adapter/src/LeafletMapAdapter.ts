@@ -44,7 +44,6 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     GEOJSON: GeoJsonAdapter
     // // MVT: MvtAdapter,
     // OSM: OsmAdapter,
-    // MARKER: MarkerAdapter,
   };
 
   static controlAdapters = {
