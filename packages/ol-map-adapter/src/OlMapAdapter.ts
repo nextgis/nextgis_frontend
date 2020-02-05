@@ -20,7 +20,6 @@ import Zoom from 'ol/control/Zoom';
 import { ImageAdapter } from './layer-adapters/ImageAdapter';
 import { EventEmitter } from 'events';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
-import { MarkerAdapter } from './layer-adapters/MarkerAdapter';
 import { TileAdapter } from './layer-adapters/TileAdapter';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 
@@ -58,7 +57,6 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     TILE: TileAdapter,
     // MVT: MvtAdapter,
     OSM: OsmAdapter,
-    MARKER: MarkerAdapter,
     GEOJSON: GeoJsonAdapter
   };
 
