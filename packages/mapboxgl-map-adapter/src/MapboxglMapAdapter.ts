@@ -51,7 +51,7 @@ export interface MapboxglMapAdapterOptions extends MapOptions {
 export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   static layerAdapters = {
     TILE: TileAdapter,
-    IMAGE: TileAdapter,
+    // IMAGE: TileAdapter,
     MVT: MvtAdapter,
     OSM: OsmAdapter,
     GEOJSON: GeoJsonAdapter
