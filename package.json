@@ -15,8 +15,8 @@
     "doc": "typedoc --options ./typedoc.json ./packages",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "publish": "lerna publish from-package",
-    "patch": "lerna version patch --conventional-commits -m \"chore(release): publish %s\" --no-push",
-    "minor": "lerna version minor --conventional-commits -m \"chore(release): publish %s\" --no-push"
+    "patch": "lerna version patch --conventional-commits -m \"chore(release): publish %s\" --no-push --create-release github",
+    "minor": "lerna version minor --conventional-commits -m \"chore(release): publish %s\" --no-push --create-release github"
   },
   "devDependencies": {
     "@types/chai": "^4.2.7",
