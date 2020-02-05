@@ -244,10 +244,6 @@ export interface GeoJsonAdapterOptions<F extends Feature = Feature, L = any>
   data?: GeoJsonObject;
 }
 
-export interface MarkerAdapterOptions extends AdapterOptions {
-  latLng: LatLng;
-}
-
 interface RasterAdapterOptions extends AdapterOptions {
   url: string;
   subdomains?: string;
@@ -270,7 +266,6 @@ export interface LayerAdapters {
   IMAGE: BaseLayerAdapter;
   OSM: BaseLayerAdapter;
   TILE: BaseLayerAdapter;
-  MARKER: BaseLayerAdapter;
   GEOJSON: VectorLayerAdapter;
 }
 
@@ -280,7 +275,6 @@ export interface LayerAdaptersOptions {
   IMAGE: ImageAdapterOptions;
   OSM: RasterAdapterOptions;
   TILE: TileAdapterOptions;
-  MARKER: MarkerAdapterOptions;
   GEOJSON: GeoJsonAdapterOptions;
 }
 
