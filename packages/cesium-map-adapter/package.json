@@ -1,0 +1,52 @@
+{
+  "name": "@nextgis/cesium-map-adapter",
+  "version": "0.25.2",
+  "_priority": 16,
+  "description": "",
+  "main": "lib/cesium-map-adapter.js",
+  "unpkg": "lib/cesium-map-adapter.js",
+  "types": "lib/index.d.ts",
+  "dependencies": {
+    "@nextgis/webmap": "^0.25.2",
+    "@types/cesium": "^1.65.3",
+    "@types/events": "^3.0.0",
+    "@types/node": "^13.7.0",
+    "cesium": "^1.66.0",
+    "events": "^3.1.0"
+  },
+  "devDependencies": {
+    "@nextgis/eslint-config": "^0.25.0",
+    "css-loader": "^3.4.2",
+    "eslint-loader": "^3.0.3",
+    "style-loader": "^1.1.3",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.5",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
+  },
+  "scripts": {
+    "mjs": "tsc -d --outDir ./lib/modules",
+    "clean": "rimraf ./lib",
+    "dev": "npm run clean && webpack --config ./webpack.config.js --progress",
+    "build": "npm run dev -- --mode=production",
+    "prod": "npm run build",
+    "watch": "npm run dev -- --watch",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nextgis/nextgisweb_frontend.git"
+  },
+  "keywords": [
+    "NextGIS",
+    "MAP"
+  ],
+  "author": "NextGIS",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib"
+  ],
+  "license": "LGPL-3.0"
+}
