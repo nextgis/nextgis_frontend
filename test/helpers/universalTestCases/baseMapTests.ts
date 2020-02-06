@@ -118,7 +118,7 @@ export const baseMapTests = (
     });
 
     describe('#getZoom', () => {
-      it('returns undefined if map not initialized', async () => {
+      it('Returns undefined if map not initialized', async () => {
         const map = await mapAdapterCreate(MA, {}, { noCreate: true });
         expect(map.getZoom()).to.be.undefined;
       });

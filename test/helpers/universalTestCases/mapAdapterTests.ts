@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import sinon from 'sinon';
 import { MapAdapter, Type, MapOptions } from '../../../packages/webmap/src';
 import { mapHtml } from '../mapHtml';
 import { baseMapTests } from './baseMapTests';
