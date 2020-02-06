@@ -81,7 +81,7 @@ export const webMapTests = <W extends WebMap = WebMap>(
 
     webMapLayersTests(FakeLayerAdapter, _buildWebMap);
 
-    it('returns undefined if map not initialized but layers added', async () => {
+    it('Returns undefined if map not initialized but layers added', async () => {
       const map = await _buildWebMap({}, undefined, { noCreate: true });
       map.addLayer('TILE', { url: 'file:///dev/null' });
       expect(map.getZoom()).to.be.undefined;
