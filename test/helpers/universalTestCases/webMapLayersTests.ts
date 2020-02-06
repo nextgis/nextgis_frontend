@@ -57,7 +57,7 @@ export const webMapLayersTests = <
         expect(spy.called).to.be.ok;
       });
 
-      it('start ordering from 1 level', async () => {
+      it('Start ordering from 1 level', async () => {
         const map = await buildWebMap({ target: 'map' });
         const layer = await map.addLayer(layerAdapter, {});
         expect(layer.options.order).to.be.eq(1);

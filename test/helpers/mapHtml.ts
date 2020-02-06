@@ -16,8 +16,15 @@ export const mapHtml = `
     html,
     body,
     #map {
-      width: 100%;
-      height: 100%;
+      width: 700px;
+      height: 700px;
+    }
+
+    /*
+      Fix to remove WARN: 'This page appears to be missing CSS declarations for Mapbox GL JS...
+    */
+    .mapboxgl-canary {
+      background-color: rgb(250, 128, 114)
     }
   </style>
 </head>
