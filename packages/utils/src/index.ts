@@ -9,6 +9,7 @@ export * from './events';
 export * from './array';
 export * from './propertiesFilter';
 export * from './sleep';
+export * from './typeHelpers';
 export { deepmerge } from './deepmerge';
 export { debounce } from './debounce';
 /**
