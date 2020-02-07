@@ -19,7 +19,8 @@ import {
   PatchRequestItemsResponseMap,
   RequestItemKeys,
   DeleteRequestItemsResponseMap,
-  PutRequestItemsResponseMap
+  PutRequestItemsResponseMap,
+  RequestItemsParams
 } from './interfaces';
 import { loadJSON, template } from './utils';
 import { EventEmitter } from 'events';
@@ -157,7 +158,7 @@ export class NgwConnector {
     P extends RequestItemKeys = RequestItemKeys
   >(
     name: K,
-    params: (RequestItemsParamsMap[K] | {}) & { [name: string]: any } = {},
+    params: RequestItemsParams<K> = {},
     options?: RequestOptions
   ): CancelablePromise<P[K]> {
     const apiItems = await this.connect();
@@ -185,6 +186,13 @@ export class NgwConnector {
       // Transfer part of the parameters from `params` to the URL string
       if (params) {
         const paramArray = [];
+        const paramList = params.paramList;
+        if (Array.isArray(paramList)) {
+          delete params.paramList;
+          paramList.forEach(x => {
+            paramArray.push(`${x[0]}=${x[1]}`);
+          });
+        }
         for (const p in params) {
           if (apiItem.indexOf(p) === -1) {
             paramArray.push(`${p}=${params[p]}`);
@@ -206,7 +214,7 @@ export class NgwConnector {
   post<K extends keyof RequestItemsParamsMap>(
     name: K,
     options?: RequestOptions<'POST'>,
-    params?: RequestItemsParamsMap[K] & { [name: string]: any }
+    params?: RequestItemsParams<K>
   ): CancelablePromise<PostRequestItemsResponseMap[K]> {
     options = options || {};
     options.method = 'POST';
@@ -217,7 +225,7 @@ export class NgwConnector {
   get<K extends keyof RequestItemsParamsMap>(
     name: K,
     options?: RequestOptions | undefined | null,
-    params?: RequestItemsParamsMap[K] & { [name: string]: any }
+    params?: RequestItemsParams<K>
   ): CancelablePromise<GetRequestItemsResponseMap[K]> {
     options = options || {};
     options.method = 'GET';
@@ -228,7 +236,7 @@ export class NgwConnector {
   patch<K extends keyof RequestItemsParamsMap>(
     name: K,
     options?: RequestOptions,
-    params?: RequestItemsParamsMap[K] & { [name: string]: any }
+    params?: RequestItemsParams<K>
   ): CancelablePromise<PatchRequestItemsResponseMap[K]> {
     options = options || {};
     options.method = 'PATCH';
@@ -239,7 +247,7 @@ export class NgwConnector {
   put<K extends keyof RequestItemsParamsMap>(
     name: K,
     options?: RequestOptions,
-    params?: RequestItemsParamsMap[K] & { [name: string]: any }
+    params?: RequestItemsParams<K>
   ): CancelablePromise<PutRequestItemsResponseMap[K]> {
     options = options || {};
     options.method = 'PUT';
@@ -250,7 +258,7 @@ export class NgwConnector {
   delete<K extends keyof RequestItemsParamsMap>(
     name: K,
     options?: RequestOptions | undefined | null,
-    params?: RequestItemsParamsMap[K] & { [name: string]: any }
+    params?: RequestItemsParams<K>
   ): CancelablePromise<DeleteRequestItemsResponseMap[K]> {
     options = options || {};
     options.method = 'DELETE';
