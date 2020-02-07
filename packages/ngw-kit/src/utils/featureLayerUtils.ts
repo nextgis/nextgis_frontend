@@ -104,11 +104,6 @@ function idFilterWorkAround<
   return CancelablePromise.all(promises);
 }
 
-// TODO: move to utils
-type Required<T> = {
-  [P in keyof T]-?: T[P];
-};
-
 // NGW REST API is not able to filtering by combined queries
 // therefore the filter is divided into several requests
 function createFeatureFieldFilterQueries(

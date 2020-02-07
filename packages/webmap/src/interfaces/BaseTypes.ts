@@ -2,12 +2,13 @@
  * @module webmap
  */
 
+import { Type } from '@nextgis/utils';
 import { LayerAdapter } from './LayerAdapter';
 
 /**
- * @ignore
+ * @deprecated
  */
-export type Type<T> = new (...args: any[]) => T;
+export { Type };
 
 export type ZoomLevel =
   | 0
