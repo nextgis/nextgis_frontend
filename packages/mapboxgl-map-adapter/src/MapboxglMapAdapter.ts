@@ -14,7 +14,7 @@ import {
   WebMapEvents,
   CreateControlOptions
 } from '@nextgis/webmap';
-import { sleep } from '@nextgis/utils';
+import { sleep, debounce } from '@nextgis/utils';
 import { MvtAdapter } from './layer-adapters/MvtAdapter';
 import mapboxgl, {
   Map,
@@ -83,6 +83,11 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
 
   private _sourceDataLoading: { [name: string]: any[] } = {};
   private _sortTimerId?: number;
+  private __setLayerOrder: (layers: { [x: string]: TLayerAdapter }) => void;
+
+  constructor() {
+    this.__setLayerOrder = debounce(layers => this._setLayerOrder(layers));
+  }
 
   // create(options: MapOptions = {target: 'map'}) {
   create(options: MapboxglMapAdapterOptions) {
@@ -257,10 +262,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     order: number,
     layers: { [x: string]: TLayerAdapter }
   ): void {
-    if (this._sortTimerId) {
-      window.clearTimeout(this._sortTimerId);
-    }
-    this._sortTimerId = window.setTimeout(() => this._setLayerOrder(layers));
+    this.__setLayerOrder(layers);
   }
 
   setLayerOpacity(layerIds: string[], opacity: number): void {
@@ -335,6 +337,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   }
 
   private _setLayerOrder(layers: { [x: string]: TLayerAdapter }): void {
+    console.log(layers);
     const _map = this.map;
     if (_map) {
       const baseLayers: TLayerAdapter[] = [];
