@@ -1,13 +1,13 @@
 {
   "name": "@nextgis/vuex-ngw",
-  "version": "0.25.2",
+  "version": "0.25.3",
   "description": "Development tools",
   "main": "lib/vuex-ngw.js",
   "unpkg": "lib/vue-ngw.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/ngw-connector": "^0.25.1",
-    "@nextgis/webmap": "^0.25.2",
+    "@nextgis/ngw-connector": "^0.25.3",
+    "@nextgis/webmap": "^0.25.3",
     "@types/wellknown": "^0.5.1",
     "reproject": "^1.2.5",
     "vue": "^2.6.11",
