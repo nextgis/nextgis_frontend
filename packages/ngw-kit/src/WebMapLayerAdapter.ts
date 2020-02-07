@@ -1,6 +1,6 @@
 import WebMap, { LngLatBoundsArray, MapClickEvent } from '@nextgis/webmap';
-import { ResourceItem, CancelablePromise } from '@nextgis/ngw-connector';
-import { fixUrlStr } from '@nextgis/utils';
+import { ResourceItem } from '@nextgis/ngw-connector';
+import { fixUrlStr, CancelablePromise } from '@nextgis/utils';
 import {
   getLayerAdapterOptions,
   updateWmsParams,
