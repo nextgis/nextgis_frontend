@@ -1,7 +1,8 @@
 /**
  * @module ngw-connector
  */
-import { CancelablePromise } from './CancelablePromise';
+import { CancelablePromise } from '@nextgis/utils';
+import { EventEmitter } from 'events';
 
 import { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
 import {
@@ -23,7 +24,6 @@ import {
   RequestItemsParams
 } from './interfaces';
 import { loadJSON, template } from './utils';
-import { EventEmitter } from 'events';
 import { ResourceItem } from './types/ResourceItem';
 
 export class NgwConnector {

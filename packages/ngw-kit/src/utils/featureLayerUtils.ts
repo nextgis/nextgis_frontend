@@ -2,15 +2,17 @@ import { Geometry, Feature, FeatureCollection } from 'geojson';
 import {
   PropertiesFilter,
   FilterOptions,
-  PropertyFilter,
-  checkIfPropertyFilter
+  PropertyFilter
 } from '@nextgis/webmap';
 import NgwConnector, {
-  CancelablePromise,
   FeatureItem,
   RequestItemAdditionalParams
 } from '@nextgis/ngw-connector';
-import { propertiesFilter } from '@nextgis/utils';
+import {
+  propertiesFilter,
+  checkIfPropertyFilter,
+  CancelablePromise
+} from '@nextgis/utils';
 
 export interface FeatureRequestParams {
   srs?: number;
