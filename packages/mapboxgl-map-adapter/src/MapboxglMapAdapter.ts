@@ -337,7 +337,6 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   }
 
   private _setLayerOrder(layers: { [x: string]: TLayerAdapter }): void {
-    console.log(layers);
     const _map = this.map;
     if (_map) {
       const baseLayers: TLayerAdapter[] = [];
