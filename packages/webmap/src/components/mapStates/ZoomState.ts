@@ -6,7 +6,8 @@ export class ZoomState extends StateItem<number> {
   name: keyof MapOptions = 'zoom';
   event: keyof WebMapEvents = 'zoomend';
   getValue() {
-    return this.webMap.getZoom();
+    const zoom = this.webMap.getZoom();
+    return zoom !== undefined ? Math.round(zoom) : undefined;
   }
   setValue(val: number) {
     this.webMap.setZoom(val);
