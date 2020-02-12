@@ -1,22 +1,6 @@
-// readyState
-// Holds the status of the XMLHttpRequest.
-// 0: request not initialized
-// 1: server connection established
-// 2: request received
-// 3: processing request
-// 4: request finished and response is ready
+import { RequestOptions } from '../interfaces';
 
-// status
-// 200: "OK"
-// 201 "Created"	The request has been fulfilled, and a new resource is created
-// 403: "Forbidden"
-// 404: "Page not found"
-// 500: "Internal Server Error"
-// For a complete list go to the Http Messages Reference
-
-import { RequestOptions } from './interfaces';
-
-export function loadJSON(
+export default function loadJSONBrowser(
   url: string,
   callback: (...args: any[]) => any,
   options: RequestOptions = {},
@@ -115,20 +99,4 @@ export function loadJSON(
     });
   }
   xhr.send(data);
-}
-
-// https://github.com/Leaflet/Leaflet/blob/b507e21c510b53cd704fb8d3f89bb46ea925c8eb/src/core/Util.js#L165
-const templateRe = /\{ *([\w_-]+) *\}/g;
-
-export function template(str: string, data: { [param: string]: any }) {
-  return str.replace(templateRe, (s, key) => {
-    let value = data[key];
-
-    if (value === undefined) {
-      throw new Error('No value provided for letiable ' + s);
-    } else if (typeof value === 'function') {
-      value = value(data);
-    }
-    return value;
-  });
 }
