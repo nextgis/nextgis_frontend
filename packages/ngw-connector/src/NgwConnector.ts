@@ -23,7 +23,8 @@ import {
   PutRequestItemsResponseMap,
   RequestItemsParams
 } from './interfaces';
-import { loadJSON, template } from './utils';
+import { loadJSON } from './utils/loadJson';
+import { template } from './utils/template';
 import { ResourceItem } from './types/ResourceItem';
 
 export class NgwConnector {
