@@ -30,7 +30,7 @@ const isNode = new Function(
   'try {return this===global;}catch(e){return false;}'
 )();
 if (isNode) {
-  loadJSON = require('./loadJsonNode').default;
+  // loadJSON = require('./loadJsonNode').default;
 } else {
   loadJSON = require('./loadJsonBrowser').default;
 }
