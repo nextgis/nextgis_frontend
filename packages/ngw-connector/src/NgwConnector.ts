@@ -309,7 +309,7 @@ export class NgwConnector {
     }
   }
 
-  _setLoadingQueue(
+  protected _setLoadingQueue(
     name: string,
     resolve: (...args: any[]) => any,
     reject: (...args: any[]) => any
@@ -325,7 +325,7 @@ export class NgwConnector {
     });
   }
 
-  _rejectLoadingQueue() {
+  protected _rejectLoadingQueue() {
     for (const q in this._loadingQueue) {
       const queue = this._loadingQueue[q];
       queue.waiting.forEach(x => {
@@ -335,7 +335,7 @@ export class NgwConnector {
     }
   }
 
-  _executeLoadingQueue(name: string, data: any, isError?: boolean) {
+  protected _executeLoadingQueue(name: string, data: any, isError?: boolean) {
     const queue = this._loadingQueue[name];
     if (queue) {
       for (let fry = 0; fry < queue.waiting.length; fry++) {
@@ -352,7 +352,10 @@ export class NgwConnector {
     }
   }
 
-  _getJson(url: string, options: RequestOptions): CancelablePromise<any> {
+  protected _getJson(
+    url: string,
+    options: RequestOptions
+  ): CancelablePromise<any> {
     const onCancel: (() => void)[] = [];
     options.responseType = options.responseType || 'json';
     return new CancelablePromise(
