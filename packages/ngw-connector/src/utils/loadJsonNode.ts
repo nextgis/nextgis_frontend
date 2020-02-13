@@ -1,12 +1,15 @@
 import { RequestOptions, RequestMethods } from '../interfaces';
 
-const adapterFor = (inputUrl: string) => {
-  const url = require('url');
-  const adapters: Record<string, any> = {
-    'http:': require('http'),
-    'https:': require('https')
-  };
+// the 'eval' is used to exclude packages from the webpack bundle for browser
+const url = eval('require("url")');
+const http = eval('require("http")');
+const https = eval('require("https")');
 
+const adapterFor = (inputUrl: string) => {
+  const adapters: Record<string, any> = {
+    'http:': http,
+    'https:': https
+  };
   return adapters[url.parse(inputUrl).protocol];
 };
 
@@ -17,26 +20,32 @@ export default function loadJSONNode(
   error: (reason?: any) => void,
   onCancel: (() => void)[]
 ) {
-  return new Promise((resolve, reject) => {
+  const request = new Promise((resolve, reject) => {
     adapterFor(url)
-      .get(
-        url,
-        // {
-        //   url
-        //   // proxy: 'http://127.0.0.1:3128'
-        // },
-        (resp: any) => {
-          let data = '';
-          resp.on('data', (chunk: any) => {
-            data += chunk;
-          });
-          resp.on('end', () => {
-            resolve(JSON.parse(data));
-          });
-        }
-      )
+      .get(url, (resp: any) => {
+        let data = '';
+        resp.on('data', (chunk: any) => {
+          data += chunk;
+        });
+        resp.on('end', () => {
+          resolve(JSON.parse(data));
+        });
+      })
       .on('error', (err: any) => {
         reject(err);
       });
   });
+  return request
+    .then(data => {
+      if (callback) {
+        callback(data);
+      }
+      return data;
+    })
+    .catch(er => {
+      if (error) {
+        error(er);
+      }
+      throw new Error(er);
+    });
 }
