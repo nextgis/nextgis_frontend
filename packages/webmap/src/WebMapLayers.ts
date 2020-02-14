@@ -38,7 +38,6 @@ export class WebMapLayers<
   private _layersOrderCounter = 1;
   private readonly _baseLayers: string[] = [];
   private readonly _layers: { [id: string]: LayerAdapter } = {};
-  private readonly _layersOrderList: number[] = [];
   private readonly _selectedLayers: string[] = [];
 
   /**
@@ -181,7 +180,7 @@ export class WebMapLayers<
         ? order
         : options.order !== undefined
         ? options.order
-        : this._layersOrderCounter++;
+        : this.reserveOrder();
     let adapterEngine: Type<LayerAdapter> | undefined;
     if (typeof adapter === 'string') {
       adapterEngine = this.getLayerAdapter(adapter);
@@ -290,7 +289,7 @@ export class WebMapLayers<
     const _order =
       order || options.order !== undefined
         ? options.order
-        : 0 || this._layersOrderCounter++;
+        : 0 || this.reserveOrder();
     const adapterConstructor = adapter as AdapterConstructor;
     const adapterConstructorPromise = adapterConstructor();
     const adapterEngine = await adapterConstructorPromise;
@@ -314,6 +313,10 @@ export class WebMapLayers<
         delete this._layers[l];
       }
     }
+  }
+
+  reserveOrder(): number {
+    return this._layersOrderCounter++;
   }
 
   /**

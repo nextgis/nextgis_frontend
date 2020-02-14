@@ -350,6 +350,15 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
         }
       }
 
+      // normalize layer ordering
+      baseLayers.forEach(x => {
+        if (x.layer) {
+          x.layer.forEach(y => {
+            _map.moveLayer(y);
+          });
+        }
+      });
+
       orderedLayers = orderedLayers.sort((a, b) => {
         return a.options.order !== undefined && b.options.order !== undefined
           ? a.options.order - b.options.order
@@ -357,24 +366,10 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
       });
 
       for (let fry = 0; fry < orderedLayers.length; fry++) {
-        const nextLayer = orderedLayers[fry + 1];
-        const nextLayerId = nextLayer && nextLayer.layer && nextLayer.layer[0];
         const mem = orderedLayers[fry];
         const _layers = this._getLayerIds(mem);
         _layers.forEach(x => {
-          _map.moveLayer(x, nextLayerId);
-        });
-      }
-      const firstRealLayer = orderedLayers.find(x => Array.isArray(x.layer));
-      if (firstRealLayer) {
-        const firstLayerId = this._getLayerIds(firstRealLayer)[0];
-        // normalize layer ordering
-        baseLayers.forEach(x => {
-          if (x.layer) {
-            x.layer.forEach(y => {
-              _map.moveLayer(y, firstLayerId);
-            });
-          }
+          _map.moveLayer(x);
         });
       }
     }
