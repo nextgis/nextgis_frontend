@@ -5,9 +5,7 @@ import { EventEmitter } from 'events';
 
 import { Viewer as TViewer } from 'cesium';
 
-// const Cesium = require('cesium/Cesium');
 const Cesium = require('cesium');
-// import Cesium from 'cesium';
 
 const Viewer = Cesium.Viewer as Type<TViewer>;
 
@@ -52,7 +50,7 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
     this.options = { ...options };
     if (this.options.target) {
       const ellipsoidProvider = new Cesium.EllipsoidTerrainProvider();
-      this.map = new Viewer(this.options.target, {
+      const viewer = new Viewer(this.options.target, {
         animation: false,
         baseLayerPicker: false,
         fullscreenButton: false,
@@ -70,8 +68,13 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
         mapProjection: new Cesium.WebMercatorProjection()
         // contextOptions: { requestWebgl2: true }
       });
-      this.map.scene.globe.depthTestAgainstTerrain = false;
-      this.map.scene.postProcessStages.fxaa.enabled = true;
+      viewer.scene.globe.depthTestAgainstTerrain = false;
+      viewer.scene.postProcessStages.fxaa.enabled = true;
+      this.map = viewer;
+      if (options.center) {
+        this.setCenter(options.center);
+      }
+
       this.emitter.emit('create');
     }
   }
@@ -85,7 +88,20 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
   }
 
   setCenter(lonLat: LngLatArray) {
-    //
+    const viewer = this.map;
+    if (viewer) {
+      const z = Cesium.Ellipsoid.WGS84.cartesianToCartographic(
+        viewer.camera.position
+      ).height;
+      const destination = Cesium.Cartesian3.fromDegrees(
+        lonLat[0],
+        lonLat[1],
+        z
+      );
+      viewer.camera.setView({
+        destination
+      });
+    }
   }
 
   getCenter(): LngLatArray | undefined {
@@ -101,7 +117,7 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
   }
 
   fitBounds(e: LngLatBoundsArray) {
-    //
+    return undefined;
   }
 
   getBounds(): LngLatBoundsArray | undefined {
