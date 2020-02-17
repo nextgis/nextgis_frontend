@@ -2,9 +2,9 @@ const path = require('path');
 const package = require('./package.json');
 const common = require('../../build/webpack.config');
 
-const library = 'CesiumMapAdapter';
+const library = 'NgwCesium';
 
-const cesiumSource = '../../node_modules/cesium/Source';
+// const cesiumSource = '../../node_modules/cesium/Source';
 // const cesiumWorkers = '../Build/Cesium/Workers';
 
 module.exports = (env, argv) => {
@@ -17,6 +17,6 @@ module.exports = (env, argv) => {
   config.output.sourcePrefix = '';
   config.node = { fs: 'empty' };
   config.amd = { toUrlUndefined: true };
-  config.resolve.alias.cesium = path.resolve(__dirname, cesiumSource);
+  // config.resolve.alias.cesium = path.resolve(__dirname, cesiumSource);
   return config;
 };

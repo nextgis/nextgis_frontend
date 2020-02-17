@@ -26,12 +26,12 @@ type LoadJSON = (
 
 let loadJSON: LoadJSON;
 
-const isNode = new Function(
-  'try {return this===global;}catch(e){return false;}'
+const isBrowser = new Function(
+  'try {return this===window;}catch(e){ return false;}'
 )();
-if (isNode) {
-  loadJSON = require('./loadJsonNode').default;
-} else {
+if (isBrowser) {
   loadJSON = require('./loadJsonBrowser').default;
+} else {
+  loadJSON = require('./loadJsonNode').default;
 }
 export { loadJSON };
