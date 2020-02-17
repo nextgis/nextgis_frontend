@@ -1,3 +1,5 @@
+import { Feature, GeoJsonProperties } from 'geojson';
+
 /**
  * gt - greater (>)
  * lt - lower (<)
@@ -81,6 +83,16 @@ export function checkIfPropertyFilter(
     typeof pf[1] === 'string'
   ) {
     return true;
+  }
+  return false;
+}
+
+export function featureFilter(feature: Feature, filters: PropertiesFilter) {
+  const properties: GeoJsonProperties = { ...feature.properties };
+  if (properties) {
+    // workaround to filter by feature id
+    properties.$id = feature.id;
+    return propertiesFilter(properties, filters);
   }
   return false;
 }

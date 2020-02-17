@@ -5,9 +5,14 @@ import {
   PropertyFilter
 } from '@nextgis/webmap';
 import NgwConnector, {
-  CancelablePromise,
-  FeatureItem
+  FeatureItem,
+  RequestItemAdditionalParams
 } from '@nextgis/ngw-connector';
+import {
+  propertiesFilter,
+  checkIfPropertyFilter,
+  CancelablePromise
+} from '@nextgis/utils';
 
 export interface FeatureRequestParams {
   srs?: number;
@@ -15,6 +20,12 @@ export interface FeatureRequestParams {
   geom_format?: string;
   limit?: number;
   intersects?: string;
+}
+
+export interface GetNgwLayerItemsOptions {
+  resourceId: number;
+  connector: NgwConnector;
+  filters?: PropertiesFilter;
 }
 
 const FEATURE_REQUEST_PARAMS: FeatureRequestParams = {
@@ -95,30 +106,113 @@ function idFilterWorkAround<
   return CancelablePromise.all(promises);
 }
 
-export function getNgwLayerItems<
+// NGW REST API is not able to filtering by combined queries
+// therefore the filter is divided into several requests
+function createFeatureFieldFilterQueries(
+  opt: Required<GetNgwLayerItemsOptions> & FilterOptions,
+  _queries: CancelablePromise<FeatureItem[]>[] = [],
+  _parentAllParams: [string, any][] = []
+): CancelablePromise<FeatureItem[]> {
+  const { filters, connector, resourceId } = opt;
+
+  const logic = typeof filters[0] === 'string' ? filters[0] : 'all';
+
+  const filters_ = filters.filter(x => Array.isArray(x)) as PropertyFilter[];
+
+  const createParam = (pf: PropertyFilter): [string, any] => {
+    const [field, operation, value] = pf;
+    return [`fld_${field}__${operation}`, value];
+  };
+
+  if (logic === 'any') {
+    filters_.forEach(f => {
+      if (f[0] === 'id') {
+        _queries.push(
+          idFilterWorkAround({ filterById: f, connector, resourceId })
+        );
+      }
+      if (checkIfPropertyFilter(f)) {
+        _queries.push(
+          getNgwLayerItemsRequest({
+            ...opt,
+            paramList: [..._parentAllParams, createParam(f)]
+          })
+        );
+      } else {
+        createFeatureFieldFilterQueries(
+          {
+            ...opt,
+            filters: f
+          },
+          _queries,
+          [..._parentAllParams]
+        );
+      }
+    });
+  } else if (logic === 'all') {
+    const filterById = filters_.find(x => x[0] === 'id');
+    if (filterById) {
+      _queries.push(idFilterWorkAround({ filterById, connector, resourceId }));
+    } else {
+      const filters: [string, any][] = [];
+      const propertiesFilterList: PropertiesFilter[] = [];
+      filters_.forEach(f => {
+        if (checkIfPropertyFilter(f)) {
+          filters.push(createParam(f));
+        } else {
+          propertiesFilterList.push(f);
+        }
+      });
+
+      if (propertiesFilterList.length) {
+        propertiesFilterList.forEach(x => {
+          createFeatureFieldFilterQueries(
+            {
+              ...opt,
+              filters: x
+            },
+            _queries,
+            [..._parentAllParams, ...filters]
+          );
+        });
+      } else {
+        _queries.push(
+          getNgwLayerItemsRequest({
+            ...opt,
+            paramList: [..._parentAllParams, ...filters]
+          })
+        );
+      }
+    }
+  }
+
+  return CancelablePromise.all(_queries).then((itemsParts: FeatureItem[][]) => {
+    const items = itemsParts.reduce((a, b) => a.concat(b), []);
+    if (opt.limit) {
+      return items.splice(0, opt.limit);
+    }
+    return items;
+  });
+}
+
+function getNgwLayerItemsRequest<
   G extends Geometry | null = Geometry,
   P extends Record<string, any> = Record<string, any>
 >(
-  options: {
-    resourceId: number;
-    connector: NgwConnector;
-    filters?: PropertiesFilter;
-  } & FilterOptions
+  options: GetNgwLayerItemsOptions &
+    FilterOptions & { paramList?: [string, any][] }
 ): CancelablePromise<FeatureItem[]> {
-  const params: FeatureRequestParams & { [name: string]: any } = {
+  const params: FeatureRequestParams & RequestItemAdditionalParams = {
     ...FEATURE_REQUEST_PARAMS
   };
-  const { connector, filters, limit, fields, intersects, resourceId } = options;
-  if (filters) {
-    const filters_ = filters.filter(x => Array.isArray(x)) as PropertyFilter[];
-    const filterById = filters_.find(x => x[0] === 'id');
-    if (filterById) {
-      return idFilterWorkAround({ filterById, connector, resourceId });
-    }
-    filters_.forEach(([field, operation, value]) => {
-      params[`fld_${field}__${operation}`] = `${value}`;
-    });
-  }
+  const {
+    connector,
+    limit,
+    fields,
+    intersects,
+    resourceId,
+    paramList
+  } = options;
   if (limit) {
     params.limit = limit;
   }
@@ -128,10 +222,38 @@ export function getNgwLayerItems<
   if (intersects) {
     params.intersects = intersects;
   }
+  if (paramList) {
+    params.paramList = paramList;
+  }
   return connector.get('feature_layer.feature.collection', null, {
     id: resourceId,
     ...params
   });
+}
+
+export function getNgwLayerItems<
+  G extends Geometry | null = Geometry,
+  P extends Record<string, any> = Record<string, any>
+>(
+  options: GetNgwLayerItemsOptions & FilterOptions
+): CancelablePromise<FeatureItem[]> {
+  const filters = options.filters;
+  if (filters) {
+    return createFeatureFieldFilterQueries({ ...options, filters });
+  } else {
+    return getNgwLayerItemsRequest(options).then(data => {
+      if (filters) {
+        // control
+        return data.filter(y => {
+          const fields = y.fields;
+          if (fields) {
+            propertiesFilter(fields, filters);
+          }
+        });
+      }
+      return data;
+    });
+  }
 }
 
 export function getNgwLayerFeatures<

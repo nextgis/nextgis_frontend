@@ -92,11 +92,11 @@ export interface NgwConnectorOptions {
 }
 
 export interface RequestHeaders {
+  [header: string]: string | undefined;
   Authorization?: string;
   Accept?: string;
   'Access-Control-Allow-Origin'?: string;
   'Access-Control-Allow-Headers'?: string;
-  [header: string]: string | undefined;
 }
 
 export type RequestMethods = 'POST' | 'GET' | 'PATCH' | 'DELETE' | 'PUT';
@@ -111,6 +111,16 @@ export interface RequestOptions<M = RequestMethods> {
   onProgress?: (percentComplete: number) => void;
   nocache?: boolean;
 }
+
+export type RequestItemAdditionalParams = { [name: string]: any } & {
+  paramList?: [string, any][];
+};
+
+export type RequestItemsParams<K extends keyof RequestItemsParamsMap> = (
+  | RequestItemsParamsMap[K]
+  | {}
+) &
+  RequestItemAdditionalParams;
 
 export interface LoadingQueue {
   name: string;

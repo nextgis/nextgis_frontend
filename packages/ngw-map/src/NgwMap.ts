@@ -4,7 +4,7 @@
 import StrictEventEmitter from 'strict-event-emitter-types';
 import { EventEmitter } from 'events';
 
-import { fixUrlStr, deepmerge } from '@nextgis/utils';
+import { fixUrlStr, deepmerge, CancelablePromise } from '@nextgis/utils';
 import WebMap, {
   MapAdapter,
   ControlPositions,
@@ -19,7 +19,6 @@ import WebMap, {
 } from '@nextgis/webmap';
 import NgwConnector, {
   ResourceItem,
-  CancelablePromise,
   FeatureLayersIdentify,
   FeatureItem,
   FeatureLayersIdentifyItems,

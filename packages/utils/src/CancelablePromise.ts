@@ -1,5 +1,5 @@
 /**
- * @module ngw-connector
+ * @module ngw-utils
  */
 type Reject = (reason?: any) => void;
 type Resolve = (value?: any) => void;

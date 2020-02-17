@@ -21,8 +21,8 @@ export interface FeatureLayersIdentifyItems {
 }
 
 export interface FeatureLayersIdentify {
-  featureCount: number;
   [layerId: number]: FeatureLayersIdentifyItems;
+  featureCount: number;
 }
 
 export interface FeatureItemAttachment {
