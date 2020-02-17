@@ -1,7 +1,8 @@
 /**
  * @module ngw-connector
  */
-import { CancelablePromise } from './CancelablePromise';
+import { CancelablePromise } from '@nextgis/utils';
+import { EventEmitter } from 'events';
 
 import { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
 import {
@@ -19,10 +20,11 @@ import {
   PatchRequestItemsResponseMap,
   RequestItemKeys,
   DeleteRequestItemsResponseMap,
-  PutRequestItemsResponseMap
+  PutRequestItemsResponseMap,
+  RequestItemsParams
 } from './interfaces';
-import { loadJSON, template } from './utils';
-import { EventEmitter } from 'events';
+import { loadJSON } from './utils/loadJson';
+import { template } from './utils/template';
 import { ResourceItem } from './types/ResourceItem';
 
 export class NgwConnector {
@@ -157,7 +159,7 @@ export class NgwConnector {
     P extends RequestItemKeys = RequestItemKeys
   >(
     name: K,
-    params: (RequestItemsParamsMap[K] | {}) & { [name: string]: any } = {},
+    params: RequestItemsParams<K> = {},
     options?: RequestOptions
   ): CancelablePromise<P[K]> {
     const apiItems = await this.connect();
@@ -185,6 +187,13 @@ export class NgwConnector {
       // Transfer part of the parameters from `params` to the URL string
       if (params) {
         const paramArray = [];
+        const paramList = params.paramList;
+        if (Array.isArray(paramList)) {
+          delete params.paramList;
+          paramList.forEach(x => {
+            paramArray.push(`${x[0]}=${x[1]}`);
+          });
+        }
         for (const p in params) {
           if (apiItem.indexOf(p) === -1) {
             paramArray.push(`${p}=${params[p]}`);
@@ -206,7 +215,7 @@ export class NgwConnector {
   post<K extends keyof RequestItemsParamsMap>(
     name: K,
     options?: RequestOptions<'POST'>,
-    params?: RequestItemsParamsMap[K] & { [name: string]: any }
+    params?: RequestItemsParams<K>
   ): CancelablePromise<PostRequestItemsResponseMap[K]> {
     options = options || {};
     options.method = 'POST';
@@ -217,7 +226,7 @@ export class NgwConnector {
   get<K extends keyof RequestItemsParamsMap>(
     name: K,
     options?: RequestOptions | undefined | null,
-    params?: RequestItemsParamsMap[K] & { [name: string]: any }
+    params?: RequestItemsParams<K>
   ): CancelablePromise<GetRequestItemsResponseMap[K]> {
     options = options || {};
     options.method = 'GET';
@@ -228,7 +237,7 @@ export class NgwConnector {
   patch<K extends keyof RequestItemsParamsMap>(
     name: K,
     options?: RequestOptions,
-    params?: RequestItemsParamsMap[K] & { [name: string]: any }
+    params?: RequestItemsParams<K>
   ): CancelablePromise<PatchRequestItemsResponseMap[K]> {
     options = options || {};
     options.method = 'PATCH';
@@ -239,7 +248,7 @@ export class NgwConnector {
   put<K extends keyof RequestItemsParamsMap>(
     name: K,
     options?: RequestOptions,
-    params?: RequestItemsParamsMap[K] & { [name: string]: any }
+    params?: RequestItemsParams<K>
   ): CancelablePromise<PutRequestItemsResponseMap[K]> {
     options = options || {};
     options.method = 'PUT';
@@ -250,7 +259,7 @@ export class NgwConnector {
   delete<K extends keyof RequestItemsParamsMap>(
     name: K,
     options?: RequestOptions | undefined | null,
-    params?: RequestItemsParamsMap[K] & { [name: string]: any }
+    params?: RequestItemsParams<K>
   ): CancelablePromise<DeleteRequestItemsResponseMap[K]> {
     options = options || {};
     options.method = 'DELETE';
@@ -300,7 +309,7 @@ export class NgwConnector {
     }
   }
 
-  _setLoadingQueue(
+  protected _setLoadingQueue(
     name: string,
     resolve: (...args: any[]) => any,
     reject: (...args: any[]) => any
@@ -316,7 +325,7 @@ export class NgwConnector {
     });
   }
 
-  _rejectLoadingQueue() {
+  protected _rejectLoadingQueue() {
     for (const q in this._loadingQueue) {
       const queue = this._loadingQueue[q];
       queue.waiting.forEach(x => {
@@ -326,7 +335,7 @@ export class NgwConnector {
     }
   }
 
-  _executeLoadingQueue(name: string, data: any, isError?: boolean) {
+  protected _executeLoadingQueue(name: string, data: any, isError?: boolean) {
     const queue = this._loadingQueue[name];
     if (queue) {
       for (let fry = 0; fry < queue.waiting.length; fry++) {
@@ -343,7 +352,10 @@ export class NgwConnector {
     }
   }
 
-  _getJson(url: string, options: RequestOptions): CancelablePromise<any> {
+  protected _getJson(
+    url: string,
+    options: RequestOptions
+  ): CancelablePromise<any> {
     const onCancel: (() => void)[] = [];
     options.responseType = options.responseType || 'json';
     return new CancelablePromise(
