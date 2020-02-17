@@ -51,7 +51,27 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
   create(options: MapOptions) {
     this.options = { ...options };
     if (this.options.target) {
-      this.map = new Viewer(this.options.target);
+      const ellipsoidProvider = new Cesium.EllipsoidTerrainProvider();
+      this.map = new Viewer(this.options.target, {
+        animation: false,
+        baseLayerPicker: false,
+        fullscreenButton: false,
+        scene3DOnly: true,
+        selectionIndicator: true,
+        geocoder: false,
+        homeButton: false,
+        infoBox: true,
+        timeline: false,
+        navigationHelpButton: false,
+        useBrowserRecommendedResolution: true,
+        sceneMode: Cesium.SceneMode.SCENE3D,
+        terrainProvider: ellipsoidProvider,
+        // imageryProvider: tms,
+        mapProjection: new Cesium.WebMercatorProjection()
+        // contextOptions: { requestWebgl2: true }
+      });
+      this.map.scene.globe.depthTestAgainstTerrain = false;
+      this.map.scene.postProcessStages.fxaa.enabled = true;
       this.emitter.emit('create');
     }
   }
