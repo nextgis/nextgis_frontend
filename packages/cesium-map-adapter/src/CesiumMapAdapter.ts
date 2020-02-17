@@ -5,7 +5,9 @@ import { EventEmitter } from 'events';
 
 import { Viewer as TViewer } from 'cesium';
 
-const Cesium = require('cesium/Cesium');
+// const Cesium = require('cesium/Cesium');
+const Cesium = require('cesium');
+// import Cesium from 'cesium';
 
 const Viewer = Cesium.Viewer as Type<TViewer>;
 
