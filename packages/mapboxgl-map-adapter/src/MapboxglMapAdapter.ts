@@ -14,7 +14,7 @@ import {
   WebMapEvents,
   CreateControlOptions
 } from '@nextgis/webmap';
-import { sleep } from '@nextgis/utils';
+import { sleep, debounce } from '@nextgis/utils';
 import { MvtAdapter } from './layer-adapters/MvtAdapter';
 import mapboxgl, {
   Map,
@@ -83,6 +83,11 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
 
   private _sourceDataLoading: { [name: string]: any[] } = {};
   private _sortTimerId?: number;
+  private __setLayerOrder: (layers: { [x: string]: TLayerAdapter }) => void;
+
+  constructor() {
+    this.__setLayerOrder = debounce(layers => this._setLayerOrder(layers));
+  }
 
   // create(options: MapOptions = {target: 'map'}) {
   create(options: MapboxglMapAdapterOptions) {
@@ -257,10 +262,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     order: number,
     layers: { [x: string]: TLayerAdapter }
   ): void {
-    if (this._sortTimerId) {
-      window.clearTimeout(this._sortTimerId);
-    }
-    this._sortTimerId = window.setTimeout(() => this._setLayerOrder(layers));
+    this.__setLayerOrder(layers);
   }
 
   setLayerOpacity(layerIds: string[], opacity: number): void {
@@ -348,6 +350,15 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
         }
       }
 
+      // normalize layer ordering
+      baseLayers.forEach(x => {
+        if (x.layer) {
+          x.layer.forEach(y => {
+            _map.moveLayer(y);
+          });
+        }
+      });
+
       orderedLayers = orderedLayers.sort((a, b) => {
         return a.options.order !== undefined && b.options.order !== undefined
           ? a.options.order - b.options.order
@@ -355,24 +366,10 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
       });
 
       for (let fry = 0; fry < orderedLayers.length; fry++) {
-        const nextLayer = orderedLayers[fry + 1];
-        const nextLayerId = nextLayer && nextLayer.layer && nextLayer.layer[0];
         const mem = orderedLayers[fry];
         const _layers = this._getLayerIds(mem);
         _layers.forEach(x => {
-          _map.moveLayer(x, nextLayerId);
-        });
-      }
-      const firstRealLayer = orderedLayers.find(x => Array.isArray(x.layer));
-      if (firstRealLayer) {
-        const firstLayerId = this._getLayerIds(firstRealLayer)[0];
-        // normalize layer ordering
-        baseLayers.forEach(x => {
-          if (x.layer) {
-            x.layer.forEach(y => {
-              _map.moveLayer(y, firstLayerId);
-            });
-          }
+          _map.moveLayer(x);
         });
       }
     }

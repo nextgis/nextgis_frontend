@@ -2,13 +2,17 @@
  * @module utils
  */
 
+export * from './CancelablePromise';
+export * from './Clipboard';
+
 import * as Dom from './dom';
 export const dom = Dom;
-export * from './clipboard';
+
 export * from './events';
 export * from './array';
 export * from './propertiesFilter';
 export * from './sleep';
+export * from './typeHelpers';
 export { deepmerge } from './deepmerge';
 export { debounce } from './debounce';
 /**

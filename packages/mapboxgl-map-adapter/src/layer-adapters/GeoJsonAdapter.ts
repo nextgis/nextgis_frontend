@@ -11,6 +11,7 @@ import {
   LayerDefinition,
   PropertiesFilter
 } from '@nextgis/webmap';
+import { featureFilter } from '@nextgis/utils';
 import {
   GeoJsonObject,
   FeatureCollection,
@@ -96,9 +97,15 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
 
   getLayers() {
     const filtered = this._filteredFeatureIds;
+    const filterProperties = this._filterProperties;
+    if (filterProperties) {
+      this._updateWithNativeFilter(filterProperties);
+    }
     return this._getFeatures().map(feature => {
       let visible = false;
-      if (filtered) {
+      if (filterProperties && feature.properties) {
+        visible = featureFilter(feature, filterProperties);
+      } else if (filtered) {
         const id = this._getFeatureFilterId(feature);
         if (id !== undefined) {
           visible = filtered.indexOf(id) !== -1;
@@ -314,8 +321,14 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
 
   private _getFeatures(): Feature[] {
     if (this.source) {
-      const features = this.map.querySourceFeatures(this.source);
-      return features;
+      // const features = this.map.querySourceFeatures(this.source);
+      // return features;
+
+      const source = this.map.getSource(this.source);
+      if (source) {
+        // @ts-ignore
+        return source._data?.features || [];
+      }
     }
     return this._features;
   }
