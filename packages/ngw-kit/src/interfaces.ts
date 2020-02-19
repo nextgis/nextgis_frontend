@@ -85,10 +85,20 @@ export interface KeynamedNgwLayerOptions<
 > extends NgwLayerOptionsAdditional<T, P> {
   keyname: string;
 }
+export interface ResourceNgwLayerOptions<
+  T extends NgwLayerAdapterType = NgwLayerAdapterType,
+  P = { [name: string]: any }
+> extends NgwLayerOptionsAdditional<T, P> {
+  resource: number | string | NgwLayerOptions;
+}
 
-export type NgwLayerOptions =
-  | ResourceIdNgwLayerOptions
-  | KeynamedNgwLayerOptions;
+export type NgwLayerOptions<
+  T extends NgwLayerAdapterType = NgwLayerAdapterType,
+  P = { [name: string]: any }
+> =
+  | ResourceNgwLayerOptions<T, P>
+  | ResourceIdNgwLayerOptions<T, P>
+  | KeynamedNgwLayerOptions<T, P>;
 
 // export interface AddNgwLayerOptions<
 //   T extends NgwLayerAdapterType = NgwLayerAdapterType,
