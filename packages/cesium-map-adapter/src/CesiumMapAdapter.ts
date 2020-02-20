@@ -20,6 +20,7 @@ import {
   LngLatBoundsArray,
   Type
 } from '@nextgis/webmap';
+import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 
 type Layer = any;
 type Control = any;
@@ -30,7 +31,7 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
     // TILE: TileAdapter,
     // MVT: MvtAdapter,
     // OSM: OsmAdapter,
-    // GEOJSON: GeoJsonAdapter
+    GEOJSON: GeoJsonAdapter
   };
 
   static controlAdapters = {
@@ -117,7 +118,16 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
   }
 
   fitBounds(e: LngLatBoundsArray) {
-    return undefined;
+    if (this.map) {
+      const [west, south, east, north] = e;
+      const destination = Cesium.Rectangle.fromDegrees(
+        west,
+        south,
+        east,
+        north
+      );
+      this.map.camera.setView({ destination });
+    }
   }
 
   getBounds(): LngLatBoundsArray | undefined {
