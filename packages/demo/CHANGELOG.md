@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.25.5](https://github.com/nextgis/nextgis_frontend_apps/compare/v0.25.4...v0.25.5) (2020-02-20)
+
+
+### Bug Fixes
+
+* **demo:** remove layer id from ngw properties filter example ([4c3c625](https://github.com/nextgis/nextgis_frontend_apps/commit/4c3c6253a47a4e1e55d3b19c5a75787d96705e69))
+
+
+
+
+
 ## [0.25.4](https://github.com/nextgis/nextgis_frontend_apps/compare/v0.25.3...v0.25.4) (2020-02-07)
 
 **Note:** Version bump only for package @nextgis/demo-app
