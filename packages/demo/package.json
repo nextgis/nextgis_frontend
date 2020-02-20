@@ -57,7 +57,8 @@
     "prod": "echo \"No build for Demo app\" && exit 0",
     "build": "npm run dev -- --mode=production",
     "watch": "npm run dev -- --watch",
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "docker:latest": "docker build -t registry.nextgis.com/code-nextgis:latest . && docker push registry.nextgis.com/code-nextgis:latest"
   },
   "repository": {
     "type": "git",
