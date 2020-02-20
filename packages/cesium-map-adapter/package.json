@@ -1,7 +1,6 @@
 {
   "name": "@nextgis/cesium-map-adapter",
   "version": "0.25.5",
-  "_priority": 16,
   "description": "",
   "main": "lib/cesium-map-adapter.js",
   "unpkg": "lib/cesium-map-adapter.js",

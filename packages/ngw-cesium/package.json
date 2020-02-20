@@ -1,6 +1,5 @@
 {
   "name": "@nextgis/ngw-cesium",
-  "_priority": 10,
   "version": "0.25.5",
   "description": "",
   "main": "lib/ngw-cesium.js",
