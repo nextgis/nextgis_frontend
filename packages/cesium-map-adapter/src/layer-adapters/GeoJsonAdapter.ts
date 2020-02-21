@@ -13,7 +13,7 @@ import { GeoJsonObject, Feature } from 'geojson';
 import { BaseAdapter, Map } from './BaseAdapter';
 const Cesium = require('cesium');
 
-type Layer = any;
+type Layer = GeoJsonDataSource;
 
 export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
   implements VectorLayerAdapter<Map> {
@@ -24,13 +24,22 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
   addLayer(options: GeoJsonAdapterOptions) {
     const source = new Cesium.GeoJsonDataSource(options.id);
     this._source = source;
-    this.map.dataSources.add(source).then(x => {
-      if (options.data) {
-        this.addData(options.data);
-      }
-    });
-
+    if (options.data) {
+      this.addData(options.data);
+    }
     return source;
+  }
+
+  showLayer() {
+    if (this._source) {
+      this.map.dataSources.add(this._source);
+    }
+  }
+
+  hideLayer() {
+    if (this._source) {
+      this.map.dataSources.remove(this._source);
+    }
   }
 
   clearLayer(cb?: (feature: Feature) => boolean) {

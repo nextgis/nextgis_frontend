@@ -21,6 +21,7 @@ import {
   Type
 } from '@nextgis/webmap';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
+import { TileAdapter } from './layer-adapters/TileAdapter';
 
 type Layer = any;
 type Control = any;
@@ -28,7 +29,7 @@ type Control = any;
 export class CesiumMapAdapter implements MapAdapter<any, Layer> {
   static layerAdapters = {
     // IMAGE: ImageAdapter,
-    // TILE: TileAdapter,
+    TILE: TileAdapter,
     // MVT: MvtAdapter,
     // OSM: OsmAdapter,
     GEOJSON: GeoJsonAdapter
@@ -51,6 +52,14 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
     this.options = { ...options };
     if (this.options.target) {
       const ellipsoidProvider = new Cesium.EllipsoidTerrainProvider();
+
+      // const tms = new Cesium.UrlTemplateImageryProvider({
+      //   url: 'http://tiles.maps.sputnik.ru/tiles/kmt2/{z}/{x}/{y}.png',
+      //   credit:
+      //     'Спутник © Ростелеком © <a href="http://www.openstreetmap.org/copyright/ru" target="_blank">Участники OpenStreetMap</a>',
+      //   maximumLevel: 19
+      // });
+
       const viewer = new Viewer(this.options.target, {
         animation: false,
         baseLayerPicker: false,
@@ -69,6 +78,9 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
         mapProjection: new Cesium.WebMercatorProjection()
         // contextOptions: { requestWebgl2: true }
       });
+
+      viewer.imageryLayers.removeAll();
+
       viewer.scene.globe.depthTestAgainstTerrain = false;
       viewer.scene.postProcessStages.fxaa.enabled = true;
       this.map = viewer;
