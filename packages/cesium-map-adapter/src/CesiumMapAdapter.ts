@@ -53,13 +53,6 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
     if (this.options.target) {
       const ellipsoidProvider = new Cesium.EllipsoidTerrainProvider();
 
-      // const tms = new Cesium.UrlTemplateImageryProvider({
-      //   url: 'http://tiles.maps.sputnik.ru/tiles/kmt2/{z}/{x}/{y}.png',
-      //   credit:
-      //     'Спутник © Ростелеком © <a href="http://www.openstreetmap.org/copyright/ru" target="_blank">Участники OpenStreetMap</a>',
-      //   maximumLevel: 19
-      // });
-
       const viewer = new Viewer(this.options.target, {
         animation: false,
         baseLayerPicker: false,
@@ -74,7 +67,6 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
         useBrowserRecommendedResolution: true,
         sceneMode: Cesium.SceneMode.SCENE3D,
         terrainProvider: ellipsoidProvider,
-        // imageryProvider: tms,
         mapProjection: new Cesium.WebMercatorProjection()
         // contextOptions: { requestWebgl2: true }
       });
@@ -84,7 +76,9 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
       viewer.scene.globe.depthTestAgainstTerrain = false;
       viewer.scene.postProcessStages.fxaa.enabled = true;
       this.map = viewer;
-      if (options.center) {
+      if (options.bounds) {
+        this.fitBounds(options.bounds);
+      } else if (options.center) {
         this.setCenter(options.center);
       }
 
