@@ -1,5 +1,4 @@
 import {
-  GeoJsonAdapterOptions,
   VectorLayerAdapter,
   DataLayerFilter,
   PropertiesFilter,

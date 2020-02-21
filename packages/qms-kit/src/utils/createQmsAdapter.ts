@@ -1,54 +1,7 @@
-import {
-  WebMap,
-  BaseLayerAdapter,
-  LayerAdaptersOptions,
-  Type,
-  AdapterOptions
-} from '@nextgis/webmap';
-import { fixUrlStr } from '@nextgis/utils';
-import {
-  QmsAdapterOptions,
-  QmsBasemap,
-  QmsLayerType,
-  QmsAdapter as QA
-} from './interfaces';
-
-const alias: { [key in QmsLayerType]: keyof LayerAdaptersOptions } = {
-  tms: 'TILE'
-};
-
-export function updateQmsOptions(
-  qms: QmsBasemap
-): AdapterOptions & { url: string } {
-  const protocol = (location.protocol === 'https:' ? 'https' : 'http') + '://';
-  const serviceUrl = qms.url.replace(/^(https?|ftp):\/\//, protocol);
-  return {
-    url: serviceUrl,
-    name: qms.name,
-    attribution: qms.copyright_text,
-    maxZoom: qms.z_max,
-    minZoom: qms.z_min
-  };
-}
-
-export function loadJSON<T = any>(url: string): Promise<T> {
-  return new Promise<T>((resolve, reject) => {
-    const xmlHttp = new XMLHttpRequest();
-    xmlHttp.onreadystatechange = () => {
-      if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-        if (xmlHttp.responseText) {
-          try {
-            resolve(JSON.parse(xmlHttp.responseText));
-          } catch (er) {
-            reject(er);
-          }
-        }
-      }
-    };
-    xmlHttp.open('GET', fixUrlStr(url), true); // true for asynchronous
-    xmlHttp.send();
-  });
-}
+import { WebMap, BaseLayerAdapter } from '@nextgis/webmap';
+import { Type } from '@nextgis/utils';
+import { QmsAdapterOptions, QmsBasemap, QmsAdapter as QA } from '../interfaces';
+import { loadJSON, alias, updateQmsOptions } from './utils';
 
 export function createQmsAdapter(
   webMap: WebMap,
@@ -87,6 +40,16 @@ export function createQmsAdapter(
             };
             this.options = options;
             const adapter = new webMapAdapter(this.map, options);
+            // mixinProperties(QmsAdapter, adapter, ['showLayer', 'hideLayer']);
+
+            if (adapter.showLayer) {
+              // @ts-ignore
+              this.showLayer = adapter.showLayer;
+            }
+            if (adapter.hideLayer) {
+              // @ts-ignore
+              this.hideLayer = adapter.hideLayer;
+            }
             return adapter.addLayer(options);
           }
         }

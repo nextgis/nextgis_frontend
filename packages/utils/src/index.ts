@@ -13,6 +13,7 @@ export * from './array';
 export * from './propertiesFilter';
 export * from './sleep';
 export * from './typeHelpers';
+export * from './applyMixins';
 export { deepmerge } from './deepmerge';
 export { debounce } from './debounce';
 /**
