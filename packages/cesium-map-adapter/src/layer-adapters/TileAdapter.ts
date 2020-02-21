@@ -1,5 +1,9 @@
 import { TileAdapterOptions } from '@nextgis/webmap';
-import { Viewer as TViewer, UrlTemplateImageryProvider } from 'cesium';
+import {
+  Viewer as TViewer,
+  UrlTemplateImageryProvider,
+  ImageryLayer
+} from 'cesium';
 
 import { BaseAdapter } from './BaseAdapter';
 const Cesium = require('cesium');
@@ -22,19 +26,11 @@ export class TileAdapter extends BaseAdapter<TileAdapterOptions, Layer> {
     return layer;
   }
 
-  showLayer() {
-    if (this._layer) {
-      this.map.imageryLayers.addImageryProvider(
-        this._layer,
-        this.options.order
-      );
-    }
+  showLayer(layer: Layer) {
+    this.map.imageryLayers.addImageryProvider(layer, this.options.order);
   }
 
-  hideLayer() {
-    if (this._layer) {
-      // @ts-ignore
-      this.map.imageryLayers.remove(this._layer);
-    }
+  hideLayer(layer: ImageryLayer) {
+    this.map.imageryLayers.remove(layer);
   }
 }

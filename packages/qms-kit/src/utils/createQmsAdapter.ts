@@ -1,5 +1,5 @@
 import { WebMap, BaseLayerAdapter } from '@nextgis/webmap';
-import { Type } from '@nextgis/utils';
+import { Type, mixinProperties } from '@nextgis/utils';
 import { QmsAdapterOptions, QmsBasemap, QmsAdapter as QA } from '../interfaces';
 import { loadJSON, alias, updateQmsOptions } from './utils';
 
@@ -31,6 +31,10 @@ export function createQmsAdapter(
         const type = alias[qms.type || 'tms'];
         const webMapAdapter = webMap.mapAdapter.layerAdapters[type];
         if (webMapAdapter) {
+          mixinProperties(QmsAdapter, webMapAdapter, [
+            'showLayer',
+            'hideLayer'
+          ]);
           if (type === 'TILE') {
             options = {
               maxZoom: webMap.options.maxZoom,
@@ -40,16 +44,6 @@ export function createQmsAdapter(
             };
             this.options = options;
             const adapter = new webMapAdapter(this.map, options);
-            // mixinProperties(QmsAdapter, adapter, ['showLayer', 'hideLayer']);
-
-            if (adapter.showLayer) {
-              // @ts-ignore
-              this.showLayer = adapter.showLayer;
-            }
-            if (adapter.hideLayer) {
-              // @ts-ignore
-              this.hideLayer = adapter.hideLayer;
-            }
             return adapter.addLayer(options);
           }
         }
