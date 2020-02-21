@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.25.5](https://github.com/nextgis/nextgisweb_frontend/compare/v0.25.4...v0.25.5) (2020-02-20)
+
+
+### Bug Fixes
+
+* **webmap:** ZoomState may be only integer ([c130469](https://github.com/nextgis/nextgisweb_frontend/commit/c13046908d63d549e3f221efc538c55d49a36450))
+
+
+### Performance Improvements
+
+* **mapbox:** upgrade layer ordering ([58a0db0](https://github.com/nextgis/nextgisweb_frontend/commit/58a0db08c0fa123ede4ef0d9fc7d9e1e9b3a6526))
+
+
+
+
+
 ## [0.25.4](https://github.com/nextgis/nextgisweb_frontend/compare/v0.25.3...v0.25.4) (2020-02-07)
 
 **Note:** Version bump only for package @nextgis/webmap

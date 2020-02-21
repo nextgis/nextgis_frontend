@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.25.5](https://github.com/nextgis/nextgisweb_frontend/compare/v0.25.4...v0.25.5) (2020-02-20)
+
+
+### Bug Fixes
+
+* rename Clipboard ([759f55a](https://github.com/nextgis/nextgisweb_frontend/commit/759f55ad35928f5212d8ed8bfaccdbebcb35246a))
+* **demo:** remove layer id from ngw properties filter example ([4c3c625](https://github.com/nextgis/nextgisweb_frontend/commit/4c3c6253a47a4e1e55d3b19c5a75787d96705e69))
+* **mapbox:** geojson getFeatures method return whole source data ([d47f893](https://github.com/nextgis/nextgisweb_frontend/commit/d47f8932d63c8a6d056d50aad351026464128595))
+* **webmap:** ZoomState may be only integer ([c130469](https://github.com/nextgis/nextgisweb_frontend/commit/c13046908d63d549e3f221efc538c55d49a36450))
+
+
+### Features
+
+* **ngw-connector:** make library polymorphic for both node and browser ([b3bd42e](https://github.com/nextgis/nextgisweb_frontend/commit/b3bd42e1ebc3880edfecb6713d0d17166e9beed0))
+* **ngw-kit:** new addNgwLayer resource option for keyname or resourceId ([f1eefd2](https://github.com/nextgis/nextgisweb_frontend/commit/f1eefd2703dc16126ef4b0a933a86b9a34d594a7))
+
+
+### Performance Improvements
+
+* **mapbox:** upgrade layer ordering ([58a0db0](https://github.com/nextgis/nextgisweb_frontend/commit/58a0db08c0fa123ede4ef0d9fc7d9e1e9b3a6526))
+
+
+
+
+
 ## [0.25.4](https://github.com/nextgis/nextgisweb_frontend/compare/v0.25.3...v0.25.4) (2020-02-07)
 
 
