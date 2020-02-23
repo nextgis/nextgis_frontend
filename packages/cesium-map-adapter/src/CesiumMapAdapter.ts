@@ -66,8 +66,9 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
         navigationHelpButton: false,
         useBrowserRecommendedResolution: true,
         sceneMode: Cesium.SceneMode.SCENE3D,
-        terrainProvider: ellipsoidProvider,
-        mapProjection: new Cesium.WebMercatorProjection()
+        terrainProvider: ellipsoidProvider
+        // imageryProvider: tms,
+        // mapProjection: new Cesium.WebMercatorProjection()
         // contextOptions: { requestWebgl2: true }
       });
 
@@ -75,6 +76,8 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
 
       viewer.scene.globe.depthTestAgainstTerrain = false;
       viewer.scene.postProcessStages.fxaa.enabled = true;
+
+      viewer.camera.percentageChanged = 0.1;
       this.map = viewer;
       if (options.bounds) {
         this.fitBounds(options.bounds);
