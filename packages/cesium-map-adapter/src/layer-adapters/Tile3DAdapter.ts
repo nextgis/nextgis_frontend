@@ -4,10 +4,10 @@ import {
   PropertiesFilter,
   TileAdapterOptions
 } from '@nextgis/webmap';
-import { Viewer as TViewer } from 'cesium';
+import Cesium, { Viewer as TViewer } from 'cesium';
 
 import { Feature, GeoJsonObject } from 'geojson';
-const Cesium = require('cesium');
+// const Cesium = require('cesium');
 
 type Layer = any;
 type Map = TViewer;

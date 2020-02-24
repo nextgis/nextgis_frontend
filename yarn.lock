@@ -10376,6 +10376,13 @@ strip-json-comments@^3.0.1:
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-3.0.1.tgz#85713975a91fb87bf1b305cca77395e40d2a64a7"
   integrity sha512-VTyMAUfdm047mwKl+u79WIdrZxtFtn+nBxHeb844XBQ9uMNTuTHdx2hc5RiAJYqwTj3wc/xe5HLSdJSkJ+WfZw==
 
+strip-pragma-loader@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/strip-pragma-loader/-/strip-pragma-loader-1.0.0.tgz#f4fbed5dd0cd9c4bdcf0587d2e50c81ee2a1354b"
+  integrity sha512-TiyrGu7GBaxOG6MWTti0mohPzAbEHk3H+ei4If/FVpNY+byR/rsGIJdQH8DAO1TzpMR25MsS9mga8a3HTZ/lNQ==
+  dependencies:
+    loader-utils "^1.1.0"
+
 strong-log-transformer@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/strong-log-transformer/-/strong-log-transformer-2.1.0.tgz#0f5ed78d325e0421ac6f90f7f10e691d6ae3ae10"
