@@ -1,15 +1,15 @@
 {
   "name": "@nextgis/icons",
-  "version": "0.25.5",
+  "version": "0.25.6",
   "description": "Svg icon pack",
   "main": "lib/icons.js",
   "unpkg": "lib/icons.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/webmap": "^0.25.5"
+    "@nextgis/webmap": "^0.25.6"
   },
   "devDependencies": {
-    "@nextgis/eslint-config": "^0.25.0",
+    "@nextgis/eslint-config": "^0.25.6",
     "@types/events": "^3.0.0",
     "@types/node": "^13.7.0",
     "css-loader": "^3.4.2",

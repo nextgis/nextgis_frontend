@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.25.6](https://github.com/nextgis/nextgisweb_frontend/compare/v0.20.3...v0.25.6) (2020-02-24)
+
+
+### Features
+
+* **demo:** add new example for simple resource table ([43fdf4f](https://github.com/nextgis/nextgisweb_frontend/commit/43fdf4f69898680872fedece44c812ca407d1d8b))
+* **ngw:** add support for `qgis_raster_style` ([959e901](https://github.com/nextgis/nextgisweb_frontend/commit/959e9014364947acbbbe768157d8cb5ab6d0c3ba))
+* **ngw:** conditions and nesting for filtering ngw feature layer ([bc7cc34](https://github.com/nextgis/nextgisweb_frontend/commit/bc7cc344d83d1769476e28cb87d595a9d25d0ebd))
+* **ngw-connector:** make library polymorphic for both node and browser ([b3bd42e](https://github.com/nextgis/nextgisweb_frontend/commit/b3bd42e1ebc3880edfecb6713d0d17166e9beed0))
+* **vue:** split vue-ngw-map for leaflet, ol an mapbox adapters ([b9dcb88](https://github.com/nextgis/nextgisweb_frontend/commit/b9dcb880140480b3557cde7bb91e761741889bf5))
+
+
+### wip
+
+* **util:** move CancelablePromise to util ([6f7f24c](https://github.com/nextgis/nextgisweb_frontend/commit/6f7f24c8c3046731b35bae28de20ab6452dbb9c8))
+
+
+### BREAKING CHANGES
+
+* **util:** CancelablePromise has been removed from ngw-connecter. Now you should do this: import {CancelablePromise} from '@nextgis/utils;'
+
+
+
+
+
 ## [0.25.5](https://github.com/nextgis/nextgisweb_frontend/compare/v0.25.4...v0.25.5) (2020-02-20)
 
 
