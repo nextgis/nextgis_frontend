@@ -1,22 +1,17 @@
 import { TileAdapterOptions } from '@nextgis/webmap';
-import {
-  Viewer as TViewer,
-  UrlTemplateImageryProvider,
-  ImageryLayer
-} from 'cesium';
+import { Viewer, UrlTemplateImageryProvider, ImageryLayer } from 'cesium';
 
 import { BaseAdapter } from './BaseAdapter';
-const Cesium = require('cesium');
 
 type Layer = UrlTemplateImageryProvider;
-type Map = TViewer;
+type Map = Viewer;
 
 export class TileAdapter extends BaseAdapter<TileAdapterOptions, Layer> {
   private _layer?: Layer;
 
   addLayer(opt: TileAdapterOptions) {
     this.options = { ...opt };
-    const layer = new Cesium.UrlTemplateImageryProvider({
+    const layer = new UrlTemplateImageryProvider({
       url: opt.url,
       credit: opt.attribution,
       maximumLevel: opt.maxZoom,

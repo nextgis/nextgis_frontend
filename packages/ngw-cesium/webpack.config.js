@@ -1,4 +1,5 @@
 const path = require('path');
+// const webpack = require('webpack');
 const package = require('./package.json');
 const common = require('../../build/webpack.config');
 const CopywebpackPlugin = require('copy-webpack-plugin');
@@ -16,9 +17,20 @@ module.exports = (env, argv) => {
     package
   })[0];
   config.output.sourcePrefix = '';
-  config.node = { fs: 'empty' };
-  config.amd = { toUrlUndefined: true };
-  // config.resolve.alias.cesium = path.resolve(__dirname, cesiumSource);
+  config.node = {
+    // Resolve node module use of fs
+    fs: 'empty',
+    Buffer: false,
+    http: 'empty',
+    https: 'empty',
+    zlib: 'empty'
+  };
+  config.resolve.mainFields = ['module', 'main'];
+
+  config.optimization = {
+    usedExports: true
+  };
+
   config.plugins = config.plugins || [];
   config.plugins.push(
     new CopywebpackPlugin([
@@ -35,5 +47,30 @@ module.exports = (env, argv) => {
       { from: path.join(cesiumSource, 'Widgets'), to: 'Widgets' }
     ])
   );
+  // config.plugins.push(
+  //   new webpack.DefinePlugin({
+  //     // Define relative base path in cesium for loading assets
+  //     CESIUM_BASE_URL: JSON.stringify('')
+  //   })
+  // );
+
+  const pragmaRule = {
+    // Strip cesium pragmas
+    test: /\.js$/,
+    enforce: 'pre',
+    include: path.resolve(__dirname, cesiumSource),
+    use: [
+      {
+        loader: 'strip-pragma-loader',
+        options: {
+          pragmas: {
+            debug: false
+          }
+        }
+      }
+    ]
+  };
+  config.module.rules.push(pragmaRule);
+  console.log(config);
   return config;
 };

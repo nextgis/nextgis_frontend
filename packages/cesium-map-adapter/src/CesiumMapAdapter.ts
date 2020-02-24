@@ -3,11 +3,15 @@
  */
 import { EventEmitter } from 'events';
 
-import { Viewer as TViewer } from 'cesium';
-
-const Cesium = require('cesium');
-
-const Viewer = Cesium.Viewer as Type<TViewer>;
+import {
+  Viewer,
+  // createWorldTerrain,
+  EllipsoidTerrainProvider,
+  SceneMode,
+  Ellipsoid,
+  Cartesian3,
+  Rectangle
+} from 'cesium';
 
 import {
   MapAdapter,
@@ -17,8 +21,7 @@ import {
   CreateControlOptions,
   ButtonControlOptions,
   LngLatArray,
-  LngLatBoundsArray,
-  Type
+  LngLatBoundsArray
 } from '@nextgis/webmap';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 import { TileAdapter } from './layer-adapters/TileAdapter';
@@ -46,12 +49,12 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
   emitter = new EventEmitter();
   options: MapOptions = {};
 
-  map?: TViewer;
+  map?: Viewer;
 
   create(options: MapOptions) {
     this.options = { ...options };
     if (this.options.target) {
-      const ellipsoidProvider = new Cesium.EllipsoidTerrainProvider();
+      const ellipsoidProvider = new EllipsoidTerrainProvider();
 
       const viewer = new Viewer(this.options.target, {
         animation: false,
@@ -64,8 +67,9 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
         infoBox: true,
         timeline: false,
         navigationHelpButton: false,
-        useBrowserRecommendedResolution: true,
-        sceneMode: Cesium.SceneMode.SCENE3D,
+        // useBrowserRecommendedResolution: true,
+        sceneMode: SceneMode.SCENE3D,
+        // terrainProvider: createWorldTerrain()
         terrainProvider: ellipsoidProvider
         // imageryProvider: tms,
         // mapProjection: new Cesium.WebMercatorProjection()
@@ -100,14 +104,9 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
   setCenter(lonLat: LngLatArray) {
     const viewer = this.map;
     if (viewer) {
-      const z = Cesium.Ellipsoid.WGS84.cartesianToCartographic(
-        viewer.camera.position
-      ).height;
-      const destination = Cesium.Cartesian3.fromDegrees(
-        lonLat[0],
-        lonLat[1],
-        z
-      );
+      const z = Ellipsoid.WGS84.cartesianToCartographic(viewer.camera.position)
+        .height;
+      const destination = Cartesian3.fromDegrees(lonLat[0], lonLat[1], z);
       viewer.camera.setView({
         destination
       });
@@ -129,12 +128,7 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
   fitBounds(e: LngLatBoundsArray) {
     if (this.map) {
       const [west, south, east, north] = e;
-      const destination = Cesium.Rectangle.fromDegrees(
-        west,
-        south,
-        east,
-        north
-      );
+      const destination = Rectangle.fromDegrees(west, south, east, north);
       this.map.camera.setView({ destination });
     }
   }
