@@ -26,6 +26,13 @@
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.6.9/core.min.js"></script>
   <!-- <script src="https://unpkg.com/@nextgis/ngw-cesium"></script> -->
+  <script>
+    // for development
+    // window.CESIUM_BASE_URL = '../../lib/';
+    // for prod
+    window.CESIUM_BASE_URL = 'https://unpkg.com/browse/@nextgis/ngw-cesium/lib/';
+    // window.CESIUM_BASE_URL = 'https://cesium.com/downloads/cesiumjs/releases/1.66/Build/Cesium';
+  </script>
   <script src="../../lib/ngw-cesium.js"></script>
 </head>
 
@@ -36,16 +43,16 @@
     var ngwMap = new NgwMap({
       baseUrl: 'https://demo.nextgis.com',
       target: 'map',
-      // qmsId: 487,
+      qmsId: 487,
       center: [102, 52]
     });
-    // ngwMap.addNgwLayer({
-    //   resource: 1733,
-    //   fit: true,
-    //   adapterOptions: {
-    //     limit: 100
-    //   }
-    // });
+    ngwMap.addNgwLayer({
+      resource: 1733,
+      fit: true,
+      adapterOptions: {
+        limit: 100
+      }
+    });
   </script>
 </body>
 

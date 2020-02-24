@@ -11,7 +11,6 @@ import {
 import { GeoJsonDataSource } from 'cesium';
 import { GeoJsonObject, Feature } from 'geojson';
 import { BaseAdapter, Map } from './BaseAdapter';
-const Cesium = require('cesium');
 
 type Layer = GeoJsonDataSource;
 
@@ -22,7 +21,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
   private _source?: GeoJsonDataSource;
 
   addLayer(options: GeoJsonAdapterOptions) {
-    const source = new Cesium.GeoJsonDataSource(options.id);
+    const source = new GeoJsonDataSource(options.id);
     this._source = source;
     if (options.data) {
       this.addData(options.data);
