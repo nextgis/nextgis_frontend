@@ -1,9 +1,9 @@
 {
   "name": "@nextgis/build-tools",
-  "version": "0.25.0",
+  "version": "0.25.6",
   "description": "",
   "dependencies": {
-    "@nextgis/eslint-config": "^0.25.0",
+    "@nextgis/eslint-config": "^0.25.6",
     "eslint-loader": "^3.0.3",
     "rimraf": "^3.0.1",
     "ts-loader": "^6.2.1",

@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.25.6](https://github.com/nextgis/nextgisweb_frontend/compare/v0.20.3...v0.25.6) (2020-02-24)
+
+
+### Bug Fixes
+
+* **demo:** remove layer id from ngw properties filter example ([4c3c625](https://github.com/nextgis/nextgisweb_frontend/commit/4c3c6253a47a4e1e55d3b19c5a75787d96705e69))
+
+
+### Features
+
+* **demo:** add new example for simple resource table ([43fdf4f](https://github.com/nextgis/nextgisweb_frontend/commit/43fdf4f69898680872fedece44c812ca407d1d8b))
+* **vue:** split vue-ngw-map for leaflet, ol an mapbox adapters ([b9dcb88](https://github.com/nextgis/nextgisweb_frontend/commit/b9dcb880140480b3557cde7bb91e761741889bf5))
+
+
+
+
+
 ## [0.25.5](https://github.com/nextgis/nextgisweb_frontend/compare/v0.25.4...v0.25.5) (2020-02-20)
 
 
