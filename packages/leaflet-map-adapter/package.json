@@ -9,8 +9,8 @@
   "dependencies": {
     "@nextgis/webmap": "^0.25.7",
     "@types/events": "^3.0.0",
-    "@types/leaflet": "^1.5.8",
-    "@types/node": "^13.7.0",
+    "@types/leaflet": "^1.5.9",
+    "@types/node": "^13.7.7",
     "events": "^3.1.0",
     "geojson": "^0.5.0",
     "leaflet": "1.6.0",
@@ -19,11 +19,11 @@
   "devDependencies": {
     "@nextgis/eslint-config": "^0.25.7",
     "eslint-loader": "^3.0.3",
-    "rimraf": "^3.0.1",
+    "rimraf": "^3.0.2",
     "ts-loader": "^6.2.1",
-    "typescript": "^3.7.5",
-    "webpack": "^4.41.5",
-    "webpack-cli": "^3.3.10"
+    "typescript": "^3.8.3",
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11"
   },
   "scripts": {
     "mjs": "tsc -d --outDir ./lib/modules",
