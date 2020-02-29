@@ -1,19 +1,19 @@
 {
   "name": "@nextgis/webmap",
-  "version": "0.25.7",
+  "version": "0.25.8",
   "_priority": 14,
   "description": "",
   "main": "lib/webmap.js",
   "unpkg": "lib/webmap.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/utils": "^0.25.7",
+    "@nextgis/utils": "^0.25.8",
     "@types/geojson": "^7946.0.7",
     "events": "^3.1.0",
     "strict-event-emitter-types": "^2.0.0"
   },
   "devDependencies": {
-    "@nextgis/eslint-config": "^0.25.7",
+    "@nextgis/eslint-config": "^0.25.8",
     "@types/events": "^3.0.0",
     "@types/node": "^13.7.7",
     "eslint-loader": "^3.0.3",

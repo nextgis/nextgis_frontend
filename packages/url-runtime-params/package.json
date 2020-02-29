@@ -1,15 +1,15 @@
 {
   "name": "@nextgis/url-runtime-params",
-  "version": "0.25.7",
+  "version": "0.25.8",
   "description": "",
   "main": "lib/url-runtime-params.js",
   "unpkg": "lib/url-runtime-params.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/webmap": "^0.25.7"
+    "@nextgis/webmap": "^0.25.8"
   },
   "devDependencies": {
-    "@nextgis/eslint-config": "^0.25.7",
+    "@nextgis/eslint-config": "^0.25.8",
     "@types/events": "^3.0.0",
     "@types/node": "^13.7.7",
     "eslint-loader": "^3.0.3",
