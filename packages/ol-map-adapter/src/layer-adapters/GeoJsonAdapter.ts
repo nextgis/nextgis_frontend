@@ -17,7 +17,7 @@ import { ForEachFeatureAtPixelCallback } from '../OlMapAdapter';
 import * as ol from 'ol';
 import Base from 'ol/layer/Base';
 import { styleFunction, labelStyleFunction, getFeature } from '../utils/utils';
-import { getResolution } from '../utils/gerResolution';
+import { resolutionOptions } from '../utils/gerResolution';
 
 type Layer = Base;
 
@@ -62,14 +62,7 @@ export class GeoJsonAdapter
         }
         return style;
       },
-      minResolution:
-        (this.options.maxScale &&
-          getResolution(this.map, this.options.maxScale)) ||
-        undefined,
-      maxResolution:
-        (this.options.minScale &&
-          getResolution(this.map, this.options.minScale)) ||
-        undefined
+      ...resolutionOptions(this.map, options)
     });
 
     if (options.selectable) {

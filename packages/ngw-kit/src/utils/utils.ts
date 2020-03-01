@@ -13,12 +13,12 @@ import {
   NgwLayerOptions,
   WebMapAdapterOptions,
   IdentifyRequestOptions,
-  ResourceAdapter,
-  ResourceIdNgwLayerOptions
+  ResourceAdapter
 } from '../interfaces';
+import { getLayerAdapterOptions as getLayerAdapterOptions_ } from './getLayerAdapterOptions';
 import { WebMapLayerAdapter } from '../WebMapLayerAdapter';
 
-export function updateWmsParams(params: any, resourceId: number) {
+export function updateImageParams(params: any, resourceId: number) {
   const { bbox, width, height } = params;
   return {
     resource: resourceId,
@@ -28,59 +28,13 @@ export function updateWmsParams(params: any, resourceId: number) {
   };
 }
 
+/** @deprecated */
 export function getLayerAdapterOptions(
   options: NgwLayerOptions,
   webMap: WebMap,
   baseUrl: string
 ) {
-  let adapter = options.adapter || 'IMAGE';
-  let url: string;
-  const layerAdapters = webMap.getLayerAdapters();
-  const isImageAllowed = layerAdapters ? layerAdapters.IMAGE : true;
-
-  // const keyname = (options as KeynamedNgwLayerOptions).keyname;
-  const resourceId = (options as ResourceIdNgwLayerOptions).resourceId;
-  // if (!resourceId && keyname) {
-  //   const resourceItem = await connector.getResourceByKeyname(keyname);
-  //   resourceId = resourceItem.resource.id;
-  // }
-  if (resourceId) {
-    if (adapter === 'IMAGE') {
-      if (isImageAllowed) {
-        url = baseUrl + '/api/component/render/image';
-        return {
-          url,
-          resourceId,
-          headers: options.headers,
-          updateWmsParams: (params: any) => updateWmsParams(params, resourceId)
-        };
-      } else {
-        adapter = 'TILE';
-      }
-    }
-    if (adapter === 'MVT') {
-      url =
-        baseUrl +
-        '/api/component/feature_layer/mvt?x={x}&y={y}&z={z}&' +
-        'resource=' +
-        resourceId +
-        '&simplification=' +
-        (options.simplification || 0);
-      // url = baseUrl + '/api/resource/' + options.resourceId + '/{z}/{x}/{y}.mvt';
-      return {
-        url
-      };
-    }
-    if (adapter === 'TILE') {
-      url =
-        baseUrl +
-        '/api/component/render/tile?z={z}&x={x}&y={y}&resource=' +
-        resourceId;
-      return { url, adapter };
-    }
-  } else {
-    console.log('Options `resourceId` not set');
-  }
+  return getLayerAdapterOptions_(options, webMap, baseUrl);
 }
 
 export function addNgwLayer(

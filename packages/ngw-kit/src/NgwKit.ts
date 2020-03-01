@@ -8,7 +8,7 @@ import {
   getNgwResourceExtent,
   sendIdentifyRequest,
   pixelsInMeterWidth,
-  updateWmsParams,
+  updateImageParams,
   getLayerAdapterOptions,
   addNgwLayer,
   extendWebMapLayerAdapter,
@@ -47,7 +47,7 @@ export class NgwKit implements StarterKit {
     setScaleRatio
   };
 
-  static updateWmsParams = updateWmsParams;
+  static updateWmsParams = updateImageParams;
 
   static getLayerAdapterOptions = getLayerAdapterOptions;
 
