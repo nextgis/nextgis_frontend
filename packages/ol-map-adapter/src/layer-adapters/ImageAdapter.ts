@@ -4,7 +4,7 @@ import ImageLayer from 'ol/layer/Image';
 import Map from 'ol/Map';
 import { queryToObject, objectToQuery } from '../utils/utils';
 import { setTileLoadFunction } from '../utils/setTileLoadFunction';
-import { getResolution } from '../utils/gerResolution';
+import { resolutionOptions } from '../utils/gerResolution';
 
 export class ImageAdapter implements BaseLayerAdapter {
   layer: any;
@@ -50,14 +50,7 @@ export class ImageAdapter implements BaseLayerAdapter {
 
     const layer = new ImageLayer({
       source,
-      minResolution:
-        (this.options.maxScale &&
-          getResolution(this.map, this.options.maxScale)) ||
-        undefined,
-      maxResolution:
-        (this.options.minScale &&
-          getResolution(this.map, this.options.minScale)) ||
-        undefined
+      ...resolutionOptions(this.map, options)
     });
     this.layer = layer;
     return layer;

@@ -1,10 +1,20 @@
 import { Map } from 'ol';
+import { AdapterOptions } from '@nextgis/webmap';
 
 const DPI = 1000 / 39.37 / 0.28;
 const IPM = 39.37;
 
 function getResolutionForScale(scale: number, metersPerUnit: number) {
   return scale / (metersPerUnit * IPM * DPI);
+}
+
+export function resolutionOptions(map: Map, opt: AdapterOptions) {
+  return {
+    minResolution:
+      (opt.maxScale && getResolution(map, opt.maxScale)) || undefined,
+    maxResolution:
+      (opt.minScale && getResolution(map, opt.minScale)) || undefined
+  };
 }
 
 export function getResolution(map: Map, scale: number) {

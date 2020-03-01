@@ -17,6 +17,7 @@ const styles: ResourceCls[] = [
   'mapserver_style',
   'qgis_vector_style',
   'qgis_raster_style',
+  'wmsserver_service',
   'raster_style'
 ];
 
@@ -68,7 +69,13 @@ export async function createAsyncAdapter(
             };
             adapter = createGeoJsonAdapter(parentOptions, webMap, connector);
           } else {
-            adapter = createRasterAdapter(_options, webMap, baseUrl, connector);
+            adapter = createRasterAdapter(
+              _options,
+              webMap,
+              baseUrl,
+              connector,
+              item.resource.cls
+            );
           }
         } else if (item.resource.cls === 'vector_layer') {
           if (adapterType !== undefined && adapterType !== 'GEOJSON') {
@@ -77,7 +84,8 @@ export async function createAsyncAdapter(
                 _options,
                 webMap,
                 baseUrl,
-                connector
+                connector,
+                item.resource.cls
               );
             } else {
               return createAdapterFromFirstStyle(

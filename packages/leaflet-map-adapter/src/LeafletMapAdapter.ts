@@ -32,6 +32,7 @@ import { ImageAdapter } from './layer-adapters/ImageAdapter/ImageAdapter';
 import { createControl } from './controls/createControl';
 import { createButtonControl } from './controls/createButtonControl';
 import { convertMapClickEvent } from './utils/utils';
+import { WmsAdapter } from './layer-adapters/WmsAdapter/WmsAdapter';
 
 export type Type<T> = new (...args: any[]) => T;
 
@@ -41,7 +42,8 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   } = {
     IMAGE: ImageAdapter,
     TILE: TileAdapter,
-    GEOJSON: GeoJsonAdapter
+    GEOJSON: GeoJsonAdapter,
+    WMS: WmsAdapter
     // // MVT: MvtAdapter,
     // OSM: OsmAdapter,
   };
