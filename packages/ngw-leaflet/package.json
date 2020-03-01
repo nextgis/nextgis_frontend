@@ -1,19 +1,19 @@
 {
   "name": "@nextgis/ngw-leaflet",
   "_priority": 10,
-  "version": "0.25.8",
+  "version": "0.26.0",
   "description": "",
   "main": "lib/ngw-leaflet.js",
   "unpkg": "lib/ngw-leaflet.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/leaflet-map-adapter": "^0.25.8",
-    "@nextgis/ngw-map": "^0.25.8",
+    "@nextgis/leaflet-map-adapter": "^0.26.0",
+    "@nextgis/ngw-map": "^0.26.0",
     "leaflet": "1.6.0",
     "leaflet.wms": "^0.2.0"
   },
   "devDependencies": {
-    "@nextgis/eslint-config": "^0.25.8",
+    "@nextgis/eslint-config": "^0.26.0",
     "@types/events": "^3.0.0",
     "@types/node": "^13.7.7",
     "base64-inline-loader": "^1.1.1",
