@@ -3,7 +3,7 @@ import { ResourceItem } from '@nextgis/ngw-connector';
 import { fixUrlStr, CancelablePromise } from '@nextgis/utils';
 import {
   getLayerAdapterOptions,
-  updateWmsParams,
+  updateImageParams,
   sendIdentifyRequest,
   getWebMapExtent
 } from './utils/utils';
@@ -199,7 +199,7 @@ export class WebMapLayerAdapter implements ResourceAdapter {
         const resourceId = item.layer_style_id;
         item.url = url;
         item.resourceId = resourceId;
-        item.updateWmsParams = params => updateWmsParams(params, resourceId);
+        item.updateWmsParams = params => updateImageParams(params, resourceId);
         item = {
           ...item,
           ...getLayerAdapterOptions(

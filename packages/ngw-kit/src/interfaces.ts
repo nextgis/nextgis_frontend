@@ -16,7 +16,7 @@ import NgwConnector, { ResourceItem } from '@nextgis/ngw-connector';
 import { FeatureLayersIdentify } from '@nextgis/ngw-connector';
 import { Feature } from 'geojson';
 
-export type NgwLayerAdapterType = 'IMAGE' | 'TILE' | 'GEOJSON' | 'MVT';
+export type NgwLayerAdapterType = 'IMAGE' | 'TILE' | 'GEOJSON' | 'MVT' | 'WMS';
 
 export interface AppSettings {
   extent_left?: number;
@@ -66,6 +66,7 @@ export interface NgwLayerOptionsAdditional<
 > {
   id?: string;
   adapter?: T;
+  layers?: string;
   adapterOptions?: LayerAdaptersOptions[T];
   headers?: any;
   fit?: boolean;

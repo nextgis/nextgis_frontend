@@ -35,6 +35,7 @@ import { AttributionControl } from './controls/AttributionControl';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 import { createControl } from './controls/createControl';
 import { createButtonControl } from './controls/createButtonControl';
+import { WmsAdapter } from './layer-adapters/WmsAdapter';
 
 export type TLayer = string[];
 type TLayerAdapter = LayerAdapter<Map, TLayer>;
@@ -51,6 +52,7 @@ export interface MapboxglMapAdapterOptions extends MapOptions {
 export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   static layerAdapters = {
     TILE: TileAdapter,
+    WMS: WmsAdapter,
     // IMAGE: TileAdapter,
     MVT: MvtAdapter,
     OSM: OsmAdapter,

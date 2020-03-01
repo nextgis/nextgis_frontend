@@ -1,21 +1,33 @@
-import { NgwLayerOptions, ResourceAdapter } from './interfaces';
+import {
+  NgwLayerOptions,
+  ResourceAdapter,
+  NgwLayerAdapterType
+} from './interfaces';
 import WebMap, {
   BaseLayerAdapter,
   Type,
   ImageAdapterOptions,
   TileAdapterOptions
 } from '@nextgis/webmap';
-import { getLayerAdapterOptions } from './utils/utils';
-import NgwConnector, { ResourceItem } from '@nextgis/ngw-connector';
+import { getLayerAdapterOptions } from './utils/getLayerAdapterOptions';
+import NgwConnector, {
+  ResourceItem,
+  ResourceCls
+} from '@nextgis/ngw-connector';
 import { resourceIdFromLayerOptions } from './utils/resourceIdFromLayerOptions';
 
 export async function createRasterAdapter(
   options: NgwLayerOptions,
   webMap: WebMap,
   baseUrl: string,
-  connector: NgwConnector
+  connector: NgwConnector,
+  resourceCls?: ResourceCls
 ): Promise<Type<BaseLayerAdapter> | undefined> {
-  let adapter = options.adapter || 'IMAGE';
+  let adapter: NgwLayerAdapterType =
+    options.adapter || (resourceCls === 'wmsserver_service' ? 'WMS' : 'IMAGE');
+  if (adapter !== undefined) {
+    options.adapter = adapter;
+  }
 
   if (adapter === 'IMAGE') {
     const layerAdapters = webMap.getLayerAdapters();
@@ -24,10 +36,11 @@ export async function createRasterAdapter(
       adapter = 'TILE';
     }
   }
-  if (adapter === 'IMAGE' || adapter === 'TILE' || adapter === 'MVT') {
-    const adapterClass = webMap.mapAdapter.layerAdapters[adapter] as Type<
-      BaseLayerAdapter
-    >;
+
+  const adapterClass = webMap.mapAdapter.layerAdapters[adapter] as Type<
+    BaseLayerAdapter
+  >;
+  if (adapterClass) {
     const resourceId = await resourceIdFromLayerOptions(options, connector);
     return class Adapter extends adapterClass implements ResourceAdapter {
       // options = {};
@@ -41,6 +54,7 @@ export async function createRasterAdapter(
           if (opt.resourceId) {
             const layerAdapterOptions: ImageAdapterOptions = {
               ...opt,
+              layers: String(opt.resourceId),
               resourceId: opt.resourceId
             };
             this.options = { ...this.options, ...layerAdapterOptions };

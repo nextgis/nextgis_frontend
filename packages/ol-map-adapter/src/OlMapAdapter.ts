@@ -36,6 +36,7 @@ import { PanelControl } from './controls/PanelControl';
 import { createControl } from './controls/createControl';
 import { createButtonControl } from './controls/createButtonControl';
 import { Extent } from 'ol/extent';
+import { WmsAdapter } from './layer-adapters/WmsAdapter';
 
 type Layer = Base;
 
@@ -55,6 +56,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
   static layerAdapters = {
     IMAGE: ImageAdapter,
     TILE: TileAdapter,
+    WMS: WmsAdapter,
     // MVT: MvtAdapter,
     OSM: OsmAdapter,
     GEOJSON: GeoJsonAdapter

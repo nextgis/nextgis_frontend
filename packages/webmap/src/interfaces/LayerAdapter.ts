@@ -235,16 +235,13 @@ export interface VectorAdapterOptions<F extends Feature = Feature, L = any>
   onLayerClick?(opt: OnLayerClickOptions): Promise<any>;
 }
 
-/**
- * Options to crateing styling and defining selection behavior.
- */
 export interface GeoJsonAdapterOptions<F extends Feature = Feature, L = any>
   extends VectorAdapterOptions<F, L> {
   /** Geojson data */
   data?: GeoJsonObject;
 }
 
-interface RasterAdapterOptions extends AdapterOptions {
+export interface RasterAdapterOptions extends AdapterOptions {
   url: string;
   subdomains?: string;
   headers?: Record<string, any>;
@@ -254,25 +251,35 @@ export interface TileAdapterOptions extends RasterAdapterOptions {
   tileSize?: number;
 }
 
-export interface ImageAdapterOptions extends RasterAdapterOptions {
-  resourceId: string | number;
+export interface WmsAdapterOptions extends RasterAdapterOptions {
+  layers?: string;
+  format?: 'image/png' | 'image/jpeg' | string;
+  version?: string;
+  tileSize?: number;
   updateWmsParams?: (obj: { [paramName: string]: any }) => object;
   transparent?: boolean;
+}
+
+export interface ImageAdapterOptions extends WmsAdapterOptions {
+  /** @deprecated use `layer` option instead */
+  resourceId?: string | number;
 }
 
 export interface LayerAdapters {
   [name: string]: BaseLayerAdapter;
   MVT: VectorLayerAdapter;
-  IMAGE: BaseLayerAdapter;
+  IMAGE: BaseLayerAdapter<any, any, ImageAdapterOptions>;
+  WMS: BaseLayerAdapter<any, any, WmsAdapterOptions>;
   OSM: BaseLayerAdapter;
-  TILE: BaseLayerAdapter;
-  GEOJSON: VectorLayerAdapter;
+  TILE: BaseLayerAdapter<any, any, TileAdapterOptions>;
+  GEOJSON: VectorLayerAdapter<any, any, GeoJsonAdapterOptions>;
 }
 
 export interface LayerAdaptersOptions {
   [name: string]: AdapterOptions;
   MVT: MvtAdapterOptions;
   IMAGE: ImageAdapterOptions;
+  WMS: WmsAdapterOptions;
   OSM: RasterAdapterOptions;
   TILE: TileAdapterOptions;
   GEOJSON: GeoJsonAdapterOptions;
