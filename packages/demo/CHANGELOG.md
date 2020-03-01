@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.26.0](https://github.com/nextgis/nextgis_frontend_apps/compare/v0.25.8...v0.26.0) (2020-03-01)
+
+
+### Features
+
+* add WmsLayerAdapter ([c57b66d](https://github.com/nextgis/nextgis_frontend_apps/commit/c57b66d2278071a57182cb4dd554e370c63ffa06))
+
+
+
+
+
 ## [0.25.8](https://github.com/nextgis/nextgis_frontend_apps/compare/v0.25.7...v0.25.8) (2020-02-29)
 
 **Note:** Version bump only for package @nextgis/demo-app
