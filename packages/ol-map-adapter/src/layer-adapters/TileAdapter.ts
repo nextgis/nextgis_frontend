@@ -1,7 +1,9 @@
-import { BaseLayerAdapter, TileAdapterOptions } from '@nextgis/webmap';
-import TileLayer from 'ol/layer/Tile';
-import XYZ from 'ol/source/XYZ';
 import Map from 'ol/Map';
+import XYZ from 'ol/source/XYZ';
+import TileLayer from 'ol/layer/Tile';
+
+import { BaseLayerAdapter, TileAdapterOptions } from '@nextgis/webmap';
+
 import { setTileLoadFunction } from '../utils/setTileLoadFunction';
 import { resolutionOptions } from '../utils/gerResolution';
 

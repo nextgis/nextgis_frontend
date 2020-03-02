@@ -1,23 +1,25 @@
-import {
-  GeoJsonAdapterOptions,
-  VectorAdapterLayerPaint,
-  GetPaintCallback,
-  VectorLayerAdapter,
-  DataLayerFilter,
-  PropertiesFilter
-} from '@nextgis/webmap';
 import Map from 'ol/Map';
+import Base from 'ol/layer/Base';
 import GeoJSON from 'ol/format/GeoJSON';
+import { Feature as OlFeature } from 'ol';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 
 import { Feature, GeoJsonObject } from 'geojson';
-import { ForEachFeatureAtPixelCallback } from '../OlMapAdapter';
 
-import * as ol from 'ol';
-import Base from 'ol/layer/Base';
-import { styleFunction, labelStyleFunction, getFeature } from '../utils/utils';
+import {
+  DataLayerFilter,
+  PropertiesFilter,
+  GetPaintCallback,
+  VectorLayerAdapter,
+  GeoJsonAdapterOptions,
+  VectorAdapterLayerPaint
+} from '@nextgis/webmap';
+
 import { resolutionOptions } from '../utils/gerResolution';
+import { styleFunction, labelStyleFunction, getFeature } from '../utils/utils';
+
+import { ForEachFeatureAtPixelCallback } from '../OlMapAdapter';
 
 type Layer = Base;
 
@@ -29,8 +31,8 @@ export class GeoJsonAdapter
   selected = false;
 
   private vectorSource = new VectorSource();
-  private _features: ol.Feature[] = [];
-  private _selectedFeatures: ol.Feature[] = [];
+  private _features: OlFeature[] = [];
+  private _selectedFeatures: OlFeature[] = [];
   private _filterFun?: DataLayerFilter<Feature>;
 
   constructor(public map: Map, public options: GeoJsonAdapterOptions) {}
@@ -49,7 +51,7 @@ export class GeoJsonAdapter
     this.layer = new VectorLayer({
       source: this.vectorSource,
       style: f => {
-        const vectorStyle = styleFunction(f as ol.Feature, options.paint);
+        const vectorStyle = styleFunction(f as OlFeature, options.paint);
         const style = [vectorStyle];
         const labelField = this.options.labelField;
         if (labelField) {
@@ -192,7 +194,7 @@ export class GeoJsonAdapter
     });
   }
 
-  private _onFeatureClick(feature: ol.Feature) {
+  private _onFeatureClick(feature: OlFeature) {
     let isSelected = this._selectedFeatures.indexOf(feature) !== -1;
     if (isSelected) {
       if (this.options && this.options.unselectOnSecondClick) {
@@ -213,7 +215,7 @@ export class GeoJsonAdapter
     }
   }
 
-  private _selectFeature(feature: ol.Feature) {
+  private _selectFeature(feature: OlFeature) {
     const options = this.options;
     if (options && !options.multiselect) {
       this._selectedFeatures.forEach(x => this._unselectFeature(x));
@@ -225,7 +227,7 @@ export class GeoJsonAdapter
     }
   }
 
-  private _unselectFeature(feature: ol.Feature) {
+  private _unselectFeature(feature: OlFeature) {
     const index = this._selectedFeatures.indexOf(feature);
     if (index !== -1) {
       this._selectedFeatures.splice(index, 1);
