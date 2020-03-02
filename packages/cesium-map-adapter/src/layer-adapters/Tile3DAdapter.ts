@@ -1,3 +1,6 @@
+/**
+ * @module cesium-map-adapter
+ */
 import {
   VectorLayerAdapter,
   DataLayerFilter,

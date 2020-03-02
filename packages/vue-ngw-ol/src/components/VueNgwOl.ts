@@ -1,3 +1,6 @@
+/**
+ * @module vue-ngw-ol
+ */
 import 'ol/ol.css';
 import Map from 'ol/Map';
 import { Mixins, Prop } from 'vue-property-decorator';

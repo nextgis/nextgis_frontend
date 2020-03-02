@@ -1,3 +1,6 @@
+/**
+ * @module vue-ngw-mapbox
+ */
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 import { Map } from 'mapbox-gl';

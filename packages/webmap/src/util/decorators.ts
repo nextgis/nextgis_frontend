@@ -1,3 +1,7 @@
+/**
+ * @module webmap
+ */
+
 import { WebMap } from '../WebMap';
 import { WebMapEvents } from '../interfaces/Events';
 

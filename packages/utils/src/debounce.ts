@@ -1,3 +1,6 @@
+/**
+ * @module utils
+ */
 export function debounce<T extends Function>(cb: T, wait = 10) {
   let h = 0;
   const callable = (...args: any) => {

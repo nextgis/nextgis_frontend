@@ -1,3 +1,6 @@
+/**
+ * @module webmap
+ */
 import { LngLatBoundsArray } from '../interfaces/BaseTypes';
 import { Feature, Polygon } from 'geojson';
 

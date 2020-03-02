@@ -1,3 +1,6 @@
+/**
+ * @module utils
+ */
 export function deepmerge(target: any, src: any, mergeArray = false): any {
   const array = Array.isArray(src);
   let dst: any = (array && []) || {};

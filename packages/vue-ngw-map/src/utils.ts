@@ -1,3 +1,6 @@
+/**
+ * @module vue-ngw-map
+ */
 import Vue from 'vue';
 import VueNgwMap from './components/VueNgwMap';
 
