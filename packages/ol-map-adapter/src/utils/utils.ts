@@ -15,8 +15,6 @@ import {
   VectorAdapterLayerPaint
 } from '@nextgis/webmap';
 
-type OlStyle = Style | Style[];
-
 const typeAlias: { [x: string]: VectorAdapterLayerType } = {
   Point: 'circle',
   MultiPoint: 'circle',

@@ -1,0 +1,33 @@
+/* Openlayers fixes */
+
+.ol-control { clear: both; pointer-events: auto; }
+
+.webmap-control-container .ol-control {
+  position: relative;
+  top: inherit;
+  left: inherit;
+  bottom: inherit;
+  right: inherit;
+}
+
+.webmap-control-container .ol-attribution {
+  padding: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+  bottom: inherit;
+  right: inherit;
+  white-space: nowrap;
+  max-width: 100%
+}
+
+.webmap-control-container .ol-attribution.ol-uncollapsible {
+  bottom: inherit;
+  right: inherit;
+}
+
+
+
+
+
+
+
