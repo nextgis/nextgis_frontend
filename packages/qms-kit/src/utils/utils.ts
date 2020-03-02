@@ -1,3 +1,6 @@
+/**
+ * @module qms-kit
+ */
 import { LayerAdaptersOptions, AdapterOptions } from '@nextgis/webmap';
 import { fixUrlStr } from '@nextgis/utils';
 import { QmsBasemap, QmsLayerType } from '../interfaces';

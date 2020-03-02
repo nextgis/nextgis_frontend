@@ -1,3 +1,6 @@
+/**
+ * @module webmap
+ */
 export class KeyCodes {
   'backspace' = 8;
   'tab' = 9;

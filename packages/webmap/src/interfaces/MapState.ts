@@ -1,8 +1,7 @@
-import { WebMapEvents } from './Events';
-
 /**
  * @module webmap
  */
+import { WebMapEvents } from './Events';
 export interface MapStateItem<V extends any = any> {
   event: keyof WebMapEvents;
   name: string;

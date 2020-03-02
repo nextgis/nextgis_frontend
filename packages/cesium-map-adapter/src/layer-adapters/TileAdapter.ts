@@ -1,3 +1,6 @@
+/**
+ * @module cesium-map-adapter
+ */
 import { TileAdapterOptions } from '@nextgis/webmap';
 import { Viewer, UrlTemplateImageryProvider, ImageryLayer } from 'cesium';
 

@@ -1,3 +1,6 @@
+/**
+ * @module utils
+ */
 import { ControlPositions } from '@nextgis/webmap';
 import './MapControlContainer.css';
 

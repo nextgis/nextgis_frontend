@@ -1,6 +1,5 @@
 /**
  * @module webmap
- * @preferred
  */
 
 import { WebMap } from './WebMap';

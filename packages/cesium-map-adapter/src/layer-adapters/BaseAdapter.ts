@@ -1,5 +1,5 @@
 /**
- * @module leaflet-map-adapter
+ * @module cesium-map-adapter
  */
 import { BaseLayerAdapter, AdapterOptions } from '@nextgis/webmap';
 import { Viewer as TViewer } from 'cesium';

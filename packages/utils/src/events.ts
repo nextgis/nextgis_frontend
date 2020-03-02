@@ -1,3 +1,6 @@
+/**
+ * @module utils
+ */
 import { EventEmitter } from 'events';
 
 export class Events<E = any> {

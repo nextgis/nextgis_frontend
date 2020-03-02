@@ -1,3 +1,6 @@
+/**
+ * @module webmap
+ */
 import { StateItem } from './StateItem';
 import { WebMapEvents } from '../../interfaces/Events';
 import { LngLatArray } from '../../interfaces/BaseTypes';
