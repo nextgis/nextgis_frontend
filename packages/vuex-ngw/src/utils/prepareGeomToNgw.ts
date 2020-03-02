@@ -1,6 +1,10 @@
+/**
+ * @module vuex-ngw
+ */
 import wellknown from 'wellknown';
 // @ts-ignore
 import { reproject } from 'reproject';
+// @ts-ignore
 import proj4 from 'proj4';
 import { GeoJsonObject } from 'geojson';
 

@@ -1,3 +1,6 @@
+/**
+ * @module vuex-ngw
+ */
 import { Geometry, GeoJsonProperties, Feature } from 'geojson';
 import { VuexModule, Mutation, Action, Module } from 'vuex-module-decorators';
 import { Store } from 'vuex';

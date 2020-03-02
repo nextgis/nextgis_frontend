@@ -1,3 +1,6 @@
+/**
+ * @module qms-kit
+ */
 import { WebMap, BaseLayerAdapter } from '@nextgis/webmap';
 import { Type, mixinProperties } from '@nextgis/utils';
 import { QmsAdapterOptions, QmsBasemap, QmsAdapter as QA } from '../interfaces';

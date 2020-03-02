@@ -75,7 +75,7 @@ export interface Pixel {
  * Available argument types for methods with map layers identification.
  *
  * @example
- * ```geojson
+ * ```javascript
  * webMap.addLayer('GEOJSON', { id: 'my_layer' }).then((layer) =>{
  *   webMap.addLayerData(layer, geojson);
  *   webMap.addLayerData('my_layer', geojson);

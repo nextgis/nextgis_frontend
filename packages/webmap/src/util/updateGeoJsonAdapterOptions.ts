@@ -1,3 +1,6 @@
+/**
+ * @module webmap
+ */
 import {
   GeoJsonAdapterOptions,
   VectorAdapterLayerType

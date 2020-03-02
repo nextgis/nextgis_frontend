@@ -1,3 +1,6 @@
+/**
+ * @module utils
+ */
 import { Feature, GeoJsonProperties } from 'geojson';
 
 /**

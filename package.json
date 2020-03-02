@@ -12,7 +12,7 @@
     "examples": "node ./build/updateExamples.js",
     "test": "npm run karma -- --single-run --coverage",
     "karma": "karma start test/karma.conf.js",
-    "doc": "typedoc --options ./typedoc.json ./packages",
+    "docs": "rimraf docs && typedoc",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "publish": "lerna publish from-package",
     "patch": "lerna version patch --conventional-commits -m \"chore(release): publish %s\" --no-push --create-release github",
@@ -43,7 +43,7 @@
     "sinon-chai": "^3.5.0",
     "ts-loader": "^6.2.1",
     "typedoc": "^0.16.11",
-    "typedoc-plugin-external-module-name": "^3.0.0",
+    "typedoc-plugin-lerna-packages": "^0.3.0",
     "typescript": "^3.8.3",
     "webpack": "^4.41.6",
     "webpack-cli": "^3.3.11",
@@ -62,6 +62,5 @@
   "license": "LGPL-3.0",
   "workspaces": [
     "packages/*"
-  ],
-  "dependencies": {}
+  ]
 }
