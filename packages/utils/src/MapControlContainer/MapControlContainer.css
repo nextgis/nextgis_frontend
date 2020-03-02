@@ -1,0 +1,63 @@
+.webmap-ctrl-top-left,
+.webmap-ctrl-top-right,
+.webmap-ctrl-bottom-left,
+.webmap-ctrl-bottom-right { position: absolute; pointer-events: none; z-index: 2; }
+.webmap-ctrl-top-left     { top: 0; left: 0; }
+.webmap-ctrl-top-right    { top: 0; right: 0; }
+.webmap-ctrl-bottom-left  { bottom: 0; left: 0; }
+.webmap-ctrl-bottom-right { right: 0; bottom: 0; }
+
+.webmap-ctrl { clear: both; pointer-events: auto; }
+.webmap-ctrl-top-left .ol-control-margin     { margin: 10px 0 0 10px; float: left; }
+.webmap-ctrl-top-right .ol-control-margin    { margin: 10px 10px 0 0; float: right; }
+.webmap-ctrl-bottom-left .ol-control-margin  { margin: 0 0 10px 10px; float: left; }
+.webmap-ctrl-bottom-right .ol-control-margin { margin: 0 10px 10px 0; float: right; }
+
+.webmap-ctrl-top-left .ol-control     { margin: 10px 0 0 10px; float: left; }
+.webmap-ctrl-top-right .ol-control    { margin: 10px 10px 0 0; float: right; }
+.webmap-ctrl-bottom-left .ol-control  { margin: 0 0 10px 10px; float: left; }
+.webmap-ctrl-bottom-right .ol-control { margin: 0 10px 10px 0; float: right; }
+
+.webmap-ctrl-group {
+    border-radius: 4px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.webmap-ctrl-group:not(:empty) {
+    -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+.webmap-ctrl-group > button {
+    width: 30px;
+    height: 30px;
+    display: block;
+    padding: 0;
+    outline: none;
+    border: 0;
+    box-sizing: border-box;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.webmap-ctrl-group > button + button {
+    border-top: 1px solid #ddd;
+}
+
+/* https://bugzilla.mozilla.org/show_bug.cgi?id=140562 */
+.webmap-ctrl > button::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+.webmap-ctrl > button:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.webmap-ctrl-icon {
+    padding: 5px;
+}
+
+

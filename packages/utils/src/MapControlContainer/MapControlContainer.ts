@@ -1,7 +1,13 @@
 import { ControlPositions } from '@nextgis/webmap';
-import './PanelContainerElement.css';
+import './MapControlContainer.css';
 
-export class PanelContainerElement {
+export interface MapControlContainerOptions {
+  classPrefix?: string;
+}
+
+export class MapControlContainer {
+  private readonly classPrefix: string = 'webmap';
+
   private _container: HTMLElement;
   private _positionsContainers: {
     [key in ControlPositions]: HTMLElement | null;
@@ -12,7 +18,10 @@ export class PanelContainerElement {
     'top-right': null
   };
 
-  constructor() {
+  constructor(opt: MapControlContainerOptions = {}) {
+    if (opt.classPrefix) {
+      this.classPrefix = opt.classPrefix;
+    }
     this._container = this.createContainerElement();
   }
 
@@ -57,7 +66,7 @@ export class PanelContainerElement {
 
   private createContainerElement(): HTMLElement {
     const element = document.createElement('div');
-    element.className = 'openlayers-control-container';
+    element.className = `${this.classPrefix}-control-container`;
 
     const positions: ControlPositions[] = [
       'top-right',
@@ -76,7 +85,7 @@ export class PanelContainerElement {
 
   private _createPositionContainer(position: ControlPositions): HTMLElement {
     const positionContainer = document.createElement('div');
-    positionContainer.className = 'openlayers-ctrl-' + position;
+    positionContainer.className = `${this.classPrefix}-ctrl-${position}`;
     return positionContainer;
   }
 }
