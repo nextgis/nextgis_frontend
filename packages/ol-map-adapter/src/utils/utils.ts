@@ -1,20 +1,19 @@
-import {
-  VectorAdapterLayerPaint,
-  GetPaintCallback,
-  GeometryPaint,
-  VectorAdapterLayerType
-} from '@nextgis/webmap';
+import { Feature } from 'geojson';
 import GeoJSON from 'ol/format/GeoJSON';
 import CircleStyle from 'ol/style/Circle';
+import { asArray, Color } from 'ol/color';
+import { Feature as OlFeature } from 'ol';
 import { Fill, Stroke, Style, Text } from 'ol/style';
 import { Options as TextOptions } from 'ol/style/Text';
-import Icon, { Options as IconOptions } from 'ol/style/Icon';
 import IconAnchorUnits from 'ol/style/IconAnchorUnits';
+import Icon, { Options as IconOptions } from 'ol/style/Icon';
 
-import { asArray, Color } from 'ol/color';
-import { Feature } from 'geojson';
-
-import * as ol from 'ol';
+import {
+  GeometryPaint,
+  GetPaintCallback,
+  VectorAdapterLayerType,
+  VectorAdapterLayerPaint
+} from '@nextgis/webmap';
 
 type OlStyle = Style | Style[];
 
@@ -28,7 +27,7 @@ const typeAlias: { [x: string]: VectorAdapterLayerType } = {
   Circle: 'circle'
 };
 
-export function getFeature(feature: ol.Feature): Feature {
+export function getFeature(feature: OlFeature): Feature {
   const geojson = new GeoJSON();
   // @ts-ignore writeFeatureObject return JSON type, need Feature
   return geojson.writeFeatureObject(feature, {
@@ -45,7 +44,7 @@ export function getColor(colorStr: string, opacity?: number): Color {
 }
 
 export function styleFunction(
-  feature: ol.Feature,
+  feature: OlFeature,
   paint: VectorAdapterLayerPaint | GetPaintCallback = {}
 ): Style {
   if (typeof paint === 'function') {

@@ -1,10 +1,12 @@
-import { BaseLayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
-import ImageWMS, { Options as ImageWMSOptions } from 'ol/source/ImageWMS';
-import ImageLayer from 'ol/layer/Image';
 import Map from 'ol/Map';
+import ImageLayer from 'ol/layer/Image';
+import ImageWMS, { Options as ImageWMSOptions } from 'ol/source/ImageWMS';
+
+import { BaseLayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
+
+import { resolutionOptions } from '../utils/gerResolution';
 import { queryToObject, objectToQuery } from '../utils/utils';
 import { setTileLoadFunction } from '../utils/setTileLoadFunction';
-import { resolutionOptions } from '../utils/gerResolution';
 
 export class ImageAdapter implements BaseLayerAdapter {
   layer: any;
