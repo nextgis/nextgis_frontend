@@ -25,6 +25,7 @@ import {
 } from '@nextgis/webmap';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 import { TileAdapter } from './layer-adapters/TileAdapter';
+import { TerrainAdapter } from './layer-adapters/TerrainAdapter';
 
 type Layer = any;
 type Control = any;
@@ -35,7 +36,8 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
     TILE: TileAdapter,
     // MVT: MvtAdapter,
     // OSM: OsmAdapter,
-    GEOJSON: GeoJsonAdapter
+    GEOJSON: GeoJsonAdapter,
+    TERRAIN: TerrainAdapter
   };
 
   static controlAdapters = {

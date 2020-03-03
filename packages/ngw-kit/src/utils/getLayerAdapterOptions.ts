@@ -53,6 +53,13 @@ export function getLayerAdapterOptions(
         url
       };
     }
+    if (adapter === 'TERRAIN') {
+      url =
+        baseUrl +
+      `/api/resource/${resourceId}/terrain_provider`;
+      // `/api/resource/${resourceId}/terrain_provider/{z}/{x}/{y}.terrain`;
+      return { url, adapter };
+    }
     if (adapter === 'TILE') {
       url =
         baseUrl +
