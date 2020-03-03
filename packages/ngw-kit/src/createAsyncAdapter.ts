@@ -18,7 +18,8 @@ const styles: ResourceCls[] = [
   'qgis_vector_style',
   'qgis_raster_style',
   'wmsserver_service',
-  'raster_style'
+  'raster_style',
+  'terrain_provider'
 ];
 
 async function createAdapterFromFirstStyle(
