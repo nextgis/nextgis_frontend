@@ -38,7 +38,8 @@ import NgwKit, {
 import { getIcon } from '@nextgis/icons';
 
 import { onMapLoad } from './decorators';
-import { appendNgwResources, prepareWebMapOptions, OPTIONS } from './utils';
+import { appendNgwResources } from './utils/appendNgwResources';
+import { prepareWebMapOptions, OPTIONS } from './utils/prepareWebMapOptions';
 
 import {
   NgwMapOptions,
