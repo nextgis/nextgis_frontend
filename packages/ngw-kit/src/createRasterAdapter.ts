@@ -23,12 +23,15 @@ export async function createRasterAdapter(
   connector: NgwConnector,
   resourceCls?: ResourceCls
 ): Promise<Type<BaseLayerAdapter> | undefined> {
-  let adapter: NgwLayerAdapterType =
-    options.adapter || (resourceCls === 'wmsserver_service' ? 'WMS' : 'IMAGE');
+  const clsAdapterAlias: { [key in ResourceCls]?: NgwLayerAdapterType } = {
+    'wmsserver_service': 'WMS',
+    'terrain_provider' : 'TERRAIN'
+  }
+  let adapter = options.adapter ||
+    (resourceCls && clsAdapterAlias[resourceCls]) || 'IMAGE';
   if (adapter !== undefined) {
     options.adapter = adapter;
   }
-
   if (adapter === 'IMAGE') {
     const layerAdapters = webMap.getLayerAdapters();
     const isImageAllowed = layerAdapters ? layerAdapters.IMAGE : true;
