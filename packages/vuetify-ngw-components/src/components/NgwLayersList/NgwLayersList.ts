@@ -13,7 +13,7 @@ import { CreateElement, VNode, VNodeData } from 'vue';
 import { VTreeview } from 'vuetify/lib';
 import { arrayCompare, debounce } from '@nextgis/utils';
 
-interface VueTreeItem {
+export interface VueTreeItem {
   id: string;
   name: string;
   children?: VueTreeItem[];
@@ -91,6 +91,7 @@ export class NgwLayersList extends Vue {
       },
       attrs: { items: this.items, selectable: true },
       scopedSlots: {
+        ...this.$scopedSlots,
         label: props => {
           const name = props.item.name;
           return h('span', {

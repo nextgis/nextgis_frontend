@@ -1,6 +1,6 @@
 /**
  * @module vuetify-ngw-components
  */
-import { NgwLayersList } from './NgwLayersList/NgwLayersList';
+import { NgwLayersList, VueTreeItem } from './NgwLayersList/NgwLayersList';
 
-export { NgwLayersList };
+export { NgwLayersList, VueTreeItem };

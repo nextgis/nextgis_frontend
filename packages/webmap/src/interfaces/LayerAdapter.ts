@@ -128,8 +128,10 @@ export interface PopupOptions {
   ) => HTMLElement | string | undefined;
 }
 
+type _VectorAdapterOptionsToExtend = AdapterOptions & FilterOptions;
+
 export interface VectorAdapterOptions<F extends Feature = Feature, L = any>
-  extends AdapterOptions {
+  extends _VectorAdapterOptionsToExtend {
   /** Type for geometries painting, for each layer may be only one of: `fill`, `circle` or `line`. */
   type?: VectorAdapterLayerType;
   /**
@@ -174,7 +176,6 @@ export interface VectorAdapterOptions<F extends Feature = Feature, L = any>
   nativeFilter?: unknown;
   layout?: any;
   selectedLayout?: any;
-  limit?: number;
   // selectedPaintDiff?: VectorAdapterLayerPaint;
   /**
    * Determines whether objects are selected by mouse click.
@@ -298,7 +299,16 @@ export type CallbackFilter<F extends Feature = Feature, L = any> = (
 export interface FilterOptions {
   limit?: number;
   fields?: string[];
+  /** WKT polygon geometry */
   intersects?: string;
+  /**
+   * set fields for order
+   * @example
+   * ```json
+   * { "orderBy": "field1,-field2,+field3"}
+   * ```
+  */
+  orderBy?: string;
 }
 
 export type DataLayerFilter<
