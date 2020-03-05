@@ -4,7 +4,8 @@
 import { WebMap, BaseLayerAdapter } from '@nextgis/webmap';
 import { Type, mixinProperties } from '@nextgis/utils';
 import { QmsAdapterOptions, QmsBasemap, QmsAdapter as QA } from '../interfaces';
-import { loadJSON, alias, updateQmsOptions } from './utils';
+import { alias, updateQmsOptions } from './updateQmsOptions';
+import { loadJson } from './loadJson';
 
 export function createQmsAdapter(
   webMap: WebMap,
@@ -25,9 +26,13 @@ export function createQmsAdapter(
     async addLayer(options: QmsAdapterOptions): Promise<any> {
       // qmsId for request, id for store
       if (!this.qms && options.qmsId) {
-        this.qms = await loadJSON<QmsBasemap>(
-          url + '/api/v1/geoservices/' + options.qmsId
-        );
+        try {
+          this.qms = await loadJson<QmsBasemap>(
+            url + '/api/v1/geoservices/' + options.qmsId
+          );
+        } catch (er) {
+          console.error(er);
+        }
       }
       const qms = this.qms;
       if (qms) {
