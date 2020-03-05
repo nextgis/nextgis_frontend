@@ -20,6 +20,7 @@ export interface FeatureRequestParams {
   geom_format?: string;
   limit?: number;
   intersects?: string;
+  order_by?: string;
 }
 
 export interface GetNgwLayerItemsOptions {
@@ -210,6 +211,7 @@ function getNgwLayerItemsRequest<
     limit,
     fields,
     intersects,
+    orderBy,
     resourceId,
     paramList
   } = options;
@@ -224,6 +226,9 @@ function getNgwLayerItemsRequest<
   }
   if (paramList) {
     params.paramList = paramList;
+  }
+  if (orderBy) {
+    params.orderBy = orderBy.join(',');
   }
   return connector.get('feature_layer.feature.collection', null, {
     id: resourceId,

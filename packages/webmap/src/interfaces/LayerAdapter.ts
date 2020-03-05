@@ -305,10 +305,10 @@ export interface FilterOptions {
    * set fields for order
    * @example
    * ```json
-   * { "orderBy": "field1,-field2,+field3"}
+   * { "orderBy": ["field1", "-field2" ]}
    * ```
   */
-  orderBy?: string;
+  orderBy?: string[];
 }
 
 export type DataLayerFilter<

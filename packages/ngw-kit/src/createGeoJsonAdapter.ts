@@ -64,7 +64,10 @@ export async function createGeoJsonAdapter(
       let data = {} as GeoJsonObject;
       if (!_opt.data) {
         data = await geoJsonAdapterCb(_opt.propertiesFilter, {
-          limit: _opt.limit
+          ..._opt
+          // limit: _opt.limit,
+          // orderBy: _opt.orderBy,
+          // intersects: _opt.intersects
         });
       }
       const opt = onLoad(data);
