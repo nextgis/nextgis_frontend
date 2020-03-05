@@ -412,7 +412,7 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<
         qmsLayerOptions.id = qmsLayerName;
       }
 
-      await this.addBaseLayer('QMS', qmsLayerOptions).then(layer => {
+      this.addBaseLayer('QMS', qmsLayerOptions).then(layer => {
         this.showLayer(layer);
       });
     }
