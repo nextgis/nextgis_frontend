@@ -1,12 +1,11 @@
 /**
  * This node script allow to generate actual index.js and index.d.ts files for current api version
  */
-const index = require('../lib/ngw-connector');
+const NgwConnector = require('../lib/ngw-connector');
 const args = require('minimist')(process.argv.slice(2));
-const Ngw = index.Ngw;
 // TODO: use something like http://api.nextgis.com to get all available data
 //       from current version on installed NGW Server API
-let baseUrl = 'http://geonote.nextgis.com';
+let baseUrl = 'http://demo.nextgis.com';
 
 const typePath = 'src/types/RequestItemsParamsMap.ts';
 
@@ -14,34 +13,7 @@ if (args.url || args.u) {
   baseUrl = args.url || args.u;
 }
 
-const adapterFor = (function() {
-  const url = require('url'),
-    adapters = {
-      'http:': require('http'),
-      'https:': require('https')
-    };
-  return function(inputUrl) {
-    return adapters[url.parse(inputUrl).protocol];
-  };
-})();
-
-Ngw.prototype._getJson = function(url, callback, context, error) {
-  adapterFor(url)
-    .get(url, resp => {
-      let data = '';
-      resp.on('data', chunk => {
-        data += chunk;
-      });
-      resp.on('end', () => {
-        callback.call(context || this, JSON.parse(data));
-      });
-    })
-    .on('error', err => {
-      error(err);
-    });
-};
-
-const connector = new Ngw({ baseUrl });
+const connector = new NgwConnector({ baseUrl });
 
 connector.connect(function(router) {
   generateTypes(router);
