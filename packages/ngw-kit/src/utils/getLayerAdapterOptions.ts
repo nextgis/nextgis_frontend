@@ -54,9 +54,7 @@ export function getLayerAdapterOptions(
       };
     }
     if (adapter === 'TERRAIN') {
-      url =
-        baseUrl +
-      `/api/resource/${resourceId}/terrain_provider`;
+      url = baseUrl + `/api/resource/${resourceId}/terrain_provider`;
       // `/api/resource/${resourceId}/terrain_provider/{z}/{x}/{y}.terrain`;
       return { url, adapter };
     }

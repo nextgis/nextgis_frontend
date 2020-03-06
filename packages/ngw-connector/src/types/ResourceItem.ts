@@ -133,6 +133,25 @@ export interface FeatureResource {
   fields: FeatureLayerField[];
 }
 
+export type GeometryType =
+  | 'POINT'
+  | 'LINESTRING'
+  | 'POLYGON'
+  | 'MULTIPOINT'
+  | 'MULTILINESTRING'
+  | 'MULTIPOLYGON'
+  | 'POINTZ'
+  | 'LINESTRINGZ'
+  | 'POLYGONZ'
+  | 'MULTIPOINTZ'
+  | 'MULTILINESTRINGZ'
+  | 'MULTIPOLYGONZ';
+
+export interface VectorLayer {
+  srs: { id: number };
+  geometry_type: GeometryType;
+}
+
 // Ngw api settings
 export interface ResourceItem {
   resource: Resource;
@@ -141,6 +160,7 @@ export interface ResourceItem {
   };
   webmap?: WebmapResource;
   feature_layer?: FeatureResource;
+  vector_layer?: VectorLayer;
   basemap_layer?: BasemapResource;
   lookup_table?: LookupTableResource;
 }

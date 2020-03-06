@@ -7,15 +7,21 @@ import WebMap, {
   FilterOptions
 } from '@nextgis/webmap';
 import { CancelablePromise } from '@nextgis/utils';
-import NgwConnector from '@nextgis/ngw-connector';
-import { GeoJsonObject } from 'geojson';
+import NgwConnector, { ResourceItem } from '@nextgis/ngw-connector';
 import { getNgwLayerFeatures } from './utils/featureLayerUtils';
 import { resourceIdFromLayerOptions } from './utils/resourceIdFromLayerOptions';
+import { degrees2meters, vectorLayerGeomToPaintTypeAlias } from './utils/utils';
+
+interface FilterArgs {
+  filters?: PropertiesFilter;
+  options?: FilterOptions;
+}
 
 export async function createGeoJsonAdapter(
   options: NgwLayerOptions,
   webMap: WebMap,
-  connector: NgwConnector
+  connector: NgwConnector,
+  item?: ResourceItem
 ) {
   const adapter = webMap.mapAdapter.layerAdapters.GEOJSON as Type<
     VectorLayerAdapter
@@ -23,9 +29,7 @@ export async function createGeoJsonAdapter(
 
   let _dataPromise: CancelablePromise<any> | undefined;
   const _fullDataLoad = false;
-  let _lastFilterArgs:
-    | { filters?: PropertiesFilter; options?: FilterOptions }
-    | undefined;
+  let _lastFilterArgs: FilterArgs | undefined;
 
   const resourceId = await resourceIdFromLayerOptions(options, connector);
 
@@ -50,43 +54,37 @@ export async function createGeoJsonAdapter(
     }
   };
 
-  const onLoad = (data: GeoJsonObject) => {
-    const geoJsonOptions: GeoJsonAdapterOptions = {
-      data
-    };
-    if (options.id) {
-      geoJsonOptions.id = options.id;
-    }
-    return WebMap.utils.updateGeoJsonAdapterOptions(geoJsonOptions);
-  };
   return class Adapter extends adapter {
-    async addLayer(_opt: GeoJsonAdapterOptions) {
-      let data = {} as GeoJsonObject;
-      if (!_opt.data) {
-        data = await geoJsonAdapterCb(_opt.propertiesFilter, {
-          ..._opt
-          // limit: _opt.limit,
-          // orderBy: _opt.orderBy,
-          // intersects: _opt.intersects
-        });
+    async addLayer(opt_: GeoJsonAdapterOptions) {
+      if (options.id !== undefined) {
+        opt_.id = options.id;
       }
-      const opt = onLoad(data);
-      const addLayerOptions = { ..._opt, ...opt };
-      if (
-        addLayerOptions.data &&
-        Object.keys(addLayerOptions.data).length === 0
-      ) {
-        addLayerOptions.data = undefined;
+      if (item && item.vector_layer) {
+        opt_.type =
+          vectorLayerGeomToPaintTypeAlias[item.vector_layer.geometry_type];
       }
-      return super.addLayer(addLayerOptions);
+
+      if (opt_.data && Object.keys(opt_.data).length === 0) {
+        opt_.data = undefined;
+      }
+      opt_.strategy = opt_.strategy || undefined;
+      // if (opt_.strategy === 'BBOX') {
+      //   opt_.intersects = this._getMapBbox();
+      // }
+      const layer = super.addLayer(opt_);
+
+      if (!opt_.data) {
+        this.updateLayer({ filters: opt_.propertiesFilter, options: opt_ });
+      }
+      return layer;
     }
 
     beforeRemove() {
       abort();
     }
 
-    async updateLayer() {
-      const { filters, options } = _lastFilterArgs || {};
+    async updateLayer(filterArgs?: FilterArgs) {
+      const { filters, options } = filterArgs || _lastFilterArgs || {};
       const data = await geoJsonAdapterCb(filters, options);
       if (this.setData) {
         this.setData(data);
@@ -118,6 +116,22 @@ export async function createGeoJsonAdapter(
         this.filter(function() {
           return true;
         });
+      }
+    }
+
+    _getMapBbox(): string | undefined {
+      const bounds = webMap.getBounds();
+      if (bounds) {
+        const [s, w, n, e] = bounds;
+        const polygon = [
+          [s, w],
+          [n, e]
+        ].map(([lng, lat]) => {
+          const [x, y] = degrees2meters(lng, lat);
+          return x + ' ' + y;
+        });
+
+        return `POLYGON((${polygon.join(', ')}))`;
       }
     }
   };
