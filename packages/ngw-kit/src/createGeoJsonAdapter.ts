@@ -6,7 +6,7 @@ import WebMap, {
   PropertiesFilter,
   FilterOptions
 } from '@nextgis/webmap';
-import { CancelablePromise } from '@nextgis/utils';
+import { CancelablePromise, debounce } from '@nextgis/utils';
 import NgwConnector, { ResourceItem } from '@nextgis/ngw-connector';
 import { getNgwLayerFeatures } from './utils/featureLayerUtils';
 import { resourceIdFromLayerOptions } from './utils/resourceIdFromLayerOptions';
@@ -37,6 +37,7 @@ export async function createGeoJsonAdapter(
     filters?: PropertiesFilter,
     opt?: FilterOptions
   ) => {
+    abort();
     _lastFilterArgs = { filters, options: opt };
     _dataPromise = getNgwLayerFeatures({
       resourceId,
@@ -46,7 +47,7 @@ export async function createGeoJsonAdapter(
     });
     return await _dataPromise;
   };
-
+  let removed = false;
   const abort = () => {
     if (_dataPromise) {
       _dataPromise.cancel();
@@ -55,6 +56,10 @@ export async function createGeoJsonAdapter(
   };
 
   return class Adapter extends adapter {
+    __onMapMove?: () => void;
+    __enableMapMoveListener?: () => void;
+    __disableMapMoveListener?: () => void;
+
     async addLayer(opt_: GeoJsonAdapterOptions) {
       if (options.id !== undefined) {
         opt_.id = options.id;
@@ -63,32 +68,46 @@ export async function createGeoJsonAdapter(
         opt_.type =
           vectorLayerGeomToPaintTypeAlias[item.vector_layer.geometry_type];
       }
-
       if (opt_.data && Object.keys(opt_.data).length === 0) {
         opt_.data = undefined;
       }
-      opt_.strategy = opt_.strategy || undefined;
-      // if (opt_.strategy === 'BBOX') {
-      //   opt_.intersects = this._getMapBbox();
-      // }
       const layer = super.addLayer(opt_);
+      this.options.strategy = opt_.strategy || undefined;
 
-      if (!opt_.data) {
-        this.updateLayer({ filters: opt_.propertiesFilter, options: opt_ });
+      _lastFilterArgs = { filters: opt_.propertiesFilter, options: opt_ };
+      if (this.options.strategy === 'BBOX') {
+        this._addBboxEventListener();
+      } else if (!opt_.data) {
+        this.updateLayer();
       }
       return layer;
     }
 
     beforeRemove() {
+      removed = true;
+      this._removeMoveEventListener();
+      this._removeBboxEventListener();
+      this.__disableMapMoveListener = undefined;
+      this.__enableMapMoveListener = undefined;
+      this.__onMapMove = undefined;
       abort();
     }
 
     async updateLayer(filterArgs?: FilterArgs) {
-      const { filters, options } = filterArgs || _lastFilterArgs || {};
-      const data = await geoJsonAdapterCb(filters, options);
-      if (this.setData) {
-        this.setData(data);
+      filterArgs = filterArgs || _lastFilterArgs || {};
+      if (this.options.strategy === 'BBOX') {
+        await webMap.onLoad();
+        filterArgs.options = filterArgs.options || {};
+        filterArgs.options.intersects = this._getMapBbox();
       }
+      if (removed) {
+        return;
+      }
+      const data = await geoJsonAdapterCb(
+        filterArgs.filters,
+        filterArgs.options
+      );
+      webMap.setLayerData(this, data);
     }
 
     async propertiesFilter(filters: PropertiesFilter, opt?: FilterOptions) {
@@ -119,18 +138,57 @@ export async function createGeoJsonAdapter(
       }
     }
 
+    _addBboxEventListener() {
+      this.__enableMapMoveListener = () => {
+        this._removeMoveEventListener();
+        if (webMap.isLayerVisible(this)) {
+          this._addMoveEventListener();
+        }
+      };
+      this.__disableMapMoveListener = () => {
+        if (!webMap.isLayerVisible(this)) {
+          this._removeMoveEventListener();
+        }
+      };
+      webMap.emitter.on('layer:show', this.__enableMapMoveListener);
+      webMap.emitter.on('layer:hide', this.__disableMapMoveListener);
+      this.__enableMapMoveListener();
+    }
+
+    _removeBboxEventListener() {
+      if (this.__enableMapMoveListener) {
+        webMap.emitter.on('layer:show', this.__enableMapMoveListener);
+      }
+      if (this.__disableMapMoveListener) {
+        webMap.emitter.on('layer:hide', this.__disableMapMoveListener);
+      }
+    }
+
+    _addMoveEventListener() {
+      this.__onMapMove = debounce(() => this.updateLayer());
+      webMap.emitter.on('moveend', this.__onMapMove);
+    }
+
+    _removeMoveEventListener() {
+      if (this.__onMapMove) {
+        webMap.emitter.off('moveend', this.__onMapMove);
+      }
+    }
+
     _getMapBbox(): string | undefined {
       const bounds = webMap.getBounds();
       if (bounds) {
         const [s, w, n, e] = bounds;
         const polygon = [
           [s, w],
-          [n, e]
+          [n, w],
+          [n, e],
+          [s, e],
+          [s, w]
         ].map(([lng, lat]) => {
           const [x, y] = degrees2meters(lng, lat);
           return x + ' ' + y;
         });
-
         return `POLYGON((${polygon.join(', ')}))`;
       }
     }
