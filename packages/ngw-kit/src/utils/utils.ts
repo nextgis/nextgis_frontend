@@ -1,12 +1,14 @@
 import WebMap, {
   Type,
   LngLatBoundsArray,
-  MapClickEvent
+  MapClickEvent,
+  VectorAdapterLayerType
 } from '@nextgis/webmap';
 import NgwConnector, {
   WebmapResource,
   ResourceItem,
-  FeatureLayersIdentify
+  FeatureLayersIdentify,
+  GeometryType
 } from '@nextgis/ngw-connector';
 import { createAsyncAdapter } from '../createAsyncAdapter';
 import {
@@ -15,8 +17,8 @@ import {
   IdentifyRequestOptions,
   ResourceAdapter
 } from '../interfaces';
-import { getLayerAdapterOptions as getLayerAdapterOptions_ } from './getLayerAdapterOptions';
 import { WebMapLayerAdapter } from '../WebMapLayerAdapter';
+import { getLayerAdapterOptions as getLayerAdapterOptions_ } from './getLayerAdapterOptions';
 
 export function updateImageParams(params: any, resourceId: number) {
   const { bbox, width, height } = params;
@@ -27,6 +29,24 @@ export function updateImageParams(params: any, resourceId: number) {
     timestamp: Date.now()
   };
 }
+
+export const vectorLayerGeomToPaintTypeAlias: Record<
+  GeometryType,
+  VectorAdapterLayerType
+> = {
+  POINT: 'circle',
+  LINESTRING: 'line',
+  POLYGON: 'fill',
+  MULTIPOINT: 'circle',
+  MULTILINESTRING: 'line',
+  MULTIPOLYGON: 'fill',
+  POINTZ: 'circle',
+  LINESTRINGZ: 'line',
+  POLYGONZ: 'fill',
+  MULTIPOINTZ: 'circle',
+  MULTILINESTRINGZ: 'line',
+  MULTIPOLYGONZ: 'fill'
+};
 
 /** @deprecated */
 export function getLayerAdapterOptions(

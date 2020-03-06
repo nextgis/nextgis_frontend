@@ -20,6 +20,3 @@ export function appendNgwResources(
     options.push({ ...defOptions, ...resource, ...overwriteOptions });
   }
 }
-
-
-

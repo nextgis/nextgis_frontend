@@ -68,7 +68,12 @@ export async function createAsyncAdapter(
               ...options,
               resourceId: item.resource.parent.id
             };
-            adapter = createGeoJsonAdapter(parentOptions, webMap, connector);
+            adapter = createGeoJsonAdapter(
+              parentOptions,
+              webMap,
+              connector,
+              item
+            );
           } else {
             adapter = createRasterAdapter(
               _options,
@@ -98,7 +103,7 @@ export async function createAsyncAdapter(
               );
             }
           } else {
-            adapter = createGeoJsonAdapter(_options, webMap, connector);
+            adapter = createGeoJsonAdapter(_options, webMap, connector, item);
           }
         } else if (item.resource.cls === 'raster_layer') {
           return createAdapterFromFirstStyle(
