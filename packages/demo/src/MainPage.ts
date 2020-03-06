@@ -40,6 +40,8 @@ export class MainPage extends Vue {
 
   api?: ApiItem;
 
+  search: string | null = null;
+
   items: Item[] = null;
   currentItemId: string;
 
