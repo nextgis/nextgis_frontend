@@ -301,13 +301,14 @@ export interface FilterOptions {
   fields?: string[];
   /** WKT polygon geometry */
   intersects?: string;
+  strategy?: 'BBOX';
   /**
    * set fields for order
    * @example
    * ```json
    * { "orderBy": ["field1", "-field2" ]}
    * ```
-  */
+   */
   orderBy?: string[];
 }
 

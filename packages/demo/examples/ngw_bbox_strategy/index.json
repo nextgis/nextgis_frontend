@@ -1,0 +1,5 @@
+{
+  "name": "BBOX strategy for vector layer",
+  "description": "Use BBOX strategy to show large vector data resource",
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
+}
