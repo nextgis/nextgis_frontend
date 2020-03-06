@@ -1,19 +1,19 @@
 {
   "name": "@nextgis/ngw-cesium",
-  "version": "0.26.0",
+  "version": "0.27.0",
   "description": "",
   "main": "lib/ngw-cesium.js",
   "unpkg": "lib/ngw-cesium.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/cesium-map-adapter": "^0.26.0",
-    "@nextgis/ngw-map": "^0.26.0",
+    "@nextgis/cesium-map-adapter": "^0.27.0",
+    "@nextgis/ngw-map": "^0.27.0",
     "@types/events": "^3.0.0",
     "@types/node": "^13.7.7",
     "events": "^3.1.0"
   },
   "devDependencies": {
-    "@nextgis/eslint-config": "^0.26.0",
+    "@nextgis/eslint-config": "^0.27.0",
     "base64-inline-loader": "^1.1.1",
     "copy-webpack-plugin": "^5.1.1",
     "css-loader": "^3.4.2",
