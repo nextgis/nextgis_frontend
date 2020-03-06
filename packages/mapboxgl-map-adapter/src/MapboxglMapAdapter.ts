@@ -205,6 +205,14 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     }
   }
 
+  getBounds() {
+    if (this.map) {
+      const bounds = this.map.getBounds();
+      const ar = bounds.toArray();
+      return [ar[0][0], ar[0][1], ar[1][0], ar[1][1]];
+    }
+  }
+
   // [extent_left, extent_bottom, extent_right, extent_top];
   async fitBounds(
     e: LngLatBoundsArray,
