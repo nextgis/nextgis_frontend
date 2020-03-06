@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.27.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.26.0...v0.27.0) (2020-03-06)
+
+
+### Bug Fixes
+
+* **ngw-map:** not block when error on add qms layer ([d06ac88](https://github.com/nextgis/nextgisweb_frontend/commit/d06ac88cc6088e16c38c47ef247905e84e0a5283))
+
+
+### Features
+
+* **ngw-kit:** add bbox strategy for large vector layer ([da6533b](https://github.com/nextgis/nextgisweb_frontend/commit/da6533b76eaf5184114ac233fa275d2398cfdf5b))
+* **utils:** create universal MapControlContainer ([2f07100](https://github.com/nextgis/nextgisweb_frontend/commit/2f07100b8a9b178533d5e3ee17b8759d8eb62866))
+* **vuetify:** allow VTree scopes for NgwLayersList ([8718f9b](https://github.com/nextgis/nextgisweb_frontend/commit/8718f9b6e114714523b3476a97b23934c31f2bb4))
+
+
+### Performance Improvements
+
+* **ngw-kit:** geojson adapter not blocked on data load ([1ceaf76](https://github.com/nextgis/nextgisweb_frontend/commit/1ceaf7688b9911727de5fa1b6fde9ae1f6b3da9e))
+
+
+
+
+
 # [0.26.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.25.8...v0.26.0) (2020-03-01)
 
 
