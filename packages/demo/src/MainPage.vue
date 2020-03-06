@@ -17,17 +17,31 @@
     <v-navigation-drawer
       :clipped="$vuetify.breakpoint.lgAndUp"
       :open="open"
+      width="250"
       v-model="drawer"
       dark
       style="background:#0070c5"
       fixed
       app
     >
+    <v-text-field
+        v-model="search"
+        label="Search"
+        class="pl-3 pr-3 pt-3"
+        dark
+        flat
+        solo-inverted
+        hide-details
+        clearable
+        clear-icon="mdi-close-circle-outline"
+      ></v-text-field>
       <v-treeview
         v-if="items"
         :active.sync="active"
+        :search="search"
         :items="items"
         :open="open"
+        dense
         activatable
         open-on-click
         transition
