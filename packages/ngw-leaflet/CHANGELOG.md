@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.27.0](https://github.com/nextgis/nextgis_frontend_apps/compare/v0.26.0...v0.27.0) (2020-03-06)
+
+
+### Features
+
+* **ngw-kit:** add bbox strategy for large vector layer ([da6533b](https://github.com/nextgis/nextgis_frontend_apps/commit/da6533b76eaf5184114ac233fa275d2398cfdf5b))
+
+
+
+
+
 # [0.26.0](https://github.com/nextgis/nextgis_frontend_apps/compare/v0.25.8...v0.26.0) (2020-03-01)
 
 

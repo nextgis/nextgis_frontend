@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.27.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.26.0...v0.27.0) (2020-03-06)
+
+
+### Features
+
+* **vuetify:** allow VTree scopes for NgwLayersList ([8718f9b](https://github.com/nextgis/nextgisweb_frontend/commit/8718f9b6e114714523b3476a97b23934c31f2bb4))
+
+
+### Performance Improvements
+
+* **ngw-kit:** geojson adapter not blocked on data load ([1ceaf76](https://github.com/nextgis/nextgisweb_frontend/commit/1ceaf7688b9911727de5fa1b6fde9ae1f6b3da9e))
+
+
+
+
+
 # [0.26.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.25.8...v0.26.0) (2020-03-01)
 
 
