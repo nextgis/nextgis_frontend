@@ -4,13 +4,15 @@
 import { EventEmitter } from 'events';
 
 import {
+  Math as CesiumMath,
   Viewer,
   // createWorldTerrain,
   EllipsoidTerrainProvider,
   SceneMode,
   Ellipsoid,
   Cartesian3,
-  Rectangle
+  Rectangle,
+  Cartographic
 } from 'cesium';
 
 import {
@@ -21,7 +23,8 @@ import {
   CreateControlOptions,
   ButtonControlOptions,
   LngLatArray,
-  LngLatBoundsArray
+  LngLatBoundsArray,
+  WebMapEvents
 } from '@nextgis/webmap';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 import { TileAdapter } from './layer-adapters/TileAdapter';
@@ -52,6 +55,9 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
   options: MapOptions = {};
 
   map?: Viewer;
+
+  // Scractch memory allocation, happens only once.
+  private _scratchRectangle = new Rectangle();
 
   create(options: MapOptions) {
     this.options = { ...options };
@@ -92,6 +98,7 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
       }
 
       this.emitter.emit('create');
+      this._addEventsListener()
     }
   }
 
@@ -136,6 +143,23 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
   }
 
   getBounds(): LngLatBoundsArray | undefined {
+    const viewer = this.map;
+    if (viewer) {
+      const rect = viewer.camera.computeViewRectangle(
+        viewer.scene.globe.ellipsoid,
+        this._scratchRectangle
+      );
+      if (rect) {
+        const [x1, y1, x2, y2] = [
+          rect.west,
+          rect.south,
+          rect.east,
+          rect.north
+        ].map(x => CesiumMath.toDegrees(x));
+
+        return [x1, y1, x2, y2];
+      }
+    }
     return undefined;
   }
 
@@ -181,5 +205,27 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
 
   onMapClick(evt: any) {
     //
+  }
+
+  private _addEventsListener() {
+    const viewer = this.map;
+    if (viewer) {
+
+      const events: [keyof WebMapEvents, Cesium.Event | undefined][] = [
+        ['zoomstart', undefined],
+        ['zoom', undefined],
+        ['zoomend', undefined],
+        ['movestart', viewer.camera.moveStart],
+        ['move', undefined],
+        ['moveend', viewer.camera.moveEnd]
+      ];
+      events.forEach(([name, event]) => {
+        if (event) {
+          event.addEventListener(() => {
+            this.emitter.emit(name);
+          })
+        }
+      })
+    }
   }
 }

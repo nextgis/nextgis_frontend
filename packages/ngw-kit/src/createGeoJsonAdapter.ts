@@ -75,10 +75,11 @@ export async function createGeoJsonAdapter(
       this.options.strategy = opt_.strategy || undefined;
 
       _lastFilterArgs = { filters: opt_.propertiesFilter, options: opt_ };
+      if (!opt_.data) {
+        this.updateLayer();
+      }
       if (this.options.strategy === 'BBOX') {
         this._addBboxEventListener();
-      } else if (!opt_.data) {
-        this.updateLayer();
       }
       return layer;
     }
@@ -142,6 +143,7 @@ export async function createGeoJsonAdapter(
       this.__enableMapMoveListener = () => {
         this._removeMoveEventListener();
         if (webMap.isLayerVisible(this)) {
+          this.updateLayer();
           this._addMoveEventListener();
         }
       };
