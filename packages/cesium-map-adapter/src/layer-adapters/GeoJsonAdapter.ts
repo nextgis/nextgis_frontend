@@ -42,7 +42,9 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
   }
 
   clearLayer(cb?: (feature: Feature) => boolean) {
-    this._source?.entities.removeAll();
+    if (this._source) {
+      this._source.entities.removeAll();
+    }
   }
 
   setData(data: GeoJsonObject) {
@@ -52,7 +54,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
 
   addData(data: GeoJsonObject) {
     if (this._source) {
-      this._source?.load(data);
+      this._source.load(data);
     }
   }
 

@@ -163,6 +163,9 @@ export function getCirclePoly(
 }
 
 export function degrees2meters(lng: number, lat: number): [number, number] {
+
+  lat = lat > 85.06 ? 85.06 : lat < -85.06 ? -85.06 : lat;
+
   const x = (lng * 20037508.34) / 180;
   let y = Math.log(Math.tan(((90 + lat) * Math.PI) / 360)) / (Math.PI / 180);
   y = (y * 20037508.34) / 180;
