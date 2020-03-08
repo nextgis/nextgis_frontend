@@ -233,6 +233,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
         selectedFeatureIds.push(id);
       }
     });
+    this._selectProperties = undefined;
     this._selectedFeatureIds = selectedFeatureIds;
     this._updateFilter();
   }
