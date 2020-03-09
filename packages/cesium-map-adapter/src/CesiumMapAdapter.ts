@@ -6,13 +6,11 @@ import { EventEmitter } from 'events';
 import {
   Math as CesiumMath,
   Viewer,
-  // createWorldTerrain,
   EllipsoidTerrainProvider,
   SceneMode,
   Ellipsoid,
   Cartesian3,
-  Rectangle,
-  Cartographic
+  Rectangle
 } from 'cesium';
 
 import {
@@ -98,7 +96,7 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
       }
 
       this.emitter.emit('create');
-      this._addEventsListener()
+      this._addEventsListener();
     }
   }
 
@@ -210,7 +208,6 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
   private _addEventsListener() {
     const viewer = this.map;
     if (viewer) {
-
       const events: [keyof WebMapEvents, Cesium.Event | undefined][] = [
         ['zoomstart', undefined],
         ['zoom', undefined],
@@ -223,9 +220,9 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
         if (event) {
           event.addEventListener(() => {
             this.emitter.emit(name);
-          })
+          });
         }
-      })
+      });
     }
   }
 }
