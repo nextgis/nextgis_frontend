@@ -11,7 +11,7 @@ export function createControl(
   const C = Control.extend({
     onAdd() {
       const element = document.createElement('div');
-      const content: HTMLElement = control.onAdd();
+      const content = control.onAdd();
       element.classList.add('leaflet-control');
       if (options.bar) {
         element.classList.add('leaflet-bar');
@@ -22,7 +22,9 @@ export function createControl(
         element.style.marginLeft = '0px';
         element.style.marginRight = '0px';
       }
-      element.appendChild(content);
+      if (content) {
+        element.appendChild(content);
+      }
 
       DomEvent.disableClickPropagation(element);
 

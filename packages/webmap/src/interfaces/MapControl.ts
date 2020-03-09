@@ -37,7 +37,7 @@ export interface MapControls {
 }
 
 export interface MapControl<M extends any = any> {
-  onAdd(map?: M): unknown;
+  onAdd(map?: M): HTMLElement | undefined;
   onRemove(map?: M): unknown;
 }
 
