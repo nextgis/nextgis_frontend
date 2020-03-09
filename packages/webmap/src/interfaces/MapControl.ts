@@ -31,14 +31,14 @@ export interface AttributionControlOptions {
 }
 
 export interface MapControls {
+  [name: string]: {};
   ZOOM: ZoomControlOptions;
   ATTRIBUTION: AttributionControlOptions;
-  [name: string]: {};
 }
 
 export interface MapControl<M extends any = any> {
-  onAdd(map?: M): any;
-  onRemove(map?: M): any;
+  onAdd(map?: M): unknown;
+  onRemove(map?: M): unknown;
 }
 
 export interface ButtonControlOptions {

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Shapes and color | Icons Example</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.6.11/core.min.js"></script>
+
+  <!-- <script src="https://unpkg.com/@nextgis/item"></script> -->
+  <script src="../../lib/item.js"></script>
+</head>
+
+<body>
+
+  <script>
+    var properties = [
+      {
+        type: 'boolean',
+        name: 'visibility',
+        getProperty: function () {
+          return this.item.tree.getChildren()
+        },
+        onSet(value) {
+          this.item.checkbox.checked = value;
+          this.item.name.innerHTML = value;
+        },
+      },
+    ];
+
+    var item = createItem();
+
+    item.tree.addChild(createItem());
+    item.tree.addChild(createItem());
+
+    var items = item.tree.all();
+    for (var fry = 0; fry < items.length; fry++) {
+      document.body.appendChild(items[fry].element);
+    }
+
+    function createItem() {
+      var i = new Item({ properties: properties });
+
+      i.element = document.createElement('div');
+      i.checkbox = document.createElement('input');
+      i.checkbox.setAttribute('type', 'checkbox');
+      i.checkbox.onchange = function () {
+        i.properties.set('visibility', i.checkbox.checked);
+      };
+
+      i.name = document.createElement('span');
+
+      i.element.appendChild(i.checkbox);
+      i.element.appendChild(i.name);
+
+      i.initProperties();
+      return i;
+    }
+  </script>
+</body>
+
+</html>

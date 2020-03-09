@@ -4,7 +4,6 @@
 
 export * from './CancelablePromise';
 export * from './Clipboard';
-export * from './MapControlContainer/MapControlContainer';
 
 import * as Dom from './dom';
 export const dom = Dom;
