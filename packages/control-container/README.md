@@ -16,7 +16,7 @@ ______________________________
 |____________________________|
 ```
 
-Use Item with NPM installation method for building large scale applications. It pairs nicely with module bundlers such as [Webpack](https://webpack.js.org/)
+## Installation
 
 ```bash
 # latest stable
@@ -25,6 +25,8 @@ $ npm install --save-dev @nextgis/control-container
 $ yarn add @nextgis/control-container
 ```
 
+## Usage
+
 ```js
 import ControlContainer from '@nextgis/control-container';
 
@@ -32,12 +34,12 @@ import ControlContainer from '@nextgis/control-container';
 const controlContainer = new ControlContainer({ target: 'map-control-id' });
 // or
 const controlContainer = new ControlContainer({ map: webMap });
-controlContainer.attach('.map-control-class');
+controlContainer.addTo('.map-control-class');
 
 // add simple HTML string
-controlContainer.append('top-right', '<div>HTML</div>');
+controlContainer.append('<div>HTML</div>', 'top-right');
 // or HTML element
-controlContainer.append('top-right', HTMLElement);
+controlContainer.append(HTMLElement, 'top-right');
 
 // add control
 const control = {
@@ -49,7 +51,7 @@ const control = {
         return container
     }
 }
-controlContainer.addControl('bottom-right', control);
+controlContainer.addControl(control, 'bottom-right');
 ```
 
 ## Commercial support

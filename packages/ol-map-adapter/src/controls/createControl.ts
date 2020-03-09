@@ -5,7 +5,7 @@ export function createControl(
   control: MapControl,
   options: CreateControlOptions = {}
 ): Control {
-  const newControl = (function(C) {
+  const newControl = (function (C) {
     function NewControl(this: Control) {
       const element = document.createElement('div');
       element.className =
@@ -13,7 +13,10 @@ export function createControl(
         'ol-unselectable' +
         (options.bar ? ' ol-control' : '') +
         (options.margin ? ' ol-control-margin' : '');
-      element.appendChild(control.onAdd());
+      const content = control.onAdd();
+      if (content) {
+        element.appendChild(content);
+      }
 
       C.call(this, {
         element
