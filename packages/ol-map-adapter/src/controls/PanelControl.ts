@@ -2,7 +2,7 @@ import './PanelControl.css';
 
 import Control from 'ol/control/Control';
 import { ControlPositions } from '@nextgis/webmap';
-import { MapControlContainer } from '@nextgis/utils';
+import { ControlContainer } from '@nextgis/control-container';
 
 interface PanelControlOptions {
   collapsible?: boolean;
@@ -13,10 +13,10 @@ const OPTIONS: PanelControlOptions = {
 };
 
 export class PanelControl extends Control {
-  private panelContainer: MapControlContainer;
+  private panelContainer: ControlContainer;
 
   constructor(options?: PanelControlOptions) {
-    const panelContainer = new MapControlContainer();
+    const panelContainer = new ControlContainer();
     const element = panelContainer.getContainer();
     super({ ...OPTIONS, ...options, element });
     this.panelContainer = panelContainer;

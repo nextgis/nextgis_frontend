@@ -2,7 +2,7 @@
  * @module cesium-map-adapter
  */
 import { TileAdapterOptions } from '@nextgis/webmap';
-import { CesiumTerrainProvider, ImageryProvider, ImageryLayer } from 'cesium';
+import { CesiumTerrainProvider, ImageryLayer } from 'cesium';
 
 import { BaseAdapter } from './BaseAdapter';
 

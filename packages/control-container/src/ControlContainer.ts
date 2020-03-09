@@ -1,16 +1,20 @@
 /**
  * @module utils
  */
-import { ControlPositions } from '@nextgis/webmap';
-import './MapControlContainer.css';
+import WebMap, { ControlPositions, MapControl } from '@nextgis/webmap';
+import './ControlContainer.css';
 
-export interface MapControlContainerOptions {
+export interface ControlContainerOptions {
+  target?: string;
   classPrefix?: string;
+  addClass?: string;
+  webMap?: WebMap;
 }
 
-export class MapControlContainer {
+export class ControlContainer {
   private readonly classPrefix: string = 'webmap';
-
+  private readonly addClass?: string;
+  private readonly webMap?: WebMap;
   private _container: HTMLElement;
   private _positionsContainers: {
     [key in ControlPositions]: HTMLElement | null;
@@ -21,11 +25,36 @@ export class MapControlContainer {
     'top-right': null
   };
 
-  constructor(opt: MapControlContainerOptions = {}) {
-    if (opt.classPrefix) {
-      this.classPrefix = opt.classPrefix;
-    }
+  constructor(opt: ControlContainerOptions = {}) {
+    this.classPrefix = opt.classPrefix || this.classPrefix;
+    this.addClass = opt.addClass;
+    this.webMap = opt.webMap;
     this._container = this.createContainerElement();
+  }
+
+  attach(el: HTMLElement | string): this {
+    let el_: HTMLElement | null = null;
+    if (typeof el === 'string') {
+      el_ = document.getElementById(el);
+      if (!el) {
+        try {
+          el_ = document.querySelector(el);
+        } catch {
+          // ignore
+        }
+      }
+    }
+    if (el_) {
+      el_.appendChild(this._container);
+    }
+    return this;
+  }
+
+  detach() {
+    const parent = this._container.parentElement;
+    if (parent) {
+      parent.removeChild(this._container);
+    }
   }
 
   getContainer() {
@@ -60,16 +89,30 @@ export class MapControlContainer {
     }
   }
 
-  append(position: ControlPositions, element: HTMLElement) {
+  addControl(position: ControlPositions, control: MapControl) {
+    const controlContainer = control.onAdd(this.webMap);
+    if (controlContainer instanceof HTMLElement) {
+      this.append(position, controlContainer);
+    }
+  }
+
+  append(position: ControlPositions, element: HTMLElement | string) {
     const positionContainer = this._positionsContainers[position];
     if (positionContainer) {
+      if (typeof element === 'string') {
+        const el = document.createElement('div');
+        el.outerHTML = element;
+        element = el;
+      }
       positionContainer.appendChild(element);
     }
   }
 
   private createContainerElement(): HTMLElement {
     const element = document.createElement('div');
-    element.className = `${this.classPrefix}-control-container`;
+    element.className =
+      `${this.classPrefix}-control-container` +
+      (this.addClass ? ' ' + this.addClass : '');
 
     const positions: ControlPositions[] = [
       'top-right',
