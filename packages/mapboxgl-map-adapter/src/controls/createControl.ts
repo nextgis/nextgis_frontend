@@ -14,7 +14,7 @@ export function createControl(
 
     onAdd() {
       const element = document.createElement('div');
-      const content: HTMLElement = control.onAdd();
+      const content = control.onAdd();
       element.classList.add('mapboxgl-ctrl');
       if (options.bar) {
         // add custom css for boarder style
@@ -23,7 +23,9 @@ export function createControl(
       if (options.addClass) {
         element.classList.add(options.addClass);
       }
-      element.appendChild(content);
+      if (content) {
+        element.appendChild(content);
+      }
       this._container = element;
       return this._container;
     }

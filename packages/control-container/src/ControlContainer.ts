@@ -1,8 +1,12 @@
 /**
  * @module utils
  */
-import WebMap, { ControlPositions, MapControl } from '@nextgis/webmap';
 import './ControlContainer.css';
+
+import { dom } from '@nextgis/utils';
+import WebMap, { ControlPositions, MapControl } from '@nextgis/webmap';
+
+import { ZoomControl } from './controls/ZoomControl';
 
 export interface ControlContainerOptions {
   target?: string;
@@ -12,6 +16,11 @@ export interface ControlContainerOptions {
 }
 
 export class ControlContainer {
+
+  static controls = {
+    ZOOM: ZoomControl
+  }
+
   private readonly classPrefix: string = 'webmap';
   private readonly addClass?: string;
   private readonly webMap?: WebMap;
@@ -32,18 +41,8 @@ export class ControlContainer {
     this._container = this.createContainerElement();
   }
 
-  attach(el: HTMLElement | string): this {
-    let el_: HTMLElement | null = null;
-    if (typeof el === 'string') {
-      el_ = document.getElementById(el);
-      if (!el) {
-        try {
-          el_ = document.querySelector(el);
-        } catch {
-          // ignore
-        }
-      }
-    }
+  addTo(el: HTMLElement | string): this {
+    const el_ = dom.getElement(el);
     if (el_) {
       el_.appendChild(this._container);
     }
@@ -89,14 +88,14 @@ export class ControlContainer {
     }
   }
 
-  addControl(position: ControlPositions, control: MapControl) {
+  addControl(control: MapControl, position: ControlPositions) {
     const controlContainer = control.onAdd(this.webMap);
     if (controlContainer instanceof HTMLElement) {
-      this.append(position, controlContainer);
+      this.append(controlContainer, position);
     }
   }
 
-  append(position: ControlPositions, element: HTMLElement | string) {
+  append(element: HTMLElement | string, position: ControlPositions) {
     const positionContainer = this._positionsContainers[position];
     if (positionContainer) {
       if (typeof element === 'string') {

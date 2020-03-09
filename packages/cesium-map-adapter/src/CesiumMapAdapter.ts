@@ -4,28 +4,33 @@
 import { EventEmitter } from 'events';
 
 import {
-  Math as CesiumMath,
   Viewer,
-  EllipsoidTerrainProvider,
-  SceneMode,
   Ellipsoid,
+  Rectangle,
+  SceneMode,
   Cartesian3,
-  Rectangle
+  Math as CesiumMath,
+  EllipsoidTerrainProvider,
+  Cartesian4,
+  Cartographic
 } from 'cesium';
 
 import {
-  MapAdapter,
-  ControlPositions,
-  MapOptions,
   MapControl,
-  CreateControlOptions,
-  ButtonControlOptions,
+  MapOptions,
+  MapAdapter,
   LngLatArray,
+  WebMapEvents,
+  ControlPositions,
   LngLatBoundsArray,
-  WebMapEvents
+  CreateControlOptions,
+  ButtonControlOptions
 } from '@nextgis/webmap';
-import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
+import ControlContainer from '@nextgis/control-container';
+import { dom } from '@nextgis/utils';
+
 import { TileAdapter } from './layer-adapters/TileAdapter';
+import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 import { TerrainAdapter } from './layer-adapters/TerrainAdapter';
 
 type Layer = any;
@@ -42,7 +47,7 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
   };
 
   static controlAdapters = {
-    // ZOOM: Zoom,
+    ZOOM: ControlContainer.controls.ZOOM,
     // ATTRIBUTION: Attribution
   };
 
@@ -56,10 +61,12 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
 
   // Scractch memory allocation, happens only once.
   private _scratchRectangle = new Rectangle();
+  private _controlContainer = new ControlContainer({ addClass: 'cesium-control' });
 
   create(options: MapOptions) {
     this.options = { ...options };
     if (this.options.target) {
+      const target = dom.getElement(this.options.target);
       const ellipsoidProvider = new EllipsoidTerrainProvider();
 
       const viewer = new Viewer(this.options.target, {
@@ -94,6 +101,11 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
       } else if (options.center) {
         this.setCenter(options.center);
       }
+      const controlContainer = this._controlContainer.getContainer();
+      const viewerContainer = viewer.container.firstChild;
+      if (viewerContainer) {
+        viewerContainer.insertBefore(controlContainer, viewerContainer.firstChild);
+      }
 
       this.emitter.emit('create');
       this._addEventsListener();
@@ -125,10 +137,27 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
   }
 
   setZoom(zoom: number) {
-    //
+    const viewer = this.map;
+    if (viewer) {
+
+    }
   }
 
   getZoom() {
+    const viewer = this.map;
+    if (viewer) {
+      let iniPos = new Cartesian3();
+      iniPos = viewer.camera.position;
+      const cartographic = new Cartographic();
+      // cartographic.height = zoom * 1000;
+      cartographic.longitude = iniPos.x;
+      cartographic.latitude = iniPos.y;
+      const newPos = new Cartesian3();
+      Ellipsoid.WGS84.cartographicToCartesian(cartographic, newPos);
+      viewer.camera.setView({
+        destination: newPos
+      });
+    }
     return undefined;
   }
 
@@ -194,7 +223,7 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
   }
 
   addControl(control: Control, position: ControlPositions) {
-    // return
+    this._controlContainer.addControl(control, position);
   }
 
   removeControl(control: Control) {
