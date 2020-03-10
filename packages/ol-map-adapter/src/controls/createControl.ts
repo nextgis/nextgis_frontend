@@ -5,7 +5,7 @@ export function createControl(
   control: MapControl,
   options: CreateControlOptions = {}
 ): Control {
-  const newControl = (function (C) {
+  const newControl = (function(C) {
     function NewControl(this: Control) {
       const element = document.createElement('div');
       element.className =

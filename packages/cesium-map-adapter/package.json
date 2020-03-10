@@ -7,6 +7,8 @@
   "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/webmap": "^0.27.0",
+    "@nextgis/control-container": "^0.27.0",
+    "@nextgis/dom": "^0.27.0",
     "@types/cesium": "^1.66.3",
     "@types/events": "^3.0.0",
     "@types/node": "^13.7.7",

@@ -1,9 +1,9 @@
 /**
- * @module utils
+ * @module control-container
  */
 import './ControlContainer.css';
 
-import { dom } from '@nextgis/utils';
+import * as dom from '@nextgis/dom';
 import WebMap, { ControlPositions, MapControl } from '@nextgis/webmap';
 
 import { ZoomControl } from './controls/ZoomControl';
@@ -16,10 +16,9 @@ export interface ControlContainerOptions {
 }
 
 export class ControlContainer {
-
   static controls = {
     ZOOM: ZoomControl
-  }
+  };
 
   private readonly classPrefix: string = 'webmap';
   private readonly addClass?: string;
