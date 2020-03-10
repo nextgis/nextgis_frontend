@@ -1,13 +1,11 @@
 {
-  "name": "@nextgis/ngw-connector",
+  "name": "@nextgis/cancelable-promise",
   "version": "0.27.0",
-  "_priority": 12,
-  "description": "Module for interaction with NGW (NextGis Web) server API",
-  "main": "lib/ngw-connector.js",
-  "unpkg": "lib/ngw-connector.js",
+  "description": "A promise you can stop",
+  "main": "lib/cancelable-promise.js",
+  "unpkg": "lib/cancelable-promise.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/cancelable-promise": "^0.27.0",
     "events": "^3.1.0"
   },
   "devDependencies": {
@@ -16,22 +14,19 @@
     "@types/node": "^13.7.7",
     "eslint-loader": "^3.0.3",
     "rimraf": "^3.0.2",
+    "style-loader": "^1.1.3",
+    "svg-inline-loader": "^0.8.2",
     "ts-loader": "^6.2.1",
     "typescript": "^3.8.3",
     "webpack": "^4.41.6",
     "webpack-cli": "^3.3.11"
   },
   "scripts": {
-    "mjs": "tsc -d --outDir ./lib/modules",
     "clean": "rimraf ./lib",
     "dev": "npm run clean && webpack --config ./webpack.config.js --progress",
     "build": "npm run dev -- --mode=production",
     "prod": "npm run build",
     "watch": "npm run dev -- --watch"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/nextgis/nextgisweb_frontend.git"
   },
   "keywords": [
     "NextGIS",
@@ -45,5 +40,14 @@
     "lib"
   ],
   "license": "LGPL-3.0",
-  "gitHead": "16ddb8f791196f047deb0e0ac17310e97e78ab19"
+  "publishConfig": {
+    "registry": "http://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nextgis/nextgisweb_frontend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nextgis/nextgisweb_frontend/issues"
+  }
 }

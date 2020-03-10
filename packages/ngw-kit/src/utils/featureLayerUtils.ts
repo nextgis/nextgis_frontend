@@ -8,11 +8,8 @@ import NgwConnector, {
   FeatureItem,
   RequestItemAdditionalParams
 } from '@nextgis/ngw-connector';
-import {
-  propertiesFilter,
-  checkIfPropertyFilter,
-  CancelablePromise
-} from '@nextgis/utils';
+import CancelablePromise from '@nextgis/cancelable-promise';
+import { propertiesFilter, checkIfPropertyFilter } from '@nextgis/utils';
 
 export interface FeatureRequestParams {
   srs?: number;
