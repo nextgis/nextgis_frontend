@@ -1,8 +1,7 @@
 import WebMap, { MapControl } from '@nextgis/webmap';
-import { dom } from '@nextgis/utils';
+import * as dom from '@nextgis/dom';
 
 export class ZoomControl implements MapControl {
-
   private webMap?: WebMap;
   private _container?: HTMLElement;
   private _zoomInBtn?: HTMLButtonElement;
@@ -31,18 +30,28 @@ export class ZoomControl implements MapControl {
 
   private _createContent() {
     if (this._container) {
-      const zoomInBtn = dom.create('button', 'webmap-ctrl-zoom-in', this._container);
-      zoomInBtn.innerHTML = '<span class="webmap-ctrl-icon" aria-hidden="true"></span>';
-      const zoomOutBtn = dom.create('button', 'webmap-ctrl-zoom-out', this._container);
-      zoomOutBtn.innerHTML = '<span class="webmap-ctrl-icon" aria-hidden="true"></span>';
+      const zoomInBtn = dom.create(
+        'button',
+        'webmap-ctrl-zoom-in',
+        this._container
+      );
+      zoomInBtn.innerHTML =
+        '<span class="webmap-ctrl-icon" aria-hidden="true"></span>';
+      const zoomOutBtn = dom.create(
+        'button',
+        'webmap-ctrl-zoom-out',
+        this._container
+      );
+      zoomOutBtn.innerHTML =
+        '<span class="webmap-ctrl-icon" aria-hidden="true"></span>';
 
       this._zoomInBtn = zoomInBtn;
-      this._zoomOutBtn = zoomOutBtn;
       this.__onZoomInBtnClick = () => this._onZoomInBtnClick();
-      this.__onZoomOutBtnClick = () => this._onZoomOutBtnClick();
+      zoomInBtn.addEventListener('click', this.__onZoomInBtnClick);
 
-      this._zoomInBtn.addEventListener('click', this.__onZoomInBtnClick);
-      this._zoomOutBtn.addEventListener('click', this.__onZoomOutBtnClick);
+      this._zoomOutBtn = zoomOutBtn;
+      this.__onZoomOutBtnClick = () => this._onZoomOutBtnClick();
+      zoomOutBtn.addEventListener('click', this.__onZoomOutBtnClick);
     }
   }
 
@@ -64,5 +73,4 @@ export class ZoomControl implements MapControl {
       }
     }
   }
-
 }
