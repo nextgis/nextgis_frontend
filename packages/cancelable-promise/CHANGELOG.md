@@ -8,4 +8,4 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* new @nextgis/dom library ([82a645d](https://github.com/nextgis/nextgisweb_frontend/commit/82a645d213d0b9ef1bb3c443dc28a94866c2884b))
+* add library cancelable-promise ([5227983](https://github.com/nextgis/nextgisweb_frontend/commit/5227983e03b0a5aa5807002f63914fa2d23154b0))

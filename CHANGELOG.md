@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.27.1](https://github.com/nextgis/nextgisweb_frontend/compare/v0.27.0...v0.27.1) (2020-03-10)
+
+
+### Bug Fixes
+
+* **mapbxo:** resolve geojson selection-filter conflict ([f0abd87](https://github.com/nextgis/nextgisweb_frontend/commit/f0abd87005176192efeac8c40bdc1a4398909eb6))
+
+
+### Features
+
+* add library cancelable-promise ([5227983](https://github.com/nextgis/nextgisweb_frontend/commit/5227983e03b0a5aa5807002f63914fa2d23154b0))
+* add new library `ControlContainer` ([e68afeb](https://github.com/nextgis/nextgisweb_frontend/commit/e68afeb5efb1e40bf20df2effa805fe80c437478))
+* new @nextgis/dom library ([82a645d](https://github.com/nextgis/nextgisweb_frontend/commit/82a645d213d0b9ef1bb3c443dc28a94866c2884b))
+* **cesium:** add mapAdapter listeners and getBounds method ([3033475](https://github.com/nextgis/nextgisweb_frontend/commit/3033475bc1cc519efe08f18e9e741750d35a0f25))
+* **control:** add universal zoom control ([1ffc089](https://github.com/nextgis/nextgisweb_frontend/commit/1ffc089942f1709f82cec8398d301503819be718))
+* **demo:** add search for left sidebar ([d72132d](https://github.com/nextgis/nextgisweb_frontend/commit/d72132dc2385d8982e6a3ec91cd76c1005ed2836))
+
+
+
+
+
 # [0.27.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.26.0...v0.27.0) (2020-03-06)
 
 
