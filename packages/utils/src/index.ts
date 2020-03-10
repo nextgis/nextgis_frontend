@@ -3,9 +3,6 @@
  */
 export * from './Clipboard';
 
-import * as Dom from './dom';
-export const dom = Dom;
-
 export * from './events';
 export * from './array';
 export * from './propertiesFilter';

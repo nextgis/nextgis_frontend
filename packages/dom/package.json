@@ -1,15 +1,12 @@
 {
-  "name": "@nextgis/control-container",
+  "name": "@nextgis/dom",
   "version": "0.27.0",
-  "description": "Placing control elements in the corners of the map container",
-  "main": "lib/control-container.js",
-  "unpkg": "lib/control-container.js",
+  "description": "Collection of libraries for working with the DOM",
+  "main": "lib/dom.js",
+  "unpkg": "lib/dom.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "events": "^3.1.0",
-    "@nextgis/webmap": "^0.27.0",
-    "@nextgis/utils": "^0.27.0",
-    "@nextgis/dom": "^0.27.0"
+    "events": "^3.1.0"
   },
   "devDependencies": {
     "@nextgis/eslint-config": "^0.27.0",

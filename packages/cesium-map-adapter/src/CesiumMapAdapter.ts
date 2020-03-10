@@ -11,7 +11,6 @@ import {
   Cartesian3,
   Math as CesiumMath,
   EllipsoidTerrainProvider,
-  Cartesian4,
   Cartographic
 } from 'cesium';
 
@@ -27,7 +26,7 @@ import {
   ButtonControlOptions
 } from '@nextgis/webmap';
 import ControlContainer from '@nextgis/control-container';
-import { dom } from '@nextgis/utils';
+import * as dom from '@nextgis/dom';
 
 import { TileAdapter } from './layer-adapters/TileAdapter';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
@@ -47,7 +46,7 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
   };
 
   static controlAdapters = {
-    ZOOM: ControlContainer.controls.ZOOM,
+    ZOOM: ControlContainer.controls.ZOOM
     // ATTRIBUTION: Attribution
   };
 
@@ -61,12 +60,13 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
 
   // Scractch memory allocation, happens only once.
   private _scratchRectangle = new Rectangle();
-  private _controlContainer = new ControlContainer({ addClass: 'cesium-control' });
+  private _controlContainer = new ControlContainer({
+    addClass: 'cesium-control'
+  });
 
   create(options: MapOptions) {
     this.options = { ...options };
     if (this.options.target) {
-      const target = dom.getElement(this.options.target);
       const ellipsoidProvider = new EllipsoidTerrainProvider();
 
       const viewer = new Viewer(this.options.target, {
@@ -104,7 +104,10 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
       const controlContainer = this._controlContainer.getContainer();
       const viewerContainer = viewer.container.firstChild;
       if (viewerContainer) {
-        viewerContainer.insertBefore(controlContainer, viewerContainer.firstChild);
+        viewerContainer.insertBefore(
+          controlContainer,
+          viewerContainer.firstChild
+        );
       }
 
       this.emitter.emit('create');
@@ -139,7 +142,7 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
   setZoom(zoom: number) {
     const viewer = this.map;
     if (viewer) {
-
+      //
     }
   }
 
