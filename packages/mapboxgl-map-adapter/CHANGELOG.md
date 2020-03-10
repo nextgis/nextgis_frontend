@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.27.1](https://github.com/nextgis/nextgisweb_frontend/compare/v0.27.0...v0.27.1) (2020-03-10)
+
+
+### Bug Fixes
+
+* **mapbxo:** resolve geojson selection-filter conflict ([f0abd87](https://github.com/nextgis/nextgisweb_frontend/commit/f0abd87005176192efeac8c40bdc1a4398909eb6))
+
+
+### Features
+
+* **control:** add universal zoom control ([1ffc089](https://github.com/nextgis/nextgisweb_frontend/commit/1ffc089942f1709f82cec8398d301503819be718))
+
+
+
+
+
 # [0.27.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.26.0...v0.27.0) (2020-03-06)
 
 
