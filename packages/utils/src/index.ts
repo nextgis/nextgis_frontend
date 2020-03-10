@@ -1,8 +1,6 @@
 /**
  * @module utils
  */
-
-export * from './CancelablePromise';
 export * from './Clipboard';
 
 import * as Dom from './dom';

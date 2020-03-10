@@ -3,8 +3,8 @@
  */
 import StrictEventEmitter from 'strict-event-emitter-types';
 import { EventEmitter } from 'events';
-
-import { fixUrlStr, deepmerge, CancelablePromise } from '@nextgis/utils';
+import CancelablePromise from '@nextgis/cancelable-promise';
+import { fixUrlStr, deepmerge } from '@nextgis/utils';
 import WebMap, {
   MapAdapter,
   ControlPositions,

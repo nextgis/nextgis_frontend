@@ -1,7 +1,7 @@
 /**
  * @module ngw-connector
  */
-import { CancelablePromise } from '@nextgis/utils';
+import CancelablePromise from '@nextgis/cancelable-promise';
 import { EventEmitter } from 'events';
 
 import { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
