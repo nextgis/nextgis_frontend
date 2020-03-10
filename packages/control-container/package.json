@@ -1,7 +1,7 @@
 {
   "name": "@nextgis/control-container",
   "version": "0.27.0",
-  "description": "Hierarchical layers control",
+  "description": "Placing control elements in the corners of the map container",
   "main": "lib/control-container.js",
   "unpkg": "lib/control-container.js",
   "types": "lib/index.d.ts",
