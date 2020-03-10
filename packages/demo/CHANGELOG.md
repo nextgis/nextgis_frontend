@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.27.1](https://github.com/nextgis/nextgis_frontend_apps/compare/v0.27.0...v0.27.1) (2020-03-10)
+
+
+### Features
+
+* **demo:** add search for left sidebar ([d72132d](https://github.com/nextgis/nextgis_frontend_apps/commit/d72132dc2385d8982e6a3ec91cd76c1005ed2836))
+
+
+
+
+
 # [0.27.0](https://github.com/nextgis/nextgis_frontend_apps/compare/v0.26.0...v0.27.0) (2020-03-06)
 
 

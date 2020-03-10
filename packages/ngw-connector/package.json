@@ -1,13 +1,13 @@
 {
   "name": "@nextgis/ngw-connector",
-  "version": "0.27.0",
+  "version": "0.27.1",
   "_priority": 12,
   "description": "Module for interaction with NGW (NextGis Web) server API",
   "main": "lib/ngw-connector.js",
   "unpkg": "lib/ngw-connector.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/cancelable-promise": "^0.27.0",
+    "@nextgis/cancelable-promise": "^0.27.1",
     "events": "^3.1.0"
   },
   "devDependencies": {
