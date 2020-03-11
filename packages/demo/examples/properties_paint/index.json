@@ -1,0 +1,5 @@
+{
+  "name": "Properties paint",
+  "description": "Use properties filter to set paint",
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
+}

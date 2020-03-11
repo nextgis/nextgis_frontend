@@ -108,6 +108,29 @@ export interface GetCustomPaintOptions {
   options?: any;
 }
 
+export function isPropertiesPaint(paint: Paint): paint is PropertiesPaint {
+  if (Array.isArray(paint)) {
+    return true;
+  }
+  return false;
+}
+
+export function isPaint(paint: Paint): paint is VectorAdapterLayerPaint {
+  if (typeof paint === 'object' && paint !== null) {
+    return true;
+  }
+  return false;
+}
+
+export function isPaintCallback(paint: Paint): paint is GetPaintCallback {
+  if (typeof paint === 'function') {
+    return true;
+  }
+  return false;
+}
+
+export type PropertiesPaint = [PropertiesFilter, VectorAdapterLayerPaint][];
+
 export type VectorAdapterLayerPaint =
   | CirclePaint
   | PathPaint
@@ -118,7 +141,10 @@ export type GetPaintCallback<F = Feature> = (
   feature: F
 ) => VectorAdapterLayerPaint;
 
-export type Paint = VectorAdapterLayerPaint | GetPaintCallback;
+export type Paint =
+  | VectorAdapterLayerPaint
+  | GetPaintCallback
+  | PropertiesPaint;
 
 export interface PopupOptions {
   minWidth?: number;
@@ -159,7 +185,7 @@ export interface VectorAdapterOptions<F extends Feature = Feature, L = any>
    * }
    * ```
    */
-  paint?: VectorAdapterLayerPaint | GetPaintCallback;
+  paint?: Paint;
   /**
    * The paint that applies to the features after it becomes selected.
    *
@@ -171,7 +197,7 @@ export interface VectorAdapterOptions<F extends Feature = Feature, L = any>
    * });
    * ```
    */
-  selectedPaint?: VectorAdapterLayerPaint | GetPaintCallback;
+  selectedPaint?: Paint;
   nativePaint?: boolean | Record<string, any>;
   nativeFilter?: unknown;
   layout?: any;
