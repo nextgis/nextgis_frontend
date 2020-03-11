@@ -7,11 +7,13 @@ import {
   VectorAdapterLayerPaint,
   VectorAdapterLayerType,
   IconOptions,
-  GetPaintCallback,
   LayerDefinition,
   DataLayerFilter,
   PathPaint,
-  PopupOptions
+  Paint,
+  PopupOptions,
+  isPaintCallback,
+  isPaint
 } from '@nextgis/webmap';
 import {
   GeoJSON,
@@ -45,8 +47,8 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
   layer: FeatureGroup;
   selected = false;
 
-  private paint?: VectorAdapterLayerPaint | GetPaintCallback;
-  private selectedPaint?: VectorAdapterLayerPaint | GetPaintCallback;
+  private paint?: Paint;
+  private selectedPaint?: Paint;
   private type?: VectorAdapterLayerType;
 
   private _layers: LayerMem[] = [];
@@ -263,25 +265,27 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     layer.closePopup().unbindPopup();
   }
 
-  private setPaintEachLayer(paint: GetPaintCallback | VectorAdapterLayerPaint) {
+  private setPaintEachLayer(paint: Paint) {
     this.layer.eachLayer(l => {
       this.setPaint(l, paint);
     });
   }
 
-  private setPaint(l: any, paint: GetPaintCallback | VectorAdapterLayerPaint) {
-    let style: VectorAdapterLayerPaint;
-    if (typeof paint === 'function') {
+  private setPaint(l: any, paint: Paint) {
+    let style: VectorAdapterLayerPaint | undefined = undefined;
+    if (isPaintCallback(paint)) {
       style = paint(l.feature);
-    } else {
+    } else if (isPaint(paint)) {
       style = paint;
     }
-    if (this.type === 'circle' && style.type === 'icon') {
-      const marker = l as Marker;
-      const divIcon = this.createDivIcon(style);
-      marker.setIcon(divIcon);
-    } else if ('setStyle' in l) {
-      l.setStyle(this.preparePaint(style));
+    if (style) {
+      if (this.type === 'circle' && style.type === 'icon') {
+        const marker = l as Marker;
+        const divIcon = this.createDivIcon(style);
+        marker.setIcon(divIcon);
+      } else if ('setStyle' in l) {
+        l.setStyle(this.preparePaint(style));
+      }
     }
   }
 

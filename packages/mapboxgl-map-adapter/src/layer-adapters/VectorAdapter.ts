@@ -13,7 +13,9 @@ import {
   DataLayerFilter,
   PropertyFilter,
   FilterOptions,
-  checkIfPropertyFilter
+  Paint,
+  checkIfPropertyFilter,
+  isPaint
 } from '@nextgis/webmap';
 import {
   Feature as F,
@@ -258,9 +260,7 @@ export abstract class VectorAdapter<
     const layerName = this._getLayerNameFromType(type);
 
     if (this.options.paint) {
-      const layers: [string, VectorAdapterLayerPaint | GetPaintCallback][] = [
-        [layerName, this.options.paint]
-      ];
+      const layers: [string, Paint][] = [[layerName, this.options.paint]];
       if (this.options.selectedPaint) {
         const selName = this._getSelectionLayerNameFromType(type);
         layers.push([selName, this.options.selectedPaint]);
@@ -301,11 +301,11 @@ export abstract class VectorAdapter<
   }
 
   protected async _createPaintForType(
-    paint: VectorAdapterLayerPaint | GetPaintCallback,
+    paint: Paint,
     type: VectorAdapterLayerType,
     name?: string
   ): Promise<any> {
-    if (typeof paint !== 'function') {
+    if (isPaint(paint)) {
       const mapboxPaint: any = {};
       const _paint = { ...PAINT, ...(paint || {}) };
       if (paint.type === 'icon' && paint.html) {
@@ -516,9 +516,7 @@ export abstract class VectorAdapter<
     }
   }
 
-  private _detectPaintType(
-    paint: VectorAdapterLayerPaint | GetPaintCallback
-  ): string | undefined {
+  private _detectPaintType(paint: Paint): string | undefined {
     if ('type' in paint) {
       return paint.type;
     } else if (typeof paint === 'function') {
