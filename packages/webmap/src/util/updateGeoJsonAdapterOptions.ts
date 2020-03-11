@@ -3,7 +3,8 @@
  */
 import {
   GeoJsonAdapterOptions,
-  VectorAdapterLayerType
+  VectorAdapterLayerType,
+  isPaint
 } from '../interfaces/LayerAdapter';
 import { detectGeometryType } from './geometryTypes';
 
@@ -22,7 +23,7 @@ export function updateGeoJsonAdapterOptions(
   if (opt.data) {
     const geomType = typeAlias[detectGeometryType(opt.data)];
     const p = opt.paint;
-    if (typeof p === 'object') {
+    if (p && isPaint(p)) {
       // define parameter if not specified
       p.type = p.type
         ? p.type

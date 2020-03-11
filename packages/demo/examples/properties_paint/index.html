@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
 
-  <title>NGW BBOX STRATEGY</title>
+  <title>PROPERTIES PAINT</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     * {
@@ -31,17 +31,16 @@
       baseUrl: 'https://demo.nextgis.com',
       target: 'map',
       qmsId: 487,
-      center: [104, 52],
-      zoom: 3,
       resources: [
         {
           resource: 1733,
           adapterOptions: {
-            // set this option to enable bbox strategy for this layer
-            strategy: 'BBOX',
-            // it is good practice to enable 'limit' option when using a boxing strategy
-            limit: 100,
+            paint: [
+              [[['AMENITY', 'eq', 'restaurant']], { color: 'green' }],
+              [[['AMENITY', 'eq', 'cafe']], { color: 'red' }]
+            ],
             fit: true,
+            limit: 300
           }
         },
       ]

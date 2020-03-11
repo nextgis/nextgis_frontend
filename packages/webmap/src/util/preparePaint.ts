@@ -1,12 +1,17 @@
 /**
  * @module webmap
  */
+import { featureFilter } from '@nextgis/utils';
+import { Feature } from 'geojson';
 import {
   Paint,
   VectorAdapterLayerPaint,
   GeometryPaint,
   GetPaintFunction,
-  GetCustomPaintOptions
+  GetCustomPaintOptions,
+  isPaintCallback,
+  isPropertiesPaint,
+  PropertiesPaint
 } from '../interfaces/LayerAdapter';
 
 function updatePaintOptionFromCallback(
@@ -23,16 +28,36 @@ function updatePaintOptionFromCallback(
   }
 }
 
+function createPropertiesPaint(
+  propertiesPaint: PropertiesPaint
+): GetPaintFunction {
+  return (feature: Feature) => {
+    const paint = propertiesPaint.find(x => featureFilter(feature, x[0]));
+    if (paint) {
+      return paint[1];
+    }
+    return {};
+  };
+}
+
 export function preparePaint(
   paint: Paint,
   defaultPaint: GeometryPaint,
   getPaintFunctions: { [name: string]: GetPaintFunction }
 ): Paint {
   let newPaint: Paint | undefined;
-  if (typeof paint === 'function') {
-    return (opt: any) => {
+  if (isPaintCallback(paint)) {
+    return (feature: Feature) => {
       return preparePaint(
-        paint(opt),
+        paint(feature),
+        defaultPaint,
+        getPaintFunctions
+      ) as VectorAdapterLayerPaint;
+    };
+  } else if (isPropertiesPaint(paint)) {
+    return (feature: Feature) => {
+      return preparePaint(
+        createPropertiesPaint(paint)(feature),
         defaultPaint,
         getPaintFunctions
       ) as VectorAdapterLayerPaint;
