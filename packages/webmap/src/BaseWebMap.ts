@@ -36,12 +36,12 @@ import { createToggleControl } from './components/controls/ToggleControl';
 import {
   detectGeometryType,
   findMostFrequentGeomType
-} from './util/geometryTypes';
-import { onLoad } from './util/decorators';
-import { clearObject } from './util/clearObject';
-import { propertiesFilter } from './util/propertiesFilter';
-import { getBoundsPolygon } from './util/getBoundsPolygon';
-import { updateGeoJsonAdapterOptions } from './util/updateGeoJsonAdapterOptions';
+} from './utils/geometryTypes';
+import { onLoad } from './utils/decorators';
+import { clearObject } from './utils/clearObject';
+import { propertiesFilter } from './utils/propertiesFilter';
+import { getBoundsPolygon } from './utils/getBoundsPolygon';
+import { updateGeoJsonAdapterOptions } from './utils/updateGeoJsonAdapterOptions';
 
 const OPTIONS: MapOptions = {
   minZoom: 0,

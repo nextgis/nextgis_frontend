@@ -15,6 +15,7 @@ import {
   PropertyPaint,
   isPaint
 } from '../interfaces/Paint';
+import { createExpressionCallback } from './fromPaintExpression';
 
 function updatePaintOptionFromCallback(
   paint: GetCustomPaintOptions,
@@ -84,6 +85,17 @@ export function preparePaint(
   } else if (paint.type === 'icon') {
     return paint;
   } else {
+    const expressionCallback = createExpressionCallback(paint);
+    if (expressionCallback) {
+      return (feature: Feature) => {
+        return preparePaint(
+          expressionCallback(feature),
+          defaultPaint,
+          getPaintFunctions
+        ) as VectorAdapterLayerPaint;
+      };
+    }
+
     newPaint = { ...paint };
     newPaint.fill = newPaint.fill !== undefined ? newPaint.fill : true;
     newPaint.stroke =
