@@ -18,13 +18,13 @@ import {
 import { LayerDef, Type } from './interfaces/BaseTypes';
 
 import { Feature, GeoJsonObject } from 'geojson';
-import { preparePaint } from './util/preparePaint';
-import { updateGeoJsonAdapterOptions } from './util/updateGeoJsonAdapterOptions';
+import { preparePaint } from './utils/preparePaint';
+import { updateGeoJsonAdapterOptions } from './utils/updateGeoJsonAdapterOptions';
 import {
   GetAttributionsOptions,
   ToggleLayerOptions
 } from './interfaces/WebMapApp';
-import { propertiesFilter } from './util/propertiesFilter';
+import { propertiesFilter } from './utils/propertiesFilter';
 import { BaseWebMap } from './BaseWebMap';
 import { WebMapEvents } from './interfaces/Events';
 

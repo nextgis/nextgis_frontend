@@ -316,7 +316,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
 
       const readyPaint: PathOptions & CircleMarkerOptions = {};
 
-      if ('radius' in paint) {
+      if ('radius' in paint && typeof paint.radius === 'number') {
         readyPaint.radius = paint.radius;
       }
       aliases.forEach(([to, from]: [keyof PathOptions, keyof PathPaint]) => {
