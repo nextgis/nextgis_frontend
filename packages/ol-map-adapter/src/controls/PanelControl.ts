@@ -2,7 +2,7 @@ import './PanelControl.css';
 
 import Control from 'ol/control/Control';
 import { ControlPositions } from '@nextgis/webmap';
-import { ControlContainer } from '@nextgis/control-container';
+import ControlContainer from '@nextgis/control-container';
 
 interface PanelControlOptions {
   collapsible?: boolean;

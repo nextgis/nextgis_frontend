@@ -12,9 +12,10 @@ import {
   PropertyFilter,
   FilterOptions,
   Paint,
-  checkIfPropertyFilter,
-  isPaint
+  VectorAdapterLayerPaint
 } from '@nextgis/webmap';
+
+import { checkIfPropertyFilter } from '@nextgis/properties-filter';
 import {
   Feature as F,
   GeometryObject,
@@ -39,6 +40,14 @@ import { getImage } from '../util/image_icons';
 import { TLayer } from '../MapboxglMapAdapter';
 import { BaseAdapter } from './BaseAdapter';
 import { typeAliasForFilter, allowedByType } from '../util/geom_type';
+
+// TODO: export from webmap or separate module
+export function isPaint(paint: Paint): paint is VectorAdapterLayerPaint {
+  if (Object.prototype.toString.call(paint) === '[object Object]') {
+    return true;
+  }
+  return false;
+}
 
 export const operationsAliases: { [key in Operations]: string } = {
   gt: '>',
