@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.28.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.27.1...v0.28.0) (2020-03-12)
+
+
+### Features
+
+* add library `@nextgis/properties-filter` ([0902366](https://github.com/nextgis/nextgisweb_frontend/commit/09023669c963ddb4e0a319400397e5f320620573))
+* **webmap:** paint from properties filter ([6645e46](https://github.com/nextgis/nextgisweb_frontend/commit/6645e467f1be79c0a2ed02fed65a62b5850daf70))
+
+
+### BREAKING CHANGES
+
+* `propertiesFilter` removed from `@nextgis/utils`
+
+
+
+
+
 ## [0.27.1](https://github.com/nextgis/nextgisweb_frontend/compare/v0.27.0...v0.27.1) (2020-03-10)
 
 
