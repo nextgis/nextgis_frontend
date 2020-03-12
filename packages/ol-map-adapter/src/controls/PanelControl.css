@@ -2,6 +2,11 @@
 
 .ol-control { clear: both; pointer-events: auto; }
 
+.ol-control button {
+  color: inherit;
+  border-radius: inherit;
+}
+
 .webmap-control-container .ol-control {
   position: relative;
   top: inherit;

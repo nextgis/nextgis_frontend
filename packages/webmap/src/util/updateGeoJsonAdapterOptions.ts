@@ -3,10 +3,10 @@
  */
 import {
   GeoJsonAdapterOptions,
-  VectorAdapterLayerType,
-  isPaint
+  VectorAdapterLayerType
 } from '../interfaces/LayerAdapter';
 import { detectGeometryType } from './geometryTypes';
+import { isPaint } from '../interfaces/Paint';
 
 export const typeAlias: { [x: string]: VectorAdapterLayerType } = {
   Point: 'circle',

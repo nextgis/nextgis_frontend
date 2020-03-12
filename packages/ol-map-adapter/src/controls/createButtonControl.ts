@@ -20,7 +20,7 @@ export function createButtonControl(options: ButtonControlOptions): Control {
       const element = document.createElement('div');
       element.className =
         (options.addClass ? options.addClass + ' ' : '') +
-        'ol-unselectable ol-control';
+        'ol-unselectable webmap-ctrl-group';
       element.appendChild(button);
 
       C.call(this, { element });

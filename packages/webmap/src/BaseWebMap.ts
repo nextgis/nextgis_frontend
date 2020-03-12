@@ -1,49 +1,47 @@
 /**
  * @module webmap
  */
+import { EventEmitter } from 'events';
+import { Feature, Polygon } from 'geojson';
+import StrictEventEmitter from 'strict-event-emitter-types';
+
 import { deepmerge } from '@nextgis/utils';
-import { GetPaintFunction } from './interfaces/LayerAdapter';
-import { LayerAdapter } from './interfaces/LayerAdapter';
-import {
-  MapAdapter,
-  FitOptions,
-  LocateOptions,
-  LocationEvents,
-  Locate
-} from './interfaces/MapAdapter';
-import { MapOptions, AppOptions } from './interfaces/WebMapApp';
+
 import {
   LngLatBoundsArray,
   Type,
   Cursor,
   LngLatArray
 } from './interfaces/BaseTypes';
-import { RuntimeParams } from './interfaces/RuntimeParams';
+import {
+  Locate,
+  MapAdapter,
+  FitOptions,
+  LocateOptions,
+  LocationEvents
+} from './interfaces/MapAdapter';
 import { StarterKit } from './interfaces/StarterKit';
-
-import { createToggleControl } from './components/controls/ToggleControl';
-
-import { Keys } from './components/keys/Keys';
-
-import StrictEventEmitter from 'strict-event-emitter-types';
-import { EventEmitter } from 'events';
+import { GetPaintFunction } from './interfaces/Paint';
+import { LayerAdapter } from './interfaces/LayerAdapter';
+import { RuntimeParams } from './interfaces/RuntimeParams';
+import { MapOptions, AppOptions } from './interfaces/WebMapApp';
 import { WebMapEvents, BaseMapEvents } from './interfaces/Events';
 
-import { onLoad } from './util/decorators';
-import { propertiesFilter } from './util/propertiesFilter';
-import { clearObject } from './util/clearObject';
-import { getBoundsPolygon } from './util/getBoundsPolygon';
+import { Keys } from './components/keys/Keys';
+import { CenterState } from './components/mapStates/CenterState';
+import { StateItem } from './components/mapStates/StateItem';
+import { ZoomState } from './components/mapStates/ZoomState';
+import { createToggleControl } from './components/controls/ToggleControl';
 
 import {
   detectGeometryType,
   findMostFrequentGeomType
 } from './util/geometryTypes';
+import { onLoad } from './util/decorators';
+import { clearObject } from './util/clearObject';
+import { propertiesFilter } from './util/propertiesFilter';
+import { getBoundsPolygon } from './util/getBoundsPolygon';
 import { updateGeoJsonAdapterOptions } from './util/updateGeoJsonAdapterOptions';
-
-import { CenterState } from './components/mapStates/CenterState';
-import { ZoomState } from './components/mapStates/ZoomState';
-import { StateItem } from './components/mapStates/StateItem';
-import { Feature, Polygon } from 'geojson';
 
 const OPTIONS: MapOptions = {
   minZoom: 0,
