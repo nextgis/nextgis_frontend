@@ -79,13 +79,20 @@ export function styleFunction(
         ...paint
       } as GeometryPaint;
 
-      if (fill && fillColor) {
+      if (
+        fill &&
+        fillColor &&
+        typeof fillColor === 'string' &&
+        typeof fillOpacity === 'number'
+      ) {
         style.fill = new Fill({
           color: getColor(fillColor, fillOpacity)
         });
       }
       if (
         strokeColor &&
+        typeof strokeColor === 'string' &&
+        typeof strokeOpacity === 'number' &&
         (stroke || ['MultiLineString', 'LineString'].indexOf(type) !== -1)
       ) {
         style.stroke = new Stroke({
@@ -95,7 +102,7 @@ export function styleFunction(
         });
       }
 
-      if (paint.type === 'circle' && radius) {
+      if (paint.type === 'circle' && typeof radius === 'number') {
         style.image = new CircleStyle({ radius, ...style });
       }
     } else if (paint.type === 'icon') {

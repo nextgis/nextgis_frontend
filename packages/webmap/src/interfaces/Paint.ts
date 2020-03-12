@@ -3,24 +3,24 @@ import { Feature } from 'geojson';
 
 export interface BasePaint {
   type?: string;
-  color?: string;
-  opacity?: number;
+  color?: string | Expression;
+  opacity?: number | Expression;
   fill?: boolean;
-  fillColor?: string;
-  fillOpacity?: number;
+  fillColor?: string | Expression;
+  fillOpacity?: number | Expression;
   stroke?: boolean;
-  strokeColor?: string;
-  strokeOpacity?: number;
+  strokeColor?: string | Expression;
+  strokeOpacity?: number | Expression;
 }
 
 export interface CirclePaint extends BasePaint {
   type?: 'circle';
-  radius?: number;
+  radius?: number | Expression;
 }
 
 export interface PathPaint extends BasePaint {
   type?: 'path';
-  weight?: number;
+  weight?: number | Expression;
 }
 
 export type GeometryPaint = PathPaint & CirclePaint;
@@ -100,3 +100,59 @@ export type Paint =
   | VectorAdapterLayerPaint
   | GetPaintCallback
   | PropertiesPaint;
+
+// MAPBOX
+export type ExpressionName =
+  // Types
+  // | 'array'
+  // | 'boolean'
+  // | 'collator'
+  // | 'format'
+  // | 'literal'
+  // | 'number'
+  // | 'object'
+  // | 'string'
+  // | 'to-boolean'
+  // | 'to-color'
+  // | 'to-number'
+  // | 'to-string'
+  // | 'typeof'
+  // Feature data
+  // | 'feature-state'
+  // | 'geometry-type'
+  // | 'id'
+  // | 'line-progress'
+  // | 'properties'
+  // Lookup
+  // | 'at'
+  'get';
+// | 'has'
+// | 'length'
+// Decision
+// | '!'
+// | '!='
+// | '<'
+// | '<='
+// | '=='
+// | '>'
+// | '>='
+// | 'all'
+// | 'any'
+// | 'case'
+// | 'match'
+// | 'coalesce'
+// String
+// | 'concat'
+// | 'downcase'
+// | 'is-supported-script'
+// | 'resolved-locale'
+// | 'upcase'
+
+export type Expression = [ExpressionName, ...any[]];
+
+export function isExpression(value: any): value is Expression {
+  if (Array.isArray(value)) {
+    return true;
+  }
+  return false;
+}
