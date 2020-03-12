@@ -1,4 +1,7 @@
 /**
  * @module webmap
  */
-export { operationsAliases, propertiesFilter } from '@nextgis/utils';
+export {
+  operationsAliases,
+  propertiesFilter
+} from '@nextgis/properties-filter';

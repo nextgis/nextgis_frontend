@@ -9,7 +9,7 @@ import {
   Operations,
   PropertyFilter,
   checkIfPropertyFilter
-} from '@nextgis/utils';
+} from '@nextgis/properties-filter';
 import { Paint } from './Paint';
 
 // backward compatibility

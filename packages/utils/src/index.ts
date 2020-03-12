@@ -5,7 +5,6 @@ export * from './Clipboard';
 
 export * from './events';
 export * from './array';
-export * from './propertiesFilter';
 export * from './sleep';
 export * from './typeHelpers';
 export * from './applyMixins';
