@@ -11,8 +11,10 @@ import {
   GetCustomPaintOptions,
   isPaintCallback,
   isPropertiesPaint,
-  PropertiesPaint
-} from '../interfaces/LayerAdapter';
+  PropertiesPaint,
+  PropertyPaint,
+  isPaint
+} from '../interfaces/Paint';
 
 function updatePaintOptionFromCallback(
   paint: GetCustomPaintOptions,
@@ -31,12 +33,24 @@ function updatePaintOptionFromCallback(
 function createPropertiesPaint(
   propertiesPaint: PropertiesPaint
 ): GetPaintFunction {
-  return (feature: Feature) => {
-    const paint = propertiesPaint.find(x => featureFilter(feature, x[0]));
-    if (paint) {
-      return paint[1];
+  let mask: VectorAdapterLayerPaint = {};
+  const paintsFilters: PropertyPaint[] = [];
+  propertiesPaint.forEach(x => {
+    if (x) {
+      if (Array.isArray(x)) {
+        paintsFilters.push(x);
+      } else {
+        mask = x as VectorAdapterLayerPaint;
+      }
     }
-    return {};
+  });
+
+  return (feature: Feature) => {
+    const paint = paintsFilters.find(x => featureFilter(feature, x[0]));
+    if (paint) {
+      return { ...mask, ...paint[1] };
+    }
+    return mask;
   };
 }
 
@@ -78,9 +92,9 @@ export function preparePaint(
         : !newPaint.fill || !!(newPaint.strokeColor || newPaint.strokeOpacity);
   }
   if (newPaint) {
-    if (typeof newPaint === 'function') {
+    if (isPaintCallback(newPaint)) {
       return newPaint;
-    } else {
+    } else if (isPaint(newPaint)) {
       newPaint = { ...defaultPaint, ...newPaint };
     }
   } else {

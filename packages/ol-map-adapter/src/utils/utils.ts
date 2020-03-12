@@ -10,9 +10,10 @@ import Icon, { Options as IconOptions } from 'ol/style/Icon';
 
 import {
   GeometryPaint,
-  GetPaintCallback,
   VectorAdapterLayerType,
-  VectorAdapterLayerPaint
+  Paint,
+  isPaintCallback,
+  isPaint
 } from '@nextgis/webmap';
 
 const typeAlias: { [x: string]: VectorAdapterLayerType } = {
@@ -43,12 +44,13 @@ export function getColor(colorStr: string, opacity?: number): Color {
 
 export function styleFunction(
   feature: OlFeature,
-  paint: VectorAdapterLayerPaint | GetPaintCallback = {}
-): Style {
-  if (typeof paint === 'function') {
+  paint: Paint = {}
+): Style | undefined {
+  if (isPaintCallback(paint)) {
     const f: Feature = getFeature(feature);
     return styleFunction(feature, paint(f));
-  } else {
+  }
+  if (isPaint(paint)) {
     const geometry = feature.getGeometry();
     const geomType = geometry && geometry.getType();
     const type = geomType || 'Point';
