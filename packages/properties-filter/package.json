@@ -1,12 +1,12 @@
 {
   "name": "@nextgis/properties-filter",
-  "version": "0.27.1",
+  "version": "0.28.0",
   "description": "Filtering objects by its properties using expressions",
   "main": "lib/properties-filter.js",
   "unpkg": "lib/properties-filter.js",
   "types": "lib/index.d.ts",
   "devDependencies": {
-    "@nextgis/eslint-config": "^0.27.0",
+    "@nextgis/eslint-config": "^0.28.0",
     "@types/node": "^13.7.7",
     "eslint-loader": "^3.0.3",
     "rimraf": "^3.0.2",

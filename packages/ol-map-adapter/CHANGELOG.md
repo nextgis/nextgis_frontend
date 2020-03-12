@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.28.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.27.1...v0.28.0) (2020-03-12)
+
+
+### Features
+
+* **webmap:** paint from expressions ([126a191](https://github.com/nextgis/nextgisweb_frontend/commit/126a191a540e12ac7ff74471a110c1fd04340516))
+
+
+### BREAKING CHANGES
+
+* **webmap:** New Paint specification may cause problems with types
+
+
+
+
+
 ## [0.27.1](https://github.com/nextgis/nextgisweb_frontend/compare/v0.27.0...v0.27.1) (2020-03-10)
 
 
