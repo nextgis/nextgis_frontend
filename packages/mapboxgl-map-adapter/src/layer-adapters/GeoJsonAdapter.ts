@@ -11,7 +11,7 @@ import {
   LayerDefinition,
   PropertiesFilter
 } from '@nextgis/webmap';
-import { featureFilter } from '@nextgis/utils';
+import { featureFilter } from '@nextgis/properties-filter';
 import {
   GeoJsonObject,
   FeatureCollection,
