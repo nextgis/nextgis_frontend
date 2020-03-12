@@ -2,11 +2,12 @@
  * @module webmap
  */
 
-import { MapAdapter, FitOptions } from './MapAdapter';
+import { GeometryPaint } from './Paint';
 import { StarterKit } from './StarterKit';
-import { LngLatArray, LngLatBoundsArray, Type } from './BaseTypes';
-import { GeometryPaint, LayerAdapter, AdapterOptions } from './LayerAdapter';
 import { RuntimeParams } from './RuntimeParams';
+import { MapAdapter, FitOptions } from './MapAdapter';
+import { LayerAdapter, AdapterOptions } from './LayerAdapter';
+import { LngLatArray, LngLatBoundsArray, Type } from './BaseTypes';
 
 export interface MapOptions {
   /**

@@ -5,7 +5,6 @@ import { EventEmitter } from 'events';
 
 import Map from 'ol/Map';
 import Base from 'ol/layer/Base';
-import Zoom from 'ol/control/Zoom';
 import { Extent } from 'ol/extent';
 import Control from 'ol/control/Control';
 import View, { ViewOptions } from 'ol/View';
@@ -30,6 +29,7 @@ import { TileAdapter } from './layer-adapters/TileAdapter';
 import { ImageAdapter } from './layer-adapters/ImageAdapter';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 
+import { ZoomControl } from './controls/ZoomControl';
 import { Attribution } from './controls/Attribution';
 import { PanelControl } from './controls/PanelControl';
 import { createControl } from './controls/createControl';
@@ -58,7 +58,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
   };
 
   static controlAdapters = {
-    ZOOM: Zoom,
+    ZOOM: ZoomControl,
     ATTRIBUTION: Attribution
   };
 

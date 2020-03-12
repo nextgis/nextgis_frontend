@@ -11,7 +11,7 @@ export function createControl(
       element.className =
         (options.addClass ? options.addClass + ' ' : '') +
         'ol-unselectable' +
-        (options.bar ? ' ol-control' : '') +
+        (options.bar ? ' webmap-ctrl-group' : '') +
         (options.margin ? ' ol-control-margin' : '');
       const content = control.onAdd();
       if (content) {

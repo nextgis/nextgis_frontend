@@ -3,8 +3,6 @@
  */
 import {
   VectorAdapterLayerType,
-  VectorAdapterLayerPaint,
-  GetPaintCallback,
   IconOptions,
   VectorLayerAdapter,
   VectorAdapterOptions,

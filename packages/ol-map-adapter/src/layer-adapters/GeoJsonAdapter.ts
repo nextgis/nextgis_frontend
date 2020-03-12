@@ -10,10 +10,9 @@ import { Feature, GeoJsonObject } from 'geojson';
 import {
   DataLayerFilter,
   PropertiesFilter,
-  GetPaintCallback,
   VectorLayerAdapter,
   GeoJsonAdapterOptions,
-  VectorAdapterLayerPaint
+  Paint
 } from '@nextgis/webmap';
 
 import { resolutionOptions } from '../utils/gerResolution';
@@ -26,8 +25,8 @@ type Layer = Base;
 export class GeoJsonAdapter
   implements VectorLayerAdapter<Map, Layer, GeoJsonAdapterOptions> {
   layer?: VectorLayer;
-  paint?: VectorAdapterLayerPaint | GetPaintCallback;
-  selectedPaint?: VectorAdapterLayerPaint | GetPaintCallback;
+  paint?: Paint;
+  selectedPaint?: Paint;
   selected = false;
 
   private vectorSource = new VectorSource();
@@ -51,8 +50,11 @@ export class GeoJsonAdapter
     this.layer = new VectorLayer({
       source: this.vectorSource,
       style: f => {
+        const style = [];
         const vectorStyle = styleFunction(f as OlFeature, options.paint);
-        const style = [vectorStyle];
+        if (vectorStyle) {
+          style.push(vectorStyle);
+        }
         const labelField = this.options.labelField;
         if (labelField) {
           const text = String(f.get(labelField));
@@ -173,12 +175,15 @@ export class GeoJsonAdapter
     this.filter();
   }
 
-  private setPaintEachLayer(paint: GetPaintCallback | VectorAdapterLayerPaint) {
+  private setPaintEachLayer(paint: Paint) {
     if (this.layer) {
       const source = this.layer.getSource();
       const features = source.getFeatures();
       features.forEach(f => {
-        f.setStyle(styleFunction(f, paint));
+        const style = styleFunction(f, paint);
+        if (style) {
+          f.setStyle(style);
+        }
       });
     }
   }
@@ -223,7 +228,10 @@ export class GeoJsonAdapter
     this._selectedFeatures.push(feature);
     this.selected = true;
     if (options && options.selectedPaint) {
-      feature.setStyle(styleFunction(feature, options.selectedPaint));
+      const style = styleFunction(feature, options.selectedPaint);
+      if (style) {
+        feature.setStyle(style);
+      }
     }
   }
 
@@ -234,7 +242,10 @@ export class GeoJsonAdapter
     }
     this.selected = this._selectedFeatures.length > 0;
     if (this.options && this.options.paint) {
-      feature.setStyle(styleFunction(feature, this.options.paint));
+      const style = styleFunction(feature, this.options.paint);
+      if (style) {
+        feature.setStyle(style);
+      }
     }
   }
 }
