@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/dom",
-  "version": "0.27.1",
+  "version": "0.28.0",
   "description": "Collection of libraries for working with the DOM",
   "main": "lib/dom.js",
   "unpkg": "lib/dom.js",
@@ -9,7 +9,7 @@
     "events": "^3.1.0"
   },
   "devDependencies": {
-    "@nextgis/eslint-config": "^0.27.0",
+    "@nextgis/eslint-config": "^0.28.0",
     "@types/events": "^3.0.0",
     "@types/node": "^13.7.7",
     "eslint-loader": "^3.0.3",
