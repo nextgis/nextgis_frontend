@@ -26,7 +26,6 @@ import {
   ButtonControlOptions
 } from '@nextgis/webmap';
 import ControlContainer from '@nextgis/control-container';
-import * as dom from '@nextgis/dom';
 
 import { TileAdapter } from './layer-adapters/TileAdapter';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
@@ -91,10 +90,10 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
 
       viewer.imageryLayers.removeAll();
 
-      viewer.scene.globe.depthTestAgainstTerrain = false;
-      viewer.scene.postProcessStages.fxaa.enabled = true;
+      // viewer.scene.globe.depthTestAgainstTerrain = false;
+      // viewer.scene.postProcessStages.fxaa.enabled = true;
 
-      viewer.camera.percentageChanged = 0.1;
+      // viewer.camera.percentageChanged = 0.1;
       this.map = viewer;
       if (options.bounds) {
         this.fitBounds(options.bounds);

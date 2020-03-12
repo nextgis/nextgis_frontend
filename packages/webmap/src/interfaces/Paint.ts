@@ -62,6 +62,16 @@ export function isPaint(paint: Paint): paint is VectorAdapterLayerPaint {
   return false;
 }
 
+export function isBasePaint(paint: Paint): paint is GeometryPaint {
+  if (isPaint(paint)) {
+    if (paint.type === 'get-paint' || paint.type === 'icon') {
+      return false;
+    }
+    return true;
+  }
+  return false;
+}
+
 export function isPaintCallback(paint: Paint): paint is GetPaintCallback {
   if (typeof paint === 'function') {
     return true;
