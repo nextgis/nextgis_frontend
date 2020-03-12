@@ -17,7 +17,7 @@
     <v-navigation-drawer
       :clipped="$vuetify.breakpoint.lgAndUp"
       :open="open"
-      width="250"
+      width="300"
       v-model="drawer"
       dark
       style="background:#0070c5"
