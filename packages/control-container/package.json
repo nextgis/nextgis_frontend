@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/control-container",
-  "version": "0.28.1",
+  "version": "0.28.2",
   "description": "Placing control elements in the corners of the map container",
   "main": "lib/control-container.js",
   "unpkg": "lib/control-container.js",
