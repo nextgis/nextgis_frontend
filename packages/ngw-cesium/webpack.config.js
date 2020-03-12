@@ -71,6 +71,5 @@ module.exports = (env, argv) => {
     ]
   };
   config.module.rules.push(pragmaRule);
-  console.log(config);
   return config;
 };

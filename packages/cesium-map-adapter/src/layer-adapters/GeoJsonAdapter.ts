@@ -5,19 +5,36 @@ import {
   VectorLayerAdapter,
   GeoJsonAdapterOptions,
   DataLayerFilter,
-  PropertiesFilter
+  PropertiesFilter,
+  VectorAdapterLayerPaint,
+  isPaintCallback,
+  Paint,
+  isBasePaint,
+  isPaint
 } from '@nextgis/webmap';
 
-import { GeoJsonDataSource } from 'cesium';
-import { GeoJsonObject, Feature } from 'geojson';
+import { GeoJsonDataSource, Color } from 'cesium';
+import { GeoJsonObject, Feature, FeatureCollection } from 'geojson';
 import { BaseAdapter, Map } from './BaseAdapter';
 
 type Layer = GeoJsonDataSource;
+
+interface GeoJsonDataSourceLoadOptions {
+  sourceUri?: string;
+  markerSize?: number;
+  markerSymbol?: string;
+  markerColor?: Color;
+  stroke?: Color;
+  strokeWidth?: number;
+  fill?: Color;
+  clampToGround?: boolean;
+}
 
 export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
   implements VectorLayerAdapter<Map> {
   selected = false;
 
+  private _features: Feature[] = [];
   private _source?: GeoJsonDataSource;
 
   addLayer(options: GeoJsonAdapterOptions) {
@@ -44,6 +61,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
   clearLayer(cb?: (feature: Feature) => boolean) {
     if (this._source) {
       this._source.entities.removeAll();
+      this._features = [];
     }
   }
 
@@ -54,7 +72,14 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
 
   addData(data: GeoJsonObject) {
     if (this._source) {
-      this._source.load(data);
+      if (data.type === 'Feature') {
+        this._features.push(data as Feature);
+      } else if (data.type === 'FeatureCollection') {
+        const featureCollection = data as FeatureCollection;
+        featureCollection.features.forEach(x => this._features.push(x));
+      }
+      this._updateSource();
+      // this._source.load(data);
     }
   }
 
@@ -80,5 +105,58 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
 
   cleanFilter() {
     //
+  }
+
+  private _updateSource() {
+    const source = this._source;
+    if (source) {
+      source.entities.removeAll();
+      this._features.forEach(x => {
+        const options: GeoJsonDataSourceLoadOptions = {};
+        const paint = this._getFeaturePaint(x, this.options.paint);
+        if (isBasePaint(paint)) {
+          const color = paint.color || 'blue';
+          const fillColor = paint.fillColor || color;
+
+          const fill = paint.fill ?? true;
+          if (fill && color) {
+            options.fill = Color.fromCssColorString(fillColor);
+            options.markerColor = Color.fromCssColorString(fillColor);
+          }
+          if (options.stroke) {
+            const strokeColor = paint.strokeColor || color;
+            options.stroke = Color.fromCssColorString(strokeColor);
+            if (paint.weight !== undefined) {
+              options.strokeWidth = paint.weight;
+            }
+          }
+          if (paint.radius !== undefined) {
+            // magic 4
+            options.markerSize = paint.radius * 4;
+          }
+        }
+
+        const dataSource = new GeoJsonDataSource();
+        dataSource.load(x, options).then(x => {
+          dataSource.entities.values.forEach(y => {
+            source.entities.add(y);
+          });
+        });
+      });
+    }
+  }
+
+  private _getFeaturePaint(
+    feature: Feature,
+    paint?: Paint
+  ): VectorAdapterLayerPaint {
+    if (paint) {
+      if (isPaintCallback(paint)) {
+        return this._getFeaturePaint(feature, paint(feature));
+      } else if (isPaint(paint)) {
+        return paint;
+      }
+    }
+    return {};
   }
 }
