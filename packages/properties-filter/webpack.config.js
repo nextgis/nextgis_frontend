@@ -7,6 +7,8 @@ module.exports = (env, argv) => {
   return common(env, argv, {
     library,
     package,
+    // libraryExport: ['propertiesFilter', 'featureFilter'],
+    libraryExport: '',
     externals: false,
     dirname: __dirname
   });
