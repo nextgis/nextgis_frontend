@@ -12,9 +12,23 @@ import {
   GeometryPaint,
   VectorAdapterLayerType,
   Paint,
-  isPaintCallback,
-  isPaint
+  GetPaintCallback,
+  VectorAdapterLayerPaint
 } from '@nextgis/webmap';
+
+// TODO: export from webmap
+export function isPaintCallback(paint: Paint): paint is GetPaintCallback {
+  if (typeof paint === 'function') {
+    return true;
+  }
+  return false;
+}
+export function isPaint(paint: Paint): paint is VectorAdapterLayerPaint {
+  if (Object.prototype.toString.call(paint) === '[object Object]') {
+    return true;
+  }
+  return false;
+}
 
 const typeAlias: { [x: string]: VectorAdapterLayerType } = {
   Point: 'circle',
