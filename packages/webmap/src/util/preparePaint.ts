@@ -1,7 +1,7 @@
 /**
  * @module webmap
  */
-import { featureFilter } from '@nextgis/utils';
+import { featureFilter } from '@nextgis/properties-filter';
 import { Feature } from 'geojson';
 import {
   Paint,

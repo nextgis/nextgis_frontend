@@ -9,7 +9,10 @@ import NgwConnector, {
   RequestItemAdditionalParams
 } from '@nextgis/ngw-connector';
 import CancelablePromise from '@nextgis/cancelable-promise';
-import { propertiesFilter, checkIfPropertyFilter } from '@nextgis/utils';
+import {
+  propertiesFilter,
+  checkIfPropertyFilter
+} from '@nextgis/properties-filter';
 
 export interface FeatureRequestParams {
   srs?: number;
