@@ -119,18 +119,20 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
           const fillColor = paint.fillColor || color;
 
           const fill = paint.fill ?? true;
-          if (fill && color) {
+          if (fill && color && typeof fillColor === 'string') {
             options.fill = Color.fromCssColorString(fillColor);
             options.markerColor = Color.fromCssColorString(fillColor);
           }
           if (options.stroke) {
             const strokeColor = paint.strokeColor || color;
-            options.stroke = Color.fromCssColorString(strokeColor);
-            if (paint.weight !== undefined) {
+            if (typeof strokeColor === 'string') {
+              options.stroke = Color.fromCssColorString(strokeColor);
+            }
+            if (typeof paint.weight === 'number') {
               options.strokeWidth = paint.weight;
             }
           }
-          if (paint.radius !== undefined) {
+          if (typeof paint.radius === 'number') {
             // magic 4
             options.markerSize = paint.radius * 4;
           }
