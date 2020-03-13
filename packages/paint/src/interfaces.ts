@@ -23,7 +23,7 @@ export interface PathPaint extends BasePaint {
   weight?: number | Expression;
 }
 
-export type GeometryPaint = PathPaint & CirclePaint;
+export type GeometryPaint = PathPaint & CirclePaint & PinPaint;
 
 export interface PinPaint extends BasePaint {
   type: 'pin';

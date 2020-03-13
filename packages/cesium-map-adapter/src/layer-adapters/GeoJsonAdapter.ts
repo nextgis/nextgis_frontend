@@ -12,10 +12,13 @@ import {
   isPaintCallback,
   Paint,
   isBasePaint,
-  isPaint
+  isPaint,
+  BasePaint,
+  GeometryPaint,
+  PinPaint
 } from '@nextgis/paint';
 
-import { GeoJsonDataSource, Color } from 'cesium';
+import { GeoJsonDataSource, Color, PinBuilder, Cartesian3, VerticalOrigin } from 'cesium';
 import { GeoJsonObject, Feature, FeatureCollection } from 'geojson';
 import { BaseAdapter, Map } from './BaseAdapter';
 
@@ -36,10 +39,13 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
   implements VectorLayerAdapter<Map> {
   selected = false;
 
+  private readonly _pinBuilder = new PinBuilder();
+
   private _features: Feature[] = [];
   private _source?: GeoJsonDataSource;
 
   addLayer(options: GeoJsonAdapterOptions) {
+    this.options = { ...options };
     const source = new GeoJsonDataSource(options.id);
     this._source = source;
     if (options.data) {
@@ -114,37 +120,90 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     if (source) {
       source.entities.removeAll();
       this._features.forEach(x => {
-        const options: GeoJsonDataSourceLoadOptions = {};
+
         const paint = this._getFeaturePaint(x, this.options.paint);
         if (isBasePaint(paint)) {
-          const color = paint.color || 'blue';
-          const fillColor = paint.fillColor || color;
-
-          const fill = paint.fill ?? true;
-          if (fill && color && typeof fillColor === 'string') {
-            options.fill = Color.fromCssColorString(fillColor);
-            options.markerColor = Color.fromCssColorString(fillColor);
-          }
-          if (options.stroke) {
-            const strokeColor = paint.strokeColor || color;
-            if (typeof strokeColor === 'string') {
-              options.stroke = Color.fromCssColorString(strokeColor);
-            }
-            if (typeof paint.weight === 'number') {
-              options.strokeWidth = paint.weight;
-            }
-          }
-          if (typeof paint.radius === 'number') {
-            // magic 4
-            options.markerSize = paint.radius * 4;
+          if (paint.type === 'pin') {
+            this._addPin(x, paint);
+          } else {
+            this._addFromGeoJson(x, paint);
           }
         }
+      });
+    }
+  }
 
-        const dataSource = new GeoJsonDataSource();
-        dataSource.load(x, options).then(x => {
-          dataSource.entities.values.forEach(y => {
-            source.entities.add(y);
-          });
+  private async _addPin(obj: Feature, paint: PinPaint) {
+    const source = this._source;
+    if (source) {
+      const colorStr = paint.fillColor || paint.color;
+      const color = Color.fromCssColorString(
+        typeof colorStr === 'string' ? colorStr : 'blue'
+      );
+      const size = typeof paint.size === 'number' ? paint.size : 42;
+      const iconFont = paint.iconfont || 'maki';
+      let pin: HTMLCanvasElement | Promise<HTMLCanvasElement> | undefined;
+      if (typeof paint.icon === 'string' && iconFont === 'maki') {
+        try {
+          const icon = paint.icon.replace(/-11|-15$/, '');
+          pin = await this._pinBuilder.fromMakiIconId(icon, color, size)
+        } catch {
+          // ignore
+        }
+      }
+      if (!pin) {
+        pin = typeof paint.symbol === 'string' ?
+          this._pinBuilder.fromText(paint.symbol, color, size) :
+          this._pinBuilder.fromColor(color, size);
+      }
+      if (pin && obj.type === 'Feature' && obj.geometry.type === 'Point') {
+        const lonLat = obj.geometry.coordinates;
+        const canvas = await pin;
+
+        source.entities.add({
+          position: Cartesian3.fromDegrees(lonLat[0], lonLat[1]),
+          billboard: {
+            // @ts-ignore
+            image: canvas.toDataURL(),
+            // @ts-ignore
+            verticalOrigin: VerticalOrigin.BOTTOM
+          }
+        })
+      }
+
+    }
+  }
+
+  private _addFromGeoJson(obj: Feature, paint: GeometryPaint) {
+    const source = this._source;
+    if (source) {
+      const options: GeoJsonDataSourceLoadOptions = {};
+      const color = paint.color || 'blue';
+      const fillColor = paint.fillColor || color;
+
+      const fill = paint.fill ?? true;
+      if (fill && color && typeof fillColor === 'string') {
+        options.fill = Color.fromCssColorString(fillColor);
+        options.markerColor = Color.fromCssColorString(fillColor);
+      }
+      if (options.stroke) {
+        const strokeColor = paint.strokeColor || color;
+        if (typeof strokeColor === 'string') {
+          options.stroke = Color.fromCssColorString(strokeColor);
+        }
+        if (typeof paint.weight === 'number') {
+          options.strokeWidth = paint.weight;
+        }
+      }
+      if (typeof paint.radius === 'number') {
+        // magic 4
+        options.markerSize = paint.radius * 4;
+      }
+
+      const dataSource = new GeoJsonDataSource();
+      dataSource.load(obj, options).then(x => {
+        dataSource.entities.values.forEach(y => {
+          source.entities.add(y);
         });
       });
     }
