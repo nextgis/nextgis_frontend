@@ -2,7 +2,7 @@
  * @module webmap
  */
 
-import { GeometryPaint } from './Paint';
+import { GeometryPaint } from '@nextgis/paint';
 import { StarterKit } from './StarterKit';
 import { RuntimeParams } from './RuntimeParams';
 import { MapAdapter, FitOptions } from './MapAdapter';
@@ -38,7 +38,7 @@ export interface MapOptions {
   /**
    * Initial extent of the map, array of degrees in [_west_, _south_, _east_, _north_] order.
    * Overrides the `center` and  `zoom` parameters.
-   * [LngLatBoundsArray](webmap-api#LngLatBoundsArray)
+   * [LngLatBoundsArray](webmap#LngLatBoundsArray)
    *
    * @example
    * ```javascript

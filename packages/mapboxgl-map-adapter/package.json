@@ -9,6 +9,7 @@
   "dependencies": {
     "@nextgis/properties-filter": "^0.28.1",
     "@nextgis/webmap": "^0.28.1",
+    "@nextgis/paint": "^0.28.1",
     "@types/events": "^3.0.0",
     "@types/mapbox-gl": "^1.8.0",
     "events": "^3.1.0",

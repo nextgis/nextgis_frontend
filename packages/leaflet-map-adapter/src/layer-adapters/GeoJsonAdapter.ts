@@ -4,17 +4,19 @@
 import {
   VectorLayerAdapter,
   GeoJsonAdapterOptions,
-  VectorAdapterLayerPaint,
   VectorAdapterLayerType,
-  IconOptions,
   LayerDefinition,
   DataLayerFilter,
+  PopupOptions
+} from '@nextgis/webmap';
+import {
+  IconOptions,
   PathPaint,
   Paint,
-  PopupOptions,
+  VectorAdapterLayerPaint,
   isPaintCallback,
   isPaint
-} from '@nextgis/webmap';
+} from '@nextgis/paint';
 import {
   GeoJSON,
   CircleMarker,
