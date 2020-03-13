@@ -5,13 +5,15 @@ import {
   VectorLayerAdapter,
   GeoJsonAdapterOptions,
   DataLayerFilter,
-  PropertiesFilter,
+  PropertiesFilter
+} from '@nextgis/webmap';
+import {
   VectorAdapterLayerPaint,
   isPaintCallback,
   Paint,
   isBasePaint,
   isPaint
-} from '@nextgis/webmap';
+} from '@nextgis/paint';
 
 import { GeoJsonDataSource, Color } from 'cesium';
 import { GeoJsonObject, Feature, FeatureCollection } from 'geojson';

@@ -8,6 +8,7 @@
   "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/webmap": "^0.28.1",
+    "@nextgis/paint": "^0.28.1",
     "@types/events": "^3.0.0",
     "@types/leaflet": "^1.5.9",
     "@types/node": "^13.7.7",

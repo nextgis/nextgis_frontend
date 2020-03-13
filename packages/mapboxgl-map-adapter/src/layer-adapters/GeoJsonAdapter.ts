@@ -5,12 +5,11 @@ import { Map, GeoJSONSource, GeoJSONSourceRaw } from 'mapbox-gl';
 import {
   GeoJsonAdapterOptions,
   VectorAdapterLayerType,
-  VectorAdapterLayerPaint,
-  GetPaintCallback,
   DataLayerFilter,
   LayerDefinition,
   PropertiesFilter
 } from '@nextgis/webmap';
+import { VectorAdapterLayerPaint, GetPaintCallback } from '@nextgis/paint';
 import { featureFilter } from '@nextgis/properties-filter';
 import {
   GeoJsonObject,

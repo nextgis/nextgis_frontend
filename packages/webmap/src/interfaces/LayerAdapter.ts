@@ -10,7 +10,7 @@ import {
   PropertyFilter,
   checkIfPropertyFilter
 } from '@nextgis/properties-filter';
-import { Paint } from './Paint';
+import { Paint } from '@nextgis/paint';
 
 // backward compatibility
 export { PropertiesFilter, Operations, PropertyFilter, checkIfPropertyFilter };

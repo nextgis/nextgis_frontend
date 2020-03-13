@@ -9,12 +9,10 @@ import {
   GeometryPaint,
   GetPaintFunction,
   GetCustomPaintOptions,
-  isPaintCallback,
-  isPropertiesPaint,
   PropertiesPaint,
-  PropertyPaint,
-  isPaint
-} from '../interfaces/Paint';
+  PropertyPaint
+} from './interfaces';
+import { isPaintCallback, isPropertiesPaint, isPaint } from './typeHelpers';
 import { createExpressionCallback } from './fromPaintExpression';
 
 function updatePaintOptionFromCallback(

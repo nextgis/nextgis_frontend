@@ -18,7 +18,7 @@ import {
 import { LayerDef, Type } from './interfaces/BaseTypes';
 
 import { Feature, GeoJsonObject } from 'geojson';
-import { preparePaint } from './utils/preparePaint';
+import { preparePaint } from '@nextgis/paint';
 import { updateGeoJsonAdapterOptions } from './utils/updateGeoJsonAdapterOptions';
 import {
   GetAttributionsOptions,

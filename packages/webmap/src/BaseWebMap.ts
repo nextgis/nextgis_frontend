@@ -6,6 +6,7 @@ import { Feature, Polygon } from 'geojson';
 import StrictEventEmitter from 'strict-event-emitter-types';
 
 import { deepmerge } from '@nextgis/utils';
+import { GetPaintFunction } from '@nextgis/paint';
 
 import {
   LngLatBoundsArray,
@@ -21,7 +22,6 @@ import {
   LocationEvents
 } from './interfaces/MapAdapter';
 import { StarterKit } from './interfaces/StarterKit';
-import { GetPaintFunction } from './interfaces/Paint';
 import { LayerAdapter } from './interfaces/LayerAdapter';
 import { RuntimeParams } from './interfaces/RuntimeParams';
 import { MapOptions, AppOptions } from './interfaces/WebMapApp';

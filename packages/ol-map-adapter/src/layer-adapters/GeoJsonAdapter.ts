@@ -11,9 +11,9 @@ import {
   DataLayerFilter,
   PropertiesFilter,
   VectorLayerAdapter,
-  GeoJsonAdapterOptions,
-  Paint
+  GeoJsonAdapterOptions
 } from '@nextgis/webmap';
+import { Paint } from '@nextgis/paint';
 
 import { resolutionOptions } from '../utils/gerResolution';
 import { styleFunction, labelStyleFunction, getFeature } from '../utils/utils';

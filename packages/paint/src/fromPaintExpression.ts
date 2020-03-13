@@ -2,9 +2,9 @@ import { Feature } from 'geojson';
 import {
   VectorAdapterLayerPaint,
   GetPaintCallback,
-  isExpression,
   Expression
-} from '../interfaces/Paint';
+} from './interfaces';
+import { isExpression } from './typeHelpers';
 
 function get(feature: Feature, field: string) {
   return feature.properties && feature.properties[field];

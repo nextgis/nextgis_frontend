@@ -8,27 +8,8 @@ import { Options as TextOptions } from 'ol/style/Text';
 import IconAnchorUnits from 'ol/style/IconAnchorUnits';
 import Icon, { Options as IconOptions } from 'ol/style/Icon';
 
-import {
-  GeometryPaint,
-  VectorAdapterLayerType,
-  Paint,
-  GetPaintCallback,
-  VectorAdapterLayerPaint
-} from '@nextgis/webmap';
-
-// TODO: export from webmap
-export function isPaintCallback(paint: Paint): paint is GetPaintCallback {
-  if (typeof paint === 'function') {
-    return true;
-  }
-  return false;
-}
-export function isPaint(paint: Paint): paint is VectorAdapterLayerPaint {
-  if (Object.prototype.toString.call(paint) === '[object Object]') {
-    return true;
-  }
-  return false;
-}
+import { VectorAdapterLayerType } from '@nextgis/webmap';
+import { GeometryPaint, Paint, isPaintCallback, isPaint } from '@nextgis/paint';
 
 const typeAlias: { [x: string]: VectorAdapterLayerType } = {
   Point: 'circle',

@@ -6,7 +6,7 @@
   "unpkg": "lib/icons.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/webmap": "^0.28.1"
+    "@nextgis/paint": "^0.28.1"
   },
   "devDependencies": {
     "@nextgis/eslint-config": "^0.28.0",

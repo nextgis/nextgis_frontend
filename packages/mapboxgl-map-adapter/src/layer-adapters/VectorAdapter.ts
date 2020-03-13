@@ -3,17 +3,16 @@
  */
 import {
   VectorAdapterLayerType,
-  IconOptions,
   VectorLayerAdapter,
   VectorAdapterOptions,
   PropertiesFilter,
   Operations,
   DataLayerFilter,
   PropertyFilter,
-  FilterOptions,
-  Paint,
-  VectorAdapterLayerPaint
+  FilterOptions
 } from '@nextgis/webmap';
+
+import { Paint, IconOptions, isPaint } from '@nextgis/paint';
 
 import { checkIfPropertyFilter } from '@nextgis/properties-filter';
 import {
@@ -29,25 +28,12 @@ import {
   AnyLayout,
   Layer,
   MapboxGeoJSONFeature
-  // BackgroundPaint, FillPaint, FillExtrusionPaint, LinePaint, SymbolPaint,
-  // RasterPaint, CirclePaint, HeatmapPaint, HillshadePaint,
 } from 'mapbox-gl';
-
-// type MapboxPaint = BackgroundPaint | FillPaint | FillExtrusionPaint | LinePaint | SymbolPaint |
-//   RasterPaint | CirclePaint | HeatmapPaint | HillshadePaint;
 
 import { getImage } from '../util/image_icons';
 import { TLayer } from '../MapboxglMapAdapter';
 import { BaseAdapter } from './BaseAdapter';
 import { typeAliasForFilter, allowedByType } from '../util/geom_type';
-
-// TODO: export from webmap or separate module
-export function isPaint(paint: Paint): paint is VectorAdapterLayerPaint {
-  if (Object.prototype.toString.call(paint) === '[object Object]') {
-    return true;
-  }
-  return false;
-}
 
 export const operationsAliases: { [key in Operations]: string } = {
   gt: '>',
