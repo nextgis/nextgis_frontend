@@ -3,7 +3,7 @@
  */
 
 // tslint:disable:max-line-length
-import { IconOptions as WebmapIcoOptions } from '@nextgis/webmap';
+import { IconOptions as WebmapIcoOptions } from '@nextgis/paint';
 
 const svgPath: { [name: string]: string | GetPathCallback } = {
   brill: '<path d="m6 0-5 6 5 6 5-6z"/>',

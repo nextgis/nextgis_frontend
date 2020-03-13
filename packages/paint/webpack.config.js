@@ -1,4 +1,4 @@
-const library = 'PropertiesFilter';
+const library = 'Paint';
 
 const package = require('./package.json');
 const common = require('../../build/webpack.config');
