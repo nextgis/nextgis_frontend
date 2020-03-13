@@ -26,7 +26,7 @@ export interface PathPaint extends BasePaint {
 export type GeometryPaint = PathPaint & CirclePaint & PinPaint;
 
 export interface PinPaint extends BasePaint {
-  type: 'pin';
+  type?: 'pin';
   size?: number | Expression;
   symbol?: string | Expression;
   /**
