@@ -25,6 +25,21 @@ export interface PathPaint extends BasePaint {
 
 export type GeometryPaint = PathPaint & CirclePaint;
 
+export interface PinPaint extends BasePaint {
+  type: 'pin';
+  size?: number | Expression;
+  symbol?: string | Expression;
+  /**
+   * TODO: make a selection of fonts with icons
+   * Place font to assets and set ASSET_PATH local or from cdn
+   *
+   * https://github.com/CesiumGS/cesium/blob/master/Source/Core/PinBuilder.js
+   * @default maki
+   */
+  iconfont?: 'maki' | 'mdi' | 'md' | 'fa';
+  icon?: string | Expression | IconPaint;
+}
+
 export interface IconPaint {
   type: 'icon';
   className?: string;
@@ -59,6 +74,7 @@ export type VectorAdapterLayerPaint =
   | CirclePaint
   | PathPaint
   | IconOptions
+  | PinPaint
   | GetCustomPaintOptions;
 
 export type GetPaintCallback<F = Feature> = (
