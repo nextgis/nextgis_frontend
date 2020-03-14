@@ -53,7 +53,7 @@ export interface IconPaint {
  * @deprecated use IconPaint instead
  */
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface IconOptions extends IconPaint {}
+export type IconOptions = IconPaint | PinPaint;
 
 export type GetPaintFunction = (opt?: any) => VectorAdapterLayerPaint;
 

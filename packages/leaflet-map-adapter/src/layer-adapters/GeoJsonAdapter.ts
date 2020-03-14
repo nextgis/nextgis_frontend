@@ -481,6 +481,11 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
           return new Marker(latlng, { icon: divIcon });
         };
       }
+    } else if (icon.type === 'pin') {
+      return (geoJsonPoint: any, latlng: LatLngExpression) => {
+        // const divIcon = this.createDivIcon(icon);
+        return new Marker(latlng);
+      };
     }
     return (geoJsonPoint: any, latlng: LatLngExpression) => {
       const p: any = PAINT;
