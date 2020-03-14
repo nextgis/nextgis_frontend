@@ -228,7 +228,7 @@ function getNgwLayerItemsRequest<
     params.paramList = paramList;
   }
   if (orderBy) {
-    params.orderBy = orderBy.join(',');
+    params.order_by = orderBy.join(',');
   }
   return connector.get('feature_layer.feature.collection', null, {
     id: resourceId,
