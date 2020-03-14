@@ -12,7 +12,7 @@ import {
   FilterOptions
 } from '@nextgis/webmap';
 
-import { Paint, IconOptions, isPaint } from '@nextgis/paint';
+import { Paint, IconOptions, isPaint, isIcon } from '@nextgis/paint';
 
 import { checkIfPropertyFilter } from '@nextgis/properties-filter';
 import {
@@ -348,7 +348,7 @@ export abstract class VectorAdapter<
   }
 
   protected async _registerImage(paint: IconOptions) {
-    if (paint.html) {
+    if (isIcon(paint) && paint.html) {
       const imageExist = this.map.hasImage(paint.html);
       if (!imageExist) {
         let width = 12;
