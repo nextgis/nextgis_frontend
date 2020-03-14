@@ -13,12 +13,17 @@ import {
   Paint,
   isBasePaint,
   isPaint,
-  BasePaint,
   GeometryPaint,
   PinPaint
 } from '@nextgis/paint';
 
-import { GeoJsonDataSource, Color, PinBuilder, Cartesian3, VerticalOrigin } from 'cesium';
+import {
+  GeoJsonDataSource,
+  Color,
+  PinBuilder,
+  Cartesian3,
+  VerticalOrigin
+} from 'cesium';
 import { GeoJsonObject, Feature, FeatureCollection } from 'geojson';
 import { BaseAdapter, Map } from './BaseAdapter';
 
@@ -120,7 +125,6 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     if (source) {
       source.entities.removeAll();
       this._features.forEach(x => {
-
         const paint = this._getFeaturePaint(x, this.options.paint);
         if (isBasePaint(paint)) {
           if (paint.type === 'pin') {
@@ -146,15 +150,16 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
       if (typeof paint.icon === 'string' && iconFont === 'maki') {
         try {
           const icon = paint.icon.replace(/-11|-15$/, '');
-          pin = await this._pinBuilder.fromMakiIconId(icon, color, size)
+          pin = await this._pinBuilder.fromMakiIconId(icon, color, size);
         } catch {
           // ignore
         }
       }
       if (!pin) {
-        pin = typeof paint.symbol === 'string' ?
-          this._pinBuilder.fromText(paint.symbol, color, size) :
-          this._pinBuilder.fromColor(color, size);
+        pin =
+          typeof paint.symbol === 'string'
+            ? this._pinBuilder.fromText(paint.symbol, color, size)
+            : this._pinBuilder.fromColor(color, size);
       }
       if (pin && obj.type === 'Feature' && obj.geometry.type === 'Point') {
         const lonLat = obj.geometry.coordinates;
@@ -168,9 +173,8 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
             // @ts-ignore
             verticalOrigin: VerticalOrigin.BOTTOM
           }
-        })
+        });
       }
-
     }
   }
 

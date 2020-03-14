@@ -6,6 +6,7 @@ export * from './Clipboard';
 export * from './events';
 export * from './array';
 export * from './sleep';
+export * from './defined';
 export * from './typeHelpers';
 export * from './applyMixins';
 export { deepmerge } from './deepmerge';
