@@ -4,7 +4,9 @@ import {
   PropertiesPaint,
   VectorAdapterLayerPaint,
   GeometryPaint,
-  GetPaintCallback
+  GetPaintCallback,
+  IconOptions,
+  IconPaint
 } from './interfaces';
 
 export function isExpression(value: any): value is Expression {
@@ -43,4 +45,8 @@ export function isPaintCallback(paint: Paint): paint is GetPaintCallback {
     return true;
   }
   return false;
+}
+
+export function isIcon(paint: IconOptions): paint is IconPaint {
+  return paint.type === 'icon' || 'html' in paint;
 }
