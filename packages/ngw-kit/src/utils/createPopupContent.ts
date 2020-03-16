@@ -6,10 +6,12 @@ export function createPopupContent(feature: Feature, item?: ResourceItem, ): HTM
   const element = create('div');
   if (item) {
     item.feature_layer?.fields.forEach(x => {
-      const value = feature.properties && feature.properties[x.keyname];
-      if (value) {
-        const propElem = create('div', null, element);
-        propElem.innerHTML = `<span>${x.display_name}</span>: ${value}<span></span>`
+      if (x.grid_visibility) {
+        const value = feature.properties && feature.properties[x.keyname];
+        if (value) {
+          const propElem = create('div', null, element);
+          propElem.innerHTML = `<span>${x.display_name}</span>: ${value}<span></span>`
+        }
       }
     });
   } else if (feature.properties) {
