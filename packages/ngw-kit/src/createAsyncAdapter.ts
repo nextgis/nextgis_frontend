@@ -69,7 +69,7 @@ export async function createAsyncAdapter(
               resourceId: item.resource.parent.id
             };
             adapter = createGeoJsonAdapter(
-              parentOptions,
+              parentOptions as NgwLayerOptions <'GEOJSON'>,
               webMap,
               connector,
               item
@@ -103,7 +103,12 @@ export async function createAsyncAdapter(
               );
             }
           } else {
-            adapter = createGeoJsonAdapter(_options, webMap, connector, item);
+            adapter = createGeoJsonAdapter(
+              _options as NgwLayerOptions<'GEOJSON'>,
+              webMap,
+              connector,
+              item
+            );
           }
         } else if (item.resource.cls === 'raster_layer') {
           return createAdapterFromFirstStyle(
