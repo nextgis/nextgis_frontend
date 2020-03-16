@@ -12,6 +12,7 @@ import NgwConnector, { ResourceItem } from '@nextgis/ngw-connector';
 import { getNgwLayerFeatures } from './utils/featureLayerUtils';
 import { resourceIdFromLayerOptions } from './utils/resourceIdFromLayerOptions';
 import { degrees2meters, vectorLayerGeomToPaintTypeAlias } from './utils/utils';
+import { createPopupContent } from './utils/createPopupContent';
 
 interface FilterArgs {
   filters?: PropertiesFilter;
@@ -19,7 +20,7 @@ interface FilterArgs {
 }
 
 export async function createGeoJsonAdapter(
-  options: NgwLayerOptions,
+  options: NgwLayerOptions<'GEOJSON'>,
   webMap: WebMap,
   connector: NgwConnector,
   item?: ResourceItem
@@ -33,6 +34,12 @@ export async function createGeoJsonAdapter(
   let _lastFilterArgs: FilterArgs | undefined;
 
   const resourceId = await resourceIdFromLayerOptions(options, connector);
+
+  if (options.adapterOptions?.popupOptions?.fromProperties) {
+    options.adapterOptions.popupOptions.createPopupContent = ({ feature }) => {
+      return feature && createPopupContent(feature, item);
+    }
+  }
 
   const geoJsonAdapterCb = async (
     filters?: PropertiesFilter,

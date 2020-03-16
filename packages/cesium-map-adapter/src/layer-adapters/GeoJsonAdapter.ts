@@ -22,7 +22,8 @@ import {
   Color,
   PinBuilder,
   Cartesian3,
-  VerticalOrigin
+  VerticalOrigin,
+  Property
 } from 'cesium';
 import { GeoJsonObject, Feature, FeatureCollection } from 'geojson';
 import { BaseAdapter, Map } from './BaseAdapter';
@@ -165,8 +166,30 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
         const lonLat = obj.geometry.coordinates;
         const canvas = await pin;
 
+        const nameField = this.options.labelField || 'name';
+        let name = '';
+        if (obj.properties && nameField in obj.properties) {
+          name = obj.properties && obj.properties[nameField];
+        }
+
+        //@ts-ignore
+        const description: Property = {
+          getValue: () => {
+            if (this.options.popupOptions?.createPopupContent) {
+              const content = this.options.popupOptions.createPopupContent({ feature: obj });
+              if (content instanceof HTMLElement) {
+                return content.outerHTML;
+              }
+              return content;
+            }
+            return '';
+          }
+        }
+
         source.entities.add({
           position: Cartesian3.fromDegrees(lonLat[0], lonLat[1]),
+          name: name || (obj.id !== undefined ? 'Feature#' + obj.id : ''),
+          description,
           billboard: {
             // @ts-ignore
             image: canvas.toDataURL(),

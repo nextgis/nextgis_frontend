@@ -65,6 +65,8 @@ export type VectorAdapterLayerType = 'fill' | 'circle' | 'line' | 'icon';
 export interface PopupOptions {
   minWidth?: number;
   autoPan?: boolean;
+  popupContent?: string | HTMLElement;
+  fromProperties?: boolean;
   createPopupContent?: (
     layerDef: LayerDefinition
   ) => HTMLElement | string | undefined;

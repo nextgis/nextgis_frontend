@@ -744,6 +744,7 @@ export class WebMapLayers<
       }
       return this._onLayerClick(e);
     };
+
     if (!options.nativePaint) {
       if (this.options.paint) {
         options.paint = preparePaint(
