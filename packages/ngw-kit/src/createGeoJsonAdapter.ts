@@ -13,6 +13,7 @@ import { getNgwLayerFeatures } from './utils/featureLayerUtils';
 import { resourceIdFromLayerOptions } from './utils/resourceIdFromLayerOptions';
 import { degrees2meters, vectorLayerGeomToPaintTypeAlias } from './utils/utils';
 import { createPopupContent } from './utils/createPopupContent';
+import { getLayerFilterOptions } from './utils/getLayerFilterOptions';
 
 interface FilterArgs {
   filters?: PropertiesFilter;
@@ -38,7 +39,7 @@ export async function createGeoJsonAdapter(
   if (options.adapterOptions?.popupOptions?.fromProperties) {
     options.adapterOptions.popupOptions.createPopupContent = ({ feature }) => {
       return feature && createPopupContent(feature, item);
-    }
+    };
   }
 
   const geoJsonAdapterCb = async (
@@ -82,7 +83,10 @@ export async function createGeoJsonAdapter(
       const layer = super.addLayer(opt_);
       this.options.strategy = opt_.strategy || undefined;
 
-      _lastFilterArgs = { filters: opt_.propertiesFilter, options: opt_ };
+      _lastFilterArgs = {
+        filters: opt_.propertiesFilter,
+        options: getLayerFilterOptions(opt_)
+      };
       if (!opt_.data) {
         this.updateLayer();
       }
@@ -141,7 +145,7 @@ export async function createGeoJsonAdapter(
       _lastFilterArgs = undefined;
       this.propertiesFilter([]);
       if (this.filter) {
-        this.filter(function() {
+        this.filter(() => {
           return true;
         });
       }
