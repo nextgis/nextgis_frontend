@@ -20,6 +20,8 @@ export interface WebMapEvents extends BaseMapEvents {
   /** @event */
   'layer:remove': LayerAdapter;
   /** @event */
+  'layer:updated': LayerAdapter;
+  /** @event */
   'layer:preshow': LayerAdapter;
   /** @event */
   'layer:show': LayerAdapter;

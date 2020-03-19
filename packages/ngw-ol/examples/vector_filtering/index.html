@@ -61,20 +61,23 @@
       resourceId: 1733,
       adapter: 'GEOJSON',
       adapterOptions: {
+        limit: 500,
         paint: { color: 'blue', radius: 4 }
       }
     }).then((layer) => {
       ngwMap.zoomToLayer(layer);
-      var features = layer.getLayers();
-      for (var f = 0; f < features.length; f++) {
-        var amenity = features[f].feature.properties.AMENITY;
-        if (amenityList.indexOf(amenity) === -1) {
-          amenityList.push(amenity);
+      layer.emitter.on('updated', function () {
+
+        var features = layer.getLayers();
+        for (var f = 0; f < features.length; f++) {
+          var amenity = features[f].feature.properties.AMENITY;
+          if (amenityList.indexOf(amenity) === -1) {
+            amenityList.push(amenity);
+          }
         }
-      }
-      updateSelectOptions();
-      setLayerFilter();
-      ngwMap.showLayer(layer);
+        updateSelectOptions();
+        setLayerFilter();
+      });
     });
 
     function setLayerFilter() {
