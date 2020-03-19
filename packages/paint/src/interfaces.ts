@@ -110,21 +110,21 @@ export type ExpressionName =
   // | 'properties'
   // Lookup
   // | 'at'
-  'get';
-// | 'has'
-// | 'length'
-// Decision
-// | '!'
-// | '!='
-// | '<'
-// | '<='
-// | '=='
-// | '>'
-// | '>='
-// | 'all'
-// | 'any'
-// | 'case'
-// | 'match'
+  | 'get'
+  // | 'has'
+  // | 'length'
+  // Decision
+  // | '!'
+  // | '!='
+  // | '<'
+  // | '<='
+  // | '=='
+  // | '>'
+  // | '>='
+  // | 'all'
+  // | 'any'
+  // | 'case'
+  | 'match';
 // | 'coalesce'
 // String
 // | 'concat'
