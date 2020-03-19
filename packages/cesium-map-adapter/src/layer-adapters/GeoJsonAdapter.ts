@@ -176,7 +176,9 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
         const description: Property = {
           getValue: () => {
             if (this.options.popupOptions?.createPopupContent) {
-              const content = this.options.popupOptions.createPopupContent({ feature: obj });
+              const content = this.options.popupOptions.createPopupContent({
+                feature: obj
+              });
               if (content instanceof HTMLElement) {
                 return content.outerHTML;
               }
@@ -184,7 +186,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
             }
             return '';
           }
-        }
+        };
 
         source.entities.add({
           position: Cartesian3.fromDegrees(lonLat[0], lonLat[1]),

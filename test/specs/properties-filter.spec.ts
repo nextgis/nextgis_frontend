@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { propertiesFilter as pf } from '../../packages/utils/src';
+import { propertiesFilter as pf } from '../../packages/properties-filter/src';
 
 const prop = {
   zero: 0,
