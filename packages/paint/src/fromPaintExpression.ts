@@ -2,27 +2,58 @@ import { Feature } from 'geojson';
 import {
   VectorAdapterLayerPaint,
   GetPaintCallback,
-  Expression
+  Expression,
+  ExpressionName
 } from './interfaces';
 import { isExpression } from './typeHelpers';
 
-function get(feature: Feature, field: string) {
+type ExpressionFun = (feature: Feature, args: any[]) => SimpleType;
+
+function get(feature: Feature, args: any[]) {
+  const field = args[0];
   return feature.properties && feature.properties[field];
 }
 
-type propertyExpressionCb = (
-  feature: Feature
-) => string | number | boolean | undefined;
+function match(feature: Feature, args: any[]) {
+  const [lookup, ...cases] = args;
+  let property = lookup;
+  if (Array.isArray(lookup)) {
+    property = featureExpression(feature, lookup as Expression);
+  }
+  // remove last odd item from cases array
+  const defValue = cases.splice(-1, cases.length % 2)[0];
+  for (let fry = 0; fry < cases.length - 1; fry += 2) {
+    const key = cases[fry];
+    if (key === property) {
+      return cases[fry + 1];
+    }
+  }
+  return defValue;
+}
+
+const expressions: { [key in ExpressionName]: ExpressionFun } = {
+  get,
+  match
+};
+
+type SimpleType = string | number | boolean | undefined;
+
+type PropertyExpressionCb = (feature: Feature) => SimpleType;
+
+function featureExpression(feature: Feature, expression: Expression) {
+  const [name, ...args] = expression;
+  const expressionFun = expressions[name];
+  if (expressionFun) {
+    return expressionFun(feature, args);
+  }
+  return undefined;
+}
 
 function createPropertyExpressionCb(
   expression: Expression
-): propertyExpressionCb {
+): PropertyExpressionCb {
   return (feature: Feature) => {
-    const name = expression[0];
-    if (name === 'get' && expression[1]) {
-      return get(feature, expression[1]);
-    }
-    return undefined;
+    return featureExpression(feature, expression);
   };
 }
 
@@ -33,7 +64,7 @@ export function createExpressionCallback(
 ): GetPaintCallback | undefined {
   let withExpression = false;
   const expressions: {
-    [key: string]: propertyExpressionCb;
+    [key: string]: PropertyExpressionCb;
   } = {};
   for (const p in paint) {
     if (excludeExpressionList.indexOf(p) === -1) {
