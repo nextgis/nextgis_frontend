@@ -69,7 +69,7 @@ export async function createAsyncAdapter(
               resourceId: item.resource.parent.id
             };
             adapter = createGeoJsonAdapter(
-              parentOptions as NgwLayerOptions <'GEOJSON'>,
+              parentOptions as NgwLayerOptions<'GEOJSON'>,
               webMap,
               connector,
               item
