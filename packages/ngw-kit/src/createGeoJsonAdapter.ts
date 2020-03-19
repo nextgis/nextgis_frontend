@@ -1,4 +1,4 @@
-import { NgwLayerOptions } from './interfaces';
+import { EventEmitter } from 'events';
 import WebMap, {
   VectorLayerAdapter,
   Type,
@@ -9,6 +9,7 @@ import WebMap, {
 import CancelablePromise from '@nextgis/cancelable-promise';
 import { debounce } from '@nextgis/utils';
 import NgwConnector, { ResourceItem } from '@nextgis/ngw-connector';
+import { NgwLayerOptions } from './interfaces';
 import { getNgwLayerFeatures } from './utils/featureLayerUtils';
 import { resourceIdFromLayerOptions } from './utils/resourceIdFromLayerOptions';
 import { degrees2meters, vectorLayerGeomToPaintTypeAlias } from './utils/utils';
@@ -65,6 +66,7 @@ export async function createGeoJsonAdapter(
   };
 
   return class Adapter extends adapter {
+    emitter = new EventEmitter();
     __onMapMove?: () => void;
     __enableMapMoveListener?: () => void;
     __disableMapMoveListener?: () => void;
@@ -121,6 +123,7 @@ export async function createGeoJsonAdapter(
         filterArgs.options
       );
       webMap.setLayerData(this, data);
+      this.emitter.emit('updated');
     }
 
     async propertiesFilter(filters: PropertiesFilter, opt?: FilterOptions) {

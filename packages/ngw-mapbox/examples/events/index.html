@@ -46,17 +46,20 @@
   <div id='map'></div>
   <script>
 
-    NgwMap.create({
+    var log = document.createElement('div');
+    log.className = 'log';
+
+    const ngwMap = new NgwMap({
       baseUrl: 'https://demo.nextgis.com',
       target: 'map',
       qmsId: [487, 'baselayer'],
-    }).then(function (ngwMap) {
+    })
+
+    ngwMap.onLoad().then(function () {
 
       ngwMap.setZoom(0);
       ngwMap.setCenter([0, 0]);
 
-      var log = document.createElement('div');
-      log.className = 'log';
       var eventControl = ngwMap.createControl({
         onAdd: function () { return log }
       }, { bar: true });
@@ -108,52 +111,6 @@
 
       ngwMap.addControl(eventControl, 'top-right');
 
-      var events = [
-        'create',
-        'zoomstart',
-        'zoom',
-        'zoomend',
-        'movestart',
-        'move',
-        'moveend',
-        'click',
-        'layer:preadd',
-        'layer:add',
-        'layer:preremove',
-        'layer:remove',
-        'layer:preshow',
-        'layer:show',
-        'layer:prehide',
-        'layer:hide',
-      ];
-
-      for (var fry = 0; fry < events.length; fry++) {
-        var event = events[fry];
-        var element = document.createElement('div');
-        element.innerHTML = event;
-        element.id = event;
-        element.className = 'event-log';
-        log.appendChild(element);
-        addListener(event, element);
-      }
-
-
-      var timeout = {};
-      function addListener(event, el) {
-        ngwMap.emitter.on(event, function (data) {
-          el.classList.add('ok');
-          el.classList.add('action');
-          var timeoutId = timeout[event];
-          if (timeoutId) {
-            clearTimeout(timeoutId);
-          }
-          timeout[event] = setTimeout(function () {
-            el.classList.remove('action');
-          }, 750);
-          console.log(event, data)
-        })
-      }
-
       function toggleLayers(status) {
         var layers = ngwMap.getLayers();
         for (var l = 0; l < layers.length; l++) {
@@ -163,12 +120,58 @@
           }
         }
       }
-
-      function randomRgb() {
-        var o = Math.round, r = Math.random, s = 255;
-        return 'rgb(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ')';
-      }
     });
+
+    var events = [
+      'create',
+      'zoomstart',
+      'zoom',
+      'zoomend',
+      'movestart',
+      'move',
+      'moveend',
+      'click',
+      'layer:preadd',
+      'layer:add',
+      'layer:preremove',
+      'layer:remove',
+      'layer:preshow',
+      'layer:show',
+      'layer:prehide',
+      'layer:hide',
+    ];
+
+    for (var fry = 0; fry < events.length; fry++) {
+      var event = events[fry];
+      var element = document.createElement('div');
+      element.innerHTML = event;
+      element.id = event;
+      element.className = 'event-log';
+      log.appendChild(element);
+      addListener(event, element);
+    }
+
+
+    var timeout = {};
+    function addListener(event, el) {
+      ngwMap.emitter.on(event, function (data) {
+        el.classList.add('ok');
+        el.classList.add('action');
+        var timeoutId = timeout[event];
+        if (timeoutId) {
+          clearTimeout(timeoutId);
+        }
+        timeout[event] = setTimeout(function () {
+          el.classList.remove('action');
+        }, 750);
+        console.log(event, data)
+      })
+    }
+
+    function randomRgb() {
+      var o = Math.round, r = Math.random, s = 255;
+      return 'rgb(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ')';
+    }
   </script>
 </body>
 

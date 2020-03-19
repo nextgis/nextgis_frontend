@@ -26,16 +26,15 @@
 <body>
   <div id='map'></div>
   <script>
-    var ngwMap = new NgwMap({
+    NgwMap.create({
       baseUrl: 'https://demo.nextgis.com',
       target: 'map',
       qmsId: 487,
       bounds: [0, -90, 180, 90]
-    });
-    ngwMap.onLoad().then(function () {
+    }).then(function (ngwMap) {
       ngwMap.addLayer('GEOJSON', {
         id: 'data',
-        paint: function (feature) { return { color: feature.properties.color } },
+        paint: { color: ['get', 'color'] },
         visibility: true
       });
       var list = document.createElement('div');

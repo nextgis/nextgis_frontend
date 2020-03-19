@@ -60,26 +60,20 @@
       // tree
       ngwMap.addNgwLayer({
         id: 'tree', resourceId: 4069, adapter: 'GEOJSON', adapterOptions: {
-          paint: function (feature) {
-            return { color: feature.properties.color }
-          }
+          paint: { color: ['get', 'color'] }
         }
       });
 
       // toys
       ngwMap.addNgwLayer({
         id: 'toys', resourceId: 4061, adapter: 'GEOJSON', adapterOptions: {
-          paint: function (feature) {
-            return { color: feature.properties.color, opacity: 0.5 }
-          },
-          selectedPaint: function (feature) {
-            return { color: feature.properties.selcolor, opacity: 1 }
-          },
+          paint: { color: ['get', 'color'], opacity: 0.5 },
+          selectedPaint: { color: ['get', 'selcolor'], opacity: 1 },
           selectable: true,
           selectOnHover: true,
           popupOnSelect: true,
           popupOptions: {
-            createPopupContent: createPopupContent
+            fromProperties: true
           }
         }
       });
@@ -126,55 +120,40 @@
       }, { bar: true });
 
       ngwMap.addControl(configControl, 'top-right');
-    })
 
-    // helper functions
+      // helper functions
 
-    function startRandomSelection() {
-      var selectableLayer = ngwMap.getLayer(config.selectableLayer.value);
-      var layers = selectableLayer.getLayers();
-      _intervalId = setInterval(function () {
-        var randomLayer = layers[Math.floor(Math.random() * layers.length)]
-        selectLayerFeatureById(selectableLayer, randomLayer.feature.id);
-      }, config.interval.value);
-    }
+      function startRandomSelection() {
+        var selectableLayer = ngwMap.getLayer(config.selectableLayer.value);
+        var layers = selectableLayer.getLayers();
+        _intervalId = setInterval(function () {
+          var randomLayer = layers[Math.floor(Math.random() * layers.length)]
+          selectLayerFeatureById(selectableLayer, randomLayer.feature.id);
+        }, config.interval.value);
+      }
 
-    function stopRandomSelection() {
-      clearInterval(_intervalId);
-    }
+      function stopRandomSelection() {
+        clearInterval(_intervalId);
+      }
 
-    function selectLayerFeatureById(layer, id) {
-      var selectableLayer = ngwMap.getLayer(layer);
-      selectableLayer.select(function (e) {
-        return e.feature.id === id;
-      });
-    }
+      function selectLayerFeatureById(layer, id) {
+        var selectableLayer = ngwMap.getLayer(layer);
+        selectableLayer.select(function (e) {
+          return e.feature.id === id;
+        });
+      }
 
-    function createPopupContent(e) {
-      var feature = e.feature;
-      var content = '<div class="feature-popup">';
-      for (var f in feature.properties) {
-        if (feature.properties.hasOwnProperty(f)) {
-          content += '<div><span class="property-key">' + f +
-            '</span>: <span class="property-value">' +
-            feature.properties[f] +
-            '</span></div>';
+      function onConfigUpdate() {
+
+        config.interval.value = Number(intervalInput.value);
+        // update current animation config
+        if (_intervalId) {
+          stopRandomSelection();
+          startRandomSelection();
         }
+
       }
-      content += '</div>';
-      return content;
-    }
-
-    function onConfigUpdate() {
-
-      config.interval.value = Number(intervalInput.value);
-      // update current animation config
-      if (_intervalId) {
-        stopRandomSelection();
-        startRandomSelection();
-      }
-
-    }
+    });
 
   </script>
 </body>

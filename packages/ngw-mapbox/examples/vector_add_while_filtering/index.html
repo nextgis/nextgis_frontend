@@ -27,77 +27,76 @@
 <body>
   <div id='map'></div>
   <script>
-    var ngwMap = new NgwMap({
+    NgwMap.create({
       target: 'map',
       qmsId: 487,
       bounds: [0, -90, 180, 90]
-    });
+    }).then(function (ngwMap) {
 
-    var colors = ['red', 'green', 'blue'];
-    var filterInput = document.createElement('select');
+      var colors = ['red', 'green', 'blue'];
+      var filterInput = document.createElement('select');
 
-    var filterLabel = document.createElement('label');
-    filterLabel.appendChild(document.createTextNode('Filter: '));
-    filterLabel.appendChild(filterInput);
+      var filterLabel = document.createElement('label');
+      filterLabel.appendChild(document.createTextNode('Filter: '));
+      filterLabel.appendChild(filterInput);
 
-    var options = ['all'].concat(colors);
-    for (var fry = 0; fry < options.length; fry++) {
-      var option = document.createElement('option');
-      option.innerHTML = options[fry];
-      filterInput.appendChild(option);
-    }
-
-    filterInput.onchange = function () {
-      setLayerFilter();
-    }
-
-    var filterFunction = function (e) {
-      var value = filterInput.value;
-      return value === 'all' ? true : e.feature.properties.color === value;
-    };
-
-    function setLayerFilter() {
-      if (filterInput.value === 'all') {
-        ngwMap.removeLayerFilter('geojson');
-      } else {
-        ngwMap.filterLayer('geojson', filterFunction);
+      var options = ['all'].concat(colors);
+      for (var fry = 0; fry < options.length; fry++) {
+        var option = document.createElement('option');
+        option.innerHTML = options[fry];
+        filterInput.appendChild(option);
       }
-    }
 
-    var filterControl = ngwMap.createControl({
-      onAdd: function () {
-        return filterLabel;
+      filterInput.onchange = function () {
+        setLayerFilter();
       }
-    }, { margin: true });
 
-    ngwMap.addControl(filterControl, 'top-right');
+      var filterFunction = function (e) {
+        var value = filterInput.value;
+        return value === 'all' ? true : e.feature.properties.color === value;
+      };
 
-    var features = [];
-    for (var fry = 0; fry < 100; fry++) {
-      var color = colors[Math.floor(Math.random() * colors.length)];
-      features.push(craeteFeature(color));
-    }
-    for (var c = 0; c < colors.length; c++) {
-      var color = colors[c];
-      var addColorControl = ngwMap.createButtonControl({
-        html: '<div style="background:' + color + '" title="Add one ' + color + ' color point">+</div>',
-        onClick: (function (c) {
-          return function () {
-            ngwMap.addLayerData('geojson', craeteFeature(c))
-          };
-        })(color)
+      function setLayerFilter() {
+        if (filterInput.value === 'all') {
+          ngwMap.removeLayerFilter('geojson');
+        } else {
+          ngwMap.filterLayer('geojson', filterFunction);
+        }
+      }
+
+      var filterControl = ngwMap.createControl({
+        onAdd: function () {
+          return filterLabel;
+        }
+      }, { margin: true });
+
+      ngwMap.addControl(filterControl, 'top-right');
+
+      var features = [];
+      for (var fry = 0; fry < 100; fry++) {
+        var color = colors[Math.floor(Math.random() * colors.length)];
+        features.push(craeteFeature(color));
+      }
+      for (var c = 0; c < colors.length; c++) {
+        var color = colors[c];
+        var addColorControl = ngwMap.createButtonControl({
+          html: '<div style="background:' + color + '" title="Add one ' + color + ' color point">+</div>',
+          onClick: (function (c) {
+            return function () {
+              ngwMap.addLayerData('geojson', craeteFeature(c))
+            };
+          })(color)
+        });
+        ngwMap.addControl(addColorControl, 'top-left');
+      }
+
+      ngwMap.addLayer('GEOJSON', {
+        id: 'geojson',
+        data: { type: 'FeatureCollection', features: features },
+        visibility: true,
+        filter: filterFunction,
+        paint: { color: ['get', 'color'] }
       });
-      ngwMap.addControl(addColorControl, 'top-left');
-    }
-
-    ngwMap.addLayer('GEOJSON', {
-      id: 'geojson',
-      data: { type: 'FeatureCollection', features: features },
-      visibility: true,
-      filter: filterFunction,
-      paint: function (feature) {
-        return { color: feature.properties.color };
-      }
     });
 
     function craeteFeature(color) {
