@@ -87,11 +87,20 @@
       id: 'geojson',
       resourceId: 1733,
       adapter: 'GEOJSON',
-      visibility: true,
       fit: true,
       adapterOptions: {
         propertiesFilter: filterFunction(),
-        paint: { color: 'blue', radius: 4 }
+        paint: {
+            color: [
+              'match', ['get', 'AMENITY'],
+              'cafe', 'green',
+              'restaurant', 'red',
+              'gray' // last item is default value
+            ],
+            fillOpacity: 0.8,
+            stroke: true,
+            radius: 6
+          }
       }
     })
 
