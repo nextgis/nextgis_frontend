@@ -8,9 +8,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* **examples:** rapair examples ([e739de7](https://github.com/nextgis/nextgisweb_frontend/commit/e739de7c52c09ba17ddcf007c2604cc1e2a0e0ba))
+* **examples:** repair examples ([e739de7](https://github.com/nextgis/nextgisweb_frontend/commit/e739de7c52c09ba17ddcf007c2604cc1e2a0e0ba))
 * **ngw:** get geojson request options ([015cffc](https://github.com/nextgis/nextgisweb_frontend/commit/015cffc415b272f0dace009e192ef7986c699138))
-* **ngw-kit:** order_by param ([dd161fc](https://github.com/nextgis/nextgisweb_frontend/commit/dd161fc8d3536fe733f2c21427f897ae4d44f60f))
+* **ngw:** order_by param ([dd161fc](https://github.com/nextgis/nextgisweb_frontend/commit/dd161fc8d3536fe733f2c21427f897ae4d44f60f))
 
 
 ### Features
