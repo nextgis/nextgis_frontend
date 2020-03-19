@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.28.3](https://github.com/nextgis/nextgisweb_frontend/compare/v0.28.2...v0.28.3) (2020-03-19)
+
+
+### Bug Fixes
+
+* **examples:** rapair examples ([e739de7](https://github.com/nextgis/nextgisweb_frontend/commit/e739de7c52c09ba17ddcf007c2604cc1e2a0e0ba))
+* **ngw:** get geojson request options ([015cffc](https://github.com/nextgis/nextgisweb_frontend/commit/015cffc415b272f0dace009e192ef7986c699138))
+* **ngw-kit:** order_by param ([dd161fc](https://github.com/nextgis/nextgisweb_frontend/commit/dd161fc8d3536fe733f2c21427f897ae4d44f60f))
+
+
+### Features
+
+* **cesium:** pin paint implementation for geojson layer ([7fadb6d](https://github.com/nextgis/nextgisweb_frontend/commit/7fadb6d6f6a7ae8dfc0449ded1c1595ebba476ed))
+* **ngw:** option to create popup content from item ([3c4a809](https://github.com/nextgis/nextgisweb_frontend/commit/3c4a809dc7cd9045e3ed1622b1eea0036e5205a1))
+* **paint:** implement of `match`-decision expression ([cc92624](https://github.com/nextgis/nextgisweb_frontend/commit/cc92624c45819334b6b815dc84aed9978b784b3a))
+* add library `@nextgis/paint` ([99391ec](https://github.com/nextgis/nextgisweb_frontend/commit/99391ec1ac9fd80508816417d9eb2ae0fd734340))
+
+
+
+
+
 ## [0.28.2](https://github.com/nextgis/nextgisweb_frontend/compare/v0.28.1...v0.28.2) (2020-03-12)
 
 **Note:** Version bump only for package root

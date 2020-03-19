@@ -1,14 +1,14 @@
 {
   "name": "@nextgis/qms-kit",
-  "version": "0.28.1",
+  "version": "0.28.3",
   "_priority": 20,
   "description": "",
   "main": "lib/qms-kit.js",
   "unpkg": "lib/qms-kit.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/utils": "^0.28.0",
-    "@nextgis/webmap": "^0.28.1"
+    "@nextgis/utils": "^0.28.3",
+    "@nextgis/webmap": "^0.28.3"
   },
   "devDependencies": {
     "@nextgis/eslint-config": "^0.28.0",

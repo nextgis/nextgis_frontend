@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.28.3](https://github.com/nextgis/nextgisweb_frontend/compare/v0.28.2...v0.28.3) (2020-03-19)
+
+
+### Bug Fixes
+
+* **examples:** rapair examples ([e739de7](https://github.com/nextgis/nextgisweb_frontend/commit/e739de7c52c09ba17ddcf007c2604cc1e2a0e0ba))
+
+
+### Features
+
+* **ngw:** option to create popup content from item ([3c4a809](https://github.com/nextgis/nextgisweb_frontend/commit/3c4a809dc7cd9045e3ed1622b1eea0036e5205a1))
+* add library `@nextgis/paint` ([99391ec](https://github.com/nextgis/nextgisweb_frontend/commit/99391ec1ac9fd80508816417d9eb2ae0fd734340))
+
+
+
+
+
 ## [0.28.1](https://github.com/nextgis/nextgisweb_frontend/compare/v0.28.0...v0.28.1) (2020-03-12)
 
 **Note:** Version bump only for package @nextgis/webmap

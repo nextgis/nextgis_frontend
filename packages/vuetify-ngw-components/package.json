@@ -1,14 +1,14 @@
 {
   "name": "@nextgis/vuetify-ngw-components",
-  "version": "0.28.1",
+  "version": "0.28.3",
   "description": "Development tools",
   "main": "lib/vuetify-ngw-components.js",
   "unpkg": "lib/vuetify-ngw-components.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/leaflet-map-adapter": "^0.28.1",
-    "@nextgis/ngw-map": "^0.28.1",
-    "@nextgis/utils": "^0.28.0",
+    "@nextgis/leaflet-map-adapter": "^0.28.3",
+    "@nextgis/ngw-map": "^0.28.3",
+    "@nextgis/utils": "^0.28.3",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
     "vue-property-decorator": "^8.4.0",
