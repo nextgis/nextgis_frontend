@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/properties-filter",
-  "version": "0.28.1",
+  "version": "0.28.3",
   "description": "Filtering objects by its properties using expressions",
   "main": "lib/properties-filter.js",
   "unpkg": "lib/properties-filter.js",

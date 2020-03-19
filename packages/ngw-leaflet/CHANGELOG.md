@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.28.3](https://github.com/nextgis/nextgis_frontend_apps/compare/v0.28.2...v0.28.3) (2020-03-19)
+
+
+### Bug Fixes
+
+* **examples:** rapair examples ([e739de7](https://github.com/nextgis/nextgis_frontend_apps/commit/e739de7c52c09ba17ddcf007c2604cc1e2a0e0ba))
+
+
+
+
+
 ## [0.28.2](https://github.com/nextgis/nextgis_frontend_apps/compare/v0.28.1...v0.28.2) (2020-03-12)
 
 **Note:** Version bump only for package @nextgis/ngw-leaflet
