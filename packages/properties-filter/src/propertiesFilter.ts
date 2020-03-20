@@ -2,6 +2,7 @@
  * @module utils
  */
 import { Feature, GeoJsonProperties } from 'geojson';
+import { reEscape } from '@nextgis/utils';
 
 /**
  * gt - greater (>)
@@ -44,7 +45,7 @@ function like(b: string, a: string, iLike?: boolean) {
   b = String(b);
   if (a === b) return true;
   if (iLike && a.toUpperCase() === b.toUpperCase()) return true;
-  const re = `^${a}$`.replace(/%/g, '.*').replace('_', '.');
+  const re = `^${reEscape(a)}$`.replace(/%/g, '.*').replace('_', '.');
   return new RegExp(re, iLike ? 'i' : '').exec(b) !== null;
 }
 
