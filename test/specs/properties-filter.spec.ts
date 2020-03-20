@@ -4,12 +4,11 @@ import { propertiesFilter as pf } from '../../packages/properties-filter/src';
 const prop = {
   zero: 0,
   two: 2,
-  str: 'Str',
-  str$: 'Str%',
-  $str: '%Str',
-  $str$: '%Str%',
+  str: 'Foo Bar',
   true: true,
-  false: false
+  false: false,
+  text:
+    'JavaScript - язык программирования типа C++, основан на св ст. UNIX и отличается от языка C при программировании в С++ из-за большого числа потоков кода и большого количества операций.'
 };
 
 const props = [
@@ -27,7 +26,7 @@ describe(`WebMap.utils`, () => {
       expect(pf(prop, [['notexist', 'eq', 'any']])).to.be.false;
 
       expect(pf(prop, [['two', 'eq', 2]])).to.be.true;
-      expect(pf(prop, [['str', 'eq', 'Str']])).to.be.true;
+      expect(pf(prop, [['str', 'eq', 'Foo Bar']])).to.be.true;
 
       expect(pf(prop, [['true', 'eq', true]])).to.be.true;
       expect(pf(prop, [['false', 'eq', false]])).to.be.true;
@@ -44,7 +43,7 @@ describe(`WebMap.utils`, () => {
       expect(pf(prop, [['notexist', 'ne', 'any']])).to.be.true;
 
       expect(pf(prop, [['two', 'ne', 2]])).to.be.false;
-      expect(pf(prop, [['str', 'ne', 'Str']])).to.be.false;
+      expect(pf(prop, [['str', 'ne', 'Foo Bar']])).to.be.false;
       expect(pf(prop, [['true', 'ne', true]])).to.be.false;
       expect(pf(prop, [['false', 'ne', false]])).to.be.false;
 
@@ -110,7 +109,7 @@ describe(`WebMap.utils`, () => {
     expect(pf(prop, [['zero', 'in', [1, 2, 0]]])).to.be.true;
     expect(pf(prop, [['zero', 'in', [1, 3]]])).to.be.false;
 
-    expect(pf(prop, [['str', 'in', ['a', 'b', 'Str']]])).to.be.true;
+    expect(pf(prop, [['str', 'in', ['a', 'b', 'Foo Bar']]])).to.be.true;
     expect(pf(prop, [['zero', 'in', ['a', 'b', 'String']]])).to.be.false;
     expect(pf(prop, [['zero', 'in', ['a', 'b', 'str']]])).to.be.false;
   });
@@ -122,25 +121,16 @@ describe(`WebMap.utils`, () => {
     expect(pf(prop, [['zero', 'notin', [1, 2, 0]]])).to.be.false;
     expect(pf(prop, [['zero', 'notin', [1, 3]]])).to.be.true;
 
-    expect(pf(prop, [['str', 'notin', ['a', 'b', 'Str']]])).to.be.false;
+    expect(pf(prop, [['str', 'notin', ['a', 'b', 'Foo Bar']]])).to.be.false;
     expect(pf(prop, [['zero', 'notin', ['a', 'b', 'String']]])).to.be.true;
     expect(pf(prop, [['zero', 'notin', ['a', 'b', 'str']]])).to.be.true;
   });
 
   it(`like`, () => {
     const keys: [string, string[], string[]][] = [
-      ['str', ['Str'], ['string', 'stt', 'str', 'mystr', 'mystring']],
-      [
-        'str$',
-        ['Str', 'String'],
-        ['stt', 'mystr', 'mystring', 'str', 'STRING']
-      ],
-      ['$str', ['Str', 'myStr'], ['stt', 'String', 'myStR']],
-      [
-        '$str$',
-        ['Str', 'String', 'myStr', 'myString'],
-        ['stt', 'str', 'MySTring']
-      ]
+      ['text%', ['JavaScript'], ['JAVASCRIPT', 'javascript']],
+      ['%text', ['операций.'], ['ОПЕРАЦИЙ.']],
+      ['%text%', ['C++', 'UNIX'], ['unix']]
     ];
 
     const toBeTrue: boolean[] = [];
@@ -154,10 +144,9 @@ describe(`WebMap.utils`, () => {
   });
   it(`ilike`, () => {
     const keys: [string, string[], string[]][] = [
-      ['str', ['Str', 'STR', 'str'], ['string', 'stt', 'mystr', 'mystring']],
-      ['str$', ['STR', 'string'], ['stt', 'mystr', 'mystring']],
-      ['$str', ['StR', 'MyStr'], ['stt', 'String']],
-      ['$str$', ['Str', 'String', 'myStr', 'myString'], ['sst']]
+      ['text%', ['JAVASCRIPT', 'javascript'], []],
+      ['%text', ['операций.', 'ОПЕРАЦИЙ.'], []],
+      ['%text%', ['C++', 'unix'], []]
     ];
 
     const toBeTrue: boolean[] = [];
@@ -173,7 +162,7 @@ describe(`WebMap.utils`, () => {
   it(`all`, () => {
     expect(
       pf(prop, [
-        ['str', 'eq', 'Str'],
+        ['str', 'eq', 'Foo Bar'],
         ['two', 'in', [1, 2, 3]]
       ])
     ).to.be.true;
@@ -185,12 +174,12 @@ describe(`WebMap.utils`, () => {
     ).to.be.false;
     expect(
       pf(prop, [
-        ['str', 'eq', 'Str'],
-        ['str$', 'like', 'String'],
+        ['str', 'eq', 'Foo Bar'],
+        ['text%', 'like', 'JavaScript'],
         ['two', 'in', [1, 2, 3]]
       ])
     ).to.be.true;
-    expect(pf(prop, ['all', ['str', 'eq', 'Str'], ['two', 'eq', 2]])).to.be
+    expect(pf(prop, ['all', ['str', 'eq', 'Foo Bar'], ['two', 'eq', 2]])).to.be
       .true;
   });
 
@@ -203,7 +192,7 @@ describe(`WebMap.utils`, () => {
       pf(prop, [
         'any',
         ['str', 'eq', 'str'],
-        ['str$', 'like', 'myString'],
+        ['str%', 'like', 'string'],
         ['two', 'in', [1, 2, 3]]
       ])
     ).to.be.true;
