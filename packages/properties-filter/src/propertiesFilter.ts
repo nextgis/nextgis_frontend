@@ -39,7 +39,7 @@ export type PropertiesFilter<T extends any = any> = (
   | PropertiesFilter<T>
 )[];
 
-function like(a: string, b: string, iLike?: boolean) {
+function like(b: string, a: string, iLike?: boolean) {
   a = String(a);
   b = String(b);
   if (a === b) return true;
@@ -110,10 +110,17 @@ export function propertiesFilter(
       const [field, operation, value] = p;
       const operationExec = operationsAliases[operation];
       if (operationExec) {
-        const property = properties[field];
-        return operationExec(property, value);
+        if (operation === 'like' || operation === 'ilike') {
+          let prop = '';
+          const value_ = field.replace(/^%?(\w+)%?$/, (match, cleanField) => {
+            prop = properties[cleanField];
+            return field.replace(cleanField, value);
+          });
+          return operationExec(prop, value_);
+        }
+        return operationExec(properties[field], value);
       }
-      return true;
+      return false;
     } else {
       return propertiesFilter(properties, p);
     }
