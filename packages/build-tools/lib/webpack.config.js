@@ -38,7 +38,7 @@ module.exports = (env, argv, opt = {}) => {
           // Node couldn't find it, so it must be user-aliased
           callback();
         }
-      }
+      },
     ];
   }
   const configFile = path.join(__dirname, '../eslint-config/index.js');
@@ -51,8 +51,8 @@ module.exports = (env, argv, opt = {}) => {
       loader: 'eslint-loader',
       options: {
         fix: true,
-        configFile
-      }
+        configFile,
+      },
     },
     {
       test: /\.tsx?$/,
@@ -61,27 +61,27 @@ module.exports = (env, argv, opt = {}) => {
           loader: 'ts-loader',
           options: {
             compilerOptions: {
-              paths: {}
-            }
-          }
-        }
+              paths: {},
+            },
+          },
+        },
       ],
-      exclude: /node_modules/
+      exclude: /node_modules/,
     },
     {
       test: /\.css$/,
-      use: ['style-loader', 'css-loader']
+      use: ['style-loader', 'css-loader'],
     },
     {
       test: /\.(jpe?g|png|ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
-      use: 'base64-inline-loader?limit=1000&name=[name].[ext]'
-    }
+      use: 'base64-inline-loader?limit=1000&name=[name].[ext]',
+    },
   ];
 
   let plugins = [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(argv.mode || 'development')
-    })
+      'process.env.NODE_ENV': JSON.stringify(argv.mode || 'development'),
+    }),
     // new BundleAnalyzerPlugin()
   ];
 
@@ -110,7 +110,7 @@ module.exports = (env, argv, opt = {}) => {
 
       resolve: {
         extensions: ['.ts', '.js', '.json'],
-        alias
+        alias,
       },
 
       output: {
@@ -119,12 +119,12 @@ module.exports = (env, argv, opt = {}) => {
         library,
         libraryExport,
         libraryTarget: 'umd',
-        globalObject: "typeof self !== 'undefined' ? self : this" // https://github.com/webpack/webpack/issues/6522
+        globalObject: "typeof self !== 'undefined' ? self : this", // https://github.com/webpack/webpack/issues/6522
       },
       module: {
-        rules
+        rules,
       },
-      plugins
-    }
+      plugins,
+    },
   ];
 };

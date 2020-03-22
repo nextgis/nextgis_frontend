@@ -40,7 +40,8 @@
     "lib": "lib"
   },
   "files": [
-    "lib"
+    "lib",
+    "index.js"
   ],
   "license": "LGPL-3.0"
 }
