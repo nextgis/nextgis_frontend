@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.29.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.28.3...v0.29.0) (2020-03-22)
+
+
+### chore
+
+* build; eslint ([97e3b07](https://github.com/nextgis/nextgisweb_frontend/commit/97e3b07da07b57373e6861ab6e2d6f9b60a6ec2c))
+
+
+### BREAKING CHANGES
+
+* code formatting rules changed to prettier 2.0 compatibility
+
+
+
+
+
 ## [0.28.3](https://github.com/nextgis/nextgisweb_frontend/compare/v0.28.2...v0.28.3) (2020-03-19)
 
 **Note:** Version bump only for package @nextgis/qms-kit
