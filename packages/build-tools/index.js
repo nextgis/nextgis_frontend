@@ -1,3 +1,3 @@
-exports.aliases = require('./lib/aliases');
+exports.getAliases = require('./lib/aliases');
 
-exports.build = require('./lib/build');
+exports.build = () => require('./lib/build');

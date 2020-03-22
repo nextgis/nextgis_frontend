@@ -9,7 +9,7 @@ export type ResourceStoreItem<
 > = ResourceStoreItemDefault & P;
 
 export interface ResourceStoreItemDefault {
+  [field: string]: string | number | boolean | null | Date;
   id: number;
   label: string;
-  [field: string]: string | number | boolean | null | Date;
 }
