@@ -18,7 +18,7 @@ const typeAlias: { [x: string]: VectorAdapterLayerType } = {
   MultiLineString: 'line',
   Polygon: 'fill',
   MultiPolygon: 'fill',
-  Circle: 'circle'
+  Circle: 'circle',
 };
 
 export function getFeature(feature: OlFeature): Feature {
@@ -26,7 +26,7 @@ export function getFeature(feature: OlFeature): Feature {
   // @ts-ignore writeFeatureObject return JSON type, need Feature
   return geojson.writeFeatureObject(feature, {
     dataProjection: 'EPSG:4326',
-    featureProjection: 'EPSG:3857'
+    featureProjection: 'EPSG:3857',
   });
 }
 
@@ -69,9 +69,9 @@ export function styleFunction(
         fillOpacity,
         strokeColor,
         stroke,
-        strokeOpacity
+        strokeOpacity,
       } = {
-        ...paint
+        ...paint,
       } as GeometryPaint;
 
       if (
@@ -81,7 +81,7 @@ export function styleFunction(
         typeof fillOpacity === 'number'
       ) {
         style.fill = new Fill({
-          color: getColor(fillColor, fillOpacity)
+          color: getColor(fillColor, fillOpacity),
         });
       }
       if (
@@ -93,7 +93,7 @@ export function styleFunction(
         style.stroke = new Stroke({
           // @ts-ignore
           width: paint.weight,
-          color: getColor(strokeColor, strokeOpacity)
+          color: getColor(strokeColor, strokeOpacity),
         });
       }
 
@@ -108,7 +108,7 @@ export function styleFunction(
           anchorXUnits: IconAnchorUnits.PIXELS,
           anchorYUnits: IconAnchorUnits.PIXELS,
           anchor: paint.iconAnchor,
-          imgSize: paint.iconSize
+          imgSize: paint.iconSize,
         };
         style.image = new Icon(iconOptions);
       }
@@ -122,23 +122,23 @@ export function labelStyleFunction(type: VectorAdapterLayerType) {
     font: '12px Calibri,sans-serif',
     overflow: true,
     fill: new Fill({
-      color: '#000'
+      color: '#000',
     }),
     stroke: new Stroke({
       color: '#fff',
-      width: 3
-    })
+      width: 3,
+    }),
   };
   if (type === 'circle') {
     options = {
       ...options,
       placement: 'point',
       textBaseline: 'bottom',
-      offsetY: 20
+      offsetY: 20,
     };
   }
   return new Style({
-    text: new Text(options)
+    text: new Text(options),
   });
 }
 

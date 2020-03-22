@@ -17,7 +17,7 @@ export class CenterState extends StateItem<LngLatArray> {
     this.webMap.setCenter(val);
   }
   toString(data: LngLatArray) {
-    const d = data.map(x => x.toFixed(5));
+    const d = data.map((x) => x.toFixed(5));
     return d[0] + '_' + d[1];
   }
   parse(str: string) {

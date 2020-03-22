@@ -11,7 +11,7 @@ import {
   Cartesian3,
   Math as CesiumMath,
   EllipsoidTerrainProvider,
-  Cartographic
+  Cartographic,
 } from 'cesium';
 
 import {
@@ -23,7 +23,7 @@ import {
   ControlPositions,
   LngLatBoundsArray,
   CreateControlOptions,
-  ButtonControlOptions
+  ButtonControlOptions,
 } from '@nextgis/webmap';
 import ControlContainer from '@nextgis/control-container';
 
@@ -41,11 +41,11 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
     // MVT: MvtAdapter,
     // OSM: OsmAdapter,
     GEOJSON: GeoJsonAdapter,
-    TERRAIN: TerrainAdapter
+    TERRAIN: TerrainAdapter,
   };
 
   static controlAdapters = {
-    ZOOM: ControlContainer.controls.ZOOM
+    ZOOM: ControlContainer.controls.ZOOM,
     // ATTRIBUTION: Attribution
   };
 
@@ -60,7 +60,7 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
   // Scractch memory allocation, happens only once.
   private _scratchRectangle = new Rectangle();
   private _controlContainer = new ControlContainer({
-    addClass: 'cesium-control'
+    addClass: 'cesium-control',
   });
 
   create(options: MapOptions) {
@@ -82,7 +82,7 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
         // useBrowserRecommendedResolution: true,
         sceneMode: SceneMode.SCENE3D,
         // terrainProvider: createWorldTerrain()
-        terrainProvider: ellipsoidProvider
+        terrainProvider: ellipsoidProvider,
         // imageryProvider: tms,
         // mapProjection: new Cesium.WebMercatorProjection()
         // contextOptions: { requestWebgl2: true }
@@ -129,7 +129,7 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
         .height;
       const destination = Cartesian3.fromDegrees(lonLat[0], lonLat[1], z);
       viewer.camera.setView({
-        destination
+        destination,
       });
     }
   }
@@ -157,7 +157,7 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
       const newPos = new Cartesian3();
       Ellipsoid.WGS84.cartographicToCartesian(cartographic, newPos);
       viewer.camera.setView({
-        destination: newPos
+        destination: newPos,
       });
     }
     return undefined;
@@ -183,8 +183,8 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
           rect.west,
           rect.south,
           rect.east,
-          rect.north
-        ].map(x => CesiumMath.toDegrees(x));
+          rect.north,
+        ].map((x) => CesiumMath.toDegrees(x));
 
         return [x1, y1, x2, y2];
       }
@@ -245,7 +245,7 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
         ['zoomend', undefined],
         ['movestart', viewer.camera.moveStart],
         ['move', undefined],
-        ['moveend', viewer.camera.moveEnd]
+        ['moveend', viewer.camera.moveEnd],
       ];
       events.forEach(([name, event]) => {
         if (event) {

@@ -74,7 +74,7 @@ export const operationsAliases: {
   // ILIKE SQL statement(for strings compare)
   ilike: (a: string, b: string) => {
     return like(a, b, true);
-  }
+  },
 };
 
 export function checkIfPropertyFilter(
@@ -126,7 +126,7 @@ export function propertiesFilter(
       return propertiesFilter(properties, p);
     }
   };
-  const filters_ = filters.filter(x => Array.isArray(x)) as (
+  const filters_ = filters.filter((x) => Array.isArray(x)) as (
     | PropertyFilter
     | PropertiesFilter
   )[];

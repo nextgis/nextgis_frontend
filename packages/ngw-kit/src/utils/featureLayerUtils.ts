@@ -2,16 +2,16 @@ import { Geometry, Feature, FeatureCollection } from 'geojson';
 import {
   PropertiesFilter,
   FilterOptions,
-  PropertyFilter
+  PropertyFilter,
 } from '@nextgis/webmap';
 import NgwConnector, {
   FeatureItem,
-  RequestItemAdditionalParams
+  RequestItemAdditionalParams,
 } from '@nextgis/ngw-connector';
 import CancelablePromise from '@nextgis/cancelable-promise';
 import {
   propertiesFilter,
-  checkIfPropertyFilter
+  checkIfPropertyFilter,
 } from '@nextgis/properties-filter';
 
 export interface FeatureRequestParams {
@@ -31,7 +31,7 @@ export interface GetNgwLayerItemsOptions {
 
 const FEATURE_REQUEST_PARAMS: FeatureRequestParams = {
   srs: 4326,
-  geom_format: 'geojson'
+  geom_format: 'geojson',
 };
 
 export function createGeoJsonFeature<
@@ -43,7 +43,7 @@ export function createGeoJsonFeature<
     id: item.id,
     type: 'Feature',
     properties: item.fields as P,
-    geometry
+    geometry,
   };
   return feature;
 }
@@ -59,12 +59,12 @@ export function getNgwLayerItem<
   } & FilterOptions
 ): CancelablePromise<FeatureItem> {
   const params: FeatureRequestParams & { [name: string]: any } = {
-    ...FEATURE_REQUEST_PARAMS
+    ...FEATURE_REQUEST_PARAMS,
   };
   return options.connector.get('feature_layer.feature.item', null, {
     id: options.resourceId,
     fid: options.featureId,
-    ...params
+    ...params,
   });
 }
 
@@ -78,7 +78,7 @@ export function getNgwLayerFeature<
     connector: NgwConnector;
   } & FilterOptions
 ): CancelablePromise<Feature<G, P>> {
-  return getNgwLayerItem(options).then(item => {
+  return getNgwLayerItem(options).then((item) => {
     return createGeoJsonFeature<G, P>(item);
   });
 }
@@ -97,11 +97,11 @@ function idFilterWorkAround<
       'Unable to filter by object id. Except `eq` or `in` operator'
     );
   }
-  const promises: Promise<FeatureItem>[] = featureIds.map(featureId => {
+  const promises: Promise<FeatureItem>[] = featureIds.map((featureId) => {
     return getNgwLayerItem<G, P>({
       connector: options.connector,
       resourceId: options.resourceId,
-      featureId
+      featureId,
     });
   });
   return CancelablePromise.all(promises);
@@ -118,7 +118,7 @@ function createFeatureFieldFilterQueries(
 
   const logic = typeof filters[0] === 'string' ? filters[0] : 'all';
 
-  const filters_ = filters.filter(x => Array.isArray(x)) as PropertyFilter[];
+  const filters_ = filters.filter((x) => Array.isArray(x)) as PropertyFilter[];
 
   const createParam = (pf: PropertyFilter): [string, any] => {
     const [field, operation, value] = pf;
@@ -126,7 +126,7 @@ function createFeatureFieldFilterQueries(
   };
 
   if (logic === 'any') {
-    filters_.forEach(f => {
+    filters_.forEach((f) => {
       if (f[0] === 'id') {
         _queries.push(
           idFilterWorkAround({ filterById: f, connector, resourceId })
@@ -136,14 +136,14 @@ function createFeatureFieldFilterQueries(
         _queries.push(
           getNgwLayerItemsRequest({
             ...opt,
-            paramList: [..._parentAllParams, createParam(f)]
+            paramList: [..._parentAllParams, createParam(f)],
           })
         );
       } else {
         createFeatureFieldFilterQueries(
           {
             ...opt,
-            filters: f
+            filters: f,
           },
           _queries,
           [..._parentAllParams]
@@ -151,13 +151,13 @@ function createFeatureFieldFilterQueries(
       }
     });
   } else if (logic === 'all') {
-    const filterById = filters_.find(x => x[0] === 'id');
+    const filterById = filters_.find((x) => x[0] === 'id');
     if (filterById) {
       _queries.push(idFilterWorkAround({ filterById, connector, resourceId }));
     } else {
       const filters: [string, any][] = [];
       const propertiesFilterList: PropertiesFilter[] = [];
-      filters_.forEach(f => {
+      filters_.forEach((f) => {
         if (checkIfPropertyFilter(f)) {
           filters.push(createParam(f));
         } else {
@@ -166,11 +166,11 @@ function createFeatureFieldFilterQueries(
       });
 
       if (propertiesFilterList.length) {
-        propertiesFilterList.forEach(x => {
+        propertiesFilterList.forEach((x) => {
           createFeatureFieldFilterQueries(
             {
               ...opt,
-              filters: x
+              filters: x,
             },
             _queries,
             [..._parentAllParams, ...filters]
@@ -180,7 +180,7 @@ function createFeatureFieldFilterQueries(
         _queries.push(
           getNgwLayerItemsRequest({
             ...opt,
-            paramList: [..._parentAllParams, ...filters]
+            paramList: [..._parentAllParams, ...filters],
           })
         );
       }
@@ -204,7 +204,7 @@ function getNgwLayerItemsRequest<
     FilterOptions & { paramList?: [string, any][] }
 ): CancelablePromise<FeatureItem[]> {
   const params: FeatureRequestParams & RequestItemAdditionalParams = {
-    ...FEATURE_REQUEST_PARAMS
+    ...FEATURE_REQUEST_PARAMS,
   };
   const {
     connector,
@@ -213,7 +213,7 @@ function getNgwLayerItemsRequest<
     intersects,
     orderBy,
     resourceId,
-    paramList
+    paramList,
   } = options;
   if (limit) {
     params.limit = limit;
@@ -232,7 +232,7 @@ function getNgwLayerItemsRequest<
   }
   return connector.get('feature_layer.feature.collection', null, {
     id: resourceId,
-    ...params
+    ...params,
   });
 }
 
@@ -246,10 +246,10 @@ export function getNgwLayerItems<
   if (filters) {
     return createFeatureFieldFilterQueries({ ...options, filters });
   } else {
-    return getNgwLayerItemsRequest(options).then(data => {
+    return getNgwLayerItemsRequest(options).then((data) => {
       if (filters) {
         // control
-        return data.filter(y => {
+        return data.filter((y) => {
           const fields = y.fields;
           if (fields) {
             propertiesFilter(fields, filters);
@@ -273,13 +273,13 @@ export function getNgwLayerFeatures<
 ): CancelablePromise<FeatureCollection<G, P>> {
   return getNgwLayerItems(options).then((x: FeatureItem[]) => {
     const features: Array<Feature<G, P>> = [];
-    x.forEach(y => {
+    x.forEach((y) => {
       features.push(createGeoJsonFeature(y));
     });
 
     const featureCollection: FeatureCollection<G, P> = {
       type: 'FeatureCollection',
-      features
+      features,
     };
     return featureCollection;
   });

@@ -16,7 +16,7 @@ export class TileAdapter extends BaseAdapter<TileAdapterOptions, TileLayer>
           pane: this.pane,
           attribution: opt.attribution,
           minZoom: opt.minZoom,
-          maxZoom: opt.maxZoom
+          maxZoom: opt.maxZoom,
         };
         let layer;
         if (opt.headers) {

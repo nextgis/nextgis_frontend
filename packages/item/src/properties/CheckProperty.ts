@@ -16,7 +16,7 @@ export class CheckProperty<
     hierarchy: true,
     bubble: false,
     propagation: false,
-    label: 'Toggle'
+    label: 'Toggle',
     // PropertyContainer: IndicatorContainer
   };
 
@@ -56,7 +56,7 @@ export class CheckProperty<
   getHierarchyValue() {
     return (
       this.get() &&
-      this.getParents().every(x => {
+      this.getParents().every((x) => {
         const property = x.properties && x.properties.get(this.name);
         return property && property.get();
       })
@@ -108,11 +108,13 @@ export class CheckProperty<
   }
 
   blockChilds(options?: O) {
-    this.item.tree.getDescendants().forEach(x => this._blockChild(x, options));
+    this.item.tree
+      .getDescendants()
+      .forEach((x) => this._blockChild(x, options));
   }
 
   unblockChilds(options?: O) {
-    this.item.tree.getChildren().forEach(x => this._unBlockChild(x, options));
+    this.item.tree.getChildren().forEach((x) => this._unBlockChild(x, options));
   }
 
   _blockChild(item: Item, options?: O) {
@@ -146,8 +148,8 @@ export class CheckProperty<
             ...options,
             ...{
               propagation: true,
-              bubble: false
-            }
+              bubble: false,
+            },
           });
         }
       }

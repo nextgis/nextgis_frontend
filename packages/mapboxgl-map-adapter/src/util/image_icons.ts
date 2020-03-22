@@ -50,7 +50,7 @@ export function getImageData(
 }
 
 export function getImage(svgStr: string, opt: GetImgOpt): Promise<ImageData> {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     if (canvg) {
       resolve(getImageData(svgStr, opt));
     } else {

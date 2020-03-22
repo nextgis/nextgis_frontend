@@ -2,8 +2,8 @@
  * @module utils
  */
 export function applyMixins(derivedCtor: any, baseCtors: any[]) {
-  baseCtors.forEach(baseCtor => {
-    Object.getOwnPropertyNames(baseCtor.prototype).forEach(name => {
+  baseCtors.forEach((baseCtor) => {
+    Object.getOwnPropertyNames(baseCtor.prototype).forEach((name) => {
       const descriptor = Object.getOwnPropertyDescriptor(
         baseCtor.prototype,
         name
@@ -20,7 +20,7 @@ export function mixinProperties(
   baseCtor: any,
   properties: string[]
 ) {
-  properties.forEach(name => {
+  properties.forEach((name) => {
     const descriptor = Object.getOwnPropertyDescriptor(
       baseCtor.prototype,
       name

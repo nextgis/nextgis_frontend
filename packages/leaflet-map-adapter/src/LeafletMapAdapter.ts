@@ -14,7 +14,7 @@ import {
   LocateOptions,
   LocationEvents,
   Locate,
-  BaseMapEvents
+  BaseMapEvents,
 } from '@nextgis/webmap';
 import L, {
   Map,
@@ -22,7 +22,7 @@ import L, {
   Layer,
   ControlPosition,
   LeafletMouseEvent,
-  GridLayer
+  GridLayer,
 } from 'leaflet';
 import { EventEmitter } from 'events';
 import { TileAdapter } from './layer-adapters/TileAdapter/TileAdapter';
@@ -43,14 +43,14 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     IMAGE: ImageAdapter,
     TILE: TileAdapter,
     GEOJSON: GeoJsonAdapter,
-    WMS: WmsAdapter
+    WMS: WmsAdapter,
     // // MVT: MvtAdapter,
     // OSM: OsmAdapter,
   };
 
   static controlAdapters = {
     ZOOM: Control.Zoom,
-    ATTRIBUTION: AttributionControl
+    ATTRIBUTION: AttributionControl,
   };
 
   static Map = L;
@@ -68,7 +68,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     'zoomend',
     'movestart',
     'move',
-    'moveend'
+    'moveend',
   ];
 
   create(options: MapOptions) {
@@ -81,7 +81,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
         maxZoom,
         minZoom,
         zoom,
-        center
+        center,
       });
       // create default pane
       const defPane = this.map.createPane('order-0');
@@ -158,7 +158,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
       // top, left, bottom, right
       this.map.fitBounds([
         [e[3], e[0]],
-        [e[1], e[2]]
+        [e[1], e[2]],
       ]);
     }
   }
@@ -290,10 +290,10 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   private _addMapListeners() {
     const map = this.map;
     if (map) {
-      map.on('click', evt => {
+      map.on('click', (evt) => {
         this.onMapClick(evt as LeafletMouseEvent);
       });
-      this._universalEvents.forEach(e => {
+      this._universalEvents.forEach((e) => {
         map.on(e, () => this.emitter.emit(e, this), map);
       });
     }

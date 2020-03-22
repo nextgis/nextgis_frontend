@@ -50,11 +50,11 @@ export default function loadJSONBrowser(
     }
   };
 
-  xhr.onerror = er => {
+  xhr.onerror = (er) => {
     error(er);
   };
 
-  xhr.upload.onprogress = function(e) {
+  xhr.upload.onprogress = function (e) {
     if (e.lengthComputable) {
       const percentComplete = (e.loaded / e.total) * 100;
       if (options.onProgress) {

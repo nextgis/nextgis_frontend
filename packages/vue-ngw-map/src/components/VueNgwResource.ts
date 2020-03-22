@@ -48,7 +48,7 @@ export class VueNgwResource extends Vue {
           resourceId: Number(resourceId),
           adapter: this.$props.adapter,
           fit,
-          adapterOptions
+          adapterOptions,
         });
       }
     }

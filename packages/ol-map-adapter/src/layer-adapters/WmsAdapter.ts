@@ -17,7 +17,7 @@ export class WmsAdapter implements BaseLayerAdapter {
     const wmsOptions: TileWMSOptions = {
       url: options.url,
       params: { LAYERS: options.layers, VERSION: options.version },
-      projection: undefined
+      projection: undefined,
     };
 
     const updateWmsParams = options.updateWmsParams;
@@ -31,7 +31,7 @@ export class WmsAdapter implements BaseLayerAdapter {
             resource,
             bbox: BBOX,
             width: WIDTH,
-            height: HEIGHT
+            height: HEIGHT,
           })
         );
         const headers = options.headers;
@@ -49,7 +49,7 @@ export class WmsAdapter implements BaseLayerAdapter {
 
     const layer = new TileLayer({
       source,
-      ...resolutionOptions(this.map, options)
+      ...resolutionOptions(this.map, options),
     });
     this.layer = layer;
     return layer;

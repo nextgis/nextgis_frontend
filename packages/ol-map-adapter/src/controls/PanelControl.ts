@@ -9,7 +9,7 @@ interface PanelControlOptions {
 }
 
 const OPTIONS: PanelControlOptions = {
-  collapsible: false
+  collapsible: false,
 };
 
 export class PanelControl extends Control {

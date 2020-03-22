@@ -16,7 +16,7 @@ export class TerrainAdapter extends BaseAdapter<TileAdapterOptions, Layer> {
     const layer = new CesiumTerrainProvider({
       url: opt.url,
       requestVertexNormals: true,
-      credit: opt.attribution
+      credit: opt.attribution,
     });
     this._layer = layer;
     return layer;

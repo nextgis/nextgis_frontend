@@ -7,7 +7,7 @@ import {
   VectorAdapterLayerType,
   LayerDefinition,
   DataLayerFilter,
-  PopupOptions
+  PopupOptions,
 } from '@nextgis/webmap';
 import {
   IconOptions,
@@ -15,7 +15,7 @@ import {
   Paint,
   VectorAdapterLayerPaint,
   isPaintCallback,
-  isPaint
+  isPaint,
 } from '@nextgis/paint';
 import {
   GeoJSON,
@@ -30,7 +30,7 @@ import {
   LatLngExpression,
   Map,
   Layer,
-  LeafletMouseEvent
+  LeafletMouseEvent,
 } from 'leaflet';
 import { GeoJsonObject, Feature } from 'geojson';
 import { BaseAdapter } from './BaseAdapter';
@@ -39,7 +39,7 @@ import {
   typeAlias,
   filterGeometries,
   PAINT,
-  convertMapClickEvent
+  convertMapClickEvent,
 } from '../utils/utils';
 
 type LayerMem = LayerDefinition<Feature>;
@@ -81,7 +81,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
   select(findFeatureFun?: DataLayerFilter) {
     if (findFeatureFun) {
       const feature = this._layers.filter(findFeatureFun);
-      feature.forEach(x => {
+      feature.forEach((x) => {
         this._selectLayer(x.layer);
       });
     } else if (!this.selected) {
@@ -95,7 +95,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
   unselect(findFeatureFun?: DataLayerFilter) {
     if (findFeatureFun) {
       const feature = this._layers.filter(findFeatureFun);
-      feature.forEach(x => {
+      feature.forEach((x) => {
         this._unSelectLayer(x.layer);
       });
     } else if (this.selected) {
@@ -107,7 +107,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
   }
 
   getSelected() {
-    return this._selectedLayers.map(x => {
+    return this._selectedLayers.map((x) => {
       return { feature: x.feature, layer: x };
     });
   }
@@ -154,7 +154,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
       return {
         feature,
         layer,
-        visible
+        visible,
       };
     });
   }
@@ -211,7 +211,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
   openPopup(findFeatureFun: DataLayerFilter, options?: PopupOptions) {
     if (findFeatureFun) {
       const feature = this._layers.filter(findFeatureFun);
-      feature.forEach(x => {
+      feature.forEach((x) => {
         this._openPopup(x.layer, options);
       });
     }
@@ -222,7 +222,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
       ? this._layers.filter(findFeatureFun)
       : this._layers;
 
-    featuresToClosePopup.forEach(x => {
+    featuresToClosePopup.forEach((x) => {
       this._closePopup(x.layer);
     });
   }
@@ -231,7 +231,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     if (layerDef) {
       this._updateTooltip(layerDef);
     } else {
-      this.getLayers().forEach(x => this._updateTooltip(x));
+      this.getLayers().forEach((x) => this._updateTooltip(x));
     }
   }
 
@@ -268,7 +268,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
   }
 
   private setPaintEachLayer(paint: Paint) {
-    this.layer.eachLayer(l => {
+    this.layer.eachLayer((l) => {
       this.setPaint(l, paint);
     });
   }
@@ -305,14 +305,14 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
         ['fillColor', 'fillColor'],
         ['fillOpacity', 'fillOpacity'],
         ['fill', 'fill'],
-        ['weight', 'weight']
+        ['weight', 'weight'],
       ];
       const aliases: [keyof PathOptions, keyof PathPaint][] =
         this.type === 'line'
           ? [
               ['color', 'strokeColor'],
               ['opacity', 'strokeOpacity'],
-              ['weight', 'weight']
+              ['weight', 'weight'],
             ]
           : paintAliases;
 
@@ -326,7 +326,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
         if (paintProp !== undefined) {
           Object.defineProperty(readyPaint, to, {
             enumerable: true,
-            value: paintProp
+            value: paintProp,
           });
         }
       });
@@ -352,17 +352,17 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
               iconOpt as IconOptions
             );
             return pointToLayer(feature, latLng);
-          }
+          },
         };
       } else {
         lopt = {
-          style: feature => {
+          style: (feature) => {
             if (feature) {
               return this.preparePaint({ ...PAINT, ...paint(feature) });
             } else {
               return this.preparePaint({ ...PAINT, type: 'path' });
             }
-          }
+          },
         };
       }
     } else {
@@ -393,7 +393,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
           } else {
             layer.on(
               'click',
-              e => this._onLayerClick(e as LeafletMouseEvent),
+              (e) => this._onLayerClick(e as LeafletMouseEvent),
               this
             );
           }
@@ -428,14 +428,14 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
         feature: layer.feature,
         selected: isSelected,
         event: convertMapClickEvent(e),
-        source: e
+        source: e,
       });
     }
   }
 
   private _selectLayer(layer: any) {
     if (this.options && !this.options.multiselect) {
-      this._selectedLayers.forEach(x => this._unSelectLayer(x));
+      this._selectedLayers.forEach((x) => this._unSelectLayer(x));
     }
     this._selectedLayers.push(layer);
     this.selected = true;

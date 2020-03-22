@@ -13,7 +13,7 @@ import {
   OnLayerClickOptions,
   PropertiesFilter,
   FilterOptions,
-  LayerDefinition
+  LayerDefinition,
 } from './interfaces/LayerAdapter';
 import { LayerDef, Type } from './interfaces/BaseTypes';
 
@@ -22,7 +22,7 @@ import { preparePaint } from '@nextgis/paint';
 import { updateGeoJsonAdapterOptions } from './utils/updateGeoJsonAdapterOptions';
 import {
   GetAttributionsOptions,
-  ToggleLayerOptions
+  ToggleLayerOptions,
 } from './interfaces/WebMapApp';
 import { propertiesFilter } from './utils/propertiesFilter';
 import { BaseWebMap } from './BaseWebMap';
@@ -143,7 +143,7 @@ export class WebMapLayers<
   ): Promise<LayerAdapter> {
     const layer = await this.addLayer(adapter, {
       ...options,
-      baseLayer: true
+      baseLayer: true,
     });
 
     return layer;
@@ -203,7 +203,7 @@ export class WebMapLayers<
       order: _order,
       maxZoom,
       minZoom,
-      ...options
+      ...options,
     };
     // options.visibility is a layer global state, but each layer on init is not visible
     const visibility = options.visibility;
@@ -216,7 +216,7 @@ export class WebMapLayers<
     if (this.options.onBeforeAddLayer) {
       const modified = this.options.onBeforeAddLayer({
         options,
-        adapter: adapterEngine
+        adapter: adapterEngine,
       });
       if (modified) {
         if (modified.options) {
@@ -455,7 +455,7 @@ export class WebMapLayers<
 
         // do not show baselayer if another on the map
         if (order === 0 && this._baseLayers.length) {
-          const anotherVisibleLayerBaseLayer = this._baseLayers.find(x => {
+          const anotherVisibleLayerBaseLayer = this._baseLayers.find((x) => {
             return x !== l.id && this.isLayerVisible(x);
           });
           if (anotherVisibleLayerBaseLayer) {
@@ -486,7 +486,7 @@ export class WebMapLayers<
       if (this.mapAdapter.map) {
         action(this.mapAdapter, layer);
       } else {
-        this.mapAdapter.emitter.once('create', adapter => {
+        this.mapAdapter.emitter.once('create', (adapter) => {
           action(adapter.map, layer);
         });
       }
@@ -620,7 +620,7 @@ export class WebMapLayers<
     if (adapter.propertiesFilter) {
       adapter.propertiesFilter(filters, options);
     } else if (adapter.filter) {
-      this.filterLayer(adapter, e => {
+      this.filterLayer(adapter, (e) => {
         if (e.feature && e.feature.properties) {
           return propertiesFilter(e.feature.properties, filters);
         }
@@ -723,7 +723,7 @@ export class WebMapLayers<
   }
 
   getActiveBaseLayer() {
-    const visibleLayerBaseLayer = this.getBaseLayers().find(x => {
+    const visibleLayerBaseLayer = this.getBaseLayers().find((x) => {
       return this.isLayerVisible(x);
     });
     if (visibleLayerBaseLayer) {
@@ -738,7 +738,7 @@ export class WebMapLayers<
 
   private _updateGeoJsonOptions(options: GeoJsonAdapterOptions) {
     const onLayerClickFromOpt = options.onLayerClick;
-    options.onLayerClick = e => {
+    options.onLayerClick = (e) => {
       if (onLayerClickFromOpt) {
         onLayerClickFromOpt(e);
       }

@@ -8,7 +8,7 @@ import {
   PropertiesFilter,
   Operations,
   PropertyFilter,
-  checkIfPropertyFilter
+  checkIfPropertyFilter,
 } from '@nextgis/properties-filter';
 import { Paint } from '@nextgis/paint';
 

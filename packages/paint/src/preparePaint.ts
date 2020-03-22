@@ -10,7 +10,7 @@ import {
   GetPaintFunction,
   GetCustomPaintOptions,
   PropertiesPaint,
-  PropertyPaint
+  PropertyPaint,
 } from './interfaces';
 import { isPaintCallback, isPropertiesPaint, isPaint } from './typeHelpers';
 import { createExpressionCallback } from './fromPaintExpression';
@@ -34,7 +34,7 @@ function createPropertiesPaint(
 ): GetPaintFunction {
   let mask: VectorAdapterLayerPaint = {};
   const paintsFilters: PropertyPaint[] = [];
-  propertiesPaint.forEach(x => {
+  propertiesPaint.forEach((x) => {
     if (x) {
       if (Array.isArray(x)) {
         paintsFilters.push(x);
@@ -45,7 +45,7 @@ function createPropertiesPaint(
   });
 
   return (feature: Feature) => {
-    const paint = paintsFilters.find(x => featureFilter(feature, x[0]));
+    const paint = paintsFilters.find((x) => featureFilter(feature, x[0]));
     if (paint) {
       return { ...mask, ...paint[1] };
     }

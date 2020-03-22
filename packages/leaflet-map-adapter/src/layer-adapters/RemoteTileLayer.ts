@@ -19,7 +19,7 @@ export class RemoteTileLayer<O extends TileLayerOptions = TileLayerOptions> {
     const tile = document.createElement('img');
     callAjax(
       url,
-      response => {
+      (response) => {
         tile.src = response;
         done(null, tile);
       },

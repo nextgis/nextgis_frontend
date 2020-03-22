@@ -15,11 +15,11 @@ export const OPTIONS: NgwMapOptions = {
     ATTRIBUTION: {
       position: 'bottom-right',
       customAttribution: [
-        '<a href="http://nextgis.ru" target="_blank">©NextGIS</a>'
-      ]
-    }
+        '<a href="http://nextgis.ru" target="_blank">©NextGIS</a>',
+      ],
+    },
   },
-  pixelRadius: 10
+  pixelRadius: 10,
 };
 
 export function prepareWebMapOptions(
@@ -31,7 +31,7 @@ export function prepareWebMapOptions(
   if (!options.connector) {
     options.connector = new NgwConnector({
       baseUrl: options.baseUrl || '',
-      auth: options.auth
+      auth: options.auth,
     });
   } else if (options.connector) {
     options.baseUrl = options.connector.options.baseUrl;
@@ -42,13 +42,13 @@ export function prepareWebMapOptions(
       new NgwKit({
         connector: opt.connector,
         auth: opt.auth,
-        identification: opt.identification
+        identification: opt.identification,
       })
     );
   }
   return {
     mapAdapter,
     starterKits: kits,
-    runtimeParams: options.runtimeParams
+    runtimeParams: options.runtimeParams,
   };
 }

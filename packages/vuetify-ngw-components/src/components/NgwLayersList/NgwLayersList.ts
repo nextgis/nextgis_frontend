@@ -6,7 +6,7 @@ import NgwMap, { LayerAdapter } from '@nextgis/ngw-map';
 import {
   ResourceAdapter,
   WebMapLayerAdapter,
-  WebMapLayerItem
+  WebMapLayerItem,
 } from '@nextgis/ngw-kit';
 import { CreateElement, VNode, VNodeData } from 'vue';
 // @ts-ignore
@@ -42,14 +42,14 @@ export class NgwLayersList extends Vue {
   setVisibleLayers(selection: string[], old: string[]) {
     const isSame = arrayCompare(selection, old);
     if (!isSame) {
-      this._layers.forEach(x => {
+      this._layers.forEach((x) => {
         if (x.layer && x.layer.properties) {
           const layer = x.layer as WebMapLayerItem;
           if (this.hideWebmapRoot && layer.item.item_type === 'root') {
             layer.properties.set('visibility', true);
           }
           const desc = layer.tree.getDescendants() as WebMapLayerItem[];
-          desc.forEach(d => {
+          desc.forEach((d) => {
             const id = this._getLayerId(d);
             if (id) {
               d.properties.set('visibility', selection.indexOf(id) !== -1);
@@ -82,26 +82,26 @@ export class NgwLayersList extends Vue {
     const data: VNodeData = {
       props: {
         value: this.selection,
-        'selection-type': 'independent'
+        'selection-type': 'independent',
       },
       on: {
         input: (event: any) => {
           this.selection = event;
-        }
+        },
       },
       attrs: { items: this.items, selectable: true },
       scopedSlots: {
         ...this.$scopedSlots,
-        label: props => {
+        label: (props) => {
           const name = props.item.name;
           return h('span', {
             domProps: {
               innerHTML: name,
-              title: name
-            }
+              title: name,
+            },
           });
-        }
-      }
+        },
+      },
       // domProps: { id: this.id }
     };
     return h(VTreeview, data, this.$slots.default);
@@ -145,10 +145,10 @@ export class NgwLayersList extends Vue {
     if (this.notOnlyNgwLayer) {
       await this.ngwMap.onLoad();
       const layers = this.ngwMap.allLayers();
-      layersList = Object.keys(layers).map(x => layers[x]);
+      layersList = Object.keys(layers).map((x) => layers[x]);
     } else {
       const ngwLayers = await this.ngwMap.getNgwLayers();
-      layersList = Object.keys(ngwLayers).map(x => ngwLayers[x].layer);
+      layersList = Object.keys(ngwLayers).map((x) => ngwLayers[x].layer);
     }
     this.items = [];
     if (layersList) {
@@ -159,7 +159,7 @@ export class NgwLayersList extends Vue {
           return aOrder - bOrder;
         })
         .reverse()
-        .forEach(x => {
+        .forEach((x) => {
           this._createTreeItem(x);
         });
     }
@@ -181,10 +181,10 @@ export class NgwLayersList extends Vue {
     const item: VueTreeItem = {
       id: layer.id || '',
       name,
-      children: []
+      children: [],
     };
     if (this.include) {
-      const isInclude = this.include.find(x => {
+      const isInclude = this.include.find((x) => {
         if (typeof x === 'string') {
           return item.id === x;
         } else {
@@ -214,7 +214,7 @@ export class NgwLayersList extends Vue {
       this.hideWebmapRoot &&
       webMapLayer.layer?.item.item_type === 'root'
     ) {
-      item.children.reverse().forEach(x => this.items.push(x));
+      item.children.reverse().forEach((x) => this.items.push(x));
       webMapLayer.layer && webMapLayer.layer.properties.set('visibility', true);
     } else {
       if (visible) {
@@ -227,7 +227,7 @@ export class NgwLayersList extends Vue {
   private _createWebMapTree(items: WebMapLayerItem[]) {
     const treeItems: VueTreeItem[] = [];
 
-    items.forEach(x => {
+    items.forEach((x) => {
       const id = this._getLayerId(x);
 
       if (this.showLayer) {
@@ -237,7 +237,7 @@ export class NgwLayersList extends Vue {
 
       const item: VueTreeItem = {
         id,
-        name: x.item.display_name || id
+        name: x.item.display_name || id,
       };
       const children = x.tree.getChildren<WebMapLayerItem>();
       if (children && children.length) {
@@ -261,7 +261,7 @@ export class NgwLayersList extends Vue {
     if (webMapTree) {
       const parents = webMap.tree
         .getParents<WebMapLayerItem>()
-        .map(x => x.item.display_name);
+        .map((x) => x.item.display_name);
       const id = [...parents, webMap.item.display_name].join('-');
       return id;
     } else {

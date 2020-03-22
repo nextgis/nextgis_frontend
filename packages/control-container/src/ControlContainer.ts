@@ -17,7 +17,7 @@ export interface ControlContainerOptions {
 
 export class ControlContainer {
   static controls = {
-    ZOOM: ZoomControl
+    ZOOM: ZoomControl,
   };
 
   private readonly classPrefix: string = 'webmap';
@@ -30,7 +30,7 @@ export class ControlContainer {
     'bottom-left': null,
     'bottom-right': null,
     'top-left': null,
-    'top-right': null
+    'top-right': null,
   };
 
   constructor(opt: ControlContainerOptions = {}) {
@@ -116,9 +116,9 @@ export class ControlContainer {
       'top-right',
       'top-left',
       'bottom-right',
-      'bottom-left'
+      'bottom-left',
     ];
-    positions.forEach(x => {
+    positions.forEach((x) => {
       const positionContainer = this._createPositionContainer(x);
       this._positionsContainers[x] = positionContainer;
       element.appendChild(positionContainer);

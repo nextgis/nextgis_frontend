@@ -32,7 +32,7 @@ export function createControl(
     },
     onRemove() {
       control.onRemove();
-    }
+    },
   });
   return new C();
 }

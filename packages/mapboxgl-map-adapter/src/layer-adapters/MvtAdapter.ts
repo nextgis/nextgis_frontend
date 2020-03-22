@@ -22,14 +22,14 @@ export class MvtAdapter extends VectorAdapter<MvtAdapterOptions> {
     if (!exist) {
       this.map.addSource(this.options.url, {
         type: 'vector',
-        tiles: [this.options.url]
+        tiles: [this.options.url],
       });
       this.source = this.options.url;
       MvtAdapter.sources.push(this.options.url);
     }
     const mvtLayerOptions: Partial<mapboxgl.Layer> = {
       source: this.options.url,
-      'source-layer': this.options.sourceLayer
+      'source-layer': this.options.sourceLayer,
     };
     return mvtLayerOptions;
   }

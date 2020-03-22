@@ -4,7 +4,7 @@
 import {
   ToggleControlOptions,
   ToggleControl,
-  ButtonControlOptions
+  ButtonControlOptions,
 } from '../../interfaces/MapControl';
 
 export function createToggleControl<C = any>(
@@ -59,7 +59,7 @@ export function createToggleControl<C = any>(
   setHtml();
 
   function _setClass(addClass: string, impact: boolean) {
-    addClass.split(' ').forEach(x => {
+    addClass.split(' ').forEach((x) => {
       if (impact) {
         link.classList.add(x);
       } else {
@@ -105,7 +105,7 @@ export function createToggleControl<C = any>(
 
   const buttonControl = createButtonControl({
     html: link,
-    onClick
+    onClick,
   }) as C & ToggleControl;
   buttonControl.onClick = onClick;
   buttonControl.changeStatus = changeStatus;
