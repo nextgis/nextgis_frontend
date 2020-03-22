@@ -14,6 +14,13 @@ export interface FileMeta {
   size: number;
 }
 
+export interface NgwExtent {
+  minLon: number;
+  minLat: number;
+  maxLon: number;
+  maxLat: number;
+}
+
 export interface FileUploadResp {
   upload_meta: FileMeta[];
 }
@@ -54,6 +61,7 @@ export interface GetRequestItemsResponseMap extends RequestItemKeys {
   'feature_layer.feature.collection': FeatureItem[];
   'feature_layer.store': ResourceStoreItem[];
   'feature_layer.field': FeatureLayerField[];
+  'feature_layer.feature.item_extent': NgwExtent;
 }
 
 export interface CreatedResource {

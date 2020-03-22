@@ -17,7 +17,7 @@ const packageOptions = package.buildOptions || {};
 const library = packageOptions.name;
 const externals = !!packageOptions.externals;
 
-const common = require('../../build/webpack.config');
+const common = require('./webpack.config');
 
 if (!library) {
   console.error(
