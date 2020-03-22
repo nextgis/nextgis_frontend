@@ -15,10 +15,12 @@ export interface FileMeta {
 }
 
 export interface NgwExtent {
-  minLon: number;
-  minLat: number;
-  maxLon: number;
-  maxLat: number;
+  extent: {
+    minLon: number;
+    minLat: number;
+    maxLon: number;
+    maxLat: number;
+  };
 }
 
 export interface FileUploadResp {
@@ -57,6 +59,7 @@ export interface GetRequestItemsResponseMap extends RequestItemKeys {
   'resource.child': any;
   'resource.collection': ResourceItem[];
   'file_upload.upload': FileUploadResp;
+  'layer.extent': NgwExtent;
   'feature_layer.feature.item': FeatureItem;
   'feature_layer.feature.collection': FeatureItem[];
   'feature_layer.store': ResourceStoreItem[];
@@ -117,6 +120,9 @@ export interface RequestOptions<M = RequestMethods> {
   file?: File;
   responseType?: 'json' | 'blob';
   onProgress?: (percentComplete: number) => void;
+  /** Save response data to return for similar query url */
+  cache?: boolean;
+  /** TODO: rename. Do not wait while query with equal url is completed */
   nocache?: boolean;
 }
 
