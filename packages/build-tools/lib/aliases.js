@@ -1,13 +1,13 @@
 const { join, resolve } = require('path');
 const { lstatSync, readdirSync, readFileSync, existsSync } = require('fs');
 
-const isDirectory = source => lstatSync(source).isDirectory();
+const isDirectory = (source) => lstatSync(source).isDirectory();
 
 function generate(source = '../') {
   source = resolve(__dirname, source);
   const items = {};
 
-  readdirSync(source).forEach(name => {
+  readdirSync(source).forEach((name) => {
     const libPath = join(source, name);
 
     // find packages
@@ -24,6 +24,6 @@ function generate(source = '../') {
   return items;
 }
 
-exports.getAliases = function(source) {
+exports.getAliases = function (source) {
   return generate(source);
 };
