@@ -17,10 +17,10 @@ export class ImageAdapter implements BaseLayerAdapter {
     const imageOptions: ImageWMSOptions = {
       url: options.url,
       params: {
-        resource: options.resourceId || options.id
+        resource: options.resourceId || options.id,
       },
       ratio: 1,
-      projection: undefined
+      projection: undefined,
     };
 
     const updateWmsParams = options.updateWmsParams;
@@ -34,7 +34,7 @@ export class ImageAdapter implements BaseLayerAdapter {
             resource,
             bbox: BBOX,
             width: WIDTH,
-            height: HEIGHT
+            height: HEIGHT,
           })
         );
         const headers = options.headers;
@@ -52,7 +52,7 @@ export class ImageAdapter implements BaseLayerAdapter {
 
     const layer = new ImageLayer({
       source,
-      ...resolutionOptions(this.map, options)
+      ...resolutionOptions(this.map, options),
     });
     this.layer = layer;
     return layer;

@@ -35,7 +35,7 @@ export class CancelablePromise<T> implements Promise<T> {
   }
 
   static resolve<T>(value: T | PromiseLike<T>): CancelablePromise<T> {
-    return new CancelablePromise(resolve => resolve(value));
+    return new CancelablePromise((resolve) => resolve(value));
   }
 
   static reject<T>(value: T | PromiseLike<T>): CancelablePromise<T> {
@@ -44,9 +44,7 @@ export class CancelablePromise<T> implements Promise<T> {
 
   static all<T>(values: (T | PromiseLike<T>)[]): CancelablePromise<T[]> {
     return new CancelablePromise((resolve, reject) => {
-      Promise.all(values)
-        .then(resolve)
-        .catch(reject);
+      Promise.all(values).then(resolve).catch(reject);
     });
   }
 
@@ -64,7 +62,7 @@ export class CancelablePromise<T> implements Promise<T> {
       (resolve, reject) => {
         if (this._promise) {
           this._promise.then(
-            r => {
+            (r) => {
               if (this._canceled) {
                 p.cancel();
               }
@@ -74,7 +72,7 @@ export class CancelablePromise<T> implements Promise<T> {
                 resolve(r);
               }
             },
-            r => {
+            (r) => {
               if (this._canceled) {
                 p.cancel();
               }

@@ -10,12 +10,12 @@ import {
   ItemBasePropertyOptions,
   Type,
   ItemPropertyConfig,
-  ItemPropertyTypes
+  ItemPropertyTypes,
 } from '../interfaces';
 
 export class ItemProperties {
   static handlers: { [name: string]: Type<BaseProperty> } = {
-    CheckProperty
+    CheckProperty,
   };
 
   options = {};
@@ -64,7 +64,7 @@ export class ItemProperties {
   }
 
   update() {
-    this.list().forEach(x => {
+    this.list().forEach((x) => {
       x.update();
     });
   }
@@ -92,7 +92,7 @@ export class ItemProperties {
   }
 
   list() {
-    return this._propertiesList.map(x => this._properties[x]);
+    return this._propertiesList.map((x) => this._properties[x]);
   }
 
   destroy() {

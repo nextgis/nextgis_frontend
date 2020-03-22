@@ -3,7 +3,7 @@ import {
   VectorAdapterLayerPaint,
   GetPaintCallback,
   Expression,
-  ExpressionName
+  ExpressionName,
 } from './interfaces';
 import { isExpression } from './typeHelpers';
 
@@ -33,7 +33,7 @@ function match(feature: Feature, args: any[]) {
 
 const expressions: { [key in ExpressionName]: ExpressionFun } = {
   get,
-  match
+  match,
 };
 
 type SimpleType = string | number | boolean | undefined;

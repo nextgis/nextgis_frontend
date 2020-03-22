@@ -15,8 +15,8 @@ export class Events<E = any> {
   onLoad(event: keyof E | (keyof E)[]): Promise<this> {
     const events: (keyof E)[] = Array.isArray(event) ? event : [event];
     const promises = events.map(
-      x =>
-        new Promise(res => {
+      (x) =>
+        new Promise((res) => {
           if (this.getEventStatus(x)) {
             res(this);
           } else {

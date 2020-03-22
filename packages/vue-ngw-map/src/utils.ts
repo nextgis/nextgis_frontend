@@ -33,7 +33,7 @@ export function propsBinder(
           vueElement[setMethodName](newVal, oldVal);
         },
         {
-          deep: deepValue
+          deep: deepValue,
         }
       );
     }

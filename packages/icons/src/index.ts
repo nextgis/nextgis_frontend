@@ -19,7 +19,7 @@ const svgPath: { [name: string]: string | GetPathCallback } = {
   plus: '<path d="m7.5 12v-4.5h4.5v-3h-4.5v-4.5h-3v4.5h-4.5v3h4.5v4.5z"/>',
   minus: '<path d="m12 7.5v-3h-12v3z"/>',
   asterisk:
-    '<path d="m7.59 12v-3.27l2.83 1.64 1.58-2.74-2.85-1.64 2.83-1.64-1.56-2.74-2.83 1.64v-3.24h-3.17v3.24l-2.85-1.64-1.57 2.74 2.84 1.64-2.84 1.64 1.57 2.74 2.85-1.64v3.27z"/>'
+    '<path d="m7.59 12v-3.27l2.83 1.64 1.58-2.74-2.85-1.64 2.83-1.64-1.56-2.74-2.83 1.64v-3.24h-3.17v3.24l-2.85-1.64-1.57 2.74 2.84 1.64-2.84 1.64 1.57 2.74 2.85-1.64v3.27z"/>',
 };
 
 export interface IconOptions {
@@ -95,6 +95,6 @@ export function getIcon(opt: IconOptions = {}): WebmapIcoOptions {
     iconSize: [size, size],
     iconAnchor: [anchor, anchor],
     html: s.serializeToString(svg),
-    svg
+    svg,
   };
 }

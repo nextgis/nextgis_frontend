@@ -7,7 +7,7 @@ import { Prop } from 'vue-property-decorator';
 import {
   MapControl,
   CreateControlOptions,
-  ControlPositions
+  ControlPositions,
 } from '@nextgis/webmap';
 import { findNgwMapParent, propsBinder } from '../utils';
 import VueNgwMap from './VueNgwMap';
@@ -43,7 +43,7 @@ export class VueNgwControl extends Vue {
       }
       const adControlOptions: CreateControlOptions = {
         ...this.$props,
-        ...this.$props.controlOptions
+        ...this.$props.controlOptions,
       };
       const controlObject: MapControl = {
         onAdd: () => {
@@ -51,7 +51,7 @@ export class VueNgwControl extends Vue {
         },
         onRemove: () => {
           // ignore
-        }
+        },
       };
       const _control = await ngwMap.createControl(
         controlObject,
@@ -82,7 +82,7 @@ export class VueNgwControl extends Vue {
       staticClass: 'vue-ngw-control',
       staticStyle,
       // 'class': this.classes,
-      attrs: { 'data-app': true }
+      attrs: { 'data-app': true },
       // domProps: { id: this.id }
     };
 

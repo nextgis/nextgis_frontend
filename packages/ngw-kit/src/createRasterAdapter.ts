@@ -1,18 +1,18 @@
 import {
   NgwLayerOptions,
   ResourceAdapter,
-  NgwLayerAdapterType
+  NgwLayerAdapterType,
 } from './interfaces';
 import WebMap, {
   BaseLayerAdapter,
   Type,
   ImageAdapterOptions,
-  TileAdapterOptions
+  TileAdapterOptions,
 } from '@nextgis/webmap';
 import { getLayerAdapterOptions } from './utils/getLayerAdapterOptions';
 import NgwConnector, {
   ResourceItem,
-  ResourceCls
+  ResourceCls,
 } from '@nextgis/ngw-connector';
 import { resourceIdFromLayerOptions } from './utils/resourceIdFromLayerOptions';
 
@@ -25,7 +25,7 @@ export async function createRasterAdapter(
 ): Promise<Type<BaseLayerAdapter> | undefined> {
   const clsAdapterAlias: { [key in ResourceCls]?: NgwLayerAdapterType } = {
     wmsserver_service: 'WMS',
-    terrain_provider: 'TERRAIN'
+    terrain_provider: 'TERRAIN',
   };
   let adapter =
     options.adapter || (resourceCls && clsAdapterAlias[resourceCls]) || 'IMAGE';
@@ -58,7 +58,7 @@ export async function createRasterAdapter(
             const layerAdapterOptions: ImageAdapterOptions = {
               ...opt,
               layers: String(opt.resourceId),
-              resourceId: opt.resourceId
+              resourceId: opt.resourceId,
             };
             this.options = { ...this.options, ...layerAdapterOptions };
           } else {

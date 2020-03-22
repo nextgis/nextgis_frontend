@@ -24,7 +24,7 @@ export function getLayerAdapterOptions(
           resourceId,
           headers: options.headers,
           updateWmsParams: (params: any) =>
-            updateImageParams(params, resourceId)
+            updateImageParams(params, resourceId),
         };
       } else {
         adapter = 'TILE';
@@ -37,7 +37,7 @@ export function getLayerAdapterOptions(
         format: 'image/png',
         version: '1.1.1',
         layers: options.layers,
-        headers: options.headers
+        headers: options.headers,
       };
     }
     if (adapter === 'MVT') {
@@ -50,7 +50,7 @@ export function getLayerAdapterOptions(
         (options.simplification || 0);
       // url = baseUrl + '/api/resource/' + options.resourceId + '/{z}/{x}/{y}.mvt';
       return {
-        url
+        url,
       };
     }
     if (adapter === 'TERRAIN') {

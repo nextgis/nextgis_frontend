@@ -12,14 +12,14 @@ import {
   LngLatBoundsArray,
   Type,
   Cursor,
-  LngLatArray
+  LngLatArray,
 } from './interfaces/BaseTypes';
 import {
   Locate,
   MapAdapter,
   FitOptions,
   LocateOptions,
-  LocationEvents
+  LocationEvents,
 } from './interfaces/MapAdapter';
 import { StarterKit } from './interfaces/StarterKit';
 import { LayerAdapter } from './interfaces/LayerAdapter';
@@ -35,7 +35,7 @@ import { createToggleControl } from './components/controls/ToggleControl';
 
 import {
   detectGeometryType,
-  findMostFrequentGeomType
+  findMostFrequentGeomType,
 } from './utils/geometryTypes';
 import { onLoad } from './utils/decorators';
 import { clearObject } from './utils/clearObject';
@@ -50,14 +50,14 @@ const OPTIONS: MapOptions = {
     color: 'blue',
     opacity: 1,
     radius: 8,
-    weight: 1
+    weight: 1,
   },
   selectedPaint: {
     color: 'darkblue',
     opacity: 1,
     radius: 12,
-    weight: 1
-  }
+    weight: 1,
+  },
 };
 
 /**
@@ -76,7 +76,7 @@ export class BaseWebMap<
     updateGeoJsonAdapterOptions,
     propertiesFilter,
     createToggleControl,
-    getBoundsPolygon
+    getBoundsPolygon,
   };
   static getPaintFunctions: { [name: string]: GetPaintFunction };
   static decorators = { onLoad };
@@ -156,7 +156,7 @@ export class BaseWebMap<
 
   getState(): Record<string, any> {
     const state: Record<string, any> = {};
-    this._mapState.forEach(x => {
+    this._mapState.forEach((x) => {
       state[x.name] = x.getValue();
     });
     return state;
@@ -164,7 +164,7 @@ export class BaseWebMap<
 
   getRuntimeParams(): Record<string, any> {
     const state: Record<string, any> = {};
-    this._mapState.forEach(x => {
+    this._mapState.forEach((x) => {
       for (const r of this.runtimeParams) {
         const val = r.get(x.name);
         if (val !== undefined) {
@@ -322,7 +322,7 @@ export class BaseWebMap<
     // ugly hack to disable type checking error
     const _eventName = event as keyof WebMapEvents;
     const status = this._eventsStatus[_eventName];
-    return status !== undefined ? status : false;
+    return status ?? false;
   }
 
   /**
@@ -345,7 +345,7 @@ export class BaseWebMap<
    * ```
    */
   onLoad(event: keyof WebMapEvents = 'create'): Promise<this> {
-    return new Promise(res => {
+    return new Promise((res) => {
       if (this.getEventStatus(event)) {
         res(this);
       } else {
@@ -357,7 +357,7 @@ export class BaseWebMap<
   }
 
   onMapLoad(cb?: (mapAdapter: MapAdapter) => void): Promise<MapAdapter> {
-    return new Promise(res => {
+    return new Promise((res) => {
       const _resolve = () => {
         const mapAdapter = this.mapAdapter;
         if (cb) {
@@ -367,10 +367,7 @@ export class BaseWebMap<
           res(mapAdapter);
         }
       };
-      const isLoaded =
-        this.mapAdapter.isLoaded !== undefined
-          ? this.mapAdapter.isLoaded
-          : true;
+      const isLoaded = this.mapAdapter.isLoaded ?? true;
       if (this.mapAdapter.map && isLoaded) {
         _resolve();
       } else {
@@ -460,15 +457,15 @@ export class BaseWebMap<
       'zoomend',
       'movestart',
       'move',
-      'moveend'
+      'moveend',
     ];
-    events.forEach(x => {
-      this._mapEvents[x] = data => {
+    events.forEach((x) => {
+      this._mapEvents[x] = (data) => {
         if (this.runtimeParams.length) {
-          const mapStatusEvent = this._mapState.find(y => y.event === x);
+          const mapStatusEvent = this._mapState.find((y) => y.event === x);
           if (mapStatusEvent) {
             const value = mapStatusEvent.toString(mapStatusEvent.getValue());
-            this.runtimeParams.forEach(r => {
+            this.runtimeParams.forEach((r) => {
               r.set(mapStatusEvent.name, value);
             });
           }

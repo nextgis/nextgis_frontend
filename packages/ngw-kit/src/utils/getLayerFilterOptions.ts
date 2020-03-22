@@ -5,14 +5,14 @@ const filterOptionsKeys: (keyof FilterOptions)[] = [
   'intersects',
   'limit',
   'orderBy',
-  'strategy'
+  'strategy',
 ];
 
 export function getLayerFilterOptions(
   options: GeoJsonAdapterOptions
 ): FilterOptions {
   const filterOptions: Record<string, any> = {};
-  filterOptionsKeys.forEach(x => {
+  filterOptionsKeys.forEach((x) => {
     const opt = options[x];
     if (opt !== undefined) {
       filterOptions[x] = opt;

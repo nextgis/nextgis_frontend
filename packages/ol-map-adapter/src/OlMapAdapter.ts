@@ -20,7 +20,7 @@ import {
   ControlPositions,
   LngLatBoundsArray,
   CreateControlOptions,
-  ButtonControlOptions
+  ButtonControlOptions,
 } from '@nextgis/webmap';
 
 import { WmsAdapter } from './layer-adapters/WmsAdapter';
@@ -54,12 +54,12 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     WMS: WmsAdapter,
     // MVT: MvtAdapter,
     OSM: OsmAdapter,
-    GEOJSON: GeoJsonAdapter
+    GEOJSON: GeoJsonAdapter,
   };
 
   static controlAdapters = {
     ZOOM: ZoomControl,
-    ATTRIBUTION: Attribution
+    ATTRIBUTION: Attribution,
   };
 
   options: any = { target: 'map' };
@@ -88,7 +88,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
       zoom: this.options.zoom,
       minZoom: this.options.minZoom,
       maxZoom: this.options.maxZoom,
-      projection: this.displayProjection
+      projection: this.displayProjection,
     };
     const view = new View(viewOptions);
 
@@ -96,11 +96,11 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
       // logo: false,
       controls: [],
       view,
-      layers: []
+      layers: [],
     };
     const mapInitOptions: OlMapOptions = {
       ...defOpt,
-      target: this.options.target || 'map'
+      target: this.options.target || 'map',
       // logo: options.logo,
     };
 
@@ -256,17 +256,17 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     );
     const latLng = {
       lat,
-      lng
+      lng,
     };
 
-    this._mapClickEvents.forEach(x => {
+    this._mapClickEvents.forEach((x) => {
       x(evt);
     });
 
     if (this._forEachFeatureAtPixel.length) {
       if (this.map) {
         this.map.forEachFeatureAtPixel(evt.pixel, (feature, layer) => {
-          this._forEachFeatureAtPixel.forEach(x => {
+          this._forEachFeatureAtPixel.forEach((x) => {
             x(feature as Feature, layer, evt);
           });
         });
@@ -276,7 +276,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     this.emitter.emit('click', {
       latLng,
       pixel: { left: evt.pixel[0], top: evt.pixel[1] },
-      source: evt
+      source: evt,
     });
   }
 
@@ -321,7 +321,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
       const zoom = this.getZoom();
 
       const events: ['movestart', 'moveend'] = ['movestart', 'moveend'];
-      events.forEach(x => {
+      events.forEach((x) => {
         this._positionMem[x] = { center, zoom };
         map.on(x, () => {
           this._emitPositionChangeEvent(x);

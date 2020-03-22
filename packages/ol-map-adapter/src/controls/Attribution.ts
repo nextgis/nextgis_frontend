@@ -2,7 +2,7 @@ import Attr from 'ol/control/Attribution';
 import { AttributionControlOptions } from '@nextgis/webmap';
 
 const OPTIONS = {
-  collapsible: false
+  collapsible: false,
 };
 
 export class Attribution extends Attr {

@@ -18,10 +18,10 @@ export class WmsAdapter extends TileAdapter<WmsAdapterOptions>
       transparent: 'true',
       width: options.tileSize || '256',
       height: options.tileSize || '256',
-      layers: options.layers || ''
+      layers: options.layers || '',
     };
     const paramsStr = Object.keys(params)
-      .map(x => `${x}=${params[x]}`)
+      .map((x) => `${x}=${params[x]}`)
       .join('&');
     options.url = options.url + '?' + paramsStr;
     return super.addLayer(options);

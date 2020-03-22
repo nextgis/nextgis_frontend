@@ -4,7 +4,7 @@ import WebMap, {
   Type,
   GeoJsonAdapterOptions,
   PropertiesFilter,
-  FilterOptions
+  FilterOptions,
 } from '@nextgis/webmap';
 import CancelablePromise from '@nextgis/cancelable-promise';
 import { debounce } from '@nextgis/utils';
@@ -53,7 +53,7 @@ export async function createGeoJsonAdapter(
       resourceId,
       filters,
       connector,
-      ...opt
+      ...opt,
     });
     return await _dataPromise;
   };
@@ -87,7 +87,7 @@ export async function createGeoJsonAdapter(
 
       _lastFilterArgs = {
         filters: opt_.propertiesFilter,
-        options: getLayerFilterOptions(opt_)
+        options: getLayerFilterOptions(opt_),
       };
       if (!opt_.data) {
         this.updateLayer();
@@ -129,7 +129,7 @@ export async function createGeoJsonAdapter(
     async propertiesFilter(filters: PropertiesFilter, opt?: FilterOptions) {
       abort();
       if (this.filter && _fullDataLoad) {
-        this.filter(e => {
+        this.filter((e) => {
           if (e.feature && e.feature.properties) {
             return WebMap.utils.propertiesFilter(e.feature.properties, filters);
           }
@@ -201,7 +201,7 @@ export async function createGeoJsonAdapter(
           [n, w],
           [n, e],
           [s, e],
-          [s, w]
+          [s, w],
         ].map(([lng, lat]) => {
           const [x, y] = degrees2meters(lng, lat);
           return x + ' ' + y;

@@ -7,7 +7,7 @@ import {
   getLayerAdapterOptions,
   updateImageParams,
   sendIdentifyRequest,
-  getWebMapExtent
+  getWebMapExtent,
 } from './utils/utils';
 import { WebMapLayerItem } from './WebMapLayerItem';
 import { ItemOptions } from '@nextgis/item';
@@ -21,7 +21,7 @@ import {
   NgwLayerAdapterType,
   WebMapAdapterOptions,
   WebMapLayerAdapterEvents,
-  ResourceAdapter
+  ResourceAdapter,
 } from './interfaces';
 
 export class WebMapLayerAdapter implements ResourceAdapter {
@@ -76,7 +76,7 @@ export class WebMapLayerAdapter implements ResourceAdapter {
     if (this.$$onMapClick) {
       this.options.webMap.emitter.off('click', this.$$onMapClick);
     }
-    this.getDependLayers().forEach(x => {
+    this.getDependLayers().forEach((x) => {
       if (!('layer' in x)) return;
       // @ts-ignore Update x interface
       mapAdapter.removeLayer(x.layer.layer);
@@ -121,7 +121,7 @@ export class WebMapLayerAdapter implements ResourceAdapter {
     if (ids && ids.length) {
       let deps = this.getDependLayers();
       deps = deps.sort((a, b) => a.id - b.id);
-      deps.forEach(x => {
+      deps.forEach((x) => {
         const item = x.item;
         const parentId = item.parentId;
         if (parentId !== undefined && item.item_type === 'layer') {
@@ -140,7 +140,7 @@ export class WebMapLayerAdapter implements ResourceAdapter {
     if (this.resourceId) {
       const webmap = await this.getWebMapConfig(this.resourceId);
       if (webmap && webmap.root_item) {
-        return new Promise<WebMapLayerItem>(resolve => {
+        return new Promise<WebMapLayerItem>((resolve) => {
           const options: ItemOptions = {};
           if (this.options.connector && this.options.connector.options.auth) {
             const headers = this.options.connector.getAuthorizationHeaders();
@@ -164,7 +164,7 @@ export class WebMapLayerAdapter implements ResourceAdapter {
   private async getWebMapConfig(id: number) {
     try {
       const data = await this.options.connector.get('resource.item', null, {
-        id
+        id,
       });
       this.response = data;
       const webmap = data.webmap;
@@ -187,7 +187,7 @@ export class WebMapLayerAdapter implements ResourceAdapter {
     if (item) {
       if (item.item_type === 'group' || item.item_type === 'root') {
         if (item.children) {
-          item.children = item.children.map(x =>
+          item.children = item.children.map((x) =>
             this._updateItemsParams(x, webMap, data)
           );
         }
@@ -201,17 +201,18 @@ export class WebMapLayerAdapter implements ResourceAdapter {
         const resourceId = item.layer_style_id;
         item.url = url;
         item.resourceId = resourceId;
-        item.updateWmsParams = params => updateImageParams(params, resourceId);
+        item.updateWmsParams = (params) =>
+          updateImageParams(params, resourceId);
         item = {
           ...item,
           ...getLayerAdapterOptions(
             {
               adapter: item.layer_adapter.toUpperCase() as NgwLayerAdapterType,
-              resourceId
+              resourceId,
             },
             webMap,
             this.options.baseUrl
-          )
+          ),
         };
       }
     }
@@ -229,7 +230,7 @@ export class WebMapLayerAdapter implements ResourceAdapter {
           const id = item.layer_style_id;
           const promise = this.options.connector
             .get('resource.item', {}, { id })
-            .then(y => {
+            .then((y) => {
               if (y) {
                 const parentId = Number(y.resource.parent.id);
                 item.parentId = parentId;
@@ -240,7 +241,7 @@ export class WebMapLayerAdapter implements ResourceAdapter {
         }
       });
       const ids = await Promise.all(promises);
-      return ids.filter(x => x !== undefined);
+      return ids.filter((x) => x !== undefined);
       // const id = item['layer_style_id']
     }
   }
@@ -250,8 +251,8 @@ export class WebMapLayerAdapter implements ResourceAdapter {
       return sendIdentifyRequest(ev, {
         layers: this._webmapLayersIds,
         connector: this.options.connector,
-        radius: this.pixelRadius
-      }).then(resp => {
+        radius: this.pixelRadius,
+      }).then((resp) => {
         this.emitter.emit('identify', { ev, data: resp });
         return resp;
       });

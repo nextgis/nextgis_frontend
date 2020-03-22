@@ -4,7 +4,7 @@
 import { isPaint } from '@nextgis/paint';
 import {
   GeoJsonAdapterOptions,
-  VectorAdapterLayerType
+  VectorAdapterLayerType,
 } from '../interfaces/LayerAdapter';
 import { detectGeometryType } from './geometryTypes';
 
@@ -14,7 +14,7 @@ export const typeAlias: { [x: string]: VectorAdapterLayerType } = {
   MultiPoint: 'circle',
   Polygon: 'fill',
   MultiLineString: 'line',
-  MultiPolygon: 'fill'
+  MultiPolygon: 'fill',
 };
 
 export function updateGeoJsonAdapterOptions(

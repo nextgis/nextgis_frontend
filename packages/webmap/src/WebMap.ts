@@ -56,7 +56,7 @@ import {
   ButtonControlOptions,
   ToggleControlOptions,
   ToggleControl,
-  MapControls
+  MapControls,
 } from './interfaces/MapControl';
 
 import { ControlPositions } from './interfaces/MapAdapter';
@@ -85,7 +85,7 @@ export class WebMap<
     },
     TOGGLE: (webMap: WebMap, options: ToggleControlOptions) => {
       return webMap.createToggleControl(options);
-    }
+    },
   };
 
   async addControl<K extends keyof MapControls>(

@@ -45,7 +45,7 @@ export function createButtonControl(options: ButtonControlOptions) {
         if (options.onClick !== undefined) {
           link.removeEventListener('click', onClick);
         }
-      }
+      },
     },
     { bar: true }
   );

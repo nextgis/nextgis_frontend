@@ -18,7 +18,7 @@ export class TileAdapter extends BaseAdapter<TileAdapterOptions, Layer> {
       url: opt.url,
       credit: opt.attribution,
       maximumLevel: opt.maxZoom,
-      minimumLevel: opt.minZoom
+      minimumLevel: opt.minZoom,
     });
     this._layer = layer;
     return layer;

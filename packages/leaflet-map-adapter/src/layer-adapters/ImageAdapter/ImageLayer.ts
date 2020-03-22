@@ -36,7 +36,7 @@ export class ImageLayer extends L.Layer {
     layers: '',
     styles: '',
     format: 'image/jpeg',
-    transparent: false
+    transparent: false,
   };
 
   options: OverlayOptions = {
@@ -49,7 +49,7 @@ export class ImageLayer extends L.Layer {
     maxZoom: 18,
     pane: 'tilePane',
     headers: null,
-    viewPortBuffer: 0
+    viewPortBuffer: 0,
   };
 
   private wmsParams: any;
@@ -102,7 +102,7 @@ export class ImageLayer extends L.Layer {
 
   getEvents() {
     return {
-      moveend: this.update
+      moveend: this.update,
     };
   }
 
@@ -126,7 +126,7 @@ export class ImageLayer extends L.Layer {
     const overlay = new ImageOverlay(url, bounds, {
       opacity: 0,
       pane: this.options.pane,
-      headers: this.options.headers
+      headers: this.options.headers,
     });
     overlay.addTo(this._map);
     overlay.once(
@@ -219,7 +219,7 @@ export class ImageLayer extends L.Layer {
       // Assemble WMS parameter string
       const params: any = {
         width: size.x,
-        height: size.y
+        height: size.y,
       };
       params[projectionKey] = crs.code;
       params.bbox = (wmsVersion >= 1.3 && crs === L.CRS.EPSG4326

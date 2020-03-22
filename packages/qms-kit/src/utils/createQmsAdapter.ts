@@ -41,14 +41,14 @@ export function createQmsAdapter(
         if (webMapAdapter) {
           mixinProperties(QmsAdapter, webMapAdapter, [
             'showLayer',
-            'hideLayer'
+            'hideLayer',
           ]);
           if (type === 'TILE') {
             options = {
               maxZoom: webMap.options.maxZoom,
               minZoom: webMap.options.minZoom,
               ...this.options,
-              ...updateQmsOptions(qms)
+              ...updateQmsOptions(qms),
             };
             this.options = options;
             const adapter = new webMapAdapter(this.map, options);

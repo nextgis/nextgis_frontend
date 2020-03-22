@@ -18,7 +18,7 @@ export class WmsAdapter extends BaseAdapter<WmsAdapterOptions, TileLayer.WMS>
           minZoom: opt.minZoom,
           maxZoom: opt.maxZoom,
           layers: options.layers,
-          format: options.format
+          format: options.format,
         };
         let layer;
         if (opt.headers) {

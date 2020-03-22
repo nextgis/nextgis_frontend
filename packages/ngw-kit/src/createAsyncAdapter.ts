@@ -1,6 +1,6 @@
 import NgwConnector, {
   ResourceCls,
-  ResourceItem
+  ResourceItem,
 } from '@nextgis/ngw-connector';
 import WebMap, { LayerAdapter, Type } from '@nextgis/webmap';
 import QmsKit from '@nextgis/qms-kit';
@@ -19,7 +19,7 @@ const styles: ResourceCls[] = [
   'qgis_raster_style',
   'wmsserver_service',
   'raster_style',
-  'terrain_provider'
+  'terrain_provider',
 ];
 
 async function createAdapterFromFirstStyle(
@@ -30,7 +30,7 @@ async function createAdapterFromFirstStyle(
   connector: NgwConnector
 ) {
   const childrenStyles = await connector.get('resource.collection', null, {
-    parent
+    parent,
   });
   const firstStyle = childrenStyles && childrenStyles[0];
   if (firstStyle) {
@@ -66,7 +66,7 @@ export async function createAsyncAdapter(
           if (adapterType === 'GEOJSON') {
             const parentOptions: NgwLayerOptions = {
               ...options,
-              resourceId: item.resource.parent.id
+              resourceId: item.resource.parent.id,
             };
             adapter = createGeoJsonAdapter(
               parentOptions as NgwLayerOptions<'GEOJSON'>,
@@ -120,7 +120,7 @@ export async function createAsyncAdapter(
           );
         } else if (item.basemap_layer && item.basemap_layer.qms) {
           adapter = Promise.resolve(QmsKit.utils.createQmsAdapter(webMap));
-          adapter.then(x => {
+          adapter.then((x) => {
             if (x && item && item.basemap_layer && item.basemap_layer.qms) {
               const qms = JSON.parse(item.basemap_layer.qms);
               x.prototype.qms = qms;
@@ -142,7 +142,7 @@ export async function createAsyncAdapter(
     // }
   }
   if (adapter) {
-    return adapter.then(x => {
+    return adapter.then((x) => {
       if (x) {
         const resourceAdapter = x as Type<ResourceAdapter>;
         resourceAdapter.prototype.item = item;

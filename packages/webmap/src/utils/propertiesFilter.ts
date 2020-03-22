@@ -3,5 +3,5 @@
  */
 export {
   operationsAliases,
-  propertiesFilter
+  propertiesFilter,
 } from '@nextgis/properties-filter';

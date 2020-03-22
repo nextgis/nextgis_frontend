@@ -3,7 +3,7 @@ import {
   NgwLayerOptions,
   KeynamedNgwLayerOptions,
   ResourceIdNgwLayerOptions,
-  ResourceNgwLayerOptions
+  ResourceNgwLayerOptions,
 } from '../interfaces';
 
 export async function resourceIdFromLayerOptions(

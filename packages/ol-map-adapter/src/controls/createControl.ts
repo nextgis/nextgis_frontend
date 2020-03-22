@@ -5,7 +5,7 @@ export function createControl(
   control: MapControl,
   options: CreateControlOptions = {}
 ): Control {
-  const newControl = (function(C) {
+  const newControl = (function (C) {
     function NewControl(this: Control) {
       const element = document.createElement('div');
       element.className =
@@ -19,7 +19,7 @@ export function createControl(
       }
 
       C.call(this, {
-        element
+        element,
       });
     }
 
@@ -30,9 +30,7 @@ export function createControl(
     NewControl.prototype.constructor = NewControl;
 
     NewControl.prototype.handleRotateNorth = function handleRotateNorth() {
-      this.getMap()
-        .getView()
-        .setRotation(0);
+      this.getMap().getView().setRotation(0);
     };
 
     return NewControl;

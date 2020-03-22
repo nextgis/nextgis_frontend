@@ -4,7 +4,7 @@
 import {
   BaseLayerAdapter,
   TileAdapterOptions,
-  RasterAdapterOptions
+  RasterAdapterOptions,
 } from '@nextgis/webmap';
 import { BaseAdapter } from './BaseAdapter';
 import { RasterSource, ResourceType, Layer } from 'mapbox-gl';
@@ -17,7 +17,7 @@ export class TileAdapter<O extends RasterAdapterOptions = TileAdapterOptions>
     const { minZoom, maxZoom } = options;
     let tiles: string[];
     if (options && options.subdomains) {
-      tiles = options.subdomains.split('').map(x => {
+      tiles = options.subdomains.split('').map((x) => {
         const subUrl = options.url.replace('{s}', x);
         return subUrl;
       });
@@ -35,7 +35,7 @@ export class TileAdapter<O extends RasterAdapterOptions = TileAdapterOptions>
         if (staticUrl === options.url) {
           return {
             url,
-            headers: options.headers
+            headers: options.headers,
           };
         }
       });
@@ -47,7 +47,7 @@ export class TileAdapter<O extends RasterAdapterOptions = TileAdapterOptions>
       // show a "url" property. This only applies to tilesets with
       // corresponding TileJSON (such as mapbox tiles).
       tiles,
-      tileSize: 256 // opt && opt.tileSize ||
+      tileSize: 256, // opt && opt.tileSize ||
     };
     if (options.attribution) {
       sourceOptions.attribution = options.attribution;
@@ -56,9 +56,9 @@ export class TileAdapter<O extends RasterAdapterOptions = TileAdapterOptions>
       id: this._layerId,
       type: 'raster',
       layout: {
-        visibility: 'none'
+        visibility: 'none',
       },
-      source: sourceOptions
+      source: sourceOptions,
       // TODO: clean remove before options from all existing apps
     };
 
