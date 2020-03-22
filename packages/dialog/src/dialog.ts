@@ -26,7 +26,7 @@ export class Dialog implements DialogAdapter {
       <p>This is dialog!</p>
     `,
     closeBtn: true,
-    closeBtnTemplate: closeBtn
+    closeBtnTemplate: closeBtn,
   };
 
   private _dialog: HTMLDialogElement;
@@ -68,7 +68,7 @@ export class Dialog implements DialogAdapter {
   }
 
   static clean = () => {
-    Dialog.dialogs.forEach(x => x.destroy());
+    Dialog.dialogs.forEach((x) => x.destroy());
   };
 
   getContainer() {
@@ -105,7 +105,7 @@ export class Dialog implements DialogAdapter {
       this._dialog.appendChild(btn);
       this._addContent(template, btn);
 
-      btn.addEventListener('click', e => {
+      btn.addEventListener('click', (e) => {
         e.stopPropagation();
         this.close();
       });
@@ -124,7 +124,7 @@ export class Dialog implements DialogAdapter {
 
   private _addEventsListeners() {
     if (this._closeBtn) {
-      this._closeBtn.addEventListener('click', e => {
+      this._closeBtn.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
         this.close();
@@ -132,7 +132,7 @@ export class Dialog implements DialogAdapter {
     }
     if (this.options.openers) {
       [].forEach.call(this.options.openers, (opener: HTMLElement) => {
-        opener.onclick = e => {
+        opener.onclick = (e) => {
           e.preventDefault();
           this.show();
         };

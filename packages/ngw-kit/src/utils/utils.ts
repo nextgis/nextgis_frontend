@@ -2,20 +2,20 @@ import WebMap, {
   Type,
   LngLatBoundsArray,
   MapClickEvent,
-  VectorAdapterLayerType
+  VectorAdapterLayerType,
 } from '@nextgis/webmap';
 import NgwConnector, {
   WebmapResource,
   ResourceItem,
   FeatureLayersIdentify,
-  GeometryType
+  GeometryType,
 } from '@nextgis/ngw-connector';
 import { createAsyncAdapter } from '../createAsyncAdapter';
 import {
   NgwLayerOptions,
   WebMapAdapterOptions,
   IdentifyRequestOptions,
-  ResourceAdapter
+  ResourceAdapter,
 } from '../interfaces';
 import { WebMapLayerAdapter } from '../WebMapLayerAdapter';
 import { getLayerAdapterOptions as getLayerAdapterOptions_ } from './getLayerAdapterOptions';
@@ -26,7 +26,7 @@ export function updateImageParams(params: any, resourceId: number) {
     resource: resourceId,
     extent: bbox,
     size: width + ',' + height,
-    timestamp: Date.now()
+    timestamp: Date.now(),
   };
 }
 
@@ -45,7 +45,7 @@ export const vectorLayerGeomToPaintTypeAlias: Record<
   POLYGONZ: 'fill',
   MULTIPOINTZ: 'circle',
   MULTILINESTRINGZ: 'line',
-  MULTIPOLYGONZ: 'fill'
+  MULTIPOLYGONZ: 'fill',
 };
 
 /** @deprecated */
@@ -94,7 +94,7 @@ export function getNgwLayerExtent(
   id: number,
   connector: NgwConnector
 ): Promise<LngLatBoundsArray | undefined> {
-  return connector.get('layer.extent', name, { id }).then(resp => {
+  return connector.get('layer.extent', name, { id }).then((resp) => {
     if (resp) {
       const { maxLat, maxLon, minLat, minLon } = resp.extent;
       const extenrArray: LngLatBoundsArray = [minLon, minLat, maxLon, maxLat];
@@ -114,9 +114,9 @@ export async function getNgwResourceExtent(
     if (resource.cls.indexOf('style') !== -1) {
       return connector
         .get('resource.item', null, {
-          id: resource.parent.id
+          id: resource.parent.id,
         })
-        .then(res => {
+        .then((res) => {
           return getNgwLayerExtent(res.resource.id, connector);
         });
     } else {
@@ -205,7 +205,7 @@ export function sendIdentifyRequest(
   const data: FeatureIdentifyRequestOptions = {
     geom: wkt,
     srs: 3857,
-    layers
+    layers,
   };
 
   return options.connector.post('feature_layer.identify', { data });
@@ -245,8 +245,8 @@ export function pixelsInMeterWidth() {
 }
 
 export function applyMixins(derivedCtor: any, baseCtors: any[]) {
-  baseCtors.forEach(baseCtor => {
-    Object.getOwnPropertyNames(baseCtor.prototype).forEach(name => {
+  baseCtors.forEach((baseCtor) => {
+    Object.getOwnPropertyNames(baseCtor.prototype).forEach((name) => {
       const descriptor = Object.getOwnPropertyDescriptor(
         baseCtor.prototype,
         name

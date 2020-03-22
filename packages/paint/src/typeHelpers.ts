@@ -6,7 +6,7 @@ import {
   GeometryPaint,
   GetPaintCallback,
   IconOptions,
-  IconPaint
+  IconPaint,
 } from './interfaces';
 
 export function isExpression(value: any): value is Expression {

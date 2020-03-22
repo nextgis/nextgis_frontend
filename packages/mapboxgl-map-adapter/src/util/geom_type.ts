@@ -3,13 +3,13 @@ import {
   GeoJsonObject,
   FeatureCollection,
   Feature,
-  GeometryCollection
+  GeometryCollection,
 } from 'geojson';
 import { VectorAdapterLayerType } from '@nextgis/webmap';
 
 export const allowedParams: ([string, string] | string)[] = [
   'color',
-  'opacity'
+  'opacity',
 ];
 export const allowedByType = {
   circle: [
@@ -18,18 +18,18 @@ export const allowedByType = {
     ['strokeColor', 'stroke-color'],
     ['strokeOpacity', 'stroke-opacity'],
     ['weight', 'stroke-width'],
-    'radius'
+    'radius',
   ],
   line: [
     ['strokeColor', 'color'],
     ['strokeOpacity', 'opacity'],
-    ['weight', 'width']
+    ['weight', 'width'],
   ],
   fill: [
     ['fillColor', 'color'],
-    ['fillOpacity', 'opacity']
+    ['fillOpacity', 'opacity'],
   ],
-  icon: allowedParams.concat([])
+  icon: allowedParams.concat([]),
 };
 
 export const typeAlias: {
@@ -41,7 +41,7 @@ export const typeAlias: {
   Polygon: 'fill',
   MultiLineString: 'line',
   MultiPolygon: 'fill',
-  GeometryCollection: 'fill'
+  GeometryCollection: 'fill',
 };
 
 export const typeAliasForFilter: {
@@ -50,13 +50,13 @@ export const typeAliasForFilter: {
   circle: 'Point',
   line: 'LineString',
   fill: 'Polygon',
-  icon: 'Point'
+  icon: 'Point',
 };
 
 export const backAliases: {
   [key in VectorAdapterLayerType]?: GeoJsonGeometryTypes[];
 } = {
-  icon: ['Point']
+  icon: ['Point'],
 };
 
 for (const a in typeAlias) {
@@ -87,12 +87,12 @@ export function detectType(geojson: GeoJsonObject): GeoJsonGeometryTypes {
   let geometry: GeoJsonGeometryTypes;
   if (geojson.type === 'FeatureCollection') {
     const featuresTypes = (geojson as FeatureCollection).features.map(
-      f => f.geometry.type
+      (f) => f.geometry.type
     );
     geometry = findMostFrequentGeomType(featuresTypes);
   } else if (geojson.type === 'GeometryCollection') {
     const geometryTypes = (geojson as GeometryCollection).geometries.map(
-      g => g.type
+      (g) => g.type
     );
     geometry = findMostFrequentGeomType(geometryTypes);
   } else if (geojson.type === 'Feature') {

@@ -6,14 +6,14 @@ import { WebMap } from '../WebMap';
 import { WebMapEvents } from '../interfaces/Events';
 
 export function onLoad<E extends WebMapEvents = WebMapEvents>(event: keyof E) {
-  return function(
+  return function (
     _target: WebMap,
     _propertyKey: string,
     descriptor: PropertyDescriptor
   ) {
     const originalMethod = descriptor.value;
 
-    descriptor.value = function(
+    descriptor.value = function (
       this: WebMap<unknown, unknown, unknown, E>,
       ...args: unknown[]
     ) {

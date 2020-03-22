@@ -17,7 +17,7 @@ export async function createWebMapAdapter(
         webMap,
         resourceId,
         baseUrl,
-        connector
+        connector,
       });
     }
   };

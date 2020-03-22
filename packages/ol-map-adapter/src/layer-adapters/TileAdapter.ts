@@ -13,7 +13,7 @@ export class TileAdapter implements BaseLayerAdapter {
   addLayer(options: TileAdapterOptions) {
     const source = new XYZ({
       attributions: options.attribution ? [options.attribution] : [],
-      url: options.url
+      url: options.url,
     });
     const headers = options.headers;
     if (headers) {
@@ -23,7 +23,7 @@ export class TileAdapter implements BaseLayerAdapter {
     }
     const layer = new TileLayer({
       source,
-      ...resolutionOptions(this.map, options)
+      ...resolutionOptions(this.map, options),
     });
     return layer;
   }

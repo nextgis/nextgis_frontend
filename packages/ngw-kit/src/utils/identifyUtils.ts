@@ -18,7 +18,7 @@ export function getIdentifyGeoJsonParams(
   }
   const sortingArr = identify.resources;
   if (sortingArr) {
-    resources.sort(function(a, b) {
+    resources.sort(function (a, b) {
       return sortingArr.indexOf(a) - sortingArr.indexOf(b);
     });
   }
@@ -30,7 +30,7 @@ export function getIdentifyGeoJsonParams(
     if (f) {
       params = {
         featureId: f.id,
-        resourceId
+        resourceId,
       };
       paramsList.push(params);
       if (!multiple) {
@@ -47,13 +47,13 @@ export function getIdentifyGeoJson(options: GetIdentifyGeoJsonOptions) {
     const id = Number(l);
     if (!isNaN(id)) {
       const item = identify[l];
-      const withGeom = item.features.find(x => x.geom);
+      const withGeom = item.features.find((x) => x.geom);
 
       if (withGeom && withGeom.geom) {
         const geom = withGeom.geom as Geometry;
         return createGeoJsonFeature({
           ...withGeom,
-          geom
+          geom,
         });
       }
     }

@@ -8,7 +8,7 @@ const https = eval('require("https")');
 const adapterFor = (inputUrl: string) => {
   const adapters: Record<string, any> = {
     'http:': http,
-    'https:': https
+    'https:': https,
   };
   return adapters[url.parse(inputUrl).protocol];
 };
@@ -36,13 +36,13 @@ export default function loadJSONNode(
       });
   });
   return request
-    .then(data => {
+    .then((data) => {
       if (callback) {
         callback(data);
       }
       return data;
     })
-    .catch(er => {
+    .catch((er) => {
       if (error) {
         error(er);
       }

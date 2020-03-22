@@ -11,7 +11,7 @@ export function appendNgwResources(
     resource = Number(resource);
     options.push({
       ...defOptions,
-      resourceId: resource
+      resourceId: resource,
     });
   } else if (Array.isArray(resource)) {
     const [resourceId, id] = resource;

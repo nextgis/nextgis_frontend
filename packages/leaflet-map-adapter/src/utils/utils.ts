@@ -7,7 +7,7 @@ import {
   GeoJsonGeometryTypes,
   FeatureCollection,
   Feature,
-  GeometryCollection
+  GeometryCollection,
 } from 'geojson';
 import { LeafletMouseEvent } from 'leaflet';
 
@@ -20,12 +20,12 @@ export const typeAlias: {
   Polygon: 'fill',
   MultiLineString: 'line',
   MultiPolygon: 'fill',
-  GeometryCollection: 'fill'
+  GeometryCollection: 'fill',
 };
 
 export const PAINT = {
   stroke: false,
-  opacity: 1
+  opacity: 1,
 };
 
 export const backAliases: {
@@ -60,12 +60,12 @@ export function detectType(geojson: GeoJsonObject): GeoJsonGeometryTypes {
   let geometry: GeoJsonGeometryTypes;
   if (geojson.type === 'FeatureCollection') {
     const featuresTypes = (geojson as FeatureCollection).features.map(
-      f => f.geometry.type
+      (f) => f.geometry.type
     );
     geometry = findMostFrequentGeomType(featuresTypes);
   } else if (geojson.type === 'GeometryCollection') {
     const geometryTypes = (geojson as GeometryCollection).geometries.map(
-      g => g.type
+      (g) => g.type
     );
     geometry = findMostFrequentGeomType(geometryTypes);
   } else if (geojson.type === 'Feature') {
@@ -90,7 +90,7 @@ export function filterGeometries(
 ): GeoJsonObject | false {
   if (data.type === 'FeatureCollection') {
     const _data = data as FeatureCollection;
-    _data.features = _data.features.filter(f =>
+    _data.features = _data.features.filter((f) =>
       geometryFilter(f.geometry.type, type)
     );
   } else if (data.type === 'Feature') {
@@ -100,7 +100,7 @@ export function filterGeometries(
     }
   } else if (data.type === 'GeometryCollection') {
     const _data = data as GeometryCollection;
-    _data.geometries = _data.geometries.filter(g =>
+    _data.geometries = _data.geometries.filter((g) =>
       geometryFilter(g.type, type)
     );
   }
@@ -113,6 +113,6 @@ export function convertMapClickEvent(evt: LeafletMouseEvent): MapClickEvent {
   return {
     latLng,
     pixel: { left: coord.x, top: coord.y },
-    source: evt
+    source: evt,
   };
 }

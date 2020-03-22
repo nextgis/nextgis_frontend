@@ -11,7 +11,7 @@ import {
   DataLayerFilter,
   PropertiesFilter,
   VectorLayerAdapter,
-  GeoJsonAdapterOptions
+  GeoJsonAdapterOptions,
 } from '@nextgis/webmap';
 import { Paint } from '@nextgis/paint';
 
@@ -49,7 +49,7 @@ export class GeoJsonAdapter
 
     this.layer = new VectorLayer({
       source: this.vectorSource,
-      style: f => {
+      style: (f) => {
         const style = [];
         const vectorStyle = styleFunction(f as OlFeature, options.paint);
         if (vectorStyle) {
@@ -66,7 +66,7 @@ export class GeoJsonAdapter
         }
         return style;
       },
-      ...resolutionOptions(this.map, options)
+      ...resolutionOptions(this.map, options),
     });
 
     if (options.selectable) {
@@ -99,7 +99,7 @@ export class GeoJsonAdapter
   addData(data: GeoJsonObject) {
     const features = new GeoJSON().readFeatures(data, {
       dataProjection: 'EPSG:4326',
-      featureProjection: 'EPSG:3857'
+      featureProjection: 'EPSG:3857',
     });
     this._features = this._features.concat(features);
     if (this._filterFun) {
@@ -111,10 +111,10 @@ export class GeoJsonAdapter
 
   select(findFeatureCb?: DataLayerFilter<Feature> | PropertiesFilter) {
     if (findFeatureCb) {
-      const feature = this._selectedFeatures.filter(x =>
+      const feature = this._selectedFeatures.filter((x) =>
         Object.create({ feature: x })
       );
-      feature.forEach(x => {
+      feature.forEach((x) => {
         this._selectFeature(x);
       });
     } else if (!this.selected) {
@@ -127,10 +127,10 @@ export class GeoJsonAdapter
 
   unselect(findFeatureCb?: DataLayerFilter<Feature> | PropertiesFilter) {
     if (findFeatureCb) {
-      const feature = this._selectedFeatures.filter(x =>
+      const feature = this._selectedFeatures.filter((x) =>
         Object.create({ feature: x })
       );
-      feature.forEach(x => {
+      feature.forEach((x) => {
         this._unselectFeature(x);
       });
     } else if (this.selected) {
@@ -142,13 +142,13 @@ export class GeoJsonAdapter
   }
 
   getLayers() {
-    return this._features.map(x => {
+    return this._features.map((x) => {
       return { feature: getFeature(x) };
     });
   }
 
   getSelected() {
-    return this._selectedFeatures.map(x => {
+    return this._selectedFeatures.map((x) => {
       return { feature: getFeature(x) };
     });
   }
@@ -157,7 +157,7 @@ export class GeoJsonAdapter
     this._filterFun = fun;
     const features = this._features;
     const filtered = fun
-      ? features.filter(feature => {
+      ? features.filter((feature) => {
           return fun({ feature: getFeature(feature) });
         })
       : features;
@@ -166,7 +166,7 @@ export class GeoJsonAdapter
     for (let fry = 0; fry < length; fry++) {
       this.vectorSource.addFeature(filtered[fry]);
     }
-    return filtered.map(x => {
+    return filtered.map((x) => {
       return { feature: getFeature(x) };
     });
   }
@@ -179,7 +179,7 @@ export class GeoJsonAdapter
     if (this.layer) {
       const source = this.layer.getSource();
       const features = source.getFeatures();
-      features.forEach(f => {
+      features.forEach((f) => {
         const style = styleFunction(f, paint);
         if (style) {
           f.setStyle(style);
@@ -215,7 +215,7 @@ export class GeoJsonAdapter
       this.options.onLayerClick({
         layer: this,
         feature: getFeature(feature),
-        selected: isSelected
+        selected: isSelected,
       });
     }
   }
@@ -223,7 +223,7 @@ export class GeoJsonAdapter
   private _selectFeature(feature: OlFeature) {
     const options = this.options;
     if (options && !options.multiselect) {
-      this._selectedFeatures.forEach(x => this._unselectFeature(x));
+      this._selectedFeatures.forEach((x) => this._unselectFeature(x));
     }
     this._selectedFeatures.push(feature);
     this.selected = true;

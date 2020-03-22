@@ -13,7 +13,7 @@ export function setTileLoadFunction(
     xhr.setRequestHeader(h, headers[h]);
   }
 
-  xhr.onload = function() {
+  xhr.onload = function () {
     const arrayBufferView = new Uint8Array(this.response);
     const blob = new Blob([arrayBufferView], { type: 'image/png' });
     // @ts-ignore for typedoc

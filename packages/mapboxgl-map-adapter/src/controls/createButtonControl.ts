@@ -25,7 +25,7 @@ export function createButtonControl(options: ButtonControlOptions) {
     }
   }
   if (options.addClass) {
-    options.addClass.split(' ').forEach(x => link.classList.add(x));
+    options.addClass.split(' ').forEach((x) => link.classList.add(x));
   }
 
   const onClick = (e: Event) => {
@@ -49,7 +49,7 @@ export function createButtonControl(options: ButtonControlOptions) {
         if (options.onClick !== undefined) {
           link.removeEventListener('click', onClick);
         }
-      }
+      },
     },
     { bar: true, addClass: 'mapboxgl-ctrl-group' }
   );

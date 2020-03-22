@@ -31,7 +31,7 @@ export class VueNgwMap<M = any> extends Vue {
 
   render(h: CreateElement): VNode {
     const staticStyle: { [param: string]: string } = {
-      zIndex: '0'
+      zIndex: '0',
     };
     if (this.fullFilling) {
       staticStyle.width = '100%';
@@ -42,7 +42,7 @@ export class VueNgwMap<M = any> extends Vue {
       staticClass: 'vue-ngw-map',
       staticStyle,
       // 'class': this.classes,
-      attrs: { 'data-app': true }
+      attrs: { 'data-app': true },
       // domProps: { id: this.id }
     };
 
@@ -53,7 +53,7 @@ export class VueNgwMap<M = any> extends Vue {
     this.ngwMap = new NgwMap(this.mapAdapter, {
       ...this.$props,
       ...this.mapOptions,
-      target: this.$el as HTMLElement
+      target: this.$el as HTMLElement,
     });
     this.ready = true;
   }

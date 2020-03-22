@@ -20,11 +20,11 @@ export class ImageAdapter extends BaseAdapter<ImageAdapterOptions>
       this.layer = new ImageLayer(url, {
         pane: this.pane,
         headers: options.headers,
-        ...options
+        ...options,
       });
       if (updateWmsParamsFromOpt) {
         const updateWmsParams = this.layer.updateWmsParams;
-        this.layer.updateWmsParams = function(map: Map) {
+        this.layer.updateWmsParams = function (map: Map) {
           updateWmsParams.call(this, map);
           this.wmsParams = updateWmsParamsFromOpt(this.wmsParams);
         };

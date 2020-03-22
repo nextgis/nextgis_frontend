@@ -14,7 +14,7 @@ export class ZoomControl extends NavigationControl {
     const element = super._createButton(className, ariaLabel, fn);
     const aliases: any = {
       'Zoom in': 'zoomInTitle',
-      'Zoom out': 'zoomOutTitle'
+      'Zoom out': 'zoomOutTitle',
     };
     const alias = aliases[ariaLabel];
     const label = alias && this.options[alias];

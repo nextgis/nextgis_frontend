@@ -16,7 +16,7 @@ export class AttributionControl extends Control.Attribution {
       } else if (customAttribution) {
         attributions = [customAttribution];
       }
-      attributions.forEach(x => this.addAttribution(x));
+      attributions.forEach((x) => this.addAttribution(x));
     }
   }
 }

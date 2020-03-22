@@ -12,7 +12,7 @@ import {
   LayerAdapter,
   LngLatBoundsArray,
   WebMapEvents,
-  CreateControlOptions
+  CreateControlOptions,
 } from '@nextgis/webmap';
 import { sleep, debounce } from '@nextgis/utils';
 import { MvtAdapter } from './layer-adapters/MvtAdapter';
@@ -24,7 +24,7 @@ import mapboxgl, {
   MapboxOptions,
   RequestParameters,
   ResourceType,
-  FitBoundsOptions
+  FitBoundsOptions,
 } from 'mapbox-gl';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
 import { TileAdapter } from './layer-adapters/TileAdapter';
@@ -56,13 +56,13 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     // IMAGE: TileAdapter,
     MVT: MvtAdapter,
     OSM: OsmAdapter,
-    GEOJSON: GeoJsonAdapter
+    GEOJSON: GeoJsonAdapter,
   };
 
   static controlAdapters: { [name: string]: any } = {
     ZOOM: ZoomControl,
     COMPASS: CompassControl,
-    ATTRIBUTION: AttributionControl
+    ATTRIBUTION: AttributionControl,
   };
 
   options: MapboxglMapAdapterOptions = {};
@@ -80,7 +80,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     'zoomend',
     'movestart',
     'move',
-    'moveend'
+    'moveend',
   ];
 
   private _sourceDataLoading: { [name: string]: any[] } = {};
@@ -88,7 +88,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   private __setLayerOrder: (layers: { [x: string]: TLayerAdapter }) => void;
 
   constructor() {
-    this.__setLayerOrder = debounce(layers => this._setLayerOrder(layers));
+    this.__setLayerOrder = debounce((layers) => this._setLayerOrder(layers));
   }
 
   // create(options: MapOptions = {target: 'map'}) {
@@ -112,10 +112,10 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
                 return transformed;
               } else {
                 return {
-                  url
+                  url,
                 };
               }
-            }
+            },
           };
           if (typeof options.style === 'string') {
             mapOpt.style = options.style;
@@ -125,9 +125,9 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
                 version: 8,
                 name: 'Empty style',
                 sources: {},
-                layers: []
+                layers: [],
               },
-              ...options.style
+              ...options.style,
             };
           }
           if (options.center !== undefined) {
@@ -223,12 +223,12 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
         linear: true,
         duration: 0,
         ...options,
-        ...fitBoundsOptions
+        ...fitBoundsOptions,
       };
       this.map.fitBounds(
         [
           [e[0], e[1]],
-          [e[2], e[3]]
+          [e[2], e[3]],
         ],
         fitBoundOptions
       );
@@ -242,14 +242,14 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
 
   showLayer(layerIds: string[]): void {
     layerIds &&
-      layerIds.forEach(layerId => {
+      layerIds.forEach((layerId) => {
         this._toggleLayer(layerId, true);
       });
   }
 
   hideLayer(layerIds: string[]): void {
     layerIds &&
-      layerIds.forEach(layerId => {
+      layerIds.forEach((layerId) => {
         this._toggleLayer(layerId, false);
       });
   }
@@ -257,7 +257,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   removeLayer(layerIds: string[]): void {
     const _map = this.map;
     if (_map && layerIds && Array.isArray(layerIds)) {
-      layerIds.forEach(layerId => {
+      layerIds.forEach((layerId) => {
         _map.removeLayer(layerId);
         const source = _map.getSource(layerId);
         if (source) {
@@ -278,7 +278,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   setLayerOpacity(layerIds: string[], opacity: number): void {
     const _map = this.map;
     if (_map) {
-      layerIds.forEach(layerId => {
+      layerIds.forEach((layerId) => {
         this._onMapLoad().then(() => {
           const layer = _map.getLayer(layerId);
           if (layer) {
@@ -326,7 +326,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   }
 
   private _onMapLoad(cb?: () => any): Promise<Map> {
-    return new Promise<Map>(resolve => {
+    return new Promise<Map>((resolve) => {
       const _resolve = () => {
         if (cb) {
           cb();
@@ -361,9 +361,9 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
       }
 
       // normalize layer ordering
-      baseLayers.forEach(x => {
+      baseLayers.forEach((x) => {
         if (x.layer) {
-          x.layer.forEach(y => {
+          x.layer.forEach((y) => {
             _map.moveLayer(y);
           });
         }
@@ -378,7 +378,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
       for (let fry = 0; fry < orderedLayers.length; fry++) {
         const mem = orderedLayers[fry];
         const _layers = this._getLayerIds(mem);
-        _layers.forEach(x => {
+        _layers.forEach((x) => {
           _map.moveLayer(x);
         });
       }
@@ -392,11 +392,11 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
         _layers = mem.layer;
       } else if (mem.getDependLayers) {
         const dependLayers = mem.getDependLayers();
-        dependLayers.forEach(x => {
+        dependLayers.forEach((x) => {
           // @ts-ignore Update x interface
           const layer: TLayer = (x.layer && x.layer.layer) || x;
           if (Array.isArray(layer)) {
-            layer.forEach(y => {
+            layer.forEach((y) => {
               _layers.push(y);
             });
           }
@@ -407,7 +407,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   }
 
   private _toggleLayer(layerId: string, status: boolean): void {
-    this._onMapLoad().then(_map => {
+    this._onMapLoad().then((_map) => {
       _map.setLayoutProperty(
         layerId,
         'visibility',
@@ -445,7 +445,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   ) {
     // if all sources is loaded emmit event for all and clean mem
     if (isLoaded) {
-      Object.keys(this._sourceDataLoading).forEach(x => {
+      Object.keys(this._sourceDataLoading).forEach((x) => {
         emit(x);
       });
       this._sourceDataLoading = {};
@@ -487,7 +487,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     const _map = this.map;
     if (_map) {
       // write mem for start loaded layers
-      _map.on('sourcedataloading', data => {
+      _map.on('sourcedataloading', (data) => {
         this._sourceDataLoading[data.sourceId] =
           this._sourceDataLoading[data.sourceId] || [];
         if (data.tile) {
@@ -497,11 +497,11 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
       // emmit data-loaded for each layer or all sources is loaded
       _map.on('sourcedata', this._onMapSourceData.bind(this));
       _map.on('error', this._onMapError.bind(this));
-      _map.on('click', evt => {
+      _map.on('click', (evt) => {
         this.onMapClick(evt);
       });
 
-      this._universalEvents.forEach(e => {
+      this._universalEvents.forEach((e) => {
         _map.on(e, () => this.emitter.emit(e, this));
       });
     }

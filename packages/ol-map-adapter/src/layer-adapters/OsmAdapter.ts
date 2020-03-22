@@ -14,8 +14,8 @@ export class OsmAdapter implements BaseLayerAdapter {
     const attributions = [ATTRIBUTION];
     const layer = new TileLayer({
       source: new OSM({
-        attributions
-      })
+        attributions,
+      }),
     });
     return layer;
   }

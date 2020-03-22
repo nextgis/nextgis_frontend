@@ -15,8 +15,8 @@ export function getBoundsPolygon(b: LngLatBoundsArray): Feature<Polygon> {
     properties: {},
     geometry: {
       type: 'Polygon',
-      coordinates: [[westNorth, eastNorth, eastSouth, westSouth, westNorth]]
-    }
+      coordinates: [[westNorth, eastNorth, eastSouth, westSouth, westNorth]],
+    },
   };
   return feature;
 }

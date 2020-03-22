@@ -9,7 +9,7 @@ import {
   Operations,
   DataLayerFilter,
   PropertyFilter,
-  FilterOptions
+  FilterOptions,
 } from '@nextgis/webmap';
 
 import { Paint, IconOptions, isPaint, isIcon } from '@nextgis/paint';
@@ -19,7 +19,7 @@ import {
   Feature as F,
   GeometryObject,
   Geometry,
-  GeoJsonProperties
+  GeoJsonProperties,
 } from 'geojson';
 import {
   Map,
@@ -27,7 +27,7 @@ import {
   AnySourceData,
   AnyLayout,
   Layer,
-  MapboxGeoJSONFeature
+  MapboxGeoJSONFeature,
 } from 'mapbox-gl';
 
 import { getImage } from '../util/image_icons';
@@ -47,7 +47,7 @@ export const operationsAliases: { [key in Operations]: string } = {
   // NOT SUPPORTED
   like: '==',
   // NOT SUPPORTED
-  ilike: '=='
+  ilike: '==',
 };
 
 const reversOperations: { [key in Operations]: string } = {
@@ -60,7 +60,7 @@ const reversOperations: { [key in Operations]: string } = {
   in: operationsAliases.notin,
   notin: operationsAliases.in,
   like: operationsAliases.ne,
-  ilike: operationsAliases.ne
+  ilike: operationsAliases.ne,
 };
 
 export interface Feature<
@@ -73,7 +73,7 @@ export interface Feature<
 const PAINT = {
   color: 'blue',
   opacity: 1,
-  radius: 10
+  radius: 10,
 };
 
 type MapboxLayerType = 'fill' | 'line' | 'symbol' | 'circle';
@@ -137,7 +137,7 @@ export abstract class VectorAdapter<
 
           await this._addLayer(layer, type, [
             geomFilter,
-            this._getNativeFilter()
+            this._getNativeFilter(),
           ]);
           this.layer.push(layer);
           if (options.selectedPaint) {
@@ -186,7 +186,7 @@ export abstract class VectorAdapter<
   removeLayer() {
     const map = this.map;
     if (this.layer) {
-      this.layer.forEach(layerId => {
+      this.layer.forEach((layerId) => {
         map.removeLayer(layerId);
       });
     }
@@ -226,9 +226,9 @@ export abstract class VectorAdapter<
       source: this._sourceId,
       layout: {
         visibility: 'none',
-        ...layout
+        ...layout,
       },
-      ...this._getAdditionalLayerOptions()
+      ...this._getAdditionalLayerOptions(),
     };
     if (minZoom) {
       layerOpt.minzoom = minZoom - 1;
@@ -239,7 +239,7 @@ export abstract class VectorAdapter<
 
     this.map.addLayer(layerOpt);
 
-    const filters = ['all', ...(filter || [])].filter(x => x);
+    const filters = ['all', ...(filter || [])].filter((x) => x);
     if (filters.length > 1) {
       this.map.setFilter(layerOpt.id, filters);
     }
@@ -304,13 +304,13 @@ export abstract class VectorAdapter<
       if (paint.type === 'icon' && paint.html) {
         await this._registerImage(paint);
         return {
-          'icon-image': paint.html
+          'icon-image': paint.html,
         };
       } else {
         for (const p in _paint) {
           const allowed = allowedByType[type];
           if (allowed) {
-            const allowedType = allowed.find(x => {
+            const allowedType = allowed.find((x) => {
               if (typeof x === 'string') {
                 return x === p;
               } else if (Array.isArray(x)) {
@@ -359,7 +359,7 @@ export abstract class VectorAdapter<
         }
         const image = await getImage(paint.html, {
           width,
-          height
+          height,
         });
 
         this.map.addImage(paint.html, image);
@@ -386,7 +386,7 @@ export abstract class VectorAdapter<
   protected _updatePropertiesFilter() {
     const layers = this.layer;
     if (layers) {
-      this._types.forEach(t => {
+      this._types.forEach((t) => {
         const geomType = typeAliasForFilter[t];
         if (geomType) {
           const geomFilter = ['==', '$type', geomType];
@@ -404,16 +404,16 @@ export abstract class VectorAdapter<
                   filters = this._convertToMapboxFilter(selectProperties) || [];
                 } else if (this._selectedFeatureIds) {
                   filters = [
-                    ['in', this.featureIdName, ...this._selectedFeatureIds]
+                    ['in', this.featureIdName, ...this._selectedFeatureIds],
                   ];
                 }
                 if (propertyFilters) {
-                  propertyFilters.forEach(x => filters.push(x));
+                  propertyFilters.forEach((x) => filters.push(x));
                 }
                 this.map.setFilter(selLayerName, [
                   'all',
                   geomFilter,
-                  ...filters
+                  ...filters,
                 ]);
               } else {
                 filters = ['in', '$id', ''];
@@ -429,16 +429,16 @@ export abstract class VectorAdapter<
                 selectProperties,
                 true
               );
-              selectFilters.forEach(x => filters_.push(x));
+              selectFilters.forEach((x) => filters_.push(x));
             } else if (this._selectedFeatureIds) {
               filters_.push([
                 '!in',
                 this.featureIdName,
-                ...this._selectedFeatureIds
+                ...this._selectedFeatureIds,
               ]);
             }
             if (propertyFilters) {
-              propertyFilters.forEach(x => filters_.push(x));
+              propertyFilters.forEach((x) => filters_.push(x));
             }
             this.map.setFilter(layerName, filters_);
           }
@@ -449,7 +449,7 @@ export abstract class VectorAdapter<
 
   protected _convertToMapboxFilter(filters: PropertiesFilter, reverse = false) {
     const _operationsAliases = reverse ? reversOperations : operationsAliases;
-    const filter = filters.map(x => {
+    const filter = filters.map((x) => {
       if (typeof x === 'string') {
         return x;
       } else if (checkIfPropertyFilter(x)) {
@@ -482,7 +482,7 @@ export abstract class VectorAdapter<
     if (this.layer) {
       const features = this.layer.reduce((a, b) => {
         const features_ = this.map.queryRenderedFeatures(e.point, {
-          layers: [b]
+          layers: [b],
         });
         const c = a.concat(features_);
         return c;
@@ -502,7 +502,7 @@ export abstract class VectorAdapter<
           this.options.onLayerClick({
             layer: this,
             feature,
-            selected: isSelected
+            selected: isSelected,
           });
         }
       }
@@ -517,7 +517,7 @@ export abstract class VectorAdapter<
         const falsePaint = paint({
           type: 'Feature',
           properties: {},
-          geometry: {} as Geometry
+          geometry: {} as Geometry,
         });
         return this._detectPaintType(falsePaint);
       } catch (er) {
@@ -528,7 +528,7 @@ export abstract class VectorAdapter<
 
   private _addEventsListeners() {
     if (this.layer && this.options && this.options.selectable) {
-      this.layer.forEach(x => {
+      this.layer.forEach((x) => {
         if (this.$onLayerClick) {
           const onLayerClick = this.$onLayerClick;
           this.map.on('click', x, (e: MapLayerMouseEvent) => {

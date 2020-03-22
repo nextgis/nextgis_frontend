@@ -13,7 +13,7 @@ export function resolutionOptions(map: Map, opt: AdapterOptions) {
     minResolution:
       (opt.maxScale && getResolution(map, opt.maxScale)) || undefined,
     maxResolution:
-      (opt.minScale && getResolution(map, opt.minScale)) || undefined
+      (opt.minScale && getResolution(map, opt.minScale)) || undefined,
   };
 }
 
@@ -21,10 +21,7 @@ export function getResolution(map: Map, scale: number) {
   if (scale) {
     return getResolutionForScale(
       scale,
-      map
-        .getView()
-        .getProjection()
-        .getMetersPerUnit() || 1
+      map.getView().getProjection().getMetersPerUnit() || 1
     );
   }
 }

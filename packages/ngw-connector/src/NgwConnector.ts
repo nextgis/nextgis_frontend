@@ -21,7 +21,7 @@ import {
   RequestItemKeys,
   DeleteRequestItemsResponseMap,
   PutRequestItemsResponseMap,
-  RequestItemsParams
+  RequestItemsParams,
 } from './interfaces';
 import { loadJSON } from './utils/loadJson';
 import { template } from './utils/template';
@@ -89,7 +89,7 @@ export class NgwConnector {
       this.options.auth = credentials;
     }
     const options: RequestOptions = {
-      headers: this.getAuthorizationHeaders(credentials)
+      headers: this.getAuthorizationHeaders(credentials),
       // withCredentials: true
     };
 
@@ -100,7 +100,7 @@ export class NgwConnector {
         this.emitter.emit('login', data);
         return data;
       })
-      .catch(er => {
+      .catch((er) => {
         this.emitter.emit('login:error', er);
         throw er;
       });
@@ -112,7 +112,7 @@ export class NgwConnector {
     const client = this.makeClientId(credentials);
     if (client) {
       return {
-        Authorization: 'Basic ' + client
+        Authorization: 'Basic ' + client,
       };
     }
   }
@@ -150,7 +150,7 @@ export class NgwConnector {
       parent = item.resource.id;
     }
     return await this.get('resource.collection', null, {
-      parent
+      parent,
     });
   }
 
@@ -190,7 +190,7 @@ export class NgwConnector {
         const paramList = params.paramList;
         if (Array.isArray(paramList)) {
           delete params.paramList;
-          paramList.forEach(x => {
+          paramList.forEach((x) => {
             paramArray.push(`${x[0]}=${x[1]}`);
           });
         }
@@ -287,12 +287,12 @@ export class NgwConnector {
         this._loadingStatus[url] = true;
 
         return this._getJson(url, options)
-          .then(data => {
+          .then((data) => {
             this._loadingStatus[url] = false;
             this._executeLoadingQueue(url, data);
             return data;
           })
-          .catch(er => {
+          .catch((er) => {
             this._loadingStatus[url] = false;
             this._executeLoadingQueue(url, er, true);
             this.emitter.emit('error', er);
@@ -316,19 +316,19 @@ export class NgwConnector {
   ) {
     this._loadingQueue[name] = this._loadingQueue[name] || {
       name,
-      waiting: []
+      waiting: [],
     };
     this._loadingQueue[name].waiting.push({
       resolve,
       reject,
-      timestamp: new Date()
+      timestamp: new Date(),
     });
   }
 
   protected _rejectLoadingQueue() {
     for (const q in this._loadingQueue) {
       const queue = this._loadingQueue[q];
-      queue.waiting.forEach(x => {
+      queue.waiting.forEach((x) => {
         x.reject();
       });
       delete this._loadingQueue[q];
@@ -365,13 +365,13 @@ export class NgwConnector {
           // options.withCredentials = true;
           options.headers = {
             ...this.getAuthorizationHeaders(),
-            ...options.headers
+            ...options.headers,
           };
         }
         loadJSON(url, resolve, options, reject, onCancel);
       },
       () => {
-        onCancel.forEach(x => x());
+        onCancel.forEach((x) => x());
       }
     );
   }

@@ -5,7 +5,7 @@ import {
   VectorLayerAdapter,
   GeoJsonAdapterOptions,
   DataLayerFilter,
-  PropertiesFilter
+  PropertiesFilter,
 } from '@nextgis/webmap';
 import {
   VectorAdapterLayerPaint,
@@ -14,7 +14,7 @@ import {
   isBasePaint,
   isPaint,
   GeometryPaint,
-  PinPaint
+  PinPaint,
 } from '@nextgis/paint';
 
 import {
@@ -23,7 +23,7 @@ import {
   PinBuilder,
   Cartesian3,
   VerticalOrigin,
-  Property
+  Property,
 } from 'cesium';
 import { GeoJsonObject, Feature, FeatureCollection } from 'geojson';
 import { BaseAdapter, Map } from './BaseAdapter';
@@ -90,7 +90,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
         this._features.push(data as Feature);
       } else if (data.type === 'FeatureCollection') {
         const featureCollection = data as FeatureCollection;
-        featureCollection.features.forEach(x => this._features.push(x));
+        featureCollection.features.forEach((x) => this._features.push(x));
       }
       this._updateSource();
       // this._source.load(data);
@@ -125,7 +125,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     const source = this._source;
     if (source) {
       source.entities.removeAll();
-      this._features.forEach(x => {
+      this._features.forEach((x) => {
         const paint = this._getFeaturePaint(x, this.options.paint);
         if (isBasePaint(paint)) {
           if (paint.type === 'pin') {
@@ -177,7 +177,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
           getValue: () => {
             if (this.options.popupOptions?.createPopupContent) {
               const content = this.options.popupOptions.createPopupContent({
-                feature: obj
+                feature: obj,
               });
               if (content instanceof HTMLElement) {
                 return content.outerHTML;
@@ -185,7 +185,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
               return content;
             }
             return '';
-          }
+          },
         };
 
         source.entities.add({
@@ -196,8 +196,8 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
             // @ts-ignore
             image: canvas.toDataURL(),
             // @ts-ignore
-            verticalOrigin: VerticalOrigin.BOTTOM
-          }
+            verticalOrigin: VerticalOrigin.BOTTOM,
+          },
         });
       }
     }
@@ -230,8 +230,8 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
       }
 
       const dataSource = new GeoJsonDataSource();
-      dataSource.load(obj, options).then(x => {
-        dataSource.entities.values.forEach(y => {
+      dataSource.load(obj, options).then((x) => {
+        dataSource.entities.values.forEach((y) => {
           source.entities.add(y);
         });
       });

@@ -6,7 +6,7 @@ import { LayerAdaptersOptions, AdapterOptions } from '@nextgis/webmap';
 import { QmsBasemap, QmsLayerType } from '../interfaces';
 
 export const alias: { [key in QmsLayerType]: keyof LayerAdaptersOptions } = {
-  tms: 'TILE'
+  tms: 'TILE',
 };
 
 export function updateQmsOptions(
@@ -19,6 +19,6 @@ export function updateQmsOptions(
     name: qms.name,
     attribution: qms.copyright_text,
     maxZoom: qms.z_max,
-    minZoom: qms.z_min
+    minZoom: qms.z_min,
   };
 }

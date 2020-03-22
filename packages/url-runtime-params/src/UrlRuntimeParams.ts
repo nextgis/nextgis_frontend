@@ -17,11 +17,11 @@ export class UrlRuntimeParams implements RuntimeParams {
     //   return this._params;
     // }
     const params: Params = {};
-    window.location.href.replace(/[?&]+(\w+)([^&]*)/gi, function(m, key) {
+    window.location.href.replace(/[?&]+(\w+)([^&]*)/gi, function (m, key) {
       params[key] = true;
       return ''; // does not matter
     });
-    window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(
+    window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (
       m,
       key,
       value

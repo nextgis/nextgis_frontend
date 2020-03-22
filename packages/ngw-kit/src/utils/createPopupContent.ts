@@ -8,7 +8,7 @@ export function createPopupContent(
 ): HTMLElement | string {
   const element = create('div');
   if (item) {
-    item.feature_layer?.fields.forEach(x => {
+    item.feature_layer?.fields.forEach((x) => {
       if (x.grid_visibility) {
         const value = feature.properties && feature.properties[x.keyname];
         if (value) {

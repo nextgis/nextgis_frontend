@@ -24,7 +24,7 @@ export function bindAll(
   fns: string[],
   context: { [method: string]: (...args: any[]) => any }
 ): void {
-  fns.forEach(fn => {
+  fns.forEach((fn) => {
     if (!context[fn]) {
       return;
     }
