@@ -63,6 +63,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     if (cb) {
       features = this._features = this._features.filter((x) => !cb(x));
     }
+    this._features = features;
     source.setData({ type: 'FeatureCollection', features });
   }
 
