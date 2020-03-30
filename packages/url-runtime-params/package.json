@@ -6,7 +6,7 @@
   "unpkg": "lib/url-runtime-params.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/webmap": "^0.28.3"
+    "@nextgis/webmap": "^0.29.0"
   },
   "devDependencies": {
     "@nextgis/build-tools": "file:../build-tools"

@@ -6,13 +6,16 @@
   "unpkg": "lib/control-container.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/dom": "^0.28.0",
-    "@nextgis/utils": "^0.28.3",
-    "@nextgis/webmap": "^0.28.3",
+    "@nextgis/dom": "^0.29.0",
+    "@nextgis/utils": "^0.29.0",
+    "@nextgis/webmap": "^0.29.0",
     "events": "^3.1.0"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "file:../build-tools"
+    "@nextgis/build-tools": "file:../build-tools",
+    "install": "^0.13.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "npm": "^6.14.4"
   },
   "scripts": {
     "clean": "rimraf ./lib",

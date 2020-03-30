@@ -7,7 +7,7 @@
   "unpkg": "lib/ngw-connector.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/cancelable-promise": "^0.28.0",
+    "@nextgis/cancelable-promise": "^0.29.0",
     "events": "^3.1.0"
   },
   "devDependencies": {

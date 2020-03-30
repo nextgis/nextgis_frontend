@@ -7,8 +7,8 @@
   "unpkg": "lib/qms-kit.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/utils": "^0.28.3",
-    "@nextgis/webmap": "^0.28.3"
+    "@nextgis/utils": "^0.29.0",
+    "@nextgis/webmap": "^0.29.0"
   },
   "devDependencies": {
     "@nextgis/build-tools": "file:../build-tools"
