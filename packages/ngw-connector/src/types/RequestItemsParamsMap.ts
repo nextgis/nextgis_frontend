@@ -26,6 +26,7 @@ export interface RequestItemsParamsMap {
   'feature_layer.feature.collection': { id: number };
   'feature_layer.feature.count': { id: number };
   'feature_layer.feature.item': { id: number; fid: number };
+  'feature_layer.feature.item_extent': { id: number; fid: number };
   'feature_layer.feature.show': { id: number; feature_id: number };
   'feature_layer.feature.update': { id: number; feature_id: number };
   'feature_layer.field': { id: number };

@@ -1,6 +1,6 @@
 const path = require('path');
 const package = require('./package.json');
-const common = require('../../build/webpack.config');
+const common = require('../build-tools/lib/webpack.config');
 
 const library = 'CesiumMapAdapter';
 
@@ -12,7 +12,7 @@ module.exports = (env, argv) => {
     library,
     externals: false,
     dirname: __dirname,
-    package
+    package,
   })[0];
   config.output.sourcePrefix = '';
   config.node = {
@@ -21,12 +21,12 @@ module.exports = (env, argv) => {
     Buffer: false,
     http: 'empty',
     https: 'empty',
-    zlib: 'empty'
+    zlib: 'empty',
   };
   config.resolve.mainFields = ['module', 'main'];
 
   config.optimization = {
-    usedExports: true
+    usedExports: true,
   };
 
   config.plugins = config.plugins || [];
@@ -62,11 +62,11 @@ module.exports = (env, argv) => {
         loader: 'strip-pragma-loader',
         options: {
           pragmas: {
-            debug: false
-          }
-        }
-      }
-    ]
+            debug: false,
+          },
+        },
+      },
+    ],
   };
   config.module.rules.push(pragmaRule);
   return config;

@@ -10,14 +10,14 @@ const progress = args.progress || args.p;
 const dirname = process.cwd();
 
 // const name = path.basename(packagesDir);
-const resolve = p => path.resolve(dirname, p);
+const resolve = (p) => path.resolve(dirname, p);
 const package = require(resolve(`package.json`));
 const packageOptions = package.buildOptions || {};
 
 const library = packageOptions.name;
 const externals = !!packageOptions.externals;
 
-const common = require('../../build/webpack.config');
+const common = require('./webpack.config');
 
 if (!library) {
   console.error(
@@ -36,7 +36,7 @@ const config = common(
     package,
     libraryExport: '',
     externals,
-    dirname
+    dirname,
   }
 );
 

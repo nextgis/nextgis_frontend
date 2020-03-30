@@ -1,5 +1,4 @@
-const { getAliases } = require('../packages/build-tools/aliases');
+const { getAliases } = require('../packages/build-tools');
 
 // backward compatibility
 exports.getAliases = getAliases;
-
