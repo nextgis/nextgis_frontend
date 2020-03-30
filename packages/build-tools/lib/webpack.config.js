@@ -2,7 +2,7 @@ const webpack = require('webpack');
 
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const path = require('path');
-const { getAliases } = require('./aliases');
+const getAliases = require('./aliases');
 
 module.exports = (env, argv, opt = {}) => {
   const relativePath = path.relative(process.cwd(), opt.dirname);
@@ -41,7 +41,7 @@ module.exports = (env, argv, opt = {}) => {
       },
     ];
   }
-  const configFile = path.join(__dirname, '../eslint-config/index.js');
+  const configFile = path.join(__dirname, '../../eslint-config/index.js');
 
   const rules = [
     {

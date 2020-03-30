@@ -1,7 +1,7 @@
 const path = require('path');
 // const webpack = require('webpack');
 const package = require('./package.json');
-const common = require('../../build/webpack.config');
+const common = require('../build-tools/lib/webpack.config');
 const CopywebpackPlugin = require('copy-webpack-plugin');
 
 const library = 'NgwCesium';
@@ -14,7 +14,7 @@ module.exports = (env, argv) => {
     library,
     externals: true,
     dirname: __dirname,
-    package
+    package,
   })[0];
   config.output.sourcePrefix = '';
   config.node = {
@@ -23,28 +23,28 @@ module.exports = (env, argv) => {
     Buffer: false,
     http: 'empty',
     https: 'empty',
-    zlib: 'empty'
+    zlib: 'empty',
   };
   config.resolve.mainFields = ['module', 'main'];
 
   config.optimization = {
-    usedExports: true
+    usedExports: true,
   };
 
   config.plugins = config.plugins || [];
   config.plugins.push(
     new CopywebpackPlugin([
-      { from: path.join(cesiumSource, cesiumWorkers), to: 'Workers' }
+      { from: path.join(cesiumSource, cesiumWorkers), to: 'Workers' },
     ])
   );
   config.plugins.push(
     new CopywebpackPlugin([
-      { from: path.join(cesiumSource, 'Assets'), to: 'Assets' }
+      { from: path.join(cesiumSource, 'Assets'), to: 'Assets' },
     ])
   );
   config.plugins.push(
     new CopywebpackPlugin([
-      { from: path.join(cesiumSource, 'Widgets'), to: 'Widgets' }
+      { from: path.join(cesiumSource, 'Widgets'), to: 'Widgets' },
     ])
   );
   // config.plugins.push(
@@ -64,11 +64,11 @@ module.exports = (env, argv) => {
         loader: 'strip-pragma-loader',
         options: {
           pragmas: {
-            debug: false
-          }
-        }
-      }
-    ]
+            debug: false,
+          },
+        },
+      },
+    ],
   };
   config.module.rules.push(pragmaRule);
   return config;
