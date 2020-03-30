@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.1](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.0...v0.29.1) (2020-03-30)
+
+
+### Bug Fixes
+
+* **build:** control-container extract css ([05d96c8](https://github.com/nextgis/nextgisweb_frontend/commit/05d96c8a4f4861a666244139a5903b2deb34194b))
+* **mapbox:** fix geojson adapter clean method ([a5138b6](https://github.com/nextgis/nextgisweb_frontend/commit/a5138b6fdd4047b3c0cc8422b3bdca33cea0e951))
+
+
+### Features
+
+* **ngw-connector:** add item_extent interface ([78f0cdd](https://github.com/nextgis/nextgisweb_frontend/commit/78f0cdd082ec2550bc9a442d05addaadd02f7aae))
+* **ngw-connector:** new query option for response cache ([d249605](https://github.com/nextgis/nextgisweb_frontend/commit/d249605823a63a0b1f6b3f242b15c06fe70bd9a3))
+
+
+
+
+
 # [0.29.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.28.3...v0.29.0) (2020-03-22)
 
 
