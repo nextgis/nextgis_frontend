@@ -6,8 +6,8 @@
   "unpkg": "lib/vue-ngw-map.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/leaflet-map-adapter": "^0.28.3",
-    "@nextgis/ngw-map": "^0.28.3",
+    "@nextgis/leaflet-map-adapter": "^0.29.0",
+    "@nextgis/ngw-map": "^0.29.0",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
     "vue-property-decorator": "^8.4.1",

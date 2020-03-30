@@ -6,10 +6,10 @@
   "unpkg": "lib/ngw-cesium.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/cesium-map-adapter": "^0.28.3",
-    "@nextgis/ngw-map": "^0.28.3",
+    "@nextgis/cesium-map-adapter": "^0.29.0",
+    "@nextgis/ngw-map": "^0.29.0",
     "@types/events": "^3.0.0",
-    "@types/node": "^13.9.2",
+    "@types/node": "^13.9.5",
     "events": "^3.1.0"
   },
   "devDependencies": {

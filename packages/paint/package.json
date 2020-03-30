@@ -6,7 +6,7 @@
   "unpkg": "lib/paint.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/properties-filter": "^0.28.3",
+    "@nextgis/properties-filter": "^0.29.0",
     "geojson": "^0.5.0"
   },
   "devDependencies": {

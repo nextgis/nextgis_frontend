@@ -1,14 +1,14 @@
 const library = 'NgwConnector';
 
 const package = require('./package.json');
-const common = require('../../build/webpack.config');
+const common = require('../build-tools/lib/webpack.config');
 
 module.exports = (env, argv) => {
   const config = common(env, argv, {
     library,
     package,
     externals: true,
-    dirname: __dirname
+    dirname: __dirname,
   })[0];
   config.externals = config.externals || {};
   config.externals.buffer = 'root Buffer';
@@ -16,7 +16,7 @@ module.exports = (env, argv) => {
   config.externals.http = 'root http';
   config.externals.https = 'root https';
   config.node = {
-    global: false
+    global: false,
   };
 
   return config;
