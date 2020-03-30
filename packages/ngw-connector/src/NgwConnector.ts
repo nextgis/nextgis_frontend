@@ -34,6 +34,7 @@ export class NgwConnector {
   private route?: PyramidRoute;
   private _loadingQueue: { [name: string]: LoadingQueue } = {};
   private _loadingStatus: { [url: string]: boolean } = {};
+  private _queriesCache: { [url: string]: any } = {};
   private _keynames: Record<string, ResourceItem> = {};
 
   constructor(public options: NgwConnectorOptions) {
@@ -283,12 +284,18 @@ export class NgwConnector {
       }
       // remove double slash
       url = url.replace(/([^:]\/)\/+/g, '$1');
+      if (options.cache && this._queriesCache[url]) {
+        return this._queriesCache[url];
+      }
       if (!this._loadingStatus[url] || options.nocache) {
         this._loadingStatus[url] = true;
 
         return this._getJson(url, options)
           .then((data) => {
             this._loadingStatus[url] = false;
+            if (options.cache) {
+              this._queriesCache[url] = data;
+            }
             this._executeLoadingQueue(url, data);
             return data;
           })

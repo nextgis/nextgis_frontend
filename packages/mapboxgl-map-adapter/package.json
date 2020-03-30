@@ -13,10 +13,10 @@
     "@types/events": "^3.0.0",
     "@types/mapbox-gl": "^1.8.1",
     "events": "^3.1.0",
-    "mapbox-gl": "1.8.1"
+    "mapbox-gl": "1.9.0"
   },
   "optionalDependencies": {
-    "canvg": "^3.0.5"
+    "canvg": "^3.0.6"
   },
   "devDependencies": {
     "@nextgis/build-tools": "file:../build-tools"
