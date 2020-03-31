@@ -97,7 +97,7 @@ export interface Credentials {
 }
 
 export interface NgwConnectorOptions {
-  baseUrl: string;
+  baseUrl?: string;
   route?: string;
   auth?: Credentials;
 }
