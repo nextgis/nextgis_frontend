@@ -59,7 +59,7 @@ export class NgwKit implements StarterKit {
 
   constructor(public options: NgwKitOptions) {
     if (this.options.connector) {
-      this.url = this.options.connector.options.baseUrl;
+      this.url = this.options.connector.options.baseUrl || '';
       this.connector = this.options.connector;
     } else {
       if (this.options.baseUrl) {

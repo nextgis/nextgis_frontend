@@ -7,22 +7,22 @@ import { Store } from 'vuex';
 import { FeatureItem } from '@nextgis/ngw-connector';
 import NgwConnector, {
   ResourceStoreItem,
-  FeatureLayerField
+  FeatureLayerField,
 } from '@nextgis/ngw-connector';
 import { Type } from '@nextgis/webmap';
 import { LookupTables, ForeignResource, PatchOptions } from '../../interfaces';
 
-type KeyName = string;
+type ResourceDef = string | number;
 
 export abstract class ResourceStore<
   P extends GeoJsonProperties = GeoJsonProperties,
   G extends Geometry | null = Geometry
 > extends VuexModule {
-  keyname!: string;
+  resource!: string;
   connector!: NgwConnector;
-  resources: { [key in KeyName]?: number } = {};
+  resources: { [key in ResourceDef]?: number } = {};
 
-  foreignResources: { [keyname: string]: ForeignResource } = {};
+  foreignResources: { [key in ResourceDef]: ForeignResource } = {};
 
   lookupTableResourceGroupId?: number;
   lookupTables: LookupTables = {};
@@ -43,7 +43,7 @@ export abstract class ResourceStore<
       return this.fields;
     }
     await this.context.dispatch('getResources');
-    const id = this.resources[this.keyname];
+    const id = this.resources[this.resource];
     if (id) {
       try {
         const item = await this.connector.get('resource.item', null, { id });
@@ -61,10 +61,10 @@ export abstract class ResourceStore<
     if (this.resourceItem && this.resourceItem.length) {
       return this.resourceItem;
     }
-    const id = this.resources[this.keyname];
+    const id = this.resources[this.resource];
     if (id) {
       const store = (await this.connector.get('feature_layer.store', null, {
-        id
+        id,
       })) as ResourceStoreItem<P>[];
       return store;
     }
@@ -78,7 +78,7 @@ export abstract class ResourceStore<
     const item = opt.item;
     if (item) {
       const storeItems = [...this.resourceItem];
-      const index = storeItems.findIndex(x => x.id === item.id);
+      const index = storeItems.findIndex((x) => x.id === item.id);
       if (index !== -1) {
         const oldItem = storeItems[index];
         const newItem = { ...oldItem, ...item.fields };
@@ -91,17 +91,17 @@ export abstract class ResourceStore<
   }
 
   @Action({ commit: 'UPDATE_RESOURCES' })
-  async getResources(): Promise<Record<KeyName, number>> {
+  async getResources(): Promise<Record<ResourceDef, number>> {
     const promises: Array<Promise<any>> = [];
-    const keyNames = [this.keyname, ...Object.keys(this.foreignResources)];
+    const resourceDefs = [this.resource, ...Object.keys(this.foreignResources)];
     if (!this._promises.getResources) {
-      keyNames.forEach(keyname => {
-        if (!(keyname in this.resources)) {
+      resourceDefs.forEach((resourceDef) => {
+        if (!(resourceDef in this.resources)) {
           const promise = this.connector
-            .getResourceByKeyname(keyname)
-            .then(item => {
+            .getResource(resourceDef)
+            .then((item) => {
               if (item) {
-                this.resources[keyname] = item.resource.id;
+                this.resources[resourceDef] = item.resource.id;
               }
             });
           promises.push(promise);
@@ -111,7 +111,7 @@ export abstract class ResourceStore<
     }
     await this._promises.getResources;
     delete this._promises.getResources;
-    return this.resources as Record<KeyName, number>;
+    return this.resources as Record<ResourceDef, number>;
   }
 
   @Action({ commit: 'UPDATE_LOOKUP_TABLES' })
@@ -125,11 +125,11 @@ export abstract class ResourceStore<
         'resource.collection',
         null,
         {
-          parent: this.lookupTableResourceGroupId
+          parent: this.lookupTableResourceGroupId,
         }
       );
 
-      lookupTableResources.forEach(x => {
+      lookupTableResources.forEach((x) => {
         const lookupTable = x.lookup_table;
         if (lookupTable) {
           const keyName = x.resource.keyname;
@@ -158,7 +158,7 @@ export abstract class ResourceStore<
     const geom = await this.context.dispatch('prepareGeomToNgw', opt);
     const featureFields = await this.fields;
     const fields: P = {} as P;
-    featureFields.forEach(x => {
+    featureFields.forEach((x) => {
       // @ts-ignore
       const property = opt.item.properties[x.keyname];
       let value: any;
@@ -186,7 +186,7 @@ export abstract class ResourceStore<
               value = {
                 year: dt.getFullYear(),
                 month: dt.getMonth(),
-                day: dt.getDay()
+                day: dt.getDay(),
               };
             }
           }
@@ -198,7 +198,7 @@ export abstract class ResourceStore<
 
     const feature: Partial<FeatureItem<P>> = {
       fields,
-      geom
+      geom,
     };
     return feature;
   }
@@ -206,7 +206,7 @@ export abstract class ResourceStore<
   @Action({ commit: '' })
   async patch(opt: PatchOptions<G, P>): Promise<FeatureItem<P> | undefined> {
     await this.context.dispatch('getResources');
-    const id = this.resources[this.keyname];
+    const id = this.resources[this.resource];
     if (id) {
       const feature: Partial<FeatureItem<P>> = await this.context.dispatch(
         'prepareFeatureToNgw',
@@ -243,7 +243,7 @@ export abstract class ResourceStore<
   @Action({ commit: 'SET_STORE' })
   async delete(fid: number) {
     await this.context.dispatch('getResources');
-    const id = this.resources[this.keyname];
+    const id = this.resources[this.resource];
     if (id) {
       try {
         if (this.events.onBeforeDelete) {
@@ -251,10 +251,10 @@ export abstract class ResourceStore<
         }
         await this.connector.delete('feature_layer.feature.item', null, {
           id,
-          fid
+          fid,
         });
         const store = [...this.resourceItem];
-        const index = store.findIndex(x => Number(x.id) === fid);
+        const index = store.findIndex((x) => Number(x.id) === fid);
         store.splice(index, 1);
         return store;
       } catch (er) {
@@ -270,7 +270,7 @@ export abstract class ResourceStore<
   }
 
   @Mutation
-  private UPDATE_RESOURCES(resources?: Record<KeyName, number>) {
+  private UPDATE_RESOURCES(resources?: Record<ResourceDef, number>) {
     this.resources = { ...this.resources, ...resources };
   }
 
@@ -298,7 +298,7 @@ export function createResourceStore<
     get connector() {
       return options.connector;
     }
-    keyname = options.keyname;
+    resource = options.keyname;
   }
   return RS;
 }

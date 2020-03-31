@@ -35,7 +35,8 @@ export class NgwConnector {
   private _loadingQueue: { [name: string]: LoadingQueue } = {};
   private _loadingStatus: { [url: string]: boolean } = {};
   private _queriesCache: { [url: string]: any } = {};
-  private _keynames: Record<string, ResourceItem> = {};
+  private _keynamesCache: Record<string, ResourceItem> = {};
+  private _resourceIdsCache: Record<number, ResourceItem> = {};
 
   constructor(public options: NgwConnectorOptions) {
     if (this.options.route) {
@@ -126,28 +127,58 @@ export class NgwConnector {
     }
   }
 
+  async getResource(resource: string | number) {
+    if (typeof resource === 'string') {
+      return this.getResourceByKeyname(resource);
+    } else if (typeof resource === 'number') {
+      return this.getResourceById(resource);
+    }
+  }
+
   async getResourceByKeyname(keyname: string) {
-    let resource: ResourceItem = this._keynames['keyname'];
-    if (!resource) {
+    let item: ResourceItem = this._keynamesCache['keyname'];
+    if (!item) {
       const resources = await this.get('resource.search', null, { keyname });
-      resource = resources[0];
-      if (resource) {
-        this._keynames[keyname] = resource;
+      item = resources[0];
+      if (item) {
+        this._keynamesCache[keyname] = item;
+        this._resourceIdsCache[item.resource.id] = item;
       }
     }
-    return resource;
+    return item;
+  }
+
+  async getResourceById(id: number) {
+    let item: ResourceItem = this._resourceIdsCache[id];
+    if (!item) {
+      item = await this.get('resource.item', null, { id });
+      if (item) {
+        this._resourceIdsCache[id] = item;
+        if (item.resource.keyname) {
+          this._keynamesCache[item.resource.keyname] = item;
+        }
+      }
+    }
+    return item;
   }
 
   async getResourceChildren(opt: {
     keyname?: string;
     resourceId?: number;
+    resource?: string | number;
   }): Promise<ResourceItem[]> {
     let parent = opt.resourceId;
-    if (!opt.keyname && !opt.resourceId) {
+    let keyname = opt.keyname;
+    if (!opt.keyname && !opt.resourceId && !opt.resource) {
       throw new Error('No keyname or resourceId is set');
     }
-    if (opt.keyname) {
-      const item = await this.getResourceByKeyname(opt.keyname);
+    if (opt.resource) {
+      if (typeof opt.resource === 'string') {
+        keyname = opt.resource;
+      }
+    }
+    if (keyname) {
+      const item = await this.getResourceByKeyname(keyname);
       parent = item.resource.id;
     }
     return await this.get('resource.collection', null, {
