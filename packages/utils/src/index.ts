@@ -5,7 +5,9 @@ export * from './Clipboard';
 
 export * from './events';
 export * from './array';
+export * from './string';
 export * from './re';
+export * from './url';
 export * from './sleep';
 export * from './defined';
 export * from './typeHelpers';
@@ -30,9 +32,4 @@ export function bindAll(
     }
     context[fn] = context[fn].bind(context);
   });
-}
-
-export function fixUrlStr(url: string): string {
-  // remove double slash
-  return url.replace(/([^:]\/)\/+/g, '$1');
 }
