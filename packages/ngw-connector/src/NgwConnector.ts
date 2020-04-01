@@ -83,7 +83,7 @@ export class NgwConnector {
     this.emitter.emit('logout');
   }
 
-  getUserInfo(credentials: Credentials): CancelablePromise<UserInfo> {
+  getUserInfo(credentials?: Credentials): CancelablePromise<UserInfo> {
     if (this.user && this.user.id) {
       return CancelablePromise.resolve(this.user);
     }
