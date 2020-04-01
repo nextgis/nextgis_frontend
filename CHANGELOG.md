@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.2](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.1...v0.29.2) (2020-04-01)
+
+
+### Bug Fixes
+
+* **ngw-connector:** improve compatibility with Node ([7b653f5](https://github.com/nextgis/nextgisweb_frontend/commit/7b653f559f7ecb681d0059ac42a9aecb543fbb90))
+
+
+
+
+
 ## [0.29.1](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.0...v0.29.1) (2020-03-30)
 
 
