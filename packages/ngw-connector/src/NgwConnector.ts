@@ -27,6 +27,8 @@ import { loadJSON } from './utils/loadJson';
 import { template } from './utils/template';
 import { ResourceItem } from './types/ResourceItem';
 
+const isNode = typeof module !== 'undefined' && module.exports;
+
 export class NgwConnector {
   emitter = new EventEmitter();
   user?: UserInfo;
@@ -123,7 +125,8 @@ export class NgwConnector {
     credentials = credentials || this.options.auth;
     if (credentials) {
       const { login, password } = credentials;
-      return window.btoa(unescape(encodeURIComponent(`${login}:${password}`)));
+      const str = unescape(encodeURIComponent(`${login}:${password}`));
+      return isNode ? Buffer.from(str).toString('base64') : window.btoa(str);
     }
   }
 
