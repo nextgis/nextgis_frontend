@@ -1,12 +1,12 @@
 {
   "name": "@nextgis/paint",
-  "version": "0.29.1",
+  "version": "0.29.2",
   "description": "Create style for vector layer",
   "main": "lib/paint.js",
   "unpkg": "lib/paint.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/properties-filter": "^0.29.1",
+    "@nextgis/properties-filter": "^0.29.2",
     "geojson": "^0.5.0"
   },
   "devDependencies": {
