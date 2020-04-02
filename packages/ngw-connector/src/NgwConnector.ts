@@ -27,7 +27,8 @@ import { loadJSON } from './utils/loadJson';
 import { template } from './utils/template';
 import { ResourceItem } from './types/ResourceItem';
 
-const isNode = typeof module !== 'undefined' && module.exports;
+const isBrowser =
+  typeof window !== 'undefined' && typeof window.document !== 'undefined';
 
 export class NgwConnector {
   emitter = new EventEmitter();
@@ -61,13 +62,13 @@ export class NgwConnector {
           await this.getUserInfo({ login, password });
         }
       }
-
-      return await this.makeQuery(this.routeStr, {}, {}).then(
-        (route: PyramidRoute) => {
-          this.route = route;
-          return route;
-        }
-      );
+      try {
+        const route: PyramidRoute = await this.makeQuery(this.routeStr, {}, {});
+        this.route = route;
+        return route;
+      } catch (er) {
+        throw new Error(er);
+      }
     }
   }
 
@@ -126,7 +127,7 @@ export class NgwConnector {
     if (credentials) {
       const { login, password } = credentials;
       const str = unescape(encodeURIComponent(`${login}:${password}`));
-      return isNode ? Buffer.from(str).toString('base64') : window.btoa(str);
+      return isBrowser ? window.btoa(str) : Buffer.from(str).toString('base64');
     }
   }
 

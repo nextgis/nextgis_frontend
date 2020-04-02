@@ -21,19 +21,24 @@ export default function loadJSONNode(
   onCancel: (() => void)[]
 ) {
   const request = new Promise((resolve, reject) => {
-    adapterFor(url)
-      .get(url, (resp: any) => {
-        let data = '';
-        resp.on('data', (chunk: any) => {
-          data += chunk;
+    const adapter = adapterFor(url);
+    if (adapter) {
+      adapter
+        .get(url, options, (resp: any) => {
+          let data = '';
+          resp.on('data', (chunk: any) => {
+            data += chunk;
+          });
+          resp.on('end', () => {
+            resolve(JSON.parse(data));
+          });
+        })
+        .on('error', (err: any) => {
+          reject(err);
         });
-        resp.on('end', () => {
-          resolve(JSON.parse(data));
-        });
-      })
-      .on('error', (err: any) => {
-        reject(err);
-      });
+    } else {
+      throw new Error(`Given URL '${url}' is not correct`);
+    }
   });
   return request
     .then((data) => {
@@ -45,7 +50,8 @@ export default function loadJSONNode(
     .catch((er) => {
       if (error) {
         error(er);
+      } else {
+        throw new Error(er);
       }
-      throw new Error(er);
     });
 }
