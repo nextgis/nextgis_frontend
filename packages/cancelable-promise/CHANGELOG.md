@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.3](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.2...v0.29.3) (2020-04-02)
+
+**Note:** Version bump only for package @nextgis/cancelable-promise
+
+
+
+
+
 ## [0.29.1](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.0...v0.29.1) (2020-03-30)
 
 
