@@ -1,8 +1,8 @@
 /**
  * @module vue-ngw-map
  */
-import Vue, { VNode, VNodeData, CreateElement } from 'vue';
-import { Prop } from 'vue-property-decorator';
+import { VNode, VNodeData, CreateElement } from 'vue';
+import { Prop, Vue } from 'vue-property-decorator';
 import Component from 'vue-class-component';
 import NgwMap, { NgwMapOptions, MapAdapter } from '@nextgis/ngw-map';
 
@@ -49,13 +49,15 @@ export class VueNgwMap<M = any> extends Vue {
     return this.ready ? h('div', data, this.$slots.default) : h('div', data);
   }
 
-  private _setNgwMap() {
+  private async _setNgwMap() {
     this.ngwMap = new NgwMap(this.mapAdapter, {
       ...this.$props,
       ...this.mapOptions,
       target: this.$el as HTMLElement,
     });
+    await this.ngwMap.onLoad();
     this.ready = true;
+    this.$emit('load', this.ngwMap);
   }
 }
 
