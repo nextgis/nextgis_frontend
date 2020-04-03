@@ -21,7 +21,7 @@ const typeAlias: { [x: string]: VectorAdapterLayerType } = {
   Circle: 'circle',
 };
 
-export function getFeature(feature: OlFeature): Feature {
+export function getFeature(feature: OlFeature<any>): Feature {
   const geojson = new GeoJSON();
   // @ts-ignore writeFeatureObject return JSON type, need Feature
   return geojson.writeFeatureObject(feature, {
@@ -38,7 +38,7 @@ export function getColor(colorStr: string, opacity?: number): Color {
 }
 
 export function styleFunction(
-  feature: OlFeature,
+  feature: OlFeature<any>,
   paint: Paint = {}
 ): Style | undefined {
   if (isPaintCallback(paint)) {
