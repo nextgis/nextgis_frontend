@@ -10,7 +10,7 @@ import Control from 'ol/control/Control';
 import View, { ViewOptions } from 'ol/View';
 import { MapOptions as OlMapOptions } from 'ol/PluggableMap';
 import { fromLonLat, transformExtent, transform } from 'ol/proj';
-import { Feature, MapBrowserPointerEvent, MapBrowserEvent } from 'ol';
+import { MapBrowserPointerEvent, MapBrowserEvent } from 'ol';
 
 import {
   MapControl,
@@ -34,6 +34,9 @@ import { Attribution } from './controls/Attribution';
 import { PanelControl } from './controls/PanelControl';
 import { createControl } from './controls/createControl';
 import { createButtonControl } from './controls/createButtonControl';
+import BaseEvent from 'ol/events/Event';
+import Feature from 'ol/Feature';
+import RenderFeature from 'ol/render/Feature';
 
 type Layer = Base;
 
@@ -43,7 +46,7 @@ interface PositionMem {
 }
 
 export type ForEachFeatureAtPixelCallback = (
-  feature: Feature,
+  feature: Feature<any>,
   layer: Layer,
   evt: MapBrowserPointerEvent
 ) => void;
@@ -267,7 +270,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
       if (this.map) {
         this.map.forEachFeatureAtPixel(evt.pixel, (feature, layer) => {
           this._forEachFeatureAtPixel.forEach((x) => {
-            x(feature as Feature, layer, evt);
+            x(feature as Feature<any>, layer, evt);
           });
         });
       }
@@ -313,7 +316,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
   private _addMapListeners() {
     const map = this.map;
     if (map) {
-      map.on('click', (evt: MapBrowserEvent) =>
+      map.on('click', (evt: BaseEvent | Event) =>
         this.onMapClick(evt as MapBrowserPointerEvent)
       );
 
