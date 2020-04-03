@@ -30,8 +30,8 @@ export class GeoJsonAdapter
   selected = false;
 
   private vectorSource = new VectorSource();
-  private _features: OlFeature[] = [];
-  private _selectedFeatures: OlFeature[] = [];
+  private _features: OlFeature<any>[] = [];
+  private _selectedFeatures: OlFeature<any>[] = [];
   private _filterFun?: DataLayerFilter<Feature>;
 
   constructor(public map: Map, public options: GeoJsonAdapterOptions) {}
@@ -51,7 +51,7 @@ export class GeoJsonAdapter
       source: this.vectorSource,
       style: (f) => {
         const style = [];
-        const vectorStyle = styleFunction(f as OlFeature, options.paint);
+        const vectorStyle = styleFunction(f as OlFeature<any>, options.paint);
         if (vectorStyle) {
           style.push(vectorStyle);
         }
@@ -199,7 +199,7 @@ export class GeoJsonAdapter
     });
   }
 
-  private _onFeatureClick(feature: OlFeature) {
+  private _onFeatureClick(feature: OlFeature<any>) {
     let isSelected = this._selectedFeatures.indexOf(feature) !== -1;
     if (isSelected) {
       if (this.options && this.options.unselectOnSecondClick) {
@@ -220,7 +220,7 @@ export class GeoJsonAdapter
     }
   }
 
-  private _selectFeature(feature: OlFeature) {
+  private _selectFeature(feature: OlFeature<any>) {
     const options = this.options;
     if (options && !options.multiselect) {
       this._selectedFeatures.forEach((x) => this._unselectFeature(x));
@@ -235,7 +235,7 @@ export class GeoJsonAdapter
     }
   }
 
-  private _unselectFeature(feature: OlFeature) {
+  private _unselectFeature(feature: OlFeature<any>) {
     const index = this._selectedFeatures.indexOf(feature);
     if (index !== -1) {
       this._selectedFeatures.splice(index, 1);
