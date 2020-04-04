@@ -30,6 +30,7 @@ import ControlContainer from '@nextgis/control-container';
 import { TileAdapter } from './layer-adapters/TileAdapter';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 import { TerrainAdapter } from './layer-adapters/TerrainAdapter';
+import { Model3DAdapter } from './layer-adapters/Model3DAdapter';
 
 type Layer = any;
 type Control = any;
@@ -42,6 +43,7 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
     // OSM: OsmAdapter,
     GEOJSON: GeoJsonAdapter,
     TERRAIN: TerrainAdapter,
+    MODEL_3D: Model3DAdapter,
   };
 
   static controlAdapters = {
