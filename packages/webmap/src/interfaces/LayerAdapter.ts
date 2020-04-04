@@ -196,6 +196,12 @@ export interface TileAdapterOptions extends RasterAdapterOptions {
   tileSize?: number;
 }
 
+export interface Model3DOptions extends RasterAdapterOptions {
+  lon?: number;
+  lat?: number;
+  height?: number;
+}
+
 export interface WmsAdapterOptions extends RasterAdapterOptions {
   layers?: string;
   format?: 'image/png' | 'image/jpeg' | string;

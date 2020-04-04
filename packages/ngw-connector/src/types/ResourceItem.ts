@@ -58,8 +58,10 @@ export type ResourceCls =
   | 'lookup_table'
   | 'wmsclient_layer'
   | 'wmsclient_connection'
+  | 'formbuilder_form'
+  // tms branch
   | 'terrain_provider'
-  | 'formbuilder_form';
+  | 'model_3d';
 
 export interface ResourceHierarchy {
   id: number;

@@ -58,6 +58,10 @@ export function getLayerAdapterOptions(
       // `/api/resource/${resourceId}/terrain_provider/{z}/{x}/{y}.terrain`;
       return { url, adapter };
     }
+    if (adapter === 'MODEL_3D') {
+      url = baseUrl + `/api/component/model_3d/${resourceId}/data.glb`;
+      return { url }
+    }
     if (adapter === 'TILE') {
       url =
         baseUrl +
@@ -66,6 +70,6 @@ export function getLayerAdapterOptions(
       return { url, adapter };
     }
   } else {
-    console.log('Options `resourceId` not set');
+    console.log('Option `resourceId` not set');
   }
 }

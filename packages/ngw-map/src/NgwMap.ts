@@ -178,7 +178,7 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<
     const resource = (options as ResourceNgwLayerOptions).resource;
     if (!keyname && !resourceId && !resource) {
       throw new Error(
-        'resourceId or keyname is required parameter to add NGW layer'
+        'resource, resourceId or keyname is required parameter to add NGW layer'
       );
     }
     if (this.options.baseUrl || this.options.baseUrl === '') {
@@ -207,10 +207,9 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<
             }
           }
         }
-
         return layer;
       } catch (er) {
-        console.error("can't add ngw layer", er);
+        console.error("Can't add NGW layer.", er);
       }
     }
   }

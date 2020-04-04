@@ -13,12 +13,15 @@ import { applyMixins } from './utils/utils';
 import { NgwResource } from './NgwResource';
 import { resourceIdFromLayerOptions } from './utils/resourceIdFromLayerOptions';
 
-const styles: ResourceCls[] = [
+const supportCls: ResourceCls[] = [
   'mapserver_style',
   'qgis_vector_style',
   'qgis_raster_style',
   'wmsserver_service',
   'raster_style',
+  'basemap_layer',
+  // 3D
+  'model_3d',
   'terrain_provider',
 ];
 
@@ -52,38 +55,18 @@ export async function createAsyncAdapter(
 ): Promise<Type<ResourceAdapter> | undefined> {
   let adapter: Promise<Type<LayerAdapter> | undefined> | undefined;
   let item: ResourceItem | undefined;
-  try {
-    const adapterType = options.adapter;
-    const resourceId = await resourceIdFromLayerOptions(options, connector);
-    if (resourceId) {
-      item = await connector.get('resource.item', null, { id: resourceId });
 
-      if (item) {
+  const adapterType = options.adapter;
+  const resourceId = await resourceIdFromLayerOptions(options, connector);
+  if (resourceId) {
+    item = await connector.get('resource.item', null, { id: resourceId });
+    const cls = item.resource.cls;
+    if (item) {
+      if (supportCls.indexOf(cls) !== -1) {
         const _options: NgwLayerOptions = { ...options, resourceId };
-        if (item.webmap) {
+        if (cls === 'webmap') {
           adapter = createWebMapAdapter(_options, webMap, baseUrl, connector);
-        } else if (styles.indexOf(item.resource.cls) !== -1) {
-          if (adapterType === 'GEOJSON') {
-            const parentOptions: NgwLayerOptions = {
-              ...options,
-              resourceId: item.resource.parent.id,
-            };
-            adapter = createGeoJsonAdapter(
-              parentOptions as NgwLayerOptions<'GEOJSON'>,
-              webMap,
-              connector,
-              item
-            );
-          } else {
-            adapter = createRasterAdapter(
-              _options,
-              webMap,
-              baseUrl,
-              connector,
-              item.resource.cls
-            );
-          }
-        } else if (item.resource.cls === 'vector_layer') {
+        } else if (cls === 'vector_layer') {
           if (adapterType !== undefined && adapterType !== 'GEOJSON') {
             if (adapterType === 'MVT') {
               adapter = createRasterAdapter(
@@ -91,7 +74,7 @@ export async function createAsyncAdapter(
                 webMap,
                 baseUrl,
                 connector,
-                item.resource.cls
+                cls
               );
             } else {
               return createAdapterFromFirstStyle(
@@ -110,7 +93,7 @@ export async function createAsyncAdapter(
               item
             );
           }
-        } else if (item.resource.cls === 'raster_layer') {
+        } else if (cls === 'raster_layer') {
           return createAdapterFromFirstStyle(
             item.resource.id,
             _options,
@@ -118,7 +101,7 @@ export async function createAsyncAdapter(
             baseUrl,
             connector
           );
-        } else if (item.basemap_layer && item.basemap_layer.qms) {
+        } else if (cls === 'basemap_layer' && item.basemap_layer && item.basemap_layer.qms) {
           adapter = Promise.resolve(QmsKit.utils.createQmsAdapter(webMap));
           adapter.then((x) => {
             if (x && item && item.basemap_layer && item.basemap_layer.qms) {
@@ -128,19 +111,36 @@ export async function createAsyncAdapter(
             }
           });
         }
+        else {
+          if (adapterType === 'GEOJSON') {
+            const parentOptions: NgwLayerOptions = {
+              ...options,
+              resourceId: item.resource.parent.id,
+            };
+            adapter = createGeoJsonAdapter(
+              parentOptions as NgwLayerOptions<'GEOJSON'>,
+              webMap,
+              connector,
+              item
+            );
+          } else {
+            adapter = createRasterAdapter(
+              _options,
+              webMap,
+              baseUrl,
+              connector,
+              cls
+            );
+          }
+        }
       } else {
-        throw new Error(
-          "Can't add NGW layer because Resource item is not found"
-        );
+        throw `Resource class '${cls}' not yet supported.`;
       }
+    } else {
+      throw 'Resource item is not found';
     }
-  } catch (er) {
-    // if (options.adapter === 'GEOJSON') {
-    //   adapter = createGeoJsonAdapter(options, webMap, connector);
-    // } else {
-    //   adapter = createRasterAdapter(options, webMap, baseUrl);
-    // }
   }
+
   if (adapter) {
     return adapter.then((x) => {
       if (x) {
