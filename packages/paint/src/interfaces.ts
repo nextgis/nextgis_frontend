@@ -11,6 +11,8 @@ export interface BasePaint {
   stroke?: boolean;
   strokeColor?: string | Expression;
   strokeOpacity?: number | Expression;
+  /** stroke width TODO: rename to width **/
+  weight?: number | Expression;
 }
 
 export interface CirclePaint extends BasePaint {
@@ -20,7 +22,6 @@ export interface CirclePaint extends BasePaint {
 
 export interface PathPaint extends BasePaint {
   type?: 'path';
-  weight?: number | Expression;
 }
 
 export type GeometryPaint = PathPaint & CirclePaint & PinPaint;
