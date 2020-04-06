@@ -10,7 +10,7 @@ import {
   MapControl,
   CreateControlOptions,
   ButtonControlOptions,
-  ToggleControlOptions
+  ToggleControlOptions,
 } from './MapControl';
 import { MapOptions } from './WebMapApp';
 import { LatLng, LngLatArray, LngLatBoundsArray, Pixel } from './BaseTypes';
