@@ -68,6 +68,7 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
   create(options: MapOptions) {
     this.options = { ...options };
     if (this.options.target) {
+      // default terrain provider
       const ellipsoidProvider = new EllipsoidTerrainProvider();
 
       const viewer = new Viewer(this.options.target, {
@@ -85,7 +86,7 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
         sceneMode: SceneMode.SCENE3D,
         // terrainProvider: createWorldTerrain()
         terrainProvider: ellipsoidProvider,
-        // imageryProvider: tms,
+        imageryProvider: false,
         // mapProjection: new Cesium.WebMercatorProjection()
         // contextOptions: { requestWebgl2: true }
       });
