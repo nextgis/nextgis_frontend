@@ -20,6 +20,7 @@ const supportCls: ResourceCls[] = [
   'wmsserver_service',
   'raster_style',
   'basemap_layer',
+  'vector_layer',
   // 3D
   'model_3d',
   'terrain_provider',
@@ -101,7 +102,11 @@ export async function createAsyncAdapter(
             baseUrl,
             connector
           );
-        } else if (cls === 'basemap_layer' && item.basemap_layer && item.basemap_layer.qms) {
+        } else if (
+          cls === 'basemap_layer' &&
+          item.basemap_layer &&
+          item.basemap_layer.qms
+        ) {
           adapter = Promise.resolve(QmsKit.utils.createQmsAdapter(webMap));
           adapter.then((x) => {
             if (x && item && item.basemap_layer && item.basemap_layer.qms) {
@@ -110,8 +115,7 @@ export async function createAsyncAdapter(
               x.prototype.baseLayer = true;
             }
           });
-        }
-        else {
+        } else {
           if (adapterType === 'GEOJSON') {
             const parentOptions: NgwLayerOptions = {
               ...options,
