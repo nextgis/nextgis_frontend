@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.4](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.3...v0.29.4) (2020-04-10)
+
+
+### Bug Fixes
+
+* **ngw:** return support for vector layer adapter ([25f19ae](https://github.com/nextgis/nextgisweb_frontend/commit/25f19aef91ed361a7fc2fe96123fa4f5833df755))
+
+
+
+
+
 ## [0.29.3](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.2...v0.29.3) (2020-04-02)
 
 **Note:** Version bump only for package @nextgis/ngw-kit
