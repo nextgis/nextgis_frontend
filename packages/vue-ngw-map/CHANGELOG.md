@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.4](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.3...v0.29.4) (2020-04-10)
+
+
+### Features
+
+* **vue:** VueNgwMap add onLoad event ([d2a1ecf](https://github.com/nextgis/nextgisweb_frontend/commit/d2a1ecf296fd001b4307179b70749811ee5e00e1))
+
+
+
+
+
 ## [0.29.3](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.2...v0.29.3) (2020-04-02)
 
 **Note:** Version bump only for package @nextgis/vue-ngw-map

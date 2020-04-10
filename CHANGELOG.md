@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.4](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.3...v0.29.4) (2020-04-10)
+
+
+### Bug Fixes
+
+* **cesium:** remove default imagery provider ([cb7d7d2](https://github.com/nextgis/nextgisweb_frontend/commit/cb7d7d290bf3ebc58eebbdb978150a7e7fff7ace))
+* **ngw:** return support for vector layer adapter ([25f19ae](https://github.com/nextgis/nextgisweb_frontend/commit/25f19aef91ed361a7fc2fe96123fa4f5833df755))
+
+
+### Features
+
+* **utils:** update string util ([2bf9a92](https://github.com/nextgis/nextgisweb_frontend/commit/2bf9a9217ade47a19426d62a80969f9173900651))
+* **vue:** VueNgwMap add onLoad event ([d2a1ecf](https://github.com/nextgis/nextgisweb_frontend/commit/d2a1ecf296fd001b4307179b70749811ee5e00e1))
+
+
+
+
+
 ## [0.29.3](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.2...v0.29.3) (2020-04-02)
 
 
