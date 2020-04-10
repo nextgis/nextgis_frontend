@@ -2,12 +2,12 @@
  * @module cesium-map-adapter
  * UNDER DEVELOPMENT
  */
-import { TileAdapterOptions, LngLatBoundsArray, RasterAdapterOptions } from '@nextgis/webmap';
 import {
-  Model,
-  Transforms,
-  Cartesian3,
-} from 'cesium';
+  TileAdapterOptions,
+  LngLatBoundsArray,
+  RasterAdapterOptions,
+} from '@nextgis/webmap';
+import { Model, Transforms, Cartesian3 } from 'cesium';
 
 import { BaseAdapter } from './BaseAdapter';
 
@@ -16,16 +16,13 @@ const LON = 104;
 
 type Layer = Model;
 
-
 export class Model3DAdapter extends BaseAdapter<RasterAdapterOptions, Layer> {
-
   private _extent?: LngLatBoundsArray = [LON, LAT, LON, LAT];
   private _layer?: Model;
 
   addLayer(opt: TileAdapterOptions) {
-
-    var origin = Cartesian3.fromDegrees(LON, LAT);
-    var modelMatrix = Transforms.eastNorthUpToFixedFrame(origin);
+    const origin = Cartesian3.fromDegrees(LON, LAT);
+    const modelMatrix = Transforms.eastNorthUpToFixedFrame(origin);
 
     this.options = { ...opt };
     this._layer = Model.fromGltf({
@@ -35,7 +32,7 @@ export class Model3DAdapter extends BaseAdapter<RasterAdapterOptions, Layer> {
       scale: 1,
       allowPicking: false,
       debugShowBoundingVolume: false,
-      debugWireframe: false
+      debugWireframe: false,
     });
     this.map.scene.primitives.add(this._layer);
     return this._layer;
@@ -46,7 +43,7 @@ export class Model3DAdapter extends BaseAdapter<RasterAdapterOptions, Layer> {
   }
 
   showLayer(layer: Layer) {
-    layer.show = true
+    layer.show = true;
   }
 
   hideLayer(layer: Layer) {
