@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.4](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.3...v0.29.4) (2020-04-10)
+
+
+### Bug Fixes
+
+* **cesium:** remove default imagery provider ([cb7d7d2](https://github.com/nextgis/nextgisweb_frontend/commit/cb7d7d290bf3ebc58eebbdb978150a7e7fff7ace))
+
+
+
+
+
 ## [0.29.3](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.2...v0.29.3) (2020-04-02)
 
 **Note:** Version bump only for package @nextgis/cesium-map-adapter
