@@ -60,7 +60,7 @@ export function getLayerAdapterOptions(
     }
     if (adapter === 'MODEL_3D') {
       url = baseUrl + `/api/component/model_3d/${resourceId}/data.glb`;
-      return { url }
+      return { url };
     }
     if (adapter === 'TILE') {
       url =
