@@ -10,7 +10,7 @@
     "@nextgis/webmap": "^0.29.4",
     "@types/proj4": "^2.5.0",
     "@types/wellknown": "^0.5.1",
-    "proj4": "^2.6.0",
+    "proj4": "^2.6.1",
     "reproject": "^1.2.5",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",

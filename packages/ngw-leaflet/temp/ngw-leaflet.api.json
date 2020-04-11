@@ -1,0 +1,134 @@
+{
+  "metadata": {
+    "toolPackage": "@microsoft/api-extractor",
+    "toolVersion": "7.7.13",
+    "schemaVersion": 1003,
+    "oldestForwardsCompatibleVersion": 1001
+  },
+  "kind": "Package",
+  "canonicalReference": "@nextgis/ngw-leaflet!",
+  "docComment": "",
+  "name": "@nextgis/ngw-leaflet",
+  "members": [
+    {
+      "kind": "EntryPoint",
+      "canonicalReference": "@nextgis/ngw-leaflet!",
+      "name": "",
+      "members": [
+        {
+          "kind": "Class",
+          "canonicalReference": "@nextgis/ngw-leaflet!NgwLeaflet:class",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class NgwLeaflet extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "NgwMap",
+              "canonicalReference": "@nextgis/ngw-leaflet!NgwMap:class"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "NgwLeaflet",
+          "members": [
+            {
+              "kind": "Constructor",
+              "canonicalReference": "@nextgis/ngw-leaflet!NgwLeaflet:constructor(1)",
+              "docComment": "/**\n * Constructs a new instance of the `NgwLeaflet` class\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "constructor(options: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NgwMapOptions",
+                  "canonicalReference": "@nextgis/ngw-leaflet!NgwMapOptions:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ");"
+                }
+              ],
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@nextgis/ngw-leaflet!NgwLeaflet.create:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "static create: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "(options: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NgwMapOptions",
+                  "canonicalReference": "@nextgis/ngw-leaflet!NgwMapOptions:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<any>) => "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NgwLeaflet",
+                  "canonicalReference": "@nextgis/ngw-leaflet!NgwLeaflet:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "create",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 8
+              },
+              "isStatic": true
+            }
+          ],
+          "extendsTokenRange": {
+            "startIndex": 1,
+            "endIndex": 3
+          },
+          "implementsTokenRanges": []
+        }
+      ]
+    }
+  ]
+}
