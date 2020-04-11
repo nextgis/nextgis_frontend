@@ -10,7 +10,7 @@
     "@nextgis/ngw-map": "^0.29.4",
     "@nextgis/ol-map-adapter": "^0.29.4",
     "events": "^3.1.0",
-    "ol": "^6.2.1"
+    "ol": "^6.3.1"
   },
   "devDependencies": {
     "@nextgis/build-tools": "file:../build-tools"

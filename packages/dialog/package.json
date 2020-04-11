@@ -7,7 +7,7 @@
   "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/webmap": "^0.29.4",
-    "dialog-polyfill": "^0.5.0"
+    "dialog-polyfill": "^0.5.1"
   },
   "devDependencies": {
     "@nextgis/build-tools": "file:../build-tools"
