@@ -26,14 +26,20 @@ export type Operations =
   | 'like'
   | 'ilike';
 
+type Properties = GeoJsonProperties;
+
 /**
  * field, operation, value
  * ['foo', 'eq', 'bar']
  * ['count', 'ge', 20]
  */
-export type PropertyFilter<T extends any = any> = [string, Operations, T];
+export type PropertyFilter<T extends Properties = Properties> = [
+  keyof T | string,
+  Operations,
+  any
+];
 
-export type PropertiesFilter<T extends any = any> = (
+export type PropertiesFilter<T extends Properties = Properties> = (
   | 'all'
   | 'any'
   | PropertyFilter<T>
