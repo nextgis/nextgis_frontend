@@ -5,6 +5,7 @@ export * from './Clipboard';
 
 export * from './events';
 export * from './array';
+export * from './object';
 export * from './string';
 export * from './re';
 export * from './url';

@@ -3,21 +3,29 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'prettier/@typescript-eslint',
-    'plugin:prettier/recommended'
+    'plugin:prettier/recommended',
   ],
   env: {
     browser: true,
     node: true,
     amd: true,
-    es6: true
+    es6: true,
   },
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 2017,
-    sourceType: 'module'
+    sourceType: 'module',
     // project: './tsconfig.json'
   },
   plugins: ['@typescript-eslint', 'prettier'],
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx'],
+      rules: {
+        'no-dupe-class-members': 'off',
+      },
+    },
+  ],
   rules: {
     // 'comma-dangle': [
     //   'error',
@@ -41,8 +49,8 @@ module.exports = {
         ignoreTrailingComments: true,
         ignoreUrls: true,
         ignoreStrings: true,
-        ignoreTemplateLiterals: true
-      }
+        ignoreTemplateLiterals: true,
+      },
     ],
     camelcase: 'off',
     '@typescript-eslint/no-use-before-define': 0,
@@ -50,20 +58,20 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': [
       1,
       {
-        args: 'none'
-      }
+        args: 'none',
+      },
     ],
     '@typescript-eslint/camelcase': [
       'error',
       {
-        properties: 'never'
-      }
+        properties: 'never',
+      },
     ],
     '@typescript-eslint/explicit-member-accessibility': [
       'error',
       {
-        accessibility: 'off'
-      }
+        accessibility: 'off',
+      },
     ],
     // '@typescript-eslint/array-type': ['error', { default: 'array-simple' }],
     '@typescript-eslint/no-explicit-any': 0,
@@ -76,8 +84,8 @@ module.exports = {
       {
         allowExpressions: true,
         allowTypedFunctionExpressions: true,
-        allowHigherOrderFunctions: true
-      }
-    ]
-  }
+        allowHigherOrderFunctions: true,
+      },
+    ],
+  },
 };
