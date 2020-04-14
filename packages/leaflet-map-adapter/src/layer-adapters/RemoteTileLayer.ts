@@ -4,10 +4,10 @@ import { callAjax } from './layersUtility';
 export class RemoteTileLayer<O extends TileLayerOptions = TileLayerOptions> {
   options!: O;
 
-  _removeTile(key: any) {
-    // @ts-ignore
-    super._removeTile(key);
-  }
+  // _removeTile(key: any) {
+  //   // @ts-ignore
+  //   super._removeTile(key);
+  // }
 
   createTile(
     coords: object,
