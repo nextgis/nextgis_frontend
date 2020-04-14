@@ -140,11 +140,12 @@ export class NgwConnector {
   }
 
   async getResourceByKeyname(keyname: string) {
-    let item: ResourceItem = this._keynamesCache['keyname'];
+    let item: ResourceItem = this._keynamesCache[keyname];
     if (!item) {
       const resources = await this.get('resource.search', null, { keyname });
       item = resources[0];
       if (item) {
+        item = await this.getResourceById(item.resource.id);
         this._keynamesCache[keyname] = item;
         this._resourceIdsCache[item.resource.id] = item;
       }

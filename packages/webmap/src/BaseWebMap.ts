@@ -147,7 +147,7 @@ export class BaseWebMap<
    * Destroys WebMap, MapAdapter, clears all layers and turn off all event listeners
    */
   destroy() {
-    this._removeEventsListeners();
+    this._removeEventListeners();
     clearObject(this._emitStatusEvent);
     if (this.mapAdapter.destroy) {
       this.mapAdapter.destroy();
@@ -478,7 +478,7 @@ export class BaseWebMap<
     });
   }
 
-  private _removeEventsListeners(): void {
+  private _removeEventListeners(): void {
     Object.entries(this._mapEvents).forEach(([x, event]) => {
       this.mapAdapter.emitter.off(x, event);
     });
