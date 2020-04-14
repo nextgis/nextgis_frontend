@@ -165,7 +165,7 @@ export abstract class ResourceStore<
       if (property) {
         if (x.datatype === 'STRING') {
           value = String(property);
-        } else if (x.datatype === 'BIGINT') {
+        } else if (x.datatype === 'BIGINT' || x.datatype === 'INTEGER') {
           value = parseInt(property, 10);
         } else if (x.datatype === 'REAL') {
           value = parseFloat(property);
