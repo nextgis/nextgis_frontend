@@ -119,7 +119,12 @@ export interface LookupTableResource {
   items: Record<string, string>;
 }
 
-export type ResourceItemDatatype = 'STRING' | 'REAL' | 'DATE' | 'BIGINT';
+export type ResourceItemDatatype =
+  | 'STRING'
+  | 'REAL'
+  | 'DATE'
+  | 'BIGINT'
+  | 'INTEGER';
 
 export interface FeatureLayerField {
   datatype: ResourceItemDatatype;
