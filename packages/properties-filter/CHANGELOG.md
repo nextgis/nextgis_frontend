@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.5](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.4...v0.29.5) (2020-04-15)
+
+
+### Features
+
+* eslint no-dupe off; object utils; propertiesFilter generic ([20200e7](https://github.com/nextgis/nextgisweb_frontend/commit/20200e79a3c7e8e45f51e6999864b9fde47d9b54))
+
+
+
+
+
 ## [0.29.4](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.3...v0.29.4) (2020-04-10)
 
 **Note:** Version bump only for package @nextgis/properties-filter
