@@ -22,6 +22,7 @@ import {
   DeleteRequestItemsResponseMap,
   PutRequestItemsResponseMap,
   RequestItemsParams,
+  ResourceDefinition,
 } from './interfaces';
 import { loadJSON } from './utils/loadJson';
 import { template } from './utils/template';
@@ -131,7 +132,7 @@ export class NgwConnector {
     }
   }
 
-  async getResource(resource: string | number) {
+  async getResource(resource: ResourceDefinition) {
     if (typeof resource === 'string') {
       return this.getResourceByKeyname(resource);
     } else if (typeof resource === 'number') {

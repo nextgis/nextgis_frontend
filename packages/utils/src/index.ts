@@ -1,7 +1,7 @@
 /**
  * @module utils
  */
-export * from './Clipboard';
+export * from './platform';
 
 export * from './events';
 export * from './array';
@@ -13,8 +13,9 @@ export * from './sleep';
 export * from './defined';
 export * from './typeHelpers';
 export * from './applyMixins';
-export { deepmerge } from './deepmerge';
-export { debounce } from './debounce';
+export * from './deepmerge';
+export * from './debounce';
+export * from './Clipboard';
 /**
  * Given an array of member function names as strings, replace all of them
  * with bound versions that will always refer to `context` as `this`. This

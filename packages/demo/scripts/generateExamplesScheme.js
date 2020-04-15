@@ -6,9 +6,10 @@ const { join } = require('path');
 // const converter = new showdown.Converter({
 //   extensions: [showdownHighlight]
 // });
-const isDirectory = source => lstatSync(source).isDirectory();
+const isDirectory = (source) => lstatSync(source).isDirectory();
 
-const getPriority = package => (package._priority !== undefined ? package._priority : 100);
+const getPriority = (package) =>
+  package._priority !== undefined ? package._priority : 100;
 
 function getIdFromPath(id) {
   id = id.replace(/\.[/\\\\]/g, '');
@@ -22,7 +23,9 @@ function replaceAbsolutePathToCdn(line, packages) {
     let newLine = line;
     const emptyCharsCount = line.search(/\S/);
 
-    const isLibPath = line.match(/(?:src|href)=("|').*?(lib\/).*?([-\w.]+)\.((?:js|css))/);
+    const isLibPath = line.match(
+      /(?:src|href)=("|').*?(lib\/).*?([-\w.]+)\.((?:js|css))/
+    );
 
     if (isLibPath) {
       newLine = '';
@@ -31,7 +34,8 @@ function replaceAbsolutePathToCdn(line, packages) {
       if (lineLibName) {
         for (let fry = 0; fry < packages.length; fry++) {
           const package = packages[fry] && packages[fry].package;
-          const matchMain = package.main && package.main.match(/([-\w.]+)\.(?:js|css)/);
+          const matchMain =
+            package.main && package.main.match(/([-\w.]+)\.(?:js|css)/);
           if (matchMain) {
             const packageLibName = matchMain[1];
 
@@ -54,7 +58,7 @@ function prepareHtml(html, package, packages) {
   const newHtml = [];
 
   // comment direct to lib script
-  html.split('\n').forEach(line => {
+  html.split('\n').forEach((line) => {
     line = replaceAbsolutePathToCdn(line, packages);
     newHtml.push(line);
   });
@@ -72,7 +76,7 @@ function getReadme(libPath) {
       // html: converter.makeHtml(readmeMd),
       md: readmeMd,
       name: 'README',
-      page: 'readme'
+      page: 'readme',
     });
   }
   return readme;
@@ -83,27 +87,33 @@ function getExamples(libPath, package, packages) {
   const examples = [];
   if (existsSync(examplesPath) && isDirectory(examplesPath)) {
     readdirSync(examplesPath)
-      .map(name => join(examplesPath, name))
+      .map((name) => join(examplesPath, name))
       .filter(isDirectory)
-      .forEach(examplePath => {
+      .forEach((examplePath) => {
         const id = getIdFromPath(examplePath);
         if (existsSync(examplePath) && isDirectory(examplePath)) {
           const htmlPath = join(examplePath, 'index.html');
           const metaPath = join(examplePath, 'index.json');
           if (existsSync(htmlPath) && existsSync(metaPath)) {
             const meta = JSON.parse(readFileSync(metaPath, 'utf8'));
-            const html = prepareHtml(readFileSync(htmlPath, 'utf8'), package, packages);
+            const html = prepareHtml(
+              readFileSync(htmlPath, 'utf8'),
+              package,
+              packages
+            );
 
             const filteredPackages = !meta.ngwMaps
               ? []
-              : packages.filter(x => {
-                  return meta.ngwMaps.indexOf(x.name.replace('@nextgis/', '')) !== -1;
+              : packages.filter((x) => {
+                  return (
+                    meta.ngwMaps.indexOf(x.name.replace('@nextgis/', '')) !== -1
+                  );
                 });
-            const ngwMaps = filteredPackages.map(x => {
+            const ngwMaps = filteredPackages.map((x) => {
               return {
                 name: x.package.name.replace('@nextgis/', ''),
                 version: x.package.version,
-                main: x.package.main
+                main: x.package.main,
               };
             });
             const example = {
@@ -112,7 +122,7 @@ function getExamples(libPath, package, packages) {
               page: 'example',
               name: meta.name,
               description: meta.description,
-              ngwMaps
+              ngwMaps,
             };
             examples.push(example);
           }
@@ -134,7 +144,7 @@ function generate(source = '../') {
     // { libPath, package }
   ];
 
-  readdirSync(source).forEach(name => {
+  readdirSync(source).forEach((name) => {
     const libPath = join(source, name);
 
     // find packages
@@ -145,7 +155,7 @@ function generate(source = '../') {
         packages.push({
           libPath,
           package,
-          name
+          name,
         });
       }
     }
@@ -166,7 +176,7 @@ function generate(source = '../') {
           name,
           id: getIdFromPath(libPath),
           children: pages,
-          priority: getPriority(package)
+          priority: getPriority(package),
         };
         items.push(item);
       }
@@ -176,12 +186,12 @@ function generate(source = '../') {
     // console.log(new Array(n + 1).join('-') + item.name);
     if (item.children && item.children.length) {
       n++;
-      item.children.forEach(x => {
+      item.children.forEach((x) => {
         log(x, n);
       });
     }
   };
-  items.forEach(x => log(x, 1));
+  items.forEach((x) => log(x, 1));
   return items;
 }
 
