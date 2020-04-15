@@ -1,14 +1,14 @@
 {
   "name": "@nextgis/leaflet-map-adapter",
-  "version": "0.29.4",
+  "version": "0.29.5",
   "_priority": 15,
   "description": "",
   "main": "lib/leaflet-map-adapter.js",
   "unpkg": "lib/leaflet-map-adapter.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/paint": "^0.29.4",
-    "@nextgis/webmap": "^0.29.4",
+    "@nextgis/paint": "^0.29.5",
+    "@nextgis/webmap": "^0.29.5",
     "@types/events": "^3.0.0",
     "@types/leaflet": "^1.5.12",
     "@types/node": "^13.11.1",

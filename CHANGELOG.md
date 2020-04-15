@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.5](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.4...v0.29.5) (2020-04-15)
+
+
+### Bug Fixes
+
+* **leaflet:** RemoteTileLayer mixin removeTile method ([af72b2b](https://github.com/nextgis/nextgisweb_frontend/commit/af72b2b420cb951f52b6ce56701f3e3bbbdb475d))
+* **ngw:** create async adapter for webmap ([40aeb07](https://github.com/nextgis/nextgisweb_frontend/commit/40aeb07f4ddce2462ea82b30f8b91009535e8531))
+* **ngw-connector:** getResourceByKeyname cache ([20fae26](https://github.com/nextgis/nextgisweb_frontend/commit/20fae266d240d51af7fe9e9a9af4f84d286f8cc2))
+
+
+### Features
+
+* eslint no-dupe off; object utils; propertiesFilter generic ([20200e7](https://github.com/nextgis/nextgisweb_frontend/commit/20200e79a3c7e8e45f51e6999864b9fde47d9b54))
+
+
+### Performance Improvements
+
+* **ngw-connector:** getResourceByKeyname one request ([23e0706](https://github.com/nextgis/nextgisweb_frontend/commit/23e0706d22502ec14a4383abe87b9bae2e4e8d26))
+
+
+
+
+
 ## [0.29.4](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.3...v0.29.4) (2020-04-10)
 
 
