@@ -23,6 +23,8 @@ export interface NgwExtent {
   };
 }
 
+export type ResourceDefinition = string | number;
+
 export interface FileUploadResp {
   upload_meta: FileMeta[];
 }

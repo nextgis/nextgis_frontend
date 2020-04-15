@@ -1,0 +1,42 @@
+{
+  "name": "@nextgis/ngw-orm",
+  "version": "0.29.4",
+  "description": "NextGIS Web Object-Relational Mapping",
+  "main": "lib/ngw-orm.js",
+  "unpkg": "lib/ngw-orm.js",
+  "types": "lib/ngw-orm/src/index.d.ts",
+  "dependencies": {
+    "@nextgis/utils": "^0.29.4",
+    "@nextgis/ngw-connector": "^0.29.4",
+    "reflect-metadata": "^0.1.13"
+  },
+  "devDependencies": {
+    "@nextgis/build-tools": "file:../build-tools"
+  },
+  "scripts": {
+    "clean": "rimraf ./lib",
+    "dev": "npm run clean && webpack --config ./webpack.config.js --progress",
+    "build": "npm run dev -- --mode=production",
+    "prod": "npm run build",
+    "watch": "npm run dev -- --watch"
+  },
+  "keywords": [
+    "NextGIS",
+    "MAP"
+  ],
+  "author": "NextGIS",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib"
+  ],
+  "license": "LGPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nextgis/nextgisweb_frontend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nextgis/nextgisweb_frontend/issues"
+  }
+}
