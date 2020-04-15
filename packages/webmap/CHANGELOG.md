@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.5](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.4...v0.29.5) (2020-04-15)
+
+
+### Bug Fixes
+
+* **ngw-connector:** getResourceByKeyname cache ([20fae26](https://github.com/nextgis/nextgisweb_frontend/commit/20fae266d240d51af7fe9e9a9af4f84d286f8cc2))
+
+
+
+
+
 ## [0.29.4](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.3...v0.29.4) (2020-04-10)
 
 
