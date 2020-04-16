@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/ngw-orm",
-  "version": "0.29.6",
+  "version": "0.29.7",
   "description": "NextGIS Web Object-Relational Mapping",
   "main": "lib/ngw-orm.js",
   "unpkg": "lib/ngw-orm.js",
