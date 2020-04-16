@@ -1,13 +1,13 @@
 {
   "name": "@nextgis/vue-ngw-mapbox",
-  "version": "0.29.5",
+  "version": "0.29.6",
   "description": "Development tools",
   "main": "lib/vue-ngw-mapbox.js",
   "unpkg": "lib/vue-ngw-mapbox.js",
   "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/mapboxgl-map-adapter": "^0.29.5",
-    "@nextgis/vue-ngw-map": "^0.29.5",
+    "@nextgis/vue-ngw-map": "^0.29.6",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
     "vue-property-decorator": "^8.4.1",
