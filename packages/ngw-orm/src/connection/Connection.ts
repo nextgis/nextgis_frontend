@@ -87,7 +87,7 @@ export class Connection {
         options
       );
       if (metadata) {
-        await this.driver.post('resource.collection', {
+        return await this.driver.post('resource.collection', {
           data: metadata,
         });
       }
