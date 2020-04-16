@@ -1,4 +1,7 @@
-import { RequestOptions, RequestMethods } from '../interfaces';
+import {
+  RequestOptions as NgwRequestOptions,
+  RequestMethods,
+} from '../interfaces';
 
 // the 'eval' is used to exclude packages from the webpack bundle for browser
 const url = eval('require("url")');
@@ -10,32 +13,59 @@ const adapterFor = (inputUrl: string) => {
     'http:': http,
     'https:': https,
   };
-  return adapters[url.parse(inputUrl).protocol];
+  const protocol = url.parse(inputUrl).protocol || 'https:';
+  return adapters[protocol];
 };
 
 export default function loadJSONNode(
   url: string,
   callback: (...args: any[]) => any,
-  options: RequestOptions<RequestMethods> | undefined,
+  options: NgwRequestOptions<RequestMethods> = {},
   error: (reason?: any) => void,
   onCancel: (() => void)[]
 ) {
   const request = new Promise((resolve, reject) => {
     const adapter = adapterFor(url);
     if (adapter) {
-      adapter
-        .get(url, options, (resp: any) => {
-          let data = '';
-          resp.on('data', (chunk: any) => {
-            data += chunk;
-          });
-          resp.on('end', () => {
-            resolve(JSON.parse(data));
-          });
-        })
-        .on('error', (err: any) => {
-          reject(err);
+      const requestOpt = {
+        headers: options.headers || {},
+        method: options.method,
+      };
+      const body =
+        typeof options.data === 'string'
+          ? options.data
+          : JSON.stringify(options.data);
+      const req = adapter.request(url, requestOpt, (resp: any) => {
+        let data = '';
+        resp.on('data', (chunk: any) => {
+          data += chunk;
         });
+        resp.on('end', () => {
+          if (data) {
+            let json: Record<string, any> | undefined;
+            try {
+              json = JSON.parse(data);
+              if (json && json.status_code && json.status_code) {
+                throw new Error(json.message);
+              }
+            } catch (er) {
+              reject(er);
+              // throw new Error(er);
+            }
+            if (json !== undefined) {
+              resolve(json);
+            }
+          }
+          reject('no data');
+        });
+      });
+      req.on('error', (err: any) => {
+        reject(err);
+      });
+      if (body) {
+        req.write(body);
+      }
+      req.end();
     } else {
       throw new Error(`Given URL '${url}' is not correct`);
     }
