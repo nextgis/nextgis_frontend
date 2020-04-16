@@ -24,7 +24,7 @@ export abstract class ResourceStore<
 
   foreignResources: { [key in ResourceDef]: ForeignResource } = {};
 
-  lookupTableResourceGroupId?: number;
+  lookupTableResourceGroupId?: number | string;
   lookupTables: LookupTables = {};
 
   resourceItem: ResourceStoreItem<P>[] = [];
@@ -133,8 +133,10 @@ export abstract class ResourceStore<
         const lookupTable = x.lookup_table;
         if (lookupTable) {
           const keyName = x.resource.keyname;
-          const fieldName = keyName.replace(/^lt_/, '');
-          lookupTables[fieldName] = lookupTable.items;
+          if (keyName) {
+            const fieldName = keyName.replace(/^lt_/, '');
+            lookupTables[fieldName] = lookupTable.items;
+          }
         }
       });
     }
