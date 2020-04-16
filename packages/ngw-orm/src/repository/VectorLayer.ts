@@ -1,17 +1,23 @@
-import { objectAssign } from '@nextgis/utils';
-import NgwConnector from '@nextgis/ngw-connector';
-import { ObjectType } from '../common/ObjectType';
-import { DeepPartial } from '../common/DeepPartial';
-import { UpdateOptions } from './UpdateOptions';
-import { FindConditions } from '../find-options/FindConditions';
-import { FindManyOptions } from '../find-options/FindManyOptions';
-import { FindOneOptions } from '../find-options/FindOneOptions';
+import { ResourceItem } from '@nextgis/ngw-connector';
+// import { objectAssign } from '@nextgis/utils';
+// import NgwConnector from '@nextgis/ngw-connector';
+// import { ObjectType } from '../common/ObjectType';
+// import { DeepPartial } from '../common/DeepPartial';
+// import { UpdateOptions } from './UpdateOptions';
+// import { FindConditions } from '../find-options/FindConditions';
+// import { FindManyOptions } from '../find-options/FindManyOptions';
+// import { FindOneOptions } from '../find-options/FindOneOptions';
 import { BaseResource } from './BaseResource';
+import { SyncOptions } from './SyncOptions';
+import { Connection } from '../connection/Connection';
+import { ConnectionOptions } from '../connection/ConnectionOptions';
+import { getMetadataArgsStorage } from '..';
+import { VectorLayerMetadataArgs } from '../metadata-args/VectorLayerMetadataArgs';
 
-type QueryDeepPartialEntity<T> = DeepPartial<T>;
-type InsertResult = any;
-type DeleteResult = any;
-type UpdateResult = any;
+// type QueryDeepPartialEntity<T> = DeepPartial<T>;
+// type InsertResult = any;
+// type DeleteResult = any;
+// type UpdateResult = any;
 
 /**
  * Base abstract entity for all entities, used in ActiveRecord patterns.
