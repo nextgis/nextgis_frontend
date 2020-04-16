@@ -104,32 +104,6 @@ export class Connection {
     )[0] as VectorLayerMetadataArgs;
     const fields = getMetadataArgsStorage().filterColumns(resource);
     if (table) {
-      // const resourceItem: DeepPartial<VectorResourceSyncItem> = {
-      //   resource: {
-      //     cls: 'vector_layer',
-      //     parent: {
-      //       id: parent,
-      //     },
-      //     display_name: options.display_name || table.display_name,
-      //     keyname: options.keyname || table.keyname,
-      //     description: options.description || table.description,
-      //   },
-      //   resmeta: {
-      //     items: {},
-      //   },
-      //   vector_layer: {
-      //     srs: { id: 3857 },
-      //     geometry_type: table.geometry_type,
-      //     fields: fields.map((x) => ({
-      //       keyname: x.propertyName,
-      //       datatype: x.options.datatype,
-      //       // grid_visibility: x.options.grid_visibility,
-      //       // label_field: x.options.label_field,
-      //       display_name: x.options.display_name,
-      //     })),
-      //   },
-      // };
-      // return resourceItem;
       return {
         resource: {
           cls: 'vector_layer',
@@ -145,7 +119,7 @@ export class Connection {
         },
         vector_layer: {
           srs: { id: 3857 },
-          geometry_type: 'POINT',
+          geometry_type: table.geometry_type,
           fields: fields.map((x) => ({
             keyname: x.propertyName,
             datatype: x.options.datatype,
