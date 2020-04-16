@@ -4,7 +4,7 @@
   "description": "NextGIS Web Object-Relational Mapping",
   "main": "lib/ngw-orm.js",
   "unpkg": "lib/ngw-orm.js",
-  "types": "lib/ngw-orm/src/index.d.ts",
+  "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/ngw-connector": "^0.29.6",
     "@nextgis/utils": "^0.29.5",
