@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.9](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.8...v0.29.9) (2020-04-16)
+
+
+### Bug Fixes
+
+* **ngw-orm:** vector resource geometry ([126dea7](https://github.com/nextgis/nextgisweb_frontend/commit/126dea73e73cf161ce6a6e88b08dde748d53ad09))
+
+
+
+
+
 ## [0.29.8](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.7...v0.29.8) (2020-04-16)
 
 
