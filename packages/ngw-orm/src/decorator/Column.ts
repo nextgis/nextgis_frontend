@@ -9,6 +9,11 @@ import { ColumnMetadataArgs } from '../metadata-args/ColumnMetadataArgs';
  * decorator will be persisted to the database when entity be saved.
  */
 export function Column(): Function;
+/**
+ * Column decorator is used to mark a specific class property as a table column. Only properties decorated with this
+ * decorator will be persisted to the database when entity be saved.
+ */
+export function Column(type: ColumnType): Function;
 
 /**
  * Column decorator is used to mark a specific class property as a table column.
@@ -21,16 +26,13 @@ export function Column(options: ColumnOptions): Function;
  * Only properties decorated with this decorator will be persisted to the database when entity be saved.
  */
 export function Column(
-  typeOrOptions?: ((type?: any) => Function) | ColumnType | ColumnOptions,
+  typeOrOptions?: ColumnType | ColumnOptions,
   options?: ColumnOptions
 ): Function {
   return function (object: Record<string, any>, propertyName: string) {
     // normalize parameters
     let type: ColumnType | undefined;
-    if (
-      typeof typeOrOptions === 'string' ||
-      typeOrOptions instanceof Function
-    ) {
+    if (typeof typeOrOptions === 'string') {
       type = typeOrOptions as ColumnType;
     } else if (typeOrOptions) {
       options = typeOrOptions as ColumnOptions;
