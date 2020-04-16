@@ -1,4 +1,4 @@
-import { ResourceCls } from 'packages/ngw-connector/src';
+import { ResourceCls } from '@nextgis/ngw-connector';
 
 /**
  * Describes all resource's options.
@@ -13,6 +13,6 @@ export interface BaseResourceOptions {
   /**
    * Human readable name
    */
-  display_name?: string;
+  display_name: string;
   description?: string;
 }

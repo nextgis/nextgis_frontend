@@ -5,6 +5,7 @@ import { DeepPartial } from '../common/DeepPartial';
 import { Connection } from '../connection/Connection';
 import { ConnectionOptions } from '../connection/ConnectionOptions';
 import { CannotExecuteResourceNotExistError } from '../error/CannotExecuteResourceNotExistError';
+import { SyncOptions } from './SyncOptions';
 
 type QueryDeepPartialEntity<T> = DeepPartial<T>;
 type InsertResult = any;
@@ -22,10 +23,7 @@ export class BaseResource {
     resourceOptions: ResourceDefinition,
     connectionOrOptions: Connection | ConnectionOptions
   ) {
-    const connection =
-      connectionOrOptions instanceof Connection
-        ? connectionOrOptions
-        : Connection.create(connectionOrOptions);
+    const connection = Connection.create(connectionOrOptions);
     await connection.connect();
     const item = await connection.driver.getResource(resourceOptions);
     if (item) {
@@ -38,7 +36,10 @@ export class BaseResource {
     }
   }
 
-  static upload() {
+  static sync(
+    options: SyncOptions,
+    connectionOrOptions: Connection | ConnectionOptions
+  ) {
     console.log('upload');
   }
 

@@ -7,7 +7,8 @@ export function Resource(options: ResourceOptions): Function {
     getMetadataArgsStorage().resources.push({
       target: target,
       type: 'vector_layer',
-      options: options,
+      ...options,
+      options,
     } as ResourceMetadataArgs);
   };
 }
