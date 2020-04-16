@@ -71,16 +71,18 @@ export interface ResourceHierarchy {
 }
 
 export interface Resource {
-  id: number;
   cls: ResourceCls;
-  parent: ResourceHierarchy;
+  id: number;
+  parent: {
+    id: number;
+  };
   owner_user: {
     id: number;
   };
   permissions: Permission[];
-  keyname: any;
-  display_name: string;
-  description: string;
+  keyname?: string | null;
+  display_name: string | null;
+  description?: string | null;
   children: boolean;
   interfaces: any[];
   scopes: string[];
@@ -123,6 +125,8 @@ export type ResourceItemDatatype =
   | 'STRING'
   | 'REAL'
   | 'DATE'
+  | 'TIME'
+  | 'DATETIME'
   | 'BIGINT'
   | 'INTEGER';
 

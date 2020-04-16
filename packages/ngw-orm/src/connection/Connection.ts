@@ -1,6 +1,12 @@
-import NgwConnector from '@nextgis/ngw-connector';
-import { objectAssign } from '@nextgis/utils';
+import NgwConnector, { ResourceItem } from '@nextgis/ngw-connector';
+import { objectAssign, Type } from '@nextgis/utils';
 import { ConnectionOptions } from './ConnectionOptions';
+import { SyncOptions } from '../repository/SyncOptions';
+import { BaseResource } from '../repository/BaseResource';
+import { getMetadataArgsStorage } from '..';
+import { VectorLayerMetadataArgs } from '../metadata-args/VectorLayerMetadataArgs';
+import { DeepPartial } from '../common/DeepPartial';
+import { VectorResourceSyncItem } from './VectorResourceSyncItem';
 
 /**
  * Connection is a single NGW connection.
@@ -37,7 +43,10 @@ export class Connection {
     Connection.connections.push(this);
   }
 
-  static create(options: ConnectionOptions) {
+  static create(options: Connection | ConnectionOptions) {
+    if (options instanceof Connection) {
+      return options;
+    }
     const exist = Connection.connections.find((connection) => {
       const eqUrl = connection.baseUrl === options.baseUrl;
       if (eqUrl) {
@@ -54,6 +63,11 @@ export class Connection {
     return new Connection(options);
   }
 
+  static connect(options: Connection | ConnectionOptions) {
+    const connection = Connection.create(options);
+    return connection.connect();
+  }
+
   async connect(): Promise<this> {
     // connect to the database via its driver
     await this.driver.connect();
@@ -62,5 +76,88 @@ export class Connection {
     objectAssign(this, { isConnected: true });
 
     return this;
+  }
+
+  async syncResource(resource: Type<BaseResource>, options: SyncOptions) {
+    const parent = await this.driver.getResource(options.parent);
+    if (parent) {
+      const metadata = this.getResourceMetadata(
+        resource,
+        parent.resource.id,
+        options
+      );
+      if (metadata) {
+        const res = await this.driver.post('resource.collection', {
+          data: metadata,
+        });
+        console.log(res);
+      }
+    }
+    console.log('upload');
+  }
+
+  getResourceMetadata(
+    resource: Type<BaseResource>,
+    parent: number,
+    options: SyncOptions
+  ): DeepPartial<VectorResourceSyncItem> | undefined {
+    const table = getMetadataArgsStorage().filterTables(
+      resource
+    )[0] as VectorLayerMetadataArgs;
+    const fields = getMetadataArgsStorage().filterColumns(resource);
+    if (table) {
+      // const resourceItem: DeepPartial<VectorResourceSyncItem> = {
+      //   resource: {
+      //     cls: 'vector_layer',
+      //     parent: {
+      //       id: parent,
+      //     },
+      //     display_name: options.display_name || table.display_name,
+      //     keyname: options.keyname || table.keyname,
+      //     description: options.description || table.description,
+      //   },
+      //   resmeta: {
+      //     items: {},
+      //   },
+      //   vector_layer: {
+      //     srs: { id: 3857 },
+      //     geometry_type: table.geometry_type,
+      //     fields: fields.map((x) => ({
+      //       keyname: x.propertyName,
+      //       datatype: x.options.datatype,
+      //       // grid_visibility: x.options.grid_visibility,
+      //       // label_field: x.options.label_field,
+      //       display_name: x.options.display_name,
+      //     })),
+      //   },
+      // };
+      // return resourceItem;
+      return {
+        resource: {
+          cls: 'vector_layer',
+          parent: {
+            id: parent,
+          },
+          display_name: options.display_name || table.display_name,
+          keyname: options.keyname || table.keyname,
+          description: options.description || table.description || null,
+        },
+        resmeta: {
+          items: {},
+        },
+        vector_layer: {
+          srs: { id: 3857 },
+          geometry_type: 'POINT',
+          fields: fields.map((x) => ({
+            keyname: x.propertyName,
+            datatype: x.options.datatype,
+            grid_visibility: x.options.grid_visibility,
+            label_field: x.options.label_field,
+            display_name: x.options.display_name,
+          })),
+        },
+      };
+    }
+    return;
   }
 }

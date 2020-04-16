@@ -39,13 +39,24 @@ export function Column(
     if (!options) options = {} as ColumnOptions;
 
     // if type is not given explicitly then try to guess it
-    const reflectMetadataType =
+    const reflectMetadata =
       Reflect && (Reflect as any).getMetadata
         ? (Reflect as any).getMetadata('design:type', object, propertyName)
         : undefined;
-    if (!type && reflectMetadataType)
+    if (!type && reflectMetadata) {
+      const reflectMetadataType = reflectMetadata.name;
       // if type is not given explicitly then try to guess it
-      type = reflectMetadataType;
+      const alias: Record<string, ColumnType> = {
+        String: 'STRING',
+        Number: 'REAL',
+        Ddate: 'DATE',
+        Boolean: 'INTEGER',
+      };
+      const type = alias[reflectMetadataType];
+      if (type) {
+        options.datatype = type;
+      }
+    }
 
     // check if there is no type in column options then set type from first function argument, or guessed one
     if (!options.datatype && type) options.datatype = type;
