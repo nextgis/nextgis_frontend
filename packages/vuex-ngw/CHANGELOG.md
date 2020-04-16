@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.8](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.7...v0.29.8) (2020-04-16)
+
+
+### Bug Fixes
+
+* **ngw-orm:** return sync resource ([d65548b](https://github.com/nextgis/nextgisweb_frontend/commit/d65548bcfded0a4fe8d5e7733b171fb8236af25f))
+
+
+
+
+
 ## [0.29.6](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.5...v0.29.6) (2020-04-16)
 
 **Note:** Version bump only for package @nextgis/vuex-ngw
