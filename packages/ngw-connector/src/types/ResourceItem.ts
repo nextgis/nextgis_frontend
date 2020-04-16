@@ -81,7 +81,7 @@ export interface Resource {
   };
   permissions: Permission[];
   keyname?: string | null;
-  display_name: string | null;
+  display_name: string;
   description?: string | null;
   children: boolean;
   interfaces: any[];
