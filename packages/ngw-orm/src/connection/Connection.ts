@@ -87,13 +87,11 @@ export class Connection {
         options
       );
       if (metadata) {
-        const res = await this.driver.post('resource.collection', {
+        await this.driver.post('resource.collection', {
           data: metadata,
         });
-        console.log(res);
       }
     }
-    console.log('upload');
   }
 
   getResourceMetadata(
