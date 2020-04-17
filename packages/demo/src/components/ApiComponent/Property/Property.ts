@@ -5,7 +5,7 @@ import Comment from '../Comment/Comment.vue';
 import * as utility from '../utility';
 
 @Component({
-  components: { Reference, Comment }
+  components: { Reference, Comment },
 })
 export class Property extends Vue {
   @Prop() item: PropertyItem | ApiItem;
@@ -22,7 +22,7 @@ export class Property extends Vue {
 
   get defaultValue() {
     const tags = this.item.comment && this.item.comment.tags;
-    const defTag = tags && tags.find(x => x.tag === 'default');
+    const defTag = tags && tags.find((x) => x.tag === 'default');
     if (defTag) {
       return defTag.text;
     }

@@ -4,7 +4,7 @@ import ApiOption from '../ApiOption/ApiOption.vue';
 import { createHref } from '../utility';
 
 @Component({
-  components: { ApiOption }
+  components: { ApiOption },
 })
 export class Reference extends Vue {
   @Prop() item: Parameter;

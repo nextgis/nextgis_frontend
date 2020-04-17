@@ -11,7 +11,7 @@ import { Indexes } from '../../../store/modules/api';
 
 @Component({
   name: 'Class',
-  components: { ConstructorItemComponent, Comment, Example, Class, Property }
+  components: { ConstructorItemComponent, Comment, Example, Class, Property },
 })
 export class ClassItemComponent extends Vue {
   @Prop() item: ClassItem | MethodItem;
@@ -51,9 +51,9 @@ export class ClassItemComponent extends Vue {
       // item is not private
       () => (item.flags.isPrivate !== undefined ? !item.flags.isPrivate : true),
       // item is Property or Method only
-      () => ['Property', 'Method', 'Event'].indexOf(item.kindString) !== -1
+      () => ['Property', 'Method', 'Event'].indexOf(item.kindString) !== -1,
     ];
-    return checkAllowedList.every(x => x());
+    return checkAllowedList.every((x) => x());
   }
 
   getAllowedMembers(
@@ -65,7 +65,7 @@ export class ClassItemComponent extends Vue {
     const members = [];
     const staticMembers = [];
     const events = [];
-    children.forEach(x => {
+    children.forEach((x) => {
       if (x.flags.isStatic) {
         staticMembers.push(x);
       } else if (x.kindString === 'Event') {
@@ -77,7 +77,7 @@ export class ClassItemComponent extends Vue {
     return [
       { name: 'Members', members },
       { name: 'Events', members: events },
-      { name: 'Static', members: staticMembers }
+      { name: 'Static', members: staticMembers },
     ];
   }
 

@@ -58,13 +58,13 @@ export class SendToCodepen extends Vue {
     }
     const minEmptyChars = Math.min(...emptyCharsCounts);
     if (minEmptyChars) {
-      newTextArr = newTextArr.map(x => x.substring(minEmptyChars));
+      newTextArr = newTextArr.map((x) => x.substring(minEmptyChars));
     }
     return newTextArr.join('\n');
   }
 
   _parseHtml(html: string): PenData {
-    const parseTag = tag => {
+    const parseTag = (tag) => {
       const re = new RegExp(`<${tag}>((.|[\n\r])*)</${tag}>`, 'i');
       const match = html.match(re);
       if (match && match.length) {
@@ -92,7 +92,7 @@ export class SendToCodepen extends Vue {
       html_classes: '',
       css_external: '',
       js_external: '',
-      template: true
+      template: true,
     };
   }
 

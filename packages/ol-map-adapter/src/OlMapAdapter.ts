@@ -36,7 +36,6 @@ import { createControl } from './controls/createControl';
 import { createButtonControl } from './controls/createButtonControl';
 import BaseEvent from 'ol/events/Event';
 import Feature from 'ol/Feature';
-import RenderFeature from 'ol/render/Feature';
 
 type Layer = Base;
 

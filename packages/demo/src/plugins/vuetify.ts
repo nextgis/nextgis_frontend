@@ -14,13 +14,13 @@ export default new Vuetify({
         // secondary: '#b0bec5',
         // accent: '#8c9eff',
         // error: '#b71c1c'
-      }
-    }
+      },
+    },
   },
   icons: {
-    iconfont: 'mdi'
+    iconfont: 'mdi',
     // iconfont: 'mdiSvg'
-  }
+  },
 });
 
 declare module 'vue/types/vue' {

@@ -16,8 +16,8 @@ const debug = process.env.NODE_ENV !== 'production';
 export default new Vuex.Store({
   modules: {
     api,
-    app
+    app,
   },
-  strict: debug
+  strict: debug,
   // plugins: debug ? [createLogger()] : []
 });

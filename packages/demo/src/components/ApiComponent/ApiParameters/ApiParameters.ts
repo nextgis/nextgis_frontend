@@ -5,7 +5,7 @@ import Reference from '../Reference/Reference.vue';
 import Property from '../Property/Property.vue';
 
 @Component({
-  components: { ApiOption, Reference, Property }
+  components: { ApiOption, Reference, Property },
 })
 export class ApiParameters extends Vue {
   @Prop() item: ConstructorItem;
@@ -13,9 +13,9 @@ export class ApiParameters extends Vue {
   get parameters(): Parameter[] {
     if (this.item && this.item.signatures) {
       const parameters: Parameter[] = [];
-      this.item.signatures.forEach(x => {
+      this.item.signatures.forEach((x) => {
         if (x.parameters) {
-          x.parameters.forEach(y => parameters.push(y));
+          x.parameters.forEach((y) => parameters.push(y));
         }
       });
       return parameters.sort((a, b) => {

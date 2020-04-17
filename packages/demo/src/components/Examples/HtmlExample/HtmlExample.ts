@@ -9,7 +9,7 @@ const changeHtmlMapAdapter: (
 ) => string = require('../../../../scripts/changeHtmlMapAdapter');
 
 @Component({
-  components: { SendToCodepen }
+  components: { SendToCodepen },
 })
 export class HtmlExample extends Vue {
   @Prop() item: Item;
@@ -33,7 +33,7 @@ export class HtmlExample extends Vue {
     const ngwMaps = this.item.ngwMaps;
     this.$store.dispatch('app/setDefaultNgwMap', value);
     if (ngwMaps && ngwMaps.length) {
-      const exist = ngwMaps.find(x => x.name === value);
+      const exist = ngwMaps.find((x) => x.name === value);
       if (exist) {
         this._ngwMap = exist;
         this.item.html = changeHtmlMapAdapter(
@@ -55,7 +55,7 @@ export class HtmlExample extends Vue {
 
   mounted() {
     this._writeIFrame(this.item.html);
-    this.$watch('item.html', newVal => {
+    this.$watch('item.html', (newVal) => {
       this._writeIFrame(newVal);
     });
     // @ts-ignore
@@ -86,7 +86,7 @@ export class HtmlExample extends Vue {
     const exist =
       fromStorage &&
       this.item.ngwMaps &&
-      this.item.ngwMaps.find(x => x.name === fromStorage);
+      this.item.ngwMaps.find((x) => x.name === fromStorage);
     if (exist) {
       return exist.name;
     }
