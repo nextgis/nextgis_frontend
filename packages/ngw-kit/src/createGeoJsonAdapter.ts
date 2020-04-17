@@ -72,6 +72,7 @@ export async function createGeoJsonAdapter(
     __disableMapMoveListener?: () => void;
 
     async addLayer(opt_: GeoJsonAdapterOptions) {
+      let needUpdate = !opt_.data;
       if (options.id !== undefined) {
         opt_.id = options.id;
       }
@@ -81,6 +82,7 @@ export async function createGeoJsonAdapter(
       }
       if (opt_.data && Object.keys(opt_.data).length === 0) {
         opt_.data = undefined;
+        needUpdate = false;
       }
       const layer = super.addLayer(opt_);
       this.options.strategy = opt_.strategy || undefined;
@@ -89,7 +91,7 @@ export async function createGeoJsonAdapter(
         filters: opt_.propertiesFilter,
         options: getLayerFilterOptions(opt_),
       };
-      if (!opt_.data) {
+      if (needUpdate) {
         this.updateLayer();
       }
       if (this.options.strategy === 'BBOX') {
