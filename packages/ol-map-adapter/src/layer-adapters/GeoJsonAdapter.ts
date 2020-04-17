@@ -14,6 +14,7 @@ import {
   GeoJsonAdapterOptions,
 } from '@nextgis/webmap';
 import { Paint } from '@nextgis/paint';
+import { defined } from '@nextgis/utils';
 
 import { resolutionOptions } from '../utils/gerResolution';
 import { styleFunction, labelStyleFunction, getFeature } from '../utils/utils';
@@ -57,7 +58,8 @@ export class GeoJsonAdapter
         }
         const labelField = this.options.labelField;
         if (labelField) {
-          const text = String(f.get(labelField));
+          const label = f.get(labelField);
+          const text = defined(label) ? String(label) : '';
           if (text) {
             const labelStyle = labelStyleFunction(options.type || 'fill');
             labelStyle.getText().setText(text);
