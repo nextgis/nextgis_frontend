@@ -11,7 +11,7 @@ const entry = './src/index.ts';
 const ASSET_PATH = process.env.ASSET_PATH || '/';
 
 const sassLoaderOptions = {
-  implementation: require('sass')
+  implementation: require('sass'),
   // indentedSyntax: true // optional
 };
 
@@ -28,7 +28,7 @@ module.exports = (env, argv) => {
   const rules = [
     {
       test: /\.vue$/,
-      loader: 'vue-loader'
+      loader: 'vue-loader',
     },
     {
       enforce: 'pre',
@@ -36,32 +36,29 @@ module.exports = (env, argv) => {
       loader: 'eslint-loader',
       exclude: /node_modules/,
       options: {
-        fix: true
-      }
+        fix: true,
+      },
     },
     {
       test: /\.tsx?$/,
       loader: 'ts-loader',
       exclude: /node_modules/,
       options: {
-        appendTsSuffixTo: [/\.vue$/]
-      }
+        appendTsSuffixTo: [/\.vue$/],
+      },
     },
     {
       test: /\.(png|jpg|gif|svg)$/,
       loader: 'file-loader',
       options: {
-        name: '[name].[ext]?[hash]'
-      }
+        name: '[name].[ext]?[hash]',
+      },
     },
     {
       test: /\.(html)$/,
       use: {
         loader: 'html-loader',
-        options: {
-          attrs: [':data-src']
-        }
-      }
+      },
     },
     {
       test: /\.(png|woff|woff2|eot|ttf)$/,
@@ -69,13 +66,13 @@ module.exports = (env, argv) => {
         loader: 'url-loader',
         options: {
           limit: 50000,
-          name: './fonts/[name].[ext]' // Output below ./fonts
-        }
-      }
+          name: './fonts/[name].[ext]', // Output below ./fonts
+        },
+      },
     },
     {
       test: /\.css$/i,
-      use: ['style-loader', 'css-loader']
+      use: ['style-loader', 'css-loader'],
     },
     {
       test: /\.s(c|a)ss$/,
@@ -84,28 +81,28 @@ module.exports = (env, argv) => {
         'css-loader',
         {
           loader: 'sass-loader',
-          options: sassLoaderOptions
-        }
-      ]
-    }
+          options: sassLoaderOptions,
+        },
+      ],
+    },
   ];
 
   let plugins = [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(argv.mode || 'development'),
-      'process.env.EXAMPLES': JSON.stringify(generateExamples('../'))
+      'process.env.EXAMPLES': JSON.stringify(generateExamples('../')),
     }),
 
     new HtmlWebpackPlugin({
       template: 'src/index.html',
       filename: 'index.html',
-      title: 'NextGIS Frontend'
+      title: 'NextGIS Frontend',
       // favicon: './src/images/favicon.ico',
     }),
     new FaviconsWebpackPlugin('./src/images/logo.png'),
 
     new VueLoaderPlugin(),
-    new VuetifyLoaderPlugin()
+    new VuetifyLoaderPlugin(),
   ];
 
   if (isProd) {
@@ -125,27 +122,27 @@ module.exports = (env, argv) => {
       plugins,
 
       module: {
-        rules
+        rules,
       },
 
       output: {
         filename: '[name]-[hash:7].js',
-        publicPath: ASSET_PATH
+        publicPath: ASSET_PATH,
       },
 
       resolve: {
         extensions: ['.ts', '.js', '.vue', '.json'],
         alias: {
-          vue$: 'vue/dist/vue.esm.js'
-        }
+          vue$: 'vue/dist/vue.esm.js',
+        },
       },
       devServer: {
         contentBase: './dist',
         historyApiFallback: true,
-        noInfo: true
+        noInfo: true,
       },
       performance: {
-        hints: false
+        hints: false,
       },
 
       optimization: {
@@ -153,9 +150,9 @@ module.exports = (env, argv) => {
         splitChunks: {
           chunks: 'all',
           minSize: 10000,
-          maxSize: 250000
-        }
-      }
-    }
+          maxSize: 250000,
+        },
+      },
+    },
   ];
 };

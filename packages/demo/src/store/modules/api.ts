@@ -57,7 +57,7 @@ function findInApi(
 function findApiModule(name: string, item: ApiItem): ApiItem {
   if (item && item.children) {
     const modules = item.children;
-    return modules.find(x => {
+    return modules.find((x) => {
       return x.name === name;
     });
   }
@@ -65,24 +65,24 @@ function findApiModule(name: string, item: ApiItem): ApiItem {
 
 const _state = {
   api: {},
-  indexes: {}
+  indexes: {},
 };
 
 // getters
 const _getters = {
-  getApiItemById: state => (id: number) => {
+  getApiItemById: (state) => (id: number) => {
     return state.api[id];
   },
 
-  getApiModule: state => (name: string, item?: ApiItem) => {
+  getApiModule: (state) => (name: string, item?: ApiItem) => {
     item = item || state.api;
     return findApiModule(name, item);
   },
 
-  findInApi: state => (cb: (item: ApiItem) => boolean, item: ApiItem) => {
+  findInApi: (state) => (cb: (item: ApiItem) => boolean, item: ApiItem) => {
     item = item || state.api;
     return findInApi(cb, item);
-  }
+  },
 };
 
 const actions = {
@@ -94,14 +94,14 @@ const actions = {
     } catch (er) {
       // ignore
     }
-  }
+  },
 };
 
 const mutations = {
   updateApi(state: any, api: any) {
     state.api = api;
     state.indexes = createIndexes(api);
-  }
+  },
 };
 
 export default {
@@ -109,5 +109,5 @@ export default {
   state: _state,
   getters: _getters,
   actions,
-  mutations
+  mutations,
 };
