@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/vuex-ngw",
-  "version": "0.29.8",
+  "version": "0.29.10",
   "description": "Development tools",
   "main": "lib/vuex-ngw.js",
   "unpkg": "lib/vue-ngw.js",
