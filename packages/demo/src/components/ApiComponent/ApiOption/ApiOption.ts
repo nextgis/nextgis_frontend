@@ -5,7 +5,7 @@ import { ApiItem, InterfaceItem, Parameter, MethodItem } from '../ApiItem';
 import * as utility from '../utility';
 
 @Component({
-  components: { ClassItem, Comment }
+  components: { ClassItem, Comment },
 })
 export class ApiOption extends Vue {
   @Prop() id: number;
@@ -27,7 +27,7 @@ export class ApiOption extends Vue {
   get properties(): Parameter[] {
     const option = this.option;
     if (option) {
-      const children = option.children.filter(x => {
+      const children = option.children.filter((x) => {
         return x.type ? true : x.kindString === 'Method';
       });
       return children.sort((a, b) => {

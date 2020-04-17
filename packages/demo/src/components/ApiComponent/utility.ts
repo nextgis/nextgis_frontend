@@ -10,12 +10,12 @@ import {
   FunctionItem,
   ApiItem,
   KindString,
-  Declaration
+  Declaration,
 } from './ApiItem';
 import { Indexes } from '../../store/modules/api';
 
 export function getSourceLink(item: ApiItem) {
-  return item.sources.map(x => {
+  return item.sources.map((x) => {
     const link = `https://github.com/nextgis/nextgisweb_frontend/blob/master/packages/${x.fileName}#L${x.line}`;
     return `<a href="${link}" target="_blank">${x.fileName}#L${x.line}</a>`;
   });
@@ -33,11 +33,11 @@ export function createMethodString(
   indexes: Indexes
 ): string {
   const signatures = methodItem.signatures
-    .map(x => {
+    .map((x) => {
       if ('parameters' in x) {
         // const args = getSignatureParameters(x.parameters, indexes).join(', ');
         const args = x.parameters
-          .map(p => {
+          .map((p) => {
             return `${getParameterName(p)}`;
           })
           .join(', ');
@@ -60,7 +60,7 @@ export function createReference(
   const kindStringToLink: KindString[] = ['Interface', 'Class'];
   const refOption = indexes[option.id];
 
-  const isHref = ref => {
+  const isHref = (ref) => {
     return ref && kindStringToLink.indexOf(ref.kindString) !== -1;
   };
 
@@ -72,8 +72,8 @@ export function createReference(
       name = createLink(refOption, option.name);
     }
     const args = option.typeArguments
-      .map(x => getOptionType(x, indexes))
-      .filter(x => !!x)
+      .map((x) => getOptionType(x, indexes))
+      .filter((x) => !!x)
       .join(' | ');
     str += `${name}${args ? `&lt;${args}&gt;` : ''}`;
   } else if (isHref(refOption)) {
@@ -89,8 +89,8 @@ export function createReference(
 export function getOptionType(option: Property, indexes: Indexes): string {
   if (option.type === 'union') {
     return option.types
-      .map(x => getOptionType(x, indexes))
-      .filter(x => !!x)
+      .map((x) => getOptionType(x, indexes))
+      .filter((x) => !!x)
       .join(' | ');
   } else if (option.type === 'intrinsic') {
     if (option.name !== 'undefined') {
@@ -98,8 +98,8 @@ export function getOptionType(option: Property, indexes: Indexes): string {
     }
   } else if (option.type === 'tuple') {
     return `[${option.elements
-      .map(x => getOptionType(x, indexes))
-      .filter(x => !!x)
+      .map((x) => getOptionType(x, indexes))
+      .filter((x) => !!x)
       .join(', ')}]`;
   } else if (option.type === 'reference') {
     return createReference(option, indexes);
@@ -134,11 +134,11 @@ export function createDeclarationStr(option: ReflectionType, indexes: Indexes) {
     if (option.declaration.name === '__type') {
       if (option.declaration.indexSignature) {
         const signatures = option.declaration.indexSignature;
-        str += signatures.map(x => {
+        str += signatures.map((x) => {
           return getDeclarationSignatureStr(x, indexes);
         });
       } else if (option.declaration.children) {
-        const defs = option.declaration.children.map(x => {
+        const defs = option.declaration.children.map((x) => {
           return `<span class="nowrap">${getParameterName(x)}: ${getOptionType(
             x.type,
             indexes
@@ -157,7 +157,7 @@ export function getSignatureParameters(
   parameters: Parameter[],
   indexes: Indexes
 ): string[] {
-  return parameters.map(p => {
+  return parameters.map((p) => {
     const typeName = getOptionType(p.type, indexes);
     return `${getParameterName(p)}${
       typeName ? `<span class="nowrap">: ${typeName}</span>` : ''
@@ -171,7 +171,7 @@ export function getConstructorSignatureStr(
 ) {
   return (
     item &&
-    item.signatures.map(x => {
+    item.signatures.map((x) => {
       return getSignatureStrForConstructor(x, indexes);
     })
   );
@@ -183,7 +183,7 @@ export function getSignatureStrForConstructor(
 ) {
   if ('parameters' in signatures) {
     // const parameters = getSignatureParameters(signatures.parameters, indexes);
-    const parameters = signatures.parameters.map(p => {
+    const parameters = signatures.parameters.map((p) => {
       return `${getParameterName(p)}`;
     });
     const str = `${signatures.name}(${parameters.join(', ')})`;
@@ -196,7 +196,7 @@ export function createMethodTypeString(
   indexes: Indexes
 ): string {
   const signatures = methodItem.signatures
-    .map(x => {
+    .map((x) => {
       let str = '(';
       if ('parameters' in x) {
         const args = getSignatureParameters(x.parameters, indexes).join(', ');
@@ -218,14 +218,14 @@ export function createMethodReturn(
   indexes: Indexes
 ): string {
   const signatures = methodItem.signatures
-    .map(x => {
+    .map((x) => {
       const toReturn = getOptionType(x.type, indexes);
       if (toReturn) {
         return toReturn;
       }
       return '';
     })
-    .filter(x => !!x)
+    .filter((x) => !!x)
     .join('| ');
   return `${signatures}`;
 }

@@ -3,7 +3,7 @@ import {
   ConstructorItem,
   ClassItem,
   PropertyItem,
-  MethodItem
+  MethodItem,
 } from '../ApiItem';
 
 import ApiParameters from '../ApiParameters/ApiParameters.vue';
@@ -13,7 +13,7 @@ import * as utility from '../utility';
 import { Indexes } from '../../../store/modules/api';
 
 @Component({
-  components: { ApiParameters, Example, Comment }
+  components: { ApiParameters, Example, Comment },
 })
 export class ConstructorItemComponent extends Vue {
   @Prop() item: ClassItem | PropertyItem | MethodItem;
@@ -24,7 +24,7 @@ export class ConstructorItemComponent extends Vue {
   mounted() {
     this.indexes = this.$store.state.api.indexes;
     if (this.item.children) {
-      this.constructorItem = this.item.children.find(x => {
+      this.constructorItem = this.item.children.find((x) => {
         return x.kindString === 'Constructor';
       }) as ConstructorItem;
     } else if (this.item.kindString === 'Method') {
@@ -36,7 +36,7 @@ export class ConstructorItemComponent extends Vue {
     const str = this.utility.getConstructorSignatureStr(item, this.indexes);
     return !str
       ? []
-      : str.map(x => {
+      : str.map((x) => {
           const tmp = document.createElement('div');
           tmp.innerHTML = x;
           return tmp.innerText;

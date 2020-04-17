@@ -4,7 +4,7 @@ import { ApiItem } from './ApiItem';
 import { Item } from '../../MainPage';
 
 @Component({
-  components: { ClassItem }
+  components: { ClassItem },
 })
 export class ApiComponent extends Vue {
   @Prop() item: Item;
@@ -49,7 +49,7 @@ export class ApiComponent extends Vue {
   }
 
   getAllowedChildren(item: ApiItem) {
-    return item.children.filter(x => this.getAllowedItem(x));
+    return item.children.filter((x) => this.getAllowedItem(x));
   }
 
   isMembersShowed(itemName: string): boolean {
