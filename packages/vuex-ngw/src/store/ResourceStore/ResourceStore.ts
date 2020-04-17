@@ -158,7 +158,9 @@ export abstract class ResourceStore<
     P = GeoJsonProperties
   >(opt: { item: Feature<G, P> }) {
     const geom = await this.context.dispatch('prepareGeomToNgw', opt);
-    const featureFields = await this.fields;
+    const featureFields = (await this.context.dispatch(
+      'getFields'
+    )) as FeatureLayerField[];
     const fields: P = {} as P;
     featureFields.forEach((x) => {
       // @ts-ignore
