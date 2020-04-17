@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.10](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.9...v0.29.10) (2020-04-17)
+
+
+### Bug Fixes
+
+* **ngw-ol:** container style ([995b409](https://github.com/nextgis/nextgisweb_frontend/commit/995b409e5b70bb6a750afb39dd42745d562b4b88))
+* **ol:** geojson label null field ([1b93b27](https://github.com/nextgis/nextgisweb_frontend/commit/1b93b275566f4f2c32ba9c114fea3a0fdc3dc77b))
+
+
+
+
+
 ## [0.29.6](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.5...v0.29.6) (2020-04-16)
 
 **Note:** Version bump only for package @nextgis/ol-map-adapter

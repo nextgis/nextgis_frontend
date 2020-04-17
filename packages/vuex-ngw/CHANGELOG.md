@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.10](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.9...v0.29.10) (2020-04-17)
+
+
+### Bug Fixes
+
+* **ol:** geojson label null field ([1b93b27](https://github.com/nextgis/nextgisweb_frontend/commit/1b93b275566f4f2c32ba9c114fea3a0fdc3dc77b))
+
+
+
+
+
 ## [0.29.8](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.7...v0.29.8) (2020-04-16)
 
 

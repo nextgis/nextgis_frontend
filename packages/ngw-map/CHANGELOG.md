@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.10](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.9...v0.29.10) (2020-04-17)
+
+**Note:** Version bump only for package @nextgis/ngw-map
+
+
+
+
+
 ## [0.29.6](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.5...v0.29.6) (2020-04-16)
 
 **Note:** Version bump only for package @nextgis/ngw-map
