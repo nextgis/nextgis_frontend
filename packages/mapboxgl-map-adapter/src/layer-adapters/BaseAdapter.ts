@@ -16,6 +16,10 @@ export abstract class BaseAdapter<O extends AdapterOptions = AdapterOptions>
     this._layerId = `layer-${ID++}`;
   }
 
+  removeLayer() {
+    Object.assign(this, { map: undefined });
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   abstract addLayer(options: O): TLayer | Promise<TLayer> | undefined;
 }
