@@ -451,6 +451,7 @@ export class BaseWebMap<
 
   private _addEventsListeners(): void {
     const events: (keyof BaseMapEvents)[] = [
+      'preclick',
       'click',
       'zoomstart',
       'zoom',
