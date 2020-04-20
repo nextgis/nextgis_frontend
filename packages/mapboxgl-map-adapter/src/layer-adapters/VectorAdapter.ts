@@ -27,7 +27,6 @@ import {
   AnySourceData,
   AnyLayout,
   Layer,
-  MapboxGeoJSONFeature,
 } from 'mapbox-gl';
 
 import { getImage } from '../util/image_icons';
@@ -93,7 +92,8 @@ export abstract class VectorAdapter<
   protected _selectProperties?: PropertiesFilter;
   protected _filterProperties?: PropertiesFilter;
 
-  private $onLayerClick?: (e: MapLayerMouseEvent) => void;
+  private $onLayerMouseMove?: (e: MapLayerMouseEvent) => void;
+  private $onLayerMouseLeave?: (e: MapLayerMouseEvent) => void;
 
   constructor(public map: Map, public options: O) {
     super(map, options);
@@ -106,11 +106,16 @@ export abstract class VectorAdapter<
     } else if (this.options.source) {
       this.featureIdName = '$id';
     } else {
-      this.featureIdName = '_fid';
+      this.featureIdName = 'fid';
     }
 
     this._selectionName = this._layerId + '-highlighted';
-    this.$onLayerClick = this._onLayerClick.bind(this);
+    this.$onLayerMouseLeave = this._onLayerMouseLeave.bind(this);
+    this.$onLayerMouseMove = this._onLayerMouseMove.bind(this);
+    if (this.options.selectable) {
+      // @ts-ignore
+      this.map._onMapClickLayers.push(this);
+    }
   }
 
   async addLayer(options: O): Promise<TLayer> {
@@ -185,11 +190,63 @@ export abstract class VectorAdapter<
 
   removeLayer() {
     const map = this.map;
-    if (this.layer) {
-      this.layer.forEach((layerId) => {
-        map.removeLayer(layerId);
-      });
+    if (map) {
+      if (this.layer) {
+        this.layer.forEach((layerId) => {
+          map.removeLayer(layerId);
+        });
+      }
+      // @ts-ignore
+      const index = map._onMapClickLayers.indexOf(this);
+      if (index !== -1) {
+        // @ts-ignore
+        this.map._onMapClickLayers.splice(index, 1);
+      }
     }
+    this._removeEventListeners();
+    this.$onLayerMouseLeave = undefined;
+    this.$onLayerMouseMove = undefined;
+    super.removeLayer();
+  }
+
+  _onLayerClick(e: MapLayerMouseEvent) {
+    e.preventDefault();
+    // not work correct
+    // const features = this.map.queryRenderedFeatures(e.point, {
+    //   layers: this.layer
+    // });
+    let feature: Feature | undefined;
+    if (this.layer) {
+      this.layer.find((a) => {
+        const features_ = this.map.queryRenderedFeatures(e.point, {
+          layers: [a],
+        });
+        if (features_.length) {
+          feature = features_[0] as Feature;
+          return true;
+        }
+        return false;
+      });
+      if (feature) {
+        let isSelected = this.isFeatureSelected(feature);
+        if (isSelected) {
+          if (this.options && this.options.unselectOnSecondClick) {
+            this._unselectFeature(feature);
+          }
+        } else {
+          this._selectFeature(feature);
+        }
+        isSelected = this.isFeatureSelected(feature);
+        if (this.options.onLayerClick) {
+          this.options.onLayerClick({
+            layer: this,
+            feature,
+            selected: isSelected,
+          });
+        }
+      }
+    }
+    return feature;
   }
 
   protected _updateWithNativeFilter(filter: any[]) {
@@ -368,7 +425,16 @@ export abstract class VectorAdapter<
   }
 
   protected _selectFeature(feature: Feature | Feature[]) {
-    // ignore
+    const features = Array.isArray(feature) ? feature : [feature];
+    this.select([
+      [
+        this.featureIdName,
+        'in',
+        features.map(
+          (x) => (x.properties && x.properties[this.featureIdName]) || x.id
+        ),
+      ],
+    ]);
   }
 
   protected _unselectFeature(feature: Feature | Feature[]) {
@@ -474,39 +540,12 @@ export abstract class VectorAdapter<
     return false;
   }
 
-  private _onLayerClick(e: MapLayerMouseEvent) {
-    e.preventDefault();
-    // const features = this.map.queryRenderedFeatures(e.point, {
-    //   layers: this.layer
-    // });
-    if (this.layer) {
-      const features = this.layer.reduce((a, b) => {
-        const features_ = this.map.queryRenderedFeatures(e.point, {
-          layers: [b],
-        });
-        const c = a.concat(features_);
-        return c;
-      }, [] as MapboxGeoJSONFeature[]);
-      const feature = features[0] as Feature;
-      if (feature) {
-        let isSelected = this.isFeatureSelected(feature);
-        if (isSelected) {
-          if (this.options && this.options.unselectOnSecondClick) {
-            this._unselectFeature(feature);
-          }
-        } else {
-          this._selectFeature(feature);
-        }
-        isSelected = this.isFeatureSelected(feature);
-        if (this.options.onLayerClick) {
-          this.options.onLayerClick({
-            layer: this,
-            feature,
-            selected: isSelected,
-          });
-        }
-      }
-    }
+  private _onLayerMouseMove() {
+    this.map.getCanvas().style.cursor = 'pointer';
+  }
+
+  private _onLayerMouseLeave() {
+    this.map.getCanvas().style.cursor = '';
   }
 
   private _detectPaintType(paint: Paint): string | undefined {
@@ -529,20 +568,25 @@ export abstract class VectorAdapter<
   private _addEventsListeners() {
     if (this.layer && this.options && this.options.selectable) {
       this.layer.forEach((x) => {
-        if (this.$onLayerClick) {
-          const onLayerClick = this.$onLayerClick;
-          this.map.on('click', x, (e: MapLayerMouseEvent) => {
-            onLayerClick(e);
-          });
+        // if (this.$onLayerClick) {
+        //   this.map.on('click', x, this.$onLayerClick);
+        // }
+        if (this.$onLayerMouseMove && this.map) {
+          this.map.on('mousemove', x, this.$onLayerMouseMove);
         }
-
-        this.map.on('mousemove', x, () => {
-          this.map.getCanvas().style.cursor = 'pointer';
-        });
-        this.map.on('mouseleave', x, () => {
-          this.map.getCanvas().style.cursor = '';
-        });
+        if (this.$onLayerMouseLeave && this.map) {
+          this.map.on('mouseleave', x, this.$onLayerMouseLeave);
+        }
       });
+    }
+  }
+
+  private _removeEventListeners() {
+    if (this.$onLayerMouseMove && this.map) {
+      this.map.off('mousemove', this.$onLayerMouseMove);
+    }
+    if (this.$onLayerMouseLeave && this.map) {
+      this.map.off('mouseleave', this.$onLayerMouseLeave);
     }
   }
 }

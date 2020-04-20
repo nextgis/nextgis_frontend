@@ -105,7 +105,10 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
             attributionControl: false,
             // @ts-ignore
             bounds: options.bounds,
-            fitBoundsOptions: { ...options.fitOptions, ...fitBoundsOptions },
+            fitBoundsOptions: {
+              ...options.fitOptions,
+              ...fitBoundsOptions,
+            },
             transformRequest: (url: string, resourceType: ResourceType) => {
               const transformed = this._transformRequest(url, resourceType);
               if (transformed) {
@@ -144,6 +147,8 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
           }
           this.map = new Map(mapOpt);
           this.map.once('load', () => {
+            // @ts-ignore
+            this.map._onMapClickLayers = [];
             // @ts-ignore
             this.map.transformRequests = [];
             this.isLoaded = true;
@@ -321,6 +326,22 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   onMapClick(evt: MapEventType['click'] & EventData): void {
     const latLng = evt.lngLat;
     const { x, y } = evt.point;
+    this.emitter.emit('preclick', { latLng, pixel: { top: y, left: x } });
+    if (this.map) {
+      // @ts-ignore
+      this.map._onMapClickLayers
+        // @ts-ignore
+        .sort((a, b) => {
+          if (a.options?.order && b.options?.order) {
+            return b.options.order - a.options.order;
+          }
+          return 1;
+        })
+        // @ts-ignore
+        .find((x) => {
+          return x._onLayerClick(evt);
+        });
+    }
 
     this.emitter.emit('click', { latLng, pixel: { top: y, left: x } });
   }

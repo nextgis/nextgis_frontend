@@ -44,6 +44,8 @@ export interface MapAdapterEvents extends BaseMapEvents {
 
 export interface BaseMapEvents {
   /** @event */
+  preclick: MapClickEvent;
+  /** @event */
   click: MapClickEvent;
   /** @event */
   zoomstart: MapAdapter;
