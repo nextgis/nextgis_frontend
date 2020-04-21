@@ -49,12 +49,12 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     return layer;
   }
 
-  removeLayer() {
-    super.removeLayer();
+  beforeRemove() {
     const source = this.map.getSource(this._sourceId);
     if (source) {
       this.map.removeSource(this._sourceId);
     }
+    super.beforeRemove();
   }
 
   clearLayer(cb?: (feature: Feature) => boolean) {

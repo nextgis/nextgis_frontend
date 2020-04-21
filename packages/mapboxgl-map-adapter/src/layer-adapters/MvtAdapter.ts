@@ -2,6 +2,7 @@
  * @module mapboxgl-map-adapter
  */
 import { MvtAdapterOptions } from '@nextgis/webmap';
+import { Layer } from 'mapbox-gl';
 import { VectorAdapter } from './VectorAdapter';
 import { TLayer } from '../MapboxglMapAdapter';
 
@@ -27,7 +28,7 @@ export class MvtAdapter extends VectorAdapter<MvtAdapterOptions> {
       this.source = this.options.url;
       MvtAdapter.sources.push(this.options.url);
     }
-    const mvtLayerOptions: Partial<mapboxgl.Layer> = {
+    const mvtLayerOptions: Partial<Layer> = {
       source: this.options.url,
       'source-layer': this.options.sourceLayer,
     };

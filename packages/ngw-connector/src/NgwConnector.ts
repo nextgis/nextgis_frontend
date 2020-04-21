@@ -404,21 +404,21 @@ export class NgwConnector {
   ): CancelablePromise<any> {
     const onCancel: (() => void)[] = [];
     options.responseType = options.responseType || 'json';
-    return new CancelablePromise(
-      (resolve, reject) => {
-        if (this.user) {
-          options = options || {};
-          // options.withCredentials = true;
-          options.headers = {
-            ...this.getAuthorizationHeaders(),
-            ...options.headers,
-          };
-        }
-        loadJSON(url, resolve, options, reject, onCancel);
-      },
-      () => {
+    return new CancelablePromise((resolve, reject) => {
+      if (this.user) {
+        options = options || {};
+        // options.withCredentials = true;
+        options.headers = {
+          ...this.getAuthorizationHeaders(),
+          ...options.headers,
+        };
+      }
+      loadJSON(url, resolve, options, reject, onCancel);
+    }).catch((er) => {
+      if (er.name === 'CancelError') {
         onCancel.forEach((x) => x());
       }
-    );
+      throw er;
+    });
   }
 }

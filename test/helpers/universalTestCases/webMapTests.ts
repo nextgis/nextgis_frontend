@@ -4,7 +4,7 @@ import {
   MapAdapter,
   AppOptions,
   Type,
-  MapOptions
+  MapOptions,
 } from '../../../packages/webmap/src';
 import { WebMap } from '../../../packages/webmap/src/WebMap';
 import { baseMapTests, MapAdapterCreateOptions } from './baseMapTests';
@@ -75,7 +75,7 @@ export const webMapTests = <W extends WebMap = WebMap>(
     const layerAdapters: string[] =
       // @ts-ignore
       ('layerAdapters' in MA && Object.keys(MA.layerAdapters)) || [];
-    layerAdapters.forEach(x => {
+    layerAdapters.forEach((x) => {
       webMapLayersTests(x, _buildWebMap);
     });
 

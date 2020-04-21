@@ -1,8 +1,8 @@
 /**
  * @module control-container
  */
-import { ControlContainer, ControlContainerOptions } from './ControlContainer';
+import { ControlContainer } from './ControlContainer';
 
-export { ControlContainerOptions };
+export * from './interfaces';
 
 export default ControlContainer;
