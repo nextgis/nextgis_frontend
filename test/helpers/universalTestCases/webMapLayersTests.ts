@@ -1,14 +1,14 @@
 import { expect } from 'chai';
+import sinon from 'sinon';
 import { mapHtml } from '../mapHtml';
 import {
   AppOptions,
   MapOptions,
   LayerAdapters,
-  Type
+  Type,
 } from '../../../packages/webmap/src';
 import { WebMap } from '../../../packages/webmap/src/WebMap';
 import { MapAdapterCreateOptions } from './baseMapTests';
-import sinon from 'sinon';
 
 export const webMapLayersTests = <
   K extends keyof LayerAdapters,
@@ -40,7 +40,7 @@ export const webMapLayersTests = <
       it('Fires a layer:preadd event after adapter received', async () => {
         const map = await buildWebMap({ target: 'map' });
         const spy = sinon.spy();
-        map.emitter.on('layer:preadd', adapter => {
+        map.emitter.on('layer:preadd', (adapter) => {
           // expect(adapter.layer).to.be.undefined;
           spy();
         });
@@ -148,7 +148,7 @@ export const webMapLayersTests = <
         const map = await buildWebMap({ target: 'map' });
         const spy = sinon.spy();
         const layer = await map.addLayer(layerAdapter, {});
-        map.emitter.on('layer:preremove', adapter => {
+        map.emitter.on('layer:preremove', (adapter) => {
           expect(adapter.options).to.be.ok;
           spy();
         });

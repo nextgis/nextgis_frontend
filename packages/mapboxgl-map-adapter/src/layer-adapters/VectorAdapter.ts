@@ -188,7 +188,7 @@ export abstract class VectorAdapter<
     this.selected = false;
   }
 
-  removeLayer() {
+  beforeRemove() {
     const map = this.map;
     if (map) {
       if (this.layer) {
@@ -206,7 +206,7 @@ export abstract class VectorAdapter<
     this._removeEventListeners();
     this.$onLayerMouseLeave = undefined;
     this.$onLayerMouseMove = undefined;
-    super.removeLayer();
+    super.beforeRemove();
   }
 
   _onLayerClick(e: MapLayerMouseEvent) {
