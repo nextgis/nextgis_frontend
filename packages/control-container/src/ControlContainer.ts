@@ -7,13 +7,7 @@ import * as dom from '@nextgis/dom';
 import WebMap, { ControlPositions, MapControl } from '@nextgis/webmap';
 
 import { ZoomControl } from './controls/ZoomControl';
-
-export interface ControlContainerOptions {
-  target?: string;
-  classPrefix?: string;
-  addClass?: string;
-  webMap?: WebMap;
-}
+import { ControlContainerOptions } from './interfaces';
 
 export class ControlContainer {
   static controls = {

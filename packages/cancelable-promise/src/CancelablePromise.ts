@@ -1,3 +1,6 @@
+import { rejects } from 'assert';
+import { CancelError } from './CancelError';
+
 /**
  * @module cancelable-promise
  */
@@ -23,15 +26,20 @@ export class CancelablePromise<T> implements Promise<T> {
   private _canceled = false;
 
   private _promise?: Promise<T>;
+  private _cancelPromise?: Promise<T>;
+  private _setCanceledCallback?: () => void;
+  private _parentPromise?: CancelablePromise<T>;
 
   constructor(
     executor: (
       resolve: (value?: T | PromiseLike<T>) => void,
       reject: (reason?: any) => void
-    ) => void,
-    private onCancel?: (...args: any[]) => void
+    ) => void
   ) {
-    this._promise = new Promise(executor);
+    this._cancelPromise = new Promise<any>((resolve_, reject_) => {
+      this._setCanceledCallback = () => resolve_(new CancelError());
+    });
+    this._promise = Promise.race([this._cancelPromise, new Promise(executor)]);
   }
 
   static resolve<T>(value: T | PromiseLike<T>): CancelablePromise<T> {
@@ -58,70 +66,81 @@ export class CancelablePromise<T> implements Promise<T> {
       | undefined
       | null
   ): CancelablePromise<TResult1 | TResult2> {
-    const p = new CancelablePromise(
-      (resolve, reject) => {
-        if (this._promise) {
-          this._promise.then(
-            (r) => {
-              if (this._canceled) {
-                p.cancel();
-              }
-              if (onfulfilled && !this._canceled) {
-                handleCallback(resolve, reject, onfulfilled, r);
-              } else {
-                resolve(r);
-              }
-            },
-            (r) => {
-              if (this._canceled) {
-                p.cancel();
-              }
-              if (onrejected && !this._canceled) {
-                handleCallback(resolve, reject, onrejected, r);
-              } else {
-                reject(r);
-              }
+    const p = new CancelablePromise((resolve, reject) => {
+      if (this._promise) {
+        const reject_ = (r: any) => {
+          if (onrejected) {
+            handleCallback(resolve, reject, onrejected, r);
+          } else {
+            reject(r);
+          }
+        };
+        this._promise.then((r) => {
+          if (this._canceled) {
+            reject_(r);
+          } else {
+            if (onfulfilled) {
+              handleCallback(resolve, reject, onfulfilled, r);
+            } else {
+              resolve(r);
             }
-          );
-        }
-      },
-      () => {
-        this.cancel();
+          }
+        }, reject_);
       }
-    );
+    });
+    p._parentPromise = this;
     return p as CancelablePromise<TResult1 | TResult2>;
   }
 
   catch<TResult = never>(
     onrejected?:
-      | ((reason: any) => TResult | PromiseLike<TResult>)
+      | ((reason: Error) => TResult | PromiseLike<TResult>)
       | undefined
       | null
   ): CancelablePromise<T | TResult> {
+    if (this._canceled && onrejected) {
+      onrejected(new CancelError());
+    }
     return this.then(undefined, onrejected);
-  }
-
-  cancel(errorCallback?: (...args: any[]) => void) {
-    this._canceled = true;
-    if (errorCallback && this._promise) {
-      this._promise.catch(errorCallback);
-    }
-    if (this.onCancel) {
-      this.onCancel();
-    }
-    this._destroy();
-    return this;
   }
 
   finally(onfinally?: (() => void) | undefined | null): Promise<T> {
     if (this._promise) {
       return this._promise.finally(onfinally);
     }
+    if (this._canceled) {
+      return Promise.reject(new CancelError());
+    }
     return Promise.reject<T>(onfinally);
   }
 
+  cancel() {
+    let parent = this._parentPromise;
+    let hasParent = !!parent;
+    this._canceled = true;
+    while (hasParent) {
+      if (parent && parent._parentPromise) {
+        parent = parent._parentPromise;
+        parent._canceled = true;
+        hasParent = !!parent;
+      } else {
+        hasParent = false;
+      }
+    }
+    if (parent) {
+      parent.cancel();
+    }
+    if (this._setCanceledCallback) {
+      this._setCanceledCallback();
+    }
+    this._destroy();
+
+    return this;
+  }
+
   private _destroy() {
-    this.onCancel = undefined;
+    this._setCanceledCallback = undefined;
+    this._cancelPromise = undefined;
     this._promise = undefined;
   }
 }

@@ -16,6 +16,17 @@ $ yarn add @nextgis/cancelable-promise
 ```js
 import CancelablePromise from '@nextgis/cancelable-promise';
 
+const promise = new CancelablePromise((resolve, reject) => {
+    setTimeout(() => resolve(), 100)
+}).catch((er) => {
+    if (er.name === 'CancelError') {
+        // handle cancel error
+    }
+    throw er;
+});
+
+promise.cancel()
+
 ```
 
 ## Commercial support
