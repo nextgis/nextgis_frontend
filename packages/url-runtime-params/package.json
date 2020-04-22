@@ -1,12 +1,12 @@
 {
   "name": "@nextgis/url-runtime-params",
-  "version": "0.29.5",
+  "version": "0.29.11",
   "description": "",
   "main": "lib/url-runtime-params.js",
   "unpkg": "lib/url-runtime-params.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/webmap": "^0.29.5"
+    "@nextgis/webmap": "^0.29.11"
   },
   "devDependencies": {
     "@nextgis/build-tools": "file:../build-tools"
