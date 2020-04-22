@@ -2,9 +2,9 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import { CancelablePromise } from '../../packages/cancelable-promise/src';
 
-const getPromise = () =>
+const getPromise = (delay = 0) =>
   new CancelablePromise((resolve) => {
-    setTimeout(() => resolve());
+    setTimeout(() => resolve(), delay);
   });
 
 const getCatchPromise = () =>
@@ -103,5 +103,17 @@ describe('CancelablePromise', () => {
         done();
       }
     });
+  });
+
+  it(`throw CancelError immediately`, (done) => {
+    const t1 = performance.now();
+    const promise = getPromise(300).catch(() => {
+      const t2 = performance.now();
+      const dt = t2 - t1;
+      if (dt < 100) {
+        done();
+      }
+    });
+    promise.cancel();
   });
 });

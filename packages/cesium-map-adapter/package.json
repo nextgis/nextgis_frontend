@@ -12,7 +12,7 @@
     "@nextgis/webmap": "^0.29.5",
     "@types/cesium": "^1.67.3",
     "@types/events": "^3.0.0",
-    "@types/node": "^13.11.1",
+    "@types/node": "^13.13.2",
     "cesium": "^1.68.0",
     "events": "^3.1.0"
   },
