@@ -10,7 +10,7 @@
     "@nextgis/control-container": "^0.29.5",
     "@nextgis/paint": "^0.29.5",
     "@nextgis/webmap": "^0.29.5",
-    "@types/ol": "^6.3.0",
+    "@types/ol": "^6.3.1",
     "events": "^3.1.0",
     "ol": "^6.3.1"
   },
