@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.11](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.10...v0.29.11) (2020-04-22)
+
+**Note:** Version bump only for package @nextgis/url-runtime-params
+
+
+
+
+
 ## [0.29.5](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.4...v0.29.5) (2020-04-15)
 
 **Note:** Version bump only for package @nextgis/url-runtime-params
