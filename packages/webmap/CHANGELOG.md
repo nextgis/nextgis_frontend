@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.11](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.10...v0.29.11) (2020-04-22)
+
+
+### Performance Improvements
+
+* **mapbox:** vector layer click event prevent by order ([e7901da](https://github.com/nextgis/nextgisweb_frontend/commit/e7901da34935e347de05aaf0798eb1e5dfda11ff))
+
+
+
+
+
 ## [0.29.5](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.4...v0.29.5) (2020-04-15)
 
 
