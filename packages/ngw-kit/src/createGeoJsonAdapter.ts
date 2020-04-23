@@ -68,6 +68,7 @@ export async function createGeoJsonAdapter(
   return class Adapter extends adapter {
     emitter = new EventEmitter();
     __onMapMove?: () => void;
+    __onMapMoveStart?: () => void;
     __enableMapMoveListener?: () => void;
     __disableMapMoveListener?: () => void;
 
@@ -107,6 +108,7 @@ export async function createGeoJsonAdapter(
       this.__disableMapMoveListener = undefined;
       this.__enableMapMoveListener = undefined;
       this.__onMapMove = undefined;
+      this.__onMapMoveStart = undefined;
       abort();
     }
 
@@ -120,12 +122,18 @@ export async function createGeoJsonAdapter(
       if (removed) {
         return;
       }
-      const data = await geoJsonAdapterCb(
-        filterArgs.filters,
-        filterArgs.options
-      );
-      webMap.setLayerData(this, data);
-      this.emitter.emit('updated');
+      try {
+        const data = await geoJsonAdapterCb(
+          filterArgs.filters,
+          filterArgs.options
+        );
+        webMap.setLayerData(this, data);
+        this.emitter.emit('updated');
+      } catch (er) {
+        if (er.name !== 'CancelError') {
+          throw er;
+        }
+      }
     }
 
     async propertiesFilter(filters: PropertiesFilter, opt?: FilterOptions) {
@@ -185,12 +193,17 @@ export async function createGeoJsonAdapter(
 
     _addMoveEventListener() {
       this.__onMapMove = debounce(() => this.updateLayer());
+      this.__onMapMoveStart = abort;
+      webMap.emitter.on('movestart', this.__onMapMoveStart);
       webMap.emitter.on('moveend', this.__onMapMove);
     }
 
     _removeMoveEventListener() {
       if (this.__onMapMove) {
         webMap.emitter.off('moveend', this.__onMapMove);
+      }
+      if (this.__onMapMoveStart) {
+        webMap.emitter.off('movestart', this.__onMapMoveStart);
       }
     }
 
