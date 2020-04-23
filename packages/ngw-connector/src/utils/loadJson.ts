@@ -21,7 +21,7 @@ type LoadJSON = (
   callback: (...args: any[]) => any,
   options: RequestOptions<RequestMethods> | undefined,
   error: (reason?: any) => void,
-  onCancel: (() => void)[]
+  onCancel: (cancelHandler: () => void) => void
 ) => void;
 
 let loadJSON: LoadJSON;

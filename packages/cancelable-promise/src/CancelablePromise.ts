@@ -1,4 +1,3 @@
-import { rejects } from 'assert';
 import { CancelError } from './CancelError';
 
 /**
@@ -6,6 +5,7 @@ import { CancelError } from './CancelError';
  */
 type Reject = (reason?: any) => void;
 type Resolve = (value?: any) => void;
+type OnCancelFunction = (cancelHandler: () => void) => void;
 
 const handleCallback = <T = never>(
   resolve: Resolve,
@@ -20,26 +20,60 @@ const handleCallback = <T = never>(
   }
 };
 
-export class CancelablePromise<T> implements Promise<T> {
+let ID = 0;
+
+export class CancelablePromise<T = any> implements Promise<T> {
   readonly [Symbol.toStringTag]: string;
-
-  private _canceled = false;
-
+  readonly id = ID++;
+  private _isCanceled = false;
+  private _isPending = true;
   private _promise?: Promise<T>;
   private _cancelPromise?: Promise<T>;
-  private _setCanceledCallback?: () => void;
-  private _parentPromise?: CancelablePromise<T>;
+  private _cancelHandlers: (() => void)[] = [];
+  private _setCanceledCallback?: (er?: any) => void;
+  private _parentPromise?: CancelablePromise;
+  private _children: CancelablePromise[] = [];
 
   constructor(
     executor: (
       resolve: (value?: T | PromiseLike<T>) => void,
-      reject: (reason?: any) => void
+      reject: (reason?: any) => void,
+      onCancel: OnCancelFunction
     ) => void
   ) {
     this._cancelPromise = new Promise<any>((resolve_, reject_) => {
-      this._setCanceledCallback = () => resolve_(new CancelError());
+      this._setCanceledCallback = (er) => resolve_(er || new CancelError());
     });
-    this._promise = Promise.race([this._cancelPromise, new Promise(executor)]);
+    this._promise = Promise.race([
+      this._cancelPromise,
+      new Promise<T>((resolve, reject) => {
+        const onResolve = (value?: T | PromiseLike<T>) => {
+          if (value instanceof CancelablePromise) {
+            this.attach(value);
+          } else {
+            this._isPending = false;
+          }
+          resolve(value);
+        };
+
+        const onReject = (error: any) => {
+          this._isPending = false;
+          reject(error);
+        };
+
+        const onCancel: OnCancelFunction = (handler) => {
+          if (!this._isPending) {
+            throw new Error(
+              'The `onCancel` handler was attached after the promise settled.'
+            );
+          }
+
+          this._cancelHandlers.push(handler);
+        };
+
+        return executor(onResolve, onReject, onCancel);
+      }),
+    ]);
   }
 
   static resolve<T>(value: T | PromiseLike<T>): CancelablePromise<T> {
@@ -54,6 +88,14 @@ export class CancelablePromise<T> implements Promise<T> {
     return new CancelablePromise((resolve, reject) => {
       Promise.all(values).then(resolve).catch(reject);
     });
+  }
+
+  attach(p: CancelablePromise) {
+    if (this._isCanceled) {
+      p.cancel();
+    } else {
+      this._children.push(p);
+    }
   }
 
   then<TResult1 = T, TResult2 = never>(
@@ -76,7 +118,7 @@ export class CancelablePromise<T> implements Promise<T> {
           }
         };
         this._promise.then((r) => {
-          if (this._canceled) {
+          if (this._isCanceled) {
             reject_(r);
           } else {
             if (onfulfilled) {
@@ -89,6 +131,7 @@ export class CancelablePromise<T> implements Promise<T> {
       }
     });
     p._parentPromise = this;
+    this._children.push(p);
     return p as CancelablePromise<TResult1 | TResult2>;
   }
 
@@ -98,7 +141,7 @@ export class CancelablePromise<T> implements Promise<T> {
       | undefined
       | null
   ): CancelablePromise<T | TResult> {
-    if (this._canceled && onrejected) {
+    if (this._isCanceled && onrejected) {
       onrejected(new CancelError());
     }
     return this.then(undefined, onrejected);
@@ -108,34 +151,57 @@ export class CancelablePromise<T> implements Promise<T> {
     if (this._promise) {
       return this._promise.finally(onfinally);
     }
-    if (this._canceled) {
+    if (this._isCanceled) {
       return Promise.reject(new CancelError());
     }
     return Promise.reject<T>(onfinally);
   }
 
   cancel() {
+    if (this._isCanceled) {
+      return this;
+    }
+    this._isCanceled = true;
+    const parent = this._getTopParent();
+    if (parent) {
+      parent.cancel();
+    }
+
+    if (this._children) {
+      this._children.forEach((x) => x.cancel());
+    }
+
+    if (this._isPending) {
+      if (this._cancelHandlers.length) {
+        try {
+          for (const handler of this._cancelHandlers) {
+            handler();
+          }
+        } catch (error) {
+          // this._setCanceledCallback(error);
+        }
+      }
+      if (this._setCanceledCallback) {
+        this._setCanceledCallback();
+      }
+    }
+    this._destroy();
+
+    return this;
+  }
+
+  private _getTopParent() {
     let parent = this._parentPromise;
     let hasParent = !!parent;
-    this._canceled = true;
     while (hasParent) {
       if (parent && parent._parentPromise) {
         parent = parent._parentPromise;
-        parent._canceled = true;
         hasParent = !!parent;
       } else {
         hasParent = false;
       }
     }
-    if (parent) {
-      parent.cancel();
-    }
-    if (this._setCanceledCallback) {
-      this._setCanceledCallback();
-    }
-    this._destroy();
-
-    return this;
+    return parent;
   }
 
   private _destroy() {
@@ -144,3 +210,5 @@ export class CancelablePromise<T> implements Promise<T> {
     this._promise = undefined;
   }
 }
+
+Object.setPrototypeOf(CancelablePromise.prototype, Promise.prototype);

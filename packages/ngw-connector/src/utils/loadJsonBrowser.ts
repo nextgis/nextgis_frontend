@@ -5,7 +5,7 @@ export default function loadJSONBrowser(
   callback: (...args: any[]) => any,
   options: RequestOptions = {},
   error: (reason?: any) => void,
-  onCancel: (() => void)[]
+  onCancel: (cancelHandler: () => void) => void
 ) {
   options.method = options.method || 'GET';
 
@@ -94,7 +94,7 @@ export default function loadJSONBrowser(
       : null;
   }
   if (onCancel) {
-    onCancel.push(() => {
+    onCancel(() => {
       xhr.abort();
     });
   }

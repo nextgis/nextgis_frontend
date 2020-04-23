@@ -13,20 +13,46 @@ $ yarn add @nextgis/cancelable-promise
 
 ## Usage
 
+Catch `CancelError'
+
 ```js
-import CancelablePromise from '@nextgis/cancelable-promise';
+import CancelablePromise from "@nextgis/cancelable-promise";
 
 const promise = new CancelablePromise((resolve, reject) => {
-    setTimeout(() => resolve(), 100)
+  setTimeout(() => resolve(), 100);
 }).catch((er) => {
-    if (er.name === 'CancelError') {
-        // handle cancel error
-    }
-    throw er;
+  if (er.name === "CancelError") {
+    // handle cancel error
+  }
+  throw er;
 });
 
-promise.cancel()
+promise.cancel();
+```
 
+Handle `onCancel` callback
+
+```js
+import CancelablePromise from "@nextgis/cancelable-promise";
+
+const promise = new CancelablePromise((resolve, reject, onCancel) => {
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", url, true);
+  xhr.onreadystatechange = () => {
+    resolve();
+  };
+  xhr.onerror = (er) => {
+    reject(er);
+  };
+
+  onCancel(() => {
+    xhr.abort();
+  });
+
+  xhr.send();
+});
+
+promise.cancel();
 ```
 
 ## Commercial support
