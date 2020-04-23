@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/properties-filter",
-  "version": "0.29.11",
+  "version": "0.30.0",
   "description": "Filtering objects by its properties using expressions",
   "main": "lib/properties-filter.js",
   "unpkg": "lib/properties-filter.js",
@@ -38,7 +38,7 @@
     "url": "https://github.com/nextgis/nextgisweb_frontend/issues"
   },
   "dependencies": {
-    "@nextgis/utils": "^0.29.11",
+    "@nextgis/utils": "^0.30.0",
     "geojson": "^0.5.0"
   }
 }

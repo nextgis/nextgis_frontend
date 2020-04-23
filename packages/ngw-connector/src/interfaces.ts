@@ -32,14 +32,11 @@ export interface FileUploadResp {
 export interface PyramidRoute {
   [requestItemName: string]: string[];
 }
+export type Router = PyramidRoute;
 
 type simple = string | number | boolean;
 
 type cbParams = (params: Params) => simple;
-
-export interface Router {
-  [name: string]: string[];
-}
 
 export interface Params {
   [name: string]: simple | cbParams;
