@@ -7,7 +7,6 @@ import { EventEmitter } from 'events';
 import { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
 import {
   NgwConnectorOptions,
-  Router,
   GetRequestItemsResponseMap,
   RequestOptions,
   Params,
@@ -53,9 +52,9 @@ export class NgwConnector {
     this.options.baseUrl = url;
   }
 
-  async connect(): CancelablePromise<Router> {
+  async connect(): CancelablePromise<PyramidRoute> {
     if (this.route) {
-      return Promise.resolve(this.route);
+      return this.route;
     } else {
       if (this.options.auth) {
         const { login, password } = this.options.auth;
@@ -63,13 +62,10 @@ export class NgwConnector {
           await this.getUserInfo({ login, password });
         }
       }
-      try {
-        const route: PyramidRoute = await this.makeQuery(this.routeStr, {}, {});
-        this.route = route;
-        return route;
-      } catch (er) {
-        throw new Error(er);
-      }
+
+      const route: PyramidRoute = await this.makeQuery(this.routeStr, {}, {});
+      this.route = route;
+      return route;
     }
   }
 
@@ -132,7 +128,9 @@ export class NgwConnector {
     }
   }
 
-  async getResource(resource: ResourceDefinition) {
+  async getResource(
+    resource: ResourceDefinition
+  ): CancelablePromise<ResourceItem | undefined> {
     if (typeof resource === 'string') {
       return this.getResourceByKeyname(resource);
     } else if (typeof resource === 'number') {
@@ -140,7 +138,9 @@ export class NgwConnector {
     }
   }
 
-  async getResourceByKeyname(keyname: string) {
+  async getResourceByKeyname(
+    keyname: string
+  ): CancelablePromise<ResourceItem | undefined> {
     let item: ResourceItem = this._keynamesCache[keyname];
     if (!item) {
       const resources = await this.get('resource.search', null, {
@@ -156,7 +156,9 @@ export class NgwConnector {
     return item;
   }
 
-  async getResourceById(id: number) {
+  async getResourceById(
+    id: number
+  ): CancelablePromise<ResourceItem | undefined> {
     let item: ResourceItem = this._resourceIdsCache[id];
     if (!item) {
       item = await this.get('resource.item', null, { id });
@@ -174,7 +176,7 @@ export class NgwConnector {
     keyname?: string;
     resourceId?: number;
     resource?: string | number;
-  }): Promise<ResourceItem[]> {
+  }): CancelablePromise<ResourceItem[]> {
     let parent = opt.resourceId;
     let keyname = opt.keyname;
     if (!opt.keyname && !opt.resourceId && !opt.resource) {
@@ -187,14 +189,16 @@ export class NgwConnector {
     }
     if (keyname) {
       const item = await this.getResourceByKeyname(keyname);
-      parent = item.resource.id;
+      if (item) {
+        parent = item.resource.id;
+      }
     }
-    return await this.get('resource.collection', null, {
+    return this.get('resource.collection', null, {
       parent,
     });
   }
 
-  async request<
+  request<
     K extends keyof RequestItemsParamsMap,
     P extends RequestItemKeys = RequestItemKeys
   >(
@@ -202,54 +206,59 @@ export class NgwConnector {
     params: RequestItemsParams<K> = {},
     options?: RequestOptions
   ): CancelablePromise<P[K]> {
-    const apiItems = await this.connect();
-    let apiItem = apiItems && apiItems[name];
-    if (apiItem) {
-      apiItem = [...apiItem];
-      let url = apiItem.shift();
-      if (apiItem.length) {
-        const replaceParams: {
-          [num: number]: string;
-        } = {};
-        for (let fry = 0; fry < apiItem.length; fry++) {
-          const arg = apiItem[fry];
-          replaceParams[fry] = '{' + arg + '}';
-          if (params[arg] === undefined) {
-            throw new Error(
-              '`' + arg + '`' + ' url api argument is not specified'
-            );
+    return new CancelablePromise((resolve, reject) => {
+      this.connect().then((apiItems) => {
+        // const apiItems = this.route;
+        let apiItem = apiItems && apiItems[name];
+        if (apiItem) {
+          apiItem = [...apiItem];
+          let url = apiItem.shift();
+          if (apiItem.length) {
+            const replaceParams: {
+              [num: number]: string;
+            } = {};
+            for (let fry = 0; fry < apiItem.length; fry++) {
+              const arg = apiItem[fry];
+              replaceParams[fry] = '{' + arg + '}';
+              if (params[arg] === undefined) {
+                throw new Error(
+                  '`' + arg + '`' + ' url api argument is not specified'
+                );
+              }
+            }
+            if (url) {
+              url = template(url, replaceParams);
+            }
+          }
+          // Transfer part of the parameters from `params` to the URL string
+          if (params) {
+            const paramArray = [];
+            const paramList = params.paramList;
+            if (Array.isArray(paramList)) {
+              delete params.paramList;
+              paramList.forEach((x) => {
+                paramArray.push(`${x[0]}=${x[1]}`);
+              });
+            }
+            for (const p in params) {
+              if (apiItem.indexOf(p) === -1) {
+                paramArray.push(`${p}=${params[p]}`);
+              }
+            }
+            if (paramArray.length) {
+              url = url + '?' + paramArray.join('&');
+            }
+          }
+          if (url) {
+            const query = this.makeQuery(url, params, options);
+            resolve(query);
+          } else {
+            reject(new Error('request url is not set'));
           }
         }
-        if (url) {
-          url = template(url, replaceParams);
-        }
-      }
-      // Transfer part of the parameters from `params` to the URL string
-      if (params) {
-        const paramArray = [];
-        const paramList = params.paramList;
-        if (Array.isArray(paramList)) {
-          delete params.paramList;
-          paramList.forEach((x) => {
-            paramArray.push(`${x[0]}=${x[1]}`);
-          });
-        }
-        for (const p in params) {
-          if (apiItem.indexOf(p) === -1) {
-            paramArray.push(`${p}=${params[p]}`);
-          }
-        }
-        if (paramArray.length) {
-          url = url + '?' + paramArray.join('&');
-        }
-      }
-      if (url) {
-        return this.makeQuery(url, params, options);
-      } else {
-        throw new Error('request url is not set');
-      }
-    }
-    return CancelablePromise.resolve({} as P[K]);
+        resolve({} as P[K]);
+      });
+    });
   }
 
   post<K extends keyof RequestItemsParamsMap>(
@@ -402,9 +411,8 @@ export class NgwConnector {
     url: string,
     options: RequestOptions
   ): CancelablePromise<any> {
-    const onCancel: (() => void)[] = [];
     options.responseType = options.responseType || 'json';
-    return new CancelablePromise((resolve, reject) => {
+    return new CancelablePromise((resolve, reject, onCancel) => {
       if (this.user) {
         options = options || {};
         // options.withCredentials = true;
@@ -414,11 +422,6 @@ export class NgwConnector {
         };
       }
       loadJSON(url, resolve, options, reject, onCancel);
-    }).catch((er) => {
-      if (er.name === 'CancelError') {
-        onCancel.forEach((x) => x());
-      }
-      throw er;
     });
   }
 }
