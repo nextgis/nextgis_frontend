@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/dom",
-  "version": "0.29.11",
+  "version": "0.30.0",
   "description": "Collection of libraries for working with the DOM",
   "main": "lib/dom.js",
   "unpkg": "lib/dom.js",
