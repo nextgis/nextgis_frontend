@@ -22,7 +22,7 @@ export default function loadJSONNode(
   callback: (...args: any[]) => any,
   options: NgwRequestOptions<RequestMethods> = {},
   error: (reason?: any) => void,
-  onCancel: (() => void)[]
+  onCancel: (cancelHandler: () => void) => void
 ) {
   const request = new Promise((resolve, reject) => {
     const adapter = adapterFor(url);
@@ -65,6 +65,9 @@ export default function loadJSONNode(
       if (body) {
         req.write(body);
       }
+      onCancel(() => {
+        req.abort();
+      });
       req.end();
     } else {
       throw new Error(`Given URL '${url}' is not correct`);

@@ -116,4 +116,51 @@ describe('CancelablePromise', () => {
     });
     promise.cancel();
   });
+
+  it(`canceled after chain`, (done) => {
+    const spy = sinon.spy();
+    const thenSpy = sinon.spy();
+    const promise = getPromise().catch((er) => {
+      if (er.name === 'CancelError') {
+        spy();
+      }
+      if (spy.callCount === 2 && !thenSpy.called) {
+        done();
+      }
+    });
+    const promise2 = promise
+      .then(() => thenSpy())
+      .catch((er) => {
+        if (er.name === 'CancelError') {
+          spy();
+        }
+        if (spy.callCount === 2 && !thenSpy.called) {
+          done();
+        }
+      });
+    promise2.cancel();
+  });
+
+  it(`attach cancelable promise`, (done) => {
+    const promise = new CancelablePromise((resolve, reject) => {
+      resolve(
+        getPromise().catch((er) => {
+          if (er.name === 'CancelError') {
+            done();
+          }
+        })
+      );
+    });
+
+    promise.cancel();
+  });
+
+  it(`handle onCancel`, (done) => {
+    const promise = new CancelablePromise((resolve, reject, onCancel) => {
+      onCancel(() => {
+        done();
+      });
+    });
+    promise.cancel();
+  });
 });
