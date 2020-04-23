@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.30.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.11...v0.30.0) (2020-04-23)
+
+**Note:** Version bump only for package @nextgis/ol-map-adapter
+
+
+
+
+
 ## [0.29.11](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.10...v0.29.11) (2020-04-22)
 
 **Note:** Version bump only for package @nextgis/ol-map-adapter
