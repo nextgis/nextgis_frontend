@@ -28,8 +28,16 @@ import {
   createGeoJsonFeature,
 } from './utils/featureLayerUtils';
 
-import { NgwKitOptions, WebMapAdapterOptions } from './interfaces';
+import { createGeoJsonAdapter } from './createGeoJsonAdapter';
+import { createRasterAdapter } from './createRasterAdapter';
+
+import {
+  NgwKitOptions,
+  WebMapAdapterOptions,
+  GetClassAdapter,
+} from './interfaces';
 import { WebMapLayerAdapter } from './WebMapLayerAdapter';
+import { classAdapters } from './createAsyncAdapter';
 
 export class NgwKit implements StarterKit {
   static utils = {
@@ -45,6 +53,12 @@ export class NgwKit implements StarterKit {
     getIdentifyGeoJsonParams,
     createGeoJsonFeature,
     setScaleRatio,
+    createGeoJsonAdapter,
+    createRasterAdapter,
+  };
+
+  static addClassAdapters = (cls: string, adapter: GetClassAdapter) => {
+    classAdapters[cls] = adapter;
   };
 
   static updateWmsParams = updateImageParams;

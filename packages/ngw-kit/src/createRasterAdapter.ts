@@ -2,6 +2,7 @@ import {
   NgwLayerOptions,
   ResourceAdapter,
   NgwLayerAdapterType,
+  GetClassAdapterOptions,
 } from './interfaces';
 import WebMap, {
   BaseLayerAdapter,
@@ -16,22 +17,25 @@ import NgwConnector, {
 } from '@nextgis/ngw-connector';
 import { resourceIdFromLayerOptions } from './utils/resourceIdFromLayerOptions';
 
-export async function createRasterAdapter(
-  options: NgwLayerOptions,
-  webMap: WebMap,
-  baseUrl: string,
-  connector: NgwConnector,
-  resourceCls?: ResourceCls
-): Promise<Type<BaseLayerAdapter> | undefined> {
+export async function createRasterAdapter({
+  layerOptions,
+  webMap,
+  baseUrl,
+  connector,
+  item,
+}: GetClassAdapterOptions): Promise<Type<BaseLayerAdapter> | undefined> {
+  const resourceCls = item.resource.cls;
   const clsAdapterAlias: { [key in ResourceCls]?: NgwLayerAdapterType } = {
     wmsserver_service: 'WMS',
     terrain_provider: 'TERRAIN',
     model_3d: 'MODEL_3D',
   };
   let adapter =
-    options.adapter || (resourceCls && clsAdapterAlias[resourceCls]) || 'IMAGE';
+    layerOptions.adapter ||
+    (resourceCls && clsAdapterAlias[resourceCls]) ||
+    'IMAGE';
   if (adapter !== undefined) {
-    options.adapter = adapter;
+    layerOptions.adapter = adapter;
   }
   if (adapter === 'IMAGE') {
     const layerAdapters = webMap.getLayerAdapters();
@@ -45,7 +49,10 @@ export async function createRasterAdapter(
     BaseLayerAdapter
   >;
   if (adapterClass) {
-    const resourceId = await resourceIdFromLayerOptions(options, connector);
+    const resourceId = await resourceIdFromLayerOptions(
+      layerOptions,
+      connector
+    );
     return class Adapter extends adapterClass implements ResourceAdapter {
       // options = {};
       item?: ResourceItem;
@@ -53,7 +60,7 @@ export async function createRasterAdapter(
 
       constructor(public map: any, _options: any) {
         super(map, _options);
-        const opt = getLayerAdapterOptions(options, webMap, baseUrl);
+        const opt = getLayerAdapterOptions(layerOptions, webMap, baseUrl);
         if (opt) {
           if (opt.resourceId) {
             const layerAdapterOptions: ImageAdapterOptions = {

@@ -9,7 +9,7 @@ import WebMap, {
 import CancelablePromise from '@nextgis/cancelable-promise';
 import { debounce } from '@nextgis/utils';
 import NgwConnector, { ResourceItem } from '@nextgis/ngw-connector';
-import { NgwLayerOptions } from './interfaces';
+import { NgwLayerOptions, GetClassAdapterOptions } from './interfaces';
 import { getNgwLayerFeatures } from './utils/featureLayerUtils';
 import { resourceIdFromLayerOptions } from './utils/resourceIdFromLayerOptions';
 import { degrees2meters, vectorLayerGeomToPaintTypeAlias } from './utils/utils';
@@ -22,11 +22,10 @@ interface FilterArgs {
 }
 
 export async function createGeoJsonAdapter(
-  options: NgwLayerOptions<'GEOJSON'>,
-  webMap: WebMap,
-  connector: NgwConnector,
-  item?: ResourceItem
+  opt: GetClassAdapterOptions
 ) {
+  const { webMap, connector, item } = opt;
+  const options = opt.layerOptions as NgwLayerOptions<'GEOJSON'>;
   const adapter = webMap.mapAdapter.layerAdapters.GEOJSON as Type<
     VectorLayerAdapter
   >;
