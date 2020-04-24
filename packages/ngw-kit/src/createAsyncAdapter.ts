@@ -2,9 +2,18 @@ import NgwConnector, {
   ResourceCls,
   ResourceItem,
 } from '@nextgis/ngw-connector';
-import WebMap, { LayerAdapter, Type } from '@nextgis/webmap';
+import WebMap, { LayerAdapter } from '@nextgis/webmap';
+import { Type } from '@nextgis/utils';
 import QmsKit from '@nextgis/qms-kit';
-import { ResourceAdapter, NgwLayerOptions } from './interfaces';
+import {
+  ResourceAdapter,
+  NgwLayerOptions,
+  GetClassAdapterCallback,
+  GetClassAdapterByType,
+  GetClassAdapter,
+  GetClassAdapterOptions,
+  ClassAdapter,
+} from './interfaces';
 
 import { createGeoJsonAdapter } from './createGeoJsonAdapter';
 import { createRasterAdapter } from './createRasterAdapter';
@@ -12,6 +21,8 @@ import { createWebMapAdapter } from './createWebMapAdapter';
 import { applyMixins } from './utils/utils';
 import { NgwResource } from './NgwResource';
 import { resourceIdFromLayerOptions } from './utils/resourceIdFromLayerOptions';
+
+export const classAdapters: Record<string, GetClassAdapter> = {};
 
 const supportCls: ResourceCls[] = [
   'mapserver_style',
@@ -27,13 +38,14 @@ const supportCls: ResourceCls[] = [
   'terrain_provider',
 ];
 
-async function createAdapterFromFirstStyle(
-  parent: number,
-  options: NgwLayerOptions,
-  webMap: WebMap,
-  baseUrl: string,
-  connector: NgwConnector
-) {
+async function createAdapterFromFirstStyle({
+  layerOptions,
+  webMap,
+  baseUrl,
+  connector,
+  item,
+}: GetClassAdapterOptions) {
+  const parent = item.resource.id;
   const childrenStyles = await connector.get('resource.collection', null, {
     parent,
   });
@@ -41,7 +53,7 @@ async function createAdapterFromFirstStyle(
   if (firstStyle) {
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
     return createAsyncAdapter(
-      { ...options, resourceId: firstStyle.resource.id },
+      { ...layerOptions, resourceId: firstStyle.resource.id },
       webMap,
       baseUrl,
       connector
@@ -55,54 +67,40 @@ export async function createAsyncAdapter(
   baseUrl: string,
   connector: NgwConnector
 ): Promise<Type<ResourceAdapter> | undefined> {
-  let adapter: Promise<Type<LayerAdapter> | undefined> | undefined;
+  let adapter: ClassAdapter | undefined;
   let item: ResourceItem | undefined;
 
   const adapterType = options.adapter;
   const resourceId = await resourceIdFromLayerOptions(options, connector);
   if (resourceId) {
-    item = await connector.get('resource.item', null, { id: resourceId });
-    const cls = item.resource.cls;
+    item = await connector.getResource(resourceId);
     if (item) {
+      const cls = item.resource.cls;
+      const layerOptions: NgwLayerOptions = { ...options, resourceId };
+
+      const adapterOptions: GetClassAdapterOptions = {
+        layerOptions,
+        baseUrl,
+        webMap,
+        connector,
+        item,
+      };
+
       if (supportCls.indexOf(cls) !== -1) {
-        const _options: NgwLayerOptions = { ...options, resourceId };
         if (cls === 'webmap') {
-          adapter = createWebMapAdapter(_options, webMap, baseUrl, connector);
+          adapter = createWebMapAdapter(adapterOptions);
         } else if (cls === 'vector_layer') {
           if (adapterType !== undefined && adapterType !== 'GEOJSON') {
             if (adapterType === 'MVT') {
-              adapter = createRasterAdapter(
-                _options,
-                webMap,
-                baseUrl,
-                connector,
-                cls
-              );
+              adapter = createRasterAdapter(adapterOptions);
             } else {
-              return createAdapterFromFirstStyle(
-                item.resource.id,
-                _options,
-                webMap,
-                baseUrl,
-                connector
-              );
+              return createAdapterFromFirstStyle(adapterOptions);
             }
           } else {
-            adapter = createGeoJsonAdapter(
-              _options as NgwLayerOptions<'GEOJSON'>,
-              webMap,
-              connector,
-              item
-            );
+            adapter = createGeoJsonAdapter(adapterOptions);
           }
         } else if (cls === 'raster_layer') {
-          return createAdapterFromFirstStyle(
-            item.resource.id,
-            _options,
-            webMap,
-            baseUrl,
-            connector
-          );
+          return createAdapterFromFirstStyle(adapterOptions);
         } else if (
           cls === 'basemap_layer' &&
           item.basemap_layer &&
@@ -122,21 +120,24 @@ export async function createAsyncAdapter(
               ...options,
               resourceId: item.resource.parent.id,
             };
-            adapter = createGeoJsonAdapter(
-              parentOptions as NgwLayerOptions<'GEOJSON'>,
-              webMap,
-              connector,
-              item
-            );
+            adapter = createGeoJsonAdapter({
+              ...adapterOptions,
+              layerOptions: parentOptions,
+            });
           } else {
-            adapter = createRasterAdapter(
-              _options,
-              webMap,
-              baseUrl,
-              connector,
-              cls
-            );
+            adapter = createRasterAdapter(adapterOptions);
           }
+        }
+      } else if (classAdapters[cls]) {
+        const getClassAdapter = classAdapters[cls];
+        let classAdapter: GetClassAdapterCallback | undefined;
+        if (adapterType && typeof classAdapter !== 'function') {
+          classAdapter = (getClassAdapter as GetClassAdapterByType)[adapterType];
+        } else {
+          classAdapter = getClassAdapter as GetClassAdapterCallback;
+        }
+        if (classAdapter) {
+          adapter = classAdapter(adapterOptions);
         }
       } else {
         throw `Resource class '${cls}' not yet supported.`;

@@ -11,9 +11,11 @@ import WebMap, {
   VectorLayerAdapter,
   GeoJsonAdapterOptions,
   OnLayerClickOptions,
+  LayerAdapter,
 } from '@nextgis/webmap';
 import NgwConnector, { ResourceItem } from '@nextgis/ngw-connector';
 import { FeatureLayersIdentify } from '@nextgis/ngw-connector';
+import { Type } from '@nextgis/utils';
 import { Feature } from 'geojson';
 
 export type NgwLayerAdapterType =
@@ -214,3 +216,23 @@ export interface GetIdentifyGeoJsonOptions {
   connector: NgwConnector;
   multiple?: boolean;
 }
+
+export interface GetClassAdapterOptions {
+  layerOptions: NgwLayerOptions;
+  webMap: WebMap;
+  baseUrl: string;
+  connector: NgwConnector;
+  item: ResourceItem;
+}
+
+export type ClassAdapter = Promise<Type<LayerAdapter> | undefined>;
+
+export type GetClassAdapterCallback = (
+  options: GetClassAdapterOptions
+) => Promise<Type<LayerAdapter> | undefined> | undefined;
+
+export type GetClassAdapterByType = {
+  [adapterType: string]: GetClassAdapterCallback;
+};
+
+export type GetClassAdapter = GetClassAdapterCallback | GetClassAdapterByType;
