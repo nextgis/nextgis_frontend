@@ -41,7 +41,6 @@ const supportCls: ResourceCls[] = [
 async function createAdapterFromFirstStyle({
   layerOptions,
   webMap,
-  baseUrl,
   connector,
   item,
 }: GetClassAdapterOptions) {
@@ -55,7 +54,6 @@ async function createAdapterFromFirstStyle({
     return createAsyncAdapter(
       { ...layerOptions, resourceId: firstStyle.resource.id },
       webMap,
-      baseUrl,
       connector
     );
   }
@@ -64,7 +62,6 @@ async function createAdapterFromFirstStyle({
 export async function createAsyncAdapter(
   options: NgwLayerOptions,
   webMap: WebMap,
-  baseUrl: string,
   connector: NgwConnector
 ): Promise<Type<ResourceAdapter> | undefined> {
   let adapter: ClassAdapter | undefined;
@@ -80,7 +77,6 @@ export async function createAsyncAdapter(
 
       const adapterOptions: GetClassAdapterOptions = {
         layerOptions,
-        baseUrl,
         webMap,
         connector,
         item,
@@ -132,7 +128,9 @@ export async function createAsyncAdapter(
         const getClassAdapter = classAdapters[cls];
         let classAdapter: GetClassAdapterCallback | undefined;
         if (adapterType && typeof classAdapter !== 'function') {
-          classAdapter = (getClassAdapter as GetClassAdapterByType)[adapterType];
+          classAdapter = (getClassAdapter as GetClassAdapterByType)[
+            adapterType
+          ];
         } else {
           classAdapter = getClassAdapter as GetClassAdapterCallback;
         }
