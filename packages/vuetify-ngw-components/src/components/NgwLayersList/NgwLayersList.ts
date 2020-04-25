@@ -196,7 +196,17 @@ export class NgwLayersList extends Vue {
       }
     }
     let visible = false;
-    const webMap = 'item' in layer && layer.item && layer.item.webmap;
+
+    let webMap: boolean = false;
+    if ('item' in layer && layer.item ) {
+      webMap = !!layer.item.webmap;
+
+      // experimental layer item type
+      if (!webMap && 'scene_3d' in layer.item) {
+        webMap = true;
+      }
+    }
+
     const webMapLayer = layer as WebMapLayerAdapter;
     if (webMap && webMapLayer.layer) {
       const tree = webMapLayer.layer.tree;

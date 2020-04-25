@@ -104,7 +104,6 @@ export class WebMapLayerItem extends Item<ItemOptions> {
     } else {
       let adapter: LayerAdapterDefinition | undefined;
       const options: any = {
-        ...item,
         headers: this.options.headers,
       };
       if (item.item_type === 'layer') {
@@ -116,6 +115,7 @@ export class WebMapLayerItem extends Item<ItemOptions> {
           ? this._mapScaleToZoomLevel(item.layer_min_scale_denom)
           : this.webMap.options.minZoom;
         objectAssign(options, {
+          ...item,
           maxZoom,
           minZoom,
           minScale: item.layer_min_scale_denom,

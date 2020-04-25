@@ -7,8 +7,7 @@ import WebMap, {
   FilterOptions,
 } from '@nextgis/webmap';
 import CancelablePromise from '@nextgis/cancelable-promise';
-import { debounce } from '@nextgis/utils';
-import NgwConnector, { ResourceItem } from '@nextgis/ngw-connector';
+import { debounce, objectAssign } from '@nextgis/utils';
 import { NgwLayerOptions, GetClassAdapterOptions } from './interfaces';
 import { getNgwLayerFeatures } from './utils/featureLayerUtils';
 import { resourceIdFromLayerOptions } from './utils/resourceIdFromLayerOptions';
@@ -83,6 +82,9 @@ export async function createGeoJsonAdapter(
       if (opt_.data && Object.keys(opt_.data).length === 0) {
         opt_.data = undefined;
         needUpdate = false;
+      }
+      if (options.adapterOptions) {
+        objectAssign(opt_, options.adapterOptions);
       }
       const layer = super.addLayer(opt_);
       this.options.strategy = opt_.strategy || undefined;
