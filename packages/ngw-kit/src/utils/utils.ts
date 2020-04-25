@@ -60,7 +60,6 @@ export function getLayerAdapterOptions(
 export function addNgwLayer(
   options: NgwLayerOptions,
   webMap: WebMap,
-  baseUrl: string,
   connector: NgwConnector
 ): Promise<Type<ResourceAdapter> | undefined> {
   const headers = connector.getAuthorizationHeaders();
@@ -68,7 +67,7 @@ export function addNgwLayer(
     options.headers = headers;
   }
 
-  return createAsyncAdapter(options, webMap, baseUrl, connector);
+  return createAsyncAdapter(options, webMap, connector);
 }
 
 export function getWebMapExtent(

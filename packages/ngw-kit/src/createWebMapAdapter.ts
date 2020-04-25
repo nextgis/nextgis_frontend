@@ -7,7 +7,6 @@ import { resourceIdFromLayerOptions } from './utils/resourceIdFromLayerOptions';
 export async function createWebMapAdapter({
   layerOptions: options,
   webMap,
-  baseUrl,
   connector,
 }: GetClassAdapterOptions): Promise<Type<WebMapLayerAdapter>> {
   const resourceId = await resourceIdFromLayerOptions(options, connector);
@@ -16,7 +15,6 @@ export async function createWebMapAdapter({
       super(map, {
         webMap,
         resourceId,
-        baseUrl,
         connector,
       });
     }

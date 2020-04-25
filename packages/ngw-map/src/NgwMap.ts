@@ -186,7 +186,6 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<
         const adapter = NgwKit.utils.addNgwLayer(
           options,
           this,
-          this.options.baseUrl,
           this.connector
         );
 

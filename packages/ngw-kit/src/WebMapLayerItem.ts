@@ -4,11 +4,22 @@
 
 import Item, { ItemOptions } from '@nextgis/item';
 
-import WebMap, { LayerAdaptersOptions, LayerAdapter } from '@nextgis/webmap';
-import { TreeGroup, TreeLayer } from './interfaces';
+import WebMap, { LayerAdapter, LayerAdapterDefinition } from '@nextgis/webmap';
+import NgwConnector from '@nextgis/ngw-connector';
+import { objectAssign } from '@nextgis/utils';
+import { TreeGroup, TreeLayer, TreeItem } from './interfaces';
 import { setScaleRatio } from './utils/utils';
 
 export class WebMapLayerItem extends Item<ItemOptions> {
+  static GetAdapterFromLayerType: {
+    [layerType: string]: (
+      item: TreeItem,
+      options: any,
+      webMap: WebMap,
+      connector?: NgwConnector
+    ) => LayerAdapterDefinition;
+  } = {};
+
   static options: ItemOptions = {
     properties: [
       {
@@ -41,6 +52,7 @@ export class WebMapLayerItem extends Item<ItemOptions> {
   };
 
   item: TreeGroup | TreeLayer;
+  connector?: NgwConnector;
   layer?: LayerAdapter;
 
   _rootDescendantsCount = 0;
@@ -49,9 +61,13 @@ export class WebMapLayerItem extends Item<ItemOptions> {
     public webMap: WebMap,
     item: TreeGroup | TreeLayer,
     options?: ItemOptions,
-    parent?: WebMapLayerItem
+    connector?: NgwConnector,
+    parent?: WebMapLayerItem,
   ) {
     super({ ...WebMapLayerItem.options, ...options });
+    if (connector) {
+      this.connector = connector;
+    }
     if (parent) {
       this.tree.setParent(parent);
     }
@@ -79,35 +95,46 @@ export class WebMapLayerItem extends Item<ItemOptions> {
             this.webMap,
             x,
             this.options,
+            this.connector,
             this
           );
           this.tree.addChild(children);
         });
       }
-    } else if (item.item_type === 'layer') {
-      const adapter = (item.adapter ||
-        item.layer_adapter.toUpperCase()) as keyof LayerAdaptersOptions;
-      const maxZoom = item.layer_max_scale_denom
-        ? this._mapScaleToZoomLevel(item.layer_max_scale_denom)
-        : this.webMap.options.maxZoom;
-      const minZoom = item.layer_min_scale_denom
-        ? this._mapScaleToZoomLevel(item.layer_min_scale_denom)
-        : this.webMap.options.minZoom;
+    } else {
+      let adapter: LayerAdapterDefinition | undefined;
       const options: any = {
-        maxZoom,
-        minZoom,
-        minScale: item.layer_min_scale_denom,
-        maxScale: item.layer_max_scale_denom,
         ...item,
         headers: this.options.headers,
       };
-      if (this.options.order) {
-        const subOrder = this.options.drawOrderEnabled
-          ? this._rootDescendantsCount - item.draw_order_position
-          : this.id;
-        options.order = Number((this.options.order | 0) + '.' + subOrder);
+      if (item.item_type === 'layer') {
+        adapter = item.adapter || item.layer_adapter.toUpperCase();
+        const maxZoom = item.layer_max_scale_denom
+          ? this._mapScaleToZoomLevel(item.layer_max_scale_denom)
+          : this.webMap.options.maxZoom;
+        const minZoom = item.layer_min_scale_denom
+          ? this._mapScaleToZoomLevel(item.layer_min_scale_denom)
+          : this.webMap.options.minZoom;
+        objectAssign(options, {
+          maxZoom,
+          minZoom,
+          minScale: item.layer_min_scale_denom,
+          maxScale: item.layer_max_scale_denom,
+        });
+        if (this.options.order) {
+          const subOrder = this.options.drawOrderEnabled
+            ? this._rootDescendantsCount - item.draw_order_position
+            : this.id;
+          options.order = Number((this.options.order | 0) + '.' + subOrder);
+        }
+      } else if (WebMapLayerItem.GetAdapterFromLayerType[item.item_type]) {
+        const getAdapter =
+          WebMapLayerItem.GetAdapterFromLayerType[item.item_type];
+        adapter = await getAdapter(item, options, this.webMap, this.connector);
       }
-      newLayer = await this.webMap.addLayer(adapter, options);
+      if (adapter) {
+        newLayer = await this.webMap.addLayer(adapter, options);
+      }
     }
     if (newLayer) {
       i._layer = newLayer;
