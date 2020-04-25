@@ -15,7 +15,12 @@ import { Paint } from '@nextgis/paint';
 // backward compatibility
 export { PropertiesFilter, Operations, PropertyFilter, checkIfPropertyFilter };
 
-export type AdapterConstructor = () => Promise<Type<LayerAdapter> | undefined>;
+export type AdapterConstructor = () => Promise<Type<LayerAdapter> | any>;
+
+export type LayerAdapterDefinition<K extends keyof LayerAdapters = string> =
+  | K
+  | Type<LayerAdapters[K]>
+  | Promise<Type<LayerAdapters[K]> | undefined>;
 
 export interface OnLayerClickOptions {
   layer: LayerAdapter;

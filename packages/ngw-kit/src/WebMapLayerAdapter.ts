@@ -1,8 +1,8 @@
 import WebMap, { LngLatBoundsArray, MapClickEvent } from '@nextgis/webmap';
-import { ResourceItem } from '@nextgis/ngw-connector';
+import { ResourceItem, WebmapResource } from '@nextgis/ngw-connector';
 import CancelablePromise from '@nextgis/cancelable-promise';
 
-import { fixUrlStr } from '@nextgis/utils';
+import { fixUrlStr, Type } from '@nextgis/utils';
 import {
   getLayerAdapterOptions,
   updateImageParams,
@@ -32,10 +32,13 @@ export class WebMapLayerAdapter implements ResourceAdapter {
    */
   pixelRadius = 10; // webmapSettings.identify_radius,
   resourceId!: number;
+  webmapClassName = 'webmap';
+  WebMapLayerItem: Type<WebMapLayerItem> = WebMapLayerItem;
   readonly emitter: StrictEventEmitter<
     EventEmitter,
     WebMapLayerAdapterEvents
   > = new EventEmitter();
+  protected _extent?: LngLatBoundsArray;
   private response?: ResourceItem;
   private _webmapLayersIds?: number[];
 
@@ -150,10 +153,11 @@ export class WebMapLayerAdapter implements ResourceAdapter {
           }
           options.order = this.options.order;
           options.drawOrderEnabled = webmap.draw_order_enabled;
-          const layer = new WebMapLayerItem(
+          const layer = new this.WebMapLayerItem(
             this.options.webMap,
             webmap.root_item,
-            options
+            options,
+            this.options.connector
           );
           layer.emitter.on('init', () => resolve(layer));
         });
@@ -163,16 +167,24 @@ export class WebMapLayerAdapter implements ResourceAdapter {
 
   private async getWebMapConfig(id: number) {
     try {
-      const data = await this.options.connector.get('resource.item', null, {
-        id,
-      });
-      this.response = data;
-      const webmap = data.webmap;
-      if (webmap) {
-        this._updateItemsParams(webmap.root_item, this.options.webMap, data);
-        return webmap;
-      } else {
-        // TODO: resource is no webmap
+      const data = await this.options.connector.getResource(id);
+      if (data) {
+        this.response = data;
+        const webmap = data[
+          this.webmapClassName as keyof ResourceItem
+        ] as WebmapResource;
+        if (webmap) {
+          this._extent = [
+            webmap.extent_left,
+            webmap.extent_bottom,
+            webmap.extent_left,
+            webmap.extent_top,
+          ];
+          this._updateItemsParams(webmap.root_item, this.options.webMap, data);
+          return webmap;
+        } else {
+          // TODO: resource is no webmap
+        }
       }
     } catch (er) {
       throw er;
@@ -196,7 +208,7 @@ export class WebMapLayerAdapter implements ResourceAdapter {
         }
       } else if (item.item_type === 'layer') {
         const url = fixUrlStr(
-          this.options.baseUrl + '/api/component/render/image'
+          this.options.connector.options.baseUrl + '/api/component/render/image'
         );
         const resourceId = item.layer_style_id;
         item.url = url;
@@ -211,7 +223,7 @@ export class WebMapLayerAdapter implements ResourceAdapter {
               resourceId,
             },
             webMap,
-            this.options.baseUrl
+            this.options.connector.options.baseUrl || ''
           ),
         };
       }

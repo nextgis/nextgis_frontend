@@ -6,7 +6,7 @@ export class NgwResource {
   item!: ResourceItem;
   connector!: NgwConnector;
 
-  private _extent?: LngLatBoundsArray;
+  protected _extent?: LngLatBoundsArray;
 
   async getExtent(): Promise<LngLatBoundsArray | undefined> {
     if (this._extent) {

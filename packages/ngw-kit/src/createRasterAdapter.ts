@@ -20,7 +20,6 @@ import { resourceIdFromLayerOptions } from './utils/resourceIdFromLayerOptions';
 export async function createRasterAdapter({
   layerOptions,
   webMap,
-  baseUrl,
   connector,
   item,
 }: GetClassAdapterOptions): Promise<Type<BaseLayerAdapter> | undefined> {
@@ -60,7 +59,11 @@ export async function createRasterAdapter({
 
       constructor(public map: any, _options: any) {
         super(map, _options);
-        const opt = getLayerAdapterOptions(layerOptions, webMap, baseUrl);
+        const opt = getLayerAdapterOptions(
+          layerOptions,
+          webMap,
+          connector.options.baseUrl || ''
+        );
         if (opt) {
           if (opt.resourceId) {
             const layerAdapterOptions: ImageAdapterOptions = {

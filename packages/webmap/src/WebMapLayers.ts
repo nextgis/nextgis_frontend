@@ -14,6 +14,7 @@ import {
   PropertiesFilter,
   FilterOptions,
   LayerDefinition,
+  LayerAdapterDefinition,
 } from './interfaces/LayerAdapter';
 import { LayerDef, Type } from './interfaces/BaseTypes';
 
@@ -167,10 +168,7 @@ export class WebMapLayers<
     K extends keyof LayerAdapters,
     O extends AdapterOptions = AdapterOptions
   >(
-    adapter:
-      | K
-      | Type<LayerAdapters[K]>
-      | Promise<Type<LayerAdapters[K]> | undefined>,
+    adapter: LayerAdapterDefinition<K>,
     options: O | LayerAdaptersOptions[K],
     order?: number
   ): Promise<LayerAdapter> {

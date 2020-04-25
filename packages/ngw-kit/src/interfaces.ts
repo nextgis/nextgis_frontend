@@ -38,7 +38,7 @@ export interface AppSettings {
 }
 
 export interface TreeItem {
-  item_type: 'root' | 'group' | 'layer';
+  item_type: 'root' | 'group' | 'layer' | string;
   display_name?: string;
   resourceId?: number | [number, string];
   parentId?: number;
@@ -147,7 +147,6 @@ export interface NgwKitOptions {
 type A = AdapterOptions; // & TreeLayer & TreeGroup;
 
 export interface WebMapAdapterOptions extends A {
-  baseUrl: string;
   resourceId: number | [number, string];
   webMap: WebMap;
   connector: NgwConnector;
@@ -220,7 +219,6 @@ export interface GetIdentifyGeoJsonOptions {
 export interface GetClassAdapterOptions {
   layerOptions: NgwLayerOptions;
   webMap: WebMap;
-  baseUrl: string;
   connector: NgwConnector;
   item: ResourceItem;
 }

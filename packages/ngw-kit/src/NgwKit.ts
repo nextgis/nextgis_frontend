@@ -28,6 +28,8 @@ import {
   createGeoJsonFeature,
 } from './utils/featureLayerUtils';
 
+import { resourceIdFromLayerOptions } from './utils/resourceIdFromLayerOptions';
+
 import { createGeoJsonAdapter } from './createGeoJsonAdapter';
 import { createRasterAdapter } from './createRasterAdapter';
 
@@ -37,6 +39,7 @@ import {
   GetClassAdapter,
 } from './interfaces';
 import { WebMapLayerAdapter } from './WebMapLayerAdapter';
+import { WebMapLayerItem } from './WebMapLayerItem';
 import { classAdapters } from './createAsyncAdapter';
 
 export class NgwKit implements StarterKit {
@@ -51,12 +54,16 @@ export class NgwKit implements StarterKit {
     getNgwLayerItem,
     getIdentifyGeoJson,
     getIdentifyGeoJsonParams,
+    resourceIdFromLayerOptions,
     createGeoJsonFeature,
     setScaleRatio,
     createGeoJsonAdapter,
     createRasterAdapter,
   };
-
+  static classes = {
+    WebMapLayerAdapter,
+    WebMapLayerItem,
+  };
   static addClassAdapters = (cls: string, adapter: GetClassAdapter) => {
     classAdapters[cls] = adapter;
   };
@@ -98,7 +105,6 @@ export class NgwKit implements StarterKit {
           const options: WebMapAdapterOptions = {
             resourceId: r,
             connector: this.connector,
-            baseUrl: this.url,
             webMap,
           };
           const layer = (await webMap.addLayer(WebMapLayerAdapter, {
