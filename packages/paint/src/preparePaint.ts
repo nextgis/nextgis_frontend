@@ -17,7 +17,7 @@ import { createExpressionCallback } from './fromPaintExpression';
 
 function updatePaintOptionFromCallback(
   paint: GetCustomPaintOptions,
-  getPaintFunctions: { [name: string]: GetPaintFunction }
+  getPaintFunctions?: { [name: string]: GetPaintFunction }
 ): VectorAdapterLayerPaint | undefined {
   if (typeof paint.from === 'function') {
     return paint.from(paint.options);
@@ -55,8 +55,8 @@ function createPropertiesPaint(
 
 export function preparePaint(
   paint: Paint,
-  defaultPaint: GeometryPaint,
-  getPaintFunctions: { [name: string]: GetPaintFunction }
+  defaultPaint?: GeometryPaint,
+  getPaintFunctions?: { [name: string]: GetPaintFunction }
 ): Paint {
   let newPaint: Paint | undefined;
   if (isPaintCallback(paint)) {
