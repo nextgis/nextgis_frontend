@@ -20,9 +20,7 @@ interface FilterArgs {
   options?: FilterOptions;
 }
 
-export async function createGeoJsonAdapter(
-  opt: GetClassAdapterOptions
-) {
+export async function createGeoJsonAdapter(opt: GetClassAdapterOptions) {
   const { webMap, connector, item } = opt;
   const options = opt.layerOptions as NgwLayerOptions<'GEOJSON'>;
   const adapter = webMap.mapAdapter.layerAdapters.GEOJSON as Type<
@@ -52,6 +50,8 @@ export async function createGeoJsonAdapter(
       filters,
       connector,
       ...opt,
+      // strict restriction on loading data from large layers
+      limit: opt?.limit !== undefined ? opt.limit : 3000,
     });
     return await _dataPromise;
   };
@@ -65,6 +65,7 @@ export async function createGeoJsonAdapter(
 
   return class Adapter extends adapter {
     emitter = new EventEmitter();
+    _count?: number;
     __onMapMove?: () => void;
     __onMapMoveStart?: () => void;
     __enableMapMoveListener?: () => void;
@@ -93,6 +94,7 @@ export async function createGeoJsonAdapter(
         filters: opt_.propertiesFilter,
         options: getLayerFilterOptions(opt_),
       };
+
       if (needUpdate) {
         this.updateLayer();
       }
@@ -111,6 +113,21 @@ export async function createGeoJsonAdapter(
       this.__onMapMove = undefined;
       this.__onMapMoveStart = undefined;
       abort();
+    }
+
+    getCount() {
+      if (this._count !== undefined) {
+        return this._count;
+      }
+      return connector
+        .get('feature_layer.feature.count', null, {
+          id: resourceId,
+        })
+        .then((resp) => {
+          if (resp) {
+            this._count = resp.total_count;
+          }
+        });
     }
 
     async updateLayer(filterArgs?: FilterArgs) {

@@ -23,6 +23,10 @@ export interface NgwExtent {
   };
 }
 
+export interface FeatureLayerCount {
+  total_count: number;
+}
+
 export type ResourceDefinition = string | number;
 
 export interface FileUploadResp {
@@ -64,6 +68,7 @@ export interface GetRequestItemsResponseMap extends RequestItemKeys {
   'feature_layer.store': ResourceStoreItem[];
   'feature_layer.field': FeatureLayerField[];
   'feature_layer.feature.item_extent': NgwExtent;
+  'feature_layer.feature.count': FeatureLayerCount;
 }
 
 export interface CreatedResource {
