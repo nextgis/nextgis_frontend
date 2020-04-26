@@ -36,7 +36,6 @@ export class NgwLayersList extends Vue {
 
   private _layers: Array<LayerAdapter | ResourceAdapter> = [];
   private __updateItems?: () => Promise<void>;
-  private __onNgwMapLoad?: Promise<NgwMap>;
 
   @Watch('selection')
   setVisibleLayers(selection: string[], old: string[]) {
@@ -115,19 +114,14 @@ export class NgwLayersList extends Vue {
   }
 
   private create() {
-    this.__onNgwMapLoad = this.ngwMap.onLoad();
-    setTimeout(() => {
-      if (this.__onNgwMapLoad) {
-        this.__onNgwMapLoad.then(() => {
-          this.destroy();
-          this.updateItems();
-          const __updateItems = debounce(() => this._updateItems());
-          this.__updateItems = __updateItems;
+    this.ngwMap.onLoad().then(() => {
+      this.destroy();
+      this.updateItems();
+      const __updateItems = debounce(() => this._updateItems());
+      this.__updateItems = __updateItems;
 
-          this.ngwMap.emitter.on('layer:add', __updateItems);
-          this.ngwMap.emitter.on('layer:remove', __updateItems);
-        });
-      }
+      this.ngwMap.emitter.on('layer:add', __updateItems);
+      this.ngwMap.emitter.on('layer:remove', __updateItems);
     });
   }
 
@@ -198,7 +192,7 @@ export class NgwLayersList extends Vue {
     let visible = false;
 
     let webMap: boolean = false;
-    if ('item' in layer && layer.item ) {
+    if ('item' in layer && layer.item) {
       webMap = !!layer.item.webmap;
 
       // experimental layer item type
@@ -222,7 +216,9 @@ export class NgwLayersList extends Vue {
     if (
       item.children &&
       this.hideWebmapRoot &&
-      webMapLayer.layer?.item.item_type === 'root'
+      webMapLayer.layer &&
+      webMapLayer.layer.item &&
+      webMapLayer.layer.item.item_type === 'root'
     ) {
       item.children.reverse().forEach((x) => this.items.push(x));
       webMapLayer.layer && webMapLayer.layer.properties.set('visibility', true);
