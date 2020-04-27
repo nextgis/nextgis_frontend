@@ -16,6 +16,7 @@ import { arrayCompare, debounce } from '@nextgis/utils';
 export interface VueTreeItem {
   id: string;
   name: string;
+  layer?: string;
   children?: VueTreeItem[];
 }
 
@@ -175,6 +176,7 @@ export class NgwLayersList extends Vue {
     const item: VueTreeItem = {
       id: layer.id || '',
       name,
+      layer: layer.id || '',
       children: [],
     };
     if (this.include) {
@@ -245,6 +247,9 @@ export class NgwLayersList extends Vue {
         id,
         name: x.item.display_name || id,
       };
+      if (x.layer) {
+        item.layer = x.layer.id;
+      }
       const children = x.tree.getChildren<WebMapLayerItem>();
       if (children && children.length) {
         item.children = this._createWebMapTree(children);

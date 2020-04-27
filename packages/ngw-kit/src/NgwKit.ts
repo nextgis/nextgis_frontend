@@ -38,6 +38,7 @@ import {
   WebMapAdapterOptions,
   GetClassAdapter,
 } from './interfaces';
+import { NgwResource } from './NgwResource';
 import { WebMapLayerAdapter } from './WebMapLayerAdapter';
 import { WebMapLayerItem } from './WebMapLayerItem';
 import { classAdapters } from './createAsyncAdapter';
@@ -63,6 +64,7 @@ export class NgwKit implements StarterKit {
   static classes = {
     WebMapLayerAdapter,
     WebMapLayerItem,
+    NgwResource,
   };
   static addClassAdapters = (cls: string, adapter: GetClassAdapter) => {
     classAdapters[cls] = adapter;
