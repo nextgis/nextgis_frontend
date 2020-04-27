@@ -215,7 +215,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
         options.fill = Color.fromCssColorString(fillColor);
         options.markerColor = Color.fromCssColorString(fillColor);
       }
-      if (options.stroke) {
+      if (paint.stroke || paint.strokeColor) {
         const strokeColor = paint.strokeColor || color;
         if (typeof strokeColor === 'string') {
           options.stroke = Color.fromCssColorString(strokeColor);
