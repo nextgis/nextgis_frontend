@@ -28,6 +28,7 @@ import {
 import { propertiesFilter } from './utils/propertiesFilter';
 import { BaseWebMap } from './BaseWebMap';
 import { WebMapEvents } from './interfaces/Events';
+import { FitOptions } from './interfaces/MapAdapter';
 
 export class WebMapLayers<
   M = any,
@@ -46,12 +47,12 @@ export class WebMapLayers<
    * But not all layers have borders
    * @param layerDef
    */
-  async fitLayer(layerDef: LayerDef) {
+  async fitLayer(layerDef: LayerDef, options?: FitOptions) {
     const layer = this.getLayer(layerDef);
     if (layer && layer.getExtent) {
       const extent = await layer.getExtent();
       if (extent) {
-        this.fitBounds(extent);
+        this.fitBounds(extent, options);
       }
     }
   }
@@ -232,7 +233,7 @@ export class WebMapLayers<
         options.order = 0;
       }
 
-      let layerId = _adapter.options.id;
+      let layerId = String(_adapter.options.id);
       if (layerId) {
         this._layers[layerId] = _adapter;
       }
@@ -246,7 +247,7 @@ export class WebMapLayers<
       _adapter.id = _adapter.options.id || String(id);
       _adapter.order = _adapter.options.order || _order;
 
-      layerId = _adapter.options.id;
+      layerId = String(_adapter.options.id);
       if (layerId) {
         if (geoJsonOptions.filter) {
           this.filterLayer(_adapter, geoJsonOptions.filter);
