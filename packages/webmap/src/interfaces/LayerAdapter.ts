@@ -202,9 +202,11 @@ export interface TileAdapterOptions extends RasterAdapterOptions {
 }
 
 export interface Model3DOptions extends RasterAdapterOptions {
-  lon?: number;
-  lat?: number;
+  lon: number;
+  lat: number;
   height?: number;
+  rotate?: number;
+  scale?: number;
 }
 
 export interface WmsAdapterOptions extends RasterAdapterOptions {
@@ -295,8 +297,8 @@ export interface BaseLayerAdapter<
   removeLayer?(): void;
   beforeRemove?(): void;
 
-  showLayer?(layer: L): void;
-  hideLayer?(layer: L): void;
+  showLayer?(layer?: L): void;
+  hideLayer?(layer?: L): void;
 
   getExtent?(): LngLatBoundsArray | Promise<LngLatBoundsArray> | undefined;
 

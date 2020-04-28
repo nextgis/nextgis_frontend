@@ -23,9 +23,9 @@ interface FilterArgs {
 export async function createGeoJsonAdapter(opt: GetClassAdapterOptions) {
   const { webMap, connector, item } = opt;
   const options = opt.layerOptions as NgwLayerOptions<'GEOJSON'>;
-  const adapter = webMap.mapAdapter.layerAdapters.GEOJSON as Type<
-    VectorLayerAdapter
-  >;
+  const adapter =
+    (opt.Adapter as Type<VectorLayerAdapter>) ||
+    (webMap.mapAdapter.layerAdapters.GEOJSON as Type<VectorLayerAdapter>);
 
   let _dataPromise: CancelablePromise<any> | undefined;
   const _fullDataLoad = false;
@@ -151,6 +151,9 @@ export async function createGeoJsonAdapter(opt: GetClassAdapterOptions) {
         if (er.name !== 'CancelError') {
           throw er;
         }
+      }
+      if (super.updateLayer) {
+        super.updateLayer();
       }
     }
 
