@@ -3,7 +3,13 @@
  * UNDER DEVELOPMENT
  */
 import { LngLatBoundsArray, Model3DOptions } from '@nextgis/webmap';
-import { Model, Transforms, Cartesian3 } from 'cesium';
+import {
+  Model,
+  Transforms,
+  Cartesian3,
+  Math as CMath,
+  HeadingPitchRoll,
+} from 'cesium';
 
 import { BaseAdapter } from './BaseAdapter';
 
@@ -17,23 +23,34 @@ export class Model3DAdapter extends BaseAdapter<Model3DOptions, Layer> {
   private _layer?: Model;
 
   addLayer(opt: Model3DOptions) {
-    if (opt.lon && opt.lat) {
-      const origin = Cartesian3.fromDegrees(opt.lon, opt.lat);
-      const modelMatrix = Transforms.eastNorthUpToFixedFrame(origin);
+    const { lat, lon, height, rotate } = opt;
+    const position = Cartesian3.fromDegrees(lon, lat, height);
 
-      this.options = { ...opt };
-      this._layer = Model.fromGltf({
-        url: this.options.url,
-        show: false,
-        modelMatrix,
-        scale: 1,
-        allowPicking: false,
-        debugShowBoundingVolume: false,
-        debugWireframe: false,
-      });
-      this.map.scene.primitives.add(this._layer);
-      return this._layer;
-    }
+    const heading = CMath.toRadians(rotate || 0);
+    const pitch = 0;
+    const roll = 0;
+    const headingPitchRoll = new HeadingPitchRoll(heading, pitch, roll);
+
+    const modelMatrix = Transforms.headingPitchRollToFixedFrame(
+      position,
+      headingPitchRoll
+    );
+
+    // const modelMatrix = Transforms.eastNorthUpToFixedFrame(position);
+
+    this.options = { ...opt };
+    this._layer = Model.fromGltf({
+      url: this.options.url,
+      show: false,
+      modelMatrix,
+      scale: opt.scale || 1,
+      allowPicking: false,
+      debugShowBoundingVolume: false,
+      debugWireframe: false,
+    });
+
+    this.map.scene.primitives.add(this._layer);
+    return this._layer;
   }
 
   getExtent() {
