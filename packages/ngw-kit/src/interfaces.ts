@@ -12,6 +12,7 @@ import WebMap, {
   GeoJsonAdapterOptions,
   OnLayerClickOptions,
   LayerAdapter,
+  BaseLayerAdapter,
 } from '@nextgis/webmap';
 import NgwConnector, { ResourceItem } from '@nextgis/ngw-connector';
 import { FeatureLayersIdentify } from '@nextgis/ngw-connector';
@@ -221,6 +222,7 @@ export interface GetClassAdapterOptions {
   webMap: WebMap;
   connector: NgwConnector;
   item: ResourceItem;
+  Adapter?: Type<BaseLayerAdapter>;
 }
 
 export type ClassAdapter = Promise<Type<LayerAdapter> | undefined>;
