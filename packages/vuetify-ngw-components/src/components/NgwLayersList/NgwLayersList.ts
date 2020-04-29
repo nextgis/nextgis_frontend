@@ -52,11 +52,12 @@ export class NgwLayersList extends Vue {
           desc.forEach((d) => {
             const id = this._getLayerId(d);
             if (id) {
-              d.properties.set('visibility', selection.indexOf(id) !== -1);
+              const isVisible = selection.indexOf(id) !== -1;
+              console.log(1);
+              d.properties.set('visibility', isVisible);
             }
           });
-        }
-        if (x.id) {
+        } else if (x.id) {
           const id = this._getLayerId(x);
           this.ngwMap.toggleLayer(x, selection.indexOf(id) !== -1);
         }
@@ -193,18 +194,8 @@ export class NgwLayersList extends Vue {
     }
     let visible = false;
 
-    let webMap: boolean = false;
-    if ('item' in layer && layer.item) {
-      webMap = !!layer.item.webmap;
-
-      // experimental layer item type
-      if (!webMap && 'scene_3d' in layer.item) {
-        webMap = true;
-      }
-    }
-
     const webMapLayer = layer as WebMapLayerAdapter;
-    if (webMap && webMapLayer.layer) {
+    if (webMapLayer.layer && webMapLayer.layer.tree) {
       const tree = webMapLayer.layer.tree;
       const children = tree.getChildren() as WebMapLayerItem[];
       item.children = this._createWebMapTree(children).reverse();
