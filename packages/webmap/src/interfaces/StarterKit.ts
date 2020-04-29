@@ -8,7 +8,7 @@ import WebMap, { Type, LayerAdapter } from '../index';
 
 export interface LayerAdapterCreators {
   name: string;
-  createAdapter: (webmap: WebMap) => Promise<Type<LayerAdapter>>;
+  createAdapter: (webMap: WebMap) => Promise<Type<LayerAdapter>>;
 }
 
 export interface StarterKit {
