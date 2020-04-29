@@ -1,6 +1,9 @@
 /**
  * @module webmap
  */
+import { Feature, GeoJsonObject } from 'geojson';
+import { preparePaint } from '@nextgis/paint';
+
 import {
   LayerAdapter,
   LayerAdapters,
@@ -18,15 +21,14 @@ import {
 } from './interfaces/LayerAdapter';
 import { LayerDef, Type } from './interfaces/BaseTypes';
 
-import { Feature, GeoJsonObject } from 'geojson';
-import { preparePaint } from '@nextgis/paint';
 import { updateGeoJsonAdapterOptions } from './utils/updateGeoJsonAdapterOptions';
+import { propertiesFilter } from './utils/propertiesFilter';
+import { BaseWebMap } from './BaseWebMap';
+
 import {
   GetAttributionsOptions,
   ToggleLayerOptions,
 } from './interfaces/WebMapApp';
-import { propertiesFilter } from './utils/propertiesFilter';
-import { BaseWebMap } from './BaseWebMap';
 import { WebMapEvents } from './interfaces/Events';
 import { FitOptions } from './interfaces/MapAdapter';
 

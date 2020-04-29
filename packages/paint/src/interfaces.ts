@@ -22,6 +22,7 @@ export interface CirclePaint extends BasePaint {
 
 export interface PathPaint extends BasePaint {
   type?: 'path';
+  extrude3d?: number | Expression;
 }
 
 export type GeometryPaint = PathPaint & CirclePaint & PinPaint;
