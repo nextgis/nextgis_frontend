@@ -62,7 +62,7 @@ export class WebMapLayerItem extends Item<ItemOptions> {
     item: TreeGroup | TreeLayer,
     options?: ItemOptions,
     connector?: NgwConnector,
-    parent?: WebMapLayerItem,
+    parent?: WebMapLayerItem
   ) {
     super({ ...WebMapLayerItem.options, ...options });
     if (connector) {
