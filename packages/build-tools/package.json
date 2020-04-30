@@ -1,9 +1,9 @@
 {
   "name": "@nextgis/build-tools",
-  "version": "0.30.0",
+  "version": "0.30.1",
   "description": "",
   "dependencies": {
-    "@nextgis/eslint-config": "^0.30.0",
+    "@nextgis/eslint-config": "^0.30.1",
     "@types/events": "^3.0.0",
     "@types/node": "^13.13.4",
     "base64-inline-loader": "^1.1.1",

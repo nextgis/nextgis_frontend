@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.30.1](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.0...v0.30.1) (2020-04-30)
+
+
+### Performance Improvements
+
+* **ngw-kit:** default limit to load large vector layer data ([1e88276](https://github.com/nextgis/nextgisweb_frontend/commit/1e8827674db30d654b6ce6c0018171b4b15db12b))
+
+
+
+
+
 # [0.30.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.11...v0.30.0) (2020-04-23)
 
 

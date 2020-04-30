@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.30.1](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.0...v0.30.1) (2020-04-30)
+
+
+### Bug Fixes
+
+* **cesium:** cesium geojson layer style ([5f6e439](https://github.com/nextgis/nextgisweb_frontend/commit/5f6e43937bb9397237c43abccce5889a710716fb))
+* **vue:** selection for items with properties and tree ([e2f72df](https://github.com/nextgis/nextgisweb_frontend/commit/e2f72df0c1800e7595c7e3e8342f15841f897eea))
+* **webmap:** get layers method only string keys ([e0182c9](https://github.com/nextgis/nextgisweb_frontend/commit/e0182c95c81f5b76605f569bcbf2826937909889))
+
+
+### Features
+
+* **cesium:** add scale and rotate for 3d model adapter ([c6c67c1](https://github.com/nextgis/nextgisweb_frontend/commit/c6c67c16356a08a434f9f5482d8fa6bc0b693091))
+* **ngw-kit:** extensibility increased ([77bdaf7](https://github.com/nextgis/nextgisweb_frontend/commit/77bdaf7df43124811a8847cad348fe6bdae6d1ed))
+* **ngw-kit:** new approach to extend adapters for any resource classes ([4521db5](https://github.com/nextgis/nextgisweb_frontend/commit/4521db5238a380e52916f3fd8ba3f4aa3e95889a))
+* **webmap:** update layer adapter options ([b0262ef](https://github.com/nextgis/nextgisweb_frontend/commit/b0262eff0db1ee56192bb410e8e1128cdc8b167b))
+
+
+### Performance Improvements
+
+* **ngw-kit:** abort BBOX request on map movestart ([af72df0](https://github.com/nextgis/nextgisweb_frontend/commit/af72df00a095ad07c0a5b495af41d8cd1dda1b90))
+* **ngw-kit:** default limit to load large vector layer data ([1e88276](https://github.com/nextgis/nextgisweb_frontend/commit/1e8827674db30d654b6ce6c0018171b4b15db12b))
+
+
+
+
+
 # [0.30.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.11...v0.30.0) (2020-04-23)
 
 
