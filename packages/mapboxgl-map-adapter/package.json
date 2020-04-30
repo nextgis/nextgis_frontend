@@ -11,9 +11,9 @@
     "@nextgis/properties-filter": "^0.30.0",
     "@nextgis/webmap": "^0.30.0",
     "@types/events": "^3.0.0",
-    "@types/mapbox-gl": "^1.9.0",
+    "@types/mapbox-gl": "^1.9.1",
     "events": "^3.1.0",
-    "mapbox-gl": "1.9.1"
+    "mapbox-gl": "1.10.0"
   },
   "optionalDependencies": {
     "canvg": "^3.0.6"
@@ -27,6 +27,7 @@
     "dev": "npm run clean && webpack --config ./webpack.config.js --progress",
     "build": "npm run dev -- --mode=production",
     "prod": "npm run build",
+    "lint": "eslint ./src/**/*.ts --fix --c ../../.eslintrc",
     "watch": "npm run dev -- --watch",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },

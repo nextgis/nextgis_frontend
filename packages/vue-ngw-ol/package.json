@@ -10,8 +10,8 @@
     "@nextgis/vue-ngw-map": "^0.30.0",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
-    "vue-property-decorator": "^8.4.1",
-    "vuex-module-decorators": "^0.16.1"
+    "vue-property-decorator": "^8.4.2",
+    "vuex-module-decorators": "^0.17.0"
   },
   "devDependencies": {
     "@nextgis/build-tools": "file:../build-tools"
@@ -21,6 +21,7 @@
     "dev": "npm run clean && webpack --config ./webpack.config.js --progress",
     "build": "npm run dev -- --mode=production",
     "prod": "npm run build",
+    "lint": "eslint ./src/**/*.ts --fix --c ../../.eslintrc",
     "watch": "npm run dev -- --watch"
   },
   "keywords": [

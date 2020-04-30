@@ -1,7 +1,6 @@
 /**
  * @module ngw-kit
  */
-
 import NgwConnector from '@nextgis/ngw-connector';
 import WebMap, { StarterKit, Type } from '@nextgis/webmap';
 import {
@@ -66,9 +65,6 @@ export class NgwKit implements StarterKit {
     WebMapLayerItem,
     NgwResource,
   };
-  static addClassAdapters = (cls: string, adapter: GetClassAdapter) => {
-    classAdapters[cls] = adapter;
-  };
 
   static updateWmsParams = updateImageParams;
 
@@ -95,6 +91,10 @@ export class NgwKit implements StarterKit {
         auth: this.options.auth,
       });
     }
+  }
+
+  static addClassAdapters(cls: string, adapter: GetClassAdapter) {
+    classAdapters[cls] = adapter;
   }
 
   async onLoadSync(webMap: WebMap) {
