@@ -32,6 +32,7 @@ const supportCls: ResourceCls[] = [
   'raster_style',
   'basemap_layer',
   'vector_layer',
+  'raster_layer',
   'webmap',
   // 3D
   'model_3d',

@@ -324,7 +324,12 @@ export class WebMapLayers<
    * Remove all layers but not remove basemap.
    */
   removeOverlays() {
-    this.removeLayers((layerId, layer) => !layer.options.baseLayer);
+    this.removeLayers((layerId, layer) => {
+      if (layer && layer.options && layer.options.baseLayer) {
+        return false;
+      }
+      return true;
+    });
   }
 
   /**
