@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.30.1](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.0...v0.30.1) (2020-04-30)
+
+
+### Bug Fixes
+
+* **webmap:** get layers method only string keys ([e0182c9](https://github.com/nextgis/nextgisweb_frontend/commit/e0182c95c81f5b76605f569bcbf2826937909889))
+
+
+### Features
+
+* **webmap:** update layer adapter options ([b0262ef](https://github.com/nextgis/nextgisweb_frontend/commit/b0262eff0db1ee56192bb410e8e1128cdc8b167b))
+
+
+
+
+
 # [0.30.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.11...v0.30.0) (2020-04-23)
 
 **Note:** Version bump only for package @nextgis/webmap

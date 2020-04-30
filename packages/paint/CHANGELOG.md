@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.30.1](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.0...v0.30.1) (2020-04-30)
+
+
+### Features
+
+* **ngw-kit:** extensibility increased ([77bdaf7](https://github.com/nextgis/nextgisweb_frontend/commit/77bdaf7df43124811a8847cad348fe6bdae6d1ed))
+
+
+
+
+
 # [0.30.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.11...v0.30.0) (2020-04-23)
 
 **Note:** Version bump only for package @nextgis/paint

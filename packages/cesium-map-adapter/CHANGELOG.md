@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.30.1](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.0...v0.30.1) (2020-04-30)
+
+
+### Bug Fixes
+
+* **cesium:** cesium geojson layer style ([5f6e439](https://github.com/nextgis/nextgisweb_frontend/commit/5f6e43937bb9397237c43abccce5889a710716fb))
+
+
+### Features
+
+* **cesium:** add scale and rotate for 3d model adapter ([c6c67c1](https://github.com/nextgis/nextgisweb_frontend/commit/c6c67c16356a08a434f9f5482d8fa6bc0b693091))
+* **webmap:** update layer adapter options ([b0262ef](https://github.com/nextgis/nextgisweb_frontend/commit/b0262eff0db1ee56192bb410e8e1128cdc8b167b))
+
+
+
+
+
 # [0.30.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.11...v0.30.0) (2020-04-23)
 
 **Note:** Version bump only for package @nextgis/cesium-map-adapter

@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.30.1](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.0...v0.30.1) (2020-04-30)
+
+
+### Bug Fixes
+
+* **vue:** selection for items with properties and tree ([e2f72df](https://github.com/nextgis/nextgisweb_frontend/commit/e2f72df0c1800e7595c7e3e8342f15841f897eea))
+* **webmap:** get layers method only string keys ([e0182c9](https://github.com/nextgis/nextgisweb_frontend/commit/e0182c95c81f5b76605f569bcbf2826937909889))
+
+
+### Features
+
+* **ngw-kit:** extensibility increased ([77bdaf7](https://github.com/nextgis/nextgisweb_frontend/commit/77bdaf7df43124811a8847cad348fe6bdae6d1ed))
+
+
+### Performance Improvements
+
+* **ngw-kit:** default limit to load large vector layer data ([1e88276](https://github.com/nextgis/nextgisweb_frontend/commit/1e8827674db30d654b6ce6c0018171b4b15db12b))
+
+
+
+
+
 # [0.30.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.29.11...v0.30.0) (2020-04-23)
 
 **Note:** Version bump only for package @nextgis/vuetify-ngw-components

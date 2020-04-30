@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/cancelable-promise",
-  "version": "0.30.0",
+  "version": "0.30.1",
   "description": "A promise you can stop",
   "main": "lib/cancelable-promise.js",
   "unpkg": "lib/cancelable-promise.js",
