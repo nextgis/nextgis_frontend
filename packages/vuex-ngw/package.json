@@ -14,8 +14,8 @@
     "reproject": "^1.2.5",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
-    "vue-property-decorator": "^8.4.1",
-    "vuex-module-decorators": "^0.16.1",
+    "vue-property-decorator": "^8.4.2",
+    "vuex-module-decorators": "^0.17.0",
     "wellknown": "^0.5.0"
   },
   "devDependencies": {

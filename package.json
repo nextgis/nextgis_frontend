@@ -7,6 +7,7 @@
     "dev": "lerna run dev",
     "build": "lerna run build",
     "prod": "lerna run prod",
+    "lint": "lerna run lint",
     "prod_script": "node ./webpack.conf.js",
     "demo": "yarn run examples && cd ./packages/demo/ && yarn run build",
     "examples": "node ./build/updateExamples.js",

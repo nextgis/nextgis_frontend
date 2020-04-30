@@ -16,7 +16,7 @@ export class ImageAdapter extends BaseAdapter<ImageAdapterOptions>
     const url = options.url;
     if (url) {
       if (options.subdomains) {
-        tiles = options.subdomains.split('').map(x => {
+        tiles = options.subdomains.split('').map((x) => {
           const subUrl = url.replace('{s}', x);
           return subUrl;
         });
@@ -29,7 +29,7 @@ export class ImageAdapter extends BaseAdapter<ImageAdapterOptions>
           id: this._layerId,
           type: 'raster',
           layout: {
-            visibility: 'none'
+            visibility: 'none',
           },
           minzoom:
             this.options.minZoom !== undefined
@@ -42,9 +42,9 @@ export class ImageAdapter extends BaseAdapter<ImageAdapterOptions>
           source: {
             type: 'raster',
             tiles,
-            tileSize: 256
+            tileSize: 256,
           },
-          paint: {}
+          paint: {},
         },
         // @ts-ignore
         options.before

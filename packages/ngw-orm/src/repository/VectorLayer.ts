@@ -1,4 +1,4 @@
-import { ResourceItem } from '@nextgis/ngw-connector';
+// import { ResourceItem } from '@nextgis/ngw-connector';
 // import { objectAssign } from '@nextgis/utils';
 // import NgwConnector from '@nextgis/ngw-connector';
 // import { ObjectType } from '../common/ObjectType';
@@ -8,11 +8,11 @@ import { ResourceItem } from '@nextgis/ngw-connector';
 // import { FindManyOptions } from '../find-options/FindManyOptions';
 // import { FindOneOptions } from '../find-options/FindOneOptions';
 import { BaseResource } from './BaseResource';
-import { SyncOptions } from './SyncOptions';
-import { Connection } from '../connection/Connection';
-import { ConnectionOptions } from '../connection/ConnectionOptions';
-import { getMetadataArgsStorage } from '..';
-import { VectorLayerMetadataArgs } from '../metadata-args/VectorLayerMetadataArgs';
+// import { SyncOptions } from './SyncOptions';
+// import { Connection } from '../connection/Connection';
+// import { ConnectionOptions } from '../connection/ConnectionOptions';
+// import { getMetadataArgsStorage } from '..';
+// import { VectorLayerMetadataArgs } from '../metadata-args/VectorLayerMetadataArgs';
 
 // type QueryDeepPartialEntity<T> = DeepPartial<T>;
 // type InsertResult = any;

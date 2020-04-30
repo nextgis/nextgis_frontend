@@ -10,12 +10,12 @@ import {
   // IconOptions,
   MapControls,
   WebMapEvents,
-  RuntimeParams
+  RuntimeParams,
 } from '@nextgis/webmap';
 import {
   NgwLayerOptions,
   ResourceAdapter,
-  NgwIdentify
+  NgwIdentify,
 } from '@nextgis/ngw-kit';
 import NgwConnector, { Credentials } from '@nextgis/ngw-connector';
 import { NgwMap } from './NgwMap';

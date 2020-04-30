@@ -1,6 +1,5 @@
-import { NgwLayerOptions, GetClassAdapterOptions } from './interfaces';
-import WebMap, { Type } from '@nextgis/webmap';
-import NgwConnector from '@nextgis/ngw-connector';
+import { GetClassAdapterOptions } from './interfaces';
+import { Type } from '@nextgis/webmap';
 import { WebMapLayerAdapter } from './WebMapLayerAdapter';
 import { resourceIdFromLayerOptions } from './utils/resourceIdFromLayerOptions';
 

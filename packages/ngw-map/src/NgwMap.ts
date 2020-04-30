@@ -183,11 +183,7 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<
     }
     if (this.options.baseUrl || this.options.baseUrl === '') {
       try {
-        const adapter = NgwKit.utils.addNgwLayer(
-          options,
-          this,
-          this.connector
-        );
+        const adapter = NgwKit.utils.addNgwLayer(options, this, this.connector);
 
         const layer = (await this.addLayer(adapter, {
           visibility: true,
