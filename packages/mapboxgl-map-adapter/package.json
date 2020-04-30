@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/mapboxgl-map-adapter",
-  "version": "0.30.1",
+  "version": "0.30.2",
   "_priority": 16,
   "description": "",
   "main": "lib/mapboxgl-map-adapter.js",
@@ -9,7 +9,7 @@
   "dependencies": {
     "@nextgis/paint": "^0.30.1",
     "@nextgis/properties-filter": "^0.30.1",
-    "@nextgis/webmap": "^0.30.1",
+    "@nextgis/webmap": "^0.30.2",
     "@types/events": "^3.0.0",
     "@types/mapbox-gl": "^1.9.1",
     "events": "^3.1.0",
