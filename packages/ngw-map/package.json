@@ -24,6 +24,7 @@
     "dev": "npm run clean && webpack --config ./webpack.config.js --progress",
     "build": "npm run dev -- --mode=production",
     "prod": "npm run build",
+    "lint": "eslint ./src/**/*.ts --fix --c ../../.eslintrc",
     "watch": "npm run dev -- --watch"
   },
   "repository": {
