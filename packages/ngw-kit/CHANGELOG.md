@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.30.2](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.1...v0.30.2) (2020-04-30)
+
+
+### Bug Fixes
+
+* **ngw-kit:** return raster_layer resource support ([76a435f](https://github.com/nextgis/nextgisweb_frontend/commit/76a435fb43d82ea8be616347010a8bd1214f106b))
+
+
+
+
+
 ## [0.30.1](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.0...v0.30.1) (2020-04-30)
 
 
