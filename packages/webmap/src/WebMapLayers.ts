@@ -230,6 +230,8 @@ export class WebMapLayers<
     }
     if (adapterEngine !== undefined) {
       const _adapter = new adapterEngine(this.mapAdapter.map, options);
+      _adapter.options = { ...options, ..._adapter.options };
+
       if (_adapter.options.baseLayer) {
         options.baseLayer = true;
         options.order = 0;
@@ -242,7 +244,7 @@ export class WebMapLayers<
       }
       this.emitter.emit('layer:preadd', _adapter);
       await this.onMapLoad();
-      const layer = await _adapter.addLayer(options);
+      const layer = await _adapter.addLayer(_adapter.options);
       // checking that the original layer was inserted into the adapter anyway
       _adapter.layer = layer;
       // think about how to move `id` to the adapter's constructor,
@@ -253,6 +255,9 @@ export class WebMapLayers<
         delete this._layers[layerId];
       }
       layerId = String(_adapter.options.id);
+      if (this._layers[layerId]) {
+        throw Error(`layer with id '${layerId}' already exist`);
+      }
       if (layerId) {
         if (geoJsonOptions.filter) {
           this.filterLayer(_adapter, geoJsonOptions.filter);
