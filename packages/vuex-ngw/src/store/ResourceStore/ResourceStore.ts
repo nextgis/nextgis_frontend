@@ -46,12 +46,15 @@ export abstract class ResourceStore<
     const id = this.resources[this.resource];
     if (id) {
       try {
-        const item = await this.connector.get('resource.item', null, { id });
-        await this.context.dispatch('loadLookupTables');
-        return item.feature_layer ? item.feature_layer.fields : [];
+        const item = await this.connector.getResource(id);
+        if (item) {
+          await this.context.dispatch('loadLookupTables');
+          return item.feature_layer ? item.feature_layer.fields : [];
+        }
       } catch (er) {
-        return [];
+        //
       }
+      return [];
     }
   }
 
