@@ -1,8 +1,17 @@
 import WebMap, { LngLatBoundsArray, MapClickEvent } from '@nextgis/webmap';
-import { ResourceItem, WebmapResource } from '@nextgis/ngw-connector';
+import {
+  ResourceItem,
+  WebmapResource,
+  BasemapResource,
+  BasemapWebmap,
+} from '@nextgis/ngw-connector';
 import CancelablePromise from '@nextgis/cancelable-promise';
-
 import { fixUrlStr, Type } from '@nextgis/utils';
+import { ItemOptions } from '@nextgis/item';
+
+import StrictEventEmitter from 'strict-event-emitter-types';
+import { EventEmitter } from 'events';
+
 import {
   getLayerAdapterOptions,
   updateImageParams,
@@ -10,10 +19,6 @@ import {
   getWebMapExtent,
 } from './utils/utils';
 import { WebMapLayerItem } from './WebMapLayerItem';
-import { ItemOptions } from '@nextgis/item';
-
-import StrictEventEmitter from 'strict-event-emitter-types';
-import { EventEmitter } from 'events';
 
 import {
   TreeGroup,
@@ -23,17 +28,18 @@ import {
   WebMapLayerAdapterEvents,
   ResourceAdapter,
 } from './interfaces';
+import { createBasemapWebmapItemAdapter } from './createBasemapWebmapItemAdapter';
 
 export class WebMapLayerAdapter implements ResourceAdapter {
   layer?: WebMapLayerItem;
 
+  WebMapLayerItem: Type<WebMapLayerItem> = WebMapLayerItem;
   /**
    * Radius for searching objects in pixels
    */
   pixelRadius = 10; // webmapSettings.identify_radius,
   resourceId!: number;
   webmapClassName = 'webmap';
-  WebMapLayerItem: Type<WebMapLayerItem> = WebMapLayerItem;
   readonly emitter: StrictEventEmitter<
     EventEmitter,
     WebMapLayerAdapterEvents
@@ -185,10 +191,30 @@ export class WebMapLayerAdapter implements ResourceAdapter {
         } else {
           // TODO: resource is no webmap
         }
+        if (data.basemap_webmap) {
+          this._setBasemaps(data.basemap_webmap);
+        }
       }
     } catch (er) {
       throw er;
     }
+  }
+
+  private _setBasemaps(baseWebmap: BasemapWebmap) {
+    const webMap = this.options.webMap;
+    baseWebmap.basemaps.forEach((x) => {
+      createBasemapWebmapItemAdapter({
+        webMap,
+        connector: this.options.connector,
+        item: x,
+      }).then((adapter) => {
+        webMap.addBaseLayer(adapter, {
+          name: x.display_name,
+          opacity: x.opacity,
+          visibility: x.enabled,
+        });
+      });
+    });
   }
 
   private _updateItemsParams(
@@ -240,15 +266,13 @@ export class WebMapLayerAdapter implements ResourceAdapter {
         const item = x.item;
         if (item.item_type === 'layer') {
           const id = item.layer_style_id;
-          const promise = this.options.connector
-            .get('resource.item', {}, { id })
-            .then((y) => {
-              if (y) {
-                const parentId = Number(y.resource.parent.id);
-                item.parentId = parentId;
-                return parentId;
-              }
-            });
+          const promise = this.options.connector.getResource(id).then((y) => {
+            if (y) {
+              const parentId = Number(y.resource.parent.id);
+              item.parentId = parentId;
+              return parentId;
+            }
+          });
           promises.push(promise);
         }
       });

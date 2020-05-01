@@ -111,13 +111,11 @@ export async function getNgwResourceExtent(
   } else {
     const resource = item.resource;
     if (resource.cls.indexOf('style') !== -1) {
-      return connector
-        .get('resource.item', null, {
-          id: resource.parent.id,
-        })
-        .then((res) => {
+      return connector.getResource(resource.parent.id).then((res) => {
+        if (res) {
           return getNgwLayerExtent(res.resource.id, connector);
-        });
+        }
+      });
     } else {
       return getNgwLayerExtent(resource.id, connector);
     }

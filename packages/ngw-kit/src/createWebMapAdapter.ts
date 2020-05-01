@@ -1,5 +1,5 @@
-import { GetClassAdapterOptions } from './interfaces';
 import { Type } from '@nextgis/webmap';
+import { GetClassAdapterOptions } from './interfaces';
 import { WebMapLayerAdapter } from './WebMapLayerAdapter';
 import { resourceIdFromLayerOptions } from './utils/resourceIdFromLayerOptions';
 
@@ -9,7 +9,7 @@ export async function createWebMapAdapter({
   connector,
 }: GetClassAdapterOptions): Promise<Type<WebMapLayerAdapter>> {
   const resourceId = await resourceIdFromLayerOptions(options, connector);
-  return class Adapter extends WebMapLayerAdapter {
+  return class WebMapAdapter extends WebMapLayerAdapter {
     constructor(map: any) {
       super(map, {
         webMap,
