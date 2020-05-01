@@ -235,8 +235,9 @@ export class WebMapLayers<
         options.order = 0;
       }
 
-      let layerId = String(_adapter.options.id);
-      if (layerId) {
+      let layerId: string | undefined;
+      if (_adapter.options.id) {
+        layerId = String(_adapter.options.id);
         this._layers[layerId] = _adapter;
       }
       this.emitter.emit('layer:preadd', _adapter);
@@ -248,7 +249,9 @@ export class WebMapLayers<
       // but that it is not required in the options
       _adapter.id = _adapter.options.id || String(id);
       _adapter.order = _adapter.options.order || _order;
-
+      if (layerId) {
+        delete this._layers[layerId];
+      }
       layerId = String(_adapter.options.id);
       if (layerId) {
         if (geoJsonOptions.filter) {
