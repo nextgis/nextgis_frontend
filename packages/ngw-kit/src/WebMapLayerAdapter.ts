@@ -179,6 +179,9 @@ export class WebMapLayerAdapter implements ResourceAdapter {
         const webmap = data[
           this.webmapClassName as keyof ResourceItem
         ] as WebmapResource;
+        if (data.basemap_webmap) {
+          this._setBasemaps(data.basemap_webmap);
+        }
         if (webmap) {
           this._extent = [
             webmap.extent_left,
@@ -190,9 +193,6 @@ export class WebMapLayerAdapter implements ResourceAdapter {
           return webmap;
         } else {
           // TODO: resource is no webmap
-        }
-        if (data.basemap_webmap) {
-          this._setBasemaps(data.basemap_webmap);
         }
       }
     } catch (er) {
