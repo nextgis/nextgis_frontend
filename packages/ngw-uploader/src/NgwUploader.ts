@@ -87,7 +87,7 @@ export class NgwUploader {
   }
 
   getResource(id: number) {
-    return this.connector && this.connector.get('resource.item', null, { id });
+    return this.connector && this.connector.getResource(id);
   }
 
   @onLoad()

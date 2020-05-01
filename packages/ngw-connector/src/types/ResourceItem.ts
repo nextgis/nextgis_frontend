@@ -117,6 +117,18 @@ export interface BasemapResource {
   qms: string;
 }
 
+export interface BasemapWebmapItem {
+  resource_id: number;
+  position: number;
+  display_name: string;
+  enabled?: boolean;
+  opacity?: number;
+}
+
+export interface BasemapWebmap {
+  basemaps: BasemapWebmapItem[];
+}
+
 export interface LookupTableResource {
   items: Record<string, string>;
 }
@@ -173,5 +185,6 @@ export interface ResourceItem {
   feature_layer?: FeatureResource;
   vector_layer?: VectorLayer;
   basemap_layer?: BasemapResource;
+  basemap_webmap?: BasemapWebmap;
   lookup_table?: LookupTableResource;
 }

@@ -4,7 +4,7 @@ import NgwConnector, {
 } from '@nextgis/ngw-connector';
 import WebMap from '@nextgis/webmap';
 import { Type } from '@nextgis/utils';
-import QmsKit from '@nextgis/qms-kit';
+
 import {
   ResourceAdapter,
   NgwLayerOptions,
@@ -21,6 +21,7 @@ import { createWebMapAdapter } from './createWebMapAdapter';
 import { applyMixins } from './utils/utils';
 import { NgwResource } from './NgwResource';
 import { resourceIdFromLayerOptions } from './utils/resourceIdFromLayerOptions';
+import { createBasemapLayerAdapter } from './createBasemapLayerAdapter';
 
 export const classAdapters: Record<string, GetClassAdapter> = {};
 
@@ -103,14 +104,7 @@ export async function createAsyncAdapter(
           item.basemap_layer &&
           item.basemap_layer.qms
         ) {
-          adapter = Promise.resolve(QmsKit.utils.createQmsAdapter(webMap));
-          adapter.then((x) => {
-            if (x && item && item.basemap_layer && item.basemap_layer.qms) {
-              const qms = JSON.parse(item.basemap_layer.qms);
-              x.prototype.qms = qms;
-              x.prototype.baseLayer = true;
-            }
-          });
+          adapter = createBasemapLayerAdapter(adapterOptions);
         } else {
           if (adapterType === 'GEOJSON') {
             const parentOptions: NgwLayerOptions = {

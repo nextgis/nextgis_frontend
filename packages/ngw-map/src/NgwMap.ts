@@ -326,23 +326,22 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<
           this.fitBounds(extent);
         }
       } else {
-        let item: ResourceItem;
+        let item: ResourceItem | undefined;
         if (ngwLayer.layer.item) {
           item = ngwLayer.layer.item;
         } else {
           const resourceId = ngwLayer.resourceId;
-          item = await this.connector.get('resource.item', null, {
-            id: resourceId,
-          });
+          item = await this.connector.getResource(resourceId);
         }
-
-        NgwKit.utils
-          .getNgwResourceExtent(item, this.connector)
-          .then((extent) => {
-            if (extent) {
-              this.fitBounds(extent);
-            }
-          });
+        if (item) {
+          NgwKit.utils
+            .getNgwResourceExtent(item, this.connector)
+            .then((extent) => {
+              if (extent) {
+                this.fitBounds(extent);
+              }
+            });
+        }
       }
     }
   }
