@@ -1,4 +1,8 @@
-import WebMap, { Type, BaseLayerAdapter } from '@nextgis/webmap';
+import WebMap, {
+  Type,
+  BaseLayerAdapter,
+  AdapterOptions,
+} from '@nextgis/webmap';
 import NgwConnector, { BasemapWebmapItem } from '@nextgis/ngw-connector';
 import { createAsyncAdapter } from './createAsyncAdapter';
 
@@ -14,8 +18,7 @@ export async function createBasemapWebmapItemAdapter({
   item,
 }: CreateBasemapWebmapOptions): Promise<Type<BaseLayerAdapter>> {
   class BasemapWebmapAdapter implements BaseLayerAdapter {
-    options = {};
-    _visibility = false;
+    options: AdapterOptions = {};
     _removed = false;
     _basemap: BaseLayerAdapter[] = [];
 
@@ -28,14 +31,14 @@ export async function createBasemapWebmapItemAdapter({
       this._basemap.forEach((x) => webMap.removeLayer(x));
     }
 
-    async showLayer() {
-      this._visibility = true;
+    showLayer() {
+      this.options.visibility = true;
       if (this._basemap.length) {
         this._basemap.forEach((x) => {
           webMap.showLayer(x);
         });
       } else {
-        const Adapter = await createAsyncAdapter(
+        createAsyncAdapter(
           {
             resourceId: item.resource_id,
             adapterOptions: {
@@ -45,21 +48,28 @@ export async function createBasemapWebmapItemAdapter({
           },
           webMap,
           connector
-        );
-        if (Adapter) {
-          const adapter = await webMap.addLayer(Adapter, { order: 0 });
-          if (this._removed) {
-            webMap.removeLayer(adapter);
+        ).then((Adapter) => {
+          if (Adapter) {
+            const adapter = new Adapter(webMap.mapAdapter.map, {});
+            adapter.addLayer({}).then((baseLayer: BaseLayerAdapter) => {
+              adapter.options.baseLayer = false;
+              adapter.id = 'basemapwebmap-' + item.resource_id;
+              adapter.layer = baseLayer;
+              if (this._removed) {
+                webMap.removeLayer(adapter);
+              }
+              if (this.options.visibility) {
+                webMap.showLayer(adapter);
+              }
+              this._basemap.push(adapter);
+            });
           }
-          if (this._visibility) {
-            webMap.showLayer(adapter);
-          }
-          this._basemap.push(adapter);
-        }
+        });
       }
     }
 
     hideLayer() {
+      this.options.visibility = false;
       if (this._basemap) {
         this._basemap.forEach((x) => webMap.hideLayer(x));
       }
