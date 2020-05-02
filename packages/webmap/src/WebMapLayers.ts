@@ -457,8 +457,6 @@ export class WebMapLayers<
     const toStatus = status !== undefined ? status : !onMap;
     const silent = options.silent !== undefined ? options.silent : false;
     const action = (source: any, l: LayerAdapter) => {
-      l.options.visibility = toStatus;
-
       const preEventName = toStatus ? 'layer:preshow' : 'layer:prehide';
       const eventName = toStatus ? 'layer:show' : 'layer:hide';
       if (!silent) {
@@ -468,7 +466,7 @@ export class WebMapLayers<
         const order = l.options.baseLayer ? 0 : l.options.order;
 
         // do not show baselayer if another on the map
-        if (order === 0 && this._baseLayers.length) {
+        if (l.options.baseLayer && this._baseLayers.length) {
           const anotherVisibleLayerBaseLayer = this._baseLayers.find((x) => {
             return x !== l.id && this.isLayerVisible(x);
           });
@@ -495,6 +493,7 @@ export class WebMapLayers<
       if (!silent) {
         this.emitter.emit(eventName, l);
       }
+      l.options.visibility = toStatus;
     };
     if (layer && layer.options.visibility !== toStatus) {
       if (this.mapAdapter.map) {
