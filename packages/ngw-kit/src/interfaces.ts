@@ -100,7 +100,7 @@ export interface ResourceNgwLayerOptions<
   T extends NgwLayerAdapterType = NgwLayerAdapterType,
   P = { [name: string]: any }
 > extends NgwLayerOptionsAdditional<T, P> {
-  resource: number | string | NgwLayerOptions;
+  resource: number | string | NgwLayerOptions | ResourceItem;
 }
 
 export type NgwLayerOptions<
@@ -110,14 +110,6 @@ export type NgwLayerOptions<
   | ResourceNgwLayerOptions<T, P>
   | ResourceIdNgwLayerOptions<T, P>
   | KeynamedNgwLayerOptions<T, P>;
-
-// export interface AddNgwLayerOptions<
-//   T extends NgwLayerAdapterType = NgwLayerAdapterType,
-//   P = { [name: string]: any }
-// > extends NgwLayerOptionsAdditional<T, P> {
-//   keyname?: string;
-//   resourceId?: number;
-// }
 
 export interface NgwConfig {
   applicationUrl: string;

@@ -187,7 +187,6 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<
 
         const layer = (await this.addLayer(adapter, {
           visibility: true,
-          // TODO: all options into one object
           ...options,
           ...options.adapterOptions,
         })) as ResourceAdapter;

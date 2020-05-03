@@ -13,6 +13,7 @@ import {
   GetClassAdapter,
   GetClassAdapterOptions,
   ClassAdapter,
+  ResourceNgwLayerOptions,
 } from './interfaces';
 
 import { createGeoJsonAdapter } from './createGeoJsonAdapter';
@@ -72,7 +73,17 @@ export async function createAsyncAdapter(
   const adapterType = options.adapter;
   const resourceId = await resourceIdFromLayerOptions(options, connector);
   if (resourceId) {
-    item = await connector.getResource(resourceId);
+    const resourceOptions = options as ResourceNgwLayerOptions;
+    const itemFromResOpt = resourceOptions.resource as ResourceItem;
+    if (
+      itemFromResOpt &&
+      itemFromResOpt.resource &&
+      itemFromResOpt.resource.id !== undefined
+    ) {
+      item = itemFromResOpt;
+    } else {
+      item = await connector.getResource(resourceId);
+    }
     if (item) {
       const cls = item.resource.cls;
       const layerOptions: NgwLayerOptions = { ...options, resourceId };
