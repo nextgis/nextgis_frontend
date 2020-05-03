@@ -1,4 +1,4 @@
-import NgwConnector from '@nextgis/ngw-connector';
+import NgwConnector, { ResourceItem } from '@nextgis/ngw-connector';
 import {
   NgwLayerOptions,
   KeynamedNgwLayerOptions,
@@ -11,6 +11,7 @@ export async function resourceIdFromLayerOptions(
   connector: NgwConnector
 ) {
   const resource = (options as ResourceNgwLayerOptions).resource;
+  const item = resource as ResourceItem;
   let keyname = (options as KeynamedNgwLayerOptions).keyname;
   let resourceId = (options as ResourceIdNgwLayerOptions).resourceId;
   if (resource) {
@@ -18,8 +19,13 @@ export async function resourceIdFromLayerOptions(
       keyname = resource;
     } else if (typeof resource === 'number') {
       resourceId = resource;
+    } else if (item.resource && item.resource !== undefined) {
+      resourceId = (resource as ResourceItem).resource.id;
     } else {
-      resourceId = await resourceIdFromLayerOptions(resource, connector);
+      resourceId = await resourceIdFromLayerOptions(
+        resource as ResourceNgwLayerOptions,
+        connector
+      );
     }
   }
   if (!resourceId && keyname) {
