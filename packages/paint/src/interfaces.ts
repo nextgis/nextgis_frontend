@@ -13,6 +13,7 @@ export interface BasePaint {
   strokeOpacity?: number | Expression;
   /** stroke width TODO: rename to width **/
   weight?: number | Expression;
+  extrude3d?: number | Expression;
 }
 
 export interface CirclePaint extends BasePaint {
@@ -22,7 +23,6 @@ export interface CirclePaint extends BasePaint {
 
 export interface PathPaint extends BasePaint {
   type?: 'path';
-  extrude3d?: number | Expression;
 }
 
 export type GeometryPaint = PathPaint & CirclePaint & PinPaint;

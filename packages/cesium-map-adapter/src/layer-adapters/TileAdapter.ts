@@ -29,6 +29,8 @@ export class TileAdapter extends BaseAdapter<TileAdapterOptions, Layer> {
   }
 
   hideLayer(layer: ImageryLayer) {
-    this.map.imageryLayers.remove(layer);
+    // TODO: do not work
+    // this.map.imageryLayers.remove(layer);
+    this.map.imageryLayers.removeAll();
   }
 }
