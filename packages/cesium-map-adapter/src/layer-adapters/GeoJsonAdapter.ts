@@ -232,6 +232,10 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
       const dataSource = new GeoJsonDataSource();
       dataSource.load(obj, options).then((x) => {
         dataSource.entities.values.forEach((y) => {
+          if (typeof paint.extrude3d === 'number') {
+            // @ts-ignore
+            y.polygon.extrudedHeight = paint.extrude3d;
+          }
           source.entities.add(y);
         });
       });
