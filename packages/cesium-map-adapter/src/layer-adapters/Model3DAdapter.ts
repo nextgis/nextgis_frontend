@@ -9,46 +9,34 @@ import {
   Cartesian3,
   Math as CMath,
   HeadingPitchRoll,
+  Cartographic,
+  sampleTerrainMostDetailed,
+  when,
 } from 'cesium';
 
 import { BaseAdapter } from './BaseAdapter';
 
-const LAT = 52;
-const LON = 104;
-
 type Layer = Model;
 
 export class Model3DAdapter extends BaseAdapter<Model3DOptions, Layer> {
-  private _extent?: LngLatBoundsArray = [LON, LAT, LON, LAT];
+  private _extent?: LngLatBoundsArray;
   private _layer?: Model;
 
   addLayer(opt: Model3DOptions) {
-    const { lat, lon, height, rotate } = opt;
-    const position = Cartesian3.fromDegrees(lon, lat, height);
-
-    const heading = CMath.toRadians(rotate || 0);
-    const pitch = 0;
-    const roll = 0;
-    const headingPitchRoll = new HeadingPitchRoll(heading, pitch, roll);
-
-    const modelMatrix = Transforms.headingPitchRollToFixedFrame(
-      position,
-      headingPitchRoll
-    );
-
+    this.options = { ...this.options, ...opt };
     // const modelMatrix = Transforms.eastNorthUpToFixedFrame(position);
 
     this.options = { ...opt };
     this._layer = Model.fromGltf({
       url: this.options.url,
       show: false,
-      modelMatrix,
+      modelMatrix: this._getModelMatrix(),
       scale: opt.scale || 1,
       allowPicking: false,
       debugShowBoundingVolume: false,
       debugWireframe: false,
     });
-
+    this.watchHeight();
     this.map.scene.primitives.add(this._layer);
     return this._layer;
   }
@@ -72,5 +60,43 @@ export class Model3DAdapter extends BaseAdapter<Model3DOptions, Layer> {
       this.map.scene.primitives.remove(this._layer);
     }
     this._layer = undefined;
+  }
+
+  private watchHeight() {
+    if (this._layer) {
+      const { lon, lat } = this.options;
+      const terrainSamplePositions: Cartographic[] = [
+        Cartographic.fromDegrees(lon, lat),
+      ];
+
+      when(
+        sampleTerrainMostDetailed(
+          this.map.terrainProvider,
+          terrainSamplePositions
+        ),
+        () => {
+          if (this._layer) {
+            const height = terrainSamplePositions[0].height;
+            const modelMatrix = this._getModelMatrix({ height });
+            this._layer.modelMatrix = modelMatrix;
+          }
+        }
+      );
+    }
+  }
+
+  private _getModelMatrix(opt?: Partial<Model3DOptions>) {
+    const options = { ...this.options, ...opt };
+    const { lat, lon, height, rotate } = options;
+    const position = Cartesian3.fromDegrees(lon, lat, height);
+
+    const heading = CMath.toRadians(rotate || 0);
+    const pitch = 0;
+    const roll = 0;
+    const headingPitchRoll = new HeadingPitchRoll(heading, pitch, roll);
+
+    this._extent = [lon, lat, lon, lat];
+
+    return Transforms.headingPitchRollToFixedFrame(position, headingPitchRoll);
   }
 }
