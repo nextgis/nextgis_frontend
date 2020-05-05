@@ -24,6 +24,11 @@ import {
   Cartesian3,
   VerticalOrigin,
   Property,
+  CallbackProperty,
+  Cartographic,
+  sampleTerrainMostDetailed,
+  when,
+  Entity,
 } from 'cesium';
 import { GeoJsonObject, Feature, FeatureCollection } from 'geojson';
 import { BaseAdapter, Map } from './BaseAdapter';
@@ -46,12 +51,13 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
   selected = false;
 
   private readonly _pinBuilder = new PinBuilder();
-
+  private _paint?: Paint;
   private _features: Feature[] = [];
   private _source?: GeoJsonDataSource;
 
   addLayer(options: GeoJsonAdapterOptions) {
     this.options = { ...options };
+    this._paint = this.options.paint;
     const source = new GeoJsonDataSource(options.id);
     this._source = source;
     if (options.data) {
@@ -93,7 +99,6 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
         featureCollection.features.forEach((x) => this._features.push(x));
       }
       this._updateSource();
-      // this._source.load(data);
     }
   }
 
@@ -134,6 +139,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
             this._addFromGeoJson(x, paint);
           }
         }
+        this.watchHeight();
       });
     }
   }
@@ -232,9 +238,11 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
       const dataSource = new GeoJsonDataSource();
       dataSource.load(obj, options).then((x) => {
         dataSource.entities.values.forEach((y) => {
-          if (typeof paint.extrude3d === 'number') {
-            // @ts-ignore
-            y.polygon.extrudedHeight = paint.extrude3d;
+          const height = this._getEntityHeight(y, paint);
+          if (height) {
+            y.polygon.extrudedHeight = new CallbackProperty(() => {
+              return height;
+            }, false);
           }
           source.entities.add(y);
         });
@@ -254,5 +262,58 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
       }
     }
     return {};
+  }
+
+  private _getEntityHeight(entity: Entity, paint?: Paint): number | undefined {
+    paint = paint || this._paint;
+    // @ts-ignore
+    const feature: Feature = {
+      type: 'Feature',
+      properties: entity.properties,
+    };
+    const featurePaint = this._getFeaturePaint(feature, paint);
+    if (paint && 'extrude3d' in featurePaint) {
+      return featurePaint.extrude3d as number;
+    }
+  }
+
+  private watchHeight() {
+    if (this._source) {
+      const entities = this._source.entities.values;
+      const terrainSamplePositions: Cartographic[] = [];
+      entities.forEach((x) => {
+        let position: Cartesian3 | undefined;
+        if (x.polygon) {
+          // @ts-ignore
+          position = x.polygon.hierarchy.getValue().positions[0];
+        }
+        if (position) {
+          terrainSamplePositions.push(Cartographic.fromCartesian(position));
+        }
+      });
+      if (entities.length) {
+        when(
+          sampleTerrainMostDetailed(
+            this.map.terrainProvider,
+            terrainSamplePositions
+          ),
+          () => {
+            for (let i = 0; i < entities.length; i++) {
+              const entity = entities[i];
+              const terrainHeight = terrainSamplePositions[i].height;
+              entity.polygon.height = new CallbackProperty(() => {
+                return terrainHeight;
+              }, false);
+              const height = this._getEntityHeight(entity);
+              if (height !== undefined) {
+                entity.polygon.extrudedHeight = new CallbackProperty(() => {
+                  return height + terrainHeight;
+                }, false);
+              }
+            }
+          }
+        );
+      }
+    }
   }
 }
