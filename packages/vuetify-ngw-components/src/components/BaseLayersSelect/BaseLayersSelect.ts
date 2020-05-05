@@ -25,8 +25,8 @@ export class BaseLayersSelect extends Vue {
 
   active: string | false = false;
 
-  private _layers: Array<LayerAdapter | ResourceAdapter> = [];
-  private __updateItems?: () => Promise<void>;
+  protected __updateItems?: () => Promise<void>;
+  protected _layers: Array<LayerAdapter | ResourceAdapter> = [];
 
   @Watch('active')
   setVisibleLayers(active: string) {
@@ -88,11 +88,14 @@ export class BaseLayersSelect extends Vue {
     }
   }
 
-  private create() {
+  protected create() {
     this.ngwMap.onLoad().then(() => {
       this.destroy();
       this.updateItems();
-      const __updateItems = debounce(() => this._updateItems());
+      const __updateItems = debounce(async () => {
+        const items = await this._updateItems();
+        this.items = items;
+      });
       this.__updateItems = __updateItems;
 
       this.ngwMap.emitter.on('layer:add', __updateItems);
@@ -100,14 +103,14 @@ export class BaseLayersSelect extends Vue {
     });
   }
 
-  private destroy() {
+  protected destroy() {
     if (this.__updateItems) {
       this.ngwMap.emitter.off('layer:add', this.__updateItems);
       this.ngwMap.emitter.off('layer:remove', this.__updateItems);
     }
   }
 
-  private async _updateItems() {
+  protected async _updateItems(): Promise<VueSelectItem[]> {
     await this.ngwMap.onLoad();
     const baseLayers: BaseLayerAdapter[] = [];
     const items: VueSelectItem[] = [];
@@ -135,7 +138,7 @@ export class BaseLayersSelect extends Vue {
         }
       }
     });
-    this.items = items;
     this._layers = baseLayers;
+    return items;
   }
 }

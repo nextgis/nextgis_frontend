@@ -29,6 +29,7 @@ import {
 
 import { resourceIdFromLayerOptions } from './utils/resourceIdFromLayerOptions';
 
+import { createBasemapWebmapItemAdapter } from './createBasemapWebmapItemAdapter';
 import { createGeoJsonAdapter } from './createGeoJsonAdapter';
 import { createRasterAdapter } from './createRasterAdapter';
 
@@ -45,21 +46,23 @@ import { classAdapters } from './createAsyncAdapter';
 export class NgwKit implements StarterKit {
   static utils = {
     addNgwLayer,
+    createBasemapWebmapItemAdapter,
+    createGeoJsonFeature,
+    createGeoJsonAdapter,
+    createRasterAdapter,
+    getIdentifyGeoJson,
+    getIdentifyGeoJsonParams,
     getNgwResourceExtent,
-    sendIdentifyRequest,
-    pixelsInMeterWidth,
     getNgwLayerFeature,
     getNgwLayerFeatures,
     getNgwLayerItems,
     getNgwLayerItem,
-    getIdentifyGeoJson,
-    getIdentifyGeoJsonParams,
+    pixelsInMeterWidth,
     resourceIdFromLayerOptions,
-    createGeoJsonFeature,
+    sendIdentifyRequest,
     setScaleRatio,
-    createGeoJsonAdapter,
-    createRasterAdapter,
   };
+
   static classes = {
     WebMapLayerAdapter,
     WebMapLayerItem,
@@ -67,9 +70,7 @@ export class NgwKit implements StarterKit {
   };
 
   static updateWmsParams = updateImageParams;
-
   static getLayerAdapterOptions = getLayerAdapterOptions;
-
   static addNgwLayer = addNgwLayer;
 
   url: string;

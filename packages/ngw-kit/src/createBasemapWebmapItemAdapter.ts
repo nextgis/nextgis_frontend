@@ -10,31 +10,35 @@ interface CreateBasemapWebmapOptions {
   webMap: WebMap;
   connector: NgwConnector;
   item: BasemapWebmapItem;
+  adapterOptions?: Record<string, any>;
+  idPrefix?: string;
 }
 
 export async function createBasemapWebmapItemAdapter({
   webMap,
   connector,
   item,
+  adapterOptions = {},
+  idPrefix = 'basemapwebmap',
 }: CreateBasemapWebmapOptions): Promise<Type<BaseLayerAdapter>> {
   class BasemapWebmapAdapter implements BaseLayerAdapter {
     options: AdapterOptions = {};
+    layer: BaseLayerAdapter[] = [];
     _removed = false;
-    _basemap: BaseLayerAdapter[] = [];
 
     addLayer() {
-      return this._basemap;
+      return this.layer;
     }
 
     removeLayer() {
       this._removed = true;
-      this._basemap.forEach((x) => webMap.removeLayer(x));
+      this.layer.forEach((x) => webMap.removeLayer(x));
     }
 
     showLayer() {
       this.options.visibility = true;
-      if (this._basemap.length) {
-        this._basemap.forEach((x) => {
+      if (this.layer.length) {
+        this.layer.forEach((x) => {
           webMap.showLayer(x);
         });
       } else {
@@ -53,7 +57,8 @@ export async function createBasemapWebmapItemAdapter({
             const adapter = new Adapter(webMap.mapAdapter.map, {});
             adapter.addLayer({}).then((baseLayer: BaseLayerAdapter) => {
               adapter.options.baseLayer = false;
-              adapter.id = 'basemapwebmap-' + item.resource_id;
+              Object.assign(adapter.options, adapterOptions);
+              adapter.id = idPrefix + '-' + item.resource_id;
               adapter.layer = baseLayer;
               if (this._removed) {
                 webMap.removeLayer(adapter);
@@ -61,7 +66,7 @@ export async function createBasemapWebmapItemAdapter({
               if (this.options.visibility) {
                 webMap.showLayer(adapter);
               }
-              this._basemap.push(adapter);
+              this.layer.push(adapter);
             });
           }
         });
@@ -70,8 +75,8 @@ export async function createBasemapWebmapItemAdapter({
 
     hideLayer() {
       this.options.visibility = false;
-      if (this._basemap) {
-        this._basemap.forEach((x) => webMap.hideLayer(x));
+      if (this.layer) {
+        this.layer.forEach((x) => webMap.hideLayer(x));
       }
     }
   }
