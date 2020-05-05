@@ -36,9 +36,6 @@ const supportCls: ResourceCls[] = [
   'vector_layer',
   'raster_layer',
   'webmap',
-  // 3D
-  'model_3d',
-  'terrain_provider',
 ];
 
 async function createAdapterFromFirstStyle({
