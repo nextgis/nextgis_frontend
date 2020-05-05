@@ -23,7 +23,7 @@ interface FilterArgs {
 export async function createGeoJsonAdapter(opt: GetClassAdapterOptions) {
   const { webMap, connector, item } = opt;
   const options = opt.layerOptions as NgwLayerOptions<'GEOJSON'>;
-  const adapter =
+  const GeoJsonAdapter =
     (opt.Adapter as Type<VectorLayerAdapter>) ||
     (webMap.mapAdapter.layerAdapters.GEOJSON as Type<VectorLayerAdapter>);
 
@@ -63,7 +63,7 @@ export async function createGeoJsonAdapter(opt: GetClassAdapterOptions) {
     }
   };
 
-  return class Adapter extends adapter {
+  return class NgwGeoJsonAdapter extends GeoJsonAdapter {
     emitter = new EventEmitter();
     _count?: number;
     __onMapMove?: () => void;

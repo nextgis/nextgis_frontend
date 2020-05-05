@@ -12,6 +12,7 @@ import {
   Math as CesiumMath,
   EllipsoidTerrainProvider,
   Cartographic,
+  GeoJsonDataSource,
 } from 'cesium';
 
 import {
@@ -90,10 +91,9 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
         // mapProjection: new Cesium.WebMercatorProjection()
         // contextOptions: { requestWebgl2: true }
       });
-
+      GeoJsonDataSource.clampToGround = true;
       viewer.imageryLayers.removeAll();
-
-      // viewer.scene.globe.depthTestAgainstTerrain = false;
+      viewer.scene.globe.depthTestAgainstTerrain = false;
       // viewer.scene.postProcessStages.fxaa.enabled = true;
       viewer.scene.requestRenderMode = true;
 

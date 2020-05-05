@@ -119,8 +119,8 @@ export interface BasemapResource {
 
 export interface BasemapWebmapItem {
   resource_id: number;
-  position: number;
   display_name: string;
+  position?: number;
   enabled?: boolean;
   opacity?: number;
 }
@@ -177,6 +177,7 @@ export interface VectorLayer {
 
 // Ngw api settings
 export interface ResourceItem {
+  [cls: string]: any;
   resource: Resource;
   resmeta: {
     items: {};
