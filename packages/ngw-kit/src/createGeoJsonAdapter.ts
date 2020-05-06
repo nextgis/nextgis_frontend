@@ -80,9 +80,9 @@ export async function createGeoJsonAdapter(opt: GetClassAdapterOptions) {
         opt_.type =
           vectorLayerGeomToPaintTypeAlias[item.vector_layer.geometry_type];
       }
-      if (options.adapterOptions) {
-        objectAssign(opt_, options.adapterOptions);
-      }
+      // if (options.adapterOptions) {
+      //   objectAssign(opt_, options.adapterOptions);
+      // }
       if (opt_.data && Object.keys(opt_.data).length === 0) {
         opt_.data = undefined;
         needUpdate = false;
