@@ -22,6 +22,10 @@ interface FilterArgs {
 
 export async function createGeoJsonAdapter(opt: GetClassAdapterOptions) {
   const { webMap, connector, item } = opt;
+  const addLayerOptionsPriority =
+    opt.addLayerOptionsPriority !== undefined
+      ? opt.addLayerOptionsPriority
+      : true;
   const options = opt.layerOptions as NgwLayerOptions<'GEOJSON'>;
   const GeoJsonAdapter =
     (opt.Adapter as Type<VectorLayerAdapter>) ||
@@ -81,7 +85,20 @@ export async function createGeoJsonAdapter(opt: GetClassAdapterOptions) {
           vectorLayerGeomToPaintTypeAlias[item.vector_layer.geometry_type];
       }
       if (options.adapterOptions) {
-        opt_ = { ...options.adapterOptions, ...opt_ };
+        // TODO: remove addLayerOptionsPriority options/
+        // in some cases, addLayer options must be used,
+        // but in others factory method options needs first
+        if (addLayerOptionsPriority) {
+          opt_ = {
+            ...options.adapterOptions,
+            ...opt_,
+          };
+        } else {
+          opt_ = {
+            ...opt_,
+            ...options.adapterOptions,
+          };
+        }
       }
       if (opt_.data && Object.keys(opt_.data).length === 0) {
         opt_.data = undefined;
