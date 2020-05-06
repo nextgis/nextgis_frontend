@@ -13,5 +13,13 @@ export abstract class BaseAdapter<
     //
   }
 
+  showLayer(layer?: any) {
+    this.map.scene.requestRender();
+  }
+
+  hideLayer(layer?: any) {
+    this.map.scene.requestRender();
+  }
+
   abstract addLayer(_options: O): L | Promise<L> | undefined;
 }

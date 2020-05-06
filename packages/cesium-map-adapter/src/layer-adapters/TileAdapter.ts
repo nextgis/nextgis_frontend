@@ -26,11 +26,13 @@ export class TileAdapter extends BaseAdapter<TileAdapterOptions, Layer> {
 
   showLayer(layer: Layer) {
     this.map.imageryLayers.addImageryProvider(layer, this.options.order);
+    super.showLayer();
   }
 
   hideLayer(layer: ImageryLayer) {
     // TODO: do not work
     // this.map.imageryLayers.remove(layer);
     this.map.imageryLayers.removeAll();
+    super.hideLayer();
   }
 }
