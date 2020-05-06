@@ -6,7 +6,7 @@ import WebMap, {
 import NgwConnector, { BasemapWebmapItem } from '@nextgis/ngw-connector';
 import { createAsyncAdapter } from './createAsyncAdapter';
 
-interface CreateBasemapWebmapOptions {
+interface CreateOnFirstShowAdapterOptions {
   webMap: WebMap;
   connector: NgwConnector;
   item: BasemapWebmapItem;
@@ -14,14 +14,14 @@ interface CreateBasemapWebmapOptions {
   idPrefix?: string;
 }
 
-export async function createBasemapWebmapItemAdapter({
+export async function createOnFirstShowAdapter({
   webMap,
   connector,
   item,
   adapterOptions = {},
   idPrefix = 'basemapwebmap',
-}: CreateBasemapWebmapOptions): Promise<Type<BaseLayerAdapter>> {
-  class BasemapWebmapAdapter implements BaseLayerAdapter {
+}: CreateOnFirstShowAdapterOptions): Promise<Type<BaseLayerAdapter>> {
+  class OnFirstShowAdapter implements BaseLayerAdapter {
     options: AdapterOptions = {};
     layer: BaseLayerAdapter[] = [];
     _removed = false;
@@ -54,7 +54,10 @@ export async function createBasemapWebmapItemAdapter({
           connector
         ).then((Adapter) => {
           if (Adapter) {
-            const adapter = new Adapter(webMap.mapAdapter.map, adapterOptions);
+            const adapter = new Adapter(webMap.mapAdapter.map, {
+              ...adapterOptions,
+              baseLayer: false,
+            });
             adapter.addLayer({}).then((baseLayer: BaseLayerAdapter) => {
               adapter.options.baseLayer = false;
               Object.assign(adapter.options, adapterOptions);
@@ -80,5 +83,5 @@ export async function createBasemapWebmapItemAdapter({
       }
     }
   }
-  return BasemapWebmapAdapter;
+  return OnFirstShowAdapter;
 }
