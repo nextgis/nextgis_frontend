@@ -29,9 +29,11 @@ import {
   sampleTerrainMostDetailed,
   when,
   Entity,
+  HeightReference,
 } from 'cesium';
 import { GeoJsonObject, Feature, FeatureCollection } from 'geojson';
 import { BaseAdapter, Map } from './BaseAdapter';
+import { promises } from 'dns';
 
 type Layer = GeoJsonDataSource;
 
@@ -132,17 +134,20 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     const source = this._source;
     if (source) {
       source.entities.removeAll();
+      const promises: Promise<any>[] = [];
       this._features.forEach((x) => {
         const paint = this._getFeaturePaint(x, this.options.paint);
         if (isBasePaint(paint)) {
           if (paint.type === 'pin') {
-            this._addPin(x, paint);
+            promises.push(this._addPin(x, paint));
           } else {
             this._addFromGeoJson(x, paint);
           }
         }
-        this.watchHeight();
       });
+      // Promise.all(promises).then((x) => {
+      // });
+      this.watchHeight();
     }
   }
 
@@ -201,6 +206,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
           name: name || (obj.id !== undefined ? 'Feature#' + obj.id : ''),
           description,
           billboard: {
+            heightReference: HeightReference.CLAMP_TO_GROUND,
             // @ts-ignore
             image: canvas.toDataURL(),
             // @ts-ignore
@@ -288,6 +294,8 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
         if (x.polygon) {
           // @ts-ignore
           position = x.polygon.hierarchy.getValue().positions[0];
+        } else if (x.point) {
+          console.log(x.point);
         }
         if (position) {
           terrainSamplePositions.push(Cartographic.fromCartesian(position));
