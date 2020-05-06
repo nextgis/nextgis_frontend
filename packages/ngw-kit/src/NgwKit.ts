@@ -29,7 +29,7 @@ import {
 
 import { resourceIdFromLayerOptions } from './utils/resourceIdFromLayerOptions';
 
-import { createBasemapWebmapItemAdapter } from './createBasemapWebmapItemAdapter';
+import { createOnFirstShowAdapter } from './createBasemapWebmapItemAdapter';
 import { createGeoJsonAdapter } from './createGeoJsonAdapter';
 import { createRasterAdapter } from './createRasterAdapter';
 
@@ -46,7 +46,7 @@ import { classAdapters } from './createAsyncAdapter';
 export class NgwKit implements StarterKit {
   static utils = {
     addNgwLayer,
-    createBasemapWebmapItemAdapter,
+    createBasemapWebmapItemAdapter: createOnFirstShowAdapter,
     createGeoJsonFeature,
     createGeoJsonAdapter,
     createRasterAdapter,

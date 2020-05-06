@@ -28,7 +28,7 @@ import {
   WebMapLayerAdapterEvents,
   ResourceAdapter,
 } from './interfaces';
-import { createBasemapWebmapItemAdapter } from './createBasemapWebmapItemAdapter';
+import { createOnFirstShowAdapter } from './createBasemapWebmapItemAdapter';
 
 export class WebMapLayerAdapter implements ResourceAdapter {
   layer?: WebMapLayerItem;
@@ -203,7 +203,7 @@ export class WebMapLayerAdapter implements ResourceAdapter {
   private _setBasemaps(baseWebmap: BasemapWebmap) {
     const webMap = this.options.webMap;
     baseWebmap.basemaps.forEach((x) => {
-      createBasemapWebmapItemAdapter({
+      createOnFirstShowAdapter({
         webMap,
         connector: this.options.connector,
         item: x,
