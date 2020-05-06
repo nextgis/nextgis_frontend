@@ -25,9 +25,11 @@ export class TerrainAdapter extends BaseAdapter<TileAdapterOptions, Layer> {
   showLayer(layer: CesiumTerrainProvider) {
     // this.map.imageryLayers.addImageryProvider(layer);
     this.map.terrainProvider = layer;
+    super.showLayer();
   }
 
   hideLayer(layer: ImageryLayer) {
     this.map.imageryLayers.remove(layer);
+    super.hideLayer();
   }
 }

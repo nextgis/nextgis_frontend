@@ -48,11 +48,13 @@ export class Model3DAdapter extends BaseAdapter<Model3DOptions, Layer> {
   showLayer(layer: Layer) {
     layer = layer || this._layer;
     layer.show = true;
+    super.showLayer();
   }
 
   hideLayer(layer: Layer) {
     layer = layer || this._layer;
     layer.show = false;
+    super.hideLayer();
   }
 
   removeLayer() {

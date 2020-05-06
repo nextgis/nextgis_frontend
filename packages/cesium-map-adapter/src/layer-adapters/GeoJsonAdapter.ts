@@ -70,12 +70,14 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     if (this._source) {
       this.map.dataSources.add(this._source);
     }
+    super.showLayer();
   }
 
   hideLayer() {
     if (this._source) {
       this.map.dataSources.remove(this._source);
     }
+    super.hideLayer();
   }
 
   clearLayer(cb?: (feature: Feature) => boolean) {
