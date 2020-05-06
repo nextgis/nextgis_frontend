@@ -54,7 +54,7 @@ export async function createBasemapWebmapItemAdapter({
           connector
         ).then((Adapter) => {
           if (Adapter) {
-            const adapter = new Adapter(webMap.mapAdapter.map, {});
+            const adapter = new Adapter(webMap.mapAdapter.map, adapterOptions);
             adapter.addLayer({}).then((baseLayer: BaseLayerAdapter) => {
               adapter.options.baseLayer = false;
               Object.assign(adapter.options, adapterOptions);

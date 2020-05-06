@@ -94,9 +94,12 @@ export async function createGeoJsonAdapter(opt: GetClassAdapterOptions) {
         filters: opt_.propertiesFilter,
         options: getLayerFilterOptions(opt_),
       };
-
+      let updatePromise: Promise<any> | undefined;
       if (needUpdate) {
-        this.updateLayer();
+        updatePromise = this.updateLayer();
+      }
+      if (opt_.waitFullLoad && updatePromise) {
+        await updatePromise;
       }
       if (this.options.strategy === 'BBOX') {
         this._addBboxEventListener();
