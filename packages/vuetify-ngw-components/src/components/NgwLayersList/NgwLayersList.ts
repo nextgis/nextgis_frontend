@@ -53,7 +53,6 @@ export class NgwLayersList extends Vue {
             const id = this._getLayerId(d);
             if (id) {
               const isVisible = selection.indexOf(id) !== -1;
-              console.log(1);
               d.properties.set('visibility', isVisible);
             }
           });

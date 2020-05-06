@@ -215,6 +215,7 @@ export interface GetClassAdapterOptions {
   connector: NgwConnector;
   item: ResourceItem;
   Adapter?: Type<BaseLayerAdapter>;
+  addLayerOptionsPriority?: false;
 }
 
 export type ClassAdapter = Promise<Type<LayerAdapter> | undefined>;
