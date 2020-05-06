@@ -83,6 +83,8 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
         infoBox: true,
         timeline: false,
         navigationHelpButton: false,
+        skyBox: false,
+        // skyAtmosphere: false,
         // useBrowserRecommendedResolution: true,
         sceneMode: SceneMode.SCENE3D,
         // terrainProvider: createWorldTerrain()
