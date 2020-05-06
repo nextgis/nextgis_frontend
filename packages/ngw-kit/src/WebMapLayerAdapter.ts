@@ -207,6 +207,7 @@ export class WebMapLayerAdapter implements ResourceAdapter {
         webMap,
         connector: this.options.connector,
         item: x,
+        adapterOptions: { crossOrigin: this.options.crossOrigin },
       }).then((adapter) => {
         webMap.addBaseLayer(adapter, {
           name: x.display_name,
