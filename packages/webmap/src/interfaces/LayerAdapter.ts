@@ -56,6 +56,11 @@ export interface AdapterOptions {
   fit?: boolean;
   name?: string;
   adapter?: string;
+  /**
+   * wait until adapter data is fully loaded before resolve addAdapter promise
+   */
+  waitFullLoad?: boolean;
+  crossOrigin?: 'anonymous';
 }
 
 export interface MvtAdapterOptions<F extends Feature = Feature>
