@@ -186,7 +186,7 @@ export class WebMapLayerAdapter implements ResourceAdapter {
           this._extent = [
             webmap.extent_left,
             webmap.extent_bottom,
-            webmap.extent_left,
+            webmap.extent_right,
             webmap.extent_top,
           ];
           this._updateItemsParams(webmap.root_item, this.options.webMap, data);

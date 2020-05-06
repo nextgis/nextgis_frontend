@@ -5,7 +5,7 @@ import { EventEmitter } from 'events';
 import { Feature, Polygon } from 'geojson';
 import StrictEventEmitter from 'strict-event-emitter-types';
 
-import { deepmerge } from '@nextgis/utils';
+import { deepmerge, defined } from '@nextgis/utils';
 import { GetPaintFunction } from '@nextgis/paint';
 
 import {
@@ -296,12 +296,20 @@ export class BaseWebMap<
    *
    * @example
    * ```javascript
-   * // Whall world
+   * // Whole world
    * webMap.fitBounds([0, -90, 180, 90]);
    * ```
    */
   fitBounds(bounds: LngLatBoundsArray, options?: FitOptions): this {
-    this.mapAdapter.fitBounds(bounds, options);
+    if (bounds.every((x) => defined(x))) {
+      if (bounds[1] < -85.06) {
+        bounds[1] = -85.06;
+      }
+      if (bounds[3] > 85.06) {
+        bounds[3] = 85.06;
+      }
+      this.mapAdapter.fitBounds(bounds, options);
+    }
     return this;
   }
 
