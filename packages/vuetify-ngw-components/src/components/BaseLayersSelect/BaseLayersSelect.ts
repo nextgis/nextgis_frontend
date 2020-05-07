@@ -4,7 +4,8 @@
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 import { CreateElement, VNode, VNodeData } from 'vue';
 
-import NgwMap, { LayerAdapter, BaseLayerAdapter } from '@nextgis/ngw-map';
+import WebMap from '@nextgis/webmap';
+import { LayerAdapter, BaseLayerAdapter } from '@nextgis/ngw-map';
 import { ResourceAdapter } from '@nextgis/ngw-kit';
 // @ts-ignore
 import { VSelect } from 'vuetify/lib';
@@ -17,7 +18,7 @@ export interface VueSelectItem {
 
 @Component
 export class BaseLayersSelect extends Vue {
-  @Prop({ type: NgwMap }) ngwMap!: NgwMap;
+  @Prop({ type: WebMap }) webMap!: WebMap;
   @Prop({ type: Boolean, default: true }) allowEmpty!: boolean;
   @Prop({ type: String, default: '---' }) emptyLayerText!: string;
 
@@ -32,11 +33,11 @@ export class BaseLayersSelect extends Vue {
   setVisibleLayers(active: string) {
     const activeLayer = this._layers.find((x) => x.id === active);
     if (activeLayer) {
-      this.ngwMap.showLayer(activeLayer);
+      this.webMap.showLayer(activeLayer);
     } else {
-      const activeBaseLayer = this.ngwMap.getActiveBaseLayer();
+      const activeBaseLayer = this.webMap.getActiveBaseLayer();
       if (activeBaseLayer) {
-        this.ngwMap.hideLayer(activeBaseLayer);
+        this.webMap.hideLayer(activeBaseLayer);
       }
     }
   }
@@ -89,34 +90,32 @@ export class BaseLayersSelect extends Vue {
   }
 
   protected create() {
-    this.ngwMap.onLoad().then(() => {
+    this.webMap.onLoad().then(() => {
       this.destroy();
-      this.updateItems();
       const __updateItems = debounce(async () => {
         const items = await this._updateItems();
         this.items = items;
       });
       this.__updateItems = __updateItems;
-
-      this.ngwMap.emitter.on('layer:add', __updateItems);
-      this.ngwMap.emitter.on('layer:remove', __updateItems);
+      this.updateItems();
+      this.webMap.emitter.on('layer:add', __updateItems);
+      this.webMap.emitter.on('layer:remove', __updateItems);
     });
   }
 
   protected destroy() {
     if (this.__updateItems) {
-      this.ngwMap.emitter.off('layer:add', this.__updateItems);
-      this.ngwMap.emitter.off('layer:remove', this.__updateItems);
+      this.webMap.emitter.off('layer:add', this.__updateItems);
+      this.webMap.emitter.off('layer:remove', this.__updateItems);
     }
   }
 
   protected async _updateItems(): Promise<VueSelectItem[]> {
-    await this.ngwMap.onLoad();
+    await this.webMap.onLoad();
     const baseLayers: BaseLayerAdapter[] = [];
     const items: VueSelectItem[] = [];
-    // this._layers = [];
-    const layers = this.ngwMap.allLayers();
-    const baseLayersIds = this.ngwMap.getBaseLayers();
+    const layers = this.webMap.allLayers();
+    const baseLayersIds = this.webMap.getBaseLayers();
 
     if (this.allowEmpty) {
       items.push({
@@ -133,7 +132,7 @@ export class BaseLayersSelect extends Vue {
           value: baseLayer.id || '',
           text: baseLayer.options.name || baseLayer.id || '',
         });
-        if (this.ngwMap.isLayerVisible(baseLayer)) {
+        if (this.webMap.isLayerVisible(baseLayer)) {
           this.active = baseLayer.id || false;
         }
       }
