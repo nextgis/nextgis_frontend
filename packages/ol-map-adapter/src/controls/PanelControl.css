@@ -18,7 +18,7 @@
 .webmap-control-container .ol-attribution {
   padding: 0;
   background-color: rgba(255, 255, 255, 0.5);
-  margin: 0;
+  margin: 0 !important;
   bottom: inherit;
   right: inherit;
   white-space: nowrap;

@@ -1,13 +1,19 @@
 import { LayerFeature } from '@nextgis/ngw-connector';
-import { getNgwLayerFeature, createGeoJsonFeature } from './featureLayerUtils';
-import { GetIdentifyGeoJsonOptions, NgwIdentify } from '../interfaces';
 import { Geometry } from 'geojson';
+import { getNgwLayerFeature, createGeoJsonFeature } from './featureLayerUtils';
+import {
+  GetIdentifyGeoJsonOptions,
+  NgwIdentify,
+  NgwIdentifyItem,
+} from '../interfaces';
 
-export function getIdentifyGeoJsonParams(
+export function getIdentifyItems(
   identify: NgwIdentify,
   multiple = false
-) {
-  let params: { resourceId: number; featureId: number } | undefined;
+): NgwIdentifyItem[] {
+  let params:
+    | { resourceId: number; featureId: number; feature: LayerFeature }
+    | undefined;
   const resources = [];
   const paramsList = [];
   for (const l in identify) {
@@ -18,7 +24,7 @@ export function getIdentifyGeoJsonParams(
   }
   const sortingArr = identify.resources;
   if (sortingArr) {
-    resources.sort(function (a, b) {
+    resources.sort((a, b) => {
       return sortingArr.indexOf(a) - sortingArr.indexOf(b);
     });
   }
@@ -26,11 +32,12 @@ export function getIdentifyGeoJsonParams(
     const l = resources[fry];
     const layerFeatures = identify[l].features;
     const resourceId = Number(l);
-    const f: LayerFeature | undefined = layerFeatures[0];
-    if (f) {
+    const feature: LayerFeature | undefined = layerFeatures[0];
+    if (feature) {
       params = {
-        featureId: f.id,
+        featureId: feature.id,
         resourceId,
+        feature,
       };
       paramsList.push(params);
       if (!multiple) {
@@ -59,7 +66,7 @@ export function getIdentifyGeoJson(options: GetIdentifyGeoJsonOptions) {
     }
   }
 
-  const params = getIdentifyGeoJsonParams(identify);
+  const params = getIdentifyItems(identify);
   if (params) {
     return getNgwLayerFeature({ connector, ...params[0] });
   }
