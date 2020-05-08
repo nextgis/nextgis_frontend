@@ -59,6 +59,7 @@ export type ResourceCls =
   | 'wmsclient_layer'
   | 'wmsclient_connection'
   | 'formbuilder_form'
+  | 'file_bucket'
   // tms branch
   | 'terrain_provider'
   | 'model_3d';
@@ -175,6 +176,17 @@ export interface VectorLayer {
   geometry_type: GeometryType;
 }
 
+interface FileBucket {
+  files: File[];
+  tstamp?: any;
+}
+
+interface File {
+  name: string;
+  mime_type: string;
+  size: number;
+}
+
 // Ngw api settings
 export interface ResourceItem {
   [cls: string]: any;
@@ -188,4 +200,5 @@ export interface ResourceItem {
   basemap_layer?: BasemapResource;
   basemap_webmap?: BasemapWebmap;
   lookup_table?: LookupTableResource;
+  file_bucket?: FileBucket;
 }
