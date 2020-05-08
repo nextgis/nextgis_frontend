@@ -14,7 +14,10 @@ import WebMap, {
   LayerAdapter,
   BaseLayerAdapter,
 } from '@nextgis/webmap';
-import NgwConnector, { ResourceItem } from '@nextgis/ngw-connector';
+import NgwConnector, {
+  ResourceItem,
+  LayerFeature,
+} from '@nextgis/ngw-connector';
 import { FeatureLayersIdentify } from '@nextgis/ngw-connector';
 import { Type } from '@nextgis/utils';
 import { Feature } from 'geojson';
@@ -198,6 +201,12 @@ interface NgwRasterIdentify {
   resources?: number[];
   sourceType: 'raster';
   event: MapClickEvent;
+}
+
+export interface NgwIdentifyItem {
+  resourceId: number;
+  featureId: number;
+  feature: LayerFeature;
 }
 
 export type NgwIdentify = FeatureLayersIdentify &
