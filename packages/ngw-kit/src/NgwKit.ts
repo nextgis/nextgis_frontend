@@ -14,10 +14,7 @@ import {
   setScaleRatio,
 } from './utils/utils';
 
-import {
-  getIdentifyGeoJson,
-  getIdentifyGeoJsonParams,
-} from './utils/identifyUtils';
+import { getIdentifyGeoJson, getIdentifyItems } from './utils/identifyUtils';
 
 import {
   getNgwLayerItems,
@@ -51,7 +48,7 @@ export class NgwKit implements StarterKit {
     createGeoJsonAdapter,
     createRasterAdapter,
     getIdentifyGeoJson,
-    getIdentifyGeoJsonParams,
+    getIdentifyGeoJsonParams: getIdentifyItems,
     getNgwResourceExtent,
     getNgwLayerFeature,
     getNgwLayerFeatures,
