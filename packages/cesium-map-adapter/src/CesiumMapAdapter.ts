@@ -13,6 +13,7 @@ import {
   EllipsoidTerrainProvider,
   Cartographic,
   GeoJsonDataSource,
+  WebMercatorProjection,
 } from 'cesium';
 
 import {
@@ -32,6 +33,7 @@ import { TileAdapter } from './layer-adapters/TileAdapter';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 import { TerrainAdapter } from './layer-adapters/TerrainAdapter';
 import { Model3DAdapter } from './layer-adapters/Model3DAdapter';
+import { Tileset3DAdapter } from './layer-adapters/Tileset3DAdapter';
 
 type Layer = any;
 type Control = any;
@@ -45,6 +47,7 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
     GEOJSON: GeoJsonAdapter,
     TERRAIN: TerrainAdapter,
     MODEL_3D: Model3DAdapter,
+    TILESET_3D: Tileset3DAdapter,
   };
 
   static controlAdapters = {
@@ -76,13 +79,15 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
         animation: false,
         baseLayerPicker: false,
         fullscreenButton: false,
-        scene3DOnly: true,
+        scene3DOnly: false,
+        sceneModePicker: true,
         selectionIndicator: true,
         geocoder: false,
         homeButton: false,
         infoBox: true,
         timeline: false,
         navigationHelpButton: false,
+        mapProjection: new WebMercatorProjection(),
         skyBox: false,
         // skyAtmosphere: false,
         // useBrowserRecommendedResolution: true,
@@ -95,8 +100,8 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
       });
       GeoJsonDataSource.clampToGround = true;
       viewer.imageryLayers.removeAll();
-      viewer.scene.globe.depthTestAgainstTerrain = false;
-      // viewer.scene.postProcessStages.fxaa.enabled = true;
+      viewer.scene.globe.depthTestAgainstTerrain = true;
+      viewer.scene.postProcessStages.fxaa.enabled = true;
       viewer.scene.requestRenderMode = true;
 
       // viewer.camera.percentageChanged = 0.1;

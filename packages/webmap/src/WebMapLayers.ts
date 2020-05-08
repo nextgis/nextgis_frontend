@@ -250,11 +250,12 @@ export class WebMapLayers<
       // think about how to move `id` to the adapter's constructor,
       // but that it is not required in the options
       _adapter.id = _adapter.options.id || String(id);
+      _adapter.options.id = _adapter.id;
       _adapter.order = _adapter.options.order || _order;
       if (layerId) {
         delete this._layers[layerId];
       }
-      layerId = String(_adapter.options.id);
+      layerId = String(_adapter.id);
       if (this._layers[layerId]) {
         throw Error(`layer with id '${layerId}' already exist`);
       }
