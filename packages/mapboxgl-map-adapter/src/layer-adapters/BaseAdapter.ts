@@ -17,7 +17,7 @@ export abstract class BaseAdapter<O extends AdapterOptions = AdapterOptions>
   }
 
   beforeRemove() {
-    // Object.assign(this, { map: undefined });
+    Object.assign(this, { map: undefined });
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
