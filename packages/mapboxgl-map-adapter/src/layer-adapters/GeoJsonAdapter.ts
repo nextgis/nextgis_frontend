@@ -50,9 +50,11 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   }
 
   beforeRemove() {
-    const source = this.map.getSource(this._sourceId);
-    if (source) {
-      this.map.removeSource(this._sourceId);
+    if (this.map) {
+      const source = this.map.getSource(this._sourceId);
+      if (source) {
+        this.map.removeSource(this._sourceId);
+      }
     }
     super.beforeRemove();
   }
