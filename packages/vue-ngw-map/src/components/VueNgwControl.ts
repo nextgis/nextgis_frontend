@@ -26,6 +26,7 @@ export class VueNgwControl extends Vue {
   name = 'vue-ngw-control';
   parentContainer!: VueNgwMap;
   control?: unknown;
+  ready = false;
 
   beforeDestroy() {
     if (this.parentContainer.ngwMap && this.control) {
@@ -54,7 +55,6 @@ export class VueNgwControl extends Vue {
         },
       };
       let _control: keyof MapControls | any = this.kind;
-
       if (!_control) {
         _control = ngwMap.createControl(controlObject, adControlOptions);
       }
@@ -66,7 +66,7 @@ export class VueNgwControl extends Vue {
     this.parentContainer = findNgwMapParent(this.$parent);
 
     await this.setControl(this.$el as HTMLElement);
-
+    this.ready = true;
     propsBinder(this, this.$props);
 
     this.$nextTick(() => {
@@ -86,8 +86,7 @@ export class VueNgwControl extends Vue {
       attrs: { 'data-app': true },
       // domProps: { id: this.id }
     };
-
-    return h('div', data, this.$slots.default);
+    return this.ready ? h('div', data, this.$slots.default) : h('div', data);
   }
 }
 

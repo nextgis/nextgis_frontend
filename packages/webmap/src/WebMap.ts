@@ -88,6 +88,9 @@ export class WebMap<
     },
   };
 
+  private _loadControlQueue: (() => Promise<any>)[] = [];
+  private _isControlLoading = false;
+
   async addControl<K extends keyof MapControls>(
     controlDef: K | C,
     position: ControlPositions,
@@ -100,8 +103,14 @@ export class WebMap<
       control = controlDef as C;
     }
     if (control) {
-      const _control = await control;
-      return this.mapAdapter.addControl(_control, position);
+      return new Promise<() => Promise<any>>((resolve) => {
+        const promise = async () => {
+          const _control = await control;
+          const c = this.mapAdapter.addControl(_control, position);
+          resolve(c);
+        };
+        this._setControlQueue(promise);
+      });
     }
   }
 
@@ -202,6 +211,25 @@ export class WebMap<
           console.error(er);
         }
       }
+    }
+  }
+
+  private _setControlQueue(cb: () => Promise<any>) {
+    this._loadControlQueue.push(cb);
+    if (!this._isControlLoading) {
+      this._applyControls();
+    }
+  }
+
+  private async _applyControls() {
+    if (this._loadControlQueue.length) {
+      this._isControlLoading = true;
+      const controlCb = this._loadControlQueue[0];
+      await controlCb();
+      this._loadControlQueue.splice(0, 1);
+      this._applyControls();
+    } else {
+      this._isControlLoading = false;
     }
   }
 }
