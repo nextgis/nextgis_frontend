@@ -117,21 +117,6 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<
   }
 
   /**
-   * Pans and zooms the map to the initial position specified in the options
-   */
-  fit() {
-    const { center, zoom, bounds } = this.options;
-    if (center) {
-      this.setCenter(center);
-      if (zoom) {
-        this.setZoom(zoom);
-      }
-    } else if (bounds) {
-      this.fitBounds(bounds);
-    }
-  }
-
-  /**
    * Organized addition to the map design and controls elements,
    * calling `control.onAdd(this.webMap.mapAdapter)`
    * @param control - object with onAdd and onRemove methods
@@ -208,6 +193,21 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<
       } catch (er) {
         console.error("Can't add NGW layer.", er);
       }
+    }
+  }
+
+  /**
+   * Pans and zooms the map to the initial position specified in the options
+   */
+  fit() {
+    const { center, zoom, bounds } = this.options;
+    if (center) {
+      this.setCenter(center);
+      if (zoom) {
+        this.setZoom(zoom);
+      }
+    } else if (bounds) {
+      this.fitBounds(bounds);
     }
   }
 
