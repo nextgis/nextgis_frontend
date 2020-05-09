@@ -8,23 +8,23 @@ import {
   MapControl,
   CreateControlOptions,
   ControlPositions,
+  MapControls,
 } from '@nextgis/webmap';
 import { findNgwMapParent, propsBinder } from '../utils';
 import VueNgwMap from './VueNgwMap';
 
 @Component
 export class VueNgwControl extends Vue {
-  name = 'vue-ngw-control';
-
-  @Prop({ type: String }) position!: ControlPositions;
-  @Prop({ type: Boolean }) bar!: boolean;
-  @Prop({ type: Boolean }) margin!: boolean;
-  @Prop({ type: String }) addClass!: string;
+  @Prop({ type: String }) readonly position!: ControlPositions;
+  @Prop({ type: Boolean }) readonly bar!: boolean;
+  @Prop({ type: Boolean }) readonly margin!: boolean;
+  @Prop({ type: String }) readonly addClass!: string;
+  @Prop({ type: String }) readonly kind!: keyof MapControls;
   @Prop({ type: Object, default: () => ({}) })
-  controlOptions!: CreateControlOptions;
+  readonly controlOptions!: CreateControlOptions;
 
+  name = 'vue-ngw-control';
   parentContainer!: VueNgwMap;
-
   control?: unknown;
 
   beforeDestroy() {
@@ -34,7 +34,7 @@ export class VueNgwControl extends Vue {
     }
   }
 
-  async setControl(element: HTMLElement) {
+  setControl(element: HTMLElement) {
     const ngwMap = this.parentContainer.ngwMap;
     const control = this.control;
     if (ngwMap) {
@@ -53,10 +53,11 @@ export class VueNgwControl extends Vue {
           // ignore
         },
       };
-      const _control = await ngwMap.createControl(
-        controlObject,
-        adControlOptions
-      );
+      let _control: keyof MapControls | any = this.kind;
+
+      if (!_control) {
+        _control = ngwMap.createControl(controlObject, adControlOptions);
+      }
       this.control = ngwMap.addControl(_control, this.position);
     }
   }
