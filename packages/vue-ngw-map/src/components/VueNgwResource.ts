@@ -11,12 +11,12 @@ import { AdapterOptions } from '@nextgis/webmap';
 
 @Component
 export class VueNgwResource extends Vue {
-  name = 'vue-ngw-resource';
-
   @Prop({ type: Number }) resourceId!: string;
   @Prop({ type: Boolean, default: false }) fit!: boolean;
   @Prop({ type: String }) adapter!: NgwLayerAdapterType;
   @Prop({ type: Object, default: () => ({}) }) adapterOptions!: AdapterOptions;
+
+  name = 'vue-ngw-resource';
 
   parentContainer!: VueNgwMap;
 
