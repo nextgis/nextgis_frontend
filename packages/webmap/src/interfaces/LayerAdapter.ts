@@ -31,6 +31,7 @@ export interface OnLayerClickOptions {
 }
 
 export interface AdapterOptions {
+  [key: string]: any;
   id?: string;
   /**
    * Show layer on the map immediately after adding.

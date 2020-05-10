@@ -176,7 +176,7 @@ export interface VectorLayer {
   geometry_type: GeometryType;
 }
 
-interface FileBucket {
+export interface FileBucket {
   files: File[];
   tstamp?: any;
 }
