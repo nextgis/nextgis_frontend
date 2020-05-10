@@ -2,9 +2,10 @@
  * @module cesium-map-adapter
  */
 import { TileAdapterOptions } from '@nextgis/webmap';
-import { CesiumTerrainProvider, ImageryLayer } from 'cesium';
+import { CesiumTerrainProvider } from 'cesium';
 
 import { BaseAdapter } from './BaseAdapter';
+import { getDefaultTerrain } from '../utils/getDefaultTerrain';
 
 type Layer = CesiumTerrainProvider;
 
@@ -22,14 +23,15 @@ export class TerrainAdapter extends BaseAdapter<TileAdapterOptions, Layer> {
     return layer;
   }
 
-  showLayer(layer: CesiumTerrainProvider) {
-    // this.map.imageryLayers.addImageryProvider(layer);
-    // this.map.terrainProvider = layer;
+  showLayer() {
+    if (this._layer) {
+      this.map.terrainProvider = this._layer;
+    }
     super.showLayer();
   }
 
-  hideLayer(layer: ImageryLayer) {
-    this.map.imageryLayers.remove(layer);
+  hideLayer() {
+    this.map.terrainProvider = getDefaultTerrain();
     super.hideLayer();
   }
 }
