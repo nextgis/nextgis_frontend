@@ -44,6 +44,7 @@ export interface FitOptions {
   maxZoom?: number;
   offset?: [number, number];
   padding?: number;
+  duration?: number;
 }
 
 export type ControlPositions =
