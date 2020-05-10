@@ -103,6 +103,18 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
       viewer.scene.globe.depthTestAgainstTerrain = true;
       viewer.scene.postProcessStages.fxaa.enabled = true;
       viewer.scene.requestRenderMode = true;
+      if (options.view) {
+        switch (options.view) {
+          case '2D':
+            viewer.scene.mode = SceneMode.SCENE2D;
+            break;
+          case '2.5D':
+            viewer.scene.mode = SceneMode.COLUMBUS_VIEW;
+            break;
+          default:
+            viewer.scene.mode = SceneMode.SCENE3D;
+        }
+      }
 
       // viewer.camera.percentageChanged = 0.1;
       this.map = viewer;
