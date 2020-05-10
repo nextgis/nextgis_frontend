@@ -15,7 +15,6 @@ import {
   Cartographic,
   GeoJsonDataSource,
   WebMercatorProjection,
-  Camera,
 } from 'cesium';
 
 import {
