@@ -6,6 +6,7 @@ import { EventEmitter } from 'events';
 import {
   Viewer,
   Ellipsoid,
+  Event,
   Rectangle,
   SceneMode,
   Cartesian3,
@@ -14,6 +15,7 @@ import {
   Cartographic,
   GeoJsonDataSource,
   WebMercatorProjection,
+  Camera,
 } from 'cesium';
 
 import {
@@ -26,6 +28,7 @@ import {
   LngLatBoundsArray,
   CreateControlOptions,
   ButtonControlOptions,
+  FitOptions,
 } from '@nextgis/webmap';
 import ControlContainer from '@nextgis/control-container';
 
@@ -68,12 +71,21 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
   private _controlContainer = new ControlContainer({
     addClass: 'cesium-control',
   });
+  private _terrainProviderChangedListener?: Event.RemoveCallback;
 
   create(options: MapOptions) {
     this.options = { ...options };
     if (this.options.target) {
       // default terrain provider
       const ellipsoidProvider = new EllipsoidTerrainProvider();
+
+      // if (options.bounds) {
+      //   console.log(options.bounds);
+      //   const extent = Rectangle.fromDegrees(...options.bounds);
+
+      //   Camera.DEFAULT_VIEW_RECTANGLE = extent;
+      //   Camera.DEFAULT_VIEW_FACTOR = 0;
+      // }
 
       const viewer = new Viewer(this.options.target, {
         animation: false,
@@ -100,9 +112,14 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
       });
       GeoJsonDataSource.clampToGround = true;
       viewer.imageryLayers.removeAll();
-      viewer.scene.globe.depthTestAgainstTerrain = true;
+      viewer.scene.globe.depthTestAgainstTerrain = false;
       viewer.scene.postProcessStages.fxaa.enabled = true;
       viewer.scene.requestRenderMode = true;
+      const t = viewer.scene.terrainProviderChanged;
+      this._terrainProviderChangedListener = t.addEventListener(() => {
+        this._onTerrainChange();
+      });
+
       if (options.view) {
         switch (options.view) {
           case '2D':
@@ -116,10 +133,11 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
         }
       }
 
-      // viewer.camera.percentageChanged = 0.1;
       this.map = viewer;
-      if (options.bounds) {
-        this.fitBounds(options.bounds);
+      const bounds = options.bounds;
+      if (bounds) {
+        // don't know why, but this should be asynchronous
+        setTimeout(() => this.fitBounds(bounds));
       } else if (options.center) {
         this.setCenter(options.center);
       }
@@ -138,7 +156,9 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
   }
 
   destroy() {
-    //
+    if (this._terrainProviderChangedListener) {
+      this._terrainProviderChangedListener();
+    }
   }
 
   getContainer(): HTMLElement | undefined {
@@ -186,11 +206,14 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
     return undefined;
   }
 
-  fitBounds(e: LngLatBoundsArray) {
+  fitBounds(e: LngLatBoundsArray, options: FitOptions = {}) {
     if (this.map) {
       const [west, south, east, north] = e;
-      const destination = Rectangle.fromDegrees(west, south, east, north);
-      this.map.camera.setView({ destination });
+      const rectangle = Rectangle.fromDegrees(west, south, east, north);
+      const destination = this.map.camera.getRectangleCameraCoordinates(
+        rectangle
+      );
+      this.map.camera.flyTo({ destination, duration: options.duration || 0 });
     }
   }
 
@@ -208,7 +231,6 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
           rect.east,
           rect.north,
         ].map((x) => CesiumMath.toDegrees(x));
-
         return [x1, y1, x2, y2];
       }
     }
@@ -257,6 +279,13 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
 
   onMapClick(evt: any) {
     //
+  }
+
+  private _onTerrainChange() {
+    const bound = this.getBounds();
+    if (bound) {
+      this.fitBounds(bound);
+    }
   }
 
   private _addEventsListener() {
