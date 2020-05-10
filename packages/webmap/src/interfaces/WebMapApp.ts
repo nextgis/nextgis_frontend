@@ -52,6 +52,8 @@ export interface MapOptions {
   paint?: GeometryPaint;
   selectedPaint?: GeometryPaint;
 
+  view?: '2D' | '3D' | '2.5D';
+
   /**
    * The callback function is calling before adding each layer
    */
