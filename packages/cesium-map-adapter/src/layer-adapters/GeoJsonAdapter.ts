@@ -26,13 +26,12 @@ import {
   Property,
   CallbackProperty,
   Cartographic,
-  sampleTerrainMostDetailed,
-  when,
   Entity,
   HeightReference,
 } from 'cesium';
 import { GeoJsonObject, Feature, FeatureCollection } from 'geojson';
 import { BaseAdapter, Map } from './BaseAdapter';
+import { whenSampleTerrainMostDetailed } from '../utils/whenSampleTerrainMostDetailed';
 
 type Layer = GeoJsonDataSource;
 
@@ -305,11 +304,9 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
         }
       });
       if (entities.length) {
-        when(
-          sampleTerrainMostDetailed(
-            this.map.terrainProvider,
-            terrainSamplePositions
-          ),
+        whenSampleTerrainMostDetailed(
+          this.map.terrainProvider,
+          terrainSamplePositions,
           () => {
             for (let i = 0; i < entities.length; i++) {
               const entity = entities[i];

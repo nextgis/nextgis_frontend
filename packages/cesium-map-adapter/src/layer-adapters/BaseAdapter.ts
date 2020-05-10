@@ -13,12 +13,10 @@ export abstract class BaseAdapter<
   private _terrainProviderChangedListener?: Event.RemoveCallback;
 
   constructor(public map: Map, public options: O) {
-    if (this.onTerrainChange) {
-      const t = map.scene.terrainProviderChanged;
-      this._terrainProviderChangedListener = t.addEventListener(() => {
-        if (this.onTerrainChange) this.onTerrainChange();
-      });
-    }
+    const t = map.scene.terrainProviderChanged;
+    this._terrainProviderChangedListener = t.addEventListener(() => {
+      if (this.onTerrainChange) this.onTerrainChange();
+    });
   }
 
   beforeRemove() {
