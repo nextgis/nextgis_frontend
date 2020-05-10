@@ -15,6 +15,7 @@ import {
   Cartographic,
   GeoJsonDataSource,
   WebMercatorProjection,
+  TerrainProvider,
 } from 'cesium';
 
 import {
@@ -36,6 +37,8 @@ import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 import { TerrainAdapter } from './layer-adapters/TerrainAdapter';
 import { Model3DAdapter } from './layer-adapters/Model3DAdapter';
 import { Tileset3DAdapter } from './layer-adapters/Tileset3DAdapter';
+import { getDefaultTerrain } from './utils/getDefaultTerrain';
+import { whenSampleTerrainMostDetailed } from './utils/whenSampleTerrainMostDetailed';
 
 type Layer = any;
 type Control = any;
@@ -76,7 +79,7 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
     this.options = { ...options };
     if (this.options.target) {
       // default terrain provider
-      const ellipsoidProvider = new EllipsoidTerrainProvider();
+      const ellipsoidProvider = getDefaultTerrain();
 
       // if (options.bounds) {
       //   console.log(options.bounds);
@@ -115,9 +118,11 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
       viewer.scene.postProcessStages.fxaa.enabled = true;
       viewer.scene.requestRenderMode = true;
       const t = viewer.scene.terrainProviderChanged;
-      this._terrainProviderChangedListener = t.addEventListener(() => {
-        this._onTerrainChange();
-      });
+      this._terrainProviderChangedListener = t.addEventListener(
+        (e: TerrainProvider) => {
+          this._onTerrainChange(e);
+        }
+      );
 
       if (options.view) {
         switch (options.view) {
@@ -212,7 +217,10 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
       const destination = this.map.camera.getRectangleCameraCoordinates(
         rectangle
       );
-      this.map.camera.flyTo({ destination, duration: options.duration || 0 });
+      this.map.camera.flyTo({
+        destination,
+        duration: options.duration || 0,
+      });
     }
   }
 
@@ -280,10 +288,17 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
     //
   }
 
-  private _onTerrainChange() {
-    const bound = this.getBounds();
-    if (bound) {
-      this.fitBounds(bound);
+  private _onTerrainChange(e: TerrainProvider) {
+    const viewer = this.map;
+    if (viewer) {
+      const iniPos = viewer.camera.position;
+      const cartographic = Cartographic.fromCartesian(iniPos);
+      const positions = [cartographic];
+
+      whenSampleTerrainMostDetailed(e, positions, () => {
+        viewer.camera.moveUp(positions[0].height);
+        // console.log(positions[0].height, viewer.camera.position);
+      });
     }
   }
 

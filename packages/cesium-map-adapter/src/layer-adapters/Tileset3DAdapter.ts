@@ -10,6 +10,7 @@ import {
   sampleTerrainMostDetailed,
 } from 'cesium';
 import { BaseAdapter } from './BaseAdapter';
+import { whenSampleTerrainMostDetailed } from '../utils/whenSampleTerrainMostDetailed';
 
 export class Tileset3DAdapter extends BaseAdapter<TileAdapterOptions> {
   layer?: Cesium3DTileset;
@@ -99,11 +100,9 @@ export class Tileset3DAdapter extends BaseAdapter<TileAdapterOptions> {
       const cartographic = Cartographic.fromCartesian(boundingSphere.center);
       const heightSurface = cartographic.height;
       const terrainSamplePositions = [cartographic];
-      when(
-        sampleTerrainMostDetailed(
-          this.map.terrainProvider,
-          terrainSamplePositions
-        ),
+      whenSampleTerrainMostDetailed(
+        this.map.terrainProvider,
+        terrainSamplePositions,
         () => {
           if (this.layer) {
             const lon = cartographic.longitude;

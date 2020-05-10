@@ -15,6 +15,7 @@ import {
 } from 'cesium';
 
 import { BaseAdapter } from './BaseAdapter';
+import { whenSampleTerrainMostDetailed } from '../utils/whenSampleTerrainMostDetailed';
 
 type Layer = Model;
 
@@ -75,11 +76,9 @@ export class Model3DAdapter extends BaseAdapter<Model3DOptions, Layer> {
         Cartographic.fromDegrees(lon, lat),
       ];
 
-      when(
-        sampleTerrainMostDetailed(
-          this.map.terrainProvider,
-          terrainSamplePositions
-        ),
+      whenSampleTerrainMostDetailed(
+        this.map.terrainProvider,
+        terrainSamplePositions,
         () => {
           if (this._layer) {
             const height = terrainSamplePositions[0].height;
