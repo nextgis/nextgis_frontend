@@ -44,6 +44,7 @@ export class NgwKit implements StarterKit {
   static utils = {
     addNgwLayer,
     createBasemapWebmapItemAdapter: createOnFirstShowAdapter,
+    createOnFirstShowAdapter,
     createGeoJsonFeature,
     createGeoJsonAdapter,
     createRasterAdapter,
