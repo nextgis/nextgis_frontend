@@ -21,10 +21,15 @@ export class Tileset3DAdapter extends BaseAdapter<TileAdapterOptions> {
     return tileset;
   }
 
+  onTerrainChange = () => {
+    this.watchHeight();
+  };
+
   beforeRemove() {
     if (this.layer) {
       this.map.scene.primitives.remove(this.layer);
     }
+    super.beforeRemove();
   }
 
   getExtent() {
@@ -53,17 +58,39 @@ export class Tileset3DAdapter extends BaseAdapter<TileAdapterOptions> {
 
     const tileset = await layer.readyPromise;
 
-    const boundingSphere = tileset.boundingSphere;
-    const carto = Ellipsoid.WGS84.cartesianToCartographic(
-      boundingSphere.center
-    );
-    const lon = CMath.toDegrees(carto.longitude);
-    const lat = CMath.toDegrees(carto.latitude);
-    this._extent = [lon, lat, lon, lat];
     this.layer = tileset;
+    this._extent = this._calculateExtent();
     this.map.scene.primitives.add(this.layer);
     this.watchHeight();
     return this.layer;
+  }
+
+  private _calculateExtent() {
+    const tileset = this.layer;
+    if (tileset) {
+      const boundingSphere = tileset.boundingSphere;
+      const minBoundingSphere = boundingSphere.clone();
+      const maxBoundingSphere = boundingSphere.clone();
+      minBoundingSphere.center.x =
+        minBoundingSphere.center.x - boundingSphere.radius;
+      minBoundingSphere.center.y =
+        minBoundingSphere.center.y - boundingSphere.radius;
+      maxBoundingSphere.center.x =
+        maxBoundingSphere.center.x + boundingSphere.radius;
+      maxBoundingSphere.center.y =
+        maxBoundingSphere.center.y + boundingSphere.radius;
+      const cartoMin = Ellipsoid.WGS84.cartesianToCartographic(
+        minBoundingSphere.center
+      );
+      const cartoMax = Ellipsoid.WGS84.cartesianToCartographic(
+        maxBoundingSphere.center
+      );
+      const west = CMath.toDegrees(cartoMin.longitude);
+      const south = CMath.toDegrees(cartoMin.latitude);
+      const east = CMath.toDegrees(cartoMax.longitude);
+      const north = CMath.toDegrees(cartoMax.latitude);
+      return [west, south, east, north];
+    }
   }
 
   private watchHeight() {

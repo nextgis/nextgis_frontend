@@ -22,6 +22,10 @@ export class Model3DAdapter extends BaseAdapter<Model3DOptions, Layer> {
   private _extent?: LngLatBoundsArray;
   private _layer?: Model;
 
+  onTerrainChange = () => {
+    this.watchHeight();
+  };
+
   addLayer(opt: Model3DOptions) {
     this.options = { ...this.options, ...opt };
     // const modelMatrix = Transforms.eastNorthUpToFixedFrame(position);

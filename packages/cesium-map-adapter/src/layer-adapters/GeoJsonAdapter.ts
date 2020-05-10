@@ -33,7 +33,6 @@ import {
 } from 'cesium';
 import { GeoJsonObject, Feature, FeatureCollection } from 'geojson';
 import { BaseAdapter, Map } from './BaseAdapter';
-import { promises } from 'dns';
 
 type Layer = GeoJsonDataSource;
 
@@ -56,6 +55,10 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
   private _paint?: Paint;
   private _features: Feature[] = [];
   private _source?: GeoJsonDataSource;
+
+  onTerrainChange = () => {
+    this.watchHeight();
+  };
 
   addLayer(options: GeoJsonAdapterOptions) {
     this.options = { ...options };
