@@ -158,12 +158,12 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     if (source) {
       const colorStr = paint.fillColor || paint.color;
       const color = Color.fromCssColorString(
-        typeof colorStr === 'string' ? colorStr : 'blue'
+        typeof colorStr === 'string' && colorStr ? colorStr : 'blue'
       );
       const size = typeof paint.size === 'number' ? paint.size : 42;
       const iconFont = paint.iconfont || 'maki';
       let pin: HTMLCanvasElement | Promise<HTMLCanvasElement> | undefined;
-      if (typeof paint.icon === 'string' && iconFont === 'maki') {
+      if (typeof paint.icon === 'string' && paint.icon && iconFont === 'maki') {
         try {
           const icon = paint.icon.replace(/-11|-15$/, '');
           pin = await this._pinBuilder.fromMakiIconId(icon, color, size);
