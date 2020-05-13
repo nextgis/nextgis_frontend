@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.31.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.2...v0.31.0) (2020-05-13)
+
+
+### Bug Fixes
+
+* **ngw-kit:** create async adapter from parent resource ([808572b](https://github.com/nextgis/nextgisweb_frontend/commit/808572b5aff6b04783cd7e9edd078e2ea5404dd2))
+* **ngw-kit:** resolve createGeoJsonAdapter options override II ([c65f1ee](https://github.com/nextgis/nextgisweb_frontend/commit/c65f1eeb2dd0974980c70455d142dba427081521))
+* **ngw-kit:** webmapLayerItem options ([154d3b2](https://github.com/nextgis/nextgisweb_frontend/commit/154d3b201df153e9d17653fc4acd1fe8a2af9ebf))
+* **nngw-kit:** resolve create geojson adapter options override ([fba851e](https://github.com/nextgis/nextgisweb_frontend/commit/fba851effec4402565c8c3b31ce1eaba2b0b590f))
+* **webmap:** add check for fitBounds extent ([c78ab3e](https://github.com/nextgis/nextgisweb_frontend/commit/c78ab3e900f3e069401fb23b5b7646aa5cbc8e7f))
+* **webmap:** addLayer adapter options set ([2d24a53](https://github.com/nextgis/nextgisweb_frontend/commit/2d24a5387634bbccb79875186cc7a9cf090291f2))
+
+
+### Features
+
+* **cesium:** fitBounds up tp terrain ([e890d9b](https://github.com/nextgis/nextgisweb_frontend/commit/e890d9b5ce449dc69c8b531c33b9ce6cb58b10b4))
+* **ngw-kit:** add addLayerOptionsPriority for createGeoJsonAdapter ([f6c563e](https://github.com/nextgis/nextgisweb_frontend/commit/f6c563e1bc1238206bb4ba3d8081971d078ef54d))
+* **ngw-kit:** add baselayers from webmap; vuetify BaseLayerSelect ([74c0749](https://github.com/nextgis/nextgisweb_frontend/commit/74c074929c7da864a9097fc8176825894555e0a3))
+* **ngw-kit:** add feature to getIdentifyItems ([9641c8e](https://github.com/nextgis/nextgisweb_frontend/commit/9641c8e8b0e67ece7186ba8a6803d109e6503afd))
+* **ngw-kit:** make create basemap layer adapter universal ([bbd8c9a](https://github.com/nextgis/nextgisweb_frontend/commit/bbd8c9a77d527921909ae9b1bf10b3580c5fa600))
+* **ngw-map:** add ngw layer from resource item object ([18fb9e1](https://github.com/nextgis/nextgisweb_frontend/commit/18fb9e105fe733b8e1e5736cfb3afeb8e5b9e84c))
+* **webmap:** layer adapter waitFullLoad and crossOrigin new options ([08c6b82](https://github.com/nextgis/nextgisweb_frontend/commit/08c6b827f6a3e5728d8b17a9c305f32cd2b28039))
+
+
+### BREAKING CHANGES
+
+* **ngw-kit:** rename NgwKit.utils.getIdentifyGeoJsonParams > NgwKit.utils.getIdentifyItems
+
+
+
+
+
 ## [0.30.2](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.1...v0.30.2) (2020-04-30)
 
 

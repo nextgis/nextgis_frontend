@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.31.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.2...v0.31.0) (2020-05-13)
+
+
+### Features
+
+* **webmap:** layer adapter waitFullLoad and crossOrigin new options ([08c6b82](https://github.com/nextgis/nextgisweb_frontend/commit/08c6b827f6a3e5728d8b17a9c305f32cd2b28039))
+
+
+
+
+
 ## [0.30.1](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.0...v0.30.1) (2020-04-30)
 
 **Note:** Version bump only for package @nextgis/utils

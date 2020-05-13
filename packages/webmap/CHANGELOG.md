@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.31.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.2...v0.31.0) (2020-05-13)
+
+
+### Bug Fixes
+
+* **webmap:** add check for fitBounds extent ([c78ab3e](https://github.com/nextgis/nextgisweb_frontend/commit/c78ab3e900f3e069401fb23b5b7646aa5cbc8e7f))
+* **webmap:** addLayer adapter options set ([2d24a53](https://github.com/nextgis/nextgisweb_frontend/commit/2d24a5387634bbccb79875186cc7a9cf090291f2))
+* **webmap:** remove addLayer dublicate id ([81a4458](https://github.com/nextgis/nextgisweb_frontend/commit/81a4458b9b420382d112be181d829e08f783c82b))
+
+
+### Features
+
+* **cesium:** add Tileset3dAdapter ([c5306f9](https://github.com/nextgis/nextgisweb_frontend/commit/c5306f9b8bb3e37f287cbd4e3d33a04d93478e2b))
+* **cesium:** fitBounds up tp terrain ([e890d9b](https://github.com/nextgis/nextgisweb_frontend/commit/e890d9b5ce449dc69c8b531c33b9ce6cb58b10b4))
+* **cesium:** set scene view from new adapter option ([c35e16d](https://github.com/nextgis/nextgisweb_frontend/commit/c35e16ded6036fccb2edb852bebd68f41fc899eb))
+* **ngw-kit:** add baselayers from webmap; vuetify BaseLayerSelect ([74c0749](https://github.com/nextgis/nextgisweb_frontend/commit/74c074929c7da864a9097fc8176825894555e0a3))
+* **webmap:** add async control in correct order ([c2eaab3](https://github.com/nextgis/nextgisweb_frontend/commit/c2eaab3a0d720a6b6d32fc0d6b2c76bc37e93a8f))
+* **webmap:** layer adapter waitFullLoad and crossOrigin new options ([08c6b82](https://github.com/nextgis/nextgisweb_frontend/commit/08c6b827f6a3e5728d8b17a9c305f32cd2b28039))
+
+
+
+
+
 ## [0.30.2](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.1...v0.30.2) (2020-04-30)
 
 
