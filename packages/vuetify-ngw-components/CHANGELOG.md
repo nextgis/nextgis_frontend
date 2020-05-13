@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.31.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.2...v0.31.0) (2020-05-13)
+
+
+### Bug Fixes
+
+* **ngw-kit:** create async adapter from parent resource ([808572b](https://github.com/nextgis/nextgisweb_frontend/commit/808572b5aff6b04783cd7e9edd078e2ea5404dd2))
+* **ol:** css control fixes ([98f6d13](https://github.com/nextgis/nextgisweb_frontend/commit/98f6d13dc9af59a39b1b0a13cea24be3a2505759))
+* **vuetify:** NgwLayersList visibility for webmap root item ([4f940a8](https://github.com/nextgis/nextgisweb_frontend/commit/4f940a854a5054070acbf9d0416f059c9f19ae7d))
+
+
+### Features
+
+* **ngw-kit:** add addLayerOptionsPriority for createGeoJsonAdapter ([f6c563e](https://github.com/nextgis/nextgisweb_frontend/commit/f6c563e1bc1238206bb4ba3d8081971d078ef54d))
+* **ngw-kit:** add baselayers from webmap; vuetify BaseLayerSelect ([74c0749](https://github.com/nextgis/nextgisweb_frontend/commit/74c074929c7da864a9097fc8176825894555e0a3))
+* **ngw-kit:** make create basemap layer adapter universal ([bbd8c9a](https://github.com/nextgis/nextgisweb_frontend/commit/bbd8c9a77d527921909ae9b1bf10b3580c5fa600))
+
+
+
+
+
 ## [0.30.2](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.1...v0.30.2) (2020-04-30)
 
 **Note:** Version bump only for package @nextgis/vuetify-ngw-components

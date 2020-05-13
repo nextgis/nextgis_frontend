@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.31.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.2...v0.31.0) (2020-05-13)
+
+
+### Features
+
+* **cesium:** add Tileset3dAdapter ([c5306f9](https://github.com/nextgis/nextgisweb_frontend/commit/c5306f9b8bb3e37f287cbd4e3d33a04d93478e2b))
+* **ngw-kit:** make create basemap layer adapter universal ([bbd8c9a](https://github.com/nextgis/nextgisweb_frontend/commit/bbd8c9a77d527921909ae9b1bf10b3580c5fa600))
+
+
+
+
+
 ## [0.30.1](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.0...v0.30.1) (2020-04-30)
 
 

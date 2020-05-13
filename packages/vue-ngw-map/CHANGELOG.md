@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.31.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.2...v0.31.0) (2020-05-13)
+
+
+### Features
+
+* **vue:** VueNgwControl from string  kind option ([1050be8](https://github.com/nextgis/nextgisweb_frontend/commit/1050be8d7488713e10869e1060e76a8da313d21f))
+* **webmap:** add async control in correct order ([c2eaab3](https://github.com/nextgis/nextgisweb_frontend/commit/c2eaab3a0d720a6b6d32fc0d6b2c76bc37e93a8f))
+
+
+
+
+
 ## [0.30.2](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.1...v0.30.2) (2020-04-30)
 
 **Note:** Version bump only for package @nextgis/vue-ngw-map
