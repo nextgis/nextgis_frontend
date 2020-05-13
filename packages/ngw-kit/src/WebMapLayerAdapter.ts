@@ -2,7 +2,6 @@ import WebMap, { LngLatBoundsArray, MapClickEvent } from '@nextgis/webmap';
 import {
   ResourceItem,
   WebmapResource,
-  BasemapResource,
   BasemapWebmap,
 } from '@nextgis/ngw-connector';
 import CancelablePromise from '@nextgis/cancelable-promise';

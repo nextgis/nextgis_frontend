@@ -40,56 +40,6 @@ export class NgwUploader {
     this._initialize();
   }
 
-  createInput(opt: UploadInputOptions = {}): HTMLElement {
-    opt = { ...this.options.inputOptions, ...opt };
-    const allowImage = opt.image || true;
-    const input = document.createElement('input');
-    input.setAttribute('type', 'file');
-    let accept: ImageTypes[] = [];
-    if (allowImage) {
-      accept = Object.keys(imageTypesAccept).reduce((a: ImageTypes[], b) => {
-        const imageTypes = imageTypesAccept[b];
-        return a.concat(imageTypes);
-      }, []);
-    }
-    input.setAttribute('accept', accept.join(','));
-    if (opt.html) {
-      input.innerHTML = opt.html;
-    }
-    input.addEventListener('change', () => {
-      const file = input && input.files && input.files[0];
-      if (file) {
-        const uploadPromise = this.uploadRaster(file, opt);
-        if (uploadPromise) {
-          if (opt.success) {
-            uploadPromise.then(opt.success);
-          }
-          if (opt.error) {
-            uploadPromise.then(opt.error);
-          }
-        }
-      }
-    });
-    if (opt.element) {
-      let element;
-      if (typeof opt.element === 'string') {
-        element = document.getElementById(opt.element);
-      } else if (opt.element instanceof HTMLElement) {
-        element = opt.element;
-      }
-      if (element) {
-        element.appendChild(input);
-      } else {
-        throw new Error('target element not founded');
-      }
-    }
-    return input;
-  }
-
-  getResource(id: number) {
-    return this.connector && this.connector.getResource(id);
-  }
-
   @onLoad()
   uploadRaster(
     file: File,
@@ -126,7 +76,9 @@ export class NgwUploader {
     const data = {
       resource: {
         cls: 'resource_group',
-        parent: { id: options.parentId !== undefined ? options.parentId : 0 },
+        parent: {
+          id: options.parentId !== undefined ? options.parentId : 0,
+        },
         display_name: name,
         keyname: options.keyname,
         description: options.description,
@@ -148,7 +100,9 @@ export class NgwUploader {
       resource: {
         cls: 'raster_layer',
         display_name: name,
-        parent: { id: options.parentId !== undefined ? options.parentId : 0 },
+        parent: {
+          id: options.parentId !== undefined ? options.parentId : 0,
+        },
       },
       raster_layer: {
         source: {
@@ -255,7 +209,9 @@ export class NgwUploader {
     const wmsData = {
       resource: {
         cls: 'wmsclient_connection',
-        parent: { id: options.parentId !== undefined ? options.parentId : 0 },
+        parent: {
+          id: options.parentId !== undefined ? options.parentId : 0,
+        },
         display_name: name,
         keyname: null,
         description: null,
@@ -352,6 +308,56 @@ export class NgwUploader {
           return meta;
         })
     );
+  }
+
+  createInput(opt: UploadInputOptions = {}): HTMLElement {
+    opt = { ...this.options.inputOptions, ...opt };
+    const allowImage = opt.image || true;
+    const input = document.createElement('input');
+    input.setAttribute('type', 'file');
+    let accept: ImageTypes[] = [];
+    if (allowImage) {
+      accept = Object.keys(imageTypesAccept).reduce((a: ImageTypes[], b) => {
+        const imageTypes = imageTypesAccept[b];
+        return a.concat(imageTypes);
+      }, []);
+    }
+    input.setAttribute('accept', accept.join(','));
+    if (opt.html) {
+      input.innerHTML = opt.html;
+    }
+    input.addEventListener('change', () => {
+      const file = input && input.files && input.files[0];
+      if (file) {
+        const uploadPromise = this.uploadRaster(file, opt);
+        if (uploadPromise) {
+          if (opt.success) {
+            uploadPromise.then(opt.success);
+          }
+          if (opt.error) {
+            uploadPromise.then(opt.error);
+          }
+        }
+      }
+    });
+    if (opt.element) {
+      let element;
+      if (typeof opt.element === 'string') {
+        element = document.getElementById(opt.element);
+      } else if (opt.element instanceof HTMLElement) {
+        element = opt.element;
+      }
+      if (element) {
+        element.appendChild(input);
+      } else {
+        throw new Error('target element not founded');
+      }
+    }
+    return input;
+  }
+
+  getResource(id: number) {
+    return this.connector && this.connector.getResource(id);
   }
 
   private async _initialize() {

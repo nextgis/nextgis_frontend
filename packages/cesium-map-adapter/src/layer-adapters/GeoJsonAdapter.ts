@@ -208,6 +208,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
           name: name || (obj.id !== undefined ? 'Feature#' + obj.id : ''),
           description,
           billboard: {
+            // @ts-ignore
             heightReference: HeightReference.CLAMP_TO_GROUND,
             // @ts-ignore
             image: canvas.toDataURL(),

@@ -10,8 +10,6 @@ import {
   Math as CMath,
   HeadingPitchRoll,
   Cartographic,
-  sampleTerrainMostDetailed,
-  when,
 } from 'cesium';
 
 import { BaseAdapter } from './BaseAdapter';

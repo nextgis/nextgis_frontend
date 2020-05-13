@@ -73,6 +73,13 @@ export class NgwLayersList extends Vue {
     this.create();
   }
 
+  @Watch('include')
+  async updateItems() {
+    if (this.__updateItems) {
+      this.__updateItems();
+    }
+  }
+
   mounted() {
     this.create();
   }
@@ -108,13 +115,6 @@ export class NgwLayersList extends Vue {
       // domProps: { id: this.id }
     };
     return h(VTreeview, data, this.$slots.default);
-  }
-
-  @Watch('include')
-  async updateItems() {
-    if (this.__updateItems) {
-      this.__updateItems();
-    }
   }
 
   private create() {

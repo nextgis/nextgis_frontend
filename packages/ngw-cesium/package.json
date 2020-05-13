@@ -9,7 +9,7 @@
     "@nextgis/cesium-map-adapter": "^0.30.2",
     "@nextgis/ngw-map": "^0.30.2",
     "@types/events": "^3.0.0",
-    "@types/node": "^13.13.4",
+    "@types/node": "^14.0.1",
     "events": "^3.1.0"
   },
   "devDependencies": {
