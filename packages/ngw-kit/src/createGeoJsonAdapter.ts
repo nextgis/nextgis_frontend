@@ -7,7 +7,7 @@ import WebMap, {
   FilterOptions,
 } from '@nextgis/webmap';
 import CancelablePromise from '@nextgis/cancelable-promise';
-import { debounce, objectAssign } from '@nextgis/utils';
+import { debounce } from '@nextgis/utils';
 import { NgwLayerOptions, GetClassAdapterOptions } from './interfaces';
 import { getNgwLayerFeatures } from './utils/featureLayerUtils';
 import { resourceIdFromLayerOptions } from './utils/resourceIdFromLayerOptions';

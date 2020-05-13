@@ -11,7 +11,6 @@ import {
   SceneMode,
   Cartesian3,
   Math as CesiumMath,
-  EllipsoidTerrainProvider,
   Cartographic,
   GeoJsonDataSource,
   WebMercatorProjection,

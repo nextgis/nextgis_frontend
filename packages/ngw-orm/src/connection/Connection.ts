@@ -1,4 +1,4 @@
-import NgwConnector, { ResourceItem } from '@nextgis/ngw-connector';
+import NgwConnector from '@nextgis/ngw-connector';
 import { objectAssign, Type } from '@nextgis/utils';
 import { ConnectionOptions } from './ConnectionOptions';
 import { SyncOptions } from '../repository/SyncOptions';
