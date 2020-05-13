@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.31.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.2...v0.31.0) (2020-05-13)
+
+
+### Bug Fixes
+
+* **ol:** css control fixes ([98f6d13](https://github.com/nextgis/nextgisweb_frontend/commit/98f6d13dc9af59a39b1b0a13cea24be3a2505759))
+
+
+### Features
+
+* **webmap:** layer adapter waitFullLoad and crossOrigin new options ([08c6b82](https://github.com/nextgis/nextgisweb_frontend/commit/08c6b827f6a3e5728d8b17a9c305f32cd2b28039))
+
+
+
+
+
 ## [0.30.2](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.1...v0.30.2) (2020-04-30)
 
 **Note:** Version bump only for package @nextgis/ol-map-adapter

@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.31.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.2...v0.31.0) (2020-05-13)
+
+
+### Features
+
+* **ngw-kit:** add feature to getIdentifyItems ([9641c8e](https://github.com/nextgis/nextgisweb_frontend/commit/9641c8e8b0e67ece7186ba8a6803d109e6503afd))
+* **ngw-map:** add ngw layer from resource item object ([18fb9e1](https://github.com/nextgis/nextgisweb_frontend/commit/18fb9e105fe733b8e1e5736cfb3afeb8e5b9e84c))
+* **vue:** VueNgwControl from string  kind option ([1050be8](https://github.com/nextgis/nextgisweb_frontend/commit/1050be8d7488713e10869e1060e76a8da313d21f))
+
+
+### BREAKING CHANGES
+
+* **ngw-kit:** rename NgwKit.utils.getIdentifyGeoJsonParams > NgwKit.utils.getIdentifyItems
+
+
+
+
+
 ## [0.30.2](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.1...v0.30.2) (2020-04-30)
 
 **Note:** Version bump only for package @nextgis/ngw-map

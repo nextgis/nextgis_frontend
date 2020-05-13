@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.31.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.2...v0.31.0) (2020-05-13)
+
+
+### Bug Fixes
+
+* **ngw-kit:** webmapLayerItem options ([154d3b2](https://github.com/nextgis/nextgisweb_frontend/commit/154d3b201df153e9d17653fc4acd1fe8a2af9ebf))
+
+
+
+
+
 ## [0.30.1](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.0...v0.30.1) (2020-04-30)
 
 **Note:** Version bump only for package @nextgis/item

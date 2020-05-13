@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.31.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.2...v0.31.0) (2020-05-13)
+
+
+### Features
+
+* **cesium:** extrude3d paint option ([c4ce679](https://github.com/nextgis/nextgisweb_frontend/commit/c4ce679cd15bbc87e362048dc007a85ce42516fd))
+
+
+
+
+
 ## [0.30.1](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.0...v0.30.1) (2020-04-30)
 
 

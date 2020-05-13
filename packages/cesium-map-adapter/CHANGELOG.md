@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.31.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.2...v0.31.0) (2020-05-13)
+
+
+### Bug Fixes
+
+* **cesium:** GeoJsonAdapter pin color from empty string ([13ef825](https://github.com/nextgis/nextgisweb_frontend/commit/13ef8258afad19709cf00a055bb772f425542d1a))
+* **cesium:** scene requestRender on layers visibility change ([e513a57](https://github.com/nextgis/nextgisweb_frontend/commit/e513a573af14660750337e951da84387fab433c2))
+* **ngw-kit:** create async adapter from parent resource ([808572b](https://github.com/nextgis/nextgisweb_frontend/commit/808572b5aff6b04783cd7e9edd078e2ea5404dd2))
+* **ngw-kit:** resolve createGeoJsonAdapter options override II ([c65f1ee](https://github.com/nextgis/nextgisweb_frontend/commit/c65f1eeb2dd0974980c70455d142dba427081521))
+
+
+### Features
+
+* **cesium:** add Tileset3dAdapter ([c5306f9](https://github.com/nextgis/nextgisweb_frontend/commit/c5306f9b8bb3e37f287cbd4e3d33a04d93478e2b))
+* **cesium:** change layers height on terrain change ([609ac9d](https://github.com/nextgis/nextgisweb_frontend/commit/609ac9ddae60eb3ac9085c9f29fa93f3aa5b13b4))
+* **cesium:** extrude3d paint option ([c4ce679](https://github.com/nextgis/nextgisweb_frontend/commit/c4ce679cd15bbc87e362048dc007a85ce42516fd))
+* **cesium:** fitBounds up tp terrain ([e890d9b](https://github.com/nextgis/nextgisweb_frontend/commit/e890d9b5ce449dc69c8b531c33b9ce6cb58b10b4))
+* **cesium:** get extent of tileset3D ([017a69a](https://github.com/nextgis/nextgisweb_frontend/commit/017a69afa63cec3f2b1773fb643557a2a88fa363))
+* **cesium:** set scene view from new adapter option ([c35e16d](https://github.com/nextgis/nextgisweb_frontend/commit/c35e16ded6036fccb2edb852bebd68f41fc899eb))
+* **ngw-kit:** add addLayerOptionsPriority for createGeoJsonAdapter ([f6c563e](https://github.com/nextgis/nextgisweb_frontend/commit/f6c563e1bc1238206bb4ba3d8081971d078ef54d))
+* **ngw-kit:** make create basemap layer adapter universal ([bbd8c9a](https://github.com/nextgis/nextgisweb_frontend/commit/bbd8c9a77d527921909ae9b1bf10b3580c5fa600))
+
+
+
+
+
 ## [0.30.2](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.1...v0.30.2) (2020-04-30)
 
 **Note:** Version bump only for package @nextgis/cesium-map-adapter
