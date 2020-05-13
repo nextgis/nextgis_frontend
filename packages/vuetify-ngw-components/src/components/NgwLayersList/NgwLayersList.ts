@@ -43,6 +43,8 @@ export class NgwLayersList extends Vue {
     const isSame = arrayCompare(selection, old);
     if (!isSame) {
       this._layers.forEach((x) => {
+        // layer properties fpr webmap tree items detect
+        // check visibility for all webmap tree layer
         if (x.layer && x.layer.properties) {
           const layer = x.layer as WebMapLayerItem;
           if (this.hideWebmapRoot && layer.item.item_type === 'root') {
@@ -56,7 +58,8 @@ export class NgwLayersList extends Vue {
               d.properties.set('visibility', isVisible);
             }
           });
-        } else if (x.id) {
+        }
+        if (x.id) {
           const id = this._getLayerId(x);
           this.ngwMap.toggleLayer(x, selection.indexOf(id) !== -1);
         }
