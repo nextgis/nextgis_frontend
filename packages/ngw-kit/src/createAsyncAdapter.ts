@@ -115,14 +115,20 @@ export async function createAsyncAdapter(
           adapter = createBasemapLayerAdapter(adapterOptions);
         } else {
           if (adapterType === 'GEOJSON') {
-            const parentOptions: NgwLayerOptions = {
-              ...options,
-              resourceId: item.resource.parent.id,
-            };
-            adapter = createGeoJsonAdapter({
-              ...adapterOptions,
-              layerOptions: parentOptions,
-            });
+            const parentItem = await connector.getResource(
+              item.resource.parent.id
+            );
+            if (parentItem) {
+              const parentOptions: NgwLayerOptions = {
+                ...options,
+                resourceId: item.resource.parent.id,
+              };
+              adapter = createGeoJsonAdapter({
+                ...adapterOptions,
+                item: parentItem,
+                layerOptions: parentOptions,
+              });
+            }
           } else {
             adapter = createRasterAdapter(adapterOptions);
           }

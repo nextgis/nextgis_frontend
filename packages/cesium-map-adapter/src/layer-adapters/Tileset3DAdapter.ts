@@ -6,8 +6,6 @@ import {
   Cartesian3,
   Cartographic,
   Ellipsoid,
-  when,
-  sampleTerrainMostDetailed,
 } from 'cesium';
 import { BaseAdapter } from './BaseAdapter';
 import { whenSampleTerrainMostDetailed } from '../utils/whenSampleTerrainMostDetailed';
