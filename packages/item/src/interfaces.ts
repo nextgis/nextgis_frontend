@@ -59,6 +59,7 @@ export interface ItemOptions {
   properties?: Array<ItemPropertyConfig<keyof ItemPropertyTypes>>;
   headers?: any;
   order?: number;
+  crossOrigin?: 'anonymous';
   drawOrderEnabled?: boolean;
 }
 

@@ -103,8 +103,10 @@ export class WebMapLayerItem extends Item<ItemOptions> {
       }
     } else {
       let adapter: LayerAdapterDefinition | undefined;
+      // TODO: interface
       const options: any = {
         headers: this.options.headers,
+        crossOrigin: this.options.crossOrigin,
       };
       if (item.item_type === 'layer') {
         adapter = item.adapter || item.layer_adapter.toUpperCase();
@@ -115,7 +117,9 @@ export class WebMapLayerItem extends Item<ItemOptions> {
           ? this._mapScaleToZoomLevel(item.layer_min_scale_denom)
           : this.webMap.options.minZoom;
         objectAssign(options, {
+          // FIXME: why items?
           ...item,
+          headers: this.options.headers,
           maxZoom,
           minZoom,
           minScale: item.layer_min_scale_denom,

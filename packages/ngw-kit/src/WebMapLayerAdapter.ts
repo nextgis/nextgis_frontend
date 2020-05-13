@@ -158,6 +158,7 @@ export class WebMapLayerAdapter implements ResourceAdapter {
             }
           }
           options.order = this.options.order;
+          options.crossOrigin = this.options.crossOrigin;
           options.drawOrderEnabled = webmap.draw_order_enabled;
           const layer = new this.WebMapLayerItem(
             this.options.webMap,
