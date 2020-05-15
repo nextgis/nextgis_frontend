@@ -6,14 +6,11 @@ Libraries such as `Leaflet` and `Mapbox GL JS` are already doing this,
 but `Cesium` and `Openlayers` do not have similar functionality.
 
 ```text
-______________________________
-|                            |
-| top-left         top-right |
-|                            |
-|            MAP             |
-|                            |
-| bottom-left   bottom-right |
-|____________________________|
+╭───────────────────────────────────────────╮
+│ top-left                        top-right │
+│                   MAP                     │
+│ bottom-left                  bottom-right │
+╰───────────────────────────────────────────╯
 ```
 
 ## Installation
