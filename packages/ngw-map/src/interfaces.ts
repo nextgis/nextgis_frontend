@@ -121,6 +121,7 @@ export interface NgwMapOptions<C = any> extends MapOptions {
    * @default false
    */
   identification?: boolean;
+  whitlabel?: boolean;
 
   pixelRadius?: number;
 
