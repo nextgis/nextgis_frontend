@@ -288,17 +288,16 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
   }
 
   private _onTerrainChange(e: TerrainProvider) {
-    const viewer = this.map;
-    if (viewer) {
-      const iniPos = viewer.camera.position;
-      const cartographic = Cartographic.fromCartesian(iniPos);
-      const positions = [cartographic];
-
-      whenSampleTerrainMostDetailed(e, positions, () => {
-        viewer.camera.moveUp(positions[0].height);
-        // console.log(positions[0].height, viewer.camera.position);
-      });
-    }
+    // const viewer = this.map;
+    // if (viewer) {
+    //   const iniPos = viewer.camera.position;
+    //   const cartographic = Cartographic.fromCartesian(iniPos);
+    //   const positions = [cartographic];
+    //   whenSampleTerrainMostDetailed(e, positions, () => {
+    //     viewer.camera.moveUp(positions[0].height);
+    //     // console.log(positions[0].height, viewer.camera.position);
+    //   });
+    // }
   }
 
   private _addEventsListener() {
