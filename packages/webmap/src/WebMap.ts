@@ -59,7 +59,7 @@ import {
   MapControls,
 } from './interfaces/MapControl';
 
-import { ControlPositions } from './interfaces/MapAdapter';
+import { ControlPosition } from './interfaces/MapAdapter';
 import { WebMapLayers } from './WebMapLayers';
 
 export class WebMap<
@@ -88,12 +88,24 @@ export class WebMap<
     },
   };
 
-  private _loadControlQueue: (() => Promise<any>)[] = [];
-  private _isControlLoading = false;
+  private _loadControlQueue: {
+    [key in ControlPosition]: (() => Promise<any>)[];
+  } = {
+    'top-right': [],
+    'bottom-right': [],
+    'top-left': [],
+    'bottom-left': [],
+  };
+  private _isControlLoading: { [key in ControlPosition]: boolean } = {
+    'top-right': false,
+    'bottom-right': false,
+    'top-left': false,
+    'bottom-left': false,
+  };
 
   async addControl<K extends keyof MapControls>(
     controlDef: K | C,
-    position: ControlPositions,
+    position: ControlPosition,
     options?: MapControls[K]
   ): Promise<any> {
     let control: C | undefined;
@@ -109,7 +121,7 @@ export class WebMap<
           const c = this.mapAdapter.addControl(_control, position);
           resolve(c);
         };
-        this._setControlQueue(promise);
+        this._setControlQueue(position, promise);
       });
     }
   }
@@ -214,22 +226,22 @@ export class WebMap<
     }
   }
 
-  private _setControlQueue(cb: () => Promise<any>) {
-    this._loadControlQueue.push(cb);
-    if (!this._isControlLoading) {
-      this._applyControls();
+  private _setControlQueue(position: ControlPosition, cb: () => Promise<any>) {
+    this._loadControlQueue[position].push(cb);
+    if (!this._isControlLoading[position]) {
+      this._applyControls(position);
     }
   }
 
-  private async _applyControls() {
-    if (this._loadControlQueue.length) {
-      this._isControlLoading = true;
-      const controlCb = this._loadControlQueue[0];
+  private async _applyControls(position: ControlPosition) {
+    if (this._loadControlQueue[position].length) {
+      this._isControlLoading[position] = true;
+      const controlCb = this._loadControlQueue[position][0];
       await controlCb();
-      this._loadControlQueue.splice(0, 1);
-      this._applyControls();
+      this._loadControlQueue[position].splice(0, 1);
+      this._applyControls(position);
     } else {
-      this._isControlLoading = false;
+      this._isControlLoading[position] = false;
     }
   }
 }
