@@ -118,7 +118,7 @@ export class WebMapLayerItem extends Item<ItemOptions> {
           : this.webMap.options.minZoom;
         objectAssign(options, {
           // FIXME: why items?
-          ...item,
+          // ...item,
           headers: this.options.headers,
           maxZoom,
           minZoom,

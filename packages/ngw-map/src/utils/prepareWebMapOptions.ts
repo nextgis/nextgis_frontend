@@ -9,6 +9,7 @@ import { NgwMapOptions } from '../interfaces';
 export const OPTIONS: NgwMapOptions = {
   target: 'map',
   baseUrl: '',
+  whitlabel: false,
   controls: ['ZOOM', 'ATTRIBUTION'],
   controlsOptions: {
     ZOOM: { position: 'top-left' },
