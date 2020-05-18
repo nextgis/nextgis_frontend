@@ -47,7 +47,12 @@ export interface FitOptions {
   duration?: number;
 }
 
-export type ControlPositions =
+/**
+ * @deprecated use ControlPosition instead
+ */
+export type ControlPositions = ControlPosition;
+
+export type ControlPosition =
   | 'top-right'
   | 'top-left'
   | 'bottom-right'
@@ -157,7 +162,7 @@ export interface MapAdapter<M = any, L = any, C = any> {
 
   addControl<K extends keyof MapControls>(
     controlName: K | any,
-    position: ControlPositions,
+    position: ControlPosition,
     options?: MapControls[K]
   ): any;
   removeControl(control: any): void;
