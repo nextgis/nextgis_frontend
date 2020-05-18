@@ -1,12 +1,12 @@
-const path = require('path');
-const CopywebpackPlugin = require('copy-webpack-plugin');
+// const path = require('path');
+// const CopywebpackPlugin = require('copy-webpack-plugin');
 
 const library = 'Paint';
 
 const package = require('./package.json');
 const common = require('../build-tools/lib/webpack.config');
 
-const makiSource = '../../node_modules/@mapbox/maki';
+// const makiSource = '../../node_modules/@mapbox/maki';
 
 module.exports = (env, argv) => {
   const configs = common(env, argv, {

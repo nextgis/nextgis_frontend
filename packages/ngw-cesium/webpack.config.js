@@ -33,19 +33,21 @@ module.exports = (env, argv) => {
 
   config.plugins = config.plugins || [];
   config.plugins.push(
-    new CopywebpackPlugin([
-      { from: path.join(cesiumSource, cesiumWorkers), to: 'Workers' },
-    ])
+    new CopywebpackPlugin({
+      patterns: [
+        { from: path.join(cesiumSource, cesiumWorkers), to: 'Workers' },
+      ],
+    })
   );
   config.plugins.push(
-    new CopywebpackPlugin([
-      { from: path.join(cesiumSource, 'Assets'), to: 'Assets' },
-    ])
+    new CopywebpackPlugin({
+      patterns: [{ from: path.join(cesiumSource, 'Assets'), to: 'Assets' }],
+    })
   );
   config.plugins.push(
-    new CopywebpackPlugin([
-      { from: path.join(cesiumSource, 'Widgets'), to: 'Widgets' },
-    ])
+    new CopywebpackPlugin({
+      patterns: [{ from: path.join(cesiumSource, 'Widgets'), to: 'Widgets' }],
+    })
   );
   // config.plugins.push(
   //   new webpack.DefinePlugin({
