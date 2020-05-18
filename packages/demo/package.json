@@ -23,7 +23,7 @@
   "devDependencies": {
     "@mdi/font": "^5.2.45",
     "@nextgis/eslint-config": "^0.31.0",
-    "@types/lodash": "^4.14.150",
+    "@types/lodash": "^4.14.151",
     "@types/showdown": "^1.9.3",
     "css-loader": "^3.5.3",
     "eslint-loader": "^4.0.2",
