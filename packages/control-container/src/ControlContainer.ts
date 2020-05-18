@@ -4,7 +4,7 @@
 import './ControlContainer.css';
 
 import * as dom from '@nextgis/dom';
-import WebMap, { ControlPositions, MapControl } from '@nextgis/webmap';
+import { ControlPositions, MapControl, MapAdapter } from '@nextgis/webmap';
 
 import { ZoomControl } from './controls/ZoomControl';
 import { ControlContainerOptions } from './interfaces';
@@ -16,7 +16,7 @@ export class ControlContainer {
 
   private readonly classPrefix: string = 'webmap';
   private readonly addClass?: string;
-  private readonly webMap?: WebMap;
+  private readonly map?: MapAdapter;
   private _container: HTMLElement;
   private _positionsContainers: {
     [key in ControlPositions]: HTMLElement | null;
@@ -30,7 +30,7 @@ export class ControlContainer {
   constructor(opt: ControlContainerOptions = {}) {
     this.classPrefix = opt.classPrefix || this.classPrefix;
     this.addClass = opt.addClass;
-    this.webMap = opt.webMap;
+    this.map = opt.map;
     this._container = this.createContainerElement();
   }
 
@@ -82,7 +82,7 @@ export class ControlContainer {
   }
 
   addControl(control: MapControl, position: ControlPositions) {
-    const controlContainer = control.onAdd(this.webMap);
+    const controlContainer = control.onAdd(this.map);
     if (controlContainer instanceof HTMLElement) {
       this.append(controlContainer, position);
     }

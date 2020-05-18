@@ -148,6 +148,10 @@ export interface MapAdapter<M = any, L = any, C = any> {
 
   getZoom(): number | undefined;
   setZoom(zoom: number): void;
+  /** zoom the map by one quantile of the current adapter */
+  zoomIn?(): void;
+  /** zoom out the map by one quantile of the current adapter */
+  zoomOut?(): void;
 
   getCenter(): LngLatArray | undefined;
   setCenter(latLng: LngLatArray): void;
