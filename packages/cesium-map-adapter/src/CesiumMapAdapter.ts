@@ -37,7 +37,6 @@ import { TerrainAdapter } from './layer-adapters/TerrainAdapter';
 import { Model3DAdapter } from './layer-adapters/Model3DAdapter';
 import { Tileset3DAdapter } from './layer-adapters/Tileset3DAdapter';
 import { getDefaultTerrain } from './utils/getDefaultTerrain';
-import { whenSampleTerrainMostDetailed } from './utils/whenSampleTerrainMostDetailed';
 
 type Layer = any;
 type Control = any;
@@ -69,9 +68,7 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
 
   // Scractch memory allocation, happens only once.
   private _scratchRectangle = new Rectangle();
-  private _controlContainer = new ControlContainer({
-    addClass: 'cesium-control',
-  });
+  private _controlContainer?: ControlContainer;
   private _terrainProviderChangedListener?: Event.RemoveCallback;
 
   create(options: MapOptions) {
@@ -137,6 +134,10 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
       }
 
       this.map = viewer;
+      this._controlContainer = new ControlContainer({
+        addClass: 'cesium-control',
+        map: this,
+      });
       const bounds = options.bounds;
       if (bounds) {
         // don't know why, but this should be asynchronous
@@ -209,6 +210,20 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
     return undefined;
   }
 
+  zoomOut() {
+    const viewer = this.map;
+    if (viewer) {
+      viewer.camera.zoomOut();
+    }
+  }
+
+  zoomIn() {
+    const viewer = this.map;
+    if (viewer) {
+      viewer.camera.zoomIn();
+    }
+  }
+
   fitBounds(e: LngLatBoundsArray, options: FitOptions = {}) {
     if (this.map) {
       const [west, south, east, north] = e;
@@ -276,7 +291,9 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
   }
 
   addControl(control: Control, position: ControlPositions) {
-    this._controlContainer.addControl(control, position);
+    if (this._controlContainer) {
+      this._controlContainer.addControl(control, position);
+    }
   }
 
   removeControl(control: Control) {
