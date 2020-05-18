@@ -265,6 +265,30 @@ export class BaseWebMap<
     return this.mapAdapter.getZoom();
   }
 
+  zoomIn(): void {
+    if (this.mapAdapter.zoomIn) {
+      this.mapAdapter.zoomIn();
+    } else {
+      const zoom = this.getZoom();
+      if (zoom) {
+        const toZoom = zoom + 1;
+        this.setZoom(toZoom);
+      }
+    }
+  }
+
+  zoomOut(): void {
+    if (this.mapAdapter.zoomOut) {
+      this.mapAdapter.zoomOut();
+    } else {
+      const zoom = this.getZoom();
+      if (zoom) {
+        const toZoom = zoom - 1;
+        this.setZoom(toZoom);
+      }
+    }
+  }
+
   /**
    * Sets the view of the map geographical center and zoom
    * @param lngLat Array of two numbers representing longitude and latitude of the center of the map view.

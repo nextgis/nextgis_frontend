@@ -1,17 +1,17 @@
-import WebMap, { MapControl } from '@nextgis/webmap';
+import { MapControl, MapAdapter } from '@nextgis/webmap';
 import * as dom from '@nextgis/dom';
 
 export class ZoomControl implements MapControl {
-  private webMap?: WebMap;
+  private map?: MapAdapter;
   private _container?: HTMLElement;
   private _zoomInBtn?: HTMLButtonElement;
   private _zoomOutBtn?: HTMLButtonElement;
   private __onZoomInBtnClick?: () => void;
   private __onZoomOutBtnClick?: () => void;
 
-  onAdd(webMap: WebMap) {
-    if (!this.webMap) {
-      this.webMap = webMap;
+  onAdd(map: MapAdapter) {
+    if (!this.map) {
+      this.map = map;
     }
     if (!this._container) {
       const container = dom.create('div', 'webmap-ctrl webmap-ctrl-group');
@@ -22,9 +22,37 @@ export class ZoomControl implements MapControl {
   }
 
   onRemove() {
-    this.webMap = undefined;
+    this.map = undefined;
     if (this._container) {
       dom.remove(this._container);
+    }
+  }
+
+  zoomIn(): void {
+    if (this.map) {
+      if (this.map.zoomIn) {
+        this.map.zoomIn();
+      } else {
+        const zoom = this.map.getZoom();
+        if (zoom) {
+          const toZoom = zoom + 1;
+          this.map.setZoom(toZoom);
+        }
+      }
+    }
+  }
+
+  zoomOut(): void {
+    if (this.map) {
+      if (this.map.zoomOut) {
+        this.map.zoomOut();
+      } else {
+        const zoom = this.map.getZoom();
+        if (zoom) {
+          const toZoom = zoom - 1;
+          this.map.setZoom(toZoom);
+        }
+      }
     }
   }
 
@@ -56,21 +84,10 @@ export class ZoomControl implements MapControl {
   }
 
   private _onZoomInBtnClick() {
-    this.changeZoom();
+    this.zoomIn();
   }
 
   private _onZoomOutBtnClick() {
-    this.changeZoom(true);
-  }
-
-  private changeZoom(decrease?: boolean) {
-    const webMap = this.webMap;
-    if (webMap) {
-      const zoom = webMap.getZoom();
-      if (zoom) {
-        const toZoom = zoom + (decrease ? -1 : 1);
-        webMap.setZoom(toZoom);
-      }
-    }
+    this.zoomOut();
   }
 }
