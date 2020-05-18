@@ -9,9 +9,9 @@
   "dependencies": {
     "@nextgis/mapboxgl-map-adapter": "^0.31.0",
     "@nextgis/ngw-map": "^0.31.0",
-    "@types/mapbox-gl": "^1.9.1",
+    "@types/mapbox-gl": "^1.10.1",
     "canvg": "^3.0.6",
-    "mapbox-gl": "^1.10.0"
+    "mapbox-gl": "^1.10.1"
   },
   "devDependencies": {
     "@nextgis/build-tools": "file:../build-tools"
