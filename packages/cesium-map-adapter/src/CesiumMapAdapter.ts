@@ -15,6 +15,7 @@ import {
   GeoJsonDataSource,
   WebMercatorProjection,
   TerrainProvider,
+  Color,
 } from 'cesium';
 
 import {
@@ -110,6 +111,7 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
       });
       GeoJsonDataSource.clampToGround = true;
       viewer.imageryLayers.removeAll();
+      viewer.scene.globe.baseColor = Color.fromCssColorString('white');
       viewer.scene.globe.depthTestAgainstTerrain = false;
       viewer.scene.postProcessStages.fxaa.enabled = true;
       viewer.scene.requestRenderMode = true;
