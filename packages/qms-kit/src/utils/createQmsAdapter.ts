@@ -45,6 +45,7 @@ export function createQmsAdapter(
           ]);
           if (type === 'TILE') {
             options = {
+              order: 0,
               maxZoom: webMap.options.maxZoom,
               minZoom: webMap.options.minZoom,
               ...this.options,
