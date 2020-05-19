@@ -13,7 +13,10 @@ export function updateQmsOptions(
   qms: QmsBasemap
 ): AdapterOptions & { url: string } {
   const protocol = (location.protocol === 'https:' ? 'https' : 'http') + '://';
-  const serviceUrl = qms.url.replace(/^(https?|ftp):\/\//, protocol);
+  let serviceUrl = qms.url.replace(/^(https?|ftp):\/\//, protocol);
+  if (!qms.y_origin_top) {
+    serviceUrl = serviceUrl.replace('{y}', '{-y}');
+  }
   return {
     url: serviceUrl,
     name: qms.name,
