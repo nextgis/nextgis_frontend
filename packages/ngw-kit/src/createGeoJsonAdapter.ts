@@ -5,6 +5,7 @@ import WebMap, {
   GeoJsonAdapterOptions,
   PropertiesFilter,
   FilterOptions,
+  LayerAdapter,
 } from '@nextgis/webmap';
 import CancelablePromise from '@nextgis/cancelable-promise';
 import { debounce } from '@nextgis/utils';
@@ -72,8 +73,8 @@ export async function createGeoJsonAdapter(opt: GetClassAdapterOptions) {
     _count?: number;
     __onMapMove?: () => void;
     __onMapMoveStart?: () => void;
-    __enableMapMoveListener?: () => void;
-    __disableMapMoveListener?: () => void;
+    __enableMapMoveListener?: (e: LayerAdapter) => void;
+    __disableMapMoveListener?: (e: LayerAdapter) => void;
 
     async addLayer(opt_: GeoJsonAdapterOptions) {
       let needUpdate = !opt_.data;
@@ -206,21 +207,21 @@ export async function createGeoJsonAdapter(opt: GetClassAdapterOptions) {
     }
 
     _addBboxEventListener() {
-      this.__enableMapMoveListener = () => {
-        this._removeMoveEventListener();
-        if (webMap.isLayerVisible(this)) {
+      this.__enableMapMoveListener = (e: LayerAdapter) => {
+        if (e === this) {
+          this._removeMoveEventListener();
           this.updateLayer();
           this._addMoveEventListener();
         }
       };
-      this.__disableMapMoveListener = () => {
-        if (!webMap.isLayerVisible(this)) {
+      this.__disableMapMoveListener = (e: LayerAdapter) => {
+        if (e === this) {
           this._removeMoveEventListener();
         }
       };
       webMap.emitter.on('layer:show', this.__enableMapMoveListener);
       webMap.emitter.on('layer:hide', this.__disableMapMoveListener);
-      this.__enableMapMoveListener();
+      this.__enableMapMoveListener(this);
     }
 
     _removeBboxEventListener() {
