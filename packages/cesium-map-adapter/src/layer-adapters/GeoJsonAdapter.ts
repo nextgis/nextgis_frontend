@@ -291,6 +291,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
   private watchHeight() {
     if (this._source) {
       const entities = this._source.entities.values;
+      const entriesOnTerrain: Entity[] = [];
       const terrainSamplePositions: Cartographic[] = [];
       entities.forEach((x) => {
         let position: Cartesian3 | undefined;
@@ -302,24 +303,28 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
         }
         if (position) {
           terrainSamplePositions.push(Cartographic.fromCartesian(position));
+          entriesOnTerrain.push(x);
         }
       });
-      if (entities.length) {
+      if (entriesOnTerrain.length) {
         whenSampleTerrainMostDetailed(
           this.map.terrainProvider,
           terrainSamplePositions,
           () => {
-            for (let i = 0; i < entities.length; i++) {
-              const entity = entities[i];
-              const terrainHeight = terrainSamplePositions[i].height;
-              entity.polygon.height = new CallbackProperty(() => {
-                return terrainHeight;
-              }, false);
-              const height = this._getEntityHeight(entity);
-              if (height !== undefined) {
-                entity.polygon.extrudedHeight = new CallbackProperty(() => {
-                  return height + terrainHeight;
+            for (let i = 0; i < entriesOnTerrain.length; i++) {
+              const entity = entriesOnTerrain[i];
+              const terrainSamplePosition = terrainSamplePositions[i];
+              if (terrainSamplePosition && terrainSamplePosition.height) {
+                const terrainHeight = terrainSamplePosition.height;
+                entity.polygon.height = new CallbackProperty(() => {
+                  return terrainHeight;
                 }, false);
+                const height = this._getEntityHeight(entity);
+                if (height !== undefined) {
+                  entity.polygon.extrudedHeight = new CallbackProperty(() => {
+                    return height + terrainHeight;
+                  }, false);
+                }
               }
             }
           }
