@@ -15,6 +15,7 @@ import {
 } from './utils/utils';
 
 import { getIdentifyGeoJson, getIdentifyItems } from './utils/identifyUtils';
+import { getCompanyLogo } from './utils/getCompanyLogo';
 
 import {
   getNgwLayerItems,
@@ -48,6 +49,7 @@ export class NgwKit implements StarterKit {
     createGeoJsonFeature,
     createGeoJsonAdapter,
     createRasterAdapter,
+    getCompanyLogo,
     getIdentifyGeoJson,
     getIdentifyGeoJsonParams: getIdentifyItems,
     getNgwResourceExtent,

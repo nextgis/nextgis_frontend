@@ -47,6 +47,7 @@ export interface RequestItemsParamsMap {
   'pyramid.settings': null;
   'pyramid.statistics': null;
   'pyramid.system_name': null;
+  'pyramid.company_logo': null;
   'qgis.vector_style_qml': { id: number };
   'render.image': null;
   'render.tile': null;
