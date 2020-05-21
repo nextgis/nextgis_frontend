@@ -168,7 +168,9 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
   }
 
   getContainer(): HTMLElement | undefined {
-    return undefined;
+    if (this.map) {
+      return this.map.container as HTMLElement;
+    }
   }
 
   setCenter(lonLat: LngLatArray) {
