@@ -553,23 +553,15 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<
   }
 
   private async _whiteLabel() {
-    // const settings = await this.connector.get('pyramid.settings');
-    // if (settings && settings.company_logo.enabled) {
-    //   const anchor = document.createElement('a');
-    //   anchor.className = 'map-logo';
-    //   const image = document.createElement('img');
-    //   // image.src = route.pyramid.company_logo();
-    //   if (
-    //     settings.company_logo.link !== null &&
-    //     settings.company_logo.link.trim() !== ''
-    //   ) {
-    //     anchor.href = settings.company_logo.link;
-    //     anchor.target = '_blank';
-    //     if (settings.company_logo.link.search(/:\/\/nextgis/) !== -1) {
-    //       // image.alt = i18n.gettext('Get your own Web GIS at nextgis.com');
-    //     }
-    //   }
-    // anchor.appendChild(image);
-    // mapNode.appendChild(anchor);
+    const container = this.getContainer();
+    if (container) {
+      const logo = await NgwKit.utils.getCompanyLogo(
+        this.connector,
+        this.options.companyLogoOptions
+      );
+      if (logo) {
+        container.appendChild(logo);
+      }
+    }
   }
 }

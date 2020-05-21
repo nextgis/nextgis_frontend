@@ -47,7 +47,7 @@ export interface Params {
 }
 
 export type RequestItemKeys = {
-  readonly [T in keyof RequestItemsParamsMap]?: { [x: string]: any };
+  readonly [T in keyof RequestItemsParamsMap]?: any; //{ [x: string]: any };
 };
 
 export interface RequestItemsResponseMap {
@@ -69,6 +69,7 @@ export interface GetRequestItemsResponseMap extends RequestItemKeys {
   'feature_layer.field': FeatureLayerField[];
   'feature_layer.feature.item_extent': NgwExtent;
   'feature_layer.feature.count': FeatureLayerCount;
+  'pyramid.company_logo': string;
 }
 
 export interface CreatedResource {

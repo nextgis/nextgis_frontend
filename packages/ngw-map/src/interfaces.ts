@@ -122,6 +122,7 @@ export interface NgwMapOptions<C = any> extends MapOptions {
    */
   identification?: boolean;
   whitlabel?: boolean;
+  companyLogoOptions?: CompanyLogoOptions;
 
   pixelRadius?: number;
 
@@ -142,4 +143,9 @@ export interface NgwLayersMem {
 
 export interface NgwLayers {
   [layerId: string]: NgwLayersMem;
+}
+
+export interface CompanyLogoOptions {
+  padding?: string;
+  cssClass?: string;
 }
