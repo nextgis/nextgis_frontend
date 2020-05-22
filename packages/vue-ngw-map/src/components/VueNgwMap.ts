@@ -17,12 +17,23 @@ export class VueNgwMap<M = any> extends Vue {
   @Prop({ type: Number }) qmsId!: string;
   @Prop({ type: String }) webMapId!: string;
   @Prop({ type: Object }) mapOptions!: NgwMapOptions;
+
   name = 'vue-ngw-map';
   ngwMap!: NgwMap<M>;
   ready = false;
 
-  mounted() {
-    this._setNgwMap();
+  async mounted() {
+    this.ngwMap = new NgwMap(this.mapAdapter, {
+      ...this.$props,
+      ...this.mapOptions,
+      target: this.$el as HTMLElement,
+    });
+    this.ngwMap.onLoad();
+
+    this.$nextTick(() => {
+      this.ready = true;
+      this.$emit('load', this.ngwMap);
+    });
   }
 
   beforeDestroy() {
@@ -45,19 +56,7 @@ export class VueNgwMap<M = any> extends Vue {
       attrs: { 'data-app': true },
       // domProps: { id: this.id }
     };
-
     return this.ready ? h('div', data, this.$slots.default) : h('div', data);
-  }
-
-  private async _setNgwMap() {
-    this.ngwMap = new NgwMap(this.mapAdapter, {
-      ...this.$props,
-      ...this.mapOptions,
-      target: this.$el as HTMLElement,
-    });
-    await this.ngwMap.onLoad();
-    this.ready = true;
-    this.$emit('load', this.ngwMap);
   }
 }
 

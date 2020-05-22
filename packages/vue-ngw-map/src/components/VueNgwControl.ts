@@ -62,10 +62,10 @@ export class VueNgwControl extends Vue {
     }
   }
 
-  async mounted() {
+  mounted() {
     this.parentContainer = findNgwMapParent(this.$parent);
 
-    await this.setControl(this.$el as HTMLElement);
+    this.setControl(this.$el as HTMLElement);
     this.ready = true;
     propsBinder(this, this.$props);
 
