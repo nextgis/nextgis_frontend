@@ -52,6 +52,8 @@ export class Tileset3DAdapter extends BaseAdapter<TileAdapterOptions> {
   private async _addLayer() {
     const layer = new Cesium3DTileset({
       url: this.options.url,
+      skipLevelOfDetail: true,
+      // loadSiblings: true,
     });
     layer.show = false;
 
