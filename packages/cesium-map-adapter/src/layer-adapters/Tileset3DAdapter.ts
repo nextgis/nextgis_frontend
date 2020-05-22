@@ -96,7 +96,7 @@ export class Tileset3DAdapter extends BaseAdapter<TileAdapterOptions> {
     if (this.layer) {
       const boundingSphere = this.layer.boundingSphere;
       const cartographic = Cartographic.fromCartesian(boundingSphere.center);
-      const heightSurface = cartographic.height;
+
       const terrainSamplePositions = [cartographic];
       whenSampleTerrainMostDetailed(
         this.map.terrainProvider,
@@ -107,11 +107,7 @@ export class Tileset3DAdapter extends BaseAdapter<TileAdapterOptions> {
             const lat = cartographic.latitude;
             const heightOffset = terrainSamplePositions[0].height;
             const surface = Cartesian3.fromRadians(lon, lat, 0);
-            const offset = Cartesian3.fromRadians(
-              lon,
-              lat,
-              heightOffset - heightSurface
-            );
+            const offset = Cartesian3.fromRadians(lon, lat, heightOffset);
             const translation = Cartesian3.subtract(
               offset,
               surface,

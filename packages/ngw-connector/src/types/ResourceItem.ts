@@ -192,7 +192,7 @@ export interface ResourceItem {
   [cls: string]: any;
   resource: Resource;
   resmeta: {
-    items: {};
+    items: Record<string, any>;
   };
   webmap?: WebmapResource;
   feature_layer?: FeatureResource;
