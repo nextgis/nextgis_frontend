@@ -109,6 +109,7 @@ export class WebMap<
     options?: MapControls[K]
   ): Promise<any> {
     let control: C | undefined;
+    position = position ?? 'top-left';
     if (typeof controlDef === 'string') {
       control = this.getControl(controlDef, options);
     } else {

@@ -186,7 +186,15 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
   }
 
   getCenter(): LngLatArray | undefined {
-    return undefined;
+    const viewer = this.map;
+    if (viewer) {
+      const position = viewer.camera.position;
+      const cartographic = Ellipsoid.WGS84.cartesianToCartographic(position);
+      return [
+        CesiumMath.toDegrees(cartographic.longitude),
+        CesiumMath.toDegrees(cartographic.latitude),
+      ];
+    }
   }
 
   setZoom(zoom: number) {
