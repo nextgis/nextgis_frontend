@@ -16,6 +16,9 @@ import {
   WebMercatorProjection,
   TerrainProvider,
   Color,
+  viewerCesiumInspectorMixin,
+  // @ts-ignore
+  viewerCesium3DTilesInspectorMixin,
 } from 'cesium';
 
 import {
@@ -140,6 +143,13 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
         addClass: 'cesium-control',
         map: this,
       });
+
+      if (options.debug) {
+        // viewer.extend(viewerCesiumInspectorMixin, {});
+        viewer.extend(viewerCesium3DTilesInspectorMixin, {});
+        // const inspectorViewModel = viewer.cesium3DTilesInspector.viewModel;
+      }
+
       const bounds = options.bounds;
       if (bounds) {
         // don't know why, but this should be asynchronous
