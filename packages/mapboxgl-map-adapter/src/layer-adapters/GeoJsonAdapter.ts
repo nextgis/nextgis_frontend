@@ -24,7 +24,7 @@ import {
   typeAlias,
   typeAliasForFilter,
   geometryFilter,
-} from '../util/geom_type';
+} from '../util/geomType';
 
 let ID = 0;
 

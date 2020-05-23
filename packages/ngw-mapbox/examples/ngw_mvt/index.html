@@ -47,14 +47,14 @@
         url: mvtUrl,
         sourceLayer: 'ngw:' + 11,
         visibility: true,
-        type: 'fill',
+        type: 'polygon',
         paint: { color: 'red' }
       });
       ngwMap.addLayer('MVT', {
         url: mvtUrl,
         sourceLayer: 'ngw:' + 9,
         visibility: true,
-        type: 'circle',
+        type: 'point',
         selectable: true,
         paint: { color: 'green', radius: 6 }
       });
@@ -62,7 +62,7 @@
         url: mvtUrl,
         sourceLayer: 'ngw:' + 7,
         visibility: true,
-        type: 'circle',
+        type: 'point',
         paint: { color: 'blue' }
       });
     });
