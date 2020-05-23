@@ -12,7 +12,7 @@ export const allowedParams: ([string, string] | string)[] = [
   'opacity',
 ];
 export const allowedByType = {
-  circle: [
+  point: [
     ['fillColor', 'color'],
     ['fillOpacity', 'opacity'],
     ['strokeColor', 'stroke-color'],
@@ -25,7 +25,7 @@ export const allowedByType = {
     ['strokeOpacity', 'opacity'],
     ['weight', 'width'],
   ],
-  fill: [
+  polygon: [
     ['fillColor', 'color'],
     ['fillOpacity', 'opacity'],
   ],
@@ -35,21 +35,21 @@ export const allowedByType = {
 export const typeAlias: {
   [key in GeoJsonGeometryTypes]: VectorAdapterLayerType;
 } = {
-  Point: 'circle',
+  Point: 'point',
   LineString: 'line',
-  MultiPoint: 'circle',
-  Polygon: 'fill',
+  MultiPoint: 'point',
+  Polygon: 'polygon',
   MultiLineString: 'line',
-  MultiPolygon: 'fill',
-  GeometryCollection: 'fill',
+  MultiPolygon: 'polygon',
+  GeometryCollection: 'polygon',
 };
 
 export const typeAliasForFilter: {
   [key in VectorAdapterLayerType]: GeoJsonGeometryTypes;
 } = {
-  circle: 'Point',
+  point: 'Point',
   line: 'LineString',
-  fill: 'Polygon',
+  polygon: 'Polygon',
   icon: 'Point',
 };
 

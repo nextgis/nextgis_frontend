@@ -67,11 +67,10 @@ export interface AdapterOptions {
 export interface MvtAdapterOptions<F extends Feature = Feature>
   extends VectorAdapterOptions<F> {
   url: string;
-  // type?: 'fill' | 'line' | 'circle' | 'point';
   sourceLayer?: string;
 }
 
-export type VectorAdapterLayerType = 'fill' | 'circle' | 'line' | 'icon';
+export type VectorAdapterLayerType = 'polygon' | 'point' | 'line' | 'icon';
 
 export interface PopupOptions {
   minWidth?: number;
@@ -87,7 +86,7 @@ type _VectorAdapterOptionsToExtend = AdapterOptions & FilterOptions;
 
 export interface VectorAdapterOptions<F extends Feature = Feature, L = any>
   extends _VectorAdapterOptionsToExtend {
-  /** Type for geometries painting, for each layer may be only one of: `fill`, `circle` or `line`. */
+  /** Type for geometries painting, for each layer may be only one of: `point`, `polygon` or `line`. */
   type?: VectorAdapterLayerType;
   /**
    * Determine the appearance of the vector data geometries.
