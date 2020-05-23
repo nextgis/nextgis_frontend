@@ -34,18 +34,18 @@ export const vectorLayerGeomToPaintTypeAlias: Record<
   GeometryType,
   VectorAdapterLayerType
 > = {
-  POINT: 'circle',
+  POINT: 'point',
   LINESTRING: 'line',
-  POLYGON: 'fill',
-  MULTIPOINT: 'circle',
+  POLYGON: 'polygon',
+  MULTIPOINT: 'point',
   MULTILINESTRING: 'line',
-  MULTIPOLYGON: 'fill',
-  POINTZ: 'circle',
+  MULTIPOLYGON: 'polygon',
+  POINTZ: 'point',
   LINESTRINGZ: 'line',
-  POLYGONZ: 'fill',
-  MULTIPOINTZ: 'circle',
+  POLYGONZ: 'polygon',
+  MULTIPOINTZ: 'point',
   MULTILINESTRINGZ: 'line',
-  MULTIPOLYGONZ: 'fill',
+  MULTIPOLYGONZ: 'polygon',
 };
 
 /** @deprecated */

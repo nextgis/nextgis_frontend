@@ -12,13 +12,20 @@ import { VectorAdapterLayerType } from '@nextgis/webmap';
 import { GeometryPaint, Paint, isPaintCallback, isPaint } from '@nextgis/paint';
 
 const typeAlias: { [x: string]: VectorAdapterLayerType } = {
-  Point: 'circle',
-  MultiPoint: 'circle',
+  Point: 'point',
+  MultiPoint: 'point',
   LineString: 'line',
   MultiLineString: 'line',
-  Polygon: 'fill',
-  MultiPolygon: 'fill',
-  Circle: 'circle',
+  Polygon: 'polygon',
+  MultiPolygon: 'polygon',
+  Circle: 'point',
+};
+
+const paintTypeAlias: Record<VectorAdapterLayerType, any> = {
+  polygon: 'path',
+  line: 'path',
+  point: 'circle',
+  icon: 'icon',
 };
 
 export function getFeature(feature: OlFeature<any>): Feature {
@@ -54,11 +61,11 @@ export function styleFunction(
     if (!_type) {
       const ta = typeAlias[type];
       paint.type =
-        ta === 'fill' || ta === 'line'
+        ta === 'polygon' || ta === 'line'
           ? 'path'
           : 'html' in paint || 'className' in paint
           ? 'icon'
-          : ta;
+          : paintTypeAlias[ta];
     }
     if (paint.type === 'path' || paint.type === 'circle') {
       // const geomPaint = ;
@@ -129,7 +136,7 @@ export function labelStyleFunction(type: VectorAdapterLayerType) {
       width: 3,
     }),
   };
-  if (type === 'circle') {
+  if (type === 'point') {
     options = {
       ...options,
       placement: 'point',

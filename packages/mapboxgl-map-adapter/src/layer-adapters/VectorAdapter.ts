@@ -29,10 +29,10 @@ import {
   Layer,
 } from 'mapbox-gl';
 
-import { getImage } from '../util/image_icons';
+import { getImage } from '../util/imageIcons';
 import { TLayer } from '../MapboxglMapAdapter';
 import { BaseAdapter } from './BaseAdapter';
-import { typeAliasForFilter, allowedByType } from '../util/geom_type';
+import { typeAliasForFilter, allowedByType } from '../util/geomType';
 
 export const operationsAliases: { [key in Operations]: string } = {
   gt: '>',
@@ -77,6 +77,13 @@ const PAINT = {
 
 type MapboxLayerType = 'fill' | 'line' | 'symbol' | 'circle';
 
+const mapboxTypeAlias: Record<VectorAdapterLayerType, MapboxLayerType> = {
+  polygon: 'fill',
+  line: 'line',
+  point: 'circle',
+  icon: 'symbol',
+};
+
 export abstract class VectorAdapter<
   O extends VectorAdapterOptions = VectorAdapterOptions
 > extends BaseAdapter<O>
@@ -84,7 +91,7 @@ export abstract class VectorAdapter<
   selected = false;
 
   protected featureIdName = 'id';
-  protected _types: VectorAdapterLayerType[] = ['fill', 'circle', 'line'];
+  protected _types: VectorAdapterLayerType[] = ['polygon', 'point', 'line'];
   protected readonly _sourceId: string;
   protected readonly _selectionName: string;
   protected _selectedFeatureIds: (number | string)[] | false = [];
@@ -130,10 +137,10 @@ export abstract class VectorAdapter<
         const geomType = typeAliasForFilter[t];
         if (geomType) {
           let type = t;
-          if (t === 'circle') {
+          if (t === 'point') {
             const paintType = this._detectPaintType(options.paint);
             if (paintType === 'icon') {
-              type = 'icon';
+              type = 'point';
             }
           }
           const layer = this._getLayerNameFromType(t);
@@ -274,7 +281,7 @@ export abstract class VectorAdapter<
     if (type === 'icon') {
       mType = 'symbol';
     } else {
-      mType = type;
+      mType = mapboxTypeAlias[type];
     }
     layout = (layout || this.options.layout || {}) as AnyLayout;
     const layerOpt: Layer = {

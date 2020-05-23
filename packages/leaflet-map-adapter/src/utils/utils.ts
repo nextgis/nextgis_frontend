@@ -14,13 +14,13 @@ import { LeafletMouseEvent } from 'leaflet';
 export const typeAlias: {
   [key in GeoJsonGeometryTypes]: VectorAdapterLayerType;
 } = {
-  Point: 'circle',
+  Point: 'point',
   LineString: 'line',
-  MultiPoint: 'circle',
-  Polygon: 'fill',
+  MultiPoint: 'point',
+  Polygon: 'polygon',
   MultiLineString: 'line',
-  MultiPolygon: 'fill',
-  GeometryCollection: 'fill',
+  MultiPolygon: 'polygon',
+  GeometryCollection: 'polygon',
 };
 
 export const PAINT = {

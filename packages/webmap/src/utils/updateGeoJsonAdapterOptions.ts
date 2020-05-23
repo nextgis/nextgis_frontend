@@ -8,13 +8,20 @@ import {
 } from '../interfaces/LayerAdapter';
 import { detectGeometryType } from './geometryTypes';
 
+export const paintTypeAlias: Record<VectorAdapterLayerType, any> = {
+  polygon: 'path',
+  line: 'path',
+  point: 'circle',
+  icon: 'icon',
+};
+
 export const typeAlias: { [x: string]: VectorAdapterLayerType } = {
-  Point: 'circle',
+  Point: 'point',
   LineString: 'line',
-  MultiPoint: 'circle',
-  Polygon: 'fill',
+  MultiPoint: 'point',
+  Polygon: 'polygon',
   MultiLineString: 'line',
-  MultiPolygon: 'fill',
+  MultiPolygon: 'polygon',
 };
 
 export function updateGeoJsonAdapterOptions(
@@ -27,11 +34,11 @@ export function updateGeoJsonAdapterOptions(
       // define parameter if not specified
       p.type = p.type
         ? p.type
-        : geomType === 'fill' || geomType === 'line'
+        : geomType === 'polygon' || geomType === 'line'
         ? 'path'
         : 'html' in p || 'className' in p
         ? 'icon'
-        : geomType;
+        : paintTypeAlias[geomType];
     }
     opt.type = opt.type || geomType;
   }
