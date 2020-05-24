@@ -9,7 +9,13 @@ import IconAnchorUnits from 'ol/style/IconAnchorUnits';
 import Icon, { Options as IconOptions } from 'ol/style/Icon';
 
 import { VectorAdapterLayerType } from '@nextgis/webmap';
-import { GeometryPaint, Paint, isPaintCallback, isPaint } from '@nextgis/paint';
+import {
+  GeometryPaint,
+  Paint,
+  isPaintCallback,
+  isPaint,
+  PaintType,
+} from '@nextgis/paint';
 
 const typeAlias: { [x: string]: VectorAdapterLayerType } = {
   Point: 'point',
@@ -21,11 +27,10 @@ const typeAlias: { [x: string]: VectorAdapterLayerType } = {
   Circle: 'point',
 };
 
-const paintTypeAlias: Record<VectorAdapterLayerType, any> = {
+const paintTypeAlias: Record<VectorAdapterLayerType, PaintType> = {
   polygon: 'path',
   line: 'path',
   point: 'circle',
-  icon: 'icon',
 };
 
 export function getFeature(feature: OlFeature<any>): Feature {

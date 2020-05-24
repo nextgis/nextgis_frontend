@@ -11,7 +11,9 @@ export const allowedParams: ([string, string] | string)[] = [
   'color',
   'opacity',
 ];
-export const allowedByType = {
+export const allowedByType: {
+  [key in VectorAdapterLayerType]: ([string, string] | string)[];
+} = {
   point: [
     ['fillColor', 'color'],
     ['fillOpacity', 'opacity'],
@@ -29,7 +31,6 @@ export const allowedByType = {
     ['fillColor', 'color'],
     ['fillOpacity', 'opacity'],
   ],
-  icon: allowedParams.concat([]),
 };
 
 export const typeAlias: {
@@ -50,14 +51,11 @@ export const typeAliasForFilter: {
   point: 'Point',
   line: 'LineString',
   polygon: 'Polygon',
-  icon: 'Point',
 };
 
 export const backAliases: {
   [key in VectorAdapterLayerType]?: GeoJsonGeometryTypes[];
-} = {
-  icon: ['Point'],
-};
+} = {};
 
 for (const a in typeAlias) {
   const layerType = typeAlias[a as GeoJsonGeometryTypes];
