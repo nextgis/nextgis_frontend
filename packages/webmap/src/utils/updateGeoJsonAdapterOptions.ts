@@ -12,7 +12,6 @@ export const paintTypeAlias: Record<VectorAdapterLayerType, any> = {
   polygon: 'path',
   line: 'path',
   point: 'circle',
-  icon: 'icon',
 };
 
 export const typeAlias: { [x: string]: VectorAdapterLayerType } = {

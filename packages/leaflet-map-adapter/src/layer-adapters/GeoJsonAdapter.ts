@@ -281,7 +281,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
       style = paint;
     }
     if (style) {
-      if (this.type === 'circle' && style.type === 'icon') {
+      if (this.type === 'point' && style.type === 'icon') {
         const marker = l as Marker;
         const divIcon = this.createDivIcon(style);
         marker.setIcon(divIcon);
@@ -344,7 +344,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     let lopt: GeoJSONOptions = {};
 
     if (typeof paint === 'function') {
-      if (type === 'circle') {
+      if (type === 'point') {
         lopt = {
           pointToLayer: (feature, latLng) => {
             const iconOpt = paint(feature);
@@ -504,7 +504,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
         return paint;
       };
     }
-    if (type === 'circle') {
+    if (type === 'point') {
       geoJsonOptions.pointToLayer = this.createPaintToLayer(
         paintOptions as IconOptions
       );

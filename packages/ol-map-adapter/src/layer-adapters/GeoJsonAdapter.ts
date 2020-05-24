@@ -61,7 +61,7 @@ export class GeoJsonAdapter
           const label = f.get(labelField);
           const text = defined(label) ? String(label) : '';
           if (text) {
-            const labelStyle = labelStyleFunction(options.type || 'fill');
+            const labelStyle = labelStyleFunction(options.type || 'polygon');
             labelStyle.getText().setText(text);
             style.push(labelStyle);
           }

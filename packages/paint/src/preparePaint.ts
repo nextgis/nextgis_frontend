@@ -11,6 +11,7 @@ import {
   GetCustomPaintOptions,
   PropertiesPaint,
   PropertyPaint,
+  GetPaintCallback,
 } from './interfaces';
 import { isPaintCallback, isPropertiesPaint, isPaint } from './typeHelpers';
 import { createExpressionCallback } from './fromPaintExpression';
@@ -60,13 +61,17 @@ export function preparePaint(
 ): Paint {
   let newPaint: Paint | undefined;
   if (isPaintCallback(paint)) {
-    return (feature: Feature) => {
-      return preparePaint(
+    const getPaintFunction: GetPaintCallback = (feature: Feature) => {
+      const getPaint = preparePaint(
         paint(feature),
         defaultPaint,
         getPaintFunctions
       ) as VectorAdapterLayerPaint;
+      getPaint.type = paint.type;
+      return getPaint;
     };
+    getPaintFunction.type = paint.type;
+    return getPaintFunction;
   } else if (isPropertiesPaint(paint)) {
     return (feature: Feature) => {
       return preparePaint(

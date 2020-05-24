@@ -1,8 +1,13 @@
 import { PropertiesFilter } from '@nextgis/properties-filter';
 import { Feature } from 'geojson';
 
-export interface BasePaint {
-  type?: string;
+export type PaintType = 'circle' | 'path' | 'pin' | 'icon' | 'get-paint';
+
+interface BaesePaintTypes {
+  type?: PaintType;
+}
+
+export interface BasePaint extends BaesePaintTypes {
   color?: string | Expression;
   opacity?: number | Expression;
   fill?: boolean;
@@ -42,7 +47,7 @@ export interface PinPaint extends BasePaint {
   icon?: string | Expression | IconPaint;
 }
 
-export interface IconPaint {
+export interface IconPaint extends BaesePaintTypes {
   type: 'icon';
   className?: string;
   html?: string;
@@ -59,7 +64,7 @@ export type IconOptions = IconPaint | PinPaint;
 
 export type GetPaintFunction = (opt?: any) => VectorAdapterLayerPaint;
 
-export interface GetCustomPaintOptions {
+export interface GetCustomPaintOptions extends BaesePaintTypes {
   type: 'get-paint';
   from: string | GetPaintFunction;
   options?: any;
@@ -79,9 +84,10 @@ export type VectorAdapterLayerPaint =
   | PinPaint
   | GetCustomPaintOptions;
 
-export type GetPaintCallback<F = Feature> = (
-  feature: F
-) => VectorAdapterLayerPaint;
+export interface GetPaintCallback<F = Feature> {
+  type?: PaintType;
+  (feature: F): VectorAdapterLayerPaint;
+}
 
 export type Paint =
   | VectorAdapterLayerPaint

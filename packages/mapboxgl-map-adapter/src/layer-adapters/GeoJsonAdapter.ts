@@ -401,6 +401,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     name: string
   ) {
     const style: any = {};
+    style.type = paint.type;
     for (const feature of this._features) {
       const _paint = paint(feature);
       if (_paint.type === 'icon') {

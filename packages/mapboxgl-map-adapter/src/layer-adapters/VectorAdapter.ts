@@ -81,7 +81,6 @@ const mapboxTypeAlias: Record<VectorAdapterLayerType, MapboxLayerType> = {
   polygon: 'fill',
   line: 'line',
   point: 'circle',
-  icon: 'symbol',
 };
 
 export abstract class VectorAdapter<
@@ -277,9 +276,19 @@ export abstract class VectorAdapter<
     layout?: AnyLayout
   ) {
     const { minZoom, maxZoom } = this.options;
-    let mType: MapboxLayerType;
-    if (type === 'icon') {
-      mType = 'symbol';
+    let mType: MapboxLayerType = 'fill';
+    if (type === 'point') {
+      if (this.options.paint) {
+        if (
+          'type' in this.options.paint &&
+          this.options.paint.type === 'icon'
+        ) {
+          mType = 'symbol';
+        }
+      }
+      if (mType === undefined) {
+        mType = 'circle';
+      }
     } else {
       mType = mapboxTypeAlias[type];
     }
@@ -371,6 +380,7 @@ export abstract class VectorAdapter<
           'icon-image': paint.html,
         };
       } else {
+        const mapboxType = mapboxTypeAlias[type];
         for (const p in _paint) {
           const allowed = allowedByType[type];
           if (allowed) {
@@ -387,11 +397,11 @@ export abstract class VectorAdapter<
                 ? allowedType[1]
                 : allowedType;
               // @ts-ignore
-              mapboxPaint[type + '-' + paramName] = _paint[p];
+              mapboxPaint[mapboxType + '-' + paramName] = _paint[p];
             }
           }
         }
-        mapboxPaint[type + '-opacity-transition'] = { duration: 0 };
+        mapboxPaint[mapboxType + '-opacity-transition'] = { duration: 0 };
         return mapboxPaint;
       }
     }
