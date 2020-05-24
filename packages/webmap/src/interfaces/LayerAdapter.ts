@@ -70,7 +70,7 @@ export interface MvtAdapterOptions<F extends Feature = Feature>
   sourceLayer?: string;
 }
 
-export type VectorAdapterLayerType = 'polygon' | 'point' | 'line' | 'icon';
+export type VectorAdapterLayerType = 'polygon' | 'point' | 'line';
 
 export interface PopupOptions {
   minWidth?: number;

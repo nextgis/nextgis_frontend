@@ -90,6 +90,7 @@ export function getIcon(opt: IconOptions = {}): WebmapIcoOptions {
   }
   fistChild.setAttribute('transform', transform);
   const s = new XMLSerializer();
+
   return {
     type: 'icon',
     iconSize: [size, size],

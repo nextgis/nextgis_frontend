@@ -13,7 +13,7 @@ export class MvtAdapter extends VectorAdapter<MvtAdapterOptions> {
 
   async addLayer(options: MvtAdapterOptions): Promise<TLayer> {
     const layer = await super.addLayer(options);
-    this._updateLayerPaint(this.options.type || 'fill');
+    this._updateLayerPaint(this.options.type || 'polygon');
 
     return layer;
   }
