@@ -276,20 +276,15 @@ export abstract class VectorAdapter<
     layout?: AnyLayout
   ) {
     const { minZoom, maxZoom } = this.options;
-    let mType: MapboxLayerType = 'fill';
-    if (type === 'point') {
-      if (this.options.paint) {
-        if (
-          'type' in this.options.paint &&
-          this.options.paint.type === 'icon'
-        ) {
-          mType = 'symbol';
-        }
+    let mType: MapboxLayerType | undefined;
+
+    if (this.options.paint) {
+      if ('type' in this.options.paint && this.options.paint.type === 'icon') {
+        mType = 'symbol';
       }
-      if (mType === undefined) {
-        mType = 'circle';
-      }
-    } else {
+    }
+
+    if (mType === undefined) {
       mType = mapboxTypeAlias[type];
     }
     layout = (layout || this.options.layout || {}) as AnyLayout;
@@ -303,6 +298,9 @@ export abstract class VectorAdapter<
       },
       ...this._getAdditionalLayerOptions(),
     };
+    if (this.options.nativeOptions) {
+      Object.assign(layerOpt, this.options.nativeOptions);
+    }
     if (minZoom) {
       layerOpt.minzoom = minZoom - 1;
     }
