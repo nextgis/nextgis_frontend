@@ -18,6 +18,7 @@ import {
   FilterOptions,
   LayerDefinition,
   LayerAdapterDefinition,
+  OnLayerSelectOptions,
 } from './interfaces/LayerAdapter';
 import { LayerDef, Type } from './interfaces/BaseTypes';
 
@@ -750,6 +751,11 @@ export class WebMapLayers<
     return Promise.resolve(options);
   }
 
+  private async _onLayerSelect(options: OnLayerSelectOptions) {
+    this.emitter.emit('layer:select', options);
+    return Promise.resolve(options);
+  }
+
   private _updateGeoJsonOptions(options: GeoJsonAdapterOptions) {
     const onLayerClickFromOpt = options.onLayerClick;
     options.onLayerClick = (e) => {
@@ -757,6 +763,14 @@ export class WebMapLayers<
         onLayerClickFromOpt(e);
       }
       return this._onLayerClick(e);
+    };
+
+    const onLayerSelectFromOpt = options.onLayerSelect;
+    options.onLayerSelect = (e) => {
+      if (onLayerSelectFromOpt) {
+        onLayerSelectFromOpt(e);
+      }
+      return this._onLayerSelect(e);
     };
 
     if (!options.nativePaint) {

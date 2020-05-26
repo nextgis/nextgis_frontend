@@ -4,7 +4,11 @@
 
 import { WebMap } from '../WebMap';
 import { MapAdapter, MapClickEvent, DataLoadError } from './MapAdapter';
-import { LayerAdapter, OnLayerClickOptions } from './LayerAdapter';
+import {
+  LayerAdapter,
+  OnLayerClickOptions,
+  OnLayerSelectOptions,
+} from './LayerAdapter';
 
 export interface WebMapEvents extends BaseMapEvents {
   /** @event */
@@ -31,6 +35,8 @@ export interface WebMapEvents extends BaseMapEvents {
   'layer:hide': LayerAdapter;
   /** @event */
   'layer:click': OnLayerClickOptions;
+  /** @event */
+  'layer:select': OnLayerSelectOptions;
 }
 
 export interface MapAdapterEvents extends BaseMapEvents {

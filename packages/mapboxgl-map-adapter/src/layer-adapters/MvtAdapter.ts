@@ -20,7 +20,7 @@ export class MvtAdapter extends VectorAdapter<MvtAdapterOptions> {
 
   protected _getAdditionalLayerOptions() {
     const exist = MvtAdapter.sources.includes(this.options.url);
-    if (!exist) {
+    if (!exist && this.map) {
       this.map.addSource(this.options.url, {
         type: 'vector',
         tiles: [this.options.url],
