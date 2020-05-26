@@ -22,6 +22,11 @@ export type LayerAdapterDefinition<K extends keyof LayerAdapters = string> =
   | Type<LayerAdapters[K]>
   | Promise<Type<LayerAdapters[K]> | undefined>;
 
+export interface OnLayerSelectOptions {
+  layer: LayerAdapter;
+  features?: Feature[];
+}
+
 export interface OnLayerClickOptions {
   layer: LayerAdapter;
   selected?: boolean;
@@ -189,6 +194,7 @@ export interface VectorAdapterOptions<F extends Feature = Feature, L = any>
   label?: (e: LayerDefinition<F, L>) => void | string;
 
   onLayerClick?(opt: OnLayerClickOptions): Promise<any>;
+  onLayerSelect?(opt: OnLayerSelectOptions): Promise<any>;
 }
 
 export interface GeoJsonAdapterOptions<F extends Feature = Feature, L = any>

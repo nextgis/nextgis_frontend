@@ -242,6 +242,9 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     this._selectProperties = undefined;
     this._selectedFeatureIds = selectedFeatureIds;
     this._updateFilter();
+    if (this.options.onLayerSelect) {
+      this.options.onLayerSelect({ layer: this, features });
+    }
   }
 
   protected _unselectFeature(feature?: Feature | Feature[]) {
@@ -268,6 +271,9 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
       this._selectedFeatureIds = false;
     }
     this._updateFilter();
+    if (this.options.onLayerSelect) {
+      this.options.onLayerSelect({ layer: this, features: undefined });
+    }
   }
 
   protected _updateFilter() {

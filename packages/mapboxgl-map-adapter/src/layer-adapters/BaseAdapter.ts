@@ -10,9 +10,11 @@ let ID = 0;
 export abstract class BaseAdapter<O extends AdapterOptions = AdapterOptions>
   implements BaseLayerAdapter<Map, TLayer, O> {
   layer?: TLayer;
+  map?: Map;
   protected readonly _layerId: string;
 
-  constructor(public map: Map, public options: O) {
+  constructor(map: Map, public options: O) {
+    this.map = map;
     this._layerId = `layer-${ID++}`;
   }
 

@@ -7,7 +7,7 @@ import { TileAdapter } from './TileAdapter';
 
 export class WmsAdapter extends TileAdapter<WmsAdapterOptions>
   implements BaseLayerAdapter {
-  addLayer(options: WmsAdapterOptions): string[] {
+  addLayer(options: WmsAdapterOptions): string[] | undefined {
     const params: Record<string, string | number> = {
       bbox: '{bbox-epsg-3857}',
       format: options.format || 'image/png',

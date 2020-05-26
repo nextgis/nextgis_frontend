@@ -12,7 +12,7 @@ import { RasterSource, ResourceType, Layer } from 'mapbox-gl';
 export class TileAdapter<O extends RasterAdapterOptions = TileAdapterOptions>
   extends BaseAdapter<O>
   implements BaseLayerAdapter {
-  addLayer(options: O): string[] {
+  addLayer(options: O): string[] | undefined {
     options = { ...this.options, ...(options || {}) };
     const { minZoom, maxZoom } = options;
     let tiles: string[];
@@ -68,13 +68,14 @@ export class TileAdapter<O extends RasterAdapterOptions = TileAdapterOptions>
     if (maxZoom) {
       layerOptions.maxzoom = maxZoom - 1;
     }
-
-    this.map.addLayer(
-      layerOptions,
-      // @ts-ignore
-      options.before
-    );
-    const layer = (this.layer = [this._layerId]);
-    return layer;
+    if (this.map) {
+      this.map.addLayer(
+        layerOptions,
+        // @ts-ignore
+        options.before
+      );
+      const layer = (this.layer = [this._layerId]);
+      return layer;
+    }
   }
 }

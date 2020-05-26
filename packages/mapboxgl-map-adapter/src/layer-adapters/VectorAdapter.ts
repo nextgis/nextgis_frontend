@@ -88,7 +88,7 @@ export abstract class VectorAdapter<
 > extends BaseAdapter<O>
   implements VectorLayerAdapter<Map, TLayer, O, Feature> {
   selected = false;
-
+  map?: Map;
   protected featureIdName = 'id';
   protected _types: VectorAdapterLayerType[] = ['polygon', 'point', 'line'];
   protected readonly _sourceId: string;
@@ -101,7 +101,7 @@ export abstract class VectorAdapter<
   private $onLayerMouseMove?: (e: MapLayerMouseEvent) => void;
   private $onLayerMouseLeave?: (e: MapLayerMouseEvent) => void;
 
-  constructor(public map: Map, public options: O) {
+  constructor(map: Map, public options: O) {
     super(map, options);
     this._sourceId = this.options.source
       ? (this.options.source as string)
@@ -186,12 +186,18 @@ export abstract class VectorAdapter<
       this._updateFilter();
     }
     this.selected = true;
+    if (this.options.onLayerSelect) {
+      this.options.onLayerSelect({ layer: this, features: [] });
+    }
   }
 
   unselect() {
     this._selectProperties = undefined;
     this._updateFilter();
     this.selected = false;
+    if (this.options.onLayerSelect) {
+      this.options.onLayerSelect({ layer: this, features: undefined });
+    }
   }
 
   beforeRemove() {
@@ -222,9 +228,13 @@ export abstract class VectorAdapter<
     //   layers: this.layer
     // });
     let feature: Feature | undefined;
+    const map = this.map;
+    if (!map) {
+      return;
+    }
     if (this.layer) {
       this.layer.find((a) => {
-        const features_ = this.map.queryRenderedFeatures(e.point, {
+        const features_ = map.queryRenderedFeatures(e.point, {
           layers: [a],
         });
         if (features_.length) {
@@ -307,12 +317,14 @@ export abstract class VectorAdapter<
     if (maxZoom) {
       layerOpt.maxzoom = maxZoom - 1;
     }
+    const map = this.map;
+    if (map) {
+      map.addLayer(layerOpt);
 
-    this.map.addLayer(layerOpt);
-
-    const filters = ['all', ...(filter || [])].filter((x) => x);
-    if (filters.length > 1) {
-      this.map.setFilter(layerOpt.id, filters);
+      const filters = ['all', ...(filter || [])].filter((x) => x);
+      if (filters.length > 1) {
+        map.setFilter(layerOpt.id, filters);
+      }
     }
   }
 
@@ -340,16 +352,17 @@ export abstract class VectorAdapter<
         } else {
           _paint = await this._createPaintForType(paint, type, name);
         }
-
-        if ('icon-image' in _paint) {
-          // If true, the icon will be visible even if it collides with other previously drawn symbols.
-          _paint['icon-allow-overlap'] = true;
-          for (const p in _paint) {
-            this.map.setLayoutProperty(name, p, _paint[p]);
-          }
-        } else {
-          for (const p in _paint) {
-            this.map.setPaintProperty(name, p, _paint[p]);
+        if (this.map) {
+          if ('icon-image' in _paint) {
+            // If true, the icon will be visible even if it collides with other previously drawn symbols.
+            _paint['icon-allow-overlap'] = true;
+            for (const p in _paint) {
+              this.map.setLayoutProperty(name, p, _paint[p]);
+            }
+          } else {
+            for (const p in _paint) {
+              this.map.setPaintProperty(name, p, _paint[p]);
+            }
           }
         }
       }
@@ -420,7 +433,7 @@ export abstract class VectorAdapter<
   }
 
   protected async _registerImage(paint: IconOptions) {
-    if (isIcon(paint) && paint.html) {
+    if (isIcon(paint) && paint.html && this.map) {
       const imageExist = this.map.hasImage(paint.html);
       if (!imageExist) {
         let width = 12;
@@ -433,8 +446,9 @@ export abstract class VectorAdapter<
           width,
           height,
         });
-
-        this.map.addImage(paint.html, image);
+        if (this.map) {
+          this.map.addImage(paint.html, image);
+        }
       }
     }
   }
@@ -477,7 +491,7 @@ export abstract class VectorAdapter<
           const filterProperties = this._filterProperties;
           const propertyFilters =
             filterProperties && this._convertToMapboxFilter(filterProperties);
-          if (layers.indexOf(selLayerName) !== -1) {
+          if (this.map && layers.indexOf(selLayerName) !== -1) {
             if (this._selectionName) {
               let filters: any[] = [];
               if (selectProperties || this._selectedFeatureIds) {
@@ -502,7 +516,7 @@ export abstract class VectorAdapter<
               }
             }
           }
-          if (layers.indexOf(layerName) !== -1) {
+          if (this.map && layers.indexOf(layerName) !== -1) {
             const filters_: any[] = ['all', geomFilter];
             this._updateWithNativeFilter(filters_);
             if (selectProperties) {
@@ -556,11 +570,15 @@ export abstract class VectorAdapter<
   }
 
   private _onLayerMouseMove() {
-    this.map.getCanvas().style.cursor = 'pointer';
+    if (this.map) {
+      this.map.getCanvas().style.cursor = 'pointer';
+    }
   }
 
   private _onLayerMouseLeave() {
-    this.map.getCanvas().style.cursor = '';
+    if (this.map) {
+      this.map.getCanvas().style.cursor = '';
+    }
   }
 
   private _detectPaintType(paint: Paint): string | undefined {
