@@ -14,7 +14,7 @@ export class ImageAdapter extends BaseAdapter<ImageAdapterOptions>
     }
     let tiles: string[];
     const url = options.url;
-    if (url) {
+    if (url && this.map) {
       if (options.subdomains) {
         tiles = options.subdomains.split('').map((x) => {
           const subUrl = url.replace('{s}', x);
