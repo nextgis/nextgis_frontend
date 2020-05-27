@@ -133,16 +133,23 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
 
   getSelected() {
     const features: LayerDefinition<Feature, TLayer>[] = [];
-    this._getFeatures().forEach((x) => {
-      const id = this._getFeatureFilterId(x);
-      if (
-        id &&
-        this._selectedFeatureIds &&
-        this._selectedFeatureIds.indexOf(id) !== -1
-      ) {
-        features.push({ feature: x });
-      }
-    });
+    const selectedFeatureIds = this._selectedFeatureIds;
+    const selectProperties = this._selectProperties;
+    const allFeatures = this._getFeatures();
+    if (selectedFeatureIds && selectedFeatureIds.length) {
+      allFeatures.forEach((x) => {
+        const id = this._getFeatureFilterId(x);
+        if (id && selectedFeatureIds.indexOf(id) !== -1) {
+          features.push({ feature: x });
+        }
+      });
+    } else if (this.source && selectProperties) {
+      allFeatures
+        .filter((x) => featureFilter(x, selectProperties))
+        .forEach((x) => {
+          features.push({ feature: x });
+        });
+    }
     return features;
   }
 
@@ -157,6 +164,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
         this.selected = true;
         this._selectProperties = find;
         super._updateFilter();
+        this._fireOnLayerSelectEvent();
       }
     } else if (!this.selected) {
       this._selectFeature(this._getFeatures());
@@ -279,7 +287,9 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   protected _updateFilter() {
     // it is not yet possible to use callbacks and properties filters together
     if (this._filterProperties || this._selectProperties) {
-      return super._updateFilter();
+      super._updateFilter();
+      this._fireOnLayerSelectEvent();
+      return;
     }
     const selected = this._selectedFeatureIds;
     let selectionArray: (string | number)[] = [];
@@ -432,5 +442,21 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     }
     const styleFromCb = this._createPaintForType(style, type, name);
     return styleFromCb;
+  }
+
+  private _fireOnLayerSelectEvent() {
+    if (this.options.onLayerSelect) {
+      const features_: Feature[] = [];
+      this.getSelected().forEach((x) => {
+        if (x.feature) {
+          features_.push(x.feature);
+        }
+      });
+      const features = features_.length ? features_ : undefined;
+      this.options.onLayerSelect({
+        layer: this,
+        features,
+      });
+    }
   }
 }

@@ -24,7 +24,7 @@ export type LayerAdapterDefinition<K extends keyof LayerAdapters = string> =
 
 export interface OnLayerSelectOptions {
   layer: LayerAdapter;
-  features?: Feature[];
+  features?: Feature[] | undefined;
 }
 
 export interface OnLayerClickOptions {

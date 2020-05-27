@@ -245,6 +245,13 @@ export abstract class VectorAdapter<
       });
       if (feature) {
         let isSelected = this.isFeatureSelected(feature);
+        if (this.options.onLayerClick) {
+          this.options.onLayerClick({
+            layer: this,
+            feature,
+            selected: isSelected,
+          });
+        }
         if (isSelected) {
           if (this.options && this.options.unselectOnSecondClick) {
             this._unselectFeature(feature);
@@ -253,13 +260,6 @@ export abstract class VectorAdapter<
           this._selectFeature(feature);
         }
         isSelected = this.isFeatureSelected(feature);
-        if (this.options.onLayerClick) {
-          this.options.onLayerClick({
-            layer: this,
-            feature,
-            selected: isSelected,
-          });
-        }
       }
     }
     return feature;
