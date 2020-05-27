@@ -119,6 +119,8 @@ export class WebMapLayerItem extends Item<ItemOptions> {
         objectAssign(options, {
           // FIXME: why items?
           // ...item,
+          updateWmsParams: item.updateWmsParams,
+          url: item.url,
           headers: this.options.headers,
           maxZoom,
           minZoom,
