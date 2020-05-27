@@ -3,7 +3,7 @@
  */
 import {
   ResourceStore,
-  createResourceStore
+  createResourceStore,
 } from './store/ResourceStore/ResourceStore';
 
 export { createResourceStore, ResourceStore };
