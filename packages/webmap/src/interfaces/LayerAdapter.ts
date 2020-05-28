@@ -213,6 +213,10 @@ export interface TileAdapterOptions extends RasterAdapterOptions {
   tileSize?: number;
 }
 
+export interface Tileset3DAdapterOptions extends RasterAdapterOptions {
+  useTerrainHeight?: boolean;
+}
+
 export interface Model3DOptions extends RasterAdapterOptions {
   lon: number;
   lat: number;
