@@ -1,4 +1,4 @@
-import { TileAdapterOptions, LngLatBoundsArray } from '@nextgis/webmap';
+import { Tileset3DAdapterOptions, LngLatBoundsArray } from '@nextgis/webmap';
 import {
   Cesium3DTileset,
   Math as CMath,
@@ -10,11 +10,11 @@ import {
 import { BaseAdapter } from './BaseAdapter';
 import { whenSampleTerrainMostDetailed } from '../utils/whenSampleTerrainMostDetailed';
 
-export class Tileset3DAdapter extends BaseAdapter<TileAdapterOptions> {
+export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
   layer?: Cesium3DTileset;
   private _extent?: LngLatBoundsArray;
 
-  async addLayer(opt: TileAdapterOptions) {
+  async addLayer(opt: Tileset3DAdapterOptions) {
     this.options = { ...opt };
     const tileset = await this._addLayer();
     return tileset;
@@ -53,7 +53,6 @@ export class Tileset3DAdapter extends BaseAdapter<TileAdapterOptions> {
     const layer = new Cesium3DTileset({
       url: this.options.url,
       skipLevelOfDetail: true,
-      // loadSiblings: true,
     });
     layer.show = false;
 
@@ -94,8 +93,25 @@ export class Tileset3DAdapter extends BaseAdapter<TileAdapterOptions> {
     }
   }
 
+  // private _setHeight(heightOffset: number) {
+  //   if (this.layer) {
+  //     const boundingSphere = this.layer.boundingSphere;
+  //     const cartographic = Cartographic.fromCartesian(boundingSphere.center);
+  //     const lon = cartographic.longitude;
+  //     const lat = cartographic.latitude;
+  //     const surface = Cartesian3.fromRadians(lon, lat, 0);
+  //     const offset = Cartesian3.fromRadians(lon, lat, heightOffset);
+  //     const translation = Cartesian3.subtract(
+  //       offset,
+  //       surface,
+  //       new Cartesian3()
+  //     );
+  //     this.layer.modelMatrix = Matrix4.fromTranslation(translation);
+  //   }
+  // }
+
   private watchHeight() {
-    if (this.layer) {
+    if (this.layer && this.options.useTerrainHeight) {
       const boundingSphere = this.layer.boundingSphere;
       const cartographic = Cartographic.fromCartesian(boundingSphere.center);
 
