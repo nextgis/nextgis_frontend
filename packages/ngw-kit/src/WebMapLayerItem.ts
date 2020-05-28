@@ -90,7 +90,7 @@ export class WebMapLayerItem extends Item<ItemOptions> {
     const i = item;
     if (item.item_type === 'group' || item.item_type === 'root') {
       if (item.children && item.children.length) {
-        item.children.reverse().forEach((x) => {
+        item.children.forEach((x) => {
           const children = new WebMapLayerItem(
             this.webMap,
             x,
@@ -108,6 +108,13 @@ export class WebMapLayerItem extends Item<ItemOptions> {
         headers: this.options.headers,
         crossOrigin: this.options.crossOrigin,
       };
+      if (this.options.order) {
+        const subOrder =
+          this.options.drawOrderEnabled && 'draw_order_position' in item
+            ? this._rootDescendantsCount - item.draw_order_position
+            : this.id;
+        options.order = Number((this.options.order | 0) + '.' + subOrder);
+      }
       if (item.item_type === 'layer') {
         adapter = item.adapter || item.layer_adapter.toUpperCase();
         const maxZoom = item.layer_max_scale_denom
@@ -127,12 +134,6 @@ export class WebMapLayerItem extends Item<ItemOptions> {
           minScale: item.layer_min_scale_denom,
           maxScale: item.layer_max_scale_denom,
         });
-        if (this.options.order) {
-          const subOrder = this.options.drawOrderEnabled
-            ? this._rootDescendantsCount - item.draw_order_position
-            : this.id;
-          options.order = Number((this.options.order | 0) + '.' + subOrder);
-        }
       } else if (WebMapLayerItem.GetAdapterFromLayerType[item.item_type]) {
         const getAdapter =
           WebMapLayerItem.GetAdapterFromLayerType[item.item_type];
