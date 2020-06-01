@@ -215,6 +215,7 @@ export interface TileAdapterOptions extends RasterAdapterOptions {
 
 export interface Tileset3DAdapterOptions extends RasterAdapterOptions {
   useTerrainHeight?: boolean;
+  heightOffset?: number;
 }
 
 export interface Model3DOptions extends RasterAdapterOptions {

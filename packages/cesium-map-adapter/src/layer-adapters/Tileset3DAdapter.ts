@@ -62,6 +62,9 @@ export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
     this._extent = this._calculateExtent();
     this.map.scene.primitives.add(this.layer);
     this.watchHeight();
+    if (this.options.heightOffset) {
+      this._setHeight();
+    }
     return this.layer;
   }
 
@@ -93,22 +96,30 @@ export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
     }
   }
 
-  // private _setHeight(heightOffset: number) {
-  //   if (this.layer) {
-  //     const boundingSphere = this.layer.boundingSphere;
-  //     const cartographic = Cartographic.fromCartesian(boundingSphere.center);
-  //     const lon = cartographic.longitude;
-  //     const lat = cartographic.latitude;
-  //     const surface = Cartesian3.fromRadians(lon, lat, 0);
-  //     const offset = Cartesian3.fromRadians(lon, lat, heightOffset);
-  //     const translation = Cartesian3.subtract(
-  //       offset,
-  //       surface,
-  //       new Cartesian3()
-  //     );
-  //     this.layer.modelMatrix = Matrix4.fromTranslation(translation);
-  //   }
-  // }
+  private _setHeight(height?: number) {
+    if (this.layer) {
+      const boundingSphere = this.layer.boundingSphere;
+      const cartographic = Cartographic.fromCartesian(boundingSphere.center);
+      if (height === undefined) {
+        height = cartographic.height;
+      }
+      if (this.options.heightOffset) {
+        height += this.options.heightOffset;
+      }
+      if (height !== undefined) {
+        const lon = cartographic.longitude;
+        const lat = cartographic.latitude;
+        const surface = Cartesian3.fromRadians(lon, lat, 0);
+        const offset = Cartesian3.fromRadians(lon, lat, height);
+        const translation = Cartesian3.subtract(
+          offset,
+          surface,
+          new Cartesian3()
+        );
+        this.layer.modelMatrix = Matrix4.fromTranslation(translation);
+      }
+    }
+  }
 
   private watchHeight() {
     if (this.layer && this.options.useTerrainHeight) {
@@ -120,19 +131,8 @@ export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
         this.map.terrainProvider,
         terrainSamplePositions,
         () => {
-          if (this.layer) {
-            const lon = cartographic.longitude;
-            const lat = cartographic.latitude;
-            const heightOffset = terrainSamplePositions[0].height;
-            const surface = Cartesian3.fromRadians(lon, lat, 0);
-            const offset = Cartesian3.fromRadians(lon, lat, heightOffset);
-            const translation = Cartesian3.subtract(
-              offset,
-              surface,
-              new Cartesian3()
-            );
-            this.layer.modelMatrix = Matrix4.fromTranslation(translation);
-          }
+          const heightOffset = terrainSamplePositions[0].height;
+          this._setHeight(heightOffset);
         }
       );
     }
