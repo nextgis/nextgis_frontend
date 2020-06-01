@@ -107,11 +107,7 @@ export async function createAsyncAdapter(
           }
         } else if (cls === 'raster_layer') {
           return createAdapterFromFirstStyle(adapterOptions);
-        } else if (
-          cls === 'basemap_layer' &&
-          item.basemap_layer &&
-          item.basemap_layer.qms
-        ) {
+        } else if (cls === 'basemap_layer') {
           adapter = createBasemapLayerAdapter(adapterOptions);
         } else {
           if (adapterType === 'GEOJSON') {
