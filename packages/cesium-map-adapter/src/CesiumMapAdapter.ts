@@ -249,14 +249,35 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
   fitBounds(e: LngLatBoundsArray, options: FitOptions = {}) {
     if (this.map) {
       const [west, south, east, north] = e;
-      const rectangle = Rectangle.fromDegrees(west, south, east, north);
-      const destination = this.map.camera.getRectangleCameraCoordinates(
-        rectangle
-      );
-      this.map.camera.flyTo({
-        destination,
-        duration: options.duration || 0,
-      });
+      let destination: Cartesian3 | undefined;
+
+      if (this.map.scene.mode === SceneMode.SCENE3D) {
+        const rectangle = Rectangle.fromDegrees(west, south, east, north);
+        const cartesian = this.map.camera.getRectangleCameraCoordinates(
+          rectangle
+        );
+
+        const cartographic = Cartographic.fromCartesian(cartesian);
+        cartographic.height += 500;
+        destination = Cartesian3.fromRadians(
+          cartographic.longitude,
+          cartographic.latitude,
+          cartographic.height
+        );
+      } else {
+        const pts = [west, south, west, north, east, north, east, south];
+        // @ts-ignore
+        destination = Rectangle.fromCartesianArray(
+          Cartesian3.fromDegreesArray(pts)
+        );
+      }
+
+      if (destination) {
+        this.map.scene.camera.flyTo({
+          destination,
+          duration: options.duration || 0,
+        });
+      }
     }
   }
 
