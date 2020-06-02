@@ -1,7 +1,7 @@
 /**
  * @module utils
  */
-export function arrayCompare(array1: any[], array2: any[]) {
+export function arrayCompare(array1: any[], array2: any[]): boolean {
   array1 = Array.from(array1);
   array2 = Array.from(array2);
   return (

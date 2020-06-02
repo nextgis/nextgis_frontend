@@ -172,7 +172,7 @@ export class WebMap<
     }
   }
 
-  removeControl(control: any) {
+  removeControl(control: any): void {
     if (control.remove) {
       control.remove();
     } else if (this.mapAdapter.removeControl) {

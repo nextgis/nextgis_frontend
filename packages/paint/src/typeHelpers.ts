@@ -9,7 +9,7 @@ import {
   IconPaint,
 } from './interfaces';
 
-export function isExpression(value: any): value is Expression {
+export function isExpression(value: unknown): value is Expression {
   if (Array.isArray(value)) {
     return true;
   }

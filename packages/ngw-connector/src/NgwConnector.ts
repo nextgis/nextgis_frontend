@@ -47,7 +47,7 @@ export class NgwConnector {
     }
   }
 
-  setNextGisWeb(url: string) {
+  setNextGisWeb(url: string): void {
     this.logout();
     this.options.baseUrl = url;
   }
@@ -69,12 +69,12 @@ export class NgwConnector {
     }
   }
 
-  async login(credentials: Credentials) {
+  async login(credentials: Credentials): Promise<UserInfo> {
     this.logout();
     return this.getUserInfo(credentials);
   }
 
-  logout() {
+  logout(): void {
     this._rejectLoadingQueue();
     this._loadingStatus = {};
     this.options.auth = undefined;
@@ -119,7 +119,7 @@ export class NgwConnector {
     }
   }
 
-  makeClientId(credentials?: Credentials) {
+  makeClientId(credentials?: Credentials): string | undefined {
     credentials = credentials || this.options.auth;
     if (credentials) {
       const { login, password } = credentials;
@@ -368,7 +368,7 @@ export class NgwConnector {
     name: string,
     resolve: (...args: any[]) => any,
     reject: (...args: any[]) => any
-  ) {
+  ): void {
     this._loadingQueue[name] = this._loadingQueue[name] || {
       name,
       waiting: [],
@@ -380,7 +380,7 @@ export class NgwConnector {
     });
   }
 
-  protected _rejectLoadingQueue() {
+  protected _rejectLoadingQueue(): void {
     for (const q in this._loadingQueue) {
       const queue = this._loadingQueue[q];
       queue.waiting.forEach((x) => {
@@ -390,7 +390,11 @@ export class NgwConnector {
     }
   }
 
-  protected _executeLoadingQueue(name: string, data: any, isError?: boolean) {
+  protected _executeLoadingQueue(
+    name: string,
+    data: unknown,
+    isError?: boolean
+  ): void {
     const queue = this._loadingQueue[name];
     if (queue) {
       for (let fry = 0; fry < queue.waiting.length; fry++) {
