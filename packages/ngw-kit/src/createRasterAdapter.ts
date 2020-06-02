@@ -22,6 +22,7 @@ export async function createRasterAdapter({
   const resourceCls = item.resource.cls;
   const clsAdapterAlias: { [key in ResourceCls]?: NgwLayerAdapterType } = {
     wmsserver_service: 'WMS',
+    tmsclient_layer: 'IMAGE',
   };
   let adapter =
     layerOptions.adapter ||
