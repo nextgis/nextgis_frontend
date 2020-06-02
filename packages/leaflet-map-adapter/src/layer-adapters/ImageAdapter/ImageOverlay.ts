@@ -15,7 +15,7 @@ export class ImageOverlay extends L.ImageOverlay {
     super(imageUrl, bounds, options);
   }
 
-  _initImage() {
+  _initImage(): void {
     // @ts-ignore
     super._initImage();
     // @ts-ignore

@@ -75,7 +75,7 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
   private _controlContainer?: ControlContainer;
   private _terrainProviderChangedListener?: Event.RemoveCallback;
 
-  create(options: MapOptions) {
+  create(options: MapOptions): void {
     this.options = { ...options };
     if (this.options.target) {
       // default terrain provider
@@ -171,7 +171,7 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
     }
   }
 
-  destroy() {
+  destroy(): void {
     if (this._terrainProviderChangedListener) {
       this._terrainProviderChangedListener();
     }
@@ -183,7 +183,7 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
     }
   }
 
-  setCenter(lonLat: LngLatArray) {
+  setCenter(lonLat: LngLatArray): void {
     const viewer = this.map;
     if (viewer) {
       const z = Ellipsoid.WGS84.cartesianToCartographic(viewer.camera.position)
@@ -207,14 +207,14 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
     }
   }
 
-  setZoom(zoom: number) {
+  setZoom(zoom: number): void {
     const viewer = this.map;
     if (viewer) {
       //
     }
   }
 
-  getZoom() {
+  getZoom(): number | undefined {
     const viewer = this.map;
     if (viewer) {
       let iniPos = new Cartesian3();
@@ -232,21 +232,21 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
     return undefined;
   }
 
-  zoomOut() {
+  zoomOut(): void {
     const viewer = this.map;
     if (viewer) {
       viewer.camera.zoomOut();
     }
   }
 
-  zoomIn() {
+  zoomIn(): void {
     const viewer = this.map;
     if (viewer) {
       viewer.camera.zoomIn();
     }
   }
 
-  fitBounds(e: LngLatBoundsArray, options: FitOptions = {}) {
+  fitBounds(e: LngLatBoundsArray, options: FitOptions = {}): void {
     if (this.map) {
       const [west, south, east, north] = e;
       let destination: Cartesian3 | undefined;
@@ -301,49 +301,49 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
     return undefined;
   }
 
-  setRotation(angle: number) {
+  setRotation(angle: number): void {
     //
   }
 
-  removeLayer(layer: Layer) {
+  removeLayer(layer: Layer): void {
     //
   }
 
-  showLayer(layer: Layer) {
+  showLayer(layer: Layer): void {
     //
   }
 
-  hideLayer(layer: Layer) {
+  hideLayer(layer: Layer): void {
     //
   }
 
-  setLayerOpacity() {
+  setLayerOpacity(): void {
     // ignore
   }
 
-  setLayerOrder(layer: Layer, order: number) {
+  setLayerOrder(layer: Layer, order: number): void {
     //
   }
 
-  createControl(control: MapControl, options: CreateControlOptions) {
+  createControl(control: MapControl, options: CreateControlOptions): any {
     // return
   }
 
-  createButtonControl(options: ButtonControlOptions) {
+  createButtonControl(options: ButtonControlOptions): any {
     // return
   }
 
-  addControl(control: Control, position: ControlPositions) {
+  addControl(control: Control, position: ControlPositions): any {
     if (this._controlContainer) {
       this._controlContainer.addControl(control, position);
     }
   }
 
-  removeControl(control: Control) {
+  removeControl(control: Control): void {
     //
   }
 
-  onMapClick(evt: any) {
+  onMapClick(evt: any): void {
     //
   }
 

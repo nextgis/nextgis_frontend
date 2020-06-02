@@ -83,7 +83,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
   private _isLoaded = false;
   private _positionMem: { [key in 'movestart' | 'moveend']?: PositionMem } = {};
 
-  create(options: MapOptions) {
+  create(options: MapOptions): void {
     this.options = { ...options };
     const viewOptions: ViewOptions = {
       center: this.options.center,
@@ -120,7 +120,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     this._addMapListeners();
   }
 
-  destroy() {
+  destroy(): void {
     if (this.map) {
       // ignore
     }
@@ -138,7 +138,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     }
   }
 
-  setCenter(lonLat: LngLatArray) {
+  setCenter(lonLat: LngLatArray): void {
     if (this._olView) {
       this._olView.setCenter(fromLonLat(lonLat));
     }
@@ -158,19 +158,19 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     }
   }
 
-  setZoom(zoom: number) {
+  setZoom(zoom: number): void {
     if (this._olView) {
       this._olView.setZoom(zoom);
     }
   }
 
-  getZoom() {
+  getZoom(): number | undefined {
     if (this._olView) {
       return this._olView.getZoom();
     }
   }
 
-  fitBounds(e: LngLatBoundsArray) {
+  fitBounds(e: LngLatBoundsArray): void {
     if (this._olView) {
       const zoom = this.getZoom();
       const extent = e as Extent;
@@ -195,62 +195,65 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     return extent as LngLatBoundsArray;
   }
 
-  setRotation(angle: number) {
+  setRotation(angle: number): void {
     if (this._olView) {
       this._olView.setRotation(angle);
     }
   }
 
-  removeLayer(layer: Layer) {
+  removeLayer(layer: Layer): void {
     if (this.map) {
       this.map.removeLayer(layer);
     }
   }
 
-  showLayer(layer: Layer) {
+  showLayer(layer: Layer): void {
     if (this.map) {
       this.map.addLayer(layer);
     }
   }
 
-  hideLayer(layer: Layer) {
+  hideLayer(layer: Layer): void {
     if (this.map) {
       this.map.removeLayer(layer);
     }
   }
 
-  setLayerOpacity() {
+  setLayerOpacity(): void {
     // ignore
   }
 
-  setLayerOrder(layer: Layer, order: number) {
+  setLayerOrder(layer: Layer, order: number): void {
     if (layer.setZIndex) {
       layer.setZIndex(order);
     }
   }
 
-  createControl(control: MapControl, options: CreateControlOptions) {
+  createControl(control: MapControl, options: CreateControlOptions): Control {
     return createControl(control, options);
   }
 
-  createButtonControl(options: ButtonControlOptions) {
+  createButtonControl(options: ButtonControlOptions): Control {
     return createButtonControl(options);
   }
 
-  addControl(control: Control, position: ControlPositions) {
+  addControl(
+    control: Control,
+    position: ControlPositions
+  ): Control | undefined {
     if (this._panelControl) {
       this._panelControl.addControl(control, position);
       return control;
     }
   }
 
-  removeControl(control: Control) {
+  removeControl(control: Control): void {
     if (this._panelControl) {
       this._panelControl.removeControl(control);
     }
   }
 
-  onMapClick(evt: MapBrowserPointerEvent) {
+  onMapClick(evt: MapBrowserPointerEvent): void {
     const [lng, lat] = transform(
       evt.coordinate,
       this.displayProjection,

@@ -3,9 +3,9 @@
  */
 import { ButtonControlOptions } from '@nextgis/webmap';
 import { createControl } from './createControl';
-import { DomEvent } from 'leaflet';
+import { DomEvent, Control } from 'leaflet';
 
-export function createButtonControl(options: ButtonControlOptions) {
+export function createButtonControl(options: ButtonControlOptions): Control {
   const link = document.createElement('a');
 
   const title = options.title || '';

@@ -46,7 +46,7 @@ export type PropertiesFilter<T extends Properties = Properties> = (
   | PropertiesFilter<T>
 )[];
 
-function like(b: string, a: string, iLike?: boolean) {
+function like(b: string, a: string, iLike?: boolean): boolean {
   a = String(a);
   b = String(b);
   if (a === b) return true;
@@ -97,7 +97,10 @@ export function checkIfPropertyFilter(
   return false;
 }
 
-export function featureFilter(feature: Feature, filters: PropertiesFilter) {
+export function featureFilter(
+  feature: Feature,
+  filters: PropertiesFilter
+): boolean {
   const properties: GeoJsonProperties = { ...feature.properties };
   if (properties) {
     // workaround to filter by feature id
