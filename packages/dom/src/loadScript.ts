@@ -5,7 +5,10 @@ export interface LoadScriptOptions {
   defer?: boolean;
 }
 
-export function loadScript(src: string, options: LoadScriptOptions = {}) {
+export function loadScript(
+  src: string,
+  options: LoadScriptOptions = {}
+): Promise<unknown> {
   return new Promise((resolve, reject) => {
     const s = document.createElement('script');
     s.src = src;

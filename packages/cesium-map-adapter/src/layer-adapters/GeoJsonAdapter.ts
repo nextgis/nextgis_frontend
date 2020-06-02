@@ -28,6 +28,7 @@ import {
   Cartographic,
   Entity,
   HeightReference,
+  JulianDate,
 } from 'cesium';
 import { GeoJsonObject, Feature, FeatureCollection } from 'geojson';
 import { BaseAdapter, Map } from './BaseAdapter';
@@ -187,20 +188,18 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
           name = obj.properties && obj.properties[nameField];
         }
 
-        //@ts-ignore
-        const description: Property = {
-          getValue: () => {
-            if (this.options.popupOptions?.createPopupContent) {
-              const content = this.options.popupOptions.createPopupContent({
-                feature: obj,
-              });
-              if (content instanceof HTMLElement) {
-                return content.outerHTML;
-              }
-              return content;
+        const description = new Property();
+        description.getValue = () => {
+          if (this.options.popupOptions?.createPopupContent) {
+            const content = this.options.popupOptions.createPopupContent({
+              feature: obj,
+            });
+            if (content instanceof HTMLElement) {
+              return content.outerHTML;
             }
-            return '';
-          },
+            return content;
+          }
+          return '';
         };
 
         source.entities.add({
@@ -208,11 +207,8 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
           name: name || (obj.id !== undefined ? 'Feature#' + obj.id : ''),
           description,
           billboard: {
-            // @ts-ignore
             heightReference: HeightReference.CLAMP_TO_GROUND,
-            // @ts-ignore
             image: canvas.toDataURL(),
-            // @ts-ignore
             verticalOrigin: VerticalOrigin.BOTTOM,
           },
         });
@@ -250,7 +246,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
       dataSource.load(obj, options).then((x) => {
         dataSource.entities.values.forEach((y) => {
           const height = this._getEntityHeight(y, paint);
-          if (height) {
+          if (height && y.polygon) {
             y.polygon.extrudedHeight = new CallbackProperty(() => {
               return height;
             }, false);
@@ -280,7 +276,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     // @ts-ignore
     const feature: Feature = {
       type: 'Feature',
-      properties: entity.properties,
+      properties: entity.properties || {},
     };
     const featurePaint = this._getFeaturePaint(feature, paint);
     if (paint && 'extrude3d' in featurePaint) {
@@ -296,8 +292,8 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
       entities.forEach((x) => {
         let position: Cartesian3 | undefined;
         if (x.polygon) {
-          // @ts-ignore
-          position = x.polygon.hierarchy.getValue().positions[0];
+          position = x.polygon.hierarchy?.getValue(JulianDate.now())
+            .positions[0];
         } else if (x.point) {
           console.log(x.point);
         }
@@ -314,7 +310,11 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
             for (let i = 0; i < entriesOnTerrain.length; i++) {
               const entity = entriesOnTerrain[i];
               const terrainSamplePosition = terrainSamplePositions[i];
-              if (terrainSamplePosition && terrainSamplePosition.height) {
+              if (
+                entity.polygon &&
+                terrainSamplePosition &&
+                terrainSamplePosition.height
+              ) {
                 const terrainHeight = terrainSamplePosition.height;
                 entity.polygon.height = new CallbackProperty(() => {
                   return terrainHeight;

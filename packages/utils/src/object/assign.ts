@@ -30,7 +30,10 @@ export function assign<T, U, V, W>(
  * @param target The target object to copy to.
  * @param sources One or more source objects from which to copy properties
  */
-export function assign(target: object, ...sources: any[]): any {
+export function assign(
+  target: Record<string, unknown>,
+  ...sources: any[]
+): any {
   for (const source of sources) {
     for (const prop of Object.getOwnPropertyNames(source)) {
       (target as any)[prop] = source[prop];

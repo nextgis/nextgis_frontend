@@ -1,5 +1,4 @@
 import {
-  when,
   sampleTerrainMostDetailed,
   TerrainProvider,
   Cartographic,
@@ -15,6 +14,6 @@ export function whenSampleTerrainMostDetailed(
     positions.forEach((x) => (x.height = 0));
     callback(positions);
   } else {
-    when(sampleTerrainMostDetailed(terrainProvider, positions), callback);
+    sampleTerrainMostDetailed(terrainProvider, positions).then(callback);
   }
 }
