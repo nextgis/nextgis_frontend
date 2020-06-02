@@ -16,15 +16,17 @@ export interface VueSelectItem {
   text: string;
 }
 
+const emptyValue = '___empty_value___';
+
 @Component
-export class BaseLayersSelect extends Vue {
+export class BasemapSelect extends Vue {
   @Prop({ type: WebMap }) webMap!: WebMap;
   @Prop({ type: Boolean, default: true }) allowEmpty!: boolean;
   @Prop({ type: String, default: '---' }) emptyLayerText!: string;
 
   items: VueSelectItem[] = [];
 
-  active: string | false = false;
+  active: string | false = emptyValue;
 
   protected __updateItems?: () => Promise<void>;
   protected _layers: Array<LayerAdapter | ResourceAdapter> = [];
@@ -120,7 +122,7 @@ export class BaseLayersSelect extends Vue {
     if (this.allowEmpty) {
       items.push({
         text: this.emptyLayerText,
-        value: undefined,
+        value: emptyValue,
       });
     }
 
@@ -132,8 +134,8 @@ export class BaseLayersSelect extends Vue {
           value: baseLayer.id || '',
           text: baseLayer.options.name || baseLayer.id || '',
         });
-        if (this.webMap.isLayerVisible(baseLayer)) {
-          this.active = baseLayer.id || false;
+        if (baseLayer.id && this.webMap.isLayerVisible(baseLayer)) {
+          this.active = baseLayer.id;
         }
       }
     });

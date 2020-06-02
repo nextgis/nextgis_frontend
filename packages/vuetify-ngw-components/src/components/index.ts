@@ -2,9 +2,12 @@
  * @module vuetify-ngw-components
  */
 import { NgwLayersList, VueTreeItem } from './NgwLayersList/NgwLayersList';
-import {
-  BaseLayersSelect,
-  VueSelectItem,
-} from './BaseLayersSelect/BaseLayersSelect';
+import { BasemapSelect, VueSelectItem } from './BasemapSelect/BasemapSelect';
 
-export { NgwLayersList, VueTreeItem, BaseLayersSelect, VueSelectItem };
+export {
+  NgwLayersList,
+  VueTreeItem,
+  BasemapSelect,
+  BasemapSelect as BaseLayersSelect,
+  VueSelectItem,
+};
