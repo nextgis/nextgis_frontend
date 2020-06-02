@@ -10,10 +10,9 @@
     "@nextgis/dom": "^0.31.0",
     "@nextgis/paint": "^0.31.0",
     "@nextgis/webmap": "^0.31.0",
-    "@types/cesium": "^1.67.5",
     "@types/events": "^3.0.0",
-    "@types/node": "^14.0.1",
-    "cesium": "^1.69.0",
+    "@types/node": "^14.0.9",
+    "cesium": "^1.70.0",
     "events": "^3.1.0"
   },
   "devDependencies": {

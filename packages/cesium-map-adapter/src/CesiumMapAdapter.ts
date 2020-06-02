@@ -16,7 +16,7 @@ import {
   WebMercatorProjection,
   TerrainProvider,
   Color,
-  viewerCesiumInspectorMixin,
+  // viewerCesiumInspectorMixin,
   // @ts-ignore
   viewerCesium3DTilesInspectorMixin,
 } from 'cesium';
@@ -102,13 +102,13 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
         timeline: false,
         navigationHelpButton: false,
         mapProjection: new WebMercatorProjection(),
-        skyBox: false,
+        skyBox: undefined,
         // skyAtmosphere: false,
         // useBrowserRecommendedResolution: true,
         sceneMode: SceneMode.SCENE3D,
         // terrainProvider: createWorldTerrain()
         terrainProvider: ellipsoidProvider,
-        imageryProvider: false,
+        imageryProvider: undefined,
         // mapProjection: new Cesium.WebMercatorProjection()
         // contextOptions: { requestWebgl2: true }
       });
@@ -363,7 +363,7 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
   private _addEventsListener() {
     const viewer = this.map;
     if (viewer) {
-      const events: [keyof WebMapEvents, Cesium.Event | undefined][] = [
+      const events: [keyof WebMapEvents, Event | undefined][] = [
         ['zoomstart', undefined],
         ['zoom', undefined],
         ['zoomend', undefined],
