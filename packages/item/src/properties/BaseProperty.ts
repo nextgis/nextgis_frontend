@@ -2,7 +2,7 @@
  * @module item
  */
 import { Item } from '../Item';
-import { ItemBasePropertyOptions } from '../interfaces';
+import { ItemBasePropertyOptions, ItemOptions } from '../interfaces';
 
 let events;
 try {
@@ -44,7 +44,7 @@ export abstract class BaseProperty<
     this._value = this.getProperty();
   }
 
-  getProperty() {
+  getProperty(): V | undefined {
     if (typeof this.options.getProperty === 'function') {
       return this.options.getProperty.call(this, this.item);
     }
@@ -55,16 +55,16 @@ export abstract class BaseProperty<
     return this.item.tree.getParents() || [];
   }
 
-  getParent() {
+  getParent(): Item<ItemOptions> | undefined {
     return this.item.tree.getParent();
   }
 
-  isGroup() {
+  isGroup(): number {
     const children = this.item.tree.getDescendants();
     return children.length;
   }
 
-  isBlocked() {
+  isBlocked(): boolean {
     if (this._blocked === undefined) {
       const parents = this.item.tree.getParents();
       if (parents) {
@@ -83,7 +83,7 @@ export abstract class BaseProperty<
     return this._blocked;
   }
 
-  set(value?: V, options?: O) {
+  set(value?: V, options?: O): void {
     this._value = this._prepareValue(value);
 
     this.update(this._value, options);
@@ -95,15 +95,15 @@ export abstract class BaseProperty<
     return this.getValue();
   }
 
-  update(value?: V, options?: O) {
+  update(value?: V, options?: O): void {
     this._callOnSet(value, options);
   }
 
-  getContainer() {
+  getContainer(): HTMLElement | undefined {
     return this._container;
   }
 
-  destroy() {
+  destroy(): void {
     if (this._container) {
       const parentNode = this._container.parentNode;
       if (parentNode) {
@@ -123,13 +123,13 @@ export abstract class BaseProperty<
     return value;
   }
 
-  protected _callOnSet<W extends V = V>(value?: W, options?: O) {
+  protected _callOnSet<W extends V = V>(value?: W, options?: O): void {
     if (this.options.onSet) {
       this.options.onSet.call(this, value, options, this.item);
     }
   }
 
-  protected _fireChangeEvent(value?: V, options?: O) {
+  protected _fireChangeEvent(value?: V, options?: O): void {
     if (this.emitter) {
       value = value !== undefined ? value : this.getValue();
       this.emitter.emit('change', { value, options });
@@ -137,7 +137,11 @@ export abstract class BaseProperty<
       parents.forEach((x) => {
         const prop = x.properties && x.properties.property(this.name);
         if (prop) {
-          prop.emitter.emit('change-tree', { value, options, item: this.item });
+          prop.emitter.emit('change-tree', {
+            value,
+            options,
+            item: this.item,
+          });
         }
       });
     }

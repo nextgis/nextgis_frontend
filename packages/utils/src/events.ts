@@ -8,7 +8,7 @@ export class Events<E = any> {
 
   constructor(private emitter: EventEmitter) {}
 
-  setEventStatus(event: keyof E, status: boolean) {
+  setEventStatus(event: keyof E, status: boolean): void {
     this._eventsStatus[event] = status;
   }
 
