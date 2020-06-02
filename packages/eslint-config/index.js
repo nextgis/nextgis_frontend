@@ -53,7 +53,7 @@ module.exports = {
       },
     ],
     camelcase: 'off',
-
+    // '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-use-before-define': 0,
     '@typescript-eslint/member-ordering': 2,
     '@typescript-eslint/no-unused-vars': [
