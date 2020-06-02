@@ -21,7 +21,9 @@ interface FilterArgs {
   options?: FilterOptions;
 }
 
-export async function createGeoJsonAdapter(opt: GetClassAdapterOptions) {
+export async function createGeoJsonAdapter(
+  opt: GetClassAdapterOptions
+): Promise<Type<VectorLayerAdapter>> {
   const { webMap, connector, item } = opt;
   const addLayerOptionsPriority =
     opt.addLayerOptionsPriority !== undefined

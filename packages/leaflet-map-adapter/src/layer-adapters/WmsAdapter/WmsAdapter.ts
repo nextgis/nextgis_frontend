@@ -8,7 +8,7 @@ import { BaseAdapter } from '../BaseAdapter';
 
 export class WmsAdapter extends BaseAdapter<WmsAdapterOptions, TileLayer.WMS>
   implements BaseLayerAdapter {
-  addLayer(options: WmsAdapterOptions) {
+  addLayer(options: WmsAdapterOptions): TileLayer.WMS | undefined {
     if (options) {
       const { url, ...opt } = options;
       if (url) {

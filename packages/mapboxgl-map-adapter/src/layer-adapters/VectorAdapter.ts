@@ -170,17 +170,17 @@ export abstract class VectorAdapter<
     return this.layer;
   }
 
-  propertiesFilter(filters: PropertiesFilter, options?: FilterOptions) {
+  propertiesFilter(filters: PropertiesFilter, options?: FilterOptions): void {
     this._filterProperties = filters;
     this._updatePropertiesFilter();
   }
 
-  removeFilter() {
+  removeFilter(): void {
     this._filterProperties = undefined;
     this._updateFilter();
   }
 
-  select(properties?: DataLayerFilter<F, TLayer> | PropertiesFilter) {
+  select(properties?: DataLayerFilter<F, TLayer> | PropertiesFilter): void {
     if (typeof properties !== 'function') {
       this._selectProperties = properties;
       this._updateFilter();
@@ -191,7 +191,7 @@ export abstract class VectorAdapter<
     }
   }
 
-  unselect() {
+  unselect(): void {
     this._selectProperties = undefined;
     this._updateFilter();
     this.selected = false;
@@ -200,7 +200,7 @@ export abstract class VectorAdapter<
     }
   }
 
-  beforeRemove() {
+  beforeRemove(): void {
     const map = this.map;
     if (map) {
       if (this.layer) {
@@ -221,7 +221,9 @@ export abstract class VectorAdapter<
     super.beforeRemove();
   }
 
-  _onLayerClick(e: MapLayerMouseEvent) {
+  _onLayerClick(
+    e: MapLayerMouseEvent
+  ): Feature<Geometry, GeoJsonProperties> | undefined {
     e.preventDefault();
     // not work correct
     // const features = this.map.queryRenderedFeatures(e.point, {
@@ -265,7 +267,7 @@ export abstract class VectorAdapter<
     return feature;
   }
 
-  protected _updateWithNativeFilter(filter: any[]) {
+  protected _updateWithNativeFilter(filter: any[]): any[] {
     const nativeFilter = this._getNativeFilter();
     if (nativeFilter.length) {
       filter.push(nativeFilter);
@@ -273,7 +275,7 @@ export abstract class VectorAdapter<
     return filter;
   }
 
-  protected _getNativeFilter() {
+  protected _getNativeFilter(): PropertyFilter<GeoJsonProperties> {
     return (this.options.nativeFilter
       ? this.options.nativeFilter
       : []) as PropertyFilter;
@@ -284,7 +286,7 @@ export abstract class VectorAdapter<
     type: VectorAdapterLayerType,
     filter?: any[],
     layout?: AnyLayout
-  ) {
+  ): Promise<void> {
     const { minZoom, maxZoom } = this.options;
     let mType: MapboxLayerType | undefined;
 
@@ -328,11 +330,13 @@ export abstract class VectorAdapter<
     }
   }
 
-  protected _onAddLayer(sourceId: string, options?: AnySourceData) {
+  protected _onAddLayer(sourceId: string, options?: AnySourceData): void {
     // ignore
   }
 
-  protected async _updateLayerPaint(type: VectorAdapterLayerType) {
+  protected async _updateLayerPaint(
+    type: VectorAdapterLayerType
+  ): Promise<void> {
     const layerName = this._getLayerNameFromType(type);
 
     if (this.options.paint) {
@@ -369,11 +373,13 @@ export abstract class VectorAdapter<
     }
   }
 
-  protected _getLayerNameFromType(type: VectorAdapterLayerType) {
+  protected _getLayerNameFromType(type: VectorAdapterLayerType): string {
     return type + '-' + this._layerId;
   }
 
-  protected _getSelectionLayerNameFromType(type: VectorAdapterLayerType) {
+  protected _getSelectionLayerNameFromType(
+    type: VectorAdapterLayerType
+  ): string {
     return type + '-' + this._selectionName;
   }
 
@@ -432,7 +438,7 @@ export abstract class VectorAdapter<
     return feature.id;
   }
 
-  protected async _registerImage(paint: IconOptions) {
+  protected async _registerImage(paint: IconOptions): Promise<void> {
     if (isIcon(paint) && paint.html && this.map) {
       const imageExist = this.map.hasImage(paint.html);
       if (!imageExist) {
@@ -453,7 +459,7 @@ export abstract class VectorAdapter<
     }
   }
 
-  protected _selectFeature(feature: Feature | Feature[]) {
+  protected _selectFeature(feature: Feature | Feature[]): void {
     const features = Array.isArray(feature) ? feature : [feature];
     this.select([
       [
@@ -466,19 +472,19 @@ export abstract class VectorAdapter<
     ]);
   }
 
-  protected _unselectFeature(feature: Feature | Feature[]) {
+  protected _unselectFeature(feature: Feature | Feature[]): void {
     // ignore
   }
 
-  protected _getAdditionalLayerOptions() {
+  protected _getAdditionalLayerOptions(): Record<string, unknown> {
     return {};
   }
 
-  protected _updateFilter() {
+  protected _updateFilter(): void {
     this._updatePropertiesFilter();
   }
 
-  protected _updatePropertiesFilter() {
+  protected _updatePropertiesFilter(): void {
     const layers = this.layer;
     if (layers) {
       this._types.forEach((t) => {
@@ -542,7 +548,10 @@ export abstract class VectorAdapter<
     }
   }
 
-  protected _convertToMapboxFilter(filters: PropertiesFilter, reverse = false) {
+  protected _convertToMapboxFilter(
+    filters: PropertiesFilter,
+    reverse = false
+  ): (any[] | 'all' | 'any' | undefined)[] {
     const _operationsAliases = reverse ? reversOperations : operationsAliases;
     const filter = filters.map((x) => {
       if (typeof x === 'string') {
@@ -559,7 +568,7 @@ export abstract class VectorAdapter<
     return filter;
   }
 
-  protected isFeatureSelected(feature: Feature) {
+  protected isFeatureSelected(feature: Feature): boolean {
     if (this._selectedFeatureIds) {
       const filterId = this._getFeatureFilterId(feature);
       if (filterId) {

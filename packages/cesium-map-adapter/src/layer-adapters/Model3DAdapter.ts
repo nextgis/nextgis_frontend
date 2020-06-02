@@ -21,11 +21,11 @@ export class Model3DAdapter extends BaseAdapter<Model3DOptions, Layer> {
   private _extent?: LngLatBoundsArray;
   private _layer?: Model;
 
-  onTerrainChange = () => {
+  onTerrainChange = (): void => {
     this.watchHeight();
   };
 
-  addLayer(opt: Model3DOptions) {
+  addLayer(opt: Model3DOptions): Model {
     this.options = { ...this.options, ...opt };
     // const modelMatrix = Transforms.eastNorthUpToFixedFrame(position);
 
@@ -44,23 +44,23 @@ export class Model3DAdapter extends BaseAdapter<Model3DOptions, Layer> {
     return this._layer;
   }
 
-  getExtent() {
+  getExtent(): LngLatBoundsArray | undefined {
     return this._extent;
   }
 
-  showLayer(layer: Layer) {
+  showLayer(layer: Layer): void {
     layer = layer || this._layer;
     layer.show = true;
     super.showLayer();
   }
 
-  hideLayer(layer: Layer) {
+  hideLayer(layer: Layer): void {
     layer = layer || this._layer;
     layer.show = false;
     super.hideLayer();
   }
 
-  removeLayer() {
+  removeLayer(): void {
     if (this._layer) {
       this.map.scene.primitives.remove(this._layer);
     }

@@ -67,7 +67,7 @@ export interface TreeLayer extends TreeItem {
 
   layer_url?: string;
 
-  adapter?: NgwLayerAdapterType;
+  adapter?: string;
   url?: string;
 
   updateWmsParams?: (parans: any) => any;

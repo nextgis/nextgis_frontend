@@ -33,11 +33,13 @@ export class ItemProperties {
     }
   }
 
-  add(propOpt: ItemPropertyConfig<keyof ItemPropertyTypes>) {
+  add(propOpt: ItemPropertyConfig<keyof ItemPropertyTypes>): void {
     this._setPropertyHandler(propOpt);
   }
 
-  _setPropertyHandler(propOpt: ItemPropertyConfig<keyof ItemPropertyTypes>) {
+  _setPropertyHandler(
+    propOpt: ItemPropertyConfig<keyof ItemPropertyTypes>
+  ): void {
     const handlers = ItemProperties.handlers;
     let handler = propOpt.handler;
     if (!handler && propOpt.type) {
@@ -63,13 +65,13 @@ export class ItemProperties {
     }
   }
 
-  update() {
+  update(): void {
     this.list().forEach((x) => {
       x.update();
     });
   }
 
-  get(name: string) {
+  get(name: string): any {
     const prop = this.property(name);
     if (prop) {
       return prop.get();
@@ -80,22 +82,22 @@ export class ItemProperties {
     name: string,
     value: ItemPropertyTypes[K],
     options?: ItemBasePropertyOptions<ItemPropertyTypes[K]>
-  ) {
+  ): void {
     const prop = this.property(name);
     if (prop) {
       return prop.set(value, options);
     }
   }
 
-  property(name: string) {
+  property(name: string): BaseProperty<any, ItemBasePropertyOptions<any>> {
     return this._properties[name];
   }
 
-  list() {
+  list(): BaseProperty<any, ItemBasePropertyOptions<any>>[] {
     return this._propertiesList.map((x) => this._properties[x]);
   }
 
-  destroy() {
+  destroy(): void {
     for (const p in this._properties) {
       const prop = this.property(p);
       if (prop && prop.destroy) {

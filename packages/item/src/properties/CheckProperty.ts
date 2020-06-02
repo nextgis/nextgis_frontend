@@ -25,7 +25,7 @@ export class CheckProperty<
     this.set(this.get());
   }
 
-  update(value?: V, options?: O) {
+  update(value?: V, options?: O): void {
     if (value) {
       const bubble = (options && options.bubble) || this.options.bubble;
       if (bubble) {
@@ -53,7 +53,7 @@ export class CheckProperty<
     }
   }
 
-  getHierarchyValue() {
+  getHierarchyValue(): boolean | undefined {
     return (
       this.get() &&
       this.getParents().every((x) => {
@@ -67,57 +67,57 @@ export class CheckProperty<
     return value;
   }
 
-  _turnOff(options?: O) {
+  _turnOff(options?: O): void {
     if (this.options.turnOff) {
       this.options.turnOff.call(this, options);
     }
     this._callOnSet(false, options);
     if (this.options.hierarchy && this.isGroup()) {
-      this.blockChilds(options);
+      this.blockChild(options);
     }
   }
 
-  _turnOn(options?: O) {
+  _turnOn(options?: O): void {
     if (this.options.turnOn) {
       this.options.turnOn.call(this, options);
     }
     this._callOnSet(true, options);
     if (this.options.hierarchy && this.isGroup()) {
-      this.unblockChilds(options);
+      this.unblockChild(options);
     }
   }
 
-  block(options?: O) {
+  block(options?: O): void {
     this._blocked = true;
     this._block(options);
   }
 
-  _block(options?: O) {
+  _block(options?: O): void {
     this._turnOff(options);
   }
 
-  unBlock(options?: O) {
+  unBlock(options?: O): void {
     this._blocked = false;
     if (this.getValue()) {
       this._unBlock(options);
     }
   }
 
-  _unBlock(options?: O) {
+  _unBlock(options?: O): void {
     this._turnOn(options);
   }
 
-  blockChilds(options?: O) {
+  blockChild(options?: O): void {
     this.item.tree
       .getDescendants()
       .forEach((x) => this._blockChild(x, options));
   }
 
-  unblockChilds(options?: O) {
+  unblockChild(options?: O): void {
     this.item.tree.getChildren().forEach((x) => this._unBlockChild(x, options));
   }
 
-  _blockChild(item: Item, options?: O) {
+  _blockChild(item: Item, options?: O): void {
     const prop =
       item.properties &&
       (item.properties.property(this.name) as CheckProperty<V, O>);
@@ -126,7 +126,7 @@ export class CheckProperty<
     }
   }
 
-  _unBlockChild(item: Item, options?: O) {
+  _unBlockChild(item: Item, options?: O): void {
     const prop =
       item.properties &&
       (item.properties.property(this.name) as CheckProperty<V, O>);
@@ -135,7 +135,7 @@ export class CheckProperty<
     }
   }
 
-  _propagation(value?: V, options?: O) {
+  _propagation(value?: V, options?: O): void {
     if (this.isGroup()) {
       const children = this.item.tree.getChildren();
       for (let fry = 0; fry < children.length; fry++) {

@@ -8,11 +8,11 @@ export class Clipboard {
     }
   }
 
-  static copy = (text: string) => {
+  static copy(text: string): Clipboard {
     return new Clipboard(text);
-  };
+  }
 
-  copy(text: string) {
+  copy(text: string): void {
     try {
       if ((navigator as any).clipboard) {
         (navigator as any).clipboard.writeText(text);

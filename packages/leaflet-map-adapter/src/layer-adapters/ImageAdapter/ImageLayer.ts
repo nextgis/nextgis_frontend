@@ -75,21 +75,21 @@ export class ImageLayer extends L.Layer {
     this.wmsParams = L.Util.extend({}, this.defaultWmsParams, params);
   }
 
-  setParams(params: any) {
+  setParams(params: any): void {
     L.Util.extend(this.wmsParams, params);
     this.update();
   }
 
-  getAttribution() {
+  getAttribution(): string {
     return this.options.attribution || '';
   }
 
-  onAdd() {
+  onAdd(): this {
     this.update();
     return this;
   }
 
-  onRemove(map: L.Map) {
+  onRemove(map: L.Map): this {
     if (this._currentOverlay) {
       map.removeLayer(this._currentOverlay);
       delete this._currentOverlay;
@@ -100,13 +100,15 @@ export class ImageLayer extends L.Layer {
     return this;
   }
 
-  getEvents() {
+  getEvents(): {
+    moveend: () => void;
+  } {
     return {
       moveend: this.update,
     };
   }
 
-  update() {
+  update(): void {
     if (!this._map) {
       return;
     }
@@ -167,28 +169,28 @@ export class ImageLayer extends L.Layer {
     }
   }
 
-  setOpacity(opacity: number) {
+  setOpacity(opacity: number): void {
     this.options.opacity = opacity;
     if (this._currentOverlay) {
       this._currentOverlay.setOpacity(opacity);
     }
   }
 
-  bringToBack() {
+  bringToBack(): void {
     this.options.isBack = true;
     if (this._currentOverlay) {
       this._currentOverlay.bringToBack();
     }
   }
 
-  bringToFront() {
+  bringToFront(): void {
     this.options.isBack = false;
     if (this._currentOverlay) {
       this._currentOverlay.bringToFront();
     }
   }
 
-  setZIndex(zIndex: number) {
+  setZIndex(zIndex: number): void {
     this.options.zIndex = zIndex;
     if (this._currentOverlay) {
       this._currentOverlay.setZIndex(zIndex);
@@ -196,7 +198,7 @@ export class ImageLayer extends L.Layer {
   }
 
   // See L.TileLayer.WMS: onAdd() & getTileUrl()
-  updateWmsParams(map?: L.Map) {
+  updateWmsParams(map?: L.Map): void {
     if (!map) {
       map = this._map;
     }
@@ -231,7 +233,7 @@ export class ImageLayer extends L.Layer {
     }
   }
 
-  getImageUrl() {
+  getImageUrl(): string {
     const uppercase = this.options.uppercase || false;
     const pstr = L.Util.getParamString(this.wmsParams, this._url, uppercase);
     return this._url + pstr;
