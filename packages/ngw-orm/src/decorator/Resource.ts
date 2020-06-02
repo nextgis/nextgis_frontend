@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import { getMetadataArgsStorage } from '..';
 import { ResourceMetadataArgs } from '../metadata-args/ResourceMetadataArgs';
 import { ResourceOptions } from '../options/ResourceOptions';

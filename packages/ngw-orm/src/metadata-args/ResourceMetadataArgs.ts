@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import { BaseResourceOptions } from '../options/BaseResourceOptions';
 import { Connection } from '../connection/Connection';
 

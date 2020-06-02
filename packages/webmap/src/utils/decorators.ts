@@ -10,7 +10,7 @@ export function onLoad<E extends WebMapEvents = WebMapEvents>(event: keyof E) {
     _target: WebMap,
     _propertyKey: string,
     descriptor: PropertyDescriptor
-  ) {
+  ): PropertyDescriptor {
     const originalMethod = descriptor.value;
 
     descriptor.value = function (

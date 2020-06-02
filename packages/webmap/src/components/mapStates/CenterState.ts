@@ -10,17 +10,17 @@ export class CenterState extends StateItem<LngLatArray> {
   name: keyof MapOptions = 'center';
   event: keyof WebMapEvents = 'moveend';
 
-  getValue() {
+  getValue(): LngLatArray | undefined {
     return this.webMap.getCenter();
   }
-  setValue(val: LngLatArray) {
+  setValue(val: LngLatArray): void {
     this.webMap.setCenter(val);
   }
-  toString(data: LngLatArray) {
+  toString(data: LngLatArray): string {
     const d = data.map((x) => x.toFixed(5));
     return d[0] + '_' + d[1];
   }
-  parse(str: string) {
+  parse(str: string): LngLatArray {
     const lngLat = str.split('_').map(Number) as LngLatArray;
     return lngLat;
   }

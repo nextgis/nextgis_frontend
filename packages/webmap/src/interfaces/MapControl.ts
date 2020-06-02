@@ -31,7 +31,7 @@ export interface AttributionControlOptions {
 }
 
 export interface MapControls {
-  [name: string]: {};
+  [name: string]: Record<string, any>;
   ZOOM: ZoomControlOptions;
   ATTRIBUTION: AttributionControlOptions;
 }
@@ -39,6 +39,7 @@ export interface MapControls {
 export interface MapControl<M extends any = any> {
   onAdd(map?: M): HTMLElement | undefined;
   onRemove(map?: M): unknown;
+  remove?(): void;
 }
 
 export interface ButtonControlOptions {

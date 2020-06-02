@@ -19,6 +19,7 @@ import {
   LayerDefinition,
   LayerAdapterDefinition,
   OnLayerSelectOptions,
+  BaseLayerAdapter,
 } from './interfaces/LayerAdapter';
 import { LayerDef, Type } from './interfaces/BaseTypes';
 
@@ -33,6 +34,8 @@ import {
 import { WebMapEvents } from './interfaces/Events';
 import { FitOptions } from './interfaces/MapAdapter';
 
+type AddedLayers = { [id: string]: LayerAdapter };
+
 export class WebMapLayers<
   M = any,
   L = any,
@@ -42,7 +45,7 @@ export class WebMapLayers<
   private _layersIdCounter = 1;
   private _layersOrderCounter = 1;
   private readonly _baseLayers: string[] = [];
-  private readonly _layers: { [id: string]: LayerAdapter } = {};
+  private readonly _layers: AddedLayers = {};
   private readonly _selectedLayers: string[] = [];
 
   /**
@@ -50,7 +53,7 @@ export class WebMapLayers<
    * But not all layers have borders
    * @param layerDef
    */
-  async fitLayer(layerDef: LayerDef, options?: FitOptions) {
+  async fitLayer(layerDef: LayerDef, options?: FitOptions): Promise<void> {
     const layer = this.getLayer(layerDef);
     if (layer && layer.getExtent) {
       const extent = await layer.getExtent();
@@ -72,7 +75,7 @@ export class WebMapLayers<
     return undefined;
   }
 
-  getBaseLayers() {
+  getBaseLayers(): string[] {
     return this._baseLayers;
   }
 
@@ -108,7 +111,7 @@ export class WebMapLayers<
   }
 
   // TODO: rename to getLayers, getLayers rename to getLayersIds
-  allLayers() {
+  allLayers(): AddedLayers {
     return this._layers;
   }
 
@@ -313,7 +316,9 @@ export class WebMapLayers<
   /**
    * Remove all layer from map and memory.
    */
-  removeLayers(allowCb?: (layer: string, adapter: LayerAdapter) => boolean) {
+  removeLayers(
+    allowCb?: (layer: string, adapter: LayerAdapter) => boolean
+  ): void {
     for (const l in this._layers) {
       let allow = true;
       if (allowCb) {
@@ -333,7 +338,7 @@ export class WebMapLayers<
   /**
    * Remove all layers but not remove basemap.
    */
-  removeOverlays() {
+  removeOverlays(): void {
     this.removeLayers((layerId, layer) => {
       if (layer && layer.options && layer.options.baseLayer) {
         return false;
@@ -346,7 +351,7 @@ export class WebMapLayers<
    * Remove specific layer from map and memory by its definition.
    * @param layerDef
    */
-  removeLayer(layerDef: LayerDef) {
+  removeLayer(layerDef: LayerDef): void {
     const layer = this.getLayer(layerDef);
     const layerId = layer && this.getLayerId(layer);
     if (layer && layerId) {
@@ -406,7 +411,7 @@ export class WebMapLayers<
   async addGeoJsonLayer<K extends keyof LayerAdaptersOptions>(
     opt: GeoJsonAdapterOptions,
     adapter?: K | Type<LayerAdapter>
-  ) {
+  ): Promise<LayerAdapter<any, any, AdapterOptions>> {
     opt = opt || {};
     opt.multiselect = opt.multiselect !== undefined ? opt.multiselect : false;
     opt.unselectOnSecondClick =
@@ -425,14 +430,14 @@ export class WebMapLayers<
   /**
    * Show added layer on the map by it definition.
    */
-  showLayer(layerDef: LayerDef, options: ToggleLayerOptions = {}) {
+  showLayer(layerDef: LayerDef, options: ToggleLayerOptions = {}): void {
     this.toggleLayer(layerDef, true, options);
   }
 
   /**
    * Hide added layer on the map by it definition.
    */
-  hideLayer(layerDef: LayerDef, options: ToggleLayerOptions = {}) {
+  hideLayer(layerDef: LayerDef, options: ToggleLayerOptions = {}): void {
     this.toggleLayer(layerDef, false, options);
   }
 
@@ -453,7 +458,7 @@ export class WebMapLayers<
     layerDef: LayerDef,
     status?: boolean,
     options: ToggleLayerOptions = {}
-  ) {
+  ): void {
     const layer = this.getLayer(layerDef);
     const onMap = layer && layer.options.visibility;
     const toStatus = status !== undefined ? status : !onMap;
@@ -508,7 +513,7 @@ export class WebMapLayers<
     }
   }
 
-  updateLayer(layerDef: LayerDef) {
+  updateLayer(layerDef: LayerDef): void {
     const layer = this.getLayer(layerDef);
     if (layer) {
       if (layer.updateLayer) {
@@ -523,7 +528,7 @@ export class WebMapLayers<
   /**
    * Set transparency for a given layer by number from 0 to 1
    */
-  setLayerOpacity(layerDef: LayerDef, value: number) {
+  setLayerOpacity(layerDef: LayerDef, value: number): void {
     const layer = this.getLayer(layerDef);
     if (layer) {
       if (this.mapAdapter.setLayerOpacity) {
@@ -554,7 +559,7 @@ export class WebMapLayers<
    * @param layerDef
    * @param findFeatureFun
    */
-  selectLayer(layerDef: LayerDef, findFeatureFun?: DataLayerFilter) {
+  selectLayer(layerDef: LayerDef, findFeatureFun?: DataLayerFilter): void {
     const layer = this.getLayer(layerDef);
     if (layer) {
       const adapter = layer as VectorLayerAdapter;
@@ -583,7 +588,7 @@ export class WebMapLayers<
    * @param layerDef
    * @param findFeatureFun
    */
-  unSelectLayer(layerDef: LayerDef, findFeatureFun?: DataLayerFilter) {
+  unSelectLayer(layerDef: LayerDef, findFeatureFun?: DataLayerFilter): void {
     const layer = this.getLayer(layerDef);
     if (layer) {
       const adapter = layer && (layer as VectorLayerAdapter);
@@ -629,7 +634,7 @@ export class WebMapLayers<
     layerDef: LayerDef,
     filters: PropertiesFilter,
     options?: FilterOptions
-  ) {
+  ): void {
     const layer = this.getLayer(layerDef);
     const adapter = layer as VectorLayerAdapter;
     if (adapter.propertiesFilter) {
@@ -644,7 +649,7 @@ export class WebMapLayers<
     }
   }
 
-  removeLayerFilter(layerDef: LayerDef) {
+  removeLayerFilter(layerDef: LayerDef): void {
     const layer = this.getLayer(layerDef);
     const adapter = layer as VectorLayerAdapter;
     if (adapter.removeFilter) {
@@ -666,7 +671,7 @@ export class WebMapLayers<
    * });
    * ```
    */
-  setLayerData(layerDef: LayerDef, data: GeoJsonObject) {
+  setLayerData(layerDef: LayerDef, data: GeoJsonObject): void {
     const vectorAdapter = this.getLayer(layerDef);
     const adapter = vectorAdapter as VectorLayerAdapter;
     if (adapter) {
@@ -691,7 +696,7 @@ export class WebMapLayers<
    * });
    * ```
    */
-  addLayerData(layerDef: LayerDef, data: GeoJsonObject) {
+  addLayerData(layerDef: LayerDef, data: GeoJsonObject): void {
     const layerMem = this.getLayer(layerDef);
     const adapter = layerMem as VectorLayerAdapter;
     if (adapter.addData) {
@@ -711,7 +716,7 @@ export class WebMapLayers<
    * });
    * ```
    */
-  clearLayerData(layerDef: LayerDef, cb?: (feature: Feature) => boolean) {
+  clearLayerData(layerDef: LayerDef, cb?: (feature: Feature) => boolean): void {
     const layerMem = this.getLayer(layerDef);
     const adapter = layerMem as VectorLayerAdapter;
     if (adapter && adapter.clearLayer) {
@@ -737,7 +742,7 @@ export class WebMapLayers<
     return attributions;
   }
 
-  getActiveBaseLayer() {
+  getActiveBaseLayer(): BaseLayerAdapter<any, any, AdapterOptions> | undefined {
     const visibleLayerBaseLayer = this.getBaseLayers().find((x) => {
       return this.isLayerVisible(x);
     });

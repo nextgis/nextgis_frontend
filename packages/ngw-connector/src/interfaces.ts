@@ -137,7 +137,7 @@ export type RequestItemAdditionalParams = { [name: string]: any } & {
 
 export type RequestItemsParams<K extends keyof RequestItemsParamsMap> = (
   | RequestItemsParamsMap[K]
-  | {}
+  | Record<string, unknown>
 ) &
   RequestItemAdditionalParams;
 
