@@ -129,7 +129,7 @@ export function styleFunction(
   }
 }
 
-export function labelStyleFunction(type: VectorAdapterLayerType) {
+export function labelStyleFunction(type: VectorAdapterLayerType): Style {
   let options: TextOptions = {
     font: '12px Calibri,sans-serif',
     overflow: true,
@@ -154,7 +154,7 @@ export function labelStyleFunction(type: VectorAdapterLayerType) {
   });
 }
 
-export function queryToObject(str: string) {
+export function queryToObject(str: string): Record<string, any> {
   const dec = decodeURIComponent;
   const qp = str.split('&');
   const ret: { [name: string]: any } = {};

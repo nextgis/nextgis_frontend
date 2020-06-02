@@ -3,7 +3,6 @@
  */
 
 import { DialogAdapter, DialogAdapterOptions } from '@nextgis/webmap';
-// @ts-ignore
 import dialogPolyfill from 'dialog-polyfill';
 import 'dialog-polyfill/dialog-polyfill.css';
 
@@ -67,28 +66,28 @@ export class Dialog implements DialogAdapter {
     this._addEventsListeners();
   }
 
-  static clean = () => {
+  static clean(): void {
     Dialog.dialogs.forEach((x) => x.destroy());
-  };
+  }
 
-  getContainer() {
+  getContainer(): HTMLDialogElement {
     return this._dialog;
   }
 
-  show() {
+  show(): void {
     this._dialog.showModal();
   }
 
-  close() {
+  close(): void {
     this._dialog.close();
   }
 
-  destroy() {
+  destroy(): void {
     this.close();
     this._dialog.remove();
   }
 
-  updateContent(content?: string | Node) {
+  updateContent(content?: string | Node): void {
     if (!content && this.options.template) {
       content = this.options.template;
     }

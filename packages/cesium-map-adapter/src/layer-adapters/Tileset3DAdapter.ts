@@ -14,35 +14,35 @@ export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
   layer?: Cesium3DTileset;
   private _extent?: LngLatBoundsArray;
 
-  async addLayer(opt: Tileset3DAdapterOptions) {
+  async addLayer(opt: Tileset3DAdapterOptions): Promise<Cesium3DTileset> {
     this.options = { ...opt };
     const tileset = await this._addLayer();
     return tileset;
   }
 
-  onTerrainChange = () => {
+  onTerrainChange = (): void => {
     this.watchHeight();
   };
 
-  beforeRemove() {
+  beforeRemove(): void {
     if (this.layer) {
       this.map.scene.primitives.remove(this.layer);
     }
     super.beforeRemove();
   }
 
-  getExtent() {
+  getExtent(): LngLatBoundsArray | undefined {
     return this._extent;
   }
 
-  showLayer() {
+  showLayer(): void {
     if (this.layer) {
       this.layer.show = true;
     }
     super.showLayer();
   }
 
-  hideLayer() {
+  hideLayer(): void {
     if (this.layer) {
       this.layer.show = false;
     }

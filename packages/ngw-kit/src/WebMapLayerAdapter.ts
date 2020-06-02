@@ -79,7 +79,7 @@ export class WebMapLayerAdapter implements ResourceAdapter {
     return this.layer;
   }
 
-  removeLayer() {
+  removeLayer(): void {
     const mapAdapter = this.options.webMap.mapAdapter;
     if (this.$$onMapClick) {
       this.options.webMap.emitter.off('click', this.$$onMapClick);
@@ -96,13 +96,13 @@ export class WebMapLayerAdapter implements ResourceAdapter {
     delete this._webmapLayersIds;
   }
 
-  showLayer() {
+  showLayer(): void {
     if (this.layer && this.layer.properties) {
       this.layer.properties.property('visibility').set(true);
     }
   }
 
-  hideLayer() {
+  hideLayer(): void {
     if (this.layer && this.layer.properties) {
       this.layer.properties.property('visibility').set(false);
     }
@@ -119,7 +119,7 @@ export class WebMapLayerAdapter implements ResourceAdapter {
     return (this.layer && this.layer.tree.getDescendants()) || [];
   }
 
-  async getIdentificationIds() {
+  async getIdentificationIds(): Promise<number[]> {
     const visibleLayers: number[] = [];
     let ids = this._webmapLayersIds;
     if (!ids) {
@@ -242,11 +242,12 @@ export class WebMapLayerAdapter implements ResourceAdapter {
         item.resourceId = resourceId;
         item.updateWmsParams = (params) =>
           updateImageParams(params, resourceId);
+        const adapter = item.layer_adapter.toUpperCase() as NgwLayerAdapterType;
         item = {
           ...item,
           ...getLayerAdapterOptions(
             {
-              adapter: item.layer_adapter.toUpperCase() as NgwLayerAdapterType,
+              adapter,
               resourceId,
             },
             webMap,
