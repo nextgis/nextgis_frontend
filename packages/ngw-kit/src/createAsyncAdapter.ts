@@ -36,6 +36,8 @@ const supportCls: ResourceCls[] = [
   'vector_layer',
   'raster_layer',
   'webmap',
+  // in tms branch
+  'tmsclient_layer',
 ];
 
 async function createAdapterFromFirstStyle({
