@@ -9,13 +9,13 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Bug Fixes
 
 * **cesium:** fitBounds for not Scene3D modes ([8fa4155](https://github.com/nextgis/nextgisweb_frontend/commit/8fa41559f506a7a41372e0f0e497e215fc0f85f5))
-* **cesium:** geojson terrainsample ([308d3d3](https://github.com/nextgis/nextgisweb_frontend/commit/308d3d352110f9496dded2464c78c663bab7a03b))
-* **cesium:** Tileset#DAdapter set terrain height ([790760f](https://github.com/nextgis/nextgisweb_frontend/commit/790760f0b8b90b9c9d572640612cfc00dabfd5d5))
+* **cesium:** geojson terrain sample ([308d3d3](https://github.com/nextgis/nextgisweb_frontend/commit/308d3d352110f9496dded2464c78c663bab7a03b))
+* **cesium:** Tileset3DAdapter set terrain height ([790760f](https://github.com/nextgis/nextgisweb_frontend/commit/790760f0b8b90b9c9d572640612cfc00dabfd5d5))
 * **examples:** check paint opacity is number ([1105262](https://github.com/nextgis/nextgisweb_frontend/commit/1105262687d8b7e85873fe58933ced82d9cb77af))
 * **examples:** set type for ngw_resource highlight layer ([13ddcdd](https://github.com/nextgis/nextgisweb_frontend/commit/13ddcdd3ad346cad9ae99a6f924bcd62299336c5))
 * **mapbox:** geojson getSelected method ([e0d859c](https://github.com/nextgis/nextgisweb_frontend/commit/e0d859cd186876f0b382e1338d1793151d18dd6a))
 * **ngw-kit:** check company_logo in settings ([decf777](https://github.com/nextgis/nextgisweb_frontend/commit/decf777de5f30f27b15265808fa85c8529021cc1))
-* **ngw-kit:** set correct options when add webmaplayeritem ([0c5cd08](https://github.com/nextgis/nextgisweb_frontend/commit/0c5cd08b62b46fabe88bc51c91f0616d1d8c4a25))
+* **ngw-kit:** set correct options when add WebmapLayerItem ([0c5cd08](https://github.com/nextgis/nextgisweb_frontend/commit/0c5cd08b62b46fabe88bc51c91f0616d1d8c4a25))
 * **ngw-kit:** WebmapLayerItem ordering ([d4a0403](https://github.com/nextgis/nextgisweb_frontend/commit/d4a04038bc76257595d2eea618629a969ca9ca00))
 * **vuetify:** correction for set empty BasemapSelect text ([8ab35e4](https://github.com/nextgis/nextgisweb_frontend/commit/8ab35e426f9333391c746849c0d2316e2cb62ec3))
 * **vuetify:** NgwLayersList root item hide ([abba8cb](https://github.com/nextgis/nextgisweb_frontend/commit/abba8cbd8a46697ba37a768bd2576086591c344c))
@@ -29,25 +29,33 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **cesium:** update layer and map adapter ([c9d6a1d](https://github.com/nextgis/nextgisweb_frontend/commit/c9d6a1db8874586adb5ae1901153e71313aa776b))
 * **ngw-kit:** add ngw basemap suppor for url ([958303e](https://github.com/nextgis/nextgisweb_frontend/commit/958303eed8753d18a8c8d60b72a338c1656388f6))
 * **ngw-kit:** add NgwKit.utils.getCompanyLogo method ([3c6fa09](https://github.com/nextgis/nextgisweb_frontend/commit/3c6fa09321c0e979543b50b93c32da8725920d28))
-* **ngw-kit:** add tmsclient_layer adapter class support ([87b5976](https://github.com/nextgis/nextgisweb_frontend/commit/87b59760a574ffc66b1aec1d2df3af301efe1326))
-* **qms-kit:** use y_origin_top option ([fa02dfd](https://github.com/nextgis/nextgisweb_frontend/commit/fa02dfd2af3927478fd9f50de7d8173b2dc4f05b))
+* **ngw-kit:** add `tmsclient_layer` adapter class support ([87b5976](https://github.com/nextgis/nextgisweb_frontend/commit/87b59760a574ffc66b1aec1d2df3af301efe1326))
+* **qms-kit:** use `y_origin_top` option ([fa02dfd](https://github.com/nextgis/nextgisweb_frontend/commit/fa02dfd2af3927478fd9f50de7d8173b2dc4f05b))
 * **webmap:** vector layer select event ([edd18ba](https://github.com/nextgis/nextgisweb_frontend/commit/edd18baa3d2b0e5886812e09795de4f041be23ab))
 * **webmap:** zoomIn and zoomOut MapAdapter optional methods ([70b807f](https://github.com/nextgis/nextgisweb_frontend/commit/70b807fd1d157b5505a3d815f24a02fbb1fff6a6))
 
 
 ### Performance Improvements
 
-* **webmap:** addControl coner queue ([5c21367](https://github.com/nextgis/nextgisweb_frontend/commit/5c21367fc1a0142d56e443948d7d01f49549d5b1))
+* **webmap:** addControl conner queue ([5c21367](https://github.com/nextgis/nextgisweb_frontend/commit/5c21367fc1a0142d56e443948d7d01f49549d5b1))
 
-
-### wip
-
-* rename VectorLayerAdapterType ([89a2c83](https://github.com/nextgis/nextgisweb_frontend/commit/89a2c83135e839f3eec373f93e5df777a7b81325))
 
 
 ### BREAKING CHANGES
 
-* rename VectorLayerAdapter types: circle > point; fill > polygon
+* Vector layer adapter types were renamed: `circle` > `point`; `fill` > `polygon`.
+
+    The `type` parameter still optional, but it is better to specify explicitly.
+Especially when the layer is initiated empty.
+
+```js
+// before
+webMap.addLayer('GEOJSON', { data: geojson, type: 'fill'});
+// after
+webMap.addLayer('GEOJSON', { data: geojson, type: 'polygon'});
+```
+
+* Updated libraries for linting. Added new rule for  worning when no set return type in TypeScript functions.
 
 
 
