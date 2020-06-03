@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.32.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.31.0...v0.32.0) (2020-06-03)
+
+
+### Bug Fixes
+
+* **vuetify:** correction for set empty BasemapSelect text ([8ab35e4](https://github.com/nextgis/nextgisweb_frontend/commit/8ab35e426f9333391c746849c0d2316e2cb62ec3))
+* **vuetify:** NgwLayersList root item hide ([abba8cb](https://github.com/nextgis/nextgisweb_frontend/commit/abba8cbd8a46697ba37a768bd2576086591c344c))
+
+
+
+
+
 # [0.31.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.2...v0.31.0) (2020-05-13)
 
 
