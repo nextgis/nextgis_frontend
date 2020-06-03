@@ -92,7 +92,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   }
 
   // create(options: MapOptions = {target: 'map'}) {
-  create(options: MapboxglMapAdapterOptions) {
+  create(options: MapboxglMapAdapterOptions): Promise<unknown> {
     return new Promise((resolve, reject) => {
       if (!this.map) {
         this.options = options;
@@ -161,17 +161,17 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     });
   }
 
-  destroy() {
+  destroy(): void {
     if (this.map) {
       this.map.remove();
     }
   }
 
-  getContainer() {
+  getContainer(): HTMLElement | undefined {
     return this.map && this.map.getContainer();
   }
 
-  setView(center: LngLatArray, zoom?: number) {
+  setView(center: LngLatArray, zoom?: number): void {
     if (this.map) {
       const options: mapboxgl.CameraOptions = { center };
       if (zoom) {
@@ -210,7 +210,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     }
   }
 
-  getBounds() {
+  getBounds(): LngLatBoundsArray | undefined {
     if (this.map) {
       const bounds = this.map.getBounds();
       const ar = bounds.toArray();

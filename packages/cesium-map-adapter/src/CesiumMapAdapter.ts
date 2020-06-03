@@ -44,8 +44,9 @@ import { getDefaultTerrain } from './utils/getDefaultTerrain';
 
 type Layer = any;
 type Control = any;
+type MapClickEvent = any;
 
-export class CesiumMapAdapter implements MapAdapter<any, Layer> {
+export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
   static layerAdapters = {
     // IMAGE: ImageAdapter,
     TILE: TileAdapter,
@@ -343,7 +344,7 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
     //
   }
 
-  onMapClick(evt: any): void {
+  onMapClick(evt: MapClickEvent): void {
     //
   }
 

@@ -4,12 +4,12 @@
 import Vue from 'vue';
 import VueNgwMap from './components/VueNgwMap';
 
-export const capitalizeFirstLetter = (str: string) => {
+export function capitalizeFirstLetter(str: string): string {
   if (!str || typeof str.charAt !== 'function') {
     return str;
   }
   return str.charAt(0).toUpperCase() + str.slice(1);
-};
+}
 
 interface VueElement extends Vue {
   [prop: string]: any;
@@ -18,7 +18,7 @@ interface VueElement extends Vue {
 export function propsBinder(
   vueElement: VueElement,
   props: Record<string, any>
-) {
+): void {
   for (const key in props) {
     const setMethodName = 'set' + capitalizeFirstLetter(key);
     if (key in props && vueElement[setMethodName]) {

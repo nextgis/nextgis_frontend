@@ -29,7 +29,7 @@ import {
 } from './interfaces';
 import { createOnFirstShowAdapter } from './createBasemapWebmapItemAdapter';
 
-export class WebMapLayerAdapter implements ResourceAdapter {
+export class WebMapLayerAdapter<M = any> implements ResourceAdapter<M> {
   layer?: WebMapLayerItem;
 
   WebMapLayerItem: Type<WebMapLayerItem> = WebMapLayerItem;
@@ -49,7 +49,7 @@ export class WebMapLayerAdapter implements ResourceAdapter {
 
   private $$onMapClick?: (ev: MapClickEvent) => void;
 
-  constructor(public map: any, public options: WebMapAdapterOptions) {
+  constructor(public map: M, public options: WebMapAdapterOptions) {
     const r = options.resourceId;
     if (Array.isArray(r)) {
       this.resourceId = r[0];

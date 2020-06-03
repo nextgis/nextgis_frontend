@@ -25,7 +25,7 @@ export class WebMapLayerItem extends Item<ItemOptions> {
       {
         type: 'boolean',
         name: 'visibility',
-        getProperty(item?: WebMapLayerItem) {
+        getProperty(item?: WebMapLayerItem): boolean {
           if (item) {
             if (item.item.item_type === 'group') {
               return true;
@@ -37,7 +37,11 @@ export class WebMapLayerItem extends Item<ItemOptions> {
           }
           return false;
         },
-        onSet(value: boolean, options?: any, item?: WebMapLayerItem) {
+        onSet(
+          value: boolean,
+          options?: Record<string, any>,
+          item?: WebMapLayerItem
+        ): void {
           if (item && item.layer && item.item.item_type === 'layer') {
             if (value) {
               item.webMap.showLayer(item.layer);
@@ -85,7 +89,7 @@ export class WebMapLayerItem extends Item<ItemOptions> {
     this._init(item);
   }
 
-  async initItem(item: TreeGroup | TreeLayer) {
+  async initItem(item: TreeGroup | TreeLayer): Promise<void> {
     let newLayer = item._layer;
     const i = item;
     if (item.item_type === 'group' || item.item_type === 'root') {
@@ -160,7 +164,7 @@ export class WebMapLayerItem extends Item<ItemOptions> {
     }
   }
 
-  bringToFront() {
+  bringToFront(): void {
     //
   }
 

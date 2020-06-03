@@ -16,6 +16,7 @@ import {
   NgwLayerOptions,
   ResourceAdapter,
   NgwIdentify,
+  CompanyLogoOptions,
 } from '@nextgis/ngw-kit';
 import NgwConnector, { Credentials } from '@nextgis/ngw-connector';
 import { NgwMap } from './NgwMap';
@@ -143,9 +144,4 @@ export interface NgwLayersMem {
 
 export interface NgwLayers {
   [layerId: string]: NgwLayersMem;
-}
-
-export interface CompanyLogoOptions {
-  padding?: string;
-  cssClass?: string;
 }

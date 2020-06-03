@@ -21,7 +21,10 @@ import {
 import { WebMapLayerAdapter } from '../WebMapLayerAdapter';
 import { getLayerAdapterOptions as getLayerAdapterOptions_ } from './getLayerAdapterOptions';
 
-export function updateImageParams(params: any, resourceId: number) {
+export function updateImageParams(
+  params: Record<string, any>,
+  resourceId: number
+): Record<string, any> {
   const { bbox, width, height } = params;
   return {
     resource: resourceId,
@@ -242,7 +245,9 @@ export function pixelsInMeterWidth(): number {
   return _pixelsInMeter;
 }
 
-export function applyMixins(derivedCtor: any, baseCtors: any[]): void {
+type Ctor = any;
+
+export function applyMixins(derivedCtor: Ctor, baseCtors: Ctor[]): void {
   baseCtors.forEach((baseCtor) => {
     Object.getOwnPropertyNames(baseCtor.prototype).forEach((name) => {
       const descriptor = Object.getOwnPropertyDescriptor(

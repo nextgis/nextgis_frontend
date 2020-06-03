@@ -8,6 +8,8 @@ import { CheckOptions } from '../interfaces';
 
 type VAL = boolean;
 
+type PreparedValue = any;
+
 export class CheckProperty<
   V extends VAL = VAL,
   O extends CheckOptions<VAL> = CheckOptions<VAL>
@@ -63,7 +65,7 @@ export class CheckProperty<
     );
   }
 
-  _prepareValue(value?: any): V | undefined {
+  _prepareValue(value?: PreparedValue): V | undefined {
     return value;
   }
 
