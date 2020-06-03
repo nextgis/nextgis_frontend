@@ -22,7 +22,10 @@ export class PanelControl extends Control {
     this.panelContainer = panelContainer;
   }
 
-  async addControl(control: Control, position: ControlPositions) {
+  async addControl(
+    control: Control,
+    position: ControlPositions
+  ): Promise<void> {
     const map = this.getMap();
     const target = this.panelContainer.newPositionContainer(position);
     if (target) {
@@ -37,7 +40,7 @@ export class PanelControl extends Control {
     }
   }
 
-  removeControl(control: Control) {
+  removeControl(control: Control): void {
     const map = this.getMap();
     map.removeControl(control);
   }

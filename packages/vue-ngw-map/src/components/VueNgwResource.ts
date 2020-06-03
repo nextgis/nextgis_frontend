@@ -22,14 +22,14 @@ export class VueNgwResource extends Vue {
 
   layer?: ResourceAdapter;
 
-  beforeDestroy() {
+  beforeDestroy(): void {
     if (this.parentContainer.ngwMap && this.layer) {
       this.parentContainer.ngwMap.removeLayer(this.layer);
       this.layer = undefined;
     }
   }
 
-  async setResourceId(resourceId: string, oldId?: number) {
+  async setResourceId(resourceId: string, oldId?: number): Promise<void> {
     const ngwMap = this.parentContainer.ngwMap;
     const layer = this.layer;
     let order: number | undefined;
@@ -54,7 +54,7 @@ export class VueNgwResource extends Vue {
     }
   }
 
-  async mounted() {
+  async mounted(): Promise<void> {
     this.parentContainer = findNgwMapParent(this.$parent);
 
     await this.setResourceId(this.$props.resourceId);

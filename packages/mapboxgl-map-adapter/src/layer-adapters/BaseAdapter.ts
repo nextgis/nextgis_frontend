@@ -18,7 +18,7 @@ export abstract class BaseAdapter<O extends AdapterOptions = AdapterOptions>
     this._layerId = `layer-${ID++}`;
   }
 
-  beforeRemove() {
+  beforeRemove(): void {
     Object.assign(this, { map: undefined });
   }
 

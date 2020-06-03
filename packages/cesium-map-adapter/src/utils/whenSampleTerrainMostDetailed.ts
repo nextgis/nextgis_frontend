@@ -9,7 +9,7 @@ export function whenSampleTerrainMostDetailed(
   terrainProvider: TerrainProvider,
   positions: Cartographic[],
   callback: (e: any) => void
-) {
+): void {
   if (terrainProvider instanceof EllipsoidTerrainProvider) {
     positions.forEach((x) => (x.height = 0));
     callback(positions);

@@ -1,5 +1,5 @@
 import NgwConnector from '@nextgis/ngw-connector';
-import { CompanyLogoOptions } from '@nextgis/ngw-map';
+import { CompanyLogoOptions } from '../interfaces';
 
 export async function getCompanyLogo(
   connector: NgwConnector,

@@ -16,6 +16,8 @@ import {
   FeatureCollection,
   GeometryCollection,
   GeometryObject,
+  Geometry,
+  GeoJsonProperties,
 } from 'geojson';
 import { TLayer } from '../MapboxglMapAdapter';
 import { VectorAdapter, Feature } from './VectorAdapter';
@@ -27,6 +29,8 @@ import {
 } from '../util/geomType';
 
 let ID = 0;
+
+type Layers = LayerDefinition<Feature<Geometry, GeoJsonProperties>, TLayer>[];
 
 export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   selected = false;
@@ -49,7 +53,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     return layer;
   }
 
-  beforeRemove() {
+  beforeRemove(): void {
     if (this.map) {
       const source = this.map.getSource(this._sourceId);
       if (source) {
@@ -59,7 +63,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     super.beforeRemove();
   }
 
-  clearLayer(cb?: (feature: Feature) => boolean) {
+  clearLayer(cb?: (feature: Feature) => boolean): void {
     let features: Feature[] = [];
     const source = this.map.getSource(this._sourceId) as GeoJSONSource;
     if (cb) {
@@ -69,7 +73,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     source.setData({ type: 'FeatureCollection', features });
   }
 
-  async addData(data: GeoJsonObject) {
+  async addData(data: GeoJsonObject): Promise<void> {
     let type: VectorAdapterLayerType | undefined;
     if (this.options.type) {
       type = this.options.type;
@@ -97,7 +101,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     }
   }
 
-  getLayers() {
+  getLayers(): Layers {
     const filtered = this._filteredFeatureIds;
     const filterProperties = this._filterProperties;
     if (filterProperties) {
@@ -120,18 +124,18 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     });
   }
 
-  filter(fun: DataLayerFilter<Feature, TLayer>) {
+  filter(fun: DataLayerFilter<Feature, TLayer>): void {
     this._filterFun = fun;
     this._filter(fun);
   }
 
-  removeFilter() {
+  removeFilter(): void {
     this._filterFun = undefined;
     this._filteredFeatureIds = undefined;
     this._updateFilter();
   }
 
-  getSelected() {
+  getSelected(): Layers {
     const features: LayerDefinition<Feature, TLayer>[] = [];
     const selectedFeatureIds = this._selectedFeatureIds;
     const selectProperties = this._selectProperties;
@@ -153,7 +157,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     return features;
   }
 
-  select(find?: DataLayerFilter<Feature, TLayer> | PropertiesFilter) {
+  select(find?: DataLayerFilter<Feature, TLayer> | PropertiesFilter): void {
     if (find) {
       if (typeof find === 'function') {
         const features = this._getFeatures().filter((x) =>
@@ -171,7 +175,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     }
   }
 
-  unselect(find?: DataLayerFilter<Feature, TLayer> | PropertiesFilter) {
+  unselect(find?: DataLayerFilter<Feature, TLayer> | PropertiesFilter): void {
     this._selectProperties = undefined;
     if (find) {
       if (typeof find === 'function') {
@@ -187,7 +191,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     }
   }
 
-  protected _onAddLayer(sourceId: string) {
+  protected _onAddLayer(sourceId: string): void {
     let source = this.map.getSource(sourceId) as GeoJSONSource;
     if (!source) {
       const sourceOpt: GeoJSONSourceRaw = {
@@ -230,7 +234,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     }
   }
 
-  protected _selectFeature(feature: Feature | Feature[]) {
+  protected _selectFeature(feature: Feature | Feature[]): void {
     let selectedFeatureIds = this._selectedFeatureIds || [];
     if (this.options && !this.options.multiselect) {
       selectedFeatureIds = [];
@@ -255,7 +259,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     }
   }
 
-  protected _unselectFeature(feature?: Feature | Feature[]) {
+  protected _unselectFeature(feature?: Feature | Feature[]): void {
     if (feature) {
       let features: Feature[] = [];
       if (Array.isArray(feature)) {
@@ -284,7 +288,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     }
   }
 
-  protected _updateFilter() {
+  protected _updateFilter(): void {
     // it is not yet possible to use callbacks and properties filters together
     if (this._filterProperties || this._selectProperties) {
       super._updateFilter();

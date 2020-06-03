@@ -12,7 +12,7 @@ type Layer = CesiumTerrainProvider;
 export class TerrainAdapter extends BaseAdapter<TileAdapterOptions, Layer> {
   private _layer?: Layer;
 
-  addLayer(opt: TileAdapterOptions) {
+  addLayer(opt: TileAdapterOptions): CesiumTerrainProvider {
     this.options = { ...opt };
     const layer = new CesiumTerrainProvider({
       url: opt.url,
@@ -23,14 +23,14 @@ export class TerrainAdapter extends BaseAdapter<TileAdapterOptions, Layer> {
     return layer;
   }
 
-  showLayer() {
+  showLayer(): void {
     if (this._layer) {
       this.map.terrainProvider = this._layer;
     }
     super.showLayer();
   }
 
-  hideLayer() {
+  hideLayer(): void {
     this.map.terrainProvider = getDefaultTerrain();
     super.hideLayer();
   }

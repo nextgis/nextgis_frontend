@@ -30,10 +30,10 @@ export class NgwLeaflet extends NgwMap {
   constructor(options: NgwMapOptions) {
     super(new LeafletMapAdapter(), options);
   }
-  static create = async (options: NgwMapOptions) => {
+  static async create(options: NgwMapOptions): Promise<NgwLeaflet> {
     const ngwMap = new NgwLeaflet(options);
     return ngwMap.onLoad();
-  };
+  }
 }
 
 export default NgwLeaflet;

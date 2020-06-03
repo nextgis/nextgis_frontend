@@ -238,3 +238,8 @@ export type GetClassAdapterByType = {
 };
 
 export type GetClassAdapter = GetClassAdapterCallback | GetClassAdapterByType;
+
+export interface CompanyLogoOptions {
+  padding?: string;
+  cssClass?: string;
+}

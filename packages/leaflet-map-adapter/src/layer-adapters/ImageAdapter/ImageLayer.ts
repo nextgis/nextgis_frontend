@@ -57,7 +57,7 @@ export class ImageLayer extends L.Layer {
   private _currentUrl?: string;
   private _currentOverlay?: L.ImageOverlay;
 
-  constructor(url: string, options: any) {
+  constructor(url: string, options: Record<string, any>) {
     super(options);
     this._url = url;
 
@@ -75,7 +75,7 @@ export class ImageLayer extends L.Layer {
     this.wmsParams = L.Util.extend({}, this.defaultWmsParams, params);
   }
 
-  setParams(params: any): void {
+  setParams(params: Record<string, any>): void {
     L.Util.extend(this.wmsParams, params);
     this.update();
   }

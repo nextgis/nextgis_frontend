@@ -43,6 +43,8 @@ import { propertiesFilter } from './utils/propertiesFilter';
 import { getBoundsPolygon } from './utils/getBoundsPolygon';
 import { updateGeoJsonAdapterOptions } from './utils/updateGeoJsonAdapterOptions';
 
+type EmitStatusEventData = any;
+
 const OPTIONS: MapOptions = {
   minZoom: 0,
   maxZoom: 21,
@@ -427,7 +429,10 @@ export class BaseWebMap<
     return { stop };
   }
 
-  protected _emitStatusEvent(eventName: keyof E, data?: any): void {
+  protected _emitStatusEvent(
+    eventName: keyof E,
+    data?: EmitStatusEventData
+  ): void {
     // ugly hack to disable type checking error
     const _eventName = eventName as keyof WebMapEvents;
     this._eventsStatus[_eventName] = true;

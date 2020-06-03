@@ -22,7 +22,7 @@ export class VueNgwMap<M = any> extends Vue {
   ngwMap!: NgwMap<M>;
   ready = false;
 
-  async mounted() {
+  async mounted(): Promise<void> {
     this.ngwMap = new NgwMap(this.mapAdapter, {
       ...this.$props,
       ...this.mapOptions,
@@ -36,7 +36,7 @@ export class VueNgwMap<M = any> extends Vue {
     });
   }
 
-  beforeDestroy() {
+  beforeDestroy(): void {
     this.ngwMap.destroy();
   }
 

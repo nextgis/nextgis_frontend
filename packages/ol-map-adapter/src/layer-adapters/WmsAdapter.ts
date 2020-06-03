@@ -13,7 +13,7 @@ export class WmsAdapter implements BaseLayerAdapter {
 
   constructor(public map: Map, public options: WmsAdapterOptions) {}
 
-  addLayer(options: WmsAdapterOptions) {
+  addLayer(options: WmsAdapterOptions): TileLayer {
     const wmsOptions: TileWMSOptions = {
       url: options.url,
       params: { LAYERS: options.layers, VERSION: options.version },

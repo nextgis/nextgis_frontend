@@ -33,6 +33,21 @@ export interface FileUploadResp {
   upload_meta: FileMeta[];
 }
 
+export interface PyramidSettingsPyramidCompanyLogo {
+  link?: 'string';
+  enabled: boolean;
+}
+
+export interface PyramidSettingsPyramid {
+  support_url?: string;
+  units: 'metric';
+  degree_format: 'dd';
+  measurement_srid: 4326;
+  company_logo?: PyramidSettingsPyramidCompanyLogo;
+}
+
+export type PyramidSettings = PyramidSettingsPyramid | Record<string, any>;
+
 export interface PyramidRoute {
   [requestItemName: string]: string[];
 }
@@ -57,6 +72,7 @@ export interface RequestItemsResponseMap {
 
 export interface GetRequestItemsResponseMap extends RequestItemKeys {
   'pyramid.route': PyramidRoute;
+  'pyramid.settings': PyramidSettings;
   'resource.item': ResourceItem;
   'resource.search': ResourceItem[];
   'resource.child': any;

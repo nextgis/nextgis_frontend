@@ -10,7 +10,7 @@ import { resolutionOptions } from '../utils/gerResolution';
 export class TileAdapter implements BaseLayerAdapter {
   constructor(public map: Map, public options: TileAdapterOptions) {}
 
-  addLayer(options: TileAdapterOptions) {
+  addLayer(options: TileAdapterOptions): TileLayer {
     const xyzOpt: Options = {
       attributions: options.attribution ? [options.attribution] : [],
       url: options.url,
