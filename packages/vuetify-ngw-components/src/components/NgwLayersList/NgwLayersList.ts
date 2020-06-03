@@ -122,9 +122,9 @@ export class NgwLayersList extends Vue {
   private create() {
     this.ngwMap.onLoad().then(() => {
       this.destroy();
-      this.updateItems();
       const __updateItems = debounce(() => this._updateItems());
       this.__updateItems = __updateItems;
+      this.updateItems();
 
       this.ngwMap.emitter.on('layer:add', __updateItems);
       this.ngwMap.emitter.on('layer:remove', __updateItems);

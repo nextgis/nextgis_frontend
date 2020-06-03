@@ -189,18 +189,20 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
           name = obj.properties && obj.properties[nameField];
         }
 
-        const description = new Property();
-        description.getValue = () => {
-          if (this.options.popupOptions?.createPopupContent) {
-            const content = this.options.popupOptions.createPopupContent({
-              feature: obj,
-            });
-            if (content instanceof HTMLElement) {
-              return content.outerHTML;
+        //@ts-ignore
+        const description: Property = {
+          getValue: () => {
+            if (this.options.popupOptions?.createPopupContent) {
+              const content = this.options.popupOptions.createPopupContent({
+                feature: obj,
+              });
+              if (content instanceof HTMLElement) {
+                return content.outerHTML;
+              }
+              return content;
             }
-            return content;
-          }
-          return '';
+            return '';
+          },
         };
 
         source.entities.add({
