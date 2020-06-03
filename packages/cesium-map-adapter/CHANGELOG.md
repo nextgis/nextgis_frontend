@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.32.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.31.0...v0.32.0) (2020-06-03)
+
+
+### Bug Fixes
+
+* **cesium:** fitBounds for not Scene3D modes ([8fa4155](https://github.com/nextgis/nextgisweb_frontend/commit/8fa41559f506a7a41372e0f0e497e215fc0f85f5))
+* **cesium:** geojson terrainsample ([308d3d3](https://github.com/nextgis/nextgisweb_frontend/commit/308d3d352110f9496dded2464c78c663bab7a03b))
+* **cesium:** Tileset#DAdapter set terrain height ([790760f](https://github.com/nextgis/nextgisweb_frontend/commit/790760f0b8b90b9c9d572640612cfc00dabfd5d5))
+* **vuetify:** correction for set empty BasemapSelect text ([8ab35e4](https://github.com/nextgis/nextgisweb_frontend/commit/8ab35e426f9333391c746849c0d2316e2cb62ec3))
+* **vuetify:** NgwLayersList root item hide ([abba8cb](https://github.com/nextgis/nextgisweb_frontend/commit/abba8cbd8a46697ba37a768bd2576086591c344c))
+
+
+### Features
+
+* **cesium:** implement getCenter ([ea83d8e](https://github.com/nextgis/nextgisweb_frontend/commit/ea83d8ebd8972123ba0991388e4e53fce91b077e))
+* **cesium:** skipLevelOfDetail by default ([7429870](https://github.com/nextgis/nextgisweb_frontend/commit/7429870fb31231fc26298240d665c4ac840f618a))
+* **cesium:** tilset 3d adapter height options ([02973bf](https://github.com/nextgis/nextgisweb_frontend/commit/02973bfcacb6bde3b7d4e23fdd190d0e81536f57))
+* **cesium:** update layer and map adapter ([c9d6a1d](https://github.com/nextgis/nextgisweb_frontend/commit/c9d6a1db8874586adb5ae1901153e71313aa776b))
+* **ngw-kit:** add NgwKit.utils.getCompanyLogo method ([3c6fa09](https://github.com/nextgis/nextgisweb_frontend/commit/3c6fa09321c0e979543b50b93c32da8725920d28))
+* **webmap:** zoomIn and zoomOut MapAdapter optional methods ([70b807f](https://github.com/nextgis/nextgisweb_frontend/commit/70b807fd1d157b5505a3d815f24a02fbb1fff6a6))
+
+
+
+
+
 # [0.31.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.2...v0.31.0) (2020-05-13)
 
 

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.32.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.31.0...v0.32.0) (2020-06-03)
+
+
+### Features
+
+* **cesium:** update layer and map adapter ([c9d6a1d](https://github.com/nextgis/nextgisweb_frontend/commit/c9d6a1db8874586adb5ae1901153e71313aa776b))
+* **qms-kit:** use y_origin_top option ([fa02dfd](https://github.com/nextgis/nextgisweb_frontend/commit/fa02dfd2af3927478fd9f50de7d8173b2dc4f05b))
+
+
+
+
+
 # [0.31.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.2...v0.31.0) (2020-05-13)
 
 **Note:** Version bump only for package @nextgis/qms-kit
