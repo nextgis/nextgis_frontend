@@ -1,4 +1,4 @@
-import NgwConnector from '@nextgis/ngw-connector';
+import NgwConnector, { CreatedResource } from '@nextgis/ngw-connector';
 import { objectAssign, Type } from '@nextgis/utils';
 import { ConnectionOptions } from './ConnectionOptions';
 import { SyncOptions } from '../repository/SyncOptions';
@@ -43,7 +43,7 @@ export class Connection {
     Connection.connections.push(this);
   }
 
-  static create(options: Connection | ConnectionOptions) {
+  static create(options: Connection | ConnectionOptions): Connection {
     if (options instanceof Connection) {
       return options;
     }
@@ -63,7 +63,7 @@ export class Connection {
     return new Connection(options);
   }
 
-  static connect(options: Connection | ConnectionOptions) {
+  static connect(options: Connection | ConnectionOptions): Promise<Connection> {
     const connection = Connection.create(options);
     return connection.connect();
   }
@@ -78,7 +78,10 @@ export class Connection {
     return this;
   }
 
-  async syncResource(resource: Type<BaseResource>, options: SyncOptions) {
+  async syncResource(
+    resource: Type<BaseResource>,
+    options: SyncOptions
+  ): Promise<CreatedResource | undefined> {
     const parent = await this.driver.getResource(options.parent);
     if (parent) {
       const metadata = this.getResourceMetadata(

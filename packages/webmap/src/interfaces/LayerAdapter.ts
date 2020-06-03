@@ -213,6 +213,11 @@ export interface TileAdapterOptions extends RasterAdapterOptions {
   tileSize?: number;
 }
 
+export interface Tileset3DAdapterOptions extends RasterAdapterOptions {
+  useTerrainHeight?: boolean;
+  heightOffset?: number;
+}
+
 export interface Model3DOptions extends RasterAdapterOptions {
   lon: number;
   lat: number;
@@ -226,7 +231,9 @@ export interface WmsAdapterOptions extends RasterAdapterOptions {
   format?: 'image/png' | 'image/jpeg' | string;
   version?: string;
   tileSize?: number;
-  updateWmsParams?: (obj: { [paramName: string]: any }) => object;
+  updateWmsParams?: (obj: {
+    [paramName: string]: any;
+  }) => Record<string, unknown>;
   transparent?: boolean;
 }
 
@@ -327,13 +334,13 @@ export interface VectorLayerAdapter<
   selected?: boolean;
   source?: unknown;
 
-  getLayers?(): Array<LayerDefinition<F, L>>;
+  getLayers?(): LayerDefinition<F, L>[];
 
   select?(findFeatureCb?: DataLayerFilter<F, L> | PropertiesFilter): void;
   unselect?(findFeatureCb?: DataLayerFilter<F, L> | PropertiesFilter): void;
-  getSelected?(): Array<LayerDefinition<Feature, L>>;
+  getSelected?(): LayerDefinition<Feature, L>[];
 
-  getFiltered?(): Array<LayerDefinition<Feature, L>>;
+  getFiltered?(): LayerDefinition<Feature, L>[];
   filter?(cb: DataLayerFilter<F, L>): Array<LayerDefinition<Feature, L>>;
   propertiesFilter?(filters: PropertiesFilter, options?: FilterOptions): void;
   removeFilter?(): void;

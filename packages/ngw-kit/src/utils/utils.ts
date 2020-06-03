@@ -3,6 +3,7 @@ import WebMap, {
   LngLatBoundsArray,
   MapClickEvent,
   VectorAdapterLayerType,
+  RasterAdapterOptions,
 } from '@nextgis/webmap';
 import NgwConnector, {
   WebmapResource,
@@ -20,7 +21,10 @@ import {
 import { WebMapLayerAdapter } from '../WebMapLayerAdapter';
 import { getLayerAdapterOptions as getLayerAdapterOptions_ } from './getLayerAdapterOptions';
 
-export function updateImageParams(params: any, resourceId: number) {
+export function updateImageParams(
+  params: Record<string, any>,
+  resourceId: number
+): Record<string, any> {
   const { bbox, width, height } = params;
   return {
     resource: resourceId,
@@ -53,7 +57,7 @@ export function getLayerAdapterOptions(
   options: NgwLayerOptions,
   webMap: WebMap,
   baseUrl: string
-) {
+): RasterAdapterOptions | undefined {
   return getLayerAdapterOptions_(options, webMap, baseUrl);
 }
 
@@ -140,7 +144,7 @@ export function getCirclePoly(
   lat: number,
   radius = 10,
   points = 6
-) {
+): number[][] {
   // find the radius in lat/lon
   const rlat = (radius / earthsradius) * r2d;
   const rlng = rlat / Math.cos(lat * d2r);
@@ -228,7 +232,7 @@ export function extendWebMapLayerAdapter(
 
 let _pixelsInMeter: number;
 
-export function pixelsInMeterWidth() {
+export function pixelsInMeterWidth(): number {
   if (_pixelsInMeter === undefined) {
     const div = document.createElement('div');
     div.style.cssText =
@@ -241,7 +245,9 @@ export function pixelsInMeterWidth() {
   return _pixelsInMeter;
 }
 
-export function applyMixins(derivedCtor: any, baseCtors: any[]) {
+type Ctor = any;
+
+export function applyMixins(derivedCtor: Ctor, baseCtors: Ctor[]): void {
   baseCtors.forEach((baseCtor) => {
     Object.getOwnPropertyNames(baseCtor.prototype).forEach((name) => {
       const descriptor = Object.getOwnPropertyDescriptor(
@@ -260,11 +266,11 @@ export function getMapWidthForLanInMeters(lat: number): number {
   return 6378137 * 2 * Math.PI * Math.cos((lat * Math.PI) / 180);
 }
 
-export function getZoomFromScale(scale: number) {
+export function getZoomFromScale(scale: number): number {
   return Math.log(scale / 256) / Math.LN2;
 }
 
-export function setScaleRatio(scale: number, lat = 104) {
+export function setScaleRatio(scale: number, lat = 104): number {
   // TODO: get real center
   // webmap does not contain center yet
   // const center = [104, 45]; // this.webMap.getCenter();

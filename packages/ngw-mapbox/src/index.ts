@@ -21,10 +21,10 @@ export class NgwMapbox extends NgwMap<
     super(new MapboxglMapAdapter(), options);
   }
 
-  static create = async (options: NgwMapOptions) => {
+  static async create(options: NgwMapOptions): Promise<NgwMapbox> {
     const ngwMap = new NgwMapbox(options);
     return ngwMap.onLoad();
-  };
+  }
 
   addNgwLayer(options: NgwLayerOptions): Promise<ResourceAdapter | undefined> {
     // TODO: still no way to add NGW IMAGE to mapbox-gl

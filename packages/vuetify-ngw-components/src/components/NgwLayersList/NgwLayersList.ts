@@ -39,7 +39,7 @@ export class NgwLayersList extends Vue {
   private __updateItems?: () => Promise<void>;
 
   @Watch('selection')
-  setVisibleLayers(selection: string[], old: string[]) {
+  setVisibleLayers(selection: string[], old: string[]): void {
     const isSame = arrayCompare(selection, old);
     if (!isSame) {
       this._layers.forEach((x) => {
@@ -70,23 +70,23 @@ export class NgwLayersList extends Vue {
   }
 
   @Watch('ngwMap')
-  updateNgwMap() {
+  updateNgwMap(): void {
     this.destroy();
     this.create();
   }
 
   @Watch('include')
-  async updateItems() {
+  async updateItems(): Promise<void> {
     if (this.__updateItems) {
       this.__updateItems();
     }
   }
 
-  mounted() {
+  mounted(): void {
     this.create();
   }
 
-  beforeDestroy() {
+  beforeDestroy(): void {
     this.destroy();
   }
 
@@ -126,9 +126,9 @@ export class NgwLayersList extends Vue {
   private create() {
     this.ngwMap.onLoad().then(() => {
       this.destroy();
-      this.updateItems();
       const __updateItems = debounce(() => this._updateItems());
       this.__updateItems = __updateItems;
+      this.updateItems();
 
       this.ngwMap.emitter.on('layer:add', __updateItems);
       this.ngwMap.emitter.on('layer:remove', __updateItems);

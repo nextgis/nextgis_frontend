@@ -13,7 +13,7 @@ export class ImageAdapter implements BaseLayerAdapter {
 
   constructor(public map: Map, public options: ImageAdapterOptions) {}
 
-  addLayer(options: ImageAdapterOptions) {
+  addLayer(options: ImageAdapterOptions): ImageLayer | undefined {
     if (options.url) {
       const imageOptions: ImageWMSOptions = {
         url: options.url,

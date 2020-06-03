@@ -25,7 +25,7 @@ export class WebMapLayerItem extends Item<ItemOptions> {
       {
         type: 'boolean',
         name: 'visibility',
-        getProperty(item?: WebMapLayerItem) {
+        getProperty(item?: WebMapLayerItem): boolean {
           if (item) {
             if (item.item.item_type === 'group') {
               return true;
@@ -37,7 +37,11 @@ export class WebMapLayerItem extends Item<ItemOptions> {
           }
           return false;
         },
-        onSet(value: boolean, options?: any, item?: WebMapLayerItem) {
+        onSet(
+          value: boolean,
+          options?: Record<string, any>,
+          item?: WebMapLayerItem
+        ): void {
           if (item && item.layer && item.item.item_type === 'layer') {
             if (value) {
               item.webMap.showLayer(item.layer);
@@ -85,12 +89,12 @@ export class WebMapLayerItem extends Item<ItemOptions> {
     this._init(item);
   }
 
-  async initItem(item: TreeGroup | TreeLayer) {
+  async initItem(item: TreeGroup | TreeLayer): Promise<void> {
     let newLayer = item._layer;
     const i = item;
     if (item.item_type === 'group' || item.item_type === 'root') {
       if (item.children && item.children.length) {
-        item.children.reverse().forEach((x) => {
+        item.children.forEach((x) => {
           const children = new WebMapLayerItem(
             this.webMap,
             x,
@@ -108,6 +112,13 @@ export class WebMapLayerItem extends Item<ItemOptions> {
         headers: this.options.headers,
         crossOrigin: this.options.crossOrigin,
       };
+      if (this.options.order) {
+        const subOrder =
+          this.options.drawOrderEnabled && 'draw_order_position' in item
+            ? this._rootDescendantsCount - item.draw_order_position
+            : this.id;
+        options.order = Number((this.options.order | 0) + '.' + subOrder);
+      }
       if (item.item_type === 'layer') {
         adapter = item.adapter || item.layer_adapter.toUpperCase();
         const maxZoom = item.layer_max_scale_denom
@@ -127,12 +138,6 @@ export class WebMapLayerItem extends Item<ItemOptions> {
           minScale: item.layer_min_scale_denom,
           maxScale: item.layer_max_scale_denom,
         });
-        if (this.options.order) {
-          const subOrder = this.options.drawOrderEnabled
-            ? this._rootDescendantsCount - item.draw_order_position
-            : this.id;
-          options.order = Number((this.options.order | 0) + '.' + subOrder);
-        }
       } else if (WebMapLayerItem.GetAdapterFromLayerType[item.item_type]) {
         const getAdapter =
           WebMapLayerItem.GetAdapterFromLayerType[item.item_type];
@@ -159,7 +164,7 @@ export class WebMapLayerItem extends Item<ItemOptions> {
     }
   }
 
-  bringToFront() {
+  bringToFront(): void {
     //
   }
 

@@ -43,6 +43,8 @@ import { propertiesFilter } from './utils/propertiesFilter';
 import { getBoundsPolygon } from './utils/getBoundsPolygon';
 import { updateGeoJsonAdapterOptions } from './utils/updateGeoJsonAdapterOptions';
 
+type EmitStatusEventData = any;
+
 const OPTIONS: MapOptions = {
   minZoom: 0,
   maxZoom: 21,
@@ -131,7 +133,7 @@ export class BaseWebMap<
    */
   async create(options?: MapOptions): Promise<this> {
     if (!this.getEventStatus('create')) {
-      this.options = deepmerge(OPTIONS || {}, options);
+      this.options = deepmerge(OPTIONS || {}, options || {});
       await this._setInitMapState(this.mapState);
       await this._setupMap();
       this._emitStatusEvent('create', this);
@@ -139,14 +141,14 @@ export class BaseWebMap<
     return this;
   }
 
-  setRuntimeParams(params: RuntimeParams) {
+  setRuntimeParams(params: RuntimeParams): void {
     this.runtimeParams.push(params);
   }
 
   /**
    * Destroys WebMap, MapAdapter, clears all layers and turn off all event listeners
    */
-  destroy() {
+  destroy(): void {
     this._removeEventListeners();
     clearObject(this._emitStatusEvent);
     if (this.mapAdapter.destroy) {
@@ -199,7 +201,7 @@ export class BaseWebMap<
    * Set the cursor icon to be displayed when hover icon on the map container.
    * @param cursor available cursor name from https://developer.mozilla.org/ru/docs/Web/CSS/cursor
    */
-  setCursor(cursor: Cursor) {
+  setCursor(cursor: Cursor): void {
     if (this.mapAdapter.setCursor) {
       this.mapAdapter.setCursor(cursor);
     }
@@ -300,7 +302,7 @@ export class BaseWebMap<
    * webMap.setView([86.925278, 27.988056], 12)
    * ```
    */
-  setView(lngLat?: LngLatArray, zoom?: number) {
+  setView(lngLat?: LngLatArray, zoom?: number): void {
     if (this.mapAdapter.setView && lngLat && zoom) {
       this.mapAdapter.setView(lngLat, zoom);
     } else {
@@ -427,7 +429,10 @@ export class BaseWebMap<
     return { stop };
   }
 
-  protected _emitStatusEvent(eventName: keyof E, data?: any) {
+  protected _emitStatusEvent(
+    eventName: keyof E,
+    data?: EmitStatusEventData
+  ): void {
     // ugly hack to disable type checking error
     const _eventName = eventName as keyof WebMapEvents;
     this._eventsStatus[_eventName] = true;

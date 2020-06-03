@@ -1,12 +1,12 @@
 {
   "name": "@nextgis/icons",
-  "version": "0.31.0",
+  "version": "0.32.0",
   "description": "Svg icon pack",
   "main": "lib/icons.js",
   "unpkg": "lib/icons.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/paint": "^0.31.0"
+    "@nextgis/paint": "^0.32.0"
   },
   "devDependencies": {
     "@nextgis/build-tools": "file:../build-tools"

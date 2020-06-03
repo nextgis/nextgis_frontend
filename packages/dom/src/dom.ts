@@ -43,7 +43,7 @@ export function getElement(el: HTMLElement | string): HTMLElement | undefined {
   return el;
 }
 
-export function remove(element: ElementDef) {
+export function remove(element: ElementDef): void {
   const el = getElement(element);
   if (el) {
     const parent = el.parentElement;

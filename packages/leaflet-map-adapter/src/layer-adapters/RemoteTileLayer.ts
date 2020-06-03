@@ -10,9 +10,9 @@ export class RemoteTileLayer<O extends TileLayerOptions = TileLayerOptions> {
   // }
 
   createTile(
-    coords: object,
+    coords: Record<string, unknown>,
     done: (error: any, tile: HTMLImageElement) => void
-  ) {
+  ): HTMLImageElement {
     // @ts-ignore
     const url = this.getTileUrl(coords);
 

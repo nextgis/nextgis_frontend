@@ -1,5 +1,5 @@
 import NgwConnector from '@nextgis/ngw-connector';
-import { CompanyLogoOptions } from '@nextgis/ngw-map';
+import { CompanyLogoOptions } from '../interfaces';
 
 export async function getCompanyLogo(
   connector: NgwConnector,
@@ -10,7 +10,7 @@ export async function getCompanyLogo(
     { cache: true },
     { component: 'pyramid' }
   );
-  if (settings && settings.company_logo.enabled) {
+  if (settings && settings.company_logo && settings.company_logo.enabled) {
     const anchor = document.createElement('a');
     anchor.style.position = 'absolute';
     anchor.style.bottom = '0';

@@ -63,7 +63,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     this.layer = new FeatureGroup([], { pane: this.pane });
   }
 
-  addLayer(options: GeoJsonAdapterOptions) {
+  addLayer(options: GeoJsonAdapterOptions): FeatureGroup<any> | undefined {
     if (options) {
       this.options = options;
       this.paint = options.paint;
@@ -78,7 +78,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     }
   }
 
-  select(findFeatureFun?: DataLayerFilter) {
+  select(findFeatureFun?: DataLayerFilter): void {
     if (findFeatureFun) {
       const feature = this._layers.filter(findFeatureFun);
       feature.forEach((x) => {
@@ -92,7 +92,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     }
   }
 
-  unselect(findFeatureFun?: DataLayerFilter) {
+  unselect(findFeatureFun?: DataLayerFilter): void {
     if (findFeatureFun) {
       const feature = this._layers.filter(findFeatureFun);
       feature.forEach((x) => {
@@ -106,17 +106,17 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     }
   }
 
-  getSelected() {
+  getSelected(): LayerDefinition<Feature, LayerMem>[] {
     return this._selectedLayers.map((x) => {
       return { feature: x.feature, layer: x };
     });
   }
 
-  getFiltered() {
+  getFiltered(): LayerMem[] {
     return this._filteredLayers;
   }
 
-  filter(fun?: DataLayerFilter) {
+  filter(fun?: DataLayerFilter): LayerMem[] {
     // Some optimization
     this._filterFun = fun;
     // @ts-ignore
@@ -143,11 +143,11 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     return this._filteredLayers;
   }
 
-  cleanFilter() {
+  cleanFilter(): void {
     this.filter();
   }
 
-  getLayers() {
+  getLayers(): LayerDefinition<Feature, LayerMem>[] {
     return this._layers.map(({ layer, feature }) => {
       // @ts-ignore
       const visible = layer && layer._map;
@@ -159,7 +159,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     });
   }
 
-  clearLayer(cb?: (feature: Feature) => boolean) {
+  clearLayer(cb?: (feature: Feature) => boolean): void {
     if (cb) {
       for (let fry = this._layers.length; fry--; ) {
         const layerMem = this._layers[fry];
@@ -175,12 +175,12 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     }
   }
 
-  setData(data: GeoJsonObject) {
+  setData(data: GeoJsonObject): void {
     this.clearLayer();
     this.addData(data);
   }
 
-  addData(data: GeoJsonObject | false) {
+  addData(data: GeoJsonObject | false): false | undefined {
     const options = this.options;
     let geoJsonOptions: GeoJSONOptions | undefined;
     if (options) {
@@ -208,7 +208,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     }
   }
 
-  openPopup(findFeatureFun: DataLayerFilter, options?: PopupOptions) {
+  openPopup(findFeatureFun: DataLayerFilter, options?: PopupOptions): void {
     if (findFeatureFun) {
       const feature = this._layers.filter(findFeatureFun);
       feature.forEach((x) => {
@@ -217,7 +217,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     }
   }
 
-  closePopup(findFeatureFun?: DataLayerFilter) {
+  closePopup(findFeatureFun?: DataLayerFilter): void {
     const featuresToClosePopup = findFeatureFun
       ? this._layers.filter(findFeatureFun)
       : this._layers;
@@ -227,7 +227,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     });
   }
 
-  updateTooltip(layerDef?: LayerDefinition) {
+  updateTooltip(layerDef?: LayerDefinition): void {
     if (layerDef) {
       this._updateTooltip(layerDef);
     } else {

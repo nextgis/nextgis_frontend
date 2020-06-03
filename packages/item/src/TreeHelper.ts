@@ -4,6 +4,7 @@
 
 import { Item } from './Item';
 import { filterIn } from './TreeUtil';
+import { ItemOptions } from './interfaces';
 
 export class TreeHelper {
   item: Item;
@@ -16,11 +17,11 @@ export class TreeHelper {
   }
 
   // region Parents
-  setParent(parent: Item) {
+  setParent(parent: Item): void {
     this._parent = parent;
   }
 
-  addChild(child: Item) {
+  addChild(child: Item): void {
     this._children.push(child);
   }
 
@@ -50,7 +51,7 @@ export class TreeHelper {
   // endregion
 
   // region Child
-  find(filterFunc?: (item: Item) => boolean) {
+  find(filterFunc?: (item: Item) => boolean): Item<ItemOptions> {
     return filterIn(this._children, filterFunc, (x) => {
       return x.tree.getChildren();
     })[0];

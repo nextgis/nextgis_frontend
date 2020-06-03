@@ -1,4 +1,4 @@
-import { TileAdapterOptions, LngLatBoundsArray } from '@nextgis/webmap';
+import { Tileset3DAdapterOptions, LngLatBoundsArray } from '@nextgis/webmap';
 import {
   Cesium3DTileset,
   Math as CMath,
@@ -10,39 +10,39 @@ import {
 import { BaseAdapter } from './BaseAdapter';
 import { whenSampleTerrainMostDetailed } from '../utils/whenSampleTerrainMostDetailed';
 
-export class Tileset3DAdapter extends BaseAdapter<TileAdapterOptions> {
+export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
   layer?: Cesium3DTileset;
   private _extent?: LngLatBoundsArray;
 
-  async addLayer(opt: TileAdapterOptions) {
+  async addLayer(opt: Tileset3DAdapterOptions): Promise<Cesium3DTileset> {
     this.options = { ...opt };
     const tileset = await this._addLayer();
     return tileset;
   }
 
-  onTerrainChange = () => {
+  onTerrainChange = (): void => {
     this.watchHeight();
   };
 
-  beforeRemove() {
+  beforeRemove(): void {
     if (this.layer) {
       this.map.scene.primitives.remove(this.layer);
     }
     super.beforeRemove();
   }
 
-  getExtent() {
+  getExtent(): LngLatBoundsArray | undefined {
     return this._extent;
   }
 
-  showLayer() {
+  showLayer(): void {
     if (this.layer) {
       this.layer.show = true;
     }
     super.showLayer();
   }
 
-  hideLayer() {
+  hideLayer(): void {
     if (this.layer) {
       this.layer.show = false;
     }
@@ -53,7 +53,6 @@ export class Tileset3DAdapter extends BaseAdapter<TileAdapterOptions> {
     const layer = new Cesium3DTileset({
       url: this.options.url,
       skipLevelOfDetail: true,
-      // loadSiblings: true,
     });
     layer.show = false;
 
@@ -63,6 +62,9 @@ export class Tileset3DAdapter extends BaseAdapter<TileAdapterOptions> {
     this._extent = this._calculateExtent();
     this.map.scene.primitives.add(this.layer);
     this.watchHeight();
+    if (this.options.heightOffset) {
+      this._setHeight();
+    }
     return this.layer;
   }
 
@@ -94,8 +96,33 @@ export class Tileset3DAdapter extends BaseAdapter<TileAdapterOptions> {
     }
   }
 
-  private watchHeight() {
+  private _setHeight(height?: number) {
     if (this.layer) {
+      const boundingSphere = this.layer.boundingSphere;
+      const cartographic = Cartographic.fromCartesian(boundingSphere.center);
+      if (height === undefined) {
+        height = cartographic.height;
+      }
+      if (this.options.heightOffset) {
+        height += this.options.heightOffset;
+      }
+      if (height !== undefined) {
+        const lon = cartographic.longitude;
+        const lat = cartographic.latitude;
+        const surface = Cartesian3.fromRadians(lon, lat, 0);
+        const offset = Cartesian3.fromRadians(lon, lat, height);
+        const translation = Cartesian3.subtract(
+          offset,
+          surface,
+          new Cartesian3()
+        );
+        this.layer.modelMatrix = Matrix4.fromTranslation(translation);
+      }
+    }
+  }
+
+  private watchHeight() {
+    if (this.layer && this.options.useTerrainHeight) {
       const boundingSphere = this.layer.boundingSphere;
       const cartographic = Cartographic.fromCartesian(boundingSphere.center);
 
@@ -104,19 +131,8 @@ export class Tileset3DAdapter extends BaseAdapter<TileAdapterOptions> {
         this.map.terrainProvider,
         terrainSamplePositions,
         () => {
-          if (this.layer) {
-            const lon = cartographic.longitude;
-            const lat = cartographic.latitude;
-            const heightOffset = terrainSamplePositions[0].height;
-            const surface = Cartesian3.fromRadians(lon, lat, 0);
-            const offset = Cartesian3.fromRadians(lon, lat, heightOffset);
-            const translation = Cartesian3.subtract(
-              offset,
-              surface,
-              new Cartesian3()
-            );
-            this.layer.modelMatrix = Matrix4.fromTranslation(translation);
-          }
+          const heightOffset = terrainSamplePositions[0].height;
+          this._setHeight(heightOffset);
         }
       );
     }

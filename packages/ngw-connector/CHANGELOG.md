@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.32.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.31.0...v0.32.0) (2020-06-03)
+
+
+### Bug Fixes
+
+* **cesium:** Tileset#DAdapter set terrain height ([790760f](https://github.com/nextgis/nextgisweb_frontend/commit/790760f0b8b90b9c9d572640612cfc00dabfd5d5))
+
+
+### Features
+
+* **ngw-kit:** add NgwKit.utils.getCompanyLogo method ([3c6fa09](https://github.com/nextgis/nextgisweb_frontend/commit/3c6fa09321c0e979543b50b93c32da8725920d28))
+* **ngw-kit:** add tmsclient_layer adapter class support ([87b5976](https://github.com/nextgis/nextgisweb_frontend/commit/87b59760a574ffc66b1aec1d2df3af301efe1326))
+
+
+
+
+
 # [0.31.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.2...v0.31.0) (2020-05-13)
 
 

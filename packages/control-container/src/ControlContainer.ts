@@ -42,14 +42,14 @@ export class ControlContainer {
     return this;
   }
 
-  detach() {
+  detach(): void {
     const parent = this._container.parentElement;
     if (parent) {
       parent.removeChild(this._container);
     }
   }
 
-  getContainer() {
+  getContainer(): HTMLElement {
     return this._container;
   }
 
@@ -81,14 +81,14 @@ export class ControlContainer {
     }
   }
 
-  addControl(control: MapControl, position: ControlPositions) {
+  addControl(control: MapControl, position: ControlPositions): void {
     const controlContainer = control.onAdd(this.map);
     if (controlContainer instanceof HTMLElement) {
       this.append(controlContainer, position);
     }
   }
 
-  append(element: HTMLElement | string, position: ControlPositions) {
+  append(element: HTMLElement | string, position: ControlPositions): void {
     const positionContainer = this._positionsContainers[position];
     if (positionContainer) {
       if (typeof element === 'string') {

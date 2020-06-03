@@ -13,7 +13,7 @@ export function evented(options?: {
     target: NgwUploader,
     propertyKey: string,
     descriptor: PropertyDescriptor
-  ) {
+  ): PropertyDescriptor {
     const originalMethod = descriptor.value;
 
     descriptor.value = function (this: NgwUploader, ...args: any[]) {
@@ -67,7 +67,7 @@ export function onLoad() {
     target: NgwUploader,
     propertyKey: string,
     descriptor: PropertyDescriptor
-  ) {
+  ): PropertyDescriptor {
     const originalMethod = descriptor.value;
 
     descriptor.value = function (this: NgwUploader, ...args: any[]) {

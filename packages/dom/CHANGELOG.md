@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.32.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.31.0...v0.32.0) (2020-06-03)
+
+
+### Features
+
+* **cesium:** implement getCenter ([ea83d8e](https://github.com/nextgis/nextgisweb_frontend/commit/ea83d8ebd8972123ba0991388e4e53fce91b077e))
+
+
+
+
+
 # [0.31.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.2...v0.31.0) (2020-05-13)
 
 **Note:** Version bump only for package @nextgis/dom

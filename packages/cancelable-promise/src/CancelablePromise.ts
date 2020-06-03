@@ -90,7 +90,7 @@ export class CancelablePromise<T = any> implements Promise<T> {
     });
   }
 
-  attach(p: CancelablePromise) {
+  attach(p: CancelablePromise): void {
     if (this._isCanceled) {
       p.cancel();
     } else {
@@ -157,7 +157,7 @@ export class CancelablePromise<T = any> implements Promise<T> {
     return Promise.reject<T>(onfinally);
   }
 
-  cancel() {
+  cancel(): this {
     if (this._isCanceled) {
       return this;
     }

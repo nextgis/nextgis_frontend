@@ -8,17 +8,17 @@ import { MapOptions } from '../../interfaces/WebMapApp';
 export class ZoomState extends StateItem<number> {
   name: keyof MapOptions = 'zoom';
   event: keyof WebMapEvents = 'zoomend';
-  getValue() {
+  getValue(): number | undefined {
     const zoom = this.webMap.getZoom();
     return zoom !== undefined ? Math.round(zoom) : undefined;
   }
-  setValue(val: number) {
+  setValue(val: number): void {
     this.webMap.setZoom(val);
   }
-  toString(val: number) {
+  toString(val: number): string {
     return String(val);
   }
-  parse(str: string) {
+  parse(str: string): number {
     return Number(str);
   }
 }
