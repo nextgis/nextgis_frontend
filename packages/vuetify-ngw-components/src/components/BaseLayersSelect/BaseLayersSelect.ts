@@ -66,7 +66,12 @@ export class BaseLayersSelect extends Vue {
           this.active = event;
         },
       },
-      attrs: { items: this.items, selectable: true },
+      attrs: {
+        ...this.$attrs,
+        items: this.items,
+        selectable: true,
+        'hide-details': true,
+      },
       scopedSlots: {
         ...this.$scopedSlots,
         label: (props) => {
