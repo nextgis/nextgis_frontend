@@ -69,12 +69,12 @@ let ID = 0;
  * });
  * ```
  */
-export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<
-  M,
-  L,
-  C,
-  NgwMapEvents
-> {
+export class NgwMap<
+  M = any,
+  L = any,
+  C = any,
+  O = Record<string, any>
+> extends WebMap<M, L, C, NgwMapEvents> {
   static utils = {
     ...WebMap.utils,
     ...NgwKit.utils,
@@ -106,7 +106,7 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<
     if (options.connector) {
       this.connector = options.connector;
     }
-    this.options = deepmerge(OPTIONS, options);
+    this.options = deepmerge(OPTIONS, options) as NgwMapOptions<C> & O;
     this._createWebMap().then(() => {
       const container = this.getContainer();
       if (container) {
@@ -138,7 +138,7 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<
     controlDef: K | C,
     position: ControlPositions,
     options?: MapControls[K]
-  ) {
+  ): Promise<any> {
     return super.addControl(controlDef, position, options);
   }
 
@@ -202,7 +202,7 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<
   /**
    * Pans and zooms the map to the initial position specified in the options
    */
-  fit() {
+  fit(): void {
     const { center, zoom, bounds } = this.options;
     if (center) {
       this.setCenter(center);
@@ -316,7 +316,7 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<
    * ngwMap.zoomToLayer('ngw_layer_name');
    * ```
    */
-  async zoomToLayer(layerDef: string | ResourceAdapter) {
+  async zoomToLayer(layerDef: string | ResourceAdapter): Promise<void> {
     let id: string | undefined;
     if (typeof layerDef === 'string' || typeof layerDef === 'number') {
       id = String(id);
@@ -355,7 +355,7 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<
     return super.onLoad(event as keyof WebMapEvents);
   }
 
-  removeLayer(layerDef: LayerDef) {
+  removeLayer(layerDef: LayerDef): void {
     const layer = this.getLayer(layerDef);
     if (layer) {
       const layerId = this.getLayerId(layer);
@@ -366,7 +366,7 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<
     }
   }
 
-  enableSelection() {
+  enableSelection(): void {
     if (!this.__selectFromNgwRaster) {
       this.__selectFromNgwRaster = (ev: MapClickEvent) =>
         this._selectFromNgwRaster(ev);
@@ -377,7 +377,7 @@ export class NgwMap<M = any, L = any, C = any, O = {}> extends WebMap<
     }
   }
 
-  disableSelection() {
+  disableSelection(): void {
     if (this.__selectFromNgwRaster) {
       this.emitter.off('click', this.__selectFromNgwRaster);
       this.emitter.off('click', this._selectFromNgwVector);

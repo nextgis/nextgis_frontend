@@ -1,5 +1,5 @@
 import { deepmerge } from '@nextgis/utils';
-import { MapAdapter, StarterKit } from '@nextgis/webmap';
+import { MapAdapter, StarterKit, AppOptions } from '@nextgis/webmap';
 import NgwConnector from '@nextgis/ngw-connector';
 import QmsKit from '@nextgis/qms-kit';
 import NgwKit from '@nextgis/ngw-kit';
@@ -26,7 +26,7 @@ export const OPTIONS: NgwMapOptions = {
 export function prepareWebMapOptions(
   mapAdapter: MapAdapter,
   options: NgwMapOptions
-) {
+): AppOptions {
   const kits: StarterKit[] = [new QmsKit()];
 
   if (!options.connector) {

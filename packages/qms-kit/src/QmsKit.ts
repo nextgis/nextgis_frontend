@@ -2,7 +2,12 @@
  * @module qms-kit
  */
 
-import WebMap, { StarterKit, Type, BaseLayerAdapter } from '@nextgis/webmap';
+import WebMap, {
+  StarterKit,
+  Type,
+  BaseLayerAdapter,
+  LayerAdapterCreators,
+} from '@nextgis/webmap';
 import { QmsOptions } from './interfaces';
 import { createQmsAdapter } from './utils/createQmsAdapter';
 
@@ -22,7 +27,7 @@ export class QmsKit implements StarterKit {
     this.url = this.options.url;
   }
 
-  getLayerAdapters() {
+  getLayerAdapters(): Promise<LayerAdapterCreators[]> {
     return Promise.resolve([
       {
         name: 'QMS',

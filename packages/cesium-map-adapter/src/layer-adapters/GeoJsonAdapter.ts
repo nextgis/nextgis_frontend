@@ -6,6 +6,7 @@ import {
   GeoJsonAdapterOptions,
   DataLayerFilter,
   PropertiesFilter,
+  LayerDefinition,
 } from '@nextgis/webmap';
 import {
   VectorAdapterLayerPaint,
@@ -28,6 +29,7 @@ import {
   Cartographic,
   Entity,
   HeightReference,
+  JulianDate,
 } from 'cesium';
 import { GeoJsonObject, Feature, FeatureCollection } from 'geojson';
 import { BaseAdapter, Map } from './BaseAdapter';
@@ -55,11 +57,11 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
   private _features: Feature[] = [];
   private _source?: GeoJsonDataSource;
 
-  onTerrainChange = () => {
+  onTerrainChange = (): void => {
     this.watchHeight();
   };
 
-  addLayer(options: GeoJsonAdapterOptions) {
+  addLayer(options: GeoJsonAdapterOptions): GeoJsonDataSource {
     this.options = { ...options };
     this._paint = this.options.paint;
     const source = new GeoJsonDataSource(options.id);
@@ -70,33 +72,33 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     return source;
   }
 
-  showLayer() {
+  showLayer(): void {
     if (this._source) {
       this.map.dataSources.add(this._source);
     }
     super.showLayer();
   }
 
-  hideLayer() {
+  hideLayer(): void {
     if (this._source) {
       this.map.dataSources.remove(this._source);
     }
     super.hideLayer();
   }
 
-  clearLayer(cb?: (feature: Feature) => boolean) {
+  clearLayer(cb?: (feature: Feature) => boolean): void {
     if (this._source) {
       this._source.entities.removeAll();
       this._features = [];
     }
   }
 
-  setData(data: GeoJsonObject) {
+  setData(data: GeoJsonObject): void {
     this.clearLayer();
     this.addData(data);
   }
 
-  addData(data: GeoJsonObject) {
+  addData(data: GeoJsonObject): void {
     if (this._source) {
       if (data.type === 'Feature') {
         this._features.push(data as Feature);
@@ -108,27 +110,27 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     }
   }
 
-  select(findFeatureCb?: DataLayerFilter<Feature> | PropertiesFilter) {
+  select(findFeatureCb?: DataLayerFilter<Feature> | PropertiesFilter): void {
     //
   }
 
-  unselect(findFeatureCb?: DataLayerFilter<Feature> | PropertiesFilter) {
+  unselect(findFeatureCb?: DataLayerFilter<Feature> | PropertiesFilter): void {
     //
   }
 
-  getLayers() {
+  getLayers(): LayerDefinition[] {
     return [];
   }
 
-  getSelected() {
+  getSelected(): LayerDefinition[] {
     return [];
   }
 
-  filter(fun?: DataLayerFilter<Feature, Layer>) {
+  filter(fun?: DataLayerFilter<Feature, Layer>): LayerDefinition[] {
     return [];
   }
 
-  cleanFilter() {
+  cleanFilter(): void {
     //
   }
 
@@ -208,11 +210,8 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
           name: name || (obj.id !== undefined ? 'Feature#' + obj.id : ''),
           description,
           billboard: {
-            // @ts-ignore
             heightReference: HeightReference.CLAMP_TO_GROUND,
-            // @ts-ignore
             image: canvas.toDataURL(),
-            // @ts-ignore
             verticalOrigin: VerticalOrigin.BOTTOM,
           },
         });
@@ -250,7 +249,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
       dataSource.load(obj, options).then((x) => {
         dataSource.entities.values.forEach((y) => {
           const height = this._getEntityHeight(y, paint);
-          if (height) {
+          if (height && y.polygon) {
             y.polygon.extrudedHeight = new CallbackProperty(() => {
               return height;
             }, false);
@@ -280,7 +279,7 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
     // @ts-ignore
     const feature: Feature = {
       type: 'Feature',
-      properties: entity.properties,
+      properties: entity.properties || {},
     };
     const featurePaint = this._getFeaturePaint(feature, paint);
     if (paint && 'extrude3d' in featurePaint) {
@@ -296,8 +295,8 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
       entities.forEach((x) => {
         let position: Cartesian3 | undefined;
         if (x.polygon) {
-          // @ts-ignore
-          position = x.polygon.hierarchy.getValue().positions[0];
+          position = x.polygon.hierarchy?.getValue(JulianDate.now())
+            .positions[0];
         } else if (x.point) {
           console.log(x.point);
         }
@@ -314,7 +313,11 @@ export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
             for (let i = 0; i < entriesOnTerrain.length; i++) {
               const entity = entriesOnTerrain[i];
               const terrainSamplePosition = terrainSamplePositions[i];
-              if (terrainSamplePosition && terrainSamplePosition.height) {
+              if (
+                entity.polygon &&
+                terrainSamplePosition &&
+                terrainSamplePosition.height
+              ) {
                 const terrainHeight = terrainSamplePosition.height;
                 entity.polygon.height = new CallbackProperty(() => {
                   return terrainHeight;

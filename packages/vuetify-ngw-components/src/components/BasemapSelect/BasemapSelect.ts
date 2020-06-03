@@ -16,21 +16,23 @@ export interface VueSelectItem {
   text: string;
 }
 
+const emptyValue = '___empty_value___';
+
 @Component
-export class BaseLayersSelect extends Vue {
+export class BasemapSelect extends Vue {
   @Prop({ type: WebMap }) webMap!: WebMap;
   @Prop({ type: Boolean, default: true }) allowEmpty!: boolean;
   @Prop({ type: String, default: '---' }) emptyLayerText!: string;
 
   items: VueSelectItem[] = [];
 
-  active: string | false = false;
+  active: string | false = emptyValue;
 
   protected __updateItems?: () => Promise<void>;
   protected _layers: Array<LayerAdapter | ResourceAdapter> = [];
 
   @Watch('active')
-  setVisibleLayers(active: string) {
+  setVisibleLayers(active: string): void {
     const activeLayer = this._layers.find((x) => x.id === active);
     if (activeLayer) {
       this.webMap.showLayer(activeLayer);
@@ -43,16 +45,16 @@ export class BaseLayersSelect extends Vue {
   }
 
   @Watch('ngwMap')
-  updateNgwMap() {
+  updateNgwMap(): void {
     this.destroy();
     this.create();
   }
 
-  mounted() {
+  mounted(): void {
     this.create();
   }
 
-  beforeDestroy() {
+  beforeDestroy(): void {
     this.destroy();
   }
 
@@ -88,13 +90,13 @@ export class BaseLayersSelect extends Vue {
     return h(VSelect, data, this.$slots.default);
   }
 
-  async updateItems() {
+  async updateItems(): Promise<void> {
     if (this.__updateItems) {
       this.__updateItems();
     }
   }
 
-  protected create() {
+  protected create(): void {
     this.webMap.onLoad().then(() => {
       this.destroy();
       const __updateItems = debounce(async () => {
@@ -108,7 +110,7 @@ export class BaseLayersSelect extends Vue {
     });
   }
 
-  protected destroy() {
+  protected destroy(): void {
     if (this.__updateItems) {
       this.webMap.emitter.off('layer:add', this.__updateItems);
       this.webMap.emitter.off('layer:remove', this.__updateItems);
@@ -125,7 +127,7 @@ export class BaseLayersSelect extends Vue {
     if (this.allowEmpty) {
       items.push({
         text: this.emptyLayerText,
-        value: undefined,
+        value: emptyValue,
       });
     }
 
@@ -137,8 +139,8 @@ export class BaseLayersSelect extends Vue {
           value: baseLayer.id || '',
           text: baseLayer.options.name || baseLayer.id || '',
         });
-        if (this.webMap.isLayerVisible(baseLayer)) {
-          this.active = baseLayer.id || false;
+        if (baseLayer.id && this.webMap.isLayerVisible(baseLayer)) {
+          this.active = baseLayer.id;
         }
       }
     });

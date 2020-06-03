@@ -172,8 +172,9 @@ export class WebMap<
     }
   }
 
-  removeControl(control: any) {
-    if (control.remove) {
+  removeControl(control: C): void {
+    if ('remove' in control) {
+      // @ts-ignore TODO: ugly code, rewrite
       control.remove();
     } else if (this.mapAdapter.removeControl) {
       this.mapAdapter.removeControl(control);

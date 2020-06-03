@@ -16,7 +16,7 @@ import {
   WebMercatorProjection,
   TerrainProvider,
   Color,
-  viewerCesiumInspectorMixin,
+  // viewerCesiumInspectorMixin,
   // @ts-ignore
   viewerCesium3DTilesInspectorMixin,
 } from 'cesium';
@@ -44,8 +44,9 @@ import { getDefaultTerrain } from './utils/getDefaultTerrain';
 
 type Layer = any;
 type Control = any;
+type MapClickEvent = any;
 
-export class CesiumMapAdapter implements MapAdapter<any, Layer> {
+export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
   static layerAdapters = {
     // IMAGE: ImageAdapter,
     TILE: TileAdapter,
@@ -75,7 +76,7 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
   private _controlContainer?: ControlContainer;
   private _terrainProviderChangedListener?: Event.RemoveCallback;
 
-  create(options: MapOptions) {
+  create(options: MapOptions): void {
     this.options = { ...options };
     if (this.options.target) {
       // default terrain provider
@@ -102,13 +103,13 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
         timeline: false,
         navigationHelpButton: false,
         mapProjection: new WebMercatorProjection(),
-        skyBox: false,
+        skyBox: undefined,
         // skyAtmosphere: false,
         // useBrowserRecommendedResolution: true,
         sceneMode: SceneMode.SCENE3D,
         // terrainProvider: createWorldTerrain()
         terrainProvider: ellipsoidProvider,
-        imageryProvider: false,
+        imageryProvider: undefined,
         // mapProjection: new Cesium.WebMercatorProjection()
         // contextOptions: { requestWebgl2: true }
       });
@@ -171,7 +172,7 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
     }
   }
 
-  destroy() {
+  destroy(): void {
     if (this._terrainProviderChangedListener) {
       this._terrainProviderChangedListener();
     }
@@ -183,7 +184,7 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
     }
   }
 
-  setCenter(lonLat: LngLatArray) {
+  setCenter(lonLat: LngLatArray): void {
     const viewer = this.map;
     if (viewer) {
       const z = Ellipsoid.WGS84.cartesianToCartographic(viewer.camera.position)
@@ -207,14 +208,14 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
     }
   }
 
-  setZoom(zoom: number) {
+  setZoom(zoom: number): void {
     const viewer = this.map;
     if (viewer) {
       //
     }
   }
 
-  getZoom() {
+  getZoom(): number | undefined {
     const viewer = this.map;
     if (viewer) {
       let iniPos = new Cartesian3();
@@ -232,31 +233,52 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
     return undefined;
   }
 
-  zoomOut() {
+  zoomOut(): void {
     const viewer = this.map;
     if (viewer) {
       viewer.camera.zoomOut();
     }
   }
 
-  zoomIn() {
+  zoomIn(): void {
     const viewer = this.map;
     if (viewer) {
       viewer.camera.zoomIn();
     }
   }
 
-  fitBounds(e: LngLatBoundsArray, options: FitOptions = {}) {
+  fitBounds(e: LngLatBoundsArray, options: FitOptions = {}): void {
     if (this.map) {
       const [west, south, east, north] = e;
-      const rectangle = Rectangle.fromDegrees(west, south, east, north);
-      const destination = this.map.camera.getRectangleCameraCoordinates(
-        rectangle
-      );
-      this.map.camera.flyTo({
-        destination,
-        duration: options.duration || 0,
-      });
+      let destination: Cartesian3 | undefined;
+
+      if (this.map.scene.mode === SceneMode.SCENE3D) {
+        const rectangle = Rectangle.fromDegrees(west, south, east, north);
+        const cartesian = this.map.camera.getRectangleCameraCoordinates(
+          rectangle
+        );
+
+        const cartographic = Cartographic.fromCartesian(cartesian);
+        cartographic.height += 500;
+        destination = Cartesian3.fromRadians(
+          cartographic.longitude,
+          cartographic.latitude,
+          cartographic.height
+        );
+      } else {
+        const pts = [west, south, west, north, east, north, east, south];
+        // @ts-ignore
+        destination = Rectangle.fromCartesianArray(
+          Cartesian3.fromDegreesArray(pts)
+        );
+      }
+
+      if (destination) {
+        this.map.scene.camera.flyTo({
+          destination,
+          duration: options.duration || 0,
+        });
+      }
     }
   }
 
@@ -280,49 +302,49 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
     return undefined;
   }
 
-  setRotation(angle: number) {
+  setRotation(angle: number): void {
     //
   }
 
-  removeLayer(layer: Layer) {
+  removeLayer(layer: Layer): void {
     //
   }
 
-  showLayer(layer: Layer) {
+  showLayer(layer: Layer): void {
     //
   }
 
-  hideLayer(layer: Layer) {
+  hideLayer(layer: Layer): void {
     //
   }
 
-  setLayerOpacity() {
+  setLayerOpacity(): void {
     // ignore
   }
 
-  setLayerOrder(layer: Layer, order: number) {
+  setLayerOrder(layer: Layer, order: number): void {
     //
   }
 
-  createControl(control: MapControl, options: CreateControlOptions) {
+  createControl(control: MapControl, options: CreateControlOptions): any {
     // return
   }
 
-  createButtonControl(options: ButtonControlOptions) {
+  createButtonControl(options: ButtonControlOptions): any {
     // return
   }
 
-  addControl(control: Control, position: ControlPositions) {
+  addControl(control: Control, position: ControlPositions): any {
     if (this._controlContainer) {
       this._controlContainer.addControl(control, position);
     }
   }
 
-  removeControl(control: Control) {
+  removeControl(control: Control): void {
     //
   }
 
-  onMapClick(evt: any) {
+  onMapClick(evt: MapClickEvent): void {
     //
   }
 
@@ -342,7 +364,7 @@ export class CesiumMapAdapter implements MapAdapter<any, Layer> {
   private _addEventsListener() {
     const viewer = this.map;
     if (viewer) {
-      const events: [keyof WebMapEvents, Cesium.Event | undefined][] = [
+      const events: [keyof WebMapEvents, Event | undefined][] = [
         ['zoomstart', undefined],
         ['zoom', undefined],
         ['zoomend', undefined],

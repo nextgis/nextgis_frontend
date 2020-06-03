@@ -12,10 +12,10 @@ export class NgwOl extends NgwMap {
     super(new OlMapAdapter(), options);
   }
 
-  static create = async (options: NgwMapOptions) => {
+  static async create(options: NgwMapOptions): Promise<NgwOl> {
     const ngwMap = new NgwOl(options);
     return ngwMap.onLoad();
-  };
+  }
 }
 
 export default NgwOl;

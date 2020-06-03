@@ -30,7 +30,7 @@ export class Item<O extends ItemOptions = ItemOptions> {
     this.tree = new TreeHelper(this);
   }
 
-  initProperties() {
+  initProperties(): void {
     this.properties = new ItemProperties(this, this.options.properties);
   }
 }

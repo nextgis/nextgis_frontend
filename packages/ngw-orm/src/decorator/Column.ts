@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import { ColumnType } from '../types/ColumnTypes';
 import { ColumnOptions } from '../options/ColumnOptions';
 import { ColumnTypeUndefinedError } from '../error/ColumnTypeUndefinedError';

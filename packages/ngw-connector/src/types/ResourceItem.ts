@@ -62,7 +62,8 @@ export type ResourceCls =
   | 'file_bucket'
   // tms branch
   | 'terrain_provider'
-  | 'model_3d';
+  | 'model_3d'
+  | 'tmsclient_layer';
 
 export interface ResourceHierarchy {
   id: number;

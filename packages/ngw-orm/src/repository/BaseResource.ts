@@ -22,7 +22,7 @@ export class BaseResource {
   static async connect(
     resourceOptions: ResourceDefinition,
     connectionOrOptions: Connection | ConnectionOptions
-  ) {
+  ): Promise<BaseResource> {
     const connection = Connection.create(connectionOrOptions);
     await connection.connect();
     const item = await connection.driver.getResource(resourceOptions);
@@ -39,15 +39,15 @@ export class BaseResource {
   static sync(
     options: SyncOptions,
     connectionOrOptions: Connection | ConnectionOptions
-  ) {
+  ): void {
     console.log('upload');
   }
 
-  useConnection(connection: Connection) {
+  useConnection(connection: Connection): void {
     this.connection = connection;
   }
 
-  setResourceItem(item: ResourceItem) {
+  setResourceItem(item: ResourceItem): void {
     this.resourceItem = item;
   }
 }

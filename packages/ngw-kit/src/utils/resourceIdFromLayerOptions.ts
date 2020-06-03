@@ -9,7 +9,7 @@ import {
 export async function resourceIdFromLayerOptions(
   options: NgwLayerOptions,
   connector: NgwConnector
-) {
+): Promise<number> {
   const resource = (options as ResourceNgwLayerOptions).resource;
   const item = resource as ResourceItem;
   let keyname = (options as KeynamedNgwLayerOptions).keyname;

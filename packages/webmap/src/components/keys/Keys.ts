@@ -38,13 +38,13 @@ export class Keys {
     return !!code && this.keys[code];
   }
 
-  addKeyboardEventsListener() {
+  addKeyboardEventsListener(): void {
     window.addEventListener('focus', this._windowOnFocus, false);
     window.addEventListener('keydown', this._keysPressed, false);
     window.addEventListener('keyup', this._keysReleased, false);
   }
 
-  removeKeyboardEventsListener() {
+  removeKeyboardEventsListener(): void {
     window.removeEventListener('focus', this._windowOnFocus, false);
     window.removeEventListener('keydown', this._keysPressed, false);
     window.removeEventListener('keyup', this._keysReleased, false);

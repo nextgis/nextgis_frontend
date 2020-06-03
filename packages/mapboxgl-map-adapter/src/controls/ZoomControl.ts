@@ -9,9 +9,17 @@ export class ZoomControl extends NavigationControl {
     super(options);
   }
 
-  _createButton(className: string, ariaLabel: string, fn: () => any) {
+  _createButton(
+    className: string,
+    ariaLabel: string,
+    fn: () => any
+  ): HTMLElement {
     // @ts-ignore
-    const element = super._createButton(className, ariaLabel, fn);
+    const element = super._createButton(
+      className,
+      ariaLabel,
+      fn
+    ) as HTMLElement;
     const aliases: any = {
       'Zoom in': 'zoomInTitle',
       'Zoom out': 'zoomOutTitle',

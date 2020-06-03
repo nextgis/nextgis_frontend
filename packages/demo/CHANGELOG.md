@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.32.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.31.0...v0.32.0) (2020-06-03)
+
+
+### Bug Fixes
+
+* **examples:** check paint opacity is number ([1105262](https://github.com/nextgis/nextgisweb_frontend/commit/1105262687d8b7e85873fe58933ced82d9cb77af))
+* **examples:** set type for ngw_resource highlight layer ([13ddcdd](https://github.com/nextgis/nextgisweb_frontend/commit/13ddcdd3ad346cad9ae99a6f924bcd62299336c5))
+
+
+### wip
+
+* rename VectorLayerAdapterType ([89a2c83](https://github.com/nextgis/nextgisweb_frontend/commit/89a2c83135e839f3eec373f93e5df777a7b81325))
+
+
+### BREAKING CHANGES
+
+* rename VectorLayerAdapter types: circle > point; fill > polygon
+
+
+
+
+
 # [0.31.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.2...v0.31.0) (2020-05-13)
 
 

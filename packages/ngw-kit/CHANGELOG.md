@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.32.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.31.0...v0.32.0) (2020-06-03)
+
+
+### Bug Fixes
+
+* **ngw-kit:** check company_logo in settings ([decf777](https://github.com/nextgis/nextgisweb_frontend/commit/decf777de5f30f27b15265808fa85c8529021cc1))
+* **ngw-kit:** set correct options when add webmaplayeritem ([0c5cd08](https://github.com/nextgis/nextgisweb_frontend/commit/0c5cd08b62b46fabe88bc51c91f0616d1d8c4a25))
+* **ngw-kit:** WebmapLayerItem ordering ([d4a0403](https://github.com/nextgis/nextgisweb_frontend/commit/d4a04038bc76257595d2eea618629a969ca9ca00))
+* **vuetify:** NgwLayersList root item hide ([abba8cb](https://github.com/nextgis/nextgisweb_frontend/commit/abba8cbd8a46697ba37a768bd2576086591c344c))
+
+
+### Features
+
+* **cesium:** update layer and map adapter ([c9d6a1d](https://github.com/nextgis/nextgisweb_frontend/commit/c9d6a1db8874586adb5ae1901153e71313aa776b))
+* **ngw-kit:** add ngw basemap suppor for url ([958303e](https://github.com/nextgis/nextgisweb_frontend/commit/958303eed8753d18a8c8d60b72a338c1656388f6))
+* **ngw-kit:** add NgwKit.utils.getCompanyLogo method ([3c6fa09](https://github.com/nextgis/nextgisweb_frontend/commit/3c6fa09321c0e979543b50b93c32da8725920d28))
+* **ngw-kit:** add tmsclient_layer adapter class support ([87b5976](https://github.com/nextgis/nextgisweb_frontend/commit/87b59760a574ffc66b1aec1d2df3af301efe1326))
+
+
+### wip
+
+* rename VectorLayerAdapterType ([89a2c83](https://github.com/nextgis/nextgisweb_frontend/commit/89a2c83135e839f3eec373f93e5df777a7b81325))
+
+
+### BREAKING CHANGES
+
+* rename VectorLayerAdapter types: circle > point; fill > polygon
+
+
+
+
+
 # [0.31.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.2...v0.31.0) (2020-05-13)
 
 

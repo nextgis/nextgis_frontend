@@ -5,9 +5,11 @@ import { BaseLayerAdapter, AdapterOptions } from '@nextgis/webmap';
 import { Viewer as TViewer, Event } from 'cesium';
 export type Map = TViewer;
 
+type Layer = any;
+
 export abstract class BaseAdapter<
   O extends AdapterOptions = AdapterOptions,
-  L = any
+  L = Layer
 > implements BaseLayerAdapter<Map, L, O> {
   protected onTerrainChange?: () => void;
   private _terrainProviderChangedListener?: Event.RemoveCallback;
@@ -19,17 +21,17 @@ export abstract class BaseAdapter<
     });
   }
 
-  beforeRemove() {
+  beforeRemove(): void {
     if (this._terrainProviderChangedListener) {
       this._terrainProviderChangedListener();
     }
   }
 
-  showLayer(layer?: any) {
+  showLayer(layer?: Layer): void {
     this.map.scene.requestRender();
   }
 
-  hideLayer(layer?: any) {
+  hideLayer(layer?: Layer): void {
     this.map.scene.requestRender();
   }
 

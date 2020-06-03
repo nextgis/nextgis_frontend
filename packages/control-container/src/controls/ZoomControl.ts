@@ -9,7 +9,7 @@ export class ZoomControl implements MapControl {
   private __onZoomInBtnClick?: () => void;
   private __onZoomOutBtnClick?: () => void;
 
-  onAdd(map: MapAdapter) {
+  onAdd(map: MapAdapter): HTMLElement {
     if (!this.map) {
       this.map = map;
     }
@@ -21,7 +21,7 @@ export class ZoomControl implements MapControl {
     return this._container;
   }
 
-  onRemove() {
+  onRemove(): void {
     this.map = undefined;
     if (this._container) {
       dom.remove(this._container);

@@ -4,6 +4,6 @@ export interface FromMakiOptions {
   size?: number;
 }
 
-export function fromMakiIcon() {
+export function fromMakiIcon(): void {
   //
 }

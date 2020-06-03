@@ -67,7 +67,7 @@ export interface TreeLayer extends TreeItem {
 
   layer_url?: string;
 
-  adapter?: NgwLayerAdapterType;
+  adapter?: string;
   url?: string;
 
   updateWmsParams?: (parans: any) => any;
@@ -238,3 +238,8 @@ export type GetClassAdapterByType = {
 };
 
 export type GetClassAdapter = GetClassAdapterCallback | GetClassAdapterByType;
+
+export interface CompanyLogoOptions {
+  padding?: string;
+  cssClass?: string;
+}

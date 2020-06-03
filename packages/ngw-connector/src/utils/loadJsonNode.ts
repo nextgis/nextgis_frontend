@@ -23,7 +23,7 @@ export default function loadJSONNode(
   options: NgwRequestOptions<RequestMethods> = {},
   error: (reason?: any) => void,
   onCancel: (cancelHandler: () => void) => void
-) {
+): Promise<unknown> {
   const request = new Promise((resolve, reject) => {
     const adapter = adapterFor(url);
     if (adapter) {
