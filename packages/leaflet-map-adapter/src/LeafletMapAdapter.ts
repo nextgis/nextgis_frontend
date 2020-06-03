@@ -203,14 +203,14 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     layer.remove();
   }
 
-  setLayerOpacity(layer: any, value: number): void {
-    if (layer.setOpacity) {
-      (layer as GridLayer).setOpacity(value);
+  setLayerOpacity(layer: GridLayer | Layer, value: number): void {
+    if ('setOpacity' in layer) {
+      layer.setOpacity(value);
     }
   }
 
   setLayerOrder(
-    layer: any,
+    layer: Layer,
     order: number,
     layers: { [x: string]: LayerAdapter }
   ): void {

@@ -32,7 +32,7 @@ export class BasemapSelect extends Vue {
   protected _layers: Array<LayerAdapter | ResourceAdapter> = [];
 
   @Watch('active')
-  setVisibleLayers(active: string) {
+  setVisibleLayers(active: string): void {
     const activeLayer = this._layers.find((x) => x.id === active);
     if (activeLayer) {
       this.webMap.showLayer(activeLayer);
@@ -45,16 +45,16 @@ export class BasemapSelect extends Vue {
   }
 
   @Watch('ngwMap')
-  updateNgwMap() {
+  updateNgwMap(): void {
     this.destroy();
     this.create();
   }
 
-  mounted() {
+  mounted(): void {
     this.create();
   }
 
-  beforeDestroy() {
+  beforeDestroy(): void {
     this.destroy();
   }
 
@@ -85,13 +85,13 @@ export class BasemapSelect extends Vue {
     return h(VSelect, data, this.$slots.default);
   }
 
-  async updateItems() {
+  async updateItems(): Promise<void> {
     if (this.__updateItems) {
       this.__updateItems();
     }
   }
 
-  protected create() {
+  protected create(): void {
     this.webMap.onLoad().then(() => {
       this.destroy();
       const __updateItems = debounce(async () => {
@@ -105,7 +105,7 @@ export class BasemapSelect extends Vue {
     });
   }
 
-  protected destroy() {
+  protected destroy(): void {
     if (this.__updateItems) {
       this.webMap.emitter.off('layer:add', this.__updateItems);
       this.webMap.emitter.off('layer:remove', this.__updateItems);

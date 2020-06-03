@@ -2,7 +2,12 @@
  * @module ngw-uploader
  */
 
-import NgwConnector, { Credentials } from '@nextgis/ngw-connector';
+import NgwConnector, {
+  Credentials,
+  CancelablePromise,
+  CreatedResource,
+  ResourceItem,
+} from '@nextgis/ngw-connector';
 import { EventEmitter } from 'events';
 import { evented, onLoad } from './decorators';
 import Dialog from '@nextgis/dialog';
@@ -72,7 +77,10 @@ export class NgwUploader {
   }
 
   @evented({ status: 'create-group', template: 'group creation' })
-  createGroup(name: string, options: GroupOptions = {}) {
+  createGroup(
+    name: string,
+    options: GroupOptions = {}
+  ): CancelablePromise<CreatedResource> | undefined {
     const data = {
       resource: {
         cls: 'resource_group',
@@ -95,7 +103,11 @@ export class NgwUploader {
   }
 
   @evented({ status: 'create-resource', template: 'resource creation' })
-  createResource(meta: any, name: string, options: RasterUploadOptions) {
+  createResource(
+    meta: Record<string, any>,
+    name: string,
+    options: RasterUploadOptions
+  ): CancelablePromise<CreatedResource> | undefined {
     const data = {
       resource: {
         cls: 'raster_layer',
@@ -127,7 +139,10 @@ export class NgwUploader {
     status: 'create-style',
     template: 'style creation for resource ID {id}',
   })
-  createStyle(newRes: any, name?: string) {
+  createStyle(
+    newRes: Record<string, any>,
+    name?: string
+  ): CancelablePromise<CreatedResource & { name: string }> | undefined {
     name = name || newRes.name || newRes.id;
     const styleData = {
       resource: {
@@ -159,7 +174,10 @@ export class NgwUploader {
     status: 'create-wms',
     template: 'wms creation for resource ID {id}',
   })
-  createWms(options: any, name?: string) {
+  createWms(
+    options: Record<string, any>,
+    name?: string
+  ): CancelablePromise<CreatedResource> | undefined {
     name = name || options.name || options.id;
     let layers = options.layers || [
       {
@@ -204,7 +222,10 @@ export class NgwUploader {
     status: 'create-wms-connection',
     template: 'create wms connection',
   })
-  createWmsConnection(options: CreateWmsConnectionOptions, name?: string) {
+  createWmsConnection(
+    options: CreateWmsConnectionOptions,
+    name?: string
+  ): CancelablePromise<CreatedResource> | undefined {
     name = name || options.name || String(options.id);
     const wmsData = {
       resource: {
@@ -240,7 +261,7 @@ export class NgwUploader {
   createWmsConnectedLayer(
     options: CreateWmsConnectedLayerOptions,
     name?: string
-  ) {
+  ): CancelablePromise<CreatedResource> | undefined {
     name = name || options.name || String(options.id);
     const wmslayers =
       options.wmslayers && Array.isArray(options.wmslayers)
@@ -278,7 +299,10 @@ export class NgwUploader {
   }
 
   @evented({ status: 'upload', template: 'file upload' })
-  fileUpload(file: File, options: RasterUploadOptions = {}) {
+  fileUpload(
+    file: File,
+    options: RasterUploadOptions = {}
+  ): CancelablePromise<Record<string, any>> | undefined {
     return (
       this.connector &&
       this.connector
@@ -356,7 +380,9 @@ export class NgwUploader {
     return input;
   }
 
-  getResource(id: number) {
+  getResource(
+    id: number
+  ): CancelablePromise<ResourceItem | undefined> | undefined {
     return this.connector && this.connector.getResource(id);
   }
 
