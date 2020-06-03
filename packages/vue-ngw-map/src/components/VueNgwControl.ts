@@ -28,14 +28,14 @@ export class VueNgwControl extends Vue {
   control?: unknown;
   ready = false;
 
-  beforeDestroy() {
+  beforeDestroy(): void {
     if (this.parentContainer.ngwMap && this.control) {
       this.parentContainer.ngwMap.removeControl(this.control);
       this.control = undefined;
     }
   }
 
-  setControl(element: HTMLElement) {
+  setControl(element: HTMLElement): void {
     const ngwMap = this.parentContainer.ngwMap;
     const control = this.control;
     if (ngwMap) {
@@ -62,7 +62,7 @@ export class VueNgwControl extends Vue {
     }
   }
 
-  mounted() {
+  mounted(): void {
     this.parentContainer = findNgwMapParent(this.$parent);
 
     this.setControl(this.$el as HTMLElement);

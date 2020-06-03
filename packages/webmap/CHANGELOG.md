@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.32.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.31.0...v0.32.0) (2020-06-03)
+
+
+### Bug Fixes
+
+* **cesium:** Tileset#DAdapter set terrain height ([790760f](https://github.com/nextgis/nextgisweb_frontend/commit/790760f0b8b90b9c9d572640612cfc00dabfd5d5))
+* **mapbox:** geojson getSelected method ([e0d859c](https://github.com/nextgis/nextgisweb_frontend/commit/e0d859cd186876f0b382e1338d1793151d18dd6a))
+
+
+### Features
+
+* **cesium:** implement getCenter ([ea83d8e](https://github.com/nextgis/nextgisweb_frontend/commit/ea83d8ebd8972123ba0991388e4e53fce91b077e))
+* **cesium:** tilset 3d adapter height options ([02973bf](https://github.com/nextgis/nextgisweb_frontend/commit/02973bfcacb6bde3b7d4e23fdd190d0e81536f57))
+* **webmap:** vector layer select event ([edd18ba](https://github.com/nextgis/nextgisweb_frontend/commit/edd18baa3d2b0e5886812e09795de4f041be23ab))
+* **webmap:** zoomIn and zoomOut MapAdapter optional methods ([70b807f](https://github.com/nextgis/nextgisweb_frontend/commit/70b807fd1d157b5505a3d815f24a02fbb1fff6a6))
+
+
+### Performance Improvements
+
+* **webmap:** addControl coner queue ([5c21367](https://github.com/nextgis/nextgisweb_frontend/commit/5c21367fc1a0142d56e443948d7d01f49549d5b1))
+
+
+### wip
+
+* rename VectorLayerAdapterType ([89a2c83](https://github.com/nextgis/nextgisweb_frontend/commit/89a2c83135e839f3eec373f93e5df777a7b81325))
+
+
+### BREAKING CHANGES
+
+* rename VectorLayerAdapter types: circle > point; fill > polygon
+
+
+
+
+
 # [0.31.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.2...v0.31.0) (2020-05-13)
 
 

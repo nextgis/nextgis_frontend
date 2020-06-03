@@ -1,5 +1,5 @@
-import { LayerFeature } from '@nextgis/ngw-connector';
-import { Geometry } from 'geojson';
+import { LayerFeature, CancelablePromise } from '@nextgis/ngw-connector';
+import { Geometry, Feature } from 'geojson';
 import { getNgwLayerFeature, createGeoJsonFeature } from './featureLayerUtils';
 import {
   GetIdentifyGeoJsonOptions,
@@ -48,7 +48,13 @@ export function getIdentifyItems(
   return paramsList;
 }
 
-export function getIdentifyGeoJson(options: GetIdentifyGeoJsonOptions) {
+// TODO: always return CancelablePromise
+export function getIdentifyGeoJson<
+  G extends Geometry | null = Geometry,
+  P extends Record<string, any> = Record<string, any>
+>(
+  options: GetIdentifyGeoJsonOptions
+): CancelablePromise<Feature<G, P>> | Feature<G, P> | undefined {
   const { connector, identify } = options;
   for (const l in identify) {
     const id = Number(l);

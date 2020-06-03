@@ -8,7 +8,15 @@ function getResolutionForScale(scale: number, metersPerUnit: number) {
   return scale / (metersPerUnit * IPM * DPI);
 }
 
-export function resolutionOptions(map: Map, opt: AdapterOptions) {
+interface ResolutionOptions {
+  minResolution: number | undefined;
+  maxResolution: number | undefined;
+}
+
+export function resolutionOptions(
+  map: Map,
+  opt: AdapterOptions
+): ResolutionOptions {
   return {
     minResolution:
       (opt.maxScale && getResolution(map, opt.maxScale)) || undefined,
@@ -17,7 +25,7 @@ export function resolutionOptions(map: Map, opt: AdapterOptions) {
   };
 }
 
-export function getResolution(map: Map, scale: number) {
+export function getResolution(map: Map, scale: number): number | undefined {
   if (scale) {
     return getResolutionForScale(
       scale,

@@ -6,7 +6,7 @@ export default function loadJSONBrowser(
   options: RequestOptions = {},
   error: (reason?: any) => void,
   onCancel: (cancelHandler: () => void) => void
-) {
+): void {
   options.method = options.method || 'GET';
 
   const xhr = new XMLHttpRequest();

@@ -12,6 +12,7 @@ import {
   PropertiesFilter,
   VectorLayerAdapter,
   GeoJsonAdapterOptions,
+  LayerDefinition,
 } from '@nextgis/webmap';
 import { Paint } from '@nextgis/paint';
 import { defined } from '@nextgis/utils';
@@ -22,6 +23,7 @@ import { styleFunction, labelStyleFunction, getFeature } from '../utils/utils';
 import { ForEachFeatureAtPixelCallback } from '../OlMapAdapter';
 
 type Layer = Base;
+type Layers = LayerDefinition<Feature, Layer>;
 
 export class GeoJsonAdapter
   implements VectorLayerAdapter<Map, Layer, GeoJsonAdapterOptions> {
@@ -37,7 +39,7 @@ export class GeoJsonAdapter
 
   constructor(public map: Map, public options: GeoJsonAdapterOptions) {}
 
-  addLayer(options: GeoJsonAdapterOptions) {
+  addLayer(options: GeoJsonAdapterOptions): VectorLayer {
     this.options = options;
     this.paint = options.paint;
 
@@ -78,7 +80,7 @@ export class GeoJsonAdapter
     return this.layer;
   }
 
-  clearLayer(cb?: (feature: Feature) => boolean) {
+  clearLayer(cb?: (feature: Feature) => boolean): void {
     if (cb) {
       const features = this.vectorSource.getFeatures().values();
       let entry;
@@ -93,12 +95,12 @@ export class GeoJsonAdapter
     }
   }
 
-  setData(data: GeoJsonObject) {
+  setData(data: GeoJsonObject): void {
     this.clearLayer();
     this.addData(data);
   }
 
-  addData(data: GeoJsonObject) {
+  addData(data: GeoJsonObject): void {
     const features = new GeoJSON().readFeatures(data, {
       dataProjection: 'EPSG:4326',
       featureProjection: 'EPSG:3857',
@@ -111,7 +113,7 @@ export class GeoJsonAdapter
     }
   }
 
-  select(findFeatureCb?: DataLayerFilter<Feature> | PropertiesFilter) {
+  select(findFeatureCb?: DataLayerFilter<Feature> | PropertiesFilter): void {
     if (findFeatureCb) {
       const feature = this._selectedFeatures.filter((x) =>
         Object.create({ feature: x })
@@ -127,7 +129,7 @@ export class GeoJsonAdapter
     }
   }
 
-  unselect(findFeatureCb?: DataLayerFilter<Feature> | PropertiesFilter) {
+  unselect(findFeatureCb?: DataLayerFilter<Feature> | PropertiesFilter): void {
     if (findFeatureCb) {
       const feature = this._selectedFeatures.filter((x) =>
         Object.create({ feature: x })
@@ -143,19 +145,19 @@ export class GeoJsonAdapter
     }
   }
 
-  getLayers() {
+  getLayers(): Layers[] {
     return this._features.map((x) => {
       return { feature: getFeature(x) };
     });
   }
 
-  getSelected() {
+  getSelected(): Layers[] {
     return this._selectedFeatures.map((x) => {
       return { feature: getFeature(x) };
     });
   }
 
-  filter(fun?: DataLayerFilter<Feature, Layer>) {
+  filter(fun?: DataLayerFilter<Feature, Layer>): Layers[] {
     this._filterFun = fun;
     const features = this._features;
     const filtered = fun
@@ -173,7 +175,7 @@ export class GeoJsonAdapter
     });
   }
 
-  cleanFilter() {
+  cleanFilter(): void {
     this.filter();
   }
 

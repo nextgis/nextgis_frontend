@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 /**
  * Represents some Type of the Object.
  */

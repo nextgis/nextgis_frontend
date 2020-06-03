@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.32.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.31.0...v0.32.0) (2020-06-03)
+
+
+### Bug Fixes
+
+* **mapbox:** geojson getSelected method ([e0d859c](https://github.com/nextgis/nextgisweb_frontend/commit/e0d859cd186876f0b382e1338d1793151d18dd6a))
+
+
+### Features
+
+* **webmap:** vector layer select event ([edd18ba](https://github.com/nextgis/nextgisweb_frontend/commit/edd18baa3d2b0e5886812e09795de4f041be23ab))
+
+
+### wip
+
+* rename VectorLayerAdapterType ([89a2c83](https://github.com/nextgis/nextgisweb_frontend/commit/89a2c83135e839f3eec373f93e5df777a7b81325))
+
+
+### BREAKING CHANGES
+
+* rename VectorLayerAdapter types: circle > point; fill > polygon
+
+
+
+
+
 # [0.31.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.30.2...v0.31.0) (2020-05-13)
 
 

@@ -2,7 +2,11 @@
  * @module ngw-kit
  */
 import NgwConnector from '@nextgis/ngw-connector';
-import WebMap, { StarterKit, Type } from '@nextgis/webmap';
+import WebMap, {
+  StarterKit,
+  Type,
+  LayerAdapterCreators,
+} from '@nextgis/webmap';
 import {
   getNgwResourceExtent,
   sendIdentifyRequest,
@@ -94,11 +98,11 @@ export class NgwKit implements StarterKit {
     }
   }
 
-  static addClassAdapters(cls: string, adapter: GetClassAdapter) {
+  static addClassAdapters(cls: string, adapter: GetClassAdapter): void {
     classAdapters[cls] = adapter;
   }
 
-  async onLoadSync(webMap: WebMap) {
+  async onLoadSync(webMap: WebMap): Promise<WebMapLayerAdapter | undefined> {
     if (this.options.resourceId && this.url) {
       // TODO: resources from array
       const resourceIds = [this.options.resourceId];
@@ -123,7 +127,7 @@ export class NgwKit implements StarterKit {
     }
   }
 
-  getLayerAdapters() {
+  getLayerAdapters(): Promise<LayerAdapterCreators[]> {
     return Promise.resolve([this._getLayerAdapter()]);
   }
 

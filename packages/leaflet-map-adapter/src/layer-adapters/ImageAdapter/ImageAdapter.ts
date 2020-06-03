@@ -12,7 +12,7 @@ export class ImageAdapter extends BaseAdapter<ImageAdapterOptions>
   implements BaseLayerAdapter<Map> {
   layer: any;
 
-  addLayer(options: ImageAdapterOptions) {
+  addLayer(options: ImageAdapterOptions): any {
     const url = options && options.url;
     if (url) {
       options = { transparent: true, ...options };

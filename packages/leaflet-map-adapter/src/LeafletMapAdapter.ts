@@ -71,7 +71,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     'moveend',
   ];
 
-  create(options: MapOptions) {
+  create(options: MapOptions): void {
     this.options = { ...options };
     if (this.options.target) {
       const { maxZoom, minZoom, zoom, center } = this.options;
@@ -91,7 +91,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     }
   }
 
-  destroy() {
+  destroy(): void {
     if (this.map) {
       this.map.remove();
     }
@@ -101,13 +101,13 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     return this.map && this.map.getContainer();
   }
 
-  setCursor(cursor: string) {
+  setCursor(cursor: string): void {
     if (this.map) {
       this.map.getContainer().style.cursor = cursor;
     }
   }
 
-  setView(lngLat: LngLatArray, zoom?: number) {
+  setView(lngLat: LngLatArray, zoom?: number): void {
     const [lng, lat] = lngLat;
     if (this.map) {
       if (zoom) {
@@ -118,7 +118,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     }
   }
 
-  setCenter(lngLat: LngLatArray) {
+  setCenter(lngLat: LngLatArray): void {
     const [lng, lat] = lngLat;
     if (this.map) {
       this.map.panTo([lat, lng]);
@@ -134,7 +134,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     }
   }
 
-  setZoom(zoom: number) {
+  setZoom(zoom: number): void {
     if (this.map) {
       this.map.setZoom(zoom);
     }
@@ -153,7 +153,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   }
 
   // [west, south, east, north]
-  fitBounds(e: LngLatBoundsArray) {
+  fitBounds(e: LngLatBoundsArray): void {
     if (this.map) {
       // top, left, bottom, right
       this.map.fitBounds([
@@ -163,15 +163,15 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     }
   }
 
-  getLayerAdapter(name: string) {
+  getLayerAdapter(name: string): Type<LayerAdapter<L.Map, any, any>> {
     return LeafletMapAdapter.layerAdapters[name];
   }
 
-  createControl(control: MapControl, options: CreateControlOptions) {
+  createControl(control: MapControl, options: CreateControlOptions): L.Control {
     return createControl(control, options);
   }
 
-  createButtonControl(options: ButtonControlOptions) {
+  createButtonControl(options: ButtonControlOptions): L.Control {
     return createButtonControl(options);
   }
 
@@ -183,37 +183,37 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     }
   }
 
-  removeControl(control: Control) {
+  removeControl(control: Control): void {
     if (this.map) {
       this.map.removeControl(control);
     }
   }
 
-  removeLayer(layer: Layer) {
+  removeLayer(layer: Layer): void {
     layer && layer.remove && layer.remove();
   }
 
-  showLayer(layer: Layer) {
+  showLayer(layer: Layer): void {
     if (this.map) {
       layer.addTo(this.map);
     }
   }
 
-  hideLayer(layer: Layer) {
+  hideLayer(layer: Layer): void {
     layer.remove();
   }
 
-  setLayerOpacity(layer: any, value: number) {
-    if (layer.setOpacity) {
-      (layer as GridLayer).setOpacity(value);
+  setLayerOpacity(layer: GridLayer | Layer, value: number): void {
+    if ('setOpacity' in layer) {
+      layer.setOpacity(value);
     }
   }
 
   setLayerOrder(
-    layer: any,
+    layer: Layer,
     order: number,
     layers: { [x: string]: LayerAdapter }
-  ) {
+  ): void {
     // const baseLayers: string[] = [];
     // const orderedLayers = Object.keys(layers).filter((x) => {
     //   if (layers[x].options.baseLayer) {
@@ -251,7 +251,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     // });
   }
 
-  onMapClick(evt: LeafletMouseEvent) {
+  onMapClick(evt: LeafletMouseEvent): void {
     this.emitter.emit('click', convertMapClickEvent(evt));
   }
 

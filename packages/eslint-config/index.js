@@ -53,6 +53,8 @@ module.exports = {
       },
     ],
     camelcase: 'off',
+    // '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/no-use-before-define': 0,
     '@typescript-eslint/member-ordering': 2,
     '@typescript-eslint/no-unused-vars': [
@@ -61,12 +63,13 @@ module.exports = {
         args: 'none',
       },
     ],
-    '@typescript-eslint/camelcase': [
-      'error',
-      {
-        properties: 'never',
-      },
-    ],
+    // '@typescript-eslint/camelcase': 'off',
+    // '@typescript-eslint/camelcase': [
+    //   'error',
+    //   {
+    //     properties: 'never',
+    //   },
+    // ],
     '@typescript-eslint/explicit-member-accessibility': [
       'error',
       {

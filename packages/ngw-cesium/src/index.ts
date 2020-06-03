@@ -10,10 +10,10 @@ export class NgwCesium extends NgwMap {
     super(new MapAdapter(), options);
   }
 
-  static create = async (options: NgwMapOptions) => {
+  static async create(options: NgwMapOptions): Promise<NgwCesium> {
     const ngwMap = new NgwCesium(options);
     return ngwMap.onLoad();
-  };
+  }
 }
 
 export default NgwCesium;

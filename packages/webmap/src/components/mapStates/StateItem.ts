@@ -29,14 +29,14 @@ export abstract class StateItem<V extends any | undefined = any | undefined>
     }
   }
 
-  getValue() {
+  getValue(): V | undefined {
     return this.value;
   }
 
-  setValue(val: V) {
+  setValue(val: V): void {
     this.value = val;
   }
 
-  abstract toString(data: any): string;
+  abstract toString(data: unknown): string;
   abstract parse(str: string): V;
 }

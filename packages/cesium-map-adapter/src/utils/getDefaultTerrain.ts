@@ -1,5 +1,5 @@
 import { EllipsoidTerrainProvider } from 'cesium';
 
-export function getDefaultTerrain() {
+export function getDefaultTerrain(): EllipsoidTerrainProvider {
   return new EllipsoidTerrainProvider();
 }
