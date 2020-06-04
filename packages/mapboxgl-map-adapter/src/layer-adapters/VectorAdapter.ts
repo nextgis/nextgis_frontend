@@ -246,7 +246,16 @@ export abstract class VectorAdapter<
         return false;
       });
       if (feature) {
+        let features: Feature[] | undefined = undefined;
         let isSelected = this.isFeatureSelected(feature);
+        if (isSelected) {
+          if (this.options && this.options.unselectOnSecondClick) {
+            this._unselectFeature(feature, { silent: true });
+          }
+        } else {
+          features = this._selectFeature(feature, { silent: true });
+        }
+        isSelected = this.isFeatureSelected(feature);
         if (this.options.onLayerClick) {
           this.options.onLayerClick({
             layer: this,
@@ -254,14 +263,9 @@ export abstract class VectorAdapter<
             selected: isSelected,
           });
         }
-        if (isSelected) {
-          if (this.options && this.options.unselectOnSecondClick) {
-            this._unselectFeature(feature);
-          }
-        } else {
-          this._selectFeature(feature);
+        if (this.options.onLayerSelect) {
+          this.options.onLayerSelect({ layer: this, features });
         }
-        isSelected = this.isFeatureSelected(feature);
       }
     }
     return feature;
@@ -418,7 +422,9 @@ export abstract class VectorAdapter<
             }
           }
         }
-        mapboxPaint[mapboxType + '-opacity-transition'] = { duration: 0 };
+        mapboxPaint[mapboxType + '-opacity-transition'] = {
+          duration: 0,
+        };
         return mapboxPaint;
       }
     }
@@ -459,7 +465,10 @@ export abstract class VectorAdapter<
     }
   }
 
-  protected _selectFeature(feature: Feature | Feature[]): void {
+  protected _selectFeature(
+    feature: Feature | Feature[],
+    opt?: { silent: boolean }
+  ): Feature[] {
     const features = Array.isArray(feature) ? feature : [feature];
     this.select([
       [
@@ -470,9 +479,13 @@ export abstract class VectorAdapter<
         ),
       ],
     ]);
+    return [];
   }
 
-  protected _unselectFeature(feature: Feature | Feature[]): void {
+  protected _unselectFeature(
+    feature: Feature | Feature[],
+    opt?: { silent: boolean }
+  ): void {
     // ignore
   }
 
