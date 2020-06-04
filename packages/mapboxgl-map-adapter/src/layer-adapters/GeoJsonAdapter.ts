@@ -97,7 +97,10 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
       }
       await this._updateLayerPaint(type);
       const source = this.map.getSource(this._sourceId) as GeoJSONSource;
-      source.setData({ type: 'FeatureCollection', features: this._features });
+      source.setData({
+        type: 'FeatureCollection',
+        features: this._features,
+      });
     }
   }
 
@@ -234,7 +237,10 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     }
   }
 
-  protected _selectFeature(feature: Feature | Feature[]): void {
+  protected _selectFeature(
+    feature: Feature | Feature[],
+    opt: { silent: boolean } = { silent: false }
+  ): Feature[] {
     let selectedFeatureIds = this._selectedFeatureIds || [];
     if (this.options && !this.options.multiselect) {
       selectedFeatureIds = [];
@@ -254,12 +260,16 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     this._selectProperties = undefined;
     this._selectedFeatureIds = selectedFeatureIds;
     this._updateFilter();
-    if (this.options.onLayerSelect) {
+    if (!opt.silent && this.options.onLayerSelect) {
       this.options.onLayerSelect({ layer: this, features });
     }
+    return features;
   }
 
-  protected _unselectFeature(feature?: Feature | Feature[]): void {
+  protected _unselectFeature(
+    feature?: Feature | Feature[],
+    opt: { silent: boolean } = { silent: false }
+  ): void {
     if (feature) {
       let features: Feature[] = [];
       if (Array.isArray(feature)) {
@@ -283,7 +293,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
       this._selectedFeatureIds = false;
     }
     this._updateFilter();
-    if (this.options.onLayerSelect) {
+    if (!opt.silent && this.options.onLayerSelect) {
       this.options.onLayerSelect({ layer: this, features: undefined });
     }
   }
