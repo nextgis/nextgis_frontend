@@ -94,7 +94,7 @@ export class WebMapLayerItem extends Item<ItemOptions> {
     const i = item;
     if (item.item_type === 'group' || item.item_type === 'root') {
       if (item.children && item.children.length) {
-        item.children.forEach((x) => {
+        this.getChildren(item).forEach((x) => {
           const children = new WebMapLayerItem(
             this.webMap,
             x,
@@ -172,6 +172,10 @@ export class WebMapLayerItem extends Item<ItemOptions> {
     if (this.item.item_type === 'layer') {
       console.log(this.item);
     }
+  }
+
+  protected getChildren(item: TreeGroup): (TreeGroup | TreeLayer)[] {
+    return item.children.reverse();
   }
 
   private _mapScaleToZoomLevel(scale: number) {
