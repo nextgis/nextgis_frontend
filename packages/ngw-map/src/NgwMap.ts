@@ -194,7 +194,10 @@ export class NgwMap<
         }
         return layer;
       } catch (er) {
-        console.error("Can't add NGW layer.", er);
+        console.error(
+          `Can't add NGW layer ${keyname || resourceId || resource}.`,
+          er
+        );
       }
     }
   }
