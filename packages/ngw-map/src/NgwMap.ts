@@ -178,6 +178,7 @@ export class NgwMap<
 
         const layer = (await this.addLayer(adapter, {
           visibility: true,
+          // TODO: do not merge options, use only `adapterOptions`
           ...options,
           ...options.adapterOptions,
         })) as ResourceAdapter;
