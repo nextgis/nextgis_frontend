@@ -19,7 +19,11 @@ export async function resourceIdFromLayerOptions(
       keyname = resource;
     } else if (typeof resource === 'number') {
       resourceId = resource;
-    } else if (item.resource && item.resource !== undefined) {
+    } else if (
+      item.resource &&
+      item.resource !== undefined &&
+      'resmeta' in item
+    ) {
       resourceId = (resource as ResourceItem).resource.id;
     } else {
       resourceId = await resourceIdFromLayerOptions(
