@@ -2,7 +2,7 @@
  * @module cesium-map-adapter
  */
 
-import { CesiumMapAdapter } from './CesiumMapAdapter';
+import { CesiumMapAdapter, MapAdapterOptions } from './CesiumMapAdapter';
 
-export { CesiumMapAdapter };
+export { CesiumMapAdapter, MapAdapterOptions };
 export default CesiumMapAdapter;
