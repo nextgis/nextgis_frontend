@@ -45,6 +45,9 @@ import { updateGeoJsonAdapterOptions } from './utils/updateGeoJsonAdapterOptions
 
 type EmitStatusEventData = any;
 
+let ID = 0;
+const WEB_MAP_CONTAINER: Record<number, any> = {};
+
 const OPTIONS: MapOptions = {
   minZoom: 0,
   maxZoom: 21,
@@ -96,6 +99,7 @@ export class BaseWebMap<
 
   getPaintFunctions = BaseWebMap.getPaintFunctions;
   mapState: Type<StateItem>[] = [CenterState, ZoomState];
+  id = ID++;
 
   /**
    * From runtime params
@@ -109,6 +113,7 @@ export class BaseWebMap<
   private readonly _mapEvents: Record<string, (...args: any[]) => void> = {};
 
   constructor(appOptions: AppOptions) {
+    WEB_MAP_CONTAINER[this.id] = this;
     this.mapAdapter = appOptions.mapAdapter;
     this._starterKits = appOptions.starterKits || [];
     if (appOptions.mapOptions) {
@@ -121,6 +126,14 @@ export class BaseWebMap<
     if (appOptions.create) {
       this.create(this.options);
     }
+  }
+
+  static get<T extends BaseWebMap = BaseWebMap>(id: number): T | undefined {
+    return WEB_MAP_CONTAINER[id];
+  }
+
+  getId(): number {
+    return this.id;
   }
 
   /**
