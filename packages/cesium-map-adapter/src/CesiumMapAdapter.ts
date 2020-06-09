@@ -33,6 +33,7 @@ import {
   ButtonControlOptions,
   FitOptions,
 } from '@nextgis/webmap';
+import { Type } from '@nextgis/utils';
 import ControlContainer from '@nextgis/control-container';
 
 import { TileAdapter } from './layer-adapters/TileAdapter';
@@ -67,7 +68,7 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
     TILESET_3D: Tileset3DAdapter,
   };
 
-  static controlAdapters = {
+  static controlAdapters: Record<string, Type<MapControl>> = {
     ZOOM: ControlContainer.controls.ZOOM,
     // ATTRIBUTION: Attribution
   };
