@@ -16,7 +16,7 @@ import {
   WebMercatorProjection,
   TerrainProvider,
   Color,
-  // viewerCesiumInspectorMixin,
+  viewerCesiumInspectorMixin,
   // @ts-ignore
   viewerCesium3DTilesInspectorMixin,
 } from 'cesium';
@@ -45,6 +45,15 @@ import { getDefaultTerrain } from './utils/getDefaultTerrain';
 type Layer = any;
 type Control = any;
 type MapClickEvent = any;
+
+export interface MapAdapterOptions {
+  baseColor: string;
+  depthTestAgainstTerrain: boolean;
+  fxaaEnabled: boolean;
+  requestRenderMode: boolean;
+  viewerCesium3DTilesInspectorMixin: boolean;
+  viewerCesiumInspectorMixin: boolean;
+}
 
 export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
   static layerAdapters = {
@@ -115,10 +124,25 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
       });
       GeoJsonDataSource.clampToGround = true;
       viewer.imageryLayers.removeAll();
-      viewer.scene.globe.baseColor = Color.fromCssColorString('white');
-      viewer.scene.globe.depthTestAgainstTerrain = false;
-      viewer.scene.postProcessStages.fxaa.enabled = true;
-      viewer.scene.requestRenderMode = true;
+
+      const ma: MapAdapterOptions = {
+        baseColor: 'white',
+        depthTestAgainstTerrain: false,
+        fxaaEnabled: true,
+        requestRenderMode: true,
+        viewerCesium3DTilesInspectorMixin: false,
+        viewerCesiumInspectorMixin: false,
+      };
+      if (this.options.mapAdapterOptions) {
+        Object.assign(ma, this.options.mapAdapterOptions);
+      }
+
+      viewer.scene.globe.baseColor = Color.fromCssColorString(
+        String(ma.baseColor)
+      );
+      viewer.scene.globe.depthTestAgainstTerrain = !!ma.depthTestAgainstTerrain;
+      viewer.scene.postProcessStages.fxaa.enabled = !!ma.fxaaEnabled;
+      viewer.scene.requestRenderMode = !!ma.requestRenderMode;
       const t = viewer.scene.terrainProviderChanged;
       this._terrainProviderChangedListener = t.addEventListener(
         (e: TerrainProvider) => {
@@ -145,10 +169,12 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
         map: this,
       });
 
-      if (options.debug) {
-        // viewer.extend(viewerCesiumInspectorMixin, {});
+      if (ma.viewerCesium3DTilesInspectorMixin) {
         viewer.extend(viewerCesium3DTilesInspectorMixin, {});
         // const inspectorViewModel = viewer.cesium3DTilesInspector.viewModel;
+      }
+      if (ma.viewerCesiumInspectorMixin) {
+        viewer.extend(viewerCesiumInspectorMixin, {});
       }
 
       const bounds = options.bounds;

@@ -49,8 +49,6 @@ import {
 } from './interfaces';
 import { Geometry, Feature, FeatureCollection } from 'geojson';
 
-let ID = 0;
-
 /**
  * Base class containing the logic of interaction WebMap with NextGIS services.
  *
@@ -89,7 +87,6 @@ export class NgwMap<
     NgwMapEvents
   > = new EventEmitter();
 
-  id = ID++;
   options: NgwMapOptions<C> & O = {} as NgwMapOptions<C> & O;
   connector!: NgwConnector;
 
