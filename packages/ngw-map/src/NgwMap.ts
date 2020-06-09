@@ -73,13 +73,13 @@ export class NgwMap<
   C = any,
   O = Record<string, any>
 > extends WebMap<M, L, C, NgwMapEvents> {
-  static utils = {
-    ...WebMap.utils,
-    ...NgwKit.utils,
-    fixUrlStr,
-    deepmerge,
-  };
-  static decorators = { onMapLoad, ...WebMap.decorators };
+  // static utils = {
+  //   ...WebMap.utils,
+  //   ...NgwKit.utils,
+  //   fixUrlStr,
+  //   deepmerge,
+  // };
+  // static decorators = { onMapLoad, ...WebMap.decorators };
   static getIcon = getIcon;
 
   readonly emitter: StrictEventEmitter<
@@ -566,3 +566,15 @@ export class NgwMap<
     }
   }
 }
+
+// update static utils for backward compatibility
+NgwMap.utils = {
+  ...NgwMap.utils,
+  ...NgwKit.utils,
+  ...{
+    deepmerge,
+    fixUrlStr,
+  },
+};
+
+NgwMap.decorators = { ...{ onMapLoad }, ...WebMap.decorators };
