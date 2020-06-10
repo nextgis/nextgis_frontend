@@ -19,7 +19,6 @@ import {
   viewerCesiumInspectorMixin,
   // @ts-ignore
   viewerCesium3DTilesInspectorMixin,
-  Credit,
 } from 'cesium';
 
 import {
