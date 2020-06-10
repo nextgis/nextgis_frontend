@@ -17,7 +17,6 @@ import {
   TerrainProvider,
   Color,
   viewerCesiumInspectorMixin,
-  // @ts-ignore
   viewerCesium3DTilesInspectorMixin,
 } from 'cesium';
 
@@ -165,7 +164,7 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
       }
 
       this.map = viewer;
-      // this._setCustomLogo();
+      this._removeLogo();
       this._controlContainer = new ControlContainer({
         addClass: 'cesium-control',
         map: this,
@@ -173,7 +172,8 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
 
       if (ma.viewerCesium3DTilesInspectorMixin) {
         viewer.extend(viewerCesium3DTilesInspectorMixin, {});
-        // const inspectorViewModel = viewer.cesium3DTilesInspector.viewModel;
+        // const inspectorViewModel = viewer.cesium3DTilesInspector;
+        // console.log(inspectorViewModel);
       }
       if (ma.viewerCesiumInspectorMixin) {
         viewer.extend(viewerCesiumInspectorMixin, {});
@@ -389,14 +389,28 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
     // }
   }
 
-  // private _setCustomLogo(): void {
-  //   const viewer = this.map;
-  //   if (viewer) {
-  //     const credit = new Credit('<div></div>');
-  //     // @ts-ignore
-  //     viewer.scene.frameState.creditDisplay.addDefaultCredit(credit);
-  //   }
-  // }
+  private _removeLogo(): void {
+    const viewer = this.map;
+    if (viewer) {
+      try {
+        // @ts-ignore
+        const widget = viewer._cesiumWidget;
+        const creditContainer = widget._creditContainer as HTMLElement;
+
+        const logoContainer = creditContainer.getElementsByClassName(
+          'cesium-credit-logoContainer'
+        )[0];
+        if (logoContainer && logoContainer.parentNode) {
+          logoContainer.parentNode.removeChild(logoContainer);
+        }
+      } catch (er) {
+        console.log(er);
+      }
+      // const credit = new Credit('<div></div>');
+      // @ts-ignore
+      // viewer.scene.frameState.creditDisplay.addDefaultCredit(credit);
+    }
+  }
 
   private _addEventsListener(): void {
     const viewer = this.map;
