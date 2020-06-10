@@ -2,7 +2,7 @@
  * @module vuetify-ngw-components
  */
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
-import NgwMap, { LayerAdapter } from '@nextgis/ngw-map';
+import NgwMap, { LayerAdapter, WebMap } from '@nextgis/ngw-map';
 import {
   ResourceAdapter,
   WebMapLayerAdapter,
@@ -22,7 +22,7 @@ export interface VueTreeItem {
 
 @Component
 export class NgwLayersList extends Vue {
-  @Prop({ type: NgwMap }) ngwMap!: NgwMap;
+  @Prop({ type: Number }) webMapId!: number;
   @Prop({ type: Array }) include!: Array<ResourceAdapter | string>;
   @Prop({ type: Boolean, default: false }) hideWebmapRoot!: boolean;
   @Prop({ type: Boolean, default: false }) notOnlyNgwLayer!: boolean;
@@ -30,6 +30,8 @@ export class NgwLayersList extends Vue {
   @Prop({ type: Function }) showResourceAdapter!: (
     adapter: LayerAdapter | ResourceAdapter
   ) => boolean;
+  /** @deprecated for backward compatibility */
+  @Prop({ type: NgwMap }) ngwMap!: NgwMap;
 
   items: VueTreeItem[] = [];
 
@@ -37,6 +39,10 @@ export class NgwLayersList extends Vue {
 
   private _layers: Array<LayerAdapter | ResourceAdapter> = [];
   private __updateItems?: () => Promise<void>;
+
+  get webMap(): WebMap | undefined {
+    return this.ngwMap || WebMap.get(this.webMapId);
+  }
 
   @Watch('selection')
   setVisibleLayers(selection: string[], old: string[]): void {
@@ -61,9 +67,9 @@ export class NgwLayersList extends Vue {
             }
           });
         }
-        if (x.id && !itemIsNotHideRoot) {
+        if (x.id && !itemIsNotHideRoot && this.webMap) {
           const id = this._getLayerId(x);
-          this.ngwMap.toggleLayer(x, selection.indexOf(id) !== -1);
+          this.webMap.toggleLayer(x, selection.indexOf(id) !== -1);
         }
       });
     }
@@ -124,21 +130,24 @@ export class NgwLayersList extends Vue {
   }
 
   private create() {
-    this.ngwMap.onLoad().then(() => {
-      this.destroy();
-      const __updateItems = debounce(() => this._updateItems());
-      this.__updateItems = __updateItems;
-      this.updateItems();
-
-      this.ngwMap.emitter.on('layer:add', __updateItems);
-      this.ngwMap.emitter.on('layer:remove', __updateItems);
-    });
+    if (this.webMap) {
+      this.webMap.onLoad().then(() => {
+        this.destroy();
+        const __updateItems = debounce(() => this._updateItems());
+        this.__updateItems = __updateItems;
+        this.updateItems();
+        if (this.webMap) {
+          this.webMap.emitter.on('layer:add', __updateItems);
+          this.webMap.emitter.on('layer:remove', __updateItems);
+        }
+      });
+    }
   }
 
   private destroy() {
-    if (this.__updateItems) {
-      this.ngwMap.emitter.off('layer:add', this.__updateItems);
-      this.ngwMap.emitter.off('layer:remove', this.__updateItems);
+    if (this.webMap && this.__updateItems) {
+      this.webMap.emitter.off('layer:add', this.__updateItems);
+      this.webMap.emitter.off('layer:remove', this.__updateItems);
     }
   }
 
@@ -146,13 +155,15 @@ export class NgwLayersList extends Vue {
     this.selection = [];
     this._layers = [];
     let layersList: LayerAdapter[] | undefined;
-    if (this.notOnlyNgwLayer) {
-      await this.ngwMap.onLoad();
-      const layers = this.ngwMap.allLayers();
-      layersList = Object.keys(layers).map((x) => layers[x]);
-    } else {
-      const ngwLayers = await this.ngwMap.getNgwLayers();
-      layersList = Object.keys(ngwLayers).map((x) => ngwLayers[x].layer);
+    if (this.webMap) {
+      if (this.notOnlyNgwLayer) {
+        await this.webMap.onLoad();
+        const layers = this.webMap.allLayers();
+        layersList = Object.keys(layers).map((x) => layers[x]);
+      } else if ('getNgwLayers' in this.webMap) {
+        const ngwLayers = await (this.webMap as NgwMap).getNgwLayers();
+        layersList = Object.keys(ngwLayers).map((x) => ngwLayers[x].layer);
+      }
     }
     this.items = [];
     if (layersList) {
@@ -209,8 +220,8 @@ export class NgwLayersList extends Vue {
       item.children = this._createWebMapTree(children).reverse();
       const webMapLayerVisible = webMapLayer.layer.properties.get('visibility');
       visible = webMapLayerVisible ?? true;
-    } else {
-      visible = this.ngwMap.isLayerVisible(layer);
+    } else if (this.webMap) {
+      visible = this.webMap.isLayerVisible(layer);
     }
 
     this._layers.push(layer);
