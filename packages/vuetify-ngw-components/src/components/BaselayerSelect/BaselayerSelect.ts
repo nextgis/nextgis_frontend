@@ -19,8 +19,8 @@ export interface VueSelectItem {
 const emptyValue = '___empty_value___';
 
 @Component
-export class BasemapSelect extends Vue {
-  @Prop({ type: WebMap }) webMap!: WebMap;
+export class BaselayerSelect extends Vue {
+  @Prop({ type: Number }) webMapId!: number;
   @Prop({ type: Boolean, default: true }) allowEmpty!: boolean;
   @Prop({ type: String, default: '---' }) emptyLayerText!: string;
 
@@ -31,21 +31,27 @@ export class BasemapSelect extends Vue {
   protected __updateItems?: () => Promise<void>;
   protected _layers: Array<LayerAdapter | ResourceAdapter> = [];
 
+  get webMap(): WebMap | undefined {
+    return WebMap.get(this.webMapId);
+  }
+
   @Watch('active')
   setVisibleLayers(active: string): void {
     const activeLayer = this._layers.find((x) => x.id === active);
-    if (activeLayer) {
-      this.webMap.showLayer(activeLayer);
-    } else {
-      const activeBaseLayer = this.webMap.getActiveBaseLayer();
-      if (activeBaseLayer) {
-        this.webMap.hideLayer(activeBaseLayer);
+    if (this.webMap) {
+      if (activeLayer) {
+        this.webMap.showLayer(activeLayer);
+      } else {
+        const activeBaseLayer = this.webMap.getActiveBaseLayer();
+        if (activeBaseLayer) {
+          this.webMap.hideLayer(activeBaseLayer);
+        }
       }
     }
   }
 
-  @Watch('ngwMap')
-  updateNgwMap(): void {
+  @Watch('webMap')
+  updateWebMap(): void {
     this.destroy();
     this.create();
   }
@@ -97,54 +103,60 @@ export class BasemapSelect extends Vue {
   }
 
   protected create(): void {
-    this.webMap.onLoad().then(() => {
-      this.destroy();
-      const __updateItems = debounce(async () => {
-        const items = await this._updateItems();
-        this.items = items;
+    const webMap = this.webMap;
+    if (webMap) {
+      webMap.onLoad().then(() => {
+        this.destroy();
+        const __updateItems = debounce(async () => {
+          const items = await this._updateItems();
+          this.items = items;
+        });
+        this.__updateItems = __updateItems;
+        this.updateItems();
+        webMap.emitter.on('layer:add', __updateItems);
+        webMap.emitter.on('layer:remove', __updateItems);
       });
-      this.__updateItems = __updateItems;
-      this.updateItems();
-      this.webMap.emitter.on('layer:add', __updateItems);
-      this.webMap.emitter.on('layer:remove', __updateItems);
-    });
+    }
   }
 
   protected destroy(): void {
-    if (this.__updateItems) {
+    if (this.__updateItems && this.webMap) {
       this.webMap.emitter.off('layer:add', this.__updateItems);
       this.webMap.emitter.off('layer:remove', this.__updateItems);
     }
   }
 
   protected async _updateItems(): Promise<VueSelectItem[]> {
-    await this.webMap.onLoad();
-    const baseLayers: BaseLayerAdapter[] = [];
+    const webMap = this.webMap;
     const items: VueSelectItem[] = [];
-    const layers = this.webMap.allLayers();
-    const baseLayersIds = this.webMap.getBaseLayers();
+    if (webMap) {
+      await webMap.onLoad();
+      const baseLayers: BaseLayerAdapter[] = [];
+      const layers = webMap.allLayers();
+      const baseLayersIds = webMap.getBaseLayers();
 
-    if (this.allowEmpty) {
-      items.push({
-        text: this.emptyLayerText,
-        value: emptyValue,
-      });
-    }
-
-    baseLayersIds.forEach((x) => {
-      const baseLayer = layers[x];
-      if (baseLayer) {
-        baseLayers.push(baseLayer);
+      if (this.allowEmpty) {
         items.push({
-          value: baseLayer.id || '',
-          text: baseLayer.options.name || baseLayer.id || '',
+          text: this.emptyLayerText,
+          value: emptyValue,
         });
-        if (baseLayer.id && this.webMap.isLayerVisible(baseLayer)) {
-          this.active = baseLayer.id;
-        }
       }
-    });
-    this._layers = baseLayers;
+
+      baseLayersIds.forEach((x) => {
+        const baseLayer = layers[x];
+        if (baseLayer) {
+          baseLayers.push(baseLayer);
+          items.push({
+            value: baseLayer.id || '',
+            text: baseLayer.options.name || baseLayer.id || '',
+          });
+          if (baseLayer.id && webMap.isLayerVisible(baseLayer)) {
+            this.active = baseLayer.id;
+          }
+        }
+      });
+      this._layers = baseLayers;
+    }
     return items;
   }
 }

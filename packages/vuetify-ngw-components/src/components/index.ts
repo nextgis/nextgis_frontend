@@ -2,12 +2,18 @@
  * @module vuetify-ngw-components
  */
 import { NgwLayersList, VueTreeItem } from './NgwLayersList/NgwLayersList';
-import { BasemapSelect, VueSelectItem } from './BasemapSelect/BasemapSelect';
+import {
+  BaselayerSelect,
+  VueSelectItem,
+} from './BaselayerSelect/BaselayerSelect';
 
 export {
   NgwLayersList,
   VueTreeItem,
-  BasemapSelect,
-  BasemapSelect as BaseLayersSelect,
+  BaselayerSelect,
+  // @deprecated
+  BaselayerSelect as BasemapSelect,
+  // @deprecated
+  BaselayerSelect as BaseLayersSelect,
   VueSelectItem,
 };
