@@ -19,6 +19,7 @@ import {
   viewerCesiumInspectorMixin,
   // @ts-ignore
   viewerCesium3DTilesInspectorMixin,
+  Credit,
 } from 'cesium';
 
 import {
@@ -165,6 +166,7 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
       }
 
       this.map = viewer;
+      // this._setCustomLogo();
       this._controlContainer = new ControlContainer({
         addClass: 'cesium-control',
         map: this,
@@ -388,7 +390,16 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
     // }
   }
 
-  private _addEventsListener() {
+  // private _setCustomLogo(): void {
+  //   const viewer = this.map;
+  //   if (viewer) {
+  //     const credit = new Credit('<div></div>');
+  //     // @ts-ignore
+  //     viewer.scene.frameState.creditDisplay.addDefaultCredit(credit);
+  //   }
+  // }
+
+  private _addEventsListener(): void {
     const viewer = this.map;
     if (viewer) {
       const events: [keyof WebMapEvents, Event | undefined][] = [
