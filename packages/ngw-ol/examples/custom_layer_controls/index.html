@@ -1,116 +1,118 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Custom layers control</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
 
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Custom layers control</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-    }
+      html,
+      body,
+      #map {
+        width: 100%;
+        height: 100%;
+      }
 
-    html,
-    body,
-    #map {
-      width: 100%;
-      height: 100%;
-    }
+      .ngw-layers {
+        background: white;
+        padding: 5px;
+      }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.6.11/core.min.js"></script>
+    <!-- <script src="https://unpkg.com/@nextgis/ngw-ol"></script> -->
+    <script src="../../lib/ngw-ol.js"></script>
+  </head>
 
-    .ngw-layers {
-      background: white;
-      padding: 5px;
-    }
-  </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.6.11/core.min.js"></script>
-  <!-- <script src="https://unpkg.com/@nextgis/ngw-ol"></script> -->
-  <script src="../../lib/ngw-ol.js"></script>
-</head>
-
-<body>
-  <div id='map'></div>
-  <script>
-    var webMapName = 'webmap';
-    var qmsBaseLayerName = 'qmsbasemap';
-
-    var ngwMap = new NgwMap({
-      baseUrl: 'https://demo.nextgis.com',
-      target: 'map',
-      qmsId: [487, qmsBaseLayerName],
-      webmapId: [4119, webMapName],
-      controls: ['ZOOM', 'ATTRIBUTION', 'ToggleBaseMap'],
-      controlsOptions: {
-        ToggleBaseMap: {
-          control: 'BUTTON',
-          position: 'top-right',
-          html: 'B',
-          title: 'Toggle base map',
+  <body>
+    <div id="map"></div>
+    <script>
+      var webMapName = "webmap";
+      var qmsBaseLayerName = "qmsbasemap";
+      var ngwMap = undefined;
+      NgwMap.create({
+        baseUrl: "https://demo.nextgis.com",
+        target: "map",
+        qmsId: [487, qmsBaseLayerName],
+        webmapId: [4119, webMapName],
+        controls: ["ZOOM", "ATTRIBUTION", "ToggleBaseMap"],
+        controlsOptions: {
+          ToggleBaseMap: {
+            control: "BUTTON",
+            position: "top-right",
+            html: "B",
+            title: "Toggle base map",
+            onClick: function (a) {
+              ngwMap.toggleLayer(qmsBaseLayerName);
+            },
+          },
+        },
+      }).then(function (ngwMap_) {
+        ngwMap = ngwMap_;
+        var toggleHeatMapControl = ngwMap.createButtonControl({
+          html: "D",
+          title: "Toggle DEM",
           onClick: function () {
-            ngwMap.toggleLayer(qmsBaseLayerName);
-          }
-        }
-      }
-    });
+            var ngwLayer = ngwMap.getLayer(webMapName);
+            var mapLayer = ngwLayer.layer.tree.getDescendants(function (x) {
+              return x.item.display_name === "Digital Elevation Model (DEM)";
+            })[0];
+            mapLayer.properties.set(
+              "visibility",
+              !mapLayer.properties.get("visibility")
+            );
+          },
+        });
 
-    var toggleHeatMapControl = ngwMap.createButtonControl({
-      html: 'D',
-      title: 'Toggle DEM',
-      onClick: function () {
-        var ngwmap = ngwMap.getLayer(webMapName);
-        var layer = ngwmap.layer.tree.getDescendants(function (x) {
-          return x.item.display_name === 'Digital Elevation Model (DEM)';
-        })[0];
-        layer.properties.set('visibility', !layer.properties.get('visibility'));
-      }
-    });
+        // ngwMap.addControl('TOGGLE', 'top-right', options)
+        // ngwMap.addControl('BUTTON', 'top-right', options)
+        ngwMap.addControl(toggleHeatMapControl, "top-right");
 
-    // ngwMap.addControl('TOGGLE', 'top-right', options)
-    // ngwMap.addControl('BUTTON', 'top-right', options)
-    ngwMap.addControl(toggleHeatMapControl, 'top-right');
+        // 'CONTROL' is same as ngwMap.createControl(control, options)
+        ngwMap.addControl("CONTROL", "bottom-right", {
+          control: {
+            onAdd: function () {
+              var list = document.createElement("div");
+              list.className = "ngw-layers";
+              // find all layer from ngw webmap tree
+              var webmap = ngwMap.getLayer(webMapName);
+              webmap.layer.tree.getDescendants().forEach(function (node) {
+                if (node.item.item_type === "layer") {
+                  var layerElement = document.createElement("div");
 
-    // 'CONTROL' is same as ngwMap.createControl(control, options)
-    ngwMap.addControl('CONTROL', 'bottom-right', {
-      control: {
-        onAdd: function () {
-          var list = document.createElement('div');
-          list.className = 'ngw-layers';
-          // find all layer from ngw webmap tree
-          var webmap = ngwMap.getLayer(webMapName);
-          webmap.layer.tree.getDescendants().forEach(function (node) {
-            if (node.item.item_type === 'layer') {
-              var layerElement = document.createElement('div');
+                  var checkbox = document.createElement("input");
+                  checkbox.id = "layer-" + node.layer.id;
+                  checkbox.checked = node.item.layer_enabled;
+                  checkbox.setAttribute("type", "checkbox");
+                  checkbox.addEventListener("click", function () {
+                    node.properties.set("visibility", checkbox.checked);
+                  });
 
-              var checkbox = document.createElement('input');
-              checkbox.id = 'layer-' + node.layer.id
-              checkbox.checked = node.item.layer_enabled;
-              checkbox.setAttribute('type', 'checkbox');
-              checkbox.addEventListener('click', function () {
-                node.properties.set('visibility', checkbox.checked);
-              })
+                  var name = document.createElement("span");
+                  name.innerHTML = node.item.display_name;
 
-              var name = document.createElement('span');
-              name.innerHTML = node.item.display_name
-
-              layerElement.appendChild(checkbox);
-              layerElement.appendChild(name);
-              list.appendChild(layerElement);
-            }
-          });
-          var visibility = webmap.layer.properties.property('visibility');
-          // listen any layer visibility change
-          visibility.emitter.on('change-tree', function (data) {
-            var itemId = data.item.layer.id;
-            var checkbox = list.querySelector('#layer-' + itemId);
-            checkbox.checked = data.value;
-          });
-          return list;
-        }
-      },
-      options: { bar: true }
-    });
-  </script>
-</body>
-
+                  layerElement.appendChild(checkbox);
+                  layerElement.appendChild(name);
+                  list.appendChild(layerElement);
+                }
+              });
+              var visibility = webmap.layer.properties.property("visibility");
+              // listen any layer visibility change
+              visibility.emitter.on("change-tree", function (data) {
+                var itemId = data.item.layer.id;
+                var checkbox = list.querySelector("#layer-" + itemId);
+                checkbox.checked = data.value;
+              });
+              return list;
+            },
+          },
+          options: { bar: true },
+        });
+      });
+    </script>
+  </body>
 </html>
