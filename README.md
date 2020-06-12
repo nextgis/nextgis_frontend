@@ -87,9 +87,34 @@ yarn add @nextgis/[package]
 then import the \[package\] in the project modules
 
 ```js
-import Package from '@nextgis/[package]';
+import Package from "@nextgis/[package]";
 
 const package = new Package(options);
+```
+
+## Create map
+
+```js
+import NgwMap from "@nextgis/ngw-map";
+
+import "./leaflet-style-override.css";
+import MapAdapter from "@nextgis/leaflet-map-adapter";
+// OR
+// import 'ol/ol.css';
+// import MapAdapter from '@nextgis/ol-map-adapter';
+// OR
+// import 'mapbox-gl/dist/mapbox-gl.css';
+// import MapAdapter from '@nextgis/mapboxgl-map-adapter';
+
+const ngwMap = new NgwMap(new MapAdapter(), {
+  target: "map",
+  qmsId: 487,
+  baseUrl: "https://demo.nextgis.com",
+  resources: [124, { resource: 222, fit: true }, { resource: "keyname" }],
+});
+ngwMap.onLoad().then(() => {
+  // do something
+});
 ```
 
 ## For developers
