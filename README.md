@@ -110,11 +110,44 @@ const ngwMap = new NgwMap(new MapAdapter(), {
   target: "map",
   qmsId: 487,
   baseUrl: "https://demo.nextgis.com",
-  resources: [124, { resource: 222, fit: true }, { resource: "keyname" }],
+  resources: [2011, { resource: 222, fit: true }, { resource: "keyname" }],
 });
 ngwMap.onLoad().then(() => {
   // do something
 });
+```
+
+## Add layers from NGW
+
+```js
+// from resource id
+ngwMap.addNgwLayer({ resource: 2011 });
+// by keyname
+ngwMap.addNgwLayer({ resource: "keyname" });
+// add vector layer from style resource
+ngwMap.addNgwLayer({ resource: 'style_keyname', adapter: 'GEOJSON'});
+// add first style from vector resource (if available)
+ngeMap.addNgwLayer({ resource: 'vector_keyname', adapter: 'TILE'});
+```
+
+## Painting vector layers
+
+```js
+```
+
+## Filtering vector layers
+
+```js
+```
+
+## Selection for vector layer
+
+```js
+```
+
+## Map events
+
+```js
 ```
 
 ## For developers
