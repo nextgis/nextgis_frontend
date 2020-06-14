@@ -1,3 +1,4 @@
+import { Type, DeepPartial } from '@nextgis/utils';
 // import { ResourceItem } from '@nextgis/ngw-connector';
 // import { objectAssign } from '@nextgis/utils';
 // import NgwConnector from '@nextgis/ngw-connector';
@@ -8,6 +9,10 @@
 // import { FindManyOptions } from '../find-options/FindManyOptions';
 // import { FindOneOptions } from '../find-options/FindOneOptions';
 import { BaseResource } from './BaseResource';
+import { VectorLayerMetadataArgs } from '../metadata-args/VectorLayerMetadataArgs';
+import { getMetadataArgsStorage } from '..';
+import { SyncOptions } from './SyncOptions';
+import { VectorResourceSyncItem } from '../sync-items/VectorResourceSyncItem';
 // import { SyncOptions } from './SyncOptions';
 // import { Connection } from '../connection/Connection';
 // import { ConnectionOptions } from '../connection/ConnectionOptions';
@@ -23,6 +28,44 @@ import { BaseResource } from './BaseResource';
  * Base abstract entity for all entities, used in ActiveRecord patterns.
  */
 export class VectorLayer extends BaseResource {
+
+  static getMetadata(
+    resource: Type<VectorLayer>,
+    parent: number,
+    options: SyncOptions
+  ): DeepPartial<VectorResourceSyncItem> | undefined {
+    const table = getMetadataArgsStorage().filterTables(
+      resource
+    )[0] as VectorLayerMetadataArgs;
+    const fields = getMetadataArgsStorage().filterColumns(resource);
+    if (table) {
+      return {
+        resource: {
+          cls: 'vector_layer',
+          parent: {
+            id: parent,
+          },
+          display_name: options.display_name || table.display_name,
+          keyname: options.keyname || table.keyname,
+          description: options.description || table.description || null,
+        },
+        resmeta: {
+          items: {},
+        },
+        vector_layer: {
+          srs: { id: 3857 },
+          geometry_type: table.geometry_type,
+          fields: fields.map((x) => ({
+            keyname: x.propertyName,
+            datatype: x.options.datatype,
+            grid_visibility: x.options.grid_visibility,
+            label_field: x.options.label_field,
+            display_name: x.options.display_name,
+          })),
+        },
+      };
+    }
+  }
   // /**
   //  * Checks entity has an id.
   //  */
