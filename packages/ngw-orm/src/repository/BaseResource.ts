@@ -1,4 +1,5 @@
 import { ResourceDefinition, ResourceItem } from '@nextgis/ngw-connector';
+import { Type } from '@nextgis/utils';
 
 import { DeepPartial } from '../common/DeepPartial';
 
@@ -6,6 +7,7 @@ import { Connection } from '../connection/Connection';
 import { ConnectionOptions } from '../connection/ConnectionOptions';
 import { CannotExecuteResourceNotExistError } from '../error/CannotExecuteResourceNotExistError';
 import { SyncOptions } from './SyncOptions';
+import { BaseResourceSyncItem } from '../sync-items/BaseResourceSyncItem';
 
 type QueryDeepPartialEntity<T> = DeepPartial<T>;
 type InsertResult = any;
@@ -18,6 +20,14 @@ type UpdateResult = any;
 export class BaseResource {
   private connection?: Connection;
   private resourceItem?: ResourceItem;
+
+  static getMetadata(
+    resource: Type<BaseResource>,
+    parent: number,
+    options: SyncOptions
+  ): DeepPartial<BaseResourceSyncItem> | undefined {
+    return {};
+  }
 
   static async connect(
     resourceOptions: ResourceDefinition,
