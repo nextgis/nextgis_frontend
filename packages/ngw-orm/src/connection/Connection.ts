@@ -6,7 +6,8 @@ import { BaseResource } from '../repository/BaseResource';
 import { getMetadataArgsStorage } from '..';
 import { VectorLayerMetadataArgs } from '../metadata-args/VectorLayerMetadataArgs';
 import { DeepPartial } from '../common/DeepPartial';
-import { VectorResourceSyncItem } from './VectorResourceSyncItem';
+import { VectorResourceSyncItem } from '../sync-items/VectorResourceSyncItem';
+import { VectorLayer } from '../repository/VectorLayer';
 
 /**
  * Connection is a single NGW connection.
@@ -102,37 +103,8 @@ export class Connection {
     parent: number,
     options: SyncOptions
   ): DeepPartial<VectorResourceSyncItem> | undefined {
-    const table = getMetadataArgsStorage().filterTables(
-      resource
-    )[0] as VectorLayerMetadataArgs;
-    const fields = getMetadataArgsStorage().filterColumns(resource);
-    if (table) {
-      return {
-        resource: {
-          cls: 'vector_layer',
-          parent: {
-            id: parent,
-          },
-          display_name: options.display_name || table.display_name,
-          keyname: options.keyname || table.keyname,
-          description: options.description || table.description || null,
-        },
-        resmeta: {
-          items: {},
-        },
-        vector_layer: {
-          srs: { id: 3857 },
-          geometry_type: table.geometry_type,
-          fields: fields.map((x) => ({
-            keyname: x.propertyName,
-            datatype: x.options.datatype,
-            grid_visibility: x.options.grid_visibility,
-            label_field: x.options.label_field,
-            display_name: x.options.display_name,
-          })),
-        },
-      };
+    if (resource instanceof VectorLayer) {
+      return VectorLayer.getMetadata(resource, parent, options);
     }
-    return;
   }
 }
