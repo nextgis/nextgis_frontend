@@ -9,7 +9,8 @@ import { MetadataArgsStorage } from './metadata-args/MetadataArgsStorage';
 export { Connection } from './connection/Connection';
 export { BaseResource } from './repository/BaseResource';
 export { VectorLayer } from './repository/VectorLayer';
-export { Resource as FeatureLayer } from './decorator/Resource';
+export { ResourceGroup } from './repository/ResourceGroup';
+export { NgwResource } from './decorator/NgwResource';
 export { Column } from './decorator/Column';
 
 /**

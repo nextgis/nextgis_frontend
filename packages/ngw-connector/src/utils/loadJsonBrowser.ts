@@ -16,7 +16,7 @@ export default function loadJSONBrowser(
     xhr.responseType = options.responseType;
   }
 
-  const processingResponce = (forError = false) => {
+  const processingResponse = (forError = false) => {
     const cb = forError ? error : callback;
     if (options.responseType === 'blob') {
       cb(xhr.response);
@@ -38,14 +38,15 @@ export default function loadJSONBrowser(
       (xhr.readyState === 4 && xhr.status === 200) ||
       (xhr.readyState === 3 && xhr.status === 201)
     ) {
-      processingResponce();
+      processingResponse();
     } else if (xhr.readyState === 3 && xhr.status === 400) {
-      processingResponce();
+      processingResponse();
     } else if (xhr.readyState === 4 && xhr.status === 500) {
-      processingResponce();
+      processingResponse();
     } else if (xhr.readyState === 4 && xhr.status === 401) {
       error(xhr.statusText);
     } else if (xhr.readyState === 4) {
+      console.log(xhr.status);
       error('request error');
     }
   };

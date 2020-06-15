@@ -73,7 +73,7 @@ export function Column(
     getMetadataArgsStorage().columns.push({
       target: object.constructor,
       propertyName: propertyName,
-      options: options,
+      options,
     } as ColumnMetadataArgs);
   };
 }

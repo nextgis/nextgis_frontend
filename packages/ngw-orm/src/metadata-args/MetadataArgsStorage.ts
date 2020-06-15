@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { ResourceMetadataArgs } from './ResourceMetadataArgs';
 import { ColumnMetadataArgs } from './ColumnMetadataArgs';
+import { GeometryColumnMetadataArgs } from './GeometryColumnMetadataArgs';
 
 /**
  * Storage all metadatas args of all available types: tables, columns etc.
@@ -10,6 +11,7 @@ import { ColumnMetadataArgs } from './ColumnMetadataArgs';
 export class MetadataArgsStorage {
   readonly resources: ResourceMetadataArgs[] = [];
   readonly columns: ColumnMetadataArgs[] = [];
+  readonly geometryColumns: GeometryColumnMetadataArgs[] = [];
 
   filterTables(
     target: (Function | string) | (Function | string)[]
@@ -22,6 +24,15 @@ export class MetadataArgsStorage {
   ): ColumnMetadataArgs[] {
     return this.filterByTargetAndWithoutDuplicateProperties(
       this.columns,
+      target
+    );
+  }
+
+  filterGeometryColumns(
+    target: (Function | string) | (Function | string)[]
+  ): GeometryColumnMetadataArgs[] {
+    return this.filterByTargetAndWithoutDuplicateProperties(
+      this.geometryColumns,
       target
     );
   }

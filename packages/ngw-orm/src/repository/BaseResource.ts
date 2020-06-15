@@ -7,7 +7,6 @@ import { Connection } from '../connection/Connection';
 import { ConnectionOptions } from '../connection/ConnectionOptions';
 import { CannotExecuteResourceNotExistError } from '../error/CannotExecuteResourceNotExistError';
 import { SyncOptions } from './SyncOptions';
-import { BaseResourceSyncItem } from '../sync-items/BaseResourceSyncItem';
 
 type QueryDeepPartialEntity<T> = DeepPartial<T>;
 type InsertResult = any;
@@ -25,8 +24,8 @@ export class BaseResource {
     resource: Type<BaseResource>,
     parent: number,
     options: SyncOptions
-  ): DeepPartial<BaseResourceSyncItem> | undefined {
-    return {};
+  ): Record<string, any> | undefined {
+    return undefined;
   }
 
   static async connect(
