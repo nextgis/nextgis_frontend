@@ -4,10 +4,10 @@ import { ConnectionOptions } from './ConnectionOptions';
 import { SyncOptions } from '../repository/SyncOptions';
 import { BaseResource } from '../repository/BaseResource';
 import { getMetadataArgsStorage } from '..';
-import { VectorLayerMetadataArgs } from '../metadata-args/VectorLayerMetadataArgs';
+import { ResourceMetadataArgs } from '../metadata-args/ResourceMetadataArgs';
 import { DeepPartial } from '../common/DeepPartial';
-import { VectorResourceSyncItem } from '../sync-items/VectorResourceSyncItem';
 import { VectorLayer } from '../repository/VectorLayer';
+import { ResourceSyncItem } from '../sync-items/ResourceSyncItem';
 
 /**
  * Connection is a single NGW connection.
@@ -72,7 +72,6 @@ export class Connection {
   async connect(): Promise<this> {
     // connect to the database via its driver
     await this.driver.connect();
-
     // set connected status for the current connection
     objectAssign(this, { isConnected: true });
 
@@ -102,9 +101,33 @@ export class Connection {
     resource: Type<BaseResource>,
     parent: number,
     options: SyncOptions
-  ): DeepPartial<VectorResourceSyncItem> | undefined {
-    if (resource instanceof VectorLayer) {
-      return VectorLayer.getMetadata(resource, parent, options);
+  ): DeepPartial<ResourceSyncItem> | undefined {
+    const table = getMetadataArgsStorage().filterTables(
+      resource
+    )[0] as ResourceMetadataArgs;
+    if (table) {
+      const resourceItem: DeepPartial<ResourceSyncItem> = {
+        resource: {
+          cls: table.type,
+          parent: {
+            id: parent,
+          },
+          display_name: options.display_name || table.display_name,
+          keyname: options.keyname || table.keyname || '',
+          description: options.description || table.description || '',
+        },
+        resmeta: {
+          items: {},
+        },
+      };
+      let item: Record<string, any> | undefined;
+      if (resource instanceof VectorLayer) {
+        item = VectorLayer.getMetadata(resource, parent, options);
+      }
+      if (item) {
+        resourceItem[table.type] = item;
+      }
+      return resourceItem;
     }
   }
 }
