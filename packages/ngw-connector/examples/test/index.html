@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.6.11/core.min.js"></script>
+    <!-- <script src="https://unpkg.com/@nextgis/ngw-connector"></script> -->
+    <script src="../../lib/ngw-connector.js"></script>
+  </head>
+
+  <body>
+    <script>
+      var connector = new NgwConnector({
+        baseUrl: "http://geonote.nextgis.com",
+        auth: {
+          login: "nextgis",
+          password: "nextgis",
+        },
+      });
+      var metadata = {
+        resource: {
+          cls: "resource_group",
+          parent: { id: 446 },
+          display_name: "ngw-orm-tests",
+          keyname: "",
+          description:
+            "Automatically created resource group when running tests for @nextgis/ngw-orm",
+        },
+        resmeta: { items: {} },
+      };
+      connector.post("resource.collection", {
+        data: metadata,
+      }).then(function (resp) {
+        console.log(resp);
+        connector.delete("resource.item", null, { id: resp.id }).then(function (resp2) {
+          console.log(resp2);
+        }).catch(function (er) {
+          console.log(er);
+        })
+      }).catch(function (er)  {
+        console.log(er);
+      });
+    </script>
+  </body>
+</html>
