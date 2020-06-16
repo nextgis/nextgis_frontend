@@ -125,22 +125,47 @@ ngwMap.addNgwLayer({ resource: 2011 });
 // by keyname
 ngwMap.addNgwLayer({ resource: "keyname" });
 // add vector layer from style resource
-ngwMap.addNgwLayer({ resource: 'style_keyname', adapter: 'GEOJSON'});
+ngwMap.addNgwLayer({ resource: "style_keyname", adapter: "GEOJSON" });
 // add first style from vector resource (if available)
-ngeMap.addNgwLayer({ resource: 'vector_keyname', adapter: 'TILE'});
+ngwMap.addNgwLayer({ resource: "vector_keyname", adapter: "TILE" });
 ```
 
-## Painting vector layers
+### Examples
+
+[Add different NGW resource](http://code.nextgis.com/demo-examples-ngw_layers)
+
+## Vector layer
+
+Adding a vector layer from the NGW is as follows
+
+```js
+ngwMap.addNgwLayer({
+  resource: 2011,
+  adapterOptions: {},
+});
+```
+
+adapterOptions
+
+| name  | default           | description|
+| ----- | ----------------- | ---------- |
+| type  | undefined         | Type of layer geometry. It is always better to prescribe this parameter in order to properly initialize the layer paint before loading the data. |
+| paint | { color: 'blue' } |  `Object`, `Function` or `Expression` to set the appearance of the layer|
+
+### Painting
+
+```js
+paint: {
+  color: "red";
+}
+```
+
+### Filtering
 
 ```js
 ```
 
-## Filtering vector layers
-
-```js
-```
-
-## Selection for vector layer
+### Selection
 
 ```js
 ```
