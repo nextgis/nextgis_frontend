@@ -1,12 +1,11 @@
-import NgwConnector, { CreatedResource } from '@nextgis/ngw-connector';
-import { objectAssign, Type } from '@nextgis/utils';
+import NgwConnector, { ResourceItem } from '@nextgis/ngw-connector';
+import { objectAssign } from '@nextgis/utils';
 import { ConnectionOptions } from './ConnectionOptions';
 import { SyncOptions } from '../repository/SyncOptions';
 import { BaseResource } from '../repository/BaseResource';
 import { getMetadataArgsStorage } from '..';
 import { ResourceMetadataArgs } from '../metadata-args/ResourceMetadataArgs';
 import { DeepPartial } from '../common/DeepPartial';
-import { VectorLayer } from '../repository/VectorLayer';
 import { ResourceSyncItem } from '../sync-items/ResourceSyncItem';
 
 /**
@@ -78,27 +77,78 @@ export class Connection {
     return this;
   }
 
-  async syncResource(
-    resource: Type<BaseResource>,
+  async getOrCreateResource(
+    resource: typeof BaseResource,
     options: SyncOptions
-  ): Promise<CreatedResource | undefined> {
+  ): Promise<typeof BaseResource | undefined> {
+    return this.createResource(resource, options, true);
+  }
+
+  async createResource(
+    resource: typeof BaseResource,
+    options: SyncOptions,
+    getExisted = false
+  ): Promise<typeof BaseResource | undefined> {
+    if (resource.item) {
+      return resource;
+    }
     const parent = await this.driver.getResource(options.parent);
     if (parent) {
-      const metadata = this.getResourceMetadata(
+      const payload = this.getResourceNgwPayload(
         resource,
         parent.resource.id,
         options
       );
-      if (metadata) {
-        return await this.driver.post('resource.collection', {
-          data: metadata,
+      if (payload) {
+        try {
+          const item = await this.driver.post('resource.collection', {
+            data: payload,
+          });
+          return resource.connect(item.id, this);
+        } catch (er) {
+          if (getExisted) {
+            const exist = await this.getResource(options, payload);
+            if (exist) {
+              return resource.connect(exist.resource.id, this);
+            }
+          } else {
+            throw er;
+          }
+        }
+      }
+    }
+  }
+
+  async getResource(
+    options: SyncOptions,
+    payload: DeepPartial<ResourceSyncItem>
+  ): Promise<ResourceItem | undefined> {
+    const resource = payload.resource;
+    if (resource) {
+      if (resource.keyname) {
+        return this.driver.getResourceByKeyname(resource.keyname);
+      } else if (options.parent && payload.resource?.display_name) {
+        const children = await this.driver.getResourceChildren(options.parent);
+        return children.find((x) => {
+          return x.resource.display_name === resource.display_name;
         });
       }
     }
   }
 
-  getResourceMetadata(
-    resource: Type<BaseResource>,
+  async deleteResource(resource: typeof BaseResource): Promise<void> {
+    let id: number | undefined;
+    if (resource.item) {
+      id = resource.item.resource.id;
+    }
+    if (id) {
+      await this.driver.deleteResource(id);
+      delete resource.item;
+    }
+  }
+
+  getResourceNgwPayload(
+    resource: typeof BaseResource,
     parent: number,
     options: SyncOptions
   ): DeepPartial<ResourceSyncItem> | undefined {
@@ -120,10 +170,7 @@ export class Connection {
           items: {},
         },
       };
-      let item: Record<string, any> | undefined;
-      if (resource instanceof VectorLayer) {
-        item = VectorLayer.getMetadata(resource, parent, options);
-      }
+      const item = resource.getNgwPayload(resource, parent, options);
       if (item) {
         resourceItem[table.type] = item;
       }

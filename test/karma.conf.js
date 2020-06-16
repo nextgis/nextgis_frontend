@@ -10,6 +10,7 @@ module.exports = (config) => {
     reporters.push('coverage-istanbul');
   }
   config.set({
+    port: 8080,
     basePath: '../',
     browsers: [
       // 'Firefox',
@@ -17,8 +18,9 @@ module.exports = (config) => {
     ],
     frameworks: ['mocha'],
     files: [{ pattern: 'test/specs/*.ts', type: 'ts' }],
+    // files: [{ pattern: 'test/specs/ngw-orm.spec.ts', type: 'ts' }],
     preprocessors: {
-      'test/specs/*.spec.ts': ['webpack'], // 'sourcemap'
+      'test/specs/*.spec.ts': ['webpack', 'sourcemap'], // 'sourcemap'
     },
     webpack: createWebpack({ coverage }),
     webpackMiddleware: {

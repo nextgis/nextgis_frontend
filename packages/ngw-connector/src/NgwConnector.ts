@@ -138,19 +138,36 @@ export class NgwConnector {
     }
   }
 
+  async getResourceId(
+    resource: ResourceDefinition
+  ): Promise<number | undefined> {
+    if (typeof resource === 'number') {
+      return resource;
+    } else if (typeof resource === 'string') {
+      const res = await this.getResourceByKeyname(resource);
+      if (res) {
+        return res.resource.id;
+      }
+    }
+  }
+
   async getResourceByKeyname(
     keyname: string
   ): CancelablePromise<ResourceItem | undefined> {
     let item: ResourceItem = this._keynamesCache[keyname];
     if (!item) {
-      const resources = await this.get('resource.search', null, {
-        keyname,
-        serialization: 'full',
-      });
-      item = resources[0];
-      if (item) {
-        this._keynamesCache[keyname] = item;
-        this._resourceIdsCache[item.resource.id] = item;
+      try {
+        const resources = await this.get('resource.search', null, {
+          keyname,
+          serialization: 'full',
+        });
+        item = resources[0];
+        if (item) {
+          this._keynamesCache[keyname] = item;
+          this._resourceIdsCache[item.resource.id] = item;
+        }
+      } catch {
+        return undefined;
       }
     }
     return item;
@@ -161,22 +178,43 @@ export class NgwConnector {
   ): CancelablePromise<ResourceItem | undefined> {
     let item: ResourceItem = this._resourceIdsCache[id];
     if (!item) {
-      item = await this.get('resource.item', null, { id });
-      if (item) {
-        this._resourceIdsCache[id] = item;
-        if (item.resource.keyname) {
-          this._keynamesCache[item.resource.keyname] = item;
+      try {
+        item = await this.get('resource.item', null, { id });
+        if (item) {
+          this._resourceIdsCache[id] = item;
+          if (item.resource.keyname) {
+            this._keynamesCache[item.resource.keyname] = item;
+          }
         }
+      } catch (er) {
+        return undefined;
       }
     }
     return item;
   }
 
-  async getResourceChildren(opt: {
-    keyname?: string;
-    resourceId?: number;
-    resource?: string | number;
-  }): CancelablePromise<ResourceItem[]> {
+  async getResourceChildren(
+    optOrResource:
+      | string
+      | number
+      | {
+          keyname?: string;
+          resourceId?: number;
+          resource?: string | number;
+        }
+  ): CancelablePromise<ResourceItem[]> {
+    let opt: {
+      keyname?: string;
+      resourceId?: number;
+      resource?: string | number;
+    } = {};
+    if (typeof optOrResource === 'string') {
+      opt.keyname = optOrResource;
+    } else if (typeof optOrResource === 'number') {
+      opt.resourceId = optOrResource;
+    } else {
+      opt = optOrResource;
+    }
     let parent = opt.resourceId;
     let keyname = opt.keyname;
     if (!opt.keyname && !opt.resourceId && !opt.resource) {
@@ -185,6 +223,8 @@ export class NgwConnector {
     if (opt.resource) {
       if (typeof opt.resource === 'string') {
         keyname = opt.resource;
+      } else if (typeof opt.resource === 'number') {
+        parent = opt.resource;
       }
     }
     if (keyname) {
@@ -196,6 +236,18 @@ export class NgwConnector {
     return this.get('resource.collection', null, {
       parent,
     });
+  }
+
+  async deleteResource(resource: ResourceDefinition): Promise<void> {
+    const id = await this.getResourceId(resource);
+    if (id !== undefined) {
+      await this.delete('resource.item', null, { id });
+      const fromCache = this._resourceIdsCache[id];
+      delete this._resourceIdsCache[id];
+      if (fromCache && fromCache.resource.keyname) {
+        delete this._keynamesCache[fromCache.resource.keyname];
+      }
+    }
   }
 
   request<
