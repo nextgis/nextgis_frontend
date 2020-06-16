@@ -46,7 +46,6 @@ export default function loadJSONBrowser(
     } else if (xhr.readyState === 4 && xhr.status === 401) {
       error(xhr.statusText);
     } else if (xhr.readyState === 4) {
-      console.log(xhr.status);
       error('request error');
     }
   };
