@@ -1,4 +1,8 @@
-import NgwConnector, { ResourceItem } from '@nextgis/ngw-connector';
+import NgwConnector, {
+  ResourceItem,
+  Resource,
+  ResourceDefinition,
+} from '@nextgis/ngw-connector';
 import { objectAssign } from '@nextgis/utils';
 import { ConnectionOptions } from './ConnectionOptions';
 import { SyncOptions } from '../repository/SyncOptions';
@@ -106,8 +110,8 @@ export class Connection {
           });
           return resource.connect(item.id, this);
         } catch (er) {
-          if (getExisted) {
-            const exist = await this.getResource(options, payload);
+          if (getExisted && payload.resource) {
+            const exist = await this.getResource(payload.resource);
             if (exist) {
               return resource.connect(exist.resource.id, this);
             }
@@ -120,20 +124,9 @@ export class Connection {
   }
 
   async getResource(
-    options: SyncOptions,
-    payload: DeepPartial<ResourceSyncItem>
+    resource: ResourceDefinition | DeepPartial<Resource>
   ): Promise<ResourceItem | undefined> {
-    const resource = payload.resource;
-    if (resource) {
-      if (resource.keyname) {
-        return this.driver.getResourceByKeyname(resource.keyname);
-      } else if (options.parent && payload.resource?.display_name) {
-        const children = await this.driver.getResourceChildren(options.parent);
-        return children.find((x) => {
-          return x.resource.display_name === resource.display_name;
-        });
-      }
-    }
+    return this.driver.getResource(resource);
   }
 
   async deleteResource(resource: typeof BaseResource): Promise<void> {
