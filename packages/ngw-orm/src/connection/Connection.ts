@@ -77,7 +77,6 @@ export class Connection {
     await this.driver.connect();
     // set connected status for the current connection
     objectAssign(this, { isConnected: true });
-
     return this;
   }
 
@@ -156,16 +155,24 @@ export class Connection {
             id: parent,
           },
           display_name: options.display_name || table.display_name,
-          keyname: options.keyname || table.keyname || '',
-          description: options.description || table.description || '',
         },
         resmeta: {
           items: {},
         },
       };
+      if (resourceItem.resource) {
+        const keyname = options.keyname || table.keyname;
+        const description = options.description || table.description;
+        if (keyname) {
+          resourceItem.resource.keyname = keyname;
+        }
+        if (description) {
+          resourceItem.resource.description = description;
+        }
+      }
       const item = resource.getNgwPayload(resource, parent, options);
       if (item) {
-        resourceItem[table.type] = item;
+        Object.assign(resourceItem, item);
       }
       return resourceItem;
     }
