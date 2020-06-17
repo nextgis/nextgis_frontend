@@ -130,6 +130,8 @@ ngwMap.addNgwLayer({ resource: "style_keyname", adapter: "GEOJSON" });
 ngwMap.addNgwLayer({ resource: "vector_keyname", adapter: "TILE" });
 ```
 
+The `resource` can be id or keyname.
+
 ### Examples
 
 [Add different NGW resource](http://code.nextgis.com/demo-examples-ngw_layers)
@@ -141,7 +143,7 @@ Adding a vector layer from the NGW is as follows
 ```js
 ngwMap.addNgwLayer({
   resource: 2011,
-  adapterOptions: {},
+  adapterOptions: {...},
 });
 ```
 
@@ -149,8 +151,8 @@ adapterOptions
 
 | name  | default           | description|
 | ----- | ----------------- | ---------- |
-| type  | undefined         | Type of layer geometry. It is always better to prescribe this parameter in order to properly initialize the layer paint before loading the data. |
-| paint | { color: 'blue' } |  `Object`, `Function` or `Expression` to set the appearance of the layer|
+| type  | undefined         | `point`, `line` or `polygon`. Type of layer geometry. It is always better to prescribe this parameter in order to properly initialize the layer paint before loading the data. |
+| paint | {color:'blue'} |  `Object`, `Function` or `Expression` to set the appearance of the layer|
 
 ### Painting
 
