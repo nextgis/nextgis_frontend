@@ -512,7 +512,7 @@ export class NgwConnector {
     const items: ResourceItem[] = Object.values(this._resourceIdsCache).filter(
       (x) => {
         // identical by uniq props
-        if (defined(resource.keyname) && defined(x.resource.keyname)) {
+        if (resource.keyname && x.resource.keyname) {
           return resource.keyname === x.resource.keyname;
         }
         if (defined(resource.id) && defined(x.resource.id)) {
