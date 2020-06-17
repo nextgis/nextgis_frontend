@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import { Connection, BaseResource } from '../../packages/ngw-orm/src';
 import { SandboxGroup } from '../helpers/ngw-orm/SandboxGroup';
+import { SandboxPointLayer } from '../helpers/ngw-orm/SandboxPointLayer';
 
 let CONNECTION: Connection;
 const TESTS_GROUP_ID = 446;
@@ -34,15 +35,12 @@ describe('NgwOrm', () => {
     it(`getOrCreate`, async () => {
       const connection = await getConnection();
       let resourceGroup: typeof BaseResource;
-      try {
-        const synced = await connection.getOrCreateResource(SandboxGroup, {
-          parent: TESTS_GROUP_ID,
-        });
-        if (synced) {
-          resourceGroup = synced;
-        }
-      } catch (er) {
-        console.log(er);
+
+      const synced = await connection.getOrCreateResource(SandboxGroup, {
+        parent: TESTS_GROUP_ID,
+      });
+      if (synced) {
+        resourceGroup = synced;
       }
 
       expect(resourceGroup.connection && resourceGroup.connection.isConnected)
@@ -53,13 +51,28 @@ describe('NgwOrm', () => {
         display_name: r.display_name,
         parent: r.parent,
       });
-      expect(!!exist).to.be.true;
+      expect(exist).to.be.exist;
 
       await connection.deleteResource(resourceGroup);
       expect(resourceGroup.item).to.be.undefined;
 
       const afterDelete = await connection.getResource(id);
       expect(afterDelete).to.be.undefined;
+    });
+  });
+
+  describe('VectorLayer', () => {
+    it(`point`, async () => {
+      const connection = await getConnection();
+      const resourceGroup = await connection.getOrCreateResource(SandboxGroup, {
+        parent: TESTS_GROUP_ID,
+      });
+      if (resourceGroup && resourceGroup.item) {
+        const point = await connection.getOrCreateResource(SandboxPointLayer, {
+          parent: resourceGroup.item.resource.id,
+        });
+        expect(point).to.be.exist;
+      }
     });
   });
 });
