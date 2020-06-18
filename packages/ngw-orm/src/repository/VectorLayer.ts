@@ -12,6 +12,7 @@ import { BaseResource } from './BaseResource';
 import { getMetadataArgsStorage } from '..';
 import { SyncOptions } from './SyncOptions';
 import { VectorResourceSyncItem } from '../sync-items/VectorResourceSyncItem';
+import { GeometryType } from 'packages/ngw-connector/src';
 // import { SyncOptions } from './SyncOptions';
 // import { Connection } from '../connection/Connection';
 // import { ConnectionOptions } from '../connection/ConnectionOptions';
@@ -23,23 +24,20 @@ import { VectorResourceSyncItem } from '../sync-items/VectorResourceSyncItem';
 // type DeleteResult = any;
 // type UpdateResult = any;
 
-/**
- * Base abstract entity for all entities, used in ActiveRecord patterns.
- */
-export class VectorLayer extends BaseResource {
-  static getMetadata(
+export class VectorLayer<G = GeometryType> extends BaseResource {
+  static geometryType: GeometryType;
+
+  static getNgwPayload(
     resource: Type<VectorLayer>,
     parent: number,
     options: SyncOptions
   ): DeepPartial<VectorResourceSyncItem> | undefined {
     const fields = getMetadataArgsStorage().filterColumns(resource);
-    const geometryField = getMetadataArgsStorage().filterGeometryColumns(
-      resource
-    )[0];
-    if (geometryField) {
-      return {
+
+    return {
+      vector_layer: {
         srs: { id: 3857 },
-        geometry_type: geometryField.options.type,
+        geometry_type: this.geometryType,
         fields: fields.map((x) => ({
           keyname: x.propertyName,
           datatype: x.options.datatype,
@@ -47,8 +45,8 @@ export class VectorLayer extends BaseResource {
           label_field: x.options.label_field,
           display_name: x.options.display_name,
         })),
-      };
-    }
+      },
+    };
   }
   // /**
   //  * Checks entity has an id.
