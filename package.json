@@ -21,8 +21,8 @@
     "minor": "lerna version minor --conventional-commits -m \"chore(release): publish %s\" --no-push --create-release github"
   },
   "devDependencies": {
-    "@microsoft/api-documenter": "^7.8.12",
-    "@microsoft/api-extractor": "^7.8.11",
+    "@microsoft/api-documenter": "^7.8.13",
+    "@microsoft/api-extractor": "^7.8.12",
     "@types/chai": "^4.2.11",
     "@types/mocha": "^7.0.2",
     "@types/sinon": "^9.0.4",
@@ -41,7 +41,7 @@
     "karma-spec-reporter": "0.0.32",
     "karma-webpack": "^4.0.2",
     "lerna": "^3.22.1",
-    "lint-staged": "^10.2.10",
+    "lint-staged": "^10.2.11",
     "mocha": "^8.0.1",
     "rimraf": "^3.0.2",
     "sinon": "^9.0.2",

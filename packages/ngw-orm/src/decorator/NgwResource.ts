@@ -6,8 +6,9 @@ import { NgwResourceOptions } from '../options/NgwResourceOptions';
 export function NgwResource(options: NgwResourceOptions): Function {
   return function (target: Function) {
     getMetadataArgsStorage().resources.push({
-      target: target,
+      target,
       ...options,
     } as ResourceMetadataArgs);
+    return target;
   };
 }
