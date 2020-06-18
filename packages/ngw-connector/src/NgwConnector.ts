@@ -2,6 +2,7 @@
  * @module ngw-connector
  */
 import CancelablePromise from '@nextgis/cancelable-promise';
+import { DeepPartial, defined, isObject } from '@nextgis/utils';
 import { EventEmitter } from 'events';
 
 import { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
@@ -25,7 +26,9 @@ import {
 } from './interfaces';
 import { loadJSON } from './utils/loadJson';
 import { template } from './utils/template';
-import { ResourceItem } from './types/ResourceItem';
+import { ResourceItem, Resource } from './types/ResourceItem';
+import { resourceToQuery } from './utils/resourceToQuery';
+import { resourceCompare } from './utils/resourceCompare';
 
 const isBrowser =
   typeof window !== 'undefined' && typeof window.document !== 'undefined';
@@ -38,7 +41,6 @@ export class NgwConnector {
   private _loadingQueue: { [name: string]: LoadingQueue } = {};
   private _loadingStatus: { [url: string]: boolean } = {};
   private _queriesCache: { [url: string]: any } = {};
-  private _keynamesCache: Record<string, ResourceItem> = {};
   private _resourceIdsCache: Record<number, ResourceItem> = {};
 
   constructor(public options: NgwConnectorOptions) {
@@ -129,12 +131,14 @@ export class NgwConnector {
   }
 
   async getResource(
-    resource: ResourceDefinition
+    resource: ResourceDefinition | DeepPartial<Resource>
   ): CancelablePromise<ResourceItem | undefined> {
     if (typeof resource === 'string') {
       return this.getResourceByKeyname(resource);
     } else if (typeof resource === 'number') {
       return this.getResourceById(resource);
+    } else if (isObject(resource)) {
+      return this.getResourceBy(resource);
     }
   }
 
@@ -151,26 +155,54 @@ export class NgwConnector {
     }
   }
 
+  async getResourcesBy(
+    resource: DeepPartial<Resource>
+  ): CancelablePromise<ResourceItem[]> {
+    let items: ResourceItem[] = [];
+    if (resource.id) {
+      const existId = this._resourceIdsCache[resource.id];
+      if (existId) {
+        items.push(existId);
+      }
+    } else {
+      items = this._resourceCacheFilter(resource);
+    }
+    if (!items.length) {
+      try {
+        const query: Record<string, unknown> = {};
+        if (resource.keyname) {
+          query.keyname = resource.keyname;
+        } else {
+          Object.assign(query, resourceToQuery(resource));
+        }
+        const resources = await this.get('resource.search', null, {
+          serialization: 'full',
+          ...query,
+        });
+        if (resources) {
+          resources.forEach((x) => {
+            this._resourceIdsCache[x.resource.id] = x;
+          });
+        }
+        items = resources;
+      } catch (er) {
+        return [];
+      }
+    }
+    return items;
+  }
+
+  async getResourceBy(
+    resource: DeepPartial<Resource>
+  ): CancelablePromise<ResourceItem | undefined> {
+    const resources = await this.getResourcesBy(resource);
+    return resources[0];
+  }
+
   async getResourceByKeyname(
     keyname: string
   ): CancelablePromise<ResourceItem | undefined> {
-    let item: ResourceItem = this._keynamesCache[keyname];
-    if (!item) {
-      try {
-        const resources = await this.get('resource.search', null, {
-          keyname,
-          serialization: 'full',
-        });
-        item = resources[0];
-        if (item) {
-          this._keynamesCache[keyname] = item;
-          this._resourceIdsCache[item.resource.id] = item;
-        }
-      } catch {
-        return undefined;
-      }
-    }
-    return item;
+    return this.getResourceBy({ keyname });
   }
 
   async getResourceById(
@@ -182,9 +214,6 @@ export class NgwConnector {
         item = await this.get('resource.item', null, { id });
         if (item) {
           this._resourceIdsCache[id] = item;
-          if (item.resource.keyname) {
-            this._keynamesCache[item.resource.keyname] = item;
-          }
         }
       } catch (er) {
         return undefined;
@@ -242,11 +271,7 @@ export class NgwConnector {
     const id = await this.getResourceId(resource);
     if (id !== undefined) {
       await this.delete('resource.item', null, { id });
-      const fromCache = this._resourceIdsCache[id];
       delete this._resourceIdsCache[id];
-      if (fromCache && fromCache.resource.keyname) {
-        delete this._keynamesCache[fromCache.resource.keyname];
-      }
     }
   }
 
@@ -479,5 +504,23 @@ export class NgwConnector {
       }
       loadJSON(url, resolve, options, reject, onCancel);
     });
+  }
+
+  private _resourceCacheFilter(
+    resource: DeepPartial<Resource>
+  ): ResourceItem[] {
+    const items: ResourceItem[] = Object.values(this._resourceIdsCache).filter(
+      (x) => {
+        // identical by uniq props
+        if (resource.keyname && x.resource.keyname) {
+          return resource.keyname === x.resource.keyname;
+        }
+        if (defined(resource.id) && defined(x.resource.id)) {
+          return resource.id === x.resource.id;
+        }
+        return resourceCompare(resource, x.resource);
+      }
+    );
+    return items;
   }
 }

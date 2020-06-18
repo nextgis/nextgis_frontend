@@ -8,6 +8,7 @@
   "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/cancelable-promise": "^0.32.0",
+    "@nextgis/utils": "^0.32.0",
     "events": "^3.1.0"
   },
   "devDependencies": {
