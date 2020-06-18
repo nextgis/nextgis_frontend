@@ -1,3 +1,6 @@
 import { VectorLayer, FeatureResource } from '@nextgis/ngw-connector';
+import { BaseResourceSyncItem } from './ResourceSyncItem';
 
-export type VectorResourceSyncItem = VectorLayer & FeatureResource;
+export interface VectorResourceSyncItem extends BaseResourceSyncItem {
+  vector_layer: VectorLayer & FeatureResource;
+}

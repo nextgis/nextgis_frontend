@@ -17,8 +17,10 @@ module.exports = (config) => {
       'Chrome',
     ],
     frameworks: ['mocha'],
-    files: [{ pattern: 'test/specs/*.ts', type: 'ts' }],
-    // files: [{ pattern: 'test/specs/ngw-orm.spec.ts', type: 'ts' }],
+    files: [
+      // { pattern: 'test/specs/*.ts', type: 'ts' },
+      { pattern: 'test/specs/ngw-orm.spec.ts', type: 'ts' },
+    ],
     preprocessors: {
       'test/specs/*.spec.ts': ['webpack', 'sourcemap'], // 'sourcemap'
     },
