@@ -7,6 +7,10 @@ import { Connection } from '../connection/Connection';
 import { ConnectionOptions } from '../connection/ConnectionOptions';
 import { CannotExecuteResourceNotExistError } from '../error/CannotExecuteResourceNotExistError';
 import { SyncOptions } from './SyncOptions';
+import { NgwResource } from '../decorator/NgwResource';
+import { NgwResourceOptions } from '../options/NgwResourceOptions';
+import { getMetadataArgsStorage } from '..';
+import { ResourceMetadataArgs } from '../metadata-args/ResourceMetadataArgs';
 
 // type QueryDeepPartialEntity<T> = DeepPartial<T>;
 // type InsertResult = any;
@@ -43,6 +47,28 @@ import { SyncOptions } from './SyncOptions';
 export class BaseResource {
   static connection?: Connection;
   static item?: ResourceItem;
+
+  static clone(options: Partial<NgwResourceOptions> = {}): typeof BaseResource {
+    const metadataArgsStorage = getMetadataArgsStorage();
+    const table = metadataArgsStorage.filterTables(
+      this
+    )[0] as ResourceMetadataArgs;
+    const tableOptions = { ...table };
+    // keyname is unique resource property
+    delete tableOptions.keyname;
+    delete tableOptions.target;
+
+    const decorator = NgwResource({ ...tableOptions, ...options });
+    const ResourceClone = decorator(class extends this {});
+    ResourceClone.connection = undefined;
+    ResourceClone.item = undefined;
+
+    metadataArgsStorage.filterColumns(this).forEach((x) => {
+      metadataArgsStorage.columns.push({ ...x, target: ResourceClone });
+    });
+
+    return ResourceClone;
+  }
 
   static getNgwPayload(
     resource: Type<BaseResource>,

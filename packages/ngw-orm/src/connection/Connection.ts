@@ -92,31 +92,43 @@ export class Connection {
     options: SyncOptions,
     getExisted = false
   ): Promise<typeof BaseResource | undefined> {
-    if (resource.item) {
+    if (resource.item && resource.connection) {
       return resource;
     }
-    const parent = await this.driver.getResource(options.parent);
-    if (parent) {
+    let parent: ResourceDefinition | undefined;
+    if (typeof options.parent === 'function') {
+      parent = options.parent.item?.resource.id;
+    } else {
+      parent = options.parent;
+    }
+    if (!parent) {
+      throw Error('parent resource is not defined');
+    }
+    const parentResource = await this.driver.getResource(parent);
+    if (parentResource) {
       const payload = this.getResourceNgwPayload(
         resource,
-        parent.resource.id,
+        parentResource.resource.id,
         options
       );
       if (payload) {
+        if (getExisted && payload.resource) {
+          try {
+            const exist = await this.getResource(payload.resource);
+            if (exist) {
+              return resource.connect(exist.resource.id, this);
+            }
+          } catch {
+            //
+          }
+        }
         try {
           const item = await this.driver.post('resource.collection', {
             data: payload,
           });
           return resource.connect(item.id, this);
         } catch (er) {
-          if (getExisted && payload.resource) {
-            const exist = await this.getResource(payload.resource);
-            if (exist) {
-              return resource.connect(exist.resource.id, this);
-            }
-          } else {
-            throw er;
-          }
+          throw er;
         }
       }
     }
@@ -135,7 +147,7 @@ export class Connection {
     }
     if (id) {
       await this.driver.deleteResource(id);
-      delete resource.item;
+      resource.item = undefined;
     }
   }
 
