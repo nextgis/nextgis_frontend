@@ -149,18 +149,43 @@ ngwMap.addNgwLayer({
 
 adapterOptions
 
-| name  | default           | description|
-| ----- | ----------------- | ---------- |
-| type  | undefined         | `point`, `line` or `polygon`. Type of layer geometry. It is always better to prescribe this parameter in order to properly initialize the layer paint before loading the data. |
-| paint | {color:'blue'} |  `Object`, `Function` or `Expression` to set the appearance of the layer|
+| name                  | default        | description                                                                                                                                                                    |
+| --------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| type                  | undefined      | `point`, `line` or `polygon`. Type of layer geometry. It is always better to prescribe this parameter in order to properly initialize the layer paint before loading the data. |
+| paint                 | {color:'blue'} | `Object`, `Function` or `Expression` to set the appearance of the layer                                                                                                        |
+| selectedPaint         | undefiend      | Like paint, but used to decorate selected elements                                                                                                                             |
+| selectable            | false          | Indicates that the selection is working on this layer                                                                                                                          |
+| multiselect           | false          | Select multiple items                                                                                                                                                          |
+| unselectOnSecondClick | false          | So it is, unselect on second click                                                                                                                                             |
+| filter                | undefined      | `PropertiesFilter` expression to filter layer items                                                                                                                            |
 
 ### Painting
 
+Vector layer painting in nextgis frontend is common for any type of geometry.
+
 ```js
-paint: {
-  color: "red";
-}
+// strict
+paint: { color: "red", fillOpacity: 0.5, stroke: true }
+// use the properties of the layer item
+paint: { color: ['get', 'color'], radius: ['get', 'radius'] }
+// different paint for different filters
+paint: [
+  { radius: 6, stroke: true, fillOpacity: 0.5 }, // base paint
+  [[['AMENITY', 'eq', 'restaurant']], { color: 'green', fillOpacity: 1 }],
+  [[['AMENITY', 'eq', 'cafe']], { color: 'red' }]
+],
+// paint callback function
+paint: (feature) => {
+  return { color: feature.properties.color };
+} // better use `{ color: ['get', 'color']}` expression
 ```
+
+#### Examples
+
+[Vector painting](http://code.nextgis.com/demo-examples-vector_paint)
+[Expression paint](http://code.nextgis.com/demo-examples-expression_paint)
+[Expression paint with match](http://code.nextgis.com/demo-examples-expression_paint_match)
+[Properties paint](http://code.nextgis.com/demo-examples-properties_paint)
 
 ### Filtering
 
