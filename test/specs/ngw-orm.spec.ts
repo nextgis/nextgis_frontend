@@ -1,5 +1,9 @@
 import { expect } from 'chai';
-import { Connection, BaseResource } from '../../packages/ngw-orm/src';
+import {
+  Connection,
+  BaseResource,
+  getMetadataArgsStorage,
+} from '../../packages/ngw-orm/src';
 import { SandboxGroup } from '../helpers/ngw-orm/SandboxGroup';
 import { SandboxPointLayer } from '../helpers/ngw-orm/SandboxPointLayer';
 
@@ -24,38 +28,44 @@ function getConnection(): Promise<Connection> {
 }
 
 describe('NgwOrm', () => {
+  before(async () => {
+    const connection = await getConnection();
+    await connection.getOrCreateResource(SandboxGroup, {
+      parent: TESTS_GROUP_ID,
+    });
+  });
+
+  after(async () => {
+    const connection = await getConnection();
+    await connection.deleteResource(SandboxGroup);
+  });
+
   describe('Connection', () => {
     it(`connect`, async () => {
       const connection = await getConnection();
       expect(connection.isConnected).to.be.true;
     });
-  });
 
-  describe('ResourceGroup', () => {
-    it(`getOrCreate`, async () => {
+    it(`#getOrCreate create`, async () => {
       const connection = await getConnection();
-      let resourceGroup: typeof BaseResource;
-
-      const synced = await connection.getOrCreateResource(SandboxGroup, {
-        parent: TESTS_GROUP_ID,
+      const Clone = SandboxGroup.clone({
+        display_name: 'Resource Group Clone',
       });
-      if (synced) {
-        resourceGroup = synced;
-      }
-
-      expect(resourceGroup.connection && resourceGroup.connection.isConnected)
-        .to.be.true;
-      const r = resourceGroup.item.resource;
-      const id = r.id;
-      const exist = await connection.getResource({
-        display_name: r.display_name,
-        parent: r.parent,
+      await connection.getOrCreateResource(Clone, {
+        parent: SandboxGroup,
       });
-      expect(exist).to.be.exist;
+      expect(Clone.connection && Clone.connection.isConnected).to.be.true;
+    });
 
-      await connection.deleteResource(resourceGroup);
-      expect(resourceGroup.item).to.be.undefined;
-
+    it(`#deleteResource`, async () => {
+      const connection = await getConnection();
+      const clone = getMetadataArgsStorage().resources.find((x) => {
+        return x.display_name === 'Resource Group Clone';
+      });
+      const Clone = clone.target as typeof BaseResource;
+      const id = Clone.item.resource.id;
+      await connection.deleteResource(Clone);
+      expect(Clone.item).to.be.undefined;
       const afterDelete = await connection.getResource(id);
       expect(afterDelete).to.be.undefined;
     });
@@ -64,14 +74,26 @@ describe('NgwOrm', () => {
   describe('VectorLayer', () => {
     it(`point`, async () => {
       const connection = await getConnection();
-      const resourceGroup = await connection.getOrCreateResource(SandboxGroup, {
-        parent: TESTS_GROUP_ID,
-      });
-      if (resourceGroup && resourceGroup.item) {
+      if (SandboxGroup.item) {
         const point = await connection.getOrCreateResource(SandboxPointLayer, {
-          parent: resourceGroup.item.resource.id,
+          parent: SandboxGroup,
         });
         expect(point).to.be.exist;
+      }
+    });
+    it(`clone`, async () => {
+      const connection = await getConnection();
+      if (SandboxGroup.item) {
+        const point = await connection.getOrCreateResource(
+          SandboxPointLayer.clone({ display_name: 'Clone of Point layer' }),
+          {
+            parent: SandboxGroup,
+          }
+        );
+        expect(point.item).to.be.exist;
+        if (point.item) {
+          expect(point.item.feature_layer.fields.length).to.be.eq(1);
+        }
       }
     });
   });
