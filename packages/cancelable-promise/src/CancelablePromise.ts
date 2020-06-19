@@ -1,8 +1,8 @@
-import { CancelError } from './CancelError';
-
 /**
  * @module cancelable-promise
  */
+import { CancelError } from './CancelError';
+
 type Reject = (reason?: any) => void;
 type Resolve = (value?: any) => void;
 type OnCancelFunction = (cancelHandler: () => void) => void;
@@ -22,6 +22,26 @@ const handleCallback = <T = never>(
 
 let ID = 0;
 
+/**
+ * Promise that can be canceled
+ *
+ * @example
+ * ```
+ * import CancelablePromise from "@nextgis/cancelable-promise";
+ *
+ * const promise = new CancelablePromise((resolve, reject) => {
+ *  setTimeout(() => resolve(), 100);
+ * }).catch((er) => {
+ *  if (er.name === "CancelError") {
+ *    // handle cancel error
+ *  }
+ *  throw er;
+ * });
+ *
+ * promise.cancel();
+ * ```
+ * @public
+ */
 export class CancelablePromise<T = any> implements Promise<T> {
   readonly [Symbol.toStringTag]: string;
   readonly id = ID++;
