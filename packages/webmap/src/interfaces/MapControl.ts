@@ -1,7 +1,3 @@
-/**
- * @module webmap
- */
-
 type OnClickSync = (status?: boolean) => void;
 type onClickAsync = (status?: boolean) => Promise<void>;
 export type OnClick = OnClickSync | onClickAsync;

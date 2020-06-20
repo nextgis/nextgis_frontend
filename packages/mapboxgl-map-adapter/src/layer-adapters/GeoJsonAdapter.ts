@@ -1,6 +1,3 @@
-/**
- * @module mapboxgl-map-adapter
- */
 import { Map, GeoJSONSource, GeoJSONSourceRaw } from 'mapbox-gl';
 import {
   GeoJsonAdapterOptions,

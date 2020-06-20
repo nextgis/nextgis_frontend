@@ -1,6 +1,35 @@
 /**
- * @module webmap
+ * The library that allows to use a single interface for managing various interactive map frameworks.
+ *
+ * @remarks
+ * The following adapters are available:
+ * {@link @nextgis/leaflet-map-adapter},
+ * {@link @nextgis/ol-map-adapter},
+ * {@link @nextgis/mapbox-map-adapter}
+ * and experimental {@link @nextgis/cesium-map-adapter}.
+ *
+ * @example
+ * ```js
+ * import WebMap from "@nextgis/webmap";
+ *
+ * import "./leaflet-style-override.css";
+ * import MapAdapter from "@nextgis/leaflet-map-adapter";
+ * // OR
+ * // import 'ol/ol.css';
+ * // import MapAdapter from '@nextgis/ol-map-adapter';
+ * // OR
+ * // import 'mapbox-gl/dist/mapbox-gl.css';
+ * // import MapAdapter from '@nextgis/mapboxgl-map-adapter';
+ *
+ * const webMap = new WebMap({
+ *   mapAdapter: new MapAdapter(),
+ *   mapOptions: { target: 'map' }
+ * });
+ * ```
+ *
+ * @packageDocumentation
  */
+
 import { WebMap } from './WebMap';
 
 export * from './WebMap';

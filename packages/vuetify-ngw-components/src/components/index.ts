@@ -1,6 +1,3 @@
-/**
- * @module vuetify-ngw-components
- */
 import { NgwLayersList, VueTreeItem } from './NgwLayersList/NgwLayersList';
 import {
   BaselayerSelect,

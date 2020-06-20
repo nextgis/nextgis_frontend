@@ -1,7 +1,3 @@
-/**
- * @module item
- */
-
 import { BaseProperty } from './properties/BaseProperty';
 import { Item } from './Item';
 

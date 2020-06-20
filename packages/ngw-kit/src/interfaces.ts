@@ -1,7 +1,3 @@
-/**
- * @module ngw-kit
- */
-
 import WebMap, {
   AdapterOptions,
   LayerAdaptersOptions,

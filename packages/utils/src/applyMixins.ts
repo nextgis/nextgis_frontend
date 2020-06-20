@@ -1,6 +1,3 @@
-/**
- * @module utils
- */
 type Ctor = any;
 
 export function applyMixins(derivedCtor: Ctor, baseCtors: Ctor[]): void {

@@ -1,6 +1,3 @@
-/**
- * @module leaflet-map-adapter
- */
 import { MapControl, CreateControlOptions } from '@nextgis/webmap';
 import { Control, DomEvent } from 'leaflet';
 

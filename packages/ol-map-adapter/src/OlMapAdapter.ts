@@ -1,6 +1,3 @@
-/**
- * @module ol-map-adapter
- */
 import { EventEmitter } from 'events';
 
 import Map from 'ol/Map';

@@ -1,6 +1,3 @@
-/**
- * @module mapboxgl-map-adapter
- */
 import {
   BaseLayerAdapter,
   TileAdapterOptions,

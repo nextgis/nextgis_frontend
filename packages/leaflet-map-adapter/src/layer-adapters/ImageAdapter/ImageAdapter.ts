@@ -1,6 +1,3 @@
-/**
- * @module leaflet-map-adapter
- */
 import { BaseLayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
 // @ts-ignore
 import { ImageLayer } from './ImageLayer';

@@ -1,6 +1,3 @@
-/**
- * @module cesium-map-adapter
- */
 import { BaseLayerAdapter, AdapterOptions } from '@nextgis/webmap';
 import { Viewer as TViewer, Event } from 'cesium';
 export type Map = TViewer;

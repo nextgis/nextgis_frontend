@@ -1,6 +1,3 @@
-/**
- * @module webmap
- */
 import { MapStateItem } from '../../interfaces/MapState';
 import { WebMapEvents } from '../../interfaces/Events';
 import { WebMap } from '../../WebMap';

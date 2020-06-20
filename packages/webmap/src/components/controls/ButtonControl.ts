@@ -1,6 +1,3 @@
-/**
- * @module webmap
- */
 import { WebMap } from '../../WebMap';
 import { ButtonControlOptions } from '../../interfaces/MapControl';
 

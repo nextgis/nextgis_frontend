@@ -1,7 +1,3 @@
-/**
- * @module ngw-uploader
- */
-
 import NgwConnector, {
   Credentials,
   CancelablePromise,

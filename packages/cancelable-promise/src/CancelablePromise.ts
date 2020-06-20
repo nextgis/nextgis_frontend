@@ -1,6 +1,3 @@
-/**
- * @module cancelable-promise
- */
 import { CancelError } from './CancelError';
 
 type Reject = (reason?: any) => void;

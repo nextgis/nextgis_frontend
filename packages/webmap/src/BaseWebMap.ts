@@ -1,6 +1,3 @@
-/**
- * @module webmap
- */
 import { EventEmitter } from 'events';
 import { Feature, Polygon } from 'geojson';
 import StrictEventEmitter from 'strict-event-emitter-types';
@@ -65,9 +62,6 @@ const OPTIONS: MapOptions = {
   },
 };
 
-/**
- * @class WebMap
- */
 export class BaseWebMap<
   M = any,
   L = any,

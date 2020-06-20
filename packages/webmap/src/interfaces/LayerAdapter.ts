@@ -1,6 +1,3 @@
-/**
- * @module webmap
- */
 import { GeoJsonObject, Feature } from 'geojson';
 import { LngLatBoundsArray, Type } from './BaseTypes';
 import { MapClickEvent } from './MapAdapter';

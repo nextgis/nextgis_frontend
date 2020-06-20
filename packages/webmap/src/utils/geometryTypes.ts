@@ -1,6 +1,3 @@
-/**
- * @module webmap
- */
 import {
   GeoJsonObject,
   GeoJsonGeometryTypes,

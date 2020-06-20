@@ -1,6 +1,3 @@
-/**
- * @module webmap
- */
 import StrictEventEmitter from 'strict-event-emitter-types';
 import { LayerAdapter } from './LayerAdapter';
 import { Type, ZoomLevel } from './BaseTypes';

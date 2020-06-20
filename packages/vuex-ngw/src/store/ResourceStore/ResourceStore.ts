@@ -1,6 +1,3 @@
-/**
- * @module vuex-ngw
- */
 import { Geometry, GeoJsonProperties, Feature } from 'geojson';
 import { VuexModule, Mutation, Action, Module } from 'vuex-module-decorators';
 import { Store } from 'vuex';
@@ -38,7 +35,7 @@ export abstract class ResourceStore<
   } = {};
 
   @Action({ commit: 'UPDATE_FIELDS' })
-  async getFields() {
+  async getFields(): Promise<FeatureLayerField[] | undefined> {
     if (this.fields.length) {
       return this.fields;
     }

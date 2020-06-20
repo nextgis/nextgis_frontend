@@ -1,7 +1,3 @@
-/**
- * @module ngw-uploader
- */
-
 // from leaflet Util.js
 const templateRe = /\{ *([\w_-]+) *\}/g;
 

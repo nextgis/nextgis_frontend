@@ -1,6 +1,3 @@
-/**
- * @module cesium-map-adapter
- */
 import {
   VectorLayerAdapter,
   GeoJsonAdapterOptions,

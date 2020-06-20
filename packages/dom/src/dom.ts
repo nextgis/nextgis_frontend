@@ -1,6 +1,3 @@
-/**
- * @module utils
- */
 export function create<K extends keyof HTMLElementTagNameMap>(
   tagName: K,
   className?: string | null,

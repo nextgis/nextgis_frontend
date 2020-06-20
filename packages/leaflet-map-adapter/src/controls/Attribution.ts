@@ -1,6 +1,3 @@
-/**
- * @module leaflet-map-adapter
- */
 import { Control, ControlOptions } from 'leaflet';
 import { AttributionControlOptions } from '@nextgis/webmap';
 

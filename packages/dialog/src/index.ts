@@ -1,7 +1,3 @@
-/**
- * @module dialog
- */
-
 import { DialogAdapterOptions } from '@nextgis/webmap';
 import { Dialog } from './dialog';
 

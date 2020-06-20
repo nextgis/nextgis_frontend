@@ -1,6 +1,3 @@
-/**
- * @module leaflet-map-adapter
- */
 import { BaseLayerAdapter, TileAdapterOptions } from '@nextgis/webmap';
 import { TileLayer, TileLayerOptions } from 'leaflet';
 import { TileLayer as TL } from './TileLayer';

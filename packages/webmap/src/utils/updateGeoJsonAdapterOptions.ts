@@ -1,6 +1,3 @@
-/**
- * @module webmap
- */
 import { isPaint } from '@nextgis/paint';
 import {
   GeoJsonAdapterOptions,

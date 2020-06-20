@@ -1,7 +1,3 @@
-/**
- * @module ngw-ol
- */
-
 import 'ol/ol.css';
 import '@nextgis/control-container/lib/control-container.css';
 import NgwMap, { NgwMapOptions } from '@nextgis/ngw-map';
