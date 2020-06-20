@@ -1,6 +1,3 @@
-/**
- * @module vue-ngw-leaflet
- */
 import L, { Map } from 'leaflet';
 import { Mixins, Prop } from 'vue-property-decorator';
 import Component from 'vue-class-component';

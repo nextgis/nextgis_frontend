@@ -1,7 +1,3 @@
-/**
- * @module ngw-connector
- */
-
 import { ResourceItem, FeatureLayerField } from './types/ResourceItem';
 import { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
 import { FeatureLayersIdentify, FeatureItem } from './types/FeatureLayer';

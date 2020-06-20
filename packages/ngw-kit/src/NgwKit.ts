@@ -1,6 +1,3 @@
-/**
- * @module ngw-kit
- */
 import NgwConnector from '@nextgis/ngw-connector';
 import WebMap, {
   StarterKit,

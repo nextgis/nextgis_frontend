@@ -1,6 +1,4 @@
-/**
- * @module cesium-map-adapter
- */
+
 import { EventEmitter } from 'events';
 
 import {

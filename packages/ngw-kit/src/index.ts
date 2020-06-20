@@ -1,7 +1,3 @@
-/**
- * @module ngw-kit
- */
-
 import { NgwKit } from './NgwKit';
 
 export * from './interfaces';

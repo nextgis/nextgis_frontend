@@ -1,6 +1,3 @@
-/**
- * @module control-container
- */
 import './ControlContainer.css';
 
 import * as dom from '@nextgis/dom';

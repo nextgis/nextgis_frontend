@@ -1,5 +1,4 @@
 /**
- * @module cesium-map-adapter
  * UNDER DEVELOPMENT
  */
 import { LngLatBoundsArray, Model3DOptions } from '@nextgis/webmap';

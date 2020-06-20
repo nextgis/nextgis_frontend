@@ -1,7 +1,3 @@
-/**
- * @module qms-kit
- */
-
 import WebMap, {
   StarterKit,
   Type,

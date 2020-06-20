@@ -1,6 +1,3 @@
-/**
- * @module leaflet-map-adapter
- */
 import { BaseLayerAdapter, WmsAdapterOptions } from '@nextgis/webmap';
 import { TileLayer, WMSOptions } from 'leaflet';
 import { WmsLayer as WMS } from './WmsLayer';

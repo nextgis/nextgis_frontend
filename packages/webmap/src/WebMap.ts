@@ -1,6 +1,5 @@
 /**
- * @module webmap
- *
+ * @privateRemarks
  * Since it was not possible to split the code through mixins, inheritance was used.
  * The `ts-mixin` plugin worked fine, but led to errors in IE.
  *
@@ -45,7 +44,6 @@
  * }
  *
  * ...and there will be compatibility issues
- *
  */
 
 import { WebMapEvents } from './interfaces/Events';
@@ -62,6 +60,28 @@ import {
 import { ControlPosition } from './interfaces/MapAdapter';
 import { WebMapLayers } from './WebMapLayers';
 
+/**
+ * The core component for managing map adapters.
+ * It contains methods for adding and manipulation with map layers and controls.
+ *
+ * @example
+ * ```js
+ * import WebMap from '@nextgis/webmap';
+ * import MapAdapter from '@nextgis/ol-map-adapter';
+ *
+ * const webMap = new WebMap({
+ *   mapAdapter: new MapAdapter(),
+ *   mapOptions: { target: 'map' },
+ * });
+ * ```
+ *
+ * @typeParam M - Interactive Map used in the adapter
+ * @typeParam L - Layer
+ * @typeParam C - Control
+ * @typeParam E - Events
+ *
+ * @public
+ */
 export class WebMap<
   M = any,
   L = any,

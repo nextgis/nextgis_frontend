@@ -1,7 +1,3 @@
-/**
- * @module ngw-connector
- */
-
 import { GeometryObject, GeoJsonProperties, GeoJsonObject } from 'geojson';
 
 export type FeatureLayerFields = GeoJsonProperties;

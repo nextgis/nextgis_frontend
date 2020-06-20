@@ -1,6 +1,3 @@
-/**
- * @module mapboxgl-map-adapter
- */
 import { MvtAdapterOptions } from '@nextgis/webmap';
 import { Layer } from 'mapbox-gl';
 import { VectorAdapter } from './VectorAdapter';

@@ -1,6 +1,3 @@
-/**
- * @module item
- */
 import { Item } from '../Item';
 import { ItemBasePropertyOptions, ItemOptions } from '../interfaces';
 

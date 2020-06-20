@@ -1,6 +1,3 @@
-/**
- * @module leaflet-map-adapter
- */
 import { BaseLayerAdapter, AdapterOptions } from '@nextgis/webmap';
 import { Map } from 'leaflet';
 

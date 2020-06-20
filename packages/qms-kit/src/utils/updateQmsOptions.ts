@@ -1,6 +1,3 @@
-/**
- * @module qms-kit
- */
 import { LayerAdaptersOptions, AdapterOptions } from '@nextgis/webmap';
 
 import { QmsBasemap, QmsLayerType } from '../interfaces';

@@ -1,7 +1,3 @@
-/**
- * @module item
- */
-
 import { TreeHelper } from './TreeHelper';
 import { ItemProperties } from './properties/ItemProperties';
 import { ItemOptions } from './interfaces';

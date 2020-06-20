@@ -1,6 +1,3 @@
-/**
- * @module utils
- */
 export function debounce<T extends (...args: any[]) => void>(
   cb: T,
   wait = 10

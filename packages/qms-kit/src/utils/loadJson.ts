@@ -1,6 +1,3 @@
-/**
- * @module qms-kit
- */
 import { fixUrlStr } from '@nextgis/utils';
 
 export function loadJson<T = any>(url: string): Promise<T> {

@@ -1,7 +1,3 @@
-/**
- * @module vue-ngw-ol
- */
-
 import '@nextgis/control-container/lib/control-container.css';
 import 'ol/ol.css';
 

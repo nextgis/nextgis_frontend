@@ -1,6 +1,3 @@
-/**
- * @module vuetify-ngw-components
- */
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 import { CreateElement, VNode, VNodeData } from 'vue';
 

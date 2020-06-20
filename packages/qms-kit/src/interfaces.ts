@@ -1,7 +1,3 @@
-/**
- * @module qms-kit
- */
-
 import { AdapterOptions, BaseLayerAdapter } from '@nextgis/webmap';
 export interface QmsOptions {
   url: string;

@@ -1,7 +1,3 @@
-/**
- * @module utils
- */
-
 export function deepmerge<T>(
   x: Partial<T>,
   y: Partial<T>,

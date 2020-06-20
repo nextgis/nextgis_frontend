@@ -1,6 +1,4 @@
-/**
- * @module cesium-map-adapter
- */
+
 
 import { CesiumMapAdapter, MapAdapterOptions } from './CesiumMapAdapter';
 

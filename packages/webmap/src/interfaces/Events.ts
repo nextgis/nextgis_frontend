@@ -1,7 +1,3 @@
-/**
- * @module webmap
- */
-
 import { WebMap } from '../WebMap';
 import { MapAdapter, MapClickEvent, DataLoadError } from './MapAdapter';
 import {

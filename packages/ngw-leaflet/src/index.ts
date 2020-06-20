@@ -1,7 +1,3 @@
-/**
- * @module ngw-leaflet
- */
-
 import 'leaflet/dist/leaflet.css';
 import './leaflet-style-override.css';
 

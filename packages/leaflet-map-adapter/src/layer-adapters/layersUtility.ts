@@ -1,6 +1,3 @@
-/**
- * @module leaflet-map-adapter
- */
 export function callAjax(
   src: string,
   callback: (resp: any) => any,

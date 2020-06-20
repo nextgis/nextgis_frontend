@@ -1,6 +1,3 @@
-/**
- * @module vue-ngw-map
- */
 import { VNode, VNodeData, CreateElement } from 'vue';
 import { Prop, Vue } from 'vue-property-decorator';
 import Component from 'vue-class-component';

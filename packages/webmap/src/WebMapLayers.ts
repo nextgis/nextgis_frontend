@@ -1,6 +1,3 @@
-/**
- * @module webmap
- */
 import { Feature, GeoJsonObject } from 'geojson';
 import { preparePaint } from '@nextgis/paint';
 

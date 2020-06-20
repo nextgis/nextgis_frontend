@@ -1,7 +1,3 @@
-/**
- * @module webmap
- */
-
 import { GeometryPaint } from '@nextgis/paint';
 import { StarterKit } from './StarterKit';
 import { RuntimeParams } from './RuntimeParams';

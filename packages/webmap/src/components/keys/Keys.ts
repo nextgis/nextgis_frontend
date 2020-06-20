@@ -1,6 +1,3 @@
-/**
- * @module webmap
- */
 import { KeyCodes } from './KeysCodes';
 
 /**

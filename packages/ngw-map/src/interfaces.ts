@@ -1,7 +1,3 @@
-/**
- * @module ngw-map
- */
-
 import {
   MapOptions,
   ControlPositions,

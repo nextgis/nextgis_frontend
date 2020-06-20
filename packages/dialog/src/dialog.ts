@@ -1,7 +1,3 @@
-/**
- * @module dialog
- */
-
 import { DialogAdapter, DialogAdapterOptions } from '@nextgis/webmap';
 import dialogPolyfill from 'dialog-polyfill';
 import 'dialog-polyfill/dialog-polyfill.css';

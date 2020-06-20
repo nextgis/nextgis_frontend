@@ -1,7 +1,3 @@
-/**
- * @module item
- */
-
 import { Item } from './Item';
 import { filterIn } from './TreeUtil';
 import { ItemOptions } from './interfaces';
