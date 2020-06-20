@@ -1,6 +1,3 @@
-/**
- * @module ngw-connector
- */
 import CancelablePromise from '@nextgis/cancelable-promise';
 import { DeepPartial, defined, isObject } from '@nextgis/utils';
 import { EventEmitter } from 'events';

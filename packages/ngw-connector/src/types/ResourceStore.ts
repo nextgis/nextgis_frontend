@@ -1,7 +1,3 @@
-/**
- * @module ngw-connector
- */
-
 export type ResourceStoreItemProperties = { [name: string]: any } | null;
 
 export type ResourceStoreItem<

@@ -1,7 +1,3 @@
-/**
- * @module icons
- */
-
 // tslint:disable:max-line-length
 import { IconOptions as WebmapIcoOptions } from '@nextgis/paint';
 

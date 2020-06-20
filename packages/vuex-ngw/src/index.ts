@@ -1,6 +1,3 @@
-/**
- * @module vuex-ngw
- */
 import {
   ResourceStore,
   createResourceStore,

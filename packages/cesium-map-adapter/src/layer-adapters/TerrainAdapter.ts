@@ -1,6 +1,3 @@
-/**
- * @module cesium-map-adapter
- */
 import { TileAdapterOptions } from '@nextgis/webmap';
 import { CesiumTerrainProvider } from 'cesium';
 

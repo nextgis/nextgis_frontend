@@ -1,6 +1,3 @@
-/**
- * @module utils
- */
 export class Clipboard {
   constructor(text: string) {
     if (text) {

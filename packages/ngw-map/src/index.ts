@@ -1,7 +1,3 @@
-/**
- * @module ngw-map
- */
-
 import { NgwMap } from './NgwMap';
 
 export * from '@nextgis/webmap';

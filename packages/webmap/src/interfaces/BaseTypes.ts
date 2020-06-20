@@ -1,7 +1,3 @@
-/**
- * @module webmap
- */
-
 import { Type } from '@nextgis/utils';
 import { LayerAdapter } from './LayerAdapter';
 

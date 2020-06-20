@@ -1,6 +1,3 @@
-/**
- * @module leaflet-map-adapter
- */
 import L, { LatLngBoundsExpression, ImageOverlayOptions } from 'leaflet';
 import { callAjax } from '../layersUtility';
 

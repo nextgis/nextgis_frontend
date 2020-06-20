@@ -1,6 +1,3 @@
-/**
- * @module ngw-map
- */
 import StrictEventEmitter from 'strict-event-emitter-types';
 import { EventEmitter } from 'events';
 import CancelablePromise from '@nextgis/cancelable-promise';

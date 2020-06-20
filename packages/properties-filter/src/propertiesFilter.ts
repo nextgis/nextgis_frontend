@@ -1,6 +1,3 @@
-/**
- * @module utils
- */
 import { Feature, GeoJsonProperties } from 'geojson';
 import { reEscape } from '@nextgis/utils';
 

@@ -1,6 +1,3 @@
-/**
- * @module vuex-ngw
- */
 import { Feature, Geometry, GeoJsonProperties } from 'geojson';
 
 export type LookupTables = { [field: string]: Record<string, string> };
