@@ -33,22 +33,31 @@ export interface MapOptions {
   center?: LngLatArray;
   /**
    * Initial extent of the map, array of degrees in [_west_, _south_, _east_, _north_] order.
+   *
+   * @remark
    * Overrides the `center` and  `zoom` parameters.
    * [LngLatBoundsArray](webmap#LngLatBoundsArray)
    *
    * @example
-   * ```javascript
+   * ```js
    * // whole world
    * bounds: [0, -90, 180, 90]
    * ```
    */
   bounds?: LngLatBoundsArray;
+  /**
+   * options to specify the initial position of the map
+   */
   fitOptions?: FitOptions;
-
+  // TODO: find usage and safe emove from here
   paint?: GeometryPaint;
+  // TODO: find usage and safe remove from here
   selectedPaint?: GeometryPaint;
-
+  // TODO: move to mapAdapterOptions
   view?: '2D' | '3D' | '2.5D';
+  /**
+   * special settings for the selected map adapter
+   */
   mapAdapterOptions?: Record<string, any>;
   /**
    * The callback function is calling before adding each layer
@@ -72,7 +81,23 @@ export interface AppOptions {
    * One way to extend WebMap functionality with the help of kits.
    */
   starterKits?: StarterKit[];
+  /**
+   * Initial map display settings
+   */
   mapOptions?: MapOptions;
+  /**
+   * A way to save the state of a map to external services
+   *
+   * @example
+   * ```js
+   * import RuntimeParams from '@nextgis/url-runtime-params';
+   * // this will allow to write in the url params of map center and zoomlevel when moving
+   * new WebMap({
+   *   mapAdapter: new MapAdapter(),
+   *   runtimeParams: [new RuntimeParams]
+   * })
+   * ```
+   */
   runtimeParams?: RuntimeParams[];
   /**
    * Аutomatic creation of a map from the constructor
@@ -96,5 +121,5 @@ export interface ToggleLayerOptions {
 
 export interface GetAttributionsOptions {
   onlyVisible?: boolean;
-  onlyBasemap?: boolean;
+  onlyBaselayer?: boolean;
 }
