@@ -1,5 +1,3 @@
-
-
 import { CesiumMapAdapter, MapAdapterOptions } from './CesiumMapAdapter';
 
 export { CesiumMapAdapter, MapAdapterOptions };
