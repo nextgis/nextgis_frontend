@@ -62,6 +62,9 @@ const OPTIONS: MapOptions = {
   },
 };
 
+/**
+ * @internal
+ */
 export class BaseWebMap<
   M = any,
   L = any,

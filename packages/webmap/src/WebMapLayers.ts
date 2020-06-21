@@ -33,6 +33,9 @@ import { FitOptions } from './interfaces/MapAdapter';
 
 type AddedLayers = { [id: string]: LayerAdapter };
 
+/**
+ * @internal
+ */
 export class WebMapLayers<
   M = any,
   L = any,
