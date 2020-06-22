@@ -1,11 +1,11 @@
-import { Type, BaseLayerAdapter, TileAdapterOptions } from '@nextgis/webmap';
+import { Type, MainLayerAdapter, TileAdapterOptions } from '@nextgis/webmap';
 import QmsKit from '@nextgis/qms-kit';
 import { GetClassAdapterOptions } from './interfaces';
 
 export async function createBasemapLayerAdapter({
   webMap,
   item,
-}: GetClassAdapterOptions): Promise<Type<BaseLayerAdapter> | undefined> {
+}: GetClassAdapterOptions): Promise<Type<MainLayerAdapter> | undefined> {
   if (item.basemap_layer) {
     const qms = item.basemap_layer.qms;
     const url = item.basemap_layer.url;
@@ -15,13 +15,13 @@ export async function createBasemapLayerAdapter({
         if (x && item) {
           const qms_ = JSON.parse(qms);
           x.prototype.qms = qms_;
-          x.prototype.baseLayer = true;
+          x.prototype.baselayer = true;
         }
       });
       return adapter;
     } else if (url) {
       const TileAdapter = webMap.mapAdapter.layerAdapters.TILE as Type<
-        BaseLayerAdapter<any, any, TileAdapterOptions>
+        MainLayerAdapter<any, any, TileAdapterOptions>
       >;
       if (TileAdapter) {
         class BasemapTileAdapter extends TileAdapter {

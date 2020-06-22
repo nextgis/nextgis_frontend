@@ -1,7 +1,7 @@
 import WebMap, {
   StarterKit,
   Type,
-  BaseLayerAdapter,
+  MainLayerAdapter,
   LayerAdapterCreators,
 } from '@nextgis/webmap';
 import { QmsOptions } from './interfaces';
@@ -33,7 +33,7 @@ export class QmsKit implements StarterKit {
     ]);
   }
 
-  private _createAdapter(webMap: WebMap): Type<BaseLayerAdapter> {
+  private _createAdapter(webMap: WebMap): Type<MainLayerAdapter> {
     return createQmsAdapter(webMap, this.url);
   }
 }

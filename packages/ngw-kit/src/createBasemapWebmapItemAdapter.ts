@@ -1,6 +1,6 @@
 import WebMap, {
   Type,
-  BaseLayerAdapter,
+  MainLayerAdapter,
   AdapterOptions,
 } from '@nextgis/webmap';
 import NgwConnector, { BasemapWebmapItem } from '@nextgis/ngw-connector';
@@ -20,10 +20,10 @@ export async function createOnFirstShowAdapter({
   item,
   adapterOptions = {},
   idPrefix = 'basemapwebmap',
-}: CreateOnFirstShowAdapterOptions): Promise<Type<BaseLayerAdapter>> {
-  class OnFirstShowAdapter implements BaseLayerAdapter {
+}: CreateOnFirstShowAdapterOptions): Promise<Type<MainLayerAdapter>> {
+  class OnFirstShowAdapter implements MainLayerAdapter {
     options: AdapterOptions = {};
-    layer: BaseLayerAdapter[] = [];
+    layer: MainLayerAdapter[] = [];
     _removed = false;
 
     addLayer() {
@@ -56,13 +56,13 @@ export async function createOnFirstShowAdapter({
           if (Adapter) {
             const adapter = new Adapter(webMap.mapAdapter.map, {
               ...adapterOptions,
-              baseLayer: false,
+              baselayer: false,
             });
-            adapter.addLayer({}).then((baseLayer: BaseLayerAdapter) => {
-              adapter.options.baseLayer = false;
+            adapter.addLayer({}).then((baselayer: MainLayerAdapter) => {
+              adapter.options.baselayer = false;
               Object.assign(adapter.options, adapterOptions);
               adapter.id = idPrefix + '-' + item.resource_id;
-              adapter.layer = baseLayer;
+              adapter.layer = baselayer;
               if (this._removed) {
                 webMap.removeLayer(adapter);
               }

@@ -1,4 +1,4 @@
-import { WebMap, BaseLayerAdapter } from '@nextgis/webmap';
+import { WebMap, MainLayerAdapter } from '@nextgis/webmap';
 import { Type, mixinProperties } from '@nextgis/utils';
 import { QmsAdapterOptions, QmsBasemap, QmsAdapter as QA } from '../interfaces';
 import { alias, updateQmsOptions } from './updateQmsOptions';
@@ -7,8 +7,8 @@ import { loadJson } from './loadJson';
 export function createQmsAdapter(
   webMap: WebMap,
   url = 'https://qms.nextgis.com'
-): Type<BaseLayerAdapter> {
-  class QmsAdapter<M = any> implements BaseLayerAdapter<M>, QA {
+): Type<MainLayerAdapter> {
+  class QmsAdapter<M = any> implements MainLayerAdapter<M>, QA {
     qms?: QmsBasemap;
 
     options: QmsAdapterOptions;
@@ -17,7 +17,7 @@ export function createQmsAdapter(
     constructor(map: M, options: QmsAdapterOptions) {
       this.map = map;
       this.options = options;
-      this.options.baseLayer = true;
+      this.options.baselayer = true;
     }
 
     async addLayer(options: QmsAdapterOptions): Promise<any> {

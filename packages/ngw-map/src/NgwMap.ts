@@ -180,7 +180,7 @@ export class NgwMap<
         if (layer && id) {
           this._ngwLayers[id] = { layer, resourceId: layer.resourceId };
 
-          if (layer.options.baseLayer) {
+          if (layer.options.baselayer) {
             const visibleLayerBaseLayer = this.getActiveBaseLayer();
             if (visibleLayerBaseLayer) {
               return layer;

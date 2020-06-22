@@ -1,11 +1,11 @@
 import { Map } from 'mapbox-gl';
-import { BaseLayerAdapter, AdapterOptions } from '@nextgis/webmap';
+import { MainLayerAdapter, AdapterOptions } from '@nextgis/webmap';
 import { TLayer } from '../MapboxglMapAdapter';
 
 let ID = 0;
 
 export abstract class BaseAdapter<O extends AdapterOptions = AdapterOptions>
-  implements BaseLayerAdapter<Map, TLayer, O> {
+  implements MainLayerAdapter<Map, TLayer, O> {
   layer?: TLayer;
   map?: Map;
   protected readonly _layerId: string;

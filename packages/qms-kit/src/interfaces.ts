@@ -1,4 +1,4 @@
-import { AdapterOptions, BaseLayerAdapter } from '@nextgis/webmap';
+import { AdapterOptions, MainLayerAdapter } from '@nextgis/webmap';
 export interface QmsOptions {
   url: string;
 }
@@ -22,7 +22,7 @@ export interface GeoserviceInList {
   epsg: number;
 }
 
-export interface QmsAdapter extends BaseLayerAdapter {
+export interface QmsAdapter extends MainLayerAdapter {
   qms?: QmsBasemap;
 }
 

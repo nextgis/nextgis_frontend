@@ -1,9 +1,9 @@
-import { BaseLayerAdapter, WmsAdapterOptions } from '@nextgis/webmap';
+import { MainLayerAdapter, WmsAdapterOptions } from '@nextgis/webmap';
 
 import { TileAdapter } from './TileAdapter';
 
 export class WmsAdapter extends TileAdapter<WmsAdapterOptions>
-  implements BaseLayerAdapter {
+  implements MainLayerAdapter {
   addLayer(options: WmsAdapterOptions): string[] | undefined {
     const params: Record<string, string | number> = {
       bbox: '{bbox-epsg-3857}',

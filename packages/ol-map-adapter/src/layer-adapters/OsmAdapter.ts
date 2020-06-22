@@ -1,11 +1,11 @@
-import { BaseLayerAdapter, AdapterOptions } from '@nextgis/webmap';
+import { MainLayerAdapter, AdapterOptions } from '@nextgis/webmap';
 import OSM from 'ol/source/OSM';
 // @ts-ignore
 import { ATTRIBUTION } from 'ol/source/OSM';
 import TileLayer from 'ol/layer/Tile';
 import Map from 'ol/Map';
 
-export class OsmAdapter implements BaseLayerAdapter {
+export class OsmAdapter implements MainLayerAdapter {
   name = 'osm';
 
   constructor(public map: Map, public options: AdapterOptions) {}
