@@ -1,4 +1,4 @@
-import { BaseLayerAdapter, AdapterOptions } from '@nextgis/webmap';
+import { MainLayerAdapter, AdapterOptions } from '@nextgis/webmap';
 import { Viewer as TViewer, Event } from 'cesium';
 export type Map = TViewer;
 
@@ -7,7 +7,7 @@ type Layer = any;
 export abstract class BaseAdapter<
   O extends AdapterOptions = AdapterOptions,
   L = Layer
-> implements BaseLayerAdapter<Map, L, O> {
+> implements MainLayerAdapter<Map, L, O> {
   protected onTerrainChange?: () => void;
   private _terrainProviderChangedListener?: Event.RemoveCallback;
 

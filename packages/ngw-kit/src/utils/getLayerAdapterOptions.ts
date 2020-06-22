@@ -1,4 +1,7 @@
-import WebMap, { RasterAdapterOptions } from '@nextgis/webmap';
+import WebMap, {
+  RasterAdapterOptions,
+  ImageAdapterOptions,
+} from '@nextgis/webmap';
 
 import { NgwLayerOptions, ResourceIdNgwLayerOptions } from '../interfaces';
 import { updateImageParams } from './utils';
@@ -7,7 +10,7 @@ export function getLayerAdapterOptions(
   options: NgwLayerOptions,
   webMap: WebMap,
   baseUrl: string
-): RasterAdapterOptions | undefined {
+): RasterAdapterOptions | ImageAdapterOptions | undefined {
   let adapter = options.adapter || 'IMAGE';
   let url: string;
   const layerAdapters = webMap.getLayerAdapters();

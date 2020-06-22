@@ -54,7 +54,7 @@
           title: 'Switch basemap layer',
           onClick: function () {
             var activeBaseLayer = ngwMap.getActiveBaseLayer();
-            var baseLayers = ngwMap.getBaseLayers();
+            var baseLayers = ngwMap.getBaseLayersIds();
             var index = baseLayers.indexOf(activeBaseLayer.id);
             var nextBaseLayer = baseLayers[(index + 1) % baseLayers.length];
             ngwMap.showLayer(nextBaseLayer);

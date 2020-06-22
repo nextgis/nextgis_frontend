@@ -1,10 +1,10 @@
-import { BaseLayerAdapter, WmsAdapterOptions } from '@nextgis/webmap';
+import { MainLayerAdapter, WmsAdapterOptions } from '@nextgis/webmap';
 import { TileLayer, WMSOptions } from 'leaflet';
 import { WmsLayer as WMS } from './WmsLayer';
 import { BaseAdapter } from '../BaseAdapter';
 
 export class WmsAdapter extends BaseAdapter<WmsAdapterOptions, TileLayer.WMS>
-  implements BaseLayerAdapter {
+  implements MainLayerAdapter {
   addLayer(options: WmsAdapterOptions): TileLayer.WMS | undefined {
     if (options) {
       const { url, ...opt } = options;
