@@ -2,6 +2,8 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "dist",
+    "declaration": false, // Generates corresponding '.d.ts' file.
+    "declarationMap": false,
     "module": "ESNext",
     "strict": false
   },
