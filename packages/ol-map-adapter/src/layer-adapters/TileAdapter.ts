@@ -2,12 +2,12 @@ import Map from 'ol/Map';
 import XYZ, { Options } from 'ol/source/XYZ';
 import TileLayer from 'ol/layer/Tile';
 
-import { BaseLayerAdapter, TileAdapterOptions } from '@nextgis/webmap';
+import { MainLayerAdapter, TileAdapterOptions } from '@nextgis/webmap';
 
 import { setTileLoadFunction } from '../utils/setTileLoadFunction';
 import { resolutionOptions } from '../utils/gerResolution';
 
-export class TileAdapter implements BaseLayerAdapter {
+export class TileAdapter implements MainLayerAdapter {
   constructor(public map: Map, public options: TileAdapterOptions) {}
 
   addLayer(options: TileAdapterOptions): TileLayer {

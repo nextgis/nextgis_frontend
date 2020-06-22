@@ -8,7 +8,7 @@ import WebMap, {
   GeoJsonAdapterOptions,
   OnLayerClickOptions,
   LayerAdapter,
-  BaseLayerAdapter,
+  MainLayerAdapter,
 } from '@nextgis/webmap';
 import NgwConnector, {
   ResourceItem,
@@ -175,7 +175,7 @@ export interface ResourceAdapter<
 > extends VectorLayerAdapter<M, L, O, F> {
   resourceId: number;
   item?: ResourceItem;
-  baseLayer?: boolean;
+  baselayer?: boolean;
   getExtent?(): LngLatBoundsArray | Promise<LngLatBoundsArray> | undefined;
   getIdentificationIds(): Promise<number[] | undefined>;
 }
@@ -219,7 +219,7 @@ export interface GetClassAdapterOptions {
   webMap: WebMap;
   connector: NgwConnector;
   item: ResourceItem;
-  Adapter?: Type<BaseLayerAdapter>;
+  Adapter?: Type<MainLayerAdapter>;
   addLayerOptionsPriority?: false;
 }
 

@@ -33,13 +33,17 @@ export interface OnLayerClickOptions {
 }
 
 export interface AdapterOptions {
-  [key: string]: any;
+  // [key: string]: any;
   id?: string;
   /**
    * Show layer on the map immediately after adding.
    * @default false
    */
   visibility?: boolean;
+  baselayer?: boolean;
+  /**
+   * @deprecated use `baselayer` instead
+   */
   baseLayer?: boolean;
   order?: number;
   attribution?: string;
@@ -240,12 +244,12 @@ export interface ImageAdapterOptions extends WmsAdapterOptions {
 }
 
 export interface LayerAdapters {
-  [name: string]: BaseLayerAdapter;
+  [name: string]: MainLayerAdapter;
   MVT: VectorLayerAdapter;
-  IMAGE: BaseLayerAdapter<any, any, ImageAdapterOptions>;
-  WMS: BaseLayerAdapter<any, any, WmsAdapterOptions>;
-  OSM: BaseLayerAdapter;
-  TILE: BaseLayerAdapter<any, any, TileAdapterOptions>;
+  IMAGE: MainLayerAdapter<any, any, ImageAdapterOptions>;
+  WMS: MainLayerAdapter<any, any, WmsAdapterOptions>;
+  OSM: MainLayerAdapter;
+  TILE: MainLayerAdapter<any, any, TileAdapterOptions>;
   GEOJSON: VectorLayerAdapter<any, any, GeoJsonAdapterOptions>;
 }
 
@@ -294,9 +298,9 @@ export type LayerAdapter<
   M = any,
   L = any,
   O extends AdapterOptions = AdapterOptions
-> = BaseLayerAdapter<M, L, O> | VectorLayerAdapter<M, L, O>;
+> = MainLayerAdapter<M, L, O> | VectorLayerAdapter<M, L, O>;
 
-export interface BaseLayerAdapter<
+export interface MainLayerAdapter<
   M = any,
   L = any,
   O extends AdapterOptions = AdapterOptions
@@ -327,7 +331,7 @@ export interface VectorLayerAdapter<
   L = any,
   O extends VectorAdapterOptions = VectorAdapterOptions,
   F extends Feature = Feature
-> extends BaseLayerAdapter<M, L, O> {
+> extends MainLayerAdapter<M, L, O> {
   selected?: boolean;
   source?: unknown;
 

@@ -2,7 +2,7 @@ import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 import { CreateElement, VNode, VNodeData } from 'vue';
 
 import WebMap from '@nextgis/webmap';
-import { LayerAdapter, BaseLayerAdapter } from '@nextgis/ngw-map';
+import { LayerAdapter, MainLayerAdapter } from '@nextgis/ngw-map';
 import { ResourceAdapter } from '@nextgis/ngw-kit';
 // @ts-ignore
 import { VSelect } from 'vuetify/lib';
@@ -128,9 +128,7 @@ export class BaselayerSelect extends Vue {
     const items: VueSelectItem[] = [];
     if (webMap) {
       await webMap.onLoad();
-      const baseLayers: BaseLayerAdapter[] = [];
-      const layers = webMap.allLayers();
-      const baseLayersIds = webMap.getBaseLayers();
+      const baseLayers: MainLayerAdapter[] = webMap.getBaseLayers();
 
       if (this.allowEmpty) {
         items.push({
@@ -139,17 +137,13 @@ export class BaselayerSelect extends Vue {
         });
       }
 
-      baseLayersIds.forEach((x) => {
-        const baseLayer = layers[x];
-        if (baseLayer) {
-          baseLayers.push(baseLayer);
-          items.push({
-            value: baseLayer.id || '',
-            text: baseLayer.options.name || baseLayer.id || '',
-          });
-          if (baseLayer.id && webMap.isLayerVisible(baseLayer)) {
-            this.active = baseLayer.id;
-          }
+      baseLayers.forEach((baselayer) => {
+        items.push({
+          value: baselayer.id || '',
+          text: baselayer.options.name || baselayer.id || '',
+        });
+        if (baselayer.id && webMap.isLayerVisible(baselayer)) {
+          this.active = baselayer.id;
         }
       });
       this._layers = baseLayers;

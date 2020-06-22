@@ -371,7 +371,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
       let orderedLayers: TLayerAdapter[] = [];
       for (const l in layers) {
         const layer = layers[l];
-        if (layer.options.baseLayer) {
+        if (layer.options.baselayer) {
           baseLayers.push(layer);
         } else {
           orderedLayers.push(layer);

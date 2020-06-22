@@ -1,4 +1,4 @@
-import { BaseLayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
+import { MainLayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
 // @ts-ignore
 import { ImageLayer } from './ImageLayer';
 
@@ -6,7 +6,7 @@ import { Map } from 'leaflet';
 import { BaseAdapter } from '../BaseAdapter';
 
 export class ImageAdapter extends BaseAdapter<ImageAdapterOptions>
-  implements BaseLayerAdapter<Map> {
+  implements MainLayerAdapter<Map> {
   layer: any;
 
   addLayer(options: ImageAdapterOptions): any {
