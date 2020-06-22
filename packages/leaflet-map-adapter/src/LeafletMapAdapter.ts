@@ -212,7 +212,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   ): void {
     // const baseLayers: string[] = [];
     // const orderedLayers = Object.keys(layers).filter((x) => {
-    //   if (layers[x].options.baseLayer) {
+    //   if (layers[x].options.baselayer) {
     //     baseLayers.push(x);
     //     return false;
     //   }

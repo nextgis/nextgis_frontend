@@ -1,10 +1,10 @@
-import { BaseLayerAdapter, TileAdapterOptions } from '@nextgis/webmap';
+import { MainLayerAdapter, TileAdapterOptions } from '@nextgis/webmap';
 import { TileLayer, TileLayerOptions } from 'leaflet';
 import { TileLayer as TL } from './TileLayer';
 import { BaseAdapter } from '../BaseAdapter';
 
 export class TileAdapter extends BaseAdapter<TileAdapterOptions, TileLayer>
-  implements BaseLayerAdapter {
+  implements MainLayerAdapter {
   addLayer(options: TileAdapterOptions): TileLayer | undefined {
     if (options) {
       const { url, ...opt } = options;

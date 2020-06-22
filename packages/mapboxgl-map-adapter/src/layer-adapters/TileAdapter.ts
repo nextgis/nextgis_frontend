@@ -1,5 +1,5 @@
 import {
-  BaseLayerAdapter,
+  MainLayerAdapter,
   TileAdapterOptions,
   RasterAdapterOptions,
 } from '@nextgis/webmap';
@@ -8,7 +8,7 @@ import { RasterSource, ResourceType, Layer } from 'mapbox-gl';
 
 export class TileAdapter<O extends RasterAdapterOptions = TileAdapterOptions>
   extends BaseAdapter<O>
-  implements BaseLayerAdapter {
+  implements MainLayerAdapter {
   addLayer(options: O): string[] | undefined {
     options = { ...this.options, ...(options || {}) };
     const { minZoom, maxZoom } = options;

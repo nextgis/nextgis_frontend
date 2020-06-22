@@ -16,7 +16,7 @@ import {
   LayerDefinition,
   LayerAdapterDefinition,
   OnLayerSelectOptions,
-  BaseLayerAdapter,
+  MainLayerAdapter,
 } from './interfaces/LayerAdapter';
 import { LayerDef, Type } from './interfaces/BaseTypes';
 
@@ -44,7 +44,7 @@ export class WebMapLayers<
 > extends BaseWebMap<M, L, C, E> {
   private _layersIdCounter = 1;
   private _layersOrderCounter = 1;
-  private readonly _baseLayers: string[] = [];
+  private readonly _baselayers: string[] = [];
   private readonly _layers: AddedLayers = {};
   private readonly _selectedLayers: string[] = [];
 
@@ -70,13 +70,24 @@ export class WebMapLayers<
   isBaseLayer(layerDef: LayerDef): boolean | undefined {
     const layer = this.getLayer(layerDef);
     if (layer && layer.id) {
-      return this._baseLayers.indexOf(layer.id) !== -1;
+      return this._baselayers.indexOf(layer.id) !== -1;
     }
     return undefined;
   }
 
-  getBaseLayers(): string[] {
-    return this._baseLayers;
+  getBaseLayers(): LayerAdapter[] {
+    const baselayers: LayerAdapter[] = [];
+    this._baselayers.forEach((x) => {
+      const baselayer = this._layers[x];
+      if (baselayer) {
+        baselayers.push(baselayer);
+      }
+    });
+    return baselayers;
+  }
+
+  getBaseLayersIds(): string[] {
+    return this._baselayers;
   }
 
   /**
@@ -151,7 +162,7 @@ export class WebMapLayers<
   ): Promise<LayerAdapter> {
     const layer = await this.addLayer(adapter, {
       ...options,
-      baseLayer: true,
+      baselayer: true,
     });
 
     return layer;
@@ -161,7 +172,7 @@ export class WebMapLayers<
    * Registration of map layer.
    *
    * @param adapter The name of layer adapter from [MapAdapter.layerAdapters](webmap#MapAdapter.layerAdapters).
-   *                May be custom object or class implemented by [BaseLayerAdapter](webmap#BaseLayerAdapter).
+   *                May be custom object or class implemented by [MainLayerAdapter](webmap#MainLayerAdapter).
    * @param options Specific options for given adapter
    *
    * @example
@@ -210,12 +221,13 @@ export class WebMapLayers<
       minZoom,
       ...options,
     };
-    // options.visibility is a layer global state, but each layer on init is not visible
+    // options.visibility is a layer global state
     const visibility = options.visibility;
     options.visibility = false;
 
-    // TODO: check usage in adapter constructor and safe remove
-    if (options.baseLayer) {
+    options.baselayer = options.baselayer ?? options.baseLayer;
+
+    if (options.baselayer) {
       options.order = 0;
     }
     if (this.options.onBeforeAddLayer) {
@@ -236,9 +248,10 @@ export class WebMapLayers<
       const _adapter = new adapterEngine(this.mapAdapter.map, options);
       _adapter.options = { ...options, ..._adapter.options };
 
-      if (_adapter.options.baseLayer) {
-        options.baseLayer = true;
+      if (_adapter.options.baselayer) {
+        options.baselayer = true;
         options.order = 0;
+        _adapter.options.order = 0;
       }
 
       let layerId: string | undefined;
@@ -255,7 +268,10 @@ export class WebMapLayers<
       // but that it is not required in the options
       _adapter.id = _adapter.options.id || String(id);
       _adapter.options.id = _adapter.id;
-      _adapter.order = _adapter.options.order || _order;
+      if (options.baselayer) {
+        _adapter.options.order = 0;
+      }
+      _adapter.order = _adapter.options.order ?? _order;
       if (layerId) {
         delete this._layers[layerId];
       }
@@ -267,8 +283,8 @@ export class WebMapLayers<
         if (geoJsonOptions.filter) {
           this.filterLayer(_adapter, geoJsonOptions.filter);
         }
-        if (options.baseLayer) {
-          this._baseLayers.push(layerId);
+        if (options.baselayer) {
+          this._baselayers.push(layerId);
         }
         this._layers[layerId] = _adapter;
 
@@ -340,7 +356,7 @@ export class WebMapLayers<
    */
   removeOverlays(): void {
     this.removeLayers((layerId, layer) => {
-      if (layer && layer.options && layer.options.baseLayer) {
+      if (layer && layer.options && layer.options.baselayer) {
         return false;
       }
       return true;
@@ -364,10 +380,10 @@ export class WebMapLayers<
       } else {
         this.mapAdapter.removeLayer(layer.layer);
       }
-      if (layer.options && layer.options.baseLayer) {
-        const index = this._baseLayers.indexOf(layerId);
+      if (layer.options && layer.options.baselayer) {
+        const index = this._baselayers.indexOf(layerId);
         if (index) {
-          this._baseLayers.splice(index, 1);
+          this._baselayers.splice(index, 1);
         }
       }
       delete this._layers[layerId];
@@ -470,11 +486,11 @@ export class WebMapLayers<
         this.emitter.emit(preEventName, l);
       }
       if (toStatus && source) {
-        const order = l.options.baseLayer ? 0 : l.options.order;
+        const order = l.options.baselayer ? 0 : l.options.order;
 
         // do not show baselayer if another on the map
-        if (l.options.baseLayer && this._baseLayers.length) {
-          const anotherVisibleLayerBaseLayer = this._baseLayers.find((x) => {
+        if (l.options.baselayer && this._baselayers.length) {
+          const anotherVisibleLayerBaseLayer = this._baselayers.find((x) => {
             return x !== l.id && this.isLayerVisible(x);
           });
           if (anotherVisibleLayerBaseLayer) {
@@ -742,7 +758,7 @@ export class WebMapLayers<
     return attributions;
   }
 
-  getActiveBaseLayer(): BaseLayerAdapter<any, any, AdapterOptions> | undefined {
+  getActiveBaseLayer(): MainLayerAdapter<any, any, AdapterOptions> | undefined {
     const visibleLayerBaseLayer = this.getBaseLayers().find((x) => {
       return this.isLayerVisible(x);
     });

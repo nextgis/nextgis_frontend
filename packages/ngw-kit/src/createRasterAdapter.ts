@@ -4,7 +4,7 @@ import {
   GetClassAdapterOptions,
 } from './interfaces';
 import {
-  BaseLayerAdapter,
+  MainLayerAdapter,
   Type,
   ImageAdapterOptions,
   TileAdapterOptions,
@@ -18,7 +18,7 @@ export async function createRasterAdapter({
   webMap,
   connector,
   item,
-}: GetClassAdapterOptions): Promise<Type<BaseLayerAdapter> | undefined> {
+}: GetClassAdapterOptions): Promise<Type<MainLayerAdapter> | undefined> {
   const resourceCls = item.resource.cls;
   const clsAdapterAlias: { [key in ResourceCls]?: NgwLayerAdapterType } = {
     wmsserver_service: 'WMS',
@@ -40,7 +40,7 @@ export async function createRasterAdapter({
   }
 
   const adapterClass = webMap.mapAdapter.layerAdapters[adapter] as Type<
-    BaseLayerAdapter
+    MainLayerAdapter
   >;
   if (adapterClass) {
     const resourceId = await resourceIdFromLayerOptions(
@@ -60,7 +60,7 @@ export async function createRasterAdapter({
           connector.options.baseUrl || ''
         );
         if (opt) {
-          if (opt.resourceId) {
+          if ('resourceId' in opt) {
             const layerAdapterOptions: ImageAdapterOptions = {
               ...opt,
               layers: String(opt.resourceId),

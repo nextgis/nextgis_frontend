@@ -2,13 +2,13 @@ import Map from 'ol/Map';
 import ImageLayer from 'ol/layer/Image';
 import ImageWMS, { Options as ImageWMSOptions } from 'ol/source/ImageWMS';
 
-import { BaseLayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
+import { MainLayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
 
 import { resolutionOptions } from '../utils/gerResolution';
 import { queryToObject, objectToQuery } from '../utils/utils';
 import { setTileLoadFunction } from '../utils/setTileLoadFunction';
 
-export class ImageAdapter implements BaseLayerAdapter {
+export class ImageAdapter implements MainLayerAdapter {
   layer: any;
 
   constructor(public map: Map, public options: ImageAdapterOptions) {}

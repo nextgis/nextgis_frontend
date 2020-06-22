@@ -1,10 +1,10 @@
-import { BaseLayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
+import { MainLayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
 import { Map } from 'mapbox-gl';
 import { TLayer } from '../MapboxglMapAdapter';
 import { BaseAdapter } from './BaseAdapter';
 
 export class ImageAdapter extends BaseAdapter<ImageAdapterOptions>
-  implements BaseLayerAdapter<Map, TLayer, ImageAdapterOptions> {
+  implements MainLayerAdapter<Map, TLayer, ImageAdapterOptions> {
   addLayer(options: ImageAdapterOptions): string[] | undefined {
     if (this.options) {
       options = { ...this.options, ...options };

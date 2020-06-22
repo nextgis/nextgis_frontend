@@ -1,9 +1,9 @@
-import { BaseLayerAdapter, AdapterOptions } from '../../../packages/webmap/src';
+import { MainLayerAdapter, AdapterOptions } from '../../../packages/webmap/src';
 import sleep from '../utils/asyncTimeout';
 
 let ID = 0;
 
-export class FakeLayerAdapter implements BaseLayerAdapter {
+export class FakeLayerAdapter implements MainLayerAdapter {
   options: AdapterOptions = { id: String(ID++) };
 
   async addLayer(options: AdapterOptions): Promise<any> {
