@@ -247,6 +247,13 @@ yarn run watch
 
 ### Publishing
 
+Before publishing you should execute `prod` and `doc:api` scripts
+
+```bash
+lerna run prod
+yarn docs:api
+```
+
 To publish new version to git and npm run
 
 ```bash
