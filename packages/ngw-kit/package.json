@@ -8,6 +8,7 @@
   "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/item": "^0.32.0",
+    "@nextgis/dom": "^0.32.0",
     "@nextgis/ngw-connector": "^0.32.0",
     "@nextgis/properties-filter": "^0.32.0",
     "@nextgis/qms-kit": "^0.32.0",
