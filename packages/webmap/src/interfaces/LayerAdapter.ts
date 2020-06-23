@@ -33,40 +33,90 @@ export interface OnLayerClickOptions {
 }
 
 export interface AdapterOptions {
-  // [key: string]: any;
+  /**
+   * Unique Layer ID.
+   * If not specified, will be added automatically.
+   *
+   * @remarks
+   * If the layer adapter is asynchronous, its id will be assigned only after the promise is resolved.
+   * While adapter is loading, methods for obtaining layers will ignore the added layer.
+   */
   id?: string;
   /**
    * Show layer on the map immediately after adding.
-   * @default false
+   * Such layers are always under others.
+   * Only one base layer can be displayed on the map at a time.
+   *
+   * @default true
    */
   visibility?: boolean;
+  /**
+   * Indicate on a cartographic base layer.
+   */
   baselayer?: boolean;
   /**
    * @deprecated use `baselayer` instead
    */
   baseLayer?: boolean;
+  /**
+   * Indicates the map layers display sequence.
+   * A layer with a larger order value overlaps smaller ones.
+   * Zero value used to indicate baselayer.
+   * If the value is not specified explicitly, it will be assigned automatically with an increase of one for each new layer.
+   */
   order?: number;
+  /**
+   * String to be shown in the attribution control.
+   * It describes the layer data and is often a legal obligation towards copyright holders and tile providers.
+   */
   attribution?: string;
+  /**
+   * Maximum zoom level of the map.
+   */
   maxZoom?: number;
+  /**
+   * Minimum zoom level of the map.
+   */
   minZoom?: number;
+  /**
+   * TODO: replace by minZoom
+   * @internal
+   */
   minScale?: number;
+  /**
+   * TODO: replace by maxZoom
+   * @internal
+   */
   maxScale?: number;
   /**
-   * from 0-transparent to 1-visible
+   * Layer transparency.
+   * From 0-transparent to 1-visible
    * @default 1
    */
   opacity?: number;
   /**
-   * Fit map for layer extent
+   * Fit map to layer extent
    * @default false
    */
   fit?: boolean;
+  /**
+   * Non-unique name of the layer. Can be used for user interfaces.
+   */
   name?: string;
   adapter?: string;
   /**
-   * wait until adapter data is fully loaded before resolve addAdapter promise
+   * Wait until the layer data is fully loaded before allowing added to the map.
+   *
+   * @remark
+   * If true, addLayer promise resolve only after data loading.
+   * This is useful for GeoJson vector layer adapters when you need to process downloaded data before displaying.
    */
   waitFullLoad?: boolean;
+  /**
+   * Parameter added when forming a request for layer data.
+   * This is needed if you want to access tile pixel data.
+   * Refer to {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin | CORS Settings} for valid String values.
+   */
   crossOrigin?: 'anonymous';
 }
 
