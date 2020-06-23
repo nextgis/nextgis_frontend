@@ -1,6 +1,10 @@
 import Item, { ItemOptions } from '@nextgis/item';
 
-import WebMap, { LayerAdapter, LayerAdapterDefinition } from '@nextgis/webmap';
+import WebMap, {
+  LayerAdapter,
+  LayerAdapterDefinition,
+  ImageAdapterOptions,
+} from '@nextgis/webmap';
 import NgwConnector from '@nextgis/ngw-connector';
 import { objectAssign } from '@nextgis/utils';
 import { TreeGroup, TreeLayer, TreeItem } from './interfaces';
@@ -103,8 +107,8 @@ export class WebMapLayerItem extends Item<ItemOptions> {
       }
     } else {
       let adapter: LayerAdapterDefinition | undefined;
-      // TODO: interface
-      const options: any = {
+      const options: Partial<ImageAdapterOptions> = {
+        visibility: false,
         headers: this.options.headers,
         crossOrigin: this.options.crossOrigin,
       };
