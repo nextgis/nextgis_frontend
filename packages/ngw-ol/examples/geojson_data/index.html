@@ -34,8 +34,7 @@
     }).then(function (ngwMap) {
       ngwMap.addLayer('GEOJSON', {
         id: 'data',
-        paint: { color: ['get', 'color'] },
-        visibility: true
+        paint: { color: ['get', 'color'] }
       });
       var list = document.createElement('div');
 
