@@ -62,12 +62,18 @@ describe('NgwOrm', () => {
       const clone = getMetadataArgsStorage().resources.find((x) => {
         return x.display_name === 'Resource Group Clone';
       });
-      const Clone = clone.target as typeof BaseResource;
-      const id = Clone.item.resource.id;
-      await connection.deleteResource(Clone);
-      expect(Clone.item).to.be.undefined;
-      const afterDelete = await connection.getResource(id);
-      expect(afterDelete).to.be.undefined;
+      expect(clone).to.be.exist;
+      if (clone) {
+        const Clone = clone.target as typeof BaseResource;
+        expect(Clone.item).to.be.exist;
+        if (Clone.item) {
+          const id = Clone.item.resource.id;
+          await connection.deleteResource(Clone);
+          expect(Clone.item).to.be.undefined;
+          const afterDelete = await connection.getResource(id);
+          expect(afterDelete).to.be.undefined;
+        }
+      }
     });
   });
 
@@ -90,9 +96,13 @@ describe('NgwOrm', () => {
             parent: SandboxGroup,
           }
         );
-        expect(point.item).to.be.exist;
-        if (point.item) {
-          expect(point.item.feature_layer.fields.length).to.be.eq(1);
+        expect(point).to.be.exist;
+        if (point) {
+          expect(point.item).to.be.exist;
+          if (point.item) {
+            expect(point.item.feature_layer).to.be.exist;
+            expect(point.item?.feature_layer?.fields.length).to.be.eq(1);
+          }
         }
       }
     });

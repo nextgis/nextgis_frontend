@@ -9,7 +9,7 @@ const mapAdapterCreate = async (
   opt?: MapOptions
 ): Promise<MapAdapter> => {
   const mapAdapter = new MA();
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     mapAdapter.emitter.on('create', () => {
       resolve(mapAdapter);
     });
@@ -17,7 +17,7 @@ const mapAdapterCreate = async (
   });
 };
 
-export const mapAdapterTests = (MA: Type<MapAdapter>) => {
+export const mapAdapterTests = (MA: Type<MapAdapter>): any => {
   const adapterName = MA.name;
   // let mapAdapter: MapAdapter;
   beforeEach(() => {
