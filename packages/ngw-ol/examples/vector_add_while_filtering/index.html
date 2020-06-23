@@ -93,7 +93,6 @@
       ngwMap.addLayer('GEOJSON', {
         id: 'geojson',
         data: { type: 'FeatureCollection', features: features },
-        visibility: true,
         filter: filterFunction,
         paint: { color: ['get', 'color'] }
       });

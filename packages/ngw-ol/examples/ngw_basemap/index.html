@@ -32,17 +32,19 @@
       target: 'map',
       bounds: [0, -90, 180 ,90],
       resources: [
+        // 1 basemap resource
         1665,
-        // add a non-base layer in the middle, it will still be higher than any base layer
+        // add a non-base layer in the middle, it will be higher than any base layer
         {
           resourceId: 1734,
           fit: true
         },
-        // another basemap with opacity parameter
+        // 2 basemap with opacity parameter
         {
           resourceId: 466,
           opacity: 0.8
         },
+        // 3 basemap resource
         4142,
 
       ],

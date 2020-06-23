@@ -190,6 +190,9 @@ export class WebMapLayers<
     options: O | LayerAdaptersOptions[K],
     order?: number
   ): Promise<LayerAdapter> {
+    // TODO: remove backward compatibility on v 1.0
+    options.baselayer = options.baselayer ?? options.baseLayer;
+
     const id = this._layersIdCounter++;
     const _order =
       order !== undefined
@@ -221,11 +224,10 @@ export class WebMapLayers<
       minZoom,
       ...options,
     };
-    // options.visibility is a layer global state
-    const visibility = options.visibility;
-    options.visibility = false;
 
-    options.baselayer = options.baselayer ?? options.baseLayer;
+    // options.visibility is a layer global state
+    const visibility = options.visibility ?? true;
+    options.visibility = false;
 
     if (options.baselayer) {
       options.order = 0;
