@@ -26,18 +26,22 @@
 
 <body>
   <div id='map'></div>
-  <script>
-    var ngwMap = new NgwMap({
-      baseUrl: 'https://demo.nextgis.com',
-      target: 'map',
-      qmsId: 487,
-    });
-    ngwMap.addNgwLayer({
-      resourceId: 4005
-    }).then(function (layer) {
-      ngwMap.zoomToLayer(layer);
-    });
-  </script>
+    <script>
+      var ngwMap = new NgwMap({
+        baseUrl: "https://demo.nextgis.com",
+        target: "map",
+        qmsId: 487,
+      });
+      ngwMap
+        .addNgwLayer({
+          resourceId: 4005,
+          fit: true,
+        })
+        .then(function (layer) {
+          // The same as using the `fit` option
+          // ngwMap.zoomToLayer(layer);
+        });
+    </script>
 </body>
 
 </html>
