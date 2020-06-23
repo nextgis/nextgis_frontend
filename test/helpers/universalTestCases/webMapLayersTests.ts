@@ -23,7 +23,7 @@ export const webMapLayersTests = <
     appOpt?: AppOptions,
     opt?: MapAdapterCreateOptions
   ) => Promise<W>
-) => {
+): any => {
   const layerAdapterName =
     typeof layerAdapter === 'string' ? layerAdapter : 'Layer';
 
@@ -44,7 +44,7 @@ export const webMapLayersTests = <
           // expect(adapter.layer).to.be.undefined;
           spy();
         });
-        await map.addLayer(layerAdapter, {});
+        await map.addLayer(layerAdapter);
         expect(spy.called).to.be.ok;
       });
 
@@ -53,23 +53,25 @@ export const webMapLayersTests = <
         const spy = sinon.spy();
         map.emitter.on('layer:add', spy);
         map.setView([0, 0], 0);
-        await map.addLayer(layerAdapter, {});
+        await map.addLayer(layerAdapter);
         expect(spy.called).to.be.ok;
       });
 
       it('Start ordering from 1 level', async () => {
         const map = await buildWebMap({ target: 'map' });
-        const layer = await map.addLayer(layerAdapter, {});
+        const layer = await map.addLayer(layerAdapter);
         expect(layer.options.order).to.be.eq(1);
       });
 
       it('Reserve layer order position immediately after function call', async () => {
         const map = await buildWebMap({ target: 'map' });
-        map.addLayer(layerAdapter, {});
-        map.addLayer(layerAdapter, {});
-        const layer = await map.addLayer(layerAdapter, {});
+        map.addLayer(layerAdapter);
+        map.addLayer(layerAdapter);
+        const layer = await map.addLayer(layerAdapter);
         expect(layer.options.order).to.be.eq(3);
       });
+
+      //-----------------------------------------------------------
 
       // it('fires a layeradd event when the map becomes ready', function() {
       //   let layer = layerSpy(),

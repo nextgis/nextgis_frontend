@@ -11,4 +11,12 @@ export class FakeLayerAdapter implements MainLayerAdapter {
     await sleep(100);
     return options.id;
   }
+
+  showLayer(): void {
+    //
+  }
+
+  removeLayer(): void {
+    //
+  }
 }

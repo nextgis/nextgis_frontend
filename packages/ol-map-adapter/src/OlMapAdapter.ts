@@ -221,7 +221,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
   }
 
   setLayerOrder(layer: Layer, order: number): void {
-    if (layer.setZIndex) {
+    if (layer && layer.setZIndex) {
       layer.setZIndex(order);
     }
   }
