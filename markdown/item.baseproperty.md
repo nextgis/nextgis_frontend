@@ -24,7 +24,7 @@ export declare abstract class BaseProperty<V = any, O extends ItemBasePropertyOp
 |  [\_container](./item.baseproperty._container.md) |  | HTMLElement |  |
 |  [\_value](./item.baseproperty._value.md) |  | V |  |
 |  [emitter](./item.baseproperty.emitter.md) |  | any |  |
-|  [item](./item.baseproperty.item.md) |  | [Item](./item.item.md) |  |
+|  [item](./item.baseproperty.item.md) |  | Item |  |
 |  [name](./item.baseproperty.name.md) |  | string |  |
 |  [options](./item.baseproperty.options.md) |  | O |  |
 

@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface NgwUploadOptions extends NgwConnectorOptions 
+export declare interface NgwUploadOptions extends NgwConnectorOptions 
 ```
 
 ## Properties

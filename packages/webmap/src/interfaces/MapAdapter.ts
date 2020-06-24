@@ -15,6 +15,7 @@ import { MapAdapterEvents } from './Events';
 
 /**
  * Parameters passed to the arguments of the callback function when clicking on the map
+ * @public
  */
 export interface MapClickEvent {
   /**
@@ -33,6 +34,7 @@ export interface MapClickEvent {
 
 /**
  * Parameters that control how the fit to object will be work.
+ * @public
  */
 export interface FitOptions {
   /**
@@ -49,21 +51,33 @@ export interface FitOptions {
  */
 export type ControlPositions = ControlPosition;
 
+/**
+ * @public
+ */
 export type ControlPosition =
   | 'top-right'
   | 'top-left'
   | 'bottom-right'
   | 'bottom-left';
 
+/**
+ * @public
+ */
 export interface Locate {
   stop: () => void;
 }
 
+/**
+ * @public
+ */
 export interface LocationEvent {
   lngLat: LngLatArray;
   bounds?: LngLatBoundsArray;
 }
 
+/**
+ * @public
+ */
 export interface LocateOptions {
   // watch?: boolean;
   setView?: boolean;
@@ -73,10 +87,16 @@ export interface LocateOptions {
   // enableHighAccuracy?: boolean;
 }
 
+/**
+ * @public
+ */
 export interface DataLoadError {
   target: string;
 }
 
+/**
+ * @public
+ */
 export interface LocationEvents {
   locationfound: (e: LocationEvent) => void;
   locationerror?: () => void;
@@ -84,14 +104,15 @@ export interface LocationEvents {
 
 /**
  * Parameters and methods that control the behavior of the map and the layers on it.
- * @typeparam M WEB-GIS framework map interface
- * @typeparam M WEB-GIS framework layer interface
- * @typeparam M WEB-GIS framework control interface
+ * @typeParam M - WEB-GIS framework map interface
+ * @typeParam L - WEB-GIS framework layer interface
+ * @typeParam C - WEB-GIS framework control interface
+ * @public
  */
 export interface MapAdapter<M = any, L = any, C = any> {
   /**
    * State of readiness of the card for use.
-   * @default true
+   * @defaultValue true
    */
   isLoaded?: boolean;
   /**

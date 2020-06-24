@@ -4,6 +4,7 @@
 
 ## BaseMapEvents.preclick property
 
+Fired before the map is clicked. 
 
 <b>Signature:</b>
 

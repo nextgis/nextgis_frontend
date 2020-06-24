@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-WMS: BaseLayerAdapter<any, any, WmsAdapterOptions>;
+WMS: MainLayerAdapter<any, any, WmsAdapterOptions>;
 ```

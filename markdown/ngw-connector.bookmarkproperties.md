@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface BookmarkProperties 
+export declare interface BookmarkProperties 
 ```
 
 ## Properties

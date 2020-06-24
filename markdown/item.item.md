@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare class Item<O extends ItemOptions = ItemOptions> 
+declare class Item<O extends ItemOptions = ItemOptions> 
 ```
 
 ## Constructors

@@ -19,5 +19,5 @@ then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | Pro
 
 <b>Returns:</b>
 
-[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;TResult1 \| TResult2&gt;
+CancelablePromise&lt;TResult1 \| TResult2&gt;
 

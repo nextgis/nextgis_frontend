@@ -4,7 +4,9 @@
 
 ## AdapterOptions.waitFullLoad property
 
-wait until adapter data is fully loaded before resolve addAdapter promise
+Wait until the layer data is fully loaded before allowing added to the map.
+
+ If true, addLayer promise resolve only after data loading. This is useful for GeoJson vector layer adapters when you need to process downloaded data before displaying.
 
 <b>Signature:</b>
 

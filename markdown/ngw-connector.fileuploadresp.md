@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface FileUploadResp 
+export declare interface FileUploadResp 
 ```
 
 ## Properties

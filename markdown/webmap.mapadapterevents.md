@@ -4,13 +4,14 @@
 
 ## MapAdapterEvents interface
 
+
 <b>Signature:</b>
 
 ```typescript
 export interface MapAdapterEvents extends BaseMapEvents 
 ```
 
-## Properties
+## Events
 
 |  Property | Type | Description |
 |  --- | --- | --- |

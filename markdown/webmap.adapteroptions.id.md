@@ -4,8 +4,15 @@
 
 ## AdapterOptions.id property
 
+Unique Layer ID. If not specified, will be added automatically.
+
 <b>Signature:</b>
 
 ```typescript
 id?: string;
 ```
+
+## Remarks
+
+If the layer adapter is asynchronous, its id will be assigned only after the promise is resolved. While adapter is loading, methods for obtaining layers will ignore the added layer.
+

@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface RequestItemsParamsMap 
+export declare interface RequestItemsParamsMap 
 ```
 
 ## Properties

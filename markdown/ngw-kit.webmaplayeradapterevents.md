@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface WebMapLayerAdapterEvents extends WebMapEvents 
+export declare interface WebMapLayerAdapterEvents extends WebMapEvents 
 ```
 
 ## Properties

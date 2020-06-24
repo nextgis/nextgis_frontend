@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface PinPaint extends BasePaint 
+export declare interface PinPaint extends BasePaint 
 ```
 
 ## Properties

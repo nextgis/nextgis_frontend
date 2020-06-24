@@ -4,8 +4,9 @@
 
 ## LayerAdapter type
 
+
 <b>Signature:</b>
 
 ```typescript
-export declare type LayerAdapter<M = any, L = any, O extends AdapterOptions = AdapterOptions> = BaseLayerAdapter<M, L, O> | VectorLayerAdapter<M, L, O>;
+export declare type LayerAdapter<M = any, L = any, O extends AdapterOptions = AdapterOptions> = MainLayerAdapter<M, L, O> | VectorLayerAdapter<M, L, O>;
 ```

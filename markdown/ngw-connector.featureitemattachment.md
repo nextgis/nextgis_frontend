@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface FeatureItemAttachment 
+export declare interface FeatureItemAttachment 
 ```
 
 ## Properties

@@ -4,6 +4,7 @@
 
 ## ControlPosition type
 
+
 <b>Signature:</b>
 
 ```typescript

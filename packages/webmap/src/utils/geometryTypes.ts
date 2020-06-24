@@ -6,6 +6,9 @@ import {
   Feature,
 } from 'geojson';
 
+/**
+ * @internal
+ */
 export function findMostFrequentGeomType(
   arr: GeoJsonGeometryTypes[]
 ): GeoJsonGeometryTypes {
@@ -23,6 +26,9 @@ export function findMostFrequentGeomType(
   return maxName as GeoJsonGeometryTypes;
 }
 
+/**
+ * @internal
+ */
 export function detectGeometryType(
   geojson: GeoJsonObject
 ): GeoJsonGeometryTypes {

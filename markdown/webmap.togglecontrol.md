@@ -4,6 +4,7 @@
 
 ## ToggleControl interface
 
+
 <b>Signature:</b>
 
 ```typescript

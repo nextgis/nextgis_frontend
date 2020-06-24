@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function getIcon(opt?: IconOptions): WebmapIcoOptions;
+export declare function getIcon(opt?: IconOptions): IconOptions_2;
 ```
 
 ## Parameters
@@ -18,5 +18,5 @@ export declare function getIcon(opt?: IconOptions): WebmapIcoOptions;
 
 <b>Returns:</b>
 
-WebmapIcoOptions
+IconOptions\_2
 

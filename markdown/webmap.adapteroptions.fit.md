@@ -4,7 +4,7 @@
 
 ## AdapterOptions.fit property
 
-Fit map for layer extent  false
+Fit map to layer extent  false
 
 <b>Signature:</b>
 

@@ -14,7 +14,7 @@ _blockChild(item: Item, options?: O): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  item | [Item](./item.item.md) |  |
+|  item | Item |  |
 |  options | O |  |
 
 <b>Returns:</b>

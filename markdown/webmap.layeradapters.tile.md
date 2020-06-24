@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-TILE: BaseLayerAdapter<any, any, TileAdapterOptions>;
+TILE: MainLayerAdapter<any, any, TileAdapterOptions>;
 ```

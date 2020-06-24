@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface LoadingQueue 
+export declare interface LoadingQueue 
 ```
 
 ## Properties

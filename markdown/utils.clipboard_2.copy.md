@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-static copy(text: string): Clipboard;
+static copy(text: string): Clipboard_2;
 ```
 
 ## Parameters
@@ -18,5 +18,5 @@ static copy(text: string): Clipboard;
 
 <b>Returns:</b>
 
-Clipboard
+Clipboard\_2
 

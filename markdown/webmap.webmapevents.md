@@ -4,13 +4,14 @@
 
 ## WebMapEvents interface
 
+
 <b>Signature:</b>
 
 ```typescript
 export interface WebMapEvents extends BaseMapEvents 
 ```
 
-## Properties
+## Events
 
 |  Property | Type | Description |
 |  --- | --- | --- |

@@ -4,6 +4,7 @@
 
 ## PopupOptions interface
 
+
 <b>Signature:</b>
 
 ```typescript

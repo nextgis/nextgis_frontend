@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface ItemPropertyBaseConfig<K extends keyof ItemPropertyTypes = any> 
+export declare interface ItemPropertyBaseConfig<K extends keyof ItemPropertyTypes = any> 
 ```
 
 ## Properties

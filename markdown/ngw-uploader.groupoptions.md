@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface GroupOptions extends ResourceCreateOptions 
+export declare interface GroupOptions extends ResourceCreateOptions 
 ```
 
 ## Properties

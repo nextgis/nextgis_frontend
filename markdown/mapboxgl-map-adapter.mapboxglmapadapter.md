@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> 
+declare class MapboxglMapAdapter implements MapAdapter<Map_2, TLayer, IControl> 
 ```
 
 ## Constructors
@@ -26,7 +26,7 @@ export declare class MapboxglMapAdapter implements MapAdapter<Map, TLayer, ICont
 |  [isLoaded](./mapboxgl-map-adapter.mapboxglmapadapter.isloaded.md) |  | boolean |  |
 |  [layerAdapters](./mapboxgl-map-adapter.mapboxglmapadapter.layeradapters.md) |  | { TILE: typeof TileAdapter; WMS: typeof WmsAdapter; MVT: typeof MvtAdapter; OSM: typeof OsmAdapter; GEOJSON: typeof GeoJsonAdapter; } |  |
 |  [layerAdapters](./mapboxgl-map-adapter.mapboxglmapadapter.layeradapters.md) | <code>static</code> | { TILE: typeof TileAdapter; WMS: typeof WmsAdapter; MVT: typeof MvtAdapter; OSM: typeof OsmAdapter; GEOJSON: typeof GeoJsonAdapter; } |  |
-|  [map](./mapboxgl-map-adapter.mapboxglmapadapter.map.md) |  | Map |  |
+|  [map](./mapboxgl-map-adapter.mapboxglmapadapter.map.md) |  | Map\_2 |  |
 |  [options](./mapboxgl-map-adapter.mapboxglmapadapter.options.md) |  | [MapboxglMapAdapterOptions](./mapboxgl-map-adapter.mapboxglmapadapteroptions.md) |  |
 
 ## Methods

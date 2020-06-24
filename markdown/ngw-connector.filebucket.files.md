@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-files: File[];
+files: File_2[];
 ```

@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-WebMapLayerItem: Type<WebMapLayerItem>;
+WebMapLayerItem: Type_2<WebMapLayerItem>;
 ```

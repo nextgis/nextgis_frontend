@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-IMAGE: BaseLayerAdapter<any, any, ImageAdapterOptions>;
+IMAGE: MainLayerAdapter<any, any, ImageAdapterOptions>;
 ```

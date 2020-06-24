@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface FeatureLayerCount 
+export declare interface FeatureLayerCount 
 ```
 
 ## Properties

@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface ResourceIdNgwLayerOptions<T extends NgwLayerAdapterType = NgwLayerAdapterType, P = {
+export declare interface ResourceIdNgwLayerOptions<T extends NgwLayerAdapterType = NgwLayerAdapterType, P = {
     [name: string]: any;
 }> extends NgwLayerOptionsAdditional<T, P> 
 ```

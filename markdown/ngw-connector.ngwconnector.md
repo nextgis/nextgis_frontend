@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare class NgwConnector 
+declare class NgwConnector 
 ```
 
 ## Constructors

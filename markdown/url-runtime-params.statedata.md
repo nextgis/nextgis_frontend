@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface StateData 
+export declare interface StateData 
 ```
 
 ## Properties
