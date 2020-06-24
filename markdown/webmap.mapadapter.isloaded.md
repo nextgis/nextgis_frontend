@@ -4,7 +4,7 @@
 
 ## MapAdapter.isLoaded property
 
-State of readiness of the card for use.  true
+State of readiness of the card for use.
 
 <b>Signature:</b>
 

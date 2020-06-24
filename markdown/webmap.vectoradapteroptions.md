@@ -17,7 +17,7 @@ export interface VectorAdapterOptions<F extends Feature = Feature, L = any> exte
 |  --- | --- | --- |
 |  [cluster](./webmap.vectoradapteroptions.cluster.md) | boolean |  |
 |  [clusterMaxZoom](./webmap.vectoradapteroptions.clustermaxzoom.md) | number | Max zoom to cluster points on |
-|  [clusterRadius](./webmap.vectoradapteroptions.clusterradius.md) | number | Radius of each cluster when clustering points  50 |
+|  [clusterRadius](./webmap.vectoradapteroptions.clusterradius.md) | number | Radius of each cluster when clustering points |
 |  [featureIdName](./webmap.vectoradapteroptions.featureidname.md) | string |  |
 |  [filter](./webmap.vectoradapteroptions.filter.md) | [DataLayerFilter](./webmap.datalayerfilter.md) |  |
 |  [interactive](./webmap.vectoradapteroptions.interactive.md) | boolean |  |

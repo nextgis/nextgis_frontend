@@ -4,10 +4,11 @@
 
 ## WebMapLayers class
 
+
 <b>Signature:</b>
 
 ```typescript
-export declare class WebMapLayers<M = any, L = any, C = any, E extends WebMapEvents = WebMapEvents> extends BaseWebMap<M, L, C, E> 
+export declare class WebMapLayers<M = any, L = any, C = any, E extends WebMapEvents = WebMapEvents> extends WebMapMain<M, L, C, E> 
 ```
 
 ## Methods

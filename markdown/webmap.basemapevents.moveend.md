@@ -4,7 +4,7 @@
 
 ## BaseMapEvents.moveend property
 
-Fired when the center of the map stops changing. 
+Fired when the center of the map stops changing.
 
 <b>Signature:</b>
 

@@ -4,7 +4,7 @@
 
 ## AdapterOptions.opacity property
 
-Layer transparency. From 0-transparent to 1-visible  1
+Layer transparency. From 0-transparent to 1-visible
 
 <b>Signature:</b>
 

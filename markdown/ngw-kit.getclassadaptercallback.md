@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-export declare type GetClassAdapterCallback = (options: GetClassAdapterOptions) => Promise<Type_2<LayerAdapter> | undefined> | undefined;
+export declare type GetClassAdapterCallback = (options: GetClassAdapterOptions) => Promise<Type<LayerAdapter> | undefined> | undefined;
 ```

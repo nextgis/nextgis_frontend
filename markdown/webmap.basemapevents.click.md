@@ -4,7 +4,7 @@
 
 ## BaseMapEvents.click property
 
-Fired every time a map is clicked. 
+Fired every time a map is clicked.
 
 <b>Signature:</b>
 

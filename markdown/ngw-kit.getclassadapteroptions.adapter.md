@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-Adapter?: Type_2<MainLayerAdapter>;
+Adapter?: Type<MainLayerAdapter>;
 ```
