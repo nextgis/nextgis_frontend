@@ -3,6 +3,9 @@ type onClickAsync = (status?: boolean) => Promise<void>;
 export type OnClick = OnClickSync | onClickAsync;
 
 // like in https://leafletjs.com/reference-1.3.4.html#control-zoom
+/**
+ * @public
+ */
 export interface ZoomControlOptions {
   /** The text set on the 'zoom in' button. */
   zoomInText?: string;
@@ -14,6 +17,9 @@ export interface ZoomControlOptions {
   zoomOutTitle?: string;
 }
 
+/**
+ * @public
+ */
 export interface AttributionControlOptions {
   /**
    * If true force a compact attribution that shows the full attribution on mouse hover,
@@ -26,18 +32,27 @@ export interface AttributionControlOptions {
   customAttribution?: string | string[];
 }
 
+/**
+ * @public
+ */
 export interface MapControls {
   [name: string]: Record<string, any>;
   ZOOM: ZoomControlOptions;
   ATTRIBUTION: AttributionControlOptions;
 }
 
+/**
+ * @public
+ */
 export interface MapControl<M extends any = any> {
   onAdd(map?: M): HTMLElement | undefined;
   onRemove(map?: M): unknown;
   remove?(): void;
 }
 
+/**
+ * @public
+ */
 export interface ButtonControlOptions {
   html?: string | HTMLElement;
   addClass?: string;
@@ -45,18 +60,30 @@ export interface ButtonControlOptions {
   title?: string;
 }
 
+/**
+ * @public
+ */
 export type HtmlDef = string | HTMLElement;
 
+/**
+ * @public
+ */
 export interface HtmlToggle {
   on: HtmlDef;
   off: HtmlDef;
 }
 
+/**
+ * @public
+ */
 export interface TitleToggle {
   on: string;
   off: string;
 }
 
+/**
+ * @public
+ */
 export interface ToggleControlOptions {
   status?: boolean;
   html?: HtmlDef | HtmlToggle;
@@ -71,12 +98,18 @@ export interface ToggleControlOptions {
   getStatus?: () => boolean;
 }
 
+/**
+ * @public
+ */
 export interface CreateControlOptions {
   bar?: boolean;
   margin?: boolean;
   addClass?: string;
 }
 
+/**
+ * @public
+ */
 export interface ToggleControl {
   onClick: OnClick;
   changeStatus: OnClickSync;

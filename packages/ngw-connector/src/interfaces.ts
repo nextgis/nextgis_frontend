@@ -165,7 +165,7 @@ export interface LoadingQueue {
 export interface UserInfo {
   display_name: string;
   id: number;
-  // @default 'guest'
+  // @defaultValue 'guest'
   keyname: 'guest' | string;
   clientId?: string;
 }

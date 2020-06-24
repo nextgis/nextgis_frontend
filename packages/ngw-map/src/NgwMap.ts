@@ -63,6 +63,7 @@ import { Geometry, Feature, FeatureCollection } from 'geojson';
  *   webmapId: 3985
  * });
  * ```
+ * @public
  */
 export class NgwMap<
   M = any,
