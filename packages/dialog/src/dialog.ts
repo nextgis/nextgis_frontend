@@ -1,6 +1,6 @@
-import { DialogAdapter, DialogAdapterOptions } from '@nextgis/webmap';
 import dialogPolyfill from 'dialog-polyfill';
 import 'dialog-polyfill/dialog-polyfill.css';
+import { DialogAdapter, DialogAdapterOptions } from './interfaces';
 
 import './dialog.css';
 
@@ -14,6 +14,9 @@ const closeBtn = `
   </a>
 `;
 
+/**
+ * @alpha
+ */
 export class Dialog implements DialogAdapter {
   static dialogs: Dialog[] = [];
   options: DialogAdapterOptions = {

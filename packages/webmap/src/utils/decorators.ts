@@ -1,6 +1,9 @@
 import { WebMap } from '../WebMap';
 import { WebMapEvents } from '../interfaces/Events';
 
+/**
+ * @internal
+ */
 export function onLoad<E extends WebMapEvents = WebMapEvents>(event: keyof E) {
   return function (
     _target: WebMap,

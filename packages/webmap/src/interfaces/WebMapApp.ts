@@ -5,6 +5,9 @@ import { MapAdapter, FitOptions } from './MapAdapter';
 import { LayerAdapter, AdapterOptions } from './LayerAdapter';
 import { LngLatArray, LngLatBoundsArray, Type } from './BaseTypes';
 
+/**
+ * @public
+ */
 export interface MapOptions {
   /**
    * The HTML element in which NgwMap will render the map,
@@ -34,7 +37,7 @@ export interface MapOptions {
   /**
    * Initial extent of the map, array of degrees in [_west_, _south_, _east_, _north_] order.
    *
-   * @remark
+   * @remarks
    * Overrides the `center` and  `zoom` parameters.
    * [LngLatBoundsArray](webmap#LngLatBoundsArray)
    *
@@ -65,6 +68,9 @@ export interface MapOptions {
   onBeforeAddLayer?: OnBeforeLayerAdd;
 }
 
+/**
+ * @public
+ */
 export type OnBeforeLayerAdd = (e: {
   adapter?: Type<LayerAdapter>;
   options: AdapterOptions & Record<string, any>;
@@ -101,7 +107,7 @@ export interface AppOptions {
   runtimeParams?: RuntimeParams[];
   /**
    * Аutomatic creation of a map from the constructor
-   * @default false
+   * @defaultValue false
    *
    * @example
    * ```javascript
@@ -115,10 +121,16 @@ export interface AppOptions {
   create?: boolean;
 }
 
+/**
+ * @public
+ */
 export interface ToggleLayerOptions {
   silent?: boolean;
 }
 
+/**
+ * @public
+ */
 export interface GetAttributionsOptions {
   onlyVisible?: boolean;
   onlyBaselayer?: boolean;
