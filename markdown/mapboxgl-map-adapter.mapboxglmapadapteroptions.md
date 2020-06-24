@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface MapboxglMapAdapterOptions extends MapOptions 
+export declare interface MapboxglMapAdapterOptions extends MapOptions 
 ```
 
 ## Properties
@@ -15,5 +15,5 @@ export interface MapboxglMapAdapterOptions extends MapOptions
 |  Property | Type | Description |
 |  --- | --- | --- |
 |  [accessToken](./mapboxgl-map-adapter.mapboxglmapadapteroptions.accesstoken.md) | string |  |
-|  [style](./mapboxgl-map-adapter.mapboxglmapadapteroptions.style.md) | Partial&lt;mapboxgl.Style&gt; \| string |  |
+|  [style](./mapboxgl-map-adapter.mapboxglmapadapteroptions.style.md) | Partial&lt;mapboxgl\_2.Style&gt; \| string |  |
 

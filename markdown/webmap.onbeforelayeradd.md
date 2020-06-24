@@ -4,6 +4,7 @@
 
 ## OnBeforeLayerAdd type
 
+
 <b>Signature:</b>
 
 ```typescript

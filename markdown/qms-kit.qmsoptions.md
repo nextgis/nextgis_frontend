@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface QmsOptions 
+export declare interface QmsOptions 
 ```
 
 ## Properties

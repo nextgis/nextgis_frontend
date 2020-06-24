@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-map: Map;
+map: Map_2;
 ```

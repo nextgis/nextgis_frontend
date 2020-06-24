@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface CreateWmsConnectedLayerOptions extends ResourceCreateOptions 
+export declare interface CreateWmsConnectedLayerOptions extends ResourceCreateOptions 
 ```
 
 ## Properties

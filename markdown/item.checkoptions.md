@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface CheckOptions<V = boolean> extends ItemBasePropertyOptions<V> 
+export declare interface CheckOptions<V = boolean> extends ItemBasePropertyOptions<V> 
 ```
 
 ## Properties

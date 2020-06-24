@@ -4,6 +4,7 @@
 
 ## HtmlToggle interface
 
+
 <b>Signature:</b>
 
 ```typescript

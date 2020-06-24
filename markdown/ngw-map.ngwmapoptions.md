@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface NgwMapOptions<C = any> extends MapOptions 
+export declare interface NgwMapOptions<C = any> extends MapOptions 
 ```
 
 ## Properties

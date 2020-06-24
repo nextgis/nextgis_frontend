@@ -18,5 +18,5 @@ catch<TResult = never>(onrejected?: ((reason: Error) => TResult | PromiseLike<TR
 
 <b>Returns:</b>
 
-[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;T \| TResult&gt;
+CancelablePromise&lt;T \| TResult&gt;
 

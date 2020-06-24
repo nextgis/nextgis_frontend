@@ -4,6 +4,7 @@
 
 ## TitleToggle interface
 
+
 <b>Signature:</b>
 
 ```typescript

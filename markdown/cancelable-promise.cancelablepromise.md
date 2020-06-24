@@ -9,7 +9,7 @@ Promise that can be canceled
 <b>Signature:</b>
 
 ```typescript
-export declare class CancelablePromise<T = any> implements Promise<T> 
+declare class CancelablePromise<T = any> implements Promise<T> 
 ```
 
 ## Example

@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface ChangeEvent<V = any, O extends ItemBasePropertyOptions<V> = ItemBasePropertyOptions<V>> 
+export declare interface ChangeEvent<V = any, O extends ItemBasePropertyOptions<V> = ItemBasePropertyOptions<V>> 
 ```
 
 ## Properties

@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface ResourceHierarchy 
+export declare interface ResourceHierarchy 
 ```
 
 ## Properties

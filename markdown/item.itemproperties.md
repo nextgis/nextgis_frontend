@@ -21,7 +21,7 @@ export declare class ItemProperties
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [handlers](./item.itemproperties.handlers.md) | <code>static</code> | { \[name: string\]: [Type](./item.type.md)<!-- -->&lt;[BaseProperty](./item.baseproperty.md)<!-- -->&gt;; } |  |
-|  [item](./item.itemproperties.item.md) |  | [Item](./item.item.md) |  |
+|  [item](./item.itemproperties.item.md) |  | Item |  |
 |  [options](./item.itemproperties.options.md) |  | {} |  |
 
 ## Methods

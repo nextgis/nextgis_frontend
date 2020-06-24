@@ -4,6 +4,8 @@
 
 ## AdapterOptions.minZoom property
 
+Minimum zoom level of the map.
+
 <b>Signature:</b>
 
 ```typescript

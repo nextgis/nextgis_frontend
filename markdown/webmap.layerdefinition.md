@@ -4,6 +4,7 @@
 
 ## LayerDefinition interface
 
+
 <b>Signature:</b>
 
 ```typescript

@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface IconPaint extends BaesePaintTypes 
+export declare interface IconPaint extends BaesePaintTypes 
 ```
 
 ## Properties

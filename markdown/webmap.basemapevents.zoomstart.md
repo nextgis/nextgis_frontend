@@ -4,6 +4,7 @@
 
 ## BaseMapEvents.zoomstart property
 
+Fired when the map zoom is about to change. 
 
 <b>Signature:</b>
 

@@ -15,7 +15,7 @@ export declare type LayerDef = string | LayerAdapter;
 ## Example
 
 
-```javascript
+```js
 webMap.addLayer('GEOJSON', { id: 'my_layer' }).then((layer) =>{
   webMap.addLayerData(layer, geojson);
   webMap.addLayerData('my_layer', geojson);
