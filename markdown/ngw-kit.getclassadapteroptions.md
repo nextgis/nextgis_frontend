@@ -14,7 +14,7 @@ export declare interface GetClassAdapterOptions
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [Adapter](./ngw-kit.getclassadapteroptions.adapter.md) | Type\_2&lt;MainLayerAdapter&gt; |  |
+|  [Adapter](./ngw-kit.getclassadapteroptions.adapter.md) | Type&lt;MainLayerAdapter&gt; |  |
 |  [addLayerOptionsPriority](./ngw-kit.getclassadapteroptions.addlayeroptionspriority.md) | false |  |
 |  [connector](./ngw-kit.getclassadapteroptions.connector.md) | NgwConnector |  |
 |  [item](./ngw-kit.getclassadapteroptions.item.md) | ResourceItem |  |

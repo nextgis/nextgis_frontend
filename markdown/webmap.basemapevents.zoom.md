@@ -4,7 +4,7 @@
 
 ## BaseMapEvents.zoom property
 
-Fired repeatedly during any change in zoom level 
+Fired repeatedly during any change in zoom level
 
 <b>Signature:</b>
 

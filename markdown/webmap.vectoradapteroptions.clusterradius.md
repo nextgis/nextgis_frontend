@@ -4,7 +4,7 @@
 
 ## VectorAdapterOptions.clusterRadius property
 
-Radius of each cluster when clustering points  50
+Radius of each cluster when clustering points
 
 <b>Signature:</b>
 

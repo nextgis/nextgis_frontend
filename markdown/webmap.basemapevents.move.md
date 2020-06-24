@@ -4,7 +4,7 @@
 
 ## BaseMapEvents.move property
 
-Fired repeatedly during any movement of the map. 
+Fired repeatedly during any movement of the map.
 
 <b>Signature:</b>
 

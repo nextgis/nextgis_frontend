@@ -6,13 +6,15 @@
 
 Initial extent of the map, array of degrees in \[\_west\_, \_south\_, \_east\_, \_north\_\] order.
 
- Overrides the `center` and `zoom` parameters. \[LngLatBoundsArray\](webmap\#LngLatBoundsArray)
-
 <b>Signature:</b>
 
 ```typescript
 bounds?: LngLatBoundsArray;
 ```
+
+## Remarks
+
+Overrides the `center` and `zoom` parameters. \[LngLatBoundsArray\](webmap\#LngLatBoundsArray)
 
 ## Example
 

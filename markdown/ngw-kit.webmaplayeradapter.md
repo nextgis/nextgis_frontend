@@ -28,7 +28,7 @@ export declare class WebMapLayerAdapter<M = any> implements ResourceAdapter<M>
 |  [pixelRadius](./ngw-kit.webmaplayeradapter.pixelradius.md) |  | number | Radius for searching objects in pixels |
 |  [resourceId](./ngw-kit.webmaplayeradapter.resourceid.md) |  | number |  |
 |  [webmapClassName](./ngw-kit.webmaplayeradapter.webmapclassname.md) |  | string |  |
-|  [WebMapLayerItem](./ngw-kit.webmaplayeradapter.webmaplayeritem.md) |  | Type\_2&lt;[WebMapLayerItem](./ngw-kit.webmaplayeritem.md)<!-- -->&gt; |  |
+|  [WebMapLayerItem](./ngw-kit.webmaplayeradapter.webmaplayeritem.md) |  | Type&lt;[WebMapLayerItem](./ngw-kit.webmaplayeritem.md)<!-- -->&gt; |  |
 
 ## Methods
 

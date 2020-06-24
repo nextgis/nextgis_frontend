@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-export declare type ClassAdapter = Promise<Type_2<LayerAdapter> | undefined>;
+export declare type ClassAdapter = Promise<Type<LayerAdapter> | undefined>;
 ```

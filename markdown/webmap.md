@@ -36,8 +36,10 @@ const webMap = new WebMap({
 
 |  Class | Description |
 |  --- | --- |
-|  [WebMap](./webmap.webmap.md) | The core component for managing map adapters. It contains methods for adding and manipulation with map layers and controls. |
+|  [WebMap](./webmap.webmap.md) | The core component for managing map adapters. It contains methods for adding and manipulation with [map](./webmap.webmapmain.md)<!-- -->, [layers](./webmap.webmaplayers.md) and . |
+|  [WebMapControls](./webmap.webmapcontrols.md) |  |
 |  [WebMapLayers](./webmap.webmaplayers.md) |  |
+|  [WebMapMain](./webmap.webmapmain.md) |  |
 
 ## Interfaces
 
@@ -107,7 +109,7 @@ const webMap = new WebMap({
 |  [LayerAdapterDefinition](./webmap.layeradapterdefinition.md) |  |
 |  [LayerDef](./webmap.layerdef.md) | Available argument types for methods with map layers identification. |
 |  [LngLatArray](./webmap.lnglatarray.md) | Array of two numbers representing longitude and latitude. |
-|  [LngLatBoundsArray](./webmap.lnglatboundsarray.md) | Array of coordinates, measured in degrees, in \[west, south, east, north\] order. {@<!-- -->linkhttps://tools.ietf.org/html/rfc7946\#section-5 \| GeoJSON standard<!-- -->} |
+|  [LngLatBoundsArray](./webmap.lnglatboundsarray.md) | Array of coordinates, measured in degrees, in \[west, south, east, north\] order. [GeoJSON standard](https://tools.ietf.org/html/rfc7946#section-5) |
 |  [OnBeforeLayerAdd](./webmap.onbeforelayeradd.md) |  |
 |  [OnClick](./webmap.onclick.md) |  |
 |  [VectorAdapterLayerType](./webmap.vectoradapterlayertype.md) |  |

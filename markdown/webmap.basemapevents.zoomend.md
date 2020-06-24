@@ -4,7 +4,7 @@
 
 ## BaseMapEvents.zoomend property
 
-Fired when the map has changed. 
+Fired when the map has changed.
 
 <b>Signature:</b>
 
