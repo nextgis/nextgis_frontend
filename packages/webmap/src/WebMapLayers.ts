@@ -22,7 +22,7 @@ import { LayerDef, Type } from './interfaces/BaseTypes';
 
 import { updateGeoJsonAdapterOptions } from './utils/updateGeoJsonAdapterOptions';
 import { propertiesFilter } from './utils/propertiesFilter';
-import { BaseWebMap } from './BaseWebMap';
+import { WebMapMain } from './WebMapMain';
 
 import {
   GetAttributionsOptions,
@@ -33,12 +33,15 @@ import { FitOptions } from './interfaces/MapAdapter';
 
 type AddedLayers = { [id: string]: LayerAdapter };
 
+/**
+ * @public
+ */
 export class WebMapLayers<
   M = any,
   L = any,
   C = any,
   E extends WebMapEvents = WebMapEvents
-> extends BaseWebMap<M, L, C, E> {
+> extends WebMapMain<M, L, C, E> {
   private _layersIdCounter = 1;
   private _layersOrderCounter = 1;
   private readonly _baselayers: string[] = [];
