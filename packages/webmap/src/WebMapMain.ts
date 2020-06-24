@@ -62,7 +62,10 @@ const OPTIONS: MapOptions = {
   },
 };
 
-export class BaseWebMap<
+/**
+ * @public
+ */
+export class WebMapMain<
   M = any,
   L = any,
   C = any,
@@ -86,12 +89,12 @@ export class BaseWebMap<
     EventEmitter,
     WebMapEvents
   > = new EventEmitter();
-  readonly keys = BaseWebMap.keys;
+  readonly keys = WebMapMain.keys;
 
   readonly mapAdapter: MapAdapter<M>;
   readonly runtimeParams: RuntimeParams[] = [];
 
-  getPaintFunctions = BaseWebMap.getPaintFunctions;
+  getPaintFunctions = WebMapMain.getPaintFunctions;
   mapState: Type<StateItem>[] = [CenterState, ZoomState];
   id = ID++;
 
@@ -122,7 +125,7 @@ export class BaseWebMap<
     }
   }
 
-  static get<T extends BaseWebMap = BaseWebMap>(id: number): T | undefined {
+  static get<T extends WebMapMain = WebMapMain>(id: number): T | undefined {
     return WEB_MAP_CONTAINER[id];
   }
 
