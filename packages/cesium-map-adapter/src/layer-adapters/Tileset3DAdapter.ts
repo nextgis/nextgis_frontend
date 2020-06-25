@@ -117,12 +117,6 @@ export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
           new Cartesian3()
         );
         this.layer.modelMatrix = Matrix4.fromTranslation(translation);
-        // test
-        // const boundingSphere2 = this.layer.boundingSphere;
-        // const cartographic2 = Cartographic.fromCartesian(
-        //   boundingSphere2.center
-        // );
-        // console.log(cartographic.height, cartographic2.height);
       }
     }
   }
