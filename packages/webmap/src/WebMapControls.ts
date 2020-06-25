@@ -15,6 +15,7 @@ import { WebMapMain } from './WebMapMain';
 import { createToggleControl } from './components/controls/ToggleControl';
 
 /**
+ * Collection of methods for managing map controls
  * @public
  */
 export class WebMapControls<
@@ -111,6 +112,26 @@ export class WebMapControls<
     }
   }
 
+  /**
+   * Create any toggler control button
+   * @param options - Options for control layout customization and assigning a callback function
+   *
+   * @example
+   * ```js
+   * const toggleControl = ngwMap.createToggleControl({
+   *   getStatus: () => webMap.isLayerVisible('any-layer-id'),
+   *   onClick: (status) => ngwMap.toggleLayer('webmap', status),
+   *   html: {
+   *     on: 'ON',
+   *     off: 'OFF'
+   *   },
+   *   title: 'Toggle layer visibility'
+   * });
+   * webMap.addControl(toggleControl, 'top-right');
+   * ```
+   * {@link http://code.nextgis.com/demo-examples-toggle_control | Toggle button control example}
+   * @public
+   */
   async createToggleControl(
     options: ToggleControlOptions
   ): Promise<(C & ToggleControl) | undefined> {
@@ -127,6 +148,12 @@ export class WebMapControls<
     }
   }
 
+  /**
+   *
+   * @param control - Instance of WEB-GIS framework control.
+   *                  What is returned by the {@Link WebMapControls.createControl | create} method
+   * @public
+   */
   removeControl(control: C): void {
     if ('remove' in control) {
       // @ts-ignore TODO: ugly code, rewrite
@@ -136,6 +163,12 @@ export class WebMapControls<
     }
   }
 
+  /**
+   * Get instance of registered control
+   * @param control - Any registered control string name
+   * @param options - Custom control options
+   * @public
+   */
   getControl<K extends keyof MapControls>(
     control: K,
     options?: MapControls[K]
