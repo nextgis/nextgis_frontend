@@ -25,6 +25,15 @@
  *   mapAdapter: new MapAdapter(),
  *   mapOptions: { target: 'map' }
  * });
+ *
+ * console.log(!!webMap.mapAdapter.map); // false
+ * webMap.onLoad().then(() => {
+ *   console.log(webMap.mapAdapter.map); // true
+ *
+ *   webMap.addLayer('GEOJSON').then((layer) => {
+ *     webMap.setLayerData(layer, geojson)
+ *   });
+ * });
  * ```
  *
  * @packageDocumentation

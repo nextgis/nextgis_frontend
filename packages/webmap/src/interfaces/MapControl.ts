@@ -1,5 +1,14 @@
-type OnClickSync = (status?: boolean) => void;
-type onClickAsync = (status?: boolean) => Promise<void>;
+/**
+ * @public
+ */
+export type OnClickSync = (status?: boolean) => void;
+/**
+ * @public
+ */
+export type onClickAsync = (status?: boolean) => Promise<void>;
+/**
+ * @public
+ */
 export type OnClick = OnClickSync | onClickAsync;
 
 // like in https://leafletjs.com/reference-1.3.4.html#control-zoom
@@ -82,19 +91,26 @@ export interface TitleToggle {
 }
 
 /**
+ * Options for creating a {@link WebMapControls.createToggleControl | toggle control}
+ * to layout customization and assigning a callback function
  * @public
  */
 export interface ToggleControlOptions {
+  /** Boolean state of control. */
   status?: boolean;
+  /** Button content, can be set for each state (`on` or `off`). */
   html?: HtmlDef | HtmlToggle;
-
+  /** Additional css class string */
   addClass?: string;
+  /** Additional css class string for `on` state only. */
   addClassOn?: string;
+  /** Additional css class string for `off` state only. */
   addClassOff?: string;
-
+  /** Button HTMLElement title, can be set for each state (`on` or `off`). */
   title?: string | TitleToggle;
-
+  /** Set an action to execute when button clicked clicked. */
   onClick?: OnClick;
+  /** Get current control status. */
   getStatus?: () => boolean;
 }
 
