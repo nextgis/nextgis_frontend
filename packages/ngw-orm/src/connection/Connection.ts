@@ -80,20 +80,19 @@ export class Connection {
     return this;
   }
 
-  async getOrCreateResource(
-    resource: typeof BaseResource,
-    options: SyncOptions
-  ): Promise<typeof BaseResource | undefined> {
-    return this.createResource(resource, options, true);
+  async getOrCreateResource<
+    T extends typeof BaseResource = typeof BaseResource
+  >(Resource: T, options: SyncOptions): Promise<T | undefined> {
+    return this.createResource(Resource, options, true);
   }
 
-  async createResource(
-    resource: typeof BaseResource,
+  async createResource<T extends typeof BaseResource = typeof BaseResource>(
+    Resource: T,
     options: SyncOptions,
     getExisted = false
-  ): Promise<typeof BaseResource | undefined> {
-    if (resource.item && resource.connection) {
-      return resource;
+  ): Promise<T | undefined> {
+    if (Resource.item && Resource.connection) {
+      return Resource;
     }
     let parent: ResourceDefinition | undefined;
     if (typeof options.parent === 'function') {
@@ -107,7 +106,7 @@ export class Connection {
     const parentResource = await this.driver.getResource(parent);
     if (parentResource) {
       const payload = this.getResourceNgwPayload(
-        resource,
+        Resource,
         parentResource.resource.id,
         options
       );
@@ -116,7 +115,7 @@ export class Connection {
           try {
             const exist = await this.getResource(payload.resource);
             if (exist) {
-              return resource.connect(exist.resource.id, this);
+              return Resource.connect<T>(exist.resource.id, this);
             }
           } catch {
             //
@@ -126,7 +125,7 @@ export class Connection {
           const item = await this.driver.post('resource.collection', {
             data: payload,
           });
-          return resource.connect(item.id, this);
+          return Resource.connect<T>(item.id, this);
         } catch (er) {
           throw er;
         }
