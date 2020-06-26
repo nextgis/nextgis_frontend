@@ -78,17 +78,17 @@ export class BaseResource {
     return undefined;
   }
 
-  static async connect(
+  static async connect<T extends typeof BaseResource = typeof BaseResource>(
     resourceOptions: ResourceDefinition,
     connectionOrOptions: Connection | ConnectionOptions
-  ): Promise<typeof BaseResource> {
+  ): Promise<T> {
     const connection = Connection.create(connectionOrOptions);
     await connection.connect();
     const item = await connection.driver.getResource(resourceOptions);
     if (item) {
       this.connection = connection;
       this.item = item;
-      return this;
+      return this as T;
     } else {
       throw new CannotExecuteResourceNotExistError(resourceOptions, connection);
     }
