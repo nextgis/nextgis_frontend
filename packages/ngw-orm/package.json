@@ -8,7 +8,9 @@
   "dependencies": {
     "@nextgis/ngw-connector": "^0.32.0",
     "@nextgis/utils": "^0.32.0",
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.1.13",
+    "reproject": "^1.2.5",
+    "wellknown": "^0.5.0"
   },
   "devDependencies": {
     "@nextgis/build-tools": "file:../build-tools"
