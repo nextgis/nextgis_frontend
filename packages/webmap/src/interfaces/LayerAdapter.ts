@@ -10,13 +10,14 @@ import { LngLatBoundsArray, Type } from './BaseTypes';
 import { MapClickEvent } from './MapAdapter';
 
 /**
- * backward compatibility
+ * Backward compatibility.
+ * @deprecated
  * @internal
  */
 export { PropertiesFilter, Operations, PropertyFilter, checkIfPropertyFilter };
 
 /**
- * @public
+ * @internal
  */
 export type AdapterConstructor = () => Promise<Type<LayerAdapter> | any>;
 
@@ -473,6 +474,7 @@ export interface MainLayerAdapter<
 }
 
 /**
+ * Adapter for vector data display control.
  * @public
  */
 export interface VectorLayerAdapter<
@@ -481,18 +483,66 @@ export interface VectorLayerAdapter<
   O extends VectorAdapterOptions = VectorAdapterOptions,
   F extends Feature = Feature
 > extends MainLayerAdapter<M, L, O> {
+  /** True if there are selected features in the layer  */
   selected?: boolean;
+
+  /**
+   * Experimental option, only for MVT. Points to a data source instead of loading data into a layer.
+   * @alpha
+   */
   source?: unknown;
-
+  /**
+   * Allows to get all vector objects of the layer. Does not work for vector tiles.
+   */
   getLayers?(): LayerDefinition<F, L>[];
-
+  /**
+   * Method for selecting objects on the map. The `selectedPaint` option will be applied to the selected objects.
+   * @remarks
+   * It is strongly recommended to use an `PtropertiesFilter` expression to set selected objects,
+   * since the selecting by the callback function is not supported by vector tiles and other asynchronous adapters.
+   */
   select?(findFeatureCb?: DataLayerFilter<F, L> | PropertiesFilter): void;
+  /**
+   * Deselect all objects in the vector layer.
+   *
+   * @remarks
+   * The parameter `findFeatureCb` is deprecated and will be deleted soon.
+   * Instead, it’s better to deselect all and select again.
+   */
   unselect?(findFeatureCb?: DataLayerFilter<F, L> | PropertiesFilter): void;
+  /**
+   * Get the selected objects of the vector layer.
+   */
   getSelected?(): LayerDefinition<Feature, L>[];
-
+  /**
+   * Get the filtered objects of the vector layer.
+   */
   getFiltered?(): LayerDefinition<Feature, L>[];
+  /**
+   * Ability to filter a layer with a callback function.
+   * It is necessary for the adapter to provide access to the layer objects before output to the map.
+   * It is not possible to apply such a filter to vector tiles and data on the remote server.
+   * So, where possible, use the {@link VectorLayerAdapter.propertiesFilter}.
+   * @example
+   * ```js
+   * layer.filter((e) => e.feature.properties.id === 2011);
+   * // but in this case it’s better to do so:
+   * layer.propertiesFilter([['id', 'eq', 2011]])
+   * ```
+   */
   filter?(cb: DataLayerFilter<F, L>): Array<LayerDefinition<Feature, L>>;
+  /**
+   * The way to filter layer objects through serializable expressions.
+   * @example
+   * ```js
+   * layer.propertiesFilter(['all', ['color', 'eq', 'green'], ['year', 'gt', 2011]])
+   * layer.propertiesFilter([['any', ['color', 'eq', 'green'], ['color', 'eq', 'red']], ['year', 'gt', 2011]])
+   * ```
+   */
   propertiesFilter?(filters: PropertiesFilter, options?: FilterOptions): void;
+  /**
+   * Cancel the filter, return all objects to the map.
+   */
   removeFilter?(): void;
 
   addData?(data: GeoJsonObject): void;
