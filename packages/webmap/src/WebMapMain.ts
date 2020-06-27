@@ -28,7 +28,7 @@ import { Keys } from './components/keys/Keys';
 import { CenterState } from './components/mapStates/CenterState';
 import { StateItem } from './components/mapStates/StateItem';
 import { ZoomState } from './components/mapStates/ZoomState';
-import { createToggleControl } from './components/controls/ToggleControl';
+import { createToggleControl } from './components/controls/createToggleControl';
 
 import {
   detectGeometryType,

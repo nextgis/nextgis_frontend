@@ -12,7 +12,7 @@ import {
 import { ControlPosition } from './interfaces/MapAdapter';
 import { WebMapLayers } from './WebMapLayers';
 import { WebMapMain } from './WebMapMain';
-import { createToggleControl } from './components/controls/ToggleControl';
+import { createToggleControl } from './components/controls/createToggleControl';
 
 /**
  * Collection of methods for managing map controls
