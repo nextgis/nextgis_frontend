@@ -7,6 +7,7 @@ import { LayerAdapter } from './LayerAdapter';
 export { Type };
 
 /**
+ * Map zoom level.
  * @public
  */
 export type ZoomLevel =

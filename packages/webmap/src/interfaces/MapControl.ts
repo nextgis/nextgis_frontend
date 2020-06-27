@@ -60,12 +60,17 @@ export interface MapControl<M extends any = any> {
 }
 
 /**
+ * Options for creating a {@link WebMapControls.createButtonControl | button control}.
  * @public
  */
 export interface ButtonControlOptions {
+  /** Button content. */
   html?: string | HTMLElement;
+  /** Additional css class string */
   addClass?: string;
+  /** Set an action to execute when button clicked. */
   onClick: OnClick;
+  /** Button HTMLElement title */
   title?: string;
 }
 
@@ -75,6 +80,7 @@ export interface ButtonControlOptions {
 export type HtmlDef = string | HTMLElement;
 
 /**
+ * Values to be in the button content in accordance with the status of the toggle control
  * @public
  */
 export interface HtmlToggle {
@@ -83,6 +89,7 @@ export interface HtmlToggle {
 }
 
 /**
+ * Values to be in the title in accordance with the status of the toggle control
  * @public
  */
 export interface TitleToggle {
@@ -108,7 +115,7 @@ export interface ToggleControlOptions {
   addClassOff?: string;
   /** Button HTMLElement title, can be set for each state (`on` or `off`). */
   title?: string | TitleToggle;
-  /** Set an action to execute when button clicked clicked. */
+  /** Set an action to execute when button clicked. */
   onClick?: OnClick;
   /** Get current control status. */
   getStatus?: () => boolean;
