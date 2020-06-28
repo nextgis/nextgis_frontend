@@ -533,10 +533,19 @@ export interface VectorLayerAdapter<
   filter?(cb: DataLayerFilter<F, L>): Array<LayerDefinition<Feature, L>>;
   /**
    * The way to filter layer objects through serializable expressions.
+   * To clear the filter, pass `null` or `undefined` as the second parameter.
+   * @param filters - Filter, conforming to the PropertiesFilter expression specification's.
+   * @param options - Options object.
    * @example
    * ```js
-   * layer.propertiesFilter(['all', ['color', 'eq', 'green'], ['year', 'gt', 2011]])
-   * layer.propertiesFilter([['any', ['color', 'eq', 'green'], ['color', 'eq', 'red']], ['year', 'gt', 2011]])
+   * layer.propertiesFilter(['all', ['color', 'eq', 'green'], ['year', 'gt', 2011]]);
+   * layer.propertiesFilter([[
+   *   'any',
+   *   ['color', 'eq', 'green'],
+   *   ['color', 'eq', 'red']
+   * ],
+   *   ['year', 'gt', 2011]
+   * ]);
    * ```
    */
   propertiesFilter?(filters: PropertiesFilter, options?: FilterOptions): void;
@@ -544,17 +553,33 @@ export interface VectorLayerAdapter<
    * Cancel the filter, return all objects to the map.
    */
   removeFilter?(): void;
-
-  addData?(data: GeoJsonObject): void;
+  /**
+   * Add GeoJson data to layer.
+   * @param geojson GeoJson object.
+   */
+  addData?(geojson: GeoJsonObject): void;
+  /**
+   * Update layer with new geojson.
+   * @param geojson GeoJson object.
+   */
+  setData?(geojson: GeoJsonObject): void;
+  /**
+   * Remove layer data.
+   * @param cb - Delete only those objects that match the filter.
+   */
   clearLayer?(cb?: (feature: Feature) => boolean): void;
-  setData?(data: GeoJsonObject): void;
-
-  onLayerClick?(opt: OnLayerClickOptions): Promise<any>;
+  /**
+   * Callback function that will be called when clicking on a layer.
+   * @param event - Data that is transmitted when you click on a layer.
+   * @internal
+   */
+  onLayerClick?(event: OnLayerClickOptions): Promise<any>;
 
   openPopup?(
     findFeatureCb?: DataLayerFilter<F, L>,
     options?: PopupOptions
   ): void;
+
   closePopup?(findFeatureCb?: DataLayerFilter<F, L>): void;
 
   updateTooltip?(layerDef?: LayerDefinition<F, L>): void;
