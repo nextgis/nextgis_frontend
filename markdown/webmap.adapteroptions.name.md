@@ -4,6 +4,8 @@
 
 ## AdapterOptions.name property
 
+Non-unique name of the layer. Can be used for user interfaces.
+
 <b>Signature:</b>
 
 ```typescript

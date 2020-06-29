@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface ControlContainerOptions 
+export declare interface ControlContainerOptions 
 ```
 
 ## Properties

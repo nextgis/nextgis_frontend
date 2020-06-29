@@ -11,5 +11,5 @@ getParents(): Item[];
 ```
 <b>Returns:</b>
 
-[Item](./item.item.md)<!-- -->\[\]
+Item\[\]
 

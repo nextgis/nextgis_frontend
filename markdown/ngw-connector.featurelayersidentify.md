@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface FeatureLayersIdentify 
+export declare interface FeatureLayersIdentify 
 ```
 
 ## Properties

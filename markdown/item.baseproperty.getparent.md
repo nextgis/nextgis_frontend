@@ -11,5 +11,5 @@ getParent(): Item<ItemOptions> | undefined;
 ```
 <b>Returns:</b>
 
-[Item](./item.item.md)<!-- -->&lt;[ItemOptions](./item.itemoptions.md)<!-- -->&gt; \| undefined
+Item&lt;[ItemOptions](./item.itemoptions.md)<!-- -->&gt; \| undefined
 

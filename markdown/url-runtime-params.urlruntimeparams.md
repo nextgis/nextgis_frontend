@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare class UrlRuntimeParams implements RuntimeParams 
+declare class UrlRuntimeParams implements RuntimeParams 
 ```
 
 ## Methods

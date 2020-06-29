@@ -7,14 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-export interface ResourceAdapter<M = any, L = any, O extends GeoJsonAdapterOptions = GeoJsonAdapterOptions, F extends Feature = Feature> extends VectorLayerAdapter<M, L, O, F> 
+export declare interface ResourceAdapter<M = any, L = any, O extends GeoJsonAdapterOptions = GeoJsonAdapterOptions, F extends Feature = Feature> extends VectorLayerAdapter<M, L, O, F> 
 ```
 
 ## Properties
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [baseLayer](./ngw-kit.resourceadapter.baselayer.md) | boolean |  |
+|  [baselayer](./ngw-kit.resourceadapter.baselayer.md) | boolean |  |
 |  [item](./ngw-kit.resourceadapter.item.md) | ResourceItem |  |
 |  [resourceId](./ngw-kit.resourceadapter.resourceid.md) | number |  |
 

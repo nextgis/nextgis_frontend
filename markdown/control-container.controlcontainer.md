@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare class ControlContainer 
+declare class ControlContainer 
 ```
 
 ## Constructors

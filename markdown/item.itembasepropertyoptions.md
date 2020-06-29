@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface ItemBasePropertyOptions<V> 
+export declare interface ItemBasePropertyOptions<V> 
 ```
 
 ## Properties
@@ -15,9 +15,9 @@ export interface ItemBasePropertyOptions<V>
 |  Property | Type | Description |
 |  --- | --- | --- |
 |  [bubble](./item.itembasepropertyoptions.bubble.md) | boolean |  |
-|  [getProperty](./item.itembasepropertyoptions.getproperty.md) | (item?: [Item](./item.item.md)<!-- -->) =&gt; V |  |
+|  [getProperty](./item.itembasepropertyoptions.getproperty.md) | (item?: Item) =&gt; V |  |
 |  [hierarchy](./item.itembasepropertyoptions.hierarchy.md) | boolean |  |
-|  [onSet](./item.itembasepropertyoptions.onset.md) | (value?: V, options?: [ItemBasePropertyOptions](./item.itembasepropertyoptions.md)<!-- -->&lt;V&gt;, item?: [Item](./item.item.md)<!-- -->) =&gt; void |  |
+|  [onSet](./item.itembasepropertyoptions.onset.md) | (value?: V, options?: [ItemBasePropertyOptions](./item.itembasepropertyoptions.md)<!-- -->&lt;V&gt;, item?: Item) =&gt; void |  |
 |  [propagation](./item.itembasepropertyoptions.propagation.md) | boolean |  |
 |  [silent](./item.itembasepropertyoptions.silent.md) | boolean |  |
 |  [value](./item.itembasepropertyoptions.value.md) | V |  |

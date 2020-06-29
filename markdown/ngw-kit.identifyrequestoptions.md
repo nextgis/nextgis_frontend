@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface IdentifyRequestOptions 
+export declare interface IdentifyRequestOptions 
 ```
 
 ## Properties

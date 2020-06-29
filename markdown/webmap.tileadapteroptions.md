@@ -4,6 +4,7 @@
 
 ## TileAdapterOptions interface
 
+
 <b>Signature:</b>
 
 ```typescript

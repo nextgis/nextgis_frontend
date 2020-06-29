@@ -18,5 +18,5 @@ static all<T>(values: (T | PromiseLike<T>)[]): CancelablePromise<T[]>;
 
 <b>Returns:</b>
 
-[CancelablePromise](./cancelable-promise.cancelablepromise.md)<!-- -->&lt;T\[\]&gt;
+CancelablePromise&lt;T\[\]&gt;
 

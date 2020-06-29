@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface NgwDateFormat 
+export declare interface NgwDateFormat 
 ```
 
 ## Properties

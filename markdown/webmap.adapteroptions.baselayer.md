@@ -4,6 +4,11 @@
 
 ## AdapterOptions.baseLayer property
 
+> Warning: This API is now obsolete.
+> 
+> use `baselayer` instead
+> 
+
 <b>Signature:</b>
 
 ```typescript

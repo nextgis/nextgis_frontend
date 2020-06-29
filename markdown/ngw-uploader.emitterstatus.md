@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface EmitterStatus 
+export declare interface EmitterStatus 
 ```
 
 ## Properties

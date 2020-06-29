@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface TreeGroup extends TreeItem 
+export declare interface TreeGroup extends TreeItem 
 ```
 
 ## Properties

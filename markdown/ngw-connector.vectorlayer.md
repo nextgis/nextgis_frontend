@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface VectorLayer 
+export declare interface VectorLayer 
 ```
 
 ## Properties

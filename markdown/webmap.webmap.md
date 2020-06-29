@@ -4,12 +4,12 @@
 
 ## WebMap class
 
-The core component for managing map adapters. It contains methods for adding and manipulation with map layers and controls.
+The core component for managing map adapters. It contains methods for adding and manipulation with [map](./webmap.webmapmain.md)<!-- -->, [layers](./webmap.webmaplayers.md) and .
 
 <b>Signature:</b>
 
 ```typescript
-export declare class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEvents> extends WebMapLayers<M, L, C, E> 
+export declare class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEvents> extends WebMapControls<M, L, C, E> implements WebMapControls, WebMapLayers, WebMapMain 
 ```
 
 ## Example
@@ -25,23 +25,4 @@ const webMap = new WebMap({
 });
 
 ```
-
-## Properties
-
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [controls](./webmap.webmap.controls.md) | <code>static</code> | { \[name: string\]: (webMap: [WebMap](./webmap.webmap.md)<!-- -->, options?: any) =&gt; any; } |  |
-
-## Methods
-
-|  Method | Modifiers | Description |
-|  --- | --- | --- |
-|  [\_addLayerProviders()](./webmap.webmap._addlayerproviders.md) |  |  |
-|  [\_onLoadSync()](./webmap.webmap._onloadsync.md) |  |  |
-|  [addControl(controlDef, position, options)](./webmap.webmap.addcontrol.md) |  |  |
-|  [createButtonControl(options)](./webmap.webmap.createbuttoncontrol.md) |  |  |
-|  [createControl(control, options)](./webmap.webmap.createcontrol.md) |  | Creating a universal map layout control element. Can be used with any map adapter. |
-|  [createToggleControl(options)](./webmap.webmap.createtogglecontrol.md) |  |  |
-|  [getControl(control, options)](./webmap.webmap.getcontrol.md) |  |  |
-|  [removeControl(control)](./webmap.webmap.removecontrol.md) |  |  |
 

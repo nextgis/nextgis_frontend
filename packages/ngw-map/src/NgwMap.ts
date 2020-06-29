@@ -63,6 +63,7 @@ import { Geometry, Feature, FeatureCollection } from 'geojson';
  *   webmapId: 3985
  * });
  * ```
+ * @public
  */
 export class NgwMap<
   M = any,
@@ -154,10 +155,10 @@ export class NgwMap<
    * });
    * ```
    */
-  @onMapLoad()
   async addNgwLayer(
     options: NgwLayerOptions
   ): Promise<ResourceAdapter | undefined> {
+    await this.onMapLoad();
     const keyname = (options as KeynamedNgwLayerOptions).keyname;
     const resourceId = (options as ResourceIdNgwLayerOptions).resourceId;
     const resource = (options as ResourceNgwLayerOptions).resource;

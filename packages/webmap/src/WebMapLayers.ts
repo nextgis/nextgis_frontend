@@ -22,7 +22,7 @@ import { LayerDef, Type } from './interfaces/BaseTypes';
 
 import { updateGeoJsonAdapterOptions } from './utils/updateGeoJsonAdapterOptions';
 import { propertiesFilter } from './utils/propertiesFilter';
-import { BaseWebMap } from './BaseWebMap';
+import { WebMapMain } from './WebMapMain';
 
 import {
   GetAttributionsOptions,
@@ -34,14 +34,14 @@ import { FitOptions } from './interfaces/MapAdapter';
 type AddedLayers = { [id: string]: LayerAdapter };
 
 /**
- * @internal
+ * @public
  */
 export class WebMapLayers<
   M = any,
   L = any,
   C = any,
   E extends WebMapEvents = WebMapEvents
-> extends BaseWebMap<M, L, C, E> {
+> extends WebMapMain<M, L, C, E> {
   private _layersIdCounter = 1;
   private _layersOrderCounter = 1;
   private readonly _baselayers: string[] = [];
@@ -187,7 +187,7 @@ export class WebMapLayers<
     O extends AdapterOptions = AdapterOptions
   >(
     adapter: LayerAdapterDefinition<K>,
-    options: O | LayerAdaptersOptions[K],
+    options: O | LayerAdaptersOptions[K] = {},
     order?: number
   ): Promise<LayerAdapter> {
     // TODO: remove backward compatibility on v 1.0
@@ -282,16 +282,16 @@ export class WebMapLayers<
         throw Error(`layer with id '${layerId}' already exist`);
       }
       if (layerId) {
+        this._layers[layerId] = _adapter;
         if (geoJsonOptions.filter) {
           this.filterLayer(_adapter, geoJsonOptions.filter);
         }
         if (options.baselayer) {
           this._baselayers.push(layerId);
         }
-        this._layers[layerId] = _adapter;
 
         if (visibility) {
-          this.showLayer(layerId);
+          await this.showLayer(layerId);
         }
       }
       const opacity = options.opacity;
@@ -448,15 +448,21 @@ export class WebMapLayers<
   /**
    * Show added layer on the map by it definition.
    */
-  showLayer(layerDef: LayerDef, options: ToggleLayerOptions = {}): void {
-    this.toggleLayer(layerDef, true, options);
+  showLayer(
+    layerDef: LayerDef,
+    options: ToggleLayerOptions = {}
+  ): Promise<void> {
+    return this.toggleLayer(layerDef, true, options);
   }
 
   /**
    * Hide added layer on the map by it definition.
    */
-  hideLayer(layerDef: LayerDef, options: ToggleLayerOptions = {}): void {
-    this.toggleLayer(layerDef, false, options);
+  hideLayer(
+    layerDef: LayerDef,
+    options: ToggleLayerOptions = {}
+  ): Promise<void> {
+    return this.toggleLayer(layerDef, false, options);
   }
 
   /**
@@ -476,7 +482,7 @@ export class WebMapLayers<
     layerDef: LayerDef,
     status?: boolean,
     options: ToggleLayerOptions = {}
-  ): void {
+  ): Promise<void> {
     const layer = this.getLayer(layerDef);
     const onMap = layer && layer.options.visibility;
     const toStatus = status !== undefined ? status : !onMap;
@@ -502,7 +508,7 @@ export class WebMapLayers<
 
         if (l.showLayer) {
           l.showLayer.call(l, l.layer);
-        } else {
+        } else if (l.layer !== undefined) {
           this.mapAdapter.showLayer(l.layer);
         }
         if (order !== undefined) {
@@ -511,7 +517,7 @@ export class WebMapLayers<
       } else {
         if (l.hideLayer) {
           l.hideLayer.call(l, l.layer);
-        } else {
+        } else if (l.layer !== undefined) {
           this.mapAdapter.hideLayer(l.layer);
         }
       }
@@ -521,14 +527,9 @@ export class WebMapLayers<
       l.options.visibility = toStatus;
     };
     if (layer && layer.options.visibility !== toStatus) {
-      if (this.mapAdapter.map) {
-        action(this.mapAdapter, layer);
-      } else {
-        this.mapAdapter.emitter.once('create', (adapter) => {
-          action(adapter.map, layer);
-        });
-      }
+      return this.onMapLoad().then(() => action(this.mapAdapter, layer));
     }
+    return Promise.resolve();
   }
 
   updateLayer(layerDef: LayerDef): void {

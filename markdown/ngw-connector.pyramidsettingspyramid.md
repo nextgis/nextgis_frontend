@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface PyramidSettingsPyramid 
+export declare interface PyramidSettingsPyramid 
 ```
 
 ## Properties

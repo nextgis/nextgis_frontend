@@ -4,6 +4,7 @@
 
 ## ZoomLevel type
 
+
 <b>Signature:</b>
 
 ```typescript

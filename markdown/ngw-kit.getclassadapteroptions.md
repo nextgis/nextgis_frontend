@@ -7,14 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-export interface GetClassAdapterOptions 
+export declare interface GetClassAdapterOptions 
 ```
 
 ## Properties
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [Adapter](./ngw-kit.getclassadapteroptions.adapter.md) | Type&lt;BaseLayerAdapter&gt; |  |
+|  [Adapter](./ngw-kit.getclassadapteroptions.adapter.md) | Type&lt;MainLayerAdapter&gt; |  |
 |  [addLayerOptionsPriority](./ngw-kit.getclassadapteroptions.addlayeroptionspriority.md) | false |  |
 |  [connector](./ngw-kit.getclassadapteroptions.connector.md) | NgwConnector |  |
 |  [item](./ngw-kit.getclassadapteroptions.item.md) | ResourceItem |  |

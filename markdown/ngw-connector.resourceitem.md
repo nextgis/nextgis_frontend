@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface ResourceItem 
+export declare interface ResourceItem 
 ```
 
 ## Properties

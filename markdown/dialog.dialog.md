@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare class Dialog implements DialogAdapter 
+declare class Dialog implements DialogAdapter 
 ```
 
 ## Constructors
@@ -20,7 +20,7 @@ export declare class Dialog implements DialogAdapter
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [dialogs](./dialog.dialog.dialogs.md) | <code>static</code> | [Dialog](./dialog.dialog.md)<!-- -->\[\] |  |
+|  [dialogs](./dialog.dialog.dialogs.md) | <code>static</code> | Dialog\[\] |  |
 |  [options](./dialog.dialog.options.md) |  | DialogAdapterOptions |  |
 
 ## Methods

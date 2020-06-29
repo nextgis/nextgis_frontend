@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface UploadInputOptions 
+export declare interface UploadInputOptions 
 ```
 
 ## Properties

@@ -4,6 +4,7 @@
 
 ## BaseMapEvents.movestart property
 
+Fired when the view of the map starts changing (e.g. user starts dragging the map).
 
 <b>Signature:</b>
 

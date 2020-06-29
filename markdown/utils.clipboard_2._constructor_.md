@@ -4,7 +4,7 @@
 
 ## Clipboard\_2.(constructor)
 
-Constructs a new instance of the `Clipboard` class
+Constructs a new instance of the `Clipboard_2` class
 
 <b>Signature:</b>
 

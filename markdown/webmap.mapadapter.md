@@ -18,7 +18,7 @@ export interface MapAdapter<M = any, L = any, C = any>
 |  --- | --- | --- |
 |  [controlAdapters](./webmap.mapadapter.controladapters.md) | { \[name: string\]: Type&lt;C&gt;; } | Named map controls specific for each framework. |
 |  [emitter](./webmap.mapadapter.emitter.md) | StrictEventEmitter&lt;EventEmitter, [MapAdapterEvents](./webmap.mapadapterevents.md)<!-- -->&gt; | An instance of the EventEmitter class for listen and emit events |
-|  [isLoaded](./webmap.mapadapter.isloaded.md) | boolean | State of readiness of the card for use.  true |
+|  [isLoaded](./webmap.mapadapter.isloaded.md) | boolean | State of readiness of the card for use. |
 |  [layerAdapters](./webmap.mapadapter.layeradapters.md) | { \[name: string\]: Type&lt;[LayerAdapter](./webmap.layeradapter.md)<!-- -->&lt;M, L, any&gt;&gt;; } | Named adapters for map layers through a generic interface. |
 |  [map](./webmap.mapadapter.map.md) | M | Original map object of GIS framework (Leaflet.Map, Openlayers.Map, Mapboxgl.Map or other) |
 
