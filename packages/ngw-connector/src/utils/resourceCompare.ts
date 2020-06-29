@@ -1,4 +1,4 @@
-import { DeepPartial, isObject } from '@nextgis/utils';
+import { DeepPartial } from '@nextgis/utils';
 import { Resource } from '../types/ResourceItem';
 
 export function resourceCompare(
@@ -8,6 +8,9 @@ export function resourceCompare(
   return objectCompare(res1, res2);
 }
 
+function isObject(val: unknown): val is Record<string | number, any> {
+  return Object.prototype.toString.call(val) === '[object Object]';
+}
 function objectCompare<T = Record<string | number, any>>(
   obj1: T,
   obj2: T
