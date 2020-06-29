@@ -62,7 +62,7 @@ export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
     this._extent = this._calculateExtent();
     this.map.scene.primitives.add(this.layer);
     this.watchHeight();
-    if (this.options.heightOffset) {
+    if (this.options.heightOffset !== undefined) {
       this._setHeight();
     }
     return this.layer;
@@ -101,7 +101,7 @@ export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
       const boundingSphere = this.layer.boundingSphere;
       const cartographic = Cartographic.fromCartesian(boundingSphere.center);
       if (height === undefined) {
-        height = cartographic.height;
+        height = 0;
       }
       if (this.options.heightOffset) {
         height += this.options.heightOffset;

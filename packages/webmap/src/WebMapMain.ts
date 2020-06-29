@@ -28,7 +28,7 @@ import { Keys } from './components/keys/Keys';
 import { CenterState } from './components/mapStates/CenterState';
 import { StateItem } from './components/mapStates/StateItem';
 import { ZoomState } from './components/mapStates/ZoomState';
-import { createToggleControl } from './components/controls/ToggleControl';
+import { createToggleControl } from './components/controls/createToggleControl';
 
 import {
   detectGeometryType,
@@ -63,9 +63,9 @@ const OPTIONS: MapOptions = {
 };
 
 /**
- * @internal
+ * @public
  */
-export class BaseWebMap<
+export class WebMapMain<
   M = any,
   L = any,
   C = any,
@@ -89,12 +89,12 @@ export class BaseWebMap<
     EventEmitter,
     WebMapEvents
   > = new EventEmitter();
-  readonly keys = BaseWebMap.keys;
+  readonly keys = WebMapMain.keys;
 
   readonly mapAdapter: MapAdapter<M>;
   readonly runtimeParams: RuntimeParams[] = [];
 
-  getPaintFunctions = BaseWebMap.getPaintFunctions;
+  getPaintFunctions = WebMapMain.getPaintFunctions;
   mapState: Type<StateItem>[] = [CenterState, ZoomState];
   id = ID++;
 
@@ -125,7 +125,7 @@ export class BaseWebMap<
     }
   }
 
-  static get<T extends BaseWebMap = BaseWebMap>(id: number): T | undefined {
+  static get<T extends WebMapMain = WebMapMain>(id: number): T | undefined {
     return WEB_MAP_CONTAINER[id];
   }
 

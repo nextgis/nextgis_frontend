@@ -6,6 +6,10 @@ import { LayerAdapter } from './LayerAdapter';
  */
 export { Type };
 
+/**
+ * Map zoom level.
+ * @public
+ */
 export type ZoomLevel =
   | 0
   | 1
@@ -34,6 +38,7 @@ export type ZoomLevel =
 
 /**
  * Longitude and latitude coordinate, measured in degrees.
+ * @public
  */
 export interface LatLng {
   /**
@@ -48,17 +53,20 @@ export interface LatLng {
 
 /**
  * Array of coordinates, measured in degrees, in [west, south, east, north] order.
- * https://tools.ietf.org/html/rfc7946#section-5
+ * {@link https://tools.ietf.org/html/rfc7946#section-5 | GeoJSON standard}
+ * @public
  */
 export type LngLatBoundsArray = [number, number, number, number] | number[];
 
 /**
  * Array of two numbers representing longitude and latitude.
+ * @public
  */
 export type LngLatArray = [number, number];
 
 /**
  * Screen coordinates in pixels.
+ * @public
  */
 export interface Pixel {
   top: number;
@@ -71,19 +79,21 @@ export interface Pixel {
  * Available argument types for methods with map layers identification.
  *
  * @example
- * ```javascript
+ * ```js
  * webMap.addLayer('GEOJSON', { id: 'my_layer' }).then((layer) =>{
  *   webMap.addLayerData(layer, geojson);
  *   webMap.addLayerData('my_layer', geojson);
  * });
  * ```
+ * @public
  */
 export type LayerDef = string | LayerAdapter;
 
 /**
  * Available cursor names from
- * https://developer.mozilla.org/ru/docs/Web/CSS/cursor
+ * {@link https://developer.mozilla.org/ru/docs/Web/CSS/cursor}
  * @ignore
+ * @internal
  */
 export type Cursor =
   | 'auto'

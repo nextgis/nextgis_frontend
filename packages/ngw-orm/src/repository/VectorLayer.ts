@@ -1,3 +1,4 @@
+import { Geometry } from 'geojson';
 import { Type, DeepPartial } from '@nextgis/utils';
 import { GeometryType } from '@nextgis/ngw-connector';
 // import { ResourceItem } from '@nextgis/ngw-connector';
@@ -13,6 +14,7 @@ import { BaseResource } from './BaseResource';
 import { getMetadataArgsStorage } from '..';
 import { SyncOptions } from './SyncOptions';
 import { VectorResourceSyncItem } from '../sync-items/VectorResourceSyncItem';
+import { vectorResourceToNgw } from '../utils/vectorResourceToNgw';
 // import { SyncOptions } from './SyncOptions';
 // import { Connection } from '../connection/Connection';
 // import { ConnectionOptions } from '../connection/ConnectionOptions';
@@ -24,8 +26,10 @@ import { VectorResourceSyncItem } from '../sync-items/VectorResourceSyncItem';
 // type DeleteResult = any;
 // type UpdateResult = any;
 
-export class VectorLayer<G = GeometryType> extends BaseResource {
+export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
   static geometryType: GeometryType;
+  id?: number;
+  private _geom!: G;
 
   static getNgwPayload(
     resource: Type<VectorLayer>,
@@ -48,6 +52,15 @@ export class VectorLayer<G = GeometryType> extends BaseResource {
       },
     };
   }
+
+  get geom(): G {
+    return this._geom;
+  }
+
+  set geom(geom: G) {
+    this._geom = geom;
+  }
+
   // /**
   //  * Checks entity has an id.
   //  */
@@ -245,6 +258,9 @@ export class VectorLayer<G = GeometryType> extends BaseResource {
   // // -------------------------------------------------------------------------
   // // Public Methods
   // // -------------------------------------------------------------------------
+  getConstructor(): typeof VectorLayer {
+    return this.constructor as any;
+  }
   // /**
   //  * Checks if entity has an id.
   //  * If entity composite compose ids, it will check them all.
@@ -252,13 +268,32 @@ export class VectorLayer<G = GeometryType> extends BaseResource {
   // hasId(): boolean {
   //   return (this.constructor as any).getRepository().hasId(this);
   // }
-  // /**
-  //  * Saves current entity in the database.
-  //  * If entity does not exist in the database then inserts, otherwise updates.
-  //  */
-  // save(options?: UpdateOptions): Promise<this> {
-  //   return (this.constructor as any).getRepository().save(this, options);
-  // }
+  /**
+   * Saves current entity in the NGW target layer.
+   * If entity does not exist in the NGW layer then inserts, otherwise updates.
+   */
+  async save(): Promise<this> {
+    const constructor = this.getConstructor();
+    const connection = constructor.connection;
+    const resource = constructor.item;
+    if (connection && resource) {
+      const feature = vectorResourceToNgw({ resource, item: this });
+      if (this.id) {
+        feature.id = this.id;
+      }
+      const resp = await connection.driver.patch(
+        'feature_layer.feature.collection',
+        { data: [feature] },
+        { id: resource.resource.id }
+      );
+      if (resp && resp[0] && resp[0].id) {
+        this.id = resp[0].id;
+      }
+    } else {
+      throw 'Can\'t save item. Resource is not connected yet';
+    }
+    return this;
+  }
   // /**
   //  * Removes current entity from the database.
   //  */
