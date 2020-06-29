@@ -51,7 +51,7 @@ export class NgwConnector {
     this.options.baseUrl = url;
   }
 
-  async connect(): Promise<PyramidRoute> {
+  async connect(): CancelablePromise<PyramidRoute> {
     if (this.route) {
       return this.route;
     } else {
@@ -68,7 +68,7 @@ export class NgwConnector {
     }
   }
 
-  async login(credentials: Credentials): Promise<UserInfo> {
+  async login(credentials: Credentials): CancelablePromise<UserInfo> {
     this.logout();
     return this.getUserInfo(credentials);
   }
@@ -82,7 +82,7 @@ export class NgwConnector {
     this.emitter.emit('logout');
   }
 
-  getUserInfo(credentials?: Credentials): Promise<UserInfo> {
+  getUserInfo(credentials?: Credentials): CancelablePromise<UserInfo> {
     if (this.user && this.user.id) {
       return CancelablePromise.resolve(this.user);
     }
@@ -129,7 +129,7 @@ export class NgwConnector {
 
   async getResource(
     resource: ResourceDefinition | DeepPartial<Resource>
-  ): Promise<ResourceItem | undefined> {
+  ): CancelablePromise<ResourceItem | undefined> {
     if (typeof resource === 'string') {
       return this.getResourceByKeyname(resource);
     } else if (typeof resource === 'number') {
@@ -141,7 +141,7 @@ export class NgwConnector {
 
   async getResourceId(
     resource: ResourceDefinition
-  ): Promise<number | undefined> {
+  ): CancelablePromise<number | undefined> {
     if (typeof resource === 'number') {
       return resource;
     } else if (typeof resource === 'string') {
@@ -154,7 +154,7 @@ export class NgwConnector {
 
   async getResourcesBy(
     resource: DeepPartial<Resource>
-  ): Promise<ResourceItem[]> {
+  ): CancelablePromise<ResourceItem[]> {
     let items: ResourceItem[] = [];
     if (resource.id) {
       const existId = this._resourceIdsCache[resource.id];
@@ -191,18 +191,20 @@ export class NgwConnector {
 
   async getResourceBy(
     resource: DeepPartial<Resource>
-  ): Promise<ResourceItem | undefined> {
+  ): CancelablePromise<ResourceItem | undefined> {
     const resources = await this.getResourcesBy(resource);
     return resources[0];
   }
 
   async getResourceByKeyname(
     keyname: string
-  ): Promise<ResourceItem | undefined> {
+  ): CancelablePromise<ResourceItem | undefined> {
     return this.getResourceBy({ keyname });
   }
 
-  async getResourceById(id: number): Promise<ResourceItem | undefined> {
+  async getResourceById(
+    id: number
+  ): CancelablePromise<ResourceItem | undefined> {
     let item: ResourceItem = this._resourceIdsCache[id];
     if (!item) {
       try {
@@ -226,7 +228,7 @@ export class NgwConnector {
           resourceId?: number;
           resource?: string | number;
         }
-  ): Promise<ResourceItem[]> {
+  ): CancelablePromise<ResourceItem[]> {
     let opt: {
       keyname?: string;
       resourceId?: number;
@@ -262,7 +264,7 @@ export class NgwConnector {
     });
   }
 
-  async deleteResource(resource: ResourceDefinition): Promise<void> {
+  async deleteResource(resource: ResourceDefinition): CancelablePromise<void> {
     const id = await this.getResourceId(resource);
     if (id !== undefined) {
       await this.delete('resource.item', null, { id });
@@ -277,7 +279,7 @@ export class NgwConnector {
     name: K,
     params: RequestItemsParams<K> = {},
     options?: RequestOptions
-  ): Promise<P[K]> {
+  ): CancelablePromise<P[K]> {
     return new CancelablePromise((resolve, reject) => {
       this.connect().then((apiItems) => {
         // const apiItems = this.route;
@@ -337,7 +339,7 @@ export class NgwConnector {
     name: K,
     options?: RequestOptions<'POST'>,
     params?: RequestItemsParams<K>
-  ): Promise<PostRequestItemsResponseMap[K]> {
+  ): CancelablePromise<PostRequestItemsResponseMap[K]> {
     options = options || {};
     options.method = 'POST';
     options.nocache = true;
@@ -348,7 +350,7 @@ export class NgwConnector {
     name: K,
     options?: RequestOptions | undefined | null,
     params?: RequestItemsParams<K>
-  ): Promise<GetRequestItemsResponseMap[K]> {
+  ): CancelablePromise<GetRequestItemsResponseMap[K]> {
     options = options || {};
     options.method = 'GET';
     options.nocache = true;
@@ -359,7 +361,7 @@ export class NgwConnector {
     name: K,
     options?: RequestOptions,
     params?: RequestItemsParams<K>
-  ): Promise<PatchRequestItemsResponseMap[K]> {
+  ): CancelablePromise<PatchRequestItemsResponseMap[K]> {
     options = options || {};
     options.method = 'PATCH';
     options.nocache = true;
@@ -370,7 +372,7 @@ export class NgwConnector {
     name: K,
     options?: RequestOptions,
     params?: RequestItemsParams<K>
-  ): Promise<PutRequestItemsResponseMap[K]> {
+  ): CancelablePromise<PutRequestItemsResponseMap[K]> {
     options = options || {};
     options.method = 'PUT';
     options.nocache = true;
@@ -381,7 +383,7 @@ export class NgwConnector {
     name: K,
     options?: RequestOptions | undefined | null,
     params?: RequestItemsParams<K>
-  ): Promise<DeleteRequestItemsResponseMap[K]> {
+  ): CancelablePromise<DeleteRequestItemsResponseMap[K]> {
     options = options || {};
     options.method = 'DELETE';
     options.nocache = true;
@@ -396,7 +398,7 @@ export class NgwConnector {
     url: string,
     params?: Params,
     options: RequestOptions = {}
-  ): Promise<any> {
+  ): CancelablePromise<any> {
     url = (this.options.baseUrl ? this.options.baseUrl : '') + url;
     if (url) {
       if (params) {
@@ -483,7 +485,10 @@ export class NgwConnector {
     }
   }
 
-  protected _getJson(url: string, options: RequestOptions): Promise<any> {
+  protected _getJson(
+    url: string,
+    options: RequestOptions
+  ): CancelablePromise<any> {
     options.responseType = options.responseType || 'json';
     return new CancelablePromise((resolve, reject, onCancel) => {
       if (this.user) {
