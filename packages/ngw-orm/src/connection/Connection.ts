@@ -54,8 +54,8 @@ export class Connection {
     const exist = Connection.connections.find((connection) => {
       const eqUrl = connection.baseUrl === options.baseUrl;
       if (eqUrl) {
-        if (options.auth?.login) {
-          return connection.options.auth?.login === options.auth.login;
+        if (options.auth && options.auth.login && connection.options.auth) {
+          return connection.options.auth.login === options.auth.login;
         }
         return true;
       }
@@ -81,57 +81,23 @@ export class Connection {
   }
 
   async getOrCreateResource(
-    resource: typeof BaseResource,
+    Resource: typeof BaseResource,
     options: SyncOptions
-  ): Promise<typeof BaseResource | undefined> {
-    return this.createResource(resource, options, true);
+  ): Promise<[typeof BaseResource, boolean]> {
+    const [resource, isCreated] = await this._getOrCreateResource(
+      Resource,
+      options,
+      true
+    );
+    return [resource, isCreated];
   }
 
   async createResource(
-    resource: typeof BaseResource,
-    options: SyncOptions,
-    getExisted = false
-  ): Promise<typeof BaseResource | undefined> {
-    if (resource.item && resource.connection) {
-      return resource;
-    }
-    let parent: ResourceDefinition | undefined;
-    if (typeof options.parent === 'function') {
-      parent = options.parent.item?.resource.id;
-    } else {
-      parent = options.parent;
-    }
-    if (!parent) {
-      throw Error('parent resource is not defined');
-    }
-    const parentResource = await this.driver.getResource(parent);
-    if (parentResource) {
-      const payload = this.getResourceNgwPayload(
-        resource,
-        parentResource.resource.id,
-        options
-      );
-      if (payload) {
-        if (getExisted && payload.resource) {
-          try {
-            const exist = await this.getResource(payload.resource);
-            if (exist) {
-              return resource.connect(exist.resource.id, this);
-            }
-          } catch {
-            //
-          }
-        }
-        try {
-          const item = await this.driver.post('resource.collection', {
-            data: payload,
-          });
-          return resource.connect(item.id, this);
-        } catch (er) {
-          throw er;
-        }
-      }
-    }
+    Resource: typeof BaseResource,
+    options: SyncOptions
+  ): Promise<typeof BaseResource> {
+    const [resource] = await this._getOrCreateResource(Resource, options);
+    return resource;
   }
 
   async getResource(
@@ -188,5 +154,59 @@ export class Connection {
       }
       return resourceItem;
     }
+  }
+
+  private async _getOrCreateResource(
+    resource: typeof BaseResource,
+    options: SyncOptions,
+    getExisted = false
+  ): Promise<[typeof BaseResource, boolean]> {
+    const isCreated = false;
+    if (resource.item && resource.connection) {
+      return [resource, isCreated];
+    }
+    let parent: ResourceDefinition | undefined;
+    if (typeof options.parent === 'function') {
+      parent = options.parent.item?.resource.id;
+    } else {
+      parent = options.parent;
+    }
+    if (!parent) {
+      throw Error('parent resource is not defined');
+    }
+    const parentResource = await this.driver.getResource(parent);
+    if (!parentResource) {
+      throw Error('parent resource is not exist');
+    }
+    const payload = this.getResourceNgwPayload(
+      resource,
+      parentResource.resource.id,
+      options
+    );
+    if (!payload) {
+      throw Error('resource is not serializable');
+    }
+    let res;
+    if (getExisted && payload.resource) {
+      try {
+        const exist = await this.getResource(payload.resource);
+        if (exist) {
+          res = await resource.connect(exist.resource.id, this);
+        }
+      } catch (er) {
+        console.log(er);
+      }
+    }
+    if (!res) {
+      try {
+        const item = await this.driver.post('resource.collection', {
+          data: payload,
+        });
+        res = await resource.connect(item.id, this);
+      } catch (er) {
+        throw er;
+      }
+    }
+    return [res, isCreated];
   }
 }

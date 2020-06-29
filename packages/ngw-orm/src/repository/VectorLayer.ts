@@ -1,4 +1,5 @@
 import { Type, DeepPartial } from '@nextgis/utils';
+import { GeometryType } from '@nextgis/ngw-connector';
 // import { ResourceItem } from '@nextgis/ngw-connector';
 // import { objectAssign } from '@nextgis/utils';
 // import NgwConnector from '@nextgis/ngw-connector';
@@ -12,7 +13,6 @@ import { BaseResource } from './BaseResource';
 import { getMetadataArgsStorage } from '..';
 import { SyncOptions } from './SyncOptions';
 import { VectorResourceSyncItem } from '../sync-items/VectorResourceSyncItem';
-import { GeometryType } from 'packages/ngw-connector/src';
 // import { SyncOptions } from './SyncOptions';
 // import { Connection } from '../connection/Connection';
 // import { ConnectionOptions } from '../connection/ConnectionOptions';
