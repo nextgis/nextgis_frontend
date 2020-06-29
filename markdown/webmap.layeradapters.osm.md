@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-OSM: BaseLayerAdapter;
+OSM: MainLayerAdapter;
 ```

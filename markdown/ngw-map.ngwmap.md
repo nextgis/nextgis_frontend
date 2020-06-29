@@ -9,7 +9,7 @@ Base class containing the logic of interaction WebMap with NextGIS services.
 <b>Signature:</b>
 
 ```typescript
-export declare class NgwMap<M = any, L = any, C = any, O = Record<string, any>> extends WebMap<M, L, C, NgwMapEvents> 
+declare class NgwMap<M = any, L = any, C = any, O = Record<string, any>> extends WebMap<M, L, C, NgwMapEvents> 
 ```
 
 ## Example

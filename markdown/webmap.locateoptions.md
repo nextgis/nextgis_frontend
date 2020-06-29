@@ -4,6 +4,7 @@
 
 ## LocateOptions interface
 
+
 <b>Signature:</b>
 
 ```typescript

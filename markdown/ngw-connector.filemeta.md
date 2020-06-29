@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface FileMeta 
+export declare interface FileMeta 
 ```
 
 ## Properties

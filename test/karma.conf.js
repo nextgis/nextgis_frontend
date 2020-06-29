@@ -19,10 +19,11 @@ module.exports = (config) => {
     frameworks: ['mocha'],
     files: [
       // { pattern: 'test/specs/*.ts', type: 'ts' },
+      // { pattern: 'test/specs/ol-map-adapter.spec.ts', type: 'ts' },
       { pattern: 'test/specs/ngw-orm.spec.ts', type: 'ts' },
     ],
     preprocessors: {
-      'test/specs/*.spec.ts': ['webpack', 'sourcemap'], // 'sourcemap'
+      'test/specs/*.spec.ts': ['webpack', 'sourcemap'],
     },
     webpack: createWebpack({ coverage }),
     webpackMiddleware: {

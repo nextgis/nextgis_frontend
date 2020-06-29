@@ -4,22 +4,23 @@
 
 ## BaseMapEvents interface
 
+
 <b>Signature:</b>
 
 ```typescript
 export interface BaseMapEvents 
 ```
 
-## Properties
+## Events
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [click](./webmap.basemapevents.click.md) | [MapClickEvent](./webmap.mapclickevent.md) |  |
-|  [move](./webmap.basemapevents.move.md) | [MapAdapter](./webmap.mapadapter.md) |  |
-|  [moveend](./webmap.basemapevents.moveend.md) | [MapAdapter](./webmap.mapadapter.md) |  |
-|  [movestart](./webmap.basemapevents.movestart.md) | [MapAdapter](./webmap.mapadapter.md) |  |
-|  [preclick](./webmap.basemapevents.preclick.md) | [MapClickEvent](./webmap.mapclickevent.md) |  |
-|  [zoom](./webmap.basemapevents.zoom.md) | [MapAdapter](./webmap.mapadapter.md) |  |
-|  [zoomend](./webmap.basemapevents.zoomend.md) | [MapAdapter](./webmap.mapadapter.md) |  |
-|  [zoomstart](./webmap.basemapevents.zoomstart.md) | [MapAdapter](./webmap.mapadapter.md) |  |
+|  [click](./webmap.basemapevents.click.md) | [MapClickEvent](./webmap.mapclickevent.md) | Fired every time a map is clicked. |
+|  [move](./webmap.basemapevents.move.md) | [MapAdapter](./webmap.mapadapter.md) | Fired repeatedly during any movement of the map. |
+|  [moveend](./webmap.basemapevents.moveend.md) | [MapAdapter](./webmap.mapadapter.md) | Fired when the center of the map stops changing. |
+|  [movestart](./webmap.basemapevents.movestart.md) | [MapAdapter](./webmap.mapadapter.md) | Fired when the view of the map starts changing (e.g. user starts dragging the map). |
+|  [preclick](./webmap.basemapevents.preclick.md) | [MapClickEvent](./webmap.mapclickevent.md) | Fired before the map is clicked. |
+|  [zoom](./webmap.basemapevents.zoom.md) | [MapAdapter](./webmap.mapadapter.md) | Fired repeatedly during any change in zoom level |
+|  [zoomend](./webmap.basemapevents.zoomend.md) | [MapAdapter](./webmap.mapadapter.md) | Fired when the map has changed. |
+|  [zoomstart](./webmap.basemapevents.zoomstart.md) | [MapAdapter](./webmap.mapadapter.md) | Fired when the map zoom is about to change. |
 

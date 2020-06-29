@@ -14,7 +14,7 @@ attach(p: CancelablePromise): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  p | [CancelablePromise](./cancelable-promise.cancelablepromise.md) |  |
+|  p | CancelablePromise |  |
 
 <b>Returns:</b>
 

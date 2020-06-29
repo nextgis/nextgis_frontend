@@ -7,14 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-export declare class Clipboard 
+declare class Clipboard_2 
 ```
 
 ## Constructors
 
 |  Constructor | Modifiers | Description |
 |  --- | --- | --- |
-|  [(constructor)(text)](./utils.clipboard_2._constructor_.md) |  | Constructs a new instance of the <code>Clipboard</code> class |
+|  [(constructor)(text)](./utils.clipboard_2._constructor_.md) |  | Constructs a new instance of the <code>Clipboard_2</code> class |
 
 ## Methods
 

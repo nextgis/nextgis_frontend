@@ -7,6 +7,6 @@
   },
   "include": [
     "./src",
-    "__tests__/classes"
+    "__tests__/classes", "../dialog/src/DialogAdapter.ts"
   ]
 }

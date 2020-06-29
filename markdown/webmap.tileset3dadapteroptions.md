@@ -4,6 +4,7 @@
 
 ## Tileset3DAdapterOptions interface
 
+
 <b>Signature:</b>
 
 ```typescript

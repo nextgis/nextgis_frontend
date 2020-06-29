@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface CompanyLogoOptions 
+export declare interface CompanyLogoOptions 
 ```
 
 ## Properties

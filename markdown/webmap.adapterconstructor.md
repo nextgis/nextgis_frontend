@@ -4,6 +4,7 @@
 
 ## AdapterConstructor type
 
+
 <b>Signature:</b>
 
 ```typescript

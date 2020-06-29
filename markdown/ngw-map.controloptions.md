@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface ControlOptions 
+export declare interface ControlOptions 
 ```
 
 ## Properties

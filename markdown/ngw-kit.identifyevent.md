@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface IdentifyEvent 
+export declare interface IdentifyEvent 
 ```
 
 ## Properties

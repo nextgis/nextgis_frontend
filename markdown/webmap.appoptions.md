@@ -14,7 +14,7 @@ export interface AppOptions
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [create](./webmap.appoptions.create.md) | boolean | Аutomatic creation of a map from the constructor  false |
+|  [create](./webmap.appoptions.create.md) | boolean | Аutomatic creation of a map from the constructor |
 |  [mapAdapter](./webmap.appoptions.mapadapter.md) | [MapAdapter](./webmap.mapadapter.md) | The main initialization property of WebMap. Determines the way of interaction with the selected GIS framework. Available: \[Leaflet\](leaflet-map-adapter); \[Openlayers\](ol-map-adapter); \[MapboxGL\](mapboxgl-map-adapter) |
 |  [mapOptions](./webmap.appoptions.mapoptions.md) | [MapOptions](./webmap.mapoptions.md) | Initial map display settings |
 |  [runtimeParams](./webmap.appoptions.runtimeparams.md) | [RuntimeParams](./webmap.runtimeparams.md)<!-- -->\[\] | A way to save the state of a map to external services |

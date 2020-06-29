@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface RasterUploadResp 
+export declare interface RasterUploadResp 
 ```
 
 ## Properties

@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare class QmsKit implements StarterKit 
+declare class QmsKit implements StarterKit 
 ```
 
 ## Constructors

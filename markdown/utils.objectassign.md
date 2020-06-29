@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function assign<T, U>(target: T, source: U): T & U;
+export declare function objectAssign<T, U>(target: T, source: U): T & U;
 ```
 
 ## Parameters

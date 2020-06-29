@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface AppSettings 
+export declare interface AppSettings 
 ```
 
 ## Properties

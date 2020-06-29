@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface PathPaint extends BasePaint 
+export declare interface PathPaint extends BasePaint 
 ```
 
 ## Properties

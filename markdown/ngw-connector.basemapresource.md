@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface BasemapResource 
+export declare interface BasemapResource 
 ```
 
 ## Properties

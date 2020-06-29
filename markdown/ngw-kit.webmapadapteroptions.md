@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface WebMapAdapterOptions extends A 
+export declare interface WebMapAdapterOptions extends A 
 ```
 
 ## Properties

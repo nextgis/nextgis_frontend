@@ -7,13 +7,13 @@
 <b>Signature:</b>
 
 ```typescript
-export interface FileBucket 
+export declare interface FileBucket 
 ```
 
 ## Properties
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [files](./ngw-connector.filebucket.files.md) | File\[\] |  |
+|  [files](./ngw-connector.filebucket.files.md) | File\_2\[\] |  |
 |  [tstamp](./ngw-connector.filebucket.tstamp.md) | any |  |
 

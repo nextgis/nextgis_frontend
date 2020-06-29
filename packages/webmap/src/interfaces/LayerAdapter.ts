@@ -1,6 +1,4 @@
 import { GeoJsonObject, Feature } from 'geojson';
-import { LngLatBoundsArray, Type } from './BaseTypes';
-import { MapClickEvent } from './MapAdapter';
 import {
   PropertiesFilter,
   Operations,
@@ -8,22 +6,40 @@ import {
   checkIfPropertyFilter,
 } from '@nextgis/properties-filter';
 import { Paint } from '@nextgis/paint';
+import { LngLatBoundsArray, Type } from './BaseTypes';
+import { MapClickEvent } from './MapAdapter';
 
-// backward compatibility
+/**
+ * Backward compatibility.
+ * @deprecated
+ * @internal
+ */
 export { PropertiesFilter, Operations, PropertyFilter, checkIfPropertyFilter };
 
+/**
+ * @internal
+ */
 export type AdapterConstructor = () => Promise<Type<LayerAdapter> | any>;
 
+/**
+ * @public
+ */
 export type LayerAdapterDefinition<K extends keyof LayerAdapters = string> =
   | K
   | Type<LayerAdapters[K]>
   | Promise<Type<LayerAdapters[K]> | undefined>;
 
+/**
+ * @public
+ */
 export interface OnLayerSelectOptions {
   layer: LayerAdapter;
   features?: Feature[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface OnLayerClickOptions {
   layer: LayerAdapter;
   selected?: boolean;
@@ -32,6 +48,10 @@ export interface OnLayerClickOptions {
   source?: any;
 }
 
+/**
+ * Parameters that can be used to create any map layer adapter.
+ * @public
+ */
 export interface AdapterOptions {
   /**
    * Unique Layer ID.
@@ -47,7 +67,7 @@ export interface AdapterOptions {
    * Such layers are always under others.
    * Only one base layer can be displayed on the map at a time.
    *
-   * @default true
+   * @defaultValue true
    */
   visibility?: boolean;
   /**
@@ -91,12 +111,12 @@ export interface AdapterOptions {
   /**
    * Layer transparency.
    * From 0-transparent to 1-visible
-   * @default 1
+   * @defaultValue 1
    */
   opacity?: number;
   /**
    * Fit map to layer extent
-   * @default false
+   * @defaultValue false
    */
   fit?: boolean;
   /**
@@ -107,7 +127,7 @@ export interface AdapterOptions {
   /**
    * Wait until the layer data is fully loaded before allowing added to the map.
    *
-   * @remark
+   * @remarks
    * If true, addLayer promise resolve only after data loading.
    * This is useful for GeoJson vector layer adapters when you need to process downloaded data before displaying.
    */
@@ -120,14 +140,23 @@ export interface AdapterOptions {
   crossOrigin?: 'anonymous';
 }
 
+/**
+ * @public
+ */
 export interface MvtAdapterOptions<F extends Feature = Feature>
   extends VectorAdapterOptions<F> {
   url: string;
   sourceLayer?: string;
 }
 
+/**
+ * @public
+ */
 export type VectorAdapterLayerType = 'polygon' | 'point' | 'line';
 
+/**
+ * @public
+ */
 export interface PopupOptions {
   minWidth?: number;
   autoPan?: boolean;
@@ -140,6 +169,9 @@ export interface PopupOptions {
 
 type _VectorAdapterOptionsToExtend = AdapterOptions & FilterOptions;
 
+/**
+ * @public
+ */
 export interface VectorAdapterOptions<F extends Feature = Feature, L = any>
   extends _VectorAdapterOptionsToExtend {
   /** Type for geometries painting, for each layer may be only one of: `point`, `polygon` or `line`. */
@@ -182,11 +214,6 @@ export interface VectorAdapterOptions<F extends Feature = Feature, L = any>
    * ```
    */
   selectedPaint?: Paint;
-  nativeOptions?: Record<string, any>;
-  nativePaint?: boolean | Record<string, any>;
-  nativeFilter?: unknown;
-  layout?: any;
-  selectedLayout?: any;
   // selectedPaintDiff?: VectorAdapterLayerPaint;
   /**
    * Determines whether objects are selected by mouse click.
@@ -235,40 +262,80 @@ export interface VectorAdapterOptions<F extends Feature = Feature, L = any>
   clusterMaxZoom?: number;
   /**
    * Radius of each cluster when clustering points
-   * @defaults 50
+   * @defaultValue 50
    */
   clusterRadius?: number;
 
-  source?: unknown;
-
   labelField?: string;
   label?: (e: LayerDefinition<F, L>) => void | string;
+
+  /**
+   * @internal
+   */
+  source?: unknown;
+
+  nativeOptions?: Record<string, any>;
+  /**
+   * TODO: move to nativeOptions
+   * @internal
+   */
+  nativePaint?: boolean | Record<string, any>;
+  /**
+   * TODO: move to nativeOptions
+   * @internal
+   */
+  nativeFilter?: unknown;
+  /**
+   * TODO: move to nativeOptions
+   * @internal
+   */
+  layout?: any;
+  /**
+   * TODO: move to nativeOptions
+   * @internal
+   */
+  selectedLayout?: any;
 
   onLayerClick?(opt: OnLayerClickOptions): Promise<any>;
   onLayerSelect?(opt: OnLayerSelectOptions): Promise<any>;
 }
 
+/**
+ * @public
+ */
 export interface GeoJsonAdapterOptions<F extends Feature = Feature, L = any>
   extends VectorAdapterOptions<F, L> {
   /** Geojson data */
   data?: GeoJsonObject;
 }
 
+/**
+ * @public
+ */
 export interface RasterAdapterOptions extends AdapterOptions {
   url: string;
   subdomains?: string;
   headers?: Record<string, any>;
 }
 
+/**
+ * @public
+ */
 export interface TileAdapterOptions extends RasterAdapterOptions {
   tileSize?: number;
 }
 
+/**
+ * @public
+ */
 export interface Tileset3DAdapterOptions extends RasterAdapterOptions {
   useTerrainHeight?: boolean;
   heightOffset?: number;
 }
 
+/**
+ * @public
+ */
 export interface Model3DOptions extends RasterAdapterOptions {
   lon: number;
   lat: number;
@@ -277,6 +344,9 @@ export interface Model3DOptions extends RasterAdapterOptions {
   scale?: number;
 }
 
+/**
+ * @public
+ */
 export interface WmsAdapterOptions extends RasterAdapterOptions {
   layers?: string;
   format?: 'image/png' | 'image/jpeg' | string;
@@ -288,11 +358,17 @@ export interface WmsAdapterOptions extends RasterAdapterOptions {
   transparent?: boolean;
 }
 
+/**
+ * @public
+ */
 export interface ImageAdapterOptions extends WmsAdapterOptions {
   /** @deprecated use `layer` option instead */
   resourceId?: string | number;
 }
 
+/**
+ * @public
+ */
 export interface LayerAdapters {
   [name: string]: MainLayerAdapter;
   MVT: VectorLayerAdapter;
@@ -303,6 +379,9 @@ export interface LayerAdapters {
   GEOJSON: VectorLayerAdapter<any, any, GeoJsonAdapterOptions>;
 }
 
+/**
+ * @public
+ */
 export interface LayerAdaptersOptions {
   [name: string]: AdapterOptions;
   MVT: MvtAdapterOptions;
@@ -313,16 +392,25 @@ export interface LayerAdaptersOptions {
   GEOJSON: GeoJsonAdapterOptions;
 }
 
+/**
+ * @public
+ */
 export interface LayerDefinition<F extends Feature = Feature, L = any> {
   layer?: L;
   feature?: F;
   visible?: boolean;
 }
 
+/**
+ * @public
+ */
 export type CallbackFilter<F extends Feature = Feature, L = any> = (
   opt: LayerDefinition<F, L>
 ) => boolean;
 
+/**
+ * @public
+ */
 export interface FilterOptions {
   limit?: number;
   fields?: string[];
@@ -339,17 +427,26 @@ export interface FilterOptions {
   orderBy?: string[];
 }
 
+/**
+ * @public
+ */
 export type DataLayerFilter<
   F extends Feature = Feature,
   L = any
 > = CallbackFilter<F, L>;
 
+/**
+ * @public
+ */
 export type LayerAdapter<
   M = any,
   L = any,
   O extends AdapterOptions = AdapterOptions
 > = MainLayerAdapter<M, L, O> | VectorLayerAdapter<M, L, O>;
 
+/**
+ * @public
+ */
 export interface MainLayerAdapter<
   M = any,
   L = any,
@@ -376,36 +473,113 @@ export interface MainLayerAdapter<
   getDependLayers?(): L[];
 }
 
+/**
+ * Adapter for vector data display control.
+ * @public
+ */
 export interface VectorLayerAdapter<
   M = any,
   L = any,
   O extends VectorAdapterOptions = VectorAdapterOptions,
   F extends Feature = Feature
 > extends MainLayerAdapter<M, L, O> {
+  /** True if there are selected features in the layer  */
   selected?: boolean;
+
+  /**
+   * Experimental option, only for MVT. Points to a data source instead of loading data into a layer.
+   * @alpha
+   */
   source?: unknown;
-
+  /**
+   * Allows to get all vector objects of the layer. Does not work for vector tiles.
+   */
   getLayers?(): LayerDefinition<F, L>[];
-
+  /**
+   * Method for selecting objects on the map. The `selectedPaint` option will be applied to the selected objects.
+   * @remarks
+   * It is strongly recommended to use an `PtropertiesFilter` expression to set selected objects,
+   * since the selecting by the callback function is not supported by vector tiles and other asynchronous adapters.
+   */
   select?(findFeatureCb?: DataLayerFilter<F, L> | PropertiesFilter): void;
+  /**
+   * Deselect all objects in the vector layer.
+   *
+   * @remarks
+   * The parameter `findFeatureCb` is deprecated and will be deleted soon.
+   * Instead, it’s better to deselect all and select again.
+   */
   unselect?(findFeatureCb?: DataLayerFilter<F, L> | PropertiesFilter): void;
+  /**
+   * Get the selected objects of the vector layer.
+   */
   getSelected?(): LayerDefinition<Feature, L>[];
-
+  /**
+   * Get the filtered objects of the vector layer.
+   */
   getFiltered?(): LayerDefinition<Feature, L>[];
+  /**
+   * Ability to filter a layer with a callback function.
+   * It is necessary for the adapter to provide access to the layer objects before output to the map.
+   * It is not possible to apply such a filter to vector tiles and data on the remote server.
+   * So, where possible, use the {@link VectorLayerAdapter.propertiesFilter}.
+   * @example
+   * ```js
+   * layer.filter((e) => e.feature.properties.id === 2011);
+   * // but in this case it’s better to do so:
+   * layer.propertiesFilter([['id', 'eq', 2011]])
+   * ```
+   */
   filter?(cb: DataLayerFilter<F, L>): Array<LayerDefinition<Feature, L>>;
+  /**
+   * The way to filter layer objects through serializable expressions.
+   * To clear the filter, pass `null` or `undefined` as the second parameter.
+   * @param filters - Filter, conforming to the PropertiesFilter expression specification's.
+   * @param options - Options object.
+   * @example
+   * ```js
+   * layer.propertiesFilter(['all', ['color', 'eq', 'green'], ['year', 'gt', 2011]]);
+   * layer.propertiesFilter([[
+   *   'any',
+   *   ['color', 'eq', 'green'],
+   *   ['color', 'eq', 'red']
+   * ],
+   *   ['year', 'gt', 2011]
+   * ]);
+   * ```
+   */
   propertiesFilter?(filters: PropertiesFilter, options?: FilterOptions): void;
+  /**
+   * Cancel the filter, return all objects to the map.
+   */
   removeFilter?(): void;
-
-  addData?(data: GeoJsonObject): void;
+  /**
+   * Add GeoJson data to layer.
+   * @param geojson GeoJson object.
+   */
+  addData?(geojson: GeoJsonObject): void;
+  /**
+   * Update layer with new geojson.
+   * @param geojson GeoJson object.
+   */
+  setData?(geojson: GeoJsonObject): void;
+  /**
+   * Remove layer data.
+   * @param cb - Delete only those objects that match the filter.
+   */
   clearLayer?(cb?: (feature: Feature) => boolean): void;
-  setData?(data: GeoJsonObject): void;
-
-  onLayerClick?(opt: OnLayerClickOptions): Promise<any>;
+  /**
+   * Callback function that will be called when clicking on a layer.
+   * @param event - Data that is transmitted when you click on a layer.
+   * @internal
+   */
+  onLayerClick?(event: OnLayerClickOptions): Promise<any>;
 
   openPopup?(
     findFeatureCb?: DataLayerFilter<F, L>,
     options?: PopupOptions
   ): void;
+
   closePopup?(findFeatureCb?: DataLayerFilter<F, L>): void;
 
   updateTooltip?(layerDef?: LayerDefinition<F, L>): void;

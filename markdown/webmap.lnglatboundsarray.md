@@ -4,7 +4,7 @@
 
 ## LngLatBoundsArray type
 
-Array of coordinates, measured in degrees, in \[west, south, east, north\] order. https://tools.ietf.org/html/rfc7946\#section-5
+Array of coordinates, measured in degrees, in \[west, south, east, north\] order. [GeoJSON standard](https://tools.ietf.org/html/rfc7946#section-5)
 
 <b>Signature:</b>
 

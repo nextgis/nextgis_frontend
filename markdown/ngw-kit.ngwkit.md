@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare class NgwKit implements StarterKit 
+declare class NgwKit implements StarterKit 
 ```
 
 ## Constructors

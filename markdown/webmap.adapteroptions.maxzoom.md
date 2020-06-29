@@ -4,6 +4,8 @@
 
 ## AdapterOptions.maxZoom property
 
+Maximum zoom level of the map.
+
 <b>Signature:</b>
 
 ```typescript

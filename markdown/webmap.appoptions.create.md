@@ -4,7 +4,7 @@
 
 ## AppOptions.create property
 
-Аutomatic creation of a map from the constructor  false
+Аutomatic creation of a map from the constructor
 
 <b>Signature:</b>
 

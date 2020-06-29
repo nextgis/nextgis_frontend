@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface CirclePaint extends BasePaint 
+export declare interface CirclePaint extends BasePaint 
 ```
 
 ## Properties

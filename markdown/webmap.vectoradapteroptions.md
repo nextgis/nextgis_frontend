@@ -4,6 +4,7 @@
 
 ## VectorAdapterOptions interface
 
+
 <b>Signature:</b>
 
 ```typescript
@@ -16,27 +17,22 @@ export interface VectorAdapterOptions<F extends Feature = Feature, L = any> exte
 |  --- | --- | --- |
 |  [cluster](./webmap.vectoradapteroptions.cluster.md) | boolean |  |
 |  [clusterMaxZoom](./webmap.vectoradapteroptions.clustermaxzoom.md) | number | Max zoom to cluster points on |
-|  [clusterRadius](./webmap.vectoradapteroptions.clusterradius.md) | number | Radius of each cluster when clustering points  50 |
+|  [clusterRadius](./webmap.vectoradapteroptions.clusterradius.md) | number | Radius of each cluster when clustering points |
 |  [featureIdName](./webmap.vectoradapteroptions.featureidname.md) | string |  |
 |  [filter](./webmap.vectoradapteroptions.filter.md) | [DataLayerFilter](./webmap.datalayerfilter.md) |  |
 |  [interactive](./webmap.vectoradapteroptions.interactive.md) | boolean |  |
 |  [label](./webmap.vectoradapteroptions.label.md) | (e: [LayerDefinition](./webmap.layerdefinition.md)<!-- -->&lt;F, L&gt;) =&gt; void \| string |  |
 |  [labelField](./webmap.vectoradapteroptions.labelfield.md) | string |  |
-|  [layout](./webmap.vectoradapteroptions.layout.md) | any |  |
 |  [multiselect](./webmap.vectoradapteroptions.multiselect.md) | boolean | Indicates whether several objects can be selected in one layer. |
-|  [nativeFilter](./webmap.vectoradapteroptions.nativefilter.md) | unknown |  |
 |  [nativeOptions](./webmap.vectoradapteroptions.nativeoptions.md) | Record&lt;string, any&gt; |  |
-|  [nativePaint](./webmap.vectoradapteroptions.nativepaint.md) | boolean \| Record&lt;string, any&gt; |  |
 |  [paint](./webmap.vectoradapteroptions.paint.md) | Paint | Determine the appearance of the vector data geometries. |
 |  [popup](./webmap.vectoradapteroptions.popup.md) | boolean |  |
 |  [popupOnSelect](./webmap.vectoradapteroptions.popuponselect.md) | boolean |  |
 |  [popupOptions](./webmap.vectoradapteroptions.popupoptions.md) | [PopupOptions](./webmap.popupoptions.md) |  |
 |  [propertiesFilter](./webmap.vectoradapteroptions.propertiesfilter.md) | PropertiesFilter |  |
 |  [selectable](./webmap.vectoradapteroptions.selectable.md) | boolean | Determines whether objects are selected by mouse click. |
-|  [selectedLayout](./webmap.vectoradapteroptions.selectedlayout.md) | any |  |
 |  [selectedPaint](./webmap.vectoradapteroptions.selectedpaint.md) | Paint | The paint that applies to the features after it becomes selected. |
 |  [selectOnHover](./webmap.vectoradapteroptions.selectonhover.md) | boolean | Make the feature selected while mouseover. |
-|  [source](./webmap.vectoradapteroptions.source.md) | unknown |  |
 |  [type](./webmap.vectoradapteroptions.type.md) | [VectorAdapterLayerType](./webmap.vectoradapterlayertype.md) | Type for geometries painting, for each layer may be only one of: <code>point</code>, <code>polygon</code> or <code>line</code>. |
 |  [unselectOnSecondClick](./webmap.vectoradapteroptions.unselectonsecondclick.md) | boolean | Deselects layer feature by second click. |
 

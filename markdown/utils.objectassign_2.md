@@ -9,7 +9,7 @@ Copy the values of all of the enumerable own properties from one or more source 
 <b>Signature:</b>
 
 ```typescript
-export declare function assign<T, U, V, W>(target: T, source1: U, source2: V, source3: W): T & U & V & W;
+export declare function objectAssign<T, U, V, W>(target: T, source1: U, source2: V, source3: W): T & U & V & W;
 ```
 
 ## Parameters

@@ -41,7 +41,7 @@ export interface PinPaint extends BasePaint {
    * Place font to assets and set ASSET_PATH local or from cdn
    *
    * https://github.com/CesiumGS/cesium/blob/master/Source/Core/PinBuilder.js
-   * @default maki
+   * @defaultValue maki
    */
   iconfont?: 'maki' | 'mdi' | 'md' | 'fa';
   icon?: string | Expression | IconPaint;

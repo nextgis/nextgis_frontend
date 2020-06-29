@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare class NgwUploader 
+declare class NgwUploader 
 ```
 
 ## Constructors

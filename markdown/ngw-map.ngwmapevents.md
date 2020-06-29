@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface NgwMapEvents extends WebMapEvents 
+export declare interface NgwMapEvents extends WebMapEvents 
 ```
 
 ## Properties
@@ -15,7 +15,7 @@ export interface NgwMapEvents extends WebMapEvents
 |  Property | Type | Description |
 |  --- | --- | --- |
 |  ["controls:create"](./ngw-map.ngwmapevents._controls_create_.md) | any |  |
-|  ["ngw-map:create"](./ngw-map.ngwmapevents._ngw-map_create_.md) | [NgwMap](./ngw-map.ngwmap.md) |  |
+|  ["ngw-map:create"](./ngw-map.ngwmapevents._ngw-map_create_.md) | NgwMap |  |
 |  ["ngw:preselect"](./ngw-map.ngwmapevents._ngw_preselect_.md) | void |  |
 |  ["ngw:select"](./ngw-map.ngwmapevents._ngw_select_.md) | NgwIdentify \| null |  |
 

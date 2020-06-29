@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface LoadScriptOptions 
+export declare interface LoadScriptOptions 
 ```
 
 ## Properties

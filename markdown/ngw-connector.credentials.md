@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface Credentials 
+export declare interface Credentials 
 ```
 
 ## Properties

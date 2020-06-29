@@ -4,7 +4,7 @@
 
 ## AdapterOptions.visibility property
 
-Show layer on the map immediately after adding.  false
+Show layer on the map immediately after adding. Such layers are always under others. Only one base layer can be displayed on the map at a time.
 
 <b>Signature:</b>
 

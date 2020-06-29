@@ -2,7 +2,7 @@ import { CancelError } from './CancelError';
 
 type Reject = (reason?: any) => void;
 type Resolve = (value?: any) => void;
-type OnCancelFunction = (cancelHandler: () => void) => void;
+export type OnCancelFunction = (cancelHandler: () => void) => void;
 
 const handleCallback = <T = never>(
   resolve: Resolve,

@@ -4,6 +4,7 @@
 
 ## MapOptions interface
 
+
 <b>Signature:</b>
 
 ```typescript
@@ -14,7 +15,7 @@ export interface MapOptions
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [bounds](./webmap.mapoptions.bounds.md) | [LngLatBoundsArray](./webmap.lnglatboundsarray.md) | Initial extent of the map, array of degrees in \[\_west\_, \_south\_, \_east\_, \_north\_\] order. Overrides the <code>center</code> and <code>zoom</code> parameters. \[LngLatBoundsArray\](webmap\#LngLatBoundsArray) |
+|  [bounds](./webmap.mapoptions.bounds.md) | [LngLatBoundsArray](./webmap.lnglatboundsarray.md) | Initial extent of the map, array of degrees in \[\_west\_, \_south\_, \_east\_, \_north\_\] order. |
 |  [center](./webmap.mapoptions.center.md) | [LngLatArray](./webmap.lnglatarray.md) | Initial position of the map, array of two degrees \[longitude, latitude\]. \[LngLatArray\](webmap-api\#LngLatArray) |
 |  [fitOptions](./webmap.mapoptions.fitoptions.md) | [FitOptions](./webmap.fitoptions.md) | options to specify the initial position of the map |
 |  [mapAdapterOptions](./webmap.mapoptions.mapadapteroptions.md) | Record&lt;string, any&gt; | special settings for the selected map adapter |

@@ -4,6 +4,7 @@
 
 ## FilterOptions interface
 
+
 <b>Signature:</b>
 
 ```typescript

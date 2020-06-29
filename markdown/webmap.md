@@ -8,7 +8,7 @@ The library that allows to use a single interface for managing various interacti
 
 ## Remarks
 
-The following adapters are available: , ,  and experimental .
+The following adapters are available: [@nextgis/leaflet-map-adapter](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/leaflet-map-adapter)<!-- -->, [@nextgis/ol-map-adapter](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/ol-map-adapter)<!-- -->, [@nextgis/mapbox-map-adapter](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/mapboxgl-map-adapter) and experimental [@nextgis/cesium-map-adapter](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/cesium-map-adapter)<!-- -->.
 
 ## Example
 
@@ -36,22 +36,22 @@ const webMap = new WebMap({
 
 |  Class | Description |
 |  --- | --- |
-|  [WebMap](./webmap.webmap.md) | The core component for managing map adapters. It contains methods for adding and manipulation with map layers and controls. |
+|  [WebMap](./webmap.webmap.md) | The core component for managing map adapters. It contains methods for adding and manipulation with [map](./webmap.webmapmain.md)<!-- -->, [layers](./webmap.webmaplayers.md) and . |
+|  [WebMapControls](./webmap.webmapcontrols.md) |  |
+|  [WebMapLayers](./webmap.webmaplayers.md) |  |
+|  [WebMapMain](./webmap.webmapmain.md) |  |
 
 ## Interfaces
 
 |  Interface | Description |
 |  --- | --- |
-|  [AdapterOptions](./webmap.adapteroptions.md) |  |
+|  [AdapterOptions](./webmap.adapteroptions.md) | Parameters that can be used to create any map layer adapter. |
 |  [AppOptions](./webmap.appoptions.md) |  |
 |  [AttributionControlOptions](./webmap.attributioncontroloptions.md) |  |
-|  [BaseLayerAdapter](./webmap.baselayeradapter.md) |  |
 |  [BaseMapEvents](./webmap.basemapevents.md) |  |
 |  [ButtonControlOptions](./webmap.buttoncontroloptions.md) |  |
 |  [CreateControlOptions](./webmap.createcontroloptions.md) |  |
 |  [DataLoadError](./webmap.dataloaderror.md) |  |
-|  [DialogAdapter](./webmap.dialogadapter.md) |  |
-|  [DialogAdapterOptions](./webmap.dialogadapteroptions.md) |  |
 |  [FilterOptions](./webmap.filteroptions.md) |  |
 |  [FitOptions](./webmap.fitoptions.md) | Parameters that control how the fit to object will be work. |
 |  [GeoJsonAdapterOptions](./webmap.geojsonadapteroptions.md) |  |
@@ -67,6 +67,7 @@ const webMap = new WebMap({
 |  [LocateOptions](./webmap.locateoptions.md) |  |
 |  [LocationEvent](./webmap.locationevent.md) |  |
 |  [LocationEvents](./webmap.locationevents.md) |  |
+|  [MainLayerAdapter](./webmap.mainlayeradapter.md) |  |
 |  [MapAdapter](./webmap.mapadapter.md) | Parameters and methods that control the behavior of the map and the layers on it. |
 |  [MapAdapterEvents](./webmap.mapadapterevents.md) |  |
 |  [MapClickEvent](./webmap.mapclickevent.md) | Parameters passed to the arguments of the callback function when clicking on the map |
@@ -102,14 +103,13 @@ const webMap = new WebMap({
 |  [CallbackFilter](./webmap.callbackfilter.md) |  |
 |  [ControlPosition](./webmap.controlposition.md) |  |
 |  [ControlPositions](./webmap.controlpositions.md) |  |
-|  [Cursor](./webmap.cursor.md) | Available cursor names from https://developer.mozilla.org/ru/docs/Web/CSS/cursor  |
 |  [DataLayerFilter](./webmap.datalayerfilter.md) |  |
 |  [HtmlDef](./webmap.htmldef.md) |  |
 |  [LayerAdapter](./webmap.layeradapter.md) |  |
 |  [LayerAdapterDefinition](./webmap.layeradapterdefinition.md) |  |
 |  [LayerDef](./webmap.layerdef.md) | Available argument types for methods with map layers identification. |
 |  [LngLatArray](./webmap.lnglatarray.md) | Array of two numbers representing longitude and latitude. |
-|  [LngLatBoundsArray](./webmap.lnglatboundsarray.md) | Array of coordinates, measured in degrees, in \[west, south, east, north\] order. https://tools.ietf.org/html/rfc7946\#section-5 |
+|  [LngLatBoundsArray](./webmap.lnglatboundsarray.md) | Array of coordinates, measured in degrees, in \[west, south, east, north\] order. [GeoJSON standard](https://tools.ietf.org/html/rfc7946#section-5) |
 |  [OnBeforeLayerAdd](./webmap.onbeforelayeradd.md) |  |
 |  [OnClick](./webmap.onclick.md) |  |
 |  [VectorAdapterLayerType](./webmap.vectoradapterlayertype.md) |  |

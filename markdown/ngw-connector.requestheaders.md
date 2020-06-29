@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface RequestHeaders 
+export declare interface RequestHeaders 
 ```
 
 ## Properties

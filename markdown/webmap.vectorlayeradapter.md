@@ -4,10 +4,11 @@
 
 ## VectorLayerAdapter interface
 
+
 <b>Signature:</b>
 
 ```typescript
-export interface VectorLayerAdapter<M = any, L = any, O extends VectorAdapterOptions = VectorAdapterOptions, F extends Feature = Feature> extends BaseLayerAdapter<M, L, O> 
+export interface VectorLayerAdapter<M = any, L = any, O extends VectorAdapterOptions = VectorAdapterOptions, F extends Feature = Feature> extends MainLayerAdapter<M, L, O> 
 ```
 
 ## Properties

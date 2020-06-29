@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface RasterLayerSourceOptions 
+export declare interface RasterLayerSourceOptions 
 ```
 
 ## Properties

@@ -17,6 +17,6 @@ constructor(name: string, item: Item, options: O);
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  name | string |  |
-|  item | [Item](./item.item.md) |  |
+|  item | Item |  |
 |  options | O |  |
 

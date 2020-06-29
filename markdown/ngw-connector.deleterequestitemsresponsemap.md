@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface DeleteRequestItemsResponseMap extends RequestItemKeys 
+export declare interface DeleteRequestItemsResponseMap extends RequestItemKeys 
 ```
 
 ## Properties

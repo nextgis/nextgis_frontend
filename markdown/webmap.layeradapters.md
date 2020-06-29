@@ -4,6 +4,7 @@
 
 ## LayerAdapters interface
 
+
 <b>Signature:</b>
 
 ```typescript
@@ -15,9 +16,9 @@ export interface LayerAdapters
 |  Property | Type | Description |
 |  --- | --- | --- |
 |  [GEOJSON](./webmap.layeradapters.geojson.md) | [VectorLayerAdapter](./webmap.vectorlayeradapter.md)<!-- -->&lt;any, any, [GeoJsonAdapterOptions](./webmap.geojsonadapteroptions.md)<!-- -->&gt; |  |
-|  [IMAGE](./webmap.layeradapters.image.md) | [BaseLayerAdapter](./webmap.baselayeradapter.md)<!-- -->&lt;any, any, [ImageAdapterOptions](./webmap.imageadapteroptions.md)<!-- -->&gt; |  |
+|  [IMAGE](./webmap.layeradapters.image.md) | [MainLayerAdapter](./webmap.mainlayeradapter.md)<!-- -->&lt;any, any, [ImageAdapterOptions](./webmap.imageadapteroptions.md)<!-- -->&gt; |  |
 |  [MVT](./webmap.layeradapters.mvt.md) | [VectorLayerAdapter](./webmap.vectorlayeradapter.md) |  |
-|  [OSM](./webmap.layeradapters.osm.md) | [BaseLayerAdapter](./webmap.baselayeradapter.md) |  |
-|  [TILE](./webmap.layeradapters.tile.md) | [BaseLayerAdapter](./webmap.baselayeradapter.md)<!-- -->&lt;any, any, [TileAdapterOptions](./webmap.tileadapteroptions.md)<!-- -->&gt; |  |
-|  [WMS](./webmap.layeradapters.wms.md) | [BaseLayerAdapter](./webmap.baselayeradapter.md)<!-- -->&lt;any, any, [WmsAdapterOptions](./webmap.wmsadapteroptions.md)<!-- -->&gt; |  |
+|  [OSM](./webmap.layeradapters.osm.md) | [MainLayerAdapter](./webmap.mainlayeradapter.md) |  |
+|  [TILE](./webmap.layeradapters.tile.md) | [MainLayerAdapter](./webmap.mainlayeradapter.md)<!-- -->&lt;any, any, [TileAdapterOptions](./webmap.tileadapteroptions.md)<!-- -->&gt; |  |
+|  [WMS](./webmap.layeradapters.wms.md) | [MainLayerAdapter](./webmap.mainlayeradapter.md)<!-- -->&lt;any, any, [WmsAdapterOptions](./webmap.wmsadapteroptions.md)<!-- -->&gt; |  |
 

@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface RespError 
+export declare interface RespError 
 ```
 
 ## Properties

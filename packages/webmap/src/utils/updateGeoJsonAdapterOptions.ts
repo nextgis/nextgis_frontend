@@ -5,12 +5,18 @@ import {
 } from '../interfaces/LayerAdapter';
 import { detectGeometryType } from './geometryTypes';
 
+/**
+ * @internal
+ */
 export const paintTypeAlias: Record<VectorAdapterLayerType, any> = {
   polygon: 'path',
   line: 'path',
   point: 'circle',
 };
 
+/**
+ * @internal
+ */
 export const typeAlias: { [x: string]: VectorAdapterLayerType } = {
   Point: 'point',
   LineString: 'line',
@@ -20,6 +26,9 @@ export const typeAlias: { [x: string]: VectorAdapterLayerType } = {
   MultiPolygon: 'polygon',
 };
 
+/**
+ * @internal
+ */
 export function updateGeoJsonAdapterOptions(
   opt: GeoJsonAdapterOptions
 ): GeoJsonAdapterOptions {

@@ -3,10 +3,10 @@
  *
  * @remarks
  * The following adapters are available:
- * {@link @nextgis/leaflet-map-adapter},
- * {@link @nextgis/ol-map-adapter},
- * {@link @nextgis/mapbox-map-adapter}
- * and experimental {@link @nextgis/cesium-map-adapter}.
+ * {@link https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/leaflet-map-adapter | @nextgis/leaflet-map-adapter},
+ * {@link https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/ol-map-adapter | @nextgis/ol-map-adapter},
+ * {@link https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/mapboxgl-map-adapter | @nextgis/mapbox-map-adapter}
+ * and experimental {@link https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/cesium-map-adapter | @nextgis/cesium-map-adapter}.
  *
  * @example
  * ```js
@@ -25,6 +25,15 @@
  *   mapAdapter: new MapAdapter(),
  *   mapOptions: { target: 'map' }
  * });
+ *
+ * console.log(!!webMap.mapAdapter.map); // false
+ * webMap.onLoad().then(() => {
+ *   console.log(webMap.mapAdapter.map); // true
+ *
+ *   webMap.addLayer('GEOJSON').then((layer) => {
+ *     webMap.setLayerData(layer, geojson)
+ *   });
+ * });
  * ```
  *
  * @packageDocumentation
@@ -34,6 +43,8 @@ import { WebMap } from './WebMap';
 
 export * from './WebMap';
 export * from './WebMapLayers';
+export * from './WebMapControls';
+export * from './WebMapMain';
 export * from './interfaces/Events';
 export * from './interfaces/BaseTypes';
 export * from './interfaces/WebMapApp';
@@ -41,7 +52,6 @@ export * from './interfaces/MapAdapter';
 export * from './interfaces/MapControl';
 export * from './interfaces/StarterKit';
 export * from './interfaces/LayerAdapter';
-export * from './interfaces/DialogAdapter';
 export * from './interfaces/RuntimeParams';
 
 export { WebMap };

@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface QmsBasemap 
+export declare interface QmsBasemap 
 ```
 
 ## Properties
