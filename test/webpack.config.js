@@ -14,21 +14,21 @@ module.exports = (opt = { coverage: false }) => {
         {
           loader: 'ts-loader',
           options: {
-            transpileOnly: true
-          }
-        }
+            transpileOnly: true,
+          },
+        },
       ],
-      exclude: [/node_modules/]
+      exclude: [/node_modules/],
       // include
     },
     {
       test: /\.css$/,
-      use: [{ loader: 'css-loader', options: { sourceMap: true } }]
+      use: [{ loader: 'css-loader', options: { sourceMap: true } }],
     },
     {
       test: /\.(jpe?g|png|ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
-      use: 'base64-inline-loader?limit=1000&name=[name].[ext]'
-    }
+      use: 'base64-inline-loader?limit=1000&name=[name].[ext]',
+    },
   ];
   if (opt.coverage) {
     rules.push({
@@ -37,8 +37,8 @@ module.exports = (opt = { coverage: false }) => {
       enforce: 'post',
       use: {
         loader: 'istanbul-instrumenter-loader',
-        options: { esModules: true }
-      }
+        options: { esModules: true },
+      },
     });
   }
   return {
@@ -46,10 +46,10 @@ module.exports = (opt = { coverage: false }) => {
     devtool: 'inline-source-map',
     resolve: {
       extensions: ['.js', '.ts', '.json'],
-      alias
+      alias,
     },
     module: {
-      rules
-    }
+      rules,
+    },
   };
 };

@@ -83,7 +83,7 @@ export interface NgwMapOptions<C = any> extends MapOptions {
    * It can be defined as a string, then points to the corresponding entry in the
    * [controlAdapters](webmap-api#MapAdapter).
    *
-   * @default ['ZOOM', 'ATTRIBUTION']
+   * @defaultValue ['ZOOM', 'ATTRIBUTION']
    *
    * @example
    * ```javascript
@@ -115,7 +115,7 @@ export interface NgwMapOptions<C = any> extends MapOptions {
   /**
    * Get information from NGW webmap layers by click.
    *
-   * @default false
+   * @defaultValue false
    */
   identification?: boolean;
   whitlabel?: boolean;

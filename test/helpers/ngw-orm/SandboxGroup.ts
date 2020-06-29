@@ -1,4 +1,4 @@
-import { ResourceGroup, NgwResource } from '../../../packages/ngw-orm/src';
+import { ResourceGroup, NgwResource } from '@nextgis/ngw-orm';
 
 @NgwResource({
   type: 'resource_group',

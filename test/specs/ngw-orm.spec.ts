@@ -3,7 +3,7 @@ import {
   Connection,
   BaseResource,
   getMetadataArgsStorage,
-} from '../../packages/ngw-orm/src';
+} from '@nextgis/ngw-orm/src';
 import { SandboxGroup } from '../helpers/ngw-orm/SandboxGroup';
 import { SandboxPointLayer } from '../helpers/ngw-orm/SandboxPointLayer';
 
@@ -62,12 +62,18 @@ describe('NgwOrm', () => {
       const clone = getMetadataArgsStorage().resources.find((x) => {
         return x.display_name === 'Resource Group Clone';
       });
-      const Clone = clone.target as typeof BaseResource;
-      const id = Clone.item.resource.id;
-      await connection.deleteResource(Clone);
-      expect(Clone.item).to.be.undefined;
-      const afterDelete = await connection.getResource(id);
-      expect(afterDelete).to.be.undefined;
+      expect(clone).to.be.exist;
+      if (clone) {
+        const Clone = clone.target as typeof BaseResource;
+        expect(Clone.item).to.be.exist;
+        if (Clone.item) {
+          const id = Clone.item.resource.id;
+          await connection.deleteResource(Clone);
+          expect(Clone.item).to.be.undefined;
+          const afterDelete = await connection.getResource(id);
+          expect(afterDelete).to.be.undefined;
+        }
+      }
     });
   });
 
@@ -90,10 +96,39 @@ describe('NgwOrm', () => {
             parent: SandboxGroup,
           }
         );
-        expect(point.item).to.be.exist;
-        if (point.item) {
-          expect(point.item.feature_layer.fields.length).to.be.eq(1);
+        expect(point).to.be.exist;
+        if (point) {
+          expect(point.item).to.be.exist;
+          if (point.item) {
+            expect(point.item.feature_layer).to.be.exist;
+            expect(point.item?.feature_layer?.fields.length).to.be.eq(1);
+          }
         }
+      }
+    });
+    it(`create feature`, async () => {
+      const connection = await getConnection();
+      if (SandboxGroup.item) {
+        const Point = await connection.getOrCreateResource(SandboxPointLayer, {
+          parent: SandboxGroup,
+        });
+        const p = new Point();
+        p.test = 'test';
+        p.geom = { type: 'Point', coordinates: [104, 52] };
+
+        await p.save();
+
+        expect(p.id).to.eq(1);
+
+        const ngwFeature = await connection.driver.get(
+          'feature_layer.feature.item',
+          null,
+          {
+            id: Point.item.resource.id,
+            fid: p.id,
+          }
+        );
+        expect(ngwFeature.id).to.eq(1);
       }
     });
   });

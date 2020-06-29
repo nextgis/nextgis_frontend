@@ -11,7 +11,7 @@ import { baseMapTests, MapAdapterCreateOptions } from './baseMapTests';
 import { webMapLayersTests } from './webMapLayersTests';
 import { FakeLayerAdapter } from '../classes/FakeLayerAdapter';
 
-export function createWebMap(MA: Type<MapAdapter>, options?: AppOptions) {
+export function createWebMap(MA: Type<MapAdapter>, options?: AppOptions): any {
   return new WebMap({ mapAdapter: new MA(), ...options });
 }
 
@@ -32,7 +32,7 @@ export const webMapTests = <W extends WebMap = WebMap>(
   MA: Type<MapAdapter>,
   webMapName = 'WebMap',
   createWebMap_?: (MA: Type<MapAdapter>, options?: AppOptions) => W
-) => {
+): any => {
   const adapterName = MA.name;
 
   const _buildWebMap = async (

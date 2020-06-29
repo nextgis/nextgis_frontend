@@ -6,59 +6,124 @@ import {
   OnLayerSelectOptions,
 } from './LayerAdapter';
 
+/**
+ * @public
+ */
 export interface WebMapEvents extends BaseMapEvents {
-  /** @event */
+  /**
+   * @eventProperty
+   */
   create: WebMap;
-  /** @event */
+  /**
+   * @eventProperty
+   */
   'build-map': MapAdapter;
-  /** @event */
+  /**
+   * @eventProperty
+   */
   'layer:preadd': LayerAdapter;
-  /** @event */
+  /**
+   * @eventProperty
+   */
   'layer:add': LayerAdapter;
-  /** @event */
+  /**
+   * @eventProperty
+   */
   'layer:preremove': LayerAdapter;
-  /** @event */
+  /**
+   * @eventProperty
+   */
   'layer:remove': LayerAdapter;
-  /** @event */
+  /**
+   * @eventProperty
+   */
   'layer:updated': LayerAdapter;
-  /** @event */
+  /**
+   * @eventProperty
+   */
   'layer:preshow': LayerAdapter;
-  /** @event */
+  /**
+   * @eventProperty
+   */
   'layer:show': LayerAdapter;
-  /** @event */
+  /**
+   * @eventProperty
+   */
   'layer:prehide': LayerAdapter;
-  /** @event */
+  /**
+   * @eventProperty
+   */
   'layer:hide': LayerAdapter;
-  /** @event */
+  /**
+   * @eventProperty
+   */
   'layer:click': OnLayerClickOptions;
-  /** @event */
+  /**
+   * @eventProperty
+   */
   'layer:select': OnLayerSelectOptions;
 }
 
+/**
+ * @public
+ */
 export interface MapAdapterEvents extends BaseMapEvents {
-  /** @event */
+  /**
+   * @eventProperty
+   */
   'data-loaded': DataLoadError;
-  /** @event */
+  /**
+   * @eventProperty
+   */
   'data-error': DataLoadError;
-  /** @event */
+  /**
+   * @eventProperty
+   */
   create: MapAdapter;
 }
 
+/**
+ * @public
+ */
 export interface BaseMapEvents {
-  /** @event */
+  /**
+   * Fired before the map is clicked.
+   * @eventProperty
+   */
   preclick: MapClickEvent;
-  /** @event */
+  /**
+   * Fired every time a map is clicked.
+   * @eventProperty
+   */
   click: MapClickEvent;
-  /** @event */
+  /**
+   * Fired when the map zoom is about to change.
+   * @eventProperty
+   */
   zoomstart: MapAdapter;
-  /** @event */
+  /**
+   * Fired repeatedly during any change in zoom level
+   * @eventProperty
+   */
   zoom: MapAdapter;
-  /** @event */
+  /**
+   * Fired when the map has changed.
+   * @eventProperty
+   */
   zoomend: MapAdapter;
-  /** @event */
+  /**
+   * Fired when the view of the map starts changing (e.g. user starts dragging the map).
+   * @eventProperty
+   */
   movestart: MapAdapter;
-  /** @event */
+  /**
+   * Fired repeatedly during any movement of the map.
+   * @eventProperty
+   */
   move: MapAdapter;
-  /** @event */
+  /**
+   * Fired when the center of the map stops changing.
+   * @eventProperty
+   */
   moveend: MapAdapter;
 }
