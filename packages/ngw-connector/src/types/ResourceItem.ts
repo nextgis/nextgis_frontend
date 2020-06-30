@@ -194,13 +194,16 @@ interface File {
   size: number;
 }
 
-// Ngw api settings
-export interface ResourceItem {
-  [cls: string]: any;
+export interface ResourceItemMain {
   resource: Resource;
   resmeta: {
     items: Record<string, any>;
   };
+}
+
+// Ngw api settings
+export interface ResourceItem extends ResourceItemMain {
+  [cls: string]: any;
   webmap?: WebmapResource;
   feature_layer?: FeatureResource;
   vector_layer?: VectorLayer;
@@ -208,4 +211,9 @@ export interface ResourceItem {
   basemap_webmap?: BasemapWebmap;
   lookup_table?: LookupTableResource;
   file_bucket?: FileBucket;
+}
+
+export interface VectorLayerResourceItem extends ResourceItemMain {
+  vector_layer: VectorLayer;
+  feature_layer: FeatureResource;
 }
