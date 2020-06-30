@@ -3,7 +3,7 @@ import {
   Connection,
   BaseResource,
   getMetadataArgsStorage,
-} from '@nextgis/ngw-orm/src';
+} from '../../packages/ngw-orm/src';
 import { SandboxGroup } from '../helpers/ngw-orm/SandboxGroup';
 import { SandboxPointLayer } from '../helpers/ngw-orm/SandboxPointLayer';
 
@@ -75,61 +75,98 @@ describe('NgwOrm', () => {
         }
       }
     });
+
+    it('#receiveResource', async () => {
+      const connection = await getConnection();
+      const [Point, created] = await connection.getOrCreateResource(
+        SandboxPointLayer.clone({
+          display_name: 'Clone for test receiveResource method',
+        }),
+        {
+          parent: SandboxGroup,
+        }
+      );
+      const ReceivedPoint = (await connection.receiveResource<typeof Point>(
+        Point.item.resource.id
+      )) as typeof SandboxPointLayer;
+      expect(ReceivedPoint.item.resource.id).to.be.eq(Point.item.resource.id);
+
+      const p = new ReceivedPoint();
+      p.test = 'test';
+      p.geom = { type: 'Point', coordinates: [104, 52] };
+
+      await p.save();
+
+      expect(p.id).to.eq(1);
+
+      const ngwFeature = await connection.driver.get(
+        'feature_layer.feature.item',
+        null,
+        {
+          id: ReceivedPoint.item.resource.id,
+          fid: p.id,
+        }
+      );
+      expect(ngwFeature.fields.test).to.eq(p.test);
+    });
   });
 
   describe('VectorLayer', () => {
     it(`point`, async () => {
       const connection = await getConnection();
-      if (SandboxGroup.item) {
-        const point = await connection.getOrCreateResource(SandboxPointLayer, {
+
+      const [point, created] = await connection.getOrCreateResource(
+        SandboxPointLayer,
+        {
           parent: SandboxGroup,
-        });
-        expect(point).to.be.exist;
-      }
+        }
+      );
+      expect(point).to.be.exist;
     });
     it(`clone`, async () => {
       const connection = await getConnection();
-      if (SandboxGroup.item) {
-        const point = await connection.getOrCreateResource(
-          SandboxPointLayer.clone({ display_name: 'Clone of Point layer' }),
-          {
-            parent: SandboxGroup,
-          }
-        );
-        expect(point).to.be.exist;
-        if (point) {
-          expect(point.item).to.be.exist;
-          if (point.item) {
-            expect(point.item.feature_layer).to.be.exist;
-            expect(point.item?.feature_layer?.fields.length).to.be.eq(1);
-          }
+
+      const [point, created] = await connection.getOrCreateResource(
+        SandboxPointLayer.clone({ display_name: 'Clone of Point layer' }),
+        {
+          parent: SandboxGroup,
+        }
+      );
+      expect(point).to.be.exist;
+      if (point) {
+        expect(point.item).to.be.exist;
+        if (point.item) {
+          expect(point.item.feature_layer).to.be.exist;
+          expect(point.item?.feature_layer?.fields.length).to.be.eq(1);
         }
       }
     });
     it(`create feature`, async () => {
       const connection = await getConnection();
-      if (SandboxGroup.item) {
-        const Point = await connection.getOrCreateResource(SandboxPointLayer, {
+
+      const [Point, created] = await connection.getOrCreateResource(
+        SandboxPointLayer,
+        {
           parent: SandboxGroup,
-        });
-        const p = new Point();
-        p.test = 'test';
-        p.geom = { type: 'Point', coordinates: [104, 52] };
+        }
+      );
+      const p = new Point();
+      p.test = 'test';
+      p.geom = { type: 'Point', coordinates: [104, 52] };
 
-        await p.save();
+      await p.save();
 
-        expect(p.id).to.eq(1);
+      expect(p.id).to.eq(1);
 
-        const ngwFeature = await connection.driver.get(
-          'feature_layer.feature.item',
-          null,
-          {
-            id: Point.item.resource.id,
-            fid: p.id,
-          }
-        );
-        expect(ngwFeature.id).to.eq(1);
-      }
+      const ngwFeature = await connection.driver.get(
+        'feature_layer.feature.item',
+        null,
+        {
+          id: Point.item.resource.id,
+          fid: p.id,
+        }
+      );
+      expect(ngwFeature.id).to.eq(1);
     });
   });
 });
