@@ -1,6 +1,6 @@
 import { Geometry } from 'geojson';
 import { Type, DeepPartial } from '@nextgis/utils';
-import { GeometryType } from '@nextgis/ngw-connector';
+import { GeometryType, VectorLayerResourceItem } from '@nextgis/ngw-connector';
 // import { ResourceItem } from '@nextgis/ngw-connector';
 // import { objectAssign } from '@nextgis/utils';
 // import NgwConnector from '@nextgis/ngw-connector';
@@ -11,7 +11,7 @@ import { GeometryType } from '@nextgis/ngw-connector';
 // import { FindManyOptions } from '../find-options/FindManyOptions';
 // import { FindOneOptions } from '../find-options/FindOneOptions';
 import { BaseResource } from './BaseResource';
-import { getMetadataArgsStorage } from '..';
+import { getMetadataArgsStorage, Column } from '..';
 import { SyncOptions } from './SyncOptions';
 import { VectorResourceSyncItem } from '../sync-items/VectorResourceSyncItem';
 import { vectorResourceToNgw } from '../utils/vectorResourceToNgw';
@@ -30,6 +30,30 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
   static geometryType: GeometryType;
   id?: number;
   private _geom!: G;
+
+  static receive(item: VectorLayerResourceItem): typeof VectorLayer {
+    const ReceivedResource = BaseResource.receive(
+      item,
+      this
+    ) as typeof VectorLayer;
+    ReceivedResource.geometryType = item.vector_layer.geometry_type;
+    item.feature_layer.fields.forEach((x) => {
+      const prop = Object.defineProperty(
+        ReceivedResource.prototype,
+        x.keyname,
+        {
+          enumerable: true,
+          writable: true,
+        }
+      );
+      const column = Column({
+        ...x,
+      });
+      column(prop, x.keyname);
+    });
+
+    return ReceivedResource;
+  }
 
   static getNgwPayload(
     resource: Type<VectorLayer>,

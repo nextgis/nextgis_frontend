@@ -48,6 +48,21 @@ export class BaseResource {
   static connection?: Connection;
   static item?: ResourceItem;
 
+  static receive(
+    item: ResourceItem,
+    ResCls?: typeof BaseResource
+  ): typeof BaseResource {
+    ResCls = ResCls ?? this;
+    const options: NgwResourceOptions = {
+      display_name: item.resource.display_name,
+      type: item.resource.cls,
+    };
+    const decorator = NgwResource({ ...options });
+    const ReceivedResource = decorator(class extends ResCls {});
+    ReceivedResource.item = item;
+    return ReceivedResource;
+  }
+
   static clone(options: Partial<NgwResourceOptions> = {}): typeof BaseResource {
     const metadataArgsStorage = getMetadataArgsStorage();
     const table = metadataArgsStorage.filterTables(

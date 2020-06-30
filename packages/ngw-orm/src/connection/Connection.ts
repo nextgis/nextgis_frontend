@@ -11,6 +11,8 @@ import { getMetadataArgsStorage } from '..';
 import { ResourceMetadataArgs } from '../metadata-args/ResourceMetadataArgs';
 import { DeepPartial } from '../common/DeepPartial';
 import { ResourceSyncItem } from '../sync-items/ResourceSyncItem';
+import { NgwResource } from '../decorator/NgwResource';
+import { NgwResources } from '../ngw/NgwResources';
 
 /**
  * Connection is a single NGW connection.
@@ -72,6 +74,19 @@ export class Connection {
     return connection.connect();
   }
 
+  async receiveResource<P extends Record<string, any> = any>(
+    resource: ResourceDefinition
+  ): Promise<typeof BaseResource & P> {
+    const res = await this.getResourceItem(resource);
+    if (res) {
+      const ResourceClass = NgwResources.getResource(res);
+      const ReceivedResource = ResourceClass.receive(res);
+      ReceivedResource.connection = this;
+      return ReceivedResource as typeof BaseResource & P;
+    }
+    throw Error(`Can't receive resource from NGW`);
+  }
+
   async connect(): Promise<this> {
     // connect to the database via its driver
     await this.driver.connect();
@@ -80,16 +95,16 @@ export class Connection {
     return this;
   }
 
-  async getOrCreateResource(
-    Resource: typeof BaseResource,
+  async getOrCreateResource<P extends typeof BaseResource>(
+    Resource: P,
     options: SyncOptions
-  ): Promise<[typeof BaseResource, boolean]> {
+  ): Promise<[P, boolean]> {
     const [resource, isCreated] = await this._getOrCreateResource(
       Resource,
       options,
       true
     );
-    return [resource, isCreated];
+    return [resource as P, isCreated];
   }
 
   async createResource(
@@ -100,10 +115,19 @@ export class Connection {
     return resource;
   }
 
-  async getResource(
+  async getResourceItem(
     resource: ResourceDefinition | DeepPartial<Resource>
   ): Promise<ResourceItem | undefined> {
     return this.driver.getResource(resource);
+  }
+
+  /**
+   * @deprecated use getResourceItem instead
+   */
+  async getResource(
+    resource: ResourceDefinition | DeepPartial<Resource>
+  ): Promise<ResourceItem | undefined> {
+    return this.getResourceItem(resource);
   }
 
   async deleteResource(resource: typeof BaseResource): Promise<void> {
