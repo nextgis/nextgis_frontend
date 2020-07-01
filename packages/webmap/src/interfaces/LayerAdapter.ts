@@ -411,9 +411,17 @@ export type CallbackFilter<F extends Feature = Feature, L = any> = (
 /**
  * @public
  */
-export interface FilterOptions {
+export interface FilterOptions<Entity = any> {
+  /**
+   * Offset (paginated) where from entities should be taken.
+   */
+  offset?: number;
+
+  /**
+   * Limit (paginated) - max number of entities should be taken.
+   */
   limit?: number;
-  fields?: string[];
+  fields?: (keyof Entity)[];
   /** WKT polygon geometry */
   intersects?: string;
   strategy?: 'BBOX';
@@ -424,7 +432,7 @@ export interface FilterOptions {
    * { "orderBy": ["field1", "-field2" ]}
    * ```
    */
-  orderBy?: string[];
+  orderBy?: (keyof Entity)[] | string[];
 }
 
 /**

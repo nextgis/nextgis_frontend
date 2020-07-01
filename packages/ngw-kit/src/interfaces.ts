@@ -10,6 +10,7 @@ import WebMap, {
   LayerAdapter,
   MainLayerAdapter,
 } from '@nextgis/webmap';
+import { PropertiesFilter } from '@nextgis/properties-filter';
 import NgwConnector, {
   ResourceItem,
   LayerFeature,
@@ -330,4 +331,19 @@ export type GetClassAdapter = GetClassAdapterCallback | GetClassAdapterByType;
 export interface CompanyLogoOptions {
   padding?: string;
   cssClass?: string;
+}
+
+export interface FeatureRequestParams {
+  srs?: number;
+  fields?: string;
+  geom_format?: string;
+  limit?: number;
+  intersects?: string;
+  order_by?: string;
+}
+
+export interface GetNgwLayerItemsOptions {
+  resourceId: number;
+  connector: NgwConnector;
+  filters?: PropertiesFilter;
 }

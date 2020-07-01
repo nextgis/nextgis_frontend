@@ -1,5 +1,8 @@
 import { Geometry } from 'geojson';
+import { FilterOptions } from '@nextgis/webmap';
+import { PropertiesFilter } from '@nextgis/properties-filter';
 import { Type, DeepPartial } from '@nextgis/utils';
+import NgwKit, { GetNgwLayerItemsOptions } from '@nextgis/ngw-kit';
 import { GeometryType, VectorLayerResourceItem } from '@nextgis/ngw-connector';
 // import { ResourceItem } from '@nextgis/ngw-connector';
 // import { objectAssign } from '@nextgis/utils';
@@ -15,6 +18,12 @@ import { getMetadataArgsStorage, Column } from '..';
 import { SyncOptions } from './SyncOptions';
 import { VectorResourceSyncItem } from '../sync-items/VectorResourceSyncItem';
 import { vectorResourceToNgw } from '../utils/vectorResourceToNgw';
+import { ObjectType } from '../common/ObjectType';
+import { FindOneOptions } from '../find-options/FindOneOptions';
+import { FindConditions } from '../find-options/FindConditions';
+import { CannotExecuteNotConnectedError } from '../error/CannotExecuteNotConnectedError';
+import { FindManyOptions } from '../find-options/FindManyOptions';
+import { itemsToEntities, itemToEntity } from '../utils/itemsToEntities';
 // import { SyncOptions } from './SyncOptions';
 // import { Connection } from '../connection/Connection';
 // import { ConnectionOptions } from '../connection/ConnectionOptions';
@@ -204,15 +213,64 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
   // ): Promise<number> {
   //   return this.getRepository().count(optionsOrConditions as any);
   // }
-  // /**
-  //  * Finds entities that match given find options or conditions.
-  //  */
-  // static find<T extends VectorLayer>(
-  //   this: ObjectType<T>,
-  //   optionsOrConditions?: FindManyOptions<T> | FindConditions<T>
-  // ): Promise<T[]> {
-  //   return this.getRepository().find(optionsOrConditions as any);
-  // }
+  /**
+   * Finds entities that match given find options or conditions.
+   */
+  static async find<T extends VectorLayer>(
+    this: ObjectType<T>,
+    optionsOrConditions?: FindManyOptions<T> | PropertiesFilter<T>
+  ): Promise<T[]> {
+    const Resource = this as typeof VectorLayer;
+    const connection = Resource.connection;
+    if (!connection || !Resource.item) {
+      throw new CannotExecuteNotConnectedError();
+    }
+    const connector = connection.driver;
+    const options: GetNgwLayerItemsOptions & FilterOptions = {
+      connector,
+      resourceId: Resource.item.resource.id,
+    };
+
+    if (Array.isArray(optionsOrConditions)) {
+      options.filters = optionsOrConditions;
+    } else if (optionsOrConditions) {
+      const opt: FindManyOptions<T> = optionsOrConditions;
+      if (Array.isArray(opt.where)) {
+        options.filters = opt.where;
+      } else if (opt.where) {
+        options.filters = [
+          Object.entries(opt.where).map(([key, value]) => {
+            return [key, 'eq', value];
+          }),
+        ];
+      }
+      if (opt.fields) {
+        options.fields = opt.fields;
+      }
+      options.limit = opt.limit;
+      options.offset = opt.offset;
+      if (opt.order) {
+        const orderBy: string[] = [];
+        Object.entries(opt.order).forEach(([key, value]) => {
+          if (value) {
+            if (value === 'DESC' || value < 0) {
+              orderBy.push(`-${key}`);
+            } else {
+              orderBy.push(key);
+            }
+          }
+          options.orderBy = orderBy;
+        });
+      }
+    }
+
+    const items = await NgwKit.utils.getNgwLayerItems(options);
+    if (items) {
+      const entities = (await itemsToEntities(Resource, items)) as T[];
+      return entities;
+    }
+    return [];
+  }
   // /**
   //  * Finds entities by ids.
   //  * Optionally find options can be applied.
@@ -224,42 +282,64 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
   // ): Promise<T[]> {
   //   return this.getRepository().findByIds(ids, optionsOrConditions as any);
   // }
-  // /**
-  //  * Finds first entity that matches given conditions.
-  //  */
-  // static findOne<T extends VectorLayer>(
-  //   this: ObjectType<T>,
-  //   optionsOrConditions?:
-  //     | string
-  //     | number
-  //     | Date
-  //     | FindOneOptions<T>
-  //     | FindConditions<T>,
-  //   maybeOptions?: FindOneOptions<T>
-  // ): Promise<T | undefined> {
-  //   return this.getRepository().findOne(
-  //     optionsOrConditions as any,
-  //     maybeOptions
-  //   );
-  // }
-  // /**
-  //  * Finds first entity that matches given conditions.
-  //  */
-  // static findOneOrFail<T extends VectorLayer>(
-  //   this: ObjectType<T>,
-  //   optionsOrConditions?:
-  //     | string
-  //     | number
-  //     | Date
-  //     | FindOneOptions<T>
-  //     | FindConditions<T>,
-  //   maybeOptions?: FindOneOptions<T>
-  // ): Promise<T> {
-  //   return this.getRepository().findOneOrFail(
-  //     optionsOrConditions as any,
-  //     maybeOptions
-  //   );
-  // }
+  /**
+   * Finds first entity that matches given conditions.
+   */
+  static async findOne<T extends VectorLayer>(
+    this: ObjectType<T>,
+    optionsOrConditions?: number | FindOneOptions<T> | FindConditions<T>,
+    maybeOptions?: FindOneOptions<T>
+  ): Promise<T | undefined> {
+    const Resource = this as typeof VectorLayer;
+    const connection = Resource.connection;
+    if (!connection || !Resource.item) {
+      throw new CannotExecuteNotConnectedError();
+    }
+    const connector = connection.driver;
+    const options: GetNgwLayerItemsOptions & FilterOptions = {
+      connector,
+      resourceId: Resource.item.resource.id,
+    };
+    if (typeof optionsOrConditions === 'number') {
+      const item = await NgwKit.utils.getNgwLayerItem({
+        ...options,
+        featureId: optionsOrConditions,
+      });
+      if (item) {
+        const entity = itemToEntity(Resource, item) as T;
+        return entity;
+      }
+    } else {
+      const options: FindOneOptions<T> = {};
+      if (Array.isArray(optionsOrConditions)) {
+        options.where = optionsOrConditions;
+      } else {
+        Object.assign(options, optionsOrConditions);
+      }
+      Object.assign(options, maybeOptions);
+
+      const items = await Resource.find({
+        ...options,
+        limit: 1,
+      });
+      return items[0];
+    }
+  }
+  /**
+   * Finds first entity that matches given conditions.
+   */
+  static async findOneOrFail<T extends VectorLayer>(
+    this: ObjectType<T>,
+    optionsOrConditions?: number | FindOneOptions<T> | FindConditions<T>,
+    maybeOptions?: FindOneOptions<T>
+  ): Promise<T> {
+    const Resource = this as typeof VectorLayer;
+    const item = await Resource.findOne<T>(optionsOrConditions, maybeOptions);
+    if (item) {
+      return item;
+    }
+    throw Error();
+  }
   // /**
   //  * Executes a raw SQL query and returns a raw database results.
   //  * Raw query execution is supported only by relational databases (MongoDB is not supported).
