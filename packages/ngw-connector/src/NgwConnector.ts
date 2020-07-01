@@ -51,24 +51,33 @@ export class NgwConnector {
     this.options.baseUrl = url;
   }
 
-  async connect(): CancelablePromise<PyramidRoute> {
-    if (this.route) {
-      return this.route;
-    } else {
-      if (this.options.auth) {
-        const { login, password } = this.options.auth;
-        if (login && password) {
-          await this.getUserInfo({ login, password });
+  connect(): CancelablePromise<PyramidRoute> {
+    return new CancelablePromise((resolve, reject) => {
+      const makeQuery = () => {
+        return this.makeQuery(this.routeStr, {}, {})
+          .then((route: PyramidRoute) => {
+            this.route = route;
+            resolve(route);
+          })
+          .catch(reject);
+      };
+      if (this.route) {
+        return resolve(this.route);
+      } else {
+        if (this.options.auth) {
+          const { login, password } = this.options.auth;
+          if (login && password) {
+            return this.getUserInfo({ login, password }).then(() =>
+              makeQuery()
+            );
+          }
         }
+        makeQuery();
       }
-
-      const route: PyramidRoute = await this.makeQuery(this.routeStr, {}, {});
-      this.route = route;
-      return route;
-    }
+    });
   }
 
-  async login(credentials: Credentials): CancelablePromise<UserInfo> {
+  login(credentials: Credentials): CancelablePromise<UserInfo> {
     this.logout();
     return this.getUserInfo(credentials);
   }
@@ -127,7 +136,7 @@ export class NgwConnector {
     }
   }
 
-  async getResource(
+  getResource(
     resource: ResourceDefinition | DeepPartial<Resource>
   ): CancelablePromise<ResourceItem | undefined> {
     if (typeof resource === 'string') {
@@ -137,22 +146,25 @@ export class NgwConnector {
     } else if (isObject(resource)) {
       return this.getResourceBy(resource);
     }
+    return CancelablePromise.resolve(undefined);
   }
 
-  async getResourceId(
+  getResourceId(
     resource: ResourceDefinition
   ): CancelablePromise<number | undefined> {
     if (typeof resource === 'number') {
-      return resource;
+      return CancelablePromise.resolve(resource);
     } else if (typeof resource === 'string') {
-      const res = await this.getResourceByKeyname(resource);
-      if (res) {
-        return res.resource.id;
-      }
+      return this.getResourceByKeyname(resource).then((res) => {
+        if (res) {
+          return res.resource.id;
+        }
+      });
     }
+    return CancelablePromise.resolve(undefined);
   }
 
-  async getResourcesBy(
+  getResourcesBy(
     resource: DeepPartial<Resource>
   ): CancelablePromise<ResourceItem[]> {
     let items: ResourceItem[] = [];
@@ -165,61 +177,57 @@ export class NgwConnector {
       items = this._resourceCacheFilter(resource);
     }
     if (!items.length) {
-      try {
-        const query: Record<string, unknown> = {};
-        if (resource.keyname) {
-          query.keyname = resource.keyname;
-        } else {
-          Object.assign(query, resourceToQuery(resource));
-        }
-        const resources = await this.get('resource.search', null, {
-          serialization: 'full',
-          ...query,
-        });
-        if (resources) {
-          resources.forEach((x) => {
-            this._resourceIdsCache[x.resource.id] = x;
-          });
-        }
-        items = resources;
-      } catch (er) {
-        return [];
+      const query: Record<string, unknown> = {};
+      if (resource.keyname) {
+        query.keyname = resource.keyname;
+      } else {
+        Object.assign(query, resourceToQuery(resource));
       }
+      return this.get('resource.search', null, {
+        serialization: 'full',
+        ...query,
+      })
+        .then((resources) => {
+          if (resources) {
+            resources.forEach((x) => {
+              this._resourceIdsCache[x.resource.id] = x;
+            });
+          }
+          return resources;
+        })
+        .catch(() => []);
     }
-    return items;
+    return CancelablePromise.resolve(items);
   }
 
-  async getResourceBy(
+  getResourceBy(
     resource: DeepPartial<Resource>
   ): CancelablePromise<ResourceItem | undefined> {
-    const resources = await this.getResourcesBy(resource);
-    return resources[0];
+    return this.getResourcesBy(resource).then((resources) => {
+      return resources[0];
+    });
   }
 
-  async getResourceByKeyname(
+  getResourceByKeyname(
     keyname: string
   ): CancelablePromise<ResourceItem | undefined> {
     return this.getResourceBy({ keyname });
   }
 
-  async getResourceById(
-    id: number
-  ): CancelablePromise<ResourceItem | undefined> {
-    let item: ResourceItem = this._resourceIdsCache[id];
+  getResourceById(id: number): CancelablePromise<ResourceItem | undefined> {
+    const item: ResourceItem = this._resourceIdsCache[id];
     if (!item) {
-      try {
-        item = await this.get('resource.item', null, { id });
+      return this.get('resource.item', null, { id }).then((item) => {
         if (item) {
           this._resourceIdsCache[id] = item;
         }
-      } catch (er) {
-        return undefined;
-      }
+        return item;
+      });
     }
-    return item;
+    return CancelablePromise.resolve(item);
   }
 
-  async getResourceChildren(
+  getResourceChildren(
     optOrResource:
       | string
       | number
@@ -253,23 +261,29 @@ export class NgwConnector {
         parent = opt.resource;
       }
     }
+    const collection = () =>
+      this.get('resource.collection', null, {
+        parent,
+      });
     if (keyname) {
-      const item = await this.getResourceByKeyname(keyname);
-      if (item) {
-        parent = item.resource.id;
-      }
+      return this.getResourceByKeyname(keyname).then((item) => {
+        if (item) {
+          parent = item.resource.id;
+        }
+        return collection();
+      });
     }
-    return this.get('resource.collection', null, {
-      parent,
-    });
+    return collection();
   }
 
-  async deleteResource(resource: ResourceDefinition): CancelablePromise<void> {
-    const id = await this.getResourceId(resource);
-    if (id !== undefined) {
-      await this.delete('resource.item', null, { id });
-      delete this._resourceIdsCache[id];
-    }
+  deleteResource(resource: ResourceDefinition): CancelablePromise<void> {
+    return this.getResourceId(resource).then((id) => {
+      if (id !== undefined) {
+        this.delete('resource.item', null, { id }).then(() => {
+          delete this._resourceIdsCache[id];
+        });
+      }
+    });
   }
 
   request<

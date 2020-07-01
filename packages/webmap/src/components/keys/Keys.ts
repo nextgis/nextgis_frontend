@@ -36,15 +36,19 @@ export class Keys {
   }
 
   addKeyboardEventsListener(): void {
-    window.addEventListener('focus', this._windowOnFocus, false);
-    window.addEventListener('keydown', this._keysPressed, false);
-    window.addEventListener('keyup', this._keysReleased, false);
+    if (typeof window !== 'undefined') {
+      window.addEventListener('focus', this._windowOnFocus, false);
+      window.addEventListener('keydown', this._keysPressed, false);
+      window.addEventListener('keyup', this._keysReleased, false);
+    }
   }
 
   removeKeyboardEventsListener(): void {
-    window.removeEventListener('focus', this._windowOnFocus, false);
-    window.removeEventListener('keydown', this._keysPressed, false);
-    window.removeEventListener('keyup', this._keysReleased, false);
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('focus', this._windowOnFocus, false);
+      window.removeEventListener('keydown', this._keysPressed, false);
+      window.removeEventListener('keyup', this._keysReleased, false);
+    }
   }
 
   private keysPressed(e: KeyboardEvent) {
