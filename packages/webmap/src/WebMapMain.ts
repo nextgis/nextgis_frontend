@@ -489,6 +489,7 @@ export class WebMapMain<
           const val = state.parse(str);
           // state.setValue(val);
           this._initMapState[state.name] = val;
+          // @ts-ignore
           this.options[state.name] = val;
           break;
         }
