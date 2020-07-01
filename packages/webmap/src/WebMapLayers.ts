@@ -746,12 +746,15 @@ export class WebMapLayers<
   getAttributions(options: GetAttributionsOptions): string[] {
     const attributions: string[] = [];
     for (const l in this._layers) {
-      const layerMem = this._layers[l];
+      const layerCache = this._layers[l];
       const onlyVisible =
         options.onlyVisible !== undefined ? options.onlyVisible : true;
-      const useLayerAttr = onlyVisible ? layerMem.options.visibility : true;
+      let useLayerAttr = onlyVisible ? layerCache.options.visibility : true;
+      if (useLayerAttr && options.onlyBaselayer) {
+        useLayerAttr = this._baselayers.includes(l);
+      }
       if (useLayerAttr) {
-        const attr = layerMem.options && layerMem.options.attribution;
+        const attr = layerCache.options && layerCache.options.attribution;
         if (attr) {
           attributions.push(attr);
         }
