@@ -13,21 +13,7 @@ import {
   propertiesFilter,
   checkIfPropertyFilter,
 } from '@nextgis/properties-filter';
-
-export interface FeatureRequestParams {
-  srs?: number;
-  fields?: string;
-  geom_format?: string;
-  limit?: number;
-  intersects?: string;
-  order_by?: string;
-}
-
-export interface GetNgwLayerItemsOptions {
-  resourceId: number;
-  connector: NgwConnector;
-  filters?: PropertiesFilter;
-}
+import { FeatureRequestParams, GetNgwLayerItemsOptions } from '../interfaces';
 
 const FEATURE_REQUEST_PARAMS: FeatureRequestParams = {
   srs: 4326,
@@ -189,8 +175,10 @@ function createFeatureFieldFilterQueries(
 
   return CancelablePromise.all(_queries).then((itemsParts: FeatureItem[][]) => {
     const items = itemsParts.reduce((a, b) => a.concat(b), []);
-    if (opt.limit) {
-      return items.splice(0, opt.limit);
+    const offset = opt.offset !== undefined ? opt.offset : 0;
+    const limit = opt.limit !== undefined ? opt.limit : items.length;
+    if (opt.offset || opt.limit) {
+      return items.splice(offset, limit);
     }
     return items;
   });
@@ -209,6 +197,7 @@ function getNgwLayerItemsRequest<
   const {
     connector,
     limit,
+    offset,
     fields,
     intersects,
     orderBy,
@@ -217,6 +206,9 @@ function getNgwLayerItemsRequest<
   } = options;
   if (limit) {
     params.limit = limit;
+  }
+  if (offset) {
+    params.offset = offset;
   }
   if (fields) {
     params.fields = fields.join();
