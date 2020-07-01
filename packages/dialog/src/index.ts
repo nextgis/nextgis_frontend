@@ -1,5 +1,5 @@
-import { DialogAdapterOptions } from '@nextgis/webmap';
 import { Dialog } from './dialog';
+import { DialogAdapterOptions } from './interfaces';
 
 export { DialogAdapterOptions };
 export { Dialog };
