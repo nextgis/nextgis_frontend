@@ -22,8 +22,8 @@
     "minor": "lerna version minor --conventional-commits -m \"chore(release): publish %s\" --no-push --create-release github"
   },
   "devDependencies": {
-    "@microsoft/api-documenter": "^7.8.13",
-    "@microsoft/api-extractor": "^7.8.12",
+    "@microsoft/api-documenter": "^7.8.19",
+    "@microsoft/api-extractor": "^7.8.15",
     "@types/chai": "^4.2.11",
     "@types/mocha": "^7.0.2",
     "@types/rimraf": "^3.0.0",
@@ -31,7 +31,7 @@
     "chai": "^4.2.0",
     "codecov": "^3.7.0",
     "conventional-changelog-cli": "^2.0.34",
-    "eslint": "^7.2.0",
+    "eslint": "^7.3.1",
     "istanbul-instrumenter-loader": "^3.0.1",
     "karma": "^5.1.0",
     "karma-chrome-launcher": "^3.1.0",
@@ -50,11 +50,11 @@
     "sinon-chai": "^3.5.0",
     "ts-loader": "^7.0.5",
     "ts-node": "^8.10.2",
-    "typedoc": "^0.17.7",
+    "typedoc": "^0.17.8",
     "typedoc-plugin-lerna-packages": "^0.3.0",
     "typescript": "^3.9.5",
     "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11",
+    "webpack-cli": "^3.3.12",
     "yorkie": "^2.0.0"
   },
   "gitHooks": {

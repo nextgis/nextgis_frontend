@@ -12,7 +12,7 @@ export interface FindOneOptions<Entity = any> {
   /**
    * Simple condition that should be applied to match entities.
    */
-  where?: FindConditions<Entity>[] | FindConditions<Entity>;
+  where?: FindConditions<Entity>;
 
   /**
    * Order, in which entities should be ordered.
