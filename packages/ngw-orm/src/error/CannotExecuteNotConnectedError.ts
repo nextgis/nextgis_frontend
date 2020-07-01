@@ -4,9 +4,9 @@
 export class CannotExecuteNotConnectedError extends Error {
   name = 'CannotExecuteNotConnectedError';
 
-  constructor(connectionName: string) {
+  constructor() {
     super();
     Object.setPrototypeOf(this, CannotExecuteNotConnectedError.prototype);
-    this.message = `Cannot execute operation on "${connectionName}" connection because connection is not yet established.`;
+    this.message = `Cannot execute operation because connection is not yet established.`;
   }
 }
