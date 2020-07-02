@@ -127,7 +127,11 @@ export class Connection {
   async getResource(
     resource: ResourceDefinition | DeepPartial<Resource>
   ): Promise<ResourceItem | undefined> {
-    return this.getResourceItem(resource);
+    try {
+      return this.getResourceItem(resource);
+    } catch {
+      return undefined;
+    }
   }
 
   async deleteResource(resource: typeof BaseResource): Promise<void> {
@@ -185,7 +189,7 @@ export class Connection {
     options: SyncOptions,
     getExisted = false
   ): Promise<[typeof BaseResource, boolean]> {
-    const isCreated = false;
+    let isCreated = false;
     if (resource.item && resource.connection) {
       return [resource, isCreated];
     }
@@ -227,6 +231,7 @@ export class Connection {
           data: payload,
         });
         res = await resource.connect(item.id, this);
+        isCreated = true;
       } catch (er) {
         throw er;
       }

@@ -46,34 +46,61 @@ describe('NgwOrm', () => {
       expect(connection.isConnected).to.be.true;
     });
 
-    it(`#getOrCreate create`, async () => {
+    it(`#getOrCreate`, async () => {
       const connection = await getConnection();
       const Clone = SandboxGroup.clone({
         display_name: 'Resource Group Clone',
       });
-      await connection.getOrCreateResource(Clone, {
-        parent: SandboxGroup,
-      });
+      const [resource1, created1] = await connection.getOrCreateResource(
+        Clone,
+        {
+          parent: SandboxGroup,
+        }
+      );
       expect(Clone.connection && Clone.connection.isConnected).to.be.true;
+      expect(created1).to.be.true;
+      const [resource2, created2] = await connection.getOrCreateResource(
+        Clone,
+        {
+          parent: SandboxGroup,
+        }
+      );
+      expect(created2).to.be.false;
+      Clone.item = undefined;
+      const [resource3, created3] = await connection.getOrCreateResource(
+        Clone,
+        {
+          parent: SandboxGroup,
+        }
+      );
+      expect(created3).to.be.false;
     });
 
     it(`#deleteResource`, async () => {
       const connection = await getConnection();
-      const clone = getMetadataArgsStorage().resources.find((x) => {
-        return x.display_name === 'Resource Group Clone';
+      const Clone = SandboxGroup.clone({
+        display_name: 'Resource Group Clone',
       });
-      expect(clone).to.be.exist;
-      if (clone) {
-        const Clone = clone.target as typeof BaseResource;
-        expect(Clone.item).to.be.exist;
-        if (Clone.item) {
-          const id = Clone.item.resource.id;
-          await connection.deleteResource(Clone);
-          expect(Clone.item).to.be.undefined;
-          const afterDelete = await connection.getResource(id);
-          expect(afterDelete).to.be.undefined;
+      const [Res] = await connection.getOrCreateResource(Clone, {
+        parent: SandboxGroup,
+      });
+      let notExist = false;
+      if (Res) {
+        expect(Res.item).to.be.exist;
+        if (Res.item) {
+          const id = Res.item.resource.id;
+
+          await connection.deleteResource(Res);
+
+          expect(Res.item).to.be.undefined;
+          try {
+            await connection.getResource(id);
+          } catch (er) {
+            notExist = true;
+          }
         }
       }
+      expect(notExist).to.be.true;
     });
 
     it('#receiveResource', async () => {
