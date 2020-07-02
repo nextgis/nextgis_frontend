@@ -1,13 +1,3 @@
-import {
-  Geometry,
-  Point,
-  MultiPoint,
-  Polygon,
-  MultiPolygon,
-  LineString,
-  MultiLineString,
-} from 'geojson';
-
 export interface TreeItem {
   item_type: 'root' | 'group' | 'layer';
   display_name?: string;
