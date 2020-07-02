@@ -136,7 +136,7 @@ export interface RequestOptions<M = RequestMethods> {
   withCredentials?: boolean;
   file?: File;
   responseType?: 'json' | 'blob';
-  onProgress?: (percentComplete: number) => void;
+  onProgress?: (percentComplete: number, event: ProgressEvent) => void;
   /** Save response data to return for similar query url */
   cache?: boolean;
   /** TODO: rename. Do not wait while query with equal url is completed */

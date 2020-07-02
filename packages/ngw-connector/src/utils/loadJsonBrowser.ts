@@ -32,22 +32,13 @@ export default function loadJSONBrowser(
       }
     }
   };
-
-  xhr.onreadystatechange = () => {
-    if (
-      (xhr.readyState === 4 && xhr.status === 200) ||
-      (xhr.readyState === 3 && xhr.status === 201)
-    ) {
-      processingResponse();
-    } else if (xhr.readyState === 3 && xhr.status === 400) {
-      processingResponse();
-    } else if (xhr.readyState === 4 && xhr.status === 500) {
-      processingResponse();
-    } else if (xhr.readyState === 4 && xhr.status === 401) {
-      error(xhr.statusText);
-    } else if (xhr.readyState === 4) {
-      error('request error');
-    }
+  // xhr.onreadystatechange = () => {
+  xhr.onload = () => {
+    processingResponse();
+    // if (xhr.status === 200 || xhr.status === 201) {
+    // } else {
+    //   error(xhr.statusText);
+    // }
   };
 
   xhr.onerror = (er) => {
@@ -58,7 +49,7 @@ export default function loadJSONBrowser(
     if (e.lengthComputable) {
       const percentComplete = (e.loaded / e.total) * 100;
       if (options.onProgress) {
-        options.onProgress(percentComplete);
+        options.onProgress(percentComplete, e);
       }
       // console.log(percentComplete + '% uploaded');
     }

@@ -279,8 +279,9 @@ export class NgwConnector {
   deleteResource(resource: ResourceDefinition): CancelablePromise<void> {
     return this.getResourceId(resource).then((id) => {
       if (id !== undefined) {
-        this.delete('resource.item', null, { id }).then(() => {
+        return this.delete('resource.item', null, { id }).then(() => {
           delete this._resourceIdsCache[id];
+          return undefined;
         });
       }
     });
@@ -338,13 +339,17 @@ export class NgwConnector {
             }
           }
           if (url) {
-            const query = this.makeQuery(url, params, options);
-            resolve(query);
+            return this.makeQuery(url, params, options)
+              .then((resp) => {
+                resolve(resp);
+              })
+              .catch(reject);
           } else {
             reject(new Error('request url is not set'));
           }
+        } else {
+          resolve({} as P[K]);
         }
-        resolve({} as P[K]);
       });
     });
   }
@@ -425,7 +430,6 @@ export class NgwConnector {
       }
       if (!this._loadingStatus[url] || options.nocache) {
         this._loadingStatus[url] = true;
-
         return this._getJson(url, options)
           .then((data) => {
             this._loadingStatus[url] = false;
