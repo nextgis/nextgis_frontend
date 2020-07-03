@@ -1,9 +1,5 @@
 import { expect } from 'chai';
-import {
-  Connection,
-  BaseResource,
-  getMetadataArgsStorage,
-} from '../../packages/ngw-orm/src';
+import { Connection } from '../../packages/ngw-orm/src';
 import { SandboxGroup } from '../helpers/ngw-orm/SandboxGroup';
 import { SandboxPointLayer } from '../helpers/ngw-orm/SandboxPointLayer';
 
@@ -194,6 +190,24 @@ describe('NgwOrm', () => {
         }
       );
       expect(ngwFeature.id).to.eq(1);
+    });
+    it(`.save`, async () => {
+      const connection = await getConnection();
+      const Clone = SandboxPointLayer.clone({
+        display_name: 'Clone of Point layer for .save test',
+      }) as typeof SandboxPointLayer;
+
+      const [Point, created] = await connection.getOrCreateResource(Clone, {
+        parent: SandboxGroup,
+      });
+      const entities = Array.from(Array(5)).map((x, i) => {
+        const p = new Point();
+        p.test = String(i);
+        return p;
+      });
+      const savedEntities = await Point.save(entities);
+      const ok = savedEntities.every((x) => String(x.id) === x.test);
+      expect(ok).to.be.true;
     });
   });
 });

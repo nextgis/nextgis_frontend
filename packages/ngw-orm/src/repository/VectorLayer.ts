@@ -3,7 +3,11 @@ import { FilterOptions } from '@nextgis/webmap';
 import { PropertiesFilter } from '@nextgis/properties-filter';
 import { Type, DeepPartial } from '@nextgis/utils';
 import NgwKit, { GetNgwLayerItemsOptions } from '@nextgis/ngw-kit';
-import { GeometryType, VectorLayerResourceItem } from '@nextgis/ngw-connector';
+import {
+  GeometryType,
+  VectorLayerResourceItem,
+  Resource,
+} from '@nextgis/ngw-connector';
 // import { ResourceItem } from '@nextgis/ngw-connector';
 // import { objectAssign } from '@nextgis/utils';
 // import NgwConnector from '@nextgis/ngw-connector';
@@ -24,6 +28,9 @@ import { FindConditions } from '../find-options/FindConditions';
 import { CannotExecuteNotConnectedError } from '../error/CannotExecuteNotConnectedError';
 import { FindManyOptions } from '../find-options/FindManyOptions';
 import { itemsToEntities, itemToEntity } from '../utils/itemsToEntities';
+import { LineLayer } from './LineLayer';
+import { saveVectorLayer } from '../utils/saveVectorLayer';
+import { UpdateOptions } from './UpdateOptions';
 // import { SyncOptions } from './SyncOptions';
 // import { Connection } from '../connection/Connection';
 // import { ConnectionOptions } from '../connection/ConnectionOptions';
@@ -144,16 +151,25 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
   // ): Promise<T | undefined> {
   //   return this.getRepository().preload(entityLike);
   // }
-  // /**
-  //  * Saves one or many given entities.
-  //  */
-  // static save<T extends VectorLayer>(
-  //   this: ObjectType<T>,
-  //   entityOrEntities: T | T[],
-  //   options?: UpdateOptions
-  // ): Promise<T | T[]> {
-  //   return this.getRepository().save(entityOrEntities as any, options);
-  // }
+  /**
+   * Saves one or many given entities.
+   */
+  static async save<T extends VectorLayer>(
+    this: ObjectType<T>,
+    entityOrEntities: T | T[],
+    options?: UpdateOptions
+  ): Promise<T[]> {
+    const Resource = this as typeof VectorLayer;
+    const connection = Resource.connection;
+    if (!connection || !Resource.item) {
+      throw new CannotExecuteNotConnectedError();
+    }
+    const items: T[] = Array.isArray(entityOrEntities)
+      ? entityOrEntities
+      : [entityOrEntities];
+    await saveVectorLayer({ items, resource: Resource.item }, connection);
+    return items;
+  }
   // /**
   //  * Removes one or many given entities.
   //  */
@@ -204,15 +220,32 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
   // ): Promise<DeleteResult> {
   //   return this.getRepository().delete(criteria, options);
   // }
-  // /**
-  //  * Counts entities that match given find options or conditions.
-  //  */
-  // static count<T extends VectorLayer>(
-  //   this: ObjectType<T>,
-  //   optionsOrConditions?: FindManyOptions<T> | FindConditions<T>
-  // ): Promise<number> {
-  //   return this.getRepository().count(optionsOrConditions as any);
-  // }
+  /**
+   * Counts entities that match given find options or conditions.
+   */
+  static async count<T extends VectorLayer>(
+    this: ObjectType<T>,
+    optionsOrConditions?: FindManyOptions<T> | PropertiesFilter<T>
+  ): Promise<number> {
+    const Resource = this as typeof VectorLayer;
+    const connection = Resource.connection;
+    if (!connection || !Resource.item) {
+      throw new CannotExecuteNotConnectedError();
+    }
+    if (!optionsOrConditions) {
+      const count = await connection.driver.get(
+        'feature_layer.feature.count',
+        null,
+        {
+          id: Resource.item.resource.id,
+        }
+      );
+      return count.total_count;
+    } else {
+      const find = await Resource.find<T>(optionsOrConditions);
+      return find.length;
+    }
+  }
   /**
    * Finds entities that match given find options or conditions.
    */
@@ -380,24 +413,13 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
     const constructor = this.getConstructor();
     const connection = constructor.connection;
     const resource = constructor.item;
-    if (connection && resource) {
-      const feature = vectorResourceToNgw({ resource, item: this });
-      if (this.id) {
-        feature.id = this.id;
-      }
-      const resp = await connection.driver.patch(
-        'feature_layer.feature.collection',
-        { data: [feature] },
-        { id: resource.resource.id }
-      );
-      if (resp && resp[0] && resp[0].id) {
-        this.id = resp[0].id;
-      }
-    } else {
-      throw 'Can\'t save item. Resource is not connected yet';
+    if (!connection || !resource) {
+      throw new CannotExecuteNotConnectedError();
     }
+    await saveVectorLayer({ resource, items: [this] }, connection);
     return this;
   }
+
   // /**
   //  * Removes current entity from the database.
   //  */
