@@ -23,17 +23,18 @@ export function vectorResourceToNgw(
     const featureLayer = opt.resource.feature_layer as FeatureResource;
     featureLayer.fields.forEach((x) => {
       if (x.keyname in item) {
-        // @ts-ignore
-        const property = opt.item[x.keyname];
+        const keyname = x.keyname as keyof VectorLayer;
+        const property = item[keyname];
 
         let value: any;
         if (property) {
           if (x.datatype === 'STRING') {
             value = String(property);
           } else if (x.datatype === 'BIGINT' || x.datatype === 'INTEGER') {
-            value = parseInt(property, 10);
+            value =
+              typeof property === 'string' ? parseInt(property, 10) : property;
           } else if (x.datatype === 'REAL') {
-            value = parseFloat(property);
+            value = typeof property === 'string' ? parseFloat(property) : value;
           } else if (x.datatype === 'DATE') {
             let dt: Date | undefined;
             if (typeof property === 'object') {
@@ -42,7 +43,7 @@ export function vectorResourceToNgw(
               if (property instanceof Date) {
                 dt = property;
               } else {
-                const parse = Date.parse(property);
+                const parse = Date.parse(String(property));
                 if (parse) {
                   dt = new Date(parse);
                 }
