@@ -9,7 +9,7 @@
       </v-toolbar-title>
       <span class="title ml-3">Frontend</span>
       <v-spacer></v-spacer>
-      <v-btn icon large href="https://github.com/nextgis/nextgisweb_frontend" target="_blank">
+      <v-btn icon large href="https://github.com/nextgis/nextgis_frontend" target="_blank">
         <v-icon large>mdi-github-circle</v-icon>
       </v-btn>
     </v-app-bar>

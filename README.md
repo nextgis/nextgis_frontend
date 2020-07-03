@@ -1,6 +1,6 @@
 # NextGIS Frontend
 
-[![http://code.nextgis.com](https://raw.githubusercontent.com/nextgis/nextgisweb_frontend/master/packages/demo/src/images/logo_96x96.png)](http://code.nextgis.com)
+[![http://code.nextgis.com](https://raw.githubusercontent.com/nextgis/nextgis_frontend/master/packages/demo/src/images/logo_96x96.png)](http://code.nextgis.com)
 
 Suite of frontend JavaScript-libraries that allow you to speed up building your own web-gis apps using Nextgis software and services as a backend.
 
@@ -210,8 +210,8 @@ First install [Yarn](https://yarnpkg.com/lang/en/docs/install/)
 
 ```bash
 # Clone git through ssh
-git clone git@github.com:nextgis/nextgisweb_frontend.git
-cd ./nextgisweb_frontend
+git clone git@github.com:nextgis/nextgis_frontend.git
+cd ./nextgis_frontend
 # Install dependencies
 yarn install
 # Prepare packages

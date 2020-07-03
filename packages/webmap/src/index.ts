@@ -3,10 +3,10 @@
  *
  * @remarks
  * The following adapters are available:
- * {@link https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/leaflet-map-adapter | @nextgis/leaflet-map-adapter},
- * {@link https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/ol-map-adapter | @nextgis/ol-map-adapter},
- * {@link https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/mapboxgl-map-adapter | @nextgis/mapbox-map-adapter}
- * and experimental {@link https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/cesium-map-adapter | @nextgis/cesium-map-adapter}.
+ * {@link https://github.com/nextgis/nextgis_frontend/tree/master/packages/leaflet-map-adapter | @nextgis/leaflet-map-adapter},
+ * {@link https://github.com/nextgis/nextgis_frontend/tree/master/packages/ol-map-adapter | @nextgis/ol-map-adapter},
+ * {@link https://github.com/nextgis/nextgis_frontend/tree/master/packages/mapboxgl-map-adapter | @nextgis/mapbox-map-adapter}
+ * and experimental {@link https://github.com/nextgis/nextgis_frontend/tree/master/packages/cesium-map-adapter | @nextgis/cesium-map-adapter}.
  *
  * @example
  * ```js
