@@ -26,6 +26,7 @@ function getConnection(): Promise<Connection> {
 describe('NgwOrm', () => {
   before(async () => {
     const connection = await getConnection();
+
     await connection.getOrCreateResource(SandboxGroup, {
       parent: TESTS_GROUP_ID,
     });
@@ -41,7 +42,6 @@ describe('NgwOrm', () => {
       const connection = await getConnection();
       expect(connection.isConnected).to.be.true;
     });
-
     it(`#getOrCreate`, async () => {
       const connection = await getConnection();
       const Clone = SandboxGroup.clone({
@@ -71,7 +71,6 @@ describe('NgwOrm', () => {
       );
       expect(created3).to.be.false;
     });
-
     it(`#deleteResource`, async () => {
       const connection = await getConnection();
       const Clone = SandboxGroup.clone({
@@ -85,9 +84,7 @@ describe('NgwOrm', () => {
         expect(Res.item).to.be.exist;
         if (Res.item) {
           const id = Res.item.resource.id;
-
           await connection.deleteResource(Res);
-
           expect(Res.item).to.be.undefined;
           try {
             await connection.getResource(id);
@@ -98,7 +95,6 @@ describe('NgwOrm', () => {
       }
       expect(notExist).to.be.true;
     });
-
     it('#receiveResource', async () => {
       const connection = await getConnection();
       const [Point, created] = await connection.getOrCreateResource(
@@ -113,15 +109,11 @@ describe('NgwOrm', () => {
         Point.item.resource.id
       )) as typeof SandboxPointLayer;
       expect(ReceivedPoint.item.resource.id).to.be.eq(Point.item.resource.id);
-
       const p = new ReceivedPoint();
       p.test = 'test';
       p.geom = { type: 'Point', coordinates: [104, 52] };
-
       await p.save();
-
       expect(p.id).to.eq(1);
-
       const ngwFeature = await connection.driver.get(
         'feature_layer.feature.item',
         null,
@@ -202,11 +194,15 @@ describe('NgwOrm', () => {
       });
       const entities = Array.from(Array(5)).map((x, i) => {
         const p = new Point();
-        p.test = String(i);
+        p.test = String(i + 1);
+        p.geom = { type: 'Point', coordinates: [104, 52] };
         return p;
       });
-      const savedEntities = await Point.save(entities);
-      const ok = savedEntities.every((x) => String(x.id) === x.test);
+
+      const savedEntities = await Clone.save(entities);
+      const ok = savedEntities.every((x) => {
+        return String(x.id) === x.test;
+      });
       expect(ok).to.be.true;
     });
   });
