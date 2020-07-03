@@ -8,7 +8,7 @@ The library that allows to use a single interface for managing various interacti
 
 ## Remarks
 
-The following adapters are available: [@nextgis/leaflet-map-adapter](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/leaflet-map-adapter)<!-- -->, [@nextgis/ol-map-adapter](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/ol-map-adapter)<!-- -->, [@nextgis/mapbox-map-adapter](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/mapboxgl-map-adapter) and experimental [@nextgis/cesium-map-adapter](https://github.com/nextgis/nextgisweb_frontend/tree/master/packages/cesium-map-adapter)<!-- -->.
+The following adapters are available: [@nextgis/leaflet-map-adapter](https://github.com/nextgis/nextgis_frontend/tree/master/packages/leaflet-map-adapter)<!-- -->, [@nextgis/ol-map-adapter](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ol-map-adapter)<!-- -->, [@nextgis/mapbox-map-adapter](https://github.com/nextgis/nextgis_frontend/tree/master/packages/mapboxgl-map-adapter) and experimental [@nextgis/cesium-map-adapter](https://github.com/nextgis/nextgis_frontend/tree/master/packages/cesium-map-adapter)<!-- -->.
 
 ## Example
 
