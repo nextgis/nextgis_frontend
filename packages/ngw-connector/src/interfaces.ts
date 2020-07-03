@@ -97,7 +97,7 @@ export interface PostRequestItemsResponseMap extends RequestItemKeys {
 }
 
 export interface PatchRequestItemsResponseMap extends RequestItemKeys {
-  'feature_layer.feature.collection': Array<{ id: number }>;
+  'feature_layer.feature.collection': { id: number }[];
 }
 
 export interface PutRequestItemsResponseMap extends RequestItemKeys {
