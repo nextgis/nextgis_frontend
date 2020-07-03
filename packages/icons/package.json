@@ -37,10 +37,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nextgis/nextgisweb_frontend.git"
+    "url": "git+https://github.com/nextgis/nextgis_frontend.git"
   },
   "bugs": {
-    "url": "https://github.com/nextgis/nextgisweb_frontend/issues"
+    "url": "https://github.com/nextgis/nextgis_frontend/issues"
   },
   "gitHead": "f9de341f87a5d00048a4b5d072af51837ced56e1"
 }

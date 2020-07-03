@@ -16,7 +16,7 @@ import { Indexes } from '../../store/modules/api';
 
 export function getSourceLink(item: ApiItem) {
   return item.sources.map((x) => {
-    const link = `https://github.com/nextgis/nextgisweb_frontend/blob/master/packages/${x.fileName}#L${x.line}`;
+    const link = `https://github.com/nextgis/nextgis_frontend/blob/master/packages/${x.fileName}#L${x.line}`;
     return `<a href="${link}" target="_blank">${x.fileName}#L${x.line}</a>`;
   });
 }

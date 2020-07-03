@@ -34,9 +34,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nextgis/nextgisweb_frontend.git"
+    "url": "git+https://github.com/nextgis/nextgis_frontend.git"
   },
   "bugs": {
-    "url": "https://github.com/nextgis/nextgisweb_frontend/issues"
+    "url": "https://github.com/nextgis/nextgis_frontend/issues"
   }
 }

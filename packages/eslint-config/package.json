@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/nextgis/nextgisweb_frontend.git"
+    "url": "git://github.com/nextgis/nextgis_frontend.git"
   },
   "keywords": [
     "eslint",
