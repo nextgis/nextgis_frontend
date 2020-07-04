@@ -169,3 +169,5 @@ export interface UserInfo {
   keyname: 'guest' | string;
   clientId?: string;
 }
+
+export type NgwExceptions = 'nextgisweb.resource.exception.ResourceNotFound';

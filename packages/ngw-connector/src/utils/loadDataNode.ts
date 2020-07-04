@@ -17,7 +17,7 @@ const adapterFor = (inputUrl: string) => {
   return adapters[protocol];
 };
 
-export default function loadJSONNode(
+export default function loadDataNode(
   url: string,
   callback: (...args: any[]) => any,
   options: NgwRequestOptions<RequestMethods> = {},
