@@ -23,10 +23,11 @@ function getConnection(): Promise<Connection> {
   });
 }
 
-describe('NgwOrm', () => {
+describe('NgwOrm', function () {
+  this.timeout(15000);
+
   before(async () => {
     const connection = await getConnection();
-
     await connection.getOrCreateResource(SandboxGroup, {
       parent: TESTS_GROUP_ID,
     });
@@ -85,12 +86,10 @@ describe('NgwOrm', () => {
         if (Res.item) {
           const id = Res.item.resource.id;
           await connection.deleteResource(Res);
+
           expect(Res.item).to.be.undefined;
-          try {
-            await connection.getResource(id);
-          } catch (er) {
-            notExist = true;
-          }
+          const afterDelete = await connection.getResource(id);
+          notExist = afterDelete === undefined ? true : false;
         }
       }
       expect(notExist).to.be.true;
