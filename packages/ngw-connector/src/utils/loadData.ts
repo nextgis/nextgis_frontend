@@ -16,7 +16,7 @@
 
 import { RequestOptions, RequestMethods } from '../interfaces';
 
-type LoadJSON = (
+type LoadData = (
   url: string,
   callback: (...args: any[]) => any,
   options: RequestOptions<RequestMethods> | undefined,
@@ -24,14 +24,14 @@ type LoadJSON = (
   onCancel: (cancelHandler: () => void) => void
 ) => void;
 
-let loadJSON: LoadJSON;
+let loadData: LoadData;
 
 const isBrowser = new Function(
   'try {return this===window;}catch(e){ return false;}'
 )();
 if (isBrowser) {
-  loadJSON = require('./loadJsonBrowser').default;
+  loadData = require('./loadDataBrowser').default;
 } else {
-  loadJSON = require('./loadJsonNode').default;
+  loadData = require('./loadDataNode').default;
 }
-export { loadJSON };
+export { loadData };
