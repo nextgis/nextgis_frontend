@@ -1,6 +1,7 @@
 import { RequestOptions } from '../interfaces';
+import { NgwError } from '../errors/NgwError';
 
-export default function loadJSONBrowser(
+export default function loadDataBrowser(
   url: string,
   callback: (...args: any[]) => any,
   options: RequestOptions = {},
@@ -15,24 +16,29 @@ export default function loadJSONBrowser(
   if (options.responseType === 'blob') {
     xhr.responseType = options.responseType;
   }
-
+  const getResponseText = () => {
+    try {
+      return JSON.parse(xhr.responseText);
+    } catch (er) {
+      return xhr.responseText;
+    }
+  };
   const processingResponse = (forError = false) => {
     const cb = forError ? error : callback;
     if (options.responseType === 'blob') {
       cb(xhr.response);
     } else {
       if (xhr.responseText) {
-        try {
-          cb(JSON.parse(xhr.responseText));
-        } catch (er) {
-          cb(xhr.responseText);
-        }
+        cb(getResponseText());
       } else {
         error({ message: '' });
       }
     }
   };
   xhr.onload = () => {
+    if ([404, 500].indexOf(xhr.status) !== -1) {
+      error(new NgwError(getResponseText()));
+    }
     processingResponse();
   };
 

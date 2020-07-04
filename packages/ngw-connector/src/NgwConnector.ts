@@ -21,16 +21,23 @@ import {
   RequestItemsParams,
   ResourceDefinition,
 } from './interfaces';
-import { loadJSON } from './utils/loadJson';
+import { loadData } from './utils/loadData';
 import { template } from './utils/template';
 import { ResourceItem, Resource } from './types/ResourceItem';
 import { resourceToQuery } from './utils/resourceToQuery';
 import { resourceCompare } from './utils/resourceCompare';
+import { ResourceNotFoundError } from './errors/ResourceNotFoundError';
+import { NgwError } from './errors/NgwError';
 
 const isBrowser =
   typeof window !== 'undefined' && typeof window.document !== 'undefined';
 
 export class NgwConnector {
+  static errors = {
+    NgwError,
+    ResourceNotFoundError,
+  };
+
   emitter = new EventEmitter();
   user?: UserInfo;
   private routeStr = '/api/component/pyramid/route';
@@ -217,12 +224,19 @@ export class NgwConnector {
   getResourceById(id: number): CancelablePromise<ResourceItem | undefined> {
     const item: ResourceItem = this._resourceIdsCache[id];
     if (!item) {
-      return this.get('resource.item', null, { id }).then((item) => {
-        if (item) {
-          this._resourceIdsCache[id] = item;
-        }
-        return item;
-      });
+      return this.get('resource.item', null, { id })
+        .then((item) => {
+          if (item) {
+            this._resourceIdsCache[id] = item;
+          }
+          return item;
+        })
+        .catch((er) => {
+          if (!(er instanceof ResourceNotFoundError)) {
+            throw er;
+          }
+          return undefined;
+        });
     }
     return CancelablePromise.resolve(item);
   }
@@ -430,7 +444,7 @@ export class NgwConnector {
       }
       if (!this._loadingStatus[url] || options.nocache) {
         this._loadingStatus[url] = true;
-        return this._getJson(url, options)
+        return this._loadData(url, options)
           .then((data) => {
             this._loadingStatus[url] = false;
             if (options.cache) {
@@ -503,7 +517,7 @@ export class NgwConnector {
     }
   }
 
-  protected _getJson(
+  protected _loadData(
     url: string,
     options: RequestOptions
   ): CancelablePromise<any> {
@@ -517,8 +531,24 @@ export class NgwConnector {
           ...options.headers,
         };
       }
-      loadJSON(url, resolve, options, reject, onCancel);
+      loadData(url, resolve, options, reject, onCancel);
+    }).catch((httpError) => {
+      const er = this._handleHttpError(httpError);
+      if (er) {
+        throw er;
+      }
     });
+  }
+
+  private _handleHttpError(er: Error) {
+    if (er) {
+      if (er instanceof NgwError) {
+        if (er.exception === 'nextgisweb.resource.exception.ResourceNotFound') {
+          throw new ResourceNotFoundError(er);
+        }
+      }
+    }
+    return er;
   }
 
   private _resourceCacheFilter(
