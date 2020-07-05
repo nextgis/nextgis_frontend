@@ -1,5 +1,6 @@
 import { RequestOptions } from '../interfaces';
 import { NgwError } from '../errors/NgwError';
+import { NetworkError } from '../errors/NetworkError';
 
 export default function loadDataBrowser(
   url: string,
@@ -60,7 +61,11 @@ export default function loadDataBrowser(
   // };
 
   xhr.onerror = (er) => {
-    error(er);
+    if (xhr.status === 0) {
+      error(new NetworkError(url));
+    } else {
+      error(er);
+    }
   };
 
   xhr.upload.onprogress = function (e) {
