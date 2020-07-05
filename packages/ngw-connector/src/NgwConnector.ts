@@ -3,6 +3,7 @@ import { DeepPartial, defined, isObject } from '@nextgis/utils';
 import { EventEmitter } from 'events';
 
 import { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
+import { ResourceItem, Resource } from './types/ResourceItem';
 import {
   NgwConnectorOptions,
   GetRequestItemsResponseMap,
@@ -23,7 +24,6 @@ import {
 } from './interfaces';
 import { loadData } from './utils/loadData';
 import { template } from './utils/template';
-import { ResourceItem, Resource } from './types/ResourceItem';
 import { resourceToQuery } from './utils/resourceToQuery';
 import { resourceCompare } from './utils/resourceCompare';
 import { ResourceNotFoundError } from './errors/ResourceNotFoundError';
@@ -45,7 +45,7 @@ export class NgwConnector {
   private _loadingQueue: { [name: string]: LoadingQueue } = {};
   private _loadingStatus: { [url: string]: boolean } = {};
   private _queriesCache: { [url: string]: any } = {};
-  private _resourceIdsCache: Record<number, ResourceItem> = {};
+  private _resourcesCache: Record<number, ResourceItem> = {};
 
   constructor(public options: NgwConnectorOptions) {
     if (this.options.route) {
@@ -53,9 +53,16 @@ export class NgwConnector {
     }
   }
 
-  setNextGisWeb(url: string): void {
+  setNgw(url: string): void {
     this.logout();
     this.options.baseUrl = url;
+  }
+
+  /**
+   * @deprecated use setNgw instead
+   */
+  setNextGisWeb(url: string): void {
+    this.setNgw(url);
   }
 
   connect(): CancelablePromise<PyramidRoute> {
@@ -143,165 +150,7 @@ export class NgwConnector {
     }
   }
 
-  getResource(
-    resource: ResourceDefinition | DeepPartial<Resource>
-  ): CancelablePromise<ResourceItem | undefined> {
-    if (typeof resource === 'string') {
-      return this.getResourceByKeyname(resource);
-    } else if (typeof resource === 'number') {
-      return this.getResourceById(resource);
-    } else if (isObject(resource)) {
-      return this.getResourceBy(resource);
-    }
-    return CancelablePromise.resolve(undefined);
-  }
-
-  getResourceId(
-    resource: ResourceDefinition
-  ): CancelablePromise<number | undefined> {
-    if (typeof resource === 'number') {
-      return CancelablePromise.resolve(resource);
-    } else if (typeof resource === 'string') {
-      return this.getResourceByKeyname(resource).then((res) => {
-        if (res) {
-          return res.resource.id;
-        }
-      });
-    }
-    return CancelablePromise.resolve(undefined);
-  }
-
-  getResourcesBy(
-    resource: DeepPartial<Resource>
-  ): CancelablePromise<ResourceItem[]> {
-    let items: ResourceItem[] = [];
-    if (resource.id) {
-      const existId = this._resourceIdsCache[resource.id];
-      if (existId) {
-        items.push(existId);
-      }
-    } else {
-      items = this._resourceCacheFilter(resource);
-    }
-    if (!items.length) {
-      const query: Record<string, unknown> = {};
-      if (resource.keyname) {
-        query.keyname = resource.keyname;
-      } else {
-        Object.assign(query, resourceToQuery(resource));
-      }
-      return this.get('resource.search', null, {
-        serialization: 'full',
-        ...query,
-      })
-        .then((resources) => {
-          if (resources) {
-            resources.forEach((x) => {
-              this._resourceIdsCache[x.resource.id] = x;
-            });
-          }
-          return resources;
-        })
-        .catch(() => []);
-    }
-    return CancelablePromise.resolve(items);
-  }
-
-  getResourceBy(
-    resource: DeepPartial<Resource>
-  ): CancelablePromise<ResourceItem | undefined> {
-    return this.getResourcesBy(resource).then((resources) => {
-      return resources[0];
-    });
-  }
-
-  getResourceByKeyname(
-    keyname: string
-  ): CancelablePromise<ResourceItem | undefined> {
-    return this.getResourceBy({ keyname });
-  }
-
-  getResourceById(id: number): CancelablePromise<ResourceItem | undefined> {
-    const item: ResourceItem = this._resourceIdsCache[id];
-    if (!item) {
-      return this.get('resource.item', null, { id })
-        .then((item) => {
-          if (item) {
-            this._resourceIdsCache[id] = item;
-          }
-          return item;
-        })
-        .catch((er) => {
-          if (!(er instanceof ResourceNotFoundError)) {
-            throw er;
-          }
-          return undefined;
-        });
-    }
-    return CancelablePromise.resolve(item);
-  }
-
-  getResourceChildren(
-    optOrResource:
-      | string
-      | number
-      | {
-          keyname?: string;
-          resourceId?: number;
-          resource?: string | number;
-        }
-  ): CancelablePromise<ResourceItem[]> {
-    let opt: {
-      keyname?: string;
-      resourceId?: number;
-      resource?: string | number;
-    } = {};
-    if (typeof optOrResource === 'string') {
-      opt.keyname = optOrResource;
-    } else if (typeof optOrResource === 'number') {
-      opt.resourceId = optOrResource;
-    } else {
-      opt = optOrResource;
-    }
-    let parent = opt.resourceId;
-    let keyname = opt.keyname;
-    if (!opt.keyname && !opt.resourceId && !opt.resource) {
-      throw new Error('No keyname or resourceId is set');
-    }
-    if (opt.resource) {
-      if (typeof opt.resource === 'string') {
-        keyname = opt.resource;
-      } else if (typeof opt.resource === 'number') {
-        parent = opt.resource;
-      }
-    }
-    const collection = () =>
-      this.get('resource.collection', null, {
-        parent,
-      });
-    if (keyname) {
-      return this.getResourceByKeyname(keyname).then((item) => {
-        if (item) {
-          parent = item.resource.id;
-        }
-        return collection();
-      });
-    }
-    return collection();
-  }
-
-  deleteResource(resource: ResourceDefinition): CancelablePromise<void> {
-    return this.getResourceId(resource).then((id) => {
-      if (id !== undefined) {
-        return this.delete('resource.item', null, { id }).then(() => {
-          delete this._resourceIdsCache[id];
-          return undefined;
-        });
-      }
-    });
-  }
-
-  request<
+  apiRequest<
     K extends keyof RequestItemsParamsMap,
     P extends RequestItemKeys = RequestItemKeys
   >(
@@ -376,7 +225,11 @@ export class NgwConnector {
     options = options || {};
     options.method = 'POST';
     options.nocache = true;
-    return this.request<K, PostRequestItemsResponseMap>(name, params, options);
+    return this.apiRequest<K, PostRequestItemsResponseMap>(
+      name,
+      params,
+      options
+    );
   }
 
   get<K extends keyof RequestItemsParamsMap>(
@@ -387,7 +240,11 @@ export class NgwConnector {
     options = options || {};
     options.method = 'GET';
     options.nocache = true;
-    return this.request<K, GetRequestItemsResponseMap>(name, params, options);
+    return this.apiRequest<K, GetRequestItemsResponseMap>(
+      name,
+      params,
+      options
+    );
   }
 
   patch<K extends keyof RequestItemsParamsMap>(
@@ -398,7 +255,11 @@ export class NgwConnector {
     options = options || {};
     options.method = 'PATCH';
     options.nocache = true;
-    return this.request<K, PatchRequestItemsResponseMap>(name, params, options);
+    return this.apiRequest<K, PatchRequestItemsResponseMap>(
+      name,
+      params,
+      options
+    );
   }
 
   put<K extends keyof RequestItemsParamsMap>(
@@ -409,7 +270,11 @@ export class NgwConnector {
     options = options || {};
     options.method = 'PUT';
     options.nocache = true;
-    return this.request<K, PutRequestItemsResponseMap>(name, params, options);
+    return this.apiRequest<K, PutRequestItemsResponseMap>(
+      name,
+      params,
+      options
+    );
   }
 
   delete<K extends keyof RequestItemsParamsMap>(
@@ -420,7 +285,7 @@ export class NgwConnector {
     options = options || {};
     options.method = 'DELETE';
     options.nocache = true;
-    return this.request<K, DeleteRequestItemsResponseMap>(
+    return this.apiRequest<K, DeleteRequestItemsResponseMap>(
       name,
       params,
       options
@@ -468,6 +333,168 @@ export class NgwConnector {
     } else {
       throw new Error('No `url` parameter set for option ' + name);
     }
+  }
+
+  // -------------------------------------------------------------------------
+  // Resource Methods
+  // -------------------------------------------------------------------------
+
+  getResource(
+    resource: ResourceDefinition | DeepPartial<Resource>
+  ): CancelablePromise<ResourceItem | undefined> {
+    if (typeof resource === 'string') {
+      return this.getResourceByKeyname(resource);
+    } else if (typeof resource === 'number') {
+      return this.getResourceById(resource);
+    } else if (isObject(resource)) {
+      return this.getResourceBy(resource);
+    }
+    return CancelablePromise.resolve(undefined);
+  }
+
+  getResourceId(
+    resource: ResourceDefinition
+  ): CancelablePromise<number | undefined> {
+    if (typeof resource === 'number') {
+      return CancelablePromise.resolve(resource);
+    } else if (typeof resource === 'string') {
+      return this.getResourceByKeyname(resource).then((res) => {
+        if (res) {
+          return res.resource.id;
+        }
+      });
+    }
+    return CancelablePromise.resolve(undefined);
+  }
+
+  getResourcesBy(
+    resource: DeepPartial<Resource>
+  ): CancelablePromise<ResourceItem[]> {
+    let items: ResourceItem[] = [];
+    if (resource.id) {
+      const existId = this._resourcesCache[resource.id];
+      if (existId) {
+        items.push(existId);
+      }
+    } else {
+      items = this._resourceCacheFilter(resource);
+    }
+    if (!items.length) {
+      const query: Record<string, unknown> = {};
+      if (resource.keyname) {
+        query.keyname = resource.keyname;
+      } else {
+        Object.assign(query, resourceToQuery(resource));
+      }
+      return this.get('resource.search', null, {
+        serialization: 'full',
+        ...query,
+      })
+        .then((resources) => {
+          if (resources) {
+            resources.forEach((x) => {
+              this._resourcesCache[x.resource.id] = x;
+            });
+          }
+          return resources;
+        })
+        .catch(() => []);
+    }
+    return CancelablePromise.resolve(items);
+  }
+
+  getResourceBy(
+    resource: DeepPartial<Resource>
+  ): CancelablePromise<ResourceItem | undefined> {
+    return this.getResourcesBy(resource).then((resources) => {
+      return resources[0];
+    });
+  }
+
+  getResourceByKeyname(
+    keyname: string
+  ): CancelablePromise<ResourceItem | undefined> {
+    return this.getResourceBy({ keyname });
+  }
+
+  getResourceById(id: number): CancelablePromise<ResourceItem | undefined> {
+    const item: ResourceItem = this._resourcesCache[id];
+    if (!item) {
+      return this.get('resource.item', null, { id })
+        .then((item) => {
+          if (item) {
+            this._resourcesCache[id] = item;
+          }
+          return item;
+        })
+        .catch((er) => {
+          if (!(er instanceof ResourceNotFoundError)) {
+            throw er;
+          }
+          return undefined;
+        });
+    }
+    return CancelablePromise.resolve(item);
+  }
+
+  getResourceChildren(
+    optOrResource:
+      | string
+      | number
+      | {
+          keyname?: string;
+          resourceId?: number;
+          resource?: string | number;
+        }
+  ): CancelablePromise<ResourceItem[]> {
+    let opt: {
+      keyname?: string;
+      resourceId?: number;
+      resource?: string | number;
+    } = {};
+    if (typeof optOrResource === 'string') {
+      opt.keyname = optOrResource;
+    } else if (typeof optOrResource === 'number') {
+      opt.resourceId = optOrResource;
+    } else {
+      opt = optOrResource;
+    }
+    let parent = opt.resourceId;
+    let keyname = opt.keyname;
+    if (!opt.keyname && !opt.resourceId && !opt.resource) {
+      throw new Error('No keyname or resourceId is set');
+    }
+    if (opt.resource) {
+      if (typeof opt.resource === 'string') {
+        keyname = opt.resource;
+      } else if (typeof opt.resource === 'number') {
+        parent = opt.resource;
+      }
+    }
+    const collection = () =>
+      this.get('resource.collection', null, {
+        parent,
+      });
+    if (keyname) {
+      return this.getResourceByKeyname(keyname).then((item) => {
+        if (item) {
+          parent = item.resource.id;
+        }
+        return collection();
+      });
+    }
+    return collection();
+  }
+
+  deleteResource(resource: ResourceDefinition): CancelablePromise<void> {
+    return this.getResourceId(resource).then((id) => {
+      if (id !== undefined) {
+        return this.delete('resource.item', null, { id }).then(() => {
+          delete this._resourcesCache[id];
+          return undefined;
+        });
+      }
+    });
   }
 
   protected _setLoadingQueue(
@@ -554,7 +581,7 @@ export class NgwConnector {
   private _resourceCacheFilter(
     resource: DeepPartial<Resource>
   ): ResourceItem[] {
-    const items: ResourceItem[] = Object.values(this._resourceIdsCache).filter(
+    const items: ResourceItem[] = Object.values(this._resourcesCache).filter(
       (x) => {
         // identical by uniq props
         if (resource.keyname && x.resource.keyname) {
