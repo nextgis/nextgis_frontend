@@ -18,23 +18,22 @@ export function vectorResourceToNgw(
   // const features: Partial<FeatureItem<GeoJsonProperties, string>>[] = [];
   return opt.items.map((item) => {
     const geom = prepareGeomToNgw(item.geom);
-
     const fields: GeoJsonProperties = {};
     const featureLayer = opt.resource.feature_layer as FeatureResource;
     featureLayer.fields.forEach((x) => {
       if (x.keyname in item) {
         const keyname = x.keyname as keyof VectorLayer;
         const property = item[keyname];
-
         let value: any;
-        if (property) {
+        if (property !== undefined) {
           if (x.datatype === 'STRING') {
             value = String(property);
           } else if (x.datatype === 'BIGINT' || x.datatype === 'INTEGER') {
             value =
               typeof property === 'string' ? parseInt(property, 10) : property;
           } else if (x.datatype === 'REAL') {
-            value = typeof property === 'string' ? parseFloat(property) : value;
+            value =
+              typeof property === 'string' ? parseFloat(property) : property;
           } else if (x.datatype === 'DATE') {
             let dt: Date | undefined;
             if (typeof property === 'object') {
@@ -58,11 +57,9 @@ export function vectorResourceToNgw(
             }
           }
         }
-        // @ts-ignore
-        fields[x.keyname] = value || null;
+        fields[x.keyname] = value ?? null;
       }
     });
-
     return {
       id: item.id,
       fields,
