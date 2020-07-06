@@ -15,7 +15,7 @@ if (args.url || args.u) {
 
 const connector = new NgwConnector({ baseUrl });
 
-connector.connect(function(router) {
+connector.connect(function (router) {
   generateTypes(router);
 });
 
@@ -24,7 +24,7 @@ function generateTypes(router) {
   const newLines = [];
   readLines(
     typePath,
-    line => {
+    (line) => {
       if (!stop) {
         stop = line.indexOf('==./scripts/generator.js==') !== -1;
         newLines.push(line);
@@ -32,7 +32,9 @@ function generateTypes(router) {
     },
     () => {
       insertRequestItemsParamsMap(newLines, router);
-      require('fs').writeFile(typePath, '', () => writeLines(typePath, newLines));
+      require('fs').writeFile(typePath, '', () =>
+        writeLines(typePath, newLines)
+      );
     }
   );
 }
@@ -40,20 +42,18 @@ function generateTypes(router) {
 function insertRequestItemsParamsMap(lines, routers) {
   lines.push('interface RequestItemsParamsMap {');
   for (var r in routers) {
-    if (routers.hasOwnProperty(r)) {
-      const router = routers[r];
-      const params = router.slice(1, router.length);
-      let line = `  '${r}'`;
-      if (params && params.length) {
-        line += ': { ';
-        // TODO: get type of parameter; until everything is a number
-        line += params.map(p => `${p}: number`).join(', ');
-        line += ' };';
-      } else {
-        line += ': null;';
-      }
-      lines.push(line);
+    const router = routers[r];
+    const params = router.slice(1, router.length);
+    let line = `  '${r}'`;
+    if (params && params.length) {
+      line += ': { ';
+      // TODO: get type of parameter; until everything is a number
+      line += params.map((p) => `${p}: number`).join(', ');
+      line += ' };';
+    } else {
+      line += ': null;';
     }
+    lines.push(line);
   }
   // lines.push('  [x: string]: {[x: string]: any};');
   lines.push('}');
@@ -61,7 +61,7 @@ function insertRequestItemsParamsMap(lines, routers) {
 
 function readLines(file, lineCb, closeCb) {
   const lineReader = require('readline').createInterface({
-    input: require('fs').createReadStream(file)
+    input: require('fs').createReadStream(file),
   });
   lineReader.on('line', lineCb);
   lineReader.on('close', closeCb);
@@ -70,7 +70,7 @@ function readLines(file, lineCb, closeCb) {
 function writeLines(file, lines) {
   var fs = require('fs');
   const text = lines.join('\r\n');
-  fs.appendFile(file, text, function(err) {
+  fs.appendFile(file, text, function (err) {
     if (err) {
       return console.log(err);
     } else {
