@@ -22,8 +22,8 @@
     "minor": "lerna version minor --conventional-commits -m \"chore(release): publish %s\" --no-push --create-release github"
   },
   "devDependencies": {
-    "@microsoft/api-documenter": "^7.8.19",
-    "@microsoft/api-extractor": "^7.8.15",
+    "@microsoft/api-documenter": "^7.8.21",
+    "@microsoft/api-extractor": "^7.9.1",
     "@types/chai": "^4.2.11",
     "@types/mocha": "^7.0.2",
     "@types/rimraf": "^3.0.0",
@@ -31,7 +31,7 @@
     "chai": "^4.2.0",
     "codecov": "^3.7.0",
     "conventional-changelog-cli": "^2.0.34",
-    "eslint": "^7.3.1",
+    "eslint": "^7.4.0",
     "istanbul-instrumenter-loader": "^3.0.1",
     "karma": "^5.1.0",
     "karma-chrome-launcher": "^3.1.0",

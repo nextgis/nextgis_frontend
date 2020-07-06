@@ -7,4 +7,6 @@ import { PointLayer, NgwResource, Column } from '../../../packages/ngw-orm/src';
 export class SandboxPointLayer extends PointLayer {
   @Column()
   test!: string;
+  @Column()
+  number!: number;
 }
