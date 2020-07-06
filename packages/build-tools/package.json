@@ -9,7 +9,7 @@
     "base64-inline-loader": "^1.1.1",
     "copy-webpack-plugin": "^6.0.3",
     "css-loader": "^3.6.0",
-    "eslint": "^7.3.1",
+    "eslint": "^7.4.0",
     "eslint-loader": "^4.0.2",
     "file-loader": "^6.0.0",
     "rimraf": "^3.0.2",

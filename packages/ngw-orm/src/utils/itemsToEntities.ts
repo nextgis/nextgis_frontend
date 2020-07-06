@@ -18,8 +18,12 @@ export function itemToEntity(
   Resource: typeof VectorLayer,
   item: FeatureItem
 ): VectorLayer {
-  const entity = new Resource();
-  objectAssign(entity, item.fields);
-  entity.geom = item.geom;
-  return entity;
+  if ('coordinates' in item.geom) {
+    const entity = new Resource();
+    objectAssign(entity, item.fields);
+    entity.id = item.id;
+    entity.geom = item.geom;
+    return entity;
+  }
+  throw new Error('No coordinates in geometry');
 }

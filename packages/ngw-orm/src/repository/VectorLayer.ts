@@ -1,13 +1,18 @@
-import { Geometry } from 'geojson';
+import {
+  Point,
+  MultiPoint,
+  LineString,
+  MultiLineString,
+  Polygon,
+  MultiPolygon,
+  GeoJsonTypes,
+  Feature,
+} from 'geojson';
 import { FilterOptions } from '@nextgis/webmap';
 import { PropertiesFilter } from '@nextgis/properties-filter';
 import { Type, DeepPartial } from '@nextgis/utils';
 import NgwKit, { GetNgwLayerItemsOptions } from '@nextgis/ngw-kit';
-import {
-  GeometryType,
-  VectorLayerResourceItem,
-  Resource,
-} from '@nextgis/ngw-connector';
+import { GeometryType, VectorLayerResourceItem } from '@nextgis/ngw-connector';
 // import { ResourceItem } from '@nextgis/ngw-connector';
 // import { objectAssign } from '@nextgis/utils';
 // import NgwConnector from '@nextgis/ngw-connector';
@@ -21,14 +26,12 @@ import { BaseResource } from './BaseResource';
 import { getMetadataArgsStorage, Column } from '..';
 import { SyncOptions } from './SyncOptions';
 import { VectorResourceSyncItem } from '../sync-items/VectorResourceSyncItem';
-import { vectorResourceToNgw } from '../utils/vectorResourceToNgw';
 import { ObjectType } from '../common/ObjectType';
 import { FindOneOptions } from '../find-options/FindOneOptions';
 import { FindConditions } from '../find-options/FindConditions';
 import { CannotExecuteNotConnectedError } from '../error/CannotExecuteNotConnectedError';
 import { FindManyOptions } from '../find-options/FindManyOptions';
 import { itemsToEntities, itemToEntity } from '../utils/itemsToEntities';
-import { LineLayer } from './LineLayer';
 import { saveVectorLayer } from '../utils/saveVectorLayer';
 import { UpdateOptions } from './UpdateOptions';
 // import { SyncOptions } from './SyncOptions';
@@ -42,10 +45,51 @@ import { UpdateOptions } from './UpdateOptions';
 // type DeleteResult = any;
 // type UpdateResult = any;
 
+type Geometry =
+  | Point
+  | MultiPoint
+  | LineString
+  | MultiLineString
+  | Polygon
+  | MultiPolygon;
+
 export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
   static geometryType: GeometryType;
   id?: number;
   private _geom!: G;
+
+  get coordinates(): G['coordinates'] {
+    return this.geom.coordinates;
+  }
+
+  set coordinates(coordinates: G['coordinates']) {
+    const constructor = this.getConstructor();
+    const aliases: Record<GeometryType, GeoJsonTypes> = {
+      POINT: 'Point',
+      MULTIPOINT: 'MultiPoint',
+      LINESTRING: 'LineString',
+      MULTILINESTRING: 'MultiLineString',
+      POLYGON: 'Polygon',
+      MULTIPOLYGON: 'MultiPolygon',
+      POINTZ: 'Point',
+      MULTIPOINTZ: 'MultiPoint',
+      LINESTRINGZ: 'LineString',
+      MULTILINESTRINGZ: 'MultiLineString',
+      POLYGONZ: 'Polygon',
+      MULTIPOLYGONZ: 'MultiPolygon',
+    };
+    const type: GeoJsonTypes = aliases[constructor.geometryType];
+    const geom = { type, coordinates } as G;
+    this._geom = geom;
+  }
+
+  get geom(): G {
+    return this._geom;
+  }
+
+  set geom(geom: G) {
+    this._geom = geom;
+  }
 
   static receive(item: VectorLayerResourceItem): typeof VectorLayer {
     const ReceivedResource = BaseResource.receive(
@@ -91,14 +135,6 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
         })),
       },
     };
-  }
-
-  get geom(): G {
-    return this._geom;
-  }
-
-  set geom(geom: G) {
-    this._geom = geom;
   }
 
   // /**
@@ -398,13 +434,35 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
   getConstructor(): typeof VectorLayer {
     return this.constructor as any;
   }
-  // /**
-  //  * Checks if entity has an id.
-  //  * If entity composite compose ids, it will check them all.
-  //  */
-  // hasId(): boolean {
-  //   return (this.constructor as any).getRepository().hasId(this);
-  // }
+
+  toJSON(): string {
+    return JSON.stringify(this.toGeoJson());
+  }
+
+  toGeoJson(): Feature<G, this> {
+    const constructor = this.getConstructor();
+    const columns = getMetadataArgsStorage().filterColumns(constructor);
+    const properties = {} as Record<keyof this, any>;
+    columns.forEach((x) => {
+      const key = x.propertyName as keyof this;
+      const descriptor = Object.getOwnPropertyDescriptor(this, key);
+      if (descriptor) {
+        properties[key] = descriptor.value;
+      }
+    });
+    const feature: Feature<G, this> = {
+      type: 'Feature',
+      properties,
+      geometry: this.geom,
+    };
+    return feature;
+  }
+  /**
+   * Checks if entity has an id.
+   */
+  hasId(): boolean {
+    return this.id !== undefined;
+  }
   /**
    * Saves current entity in the NGW target layer.
    * If entity does not exist in the NGW layer then inserts, otherwise updates.

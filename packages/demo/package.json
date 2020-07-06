@@ -33,7 +33,7 @@
     "html-webpack-plugin": "^4.3.0",
     "rimraf": "^3.0.2",
     "sass": "^1.26.9",
-    "sass-loader": "^9.0.0",
+    "sass-loader": "^9.0.1",
     "showdown": "^1.9.1",
     "ts-loader": "^7.0.5",
     "typescript": "^3.9.6",
