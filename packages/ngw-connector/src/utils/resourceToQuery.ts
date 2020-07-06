@@ -1,5 +1,6 @@
-import { DeepPartial, isObject, defined } from '@nextgis/utils';
+import { DeepPartial, defined } from '@nextgis/utils';
 import { Resource } from '../types/ResourceItem';
+import { isObject } from './isObject';
 
 /**
  * { keyname, parent: { id }} > { keyname, parent__id }

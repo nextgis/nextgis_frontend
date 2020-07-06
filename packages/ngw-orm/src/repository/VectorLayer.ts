@@ -31,9 +31,13 @@ import { FindOneOptions } from '../find-options/FindOneOptions';
 import { FindConditions } from '../find-options/FindConditions';
 import { CannotExecuteNotConnectedError } from '../error/CannotExecuteNotConnectedError';
 import { FindManyOptions } from '../find-options/FindManyOptions';
-import { itemsToEntities, itemToEntity } from '../utils/itemsToEntities';
-import { saveVectorLayer } from '../utils/saveVectorLayer';
+import {
+  itemsToEntities,
+  itemToEntity,
+} from '../vector-layer-utils/itemsToEntities';
+import { saveVectorLayer } from '../vector-layer-utils/saveVectorLayer';
 import { UpdateOptions } from './UpdateOptions';
+import { toTypescript } from '../vector-layer-utils/toTypescript';
 // import { SyncOptions } from './SyncOptions';
 // import { Connection } from '../connection/Connection';
 // import { ConnectionOptions } from '../connection/ConnectionOptions';
@@ -89,6 +93,10 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
 
   set geom(geom: G) {
     this._geom = geom;
+  }
+
+  static toTypescript(): string {
+    return toTypescript(this);
   }
 
   static receive(item: VectorLayerResourceItem): typeof VectorLayer {
