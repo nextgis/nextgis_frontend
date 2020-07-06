@@ -1,5 +1,5 @@
 import CancelablePromise from '@nextgis/cancelable-promise';
-import { DeepPartial, defined, isObject } from '@nextgis/utils';
+import { DeepPartial, defined } from '@nextgis/utils';
 import { EventEmitter } from 'events';
 
 import { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
@@ -28,6 +28,7 @@ import { resourceToQuery } from './utils/resourceToQuery';
 import { resourceCompare } from './utils/resourceCompare';
 import { ResourceNotFoundError } from './errors/ResourceNotFoundError';
 import { NgwError } from './errors/NgwError';
+import { isObject } from './utils/isObject';
 
 const isBrowser =
   typeof window !== 'undefined' && typeof window.document !== 'undefined';
