@@ -115,4 +115,10 @@ export class BaseResource {
   ): void {
     console.log('upload');
   }
+
+  static toTypescript(): string {
+    throw Error(
+      'TypeScript code generation is not implement for this resource'
+    );
+  }
 }
