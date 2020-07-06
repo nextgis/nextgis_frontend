@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import { Connection } from '../../packages/ngw-orm/src';
 import { SandboxGroup } from '../helpers/ngw-orm/SandboxGroup';
 import { SandboxPointLayer } from '../helpers/ngw-orm/SandboxPointLayer';
+import { getMetadataArgsStorage } from '../../packages/ngw-orm/src';
 
 let CONNECTION: Connection;
 const TESTS_GROUP_ID = 446;
@@ -21,6 +22,20 @@ function getConnection(): Promise<Connection> {
     CONNECTION = connection;
     return connection;
   });
+}
+
+let ID = 0;
+
+async function newPointLayer(name?: string) {
+  const connection = await getConnection();
+  const Clone = SandboxPointLayer.clone({
+    display_name: name || 'Clone of Point layer #' + ID++,
+  }) as typeof SandboxPointLayer;
+
+  await connection.getOrCreateResource(Clone, {
+    parent: SandboxGroup,
+  });
+  return Clone;
 }
 
 describe('NgwOrm', function () {
@@ -137,21 +152,25 @@ describe('NgwOrm', function () {
       );
       expect(point).to.be.exist;
     });
-    it(`clone`, async () => {
+    it(`.clone`, async () => {
       const connection = await getConnection();
 
-      const [point, created] = await connection.getOrCreateResource(
+      const [Point, created] = await connection.getOrCreateResource(
         SandboxPointLayer.clone({ display_name: 'Clone of Point layer' }),
         {
           parent: SandboxGroup,
         }
       );
-      expect(point).to.be.exist;
-      if (point) {
-        expect(point.item).to.be.exist;
-        if (point.item) {
-          expect(point.item.feature_layer).to.be.exist;
-          expect(point.item?.feature_layer?.fields.length).to.be.eq(1);
+      expect(Point).to.be.exist;
+      if (Point) {
+        expect(Point.item).to.be.exist;
+        if (Point.item) {
+          expect(Point.item.feature_layer).to.be.exist;
+
+          const columns = getMetadataArgsStorage().filterColumns(Point);
+          expect(Point.item.feature_layer.fields.length).to.be.eq(
+            columns.length
+          );
         }
       }
     });
@@ -166,7 +185,7 @@ describe('NgwOrm', function () {
       );
       const p = new Point();
       p.test = 'test';
-      p.geom = { type: 'Point', coordinates: [104, 52] };
+      p.coordinates = [104, 52];
 
       await p.save();
 
@@ -183,26 +202,37 @@ describe('NgwOrm', function () {
       expect(ngwFeature.id).to.eq(1);
     });
     it(`.save`, async () => {
-      const connection = await getConnection();
-      const Clone = SandboxPointLayer.clone({
-        display_name: 'Clone of Point layer for .save test',
-      }) as typeof SandboxPointLayer;
+      const Point = await newPointLayer('Clone of Point layer for .save test');
 
-      const [Point, created] = await connection.getOrCreateResource(Clone, {
-        parent: SandboxGroup,
-      });
       const entities = Array.from(Array(5)).map((x, i) => {
         const p = new Point();
         p.test = String(i + 1);
-        p.geom = { type: 'Point', coordinates: [104, 52] };
+        p.coordinates = [104, 52];
         return p;
       });
 
-      const savedEntities = await Clone.save(entities);
+      const savedEntities = await Point.save(entities);
       const ok = savedEntities.every((x) => {
         return String(x.id) === x.test;
       });
       expect(ok).to.be.true;
+    });
+
+    it(`.findOne`, async () => {
+      const Point = await newPointLayer(
+        'Clone of Point layer for .findOne test'
+      );
+
+      const entities = Array.from(Array(5)).map((x, i) => {
+        const p = new Point();
+        p.number = i + 1;
+        p.coordinates = [104, 52];
+        return p;
+      });
+      await Point.save(entities);
+      const findById = await Point.findOne(1);
+
+      expect(findById.id).to.be.eq(1);
     });
   });
 });
