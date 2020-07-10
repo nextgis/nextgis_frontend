@@ -3,6 +3,7 @@
   "version": "0.32.0",
   "description": "Development tools",
   "main": "lib/vuex-ngw.js",
+  "module": "lib/vuex-ngw.esm.js",
   "unpkg": "lib/vue-ngw.js",
   "types": "lib/index.d.ts",
   "dependencies": {

@@ -3,13 +3,14 @@
   "version": "0.32.0",
   "description": "",
   "main": "lib/ngw-cesium.js",
+  "module": "lib/ngw-cesium.esm.js",
   "unpkg": "lib/ngw-cesium.js",
   "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/cesium-map-adapter": "^0.32.0",
     "@nextgis/ngw-map": "^0.32.0",
     "@types/events": "^3.0.0",
-    "@types/node": "^14.0.14",
+    "@types/node": "^14.0.20",
     "events": "^3.1.0"
   },
   "devDependencies": {
@@ -19,7 +20,8 @@
     "clean": "rimraf ./lib",
     "dev": "npm run clean && webpack --config ./webpack.config.js --progress",
     "build": "npm run dev -- --mode=production",
-    "prod": "npm run build",
+    "prod": "exit 0",
+    "#prod": "npm run build",
     "lint": "eslint ./src/**/*.ts --fix --c ../../.eslintrc",
     "watch": "npm run dev -- --watch"
   },

@@ -11,7 +11,6 @@ import { getMetadataArgsStorage } from '..';
 import { ResourceMetadataArgs } from '../metadata-args/ResourceMetadataArgs';
 import { DeepPartial } from '../common/DeepPartial';
 import { ResourceSyncItem } from '../sync-items/ResourceSyncItem';
-import { NgwResource } from '../decorator/NgwResource';
 import { NgwResources } from '../ngw/NgwResources';
 
 /**

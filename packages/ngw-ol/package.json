@@ -4,6 +4,7 @@
   "version": "0.32.0",
   "description": "",
   "main": "lib/ngw-ol.js",
+  "module": "lib/ngw-ol.esm.js",
   "unpkg": "lib/ngw-ol.js",
   "types": "lib/index.d.ts",
   "dependencies": {
