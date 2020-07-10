@@ -3,6 +3,7 @@
   "version": "0.32.0",
   "description": "",
   "main": "lib/url-runtime-params.js",
+  "module": "lib/url-runtime-params.esm.js",
   "unpkg": "lib/url-runtime-params.js",
   "types": "lib/index.d.ts",
   "dependencies": {

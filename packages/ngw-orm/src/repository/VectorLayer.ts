@@ -22,11 +22,8 @@ import { GeometryType, VectorLayerResourceItem } from '@nextgis/ngw-connector';
 // import { FindConditions } from '../find-options/FindConditions';
 // import { FindManyOptions } from '../find-options/FindManyOptions';
 // import { FindOneOptions } from '../find-options/FindOneOptions';
-import { BaseResource } from './BaseResource';
 import { getMetadataArgsStorage, Column } from '..';
-import { SyncOptions } from './SyncOptions';
 import { VectorResourceSyncItem } from '../sync-items/VectorResourceSyncItem';
-import { ObjectType } from '../common/ObjectType';
 import { FindOneOptions } from '../find-options/FindOneOptions';
 import { FindConditions } from '../find-options/FindConditions';
 import { CannotExecuteNotConnectedError } from '../error/CannotExecuteNotConnectedError';
@@ -36,6 +33,9 @@ import {
   itemToEntity,
 } from '../vector-layer-utils/itemsToEntities';
 import { saveVectorLayer } from '../vector-layer-utils/saveVectorLayer';
+import { ObjectType } from '../common/ObjectType';
+import { BaseResource } from './BaseResource';
+import { SyncOptions } from './SyncOptions';
 import { UpdateOptions } from './UpdateOptions';
 import { toTypescript } from '../vector-layer-utils/toTypescript';
 // import { SyncOptions } from './SyncOptions';

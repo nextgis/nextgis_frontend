@@ -3,6 +3,7 @@
   "version": "0.32.0",
   "description": "Development tools",
   "main": "lib/utils.js",
+  "module": "lib/utils.esm.js",
   "unpkg": "lib/utils.js",
   "types": "lib/index.d.ts",
   "devDependencies": {

@@ -3,6 +3,7 @@
   "version": "0.32.0",
   "description": "Development tools",
   "main": "lib/vue-ngw-map.js",
+  "module": "lib/vue-ngw-map.esm.js",
   "unpkg": "lib/vue-ngw-map.js",
   "types": "lib/index.d.ts",
   "dependencies": {
