@@ -213,7 +213,7 @@ export class NgwMap<
     }
   }
 
-  async getNgwLayerItem(options: {
+  getNgwLayerItem(options: {
     resourceId: number;
     featureId: number;
   }): CancelablePromise<FeatureItem> {
@@ -223,7 +223,7 @@ export class NgwMap<
     });
   }
 
-  async getNgwLayerItems(
+  getNgwLayerItems(
     options: {
       resourceId: number;
       connector?: NgwConnector;
@@ -236,7 +236,7 @@ export class NgwMap<
     });
   }
 
-  async getNgwLayerFeature<
+  getNgwLayerFeature<
     G extends Geometry | null = Geometry,
     P extends Record<string, any> = Record<string, any>
   >(options: {
@@ -249,7 +249,7 @@ export class NgwMap<
     });
   }
 
-  async getNgwLayerFeatures<
+  getNgwLayerFeatures<
     G extends Geometry | null = Geometry,
     P extends Record<string, any> = Record<string, any>
   >(
@@ -265,15 +265,20 @@ export class NgwMap<
     });
   }
 
-  async getIdentifyGeoJson(
+  getIdentifyGeoJson(
     identify: NgwIdentify,
     multiple = false
   ): CancelablePromise<Feature | undefined> {
-    return NgwKit.utils.getIdentifyGeoJson({
+    const geojson = NgwKit.utils.getIdentifyGeoJson({
       identify,
       connector: this.connector,
       multiple,
     });
+    if (geojson && 'then' in geojson) {
+      return geojson;
+    } else {
+      return CancelablePromise.resolve(geojson);
+    }
   }
 
   async getNgwLayers(): Promise<NgwLayers> {

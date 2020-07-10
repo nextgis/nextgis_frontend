@@ -4,6 +4,7 @@
   "_priority": 20,
   "description": "",
   "main": "lib/qms-kit.js",
+  "module": "lib/qms-kit.esm.js",
   "unpkg": "lib/qms-kit.js",
   "types": "lib/index.d.ts",
   "dependencies": {

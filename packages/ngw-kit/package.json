@@ -4,6 +4,7 @@
   "_priority": 20,
   "description": "",
   "main": "lib/ngw-kit.js",
+  "module": "lib/ngw-kit.esm.js",
   "unpkg": "lib/ngw-kit.js",
   "types": "lib/index.d.ts",
   "dependencies": {

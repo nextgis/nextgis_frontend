@@ -3,6 +3,7 @@
   "version": "0.32.0",
   "description": "Modal window management",
   "main": "lib/dialog.js",
+  "module": "lib/dialog.esm.js",
   "unpkg": "lib/dialog.js",
   "types": "lib/index.d.ts",
   "dependencies": {

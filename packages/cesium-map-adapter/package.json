@@ -3,6 +3,7 @@
   "version": "0.32.0",
   "description": "",
   "main": "lib/cesium-map-adapter.js",
+  "module": "lib/cesium-map-adapter.esm.js",
   "unpkg": "lib/cesium-map-adapter.js",
   "types": "lib/index.d.ts",
   "dependencies": {
@@ -11,7 +12,7 @@
     "@nextgis/paint": "^0.32.0",
     "@nextgis/webmap": "^0.32.0",
     "@types/events": "^3.0.0",
-    "@types/node": "^14.0.14",
+    "@types/node": "^14.0.20",
     "cesium": "^1.71.0",
     "events": "^3.1.0"
   },

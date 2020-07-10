@@ -4,6 +4,7 @@
   "version": "0.32.0",
   "description": "",
   "main": "lib/ngw-leaflet.js",
+  "module": "lib/ngw-leaflet.esm.js",
   "unpkg": "lib/ngw-leaflet.js",
   "types": "lib/index.d.ts",
   "dependencies": {
