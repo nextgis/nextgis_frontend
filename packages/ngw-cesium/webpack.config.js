@@ -10,26 +10,47 @@ const cesiumSource = '../../node_modules/cesium/Source';
 const cesiumWorkers = '../Build/Cesium/Workers';
 
 module.exports = (env, argv) => {
-  const config = common(env, argv, {
+  const configs = common(env, argv, {
     library,
     externals: true,
     dirname: __dirname,
     package,
-  })[0];
-  config.output.sourcePrefix = '';
-  config.node = {
-    // Resolve node module use of fs
-    fs: 'empty',
-    Buffer: false,
-    http: 'empty',
-    https: 'empty',
-    zlib: 'empty',
-  };
-  config.resolve.mainFields = ['module', 'main'];
+  });
+  configs.forEach((config) => {
+    config.output.sourcePrefix = '';
+    config.resolve.alias = config.resolve.alias || {};
+    config.resolve.alias.path = false;
+    // config.node = {
+    //   // Resolve node module use of fs
+    //   fs: 'empty',
+    //   Buffer: false,
+    //   http: 'empty',
+    //   https: 'empty',
+    //   zlib: 'empty',
+    // };
+    config.resolve.mainFields = ['module', 'main'];
+    config.optimization = config.optimization || {};
+    config.optimization.usedExports = true;
+    const pragmaRule = {
+      // Strip cesium pragmas
+      test: /\.js$/,
+      enforce: 'pre',
+      include: path.resolve(__dirname, cesiumSource),
+      use: [
+        {
+          loader: 'strip-pragma-loader',
+          options: {
+            pragmas: {
+              debug: false,
+            },
+          },
+        },
+      ],
+    };
+    config.module.rules.push(pragmaRule);
+  });
 
-  config.optimization = {
-    usedExports: true,
-  };
+  const config = configs[0];
 
   config.plugins = config.plugins || [];
   config.plugins.push(
@@ -56,22 +77,5 @@ module.exports = (env, argv) => {
   //   })
   // );
 
-  const pragmaRule = {
-    // Strip cesium pragmas
-    test: /\.js$/,
-    enforce: 'pre',
-    include: path.resolve(__dirname, cesiumSource),
-    use: [
-      {
-        loader: 'strip-pragma-loader',
-        options: {
-          pragmas: {
-            debug: false,
-          },
-        },
-      },
-    ],
-  };
-  config.module.rules.push(pragmaRule);
-  return config;
+  return configs;
 };

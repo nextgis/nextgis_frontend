@@ -4,6 +4,7 @@
   "_priority": 14,
   "description": "",
   "main": "lib/webmap.js",
+  "module": "lib/webmap.esm.js",
   "unpkg": "lib/webmap.js",
   "types": "lib/index.d.ts",
   "dependencies": {

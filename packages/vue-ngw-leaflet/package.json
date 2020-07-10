@@ -3,6 +3,7 @@
   "version": "0.32.0",
   "description": "Development tools",
   "main": "lib/vue-ngw-leaflet.js",
+  "module": "lib/vue-ngw-leaflet.esm.js",
   "unpkg": "lib/vue-ngw-leaflet.js",
   "types": "lib/index.d.ts",
   "dependencies": {

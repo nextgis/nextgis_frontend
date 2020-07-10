@@ -3,6 +3,7 @@
   "version": "0.32.0",
   "description": "Create style for vector layer",
   "main": "lib/paint.js",
+  "module": "lib/paint.esm.js",
   "unpkg": "lib/paint.js",
   "types": "lib/index.d.ts",
   "dependencies": {

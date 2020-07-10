@@ -3,6 +3,7 @@
   "version": "0.32.0",
   "description": "Development tools",
   "main": "lib/vue-ngw-ol.js",
+  "module": "lib/vue-ngw-ol.esm.js",
   "unpkg": "lib/vue-ngw-ol.js",
   "types": "lib/index.d.ts",
   "dependencies": {

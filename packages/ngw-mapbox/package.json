@@ -4,14 +4,15 @@
   "version": "0.32.0",
   "description": "",
   "main": "lib/ngw-mapbox.js",
+  "module": "lib/ngw-mapbox.esm.js",
   "unpkg": "lib/ngw-mapbox.js",
   "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/mapboxgl-map-adapter": "^0.32.0",
     "@nextgis/ngw-map": "^0.32.0",
-    "@types/mapbox-gl": "^1.11.0",
+    "@types/mapbox-gl": "^1.11.1",
     "canvg": "^3.0.6",
-    "mapbox-gl": "^1.11.0"
+    "mapbox-gl": "^1.11.1"
   },
   "devDependencies": {
     "@nextgis/build-tools": "file:../build-tools"
