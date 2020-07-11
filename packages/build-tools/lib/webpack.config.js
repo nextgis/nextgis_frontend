@@ -1,6 +1,5 @@
 const webpack = require('webpack');
 
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const path = require('path');
 const getAliases = require('./aliases');
 
@@ -49,10 +48,10 @@ module.exports = (env, argv, opt = {}) => {
     };
     if (module) {
       Object.assign(compilerOptions, {
-        target: 'ES2015', // 'ESNext'
-        module: 'ESNext', // 'ES2015'
-        esModuleInterop: true,
-        forceConsistentCasingInFileNames: true,
+        // target: 'es5', // 'ESNext'
+        // module: 'ES2015', // 'ES2015'
+        // esModuleInterop: true,
+        // forceConsistentCasingInFileNames: true,
       });
     }
     if (declaration) {
@@ -97,23 +96,23 @@ module.exports = (env, argv, opt = {}) => {
     return rules;
   };
 
-  let plugins = [
+  const plugins = [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(argv.mode || 'development'),
     }),
   ];
 
-  let alias = {};
-
-  if (isProd) {
-    // const { BundleAnalyzerPlugin }= require('webpack-bundle-analyzer');
-    plugins = plugins.concat([
-      // new BundleAnalyzerPlugin()
-    ]);
-    // alias = getAliases(undefined, true);
-  } else {
-    alias = getAliases();
-  }
+  const alias = getAliases();
+  // let alias = {};
+  // if (isProd) {
+  //   // const { BundleAnalyzerPlugin }= require('webpack-bundle-analyzer');
+  //   plugins = plugins.concat([
+  //     // new BundleAnalyzerPlugin()
+  //   ]);
+  //   // alias = getAliases(undefined, true);
+  // } else {
+  //   alias = getAliases();
+  // }
 
   const getCommonConfig = () => {
     return {
@@ -138,7 +137,7 @@ module.exports = (env, argv, opt = {}) => {
   const umdConfig = {
     ...getCommonConfig(),
     module: {
-      rules: getRules({ declaration: true }),
+      rules: getRules({ declaration: false }),
     },
     output: {
       ecmaVersion: 5,
@@ -167,7 +166,7 @@ module.exports = (env, argv, opt = {}) => {
     const moduleConfig = {
       ...getCommonConfig(),
       module: {
-        rules: getRules({ module: true }),
+        rules: getRules({ module: true, declaration: true }),
       },
       experiments: {
         outputModule: true,
@@ -183,7 +182,7 @@ module.exports = (env, argv, opt = {}) => {
         concatenateModules: false,
       },
     };
-    // configs.push(moduleConfig);
+    configs.push(moduleConfig);
   }
 
   return configs;
