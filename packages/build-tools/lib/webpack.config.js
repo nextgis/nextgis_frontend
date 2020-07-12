@@ -16,7 +16,7 @@ module.exports = (env, argv, opt = {}) => {
   const libraryExport =
     opt.libraryExport !== undefined
       ? opt.libraryExport === ''
-        ? undefined
+        ? '' // undefined for webpack5
         : opt.libraryExport
       : 'default';
 
@@ -25,7 +25,7 @@ module.exports = (env, argv, opt = {}) => {
   const isProd = argv.mode === 'production';
 
   const getExternals = [
-    function ({ context, request }, callback) {
+    function (context, request, callback) {
       // Absolute & Relative paths are not externals
       if (request.match(/^(\.{0,2})\//)) {
         return callback();
@@ -33,7 +33,8 @@ module.exports = (env, argv, opt = {}) => {
       try {
         // Attempt to resolve the module via Node
         require.resolve(request);
-        callback(null, request, 'commonjs2');
+        // callback(null, request, 'commonjs2');
+        callback(null, request);
       } catch (e) {
         // Node couldn't find it, so it must be user-aliased
         callback();
@@ -102,21 +103,20 @@ module.exports = (env, argv, opt = {}) => {
     }),
   ];
 
-  const alias = getAliases();
-  // let alias = {};
-  // if (isProd) {
-  //   // const { BundleAnalyzerPlugin }= require('webpack-bundle-analyzer');
-  //   plugins = plugins.concat([
-  //     // new BundleAnalyzerPlugin()
-  //   ]);
-  //   // alias = getAliases(undefined, true);
-  // } else {
-  //   alias = getAliases();
-  // }
+  // const alias = getAliases();
+
+  let alias = {};
+  if (isProd) {
+    // const { BundleAnalyzerPlugin }= require('webpack-bundle-analyzer');
+    // plugins = plugins.concat([
+    //   // new BundleAnalyzerPlugin()
+    // ]);
+  } else {
+    alias = getAliases();
+  }
 
   const getCommonConfig = () => {
     return {
-      // context: opt.dirname,
       mode: argv.mode || 'development',
       devtool: isProd ? 'source-map' : 'inline-source-map',
       entry,
@@ -133,20 +133,23 @@ module.exports = (env, argv, opt = {}) => {
   };
 
   const configs = [];
+  const umdOutput = {
+    library,
+    libraryExport,
+    libraryTarget: 'umd',
+    globalObject: "typeof self !== 'undefined' ? self : this", // https://github.com/webpack/webpack/issues/6522
+  };
 
   const umdConfig = {
     ...getCommonConfig(),
     module: {
-      rules: getRules({ declaration: false }),
+      rules: getRules({ declaration: true }),
     },
     output: {
-      ecmaVersion: 5,
+      // ecmaVersion: 5,
       path: outDir,
       filename,
-      library,
-      libraryExport,
-      libraryTarget: 'umd',
-      globalObject: "typeof self !== 'undefined' ? self : this", // https://github.com/webpack/webpack/issues/6522
+      ...umdOutput,
     },
   };
   configs.push(umdConfig);
@@ -162,27 +165,29 @@ module.exports = (env, argv, opt = {}) => {
   //   };
   //   configs.push(allInOneConfig);
   // }
-  if (isProd) {
+  if (isProd && !useExternals) {
     const moduleConfig = {
       ...getCommonConfig(),
       module: {
         rules: getRules({ module: true, declaration: true }),
       },
-      experiments: {
-        outputModule: true,
-      },
+      // experiments: {
+      //   outputModule: true,
+      // },
       output: {
-        module: true,
+        // module: true,
         path: outDir,
         filename: filename.replace('.js', '.esm.js'),
+
+        ...umdOutput,
       },
       externals: getExternals,
-      optimization: {
-        usedExports: false,
-        concatenateModules: false,
-      },
+      // optimization: {
+      //   usedExports: false,
+      //   concatenateModules: false,
+      // },
     };
-    configs.push(moduleConfig);
+    // configs.push(moduleConfig);
   }
 
   return configs;
