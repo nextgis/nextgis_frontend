@@ -71,9 +71,6 @@
     "NGW"
   ],
   "author": "NextGIS",
-  "directories": {
-    "lib": "dist"
-  },
   "files": [
     "dist"
   ],
