@@ -34,9 +34,7 @@
     "API"
   ],
   "author": "NextGIS",
-  "directories": {
-    "lib": "lib"
-  },
+
   "files": [
     "lib"
   ],
