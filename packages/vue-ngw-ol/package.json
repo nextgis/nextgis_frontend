@@ -30,10 +30,7 @@
     "MAP"
   ],
   "author": "NextGIS",
-  "directories": {
-    "lib": "lib",
-    "test": "__tests__"
-  },
+
   "files": [
     "lib"
   ],

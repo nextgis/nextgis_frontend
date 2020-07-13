@@ -2,9 +2,10 @@
   "name": "@nextgis/utils",
   "version": "0.32.0",
   "description": "Development tools",
-  "main": "lib/utils.js",
-  "module": "lib/utils.esm.js",
-  "unpkg": "lib/utils.js",
+  "main": "index.js",
+  "module": "lib/utils.esm-bundler.js",
+  "unpkg": "lib/utils.global.prod.js",
+  "jsdelivr": "lib/utils.global.prod.js",
   "types": "lib/index.d.ts",
   "devDependencies": {
     "@nextgis/build-tools": "file:../build-tools"
@@ -13,7 +14,7 @@
     "clean": "rimraf ./lib",
     "dev": "npm run clean && webpack --config ./webpack.config.js --progress",
     "build": "npm run dev -- --mode=production",
-    "prod": "npm run build",
+    "prod": "node ../build-tools/lib/rollup.build.js",
     "lint": "eslint ./src/**/*.ts --fix --c ../../.eslintrc",
     "watch": "npm run dev -- --watch"
   },
@@ -22,13 +23,19 @@
     "MAP"
   ],
   "author": "NextGIS",
-  "directories": {
-    "lib": "lib",
-    "test": "__tests__"
-  },
   "files": [
+    "index.js",
     "lib"
   ],
+  "buildOptions": {
+    "name": "Utils",
+    "formats": [
+      "esm-bundler",
+      "esm-browser",
+      "cjs",
+      "global"
+    ]
+  },
   "license": "LGPL-3.0",
   "publishConfig": {
     "registry": "http://registry.npmjs.org/"
