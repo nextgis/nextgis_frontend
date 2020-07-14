@@ -15,17 +15,19 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "removeComments": false,
-    // "lib": ["es6", "dom"],
     "lib": ["esnext", "dom"],
     "types": ["node"],
     "rootDir": ".",
 
-    "emitDecoratorMetadata": true,
-    "noImplicitReturns": false,
+    // "emitDecoratorMetadata": true,
+    // "noImplicitReturns": false,
 
     "paths": {
       "@nextgis/*": ["./packages/*/src/"]
     }
   },
-  "includes": ["packages/*/src"],
+  "includes": [
+    "packages/global.d.ts",
+    "packages/*/src"
+  ]
 }
