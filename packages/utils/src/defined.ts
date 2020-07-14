@@ -3,15 +3,17 @@
  *
  * @exports defined
  *
- * @param {*} value The object.
- * @returns {Boolean} Returns true if the object is defined, returns false otherwise.
+ * @param value - The object.
+ * @returns Returns true if the object is defined, returns false otherwise.
  *
  * @example
+ * ```js
  * if (defined(positions)) {
  *      doSomething();
  * } else {
  *      doSomethingElse();
  * }
+ * ```
  */
 export function defined(value: unknown): boolean {
   return value !== undefined && value !== null;

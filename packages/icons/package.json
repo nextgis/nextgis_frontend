@@ -30,9 +30,7 @@
     "lib"
   ],
   "license": "LGPL-3.0",
-  "publishConfig": {
-    "registry": "http://registry.npmjs.org/"
-  },
+
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nextgis/nextgis_frontend.git"
