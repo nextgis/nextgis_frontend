@@ -20,7 +20,7 @@ const chalk = require('chalk');
 const execa = require('execa');
 const { gzipSync } = require('zlib');
 const { compress } = require('brotli');
-const { targets: allTargets, fuzzyMatchTarget } = require('./utils');
+// const { targets: allTargets, fuzzyMatchTarget } = require('./utils');
 
 const args = require('minimist')(process.argv.slice(2));
 const targets = args._;
@@ -39,16 +39,15 @@ run();
 async function run() {
   const cwd = process.cwd();
   const target = cwd.match(/packages[\\, /](\w+)$/)[1];
-
-  if (!targets.length) {
-    await buildAll(allTargets);
-    checkAllSizes(allTargets);
-  } else if (target) {
+  if (target) {
     await build(target);
     checkAllSizes([target]);
+  } else if (!targets.length) {
+    // await buildAll(allTargets);
+    // checkAllSizes(allTargets);
   } else {
-    await buildAll(fuzzyMatchTarget(targets, buildAllMatching));
-    checkAllSizes(fuzzyMatchTarget(targets, buildAllMatching));
+    // await buildAll(fuzzyMatchTarget(targets, buildAllMatching));
+    // checkAllSizes(fuzzyMatchTarget(targets, buildAllMatching));
   }
 }
 
@@ -59,8 +58,11 @@ async function buildAll(targets) {
 }
 
 async function build(target) {
-  const pkgDir = path.resolve(`../${target}`);
-  const pkg = require(`${pkgDir}/package.json`);
+  const rootPath = path.resolve(__dirname, '..', '..', '..');
+  const pkgPath = `../${target}`;
+  const pkgDir = path.resolve(pkgPath);
+  const pkgFullPath = `${pkgDir}/package.json`;
+  const pkg = require(pkgFullPath);
 
   // only build published packages for release
   if (isRelease && pkg.private) {
@@ -108,10 +110,80 @@ async function build(target) {
     // build types
     const { Extractor, ExtractorConfig } = require('@microsoft/api-extractor');
 
-    const extractorConfigPath = path.resolve(pkgDir, `api-extractor.json`);
-    const extractorConfig = ExtractorConfig.loadFileAndPrepare(
-      extractorConfigPath
-    );
+    const reportFolder = path.resolve(rootPath, 'input');
+
+    const reportTempFolder = path.resolve(rootPath, 'temp');
+
+    const publicTrimmedFilePath = path.resolve(`${pkgPath}/lib/index.d.ts`);
+
+    const extractorConfig = ExtractorConfig.prepare({
+      packageJson: pkg,
+      packageJsonFullPath: pkgFullPath,
+      configObjectFullPath: pkgDir,
+      configObject: {
+        projectFolder: pkgDir,
+        mainEntryPointFilePath: path.resolve(
+          pkgPath,
+          'lib',
+          'packages',
+          target,
+          'src',
+          'index.d.ts'
+        ),
+        compiler: {
+          tsconfigFilePath: path.resolve(`${rootPath}/tsconfig.json`),
+          overrideTsconfig: {
+            include: [path.resolve(pkgPath, 'src')],
+          },
+        },
+        docModel: {
+          enabled: true,
+          apiJsonFilePath: `${reportFolder}/<unscopedPackageName>.api.json`,
+        },
+        tsdocMetadata: {
+          enabled: false,
+        },
+        dtsRollup: {
+          enabled: true,
+          publicTrimmedFilePath,
+        },
+        apiReport: {
+          enabled: true,
+          reportFolder,
+          reportTempFolder,
+          reportFileName: '<unscopedPackageName>.api.md',
+        },
+        messages: {
+          compilerMessageReporting: {
+            default: {
+              logLevel: 'warning',
+            },
+          },
+
+          extractorMessageReporting: {
+            default: {
+              logLevel: 'warning',
+              addToApiReportFile: true,
+            },
+
+            'ae-missing-release-tag': {
+              logLevel: 'none',
+            },
+          },
+
+          tsdocMessageReporting: {
+            default: {
+              logLevel: 'warning',
+            },
+
+            'tsdoc-undefined-tag': {
+              logLevel: 'none',
+            },
+          },
+        },
+      },
+    });
+
     const extractorResult = Extractor.invoke(extractorConfig, {
       localBuild: true,
       showVerboseMessages: true,

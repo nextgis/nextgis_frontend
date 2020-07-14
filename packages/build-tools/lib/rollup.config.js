@@ -114,9 +114,9 @@ function createConfig(format, output, plugins = []) {
         sourceMap: output.sourcemap,
         declaration: shouldEmitDeclarations,
         declarationMap: shouldEmitDeclarations,
-        compilerOptions,
+        ...compilerOptions,
       },
-      exclude: ['**/__tests__', 'test-dts'],
+      include: [resolve('src')],
     },
   });
   // we only need to check TS and generate declarations once for each build.
