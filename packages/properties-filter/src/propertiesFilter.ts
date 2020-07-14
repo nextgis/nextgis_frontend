@@ -2,10 +2,10 @@ import { Feature, GeoJsonProperties } from 'geojson';
 import { reEscape } from '@nextgis/utils';
 
 /**
- * gt - greater (>)
- * lt - lower (<)
- * ge - greater or equal (>=)
- * le - lower or equal (<=)
+ * gt - greater (\>)
+ * lt - lower (\<)
+ * ge - greater or equal (\>=)
+ * le - lower or equal (\<=)
  * eq - equal (=)
  * ne - not equal (!=)
  * like - LIKE SQL statement (for strings compare)
