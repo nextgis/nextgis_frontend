@@ -1,4 +1,6 @@
 /*
+Based on https://github.com/vuejs/vue-next/blob/master/scripts/build.js
+
 Produces production builds and stitches together d.ts files.
 
 To specify the package to build, simply pass its name and the desired build
@@ -29,8 +31,7 @@ const devOnly = args.devOnly || args.d;
 const prodOnly = !devOnly && (args.prodOnly || args.p);
 const sourceMap = args.sourcemap || args.s;
 const isRelease = args.release;
-// const buildTypes = args.t || args.types || isRelease;
-const buildTypes = true;
+const buildTypes = args.t || args.types || isRelease;
 const buildAllMatching = args.all || args.a;
 const commit = execa.sync('git', ['rev-parse', 'HEAD']).stdout.slice(0, 7);
 
@@ -38,7 +39,7 @@ run();
 
 async function run() {
   const cwd = process.cwd();
-  const target = cwd.match(/packages[\\, /](\w+)$/)[1];
+  const target = cwd.match(/packages[\\, /](\D+)$/)[1];
   if (target) {
     await build(target);
     checkAllSizes([target]);
@@ -98,7 +99,7 @@ async function build(target) {
         .filter(Boolean)
         .join(','),
     ],
-    { stdio: 'inherit' }
+    { stdio: 'inherit', cwd: rootPath }
   );
 
   if (buildTypes && pkg.types) {

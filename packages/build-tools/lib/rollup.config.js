@@ -1,3 +1,5 @@
+// based on https://github.com/vuejs/vue-next/blob/master/rollup.config.js
+
 import path from 'path';
 import ts from 'rollup-plugin-typescript2';
 import replace from '@rollup/plugin-replace';
@@ -93,6 +95,34 @@ function createConfig(format, output, plugins = []) {
   const isNodeBuild = format === 'cjs';
   const isGlobalBuild = /global/.test(format);
 
+  const dependencies = [
+    ...Object.keys(pkg.dependencies || {}),
+    ...Object.keys(pkg.peerDependencies || {}),
+  ];
+
+  const external =
+    isGlobalBuild || isBrowserESMBuild
+      ? packageOptions.enableNonBrowserBranches
+        ? // externalize postcss for @vue/compiler-sfc
+          // because @rollup/plugin-commonjs cannot bundle it properly
+          [] // ['postcss']
+        : // normal browser builds - non-browser only imports are tree-shaken,
+          // they are only listed here to suppress warnings.
+          // ['source-map', '@babel/parser', 'estree-walker']
+          []
+      : // Node / esm-bundler builds. Externalize everything.
+        dependencies;
+
+  const dependenciesInclude =
+    isGlobalBuild || isBrowserESMBuild
+      ? dependencies
+          .filter((e) => /@nextgis/.test(e))
+          .map((e) => {
+            const name = e.replace('@nextgis/', '');
+            return path.resolve(packagesDir, name, 'src');
+          })
+      : [];
+
   let compilerOptions = {};
 
   if (isGlobalBuild) {
@@ -104,7 +134,6 @@ function createConfig(format, output, plugins = []) {
   }
 
   const shouldEmitDeclarations = process.env.TYPES != null && !hasTSChecked;
-
   const tsPlugin = ts({
     check: process.env.NODE_ENV === 'production' && !hasTSChecked,
     tsconfig: path.resolve(rootPath, 'tsconfig.json'),
@@ -116,7 +145,7 @@ function createConfig(format, output, plugins = []) {
         declarationMap: shouldEmitDeclarations,
         ...compilerOptions,
       },
-      include: [resolve('src')],
+      include: [resolve('src'), ...dependenciesInclude],
     },
   });
   // we only need to check TS and generate declarations once for each build.
@@ -126,26 +155,10 @@ function createConfig(format, output, plugins = []) {
 
   const entryFile = /runtime$/.test(format) ? `src/runtime.ts` : `src/index.ts`;
 
-  const external =
-    isGlobalBuild || isBrowserESMBuild
-      ? packageOptions.enableNonBrowserBranches
-        ? // externalize postcss for @vue/compiler-sfc
-          // because @rollup/plugin-commonjs cannot bundle it properly
-          ['postcss']
-        : // normal browser builds - non-browser only imports are tree-shaken,
-          // they are only listed here to suppress warnings.
-          ['source-map', '@babel/parser', 'estree-walker']
-      : // Node / esm-bundler builds. Externalize everything.
-        [
-          ...Object.keys(pkg.dependencies || {}),
-          ...Object.keys(pkg.peerDependencies || {}),
-          ...['path', 'url'], // for @vue/compiler-sfc
-        ];
-
   // the browser builds of @vue/compiler-sfc requires postcss to be available
   // as a global (e.g. http://wzrd.in/standalone/postcss)
   output.globals = {
-    postcss: 'postcss',
+    // postcss: 'postcss',
   };
 
   const nodePlugins =
@@ -224,14 +237,14 @@ function createReplacePlugin(
     __NODE_JS__: isNodeBuild,
     __FEATURE_OPTIONS__: true,
     __FEATURE_SUSPENSE__: true,
-    ...(isProduction && isBrowserBuild
-      ? {
-          'context.onError(': `/*#__PURE__*/ context.onError(`,
-          'emitError(': `/*#__PURE__*/ emitError(`,
-          'createCompilerError(': `/*#__PURE__*/ createCompilerError(`,
-          'createDOMCompilerError(': `/*#__PURE__*/ createDOMCompilerError(`,
-        }
-      : {}),
+    // ...(isProduction && isBrowserBuild
+    //   ? {
+    //       'context.onError(': `/*#__PURE__*/ context.onError(`,
+    //       'emitError(': `/*#__PURE__*/ emitError(`,
+    //       'createCompilerError(': `/*#__PURE__*/ createCompilerError(`,
+    //       'createDOMCompilerError(': `/*#__PURE__*/ createDOMCompilerError(`,
+    //     }
+    //   : {}),
   };
   // allow inline overrides like
   //__RUNTIME_COMPILE__=true yarn build runtime-core
