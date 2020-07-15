@@ -1,4 +1,5 @@
-const NgwConnector = require('@nextgis/ngw-connector');
+// const NgwConnector = require('@nextgis/ngw-connector');
+const NgwConnector = require('../../lib/ngw-connector.cjs');
 
 async function connect() {
   const connector = new NgwConnector({ baseUrl: 'https://demo.nextgis.com' });
