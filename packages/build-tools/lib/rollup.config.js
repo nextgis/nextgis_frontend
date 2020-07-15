@@ -152,6 +152,13 @@ function createConfig(format, output, plugins = []) {
         ]
       : [];
 
+  nodePlugins.push(
+    require('rollup-plugin-postcss')({
+      extract: resolve(`lib/${name}.css`),
+      plugins: [require('postcss-assets')],
+    })
+  );
+
   return {
     input: resolve(entryFile),
     // Global and Browser ESM builds inlines everything so that they can be

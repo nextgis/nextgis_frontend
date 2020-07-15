@@ -2,9 +2,10 @@
   "name": "@nextgis/item",
   "version": "0.32.0",
   "description": "Hierarchical layers control",
-  "main": "lib/item.js",
-  "module": "lib/item.esm.js",
-  "unpkg": "lib/item.js",
+  "main": "index.js",
+  "module": "lib/items.esm-bundler.js",
+  "unpkg": "lib/items.global.prod.js",
+  "jsdelivr": "lib/items.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
     "events": "^3.1.0"
@@ -12,11 +13,19 @@
   "devDependencies": {
     "@nextgis/build-tools": "file:../build-tools"
   },
+  "buildOptions": {
+    "name": "Items",
+    "formats": [
+      "esm-bundler",
+      "esm-browser",
+      "cjs",
+      "global"
+    ]
+  },
   "scripts": {
     "clean": "rimraf ./lib",
-    "dev": "npm run clean && webpack --config ./webpack.config.js --progress",
-    "build": "npm run dev -- --mode=production",
-    "prod": "npm run build",
+    "dev": "node ../build-tools/lib/rollup.build.js",
+    "prod": "node ../build-tools/lib/rollup.build.js --release",
     "lint": "eslint ./src/**/*.ts --fix --c ../../.eslintrc",
     "watch": "npm run dev -- --watch"
   },
@@ -26,10 +35,11 @@
   ],
   "author": "NextGIS",
   "files": [
+    "index.js",
     "lib"
   ],
   "license": "LGPL-3.0",
-
+  "homepage": "https://github.com/nextgis/nextgis_frontend/tree/master/packages/items#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nextgis/nextgis_frontend.git"

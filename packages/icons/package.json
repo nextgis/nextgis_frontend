@@ -2,9 +2,10 @@
   "name": "@nextgis/icons",
   "version": "0.32.0",
   "description": "Svg icon pack",
-  "main": "lib/icons.js",
-  "module": "lib/icons.esm.js",
-  "unpkg": "lib/icons.js",
+  "main": "index.js",
+  "module": "lib/icons.esm-bundler.js",
+  "unpkg": "lib/icons.global.prod.js",
+  "jsdelivr": "lib/icons.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/paint": "^0.32.0"
@@ -12,11 +13,18 @@
   "devDependencies": {
     "@nextgis/build-tools": "file:../build-tools"
   },
+"buildOptions": {
+    "name": "Icons",
+    "formats": [
+      "esm-bundler",
+      "esm-browser",
+      "global"
+    ]
+  },
   "scripts": {
     "clean": "rimraf ./lib",
-    "dev": "npm run clean && webpack --config ./webpack.config.js --progress",
-    "build": "npm run dev -- --mode=production",
-    "prod": "npm run build",
+    "dev": "node ../build-tools/lib/rollup.build.js",
+    "prod": "node ../build-tools/lib/rollup.build.js --release",
     "lint": "eslint ./src/**/*.ts --fix --c ../../.eslintrc",
     "watch": "npm run dev -- --watch"
   },
@@ -25,18 +33,17 @@
     "MAP"
   ],
   "author": "NextGIS",
-
   "files": [
+    "index.js",
     "lib"
   ],
   "license": "LGPL-3.0",
-
+  "homepage": "https://github.com/nextgis/nextgis_frontend/tree/master/packages/icons#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nextgis/nextgis_frontend.git"
   },
   "bugs": {
     "url": "https://github.com/nextgis/nextgis_frontend/issues"
-  },
-  "gitHead": "f9de341f87a5d00048a4b5d072af51837ced56e1"
+  }
 }
