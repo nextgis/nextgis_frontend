@@ -2,7 +2,8 @@ import StrictEventEmitter from 'strict-event-emitter-types';
 import { EventEmitter } from 'events';
 import CancelablePromise from '@nextgis/cancelable-promise';
 import { fixUrlStr, deepmerge } from '@nextgis/utils';
-import WebMap, {
+import {
+  WebMap,
   MapAdapter,
   ControlPositions,
   MapControls,
@@ -22,7 +23,9 @@ import NgwConnector, {
   LayerFeature,
 } from '@nextgis/ngw-connector';
 import { QmsAdapterOptions } from '@nextgis/qms-kit';
-import NgwKit, {
+import {
+  NgwKit,
+  addNgwLayer,
   NgwLayerOptions,
   ResourceAdapter,
   WebMapLayerItem,
@@ -31,6 +34,14 @@ import NgwKit, {
   KeynamedNgwLayerOptions,
   ResourceIdNgwLayerOptions,
   ResourceNgwLayerOptions,
+  getNgwLayerItem,
+  getNgwLayerItems,
+  getNgwLayerFeature,
+  getNgwLayerFeatures,
+  getIdentifyGeoJson,
+  getNgwResourceExtent,
+  sendIdentifyRequest,
+  getCompanyLogo,
 } from '@nextgis/ngw-kit';
 import { getIcon } from '@nextgis/icons';
 
@@ -71,13 +82,6 @@ export class NgwMap<
   C = any,
   O = Record<string, any>
 > extends WebMap<M, L, C, NgwMapEvents> {
-  // static utils = {
-  //   ...WebMap.utils,
-  //   ...NgwKit.utils,
-  //   fixUrlStr,
-  //   deepmerge,
-  // };
-  // static decorators = { onMapLoad, ...WebMap.decorators };
   static getIcon = getIcon;
 
   readonly emitter: StrictEventEmitter<
@@ -169,7 +173,7 @@ export class NgwMap<
     }
     if (this.options.baseUrl || this.options.baseUrl === '') {
       try {
-        const adapter = NgwKit.utils.addNgwLayer(options, this, this.connector);
+        const adapter = addNgwLayer(options, this, this.connector);
 
         const layer = (await this.addLayer(adapter, {
           visibility: true,
@@ -217,7 +221,7 @@ export class NgwMap<
     resourceId: number;
     featureId: number;
   }): CancelablePromise<FeatureItem> {
-    return NgwKit.utils.getNgwLayerItem({
+    return getNgwLayerItem({
       connector: this.connector,
       ...options,
     });
@@ -230,7 +234,7 @@ export class NgwMap<
       filters?: PropertiesFilter;
     } & FilterOptions
   ): CancelablePromise<FeatureItem[]> {
-    return NgwKit.utils.getNgwLayerItems({
+    return getNgwLayerItems({
       connector: this.connector,
       ...options,
     });
@@ -243,7 +247,7 @@ export class NgwMap<
     resourceId: number;
     featureId: number;
   }): CancelablePromise<Feature<G, P>> {
-    return NgwKit.utils.getNgwLayerFeature<G, P>({
+    return getNgwLayerFeature<G, P>({
       connector: this.connector,
       ...options,
     });
@@ -259,7 +263,7 @@ export class NgwMap<
       filters?: PropertiesFilter;
     } & FilterOptions
   ): CancelablePromise<FeatureCollection<G, P>> {
-    return NgwKit.utils.getNgwLayerFeatures({
+    return getNgwLayerFeatures({
       connector: this.connector,
       ...options,
     });
@@ -269,7 +273,7 @@ export class NgwMap<
     identify: NgwIdentify,
     multiple = false
   ): CancelablePromise<Feature | undefined> {
-    const geojson = NgwKit.utils.getIdentifyGeoJson({
+    const geojson = getIdentifyGeoJson({
       identify,
       connector: this.connector,
       multiple,
@@ -343,13 +347,11 @@ export class NgwMap<
           item = await this.connector.getResource(resourceId);
         }
         if (item) {
-          NgwKit.utils
-            .getNgwResourceExtent(item, this.connector)
-            .then((extent) => {
-              if (extent) {
-                this.fitBounds(extent);
-              }
-            });
+          getNgwResourceExtent(item, this.connector).then((extent) => {
+            if (extent) {
+              this.fitBounds(extent);
+            }
+          });
         }
       }
     }
@@ -539,27 +541,25 @@ export class NgwMap<
       Math.pow(2, zoom + 8);
     // FIXME: understand the circle creation function
     const radius = pixelRadius * metresPerPixel * 0.0005;
-    return NgwKit.utils
-      .sendIdentifyRequest(ev, {
-        layers: ids,
-        connector: this.connector,
-        radius,
-      })
-      .then((resp) => {
-        this._emitStatusEvent('ngw:select', {
-          ...resp,
-          resources: ids,
-          sourceType: 'raster',
-          event: ev,
-        });
-        return resp;
+    return sendIdentifyRequest(ev, {
+      layers: ids,
+      connector: this.connector,
+      radius,
+    }).then((resp) => {
+      this._emitStatusEvent('ngw:select', {
+        ...resp,
+        resources: ids,
+        sourceType: 'raster',
+        event: ev,
       });
+      return resp;
+    });
   }
 
   private async _whiteLabel() {
     const container = this.getContainer();
     if (container) {
-      const logo = await NgwKit.utils.getCompanyLogo(
+      const logo = await getCompanyLogo(
         this.connector,
         this.options.companyLogoOptions
       );
@@ -569,15 +569,3 @@ export class NgwMap<
     }
   }
 }
-
-// update static utils for backward compatibility
-NgwMap.utils = {
-  ...NgwMap.utils,
-  ...NgwKit.utils,
-  ...{
-    deepmerge,
-    fixUrlStr,
-  },
-};
-
-NgwMap.decorators = { ...{ onMapLoad }, ...WebMap.decorators };

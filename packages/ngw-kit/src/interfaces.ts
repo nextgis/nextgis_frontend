@@ -1,4 +1,5 @@
-import WebMap, {
+import {
+  WebMap,
   AdapterOptions,
   LayerAdaptersOptions,
   WebMapEvents,

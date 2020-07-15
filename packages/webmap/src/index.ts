@@ -10,7 +10,7 @@
  *
  * @example
  * ```js
- * import WebMap from "@nextgis/webmap";
+ * import { WebMap } from "@nextgis/webmap";
  *
  * import "./leaflet-style-override.css";
  * import MapAdapter from "@nextgis/leaflet-map-adapter";
@@ -39,8 +39,6 @@
  * @packageDocumentation
  */
 
-import { WebMap } from './WebMap';
-
 export * from './WebMap';
 export * from './WebMapLayers';
 export * from './WebMapControls';
@@ -53,6 +51,3 @@ export * from './interfaces/MapControl';
 export * from './interfaces/StarterKit';
 export * from './interfaces/LayerAdapter';
 export * from './interfaces/RuntimeParams';
-
-export { WebMap };
-export default WebMap;

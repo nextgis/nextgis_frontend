@@ -1,4 +1,4 @@
-import WebMap from '@nextgis/webmap';
+import { WebMap } from '@nextgis/webmap';
 import { NgwMapEvents } from './interfaces';
 
 /**
