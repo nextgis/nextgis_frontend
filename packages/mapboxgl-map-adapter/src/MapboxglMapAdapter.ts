@@ -81,7 +81,6 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   ];
 
   private _sourceDataLoading: { [name: string]: any[] } = {};
-  private _sortTimerId?: number;
   private __setLayerOrder: (layers: { [x: string]: TLayerAdapter }) => void;
 
   constructor() {
@@ -329,7 +328,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
       this.map._onMapClickLayers
         // @ts-ignore
         .sort((a, b) => {
-          if (a.options?.order && b.options?.order) {
+          if (a.options && a.options.order && b.options && b.options.order) {
             return b.options.order - a.options.order;
           }
           return 1;

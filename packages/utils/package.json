@@ -10,6 +10,15 @@
   "devDependencies": {
     "@nextgis/build-tools": "file:../build-tools"
   },
+  "buildOptions": {
+    "name": "Utils",
+    "formats": [
+      "esm-bundler",
+      "esm-browser",
+      "cjs",
+      "global"
+    ]
+  },
   "scripts": {
     "clean": "rimraf ./lib",
     "dev": "node ../build-tools/lib/rollup.build.js",
@@ -26,15 +35,6 @@
     "index.js",
     "lib"
   ],
-  "buildOptions": {
-    "name": "Utils",
-    "formats": [
-      "esm-bundler",
-      "esm-browser",
-      "cjs",
-      "global"
-    ]
-  },
   "license": "LGPL-3.0",
   "homepage": "https://github.com/nextgis/nextgis_frontend/tree/master/packages/utils#readme",
   "repository": {

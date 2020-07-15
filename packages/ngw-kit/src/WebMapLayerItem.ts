@@ -1,4 +1,4 @@
-import Item, { ItemOptions } from '@nextgis/item';
+import { ItemOptions, Item } from '@nextgis/item';
 
 import WebMap, {
   LayerAdapter,
