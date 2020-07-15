@@ -8,15 +8,17 @@ export function createPopupContent(
 ): HTMLElement | string {
   const element = create('div');
   if (item) {
-    item.feature_layer?.fields.forEach((x) => {
-      if (x.grid_visibility) {
-        const value = feature.properties && feature.properties[x.keyname];
-        if (value) {
-          const propElem = create('div', null, element);
-          propElem.innerHTML = `<span>${x.display_name}</span>: ${value}<span></span>`;
+    if (item.feature_layer) {
+      item.feature_layer.fields.forEach((x) => {
+        if (x.grid_visibility) {
+          const value = feature.properties && feature.properties[x.keyname];
+          if (value) {
+            const propElem = create('div', null, element);
+            propElem.innerHTML = `<span>${x.display_name}</span>: ${value}<span></span>`;
+          }
         }
-      }
-    });
+      });
+    }
   } else if (feature.properties) {
     for (const p in feature.properties) {
       const propElem = create('div', null, element);

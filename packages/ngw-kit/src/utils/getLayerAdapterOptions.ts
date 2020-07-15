@@ -1,4 +1,5 @@
-import WebMap, {
+import {
+  WebMap,
   RasterAdapterOptions,
   ImageAdapterOptions,
 } from '@nextgis/webmap';

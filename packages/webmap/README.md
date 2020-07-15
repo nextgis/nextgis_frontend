@@ -14,7 +14,7 @@ $ yarn add @nextgis/webmap
 ```
 
 ```js
-import WebMap from '@nextgis/webmap';
+import { WebMap } from '@nextgis/webmap';
 import LeafletMapAdapter from '@nextgis/leaflet-map-adapter';
 // manually added styles
 import 'leaflet/dist/leaflet.css';

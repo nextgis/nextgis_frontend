@@ -59,7 +59,7 @@ import { WebMapControls } from './WebMapControls';
  *
  * @example
  * ```js
- * import WebMap from '@nextgis/webmap';
+ * import { WebMap } from '@nextgis/webmap';
  * import MapAdapter from '@nextgis/ol-map-adapter';
  *
  * const webMap = new WebMap({
