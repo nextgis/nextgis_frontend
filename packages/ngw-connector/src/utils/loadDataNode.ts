@@ -4,9 +4,13 @@ import {
 } from '../interfaces';
 
 // the 'eval' is used to exclude packages from the webpack bundle for browser
-const url = eval('require("url")');
-const http = eval('require("http")');
-const https = eval('require("https")');
+// const url = require("url")');
+// const http = require("http")');
+// const https = require("https")');
+
+const url = require('url');
+const http = require('http');
+const https = require('https');
 
 const adapterFor = (inputUrl: string) => {
   const adapters: Record<string, any> = {
