@@ -26,10 +26,10 @@ type LoadData = (
 
 let loadData: LoadData;
 
-const isBrowser = new Function(
-  'try {return this===window;}catch(e){ return false;}'
-)();
-if (isBrowser) {
+// const isBrowser = new Function(
+//   'try {return this===window;}catch(e){ return false;}'
+// )();
+if (__BROWSER__) {
   loadData = require('./loadDataBrowser').default;
 } else {
   loadData = require('./loadDataNode').default;
