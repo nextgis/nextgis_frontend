@@ -1,6 +1,7 @@
 import { ItemOptions, Item } from '@nextgis/item';
 
-import WebMap, {
+import {
+  WebMap,
   LayerAdapter,
   LayerAdapterDefinition,
   ImageAdapterOptions,

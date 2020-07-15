@@ -1,5 +1,6 @@
 import { EventEmitter } from 'events';
-import WebMap, {
+import {
+  WebMap,
   VectorLayerAdapter,
   Type,
   GeoJsonAdapterOptions,
@@ -40,7 +41,11 @@ export async function createGeoJsonAdapter(
 
   const resourceId = await resourceIdFromLayerOptions(options, connector);
 
-  if (options.adapterOptions?.popupOptions?.fromProperties) {
+  if (
+    options.adapterOptions &&
+    options.adapterOptions.popupOptions &&
+    options.adapterOptions.popupOptions.fromProperties
+  ) {
     options.adapterOptions.popupOptions.createPopupContent = ({ feature }) => {
       return feature && createPopupContent(feature, item);
     };

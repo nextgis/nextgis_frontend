@@ -2,7 +2,7 @@ import NgwConnector, {
   ResourceCls,
   ResourceItem,
 } from '@nextgis/ngw-connector';
-import WebMap from '@nextgis/webmap';
+import { WebMap } from '@nextgis/webmap';
 import { Type } from '@nextgis/utils';
 
 import {

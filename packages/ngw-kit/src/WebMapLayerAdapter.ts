@@ -1,4 +1,9 @@
-import WebMap, { LngLatBoundsArray, MapClickEvent } from '@nextgis/webmap';
+import {
+  WebMap,
+  LngLatBoundsArray,
+  MapClickEvent,
+  RasterAdapterOptions,
+} from '@nextgis/webmap';
 import {
   ResourceItem,
   WebmapResource,
@@ -12,7 +17,6 @@ import StrictEventEmitter from 'strict-event-emitter-types';
 import { EventEmitter } from 'events';
 
 import {
-  getLayerAdapterOptions,
   updateImageParams,
   sendIdentifyRequest,
   getWebMapExtent,
@@ -28,6 +32,7 @@ import {
   ResourceAdapter,
 } from './interfaces';
 import { createOnFirstShowAdapter } from './createBasemapWebmapItemAdapter';
+import { getLayerAdapterOptions } from './utils/getLayerAdapterOptions';
 
 export class WebMapLayerAdapter<M = any> implements ResourceAdapter<M> {
   layer?: WebMapLayerItem;
@@ -243,16 +248,17 @@ export class WebMapLayerAdapter<M = any> implements ResourceAdapter<M> {
         item.updateWmsParams = (params) =>
           updateImageParams(params, resourceId);
         const adapter = item.layer_adapter.toUpperCase() as NgwLayerAdapterType;
+        const layerAdapterOptions = getLayerAdapterOptions(
+          {
+            adapter,
+            resourceId,
+          },
+          webMap,
+          this.options.connector.options.baseUrl || ''
+        ) as RasterAdapterOptions;
         item = {
           ...item,
-          ...getLayerAdapterOptions(
-            {
-              adapter,
-              resourceId,
-            },
-            webMap,
-            this.options.connector.options.baseUrl || ''
-          ),
+          ...layerAdapterOptions,
         };
       }
     }

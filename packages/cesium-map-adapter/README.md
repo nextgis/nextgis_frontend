@@ -14,7 +14,7 @@ $ yarn add @nextgis/ol-map-adapter
 ```
 
 ```js
-import WebMap from '@nextgis/webmap';
+import { WebMap } from '@nextgis/webmap';
 import OlMapAdapter from '@nextgis/ol-map-adapter';
 // manually added styles
 import 'ol/ol.css';
