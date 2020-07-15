@@ -103,24 +103,14 @@ function createConfig(format, output, plugins = []) {
   const external =
     isGlobalBuild || isBrowserESMBuild
       ? packageOptions.enableNonBrowserBranches
-        ? // externalize postcss for @vue/compiler-sfc
-          // because @rollup/plugin-commonjs cannot bundle it properly
-          [] // ['postcss']
-        : // normal browser builds - non-browser only imports are tree-shaken,
-          // they are only listed here to suppress warnings.
-          // ['source-map', '@babel/parser', 'estree-walker']
-          []
+        ? []
+        : []
       : // Node / esm-bundler builds. Externalize everything.
         dependencies;
 
   const dependenciesInclude =
     isGlobalBuild || isBrowserESMBuild
-      ? dependencies
-          .filter((e) => /@nextgis/.test(e))
-          .map((e) => {
-            const name = e.replace('@nextgis/', '');
-            return path.resolve(packagesDir, name, 'src');
-          })
+      ? getDeepDependencies(process.env.TARGET)
       : [];
 
   let compilerOptions = {};
@@ -145,7 +135,11 @@ function createConfig(format, output, plugins = []) {
         declarationMap: shouldEmitDeclarations,
         ...compilerOptions,
       },
-      include: [resolve('src'), ...dependenciesInclude],
+      include: [
+        resolve('src'),
+        path.resolve(packagesDir, 'global.d.ts'),
+        ...dependenciesInclude,
+      ],
     },
   });
   // we only need to check TS and generate declarations once for each build.
@@ -155,14 +149,11 @@ function createConfig(format, output, plugins = []) {
 
   const entryFile = /runtime$/.test(format) ? `src/runtime.ts` : `src/index.ts`;
 
-  // the browser builds of @vue/compiler-sfc requires postcss to be available
-  // as a global (e.g. http://wzrd.in/standalone/postcss)
-  output.globals = {
-    // postcss: 'postcss',
-  };
+  output.globals = {};
 
   const nodePlugins =
-    packageOptions.enableNonBrowserBranches && format !== 'cjs'
+    // packageOptions.enableNonBrowserBranches &&
+    format !== 'cjs'
       ? [
           require('@rollup/plugin-node-resolve').nodeResolve({
             preferBuiltins: true,
@@ -174,6 +165,8 @@ function createConfig(format, output, plugins = []) {
           require('rollup-plugin-node-globals')(),
         ]
       : [];
+
+  // nodePlugins.push(require('rollup-plugin-node-polyfills')());
 
   return {
     input: resolve(entryFile),
@@ -281,4 +274,26 @@ function createMinifiedConfig(format) {
       }),
     ]
   );
+}
+
+function getDeepDependencies(target, _nextgisDeps = []) {
+  const packageDir_ = path.resolve(packagesDir, target);
+  const resolve_ = (p) => path.resolve(packageDir_, p);
+  const pkg_ = require(resolve_(`package.json`));
+
+  const dependencies = [
+    ...Object.keys(pkg_.dependencies || {}),
+    ...Object.keys(pkg_.peerDependencies || {}),
+  ];
+  dependencies
+    .filter((e) => /@nextgis/.test(e))
+    .forEach((e) => {
+      const name = e.replace('@nextgis/', '');
+      const depPath = path.resolve(packagesDir, name, 'src');
+      if (!_nextgisDeps.includes(depPath)) {
+        _nextgisDeps.push(depPath);
+        getDeepDependencies(name, _nextgisDeps);
+      }
+    });
+  return _nextgisDeps;
 }
