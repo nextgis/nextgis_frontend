@@ -1,7 +1,7 @@
+import { MapEventType, EventData, ResourceType } from 'mapbox-gl';
+
 interface OnLayerClickLayer {
-  _onLayerClick: (
-    e: mapboxgl.MapEventType['click'] & mapboxgl.EventData
-  ) => any;
+  _onLayerClick: (e: MapEventType['click'] & EventData) => any;
   options: { order?: number };
 }
 

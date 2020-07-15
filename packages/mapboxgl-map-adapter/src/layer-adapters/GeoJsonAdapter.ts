@@ -361,7 +361,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
       const source = this.map.getSource(this.source);
       if (source) {
         // @ts-ignore
-        return source._data?.features || [];
+        return source._data ? source._data.features : [];
       }
     }
     return this._features;
