@@ -39,20 +39,6 @@ const outputConfigs = {
     file: resolve(`lib/${name}.global.js`),
     format: `iife`,
   },
-
-  // runtime-only builds, for main "vue" package only
-  'esm-bundler-runtime': {
-    file: resolve(`lib/${name}.runtime.esm-bundler.js`),
-    format: `es`,
-  },
-  'esm-browser-runtime': {
-    file: resolve(`lib/${name}.runtime.esm-browser.js`),
-    format: 'es',
-  },
-  'global-runtime': {
-    file: resolve(`lib/${name}.runtime.global.js`),
-    format: 'iife',
-  },
 };
 
 const defaultFormats = ['esm-bundler', 'cjs'];
@@ -71,7 +57,7 @@ if (process.env.NODE_ENV === 'production') {
     if (format === 'cjs') {
       packageConfigs.push(createProductionConfig(format));
     }
-    if (/^(global|esm-browser)(-runtime)?/.test(format)) {
+    if (/^(global|esm-browser)?/.test(format)) {
       packageConfigs.push(createMinifiedConfig(format));
     }
   });
@@ -87,7 +73,7 @@ function createConfig(format, output, plugins = []) {
 
   output.sourcemap = !!process.env.SOURCE_MAP;
   output.externalLiveBindings = false;
-
+  output.exports = 'auto';
   const isProductionBuild =
     process.env.__DEV__ === 'false' || /\.prod\.js$/.test(output.file);
   const isBundlerESMBuild = /esm-bundler/.test(format);
@@ -147,7 +133,7 @@ function createConfig(format, output, plugins = []) {
   // during a single build.
   hasTSChecked = true;
 
-  const entryFile = /runtime$/.test(format) ? `src/runtime.ts` : `src/index.ts`;
+  const entryFile = `src/index.ts`;
 
   output.globals = {};
 
@@ -165,8 +151,6 @@ function createConfig(format, output, plugins = []) {
           require('rollup-plugin-node-globals')(),
         ]
       : [];
-
-  // nodePlugins.push(require('rollup-plugin-node-polyfills')());
 
   return {
     input: resolve(entryFile),
@@ -240,7 +224,7 @@ function createReplacePlugin(
     //   : {}),
   };
   // allow inline overrides like
-  //__RUNTIME_COMPILE__=true yarn build runtime-core
+
   Object.keys(replacements).forEach((key) => {
     if (key in process.env) {
       replacements[key] = process.env[key];
