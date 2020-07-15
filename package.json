@@ -23,7 +23,6 @@
   },
   "devDependencies": {
     "@microsoft/api-documenter": "^7.8.21",
-    "@microsoft/api-extractor": "^7.9.2",
     "@types/chai": "^4.2.11",
     "@types/mocha": "^7.0.2",
     "@types/rimraf": "^3.0.0",

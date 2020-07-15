@@ -40,6 +40,8 @@ let ID = 0;
  * @public
  */
 export class CancelablePromise<T = any> implements Promise<T> {
+  static CancelError = CancelError;
+
   readonly [Symbol.toStringTag]: string;
   readonly id = ID++;
   private _isCanceled = false;
