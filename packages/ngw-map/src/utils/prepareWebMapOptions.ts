@@ -2,7 +2,7 @@ import { deepmerge } from '@nextgis/utils';
 import { MapAdapter, StarterKit, AppOptions } from '@nextgis/webmap';
 import NgwConnector from '@nextgis/ngw-connector';
 import QmsKit from '@nextgis/qms-kit';
-import NgwKit from '@nextgis/ngw-kit';
+import { NgwKit } from '@nextgis/ngw-kit';
 
 import { NgwMapOptions } from '../interfaces';
 
