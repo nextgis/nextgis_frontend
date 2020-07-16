@@ -85,7 +85,6 @@ function createConfig(format, output, plugins = []) {
     ...Object.keys(pkg.dependencies || {}),
     ...Object.keys(pkg.peerDependencies || {}),
   ];
-
   const external =
     isGlobalBuild || isBrowserESMBuild
       ? packageOptions.enableNonBrowserBranches
@@ -93,11 +92,6 @@ function createConfig(format, output, plugins = []) {
         : []
       : // Node / esm-bundler builds. Externalize everything.
         dependencies;
-
-  const dependenciesInclude =
-    isGlobalBuild || isBrowserESMBuild
-      ? getDeepDependencies(process.env.TARGET)
-      : [];
 
   let compilerOptions = {};
 
@@ -121,11 +115,6 @@ function createConfig(format, output, plugins = []) {
         declarationMap: shouldEmitDeclarations,
         ...compilerOptions,
       },
-      include: [
-        resolve('src'),
-        path.resolve(packagesDir, 'global.d.ts'),
-        ...dependenciesInclude,
-      ],
     },
   });
   // we only need to check TS and generate declarations once for each build.
@@ -265,26 +254,4 @@ function createMinifiedConfig(format) {
       }),
     ]
   );
-}
-
-function getDeepDependencies(target, _nextgisDeps = []) {
-  const packageDir_ = path.resolve(packagesDir, target);
-  const resolve_ = (p) => path.resolve(packageDir_, p);
-  const pkg_ = require(resolve_(`package.json`));
-
-  const dependencies = [
-    ...Object.keys(pkg_.dependencies || {}),
-    ...Object.keys(pkg_.peerDependencies || {}),
-  ];
-  dependencies
-    .filter((e) => /@nextgis/.test(e))
-    .forEach((e) => {
-      const name = e.replace('@nextgis/', '');
-      const depPath = path.resolve(packagesDir, name, 'src');
-      if (!_nextgisDeps.includes(depPath)) {
-        _nextgisDeps.push(depPath);
-        getDeepDependencies(name, _nextgisDeps);
-      }
-    });
-  return _nextgisDeps;
 }
