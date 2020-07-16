@@ -1,7 +1,7 @@
 import StrictEventEmitter from 'strict-event-emitter-types';
 import { EventEmitter } from 'events';
 import CancelablePromise from '@nextgis/cancelable-promise';
-import { fixUrlStr, deepmerge } from '@nextgis/utils';
+import { deepmerge } from '@nextgis/utils';
 import {
   WebMap,
   MapAdapter,
@@ -24,7 +24,6 @@ import NgwConnector, {
 } from '@nextgis/ngw-connector';
 import { QmsAdapterOptions } from '@nextgis/qms-kit';
 import {
-  NgwKit,
   addNgwLayer,
   NgwLayerOptions,
   ResourceAdapter,
@@ -45,7 +44,6 @@ import {
 } from '@nextgis/ngw-kit';
 import { getIcon } from '@nextgis/icons';
 
-import { onMapLoad } from './decorators';
 import { appendNgwResources } from './utils/appendNgwResources';
 import { prepareWebMapOptions, OPTIONS } from './utils/prepareWebMapOptions';
 
@@ -96,10 +94,6 @@ export class NgwMap<
   private __selectFromNgwRaster?: (ev: MapClickEvent) => void;
   private __selectFromNgwVector?: (ev: OnLayerClickOptions) => void;
 
-  /**
-   * @param mapAdapter #noapi
-   * @param options
-   */
   constructor(mapAdapter: MapAdapter, options: NgwMapOptions<C> & O) {
     super(prepareWebMapOptions(mapAdapter, options));
     if (options.connector) {
@@ -132,19 +126,18 @@ export class NgwMap<
    * ngwMap.addControl('ZOOM', 'top-right')
    * ```
    */
-  @WebMap.decorators.onLoad<NgwMapEvents>('controls:create')
   async addControl<K extends keyof MapControls>(
     controlDef: K | C,
     position: ControlPositions,
     options?: MapControls[K]
   ): Promise<any> {
+    await this.onLoad('controls:create');
     return super.addControl(controlDef, position, options);
   }
 
   /**
    * Add any (style, vector, webmap) NGW layer by resource id.
    * @param options - set layer identification parameters and render method.
-   * @param [adapterOptions] - parameters for the selected adapter
    *
    * @example
    * ```javascript
@@ -315,7 +308,6 @@ export class NgwMap<
 
   /**
    * Move map to layer. If the layer is NGW resource, extent will be received from the server
-   * @param layerDef
    *
    * @example
    * ```javascript
