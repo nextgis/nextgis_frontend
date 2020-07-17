@@ -1,4 +1,4 @@
-import { Map } from 'ol';
+import Map from 'ol/Map';
 import { AdapterOptions } from '@nextgis/webmap';
 
 const DPI = 1000 / 39.37 / 0.28;
