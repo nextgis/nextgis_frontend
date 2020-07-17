@@ -116,6 +116,11 @@ function createConfig(format, output, plugins = []) {
         ...compilerOptions,
       },
       exclude: ['test'],
+      include: [
+        resolve('src'),
+        path.resolve(packagesDir, 'global.d.ts'),
+        ...getDeepDependencies(process.env.TARGET),
+      ],
     },
   });
   // we only need to check TS and generate declarations once for each build.
@@ -267,4 +272,26 @@ function createMinifiedConfig(format) {
       }),
     ]
   );
+}
+
+function getDeepDependencies(target, _nextgisDeps = []) {
+  const packageDir_ = path.resolve(packagesDir, target);
+  const resolve_ = (p) => path.resolve(packageDir_, p);
+  const pkg_ = require(resolve_(`package.json`));
+
+  const dependencies = [
+    ...Object.keys(pkg_.dependencies || {}),
+    ...Object.keys(pkg_.peerDependencies || {}),
+  ];
+  dependencies
+    .filter((e) => /^@nextgis\//.test(e))
+    .forEach((e) => {
+      const name = e.replace('@nextgis/', '');
+      const depPath = path.resolve(packagesDir, name, 'src');
+      if (!_nextgisDeps.includes(depPath)) {
+        _nextgisDeps.push(depPath);
+        getDeepDependencies(name, _nextgisDeps);
+      }
+    });
+  return _nextgisDeps;
 }
