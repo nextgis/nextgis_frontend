@@ -20,7 +20,7 @@
     "@nextgis/build-tools": "file:../build-tools"
   },
   "buildOptions": {
-    "name": "NgwMap",
+    "name": "NgwOrm",
     "formats": [
       "esm-bundler",
       "esm-browser",
