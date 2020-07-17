@@ -1,4 +1,4 @@
-const ReplacePlugin = require('webpack-plugin-replace');
+const webpack = require('webpack');
 
 let alias = {};
 try {
@@ -55,10 +55,8 @@ module.exports = (opt = { coverage: false }) => {
       rules,
     },
     plugins: [
-      new ReplacePlugin({
-        values: {
-          __BROWSER__: 'true',
-        },
+      new webpack.DefinePlugin({
+        __BROWSER__: true,
       }),
     ],
   };

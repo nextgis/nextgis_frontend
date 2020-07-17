@@ -31,15 +31,6 @@ type LoadData = (
 
 let loadData: LoadData;
 
-// const isBrowser = new Function(
-//   'try {return this===window;}catch(e){ return false;}'
-// )();
-// if (__BROWSER__) {
-//   loadData = require('./loadDataBrowser').default;
-// } else {
-//   loadData = require('./loadDataNode').default;
-// }
-
 if (__BROWSER__) {
   loadData = (
     url: string,
@@ -154,11 +145,6 @@ if (__BROWSER__) {
     xhr.send(data);
   };
 } else {
-  // the 'eval' is used to exclude packages from the webpack bundle for browser
-  // const url = require("url")');
-  // const http = require("http")');
-  // const https = require("https")');
-
   const url = require('url');
   const http = require('http');
   const https = require('https');
@@ -246,11 +232,3 @@ if (__BROWSER__) {
 }
 
 export { loadData };
-
-// function localeDynamicImport() {
-//   if (__BROWSER__) {
-//     return import('./loadDataBrowser');
-//   } else {
-//     return import('./loadDataNode');
-//   }
-// }
