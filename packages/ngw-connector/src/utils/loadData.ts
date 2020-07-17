@@ -41,13 +41,13 @@ let loadData: LoadData;
 // }
 
 if (__BROWSER__) {
-  loadData = function loadDataBrowser(
+  loadData = (
     url: string,
     callback: (...args: any[]) => any,
     options: NgwRequestOptions = {},
     error: (reason?: any) => void,
     onCancel: (cancelHandler: () => void) => void
-  ): void {
+  ): void => {
     options.method = options.method || 'GET';
 
     const xhr = new XMLHttpRequest();
@@ -172,13 +172,13 @@ if (__BROWSER__) {
     return adapters[protocol];
   };
 
-  loadData = function loadDataNode(
+  loadData = (
     url: string,
     callback: (...args: any[]) => any,
     options: NgwRequestOptions<RequestMethods> = {},
     error: (reason?: any) => void,
     onCancel: (cancelHandler: () => void) => void
-  ): Promise<unknown> {
+  ): Promise<unknown> => {
     const request = new Promise((resolve, reject) => {
       const adapter = adapterFor(url);
       if (adapter) {
