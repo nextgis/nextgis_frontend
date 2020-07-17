@@ -1259,6 +1259,7 @@
     execa "^4.0.2"
     file-loader "^6.0.0"
     fs-extra "^9.0.1"
+    postcss-assets "^5.0.0"
     rimraf "^3.0.2"
     rollup "^2.16.1"
     rollup-plugin-node-builtins "^2.1.2"
@@ -1414,6 +1415,13 @@
   integrity sha512-GorvORVwp244fGKEt3cgt/P+M0MGy4xEDbckw+K5ojEezxyMDgCaYPKVct+/eWQfZXOT7uq0xRpmrl/+hliabA==
   dependencies:
     "@types/node" ">= 8"
+
+"@rollup/plugin-alias@^3.1.1":
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@rollup/plugin-alias/-/plugin-alias-3.1.1.tgz#bb96cf37fefeb0a953a6566c284855c7d1cd290c"
+  integrity sha512-hNcQY4bpBUIvxekd26DBPgF7BT4mKVNDF5tBG4Zi+3IgwLxGYRY0itHs9D0oLVwXM5pvJDWJlBQro+au8WaUWw==
+  dependencies:
+    slash "^3.0.0"
 
 "@rollup/plugin-commonjs@^13.0.0":
   version "13.0.1"
