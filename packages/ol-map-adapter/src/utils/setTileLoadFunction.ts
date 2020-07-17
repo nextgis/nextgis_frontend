@@ -1,4 +1,4 @@
-import { Tile } from 'ol';
+import Tile from 'ol/Tile';
 import ImageWrapper from 'ol/Image';
 
 export function setTileLoadFunction(
