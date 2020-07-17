@@ -15,7 +15,7 @@ import {
 } from '@nextgis/properties-filter';
 import { FeatureRequestParams, GetNgwLayerItemsOptions } from '../interfaces';
 
-const FEATURE_REQUEST_PARAMS: FeatureRequestParams = {
+export const FEATURE_REQUEST_PARAMS: FeatureRequestParams = {
   srs: 4326,
   geom_format: 'geojson',
 };

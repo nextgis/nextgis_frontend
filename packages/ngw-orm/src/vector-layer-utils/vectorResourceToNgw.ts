@@ -1,4 +1,4 @@
-import { GeoJsonProperties } from 'geojson';
+import { GeoJsonProperties, GeoJsonObject } from 'geojson';
 import {
   ResourceItem,
   FeatureResource,
@@ -14,7 +14,7 @@ export interface VectorResourceToNgwOptions {
 
 export function vectorResourceToNgw(
   opt: VectorResourceToNgwOptions
-): Partial<FeatureItem<GeoJsonProperties, string>>[] {
+): Partial<FeatureItem<GeoJsonProperties, GeoJsonObject>>[] {
   // const features: Partial<FeatureItem<GeoJsonProperties, string>>[] = [];
   return opt.items.map((item) => {
     const geom = prepareGeomToNgw(item.geom);
