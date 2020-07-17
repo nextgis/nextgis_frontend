@@ -115,6 +115,7 @@ function createConfig(format, output, plugins = []) {
         declarationMap: shouldEmitDeclarations,
         ...compilerOptions,
       },
+      exclude: ['test'],
     },
   });
   // we only need to check TS and generate declarations once for each build.
@@ -126,20 +127,7 @@ function createConfig(format, output, plugins = []) {
 
   output.globals = {};
 
-  const nodePlugins =
-    // packageOptions.enableNonBrowserBranches &&
-    format !== 'cjs'
-      ? [
-          require('@rollup/plugin-node-resolve').nodeResolve({
-            preferBuiltins: true,
-          }),
-          require('@rollup/plugin-commonjs')({
-            sourceMap: false,
-          }),
-          require('rollup-plugin-node-builtins')(),
-          require('rollup-plugin-node-globals')(),
-        ]
-      : [];
+  const nodePlugins = [];
 
   nodePlugins.push(
     require('rollup-plugin-postcss')({
@@ -147,6 +135,31 @@ function createConfig(format, output, plugins = []) {
       plugins: [require('postcss-assets')],
     })
   );
+
+  if (packageOptions.alias) {
+    nodePlugins.push(
+      require('@rollup/plugin-alias')({
+        entries: packageOptions.alias.map((x) => {
+          const find = new RegExp(x.find);
+          return { ...x, find };
+        }),
+      })
+    );
+  }
+
+  // packageOptions.enableNonBrowserBranches &&
+  if (format !== 'cjs') {
+    [
+      require('@rollup/plugin-node-resolve').nodeResolve({
+        preferBuiltins: true,
+      }),
+      require('@rollup/plugin-commonjs')({
+        sourceMap: false,
+      }),
+      require('rollup-plugin-node-builtins')(),
+      require('rollup-plugin-node-globals')(),
+    ].forEach((x) => nodePlugins.push(x));
+  }
 
   return {
     input: resolve(entryFile),

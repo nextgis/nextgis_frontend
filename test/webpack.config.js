@@ -1,3 +1,5 @@
+const ReplacePlugin = require('webpack-plugin-replace');
+
 let alias = {};
 try {
   const { getAliases } = require('../build/aliases');
@@ -15,6 +17,7 @@ module.exports = (opt = { coverage: false }) => {
           loader: 'ts-loader',
           options: {
             transpileOnly: true,
+            // configFile: require.resolve('tsconfig.json'),
           },
         },
       ],
@@ -51,5 +54,12 @@ module.exports = (opt = { coverage: false }) => {
     module: {
       rules,
     },
+    plugins: [
+      new ReplacePlugin({
+        values: {
+          __BROWSER__: 'true',
+        },
+      }),
+    ],
   };
 };
