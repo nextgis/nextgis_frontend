@@ -19,8 +19,8 @@
     "types": ["node"],
     "rootDir": ".",
 
-    // "emitDecoratorMetadata": true,
-    // "noImplicitReturns": false,
+    "emitDecoratorMetadata": true,
+    "noImplicitReturns": false,
 
     "paths": {
       "@nextgis/*": ["./packages/*/src/"]
@@ -28,6 +28,8 @@
   },
   "includes": [
     "packages/global.d.ts",
-    "packages/*/src"
+    "packages/*/src",
+    "test"
   ]
 }
+
