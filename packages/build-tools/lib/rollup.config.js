@@ -129,13 +129,6 @@ function createConfig(format, output, plugins = []) {
 
   const nodePlugins = [];
 
-  nodePlugins.push(
-    require('rollup-plugin-postcss')({
-      extract: resolve(`lib/${name}.css`),
-      plugins: [require('postcss-assets')],
-    })
-  );
-
   if (packageOptions.alias) {
     nodePlugins.push(
       require('@rollup/plugin-alias')({
@@ -160,6 +153,13 @@ function createConfig(format, output, plugins = []) {
       require('rollup-plugin-node-globals')(),
     ].forEach((x) => nodePlugins.push(x));
   }
+
+  nodePlugins.push(
+    require('rollup-plugin-postcss')({
+      extract: resolve(`lib/${name}.css`),
+      plugins: [require('postcss-assets')],
+    })
+  );
 
   return {
     input: resolve(entryFile),
