@@ -1,32 +1,33 @@
 {
   "name": "@nextgis/vuex-ngw",
   "version": "0.32.0",
-  "description": "Development tools",
-  "main": "lib/vuex-ngw.js",
-  "module": "lib/vuex-ngw.esm.js",
-  "unpkg": "lib/vue-ngw.js",
+  "description": "Vuex store for NGW feature layers",
+  "main": "index.js",
+  "module": "lib/vuex-ngw.esm-bundler.js",
   "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/ngw-connector": "^0.32.0",
     "@nextgis/webmap": "^0.32.0",
-    "@types/proj4": "^2.5.0",
-    "@types/wellknown": "^0.5.1",
-    "proj4": "^2.6.2",
-    "reproject": "^1.2.5",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
     "vue-property-decorator": "^9.0.0",
-    "vuex-module-decorators": "^0.17.0",
-    "wellknown": "^0.5.0"
+    "vuex-module-decorators": "^0.17.0"
   },
   "devDependencies": {
     "@nextgis/build-tools": "file:../build-tools"
   },
+  "buildOptions": {
+    "name": "VuexNgw",
+    "formats": [
+      "esm-bundler",
+      "cjs"
+    ]
+  },
   "scripts": {
     "clean": "rimraf ./lib",
-    "dev": "npm run clean && webpack --config ./webpack.config.js --progress",
-    "build": "npm run dev -- --mode=production",
-    "prod": "exit 0",
+    "dev": "node ../build-tools/lib/rollup.build.js",
+    "prod": "node ../build-tools/lib/rollup.build.js --release",
+    "lint": "eslint ./src/**/*.ts --fix --c ../../.eslintrc",
     "watch": "npm run dev -- --watch"
   },
   "keywords": [
@@ -34,19 +35,17 @@
     "MAP"
   ],
   "author": "NextGIS",
-
   "files": [
-    "lib",
-    "src"
+    "index.js",
+    "lib"
   ],
   "license": "LGPL-3.0",
-
+  "homepage": "https://github.com/nextgis/nextgis_frontend/tree/master/packages/vuex-ngw#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nextgis/nextgis_frontend.git"
   },
   "bugs": {
     "url": "https://github.com/nextgis/nextgis_frontend/issues"
-  },
-  "gitHead": "f9de341f87a5d00048a4b5d072af51837ced56e1"
+  }
 }

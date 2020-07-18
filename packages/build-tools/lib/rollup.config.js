@@ -18,6 +18,7 @@ const name = path.basename(packageDir);
 const resolve = (p) => path.resolve(packageDir, p);
 const pkg = require(resolve(`package.json`));
 const packageOptions = pkg.buildOptions || {};
+const dependencies = getPeerDependencies(process.env.TARGET);
 
 // ensure TS checks only once for each build
 let hasTSChecked = false;
@@ -81,10 +82,6 @@ function createConfig(format, output, plugins = []) {
   const isNodeBuild = format === 'cjs';
   const isGlobalBuild = /global/.test(format);
 
-  const dependencies = [
-    ...Object.keys(pkg.dependencies || {}),
-    ...Object.keys(pkg.peerDependencies || {}),
-  ];
   const external =
     isGlobalBuild || isBrowserESMBuild
       ? packageOptions.enableNonBrowserBranches
@@ -119,7 +116,11 @@ function createConfig(format, output, plugins = []) {
       include: [
         resolve('src'),
         path.resolve(packagesDir, 'global.d.ts'),
-        ...getDeepDependencies(process.env.TARGET),
+        ...dependencies
+          .filter((e) => /^@nextgis\//.test(e))
+          .map((e) =>
+            path.resolve(packagesDir, e.replace('@nextgis/', ''), 'src')
+          ),
       ],
     },
   });
@@ -274,7 +275,7 @@ function createMinifiedConfig(format) {
   );
 }
 
-function getDeepDependencies(target, _nextgisDeps = []) {
+function getPeerDependencies(target, deps = []) {
   const packageDir_ = path.resolve(packagesDir, target);
   const resolve_ = (p) => path.resolve(packageDir_, p);
   const pkg_ = require(resolve_(`package.json`));
@@ -283,15 +284,13 @@ function getDeepDependencies(target, _nextgisDeps = []) {
     ...Object.keys(pkg_.dependencies || {}),
     ...Object.keys(pkg_.peerDependencies || {}),
   ];
-  dependencies
-    .filter((e) => /^@nextgis\//.test(e))
-    .forEach((e) => {
-      const name = e.replace('@nextgis/', '');
-      const depPath = path.resolve(packagesDir, name, 'src');
-      if (!_nextgisDeps.includes(depPath)) {
-        _nextgisDeps.push(depPath);
-        getDeepDependencies(name, _nextgisDeps);
+  dependencies.forEach((e) => {
+    if (!deps.includes(e)) {
+      deps.push(e);
+      if (/^@nextgis\//.test(e)) {
+        getPeerDependencies(e.replace('@nextgis/', ''), deps);
       }
-    });
-  return _nextgisDeps;
+    }
+  });
+  return deps;
 }
