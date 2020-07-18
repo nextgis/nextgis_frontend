@@ -95,7 +95,7 @@ const package = new Package(options);
 ## Create map
 
 ```js
-import NgwMap from "@nextgis/ngw-map";
+import { NgwMap } from "@nextgis/ngw-map";
 
 import "./leaflet-style-override.css";
 import MapAdapter from "@nextgis/leaflet-map-adapter";

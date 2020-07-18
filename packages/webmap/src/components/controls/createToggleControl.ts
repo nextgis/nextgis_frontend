@@ -6,8 +6,6 @@ import {
 
 /**
  * The toggle is a button with status.
- * @param createButtonControl
- * @param options
  * @internal
  */
 export function createToggleControl<C = any>(

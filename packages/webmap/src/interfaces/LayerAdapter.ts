@@ -6,7 +6,8 @@ import {
   checkIfPropertyFilter,
 } from '@nextgis/properties-filter';
 import { Paint } from '@nextgis/paint';
-import { LngLatBoundsArray, Type } from './BaseTypes';
+import { Type } from '@nextgis/utils';
+import { LngLatBoundsArray } from './BaseTypes';
 import { MapClickEvent } from './MapAdapter';
 
 /**
@@ -563,12 +564,12 @@ export interface VectorLayerAdapter<
   removeFilter?(): void;
   /**
    * Add GeoJson data to layer.
-   * @param geojson GeoJson object.
+   * @param geojson - GeoJson object.
    */
   addData?(geojson: GeoJsonObject): void;
   /**
    * Update layer with new geojson.
-   * @param geojson GeoJson object.
+   * @param geojson - GeoJson object.
    */
   setData?(geojson: GeoJsonObject): void;
   /**

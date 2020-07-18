@@ -87,11 +87,13 @@ export class WebMapControls<
    * Creating a universal map layout control element. Can be used with any map adapter.
    *
    * @example
+   * ```javascript
    * const control = webMap.createControl({
    *   onAdd() {
    *     return document.createElement('div');
    *   }
    * });
+   * ```
    */
   async createControl(
     control: MapControl,
