@@ -1,7 +1,7 @@
 import 'leaflet/dist/leaflet.css';
 import './leaflet-style-override.css';
 
-import NgwMap, { NgwMapOptions } from '@nextgis/ngw-map';
+import { NgwMap, NgwMapOptions } from '@nextgis/ngw-map';
 import LeafletMapAdapter from '@nextgis/leaflet-map-adapter';
 
 /**
@@ -12,7 +12,7 @@ import LeafletMapAdapter from '@nextgis/leaflet-map-adapter';
  * ```javascript
  * // Base initialization
  * // [live demo](http://code.nextgis.com/ngw-leaflet-examples-ngw_webmap)
- * import NgwMap from '@nextgis/ngw-leaflet';
+ * import { NgwMap } from '@nextgis/ngw-leaflet';
  *
  * const ngwMap = new NgwMap({
  *   target: 'map',

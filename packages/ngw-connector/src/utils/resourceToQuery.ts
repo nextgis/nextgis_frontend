@@ -4,7 +4,7 @@ import { isObject } from './isObject';
 
 /**
  * { keyname, parent: { id }} > { keyname, parent__id }
- * @param resource any property from NGW resource item
+ * @param resource - Any property from NGW resource item
  */
 export function resourceToQuery(
   resource: DeepPartial<Resource>,
