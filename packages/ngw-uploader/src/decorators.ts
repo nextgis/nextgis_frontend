@@ -3,7 +3,6 @@ import { template } from './utils';
 
 /**
  * decorator to emit events on start end and error for async methods
- * @param options
  */
 export function evented(options?: {
   status: AvailableStatus;

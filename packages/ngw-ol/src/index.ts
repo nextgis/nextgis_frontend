@@ -1,6 +1,6 @@
 import 'ol/ol.css';
 import '@nextgis/control-container/lib/control-container.css';
-import NgwMap, { NgwMapOptions } from '@nextgis/ngw-map';
+import { NgwMap, NgwMapOptions } from '@nextgis/ngw-map';
 import OlMapAdapter from '@nextgis/ol-map-adapter';
 
 export class NgwOl extends NgwMap {

@@ -14,7 +14,7 @@ $ yarn add @nextgis/ngw-map
 ```
 
 ```js
-import NgwMap from '@nextgis/ngw-map';
+import { NgwMap } from '@nextgis/ngw-map';
 import LeafletMapAdapter from '@nextgis/leaflet-map-adapter';
 // manually added styles
 import 'leaflet/dist/leaflet.css';

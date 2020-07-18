@@ -1,6 +1,6 @@
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-import NgwMap, { NgwLayerOptions, NgwMapOptions } from '@nextgis/ngw-map';
+import { NgwMap, NgwLayerOptions, NgwMapOptions } from '@nextgis/ngw-map';
 import MapboxglMapAdapter, {
   MapboxglMapAdapterOptions,
 } from '@nextgis/mapboxgl-map-adapter';
