@@ -38,11 +38,13 @@
  *
  * @packageDocumentation
  */
+import { WebMap } from './WebMap';
+import { MapAdapter } from './interfaces/MapAdapter';
+import { AppOptions } from './interfaces/WebMapApp';
 
-export * from './WebMap';
-export * from './WebMapLayers';
-export * from './WebMapControls';
-export * from './WebMapMain';
+// export * from './WebMapLayers';
+// export * from './WebMapControls';
+// export * from './WebMapMain';
 export * from './interfaces/Events';
 export * from './interfaces/BaseTypes';
 export * from './interfaces/WebMapApp';
@@ -51,3 +53,10 @@ export * from './interfaces/MapControl';
 export * from './interfaces/StarterKit';
 export * from './interfaces/LayerAdapter';
 export * from './interfaces/RuntimeParams';
+
+export { WebMap };
+
+export async function createMap(options: AppOptions): Promise<WebMap> {
+  const webMap = new WebMap(options);
+  return webMap.onLoad();
+}

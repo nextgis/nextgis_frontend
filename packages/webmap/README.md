@@ -2,8 +2,6 @@
 
 Universal map constructor
 
-This library is not intended for using directly in the browser.
-
 Use Webmap with NPM installation method for building large scale applications. It pairs nicely with module bundlers such as [Webpack](https://webpack.js.org/)
 
 ```bash
