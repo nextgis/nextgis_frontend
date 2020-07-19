@@ -1,7 +1,7 @@
 import StrictEventEmitter from 'strict-event-emitter-types';
 import { EventEmitter } from 'events';
 import CancelablePromise from '@nextgis/cancelable-promise';
-import { deepmerge } from '@nextgis/utils';
+import { deepmerge, isObject } from '@nextgis/utils';
 import {
   WebMap,
   MapAdapter,
@@ -187,10 +187,11 @@ export class NgwMap<
         }
         return layer;
       } catch (er) {
-        console.error(
-          `Can't add NGW layer ${keyname || resourceId || resource}.`,
-          er
-        );
+        const resId =
+          isObject(resource) && 'id' in resource
+            ? resource.id
+            : keyname || resourceId || resource;
+        console.error(`Can't add NGW layer ${resId}.`, er);
       }
     }
   }
