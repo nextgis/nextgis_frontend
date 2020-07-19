@@ -170,4 +170,6 @@ export interface UserInfo {
   clientId?: string;
 }
 
-export type NgwExceptions = 'nextgisweb.resource.exception.ResourceNotFound';
+export type NgwExceptions =
+  | 'nextgisweb.resource.exception.ResourceNotFound'
+  | 'nextgisweb.core.exception.InsufficientPermissions';
