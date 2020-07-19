@@ -29,6 +29,7 @@ import { resourceCompare } from './utils/resourceCompare';
 import { ResourceNotFoundError } from './errors/ResourceNotFoundError';
 import { NgwError } from './errors/NgwError';
 import { isObject } from './utils/isObject';
+import { InsufficientPermissionsError } from './errors/InsufficientPermissionsError';
 
 const isBrowser =
   typeof window !== 'undefined' && typeof window.document !== 'undefined';
@@ -573,6 +574,10 @@ export class NgwConnector {
       if (er instanceof NgwError) {
         if (er.exception === 'nextgisweb.resource.exception.ResourceNotFound') {
           throw new ResourceNotFoundError(er);
+        } else if (
+          er.exception === 'nextgisweb.core.exception.InsufficientPermissions'
+        ) {
+          throw new InsufficientPermissionsError(er);
         }
       }
     }
