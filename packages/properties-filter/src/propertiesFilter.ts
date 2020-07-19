@@ -118,12 +118,14 @@ export function propertiesFilter(
       const operationExec = operationsAliases[operation];
       if (operationExec) {
         if (operation === 'like' || operation === 'ilike') {
-          let prop = '';
-          const value_ = field.replace(/^%?(\w+)%?$/, (match, cleanField) => {
-            prop = properties[cleanField];
-            return field.replace(cleanField, value);
-          });
-          return operationExec(prop, value_);
+          if (typeof field === 'string') {
+            let prop = '';
+            const value_ = field.replace(/^%?(\w+)%?$/, (match, cleanField) => {
+              prop = properties[cleanField];
+              return field.replace(cleanField, value);
+            });
+            return operationExec(prop, value_);
+          }
         }
         return operationExec(properties[field], value);
       }
