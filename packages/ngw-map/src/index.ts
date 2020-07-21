@@ -8,7 +8,7 @@ export * from './interfaces';
 
 export { NgwMap };
 
-export async function createMap(
+export async function createNgwMap(
   mapAdapter: MapAdapter,
   options: NgwMapOptions
 ): Promise<NgwMap> {
