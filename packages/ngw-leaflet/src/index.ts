@@ -22,7 +22,7 @@ import LeafletMapAdapter from '@nextgis/leaflet-map-adapter';
  * });
  * ```
  */
-export class NgwLeaflet extends NgwMap {
+class NgwLeaflet extends NgwMap {
   constructor(options: NgwMapOptions) {
     super(new LeafletMapAdapter(), options);
   }

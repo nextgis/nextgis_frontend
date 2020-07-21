@@ -3,9 +3,10 @@
   "_priority": 10,
   "version": "0.32.0",
   "description": "",
-  "main": "lib/ngw-leaflet.js",
-  "module": "lib/ngw-leaflet.esm.js",
-  "unpkg": "lib/ngw-leaflet.js",
+  "main": "index.js",
+  "module": "lib/ngw-leaflet.esm-bundler.js",
+  "unpkg": "lib/ngw-leaflet.global.prod.js",
+  "jsdelivr": "lib/ngw-leaflet.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/leaflet-map-adapter": "^0.32.0",
@@ -16,29 +17,38 @@
   "devDependencies": {
     "@nextgis/build-tools": "file:../build-tools"
   },
+  "buildOptions": {
+    "name": "NgwLeaflet",
+    "injectCss": true,
+    "formats": [
+      "esm-bundler",
+      "esm-browser",
+      "global"
+    ]
+  },
   "scripts": {
     "clean": "rimraf ./lib",
-    "dev": "npm run clean && webpack --config ./webpack.config.js --progress",
-    "build": "npm run dev -- --mode=production",
-    "prod": "npm run build",
+    "dev": "node ../build-tools/lib/rollup.build.js",
+    "prod": "node ../build-tools/lib/rollup.build.js --release",
     "lint": "eslint ./src/**/*.ts --fix --c ../../.eslintrc",
     "watch": "npm run dev -- --watch"
   },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/nextgis/nextgis_frontend.git"
-  },
   "keywords": [
     "NextGIS",
-    "MAP",
-    "NGW",
-    "API"
+    "MAP"
   ],
   "author": "NextGIS",
-
   "files": [
+    "index.js",
     "lib"
   ],
   "license": "LGPL-3.0",
-  "gitHead": "63bdb386006455c48c1e6e2900e74bb27e4a41bd"
+  "homepage": "https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-leaflet#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nextgis/nextgis_frontend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nextgis/nextgis_frontend/issues"
+  }
 }

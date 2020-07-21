@@ -146,7 +146,17 @@ function createConfig(format, output, plugins = []) {
     );
   }
 
-  // packageOptions.enableNonBrowserBranches &&
+  nodePlugins.push(
+    require('rollup-plugin-postcss')({
+      extract: packageOptions.injectCss ? false : resolve(`lib/${name}.css`),
+      plugins: [
+        require('postcss-url')({ url: 'inline' }),
+        require('autoprefixer'),
+        require('cssnano')(),
+      ],
+    })
+  );
+
   if (format !== 'cjs') {
     [
       require('@rollup/plugin-node-resolve').nodeResolve({
@@ -159,13 +169,6 @@ function createConfig(format, output, plugins = []) {
       require('rollup-plugin-node-globals')(),
     ].forEach((x) => nodePlugins.push(x));
   }
-
-  nodePlugins.push(
-    require('rollup-plugin-postcss')({
-      extract: resolve(`lib/${name}.css`),
-      plugins: [require('postcss-assets')],
-    })
-  );
 
   return {
     input: resolve(entryFile),
@@ -196,8 +199,9 @@ function createConfig(format, output, plugins = []) {
         warn(msg);
       }
     },
+    // treeshake: true,
     treeshake: {
-      moduleSideEffects: false,
+      moduleSideEffects: !!packageOptions.injectCss,
     },
   };
 }
@@ -229,14 +233,9 @@ function createReplacePlugin(
     __NODE_JS__: isNodeBuild,
     __FEATURE_OPTIONS__: true,
     __FEATURE_SUSPENSE__: true,
-    // ...(isProduction && isBrowserBuild
-    //   ? {
-    //       'context.onError(': `/*#__PURE__*/ context.onError(`,
-    //       'emitError(': `/*#__PURE__*/ emitError(`,
-    //       'createCompilerError(': `/*#__PURE__*/ createCompilerError(`,
-    //       'createDOMCompilerError(': `/*#__PURE__*/ createDOMCompilerError(`,
-    //     }
-    //   : {}),
+    ...{
+      // 'styleInject(': `/*#__PURE__*/ styleInject(`,
+    },
   };
   // allow inline overrides like
 

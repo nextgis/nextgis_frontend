@@ -39,7 +39,6 @@
  * @packageDocumentation
  */
 import { WebMap } from './WebMap';
-import { MapAdapter } from './interfaces/MapAdapter';
 import { AppOptions } from './interfaces/WebMapApp';
 
 // export * from './WebMapLayers';
@@ -56,7 +55,7 @@ export * from './interfaces/RuntimeParams';
 
 export { WebMap };
 
-export async function createMap(options: AppOptions): Promise<WebMap> {
+export async function createWebMap(options: AppOptions): Promise<WebMap> {
   const webMap = new WebMap(options);
   return webMap.onLoad();
 }
