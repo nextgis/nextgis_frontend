@@ -139,6 +139,8 @@ export interface AdapterOptions {
    * Refer to {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin | CORS Settings} for valid String values.
    */
   crossOrigin?: 'anonymous';
+
+  nativeOptions?: Record<string, any>;
 }
 
 /**
@@ -274,8 +276,6 @@ export interface VectorAdapterOptions<F extends Feature = Feature, L = any>
    * @internal
    */
   source?: unknown;
-
-  nativeOptions?: Record<string, any>;
   /**
    * TODO: move to nativeOptions
    * @internal
