@@ -19,7 +19,7 @@
       }
     </style>
 
-    <script src="../../lib/ngw-mapbox.js"></script>
+    <script src="../../lib/ngw-mapbox.global.js"></script>
     <script src="../../../icons/lib/icons.global.js"></script>
   </head>
 
@@ -86,7 +86,7 @@
 
         ngwMap.addGeoJsonLayer({
           data: geojson,
-          paint: getPaint,
+          paint: getPaint
         });
       });
     </script>

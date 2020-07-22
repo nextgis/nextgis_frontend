@@ -362,7 +362,11 @@ export abstract class VectorAdapter<
             // If true, the icon will be visible even if it collides with other previously drawn symbols.
             _paint['icon-allow-overlap'] = true;
             for (const p in _paint) {
-              this.map.setLayoutProperty(name, p, _paint[p]);
+              try {
+                this.map.setLayoutProperty(name, p, _paint[p]);
+              } catch (er) {
+                //
+              }
             }
           } else {
             for (const p in _paint) {
