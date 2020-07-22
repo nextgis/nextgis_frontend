@@ -12,7 +12,7 @@ import {
   Locate,
   BaseMapEvents,
 } from '@nextgis/webmap';
-import L, {
+import {
   Map,
   Control,
   Layer,
@@ -49,7 +49,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     ATTRIBUTION: AttributionControl,
   };
 
-  static Map = L;
+  static Map = Map;
 
   options: MapOptions = { target: 'map' };
 

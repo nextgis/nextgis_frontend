@@ -11,7 +11,7 @@ if (!process.env.TARGET) {
 
 const rootPath = path.resolve(__dirname, '..', '..', '..');
 
-const masterVersion = require('../../../package.json').version;
+const masterVersion = require('../../../lerna.json').version;
 const packagesDir = path.resolve(rootPath, 'packages');
 const packageDir = path.resolve(packagesDir, process.env.TARGET);
 const name = path.basename(packageDir);
@@ -156,6 +156,7 @@ function createConfig(format, output, plugins = []) {
       ],
     })
   );
+  // nodePlugins.push(require('@rollup/plugin-image'));
 
   if (format !== 'cjs') {
     [

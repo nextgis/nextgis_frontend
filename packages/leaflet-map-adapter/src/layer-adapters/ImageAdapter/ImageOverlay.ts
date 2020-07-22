@@ -1,9 +1,13 @@
-import L, { LatLngBoundsExpression, ImageOverlayOptions } from 'leaflet';
+import {
+  ImageOverlay as LImageOverlay,
+  LatLngBoundsExpression,
+  ImageOverlayOptions,
+} from 'leaflet';
 import { callAjax } from '../layersUtility';
 
 type IOptions = ImageOverlayOptions & { headers?: any };
 
-export class ImageOverlay extends L.ImageOverlay {
+export class ImageOverlay extends LImageOverlay {
   constructor(
     imageUrl: string,
     bounds: LatLngBoundsExpression,
