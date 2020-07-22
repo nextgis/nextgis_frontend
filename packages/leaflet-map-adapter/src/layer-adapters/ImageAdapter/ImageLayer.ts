@@ -5,7 +5,7 @@
  * MIT License
  */
 
-import L from 'leaflet';
+import { Layer, Util, CRS } from 'leaflet';
 import { ImageOverlay } from './ImageOverlay';
 
 interface OverlayOptions {
@@ -28,7 +28,7 @@ interface OverlayOptions {
  * Portions of wms.Overlay are directly extracted from L.TileLayer.WMS.
  * See Leaflet license.
  */
-export class ImageLayer extends L.Layer {
+export class ImageLayer extends Layer {
   defaultWmsParams = {
     service: 'WMS',
     request: 'GetMap',
@@ -55,7 +55,7 @@ export class ImageLayer extends L.Layer {
   private wmsParams: any;
   private _url?: string;
   private _currentUrl?: string;
-  private _currentOverlay?: L.ImageOverlay;
+  private _currentOverlay?: ImageOverlay;
 
   constructor(url: string, options: Record<string, any>) {
     super(options);
@@ -71,12 +71,12 @@ export class ImageLayer extends L.Layer {
         params[opt] = options[opt];
       }
     }
-    L.Util.setOptions(this, opts);
-    this.wmsParams = L.Util.extend({}, this.defaultWmsParams, params);
+    Util.setOptions(this, opts);
+    this.wmsParams = Util.extend({}, this.defaultWmsParams, params);
   }
 
   setParams(params: Record<string, any>): void {
-    L.Util.extend(this.wmsParams, params);
+    Util.extend(this.wmsParams, params);
     this.update();
   }
 
@@ -224,18 +224,18 @@ export class ImageLayer extends L.Layer {
         height: size.y,
       };
       params[projectionKey] = crs.code;
-      params.bbox = (wmsVersion >= 1.3 && crs === L.CRS.EPSG4326
+      params.bbox = (wmsVersion >= 1.3 && crs === CRS.EPSG4326
         ? [se.y, nw.x, nw.y, se.x]
         : [nw.x, se.y, se.x, nw.y]
       ).join(',');
 
-      L.Util.extend(this.wmsParams, params);
+      Util.extend(this.wmsParams, params);
     }
   }
 
   getImageUrl(): string {
     const uppercase = this.options.uppercase || false;
-    const pstr = L.Util.getParamString(this.wmsParams, this._url, uppercase);
+    const pstr = Util.getParamString(this.wmsParams, this._url, uppercase);
     return this._url + pstr;
   }
 }
