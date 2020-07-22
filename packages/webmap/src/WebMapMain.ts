@@ -523,7 +523,7 @@ export class WebMapMain<
 
   private _removeEventListeners(): void {
     Object.entries(this._mapEvents).forEach(([x, event]) => {
-      this.mapAdapter.emitter.off(x, event);
+      this.mapAdapter.emitter.removeListener(x, event);
     });
   }
 }
