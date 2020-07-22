@@ -4,7 +4,6 @@ import './leaflet-style-override.css';
 import { NgwMap, NgwMapOptions } from '@nextgis/ngw-map';
 import LeafletMapAdapter from '@nextgis/leaflet-map-adapter';
 
-
 // const iconRetinaUrl = require('leaflet/dist/images/marker-icon-2x.png');
 // const iconUrl = require('leaflet/dist/images/marker-icon.png');
 // const shadowUrl = require('leaflet/dist/images/marker-shadow.png');
