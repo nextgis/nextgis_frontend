@@ -4,6 +4,19 @@ import './leaflet-style-override.css';
 import { NgwMap, NgwMapOptions } from '@nextgis/ngw-map';
 import LeafletMapAdapter from '@nextgis/leaflet-map-adapter';
 
+
+// const iconRetinaUrl = require('leaflet/dist/images/marker-icon-2x.png');
+// const iconUrl = require('leaflet/dist/images/marker-icon.png');
+// const shadowUrl = require('leaflet/dist/images/marker-shadow.png');
+// // @ts-ignore
+// delete L.Icon.Default.prototype._getIconUrl;
+
+// L.Icon.Default.mergeOptions({
+//   iconRetinaUrl: iconRetinaUrl.default,
+//   iconUrl: iconUrl.default,
+//   shadowUrl: shadowUrl.default,
+// });
+
 /**
  * Displaying the [NgwMap](ngw-map-api)
  * using the  [LeafletMapAdapter](leaflet-map-adapter-api)
