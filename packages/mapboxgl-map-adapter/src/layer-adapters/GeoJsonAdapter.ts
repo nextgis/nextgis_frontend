@@ -44,9 +44,6 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
 
   async addLayer(options: GeoJsonAdapterOptions): Promise<TLayer> {
     const layer = await super.addLayer(options);
-    if (this.options.data) {
-      this.addData(this.options.data);
-    }
     return layer;
   }
 
@@ -192,6 +189,9 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   }
 
   protected _onAddLayer(sourceId: string): void {
+    if (this.options.data) {
+      this.addData(this.options.data);
+    }
     let source = this.map.getSource(sourceId) as GeoJSONSource;
     if (!source) {
       const sourceOpt: GeoJSONSourceRaw = {

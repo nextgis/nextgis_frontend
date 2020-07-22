@@ -260,6 +260,7 @@ export class WebMapLayers<
       }
       this.emitter.emit('layer:preadd', _adapter);
       await this.onMapLoad();
+      _adapter.map = this.mapAdapter.map;
       const layer = await _adapter.addLayer(_adapter.options);
       // checking that the original layer was inserted into the adapter anyway
       _adapter.layer = layer;
