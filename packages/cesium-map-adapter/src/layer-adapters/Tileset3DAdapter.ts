@@ -53,6 +53,12 @@ export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
     const layer = new Cesium3DTileset({
       url: this.options.url,
       skipLevelOfDetail: true,
+      maximumScreenSpaceError:
+        this.options.nativeOptions &&
+        this.options.nativeOptions.maximumScreenSpaceError &&
+        this.options.nativeOptions.maximumScreenSpaceError !== undefined
+          ? this.options.nativeOptions.maximumScreenSpaceError
+          : 16,
     });
     layer.show = false;
 
