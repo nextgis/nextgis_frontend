@@ -1,4 +1,4 @@
-import L, { Map } from 'leaflet';
+import { Map, Icon } from 'leaflet';
 import { Mixins, Prop } from 'vue-property-decorator';
 import Component from 'vue-class-component';
 import MapAdapter from '@nextgis/leaflet-map-adapter';
@@ -11,7 +11,7 @@ const shadowUrl = require('leaflet/dist/images/marker-shadow.png');
 // @ts-ignore
 delete L.Icon.Default.prototype._getIconUrl;
 
-L.Icon.Default.mergeOptions({
+Icon.Default.mergeOptions({
   iconRetinaUrl: iconRetinaUrl.default,
   iconUrl: iconUrl.default,
   shadowUrl: shadowUrl.default,
