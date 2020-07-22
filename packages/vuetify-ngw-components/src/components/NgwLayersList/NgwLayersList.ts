@@ -143,8 +143,8 @@ export class NgwLayersList extends Vue {
 
   private destroy() {
     if (this.webMap && this.__updateItems) {
-      this.webMap.emitter.off('layer:add', this.__updateItems);
-      this.webMap.emitter.off('layer:remove', this.__updateItems);
+      this.webMap.emitter.removeListener('layer:add', this.__updateItems);
+      this.webMap.emitter.removeListener('layer:remove', this.__updateItems);
     }
   }
 

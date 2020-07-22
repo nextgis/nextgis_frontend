@@ -249,10 +249,10 @@ export async function createGeoJsonAdapter(
 
     _removeMoveEventListener() {
       if (this.__onMapMove) {
-        webMap.emitter.off('moveend', this.__onMapMove);
+        webMap.emitter.removeListener('moveend', this.__onMapMove);
       }
       if (this.__onMapMoveStart) {
-        webMap.emitter.off('movestart', this.__onMapMoveStart);
+        webMap.emitter.removeListener('movestart', this.__onMapMoveStart);
       }
     }
 
