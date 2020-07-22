@@ -378,8 +378,8 @@ export class NgwMap<
 
   disableSelection(): void {
     if (this.__selectFromNgwRaster) {
-      this.emitter.off('click', this.__selectFromNgwRaster);
-      this.emitter.off('click', this._selectFromNgwVector);
+      this.emitter.removeListener('click', this.__selectFromNgwRaster);
+      this.emitter.removeListener('click', this._selectFromNgwVector);
       this.__selectFromNgwRaster = undefined;
       this.__selectFromNgwVector = undefined;
     }
