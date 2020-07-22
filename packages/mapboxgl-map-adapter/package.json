@@ -34,7 +34,7 @@
   "scripts": {
     "clean": "rimraf ./lib",
     "dev": "node ../build-tools/lib/rollup.build.js",
-    "prod": "node ../build-tools/lib/rollup.build.js --release",
+    "prod": "npm run dev -- --release",
     "lint": "eslint ./src/**/*.ts --fix --c ../../.eslintrc",
     "watch": "npm run dev -- --watch"
   },
