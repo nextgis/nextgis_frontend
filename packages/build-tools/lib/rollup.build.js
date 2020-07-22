@@ -26,10 +26,11 @@ const { compress } = require('brotli');
 
 const args = require('minimist')(process.argv.slice(2));
 const targets = args._;
-const formats = args.formats || args.f;
-const devOnly = args.devOnly || args.d;
+const watch = args.watch || args.w;
+const formats = args.formats || args.f || (watch && 'global');
+const devOnly = watch || args.devOnly || args.d;
 const prodOnly = !devOnly && (args.prodOnly || args.p);
-const sourceMap = args.sourcemap || args.s;
+const sourceMap = args.sourcemap || args.s || watch;
 const isRelease = args.release;
 const buildTypes = args.t || args.types || isRelease;
 const buildAllMatching = args.all || args.a;
@@ -42,7 +43,9 @@ async function run() {
   const target = cwd.match(/packages[\\, /](\D+)$/)[1];
   if (target) {
     await build(target);
-    checkAllSizes([target]);
+    if (!watch) {
+      checkAllSizes([target]);
+    }
   } else if (!targets.length) {
     // await buildAll(allTargets);
     // checkAllSizes(allTargets);
@@ -84,7 +87,7 @@ async function build(target) {
   await execa(
     'rollup',
     [
-      '-c',
+      watch ? '-wc' : '-c',
       `'${config}'`,
       '--environment',
       [

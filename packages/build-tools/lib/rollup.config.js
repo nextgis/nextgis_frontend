@@ -197,6 +197,8 @@ function createConfig(format, output, plugins = []) {
     output,
     onwarn: (msg, warn) => {
       if (!/Circular/.test(msg)) {
+        // for ol build
+        if (msg.code === 'THIS_IS_UNDEFINED') return;
         warn(msg);
       }
     },
