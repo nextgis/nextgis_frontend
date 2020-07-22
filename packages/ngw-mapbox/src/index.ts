@@ -7,12 +7,7 @@ import MapboxglMapAdapter, {
 import { ResourceAdapter } from '@nextgis/ngw-kit';
 import { Map } from 'mapbox-gl';
 
-export class NgwMapbox extends NgwMap<
-  Map,
-  string[],
-  any,
-  MapboxglMapAdapterOptions
-> {
+class NgwMapbox extends NgwMap<Map, string[], any, MapboxglMapAdapterOptions> {
   constructor(options: NgwMapOptions) {
     super(new MapboxglMapAdapter(), options);
   }
