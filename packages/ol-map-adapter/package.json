@@ -3,9 +3,10 @@
   "version": "0.32.0",
   "_priority": 16,
   "description": "",
-  "main": "lib/ol-map-adapter.js",
-  "module": "lib/ol-map-adapter.esm.js",
-  "unpkg": "lib/ol-map-adapter.js",
+  "main": "index.js",
+  "module": "lib/ol-map-adapter.esm-bundler.js",
+  "unpkg": "lib/ol-map-adapter.global.prod.js",
+  "jsdelivr": "lib/ol-map-adapter.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/control-container": "^0.32.0",
