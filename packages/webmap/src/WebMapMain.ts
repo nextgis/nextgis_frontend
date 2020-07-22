@@ -17,7 +17,7 @@ import { StarterKit } from './interfaces/StarterKit';
 import { LayerAdapter } from './interfaces/LayerAdapter';
 import { RuntimeParams } from './interfaces/RuntimeParams';
 import { MapOptions, AppOptions } from './interfaces/WebMapApp';
-import { WebMapEvents, BaseMapEvents } from './interfaces/Events';
+import { WebMapEvents, MainMapEvents } from './interfaces/Events';
 
 import { Keys } from './components/keys/Keys';
 import { CenterState } from './components/mapStates/CenterState';
@@ -492,7 +492,7 @@ export class WebMapMain<
   }
 
   private _addEventsListeners(): void {
-    const events: (keyof BaseMapEvents)[] = [
+    const events: (keyof MainMapEvents)[] = [
       'preclick',
       'click',
       'zoomstart',
@@ -523,7 +523,7 @@ export class WebMapMain<
 
   private _removeEventListeners(): void {
     Object.entries(this._mapEvents).forEach(([x, event]) => {
-      this.mapAdapter.emitter.removeListener(x, event);
+      this.mapAdapter.emitter.removeListener(x as keyof MainMapEvents, event);
     });
   }
 }
