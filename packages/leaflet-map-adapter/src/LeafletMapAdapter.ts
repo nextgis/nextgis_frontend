@@ -10,7 +10,7 @@ import {
   LocateOptions,
   LocationEvents,
   Locate,
-  BaseMapEvents,
+  MainMapEvents,
 } from '@nextgis/webmap';
 import {
   Map,
@@ -58,7 +58,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   emitter = new EventEmitter();
   map?: Map;
 
-  private _universalEvents: (keyof BaseMapEvents)[] = [
+  private _universalEvents: (keyof MainMapEvents)[] = [
     'zoomstart',
     'zoom',
     'zoomend',
