@@ -1,4 +1,3 @@
-import { VueNgwOl } from './components/VueNgwOl';
+import { VueNgwOl } from './VueNgwOl';
 
-export { VueNgwOl };
 export default VueNgwOl;
