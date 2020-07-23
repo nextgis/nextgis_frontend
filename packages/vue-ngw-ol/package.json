@@ -7,18 +7,14 @@
   "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/ol-map-adapter": "^0.32.0",
-    "@nextgis/vue-ngw-map": "^0.32.0",
-    "vue": "^2.6.11",
-    "vue-class-component": "^7.2.4",
-    "vue-property-decorator": "^9.0.0",
-    "vuex-module-decorators": "^0.17.0"
+    "@nextgis/vue-ngw-map": "^0.32.0"
   },
   "devDependencies": {
     "@nextgis/build-tools": "file:../build-tools"
   },
   "buildOptions": {
     "name": "VueNgwOl",
-    "alias": [{"find": "^(ol|ol(\/.*))$", "replacement": "ol/src$2"}],
+    "injectCss": true,
     "formats": [
       "esm-bundler"
     ]

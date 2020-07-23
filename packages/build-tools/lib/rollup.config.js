@@ -145,7 +145,6 @@ function createConfig(format, output, plugins = []) {
       })
     );
   }
-  
 
   if (format !== 'cjs') {
     [
