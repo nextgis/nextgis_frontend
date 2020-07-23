@@ -1,13 +1,15 @@
 import { EventEmitter } from 'events';
 
 import Map from 'ol/Map';
+import Feature from 'ol/Feature';
 import Base from 'ol/layer/Base';
 import { Extent } from 'ol/extent';
+import BaseEvent from 'ol/events/Event';
 import Control from 'ol/control/Control';
 import View, { ViewOptions } from 'ol/View';
 import { MapOptions as OlMapOptions } from 'ol/PluggableMap';
-import { fromLonLat, transformExtent, transform } from 'ol/proj';
 import MapBrowserPointerEvent from 'ol/MapBrowserPointerEvent';
+import { fromLonLat, transformExtent, transform } from 'ol/proj';
 
 import {
   MapControl,
@@ -31,8 +33,6 @@ import { Attribution } from './controls/Attribution';
 import { PanelControl } from './controls/PanelControl';
 import { createControl } from './controls/createControl';
 import { createButtonControl } from './controls/createButtonControl';
-import BaseEvent from 'ol/events/Event';
-import Feature from 'ol/Feature';
 
 type Layer = Base;
 

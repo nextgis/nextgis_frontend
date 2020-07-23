@@ -17,7 +17,7 @@ export class VueNgwMap<M = any> extends Vue {
   @Prop({ type: Object }) mapOptions!: NgwMapOptions;
 
   name = 'vue-ngw-map';
-  ngwMap?: NgwMap<M> = undefined;
+  ngwMap: NgwMap<M> | null = null;
   ready = false;
 
   async mounted(): Promise<void> {
