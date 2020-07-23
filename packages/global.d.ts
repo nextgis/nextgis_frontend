@@ -9,6 +9,9 @@ declare let __NODE_JS__: boolean;
 declare let __COMMIT__: string;
 declare let __VERSION__: string;
 
-// Feature flags
-declare let __FEATURE_OPTIONS__: boolean;
-declare let __FEATURE_SUSPENSE__: boolean;
+declare module "*.png" {
+  const value: any;
+  export default value;
+}
+
+

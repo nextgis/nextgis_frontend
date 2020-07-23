@@ -145,18 +145,7 @@ function createConfig(format, output, plugins = []) {
       })
     );
   }
-
-  nodePlugins.push(
-    require('rollup-plugin-postcss')({
-      extract: packageOptions.injectCss ? false : resolve(`lib/${name}.css`),
-      plugins: [
-        require('postcss-url')({ url: 'inline' }),
-        require('autoprefixer'),
-        require('cssnano')(),
-      ],
-    })
-  );
-  // nodePlugins.push(require('@rollup/plugin-image'));
+  
 
   if (format !== 'cjs') {
     [
@@ -170,6 +159,18 @@ function createConfig(format, output, plugins = []) {
       require('rollup-plugin-node-globals')(),
     ].forEach((x) => nodePlugins.push(x));
   }
+
+  nodePlugins.push(require('@rollup/plugin-image')());
+  nodePlugins.push(
+    require('rollup-plugin-postcss')({
+      extract: packageOptions.injectCss ? false : resolve(`lib/${name}.css`),
+      plugins: [
+        require('postcss-url')({ url: 'inline' }),
+        require('autoprefixer'),
+        require('cssnano')(),
+      ],
+    })
+  );
 
   return {
     input: resolve(entryFile),

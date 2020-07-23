@@ -1,20 +1,21 @@
 import 'leaflet/dist/leaflet.css';
 import './leaflet-style-override.css';
 
+import { Icon } from 'leaflet';
 import { NgwMap, NgwMapOptions } from '@nextgis/ngw-map';
 import LeafletMapAdapter from '@nextgis/leaflet-map-adapter';
 
-// const iconRetinaUrl = require('leaflet/dist/images/marker-icon-2x.png');
-// const iconUrl = require('leaflet/dist/images/marker-icon.png');
-// const shadowUrl = require('leaflet/dist/images/marker-shadow.png');
-// // @ts-ignore
-// delete L.Icon.Default.prototype._getIconUrl;
+import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
+import iconUrl from 'leaflet/dist/images/marker-icon.png';
+import shadowUrl from 'leaflet/dist/images/marker-shadow.png';
+// @ts-ignore
+delete Icon.Default.prototype._getIconUrl;
 
-// L.Icon.Default.mergeOptions({
-//   iconRetinaUrl: iconRetinaUrl.default,
-//   iconUrl: iconUrl.default,
-//   shadowUrl: shadowUrl.default,
-// });
+Icon.Default.mergeOptions({
+  iconRetinaUrl: iconRetinaUrl,
+  iconUrl: iconUrl,
+  shadowUrl: shadowUrl,
+});
 
 /**
  * Displaying the [NgwMap](ngw-map-api)
