@@ -1,7 +1,7 @@
 {
   "name": "@nextgis/ngw-ol",
   "_priority": 10,
-  "version": "0.32.0",
+  "version": "1.0.0-alpha.0",
   "description": "",
   "main": "index.js",
   "module": "lib/ngw-ol.esm-bundler.js",
@@ -9,8 +9,8 @@
   "jsdelivr": "lib/ngw-ol.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/ngw-map": "^0.32.0",
-    "@nextgis/ol-map-adapter": "^0.32.0",
+    "@nextgis/ngw-map": "^1.0.0-alpha.0",
+    "@nextgis/ol-map-adapter": "^1.0.0-alpha.0",
     "events": "^3.1.0"
   },
   "devDependencies": {
@@ -19,7 +19,12 @@
   "buildOptions": {
     "name": "NgwOl",
     "injectCss": true,
-    "#alias": [{"find": "^(ol|ol(\/.*))$", "replacement": "ol/src$2"}],
+    "#alias": [
+      {
+        "find": "^(ol|ol(/.*))$",
+        "replacement": "ol/src$2"
+      }
+    ],
     "formats": [
       "esm-bundler",
       "esm-browser",

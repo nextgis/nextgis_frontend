@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/dom",
-  "version": "0.32.0",
+  "version": "1.0.0-alpha.0",
   "description": "Collection of libraries for working with the DOM",
   "main": "index.js",
   "module": "lib/dom.esm-bundler.js",
@@ -10,7 +10,7 @@
   "devDependencies": {
     "@nextgis/build-tools": "file:../build-tools"
   },
-    "buildOptions": {
+  "buildOptions": {
     "name": "Dom",
     "formats": [
       "esm-bundler",
