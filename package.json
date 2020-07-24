@@ -3,18 +3,13 @@
   "private": true,
   "scripts": {
     "clean": "lerna run clean",
-    "bootstrap": "lerna bootstrap",
     "dev": "lerna run dev",
-    "build": "lerna run build",
     "prod": "lerna run prod",
     "lint": "lerna run lint",
-    "prod_script": "node ./webpack.conf.js",
     "demo": "yarn run examples && cd ./packages/demo/ && yarn run build",
     "examples": "node ./build/updateExamples.js",
     "test": "npm run karma -- --single-run --coverage",
-    "karma": "karma start test/karma.conf.js",
-    "docs": "rimraf docs && typedoc",
-    "docs:api": "ts-node --project scripts/tsconfig.json ./scripts/apiDocs.ts",
+    "karma": "karma start tests/karma.conf.js",
     "docs:md": "api-documenter markdown",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "publish": "lerna publish from-package",
@@ -22,36 +17,11 @@
     "minor": "lerna version minor --conventional-commits -m \"chore(release): publish %s\" --no-push --create-release github"
   },
   "devDependencies": {
+    "@types/node":"^14.0.25",
     "@microsoft/api-documenter": "^7.8.21",
-    "@types/chai": "^4.2.11",
-    "@types/mocha": "^7.0.2",
-    "@types/rimraf": "^3.0.0",
-    "@types/sinon": "^9.0.4",
-    "chai": "^4.2.0",
-    "codecov": "^3.7.0",
-    "conventional-changelog-cli": "^2.0.34",
-    "eslint": "^7.4.0",
-    "istanbul-instrumenter-loader": "^3.0.1",
-    "karma": "^5.1.0",
-    "karma-chrome-launcher": "^3.1.0",
-    "karma-coverage-istanbul-reporter": "^3.0.3",
-    "karma-firefox-launcher": "^1.3.0",
-    "karma-mocha": "^2.0.1",
-    "karma-sinon-chai": "^2.0.2",
-    "karma-sourcemap-loader": "^0.3.7",
-    "karma-spec-reporter": "0.0.32",
-    "karma-webpack": "^4.0.2",
     "lerna": "^3.22.1",
     "lint-staged": "^10.2.11",
-    "mocha": "^8.0.1",
     "rimraf": "^3.0.2",
-    "sinon": "^9.0.2",
-    "sinon-chai": "^3.5.0",
-    "ts-loader": "^8.0.0",
-    "ts-node": "^8.10.2",
-    "typescript": "^3.9.6",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.12",
     "yorkie": "^2.0.0"
   },
   "gitHooks": {
@@ -66,6 +36,7 @@
   },
   "license": "LGPL-3.0",
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "tests"
   ]
 }

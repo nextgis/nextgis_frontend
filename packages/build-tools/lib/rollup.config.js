@@ -110,7 +110,7 @@ function createConfig(format, output, plugins = []) {
         declarationMap: shouldEmitDeclarations,
         ...compilerOptions,
       },
-      exclude: ['test'],
+      exclude: ['tests'],
       include: [
         resolve('src'),
         path.resolve(packagesDir, 'global.d.ts'),

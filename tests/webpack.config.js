@@ -1,8 +1,9 @@
+const path = require('path');
 const webpack = require('webpack');
 
 let alias = {};
 try {
-  const { getAliases } = require('../build/aliases');
+  const { getAliases } = require('../scripts/aliases');
   alias = getAliases();
 } catch (er) {
   // ignore
@@ -17,7 +18,7 @@ module.exports = (opt = { coverage: false }) => {
           loader: 'ts-loader',
           options: {
             transpileOnly: true,
-            // configFile: require.resolve('tsconfig.json'),
+            // configFile: 'tsconfig.json',
           },
         },
       ],
@@ -50,6 +51,7 @@ module.exports = (opt = { coverage: false }) => {
     resolve: {
       extensions: ['.js', '.ts', '.json'],
       alias,
+      // modules: ['node_modules'],
     },
     module: {
       rules,

@@ -5,8 +5,8 @@ import { SandboxPointLayer } from '../helpers/ngw-orm/SandboxPointLayer';
 import { getMetadataArgsStorage } from '../../packages/ngw-orm/src';
 
 let CONNECTION: Connection;
-// const TESTS_GROUP_ID = 446;
-const TESTS_GROUP_ID = 3;
+const TESTS_GROUP_ID = 446;
+// const TESTS_GROUP_ID = 3;
 
 function getConnection(): Promise<Connection> {
   if (CONNECTION) {
@@ -14,16 +14,16 @@ function getConnection(): Promise<Connection> {
   }
   return Connection.connect({
     // baseUrl: 'http://dev.nextgis.com/sandbox/',
-    // baseUrl: 'http://geonote.nextgis.com',
-    // auth: {
-    //   login: 'nextgis',
-    //   password: 'nextgis',
-    // },
-    baseUrl: 'https://dory.nextgis.com',
+    baseUrl: 'http://geonote.nextgis.com',
     auth: {
-      login: 'administrator',
-      password: 'admin',
+      login: 'nextgis',
+      password: 'nextgis',
     },
+    // baseUrl: 'https://dory.nextgis.com',
+    // auth: {
+    //   login: 'administrator',
+    //   password: 'admin',
+    // },
   }).then((connection) => {
     CONNECTION = connection;
     return connection;
