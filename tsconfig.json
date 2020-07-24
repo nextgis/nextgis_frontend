@@ -27,7 +27,7 @@
   "includes": [
     "packages/global.d.ts",
     "packages/*/src",
-    "test"
+    "tests"
   ]
 }
 
