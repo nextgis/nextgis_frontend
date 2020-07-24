@@ -24,7 +24,7 @@ function replaceAbsolutePathToCdn(line, packages) {
     const emptyCharsCount = line.search(/\S/);
 
     const isLibPath = line.match(
-      /(?:src|href)=("|').*?(lib\/).*?([-\w.]+)\.((?:js|css))/
+      /(?:src|href)=("|').*?(lib\/).*?([-\w.]+)\.(?:([-\w.]+)\.)((?:js|css))/
     );
 
     if (isLibPath) {
@@ -34,16 +34,11 @@ function replaceAbsolutePathToCdn(line, packages) {
       if (lineLibName) {
         for (let fry = 0; fry < packages.length; fry++) {
           const package = packages[fry] && packages[fry].package;
-          const matchMain =
-            package.main && package.main.match(/([-\w.]+)\.(?:js|css)/);
-          if (matchMain) {
-            const packageLibName = matchMain[1];
-
-            if (packageLibName === lineLibName) {
-              newLine =
-                new Array(emptyCharsCount + 1).join(' ') +
-                `<script src="https://unpkg.com/@nextgis/${packageLibName}@${package.version}/${package.main}"></script>`;
-            }
+          const packageLibName = package.name.replace(/^@nextgis\//, '');
+          if (packageLibName === lineLibName) {
+            newLine =
+              new Array(emptyCharsCount + 1).join(' ') +
+              `<script src="https://unpkg.com/${package.name}@${package.version}/${package.unpkg}"></script>`;
           }
         }
       }
