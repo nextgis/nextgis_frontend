@@ -1,7 +1,7 @@
 {
   "name": "@nextgis/ngw-leaflet",
   "_priority": 10,
-  "version": "0.32.0",
+  "version": "1.0.0-alpha.0",
   "description": "",
   "main": "index.js",
   "module": "lib/ngw-leaflet.esm-bundler.js",
@@ -9,8 +9,8 @@
   "jsdelivr": "lib/ngw-leaflet.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/leaflet-map-adapter": "^0.32.0",
-    "@nextgis/ngw-map": "^0.32.0",
+    "@nextgis/leaflet-map-adapter": "^1.0.0-alpha.0",
+    "@nextgis/ngw-map": "^1.0.0-alpha.0",
     "leaflet": "1.6.0",
     "leaflet.wms": "^0.2.0"
   },
@@ -20,7 +20,12 @@
   "buildOptions": {
     "name": "NgwLeaflet",
     "injectCss": true,
-    "#alias": [{"find": "^leaflet$", "replacement": "leaflet/dist/leaflet-src.esm"}],
+    "#alias": [
+      {
+        "find": "^leaflet$",
+        "replacement": "leaflet/dist/leaflet-src.esm"
+      }
+    ],
     "formats": [
       "esm-bundler",
       "esm-browser",
