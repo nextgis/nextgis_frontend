@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/eslint-config",
-  "version": "0.32.0",
+  "version": "1.0.0-alpha.0",
   "description": "ESLint config for Nextgis Frontend TS and JS projects",
   "main": "index.js",
   "repository": {

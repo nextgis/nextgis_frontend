@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/properties-filter",
-  "version": "0.32.0",
+  "version": "1.0.0-alpha.0",
   "description": "Filtering objects by its properties using expressions",
   "main": "index.js",
   "module": "lib/properties-filter.esm-bundler.js",
@@ -8,7 +8,7 @@
   "jsdelivr": "lib/properties-filter.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/utils": "^0.32.0",
+    "@nextgis/utils": "^1.0.0-alpha.0",
     "geojson": "^0.5.0"
   },
   "devDependencies": {
@@ -35,7 +35,6 @@
     "MAP"
   ],
   "author": "NextGIS",
-
   "files": [
     "index.js",
     "lib"
