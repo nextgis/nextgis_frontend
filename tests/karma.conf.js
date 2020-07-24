@@ -20,10 +20,10 @@ module.exports = (config) => {
     files: [
       // { pattern: 'test/specs/*.ts', type: 'ts' },
       // { pattern: 'test/specs/ol-map-adapter.spec.ts', type: 'ts' },
-      { pattern: 'test/specs/ngw-orm.spec.ts', type: 'ts' },
+      { pattern: 'tests/specs/ngw-orm.spec.ts', type: 'ts' },
     ],
     preprocessors: {
-      'test/specs/*.spec.ts': ['webpack', 'sourcemap'],
+      'tests/specs/*.spec.ts': ['webpack', 'sourcemap'],
     },
     webpack: createWebpack({ coverage }),
     webpackMiddleware: {
