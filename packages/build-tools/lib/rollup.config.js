@@ -84,11 +84,9 @@ function createConfig(format, output, plugins = []) {
 
   const external =
     isGlobalBuild || isBrowserESMBuild
-      ? packageOptions.enableNonBrowserBranches
-        ? []
-        : []
+      ? []
       : // Node / esm-bundler builds. Externalize everything.
-        dependencies;
+        [...dependencies, 'vuetify/lib'];
 
   let compilerOptions = {};
 
@@ -186,8 +184,7 @@ function createConfig(format, output, plugins = []) {
         isBundlerESMBuild,
         isBrowserESMBuild,
         // isBrowserBuild?
-        (isGlobalBuild || isBrowserESMBuild || isBundlerESMBuild) &&
-          !packageOptions.enableNonBrowserBranches,
+        (isGlobalBuild || isBrowserESMBuild || isBundlerESMBuild),
         isGlobalBuild,
         isNodeBuild
       ),
