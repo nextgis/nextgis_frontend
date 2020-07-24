@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.0](https://github.com/nextgis/nextgis_frontend/compare/v0.32.0...v1.0.0-alpha.0) (2020-07-24)
+
+
+### Bug Fixes
+
+* **cesium:** fix Tilset3D setHeight ([fb95256](https://github.com/nextgis/nextgis_frontend/commit/fb952565adb2734ec4a40df2c955ad51cec90c54))
+* **vuetify:** update items on init ([03f78ed](https://github.com/nextgis/nextgis_frontend/commit/03f78ed98e74fc2eb005085f1fce30b3a957ece5))
+
+
+### Code Refactoring
+
+* rename layerAdapter baseLayer option to baselayer ([368d657](https://github.com/nextgis/nextgis_frontend/commit/368d6576278505ddddde2a1ab160a0849e087c70))
+
+
+### Features
+
+* **cesium:** add maximumScreenSpaceError option for tilset3d adapter ([c82c524](https://github.com/nextgis/nextgis_frontend/commit/c82c52452765b2e764f6c3d42bc3522bd36a4258))
+* **cesium:** set custom logo ([bd05fd3](https://github.com/nextgis/nextgis_frontend/commit/bd05fd3f6e34e9cd7e38bbfe5bd1941583ef8fe8))
+* **webmap:** add special MapAdapterOptions option to MapOptions ([e3dd2ec](https://github.com/nextgis/nextgis_frontend/commit/e3dd2eceb5b63bf7c19791deacd72b2e047a74f8))
+* **webmap:** implement WebmapLayers get Attributions onlyBaselayer option ([430d51e](https://github.com/nextgis/nextgis_frontend/commit/430d51e7211c050ebeffd68b0c839d9a38170054))
+
+
+### BREAKING CHANGES
+
+* LayerAdapter option baseLayer was renamed to baselayer;
+* webMap.getBaseLayers() method now return LayerAdapter, not string array of ids
+
+
+
+
+
 # [0.32.0](https://github.com/nextgis/nextgis_frontend/compare/v0.31.0...v0.32.0) (2020-06-03)
 
 

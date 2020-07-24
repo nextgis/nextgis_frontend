@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/ol-map-adapter",
-  "version": "0.32.0",
+  "version": "1.0.0-alpha.0",
   "_priority": 16,
   "description": "",
   "main": "index.js",
@@ -9,9 +9,9 @@
   "jsdelivr": "lib/ol-map-adapter.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/control-container": "^0.32.0",
-    "@nextgis/paint": "^0.32.0",
-    "@nextgis/webmap": "^0.32.0",
+    "@nextgis/control-container": "^1.0.0-alpha.0",
+    "@nextgis/paint": "^1.0.0-alpha.0",
+    "@nextgis/webmap": "^1.0.0-alpha.0",
     "@types/ol": "^6.3.1",
     "events": "^3.1.0",
     "ol": "^6.3.1"
@@ -21,7 +21,12 @@
   },
   "buildOptions": {
     "name": "OlMapAdapter",
-    "#alias": [{"find": "^(ol|ol(\/.*))$", "replacement": "ol/src$2"}],
+    "#alias": [
+      {
+        "find": "^(ol|ol(/.*))$",
+        "replacement": "ol/src$2"
+      }
+    ],
     "formats": [
       "esm-bundler",
       "esm-browser",

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.0](https://github.com/nextgis/nextgis_frontend/compare/v0.32.0...v1.0.0-alpha.0) (2020-07-24)
+
+
+### Features
+
+* **ngw-connector:** new getResourceBy method ([462f0db](https://github.com/nextgis/nextgis_frontend/commit/462f0dbed5c0b448f5be60a73e8d70e792a4f87a))
+* **ngw-orm:** remove 3rd part libs to convers geom to wkt, use new ngw api ([01c8e21](https://github.com/nextgis/nextgis_frontend/commit/01c8e21321b041024584cdcb8c41998adddb3246))
+
+
+
+
+
 # [0.32.0](https://github.com/nextgis/nextgis_frontend/compare/v0.31.0...v0.32.0) (2020-06-03)
 
 **Note:** Version bump only for package @nextgis/ngw-orm
