@@ -55,7 +55,7 @@ Some universal examples:
 Download and include with a script tag. \[Package\] will be registered as a global variable.
 
 ```html
-<script src="./lib/[package].js"></script>
+<script src="./lib/[package].global.js"></script>
 <script>
   var package = new Package(options);
 </script>
@@ -70,7 +70,7 @@ Download and include with a script tag. \[Package\] will be registered as a glob
 We recommend linking to a specific version number that you can update manually:
 
 ```html
-<script src="https://unpkg.com/@nextgis/[package]@0.19.0"></script>
+<script src="https://unpkg.com/@nextgis/[package]@[version]"></script>
 ```
 
 ### NPM/YARN
@@ -87,7 +87,9 @@ yarn add @nextgis/[package]
 then import the \[package\] in the project modules
 
 ```js
-import Package from "@nextgis/[package]";
+import Package from '@nextgis/[package]';
+// or
+import { Component, utility } from '@nextgis/[package]';
 
 const package = new Package(options);
 ```
@@ -95,10 +97,10 @@ const package = new Package(options);
 ## Create map
 
 ```js
-import { NgwMap } from "@nextgis/ngw-map";
+import { NgwMap } from '@nextgis/ngw-map';
 
-import "./leaflet-style-override.css";
-import MapAdapter from "@nextgis/leaflet-map-adapter";
+import './leaflet-style-override.css';
+import MapAdapter from '@nextgis/leaflet-map-adapter';
 // OR
 // import 'ol/ol.css';
 // import MapAdapter from '@nextgis/ol-map-adapter';
@@ -136,72 +138,6 @@ The `resource` can be id or keyname.
 
 [Add different NGW resource](http://code.nextgis.com/demo-examples-ngw_layers)
 
-## Vector layer
-
-Adding a vector layer from the NGW is as follows
-
-```js
-ngwMap.addNgwLayer({
-  resource: 2011,
-  adapterOptions: {...},
-});
-```
-
-adapterOptions
-
-| name                  | default        | description                                                                                                                                                                    |
-| --------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| type                  | undefined      | `point`, `line` or `polygon`. Type of layer geometry. It is always better to prescribe this parameter in order to properly initialize the layer paint before loading the data. |
-| paint                 | {color:'blue'} | `Object`, `Function` or `Expression` to set the appearance of the layer                                                                                                        |
-| selectedPaint         | undefiend      | Like paint, but used to decorate selected elements                                                                                                                             |
-| selectable            | false          | Indicates that the selection is working on this layer                                                                                                                          |
-| multiselect           | false          | Select multiple items                                                                                                                                                          |
-| unselectOnSecondClick | false          | So it is, unselect on second click                                                                                                                                             |
-| filter                | undefined      | `PropertiesFilter` expression to filter layer items                                                                                                                            |
-
-### Painting
-
-Vector layer painting in nextgis frontend is common for any type of geometry.
-
-```js
-// strict
-paint: { color: "red", fillOpacity: 0.5, stroke: true }
-// use the properties of the layer item
-paint: { color: ['get', 'color'], radius: ['get', 'radius'] }
-// different paint for different filters
-paint: [
-  { radius: 6, stroke: true, fillOpacity: 0.5 }, // base paint
-  [[['AMENITY', 'eq', 'restaurant']], { color: 'green', fillOpacity: 1 }],
-  [[['AMENITY', 'eq', 'cafe']], { color: 'red' }]
-],
-// paint callback function
-paint: (feature) => {
-  return { color: feature.properties.color };
-} // better use `{ color: ['get', 'color']}` expression
-```
-
-#### Examples
-
-[Vector painting](http://code.nextgis.com/demo-examples-vector_paint)
-[Expression paint](http://code.nextgis.com/demo-examples-expression_paint)
-[Expression paint with match](http://code.nextgis.com/demo-examples-expression_paint_match)
-[Properties paint](http://code.nextgis.com/demo-examples-properties_paint)
-
-### Filtering
-
-```js
-```
-
-### Selection
-
-```js
-```
-
-## Map events
-
-```js
-```
-
 ## For developers
 
 ### Instructions for whole repository
@@ -222,12 +158,6 @@ yarn run prod
 yarn run demo
 ```
 
-To generate json schema for build API pages run
-
-```bash
-yarn run doc
-```
-
 To copy the pages of universal examples from the demo/examples into the corresponding examples of frontend libraries run
 
 ```bash
@@ -240,18 +170,19 @@ yarn run examples
 # Go to package directory (for example webmap)
 cd ./packages/webmap
 # Run build command
-yarn run build
+yarn run dev
+# or
+yarn run prod
 # Run watch source files changes command
 yarn run watch
 ```
 
 ### Publishing
 
-Before publishing you should execute `prod` and `doc:api` scripts
+Before publishing you should execute `prod` script
 
 ```bash
 lerna run prod
-yarn docs:api
 ```
 
 To publish new version to git and npm run
@@ -311,21 +242,6 @@ yarn run watch
 ```
 
 Run LiveServer for some example index.html
-
-Set configuration for Chrome Debugger
-
-```json
-{
-  "type": "chrome",
-  "request": "launch",
-  "name": "NgwLeaflet debug",
-  "url": "http://127.0.0.1:5500",
-  "webRoot": "${workspaceFolder}/http://127.0.0.1:5500/packages/demo/examples",
-  "sourceMapPathOverrides": {
-    "webpack://NgwLeaflet/../*": "${webRoot}/packages/*"
-  }
-}
-```
 
 ## Commercial support
 
