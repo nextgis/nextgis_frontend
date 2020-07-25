@@ -125,24 +125,35 @@ describe('NgwOrm', function () {
           parent: SandboxGroup,
         }
       );
-      const ReceivedPoint = (await connection.receiveResource<typeof Point>(
-        Point.item.resource.id
-      )) as typeof SandboxPointLayer;
-      expect(ReceivedPoint.item.resource.id).to.be.eq(Point.item.resource.id);
-      const p = new ReceivedPoint();
-      p.test = 'test';
-      p.geom = { type: 'Point', coordinates: [104, 52] };
-      await p.save();
-      expect(p.id).to.eq(1);
-      const ngwFeature = await connection.driver.get(
-        'feature_layer.feature.item',
-        null,
-        {
-          id: ReceivedPoint.item.resource.id,
-          fid: p.id,
+      expect(Point.item).to.be.exist;
+      if (Point.item) {
+        const ReceivedPoint = (await connection.receiveResource<typeof Point>(
+          Point.item.resource.id
+        )) as typeof SandboxPointLayer;
+        expect(ReceivedPoint.item).to.be.exist;
+        if (ReceivedPoint.item) {
+          expect(ReceivedPoint.item.resource.id).to.be.eq(
+            Point.item.resource.id
+          );
+          const p = new ReceivedPoint();
+          p.test = 'test';
+          p.geom = { type: 'Point', coordinates: [104, 52] };
+          await p.save();
+          expect(p.id).to.eq(1);
+          const ngwFeature = await connection.driver.get(
+            'feature_layer.feature.item',
+            null,
+            {
+              id: ReceivedPoint.item.resource.id,
+              fid: p.id,
+            }
+          );
+          expect(ngwFeature.fields);
+          if (ngwFeature.fields) {
+            expect(ngwFeature.fields.test).to.eq(p.test);
+          }
         }
-      );
-      expect(ngwFeature.fields.test).to.eq(p.test);
+      }
     });
   });
 
@@ -172,11 +183,12 @@ describe('NgwOrm', function () {
         expect(Point.item).to.be.exist;
         if (Point.item) {
           expect(Point.item.feature_layer).to.be.exist;
-
-          const columns = getMetadataArgsStorage().filterColumns(Point);
-          expect(Point.item.feature_layer.fields.length).to.be.eq(
-            columns.length
-          );
+          if (Point.item.feature_layer) {
+            const columns = getMetadataArgsStorage().filterColumns(Point);
+            expect(Point.item.feature_layer.fields.length).to.be.eq(
+              columns.length
+            );
+          }
         }
       }
     });
@@ -196,16 +208,18 @@ describe('NgwOrm', function () {
       await p.save();
 
       expect(p.id).to.eq(1);
-
-      const ngwFeature = await connection.driver.get(
-        'feature_layer.feature.item',
-        null,
-        {
-          id: Point.item.resource.id,
-          fid: p.id,
-        }
-      );
-      expect(ngwFeature.id).to.eq(1);
+      expect(Point.item).to.be.exist;
+      if (Point.item) {
+        const ngwFeature = await connection.driver.get(
+          'feature_layer.feature.item',
+          null,
+          {
+            id: Point.item.resource.id,
+            fid: p.id,
+          }
+        );
+        expect(ngwFeature.id).to.eq(1);
+      }
     });
     it(`.save`, async () => {
       const Point = await newPointLayer('Clone of Point layer for .save test');
@@ -237,8 +251,10 @@ describe('NgwOrm', function () {
       });
       await Point.save(entities);
       const findById = await Point.findOne(1);
-
-      expect(findById.id).to.be.eq(1);
+      expect(findById).to.be.exist;
+      if (findById) {
+        expect(findById.id).to.be.eq(1);
+      }
     });
   });
 });
