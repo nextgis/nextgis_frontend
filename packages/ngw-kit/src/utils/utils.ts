@@ -87,7 +87,7 @@ export function getNgwLayerExtent(
   id: number,
   connector: NgwConnector
 ): Promise<LngLatBoundsArray | undefined> {
-  return connector.get('layer.extent', name, { id }).then((resp) => {
+  return connector.get('layer.extent', null, { id }).then((resp) => {
     if (resp) {
       const { maxLat, maxLon, minLat, minLon } = resp.extent;
       const extenrArray: LngLatBoundsArray = [minLon, minLat, maxLon, maxLat];
