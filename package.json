@@ -17,7 +17,7 @@
     "minor": "lerna version minor --conventional-commits -m \"chore(release): publish %s\" --no-push --create-release github"
   },
   "devDependencies": {
-    "@types/node":"^14.0.25",
+    "@types/node": "^14.0.26",
     "@microsoft/api-documenter": "^7.8.21",
     "lerna": "^3.22.1",
     "lint-staged": "^10.2.11",
