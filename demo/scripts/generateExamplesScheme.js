@@ -1,11 +1,8 @@
 const { lstatSync, readdirSync, readFileSync, existsSync } = require('fs');
 const { join } = require('path');
-// const showdown = require('showdown');
-// const showdownHighlight = require("showdown-highlight");
 
-// const converter = new showdown.Converter({
-//   extensions: [showdownHighlight]
-// });
+const pkgRoot = join(__dirname, '..', '..');
+
 const isDirectory = (source) => lstatSync(source).isDirectory();
 
 const getPriority = (package) =>
@@ -127,20 +124,27 @@ function getExamples(libPath, package, packages) {
   return examples;
 }
 
-function generate(source = '../') {
+function generate() {
   const items = [];
 
-  // add global READMEs
-  const readmeItem = getReadme(join(source, '../'))[0];
+  // add global README
+  const readmeItem = getReadme(pkgRoot)[0];
   readmeItem.id = 'readme';
   items.push(readmeItem);
 
   const packages = [
-    // { libPath, package }
+    // { libPath, package, name }
+    {
+      libPath: join(pkgRoot, 'demo'),
+      package: JSON.parse(
+        readFileSync(join(pkgRoot, 'demo', 'package.json'), 'utf8')
+      ),
+      name: 'demo',
+    },
   ];
-
-  readdirSync(source).forEach((name) => {
-    const libPath = join(source, name);
+  const packagesPath = join(pkgRoot, 'packages');
+  readdirSync(packagesPath).forEach((name) => {
+    const libPath = join(packagesPath, name);
 
     // find packages
     if (isDirectory(libPath)) {
