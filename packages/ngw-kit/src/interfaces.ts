@@ -95,7 +95,6 @@ export interface NgwLayerOptionsAdditional<
 > {
   id?: string;
   adapter?: T;
-  layers?: string;
   adapterOptions?: LayerAdaptersOptions[T];
   headers?: any;
   fit?: boolean;
