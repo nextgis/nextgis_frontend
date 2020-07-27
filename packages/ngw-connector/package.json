@@ -11,7 +11,7 @@
   "dependencies": {
     "@nextgis/cancelable-promise": "^1.0.0-alpha.0",
     "@nextgis/utils": "^1.0.0-alpha.0",
-    "events": "^3.1.0"
+    "events": "^3.2.0"
   },
   "devDependencies": {
     "@nextgis/build-tools": "file:../build-tools"

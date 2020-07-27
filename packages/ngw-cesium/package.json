@@ -10,8 +10,8 @@
     "@nextgis/cesium-map-adapter": "^1.0.0-alpha.0",
     "@nextgis/ngw-map": "^1.0.0-alpha.0",
     "@types/events": "^3.0.0",
-    "@types/node": "^14.0.24",
-    "events": "^3.1.0"
+    "@types/node": "^14.0.26",
+    "events": "^3.2.0"
   },
   "devDependencies": {
     "@nextgis/build-tools": "file:../build-tools"
