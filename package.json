@@ -37,6 +37,7 @@
   "license": "LGPL-3.0",
   "workspaces": [
     "packages/*",
+    "demo",
     "tests"
   ]
 }
