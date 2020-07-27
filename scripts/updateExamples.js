@@ -24,8 +24,9 @@ function copyExampleToLib(packageName, exampleFolderPath, exampleName) {
 
   // copy index.json
   const meta = JSON.parse(fs.readFileSync(metaPath, 'utf8'));
+
   const { ngwMaps, ...opts } = meta;
-  const newMeta = { ...opts, _copiedFrom: join(exampleFolderPath) };
+  const newMeta = { ...opts };
   fs.writeFileSync(
     join(libExamplesPath, 'index.json'),
     JSON.stringify(newMeta)
@@ -35,11 +36,11 @@ function copyExampleToLib(packageName, exampleFolderPath, exampleName) {
   const html = fs.readFileSync(htmlPath, 'utf8');
   let newHtml = changeHtmlMapAdapter(html, packageName, ngwMaps);
 
-  newHtml = newHtml.replace(/..\/..\/..\/([a-zA-Z-]+)\//g, (m, g) => {
+  newHtml = newHtml.replace(/..\/..\/..\/packages\/([a-zA-Z-]+)\//g, (m, g) => {
     if (g === packageName) {
       return '../../';
     }
-    return m;
+    return `../../../${g}/`;
   });
 
   fs.writeFileSync(join(libExamplesPath, 'index.html'), newHtml);

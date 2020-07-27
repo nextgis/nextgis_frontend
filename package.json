@@ -7,7 +7,7 @@
     "prod": "lerna run prod",
     "lint": "lerna run lint",
     "demo": "yarn run examples && cd ./packages/demo/ && yarn run build",
-    "examples": "node ./build/updateExamples.js",
+    "examples": "node ./scripts/updateExamples.js",
     "test": "npm run karma -- --single-run --coverage",
     "karma": "karma start tests/karma.conf.js",
     "docs:md": "api-documenter markdown",
