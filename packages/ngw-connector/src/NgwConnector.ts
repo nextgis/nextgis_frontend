@@ -31,9 +31,6 @@ import { NgwError } from './errors/NgwError';
 import { isObject } from './utils/isObject';
 import { InsufficientPermissionsError } from './errors/InsufficientPermissionsError';
 
-const isBrowser =
-  typeof window !== 'undefined' && typeof window.document !== 'undefined';
-
 export class NgwConnector {
   static errors = {
     NgwError,
@@ -148,7 +145,11 @@ export class NgwConnector {
     if (credentials) {
       const { login, password } = credentials;
       const str = unescape(encodeURIComponent(`${login}:${password}`));
-      return isBrowser ? window.btoa(str) : Buffer.from(str).toString('base64');
+      if (__BROWSER__) {
+        return window.btoa(str);
+      } else {
+        return Buffer.from(str).toString('base64');
+      }
     }
   }
 
