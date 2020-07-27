@@ -8,7 +8,6 @@ function changeHtmlMapAdapter(html, adapter, adapters) {
     const reName = new RegExp(adapters.map((x) => x).join('|'), 'g');
     html = html.replace(reName, adapter);
   }
-
   return html;
 }
 
