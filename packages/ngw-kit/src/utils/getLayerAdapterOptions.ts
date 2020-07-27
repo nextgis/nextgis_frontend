@@ -2,6 +2,7 @@ import {
   WebMap,
   RasterAdapterOptions,
   ImageAdapterOptions,
+  WmsAdapterOptions,
 } from '@nextgis/webmap';
 
 import { NgwLayerOptions, ResourceIdNgwLayerOptions } from '../interfaces';
@@ -36,11 +37,12 @@ export function getLayerAdapterOptions(
     }
     if (adapter === 'WMS') {
       url = `${baseUrl}/api/resource/${resourceId}/wms`;
+      const adapterOptions = options.adapterOptions as WmsAdapterOptions;
       return {
         url,
         format: 'image/png',
         version: '1.1.1',
-        layers: options.layers,
+        layers: adapterOptions && adapterOptions.layers,
         headers: options.headers,
       };
     }
