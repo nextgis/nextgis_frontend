@@ -90,7 +90,7 @@ module.exports = (env, argv) => {
   let plugins = [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(argv.mode || 'development'),
-      'process.env.EXAMPLES': JSON.stringify(generateExamples('../')),
+      'process.env.EXAMPLES': JSON.stringify(generateExamples()),
     }),
 
     new HtmlWebpackPlugin({

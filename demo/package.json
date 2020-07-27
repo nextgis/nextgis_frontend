@@ -54,11 +54,8 @@
     "start": "webpack-dev-server --progress --open --hot",
     "clean": "rimraf ./dist",
     "dev": "npm run clean && webpack --config ./webpack.config.js --progress",
-    "prod": "echo \"No build for Demo app\" && exit 0",
-    "lint": "echo \"No lint for Demo app\" && exit 0",
-    "build": "npm run dev -- --mode=production",
+    "prod": "npm run dev -- --mode=production",
     "watch": "npm run dev -- --watch",
-    "test": "echo \"Error: run tests from root\" && exit 1",
     "docker:latest": "docker build -t registry.nextgis.com/code-nextgis:latest . && docker push registry.nextgis.com/code-nextgis:latest"
   },
   "repository": {
