@@ -1,6 +1,6 @@
 const fs = require('fs');
 const { join } = require('path');
-const changeHtmlMapAdapter = require('../packages/demo/scripts/changeHtmlMapAdapter');
+const changeHtmlMapAdapter = require('../demo/scripts/changeHtmlMapAdapter');
 
 const packagesPath = './packages';
 
@@ -47,7 +47,7 @@ function copyExampleToLib(packageName, exampleFolderPath, exampleName) {
 
 function updateExamples() {
   // find demo examples folder
-  const demoExamplesPath = join(packagesPath, 'demo', 'examples');
+  const demoExamplesPath = join('demo', 'examples');
   if (fs.existsSync(demoExamplesPath)) {
     fs.readdirSync(demoExamplesPath).forEach((name) => {
       const examplePath = join(demoExamplesPath, name);
