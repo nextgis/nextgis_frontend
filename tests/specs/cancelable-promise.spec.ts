@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
-import { CancelablePromise } from '../../packages/cancelable-promise/src';
+import CancelablePromise from '../../packages/cancelable-promise/src';
 
 const getPromise = (delay = 0) =>
   new CancelablePromise((resolve) => {
