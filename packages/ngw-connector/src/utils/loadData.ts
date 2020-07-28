@@ -30,7 +30,7 @@ type LoadData = (
 ) => void;
 
 let loadData: LoadData;
-
+// @ts-ignore
 if (__BROWSER__) {
   loadData = (
     url: string,

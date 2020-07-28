@@ -9,9 +9,7 @@ declare let __NODE_JS__: boolean;
 declare let __COMMIT__: string;
 declare let __VERSION__: string;
 
-declare module "*.png" {
+declare module '*.png' {
   const value: any;
   export default value;
 }
-
-
