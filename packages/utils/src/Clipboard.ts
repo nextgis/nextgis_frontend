@@ -1,4 +1,6 @@
 export class Clipboard {
+  silent = true;
+
   constructor(text: string) {
     if (text) {
       this.copy(text);
@@ -18,9 +20,9 @@ export class Clipboard {
       } else {
         this.copyToClipboard(text);
       }
-      console.log('Copied to Clipboard');
+      !this.silent && console.log('Copied to Clipboard');
     } catch (e) {
-      console.log('Please copy coupon manually');
+      !this.silent && console.log('Please copy coupon manually');
     }
   }
 

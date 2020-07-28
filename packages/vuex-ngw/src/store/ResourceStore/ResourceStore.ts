@@ -1,10 +1,11 @@
+import { Store } from 'vuex';
 import { Geometry, GeoJsonProperties, Feature } from 'geojson';
 import { VuexModule, Mutation, Action, Module } from 'vuex-module-decorators';
-import { Store } from 'vuex';
-import { FeatureItem } from '@nextgis/ngw-connector';
+import { prepareFieldsToNgw, FEATURE_REQUEST_PARAMS } from '@nextgis/ngw-kit';
 import NgwConnector, {
   ResourceStoreItem,
   FeatureLayerField,
+  FeatureItem,
 } from '@nextgis/ngw-connector';
 import { Type } from '@nextgis/webmap';
 import { LookupTables, ForeignResource, PatchOptions } from '../../interfaces';
@@ -144,67 +145,19 @@ export abstract class ResourceStore<
   }
 
   @Action({ commit: '' })
-  async prepareGeomToNgw<
-    G extends Geometry | null = Geometry,
-    P = GeoJsonProperties
-  >(opt: { item: Feature<G, P> }) {
-    const { prepareGeomToNgw } = await import('../../utils/prepareGeomToNgw');
-    return prepareGeomToNgw(opt.item);
-  }
-
-  @Action({ commit: '' })
   async prepareFeatureToNgw<
     G extends Geometry | null = Geometry,
     P = GeoJsonProperties
-  >(opt: { item: Feature<G, P> }) {
-    const geom = await this.context.dispatch('prepareGeomToNgw', opt);
+  >(opt: { item: Feature<G, P> }): Promise<Partial<FeatureItem<P>>> {
+    const geom = opt.item.geometry as Geometry;
     const featureFields = (await this.context.dispatch(
       'getFields'
     )) as FeatureLayerField[];
-    const fields: P = {} as P;
-    featureFields.forEach((x) => {
-      // @ts-ignore
-      const property = opt.item.properties[x.keyname];
-      let value: any;
-      if (property) {
-        if (x.datatype === 'STRING') {
-          value = String(property);
-        } else if (x.datatype === 'BIGINT' || x.datatype === 'INTEGER') {
-          value = parseInt(property, 10);
-        } else if (x.datatype === 'REAL') {
-          value = parseFloat(property);
-        } else if (x.datatype === 'DATE') {
-          let dt: Date | undefined;
-          if (typeof property === 'object') {
-            value = property;
-          } else {
-            if (property instanceof Date) {
-              dt = property;
-            } else {
-              const parse = Date.parse(property);
-              if (parse) {
-                dt = new Date(parse);
-              }
-            }
-            if (dt) {
-              value = {
-                year: dt.getFullYear(),
-                month: dt.getMonth(),
-                day: dt.getDay(),
-              };
-            }
-          }
-        }
-      }
-      // @ts-ignore
-      fields[x.keyname] = value || null;
-    });
-
-    const feature: Partial<FeatureItem<P>> = {
+    const fields = prepareFieldsToNgw(opt.item.properties, featureFields);
+    return {
       fields,
       geom,
     };
-    return feature;
   }
 
   @Action({ commit: '' })
@@ -224,7 +177,7 @@ export abstract class ResourceStore<
         const item = await this.connector.patch(
           'feature_layer.feature.collection',
           { data: [feature] },
-          { id }
+          { id, ...FEATURE_REQUEST_PARAMS }
         );
         const newFeature = feature as FeatureItem<P>;
         const newItem = item && item[0];
@@ -245,7 +198,7 @@ export abstract class ResourceStore<
   }
 
   @Action({ commit: 'SET_STORE' })
-  async delete(fid: number) {
+  async delete(fid: number): Promise<ResourceStoreItem<P>[]> {
     await this.context.dispatch('getResources');
     const id = this.resources[this.resource];
     if (id) {
@@ -269,22 +222,22 @@ export abstract class ResourceStore<
   }
 
   @Mutation
-  private UPDATE_LOOKUP_TABLES(lookupTables: LookupTables) {
+  protected UPDATE_LOOKUP_TABLES(lookupTables: LookupTables): void {
     this.lookupTables = lookupTables;
   }
 
   @Mutation
-  private UPDATE_RESOURCES(resources?: Record<ResourceDef, number>) {
+  protected UPDATE_RESOURCES(resources?: Record<ResourceDef, number>): void {
     this.resources = { ...this.resources, ...resources };
   }
 
   @Mutation
-  private SET_STORE(store: ResourceStoreItem<P>[]) {
+  protected SET_STORE(store: ResourceStoreItem<P>[]): void {
     this.resourceItem = store;
   }
 
   @Mutation
-  private UPDATE_FIELDS(fields: FeatureLayerField[]) {
+  protected UPDATE_FIELDS(fields: FeatureLayerField[]): void {
     this.fields = fields;
   }
 }

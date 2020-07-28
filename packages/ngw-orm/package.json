@@ -1,25 +1,35 @@
 {
   "name": "@nextgis/ngw-orm",
-  "version": "0.32.0",
+  "version": "1.0.0-alpha.1",
   "description": "NextGIS Web Object-Relational Mapping",
-  "main": "lib/ngw-orm.js",
-  "unpkg": "lib/ngw-orm.js",
+  "main": "index.js",
+  "module": "lib/ngw-orm.esm-bundler.js",
+  "unpkg": "lib/ngw-orm.global.prod.js",
+  "jsdelivr": "lib/ngw-orm.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/ngw-connector": "^0.32.0",
-    "@nextgis/utils": "^0.32.0",
-    "reflect-metadata": "^0.1.13",
-    "reproject": "^1.2.5",
-    "wellknown": "^0.5.0"
+    "@nextgis/ngw-connector": "^1.0.0-alpha.1",
+    "@nextgis/ngw-kit": "^1.0.0-alpha.1",
+    "@nextgis/utils": "^1.0.0-alpha.1",
+    "@nextgis/webmap": "^1.0.0-alpha.1",
+    "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
     "@nextgis/build-tools": "file:../build-tools"
   },
+  "buildOptions": {
+    "name": "NgwOrm",
+    "formats": [
+      "esm-bundler",
+      "esm-browser",
+      "cjs",
+      "global"
+    ]
+  },
   "scripts": {
     "clean": "rimraf ./lib",
-    "dev": "npm run clean && webpack --config ./webpack.config.js --progress",
-    "build": "npm run dev -- --mode=production",
-    "prod": "npm run build",
+    "dev": "node ../build-tools/lib/build.js",
+    "prod": "npm run dev -- --release",
     "lint": "eslint ./src/**/*.ts --fix --c ../../.eslintrc",
     "watch": "npm run dev -- --watch"
   },
@@ -28,13 +38,12 @@
     "MAP"
   ],
   "author": "NextGIS",
-  "directories": {
-    "lib": "lib"
-  },
   "files": [
+    "index.js",
     "lib"
   ],
   "license": "LGPL-3.0",
+  "homepage": "https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-orm#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nextgis/nextgis_frontend.git"

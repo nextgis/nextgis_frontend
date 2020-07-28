@@ -1,9 +1,9 @@
-import WebMap, {
+import {
+  WebMap,
   Type,
   LngLatBoundsArray,
   MapClickEvent,
   VectorAdapterLayerType,
-  RasterAdapterOptions,
 } from '@nextgis/webmap';
 import NgwConnector, {
   WebmapResource,
@@ -19,7 +19,6 @@ import {
   ResourceAdapter,
 } from '../interfaces';
 import { WebMapLayerAdapter } from '../WebMapLayerAdapter';
-import { getLayerAdapterOptions as getLayerAdapterOptions_ } from './getLayerAdapterOptions';
 
 export function updateImageParams(
   params: Record<string, any>,
@@ -51,15 +50,6 @@ export const vectorLayerGeomToPaintTypeAlias: Record<
   MULTILINESTRINGZ: 'line',
   MULTIPOLYGONZ: 'polygon',
 };
-
-/** @deprecated */
-export function getLayerAdapterOptions(
-  options: NgwLayerOptions,
-  webMap: WebMap,
-  baseUrl: string
-): RasterAdapterOptions | undefined {
-  return getLayerAdapterOptions_(options, webMap, baseUrl);
-}
 
 export function addNgwLayer(
   options: NgwLayerOptions,
@@ -97,7 +87,7 @@ export function getNgwLayerExtent(
   id: number,
   connector: NgwConnector
 ): Promise<LngLatBoundsArray | undefined> {
-  return connector.get('layer.extent', name, { id }).then((resp) => {
+  return connector.get('layer.extent', null, { id }).then((resp) => {
     if (resp) {
       const { maxLat, maxLon, minLat, minLon } = resp.extent;
       const extenrArray: LngLatBoundsArray = [minLon, minLat, maxLon, maxLat];
@@ -212,7 +202,7 @@ export function sendIdentifyRequest(
   return options.connector.post('feature_layer.identify', { data });
 }
 
-interface ExtendWebMapLayerAdapterOptions {
+export interface ExtendWebMapLayerAdapterOptions {
   webMap: WebMap;
   connector: NgwConnector;
   baseUrl?: string;

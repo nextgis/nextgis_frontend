@@ -1,8 +1,9 @@
 import StrictEventEmitter from 'strict-event-emitter-types';
 import { EventEmitter } from 'events';
 import CancelablePromise from '@nextgis/cancelable-promise';
-import { fixUrlStr, deepmerge } from '@nextgis/utils';
-import WebMap, {
+import { deepmerge, isObject } from '@nextgis/utils';
+import {
+  WebMap,
   MapAdapter,
   ControlPositions,
   MapControls,
@@ -22,7 +23,8 @@ import NgwConnector, {
   LayerFeature,
 } from '@nextgis/ngw-connector';
 import { QmsAdapterOptions } from '@nextgis/qms-kit';
-import NgwKit, {
+import {
+  addNgwLayer,
   NgwLayerOptions,
   ResourceAdapter,
   WebMapLayerItem,
@@ -31,10 +33,17 @@ import NgwKit, {
   KeynamedNgwLayerOptions,
   ResourceIdNgwLayerOptions,
   ResourceNgwLayerOptions,
+  getNgwLayerItem,
+  getNgwLayerItems,
+  getNgwLayerFeature,
+  getNgwLayerFeatures,
+  getIdentifyGeoJson,
+  getNgwResourceExtent,
+  sendIdentifyRequest,
+  getCompanyLogo,
 } from '@nextgis/ngw-kit';
 import { getIcon } from '@nextgis/icons';
 
-import { onMapLoad } from './decorators';
 import { appendNgwResources } from './utils/appendNgwResources';
 import { prepareWebMapOptions, OPTIONS } from './utils/prepareWebMapOptions';
 
@@ -51,7 +60,7 @@ import { Geometry, Feature, FeatureCollection } from 'geojson';
  *
  * @example
  * ```javascript
- * import NgwMap from '@nextgis/ngw-map';
+ * import { NgwMap } from '@nextgis/ngw-map';
  * import MapAdapter from '@nextgis/leaflet-map-adapter';
  * // styles are not included in the leaflet-map-adapter
  * import 'leaflet/dist/leaflet.css';
@@ -71,13 +80,6 @@ export class NgwMap<
   C = any,
   O = Record<string, any>
 > extends WebMap<M, L, C, NgwMapEvents> {
-  // static utils = {
-  //   ...WebMap.utils,
-  //   ...NgwKit.utils,
-  //   fixUrlStr,
-  //   deepmerge,
-  // };
-  // static decorators = { onMapLoad, ...WebMap.decorators };
   static getIcon = getIcon;
 
   readonly emitter: StrictEventEmitter<
@@ -92,10 +94,6 @@ export class NgwMap<
   private __selectFromNgwRaster?: (ev: MapClickEvent) => void;
   private __selectFromNgwVector?: (ev: OnLayerClickOptions) => void;
 
-  /**
-   * @param mapAdapter #noapi
-   * @param options
-   */
   constructor(mapAdapter: MapAdapter, options: NgwMapOptions<C> & O) {
     super(prepareWebMapOptions(mapAdapter, options));
     if (options.connector) {
@@ -128,19 +126,18 @@ export class NgwMap<
    * ngwMap.addControl('ZOOM', 'top-right')
    * ```
    */
-  @WebMap.decorators.onLoad<NgwMapEvents>('controls:create')
   async addControl<K extends keyof MapControls>(
     controlDef: K | C,
     position: ControlPositions,
     options?: MapControls[K]
   ): Promise<any> {
+    await this.onLoad('controls:create');
     return super.addControl(controlDef, position, options);
   }
 
   /**
    * Add any (style, vector, webmap) NGW layer by resource id.
    * @param options - set layer identification parameters and render method.
-   * @param [adapterOptions] - parameters for the selected adapter
    *
    * @example
    * ```javascript
@@ -169,7 +166,7 @@ export class NgwMap<
     }
     if (this.options.baseUrl || this.options.baseUrl === '') {
       try {
-        const adapter = NgwKit.utils.addNgwLayer(options, this, this.connector);
+        const adapter = addNgwLayer(options, this, this.connector);
 
         const layer = (await this.addLayer(adapter, {
           visibility: true,
@@ -190,10 +187,11 @@ export class NgwMap<
         }
         return layer;
       } catch (er) {
-        console.error(
-          `Can't add NGW layer ${keyname || resourceId || resource}.`,
-          er
-        );
+        const resId =
+          isObject(resource) && 'id' in resource
+            ? resource.id
+            : keyname || resourceId || resource;
+        console.error(`Can't add NGW layer ${resId}.`, er);
       }
     }
   }
@@ -213,43 +211,43 @@ export class NgwMap<
     }
   }
 
-  async getNgwLayerItem(options: {
+  getNgwLayerItem(options: {
     resourceId: number;
     featureId: number;
   }): CancelablePromise<FeatureItem> {
-    return NgwKit.utils.getNgwLayerItem({
+    return getNgwLayerItem({
       connector: this.connector,
       ...options,
     });
   }
 
-  async getNgwLayerItems(
+  getNgwLayerItems(
     options: {
       resourceId: number;
       connector?: NgwConnector;
       filters?: PropertiesFilter;
     } & FilterOptions
   ): CancelablePromise<FeatureItem[]> {
-    return NgwKit.utils.getNgwLayerItems({
+    return getNgwLayerItems({
       connector: this.connector,
       ...options,
     });
   }
 
-  async getNgwLayerFeature<
+  getNgwLayerFeature<
     G extends Geometry | null = Geometry,
     P extends Record<string, any> = Record<string, any>
   >(options: {
     resourceId: number;
     featureId: number;
   }): CancelablePromise<Feature<G, P>> {
-    return NgwKit.utils.getNgwLayerFeature<G, P>({
+    return getNgwLayerFeature<G, P>({
       connector: this.connector,
       ...options,
     });
   }
 
-  async getNgwLayerFeatures<
+  getNgwLayerFeatures<
     G extends Geometry | null = Geometry,
     P extends Record<string, any> = Record<string, any>
   >(
@@ -259,21 +257,26 @@ export class NgwMap<
       filters?: PropertiesFilter;
     } & FilterOptions
   ): CancelablePromise<FeatureCollection<G, P>> {
-    return NgwKit.utils.getNgwLayerFeatures({
+    return getNgwLayerFeatures({
       connector: this.connector,
       ...options,
     });
   }
 
-  async getIdentifyGeoJson(
+  getIdentifyGeoJson(
     identify: NgwIdentify,
     multiple = false
   ): CancelablePromise<Feature | undefined> {
-    return NgwKit.utils.getIdentifyGeoJson({
+    const geojson = getIdentifyGeoJson({
       identify,
       connector: this.connector,
       multiple,
     });
+    if (geojson && 'then' in geojson) {
+      return geojson;
+    } else {
+      return CancelablePromise.resolve(geojson);
+    }
   }
 
   async getNgwLayers(): Promise<NgwLayers> {
@@ -306,7 +309,6 @@ export class NgwMap<
 
   /**
    * Move map to layer. If the layer is NGW resource, extent will be received from the server
-   * @param layerDef
    *
    * @example
    * ```javascript
@@ -338,13 +340,11 @@ export class NgwMap<
           item = await this.connector.getResource(resourceId);
         }
         if (item) {
-          NgwKit.utils
-            .getNgwResourceExtent(item, this.connector)
-            .then((extent) => {
-              if (extent) {
-                this.fitBounds(extent);
-              }
-            });
+          getNgwResourceExtent(item, this.connector).then((extent) => {
+            if (extent) {
+              this.fitBounds(extent);
+            }
+          });
         }
       }
     }
@@ -378,8 +378,8 @@ export class NgwMap<
 
   disableSelection(): void {
     if (this.__selectFromNgwRaster) {
-      this.emitter.off('click', this.__selectFromNgwRaster);
-      this.emitter.off('click', this._selectFromNgwVector);
+      this.emitter.removeListener('click', this.__selectFromNgwRaster);
+      this.emitter.removeListener('click', this._selectFromNgwVector);
       this.__selectFromNgwRaster = undefined;
       this.__selectFromNgwVector = undefined;
     }
@@ -534,27 +534,25 @@ export class NgwMap<
       Math.pow(2, zoom + 8);
     // FIXME: understand the circle creation function
     const radius = pixelRadius * metresPerPixel * 0.0005;
-    return NgwKit.utils
-      .sendIdentifyRequest(ev, {
-        layers: ids,
-        connector: this.connector,
-        radius,
-      })
-      .then((resp) => {
-        this._emitStatusEvent('ngw:select', {
-          ...resp,
-          resources: ids,
-          sourceType: 'raster',
-          event: ev,
-        });
-        return resp;
+    return sendIdentifyRequest(ev, {
+      layers: ids,
+      connector: this.connector,
+      radius,
+    }).then((resp) => {
+      this._emitStatusEvent('ngw:select', {
+        ...resp,
+        resources: ids,
+        sourceType: 'raster',
+        event: ev,
       });
+      return resp;
+    });
   }
 
   private async _whiteLabel() {
     const container = this.getContainer();
     if (container) {
-      const logo = await NgwKit.utils.getCompanyLogo(
+      const logo = await getCompanyLogo(
         this.connector,
         this.options.companyLogoOptions
       );
@@ -564,15 +562,3 @@ export class NgwMap<
     }
   }
 }
-
-// update static utils for backward compatibility
-NgwMap.utils = {
-  ...NgwMap.utils,
-  ...NgwKit.utils,
-  ...{
-    deepmerge,
-    fixUrlStr,
-  },
-};
-
-NgwMap.decorators = { ...{ onMapLoad }, ...WebMap.decorators };

@@ -2,15 +2,10 @@ import { EventEmitter } from 'events';
 import { Feature, Polygon } from 'geojson';
 import StrictEventEmitter from 'strict-event-emitter-types';
 
-import { deepmerge, defined } from '@nextgis/utils';
+import { deepmerge, defined, Type } from '@nextgis/utils';
 import { GetPaintFunction } from '@nextgis/paint';
 
-import {
-  LngLatBoundsArray,
-  Type,
-  Cursor,
-  LngLatArray,
-} from './interfaces/BaseTypes';
+import { LngLatBoundsArray, Cursor, LngLatArray } from './interfaces/BaseTypes';
 import {
   Locate,
   MapAdapter,
@@ -22,7 +17,7 @@ import { StarterKit } from './interfaces/StarterKit';
 import { LayerAdapter } from './interfaces/LayerAdapter';
 import { RuntimeParams } from './interfaces/RuntimeParams';
 import { MapOptions, AppOptions } from './interfaces/WebMapApp';
-import { WebMapEvents, BaseMapEvents } from './interfaces/Events';
+import { WebMapEvents, MainMapEvents } from './interfaces/Events';
 
 import { Keys } from './components/keys/Keys';
 import { CenterState } from './components/mapStates/CenterState';
@@ -209,7 +204,7 @@ export class WebMapMain<
 
   /**
    * Set the cursor icon to be displayed when hover icon on the map container.
-   * @param cursor available cursor name from https://developer.mozilla.org/ru/docs/Web/CSS/cursor
+   * @param cursor - Available cursor name from https://developer.mozilla.org/ru/docs/Web/CSS/cursor
    */
   setCursor(cursor: Cursor): void {
     if (this.mapAdapter.setCursor) {
@@ -219,7 +214,7 @@ export class WebMapMain<
 
   /**
    * Set the center of the current view.
-   * @param lngLat Array of two numbers representing longitude and latitude of the center of the map view.
+   * @param lngLat - Array of two numbers representing longitude and latitude of the center of the map view.
    *
    * @example
    * ```javascript
@@ -262,7 +257,7 @@ export class WebMapMain<
 
   /**
    * Zoom to a specific zoom level.
-   * @param zoom The zoom level to set (0-24).
+   * @param zoom - The zoom level to set (0-24).
    */
   setZoom(zoom: number): this {
     this.mapAdapter.setZoom(zoom);
@@ -303,8 +298,8 @@ export class WebMapMain<
 
   /**
    * Sets the view of the map geographical center and zoom
-   * @param lngLat Array of two numbers representing longitude and latitude of the center of the map view.
-   * @param zoom The zoom level to set (0-24).
+   * @param lngLat - Array of two numbers representing longitude and latitude of the center of the map view.
+   * @param zoom - The zoom level to set (0-24).
    *
    * @example
    * ```javascript
@@ -327,8 +322,7 @@ export class WebMapMain<
 
   /**
    * Sets a map view that contains the given geographical bounds.
-   * @param bounds Array of coordinates, measured in degrees, in [west, south, east, north] order.
-   * @param options
+   * @param bounds - Array of coordinates, measured in degrees, in [west, south, east, north] order.
    *
    * @example
    * ```javascript
@@ -351,7 +345,7 @@ export class WebMapMain<
 
   /**
    * Checking the status of any asynchronous operation
-   * @param event The name of the event whose status is checked
+   * @param event - The name of the event whose status is checked
    *
    * @example
    * ```javascript
@@ -371,7 +365,7 @@ export class WebMapMain<
 
   /**
    * helper method to wait for events to load. By default, card creation is tracked
-   * @param event The name of the event whose status is checked
+   * @param event - The name of the event whose status is checked
    *
    * @example
    * ```javascript
@@ -498,7 +492,7 @@ export class WebMapMain<
   }
 
   private _addEventsListeners(): void {
-    const events: (keyof BaseMapEvents)[] = [
+    const events: (keyof MainMapEvents)[] = [
       'preclick',
       'click',
       'zoomstart',
@@ -529,7 +523,7 @@ export class WebMapMain<
 
   private _removeEventListeners(): void {
     Object.entries(this._mapEvents).forEach(([x, event]) => {
-      this.mapAdapter.emitter.off(x, event);
+      this.mapAdapter.emitter.removeListener(x as keyof MainMapEvents, event);
     });
   }
 }

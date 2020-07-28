@@ -4,8 +4,6 @@ import * as dom from '@nextgis/dom';
 export class ZoomControl implements MapControl {
   private map?: MapAdapter;
   private _container?: HTMLElement;
-  private _zoomInBtn?: HTMLButtonElement;
-  private _zoomOutBtn?: HTMLButtonElement;
   private __onZoomInBtnClick?: () => void;
   private __onZoomOutBtnClick?: () => void;
 
@@ -73,11 +71,9 @@ export class ZoomControl implements MapControl {
       zoomOutBtn.innerHTML =
         '<span class="webmap-ctrl-icon" aria-hidden="true"></span>';
 
-      this._zoomInBtn = zoomInBtn;
       this.__onZoomInBtnClick = () => this._onZoomInBtnClick();
       zoomInBtn.addEventListener('click', this.__onZoomInBtnClick);
 
-      this._zoomOutBtn = zoomOutBtn;
       this.__onZoomOutBtnClick = () => this._onZoomOutBtnClick();
       zoomOutBtn.addEventListener('click', this.__onZoomOutBtnClick);
     }

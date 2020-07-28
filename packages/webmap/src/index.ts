@@ -10,7 +10,7 @@
  *
  * @example
  * ```js
- * import WebMap from "@nextgis/webmap";
+ * import { WebMap } from "@nextgis/webmap";
  *
  * import "./leaflet-style-override.css";
  * import MapAdapter from "@nextgis/leaflet-map-adapter";
@@ -38,13 +38,12 @@
  *
  * @packageDocumentation
  */
-
 import { WebMap } from './WebMap';
+import { AppOptions } from './interfaces/WebMapApp';
 
-export * from './WebMap';
-export * from './WebMapLayers';
-export * from './WebMapControls';
-export * from './WebMapMain';
+// export * from './WebMapLayers';
+// export * from './WebMapControls';
+// export * from './WebMapMain';
 export * from './interfaces/Events';
 export * from './interfaces/BaseTypes';
 export * from './interfaces/WebMapApp';
@@ -55,4 +54,8 @@ export * from './interfaces/LayerAdapter';
 export * from './interfaces/RuntimeParams';
 
 export { WebMap };
-export default WebMap;
+
+export async function createWebMap(options: AppOptions): Promise<WebMap> {
+  const webMap = new WebMap(options);
+  return webMap.onLoad();
+}

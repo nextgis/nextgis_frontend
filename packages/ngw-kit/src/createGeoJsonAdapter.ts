@@ -1,5 +1,6 @@
 import { EventEmitter } from 'events';
-import WebMap, {
+import {
+  WebMap,
   VectorLayerAdapter,
   Type,
   GeoJsonAdapterOptions,
@@ -40,7 +41,11 @@ export async function createGeoJsonAdapter(
 
   const resourceId = await resourceIdFromLayerOptions(options, connector);
 
-  if (options.adapterOptions?.popupOptions?.fromProperties) {
+  if (
+    options.adapterOptions &&
+    options.adapterOptions.popupOptions &&
+    options.adapterOptions.popupOptions.fromProperties
+  ) {
     options.adapterOptions.popupOptions.createPopupContent = ({ feature }) => {
       return feature && createPopupContent(feature, item);
     };
@@ -244,10 +249,10 @@ export async function createGeoJsonAdapter(
 
     _removeMoveEventListener() {
       if (this.__onMapMove) {
-        webMap.emitter.off('moveend', this.__onMapMove);
+        webMap.emitter.removeListener('moveend', this.__onMapMove);
       }
       if (this.__onMapMoveStart) {
-        webMap.emitter.off('movestart', this.__onMapMoveStart);
+        webMap.emitter.removeListener('movestart', this.__onMapMoveStart);
       }
     }
 

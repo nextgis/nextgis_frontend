@@ -14,7 +14,7 @@ $ yarn add @nextgis/ngw-kit
 ```
 
 ```js
-import WebMap from '@nextgis/webmap';
+import { WebMap } from '@nextgis/webmap';
 import LeafletMapAdapter from '@nextgis/leaflet-map-adapter';
 import NgwKit from '@nextgis/ngw-kit';
 

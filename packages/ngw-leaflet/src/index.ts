@@ -1,8 +1,21 @@
 import 'leaflet/dist/leaflet.css';
 import './leaflet-style-override.css';
 
-import NgwMap, { NgwMapOptions } from '@nextgis/ngw-map';
+import { Icon } from 'leaflet';
+import { NgwMap, NgwMapOptions } from '@nextgis/ngw-map';
 import LeafletMapAdapter from '@nextgis/leaflet-map-adapter';
+
+import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
+import iconUrl from 'leaflet/dist/images/marker-icon.png';
+import shadowUrl from 'leaflet/dist/images/marker-shadow.png';
+// @ts-ignore
+delete Icon.Default.prototype._getIconUrl;
+
+Icon.Default.mergeOptions({
+  iconRetinaUrl: iconRetinaUrl,
+  iconUrl: iconUrl,
+  shadowUrl: shadowUrl,
+});
 
 /**
  * Displaying the [NgwMap](ngw-map-api)
@@ -12,7 +25,7 @@ import LeafletMapAdapter from '@nextgis/leaflet-map-adapter';
  * ```javascript
  * // Base initialization
  * // [live demo](http://code.nextgis.com/ngw-leaflet-examples-ngw_webmap)
- * import NgwMap from '@nextgis/ngw-leaflet';
+ * import { NgwMap } from '@nextgis/ngw-leaflet';
  *
  * const ngwMap = new NgwMap({
  *   target: 'map',
@@ -22,7 +35,7 @@ import LeafletMapAdapter from '@nextgis/leaflet-map-adapter';
  * });
  * ```
  */
-export class NgwLeaflet extends NgwMap {
+class NgwLeaflet extends NgwMap {
   constructor(options: NgwMapOptions) {
     super(new LeafletMapAdapter(), options);
   }

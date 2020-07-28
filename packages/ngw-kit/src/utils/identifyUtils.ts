@@ -1,4 +1,5 @@
-import { LayerFeature, CancelablePromise } from '@nextgis/ngw-connector';
+import { LayerFeature } from '@nextgis/ngw-connector';
+import CancelablePromise from '@nextgis/cancelable-promise';
 import { Geometry, Feature } from 'geojson';
 import { getNgwLayerFeature, createGeoJsonFeature } from './featureLayerUtils';
 import {
