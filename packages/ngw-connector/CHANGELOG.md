@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.1](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2020-07-28)
+
+
+### Bug Fixes
+
+* **ngw-connector:** improve node/browser separation ([7dd5d8d](https://github.com/nextgis/nextgis_frontend/commit/7dd5d8de655cd54ce03ebd77792bf46566265e9c))
+
+
+
+
+
 # [1.0.0-alpha.0](https://github.com/nextgis/nextgis_frontend/compare/v0.32.0...v1.0.0-alpha.0) (2020-07-24)
 
 
