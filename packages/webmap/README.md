@@ -2,8 +2,6 @@
 
 Universal map constructor
 
-This library is not intended for using directly in the browser.
-
 Use Webmap with NPM installation method for building large scale applications. It pairs nicely with module bundlers such as [Webpack](https://webpack.js.org/)
 
 ```bash
@@ -14,7 +12,7 @@ $ yarn add @nextgis/webmap
 ```
 
 ```js
-import WebMap from '@nextgis/webmap';
+import { WebMap } from '@nextgis/webmap';
 import LeafletMapAdapter from '@nextgis/leaflet-map-adapter';
 // manually added styles
 import 'leaflet/dist/leaflet.css';

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+
+  <title>Clipboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <div>
+    <input id='copy-input' value="Click button to copy this text to clipboard"/>
+    <button id='copy-btn'>Copy</button>
+  </div>
+  <script type="module">
+    import { Clipboard } from '../../lib/utils.esm-browser.prod.js';
+
+    document.getElementById('copy-btn').addEventListener('click', () => {
+      const text = document.getElementById('copy-input').value;
+      Clipboard.copy(text);
+    });
+  </script>
+</body>
+
+</html>

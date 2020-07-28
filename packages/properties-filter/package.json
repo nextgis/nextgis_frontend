@@ -1,18 +1,32 @@
 {
   "name": "@nextgis/properties-filter",
-  "version": "0.32.0",
+  "version": "1.0.0-alpha.1",
   "description": "Filtering objects by its properties using expressions",
-  "main": "lib/properties-filter.js",
-  "unpkg": "lib/properties-filter.js",
+  "main": "index.js",
+  "module": "lib/properties-filter.esm-bundler.js",
+  "unpkg": "lib/properties-filter.global.prod.js",
+  "jsdelivr": "lib/properties-filter.global.prod.js",
   "types": "lib/index.d.ts",
+  "dependencies": {
+    "@nextgis/utils": "^1.0.0-alpha.1",
+    "geojson": "^0.5.0"
+  },
   "devDependencies": {
     "@nextgis/build-tools": "file:../build-tools"
   },
+  "buildOptions": {
+    "name": "PropertiesFilter",
+    "formats": [
+      "esm-bundler",
+      "esm-browser",
+      "cjs",
+      "global"
+    ]
+  },
   "scripts": {
     "clean": "rimraf ./lib",
-    "dev": "npm run clean && webpack --config ./webpack.config.js --progress",
-    "build": "npm run dev -- --mode=production",
-    "prod": "npm run build",
+    "dev": "node ../build-tools/lib/build.js",
+    "prod": "npm run dev -- --release",
     "lint": "eslint ./src/**/*.ts --fix --c ../../.eslintrc",
     "watch": "npm run dev -- --watch"
   },
@@ -21,25 +35,17 @@
     "MAP"
   ],
   "author": "NextGIS",
-  "directories": {
-    "lib": "lib"
-  },
   "files": [
+    "index.js",
     "lib"
   ],
   "license": "LGPL-3.0",
-  "publishConfig": {
-    "registry": "http://registry.npmjs.org/"
-  },
+  "homepage": "https://github.com/nextgis/nextgis_frontend/tree/master/packages/properties-filter#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nextgis/nextgis_frontend.git"
   },
   "bugs": {
     "url": "https://github.com/nextgis/nextgis_frontend/issues"
-  },
-  "dependencies": {
-    "@nextgis/utils": "^0.32.0",
-    "geojson": "^0.5.0"
   }
 }

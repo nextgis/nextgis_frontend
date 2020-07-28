@@ -1,79 +1,22 @@
 import NgwConnector from '@nextgis/ngw-connector';
-import WebMap, {
+import {
+  WebMap,
   StarterKit,
   Type,
   LayerAdapterCreators,
 } from '@nextgis/webmap';
-import {
-  getNgwResourceExtent,
-  sendIdentifyRequest,
-  pixelsInMeterWidth,
-  updateImageParams,
-  getLayerAdapterOptions,
-  addNgwLayer,
-  extendWebMapLayerAdapter,
-  setScaleRatio,
-} from './utils/utils';
 
-import { getIdentifyGeoJson, getIdentifyItems } from './utils/identifyUtils';
-import { getCompanyLogo } from './utils/getCompanyLogo';
-
-import {
-  getNgwLayerItems,
-  getNgwLayerItem,
-  getNgwLayerFeatures,
-  getNgwLayerFeature,
-  createGeoJsonFeature,
-} from './utils/featureLayerUtils';
-
-import { resourceIdFromLayerOptions } from './utils/resourceIdFromLayerOptions';
-
-import { createOnFirstShowAdapter } from './createBasemapWebmapItemAdapter';
-import { createGeoJsonAdapter } from './createGeoJsonAdapter';
-import { createRasterAdapter } from './createRasterAdapter';
+import { extendWebMapLayerAdapter } from './utils/utils';
+import { WebMapLayerAdapter } from './WebMapLayerAdapter';
+import { classAdapters } from './createAsyncAdapter';
 
 import {
   NgwKitOptions,
   WebMapAdapterOptions,
   GetClassAdapter,
 } from './interfaces';
-import { NgwResource } from './NgwResource';
-import { WebMapLayerAdapter } from './WebMapLayerAdapter';
-import { WebMapLayerItem } from './WebMapLayerItem';
-import { classAdapters } from './createAsyncAdapter';
 
 export class NgwKit implements StarterKit {
-  static utils = {
-    addNgwLayer,
-    createBasemapWebmapItemAdapter: createOnFirstShowAdapter,
-    createOnFirstShowAdapter,
-    createGeoJsonFeature,
-    createGeoJsonAdapter,
-    createRasterAdapter,
-    getCompanyLogo,
-    getIdentifyGeoJson,
-    getIdentifyGeoJsonParams: getIdentifyItems,
-    getNgwResourceExtent,
-    getNgwLayerFeature,
-    getNgwLayerFeatures,
-    getNgwLayerItems,
-    getNgwLayerItem,
-    pixelsInMeterWidth,
-    resourceIdFromLayerOptions,
-    sendIdentifyRequest,
-    setScaleRatio,
-  };
-
-  static classes = {
-    WebMapLayerAdapter,
-    WebMapLayerItem,
-    NgwResource,
-  };
-
-  static updateWmsParams = updateImageParams;
-  static getLayerAdapterOptions = getLayerAdapterOptions;
-  static addNgwLayer = addNgwLayer;
-
   url: string;
   connector: NgwConnector;
   webMap?: WebMap;

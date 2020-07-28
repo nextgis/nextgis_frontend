@@ -14,7 +14,7 @@ $ yarn add @nextgis/mapboxgl-map-adapter
 ```
 
 ```js
-import WebMap from '@nextgis/webmap';
+import { WebMap } from '@nextgis/webmap';
 import MapboxglMapAdapter from '@nextgis/mapboxgl-map-adapter';
 // manually added styles
 

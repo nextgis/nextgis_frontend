@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.1](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2020-07-28)
+
+**Note:** Version bump only for package @nextgis/utils
+
+
+
+
+
+# [1.0.0-alpha.0](https://github.com/nextgis/nextgis_frontend/compare/v0.32.0...v1.0.0-alpha.0) (2020-07-24)
+
+
+### Features
+
+* **ngw-connector:** new getResourceBy method ([462f0db](https://github.com/nextgis/nextgis_frontend/commit/462f0dbed5c0b448f5be60a73e8d70e792a4f87a))
+* **utils:** add new tools ([25e6339](https://github.com/nextgis/nextgis_frontend/commit/25e6339b5d079f231f3d1fd3ac91e9d32402e0d5))
+
+
+
+
+
 # [0.32.0](https://github.com/nextgis/nextgis_frontend/compare/v0.31.0...v0.32.0) (2020-06-03)
 
 **Note:** Version bump only for package @nextgis/utils

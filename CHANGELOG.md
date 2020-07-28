@@ -3,6 +3,82 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.1](https://github.com/nextgis/nextgisweb_frontend/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2020-07-28)
+
+
+### Bug Fixes
+
+* **build:** fix item index.js error ([7a9d27f](https://github.com/nextgis/nextgisweb_frontend/commit/7a9d27f12ebd1f9e7fd974c32905faa36b858d5e))
+* **ngw-connector:** improve node/browser separation ([7dd5d8d](https://github.com/nextgis/nextgisweb_frontend/commit/7dd5d8de655cd54ce03ebd77792bf46566265e9c))
+* **ngw-kit:** remove unresolved variable ([e74c4c7](https://github.com/nextgis/nextgisweb_frontend/commit/e74c4c7e6ed9c39d4e9837d1830002f3d659d254))
+* **ngw-kit:** wms adapter layers options from adapterOptions ([4476a55](https://github.com/nextgis/nextgisweb_frontend/commit/4476a55953a60c3bbc6b58178f90eac998897482))
+
+
+
+
+
+# [1.0.0-alpha.0](https://github.com/nextgis/nextgisweb_frontend/compare/v0.32.0...v1.0.0-alpha.0) (2020-07-24)
+
+
+### Bug Fixes
+
+* replace emitter.of by emitter.removeListener ([5a92e2b](https://github.com/nextgis/nextgisweb_frontend/commit/5a92e2b91e741346be39be87d5b9f50b9621c092))
+* **cesium:** fix Tilset3D setHeight ([fb95256](https://github.com/nextgis/nextgisweb_frontend/commit/fb952565adb2734ec4a40df2c955ad51cec90c54))
+* **control-container:** style url ([326f837](https://github.com/nextgis/nextgisweb_frontend/commit/326f83755e1adfe2e5ff673f50087b54297f0197))
+* **mapbox:** right selected event order call ([22c4511](https://github.com/nextgis/nextgisweb_frontend/commit/22c45118ae57c9a2952725a09e26cb423965be03))
+* **ngw-kit:** editing for a new layer visibility standard ([d2db4ed](https://github.com/nextgis/nextgisweb_frontend/commit/d2db4ed94648d0854321b4c3192b6cf2ab866652))
+* **ngw-kit:** fix addNgwLayer resource options ([c689db1](https://github.com/nextgis/nextgisweb_frontend/commit/c689db13cb8fb2d043ef395ae56ab501cf77a350))
+* **properties-filter:** add field type check for like\ilike filter ([55f5c23](https://github.com/nextgis/nextgisweb_frontend/commit/55f5c23c252f6ee1f8cd34207bdaeb43610e68fb))
+* **vuetify:** pass $attrs from parent ([778f909](https://github.com/nextgis/nextgisweb_frontend/commit/778f9093dba1b15115806996b7c0984d5bfc84b0))
+* **vuetify:** update items on init ([03f78ed](https://github.com/nextgis/nextgisweb_frontend/commit/03f78ed98e74fc2eb005085f1fce30b3a957ece5))
+* **webmap:** editing for new layer visibility standard ([32413d0](https://github.com/nextgis/nextgisweb_frontend/commit/32413d085d30073056b8da97c8735ca13016c616))
+
+
+### Build System
+
+* qms-kit to rollup ([3831a57](https://github.com/nextgis/nextgisweb_frontend/commit/3831a57e661a85386ef14b69cc6ef682cf961394))
+* wepmap to rollup ([bc66507](https://github.com/nextgis/nextgisweb_frontend/commit/bc665072f7eefacae748c2cf81f6bdef75d9f8aa))
+
+
+### Code Refactoring
+
+* rename layerAdapter baseLayer option to baselayer ([368d657](https://github.com/nextgis/nextgisweb_frontend/commit/368d6576278505ddddde2a1ab160a0849e087c70))
+
+
+### Features
+
+* **cesium:** add maximumScreenSpaceError option for tilset3d adapter ([c82c524](https://github.com/nextgis/nextgisweb_frontend/commit/c82c52452765b2e764f6c3d42bc3522bd36a4258))
+* **cesium:** set custom logo ([bd05fd3](https://github.com/nextgis/nextgisweb_frontend/commit/bd05fd3f6e34e9cd7e38bbfe5bd1941583ef8fe8))
+* **ngw-connector:** add check for 403 ngw error ([e344663](https://github.com/nextgis/nextgisweb_frontend/commit/e344663a974867e510b460fb00eea1775d801ee4))
+* **ngw-connector:** handle network error ([7e4a687](https://github.com/nextgis/nextgisweb_frontend/commit/7e4a687934e9fd8a557a41102e70c8761f7d5d2d))
+* **ngw-connector:** new getResourceBy method ([462f0db](https://github.com/nextgis/nextgisweb_frontend/commit/462f0dbed5c0b448f5be60a73e8d70e792a4f87a))
+* **ngw-kit:** add webmap item method to cotrol item children order ([4c4e95a](https://github.com/nextgis/nextgisweb_frontend/commit/4c4e95a146c4aeb3d5b5e7a1868ab17e5ff68c1c))
+* **ngw-kit:** ngw error handling ([490d068](https://github.com/nextgis/nextgisweb_frontend/commit/490d068021b21fb7ddcd7475d2a669a969f81480))
+* **ngw-orm:** remove 3rd part libs to convers geom to wkt, use new ngw api ([01c8e21](https://github.com/nextgis/nextgisweb_frontend/commit/01c8e21321b041024584cdcb8c41998adddb3246))
+* **utils:** add new tools ([25e6339](https://github.com/nextgis/nextgisweb_frontend/commit/25e6339b5d079f231f3d1fd3ac91e9d32402e0d5))
+* **webmap:** add special MapAdapterOptions option to MapOptions ([e3dd2ec](https://github.com/nextgis/nextgisweb_frontend/commit/e3dd2eceb5b63bf7c19791deacd72b2e047a74f8))
+* **webmap:** change default behaviour of addLayer visibility option, its now true ([0e91555](https://github.com/nextgis/nextgisweb_frontend/commit/0e91555cea9666dd3ce8c2df7364f0e588dc8c24))
+* **webmap:** implement WebmapLayers get Attributions onlyBaselayer option ([430d51e](https://github.com/nextgis/nextgisweb_frontend/commit/430d51e7211c050ebeffd68b0c839d9a38170054))
+* **webmap:** new static method WebMap.get(id) to get webmap instance ([658f537](https://github.com/nextgis/nextgisweb_frontend/commit/658f5372bde27b4d8502856649b2b11e9e4bade7))
+
+
+### Performance Improvements
+
+* **vuetify:** replace components gwMap param with webMapId ([59a42d3](https://github.com/nextgis/nextgisweb_frontend/commit/59a42d35029c4d713469a1ea2f339c3bb5f3747a))
+
+
+### BREAKING CHANGES
+
+* No more default export from `qms-kit`. You should replace `import QmsKit from "@nextgis/qms-kit"` to `import { QmsKit } from "@nextgis/qms-kit"` everywhere
+* No more default export from `ngw-map`. You should replace `import NgwMap from "@nextgis/ngw-map"` to `import { NgwMap } from "@nextgis/ngw-map"` everywhere
+* **webmap:** the added layer `visibility` is now `true`
+* LayerAdapter option baseLayer was renamed to baselayer;
+* webMap.getBaseLayers() method now return LayerAdapter, not string array of ids
+
+
+
+
+
 # [0.32.0](https://github.com/nextgis/nextgis_frontend/compare/v0.31.0...v0.32.0) (2020-06-03)
 
 

@@ -1,4 +1,3 @@
-import { VueNgwLeaflet } from './components/VueNgwLeaflet';
+import { VueNgwLeaflet } from './VueNgwLeaflet';
 
-export { VueNgwLeaflet };
 export default VueNgwLeaflet;

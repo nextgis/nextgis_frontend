@@ -1,8 +1,8 @@
 import { deepmerge } from '@nextgis/utils';
 import { MapAdapter, StarterKit, AppOptions } from '@nextgis/webmap';
 import NgwConnector from '@nextgis/ngw-connector';
-import QmsKit from '@nextgis/qms-kit';
-import NgwKit from '@nextgis/ngw-kit';
+import { QmsKit } from '@nextgis/qms-kit';
+import { NgwKit } from '@nextgis/ngw-kit';
 
 import { NgwMapOptions } from '../interfaces';
 
@@ -16,7 +16,7 @@ export const OPTIONS: NgwMapOptions = {
     ATTRIBUTION: {
       position: 'bottom-right',
       customAttribution: [
-        '<a href="http://nextgis.ru" target="_blank">©NextGIS</a>',
+        '<a href="https://nextgis.com" target="_blank">©NextGIS</a>',
       ],
     },
   },

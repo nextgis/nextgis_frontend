@@ -3,6 +3,49 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.1](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2020-07-28)
+
+**Note:** Version bump only for package @nextgis/vuetify-ngw-components
+
+
+
+
+
+# [1.0.0-alpha.0](https://github.com/nextgis/nextgis_frontend/compare/v0.32.0...v1.0.0-alpha.0) (2020-07-24)
+
+
+### Bug Fixes
+
+* replace emitter.of by emitter.removeListener ([5a92e2b](https://github.com/nextgis/nextgis_frontend/commit/5a92e2b91e741346be39be87d5b9f50b9621c092))
+* **vuetify:** pass $attrs from parent ([778f909](https://github.com/nextgis/nextgis_frontend/commit/778f9093dba1b15115806996b7c0984d5bfc84b0))
+* **vuetify:** update items on init ([03f78ed](https://github.com/nextgis/nextgis_frontend/commit/03f78ed98e74fc2eb005085f1fce30b3a957ece5))
+
+
+### Build System
+
+* wepmap to rollup ([bc66507](https://github.com/nextgis/nextgis_frontend/commit/bc665072f7eefacae748c2cf81f6bdef75d9f8aa))
+
+
+### Code Refactoring
+
+* rename layerAdapter baseLayer option to baselayer ([368d657](https://github.com/nextgis/nextgis_frontend/commit/368d6576278505ddddde2a1ab160a0849e087c70))
+
+
+### Performance Improvements
+
+* **vuetify:** replace components gwMap param with webMapId ([59a42d3](https://github.com/nextgis/nextgis_frontend/commit/59a42d35029c4d713469a1ea2f339c3bb5f3747a))
+
+
+### BREAKING CHANGES
+
+* No more default export from `ngw-map`. You should replace `import NgwMap from "@nextgis/ngw-map"` to `import { NgwMap } from "@nextgis/ngw-map"` everywhere
+* LayerAdapter option baseLayer was renamed to baselayer;
+* webMap.getBaseLayers() method now return LayerAdapter, not string array of ids
+
+
+
+
+
 # [0.32.0](https://github.com/nextgis/nextgis_frontend/compare/v0.31.0...v0.32.0) (2020-06-03)
 
 

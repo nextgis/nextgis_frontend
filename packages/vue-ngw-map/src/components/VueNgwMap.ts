@@ -1,7 +1,8 @@
 import { VNode, VNodeData, CreateElement } from 'vue';
 import { Prop, Vue } from 'vue-property-decorator';
 import Component from 'vue-class-component';
-import NgwMap, { NgwMapOptions, MapAdapter } from '@nextgis/ngw-map';
+import { MapAdapter } from '@nextgis/webmap';
+import { NgwMap, NgwMapOptions } from '@nextgis/ngw-map';
 
 import NgwConnector from '@nextgis/ngw-connector';
 
@@ -16,7 +17,7 @@ export class VueNgwMap<M = any> extends Vue {
   @Prop({ type: Object }) mapOptions!: NgwMapOptions;
 
   name = 'vue-ngw-map';
-  ngwMap?: NgwMap<M> = undefined;
+  ngwMap: NgwMap<M> | null = null;
   ready = false;
 
   async mounted(): Promise<void> {

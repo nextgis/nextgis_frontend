@@ -1,3 +1,8 @@
-import { MapboxglMapAdapter } from './MapboxglMapAdapter';
-export * from './MapboxglMapAdapter';
+import {
+  MapboxglMapAdapter,
+  MapboxglMapAdapterOptions,
+} from './MapboxglMapAdapter';
+
+export { MapboxglMapAdapterOptions };
+
 export default MapboxglMapAdapter;

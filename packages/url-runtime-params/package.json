@@ -1,40 +1,49 @@
 {
   "name": "@nextgis/url-runtime-params",
-  "version": "0.32.0",
-  "description": "",
-  "main": "lib/url-runtime-params.js",
-  "unpkg": "lib/url-runtime-params.js",
+  "version": "1.0.0-alpha.1",
+  "description": "Сontrol of writing and reading URL parameters",
+  "main": "index.js",
+  "module": "lib/url-runtime-params.esm-bundler.js",
+  "unpkg": "lib/url-runtime-params.global.prod.js",
+  "jsdelivr": "lib/url-runtime-params.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/webmap": "^0.32.0"
+    "@nextgis/webmap": "^1.0.0-alpha.1"
   },
   "devDependencies": {
     "@nextgis/build-tools": "file:../build-tools"
   },
+  "buildOptions": {
+    "name": "UrlRuntimeParams",
+    "formats": [
+      "esm-bundler",
+      "esm-browser",
+      "global"
+    ]
+  },
   "scripts": {
     "clean": "rimraf ./lib",
-    "dev": "npm run clean && webpack --config ./webpack.config.js --progress",
-    "build": "npm run dev -- --mode=production",
-    "prod": "npm run build",
+    "dev": "node ../build-tools/lib/build.js",
+    "prod": "npm run dev -- --release",
     "lint": "eslint ./src/**/*.ts --fix --c ../../.eslintrc",
-    "watch": "npm run dev -- --watch",
-    "test": "echo \"Error: run tests from root\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/nextgis/nextgis_frontend.git"
+    "watch": "npm run dev -- --watch"
   },
   "keywords": [
     "NextGIS",
     "MAP"
   ],
   "author": "NextGIS",
-  "directories": {
-    "lib": "lib"
-  },
   "files": [
+    "index.js",
     "lib"
   ],
   "license": "LGPL-3.0",
-  "gitHead": "63bdb386006455c48c1e6e2900e74bb27e4a41bd"
+  "homepage": "https://github.com/nextgis/nextgis_frontend/tree/master/packages/url-runtime-params#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nextgis/nextgis_frontend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nextgis/nextgis_frontend/issues"
+  }
 }
