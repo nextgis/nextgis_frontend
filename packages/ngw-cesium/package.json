@@ -1,14 +1,14 @@
 {
   "name": "@nextgis/ngw-cesium",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-alpha.1",
   "description": "",
   "main": "lib/ngw-cesium.js",
   "module": "lib/ngw-cesium.esm.js",
   "unpkg": "lib/ngw-cesium.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/cesium-map-adapter": "^1.0.0-alpha.0",
-    "@nextgis/ngw-map": "^1.0.0-alpha.0",
+    "@nextgis/cesium-map-adapter": "^1.0.0-alpha.1",
+    "@nextgis/ngw-map": "^1.0.0-alpha.1",
     "@types/events": "^3.0.0",
     "@types/node": "^14.0.26",
     "events": "^3.2.0"
