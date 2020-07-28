@@ -1,5 +1,5 @@
 {
-  "name": "nextgis_frontend_test",
+  "name": "@nextgis/frontend_test",
   "private": true,
   "version": "1.0.0-alpha.0",
   "scripts": {
