@@ -10,7 +10,6 @@
   "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/cancelable-promise": "^1.0.0-alpha.1",
-    "@nextgis/dom": "^1.0.0-alpha.1",
     "@nextgis/item": "^1.0.0-alpha.1",
     "@nextgis/ngw-connector": "^1.0.0-alpha.1",
     "@nextgis/properties-filter": "^1.0.0-alpha.1",
