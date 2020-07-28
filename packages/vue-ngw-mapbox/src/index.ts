@@ -1,4 +1,3 @@
-import { VueNgwMapbox } from './components/VueNgwMapbox';
+import { VueNgwMapbox } from './VueNgwMapbox';
 
-export { VueNgwMapbox };
 export default VueNgwMapbox;

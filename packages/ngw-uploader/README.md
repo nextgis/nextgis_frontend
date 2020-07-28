@@ -11,7 +11,7 @@ Library providing tools for uploading data to the NGW cloud
 Simply download and include with a script tag. NgwLeaflet will be registered as a global variable.
 
 ```html
-<script src="../lib/ngw-uploader.js"></script>
+<script src="../lib/ngw-uploader.global.prod.js"></script>
 <div id='uploader'></div>
 <script>
   var uploader = document.getElementById('uploader');
@@ -45,9 +45,9 @@ $ npm install @nextgis/ngw-uploader
 ```
 
 ```js
-import NgwLeaflet from '@nextgis/ngw-uploader';
+import NgwUploader from '@nextgis/ngw-uploader';
 
-const ngwLeaflet = new NgwUploader({
+const ngwUploader = new NgwUploader({
     baseUrl: 'http://dev.nextgis.com/sandbox'
 });
 

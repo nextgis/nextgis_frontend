@@ -1,8 +1,8 @@
 # NextGIS Frontend
 
-[![http://code.nextgis.com](https://raw.githubusercontent.com/nextgis/nextgis_frontend/master/packages/demo/src/images/logo_96x96.png)](http://code.nextgis.com)
+[![http://code.nextgis.com](https://raw.githubusercontent.com/nextgis/nextgis_frontend/master/demo/src/images/logo_96x96.png)](http://code.nextgis.com)
 
-Suite of frontend JavaScript-libraries that allow you to speed up building your own web-gis apps using Nextgis software and services as a backend.
+Suite of frontend JavaScript-libraries that allow you to speed up building your own web-gis apps using NextGIS software and services as a backend.
 
 NextGIS Frontend support three main open-source GIS frameworks with common interfaces.
 
@@ -21,20 +21,49 @@ Some universal examples:
 
 ## Packages `@nextgis/`
 
-- [ngw-leaflet](http://code.nextgis.com/ngw-leaflet) – one file bundle for building [Leaflet](https://leafletjs.com/) map interacting with NextGIS services;
-- [ngw-ol](http://code.nextgis.com/ngw-ol) – one file bundle for building [OpenLayers](https://openlayers.org/) map interacting with NextGIS;
-- [ngw-mapbox](http://code.nextgis.com/ngw-mapbox) – one file bundle for building [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/) map interacting with NextGIS;
-- [ngw-map](http://code.nextgis.com/ngw-map) – abstract map to simplify work with NextGIS services;
-- [ngw-connector](http://code.nextgis.com/ngw-connector) – module to interact with [NextGIS Web](http://docs.nextgis.ru/docs_ngweb_dev/doc/developer/toc.html) REST API;
-- [ngw-uploader](http://code.nextgis.com/ngw-uploader) – library providing tools for uploading data to [nextgis.com](http://nextgis.com/nextgis-com/) cloud;
-- [webmap](http://code.nextgis.com/webmap) – universal map constructor;
-- [leaflet-map-adapter](http://code.nextgis.com/leaflet-map-adapter) – webmap adapter to use [Leaflet](https://leafletjs.com/) GIS framework;
-- [ol-map-adapter](http://code.nextgis.com/ol-map-adapter) – webmap adapter to use [OpenLayers](https://openlayers.org/) GIS framework;
-- [mapboxgl-map-adapter](http://code.nextgis.com/mapboxgl-map-adapter) – webmap adapter to use [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/) framework;
-- [ngw-kit](http://code.nextgis.com/ngw-kit) – build webmap with [NextGIS Web](http://nextgis.ru/nextgis-web/) instance;
-- [qms-kit](http://code.nextgis.com/qms-kit) – build webmap with [NextGIS QMS](https://qms.nextgis.com/) baselayer;
-- [icons](http://code.nextgis.com/icons) – simple svg icons pack to display on the map;
-- [dialog](http://code.nextgis.com/dialog) – utility to work with modal windows;
+### Ready to use maps
+
+Single-file bundles for rapid deployment of web-gis applications with NextGIS services
+
+- [ngw-leaflet](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-leaflet) – for [Leaflet](https://leafletjs.com/);
+- [ngw-ol](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-ol) – for [OpenLayers](https://openlayers.org/);
+- [ngw-mapbox](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-mapbox) – for [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/);
+
+### Map constructor
+- [ngw-map](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-map) – abstract map to simplify work with NextGIS services;
+- [webmap](https://github.com/nextgis/nextgis_frontend/tree/master/packages/webmap) – universal map constructor;
+- [leaflet-map-adapter](https://github.com/nextgis/nextgis_frontend/tree/master/packages/leaflet-map-adapter) – webmap adapter to use [Leaflet](https://leafletjs.com/) GIS framework;
+- [mapboxgl-map-adapter](https://github.com/nextgis/nextgis_frontend/tree/master/packages/mapboxgl-map-adapter) – webmap adapter to use [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/) framework;
+- [ol-map-adapter](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ol-map-adapter) – webmap adapter to use [OpenLayers](https://openlayers.org/) GIS framework;
+- [ngw-kit](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-kit) – build webmap with [NextGIS Web](http://nextgis.ru/nextgis-web/) instance;
+- [qms-kit](https://github.com/nextgis/nextgis_frontend/tree/master/packages/qms-kit) – build webmap with [NextGIS QMS](https://qms.nextgis.com/) baselayer;
+- [icons](https://github.com/nextgis/nextgis_frontend/tree/master/packages/icons) – simple svg icons pack to display on the map;
+- [dialog](https://github.com/nextgis/nextgis_frontend/tree/master/packages/dialog) – utility to work with modal windows;
+- [control-container](https://github.com/nextgis/nextgis_frontend/tree/master/packages/control-container) – placing control elements in the corners of the map container;
+- [paint](https://github.com/nextgis/nextgis_frontend/tree/master/packages/paint) – working with the style of vector layers;
+- [properties-filter](https://github.com/nextgis/nextgis_frontend/tree/master/packages/properties-filter) – filtering objects by its properties using JSON-serializable expressions;
+- [url-runtime-params](https://github.com/nextgis/nextgis_frontend/tree/master/packages/url-runtime-params) – writing and reading URL parameters;
+- [item](https://github.com/nextgis/nextgis_frontend/tree/master/packages/item) – hierarchical layers control;
+
+### NextGisWeb Tools
+- [ngw-connector](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-connector) – module to interact with [NextGIS Web](http://docs.nextgis.ru/docs_ngweb_dev/doc/developer/toc.html) REST API;
+- [ngw-orm](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-orm) – NextGIS Web Object-Relational Mapping;
+- [ngw-uploader](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-uploader) – library providing tools for uploading data to [nextgis.com](http://nextgis.com/nextgis-com/) cloud;
+
+
+### Utilities
+- [utils](https://github.com/nextgis/nextgis_frontend/tree/master/packages/utils) – common development tools;
+- [dom](https://github.com/nextgis/nextgis_frontend/tree/master/packages/dom) – collection of libraries for working with the DOM;
+- [cancelable-promise](https://github.com/nextgis/nextgis_frontend/tree/master/packages/cancelable-promise) – a promise you can stop;
+
+### Vue
+- [vue-ngw-leaflet](https://github.com/nextgis/nextgis_frontend/tree/master/packages/vue-ngw-leaflet) – integrate NGW maps into vue.js with leaflet adapter;
+- [vue-ngw-ol](https://github.com/nextgis/nextgis_frontend/tree/master/packages/vue-ngw-ol) – integrate NGW maps into vue.js with openlayers adapter;
+- [vue-ngw-mapbox](https://github.com/nextgis/nextgis_frontend/tree/master/packages/vue-ngw-mapbox) – integrate NGW maps into vue.js with mapbox-gl js adapter;
+- [vue-ngw-map](https://github.com/nextgis/nextgis_frontend/tree/master/packages/vue-ngw-map) – abstract plugin to integrate NGW maps into vue.js;
+- [vuetify-ngw-components](https://github.com/nextgis/nextgis_frontend/tree/master/packages/vuetify-ngw-components) – vuetify components for NGW Frontend
+- [vuex-ngw](https://github.com/nextgis/nextgis_frontend/tree/master/packages/vuex-ngw) – vuex store for NGW resources;
+
 
 ## Example projects
 
@@ -55,7 +84,7 @@ Some universal examples:
 Download and include with a script tag. \[Package\] will be registered as a global variable.
 
 ```html
-<script src="./lib/[package].js"></script>
+<script src="./lib/[package].global.js"></script>
 <script>
   var package = new Package(options);
 </script>
@@ -70,7 +99,7 @@ Download and include with a script tag. \[Package\] will be registered as a glob
 We recommend linking to a specific version number that you can update manually:
 
 ```html
-<script src="https://unpkg.com/@nextgis/[package]@0.19.0"></script>
+<script src="https://unpkg.com/@nextgis/[package]@[version]"></script>
 ```
 
 ### NPM/YARN
@@ -87,7 +116,9 @@ yarn add @nextgis/[package]
 then import the \[package\] in the project modules
 
 ```js
-import Package from "@nextgis/[package]";
+import Package from '@nextgis/[package]';
+// or
+import { Component, utility } from '@nextgis/[package]';
 
 const package = new Package(options);
 ```
@@ -95,10 +126,10 @@ const package = new Package(options);
 ## Create map
 
 ```js
-import NgwMap from "@nextgis/ngw-map";
+import { NgwMap } from '@nextgis/ngw-map';
 
-import "./leaflet-style-override.css";
-import MapAdapter from "@nextgis/leaflet-map-adapter";
+import './leaflet-style-override.css';
+import MapAdapter from '@nextgis/leaflet-map-adapter';
 // OR
 // import 'ol/ol.css';
 // import MapAdapter from '@nextgis/ol-map-adapter';
@@ -136,72 +167,6 @@ The `resource` can be id or keyname.
 
 [Add different NGW resource](http://code.nextgis.com/demo-examples-ngw_layers)
 
-## Vector layer
-
-Adding a vector layer from the NGW is as follows
-
-```js
-ngwMap.addNgwLayer({
-  resource: 2011,
-  adapterOptions: {...},
-});
-```
-
-adapterOptions
-
-| name                  | default        | description                                                                                                                                                                    |
-| --------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| type                  | undefined      | `point`, `line` or `polygon`. Type of layer geometry. It is always better to prescribe this parameter in order to properly initialize the layer paint before loading the data. |
-| paint                 | {color:'blue'} | `Object`, `Function` or `Expression` to set the appearance of the layer                                                                                                        |
-| selectedPaint         | undefiend      | Like paint, but used to decorate selected elements                                                                                                                             |
-| selectable            | false          | Indicates that the selection is working on this layer                                                                                                                          |
-| multiselect           | false          | Select multiple items                                                                                                                                                          |
-| unselectOnSecondClick | false          | So it is, unselect on second click                                                                                                                                             |
-| filter                | undefined      | `PropertiesFilter` expression to filter layer items                                                                                                                            |
-
-### Painting
-
-Vector layer painting in nextgis frontend is common for any type of geometry.
-
-```js
-// strict
-paint: { color: "red", fillOpacity: 0.5, stroke: true }
-// use the properties of the layer item
-paint: { color: ['get', 'color'], radius: ['get', 'radius'] }
-// different paint for different filters
-paint: [
-  { radius: 6, stroke: true, fillOpacity: 0.5 }, // base paint
-  [[['AMENITY', 'eq', 'restaurant']], { color: 'green', fillOpacity: 1 }],
-  [[['AMENITY', 'eq', 'cafe']], { color: 'red' }]
-],
-// paint callback function
-paint: (feature) => {
-  return { color: feature.properties.color };
-} // better use `{ color: ['get', 'color']}` expression
-```
-
-#### Examples
-
-[Vector painting](http://code.nextgis.com/demo-examples-vector_paint)
-[Expression paint](http://code.nextgis.com/demo-examples-expression_paint)
-[Expression paint with match](http://code.nextgis.com/demo-examples-expression_paint_match)
-[Properties paint](http://code.nextgis.com/demo-examples-properties_paint)
-
-### Filtering
-
-```js
-```
-
-### Selection
-
-```js
-```
-
-## Map events
-
-```js
-```
-
 ## For developers
 
 ### Instructions for whole repository
@@ -222,12 +187,6 @@ yarn run prod
 yarn run demo
 ```
 
-To generate json schema for build API pages run
-
-```bash
-yarn run doc
-```
-
 To copy the pages of universal examples from the demo/examples into the corresponding examples of frontend libraries run
 
 ```bash
@@ -240,18 +199,19 @@ yarn run examples
 # Go to package directory (for example webmap)
 cd ./packages/webmap
 # Run build command
-yarn run build
+yarn run dev
+# or
+yarn run prod
 # Run watch source files changes command
 yarn run watch
 ```
 
 ### Publishing
 
-Before publishing you should execute `prod` and `doc:api` scripts
+Before publishing you should execute `prod` script
 
 ```bash
 lerna run prod
-yarn docs:api
 ```
 
 To publish new version to git and npm run
@@ -311,21 +271,6 @@ yarn run watch
 ```
 
 Run LiveServer for some example index.html
-
-Set configuration for Chrome Debugger
-
-```json
-{
-  "type": "chrome",
-  "request": "launch",
-  "name": "NgwLeaflet debug",
-  "url": "http://127.0.0.1:5500",
-  "webRoot": "${workspaceFolder}/http://127.0.0.1:5500/packages/demo/examples",
-  "sourceMapPathOverrides": {
-    "webpack://NgwLeaflet/../*": "${webRoot}/packages/*"
-  }
-}
-```
 
 ## Commercial support
 

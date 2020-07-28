@@ -9,7 +9,7 @@ import {
 /**
  * @public
  */
-export interface WebMapEvents extends BaseMapEvents {
+export interface WebMapEvents extends MainMapEvents {
   /**
    * @eventProperty
    */
@@ -67,7 +67,7 @@ export interface WebMapEvents extends BaseMapEvents {
 /**
  * @public
  */
-export interface MapAdapterEvents extends BaseMapEvents {
+export interface MapAdapterEvents extends MainMapEvents {
   /**
    * @eventProperty
    */
@@ -85,7 +85,7 @@ export interface MapAdapterEvents extends BaseMapEvents {
 /**
  * @public
  */
-export interface BaseMapEvents {
+export interface MainMapEvents {
   /**
    * Fired before the map is clicked.
    * @eventProperty

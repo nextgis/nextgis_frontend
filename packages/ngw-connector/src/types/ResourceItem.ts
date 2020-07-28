@@ -174,11 +174,11 @@ export interface VectorLayer {
 }
 
 export interface FileBucket {
-  files: File[];
+  files: NgwFile[];
   tstamp?: any;
 }
 
-interface File {
+export interface NgwFile {
   name: string;
   mime_type: string;
   size: number;

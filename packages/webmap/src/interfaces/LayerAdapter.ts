@@ -6,7 +6,8 @@ import {
   checkIfPropertyFilter,
 } from '@nextgis/properties-filter';
 import { Paint } from '@nextgis/paint';
-import { LngLatBoundsArray, Type } from './BaseTypes';
+import { Type } from '@nextgis/utils';
+import { LngLatBoundsArray } from './BaseTypes';
 import { MapClickEvent } from './MapAdapter';
 
 /**
@@ -138,6 +139,8 @@ export interface AdapterOptions {
    * Refer to {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin | CORS Settings} for valid String values.
    */
   crossOrigin?: 'anonymous';
+
+  nativeOptions?: Record<string, any>;
 }
 
 /**
@@ -273,8 +276,6 @@ export interface VectorAdapterOptions<F extends Feature = Feature, L = any>
    * @internal
    */
   source?: unknown;
-
-  nativeOptions?: Record<string, any>;
   /**
    * TODO: move to nativeOptions
    * @internal
@@ -563,12 +564,12 @@ export interface VectorLayerAdapter<
   removeFilter?(): void;
   /**
    * Add GeoJson data to layer.
-   * @param geojson GeoJson object.
+   * @param geojson - GeoJson object.
    */
   addData?(geojson: GeoJsonObject): void;
   /**
    * Update layer with new geojson.
-   * @param geojson GeoJson object.
+   * @param geojson - GeoJson object.
    */
   setData?(geojson: GeoJsonObject): void;
   /**

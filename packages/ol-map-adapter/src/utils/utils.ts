@@ -2,7 +2,7 @@ import { Feature } from 'geojson';
 import GeoJSON from 'ol/format/GeoJSON';
 import CircleStyle from 'ol/style/Circle';
 import { asArray, Color } from 'ol/color';
-import { Feature as OlFeature } from 'ol';
+import OlFeature from 'ol/Feature';
 import { Fill, Stroke, Style, Text } from 'ol/style';
 import { Options as TextOptions } from 'ol/style/Text';
 import IconAnchorUnits from 'ol/style/IconAnchorUnits';

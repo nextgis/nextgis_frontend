@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+
+  <title>Clipboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+  </style>
+  <!-- <script src="https://unpkg.com/@nextgis/utils"></script> -->
+  <script src="../../lib/utils.global.js"></script>
+</head>
+
+<body>
+  <div>
+    <input id='copy-input' value="Click button to copy this text to clipboard"/>
+    <button onclick="copy()">Copy</button>
+  </div>
+  <script>
+    function copy() {
+      var text = document.getElementById('copy-input').value;
+      Utils.Clipboard.copy(text);
+    }
+  </script>
+</body>
+
+</html>

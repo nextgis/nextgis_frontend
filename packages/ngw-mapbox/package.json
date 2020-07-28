@@ -1,46 +1,54 @@
 {
   "name": "@nextgis/ngw-mapbox",
   "_priority": 10,
-  "version": "0.32.0",
+  "version": "1.0.0-alpha.1",
   "description": "",
-  "main": "lib/ngw-mapbox.js",
-  "unpkg": "lib/ngw-mapbox.js",
+  "main": "index.js",
+  "module": "lib/ngw-mapbox.esm-bundler.js",
+  "unpkg": "lib/ngw-mapbox.global.prod.js",
+  "jsdelivr": "lib/ngw-mapbox.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/mapboxgl-map-adapter": "^0.32.0",
-    "@nextgis/ngw-map": "^0.32.0",
-    "@types/mapbox-gl": "^1.11.0",
-    "canvg": "^3.0.6",
-    "mapbox-gl": "^1.11.0"
+    "@nextgis/mapboxgl-map-adapter": "^1.0.0-alpha.1",
+    "@nextgis/ngw-map": "^1.0.0-alpha.1",
+    "@types/mapbox-gl": "^1.11.1",
+    "canvg": "^3.0.6"
   },
   "devDependencies": {
     "@nextgis/build-tools": "file:../build-tools"
   },
+  "buildOptions": {
+    "name": "NgwMapbox",
+    "injectCss": true,
+    "formats": [
+      "esm-bundler",
+      "esm-browser",
+      "global"
+    ]
+  },
   "scripts": {
     "clean": "rimraf ./lib",
-    "dev": "npm run clean && webpack --config ./webpack.config.js --progress",
-    "build": "npm run dev -- --mode=production",
-    "prod": "npm run build",
+    "dev": "node ../build-tools/lib/build.js",
+    "prod": "npm run dev -- --release",
     "lint": "eslint ./src/**/*.ts --fix --c ../../.eslintrc",
     "watch": "npm run dev -- --watch"
   },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/nextgis/nextgis_frontend.git"
-  },
   "keywords": [
     "NextGIS",
-    "MAP",
-    "NGW",
-    "API"
+    "MAP"
   ],
   "author": "NextGIS",
-  "directories": {
-    "lib": "lib"
-  },
   "files": [
+    "index.js",
     "lib"
   ],
   "license": "LGPL-3.0",
-  "gitHead": "63bdb386006455c48c1e6e2900e74bb27e4a41bd"
+  "homepage": "https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-mapbox#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nextgis/nextgis_frontend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nextgis/nextgis_frontend/issues"
+  }
 }

@@ -1,13 +1,14 @@
+import './ngw-uploader.css';
+
 import NgwConnector, {
   Credentials,
-  CancelablePromise,
   CreatedResource,
   ResourceItem,
 } from '@nextgis/ngw-connector';
+import CancelablePromise from '@nextgis/cancelable-promise';
+import Dialog from '@nextgis/dialog';
 import { EventEmitter } from 'events';
 import { evented, onLoad } from './decorators';
-import Dialog from '@nextgis/dialog';
-import './ngw-uploader.css';
 import {
   NgwUploadOptions,
   UploadInputOptions,
