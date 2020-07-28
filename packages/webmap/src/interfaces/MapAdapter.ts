@@ -1,6 +1,7 @@
 import StrictEventEmitter from 'strict-event-emitter-types';
+import { Type } from '@nextgis/utils';
 import { LayerAdapter } from './LayerAdapter';
-import { Type, ZoomLevel } from './BaseTypes';
+import { ZoomLevel } from './BaseTypes';
 import { EventEmitter } from 'events';
 import {
   MapControls,
@@ -137,15 +138,12 @@ export interface MapAdapter<M = any, L = any, C = any> {
 
   /**
    * Remove layer from Map
-   * @param layer
    */
   removeLayer(layer: L): any;
   beforeRemove?(): void;
 
   /**
    * Set the transparency of given layer.
-   * @param layer
-   * @param opacity
    */
   setLayerOpacity(layer: L, opacity: number): void;
   showLayer(layer: L): void;

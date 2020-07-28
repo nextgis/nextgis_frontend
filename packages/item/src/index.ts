@@ -6,4 +6,3 @@ export * from './properties/CheckProperty';
 export * from './properties/ItemProperties';
 
 export { Item };
-export default Item;

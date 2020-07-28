@@ -1,19 +1,20 @@
 {
   "name": "@nextgis/cesium-map-adapter",
-  "version": "0.32.0",
+  "version": "1.0.0-alpha.1",
   "description": "",
   "main": "lib/cesium-map-adapter.js",
+  "module": "lib/cesium-map-adapter.esm.js",
   "unpkg": "lib/cesium-map-adapter.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/control-container": "^0.32.0",
-    "@nextgis/dom": "^0.32.0",
-    "@nextgis/paint": "^0.32.0",
-    "@nextgis/webmap": "^0.32.0",
+    "@nextgis/control-container": "^1.0.0-alpha.1",
+    "@nextgis/dom": "^1.0.0-alpha.1",
+    "@nextgis/paint": "^1.0.0-alpha.1",
+    "@nextgis/webmap": "^1.0.0-alpha.1",
     "@types/events": "^3.0.0",
-    "@types/node": "^14.0.14",
-    "cesium": "^1.70.1",
-    "events": "^3.1.0"
+    "@types/node": "^14.0.26",
+    "cesium": "^1.71.0",
+    "events": "^3.2.0"
   },
   "devDependencies": {
     "@nextgis/build-tools": "file:../build-tools"
@@ -22,7 +23,7 @@
     "clean": "rimraf ./lib",
     "dev": "npm run clean && webpack --config ./webpack.config.js --progress",
     "build": "npm run dev -- --mode=production",
-    "prod": "npm run build",
+    "prod": "exit 0",
     "lint": "eslint ./src/**/*.ts --fix --c ../../.eslintrc",
     "watch": "npm run dev -- --watch",
     "test": "echo \"Error: run tests from root\" && exit 1"
@@ -36,9 +37,6 @@
     "MAP"
   ],
   "author": "NextGIS",
-  "directories": {
-    "lib": "lib"
-  },
   "files": [
     "lib"
   ],

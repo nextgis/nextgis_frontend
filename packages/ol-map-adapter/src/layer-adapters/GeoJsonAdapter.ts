@@ -1,7 +1,7 @@
 import Map from 'ol/Map';
+import OlFeature from 'ol/Feature';
 import Base from 'ol/layer/Base';
 import GeoJSON from 'ol/format/GeoJSON';
-import { Feature as OlFeature } from 'ol';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 

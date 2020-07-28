@@ -1,27 +1,36 @@
 {
   "name": "@nextgis/control-container",
-  "version": "0.32.0",
+  "version": "1.0.0-alpha.1",
   "description": "Placing control elements in the corners of the map container",
-  "main": "lib/control-container.js",
-  "unpkg": "lib/control-container.js",
+  "main": "index.js",
+  "module": "lib/control-container.esm-bundler.js",
+  "unpkg": "lib/control-container.global.prod.js",
+  "jsdelivr": "lib/control-container.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/dom": "^0.32.0",
-    "@nextgis/utils": "^0.32.0",
-    "@nextgis/webmap": "^0.32.0",
-    "events": "^3.1.0"
+    "@nextgis/dom": "^1.0.0-alpha.1",
+    "@nextgis/utils": "^1.0.0-alpha.1",
+    "@nextgis/webmap": "^1.0.0-alpha.1",
+    "events": "^3.2.0"
   },
   "devDependencies": {
     "@nextgis/build-tools": "file:../build-tools",
     "install": "^0.13.0",
     "mini-css-extract-plugin": "^0.9.0",
-    "npm": "^6.14.5"
+    "npm": "^6.14.7"
+  },
+  "buildOptions": {
+    "name": "ControlContainer",
+    "formats": [
+      "esm-bundler",
+      "esm-browser",
+      "global"
+    ]
   },
   "scripts": {
     "clean": "rimraf ./lib",
-    "dev": "npm run clean && webpack --config ./webpack.config.js --progress",
-    "build": "npm run dev -- --mode=production",
-    "prod": "npm run build",
+    "dev": "node ../build-tools/lib/build.js",
+    "prod": "npm run dev -- --release",
     "lint": "eslint ./src/**/*.ts --fix --c ../../.eslintrc",
     "watch": "npm run dev -- --watch"
   },
@@ -30,16 +39,12 @@
     "MAP"
   ],
   "author": "NextGIS",
-  "directories": {
-    "lib": "lib"
-  },
   "files": [
+    "index.js",
     "lib"
   ],
   "license": "LGPL-3.0",
-  "publishConfig": {
-    "registry": "http://registry.npmjs.org/"
-  },
+  "homepage": "https://github.com/nextgis/nextgis_frontend/tree/master/packages/control-container#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nextgis/nextgis_frontend.git"

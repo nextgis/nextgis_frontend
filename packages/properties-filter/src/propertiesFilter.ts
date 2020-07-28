@@ -2,10 +2,10 @@ import { Feature, GeoJsonProperties } from 'geojson';
 import { reEscape } from '@nextgis/utils';
 
 /**
- * gt - greater (>)
- * lt - lower (<)
- * ge - greater or equal (>=)
- * le - lower or equal (<=)
+ * gt - greater (\>)
+ * lt - lower (\<)
+ * ge - greater or equal (\>=)
+ * le - lower or equal (\<=)
  * eq - equal (=)
  * ne - not equal (!=)
  * like - LIKE SQL statement (for strings compare)
@@ -118,12 +118,14 @@ export function propertiesFilter(
       const operationExec = operationsAliases[operation];
       if (operationExec) {
         if (operation === 'like' || operation === 'ilike') {
-          let prop = '';
-          const value_ = field.replace(/^%?(\w+)%?$/, (match, cleanField) => {
-            prop = properties[cleanField];
-            return field.replace(cleanField, value);
-          });
-          return operationExec(prop, value_);
+          if (typeof field === 'string') {
+            let prop = '';
+            const value_ = field.replace(/^%?(\w+)%?$/, (match, cleanField) => {
+              prop = properties[cleanField];
+              return field.replace(cleanField, value);
+            });
+            return operationExec(prop, value_);
+          }
         }
         return operationExec(properties[field], value);
       }

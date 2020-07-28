@@ -1,5 +1,5 @@
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
-import NgwMap, { LayerAdapter, WebMap } from '@nextgis/ngw-map';
+import { NgwMap, LayerAdapter, WebMap } from '@nextgis/ngw-map';
 import {
   ResourceAdapter,
   WebMapLayerAdapter,
@@ -143,8 +143,8 @@ export class NgwLayersList extends Vue {
 
   private destroy() {
     if (this.webMap && this.__updateItems) {
-      this.webMap.emitter.off('layer:add', this.__updateItems);
-      this.webMap.emitter.off('layer:remove', this.__updateItems);
+      this.webMap.emitter.removeListener('layer:add', this.__updateItems);
+      this.webMap.emitter.removeListener('layer:remove', this.__updateItems);
     }
   }
 

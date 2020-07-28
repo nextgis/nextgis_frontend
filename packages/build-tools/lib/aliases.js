@@ -3,7 +3,7 @@ const { lstatSync, readdirSync, readFileSync, existsSync } = require('fs');
 
 const isDirectory = (source) => lstatSync(source).isDirectory();
 
-function generate(source) {
+function generate(source, module = false) {
   source = source || resolve(__dirname, '..', '..');
   const items = {};
   readdirSync(source).forEach((name) => {
@@ -14,7 +14,16 @@ function generate(source) {
       if (existsSync(packagePath)) {
         const package = JSON.parse(readFileSync(packagePath, 'utf8'));
         if (!package.private) {
-          items[package.name + '$'] = join(libPath, '/src/index.ts');
+          if (module) {
+            if (package.module) {
+              const module = join(libPath, package.module);
+              if (existsSync(module)) {
+                items[package.name + '$'] = module;
+              }
+            }
+          } else {
+            items[package.name + '$'] = join(libPath, '/src/index.ts');
+          }
         }
       }
     }
@@ -22,6 +31,6 @@ function generate(source) {
   return items;
 }
 
-module.exports = function (source) {
-  return generate(source);
+module.exports = (source, module) => {
+  return generate(source, module);
 };

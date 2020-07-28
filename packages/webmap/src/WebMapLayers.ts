@@ -1,5 +1,6 @@
 import { Feature, GeoJsonObject } from 'geojson';
 import { preparePaint } from '@nextgis/paint';
+import { Type } from '@nextgis/utils';
 
 import {
   LayerAdapter,
@@ -18,7 +19,7 @@ import {
   OnLayerSelectOptions,
   MainLayerAdapter,
 } from './interfaces/LayerAdapter';
-import { LayerDef, Type } from './interfaces/BaseTypes';
+import { LayerDef } from './interfaces/BaseTypes';
 
 import { updateGeoJsonAdapterOptions } from './utils/updateGeoJsonAdapterOptions';
 import { propertiesFilter } from './utils/propertiesFilter';
@@ -51,7 +52,6 @@ export class WebMapLayers<
   /**
    * Try to fit map view by given layer bounds.
    * But not all layers have borders
-   * @param layerDef
    */
   async fitLayer(layerDef: LayerDef, options?: FitOptions): Promise<void> {
     const layer = this.getLayer(layerDef);
@@ -65,7 +65,6 @@ export class WebMapLayers<
 
   /**
    * Check if given layer is baselayer
-   * @param layerName Check
    */
   isBaseLayer(layerDef: LayerDef): boolean | undefined {
     const layer = this.getLayer(layerDef);
@@ -150,8 +149,6 @@ export class WebMapLayers<
 
   /**
    * Shortcut method to create base layer
-   * @param adapter
-   * @param options
    */
   async addBaseLayer<
     K extends keyof LayerAdapters,
@@ -171,9 +168,9 @@ export class WebMapLayers<
   /**
    * Registration of map layer.
    *
-   * @param adapter The name of layer adapter from [MapAdapter.layerAdapters](webmap#MapAdapter.layerAdapters).
+   * @param adapter - The name of layer adapter from [MapAdapter.layerAdapters](webmap#MapAdapter.layerAdapters).
    *                May be custom object or class implemented by [MainLayerAdapter](webmap#MainLayerAdapter).
-   * @param options Specific options for given adapter
+   * @param options - Specific options for given adapter
    *
    * @example
    * ```javascript
@@ -263,6 +260,7 @@ export class WebMapLayers<
       }
       this.emitter.emit('layer:preadd', _adapter);
       await this.onMapLoad();
+      _adapter.map = this.mapAdapter.map;
       const layer = await _adapter.addLayer(_adapter.options);
       // checking that the original layer was inserted into the adapter anyway
       _adapter.layer = layer;
@@ -367,7 +365,6 @@ export class WebMapLayers<
 
   /**
    * Remove specific layer from map and memory by its definition.
-   * @param layerDef
    */
   removeLayer(layerDef: LayerDef): void {
     const layer = this.getLayer(layerDef);
@@ -575,8 +572,7 @@ export class WebMapLayers<
    *   webMap.selectLayer(layer, ({feature}) => feature.id === '42');
    * });
    * ```
-   * @param layerDef
-   * @param findFeatureFun
+
    */
   selectLayer(layerDef: LayerDef, findFeatureFun?: DataLayerFilter): void {
     const layer = this.getLayer(layerDef);
@@ -604,8 +600,6 @@ export class WebMapLayers<
    * });
    * ```
    *
-   * @param layerDef
-   * @param findFeatureFun
    */
   unSelectLayer(layerDef: LayerDef, findFeatureFun?: DataLayerFilter): void {
     const layer = this.getLayer(layerDef);
@@ -634,8 +628,6 @@ export class WebMapLayers<
    * });
    * ```
    *
-   * @param layerDef
-   * @param filter
    */
   filterLayer(
     layerDef: LayerDef,

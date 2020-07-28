@@ -5,4 +5,3 @@ import {
 
 export { createResourceStore, ResourceStore };
 export * from './interfaces';
-export default ResourceStore;

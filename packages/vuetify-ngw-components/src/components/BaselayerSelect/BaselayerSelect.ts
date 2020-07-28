@@ -1,7 +1,7 @@
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 import { CreateElement, VNode, VNodeData } from 'vue';
 
-import WebMap from '@nextgis/webmap';
+import { WebMap } from '@nextgis/webmap';
 import { LayerAdapter, MainLayerAdapter } from '@nextgis/ngw-map';
 import { ResourceAdapter } from '@nextgis/ngw-kit';
 // @ts-ignore
@@ -118,8 +118,8 @@ export class BaselayerSelect extends Vue {
 
   protected destroy(): void {
     if (this.__updateItems && this.webMap) {
-      this.webMap.emitter.off('layer:add', this.__updateItems);
-      this.webMap.emitter.off('layer:remove', this.__updateItems);
+      this.webMap.emitter.removeListener('layer:add', this.__updateItems);
+      this.webMap.emitter.removeListener('layer:remove', this.__updateItems);
     }
   }
 

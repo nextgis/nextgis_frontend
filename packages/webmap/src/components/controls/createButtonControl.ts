@@ -3,7 +3,6 @@ import { ButtonControlOptions } from '../../interfaces/MapControl';
 
 /**
  * @param webMap - WebMap instance
- * @param options
  * @internal
  */
 export function createButtonControl(

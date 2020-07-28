@@ -7,6 +7,7 @@ import {
 import NgwConnector, {
   FeatureItem,
   RequestItemAdditionalParams,
+  FeatureLayerField,
 } from '@nextgis/ngw-connector';
 import CancelablePromise from '@nextgis/cancelable-promise';
 import {
@@ -15,7 +16,7 @@ import {
 } from '@nextgis/properties-filter';
 import { FeatureRequestParams, GetNgwLayerItemsOptions } from '../interfaces';
 
-const FEATURE_REQUEST_PARAMS: FeatureRequestParams = {
+export const FEATURE_REQUEST_PARAMS: FeatureRequestParams = {
   srs: 4326,
   geom_format: 'geojson',
 };
@@ -275,4 +276,52 @@ export function getNgwLayerFeatures<
     };
     return featureCollection;
   });
+}
+
+export function prepareFieldsToNgw<T extends any>(
+  item: T,
+  resourceFields: Pick<FeatureLayerField, 'keyname' | 'datatype'>[]
+): Record<keyof T, any> {
+  const fields = {} as Record<keyof T, any>;
+  resourceFields.forEach((x) => {
+    if (x.keyname in item) {
+      const keyname = x.keyname as keyof T;
+      const property = item[keyname];
+      let value: any;
+      if (property !== undefined) {
+        if (x.datatype === 'STRING') {
+          value = String(property);
+        } else if (x.datatype === 'BIGINT' || x.datatype === 'INTEGER') {
+          value =
+            typeof property === 'string' ? parseInt(property, 10) : property;
+        } else if (x.datatype === 'REAL') {
+          value =
+            typeof property === 'string' ? parseFloat(property) : property;
+        } else if (x.datatype === 'DATE') {
+          let dt: Date | undefined;
+          if (typeof property === 'object') {
+            value = property;
+          } else {
+            if (property instanceof Date) {
+              dt = property;
+            } else {
+              const parse = Date.parse(String(property));
+              if (parse) {
+                dt = new Date(parse);
+              }
+            }
+            if (dt) {
+              value = {
+                year: dt.getFullYear(),
+                month: dt.getMonth(),
+                day: dt.getDay(),
+              };
+            }
+          }
+        }
+      }
+      fields[keyname] = value ?? null;
+    }
+  });
+  return fields;
 }

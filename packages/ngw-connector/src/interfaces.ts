@@ -97,7 +97,7 @@ export interface PostRequestItemsResponseMap extends RequestItemKeys {
 }
 
 export interface PatchRequestItemsResponseMap extends RequestItemKeys {
-  'feature_layer.feature.collection': Array<{ id: number }>;
+  'feature_layer.feature.collection': { id: number }[];
 }
 
 export interface PutRequestItemsResponseMap extends RequestItemKeys {
@@ -169,3 +169,7 @@ export interface UserInfo {
   keyname: 'guest' | string;
   clientId?: string;
 }
+
+export type NgwExceptions =
+  | 'nextgisweb.resource.exception.ResourceNotFound'
+  | 'nextgisweb.core.exception.InsufficientPermissions';

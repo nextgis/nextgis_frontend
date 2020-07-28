@@ -1,21 +1,28 @@
 {
   "name": "@nextgis/cancelable-promise",
-  "version": "0.32.0",
+  "version": "1.0.0-alpha.1",
   "description": "A promise you can stop",
-  "main": "lib/cancelable-promise.js",
-  "unpkg": "lib/cancelable-promise.js",
+  "main": "index.js",
+  "module": "lib/cancelable-promise.esm-bundler.js",
+  "unpkg": "lib/cancelable-promise.global.prod.js",
+  "jsdelivr": "lib/cancelable-promise.global.prod.js",
   "types": "lib/index.d.ts",
-  "dependencies": {
-    "events": "^3.1.0"
-  },
   "devDependencies": {
     "@nextgis/build-tools": "file:../build-tools"
   },
+  "buildOptions": {
+    "name": "CancelablePromise",
+    "formats": [
+      "esm-bundler",
+      "esm-browser",
+      "cjs",
+      "global"
+    ]
+  },
   "scripts": {
     "clean": "rimraf ./lib",
-    "dev": "npm run clean && webpack --config ./webpack.config.js --progress",
-    "build": "npm run dev -- --mode=production",
-    "prod": "npm run build",
+    "dev": "node ../build-tools/lib/build.js",
+    "prod": "npm run dev -- --release",
     "lint": "eslint ./src/**/*.ts --fix --c ../../.eslintrc",
     "watch": "npm run dev -- --watch"
   },
@@ -24,16 +31,12 @@
     "MAP"
   ],
   "author": "NextGIS",
-  "directories": {
-    "lib": "lib"
-  },
   "files": [
+    "index.js",
     "lib"
   ],
   "license": "LGPL-3.0",
-  "publishConfig": {
-    "registry": "http://registry.npmjs.org/"
-  },
+  "homepage": "https://github.com/nextgis/nextgis_frontend/tree/master/packages/cancelable-promise#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nextgis/nextgis_frontend.git"

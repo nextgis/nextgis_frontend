@@ -1,8 +1,21 @@
-import { Geometry } from 'geojson';
+import {
+  Point,
+  MultiPoint,
+  LineString,
+  MultiLineString,
+  Polygon,
+  MultiPolygon,
+  GeoJsonTypes,
+  Feature,
+} from 'geojson';
 import { FilterOptions } from '@nextgis/webmap';
 import { PropertiesFilter } from '@nextgis/properties-filter';
 import { Type, DeepPartial } from '@nextgis/utils';
-import NgwKit, { GetNgwLayerItemsOptions } from '@nextgis/ngw-kit';
+import {
+  GetNgwLayerItemsOptions,
+  getNgwLayerItems,
+  getNgwLayerItem,
+} from '@nextgis/ngw-kit';
 import { GeometryType, VectorLayerResourceItem } from '@nextgis/ngw-connector';
 // import { ResourceItem } from '@nextgis/ngw-connector';
 // import { objectAssign } from '@nextgis/utils';
@@ -13,17 +26,22 @@ import { GeometryType, VectorLayerResourceItem } from '@nextgis/ngw-connector';
 // import { FindConditions } from '../find-options/FindConditions';
 // import { FindManyOptions } from '../find-options/FindManyOptions';
 // import { FindOneOptions } from '../find-options/FindOneOptions';
-import { BaseResource } from './BaseResource';
 import { getMetadataArgsStorage, Column } from '..';
-import { SyncOptions } from './SyncOptions';
 import { VectorResourceSyncItem } from '../sync-items/VectorResourceSyncItem';
-import { vectorResourceToNgw } from '../utils/vectorResourceToNgw';
-import { ObjectType } from '../common/ObjectType';
 import { FindOneOptions } from '../find-options/FindOneOptions';
 import { FindConditions } from '../find-options/FindConditions';
 import { CannotExecuteNotConnectedError } from '../error/CannotExecuteNotConnectedError';
 import { FindManyOptions } from '../find-options/FindManyOptions';
-import { itemsToEntities, itemToEntity } from '../utils/itemsToEntities';
+import {
+  itemsToEntities,
+  itemToEntity,
+} from '../vector-layer-utils/itemsToEntities';
+import { saveVectorLayer } from '../vector-layer-utils/saveVectorLayer';
+import { ObjectType } from '../common/ObjectType';
+import { BaseResource } from './BaseResource';
+import { SyncOptions } from './SyncOptions';
+import { UpdateOptions } from './UpdateOptions';
+import { toTypescript } from '../vector-layer-utils/toTypescript';
 // import { SyncOptions } from './SyncOptions';
 // import { Connection } from '../connection/Connection';
 // import { ConnectionOptions } from '../connection/ConnectionOptions';
@@ -35,10 +53,55 @@ import { itemsToEntities, itemToEntity } from '../utils/itemsToEntities';
 // type DeleteResult = any;
 // type UpdateResult = any;
 
+type Geometry =
+  | Point
+  | MultiPoint
+  | LineString
+  | MultiLineString
+  | Polygon
+  | MultiPolygon;
+
 export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
   static geometryType: GeometryType;
   id?: number;
   private _geom!: G;
+
+  get coordinates(): G['coordinates'] {
+    return this.geom.coordinates;
+  }
+
+  set coordinates(coordinates: G['coordinates']) {
+    const constructor = this.getConstructor();
+    const aliases: Record<GeometryType, GeoJsonTypes> = {
+      POINT: 'Point',
+      MULTIPOINT: 'MultiPoint',
+      LINESTRING: 'LineString',
+      MULTILINESTRING: 'MultiLineString',
+      POLYGON: 'Polygon',
+      MULTIPOLYGON: 'MultiPolygon',
+      POINTZ: 'Point',
+      MULTIPOINTZ: 'MultiPoint',
+      LINESTRINGZ: 'LineString',
+      MULTILINESTRINGZ: 'MultiLineString',
+      POLYGONZ: 'Polygon',
+      MULTIPOLYGONZ: 'MultiPolygon',
+    };
+    const type: GeoJsonTypes = aliases[constructor.geometryType];
+    const geom = { type, coordinates } as G;
+    this._geom = geom;
+  }
+
+  get geom(): G {
+    return this._geom;
+  }
+
+  set geom(geom: G) {
+    this._geom = geom;
+  }
+
+  static toTypescript(): string {
+    return toTypescript(this);
+  }
 
   static receive(item: VectorLayerResourceItem): typeof VectorLayer {
     const ReceivedResource = BaseResource.receive(
@@ -84,14 +147,6 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
         })),
       },
     };
-  }
-
-  get geom(): G {
-    return this._geom;
-  }
-
-  set geom(geom: G) {
-    this._geom = geom;
   }
 
   // /**
@@ -144,16 +199,25 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
   // ): Promise<T | undefined> {
   //   return this.getRepository().preload(entityLike);
   // }
-  // /**
-  //  * Saves one or many given entities.
-  //  */
-  // static save<T extends VectorLayer>(
-  //   this: ObjectType<T>,
-  //   entityOrEntities: T | T[],
-  //   options?: UpdateOptions
-  // ): Promise<T | T[]> {
-  //   return this.getRepository().save(entityOrEntities as any, options);
-  // }
+  /**
+   * Saves one or many given entities.
+   */
+  static async save<T extends VectorLayer>(
+    this: ObjectType<T>,
+    entityOrEntities: T | T[],
+    options?: UpdateOptions
+  ): Promise<T[]> {
+    const Resource = this as typeof VectorLayer;
+    const connection = Resource.connection;
+    if (!connection || !Resource.item) {
+      throw new CannotExecuteNotConnectedError();
+    }
+    const items: T[] = Array.isArray(entityOrEntities)
+      ? entityOrEntities
+      : [entityOrEntities];
+    await saveVectorLayer({ items, resource: Resource.item }, connection);
+    return items;
+  }
   // /**
   //  * Removes one or many given entities.
   //  */
@@ -204,15 +268,32 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
   // ): Promise<DeleteResult> {
   //   return this.getRepository().delete(criteria, options);
   // }
-  // /**
-  //  * Counts entities that match given find options or conditions.
-  //  */
-  // static count<T extends VectorLayer>(
-  //   this: ObjectType<T>,
-  //   optionsOrConditions?: FindManyOptions<T> | FindConditions<T>
-  // ): Promise<number> {
-  //   return this.getRepository().count(optionsOrConditions as any);
-  // }
+  /**
+   * Counts entities that match given find options or conditions.
+   */
+  static async count<T extends VectorLayer>(
+    this: ObjectType<T>,
+    optionsOrConditions?: FindManyOptions<T> | PropertiesFilter<T>
+  ): Promise<number> {
+    const Resource = this as typeof VectorLayer;
+    const connection = Resource.connection;
+    if (!connection || !Resource.item) {
+      throw new CannotExecuteNotConnectedError();
+    }
+    if (!optionsOrConditions) {
+      const count = await connection.driver.get(
+        'feature_layer.feature.count',
+        null,
+        {
+          id: Resource.item.resource.id,
+        }
+      );
+      return count.total_count;
+    } else {
+      const find = await Resource.find<T>(optionsOrConditions);
+      return find.length;
+    }
+  }
   /**
    * Finds entities that match given find options or conditions.
    */
@@ -264,7 +345,7 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
       }
     }
 
-    const items = await NgwKit.utils.getNgwLayerItems(options);
+    const items = await getNgwLayerItems(options);
     if (items) {
       const entities = (await itemsToEntities(Resource, items)) as T[];
       return entities;
@@ -301,7 +382,7 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
       resourceId: Resource.item.resource.id,
     };
     if (typeof optionsOrConditions === 'number') {
-      const item = await NgwKit.utils.getNgwLayerItem({
+      const item = await getNgwLayerItem({
         ...options,
         featureId: optionsOrConditions,
       });
@@ -365,13 +446,35 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
   getConstructor(): typeof VectorLayer {
     return this.constructor as any;
   }
-  // /**
-  //  * Checks if entity has an id.
-  //  * If entity composite compose ids, it will check them all.
-  //  */
-  // hasId(): boolean {
-  //   return (this.constructor as any).getRepository().hasId(this);
-  // }
+
+  toJSON(): string {
+    return JSON.stringify(this.toGeoJson());
+  }
+
+  toGeoJson(): Feature<G, this> {
+    const constructor = this.getConstructor();
+    const columns = getMetadataArgsStorage().filterColumns(constructor);
+    const properties = {} as Record<keyof this, any>;
+    columns.forEach((x) => {
+      const key = x.propertyName as keyof this;
+      const descriptor = Object.getOwnPropertyDescriptor(this, key);
+      if (descriptor) {
+        properties[key] = descriptor.value;
+      }
+    });
+    const feature: Feature<G, this> = {
+      type: 'Feature',
+      properties,
+      geometry: this.geom,
+    };
+    return feature;
+  }
+  /**
+   * Checks if entity has an id.
+   */
+  hasId(): boolean {
+    return this.id !== undefined;
+  }
   /**
    * Saves current entity in the NGW target layer.
    * If entity does not exist in the NGW layer then inserts, otherwise updates.
@@ -380,24 +483,13 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
     const constructor = this.getConstructor();
     const connection = constructor.connection;
     const resource = constructor.item;
-    if (connection && resource) {
-      const feature = vectorResourceToNgw({ resource, item: this });
-      if (this.id) {
-        feature.id = this.id;
-      }
-      const resp = await connection.driver.patch(
-        'feature_layer.feature.collection',
-        { data: [feature] },
-        { id: resource.resource.id }
-      );
-      if (resp && resp[0] && resp[0].id) {
-        this.id = resp[0].id;
-      }
-    } else {
-      throw 'Can\'t save item. Resource is not connected yet';
+    if (!connection || !resource) {
+      throw new CannotExecuteNotConnectedError();
     }
+    await saveVectorLayer({ resource, items: [this] }, connection);
     return this;
   }
+
   // /**
   //  * Removes current entity from the database.
   //  */
