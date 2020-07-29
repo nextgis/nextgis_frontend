@@ -26,12 +26,11 @@ export class VueNgwMap<M = any> extends Vue {
       ...this.mapOptions,
       target: this.$el as HTMLElement,
     });
-    this.ngwMap.onLoad();
+    await this.ngwMap.onLoad();
 
-    this.$nextTick(() => {
-      this.ready = true;
-      this.$emit('load', this.ngwMap);
-    });
+    await this.$nextTick();
+    this.ready = true;
+    this.$emit('load', this.ngwMap);
   }
 
   beforeDestroy(): void {
