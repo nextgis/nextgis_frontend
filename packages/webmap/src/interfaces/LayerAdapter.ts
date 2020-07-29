@@ -76,10 +76,6 @@ export interface AdapterOptions {
    */
   baselayer?: boolean;
   /**
-   * @deprecated use `baselayer` instead
-   */
-  baseLayer?: boolean;
-  /**
    * Indicates the map layers display sequence.
    * A layer with a larger order value overlaps smaller ones.
    * Zero value used to indicate baselayer.
