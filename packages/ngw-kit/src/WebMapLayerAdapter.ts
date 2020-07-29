@@ -184,8 +184,14 @@ export class WebMapLayerAdapter<M = any> implements ResourceAdapter<M> {
         const webmap = data[
           this.webmapClassName as keyof ResourceItem
         ] as WebmapResource;
-        if (data.basemap_webmap) {
+        if (data.basemap_webmap && data.basemap_webmap.basemaps.length) {
           this._setBasemaps(data.basemap_webmap);
+        } else if (this.options.defaultBasemap) {
+          const webMap = this.options.webMap;
+          webMap.addBaseLayer('OSM', {
+            id: 'webmap-default-baselayer',
+            name: 'OpenStreetMap',
+          });
         }
         if (webmap) {
           this._extent = [

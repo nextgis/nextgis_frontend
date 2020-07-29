@@ -29,6 +29,7 @@ import { createControl } from './controls/createControl';
 import { createButtonControl } from './controls/createButtonControl';
 import { convertMapClickEvent } from './utils/utils';
 import { WmsAdapter } from './layer-adapters/WmsAdapter/WmsAdapter';
+import { OsmAdapter } from './layer-adapters/OsmAdapter';
 
 export type Type<T> = new (...args: any[]) => T;
 
@@ -41,7 +42,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     GEOJSON: GeoJsonAdapter,
     WMS: WmsAdapter,
     // // MVT: MvtAdapter,
-    // OSM: OsmAdapter,
+    OSM: OsmAdapter,
   };
 
   static controlAdapters = {
