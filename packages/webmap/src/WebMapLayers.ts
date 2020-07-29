@@ -155,7 +155,7 @@ export class WebMapLayers<
     O extends AdapterOptions = AdapterOptions
   >(
     adapter: K | Type<LayerAdapters[K]>,
-    options: O | LayerAdaptersOptions[K]
+    options?: O | LayerAdaptersOptions[K]
   ): Promise<LayerAdapter> {
     const layer = await this.addLayer(adapter, {
       ...options,
@@ -187,9 +187,6 @@ export class WebMapLayers<
     options: O | LayerAdaptersOptions[K] = {},
     order?: number
   ): Promise<LayerAdapter> {
-    // TODO: remove backward compatibility on v 1.0
-    options.baselayer = options.baselayer ?? options.baseLayer;
-
     const id = this._layersIdCounter++;
     const _order =
       order !== undefined

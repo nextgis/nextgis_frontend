@@ -30,7 +30,8 @@ export type NgwLayerAdapterType =
   | 'MVT'
   | 'WMS'
   | 'TERRAIN'
-  | 'MODEL_3D';
+  | 'MODEL_3D'
+  | 'NGW:WEBMAP';
 
 /**
  * @public
@@ -195,6 +196,11 @@ export interface WebMapAdapterOptions extends A {
   selectable?: boolean;
   /** Radius for searching objects in pixels */
   pixelRadius?: number;
+  /**
+   * Add baselayer from OsmLayerAdapter if no [webmap_resource].basemap_webmap set has been set.
+   * @defaultValue false
+   */
+  defaultBasemap?: boolean;
 }
 
 /**
@@ -346,4 +352,10 @@ export interface GetNgwLayerItemsOptions {
   resourceId: number;
   connector: NgwConnector;
   filters?: PropertiesFilter;
+}
+
+declare module '@nextgis/webmap' {
+  interface LayerAdaptersOptions {
+    'NGW:WEBMAP': Partial<WebMapAdapterOptions>;
+  }
 }
