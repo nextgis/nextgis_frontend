@@ -21,23 +21,23 @@ import {
   sendIdentifyRequest,
   getWebMapExtent,
 } from './utils/utils';
-import { WebMapLayerItem } from './WebMapLayerItem';
+import { NgwWebmapItem } from './NgwWebmapItem';
 
 import {
   TreeGroup,
   TreeLayer,
   NgwLayerAdapterType,
-  WebMapAdapterOptions,
-  WebMapLayerAdapterEvents,
+  NgwWebmapAdapterOptions,
+  NgwWebmapLayerAdapterEvents,
   ResourceAdapter,
 } from './interfaces';
 import { createOnFirstShowAdapter } from './createBasemapWebmapItemAdapter';
 import { getLayerAdapterOptions } from './utils/getLayerAdapterOptions';
 
-export class WebMapLayerAdapter<M = any> implements ResourceAdapter<M> {
-  layer?: WebMapLayerItem;
+export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
+  layer?: NgwWebmapItem;
 
-  WebMapLayerItem: Type<WebMapLayerItem> = WebMapLayerItem;
+  NgwWebmapItem: Type<NgwWebmapItem> = NgwWebmapItem;
   /**
    * Radius for searching objects in pixels
    */
@@ -46,7 +46,7 @@ export class WebMapLayerAdapter<M = any> implements ResourceAdapter<M> {
   webmapClassName = 'webmap';
   readonly emitter: StrictEventEmitter<
     EventEmitter,
-    WebMapLayerAdapterEvents
+    NgwWebmapLayerAdapterEvents
   > = new EventEmitter();
   protected _extent?: LngLatBoundsArray;
   private response?: ResourceItem;
@@ -54,7 +54,7 @@ export class WebMapLayerAdapter<M = any> implements ResourceAdapter<M> {
 
   private $$onMapClick?: (ev: MapClickEvent) => void;
 
-  constructor(public map: M, public options: WebMapAdapterOptions) {
+  constructor(public map: M, public options: NgwWebmapAdapterOptions) {
     const r = options.resourceId;
     if (Array.isArray(r)) {
       this.resourceId = r[0];
@@ -68,7 +68,7 @@ export class WebMapLayerAdapter<M = any> implements ResourceAdapter<M> {
     }
   }
 
-  async addLayer(options: WebMapAdapterOptions): Promise<any> {
+  async addLayer(options: NgwWebmapAdapterOptions): Promise<any> {
     this.options = { ...this.options, ...options };
 
     this.layer = await this._getWebMapLayerItem();
@@ -120,7 +120,7 @@ export class WebMapLayerAdapter<M = any> implements ResourceAdapter<M> {
     }
   }
 
-  getDependLayers(): Array<WebMapLayerItem> {
+  getDependLayers(): Array<NgwWebmapItem> {
     return (this.layer && this.layer.tree.getDescendants()) || [];
   }
 
@@ -149,11 +149,11 @@ export class WebMapLayerAdapter<M = any> implements ResourceAdapter<M> {
     return visibleLayers;
   }
 
-  private async _getWebMapLayerItem(): Promise<WebMapLayerItem | undefined> {
+  private async _getWebMapLayerItem(): Promise<NgwWebmapItem | undefined> {
     if (this.resourceId) {
       const webmap = await this.getWebMapConfig(this.resourceId);
       if (webmap && webmap.root_item) {
-        return new Promise<WebMapLayerItem>((resolve) => {
+        return new Promise<NgwWebmapItem>((resolve) => {
           const options: ItemOptions = {};
           if (this.options.connector && this.options.connector.options.auth) {
             const headers = this.options.connector.getAuthorizationHeaders();
@@ -164,7 +164,7 @@ export class WebMapLayerAdapter<M = any> implements ResourceAdapter<M> {
           options.order = this.options.order;
           options.crossOrigin = this.options.crossOrigin;
           options.drawOrderEnabled = webmap.draw_order_enabled;
-          const layer = new this.WebMapLayerItem(
+          const layer = new this.NgwWebmapItem(
             this.options.webMap,
             webmap.root_item,
             options,
@@ -276,7 +276,7 @@ export class WebMapLayerAdapter<M = any> implements ResourceAdapter<M> {
     if (webMapItem && webMapItem.item.item_type === 'root') {
       const layers = webMapItem.tree.getDescendants();
       const promises: Array<CancelablePromise<any>> = [];
-      layers.forEach((x: WebMapLayerItem) => {
+      layers.forEach((x: NgwWebmapItem) => {
         const item = x.item;
         if (item.item_type === 'layer') {
           const id = item.layer_style_id;
