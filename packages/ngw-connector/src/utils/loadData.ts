@@ -67,7 +67,7 @@ if (__BROWSER__) {
       }
     };
     xhr.onload = () => {
-      if ([403, 404, 500].indexOf(xhr.status) !== -1) {
+      if ([401, 403, 404, 500].indexOf(xhr.status) !== -1) {
         error(new NgwError(getResponseText()));
       }
       processingResponse();
