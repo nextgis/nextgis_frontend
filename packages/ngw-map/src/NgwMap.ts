@@ -27,7 +27,7 @@ import {
   addNgwLayer,
   NgwLayerOptions,
   ResourceAdapter,
-  WebMapLayerItem,
+  NgwWebmapItem,
   NgwLayerOptionsAdditional,
   NgwIdentify,
   KeynamedNgwLayerOptions,
@@ -296,7 +296,7 @@ export class NgwMap<
         }
       }
       if (mem.layer.getDependLayers) {
-        const dependLayers = mem.layer.getDependLayers() as WebMapLayerItem[];
+        const dependLayers = mem.layer.getDependLayers() as NgwWebmapItem[];
         const dependFit = dependLayers.find((x) => {
           return x.item && x.item.parentId === id;
         });
