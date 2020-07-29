@@ -11,7 +11,7 @@ import { objectAssign } from '@nextgis/utils';
 import { TreeGroup, TreeLayer, TreeItem } from './interfaces';
 import { setScaleRatio } from './utils/utils';
 
-export class WebMapLayerItem extends Item<ItemOptions> {
+export class NgwWebmapItem extends Item<ItemOptions> {
   static GetAdapterFromLayerType: {
     [layerType: string]: (
       item: TreeItem,
@@ -26,7 +26,7 @@ export class WebMapLayerItem extends Item<ItemOptions> {
       {
         type: 'boolean',
         name: 'visibility',
-        getProperty(item?: WebMapLayerItem): boolean {
+        getProperty(item?: NgwWebmapItem): boolean {
           if (item) {
             if (item.item.item_type === 'group') {
               return true;
@@ -41,7 +41,7 @@ export class WebMapLayerItem extends Item<ItemOptions> {
         onSet(
           value: boolean,
           options?: Record<string, any>,
-          item?: WebMapLayerItem
+          item?: NgwWebmapItem
         ): void {
           if (item && item.layer && item.item.item_type === 'layer') {
             if (value) {
@@ -67,9 +67,9 @@ export class WebMapLayerItem extends Item<ItemOptions> {
     item: TreeGroup | TreeLayer,
     options?: ItemOptions,
     connector?: NgwConnector,
-    parent?: WebMapLayerItem
+    parent?: NgwWebmapItem
   ) {
-    super({ ...WebMapLayerItem.options, ...options });
+    super({ ...NgwWebmapItem.options, ...options });
     if (connector) {
       this.connector = connector;
     }
@@ -96,7 +96,7 @@ export class WebMapLayerItem extends Item<ItemOptions> {
     if (item.item_type === 'group' || item.item_type === 'root') {
       if (item.children && item.children.length) {
         this.getChildren(item).forEach((x) => {
-          const children = new WebMapLayerItem(
+          const children = new NgwWebmapItem(
             this.webMap,
             x,
             this.options,
@@ -139,9 +139,9 @@ export class WebMapLayerItem extends Item<ItemOptions> {
           minScale: item.layer_min_scale_denom,
           maxScale: item.layer_max_scale_denom,
         });
-      } else if (WebMapLayerItem.GetAdapterFromLayerType[item.item_type]) {
+      } else if (NgwWebmapItem.GetAdapterFromLayerType[item.item_type]) {
         const getAdapter =
-          WebMapLayerItem.GetAdapterFromLayerType[item.item_type];
+          NgwWebmapItem.GetAdapterFromLayerType[item.item_type];
         adapter = await getAdapter(item, options, this.webMap, this.connector);
       }
       if (adapter) {

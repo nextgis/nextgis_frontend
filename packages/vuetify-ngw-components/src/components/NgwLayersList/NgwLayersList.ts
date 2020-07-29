@@ -2,8 +2,8 @@ import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 import { NgwMap, LayerAdapter, WebMap } from '@nextgis/ngw-map';
 import {
   ResourceAdapter,
-  WebMapLayerAdapter,
-  WebMapLayerItem,
+  NgwWebmapLayerAdapter,
+  NgwWebmapItem,
 } from '@nextgis/ngw-kit';
 import { CreateElement, VNode, VNodeData } from 'vue';
 // @ts-ignore
@@ -23,7 +23,7 @@ export class NgwLayersList extends Vue {
   @Prop({ type: Array }) include!: Array<ResourceAdapter | string>;
   @Prop({ type: Boolean, default: false }) hideWebmapRoot!: boolean;
   @Prop({ type: Boolean, default: false }) notOnlyNgwLayer!: boolean;
-  @Prop({ type: Function }) showLayer!: (layer: WebMapLayerItem) => boolean;
+  @Prop({ type: Function }) showLayer!: (layer: NgwWebmapItem) => boolean;
   @Prop({ type: Function }) showResourceAdapter!: (
     adapter: LayerAdapter | ResourceAdapter
   ) => boolean;
@@ -50,12 +50,12 @@ export class NgwLayersList extends Vue {
         // layer properties fpr webmap tree items detect
         // check visibility for all webmap tree layer
         if (x.layer && x.layer.properties) {
-          const layer = x.layer as WebMapLayerItem;
+          const layer = x.layer as NgwWebmapItem;
           if (this.hideWebmapRoot && layer.item.item_type === 'root') {
             itemIsNotHideRoot = true;
             layer.properties.set('visibility', true);
           }
-          const desc = layer.tree.getDescendants() as WebMapLayerItem[];
+          const desc = layer.tree.getDescendants() as NgwWebmapItem[];
           desc.forEach((d) => {
             const id = this._getLayerId(d);
             if (id) {
@@ -210,10 +210,10 @@ export class NgwLayersList extends Vue {
     }
     let visible = false;
 
-    const webMapLayer = layer as WebMapLayerAdapter;
+    const webMapLayer = layer as NgwWebmapLayerAdapter;
     if (webMapLayer.layer && webMapLayer.layer.tree) {
       const tree = webMapLayer.layer.tree;
-      const children = tree.getChildren() as WebMapLayerItem[];
+      const children = tree.getChildren() as NgwWebmapItem[];
       item.children = this._createWebMapTree(children).reverse();
       const webMapLayerVisible = webMapLayer.layer.properties.get('visibility');
       visible = webMapLayerVisible ?? true;
@@ -239,7 +239,7 @@ export class NgwLayersList extends Vue {
     }
   }
 
-  private _createWebMapTree(items: WebMapLayerItem[]) {
+  private _createWebMapTree(items: NgwWebmapItem[]) {
     const treeItems: VueTreeItem[] = [];
 
     items.forEach((x) => {
@@ -257,7 +257,7 @@ export class NgwLayersList extends Vue {
       if (x.layer) {
         item.layer = x.layer.id;
       }
-      const children = x.tree.getChildren<WebMapLayerItem>();
+      const children = x.tree.getChildren<NgwWebmapItem>();
       if (children && children.length) {
         item.children = this._createWebMapTree(children);
       }
@@ -272,13 +272,13 @@ export class NgwLayersList extends Vue {
   }
 
   private _getLayerId(
-    layer: LayerAdapter | ResourceAdapter | WebMapLayerItem
+    layer: LayerAdapter | ResourceAdapter | NgwWebmapItem
   ): string {
-    const webMap = layer as WebMapLayerItem;
+    const webMap = layer as NgwWebmapItem;
     const webMapTree = webMap.tree;
     if (webMapTree) {
       const parents = webMap.tree
-        .getParents<WebMapLayerItem>()
+        .getParents<NgwWebmapItem>()
         .map((x) => x.item.display_name);
       const id = [...parents, webMap.item.display_name].join('-');
       return id;

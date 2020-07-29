@@ -184,7 +184,7 @@ type A = AdapterOptions; // & TreeLayer & TreeGroup;
 /**
  * @public
  */
-export interface WebMapAdapterOptions extends A {
+export interface NgwWebmapAdapterOptions extends A {
   resourceId: number | [number, string];
   webMap: WebMap;
   connector: NgwConnector;
@@ -223,7 +223,7 @@ export interface IdentifyEvent {
 /**
  * @public
  */
-export interface WebMapLayerAdapterEvents extends WebMapEvents {
+export interface NgwWebmapLayerAdapterEvents extends WebMapEvents {
   identify: IdentifyEvent;
 }
 
@@ -356,6 +356,6 @@ export interface GetNgwLayerItemsOptions {
 
 declare module '@nextgis/webmap' {
   interface LayerAdaptersOptions {
-    'NGW:WEBMAP': Partial<WebMapAdapterOptions>;
+    'NGW:WEBMAP': Partial<NgwWebmapAdapterOptions>;
   }
 }

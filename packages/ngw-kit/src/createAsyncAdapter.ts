@@ -18,7 +18,7 @@ import {
 
 import { createGeoJsonAdapter } from './createGeoJsonAdapter';
 import { createRasterAdapter } from './createRasterAdapter';
-import { createWebMapAdapter } from './createWebMapAdapter';
+import { createWebMapAdapter } from './createNgwWebmapAdapter';
 import { applyMixins } from './utils/utils';
 import { NgwResource } from './NgwResource';
 import { resourceIdFromLayerOptions } from './utils/resourceIdFromLayerOptions';
