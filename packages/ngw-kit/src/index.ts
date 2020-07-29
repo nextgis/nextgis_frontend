@@ -3,8 +3,8 @@ import { NgwKit } from './NgwKit';
 export * from './interfaces';
 
 export * from './NgwResource';
-export * from './WebMapLayerAdapter';
-export * from './WebMapLayerItem';
+export * from './NgwWebmapLayerAdapter';
+export * from './NgwWebmapItem';
 
 export * from './utils/utils';
 export * from './utils/identifyUtils';

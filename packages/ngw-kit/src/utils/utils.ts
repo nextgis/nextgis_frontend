@@ -14,11 +14,11 @@ import NgwConnector, {
 import { createAsyncAdapter } from '../createAsyncAdapter';
 import {
   NgwLayerOptions,
-  WebMapAdapterOptions,
+  NgwWebmapAdapterOptions,
   IdentifyRequestOptions,
   ResourceAdapter,
 } from '../interfaces';
-import { WebMapLayerAdapter } from '../WebMapLayerAdapter';
+import { NgwWebmapLayerAdapter } from '../NgwWebmapLayerAdapter';
 
 export function updateImageParams(
   params: Record<string, any>,
@@ -202,17 +202,17 @@ export function sendIdentifyRequest(
   return options.connector.post('feature_layer.identify', { data });
 }
 
-export interface ExtendWebMapLayerAdapterOptions {
+export interface ExtendNgwWebmapLayerAdapterOptions {
   webMap: WebMap;
   connector: NgwConnector;
   baseUrl?: string;
 }
 
-export function extendWebMapLayerAdapter(
-  opt: ExtendWebMapLayerAdapterOptions
-): Type<WebMapLayerAdapter> {
-  class A extends WebMapLayerAdapter {
-    constructor(map: any, options: WebMapAdapterOptions) {
+export function extendNgwWebmapLayerAdapter(
+  opt: ExtendNgwWebmapLayerAdapterOptions
+): Type<NgwWebmapLayerAdapter> {
+  class A extends NgwWebmapLayerAdapter {
+    constructor(map: any, options: NgwWebmapAdapterOptions) {
       options = { ...opt, ...options };
       super(map, options);
     }

@@ -6,13 +6,13 @@ import {
   LayerAdapterCreators,
 } from '@nextgis/webmap';
 
-import { extendWebMapLayerAdapter } from './utils/utils';
-import { WebMapLayerAdapter } from './WebMapLayerAdapter';
+import { extendNgwWebmapLayerAdapter } from './utils/utils';
+import { NgwWebmapLayerAdapter } from './NgwWebmapLayerAdapter';
 import { classAdapters } from './createAsyncAdapter';
 
 import {
   NgwKitOptions,
-  WebMapAdapterOptions,
+  NgwWebmapAdapterOptions,
   GetClassAdapter,
 } from './interfaces';
 
@@ -42,25 +42,25 @@ export class NgwKit implements StarterKit {
     classAdapters[cls] = adapter;
   }
 
-  async onLoadSync(webMap: WebMap): Promise<WebMapLayerAdapter | undefined> {
+  async onLoadSync(webMap: WebMap): Promise<NgwWebmapLayerAdapter | undefined> {
     if (this.options.resourceId && this.url) {
       // TODO: resources from array
       const resourceIds = [this.options.resourceId];
 
       if (resourceIds.length) {
         for (const r of resourceIds) {
-          const options: WebMapAdapterOptions = {
+          const options: NgwWebmapAdapterOptions = {
             resourceId: r,
             connector: this.connector,
             webMap,
           };
-          const layer = (await webMap.addLayer(WebMapLayerAdapter, {
+          const layer = (await webMap.addLayer(NgwWebmapLayerAdapter, {
             visibility: true,
             fit: true,
             identification: this.options.identification,
             pixelRadius: this.options.pixelRadius,
             ...options,
-          })) as WebMapLayerAdapter;
+          })) as NgwWebmapLayerAdapter;
           return layer;
         }
       }
@@ -79,10 +79,10 @@ export class NgwKit implements StarterKit {
     };
   }
 
-  private _createAdapter(webMap: WebMap): Type<WebMapLayerAdapter> {
+  private _createAdapter(webMap: WebMap): Type<NgwWebmapLayerAdapter> {
     const connector = this.connector;
     const baseUrl = this.url;
-    return extendWebMapLayerAdapter({
+    return extendNgwWebmapLayerAdapter({
       webMap,
       connector,
       baseUrl,
