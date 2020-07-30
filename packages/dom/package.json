@@ -2,7 +2,7 @@
   "name": "@nextgis/dom",
   "version": "1.0.0-alpha.1",
   "description": "Collection of libraries for working with the DOM",
-  "main": "index.js",
+  "main": "lib/dom.global.prod.js",
   "module": "lib/dom.esm-bundler.js",
   "unpkg": "lib/dom.global.prod.js",
   "jsdelivr": "lib/dom.global.prod.js",

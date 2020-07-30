@@ -3,7 +3,7 @@
   "_priority": 10,
   "version": "1.0.0-alpha.1",
   "description": "",
-  "main": "index.js",
+  "main": "lib/ngw-ol.global.prod.js",
   "module": "lib/ngw-ol.esm-bundler.js",
   "unpkg": "lib/ngw-ol.global.prod.js",
   "jsdelivr": "lib/ngw-ol.global.prod.js",

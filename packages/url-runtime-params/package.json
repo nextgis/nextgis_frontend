@@ -2,7 +2,7 @@
   "name": "@nextgis/url-runtime-params",
   "version": "1.0.0-alpha.1",
   "description": "Сontrol of writing and reading URL parameters",
-  "main": "index.js",
+  "main": "lib/url-runtime-params.global.prod.js",
   "module": "lib/url-runtime-params.esm-bundler.js",
   "unpkg": "lib/url-runtime-params.global.prod.js",
   "jsdelivr": "lib/url-runtime-params.global.prod.js",
