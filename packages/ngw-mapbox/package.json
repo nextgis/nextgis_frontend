@@ -3,7 +3,7 @@
   "_priority": 10,
   "version": "1.0.0-alpha.1",
   "description": "",
-  "main": "index.js",
+  "main": "lib/ngw-mapbox.global.prod.js",
   "module": "lib/ngw-mapbox.esm-bundler.js",
   "unpkg": "lib/ngw-mapbox.global.prod.js",
   "jsdelivr": "lib/ngw-mapbox.global.prod.js",

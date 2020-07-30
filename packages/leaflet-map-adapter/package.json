@@ -3,7 +3,7 @@
   "version": "1.0.0-alpha.1",
   "_priority": 15,
   "description": "Webmap adapter to use Laeflet GIS framework",
-  "main": "index.js",
+  "main": "lib/leaflet-map-adapter.global.prod.js",
   "module": "lib/leaflet-map-adapter.esm-bundler.js",
   "unpkg": "lib/leaflet-map-adapter.global.prod.js",
   "jsdelivr": "lib/leaflet-map-adapter.global.prod.js",

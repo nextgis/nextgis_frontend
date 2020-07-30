@@ -3,7 +3,7 @@
   "version": "1.0.0-alpha.1",
   "_priority": 16,
   "description": "",
-  "main": "index.js",
+  "main": "lib/ol-map-adapter.global.prod.js",
   "module": "lib/ol-map-adapter.esm-bundler.js",
   "unpkg": "lib/ol-map-adapter.global.prod.js",
   "jsdelivr": "lib/ol-map-adapter.global.prod.js",

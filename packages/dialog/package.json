@@ -2,7 +2,7 @@
   "name": "@nextgis/dialog",
   "version": "1.0.0-alpha.1",
   "description": "Modal window management",
-  "main": "index.js",
+  "main": "lib/dialog.global.prod.js",
   "module": "lib/dialog.esm-bundler.js",
   "unpkg": "lib/dialog.global.prod.js",
   "jsdelivr": "lib/dialog.global.prod.js",
