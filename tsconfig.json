@@ -24,7 +24,7 @@
       "@nextgis/*": ["./packages/*/src/"]
     }
   },
-  "includes": [
+  "include": [
     "packages/global.d.ts",
     "packages/*/src",
     "tests"

@@ -1,7 +1,3 @@
 'use strict';
 
-if (process.env.NODE_ENV === 'production') {
-  module.exports = require('./lib/ngw-ol.esm-bundler.prod.js');
-} else {
-  module.exports = require('./lib/ngw-ol.esm-bundler.js');
-}
+throw new Error('No cjs module export for `@nextgis/ngw-ol` library');
