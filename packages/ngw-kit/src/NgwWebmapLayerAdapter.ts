@@ -16,12 +16,11 @@ import { ItemOptions } from '@nextgis/item';
 import StrictEventEmitter from 'strict-event-emitter-types';
 import { EventEmitter } from 'events';
 
-import {
-  updateImageParams,
-  sendIdentifyRequest,
-  getWebMapExtent,
-} from './utils/utils';
 import { NgwWebmapItem } from './NgwWebmapItem';
+import { createOnFirstShowAdapter } from './adapters/createBasemapWebmapItemAdapter';
+import { sendIdentifyRequest } from './utils/identifyUtils';
+import { getLayerAdapterOptions } from './utils/getLayerAdapterOptions';
+import { updateImageParams, getNgwWebmapExtent } from './utils/utils';
 
 import {
   TreeGroup,
@@ -31,8 +30,6 @@ import {
   NgwWebmapLayerAdapterEvents,
   ResourceAdapter,
 } from './interfaces';
-import { createOnFirstShowAdapter } from './createBasemapWebmapItemAdapter';
-import { getLayerAdapterOptions } from './utils/getLayerAdapterOptions';
 
 export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
   layer?: NgwWebmapItem;
@@ -116,7 +113,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
   getExtent(): LngLatBoundsArray | undefined {
     const webmap = this.response && this.response.webmap;
     if (webmap) {
-      return getWebMapExtent(webmap);
+      return getNgwWebmapExtent(webmap);
     }
   }
 

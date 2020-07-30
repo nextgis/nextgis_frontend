@@ -8,7 +8,7 @@ import {
 
 import { extendNgwWebmapLayerAdapter } from './utils/utils';
 import { NgwWebmapLayerAdapter } from './NgwWebmapLayerAdapter';
-import { classAdapters } from './createAsyncAdapter';
+import { classAdapters } from './adapters/createAsyncAdapter';
 
 import {
   NgwKitOptions,

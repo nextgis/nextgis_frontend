@@ -1,7 +1,6 @@
 import NgwConnector, { ResourceItem } from '@nextgis/ngw-connector';
 import { getNgwResourceExtent } from './utils/utils';
 import { LngLatBoundsArray } from '@nextgis/webmap';
-
 export class NgwResource {
   item!: ResourceItem;
   connector!: NgwConnector;

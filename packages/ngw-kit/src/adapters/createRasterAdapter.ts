@@ -2,16 +2,17 @@ import {
   ResourceAdapter,
   NgwLayerAdapterType,
   GetClassAdapterOptions,
-} from './interfaces';
+} from '../interfaces';
 import {
   MainLayerAdapter,
   Type,
   ImageAdapterOptions,
   TileAdapterOptions,
 } from '@nextgis/webmap';
-import { getLayerAdapterOptions } from './utils/getLayerAdapterOptions';
 import { ResourceItem, ResourceCls } from '@nextgis/ngw-connector';
-import { resourceIdFromLayerOptions } from './utils/resourceIdFromLayerOptions';
+
+import { getLayerAdapterOptions } from '../utils/getLayerAdapterOptions';
+import { resourceIdFromLayerOptions } from '../utils/resourceIdFromLayerOptions';
 
 export async function createRasterAdapter({
   layerOptions,
