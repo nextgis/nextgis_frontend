@@ -120,7 +120,7 @@ export class WebMapMain<
     }
   }
 
-  static get<T extends WebMapMain = WebMapMain>(id: number): T | undefined {
+  static get<T extends WebMapMain = WebMapMain>(id: number): T {
     return WEB_MAP_CONTAINER[id];
   }
 
