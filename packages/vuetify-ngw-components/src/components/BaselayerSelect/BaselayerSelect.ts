@@ -28,7 +28,7 @@ export class BaselayerSelect extends Vue {
   protected __updateItems?: () => Promise<void>;
   protected _layers: Array<LayerAdapter | ResourceAdapter> = [];
 
-  get webMap(): WebMap | undefined {
+  get webMap(): WebMap {
     return WebMap.get(this.webMapId);
   }
 
