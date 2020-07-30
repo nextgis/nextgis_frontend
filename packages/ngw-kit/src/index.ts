@@ -12,8 +12,8 @@ export * from './utils/getCompanyLogo';
 export * from './utils/featureLayerUtils';
 export * from './utils/resourceIdFromLayerOptions';
 
-export * from './createBasemapWebmapItemAdapter';
-export * from './createGeoJsonAdapter';
-export * from './createRasterAdapter';
+export * from './adapters/createBasemapWebmapItemAdapter';
+export * from './adapters/createGeoJsonAdapter';
+export * from './adapters/createRasterAdapter';
 
 export { NgwKit };

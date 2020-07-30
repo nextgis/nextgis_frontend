@@ -1,12 +1,16 @@
-import { LayerFeature } from '@nextgis/ngw-connector';
-import CancelablePromise from '@nextgis/cancelable-promise';
 import { Geometry, Feature } from 'geojson';
-import { getNgwLayerFeature, createGeoJsonFeature } from './featureLayerUtils';
+import { LayerFeature, FeatureLayersIdentify } from '@nextgis/ngw-connector';
+import CancelablePromise from '@nextgis/cancelable-promise';
+import { MapClickEvent } from '@nextgis/webmap';
 import {
   GetIdentifyGeoJsonOptions,
   NgwIdentify,
   NgwIdentifyItem,
+  IdentifyRequestOptions,
+  FeatureIdentifyRequestOptions,
 } from '../interfaces';
+import { getCirclePoly, degrees2meters } from './utils';
+import { getNgwLayerFeature, createGeoJsonFeature } from './featureLayerUtils';
 
 export function getIdentifyItems(
   identify: NgwIdentify,
@@ -77,4 +81,33 @@ export function getIdentifyGeoJson<
   if (params) {
     return getNgwLayerFeature({ connector, ...params[0] });
   }
+}
+
+export function sendIdentifyRequest(
+  ev: MapClickEvent,
+  options: IdentifyRequestOptions
+  // webMap: WebMap
+): Promise<FeatureLayersIdentify> {
+  // webMap.emitter.emit('start-identify', { ev });
+  const geom = getCirclePoly(ev.latLng.lng, ev.latLng.lat, options.radius);
+
+  // create wkt string
+  const polygon: string[] = [];
+
+  geom.forEach(([lng, lat]) => {
+    const [x, y] = degrees2meters(lng, lat);
+    polygon.push(x + ' ' + y);
+  });
+
+  const wkt = `POLYGON((${polygon.join(', ')}))`;
+
+  const layers: number[] = options.layers;
+
+  const data: FeatureIdentifyRequestOptions = {
+    geom: wkt,
+    srs: 3857,
+    layers,
+  };
+
+  return options.connector.post('feature_layer.identify', { data });
 }

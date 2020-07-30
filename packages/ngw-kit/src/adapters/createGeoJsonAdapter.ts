@@ -8,14 +8,17 @@ import {
   FilterOptions,
   LayerAdapter,
 } from '@nextgis/webmap';
-import CancelablePromise from '@nextgis/cancelable-promise';
 import { debounce } from '@nextgis/utils';
-import { NgwLayerOptions, GetClassAdapterOptions } from './interfaces';
-import { getNgwLayerFeatures } from './utils/featureLayerUtils';
-import { resourceIdFromLayerOptions } from './utils/resourceIdFromLayerOptions';
-import { degrees2meters, vectorLayerGeomToPaintTypeAlias } from './utils/utils';
-import { createPopupContent } from './utils/createPopupContent';
-import { getLayerFilterOptions } from './utils/getLayerFilterOptions';
+import CancelablePromise from '@nextgis/cancelable-promise';
+import {
+  degrees2meters,
+  vectorLayerGeomToPaintTypeAlias,
+} from '../utils/utils';
+import { getNgwLayerFeatures } from '../utils/featureLayerUtils';
+import { createPopupContent } from '../utils/createPopupContent';
+import { getLayerFilterOptions } from '../utils/getLayerFilterOptions';
+import { resourceIdFromLayerOptions } from '../utils/resourceIdFromLayerOptions';
+import { NgwLayerOptions, GetClassAdapterOptions } from '../interfaces';
 
 interface FilterArgs {
   filters?: PropertiesFilter;

@@ -1,5 +1,4 @@
 import { ItemOptions, Item } from '@nextgis/item';
-
 import {
   WebMap,
   LayerAdapter,
@@ -8,8 +7,9 @@ import {
 } from '@nextgis/webmap';
 import NgwConnector from '@nextgis/ngw-connector';
 import { objectAssign } from '@nextgis/utils';
-import { TreeGroup, TreeLayer, TreeItem } from './interfaces';
+
 import { setScaleRatio } from './utils/utils';
+import { TreeGroup, TreeLayer, TreeItem } from './interfaces';
 
 export class NgwWebmapItem extends Item<ItemOptions> {
   static GetAdapterFromLayerType: {
