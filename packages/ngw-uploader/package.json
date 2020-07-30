@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/ngw-uploader",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "_priority": 13,
   "description": "",
   "main": "index.js",
@@ -9,9 +9,9 @@
   "jsdelivr": "lib/dialog.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/cancelable-promise": "^1.0.0-alpha.1",
-    "@nextgis/dialog": "^1.0.0-alpha.1",
-    "@nextgis/ngw-connector": "^1.0.0-alpha.1",
+    "@nextgis/cancelable-promise": "^1.0.0-alpha.2",
+    "@nextgis/dialog": "^1.0.0-alpha.2",
+    "@nextgis/ngw-connector": "^1.0.0-alpha.2",
     "events": "^3.2.0"
   },
   "devDependencies": {
