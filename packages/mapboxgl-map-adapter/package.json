@@ -3,7 +3,7 @@
   "version": "1.0.0-alpha.1",
   "_priority": 16,
   "description": "Webmap adapter to use Mapbox GL JS GIS framework.",
-  "main": "index.js",
+  "main": "lib/mapboxgl-map-adapter.global.prod.js",
   "module": "lib/mapboxgl-map-adapter.esm-bundler.js",
   "unpkg": "lib/mapboxgl-map-adapter.global.prod.js",
   "jsdelivr": "lib/mapboxgl-map-adapter.global.prod.js",

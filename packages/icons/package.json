@@ -2,7 +2,7 @@
   "name": "@nextgis/icons",
   "version": "1.0.0-alpha.1",
   "description": "Svg icon pack",
-  "main": "index.js",
+  "main": "lib/icons.global.prod.js",
   "module": "lib/icons.esm-bundler.js",
   "unpkg": "lib/icons.global.prod.js",
   "jsdelivr": "lib/icons.global.prod.js",

@@ -184,7 +184,7 @@ function createConfig(format, output, plugins = []) {
         isBundlerESMBuild,
         isBrowserESMBuild,
         // isBrowserBuild?
-        (isGlobalBuild || isBrowserESMBuild || isBundlerESMBuild),
+        isGlobalBuild || isBrowserESMBuild || isBundlerESMBuild,
         isGlobalBuild,
         isNodeBuild
       ),

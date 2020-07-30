@@ -2,7 +2,7 @@
   "name": "@nextgis/control-container",
   "version": "1.0.0-alpha.1",
   "description": "Placing control elements in the corners of the map container",
-  "main": "index.js",
+  "main": "lib/control-container.global.prod.js",
   "module": "lib/control-container.esm-bundler.js",
   "unpkg": "lib/control-container.global.prod.js",
   "jsdelivr": "lib/control-container.global.prod.js",
