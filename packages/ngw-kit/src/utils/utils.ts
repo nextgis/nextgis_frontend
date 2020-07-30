@@ -2,22 +2,19 @@ import {
   WebMap,
   Type,
   LngLatBoundsArray,
-  MapClickEvent,
   VectorAdapterLayerType,
 } from '@nextgis/webmap';
 import NgwConnector, {
   WebmapResource,
   ResourceItem,
-  FeatureLayersIdentify,
   GeometryType,
 } from '@nextgis/ngw-connector';
-import { createAsyncAdapter } from '../createAsyncAdapter';
 import {
   NgwLayerOptions,
   NgwWebmapAdapterOptions,
-  IdentifyRequestOptions,
   ResourceAdapter,
 } from '../interfaces';
+import { createAsyncAdapter } from '../adapters/createAsyncAdapter';
 import { NgwWebmapLayerAdapter } from '../NgwWebmapLayerAdapter';
 
 export function updateImageParams(
@@ -64,7 +61,7 @@ export function addNgwLayer(
   return createAsyncAdapter(options, webMap, connector);
 }
 
-export function getWebMapExtent(
+export function getNgwWebmapExtent(
   webmap: WebmapResource
 ): LngLatBoundsArray | undefined {
   const bottom = webmap['extent_bottom'];
@@ -101,7 +98,7 @@ export async function getNgwResourceExtent(
   connector: NgwConnector
 ): Promise<LngLatBoundsArray | undefined> {
   if (item.webmap) {
-    return getWebMapExtent(item.webmap);
+    return getNgwWebmapExtent(item.webmap);
   } else {
     const resource = item.resource;
     if (resource.cls.indexOf('style') !== -1) {
@@ -114,15 +111,6 @@ export async function getNgwResourceExtent(
       return getNgwLayerExtent(resource.id, connector);
     }
   }
-}
-
-interface FeatureIdentifyRequestOptions {
-  /**
-   * WKT Polygon geometry
-   */
-  geom: string;
-  srs: 3857;
-  layers: number[];
 }
 
 const d2r = Math.PI / 180; // degrees to radians
@@ -160,46 +148,6 @@ export function degrees2meters(lng: number, lat: number): [number, number] {
   let y = Math.log(Math.tan(((90 + lat) * Math.PI) / 360)) / (Math.PI / 180);
   y = (y * 20037508.34) / 180;
   return [x, y];
-}
-
-export function sendIdentifyRequest(
-  ev: MapClickEvent,
-  options: IdentifyRequestOptions
-  // webMap: WebMap
-): Promise<FeatureLayersIdentify> {
-  // webMap.emitter.emit('start-identify', { ev });
-  const geom = getCirclePoly(ev.latLng.lng, ev.latLng.lat, options.radius);
-
-  // create wkt string
-  const polygon: string[] = [];
-
-  // webMap.addLayer('GEOJSON', {
-  //   visibility: true,
-  //   data: {
-  //     type: 'Feature',
-  //     geometry: {
-  //       type: 'Polygon',
-  //       coordinates: [geom]
-  //     }
-  //   }
-  // })
-
-  geom.forEach(([lng, lat]) => {
-    const [x, y] = degrees2meters(lng, lat);
-    polygon.push(x + ' ' + y);
-  });
-
-  const wkt = `POLYGON((${polygon.join(', ')}))`;
-
-  const layers: number[] = options.layers;
-
-  const data: FeatureIdentifyRequestOptions = {
-    geom: wkt,
-    srs: 3857,
-    layers,
-  };
-
-  return options.connector.post('feature_layer.identify', { data });
 }
 
 export interface ExtendNgwWebmapLayerAdapterOptions {

@@ -14,14 +14,14 @@ import {
   GetClassAdapterOptions,
   ClassAdapter,
   ResourceNgwLayerOptions,
-} from './interfaces';
+} from '../interfaces';
 
 import { createGeoJsonAdapter } from './createGeoJsonAdapter';
 import { createRasterAdapter } from './createRasterAdapter';
 import { createWebMapAdapter } from './createNgwWebmapAdapter';
-import { applyMixins } from './utils/utils';
-import { NgwResource } from './NgwResource';
-import { resourceIdFromLayerOptions } from './utils/resourceIdFromLayerOptions';
+import { applyMixins } from '../utils/utils';
+import { NgwResource } from '../NgwResource';
+import { resourceIdFromLayerOptions } from '../utils/resourceIdFromLayerOptions';
 import { createBasemapLayerAdapter } from './createBasemapLayerAdapter';
 
 export const classAdapters: Record<string, GetClassAdapter> = {};

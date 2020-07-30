@@ -20,6 +20,12 @@ import { FeatureLayersIdentify } from '@nextgis/ngw-connector';
 import { Type } from '@nextgis/utils';
 import { Feature } from 'geojson';
 
+declare module '@nextgis/webmap' {
+  interface LayerAdaptersOptions {
+    'NGW:WEBMAP': Partial<NgwWebmapAdapterOptions>;
+  }
+}
+
 /**
  * @public
  */
@@ -354,8 +360,11 @@ export interface GetNgwLayerItemsOptions {
   filters?: PropertiesFilter;
 }
 
-declare module '@nextgis/webmap' {
-  interface LayerAdaptersOptions {
-    'NGW:WEBMAP': Partial<NgwWebmapAdapterOptions>;
-  }
+export interface FeatureIdentifyRequestOptions {
+  /**
+   * WKT Polygon geometry
+   */
+  geom: string;
+  srs: 3857;
+  layers: number[];
 }
