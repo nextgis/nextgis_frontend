@@ -39,7 +39,7 @@ NPM is the recommended installation method when building large scale application
 $ npm install @nextgis/dialog
 ```
 
-```js
+```javascript
 import Dialog from '@nextgis/dialog';
 
 const dialog = new Dialog();

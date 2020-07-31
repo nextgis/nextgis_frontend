@@ -44,7 +44,7 @@ NPM is the recommended installation method when building large scale application
 $ npm install @nextgis/ngw-uploader
 ```
 
-```js
+```javascript
 import NgwUploader from '@nextgis/ngw-uploader';
 
 const ngwUploader = new NgwUploader({

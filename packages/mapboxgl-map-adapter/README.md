@@ -13,7 +13,7 @@ $ npm install --save-dev @nextgis/mapboxgl-map-adapter
 $ yarn add @nextgis/mapboxgl-map-adapter
 ```
 
-```js
+```javascript
 import { WebMap } from '@nextgis/webmap';
 import MapboxglMapAdapter from '@nextgis/mapboxgl-map-adapter';
 // manually added styles

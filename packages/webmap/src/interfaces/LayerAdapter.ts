@@ -425,8 +425,8 @@ export interface FilterOptions<Entity = any> {
   /**
    * set fields for order
    * @example
-   * ```json
-   * { "orderBy": ["field1", "-field2" ]}
+   * ```javascripton
+   * { "orderBy": ["field1", "-field2"] }
    * ```
    */
   orderBy?: (keyof Entity)[] | string[];
@@ -529,7 +529,7 @@ export interface VectorLayerAdapter<
    * It is not possible to apply such a filter to vector tiles and data on the remote server.
    * So, where possible, use the {@link VectorLayerAdapter.propertiesFilter}.
    * @example
-   * ```js
+   * ```javascript
    * layer.filter((e) => e.feature.properties.id === 2011);
    * // but in this case it’s better to do so:
    * layer.propertiesFilter([['id', 'eq', 2011]])
@@ -542,7 +542,7 @@ export interface VectorLayerAdapter<
    * @param filters - Filter, conforming to the PropertiesFilter expression specification's.
    * @param options - Options object.
    * @example
-   * ```js
+   * ```javascript
    * layer.propertiesFilter(['all', ['color', 'eq', 'green'], ['year', 'gt', 2011]]);
    * layer.propertiesFilter([[
    *   'any',
