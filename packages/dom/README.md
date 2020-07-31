@@ -13,7 +13,7 @@ $ yarn add @nextgis/dom
 
 ## Usage
 
-```js
+```javascript
 import * as DOM from '@nextgis/dom';
 
 ```

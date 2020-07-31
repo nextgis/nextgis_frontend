@@ -24,7 +24,7 @@ $ yarn add @nextgis/control-container
 
 ## Usage
 
-```js
+```javascript
 import ControlContainer from '@nextgis/control-container';
 
 // initialization

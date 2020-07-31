@@ -11,7 +11,7 @@ $ npm install --save-dev @nextgis/webmap
 $ yarn add @nextgis/webmap
 ```
 
-```js
+```javascript
 import { WebMap } from '@nextgis/webmap';
 import LeafletMapAdapter from '@nextgis/leaflet-map-adapter';
 // manually added styles

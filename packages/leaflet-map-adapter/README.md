@@ -13,7 +13,7 @@ $ npm install --save-dev @nextgis/leaflet-map-adapter
 $ yarn add @nextgis/leaflet-map-adapter
 ```
 
-```js
+```javascript
 import { WebMap } from '@nextgis/webmap';
 import LeafletMapAdapter from '@nextgis/leaflet-map-adapter';
 // manually added styles

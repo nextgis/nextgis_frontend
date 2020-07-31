@@ -42,7 +42,7 @@ export interface MapOptions {
    * [LngLatBoundsArray](webmap#LngLatBoundsArray)
    *
    * @example
-   * ```js
+   * ```javascript
    * // whole world
    * bounds: [0, -90, 180, 90]
    * ```
@@ -95,7 +95,7 @@ export interface AppOptions {
    * A way to save the state of a map to external services
    *
    * @example
-   * ```js
+   * ```javascript
    * import RuntimeParams from '@nextgis/url-runtime-params';
    * // this will allow to write in the url params of map center and zoomlevel when moving
    * new WebMap({

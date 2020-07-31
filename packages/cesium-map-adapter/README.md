@@ -13,7 +13,7 @@ $ npm install --save-dev @nextgis/ol-map-adapter
 $ yarn add @nextgis/ol-map-adapter
 ```
 
-```js
+```javascript
 import { WebMap } from '@nextgis/webmap';
 import OlMapAdapter from '@nextgis/ol-map-adapter';
 // manually added styles

@@ -9,7 +9,7 @@
  * and experimental {@link https://github.com/nextgis/nextgis_frontend/tree/master/packages/cesium-map-adapter | @nextgis/cesium-map-adapter}.
  *
  * @example
- * ```js
+ * ```javascript
  * import { WebMap } from "@nextgis/webmap";
  *
  * import "./leaflet-style-override.css";

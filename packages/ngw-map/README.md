@@ -13,7 +13,7 @@ $ npm install --save-dev @nextgis/ngw-map
 $ yarn add @nextgis/ngw-map
 ```
 
-```js
+```javascript
 import { NgwMap } from '@nextgis/ngw-map';
 import LeafletMapAdapter from '@nextgis/leaflet-map-adapter';
 // manually added styles

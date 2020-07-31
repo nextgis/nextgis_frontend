@@ -7,7 +7,7 @@
  * @returns Returns true if the object is defined, returns false otherwise.
  *
  * @example
- * ```js
+ * ```javascript
  * if (defined(positions)) {
  *      doSomething();
  * } else {
