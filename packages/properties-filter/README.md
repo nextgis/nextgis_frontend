@@ -45,7 +45,7 @@ Nesting
 
 
 
-```js
+```javascript
 import { propertiesFilter, featureFilter } from '@nextgis/properties-filter';
 
 const properties = {

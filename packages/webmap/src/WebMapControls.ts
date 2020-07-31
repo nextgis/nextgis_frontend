@@ -119,7 +119,7 @@ export class WebMapControls<
    * @param options - Options for control layout customization and assigning a callback function
    *
    * @example
-   * ```js
+   * ```javascript
    * const toggleControl = ngwMap.createToggleControl({
    *   getStatus: () => webMap.isLayerVisible('any-layer-id'),
    *   onClick: (status) => ngwMap.toggleLayer('webmap', status),

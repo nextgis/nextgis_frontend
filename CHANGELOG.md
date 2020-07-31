@@ -151,7 +151,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
     The `type` parameter still optional, but it is better to specify explicitly.
 Especially when the layer is initiated empty.
 
-```js
+```javascript
 // before
 webMap.addLayer('GEOJSON', { data: geojson, type: 'fill'});
 // after

@@ -1,10 +1,12 @@
-# Ngw kit
+# NgwKit
 
-build webmap with [NextGIS Web](http://nextgis.ru/nextgis-web/) instance.
+![size](https://img.shields.io/bundlephobia/minzip/@nextgis/ngw-kit) ![version](https://img.shields.io/npm/v/@nextgis/ngw-kit)
 
-This library is not intended for using directly in the browser.
+Build [WebMap](../webmap/README.md) with [NextGIS Web](http://nextgis.ru/nextgis-web/) instance.
 
-Use NgwKit with NPM installation method for building large scale applications. It pairs nicely with module bundlers such as [Webpack](https://webpack.js.org/)
+This library contains a WebMap plugin and utilities that allow you to interact with NextGIS Web.
+
+Make sure CORS is registered in the [NextGIS Web settings](https://docs.nextgis.com/docs_ngcom/source/CORS.html) to be able to send requests.
 
 ```bash
 # latest stable
@@ -13,30 +15,51 @@ $ npm install --save-dev @nextgis/ngw-kit
 $ yarn add @nextgis/ngw-kit
 ```
 
-```js
-import { WebMap } from '@nextgis/webmap';
+## Usage example
+As WebMap starter kit
+```javascript
+import { NgwKit } from '@nextgis/ngw-kit';
+import { createWebMap } from '@nextgis/webmap';
 import LeafletMapAdapter from '@nextgis/leaflet-map-adapter';
-import NgwKit from '@nextgis/ngw-kit';
 
-// manually added styles
 import 'leaflet/dist/leaflet.css';
 
-const webMap = new WebMap({
+createWebMap({
   mapAdapter: new LeafletMapAdapter(),
-  starterKits: [new NgwKit({
-    baseUrl: 'YOU NEXTGIS CLOUD INSTANCE URL',
-    resourceId: 'WEBMAP RESOURCE ID'
-  })]
+  starterKits: [
+    new NgwKit({
+      baseUrl: 'YOU NEXTGIS WEB URL',
+      resource: 'WEBMAP RESOURCE ID',
+    }),
+  ],
 });
-
-webMap.create(options).then(() => {
-  // on webmap create
-})
 ```
+Get NGW vector layer items
+```javascript
+import { getNgwLayerItem, getNgwLayerItems } from '@nextgis/ngw-kit';
+import NgwConnector from '@nextgis/ngw-connector';
+
+const connector = new NgwConnector({ baseUrl: 'YOU NEXTGIS WEB URL'});
+
+getNgwLayerItem({
+  resourceId: 2011,
+  featureId: 1,
+  connector: connector
+}).then((item) => { ... });
+
+getNgwLayerItems({
+  resourceId: 2011,
+  offset: 10,
+  limit: 300,
+  fields: ['name', 'year', 'Ni', 'Cu', 'Pt', 'Pd', 'Au']
+  orderBy: ['year']
+}).then((items) => { ... });
+```
+
+Check out the [API Documentation](../../markdown/ngw-kit.md)
 
 ## Commercial support
 
 Need to fix a bug or add a feature to `@nextgis/ngw-kit`? We provide custom development and support for this software. [Contact us](http://nextgis.com/contact/) to discuss options!
 
 [![http://nextgis.com](http://nextgis.ru/img/nextgis.png)](http://nextgis.com)
-

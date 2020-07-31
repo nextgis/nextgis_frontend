@@ -68,7 +68,7 @@ Single-file bundles for rapid deployment of web-gis applications with NextGIS se
 ## Example projects
 
 - [russia-history](https://github.com/nextgis/russia-history) – Russia history live web map ([LIVE](https://map.runivers.ru))
-- [nextgisweb_viewer](https://github.com/nextgis/nextgisweb_viewer) – Service for viewing map resources from NextGIS WEB ([LIVE](http://viewer.nextgis.com))
+- [nextgisweb_viewer](https://github.com/nextgis/nextgisweb_viewer) – Service for viewing map resources from NextGIS Web ([LIVE](http://viewer.nextgis.com))
 - [ngw_frontend_boilerplate](https://github.com/nextgis/ngw_frontend_boilerplate)
 - [wwf-oilspill](https://github.com/nextgis/wwf-oilspill) – Emergency situations with oil spills ([LIVE](http://nextgis.ru/demo/oilspill/build/))
 - [oralhistory](https://github.com/nextgis/oralhistory) ([LIVE](https://nextgis.ru/demo/oralhistory/dist/))
@@ -115,7 +115,7 @@ yarn add @nextgis/[package]
 
 then import the \[package\] in the project modules
 
-```js
+```javascript
 import Package from '@nextgis/[package]';
 // or
 import { Component, utility } from '@nextgis/[package]';
@@ -125,7 +125,7 @@ const package = new Package(options);
 
 ## Create map
 
-```js
+```javascript
 import { NgwMap } from '@nextgis/ngw-map';
 
 import './leaflet-style-override.css';
@@ -150,7 +150,7 @@ ngwMap.onLoad().then(() => {
 
 ## Add layers from NGW
 
-```js
+```javascript
 // from resource id
 ngwMap.addNgwLayer({ resource: 2011 });
 // by keyname
@@ -248,7 +248,7 @@ Open VSCode `File > Preferences > Settings` JSON view and add this to config:
 mkdir .vscode && touch .vscode/settings.json
 ```
 
-```json
+```javascripton
 {
   "editor.formatOnSave": false,
   "tslint.enable": false,

@@ -19,7 +19,7 @@ yarn add -D @nextgis/eslint-config
 
 Then create the `.eslintrc` in the root of your project and add the following content:
 
-```json
+```javascripton
 {
   "extends": [
     "@nextgis/eslint-config"
@@ -43,7 +43,7 @@ yarn add -D eslint-loader
 
 In your webpack configuration
 
-```js
+```javascript
 module.exports = {
   // ...
   module: {
@@ -88,7 +88,7 @@ mkdir .vscode && touch .vscode/settings.json
 
 and add this to config:
 
-```json
+```javascripton
   "editor.formatOnSave": true,
   "eslint.autoFixOnSave": true,
   "eslint.validate": [

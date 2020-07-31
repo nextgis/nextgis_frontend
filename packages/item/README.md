@@ -13,7 +13,7 @@ $ npm install --save-dev @nextgis/item
 $ yarn add @nextgis/item
 ```
 
-```js
+```javascript
 import Item from '@nextgis/item';
 
 

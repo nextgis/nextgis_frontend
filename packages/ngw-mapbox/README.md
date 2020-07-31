@@ -44,7 +44,7 @@ NPM is the recommended installation method when building large scale application
 $ npm install @nextgis/ngw-mapbox
 ```
 
-```js
+```javascript
 import NgwMapbox from '@nextgis/ngw-mapbox';
 
 const ngwMapbox = new NgwMapbox({

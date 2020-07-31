@@ -46,7 +46,7 @@ $ npm install --save-dev @nextgis/ngw-leaflet
 $ yarn add @nextgis/ngw-leaflet
 ```
 
-```js
+```javascript
 import NgwLeaflet from '@nextgis/ngw-leaflet';
 
 const ngwLeaflet = new NgwLeaflet({
