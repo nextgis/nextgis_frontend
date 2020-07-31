@@ -43,7 +43,7 @@ $ npm install --save-dev @nextgis/ngw-connector
 $ yarn add @nextgis/ngw-connector
 ```
 
-```js
+```javascript
 import NgwConnector from '@nextgis/ngw-connector';
 
 const ngwConnector = new NgwConnector({

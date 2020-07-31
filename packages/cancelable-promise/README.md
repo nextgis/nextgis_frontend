@@ -15,7 +15,7 @@ $ yarn add @nextgis/cancelable-promise
 
 Catch `CancelError'
 
-```js
+```javascript
 import CancelablePromise from "@nextgis/cancelable-promise";
 
 const promise = new CancelablePromise((resolve, reject) => {
@@ -32,7 +32,7 @@ promise.cancel();
 
 Handle `onCancel` callback
 
-```js
+```javascript
 import CancelablePromise from "@nextgis/cancelable-promise";
 
 const promise = new CancelablePromise((resolve, reject, onCancel) => {

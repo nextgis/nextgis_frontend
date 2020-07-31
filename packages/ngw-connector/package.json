@@ -2,7 +2,7 @@
   "name": "@nextgis/ngw-connector",
   "version": "1.0.0-alpha.2",
   "_priority": 12,
-  "description": "Module for interaction with NGW (NextGis Web) server API",
+  "description": "Module for interaction with NGW (NextGIS Web) server API",
   "main": "index.js",
   "module": "lib/ngw-connector.esm-bundler.js",
   "unpkg": "lib/ngw-connector.global.prod.js",

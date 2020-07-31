@@ -2,7 +2,7 @@
   "name": "@nextgis/ngw-kit",
   "version": "1.0.0-alpha.2",
   "_priority": 20,
-  "description": "",
+  "description": "This library contains a plugin, a set of utilities and adapters that allow you to interact with NextGIS Web",
   "main": "index.js",
   "module": "lib/ngw-kit.esm-bundler.js",
   "unpkg": "lib/ngw-kit.global.prod.js",

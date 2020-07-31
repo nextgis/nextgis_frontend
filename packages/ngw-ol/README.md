@@ -44,7 +44,7 @@ NPM is the recommended installation method when building large scale application
 $ npm install @nextgis/ngw-ol
 ```
 
-```js
+```javascript
 import NgwOl from '@nextgis/ngw-ol';
 
 const ngwOl = new NgwOl({

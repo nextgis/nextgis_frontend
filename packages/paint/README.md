@@ -13,7 +13,7 @@ $ yarn add @nextgis/paint
 
 ## Usage
 
-```js
+```javascript
 import { isPaint } from '@nextgis/paint';
 ```
 

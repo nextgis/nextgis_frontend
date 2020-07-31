@@ -58,7 +58,7 @@ import { WebMapControls } from './WebMapControls';
  * {@link WebMapMain | map}, {@link WebMapLayers | layers} and {@link WebMapControls | controls}.
  *
  * @example
- * ```js
+ * ```javascript
  * import { WebMap } from '@nextgis/webmap';
  * import MapAdapter from '@nextgis/ol-map-adapter';
  *
