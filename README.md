@@ -64,7 +64,6 @@ Single-file bundles for rapid deployment of web-gis applications with NextGIS se
 - [vuetify-ngw-components](https://github.com/nextgis/nextgis_frontend/tree/master/packages/vuetify-ngw-components) – vuetify components for NGW Frontend
 - [vuex-ngw](https://github.com/nextgis/nextgis_frontend/tree/master/packages/vuex-ngw) – vuex store for NGW resources;
 
-
 ## Example projects
 
 - [russia-history](https://github.com/nextgis/russia-history) – Russia history live web map ([LIVE](https://map.runivers.ru))
@@ -77,7 +76,7 @@ Single-file bundles for rapid deployment of web-gis applications with NextGIS se
 
 ## Base usage
 
-### Using directly in the browser
+### In browser
 
 #### Include assets
 
@@ -92,24 +91,30 @@ Download and include with a script tag. \[Package\] will be registered as a glob
 
 #### CDN
 
+unpkg
+
 ```html
 <script src="https://unpkg.com/@nextgis/[package]"></script>
+<script src="https://unpkg.com/@nextgis/[package]@[version]"></script>
+<script src="https://unpkg.com/@nextgis/[package]@[version]/lib/[file]"></script>
+```
+
+jsdelivr
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@nextgis/[package]"></script>
+<script src="https://cdn.jsdelivr.net/npm/@nextgis/[package]@[version]/lib/[file]"></script>
 ```
 
 We recommend linking to a specific version number that you can update manually:
 
-```html
-<script src="https://unpkg.com/@nextgis/[package]@[version]"></script>
-```
-
-### NPM/YARN
-
-NPM/YARN is the recommended installation method when building large scale applications with [PACKAGE]. It pairs nicely with module bundlers such as [Webpack](https://webpack.js.org/).
+### In Node.js
 
 ```bash
-# latest stable
 npm i -S @nextgis/[package]
-# or with yarn
+```
+
+```bash
 yarn add @nextgis/[package]
 ```
 
@@ -123,7 +128,9 @@ import { Component, utility } from '@nextgis/[package]';
 const package = new Package(options);
 ```
 
-## Create map
+## Usage
+
+### Create map
 
 ```javascript
 import { NgwMap } from '@nextgis/ngw-map';
@@ -148,7 +155,7 @@ ngwMap.onLoad().then(() => {
 });
 ```
 
-## Add layers from NGW
+### Add layers from NGW
 
 ```javascript
 // from resource id
@@ -163,7 +170,7 @@ ngwMap.addNgwLayer({ resource: "vector_keyname", adapter: "TILE" });
 
 The `resource` can be id or keyname.
 
-### Examples
+#### Examples
 
 [Add different NGW resource](http://code.nextgis.com/demo-examples-ngw_layers)
 
