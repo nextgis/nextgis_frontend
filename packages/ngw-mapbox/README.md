@@ -4,7 +4,7 @@ One file bundle for building [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/
 
 ## Installation
 
-### Using directly in the browser
+### In browser
 
 #### Include assets
 
@@ -35,7 +35,7 @@ We recommend linking to a specific version number that you can update manually:
 <script src="https://unpkg.com/@nextgis/ngw-mapbox@0.19.0"></script>
 ```
 
-### NPM
+### In Node.js
 
 NPM is the recommended installation method when building large scale applications with NgwMapbox. It pairs nicely with module bundlers such as [Webpack](https://webpack.js.org/)
 
