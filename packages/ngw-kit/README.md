@@ -8,15 +8,18 @@ This library contains a WebMap plugin and utilities that allow you to interact w
 
 Make sure CORS is registered in the [NextGIS Web settings](https://docs.nextgis.com/docs_ngcom/source/CORS.html) to be able to send requests.
 
+## Install
+
 ```bash
-# latest stable
 $ npm install --save-dev @nextgis/ngw-kit
 # or
 $ yarn add @nextgis/ngw-kit
 ```
 
 ## Usage example
+
 As WebMap starter kit
+
 ```javascript
 import { NgwKit } from '@nextgis/ngw-kit';
 import { createWebMap } from '@nextgis/webmap';
@@ -34,7 +37,9 @@ createWebMap({
   ],
 });
 ```
+
 Get NGW vector layer items
+
 ```javascript
 import { getNgwLayerItem, getNgwLayerItems } from '@nextgis/ngw-kit';
 import NgwConnector from '@nextgis/ngw-connector';
