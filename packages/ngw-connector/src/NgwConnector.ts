@@ -501,6 +501,9 @@ export class NgwConnector {
     });
   }
 
+  /**
+   * @internal
+   */
   protected _setLoadingQueue(
     name: string,
     resolve: (...args: any[]) => any,
@@ -517,6 +520,9 @@ export class NgwConnector {
     });
   }
 
+  /**
+   * @internal
+   */
   protected _rejectLoadingQueue(): void {
     for (const q in this._loadingQueue) {
       const queue = this._loadingQueue[q];
@@ -527,6 +533,9 @@ export class NgwConnector {
     }
   }
 
+  /**
+   * @internal
+   */
   protected _executeLoadingQueue(
     name: string,
     data: unknown,
@@ -548,6 +557,9 @@ export class NgwConnector {
     }
   }
 
+  /**
+   * @internal
+   */
   protected _loadData(
     url: string,
     options: RequestOptions
