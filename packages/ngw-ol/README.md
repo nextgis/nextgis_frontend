@@ -4,7 +4,7 @@ One file bundle for building [OpenLayers](https://openlayers.org/) map interacti
 
 ## Installation
 
-### In browser
+### In Browser
 
 #### Include assets
 

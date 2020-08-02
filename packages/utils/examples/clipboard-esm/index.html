@@ -14,7 +14,7 @@
     <button id='copy-btn'>Copy</button>
   </div>
   <script type="module">
-    import { Clipboard } from '../../lib/utils.esm-browser.prod.js';
+    import { Clipboard } from 'https://unpkg.com/@nextgis/utils/lib/utils.esm-browser.prod.js';
 
     document.getElementById('copy-btn').addEventListener('click', () => {
       const text = document.getElementById('copy-input').value;
