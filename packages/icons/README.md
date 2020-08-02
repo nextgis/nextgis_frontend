@@ -4,7 +4,7 @@ Svg icons pack
 
 ## Installation
 
-### In browser
+### In Browser
 
 #### Include assets
 
