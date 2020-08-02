@@ -4,7 +4,7 @@ One file bundle for building [Laeflet](https://leafletjs.com/) map interacting w
 
 ## Installation
 
-### In browser
+### In Browser
 
 #### Include assets
 

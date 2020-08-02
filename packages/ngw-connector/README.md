@@ -8,11 +8,11 @@ Make sure CORS is registered in the [NextGIS Web settings](https://docs.nextgis.
 
 ## Installation
 
-### In browser
+### In Browser
 
 #### Include assets
 
-Simply download and include with a script tag. NgwConnector will be registered as a global variable.
+Simply download and include with a script tag, `NgwConnector` will be registered as a global variable.
 
 ```html
 <script src="../lib/ngw-connector.global.js"></script>
