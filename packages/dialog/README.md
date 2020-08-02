@@ -4,11 +4,11 @@ Modal window management
 
 ## Installation
 
-### In browser
+### In Browser
 
 #### Include assets
 
-Simply download and include with a script tag. Dialog will be registered as a global variable.
+Simply download and include with a script tag, `Dialog` will be registered as a global variable.
 
 ```html
 <script src="../lib/dialog.js"></script>

@@ -76,7 +76,7 @@ Single-file bundles for rapid deployment of web-gis applications with NextGIS se
 
 ## Base usage
 
-### In browser
+### In Browser
 
 #### Include assets
 
