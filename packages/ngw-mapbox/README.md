@@ -4,7 +4,7 @@ One file bundle for building [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/
 
 ## Installation
 
-### In browser
+### In Browser
 
 #### Include assets
 

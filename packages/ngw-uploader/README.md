@@ -4,7 +4,7 @@ Library providing tools for uploading data to the NGW cloud
 
 ## Installation
 
-### In browser
+### In Browser
 
 #### Include assets
 
