@@ -53,7 +53,9 @@ export interface OnLayerClickOptions {
  * Parameters that can be used to create any map layer adapter.
  * @public
  */
-export interface AdapterOptions {
+export interface AdapterOptions<
+  N extends Record<string, any> = Record<string, any>
+> {
   /**
    * Unique Layer ID.
    * If not specified, will be added automatically.
@@ -136,7 +138,7 @@ export interface AdapterOptions {
    */
   crossOrigin?: 'anonymous';
 
-  nativeOptions?: Record<string, any>;
+  nativeOptions?: N;
 }
 
 /**
@@ -166,13 +168,18 @@ export interface PopupOptions {
   ) => HTMLElement | string | undefined;
 }
 
-type _VectorAdapterOptionsToExtend = AdapterOptions & FilterOptions;
+type _VectorAdapterOptionsToExtend<
+  N extends Record<string, any> = Record<string, any>
+> = AdapterOptions<N> & FilterOptions;
 
 /**
  * @public
  */
-export interface VectorAdapterOptions<F extends Feature = Feature, L = any>
-  extends _VectorAdapterOptionsToExtend {
+export interface VectorAdapterOptions<
+  F extends Feature = Feature,
+  L = any,
+  N = Record<string, any>
+> extends _VectorAdapterOptionsToExtend<N> {
   /** Type for geometries painting, for each layer may be only one of: `point`, `polygon` or `line`. */
   type?: VectorAdapterLayerType;
   /**
@@ -275,21 +282,25 @@ export interface VectorAdapterOptions<F extends Feature = Feature, L = any>
   /**
    * TODO: move to nativeOptions
    * @internal
+   * @deprecated
    */
   nativePaint?: boolean | Record<string, any>;
   /**
    * TODO: move to nativeOptions
    * @internal
+   * @deprecated
    */
   nativeFilter?: unknown;
   /**
    * TODO: move to nativeOptions
    * @internal
+   * @deprecated
    */
   layout?: any;
   /**
    * TODO: move to nativeOptions
    * @internal
+   * @deprecated
    */
   selectedLayout?: any;
 
@@ -493,7 +504,6 @@ export interface VectorLayerAdapter<
 
   /**
    * Experimental option, only for MVT. Points to a data source instead of loading data into a layer.
-   * @alpha
    */
   source?: unknown;
   /**

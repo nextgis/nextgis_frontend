@@ -10,5 +10,5 @@ import MapAdapter from '@nextgis/mapboxgl-map-adapter';
 export class VueNgwMapbox extends Mixins(VueNgwMap) implements VueNgwMap<Map> {
   @Prop({ type: Object, default: () => new MapAdapter() })
   mapAdapter!: MapAdapter;
-  ngwMap: NgwMap<Map> | null = null;
+  ngwMap!: NgwMap<Map>;
 }

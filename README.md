@@ -1,5 +1,7 @@
 # NextGIS Frontend
 
+![Github lerna version](https://img.shields.io/github/lerna-json/v/nextgis/nextgis_frontend)
+
 [![http://code.nextgis.com](https://raw.githubusercontent.com/nextgis/nextgis_frontend/master/demo/src/images/logo_96x96.png)](http://code.nextgis.com)
 
 Suite of frontend JavaScript-libraries that allow you to speed up building your own web-gis apps using NextGIS software and services as a backend.
@@ -10,6 +12,9 @@ Read more in the [article](http://nextgis.com/blog/nextgis-frontend/).
 
 Some universal examples:
 
+- [Expression paint](http://code.nextgis.com/demo-examples-expression_paint_match)
+- [Layer properties filters](http://code.nextgis.com/demo-examples-ngw_layer_properties_filters)
+- [BBOX strategy for vector layer](http://code.nextgis.com/demo-examples-ngw_bbox_strategy)
 - [Custom layers control](http://code.nextgis.com/demo-examples-custom_layer_controls)
 - [Events](http://code.nextgis.com/demo-examples-events)
 - [Data management in the vector layer](http://code.nextgis.com/demo-examples-geojson_data)
@@ -21,7 +26,7 @@ Some universal examples:
 
 ## Packages `@nextgis/`
 
-### Ready to use maps
+### Ready-to-use maps
 
 Single-file bundles for rapid deployment of web-gis applications with NextGIS services
 
@@ -29,13 +34,14 @@ Single-file bundles for rapid deployment of web-gis applications with NextGIS se
 - [ngw-ol](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-ol) – for [OpenLayers](https://openlayers.org/);
 - [ngw-mapbox](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-mapbox) – for [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/);
 
-### Map constructor
-- [ngw-map](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-map) – abstract map to simplify work with NextGIS services;
+### Map development tools
+
+Bricks for build custom Web GIS frontend
+
 - [webmap](https://github.com/nextgis/nextgis_frontend/tree/master/packages/webmap) – universal map constructor;
 - [leaflet-map-adapter](https://github.com/nextgis/nextgis_frontend/tree/master/packages/leaflet-map-adapter) – webmap adapter to use [Leaflet](https://leafletjs.com/) GIS framework;
 - [mapboxgl-map-adapter](https://github.com/nextgis/nextgis_frontend/tree/master/packages/mapboxgl-map-adapter) – webmap adapter to use [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/) framework;
 - [ol-map-adapter](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ol-map-adapter) – webmap adapter to use [OpenLayers](https://openlayers.org/) GIS framework;
-- [ngw-kit](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-kit) – build webmap with [NextGIS Web](http://nextgis.ru/nextgis-web/) instance;
 - [qms-kit](https://github.com/nextgis/nextgis_frontend/tree/master/packages/qms-kit) – build webmap with [NextGIS QMS](https://qms.nextgis.com/) baselayer;
 - [icons](https://github.com/nextgis/nextgis_frontend/tree/master/packages/icons) – simple svg icons pack to display on the map;
 - [dialog](https://github.com/nextgis/nextgis_frontend/tree/master/packages/dialog) – utility to work with modal windows;
@@ -44,19 +50,27 @@ Single-file bundles for rapid deployment of web-gis applications with NextGIS se
 - [properties-filter](https://github.com/nextgis/nextgis_frontend/tree/master/packages/properties-filter) – filtering objects by its properties using JSON-serializable expressions;
 - [url-runtime-params](https://github.com/nextgis/nextgis_frontend/tree/master/packages/url-runtime-params) – writing and reading URL parameters;
 - [item](https://github.com/nextgis/nextgis_frontend/tree/master/packages/item) – hierarchical layers control;
+- [ngw-kit](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-kit) – build webmap with [NextGIS Web](http://nextgis.ru/nextgis-web/) instance;
+- [ngw-map](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-map) – abstract map to simplify work with NextGIS services;
 
-### NextGisWeb Tools
+### NextGIS Web tools
+
+Map-free libraries to interaction with NextGIS Web
+
 - [ngw-connector](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-connector) – module to interact with [NextGIS Web](http://docs.nextgis.ru/docs_ngweb_dev/doc/developer/toc.html) REST API;
 - [ngw-orm](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-orm) – NextGIS Web Object-Relational Mapping;
 - [ngw-uploader](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-uploader) – library providing tools for uploading data to [nextgis.com](http://nextgis.com/nextgis-com/) cloud;
 
-
 ### Utilities
+
+Map-free tools for common purpose
+
 - [utils](https://github.com/nextgis/nextgis_frontend/tree/master/packages/utils) – common development tools;
 - [dom](https://github.com/nextgis/nextgis_frontend/tree/master/packages/dom) – collection of libraries for working with the DOM;
 - [cancelable-promise](https://github.com/nextgis/nextgis_frontend/tree/master/packages/cancelable-promise) – a promise you can stop;
 
 ### Vue
+
 - [vue-ngw-leaflet](https://github.com/nextgis/nextgis_frontend/tree/master/packages/vue-ngw-leaflet) – integrate NGW maps into vue.js with leaflet adapter;
 - [vue-ngw-ol](https://github.com/nextgis/nextgis_frontend/tree/master/packages/vue-ngw-ol) – integrate NGW maps into vue.js with openlayers adapter;
 - [vue-ngw-mapbox](https://github.com/nextgis/nextgis_frontend/tree/master/packages/vue-ngw-mapbox) – integrate NGW maps into vue.js with mapbox-gl js adapter;
@@ -66,6 +80,8 @@ Single-file bundles for rapid deployment of web-gis applications with NextGIS se
 
 ## Example projects
 
+See how nextgis frontend libraries are used in real projects
+
 - [russia-history](https://github.com/nextgis/russia-history) – Russia history live web map ([LIVE](https://map.runivers.ru))
 - [nextgisweb_viewer](https://github.com/nextgis/nextgisweb_viewer) – Service for viewing map resources from NextGIS Web ([LIVE](http://viewer.nextgis.com))
 - [ngw_frontend_boilerplate](https://github.com/nextgis/ngw_frontend_boilerplate)
@@ -74,7 +90,7 @@ Single-file bundles for rapid deployment of web-gis applications with NextGIS se
 - [clear_horizon_frontend](https://github.com/nextgis/clear_horizon_frontend) – Clear horizon frontend.
 - [petro2020](https://github.com/rendrom/petro2020) ([LIVE](http://petro2020.igc.irk.ru/))
 
-## Base usage
+## Install
 
 ### In Browser
 
@@ -118,7 +134,7 @@ npm i -S @nextgis/[package]
 yarn add @nextgis/[package]
 ```
 
-then import the \[package\] in the project modules
+then import the [package] in the project modules
 
 ```javascript
 import Package from '@nextgis/[package]';
