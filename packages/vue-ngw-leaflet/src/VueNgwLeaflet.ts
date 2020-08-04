@@ -21,5 +21,5 @@ Icon.Default.mergeOptions({
 export class VueNgwLeaflet extends Mixins(VueNgwMap) implements VueNgwMap<Map> {
   @Prop({ type: Object, default: () => new MapAdapter() })
   mapAdapter!: MapAdapter;
-  ngwMap: NgwMap<Map> | null = null;
+  ngwMap!: NgwMap<Map>;
 }
