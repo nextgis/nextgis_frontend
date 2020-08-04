@@ -17,20 +17,21 @@ export class VueNgwMap<M = any> extends Vue {
   @Prop({ type: Object }) mapOptions!: NgwMapOptions;
 
   name = 'vue-ngw-map';
-  ngwMap: NgwMap<M> | null = null;
+  ngwMap!: NgwMap<M>;
   ready = false;
 
-  async mounted(): Promise<void> {
+  mounted(): void {
     this.ngwMap = new NgwMap(this.mapAdapter, {
       ...this.$props,
       ...this.mapOptions,
       target: this.$el as HTMLElement,
     });
-    await this.ngwMap.onLoad();
-
-    await this.$nextTick();
-    this.ready = true;
-    this.$emit('load', this.ngwMap);
+    this.ngwMap.onLoad().then(() => {
+      this.$nextTick().then(() => {
+        this.ready = true;
+        this.$emit('load', this.ngwMap);
+      });
+    });
   }
 
   beforeDestroy(): void {
