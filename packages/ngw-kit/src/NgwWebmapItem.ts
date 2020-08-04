@@ -67,7 +67,8 @@ export class NgwWebmapItem extends Item<ItemOptions> {
     item: TreeGroup | TreeLayer,
     options?: ItemOptions,
     connector?: NgwConnector,
-    parent?: NgwWebmapItem
+    parent?: NgwWebmapItem,
+    noInit?: boolean
   ) {
     super({ ...NgwWebmapItem.options, ...options });
     if (connector) {
@@ -85,9 +86,29 @@ export class NgwWebmapItem extends Item<ItemOptions> {
         this._rootDescendantsCount = root._rootDescendantsCount;
       }
     }
-
     this.initProperties();
-    this._init(item);
+    if (!noInit) {
+      this._init(item);
+    }
+  }
+
+  static async create(
+    webMap: WebMap,
+    item: TreeGroup | TreeLayer,
+    options?: ItemOptions,
+    connector?: NgwConnector,
+    parent?: NgwWebmapItem
+  ): Promise<NgwWebmapItem> {
+    const ngwWebmapItem = new NgwWebmapItem(
+      webMap,
+      item,
+      options,
+      connector,
+      parent,
+      true
+    );
+    await ngwWebmapItem._init(item);
+    return ngwWebmapItem;
   }
 
   async initItem(item: TreeGroup | TreeLayer): Promise<void> {
@@ -95,16 +116,17 @@ export class NgwWebmapItem extends Item<ItemOptions> {
     const i = item;
     if (item.item_type === 'group' || item.item_type === 'root') {
       if (item.children && item.children.length) {
-        this.getChildren(item).forEach((x) => {
-          const children = new NgwWebmapItem(
+        const children = this.getChildren(item);
+        for (const c of children) {
+          const children = await NgwWebmapItem.create(
             this.webMap,
-            x,
+            c,
             this.options,
             this.connector,
             this
           );
           this.tree.addChild(children);
-        });
+        }
       }
     } else {
       let adapter: LayerAdapterDefinition | undefined;
@@ -171,7 +193,7 @@ export class NgwWebmapItem extends Item<ItemOptions> {
 
   fit(): void {
     if (this.item.item_type === 'layer') {
-      console.log(this.item);
+      // console.log(this.item);
     }
   }
 

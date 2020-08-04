@@ -13,7 +13,7 @@ export class BaseAdapter<O extends AdapterOptions = AdapterOptions, L = any>
       if (!exist) {
         exist = map.createPane(pane);
       }
-      exist.style.zIndex = String(options.order * 100);
+      exist.style.zIndex = String(Math.round(options.order * 100));
       this.pane = pane;
     }
   }

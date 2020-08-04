@@ -302,8 +302,8 @@ export function prepareFieldsToNgw<T extends any>(
           if (typeof property === 'object') {
             value = property;
           } else {
-            if (property instanceof Date) {
-              dt = property;
+            if ((property as any) instanceof Date) {
+              dt = property as any;
             } else {
               const parse = Date.parse(String(property));
               if (parse) {
