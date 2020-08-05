@@ -43,4 +43,7 @@ export interface FeatureItem<
   };
 }
 
-export type FeatureItemToNgw<F = FeatureLayerFields> = FeatureItem<F, string>;
+export type FeatureItemToNgw<
+  F = FeatureLayerFields,
+  G extends GeometryObject | string = GeometryObject
+> = FeatureItem<F, G>;

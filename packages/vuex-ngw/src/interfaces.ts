@@ -10,7 +10,6 @@ export interface PatchOptions<
   G extends Geometry | null = Geometry,
   P extends GeoJsonProperties = GeoJsonProperties
 > {
-  [options: string]: any;
   item: Feature<G, P>;
   fid?: number;
 }
