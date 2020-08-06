@@ -175,6 +175,7 @@ export interface MapAdapter<M = any, L = any, C = any> {
   getContainer(): HTMLElement | undefined;
 
   setCursor?(cursor: string): void;
+  getCursor?(): string | undefined;
 
   createControl?(control: MapControl, options?: CreateControlOptions): C;
   createButtonControl?(options: ButtonControlOptions): C;

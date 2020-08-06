@@ -4,6 +4,7 @@ import StrictEventEmitter from 'strict-event-emitter-types';
 
 import { deepmerge, defined, Type } from '@nextgis/utils';
 import { GetPaintFunction } from '@nextgis/paint';
+import CancelablePromise from '@nextgis/cancelable-promise';
 
 import { LngLatBoundsArray, Cursor, LngLatArray } from './interfaces/BaseTypes';
 import {
@@ -12,6 +13,7 @@ import {
   FitOptions,
   LocateOptions,
   LocationEvents,
+  MapClickEvent,
 } from './interfaces/MapAdapter';
 import { StarterKit } from './interfaces/StarterKit';
 import { LayerAdapter } from './interfaces/LayerAdapter';
@@ -38,7 +40,11 @@ import { updateGeoJsonAdapterOptions } from './utils/updateGeoJsonAdapterOptions
 type EmitStatusEventData = any;
 
 let ID = 0;
-const WEB_MAP_CONTAINER: Record<number, any> = {};
+
+/**
+ * @internal
+ */
+export const WEB_MAP_CONTAINER: Record<number, any> = {};
 
 const OPTIONS: MapOptions = {
   minZoom: 0,
@@ -56,6 +62,10 @@ const OPTIONS: MapOptions = {
     weight: 1,
   },
 };
+
+interface AddEventsListenersOptions {
+  include: (keyof MainMapEvents)[];
+}
 
 /**
  * @public
@@ -101,8 +111,11 @@ export class WebMapMain<
   private _mapState: StateItem[] = [];
   private _extent?: LngLatBoundsArray;
   private readonly _eventsStatus: { [key in keyof E]?: boolean } = {};
+  private _coordFromMapClickPromise?: CancelablePromise<LngLatArray>;
 
-  private readonly _mapEvents: Record<string, (...args: any[]) => void> = {};
+  private readonly _mapEvents: {
+    [key in keyof MainMapEvents]?: (...args: any[]) => void;
+  } = {};
 
   constructor(appOptions: AppOptions) {
     WEB_MAP_CONTAINER[this.id] = this;
@@ -118,10 +131,6 @@ export class WebMapMain<
     if (appOptions.create) {
       this.create(this.options);
     }
-  }
-
-  static get<T extends WebMapMain = WebMapMain>(id: number): T {
-    return WEB_MAP_CONTAINER[id];
   }
 
   getId(): number {
@@ -209,6 +218,16 @@ export class WebMapMain<
   setCursor(cursor: Cursor): void {
     if (this.mapAdapter.setCursor) {
       this.mapAdapter.setCursor(cursor);
+    }
+  }
+
+  getCursor(): Cursor | undefined {
+    if (this.mapAdapter.getCursor) {
+      return this.mapAdapter.getCursor() as Cursor;
+    }
+    const container = this.getContainer();
+    if (container) {
+      return container.style.cursor as Cursor;
     }
   }
 
@@ -433,6 +452,39 @@ export class WebMapMain<
     return { stop };
   }
 
+  stopGetCoordFromMapClick(): void {
+    if (this._coordFromMapClickPromise) {
+      this._coordFromMapClickPromise.cancel();
+    }
+  }
+
+  getCoordFromMapClick(): CancelablePromise<LngLatArray> {
+    if (!this._coordFromMapClickPromise) {
+      this._coordFromMapClickPromise = new CancelablePromise(
+        (resolve, reject, onCancel) => {
+          const cursor: Cursor = this.getCursor() || 'grab';
+          this._removeEventListeners({ include: ['click'] });
+          this.setCursor('crosshair');
+          const onCancel_ = () => {
+            this.setCursor(cursor);
+            this._addEventsListeners({ include: ['click'] });
+            this.mapAdapter.emitter.off('click', onMapClick);
+            this._coordFromMapClickPromise = undefined;
+          };
+          const onMapClick = (e: MapClickEvent) => {
+            onCancel_();
+            resolve([e.latLng.lng, e.latLng.lat]);
+          };
+          this.mapAdapter.emitter.once('click', onMapClick);
+          onCancel(onCancel_);
+        }
+      );
+    } else {
+      return this.getCoordFromMapClick();
+    }
+    return this._coordFromMapClickPromise;
+  }
+
   protected _emitStatusEvent(
     eventName: keyof E,
     data?: EmitStatusEventData
@@ -491,8 +543,8 @@ export class WebMapMain<
     }
   }
 
-  private _addEventsListeners(): void {
-    const events: (keyof MainMapEvents)[] = [
+  private _addEventsListeners(opt?: AddEventsListenersOptions): void {
+    let events: (keyof MainMapEvents)[] = [
       'preclick',
       'click',
       'zoomstart',
@@ -502,6 +554,10 @@ export class WebMapMain<
       'move',
       'moveend',
     ];
+
+    if (opt && opt.include) {
+      events = events.filter((x) => opt.include.includes(x));
+    }
     events.forEach((x) => {
       this._mapEvents[x] = (data) => {
         if (this.runtimeParams.length) {
@@ -517,13 +573,25 @@ export class WebMapMain<
           this.emitter.emit(x, data);
         }
       };
-      this.mapAdapter.emitter.on(x, this._mapEvents[x]);
+      const mapEvent = this._mapEvents[x];
+      if (mapEvent) {
+        this.mapAdapter.emitter.on(x, mapEvent);
+      }
     });
   }
 
-  private _removeEventListeners(): void {
-    Object.entries(this._mapEvents).forEach(([x, event]) => {
-      this.mapAdapter.emitter.removeListener(x as keyof MainMapEvents, event);
+  private _removeEventListeners(opt?: AddEventsListenersOptions): void {
+    let events = Object.entries(this._mapEvents) as [
+      keyof MainMapEvents,
+      ((...args: any[]) => void) | undefined
+    ][];
+    if (opt && opt.include) {
+      events = events.filter((x) => opt.include.includes(x[0]));
+    }
+    events.forEach(([x, event]) => {
+      if (event) {
+        this.mapAdapter.emitter.removeListener(x as keyof MainMapEvents, event);
+      }
     });
   }
 }
