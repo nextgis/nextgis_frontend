@@ -49,7 +49,7 @@
 import { WebMapEvents } from './interfaces/Events';
 
 import { WebMapLayers } from './WebMapLayers';
-import { WebMapMain } from './WebMapMain';
+import { WebMapMain, WEB_MAP_CONTAINER } from './WebMapMain';
 import { WebMapControls } from './WebMapControls';
 
 /**
@@ -82,6 +82,9 @@ export class WebMap<
   E extends WebMapEvents = WebMapEvents
 > extends WebMapControls<M, L, C, E>
   implements WebMapControls, WebMapLayers, WebMapMain {
+  static get<T extends WebMap = WebMap>(id: number): T {
+    return WEB_MAP_CONTAINER[id];
+  }
   /**
    * @internal
    */
