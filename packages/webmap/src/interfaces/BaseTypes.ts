@@ -100,6 +100,7 @@ export type Cursor =
   | 'crosshair'
   | 'default'
   | 'e-resize'
+  | 'grab'
   | 'help'
   | 'move'
   | 'n-resize'
