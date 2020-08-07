@@ -3,7 +3,7 @@
  *
  * @exports defined
  *
- * @param value - The object.
+ * @param val - The object.
  * @returns Returns true if the object is defined, returns false otherwise.
  *
  * @example
@@ -15,6 +15,6 @@
  * }
  * ```
  */
-export function defined(value: unknown): boolean {
-  return value !== undefined && value !== null;
+export function defined(val: unknown): val is boolean {
+  return val !== undefined && val !== null;
 }
