@@ -174,37 +174,33 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
   }
 
   private async getWebMapConfig(id: number) {
-    try {
-      const data = await this.options.connector.getResource(id);
-      if (data) {
-        this.response = data;
-        const webmap = data[
-          this.webmapClassName as keyof ResourceItem
-        ] as WebmapResource;
-        if (data.basemap_webmap && data.basemap_webmap.basemaps.length) {
-          this._setBasemaps(data.basemap_webmap);
-        } else if (this.options.defaultBasemap) {
-          const webMap = this.options.webMap;
-          webMap.addBaseLayer('OSM', {
-            id: 'webmap-default-baselayer',
-            name: 'OpenStreetMap',
-          });
-        }
-        if (webmap) {
-          this._extent = [
-            webmap.extent_left,
-            webmap.extent_bottom,
-            webmap.extent_right,
-            webmap.extent_top,
-          ];
-          this._updateItemsParams(webmap.root_item, this.options.webMap, data);
-          return webmap;
-        } else {
-          // TODO: resource is no webmap
-        }
+    const data = await this.options.connector.getResource(id);
+    if (data) {
+      this.response = data;
+      const webmap = data[
+        this.webmapClassName as keyof ResourceItem
+      ] as WebmapResource;
+      if (data.basemap_webmap && data.basemap_webmap.basemaps.length) {
+        this._setBasemaps(data.basemap_webmap);
+      } else if (this.options.defaultBasemap) {
+        const webMap = this.options.webMap;
+        webMap.addBaseLayer('OSM', {
+          id: 'webmap-default-baselayer',
+          name: 'OpenStreetMap',
+        });
       }
-    } catch (er) {
-      throw er;
+      if (webmap) {
+        this._extent = [
+          webmap.extent_left,
+          webmap.extent_bottom,
+          webmap.extent_right,
+          webmap.extent_top,
+        ];
+        this._updateItemsParams(webmap.root_item, this.options.webMap, data);
+        return webmap;
+      } else {
+        // TODO: resource is no webmap
+      }
     }
   }
 
