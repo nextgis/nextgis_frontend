@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function getNgwLayerFeature<G extends Geometry | null = Geometry, P extends Record<string, any> = Record<string, any>>(options: {
+export declare function getNgwLayerFeature<G extends Geometry | null = Geometry, P extends JsonMap = JsonMap>(options: {
     resourceId: number;
     featureId: number;
     connector: NgwConnector;

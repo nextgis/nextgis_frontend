@@ -7,9 +7,9 @@
 <b>Signature:</b>
 
 ```typescript
-export declare interface QmsAdapter extends MainLayerAdapter 
+export interface QmsAdapter extends MainLayerAdapter 
 ```
-<b>Extends:</b> MainLayerAdapter
+<b>Extends:</b> [MainLayerAdapter](./webmap.mainlayeradapter.md)
 
 ## Properties
 

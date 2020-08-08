@@ -9,7 +9,7 @@ Parameters that can be used to create any map layer adapter.
 <b>Signature:</b>
 
 ```typescript
-export interface AdapterOptions 
+export interface AdapterOptions<N extends Record<string, any> = Record<string, any>> 
 ```
 
 ## Properties
@@ -25,7 +25,7 @@ export interface AdapterOptions
 |  [maxZoom](./webmap.adapteroptions.maxzoom.md) | number | Maximum zoom level of the map. |
 |  [minZoom](./webmap.adapteroptions.minzoom.md) | number | Minimum zoom level of the map. |
 |  [name](./webmap.adapteroptions.name.md) | string | Non-unique name of the layer. Can be used for user interfaces. |
-|  [nativeOptions](./webmap.adapteroptions.nativeoptions.md) | Record&lt;string, any&gt; |  |
+|  [nativeOptions](./webmap.adapteroptions.nativeoptions.md) | N |  |
 |  [opacity](./webmap.adapteroptions.opacity.md) | number | Layer transparency. From 0-transparent to 1-visible |
 |  [order](./webmap.adapteroptions.order.md) | number | Indicates the map layers display sequence. A layer with a larger order value overlaps smaller ones. Zero value used to indicate baselayer. If the value is not specified explicitly, it will be assigned automatically with an increase of one for each new layer. |
 |  [visibility](./webmap.adapteroptions.visibility.md) | boolean | Show layer on the map immediately after adding. Such layers are always under others. Only one base layer can be displayed on the map at a time. |

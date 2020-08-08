@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-ngwMap: NgwMap<M> | null;
+ngwMap: NgwMap<M>;
 ```

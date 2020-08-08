@@ -11,5 +11,5 @@ getLayerAdapters(): Promise<LayerAdapterCreators[]>;
 ```
 <b>Returns:</b>
 
-Promise&lt;LayerAdapterCreators\[\]&gt;
+Promise&lt;[LayerAdapterCreators](./webmap.layeradaptercreators.md)<!-- -->\[\]&gt;
 

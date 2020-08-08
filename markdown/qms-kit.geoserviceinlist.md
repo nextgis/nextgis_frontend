@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare interface GeoserviceInList 
+export interface GeoserviceInList 
 ```
 
 ## Properties

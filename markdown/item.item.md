@@ -20,7 +20,6 @@ export declare class Item<O extends ItemOptions = ItemOptions>
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [emitter](./item.item.emitter.md) |  | any |  |
 |  [id](./item.item.id.md) |  | number |  |
 |  [options](./item.item.options.md) |  | O |  |
 |  [properties](./item.item.properties.md) |  | [ItemProperties](./item.itemproperties.md) |  |

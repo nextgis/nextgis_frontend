@@ -9,6 +9,7 @@
 |  Package | Description |
 |  --- | --- |
 |  [@nextgis/cancelable-promise](./cancelable-promise.md) |  |
+|  [@nextgis/cesium-map-adapter](./cesium-map-adapter.md) |  |
 |  [@nextgis/control-container](./control-container.md) |  |
 |  [@nextgis/dialog](./dialog.md) |  |
 |  [@nextgis/dom](./dom.md) |  |
@@ -16,9 +17,9 @@
 |  [@nextgis/item](./item.md) |  |
 |  [@nextgis/leaflet-map-adapter](./leaflet-map-adapter.md) |  |
 |  [@nextgis/mapboxgl-map-adapter](./mapboxgl-map-adapter.md) |  |
-|  [@nextgis/ngw-connector](./ngw-connector.md) |  |
+|  [@nextgis/ngw-connector](./ngw-connector.md) | A lightweight HTTP client optimized for use with [NextGIS Web](http://docs.nextgis.ru/docs_ngweb_dev/doc/developer/toc.html) API |
 |  [@nextgis/ngw-kit](./ngw-kit.md) | WebMap plugin and utilities that allow you to interact with NextGIS Web. |
-|  [@nextgis/ngw-leaflet](./ngw-leaflet.md) |  |
+|  [@nextgis/ngw-leaflet](./ngw-leaflet.md) | Single-file bundle for rapid deployment of [Leaflet](https://leafletjs.com/)<!-- -->-based web-gis applications with NextGIS services |
 |  [@nextgis/ngw-map](./ngw-map.md) |  |
 |  [@nextgis/ngw-mapbox](./ngw-mapbox.md) |  |
 |  [@nextgis/ngw-ol](./ngw-ol.md) |  |

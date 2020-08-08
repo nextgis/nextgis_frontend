@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-emitter: any;
+emitter: EventEmitter;
 ```
