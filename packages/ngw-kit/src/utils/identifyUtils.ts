@@ -2,6 +2,7 @@ import { Geometry, Feature } from 'geojson';
 import { LayerFeature, FeatureLayersIdentify } from '@nextgis/ngw-connector';
 import CancelablePromise from '@nextgis/cancelable-promise';
 import { MapClickEvent } from '@nextgis/webmap';
+import { JsonMap } from '@nextgis/utils';
 import {
   GetIdentifyGeoJsonOptions,
   NgwIdentify,
@@ -56,7 +57,7 @@ export function getIdentifyItems(
 // TODO: always return CancelablePromise
 export function getIdentifyGeoJson<
   G extends Geometry | null = Geometry,
-  P extends Record<string, any> = Record<string, any>
+  P extends JsonMap = JsonMap
 >(
   options: GetIdentifyGeoJsonOptions
 ): CancelablePromise<Feature<G, P>> | Feature<G, P> | undefined {

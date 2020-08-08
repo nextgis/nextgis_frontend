@@ -1,3 +1,4 @@
+import { EventEmitter } from 'events';
 import { ItemOptions, Item } from '@nextgis/item';
 import {
   WebMap,
@@ -59,8 +60,9 @@ export class NgwWebmapItem extends Item<ItemOptions> {
   item: TreeGroup | TreeLayer;
   connector?: NgwConnector;
   layer?: LayerAdapter;
+  readonly emitter = new EventEmitter();
 
-  _rootDescendantsCount = 0;
+  protected _rootDescendantsCount = 0;
 
   constructor(
     public webMap: WebMap,

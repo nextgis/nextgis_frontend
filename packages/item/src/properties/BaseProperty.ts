@@ -1,14 +1,6 @@
+import { EventEmitter } from 'events';
 import { Item } from '../Item';
 import { ItemBasePropertyOptions, ItemOptions } from '../interfaces';
-
-let events;
-try {
-  events = require('events');
-} catch (er) {
-  // ignore
-}
-// tslint:disable-next-line:variable-name
-const EventEmitter = events && events.EventEmitter;
 
 // import StrictEventEmitter from 'strict-event-emitter-types/types/src';
 
@@ -24,7 +16,7 @@ export abstract class BaseProperty<
   options: O;
 
   // emitter: StrictEventEmitter<EventEmitter, BasePropertyEvents<V, O>> = new EventEmitter();
-  emitter = EventEmitter && new EventEmitter();
+  emitter = new EventEmitter();
   name: string;
 
   item: Item;
