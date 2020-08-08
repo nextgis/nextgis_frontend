@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.3](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2020-08-08)
+
+
+### Features
+
+* **webmap:** new method getCoordFromMapClick ([439d8c9](https://github.com/nextgis/nextgis_frontend/commit/439d8c90fe11193faafc90c9bd33fec2b335bf78))
+
+
+
+
+
 # [1.0.0-alpha.2](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2020-07-30)
 
 
