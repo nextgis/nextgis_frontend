@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.3](https://github.com/nextgis/nextgisweb_frontend/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2020-08-08)
+
+
+### Bug Fixes
+
+* remove require imports ([be789b8](https://github.com/nextgis/nextgisweb_frontend/commit/be789b89f39741efe146da97eeb19460a7cca527))
+* **leaflet-map-adapter:** fix BaseAdapter pane zIndex set ([f73bb6a](https://github.com/nextgis/nextgisweb_frontend/commit/f73bb6ae9b9e3e99c5a1ca7cc859570ce0ce8911))
+
+
+### Features
+
+* **webmap:** new method getCoordFromMapClick ([439d8c9](https://github.com/nextgis/nextgisweb_frontend/commit/439d8c90fe11193faafc90c9bd33fec2b335bf78))
+
+
+
+
+
 # [1.0.0-alpha.2](https://github.com/nextgis/nextgisweb_frontend/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2020-07-30)
 
 

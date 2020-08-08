@@ -1,7 +1,7 @@
 {
   "name": "@nextgis/ngw-mapbox",
   "_priority": 10,
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.3",
   "description": "",
   "main": "lib/ngw-mapbox.global.prod.js",
   "module": "lib/ngw-mapbox.esm-bundler.js",
@@ -9,8 +9,8 @@
   "jsdelivr": "lib/ngw-mapbox.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/mapboxgl-map-adapter": "^1.0.0-alpha.2",
-    "@nextgis/ngw-map": "^1.0.0-alpha.2",
+    "@nextgis/mapboxgl-map-adapter": "^1.0.0-alpha.3",
+    "@nextgis/ngw-map": "^1.0.0-alpha.3",
     "@types/mapbox-gl": "^1.11.1",
     "canvg": "^3.0.6"
   },
