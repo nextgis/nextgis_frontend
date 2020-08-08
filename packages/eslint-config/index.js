@@ -10,12 +10,12 @@ module.exports = {
     node: true,
     amd: true,
     es6: true,
+    es2017: true,
   },
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    ecmaVersion: 2017,
+    ecmaVersion: 10,
     sourceType: 'module',
-    // project: './tsconfig.json'
   },
   plugins: ['@typescript-eslint', 'prettier'],
   overrides: [
@@ -23,24 +23,16 @@ module.exports = {
       files: ['*.ts', '*.tsx'],
       rules: {
         'no-dupe-class-members': 'off',
+        '@typescript-eslint/ban-ts-comment': 'off',
+        '@typescript-eslint/no-use-before-define': 'off',
+        '@typescript-eslint/no-explicit-any': 'off',
       },
     },
   ],
   rules: {
-    // 'comma-dangle': [
-    //   'error',
-    //   {
-    //     arrays: 'ignore',
-    //     objects: 'ignore',
-    //     imports: 'never',
-    //     exports: 'never',
-    //     functions: 'never',
-    //   }
-    // ],
-    // 'arrow-parens': 'always',
-    'prefer-const': 2,
     indent: 'off',
-    'no-useless-catch': 'off',
+    camelcase: 'off',
+    'prefer-const': 'error',
     'max-len': [
       'error',
       {
@@ -52,43 +44,19 @@ module.exports = {
         ignoreTemplateLiterals: true,
       },
     ],
-    camelcase: 'off',
-    // '@typescript-eslint/explicit-module-boundary-types': 'off',
-    '@typescript-eslint/ban-ts-comment': 'off',
-    '@typescript-eslint/no-use-before-define': 0,
-    '@typescript-eslint/member-ordering': 2,
+    '@typescript-eslint/member-ordering': 'error',
     '@typescript-eslint/no-unused-vars': [
       1,
       {
         args: 'none',
       },
     ],
-    // '@typescript-eslint/camelcase': 'off',
-    // '@typescript-eslint/camelcase': [
-    //   'error',
-    //   {
-    //     properties: 'never',
-    //   },
-    // ],
     '@typescript-eslint/explicit-member-accessibility': [
       'error',
       {
         accessibility: 'off',
       },
     ],
-    // '@typescript-eslint/array-type': ['error', { default: 'array-simple' }],
-    '@typescript-eslint/no-explicit-any': 0,
-    '@typescript-eslint/no-var-requires': 0,
-    '@typescript-eslint/ban-ts-ignore': 0,
-    '@typescript-eslint/no-parameter-properties': 0,
-    '@typescript-eslint/no-object-literal-type-assertion': 0,
-    '@typescript-eslint/explicit-function-return-type': [
-      0,
-      {
-        allowExpressions: true,
-        allowTypedFunctionExpressions: true,
-        allowHigherOrderFunctions: true,
-      },
-    ],
+    '@typescript-eslint/no-var-requires': 'off',
   },
 };

@@ -72,7 +72,9 @@ export class NgwConnector {
             this.route = route;
             resolve(route);
           })
-          .catch(reject);
+          .catch((er) => {
+            reject(er);
+          });
       };
       if (this.route) {
         return resolve(this.route);
@@ -85,7 +87,7 @@ export class NgwConnector {
             );
           }
         }
-        makeQuery();
+        return makeQuery();
       }
     });
   }
@@ -163,61 +165,65 @@ export class NgwConnector {
     options?: RequestOptions
   ): CancelablePromise<P[K]> {
     return new CancelablePromise((resolve, reject) => {
-      this.connect().then((apiItems) => {
-        // const apiItems = this.route;
-        let apiItem = apiItems && apiItems[name];
-        if (apiItem) {
-          apiItem = [...apiItem];
-          let url = apiItem.shift();
-          if (apiItem.length) {
-            const replaceParams: {
-              [num: number]: string;
-            } = {};
-            for (let fry = 0; fry < apiItem.length; fry++) {
-              const arg = apiItem[fry];
-              replaceParams[fry] = '{' + arg + '}';
-              if (params[arg] === undefined) {
-                throw new Error(
-                  '`' + arg + '`' + ' url api argument is not specified'
-                );
+      this.connect()
+        .then((apiItems) => {
+          // const apiItems = this.route;
+          let apiItem = apiItems && apiItems[name];
+          if (apiItem) {
+            apiItem = [...apiItem];
+            let url = apiItem.shift();
+            if (apiItem.length) {
+              const replaceParams: {
+                [num: number]: string;
+              } = {};
+              for (let fry = 0; fry < apiItem.length; fry++) {
+                const arg = apiItem[fry];
+                replaceParams[fry] = '{' + arg + '}';
+                if (params[arg] === undefined) {
+                  throw new Error(
+                    '`' + arg + '`' + ' url api argument is not specified'
+                  );
+                }
+              }
+              if (url) {
+                url = template(url, replaceParams);
+              }
+            }
+            // Transfer part of the parameters from `params` to the URL string
+            if (params) {
+              const paramArray = [];
+              const paramList = params.paramList;
+              if (Array.isArray(paramList)) {
+                delete params.paramList;
+                paramList.forEach((x) => {
+                  paramArray.push(`${x[0]}=${x[1]}`);
+                });
+              }
+              for (const p in params) {
+                if (apiItem.indexOf(p) === -1) {
+                  paramArray.push(`${p}=${params[p]}`);
+                }
+              }
+              if (paramArray.length) {
+                url = url + '?' + paramArray.join('&');
               }
             }
             if (url) {
-              url = template(url, replaceParams);
+              return this.makeQuery(url, params, options)
+                .then((resp) => {
+                  resolve(resp);
+                })
+                .catch(reject);
+            } else {
+              reject(new Error('request url is not set'));
             }
-          }
-          // Transfer part of the parameters from `params` to the URL string
-          if (params) {
-            const paramArray = [];
-            const paramList = params.paramList;
-            if (Array.isArray(paramList)) {
-              delete params.paramList;
-              paramList.forEach((x) => {
-                paramArray.push(`${x[0]}=${x[1]}`);
-              });
-            }
-            for (const p in params) {
-              if (apiItem.indexOf(p) === -1) {
-                paramArray.push(`${p}=${params[p]}`);
-              }
-            }
-            if (paramArray.length) {
-              url = url + '?' + paramArray.join('&');
-            }
-          }
-          if (url) {
-            return this.makeQuery(url, params, options)
-              .then((resp) => {
-                resolve(resp);
-              })
-              .catch(reject);
           } else {
-            reject(new Error('request url is not set'));
+            resolve({} as P[K]);
           }
-        } else {
-          resolve({} as P[K]);
-        }
-      });
+        })
+        .catch((er) => {
+          reject(er);
+        });
     });
   }
 
@@ -325,7 +331,7 @@ export class NgwConnector {
           .catch((er) => {
             this._loadingStatus[url] = false;
             this._executeLoadingQueue(url, er, true);
-            this.emitter.emit('error', er);
+            // this.emitter.emit('error', er);
             throw er;
           });
       } else {

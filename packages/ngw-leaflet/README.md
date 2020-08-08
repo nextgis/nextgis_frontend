@@ -1,6 +1,8 @@
-# Ngw Leaflet
+# NgwLeaflet
 
-One file bundle for building [Laeflet](https://leafletjs.com/) map interacting with NextGIS services
+![size](https://img.shields.io/bundlephobia/minzip/@nextgis/ngw-leaflet) ![version](https://img.shields.io/npm/v/@nextgis/ngw-leaflet)
+
+Styles images and other assets are already in bundle, you don't need to include anything except one JS file!
 
 ## Installation
 
@@ -8,12 +10,14 @@ One file bundle for building [Laeflet](https://leafletjs.com/) map interacting w
 
 #### Include assets
 
-Simply download and include with a script tag. NgwLeaflet will be registered as a global variable.
+Simply download and include with a script tag, `NgwLeaflet` and `NgwMap` will be registered as a global variable.
 
 ```html
-<script src="../lib/ngw-leaflet.js"></script>
+<script src="../lib/ngw-leaflet.global.js"></script>
+
 <div id='map'></div>
 <script>
+  // var ngwMap = new NgwMap({
   var ngwMap = new NgwLeaflet({
     baseUrl: 'https://demo.nextgis.com',
     target: 'map',
@@ -25,38 +29,42 @@ Simply download and include with a script tag. NgwLeaflet will be registered as 
 
 #### CDN
 
+unpkg
+
 ```html
 <script src="https://unpkg.com/@nextgis/ngw-leaflet"></script>
 ```
 
-We recommend linking to a specific version number that you can update manually:
+jsdelivr
 
 ```html
-<script src="https://unpkg.com/@nextgis/ngw-leaflet@0.19.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/@nextgis/ngw-leaflet"></script>
 ```
+
+We recommend linking to a specific version number `/ngw-leaflet@[version]`
 
 ### In Node.js
 
-NPM is the recommended installation method when building large scale applications with NgwLeaflet. It pairs nicely with module bundlers such as [Webpack](https://webpack.js.org/)
-
 ```bash
-# latest stable
 $ npm install --save-dev @nextgis/ngw-leaflet
 # or
 $ yarn add @nextgis/ngw-leaflet
 ```
 
-```javascript
-import NgwLeaflet from '@nextgis/ngw-leaflet';
+## Usage
 
-const ngwLeaflet = new NgwLeaflet({
+```javascript
+import NgwMap from '@nextgis/ngw-leaflet';
+
+const ngwMap = new NgwMap({
   baseUrl: 'https://demo.nextgis.com',
   target: 'map',
   qmsId: 487,
   webmapId: 3985
 });
-
 ```
+
+Check out the [API Documentation](https://github.com/nextgis/nextgis_frontend/blob/master/markdown/ngw-map.md)
 
 ## Commercial support
 

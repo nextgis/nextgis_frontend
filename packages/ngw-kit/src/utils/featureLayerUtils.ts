@@ -15,6 +15,7 @@ import {
   checkIfPropertyFilter,
 } from '@nextgis/properties-filter';
 import { FeatureRequestParams, GetNgwLayerItemsOptions } from '../interfaces';
+import { JsonMap } from '@nextgis/utils';
 
 export const FEATURE_REQUEST_PARAMS: FeatureRequestParams = {
   srs: 4326,
@@ -23,7 +24,7 @@ export const FEATURE_REQUEST_PARAMS: FeatureRequestParams = {
 
 export function createGeoJsonFeature<
   G extends Geometry | null = Geometry,
-  P extends Record<string, any> = Record<string, any>
+  P extends JsonMap = JsonMap
 >(item: Pick<FeatureItem, 'id' | 'geom' | 'fields'>): Feature<G, P> {
   const geometry = item.geom as G;
   const feature: Feature<G, P> = {
@@ -37,7 +38,7 @@ export function createGeoJsonFeature<
 
 export function getNgwLayerItem<
   G extends Geometry | null = Geometry,
-  P extends Record<string, any> = Record<string, any>
+  P extends JsonMap = JsonMap
 >(
   options: {
     resourceId: number;
@@ -57,7 +58,7 @@ export function getNgwLayerItem<
 
 export function getNgwLayerFeature<
   G extends Geometry | null = Geometry,
-  P extends Record<string, any> = Record<string, any>
+  P extends JsonMap = JsonMap
 >(
   options: {
     resourceId: number;
@@ -72,8 +73,12 @@ export function getNgwLayerFeature<
 
 function idFilterWorkAround<
   G extends Geometry | null = Geometry,
-  P extends Record<string, any> = Record<string, any>
->(options: { filterById: any; resourceId: number; connector: NgwConnector }) {
+  P extends JsonMap = JsonMap
+>(options: {
+  filterById: PropertyFilter;
+  resourceId: number;
+  connector: NgwConnector;
+}) {
   const value = options.filterById[2];
   const featureIds: number[] =
     typeof value === 'number'
@@ -187,7 +192,7 @@ function createFeatureFieldFilterQueries(
 
 function getNgwLayerItemsRequest<
   G extends Geometry | null = Geometry,
-  P extends Record<string, any> = Record<string, any>
+  P extends JsonMap = JsonMap
 >(
   options: GetNgwLayerItemsOptions &
     FilterOptions & { paramList?: [string, any][] }
@@ -231,7 +236,7 @@ function getNgwLayerItemsRequest<
 
 export function getNgwLayerItems<
   G extends Geometry | null = Geometry,
-  P extends Record<string, any> = Record<string, any>
+  P extends JsonMap = JsonMap
 >(
   options: GetNgwLayerItemsOptions & FilterOptions
 ): CancelablePromise<FeatureItem[]> {
@@ -256,7 +261,7 @@ export function getNgwLayerItems<
 
 export function getNgwLayerFeatures<
   G extends Geometry | null = Geometry,
-  P extends Record<string, any> = Record<string, any>
+  P extends JsonMap = JsonMap
 >(
   options: {
     resourceId: number;
