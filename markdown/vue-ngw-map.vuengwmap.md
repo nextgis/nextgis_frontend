@@ -21,7 +21,7 @@ export declare class VueNgwMap<M = any> extends Vue
 |  [mapAdapter](./vue-ngw-map.vuengwmap.mapadapter.md) |  | [MapAdapter](./webmap.mapadapter.md) |  |
 |  [mapOptions](./vue-ngw-map.vuengwmap.mapoptions.md) |  | [NgwMapOptions](./ngw-map.ngwmapoptions.md) |  |
 |  [name](./vue-ngw-map.vuengwmap.name.md) |  | string |  |
-|  [ngwMap](./vue-ngw-map.vuengwmap.ngwmap.md) |  | [NgwMap](./ngw-map.ngwmap.md)<!-- -->&lt;M&gt; \| null |  |
+|  [ngwMap](./vue-ngw-map.vuengwmap.ngwmap.md) |  | [NgwMap](./ngw-map.ngwmap.md)<!-- -->&lt;M&gt; |  |
 |  [qmsId](./vue-ngw-map.vuengwmap.qmsid.md) |  | string |  |
 |  [ready](./vue-ngw-map.vuengwmap.ready.md) |  | boolean |  |
 |  [webMapId](./vue-ngw-map.vuengwmap.webmapid.md) |  | string |  |

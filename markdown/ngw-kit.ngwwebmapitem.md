@@ -15,7 +15,7 @@ export declare class NgwWebmapItem extends Item<ItemOptions>
 
 |  Constructor | Modifiers | Description |
 |  --- | --- | --- |
-|  [(constructor)(webMap, item, options, connector, parent)](./ngw-kit.ngwwebmapitem._constructor_.md) |  | Constructs a new instance of the <code>NgwWebmapItem</code> class |
+|  [(constructor)(webMap, item, options, connector, parent, noInit)](./ngw-kit.ngwwebmapitem._constructor_.md) |  | Constructs a new instance of the <code>NgwWebmapItem</code> class |
 
 ## Properties
 
@@ -23,6 +23,7 @@ export declare class NgwWebmapItem extends Item<ItemOptions>
 |  --- | --- | --- | --- |
 |  [\_rootDescendantsCount](./ngw-kit.ngwwebmapitem._rootdescendantscount.md) |  | number |  |
 |  [connector](./ngw-kit.ngwwebmapitem.connector.md) |  | NgwConnector |  |
+|  [emitter](./ngw-kit.ngwwebmapitem.emitter.md) |  | EventEmitter |  |
 |  [GetAdapterFromLayerType](./ngw-kit.ngwwebmapitem.getadapterfromlayertype.md) | <code>static</code> | { \[layerType: string\]: (item: [TreeItem](./ngw-kit.treeitem.md)<!-- -->, options: any, webMap: [WebMap](./webmap.webmap.md)<!-- -->, connector?: NgwConnector) =&gt; [LayerAdapterDefinition](./webmap.layeradapterdefinition.md)<!-- -->; } |  |
 |  [item](./ngw-kit.ngwwebmapitem.item.md) |  | [TreeGroup](./ngw-kit.treegroup.md) \| [TreeLayer](./ngw-kit.treelayer.md) |  |
 |  [layer](./ngw-kit.ngwwebmapitem.layer.md) |  | [LayerAdapter](./webmap.layeradapter.md) |  |
@@ -34,6 +35,7 @@ export declare class NgwWebmapItem extends Item<ItemOptions>
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
 |  [bringToFront()](./ngw-kit.ngwwebmapitem.bringtofront.md) |  |  |
+|  [create(webMap, item, options, connector, parent)](./ngw-kit.ngwwebmapitem.create.md) | <code>static</code> |  |
 |  [fit()](./ngw-kit.ngwwebmapitem.fit.md) |  |  |
 |  [getChildren(item)](./ngw-kit.ngwwebmapitem.getchildren.md) |  |  |
 |  [initItem(item)](./ngw-kit.ngwwebmapitem.inititem.md) |  |  |

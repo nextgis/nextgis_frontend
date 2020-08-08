@@ -9,7 +9,7 @@ Constructs a new instance of the `NgwWebmapItem` class
 <b>Signature:</b>
 
 ```typescript
-constructor(webMap: WebMap, item: TreeGroup | TreeLayer, options?: ItemOptions, connector?: NgwConnector, parent?: NgwWebmapItem);
+constructor(webMap: WebMap, item: TreeGroup | TreeLayer, options?: ItemOptions, connector?: NgwConnector, parent?: NgwWebmapItem, noInit?: boolean);
 ```
 
 ## Parameters
@@ -21,4 +21,5 @@ constructor(webMap: WebMap, item: TreeGroup | TreeLayer, options?: ItemOptions, 
 |  options | [ItemOptions](./item.itemoptions.md) |  |
 |  connector | NgwConnector |  |
 |  parent | [NgwWebmapItem](./ngw-kit.ngwwebmapitem.md) |  |
+|  noInit | boolean |  |
 

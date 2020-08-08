@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-nativeOptions?: Record<string, any>;
+nativeOptions?: N;
 ```

@@ -7,9 +7,9 @@
 <b>Signature:</b>
 
 ```typescript
-declare class QmsKit implements StarterKit 
+export declare class QmsKit implements StarterKit 
 ```
-<b>Implements:</b> StarterKit
+<b>Implements:</b> [StarterKit](./webmap.starterkit.md)
 
 ## Constructors
 

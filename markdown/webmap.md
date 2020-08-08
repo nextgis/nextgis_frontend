@@ -45,7 +45,10 @@ webMap.onLoad().then(() => {
 
 |  Class | Description |
 |  --- | --- |
-|  [WebMap](./webmap.webmap.md) | The core component for managing map adapters. It contains methods for adding and manipulation with ,  and . |
+|  [WebMap](./webmap.webmap.md) | The core component for managing map adapters. It contains methods for adding and manipulation with [map](./webmap.webmapmain.md)<!-- -->, [layers](./webmap.webmaplayers.md) and [controls](./webmap.webmapcontrols.md)<!-- -->. |
+|  [WebMapControls](./webmap.webmapcontrols.md) | Collection of methods for managing map controls |
+|  [WebMapLayers](./webmap.webmaplayers.md) |  |
+|  [WebMapMain](./webmap.webmapmain.md) |  |
 
 ## Functions
 
@@ -60,7 +63,7 @@ webMap.onLoad().then(() => {
 |  [AdapterOptions](./webmap.adapteroptions.md) | Parameters that can be used to create any map layer adapter. |
 |  [AppOptions](./webmap.appoptions.md) |  |
 |  [AttributionControlOptions](./webmap.attributioncontroloptions.md) |  |
-|  [ButtonControlOptions](./webmap.buttoncontroloptions.md) | Options for creating a . |
+|  [ButtonControlOptions](./webmap.buttoncontroloptions.md) | Options for creating a [button control](./webmap.webmapcontrols.createbuttoncontrol.md)<!-- -->. |
 |  [CreateControlOptions](./webmap.createcontroloptions.md) |  |
 |  [DataLoadError](./webmap.dataloaderror.md) |  |
 |  [FilterOptions](./webmap.filteroptions.md) |  |
@@ -99,7 +102,7 @@ webMap.onLoad().then(() => {
 |  [Tileset3DAdapterOptions](./webmap.tileset3dadapteroptions.md) |  |
 |  [TitleToggle](./webmap.titletoggle.md) | Values to be in the title in accordance with the status of the toggle control |
 |  [ToggleControl](./webmap.togglecontrol.md) |  |
-|  [ToggleControlOptions](./webmap.togglecontroloptions.md) | Options for creating a  to layout customization and assigning a callback function |
+|  [ToggleControlOptions](./webmap.togglecontroloptions.md) | Options for creating a [toggle control](./webmap.webmapcontrols.createtogglecontrol.md) to layout customization and assigning a callback function |
 |  [ToggleLayerOptions](./webmap.togglelayeroptions.md) |  |
 |  [VectorAdapterOptions](./webmap.vectoradapteroptions.md) |  |
 |  [VectorLayerAdapter](./webmap.vectorlayeradapter.md) | Adapter for vector data display control. |

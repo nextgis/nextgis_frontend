@@ -4,6 +4,12 @@
 
 ## ngw-connector package
 
+A lightweight HTTP client optimized for use with [NextGIS Web](http://docs.nextgis.ru/docs_ngweb_dev/doc/developer/toc.html) API
+
+## Remarks
+
+Make sure CORS is registered in the [NextGIS Web settings](https://docs.nextgis.com/docs_ngcom/source/CORS.html) to be able to send requests.
+
 ## Classes
 
 |  Class | Description |

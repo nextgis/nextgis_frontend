@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-_rootDescendantsCount: number;
+protected _rootDescendantsCount: number;
 ```

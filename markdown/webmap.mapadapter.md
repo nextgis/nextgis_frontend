@@ -38,6 +38,7 @@ export interface MapAdapter<M = any, L = any, C = any>
 |  [getBounds()](./webmap.mapadapter.getbounds.md) |  |
 |  [getCenter()](./webmap.mapadapter.getcenter.md) |  |
 |  [getContainer()](./webmap.mapadapter.getcontainer.md) |  |
+|  [getCursor()](./webmap.mapadapter.getcursor.md) |  |
 |  [getZoom()](./webmap.mapadapter.getzoom.md) |  |
 |  [hideLayer(layer)](./webmap.mapadapter.hidelayer.md) |  |
 |  [locate(opt, events)](./webmap.mapadapter.locate.md) | Tries to locate the user using the Geolocation API, firing a locationfound event with location data on success or a locationerror event on failure, and optionally sets the map view to the user's location with respect to detection accuracy (or to the world view if geolocation failed). Note that, if your page doesn't use HTTPS, this method will fail in modern browsers (Chrome 50 and newer) See Locate options for more details. |

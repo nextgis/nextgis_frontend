@@ -10,6 +10,13 @@
 |  --- | --- |
 |  [QmsKit](./qms-kit.qmskit.md) |  |
 
+## Functions
+
+|  Function | Description |
+|  --- | --- |
+|  [createQmsAdapter(webMap, url)](./qms-kit.createqmsadapter.md) |  |
+|  [updateQmsOptions(qms)](./qms-kit.updateqmsoptions.md) |  |
+
 ## Interfaces
 
 |  Interface | Description |
@@ -19,6 +26,12 @@
 |  [QmsAdapterOptions](./qms-kit.qmsadapteroptions.md) |  |
 |  [QmsBasemap](./qms-kit.qmsbasemap.md) |  |
 |  [QmsOptions](./qms-kit.qmsoptions.md) |  |
+
+## Variables
+
+|  Variable | Description |
+|  --- | --- |
+|  [alias](./qms-kit.alias.md) |  |
 
 ## Type Aliases
 
