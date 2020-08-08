@@ -225,15 +225,11 @@ export class Connection {
       }
     }
     if (!res) {
-      try {
-        const item = await this.driver.post('resource.collection', {
-          data: payload,
-        });
-        res = await resource.connect(item.id, this);
-        isCreated = true;
-      } catch (er) {
-        throw er;
-      }
+      const item = await this.driver.post('resource.collection', {
+        data: payload,
+      });
+      res = await resource.connect(item.id, this);
+      isCreated = true;
     }
     return [res, isCreated];
   }

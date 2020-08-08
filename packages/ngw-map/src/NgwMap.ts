@@ -1,7 +1,7 @@
 import StrictEventEmitter from 'strict-event-emitter-types';
 import { EventEmitter } from 'events';
 import CancelablePromise from '@nextgis/cancelable-promise';
-import { deepmerge, isObject } from '@nextgis/utils';
+import { deepmerge, isObject, JsonMap } from '@nextgis/utils';
 import {
   WebMap,
   MapAdapter,
@@ -75,9 +75,9 @@ import { Geometry, Feature, FeatureCollection } from 'geojson';
  * @public
  */
 export class NgwMap<
-  M = any,
-  L = any,
-  C = any,
+  M = unknown,
+  L = unknown,
+  C = unknown,
   O = Record<string, any>
 > extends WebMap<M, L, C, NgwMapEvents> {
   static getIcon = getIcon;
@@ -236,7 +236,7 @@ export class NgwMap<
 
   getNgwLayerFeature<
     G extends Geometry | null = Geometry,
-    P extends Record<string, any> = Record<string, any>
+    P extends JsonMap = JsonMap
   >(options: {
     resourceId: number;
     featureId: number;
@@ -249,7 +249,7 @@ export class NgwMap<
 
   getNgwLayerFeatures<
     G extends Geometry | null = Geometry,
-    P extends Record<string, any> = Record<string, any>
+    P extends JsonMap = JsonMap
   >(
     options: {
       resourceId: number;
@@ -434,7 +434,11 @@ export class NgwMap<
     }
 
     for (const r of resources) {
-      await this.addNgwLayer(r);
+      try {
+        await this.addNgwLayer(r);
+      } catch (er) {
+        console.log(er);
+      }
     }
 
     this._emitStatusEvent('ngw-map:create', this);
