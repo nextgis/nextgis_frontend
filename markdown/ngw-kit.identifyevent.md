@@ -15,6 +15,6 @@ export interface IdentifyEvent
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [data](./ngw-kit.identifyevent.data.md) | [FeatureLayersIdentify](./ngw-connector.featurelayersidentify.md) |  |
+|  [data](./ngw-kit.identifyevent.data.md) | FeatureLayersIdentify |  |
 |  [ev](./ngw-kit.identifyevent.ev.md) | [MapClickEvent](./webmap.mapclickevent.md) |  |
 

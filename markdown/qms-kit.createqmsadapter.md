@@ -19,5 +19,5 @@ export declare function createQmsAdapter(webMap: WebMap, url?: string): Type<Mai
 
 <b>Returns:</b>
 
-[Type](./utils.type.md)<!-- -->&lt;[MainLayerAdapter](./webmap.mainlayeradapter.md)<!-- -->&gt;
+Type&lt;[MainLayerAdapter](./webmap.mainlayeradapter.md)<!-- -->&gt;
 

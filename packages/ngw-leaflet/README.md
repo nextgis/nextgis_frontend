@@ -2,6 +2,8 @@
 
 ![size](https://img.shields.io/bundlephobia/minzip/@nextgis/ngw-leaflet) ![version](https://img.shields.io/npm/v/@nextgis/ngw-leaflet)
 
+Single-file bundle for rapid deployment of [Leaflet](https://leafletjs.com)-based web-gis applications with NextGIS services
+
 Styles images and other assets are already in bundle, you don't need to include anything except one JS file!
 
 ## Installation

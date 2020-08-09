@@ -16,10 +16,10 @@ export interface MapAdapter<M = any, L = any, C = any>
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [controlAdapters](./webmap.mapadapter.controladapters.md) | { \[name: string\]: [Type](./utils.type.md)<!-- -->&lt;C&gt;; } | Named map controls specific for each framework. |
+|  [controlAdapters](./webmap.mapadapter.controladapters.md) | { \[name: string\]: Type&lt;C&gt;; } | Named map controls specific for each framework. |
 |  [emitter](./webmap.mapadapter.emitter.md) | StrictEventEmitter&lt;EventEmitter, [MapAdapterEvents](./webmap.mapadapterevents.md)<!-- -->&gt; | An instance of the EventEmitter class for listen and emit events |
 |  [isLoaded](./webmap.mapadapter.isloaded.md) | boolean | State of readiness of the card for use. |
-|  [layerAdapters](./webmap.mapadapter.layeradapters.md) | { \[name: string\]: [Type](./utils.type.md)<!-- -->&lt;[LayerAdapter](./webmap.layeradapter.md)<!-- -->&lt;M, L, any&gt;&gt;; } | Named adapters for map layers through a generic interface. |
+|  [layerAdapters](./webmap.mapadapter.layeradapters.md) | { \[name: string\]: Type&lt;[LayerAdapter](./webmap.layeradapter.md)<!-- -->&lt;M, L, any&gt;&gt;; } | Named adapters for map layers through a generic interface. |
 |  [map](./webmap.mapadapter.map.md) | M | Original map object of GIS framework (Leaflet.Map, Openlayers.Map, Mapboxgl.Map or other) |
 
 ## Methods
@@ -38,7 +38,6 @@ export interface MapAdapter<M = any, L = any, C = any>
 |  [getBounds()](./webmap.mapadapter.getbounds.md) |  |
 |  [getCenter()](./webmap.mapadapter.getcenter.md) |  |
 |  [getContainer()](./webmap.mapadapter.getcontainer.md) |  |
-|  [getCursor()](./webmap.mapadapter.getcursor.md) |  |
 |  [getZoom()](./webmap.mapadapter.getzoom.md) |  |
 |  [hideLayer(layer)](./webmap.mapadapter.hidelayer.md) |  |
 |  [locate(opt, events)](./webmap.mapadapter.locate.md) | Tries to locate the user using the Geolocation API, firing a locationfound event with location data on success or a locationerror event on failure, and optionally sets the map view to the user's location with respect to detection accuracy (or to the world view if geolocation failed). Note that, if your page doesn't use HTTPS, this method will fail in modern browsers (Chrome 50 and newer) See Locate options for more details. |

@@ -22,5 +22,5 @@ export declare function createResourceStore<P extends GeoJsonProperties = GeoJso
 
 <b>Returns:</b>
 
-[Type](./utils.type.md)<!-- -->&lt;[ResourceStore](./vuex-ngw.resourcestore.md)<!-- -->&lt;P, G&gt;&gt;
+Type&lt;[ResourceStore](./vuex-ngw.resourcestore.md)<!-- -->&lt;P, G&gt;&gt;
 

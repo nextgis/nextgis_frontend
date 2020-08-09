@@ -16,7 +16,7 @@ export declare class NgwResource
 |  --- | --- | --- | --- |
 |  [\_extent](./ngw-kit.ngwresource._extent.md) |  | [LngLatBoundsArray](./webmap.lnglatboundsarray.md) |  |
 |  [connector](./ngw-kit.ngwresource.connector.md) |  | NgwConnector |  |
-|  [item](./ngw-kit.ngwresource.item.md) |  | [ResourceItem](./ngw-connector.resourceitem.md) |  |
+|  [item](./ngw-kit.ngwresource.item.md) |  | ResourceItem |  |
 
 ## Methods
 

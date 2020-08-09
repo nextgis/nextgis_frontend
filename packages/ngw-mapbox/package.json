@@ -2,7 +2,7 @@
   "name": "@nextgis/ngw-mapbox",
   "_priority": 10,
   "version": "1.0.0-alpha.3",
-  "description": "",
+  "description": "Single-file bundle for rapid deployment of Mapbox GL JS based web-gis applications with NextGIS services",
   "main": "lib/ngw-mapbox.global.prod.js",
   "module": "lib/ngw-mapbox.esm-bundler.js",
   "unpkg": "lib/ngw-mapbox.global.prod.js",

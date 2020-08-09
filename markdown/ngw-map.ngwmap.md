@@ -9,7 +9,7 @@ Base class containing the logic of interaction WebMap with NextGIS services.
 <b>Signature:</b>
 
 ```typescript
-export declare class NgwMap<M = unknown, L = unknown, C = unknown, O = Record<string, any>> extends WebMap<M, L, C, NgwMapEvents> 
+export declare class NgwMap<M = any, L = any, C = any, O = Record<string, any>> extends WebMap<M, L, C, NgwMapEvents> 
 ```
 <b>Extends:</b> [WebMap](./webmap.webmap.md)<!-- -->&lt;M, L, C, [NgwMapEvents](./ngw-map.ngwmapevents.md)<!-- -->&gt;
 
@@ -17,7 +17,7 @@ export declare class NgwMap<M = unknown, L = unknown, C = unknown, O = Record<st
 
 
 ```javascript
-import { NgwMap } from '@nextgis/ngw-map';
+import NgwMap from '@nextgis/ngw-map';
 import MapAdapter from '@nextgis/leaflet-map-adapter';
 // styles are not included in the leaflet-map-adapter
 import 'leaflet/dist/leaflet.css';

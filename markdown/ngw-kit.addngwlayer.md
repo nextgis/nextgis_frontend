@@ -20,5 +20,5 @@ export declare function addNgwLayer(options: NgwLayerOptions, webMap: WebMap, co
 
 <b>Returns:</b>
 
-Promise&lt;[Type](./utils.type.md)<!-- -->&lt;[ResourceAdapter](./ngw-kit.resourceadapter.md)<!-- -->&gt; \| undefined&gt;
+Promise&lt;Type&lt;[ResourceAdapter](./ngw-kit.resourceadapter.md)<!-- -->&gt; \| undefined&gt;
 

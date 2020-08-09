@@ -14,7 +14,7 @@ getResource(resource: ResourceDefinition | DeepPartial<Resource>): CancelablePro
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  resource | [ResourceDefinition](./ngw-connector.resourcedefinition.md) \| [DeepPartial](./utils.deeppartial.md)<!-- -->&lt;[Resource](./ngw-connector.resource.md)<!-- -->&gt; |  |
+|  resource | [ResourceDefinition](./ngw-connector.resourcedefinition.md) \| DeepPartial&lt;[Resource](./ngw-connector.resource.md)<!-- -->&gt; |  |
 
 <b>Returns:</b>
 

@@ -15,9 +15,9 @@ export interface NgwMapOptions<C = any> extends MapOptions
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [auth](./ngw-map.ngwmapoptions.auth.md) | [Credentials](./ngw-connector.credentials.md) | User credentials for authorization in NGW. Provides the ability to display protected resources |
+|  [auth](./ngw-map.ngwmapoptions.auth.md) | Credentials | User credentials for authorization in NGW. Provides the ability to display protected resources |
 |  [baseUrl](./ngw-map.ngwmapoptions.baseurl.md) | string | Url of NGW server like this https://demo.nextgis.com |
-|  [companyLogoOptions](./ngw-map.ngwmapoptions.companylogooptions.md) | [CompanyLogoOptions](./ngw-kit.companylogooptions.md) |  |
+|  [companyLogoOptions](./ngw-map.ngwmapoptions.companylogooptions.md) | CompanyLogoOptions |  |
 |  [connector](./ngw-map.ngwmapoptions.connector.md) | NgwConnector |  |
 |  [controls](./ngw-map.ngwmapoptions.controls.md) | Array&lt;keyof [MapControls](./webmap.mapcontrols.md) \| C&gt; | List of controls that will be initialized when creating a map instance. It can be defined as a string, then points to the corresponding entry in the \[controlAdapters\](webmap-api\#MapAdapter). |
 |  [controlsOptions](./ngw-map.ngwmapoptions.controlsoptions.md) | ControlsOptions | Set options for those controls that are specified by name. |

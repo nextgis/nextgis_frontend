@@ -18,5 +18,5 @@ getResource(id: number): CancelablePromise<ResourceItem | undefined> | undefined
 
 <b>Returns:</b>
 
-CancelablePromise&lt;[ResourceItem](./ngw-connector.resourceitem.md) \| undefined&gt; \| undefined
+CancelablePromise&lt;ResourceItem \| undefined&gt; \| undefined
 

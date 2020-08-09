@@ -19,5 +19,5 @@ createGroup(name: string, options?: GroupOptions): CancelablePromise<CreatedReso
 
 <b>Returns:</b>
 
-CancelablePromise&lt;[CreatedResource](./ngw-connector.createdresource.md)<!-- -->&gt; \| undefined
+CancelablePromise&lt;CreatedResource&gt; \| undefined
 

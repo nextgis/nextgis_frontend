@@ -2,7 +2,7 @@
   "name": "@nextgis/ngw-ol",
   "_priority": 10,
   "version": "1.0.0-alpha.3",
-  "description": "",
+  "description": "Single-file bundle for rapid deployment of OpenLayers-based web-gis applications with NextGIS services",
   "main": "lib/ngw-ol.global.prod.js",
   "module": "lib/ngw-ol.esm-bundler.js",
   "unpkg": "lib/ngw-ol.global.prod.js",
