@@ -19,7 +19,7 @@ Overrides the `center` and `zoom` parameters. \[LngLatBoundsArray\](webmap\#LngL
 ## Example
 
 
-```javascript
+```js
 // whole world
 bounds: [0, -90, 180, 90]
 

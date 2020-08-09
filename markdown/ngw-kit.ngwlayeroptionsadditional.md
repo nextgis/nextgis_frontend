@@ -18,10 +18,11 @@ export interface NgwLayerOptionsAdditional<T extends NgwLayerAdapterType = NgwLa
 |  Property | Type | Description |
 |  --- | --- | --- |
 |  [adapter](./ngw-kit.ngwlayeroptionsadditional.adapter.md) | T |  |
-|  [adapterOptions](./ngw-kit.ngwlayeroptionsadditional.adapteroptions.md) | LayerAdaptersOptions\[T\] |  |
+|  [adapterOptions](./ngw-kit.ngwlayeroptionsadditional.adapteroptions.md) | [LayerAdaptersOptions](./webmap.layeradaptersoptions.md)<!-- -->\[T\] |  |
 |  [fit](./ngw-kit.ngwlayeroptionsadditional.fit.md) | boolean |  |
 |  [headers](./ngw-kit.ngwlayeroptionsadditional.headers.md) | any |  |
 |  [id](./ngw-kit.ngwlayeroptionsadditional.id.md) | string |  |
+|  [layers](./ngw-kit.ngwlayeroptionsadditional.layers.md) | string |  |
 |  [meta](./ngw-kit.ngwlayeroptionsadditional.meta.md) | P |  |
 |  [simplification](./ngw-kit.ngwlayeroptionsadditional.simplification.md) | number |  |
 

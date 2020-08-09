@@ -15,7 +15,7 @@ export interface NgwIdentifyItem
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [feature](./ngw-kit.ngwidentifyitem.feature.md) | [LayerFeature](./ngw-connector.layerfeature.md) |  |
+|  [feature](./ngw-kit.ngwidentifyitem.feature.md) | LayerFeature |  |
 |  [featureId](./ngw-kit.ngwidentifyitem.featureid.md) | number |  |
 |  [resourceId](./ngw-kit.ngwidentifyitem.resourceid.md) | number |  |
 

@@ -4,21 +4,21 @@
 
 ## WebMap class
 
-The core component for managing map adapters. It contains methods for adding and manipulation with [map](./webmap.webmapmain.md)<!-- -->, [layers](./webmap.webmaplayers.md) and [controls](./webmap.webmapcontrols.md)<!-- -->.
+The core component for managing map adapters. It contains methods for adding and manipulation with ,  and .
 
 <b>Signature:</b>
 
 ```typescript
 export declare class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEvents> extends WebMapControls<M, L, C, E> implements WebMapControls, WebMapLayers, WebMapMain 
 ```
-<b>Extends:</b> [WebMapControls](./webmap.webmapcontrols.md)<!-- -->&lt;M, L, C, E&gt;
+<b>Extends:</b> WebMapControls&lt;M, L, C, E&gt;
 
-<b>Implements:</b> [WebMapControls](./webmap.webmapcontrols.md)<!-- -->, [WebMapLayers](./webmap.webmaplayers.md)<!-- -->, [WebMapMain](./webmap.webmapmain.md)
+<b>Implements:</b> WebMapControls, WebMapLayers, WebMapMain
 
 ## Example
 
 
-```javascript
+```js
 import { WebMap } from '@nextgis/webmap';
 import MapAdapter from '@nextgis/ol-map-adapter';
 
@@ -28,10 +28,4 @@ const webMap = new WebMap({
 });
 
 ```
-
-## Methods
-
-|  Method | Modifiers | Description |
-|  --- | --- | --- |
-|  [get(id)](./webmap.webmap.get.md) | <code>static</code> |  |
 

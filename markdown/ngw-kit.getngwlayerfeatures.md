@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function getNgwLayerFeatures<G extends Geometry | null = Geometry, P extends JsonMap = JsonMap>(options: {
+export declare function getNgwLayerFeatures<G extends Geometry | null = Geometry, P extends Record<string, any> = Record<string, any>>(options: {
     resourceId: number;
     connector: NgwConnector;
     filters?: PropertiesFilter;
@@ -18,7 +18,7 @@ export declare function getNgwLayerFeatures<G extends Geometry | null = Geometry
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | { resourceId: number; connector: NgwConnector; filters?: [PropertiesFilter](./properties-filter.propertiesfilter.md)<!-- -->; } &amp; [FilterOptions](./webmap.filteroptions.md) |  |
+|  options | { resourceId: number; connector: NgwConnector; filters?: PropertiesFilter; } &amp; [FilterOptions](./webmap.filteroptions.md) |  |
 
 <b>Returns:</b>
 

@@ -29,6 +29,10 @@ export declare class NgwConnector
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
+|  [\_executeLoadingQueue(name, data, isError)](./ngw-connector.ngwconnector._executeloadingqueue.md) |  |  |
+|  [\_loadData(url, options)](./ngw-connector.ngwconnector._loaddata.md) |  |  |
+|  [\_rejectLoadingQueue()](./ngw-connector.ngwconnector._rejectloadingqueue.md) |  |  |
+|  [\_setLoadingQueue(name, resolve, reject)](./ngw-connector.ngwconnector._setloadingqueue.md) |  |  |
 |  [apiRequest(name, params, options)](./ngw-connector.ngwconnector.apirequest.md) |  |  |
 |  [connect()](./ngw-connector.ngwconnector.connect.md) |  |  |
 |  [delete(name, options, params)](./ngw-connector.ngwconnector.delete.md) |  |  |

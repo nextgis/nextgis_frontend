@@ -16,6 +16,6 @@ constructor(mapAdapter: MapAdapter, options: NgwMapOptions<C> & O);
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  mapAdapter | [MapAdapter](./webmap.mapadapter.md) |  |
+|  mapAdapter | [MapAdapter](./webmap.mapadapter.md) | \#noapi |
 |  options | [NgwMapOptions](./ngw-map.ngwmapoptions.md)<!-- -->&lt;C&gt; &amp; O |  |
 

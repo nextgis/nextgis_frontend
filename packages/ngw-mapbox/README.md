@@ -1,6 +1,10 @@
-# Ngw Mapbox
+# NgwMapbox
 
-One file bundle for building [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/) map interacting with NextGIS;
+![size](https://img.shields.io/bundlephobia/minzip/@nextgis/ngw-mapbox) ![version](https://img.shields.io/npm/v/@nextgis/ngw-mapbox)
+
+Single-file bundle for rapid deployment of [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js) based web-gis applications with NextGIS services
+
+Styles images and other assets are already in bundle, you don't need to include anything except one JS file!
 
 ## Installation
 
@@ -8,12 +12,14 @@ One file bundle for building [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/
 
 #### Include assets
 
-Simply download and include with a script tag. NgwMapbox will be registered as a global variable.
+Simply download and include with a script tag, `NgwMapbox` and `NgwMap` will be registered as a global variable.
 
 ```html
-<script src="../lib/ngw-mapbox.js"></script>
+<script src="../lib/ngw-mapbox.global.js"></script>
+
 <div id='map'></div>
 <script>
+  // var ngwMap = new NgwMap({
   var ngwMap = new NgwMapbox({
     baseUrl: 'https://demo.nextgis.com',
     target: 'map',
@@ -25,36 +31,42 @@ Simply download and include with a script tag. NgwMapbox will be registered as a
 
 #### CDN
 
+unpkg
+
 ```html
 <script src="https://unpkg.com/@nextgis/ngw-mapbox"></script>
 ```
 
-We recommend linking to a specific version number that you can update manually:
+jsdelivr
 
 ```html
-<script src="https://unpkg.com/@nextgis/ngw-mapbox@0.19.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/@nextgis/ngw-mapbox"></script>
 ```
+
+We recommend linking to a specific version number `/ngw-mapbox@[version]`
 
 ### In Node.js
 
-NPM is the recommended installation method when building large scale applications with NgwMapbox. It pairs nicely with module bundlers such as [Webpack](https://webpack.js.org/)
-
 ```bash
-# latest stable
-$ npm install @nextgis/ngw-mapbox
+$ npm install --save-dev @nextgis/ngw-mapbox
+# or
+$ yarn add @nextgis/ngw-mapbox
 ```
 
-```javascript
-import NgwMapbox from '@nextgis/ngw-mapbox';
+## Usage
 
-const ngwMapbox = new NgwMapbox({
+```javascript
+import NgwMap from '@nextgis/ngw-mapbox';
+
+const ngwMap = new NgwMap({
   baseUrl: 'https://demo.nextgis.com',
   target: 'map',
   qmsId: 487,
   webmapId: 3985
 });
-
 ```
+
+Check out the [API Documentation](https://github.com/nextgis/nextgis_frontend/blob/master/markdown/ngw-map.md)
 
 ## Commercial support
 

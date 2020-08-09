@@ -18,9 +18,9 @@ getNgwLayerItems(options: {
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | { resourceId: number; connector?: NgwConnector; filters?: [PropertiesFilter](./properties-filter.propertiesfilter.md)<!-- -->; } &amp; [FilterOptions](./webmap.filteroptions.md) |  |
+|  options | { resourceId: number; connector?: NgwConnector; filters?: PropertiesFilter; } &amp; [FilterOptions](./webmap.filteroptions.md) |  |
 
 <b>Returns:</b>
 
-CancelablePromise&lt;[FeatureItem](./ngw-connector.featureitem.md)<!-- -->\[\]&gt;
+CancelablePromise&lt;FeatureItem\[\]&gt;
 

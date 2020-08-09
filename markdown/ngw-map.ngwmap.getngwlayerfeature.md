@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-getNgwLayerFeature<G extends Geometry | null = Geometry, P extends JsonMap = JsonMap>(options: {
+getNgwLayerFeature<G extends Geometry | null = Geometry, P extends Record<string, any> = Record<string, any>>(options: {
         resourceId: number;
         featureId: number;
     }): CancelablePromise<Feature<G, P>>;

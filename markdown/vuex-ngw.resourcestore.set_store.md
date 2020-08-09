@@ -14,7 +14,7 @@ protected SET_STORE(store: ResourceStoreItem<P>[]): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  store | [ResourceStoreItem](./ngw-connector.resourcestoreitem.md)<!-- -->&lt;P&gt;\[\] |  |
+|  store | ResourceStoreItem&lt;P&gt;\[\] |  |
 
 <b>Returns:</b>
 

@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-onLoadSync(webMap: WebMap): Promise<NgwWebmapLayerAdapter | undefined>;
+onLoadSync(webMap: WebMap): Promise<WebMapLayerAdapter | undefined>;
 ```
 
 ## Parameters
@@ -18,5 +18,5 @@ onLoadSync(webMap: WebMap): Promise<NgwWebmapLayerAdapter | undefined>;
 
 <b>Returns:</b>
 
-Promise&lt;[NgwWebmapLayerAdapter](./ngw-kit.ngwwebmaplayeradapter.md) \| undefined&gt;
+Promise&lt;[WebMapLayerAdapter](./ngw-kit.webmaplayeradapter.md) \| undefined&gt;
 

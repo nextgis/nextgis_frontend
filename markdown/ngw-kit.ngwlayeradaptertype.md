@@ -8,5 +8,5 @@
 <b>Signature:</b>
 
 ```typescript
-export declare type NgwLayerAdapterType = 'IMAGE' | 'TILE' | 'GEOJSON' | 'MVT' | 'WMS' | 'TERRAIN' | 'MODEL_3D' | 'NGW:WEBMAP';
+export declare type NgwLayerAdapterType = 'IMAGE' | 'TILE' | 'GEOJSON' | 'MVT' | 'WMS' | 'TERRAIN' | 'MODEL_3D';
 ```

@@ -19,5 +19,5 @@ createWmsConnectedLayer(options: CreateWmsConnectedLayerOptions, name?: string):
 
 <b>Returns:</b>
 
-CancelablePromise&lt;[CreatedResource](./ngw-connector.createdresource.md)<!-- -->&gt; \| undefined
+CancelablePromise&lt;CreatedResource&gt; \| undefined
 

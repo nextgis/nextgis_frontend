@@ -18,7 +18,6 @@ export interface VectorLayerAdapter<M = any, L = any, O extends VectorAdapterOpt
 |  Property | Type | Description |
 |  --- | --- | --- |
 |  [selected](./webmap.vectorlayeradapter.selected.md) | boolean | True if there are selected features in the layer |
-|  [source](./webmap.vectorlayeradapter.source.md) | unknown | Experimental option, only for MVT. Points to a data source instead of loading data into a layer. |
 
 ## Methods
 

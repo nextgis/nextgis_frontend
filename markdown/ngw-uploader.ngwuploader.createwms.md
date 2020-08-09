@@ -19,5 +19,5 @@ createWms(options: Record<string, any>, name?: string): CancelablePromise<Create
 
 <b>Returns:</b>
 
-CancelablePromise&lt;[CreatedResource](./ngw-connector.createdresource.md)<!-- -->&gt; \| undefined
+CancelablePromise&lt;CreatedResource&gt; \| undefined
 

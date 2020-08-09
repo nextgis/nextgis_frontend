@@ -19,5 +19,5 @@ export declare function sendIdentifyRequest(ev: MapClickEvent, options: Identify
 
 <b>Returns:</b>
 
-Promise&lt;[FeatureLayersIdentify](./ngw-connector.featurelayersidentify.md)<!-- -->&gt;
+Promise&lt;FeatureLayersIdentify&gt;
 

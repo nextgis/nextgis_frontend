@@ -19,5 +19,5 @@ createWmsConnection(options: CreateWmsConnectionOptions, name?: string): Cancela
 
 <b>Returns:</b>
 
-CancelablePromise&lt;[CreatedResource](./ngw-connector.createdresource.md)<!-- -->&gt; \| undefined
+CancelablePromise&lt;CreatedResource&gt; \| undefined
 

@@ -15,8 +15,8 @@ orderBy?: (keyof Entity)[] | string[];
 ## Example
 
 
-```javascripton
-{ "orderBy": ["field1", "-field2"] }
+```json
+{ "orderBy": ["field1", "-field2" ]}
 
 ```
 

@@ -16,7 +16,7 @@ zoomToLayer(layerDef: string | ResourceAdapter): Promise<void>;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  layerDef | string \| [ResourceAdapter](./ngw-kit.resourceadapter.md) |  |
+|  layerDef | string \| ResourceAdapter |  |
 
 <b>Returns:</b>
 

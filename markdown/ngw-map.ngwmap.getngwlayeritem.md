@@ -21,5 +21,5 @@ getNgwLayerItem(options: {
 
 <b>Returns:</b>
 
-CancelablePromise&lt;[FeatureItem](./ngw-connector.featureitem.md)<!-- -->&gt;
+CancelablePromise&lt;FeatureItem&gt;
 

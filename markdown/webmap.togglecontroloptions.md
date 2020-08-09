@@ -4,7 +4,7 @@
 
 ## ToggleControlOptions interface
 
-Options for creating a [toggle control](./webmap.webmapcontrols.createtogglecontrol.md) to layout customization and assigning a callback function
+Options for creating a  to layout customization and assigning a callback function
 
 <b>Signature:</b>
 

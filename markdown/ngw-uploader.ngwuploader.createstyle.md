@@ -21,5 +21,5 @@ createStyle(newRes: Record<string, any>, name?: string): CancelablePromise<Creat
 
 <b>Returns:</b>
 
-CancelablePromise&lt;[CreatedResource](./ngw-connector.createdresource.md) &amp; { name: string; }&gt; \| undefined
+CancelablePromise&lt;CreatedResource &amp; { name: string; }&gt; \| undefined
 
