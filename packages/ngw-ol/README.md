@@ -1,6 +1,10 @@
-# Ngw Ol
+# NgwOl
 
-One file bundle for building [OpenLayers](https://openlayers.org/) map interacting with NextGIS
+![size](https://img.shields.io/bundlephobia/minzip/@nextgis/ngw-ol) ![version](https://img.shields.io/npm/v/@nextgis/ngw-ol)
+
+Single-file bundle for rapid deployment of [OpenLayers](https://openlayers.org/)-based web-gis applications with NextGIS services
+
+Styles images and other assets are already in bundle, you don't need to include anything except one JS file!
 
 ## Installation
 
@@ -8,12 +12,14 @@ One file bundle for building [OpenLayers](https://openlayers.org/) map interacti
 
 #### Include assets
 
-Simply download and include with a script tag. NgwOl will be registered as a global variable.
+Simply download and include with a script tag, `NgwOl` and `NgwMap` will be registered as a global variable.
 
 ```html
-<script src="../lib/ngw-ol.js"></script>
+<script src="../lib/ngw-ol.global.js"></script>
+
 <div id='map'></div>
 <script>
+  // var ngwMap = new NgwMap({
   var ngwMap = new NgwOl({
     baseUrl: 'https://demo.nextgis.com',
     target: 'map',
@@ -25,36 +31,42 @@ Simply download and include with a script tag. NgwOl will be registered as a glo
 
 #### CDN
 
+unpkg
+
 ```html
 <script src="https://unpkg.com/@nextgis/ngw-ol"></script>
 ```
 
-We recommend linking to a specific version number that you can update manually:
+jsdelivr
 
 ```html
-<script src="https://unpkg.com/@nextgis/ngw-ol@0.19.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/@nextgis/ngw-ol"></script>
 ```
+
+We recommend linking to a specific version number `/ngw-ol@[version]`
 
 ### In Node.js
 
-NPM is the recommended installation method when building large scale applications with NgwOl. It pairs nicely with module bundlers such as [Webpack](https://webpack.js.org/)
-
 ```bash
-# latest stable
-$ npm install @nextgis/ngw-ol
+$ npm install --save-dev @nextgis/ngw-ol
+# or
+$ yarn add @nextgis/ngw-ol
 ```
 
-```javascript
-import NgwOl from '@nextgis/ngw-ol';
+## Usage
 
-const ngwOl = new NgwOl({
+```javascript
+import NgwMap from '@nextgis/ngw-ol';
+
+const ngwMap = new NgwMap({
   baseUrl: 'https://demo.nextgis.com',
   target: 'map',
   qmsId: 487,
   webmapId: 3985
 });
-
 ```
+
+Check out the [API Documentation](https://github.com/nextgis/nextgis_frontend/blob/master/markdown/ngw-map.md)
 
 ## Commercial support
 

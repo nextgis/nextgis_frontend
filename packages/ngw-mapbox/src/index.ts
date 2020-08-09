@@ -1,3 +1,11 @@
+/**
+ * Single-file bundle for rapid deployment of {@link https://docs.mapbox.com/mapbox-gl-js | Mapbox GL JS } based web-gis applications with NextGIS services
+ *
+ * @remarks
+ * Styles images and other assets are already in bundle, you don't need to include anything except one JS file!
+ *
+ * @packageDocumentation
+ */
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 import { NgwMap, NgwLayerOptions, NgwMapOptions } from '@nextgis/ngw-map';
