@@ -169,6 +169,13 @@ function createConfig(format, output, plugins = []) {
     })
   );
 
+  // nodePlugins.push(
+  //   require('rollup-plugin-analyzer')({
+  //     // summaryOnly: true,
+  //     limit: 10,
+  //   })
+  // );
+
   return {
     input: resolve(entryFile),
     // Global and Browser ESM builds inlines everything so that they can be
@@ -202,6 +209,7 @@ function createConfig(format, output, plugins = []) {
     // treeshake: true,
     treeshake: {
       moduleSideEffects: !!packageOptions.injectCss,
+      // moduleSideEffects: false,
     },
   };
 }

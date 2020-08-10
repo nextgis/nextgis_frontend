@@ -1,11 +1,48 @@
-# Cancelable Promise
+# CancelablePromise
+
+![size](https://img.shields.io/bundlephobia/minzip/@nextgis/cancelable-promise) ![version](https://img.shields.io/npm/v/@nextgis/cancelable-promise)
 
 A promise you can stop.
 
 ## Installation
 
+### In Browser
+
+#### Include assets
+
+Simply download and include with a script tag, `CancelablePromise` will be registered as a global variable.
+
+```html
+<script src="../lib/cancelable-promise.global.js"></script>
+
+<script>
+  var promise = new CancelablePromise((resolve, reject, onCancel) => {
+    setTimeout(resolve, 1000);
+    onCancel(() => console.log('canceled'));
+  });
+  promise.cancel();
+</script>
+```
+
+#### CDN
+
+unpkg
+
+```html
+<script src="https://unpkg.com/@nextgis/cancelable-promise"></script>
+```
+
+jsdelivr
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@nextgis/cancelable-promise"></script>
+```
+
+We recommend linking to a specific version number `/cancelable-promise@[version]`
+
+### In Node.js
+
 ```bash
-# latest stable
 $ npm install --save-dev @nextgis/cancelable-promise
 # or
 $ yarn add @nextgis/cancelable-promise
@@ -54,6 +91,8 @@ const promise = new CancelablePromise((resolve, reject, onCancel) => {
 
 promise.cancel();
 ```
+
+Check out the [API Documentation](https://github.com/nextgis/nextgis_frontend/blob/master/markdown/cancelable-promise.md)
 
 ## Commercial support
 

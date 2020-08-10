@@ -80,8 +80,8 @@ export interface TreeLayer extends TreeItem {
   layer_adapter: string;
   layer_enabled: boolean;
   draw_order_position: number;
-  layer_max_scale_denom: number;
-  layer_min_scale_denom: number;
+  layer_max_scale_denom?: number;
+  layer_min_scale_denom?: number;
   layer_style_id: number;
   layer_transparency: number;
 
