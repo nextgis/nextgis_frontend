@@ -50,7 +50,7 @@ $ yarn add @nextgis/cancelable-promise
 
 ## Usage
 
-Catch `CancelError'
+Catch `CancelError`
 
 ```javascript
 import CancelablePromise from "@nextgis/cancelable-promise";
@@ -75,8 +75,8 @@ import CancelablePromise from "@nextgis/cancelable-promise";
 const promise = new CancelablePromise((resolve, reject, onCancel) => {
   const xhr = new XMLHttpRequest();
   xhr.open("GET", url, true);
-  xhr.onreadystatechange = () => {
-    resolve();
+  xhr.onload = () => {
+    resolve(xhr.responseText);
   };
   xhr.onerror = (er) => {
     reject(er);
