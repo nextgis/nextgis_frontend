@@ -1,17 +1,18 @@
 export * from './platform';
 
-export * from './events';
-export * from './array';
-export * from './object';
-export * from './string';
-export * from './re';
-export * from './url';
-export * from './sleep';
-export * from './defined';
-export * from './typeHelpers';
 export * from './applyMixins';
+export * from './array';
+export * from './defined';
 export * from './deepmerge';
 export * from './debounce';
+export * from './events';
+export * from './geom';
+export * from './object';
+export * from './re';
+export * from './sleep';
+export * from './string';
+export * from './typeHelpers';
+export * from './url';
 export * from './Clipboard';
 /**
  * Given an array of member function names as strings, replace all of them
