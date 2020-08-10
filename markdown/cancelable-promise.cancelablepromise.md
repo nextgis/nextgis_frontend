@@ -13,10 +13,11 @@ export declare class CancelablePromise<T = any> implements Promise<T>
 ```
 <b>Implements:</b> Promise&lt;T&gt;
 
-## Example
+## Example 1
 
+Catch `CancelError`
 
-```
+```javascript
 import CancelablePromise from "@nextgis/cancelable-promise";
 
 const promise = new CancelablePromise((resolve, reject) => {
@@ -26,6 +27,34 @@ const promise = new CancelablePromise((resolve, reject) => {
    // handle cancel error
  }
  throw er;
+});
+
+promise.cancel();
+
+```
+
+## Example 2
+
+Handle `onCancel` callback
+
+```javascript
+import CancelablePromise from "@nextgis/cancelable-promise";
+
+const promise = new CancelablePromise((resolve, reject, onCancel) => {
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", url, true);
+  xhr.onload = () => {
+    resolve(xhr.responseText);
+  };
+  xhr.onerror = (er) => {
+    reject(er);
+  };
+
+  onCancel(() => {
+    xhr.abort();
+  });
+
+  xhr.send();
 });
 
 promise.cancel();
