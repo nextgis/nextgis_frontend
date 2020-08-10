@@ -23,7 +23,8 @@ let ID = 0;
  * Promise that can be canceled
  *
  * @example
- * ```
+ * Catch `CancelError`
+ * ```javascript
  * import CancelablePromise from "@nextgis/cancelable-promise";
  *
  * const promise = new CancelablePromise((resolve, reject) => {
@@ -33,6 +34,30 @@ let ID = 0;
  *    // handle cancel error
  *  }
  *  throw er;
+ * });
+ *
+ * promise.cancel();
+ * ```
+ * @example
+ * Handle `onCancel` callback
+ * ```javascript
+ * import CancelablePromise from "@nextgis/cancelable-promise";
+ *
+ * const promise = new CancelablePromise((resolve, reject, onCancel) => {
+ *   const xhr = new XMLHttpRequest();
+ *   xhr.open("GET", url, true);
+ *   xhr.onload = () => {
+ *     resolve(xhr.responseText);
+ *   };
+ *   xhr.onerror = (er) => {
+ *     reject(er);
+ *   };
+ *
+ *   onCancel(() => {
+ *     xhr.abort();
+ *   });
+ *
+ *   xhr.send();
  * });
  *
  * promise.cancel();
