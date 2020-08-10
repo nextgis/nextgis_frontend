@@ -14,7 +14,7 @@ export declare function getNgwResourceExtent(item: ResourceItem, connector: NgwC
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  item | ResourceItem |  |
+|  item | [ResourceItem](./ngw-connector.resourceitem.md) |  |
 |  connector | NgwConnector |  |
 
 <b>Returns:</b>

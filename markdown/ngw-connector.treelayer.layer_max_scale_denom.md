@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-layer_max_scale_denom: any;
+layer_max_scale_denom?: number;
 ```

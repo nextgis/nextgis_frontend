@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-draw_order_position: any;
+draw_order_position: number;
 ```

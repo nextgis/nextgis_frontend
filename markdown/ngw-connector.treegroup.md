@@ -17,5 +17,5 @@ export interface TreeGroup extends TreeItem
 |  --- | --- | --- |
 |  [children](./ngw-connector.treegroup.children.md) | Array&lt;[TreeLayer](./ngw-connector.treelayer.md) \| [TreeGroup](./ngw-connector.treegroup.md)<!-- -->&gt; |  |
 |  [group\_expanded](./ngw-connector.treegroup.group_expanded.md) | boolean |  |
-|  [item\_type](./ngw-connector.treegroup.item_type.md) | 'group' |  |
+|  [item\_type](./ngw-connector.treegroup.item_type.md) | 'root' \| 'group' |  |
 

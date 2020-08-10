@@ -147,7 +147,6 @@ export class NgwConnector {
     if (credentials) {
       const { login, password } = credentials;
       const str = unescape(encodeURIComponent(`${login}:${password}`));
-      // @ts-ignore
       if (__BROWSER__) {
         return window.btoa(str);
       } else {

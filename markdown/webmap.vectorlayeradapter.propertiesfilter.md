@@ -26,7 +26,7 @@ void
 ## Example
 
 
-```js
+```javascript
 layer.propertiesFilter(['all', ['color', 'eq', 'green'], ['year', 'gt', 2011]]);
 layer.propertiesFilter([[
   'any',

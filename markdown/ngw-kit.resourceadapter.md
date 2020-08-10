@@ -17,7 +17,7 @@ export interface ResourceAdapter<M = any, L = any, O extends GeoJsonAdapterOptio
 |  Property | Type | Description |
 |  --- | --- | --- |
 |  [baselayer](./ngw-kit.resourceadapter.baselayer.md) | boolean |  |
-|  [item](./ngw-kit.resourceadapter.item.md) | ResourceItem |  |
+|  [item](./ngw-kit.resourceadapter.item.md) | [ResourceItem](./ngw-connector.resourceitem.md) |  |
 |  [resourceId](./ngw-kit.resourceadapter.resourceid.md) | number |  |
 
 ## Methods

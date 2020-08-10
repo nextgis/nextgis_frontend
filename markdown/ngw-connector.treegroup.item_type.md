@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-item_type: 'group';
+item_type: 'root' | 'group';
 ```

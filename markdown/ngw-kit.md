@@ -4,14 +4,69 @@
 
 ## ngw-kit package
 
+WebMap plugin and utilities that allow you to interact with NextGIS Web.
+
+## Remarks
+
+Make sure CORS is registered in the [NextGIS Web settings](https://docs.nextgis.com/docs_ngcom/source/CORS.html) to be able to send requests.
+
+## Example 1
+
+As WebMap starter kit example
+
+```javascript
+import { NgwKit } from '@nextgis/ngw-kit';
+import { createWebMap } from '@nextgis/webmap';
+import LeafletMapAdapter from '@nextgis/leaflet-map-adapter';
+
+import 'leaflet/dist/leaflet.css';
+
+createWebMap({
+  mapAdapter: new LeafletMapAdapter(),
+  starterKits: [
+    new NgwKit({
+      baseUrl: 'YOU NEXTGIS WEB URL',
+      resource: 'WEBMAP RESOURCE ID',
+    }),
+  ],
+});
+
+```
+
+## Example 2
+
+Get NGW vector layer items
+
+```javascript
+import { getNgwLayerItem, getNgwLayerItems } from '@nextgis/ngw-kit';
+import NgwConnector from '@nextgis/ngw-connector';
+
+const connector = new NgwConnector({ baseUrl: 'YOU NEXTGIS WEB URL'});
+
+getNgwLayerItem({
+  resourceId: 2011,
+  featureId: 1,
+  connector: connector
+}).then((item) => { ... });
+
+getNgwLayerItems({
+  resourceId: 2011,
+  offset: 10,
+  limit: 300,
+  fields: ['name', 'year', 'Ni', 'Cu', 'Pt', 'Pd', 'Au']
+  orderBy: ['year']
+}).then((items) => { ... });
+
+```
+
 ## Classes
 
 |  Class | Description |
 |  --- | --- |
 |  [NgwKit](./ngw-kit.ngwkit.md) |  |
 |  [NgwResource](./ngw-kit.ngwresource.md) |  |
-|  [WebMapLayerAdapter](./ngw-kit.webmaplayeradapter.md) |  |
-|  [WebMapLayerItem](./ngw-kit.webmaplayeritem.md) |  |
+|  [NgwWebmapItem](./ngw-kit.ngwwebmapitem.md) |  |
+|  [NgwWebmapLayerAdapter](./ngw-kit.ngwwebmaplayeradapter.md) |  |
 
 ## Functions
 
@@ -24,12 +79,11 @@
 |  [createOnFirstShowAdapter({ webMap, connector, item, adapterOptions, idPrefix, })](./ngw-kit.createonfirstshowadapter.md) |  |
 |  [createRasterAdapter({ layerOptions, webMap, connector, item, })](./ngw-kit.createrasteradapter.md) |  |
 |  [degrees2meters(lng, lat)](./ngw-kit.degrees2meters.md) |  |
-|  [extendWebMapLayerAdapter(opt)](./ngw-kit.extendwebmaplayeradapter.md) |  |
+|  [extendNgwWebmapLayerAdapter(opt)](./ngw-kit.extendngwwebmaplayeradapter.md) |  |
 |  [getCirclePoly(lng, lat, radius, points)](./ngw-kit.getcirclepoly.md) |  |
 |  [getCompanyLogo(connector, options)](./ngw-kit.getcompanylogo.md) |  |
 |  [getIdentifyGeoJson(options)](./ngw-kit.getidentifygeojson.md) |  |
 |  [getIdentifyItems(identify, multiple)](./ngw-kit.getidentifyitems.md) |  |
-|  [getLayerAdapterOptions(options, webMap, baseUrl)](./ngw-kit.getlayeradapteroptions.md) |  |
 |  [getMapWidthForLanInMeters(lat)](./ngw-kit.getmapwidthforlaninmeters.md) |  |
 |  [getNgwLayerExtent(id, connector)](./ngw-kit.getngwlayerextent.md) |  |
 |  [getNgwLayerFeature(options)](./ngw-kit.getngwlayerfeature.md) |  |
@@ -37,9 +91,10 @@
 |  [getNgwLayerItem(options)](./ngw-kit.getngwlayeritem.md) |  |
 |  [getNgwLayerItems(options)](./ngw-kit.getngwlayeritems.md) |  |
 |  [getNgwResourceExtent(item, connector)](./ngw-kit.getngwresourceextent.md) |  |
-|  [getWebMapExtent(webmap)](./ngw-kit.getwebmapextent.md) |  |
+|  [getNgwWebmapExtent(webmap)](./ngw-kit.getngwwebmapextent.md) |  |
 |  [getZoomFromScale(scale)](./ngw-kit.getzoomfromscale.md) |  |
 |  [pixelsInMeterWidth()](./ngw-kit.pixelsinmeterwidth.md) |  |
+|  [prepareFieldsToNgw(item, resourceFields)](./ngw-kit.preparefieldstongw.md) |  |
 |  [resourceIdFromLayerOptions(options, connector)](./ngw-kit.resourceidfromlayeroptions.md) |  |
 |  [sendIdentifyRequest(ev, options)](./ngw-kit.sendidentifyrequest.md) |  |
 |  [setScaleRatio(scale, lat)](./ngw-kit.setscaleratio.md) |  |
@@ -51,6 +106,8 @@
 |  --- | --- |
 |  [AppSettings](./ngw-kit.appsettings.md) |  |
 |  [CompanyLogoOptions](./ngw-kit.companylogooptions.md) |  |
+|  [ExtendNgwWebmapLayerAdapterOptions](./ngw-kit.extendngwwebmaplayeradapteroptions.md) |  |
+|  [FeatureIdentifyRequestOptions](./ngw-kit.featureidentifyrequestoptions.md) |  |
 |  [FeatureRequestParams](./ngw-kit.featurerequestparams.md) |  |
 |  [GetClassAdapterOptions](./ngw-kit.getclassadapteroptions.md) |  |
 |  [GetIdentifyGeoJsonOptions](./ngw-kit.getidentifygeojsonoptions.md) |  |
@@ -62,19 +119,20 @@
 |  [NgwIdentifyItem](./ngw-kit.ngwidentifyitem.md) |  |
 |  [NgwKitOptions](./ngw-kit.ngwkitoptions.md) |  |
 |  [NgwLayerOptionsAdditional](./ngw-kit.ngwlayeroptionsadditional.md) |  |
+|  [NgwWebmapAdapterOptions](./ngw-kit.ngwwebmapadapteroptions.md) |  |
+|  [NgwWebmapLayerAdapterEvents](./ngw-kit.ngwwebmaplayeradapterevents.md) |  |
 |  [ResourceAdapter](./ngw-kit.resourceadapter.md) |  |
 |  [ResourceIdNgwLayerOptions](./ngw-kit.resourceidngwlayeroptions.md) |  |
 |  [ResourceNgwLayerOptions](./ngw-kit.resourcengwlayeroptions.md) |  |
 |  [TreeGroup](./ngw-kit.treegroup.md) |  |
 |  [TreeItem](./ngw-kit.treeitem.md) |  |
 |  [TreeLayer](./ngw-kit.treelayer.md) |  |
-|  [WebMapAdapterOptions](./ngw-kit.webmapadapteroptions.md) |  |
-|  [WebMapLayerAdapterEvents](./ngw-kit.webmaplayeradapterevents.md) |  |
 
 ## Variables
 
 |  Variable | Description |
 |  --- | --- |
+|  [FEATURE\_REQUEST\_PARAMS](./ngw-kit.feature_request_params.md) |  |
 |  [vectorLayerGeomToPaintTypeAlias](./ngw-kit.vectorlayergeomtopainttypealias.md) |  |
 
 ## Type Aliases

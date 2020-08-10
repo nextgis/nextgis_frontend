@@ -18,5 +18,5 @@ patch(opt: PatchOptions<G, P>): Promise<FeatureItem<P> | undefined>;
 
 <b>Returns:</b>
 
-Promise&lt;FeatureItem&lt;P&gt; \| undefined&gt;
+Promise&lt;[FeatureItem](./ngw-connector.featureitem.md)<!-- -->&lt;P&gt; \| undefined&gt;
 

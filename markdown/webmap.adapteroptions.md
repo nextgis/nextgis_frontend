@@ -9,7 +9,7 @@ Parameters that can be used to create any map layer adapter.
 <b>Signature:</b>
 
 ```typescript
-export interface AdapterOptions 
+export interface AdapterOptions<N extends Record<string, any> = Record<string, any>> 
 ```
 
 ## Properties
@@ -19,13 +19,13 @@ export interface AdapterOptions
 |  [adapter](./webmap.adapteroptions.adapter.md) | string |  |
 |  [attribution](./webmap.adapteroptions.attribution.md) | string | String to be shown in the attribution control. It describes the layer data and is often a legal obligation towards copyright holders and tile providers. |
 |  [baselayer](./webmap.adapteroptions.baselayer.md) | boolean | Indicate on a cartographic base layer. |
-|  [baseLayer](./webmap.adapteroptions.baselayer.md) | boolean |  |
 |  [crossOrigin](./webmap.adapteroptions.crossorigin.md) | 'anonymous' | Parameter added when forming a request for layer data. This is needed if you want to access tile pixel data. Refer to [CORS Settings](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin) for valid String values. |
 |  [fit](./webmap.adapteroptions.fit.md) | boolean | Fit map to layer extent |
 |  [id](./webmap.adapteroptions.id.md) | string | Unique Layer ID. If not specified, will be added automatically. |
 |  [maxZoom](./webmap.adapteroptions.maxzoom.md) | number | Maximum zoom level of the map. |
 |  [minZoom](./webmap.adapteroptions.minzoom.md) | number | Minimum zoom level of the map. |
 |  [name](./webmap.adapteroptions.name.md) | string | Non-unique name of the layer. Can be used for user interfaces. |
+|  [nativeOptions](./webmap.adapteroptions.nativeoptions.md) | N |  |
 |  [opacity](./webmap.adapteroptions.opacity.md) | number | Layer transparency. From 0-transparent to 1-visible |
 |  [order](./webmap.adapteroptions.order.md) | number | Indicates the map layers display sequence. A layer with a larger order value overlaps smaller ones. Zero value used to indicate baselayer. If the value is not specified explicitly, it will be assigned automatically with an increase of one for each new layer. |
 |  [visibility](./webmap.adapteroptions.visibility.md) | boolean | Show layer on the map immediately after adding. Such layers are always under others. Only one base layer can be displayed on the map at a time. |

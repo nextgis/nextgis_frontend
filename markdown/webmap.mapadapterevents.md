@@ -8,9 +8,9 @@
 <b>Signature:</b>
 
 ```typescript
-export interface MapAdapterEvents extends BaseMapEvents 
+export interface MapAdapterEvents extends MainMapEvents 
 ```
-<b>Extends:</b> [BaseMapEvents](./webmap.basemapevents.md)
+<b>Extends:</b> [MainMapEvents](./webmap.mainmapevents.md)
 
 ## Events
 

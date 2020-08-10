@@ -8,9 +8,9 @@
 <b>Signature:</b>
 
 ```typescript
-export interface VectorAdapterOptions<F extends Feature = Feature, L = any> extends _VectorAdapterOptionsToExtend 
+export interface VectorAdapterOptions<F extends Feature = Feature, L = any, N = Record<string, any>> extends _VectorAdapterOptionsToExtend<N> 
 ```
-<b>Extends:</b> \_VectorAdapterOptionsToExtend
+<b>Extends:</b> \_VectorAdapterOptionsToExtend&lt;N&gt;
 
 ## Properties
 
@@ -25,7 +25,6 @@ export interface VectorAdapterOptions<F extends Feature = Feature, L = any> exte
 |  [label](./webmap.vectoradapteroptions.label.md) | (e: [LayerDefinition](./webmap.layerdefinition.md)<!-- -->&lt;F, L&gt;) =&gt; void \| string |  |
 |  [labelField](./webmap.vectoradapteroptions.labelfield.md) | string |  |
 |  [multiselect](./webmap.vectoradapteroptions.multiselect.md) | boolean | Indicates whether several objects can be selected in one layer. |
-|  [nativeOptions](./webmap.vectoradapteroptions.nativeoptions.md) | Record&lt;string, any&gt; |  |
 |  [paint](./webmap.vectoradapteroptions.paint.md) | [Paint](./paint.paint.md) | Determine the appearance of the vector data geometries. |
 |  [popup](./webmap.vectoradapteroptions.popup.md) | boolean |  |
 |  [popupOnSelect](./webmap.vectoradapteroptions.popuponselect.md) | boolean |  |

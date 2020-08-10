@@ -10,6 +10,12 @@
 |  --- | --- |
 |  [NgwMap](./ngw-map.ngwmap.md) | Base class containing the logic of interaction WebMap with NextGIS services. |
 
+## Functions
+
+|  Function | Description |
+|  --- | --- |
+|  [createNgwMap(mapAdapter, options)](./ngw-map.createngwmap.md) |  |
+
 ## Interfaces
 
 |  Interface | Description |

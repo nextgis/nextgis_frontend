@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-draw_order_enabled: any;
+draw_order_enabled: boolean;
 ```

@@ -8,15 +8,30 @@
 
 |  Package | Description |
 |  --- | --- |
-|  [@nextgis/ngw-connector](./ngw-connector.md) |  |
-|  [@nextgis/ngw-kit](./ngw-kit.md) |  |
+|  [@nextgis/cancelable-promise](./cancelable-promise.md) | A promise you can stop |
+|  [@nextgis/control-container](./control-container.md) |  |
+|  [@nextgis/dialog](./dialog.md) |  |
+|  [@nextgis/dom](./dom.md) |  |
+|  [@nextgis/icons](./icons.md) |  |
+|  [@nextgis/item](./item.md) |  |
+|  [@nextgis/leaflet-map-adapter](./leaflet-map-adapter.md) |  |
+|  [@nextgis/mapboxgl-map-adapter](./mapboxgl-map-adapter.md) |  |
+|  [@nextgis/ngw-connector](./ngw-connector.md) | A lightweight HTTP client optimized for use with [NextGIS Web](http://docs.nextgis.ru/docs_ngweb_dev/doc/developer/toc.html) API |
+|  [@nextgis/ngw-kit](./ngw-kit.md) | WebMap plugin and utilities that allow you to interact with NextGIS Web. |
+|  [@nextgis/ngw-leaflet](./ngw-leaflet.md) | Single-file bundle for rapid deployment of [Leaflet](https://leafletjs.com/)<!-- -->-based web-gis applications with NextGIS services |
 |  [@nextgis/ngw-map](./ngw-map.md) |  |
+|  [@nextgis/ngw-mapbox](./ngw-mapbox.md) | Single-file bundle for rapid deployment of [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js) based web-gis applications with NextGIS services |
+|  [@nextgis/ngw-ol](./ngw-ol.md) | Single-file bundle for rapid deployment of [OpenLayers](https://openlayers.org/)<!-- -->-based web-gis applications with NextGIS services |
+|  [@nextgis/ngw-orm](./ngw-orm.md) |  |
 |  [@nextgis/ngw-uploader](./ngw-uploader.md) |  |
+|  [@nextgis/ol-map-adapter](./ol-map-adapter.md) |  |
 |  [@nextgis/paint](./paint.md) |  |
 |  [@nextgis/properties-filter](./properties-filter.md) |  |
 |  [@nextgis/qms-kit](./qms-kit.md) |  |
 |  [@nextgis/url-runtime-params](./url-runtime-params.md) |  |
 |  [@nextgis/utils](./utils.md) |  |
+|  [@nextgis/vue-ngw-map](./vue-ngw-map.md) |  |
+|  [@nextgis/vuetify-ngw-components](./vuetify-ngw-components.md) |  |
 |  [@nextgis/vuex-ngw](./vuex-ngw.md) |  |
 |  [@nextgis/webmap](./webmap.md) | The library that allows to use a single interface for managing various interactive map frameworks. |
 

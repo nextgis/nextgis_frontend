@@ -16,9 +16,9 @@ updateStore(opt: {
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  opt | { item: FeatureItem&lt;P&gt;; } |  |
+|  opt | { item: [FeatureItem](./ngw-connector.featureitem.md)<!-- -->&lt;P&gt;; } |  |
 
 <b>Returns:</b>
 
-Promise&lt;ResourceStoreItem&lt;P&gt;\[\] \| undefined&gt;
+Promise&lt;[ResourceStoreItem](./ngw-connector.resourcestoreitem.md)<!-- -->&lt;P&gt;\[\] \| undefined&gt;
 

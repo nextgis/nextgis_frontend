@@ -18,5 +18,5 @@ delete(fid: number): Promise<ResourceStoreItem<P>[]>;
 
 <b>Returns:</b>
 
-Promise&lt;ResourceStoreItem&lt;P&gt;\[\]&gt;
+Promise&lt;[ResourceStoreItem](./ngw-connector.resourcestoreitem.md)<!-- -->&lt;P&gt;\[\]&gt;
 
