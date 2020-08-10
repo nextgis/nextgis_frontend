@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function getNgwLayerItem<G extends Geometry | null = Geometry, P extends Record<string, any> = Record<string, any>>(options: {
+export declare function getNgwLayerItem<G extends Geometry | null = Geometry, P extends JsonMap = JsonMap>(options: {
     resourceId: number;
     featureId: number;
     connector: NgwConnector;
@@ -22,5 +22,5 @@ export declare function getNgwLayerItem<G extends Geometry | null = Geometry, P 
 
 <b>Returns:</b>
 
-CancelablePromise&lt;FeatureItem&gt;
+CancelablePromise&lt;[FeatureItem](./ngw-connector.featureitem.md)<!-- -->&gt;
 

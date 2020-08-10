@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-export declare type FeatureItemToNgw<F = FeatureLayerFields> = FeatureItem<F, string>;
+export declare type FeatureItemToNgw<F = FeatureLayerFields, G extends GeometryObject | string = GeometryObject> = FeatureItem<F, G>;
 ```

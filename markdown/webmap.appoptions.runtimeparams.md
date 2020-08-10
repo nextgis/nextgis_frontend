@@ -15,7 +15,7 @@ runtimeParams?: RuntimeParams[];
 ## Example
 
 
-```js
+```javascript
 import RuntimeParams from '@nextgis/url-runtime-params';
 // this will allow to write in the url params of map center and zoomlevel when moving
 new WebMap({

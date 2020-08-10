@@ -20,12 +20,6 @@
   "buildOptions": {
     "name": "NgwLeaflet",
     "injectCss": true,
-    "#alias": [
-      {
-        "find": "^leaflet$",
-        "replacement": "leaflet/dist/leaflet-src.esm"
-      }
-    ],
     "formats": [
       "esm-bundler",
       "esm-browser",

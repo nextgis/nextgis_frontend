@@ -1,3 +1,5 @@
+import { JsonMap } from '@nextgis/utils';
+
 export interface TreeItem {
   item_type: 'root' | 'group' | 'layer';
   display_name?: string;
@@ -8,7 +10,7 @@ export interface TreeItem {
 }
 
 export interface TreeGroup extends TreeItem {
-  item_type: 'group';
+  item_type: 'root' | 'group';
   group_expanded?: boolean;
   children: Array<TreeLayer | TreeGroup>;
 }
@@ -17,11 +19,11 @@ export interface TreeLayer extends TreeItem {
   item_type: 'layer';
   layer_adapter: string;
   layer_enabled: boolean;
-  draw_order_position: any;
-  layer_max_scale_denom: any;
-  layer_min_scale_denom: any;
+  draw_order_position: number;
+  layer_max_scale_denom?: number;
+  layer_min_scale_denom?: number;
   layer_style_id: number;
-  layer_transparency: any;
+  layer_transparency: number;
 }
 
 export interface Permission {
@@ -102,7 +104,7 @@ export interface WebmapResource {
   extent_right: number;
   extent_bottom: number;
   extent_top: number;
-  draw_order_enabled: any;
+  draw_order_enabled: boolean;
   bookmark_resource: ResourceHierarchy;
   root_item: TreeGroup;
 }
@@ -187,7 +189,7 @@ export interface NgwFile {
 export interface ResourceItemMain {
   resource: Resource;
   resmeta: {
-    items: Record<string, any>;
+    items: JsonMap;
   };
 }
 

@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function getIdentifyGeoJson<G extends Geometry | null = Geometry, P extends Record<string, any> = Record<string, any>>(options: GetIdentifyGeoJsonOptions): CancelablePromise<Feature<G, P>> | Feature<G, P> | undefined;
+export declare function getIdentifyGeoJson<G extends Geometry | null = Geometry, P extends JsonMap = JsonMap>(options: GetIdentifyGeoJsonOptions): CancelablePromise<Feature<G, P>> | Feature<G, P> | undefined;
 ```
 
 ## Parameters

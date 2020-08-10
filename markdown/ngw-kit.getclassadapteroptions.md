@@ -15,10 +15,10 @@ export interface GetClassAdapterOptions
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [Adapter](./ngw-kit.getclassadapteroptions.adapter.md) | Type&lt;MainLayerAdapter&gt; |  |
+|  [Adapter](./ngw-kit.getclassadapteroptions.adapter.md) | Type&lt;[MainLayerAdapter](./webmap.mainlayeradapter.md)<!-- -->&gt; |  |
 |  [addLayerOptionsPriority](./ngw-kit.getclassadapteroptions.addlayeroptionspriority.md) | false |  |
 |  [connector](./ngw-kit.getclassadapteroptions.connector.md) | NgwConnector |  |
-|  [item](./ngw-kit.getclassadapteroptions.item.md) | ResourceItem |  |
+|  [item](./ngw-kit.getclassadapteroptions.item.md) | [ResourceItem](./ngw-connector.resourceitem.md) |  |
 |  [layerOptions](./ngw-kit.getclassadapteroptions.layeroptions.md) | [NgwLayerOptions](./ngw-kit.ngwlayeroptions.md) |  |
 |  [webMap](./ngw-kit.getclassadapteroptions.webmap.md) | [WebMap](./webmap.webmap.md) |  |
 

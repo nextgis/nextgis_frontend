@@ -11,5 +11,5 @@ getFields(): Promise<FeatureLayerField[] | undefined>;
 ```
 <b>Returns:</b>
 
-Promise&lt;FeatureLayerField\[\] \| undefined&gt;
+Promise&lt;[FeatureLayerField](./ngw-connector.featurelayerfield.md)<!-- -->\[\] \| undefined&gt;
 

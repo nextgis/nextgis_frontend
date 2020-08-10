@@ -15,7 +15,7 @@ export interface WebmapResource
 |  Property | Type | Description |
 |  --- | --- | --- |
 |  [bookmark\_resource](./ngw-connector.webmapresource.bookmark_resource.md) | [ResourceHierarchy](./ngw-connector.resourcehierarchy.md) |  |
-|  [draw\_order\_enabled](./ngw-connector.webmapresource.draw_order_enabled.md) | any |  |
+|  [draw\_order\_enabled](./ngw-connector.webmapresource.draw_order_enabled.md) | boolean |  |
 |  [extent\_bottom](./ngw-connector.webmapresource.extent_bottom.md) | number |  |
 |  [extent\_left](./ngw-connector.webmapresource.extent_left.md) | number |  |
 |  [extent\_right](./ngw-connector.webmapresource.extent_right.md) | number |  |

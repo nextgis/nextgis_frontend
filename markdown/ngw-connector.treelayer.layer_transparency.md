@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-layer_transparency: any;
+layer_transparency: number;
 ```

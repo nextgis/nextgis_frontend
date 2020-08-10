@@ -4,7 +4,7 @@
 
 ## ButtonControlOptions interface
 
-Options for creating a .
+Options for creating a [button control](./webmap.webmapcontrols.createbuttoncontrol.md)<!-- -->.
 
 <b>Signature:</b>
 

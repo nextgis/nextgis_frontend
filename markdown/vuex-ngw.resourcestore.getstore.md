@@ -11,5 +11,5 @@ getStore(): Promise<ResourceStoreItem<P>[] | undefined>;
 ```
 <b>Returns:</b>
 
-Promise&lt;ResourceStoreItem&lt;P&gt;\[\] \| undefined&gt;
+Promise&lt;[ResourceStoreItem](./ngw-connector.resourcestoreitem.md)<!-- -->&lt;P&gt;\[\] \| undefined&gt;
 

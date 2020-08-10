@@ -9,7 +9,7 @@
 ```typescript
 export interface NgwUploadOptions extends NgwConnectorOptions 
 ```
-<b>Extends:</b> NgwConnectorOptions
+<b>Extends:</b> [NgwConnectorOptions](./ngw-connector.ngwconnectoroptions.md)
 
 ## Properties
 

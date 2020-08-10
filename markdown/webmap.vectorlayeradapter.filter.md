@@ -25,7 +25,7 @@ Array&lt;[LayerDefinition](./webmap.layerdefinition.md)<!-- -->&lt;Feature, L&gt
 ## Example
 
 
-```js
+```javascript
 layer.filter((e) => e.feature.properties.id === 2011);
 // but in this case it’s better to do so:
 layer.propertiesFilter([['id', 'eq', 2011]])

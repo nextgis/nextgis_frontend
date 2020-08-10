@@ -7,14 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function createGeoJsonFeature<G extends Geometry | null = Geometry, P extends Record<string, any> = Record<string, any>>(item: Pick<FeatureItem, 'id' | 'geom' | 'fields'>): Feature<G, P>;
+export declare function createGeoJsonFeature<G extends Geometry | null = Geometry, P extends JsonMap = JsonMap>(item: Pick<FeatureItem, 'id' | 'geom' | 'fields'>): Feature<G, P>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  item | Pick&lt;FeatureItem, 'id' \| 'geom' \| 'fields'&gt; |  |
+|  item | Pick&lt;[FeatureItem](./ngw-connector.featureitem.md)<!-- -->, 'id' \| 'geom' \| 'fields'&gt; |  |
 
 <b>Returns:</b>
 

@@ -20,5 +20,5 @@ prepareFeatureToNgw<G extends Geometry | null = Geometry, P = GeoJsonProperties>
 
 <b>Returns:</b>
 
-Promise&lt;Partial&lt;FeatureItem&lt;P&gt;&gt;&gt;
+Promise&lt;Partial&lt;[FeatureItem](./ngw-connector.featureitem.md)<!-- -->&lt;P&gt;&gt;&gt;
 

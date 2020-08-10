@@ -20,5 +20,5 @@ createResource(meta: Record<string, any>, name: string, options: RasterUploadOpt
 
 <b>Returns:</b>
 
-CancelablePromise&lt;CreatedResource&gt; \| undefined
+CancelablePromise&lt;[CreatedResource](./ngw-connector.createdresource.md)<!-- -->&gt; \| undefined
 

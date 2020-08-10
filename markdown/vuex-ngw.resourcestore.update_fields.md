@@ -14,7 +14,7 @@ protected UPDATE_FIELDS(fields: FeatureLayerField[]): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  fields | FeatureLayerField\[\] |  |
+|  fields | [FeatureLayerField](./ngw-connector.featurelayerfield.md)<!-- -->\[\] |  |
 
 <b>Returns:</b>
 

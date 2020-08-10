@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-layer_min_scale_denom: number;
+layer_min_scale_denom?: number;
 ```
