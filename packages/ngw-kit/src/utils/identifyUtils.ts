@@ -2,7 +2,7 @@ import { Geometry, Feature } from 'geojson';
 import { LayerFeature, FeatureLayersIdentify } from '@nextgis/ngw-connector';
 import CancelablePromise from '@nextgis/cancelable-promise';
 import { MapClickEvent } from '@nextgis/webmap';
-import { JsonMap } from '@nextgis/utils';
+import { JsonMap, degrees2meters, getCirclePoly } from '@nextgis/utils';
 import {
   GetIdentifyGeoJsonOptions,
   NgwIdentify,
@@ -10,7 +10,6 @@ import {
   IdentifyRequestOptions,
   FeatureIdentifyRequestOptions,
 } from '../interfaces';
-import { getCirclePoly, degrees2meters } from './utils';
 import { getNgwLayerFeature, createGeoJsonFeature } from './featureLayerUtils';
 
 export function getIdentifyItems(
