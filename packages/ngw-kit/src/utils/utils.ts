@@ -113,43 +113,6 @@ export async function getNgwResourceExtent(
   }
 }
 
-const d2r = Math.PI / 180; // degrees to radians
-const r2d = 180 / Math.PI; // radians to degrees
-const earthsradius = 3963; // 3963 is the radius of the earth in miles
-
-export function getCirclePoly(
-  lng: number,
-  lat: number,
-  radius = 10,
-  points = 6
-): number[][] {
-  // find the radius in lat/lon
-  const rlat = (radius / earthsradius) * r2d;
-  const rlng = rlat / Math.cos(lat * d2r);
-
-  const extp = [];
-  for (let i = 0; i < points + 1; i++) {
-    // one extra here makes sure we connect the
-
-    const theta = Math.PI * (i / (points / 2));
-    const ex = lng + rlng * Math.cos(theta); // center a + radius x * cos(theta)
-    const ey = lat + rlat * Math.sin(theta); // center b + radius y * sin(theta)
-    extp.push([ex, ey]);
-  }
-
-  // add the circle to the map
-  return extp;
-}
-
-export function degrees2meters(lng: number, lat: number): [number, number] {
-  lat = lat > 85.06 ? 85.06 : lat < -85.06 ? -85.06 : lat;
-
-  const x = (lng * 20037508.34) / 180;
-  let y = Math.log(Math.tan(((90 + lat) * Math.PI) / 360)) / (Math.PI / 180);
-  y = (y * 20037508.34) / 180;
-  return [x, y];
-}
-
 export interface ExtendNgwWebmapLayerAdapterOptions {
   webMap: WebMap;
   connector: NgwConnector;

@@ -8,12 +8,9 @@ import {
   FilterOptions,
   LayerAdapter,
 } from '@nextgis/webmap';
-import { debounce } from '@nextgis/utils';
+import { debounce, degrees2meters } from '@nextgis/utils';
 import CancelablePromise from '@nextgis/cancelable-promise';
-import {
-  degrees2meters,
-  vectorLayerGeomToPaintTypeAlias,
-} from '../utils/utils';
+import { vectorLayerGeomToPaintTypeAlias } from '../utils/utils';
 import { getNgwLayerFeatures } from '../utils/featureLayerUtils';
 import { createPopupContent } from '../utils/createPopupContent';
 import { getLayerFilterOptions } from '../utils/getLayerFilterOptions';
