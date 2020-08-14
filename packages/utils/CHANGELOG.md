@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.4](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2020-08-14)
+
+
+### Bug Fixes
+
+* **leaflet-map-adapter:** init center option ([f0cff9e](https://github.com/nextgis/nextgis_frontend/commit/f0cff9ee40e26043b25c85bf556b78a2a0b5366f))
+
+
+### Features
+
+* **util:** add coord format transformer ([9709333](https://github.com/nextgis/nextgis_frontend/commit/97093339c11b104106dc1f9aff3a3b691b02966c))
+* **utils:** add DebounceDecorator ([196284c](https://github.com/nextgis/nextgis_frontend/commit/196284cc25033d12a3108aa87706c92c3b4317d4))
+* **utils:** move some utils from ngw-kit and webmap to geom ([fbd3d91](https://github.com/nextgis/nextgis_frontend/commit/fbd3d913485c537e92068b5284691bb47f123b43))
+
+
+
+
+
 # [1.0.0-alpha.3](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2020-08-08)
 
 
