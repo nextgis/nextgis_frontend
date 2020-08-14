@@ -14,7 +14,7 @@ fitBounds(e: LngLatBoundsArray): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  e | [LngLatBoundsArray](./webmap.lnglatboundsarray.md) |  |
+|  e | LngLatBoundsArray |  |
 
 <b>Returns:</b>
 

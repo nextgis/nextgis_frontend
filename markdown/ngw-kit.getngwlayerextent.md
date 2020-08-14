@@ -19,5 +19,5 @@ export declare function getNgwLayerExtent(id: number, connector: NgwConnector): 
 
 <b>Returns:</b>
 
-Promise&lt;[LngLatBoundsArray](./webmap.lnglatboundsarray.md) \| undefined&gt;
+Promise&lt;LngLatBoundsArray \| undefined&gt;
 

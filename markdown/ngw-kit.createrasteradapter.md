@@ -18,5 +18,5 @@ export declare function createRasterAdapter({ layerOptions, webMap, connector, i
 
 <b>Returns:</b>
 
-Promise&lt;Type&lt;[MainLayerAdapter](./webmap.mainlayeradapter.md)<!-- -->&gt; \| undefined&gt;
+Promise&lt;[Type](./utils.type.md)<!-- -->&lt;[MainLayerAdapter](./webmap.mainlayeradapter.md)<!-- -->&gt; \| undefined&gt;
 

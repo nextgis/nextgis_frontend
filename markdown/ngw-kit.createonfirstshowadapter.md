@@ -18,5 +18,5 @@ export declare function createOnFirstShowAdapter({ webMap, connector, item, adap
 
 <b>Returns:</b>
 
-Promise&lt;Type&lt;[MainLayerAdapter](./webmap.mainlayeradapter.md)<!-- -->&gt;&gt;
+Promise&lt;[Type](./utils.type.md)<!-- -->&lt;[MainLayerAdapter](./webmap.mainlayeradapter.md)<!-- -->&gt;&gt;
 

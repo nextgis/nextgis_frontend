@@ -29,7 +29,7 @@ Returns true if the object is defined, returns false otherwise.
 ## Example
 
 
-```javascript
+```js
 if (defined(positions)) {
      doSomething();
 } else {

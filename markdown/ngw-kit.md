@@ -78,9 +78,7 @@ getNgwLayerItems({
 |  [createGeoJsonFeature(item)](./ngw-kit.creategeojsonfeature.md) |  |
 |  [createOnFirstShowAdapter({ webMap, connector, item, adapterOptions, idPrefix, })](./ngw-kit.createonfirstshowadapter.md) |  |
 |  [createRasterAdapter({ layerOptions, webMap, connector, item, })](./ngw-kit.createrasteradapter.md) |  |
-|  [degrees2meters(lng, lat)](./ngw-kit.degrees2meters.md) |  |
 |  [extendNgwWebmapLayerAdapter(opt)](./ngw-kit.extendngwwebmaplayeradapter.md) |  |
-|  [getCirclePoly(lng, lat, radius, points)](./ngw-kit.getcirclepoly.md) |  |
 |  [getCompanyLogo(connector, options)](./ngw-kit.getcompanylogo.md) |  |
 |  [getIdentifyGeoJson(options)](./ngw-kit.getidentifygeojson.md) |  |
 |  [getIdentifyItems(identify, multiple)](./ngw-kit.getidentifyitems.md) |  |

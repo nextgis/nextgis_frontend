@@ -31,7 +31,7 @@ export declare class WebMapMain<M = any, L = any, C = any, E extends WebMapEvent
 |  [keys](./webmap.webmapmain.keys.md) |  | Keys |  |
 |  [keys](./webmap.webmapmain.keys.md) | <code>static</code> | Keys |  |
 |  [mapAdapter](./webmap.webmapmain.mapadapter.md) |  | [MapAdapter](./webmap.mapadapter.md)<!-- -->&lt;M&gt; |  |
-|  [mapState](./webmap.webmapmain.mapstate.md) |  | Type&lt;StateItem&gt;\[\] |  |
+|  [mapState](./webmap.webmapmain.mapstate.md) |  | [Type](./utils.type.md)<!-- -->&lt;StateItem&gt;\[\] |  |
 |  [options](./webmap.webmapmain.options.md) |  | [MapOptions](./webmap.mapoptions.md) |  |
 |  [runtimeParams](./webmap.webmapmain.runtimeparams.md) |  | [RuntimeParams](./webmap.runtimeparams.md)<!-- -->\[\] |  |
 |  [utils](./webmap.webmapmain.utils.md) | <code>static</code> | { detectGeometryType: typeof detectGeometryType; findMostFrequentGeomType: typeof findMostFrequentGeomType; updateGeoJsonAdapterOptions: typeof updateGeoJsonAdapterOptions; propertiesFilter: typeof propertiesFilter; createToggleControl: typeof createToggleControl; getBoundsPolygon: typeof getBoundsPolygon; } |  |

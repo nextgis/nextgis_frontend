@@ -9,7 +9,7 @@
 ```typescript
 declare class NgwMapbox extends NgwMap<Map, string[], any, MapboxglMapAdapterOptions> 
 ```
-<b>Extends:</b> [NgwMap](./ngw-map.ngwmap.md)<!-- -->&lt;Map, string\[\], any, [MapboxglMapAdapterOptions](./mapboxgl-map-adapter.mapboxglmapadapteroptions.md)<!-- -->&gt;
+<b>Extends:</b> [NgwMap](./ngw-map.ngwmap.md)<!-- -->&lt;Map, string\[\], any, MapboxglMapAdapterOptions&gt;
 
 ## Constructors
 

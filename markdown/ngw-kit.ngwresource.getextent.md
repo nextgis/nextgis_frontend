@@ -11,5 +11,5 @@ getExtent(): Promise<LngLatBoundsArray | undefined>;
 ```
 <b>Returns:</b>
 
-Promise&lt;[LngLatBoundsArray](./webmap.lnglatboundsarray.md) \| undefined&gt;
+Promise&lt;LngLatBoundsArray \| undefined&gt;
 

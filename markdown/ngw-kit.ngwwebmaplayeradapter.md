@@ -21,11 +21,11 @@ export declare class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [\_extent](./ngw-kit.ngwwebmaplayeradapter._extent.md) |  | [LngLatBoundsArray](./webmap.lnglatboundsarray.md) |  |
+|  [\_extent](./ngw-kit.ngwwebmaplayeradapter._extent.md) |  | LngLatBoundsArray |  |
 |  [emitter](./ngw-kit.ngwwebmaplayeradapter.emitter.md) |  | StrictEventEmitter&lt;EventEmitter, [NgwWebmapLayerAdapterEvents](./ngw-kit.ngwwebmaplayeradapterevents.md)<!-- -->&gt; |  |
 |  [layer](./ngw-kit.ngwwebmaplayeradapter.layer.md) |  | [NgwWebmapItem](./ngw-kit.ngwwebmapitem.md) |  |
 |  [map](./ngw-kit.ngwwebmaplayeradapter.map.md) |  | M |  |
-|  [NgwWebmapItem](./ngw-kit.ngwwebmaplayeradapter.ngwwebmapitem.md) |  | Type&lt;[NgwWebmapItem](./ngw-kit.ngwwebmapitem.md)<!-- -->&gt; |  |
+|  [NgwWebmapItem](./ngw-kit.ngwwebmaplayeradapter.ngwwebmapitem.md) |  | [Type](./utils.type.md)<!-- -->&lt;[NgwWebmapItem](./ngw-kit.ngwwebmapitem.md)<!-- -->&gt; |  |
 |  [options](./ngw-kit.ngwwebmaplayeradapter.options.md) |  | [NgwWebmapAdapterOptions](./ngw-kit.ngwwebmapadapteroptions.md) |  |
 |  [pixelRadius](./ngw-kit.ngwwebmaplayeradapter.pixelradius.md) |  | number | Radius for searching objects in pixels |
 |  [resourceId](./ngw-kit.ngwwebmaplayeradapter.resourceid.md) |  | number |  |
