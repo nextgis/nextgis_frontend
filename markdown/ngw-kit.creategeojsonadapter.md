@@ -18,5 +18,5 @@ export declare function createGeoJsonAdapter(opt: GetClassAdapterOptions): Promi
 
 <b>Returns:</b>
 
-Promise&lt;Type&lt;[VectorLayerAdapter](./webmap.vectorlayeradapter.md)<!-- -->&gt;&gt;
+Promise&lt;[Type](./utils.type.md)<!-- -->&lt;[VectorLayerAdapter](./webmap.vectorlayeradapter.md)<!-- -->&gt;&gt;
 

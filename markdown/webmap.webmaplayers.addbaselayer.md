@@ -16,7 +16,7 @@ addBaseLayer<K extends keyof LayerAdapters, O extends AdapterOptions = AdapterOp
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  adapter | K \| Type&lt;[LayerAdapters](./webmap.layeradapters.md)<!-- -->\[K\]&gt; |  |
+|  adapter | K \| [Type](./utils.type.md)<!-- -->&lt;[LayerAdapters](./webmap.layeradapters.md)<!-- -->\[K\]&gt; |  |
 |  options | O \| [LayerAdaptersOptions](./webmap.layeradaptersoptions.md)<!-- -->\[K\] |  |
 
 <b>Returns:</b>

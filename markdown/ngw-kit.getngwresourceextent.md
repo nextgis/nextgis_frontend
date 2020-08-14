@@ -19,5 +19,5 @@ export declare function getNgwResourceExtent(item: ResourceItem, connector: NgwC
 
 <b>Returns:</b>
 
-Promise&lt;[LngLatBoundsArray](./webmap.lnglatboundsarray.md) \| undefined&gt;
+Promise&lt;LngLatBoundsArray \| undefined&gt;
 

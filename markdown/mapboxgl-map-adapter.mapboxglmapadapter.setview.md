@@ -14,7 +14,7 @@ setView(center: LngLatArray, zoom?: number): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  center | [LngLatArray](./webmap.lnglatarray.md) |  |
+|  center | LngLatArray |  |
 |  zoom | number |  |
 
 <b>Returns:</b>

@@ -14,7 +14,7 @@ setCenter(lonLat: LngLatArray): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  lonLat | [LngLatArray](./webmap.lnglatarray.md) |  |
+|  lonLat | LngLatArray |  |
 
 <b>Returns:</b>
 

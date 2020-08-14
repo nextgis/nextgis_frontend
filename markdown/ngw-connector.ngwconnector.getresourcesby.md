@@ -14,7 +14,7 @@ getResourcesBy(resource: DeepPartial<Resource>): CancelablePromise<ResourceItem[
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  resource | DeepPartial&lt;[Resource](./ngw-connector.resource.md)<!-- -->&gt; |  |
+|  resource | [DeepPartial](./utils.deeppartial.md)<!-- -->&lt;[Resource](./ngw-connector.resource.md)<!-- -->&gt; |  |
 
 <b>Returns:</b>
 

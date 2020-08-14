@@ -14,7 +14,7 @@ static getNgwPayload(resource: Type<BaseResource>, parent: number, options: Sync
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  resource | Type&lt;[BaseResource](./ngw-orm.baseresource.md)<!-- -->&gt; |  |
+|  resource | [Type](./utils.type.md)<!-- -->&lt;[BaseResource](./ngw-orm.baseresource.md)<!-- -->&gt; |  |
 |  parent | number |  |
 |  options | SyncOptions |  |
 

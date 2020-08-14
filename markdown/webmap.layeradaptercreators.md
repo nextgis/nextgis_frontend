@@ -15,6 +15,6 @@ export interface LayerAdapterCreators
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [createAdapter](./webmap.layeradaptercreators.createadapter.md) | (webMap: [WebMap](./webmap.webmap.md)<!-- -->) =&gt; Promise&lt;Type&lt;[LayerAdapter](./webmap.layeradapter.md)<!-- -->&gt;&gt; |  |
+|  [createAdapter](./webmap.layeradaptercreators.createadapter.md) | (webMap: [WebMap](./webmap.webmap.md)<!-- -->) =&gt; Promise&lt;[Type](./utils.type.md)<!-- -->&lt;[LayerAdapter](./webmap.layeradapter.md)<!-- -->&gt;&gt; |  |
 |  [name](./webmap.layeradaptercreators.name.md) | string |  |
 

@@ -9,6 +9,7 @@
 |  Package | Description |
 |  --- | --- |
 |  [@nextgis/cancelable-promise](./cancelable-promise.md) | A promise you can stop |
+|  [@nextgis/cesium-map-adapter](./cesium-map-adapter.md) |  |
 |  [@nextgis/control-container](./control-container.md) |  |
 |  [@nextgis/dialog](./dialog.md) |  |
 |  [@nextgis/dom](./dom.md) |  |

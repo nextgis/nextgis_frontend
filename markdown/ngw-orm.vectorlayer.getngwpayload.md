@@ -14,11 +14,11 @@ static getNgwPayload(resource: Type<VectorLayer>, parent: number, options: SyncO
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  resource | Type&lt;[VectorLayer](./ngw-orm.vectorlayer.md)<!-- -->&gt; |  |
+|  resource | [Type](./utils.type.md)<!-- -->&lt;[VectorLayer](./ngw-orm.vectorlayer.md)<!-- -->&gt; |  |
 |  parent | number |  |
 |  options | SyncOptions |  |
 
 <b>Returns:</b>
 
-DeepPartial&lt;VectorResourceSyncItem&gt; \| undefined
+[DeepPartial](./utils.deeppartial.md)<!-- -->&lt;VectorResourceSyncItem&gt; \| undefined
 

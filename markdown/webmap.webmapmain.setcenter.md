@@ -16,7 +16,7 @@ setCenter(lngLat: LngLatArray): this;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  lngLat | [LngLatArray](./webmap.lnglatarray.md) | Array of two numbers representing longitude and latitude of the center of the map view. |
+|  lngLat | LngLatArray | Array of two numbers representing longitude and latitude of the center of the map view. |
 
 <b>Returns:</b>
 

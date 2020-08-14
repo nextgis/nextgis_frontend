@@ -17,7 +17,7 @@ addGeoJsonLayer<K extends keyof LayerAdaptersOptions>(opt: GeoJsonAdapterOptions
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  opt | [GeoJsonAdapterOptions](./webmap.geojsonadapteroptions.md) |  |
-|  adapter | K \| Type&lt;[LayerAdapter](./webmap.layeradapter.md)<!-- -->&gt; |  |
+|  adapter | K \| [Type](./utils.type.md)<!-- -->&lt;[LayerAdapter](./webmap.layeradapter.md)<!-- -->&gt; |  |
 
 <b>Returns:</b>
 

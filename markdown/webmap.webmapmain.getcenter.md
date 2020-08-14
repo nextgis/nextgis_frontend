@@ -13,7 +13,7 @@ getCenter(): LngLatArray | undefined;
 ```
 <b>Returns:</b>
 
-[LngLatArray](./webmap.lnglatarray.md) \| undefined
+LngLatArray \| undefined
 
 ## Example
 

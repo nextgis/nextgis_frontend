@@ -18,5 +18,5 @@ getLayerAdapter(name: string): Type<LayerAdapter>;
 
 <b>Returns:</b>
 
-Type&lt;[LayerAdapter](./webmap.layeradapter.md)<!-- -->&gt;
+[Type](./utils.type.md)<!-- -->&lt;[LayerAdapter](./webmap.layeradapter.md)<!-- -->&gt;
 

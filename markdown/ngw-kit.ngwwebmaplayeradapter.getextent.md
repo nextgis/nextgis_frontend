@@ -11,5 +11,5 @@ getExtent(): LngLatBoundsArray | undefined;
 ```
 <b>Returns:</b>
 
-[LngLatBoundsArray](./webmap.lnglatboundsarray.md) \| undefined
+LngLatBoundsArray \| undefined
 

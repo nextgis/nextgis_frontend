@@ -72,7 +72,6 @@ webMap.onLoad().then(() => {
 |  [GetAttributionsOptions](./webmap.getattributionsoptions.md) |  |
 |  [HtmlToggle](./webmap.htmltoggle.md) | Values to be in the button content in accordance with the status of the toggle control |
 |  [ImageAdapterOptions](./webmap.imageadapteroptions.md) |  |
-|  [LatLng](./webmap.latlng.md) | Longitude and latitude coordinate, measured in degrees. |
 |  [LayerAdapterCreators](./webmap.layeradaptercreators.md) |  |
 |  [LayerAdapters](./webmap.layeradapters.md) |  |
 |  [LayerAdaptersOptions](./webmap.layeradaptersoptions.md) |  |
@@ -122,12 +121,9 @@ webMap.onLoad().then(() => {
 |  [LayerAdapter](./webmap.layeradapter.md) |  |
 |  [LayerAdapterDefinition](./webmap.layeradapterdefinition.md) |  |
 |  [LayerDef](./webmap.layerdef.md) | Available argument types for methods with map layers identification. |
-|  [LngLatArray](./webmap.lnglatarray.md) | Array of two numbers representing longitude and latitude. |
-|  [LngLatBoundsArray](./webmap.lnglatboundsarray.md) | Array of coordinates, measured in degrees, in \[west, south, east, north\] order. [GeoJSON standard](https://tools.ietf.org/html/rfc7946#section-5) |
 |  [OnBeforeLayerAdd](./webmap.onbeforelayeradd.md) |  |
 |  [OnClick](./webmap.onclick.md) |  |
 |  [onClickAsync](./webmap.onclickasync.md) |  |
 |  [OnClickSync](./webmap.onclicksync.md) |  |
 |  [VectorAdapterLayerType](./webmap.vectoradapterlayertype.md) |  |
-|  [ZoomLevel](./webmap.zoomlevel.md) | Map zoom level. |
 

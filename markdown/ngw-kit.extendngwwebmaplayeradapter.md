@@ -18,5 +18,5 @@ export declare function extendNgwWebmapLayerAdapter(opt: ExtendNgwWebmapLayerAda
 
 <b>Returns:</b>
 
-Type&lt;[NgwWebmapLayerAdapter](./ngw-kit.ngwwebmaplayeradapter.md)<!-- -->&gt;
+[Type](./utils.type.md)<!-- -->&lt;[NgwWebmapLayerAdapter](./ngw-kit.ngwwebmaplayeradapter.md)<!-- -->&gt;
 
