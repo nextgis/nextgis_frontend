@@ -3,8 +3,13 @@ import {
   VectorLayerResourceItem,
   ResourceItemDatatype,
 } from '@nextgis/ngw-connector';
+import { capitalize, camelize } from '@nextgis/utils';
 import { VectorLayer } from '../repository/VectorLayer';
 import { CannotExecuteNotConnectedError } from '../error/CannotExecuteNotConnectedError';
+
+interface ToTypescriptOptions {
+  name?: string;
+}
 
 const dataTypeAlias: Record<ResourceItemDatatype, string> = {
   STRING: 'string',
@@ -22,7 +27,10 @@ const layerAlias: Partial<Record<GeometryType, string>> = {
   LINESTRING: 'LineLayer',
 };
 
-export function toTypescript(Resource: typeof VectorLayer): string {
+export function toTypescript(
+  Resource: typeof VectorLayer,
+  opt: ToTypescriptOptions = {}
+): { ts: string; dts: string } {
   const item = Resource.item as VectorLayerResourceItem;
   if (!item) {
     throw new CannotExecuteNotConnectedError();
@@ -32,10 +40,13 @@ export function toTypescript(Resource: typeof VectorLayer): string {
   if (!layerAlias[type]) {
     throw new Error(`${type} geometry type is not supported`);
   }
+  const name =
+    opt.name ||
+    (item.resource.keyname && capitalize(camelize(item.resource.keyname))) ||
+    `Resource${item.resource.id}`;
+  const dts: string[] = [`export interface ${name} {`];
 
-  const str = [
-    `// This code is generated automatically`,
-    '',
+  const ts = [
     `import {`,
     `  ${layerAlias[type]} as VectorLayer,`,
     `  NgwResource,`,
@@ -47,14 +58,16 @@ export function toTypescript(Resource: typeof VectorLayer): string {
     `  display_name: '${item.resource.display_name}',`,
   ];
   if (item.resource.keyname) {
-    str.push(`  keyname: '${item.resource.keyname}',`);
+    ts.push(`  keyname: '${item.resource.keyname}',`);
   }
   if (item.resource.description) {
-    str.push(`  description: '${item.resource.description}',`);
+    ts.push(`  description: '${item.resource.description}',`);
   }
-  str.push(`})`);
+  ts.push(`})`);
 
-  str.push(`export default class Plot extends VectorLayer {`);
+  ts.push(
+    `export default class ${name ? name + ' ' : ''}extends VectorLayer {`
+  );
 
   item.feature_layer.fields.forEach((x, i) => {
     const columnStr = [`  @Column({`];
@@ -69,15 +82,18 @@ export function toTypescript(Resource: typeof VectorLayer): string {
       columnStr.push(`    grid_visibility: ${x.grid_visibility},`);
     }
     columnStr.push(`  })`);
-    columnStr.push(`  ${x.keyname}!: ${dataTypeAlias[x.datatype]};`);
+    const prop = `  ${x.keyname}!: ${dataTypeAlias[x.datatype]};`;
+    columnStr.push(prop);
+    dts.push(prop);
     if (i) {
-      str.push('');
+      ts.push('');
     }
-    str.push(columnStr.join('\n'));
+    ts.push(columnStr.join('\n'));
+  });
+  [dts, ts].forEach((x) => {
+    x.push(`}`);
+    x.push(``);
   });
 
-  str.push(`}`);
-  str.push(``);
-
-  return str.join('\n');
+  return { ts: ts.join('\n'), dts: dts.join('\n') };
 }
