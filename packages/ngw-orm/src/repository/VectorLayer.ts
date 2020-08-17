@@ -42,6 +42,10 @@ import { BaseResource } from './BaseResource';
 import { SyncOptions } from './SyncOptions';
 import { UpdateOptions } from './UpdateOptions';
 import { toTypescript } from '../vector-layer-utils/toTypescript';
+import {
+  ToTypescript,
+  ToTypescriptOptions,
+} from '../options/ToTypescriptOptions';
 // import { SyncOptions } from './SyncOptions';
 // import { Connection } from '../connection/Connection';
 // import { ConnectionOptions } from '../connection/ConnectionOptions';
@@ -99,8 +103,8 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
     this._geom = geom;
   }
 
-  static toTypescript(): string {
-    return toTypescript(this);
+  static toTypescript(opt?: ToTypescriptOptions): ToTypescript {
+    return toTypescript(this, opt);
   }
 
   static receive(item: VectorLayerResourceItem): typeof VectorLayer {
