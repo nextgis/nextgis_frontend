@@ -11,6 +11,10 @@ import { NgwResource } from '../decorator/NgwResource';
 import { NgwResourceOptions } from '../options/NgwResourceOptions';
 import { getMetadataArgsStorage } from '..';
 import { ResourceMetadataArgs } from '../metadata-args/ResourceMetadataArgs';
+import {
+  ToTypescript,
+  ToTypescriptOptions,
+} from '../options/ToTypescriptOptions';
 
 // type QueryDeepPartialEntity<T> = DeepPartial<T>;
 // type InsertResult = any;
@@ -116,7 +120,7 @@ export class BaseResource {
     console.log('upload');
   }
 
-  static toTypescript(): string {
+  static toTypescript(opt?: ToTypescriptOptions): ToTypescript {
     throw Error(
       'TypeScript code generation is not implement for this resource'
     );
