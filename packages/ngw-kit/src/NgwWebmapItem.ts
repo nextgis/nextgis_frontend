@@ -118,17 +118,16 @@ export class NgwWebmapItem extends Item<ItemOptions> {
     const i = item;
     if (item.item_type === 'group' || item.item_type === 'root') {
       if (item.children && item.children.length) {
-        const children = this.getChildren(item);
-        for (const c of children) {
-          const children = await NgwWebmapItem.create(
+        this.getChildren(item).forEach((x) => {
+          const children = new NgwWebmapItem(
             this.webMap,
-            c,
+            x,
             this.options,
             this.connector,
             this
           );
           this.tree.addChild(children);
-        }
+        });
       }
     } else {
       let adapter: LayerAdapterDefinition | undefined;
