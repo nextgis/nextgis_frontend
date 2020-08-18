@@ -7,8 +7,8 @@ import {
   Cartographic,
   Ellipsoid,
 } from 'cesium';
-import { BaseAdapter } from './BaseAdapter';
 import { whenSampleTerrainMostDetailed } from '../utils/whenSampleTerrainMostDetailed';
+import { BaseAdapter } from './BaseAdapter';
 
 export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
   layer?: Cesium3DTileset;
