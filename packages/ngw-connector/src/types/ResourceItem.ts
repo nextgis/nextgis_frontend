@@ -1,4 +1,4 @@
-import { JsonMap } from '@nextgis/utils';
+import { JsonMap, AnyJson } from '@nextgis/utils';
 
 export interface TreeItem {
   item_type: 'root' | 'group' | 'layer';
@@ -189,7 +189,7 @@ export interface NgwFile {
 export interface ResourceItemMain {
   resource: Resource;
   resmeta: {
-    items: JsonMap;
+    items: Record<string, any>;
   };
 }
 
