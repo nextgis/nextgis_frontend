@@ -178,6 +178,7 @@ export interface VectorLayer {
 export interface FileBucket {
   files: NgwFile[];
   tstamp?: any;
+  main_tileset?: string
 }
 
 export interface NgwFile {
