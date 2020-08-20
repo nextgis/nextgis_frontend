@@ -82,9 +82,9 @@ export class NgwConnector {
         if (this.options.auth) {
           const { login, password } = this.options.auth;
           if (login && password) {
-            return this.getUserInfo({ login, password }).then(() =>
-              makeQuery()
-            );
+            return this.getUserInfo({ login, password })
+              .then(() => makeQuery())
+              .catch((er) => reject(er));
           }
         }
         return makeQuery();
@@ -398,16 +398,14 @@ export class NgwConnector {
       return this.get('resource.search', null, {
         serialization: 'full',
         ...query,
-      })
-        .then((resources) => {
-          if (resources) {
-            resources.forEach((x) => {
-              this._resourcesCache[x.resource.id] = x;
-            });
-          }
-          return resources;
-        })
-        .catch(() => []);
+      }).then((resources) => {
+        if (resources) {
+          resources.forEach((x) => {
+            this._resourcesCache[x.resource.id] = x;
+          });
+        }
+        return resources;
+      });
     }
     return CancelablePromise.resolve(items);
   }
@@ -581,6 +579,9 @@ export class NgwConnector {
       }
       loadData(url, resolve, options, reject, onCancel);
     }).catch((httpError) => {
+      if (__DEV__) {
+        console.error(httpError);
+      }
       const er = this._handleHttpError(httpError);
       if (er) {
         throw er;

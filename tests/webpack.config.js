@@ -59,6 +59,7 @@ module.exports = (opt = { coverage: false }) => {
     plugins: [
       new webpack.DefinePlugin({
         __BROWSER__: true,
+        __DEV__: true,
       }),
     ],
   };
