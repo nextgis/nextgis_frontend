@@ -7,14 +7,16 @@ import {
   Cartographic,
   Ellipsoid,
 } from 'cesium';
-import { BaseAdapter } from './BaseAdapter';
 import { whenSampleTerrainMostDetailed } from '../utils/whenSampleTerrainMostDetailed';
+import { BaseAdapter } from './BaseAdapter';
 
 export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
   layer?: Cesium3DTileset;
   private _extent?: LngLatBoundsArray;
 
-  async addLayer(opt: Tileset3DAdapterOptions): Promise<Cesium3DTileset> {
+  async addLayer(
+    opt: Tileset3DAdapterOptions
+  ): Promise<Cesium3DTileset | undefined> {
     this.options = { ...opt };
     const tileset = await this._addLayer();
     return tileset;
@@ -62,16 +64,21 @@ export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
     });
     layer.show = false;
 
-    const tileset = await layer.readyPromise;
-
-    this.layer = tileset;
-    this._extent = this._calculateExtent();
-    this.map.scene.primitives.add(this.layer);
-    this.watchHeight();
-    if (this.options.heightOffset !== undefined) {
-      this._setHeight();
+    try {
+      const tileset = await layer.readyPromise;
+      this.layer = tileset;
+      this._extent = this._calculateExtent();
+      this.map.scene.primitives.add(this.layer);
+      this.watchHeight();
+      if (this.options.heightOffset !== undefined) {
+        this._setHeight();
+      }
+      return this.layer;
+    } catch (er) {
+      if (__DEV__) {
+        console.warn(er);
+      }
     }
-    return this.layer;
   }
 
   private _calculateExtent() {
