@@ -130,7 +130,8 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
             };
           }
           if (options.center !== undefined) {
-            mapOpt.center = options.center;
+            const center = options.center;
+            mapOpt.center = [center[0], center[1]];
           }
           if (options.zoom !== undefined) {
             mapOpt.zoom = options.zoom - 1;
@@ -169,7 +170,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
 
   setView(center: LngLatArray, zoom?: number): void {
     if (this.map) {
-      const options: mapboxgl.CameraOptions = { center };
+      const options: mapboxgl.CameraOptions = { center: [center[0], center[1]]};
       if (zoom) {
         options.zoom = zoom - 1;
       }
@@ -179,7 +180,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
 
   setCenter(latLng: LngLatArray): void {
     if (this.map) {
-      this.map.setCenter(latLng);
+      this.map.setCenter([latLng[0], latLng[1]]);
     }
   }
 

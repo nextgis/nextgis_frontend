@@ -6,10 +6,10 @@ import {
 import { capitalize, camelize } from '@nextgis/utils';
 import { VectorLayer } from '../repository/VectorLayer';
 import { CannotExecuteNotConnectedError } from '../error/CannotExecuteNotConnectedError';
-
-interface ToTypescriptOptions {
-  name?: string;
-}
+import {
+  ToTypescriptOptions,
+  ToTypescript,
+} from '../options/ToTypescriptOptions';
 
 const dataTypeAlias: Record<ResourceItemDatatype, string> = {
   STRING: 'string',
@@ -30,7 +30,7 @@ const layerAlias: Partial<Record<GeometryType, string>> = {
 export function toTypescript(
   Resource: typeof VectorLayer,
   opt: ToTypescriptOptions = {}
-): { ts: string; dts: string } {
+): ToTypescript {
   const item = Resource.item as VectorLayerResourceItem;
   if (!item) {
     throw new CannotExecuteNotConnectedError();
@@ -95,5 +95,5 @@ export function toTypescript(
     x.push(``);
   });
 
-  return { ts: ts.join('\n'), dts: dts.join('\n') };
+  return { model: ts.join('\n'), interface: dts.join('\n') };
 }
