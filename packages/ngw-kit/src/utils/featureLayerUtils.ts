@@ -58,7 +58,7 @@ export function getNgwLayerItem<
 
 export function getNgwLayerFeature<
   G extends Geometry | null = Geometry,
-  P extends JsonMap = JsonMap
+  P extends Record<string, any> = Record<string, any>
 >(
   options: {
     resourceId: number;
@@ -261,7 +261,7 @@ export function getNgwLayerItems<
 
 export function getNgwLayerFeatures<
   G extends Geometry | null = Geometry,
-  P extends JsonMap = JsonMap
+  P extends Record<string, any> = Record<string, any>
 >(
   options: {
     resourceId: number;
