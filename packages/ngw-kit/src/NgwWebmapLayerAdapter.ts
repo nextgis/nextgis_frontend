@@ -92,7 +92,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
       mapAdapter.removeLayer(x.layer.layer);
     });
     this.$$onMapClick = undefined;
-    delete this.options;
+    // delete this.options;
     delete this.layer;
     delete this.response;
     delete this._webmapLayersIds;
