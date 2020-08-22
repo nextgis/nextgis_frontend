@@ -52,18 +52,29 @@ export class NgwConnector {
     }
   }
 
-  setNgw(url: string): void {
+  /**
+   * Fast way to specify the connection address to NextGIS Web.
+   * The current connection will be severed.
+   * @param baseUrl - NGW url
+   */
+  setNgw(baseUrl: string): void {
     this.logout();
-    this.options.baseUrl = url;
+    this.options.baseUrl = baseUrl;
   }
 
   /**
-   * @deprecated use setNgw instead
+   * Establishing a connection with NextGIS Web to fulfill all other requests.
+   * @remarks
+   * This method need not be called manually as it is used when forming a request in {@link NgwConnector.apiRequest | apiRequest}.
+   * Can be used to check connection.
+   * @example
+   * ```javascript
+   * const connector = new NgwConnector({baseUrl: 'https://demo.nextgis.com'});
+   * connector.connect()
+   *   .then(() => console.log('Ok'))
+   *   .catch((er) => console.log('Connection problem', er));
+   * ```
    */
-  setNextGisWeb(url: string): void {
-    this.setNgw(url);
-  }
-
   connect(): CancelablePromise<PyramidRoute> {
     return new CancelablePromise((resolve, reject) => {
       const makeQuery = () => {
@@ -92,6 +103,10 @@ export class NgwConnector {
     });
   }
 
+  /**
+   * Quick way to change NextGIS Web user.
+   * @param credentials - New user credentials
+   */
   login(credentials: Credentials): CancelablePromise<UserInfo> {
     this.logout();
     return this.getUserInfo(credentials);
