@@ -170,7 +170,9 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
 
   setView(center: LngLatArray, zoom?: number): void {
     if (this.map) {
-      const options: mapboxgl.CameraOptions = { center: [center[0], center[1]]};
+      const options: mapboxgl.CameraOptions = {
+        center: [center[0], center[1]],
+      };
       if (zoom) {
         options.zoom = zoom - 1;
       }
