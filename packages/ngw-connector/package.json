@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/ngw-connector",
-  "version": "1.0.0-alpha.4",
+  "version": "1.0.0-alpha.5",
   "_priority": 12,
   "description": "A lightweight HTTP client optimized for use with NextGIS Web API",
   "main": "index.js",
@@ -9,8 +9,8 @@
   "jsdelivr": "lib/ngw-connector.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/cancelable-promise": "^1.0.0-alpha.4",
-    "@nextgis/utils": "^1.0.0-alpha.4",
+    "@nextgis/cancelable-promise": "^1.0.0-alpha.5",
+    "@nextgis/utils": "^1.0.0-alpha.5",
     "events": "^3.2.0"
   },
   "devDependencies": {
