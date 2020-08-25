@@ -1,5 +1,3 @@
-import { JsonMap, AnyJson } from '@nextgis/utils';
-
 export interface TreeItem {
   item_type: 'root' | 'group' | 'layer';
   display_name?: string;
