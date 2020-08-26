@@ -221,7 +221,7 @@ async function build(target) {
       console.log(chalk(er));
     }
 
-    // await fs.remove(`${pkgDir}/lib/packages`);
+    await fs.remove(`${pkgDir}/lib/packages`);
   }
 }
 
