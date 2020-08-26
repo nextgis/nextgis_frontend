@@ -218,10 +218,10 @@ async function build(target) {
         process.exitCode = 1;
       }
     } catch (er) {
-      //
+      console.log(chalk(er));
     }
 
-    await fs.remove(`${pkgDir}/lib/packages`);
+    // await fs.remove(`${pkgDir}/lib/packages`);
   }
 }
 
