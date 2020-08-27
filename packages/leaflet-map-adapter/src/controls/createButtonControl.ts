@@ -25,13 +25,13 @@ export function createButtonControl(options: ButtonControlOptions): Control {
     e.stopPropagation();
     options.onClick();
   };
-  if (options.onClick !== undefined) {
-    link.addEventListener('click', onClick);
-  }
 
   return createControl(
     {
       onAdd() {
+        if (options.onClick !== undefined) {
+          link.addEventListener('click', onClick);
+        }
         return link;
       },
       onRemove() {
