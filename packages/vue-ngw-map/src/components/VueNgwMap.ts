@@ -20,10 +20,14 @@ export class VueNgwMap<M = any> extends Vue {
   ngwMap!: NgwMap<M>;
   ready = false;
 
+  getMapOptions(): NgwMapOptions {
+    return this.mapOptions;
+  }
+
   mounted(): void {
     this.ngwMap = new NgwMap(this.mapAdapter, {
       ...this.$props,
-      ...this.mapOptions,
+      ...this.getMapOptions(),
       target: this.$el as HTMLElement,
     });
     this.ngwMap.onLoad().then(() => {

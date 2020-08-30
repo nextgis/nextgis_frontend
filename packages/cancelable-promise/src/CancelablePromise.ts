@@ -1,4 +1,5 @@
 import { CancelError } from './CancelError';
+import { AbortControl } from './ArortControl';
 
 type Reject = (reason?: any) => void;
 type Resolve = (value?: any) => void;
@@ -118,6 +119,10 @@ export class CancelablePromise<T = any> implements Promise<T> {
         return executor(onResolve, onReject, onCancel);
       }),
     ]);
+  }
+
+  static abortControl(): AbortControl {
+    return new AbortControl();
   }
 
   static resolve<T>(value: T | PromiseLike<T>): CancelablePromise<T> {
