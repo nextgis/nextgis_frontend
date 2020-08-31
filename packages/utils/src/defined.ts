@@ -18,8 +18,5 @@ export function defined(val: unknown): val is boolean {
 }
 
 export function full(val: unknown): val is boolean {
-  if (typeof val === 'string') {
-    return !!val;
-  }
-  return defined(val);
+  return typeof val === 'string' ? !!val : defined(val);
 }
