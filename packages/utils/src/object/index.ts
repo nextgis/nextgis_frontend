@@ -1,3 +1,4 @@
 import { assign as objectAssign } from './assign';
+import { deepEqual as objectDeepEqual } from './equal';
 
-export { objectAssign };
+export { objectDeepEqual, objectAssign };
