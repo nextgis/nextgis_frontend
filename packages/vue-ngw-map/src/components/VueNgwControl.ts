@@ -1,6 +1,7 @@
 import Vue, { CreateElement, VNode, VNodeData } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, InjectReactive } from 'vue-property-decorator';
+import { NgwMap } from '@nextgis/ngw-map';
 import {
   MapControl,
   CreateControlOptions,
@@ -8,7 +9,6 @@ import {
   MapControls,
 } from '@nextgis/webmap';
 import { findNgwMapParent, propsBinder } from '../utils';
-import VueNgwMap from './VueNgwMap';
 
 @Component
 export class VueNgwControl extends Vue {
@@ -20,20 +20,22 @@ export class VueNgwControl extends Vue {
   @Prop({ type: Object, default: () => ({}) })
   readonly controlOptions!: CreateControlOptions;
 
+  @InjectReactive() readonly ngwMap!: NgwMap;
+
   name = 'vue-ngw-control';
-  parentContainer!: VueNgwMap;
+
   control?: unknown;
   ready = false;
 
   beforeDestroy(): void {
-    if (this.parentContainer.ngwMap && this.control) {
-      this.parentContainer.ngwMap.removeControl(this.control);
+    if (this.ngwMap && this.control) {
+      this.ngwMap.removeControl(this.control);
       this.control = undefined;
     }
   }
 
   setControl(element: HTMLElement): void {
-    const ngwMap = this.parentContainer.ngwMap;
+    const ngwMap = this.ngwMap;
     const control = this.control;
     if (ngwMap) {
       if (control) {
@@ -60,8 +62,6 @@ export class VueNgwControl extends Vue {
   }
 
   mounted(): void {
-    this.parentContainer = findNgwMapParent(this.$parent);
-
     this.setControl(this.$el as HTMLElement);
     this.ready = true;
     propsBinder(this, this.$props);
