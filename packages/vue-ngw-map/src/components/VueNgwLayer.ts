@@ -1,6 +1,6 @@
 import Vue, { VNode, CreateElement } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, InjectReactive } from 'vue-property-decorator';
+import { Prop } from 'vue-property-decorator';
 import {
   AdapterOptions,
   LayerAdapters,
@@ -8,7 +8,8 @@ import {
   LayerAdapterDefinition,
 } from '@nextgis/webmap';
 import { NgwMap } from '@nextgis/ngw-map';
-import { propsBinder } from '../utils';
+import { propsBinder, findNgwMapParent } from '../utils';
+import VueNgwMap from './VueNgwMap';
 
 @Component
 export class VueNgwLayer extends Vue {
@@ -16,7 +17,13 @@ export class VueNgwLayer extends Vue {
   @Prop({ type: Object, default: () => ({}) }) adapterOptions!: AdapterOptions;
   @Prop({ type: Boolean, default: false }) fit!: boolean;
 
-  @InjectReactive() readonly ngwMap!: NgwMap;
+  // @InjectReactive() readonly ngwMap!: NgwMap;
+
+  parentContainer?: VueNgwMap;
+
+  get ngwMap(): NgwMap | undefined {
+    return this.parentContainer && this.parentContainer.ngwMap;
+  }
 
   name = 'vue-ngw-layer';
 
@@ -32,8 +39,10 @@ export class VueNgwLayer extends Vue {
   addLayer(
     adapter: LayerAdapterDefinition,
     options: AdapterOptions = {}
-  ): Promise<LayerAdapter> {
-    return this.ngwMap.addLayer(adapter, options);
+  ): Promise<LayerAdapter | undefined> {
+    return Promise.resolve(
+      this.ngwMap && this.ngwMap.addLayer(adapter, options)
+    );
   }
 
   async setLayer(): Promise<void> {
@@ -59,6 +68,7 @@ export class VueNgwLayer extends Vue {
   }
 
   async mounted(): Promise<void> {
+    this.parentContainer = findNgwMapParent(this.$parent);
     await this.setLayer();
 
     propsBinder(this, this.$props);
