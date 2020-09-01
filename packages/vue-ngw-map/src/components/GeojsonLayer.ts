@@ -1,4 +1,4 @@
-import { GeoJsonObject, Feature } from 'geojson';
+import { GeoJsonObject } from 'geojson';
 import Component from 'vue-class-component';
 import { Prop, Mixins, Watch, Emit, Model } from 'vue-property-decorator';
 
@@ -20,13 +20,11 @@ export class GeojsonLayer extends Mixins(VueNgwLayer) {
 
   name = 'geojson-layer';
 
-  // parentContainer!: VueNgwMap;
-
   layer?: VectorLayerAdapter;
 
   @Watch('data')
   onDataChange(data: GeoJsonObject): void {
-    if (this.layer) {
+    if (this.layer && this.ngwMap) {
       this.ngwMap.setLayerData(this.layer, data);
     }
   }
@@ -71,16 +69,19 @@ export class GeojsonLayer extends Mixins(VueNgwLayer) {
   addLayer(
     adapter: 'GEOJSON',
     options: AdapterOptions = {}
-  ): Promise<LayerAdapter> {
-    return this.ngwMap
-      .addLayer(adapter, {
-        ...options,
-        data: this.data,
-        onLayerClick: this.onLayerClick,
-      })
-      .then((layer) => {
-        this.onSelectedChange();
-        return layer;
-      });
+  ): Promise<LayerAdapter | undefined> {
+    return Promise.resolve(
+      this.ngwMap &&
+        this.ngwMap
+          .addLayer(adapter, {
+            ...options,
+            data: this.data,
+            onLayerClick: this.onLayerClick,
+          })
+          .then((layer) => {
+            this.onSelectedChange();
+            return layer;
+          })
+    );
   }
 }

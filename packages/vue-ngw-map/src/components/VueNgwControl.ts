@@ -9,6 +9,7 @@ import {
   MapControls,
 } from '@nextgis/webmap';
 import { findNgwMapParent, propsBinder } from '../utils';
+import { VueNgwMap } from './VueNgwMap';
 
 @Component
 export class VueNgwControl extends Vue {
@@ -20,7 +21,11 @@ export class VueNgwControl extends Vue {
   @Prop({ type: Object, default: () => ({}) })
   readonly controlOptions!: CreateControlOptions;
 
-  @InjectReactive() readonly ngwMap!: NgwMap;
+  parentContainer?: VueNgwMap;
+
+  get ngwMap(): NgwMap | undefined {
+    return this.parentContainer && this.parentContainer.ngwMap;
+  }
 
   name = 'vue-ngw-control';
 
@@ -62,6 +67,7 @@ export class VueNgwControl extends Vue {
   }
 
   mounted(): void {
+    this.parentContainer = findNgwMapParent(this.$parent);
     this.setControl(this.$el as HTMLElement);
     this.ready = true;
     propsBinder(this, this.$props);
