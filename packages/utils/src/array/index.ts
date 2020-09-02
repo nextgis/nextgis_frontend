@@ -1,2 +1,2 @@
-export { arrayCompare } from './arrayCompare';
+export { arrayCompare, arrayCompareStrict } from './arrayCompare';
 export * from './arrayUnique';
