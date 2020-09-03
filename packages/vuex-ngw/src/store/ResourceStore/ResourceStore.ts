@@ -33,6 +33,7 @@ export abstract class ResourceStore<
   events: {
     onNewItem?: (opt: PatchOptions<G, P>) => Promise<void>;
     onBeforeDelete?: (opt: { fid: number }) => void;
+    delete?: (resourceId: number, featureId: number) => Promise<void>;
   } = {};
 
   @Action({ commit: 'UPDATE_FIELDS' })
@@ -85,7 +86,11 @@ export abstract class ResourceStore<
         const newItem = { ...oldItem, ...item.fields };
         storeItems.splice(index, 1, newItem);
       } else {
-        storeItems.push({ id: item.id, label: `#${item.id}`, ...item.fields });
+        storeItems.push({
+          id: item.id,
+          label: `#${item.id}`,
+          ...item.fields,
+        });
       }
       return storeItems;
     }
@@ -200,16 +205,20 @@ export abstract class ResourceStore<
   @Action({ commit: 'SET_STORE' })
   async delete(fid: number): Promise<ResourceStoreItem<P>[]> {
     await this.context.dispatch('getResources');
-    const id = this.resources[this.resource];
-    if (id) {
+    const resourceId = this.resources[this.resource];
+    if (resourceId) {
       try {
         if (this.events.onBeforeDelete) {
           await this.events.onBeforeDelete({ fid });
         }
-        await this.connector.delete('feature_layer.feature.item', null, {
-          id,
-          fid,
-        });
+        if (this.events.delete) {
+          await this.events.delete(resourceId, fid);
+        } else {
+          await this.connector.delete('feature_layer.feature.item', null, {
+            id: resourceId,
+            fid,
+          });
+        }
         const store = [...this.resourceItem];
         const index = store.findIndex((x) => Number(x.id) === fid);
         store.splice(index, 1);
