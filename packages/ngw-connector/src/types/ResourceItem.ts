@@ -138,7 +138,8 @@ export type ResourceItemDatatype =
   | 'TIME'
   | 'DATETIME'
   | 'BIGINT'
-  | 'INTEGER';
+  | 'INTEGER'
+  | 'BOOLEAN';
 
 export interface FeatureLayerField {
   datatype: ResourceItemDatatype;
