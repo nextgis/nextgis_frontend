@@ -302,6 +302,8 @@ export function prepareFieldsToNgw<T extends any>(
         } else if (x.datatype === 'REAL') {
           value =
             typeof property === 'string' ? parseFloat(property) : property;
+        } else if (x.datatype === 'BOOLEAN') {
+          value = Number(value);
         } else if (x.datatype === 'DATE') {
           let dt: Date | undefined;
           if (typeof property === 'object') {

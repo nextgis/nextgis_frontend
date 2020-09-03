@@ -19,6 +19,7 @@ const dataTypeAlias: Record<ResourceItemDatatype, string> = {
   DATETIME: 'Date',
   BIGINT: 'number',
   INTEGER: 'number',
+  BOOLEAN: 'boolean',
 };
 
 const layerAlias: Partial<Record<GeometryType, string>> = {
