@@ -144,7 +144,9 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
         geometry_type: this.geometryType,
         fields: fields.map((x) => ({
           keyname: x.propertyName,
-          datatype: x.options.datatype,
+          // NGW does not support boolean yet
+          datatype:
+            x.options.datatype === 'BOOLEAN' ? 'INTEGER' : x.options.datatype,
           grid_visibility: x.options.grid_visibility,
           label_field: x.options.label_field,
           display_name: x.options.display_name,
@@ -351,7 +353,7 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
 
     const items = await getNgwLayerItems(options);
     if (items) {
-      const entities = (await itemsToEntities(Resource, items)) as T[];
+      const entities = itemsToEntities(Resource, items) as T[];
       return entities;
     }
     return [];

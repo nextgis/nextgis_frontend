@@ -1,6 +1,7 @@
-import { FeatureItem } from '@nextgis/ngw-connector';
-import { objectAssign } from '@nextgis/utils';
+import { defined } from '@nextgis/utils';
+import { FeatureItem, FeatureLayerFields } from '@nextgis/ngw-connector';
 import { VectorLayer } from '../repository/VectorLayer';
+import { getMetadataArgsStorage } from '..';
 
 export function itemsToEntities(
   Resource: typeof VectorLayer,
@@ -18,9 +19,25 @@ export function itemToEntity(
   Resource: typeof VectorLayer,
   item: FeatureItem
 ): VectorLayer {
-  if ('coordinates' in item.geom) {
+  const fields = getMetadataArgsStorage().filterColumns(Resource);
+  const itemFields = item.fields;
+  if ('coordinates' in item.geom && defined(itemFields)) {
     const entity = new Resource();
-    objectAssign(entity, item.fields);
+    fields.forEach((x) => {
+      const propertyName = x.propertyName as keyof FeatureLayerFields;
+      if (propertyName in itemFields) {
+        let value = itemFields[propertyName];
+        if (x.options.datatype === 'BOOLEAN') {
+          value = Boolean(value);
+        }
+        Object.defineProperty(entity, propertyName, {
+          value,
+          configurable: true,
+          enumerable: true,
+        });
+      }
+    });
+    // objectAssign(entity, item.fields);
     entity.id = item.id;
     entity.geom = item.geom;
     return entity;
