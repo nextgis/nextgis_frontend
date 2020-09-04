@@ -19,11 +19,13 @@ import { createToggleControl } from './components/controls/createToggleControl';
  * @public
  */
 export class WebMapControls<
-  M = any,
-  L = any,
-  C = any,
-  E extends WebMapEvents = WebMapEvents
-> extends WebMapLayers<M, L, C, E> implements WebMapLayers, WebMapMain {
+    M = any,
+    L = any,
+    C = any,
+    E extends WebMapEvents = WebMapEvents
+  >
+  extends WebMapLayers<M, L, C, E>
+  implements WebMapLayers, WebMapMain {
   static controls: {
     [name: string]: (webMap: WebMapControls, options?: any) => any;
   } = {
