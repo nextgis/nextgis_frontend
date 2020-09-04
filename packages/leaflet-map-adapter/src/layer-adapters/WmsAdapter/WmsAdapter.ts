@@ -3,7 +3,8 @@ import { TileLayer, WMSOptions } from 'leaflet';
 import { WmsLayer as WMS } from './WmsLayer';
 import { BaseAdapter } from '../BaseAdapter';
 
-export class WmsAdapter extends BaseAdapter<WmsAdapterOptions, TileLayer.WMS>
+export class WmsAdapter
+  extends BaseAdapter<WmsAdapterOptions, TileLayer.WMS>
   implements MainLayerAdapter {
   addLayer(options: WmsAdapterOptions): TileLayer.WMS | undefined {
     if (options) {
