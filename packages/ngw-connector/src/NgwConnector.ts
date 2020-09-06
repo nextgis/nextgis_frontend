@@ -39,6 +39,8 @@ export class NgwConnector {
 
   emitter = new EventEmitter();
   user?: UserInfo;
+  requestControl = CancelablePromise.createControl();
+
   private routeStr = '/api/component/pyramid/route';
   private route?: PyramidRoute;
   private _loadingQueue: { [name: string]: LoadingQueue } = {};
@@ -112,7 +114,11 @@ export class NgwConnector {
     return this.getUserInfo(credentials);
   }
 
+  /**
+   * Disconnecting a user. Aborting all current requests
+   */
   logout(): void {
+    this.requestControl.abort();
     this._rejectLoadingQueue();
     this._loadingStatus = {};
     this.options.auth = undefined;
@@ -121,6 +127,7 @@ export class NgwConnector {
     this.emitter.emit('logout');
   }
 
+  // TODO: rename
   getUserInfo(credentials?: Credentials): CancelablePromise<UserInfo> {
     if (this.user && this.user.id) {
       return CancelablePromise.resolve(this.user);
@@ -146,6 +153,9 @@ export class NgwConnector {
       });
   }
 
+  /**
+   * Obtaining the required Headers for authentication of requests in the NGW.
+   */
   getAuthorizationHeaders(
     credentials?: Credentials
   ): RequestHeaders | undefined {
@@ -170,6 +180,35 @@ export class NgwConnector {
     }
   }
 
+  /**
+   * Compose request for NGW api router.
+   * @param name - NGW route name from {@link https://docs.nextgis.com/docs_ngweb_dev/doc/developer/resource.html#routes | routes}
+   * @param params - Request item params or query params
+   * @param options - Request options
+   *
+   * @example
+   * ```javascript
+   *
+   * // there is such an NGW route item
+   * // "feature_layer.feature.item": [
+   * //   "/api/resource/{0}/feature/{1}",
+   * //   "id",
+   * //   "fid"
+   * // ],
+   *
+   * const connector = new NgwConnector({ baseUrl: 'https://example.nextgis.com' });
+   * connector.apiRequest('feature_layer.feature.item', {
+   *   // request params for {0} and {1}
+   *   'id': 2011,
+   *   'fid': 101,
+   *   // query params
+   *   'srs': 4326,
+   *   'geom_format': 'geojson',
+   * }, { method: 'GET' });
+   * // send get-request to 'https://example.nextgis.com/api/resource/2011/feature/101?srs=4326&geom_format=geojson'
+   *
+   * ```
+   */
   apiRequest<
     K extends keyof RequestItemsParamsMap,
     P extends RequestItemKeys = RequestItemKeys
@@ -333,21 +372,22 @@ export class NgwConnector {
       }
       if (!this._loadingStatus[url] || options.nocache) {
         this._loadingStatus[url] = true;
-        return this._loadData(url, options)
-          .then((data) => {
-            this._loadingStatus[url] = false;
-            if (options.cache) {
-              this._queriesCache[url] = data;
-            }
-            this._executeLoadingQueue(url, data);
-            return data;
-          })
-          .catch((er) => {
-            this._loadingStatus[url] = false;
-            this._executeLoadingQueue(url, er, true);
-            // this.emitter.emit('error', er);
-            throw er;
-          });
+        return this.requestControl.add(
+          this._loadData(url, options)
+            .then((data) => {
+              this._loadingStatus[url] = false;
+              if (options.cache) {
+                this._queriesCache[url] = data;
+              }
+              this._executeLoadingQueue(url, data);
+              return data;
+            })
+            .catch((er) => {
+              this._loadingStatus[url] = false;
+              this._executeLoadingQueue(url, er, true);
+              throw er;
+            })
+        );
       } else {
         this._loadingStatus[url] = false;
         return new CancelablePromise((resolve, reject) => {
