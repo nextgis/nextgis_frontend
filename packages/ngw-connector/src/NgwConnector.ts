@@ -181,7 +181,7 @@ export class NgwConnector {
   }
 
   /**
-   * Compose request for NGW api router.
+   * Send request to NGW api router.
    * @param name - NGW route name from {@link https://docs.nextgis.com/docs_ngweb_dev/doc/developer/resource.html#routes | routes}
    * @param params - Request item params or query params
    * @param options - Request options
@@ -280,6 +280,19 @@ export class NgwConnector {
     });
   }
 
+  /**
+   * Shortcut method for send POST request to NGW.
+   * @param name - NGW route name from {@link https://docs.nextgis.com/docs_ngweb_dev/doc/developer/resource.html#routes | routes}
+   * @param options - Request options
+   * @param params - Request item params or query params
+   *
+   * @example
+   * ```javascript
+   * connector.post('resource.collection', { data: POST_PAYLOAD })
+   *   .then((newResource) => console.log(newResource))
+   *   .catch((error) => console.warn(error));
+   * ```
+   */
   post<K extends keyof RequestItemsParamsMap>(
     name: K,
     options?: RequestOptions<'POST'>,
@@ -295,6 +308,12 @@ export class NgwConnector {
     );
   }
 
+  /**
+   * Shortcut method for send GET request to NGW.
+   * @param name - NGW route name from {@link https://docs.nextgis.com/docs_ngweb_dev/doc/developer/resource.html#routes | routes}
+   * @param options - Request options
+   * @param params - Request item params or query params
+   */
   get<K extends keyof RequestItemsParamsMap>(
     name: K,
     options?: RequestOptions | undefined | null,
@@ -310,6 +329,12 @@ export class NgwConnector {
     );
   }
 
+  /**
+   * Shortcut method for send PATCH request to NGW.
+   * @param name - NGW route name from {@link https://docs.nextgis.com/docs_ngweb_dev/doc/developer/resource.html#routes | routes}
+   * @param options - Request options
+   * @param params - Request item params or query params
+   */
   patch<K extends keyof RequestItemsParamsMap>(
     name: K,
     options?: RequestOptions,
@@ -325,6 +350,12 @@ export class NgwConnector {
     );
   }
 
+  /**
+   * Shortcut method for send PUT request to NGW.
+   * @param name - NGW route name from {@link https://docs.nextgis.com/docs_ngweb_dev/doc/developer/resource.html#routes | routes}
+   * @param options - Request options
+   * @param params - Request item params or query params
+   */
   put<K extends keyof RequestItemsParamsMap>(
     name: K,
     options?: RequestOptions,
@@ -340,6 +371,12 @@ export class NgwConnector {
     );
   }
 
+  /**
+   * Shortcut method for send DELETE request to NGW.
+   * @param name - NGW route name from {@link https://docs.nextgis.com/docs_ngweb_dev/doc/developer/resource.html#routes | routes}
+   * @param options - Request options
+   * @param params - Request item params or query params
+   */
   delete<K extends keyof RequestItemsParamsMap>(
     name: K,
     options?: RequestOptions | undefined | null,
@@ -355,6 +392,12 @@ export class NgwConnector {
     );
   }
 
+  /**
+   * Send request to NGW.
+   * @param url - URL address to NGW
+   * @param params - Query params
+   * @param options - Request options
+   */
   makeQuery(
     url: string,
     params?: Params,
