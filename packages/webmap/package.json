@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/webmap",
-  "version": "1.0.0-alpha.5",
+  "version": "1.0.0-alpha.6",
   "_priority": 14,
   "description": "Universal map constructor",
   "main": "index.js",
@@ -9,9 +9,9 @@
   "jsdelivr": "lib/webmap.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/paint": "^1.0.0-alpha.5",
-    "@nextgis/properties-filter": "^1.0.0-alpha.5",
-    "@nextgis/utils": "^1.0.0-alpha.5",
+    "@nextgis/paint": "^1.0.0-alpha.6",
+    "@nextgis/properties-filter": "^1.0.0-alpha.6",
+    "@nextgis/utils": "^1.0.0-alpha.6",
     "@types/geojson": "^7946.0.7",
     "events": "^3.2.0",
     "strict-event-emitter-types": "^2.0.0"

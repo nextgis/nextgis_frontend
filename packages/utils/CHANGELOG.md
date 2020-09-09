@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.6](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2020-09-09)
+
+
+### Features
+
+* **cancelable-promise:** create abort control ([9768157](https://github.com/nextgis/nextgis_frontend/commit/976815713d25b1da20a96b678668648caf2c0489))
+* **utils:** add `arrayCompareStrict` function ([9d65949](https://github.com/nextgis/nextgis_frontend/commit/9d659496fbcf4dd0e2f467d3e18ad7253fcb7041))
+* **utils:** add `full` method ([00eb185](https://github.com/nextgis/nextgis_frontend/commit/00eb185fe1859a8bb30b2e9f8d8d10c08c88eb7f))
+* **vue:** GeojsonLayer selected model and onClick ([b3b2ce0](https://github.com/nextgis/nextgis_frontend/commit/b3b2ce0d7023bd738a2496f01d8cd9642dff2a0a))
+
+
+
+
+
 # [1.0.0-alpha.5](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2020-08-25)
 
 
