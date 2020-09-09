@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.6](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2020-09-09)
+
+
+### Features
+
+* **cancelable-promise:** шьзкщму PromisesControl ([ca5fabb](https://github.com/nextgis/nextgis_frontend/commit/ca5fabb60e998f19713704011db58588487aebe7))
+* **cancelable-promise:** create abort control ([9768157](https://github.com/nextgis/nextgis_frontend/commit/976815713d25b1da20a96b678668648caf2c0489))
+
+
+
+
+
 # [1.0.0-alpha.5](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2020-08-25)
 
 **Note:** Version bump only for package @nextgis/cancelable-promise
