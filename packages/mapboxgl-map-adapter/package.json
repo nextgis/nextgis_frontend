@@ -13,7 +13,7 @@
     "@nextgis/properties-filter": "^1.0.0-alpha.5",
     "@nextgis/webmap": "^1.0.0-alpha.5",
     "@types/events": "^3.0.0",
-    "@types/mapbox-gl": "^1.11.1",
+    "@types/mapbox-gl": "^1.11.2",
     "events": "^3.2.0",
     "mapbox-gl": "1.12.0"
   },
