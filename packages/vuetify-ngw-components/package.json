@@ -9,10 +9,10 @@
     "@nextgis/leaflet-map-adapter": "^1.0.0-alpha.5",
     "@nextgis/ngw-map": "^1.0.0-alpha.5",
     "@nextgis/utils": "^1.0.0-alpha.5",
-    "vue": "^2.6.11",
+    "vue": "^2.6.12",
     "vue-class-component": "^7.2.5",
     "vue-property-decorator": "^9.0.0",
-    "vuetify": "^2.3.8"
+    "vuetify": "^2.3.10"
   },
   "devDependencies": {
     "@nextgis/build-tools": "file:../build-tools"
