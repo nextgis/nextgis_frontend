@@ -29,7 +29,7 @@ export class TileAdapter extends BaseAdapter<TileAdapterOptions, Layer> {
 
   showLayer(layer: ImageryLayer): void {
     layer.show = true;
-    const order = this.options.order ? this.options.order * 1000 : undefined;
+    const order = this.options.order ? this.options.order * 1000 : 0;
     this.map.imageryLayers.add(layer, order);
     super.showLayer();
   }
