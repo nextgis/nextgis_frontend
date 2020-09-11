@@ -30,9 +30,13 @@ export abstract class ResourceStore<
 
   _promises: Record<string, Promise<any>> = {};
 
-  events: {
+  hooks: {
     onNewItem?: (opt: PatchOptions<G, P>) => Promise<void>;
-    onBeforeDelete?: (opt: { fid: number }) => void;
+    onBeforeDelete?: (opt: { fid: number }) => Promise<void>;
+    onBeforePatch?: (
+      data: Partial<FeatureItem<P, Geometry>>[],
+      opt: { id: number }
+    ) => Promise<void>;
     delete?: (resourceId: number, featureId: number) => Promise<void>;
   } = {};
 
@@ -179,17 +183,21 @@ export abstract class ResourceStore<
         if (fid) {
           feature.id = Number(fid);
         }
+        const data = [feature];
+        if (this.hooks.onBeforePatch) {
+          await this.hooks.onBeforePatch(data, { id });
+        }
         const item = await this.connector.patch(
           'feature_layer.feature.collection',
-          { data: [feature] },
+          { data },
           { id, ...FEATURE_REQUEST_PARAMS }
         );
         const newFeature = feature as FeatureItem<P>;
         const newItem = item && item[0];
         if (newItem) {
           newFeature.id = newItem.id;
-          if (this.events.onNewItem) {
-            await this.events.onNewItem({ ...opt, fid: newItem.id });
+          if (this.hooks.onNewItem) {
+            await this.hooks.onNewItem({ ...opt, fid: newItem.id });
           }
         } else {
           throw new Error('Error on save');
@@ -208,11 +216,11 @@ export abstract class ResourceStore<
     const resourceId = this.resources[this.resource];
     if (resourceId) {
       try {
-        if (this.events.onBeforeDelete) {
-          await this.events.onBeforeDelete({ fid });
+        if (this.hooks.onBeforeDelete) {
+          await this.hooks.onBeforeDelete({ fid });
         }
-        if (this.events.delete) {
-          await this.events.delete(resourceId, fid);
+        if (this.hooks.delete) {
+          await this.hooks.delete(resourceId, fid);
         } else {
           await this.connector.delete('feature_layer.feature.item', null, {
             id: resourceId,
