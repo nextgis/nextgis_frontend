@@ -76,12 +76,11 @@ import { WebMapControls } from './WebMapControls';
  * @public
  */
 export class WebMap<
-    M = any,
-    L = any,
-    C = any,
-    E extends WebMapEvents = WebMapEvents
-  >
-  extends WebMapControls<M, L, C, E>
+  M = any,
+  L = any,
+  C = any,
+  E extends WebMapEvents = WebMapEvents
+> extends WebMapControls<M, L, C, E>
   implements WebMapControls, WebMapLayers, WebMapMain {
   static get<T extends WebMap = WebMap>(id: number): T {
     return WEB_MAP_CONTAINER[id];
