@@ -446,6 +446,13 @@ export class NgwConnector {
   // Resource Methods
   // -------------------------------------------------------------------------
 
+  /**
+   * Receive resource from NGW by id, keyname or serch-object parameter.
+   * @param resource - Resource id, keyname or search-object
+   *
+   * @remark
+   * Fetching resource would be cached to speed up next call
+   */
   getResource(
     resource: ResourceDefinition | DeepPartial<Resource>
   ): CancelablePromise<ResourceItem | undefined> {
@@ -459,13 +466,23 @@ export class NgwConnector {
     return CancelablePromise.resolve(undefined);
   }
 
+  /**
+   * A fast way to retrieve resource ID for any resource definition.
+   * @param resource - Any available resource definition
+   *
+   * @remark
+   * There are situations when exactly the resource id is needed
+   * (for example, to compose the correct request to the api)
+   * then this method will come in handy to facilitate the extraction of the identifier
+   * if the resource is specified through a keyname or other parameters.
+   */
   getResourceId(
-    resource: ResourceDefinition
+    resource: ResourceDefinition | DeepPartial<Resource>
   ): CancelablePromise<number | undefined> {
     if (typeof resource === 'number') {
       return CancelablePromise.resolve(resource);
-    } else if (typeof resource === 'string') {
-      return this.getResourceByKeyname(resource).then((res) => {
+    } else if (typeof resource === 'string' || isObject(resource)) {
+      return this.getResource(resource).then((res) => {
         if (res) {
           return res.resource.id;
         }
@@ -591,6 +608,10 @@ export class NgwConnector {
     return collection();
   }
 
+  /**
+   * Fast way to delete resource from NGW and clean cache.
+   * @param resource - Resource definition
+   */
   deleteResource(resource: ResourceDefinition): CancelablePromise<void> {
     return this.getResourceId(resource).then((id) => {
       if (id !== undefined) {

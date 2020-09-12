@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.6](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2020-09-09)
+
+
+### Features
+
+* **vue:** vuex ResourceStore override delete function ability ([0814ccd](https://github.com/nextgis/nextgis_frontend/commit/0814ccdd86d96c7bc306569fea08c2439b25e65c))
+
+
+
+
+
 # [1.0.0-alpha.5](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2020-08-25)
 
 **Note:** Version bump only for package @nextgis/vuex-ngw
