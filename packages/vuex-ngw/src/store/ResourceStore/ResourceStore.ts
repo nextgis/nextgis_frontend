@@ -17,7 +17,7 @@ export abstract class ResourceStore<
   G extends Geometry | null = Geometry
 > extends VuexModule {
   resource!: string;
-  connector!: NgwConnector;
+
   resources: { [key in ResourceDef]?: number } = {};
 
   foreignResources: { [key in ResourceDef]: ForeignResource } = {};
@@ -27,6 +27,13 @@ export abstract class ResourceStore<
 
   resourceItem: ResourceStoreItem<P>[] = [];
   fields: FeatureLayerField[] = [];
+
+  get connector(): NgwConnector {
+    return this._connector;
+  }
+  set connector(val: NgwConnector) {
+    this._connector = val;
+  }
 
   _promises: Record<string, Promise<any>> = {};
 
@@ -39,6 +46,7 @@ export abstract class ResourceStore<
     ) => Promise<void>;
     delete?: (resourceId: number, featureId: number) => Promise<void>;
   } = {};
+  private _connector!: NgwConnector;
 
   @Action({ commit: 'UPDATE_FIELDS' })
   async getFields(): Promise<FeatureLayerField[] | undefined> {
