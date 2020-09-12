@@ -14,6 +14,7 @@ export class MetadataArgsStorage {
   filterTables(
     target: (Function | string) | (Function | string)[]
   ): ResourceMetadataArgs[] {
+    // @ts-ignore TODO: fix types
     return this.filterByTarget(this.resources, target);
   }
 

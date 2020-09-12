@@ -6,6 +6,6 @@ import { Connection } from '../connection/Connection';
  * Arguments for TableMetadata class, helps to construct an TableMetadata object.
  */
 export interface ResourceMetadataArgs extends NgwResourceOptions {
-  target: Function | string;
+  target?: Function | string;
   connection?: Connection;
 }
