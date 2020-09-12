@@ -41,7 +41,8 @@ import {
 
 type LayerMem = LayerDefinition<Feature>;
 
-export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
+export class GeoJsonAdapter
+  extends BaseAdapter<GeoJsonAdapterOptions>
   implements VectorLayerAdapter<Map> {
   layer: FeatureGroup;
   selected = false;
