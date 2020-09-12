@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.6](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2020-09-09)
+
+
+### Bug Fixes
+
+* **vue:** layer and control components ([6cceee9](https://github.com/nextgis/nextgis_frontend/commit/6cceee96465ce962e97ee439efce6f4ebd07e821))
+
+
+### Features
+
+* **utils:** add `full` method ([00eb185](https://github.com/nextgis/nextgis_frontend/commit/00eb185fe1859a8bb30b2e9f8d8d10c08c88eb7f))
+* **vue:** add GeojsonLayer ([eb5fded](https://github.com/nextgis/nextgis_frontend/commit/eb5fded1b60e3616c51c46e723df0395dcb92d5e))
+* **vue:** add VueNgwLayer component ([004b62d](https://github.com/nextgis/nextgis_frontend/commit/004b62dde59f8bdadde0367544eb8f6fddf78514))
+* **vue:** GeojsonLayer selected model and onClick ([b3b2ce0](https://github.com/nextgis/nextgis_frontend/commit/b3b2ce0d7023bd738a2496f01d8cd9642dff2a0a))
+
+
+
+
+
 # [1.0.0-alpha.5](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2020-08-25)
 
 **Note:** Version bump only for package @nextgis/vue-ngw-map
