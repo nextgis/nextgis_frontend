@@ -491,6 +491,25 @@ export class NgwConnector {
     return CancelablePromise.resolve(undefined);
   }
 
+  /**
+   * A fast way to retrieve resource ID for any resource definition.
+   * @param resource - Any available resource definition
+   *
+   * @remark
+   * Similar with {@link NgwConnector.getResourceId | getResourceId} but rise error if resource is not exist.
+   * To not make one more checks if the resource is definitely exists
+   */
+  getResourceIdOrError(
+    resource: ResourceDefinition | DeepPartial<Resource>
+  ): CancelablePromise<number> {
+    return this.getResourceId(resource).then((resp) => {
+      if (resp === undefined) {
+        throw new Error();
+      }
+      return resp;
+    });
+  }
+
   getResourcesBy(
     resource: DeepPartial<Resource>
   ): CancelablePromise<ResourceItem[]> {
