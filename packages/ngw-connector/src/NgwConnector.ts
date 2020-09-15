@@ -39,7 +39,6 @@ export class NgwConnector {
 
   emitter = new EventEmitter();
   user?: UserInfo;
-  requestControl = CancelablePromise.createControl();
 
   private routeStr = '/api/component/pyramid/route';
   private route?: PyramidRoute;
@@ -118,7 +117,6 @@ export class NgwConnector {
    * Disconnecting a user. Aborting all current requests
    */
   logout(): void {
-    this.requestControl.abort();
     this._rejectLoadingQueue();
     this._loadingStatus = {};
     this.options.auth = undefined;
@@ -172,6 +170,7 @@ export class NgwConnector {
     if (credentials) {
       const { login, password } = credentials;
       const str = unescape(encodeURIComponent(`${login}:${password}`));
+      // @ts-ignore
       if (__BROWSER__) {
         return window.btoa(str);
       } else {
@@ -415,22 +414,20 @@ export class NgwConnector {
       }
       if (!this._loadingStatus[url] || options.nocache) {
         this._loadingStatus[url] = true;
-        return this.requestControl.add(
-          this._loadData(url, options)
-            .then((data) => {
-              this._loadingStatus[url] = false;
-              if (options.cache) {
-                this._queriesCache[url] = data;
-              }
-              this._executeLoadingQueue(url, data);
-              return data;
-            })
-            .catch((er) => {
-              this._loadingStatus[url] = false;
-              this._executeLoadingQueue(url, er, true);
-              throw er;
-            })
-        );
+        return this._loadData(url, options)
+          .then((data) => {
+            this._loadingStatus[url] = false;
+            if (options.cache) {
+              this._queriesCache[url] = data;
+            }
+            this._executeLoadingQueue(url, data);
+            return data;
+          })
+          .catch((er) => {
+            this._loadingStatus[url] = false;
+            this._executeLoadingQueue(url, er, true);
+            throw er;
+          });
       } else {
         this._loadingStatus[url] = false;
         return new CancelablePromise((resolve, reject) => {
@@ -717,6 +714,7 @@ export class NgwConnector {
       }
       loadData(url, resolve, options, reject, onCancel);
     }).catch((httpError) => {
+      // @ts-ignore
       if (__DEV__) {
         console.error(httpError);
       }
