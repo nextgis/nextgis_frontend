@@ -28,10 +28,10 @@ export class PromiseControl {
     if (this.options.onStart && !this.isLoaded) {
       this.options.onStart();
     }
-    this._promises.push(promise);
     promise.finally(() => {
       this.remove(promise);
     });
+    this._promises.push(promise);
     return promise;
   }
 
