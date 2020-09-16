@@ -5,33 +5,44 @@ export interface PromiseControlOptions {
   onStop?: () => void;
 }
 
+type Key = CancelablePromise | string | number | symbol;
+
 export class PromiseControl {
-  private _promises: CancelablePromise[] = [];
+  private _promises: Map<Key, CancelablePromise> = new Map();
 
   get isLoaded(): boolean {
-    return this._promises.length > 0;
+    return this._promises.size > 0;
   }
 
   constructor(private options: PromiseControlOptions = {}) {}
 
-  remove(promise: CancelablePromise): void {
-    const index = this._promises.indexOf(promise);
-    if (index !== -1) {
-      this._promises.splice(index, 1);
+  remove(promise: Key): void {
+    if (this._promises.has(promise)) {
+      this._promises.delete(promise);
       this._onStop();
     }
   }
 
+  get(promise: Key): CancelablePromise | undefined {
+    return this._promises.get(promise);
+  }
+
   add<T extends CancelablePromise = CancelablePromise>(
-    promise: T
+    promise: T,
+    name?: string | number | symbol
   ): CancelablePromise<T> {
+    const key = name ? name : promise;
+    const exist = this._promises.get(key);
     if (this.options.onStart && !this.isLoaded) {
       this.options.onStart();
     }
+    if (exist) {
+      return exist;
+    }
+    this._promises.set(key, promise);
     promise.finally(() => {
-      this.remove(promise);
+      this.remove(key);
     });
-    this._promises.push(promise);
     return promise;
   }
 
@@ -42,9 +53,32 @@ export class PromiseControl {
           x.cancel();
         }
       });
-      this._promises = [];
+      this._promises.clear();
       this._onStop();
     }
+  }
+
+  GetOrCreateDecorator(name: string | symbol = ''): MethodDecorator {
+    const get = this.get.bind(this);
+    const add = this.add.bind(this);
+    return function (
+      target: unknown,
+      key: string | symbol,
+      descriptor: PropertyDescriptor
+    ): PropertyDescriptor {
+      const originalMethod = descriptor.value;
+      name = name || key;
+      descriptor.value = function (...args: any[]) {
+        const exist = get(name);
+        if (exist) {
+          return exist;
+        }
+        const result = add(originalMethod.apply(this, args), name);
+        return result;
+      };
+
+      return descriptor;
+    };
   }
 
   private _onStop() {
