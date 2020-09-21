@@ -41,6 +41,14 @@
 import { WebMap } from './WebMap';
 import { AppOptions } from './interfaces/WebMapApp';
 
+export { createToggleControl } from './components/controls/createToggleControl';
+
+export {
+  detectGeometryType,
+  findMostFrequentGeomType,
+} from './utils/geometryTypes';
+export { updateGeoJsonAdapterOptions } from './utils/updateGeoJsonAdapterOptions';
+
 export * from './WebMapLayers';
 export * from './WebMapControls';
 export * from './WebMapMain';

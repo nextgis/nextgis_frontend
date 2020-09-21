@@ -1,4 +1,9 @@
-import { Geometry, Feature, FeatureCollection } from 'geojson';
+import {
+  Geometry,
+  Feature,
+  FeatureCollection,
+  GeoJsonProperties,
+} from 'geojson';
 import {
   PropertiesFilter,
   FilterOptions,
@@ -37,15 +42,15 @@ export function createGeoJsonFeature<
 }
 
 export function getNgwLayerItem<
-  G extends Geometry | null = Geometry,
-  P extends JsonMap = JsonMap
+  G extends Geometry = Geometry,
+  P extends GeoJsonProperties = GeoJsonProperties
 >(
   options: {
     resourceId: number;
     featureId: number;
     connector: NgwConnector;
   } & FilterOptions
-): CancelablePromise<FeatureItem> {
+): CancelablePromise<FeatureItem<P, G>> {
   const params: FeatureRequestParams & { [name: string]: any } = {
     ...FEATURE_REQUEST_PARAMS,
   };
@@ -53,11 +58,11 @@ export function getNgwLayerItem<
     id: options.resourceId,
     fid: options.featureId,
     ...params,
-  });
+  }) as CancelablePromise<FeatureItem<P, G>>;
 }
 
 export function getNgwLayerFeature<
-  G extends Geometry | null = Geometry,
+  G extends Geometry = Geometry,
   P extends Record<string, any> = Record<string, any>
 >(
   options: {
@@ -72,7 +77,7 @@ export function getNgwLayerFeature<
 }
 
 function idFilterWorkAround<
-  G extends Geometry | null = Geometry,
+  G extends Geometry = Geometry,
   P extends JsonMap = JsonMap
 >(options: {
   filterById: PropertyFilter;
@@ -191,12 +196,12 @@ function createFeatureFieldFilterQueries(
 }
 
 function getNgwLayerItemsRequest<
-  G extends Geometry | null = Geometry,
+  G extends Geometry = Geometry,
   P extends JsonMap = JsonMap
 >(
   options: GetNgwLayerItemsOptions &
     FilterOptions & { paramList?: [string, any][] }
-): CancelablePromise<FeatureItem[]> {
+): CancelablePromise<FeatureItem<P, G>[]> {
   const params: FeatureRequestParams & RequestItemAdditionalParams = {
     ...FEATURE_REQUEST_PARAMS,
   };
@@ -231,7 +236,7 @@ function getNgwLayerItemsRequest<
   return connector.get('feature_layer.feature.collection', null, {
     id: resourceId,
     ...params,
-  });
+  }) as CancelablePromise<FeatureItem<P, G>[]>;
 }
 
 export function getNgwLayerItems<
