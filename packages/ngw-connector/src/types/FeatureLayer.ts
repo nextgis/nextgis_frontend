@@ -1,4 +1,4 @@
-import { GeometryObject, GeoJsonProperties, GeoJsonObject } from 'geojson';
+import { Geometry, GeoJsonProperties, GeoJsonObject } from 'geojson';
 
 export type FeatureLayerFields = GeoJsonProperties;
 
@@ -32,7 +32,7 @@ export interface FeatureItemAttachment {
 
 export interface FeatureItem<
   F = FeatureLayerFields,
-  G extends GeometryObject | string = GeometryObject
+  G extends Geometry | string = Geometry
 > {
   id: number;
   geom: G;
@@ -45,5 +45,5 @@ export interface FeatureItem<
 
 export type FeatureItemToNgw<
   F = FeatureLayerFields,
-  G extends GeometryObject | string = GeometryObject
+  G extends Geometry | string = Geometry
 > = FeatureItem<F, G>;

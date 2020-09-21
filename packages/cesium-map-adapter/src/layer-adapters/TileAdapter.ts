@@ -1,10 +1,9 @@
 import { TileAdapterOptions } from '@nextgis/webmap';
-import { Viewer, UrlTemplateImageryProvider, ImageryLayer } from 'cesium';
+import { UrlTemplateImageryProvider, ImageryLayer } from 'cesium';
 
 import { BaseAdapter } from './BaseAdapter';
 
 type Layer = ImageryLayer;
-type Map = Viewer;
 
 export class TileAdapter extends BaseAdapter<TileAdapterOptions, Layer> {
   private _layer?: ImageryLayer;

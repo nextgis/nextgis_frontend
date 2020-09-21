@@ -3,7 +3,8 @@ import { Map } from 'mapbox-gl';
 import { TLayer } from '../MapboxglMapAdapter';
 import { BaseAdapter } from './BaseAdapter';
 
-export class ImageAdapter extends BaseAdapter<ImageAdapterOptions>
+export class ImageAdapter
+  extends BaseAdapter<ImageAdapterOptions>
   implements MainLayerAdapter<Map, TLayer, ImageAdapterOptions> {
   addLayer(options: ImageAdapterOptions): string[] | undefined {
     if (this.options) {
