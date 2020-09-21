@@ -2,7 +2,11 @@ import { Geometry, Feature } from 'geojson';
 import { LayerFeature, FeatureLayersIdentify } from '@nextgis/ngw-connector';
 import CancelablePromise from '@nextgis/cancelable-promise';
 import { MapClickEvent } from '@nextgis/webmap';
-import { JsonMap, degrees2meters, getCirclePoly } from '@nextgis/utils';
+import {
+  JsonMap,
+  degrees2meters,
+  getCirclePolygonCoordinates,
+} from '@nextgis/utils';
 import {
   GetIdentifyGeoJsonOptions,
   NgwIdentify,
@@ -53,13 +57,12 @@ export function getIdentifyItems(
   return paramsList;
 }
 
-// TODO: always return CancelablePromise
 export function getIdentifyGeoJson<
-  G extends Geometry | null = Geometry,
+  G extends Geometry = Geometry,
   P extends JsonMap = JsonMap
 >(
   options: GetIdentifyGeoJsonOptions
-): CancelablePromise<Feature<G, P>> | Feature<G, P> | undefined {
+): CancelablePromise<Feature<G, P> | undefined> {
   const { connector, identify } = options;
   for (const l in identify) {
     const id = Number(l);
@@ -69,10 +72,12 @@ export function getIdentifyGeoJson<
 
       if (withGeom && withGeom.geom) {
         const geom = withGeom.geom as Geometry;
-        return createGeoJsonFeature({
-          ...withGeom,
-          geom,
-        });
+        return CancelablePromise.resolve(
+          createGeoJsonFeature({
+            ...withGeom,
+            geom,
+          })
+        );
       }
     }
   }
@@ -81,6 +86,7 @@ export function getIdentifyGeoJson<
   if (params) {
     return getNgwLayerFeature({ connector, ...params[0] });
   }
+  return CancelablePromise.resolve(undefined);
 }
 
 export function sendIdentifyRequest(
@@ -89,7 +95,11 @@ export function sendIdentifyRequest(
   // webMap: WebMap
 ): Promise<FeatureLayersIdentify> {
   // webMap.emitter.emit('start-identify', { ev });
-  const geom = getCirclePoly(ev.latLng.lng, ev.latLng.lat, options.radius);
+  const geom = getCirclePolygonCoordinates(
+    ev.latLng.lng,
+    ev.latLng.lat,
+    options.radius
+  );
 
   // create wkt string
   const polygon: string[] = [];

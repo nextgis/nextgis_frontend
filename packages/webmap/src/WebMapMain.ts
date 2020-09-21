@@ -2,7 +2,7 @@ import { EventEmitter } from 'events';
 import { Feature, Polygon } from 'geojson';
 import StrictEventEmitter from 'strict-event-emitter-types';
 
-import { deepmerge, defined, Type } from '@nextgis/utils';
+import { deepmerge, defined, Type, getBoundsFeature } from '@nextgis/utils';
 import { GetPaintFunction } from '@nextgis/paint';
 import CancelablePromise from '@nextgis/cancelable-promise';
 
@@ -25,17 +25,9 @@ import { Keys } from './components/keys/Keys';
 import { CenterState } from './components/mapStates/CenterState';
 import { StateItem } from './components/mapStates/StateItem';
 import { ZoomState } from './components/mapStates/ZoomState';
-import { createToggleControl } from './components/controls/createToggleControl';
 
-import {
-  detectGeometryType,
-  findMostFrequentGeomType,
-} from './utils/geometryTypes';
 import { onLoad } from './utils/decorators';
 import { clearObject } from './utils/clearObject';
-import { propertiesFilter } from './utils/propertiesFilter';
-import { getBoundsPolygon } from './utils/getBoundsPolygon';
-import { updateGeoJsonAdapterOptions } from './utils/updateGeoJsonAdapterOptions';
 
 type EmitStatusEventData = any;
 
@@ -77,14 +69,14 @@ export class WebMapMain<
   E extends WebMapEvents = WebMapEvents
 > {
   static keys: Keys = new Keys();
-  static utils = {
-    detectGeometryType,
-    findMostFrequentGeomType,
-    updateGeoJsonAdapterOptions,
-    propertiesFilter,
-    createToggleControl,
-    getBoundsPolygon,
-  };
+  // static utils = {
+  //   detectGeometryType,
+  //   findMostFrequentGeomType,
+  //   updateGeoJsonAdapterOptions,
+  //   propertiesFilter,
+  //   createToggleControl,
+  //   getBoundsPolygon,
+  // };
   static getPaintFunctions: { [name: string]: GetPaintFunction };
   static decorators = { onLoad };
 
@@ -269,7 +261,7 @@ export class WebMapMain<
   getBoundsPolygon(): Feature<Polygon> | undefined {
     const bounds = this.getBounds();
     if (bounds) {
-      const feature = getBoundsPolygon(bounds);
+      const feature = getBoundsFeature(bounds);
       return feature;
     }
   }

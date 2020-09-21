@@ -81,8 +81,9 @@ const mapboxTypeAlias: Record<VectorAdapterLayerType, MapboxLayerType> = {
 };
 
 export abstract class VectorAdapter<
-  O extends VectorAdapterOptions = VectorAdapterOptions
-> extends BaseAdapter<O>
+    O extends VectorAdapterOptions = VectorAdapterOptions
+  >
+  extends BaseAdapter<O>
   implements VectorLayerAdapter<Map, TLayer, O, Feature> {
   selected = false;
   map?: Map;
