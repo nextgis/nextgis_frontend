@@ -11,8 +11,9 @@
   "dependencies": {
     "@nextgis/control-container": "^1.0.0-alpha.6",
     "@nextgis/paint": "^1.0.0-alpha.6",
+    "@nextgis/properties-filter": "^1.0.0-alpha.6",
     "@nextgis/webmap": "^1.0.0-alpha.6",
-    "@types/ol": "^6.3.1",
+    "@types/ol": "^6.4.1",
     "events": "^3.2.0",
     "ol": "^6.4.3"
   },

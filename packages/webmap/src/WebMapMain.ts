@@ -26,7 +26,6 @@ import { CenterState } from './components/mapStates/CenterState';
 import { StateItem } from './components/mapStates/StateItem';
 import { ZoomState } from './components/mapStates/ZoomState';
 
-import { onLoad } from './utils/decorators';
 import { clearObject } from './utils/clearObject';
 
 type EmitStatusEventData = any;
@@ -62,23 +61,10 @@ interface AddEventsListenersOptions {
 /**
  * @public
  */
-export class WebMapMain<
-  M = any,
-  L = any,
-  C = any,
-  E extends WebMapEvents = WebMapEvents
-> {
+export class WebMapMain<M = any, E extends WebMapEvents = WebMapEvents> {
   static keys: Keys = new Keys();
-  // static utils = {
-  //   detectGeometryType,
-  //   findMostFrequentGeomType,
-  //   updateGeoJsonAdapterOptions,
-  //   propertiesFilter,
-  //   createToggleControl,
-  //   getBoundsPolygon,
-  // };
+
   static getPaintFunctions: { [name: string]: GetPaintFunction };
-  static decorators = { onLoad };
 
   options: MapOptions = OPTIONS;
   // `WebMapEvents` must be `E` but its not work correct

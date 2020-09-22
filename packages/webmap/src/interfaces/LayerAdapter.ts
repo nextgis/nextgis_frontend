@@ -1,25 +1,10 @@
 import { GeoJsonObject, Feature } from 'geojson';
-import {
-  PropertiesFilter,
-  Operations,
-  PropertyFilter,
-  checkIfPropertyFilter,
-} from '@nextgis/properties-filter';
+import { PropertiesFilter } from '@nextgis/properties-filter';
 import { Paint } from '@nextgis/paint';
 import { Type } from '@nextgis/utils';
 import { LngLatBoundsArray } from './BaseTypes';
 import { MapClickEvent } from './MapAdapter';
 
-/**
- * Backward compatibility.
- * @deprecated
- * @internal
- */
-export { PropertiesFilter, Operations, PropertyFilter, checkIfPropertyFilter };
-
-/**
- * @internal
- */
 export type AdapterConstructor = () => Promise<Type<LayerAdapter> | any>;
 
 /**
@@ -241,10 +226,12 @@ export interface VectorAdapterOptions<
    * Indicates whether several objects can be selected in one layer.
    *
    * @example
+   * ```javascript
    * // multiselect: false
    * layer.select(({ feature }) => feature.properties.color === 'green'); // one feature will be selected
    * // multiselect: true
    * layer.select(({ feature }) => feature.properties.color === 'green'); // all 'green' features will be selected
+   * ```
    */
   multiselect?: boolean;
   /**
@@ -280,27 +267,23 @@ export interface VectorAdapterOptions<
    */
   source?: unknown;
   /**
-   * TODO: move to nativeOptions
    * @internal
-   * @deprecated
+   * @deprecated - TODO: move to nativeOptions
    */
   nativePaint?: boolean | Record<string, any>;
   /**
-   * TODO: move to nativeOptions
    * @internal
-   * @deprecated
+   * @deprecated - TODO: move to nativeOptions
    */
   nativeFilter?: unknown;
   /**
-   * TODO: move to nativeOptions
    * @internal
-   * @deprecated
+   * @deprecated - TODO: move to nativeOptions
    */
   layout?: any;
   /**
-   * TODO: move to nativeOptions
    * @internal
-   * @deprecated
+   * @deprecated - TODO: move to nativeOptions
    */
   selectedLayout?: any;
 
@@ -436,7 +419,7 @@ export interface FilterOptions<Entity = any> {
   /**
    * set fields for order
    * @example
-   * ```javascripton
+   * ```javascript
    * { "orderBy": ["field1", "-field2"] }
    * ```
    */

@@ -5,13 +5,12 @@ import { deepmerge, isObject, JsonMap } from '@nextgis/utils';
 import {
   WebMap,
   MapAdapter,
-  ControlPositions,
+  ControlPosition,
   MapControls,
   WebMapEvents,
   LayerDef,
   MapClickEvent,
   LayerAdapter,
-  PropertiesFilter,
   FilterOptions,
   OnLayerClickOptions,
 } from '@nextgis/webmap';
@@ -43,6 +42,7 @@ import {
   getCompanyLogo,
 } from '@nextgis/ngw-kit';
 import { getIcon } from '@nextgis/icons';
+import { PropertiesFilter } from '@nextgis/properties-filter';
 
 import { appendNgwResources } from './utils/appendNgwResources';
 import { prepareWebMapOptions, OPTIONS } from './utils/prepareWebMapOptions';
@@ -128,7 +128,7 @@ export class NgwMap<
    */
   async addControl<K extends keyof MapControls>(
     controlDef: K | C,
-    position: ControlPositions,
+    position: ControlPosition,
     options?: MapControls[K]
   ): Promise<any> {
     await this.onLoad('controls:create');
@@ -235,7 +235,7 @@ export class NgwMap<
   }
 
   getNgwLayerFeature<
-    G extends Geometry | null = Geometry,
+    G extends Geometry = Geometry,
     P extends JsonMap = JsonMap
   >(options: {
     resourceId: number;

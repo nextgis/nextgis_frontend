@@ -4,11 +4,8 @@ import {
   FeatureCollection,
   GeoJsonProperties,
 } from 'geojson';
-import {
-  PropertiesFilter,
-  FilterOptions,
-  PropertyFilter,
-} from '@nextgis/webmap';
+import { FilterOptions } from '@nextgis/webmap';
+
 import NgwConnector, {
   FeatureItem,
   RequestItemAdditionalParams,
@@ -18,6 +15,8 @@ import CancelablePromise from '@nextgis/cancelable-promise';
 import {
   propertiesFilter,
   checkIfPropertyFilter,
+  PropertyFilter,
+  PropertiesFilter,
 } from '@nextgis/properties-filter';
 import { FeatureRequestParams, GetNgwLayerItemsOptions } from '../interfaces';
 import { JsonMap } from '@nextgis/utils';
@@ -240,14 +239,17 @@ function getNgwLayerItemsRequest<
 }
 
 export function getNgwLayerItems<
-  G extends Geometry | null = Geometry,
+  G extends Geometry = Geometry,
   P extends JsonMap = JsonMap
 >(
   options: GetNgwLayerItemsOptions & FilterOptions
-): CancelablePromise<FeatureItem[]> {
+): CancelablePromise<FeatureItem<P, G>[]> {
   const filters = options.filters;
   if (filters) {
-    return createFeatureFieldFilterQueries({ ...options, filters });
+    return createFeatureFieldFilterQueries({
+      ...options,
+      filters,
+    }) as CancelablePromise<FeatureItem<P, G>[]>;
   } else {
     return getNgwLayerItemsRequest(options).then((data) => {
       if (filters) {
@@ -260,7 +262,7 @@ export function getNgwLayerItems<
         });
       }
       return data;
-    });
+    }) as CancelablePromise<FeatureItem<P, G>[]>;
   }
 }
 

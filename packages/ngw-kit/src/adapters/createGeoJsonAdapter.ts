@@ -1,14 +1,13 @@
 import { EventEmitter } from 'events';
 import {
-  WebMap,
   VectorLayerAdapter,
   Type,
   GeoJsonAdapterOptions,
-  PropertiesFilter,
   FilterOptions,
   LayerAdapter,
 } from '@nextgis/webmap';
 import { debounce, degrees2meters } from '@nextgis/utils';
+import { PropertiesFilter, propertiesFilter } from '@nextgis/properties-filter';
 import CancelablePromise from '@nextgis/cancelable-promise';
 import { vectorLayerGeomToPaintTypeAlias } from '../utils/utils';
 import { getNgwLayerFeatures } from '../utils/featureLayerUtils';
@@ -190,7 +189,7 @@ export async function createGeoJsonAdapter(
       if (this.filter && _fullDataLoad) {
         this.filter((e) => {
           if (e.feature && e.feature.properties) {
-            return WebMap.utils.propertiesFilter(e.feature.properties, filters);
+            return propertiesFilter(e.feature.properties, filters);
           }
           return true;
         });

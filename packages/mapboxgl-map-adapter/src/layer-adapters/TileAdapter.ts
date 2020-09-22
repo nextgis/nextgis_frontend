@@ -56,7 +56,6 @@ export class TileAdapter<O extends RasterAdapterOptions = TileAdapterOptions>
         visibility: 'none',
       },
       source: sourceOptions,
-      // TODO: clean remove before options from all existing apps
     };
 
     if (minZoom) {
