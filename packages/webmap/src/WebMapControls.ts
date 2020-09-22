@@ -24,7 +24,7 @@ export class WebMapControls<
     C = any,
     E extends WebMapEvents = WebMapEvents
   >
-  extends WebMapLayers<M, L, C, E>
+  extends WebMapLayers<M, L, E>
   implements WebMapLayers, WebMapMain {
   static controls: {
     [name: string]: (webMap: WebMapControls, options?: any) => any;

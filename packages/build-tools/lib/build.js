@@ -179,8 +179,10 @@ async function build(target) {
             default: {
               logLevel: 'warning',
             },
-
             'tsdoc-undefined-tag': {
+              logLevel: 'none',
+            },
+            'tsdoc-unsupported-tag': {
               logLevel: 'none',
             },
           },

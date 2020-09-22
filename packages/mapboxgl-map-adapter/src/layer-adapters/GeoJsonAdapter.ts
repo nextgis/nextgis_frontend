@@ -4,10 +4,9 @@ import {
   VectorAdapterLayerType,
   DataLayerFilter,
   LayerDefinition,
-  PropertiesFilter,
 } from '@nextgis/webmap';
 import { VectorAdapterLayerPaint, GetPaintCallback } from '@nextgis/paint';
-import { featureFilter } from '@nextgis/properties-filter';
+import { featureFilter, PropertiesFilter } from '@nextgis/properties-filter';
 import {
   GeoJsonObject,
   FeatureCollection,

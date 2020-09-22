@@ -9,13 +9,13 @@ import { Feature, GeoJsonObject } from 'geojson';
 
 import {
   DataLayerFilter,
-  PropertiesFilter,
   VectorLayerAdapter,
   GeoJsonAdapterOptions,
   LayerDefinition,
 } from '@nextgis/webmap';
 import { Paint } from '@nextgis/paint';
 import { defined } from '@nextgis/utils';
+import { PropertiesFilter } from '@nextgis/properties-filter';
 
 import { resolutionOptions } from '../utils/gerResolution';
 import { styleFunction, labelStyleFunction, getFeature } from '../utils/utils';
