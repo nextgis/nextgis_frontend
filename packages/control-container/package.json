@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/control-container",
-  "version": "1.0.0-alpha.6",
+  "version": "1.0.0-alpha.7",
   "description": "Placing control elements in the corners of the map container",
   "main": "lib/control-container.global.prod.js",
   "module": "lib/control-container.esm-bundler.js",
@@ -8,9 +8,9 @@
   "jsdelivr": "lib/control-container.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/dom": "^1.0.0-alpha.6",
-    "@nextgis/utils": "^1.0.0-alpha.6",
-    "@nextgis/webmap": "^1.0.0-alpha.6",
+    "@nextgis/dom": "^1.0.0-alpha.7",
+    "@nextgis/utils": "^1.0.0-alpha.7",
+    "@nextgis/webmap": "^1.0.0-alpha.7",
     "events": "^3.2.0"
   },
   "devDependencies": {
