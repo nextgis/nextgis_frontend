@@ -52,16 +52,14 @@ export interface MapOptions {
    * options to specify the initial position of the map
    */
   fitOptions?: FitOptions;
-  // TODO: find usage and safe emove from here
-  paint?: GeometryPaint;
-  // TODO: find usage and safe remove from here
-  selectedPaint?: GeometryPaint;
   // TODO: move to mapAdapterOptions
   view?: '2D' | '3D' | '2.5D';
   /**
    * special settings for the selected map adapter
    */
   mapAdapterOptions?: Record<string, any>;
+  paint?: GeometryPaint;
+  selectedPaint?: GeometryPaint;
   /**
    * The callback function is calling before adding each layer
    */

@@ -2,16 +2,18 @@ import {
   VectorAdapterLayerType,
   VectorLayerAdapter,
   VectorAdapterOptions,
-  PropertiesFilter,
-  Operations,
   DataLayerFilter,
-  PropertyFilter,
   FilterOptions,
 } from '@nextgis/webmap';
 
 import { Paint, IconOptions, isPaint, isIcon } from '@nextgis/paint';
 
-import { checkIfPropertyFilter } from '@nextgis/properties-filter';
+import {
+  checkIfPropertyFilter,
+  PropertiesFilter,
+  Operations,
+  PropertyFilter,
+} from '@nextgis/properties-filter';
 import {
   Feature as F,
   GeometryObject,

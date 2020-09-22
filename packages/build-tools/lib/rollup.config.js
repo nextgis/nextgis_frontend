@@ -75,6 +75,7 @@ function createConfig(format, output, plugins = []) {
   output.sourcemap = !!process.env.SOURCE_MAP;
   output.externalLiveBindings = false;
   output.exports = 'auto';
+  output.banner = `/** Bundle of ${pkg.name}; version: ${pkg.version}; author: ${pkg.author} */`;
   const isProductionBuild =
     process.env.__DEV__ === 'false' || /\.prod\.js$/.test(output.file);
   const isBundlerESMBuild = /esm-bundler/.test(format);
@@ -206,7 +207,6 @@ function createConfig(format, output, plugins = []) {
         warn(msg);
       }
     },
-    // treeshake: true,
     treeshake: {
       moduleSideEffects: !!packageOptions.injectCss,
       // moduleSideEffects: false,
