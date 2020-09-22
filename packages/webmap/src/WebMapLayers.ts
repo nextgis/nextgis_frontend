@@ -1,6 +1,7 @@
 import { Feature, GeoJsonObject } from 'geojson';
 import { preparePaint } from '@nextgis/paint';
 import { Type } from '@nextgis/utils';
+import { PropertiesFilter, propertiesFilter } from '@nextgis/properties-filter';
 
 import {
   LayerAdapter,
@@ -12,17 +13,16 @@ import {
   VectorLayerAdapter,
   DataLayerFilter,
   OnLayerClickOptions,
-  PropertiesFilter,
   FilterOptions,
   LayerDefinition,
   LayerAdapterDefinition,
   OnLayerSelectOptions,
   MainLayerAdapter,
 } from './interfaces/LayerAdapter';
+
 import { LayerDef } from './interfaces/BaseTypes';
 
 import { updateGeoJsonAdapterOptions } from './utils/updateGeoJsonAdapterOptions';
-import { propertiesFilter } from './utils/propertiesFilter';
 import { WebMapMain } from './WebMapMain';
 
 import {
@@ -40,9 +40,8 @@ type AddedLayers = { [id: string]: LayerAdapter };
 export class WebMapLayers<
   M = any,
   L = any,
-  C = any,
   E extends WebMapEvents = WebMapEvents
-> extends WebMapMain<M, L, C, E> {
+> extends WebMapMain<M, E> {
   private _layersIdCounter = 1;
   private _layersOrderCounter = 1;
   private readonly _baselayers: string[] = [];

@@ -8,7 +8,7 @@ import BaseEvent from 'ol/events/Event';
 import Control from 'ol/control/Control';
 import View, { ViewOptions } from 'ol/View';
 import { MapOptions as OlMapOptions } from 'ol/PluggableMap';
-import MapBrowserPointerEvent from 'ol/MapBrowserPointerEvent';
+import MapBrowserPointerEvent from 'ol/MapBrowserEvent';
 import { fromLonLat, transformExtent, transform } from 'ol/proj';
 
 import {
