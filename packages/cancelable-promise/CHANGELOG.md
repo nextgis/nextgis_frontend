@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.7](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-alpha.6...v1.0.0-alpha.7) (2020-09-22)
+
+
+### Bug Fixes
+
+* **ngw-connector:** remove requestControl ([a5a0484](https://github.com/nextgis/nextgis_frontend/commit/a5a0484eb23393dd44da6b55e22f0b7f6525b6bd))
+
+
+### Features
+
+* **cancelable-promise:** add control GetOrCreateDecorator ([77eec38](https://github.com/nextgis/nextgis_frontend/commit/77eec38578db300ec5b809daf348b69a2b05078e))
+
+
+
+
+
 # [1.0.0-alpha.6](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2020-09-09)
 
 
