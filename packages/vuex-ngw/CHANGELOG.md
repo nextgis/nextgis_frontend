@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.7](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-alpha.6...v1.0.0-alpha.7) (2020-09-22)
+
+
+### Features
+
+* **vues:** add onBeforeDelete hook ([be5b966](https://github.com/nextgis/nextgis_frontend/commit/be5b966065cdcab13f3883c0c0a65ae28045f906))
+
+
+
+
+
 # [1.0.0-alpha.6](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2020-09-09)
 
 

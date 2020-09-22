@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.7](https://github.com/nextgis/nextgisweb_frontend/compare/v1.0.0-alpha.6...v1.0.0-alpha.7) (2020-09-22)
+
+
+### Bug Fixes
+
+* **cesium:** TileAdapter baselayer ordering ([c7805c9](https://github.com/nextgis/nextgisweb_frontend/commit/c7805c9fc44303bc936b7af96a101aecc126ed91))
+* **ngw-connector:** remove requestControl ([a5a0484](https://github.com/nextgis/nextgisweb_frontend/commit/a5a0484eb23393dd44da6b55e22f0b7f6525b6bd))
+
+
+### Code Refactoring
+
+* **utils:** update geom utils ([b7e1f7a](https://github.com/nextgis/nextgisweb_frontend/commit/b7e1f7aab478603f35c49470cfff71d09f58d922))
+
+
+### Features
+
+* **cancelable-promise:** add control GetOrCreateDecorator ([77eec38](https://github.com/nextgis/nextgisweb_frontend/commit/77eec38578db300ec5b809daf348b69a2b05078e))
+* **ngw-connector:** add getResourceIdOrError method ([80769c7](https://github.com/nextgis/nextgisweb_frontend/commit/80769c7d2e0a915222a20e3e08476c514f6a0826))
+* **util:** add keyInObj typescript helper ([fabb5e0](https://github.com/nextgis/nextgisweb_frontend/commit/fabb5e017d6b3b228d6cdb98a3fffe0ce8e57929))
+* **vues:** add onBeforeDelete hook ([be5b966](https://github.com/nextgis/nextgisweb_frontend/commit/be5b966065cdcab13f3883c0c0a65ae28045f906))
+
+
+### BREAKING CHANGES
+
+* **utils:** WebMap static property utils have been removed, import utilites from `@nextgis/webmap` library instead
+
+
+
+
+
 # [1.0.0-alpha.6](https://gitlab.com/nextgis_private/aeronetservice/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2020-09-09)
 
 
