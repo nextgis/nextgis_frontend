@@ -1,0 +1,54 @@
+{
+  "name": "@nextgis/geocoder",
+  "version": "1.0.0-alpha.7",
+  "description": "",
+  "main": "index.js",
+  "module": "lib/geocoder.esm-bundler.js",
+  "unpkg": "lib/geocoder.global.prod.js",
+  "jsdelivr": "lib/geocoder.global.prod.js",
+  "types": "lib/index.d.ts",
+  "dependencies": {
+    "@nextgis/webmap": "^1.0.0-alpha.7",
+    "@nextgis/cancelable-promise": "^1.0.0-alpha.7",
+    "@nextgis/utils": "^1.0.0-alpha.7",
+    "@types/geojson": "^7946.0.7",
+    "events": "^3.2.0"
+  },
+  "devDependencies": {
+    "@nextgis/build-tools": "file:../build-tools"
+  },
+  "buildOptions": {
+    "name": "Geocoder",
+    "formats": [
+      "esm-bundler",
+      "esm-browser",
+      "cjs",
+      "global"
+    ]
+  },
+  "scripts": {
+    "clean": "rimraf ./lib",
+    "dev": "node ../build-tools/lib/build.js",
+    "prod": "npm run dev -- --release",
+    "lint": "eslint ./src/**/*.ts --fix --c ../../.eslintrc",
+    "watch": "npm run dev -- --watch"
+  },
+  "keywords": [
+    "NextGIS",
+    "MAP"
+  ],
+  "author": "NextGIS",
+  "files": [
+    "index.js",
+    "lib"
+  ],
+  "license": "LGPL-3.0",
+  "homepage": "https://github.com/nextgis/nextgis_frontend/tree/master/packages/geocoder#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nextgis/nextgis_frontend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nextgis/nextgis_frontend/issues"
+  }
+}
