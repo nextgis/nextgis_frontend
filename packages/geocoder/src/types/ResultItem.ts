@@ -1,5 +1,5 @@
 import { GeoJsonObject } from 'geojson';
-import { LngLatBoundsArray } from '@nextgis/webmap';
+import { LngLatBoundsArray } from '@nextgis/utils';
 
 export interface ResultItem {
   text: string;
