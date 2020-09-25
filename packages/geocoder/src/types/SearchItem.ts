@@ -6,6 +6,7 @@ import { ResultItem } from './ResultItem';
 
 export interface SearchItem {
   [prop: string]: any;
+  _id?: number | string;
   text: string;
   query: string;
   extent?: LngLatBoundsArray;
