@@ -11,6 +11,7 @@ export * from './object';
 export * from './re';
 export * from './sleep';
 export * from './string';
+export * from './number';
 export * from './typeHelpers';
 export * from './url';
 export * from './Clipboard';
