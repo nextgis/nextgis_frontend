@@ -1,6 +1,6 @@
 import { GeoJsonObject } from 'geojson';
 import CancelablePromise from '@nextgis/cancelable-promise';
-import { LngLatBoundsArray } from '@nextgis/webmap';
+import { LngLatBoundsArray } from '@nextgis/utils';
 import { BaseProvider } from '../providers/BaseProvider';
 import { ResultItem } from './ResultItem';
 
