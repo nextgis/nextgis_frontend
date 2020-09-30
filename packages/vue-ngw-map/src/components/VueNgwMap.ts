@@ -1,7 +1,7 @@
 import { VNode, VNodeData, CreateElement } from 'vue';
 import { Prop, Vue, Watch } from 'vue-property-decorator';
 import Component from 'vue-class-component';
-import { MapAdapter } from '@nextgis/webmap';
+import { MapAdapter, Cursor } from '@nextgis/webmap';
 import { LngLatBoundsArray } from '@nextgis/utils';
 import { NgwMap, NgwMapOptions } from '@nextgis/ngw-map';
 
@@ -18,6 +18,7 @@ export class VueNgwMap<M = any> extends Vue {
   @Prop({ type: Object }) readonly mapOptions!: NgwMapOptions;
   @Prop({ type: Array }) readonly bounds!: LngLatBoundsArray;
   @Prop({ type: Boolean }) readonly osm!: boolean;
+  @Prop({ type: String }) readonly cursor!: Cursor;
 
   // @ProvideReactive() ngwMap!: NgwMap<M>;
   ngwMap!: NgwMap<M>;
@@ -32,6 +33,11 @@ export class VueNgwMap<M = any> extends Vue {
     }
   }
 
+  @Watch('cursor')
+  onCursorChange(cursor: Cursor): void {
+    this.ngwMap.setCursor(cursor || 'default');
+  }
+
   getMapOptions(): NgwMapOptions {
     return this.mapOptions;
   }
@@ -44,9 +50,11 @@ export class VueNgwMap<M = any> extends Vue {
     });
     this.ngwMap.onLoad().then(() => {
       this.$nextTick().then(() => {
+        this._onReady();
         this.ready = true;
         this.$emit('load', this.ngwMap);
       });
+      this._addEventsListener();
     });
   }
 
@@ -73,6 +81,18 @@ export class VueNgwMap<M = any> extends Vue {
       // domProps: { id: this.id }
     };
     return this.ready ? h('div', data, this.$slots.default) : h('div', data);
+  }
+
+  private _onReady() {
+    if (this.cursor) {
+      this.onCursorChange(this.cursor);
+    }
+  }
+
+  private _addEventsListener() {
+    this.ngwMap.emitter.on('click', (e) => {
+      this.$emit('click', e);
+    });
   }
 }
 
