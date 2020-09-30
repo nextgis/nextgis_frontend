@@ -86,8 +86,8 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
         minZoom,
         zoom,
         maxBounds: mb && [
-          [mb[0], mb[1]],
-          [mb[2], mb[3]],
+          [mb[1], mb[0]],
+          [mb[3], mb[2]],
         ],
         center: center && [center[1], center[0]],
         ...mapAdapterOptions,
