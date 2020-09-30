@@ -71,6 +71,10 @@ export interface NgwMapOptions<C = any> extends MapOptions {
 
   qmsId?: number | [number, string];
   /**
+   * Shortcut to add OSM baselayer
+   */
+  osm?: boolean;
+  /**
    * Set default paint for vector layers geometry objects.
    */
   // vectorLayersDefaultPaint?: {
