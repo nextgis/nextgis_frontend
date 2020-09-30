@@ -17,6 +17,7 @@ export class VueNgwMap<M = any> extends Vue {
   @Prop({ type: String }) readonly webMapId!: string;
   @Prop({ type: Object }) readonly mapOptions!: NgwMapOptions;
   @Prop({ type: Array }) readonly bounds!: LngLatBoundsArray;
+  @Prop({ type: Boolean }) readonly osm!: boolean;
 
   // @ProvideReactive() ngwMap!: NgwMap<M>;
   ngwMap!: NgwMap<M>;
