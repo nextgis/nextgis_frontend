@@ -15,6 +15,7 @@ import {
   ToTypescript,
   ToTypescriptOptions,
 } from '../options/ToTypescriptOptions';
+import { ValidateErrorType } from '../types/ValidateErrorType';
 
 // type QueryDeepPartialEntity<T> = DeepPartial<T>;
 // type InsertResult = any;
@@ -65,6 +66,10 @@ export class BaseResource {
     const ReceivedResource = decorator(class extends ResCls {});
     ReceivedResource.item = item;
     return ReceivedResource;
+  }
+
+  static validate(): ValidateErrorType[] {
+    return [];
   }
 
   static clone(options: Partial<NgwResourceOptions> = {}): typeof BaseResource {
