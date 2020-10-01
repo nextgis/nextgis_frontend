@@ -48,6 +48,7 @@ export interface MapOptions {
    * ```
    */
   bounds?: LngLatBoundsArray;
+  maxBounds?: LngLatBoundsArray;
   /**
    * options to specify the initial position of the map
    */
