@@ -46,6 +46,7 @@ import {
   ToTypescript,
   ToTypescriptOptions,
 } from '../options/ToTypescriptOptions';
+import { ValidateErrorType } from '../types/ValidateErrorType';
 // import { SyncOptions } from './SyncOptions';
 // import { Connection } from '../connection/Connection';
 // import { ConnectionOptions } from '../connection/ConnectionOptions';
@@ -129,6 +130,40 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
     });
 
     return ReceivedResource;
+  }
+
+  static validate(): ValidateErrorType[] {
+    const fields = getMetadataArgsStorage().filterColumns(this);
+    const resource = this.item && this.item?.resource;
+    const itemFields =
+      this.item && this.item.feature_layer && this.item.feature_layer.fields;
+    if (!itemFields || !resource) {
+      return [{ type: 'resource', message: 'Resource not connected' }];
+    }
+    const errors: ValidateErrorType[] = [];
+    fields.forEach((x) => {
+      const exist = itemFields.find((y) => y.keyname === x.propertyName);
+      if (!exist) {
+        errors.push({
+          type: 'field-not-exist',
+          message: `resource #${resource.id} does not contain field ${x.propertyName}:${x.options.datatype}`,
+          context: [x.propertyName],
+        });
+      } else {
+        if (x.options.datatype !== exist.datatype) {
+          errors.push({
+            type: 'field-type-not-match',
+            message: `resource #${resource.id} type for field ${x.propertyName} does not match model ${exist.datatype} !== ${x.options.datatype}`,
+            context: [
+              x.propertyName,
+              exist.datatype,
+              String(x.options.datatype),
+            ],
+          });
+        }
+      }
+    });
+    return errors;
   }
 
   static getNgwPayload(
