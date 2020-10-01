@@ -396,24 +396,10 @@ export class NgwMap<
   private async _createWebMap() {
     await this.create({ ...this.options });
     if (this.options.qmsId) {
-      let qmsId: number;
-      let qmsLayerName: string | undefined;
-      if (Array.isArray(this.options.qmsId)) {
-        qmsId = this.options.qmsId[0];
-        qmsLayerName = this.options.qmsId[1];
-      } else {
-        qmsId = Number(this.options.qmsId);
-      }
-      const qmsLayerOptions: QmsAdapterOptions = {
-        qmsId,
-      };
-      if (qmsLayerName) {
-        qmsLayerOptions.id = qmsLayerName;
-      }
-
-      this.addBaseLayer('QMS', qmsLayerOptions).then((layer) => {
-        this.showLayer(layer);
-      });
+      this.addQmsBaseLayer();
+    }
+    if (this.options.osm) {
+      this.addOsmBaseLayer();
     }
 
     const resources: NgwLayerOptions[] = [];
@@ -440,10 +426,31 @@ export class NgwMap<
         console.log(er);
       }
     }
-
     this._emitStatusEvent('ngw-map:create', this);
-
     this.enableSelection();
+  }
+
+  private addOsmBaseLayer() {
+    this.addBaseLayer('OSM');
+  }
+
+  private addQmsBaseLayer() {
+    let qmsId: number;
+    let qmsLayerName: string | undefined;
+    if (Array.isArray(this.options.qmsId)) {
+      qmsId = this.options.qmsId[0];
+      qmsLayerName = this.options.qmsId[1];
+    } else {
+      qmsId = Number(this.options.qmsId);
+    }
+    const qmsLayerOptions: QmsAdapterOptions = {
+      qmsId,
+    };
+    if (qmsLayerName) {
+      qmsLayerOptions.id = qmsLayerName;
+    }
+
+    this.addBaseLayer('QMS', qmsLayerOptions);
   }
 
   private _addControls() {
