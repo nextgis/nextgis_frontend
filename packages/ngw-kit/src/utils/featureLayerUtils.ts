@@ -298,28 +298,33 @@ export function prepareFieldsToNgw<T extends any>(
   resourceFields.forEach((x) => {
     if (x.keyname in item) {
       const keyname = x.keyname as keyof T;
-      const property = item[keyname];
+      const prop = item[keyname];
       let value: any;
-      if (property !== undefined) {
+      if (prop !== undefined) {
         if (x.datatype === 'STRING') {
-          value = String(property);
+          value = prop ? String(prop) : null;
+          // TODO: remove after v 3.0.0. For backward compatibility
+          if (value === 'null') {
+            value = null;
+          }
         } else if (x.datatype === 'BIGINT' || x.datatype === 'INTEGER') {
-          value =
-            typeof property === 'string' ? parseInt(property, 10) : property;
+          value = typeof prop === 'string' ? parseInt(prop, 10) : prop;
         } else if (x.datatype === 'REAL') {
-          value =
-            typeof property === 'string' ? parseFloat(property) : property;
+          value = typeof prop === 'string' ? parseFloat(prop) : prop;
         } else if (x.datatype === 'BOOLEAN') {
-          value = Number(value);
+          value =
+            typeof prop === 'boolean' || typeof prop === 'number'
+              ? Number(!!prop)
+              : null;
         } else if (x.datatype === 'DATE') {
           let dt: Date | undefined;
-          if (typeof property === 'object') {
-            value = property;
+          if (typeof prop === 'object') {
+            value = prop;
           } else {
-            if ((property as any) instanceof Date) {
-              dt = property as any;
+            if ((prop as any) instanceof Date) {
+              dt = prop as any;
             } else {
-              const parse = Date.parse(String(property));
+              const parse = Date.parse(String(prop));
               if (parse) {
                 dt = new Date(parse);
               }
