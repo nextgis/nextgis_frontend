@@ -34,9 +34,11 @@ export const VueNgwMap = Vue.extend<VueNgwMapData, any, any, VueNgwMapProps>({
     mapOptions: Object,
   },
 
-  data: {
-    ngwMap: {} as NgwMap,
-    ready: false,
+  data: () => {
+    return {
+      ngwMap: {} as NgwMap,
+      ready: false,
+    };
   },
 
   mounted(): void {
