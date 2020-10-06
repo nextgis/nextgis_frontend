@@ -1,20 +1,4 @@
-import {
-  VectorLayerAdapter,
-  GeoJsonAdapterOptions,
-  DataLayerFilter,
-  PropertiesFilter,
-  LayerDefinition,
-} from '@nextgis/webmap';
-import {
-  VectorAdapterLayerPaint,
-  isPaintCallback,
-  Paint,
-  isBasePaint,
-  isPaint,
-  GeometryPaint,
-  PinPaint,
-} from '@nextgis/paint';
-
+import { GeoJsonObject, Feature, FeatureCollection } from 'geojson';
 import {
   GeoJsonDataSource,
   Color,
@@ -28,7 +12,24 @@ import {
   HeightReference,
   JulianDate,
 } from 'cesium';
-import { GeoJsonObject, Feature, FeatureCollection } from 'geojson';
+
+import {
+  VectorLayerAdapter,
+  GeoJsonAdapterOptions,
+  DataLayerFilter,
+  LayerDefinition,
+} from '@nextgis/webmap';
+import { PropertiesFilter } from '@nextgis/properties-filter';
+import {
+  VectorAdapterLayerPaint,
+  isPaintCallback,
+  Paint,
+  isBasePaint,
+  isPaint,
+  GeometryPaint,
+  PinPaint,
+} from '@nextgis/paint';
+
 import { BaseAdapter, Map } from './BaseAdapter';
 import { whenSampleTerrainMostDetailed } from '../utils/whenSampleTerrainMostDetailed';
 

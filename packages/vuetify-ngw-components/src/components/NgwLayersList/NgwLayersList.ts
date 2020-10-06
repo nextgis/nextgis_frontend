@@ -280,7 +280,9 @@ export class NgwLayersList extends Vue {
       const parents = webMap.tree
         .getParents<NgwWebmapItem>()
         .map((x) => x.item.display_name);
-      const id = [...parents, webMap.item.display_name].join('-');
+      // @ts-ignore
+      const itemId = webMap.item.id;
+      const id = [...parents, webMap.item.display_name, itemId].join('-');
       return id;
     } else {
       return String(layer.id);
