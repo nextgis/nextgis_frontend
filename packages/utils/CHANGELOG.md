@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.8](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-alpha.7...v1.0.0-alpha.8) (2020-10-06)
+
+
+### Features
+
+* **utils:** add number utils ([d2378ba](https://github.com/nextgis/nextgis_frontend/commit/d2378ba53a3d7b371087aba98a99f5b90e007d92))
+
+
+
+
+
 # [1.0.0-alpha.7](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-alpha.6...v1.0.0-alpha.7) (2020-09-22)
 
 
