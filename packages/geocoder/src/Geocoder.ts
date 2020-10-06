@@ -4,6 +4,8 @@ import { GeocoderOptions } from './GeocoderOptions';
 import { BaseGeocoder } from './BaseGeocoder';
 import { SearchItem } from './types/SearchItem';
 
+let ID = 0;
+
 export class Geocoder extends BaseGeocoder<GeocoderOptions> {
   providers: BaseProvider[] = [];
 
@@ -28,7 +30,7 @@ export class Geocoder extends BaseGeocoder<GeocoderOptions> {
         const results = provider.search(query);
 
         for await (const r of results) {
-          yield { ...r, provider };
+          yield { ...r, provider, _id: ID++ };
         }
       } catch (er) {
         //
