@@ -11,8 +11,8 @@
     "@nextgis/utils": "^1.0.0-alpha.7",
     "vue": "^2.6.12",
     "vue-class-component": "^7.2.6",
-    "vue-property-decorator": "^9.0.0",
-    "vuetify": "^2.3.10"
+    "vue-property-decorator": "^9.0.2",
+    "vuetify": "^2.3.12"
   },
   "devDependencies": {
     "@nextgis/build-tools": "file:../build-tools"
