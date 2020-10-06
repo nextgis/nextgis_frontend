@@ -43,9 +43,16 @@ export class VueNgwMap<M = any> extends Vue {
   }
 
   mounted(): void {
+    const props: Record<string, any> = {};
+    for (const p in this.$props) {
+      const prop = this.$props[p];
+      if (prop !== undefined) {
+        props[p] = prop;
+      }
+    }
     this.ngwMap = new NgwMap(this.mapAdapter, {
       ...this.getMapOptions(),
-      ...this.$props,
+      ...props,
       target: this.$el as HTMLElement,
     });
     this.ngwMap.onLoad().then(() => {

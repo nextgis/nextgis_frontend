@@ -13,6 +13,7 @@ import {
 
 import { BaseAdapter } from './BaseAdapter';
 import { whenSampleTerrainMostDetailed } from '../utils/whenSampleTerrainMostDetailed';
+import { makeUrl } from '../utils/makeUrl';
 
 type Layer = Model;
 
@@ -27,10 +28,10 @@ export class Model3DAdapter extends BaseAdapter<Model3DOptions, Layer> {
   addLayer(opt: Model3DOptions): Model {
     this.options = { ...this.options, ...opt };
     // const modelMatrix = Transforms.eastNorthUpToFixedFrame(position);
-
+    const url = makeUrl(this.options.url, this.options.headers);
     this.options = { ...opt };
     this._layer = Model.fromGltf({
-      url: this.options.url,
+      url,
       show: false,
       modelMatrix: this._getModelMatrix(),
       scale: opt.scale || 1,

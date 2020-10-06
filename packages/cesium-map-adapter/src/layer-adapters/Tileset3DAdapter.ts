@@ -7,6 +7,7 @@ import {
   Cartographic,
   Ellipsoid,
 } from 'cesium';
+import { makeUrl } from '../utils/makeUrl';
 import { whenSampleTerrainMostDetailed } from '../utils/whenSampleTerrainMostDetailed';
 import { BaseAdapter } from './BaseAdapter';
 
@@ -52,8 +53,10 @@ export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
   }
 
   private async _addLayer() {
+    const url = makeUrl(this.options.url, this.options.headers);
+
     const layer = new Cesium3DTileset({
-      url: this.options.url,
+      url,
       skipLevelOfDetail: true,
       maximumScreenSpaceError:
         this.options.nativeOptions &&

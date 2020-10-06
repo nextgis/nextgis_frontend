@@ -13,17 +13,16 @@ function generate(source, module = false) {
       const packagePath = join(libPath, 'package.json');
       if (existsSync(packagePath)) {
         const package = JSON.parse(readFileSync(packagePath, 'utf8'));
-        if (!package.private) {
-          if (module) {
-            if (package.module) {
-              const module = join(libPath, package.module);
-              if (existsSync(module)) {
-                items[package.name + '$'] = module;
-              }
+
+        if (module) {
+          if (package.module) {
+            const module = join(libPath, package.module);
+            if (existsSync(module)) {
+              items[package.name + '$'] = module;
             }
-          } else {
-            items[package.name + '$'] = join(libPath, '/src/index.ts');
           }
+        } else {
+          items[package.name + '$'] = join(libPath, '/src/index.ts');
         }
       }
     }
