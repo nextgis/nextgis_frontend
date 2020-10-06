@@ -38,6 +38,12 @@ export function prepareWebMapOptions(
     options.baseUrl = options.connector.options.baseUrl;
   }
   const opt: NgwMapOptions = deepmerge(OPTIONS, options);
+
+  if (!opt.center && !opt.bounds) {
+    options.bounds = [-179, -90, 180, 90];
+    options.maxBounds = options.bounds;
+  }
+
   if (opt.connector) {
     kits.push(
       new NgwKit({
