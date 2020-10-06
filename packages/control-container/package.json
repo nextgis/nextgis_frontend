@@ -14,10 +14,7 @@
     "events": "^3.2.0"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "file:../build-tools",
-    "install": "^0.13.0",
-    "mini-css-extract-plugin": "^0.11.2",
-    "npm": "^6.14.8"
+    "@nextgis/build-tools": "file:../build-tools"
   },
   "buildOptions": {
     "name": "ControlContainer",
