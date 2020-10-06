@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/dom",
-  "version": "1.0.0-alpha.7",
+  "version": "1.0.0-alpha.8",
   "description": "Collection of libraries for working with the DOM",
   "main": "lib/dom.global.prod.js",
   "module": "lib/dom.esm-bundler.js",
