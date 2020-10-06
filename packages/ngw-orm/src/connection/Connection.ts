@@ -216,7 +216,7 @@ export class Connection {
     let res;
     if (getExisted && payload.resource) {
       try {
-        const exist = await this.getResource(payload.resource);
+        const exist = await this.getResourceItem(payload.resource);
         if (exist) {
           res = await resource.connect(exist.resource.id, this);
         }
