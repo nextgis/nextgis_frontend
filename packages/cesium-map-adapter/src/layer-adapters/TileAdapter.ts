@@ -1,5 +1,7 @@
 import { TileAdapterOptions } from '@nextgis/webmap';
+import { defined } from '@nextgis/utils';
 import { UrlTemplateImageryProvider, ImageryLayer } from 'cesium';
+import { makeUrl } from '../utils/makeUrl';
 
 import { BaseAdapter } from './BaseAdapter';
 
@@ -10,11 +12,12 @@ export class TileAdapter extends BaseAdapter<TileAdapterOptions, Layer> {
 
   addLayer(opt: TileAdapterOptions): ImageryLayer {
     this.options = { ...opt };
+    const url = makeUrl(this.options.url, this.options.headers);
     const urlLayer = new UrlTemplateImageryProvider({
-      url: opt.url,
+      url,
       credit: opt.attribution,
-      maximumLevel: opt.maxZoom,
-      minimumLevel: opt.minZoom,
+      maximumLevel: defined(opt.maxZoom) ? opt.maxZoom : undefined,
+      minimumLevel: defined(opt.minZoom) ? opt.minZoom : undefined,
     });
     // @ts-ignore - ImageryLayer need to set layer opacity
     // based on https://sandcastle.cesium.com/index.html?src=Imagery%2520Layers%2520Manipulation.html
