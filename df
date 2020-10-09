@@ -1,0 +1,13 @@
+[1mdiff --git a/packages/ngw-kit/src/utils/featureLayerUtils.ts b/packages/ngw-kit/src/utils/featureLayerUtils.ts[m
+[1mindex 082d4f400..8b6125c62 100644[m
+[1m--- a/packages/ngw-kit/src/utils/featureLayerUtils.ts[m
+[1m+++ b/packages/ngw-kit/src/utils/featureLayerUtils.ts[m
+[36m@@ -303,7 +303,7 @@[m [mexport function prepareFieldsToNgw<T extends any>([m
+       if (prop !== undefined) {[m
+         if (x.datatype === 'STRING') {[m
+           value = prop ? String(prop) : null;[m
+[31m-          // TODO: remove after v 3.0.0. For backward compatibility[m
+[32m+[m[32m          // TODO: remove after v 1.0.0. For backward compatibility[m
+           if (value === 'null') {[m
+             value = null;[m
+           }[m

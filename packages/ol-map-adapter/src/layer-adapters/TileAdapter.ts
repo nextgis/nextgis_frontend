@@ -27,6 +27,7 @@ export class TileAdapter implements MainLayerAdapter {
     }
     const layer = new TileLayer({
       source,
+      opacity: options.opacity,
       ...resolutionOptions(this.map, options),
     });
     return layer;
