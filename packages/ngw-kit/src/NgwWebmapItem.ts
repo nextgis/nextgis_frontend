@@ -116,6 +116,8 @@ export class NgwWebmapItem extends Item<ItemOptions> {
   async initItem(item: TreeGroup | TreeLayer): Promise<void> {
     let newLayer = item._layer;
     const i = item;
+    const transparency = item.item_type === 'layer' && item.layer_transparency;
+    const opacity = typeof transparency === 'number' ?(100 - transparency) / 100 : undefined;
     if (item.item_type === 'group' || item.item_type === 'root') {
       if (item.children && item.children.length) {
         this.getChildren(item).forEach((x) => {
@@ -167,6 +169,9 @@ export class NgwWebmapItem extends Item<ItemOptions> {
           NgwWebmapItem.GetAdapterFromLayerType[item.item_type];
         adapter = await getAdapter(item, options, this.webMap, this.connector);
       }
+      if (opacity !== undefined) {
+        options.opacity = opacity;
+      }
       if (adapter) {
         newLayer = await this.webMap.addLayer(adapter, options);
       }
@@ -177,10 +182,8 @@ export class NgwWebmapItem extends Item<ItemOptions> {
       if (this.properties && item.item_type === 'layer' && item.layer_enabled) {
         this.properties.property('visibility').set(true);
       }
-      const transparency =
-        item.item_type === 'layer' && item.layer_transparency;
-      if (typeof transparency === 'number') {
-        const opacity = (100 - transparency) / 100;
+
+      if (opacity !== undefined) {
         this.webMap.setLayerOpacity(newLayer, opacity);
       }
     } else {
