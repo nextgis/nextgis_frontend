@@ -3,7 +3,7 @@ import NgwConnector, {
   Resource,
   ResourceDefinition,
 } from '@nextgis/ngw-connector';
-import { objectAssign } from '@nextgis/utils';
+import { objectAssign, defined } from '@nextgis/utils';
 import { ConnectionOptions } from './ConnectionOptions';
 import { SyncOptions } from '../repository/SyncOptions';
 import { BaseResource } from '../repository/BaseResource';
@@ -198,7 +198,7 @@ export class Connection {
     } else {
       parent = options.parent;
     }
-    if (!parent) {
+    if (!defined(parent)) {
       throw Error('parent resource is not defined');
     }
     const parentResource = await this.driver.getResource(parent);
