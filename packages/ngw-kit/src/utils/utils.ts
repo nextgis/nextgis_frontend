@@ -146,22 +146,6 @@ export function pixelsInMeterWidth(): number {
   return _pixelsInMeter;
 }
 
-type Ctor = any;
-
-export function applyMixins(derivedCtor: Ctor, baseCtors: Ctor[]): void {
-  baseCtors.forEach((baseCtor) => {
-    Object.getOwnPropertyNames(baseCtor.prototype).forEach((name) => {
-      const descriptor = Object.getOwnPropertyDescriptor(
-        baseCtor.prototype,
-        name
-      );
-      if (descriptor) {
-        Object.defineProperty(derivedCtor.prototype, name, descriptor);
-      }
-    });
-  });
-}
-
 // Returns width of map in meters on specified latitude.
 export function getMapWidthForLanInMeters(lat: number): number {
   return 6378137 * 2 * Math.PI * Math.cos((lat * Math.PI) / 180);

@@ -7,7 +7,8 @@ export function applyMixins(derivedCtor: Ctor, baseCtors: Ctor[]): void {
         baseCtor.prototype,
         name
       );
-      if (descriptor) {
+      if (descriptor && name !== 'constructor') {
+        // if (descriptor) {
         Object.defineProperty(derivedCtor.prototype, name, descriptor);
       }
     });
