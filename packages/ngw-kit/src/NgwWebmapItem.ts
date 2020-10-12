@@ -117,7 +117,8 @@ export class NgwWebmapItem extends Item<ItemOptions> {
     let newLayer = item._layer;
     const i = item;
     const transparency = item.item_type === 'layer' && item.layer_transparency;
-    const opacity = typeof transparency === 'number' ?(100 - transparency) / 100 : undefined;
+    const opacity =
+      typeof transparency === 'number' ? (100 - transparency) / 100 : undefined;
     if (item.item_type === 'group' || item.item_type === 'root') {
       if (item.children && item.children.length) {
         this.getChildren(item).forEach((x) => {

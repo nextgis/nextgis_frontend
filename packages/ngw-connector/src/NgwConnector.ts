@@ -270,7 +270,7 @@ export class NgwConnector {
               reject(new Error('request url is not set'));
             }
           } else {
-            resolve({} as P[K]);
+            resolve(undefined);
           }
         })
         .catch((er) => {
