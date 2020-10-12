@@ -18,4 +18,5 @@ export async function createWebMapAdapter({
       });
     }
   };
+
 }

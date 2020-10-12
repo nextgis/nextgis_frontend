@@ -3,7 +3,7 @@ import NgwConnector, {
   ResourceItem,
 } from '@nextgis/ngw-connector';
 import { WebMap } from '@nextgis/webmap';
-import { Type } from '@nextgis/utils';
+import { Type, applyMixins } from '@nextgis/utils';
 
 import {
   ResourceAdapter,
@@ -19,7 +19,6 @@ import {
 import { createGeoJsonAdapter } from './createGeoJsonAdapter';
 import { createRasterAdapter } from './createRasterAdapter';
 import { createWebMapAdapter } from './createNgwWebmapAdapter';
-import { applyMixins } from '../utils/utils';
 import { NgwResource } from '../NgwResource';
 import { resourceIdFromLayerOptions } from '../utils/resourceIdFromLayerOptions';
 import { createBasemapLayerAdapter } from './createBasemapLayerAdapter';
@@ -156,12 +155,12 @@ export async function createAsyncAdapter(
     return adapter.then((x) => {
       if (x) {
         const resourceAdapter = x as Type<ResourceAdapter>;
+
         resourceAdapter.prototype.item = item;
         resourceAdapter.prototype.resourceId = item?.resource.id;
         resourceAdapter.prototype.connector = connector;
 
         applyMixins(resourceAdapter, [NgwResource]);
-
         return resourceAdapter;
       }
     });
