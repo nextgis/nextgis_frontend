@@ -10,6 +10,49 @@ import { LngLatArray, LngLatBoundsArray, Type } from './BaseTypes';
  */
 export interface MapOptions {
   /**
+   * The main initialization property of WebMap.
+   * Determines the way of interaction with the selected GIS framework.
+   * Available: [Leaflet](leaflet-map-adapter); [Openlayers](ol-map-adapter); [MapboxGL](mapboxgl-map-adapter)
+   */
+  mapAdapter?: MapAdapter;
+  /**
+   * One way to extend WebMap functionality with the help of kits.
+   */
+  starterKits?: StarterKit[];
+  /**
+   * Initial map display settings
+   */
+  mapOptions?: MapOptions;
+  /**
+   * A way to save the state of a map to external services
+   *
+   * @example
+   * ```javascript
+   * import RuntimeParams from '@nextgis/url-runtime-params';
+   * // this will allow to write in the url params of map center and zoomlevel when moving
+   * new WebMap({
+   *   mapAdapter: new MapAdapter(),
+   *   runtimeParams: [new RuntimeParams]
+   * })
+   * ```
+   */
+  runtimeParams?: RuntimeParams[];
+  /**
+   * Аutomatic creation of a map from the constructor
+   * @defaultValue false
+   *
+   * @example
+   * ```javascript
+   * const webMap = new WebMap(options);
+   * // create: false
+   * webMap.create().then(() => doSomething());
+   * // create: true
+   * webMap.emitter.on('created', () => doSomething());
+   * ```
+   */
+  create?: boolean;
+
+  /**
    * The HTML element in which NgwMap will render the map,
    * or the element's string  id.
    * The specified element must have no children.
@@ -74,51 +117,6 @@ export type OnBeforeLayerAdd = (e: {
   adapter?: Type<LayerAdapter>;
   options: AdapterOptions & Record<string, any>;
 }) => { adapter?: Type<LayerAdapter>; options?: AdapterOptions } | undefined;
-
-export interface AppOptions {
-  /**
-   * The main initialization property of WebMap.
-   * Determines the way of interaction with the selected GIS framework.
-   * Available: [Leaflet](leaflet-map-adapter); [Openlayers](ol-map-adapter); [MapboxGL](mapboxgl-map-adapter)
-   */
-  mapAdapter: MapAdapter;
-  /**
-   * One way to extend WebMap functionality with the help of kits.
-   */
-  starterKits?: StarterKit[];
-  /**
-   * Initial map display settings
-   */
-  mapOptions?: MapOptions;
-  /**
-   * A way to save the state of a map to external services
-   *
-   * @example
-   * ```javascript
-   * import RuntimeParams from '@nextgis/url-runtime-params';
-   * // this will allow to write in the url params of map center and zoomlevel when moving
-   * new WebMap({
-   *   mapAdapter: new MapAdapter(),
-   *   runtimeParams: [new RuntimeParams]
-   * })
-   * ```
-   */
-  runtimeParams?: RuntimeParams[];
-  /**
-   * Аutomatic creation of a map from the constructor
-   * @defaultValue false
-   *
-   * @example
-   * ```javascript
-   * const webMap = new WebMap(options);
-   * // create: false
-   * webMap.create().then(() => doSomething());
-   * // create: true
-   * webMap.emitter.on('created', () => doSomething());
-   * ```
-   */
-  create?: boolean;
-}
 
 /**
  * @public

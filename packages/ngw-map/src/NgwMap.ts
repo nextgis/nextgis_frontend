@@ -4,7 +4,6 @@ import CancelablePromise from '@nextgis/cancelable-promise';
 import { deepmerge, isObject, JsonMap } from '@nextgis/utils';
 import {
   WebMap,
-  MapAdapter,
   ControlPosition,
   MapControls,
   WebMapEvents,
@@ -65,7 +64,8 @@ import { Geometry, Feature, FeatureCollection } from 'geojson';
  * // styles are not included in the leaflet-map-adapter
  * import 'leaflet/dist/leaflet.css';
  *
- * const ngwMap = new NgwMap(new MapAdapter(), {
+ * const ngwMap = new NgwMap({
+ *   mapAdapter: new MapAdapter(),
  *   target: 'map',
  *   qmsId: 487,
  *   baseUrl: 'https://demo.nextgis.com',
@@ -94,8 +94,8 @@ export class NgwMap<
   private __selectFromNgwRaster?: (ev: MapClickEvent) => void;
   private __selectFromNgwVector?: (ev: OnLayerClickOptions) => void;
 
-  constructor(mapAdapter: MapAdapter, options: NgwMapOptions<C> & O) {
-    super(prepareWebMapOptions(mapAdapter, options));
+  constructor(options: NgwMapOptions<C> & O) {
+    super(prepareWebMapOptions(options));
     if (options.connector) {
       this.connector = options.connector;
     }
@@ -141,7 +141,6 @@ export class NgwMap<
    *
    * @example
    * ```javascript
-   * var ngwMap = new NgwMap({ baseUrl: 'https://demo.nextgis.com', target: 'map' });
    * // add raster layer resourceId is the style of 4004 layer
    * ngwMap.addNgwLayer({ resourceId: 4005 });
    * // add vector data from layer GEOJSON source
@@ -394,7 +393,7 @@ export class NgwMap<
   }
 
   private async _createWebMap() {
-    await this.create({ ...this.options });
+    await this.create();
     if (this.options.qmsId) {
       this.addQmsBaseLayer();
     }
