@@ -1,8 +1,8 @@
 export function unflatten(data: Record<string, any> | any[]) {
   if (Object(data) !== data || Array.isArray(data)) return data;
-  const regex = /\.?([^.\[\]]+)|\[(\d+)\]/g;
+  const regex = /\.?([^.[\]]+)|\[(\d+)\]/g;
   const flat: Record<string, any> = {};
-  for (var p in data) {
+  for (const p in data) {
     let cur = flat;
     let prop = '';
     let m;

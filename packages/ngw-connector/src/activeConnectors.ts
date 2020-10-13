@@ -11,11 +11,14 @@ export function addConnector(connector: NgwConnector) {
 
 export function findConnector(options: NgwConnectorOptions) {
   return CONNECTORS.find((x) => {
-    x.options.baseUrl = options.baseUrl;
-    if (options.auth) {
-      return x.options.auth && objectDeepEqual(x.options.auth, options.auth)
-    } else {
-      x.options.auth === undefined;
+    if (x.options.baseUrl === options.baseUrl) {
+      if (options.auth) {
+        if (x.options.auth) {
+          return objectDeepEqual(x.options.auth, options.auth);
+        }
+      } else {
+        x.options.auth === undefined;
+      }
     }
   });
 }
