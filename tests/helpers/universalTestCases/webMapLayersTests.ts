@@ -1,12 +1,7 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 import { mapHtml } from '../mapHtml';
-import {
-  AppOptions,
-  MapOptions,
-  LayerAdapters,
-  Type,
-} from '../../../packages/webmap/src';
+import { MapOptions, LayerAdapters, Type } from '../../../packages/webmap/src';
 import { WebMap } from '../../../packages/webmap/src/WebMap';
 import { MapAdapterCreateOptions } from './baseMapTests';
 
@@ -20,7 +15,6 @@ export const webMapLayersTests = <
     | Promise<Type<LayerAdapters[K]> | undefined>,
   buildWebMap: (
     mapOptions: MapOptions,
-    appOpt?: AppOptions,
     opt?: MapAdapterCreateOptions
   ) => Promise<W>
 ): any => {

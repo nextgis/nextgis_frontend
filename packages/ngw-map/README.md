@@ -15,11 +15,12 @@ $ yarn add @nextgis/ngw-map
 
 ```javascript
 import { NgwMap } from '@nextgis/ngw-map';
-import LeafletMapAdapter from '@nextgis/leaflet-map-adapter';
+import MapAdapter from '@nextgis/leaflet-map-adapter';
 // manually added styles
 import 'leaflet/dist/leaflet.css';
 
-const ngwMap = new NgwMap(new LeafletMapAdapter(), {
+const ngwMap = new NgwMap({
+  mapAdapter: new MapAdapter(),
   baseUrl: 'https://demo.nextgis.com',
   target: 'map',
   qmsId: 487,

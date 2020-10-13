@@ -13,7 +13,7 @@ import OlMapAdapter from '@nextgis/ol-map-adapter';
 
 class NgwOl extends NgwMap {
   constructor(options: NgwMapOptions) {
-    super(new OlMapAdapter(), options);
+    super({ ...options, mapAdapter: new OlMapAdapter() });
   }
 
   static async create(options: NgwMapOptions): Promise<NgwOl> {

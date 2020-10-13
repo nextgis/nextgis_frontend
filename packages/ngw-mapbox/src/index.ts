@@ -17,7 +17,7 @@ import { Map } from 'mapbox-gl';
 
 class NgwMapbox extends NgwMap<Map, string[], any, MapboxglMapAdapterOptions> {
   constructor(options: NgwMapOptions) {
-    super(new MapboxglMapAdapter(), options);
+    super({ ...options, mapAdapter: new MapboxglMapAdapter() });
   }
 
   static async create(options: NgwMapOptions): Promise<NgwMapbox> {

@@ -1,5 +1,5 @@
 import { MapClickEvent } from './MapAdapter';
-import { MapOptions } from './WebMapApp';
+import { MapOptions } from './MapOptions';
 import { WebMap, Type, LayerAdapter } from '../index';
 
 /**
