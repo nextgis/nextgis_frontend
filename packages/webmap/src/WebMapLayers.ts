@@ -28,7 +28,7 @@ import { WebMapMain } from './WebMapMain';
 import {
   GetAttributionsOptions,
   ToggleLayerOptions,
-} from './interfaces/WebMapApp';
+} from './interfaces/MapOptions';
 import { WebMapEvents } from './interfaces/Events';
 import { FitOptions } from './interfaces/MapAdapter';
 

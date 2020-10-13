@@ -45,7 +45,8 @@ Icon.Default.mergeOptions({
  */
 class NgwLeaflet extends NgwMap {
   constructor(options: NgwMapOptions) {
-    super(new LeafletMapAdapter(), options);
+    options = { ...options, mapAdapter: new LeafletMapAdapter() };
+    super(options);
   }
   static async create(options: NgwMapOptions): Promise<NgwLeaflet> {
     const ngwMap = new NgwLeaflet(options);

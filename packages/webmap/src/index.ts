@@ -23,7 +23,7 @@
  *
  * const webMap = new WebMap({
  *   mapAdapter: new MapAdapter(),
- *   mapOptions: { target: 'map' }
+ *   target: 'map',
  * });
  *
  * console.log(!!webMap.mapAdapter.map); // false
@@ -39,7 +39,7 @@
  * @packageDocumentation
  */
 import { WebMap } from './WebMap';
-import { AppOptions } from './interfaces/WebMapApp';
+import { MapOptions } from './interfaces/MapOptions';
 
 export { createToggleControl } from './components/controls/createToggleControl';
 
@@ -55,7 +55,7 @@ export * from './WebMapMain';
 
 export * from './interfaces/Events';
 export * from './interfaces/BaseTypes';
-export * from './interfaces/WebMapApp';
+export * from './interfaces/MapOptions';
 export * from './interfaces/MapAdapter';
 export * from './interfaces/MapControl';
 export * from './interfaces/StarterKit';
@@ -64,7 +64,7 @@ export * from './interfaces/RuntimeParams';
 
 export { WebMap };
 
-export async function createWebMap(options: AppOptions): Promise<WebMap> {
+export async function createWebMap(options: MapOptions): Promise<WebMap> {
   const webMap = new WebMap(options);
   return webMap.onLoad();
 }
