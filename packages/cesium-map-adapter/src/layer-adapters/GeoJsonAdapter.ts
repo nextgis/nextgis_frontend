@@ -46,8 +46,7 @@ interface GeoJsonDataSourceLoadOptions {
   clampToGround?: boolean;
 }
 
-export class GeoJsonAdapter
-  extends BaseAdapter<GeoJsonAdapterOptions>
+export class GeoJsonAdapter extends BaseAdapter<GeoJsonAdapterOptions>
   implements VectorLayerAdapter<Map> {
   selected = false;
 
