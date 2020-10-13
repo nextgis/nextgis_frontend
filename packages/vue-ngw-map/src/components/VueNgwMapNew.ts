@@ -42,9 +42,10 @@ export const VueNgwMap = Vue.extend<VueNgwMapData, any, any, VueNgwMapProps>({
   },
 
   mounted(): void {
-    this.ngwMap = new NgwMap(this.$props.mapAdapter, {
+    this.ngwMap = new NgwMap({
       ...this.$props,
       ...this.$props.mapOptions,
+      mapAdapter: this.$props.mapAdapter,
       target: this.$el as HTMLElement,
     });
     this.ngwMap.onLoad().then(() => {
