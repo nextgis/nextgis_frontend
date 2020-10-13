@@ -1,4 +1,3 @@
-import { MapAdapter } from '@nextgis/webmap';
 import { NgwMap } from './NgwMap';
 import { NgwMapOptions } from './interfaces';
 
@@ -8,10 +7,7 @@ export * from './interfaces';
 
 export { NgwMap };
 
-export async function createNgwMap(
-  mapAdapter: MapAdapter,
-  options: NgwMapOptions
-): Promise<NgwMap> {
-  const ngwMap = new NgwMap(mapAdapter, options);
+export async function createNgwMap(options: NgwMapOptions): Promise<NgwMap> {
+  const ngwMap = new NgwMap(options);
   return ngwMap.onLoad();
 }

@@ -18,7 +18,7 @@ import {
 import { StarterKit } from './interfaces/StarterKit';
 import { LayerAdapter } from './interfaces/LayerAdapter';
 import { RuntimeParams } from './interfaces/RuntimeParams';
-import { MapOptions, AppOptions } from './interfaces/WebMapApp';
+import { MapOptions } from './interfaces/MapOptions';
 import { WebMapEvents, MainMapEvents } from './interfaces/Events';
 
 import { Keys } from './components/keys/Keys';
@@ -52,6 +52,7 @@ const OPTIONS: MapOptions = {
     radius: 12,
     weight: 1,
   },
+  create: true,
 };
 
 interface AddEventsListenersOptions {
@@ -95,19 +96,22 @@ export class WebMapMain<M = any, E extends WebMapEvents = WebMapEvents> {
     [key in keyof MainMapEvents]?: (...args: any[]) => void;
   } = {};
 
-  constructor(appOptions: AppOptions) {
+  constructor(mapOptions: MapOptions) {
     WEB_MAP_CONTAINER[this.id] = this;
-    this.mapAdapter = appOptions.mapAdapter;
-    this._starterKits = appOptions.starterKits || [];
-    if (appOptions.mapOptions) {
-      this.options = deepmerge(OPTIONS || {}, appOptions.mapOptions);
+    if (!this.options.mapAdapter) {
+      throw new Error('WebMap `adapter` option is not set');
     }
-    if (appOptions.runtimeParams) {
-      this.runtimeParams = appOptions.runtimeParams;
+    this.mapAdapter = mapOptions.mapAdapter as MapAdapter<M>;
+    this._starterKits = mapOptions.starterKits || [];
+    if (mapOptions.mapOptions) {
+      this.options = deepmerge(OPTIONS || {}, mapOptions.mapOptions);
+    }
+    if (mapOptions.runtimeParams) {
+      this.runtimeParams = mapOptions.runtimeParams;
     }
     this._addEventsListeners();
-    if (appOptions.create) {
-      this.create(this.options);
+    if (mapOptions.create) {
+      this.create();
     }
   }
 
@@ -116,16 +120,15 @@ export class WebMapMain<M = any, E extends WebMapEvents = WebMapEvents> {
   }
 
   /**
-   * Manual way to create a map. On default
+   * Manual way to create a map (If {@link MapOptions.create} is `false`).
    * @example
    * ```javascript
    * const webMap = new WebMap(options);
-   * webMap.create(mapOptions).then(() => doSomething());
+   * webMap.create().then(() => doSomething());
    * ```
    */
-  async create(options?: MapOptions): Promise<this> {
+  async create(): Promise<this> {
     if (!this.getEventStatus('create')) {
-      this.options = deepmerge(OPTIONS || {}, options || {});
       await this._setInitMapState(this.mapState);
       await this._setupMap();
       this._emitStatusEvent('create', this);

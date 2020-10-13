@@ -1,5 +1,5 @@
 import { deepmerge } from '@nextgis/utils';
-import { MapAdapter, StarterKit, AppOptions } from '@nextgis/webmap';
+import { MapAdapter, StarterKit, MapOptions } from '@nextgis/webmap';
 import NgwConnector from '@nextgis/ngw-connector';
 import { QmsKit } from '@nextgis/qms-kit';
 import { NgwKit } from '@nextgis/ngw-kit';
@@ -23,11 +23,13 @@ export const OPTIONS: NgwMapOptions = {
   pixelRadius: 10,
 };
 
-export function prepareWebMapOptions(
-  mapAdapter: MapAdapter,
-  options: NgwMapOptions
-): AppOptions {
+export function prepareWebMapOptions(options: NgwMapOptions): MapOptions {
   const kits: StarterKit[] = [new QmsKit()];
+  if (options.starterKits) {
+    options.starterKits.forEach((x) => {
+      kits.push(x);
+    });
+  }
 
   if (!options.connector) {
     options.connector = new NgwConnector({
@@ -53,9 +55,10 @@ export function prepareWebMapOptions(
       })
     );
   }
-  return {
-    mapAdapter,
+  options = {
+    ...options,
     starterKits: kits,
-    runtimeParams: options.runtimeParams,
+    create: false,
   };
+  return options;
 }

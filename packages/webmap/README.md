@@ -13,16 +13,16 @@ $ yarn add @nextgis/webmap
 
 ```javascript
 import { WebMap } from '@nextgis/webmap';
-import LeafletMapAdapter from '@nextgis/leaflet-map-adapter';
+import MapAdapter from '@nextgis/leaflet-map-adapter';
 // manually added styles
 import 'leaflet/dist/leaflet.css';
 
 const webMap = new WebMap({
-  mapAdapter: new LeafletMapAdapter()
+  mapAdapter: new MapAdapter()
 });
 
-webMap.create(options).then(() => {
-  // on webmap create
+webMap.onLoad().then(() => {
+  // on map adapter created
 })
 ```
 

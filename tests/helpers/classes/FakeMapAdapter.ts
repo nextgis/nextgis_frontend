@@ -4,7 +4,7 @@ import {
   ControlPositions,
   LocateOptions,
   Locate,
-  LocationEvents
+  LocationEvents,
 } from '../../../packages/webmap/src/interfaces/MapAdapter';
 
 import { LayerAdapter } from '../../../packages/webmap/src/interfaces/LayerAdapter';
@@ -15,12 +15,12 @@ import {
   MapControl,
   CreateControlOptions,
   ButtonControlOptions,
-  ToggleControlOptions
+  ToggleControlOptions,
 } from '../../../packages/webmap/src/interfaces/MapControl';
-import { MapOptions } from '../../../packages/webmap/src/interfaces/WebMapApp';
+import { MapOptions } from '../../../packages/webmap/src/interfaces/MapOptions';
 import {
   LngLatArray,
-  LngLatBoundsArray
+  LngLatBoundsArray,
 } from '../../../packages/webmap/src/interfaces/BaseTypes';
 import { FakeGeoJsonLayerAdapter } from './FakeGeojsonLayerAdapter';
 import { FakeLayerAdapter } from './FakeLayerAdapter';
@@ -32,7 +32,7 @@ export class FakeMapAdapter<M extends any = {}, L = any, C extends any = any>
     IMAGE: FakeLayerAdapter,
     // MVT: MvtAdapter,
     // OSM: OsmAdapter,
-    GEOJSON: FakeGeoJsonLayerAdapter
+    GEOJSON: FakeGeoJsonLayerAdapter,
   };
 
   layerAdapters = FakeMapAdapter.layerAdapters;

@@ -1,7 +1,7 @@
 import { MapStateItem } from '../../interfaces/MapState';
 import { WebMapEvents } from '../../interfaces/Events';
 import { WebMap } from '../../WebMap';
-import { MapOptions } from '../../interfaces/WebMapApp';
+import { MapOptions } from '../../interfaces/MapOptions';
 
 export abstract class StateItem<V extends any | undefined = any | undefined>
   implements MapStateItem<V | undefined> {
