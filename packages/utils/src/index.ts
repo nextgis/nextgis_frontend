@@ -8,6 +8,8 @@ export * from './debounce';
 export * from './events';
 export * from './geom';
 export * from './object';
+export * from './flatten';
+export * from './unflatten';
 export * from './re';
 export * from './sleep';
 export * from './string';
