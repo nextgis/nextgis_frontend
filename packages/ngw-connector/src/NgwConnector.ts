@@ -30,12 +30,27 @@ import { ResourceNotFoundError } from './errors/ResourceNotFoundError';
 import { NgwError } from './errors/NgwError';
 import { isObject } from './utils/isObject';
 import { InsufficientPermissionsError } from './errors/InsufficientPermissionsError';
+import {
+  addConnector,
+  findConnector,
+  removeConnector,
+} from './activeConnectors';
 
 export class NgwConnector {
   static errors = {
     NgwError,
     ResourceNotFoundError,
   };
+
+  static create(options: NgwConnectorOptions): NgwConnector {
+    const exist = findConnector(options);
+    if (exist) {
+      return exist;
+    }
+    const connector = new NgwConnector(options);
+    addConnector(connector);
+    return connector;
+  }
 
   emitter = new EventEmitter();
   user?: UserInfo;
@@ -61,6 +76,7 @@ export class NgwConnector {
   setNgw(baseUrl: string): void {
     this.logout();
     this.options.baseUrl = baseUrl;
+    addConnector(this);
   }
 
   /**
@@ -110,6 +126,7 @@ export class NgwConnector {
    */
   login(credentials: Credentials): CancelablePromise<UserInfo> {
     this.logout();
+    addConnector(this);
     return this.getUserInfo(credentials);
   }
 
@@ -117,6 +134,7 @@ export class NgwConnector {
    * Disconnecting a user. Aborting all current requests
    */
   logout(): void {
+    removeConnector(this);
     this._rejectLoadingQueue();
     this._loadingStatus = {};
     this.options.auth = undefined;
@@ -463,6 +481,17 @@ export class NgwConnector {
     return CancelablePromise.resolve(undefined);
   }
 
+  getResourceOrFail(
+    resource: ResourceDefinition | DeepPartial<Resource>
+  ): CancelablePromise<ResourceItem> {
+    return this.getResource(resource).then((res) => {
+      if (res) {
+        return res;
+      }
+      throw new ResourceNotFoundError();
+    });
+  }
+
   /**
    * A fast way to retrieve resource ID for any resource definition.
    * @param resource - Any available resource definition
@@ -496,7 +525,7 @@ export class NgwConnector {
    * Similar with {@link NgwConnector.getResourceId | getResourceId} but rise error if resource is not exist.
    * To not make one more checks if the resource is definitely exists
    */
-  getResourceIdOrError(
+  getResourceIdOrFail(
     resource: ResourceDefinition | DeepPartial<Resource>
   ): CancelablePromise<number> {
     return this.getResourceId(resource).then((resp) => {
@@ -622,6 +651,17 @@ export class NgwConnector {
       });
     }
     return collection();
+  }
+
+  updateResource(resource: ResourceDefinition, data: DeepPartial<ResourceItem>) {
+    return this.getResourceId(resource).then((id) => {
+      if (id !== undefined) {
+        this.put('resource.item', { data }, { id }).then((res) => {
+          this._resourcesCache[id] = res;
+          return res;
+        })
+      }
+    });
   }
 
   /**
