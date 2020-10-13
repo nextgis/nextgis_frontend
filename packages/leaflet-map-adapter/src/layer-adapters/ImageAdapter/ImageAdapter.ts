@@ -5,8 +5,7 @@ import { ImageLayer } from './ImageLayer';
 import { Map } from 'leaflet';
 import { BaseAdapter } from '../BaseAdapter';
 
-export class ImageAdapter
-  extends BaseAdapter<ImageAdapterOptions>
+export class ImageAdapter extends BaseAdapter<ImageAdapterOptions>
   implements MainLayerAdapter<Map> {
   layer: any;
 
