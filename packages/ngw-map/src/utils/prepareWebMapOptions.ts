@@ -1,5 +1,5 @@
 import { deepmerge } from '@nextgis/utils';
-import { MapAdapter, StarterKit, MapOptions } from '@nextgis/webmap';
+import { StarterKit, MapOptions } from '@nextgis/webmap';
 import NgwConnector from '@nextgis/ngw-connector';
 import { QmsKit } from '@nextgis/qms-kit';
 import { NgwKit } from '@nextgis/ngw-kit';

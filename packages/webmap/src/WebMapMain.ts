@@ -98,13 +98,10 @@ export class WebMapMain<M = any, E extends WebMapEvents = WebMapEvents> {
 
   constructor(mapOptions: MapOptions) {
     WEB_MAP_CONTAINER[this.id] = this;
-    if (!this.options.mapAdapter) {
-      throw new Error('WebMap `adapter` option is not set');
-    }
     this.mapAdapter = mapOptions.mapAdapter as MapAdapter<M>;
     this._starterKits = mapOptions.starterKits || [];
-    if (mapOptions.mapOptions) {
-      this.options = deepmerge(OPTIONS || {}, mapOptions.mapOptions);
+    if (mapOptions) {
+      this.options = deepmerge(OPTIONS || {}, mapOptions);
     }
     if (mapOptions.runtimeParams) {
       this.runtimeParams = mapOptions.runtimeParams;
@@ -485,6 +482,9 @@ export class WebMapMain<M = any, E extends WebMapEvents = WebMapEvents> {
   }
 
   private async _setupMap() {
+    if (!this.mapAdapter) {
+      throw new Error('WebMap `mapAdapter` option is not set');
+    }
     await this.mapAdapter.create(this.options);
     this._zoomToInitialExtent();
 
