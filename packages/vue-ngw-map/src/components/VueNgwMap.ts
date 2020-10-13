@@ -50,7 +50,8 @@ export class VueNgwMap<M = any> extends Vue {
         props[p] = prop;
       }
     }
-    this.ngwMap = new NgwMap(this.mapAdapter, {
+    this.ngwMap = new NgwMap({
+      mapAdapter: this.mapAdapter,
       ...this.getMapOptions(),
       ...props,
       target: this.$el as HTMLElement,
