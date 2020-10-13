@@ -8,7 +8,7 @@ export class ResourceNotFoundError extends NgwError {
   name = 'ResourceNotFoundError';
   exception: NgwExceptions = 'nextgisweb.resource.exception.ResourceNotFound';
 
-  constructor(obj: ResourceNotFoundError) {
+  constructor(obj?: ResourceNotFoundError) {
     super(obj);
     Object.setPrototypeOf(this, ResourceNotFoundError.prototype);
   }
