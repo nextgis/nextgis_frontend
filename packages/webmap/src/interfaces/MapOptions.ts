@@ -20,10 +20,6 @@ export interface MapOptions {
    */
   starterKits?: StarterKit[];
   /**
-   * Initial map display settings
-   */
-  mapOptions?: MapOptions;
-  /**
    * A way to save the state of a map to external services
    *
    * @example
