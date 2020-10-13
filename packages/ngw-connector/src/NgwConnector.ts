@@ -46,10 +46,10 @@ export class NgwConnector {
     const exist = findConnector(options);
     if (exist) {
       return exist;
+    } else {
+      const connector = new NgwConnector(options);
+      return connector;
     }
-    const connector = new NgwConnector(options);
-    addConnector(connector);
-    return connector;
   }
 
   emitter = new EventEmitter();
@@ -66,6 +66,7 @@ export class NgwConnector {
     if (this.options.route) {
       this.routeStr = this.options.route;
     }
+    addConnector(this);
   }
 
   /**
@@ -653,13 +654,16 @@ export class NgwConnector {
     return collection();
   }
 
-  updateResource(resource: ResourceDefinition, data: DeepPartial<ResourceItem>) {
+  updateResource(
+    resource: ResourceDefinition,
+    data: DeepPartial<ResourceItem>
+  ) {
     return this.getResourceId(resource).then((id) => {
       if (id !== undefined) {
         this.put('resource.item', { data }, { id }).then((res) => {
           this._resourcesCache[id] = res;
           return res;
-        })
+        });
       }
     });
   }

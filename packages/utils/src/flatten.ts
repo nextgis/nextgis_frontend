@@ -1,15 +1,15 @@
-export function flatten(data: Record<string, any>) {
+export function flatten(data: Record<string, any>): Record<string, any> {
   const result: Record<string, any> = {};
   function recurse(cur: Record<string, any>, prop: any) {
     if (Object(cur) !== cur) {
       result[prop] = cur;
     } else if (Array.isArray(cur)) {
-      for (var i = 0, l = cur.length; i < l; i++)
-        recurse(cur[i], prop + '[' + i + ']');
-      if (l == 0) result[prop] = [];
+      const l = cur.length;
+      for (let i = 0; i < l; i++) recurse(cur[i], prop + '[' + i + ']');
+      if (l === 0) result[prop] = [];
     } else {
-      var isEmpty = true;
-      for (var p in cur) {
+      let isEmpty = true;
+      for (const p in cur) {
         isEmpty = false;
         recurse(cur[p], prop ? prop + '.' + p : p);
       }
