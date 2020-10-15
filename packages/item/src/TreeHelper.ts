@@ -12,7 +12,6 @@ export class TreeHelper {
     this.item = item;
   }
 
-  // region Parents
   setParent(parent: Item): void {
     this._parent = parent;
   }
