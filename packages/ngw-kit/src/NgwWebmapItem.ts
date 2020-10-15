@@ -1,5 +1,6 @@
 import { EventEmitter } from 'events';
 import { ItemOptions, Item } from '@nextgis/item';
+import { treeSome } from '@nextgis/tree';
 import {
   WebMap,
   LayerAdapter,

@@ -1,5 +1,5 @@
+import { treeFind, treeFilter, treeEvery, treeSome } from '@nextgis/tree';
 import { Item } from './Item';
-import { filterIn } from './TreeUtil';
 import { ItemOptions } from './interfaces';
 
 export class TreeHelper {
@@ -27,7 +27,11 @@ export class TreeHelper {
   getParents<I extends Item = Item>(filterFunc?: (item: I) => boolean): I[] {
     const parent = this.getParent() as I;
     if (parent) {
-      return filterIn(parent, filterFunc, (x: I) => x.tree.getParent() as I);
+      return treeFilter<I>(
+        parent,
+        filterFunc,
+        (x: I) => x.tree.getParent() as I
+      );
     }
     return [];
   }
@@ -45,11 +49,22 @@ export class TreeHelper {
   }
   // endregion
 
-  // region Child
-  find(filterFunc?: (item: Item) => boolean): Item<ItemOptions> {
-    return filterIn(this._children, filterFunc, (x) => {
+  find(filterFunc?: (item: Item) => boolean): Item<ItemOptions> | undefined {
+    return treeFind(this._children, filterFunc, (x) => {
       return x.tree.getChildren();
-    })[0];
+    });
+  }
+
+  every<I extends Item = Item>(filterFunc?: (item: I) => boolean): boolean {
+    return treeEvery(this._children as I[], filterFunc, (x) => {
+      return x.tree.getChildren();
+    });
+  }
+
+  some<I extends Item = Item>(filterFunc?: (item: I) => boolean): boolean {
+    return treeSome(this._children as I[], filterFunc, (x) => {
+      return x.tree.getChildren();
+    });
   }
 
   // getDescendants shortcut
@@ -58,7 +73,7 @@ export class TreeHelper {
   }
 
   getDescendants(filterFunc?: (item: Item) => boolean): any[] {
-    return filterIn(this._children, filterFunc, (x) => {
+    return treeFilter(this._children, filterFunc, (x) => {
       return x.tree.getChildren();
     });
   }
