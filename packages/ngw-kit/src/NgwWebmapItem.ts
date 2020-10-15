@@ -31,7 +31,11 @@ export class NgwWebmapItem extends Item<ItemOptions> {
         getProperty(item?: NgwWebmapItem): boolean {
           if (item) {
             if (item.item.item_type === 'group') {
-              return true;
+              return treeSome<TreeGroup | TreeLayer>(
+                item.item,
+                (i) => ('layer_enabled' in i ? i.layer_enabled : false),
+                (i) => (i as TreeGroup).children
+              );
             } else if (item.item.item_type === 'layer') {
               return item.item.layer_enabled;
             } else if (item.item.item_type === 'root') {
