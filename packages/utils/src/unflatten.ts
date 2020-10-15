@@ -1,4 +1,6 @@
-export function unflatten(data: Record<string, any> | any[]) {
+export function unflatten(
+  data: Record<string, any> | any[]
+): Record<string, any> {
   if (Object(data) !== data || Array.isArray(data)) return data;
   const regex = /\.?([^.[\]]+)|\[(\d+)\]/g;
   const flat: Record<string, any> = {};
