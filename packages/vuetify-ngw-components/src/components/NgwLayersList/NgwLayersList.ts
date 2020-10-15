@@ -23,6 +23,7 @@ export class NgwLayersList extends Vue {
   @Prop({ type: Array }) include!: Array<ResourceAdapter | string>;
   @Prop({ type: Boolean, default: false }) hideWebmapRoot!: boolean;
   @Prop({ type: Boolean, default: false }) notOnlyNgwLayer!: boolean;
+  @Prop({ type: Boolean, default: false }) propagation!: boolean;
   @Prop({ type: Function }) showLayer!: (layer: NgwWebmapItem) => boolean;
   @Prop({ type: Function }) showResourceAdapter!: (
     adapter: LayerAdapter | ResourceAdapter
@@ -43,8 +44,10 @@ export class NgwLayersList extends Vue {
 
   @Watch('selection')
   setVisibleLayers(selection: string[], old: string[]): void {
-    const isSame = arrayCompare(selection, old);
-    if (!isSame) {
+    const difference = selection
+      .filter((x) => !old.includes(x))
+      .concat(old.filter((x) => !selection.includes(x)));
+    if (difference.length) {
       this._layers.forEach((x) => {
         let itemIsNotHideRoot = false;
         // layer properties fpr webmap tree items detect
@@ -58,15 +61,19 @@ export class NgwLayersList extends Vue {
           const desc = layer.tree.getDescendants() as NgwWebmapItem[];
           desc.forEach((d) => {
             const id = this._getLayerId(d);
-            if (id) {
+            if (id && difference.indexOf(id) !== -1) {
               const isVisible = selection.indexOf(id) !== -1;
-              d.properties.set('visibility', isVisible);
+              d.properties.set('visibility', isVisible, {
+                // propagation: this.propagation,
+              });
             }
           });
         }
         if (x.id && !itemIsNotHideRoot && this.webMap) {
           const id = this._getLayerId(x);
-          this.webMap.toggleLayer(x, selection.indexOf(id) !== -1);
+          if (difference.indexOf(id) !== -1) {
+            this.webMap.toggleLayer(x, selection.indexOf(id) !== -1);
+          }
         }
       });
     }
