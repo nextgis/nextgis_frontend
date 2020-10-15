@@ -28,6 +28,7 @@ export const allowedByType: {
     ['weight', 'width'],
   ],
   polygon: [
+    ['color', 'color'],
     ['fillColor', 'color'],
     ['fillOpacity', 'opacity'],
   ],
