@@ -3,6 +3,55 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.9](https://github.com/nextgis/nextgisweb_frontend/compare/v1.0.0-alpha.8...v1.0.0-alpha.9) (2020-10-15)
+
+
+### Bug Fixes
+
+* **cesium-map-adapter:** set layer adapters request headers ([eb2b570](https://github.com/nextgis/nextgisweb_frontend/commit/eb2b5702062b44b7885d3582fe953986fd4b02d9))
+* **leaflet-map-adapter:** maxBounds hotfix ([18452bc](https://github.com/nextgis/nextgisweb_frontend/commit/18452bc519c15ac2e47927e6145503f5e516d3f4))
+* **ngw-connector:** retunr undefined on empty apiRequest ([32bca5d](https://github.com/nextgis/nextgisweb_frontend/commit/32bca5df691840740095b62465ff58c1a05c2586))
+* **ngw-kit:** not stringify null on save ngw feature ([9174017](https://github.com/nextgis/nextgisweb_frontend/commit/91740174be9086af26568e48deff3b9d3c353fe3))
+* **utils:** update applyMixins util to allow babel build ([a46cb82](https://github.com/nextgis/nextgisweb_frontend/commit/a46cb82d09b955aa43ab901750aa0ed5975b9fdd))
+* **webmap:** webmap constructor options ([8c92b6c](https://github.com/nextgis/nextgisweb_frontend/commit/8c92b6c17e4b0f69630abb5ad0ffa78234d50a6f))
+
+
+### Code Refactoring
+
+* change WebMap and NgwMap constructor options ([de7eaf9](https://github.com/nextgis/nextgisweb_frontend/commit/de7eaf900ece63cf91596b726ad19918f3b926b7))
+
+
+### Features
+
+* add getExtent method for all mapAdapters GeoJsonLayerAdapter ([9254c3b](https://github.com/nextgis/nextgisweb_frontend/commit/9254c3bf4b1200c69126d770525a8b6b20a9f5c2))
+* **geocoder:** index for all result items ([a1c705c](https://github.com/nextgis/nextgisweb_frontend/commit/a1c705ce27681df4a7765ff746f69a3c000e70fd))
+* **item:** add @nextgis/tree dependency ([a0d6cc5](https://github.com/nextgis/nextgisweb_frontend/commit/a0d6cc56d7a972d1891242feeff4e746d7e45e94))
+* **ngw-connector:** add static create method ([00b58d7](https://github.com/nextgis/nextgisweb_frontend/commit/00b58d7e8be7d898142f44cd53414c45dbc4408e))
+* **ngw-kit:** calculate group NgwWebMapItem init visibility ([3ec0d57](https://github.com/nextgis/nextgisweb_frontend/commit/3ec0d5719a21f4e963b8132268ed4d529edc4556))
+* **ngw-map:** default bounds; add mapOption for show osm baselayer ([8df4e0e](https://github.com/nextgis/nextgisweb_frontend/commit/8df4e0ea53a41f3df7a782c973686c160c3552d6))
+* **ngw-orm:** validate resource ([c8ec5f2](https://github.com/nextgis/nextgisweb_frontend/commit/c8ec5f21be1100f55d728ddfcc825a059de99520))
+* **ol-map-adapter:** use add layer opacity option ([0e8aa48](https://github.com/nextgis/nextgisweb_frontend/commit/0e8aa48dd0a154c37e187cea54951f4d596ef88d))
+* **utils:** add flatten and unflatten functions ([6562c34](https://github.com/nextgis/nextgisweb_frontend/commit/6562c34162b7d49e91fe1a6661457a620b737aa7))
+* **vue:** add GeojsonLayer paint param ([5b19276](https://github.com/nextgis/nextgisweb_frontend/commit/5b19276c688affa99afabc3d185307e1c95af34d))
+* **vue:** NgwLayersList propagation param ([636c46b](https://github.com/nextgis/nextgisweb_frontend/commit/636c46bf387be491819297e42346beea246de8f1))
+* **vue:** VueNgwMap bounds param watch ([ed6cd1e](https://github.com/nextgis/nextgisweb_frontend/commit/ed6cd1e1a5919a61d7074e890e66114cbf6b77ba))
+
+
+### Performance Improvements
+
+* **vue:** Vuetify NgwLayersList set visibility only for changed ([bfddc9e](https://github.com/nextgis/nextgisweb_frontend/commit/bfddc9e062c155d3e9ea62f6df18bacbc34acadd))
+
+
+### BREAKING CHANGES
+
+* `new WebMap({ mapAdapter: new MapAdapter(), ...appOptions, mapOptions: MapOptions })` > `new WebMap(mapOptions)`
+* `new NgwMap(new MapAdapter(), ngwMapOptions)` > `new NgwMap(ngwMapOptions)`
+* `WebMapOptions.create` is now `true` by default
+
+
+
+
+
 # [1.0.0-alpha.8](https://github.com/nextgis/nextgisweb_frontend/compare/v1.0.0-alpha.7...v1.0.0-alpha.8) (2020-10-06)
 
 
