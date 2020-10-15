@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.9](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-alpha.8...v1.0.0-alpha.9) (2020-10-15)
+
+
+### Bug Fixes
+
+* **ngw-connector:** retunr undefined on empty apiRequest ([32bca5d](https://github.com/nextgis/nextgis_frontend/commit/32bca5df691840740095b62465ff58c1a05c2586))
+
+
+### Features
+
+* **ngw-orm:** validate resource ([c8ec5f2](https://github.com/nextgis/nextgis_frontend/commit/c8ec5f21be1100f55d728ddfcc825a059de99520))
+
+
+
+
+
 # [1.0.0-alpha.8](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-alpha.7...v1.0.0-alpha.8) (2020-10-06)
 
 **Note:** Version bump only for package @nextgis/ngw-orm

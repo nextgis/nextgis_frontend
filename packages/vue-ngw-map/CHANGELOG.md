@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.9](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-alpha.8...v1.0.0-alpha.9) (2020-10-15)
+
+
+### Bug Fixes
+
+* **cesium-map-adapter:** set layer adapters request headers ([eb2b570](https://github.com/nextgis/nextgis_frontend/commit/eb2b5702062b44b7885d3582fe953986fd4b02d9))
+* **leaflet-map-adapter:** maxBounds hotfix ([18452bc](https://github.com/nextgis/nextgis_frontend/commit/18452bc519c15ac2e47927e6145503f5e516d3f4))
+* **webmap:** webmap constructor options ([8c92b6c](https://github.com/nextgis/nextgis_frontend/commit/8c92b6c17e4b0f69630abb5ad0ffa78234d50a6f))
+
+
+### Features
+
+* **ngw-map:** default bounds; add mapOption for show osm baselayer ([8df4e0e](https://github.com/nextgis/nextgis_frontend/commit/8df4e0ea53a41f3df7a782c973686c160c3552d6))
+* **utils:** add flatten and unflatten functions ([6562c34](https://github.com/nextgis/nextgis_frontend/commit/6562c34162b7d49e91fe1a6661457a620b737aa7))
+* **vue:** add GeojsonLayer paint param ([5b19276](https://github.com/nextgis/nextgis_frontend/commit/5b19276c688affa99afabc3d185307e1c95af34d))
+* **vue:** VueNgwMap bounds param watch ([ed6cd1e](https://github.com/nextgis/nextgis_frontend/commit/ed6cd1e1a5919a61d7074e890e66114cbf6b77ba))
+
+
+
+
+
 # [1.0.0-alpha.8](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-alpha.7...v1.0.0-alpha.8) (2020-10-06)
 
 **Note:** Version bump only for package @nextgis/vue-ngw-map
