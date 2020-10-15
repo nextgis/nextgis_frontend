@@ -480,13 +480,14 @@ export class WebMapLayers<
     const onMap = layer && layer.options.visibility;
     const toStatus = status !== undefined ? status : !onMap;
     const silent = options.silent !== undefined ? options.silent : false;
-    const action = (source: any, l: LayerAdapter) => {
+    const action = (l: LayerAdapter) => {
       const preEventName = toStatus ? 'layer:preshow' : 'layer:prehide';
       const eventName = toStatus ? 'layer:show' : 'layer:hide';
       if (!silent) {
         this.emitter.emit(preEventName, l);
+        this.emitter.emit('layer:pretoggle', l);
       }
-      if (toStatus && source) {
+      if (toStatus && this.mapAdapter) {
         const order = l.options.baselayer ? 0 : l.options.order;
 
         // do not show baselayer if another on the map
@@ -516,11 +517,12 @@ export class WebMapLayers<
       }
       if (!silent) {
         this.emitter.emit(eventName, l);
+        this.emitter.emit('layer:toggle', l);
       }
       l.options.visibility = toStatus;
     };
     if (layer && layer.options.visibility !== toStatus) {
-      return this.onMapLoad().then(() => action(this.mapAdapter, layer));
+      return this.onMapLoad().then(() => action(layer));
     }
     return Promise.resolve();
   }
