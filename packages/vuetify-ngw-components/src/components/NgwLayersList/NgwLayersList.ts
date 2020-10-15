@@ -8,7 +8,7 @@ import {
 import { CreateElement, VNode, VNodeData } from 'vue';
 // @ts-ignore
 import { VTreeview } from 'vuetify/lib';
-import { arrayCompare, debounce } from '@nextgis/utils';
+import { debounce } from '@nextgis/utils';
 
 export interface VueTreeItem {
   id: string;
@@ -35,6 +35,7 @@ export class NgwLayersList extends Vue {
 
   selection: string[] = [];
 
+  private _selectionWatcher?: () => void;
   private _layers: Array<LayerAdapter | ResourceAdapter> = [];
   private __updateItems?: () => Promise<void>;
 
@@ -42,12 +43,12 @@ export class NgwLayersList extends Vue {
     return this.ngwMap || WebMap.get(this.webMapId);
   }
 
-  @Watch('selection')
   setVisibleLayers(selection: string[], old: string[]): void {
     const difference = selection
       .filter((x) => !old.includes(x))
       .concat(old.filter((x) => !selection.includes(x)));
     if (difference.length) {
+      this._stopSelectionWatch();
       this._layers.forEach((x) => {
         let itemIsNotHideRoot = false;
         // layer properties fpr webmap tree items detect
@@ -64,7 +65,7 @@ export class NgwLayersList extends Vue {
             if (id && difference.indexOf(id) !== -1) {
               const isVisible = selection.indexOf(id) !== -1;
               d.properties.set('visibility', isVisible, {
-                // propagation: this.propagation,
+                propagation: this.propagation,
               });
             }
           });
@@ -76,6 +77,7 @@ export class NgwLayersList extends Vue {
           }
         }
       });
+      this._startSelectionWatch();
     }
   }
 
@@ -139,29 +141,35 @@ export class NgwLayersList extends Vue {
         this.destroy();
         const __updateItems = debounce(() => this._updateItems());
         this.__updateItems = __updateItems;
-        this.updateItems();
-        if (this.webMap) {
-          this.webMap.emitter.on('layer:add', __updateItems);
-          this.webMap.emitter.on('layer:remove', __updateItems);
-        }
+        this.updateItems().then(() => {
+          if (this.webMap) {
+            this._startSelectionWatch();
+            this.webMap.emitter.on('layer:pretoggle', __updateItems);
+            this.webMap.emitter.on('layer:add', __updateItems);
+            this.webMap.emitter.on('layer:remove', __updateItems);
+          }
+        });
       });
     }
   }
 
   private destroy() {
-    if (this.webMap && this.__updateItems) {
-      this.webMap.emitter.removeListener('layer:add', this.__updateItems);
-      this.webMap.emitter.removeListener('layer:remove', this.__updateItems);
+    if (this.webMap) {
+      if (this.__updateItems) {
+        this.webMap.emitter.on('layer:toggle', this.__updateItems);
+        this.webMap.emitter.removeListener('layer:add', this.__updateItems);
+        this.webMap.emitter.removeListener('layer:remove', this.__updateItems);
+      }
     }
   }
 
   private async _updateItems() {
+    console.log(1);
     this.selection = [];
     this._layers = [];
     let layersList: LayerAdapter[] | undefined;
     if (this.webMap) {
       if (this.notOnlyNgwLayer) {
-        await this.webMap.onLoad();
         const layers = this.webMap.allLayers();
         layersList = Object.keys(layers).map((x) => layers[x]);
       } else if ('getNgwLayers' in this.webMap) {
@@ -276,6 +284,18 @@ export class NgwLayersList extends Vue {
     });
 
     return treeItems;
+  }
+
+  private _startSelectionWatch() {
+    this._stopSelectionWatch();
+    this._selectionWatcher = this.$watch('selection', this.setVisibleLayers);
+  }
+
+  private _stopSelectionWatch() {
+    if (this._selectionWatcher) {
+      this._selectionWatcher();
+      this._selectionWatcher = undefined;
+    }
   }
 
   private _getLayerId(
