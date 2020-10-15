@@ -2,7 +2,7 @@ import { propertiesFilter, PropertyFilter } from '@nextgis/properties-filter';
 export type SelfFilter<X extends any> = (x: X) => boolean;
 export type RelationFunction<X extends any> = (x: X) => X | X[] | undefined;
 
-type DefaultTreeItem = Record<string, unknown>;
+type DefaultTreeItem = Record<string, any>;
 
 type TreeFunction<X extends DefaultTreeItem> = (
   item: X | X[],
@@ -12,32 +12,32 @@ type TreeFunction<X extends DefaultTreeItem> = (
 
 export function treeEvery<F extends DefaultTreeItem = DefaultTreeItem>(
   item: F | F[],
-  filter: PropertyFilter | SelfFilter<F>,
-  relation: RelationFunction<F> | string
+  filter?: PropertyFilter | SelfFilter<F>,
+  relation?: RelationFunction<F> | string
 ): boolean {
   return !!treeWrapper<F>(item, filter, relation, treeEvery_);
 }
 
 export function treeSome<F extends DefaultTreeItem = DefaultTreeItem>(
   item: F | F[],
-  filter: PropertyFilter | SelfFilter<F>,
-  relation: RelationFunction<F> | string
+  filter?: PropertyFilter | SelfFilter<F>,
+  relation?: RelationFunction<F> | string
 ): boolean {
   return !!treeWrapper<F>(item, filter, relation, treeFind_);
 }
 
 export function treeFind<F extends DefaultTreeItem = DefaultTreeItem>(
   item: F | F[],
-  filter: PropertyFilter | SelfFilter<F>,
-  relation: RelationFunction<F> | string
+  filter?: PropertyFilter | SelfFilter<F>,
+  relation?: RelationFunction<F> | string
 ): F | undefined {
   return treeWrapper<F>(item, filter, relation, treeFind_) as F;
 }
 
 export function treeFilter<F extends DefaultTreeItem = DefaultTreeItem>(
   item: F | F[],
-  filter: PropertyFilter | SelfFilter<F>,
-  relation: RelationFunction<F> | string
+  filter?: PropertyFilter | SelfFilter<F>,
+  relation?: RelationFunction<F> | string
 ): F[] {
   return treeWrapper<F>(item, filter, relation, treeFilter_) as F[];
 }
@@ -85,7 +85,7 @@ function treeFind_<F extends any = any>(
 
   for (let fry = 0; fry < children.length; fry++) {
     if (children[fry]) {
-      const result = treeFilter_(
+      const result = treeFind_(
         children[fry],
         filterFunc,
         relationFunc,
@@ -131,7 +131,6 @@ function treeFilter_<F extends any = any>(
   return _filtered;
 }
 
-
 function treeEvery_<F extends any = any>(
   item: F | F[],
   filterFunc: SelfFilter<F> = (x: F) => !!x,
@@ -158,7 +157,12 @@ function treeEvery_<F extends any = any>(
 
   for (let fry = 0; fry < children.length; fry++) {
     if (children[fry]) {
-      const res = treeFilter_(children[fry], filterFunc, relationFunc, _filtered);
+      const res = treeEvery_(
+        children[fry],
+        filterFunc,
+        relationFunc,
+        _filtered
+      );
       if (!res) {
         return false;
       }
