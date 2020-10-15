@@ -42,16 +42,6 @@ export class NgwConnector {
     ResourceNotFoundError,
   };
 
-  static create(options: NgwConnectorOptions): NgwConnector {
-    const exist = findConnector(options);
-    if (exist) {
-      return exist;
-    } else {
-      const connector = new NgwConnector(options);
-      return connector;
-    }
-  }
-
   emitter = new EventEmitter();
   user?: UserInfo;
 
@@ -67,6 +57,16 @@ export class NgwConnector {
       this.routeStr = this.options.route;
     }
     addConnector(this);
+  }
+
+  static create(options: NgwConnectorOptions): NgwConnector {
+    const exist = findConnector(options);
+    if (exist) {
+      return exist;
+    } else {
+      const connector = new NgwConnector(options);
+      return connector;
+    }
   }
 
   /**
@@ -657,12 +657,12 @@ export class NgwConnector {
   updateResource(
     resource: ResourceDefinition,
     data: DeepPartial<ResourceItem>
-  ) {
+  ): CancelablePromise<ResourceItem | undefined> {
     return this.getResourceId(resource).then((id) => {
       if (id !== undefined) {
-        this.put('resource.item', { data }, { id }).then((res) => {
+        return this.put('resource.item', { data }, { id }).then((res) => {
           this._resourcesCache[id] = res;
-          return res;
+          return res as ResourceItem;
         });
       }
     });

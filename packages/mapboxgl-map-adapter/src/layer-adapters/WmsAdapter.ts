@@ -2,7 +2,8 @@ import { MainLayerAdapter, WmsAdapterOptions } from '@nextgis/webmap';
 
 import { TileAdapter } from './TileAdapter';
 
-export class WmsAdapter extends TileAdapter<WmsAdapterOptions>
+export class WmsAdapter
+  extends TileAdapter<WmsAdapterOptions>
   implements MainLayerAdapter {
   addLayer(options: WmsAdapterOptions): string[] | undefined {
     const params: Record<string, string | number> = {

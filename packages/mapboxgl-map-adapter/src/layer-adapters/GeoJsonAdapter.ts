@@ -1,9 +1,10 @@
-import { Map, GeoJSONSource, GeoJSONSourceRaw } from 'mapbox-gl';
+import { Map, GeoJSONSource, GeoJSONSourceRaw, LngLatBounds } from 'mapbox-gl';
 import {
   GeoJsonAdapterOptions,
   VectorAdapterLayerType,
   DataLayerFilter,
   LayerDefinition,
+  LngLatBoundsArray,
 } from '@nextgis/webmap';
 import { VectorAdapterLayerPaint, GetPaintCallback } from '@nextgis/paint';
 import { featureFilter, PropertiesFilter } from '@nextgis/properties-filter';
@@ -185,6 +186,34 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
       this.selected = false;
       this._unselectFeature();
     }
+  }
+
+  getExtent(): LngLatBoundsArray {
+    const features = this._features;
+    const bounds = new LngLatBounds();
+    const coordinates: (number[] | [number, number])[] = [];
+    features.forEach((feature) => {
+      const geom = feature.geometry;
+      if (geom.type === 'Polygon' || geom.type === 'MultiLineString') {
+        geom.coordinates.forEach((x) => {
+          x.forEach((y) => coordinates.push(y));
+        });
+      } else if (geom.type === 'MultiPolygon') {
+        geom.coordinates.forEach((x) => {
+          x.forEach((y) => y.forEach((z) => coordinates.push(z)));
+        });
+      } else if (geom.type === 'Point') {
+        coordinates.push(geom.coordinates);
+      } else if (geom.type === 'MultiPoint' || geom.type === 'LineString') {
+        geom.coordinates.forEach((x) => {
+          coordinates.push(x);
+        });
+      }
+    });
+    coordinates.forEach((c) => bounds.extend(c as [number, number]));
+    const ne = bounds.getNorthEast();
+    const sw = bounds.getSouthWest();
+    return [sw.lng, sw.lat, ne.lng, ne.lat];
   }
 
   protected _onAddLayer(sourceId: string): void {
