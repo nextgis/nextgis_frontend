@@ -57,6 +57,14 @@ export interface WebMapEvents extends MainMapEvents {
   /**
    * @eventProperty
    */
+  'layer:pretoggle': LayerAdapter;
+  /**
+   * @eventProperty
+   */
+  'layer:toggle': LayerAdapter;
+  /**
+   * @eventProperty
+   */
   'layer:click': OnLayerClickOptions;
   /**
    * @eventProperty
