@@ -43,6 +43,23 @@ export class NgwLayersList extends Vue {
     return this.ngwMap || WebMap.get(this.webMapId);
   }
 
+  @Watch('ngwMap')
+  updateNgwMap(): void {
+    this.destroy();
+    this.create();
+  }
+
+  @Watch('include')
+  async updateItems(): Promise<void> {
+    if (this.__updateItems) {
+      this.__updateItems();
+    }
+  }
+
+  mounted(): void {
+    this.create();
+  }
+
   setVisibleLayers(selection: string[], old: string[]): void {
     const difference = selection
       .filter((x) => !old.includes(x))
@@ -79,23 +96,6 @@ export class NgwLayersList extends Vue {
       });
       this._startSelectionWatch();
     }
-  }
-
-  @Watch('ngwMap')
-  updateNgwMap(): void {
-    this.destroy();
-    this.create();
-  }
-
-  @Watch('include')
-  async updateItems(): Promise<void> {
-    if (this.__updateItems) {
-      this.__updateItems();
-    }
-  }
-
-  mounted(): void {
-    this.create();
   }
 
   beforeDestroy(): void {

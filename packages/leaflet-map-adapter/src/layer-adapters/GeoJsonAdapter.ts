@@ -5,6 +5,7 @@ import {
   LayerDefinition,
   DataLayerFilter,
   PopupOptions,
+  LngLatBoundsArray,
 } from '@nextgis/webmap';
 import {
   IconOptions,
@@ -233,6 +234,13 @@ export class GeoJsonAdapter
     }
   }
 
+  getExtent(): LngLatBoundsArray {
+    const bounds = this.layer.getBounds();
+    const ne = bounds.getNorthEast();
+    const sw = bounds.getSouthWest();
+    return [sw.lng, sw.lat, ne.lng, ne.lat];
+  }
+
   private _updateTooltip(layerDef: LayerDefinition) {
     const { feature, layer } = layerDef;
     if (this.options.labelField && feature && feature.properties) {
@@ -297,6 +305,7 @@ export class GeoJsonAdapter
       // }
 
       const paintAliases: [keyof PathOptions, keyof PathPaint][] = [
+        ['color', 'color'],
         ['color', 'strokeColor'],
         ['opacity', 'strokeOpacity'],
         ['stroke', 'stroke'],

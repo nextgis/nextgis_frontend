@@ -14,7 +14,7 @@ import {
   LayerDefinition,
 } from '@nextgis/webmap';
 import { Paint } from '@nextgis/paint';
-import { defined } from '@nextgis/utils';
+import { defined, LngLatBoundsArray } from '@nextgis/utils';
 import { PropertiesFilter } from '@nextgis/properties-filter';
 
 import { resolutionOptions } from '../utils/gerResolution';
@@ -177,6 +177,14 @@ export class GeoJsonAdapter
 
   cleanFilter(): void {
     this.filter();
+  }
+
+  getExtent(): LngLatBoundsArray | undefined {
+    if (this.layer) {
+      const source = this.layer.getSource();
+      const bounds = source.getExtent();
+      return bounds as LngLatBoundsArray;
+    }
   }
 
   private setPaintEachLayer(paint: Paint) {
