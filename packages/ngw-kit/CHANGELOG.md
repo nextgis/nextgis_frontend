@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.9](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-alpha.8...v1.0.0-alpha.9) (2020-10-15)
+
+
+### Bug Fixes
+
+* **ngw-connector:** retunr undefined on empty apiRequest ([32bca5d](https://github.com/nextgis/nextgis_frontend/commit/32bca5df691840740095b62465ff58c1a05c2586))
+* **ngw-kit:** not stringify null on save ngw feature ([9174017](https://github.com/nextgis/nextgis_frontend/commit/91740174be9086af26568e48deff3b9d3c353fe3))
+* **utils:** update applyMixins util to allow babel build ([a46cb82](https://github.com/nextgis/nextgis_frontend/commit/a46cb82d09b955aa43ab901750aa0ed5975b9fdd))
+
+
+### Features
+
+* **item:** add @nextgis/tree dependency ([a0d6cc5](https://github.com/nextgis/nextgis_frontend/commit/a0d6cc56d7a972d1891242feeff4e746d7e45e94))
+* **ngw-kit:** calculate group NgwWebMapItem init visibility ([3ec0d57](https://github.com/nextgis/nextgis_frontend/commit/3ec0d5719a21f4e963b8132268ed4d529edc4556))
+* **ol-map-adapter:** use add layer opacity option ([0e8aa48](https://github.com/nextgis/nextgis_frontend/commit/0e8aa48dd0a154c37e187cea54951f4d596ef88d))
+
+
+
+
+
 # [1.0.0-alpha.8](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-alpha.7...v1.0.0-alpha.8) (2020-10-06)
 
 **Note:** Version bump only for package @nextgis/ngw-kit
