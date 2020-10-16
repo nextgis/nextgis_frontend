@@ -67,6 +67,9 @@ export class NgwLayersList extends Vue {
   }
 
   setVisibleLayers(selection: string[], old: string[]): void {
+    const propagation = this.webMap?.keys.pressed('ctrl')
+      ? !this.propagation
+      : this.propagation;
     const difference = selection
       .filter((x) => !old.includes(x))
       .concat(old.filter((x) => !selection.includes(x)));
@@ -89,10 +92,10 @@ export class NgwLayersList extends Vue {
             if (id && difference.indexOf(id) !== -1) {
               const isVisible = selection.indexOf(id) !== -1;
               d.properties.set('visibility', isVisible, {
-                propagation: this.propagation && isGroup,
-                bubble: this.propagation && !isGroup,
+                propagation: propagation && isGroup,
+                bubble: propagation && !isGroup,
               });
-              if (this.propagation) {
+              if (propagation) {
                 const parents = d.tree.getParents();
                 parents.forEach((p) => {
                   const isParentVisible = p.properties.get('visibility');
