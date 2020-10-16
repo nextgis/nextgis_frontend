@@ -85,11 +85,24 @@ export class NgwLayersList extends Vue {
           const desc = layer.tree.getDescendants() as NgwWebmapItem[];
           desc.forEach((d) => {
             const id = this._getLayerId(d);
+            const isGroup = d.item.item_type === 'group';
             if (id && difference.indexOf(id) !== -1) {
               const isVisible = selection.indexOf(id) !== -1;
               d.properties.set('visibility', isVisible, {
-                propagation: this.propagation,
+                propagation: this.propagation && isGroup,
+                bubble: this.propagation && !isGroup,
               });
+              if (this.propagation) {
+                const parents = d.tree.getParents();
+                parents.forEach((p) => {
+                  const isParentVisible = p.properties.get('visibility');
+                  const parentProp = p.properties.property('visibility');
+                  const isParentChildVisible = parentProp.getProperty();
+                  if (isParentChildVisible !== isParentVisible) {
+                    p.properties.set('visibility', isParentChildVisible);
+                  }
+                });
+              }
             }
           });
         }
