@@ -35,9 +35,11 @@ export class NgwLayersList extends Vue {
 
   selection: string[] = [];
 
+  private updateInProgress = false;
   private _selectionWatcher?: () => void;
   private _layers: Array<LayerAdapter | ResourceAdapter> = [];
   private __updateItems?: () => Promise<void>;
+  private __onLayerAdd?: (l: LayerAdapter) => void;
 
   get webMap(): WebMap | undefined {
     return this.ngwMap || WebMap.get(this.webMapId);
@@ -50,9 +52,13 @@ export class NgwLayersList extends Vue {
   }
 
   @Watch('include')
+  onInclude(): void {
+    this.updateItems();
+  }
+
   async updateItems(): Promise<void> {
     if (this.__updateItems) {
-      this.__updateItems();
+      await this.__updateItems();
     }
   }
 
@@ -65,7 +71,7 @@ export class NgwLayersList extends Vue {
       .filter((x) => !old.includes(x))
       .concat(old.filter((x) => !selection.includes(x)));
     if (difference.length) {
-      this._stopSelectionWatch();
+      this._stopListeners();
       this._layers.forEach((x) => {
         let itemIsNotHideRoot = false;
         // layer properties fpr webmap tree items detect
@@ -94,7 +100,11 @@ export class NgwLayersList extends Vue {
           }
         }
       });
-      this._startSelectionWatch();
+
+      if (this.propagation) {
+        this.updateItems();
+      }
+      this._startListeners();
     }
   }
 
@@ -139,32 +149,45 @@ export class NgwLayersList extends Vue {
     if (this.webMap) {
       this.webMap.onLoad().then(() => {
         this.destroy();
-        const __updateItems = debounce(() => this._updateItems());
-        this.__updateItems = __updateItems;
+        this.__updateItems = debounce(() => this._updateItems(), 100);
+        this.__onLayerAdd = (l: LayerAdapter) => this._onLayerAdd(l);
         this.updateItems().then(() => {
-          if (this.webMap) {
-            this._startSelectionWatch();
-            this.webMap.emitter.on('layer:pretoggle', __updateItems);
-            this.webMap.emitter.on('layer:add', __updateItems);
-            this.webMap.emitter.on('layer:remove', __updateItems);
-          }
+          this._startListeners();
         });
       });
     }
   }
 
   private destroy() {
-    if (this.webMap) {
-      if (this.__updateItems) {
-        this.webMap.emitter.on('layer:toggle', this.__updateItems);
-        this.webMap.emitter.removeListener('layer:add', this.__updateItems);
-        this.webMap.emitter.removeListener('layer:remove', this.__updateItems);
-      }
+    this._stopUpdateItemListeners();
+  }
+
+  private _onLayerAdd(l: LayerAdapter) {
+    const id = l.options.id;
+    const exist =
+      this._layers &&
+      this._layers.find((x) => {
+        if (x.id === id) {
+          return true;
+        }
+        const layer = x.layer as NgwWebmapItem;
+        const tree = layer.tree;
+        const existInTree = tree.some((y) => String(y.id) === id);
+        if (existInTree) {
+          return true;
+        }
+        return false;
+      });
+    if (!exist && this.__updateItems) {
+      this.__updateItems();
     }
   }
 
   private async _updateItems() {
-    console.log(1);
+    if (this.updateInProgress) {
+      return;
+    }
+    this.updateInProgress = true;
     this.selection = [];
     this._layers = [];
     let layersList: LayerAdapter[] | undefined;
@@ -190,6 +213,7 @@ export class NgwLayersList extends Vue {
           this._createTreeItem(x);
         });
     }
+    this.updateInProgress = false;
   }
 
   private _createTreeItem(layer: LayerAdapter | ResourceAdapter) {
@@ -284,6 +308,48 @@ export class NgwLayersList extends Vue {
     });
 
     return treeItems;
+  }
+
+  private _startListeners() {
+    this._startSelectionWatch();
+    this._startUpdateItemListeners();
+  }
+
+  private _stopListeners() {
+    this._stopSelectionWatch();
+    this._stopUpdateItemListeners();
+  }
+
+  private _startUpdateItemListeners() {
+    this._stopUpdateItemListeners();
+    const __updateItems = this.__updateItems;
+    if (this.webMap) {
+      if (__updateItems) {
+        this.webMap.emitter.on('layer:pretoggle', __updateItems);
+        this.webMap.emitter.on('layer:preremove', __updateItems);
+      }
+      if (this.__onLayerAdd) {
+        this.webMap.emitter.on('layer:add', this.__onLayerAdd);
+      }
+    }
+  }
+
+  private _stopUpdateItemListeners() {
+    if (this.webMap) {
+      if (this.__updateItems) {
+        this.webMap.emitter.removeListener(
+          'layer:pretoggle',
+          this.__updateItems
+        );
+        this.webMap.emitter.removeListener(
+          'layer:preremove',
+          this.__updateItems
+        );
+      }
+      if (this.__onLayerAdd) {
+        this.webMap.emitter.removeListener('layer:add', this.__onLayerAdd);
+      }
+    }
   }
 
   private _startSelectionWatch() {
