@@ -93,8 +93,9 @@ export class NgwLayersList extends Vue {
               const isVisible = selection.indexOf(id) !== -1;
               d.properties.set('visibility', isVisible, {
                 propagation: propagation && isGroup,
-                bubble: propagation && !isGroup,
+                bubble: propagation,
               });
+
               if (propagation) {
                 const parents = d.tree.getParents();
                 parents.forEach((p) => {
@@ -224,7 +225,6 @@ export class NgwLayersList extends Vue {
           const bOrder = (b.options && b.options.order) || 0;
           return aOrder - bOrder;
         })
-        .reverse()
         .forEach((x) => {
           this._createTreeItem(x);
         });
@@ -269,7 +269,7 @@ export class NgwLayersList extends Vue {
     if (webMapLayer.layer && webMapLayer.layer.tree) {
       const tree = webMapLayer.layer.tree;
       const children = tree.getChildren() as NgwWebmapItem[];
-      item.children = this._createWebMapTree(children).reverse();
+      item.children = this._createWebMapTree(children);
       const webMapLayerVisible = webMapLayer.layer.properties.get('visibility');
       visible = webMapLayerVisible ?? true;
     } else if (this.webMap) {
@@ -284,7 +284,7 @@ export class NgwLayersList extends Vue {
       webMapLayer.layer.item &&
       webMapLayer.layer.item.item_type === 'root'
     ) {
-      item.children.reverse().forEach((x) => this.items.push(x));
+      item.children.forEach((x) => this.items.push(x));
       webMapLayer.layer && webMapLayer.layer.properties.set('visibility', true);
     } else {
       if (visible) {
@@ -312,8 +312,8 @@ export class NgwLayersList extends Vue {
       if (x.layer) {
         item.layer = x.layer.id;
       }
-      const children = x.tree.getChildren<NgwWebmapItem>();
-      if (children && children.length) {
+      if (x.item.item_type === 'group') {
+        const children = x.tree.getChildren<NgwWebmapItem>();
         item.children = this._createWebMapTree(children);
       }
       const visible = x.properties.get('visibility');
