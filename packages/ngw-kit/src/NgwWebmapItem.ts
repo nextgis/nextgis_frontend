@@ -208,7 +208,7 @@ export class NgwWebmapItem extends Item<ItemOptions> {
   }
 
   protected getChildren(item: TreeGroup): (TreeGroup | TreeLayer)[] {
-    return item.children.reverse();
+    return item.children;
   }
 
   private _mapScaleToZoomLevel(scale: number) {
