@@ -8,7 +8,7 @@ import {
 import { CreateElement, VNode, VNodeData } from 'vue';
 // @ts-ignore
 import { VTreeview } from 'vuetify/lib';
-import { debounce } from '@nextgis/utils';
+import { debounce, DebounceDecorator } from '@nextgis/utils';
 
 export interface VueTreeItem {
   id: string;
@@ -56,16 +56,7 @@ export class NgwLayersList extends Vue {
     this.updateItems();
   }
 
-  async updateItems(): Promise<void> {
-    if (this.__updateItems) {
-      await this.__updateItems();
-    }
-  }
-
-  mounted(): void {
-    this.create();
-  }
-
+  @DebounceDecorator()
   setVisibleLayers(selection: string[], old: string[]): void {
     const propagation = this.webMap?.keys.pressed('ctrl')
       ? !this.propagation
@@ -98,6 +89,9 @@ export class NgwLayersList extends Vue {
 
               if (propagation) {
                 const parents = d.tree.getParents();
+                if (this.hideWebmapRoot) {
+                  parents.pop();
+                }
                 parents.forEach((p) => {
                   const isParentVisible = p.properties.get('visibility');
                   const parentProp = p.properties.property('visibility');
@@ -119,10 +113,23 @@ export class NgwLayersList extends Vue {
       });
 
       if (this.propagation) {
-        this.updateItems();
+        this.updateItems().then(() => {
+          this._startListeners();
+        });
+      } else {
+        this._startListeners();
       }
-      this._startListeners();
     }
+  }
+
+  async updateItems(): Promise<void> {
+    if (this.__updateItems) {
+      await this.__updateItems();
+    }
+  }
+
+  mounted(): void {
+    this.create();
   }
 
   beforeDestroy(): void {
@@ -217,6 +224,7 @@ export class NgwLayersList extends Vue {
         layersList = Object.keys(ngwLayers).map((x) => ngwLayers[x].layer);
       }
     }
+
     this.items = [];
     if (layersList) {
       layersList
@@ -270,8 +278,21 @@ export class NgwLayersList extends Vue {
       const tree = webMapLayer.layer.tree;
       const children = tree.getChildren() as NgwWebmapItem[];
       item.children = this._createWebMapTree(children);
-      const webMapLayerVisible = webMapLayer.layer.properties.get('visibility');
-      visible = webMapLayerVisible ?? true;
+      const props = webMapLayer.layer.properties;
+      const webMapLayerVisible = props.get('visibility');
+      if (
+        this.propagation &&
+        (webMapLayer.layer.item.item_type === 'group' ||
+          webMapLayer.layer.item.item_type === 'root')
+      ) {
+        const parentProp = props.property('visibility');
+        const isGroupVisible = parentProp.getProperty();
+        if (isGroupVisible !== webMapLayerVisible) {
+          visible = isGroupVisible;
+        }
+      } else {
+        visible = webMapLayerVisible ?? true;
+      }
     } else if (this.webMap) {
       visible = this.webMap.isLayerVisible(layer);
     }
