@@ -35,7 +35,6 @@ export class NgwLayersList extends Vue {
 
   selection: string[] = [];
 
-  private updateInProgress = false;
   private _selectionWatcher?: () => void;
   private _layers: Array<LayerAdapter | ResourceAdapter> = [];
   private __updateItems?: () => Promise<void>;
@@ -65,7 +64,7 @@ export class NgwLayersList extends Vue {
       .filter((x) => !old.includes(x))
       .concat(old.filter((x) => !selection.includes(x)));
     if (difference.length) {
-      this._stopListeners();
+      this._stopUpdateItemListeners();
       this._layers.forEach((x) => {
         let itemIsNotHideRoot = false;
         // layer properties fpr webmap tree items detect
@@ -114,10 +113,10 @@ export class NgwLayersList extends Vue {
 
       if (this.propagation) {
         this.updateItems().then(() => {
-          this._startListeners();
+          this._startUpdateItemListeners();
         });
       } else {
-        this._startListeners();
+        this._startUpdateItemListeners();
       }
     }
   }
@@ -208,10 +207,7 @@ export class NgwLayersList extends Vue {
   }
 
   private async _updateItems() {
-    if (this.updateInProgress) {
-      return;
-    }
-    this.updateInProgress = true;
+    this._stopSelectionWatch();
     this.selection = [];
     this._layers = [];
     let layersList: LayerAdapter[] | undefined;
@@ -237,7 +233,7 @@ export class NgwLayersList extends Vue {
           this._createTreeItem(x);
         });
     }
-    this.updateInProgress = false;
+    this._startSelectionWatch();
   }
 
   private _createTreeItem(layer: LayerAdapter | ResourceAdapter) {
@@ -366,7 +362,7 @@ export class NgwLayersList extends Vue {
         this.webMap.emitter.on('layer:preremove', __updateItems);
       }
       if (this.__onLayerAdd) {
-        this.webMap.emitter.on('layer:add', this.__onLayerAdd);
+        // this.webMap.emitter.on('layer:preadd', this.__onLayerAdd);
       }
     }
   }
@@ -384,7 +380,7 @@ export class NgwLayersList extends Vue {
         );
       }
       if (this.__onLayerAdd) {
-        this.webMap.emitter.removeListener('layer:add', this.__onLayerAdd);
+        this.webMap.emitter.removeListener('layer:preadd', this.__onLayerAdd);
       }
     }
   }
