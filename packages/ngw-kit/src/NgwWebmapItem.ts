@@ -53,11 +53,13 @@ export class NgwWebmapItem extends Item<ItemOptions> {
           options?: Record<string, any>,
           item?: NgwWebmapItem
         ): void {
-          if (item && item.layer && item.item.item_type === 'layer') {
-            if (value) {
-              item.webMap.showLayer(item.layer);
-            } else {
-              item.webMap.hideLayer(item.layer);
+          if (item && item.item.item_type === 'layer') {
+            if (item.layer) {
+              if (value) {
+                item.webMap.showLayer(item.layer);
+              } else {
+                item.webMap.hideLayer(item.layer);
+              }
             }
             item.item['layer_enabled'] = value;
           }
