@@ -58,7 +58,7 @@ export class PromiseControl {
     }
   }
 
-  GetOrCreateDecorator(name: string | symbol = ''): MethodDecorator {
+  WaitForMe(name: string | symbol = ''): MethodDecorator {
     const get = this.get.bind(this);
     const add = this.add.bind(this);
     return function (
@@ -79,6 +79,11 @@ export class PromiseControl {
 
       return descriptor;
     };
+  }
+
+  /** @deprecated use {@link PromiseControl.WaitForMe } instead */
+  GetOrCreateDecorator(name: string | symbol = ''): MethodDecorator {
+    return this.WaitForMe(name);
   }
 
   private _onStop() {
