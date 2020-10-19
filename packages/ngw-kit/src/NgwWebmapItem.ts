@@ -30,7 +30,10 @@ export class NgwWebmapItem extends Item<ItemOptions> {
         name: 'visibility',
         getProperty(item?: NgwWebmapItem): boolean {
           if (item) {
-            if (item.item.item_type === 'group') {
+            if (
+              item.item.item_type === 'group' ||
+              item.item.item_type === 'root'
+            ) {
               return treeSome<TreeGroup | TreeLayer>(
                 item.item,
                 (i) => ('layer_enabled' in i ? i.layer_enabled : false),
@@ -38,9 +41,10 @@ export class NgwWebmapItem extends Item<ItemOptions> {
               );
             } else if (item.item.item_type === 'layer') {
               return item.item.layer_enabled;
-            } else if (item.item.item_type === 'root') {
-              return true;
             }
+            // else if (item.item.item_type === 'root') {
+            //   return true;
+            // }
           }
           return false;
         },
@@ -118,9 +122,25 @@ export class NgwWebmapItem extends Item<ItemOptions> {
     return ngwWebmapItem;
   }
 
-  async initItem(item: TreeGroup | TreeLayer): Promise<void> {
-    let newLayer = item._layer;
+  initItem(item: TreeGroup | TreeLayer): void {
     const i = item;
+    // let newLayer = item._layer;
+    const setNewLayer = (l: LayerAdapter) => {
+      i._layer = l;
+      this.layer = l;
+      const enabled = this.properties.get('visibility');
+      if (enabled) {
+        this.properties.set('visibility', true);
+      }
+      // if (this.properties && item.item_type === 'layer' && item.layer_enabled) {
+      //   this.properties.property('visibility').set(true);
+      // }
+
+      if (opacity !== undefined) {
+        this.webMap.setLayerOpacity(l, opacity);
+      }
+    };
+
     const transparency = item.item_type === 'layer' && item.layer_transparency;
     const opacity =
       typeof transparency === 'number' ? (100 - transparency) / 100 : undefined;
@@ -173,27 +193,19 @@ export class NgwWebmapItem extends Item<ItemOptions> {
       } else if (NgwWebmapItem.GetAdapterFromLayerType[item.item_type]) {
         const getAdapter =
           NgwWebmapItem.GetAdapterFromLayerType[item.item_type];
-        adapter = await getAdapter(item, options, this.webMap, this.connector);
+        adapter = getAdapter(item, options, this.webMap, this.connector);
       }
       if (opacity !== undefined) {
         options.opacity = opacity;
       }
       if (adapter) {
-        newLayer = await this.webMap.addLayer(adapter, options);
+        this.webMap.addLayer(adapter, options).then((newLayer) => {
+          setNewLayer(newLayer);
+        });
       }
     }
-    if (newLayer) {
-      i._layer = newLayer;
-      this.layer = newLayer;
-      if (this.properties && item.item_type === 'layer' && item.layer_enabled) {
-        this.properties.property('visibility').set(true);
-      }
-
-      if (opacity !== undefined) {
-        this.webMap.setLayerOpacity(newLayer, opacity);
-      }
-    } else {
-      // this.properties.get('visibility').set(true);
+    if (item._layer) {
+      setNewLayer(item._layer);
     }
   }
 
