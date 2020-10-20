@@ -13,6 +13,7 @@ import { ControlPosition } from './interfaces/MapAdapter';
 import { WebMapLayers } from './WebMapLayers';
 import { WebMapMain } from './WebMapMain';
 import { createToggleControl } from './components/controls/createToggleControl';
+import { MapOptions } from './interfaces/MapOptions';
 
 /**
  * Collection of methods for managing map controls
@@ -22,9 +23,10 @@ export class WebMapControls<
     M = any,
     L = any,
     C = any,
-    E extends WebMapEvents = WebMapEvents
+    E extends WebMapEvents = WebMapEvents,
+    O extends MapOptions = MapOptions
   >
-  extends WebMapLayers<M, L, E>
+  extends WebMapLayers<M, L, E, O>
   implements WebMapLayers, WebMapMain {
   static controls: {
     [name: string]: (webMap: WebMapControls, options?: any) => any;

@@ -27,6 +27,7 @@ import { WebMapMain } from './WebMapMain';
 
 import {
   GetAttributionsOptions,
+  MapOptions,
   ToggleLayerOptions,
 } from './interfaces/MapOptions';
 import { WebMapEvents } from './interfaces/Events';
@@ -40,8 +41,9 @@ type AddedLayers = { [id: string]: LayerAdapter };
 export class WebMapLayers<
   M = any,
   L = any,
-  E extends WebMapEvents = WebMapEvents
-> extends WebMapMain<M, E> {
+  E extends WebMapEvents = WebMapEvents,
+  O extends MapOptions = MapOptions
+> extends WebMapMain<M, E, O> {
   private _layersIdCounter = 1;
   private _layersOrderCounter = 1;
   private readonly _baselayers: string[] = [];
