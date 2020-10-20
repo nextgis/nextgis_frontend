@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.10](https://github.com/nextgis/nextgisweb_frontend/compare/v1.0.0-alpha.9...v1.0.0-alpha.10) (2020-10-20)
+
+
+### Bug Fixes
+
+* **ngw-kit:** remove async from NgwWebmapItem child add ([024cd13](https://github.com/nextgis/nextgisweb_frontend/commit/024cd13781f8c089af081511d8a784c4b0089405))
+* **ngw-kit:** set NgwWebmap tree item property before layer load ([edb38ab](https://github.com/nextgis/nextgisweb_frontend/commit/edb38abb8a45d7ee1933a1fee633c753a52e11eb))
+* **ngw-kit:** webmap item children ordering ([952f72f](https://github.com/nextgis/nextgisweb_frontend/commit/952f72fca18b6222e53d8ac3a5ad615ae40a2aa1))
+* **ngw-map:** constructor options ([d78dd12](https://github.com/nextgis/nextgisweb_frontend/commit/d78dd1268c916479359a70299aa42dcfaac0e738))
+
+
+### Code Refactoring
+
+* **webmap:** change default paint ([1baea95](https://github.com/nextgis/nextgisweb_frontend/commit/1baea95158e2cd8b79ec2de6b95a377030951d0f))
+
+
+### Features
+
+* **casium:** zoomIn and zoomOut onground control ([00818d0](https://github.com/nextgis/nextgisweb_frontend/commit/00818d08489456dc0c5104191e70cf9c21c945f3))
+* **vue:** NgwlayersList bubble with propagation ([2c023bd](https://github.com/nextgis/nextgisweb_frontend/commit/2c023bd29b54c47d67e1eb0afe5589772e6e3359))
+* **vue:** NgwLayersList ctrl key to propagation reverse ([2ecf4a5](https://github.com/nextgis/nextgisweb_frontend/commit/2ecf4a553cd8788018b664c7e5bf3e8e4fc62b12))
+
+
+### BREAKING CHANGES
+
+* **webmap:** changed the default paint: the fill is semi-transparent, add stroke
+
+
+
+
+
 # [1.0.0-alpha.9](https://github.com/nextgis/nextgisweb_frontend/compare/v1.0.0-alpha.8...v1.0.0-alpha.9) (2020-10-15)
 
 
