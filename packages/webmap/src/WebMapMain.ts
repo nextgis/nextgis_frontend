@@ -43,12 +43,16 @@ const OPTIONS: MapOptions = {
   paint: {
     color: 'blue',
     opacity: 1,
+    fillOpacity: 0.4,
+    stroke: true,
     radius: 8,
     weight: 1,
   },
   selectedPaint: {
     color: 'darkblue',
     opacity: 1,
+    fillOpacity: 0.4,
+    stroke: true,
     radius: 12,
     weight: 1,
   },
@@ -62,12 +66,16 @@ interface AddEventsListenersOptions {
 /**
  * @public
  */
-export class WebMapMain<M = any, E extends WebMapEvents = WebMapEvents> {
+export class WebMapMain<
+  M = any,
+  E extends WebMapEvents = WebMapEvents,
+  O extends MapOptions = MapOptions
+> {
   static keys: Keys = new Keys();
 
   static getPaintFunctions: { [name: string]: GetPaintFunction };
 
-  options: MapOptions = OPTIONS;
+  options: O = OPTIONS as O;
   // `WebMapEvents` must be `E` but its not work correct
   readonly emitter: StrictEventEmitter<
     EventEmitter,
@@ -96,12 +104,12 @@ export class WebMapMain<M = any, E extends WebMapEvents = WebMapEvents> {
     [key in keyof MainMapEvents]?: (...args: any[]) => void;
   } = {};
 
-  constructor(mapOptions: MapOptions) {
+  constructor(mapOptions: O) {
     WEB_MAP_CONTAINER[this.id] = this;
     this.mapAdapter = mapOptions.mapAdapter as MapAdapter<M>;
     this._starterKits = mapOptions.starterKits || [];
     if (mapOptions) {
-      this.options = deepmerge(OPTIONS || {}, mapOptions);
+      this.options = deepmerge((OPTIONS as O) || {}, mapOptions) as O;
     }
     if (mapOptions.runtimeParams) {
       this.runtimeParams = mapOptions.runtimeParams;

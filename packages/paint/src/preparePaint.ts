@@ -56,7 +56,10 @@ export function preparePaint(
   defaultPaint?: GeometryPaint,
   getPaintFunctions?: { [name: string]: GetPaintFunction }
 ): Paint {
-  let newPaint: Paint | undefined;
+  if (!paint) {
+    throw new Error('paint is empty');
+  }
+  let newPaint: Paint = { ...defaultPaint };
   if (isPaintCallback(paint)) {
     const getPaintFunction: GetPaintCallback = (feature: Feature) => {
       const getPaint = preparePaint(
@@ -96,21 +99,16 @@ export function preparePaint(
       };
     }
 
-    newPaint = { ...paint };
+    newPaint = { ...newPaint, ...paint };
     newPaint.fill = newPaint.fill !== undefined ? newPaint.fill : true;
     newPaint.stroke =
       newPaint.stroke !== undefined
         ? newPaint.stroke
         : !newPaint.fill || !!(newPaint.strokeColor || newPaint.strokeOpacity);
   }
-  if (newPaint) {
-    if (isPaintCallback(newPaint)) {
-      return newPaint;
-    } else if (isPaint(newPaint)) {
-      newPaint = { ...defaultPaint, ...newPaint };
-    }
-  } else {
-    newPaint = { ...defaultPaint };
+
+  if (isPaintCallback(newPaint)) {
+    return newPaint;
   }
 
   if ('color' in newPaint) {

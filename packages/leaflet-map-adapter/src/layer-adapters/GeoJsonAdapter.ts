@@ -8,12 +8,12 @@ import {
   LngLatBoundsArray,
 } from '@nextgis/webmap';
 import {
-  IconOptions,
   PathPaint,
   Paint,
   VectorAdapterLayerPaint,
   isPaintCallback,
   isPaint,
+  IconPaint,
 } from '@nextgis/paint';
 import {
   GeoJSON,
@@ -305,7 +305,7 @@ export class GeoJsonAdapter
       // }
 
       const paintAliases: [keyof PathOptions, keyof PathPaint][] = [
-        ['color', 'color'],
+        // ['color', 'color'],
         ['color', 'strokeColor'],
         ['opacity', 'strokeOpacity'],
         ['stroke', 'stroke'],
@@ -355,9 +355,7 @@ export class GeoJsonAdapter
         lopt = {
           pointToLayer: (feature, latLng) => {
             const iconOpt = paint(feature);
-            const pointToLayer = this.createPaintToLayer(
-              iconOpt as IconOptions
-            );
+            const pointToLayer = this.createPaintToLayer(iconOpt as IconPaint);
             return pointToLayer(feature, latLng);
           },
         };
@@ -473,26 +471,28 @@ export class GeoJsonAdapter
     }
   }
 
-  private createDivIcon(icon: IconOptions) {
+  private createDivIcon(icon: IconPaint) {
     const { ...toLIconOpt } = icon;
     return new DivIcon({ className: '', ...toLIconOpt });
   }
 
-  private createPaintToLayer(icon: IconOptions) {
-    if (icon.type === 'icon') {
-      const iconClassName = icon.className;
-      const html = icon.html;
-      if (iconClassName || html) {
+  private createPaintToLayer(icon: IconPaint) {
+    if (icon && icon.type) {
+      if (icon.type === 'icon') {
+        const iconClassName = icon.className;
+        const html = icon.html;
+        if (iconClassName || html) {
+          return (geoJsonPoint: any, latlng: LatLngExpression) => {
+            const divIcon = this.createDivIcon(icon);
+            return new Marker(latlng, { icon: divIcon });
+          };
+        }
+      } else if (icon.type === 'pin') {
         return (geoJsonPoint: any, latlng: LatLngExpression) => {
-          const divIcon = this.createDivIcon(icon);
-          return new Marker(latlng, { icon: divIcon });
+          // const divIcon = this.createDivIcon(icon);
+          return new Marker(latlng);
         };
       }
-    } else if (icon.type === 'pin') {
-      return (geoJsonPoint: any, latlng: LatLngExpression) => {
-        // const divIcon = this.createDivIcon(icon);
-        return new Marker(latlng);
-      };
     }
     return (geoJsonPoint: any, latlng: LatLngExpression) => {
       const p: any = PAINT;
@@ -513,7 +513,7 @@ export class GeoJsonAdapter
     }
     if (type === 'point') {
       geoJsonOptions.pointToLayer = this.createPaintToLayer(
-        paintOptions as IconOptions
+        paintOptions as IconPaint
       );
     } else if (type === 'line') {
       paint.stroke = true;
