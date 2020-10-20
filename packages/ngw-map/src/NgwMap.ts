@@ -97,10 +97,6 @@ export class NgwMap<
     if (options.connector) {
       this.connector = options.connector;
     }
-    this.options = deepmerge(
-      this.options,
-      deepmerge(OPTIONS, options)
-    ) as NgwMapOptions<C> & O;
     this._createWebMap().then(() => {
       const container = this.getContainer();
       if (container) {
