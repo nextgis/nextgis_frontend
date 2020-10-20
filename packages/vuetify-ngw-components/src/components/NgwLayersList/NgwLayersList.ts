@@ -348,11 +348,6 @@ export class NgwLayersList extends Vue {
     this._startUpdateItemListeners();
   }
 
-  private _stopListeners() {
-    this._stopSelectionWatch();
-    this._stopUpdateItemListeners();
-  }
-
   private _startUpdateItemListeners() {
     this._stopUpdateItemListeners();
     const __updateItems = this.__updateItems;

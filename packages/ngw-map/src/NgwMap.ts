@@ -1,7 +1,7 @@
 import StrictEventEmitter from 'strict-event-emitter-types';
 import { EventEmitter } from 'events';
 import CancelablePromise from '@nextgis/cancelable-promise';
-import { deepmerge, isObject, JsonMap } from '@nextgis/utils';
+import { isObject, JsonMap } from '@nextgis/utils';
 import {
   WebMap,
   ControlPosition,
@@ -44,7 +44,7 @@ import { getIcon } from '@nextgis/icons';
 import { PropertiesFilter } from '@nextgis/properties-filter';
 
 import { appendNgwResources } from './utils/appendNgwResources';
-import { prepareWebMapOptions, OPTIONS } from './utils/prepareWebMapOptions';
+import { prepareWebMapOptions } from './utils/prepareWebMapOptions';
 
 import {
   NgwMapOptions,
