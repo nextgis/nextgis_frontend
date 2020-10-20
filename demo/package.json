@@ -1,12 +1,12 @@
 {
   "name": "@nextgis/demo-app",
-  "version": "1.0.0-alpha.9",
+  "version": "1.0.0-alpha.10",
   "_priority": 1,
   "description": "",
   "private": true,
   "dependencies": {
     "@babel/polyfill": "^7.11.5",
-    "@nextgis/ngw-uploader": "^1.0.0-alpha.9",
+    "@nextgis/ngw-uploader": "^1.0.0-alpha.10",
     "highlight.js": "^10.2.1",
     "showdown-highlight": "^2.1.5",
     "vue": "^2.6.12",
