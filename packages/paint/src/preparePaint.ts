@@ -10,7 +10,7 @@ import {
   PropertyPaint,
   GetPaintCallback,
 } from './interfaces';
-import { isPaintCallback, isPropertiesPaint, isPaint } from './typeHelpers';
+import { isPaintCallback, isPropertiesPaint } from './typeHelpers';
 import { createExpressionCallback } from './fromPaintExpression';
 
 function updatePaintOptionFromCallback(
