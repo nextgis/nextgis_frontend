@@ -38,6 +38,8 @@ import { TerrainAdapter } from './layer-adapters/TerrainAdapter';
 import { Model3DAdapter } from './layer-adapters/Model3DAdapter';
 import { Tileset3DAdapter } from './layer-adapters/Tileset3DAdapter';
 import { getDefaultTerrain } from './utils/getDefaultTerrain';
+import { getCameraFocus } from './utils/getCameraFocus';
+import { whenSampleTerrainMostDetailed } from './utils/whenSampleTerrainMostDetailed';
 
 type Layer = any;
 type Control = any;
@@ -81,6 +83,7 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
   private _scratchRectangle = new Rectangle();
   private _controlContainer?: ControlContainer;
   private _terrainProviderChangedListener?: Event.RemoveCallback;
+  private _ZOOM_SET_ID = 0;
 
   create(options: MapOptions): void {
     this.options = { ...options };
@@ -259,17 +262,11 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
   }
 
   zoomOut(): void {
-    const viewer = this.map;
-    if (viewer) {
-      viewer.camera.zoomOut();
-    }
+    this._setZoomScalar(-2.0);
   }
 
   zoomIn(): void {
-    const viewer = this.map;
-    if (viewer) {
-      viewer.camera.zoomIn();
-    }
+    this._setZoomScalar(2.0 / 3.0);
   }
 
   fitBounds(e: LngLatBoundsArray, options: FitOptions = {}): void {
@@ -371,6 +368,49 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
 
   onMapClick(evt: MapClickEvent): void {
     //
+  }
+
+  private _setZoomScalar(scalar: number) {
+    const cartesian3Scratch = new Cartesian3();
+    const map = this.map;
+    if (map) {
+      const scene = map.scene;
+      const camera = scene.camera;
+      const focus = getCameraFocus(scene);
+      const direction = Cartesian3.subtract(
+        focus,
+        camera.position,
+        cartesian3Scratch
+      );
+      const movementVector = Cartesian3.multiplyByScalar(
+        direction,
+        scalar,
+        cartesian3Scratch
+      );
+      const destination = Cartesian3.add(
+        camera.position,
+        movementVector,
+        cartesian3Scratch
+      );
+      const z = Ellipsoid.WGS84.cartesianToCartographic(camera.position).height;
+      const cartographic = Cartographic.fromCartesian(destination);
+      const zoomId = ++this._ZOOM_SET_ID;
+      whenSampleTerrainMostDetailed(map.terrainProvider, [cartographic], () => {
+        if (zoomId === this._ZOOM_SET_ID) {
+          const newZ = Ellipsoid.WGS84.cartesianToCartographic(camera.position)
+            .height;
+          const isUnderGround = cartographic.height + 100 - newZ > 0;
+          if (isUnderGround) {
+            cartographic.height = cartographic.height + 100;
+            const onGround = Cartographic.toCartesian(cartographic);
+            scene.camera.flyTo({ destination: onGround });
+          }
+        }
+      });
+      if (z > 200) {
+        scene.camera.flyTo({ destination, duration: 0 });
+      }
+    }
   }
 
   private _onTerrainChange(e: TerrainProvider) {
