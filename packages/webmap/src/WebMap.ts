@@ -51,6 +51,7 @@ import { WebMapEvents } from './interfaces/Events';
 import { WebMapLayers } from './WebMapLayers';
 import { WebMapMain, WEB_MAP_CONTAINER } from './WebMapMain';
 import { WebMapControls } from './WebMapControls';
+import { MapOptions } from './interfaces/MapOptions';
 
 /**
  * The core component for managing map adapters.
@@ -79,9 +80,10 @@ export class WebMap<
     M = any,
     L = any,
     C = any,
-    E extends WebMapEvents = WebMapEvents
+    E extends WebMapEvents = WebMapEvents,
+    O extends MapOptions = MapOptions
   >
-  extends WebMapControls<M, L, C, E>
+  extends WebMapControls<M, L, C, E, O>
   implements WebMapControls, WebMapLayers, WebMapMain {
   static get<T extends WebMap = WebMap>(id: number): T {
     return WEB_MAP_CONTAINER[id];
