@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.10](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-alpha.9...v1.0.0-alpha.10) (2020-10-20)
+
+
+### Features
+
+* **casium:** zoomIn and zoomOut onground control ([00818d0](https://github.com/nextgis/nextgis_frontend/commit/00818d08489456dc0c5104191e70cf9c21c945f3))
+
+
+
+
+
 # [1.0.0-alpha.9](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-alpha.8...v1.0.0-alpha.9) (2020-10-15)
 
 

@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.10](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-alpha.9...v1.0.0-alpha.10) (2020-10-20)
+
+
+### Bug Fixes
+
+* **ngw-map:** constructor options ([d78dd12](https://github.com/nextgis/nextgis_frontend/commit/d78dd1268c916479359a70299aa42dcfaac0e738))
+
+
+### Code Refactoring
+
+* **webmap:** change default paint ([1baea95](https://github.com/nextgis/nextgis_frontend/commit/1baea95158e2cd8b79ec2de6b95a377030951d0f))
+
+
+### BREAKING CHANGES
+
+* **webmap:** changed the default paint: the fill is semi-transparent, add stroke
+
+
+
+
+
 # [1.0.0-alpha.9](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-alpha.8...v1.0.0-alpha.9) (2020-10-15)
 
 
