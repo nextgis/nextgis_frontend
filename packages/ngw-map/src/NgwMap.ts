@@ -78,28 +78,29 @@ export class NgwMap<
   M = unknown,
   L = unknown,
   C = unknown,
-  O = Record<string, any>
-> extends WebMap<M, L, C, NgwMapEvents> {
+  O extends NgwMapOptions<C> = NgwMapOptions<C>
+> extends WebMap<M, L, C, NgwMapEvents, O> {
   static getIcon = getIcon;
 
   readonly emitter: StrictEventEmitter<
     EventEmitter,
     NgwMapEvents
   > = new EventEmitter();
-
-  options: NgwMapOptions<C> & O = {} as NgwMapOptions<C> & O;
   connector!: NgwConnector;
 
   protected _ngwLayers: NgwLayers = {};
   private __selectFromNgwRaster?: (ev: MapClickEvent) => void;
   private __selectFromNgwVector?: (ev: OnLayerClickOptions) => void;
 
-  constructor(options: NgwMapOptions<C> & O) {
-    super(prepareWebMapOptions(options));
+  constructor(options: O) {
+    super(prepareWebMapOptions(options) as O);
     if (options.connector) {
       this.connector = options.connector;
     }
-    this.options = deepmerge(OPTIONS, options) as NgwMapOptions<C> & O;
+    this.options = deepmerge(
+      this.options,
+      deepmerge(OPTIONS, options)
+    ) as NgwMapOptions<C> & O;
     this._createWebMap().then(() => {
       const container = this.getContainer();
       if (container) {
