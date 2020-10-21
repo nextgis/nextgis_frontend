@@ -387,12 +387,12 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
         scalar,
         cartesian3Scratch
       );
-      const destination = Cartesian3.add(
+      let destination = Cartesian3.add(
         camera.position,
         movementVector,
         cartesian3Scratch
       );
-      const z = Ellipsoid.WGS84.cartesianToCartographic(camera.position).height;
+      const z = Ellipsoid.WGS84.cartesianToCartographic(destination).height;
       const cartographic = Cartographic.fromCartesian(destination);
       const zoomId = ++this._ZOOM_SET_ID;
       whenSampleTerrainMostDetailed(map.terrainProvider, [cartographic], () => {
@@ -407,9 +407,11 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
           }
         }
       });
-      if (z > 200) {
-        scene.camera.flyTo({ destination, duration: 0 });
+      if (z < 100) {
+        cartographic.height = 100;
+        destination = Cartographic.toCartesian(cartographic);
       }
+      scene.camera.flyTo({ destination, duration: 0 });
     }
   }
 
