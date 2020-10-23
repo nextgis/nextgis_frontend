@@ -1,7 +1,11 @@
 import { Store } from 'vuex';
 import { Geometry, GeoJsonProperties, Feature } from 'geojson';
 import { VuexModule, Mutation, Action, Module } from 'vuex-module-decorators';
-import { prepareFieldsToNgw, FEATURE_REQUEST_PARAMS } from '@nextgis/ngw-kit';
+import {
+  prepareFieldsToNgw,
+  FEATURE_REQUEST_PARAMS,
+  parseDate,
+} from '@nextgis/ngw-kit';
 import NgwConnector, {
   ResourceStoreItem,
   FeatureLayerField,
@@ -258,7 +262,25 @@ export abstract class ResourceStore<
 
   @Mutation
   protected SET_STORE(store: ResourceStoreItem<P>[]): void {
-    this.resourceItem = store;
+    let prepared = store;
+    const datefields = this.fields
+      .filter((x) => x.datatype === 'DATE')
+      .map((x) => x.keyname);
+    if (datefields.length) {
+      prepared = store.map((x) => {
+        for (const k in x) {
+          if (datefields.includes(k)) {
+            const date = parseDate(x[k]);
+            if (date) {
+              // @ts-ignore
+              x[k] = date;
+            }
+          }
+        }
+        return x;
+      });
+    }
+    this.resourceItem = prepared;
   }
 
   @Mutation
