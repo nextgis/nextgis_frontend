@@ -61,6 +61,7 @@ export * from './utils/identifyUtils';
 export * from './utils/getCompanyLogo';
 export * from './utils/featureLayerUtils';
 export * from './utils/resourceIdFromLayerOptions';
+export * from './utils/parseDateFromNgw';
 
 export * from './adapters/createBasemapWebmapItemAdapter';
 export * from './adapters/createGeoJsonAdapter';
