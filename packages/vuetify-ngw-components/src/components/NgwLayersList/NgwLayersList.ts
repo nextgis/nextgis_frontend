@@ -39,7 +39,6 @@ export class NgwLayersList extends Vue {
   items: VueTreeItem[] = [];
 
   selection: string[] = [];
-  private tmpSelection: string[] = [];
 
   private _selectionWatcher?: () => void;
   private _layers: Array<LayerAdapter | ResourceAdapter> = [];
@@ -110,9 +109,7 @@ export class NgwLayersList extends Vue {
             if ('properties' in x.layer) {
               setTreeItemVisibility(x.layer as NgwWebmapItem, id);
             } else {
-              readyToFinishPromises.push(
-                this.webMap.toggleLayer(x, isVisible)
-              );
+              readyToFinishPromises.push(this.webMap.toggleLayer(x, isVisible));
             }
           }
         }
@@ -221,7 +218,7 @@ export class NgwLayersList extends Vue {
 
   private async _updateItems() {
     this._stopSelectionWatch();
-    this.tmpSelection = [];
+    this.selection = [];
     this._layers = [];
     let layersList: LayerAdapter[] | undefined;
     if (this.webMap) {
@@ -246,7 +243,6 @@ export class NgwLayersList extends Vue {
           this._createTreeItem(x);
         });
     }
-    this.selection = this.tmpSelection;
     this._startSelectionWatch();
   }
 
@@ -338,7 +334,7 @@ export class NgwLayersList extends Vue {
       webMapLayer.layer && webMapLayer.layer.properties.set('visibility', true);
     } else {
       if (visible) {
-        this.tmpSelection.push(item.id);
+        this.selection.push(item.id);
       }
       this.items.push(item);
     }
@@ -368,7 +364,7 @@ export class NgwLayersList extends Vue {
       }
       const visible = x.properties.get('visibility');
       if (visible) {
-        this.tmpSelection.push(id);
+        this.selection.push(id);
       }
       treeItems.push(item);
     });
