@@ -1,5 +1,11 @@
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
-import { NgwMap, LayerAdapter, WebMap } from '@nextgis/ngw-map';
+import {
+  NgwMap,
+  LayerAdapter,
+  WebMap,
+  MainLayerAdapter,
+} from '@nextgis/ngw-map';
+import { debounce, DebounceDecorator } from '@nextgis/utils';
 import {
   ResourceAdapter,
   NgwWebmapLayerAdapter,
@@ -8,7 +14,6 @@ import {
 import { CreateElement, VNode, VNodeData } from 'vue';
 // @ts-ignore
 import { VTreeview } from 'vuetify/lib';
-import { debounce, DebounceDecorator } from '@nextgis/utils';
 
 export interface VueTreeItem {
   id: string;
@@ -34,11 +39,13 @@ export class NgwLayersList extends Vue {
   items: VueTreeItem[] = [];
 
   selection: string[] = [];
+  private tmpSelection: string[] = [];
 
   private _selectionWatcher?: () => void;
   private _layers: Array<LayerAdapter | ResourceAdapter> = [];
   private __updateItems?: () => Promise<void>;
   private __onLayerAdd?: (l: LayerAdapter) => void;
+  private tmpPropagation = false;
 
   get webMap(): WebMap | undefined {
     return this.ngwMap || WebMap.get(this.webMapId);
@@ -57,12 +64,28 @@ export class NgwLayersList extends Vue {
 
   @DebounceDecorator()
   setVisibleLayers(selection: string[], old: string[]): void {
-    const propagation = this.webMap?.keys.pressed('ctrl')
-      ? !this.propagation
-      : this.propagation;
+    this.tmpPropagation = this.isPropagationNow();
+    const propagation = this.tmpPropagation;
     const difference = selection
       .filter((x) => !old.includes(x))
       .concat(old.filter((x) => !selection.includes(x)));
+
+    const setTreeItemVisibility = (d: NgwWebmapItem, id?: string) => {
+      id = id !== undefined ? id : this._getLayerId(d);
+      if (id && difference.indexOf(id) !== -1) {
+        const isGroup =
+          d.item.item_type === 'group' || d.item.item_type === 'root';
+        const isVisible = selection.indexOf(id) !== -1;
+        d.properties.set('visibility', isVisible, {
+          propagation: propagation && isGroup,
+          bubble: propagation,
+        });
+
+        this._updateTreeVisibilityForPropagateItem(d);
+      }
+    };
+
+    const readyToFinishPromises: Promise<void>[] = [];
     if (difference.length) {
       this._stopUpdateItemListeners();
       this._layers.forEach((x) => {
@@ -77,47 +100,31 @@ export class NgwLayersList extends Vue {
           }
           const desc = layer.tree.getDescendants() as NgwWebmapItem[];
           desc.forEach((d) => {
-            const id = this._getLayerId(d);
-            const isGroup = d.item.item_type === 'group';
-            if (id && difference.indexOf(id) !== -1) {
-              const isVisible = selection.indexOf(id) !== -1;
-              d.properties.set('visibility', isVisible, {
-                propagation: propagation && isGroup,
-                bubble: propagation,
-              });
-
-              if (propagation) {
-                const parents = d.tree.getParents();
-                if (this.hideWebmapRoot) {
-                  parents.pop();
-                }
-                parents.forEach((p) => {
-                  const isParentVisible = p.properties.get('visibility');
-                  const parentProp = p.properties.property('visibility');
-                  const isParentChildVisible = parentProp.getProperty();
-                  if (isParentChildVisible !== isParentVisible) {
-                    p.properties.set('visibility', isParentChildVisible);
-                  }
-                });
-              }
-            }
+            setTreeItemVisibility(d);
           });
         }
         if (x.id && !itemIsNotHideRoot && this.webMap) {
           const id = this._getLayerId(x);
           if (difference.indexOf(id) !== -1) {
-            this.webMap.toggleLayer(x, selection.indexOf(id) !== -1);
+            const isVisible = selection.indexOf(id) !== -1;
+            if ('properties' in x.layer) {
+              setTreeItemVisibility(x.layer as NgwWebmapItem, id);
+            } else {
+              readyToFinishPromises.push(
+                this.webMap.toggleLayer(x, isVisible)
+              );
+            }
           }
         }
       });
 
-      if (this.propagation) {
-        this.updateItems().then(() => {
-          this._startUpdateItemListeners();
-        });
-      } else {
-        this._startUpdateItemListeners();
+      if (propagation) {
+        readyToFinishPromises.push(this.updateItems());
       }
+      Promise.all(readyToFinishPromises).finally(() => {
+        this.tmpPropagation = this.isPropagationNow();
+        this._startUpdateItemListeners();
+      });
     }
   }
 
@@ -168,6 +175,12 @@ export class NgwLayersList extends Vue {
     return h(VTreeview, data, this.$slots.default);
   }
 
+  private isPropagationNow() {
+    return this.webMap?.keys.pressed('ctrl')
+      ? !this.propagation
+      : this.propagation;
+  }
+
   private create() {
     if (this.webMap) {
       this.webMap.onLoad().then(() => {
@@ -208,7 +221,7 @@ export class NgwLayersList extends Vue {
 
   private async _updateItems() {
     this._stopSelectionWatch();
-    this.selection = [];
+    this.tmpSelection = [];
     this._layers = [];
     let layersList: LayerAdapter[] | undefined;
     if (this.webMap) {
@@ -233,7 +246,27 @@ export class NgwLayersList extends Vue {
           this._createTreeItem(x);
         });
     }
+    this.selection = this.tmpSelection;
     this._startSelectionWatch();
+  }
+
+  private _updateTreeVisibilityForPropagateItem(
+    d: NgwWebmapItem | MainLayerAdapter
+  ) {
+    if (this.tmpPropagation && 'tree' in d) {
+      const parents = d.tree.getParents();
+      if (this.hideWebmapRoot) {
+        parents.pop();
+      }
+      parents.forEach((p) => {
+        const isParentVisible = p.properties.get('visibility');
+        const parentProp = p.properties.property('visibility');
+        const isParentChildVisible = parentProp.getProperty();
+        if (isParentChildVisible !== isParentVisible) {
+          p.properties.set('visibility', isParentChildVisible);
+        }
+      });
+    }
   }
 
   private _createTreeItem(layer: LayerAdapter | ResourceAdapter) {
@@ -277,7 +310,7 @@ export class NgwLayersList extends Vue {
       const props = webMapLayer.layer.properties;
       const webMapLayerVisible = props.get('visibility');
       if (
-        this.propagation &&
+        this.tmpPropagation &&
         (webMapLayer.layer.item.item_type === 'group' ||
           webMapLayer.layer.item.item_type === 'root')
       ) {
@@ -305,7 +338,7 @@ export class NgwLayersList extends Vue {
       webMapLayer.layer && webMapLayer.layer.properties.set('visibility', true);
     } else {
       if (visible) {
-        this.selection.push(item.id);
+        this.tmpSelection.push(item.id);
       }
       this.items.push(item);
     }
@@ -335,7 +368,7 @@ export class NgwLayersList extends Vue {
       }
       const visible = x.properties.get('visibility');
       if (visible) {
-        this.selection.push(id);
+        this.tmpSelection.push(id);
       }
       treeItems.push(item);
     });
