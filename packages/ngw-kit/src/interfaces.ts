@@ -354,10 +354,12 @@ export interface FeatureRequestParams {
   limit?: number;
   intersects?: string;
   order_by?: string;
+  geom?: 'yes' | 'no';
 }
 
 export interface NgwFeatureRequestOptions extends FilterOptions {
   extensions?: string[] | null | false;
+  geom?: boolean;
 }
 
 export interface GetNgwLayerItemsOptions {

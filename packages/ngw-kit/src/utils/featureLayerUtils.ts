@@ -12,7 +12,6 @@ import NgwConnector, {
 } from '@nextgis/ngw-connector';
 import CancelablePromise from '@nextgis/cancelable-promise';
 import {
-  propertiesFilter,
   checkIfPropertyFilter,
   PropertyFilter,
   PropertiesFilter,
@@ -22,7 +21,10 @@ import {
   GetNgwLayerItemsOptions,
   NgwFeatureRequestOptions,
 } from '../interfaces';
-import { defined, JsonMap } from '@nextgis/utils';
+import { JsonMap } from '@nextgis/utils';
+import { fetchNgwLayerItem } from './fetchNgwLayerItem';
+import { fetchNgwLayerFeatures } from './fetchNgwLayerFeatures';
+import { fetchNgwLayerItems } from './fetchNgwLayerItems';
 
 export const FEATURE_REQUEST_PARAMS: FeatureRequestParams = {
   srs: 4326,
@@ -43,6 +45,9 @@ export function createGeoJsonFeature<
   return feature;
 }
 
+/**
+ * @deprecated use {@link fetchNgwLayerItem} instead
+ */
 export function getNgwLayerItem<
   G extends Geometry = Geometry,
   P extends GeoJsonProperties = GeoJsonProperties
@@ -53,16 +58,12 @@ export function getNgwLayerItem<
     connector: NgwConnector;
   } & NgwFeatureRequestOptions
 ): CancelablePromise<FeatureItem<P, G>> {
-  const params: FeatureRequestParams & { [name: string]: any } = {
-    ...FEATURE_REQUEST_PARAMS,
-  };
-  return options.connector.get('feature_layer.feature.item', null, {
-    id: options.resourceId,
-    fid: options.featureId,
-    ...params,
-  }) as CancelablePromise<FeatureItem<P, G>>;
+  return fetchNgwLayerItem(options);
 }
 
+/**
+ * @deprecated use {@link fetchNgwLayerFeature} instead
+ */
 export function getNgwLayerFeature<
   G extends Geometry = Geometry,
   P extends Record<string, any> = Record<string, any>
@@ -73,12 +74,40 @@ export function getNgwLayerFeature<
     connector: NgwConnector;
   } & NgwFeatureRequestOptions
 ): CancelablePromise<Feature<G, P>> {
-  return getNgwLayerItem(options).then((item) => {
-    return createGeoJsonFeature<G, P>(item);
-  });
+  return getNgwLayerFeature(options);
 }
 
-function idFilterWorkAround<
+/**
+ * @deprecated use {@link fetchNgwLayerFeatures} instead
+ */
+
+export function getNgwLayerFeatures<
+  G extends Geometry | null = Geometry,
+  P extends Record<string, any> = Record<string, any>
+>(
+  options: {
+    resourceId: number;
+    connector: NgwConnector;
+    filters?: PropertiesFilter;
+  } & NgwFeatureRequestOptions
+): CancelablePromise<FeatureCollection<G, P>> {
+  return fetchNgwLayerFeatures(options);
+}
+
+/**
+ * @deprecated use {@link fetchNgwLayerItems} instead
+ */
+export function getNgwLayerItems<
+  G extends Geometry = Geometry,
+  P extends JsonMap = JsonMap
+>(
+  options: GetNgwLayerItemsOptions & NgwFeatureRequestOptions
+): CancelablePromise<FeatureItem<P, G>[]> {
+  return fetchNgwLayerItems(options);
+}
+
+
+export function idFilterWorkAround<
   G extends Geometry = Geometry,
   P extends JsonMap = JsonMap
 >(options: {
@@ -108,7 +137,7 @@ function idFilterWorkAround<
 
 // NGW REST API is not able to filtering by combined queries
 // therefore the filter is divided into several requests
-function createFeatureFieldFilterQueries(
+export function createFeatureFieldFilterQueries(
   opt: Required<GetNgwLayerItemsOptions> & NgwFeatureRequestOptions,
   _queries: CancelablePromise<FeatureItem[]>[] = [],
   _parentAllParams: [string, any][] = []
@@ -133,7 +162,7 @@ function createFeatureFieldFilterQueries(
       }
       if (checkIfPropertyFilter(f)) {
         _queries.push(
-          getNgwLayerItemsRequest({
+          fetchNgwLayerItemsRequest({
             ...opt,
             paramList: [..._parentAllParams, createParam(f)],
           })
@@ -177,7 +206,7 @@ function createFeatureFieldFilterQueries(
         });
       } else {
         _queries.push(
-          getNgwLayerItemsRequest({
+          fetchNgwLayerItemsRequest({
             ...opt,
             paramList: [..._parentAllParams, ...filters],
           })
@@ -197,7 +226,7 @@ function createFeatureFieldFilterQueries(
   });
 }
 
-function getNgwLayerItemsRequest<
+export function fetchNgwLayerItemsRequest<
   G extends Geometry = Geometry,
   P extends JsonMap = JsonMap
 >(
@@ -217,6 +246,7 @@ function getNgwLayerItemsRequest<
     resourceId,
     paramList,
     extensions,
+    geom,
   } = options;
   if (limit) {
     params.limit = limit;
@@ -239,62 +269,13 @@ function getNgwLayerItemsRequest<
   if (extensions !== undefined) {
     params.extensions = extensions ? extensions.join(',') : '';
   }
+  if (geom !== undefined) {
+    params.geom = geom ? 'yes' : 'no';
+  }
   return connector.get('feature_layer.feature.collection', null, {
     id: resourceId,
     ...params,
   }) as CancelablePromise<FeatureItem<P, G>[]>;
-}
-
-export function getNgwLayerItems<
-  G extends Geometry = Geometry,
-  P extends JsonMap = JsonMap
->(
-  options: GetNgwLayerItemsOptions & NgwFeatureRequestOptions
-): CancelablePromise<FeatureItem<P, G>[]> {
-  const filters = options.filters;
-  if (filters) {
-    return createFeatureFieldFilterQueries({
-      ...options,
-      filters,
-    }) as CancelablePromise<FeatureItem<P, G>[]>;
-  } else {
-    return getNgwLayerItemsRequest(options).then((data) => {
-      if (filters) {
-        // control
-        return data.filter((y) => {
-          const fields = y.fields;
-          if (fields) {
-            propertiesFilter(fields, filters);
-          }
-        });
-      }
-      return data;
-    }) as CancelablePromise<FeatureItem<P, G>[]>;
-  }
-}
-
-export function getNgwLayerFeatures<
-  G extends Geometry | null = Geometry,
-  P extends Record<string, any> = Record<string, any>
->(
-  options: {
-    resourceId: number;
-    connector: NgwConnector;
-    filters?: PropertiesFilter;
-  } & NgwFeatureRequestOptions
-): CancelablePromise<FeatureCollection<G, P>> {
-  return getNgwLayerItems(options).then((x: FeatureItem[]) => {
-    const features: Array<Feature<G, P>> = [];
-    x.forEach((y) => {
-      features.push(createGeoJsonFeature(y));
-    });
-
-    const featureCollection: FeatureCollection<G, P> = {
-      type: 'FeatureCollection',
-      features,
-    };
-    return featureCollection;
-  });
 }
 
 export function prepareFieldsToNgw<T extends any>(
