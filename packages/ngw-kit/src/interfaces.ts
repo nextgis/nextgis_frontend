@@ -10,6 +10,7 @@ import {
   OnLayerClickOptions,
   LayerAdapter,
   MainLayerAdapter,
+  FilterOptions,
 } from '@nextgis/webmap';
 import { PropertiesFilter } from '@nextgis/properties-filter';
 import NgwConnector, {
@@ -348,10 +349,15 @@ export interface CompanyLogoOptions {
 export interface FeatureRequestParams {
   srs?: number;
   fields?: string;
+  extensions?: string;
   geom_format?: string;
   limit?: number;
   intersects?: string;
   order_by?: string;
+}
+
+export interface NgwFeatureRequestOptions extends FilterOptions {
+  extensions?: string[] | null | false;
 }
 
 export interface GetNgwLayerItemsOptions {
