@@ -58,9 +58,9 @@
       </v-treeview>
     </v-navigation-drawer>
 
-    <v-content>
+    <v-main>
       <component v-if="current" :is="current.component" :item="current"></component>
-    </v-content>
+    </v-main>
   </div>
 </template>
 
