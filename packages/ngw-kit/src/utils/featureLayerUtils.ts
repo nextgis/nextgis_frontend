@@ -4,7 +4,6 @@ import {
   FeatureCollection,
   GeoJsonProperties,
 } from 'geojson';
-import { FilterOptions } from '@nextgis/webmap';
 
 import NgwConnector, {
   FeatureItem,
@@ -18,8 +17,12 @@ import {
   PropertyFilter,
   PropertiesFilter,
 } from '@nextgis/properties-filter';
-import { FeatureRequestParams, GetNgwLayerItemsOptions } from '../interfaces';
-import { JsonMap } from '@nextgis/utils';
+import {
+  FeatureRequestParams,
+  GetNgwLayerItemsOptions,
+  NgwFeatureRequestOptions,
+} from '../interfaces';
+import { defined, JsonMap } from '@nextgis/utils';
 
 export const FEATURE_REQUEST_PARAMS: FeatureRequestParams = {
   srs: 4326,
@@ -48,7 +51,7 @@ export function getNgwLayerItem<
     resourceId: number;
     featureId: number;
     connector: NgwConnector;
-  } & FilterOptions
+  } & NgwFeatureRequestOptions
 ): CancelablePromise<FeatureItem<P, G>> {
   const params: FeatureRequestParams & { [name: string]: any } = {
     ...FEATURE_REQUEST_PARAMS,
@@ -68,7 +71,7 @@ export function getNgwLayerFeature<
     resourceId: number;
     featureId: number;
     connector: NgwConnector;
-  } & FilterOptions
+  } & NgwFeatureRequestOptions
 ): CancelablePromise<Feature<G, P>> {
   return getNgwLayerItem(options).then((item) => {
     return createGeoJsonFeature<G, P>(item);
@@ -106,7 +109,7 @@ function idFilterWorkAround<
 // NGW REST API is not able to filtering by combined queries
 // therefore the filter is divided into several requests
 function createFeatureFieldFilterQueries(
-  opt: Required<GetNgwLayerItemsOptions> & FilterOptions,
+  opt: Required<GetNgwLayerItemsOptions> & NgwFeatureRequestOptions,
   _queries: CancelablePromise<FeatureItem[]>[] = [],
   _parentAllParams: [string, any][] = []
 ): CancelablePromise<FeatureItem[]> {
@@ -199,7 +202,7 @@ function getNgwLayerItemsRequest<
   P extends JsonMap = JsonMap
 >(
   options: GetNgwLayerItemsOptions &
-    FilterOptions & { paramList?: [string, any][] }
+    NgwFeatureRequestOptions & { paramList?: [string, any][] }
 ): CancelablePromise<FeatureItem<P, G>[]> {
   const params: FeatureRequestParams & RequestItemAdditionalParams = {
     ...FEATURE_REQUEST_PARAMS,
@@ -213,6 +216,7 @@ function getNgwLayerItemsRequest<
     orderBy,
     resourceId,
     paramList,
+    extensions,
   } = options;
   if (limit) {
     params.limit = limit;
@@ -232,6 +236,9 @@ function getNgwLayerItemsRequest<
   if (orderBy) {
     params.order_by = orderBy.join(',');
   }
+  if (extensions !== undefined) {
+    params.extensions = extensions ? extensions.join(',') : '';
+  }
   return connector.get('feature_layer.feature.collection', null, {
     id: resourceId,
     ...params,
@@ -242,7 +249,7 @@ export function getNgwLayerItems<
   G extends Geometry = Geometry,
   P extends JsonMap = JsonMap
 >(
-  options: GetNgwLayerItemsOptions & FilterOptions
+  options: GetNgwLayerItemsOptions & NgwFeatureRequestOptions
 ): CancelablePromise<FeatureItem<P, G>[]> {
   const filters = options.filters;
   if (filters) {
@@ -274,7 +281,7 @@ export function getNgwLayerFeatures<
     resourceId: number;
     connector: NgwConnector;
     filters?: PropertiesFilter;
-  } & FilterOptions
+  } & NgwFeatureRequestOptions
 ): CancelablePromise<FeatureCollection<G, P>> {
   return getNgwLayerItems(options).then((x: FeatureItem[]) => {
     const features: Array<Feature<G, P>> = [];
