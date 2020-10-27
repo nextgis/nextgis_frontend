@@ -60,6 +60,10 @@ export * from './utils/utils';
 export * from './utils/identifyUtils';
 export * from './utils/getCompanyLogo';
 export * from './utils/featureLayerUtils';
+export * from './utils/fetchNgwLayerFeature';
+export * from './utils/fetchNgwLayerFeatures';
+export * from './utils/fetchNgwLayerItem';
+export * from './utils/fetchNgwLayerItems';
 export * from './utils/resourceIdFromLayerOptions';
 export * from './utils/parseDateFromNgw';
 
