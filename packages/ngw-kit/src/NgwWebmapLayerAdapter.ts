@@ -20,7 +20,7 @@ import { NgwWebmapItem } from './NgwWebmapItem';
 import { createOnFirstShowAdapter } from './adapters/createBasemapWebmapItemAdapter';
 import { sendIdentifyRequest } from './utils/identifyUtils';
 import { getLayerAdapterOptions } from './utils/getLayerAdapterOptions';
-import { updateImageParams, getNgwWebmapExtent } from './utils/utils';
+import { updateImageParams } from './utils/utils';
 
 import {
   TreeGroup,
@@ -30,6 +30,7 @@ import {
   NgwWebmapLayerAdapterEvents,
   ResourceAdapter,
 } from './interfaces';
+import { getNgwWebmapExtent } from './utils/fetchNgwExtent';
 
 export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
   layer?: NgwWebmapItem;
