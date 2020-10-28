@@ -39,19 +39,19 @@ export function prepareWebMapOptions(options: NgwMapOptions): MapOptions {
   } else if (options.connector) {
     options.baseUrl = options.connector.options.baseUrl;
   }
-  const opt: NgwMapOptions = deepmerge(OPTIONS, options);
+  options = deepmerge(OPTIONS, options);
 
-  if (!opt.center && !opt.bounds) {
+  if (!options.center && !options.bounds) {
     options.bounds = [-179, -90, 180, 90];
     options.maxBounds = options.bounds;
   }
 
-  if (opt.connector) {
+  if (options.connector) {
     kits.push(
       new NgwKit({
-        connector: opt.connector,
-        auth: opt.auth,
-        identification: opt.identification,
+        connector: options.connector,
+        auth: options.auth,
+        identification: options.identification,
       })
     );
   }
