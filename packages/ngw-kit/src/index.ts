@@ -64,6 +64,7 @@ export * from './utils/fetchNgwLayerFeature';
 export * from './utils/fetchNgwLayerFeatures';
 export * from './utils/fetchNgwLayerItem';
 export * from './utils/fetchNgwLayerItems';
+export * from './utils/fetchNgwExtent';
 export * from './utils/resourceIdFromLayerOptions';
 export * from './utils/parseDateFromNgw';
 

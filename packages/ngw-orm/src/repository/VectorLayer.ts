@@ -13,8 +13,8 @@ import { PropertiesFilter } from '@nextgis/properties-filter';
 import { Type, DeepPartial } from '@nextgis/utils';
 import {
   GetNgwLayerItemsOptions,
-  getNgwLayerItems,
-  getNgwLayerItem,
+  fetchNgwLayerItems,
+  fetchNgwLayerItem,
 } from '@nextgis/ngw-kit';
 import { GeometryType, VectorLayerResourceItem } from '@nextgis/ngw-connector';
 // import { ResourceItem } from '@nextgis/ngw-connector';
@@ -386,7 +386,7 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
       }
     }
 
-    const items = await getNgwLayerItems(options);
+    const items = await fetchNgwLayerItems(options);
     if (items) {
       const entities = itemsToEntities(Resource, items) as T[];
       return entities;
@@ -423,7 +423,7 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
       resourceId: Resource.item.resource.id,
     };
     if (typeof optionsOrConditions === 'number') {
-      const item = await getNgwLayerItem({
+      const item = await fetchNgwLayerItem({
         ...options,
         featureId: optionsOrConditions,
       });
