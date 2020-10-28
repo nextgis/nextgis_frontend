@@ -23,6 +23,7 @@ import {
 } from '../interfaces';
 import { JsonMap } from '@nextgis/utils';
 import { fetchNgwLayerItem } from './fetchNgwLayerItem';
+import { fetchNgwLayerFeature } from './fetchNgwLayerFeature';
 import { fetchNgwLayerFeatures } from './fetchNgwLayerFeatures';
 import { fetchNgwLayerItems } from './fetchNgwLayerItems';
 
@@ -74,7 +75,7 @@ export function getNgwLayerFeature<
     connector: NgwConnector;
   } & NgwFeatureRequestOptions
 ): CancelablePromise<Feature<G, P>> {
-  return getNgwLayerFeature(options);
+  return fetchNgwLayerFeature(options);
 }
 
 /**
@@ -126,7 +127,7 @@ export function idFilterWorkAround<
     );
   }
   const promises: Promise<FeatureItem>[] = featureIds.map((featureId) => {
-    return getNgwLayerItem<G, P>({
+    return fetchNgwLayerItem<G, P>({
       connector: options.connector,
       resourceId: options.resourceId,
       featureId,

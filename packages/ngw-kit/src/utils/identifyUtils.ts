@@ -14,7 +14,8 @@ import {
   IdentifyRequestOptions,
   FeatureIdentifyRequestOptions,
 } from '../interfaces';
-import { getNgwLayerFeature, createGeoJsonFeature } from './featureLayerUtils';
+import { createGeoJsonFeature } from './featureLayerUtils';
+import { fetchNgwLayerFeature } from './fetchNgwLayerFeature';
 
 export function getIdentifyItems(
   identify: NgwIdentify,
@@ -84,7 +85,7 @@ export function getIdentifyGeoJson<
 
   const params = getIdentifyItems(identify);
   if (params) {
-    return getNgwLayerFeature({ connector, ...params[0] });
+    return fetchNgwLayerFeature({ connector, ...params[0] });
   }
   return CancelablePromise.resolve(undefined);
 }
