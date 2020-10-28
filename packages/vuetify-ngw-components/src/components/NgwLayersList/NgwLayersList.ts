@@ -386,7 +386,7 @@ export class NgwLayersList extends Vue {
         this.webMap.emitter.on('layer:preremove', __updateItems);
       }
       if (this.__onLayerAdd) {
-        // this.webMap.emitter.on('layer:preadd', this.__onLayerAdd);
+        this.webMap.emitter.on('layer:add', this.__onLayerAdd);
       }
     }
   }
@@ -404,7 +404,7 @@ export class NgwLayersList extends Vue {
         );
       }
       if (this.__onLayerAdd) {
-        this.webMap.emitter.removeListener('layer:preadd', this.__onLayerAdd);
+        this.webMap.emitter.removeListener('layer:add', this.__onLayerAdd);
       }
     }
   }
