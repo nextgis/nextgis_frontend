@@ -12,7 +12,7 @@ import NgwConnector, {
   FeatureItem,
 } from '@nextgis/ngw-connector';
 import { Type } from '@nextgis/webmap';
-import { LookupTables, ForeignResource, PatchOptions } from '../../interfaces';
+import { ForeignResource, PatchOptions } from '../../interfaces';
 
 type ResourceDef = string | number;
 
@@ -26,8 +26,6 @@ export abstract class ResourceStore<
 
   foreignResources: { [key in ResourceDef]: ForeignResource } = {};
 
-  lookupTableResourceGroupId?: number | string;
-  lookupTables: LookupTables = {};
 
   resourceItem: ResourceStoreItem<P>[] = [];
   fields: FeatureLayerField[] = [];
@@ -63,7 +61,6 @@ export abstract class ResourceStore<
       try {
         const item = await this.connector.getResource(id);
         if (item) {
-          await this.context.dispatch('loadLookupTables');
           return item.feature_layer ? item.feature_layer.fields : [];
         }
       } catch (er) {
@@ -134,35 +131,6 @@ export abstract class ResourceStore<
     await this._promises.getResources;
     delete this._promises.getResources;
     return this.resources as Record<ResourceDef, number>;
-  }
-
-  @Action({ commit: 'UPDATE_LOOKUP_TABLES' })
-  async loadLookupTables(): Promise<LookupTables> {
-    const lookupTables: { [field: string]: Record<string, string> } = {};
-    if (this.lookupTableResourceGroupId) {
-      if (Object.keys(this.lookupTables).length) {
-        return this.lookupTables;
-      }
-      const lookupTableResources = await this.connector.get(
-        'resource.collection',
-        null,
-        {
-          parent: this.lookupTableResourceGroupId,
-        }
-      );
-
-      lookupTableResources.forEach((x) => {
-        const lookupTable = x.lookup_table;
-        if (lookupTable) {
-          const keyName = x.resource.keyname;
-          if (keyName) {
-            const fieldName = keyName.replace(/^lt_/, '');
-            lookupTables[fieldName] = lookupTable.items;
-          }
-        }
-      });
-    }
-    return lookupTables;
   }
 
   @Action({ commit: '' })
@@ -248,11 +216,6 @@ export abstract class ResourceStore<
       }
     }
     return this.resourceItem;
-  }
-
-  @Mutation
-  protected UPDATE_LOOKUP_TABLES(lookupTables: LookupTables): void {
-    this.lookupTables = lookupTables;
   }
 
   @Mutation
