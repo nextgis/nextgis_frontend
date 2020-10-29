@@ -4,6 +4,8 @@ import {
   ResourceAdapter,
   NgwWebmapLayerAdapter,
   NgwWebmapItem,
+  TreeGroup,
+  TreeLayer,
 } from '@nextgis/ngw-kit';
 import { CreateElement, VNode, VNodeData } from 'vue';
 // @ts-ignore
@@ -24,6 +26,9 @@ export class NgwLayersList extends Vue {
   @Prop({ type: Boolean, default: false }) hideWebmapRoot!: boolean;
   @Prop({ type: Boolean, default: false }) notOnlyNgwLayer!: boolean;
   @Prop({ type: Function }) showLayer!: (layer: NgwWebmapItem) => boolean;
+  @Prop({ type: String, default: 'independent' }) selectionType!:
+    | 'independent'
+    | 'leaf';
   @Prop({ type: Function }) showResourceAdapter!: (
     adapter: LayerAdapter | ResourceAdapter
   ) => boolean;
@@ -34,11 +39,17 @@ export class NgwLayersList extends Vue {
 
   selection: string[] = [];
 
+  private _selectionWatcher?: () => void;
   private _layers: Array<LayerAdapter | ResourceAdapter> = [];
   private __updateItems?: () => Promise<void>;
+  private __onLayerAdd?: (l: LayerAdapter) => void;
 
   get webMap(): WebMap | undefined {
     return this.ngwMap || WebMap.get(this.webMapId);
+  }
+
+  get independent(): boolean {
+    return this.selectionType === 'independent';
   }
 
   @Watch('selection')
@@ -51,15 +62,22 @@ export class NgwLayersList extends Vue {
         // check visibility for all webmap tree layer
         if (x.layer && x.layer.properties) {
           const layer = x.layer as NgwWebmapItem;
-          if (this.hideWebmapRoot && layer.item.item_type === 'root') {
+          if (
+            (!this.independent && this.itemIsGroup(layer.item)) ||
+            (this.hideWebmapRoot && layer.item.item_type === 'root')
+          ) {
             itemIsNotHideRoot = true;
             layer.properties.set('visibility', true);
           }
+
           const desc = layer.tree.getDescendants() as NgwWebmapItem[];
           desc.forEach((d) => {
             const id = this._getLayerId(d);
             if (id) {
-              const isVisible = selection.indexOf(id) !== -1;
+              const isVisible =
+                !this.independent && this.itemIsGroup(d.item)
+                  ? true
+                  : selection.indexOf(id) !== -1;
               d.properties.set('visibility', isVisible);
             }
           });
@@ -97,7 +115,7 @@ export class NgwLayersList extends Vue {
     const data: VNodeData = {
       props: {
         value: this.selection,
-        'selection-type': 'independent',
+        'selection-type': this.selectionType,
       },
       on: {
         input: (event: any) => {
@@ -126,25 +144,45 @@ export class NgwLayersList extends Vue {
     return h(VTreeview, data, this.$slots.default);
   }
 
+  private itemIsGroup(item: TreeGroup | TreeLayer) {
+    return item.item_type === 'group' || item.item_type === 'root';
+  }
+
   private create() {
     if (this.webMap) {
       this.webMap.onLoad().then(() => {
         this.destroy();
-        const __updateItems = debounce(() => this._updateItems());
-        this.__updateItems = __updateItems;
-        this.updateItems();
-        if (this.webMap) {
-          this.webMap.emitter.on('layer:add', __updateItems);
-          this.webMap.emitter.on('layer:remove', __updateItems);
-        }
+        this.__updateItems = debounce(() => this._updateItems(), 100);
+        this.__onLayerAdd = (l: LayerAdapter) => this._onLayerAdd(l);
+        this.updateItems().then(() => {
+          this._startListeners();
+        });
       });
     }
   }
 
   private destroy() {
-    if (this.webMap && this.__updateItems) {
-      this.webMap.emitter.removeListener('layer:add', this.__updateItems);
-      this.webMap.emitter.removeListener('layer:remove', this.__updateItems);
+    this._stopUpdateItemListeners();
+  }
+
+  private _onLayerAdd(l: LayerAdapter) {
+    const id = l.options.id;
+    const exist =
+      this._layers &&
+      this._layers.find((x) => {
+        if (x.id === id) {
+          return true;
+        }
+        const layer = x.layer as NgwWebmapItem;
+        const tree = layer.tree;
+        const existInTree = tree.some((y) => String(y.id) === id);
+        if (existInTree) {
+          return true;
+        }
+        return false;
+      });
+    if (!exist && this.__updateItems) {
+      this.__updateItems();
     }
   }
 
@@ -257,9 +295,11 @@ export class NgwLayersList extends Vue {
       if (x.layer) {
         item.layer = x.layer.id;
       }
-      const children = x.tree.getChildren<NgwWebmapItem>();
-      if (children && children.length) {
-        item.children = this._createWebMapTree(children);
+      if (x.item.item_type === 'group') {
+        const children = x.tree.getChildren<NgwWebmapItem>();
+        if (children && children.length) {
+          item.children = this._createWebMapTree(children);
+        }
       }
       const visible = x.properties.get('visibility');
       if (visible) {
@@ -269,6 +309,55 @@ export class NgwLayersList extends Vue {
     });
 
     return treeItems;
+  }
+
+  private _startListeners() {
+    this._startSelectionWatch();
+    this._startUpdateItemListeners();
+  }
+
+  private _startUpdateItemListeners() {
+    this._stopUpdateItemListeners();
+    const __updateItems = this.__updateItems;
+    if (this.webMap) {
+      if (__updateItems) {
+        // this.webMap.emitter.on('layer:pretoggle', __updateItems);
+        this.webMap.emitter.on('layer:preremove', __updateItems);
+      }
+      if (this.__onLayerAdd) {
+        this.webMap.emitter.on('layer:add', this.__onLayerAdd);
+      }
+    }
+  }
+
+  private _stopUpdateItemListeners() {
+    if (this.webMap) {
+      if (this.__updateItems) {
+        // this.webMap.emitter.removeListener(
+        //   'layer:pretoggle',
+        //   this.__updateItems
+        // );
+        this.webMap.emitter.removeListener(
+          'layer:preremove',
+          this.__updateItems
+        );
+      }
+      if (this.__onLayerAdd) {
+        this.webMap.emitter.removeListener('layer:add', this.__onLayerAdd);
+      }
+    }
+  }
+
+  private _startSelectionWatch() {
+    this._stopSelectionWatch();
+    this._selectionWatcher = this.$watch('selection', this.setVisibleLayers);
+  }
+
+  private _stopSelectionWatch() {
+    if (this._selectionWatcher) {
+      this._selectionWatcher();
+      this._selectionWatcher = undefined;
+    }
   }
 
   private _getLayerId(
