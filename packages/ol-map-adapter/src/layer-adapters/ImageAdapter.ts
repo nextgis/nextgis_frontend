@@ -50,7 +50,6 @@ export class ImageAdapter implements MainLayerAdapter {
       }
 
       const source = new ImageWMS(imageOptions);
-      console.log(options.opacity);
       const layer = new ImageLayer({
         source,
         opacity: options.opacity,
