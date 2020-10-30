@@ -52,10 +52,13 @@ export class NgwLayersList extends Vue {
     return this.selectionType === 'independent';
   }
 
-  @Watch('selection')
   setVisibleLayers(selection: string[], old: string[]): void {
-    const isSame = arrayCompare(selection, old);
-    if (!isSame) {
+    const difference = selection
+      .filter((x) => !old.includes(x))
+      .concat(old.filter((x) => !selection.includes(x)));
+
+    // const isSame = arrayCompare(selection, old);
+    if (difference.length) {
       this._layers.forEach((x) => {
         let itemIsNotHideRoot = false;
         // layer properties fpr webmap tree items detect
@@ -73,7 +76,7 @@ export class NgwLayersList extends Vue {
           const desc = layer.tree.getDescendants() as NgwWebmapItem[];
           desc.forEach((d) => {
             const id = this._getLayerId(d);
-            if (id) {
+            if (difference.indexOf(id) !== -1) {
               const isVisible =
                 !this.independent && this.itemIsGroup(d.item)
                   ? true
@@ -84,7 +87,9 @@ export class NgwLayersList extends Vue {
         }
         if (x.id && !itemIsNotHideRoot && this.webMap) {
           const id = this._getLayerId(x);
-          this.webMap.toggleLayer(x, selection.indexOf(id) !== -1);
+          if (difference.indexOf(id) !== -1) {
+            this.webMap.toggleLayer(x, selection.indexOf(id) !== -1);
+          }
         }
       });
     }
