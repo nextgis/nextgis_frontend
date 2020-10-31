@@ -180,7 +180,7 @@ export class NgwLayersList extends Vue {
         }
         const layer = x.layer as NgwWebmapItem;
         const tree = layer.tree;
-        const existInTree = tree.some((y) => String(y.id) === id);
+        const existInTree = tree && tree.some((y) => String(y.id) === id);
         if (existInTree) {
           return true;
         }
