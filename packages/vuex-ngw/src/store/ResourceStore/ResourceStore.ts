@@ -26,7 +26,6 @@ export abstract class ResourceStore<
 
   foreignResources: { [key in ResourceDef]: ForeignResource } = {};
 
-
   resourceItem: ResourceStoreItem<P>[] = [];
   fields: FeatureLayerField[] = [];
 
@@ -47,6 +46,7 @@ export abstract class ResourceStore<
       opt: { id: number }
     ) => Promise<void>;
     delete?: (resourceId: number, featureId: number) => Promise<void>;
+    dateFormat?: (ngwDate: string) => string;
   } = {};
   private _connector!: NgwConnector;
 
@@ -233,8 +233,11 @@ export abstract class ResourceStore<
       prepared = store.map((x) => {
         for (const k in x) {
           if (datefields.includes(k)) {
-            const date = parseDate(x[k]);
+            let date = parseDate(x[k]);
             if (date) {
+              if (this.hooks.dateFormat) {
+                date = this.hooks.dateFormat(date);
+              }
               // @ts-ignore
               x[k] = date;
             }
