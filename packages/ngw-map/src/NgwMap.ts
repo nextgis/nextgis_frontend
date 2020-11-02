@@ -46,12 +46,7 @@ import { PropertiesFilter } from '@nextgis/properties-filter';
 import { appendNgwResources } from './utils/appendNgwResources';
 import { prepareWebMapOptions } from './utils/prepareWebMapOptions';
 
-import {
-  NgwMapOptions,
-  ControlOptions,
-  NgwMapEvents,
-  NgwLayers,
-} from './interfaces';
+import { NgwMapOptions, NgwMapEvents, NgwLayers } from './interfaces';
 import { Geometry, Feature, FeatureCollection } from 'geojson';
 
 /**
@@ -105,7 +100,6 @@ export class NgwMap<
       if (this.options.whitlabel) {
         this._whiteLabel();
       }
-      this._addControls();
     });
   }
 
@@ -499,26 +493,6 @@ export class NgwMap<
     }
 
     this.addBaseLayer('QMS', qmsLayerOptions);
-  }
-
-  private _addControls() {
-    if (this.options.controls) {
-      this.options.controls.forEach((x) => {
-        let controlAdapterName = x;
-        let controlOptions: ControlOptions = {};
-        if (typeof x === 'string' && this.options.controlsOptions) {
-          if (this.options.controlsOptions[x]) {
-            controlOptions = this.options.controlsOptions[x];
-            if (controlOptions.control !== undefined) {
-              controlAdapterName = controlOptions.control;
-            }
-          }
-        }
-        const { position, ...options } = controlOptions;
-        this.addControl(controlAdapterName, position || 'top-left', options);
-      });
-    }
-    this._emitStatusEvent('controls:create');
   }
 
   private async _selectFromNgwVector(

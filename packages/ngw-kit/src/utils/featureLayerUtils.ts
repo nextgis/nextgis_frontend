@@ -107,7 +107,6 @@ export function getNgwLayerItems<
   return fetchNgwLayerItems(options);
 }
 
-
 export function idFilterWorkAround<
   G extends Geometry = Geometry,
   P extends JsonMap = JsonMap

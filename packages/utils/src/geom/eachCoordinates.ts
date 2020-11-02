@@ -1,8 +1,4 @@
-import {
-  GeoJSON,
-  Position,
-  Geometry,
-} from 'geojson';
+import { GeoJSON, Position, Geometry } from 'geojson';
 
 export function eachCoordinates(
   geojson: GeoJSON,
@@ -27,7 +23,7 @@ export function eachCoordinates(
       }
     }
     return geom;
-  })
+  });
 }
 
 export function eachGeometry(
