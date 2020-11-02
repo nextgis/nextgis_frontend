@@ -9,9 +9,8 @@ import {
 import { JsonMap } from '@nextgis/utils';
 import {
   createFeatureFieldFilterQueries,
-  fetchNgwLayerItemsRequest
+  fetchNgwLayerItemsRequest,
 } from './featureLayerUtils';
-
 
 export function fetchNgwLayerItems<
   G extends Geometry = Geometry,
