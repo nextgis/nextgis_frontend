@@ -1,20 +1,11 @@
-import {
-  Geometry,
-  Feature,
-} from 'geojson';
+import { Geometry, Feature } from 'geojson';
 
-import NgwConnector, {
-
-} from '@nextgis/ngw-connector';
+import NgwConnector from '@nextgis/ngw-connector';
 import CancelablePromise from '@nextgis/cancelable-promise';
 
-import {
-
-  NgwFeatureRequestOptions,
-} from '../interfaces';
+import { NgwFeatureRequestOptions } from '../interfaces';
 import { fetchNgwLayerItem } from './fetchNgwLayerItem';
 import { createGeoJsonFeature } from './featureLayerUtils';
-
 
 export function fetchNgwLayerFeature<
   G extends Geometry = Geometry,

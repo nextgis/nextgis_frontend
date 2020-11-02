@@ -10,7 +10,7 @@ import {
 import { CreateElement, VNode, VNodeData } from 'vue';
 // @ts-ignore
 import { VTreeview } from 'vuetify/lib';
-import { arrayCompare, debounce } from '@nextgis/utils';
+import { debounce } from '@nextgis/utils';
 
 export interface VueTreeItem {
   id: string;
@@ -50,6 +50,19 @@ export class NgwLayersList extends Vue {
 
   get independent(): boolean {
     return this.selectionType === 'independent';
+  }
+
+  @Watch('ngwMap')
+  updateNgwMap(): void {
+    this.destroy();
+    this.create();
+  }
+
+  @Watch('include')
+  async updateItems(): Promise<void> {
+    if (this.__updateItems) {
+      this.__updateItems();
+    }
   }
 
   setVisibleLayers(selection: string[], old: string[]): void {
@@ -92,19 +105,6 @@ export class NgwLayersList extends Vue {
           }
         }
       });
-    }
-  }
-
-  @Watch('ngwMap')
-  updateNgwMap(): void {
-    this.destroy();
-    this.create();
-  }
-
-  @Watch('include')
-  async updateItems(): Promise<void> {
-    if (this.__updateItems) {
-      this.__updateItems();
     }
   }
 
