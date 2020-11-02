@@ -1,14 +1,14 @@
 {
   "name": "@nextgis/vue-ngw-map",
-  "version": "1.0.0-alpha.10",
+  "version": "1.0.0-alpha.11",
   "description": "Development tools",
   "main": "index.js",
   "module": "lib/vue-ngw-map.esm-bundler.js",
   "#types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/leaflet-map-adapter": "^1.0.0-alpha.10",
-    "@nextgis/ngw-map": "^1.0.0-alpha.10",
-    "@nextgis/utils": "^1.0.0-alpha.9",
+    "@nextgis/leaflet-map-adapter": "^1.0.0-alpha.11",
+    "@nextgis/ngw-map": "^1.0.0-alpha.11",
+    "@nextgis/utils": "^1.0.0-alpha.11",
     "vue": "^2.6.12",
     "vue-class-component": "^7.2.6",
     "vue-property-decorator": "^9.0.2",
