@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.11](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-alpha.10...v1.0.0-alpha.11) (2020-11-02)
+
+
+### Bug Fixes
+
+* **ngw-map:** constructor options for control ([7d40e0c](https://github.com/nextgis/nextgis_frontend/commit/7d40e0c6d52f3d734cd5f28173f03e4a1a0943df))
+* **vue:** NgwLayersList selection event ([054b42a](https://github.com/nextgis/nextgis_frontend/commit/054b42a90559196ab4302a6607d8fad8e4d0910c))
+* **vue:** NgwlayersList visibility toggle ([e5a9d5c](https://github.com/nextgis/nextgis_frontend/commit/e5a9d5c9d9333e155364e99a1164c805ddd29f94))
+* **webmap:** constructor options; move controls options from ngw to webmap ([611b8c0](https://github.com/nextgis/nextgis_frontend/commit/611b8c0af120c726ccf42eca0a608edbd54bb1c1))
+
+
+### Features
+
+* **vue:** selection for NgwLayersList ([7029a73](https://github.com/nextgis/nextgis_frontend/commit/7029a73555d73b1937f44d82ce0d5942fa933c49))
+* **vue:** use vuetify tree prop to NgwLayersList selection strategy ([2c5f5e6](https://github.com/nextgis/nextgis_frontend/commit/2c5f5e663a07b2945c7884ffb6902d0463ee225e))
+
+
+
+
+
 # [1.0.0-alpha.10](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-alpha.9...v1.0.0-alpha.10) (2020-10-20)
 
 
