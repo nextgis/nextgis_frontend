@@ -111,11 +111,11 @@ export class WebMapMain<
     if (mapOptions) {
       this.options = deepmerge((OPTIONS as O) || {}, mapOptions) as O;
     }
-    if (mapOptions.runtimeParams) {
-      this.runtimeParams = mapOptions.runtimeParams;
+    if (this.options.runtimeParams) {
+      this.runtimeParams = this.options.runtimeParams;
     }
     this._addEventsListeners();
-    if (mapOptions.create) {
+    if (this.options.create) {
       this.create();
     }
   }

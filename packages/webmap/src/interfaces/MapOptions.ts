@@ -4,11 +4,12 @@ import { RuntimeParams } from './RuntimeParams';
 import { MapAdapter, FitOptions } from './MapAdapter';
 import { LayerAdapter, AdapterOptions } from './LayerAdapter';
 import { LngLatArray, LngLatBoundsArray, Type } from './BaseTypes';
+import { ControlsOptions, MapControls } from './MapControl';
 
 /**
  * @public
  */
-export interface MapOptions {
+export interface MapOptions<C = any> {
   /**
    * The main initialization property of WebMap.
    * Determines the way of interaction with the selected GIS framework.
@@ -104,6 +105,41 @@ export interface MapOptions {
    * The callback function is calling before adding each layer
    */
   onBeforeAddLayer?: OnBeforeLayerAdd;
+
+  /**
+   * List of controls that will be initialized when creating a map instance.
+   * It can be defined as a string, then points to the corresponding entry in the
+   * [controlAdapters](webmap-api#MapAdapter).
+   *
+   * @defaultValue ['ZOOM', 'ATTRIBUTION']
+   *
+   * @example
+   * ```javascript
+   * {
+   *   controls: [
+   *     'ZOOM',
+   *     new CustomControl()
+   *   ]
+   * }
+   * ```
+   */
+  controls?: Array<keyof MapControls | C>;
+  /**
+   * Set options for those controls that are specified by name.
+   *
+   * @example
+   * ```javascript
+   * {
+   *   controls: ['ZOOM', 'button1', 'button2'],
+   *   controlsOptions: {
+   *     'ZOOM': { position: 'top-right' },
+   *     'button1': { control: 'BUTTON', position: 'top-left' },
+   *     'button2': { control: 'BUTTON' },
+   *   }
+   * }
+   * ```
+   */
+  controlsOptions?: ControlsOptions;
 }
 
 /**
