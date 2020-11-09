@@ -133,7 +133,6 @@ export class NgwLayersList extends Vue {
         selectable: true,
       },
       scopedSlots: {
-        ...this.$scopedSlots,
         label: (props) => {
           const name = props.item.name;
           return h('span', {
@@ -143,6 +142,7 @@ export class NgwLayersList extends Vue {
             },
           });
         },
+        ...this.$scopedSlots,
       },
       // domProps: { id: this.id }
     };
