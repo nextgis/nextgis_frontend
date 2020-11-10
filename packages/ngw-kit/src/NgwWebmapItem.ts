@@ -148,16 +148,17 @@ export class NgwWebmapItem extends Item<ItemOptions> {
       typeof transparency === 'number' ? (100 - transparency) / 100 : undefined;
     if (item.item_type === 'group' || item.item_type === 'root') {
       if (item.children && item.children.length) {
-        this.getChildren(item).forEach((x) => {
-          const children = new NgwWebmapItem(
-            this.webMap,
-            x,
-            this.options,
-            this.connector,
-            this
-          );
-          this.tree.addChild(children);
-        });
+        this.getChildren(item)
+          .forEach((x) => {
+            const children = new NgwWebmapItem(
+              this.webMap,
+              x,
+              this.options,
+              this.connector,
+              this
+            );
+            this.tree.addChild(children);
+          });
       }
     } else {
       let adapter: LayerAdapterDefinition | undefined;
@@ -222,7 +223,7 @@ export class NgwWebmapItem extends Item<ItemOptions> {
   }
 
   protected getChildren(item: TreeGroup): (TreeGroup | TreeLayer)[] {
-    return item.children;
+    return item.children.reverse();
   }
 
   private _mapScaleToZoomLevel(scale: number) {
