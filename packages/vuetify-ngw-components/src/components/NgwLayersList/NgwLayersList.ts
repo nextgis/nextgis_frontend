@@ -257,7 +257,7 @@ export class NgwLayersList extends Vue {
     if (webMapLayer.layer && webMapLayer.layer.tree) {
       const tree = webMapLayer.layer.tree;
       const children = tree.getChildren() as NgwWebmapItem[];
-      item.children = this._createWebMapTree(children);
+      item.children = this._createWebMapTree([...children].reverse());
       const webMapLayerVisible = webMapLayer.layer.properties.get('visibility');
       visible = webMapLayerVisible ?? true;
     } else if (this.webMap) {
@@ -303,7 +303,7 @@ export class NgwLayersList extends Vue {
       if (x.item.item_type === 'group') {
         const children = x.tree.getChildren<NgwWebmapItem>();
         if (children && children.length) {
-          item.children = this._createWebMapTree(children);
+          item.children = this._createWebMapTree([...children].reverse());
         }
       }
       const visible = x.properties.get('visibility');
