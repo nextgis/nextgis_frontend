@@ -38,6 +38,7 @@ export class NgwLayersList extends Vue {
   items: VueTreeItem[] = [];
 
   selection: string[] = [];
+  open: string[] = [];
 
   private _selectionWatcher?: () => void;
   private _layers: Array<LayerAdapter | ResourceAdapter> = [];
@@ -130,6 +131,7 @@ export class NgwLayersList extends Vue {
       attrs: {
         ...this.$attrs,
         items: this.items,
+        open: this.open,
         selectable: true,
       },
       scopedSlots: {
@@ -193,6 +195,7 @@ export class NgwLayersList extends Vue {
 
   private async _updateItems() {
     this.selection = [];
+    this.open = [];
     this._layers = [];
     let layersList: LayerAdapter[] | undefined;
     if (this.webMap) {
@@ -257,7 +260,7 @@ export class NgwLayersList extends Vue {
     if (webMapLayer.layer && webMapLayer.layer.tree) {
       const tree = webMapLayer.layer.tree;
       const children = tree.getChildren() as NgwWebmapItem[];
-      item.children = this._createWebMapTree([...children].reverse());
+      item.children = this._createWebMapTree(children);
       const webMapLayerVisible = webMapLayer.layer.properties.get('visibility');
       visible = webMapLayerVisible ?? true;
     } else if (this.webMap) {
@@ -285,7 +288,7 @@ export class NgwLayersList extends Vue {
   private _createWebMapTree(items: NgwWebmapItem[]) {
     const treeItems: VueTreeItem[] = [];
 
-    items.forEach((x) => {
+    [...items].reverse().forEach((x) => {
       const id = this._getLayerId(x);
 
       if (this.showLayer) {
@@ -303,7 +306,10 @@ export class NgwLayersList extends Vue {
       if (x.item.item_type === 'group') {
         const children = x.tree.getChildren<NgwWebmapItem>();
         if (children && children.length) {
-          item.children = this._createWebMapTree([...children].reverse());
+          item.children = this._createWebMapTree(children);
+        }
+        if (x.item.group_expanded) {
+          this.open.push(id);
         }
       }
       const visible = x.properties.get('visibility');
