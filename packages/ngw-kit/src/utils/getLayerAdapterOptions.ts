@@ -28,6 +28,7 @@ export function getLayerAdapterOptions(
           url,
           resourceId,
           headers: options.headers,
+          params: {resource: resourceId},
           updateWmsParams: (params: any) =>
             updateImageParams(params, resourceId),
         };
