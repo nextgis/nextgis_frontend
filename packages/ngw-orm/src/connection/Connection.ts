@@ -114,6 +114,24 @@ export class Connection {
     return resource;
   }
 
+  async updateResource(Resource: typeof BaseResource): Promise<void> {
+    const item = Resource.item;
+    if (item && item.resource) {
+      const payload = this.getResourceNgwPayload(
+        Resource,
+        item.resource.parent.id
+      );
+      delete payload?.resource?.cls;
+      await this.driver.put(
+        'resource.item',
+        {
+          data: payload,
+        },
+        { id: item.resource.id }
+      );
+    }
+  }
+
   async getResourceItem(
     resource: ResourceDefinition | DeepPartial<Resource>
   ): Promise<ResourceItem | undefined> {
@@ -147,27 +165,28 @@ export class Connection {
   getResourceNgwPayload(
     resource: typeof BaseResource,
     parent: number,
-    options: SyncOptions
+    opt: Partial<SyncOptions> = {}
   ): DeepPartial<ResourceSyncItem> | undefined {
     const table = getMetadataArgsStorage().filterTables(
       resource
     )[0] as ResourceMetadataArgs;
     if (table) {
+      const options = { ...table, ...opt } as SyncOptions;
       const resourceItem: DeepPartial<ResourceSyncItem> = {
         resource: {
           cls: table.type,
           parent: {
             id: parent,
           },
-          display_name: options.display_name || table.display_name,
+          display_name: options.display_name,
         },
         resmeta: {
           items: {},
         },
       };
       if (resourceItem.resource) {
-        const keyname = options.keyname || table.keyname;
-        const description = options.description || table.description;
+        const keyname = options.keyname;
+        const description = options.description;
         if (keyname) {
           resourceItem.resource.keyname = keyname;
         }
