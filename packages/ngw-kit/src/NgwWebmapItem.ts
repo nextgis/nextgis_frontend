@@ -148,17 +148,16 @@ export class NgwWebmapItem extends Item<ItemOptions> {
       typeof transparency === 'number' ? (100 - transparency) / 100 : undefined;
     if (item.item_type === 'group' || item.item_type === 'root') {
       if (item.children && item.children.length) {
-        this.getChildren(item)
-          .forEach((x) => {
-            const children = new NgwWebmapItem(
-              this.webMap,
-              x,
-              this.options,
-              this.connector,
-              this
-            );
-            this.tree.addChild(children);
-          });
+        this.getChildren(item).forEach((x) => {
+          const children = new NgwWebmapItem(
+            this.webMap,
+            x,
+            this.options,
+            this.connector,
+            this
+          );
+          this.tree.addChild(children);
+        });
       }
     } else {
       let adapter: LayerAdapterDefinition | undefined;
@@ -166,6 +165,7 @@ export class NgwWebmapItem extends Item<ItemOptions> {
         visibility: false,
         headers: this.options.headers,
         crossOrigin: this.options.crossOrigin,
+        params: { resource: this.item.resourceId },
       };
       if (this.options.order) {
         const subOrder =
@@ -183,8 +183,6 @@ export class NgwWebmapItem extends Item<ItemOptions> {
           ? this._mapScaleToZoomLevel(item.layer_min_scale_denom)
           : this.webMap.options.minZoom;
         objectAssign(options, {
-          // FIXME: why items?
-          // ...item,
           updateWmsParams: item.updateWmsParams,
           url: item.url,
           headers: this.options.headers,

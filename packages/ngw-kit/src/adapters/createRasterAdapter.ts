@@ -65,7 +65,7 @@ export async function createRasterAdapter({
             const layerAdapterOptions: ImageAdapterOptions = {
               ...opt,
               layers: String(opt.resourceId),
-              resourceId: opt.resourceId,
+              params: { resource: opt.resourceId },
             };
             this.options = { ...this.options, ...layerAdapterOptions };
           } else {
