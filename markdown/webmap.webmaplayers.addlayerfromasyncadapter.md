@@ -14,7 +14,7 @@ addLayerFromAsyncAdapter<K extends keyof LayerAdapters, O extends AdapterOptions
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  adapter | AdapterConstructor |  |
+|  adapter | [AdapterConstructor](./webmap.adapterconstructor.md) |  |
 |  options | O \| [LayerAdaptersOptions](./webmap.layeradaptersoptions.md)<!-- -->\[K\] |  |
 |  order | number |  |
 

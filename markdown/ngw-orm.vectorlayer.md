@@ -36,5 +36,6 @@ export declare class VectorLayer<G extends Geometry = Geometry> extends BaseReso
 |  [save(this, entityOrEntities, options)](./ngw-orm.vectorlayer.save.md) | <code>static</code> | Saves one or many given entities. |
 |  [toGeoJson()](./ngw-orm.vectorlayer.togeojson.md) |  |  |
 |  [toJSON()](./ngw-orm.vectorlayer.tojson.md) |  |  |
-|  [toTypescript()](./ngw-orm.vectorlayer.totypescript.md) | <code>static</code> |  |
+|  [toTypescript(opt)](./ngw-orm.vectorlayer.totypescript.md) | <code>static</code> |  |
+|  [validate()](./ngw-orm.vectorlayer.validate.md) | <code>static</code> |  |
 

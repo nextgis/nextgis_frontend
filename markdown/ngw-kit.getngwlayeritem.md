@@ -4,23 +4,28 @@
 
 ## getNgwLayerItem() function
 
+> Warning: This API is now obsolete.
+> 
+> use [fetchNgwLayerItem()](./ngw-kit.fetchngwlayeritem.md) instead
+> 
+
 <b>Signature:</b>
 
 ```typescript
-export declare function getNgwLayerItem<G extends Geometry | null = Geometry, P extends JsonMap = JsonMap>(options: {
+export declare function getNgwLayerItem<G extends Geometry = Geometry, P extends GeoJsonProperties = GeoJsonProperties>(options: {
     resourceId: number;
     featureId: number;
     connector: NgwConnector;
-} & FilterOptions): CancelablePromise<FeatureItem>;
+} & NgwFeatureRequestOptions): CancelablePromise<FeatureItem<P, G>>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | { resourceId: number; featureId: number; connector: NgwConnector; } &amp; [FilterOptions](./webmap.filteroptions.md) |  |
+|  options | { resourceId: number; featureId: number; connector: NgwConnector; } &amp; [NgwFeatureRequestOptions](./ngw-kit.ngwfeaturerequestoptions.md) |  |
 
 <b>Returns:</b>
 
-CancelablePromise&lt;[FeatureItem](./ngw-connector.featureitem.md)<!-- -->&gt;
+CancelablePromise&lt;[FeatureItem](./ngw-connector.featureitem.md)<!-- -->&lt;P, G&gt;&gt;
 

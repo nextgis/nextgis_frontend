@@ -8,6 +8,6 @@
 
 ```typescript
 resmeta: {
-        items: JsonMap;
+        items: Record<string, any>;
     };
 ```

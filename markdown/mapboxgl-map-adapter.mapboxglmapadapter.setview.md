@@ -14,7 +14,7 @@ setView(center: LngLatArray, zoom?: number): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  center | LngLatArray |  |
+|  center | [LngLatArray](./utils.lnglatarray.md) |  |
 |  zoom | number |  |
 
 <b>Returns:</b>

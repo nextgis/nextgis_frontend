@@ -24,4 +24,5 @@ export interface NgwLayerOptionsAdditional<T extends NgwLayerAdapterType = NgwLa
 |  [id](./ngw-kit.ngwlayeroptionsadditional.id.md) | string |  |
 |  [meta](./ngw-kit.ngwlayeroptionsadditional.meta.md) | P |  |
 |  [simplification](./ngw-kit.ngwlayeroptionsadditional.simplification.md) | number |  |
+|  [tileNoData](./ngw-kit.ngwlayeroptionsadditional.tilenodata.md) | [TileNoData](./ngw-kit.tilenodata.md) | Parameter for <code>TILE</code> and <code>IMAGE</code> adapters to say NGW what will be returned if there is no data to render. In NGW api this parameter is written as follows: <code>nd=204&#124;404&#124;200</code>, 200 by default. But in frontend libraries default value id 204 (no content) for performance purpose. 204 |
 

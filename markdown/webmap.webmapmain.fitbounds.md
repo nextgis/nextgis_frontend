@@ -16,7 +16,7 @@ fitBounds(bounds: LngLatBoundsArray, options?: FitOptions): this;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  bounds | LngLatBoundsArray | Array of coordinates, measured in degrees, in \[west, south, east, north\] order. |
+|  bounds | [LngLatBoundsArray](./utils.lnglatboundsarray.md) | Array of coordinates, measured in degrees, in \[west, south, east, north\] order. |
 |  options | [FitOptions](./webmap.fitoptions.md) |  |
 
 <b>Returns:</b>

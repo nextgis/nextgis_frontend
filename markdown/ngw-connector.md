@@ -43,6 +43,7 @@ Make sure CORS is registered in the [NextGIS Web settings](https://docs.nextgis.
 |  [LookupTableResource](./ngw-connector.lookuptableresource.md) |  |
 |  [NgwConnectorOptions](./ngw-connector.ngwconnectoroptions.md) |  |
 |  [NgwDateFormat](./ngw-connector.ngwdateformat.md) |  |
+|  [NgwDateTimeFormat](./ngw-connector.ngwdatetimeformat.md) |  |
 |  [NgwExtent](./ngw-connector.ngwextent.md) |  |
 |  [NgwFile](./ngw-connector.ngwfile.md) |  |
 |  [Params](./ngw-connector.params.md) |  |

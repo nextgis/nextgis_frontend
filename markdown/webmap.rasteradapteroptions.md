@@ -17,6 +17,6 @@ export interface RasterAdapterOptions extends AdapterOptions
 |  Property | Type | Description |
 |  --- | --- | --- |
 |  [headers](./webmap.rasteradapteroptions.headers.md) | Record&lt;string, any&gt; |  |
-|  [subdomains](./webmap.rasteradapteroptions.subdomains.md) | string |  |
+|  [subdomains](./webmap.rasteradapteroptions.subdomains.md) | string \| string\[\] |  |
 |  [url](./webmap.rasteradapteroptions.url.md) | string |  |
 

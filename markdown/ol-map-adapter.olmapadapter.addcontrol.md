@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-addControl(control: Control, position: ControlPositions): Control | undefined;
+addControl(control: Control, position: ControlPosition): Control | undefined;
 ```
 
 ## Parameters
@@ -15,7 +15,7 @@ addControl(control: Control, position: ControlPositions): Control | undefined;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  control | Control |  |
-|  position | [ControlPositions](./webmap.controlpositions.md) |  |
+|  position | [ControlPosition](./webmap.controlposition.md) |  |
 
 <b>Returns:</b>
 

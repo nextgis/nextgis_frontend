@@ -28,5 +28,6 @@ export declare class BaseResource
 |  [getNgwPayload(resource, parent, options)](./ngw-orm.baseresource.getngwpayload.md) | <code>static</code> |  |
 |  [receive(item, ResCls)](./ngw-orm.baseresource.receive.md) | <code>static</code> |  |
 |  [sync(options, connectionOrOptions)](./ngw-orm.baseresource.sync.md) | <code>static</code> |  |
-|  [toTypescript()](./ngw-orm.baseresource.totypescript.md) | <code>static</code> |  |
+|  [toTypescript(opt)](./ngw-orm.baseresource.totypescript.md) | <code>static</code> |  |
+|  [validate()](./ngw-orm.baseresource.validate.md) | <code>static</code> |  |
 

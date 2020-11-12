@@ -7,18 +7,18 @@
 <b>Signature:</b>
 
 ```typescript
-static getNgwPayload(resource: Type<VectorLayer>, parent: number, options: SyncOptions): DeepPartial<VectorResourceSyncItem> | undefined;
+static getNgwPayload(resource: typeof VectorLayer, parent: number, options: SyncOptions): DeepPartial<VectorResourceSyncItem | VectorResourceUpdateItem> | undefined;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  resource | [Type](./utils.type.md)<!-- -->&lt;[VectorLayer](./ngw-orm.vectorlayer.md)<!-- -->&gt; |  |
+|  resource | typeof [VectorLayer](./ngw-orm.vectorlayer.md) |  |
 |  parent | number |  |
 |  options | SyncOptions |  |
 
 <b>Returns:</b>
 
-[DeepPartial](./utils.deeppartial.md)<!-- -->&lt;VectorResourceSyncItem&gt; \| undefined
+[DeepPartial](./utils.deeppartial.md)<!-- -->&lt;VectorResourceSyncItem \| VectorResourceUpdateItem&gt; \| undefined
 

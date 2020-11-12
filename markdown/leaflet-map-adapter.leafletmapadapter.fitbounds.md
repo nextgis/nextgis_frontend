@@ -14,7 +14,7 @@ fitBounds(e: LngLatBoundsArray): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  e | LngLatBoundsArray |  |
+|  e | [LngLatBoundsArray](./utils.lnglatboundsarray.md) |  |
 
 <b>Returns:</b>
 
