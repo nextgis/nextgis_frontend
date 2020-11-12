@@ -35,7 +35,7 @@ import {
   fetchNgwLayerItems,
   fetchNgwLayerFeature,
   fetchNgwLayerFeatures,
-  getIdentifyGeoJson,
+  fetchIdentifyGeoJson,
   fetchNgwResourceExtent,
   sendIdentifyRequest,
   getCompanyLogo,
@@ -253,11 +253,11 @@ export class NgwMap<
     });
   }
 
-  getIdentifyGeoJson(
+  fetchIdentifyGeoJson(
     identify: NgwIdentify,
     multiple = false
   ): CancelablePromise<Feature | undefined> {
-    const geojson = getIdentifyGeoJson({
+    const geojson = fetchIdentifyGeoJson({
       identify,
       connector: this.connector,
       multiple,
@@ -267,6 +267,16 @@ export class NgwMap<
     } else {
       return CancelablePromise.resolve(geojson);
     }
+  }
+
+  /**
+   * @deprecated use {@link fetchIdentifyGeoJson} instead
+   */
+  getIdentifyGeoJson(
+    identify: NgwIdentify,
+    multiple = false
+  ): CancelablePromise<Feature | undefined> {
+    return this.fetchIdentifyGeoJson(identify, multiple);
   }
 
   async getNgwLayers(): Promise<NgwLayers> {
@@ -460,7 +470,6 @@ export class NgwMap<
         appendNgwResources(resources, x, {}, overwriteOptions);
       });
     }
-
     for (const r of resources) {
       try {
         await this.addNgwLayer(r);
@@ -495,9 +504,9 @@ export class NgwMap<
     this.addBaseLayer('QMS', qmsLayerOptions);
   }
 
-  private async _selectFromNgwVector(
+  private _selectFromNgwVector(
     ev: OnLayerClickOptions
-  ): Promise<FeatureLayersIdentify | undefined> {
+  ): FeatureLayersIdentify | undefined {
     const layer: ResourceAdapter = ev.layer as ResourceAdapter;
     // item property means layer is NgwResource
     const id = layer.item && layer.item.resource.id;

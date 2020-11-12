@@ -4,7 +4,7 @@ import NgwConnector, {
   ResourceItem,
 } from '@nextgis/ngw-connector';
 
-export function fetchNgwWebmapExtent(
+export function getNgwWebmapExtent(
   webmap: WebmapResource
 ): LngLatBoundsArray | undefined {
   const bottom = webmap['extent_bottom'];
@@ -41,7 +41,7 @@ export async function fetchNgwResourceExtent(
   connector: NgwConnector
 ): Promise<LngLatBoundsArray | undefined> {
   if (item.webmap) {
-    return fetchNgwWebmapExtent(item.webmap);
+    return getNgwWebmapExtent(item.webmap);
   } else {
     const resource = item.resource;
     if (resource.cls.indexOf('style') !== -1) {
@@ -56,14 +56,6 @@ export async function fetchNgwResourceExtent(
   }
 }
 
-/**
- * @deprecated use {@link fetchNgwWebmapExtent} instead
- */
-export function getNgwWebmapExtent(
-  webmap: WebmapResource
-): LngLatBoundsArray | undefined {
-  return fetchNgwWebmapExtent(webmap);
-}
 /**
  * @deprecated use {@link fetchNgwLayerExtent} instead
  */

@@ -22,7 +22,7 @@ export class ImageAdapter
          * TODO: safe remove, use only options.params
          */
         ...options,
-        ...options.params
+        ...options.params,
       });
       if (updateWmsParamsFromOpt) {
         const updateWmsParams = this.layer.updateWmsParams;

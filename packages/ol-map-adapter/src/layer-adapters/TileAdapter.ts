@@ -11,9 +11,21 @@ export class TileAdapter implements MainLayerAdapter {
   constructor(public map: Map, public options: TileAdapterOptions) {}
 
   addLayer(options: TileAdapterOptions): TileLayer {
+    const urls: string[] = [];
+    const subdomains: string[] | undefined =
+      typeof options.subdomains === 'string'
+        ? options.subdomains.split('')
+        : options.subdomains;
+    if (subdomains?.length) {
+      subdomains.forEach((x) => {
+        urls.push(options.url.replace(/{s}/, x));
+      });
+    } else {
+      urls.push(options.url);
+    }
     const xyzOpt: Options = {
       attributions: options.attribution ? [options.attribution] : [],
-      url: options.url,
+      urls,
       // tilePixelRatio: 2
     };
     if (options.crossOrigin) {
@@ -29,6 +41,7 @@ export class TileAdapter implements MainLayerAdapter {
     const layer = new TileLayer({
       source,
       opacity: options.opacity,
+
       ...resolutionOptions(this.map, options),
     });
     return layer;

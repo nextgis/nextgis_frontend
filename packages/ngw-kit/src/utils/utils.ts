@@ -95,16 +95,16 @@ export function getZoomFromScale(scale: number): number {
   return Math.log(scale / 256) / Math.LN2;
 }
 
-export function setScaleRatio(scale: number, lat = 104): number {
+export function setScaleRatio(scale: number, lat = 0): number {
   // TODO: get real center
   // webmap does not contain center yet
   // const center = [104, 45]; // this.webMap.getCenter();
-  if (lat) {
-    const centerLat = lat;
-    const crsScale =
-      (pixelsInMeterWidth() * getMapWidthForLanInMeters(centerLat)) / scale;
-    const zoom = getZoomFromScale(crsScale);
-    return zoom;
-  }
-  return Math.round(Math.log(591657550.5 / (scale / 2)) / Math.log(2));
+
+  const centerLat = lat;
+  const crsScale =
+    (pixelsInMeterWidth() * getMapWidthForLanInMeters(centerLat)) / scale;
+  const zoom = getZoomFromScale(crsScale);
+  return zoom;
+
+  // return Math.round(Math.log(591657550.5 / (scale / 2)) / Math.log(2));
 }
