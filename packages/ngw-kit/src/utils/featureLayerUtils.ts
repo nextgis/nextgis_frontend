@@ -304,9 +304,9 @@ export function prepareFieldsToNgw<T extends any>(
             typeof prop === 'boolean' || typeof prop === 'number'
               ? Number(!!prop)
               : null;
-        } else if (x.datatype === 'DATE') {
+        } else if (x.datatype === 'DATE' || x.datatype === 'DATETIME') {
           let dt: Date | undefined;
-          if (typeof prop === 'object') {
+          if (typeof prop === 'object' && !((prop as any) instanceof Date)) {
             value = prop;
           } else {
             if ((prop as any) instanceof Date) {
@@ -323,6 +323,11 @@ export function prepareFieldsToNgw<T extends any>(
                 month: dt.getMonth(),
                 day: dt.getDay(),
               };
+              if (x.datatype === 'DATETIME') {
+                value.hour = dt.getHours();
+                value.minute = dt.getMinutes();
+                value.second = dt.getSeconds();
+              }
             }
           }
         }

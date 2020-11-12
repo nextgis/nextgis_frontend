@@ -5,7 +5,7 @@ import {
   WmsAdapterOptions,
 } from '@nextgis/webmap';
 
-import { NgwLayerOptions, ResourceIdNgwLayerOptions } from '../interfaces';
+import { NgwLayerOptions, ResourceIdNgwLayerOptions, TileNoData } from '../interfaces';
 import { updateImageParams } from './utils';
 
 export function getLayerAdapterOptions(
@@ -19,6 +19,7 @@ export function getLayerAdapterOptions(
   const isImageAllowed = layerAdapters ? layerAdapters.IMAGE : true;
 
   const resourceId = (options as ResourceIdNgwLayerOptions).resourceId;
+  const nd: TileNoData = options.tileNoData ? options.tileNoData : 204;
 
   if (resourceId) {
     if (adapter === 'IMAGE') {
@@ -28,9 +29,10 @@ export function getLayerAdapterOptions(
           url,
           resourceId,
           headers: options.headers,
-          updateWmsParams: (params: any) =>
-            updateImageParams(params, resourceId),
-        };
+          params: { resource: resourceId, nd: nd },
+          updateWmsParams: (params: Record<string, any>) =>
+            updateImageParams({nd: nd, ...params}, resourceId),
+        } as ImageAdapterOptions;
       } else {
         adapter = 'TILE';
       }
@@ -72,7 +74,9 @@ export function getLayerAdapterOptions(
       url =
         baseUrl +
         '/api/component/render/tile?z={z}&x={x}&y={y}&resource=' +
-        resourceId;
+        resourceId +
+        '&nd=' +
+        nd;
       return { url, adapter };
     }
   } else {
