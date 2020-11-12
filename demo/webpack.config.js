@@ -4,16 +4,13 @@ const { VueLoaderPlugin } = require('vue-loader');
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const generateExamples = require('./scripts/generateExamplesScheme');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 // const utils = require('../../build/utils');
 
 const entry = './src/index.ts';
 
 const ASSET_PATH = process.env.ASSET_PATH || '/';
-
-const sassLoaderOptions = {
-  implementation: require('sass'),
-  // indentedSyntax: true // optional
-};
 
 try {
   // const Fiber = require('fibers');
@@ -22,6 +19,21 @@ try {
   // ignore
 }
 
+const sassLoaderOptions = {
+  implementation: require('sass'),
+  // sassOptions: {
+  //   fiber: require('fibers'),
+  //   // indentedSyntax: true, // optional
+  // },
+};
+
+const cssLoader = {
+  loader: 'css-loader',
+  options: {
+    esModule: false,
+  },
+};
+
 module.exports = (env, argv) => {
   const isProd = argv.mode === 'production';
 
@@ -29,15 +41,6 @@ module.exports = (env, argv) => {
     {
       test: /\.vue$/,
       loader: 'vue-loader',
-    },
-    {
-      enforce: 'pre',
-      test: /\.(t|j)sx?$/,
-      loader: 'eslint-loader',
-      exclude: /node_modules/,
-      options: {
-        fix: true,
-      },
     },
     {
       test: /\.tsx?$/,
@@ -72,13 +75,13 @@ module.exports = (env, argv) => {
     },
     {
       test: /\.css$/i,
-      use: ['style-loader', 'css-loader'],
+      use: [isProd ? MiniCssExtractPlugin.loader : 'style-loader', cssLoader],
     },
     {
       test: /\.s(c|a)ss$/,
       use: [
-        'vue-style-loader',
-        'css-loader',
+        isProd ? MiniCssExtractPlugin.loader : 'vue-style-loader',
+        cssLoader,
         {
           loader: 'sass-loader',
           options: sassLoaderOptions,
@@ -88,6 +91,7 @@ module.exports = (env, argv) => {
   ];
 
   let plugins = [
+    new ESLintPlugin({ fix: true, files: ['src/'], extensions: ['ts'] }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(argv.mode || 'development'),
       'process.env.EXAMPLES': JSON.stringify(generateExamples()),
@@ -107,6 +111,7 @@ module.exports = (env, argv) => {
 
   if (isProd) {
     plugins = plugins.concat([
+      new MiniCssExtractPlugin(),
       // new BundleAnalyzerPlugin()
     ]);
   }

@@ -305,7 +305,7 @@ export interface GeoJsonAdapterOptions<F extends Feature = Feature, L = any>
  */
 export interface RasterAdapterOptions extends AdapterOptions {
   url: string;
-  subdomains?: string;
+  subdomains?: string | string[];
   headers?: Record<string, any>;
 }
 
@@ -466,8 +466,11 @@ export interface MainLayerAdapter<
 
   showLayer?(layer?: L): void;
   hideLayer?(layer?: L): void;
-
-  getExtent?(): LngLatBoundsArray | Promise<LngLatBoundsArray> | undefined;
+  // TODO: always return Promise
+  getExtent?():
+    | LngLatBoundsArray
+    | Promise<LngLatBoundsArray | undefined>
+    | undefined;
 
   // remove from this place
   getDependLayers?(): L[];

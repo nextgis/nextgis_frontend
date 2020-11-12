@@ -5,7 +5,11 @@ import {
   WmsAdapterOptions,
 } from '@nextgis/webmap';
 
-import { NgwLayerOptions, ResourceIdNgwLayerOptions, TileNoData } from '../interfaces';
+import {
+  NgwLayerOptions,
+  ResourceIdNgwLayerOptions,
+  TileNoData,
+} from '../interfaces';
 import { updateImageParams } from './utils';
 
 export function getLayerAdapterOptions(
@@ -31,7 +35,7 @@ export function getLayerAdapterOptions(
           headers: options.headers,
           params: { resource: resourceId, nd: nd },
           updateWmsParams: (params: Record<string, any>) =>
-            updateImageParams({nd: nd, ...params}, resourceId),
+            updateImageParams({ nd: nd, ...params }, resourceId),
         } as ImageAdapterOptions;
       } else {
         adapter = 'TILE';

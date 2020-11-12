@@ -1,6 +1,11 @@
 <template>
   <div>
-    <v-app-bar :clipped-left="$vuetify.breakpoint.lgAndUp" color="#e5eef7" fixed app>
+    <v-app-bar
+      :clipped-left="$vuetify.breakpoint.lgAndUp"
+      color="#e5eef7"
+      fixed
+      app
+    >
       <v-toolbar-title class="ml-0 pl-0">
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <router-link to="/">
@@ -9,7 +14,12 @@
       </v-toolbar-title>
       <span class="title ml-3">Frontend</span>
       <v-spacer></v-spacer>
-      <v-btn icon large href="https://github.com/nextgis/nextgis_frontend" target="_blank">
+      <v-btn
+        icon
+        large
+        href="https://github.com/nextgis/nextgis_frontend"
+        target="_blank"
+      >
         <v-icon large>mdi-github-circle</v-icon>
       </v-btn>
     </v-app-bar>
@@ -20,11 +30,11 @@
       width="300"
       v-model="drawer"
       dark
-      style="background:#0070c5"
+      style="background: #0070c5"
       fixed
       app
     >
-    <v-text-field
+      <v-text-field
         v-model="search"
         label="Search"
         class="pl-3 pr-3 pt-3"
@@ -50,22 +60,28 @@
         class="pt-3 pb-3"
       >
         <template slot="prepend" slot-scope="{ item }">
-          <v-icon v-if="item.icon">{{item.icon}}</v-icon>
+          <v-icon v-if="item.icon">{{ item.icon }}</v-icon>
         </template>
         <template slot="label" slot-scope="{ item }">
-          <span :class="[item.priority <= 10 ? 'main-page' : '']">{{item.name}}</span>
+          <span :class="[item.priority <= 10 ? 'main-page' : '']">{{
+            item.name
+          }}</span>
         </template>
       </v-treeview>
     </v-navigation-drawer>
 
     <v-main>
-      <component v-if="current" :is="current.component" :item="current"></component>
+      <component
+        v-if="current"
+        :is="current.component"
+        :item="current"
+      ></component>
     </v-main>
   </div>
 </template>
 
 <script lang="ts">
-export { MainPage as default } from "./MainPage";
+export { MainPage as default } from './MainPage';
 </script>
 
 <style>
@@ -73,7 +89,7 @@ code:after,
 kbd:after,
 code:before,
 kbd:before {
-  content: "" !important;
+  content: '' !important;
   letter-spacing: 0 !important;
 }
 
@@ -108,7 +124,8 @@ kbd:before {
 
 .v-application code {
   /* rewrite vuetify */
-  color: inherit !important;
+  color: #444;
+  background: #F0F0F0;
 }
 
 code {

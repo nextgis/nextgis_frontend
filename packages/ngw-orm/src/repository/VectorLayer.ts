@@ -10,7 +10,7 @@ import {
 } from 'geojson';
 import { FilterOptions } from '@nextgis/webmap';
 import { PropertiesFilter } from '@nextgis/properties-filter';
-import { Type, DeepPartial } from '@nextgis/utils';
+import { DeepPartial } from '@nextgis/utils';
 import {
   GetNgwLayerItemsOptions,
   fetchNgwLayerItems,

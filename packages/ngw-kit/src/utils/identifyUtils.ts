@@ -58,7 +58,7 @@ export function getIdentifyItems(
   return paramsList;
 }
 
-export function getIdentifyGeoJson<
+export function fetchIdentifyGeoJson<
   G extends Geometry = Geometry,
   P extends JsonMap = JsonMap
 >(
@@ -84,10 +84,22 @@ export function getIdentifyGeoJson<
   }
 
   const params = getIdentifyItems(identify);
-  if (params) {
+  if (params && params.length) {
     return fetchNgwLayerFeature({ connector, ...params[0] });
   }
   return CancelablePromise.resolve(undefined);
+}
+
+/**
+ * @deprecated use {@link fetchIdentifyGeoJson} instead
+ */
+export function getIdentifyGeoJson<
+  G extends Geometry = Geometry,
+  P extends JsonMap = JsonMap
+>(
+  options: GetIdentifyGeoJsonOptions
+): CancelablePromise<Feature<G, P> | undefined> {
+  return fetchIdentifyGeoJson(options);
 }
 
 export function sendIdentifyRequest(
