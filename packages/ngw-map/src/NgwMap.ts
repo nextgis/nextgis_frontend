@@ -409,7 +409,7 @@ export class NgwMap<
   }
 
   /**
-   * @deprecated use {@link NgwMap.getNgwLayerFeature} instead
+   * @deprecated use {@link NgwMap.fetchNgwLayerFeature} instead
    */
   getNgwLayerFeature<
     G extends Geometry = Geometry,
@@ -418,7 +418,7 @@ export class NgwMap<
     resourceId: number;
     featureId: number;
   }): CancelablePromise<Feature<G, P>> {
-    return this.getNgwLayerFeature(options);
+    return this.fetchNgwLayerFeature(options);
   }
 
   /**
