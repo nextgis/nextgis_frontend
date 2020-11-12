@@ -27,14 +27,17 @@ export function applyMixins(
   });
 }
 
-export function allProperties(obj: Object) {
+export function allProperties(obj: Record<string, unknown>): string[] {
   return _allProperties(obj);
 }
 
-export function _allProperties(obj: Object, _props: string[] = []) {
+export function _allProperties(
+  obj: Record<string, unknown>,
+  _props: string[] = []
+): string[] {
   for (; obj !== null; obj = Object.getPrototypeOf(obj)) {
     const op = Object.getOwnPropertyNames(obj);
-    for (var i = 0; i < op.length; i++) {
+    for (let i = 0; i < op.length; i++) {
       if (_props.indexOf(op[i]) == -1) {
         _props.push(op[i]);
       }
