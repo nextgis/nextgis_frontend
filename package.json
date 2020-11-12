@@ -4,7 +4,7 @@
   "scripts": {
     "clean": "lerna run clean",
     "dev": "lerna run dev",
-    "prod": "lerna run prod",
+    "prod": "lerna run prod && npm run test:build",
     "lint": "lerna run lint",
     "demo": "yarn run examples && cd ./packages/demo/ && yarn run build",
     "examples": "node ./scripts/updateExamples.js",

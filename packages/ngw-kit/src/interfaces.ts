@@ -260,7 +260,10 @@ export interface ResourceAdapter<
   resourceId: number;
   item?: ResourceItem;
   baselayer?: boolean;
-  getExtent?(): LngLatBoundsArray | Promise<LngLatBoundsArray> | undefined;
+  getExtent?():
+    | LngLatBoundsArray
+    | Promise<LngLatBoundsArray | undefined>
+    | undefined;
   getIdentificationIds(): Promise<number[] | undefined>;
 }
 

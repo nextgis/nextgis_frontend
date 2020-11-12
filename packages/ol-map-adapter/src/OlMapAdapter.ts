@@ -16,7 +16,7 @@ import {
   MapAdapter,
   MapOptions,
   LngLatArray,
-  ControlPositions,
+  ControlPosition,
   LngLatBoundsArray,
   CreateControlOptions,
   ButtonControlOptions,
@@ -234,10 +234,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     return createButtonControl(options);
   }
 
-  addControl(
-    control: Control,
-    position: ControlPositions
-  ): Control | undefined {
+  addControl(control: Control, position: ControlPosition): Control | undefined {
     if (this._panelControl) {
       this._panelControl.addControl(control, position);
       return control;

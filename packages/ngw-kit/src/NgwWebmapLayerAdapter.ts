@@ -131,7 +131,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
     }
     if (ids && ids.length) {
       let deps = this.getDependLayers();
-      deps = deps.sort((a, b) => a.id - b.id);
+      deps = deps.sort((a, b) => b.id - a.id);
       deps.forEach((x) => {
         const item = x.item;
         const parentId = item.parentId;
