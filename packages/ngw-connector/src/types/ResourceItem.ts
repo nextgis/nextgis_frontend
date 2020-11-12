@@ -97,6 +97,12 @@ export interface NgwDateFormat {
   day: number;
 }
 
+export interface NgwDateTimeFormat extends NgwDateFormat {
+  hour: number;
+  minute: number;
+  second: number;
+}
+
 export interface WebmapResource {
   extent_left: number;
   extent_right: number;
