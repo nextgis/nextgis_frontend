@@ -21,6 +21,7 @@ import { resolutionOptions } from '../utils/gerResolution';
 import { styleFunction, labelStyleFunction, getFeature } from '../utils/utils';
 
 import { ForEachFeatureAtPixelCallback } from '../OlMapAdapter';
+import { transformExtent } from 'ol/proj';
 
 type Layer = Base;
 type Layers = LayerDefinition<Feature, Layer>;
@@ -36,6 +37,10 @@ export class GeoJsonAdapter
   private _features: OlFeature<any>[] = [];
   private _selectedFeatures: OlFeature<any>[] = [];
   private _filterFun?: DataLayerFilter<Feature>;
+
+  // TODO: get from OlMapAdapter
+  private displayProjection = 'EPSG:3857';
+  private lonlatProjection = 'EPSG:4326';
 
   constructor(public map: Map, public options: GeoJsonAdapterOptions) {}
 
@@ -183,7 +188,12 @@ export class GeoJsonAdapter
     if (this.layer) {
       const source = this.layer.getSource();
       const bounds = source.getExtent();
-      return bounds as LngLatBoundsArray;
+      const extent = transformExtent(
+        bounds,
+        this.displayProjection,
+        this.lonlatProjection
+      );
+      return extent as LngLatBoundsArray;
     }
   }
 

@@ -18,7 +18,9 @@ export class ImageAdapter implements MainLayerAdapter {
       const imageOptions: ImageWMSOptions = {
         url: options.url,
         params: {
+          /**@deprecated set params.resource instead */
           resource: options.resourceId || options.id,
+          ...options.params
         },
         ratio: 1,
         projection: undefined,
@@ -29,13 +31,14 @@ export class ImageAdapter implements MainLayerAdapter {
         imageOptions.imageLoadFunction = (image, src) => {
           const url = src.split('?')[0];
           const query = src.split('?')[1];
-          const { resource, BBOX, WIDTH, HEIGHT } = queryToObject(query);
+          const { resource, BBOX, WIDTH, HEIGHT, ...params } = queryToObject(query);
           const queryString = objectToQuery(
             updateWmsParams({
               resource,
               bbox: BBOX,
               width: WIDTH,
               height: HEIGHT,
+              ...params
             })
           );
           const headers = options.headers;
