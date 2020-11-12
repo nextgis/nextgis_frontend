@@ -4,6 +4,8 @@
 
 ## NgwConnector.getResource() method
 
+Receive resource from NGW by id, keyname or serch-object parameter.
+
 <b>Signature:</b>
 
 ```typescript
@@ -14,7 +16,7 @@ getResource(resource: ResourceDefinition | DeepPartial<Resource>): CancelablePro
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  resource | [ResourceDefinition](./ngw-connector.resourcedefinition.md) \| [DeepPartial](./utils.deeppartial.md)<!-- -->&lt;[Resource](./ngw-connector.resource.md)<!-- -->&gt; |  |
+|  resource | [ResourceDefinition](./ngw-connector.resourcedefinition.md) \| [DeepPartial](./utils.deeppartial.md)<!-- -->&lt;[Resource](./ngw-connector.resource.md)<!-- -->&gt; | Resource id, keyname or search-object Fetching resource would be cached to speed up next call |
 
 <b>Returns:</b>
 

@@ -7,14 +7,13 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function createNgwMap(mapAdapter: MapAdapter, options: NgwMapOptions): Promise<NgwMap>;
+export declare function createNgwMap(options: NgwMapOptions): Promise<NgwMap>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  mapAdapter | [MapAdapter](./webmap.mapadapter.md) |  |
 |  options | [NgwMapOptions](./ngw-map.ngwmapoptions.md) |  |
 
 <b>Returns:</b>

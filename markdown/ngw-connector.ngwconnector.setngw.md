@@ -4,17 +4,19 @@
 
 ## NgwConnector.setNgw() method
 
+Fast way to specify the connection address to NextGIS Web. The current connection will be severed.
+
 <b>Signature:</b>
 
 ```typescript
-setNgw(url: string): void;
+setNgw(baseUrl: string): void;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  url | string |  |
+|  baseUrl | string | NGW url |
 
 <b>Returns:</b>
 

@@ -15,6 +15,6 @@ export interface LocationEvent
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [bounds](./webmap.locationevent.bounds.md) | LngLatBoundsArray |  |
-|  [lngLat](./webmap.locationevent.lnglat.md) | LngLatArray |  |
+|  [bounds](./webmap.locationevent.bounds.md) | [LngLatBoundsArray](./utils.lnglatboundsarray.md) |  |
+|  [lngLat](./webmap.locationevent.lnglat.md) | [LngLatArray](./utils.lnglatarray.md) |  |
 

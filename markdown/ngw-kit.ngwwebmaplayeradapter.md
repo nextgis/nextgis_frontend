@@ -21,7 +21,7 @@ export declare class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [\_extent](./ngw-kit.ngwwebmaplayeradapter._extent.md) |  | LngLatBoundsArray |  |
+|  [\_extent](./ngw-kit.ngwwebmaplayeradapter._extent.md) |  | [LngLatBoundsArray](./utils.lnglatboundsarray.md) |  |
 |  [emitter](./ngw-kit.ngwwebmaplayeradapter.emitter.md) |  | StrictEventEmitter&lt;EventEmitter, [NgwWebmapLayerAdapterEvents](./ngw-kit.ngwwebmaplayeradapterevents.md)<!-- -->&gt; |  |
 |  [layer](./ngw-kit.ngwwebmaplayeradapter.layer.md) |  | [NgwWebmapItem](./ngw-kit.ngwwebmapitem.md) |  |
 |  [map](./ngw-kit.ngwwebmaplayeradapter.map.md) |  | M |  |

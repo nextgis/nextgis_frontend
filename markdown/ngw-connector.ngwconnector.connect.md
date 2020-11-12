@@ -4,6 +4,8 @@
 
 ## NgwConnector.connect() method
 
+Establishing a connection with NextGIS Web to fulfill all other requests.
+
 <b>Signature:</b>
 
 ```typescript
@@ -12,4 +14,19 @@ connect(): CancelablePromise<PyramidRoute>;
 <b>Returns:</b>
 
 CancelablePromise&lt;[PyramidRoute](./ngw-connector.pyramidroute.md)<!-- -->&gt;
+
+## Remarks
+
+This method need not be called manually as it is used when forming a request in [apiRequest](./ngw-connector.ngwconnector.apirequest.md)<!-- -->. Can be used to check connection.
+
+## Example
+
+
+```javascript
+const connector = new NgwConnector({baseUrl: 'https://demo.nextgis.com'});
+connector.connect()
+  .then(() => console.log('Ok'))
+  .catch((er) => console.log('Connection problem', er));
+
+```
 

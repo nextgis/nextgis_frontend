@@ -6,34 +6,32 @@
 
 from https://github.com/CesiumGS/cesium/blob/master/Source/Core/defined.js
 
- defined
-
 <b>Signature:</b>
 
 ```typescript
-export declare function defined(value: unknown): boolean;
+export declare function defined(val: unknown): val is boolean;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  value | unknown | The object. |
+|  val | unknown | The object. |
 
 <b>Returns:</b>
 
-boolean
+val is boolean
 
 Returns true if the object is defined, returns false otherwise.
 
 ## Example
 
 
-```js
+```javascript
 if (defined(positions)) {
-     doSomething();
+  doSomething();
 } else {
-     doSomethingElse();
+  doSomethingElse();
 }
 
 ```

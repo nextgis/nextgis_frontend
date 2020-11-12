@@ -7,9 +7,16 @@
 <b>Signature:</b>
 
 ```typescript
-static toTypescript(): string;
+static toTypescript(opt?: ToTypescriptOptions): ToTypescript;
 ```
+
+## Parameters
+
+|  Parameter | Type | Description |
+|  --- | --- | --- |
+|  opt | ToTypescriptOptions |  |
+
 <b>Returns:</b>
 
-string
+ToTypescript
 
