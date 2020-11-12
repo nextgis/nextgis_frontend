@@ -122,6 +122,8 @@ export class Connection {
         item.resource.parent.id
       );
       delete payload?.resource?.cls;
+
+      // console.log(JSON.stringify(payload, null, ' '));
       await this.driver.put(
         'resource.item',
         {
