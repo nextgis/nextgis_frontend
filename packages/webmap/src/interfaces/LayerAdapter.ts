@@ -353,8 +353,9 @@ export interface WmsAdapterOptions extends RasterAdapterOptions {
  * @public
  */
 export interface ImageAdapterOptions extends WmsAdapterOptions {
-  /** @deprecated use `layer` option instead */
+  /** @deprecated use `params` option instead */
   resourceId?: string | number;
+  params: Record<string, any>;
 }
 
 /**

@@ -12,12 +12,13 @@ export function updateImageParams(
   params: Record<string, any>,
   resourceId: number
 ): Record<string, any> {
-  const { bbox, width, height } = params;
+  const { bbox, width, height, nd } = params;
   return {
     resource: resourceId,
     extent: bbox,
     size: width + ',' + height,
     timestamp: Date.now(),
+    nd,
   };
 }
 

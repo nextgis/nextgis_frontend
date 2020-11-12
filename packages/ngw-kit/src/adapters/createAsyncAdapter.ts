@@ -160,7 +160,7 @@ export async function createAsyncAdapter(
         resourceAdapter.prototype.resourceId = item?.resource.id;
         resourceAdapter.prototype.connector = connector;
 
-        applyMixins(resourceAdapter, [NgwResource]);
+        applyMixins(resourceAdapter, [NgwResource], { replace: false });
         return resourceAdapter;
       }
     });

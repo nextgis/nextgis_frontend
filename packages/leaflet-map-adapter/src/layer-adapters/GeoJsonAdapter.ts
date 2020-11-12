@@ -234,11 +234,13 @@ export class GeoJsonAdapter
     }
   }
 
-  getExtent(): LngLatBoundsArray {
+  getExtent(): LngLatBoundsArray | undefined {
     const bounds = this.layer.getBounds();
     const ne = bounds.getNorthEast();
     const sw = bounds.getSouthWest();
-    return [sw.lng, sw.lat, ne.lng, ne.lat];
+    if (ne && sw) {
+      return [sw.lng, sw.lat, ne.lng, ne.lat];
+    }
   }
 
   private _updateTooltip(layerDef: LayerDefinition) {
