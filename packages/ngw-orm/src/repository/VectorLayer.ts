@@ -51,6 +51,7 @@ import {
   ToTypescriptOptions,
 } from '../options/ToTypescriptOptions';
 import { ValidateErrorType } from '../types/ValidateErrorType';
+import { VectorResourceUpdateItem } from '../sync-items/VectorResourceUpdateItem';
 // import { SyncOptions } from './SyncOptions';
 // import { Connection } from '../connection/Connection';
 // import { ConnectionOptions } from '../connection/ConnectionOptions';
@@ -174,15 +175,14 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
     resource: typeof VectorLayer,
     parent: number,
     options: SyncOptions
-  ): DeepPartial<VectorResourceSyncItem> | undefined {
+  ):
+    | DeepPartial<VectorResourceSyncItem | VectorResourceUpdateItem>
+    | undefined {
     const metaFields = getMetadataArgsStorage().filterColumns(resource);
     const item = resource.item;
     const existFields = item && item.feature_layer && item.feature_layer.fields;
     const fields = metaFields.map((x) => {
-      const exist =
-        existFields && existFields.find((y) => y.keyname === x.propertyName);
       return {
-        ...exist,
         keyname: x.propertyName,
         // NGW does not support boolean yet
         datatype:
@@ -192,13 +192,25 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
         display_name: x.options.display_name,
       };
     }) as FeatureLayerField[];
-    return {
-      vector_layer: {
-        srs: { id: 3857 },
-        geometry_type: this.geometryType,
-        fields,
-      },
-    } as DeepPartial<VectorResourceSyncItem>;
+    if (item) {
+      return {
+        feature_layer: {
+          fields: fields.map((f) => {
+            const exist =
+              existFields && existFields.find((y) => y.keyname === f.keyname);
+            return { ...exist, ...f };
+          }),
+        },
+      } as DeepPartial<VectorResourceUpdateItem>;
+    } else {
+      return {
+        vector_layer: {
+          srs: { id: 3857 },
+          geometry_type: this.geometryType,
+          fields,
+        },
+      } as DeepPartial<VectorResourceSyncItem>;
+    }
   }
 
   // /**
