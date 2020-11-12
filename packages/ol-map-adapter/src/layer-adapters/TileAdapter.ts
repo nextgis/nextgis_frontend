@@ -14,7 +14,7 @@ export class TileAdapter implements MainLayerAdapter {
     const xyzOpt: Options = {
       attributions: options.attribution ? [options.attribution] : [],
       url: options.url,
-      tilePixelRatio: 2
+      // tilePixelRatio: 2
     };
     if (options.crossOrigin) {
       xyzOpt.crossOrigin = options.crossOrigin;
