@@ -16,7 +16,11 @@ import {
   fetchNgwLayerItems,
   fetchNgwLayerItem,
 } from '@nextgis/ngw-kit';
-import { GeometryType, VectorLayerResourceItem, FeatureLayerField } from '@nextgis/ngw-connector';
+import {
+  GeometryType,
+  VectorLayerResourceItem,
+  FeatureLayerField,
+} from '@nextgis/ngw-connector';
 // import { ResourceItem } from '@nextgis/ngw-connector';
 // import { objectAssign } from '@nextgis/utils';
 // import NgwConnector from '@nextgis/ngw-connector';
@@ -193,7 +197,7 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
         srs: { id: 3857 },
         geometry_type: this.geometryType,
         fields,
-      } ,
+      },
     } as DeepPartial<VectorResourceSyncItem>;
   }
 
