@@ -16,7 +16,11 @@ import {
   fetchNgwLayerItems,
   fetchNgwLayerItem,
 } from '@nextgis/ngw-kit';
-import { GeometryType, VectorLayerResourceItem } from '@nextgis/ngw-connector';
+import {
+  GeometryType,
+  VectorLayerResourceItem,
+  FeatureLayerField,
+} from '@nextgis/ngw-connector';
 // import { ResourceItem } from '@nextgis/ngw-connector';
 // import { objectAssign } from '@nextgis/utils';
 // import NgwConnector from '@nextgis/ngw-connector';
@@ -47,6 +51,7 @@ import {
   ToTypescriptOptions,
 } from '../options/ToTypescriptOptions';
 import { ValidateErrorType } from '../types/ValidateErrorType';
+import { VectorResourceUpdateItem } from '../sync-items/VectorResourceUpdateItem';
 // import { SyncOptions } from './SyncOptions';
 // import { Connection } from '../connection/Connection';
 // import { ConnectionOptions } from '../connection/ConnectionOptions';
@@ -167,27 +172,45 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
   }
 
   static getNgwPayload(
-    resource: Type<VectorLayer>,
+    resource: typeof VectorLayer,
     parent: number,
     options: SyncOptions
-  ): DeepPartial<VectorResourceSyncItem> | undefined {
-    const fields = getMetadataArgsStorage().filterColumns(resource);
-
-    return {
-      vector_layer: {
-        srs: { id: 3857 },
-        geometry_type: this.geometryType,
-        fields: fields.map((x) => ({
-          keyname: x.propertyName,
-          // NGW does not support boolean yet
-          datatype:
-            x.options.datatype === 'BOOLEAN' ? 'INTEGER' : x.options.datatype,
-          grid_visibility: x.options.grid_visibility,
-          label_field: x.options.label_field,
-          display_name: x.options.display_name,
-        })),
-      },
-    };
+  ):
+    | DeepPartial<VectorResourceSyncItem | VectorResourceUpdateItem>
+    | undefined {
+    const metaFields = getMetadataArgsStorage().filterColumns(resource);
+    const item = resource.item;
+    const existFields = item && item.feature_layer && item.feature_layer.fields;
+    const fields = metaFields.map((x) => {
+      return {
+        keyname: x.propertyName,
+        // NGW does not support boolean yet
+        datatype:
+          x.options.datatype === 'BOOLEAN' ? 'INTEGER' : x.options.datatype,
+        grid_visibility: x.options.grid_visibility,
+        label_field: x.options.label_field,
+        display_name: x.options.display_name,
+      };
+    }) as FeatureLayerField[];
+    if (item) {
+      return {
+        feature_layer: {
+          fields: fields.map((f) => {
+            const exist =
+              existFields && existFields.find((y) => y.keyname === f.keyname);
+            return { ...exist, ...f };
+          }),
+        },
+      } as DeepPartial<VectorResourceUpdateItem>;
+    } else {
+      return {
+        vector_layer: {
+          srs: { id: 3857 },
+          geometry_type: this.geometryType,
+          fields,
+        },
+      } as DeepPartial<VectorResourceSyncItem>;
+    }
   }
 
   // /**
