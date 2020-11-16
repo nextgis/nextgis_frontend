@@ -1282,7 +1282,6 @@
     postcss-url "^8.0.0"
     rimraf "^3.0.2"
     rollup "^2.33.1"
-    rollup-plugin-analyzer "^3.3.0"
     rollup-plugin-node-builtins "^2.1.2"
     rollup-plugin-node-globals "^1.4.0"
     rollup-plugin-postcss "^3.1.8"
@@ -11007,11 +11006,6 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
   dependencies:
     hash-base "^3.0.0"
     inherits "^2.0.1"
-
-rollup-plugin-analyzer@^3.3.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-analyzer/-/rollup-plugin-analyzer-3.3.0.tgz#52fb30465ae927d9c078b6ec90c578cfb9164fc2"
-  integrity sha512-zUPGitW4usmZcVa0nKecRvw3odtXgnxdCben9Hx1kxVoR3demek8RU9tmRG/R35hnRPQTb7wEsYEe3GUcjxIMA==
 
 rollup-plugin-node-builtins@^2.1.2:
   version "2.1.2"

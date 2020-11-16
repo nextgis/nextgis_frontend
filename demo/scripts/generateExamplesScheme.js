@@ -3,14 +3,19 @@ const { join } = require('path');
 
 const pkgRoot = join(__dirname, '..', '..');
 
+console.log(pkgRoot);
+
 const isDirectory = (source) => lstatSync(source).isDirectory();
 
 const getPriority = (package) =>
   package._priority !== undefined ? package._priority : 100;
 
 function getIdFromPath(id) {
+  id = id.replace(pkgRoot, '');
   id = id.replace(/\.[/\\\\]/g, '');
   id = id.replace(/[/\\\\]/g, '-');
+  id = id.replace(/^-packages-/g, '');
+  id = id.replace(/^-/g, '');
   id = id.replace(/\./g, '');
   return id;
 }
@@ -178,6 +183,7 @@ function generate() {
           priority: getPriority(package),
         };
         items.push(item);
+        // console.log(item.id);
       }
     });
 
