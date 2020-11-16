@@ -4,6 +4,11 @@
 
 ## NgwMap.getNgwLayerItem() method
 
+> Warning: This API is now obsolete.
+> 
+> use [NgwMap.fetchNgwLayerItem()](./ngw-map.ngwmap.fetchngwlayeritem.md) instead
+> 
+
 <b>Signature:</b>
 
 ```typescript

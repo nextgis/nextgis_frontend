@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.11](https://github.com/nextgis/nextgisweb_frontend/compare/v1.0.0-alpha.10...v1.0.0-alpha.11) (2020-11-02)
+
+
+### Bug Fixes
+
+* **cesium:** disable zoom undergroung ([fac7bdf](https://github.com/nextgis/nextgisweb_frontend/commit/fac7bdf43fd570aba5f97ec13c77225e32e32a0b))
+* **cesium:** do not clamp to ground 3d geojson ([78e1be3](https://github.com/nextgis/nextgisweb_frontend/commit/78e1be384b3a708d2c89136d3f63890315b738b8))
+* **ngw-map:** constructor options for control ([7d40e0c](https://github.com/nextgis/nextgisweb_frontend/commit/7d40e0c6d52f3d734cd5f28173f03e4a1a0943df))
+* **vue:** NgwLayersList selection event ([054b42a](https://github.com/nextgis/nextgisweb_frontend/commit/054b42a90559196ab4302a6607d8fad8e4d0910c))
+* **vue:** NgwlayersList visibility toggle ([e5a9d5c](https://github.com/nextgis/nextgisweb_frontend/commit/e5a9d5c9d9333e155364e99a1164c805ddd29f94))
+* **webmap:** constructor options; move controls options from ngw to webmap ([611b8c0](https://github.com/nextgis/nextgisweb_frontend/commit/611b8c0af120c726ccf42eca0a608edbd54bb1c1))
+
+
+### Features
+
+* **ngw-kit:** add feature request extensions param ([0a3f839](https://github.com/nextgis/nextgisweb_frontend/commit/0a3f839925b23012a406bfe088cb318c0f1b2cf0))
+* **ngw-kit:** add parse date from ngw feature and store util ([6cc45de](https://github.com/nextgis/nextgisweb_frontend/commit/6cc45ded20b3e14f464c63ed02db1a385689f540))
+* **utils:** add geojson eachCoordinates util ([f50e556](https://github.com/nextgis/nextgisweb_frontend/commit/f50e5568cff8af3426842201a1e9310d825424eb))
+* **vue:** selection for NgwLayersList ([7029a73](https://github.com/nextgis/nextgisweb_frontend/commit/7029a73555d73b1937f44d82ce0d5942fa933c49))
+* **vue:** use vuetify tree prop to NgwLayersList selection strategy ([2c5f5e6](https://github.com/nextgis/nextgisweb_frontend/commit/2c5f5e663a07b2945c7884ffb6902d0463ee225e))
+
+
+
+
+
 # [1.0.0-alpha.10](https://github.com/nextgis/nextgisweb_frontend/compare/v1.0.0-alpha.9...v1.0.0-alpha.10) (2020-10-20)
 
 

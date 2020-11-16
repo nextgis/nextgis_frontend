@@ -10,6 +10,7 @@ import {
   OnLayerClickOptions,
   LayerAdapter,
   MainLayerAdapter,
+  FilterOptions,
 } from '@nextgis/webmap';
 import { PropertiesFilter } from '@nextgis/properties-filter';
 import NgwConnector, {
@@ -93,6 +94,8 @@ export interface TreeLayer extends TreeItem {
   updateWmsParams?: (parans: any) => any;
 }
 
+export type TileNoData = 200 | 404 | 204;
+
 /**
  * @public
  */
@@ -107,10 +110,21 @@ export interface NgwLayerOptionsAdditional<
   fit?: boolean;
   meta?: P;
   simplification?: number;
+  /**
+   * Parameter for `TILE` and `IMAGE` adapters to say NGW what will be returned if there is no data to render.
+   *
+   * @remark
+   * In NGW api this parameter is written as follows: `nd=204|404|200`, 200 by default.
+   * But in frontend libraries default value id 204 (no content) for performance purpose.
+   *
+   * @default 204
+   */
+  tileNoData?: TileNoData;
 }
 
 /**
- * @public
+ * @internal
+ * @deprecated use resource instead
  */
 export interface ResourceIdNgwLayerOptions<
   T extends NgwLayerAdapterType = NgwLayerAdapterType,
@@ -120,7 +134,8 @@ export interface ResourceIdNgwLayerOptions<
 }
 
 /**
- * @public
+ * @internal
+ * @deprecated use resource instead
  */
 export interface KeynamedNgwLayerOptions<
   T extends NgwLayerAdapterType = NgwLayerAdapterType,
@@ -245,7 +260,10 @@ export interface ResourceAdapter<
   resourceId: number;
   item?: ResourceItem;
   baselayer?: boolean;
-  getExtent?(): LngLatBoundsArray | Promise<LngLatBoundsArray> | undefined;
+  getExtent?():
+    | LngLatBoundsArray
+    | Promise<LngLatBoundsArray | undefined>
+    | undefined;
   getIdentificationIds(): Promise<number[] | undefined>;
 }
 
@@ -348,10 +366,17 @@ export interface CompanyLogoOptions {
 export interface FeatureRequestParams {
   srs?: number;
   fields?: string;
+  extensions?: string;
   geom_format?: string;
   limit?: number;
   intersects?: string;
   order_by?: string;
+  geom?: 'yes' | 'no';
+}
+
+export interface NgwFeatureRequestOptions extends FilterOptions {
+  extensions?: string[] | null | false;
+  geom?: boolean;
 }
 
 export interface GetNgwLayerItemsOptions {

@@ -4,17 +4,19 @@
 
 ## NgwConnector.getResourceId() method
 
+A fast way to retrieve resource ID for any resource definition.
+
 <b>Signature:</b>
 
 ```typescript
-getResourceId(resource: ResourceDefinition): CancelablePromise<number | undefined>;
+getResourceId(resource: ResourceDefinition | DeepPartial<Resource>): CancelablePromise<number | undefined>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  resource | [ResourceDefinition](./ngw-connector.resourcedefinition.md) |  |
+|  resource | [ResourceDefinition](./ngw-connector.resourcedefinition.md) \| [DeepPartial](./utils.deeppartial.md)<!-- -->&lt;[Resource](./ngw-connector.resource.md)<!-- -->&gt; | Any available resource definition There are situations when exactly the resource id is needed (for example, to compose the correct request to the api) then this method will come in handy to facilitate the extraction of the identifier if the resource is specified through a keyname or other parameters. |
 
 <b>Returns:</b>
 

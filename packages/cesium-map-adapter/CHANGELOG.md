@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.11](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-alpha.10...v1.0.0-alpha.11) (2020-11-02)
+
+
+### Bug Fixes
+
+* **cesium:** disable zoom undergroung ([fac7bdf](https://github.com/nextgis/nextgis_frontend/commit/fac7bdf43fd570aba5f97ec13c77225e32e32a0b))
+* **cesium:** do not clamp to ground 3d geojson ([78e1be3](https://github.com/nextgis/nextgis_frontend/commit/78e1be384b3a708d2c89136d3f63890315b738b8))
+
+
+
+
+
 # [1.0.0-alpha.10](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-alpha.9...v1.0.0-alpha.10) (2020-10-20)
 
 

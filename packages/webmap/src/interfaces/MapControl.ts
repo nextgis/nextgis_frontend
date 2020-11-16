@@ -1,3 +1,5 @@
+import { ControlPosition } from './MapAdapter';
+
 /**
  * @public
  */
@@ -48,6 +50,16 @@ export interface MapControls {
   [name: string]: Record<string, any>;
   ZOOM: ZoomControlOptions;
   ATTRIBUTION: AttributionControlOptions;
+}
+
+export interface ControlOptions {
+  [param: string]: any;
+  position?: ControlPosition;
+  control?: string;
+}
+
+export interface ControlsOptions {
+  [control: string]: ControlOptions;
 }
 
 /**

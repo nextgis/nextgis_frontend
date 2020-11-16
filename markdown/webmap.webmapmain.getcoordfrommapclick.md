@@ -11,5 +11,5 @@ getCoordFromMapClick(): CancelablePromise<LngLatArray>;
 ```
 <b>Returns:</b>
 
-CancelablePromise&lt;LngLatArray&gt;
+CancelablePromise&lt;[LngLatArray](./utils.lnglatarray.md)<!-- -->&gt;
 

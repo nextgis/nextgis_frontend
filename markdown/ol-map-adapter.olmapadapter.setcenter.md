@@ -14,7 +14,7 @@ setCenter(lonLat: LngLatArray): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  lonLat | LngLatArray |  |
+|  lonLat | [LngLatArray](./utils.lnglatarray.md) |  |
 
 <b>Returns:</b>
 

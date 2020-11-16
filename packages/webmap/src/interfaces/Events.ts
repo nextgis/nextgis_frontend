@@ -70,6 +70,10 @@ export interface WebMapEvents extends MainMapEvents {
    * @eventProperty
    */
   'layer:select': OnLayerSelectOptions;
+  /**
+   * @eventProperty
+   */
+  'controls:create': any;
 }
 
 /**

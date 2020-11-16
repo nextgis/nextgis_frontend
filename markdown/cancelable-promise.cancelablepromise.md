@@ -83,6 +83,7 @@ promise.cancel();
 |  [attach(p)](./cancelable-promise.cancelablepromise.attach.md) |  |  |
 |  [cancel()](./cancelable-promise.cancelablepromise.cancel.md) |  |  |
 |  [catch(onrejected)](./cancelable-promise.cancelablepromise.catch.md) |  |  |
+|  [createControl(opt)](./cancelable-promise.cancelablepromise.createcontrol.md) | <code>static</code> |  |
 |  [finally(onfinally)](./cancelable-promise.cancelablepromise.finally.md) |  |  |
 |  [reject(value)](./cancelable-promise.cancelablepromise.reject.md) | <code>static</code> |  |
 |  [resolve(value)](./cancelable-promise.cancelablepromise.resolve.md) | <code>static</code> |  |

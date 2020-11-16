@@ -7,5 +7,8 @@
 <b>Signature:</b>
 
 ```typescript
-export declare type PropertiesPaint = [VectorAdapterLayerPaint | undefined, ...PropertyPaint[]];
+export declare type PropertiesPaint = [
+    VectorAdapterLayerPaint | undefined,
+    ...PropertyPaint[]
+];
 ```

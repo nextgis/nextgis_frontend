@@ -18,5 +18,5 @@ export declare function getNgwWebmapExtent(webmap: WebmapResource): LngLatBounds
 
 <b>Returns:</b>
 
-LngLatBoundsArray \| undefined
+[LngLatBoundsArray](./utils.lnglatboundsarray.md) \| undefined
 

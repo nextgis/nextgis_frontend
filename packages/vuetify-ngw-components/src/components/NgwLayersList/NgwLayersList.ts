@@ -4,11 +4,13 @@ import {
   ResourceAdapter,
   NgwWebmapLayerAdapter,
   NgwWebmapItem,
+  TreeGroup,
+  TreeLayer,
 } from '@nextgis/ngw-kit';
 import { CreateElement, VNode, VNodeData } from 'vue';
 // @ts-ignore
 import { VTreeview } from 'vuetify/lib';
-import { debounce, DebounceDecorator } from '@nextgis/utils';
+import { debounce } from '@nextgis/utils';
 
 export interface VueTreeItem {
   id: string;
@@ -23,8 +25,10 @@ export class NgwLayersList extends Vue {
   @Prop({ type: Array }) include!: Array<ResourceAdapter | string>;
   @Prop({ type: Boolean, default: false }) hideWebmapRoot!: boolean;
   @Prop({ type: Boolean, default: false }) notOnlyNgwLayer!: boolean;
-  @Prop({ type: Boolean, default: false }) propagation!: boolean;
   @Prop({ type: Function }) showLayer!: (layer: NgwWebmapItem) => boolean;
+  @Prop({ type: String, default: 'independent' }) selectionType!:
+    | 'independent'
+    | 'leaf';
   @Prop({ type: Function }) showResourceAdapter!: (
     adapter: LayerAdapter | ResourceAdapter
   ) => boolean;
@@ -34,6 +38,7 @@ export class NgwLayersList extends Vue {
   items: VueTreeItem[] = [];
 
   selection: string[] = [];
+  open: string[] = [];
 
   private _selectionWatcher?: () => void;
   private _layers: Array<LayerAdapter | ResourceAdapter> = [];
@@ -44,6 +49,10 @@ export class NgwLayersList extends Vue {
     return this.ngwMap || WebMap.get(this.webMapId);
   }
 
+  get independent(): boolean {
+    return this.selectionType === 'independent';
+  }
+
   @Watch('ngwMap')
   updateNgwMap(): void {
     this.destroy();
@@ -51,55 +60,42 @@ export class NgwLayersList extends Vue {
   }
 
   @Watch('include')
-  onInclude(): void {
-    this.updateItems();
+  async updateItems(): Promise<void> {
+    if (this.__updateItems) {
+      this.__updateItems();
+    }
   }
 
-  @DebounceDecorator()
   setVisibleLayers(selection: string[], old: string[]): void {
-    const propagation = this.webMap?.keys.pressed('ctrl')
-      ? !this.propagation
-      : this.propagation;
     const difference = selection
       .filter((x) => !old.includes(x))
       .concat(old.filter((x) => !selection.includes(x)));
+
+    // const isSame = arrayCompare(selection, old);
     if (difference.length) {
-      this._stopUpdateItemListeners();
       this._layers.forEach((x) => {
         let itemIsNotHideRoot = false;
         // layer properties fpr webmap tree items detect
         // check visibility for all webmap tree layer
         if (x.layer && x.layer.properties) {
           const layer = x.layer as NgwWebmapItem;
-          if (this.hideWebmapRoot && layer.item.item_type === 'root') {
+          if (
+            (!this.independent && this.itemIsGroup(layer.item)) ||
+            (this.hideWebmapRoot && layer.item.item_type === 'root')
+          ) {
             itemIsNotHideRoot = true;
             layer.properties.set('visibility', true);
           }
+
           const desc = layer.tree.getDescendants() as NgwWebmapItem[];
           desc.forEach((d) => {
             const id = this._getLayerId(d);
-            const isGroup = d.item.item_type === 'group';
-            if (id && difference.indexOf(id) !== -1) {
-              const isVisible = selection.indexOf(id) !== -1;
-              d.properties.set('visibility', isVisible, {
-                propagation: propagation && isGroup,
-                bubble: propagation,
-              });
-
-              if (propagation) {
-                const parents = d.tree.getParents();
-                if (this.hideWebmapRoot) {
-                  parents.pop();
-                }
-                parents.forEach((p) => {
-                  const isParentVisible = p.properties.get('visibility');
-                  const parentProp = p.properties.property('visibility');
-                  const isParentChildVisible = parentProp.getProperty();
-                  if (isParentChildVisible !== isParentVisible) {
-                    p.properties.set('visibility', isParentChildVisible);
-                  }
-                });
-              }
+            if (difference.indexOf(id) !== -1) {
+              const isVisible =
+                !this.independent && this.itemIsGroup(d.item)
+                  ? true
+                  : selection.indexOf(id) !== -1;
+              d.properties.set('visibility', isVisible);
             }
           });
         }
@@ -110,20 +106,6 @@ export class NgwLayersList extends Vue {
           }
         }
       });
-
-      if (this.propagation) {
-        this.updateItems().then(() => {
-          this._startUpdateItemListeners();
-        });
-      } else {
-        this._startUpdateItemListeners();
-      }
-    }
-  }
-
-  async updateItems(): Promise<void> {
-    if (this.__updateItems) {
-      await this.__updateItems();
     }
   }
 
@@ -139,7 +121,7 @@ export class NgwLayersList extends Vue {
     const data: VNodeData = {
       props: {
         value: this.selection,
-        'selection-type': 'independent',
+        'selection-type': this.selectionType,
       },
       on: {
         input: (event: any) => {
@@ -149,10 +131,10 @@ export class NgwLayersList extends Vue {
       attrs: {
         ...this.$attrs,
         items: this.items,
+        open: this.open,
         selectable: true,
       },
       scopedSlots: {
-        ...this.$scopedSlots,
         label: (props) => {
           const name = props.item.name;
           return h('span', {
@@ -162,10 +144,15 @@ export class NgwLayersList extends Vue {
             },
           });
         },
+        ...this.$scopedSlots,
       },
       // domProps: { id: this.id }
     };
     return h(VTreeview, data, this.$slots.default);
+  }
+
+  private itemIsGroup(item: TreeGroup | TreeLayer) {
+    return item.item_type === 'group' || item.item_type === 'root';
   }
 
   private create() {
@@ -195,7 +182,7 @@ export class NgwLayersList extends Vue {
         }
         const layer = x.layer as NgwWebmapItem;
         const tree = layer.tree;
-        const existInTree = tree.some((y) => String(y.id) === id);
+        const existInTree = tree && tree.some((y) => String(y.id) === id);
         if (existInTree) {
           return true;
         }
@@ -207,12 +194,13 @@ export class NgwLayersList extends Vue {
   }
 
   private async _updateItems() {
-    this._stopSelectionWatch();
     this.selection = [];
+    this.open = [];
     this._layers = [];
     let layersList: LayerAdapter[] | undefined;
     if (this.webMap) {
       if (this.notOnlyNgwLayer) {
+        await this.webMap.onLoad();
         const layers = this.webMap.allLayers();
         layersList = Object.keys(layers).map((x) => layers[x]);
       } else if ('getNgwLayers' in this.webMap) {
@@ -220,7 +208,6 @@ export class NgwLayersList extends Vue {
         layersList = Object.keys(ngwLayers).map((x) => ngwLayers[x].layer);
       }
     }
-
     this.items = [];
     if (layersList) {
       layersList
@@ -229,11 +216,11 @@ export class NgwLayersList extends Vue {
           const bOrder = (b.options && b.options.order) || 0;
           return aOrder - bOrder;
         })
+        .reverse()
         .forEach((x) => {
           this._createTreeItem(x);
         });
     }
-    this._startSelectionWatch();
   }
 
   private _createTreeItem(layer: LayerAdapter | ResourceAdapter) {
@@ -274,21 +261,8 @@ export class NgwLayersList extends Vue {
       const tree = webMapLayer.layer.tree;
       const children = tree.getChildren() as NgwWebmapItem[];
       item.children = this._createWebMapTree(children);
-      const props = webMapLayer.layer.properties;
-      const webMapLayerVisible = props.get('visibility');
-      if (
-        this.propagation &&
-        (webMapLayer.layer.item.item_type === 'group' ||
-          webMapLayer.layer.item.item_type === 'root')
-      ) {
-        const parentProp = props.property('visibility');
-        const isGroupVisible = parentProp.getProperty();
-        if (isGroupVisible !== webMapLayerVisible) {
-          visible = isGroupVisible;
-        }
-      } else {
-        visible = webMapLayerVisible ?? true;
-      }
+      const webMapLayerVisible = webMapLayer.layer.properties.get('visibility');
+      visible = webMapLayerVisible ?? true;
     } else if (this.webMap) {
       visible = this.webMap.isLayerVisible(layer);
     }
@@ -314,7 +288,7 @@ export class NgwLayersList extends Vue {
   private _createWebMapTree(items: NgwWebmapItem[]) {
     const treeItems: VueTreeItem[] = [];
 
-    items.forEach((x) => {
+    [...items].reverse().forEach((x) => {
       const id = this._getLayerId(x);
 
       if (this.showLayer) {
@@ -331,7 +305,12 @@ export class NgwLayersList extends Vue {
       }
       if (x.item.item_type === 'group') {
         const children = x.tree.getChildren<NgwWebmapItem>();
-        item.children = this._createWebMapTree(children);
+        if (children && children.length) {
+          item.children = this._createWebMapTree(children);
+        }
+        if (x.item.group_expanded) {
+          this.open.push(id);
+        }
       }
       const visible = x.properties.get('visibility');
       if (visible) {
@@ -353,11 +332,11 @@ export class NgwLayersList extends Vue {
     const __updateItems = this.__updateItems;
     if (this.webMap) {
       if (__updateItems) {
-        this.webMap.emitter.on('layer:pretoggle', __updateItems);
+        // this.webMap.emitter.on('layer:pretoggle', __updateItems);
         this.webMap.emitter.on('layer:preremove', __updateItems);
       }
       if (this.__onLayerAdd) {
-        // this.webMap.emitter.on('layer:preadd', this.__onLayerAdd);
+        this.webMap.emitter.on('layer:add', this.__onLayerAdd);
       }
     }
   }
@@ -365,17 +344,17 @@ export class NgwLayersList extends Vue {
   private _stopUpdateItemListeners() {
     if (this.webMap) {
       if (this.__updateItems) {
-        this.webMap.emitter.removeListener(
-          'layer:pretoggle',
-          this.__updateItems
-        );
+        // this.webMap.emitter.removeListener(
+        //   'layer:pretoggle',
+        //   this.__updateItems
+        // );
         this.webMap.emitter.removeListener(
           'layer:preremove',
           this.__updateItems
         );
       }
       if (this.__onLayerAdd) {
-        this.webMap.emitter.removeListener('layer:preadd', this.__onLayerAdd);
+        this.webMap.emitter.removeListener('layer:add', this.__onLayerAdd);
       }
     }
   }

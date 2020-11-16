@@ -4,6 +4,8 @@
 
 ## NgwConnector.deleteResource() method
 
+Fast way to delete resource from NGW and clean cache.
+
 <b>Signature:</b>
 
 ```typescript
@@ -14,7 +16,7 @@ deleteResource(resource: ResourceDefinition): CancelablePromise<void>;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  resource | [ResourceDefinition](./ngw-connector.resourcedefinition.md) |  |
+|  resource | [ResourceDefinition](./ngw-connector.resourcedefinition.md) | Resource definition |
 
 <b>Returns:</b>
 

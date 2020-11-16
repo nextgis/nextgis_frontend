@@ -18,7 +18,11 @@ export class ImageAdapter
       this.layer = new ImageLayer(url, {
         pane: this.pane,
         headers: options.headers,
+        /**
+         * TODO: safe remove, use only options.params
+         */
         ...options,
+        ...options.params,
       });
       if (updateWmsParamsFromOpt) {
         const updateWmsParams = this.layer.updateWmsParams;

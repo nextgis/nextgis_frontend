@@ -4,6 +4,11 @@
 
 ## NgwMap.getNgwLayerFeatures() method
 
+> Warning: This API is now obsolete.
+> 
+> use [NgwMap.fetchNgwLayerFeatures()](./ngw-map.ngwmap.fetchngwlayerfeatures.md) instead
+> 
+
 <b>Signature:</b>
 
 ```typescript
