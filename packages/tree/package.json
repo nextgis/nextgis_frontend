@@ -39,7 +39,7 @@
     "index.js",
     "lib"
   ],
-  "license": "LGPL-3.0",
+  "license": "MIT",
   "homepage": "https://github.com/nextgis/nextgis_frontend/tree/master/packages/tree#readme",
   "repository": {
     "type": "git",
