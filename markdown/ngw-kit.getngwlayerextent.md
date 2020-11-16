@@ -4,6 +4,11 @@
 
 ## getNgwLayerExtent() function
 
+> Warning: This API is now obsolete.
+> 
+> use [fetchNgwLayerExtent()](./ngw-kit.fetchngwlayerextent.md) instead
+> 
+
 <b>Signature:</b>
 
 ```typescript
@@ -19,5 +24,5 @@ export declare function getNgwLayerExtent(id: number, connector: NgwConnector): 
 
 <b>Returns:</b>
 
-Promise&lt;LngLatBoundsArray \| undefined&gt;
+Promise&lt;[LngLatBoundsArray](./utils.lnglatboundsarray.md) \| undefined&gt;
 

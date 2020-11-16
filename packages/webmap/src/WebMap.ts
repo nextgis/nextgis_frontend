@@ -52,6 +52,7 @@ import { WebMapLayers } from './WebMapLayers';
 import { WebMapMain, WEB_MAP_CONTAINER } from './WebMapMain';
 import { WebMapControls } from './WebMapControls';
 import { MapOptions } from './interfaces/MapOptions';
+import { ControlOptions } from './interfaces/MapControl';
 
 /**
  * The core component for managing map adapters.
@@ -85,9 +86,15 @@ export class WebMap<
   >
   extends WebMapControls<M, L, C, E, O>
   implements WebMapControls, WebMapLayers, WebMapMain {
+  constructor(mapOptions: O) {
+    super(mapOptions);
+    this._addControls();
+  }
+
   static get<T extends WebMap = WebMap>(id: number): T {
     return WEB_MAP_CONTAINER[id];
   }
+
   /**
    * @internal
    */
@@ -124,5 +131,25 @@ export class WebMap<
         }
       }
     }
+  }
+
+  private _addControls() {
+    if (this.options.controls) {
+      this.options.controls.forEach((x) => {
+        let controlAdapterName = x;
+        let controlOptions: ControlOptions = {};
+        if (typeof x === 'string' && this.options.controlsOptions) {
+          if (this.options.controlsOptions[x]) {
+            controlOptions = this.options.controlsOptions[x];
+            if (controlOptions.control !== undefined) {
+              controlAdapterName = controlOptions.control;
+            }
+          }
+        }
+        const { position, ...options } = controlOptions;
+        this.addControl(controlAdapterName, position || 'top-left', options);
+      });
+    }
+    this._emitStatusEvent('controls:create');
   }
 }

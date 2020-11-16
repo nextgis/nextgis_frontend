@@ -17,10 +17,13 @@ export declare class NgwLayersList extends Vue
 |  --- | --- | --- | --- |
 |  [hideWebmapRoot](./vuetify-ngw-components.ngwlayerslist.hidewebmaproot.md) |  | boolean |  |
 |  [include](./vuetify-ngw-components.ngwlayerslist.include.md) |  | Array&lt;[ResourceAdapter](./ngw-kit.resourceadapter.md) \| string&gt; |  |
+|  [independent](./vuetify-ngw-components.ngwlayerslist.independent.md) |  | boolean |  |
 |  [items](./vuetify-ngw-components.ngwlayerslist.items.md) |  | [VueTreeItem](./vuetify-ngw-components.vuetreeitem.md)<!-- -->\[\] |  |
 |  [ngwMap](./vuetify-ngw-components.ngwlayerslist.ngwmap.md) |  | [NgwMap](./ngw-map.ngwmap.md) |  |
 |  [notOnlyNgwLayer](./vuetify-ngw-components.ngwlayerslist.notonlyngwlayer.md) |  | boolean |  |
+|  [open](./vuetify-ngw-components.ngwlayerslist.open.md) |  | string\[\] |  |
 |  [selection](./vuetify-ngw-components.ngwlayerslist.selection.md) |  | string\[\] |  |
+|  [selectionType](./vuetify-ngw-components.ngwlayerslist.selectiontype.md) |  | 'independent' \| 'leaf' |  |
 |  [showLayer](./vuetify-ngw-components.ngwlayerslist.showlayer.md) |  | (layer: [NgwWebmapItem](./ngw-kit.ngwwebmapitem.md)<!-- -->) =&gt; boolean |  |
 |  [showResourceAdapter](./vuetify-ngw-components.ngwlayerslist.showresourceadapter.md) |  | (adapter: [LayerAdapter](./webmap.layeradapter.md) \| [ResourceAdapter](./ngw-kit.resourceadapter.md)<!-- -->) =&gt; boolean |  |
 |  [webMap](./vuetify-ngw-components.ngwlayerslist.webmap.md) |  | [WebMap](./webmap.webmap.md) \| undefined |  |

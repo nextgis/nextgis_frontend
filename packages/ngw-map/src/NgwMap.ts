@@ -31,12 +31,12 @@ import {
   KeynamedNgwLayerOptions,
   ResourceIdNgwLayerOptions,
   ResourceNgwLayerOptions,
-  getNgwLayerItem,
-  getNgwLayerItems,
-  getNgwLayerFeature,
-  getNgwLayerFeatures,
-  getIdentifyGeoJson,
-  getNgwResourceExtent,
+  fetchNgwLayerItem,
+  fetchNgwLayerItems,
+  fetchNgwLayerFeature,
+  fetchNgwLayerFeatures,
+  fetchIdentifyGeoJson,
+  fetchNgwResourceExtent,
   sendIdentifyRequest,
   getCompanyLogo,
 } from '@nextgis/ngw-kit';
@@ -46,12 +46,7 @@ import { PropertiesFilter } from '@nextgis/properties-filter';
 import { appendNgwResources } from './utils/appendNgwResources';
 import { prepareWebMapOptions } from './utils/prepareWebMapOptions';
 
-import {
-  NgwMapOptions,
-  ControlOptions,
-  NgwMapEvents,
-  NgwLayers,
-} from './interfaces';
+import { NgwMapOptions, NgwMapEvents, NgwLayers } from './interfaces';
 import { Geometry, Feature, FeatureCollection } from 'geojson';
 
 /**
@@ -105,7 +100,6 @@ export class NgwMap<
       if (this.options.whitlabel) {
         this._whiteLabel();
       }
-      this._addControls();
     });
   }
 
@@ -207,43 +201,43 @@ export class NgwMap<
     }
   }
 
-  getNgwLayerItem(options: {
+  fetchNgwLayerItem(options: {
     resourceId: number;
     featureId: number;
   }): CancelablePromise<FeatureItem> {
-    return getNgwLayerItem({
+    return fetchNgwLayerItem({
       connector: this.connector,
       ...options,
     });
   }
 
-  getNgwLayerItems(
+  fetchNgwLayerItems(
     options: {
       resourceId: number;
       connector?: NgwConnector;
       filters?: PropertiesFilter;
     } & FilterOptions
   ): CancelablePromise<FeatureItem[]> {
-    return getNgwLayerItems({
+    return fetchNgwLayerItems({
       connector: this.connector,
       ...options,
     });
   }
 
-  getNgwLayerFeature<
+  fetchNgwLayerFeature<
     G extends Geometry = Geometry,
     P extends JsonMap = JsonMap
   >(options: {
     resourceId: number;
     featureId: number;
   }): CancelablePromise<Feature<G, P>> {
-    return getNgwLayerFeature<G, P>({
+    return fetchNgwLayerFeature<G, P>({
       connector: this.connector,
       ...options,
     });
   }
 
-  getNgwLayerFeatures<
+  fetchNgwLayerFeatures<
     G extends Geometry | null = Geometry,
     P extends JsonMap = JsonMap
   >(
@@ -253,17 +247,17 @@ export class NgwMap<
       filters?: PropertiesFilter;
     } & FilterOptions
   ): CancelablePromise<FeatureCollection<G, P>> {
-    return getNgwLayerFeatures({
+    return fetchNgwLayerFeatures({
       connector: this.connector,
       ...options,
     });
   }
 
-  getIdentifyGeoJson(
+  fetchIdentifyGeoJson(
     identify: NgwIdentify,
     multiple = false
   ): CancelablePromise<Feature | undefined> {
-    const geojson = getIdentifyGeoJson({
+    const geojson = fetchIdentifyGeoJson({
       identify,
       connector: this.connector,
       multiple,
@@ -273,6 +267,16 @@ export class NgwMap<
     } else {
       return CancelablePromise.resolve(geojson);
     }
+  }
+
+  /**
+   * @deprecated use {@link fetchIdentifyGeoJson} instead
+   */
+  getIdentifyGeoJson(
+    identify: NgwIdentify,
+    multiple = false
+  ): CancelablePromise<Feature | undefined> {
+    return this.fetchIdentifyGeoJson(identify, multiple);
   }
 
   async getNgwLayers(): Promise<NgwLayers> {
@@ -336,7 +340,7 @@ export class NgwMap<
           item = await this.connector.getResource(resourceId);
         }
         if (item) {
-          getNgwResourceExtent(item, this.connector).then((extent) => {
+          fetchNgwResourceExtent(item, this.connector).then((extent) => {
             if (extent) {
               this.fitBounds(extent);
             }
@@ -381,6 +385,58 @@ export class NgwMap<
     }
   }
 
+  /**
+   * @deprecated use {@link NgwMap.fetchNgwLayerItem} instead
+   */
+  getNgwLayerItem(options: {
+    resourceId: number;
+    featureId: number;
+  }): CancelablePromise<FeatureItem> {
+    return this.fetchNgwLayerItem(options);
+  }
+
+  /**
+   * @deprecated use {@link NgwMap.fetchNgwLayerItems} instead
+   */
+  getNgwLayerItems(
+    options: {
+      resourceId: number;
+      connector?: NgwConnector;
+      filters?: PropertiesFilter;
+    } & FilterOptions
+  ): CancelablePromise<FeatureItem[]> {
+    return this.fetchNgwLayerItems(options);
+  }
+
+  /**
+   * @deprecated use {@link NgwMap.fetchNgwLayerFeature} instead
+   */
+  getNgwLayerFeature<
+    G extends Geometry = Geometry,
+    P extends JsonMap = JsonMap
+  >(options: {
+    resourceId: number;
+    featureId: number;
+  }): CancelablePromise<Feature<G, P>> {
+    return this.fetchNgwLayerFeature(options);
+  }
+
+  /**
+   * @deprecated use {@link NgwMap.fetchNgwLayerFeatures} instead
+   */
+  getNgwLayerFeatures<
+    G extends Geometry | null = Geometry,
+    P extends JsonMap = JsonMap
+  >(
+    options: {
+      resourceId: number;
+      connector?: NgwConnector;
+      filters?: PropertiesFilter;
+    } & FilterOptions
+  ): CancelablePromise<FeatureCollection<G, P>> {
+    return this.fetchNgwLayerFeatures(options);
+  }
+
   private _isFitFromResource() {
     const params = this._initMapState;
     if (params.zoom && params.center) {
@@ -414,7 +470,6 @@ export class NgwMap<
         appendNgwResources(resources, x, {}, overwriteOptions);
       });
     }
-
     for (const r of resources) {
       try {
         await this.addNgwLayer(r);
@@ -449,29 +504,9 @@ export class NgwMap<
     this.addBaseLayer('QMS', qmsLayerOptions);
   }
 
-  private _addControls() {
-    if (this.options.controls) {
-      this.options.controls.forEach((x) => {
-        let controlAdapterName = x;
-        let controlOptions: ControlOptions = {};
-        if (typeof x === 'string' && this.options.controlsOptions) {
-          if (this.options.controlsOptions[x]) {
-            controlOptions = this.options.controlsOptions[x];
-            if (controlOptions.control !== undefined) {
-              controlAdapterName = controlOptions.control;
-            }
-          }
-        }
-        const { position, ...options } = controlOptions;
-        this.addControl(controlAdapterName, position || 'top-left', options);
-      });
-    }
-    this._emitStatusEvent('controls:create');
-  }
-
-  private async _selectFromNgwVector(
+  private _selectFromNgwVector(
     ev: OnLayerClickOptions
-  ): Promise<FeatureLayersIdentify | undefined> {
+  ): FeatureLayersIdentify | undefined {
     const layer: ResourceAdapter = ev.layer as ResourceAdapter;
     // item property means layer is NgwResource
     const id = layer.item && layer.item.resource.id;

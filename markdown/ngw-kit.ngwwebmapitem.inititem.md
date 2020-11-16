@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-initItem(item: TreeGroup | TreeLayer): Promise<void>;
+initItem(item: TreeGroup | TreeLayer): void;
 ```
 
 ## Parameters
@@ -18,5 +18,5 @@ initItem(item: TreeGroup | TreeLayer): Promise<void>;
 
 <b>Returns:</b>
 
-Promise&lt;void&gt;
+void
 

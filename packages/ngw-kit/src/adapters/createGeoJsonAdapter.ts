@@ -10,11 +10,11 @@ import { debounce, degrees2meters } from '@nextgis/utils';
 import { PropertiesFilter, propertiesFilter } from '@nextgis/properties-filter';
 import CancelablePromise from '@nextgis/cancelable-promise';
 import { vectorLayerGeomToPaintTypeAlias } from '../utils/utils';
-import { getNgwLayerFeatures } from '../utils/featureLayerUtils';
 import { createPopupContent } from '../utils/createPopupContent';
 import { getLayerFilterOptions } from '../utils/getLayerFilterOptions';
 import { resourceIdFromLayerOptions } from '../utils/resourceIdFromLayerOptions';
 import { NgwLayerOptions, GetClassAdapterOptions } from '../interfaces';
+import { fetchNgwLayerFeatures } from '../utils/fetchNgwLayerFeatures';
 
 interface FilterArgs {
   filters?: PropertiesFilter;
@@ -56,7 +56,7 @@ export async function createGeoJsonAdapter(
   ) => {
     abort();
     _lastFilterArgs = { filters, options: opt };
-    _dataPromise = getNgwLayerFeatures({
+    _dataPromise = fetchNgwLayerFeatures({
       resourceId,
       filters,
       connector,
@@ -84,6 +84,8 @@ export async function createGeoJsonAdapter(
 
     async addLayer(opt_: GeoJsonAdapterOptions) {
       let needUpdate = !opt_.data;
+      const waitFullLoad =
+        opt_.waitFullLoad !== undefined ? opt_.waitFullLoad : true;
       if (options.id !== undefined) {
         opt_.id = options.id;
       }
@@ -122,7 +124,7 @@ export async function createGeoJsonAdapter(
       if (needUpdate) {
         updatePromise = this.updateLayer();
       }
-      if (opt_.waitFullLoad && updatePromise) {
+      if (waitFullLoad && updatePromise) {
         await updatePromise;
       }
       if (this.options.strategy === 'BBOX') {
@@ -160,7 +162,7 @@ export async function createGeoJsonAdapter(
     async updateLayer(filterArgs?: FilterArgs) {
       filterArgs = filterArgs || _lastFilterArgs || {};
       if (this.options.strategy === 'BBOX') {
-        await webMap.onLoad();
+        await webMap.onLoad('create');
         filterArgs.options = filterArgs.options || {};
         filterArgs.options.intersects = this._getMapBbox();
       }

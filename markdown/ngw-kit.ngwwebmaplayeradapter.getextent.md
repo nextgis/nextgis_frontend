@@ -11,5 +11,5 @@ getExtent(): LngLatBoundsArray | undefined;
 ```
 <b>Returns:</b>
 
-LngLatBoundsArray \| undefined
+[LngLatBoundsArray](./utils.lnglatboundsarray.md) \| undefined
 

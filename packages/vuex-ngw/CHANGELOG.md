@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.11](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-alpha.10...v1.0.0-alpha.11) (2020-11-02)
+
+
+### Features
+
+* **ngw-kit:** add parse date from ngw feature and store util ([6cc45de](https://github.com/nextgis/nextgis_frontend/commit/6cc45ded20b3e14f464c63ed02db1a385689f540))
+
+
+
+
+
 # [1.0.0-alpha.10](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-alpha.9...v1.0.0-alpha.10) (2020-10-20)
 
 **Note:** Version bump only for package @nextgis/vuex-ngw

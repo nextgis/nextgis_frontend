@@ -16,7 +16,7 @@ setView(lngLat?: LngLatArray, zoom?: number): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  lngLat | LngLatArray | Array of two numbers representing longitude and latitude of the center of the map view. |
+|  lngLat | [LngLatArray](./utils.lnglatarray.md) | Array of two numbers representing longitude and latitude of the center of the map view. |
 |  zoom | number | The zoom level to set (0-24). |
 
 <b>Returns:</b>

@@ -32,6 +32,7 @@ import {
 
 import { BaseAdapter, Map } from './BaseAdapter';
 import { whenSampleTerrainMostDetailed } from '../utils/whenSampleTerrainMostDetailed';
+import { isFeature3D } from '../utils/isFeature3D';
 
 type Layer = GeoJsonDataSource;
 
@@ -218,7 +219,7 @@ export class GeoJsonAdapter
     }
   }
 
-  private _addFromGeoJson(obj: Feature, paint: GeometryPaint) {
+  private _addFromGeoJson(feature: Feature, paint: GeometryPaint) {
     const source = this._source;
     if (source) {
       const options: GeoJsonDataSourceLoadOptions = {};
@@ -243,9 +244,11 @@ export class GeoJsonAdapter
         // magic 4
         options.markerSize = paint.radius * 4;
       }
-
+      if (isFeature3D(feature)) {
+        options.clampToGround = false;
+      }
       const dataSource = new GeoJsonDataSource();
-      dataSource.load(obj, options).then((x) => {
+      dataSource.load(feature, options).then((x) => {
         dataSource.entities.values.forEach((y) => {
           const height = this._getEntityHeight(y, paint);
           if (height && y.polygon) {

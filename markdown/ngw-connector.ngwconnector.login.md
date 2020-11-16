@@ -4,6 +4,8 @@
 
 ## NgwConnector.login() method
 
+Quick way to change NextGIS Web user.
+
 <b>Signature:</b>
 
 ```typescript
@@ -14,7 +16,7 @@ login(credentials: Credentials): CancelablePromise<UserInfo>;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  credentials | [Credentials](./ngw-connector.credentials.md) |  |
+|  credentials | [Credentials](./ngw-connector.credentials.md) | New user credentials |
 
 <b>Returns:</b>
 

@@ -26,7 +26,6 @@ Promise&lt;[ResourceAdapter](./ngw-kit.resourceadapter.md) \| undefined&gt;
 
 
 ```javascript
-var ngwMap = new NgwMap({ baseUrl: 'https://demo.nextgis.com', target: 'map' });
 // add raster layer resourceId is the style of 4004 layer
 ngwMap.addNgwLayer({ resourceId: 4005 });
 // add vector data from layer GEOJSON source

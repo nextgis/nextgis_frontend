@@ -165,6 +165,7 @@ export class NgwWebmapItem extends Item<ItemOptions> {
         visibility: false,
         headers: this.options.headers,
         crossOrigin: this.options.crossOrigin,
+        params: { resource: this.item.resourceId },
       };
       if (this.options.order) {
         const subOrder =
@@ -182,8 +183,6 @@ export class NgwWebmapItem extends Item<ItemOptions> {
           ? this._mapScaleToZoomLevel(item.layer_min_scale_denom)
           : this.webMap.options.minZoom;
         objectAssign(options, {
-          // FIXME: why items?
-          // ...item,
           updateWmsParams: item.updateWmsParams,
           url: item.url,
           headers: this.options.headers,
@@ -222,7 +221,7 @@ export class NgwWebmapItem extends Item<ItemOptions> {
   }
 
   protected getChildren(item: TreeGroup): (TreeGroup | TreeLayer)[] {
-    return item.children;
+    return item.children.reverse();
   }
 
   private _mapScaleToZoomLevel(scale: number) {

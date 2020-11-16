@@ -13,7 +13,7 @@ getCenter(): LngLatArray | undefined;
 ```
 <b>Returns:</b>
 
-LngLatArray \| undefined
+[LngLatArray](./utils.lnglatarray.md) \| undefined
 
 ## Example
 

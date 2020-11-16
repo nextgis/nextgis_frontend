@@ -1,10 +1,8 @@
 import {
   MapOptions,
-  ControlPositions,
   // CirclePaint,
   // PathPaint,
   // IconOptions,
-  MapControls,
   WebMapEvents,
   RuntimeParams,
 } from '@nextgis/webmap';
@@ -19,19 +17,9 @@ import { NgwMap } from './NgwMap';
 
 export { NgwLayerOptions };
 
-export interface ControlOptions {
-  [param: string]: any;
-  position?: ControlPositions;
-  control?: string;
-}
-
 export type NgwResourceDefinition = number | [number, string] | NgwLayerOptions;
 
-interface ControlsOptions {
-  [control: string]: ControlOptions;
-}
-
-export interface NgwMapOptions<C = any> extends MapOptions {
+export interface NgwMapOptions<C = any> extends MapOptions<C> {
   /**
    * Url of NGW server like this https://demo.nextgis.com
    */
@@ -83,40 +71,6 @@ export interface NgwMapOptions<C = any> extends MapOptions {
   //   icon: IconOptions
   // };
   /**
-   * List of controls that will be initialized when creating a map instance.
-   * It can be defined as a string, then points to the corresponding entry in the
-   * [controlAdapters](webmap-api#MapAdapter).
-   *
-   * @defaultValue ['ZOOM', 'ATTRIBUTION']
-   *
-   * @example
-   * ```javascript
-   * {
-   *   controls: [
-   *     'ZOOM',
-   *     new CustomControl()
-   *   ]
-   * }
-   * ```
-   */
-  controls?: Array<keyof MapControls | C>;
-  /**
-   * Set options for those controls that are specified by name.
-   *
-   * @example
-   * ```javascript
-   * {
-   *   controls: ['ZOOM', 'button1', 'button2'],
-   *   controlsOptions: {
-   *     'ZOOM': { position: 'top-right' },
-   *     'button1': { control: 'BUTTON', position: 'top-left' },
-   *     'button2': { control: 'BUTTON' },
-   *   }
-   * }
-   * ```
-   */
-  controlsOptions?: ControlsOptions;
-  /**
    * Get information from NGW webmap layers by click.
    *
    * @defaultValue false
@@ -131,7 +85,6 @@ export interface NgwMapOptions<C = any> extends MapOptions {
 }
 
 export interface NgwMapEvents extends WebMapEvents {
-  'controls:create': any;
   'ngw-map:create': NgwMap;
   'ngw:select': NgwIdentify | null;
   'ngw:preselect': void;

@@ -33,7 +33,18 @@
       qmsId: 487,
       resources: [{ resourceId: 4226, fit: true, selectable: true }]
     });
-    ngwMap.emitter.on('ngw:select', function (e) { console.log(e) })
+    var promise;
+    ngwMap.emitter.on('ngw:select', function (e) {
+      if (promise) {
+        console.log('cancel');
+        promise.cancel();
+      }
+      promise = ngwMap.fetchIdentifyGeoJson(e).then(function (geojson) {
+        promise = undefined;
+        ngwMap.removeLayer('geojson');
+        ngwMap.addGeoJsonLayer({data: geojson, id: 'geojson'})
+      })
+    })
   </script>
 </body>
 

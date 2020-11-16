@@ -4,6 +4,11 @@
 
 ## getNgwResourceExtent() function
 
+> Warning: This API is now obsolete.
+> 
+> use [fetchNgwResourceExtent()](./ngw-kit.fetchngwresourceextent.md) instead
+> 
+
 <b>Signature:</b>
 
 ```typescript
@@ -19,5 +24,5 @@ export declare function getNgwResourceExtent(item: ResourceItem, connector: NgwC
 
 <b>Returns:</b>
 
-Promise&lt;LngLatBoundsArray \| undefined&gt;
+Promise&lt;[LngLatBoundsArray](./utils.lnglatboundsarray.md) \| undefined&gt;
 

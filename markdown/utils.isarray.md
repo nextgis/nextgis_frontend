@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function isArray(val: unknown): boolean;
+export declare function isArray(val: unknown): val is [];
 ```
 
 ## Parameters
@@ -18,5 +18,5 @@ export declare function isArray(val: unknown): boolean;
 
 <b>Returns:</b>
 
-boolean
+val is \[\]
 

@@ -4,7 +4,6 @@ import {
   FeatureCollection,
   GeoJsonProperties,
 } from 'geojson';
-import { FilterOptions } from '@nextgis/webmap';
 
 import NgwConnector, {
   FeatureItem,
@@ -13,13 +12,20 @@ import NgwConnector, {
 } from '@nextgis/ngw-connector';
 import CancelablePromise from '@nextgis/cancelable-promise';
 import {
-  propertiesFilter,
   checkIfPropertyFilter,
   PropertyFilter,
   PropertiesFilter,
 } from '@nextgis/properties-filter';
-import { FeatureRequestParams, GetNgwLayerItemsOptions } from '../interfaces';
+import {
+  FeatureRequestParams,
+  GetNgwLayerItemsOptions,
+  NgwFeatureRequestOptions,
+} from '../interfaces';
 import { JsonMap } from '@nextgis/utils';
+import { fetchNgwLayerItem } from './fetchNgwLayerItem';
+import { fetchNgwLayerFeature } from './fetchNgwLayerFeature';
+import { fetchNgwLayerFeatures } from './fetchNgwLayerFeatures';
+import { fetchNgwLayerItems } from './fetchNgwLayerItems';
 
 export const FEATURE_REQUEST_PARAMS: FeatureRequestParams = {
   srs: 4326,
@@ -40,6 +46,9 @@ export function createGeoJsonFeature<
   return feature;
 }
 
+/**
+ * @deprecated use {@link fetchNgwLayerItem} instead
+ */
 export function getNgwLayerItem<
   G extends Geometry = Geometry,
   P extends GeoJsonProperties = GeoJsonProperties
@@ -48,18 +57,14 @@ export function getNgwLayerItem<
     resourceId: number;
     featureId: number;
     connector: NgwConnector;
-  } & FilterOptions
+  } & NgwFeatureRequestOptions
 ): CancelablePromise<FeatureItem<P, G>> {
-  const params: FeatureRequestParams & { [name: string]: any } = {
-    ...FEATURE_REQUEST_PARAMS,
-  };
-  return options.connector.get('feature_layer.feature.item', null, {
-    id: options.resourceId,
-    fid: options.featureId,
-    ...params,
-  }) as CancelablePromise<FeatureItem<P, G>>;
+  return fetchNgwLayerItem(options);
 }
 
+/**
+ * @deprecated use {@link fetchNgwLayerFeature} instead
+ */
 export function getNgwLayerFeature<
   G extends Geometry = Geometry,
   P extends Record<string, any> = Record<string, any>
@@ -68,14 +73,41 @@ export function getNgwLayerFeature<
     resourceId: number;
     featureId: number;
     connector: NgwConnector;
-  } & FilterOptions
+  } & NgwFeatureRequestOptions
 ): CancelablePromise<Feature<G, P>> {
-  return getNgwLayerItem(options).then((item) => {
-    return createGeoJsonFeature<G, P>(item);
-  });
+  return fetchNgwLayerFeature(options);
 }
 
-function idFilterWorkAround<
+/**
+ * @deprecated use {@link fetchNgwLayerFeatures} instead
+ */
+
+export function getNgwLayerFeatures<
+  G extends Geometry | null = Geometry,
+  P extends Record<string, any> = Record<string, any>
+>(
+  options: {
+    resourceId: number;
+    connector: NgwConnector;
+    filters?: PropertiesFilter;
+  } & NgwFeatureRequestOptions
+): CancelablePromise<FeatureCollection<G, P>> {
+  return fetchNgwLayerFeatures(options);
+}
+
+/**
+ * @deprecated use {@link fetchNgwLayerItems} instead
+ */
+export function getNgwLayerItems<
+  G extends Geometry = Geometry,
+  P extends JsonMap = JsonMap
+>(
+  options: GetNgwLayerItemsOptions & NgwFeatureRequestOptions
+): CancelablePromise<FeatureItem<P, G>[]> {
+  return fetchNgwLayerItems(options);
+}
+
+export function idFilterWorkAround<
   G extends Geometry = Geometry,
   P extends JsonMap = JsonMap
 >(options: {
@@ -94,7 +126,7 @@ function idFilterWorkAround<
     );
   }
   const promises: Promise<FeatureItem>[] = featureIds.map((featureId) => {
-    return getNgwLayerItem<G, P>({
+    return fetchNgwLayerItem<G, P>({
       connector: options.connector,
       resourceId: options.resourceId,
       featureId,
@@ -105,8 +137,8 @@ function idFilterWorkAround<
 
 // NGW REST API is not able to filtering by combined queries
 // therefore the filter is divided into several requests
-function createFeatureFieldFilterQueries(
-  opt: Required<GetNgwLayerItemsOptions> & FilterOptions,
+export function createFeatureFieldFilterQueries(
+  opt: Required<GetNgwLayerItemsOptions> & NgwFeatureRequestOptions,
   _queries: CancelablePromise<FeatureItem[]>[] = [],
   _parentAllParams: [string, any][] = []
 ): CancelablePromise<FeatureItem[]> {
@@ -130,7 +162,7 @@ function createFeatureFieldFilterQueries(
       }
       if (checkIfPropertyFilter(f)) {
         _queries.push(
-          getNgwLayerItemsRequest({
+          fetchNgwLayerItemsRequest({
             ...opt,
             paramList: [..._parentAllParams, createParam(f)],
           })
@@ -174,7 +206,7 @@ function createFeatureFieldFilterQueries(
         });
       } else {
         _queries.push(
-          getNgwLayerItemsRequest({
+          fetchNgwLayerItemsRequest({
             ...opt,
             paramList: [..._parentAllParams, ...filters],
           })
@@ -194,12 +226,12 @@ function createFeatureFieldFilterQueries(
   });
 }
 
-function getNgwLayerItemsRequest<
+export function fetchNgwLayerItemsRequest<
   G extends Geometry = Geometry,
   P extends JsonMap = JsonMap
 >(
   options: GetNgwLayerItemsOptions &
-    FilterOptions & { paramList?: [string, any][] }
+    NgwFeatureRequestOptions & { paramList?: [string, any][] }
 ): CancelablePromise<FeatureItem<P, G>[]> {
   const params: FeatureRequestParams & RequestItemAdditionalParams = {
     ...FEATURE_REQUEST_PARAMS,
@@ -213,6 +245,8 @@ function getNgwLayerItemsRequest<
     orderBy,
     resourceId,
     paramList,
+    extensions,
+    geom,
   } = options;
   if (limit) {
     params.limit = limit;
@@ -232,62 +266,16 @@ function getNgwLayerItemsRequest<
   if (orderBy) {
     params.order_by = orderBy.join(',');
   }
+  if (extensions !== undefined) {
+    params.extensions = extensions ? extensions.join(',') : '';
+  }
+  if (geom !== undefined) {
+    params.geom = geom ? 'yes' : 'no';
+  }
   return connector.get('feature_layer.feature.collection', null, {
     id: resourceId,
     ...params,
   }) as CancelablePromise<FeatureItem<P, G>[]>;
-}
-
-export function getNgwLayerItems<
-  G extends Geometry = Geometry,
-  P extends JsonMap = JsonMap
->(
-  options: GetNgwLayerItemsOptions & FilterOptions
-): CancelablePromise<FeatureItem<P, G>[]> {
-  const filters = options.filters;
-  if (filters) {
-    return createFeatureFieldFilterQueries({
-      ...options,
-      filters,
-    }) as CancelablePromise<FeatureItem<P, G>[]>;
-  } else {
-    return getNgwLayerItemsRequest(options).then((data) => {
-      if (filters) {
-        // control
-        return data.filter((y) => {
-          const fields = y.fields;
-          if (fields) {
-            propertiesFilter(fields, filters);
-          }
-        });
-      }
-      return data;
-    }) as CancelablePromise<FeatureItem<P, G>[]>;
-  }
-}
-
-export function getNgwLayerFeatures<
-  G extends Geometry | null = Geometry,
-  P extends Record<string, any> = Record<string, any>
->(
-  options: {
-    resourceId: number;
-    connector: NgwConnector;
-    filters?: PropertiesFilter;
-  } & FilterOptions
-): CancelablePromise<FeatureCollection<G, P>> {
-  return getNgwLayerItems(options).then((x: FeatureItem[]) => {
-    const features: Array<Feature<G, P>> = [];
-    x.forEach((y) => {
-      features.push(createGeoJsonFeature(y));
-    });
-
-    const featureCollection: FeatureCollection<G, P> = {
-      type: 'FeatureCollection',
-      features,
-    };
-    return featureCollection;
-  });
 }
 
 export function prepareFieldsToNgw<T extends any>(
@@ -316,9 +304,9 @@ export function prepareFieldsToNgw<T extends any>(
             typeof prop === 'boolean' || typeof prop === 'number'
               ? Number(!!prop)
               : null;
-        } else if (x.datatype === 'DATE') {
+        } else if (x.datatype === 'DATE' || x.datatype === 'DATETIME') {
           let dt: Date | undefined;
-          if (typeof prop === 'object') {
+          if (typeof prop === 'object' && !((prop as any) instanceof Date)) {
             value = prop;
           } else {
             if ((prop as any) instanceof Date) {
@@ -335,6 +323,11 @@ export function prepareFieldsToNgw<T extends any>(
                 month: dt.getMonth(),
                 day: dt.getDay(),
               };
+              if (x.datatype === 'DATETIME') {
+                value.hour = dt.getHours();
+                value.minute = dt.getMinutes();
+                value.second = dt.getSeconds();
+              }
             }
           }
         }
