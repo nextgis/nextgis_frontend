@@ -1,7 +1,5 @@
 import { Feature, Geometry, GeoJsonProperties } from 'geojson';
 
-export type LookupTables = { [field: string]: Record<string, string> };
-
 export interface ForeignResource {
   relationField?: string;
 }

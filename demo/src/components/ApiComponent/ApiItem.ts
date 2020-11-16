@@ -180,4 +180,7 @@ export interface ReflectionType extends PropertyType {
   declaration: Declaration;
 }
 
-export type Signatures = IndexSignature | ConstructorSignature | CallSignatureItem;
+export type Signatures =
+  | IndexSignature
+  | ConstructorSignature
+  | CallSignatureItem;
