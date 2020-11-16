@@ -47,7 +47,6 @@ export class TreeHelper {
     }
     return toReturn;
   }
-  // endregion
 
   find(filterFunc?: (item: Item) => boolean): Item<ItemOptions> | undefined {
     return treeFind(this._children, filterFunc, (x) => {
