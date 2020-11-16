@@ -170,12 +170,7 @@ function createConfig(format, output, plugins = []) {
     })
   );
 
-  // nodePlugins.push(
-  //   require('rollup-plugin-analyzer')({
-  //     // summaryOnly: true,
-  //     limit: 10,
-  //   })
-  // );
+  // nodePlugins.push(require('rollup-plugin-visualizer')());
 
   return {
     input: resolve(entryFile),
@@ -208,8 +203,8 @@ function createConfig(format, output, plugins = []) {
       }
     },
     treeshake: {
-      moduleSideEffects: !!packageOptions.injectCss,
-      // moduleSideEffects: false,
+      // moduleSideEffects: !!packageOptions.injectCss,
+      moduleSideEffects: false,
     },
   };
 }

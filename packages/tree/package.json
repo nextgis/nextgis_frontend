@@ -15,7 +15,7 @@
     "@nextgis/build-tools": "file:../build-tools"
   },
   "buildOptions": {
-    "name": "PropertiesFilter",
+    "name": "Tree",
     "formats": [
       "esm-bundler",
       "esm-browser",
