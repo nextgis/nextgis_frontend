@@ -12,14 +12,17 @@ export class TileAdapter<O extends RasterAdapterOptions = TileAdapterOptions>
   addLayer(options: O): string[] | undefined {
     options = { ...this.options, ...(options || {}) };
     const { minZoom, maxZoom } = options;
-    let tiles: string[];
-    if (options && options.subdomains) {
-      tiles = options.subdomains.split('').map((x) => {
-        const subUrl = options.url.replace('{s}', x);
-        return subUrl;
+    const tiles: string[] = [];
+    const subdomains: string[] | undefined =
+      typeof options.subdomains === 'string'
+        ? options.subdomains.split('')
+        : options.subdomains;
+    if (subdomains?.length) {
+      subdomains.forEach((x) => {
+        tiles.push(options.url.replace(/{s}/, x));
       });
     } else {
-      tiles = [options.url];
+      tiles.push(options.url);
     }
     if (options.headers) {
       // @ts-ignore
