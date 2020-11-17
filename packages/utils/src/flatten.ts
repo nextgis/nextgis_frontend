@@ -5,7 +5,9 @@ export function flatten(data: Record<string, any>): Record<string, any> {
       result[prop] = cur;
     } else if (Array.isArray(cur)) {
       const l = cur.length;
-      for (let i = 0; i < l; i++) recurse(cur[i], prop + '[' + i + ']');
+      for (let i = 0; i < l; i++) {
+        recurse(cur[i], prop + '[' + i + ']');
+      }
       if (l === 0) result[prop] = [];
     } else {
       let isEmpty = true;
