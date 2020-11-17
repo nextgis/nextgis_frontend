@@ -307,8 +307,7 @@ export interface NgwIdentifyItem {
 /**
  * @public
  */
-export type NgwIdentify = FeatureLayersIdentify &
-  (NgwVectorIdentify | NgwRasterIdentify);
+export type NgwIdentify = FeatureLayersIdentify & (NgwVectorIdentify | NgwRasterIdentify);
 
 /**
  * @public
