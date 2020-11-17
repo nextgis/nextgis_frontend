@@ -545,12 +545,19 @@ export class NgwMap<
     this._emitStatusEvent('ngw:preselect');
 
     const promises: Promise<number[] | undefined>[] = [];
-    for (const nl in this._ngwLayers) {
-      const layer = this._ngwLayers[nl].layer;
+    const layers = Object.values(this._ngwLayers);
+    layers.sort((a, b) => {
+      if (a.layer.order && b.layer.order) {
+        return b.layer.order - a.layer.order;
+      }
+      return 1;
+    });
+    layers.forEach((l) => {
+      const layer = l.layer;
       if (layer.getIdentificationIds && layer.options.selectable) {
         promises.push(layer.getIdentificationIds());
       }
-    }
+    });
     const getIds = await Promise.all(promises);
     const ids: number[] = [];
     getIds.forEach((x) => {
