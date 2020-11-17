@@ -210,7 +210,7 @@ export class NgwLayersList extends Vue {
     }
     this.items = [];
     if (layersList) {
-      layersList
+      [...layersList]
         .sort((a, b) => {
           const aOrder = (a.options && a.options.order) || 0;
           const bOrder = (b.options && b.options.order) || 0;
