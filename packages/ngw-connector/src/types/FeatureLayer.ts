@@ -2,6 +2,10 @@ import { Geometry, GeoJsonProperties, GeoJsonObject } from 'geojson';
 
 export type FeatureLayerFields = GeoJsonProperties;
 
+export interface NgwLayerIdentifyError {
+  error: 'Not implemented';
+}
+
 export interface LayerFeature {
   id: number;
   label: string;
@@ -17,7 +21,7 @@ export interface FeatureLayersIdentifyItems {
 }
 
 export interface FeatureLayersIdentify {
-  [layerId: number]: FeatureLayersIdentifyItems;
+  [layerId: number]: FeatureLayersIdentifyItems | NgwLayerIdentifyError;
   featureCount: number;
 }
 

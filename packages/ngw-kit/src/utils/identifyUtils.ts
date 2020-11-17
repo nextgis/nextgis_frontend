@@ -40,18 +40,21 @@ export function getIdentifyItems(
   }
   for (let fry = 0; fry < resources.length; fry++) {
     const l = resources[fry];
-    const layerFeatures = identify[l].features;
-    const resourceId = Number(l);
-    const feature: LayerFeature | undefined = layerFeatures[0];
-    if (feature) {
-      params = {
-        featureId: feature.id,
-        resourceId,
-        feature,
-      };
-      paramsList.push(params);
-      if (!multiple) {
-        break;
+    const identifyItem = identify[l];
+    if ('features' in identifyItem) {
+      const layerFeatures = identifyItem.features;
+      const resourceId = Number(l);
+      const feature: LayerFeature | undefined = layerFeatures[0];
+      if (feature) {
+        params = {
+          featureId: feature.id,
+          resourceId,
+          feature,
+        };
+        paramsList.push(params);
+        if (!multiple) {
+          break;
+        }
       }
     }
   }
@@ -69,16 +72,18 @@ export function fetchIdentifyGeoJson<
     const id = Number(l);
     if (!isNaN(id)) {
       const item = identify[l];
-      const withGeom = item.features.find((x) => x.geom);
+      if ('features' in item) {
+        const withGeom = item.features.find((x) => x.geom);
 
-      if (withGeom && withGeom.geom) {
-        const geom = withGeom.geom as Geometry;
-        return CancelablePromise.resolve(
-          createGeoJsonFeature({
-            ...withGeom,
-            geom,
-          })
-        );
+        if (withGeom && withGeom.geom) {
+          const geom = withGeom.geom as Geometry;
+          return CancelablePromise.resolve(
+            createGeoJsonFeature({
+              ...withGeom,
+              geom,
+            })
+          );
+        }
       }
     }
   }
