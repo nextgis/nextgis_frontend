@@ -18,6 +18,7 @@ import {
   GeoJsonAdapterOptions,
   DataLayerFilter,
   LayerDefinition,
+  LngLatBoundsArray,
 } from '@nextgis/webmap';
 import { PropertiesFilter } from '@nextgis/properties-filter';
 import {
@@ -33,6 +34,8 @@ import {
 import { BaseAdapter, Map } from './BaseAdapter';
 import { whenSampleTerrainMostDetailed } from '../utils/whenSampleTerrainMostDetailed';
 import { isFeature3D } from '../utils/isFeature3D';
+import { getEntitiesBoundingSphere } from '../utils/getEntitiesBoundingSphere';
+import { getExtentFromBoundingSphere } from '../utils/getExtentFromBoundingSphere';
 
 type Layer = GeoJsonDataSource;
 
@@ -108,6 +111,19 @@ export class GeoJsonAdapter
       }
       this._updateSource();
     }
+  }
+
+  getExtent(): LngLatBoundsArray | undefined {
+    if (this._source) {
+      const boundingSphere = getEntitiesBoundingSphere(
+        this.map,
+        this._source.entities.values
+      );
+      if (boundingSphere) {
+        return getExtentFromBoundingSphere(boundingSphere);
+      }
+    }
+    return undefined;
   }
 
   select(findFeatureCb?: DataLayerFilter<Feature> | PropertiesFilter): void {
@@ -229,6 +245,9 @@ export class GeoJsonAdapter
       const fill = paint.fill ?? true;
       if (fill && color && typeof fillColor === 'string') {
         options.fill = Color.fromCssColorString(fillColor);
+        if (typeof paint.fillOpacity === 'number') {
+          options.fill.alpha = paint.fillOpacity;
+        }
         options.markerColor = Color.fromCssColorString(fillColor);
       }
       if (paint.stroke || paint.strokeColor) {
@@ -247,6 +266,7 @@ export class GeoJsonAdapter
       if (isFeature3D(feature)) {
         options.clampToGround = false;
       }
+
       const dataSource = new GeoJsonDataSource();
       dataSource.load(feature, options).then((x) => {
         dataSource.entities.values.forEach((y) => {

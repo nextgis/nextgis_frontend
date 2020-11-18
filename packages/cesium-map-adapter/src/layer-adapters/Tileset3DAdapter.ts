@@ -7,6 +7,7 @@ import {
   Cartographic,
   Ellipsoid,
 } from 'cesium';
+import { getExtentFromBoundingSphere } from '../utils/getExtentFromBoundingSphere';
 import { makeUrl } from '../utils/makeUrl';
 import { whenSampleTerrainMostDetailed } from '../utils/whenSampleTerrainMostDetailed';
 import { BaseAdapter } from './BaseAdapter';
@@ -87,28 +88,7 @@ export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
   private _calculateExtent() {
     const tileset = this.layer;
     if (tileset) {
-      const boundingSphere = tileset.boundingSphere;
-      const minBoundingSphere = boundingSphere.clone();
-      const maxBoundingSphere = boundingSphere.clone();
-      minBoundingSphere.center.x =
-        minBoundingSphere.center.x - boundingSphere.radius;
-      minBoundingSphere.center.y =
-        minBoundingSphere.center.y - boundingSphere.radius;
-      maxBoundingSphere.center.x =
-        maxBoundingSphere.center.x + boundingSphere.radius;
-      maxBoundingSphere.center.y =
-        maxBoundingSphere.center.y + boundingSphere.radius;
-      const cartoMin = Ellipsoid.WGS84.cartesianToCartographic(
-        minBoundingSphere.center
-      );
-      const cartoMax = Ellipsoid.WGS84.cartesianToCartographic(
-        maxBoundingSphere.center
-      );
-      const west = CMath.toDegrees(cartoMin.longitude);
-      const south = CMath.toDegrees(cartoMin.latitude);
-      const east = CMath.toDegrees(cartoMax.longitude);
-      const north = CMath.toDegrees(cartoMax.latitude);
-      return [west, south, east, north];
+      return getExtentFromBoundingSphere(tileset.boundingSphere);
     }
   }
 
