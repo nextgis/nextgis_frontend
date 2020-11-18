@@ -20,7 +20,6 @@ import NgwConnector, {
 import { FeatureLayersIdentify } from '@nextgis/ngw-connector';
 import { Type } from '@nextgis/utils';
 import { Feature } from 'geojson';
-import { Viewer } from 'cesium';
 
 declare module '@nextgis/webmap' {
   interface LayerAdaptersOptions {
@@ -206,9 +205,9 @@ type A = AdapterOptions; // & TreeLayer & TreeGroup;
 /**
  * @public
  */
-export interface NgwWebmapAdapterOptions extends A {
+export interface NgwWebmapAdapterOptions<M = any> extends A {
   resourceId: number | [number, string];
-  webMap: WebMap<Viewer>;
+  webMap: WebMap<M>;
   connector: NgwConnector;
   /**
    * Get information from NGW webmap layers by click.
