@@ -147,7 +147,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
     return visibleLayers;
   }
 
-  private async _getWebMapLayerItem(): Promise<NgwWebmapItem | undefined> {
+  protected async _getWebMapLayerItem(): Promise<NgwWebmapItem | undefined> {
     if (this.resourceId) {
       const webmap = await this.getWebMapConfig(this.resourceId);
       if (webmap && webmap.root_item) {
