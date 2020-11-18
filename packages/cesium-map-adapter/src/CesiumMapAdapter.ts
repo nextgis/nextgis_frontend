@@ -15,6 +15,9 @@ import {
   Color,
   viewerCesiumInspectorMixin,
   viewerCesium3DTilesInspectorMixin,
+  ScreenSpaceEventType,
+  Cartesian2,
+  Math as CMath,
 } from 'cesium';
 
 import {
@@ -40,6 +43,7 @@ import { Tileset3DAdapter } from './layer-adapters/Tileset3DAdapter';
 import { getDefaultTerrain } from './utils/getDefaultTerrain';
 import { getCameraFocus } from './utils/getCameraFocus';
 import { whenSampleTerrainMostDetailed } from './utils/whenSampleTerrainMostDetailed';
+import { cartesian3ToLngLat } from './utils/cartesian3ToLngLat';
 
 type Layer = any;
 type Control = any;
@@ -227,12 +231,7 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
   getCenter(): LngLatArray | undefined {
     const viewer = this.map;
     if (viewer) {
-      const position = viewer.camera.position;
-      const cartographic = Ellipsoid.WGS84.cartesianToCartographic(position);
-      return [
-        CesiumMath.toDegrees(cartographic.longitude),
-        CesiumMath.toDegrees(cartographic.latitude),
-      ];
+      return cartesian3ToLngLat(viewer.camera.position);
     }
   }
 
@@ -454,6 +453,23 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
   private _addEventsListener(): void {
     const viewer = this.map;
     if (viewer) {
+      viewer.screenSpaceEventHandler.setInputAction((e) => {
+        const ct2 = e.position as Cartesian2;
+        const ellipsoid = viewer.scene.globe.ellipsoid;
+        // Mouse over the globe to see the cartographic position
+        const cartesian = viewer.camera.pickEllipsoid(
+          new Cartesian3(ct2.x, ct2.y),
+          ellipsoid
+        );
+        if (cartesian) {
+          this.emitter.emit('click', {
+            latLng: cartesian3ToLngLat(cartesian),
+            pixel: { left: ct2.x, bottom: ct2.y },
+            source: e,
+          });
+        }
+      }, ScreenSpaceEventType.LEFT_CLICK);
+
       const events: [keyof WebMapEvents, Event | undefined][] = [
         ['zoomstart', undefined],
         ['zoom', undefined],

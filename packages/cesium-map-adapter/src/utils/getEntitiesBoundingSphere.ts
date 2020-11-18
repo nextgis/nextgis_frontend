@@ -18,10 +18,9 @@ export function getEntitiesBoundingSphere(
       false,
       boundingSphereScratch
     );
-    console.log(state);
-    if (state === 'PENDING') {
+    if (state !== 0) {
       return;
-    } else if (state !== 'FAILED') {
+    } else if (state === 0) {
       boundingSpheres.push(BoundingSphere.clone(boundingSphereScratch));
     }
   }
