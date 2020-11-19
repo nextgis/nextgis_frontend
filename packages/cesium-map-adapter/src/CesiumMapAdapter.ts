@@ -25,7 +25,7 @@ import {
   MapAdapter,
   LngLatArray,
   WebMapEvents,
-  ControlPositions,
+  ControlPosition,
   LngLatBoundsArray,
   CreateControlOptions,
   ButtonControlOptions,
@@ -44,6 +44,7 @@ import { getDefaultTerrain } from './utils/getDefaultTerrain';
 import { getCameraFocus } from './utils/getCameraFocus';
 import { whenSampleTerrainMostDetailed } from './utils/whenSampleTerrainMostDetailed';
 import { cartesian3ToLngLat } from './utils/cartesian3ToLngLat';
+import { CesiumAdapterMapClickEvent, CesiumMapClickEvent } from './interfaces';
 
 type Layer = any;
 type Control = any;
@@ -355,7 +356,7 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
     // return
   }
 
-  addControl(control: Control, position: ControlPositions): any {
+  addControl(control: Control, position: ControlPosition): any {
     if (this._controlContainer) {
       this._controlContainer.addControl(control, position);
     }
@@ -453,34 +454,37 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
   private _addEventsListener(): void {
     const viewer = this.map;
     if (viewer) {
-      viewer.screenSpaceEventHandler.setInputAction((e) => {
-        const ct2 = e.position as Cartesian2;
-        const scene = viewer.scene;
-        const ellipsoid = viewer.scene.globe.ellipsoid;
-        // Mouse over the globe to see the cartographic position
-        const cartesian = viewer.camera.pickEllipsoid(
-          new Cartesian3(ct2.x, ct2.y),
-          ellipsoid
-        );
-        const top = scene.canvas.clientHeight - ct2.y;
-        const clickData: MapClickEvent = {
-          pixel: { left: ct2.x, top, bottom: ct2.y },
-          lngLat: cartesian
-            ? cartesian3ToLngLat(cartesian)
-            : [Infinity, Infinity],
-          source: {
-            ...e,
-          },
-        };
-        if (viewer.scene.pickPositionSupported) {
-          const pickedPosition = viewer.scene.pickPosition(e.position);
-          clickData.source.pickedPosition = pickedPosition;
-          clickData.source.pickedPositionLngLat = cartesian3ToLngLat(
-            pickedPosition
+      viewer.screenSpaceEventHandler.setInputAction(
+        (e: CesiumMapClickEvent) => {
+          const ct2 = e.position as Cartesian2;
+          const scene = viewer.scene;
+          const ellipsoid = viewer.scene.globe.ellipsoid;
+          // Mouse over the globe to see the cartographic position
+          const cartesian = viewer.camera.pickEllipsoid(
+            new Cartesian3(ct2.x, ct2.y),
+            ellipsoid
           );
-        }
-        this.emitter.emit('click', clickData);
-      }, ScreenSpaceEventType.LEFT_CLICK);
+          const top = scene.canvas.clientHeight - ct2.y;
+          const clickData: CesiumAdapterMapClickEvent = {
+            pixel: { left: ct2.x, top, bottom: ct2.y },
+            lngLat: cartesian
+              ? cartesian3ToLngLat(cartesian)
+              : [Infinity, Infinity],
+            source: {
+              ...e,
+            },
+          };
+          if (viewer.scene.pickPositionSupported) {
+            const pickedPosition = viewer.scene.pickPosition(e.position);
+            clickData.source.pickedPosition = pickedPosition;
+            clickData.source.pickedPositionLngLat = cartesian3ToLngLat(
+              pickedPosition
+            );
+          }
+          this.emitter.emit('click', clickData);
+        },
+        ScreenSpaceEventType.LEFT_CLICK
+      );
 
       const events: [keyof WebMapEvents, Event | undefined][] = [
         ['zoomstart', undefined],
