@@ -13,12 +13,16 @@ export class TileAdapter extends BaseAdapter<TileAdapterOptions, Layer> {
   addLayer(opt: TileAdapterOptions): ImageryLayer {
     this.options = { ...opt };
     const url = makeUrl(this.options.url, this.options.headers);
-    const urlLayer = new UrlTemplateImageryProvider({
+    const imageProviderOpt: UrlTemplateImageryProvider.ConstructorOptions = {
       url,
       credit: opt.attribution,
       maximumLevel: defined(opt.maxZoom) ? opt.maxZoom : undefined,
       minimumLevel: defined(opt.minZoom) ? opt.minZoom : undefined,
-    });
+    };
+    if (this.options.subdomains) {
+      imageProviderOpt.subdomains = this.options.subdomains;
+    }
+    const urlLayer = new UrlTemplateImageryProvider(opt);
     // @ts-ignore - ImageryLayer need to set layer opacity
     // based on https://sandcastle.cesium.com/index.html?src=Imagery%2520Layers%2520Manipulation.html
     const layer = new ImageryLayer(urlLayer, { show: false });
