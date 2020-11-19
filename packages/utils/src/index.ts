@@ -4,6 +4,7 @@ export * from './applyMixins';
 export * from './array';
 export * from './defined';
 export * from './deepmerge';
+export * from './deprecated';
 export * from './debounce';
 export * from './events';
 export * from './geom';
