@@ -5,6 +5,7 @@ import StrictEventEmitter from 'strict-event-emitter-types';
 import { deepmerge, defined, Type, getBoundsFeature } from '@nextgis/utils';
 import { GetPaintFunction } from '@nextgis/paint';
 import CancelablePromise from '@nextgis/cancelable-promise';
+import { deprecatedMapClick } from '@nextgis/utils';
 
 import { LngLatBoundsArray, Cursor, LngLatArray } from './interfaces/BaseTypes';
 import {
@@ -459,7 +460,8 @@ export class WebMapMain<
           };
           const onMapClick = (e: MapClickEvent) => {
             onCancel_();
-            resolve([e.latLng.lng, e.latLng.lat]);
+            deprecatedMapClick(e);
+            resolve(e.lngLat);
           };
           this.mapAdapter.emitter.once('click', onMapClick);
           onCancel(onCancel_);
