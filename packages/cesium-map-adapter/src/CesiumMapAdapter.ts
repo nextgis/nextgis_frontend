@@ -479,9 +479,9 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
           if (viewer.scene.pickPositionSupported) {
             const pickedPosition = viewer.scene.pickPosition(e.position);
             clickData.source.pickedPosition = pickedPosition;
-            clickData.source.pickedPositionLngLat = cartesian3ToLngLat(
-              pickedPosition
-            );
+            const pickedPositionLngLat = cartesian3ToLngLat(pickedPosition);
+            clickData.source.pickedPositionLngLat = pickedPositionLngLat;
+            clickData.lngLat = pickedPositionLngLat;
           }
           this.emitter.emit('click', clickData);
         },
