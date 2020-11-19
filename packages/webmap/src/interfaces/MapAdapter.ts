@@ -22,7 +22,7 @@ export interface MapClickEvent {
   /**
    * The geographical point where the mouse event occurred.
    */
-  latLng: LatLng;
+  lngLat: LngLatArray;
   /**
    * Pixel coordinates of the point where the mouse event occurred relative to the map container.
    */
@@ -31,6 +31,12 @@ export interface MapClickEvent {
    * Map adapter original click event
    */
   source?: any;
+
+  /**
+   * The geographical point where the mouse event occurred.
+   * @deprecated use `lngLat: number[]` instead
+   */
+  latLng?: LatLng;
 }
 
 /**

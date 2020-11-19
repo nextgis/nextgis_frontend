@@ -6,6 +6,7 @@ import {
   JsonMap,
   degrees2meters,
   getCirclePolygonCoordinates,
+  deprecatedMapClick,
 } from '@nextgis/utils';
 import {
   GetIdentifyGeoJsonOptions,
@@ -112,12 +113,9 @@ export function sendIdentifyRequest(
   options: IdentifyRequestOptions
   // webMap: WebMap
 ): Promise<FeatureLayersIdentify> {
-  // webMap.emitter.emit('start-identify', { ev });
-  const geom = getCirclePolygonCoordinates(
-    ev.latLng.lng,
-    ev.latLng.lat,
-    options.radius
-  );
+  deprecatedMapClick(ev);
+  const [lng, lat] = ev.lngLat;
+  const geom = getCirclePolygonCoordinates(lng, lat, options.radius);
 
   // create wkt string
   const polygon: string[] = [];
