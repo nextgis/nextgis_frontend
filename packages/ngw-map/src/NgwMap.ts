@@ -573,7 +573,8 @@ export class NgwMap<
 
     const pixelRadius = this.options.pixelRadius || 10;
     const center = this.getCenter();
-    const zoom = this.getZoom();
+    let zoom = this.getZoom();
+    zoom = zoom !== undefined ? zoom : 20;
     if (!center || !zoom) {
       this._emitStatusEvent('ngw:select', null);
       return;
@@ -581,7 +582,6 @@ export class NgwMap<
     const metresPerPixel =
       (40075016.686 * Math.abs(Math.cos((center[1] * 180) / Math.PI))) /
       Math.pow(2, zoom + 8);
-    // FIXME: understand the circle creation function
     const radius = pixelRadius * metresPerPixel * 0.0005;
     return sendIdentifyRequest(ev, {
       layers: ids,
