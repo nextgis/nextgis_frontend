@@ -424,7 +424,7 @@ export class WebMapLayers<
   async addGeoJsonLayer<K extends keyof LayerAdaptersOptions>(
     opt: GeoJsonAdapterOptions,
     adapter?: K | Type<LayerAdapter>
-  ): Promise<LayerAdapter<any, any, AdapterOptions>> {
+  ): Promise<VectorLayerAdapter<any, any, AdapterOptions>> {
     opt = opt || {};
     opt.multiselect = opt.multiselect !== undefined ? opt.multiselect : false;
     opt.unselectOnSecondClick =

@@ -49,6 +49,8 @@ import { prepareWebMapOptions } from './utils/prepareWebMapOptions';
 import { NgwMapOptions, NgwMapEvents, NgwLayers } from './interfaces';
 import { Geometry, Feature, FeatureCollection } from 'geojson';
 
+type PromiseGroup = 'select' | 'identify';
+
 /**
  * Base class containing the logic of interaction WebMap with NextGIS services.
  *
@@ -86,6 +88,10 @@ export class NgwMap<
   protected _ngwLayers: NgwLayers = {};
   private __selectFromNgwRaster?: (ev: MapClickEvent) => void;
   private __selectFromNgwVector?: (ev: OnLayerClickOptions) => void;
+  private _promises: Record<PromiseGroup, CancelablePromise[]> = {
+    select: [],
+    identify: [],
+  };
 
   constructor(options: O) {
     super(prepareWebMapOptions(options) as O);
@@ -257,15 +263,16 @@ export class NgwMap<
     identify: NgwIdentify,
     multiple = false
   ): CancelablePromise<Feature | undefined> {
-    const geojson = fetchIdentifyGeoJson({
+    const promise = fetchIdentifyGeoJson({
       identify,
       connector: this.connector,
       multiple,
     });
-    if (geojson && 'then' in geojson) {
-      return geojson;
+    if (promise && 'then' in promise) {
+      this._addPromise('identify', promise);
+      return promise;
     } else {
-      return CancelablePromise.resolve(geojson);
+      return CancelablePromise.resolve(promise);
     }
   }
 
@@ -437,6 +444,29 @@ export class NgwMap<
     return this.fetchNgwLayerFeatures(options);
   }
 
+  cancelPromise(name: PromiseGroup): void {
+    const group = this._promises[name];
+    if (group) {
+      group.forEach((x) => x.cancel());
+      this._promises[name] = [];
+    }
+  }
+
+  private _addPromise(groupName: PromiseGroup, promise: CancelablePromise) {
+    const group = this._promises[groupName];
+    if (group && group.indexOf(promise) === -1) {
+      const removeFromGroup = () => {
+        const index = group.indexOf(promise);
+        if (index !== -1) {
+          group.splice(index, 1);
+        }
+      };
+      promise.then(removeFromGroup);
+      promise.catch(removeFromGroup);
+      group.push(promise);
+    }
+  }
+
   private _isFitFromResource() {
     const params = this._initMapState;
     if (params.zoom && params.center) {
@@ -558,7 +588,8 @@ export class NgwMap<
         promises.push(layer.getIdentificationIds());
       }
     });
-    const getIds = await Promise.all(promises);
+    const getIdsPromise = Promise.all(promises);
+    const getIds = await getIdsPromise;
     const ids: number[] = [];
     getIds.forEach((x) => {
       if (x) {
@@ -583,7 +614,8 @@ export class NgwMap<
       (40075016.686 * Math.abs(Math.cos((center[1] * 180) / Math.PI))) /
       Math.pow(2, zoom + 8);
     const radius = pixelRadius * metresPerPixel * 0.0005;
-    return sendIdentifyRequest(ev, {
+
+    const selectPromise = sendIdentifyRequest(ev, {
       layers: ids,
       connector: this.connector,
       radius,
@@ -596,6 +628,8 @@ export class NgwMap<
       });
       return resp;
     });
+    this._addPromise('select', selectPromise);
+    return selectPromise;
   }
 
   private async _whiteLabel() {
