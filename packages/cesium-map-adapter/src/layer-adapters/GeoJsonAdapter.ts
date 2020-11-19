@@ -161,12 +161,13 @@ export class GeoJsonAdapter
           if (paint.type === 'pin') {
             promises.push(this._addPin(x, paint));
           } else {
-            this._addFromGeoJson(x, paint);
+            promises.push(this._addFromGeoJson(x, paint));
           }
         }
       });
-      // Promise.all(promises).then((x) => {
-      // });
+      Promise.all(promises).then((x) => {
+        this.map.scene.requestRender();
+      });
       this.watchHeight();
     }
   }
@@ -235,7 +236,10 @@ export class GeoJsonAdapter
     }
   }
 
-  private _addFromGeoJson(feature: Feature, paint: GeometryPaint) {
+  private _addFromGeoJson(
+    feature: Feature,
+    paint: GeometryPaint
+  ): Promise<void> {
     const source = this._source;
     if (source) {
       const options: GeoJsonDataSourceLoadOptions = {};
@@ -268,7 +272,7 @@ export class GeoJsonAdapter
       }
 
       const dataSource = new GeoJsonDataSource();
-      dataSource.load(feature, options).then((x) => {
+      return dataSource.load(feature, options).then((x) => {
         dataSource.entities.values.forEach((y) => {
           const height = this._getEntityHeight(y, paint);
           if (height && y.polygon) {
@@ -280,6 +284,7 @@ export class GeoJsonAdapter
         });
       });
     }
+    return Promise.resolve();
   }
 
   private _getFeaturePaint(

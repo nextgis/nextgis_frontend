@@ -112,7 +112,7 @@ export function sendIdentifyRequest(
   ev: MapClickEvent,
   options: IdentifyRequestOptions
   // webMap: WebMap
-): Promise<FeatureLayersIdentify> {
+): CancelablePromise<FeatureLayersIdentify> {
   deprecatedMapClick(ev);
   const [lng, lat] = ev.lngLat;
   const geom = getCirclePolygonCoordinates(lng, lat, options.radius);
