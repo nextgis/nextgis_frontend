@@ -6,6 +6,7 @@ export * from './defined';
 export * from './deepmerge';
 export * from './deprecated';
 export * from './debounce';
+export * from './debug';
 export * from './events';
 export * from './geom';
 export * from './object';

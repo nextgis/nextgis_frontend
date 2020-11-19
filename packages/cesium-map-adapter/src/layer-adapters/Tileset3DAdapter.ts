@@ -1,12 +1,6 @@
 import { Tileset3DAdapterOptions, LngLatBoundsArray } from '@nextgis/webmap';
-import {
-  Cesium3DTileset,
-  Math as CMath,
-  Matrix4,
-  Cartesian3,
-  Cartographic,
-  Ellipsoid,
-} from 'cesium';
+import { Cesium3DTileset, Matrix4, Cartesian3, Cartographic } from 'cesium';
+import { debugLog } from '@nextgis/utils';
 import { getExtentFromBoundingSphere } from '../utils/getExtentFromBoundingSphere';
 import { makeUrl } from '../utils/makeUrl';
 import { whenSampleTerrainMostDetailed } from '../utils/whenSampleTerrainMostDetailed';
@@ -79,9 +73,7 @@ export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
       }
       return this.layer;
     } catch (er) {
-      if (__DEV__) {
-        console.warn(er);
-      }
+      debugLog(er);
     }
   }
 

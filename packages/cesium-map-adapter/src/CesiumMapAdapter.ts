@@ -455,14 +455,16 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
     if (viewer) {
       viewer.screenSpaceEventHandler.setInputAction((e) => {
         const ct2 = e.position as Cartesian2;
+        const scene = viewer.scene;
         const ellipsoid = viewer.scene.globe.ellipsoid;
         // Mouse over the globe to see the cartographic position
         const cartesian = viewer.camera.pickEllipsoid(
           new Cartesian3(ct2.x, ct2.y),
           ellipsoid
         );
+        const top = scene.canvas.clientHeight - ct2.y;
         const clickData: MapClickEvent = {
-          pixel: { left: ct2.x, bottom: ct2.y },
+          pixel: { left: ct2.x, top, bottom: ct2.y },
           lngLat: cartesian
             ? cartesian3ToLngLat(cartesian)
             : [Infinity, Infinity],
