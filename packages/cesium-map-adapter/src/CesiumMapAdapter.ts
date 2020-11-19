@@ -17,7 +17,6 @@ import {
   viewerCesium3DTilesInspectorMixin,
   ScreenSpaceEventType,
   Cartesian2,
-  Math as CMath,
 } from 'cesium';
 
 import {
@@ -31,6 +30,7 @@ import {
   CreateControlOptions,
   ButtonControlOptions,
   FitOptions,
+  MapClickEvent,
 } from '@nextgis/webmap';
 import { Type } from '@nextgis/utils';
 import ControlContainer from '@nextgis/control-container';
@@ -47,7 +47,7 @@ import { cartesian3ToLngLat } from './utils/cartesian3ToLngLat';
 
 type Layer = any;
 type Control = any;
-type MapClickEvent = any;
+// type MapClickEvent = any;
 
 export interface MapAdapterOptions {
   baseColor: string;
@@ -461,13 +461,23 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
           new Cartesian3(ct2.x, ct2.y),
           ellipsoid
         );
-        if (cartesian) {
-          this.emitter.emit('click', {
-            latLng: cartesian3ToLngLat(cartesian),
-            pixel: { left: ct2.x, bottom: ct2.y },
-            source: e,
-          });
+        const clickData: MapClickEvent = {
+          pixel: { left: ct2.x, bottom: ct2.y },
+          lngLat: cartesian
+            ? cartesian3ToLngLat(cartesian)
+            : [Infinity, Infinity],
+          source: {
+            ...e,
+          },
+        };
+        if (viewer.scene.pickPositionSupported) {
+          const pickedPosition = viewer.scene.pickPosition(e.position);
+          clickData.source.pickedPosition = pickedPosition;
+          clickData.source.pickedPositionLngLat = cartesian3ToLngLat(
+            pickedPosition
+          );
         }
+        this.emitter.emit('click', clickData);
       }, ScreenSpaceEventType.LEFT_CLICK);
 
       const events: [keyof WebMapEvents, Event | undefined][] = [
