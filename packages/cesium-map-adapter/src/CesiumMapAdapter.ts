@@ -244,21 +244,23 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
   }
 
   getZoom(): number | undefined {
-    const viewer = this.map;
-    if (viewer) {
-      let iniPos = new Cartesian3();
-      iniPos = viewer.camera.position;
-      const cartographic = new Cartographic();
-      // cartographic.height = zoom * 1000;
-      cartographic.longitude = iniPos.x;
-      cartographic.latitude = iniPos.y;
-      const newPos = new Cartesian3();
-      Ellipsoid.WGS84.cartographicToCartesian(cartographic, newPos);
-      viewer.camera.setView({
-        destination: newPos,
-      });
-    }
     return undefined;
+  }
+
+  fetchZoom(): Promise<number | undefined> {
+    return new Promise((resolve) => {
+      const map = this.map;
+      if (map) {
+        const cartographic = Cartographic.fromCartesian(map.camera.position);
+        whenSampleTerrainMostDetailed(
+          map.terrainProvider,
+          [cartographic],
+          () => {
+            resolve(cartographic.height);
+          }
+        );
+      }
+    });
   }
 
   zoomOut(): void {
