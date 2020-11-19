@@ -30,7 +30,7 @@ export interface MapClickEvent {
   /**
    * Map adapter original click event
    */
-  source?: any;
+  source?: unknown;
 
   /**
    * The geographical point where the mouse event occurred.
@@ -169,6 +169,12 @@ export interface MapAdapter<M = any, L = any, C = any> {
   getBounds?(): LngLatBoundsArray | undefined;
 
   getZoom(): number | undefined;
+  /**
+   * Temporal async method.
+   * @remark
+   * TODO: need to replace all 'get' methods with asynchronous
+   */
+  fetchZoom(): Promise<number | undefined>;
   setZoom(zoom: number): void;
   /** zoom the map by one quantile of the current adapter */
   zoomIn?(): void;
