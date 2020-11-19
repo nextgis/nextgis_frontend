@@ -17,8 +17,8 @@ export { Type, ZoomLevel, LatLng, LngLatBoundsArray, LngLatArray };
  * @public
  */
 export interface Pixel {
-  top?: number;
-  left?: number;
+  top: number;
+  left: number;
   right?: number;
   bottom?: number;
 }
