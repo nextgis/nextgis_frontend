@@ -12,6 +12,7 @@ import {
   LayerAdapter,
   FilterOptions,
   OnLayerClickOptions,
+  FitOptions,
 } from '@nextgis/webmap';
 import NgwConnector, {
   ResourceItem,
@@ -86,8 +87,8 @@ export class NgwMap<
   connector!: NgwConnector;
 
   protected _ngwLayers: NgwLayers = {};
-  private __selectFromNgwRaster?: (ev: MapClickEvent) => void;
-  private __selectFromNgwVector?: (ev: OnLayerClickOptions) => void;
+  private $$selectFromNgwRaster?: (ev: MapClickEvent) => void;
+  private $$selectFromNgwVector?: (ev: OnLayerClickOptions) => void;
   private _promises: Record<PromiseGroup, CancelablePromise[]> = {
     select: [],
     identify: [],
@@ -320,11 +321,11 @@ export class NgwMap<
    * @example
    * ```javascript
    * const ngwLayer = ngwMap.addNgwLayer({ id: 'ngw_layer_name', resourceId: 4005 });
-   * ngwMap.zoomToLayer(ngwLayer);
-   * ngwMap.zoomToLayer('ngw_layer_name');
+   * ngwMap.fitLayer(ngwLayer);
+   * ngwMap.fitLayer('ngw_layer_name');
    * ```
    */
-  async zoomToLayer(layerDef: string | ResourceAdapter): Promise<void> {
+  async fitLayer(layerDef: LayerDef, options?: FitOptions): Promise<void> {
     let id: string | undefined;
     if (typeof layerDef === 'string' || typeof layerDef === 'number') {
       id = String(id);
@@ -336,7 +337,7 @@ export class NgwMap<
       if (ngwLayer.layer.getExtent) {
         const extent = await ngwLayer.layer.getExtent();
         if (extent) {
-          this.fitBounds(extent);
+          this.fitBounds(extent, options);
         }
       } else {
         let item: ResourceItem | undefined;
@@ -349,12 +350,19 @@ export class NgwMap<
         if (item) {
           fetchNgwResourceExtent(item, this.connector).then((extent) => {
             if (extent) {
-              this.fitBounds(extent);
+              this.fitBounds(extent, options);
             }
           });
         }
       }
+    } else {
+      super.fitLayer(layerDef, options);
     }
+  }
+
+  /** @deprecated use {@link NgwMap.fitLayer} instead */
+  async zoomToLayer(layerDef: string | ResourceAdapter): Promise<void> {
+    return this.fitLayer(layerDef);
   }
 
   onLoad(event: keyof NgwMapEvents = 'ngw-map:create'): Promise<this> {
@@ -373,22 +381,22 @@ export class NgwMap<
   }
 
   enableSelection(): void {
-    if (!this.__selectFromNgwRaster) {
-      this.__selectFromNgwRaster = (ev: MapClickEvent) =>
+    if (!this.$$selectFromNgwRaster) {
+      this.$$selectFromNgwRaster = (ev: MapClickEvent) =>
         this._selectFromNgwRaster(ev);
-      this.__selectFromNgwVector = (ev: OnLayerClickOptions) =>
+      this.$$selectFromNgwVector = (ev: OnLayerClickOptions) =>
         this._selectFromNgwVector(ev);
-      this.emitter.on('click', this.__selectFromNgwRaster);
-      this.emitter.on('layer:click', this.__selectFromNgwVector);
+      this.emitter.on('click', this.$$selectFromNgwRaster);
+      this.emitter.on('layer:click', this.$$selectFromNgwVector);
     }
   }
 
   disableSelection(): void {
-    if (this.__selectFromNgwRaster) {
-      this.emitter.removeListener('click', this.__selectFromNgwRaster);
+    if (this.$$selectFromNgwRaster) {
+      this.emitter.removeListener('click', this.$$selectFromNgwRaster);
       this.emitter.removeListener('click', this._selectFromNgwVector);
-      this.__selectFromNgwRaster = undefined;
-      this.__selectFromNgwVector = undefined;
+      this.$$selectFromNgwRaster = undefined;
+      this.$$selectFromNgwVector = undefined;
     }
   }
 
