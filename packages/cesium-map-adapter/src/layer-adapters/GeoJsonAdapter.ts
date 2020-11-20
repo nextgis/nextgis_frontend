@@ -90,18 +90,16 @@ export class GeoJsonAdapter
   }
 
   clearLayer(cb?: (feature: Feature) => boolean): void {
-    if (this._source) {
-      this._source.entities.removeAll();
-      this._features = [];
-    }
+    this._clearLayer();
+    this.map.scene.requestRender();
   }
 
   setData(data: GeoJsonObject): void {
-    this.clearLayer();
+    this._clearLayer();
     this.addData(data);
   }
 
-  addData(data: GeoJsonObject): void {
+  addData(data: GeoJsonObject): Promise<void> {
     if (this._source) {
       if (data.type === 'Feature') {
         this._features.push(data as Feature);
@@ -109,8 +107,11 @@ export class GeoJsonAdapter
         const featureCollection = data as FeatureCollection;
         featureCollection.features.forEach((x) => this._features.push(x));
       }
-      this._updateSource();
+      return this._updateSource().then(() => {
+        this.map.scene.requestRender();
+      });
     }
+    return Promise.resolve();
   }
 
   getExtent(): LngLatBoundsArray | undefined {
@@ -150,7 +151,14 @@ export class GeoJsonAdapter
     //
   }
 
-  private _updateSource() {
+  private _clearLayer(): void {
+    if (this._source) {
+      this._source.entities.removeAll();
+      this._features = [];
+    }
+  }
+
+  private _updateSource(): Promise<void> {
     const source = this._source;
     if (source) {
       source.entities.removeAll();
@@ -165,11 +173,11 @@ export class GeoJsonAdapter
           }
         }
       });
-      Promise.all(promises).then((x) => {
-        this.map.scene.requestRender();
+      return Promise.all(promises).then((x) => {
+        this.watchHeight();
       });
-      this.watchHeight();
     }
+    return Promise.resolve();
   }
 
   private async _addPin(obj: Feature, paint: PinPaint) {
