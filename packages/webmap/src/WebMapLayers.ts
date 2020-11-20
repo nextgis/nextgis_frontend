@@ -682,17 +682,18 @@ export class WebMapLayers<
    * });
    * ```
    */
-  setLayerData(layerDef: LayerDef, data: GeoJsonObject): void {
+  setLayerData(layerDef: LayerDef, data: GeoJsonObject): void | Promise<void> {
     const vectorAdapter = this.getLayer(layerDef);
     const adapter = vectorAdapter as VectorLayerAdapter;
     if (adapter) {
       if (adapter.setData) {
-        adapter.setData(data);
+        return adapter.setData(data);
       } else if (adapter.clearLayer && adapter.addData) {
         adapter.clearLayer();
-        adapter.addData(data);
+        return adapter.addData(data);
       }
     }
+    return Promise.resolve();
   }
 
   /**

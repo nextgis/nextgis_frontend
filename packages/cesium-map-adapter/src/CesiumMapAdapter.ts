@@ -17,6 +17,8 @@ import {
   viewerCesium3DTilesInspectorMixin,
   ScreenSpaceEventType,
   Cartesian2,
+  Cesium3DTileFeature,
+  Entity,
 } from 'cesium';
 
 import {
@@ -33,6 +35,7 @@ import {
   MapClickEvent,
 } from '@nextgis/webmap';
 import { Type } from '@nextgis/utils';
+import { PathPaint } from '@nextgis/paint';
 import ControlContainer from '@nextgis/control-container';
 
 import { TileAdapter } from './layer-adapters/TileAdapter';
@@ -57,6 +60,7 @@ export interface MapAdapterOptions {
   requestRenderMode: boolean;
   viewerCesium3DTilesInspectorMixin: boolean;
   viewerCesiumInspectorMixin: boolean;
+  highlight?: PathPaint;
 }
 
 export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
@@ -167,7 +171,7 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
             viewer.scene.mode = SceneMode.SCENE3D;
         }
       }
-
+      // viewer._onMapClick: (() => void)[] = []
       this.map = viewer;
       this._removeLogo();
       this._controlContainer = new ControlContainer({
@@ -178,7 +182,6 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
       if (ma.viewerCesium3DTilesInspectorMixin) {
         viewer.extend(viewerCesium3DTilesInspectorMixin, {});
         // const inspectorViewModel = viewer.cesium3DTilesInspector;
-        // console.log(inspectorViewModel);
       }
       if (ma.viewerCesiumInspectorMixin) {
         viewer.extend(viewerCesiumInspectorMixin, {});
@@ -456,6 +459,34 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
   private _addEventsListener(): void {
     const viewer = this.map;
     if (viewer) {
+      this._addClickEvent();
+
+      const events: [keyof WebMapEvents, Event | undefined][] = [
+        ['zoomstart', undefined],
+        ['zoom', undefined],
+        ['zoomend', undefined],
+        ['movestart', viewer.camera.moveStart],
+        ['move', undefined],
+        ['moveend', viewer.camera.moveEnd],
+      ];
+      events.forEach(([name, event]) => {
+        if (event) {
+          event.addEventListener(() => {
+            this.emitter.emit(name);
+          });
+        }
+      });
+    }
+  }
+
+  private _addClickEvent() {
+    const viewer = this.map;
+    this.emitter.emit('preclick');
+    if (viewer) {
+      const clickHandler = viewer.screenSpaceEventHandler.getInputAction(
+        ScreenSpaceEventType.LEFT_CLICK
+      );
+
       viewer.screenSpaceEventHandler.setInputAction(
         (e: CesiumMapClickEvent) => {
           const ct2 = e.position as Cartesian2;
@@ -478,31 +509,24 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
           };
           if (viewer.scene.pickPositionSupported) {
             const pickedPosition = viewer.scene.pickPosition(e.position);
-            clickData.source.pickedPosition = pickedPosition;
-            const pickedPositionLngLat = cartesian3ToLngLat(pickedPosition);
-            clickData.source.pickedPositionLngLat = pickedPositionLngLat;
-            clickData.lngLat = pickedPositionLngLat;
+            if (pickedPosition) {
+              clickData.source.pickedPosition = pickedPosition;
+              const pickedPositionLngLat = cartesian3ToLngLat(pickedPosition);
+              clickData.source.pickedPositionLngLat = pickedPositionLngLat;
+              clickData.lngLat = pickedPositionLngLat;
+            }
           }
+          // const picked = viewer.scene.pick(e.position);
+          // if (picked && picked.id && picked.id instanceof Entity) {
+          //   viewer.selectedEntity = picked.id;
+          // } else {
+          //   clickHandler(e);
+          // }
+          clickHandler(e);
           this.emitter.emit('click', clickData);
         },
         ScreenSpaceEventType.LEFT_CLICK
       );
-
-      const events: [keyof WebMapEvents, Event | undefined][] = [
-        ['zoomstart', undefined],
-        ['zoom', undefined],
-        ['zoomend', undefined],
-        ['movestart', viewer.camera.moveStart],
-        ['move', undefined],
-        ['moveend', viewer.camera.moveEnd],
-      ];
-      events.forEach(([name, event]) => {
-        if (event) {
-          event.addEventListener(() => {
-            this.emitter.emit(name);
-          });
-        }
-      });
     }
   }
 }
