@@ -1,6 +1,6 @@
 import NgwConnector, { ResourceItem } from '@nextgis/ngw-connector';
 import { LngLatBoundsArray } from '@nextgis/webmap';
-import { getNgwResourceExtent } from './utils/fetchNgwExtent';
+import { fetchNgwResourceExtent } from './utils/fetchNgwExtent';
 export class NgwResource {
   item!: ResourceItem;
   connector!: NgwConnector;
@@ -12,7 +12,7 @@ export class NgwResource {
       return this._extent;
     }
     if (this.item) {
-      this._extent = await getNgwResourceExtent(
+      this._extent = await fetchNgwResourceExtent(
         this.item,
         this.connector
       ).then();

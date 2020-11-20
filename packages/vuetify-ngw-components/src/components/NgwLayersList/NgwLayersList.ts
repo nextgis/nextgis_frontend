@@ -302,6 +302,12 @@ export class NgwLayersList extends Vue {
       };
       if (x.layer) {
         item.layer = x.layer.id;
+      } else {
+        x.emitter.once('init', () => {
+          if (x.layer) {
+            item.layer = x.layer.id;
+          }
+        });
       }
       if (x.item.item_type === 'group') {
         const children = x.tree.getChildren<NgwWebmapItem>();

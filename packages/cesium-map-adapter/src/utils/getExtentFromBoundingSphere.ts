@@ -2,7 +2,7 @@ import { BoundingSphere, Ellipsoid, Math as CMath } from 'cesium';
 
 export function getExtentFromBoundingSphere(
   boundingSphere: BoundingSphere
-): number[] {
+): number[] | undefined {
   const minBoundingSphere = boundingSphere.clone();
   const maxBoundingSphere = boundingSphere.clone();
   minBoundingSphere.center.x =
@@ -19,9 +19,11 @@ export function getExtentFromBoundingSphere(
   const cartoMax = Ellipsoid.WGS84.cartesianToCartographic(
     maxBoundingSphere.center
   );
-  const west = CMath.toDegrees(cartoMin.longitude);
-  const south = CMath.toDegrees(cartoMin.latitude);
-  const east = CMath.toDegrees(cartoMax.longitude);
-  const north = CMath.toDegrees(cartoMax.latitude);
-  return [west, south, east, north];
+  if (cartoMin && cartoMax) {
+    const west = CMath.toDegrees(cartoMin.longitude);
+    const south = CMath.toDegrees(cartoMin.latitude);
+    const east = CMath.toDegrees(cartoMax.longitude);
+    const north = CMath.toDegrees(cartoMax.latitude);
+    return [west, south, east, north];
+  }
 }
