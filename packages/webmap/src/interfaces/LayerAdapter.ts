@@ -559,17 +559,17 @@ export interface VectorLayerAdapter<
    * Add GeoJson data to layer.
    * @param geojson - GeoJson object.
    */
-  addData?(geojson: GeoJsonObject): void;
+  addData?(geojson: GeoJsonObject): void | Promise<void>;
   /**
    * Update layer with new geojson.
    * @param geojson - GeoJson object.
    */
-  setData?(geojson: GeoJsonObject): void;
+  setData?(geojson: GeoJsonObject): void | Promise<void>;
   /**
    * Remove layer data.
    * @param cb - Delete only those objects that match the filter.
    */
-  clearLayer?(cb?: (feature: Feature) => boolean): void;
+  clearLayer?(cb?: (feature: Feature) => boolean): void | Promise<void>;
   /**
    * Callback function that will be called when clicking on a layer.
    * @param event - Data that is transmitted when you click on a layer.

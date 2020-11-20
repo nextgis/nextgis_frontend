@@ -15,6 +15,7 @@ import { getLayerFilterOptions } from '../utils/getLayerFilterOptions';
 import { resourceIdFromLayerOptions } from '../utils/resourceIdFromLayerOptions';
 import { NgwLayerOptions, GetClassAdapterOptions } from '../interfaces';
 import { fetchNgwLayerFeatures } from '../utils/fetchNgwLayerFeatures';
+import { fetchNgwResourceExtent } from '../utils/fetchNgwExtent';
 
 interface FilterArgs {
   filters?: PropertiesFilter;
@@ -131,6 +132,17 @@ export async function createGeoJsonAdapter(
         this._addBboxEventListener();
       }
       return layer;
+    }
+
+    getExtent() {
+      const hasData = this.getLayers && this.getLayers().length;
+      if (this.options.strategy === 'BBOX' || hasData) {
+        return fetchNgwResourceExtent(item, connector);
+      } else {
+        if (super.getExtent) {
+          return super.getExtent();
+        }
+      }
     }
 
     beforeRemove() {

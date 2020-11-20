@@ -94,9 +94,9 @@ export class GeoJsonAdapter
     this.map.scene.requestRender();
   }
 
-  setData(data: GeoJsonObject): void {
+  setData(data: GeoJsonObject): Promise<void> {
     this._clearLayer();
-    this.addData(data);
+    return this.addData(data);
   }
 
   addData(data: GeoJsonObject): Promise<void> {
@@ -128,14 +128,35 @@ export class GeoJsonAdapter
   }
 
   select(findFeatureCb?: DataLayerFilter<Feature> | PropertiesFilter): void {
-    //
+    if (this._source) {
+      const values = this._source.entities.values;
+      if (values.length) {
+        this.selected = true;
+        const entry = values[values.length - 1];
+        this.map.selectedEntity = entry;
+        this.map.scene.requestRender();
+      }
+    }
   }
 
   unselect(findFeatureCb?: DataLayerFilter<Feature> | PropertiesFilter): void {
-    //
+    if (this._source) {
+      if (this.selected) {
+        this.map.selectedEntity = undefined;
+        this.map.scene.requestRender();
+        this.selected = false;
+      }
+    }
   }
 
   getLayers(): LayerDefinition[] {
+    if (this._source) {
+      return this._source?.entities.values.map((x) => {
+        return {
+          layer: x,
+        };
+      });
+    }
     return [];
   }
 
@@ -213,27 +234,13 @@ export class GeoJsonAdapter
         if (obj.properties && nameField in obj.properties) {
           name = obj.properties && obj.properties[nameField];
         }
-
-        //@ts-ignore
-        const description: Property = {
-          getValue: () => {
-            if (this.options.popupOptions?.createPopupContent) {
-              const content = this.options.popupOptions.createPopupContent({
-                feature: obj,
-              });
-              if (content instanceof HTMLElement) {
-                return content.outerHTML;
-              }
-              return content;
-            }
-            return '';
-          },
-        };
-
+        const description =
+          this.options.popupOptions?.createPopupContent &&
+          this._getDescription(obj);
         source.entities.add({
           position: Cartesian3.fromDegrees(lonLat[0], lonLat[1]),
           name: name || (obj.id !== undefined ? 'Feature#' + obj.id : ''),
-          description,
+          description: description || undefined,
           billboard: {
             heightReference: HeightReference.CLAMP_TO_GROUND,
             image: canvas.toDataURL(),
@@ -242,6 +249,24 @@ export class GeoJsonAdapter
         });
       }
     }
+  }
+
+  private _getDescription(feature: Feature): Property {
+    //@ts-ignore
+    return {
+      getValue: () => {
+        if (this.options.popupOptions?.createPopupContent) {
+          const content = this.options.popupOptions.createPopupContent({
+            feature,
+          });
+          if (content instanceof HTMLElement) {
+            return content.outerHTML;
+          }
+          return content;
+        }
+        // return '';
+      },
+    };
   }
 
   private _addFromGeoJson(
@@ -262,10 +287,14 @@ export class GeoJsonAdapter
         }
         options.markerColor = Color.fromCssColorString(fillColor);
       }
+      // not work with clampToGround
       if (paint.stroke || paint.strokeColor) {
         const strokeColor = paint.strokeColor || color;
         if (typeof strokeColor === 'string') {
           options.stroke = Color.fromCssColorString(strokeColor);
+          if (typeof paint.strokeOpacity === 'number') {
+            options.stroke.alpha = paint.strokeOpacity;
+          }
         }
         if (typeof paint.weight === 'number') {
           options.strokeWidth = paint.weight;
@@ -275,6 +304,7 @@ export class GeoJsonAdapter
         // magic 4
         options.markerSize = paint.radius * 4;
       }
+      // do not claim to ground features with self Z coordinates
       if (isFeature3D(feature)) {
         options.clampToGround = false;
       }
@@ -287,6 +317,12 @@ export class GeoJsonAdapter
             y.polygon.extrudedHeight = new CallbackProperty(() => {
               return height;
             }, false);
+          }
+          const description =
+            this.options.popupOptions?.createPopupContent &&
+            this._getDescription(feature);
+          if (description) {
+            y.description = description;
           }
           source.entities.add(y);
         });

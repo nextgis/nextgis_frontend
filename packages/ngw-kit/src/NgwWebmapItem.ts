@@ -124,7 +124,7 @@ export class NgwWebmapItem extends Item<ItemOptions> {
     return ngwWebmapItem;
   }
 
-  initItem(item: TreeGroup | TreeLayer): void {
+  initItem(item: TreeGroup | TreeLayer): Promise<void> {
     const i = item;
     // let newLayer = item._layer;
     const setNewLayer = (l: LayerAdapter) => {
@@ -159,6 +159,7 @@ export class NgwWebmapItem extends Item<ItemOptions> {
           this.tree.addChild(children);
         });
       }
+      return Promise.resolve();
     } else {
       let adapter: LayerAdapterDefinition | undefined;
       const options: Partial<ImageAdapterOptions> = {
@@ -200,14 +201,15 @@ export class NgwWebmapItem extends Item<ItemOptions> {
         options.opacity = opacity;
       }
       if (adapter) {
-        this.webMap.addLayer(adapter, options).then((newLayer) => {
+        return this.webMap.addLayer(adapter, options).then((newLayer) => {
           setNewLayer(newLayer);
         });
       }
     }
     if (item._layer) {
-      setNewLayer(item._layer);
+      return Promise.resolve(setNewLayer(item._layer));
     }
+    return Promise.reject('No layer added');
   }
 
   bringToFront(): void {
@@ -228,9 +230,10 @@ export class NgwWebmapItem extends Item<ItemOptions> {
     return setScaleRatio(scale);
   }
 
-  private async _init(item: TreeGroup | TreeLayer) {
-    await this.initItem(item);
-    this.emitter.emit('init');
+  private _init(item: TreeGroup | TreeLayer) {
+    this.initItem(item).then(() => {
+      this.emitter.emit('init');
+    });
   }
 
   private _sumUp(children: Array<TreeGroup | TreeLayer>, totalValue = 0) {

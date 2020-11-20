@@ -174,7 +174,7 @@ export interface MapAdapter<M = any, L = any, C = any> {
    * @remark
    * TODO: need to replace all 'get' methods with asynchronous
    */
-  fetchZoom(): Promise<number | undefined>;
+  fetchZoom?(): Promise<number | undefined>;
   setZoom(zoom: number): void;
   /** zoom the map by one quantile of the current adapter */
   zoomIn?(): void;
