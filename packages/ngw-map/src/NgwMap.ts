@@ -479,12 +479,14 @@ export class NgwMap<
     return this.fetchNgwLayerFeatures(options);
   }
 
-  cancelPromise(name: PromiseGroup): void {
-    const group = this._promises[name];
-    if (group) {
-      group.forEach((x) => x.cancel());
-      this._promises[name] = [];
-    }
+  cancelPromise(...args: PromiseGroup[]): void {
+    args.forEach((name) => {
+      const group = this._promises[name];
+      if (group) {
+        group.forEach((x) => x.cancel());
+        this._promises[name] = [];
+      }
+    });
   }
 
   private _addPromise(groupName: PromiseGroup, promise: CancelablePromise) {
