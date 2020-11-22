@@ -466,7 +466,7 @@ export class NgwConnector {
    * Receive resource from NGW by id, keyname or serch-object parameter.
    * @param resource - Resource id, keyname or search-object
    *
-   * @remark
+   * @remarks
    * Fetching resource would be cached to speed up next call
    */
   getResource(
@@ -497,7 +497,7 @@ export class NgwConnector {
    * A fast way to retrieve resource ID for any resource definition.
    * @param resource - Any available resource definition
    *
-   * @remark
+   * @remarks
    * There are situations when exactly the resource id is needed
    * (for example, to compose the correct request to the api)
    * then this method will come in handy to facilitate the extraction of the identifier
@@ -522,7 +522,7 @@ export class NgwConnector {
    * A fast way to retrieve resource ID for any resource definition.
    * @param resource - Any available resource definition
    *
-   * @remark
+   * @remarks
    * Similar with {@link NgwConnector.getResourceId | getResourceId} but rise error if resource is not exist.
    * To not make one more checks if the resource is definitely exists
    */

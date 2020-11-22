@@ -40,6 +40,9 @@ import {
   fetchNgwResourceExtent,
   sendIdentifyRequest,
   getCompanyLogo,
+  fetchIdentifyItem,
+  NgwFeatureItemResponse,
+  NgwFeatureRequestOptions,
 } from '@nextgis/ngw-kit';
 import { getIcon } from '@nextgis/icons';
 import { PropertiesFilter } from '@nextgis/properties-filter';
@@ -48,7 +51,12 @@ import { appendNgwResources } from './utils/appendNgwResources';
 import { prepareWebMapOptions } from './utils/prepareWebMapOptions';
 
 import { NgwMapOptions, NgwMapEvents, NgwLayers } from './interfaces';
-import { Geometry, Feature, FeatureCollection } from 'geojson';
+import {
+  Geometry,
+  Feature,
+  FeatureCollection,
+  GeoJsonProperties,
+} from 'geojson';
 
 type PromiseGroup = 'select' | 'identify';
 
@@ -258,6 +266,25 @@ export class NgwMap<
       connector: this.connector,
       ...options,
     });
+  }
+
+  fetchIdentifyItem<
+    G extends Geometry = Geometry,
+    P extends GeoJsonProperties = GeoJsonProperties
+  >(
+    identify: NgwIdentify,
+    requestOptions?: NgwFeatureRequestOptions
+    // multiple = false
+  ): CancelablePromise<NgwFeatureItemResponse<P, G> | undefined> {
+    const promise = fetchIdentifyItem<G, P>({
+      identify,
+      connector: this.connector,
+      requestOptions,
+      // multiple,
+    });
+
+    this._addPromise('identify', promise);
+    return promise;
   }
 
   fetchIdentifyGeoJson(

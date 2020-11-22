@@ -413,7 +413,7 @@ export interface FilterOptions<Entity = any> {
    * Limit (paginated) - max number of entities should be taken.
    */
   limit?: number;
-  fields?: (keyof Entity)[];
+  fields?: (keyof Entity)[] | null | false;
   /** WKT polygon geometry */
   intersects?: string;
   strategy?: 'BBOX';

@@ -179,7 +179,7 @@ export class GeoJsonAdapter
     this.addData(data);
   }
 
-  addData(data: GeoJsonObject | false): false | undefined {
+  addData(data: GeoJsonObject | false): void {
     const options = this.options;
     let geoJsonOptions: GeoJSONOptions | undefined;
     if (options) {
@@ -194,7 +194,7 @@ export class GeoJsonAdapter
         }
         if (this.type && this.type !== type) {
           console.warn('no other data type than layer can be added');
-          return false;
+          return;
         }
         this.type = type;
 
