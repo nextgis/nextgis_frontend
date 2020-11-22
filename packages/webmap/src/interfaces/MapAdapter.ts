@@ -171,7 +171,7 @@ export interface MapAdapter<M = any, L = any, C = any> {
   getZoom(): number | undefined;
   /**
    * Temporal async method.
-   * @remark
+   * @remarks
    * TODO: need to replace all 'get' methods with asynchronous
    */
   fetchZoom?(): Promise<number | undefined>;
