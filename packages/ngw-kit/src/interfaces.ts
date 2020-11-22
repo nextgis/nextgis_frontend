@@ -16,10 +16,13 @@ import { PropertiesFilter } from '@nextgis/properties-filter';
 import NgwConnector, {
   ResourceItem,
   LayerFeature,
+  FeatureItem,
+  FeatureLayerFields,
 } from '@nextgis/ngw-connector';
 import { FeatureLayersIdentify } from '@nextgis/ngw-connector';
 import { Type } from '@nextgis/utils';
-import { Feature } from 'geojson';
+import CancelablePromise from '@nextgis/cancelable-promise';
+import { Feature, Geometry } from 'geojson';
 
 declare module '@nextgis/webmap' {
   interface LayerAdaptersOptions {
@@ -113,7 +116,7 @@ export interface NgwLayerOptionsAdditional<
   /**
    * Parameter for `TILE` and `IMAGE` adapters to say NGW what will be returned if there is no data to render.
    *
-   * @remark
+   * @remarks
    * In NGW api this parameter is written as follows: `nd=204|404|200`, 200 by default.
    * But in frontend libraries default value id 204 (no content) for performance purpose.
    *
@@ -317,6 +320,7 @@ export interface GetIdentifyGeoJsonOptions {
   identify: NgwIdentify;
   connector: NgwConnector;
   multiple?: boolean;
+  requestOptions?: NgwFeatureRequestOptions;
 }
 
 /**
@@ -392,4 +396,17 @@ export interface FeatureIdentifyRequestOptions {
   geom: string;
   srs: 3857;
   layers: number[];
+}
+
+export interface NgwFeatureItemResponse<
+  F = FeatureLayerFields,
+  G extends Geometry = Geometry
+> extends FeatureItem<F, G> {
+  /**
+   * To get GeoJson from ngw item
+   *
+   * @remarks
+   * if geometry is not available (see {@link NgwFeatureRequestOptions.geom}), this method will return it anyway
+   */
+  toGeojson(): CancelablePromise<Feature<G, F>>;
 }
