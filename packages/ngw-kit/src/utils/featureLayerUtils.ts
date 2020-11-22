@@ -34,7 +34,7 @@ export const FEATURE_REQUEST_PARAMS: FeatureRequestParams = {
 
 export function createGeoJsonFeature<
   G extends Geometry | null = Geometry,
-  P extends JsonMap = JsonMap
+  P extends GeoJsonProperties = GeoJsonProperties
 >(item: Pick<FeatureItem, 'id' | 'geom' | 'fields'>): Feature<G, P> {
   const geometry = item.geom as G;
   const feature: Feature<G, P> = {
@@ -107,6 +107,22 @@ export function getNgwLayerItems<
   return fetchNgwLayerItems(options);
 }
 
+export function updateItemRequestParam(
+  params: FeatureRequestParams,
+  options: NgwFeatureRequestOptions
+): void {
+  const { extensions, geom, fields } = options;
+  if (fields !== undefined) {
+    params.fields = Array.isArray(fields) ? fields.join(',') : '';
+  }
+  if (extensions !== undefined) {
+    params.extensions = extensions ? extensions.join(',') : '';
+  }
+  if (geom !== undefined) {
+    params.geom = geom ? 'yes' : 'no';
+  }
+}
+
 export function idFilterWorkAround<
   G extends Geometry = Geometry,
   P extends JsonMap = JsonMap
@@ -114,7 +130,7 @@ export function idFilterWorkAround<
   filterById: PropertyFilter;
   resourceId: number;
   connector: NgwConnector;
-}) {
+}): CancelablePromise<FeatureItem<P, G>[]> {
   const value = options.filterById[2];
   const featureIds: number[] =
     typeof value === 'number'
@@ -125,7 +141,7 @@ export function idFilterWorkAround<
       'Unable to filter by object id. Except `eq` or `in` operator'
     );
   }
-  const promises: Promise<FeatureItem>[] = featureIds.map((featureId) => {
+  const promises: Promise<FeatureItem<P, G>>[] = featureIds.map((featureId) => {
     return fetchNgwLayerItem<G, P>({
       connector: options.connector,
       resourceId: options.resourceId,
@@ -240,13 +256,10 @@ export function fetchNgwLayerItemsRequest<
     connector,
     limit,
     offset,
-    fields,
     intersects,
     orderBy,
     resourceId,
     paramList,
-    extensions,
-    geom,
   } = options;
   if (limit) {
     params.limit = limit;
@@ -254,24 +267,20 @@ export function fetchNgwLayerItemsRequest<
   if (offset) {
     params.offset = offset;
   }
-  if (fields) {
-    params.fields = fields.join();
+
+  updateItemRequestParam(params, options);
+
+  if (orderBy) {
+    params.order_by = orderBy.join(',');
   }
   if (intersects) {
     params.intersects = intersects;
   }
+
   if (paramList) {
     params.paramList = paramList;
   }
-  if (orderBy) {
-    params.order_by = orderBy.join(',');
-  }
-  if (extensions !== undefined) {
-    params.extensions = extensions ? extensions.join(',') : '';
-  }
-  if (geom !== undefined) {
-    params.geom = geom ? 'yes' : 'no';
-  }
+
   return connector.get('feature_layer.feature.collection', null, {
     id: resourceId,
     ...params,

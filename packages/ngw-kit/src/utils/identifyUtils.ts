@@ -1,5 +1,9 @@
-import { Geometry, Feature } from 'geojson';
-import { LayerFeature, FeatureLayersIdentify } from '@nextgis/ngw-connector';
+import { Geometry, Feature, GeoJsonProperties } from 'geojson';
+import {
+  LayerFeature,
+  FeatureLayersIdentify,
+  FeatureItem,
+} from '@nextgis/ngw-connector';
 import CancelablePromise from '@nextgis/cancelable-promise';
 import { MapClickEvent } from '@nextgis/webmap';
 import {
@@ -14,9 +18,11 @@ import {
   NgwIdentifyItem,
   IdentifyRequestOptions,
   FeatureIdentifyRequestOptions,
+  NgwFeatureItemResponse,
 } from '../interfaces';
 import { createGeoJsonFeature } from './featureLayerUtils';
 import { fetchNgwLayerFeature } from './fetchNgwLayerFeature';
+import { fetchNgwLayerItem } from './fetchNgwLayerItem';
 
 export function getIdentifyItems(
   identify: NgwIdentify,
@@ -92,6 +98,25 @@ export function fetchIdentifyGeoJson<
   const params = getIdentifyItems(identify);
   if (params && params.length) {
     return fetchNgwLayerFeature({ connector, ...params[0] });
+  }
+  return CancelablePromise.resolve(undefined);
+}
+
+export function fetchIdentifyItem<
+  G extends Geometry = Geometry,
+  P extends GeoJsonProperties = GeoJsonProperties
+>(
+  options: GetIdentifyGeoJsonOptions
+): CancelablePromise<NgwFeatureItemResponse<P, G> | undefined> {
+  const { connector, identify } = options;
+
+  const params = getIdentifyItems(identify);
+  if (params && params.length) {
+    return fetchNgwLayerItem({
+      connector,
+      ...options.requestOptions,
+      ...params[0],
+    });
   }
   return CancelablePromise.resolve(undefined);
 }
