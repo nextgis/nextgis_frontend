@@ -409,10 +409,18 @@ export class NgwMap<
 
   enableSelection(): void {
     if (!this.$$selectFromNgwRaster) {
-      this.$$selectFromNgwRaster = (ev: MapClickEvent) =>
-        this._selectFromNgwRaster(ev);
-      this.$$selectFromNgwVector = (ev: OnLayerClickOptions) =>
-        this._selectFromNgwVector(ev);
+      this.$$selectFromNgwRaster = (ev: MapClickEvent) => {
+        const c = this.emitter.listenerCount('ngw:select');
+        console.log(c);
+        if (this.emitter.listenerCount('ngw:select')) {
+          this._selectFromNgwRaster(ev);
+        }
+      };
+      this.$$selectFromNgwVector = (ev: OnLayerClickOptions) => {
+        if (this.emitter.listenerCount('ngw:select')) {
+          this._selectFromNgwVector(ev);
+        }
+      };
       this.emitter.on('click', this.$$selectFromNgwRaster);
       this.emitter.on('layer:click', this.$$selectFromNgwVector);
     }
