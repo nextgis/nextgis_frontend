@@ -112,11 +112,9 @@ export function updateItemRequestParam(
   options: NgwFeatureRequestOptions
 ): void {
   const { extensions, geom, fields } = options;
+  params.extensions = extensions ? extensions.join(',') : '';
   if (fields !== undefined) {
     params.fields = Array.isArray(fields) ? fields.join(',') : '';
-  }
-  if (extensions !== undefined) {
-    params.extensions = extensions ? extensions.join(',') : '';
   }
   if (geom !== undefined) {
     params.geom = geom ? 'yes' : 'no';
