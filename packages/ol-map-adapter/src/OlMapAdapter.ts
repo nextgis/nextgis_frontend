@@ -274,6 +274,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
 
     this.emitter.emit('click', {
       latLng,
+      lngLat: [lng, lat],
       pixel: { left: evt.pixel[0], top: evt.pixel[1] },
       source: evt,
     });

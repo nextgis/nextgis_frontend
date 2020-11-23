@@ -1,3 +1,4 @@
+import { Feature, Geometry } from 'geojson';
 import {
   WebMap,
   AdapterOptions,
@@ -22,7 +23,6 @@ import NgwConnector, {
 import { FeatureLayersIdentify } from '@nextgis/ngw-connector';
 import { Type } from '@nextgis/utils';
 import CancelablePromise from '@nextgis/cancelable-promise';
-import { Feature, Geometry } from 'geojson';
 
 declare module '@nextgis/webmap' {
   interface LayerAdaptersOptions {
@@ -378,8 +378,10 @@ export interface FeatureRequestParams {
   geom?: 'yes' | 'no';
 }
 
+type Extensions = keyof FeatureItem['extensions'];
+
 export interface NgwFeatureRequestOptions extends FilterOptions {
-  extensions?: string[] | null | false;
+  extensions?: Extensions[] | string[] | null | false;
   geom?: boolean;
 }
 

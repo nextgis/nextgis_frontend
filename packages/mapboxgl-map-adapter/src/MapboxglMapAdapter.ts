@@ -1,3 +1,13 @@
+import mapboxgl, {
+  Map,
+  IControl,
+  MapEventType,
+  EventData,
+  MapboxOptions,
+  RequestParameters,
+  ResourceType,
+  FitBoundsOptions,
+} from 'mapbox-gl';
 import {
   MapAdapter,
   FitOptions,
@@ -13,16 +23,6 @@ import {
 } from '@nextgis/webmap';
 import { sleep, debounce } from '@nextgis/utils';
 import { MvtAdapter } from './layer-adapters/MvtAdapter';
-import mapboxgl, {
-  Map,
-  IControl,
-  MapEventType,
-  EventData,
-  MapboxOptions,
-  RequestParameters,
-  ResourceType,
-  FitBoundsOptions,
-} from 'mapbox-gl';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
 import { TileAdapter } from './layer-adapters/TileAdapter';
 import { EventEmitter } from 'events';
@@ -324,6 +324,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
 
   onMapClick(evt: MapEventType['click'] & EventData): void {
     const latLng = evt.lngLat;
+    const { lng, lat } = latLng;
     const { x, y } = evt.point;
     this.emitter.emit('preclick', { latLng, pixel: { top: y, left: x } });
     if (this.map) {
@@ -342,7 +343,11 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
         });
     }
 
-    this.emitter.emit('click', { latLng, pixel: { top: y, left: x } });
+    this.emitter.emit('click', {
+      latLng,
+      lnglat: [lng, lat],
+      pixel: { top: y, left: x },
+    });
   }
 
   private _onMapLoad(cb?: () => any): Promise<Map> {
