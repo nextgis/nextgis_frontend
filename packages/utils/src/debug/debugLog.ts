@@ -1,6 +1,6 @@
 export function debugLog(message?: string): boolean {
   if (__DEV__) {
-    console.warn('DEBUG: ' + message);
+    console.trace('DEBUG: ' + message);
     return true;
   }
   return false;

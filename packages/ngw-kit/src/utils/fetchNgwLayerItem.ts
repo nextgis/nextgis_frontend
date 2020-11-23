@@ -1,7 +1,8 @@
 import { Geometry, GeoJsonProperties } from 'geojson';
 
-import NgwConnector, { FeatureItem } from '@nextgis/ngw-connector';
+import NgwConnector from '@nextgis/ngw-connector';
 import CancelablePromise from '@nextgis/cancelable-promise';
+import { debugLog } from '@nextgis/utils';
 
 import {
   FeatureRequestParams,
@@ -13,6 +14,7 @@ import {
   FEATURE_REQUEST_PARAMS,
   updateItemRequestParam,
 } from './featureLayerUtils';
+import { extensionsAllowedDevHelper } from './check/extensionsAllowedDevHelper';
 
 export function fetchNgwLayerItem<
   G extends Geometry = Geometry,
@@ -35,6 +37,7 @@ export function fetchNgwLayerItem<
       ...params,
     })
     .then((resp) => {
+      extensionsAllowedDevHelper(resp, params);
       return {
         ...resp,
         toGeojson: () => {
