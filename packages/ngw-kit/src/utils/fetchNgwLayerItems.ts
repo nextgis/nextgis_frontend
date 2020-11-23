@@ -27,7 +27,7 @@ export function fetchNgwLayerItems<
   } else {
     return fetchNgwLayerItemsRequest(options).then((data) => {
       if (filters) {
-        // control
+        // client-side filter check
         return data.filter((y) => {
           const fields = y.fields;
           if (fields) {

@@ -26,6 +26,7 @@ import { fetchNgwLayerItem } from './fetchNgwLayerItem';
 import { fetchNgwLayerFeature } from './fetchNgwLayerFeature';
 import { fetchNgwLayerFeatures } from './fetchNgwLayerFeatures';
 import { fetchNgwLayerItems } from './fetchNgwLayerItems';
+import { extensionsAllowedDevHelper } from './check/extensionsAllowedDevHelper';
 
 export const FEATURE_REQUEST_PARAMS: FeatureRequestParams = {
   srs: 4326,
@@ -279,10 +280,19 @@ export function fetchNgwLayerItemsRequest<
     params.paramList = paramList;
   }
 
-  return connector.get('feature_layer.feature.collection', null, {
-    id: resourceId,
-    ...params,
-  }) as CancelablePromise<FeatureItem<P, G>[]>;
+  return connector
+    .get('feature_layer.feature.collection', null, {
+      id: resourceId,
+      ...params,
+    })
+    .then((resp) => {
+      if (__DEV__) {
+        resp.forEach((respItem) => {
+          extensionsAllowedDevHelper(respItem, params);
+        });
+      }
+      return resp;
+    }) as CancelablePromise<FeatureItem<P, G>[]>;
 }
 
 export function prepareFieldsToNgw<T extends any>(
