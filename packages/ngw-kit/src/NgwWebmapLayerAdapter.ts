@@ -1,7 +1,6 @@
 import {
   WebMap,
   LngLatBoundsArray,
-  MapClickEvent,
   RasterAdapterOptions,
 } from '@nextgis/webmap';
 import {
@@ -18,7 +17,6 @@ import { EventEmitter } from 'events';
 
 import { NgwWebmapItem } from './NgwWebmapItem';
 import { createOnFirstShowAdapter } from './adapters/createBasemapWebmapItemAdapter';
-import { sendIdentifyRequest } from './utils/identifyUtils';
 import { getLayerAdapterOptions } from './utils/getLayerAdapterOptions';
 import { updateImageParams } from './utils/utils';
 
@@ -50,8 +48,6 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
   private response?: ResourceItem;
   private _webmapLayersIds?: number[];
 
-  private $$onMapClick?: (ev: MapClickEvent) => void;
-
   constructor(public map: M, public options: NgwWebmapAdapterOptions) {
     const r = options.resourceId;
     if (Array.isArray(r)) {
@@ -68,31 +64,18 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
 
   async addLayer(options: NgwWebmapAdapterOptions): Promise<any> {
     this.options = { ...this.options, ...options };
-
     this.layer = await this._getWebMapLayerItem();
-
-    if (this.options.identification) {
-      const ids = await this._getWebMapIds();
-      if (ids) {
-        this._webmapLayersIds = ids;
-        this.$$onMapClick = (ev: MapClickEvent) => this._onMapClick(ev);
-        this.options.webMap.emitter.on('click', this.$$onMapClick);
-      }
-    }
     return this.layer;
   }
 
   removeLayer(): void {
     const mapAdapter = this.options.webMap.mapAdapter;
-    if (this.$$onMapClick) {
-      this.options.webMap.emitter.removeListener('click', this.$$onMapClick);
-    }
+
     this.getDependLayers().forEach((x) => {
       if (!('layer' in x)) return;
       // @ts-ignore Update x interface
       mapAdapter.removeLayer(x.layer.layer);
     });
-    this.$$onMapClick = undefined;
     // delete this.options;
     delete this.layer;
     delete this.response;
@@ -288,22 +271,5 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
       return ids.filter((x) => x !== undefined);
       // const id = item['layer_style_id']
     }
-  }
-
-  private _sendIdentifyRequest(ev: MapClickEvent) {
-    if (this._webmapLayersIds) {
-      return sendIdentifyRequest(ev, {
-        layers: this._webmapLayersIds,
-        connector: this.options.connector,
-        radius: this.pixelRadius,
-      }).then((resp) => {
-        this.emitter.emit('identify', { ev, data: resp });
-        return resp;
-      });
-    }
-  }
-
-  private _onMapClick(ev: MapClickEvent) {
-    this._sendIdentifyRequest(ev);
   }
 }

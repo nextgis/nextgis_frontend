@@ -203,8 +203,8 @@ function createConfig(format, output, plugins = []) {
       }
     },
     treeshake: {
-      // moduleSideEffects: !!packageOptions.injectCss,
-      moduleSideEffects: false,
+      moduleSideEffects: !!packageOptions.injectCss,
+      // moduleSideEffects: false,
     },
   };
 }
