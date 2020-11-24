@@ -196,11 +196,6 @@ export interface NgwKitOptions {
     login: string;
     password: string;
   };
-  /**
-   * Get information from NGW webmap layers by click.
-   * @defaultValue false
-   */
-  identification?: boolean;
 }
 
 type A = AdapterOptions; // & TreeLayer & TreeGroup;
@@ -212,16 +207,11 @@ export interface NgwWebmapAdapterOptions<M = any> extends A {
   resourceId: number | [number, string];
   webMap: WebMap<M>;
   connector: NgwConnector;
-  /**
-   * Get information from NGW webmap layers by click.
-   * @defaultValue false
-   */
-  identification?: boolean;
   selectable?: boolean;
   /** Radius for searching objects in pixels */
   pixelRadius?: number;
   /**
-   * Add baselayer from OsmLayerAdapter if no [webmap_resource].basemap_webmap set has been set.
+   * Add baselayer from OsmLayerAdapter if no [webmap_resource].basemap_webmap has been set.
    * @defaultValue false
    */
   defaultBasemap?: boolean;

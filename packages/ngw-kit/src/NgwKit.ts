@@ -57,7 +57,6 @@ export class NgwKit implements StarterKit {
           const layer = (await webMap.addLayer(NgwWebmapLayerAdapter, {
             visibility: true,
             fit: true,
-            identification: this.options.identification,
             pixelRadius: this.options.pixelRadius,
             ...options,
           })) as NgwWebmapLayerAdapter;
