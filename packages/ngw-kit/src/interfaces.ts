@@ -370,7 +370,9 @@ export interface FeatureRequestParams {
 
 type Extensions = keyof FeatureItem['extensions'];
 
-export interface NgwFeatureRequestOptions extends FilterOptions {
+export interface NgwFeatureRequestOptions<
+  P extends { [field: string]: any } = { [field: string]: any }
+> extends FilterOptions<P> {
   extensions?: Extensions[] | string[] | null | false;
   geom?: boolean;
 }

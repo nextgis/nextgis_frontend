@@ -14,7 +14,7 @@ import { createPopupContent } from '../utils/createPopupContent';
 import { getLayerFilterOptions } from '../utils/getLayerFilterOptions';
 import { resourceIdFromLayerOptions } from '../utils/resourceIdFromLayerOptions';
 import { NgwLayerOptions, GetClassAdapterOptions } from '../interfaces';
-import { fetchNgwLayerFeatures } from '../utils/fetchNgwLayerFeatures';
+import { fetchNgwLayerFeatureCollection } from '../utils/fetchNgwLayerFeatureCollection';
 import { fetchNgwResourceExtent } from '../utils/fetchNgwExtent';
 
 interface FilterArgs {
@@ -57,7 +57,7 @@ export async function createGeoJsonAdapter(
   ) => {
     abort();
     _lastFilterArgs = { filters, options: opt };
-    _dataPromise = fetchNgwLayerFeatures({
+    _dataPromise = fetchNgwLayerFeatureCollection({
       resourceId,
       filters,
       connector,

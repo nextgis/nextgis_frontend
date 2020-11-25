@@ -403,7 +403,9 @@ export type CallbackFilter<F extends Feature = Feature, L = any> = (
 /**
  * @public
  */
-export interface FilterOptions<Entity = any> {
+export interface FilterOptions<
+  P extends { [field: string]: any } = { [field: string]: any }
+> {
   /**
    * Offset (paginated) where from entities should be taken.
    */
@@ -413,18 +415,22 @@ export interface FilterOptions<Entity = any> {
    * Limit (paginated) - max number of entities should be taken.
    */
   limit?: number;
-  fields?: (keyof Entity)[] | null | false;
+  fields?: (keyof P)[] | false | null;
   /** WKT polygon geometry */
   intersects?: string;
   strategy?: 'BBOX';
   /**
    * set fields for order
+   *
+   * @remarks
+   * TODO: use typescript 4.1 template string type for map -${field}
+   *
    * @example
    * ```javascript
    * { "orderBy": ["field1", "-field2"] }
    * ```
    */
-  orderBy?: (keyof Entity)[] | string[];
+  orderBy?: (keyof P | string)[];
 }
 
 /**

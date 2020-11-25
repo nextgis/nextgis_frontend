@@ -6,7 +6,6 @@ import {
   GetNgwLayerItemsOptions,
   NgwFeatureRequestOptions,
 } from '../interfaces';
-import { JsonMap } from '@nextgis/utils';
 import {
   createFeatureFieldFilterQueries,
   fetchNgwLayerItemsRequest,
@@ -14,9 +13,9 @@ import {
 
 export function fetchNgwLayerItems<
   G extends Geometry = Geometry,
-  P extends JsonMap = JsonMap
+  P extends { [field: string]: any } = { [field: string]: any }
 >(
-  options: GetNgwLayerItemsOptions & NgwFeatureRequestOptions
+  options: GetNgwLayerItemsOptions & NgwFeatureRequestOptions<P>
 ): CancelablePromise<FeatureItem<P, G>[]> {
   const filters = options.filters;
   if (filters) {
@@ -25,7 +24,7 @@ export function fetchNgwLayerItems<
       filters,
     }) as CancelablePromise<FeatureItem<P, G>[]>;
   } else {
-    return fetchNgwLayerItemsRequest(options).then((data) => {
+    return fetchNgwLayerItemsRequest<G, P>(options).then((data) => {
       if (filters) {
         // client-side filter check
         return data.filter((y) => {
