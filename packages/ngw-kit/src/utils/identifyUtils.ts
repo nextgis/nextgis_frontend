@@ -1,9 +1,5 @@
 import { Geometry, Feature, GeoJsonProperties } from 'geojson';
-import {
-  LayerFeature,
-  FeatureLayersIdentify,
-  FeatureItem,
-} from '@nextgis/ngw-connector';
+import { LayerFeature, FeatureLayersIdentify } from '@nextgis/ngw-connector';
 import CancelablePromise from '@nextgis/cancelable-promise';
 import { MapClickEvent } from '@nextgis/webmap';
 import {

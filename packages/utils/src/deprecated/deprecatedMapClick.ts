@@ -1,4 +1,3 @@
-import { debuglog } from 'util';
 import { debugLog } from '../debug/debugLog';
 import { LatLng } from '../geom/interfaces';
 import { LngLatArray } from '../geom/interfaces';

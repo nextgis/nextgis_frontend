@@ -61,7 +61,7 @@ export * from './utils/identifyUtils';
 export * from './utils/getCompanyLogo';
 export * from './utils/featureLayerUtils';
 export * from './utils/fetchNgwLayerFeature';
-export * from './utils/fetchNgwLayerFeatures';
+export * from './utils/fetchNgwLayerFeatureCollection';
 export * from './utils/fetchNgwLayerItem';
 export * from './utils/fetchNgwLayerItems';
 export * from './utils/fetchNgwExtent';

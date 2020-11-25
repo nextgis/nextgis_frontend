@@ -51,7 +51,6 @@ export function prepareWebMapOptions(options: NgwMapOptions): MapOptions {
       new NgwKit({
         connector: options.connector,
         auth: options.auth,
-        identification: options.identification,
       })
     );
   }

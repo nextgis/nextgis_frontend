@@ -371,7 +371,7 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
       throw new CannotExecuteNotConnectedError();
     }
     const connector = connection.driver;
-    const options: GetNgwLayerItemsOptions & FilterOptions = {
+    const options: GetNgwLayerItemsOptions & FilterOptions<T> = {
       connector,
       resourceId: Resource.item.resource.id,
     };
@@ -395,7 +395,7 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
       options.limit = opt.limit;
       options.offset = opt.offset;
       if (opt.order) {
-        const orderBy: string[] = [];
+        const orderBy: (keyof T | string)[] = [];
         Object.entries(opt.order).forEach(([key, value]) => {
           if (value) {
             if (value === 'DESC' || value < 0) {
