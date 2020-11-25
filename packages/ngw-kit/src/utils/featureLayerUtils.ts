@@ -24,7 +24,7 @@ import {
 import { JsonMap } from '@nextgis/utils';
 import { fetchNgwLayerItem } from './fetchNgwLayerItem';
 import { fetchNgwLayerFeature } from './fetchNgwLayerFeature';
-import { fetchNgwLayerFeatures } from './fetchNgwLayerFeatures';
+import { fetchNgwLayerFeatureCollection } from './fetchNgwLayerFeatureCollection';
 import { fetchNgwLayerItems } from './fetchNgwLayerItems';
 import { extensionsAllowedDevHelper } from './check/extensionsAllowedDevHelper';
 
@@ -85,15 +85,15 @@ export function getNgwLayerFeature<
 
 export function getNgwLayerFeatures<
   G extends Geometry | null = Geometry,
-  P extends Record<string, any> = Record<string, any>
+  P extends { [field: string]: any } = { [field: string]: any }
 >(
   options: {
     resourceId: number;
     connector: NgwConnector;
     filters?: PropertiesFilter;
-  } & NgwFeatureRequestOptions
+  } & NgwFeatureRequestOptions<P>
 ): CancelablePromise<FeatureCollection<G, P>> {
-  return fetchNgwLayerFeatures(options);
+  return fetchNgwLayerFeatureCollection(options);
 }
 
 /**
@@ -103,7 +103,7 @@ export function getNgwLayerItems<
   G extends Geometry = Geometry,
   P extends JsonMap = JsonMap
 >(
-  options: GetNgwLayerItemsOptions & NgwFeatureRequestOptions
+  options: GetNgwLayerItemsOptions & NgwFeatureRequestOptions<P>
 ): CancelablePromise<FeatureItem<P, G>[]> {
   return fetchNgwLayerItems(options);
 }
@@ -152,11 +152,14 @@ export function idFilterWorkAround<
 
 // NGW REST API is not able to filtering by combined queries
 // therefore the filter is divided into several requests
-export function createFeatureFieldFilterQueries(
-  opt: Required<GetNgwLayerItemsOptions> & NgwFeatureRequestOptions,
-  _queries: CancelablePromise<FeatureItem[]>[] = [],
+export function createFeatureFieldFilterQueries<
+  G extends Geometry = Geometry,
+  P extends { [field: string]: any } = { [field: string]: any }
+>(
+  opt: Required<GetNgwLayerItemsOptions> & NgwFeatureRequestOptions<P>,
+  _queries: CancelablePromise<FeatureItem<P, G>[]>[] = [],
   _parentAllParams: [string, any][] = []
-): CancelablePromise<FeatureItem[]> {
+): CancelablePromise<FeatureItem<P, G>[]> {
   const { filters, connector, resourceId } = opt;
 
   const logic = typeof filters[0] === 'string' ? filters[0] : 'all';
@@ -177,7 +180,7 @@ export function createFeatureFieldFilterQueries(
       }
       if (checkIfPropertyFilter(f)) {
         _queries.push(
-          fetchNgwLayerItemsRequest({
+          fetchNgwLayerItemsRequest<G, P>({
             ...opt,
             paramList: [..._parentAllParams, createParam(f)],
           })
@@ -221,7 +224,7 @@ export function createFeatureFieldFilterQueries(
         });
       } else {
         _queries.push(
-          fetchNgwLayerItemsRequest({
+          fetchNgwLayerItemsRequest<G, P>({
             ...opt,
             paramList: [..._parentAllParams, ...filters],
           })
@@ -230,7 +233,7 @@ export function createFeatureFieldFilterQueries(
     }
   }
 
-  return CancelablePromise.all(_queries).then((itemsParts: FeatureItem[][]) => {
+  return CancelablePromise.all(_queries).then((itemsParts) => {
     const items = itemsParts.reduce((a, b) => a.concat(b), []);
     const offset = opt.offset !== undefined ? opt.offset : 0;
     const limit = opt.limit !== undefined ? opt.limit : items.length;
@@ -243,10 +246,10 @@ export function createFeatureFieldFilterQueries(
 
 export function fetchNgwLayerItemsRequest<
   G extends Geometry = Geometry,
-  P extends JsonMap = JsonMap
+  P extends { [field: string]: any } = { [field: string]: any }
 >(
   options: GetNgwLayerItemsOptions &
-    NgwFeatureRequestOptions & { paramList?: [string, any][] }
+    NgwFeatureRequestOptions<P> & { paramList?: [string, any][] }
 ): CancelablePromise<FeatureItem<P, G>[]> {
   const params: FeatureRequestParams & RequestItemAdditionalParams = {
     ...FEATURE_REQUEST_PARAMS,
@@ -266,8 +269,8 @@ export function fetchNgwLayerItemsRequest<
   if (offset) {
     params.offset = offset;
   }
-
-  updateItemRequestParam(params, options);
+  // TODO: fix type for options
+  updateItemRequestParam(params, options as { [field: string]: any });
 
   if (orderBy) {
     params.order_by = orderBy.join(',');

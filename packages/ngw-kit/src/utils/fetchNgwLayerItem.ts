@@ -2,7 +2,6 @@ import { Geometry, GeoJsonProperties } from 'geojson';
 
 import NgwConnector from '@nextgis/ngw-connector';
 import CancelablePromise from '@nextgis/cancelable-promise';
-import { debugLog } from '@nextgis/utils';
 
 import {
   FeatureRequestParams,
