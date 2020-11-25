@@ -35,7 +35,7 @@ import {
   fetchNgwLayerItem,
   fetchNgwLayerItems,
   fetchNgwLayerFeature,
-  fetchNgwLayerFeatures,
+  fetchNgwLayerFeatureCollection,
   fetchIdentifyGeoJson,
   fetchNgwResourceExtent,
   sendIdentifyRequest,
@@ -262,7 +262,7 @@ export class NgwMap<
       filters?: PropertiesFilter;
     } & FilterOptions
   ): CancelablePromise<FeatureCollection<G, P>> {
-    return fetchNgwLayerFeatures({
+    return fetchNgwLayerFeatureCollection({
       connector: this.connector,
       ...options,
     });

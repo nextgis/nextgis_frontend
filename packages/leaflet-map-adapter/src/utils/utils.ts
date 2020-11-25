@@ -107,7 +107,7 @@ export function filterGeometries(
 export function convertMapClickEvent(evt: LeafletMouseEvent): MapClickEvent {
   const coord = evt.containerPoint;
   const latLng = evt.latlng;
-  const {lat, lng} = latLng;
+  const { lat, lng } = latLng;
   return {
     latLng,
     lngLat: [lng, lat],
