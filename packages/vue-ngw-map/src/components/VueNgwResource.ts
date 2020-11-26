@@ -42,7 +42,7 @@ export class VueNgwResource extends Vue {
       if (resourceId) {
         const fit = this.$props.fit ? !oldId : false;
         this.layer = await ngwMap.addNgwLayer({
-          resourceId: Number(resourceId),
+          resource: Number(resourceId),
           adapter: this.$props.adapter,
           fit,
           adapterOptions,

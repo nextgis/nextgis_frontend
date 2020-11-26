@@ -22,6 +22,7 @@ export function getLayerAdapterOptions(
   const layerAdapters = webMap.getLayerAdapters();
   const isImageAllowed = layerAdapters ? layerAdapters.IMAGE : true;
 
+  // @ts-ignore @deprecated
   const resourceId = (options as ResourceIdNgwLayerOptions).resourceId;
   const nd: TileNoData = options.tileNoData ? options.tileNoData : 204;
 
