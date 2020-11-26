@@ -53,7 +53,7 @@ async function createAdapterFromFirstStyle({
   if (firstStyle) {
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
     return createAsyncAdapter(
-      { ...layerOptions, resourceId: firstStyle.resource.id },
+      { ...layerOptions, resource: firstStyle.resource.id },
       webMap,
       connector
     );
@@ -84,7 +84,10 @@ export async function createAsyncAdapter(
     }
     if (item) {
       const cls = item.resource.cls;
-      const layerOptions: NgwLayerOptions = { ...options, resourceId };
+      const layerOptions: NgwLayerOptions = {
+        ...options,
+        resource: resourceId,
+      };
 
       const adapterOptions: GetClassAdapterOptions = {
         layerOptions,
@@ -118,7 +121,7 @@ export async function createAsyncAdapter(
             if (parentItem) {
               const parentOptions: NgwLayerOptions = {
                 ...options,
-                resourceId: item.resource.parent.id,
+                resource: item.resource.parent.id,
               };
               adapter = createGeoJsonAdapter({
                 ...adapterOptions,

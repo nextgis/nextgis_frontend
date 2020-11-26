@@ -12,8 +12,12 @@ export async function resourceIdFromLayerOptions(
 ): Promise<number> {
   const resource = (options as ResourceNgwLayerOptions).resource;
   const item = resource as ResourceItem;
+
+  // @ts-ignore @deprecated
   let keyname = (options as KeynamedNgwLayerOptions).keyname;
+  // @ts-ignore @deprecated
   let resourceId = (options as ResourceIdNgwLayerOptions).resourceId;
+
   if (resource) {
     if (typeof resource === 'string') {
       keyname = resource;
