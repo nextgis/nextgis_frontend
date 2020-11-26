@@ -577,7 +577,7 @@ export class NgwMap<
     } else {
       qmsId = Number(this.options.qmsId);
     }
-    const qmsLayerOptions: QmsAdapterOptions = {
+    const qmsLayerOptions: Partial<QmsAdapterOptions> = {
       qmsId,
     };
     if (qmsLayerName) {
