@@ -31,7 +31,6 @@ import {
   NgwIdentify,
   KeynamedNgwLayerOptions,
   ResourceIdNgwLayerOptions,
-  ResourceNgwLayerOptions,
   fetchNgwLayerItem,
   fetchNgwLayerItems,
   fetchNgwLayerFeature,
@@ -57,6 +56,7 @@ import {
   FeatureCollection,
   GeoJsonProperties,
 } from 'geojson';
+import { deprecatedWarn } from '@nextgis/utils';
 
 type PromiseGroup = 'select' | 'identify';
 
@@ -161,9 +161,18 @@ export class NgwMap<
     options: NgwLayerOptions
   ): Promise<ResourceAdapter | undefined> {
     await this.onMapLoad();
+    // @ts-ignore for backward compatibility
     const keyname = (options as KeynamedNgwLayerOptions).keyname;
+    // @ts-ignore for backward compatibility
     const resourceId = (options as ResourceIdNgwLayerOptions).resourceId;
-    const resource = (options as ResourceNgwLayerOptions).resource;
+
+    if (keyname || resourceId !== undefined) {
+      deprecatedWarn(
+        'set `resource` options instead of `keyname` or `resourceId`'
+      );
+    }
+
+    const resource = options.resource;
     if (!keyname && !resourceId && !resource) {
       throw new Error(
         'resource, resourceId or keyname is required parameter to add NGW layer'

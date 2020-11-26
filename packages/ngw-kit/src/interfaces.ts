@@ -163,10 +163,7 @@ export interface ResourceNgwLayerOptions<
 export type NgwLayerOptions<
   T extends NgwLayerAdapterType = NgwLayerAdapterType,
   P = { [name: string]: any }
-> =
-  | ResourceNgwLayerOptions<T, P>
-  | ResourceIdNgwLayerOptions<T, P>
-  | KeynamedNgwLayerOptions<T, P>;
+> = ResourceNgwLayerOptions<T, P>;
 
 /**
  * @public

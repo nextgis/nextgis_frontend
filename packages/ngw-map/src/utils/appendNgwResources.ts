@@ -11,11 +11,16 @@ export function appendNgwResources(
     resource = Number(resource);
     options.push({
       ...defOptions,
-      resourceId: resource,
+      resource,
     });
   } else if (Array.isArray(resource)) {
     const [resourceId, id] = resource;
-    options.push({ ...defOptions, resourceId, id, ...overwriteOptions });
+    options.push({
+      ...defOptions,
+      resource: resourceId,
+      id,
+      ...overwriteOptions,
+    });
   } else if (typeof resource === 'object') {
     options.push({ ...defOptions, ...resource, ...overwriteOptions });
   }

@@ -234,7 +234,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
         const layerAdapterOptions = getLayerAdapterOptions(
           {
             adapter,
-            resourceId,
+            resource: resourceId,
           },
           webMap,
           this.options.connector.options.baseUrl || ''

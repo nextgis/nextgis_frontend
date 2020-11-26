@@ -45,7 +45,7 @@ export async function createOnFirstShowAdapter({
       } else {
         createAsyncAdapter(
           {
-            resourceId: item.resource_id,
+            resource: item.resource_id,
             adapterOptions: {
               name: item.display_name,
               opacity: item.opacity,
