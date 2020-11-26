@@ -410,8 +410,7 @@ export class NgwMap<
   enableSelection(): void {
     if (!this.$$selectFromNgwRaster) {
       this.$$selectFromNgwRaster = (ev: MapClickEvent) => {
-        const c = this.emitter.listenerCount('ngw:select');
-        console.log(c);
+        this.emitter.listenerCount('ngw:select');
         if (this.emitter.listenerCount('ngw:select')) {
           this._selectFromNgwRaster(ev);
         }
