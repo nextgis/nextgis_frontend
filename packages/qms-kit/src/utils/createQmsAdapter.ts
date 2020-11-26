@@ -3,6 +3,7 @@ import { Type, mixinProperties } from '@nextgis/utils';
 import { QmsAdapterOptions, QmsBasemap, QmsAdapter as QA } from '../interfaces';
 import { alias, updateQmsOptions } from './updateQmsOptions';
 import { loadJson } from './loadJson';
+import { getSubdomainsOriginUrl } from './getSubmodulesFromOriginUrl';
 
 export function createQmsAdapter(
   webMap: WebMap,
@@ -48,6 +49,13 @@ export function createQmsAdapter(
               ...this.options,
               ...updateQmsOptions(qms),
             };
+            if (qms.origin_url) {
+              const [url, subdomains] = getSubdomainsOriginUrl(qms.origin_url);
+              if (subdomains.length) {
+                options.subdomains = subdomains;
+                options.url = url;
+              }
+            }
             this.options = options;
             const adapter = new webMapAdapter(this.map, options);
             return adapter.addLayer(options);

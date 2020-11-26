@@ -1,12 +1,16 @@
-import { AdapterOptions, MainLayerAdapter } from '@nextgis/webmap';
+import {
+  AdapterOptions,
+  MainLayerAdapter,
+  RasterAdapterOptions,
+} from '@nextgis/webmap';
 export interface QmsOptions {
   url: string;
 }
 
 export type QmsLayerType = 'tms';
 
-export interface QmsAdapterOptions extends AdapterOptions {
-  url?: string;
+export interface QmsAdapterOptions extends RasterAdapterOptions {
+  url: string;
   qmsId?: number;
   name?: string;
 
