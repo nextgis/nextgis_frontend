@@ -14,7 +14,7 @@ export function applyMixins(
   baseCtors.forEach((baseCtor) => {
     Object.getOwnPropertyNames(baseCtor.prototype).forEach((name) => {
       const isSomeProp = derivedProperties.indexOf(name) !== -1;
-      if (!replace && !isSomeProp) {
+      if ((!replace && !isSomeProp) || replace) {
         const descriptor = Object.getOwnPropertyDescriptor(
           baseCtor.prototype,
           name

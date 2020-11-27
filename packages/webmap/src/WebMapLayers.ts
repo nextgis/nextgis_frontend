@@ -245,6 +245,7 @@ export class WebMapLayers<
       const _adapter = new adapterEngine(this.mapAdapter.map, options);
       _adapter.options = { ...options, ..._adapter.options };
 
+
       if (_adapter.options.baselayer) {
         options.baselayer = true;
         options.order = 0;
