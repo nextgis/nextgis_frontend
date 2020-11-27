@@ -61,17 +61,16 @@ export async function createRasterAdapter({
           connector.options.baseUrl || ''
         );
         if (opt) {
-          if ('resourceId' in opt) {
+
             const layerAdapterOptions: ImageAdapterOptions = {
               ...opt,
-              layers: String(opt.resourceId),
-              params: { resource: opt.resourceId },
+              params: { resource: resourceId },
+              // @deprecated
+              layers: String(resourceId),
+              resourceId: resourceId,
             };
             this.options = { ...this.options, ...layerAdapterOptions };
-          } else {
-            const tileAdapterOptions: TileAdapterOptions = opt;
-            this.options = { ...this.options, ...tileAdapterOptions };
-          }
+
         }
       }
       addLayer(addOptions: any) {

@@ -22,11 +22,10 @@ export function getLayerAdapterOptions(
   const layerAdapters = webMap.getLayerAdapters();
   const isImageAllowed = layerAdapters ? layerAdapters.IMAGE : true;
 
-  // @ts-ignore @deprecated
-  const resourceId = (options as ResourceIdNgwLayerOptions).resourceId;
+  const resourceId = options.resource;
   const nd: TileNoData = options.tileNoData ? options.tileNoData : 204;
 
-  if (resourceId) {
+  if (typeof resourceId === 'number') {
     if (adapter === 'IMAGE') {
       if (isImageAllowed) {
         url = baseUrl + '/api/component/render/image';
@@ -84,7 +83,9 @@ export function getLayerAdapterOptions(
         nd;
       return { url, adapter };
     }
+  } else if (resourceId !== undefined) {
+    throw new Error('Option `resource` must be number, not ' + typeof resourceId);
   } else {
-    console.log('Option `resourceId` not set');
+    console.log('Option `resource` not set');
   }
 }
