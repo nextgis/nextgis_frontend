@@ -7,14 +7,18 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function fetchNgwLayerItems<G extends Geometry = Geometry, P extends JsonMap = JsonMap>(options: GetNgwLayerItemsOptions & NgwFeatureRequestOptions): CancelablePromise<FeatureItem<P, G>[]>;
+export declare function fetchNgwLayerItems<G extends Geometry = Geometry, P extends {
+    [field: string]: any;
+} = {
+    [field: string]: any;
+}>(options: GetNgwLayerItemsOptions & NgwFeatureRequestOptions<P>): CancelablePromise<FeatureItem<P, G>[]>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | [GetNgwLayerItemsOptions](./ngw-kit.getngwlayeritemsoptions.md) &amp; [NgwFeatureRequestOptions](./ngw-kit.ngwfeaturerequestoptions.md) |  |
+|  options | [GetNgwLayerItemsOptions](./ngw-kit.getngwlayeritemsoptions.md) &amp; [NgwFeatureRequestOptions](./ngw-kit.ngwfeaturerequestoptions.md)<!-- -->&lt;P&gt; |  |
 
 <b>Returns:</b>
 

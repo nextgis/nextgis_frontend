@@ -18,7 +18,6 @@ export interface NgwKitOptions
 |  [auth](./ngw-kit.ngwkitoptions.auth.md) | { login: string; password: string; } |  |
 |  [baseUrl](./ngw-kit.ngwkitoptions.baseurl.md) | string |  |
 |  [connector](./ngw-kit.ngwkitoptions.connector.md) | NgwConnector |  |
-|  [identification](./ngw-kit.ngwkitoptions.identification.md) | boolean | Get information from NGW webmap layers by click. |
 |  [pixelRadius](./ngw-kit.ngwkitoptions.pixelradius.md) | number | Radius for searching objects in pixels |
 |  [resourceId](./ngw-kit.ngwkitoptions.resourceid.md) | [ResourceDef](./ngw-kit.resourcedef.md) |  |
 

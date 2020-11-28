@@ -7,14 +7,18 @@
 <b>Signature:</b>
 
 ```typescript
-export interface NgwFeatureRequestOptions extends FilterOptions 
+export interface NgwFeatureRequestOptions<P extends {
+    [field: string]: any;
+} = {
+    [field: string]: any;
+}> extends FilterOptions<P> 
 ```
-<b>Extends:</b> [FilterOptions](./webmap.filteroptions.md)
+<b>Extends:</b> [FilterOptions](./webmap.filteroptions.md)<!-- -->&lt;P&gt;
 
 ## Properties
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [extensions](./ngw-kit.ngwfeaturerequestoptions.extensions.md) | string\[\] \| null \| false |  |
+|  [extensions](./ngw-kit.ngwfeaturerequestoptions.extensions.md) | Extensions\[\] \| string\[\] \| null \| false |  |
 |  [geom](./ngw-kit.ngwfeaturerequestoptions.geom.md) | boolean |  |
 

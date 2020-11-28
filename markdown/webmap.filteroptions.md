@@ -8,17 +8,21 @@
 <b>Signature:</b>
 
 ```typescript
-export interface FilterOptions<Entity = any> 
+export interface FilterOptions<P extends {
+    [field: string]: any;
+} = {
+    [field: string]: any;
+}> 
 ```
 
 ## Properties
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [fields](./webmap.filteroptions.fields.md) | (keyof Entity)\[\] |  |
+|  [fields](./webmap.filteroptions.fields.md) | (keyof P)\[\] \| false \| null |  |
 |  [intersects](./webmap.filteroptions.intersects.md) | string | WKT polygon geometry |
 |  [limit](./webmap.filteroptions.limit.md) | number | Limit (paginated) - max number of entities should be taken. |
 |  [offset](./webmap.filteroptions.offset.md) | number | Offset (paginated) where from entities should be taken. |
-|  [orderBy](./webmap.filteroptions.orderby.md) | (keyof Entity)\[\] \| string\[\] | set fields for order |
+|  [orderBy](./webmap.filteroptions.orderby.md) | (keyof P \| string)\[\] | set fields for order |
 |  [strategy](./webmap.filteroptions.strategy.md) | 'BBOX' |  |
 

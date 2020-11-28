@@ -26,9 +26,12 @@
 |  [capitalize(str)](./utils.capitalize.md) |  |
 |  [debounce(cb, wait)](./utils.debounce.md) |  |
 |  [DebounceDecorator(wait)](./utils.debouncedecorator.md) |  |
+|  [debugLog(message)](./utils.debuglog.md) |  |
 |  [deepmerge(x, y, mergeArray)](./utils.deepmerge.md) |  |
 |  [defined(val)](./utils.defined.md) | from https://github.com/CesiumGS/cesium/blob/master/Source/Core/defined.js |
 |  [degrees2meters(lng, lat)](./utils.degrees2meters.md) |  |
+|  [deprecatedMapClick(ev)](./utils.deprecatedmapclick.md) |  |
+|  [deprecatedWarn(message)](./utils.deprecatedwarn.md) |  |
 |  [eachCoordinates(geojson, cb)](./utils.eachcoordinates.md) |  |
 |  [eachGeometry(geojson, cb)](./utils.eachgeometry.md) |  |
 |  [fixUrlStr(url)](./utils.fixurlstr.md) |  |

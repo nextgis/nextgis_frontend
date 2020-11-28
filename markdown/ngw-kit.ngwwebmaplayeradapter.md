@@ -35,6 +35,7 @@ export declare class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
+|  [\_getWebMapLayerItem()](./ngw-kit.ngwwebmaplayeradapter._getwebmaplayeritem.md) |  |  |
 |  [addLayer(options)](./ngw-kit.ngwwebmaplayeradapter.addlayer.md) |  |  |
 |  [getDependLayers()](./ngw-kit.ngwwebmaplayeradapter.getdependlayers.md) |  |  |
 |  [getExtent()](./ngw-kit.ngwwebmaplayeradapter.getextent.md) |  |  |

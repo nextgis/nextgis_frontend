@@ -14,7 +14,7 @@
     "events": "^3.2.0"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "file:../build-tools"
+    "@nextgis/build-tools": "^1.0.0-beta.2"
   },
   "scripts": {
     "clean": "rimraf ./lib",
@@ -46,5 +46,6 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/nextgis/nextgis_frontend.git"
-  }
+  },
+  "gitHead": "902bc588de905d567f54f8f53838b921ee3a3436"
 }

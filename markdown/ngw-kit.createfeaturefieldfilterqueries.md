@@ -7,18 +7,22 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function createFeatureFieldFilterQueries(opt: Required<GetNgwLayerItemsOptions> & NgwFeatureRequestOptions, _queries?: CancelablePromise<FeatureItem[]>[], _parentAllParams?: [string, any][]): CancelablePromise<FeatureItem[]>;
+export declare function createFeatureFieldFilterQueries<G extends Geometry = Geometry, P extends {
+    [field: string]: any;
+} = {
+    [field: string]: any;
+}>(opt: Required<GetNgwLayerItemsOptions> & NgwFeatureRequestOptions<P>, _queries?: CancelablePromise<FeatureItem<P, G>[]>[], _parentAllParams?: [string, any][]): CancelablePromise<FeatureItem<P, G>[]>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  opt | Required&lt;[GetNgwLayerItemsOptions](./ngw-kit.getngwlayeritemsoptions.md)<!-- -->&gt; &amp; [NgwFeatureRequestOptions](./ngw-kit.ngwfeaturerequestoptions.md) |  |
-|  \_queries | CancelablePromise&lt;[FeatureItem](./ngw-connector.featureitem.md)<!-- -->\[\]&gt;\[\] |  |
+|  opt | Required&lt;[GetNgwLayerItemsOptions](./ngw-kit.getngwlayeritemsoptions.md)<!-- -->&gt; &amp; [NgwFeatureRequestOptions](./ngw-kit.ngwfeaturerequestoptions.md)<!-- -->&lt;P&gt; |  |
+|  \_queries | CancelablePromise&lt;[FeatureItem](./ngw-connector.featureitem.md)<!-- -->&lt;P, G&gt;\[\]&gt;\[\] |  |
 |  \_parentAllParams | \[string, any\]\[\] |  |
 
 <b>Returns:</b>
 
-CancelablePromise&lt;[FeatureItem](./ngw-connector.featureitem.md)<!-- -->\[\]&gt;
+CancelablePromise&lt;[FeatureItem](./ngw-connector.featureitem.md)<!-- -->&lt;P, G&gt;\[\]&gt;
 
