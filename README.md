@@ -12,6 +12,9 @@ Read more in the [article](http://nextgis.com/blog/nextgis-frontend/).
 
 Some universal examples:
 
+- [Add layer from NGW Cloud](http://code.nextgis.com/demo-examples-ngw_layer)
+- [Add webmap from NGW Cloud](http://code.nextgis.com/demo-examples-ngw_webmap)
+- [Highlight features from NGW webmap](https://code.nextgis.com/demo-examples-webmap_identification)
 - [Expression paint](http://code.nextgis.com/demo-examples-expression_paint_match)
 - [Layer properties filters](http://code.nextgis.com/demo-examples-ngw_layer_properties_filters)
 - [BBOX strategy for vector layer](http://code.nextgis.com/demo-examples-ngw_bbox_strategy)
@@ -19,8 +22,6 @@ Some universal examples:
 - [Events](http://code.nextgis.com/demo-examples-events)
 - [Data management in the vector layer](http://code.nextgis.com/demo-examples-geojson_data)
 - [GeoJSON data](http://code.nextgis.com/demo-examples-geojson_layer)
-- [Add layer from NGW Cloud](http://code.nextgis.com/demo-examples-ngw_layer)
-- [Add webmap from NGW Cloud](http://code.nextgis.com/demo-examples-ngw_webmap)
 - [Toggle button control](http://code.nextgis.com/demo-examples-toggle%20control)
 - [Vector selection](http://code.nextgis.com/demo-examples-vector_selection)
 
@@ -82,13 +83,13 @@ Map-free tools for common purpose
 
 See how nextgis frontend libraries are used in real projects
 
-- [russia-history](https://github.com/nextgis/russia-history) – Russia history live web map ([LIVE](https://map.runivers.ru))
-- [nextgisweb_viewer](https://github.com/nextgis/nextgisweb_viewer) – Service for viewing map resources from NextGIS Web ([LIVE](http://viewer.nextgis.com))
-- [ngw_frontend_boilerplate](https://github.com/nextgis/ngw_frontend_boilerplate)
 - [wwf-oilspill](https://github.com/nextgis/wwf-oilspill) – Emergency situations with oil spills ([LIVE](http://nextgis.ru/demo/oilspill/build/))
 - [oralhistory](https://github.com/nextgis/oralhistory) ([LIVE](https://nextgis.ru/demo/oralhistory/dist/))
 - [clear_horizon_frontend](https://github.com/nextgis/clear_horizon_frontend) – Clear horizon frontend.
 - [petro2020](https://github.com/rendrom/petro2020) ([LIVE](http://petro2020.igc.irk.ru/))
+- [russia-history](https://github.com/nextgis/russia-history) – Russia history live web map ([LIVE](https://map.runivers.ru))
+- [nextgisweb_viewer](https://github.com/nextgis/nextgisweb_viewer) – Service for viewing map resources from NextGIS Web ([LIVE](http://viewer.nextgis.com))
+- [ngw_frontend_boilerplate](https://github.com/nextgis/ngw_frontend_boilerplate)
 
 ## Install
 
@@ -260,40 +261,6 @@ The tests are launched from the root project directory. Testing is performed for
 npm t # run all test with coverage
 npm run karma # run karma test in watch mode for development
 ```
-
-## VSCode
-
-### Eslint for typescript configuration
-
-Open VSCode `File > Preferences > Settings` JSON view and add this to config:
-
-```bash
-mkdir .vscode && touch .vscode/settings.json
-```
-
-```javascripton
-{
-  "editor.formatOnSave": false,
-  "tslint.enable": false,
-  "eslint.enable": true,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  }
-}
-```
-
-### Debugging with Chrome, LiveServer and Watch
-
-Example for ngw-leaflet:
-
-Run webpack building with watch
-
-```bash
-cd ./packages/ngw-leaflet
-yarn run watch
-```
-
-Run LiveServer for some example index.html
 
 ## Commercial support
 

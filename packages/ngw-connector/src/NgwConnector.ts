@@ -238,7 +238,6 @@ export class NgwConnector {
     return new CancelablePromise((resolve, reject) => {
       this.connect()
         .then((apiItems) => {
-          // const apiItems = this.route;
           let apiItem = apiItems && apiItems[name];
           if (apiItem) {
             apiItem = [...apiItem];
@@ -280,11 +279,7 @@ export class NgwConnector {
               }
             }
             if (url) {
-              return this.makeQuery(url, params, options)
-                .then((resp) => {
-                  resolve(resp);
-                })
-                .catch(reject);
+              resolve(this.makeQuery(url, params, options));
             } else {
               reject(new Error('request url is not set'));
             }

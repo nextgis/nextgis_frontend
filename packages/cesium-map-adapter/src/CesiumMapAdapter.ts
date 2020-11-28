@@ -17,8 +17,6 @@ import {
   viewerCesium3DTilesInspectorMixin,
   ScreenSpaceEventType,
   Cartesian2,
-  Cesium3DTileFeature,
-  Entity,
 } from 'cesium';
 
 import {
