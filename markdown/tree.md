@@ -13,10 +13,3 @@
 |  [treeFind(item, filter, relation)](./tree.treefind.md) |  |
 |  [treeSome(item, filter, relation)](./tree.treesome.md) |  |
 
-## Type Aliases
-
-|  Type Alias | Description |
-|  --- | --- |
-|  [RelationFunction](./tree.relationfunction.md) |  |
-|  [SelfFilter](./tree.selffilter.md) |  |
-

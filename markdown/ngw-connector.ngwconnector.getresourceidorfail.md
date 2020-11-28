@@ -16,9 +16,13 @@ getResourceIdOrFail(resource: ResourceDefinition | DeepPartial<Resource>): Cance
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  resource | [ResourceDefinition](./ngw-connector.resourcedefinition.md) \| [DeepPartial](./utils.deeppartial.md)<!-- -->&lt;[Resource](./ngw-connector.resource.md)<!-- -->&gt; | Any available resource definition Similar with [getResourceId](./ngw-connector.ngwconnector.getresourceid.md) but rise error if resource is not exist. To not make one more checks if the resource is definitely exists |
+|  resource | [ResourceDefinition](./ngw-connector.resourcedefinition.md) \| [DeepPartial](./utils.deeppartial.md)<!-- -->&lt;[Resource](./ngw-connector.resource.md)<!-- -->&gt; | Any available resource definition |
 
 <b>Returns:</b>
 
 CancelablePromise&lt;number&gt;
+
+## Remarks
+
+Similar with [getResourceId](./ngw-connector.ngwconnector.getresourceid.md) but rise error if resource is not exist. To not make one more checks if the resource is definitely exists
 

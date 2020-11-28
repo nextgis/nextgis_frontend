@@ -16,9 +16,13 @@ getResource(resource: ResourceDefinition | DeepPartial<Resource>): CancelablePro
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  resource | [ResourceDefinition](./ngw-connector.resourcedefinition.md) \| [DeepPartial](./utils.deeppartial.md)<!-- -->&lt;[Resource](./ngw-connector.resource.md)<!-- -->&gt; | Resource id, keyname or search-object Fetching resource would be cached to speed up next call |
+|  resource | [ResourceDefinition](./ngw-connector.resourcedefinition.md) \| [DeepPartial](./utils.deeppartial.md)<!-- -->&lt;[Resource](./ngw-connector.resource.md)<!-- -->&gt; | Resource id, keyname or search-object |
 
 <b>Returns:</b>
 
 CancelablePromise&lt;[ResourceItem](./ngw-connector.resourceitem.md) \| undefined&gt;
+
+## Remarks
+
+Fetching resource would be cached to speed up next call
 

@@ -53,14 +53,17 @@ const ngwMap = new NgwMap({
 |  --- | --- | --- |
 |  [addControl(controlDef, position, options)](./ngw-map.ngwmap.addcontrol.md) |  | Organized addition to the map design and controls elements, calling <code>control.onAdd(this.webMap.mapAdapter)</code> |
 |  [addNgwLayer(options)](./ngw-map.ngwmap.addngwlayer.md) |  | Add any (style, vector, webmap) NGW layer by resource id. |
+|  [cancelPromise(args)](./ngw-map.ngwmap.cancelpromise.md) |  |  |
 |  [disableSelection()](./ngw-map.ngwmap.disableselection.md) |  |  |
 |  [enableSelection()](./ngw-map.ngwmap.enableselection.md) |  |  |
 |  [fetchIdentifyGeoJson(identify, multiple)](./ngw-map.ngwmap.fetchidentifygeojson.md) |  |  |
+|  [fetchIdentifyItem(identify, requestOptions)](./ngw-map.ngwmap.fetchidentifyitem.md) |  |  |
 |  [fetchNgwLayerFeature(options)](./ngw-map.ngwmap.fetchngwlayerfeature.md) |  |  |
 |  [fetchNgwLayerFeatures(options)](./ngw-map.ngwmap.fetchngwlayerfeatures.md) |  |  |
 |  [fetchNgwLayerItem(options)](./ngw-map.ngwmap.fetchngwlayeritem.md) |  |  |
 |  [fetchNgwLayerItems(options)](./ngw-map.ngwmap.fetchngwlayeritems.md) |  |  |
 |  [fit()](./ngw-map.ngwmap.fit.md) |  | Pans and zooms the map to the initial position specified in the options |
+|  [fitLayer(layerDef, options)](./ngw-map.ngwmap.fitlayer.md) |  | Move map to layer. If the layer is NGW resource, extent will be received from the server |
 |  [getIdentifyGeoJson(identify, multiple)](./ngw-map.ngwmap.getidentifygeojson.md) |  |  |
 |  [getNgwLayerByResourceId(id)](./ngw-map.ngwmap.getngwlayerbyresourceid.md) |  |  |
 |  [getNgwLayerFeature(options)](./ngw-map.ngwmap.getngwlayerfeature.md) |  |  |
@@ -70,5 +73,5 @@ const ngwMap = new NgwMap({
 |  [getNgwLayers()](./ngw-map.ngwmap.getngwlayers.md) |  |  |
 |  [onLoad(event)](./ngw-map.ngwmap.onload.md) |  |  |
 |  [removeLayer(layerDef)](./ngw-map.ngwmap.removelayer.md) |  |  |
-|  [zoomToLayer(layerDef)](./ngw-map.ngwmap.zoomtolayer.md) |  | Move map to layer. If the layer is NGW resource, extent will be received from the server |
+|  [zoomToLayer(layerDef)](./ngw-map.ngwmap.zoomtolayer.md) |  |  |
 

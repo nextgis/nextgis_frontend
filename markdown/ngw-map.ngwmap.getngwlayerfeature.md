@@ -6,7 +6,7 @@
 
 > Warning: This API is now obsolete.
 > 
-> use [NgwMap.getNgwLayerFeature()](./ngw-map.ngwmap.getngwlayerfeature.md) instead
+> use [NgwMap.fetchNgwLayerFeature()](./ngw-map.ngwmap.fetchngwlayerfeature.md) instead
 > 
 
 <b>Signature:</b>

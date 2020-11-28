@@ -80,8 +80,10 @@ getNgwLayerItems({
 |  [createRasterAdapter({ layerOptions, webMap, connector, item, })](./ngw-kit.createrasteradapter.md) |  |
 |  [extendNgwWebmapLayerAdapter(opt)](./ngw-kit.extendngwwebmaplayeradapter.md) |  |
 |  [fetchIdentifyGeoJson(options)](./ngw-kit.fetchidentifygeojson.md) |  |
+|  [fetchIdentifyItem(options)](./ngw-kit.fetchidentifyitem.md) |  |
 |  [fetchNgwLayerExtent(id, connector)](./ngw-kit.fetchngwlayerextent.md) |  |
 |  [fetchNgwLayerFeature(options)](./ngw-kit.fetchngwlayerfeature.md) |  |
+|  [fetchNgwLayerFeatureCollection(options)](./ngw-kit.fetchngwlayerfeaturecollection.md) |  |
 |  [fetchNgwLayerFeatures(options)](./ngw-kit.fetchngwlayerfeatures.md) |  |
 |  [fetchNgwLayerItem(options)](./ngw-kit.fetchngwlayeritem.md) |  |
 |  [fetchNgwLayerItems(options)](./ngw-kit.fetchngwlayeritems.md) |  |
@@ -108,6 +110,7 @@ getNgwLayerItems({
 |  [sendIdentifyRequest(ev, options)](./ngw-kit.sendidentifyrequest.md) |  |
 |  [setScaleRatio(scale, lat)](./ngw-kit.setscaleratio.md) |  |
 |  [updateImageParams(params, resourceId)](./ngw-kit.updateimageparams.md) |  |
+|  [updateItemRequestParam(params, options)](./ngw-kit.updateitemrequestparam.md) |  |
 
 ## Interfaces
 
@@ -124,6 +127,7 @@ getNgwLayerItems({
 |  [IdentifyEvent](./ngw-kit.identifyevent.md) |  |
 |  [IdentifyRequestOptions](./ngw-kit.identifyrequestoptions.md) |  |
 |  [NgwConfig](./ngw-kit.ngwconfig.md) |  |
+|  [NgwFeatureItemResponse](./ngw-kit.ngwfeatureitemresponse.md) |  |
 |  [NgwFeatureRequestOptions](./ngw-kit.ngwfeaturerequestoptions.md) |  |
 |  [NgwIdentifyItem](./ngw-kit.ngwidentifyitem.md) |  |
 |  [NgwKitOptions](./ngw-kit.ngwkitoptions.md) |  |

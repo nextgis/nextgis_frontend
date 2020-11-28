@@ -31,19 +31,19 @@
       baseUrl: 'https://demo.nextgis.com',
       target: 'map',
       qmsId: 487,
-      resources: [{ resource: 4226, fit: true, selectable: true }]
+      resources: [{ resourceId: 4226, fit: true, selectable: true }]
     });
-
-    ngwMap.emitter.on('click', function (e) {
-      ngwMap.setCursor('wait');
-      ngwMap.cancelPromise('identify', 'select');
-      ngwMap.removeLayer('geojson');
-    })
+    var promise;
     ngwMap.emitter.on('ngw:select', function (e) {
-      ngwMap.fetchIdentifyGeoJson(e).then(function (geojson) {
-        ngwMap.addGeoJsonLayer({data: geojson, id: 'geojson'});
-        ngwMap.setCursor('pointer');
-      });
+      if (promise) {
+        console.log('cancel');
+        promise.cancel();
+      }
+      promise = ngwMap.fetchIdentifyGeoJson(e).then(function (geojson) {
+        promise = undefined;
+        ngwMap.removeLayer('geojson');
+        ngwMap.addGeoJsonLayer({data: geojson, id: 'geojson'})
+      })
     })
   </script>
 </body>

@@ -10,7 +10,7 @@
     "@nextgis/vue-ngw-map": "^1.0.0-beta.2"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "file:../build-tools"
+    "@nextgis/build-tools": "^1.0.0-beta.2"
   },
   "buildOptions": {
     "name": "VueNgwMapbox",
@@ -43,5 +43,6 @@
   },
   "bugs": {
     "url": "https://github.com/nextgis/nextgis_frontend/issues"
-  }
+  },
+  "gitHead": "902bc588de905d567f54f8f53838b921ee3a3436"
 }

@@ -46,6 +46,7 @@ Make sure CORS is registered in the [NextGIS Web settings](https://docs.nextgis.
 |  [NgwDateTimeFormat](./ngw-connector.ngwdatetimeformat.md) |  |
 |  [NgwExtent](./ngw-connector.ngwextent.md) |  |
 |  [NgwFile](./ngw-connector.ngwfile.md) |  |
+|  [NgwLayerIdentifyError](./ngw-connector.ngwlayeridentifyerror.md) |  |
 |  [Params](./ngw-connector.params.md) |  |
 |  [PatchRequestItemsResponseMap](./ngw-connector.patchrequestitemsresponsemap.md) |  |
 |  [Permission](./ngw-connector.permission.md) |  |

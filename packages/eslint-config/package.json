@@ -32,5 +32,6 @@
     "prod": "exit 0",
     "watch": "exit 0",
     "test": "eslint index.js"
-  }
+  },
+  "gitHead": "902bc588de905d567f54f8f53838b921ee3a3436"
 }

@@ -11,7 +11,7 @@ export declare function idFilterWorkAround<G extends Geometry = Geometry, P exte
     filterById: PropertyFilter;
     resourceId: number;
     connector: NgwConnector;
-}): CancelablePromise<FeatureItem<GeoJsonProperties, Geometry>[]>;
+}): CancelablePromise<FeatureItem<P, G>[]>;
 ```
 
 ## Parameters
@@ -22,5 +22,5 @@ export declare function idFilterWorkAround<G extends Geometry = Geometry, P exte
 
 <b>Returns:</b>
 
-CancelablePromise&lt;[FeatureItem](./ngw-connector.featureitem.md)<!-- -->&lt;GeoJsonProperties, Geometry&gt;\[\]&gt;
+CancelablePromise&lt;[FeatureItem](./ngw-connector.featureitem.md)<!-- -->&lt;P, G&gt;\[\]&gt;
 

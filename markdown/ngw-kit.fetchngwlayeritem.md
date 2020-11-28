@@ -11,7 +11,7 @@ export declare function fetchNgwLayerItem<G extends Geometry = Geometry, P exten
     resourceId: number;
     featureId: number;
     connector: NgwConnector;
-} & NgwFeatureRequestOptions): CancelablePromise<FeatureItem<P, G>>;
+} & NgwFeatureRequestOptions): CancelablePromise<NgwFeatureItemResponse<P, G>>;
 ```
 
 ## Parameters
@@ -22,5 +22,5 @@ export declare function fetchNgwLayerItem<G extends Geometry = Geometry, P exten
 
 <b>Returns:</b>
 
-CancelablePromise&lt;[FeatureItem](./ngw-connector.featureitem.md)<!-- -->&lt;P, G&gt;&gt;
+CancelablePromise&lt;[NgwFeatureItemResponse](./ngw-kit.ngwfeatureitemresponse.md)<!-- -->&lt;P, G&gt;&gt;
 

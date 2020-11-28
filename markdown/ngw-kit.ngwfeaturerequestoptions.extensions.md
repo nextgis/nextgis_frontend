@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-extensions?: string[] | null | false;
+extensions?: Extensions[] | string[] | null | false;
 ```
