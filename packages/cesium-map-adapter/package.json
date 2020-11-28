@@ -13,8 +13,8 @@
     "@nextgis/paint": "^1.0.0-beta.1",
     "@nextgis/webmap": "^1.0.0-beta.1",
     "@types/events": "^3.0.0",
-    "@types/node": "^14.11.5",
-    "cesium": "^1.74.0",
+    "@types/node": "^14.14.10",
+    "cesium": "^1.75.0",
     "events": "^3.2.0"
   },
   "devDependencies": {
