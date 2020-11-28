@@ -52,5 +52,6 @@
   "license": "MIT",
   "devDependencies": {
     "rollup-plugin-visualizer": "^4.2.0"
-  }
+  },
+  "gitHead": "902bc588de905d567f54f8f53838b921ee3a3436"
 }
