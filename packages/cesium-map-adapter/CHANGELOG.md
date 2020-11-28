@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.2](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2020-11-28)
+
+
+### Bug Fixes
+
+* **ngw-connector:** fixes to apiRequest cancel work ([0ac44ee](https://github.com/nextgis/nextgis_frontend/commit/0ac44eee447019593ae80529cc3b063171f8f88c)), closes [#6](https://github.com/nextgis/nextgis_frontend/issues/6)
+
+
+### Features
+
+* **cesium-map-adapter:** add geojson adapter getExtent method ([84f0fb9](https://github.com/nextgis/nextgis_frontend/commit/84f0fb991c1f013d0f08e28c4e168d85cb1d31a4))
+* **cesium-map-adapter:** add map click event ([90ac3ab](https://github.com/nextgis/nextgis_frontend/commit/90ac3ab3464341984da524306b19f0e966e1ef72))
+* **cesium-map-adapter:** add subdomains for TileAdapter ([36e6b93](https://github.com/nextgis/nextgis_frontend/commit/36e6b932c7f1b62ece5ca2d1ff1109e3e65be97f))
+* **ngw-map:** add promise groups handler ([864fc6d](https://github.com/nextgis/nextgis_frontend/commit/864fc6d3a905e72136df3795f1e86046d54e0fd4))
+* **utils:** add debug log util ([6435c77](https://github.com/nextgis/nextgis_frontend/commit/6435c779050faa8b0e36945c69bbd22a55dba5ca))
+* **utils:** deprecated helper utils ([9bab695](https://github.com/nextgis/nextgis_frontend/commit/9bab695eb840d49015c739c8f871305e57640aab))
+
+
+### BREAKING CHANGES
+
+* **utils:** removed latLng from MapClickEvent, use lngLat: numner[] instead
+
+
+
+
+
 # [1.0.0-beta.1](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.0...v1.0.0-beta.1) (2020-11-16)
 
 **Note:** Version bump only for package @nextgis/cesium-map-adapter

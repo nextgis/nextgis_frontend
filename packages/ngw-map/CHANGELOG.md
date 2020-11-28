@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.2](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2020-11-28)
+
+
+### Bug Fixes
+
+* **ngw-map:** identify order ([1635f61](https://github.com/nextgis/nextgis_frontend/commit/1635f61e0c38fd913a850807cd1d084320016d3a))
+
+
+### Features
+
+* **ngw-kit:** add toGeojson in ngw layer item response ([a9f073a](https://github.com/nextgis/nextgis_frontend/commit/a9f073a50dac3ecf3472e7b90f4124b8e3a6b772))
+* **ngw-map:** add promise groups handler ([864fc6d](https://github.com/nextgis/nextgis_frontend/commit/864fc6d3a905e72136df3795f1e86046d54e0fd4))
+
+
+### Performance Improvements
+
+* **ngw-map:** identify only when listeners exist ([f591343](https://github.com/nextgis/nextgis_frontend/commit/f5913431b110b001e1403ee59fc97c343ea576c6))
+
+
+
+
+
 # [1.0.0-beta.1](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.0...v1.0.0-beta.1) (2020-11-16)
 
 **Note:** Version bump only for package @nextgis/ngw-map
