@@ -3,12 +3,7 @@ import {
   NgwLayerAdapterType,
   GetClassAdapterOptions,
 } from '../interfaces';
-import {
-  MainLayerAdapter,
-  Type,
-  ImageAdapterOptions,
-  TileAdapterOptions,
-} from '@nextgis/webmap';
+import { MainLayerAdapter, Type, ImageAdapterOptions } from '@nextgis/webmap';
 import { ResourceItem, ResourceCls } from '@nextgis/ngw-connector';
 
 import { getLayerAdapterOptions } from '../utils/getLayerAdapterOptions';
