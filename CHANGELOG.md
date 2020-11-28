@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.2](https://github.com/nextgis/nextgisweb_frontend/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2020-11-28)
+
+
+### Bug Fixes
+
+* **ngw-connector:** fixes to apiRequest cancel work ([0ac44ee](https://github.com/nextgis/nextgisweb_frontend/commit/0ac44eee447019593ae80529cc3b063171f8f88c)), closes [#6](https://github.com/nextgis/nextgisweb_frontend/issues/6)
+* **ngw-kit:** clean layer adapter options ([642b1e8](https://github.com/nextgis/nextgisweb_frontend/commit/642b1e810a337231a989b323f24d0c5502efd9ee))
+* **ngw-kit:** ngw webmap item childrensafe reverse ([fbcb433](https://github.com/nextgis/nextgisweb_frontend/commit/fbcb4330b193cb914fa184ccdb6ac81bc2b8a5f6))
+* **ngw-kit:** not identify for not supported layer ([1fbd7dc](https://github.com/nextgis/nextgisweb_frontend/commit/1fbd7dc28c7d6bc6fa4b1ac20e894fbbd3b27a2c))
+* **ngw-map:** identify order ([1635f61](https://github.com/nextgis/nextgisweb_frontend/commit/1635f61e0c38fd913a850807cd1d084320016d3a))
+* **utils:** applyMixin options on no replace ([4362c4c](https://github.com/nextgis/nextgisweb_frontend/commit/4362c4cb36dcd885803bb9dde36512ced21287cb))
+
+
+### Features
+
+* **cesium-map-adapter:** add geojson adapter getExtent method ([84f0fb9](https://github.com/nextgis/nextgisweb_frontend/commit/84f0fb991c1f013d0f08e28c4e168d85cb1d31a4))
+* **cesium-map-adapter:** add map click event ([90ac3ab](https://github.com/nextgis/nextgisweb_frontend/commit/90ac3ab3464341984da524306b19f0e966e1ef72))
+* **cesium-map-adapter:** add subdomains for TileAdapter ([36e6b93](https://github.com/nextgis/nextgisweb_frontend/commit/36e6b932c7f1b62ece5ca2d1ff1109e3e65be97f))
+* **ngw-kit:** add toGeojson in ngw layer item response ([a9f073a](https://github.com/nextgis/nextgisweb_frontend/commit/a9f073a50dac3ecf3472e7b90f4124b8e3a6b772))
+* **ngw-kit:** log to get item extensions if not request param set ([b2bf132](https://github.com/nextgis/nextgisweb_frontend/commit/b2bf13205d4b2a04ca58f63b03523007dcaff199))
+* **ngw-kit:** update feature request params ([4b2ffe8](https://github.com/nextgis/nextgisweb_frontend/commit/4b2ffe8170216e168bdd8f977a0d72d87277c181))
+* **ngw-map:** add promise groups handler ([864fc6d](https://github.com/nextgis/nextgisweb_frontend/commit/864fc6d3a905e72136df3795f1e86046d54e0fd4))
+* **qms-kit:** add subdomains support from origin_url ([8b6eb1a](https://github.com/nextgis/nextgisweb_frontend/commit/8b6eb1a7d60c27f3592b26642a4cfcd25086dcb5))
+* **utils:** add debug log util ([6435c77](https://github.com/nextgis/nextgisweb_frontend/commit/6435c779050faa8b0e36945c69bbd22a55dba5ca))
+* **utils:** deprecated helper utils ([9bab695](https://github.com/nextgis/nextgisweb_frontend/commit/9bab695eb840d49015c739c8f871305e57640aab))
+
+
+### Performance Improvements
+
+* **ngw-map:** identify only when listeners exist ([f591343](https://github.com/nextgis/nextgisweb_frontend/commit/f5913431b110b001e1403ee59fc97c343ea576c6))
+
+
+### BREAKING CHANGES
+
+* **ngw-kit:** `extensions` for any ngw feature request is now empty for default
+* **utils:** removed latLng from MapClickEvent, use lngLat: numner[] instead
+
+
+
+
+
 # [1.0.0-beta.1](https://github.com/nextgis/nextgisweb_frontend/compare/v1.0.0-beta.0...v1.0.0-beta.1) (2020-11-16)
 
 **Note:** Version bump only for package root
