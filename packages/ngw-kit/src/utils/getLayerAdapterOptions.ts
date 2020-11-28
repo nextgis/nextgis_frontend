@@ -5,11 +5,7 @@ import {
   WmsAdapterOptions,
 } from '@nextgis/webmap';
 
-import {
-  NgwLayerOptions,
-  ResourceIdNgwLayerOptions,
-  TileNoData,
-} from '../interfaces';
+import { NgwLayerOptions, TileNoData } from '../interfaces';
 import { updateImageParams } from './utils';
 
 export function getLayerAdapterOptions(
@@ -84,7 +80,9 @@ export function getLayerAdapterOptions(
       return { url, adapter };
     }
   } else if (resourceId !== undefined) {
-    throw new Error('Option `resource` must be number, not ' + typeof resourceId);
+    throw new Error(
+      'Option `resource` must be number, not ' + typeof resourceId
+    );
   } else {
     console.log('Option `resource` not set');
   }
