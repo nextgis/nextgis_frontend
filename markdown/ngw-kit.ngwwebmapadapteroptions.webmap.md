@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-webMap: WebMap<M>;
+webMap: WebMap;
 ```

@@ -10,3 +10,5 @@
 ```typescript
 export declare type VectorResourceAdapter<M = any, L = any, O extends GeoJsonAdapterOptions = GeoJsonAdapterOptions, F extends Feature = Feature> = ResourceAdapter<M, L, O, F> & VectorLayerAdapter<M, L, O, F>;
 ```
+<b>References:</b> [GeoJsonAdapterOptions](./webmap.geojsonadapteroptions.md)<!-- -->, [ResourceAdapter](./ngw-kit.resourceadapter.md)<!-- -->, [VectorLayerAdapter](./webmap.vectorlayeradapter.md)
+

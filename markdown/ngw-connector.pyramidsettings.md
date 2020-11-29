@@ -9,3 +9,5 @@
 ```typescript
 export declare type PyramidSettings = PyramidSettingsPyramid | Record<string, any>;
 ```
+<b>References:</b> [PyramidSettingsPyramid](./ngw-connector.pyramidsettingspyramid.md)
+

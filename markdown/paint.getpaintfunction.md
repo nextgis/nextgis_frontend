@@ -9,3 +9,5 @@
 ```typescript
 export declare type GetPaintFunction = (opt?: any) => VectorAdapterLayerPaint;
 ```
+<b>References:</b> [VectorAdapterLayerPaint](./paint.vectoradapterlayerpaint.md)
+

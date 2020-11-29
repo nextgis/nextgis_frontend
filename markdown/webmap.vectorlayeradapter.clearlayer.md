@@ -9,7 +9,7 @@ Remove layer data.
 <b>Signature:</b>
 
 ```typescript
-clearLayer?(cb?: (feature: Feature) => boolean): void | Promise<void>;
+clearLayer?(cb?: (feature: Feature) => boolean): void;
 ```
 
 ## Parameters
@@ -20,5 +20,5 @@ clearLayer?(cb?: (feature: Feature) => boolean): void | Promise<void>;
 
 <b>Returns:</b>
 
-void \| Promise&lt;void&gt;
+void
 

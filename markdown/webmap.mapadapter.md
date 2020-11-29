@@ -33,7 +33,6 @@ export interface MapAdapter<M = any, L = any, C = any>
 |  [createControl(control, options)](./webmap.mapadapter.createcontrol.md) |  |
 |  [createToggleControl(options)](./webmap.mapadapter.createtogglecontrol.md) |  |
 |  [destroy()](./webmap.mapadapter.destroy.md) |  |
-|  [fetchZoom()](./webmap.mapadapter.fetchzoom.md) | Temporal async method. |
 |  [fit(extent, options)](./webmap.mapadapter.fit.md) |  |
 |  [fitBounds(extent, options)](./webmap.mapadapter.fitbounds.md) |  |
 |  [getBounds()](./webmap.mapadapter.getbounds.md) |  |

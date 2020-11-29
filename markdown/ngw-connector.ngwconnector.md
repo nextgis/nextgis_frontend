@@ -29,30 +29,26 @@ export declare class NgwConnector
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
-|  [apiRequest(name, params, options)](./ngw-connector.ngwconnector.apirequest.md) |  | Send request to NGW api router. |
+|  [apiRequest(name, params, options)](./ngw-connector.ngwconnector.apirequest.md) |  |  |
 |  [connect()](./ngw-connector.ngwconnector.connect.md) |  | Establishing a connection with NextGIS Web to fulfill all other requests. |
-|  [create(options)](./ngw-connector.ngwconnector.create.md) | <code>static</code> |  |
-|  [delete(name, options, params)](./ngw-connector.ngwconnector.delete.md) |  | Shortcut method for send DELETE request to NGW. |
-|  [deleteResource(resource)](./ngw-connector.ngwconnector.deleteresource.md) |  | Fast way to delete resource from NGW and clean cache. |
-|  [get(name, options, params)](./ngw-connector.ngwconnector.get.md) |  | Shortcut method for send GET request to NGW. |
-|  [getAuthorizationHeaders(credentials)](./ngw-connector.ngwconnector.getauthorizationheaders.md) |  | Obtaining the required Headers for authentication of requests in the NGW. |
-|  [getResource(resource)](./ngw-connector.ngwconnector.getresource.md) |  | Receive resource from NGW by id, keyname or serch-object parameter. |
+|  [delete(name, options, params)](./ngw-connector.ngwconnector.delete.md) |  |  |
+|  [deleteResource(resource)](./ngw-connector.ngwconnector.deleteresource.md) |  |  |
+|  [get(name, options, params)](./ngw-connector.ngwconnector.get.md) |  |  |
+|  [getAuthorizationHeaders(credentials)](./ngw-connector.ngwconnector.getauthorizationheaders.md) |  |  |
+|  [getResource(resource)](./ngw-connector.ngwconnector.getresource.md) |  |  |
 |  [getResourceBy(resource)](./ngw-connector.ngwconnector.getresourceby.md) |  |  |
 |  [getResourceById(id)](./ngw-connector.ngwconnector.getresourcebyid.md) |  |  |
 |  [getResourceByKeyname(keyname)](./ngw-connector.ngwconnector.getresourcebykeyname.md) |  |  |
 |  [getResourceChildren(optOrResource)](./ngw-connector.ngwconnector.getresourcechildren.md) |  |  |
-|  [getResourceId(resource)](./ngw-connector.ngwconnector.getresourceid.md) |  | A fast way to retrieve resource ID for any resource definition. |
-|  [getResourceIdOrFail(resource)](./ngw-connector.ngwconnector.getresourceidorfail.md) |  | A fast way to retrieve resource ID for any resource definition. |
-|  [getResourceOrFail(resource)](./ngw-connector.ngwconnector.getresourceorfail.md) |  |  |
+|  [getResourceId(resource)](./ngw-connector.ngwconnector.getresourceid.md) |  |  |
 |  [getResourcesBy(resource)](./ngw-connector.ngwconnector.getresourcesby.md) |  |  |
 |  [getUserInfo(credentials)](./ngw-connector.ngwconnector.getuserinfo.md) |  |  |
 |  [login(credentials)](./ngw-connector.ngwconnector.login.md) |  | Quick way to change NextGIS Web user. |
-|  [logout()](./ngw-connector.ngwconnector.logout.md) |  | Disconnecting a user. Aborting all current requests |
+|  [logout()](./ngw-connector.ngwconnector.logout.md) |  |  |
 |  [makeClientId(credentials)](./ngw-connector.ngwconnector.makeclientid.md) |  |  |
-|  [makeQuery(url, params, options)](./ngw-connector.ngwconnector.makequery.md) |  | Send request to NGW. |
-|  [patch(name, options, params)](./ngw-connector.ngwconnector.patch.md) |  | Shortcut method for send PATCH request to NGW. |
-|  [post(name, options, params)](./ngw-connector.ngwconnector.post.md) |  | Shortcut method for send POST request to NGW. |
-|  [put(name, options, params)](./ngw-connector.ngwconnector.put.md) |  | Shortcut method for send PUT request to NGW. |
+|  [makeQuery(url, params, options)](./ngw-connector.ngwconnector.makequery.md) |  |  |
+|  [patch(name, options, params)](./ngw-connector.ngwconnector.patch.md) |  |  |
+|  [post(name, options, params)](./ngw-connector.ngwconnector.post.md) |  |  |
+|  [put(name, options, params)](./ngw-connector.ngwconnector.put.md) |  |  |
 |  [setNgw(baseUrl)](./ngw-connector.ngwconnector.setngw.md) |  | Fast way to specify the connection address to NextGIS Web. The current connection will be severed. |
-|  [updateResource(resource, data)](./ngw-connector.ngwconnector.updateresource.md) |  |  |
 

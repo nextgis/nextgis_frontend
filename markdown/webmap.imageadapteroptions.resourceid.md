@@ -6,7 +6,7 @@
 
 > Warning: This API is now obsolete.
 > 
-> use `params` option instead
+> use `layer` option instead
 > 
 
 <b>Signature:</b>

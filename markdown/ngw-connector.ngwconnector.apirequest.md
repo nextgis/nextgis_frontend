@@ -4,8 +4,6 @@
 
 ## NgwConnector.apiRequest() method
 
-Send request to NGW api router.
-
 <b>Signature:</b>
 
 ```typescript
@@ -16,37 +14,11 @@ apiRequest<K extends keyof RequestItemsParamsMap, P extends RequestItemKeys = Re
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  name | K | NGW route name from [routes](https://docs.nextgis.com/docs_ngweb_dev/doc/developer/resource.html#routes) |
-|  params | [RequestItemsParams](./ngw-connector.requestitemsparams.md)<!-- -->&lt;K&gt; | Request item params or query params |
-|  options | [RequestOptions](./ngw-connector.requestoptions.md) | Request options |
+|  name | K |  |
+|  params | [RequestItemsParams](./ngw-connector.requestitemsparams.md)<!-- -->&lt;K&gt; |  |
+|  options | [RequestOptions](./ngw-connector.requestoptions.md) |  |
 
 <b>Returns:</b>
 
 CancelablePromise&lt;P\[K\]&gt;
-
-## Example
-
-
-```javascript
-
-// there is such an NGW route item
-// "feature_layer.feature.item": [
-//   "/api/resource/{0}/feature/{1}",
-//   "id",
-//   "fid"
-// ],
-
-const connector = new NgwConnector({ baseUrl: 'https://example.nextgis.com' });
-connector.apiRequest('feature_layer.feature.item', {
-  // request params for {0} and {1}
-  'id': 2011,
-  'fid': 101,
-  // query params
-  'srs': 4326,
-  'geom_format': 'geojson',
-}, { method: 'GET' });
-// send get-request to 'https://example.nextgis.com/api/resource/2011/feature/101?srs=4326&geom_format=geojson'
-
-
-```
 

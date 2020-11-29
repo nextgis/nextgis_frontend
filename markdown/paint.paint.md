@@ -9,3 +9,5 @@
 ```typescript
 export declare type Paint = VectorAdapterLayerPaint | GetPaintCallback | PropertiesPaint;
 ```
+<b>References:</b> [VectorAdapterLayerPaint](./paint.vectoradapterlayerpaint.md)<!-- -->, [GetPaintCallback](./paint.getpaintcallback.md)<!-- -->, [PropertiesPaint](./paint.propertiespaint.md)
+

@@ -7,7 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-get connector(): NgwConnector;
-
-set connector(val: NgwConnector);
+connector: NgwConnector;
 ```

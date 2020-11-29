@@ -8,9 +8,9 @@
 <b>Signature:</b>
 
 ```typescript
-export declare class WebMapLayers<M = any, L = any, E extends WebMapEvents = WebMapEvents, O extends MapOptions = MapOptions> extends WebMapMain<M, E, O> 
+export declare class WebMapLayers<M = any, L = any, C = any, E extends WebMapEvents = WebMapEvents> extends WebMapMain<M, L, C, E> 
 ```
-<b>Extends:</b> [WebMapMain](./webmap.webmapmain.md)<!-- -->&lt;M, E, O&gt;
+<b>Extends:</b> [WebMapMain](./webmap.webmapmain.md)<!-- -->&lt;M, L, C, E&gt;
 
 ## Methods
 

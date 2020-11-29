@@ -7,9 +7,9 @@
 <b>Signature:</b>
 
 ```typescript
-export interface QmsAdapterOptions extends RasterAdapterOptions 
+export interface QmsAdapterOptions extends AdapterOptions 
 ```
-<b>Extends:</b> [RasterAdapterOptions](./webmap.rasteradapteroptions.md)
+<b>Extends:</b> [AdapterOptions](./webmap.adapteroptions.md)
 
 ## Properties
 

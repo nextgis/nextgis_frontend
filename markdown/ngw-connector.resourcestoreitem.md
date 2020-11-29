@@ -9,3 +9,5 @@
 ```typescript
 export declare type ResourceStoreItem<P extends ResourceStoreItemProperties = ResourceStoreItemProperties> = ResourceStoreItemDefault & P;
 ```
+<b>References:</b> [ResourceStoreItemProperties](./ngw-connector.resourcestoreitemproperties.md)<!-- -->, [ResourceStoreItemDefault](./ngw-connector.resourcestoreitemdefault.md)
+

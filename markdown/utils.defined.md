@@ -6,6 +6,8 @@
 
 from https://github.com/CesiumGS/cesium/blob/master/Source/Core/defined.js
 
+ defined
+
 <b>Signature:</b>
 
 ```typescript
@@ -29,9 +31,9 @@ Returns true if the object is defined, returns false otherwise.
 
 ```javascript
 if (defined(positions)) {
-  doSomething();
+     doSomething();
 } else {
-  doSomethingElse();
+     doSomethingElse();
 }
 
 ```

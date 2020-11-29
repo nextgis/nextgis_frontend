@@ -9,3 +9,5 @@
 ```typescript
 export declare type NgwResourceDefinition = number | [number, string] | NgwLayerOptions;
 ```
+<b>References:</b> [NgwLayerOptions](./ngw-kit.ngwlayeroptions.md)
+

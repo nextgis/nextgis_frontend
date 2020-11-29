@@ -24,5 +24,4 @@ export interface NgwLayerOptionsAdditional<T extends NgwLayerAdapterType = NgwLa
 |  [id](./ngw-kit.ngwlayeroptionsadditional.id.md) | string |  |
 |  [meta](./ngw-kit.ngwlayeroptionsadditional.meta.md) | P |  |
 |  [simplification](./ngw-kit.ngwlayeroptionsadditional.simplification.md) | number |  |
-|  [tileNoData](./ngw-kit.ngwlayeroptionsadditional.tilenodata.md) | [TileNoData](./ngw-kit.tilenodata.md) | Parameter for <code>TILE</code> and <code>IMAGE</code> adapters to say NGW what will be returned if there is no data to render. |
 

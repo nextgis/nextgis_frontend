@@ -4,8 +4,6 @@
 
 ## NgwConnector.makeQuery() method
 
-Send request to NGW.
-
 <b>Signature:</b>
 
 ```typescript
@@ -16,9 +14,9 @@ makeQuery(url: string, params?: Params, options?: RequestOptions): CancelablePro
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  url | string | URL address to NGW |
-|  params | [Params](./ngw-connector.params.md) | Query params |
-|  options | [RequestOptions](./ngw-connector.requestoptions.md) | Request options |
+|  url | string |  |
+|  params | [Params](./ngw-connector.params.md) |  |
+|  options | [RequestOptions](./ngw-connector.requestoptions.md) |  |
 
 <b>Returns:</b>
 

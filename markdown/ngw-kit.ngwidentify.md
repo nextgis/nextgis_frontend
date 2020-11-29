@@ -10,3 +10,5 @@
 ```typescript
 export declare type NgwIdentify = FeatureLayersIdentify & (NgwVectorIdentify | NgwRasterIdentify);
 ```
+<b>References:</b> [FeatureLayersIdentify](./ngw-connector.featurelayersidentify.md)
+

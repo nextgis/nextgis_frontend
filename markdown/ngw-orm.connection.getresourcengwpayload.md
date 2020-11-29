@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-getResourceNgwPayload(resource: typeof BaseResource, parent: number, opt?: Partial<SyncOptions>): DeepPartial<ResourceSyncItem> | undefined;
+getResourceNgwPayload(resource: typeof BaseResource, parent: number, options: SyncOptions): DeepPartial<ResourceSyncItem> | undefined;
 ```
 
 ## Parameters
@@ -16,7 +16,7 @@ getResourceNgwPayload(resource: typeof BaseResource, parent: number, opt?: Parti
 |  --- | --- | --- |
 |  resource | typeof [BaseResource](./ngw-orm.baseresource.md) |  |
 |  parent | number |  |
-|  opt | Partial&lt;SyncOptions&gt; |  |
+|  options | SyncOptions |  |
 
 <b>Returns:</b>
 

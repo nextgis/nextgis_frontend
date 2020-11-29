@@ -9,3 +9,5 @@
 ```typescript
 export declare type Router = PyramidRoute;
 ```
+<b>References:</b> [PyramidRoute](./ngw-connector.pyramidroute.md)
+

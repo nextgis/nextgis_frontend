@@ -9,9 +9,9 @@ Base class containing the logic of interaction WebMap with NextGIS services.
 <b>Signature:</b>
 
 ```typescript
-export declare class NgwMap<M = unknown, L = unknown, C = unknown, O extends NgwMapOptions<C> = NgwMapOptions<C>> extends WebMap<M, L, C, NgwMapEvents, O> 
+export declare class NgwMap<M = unknown, L = unknown, C = unknown, O = Record<string, any>> extends WebMap<M, L, C, NgwMapEvents> 
 ```
-<b>Extends:</b> [WebMap](./webmap.webmap.md)<!-- -->&lt;M, L, C, [NgwMapEvents](./ngw-map.ngwmapevents.md)<!-- -->, O&gt;
+<b>Extends:</b> [WebMap](./webmap.webmap.md)<!-- -->&lt;M, L, C, [NgwMapEvents](./ngw-map.ngwmapevents.md)<!-- -->&gt;
 
 ## Example
 
@@ -22,8 +22,7 @@ import MapAdapter from '@nextgis/leaflet-map-adapter';
 // styles are not included in the leaflet-map-adapter
 import 'leaflet/dist/leaflet.css';
 
-const ngwMap = new NgwMap({
-  mapAdapter: new MapAdapter(),
+const ngwMap = new NgwMap(new MapAdapter(), {
   target: 'map',
   qmsId: 487,
   baseUrl: 'https://demo.nextgis.com',
@@ -36,7 +35,7 @@ const ngwMap = new NgwMap({
 
 |  Constructor | Modifiers | Description |
 |  --- | --- | --- |
-|  [(constructor)(options)](./ngw-map.ngwmap._constructor_.md) |  | Constructs a new instance of the <code>NgwMap</code> class |
+|  [(constructor)(mapAdapter, options)](./ngw-map.ngwmap._constructor_.md) |  | Constructs a new instance of the <code>NgwMap</code> class |
 
 ## Properties
 
@@ -46,6 +45,7 @@ const ngwMap = new NgwMap({
 |  [connector](./ngw-map.ngwmap.connector.md) |  | NgwConnector |  |
 |  [emitter](./ngw-map.ngwmap.emitter.md) |  | StrictEventEmitter&lt;EventEmitter, [NgwMapEvents](./ngw-map.ngwmapevents.md)<!-- -->&gt; |  |
 |  [getIcon](./ngw-map.ngwmap.geticon.md) | <code>static</code> | typeof getIcon |  |
+|  [options](./ngw-map.ngwmap.options.md) |  | [NgwMapOptions](./ngw-map.ngwmapoptions.md)<!-- -->&lt;C&gt; &amp; O |  |
 
 ## Methods
 
@@ -53,17 +53,9 @@ const ngwMap = new NgwMap({
 |  --- | --- | --- |
 |  [addControl(controlDef, position, options)](./ngw-map.ngwmap.addcontrol.md) |  | Organized addition to the map design and controls elements, calling <code>control.onAdd(this.webMap.mapAdapter)</code> |
 |  [addNgwLayer(options)](./ngw-map.ngwmap.addngwlayer.md) |  | Add any (style, vector, webmap) NGW layer by resource id. |
-|  [cancelPromise(args)](./ngw-map.ngwmap.cancelpromise.md) |  |  |
 |  [disableSelection()](./ngw-map.ngwmap.disableselection.md) |  |  |
 |  [enableSelection()](./ngw-map.ngwmap.enableselection.md) |  |  |
-|  [fetchIdentifyGeoJson(identify, multiple)](./ngw-map.ngwmap.fetchidentifygeojson.md) |  |  |
-|  [fetchIdentifyItem(identify, requestOptions)](./ngw-map.ngwmap.fetchidentifyitem.md) |  |  |
-|  [fetchNgwLayerFeature(options)](./ngw-map.ngwmap.fetchngwlayerfeature.md) |  |  |
-|  [fetchNgwLayerFeatures(options)](./ngw-map.ngwmap.fetchngwlayerfeatures.md) |  |  |
-|  [fetchNgwLayerItem(options)](./ngw-map.ngwmap.fetchngwlayeritem.md) |  |  |
-|  [fetchNgwLayerItems(options)](./ngw-map.ngwmap.fetchngwlayeritems.md) |  |  |
 |  [fit()](./ngw-map.ngwmap.fit.md) |  | Pans and zooms the map to the initial position specified in the options |
-|  [fitLayer(layerDef, options)](./ngw-map.ngwmap.fitlayer.md) |  | Move map to layer. If the layer is NGW resource, extent will be received from the server |
 |  [getIdentifyGeoJson(identify, multiple)](./ngw-map.ngwmap.getidentifygeojson.md) |  |  |
 |  [getNgwLayerByResourceId(id)](./ngw-map.ngwmap.getngwlayerbyresourceid.md) |  |  |
 |  [getNgwLayerFeature(options)](./ngw-map.ngwmap.getngwlayerfeature.md) |  |  |
@@ -73,5 +65,5 @@ const ngwMap = new NgwMap({
 |  [getNgwLayers()](./ngw-map.ngwmap.getngwlayers.md) |  |  |
 |  [onLoad(event)](./ngw-map.ngwmap.onload.md) |  |  |
 |  [removeLayer(layerDef)](./ngw-map.ngwmap.removelayer.md) |  |  |
-|  [zoomToLayer(layerDef)](./ngw-map.ngwmap.zoomtolayer.md) |  |  |
+|  [zoomToLayer(layerDef)](./ngw-map.ngwmap.zoomtolayer.md) |  | Move map to layer. If the layer is NGW resource, extent will be received from the server |
 

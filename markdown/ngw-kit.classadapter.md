@@ -10,3 +10,5 @@
 ```typescript
 export declare type ClassAdapter = Promise<Type<LayerAdapter> | undefined>;
 ```
+<b>References:</b> [Type](./utils.type.md)<!-- -->, [LayerAdapter](./webmap.layeradapter.md)
+

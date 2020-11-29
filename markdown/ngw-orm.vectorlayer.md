@@ -37,5 +37,4 @@ export declare class VectorLayer<G extends Geometry = Geometry> extends BaseReso
 |  [toGeoJson()](./ngw-orm.vectorlayer.togeojson.md) |  |  |
 |  [toJSON()](./ngw-orm.vectorlayer.tojson.md) |  |  |
 |  [toTypescript(opt)](./ngw-orm.vectorlayer.totypescript.md) | <code>static</code> |  |
-|  [validate()](./ngw-orm.vectorlayer.validate.md) | <code>static</code> |  |
 

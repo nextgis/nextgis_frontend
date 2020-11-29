@@ -14,3 +14,5 @@
 ```typescript
 export declare type ControlPositions = ControlPosition;
 ```
+<b>References:</b> [ControlPosition](./webmap.controlposition.md)
+

@@ -16,3 +16,5 @@ export declare type OnBeforeLayerAdd = (e: {
     options?: AdapterOptions;
 } | undefined;
 ```
+<b>References:</b> [Type](./utils.type.md)<!-- -->, [LayerAdapter](./webmap.layeradapter.md)<!-- -->, [AdapterOptions](./webmap.adapteroptions.md)
+
