@@ -23,7 +23,7 @@ Simply download and include with a script tag, `NgwLeaflet` and `NgwMap` will be
   var ngwMap = new NgwLeaflet({
     baseUrl: 'https://demo.nextgis.com',
     target: 'map',
-    qmsId: 487,
+    qmsId: 448,
     webmapId: 3985
   });
 </script>
@@ -61,7 +61,7 @@ import NgwMap from '@nextgis/ngw-leaflet';
 const ngwMap = new NgwMap({
   baseUrl: 'https://demo.nextgis.com',
   target: 'map',
-  qmsId: 487,
+  qmsId: 448,
   webmapId: 3985
 });
 ```
