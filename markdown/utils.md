@@ -15,40 +15,25 @@
 
 |  Function | Description |
 |  --- | --- |
-|  [\_allProperties(obj, \_props)](./utils._allproperties.md) |  |
-|  [allProperties(obj)](./utils.allproperties.md) |  |
-|  [applyMixins(derivedCtor, baseCtors, opt)](./utils.applymixins.md) |  |
-|  [arrayCompare(array1, array2)](./utils.arraycompare.md) | Comparison of the contents of two arrays. Position of elements is ignored. |
-|  [arrayCompareStrict(array1, array2)](./utils.arraycomparestrict.md) | Comparing content and position of elements of two arrays. |
+|  [applyMixins(derivedCtor, baseCtors)](./utils.applymixins.md) |  |
+|  [arrayCompare(array1, array2)](./utils.arraycompare.md) |  |
 |  [arrayUnique(arr)](./utils.arrayunique.md) |  |
 |  [bindAll(fns, context)](./utils.bindall.md) | Given an array of member function names as strings, replace all of them with bound versions that will always refer to <code>context</code> as <code>this</code>. This is useful for classes where otherwise event bindings would reassign <code>this</code> to the evented object or some other value: this lets you ensure the <code>this</code> value always. Taken from: https://github.com/mapbox/mapbox-gl-js/blob/v1.0.0/src/util/util.js\#L243 |
 |  [camelize(str)](./utils.camelize.md) |  |
 |  [capitalize(str)](./utils.capitalize.md) |  |
 |  [debounce(cb, wait)](./utils.debounce.md) |  |
 |  [DebounceDecorator(wait)](./utils.debouncedecorator.md) |  |
-|  [debugLog(message)](./utils.debuglog.md) |  |
 |  [deepmerge(x, y, mergeArray)](./utils.deepmerge.md) |  |
-|  [defined(val)](./utils.defined.md) | from https://github.com/CesiumGS/cesium/blob/master/Source/Core/defined.js |
+|  [defined(val)](./utils.defined.md) | from https://github.com/CesiumGS/cesium/blob/master/Source/Core/defined.js defined |
 |  [degrees2meters(lng, lat)](./utils.degrees2meters.md) |  |
-|  [deprecatedMapClick(ev)](./utils.deprecatedmapclick.md) |  |
-|  [deprecatedWarn(message)](./utils.deprecatedwarn.md) |  |
-|  [eachCoordinates(geojson, cb)](./utils.eachcoordinates.md) |  |
-|  [eachGeometry(geojson, cb)](./utils.eachgeometry.md) |  |
 |  [fixUrlStr(url)](./utils.fixurlstr.md) |  |
-|  [flatten(data)](./utils.flatten.md) |  |
-|  [full(val)](./utils.full.md) |  |
-|  [getBoundsFeature(b)](./utils.getboundsfeature.md) |  |
-|  [getBoundsPolygon(b)](./utils.getboundspolygon.md) |  |
-|  [getCircleFeature(lng, lat, radius, points)](./utils.getcirclefeature.md) |  |
-|  [getCirclePolygonCoordinates(lng, lat, radius, points)](./utils.getcirclepolygoncoordinates.md) |  |
+|  [getCirclePoly(lng, lat, radius, points)](./utils.getcirclepoly.md) |  |
 |  [getGlobalVariable()](./utils.getglobalvariable.md) |  |
 |  [isAnyJson(val)](./utils.isanyjson.md) |  |
 |  [isArray(val)](./utils.isarray.md) |  |
 |  [isJsonArray(val)](./utils.isjsonarray.md) |  |
 |  [isJsonMap(val)](./utils.isjsonmap.md) |  |
 |  [isObject(val)](./utils.isobject.md) |  |
-|  [isObjKey(obj, key)](./utils.isobjkey.md) |  |
-|  [keyInObj(obj, key)](./utils.keyinobj.md) |  |
 |  [latLngToLngLatArray(latLng)](./utils.latlngtolnglatarray.md) |  |
 |  [lngLatArrayToLatLng(coord)](./utils.lnglatarraytolatlng.md) |  |
 |  [meters2degress(x, y)](./utils.meters2degress.md) |  |
@@ -57,17 +42,13 @@
 |  [objectAssign(target, source)](./utils.objectassign.md) |  |
 |  [objectAssign(target, source1, source2)](./utils.objectassign_1.md) | Copy the values of all of the enumerable own properties from one or more source objects to a target object. Returns the target object. |
 |  [objectAssign(target, source1, source2, source3)](./utils.objectassign_2.md) | Copy the values of all of the enumerable own properties from one or more source objects to a target object. Returns the target object. |
-|  [objectDeepEqual(obj1, obj2)](./utils.objectdeepequal.md) |  |
 |  [reEscape(s)](./utils.reescape.md) |  |
-|  [round(val, toFixed)](./utils.round.md) |  |
 |  [sleep(delay)](./utils.sleep.md) |  |
-|  [unflatten(data)](./utils.unflatten.md) |  |
 
 ## Interfaces
 
 |  Interface | Description |
 |  --- | --- |
-|  [ApplyMixinOptions](./utils.applymixinoptions.md) |  |
 |  [JsonMap](./utils.jsonmap.md) |  |
 |  [LatLng](./utils.latlng.md) | Longitude and latitude coordinate, measured in degrees. |
 

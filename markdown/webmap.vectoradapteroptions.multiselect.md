@@ -14,12 +14,5 @@ multiselect?: boolean;
 
 ## Example
 
-
-```javascript
-// multiselect: false
-layer.select(({ feature }) => feature.properties.color === 'green'); // one feature will be selected
-// multiselect: true
-layer.select(({ feature }) => feature.properties.color === 'green'); // all 'green' features will be selected
-
-```
+// multiselect: false layer.select((<!-- -->{ feature }<!-- -->) =<!-- -->&gt; feature.properties.color === 'green'); // one feature will be selected // multiselect: true layer.select((<!-- -->{ feature }<!-- -->) =<!-- -->&gt; feature.properties.color === 'green'); // all 'green' features will be selected
 

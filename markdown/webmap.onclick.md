@@ -10,3 +10,5 @@
 ```typescript
 export declare type OnClick = OnClickSync | onClickAsync;
 ```
+<b>References:</b> [OnClickSync](./webmap.onclicksync.md)<!-- -->, [onClickAsync](./webmap.onclickasync.md)
+

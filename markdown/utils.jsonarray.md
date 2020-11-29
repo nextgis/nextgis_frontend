@@ -9,3 +9,5 @@
 ```typescript
 export declare type JsonArray = Array<AnyJson>;
 ```
+<b>References:</b> [AnyJson](./utils.anyjson.md)
+

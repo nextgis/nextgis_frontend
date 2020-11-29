@@ -9,12 +9,12 @@ Constructs a new instance of the `WebMapMain` class
 <b>Signature:</b>
 
 ```typescript
-constructor(mapOptions: O);
+constructor(appOptions: AppOptions);
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  mapOptions | O |  |
+|  appOptions | [AppOptions](./webmap.appoptions.md) |  |
 

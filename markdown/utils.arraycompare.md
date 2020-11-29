@@ -4,8 +4,6 @@
 
 ## arrayCompare() function
 
-Comparison of the contents of two arrays. Position of elements is ignored.
-
 <b>Signature:</b>
 
 ```typescript
@@ -22,14 +20,4 @@ export declare function arrayCompare(array1: any[], array2: any[]): boolean;
 <b>Returns:</b>
 
 boolean
-
-## Example
-
-
-```javascript
-arrayCompare(['a', 'b'], ['b', 'a']) // true
-arrayCompare(['a', 'b'], ['b']) // false
-arrayCompare('asdf1234', '1234asdf') // true
-
-```
 

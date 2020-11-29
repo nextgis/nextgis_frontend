@@ -10,3 +10,5 @@
 ```typescript
 export declare type CallbackFilter<F extends Feature = Feature, L = any> = (opt: LayerDefinition<F, L>) => boolean;
 ```
+<b>References:</b> [LayerDefinition](./webmap.layerdefinition.md)
+

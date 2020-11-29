@@ -4,10 +4,7 @@
 
 ## NgwMap.zoomToLayer() method
 
-> Warning: This API is now obsolete.
-> 
-> use [NgwMap.fitLayer()](./ngw-map.ngwmap.fitlayer.md) instead
-> 
+Move map to layer. If the layer is NGW resource, extent will be received from the server
 
 <b>Signature:</b>
 
@@ -24,4 +21,14 @@ zoomToLayer(layerDef: string | ResourceAdapter): Promise<void>;
 <b>Returns:</b>
 
 Promise&lt;void&gt;
+
+## Example
+
+
+```javascript
+const ngwLayer = ngwMap.addNgwLayer({ id: 'ngw_layer_name', resourceId: 4005 });
+ngwMap.zoomToLayer(ngwLayer);
+ngwMap.zoomToLayer('ngw_layer_name');
+
+```
 

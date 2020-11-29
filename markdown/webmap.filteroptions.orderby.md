@@ -9,17 +9,13 @@ set fields for order
 <b>Signature:</b>
 
 ```typescript
-orderBy?: (keyof P | string)[];
+orderBy?: (keyof Entity)[] | string[];
 ```
-
-## Remarks
-
-TODO: use typescript 4.1 template string type for map -$<!-- -->{<!-- -->field<!-- -->}
 
 ## Example
 
 
-```javascript
+```javascripton
 { "orderBy": ["field1", "-field2"] }
 
 ```

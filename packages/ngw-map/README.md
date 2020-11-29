@@ -23,7 +23,7 @@ const ngwMap = new NgwMap({
   mapAdapter: new MapAdapter(),
   baseUrl: 'https://demo.nextgis.com',
   target: 'map',
-  qmsId: 487,
+  qmsId: 448,
   webmapId: 3985
 });
 

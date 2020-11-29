@@ -7,14 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function createWebMap(options: MapOptions): Promise<WebMap>;
+export declare function createWebMap(options: AppOptions): Promise<WebMap>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | [MapOptions](./webmap.mapoptions.md) |  |
+|  options | [AppOptions](./webmap.appoptions.md) |  |
 
 <b>Returns:</b>
 

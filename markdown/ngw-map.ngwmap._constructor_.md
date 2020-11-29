@@ -9,12 +9,13 @@ Constructs a new instance of the `NgwMap` class
 <b>Signature:</b>
 
 ```typescript
-constructor(options: O);
+constructor(mapAdapter: MapAdapter, options: NgwMapOptions<C> & O);
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | O |  |
+|  mapAdapter | [MapAdapter](./webmap.mapadapter.md) |  |
+|  options | [NgwMapOptions](./ngw-map.ngwmapoptions.md)<!-- -->&lt;C&gt; &amp; O |  |
 

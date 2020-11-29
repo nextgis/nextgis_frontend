@@ -12,3 +12,5 @@ export declare type GetClassAdapterByType = {
     [adapterType: string]: GetClassAdapterCallback;
 };
 ```
+<b>References:</b> [GetClassAdapterCallback](./ngw-kit.getclassadaptercallback.md)
+

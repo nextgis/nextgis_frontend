@@ -11,3 +11,5 @@ export declare type RequestItemKeys = {
     readonly [T in keyof RequestItemsParamsMap]?: any;
 };
 ```
+<b>References:</b> [RequestItemsParamsMap](./ngw-connector.requestitemsparamsmap.md)
+

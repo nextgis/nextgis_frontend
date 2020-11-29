@@ -13,7 +13,6 @@ import {
   FEATURE_REQUEST_PARAMS,
   updateItemRequestParam,
 } from './featureLayerUtils';
-import { extensionsAllowedDevHelper } from './check/extensionsAllowedDevHelper';
 
 export function fetchNgwLayerItem<
   G extends Geometry = Geometry,
@@ -36,7 +35,6 @@ export function fetchNgwLayerItem<
       ...params,
     })
     .then((resp) => {
-      extensionsAllowedDevHelper(resp, params);
       return {
         ...resp,
         toGeojson: () => {

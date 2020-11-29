@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface FeatureItem<F = FeatureLayerFields, G extends Geometry | string = Geometry> 
+export interface FeatureItem<F = FeatureLayerFields, G extends GeometryObject | string = GeometryObject> 
 ```
 
 ## Properties

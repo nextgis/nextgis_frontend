@@ -14,10 +14,8 @@ export interface FeatureRequestParams
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [extensions](./ngw-kit.featurerequestparams.extensions.md) | string |  |
 |  [fields](./ngw-kit.featurerequestparams.fields.md) | string |  |
 |  [geom\_format](./ngw-kit.featurerequestparams.geom_format.md) | string |  |
-|  [geom](./ngw-kit.featurerequestparams.geom.md) | 'yes' \| 'no' |  |
 |  [intersects](./ngw-kit.featurerequestparams.intersects.md) | string |  |
 |  [limit](./ngw-kit.featurerequestparams.limit.md) | number |  |
 |  [order\_by](./ngw-kit.featurerequestparams.order_by.md) | string |  |

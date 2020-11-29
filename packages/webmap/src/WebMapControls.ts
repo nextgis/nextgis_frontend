@@ -135,7 +135,7 @@ export class WebMapControls<
    * });
    * webMap.addControl(toggleControl, 'top-right');
    * ```
-   * {@link http://code.nextgis.com/demo-examples-toggle_control | Toggle button control example}
+   * {@link http://code.nextgis.com/demo-examples-toggle-control | Toggle button control example}
    * @public
    */
   async createToggleControl(

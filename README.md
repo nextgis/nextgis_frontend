@@ -12,18 +12,18 @@ Read more in the [article](http://nextgis.com/blog/nextgis-frontend/).
 
 Some universal examples:
 
-- [Add layer from NGW Cloud](http://code.nextgis.com/demo-examples-ngw_layer)
-- [Add webmap from NGW Cloud](http://code.nextgis.com/demo-examples-ngw_webmap)
-- [Highlight features from NGW webmap](https://code.nextgis.com/demo-examples-webmap_identification)
-- [Expression paint](http://code.nextgis.com/demo-examples-expression_paint_match)
-- [Layer properties filters](http://code.nextgis.com/demo-examples-ngw_layer_properties_filters)
-- [BBOX strategy for vector layer](http://code.nextgis.com/demo-examples-ngw_bbox_strategy)
-- [Custom layers control](http://code.nextgis.com/demo-examples-custom_layer_controls)
+- [Add layer from NGW Cloud](http://code.nextgis.com/demo-examples-ngw-layer)
+- [Add webmap from NGW Cloud](http://code.nextgis.com/demo-examples-ngw-webmap)
+- [Highlight features from NGW webmap](https://code.nextgis.com/demo-examples-webmap-identification)
+- [Expression paint](http://code.nextgis.com/demo-examples-expression-paint-match)
+- [Layer properties filters](http://code.nextgis.com/demo-examples-ngw-layer-properties-filters)
+- [BBOX strategy for vector layer](http://code.nextgis.com/demo-examples-ngw-bbox-strategy)
+- [Custom layers control](http://code.nextgis.com/demo-examples-custom-layer-controls)
 - [Events](http://code.nextgis.com/demo-examples-events)
-- [Data management in the vector layer](http://code.nextgis.com/demo-examples-geojson_data)
-- [GeoJSON data](http://code.nextgis.com/demo-examples-geojson_layer)
-- [Toggle button control](http://code.nextgis.com/demo-examples-toggle%20control)
-- [Vector selection](http://code.nextgis.com/demo-examples-vector_selection)
+- [Data management in the vector layer](http://code.nextgis.com/demo-examples-geojson-data)
+- [GeoJSON data](http://code.nextgis.com/demo-examples-geojson-layer)
+- [Toggle button control](http://code.nextgis.com/demo-examples-toggle-control)
+- [Vector selection](http://code.nextgis.com/demo-examples-vector-selection)
 
 ## Packages `@nextgis/`
 
@@ -163,7 +163,7 @@ import MapAdapter from '@nextgis/leaflet-map-adapter';
 
 const ngwMap = new NgwMap(new MapAdapter(), {
   target: "map",
-  qmsId: 487,
+  qmsId: 448,
   baseUrl: "https://demo.nextgis.com",
   resources: [2011, { resource: 222, fit: true }, { resource: "keyname" }],
 });
@@ -189,7 +189,7 @@ The `resource` can be id or keyname.
 
 #### Examples
 
-[Add different NGW resource](http://code.nextgis.com/demo-examples-ngw_layers)
+[Add different NGW resource](http://code.nextgis.com/demo-examples-ngw-layers)
 
 ## For developers
 

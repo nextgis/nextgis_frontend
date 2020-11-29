@@ -10,3 +10,5 @@
 ```typescript
 export declare type GetClassAdapter = GetClassAdapterCallback | GetClassAdapterByType;
 ```
+<b>References:</b> [GetClassAdapterCallback](./ngw-kit.getclassadaptercallback.md)<!-- -->, [GetClassAdapterByType](./ngw-kit.getclassadapterbytype.md)
+

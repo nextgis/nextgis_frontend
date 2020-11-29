@@ -9,3 +9,5 @@
 ```typescript
 export declare type Expression = [ExpressionName, ...any[]];
 ```
+<b>References:</b> [ExpressionName](./paint.expressionname.md)
+

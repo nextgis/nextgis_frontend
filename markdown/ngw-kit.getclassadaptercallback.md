@@ -10,3 +10,5 @@
 ```typescript
 export declare type GetClassAdapterCallback = (options: GetClassAdapterOptions) => Promise<Type<LayerAdapter> | undefined> | undefined;
 ```
+<b>References:</b> [GetClassAdapterOptions](./ngw-kit.getclassadapteroptions.md)<!-- -->, [Type](./utils.type.md)<!-- -->, [LayerAdapter](./webmap.layeradapter.md)
+

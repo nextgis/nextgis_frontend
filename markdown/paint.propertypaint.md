@@ -9,3 +9,5 @@
 ```typescript
 export declare type PropertyPaint = [PropertiesFilter, VectorAdapterLayerPaint];
 ```
+<b>References:</b> [PropertiesFilter](./properties-filter.propertiesfilter.md)<!-- -->, [VectorAdapterLayerPaint](./paint.vectoradapterlayerpaint.md)
+

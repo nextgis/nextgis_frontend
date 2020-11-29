@@ -14,12 +14,13 @@
 
 |  Function | Description |
 |  --- | --- |
-|  [createNgwMap(options)](./ngw-map.createngwmap.md) |  |
+|  [createNgwMap(mapAdapter, options)](./ngw-map.createngwmap.md) |  |
 
 ## Interfaces
 
 |  Interface | Description |
 |  --- | --- |
+|  [ControlOptions](./ngw-map.controloptions.md) |  |
 |  [NgwLayers](./ngw-map.ngwlayers.md) |  |
 |  [NgwLayersMem](./ngw-map.ngwlayersmem.md) |  |
 |  [NgwMapEvents](./ngw-map.ngwmapevents.md) |  |

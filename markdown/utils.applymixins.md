@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function applyMixins(derivedCtor: Ctor, baseCtors: Ctor[], opt?: ApplyMixinOptions): void;
+export declare function applyMixins(derivedCtor: Ctor, baseCtors: Ctor[]): void;
 ```
 
 ## Parameters
@@ -16,7 +16,6 @@ export declare function applyMixins(derivedCtor: Ctor, baseCtors: Ctor[], opt?: 
 |  --- | --- | --- |
 |  derivedCtor | Ctor |  |
 |  baseCtors | Ctor\[\] |  |
-|  opt | [ApplyMixinOptions](./utils.applymixinoptions.md) |  |
 
 <b>Returns:</b>
 

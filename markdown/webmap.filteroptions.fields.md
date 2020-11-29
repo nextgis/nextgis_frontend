@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-fields?: (keyof P)[] | false | null;
+fields?: (keyof Entity)[];
 ```

@@ -73,7 +73,7 @@ type PromiseGroup = 'select' | 'identify';
  * const ngwMap = new NgwMap({
  *   mapAdapter: new MapAdapter(),
  *   target: 'map',
- *   qmsId: 487,
+ *   qmsId: 448,
  *   baseUrl: 'https://demo.nextgis.com',
  *   webmapId: 3985
  * });

@@ -4,8 +4,6 @@
 
 ## NgwConnector.logout() method
 
-Disconnecting a user. Aborting all current requests
-
 <b>Signature:</b>
 
 ```typescript
