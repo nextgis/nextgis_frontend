@@ -58,7 +58,7 @@ export interface MapAdapterOptions {
   requestRenderMode: boolean;
   viewerCesium3DTilesInspectorMixin: boolean;
   viewerCesiumInspectorMixin: boolean;
-  highlight?: PathPaint;
+  highlightLayer?: PathPaint;
 }
 
 export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
@@ -479,7 +479,6 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
 
   private _addClickEvent() {
     const viewer = this.map;
-    this.emitter.emit('preclick');
     if (viewer) {
       const clickHandler = viewer.screenSpaceEventHandler.getInputAction(
         ScreenSpaceEventType.LEFT_CLICK
@@ -487,6 +486,7 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
 
       viewer.screenSpaceEventHandler.setInputAction(
         (e: CesiumMapClickEvent) => {
+          this.emitter.emit('preclick');
           const ct2 = e.position as Cartesian2;
           const scene = viewer.scene;
           const ellipsoid = viewer.scene.globe.ellipsoid;

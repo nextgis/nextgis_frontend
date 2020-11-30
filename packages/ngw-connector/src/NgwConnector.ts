@@ -753,13 +753,18 @@ export class NgwConnector {
       }
       loadData(url, resolve, options, reject, onCancel);
     }).catch((httpError) => {
-      // @ts-ignore
-      if (__DEV__) {
-        console.error(httpError);
-      }
-      const er = this._handleHttpError(httpError);
-      if (er) {
-        throw er;
+      if (httpError instanceof CancelablePromise.CancelError) {
+        // not need to handle cancel error because used onCancel
+      } else {
+        // @ts-ignore
+        if (__DEV__) {
+          console.warn(httpError);
+        }
+        console.log(httpError);
+        const er = this._handleHttpError(httpError);
+        if (er) {
+          throw er;
+        }
       }
     });
   }
