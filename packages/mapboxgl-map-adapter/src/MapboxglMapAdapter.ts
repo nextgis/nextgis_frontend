@@ -20,6 +20,7 @@ import {
   LngLatBoundsArray,
   WebMapEvents,
   CreateControlOptions,
+  MapClickEvent,
 } from '@nextgis/webmap';
 import { sleep, debounce } from '@nextgis/utils';
 import { MvtAdapter } from './layer-adapters/MvtAdapter';
@@ -326,7 +327,12 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     const latLng = evt.lngLat;
     const { lng, lat } = latLng;
     const { x, y } = evt.point;
-    this.emitter.emit('preclick', { latLng, pixel: { top: y, left: x } });
+    const emitData: MapClickEvent = {
+      latLng,
+      lngLat: [lng, lat],
+      pixel: { top: y, left: x },
+    };
+    this.emitter.emit('preclick', emitData);
     if (this.map) {
       // @ts-ignore
       this.map._onMapClickLayers
@@ -343,11 +349,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
         });
     }
 
-    this.emitter.emit('click', {
-      latLng,
-      lnglat: [lng, lat],
-      pixel: { top: y, left: x },
-    });
+    this.emitter.emit('click', emitData);
   }
 
   private _onMapLoad(cb?: () => any): Promise<Map> {

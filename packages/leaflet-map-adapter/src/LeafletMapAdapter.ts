@@ -261,7 +261,9 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   }
 
   onMapClick(evt: LeafletMouseEvent): void {
-    this.emitter.emit('click', convertMapClickEvent(evt));
+    const converted = convertMapClickEvent(evt);
+    this.emitter.emit('preclick', converted);
+    this.emitter.emit('click', converted);
   }
 
   locate(opt: LocateOptions, events?: LocationEvents): Locate {
