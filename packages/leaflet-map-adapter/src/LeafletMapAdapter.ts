@@ -119,7 +119,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   setView(lngLat: LngLatArray, zoom?: number): void {
     const [lng, lat] = lngLat;
     if (this.map) {
-      if (zoom) {
+      if (typeof zoom === 'number') {
         this.map.setView([lat, lng], zoom, { animate: false });
       } else {
         this.setCenter([lng, lat]);
