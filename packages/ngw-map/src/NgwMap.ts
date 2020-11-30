@@ -495,7 +495,15 @@ export class NgwMap<
     return this.fetchNgwLayerFeatures(options);
   }
 
+  /** @deprecated use {@link NgwMap.cancelPromises} instead */
   cancelPromise(...args: PromiseGroup[]): void {
+    this.cancelPromises(...args);
+  }
+
+  cancelPromises(...args: PromiseGroup[]): void {
+    if (!args.length) {
+      args = Object.keys(this._promises) as PromiseGroup[];
+    }
     args.forEach((name) => {
       const group = this._promises[name];
       if (group) {
