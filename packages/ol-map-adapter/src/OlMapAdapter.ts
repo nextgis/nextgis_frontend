@@ -20,6 +20,7 @@ import {
   LngLatBoundsArray,
   CreateControlOptions,
   ButtonControlOptions,
+  MapClickEvent,
 } from '@nextgis/webmap';
 
 import { WmsAdapter } from './layer-adapters/WmsAdapter';
@@ -258,6 +259,14 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
       lng,
     };
 
+    const emitData: MapClickEvent = {
+      latLng,
+      lngLat: [lng, lat],
+      pixel: { left: evt.pixel[0], top: evt.pixel[1] },
+      source: evt,
+    };
+    this.emitter.emit('preclick', emitData);
+
     this._mapClickEvents.forEach((x) => {
       x(evt);
     });
@@ -272,12 +281,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
       }
     }
 
-    this.emitter.emit('click', {
-      latLng,
-      lngLat: [lng, lat],
-      pixel: { left: evt.pixel[0], top: evt.pixel[1] },
-      source: evt,
-    });
+    this.emitter.emit('click', emitData);
   }
 
   // requestGeomString(pixel: { top: number, left: number }, pixelRadius = 5) {
