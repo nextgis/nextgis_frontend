@@ -314,13 +314,13 @@ export class WebMapMain<
    * ```
    */
   setView(lngLat?: LngLatArray, zoom?: number): void {
-    if (this.mapAdapter.setView && lngLat && zoom) {
+    if (this.mapAdapter.setView && lngLat && defined(zoom)) {
       this.mapAdapter.setView(lngLat, zoom);
     } else {
       if (lngLat) {
         this.mapAdapter.setCenter(lngLat);
       }
-      if (zoom) {
+      if (defined(zoom)) {
         this.mapAdapter.setZoom(zoom);
       }
     }
