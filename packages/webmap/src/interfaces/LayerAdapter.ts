@@ -307,6 +307,7 @@ export interface RasterAdapterOptions extends AdapterOptions {
   url: string;
   subdomains?: string | string[];
   headers?: Record<string, any>;
+  ratio?: number;
 }
 
 /**
