@@ -14,7 +14,10 @@ export class ImageAdapter
     const url = options.url;
     if (url && this.map) {
       if (options.subdomains) {
-        tiles = options.subdomains.split('').map((x) => {
+        tiles = (typeof options.subdomains === 'string'
+          ? options.subdomains.split('')
+          : options.subdomains
+        ).map((x) => {
           const subUrl = url.replace('{s}', x);
           return subUrl;
         });
