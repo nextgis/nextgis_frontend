@@ -1,5 +1,5 @@
 import CancelablePromise from '@nextgis/cancelable-promise';
-import { DeepPartial, defined } from '@nextgis/utils';
+import { DeepPartial } from '@nextgis/utils';
 import { EventEmitter } from 'events';
 
 import { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
@@ -24,17 +24,15 @@ import {
 } from './interfaces';
 import { loadData } from './utils/loadData';
 import { template } from './utils/template';
-import { resourceToQuery } from './utils/resourceToQuery';
-import { resourceCompare } from './utils/resourceCompare';
 import { ResourceNotFoundError } from './errors/ResourceNotFoundError';
 import { NgwError } from './errors/NgwError';
-import { isObject } from './utils/isObject';
 import { InsufficientPermissionsError } from './errors/InsufficientPermissionsError';
 import {
   addConnector,
   findConnector,
   removeConnector,
 } from './activeConnectors';
+import { ResourcesControl } from './ResourcesControl';
 
 export class NgwConnector {
   static errors = {
@@ -45,17 +43,19 @@ export class NgwConnector {
   emitter = new EventEmitter();
   user?: UserInfo;
 
+  resources: ResourcesControl;
+
   private routeStr = '/api/component/pyramid/route';
   private route?: PyramidRoute;
   private _loadingQueue: { [name: string]: LoadingQueue } = {};
   private _loadingStatus: { [url: string]: boolean } = {};
   private _queriesCache: { [url: string]: any } = {};
-  private _resourcesCache: Record<number, ResourceItem> = {};
 
   constructor(public options: NgwConnectorOptions) {
     if (this.options.route) {
       this.routeStr = this.options.route;
     }
+    this.resources = new ResourcesControl(this);
     addConnector(this);
   }
 
@@ -458,148 +458,78 @@ export class NgwConnector {
   // -------------------------------------------------------------------------
 
   /**
-   * Receive resource from NGW by id, keyname or serch-object parameter.
-   * @param resource - Resource id, keyname or search-object
-   *
-   * @remarks
-   * Fetching resource would be cached to speed up next call
+   * {@inheritDoc ResourcesControl.getOne}
    */
   getResource(
     resource: ResourceDefinition | DeepPartial<Resource>
   ): CancelablePromise<ResourceItem | undefined> {
-    if (typeof resource === 'string') {
-      return this.getResourceByKeyname(resource);
-    } else if (typeof resource === 'number') {
-      return this.getResourceById(resource);
-    } else if (isObject(resource)) {
-      return this.getResourceBy(resource);
-    }
-    return CancelablePromise.resolve(undefined);
-  }
-
-  getResourceOrFail(
-    resource: ResourceDefinition | DeepPartial<Resource>
-  ): CancelablePromise<ResourceItem> {
-    return this.getResource(resource).then((res) => {
-      if (res) {
-        return res;
-      }
-      throw new ResourceNotFoundError();
-    });
+    return this.resources.getOne(resource);
   }
 
   /**
-   * A fast way to retrieve resource ID for any resource definition.
-   * @param resource - Any available resource definition
-   *
-   * @remarks
-   * There are situations when exactly the resource id is needed
-   * (for example, to compose the correct request to the api)
-   * then this method will come in handy to facilitate the extraction of the identifier
-   * if the resource is specified through a keyname or other parameters.
+   * {@inheritDoc ResourcesControl.getOneOrFail}
+   */
+  getResourceOrFail(
+    resource: ResourceDefinition | DeepPartial<Resource>
+  ): CancelablePromise<ResourceItem> {
+    return this.resources.getOneOrFail(resource);
+  }
+
+  /**
+   * @deprecated - use {@link NgwConnector.getResource}
+   */
+  getResourceBy(
+    resource: DeepPartial<Resource>
+  ): CancelablePromise<ResourceItem | undefined> {
+    return this.resources.getOne(resource);
+  }
+
+  /**
+   * @deprecated - use {@link NgwConnector.getResource}
+   */
+  getResourceByKeyname(
+    keyname: string
+  ): CancelablePromise<ResourceItem | undefined> {
+    return this.resources.getOne(keyname);
+  }
+
+  /**
+   * @deprecated - use {@link NgwConnector.getResource}
+   */
+  getResourceById(id: number): CancelablePromise<ResourceItem | undefined> {
+    return this.resources.getOne(id);
+  }
+
+  /**
+   * {@inheritDoc ResourcesControl.getId}
    */
   getResourceId(
     resource: ResourceDefinition | DeepPartial<Resource>
   ): CancelablePromise<number | undefined> {
-    if (typeof resource === 'number') {
-      return CancelablePromise.resolve(resource);
-    } else if (typeof resource === 'string' || isObject(resource)) {
-      return this.getResource(resource).then((res) => {
-        if (res) {
-          return res.resource.id;
-        }
-      });
-    }
-    return CancelablePromise.resolve(undefined);
+    return this.resources.getId(resource);
   }
 
   /**
-   * A fast way to retrieve resource ID for any resource definition.
-   * @param resource - Any available resource definition
-   *
-   * @remarks
-   * Similar with {@link NgwConnector.getResourceId | getResourceId} but rise error if resource is not exist.
-   * To not make one more checks if the resource is definitely exists
+   * {@inheritDoc ResourcesControl.getIdOrFail}
    */
   getResourceIdOrFail(
     resource: ResourceDefinition | DeepPartial<Resource>
   ): CancelablePromise<number> {
-    return this.getResourceId(resource).then((resp) => {
-      if (resp === undefined) {
-        throw new Error();
-      }
-      return resp;
-    });
+    return this.resources.getIdOrFail(resource);
   }
 
+  /**
+   * {@inheritDoc ResourcesControl.getMany}
+   */
   getResourcesBy(
     resource: DeepPartial<Resource>
   ): CancelablePromise<ResourceItem[]> {
-    let items: ResourceItem[] = [];
-    if (resource.id) {
-      const existId = this._resourcesCache[resource.id];
-      if (existId) {
-        items.push(existId);
-      }
-    } else {
-      items = this._resourceCacheFilter(resource);
-    }
-    if (!items.length) {
-      const query: Record<string, unknown> = {};
-      if (resource.keyname) {
-        query.keyname = resource.keyname;
-      } else {
-        Object.assign(query, resourceToQuery(resource));
-      }
-      return this.get('resource.search', null, {
-        serialization: 'full',
-        ...query,
-      }).then((resources) => {
-        if (resources) {
-          resources.forEach((x) => {
-            this._resourcesCache[x.resource.id] = x;
-          });
-        }
-        return resources;
-      });
-    }
-    return CancelablePromise.resolve(items);
+    return this.resources.getMany(resource);
   }
 
-  getResourceBy(
-    resource: DeepPartial<Resource>
-  ): CancelablePromise<ResourceItem | undefined> {
-    return this.getResourcesBy(resource).then((resources) => {
-      return resources[0];
-    });
-  }
-
-  getResourceByKeyname(
-    keyname: string
-  ): CancelablePromise<ResourceItem | undefined> {
-    return this.getResourceBy({ keyname });
-  }
-
-  getResourceById(id: number): CancelablePromise<ResourceItem | undefined> {
-    const item: ResourceItem = this._resourcesCache[id];
-    if (!item) {
-      return this.get('resource.item', null, { id })
-        .then((item) => {
-          if (item) {
-            this._resourcesCache[id] = item;
-          }
-          return item;
-        })
-        .catch((er) => {
-          if (!(er instanceof ResourceNotFoundError)) {
-            throw er;
-          }
-          return undefined;
-        });
-    }
-    return CancelablePromise.resolve(item);
-  }
-
+  /**
+   * {@inheritDoc ResourcesControl.getChildrenOf}
+   */
   getResourceChildren(
     optOrResource:
       | string
@@ -610,72 +540,24 @@ export class NgwConnector {
           resource?: string | number;
         }
   ): CancelablePromise<ResourceItem[]> {
-    let opt: {
-      keyname?: string;
-      resourceId?: number;
-      resource?: string | number;
-    } = {};
-    if (typeof optOrResource === 'string') {
-      opt.keyname = optOrResource;
-    } else if (typeof optOrResource === 'number') {
-      opt.resourceId = optOrResource;
-    } else {
-      opt = optOrResource;
-    }
-    let parent = opt.resourceId;
-    let keyname = opt.keyname;
-    if (!opt.keyname && !opt.resourceId && !opt.resource) {
-      throw new Error('No keyname or resourceId is set');
-    }
-    if (opt.resource) {
-      if (typeof opt.resource === 'string') {
-        keyname = opt.resource;
-      } else if (typeof opt.resource === 'number') {
-        parent = opt.resource;
-      }
-    }
-    const collection = () =>
-      this.get('resource.collection', null, {
-        parent,
-      });
-    if (keyname) {
-      return this.getResourceByKeyname(keyname).then((item) => {
-        if (item) {
-          parent = item.resource.id;
-        }
-        return collection();
-      });
-    }
-    return collection();
+    return this.resources.getChildrenOf(optOrResource);
   }
 
+  /**
+   * {@inheritDoc ResourcesControl.update}
+   */
   updateResource(
     resource: ResourceDefinition,
     data: DeepPartial<ResourceItem>
   ): CancelablePromise<ResourceItem | undefined> {
-    return this.getResourceId(resource).then((id) => {
-      if (id !== undefined) {
-        return this.put('resource.item', { data }, { id }).then((res) => {
-          this._resourcesCache[id] = res;
-          return res as ResourceItem;
-        });
-      }
-    });
+    return this.resources.update(resource, data);
   }
 
   /**
-   * Fast way to delete resource from NGW and clean cache.
-   * @param resource - Resource definition
+   * {@inheritDoc ResourcesControl.delete}
    */
   deleteResource(resource: ResourceDefinition): CancelablePromise<void> {
-    return this.getResourceId(resource).then((id) => {
-      if (id !== undefined) {
-        return this.delete('resource.item', null, { id }).then(() => {
-          delete this._resourcesCache[id];
-          return undefined;
-        });
-      }
-    });
+    return this.resources.delete(resource);
   }
 
   /**
@@ -782,23 +664,5 @@ export class NgwConnector {
       }
     }
     return er;
-  }
-
-  private _resourceCacheFilter(
-    resource: DeepPartial<Resource>
-  ): ResourceItem[] {
-    const items: ResourceItem[] = Object.values(this._resourcesCache).filter(
-      (x) => {
-        // identical by uniq props
-        if (resource.keyname && x.resource.keyname) {
-          return resource.keyname === x.resource.keyname;
-        }
-        if (defined(resource.id) && defined(x.resource.id)) {
-          return resource.id === x.resource.id;
-        }
-        return resourceCompare(resource, x.resource);
-      }
-    );
-    return items;
   }
 }
