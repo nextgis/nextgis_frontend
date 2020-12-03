@@ -49,7 +49,7 @@ export class NgwKit implements StarterKit {
 
       if (resourceIds.length) {
         for (const r of resourceIds) {
-          const options: NgwWebmapAdapterOptions = {
+          const options: Partial<NgwWebmapAdapterOptions> = {
             resourceId: r,
             connector: this.connector,
             webMap,
