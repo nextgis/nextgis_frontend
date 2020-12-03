@@ -187,6 +187,7 @@ export class NgwWebmapItem extends Item<ItemOptions> {
           updateWmsParams: item.updateWmsParams,
           url: item.url,
           headers: this.options.headers,
+          ratio: this.options.ratio,
           maxZoom,
           minZoom,
           minScale: item.layer_min_scale_denom,

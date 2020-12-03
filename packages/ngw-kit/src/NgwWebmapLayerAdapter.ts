@@ -143,6 +143,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
             }
           }
           options.order = this.options.order;
+          options.ratio = this.options.ratio;
           options.crossOrigin = this.options.crossOrigin;
           options.drawOrderEnabled = webmap.draw_order_enabled;
           const layer = new this.NgwWebmapItem(
