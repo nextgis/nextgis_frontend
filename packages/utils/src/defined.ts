@@ -13,10 +13,24 @@
  * }
  * ```
  */
-export function defined(val: unknown): val is boolean {
+export function defined<T>(val: T): val is T {
   return val !== undefined && val !== null;
 }
 
-export function full(val: unknown): val is boolean {
+/**
+ * from https://github.com/CesiumGS/cesium/blob/master/Source/Core/defined.js
+ *
+ * @param val - The object.
+ * @returns Returns true if the object is defined and not empty string, returns false otherwise.
+ *
+ * @example
+ * ```javascript
+ * full('foo') // true
+ * full('') // false
+ * full(undefined) // false
+ * full(0) // true
+ * ```
+ */
+export function full<T>(val: T): val is T {
   return typeof val === 'string' ? !!val : defined(val);
 }
