@@ -57,6 +57,7 @@ export interface ItemOptions {
   order?: number;
   crossOrigin?: 'anonymous';
   drawOrderEnabled?: boolean;
+  ratio?: number
 }
 
 export interface ChangeEvent<
