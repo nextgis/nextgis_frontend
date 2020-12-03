@@ -48,7 +48,9 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
   private response?: ResourceItem;
   private _webmapLayersIds?: number[];
 
-  constructor(public map: M, public options: NgwWebmapAdapterOptions) {
+  constructor(
+    public map: M,
+    public options: NgwWebmapAdapterOptions) {
     const r = options.resourceId;
     if (Array.isArray(r)) {
       this.resourceId = r[0];
