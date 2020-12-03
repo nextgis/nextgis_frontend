@@ -12,6 +12,7 @@ import {
   LayerAdapter,
   MainLayerAdapter,
   FilterOptions,
+  RasterAdapterOptions,
 } from '@nextgis/webmap';
 import { PropertiesFilter } from '@nextgis/properties-filter';
 import NgwConnector, {
@@ -195,7 +196,7 @@ export interface NgwKitOptions {
   };
 }
 
-type A = AdapterOptions; // & TreeLayer & TreeGroup;
+type A = AdapterOptions & RasterAdapterOptions;
 
 /**
  * @public
