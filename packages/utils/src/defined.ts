@@ -13,7 +13,7 @@
  * }
  * ```
  */
-export function defined<T>(val: T): val is T {
+export function defined<T>(val: T): val is Exclude<T, null | undefined> {
   return val !== undefined && val !== null;
 }
 
@@ -31,6 +31,6 @@ export function defined<T>(val: T): val is T {
  * full(0) // true
  * ```
  */
-export function full<T>(val: T): val is T {
+export function full<T>(val: T): val is Exclude<T, null | undefined> {
   return typeof val === 'string' ? !!val : defined(val);
 }
