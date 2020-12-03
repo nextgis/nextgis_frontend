@@ -26,7 +26,7 @@ export abstract class ResourceStore<
 
   foreignResources: { [key in ResourceDef]: ForeignResource } = {};
 
-  resourceItem: ResourceStoreItem<P>[] = [];
+  resourceItems: ResourceStoreItem<P>[] = [];
   fields: FeatureLayerField[] = [];
 
   get connector(): NgwConnector {
@@ -73,8 +73,8 @@ export abstract class ResourceStore<
   @Action({ commit: 'SET_STORE' })
   async getStore(): Promise<ResourceStoreItem<P>[] | undefined> {
     await this.context.dispatch('getResources');
-    if (this.resourceItem && this.resourceItem.length) {
-      return this.resourceItem;
+    if (this.resourceItems && this.resourceItems.length) {
+      return this.resourceItems;
     }
     const id = this.resources[this.resource];
     if (id) {
@@ -92,7 +92,7 @@ export abstract class ResourceStore<
     await this.context.dispatch('getStore');
     const item = opt.item;
     if (item) {
-      const storeItems = [...this.resourceItem];
+      const storeItems = [...this.resourceItems];
       const index = storeItems.findIndex((x) => x.id === item.id);
       if (index !== -1) {
         const oldItem = storeItems[index];
@@ -207,7 +207,7 @@ export abstract class ResourceStore<
             fid,
           });
         }
-        const store = [...this.resourceItem];
+        const store = [...this.resourceItems];
         const index = store.findIndex((x) => Number(x.id) === fid);
         store.splice(index, 1);
         return store;
@@ -215,7 +215,7 @@ export abstract class ResourceStore<
         console.error(er);
       }
     }
-    return this.resourceItem;
+    return this.resourceItems;
   }
 
   @Mutation
@@ -246,7 +246,7 @@ export abstract class ResourceStore<
         return x;
       });
     }
-    this.resourceItem = prepared;
+    this.resourceItems = prepared;
   }
 
   @Mutation

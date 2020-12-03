@@ -12,6 +12,7 @@ export async function createWebMapAdapter({
   return class NgwWebmapLayerAdapter extends NWLayerAdapter {
     constructor(map: any) {
       super(map, {
+        url: '',
         webMap,
         resourceId,
         connector,
