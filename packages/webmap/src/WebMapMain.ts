@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
-import { Feature, Polygon } from 'geojson';
 import StrictEventEmitter from 'strict-event-emitter-types';
+import { Feature, Polygon } from 'geojson';
 
 import { deepmerge, defined, Type, getBoundsFeature } from '@nextgis/utils';
 import { GetPaintFunction } from '@nextgis/paint';

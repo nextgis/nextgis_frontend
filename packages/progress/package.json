@@ -1,0 +1,49 @@
+{
+  "name": "@nextgis/progress",
+  "version": "1.0.0-beta.2",
+  "description": "A promise you can stop",
+  "main": "index.js",
+  "module": "lib/progress.esm-bundler.js",
+  "unpkg": "lib/progress.global.prod.js",
+  "jsdelivr": "lib/progress.global.prod.js",
+  "types": "lib/index.d.ts",
+  "devDependencies": {
+    "@nextgis/build-tools": "^1.0.0-beta.2",
+    "events": "^3.2.0",
+    "strict-event-emitter-types": "^2.0.0"
+  },
+  "buildOptions": {
+    "name": "Progress",
+    "formats": [
+      "esm-bundler",
+      "esm-browser",
+      "cjs",
+      "global"
+    ]
+  },
+  "scripts": {
+    "clean": "rimraf ./lib",
+    "dev": "node ../build-tools/lib/build.js",
+    "prod": "npm run dev -- --release",
+    "lint": "eslint ./src/**/*.ts --fix --c ../../.eslintrc",
+    "watch": "npm run dev -- --watch"
+  },
+  "keywords": [
+    "NextGIS",
+    "MAP"
+  ],
+  "author": "NextGIS",
+  "files": [
+    "index.js",
+    "lib"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/nextgis/nextgis_frontend/tree/master/packages/progress#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nextgis/nextgis_frontend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nextgis/nextgis_frontend/issues"
+  }
+}
