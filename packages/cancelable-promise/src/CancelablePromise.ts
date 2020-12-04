@@ -1,5 +1,6 @@
 import { CancelError } from './CancelError';
 import { PromiseControl, PromiseControlOptions } from './PromiseControl';
+import { TimeoutError } from './TimeoutError';
 
 type Reject = (reason?: any) => void;
 type Resolve = (value?: any) => void;
@@ -67,6 +68,7 @@ let ID = 0;
  */
 export class CancelablePromise<T = any> implements Promise<T> {
   static CancelError = CancelError;
+  static TimeoutError = TimeoutError;
 
   readonly [Symbol.toStringTag]: string;
   readonly id = ID++;
@@ -84,12 +86,13 @@ export class CancelablePromise<T = any> implements Promise<T> {
       resolve: (value?: T | PromiseLike<T>) => void,
       reject: (reason?: any) => void,
       onCancel: OnCancelFunction
-    ) => void
+    ) => void,
+    timeout?: number
   ) {
     this._cancelPromise = new Promise<any>((resolve_, reject_) => {
       this._setCanceledCallback = (er) => resolve_(er || new CancelError());
     });
-    this._promise = Promise.race([
+    const promises = [
       this._cancelPromise,
       new Promise<T>((resolve, reject) => {
         const onResolve = (value?: T | PromiseLike<T>) => {
@@ -118,7 +121,23 @@ export class CancelablePromise<T = any> implements Promise<T> {
 
         return executor(onResolve, onReject, onCancel);
       }),
-    ]);
+    ];
+    if (timeout) {
+      promises.push(
+        new Promise((resolve, reject) => {
+          setTimeout(() => {
+            if (this._isPending) {
+              try {
+                this.cancel();
+              } finally {
+                reject(new TimeoutError());
+              }
+            }
+          }, timeout);
+        })
+      );
+    }
+    this._promise = Promise.race(promises);
   }
 
   static createControl(opt?: PromiseControlOptions): PromiseControl {
