@@ -9,6 +9,7 @@ type Layer = ImageryLayer;
 
 export class TileAdapter extends BaseAdapter<TileAdapterOptions, Layer> {
   private _layer?: ImageryLayer;
+  private _added = false;
 
   addLayer(opt: TileAdapterOptions): ImageryLayer {
     this.options = { ...opt };
@@ -22,27 +23,32 @@ export class TileAdapter extends BaseAdapter<TileAdapterOptions, Layer> {
     if (this.options.subdomains) {
       imageProviderOpt.subdomains = this.options.subdomains;
     }
-    const urlLayer = new UrlTemplateImageryProvider(opt);
-    // @ts-ignore - ImageryLayer need to set layer opacity
+    const urlLayer = new UrlTemplateImageryProvider(imageProviderOpt);
     // based on https://sandcastle.cesium.com/index.html?src=Imagery%2520Layers%2520Manipulation.html
     const layer = new ImageryLayer(urlLayer, { show: false });
     if (this.options.opacity !== undefined) {
       layer.alpha = this.options.opacity;
     }
     this._layer = layer;
+
     return layer;
   }
 
   showLayer(layer: ImageryLayer): void {
     layer.show = true;
-    const order = this.options.order ? this.options.order * 1000 : 0;
-    this.map.imageryLayers.add(layer, order);
+    if (!this._added) {
+      // TODO: order is not work in this way, need to use index of all added layers array
+      const order = this.options.order ? this.options.order * 1000 : 0;
+      this.map.imageryLayers.add(layer, order);
+      this._added = true;
+    }
+
     super.showLayer();
   }
 
   hideLayer(layer: ImageryLayer): void {
     layer.show = false;
-    this.map.imageryLayers.remove(layer, false);
+    // this.map.imageryLayers.remove(layer, false);
     super.hideLayer();
   }
 
