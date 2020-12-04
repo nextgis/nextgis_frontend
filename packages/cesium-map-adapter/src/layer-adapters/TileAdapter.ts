@@ -38,7 +38,10 @@ export class TileAdapter extends BaseAdapter<TileAdapterOptions, Layer> {
     layer.show = true;
     if (!this._added) {
       // TODO: order is not work in this way, need to use index of all added layers array
-      const order = this.options.order ? this.options.order * 1000 : 0;
+      const order =
+        this.options.order !== undefined
+          ? this.options.order * 1000
+          : undefined;
       this.map.imageryLayers.add(layer, order);
       this._added = true;
     }
