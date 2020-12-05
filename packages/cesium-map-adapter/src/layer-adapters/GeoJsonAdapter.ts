@@ -39,6 +39,12 @@ import { getExtentFromBoundingSphere } from '../utils/getExtentFromBoundingSpher
 
 type Layer = GeoJsonDataSource;
 
+interface NativeGeojsonOptions {
+  watchTerrainChange?: boolean;
+}
+
+type AdapterOptions = GeoJsonAdapterOptions<any, any, NativeGeojsonOptions>;
+
 interface GeoJsonDataSourceLoadOptions {
   sourceUri?: string;
   markerSize?: number;
@@ -51,7 +57,7 @@ interface GeoJsonDataSourceLoadOptions {
 }
 
 export class GeoJsonAdapter
-  extends BaseAdapter<GeoJsonAdapterOptions>
+  extends BaseAdapter<AdapterOptions>
   implements VectorLayerAdapter<Map> {
   selected = false;
 
@@ -64,7 +70,7 @@ export class GeoJsonAdapter
     this.watchHeight();
   };
 
-  addLayer(options: GeoJsonAdapterOptions): GeoJsonDataSource {
+  addLayer(options: AdapterOptions): GeoJsonDataSource {
     this.options = { ...options };
     this._paint = this.options.paint;
     const source = new GeoJsonDataSource(options.id);
@@ -359,7 +365,12 @@ export class GeoJsonAdapter
   }
 
   private watchHeight() {
-    if (this._source) {
+    const watchTerrainChange =
+      this.options.nativeOptions &&
+      this.options.nativeOptions.watchTerrainChange !== undefined
+        ? this.options.nativeOptions.watchTerrainChange
+        : true;
+    if (this._source && watchTerrainChange) {
       const entities = this._source.entities.values;
       const entriesOnTerrain: Entity[] = [];
       const terrainSamplePositions: Cartographic[] = [];
