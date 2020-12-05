@@ -278,7 +278,7 @@ export class NgwLayersList extends Vue {
       item.children.forEach((x) => this.items.push(x));
       webMapLayer.layer && webMapLayer.layer.properties.set('visibility', true);
     } else {
-      if (visible) {
+      if (visible && !this.independent) {
         this.selection.push(item.id);
       }
       this.items.push(item);
@@ -309,6 +309,7 @@ export class NgwLayersList extends Vue {
           }
         });
       }
+      let visible = x.properties.get('visibility');
       if (x.item.item_type === 'group') {
         const children = x.tree.getChildren<NgwWebmapItem>();
         if (children && children.length) {
@@ -317,8 +318,10 @@ export class NgwLayersList extends Vue {
         if (x.item.group_expanded) {
           this.open.push(id);
         }
+        if (!this.independent) {
+          visible = false;
+        }
       }
-      const visible = x.properties.get('visibility');
       if (visible) {
         this.selection.push(id);
       }
