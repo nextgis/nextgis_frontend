@@ -3,27 +3,21 @@ import { BoundingSphere, Ellipsoid, Math as CMath } from 'cesium';
 export function getExtentFromBoundingSphere(
   boundingSphere: BoundingSphere
 ): number[] | undefined {
-  const minBoundingSphere = boundingSphere.clone();
-  const maxBoundingSphere = boundingSphere.clone();
-  minBoundingSphere.center.x =
-    minBoundingSphere.center.x - boundingSphere.radius;
-  minBoundingSphere.center.y =
-    minBoundingSphere.center.y - boundingSphere.radius;
-  maxBoundingSphere.center.x =
-    maxBoundingSphere.center.x + boundingSphere.radius;
-  maxBoundingSphere.center.y =
-    maxBoundingSphere.center.y + boundingSphere.radius;
-  const cartoMin = Ellipsoid.WGS84.cartesianToCartographic(
-    minBoundingSphere.center
-  );
-  const cartoMax = Ellipsoid.WGS84.cartesianToCartographic(
-    maxBoundingSphere.center
-  );
+  const minBS = boundingSphere.clone();
+  const maxBS = boundingSphere.clone();
+  minBS.center.x = minBS.center.x - boundingSphere.radius;
+  minBS.center.y = minBS.center.y - boundingSphere.radius;
+  maxBS.center.x = maxBS.center.x + boundingSphere.radius;
+  maxBS.center.y = maxBS.center.y + boundingSphere.radius;
+  const cartoMin = Ellipsoid.WGS84.cartesianToCartographic(minBS.center);
+  const cartoMax = Ellipsoid.WGS84.cartesianToCartographic(maxBS.center);
   if (cartoMin && cartoMax) {
-    const west = CMath.toDegrees(cartoMin.longitude);
-    const south = CMath.toDegrees(cartoMin.latitude);
-    const east = CMath.toDegrees(cartoMax.longitude);
-    const north = CMath.toDegrees(cartoMax.latitude);
+    const [west, east] = [cartoMin.longitude, cartoMax.longitude]
+      .map(CMath.toDegrees)
+      .sort((a, b) => a - b);
+    const [south, north] = [cartoMin.latitude, cartoMax.latitude]
+      .map(CMath.toDegrees)
+      .sort((a, b) => a - b);
     return [west, south, east, north];
   }
 }
