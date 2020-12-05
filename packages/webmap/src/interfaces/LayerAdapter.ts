@@ -294,8 +294,11 @@ export interface VectorAdapterOptions<
 /**
  * @public
  */
-export interface GeoJsonAdapterOptions<F extends Feature = Feature, L = any>
-  extends VectorAdapterOptions<F, L> {
+export interface GeoJsonAdapterOptions<
+  F extends Feature = Feature,
+  L = any,
+  N = Record<string, any>
+> extends VectorAdapterOptions<F, L, N> {
   /** Geojson data */
   data?: GeoJsonObject;
 }
