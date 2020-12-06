@@ -1,134 +1,275 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>IP cameras map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
 
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>IP cameras map</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-    }
+      html,
+      body,
+      #map {
+        width: 100%;
+        height: 100%;
+      }
 
-    html,
-    body,
-    #map {
-      width: 100%;
-      height: 100%;
-    }
+      .camera-panel {
+        width: 250px;
+        height: 250px;
+        background: white;
+      }
 
-    .camera-panel {
-      width: 250px;
-      height: 250px;
-      background: white;
-    }
+      .camera-title {
+        position: absolute;
+        color: white;
+        z-index: 1;
+      }
 
-    .camera-title {
-      position: absolute;
-      color: white;
-      z-index: 1;
-    }
+      .no-active-camera-block {
+        line-height: 250px;
+        text-align: center;
+      }
+    </style>
 
-    .no-active-camera-block {
-      line-height: 250px;
-      text-align: center;
-    }
-  </style>
+    <!-- <script src="https://unpkg.com/@nextgis/ngw-leaflet"></script> -->
+    <script src="../../../packages/ngw-leaflet/lib/ngw-leaflet.global.js"></script>
 
-  <!-- <script src="https://unpkg.com/@nextgis/ngw-leaflet"></script> -->
-  <script src="../../../packages/ngw-leaflet/lib/ngw-leaflet.global.js"></script>
+    <!-- Video Player libraries -->
+    <link href="//vjs.zencdn.net/7.3.0/video-js.min.css" rel="stylesheet" />
+    <script src="//vjs.zencdn.net/7.3.0/video.min.js"></script>
+    <script src="https://unpkg.com/@videojs/http-streaming@1.8.0/dist/videojs-http-streaming.js"></script>
+  </head>
 
-  <!-- Video Player libraries -->
-  <link href="//vjs.zencdn.net/7.3.0/video-js.min.css" rel="stylesheet">
-  <script src="//vjs.zencdn.net/7.3.0/video.min.js"></script>
-  <script src="https://unpkg.com/@videojs/http-streaming@1.8.0/dist/videojs-http-streaming.js"></script>
-</head>
+  <body>
+    <div id="map"></div>
 
-<body>
+    <script>
+      // initialize webmap
 
-  <div id='map'></div>
+      var geojson = {
+        type: 'FeatureCollection',
+        features: [
+          {
+            type: 'Feature',
+            properties: {
+              camera: 'https://599da0b457148.streamlock.net:1936/traffic/trafcam2gorkogo.stream/playlist.m3u8',
+              name:
+                'Центральный рынок, вид на перекрёсток ул. Горького и ул. Черняховского',
+            },
+            geometry: {
+              type: 'Point',
+              coordinates: [20.507788971975938, 54.720059550307376],
+            },
+          },
+          {
+            type: 'Feature',
+            properties: {
+              camera: 'https://599da0b457148.streamlock.net:1936/traffic/trafcam3frunze.stream/chunklist_w276424497.m3u8',
+              name:
+                'Вторая эстакада, вид на перекрёсток ул. Фрунзе и ул. 9 апреля',
+            },
+            geometry: {
+              type: 'Point',
+              coordinates: [20.522329227045645, 54.71213403989111],
+            },
+          },
+          {
+            type: 'Feature',
+            properties: {
+              camera: 'https://599da0b457148.streamlock.net:1936/traffic/trafcam4shevl.stream/playlist.m3u8',
+              name:
+                'Вид на Ленинский проспект в сторону площади Победы от перекрёстка с ул. Шевченко',
+            },
+            geometry: {
+              type: 'Point',
+              coordinates: [20.509146169737633, 54.71168678545332],
+            },
+          },
+          {
+            type: 'Feature',
+            properties: {
+              camera: 'https://599da0b457148.streamlock.net:1936/traffic/trafcam5sheve.stream/playlist.m3u8',
+              name:
+                'Вид на Ленинский проспект и эстакадный мост со стороны перекрёстка с ул. Шевченко<br><a href="/traffic/camera/17-jestakadnyj-most">Смотреть</a>',
+            },
+            geometry: {
+              type: 'Point',
+              coordinates: [20.508674100951488, 54.71027044940315],
+            },
+          },
+          {
+            type: 'Feature',
+            properties: {
+              camera: 'https://599da0b457148.streamlock.net:1936/traffic/trafcam9dsgost.stream/playlist.m3u8',
+              name:
+                'Виды с Дома Советов',
+            },
+            geometry: {
+              type: 'Point',
+              coordinates: [20.511377767638496, 54.71111528718261],
+            },
+          },
+          {
+            type: 'Feature',
+            properties: {
+              camera: 'https://599da0b457148.streamlock.net:1936/traffic/trafcam8korona.stream/playlist.m3u8',
+              name:
+                'Вид на перекрёсток Литовского вала и Московского проспекта в сторону окружной',
+            },
+            geometry: {
+              type: 'Point',
+              coordinates: [20.538500265197033, 54.71004681219569],
+            },
+          },
+          {
+            type: 'Feature',
 
-  <script>
-    // initialize webmap
-    NgwMap.create({
-      baseUrl: 'http://kazahstan.nextgis.com',
-      target: 'map',
-      webmapId: 10,
-      qmsId: 448,
-      maxZoom: 22
-    }).then(function (ngwMap) {
-
-      // add layer with cameras
-      ngwMap.addNgwLayer({
-        resource: 3,
-        id: 'cameras',
-        adapter: 'GEOJSON',
-        adapterOptions: {
-          paint: { color: 'red', radius: 5 },
-          selectedPaint: { color: 'green', radius: 5 },
-          selectable: true,
-        }
-      });
-
-      // create camera panel control
-      var cameraPanel = document.createElement('div');
-      cameraPanel.className = 'camera-panel';
-      cameraPanel.innerHTML = '<div class="camera-wrapper" style="display: none;">' +
-        '<p class="camera-title"></p>' +
-        '<video-js id="vid1" width="250" height="250" class="vjs-default-skin" controls></video-js>' +
-        '</div>' +
-        '<div class="no-active-camera-block">Select camera</div>';
-
-      var cameraPanelControl = ngwMap.createControl({
-        onAdd: function () {
-          return cameraPanel;
-        }
-      }, { bar: true });
-
-      ngwMap.addControl(cameraPanelControl, 'bottom-right');
-
-      // define some element after the panel is added to dom the DOM
-      var wrapper = cameraPanel.querySelector('.camera-wrapper')
-      var title = cameraPanel.querySelector('.camera-title')
-      var player = videojs(cameraPanel.querySelector('#vid1'));
-
-
-      function updateCameraPanel(id) {
-        if (id) {
-          wrapper.style.display = 'block';
-          title.innerHTML = 'Camera #' + id;
-          // random cameras
-          var cameraSrcs = [
-            'https://cdn-003.whatsupcams.com/hls/hr_zgzoo03.m3u8',
-            'https://videos3.earthcam.com/fecnetwork/4798.flv/chunklist_w1157489744.m3u8',
-            'https://ngx.cr6.streamzilla.xlcdn.com/session/f6dcb457ed14d63375aee687d4b0d50a/sz/streamdays/wowza4/live/paigntonzoo-blackmacaques/chunklist.m3u8'
-          ]
-          player.src({
-            src: cameraSrcs[id % cameraSrcs.length],
-            type: 'application/x-mpegURL',
-            overrideNative: true
-          });
-          player.play();
-        } else {
-          wrapper.style.display = 'none';
-          player.pause();
-        }
+            properties: {
+              camera: 'https://599da0b457148.streamlock.net:1936/traffic/trafcam11prol.stream/playlist.m3u8',
+              name:
+                'Вид на улицу Черняховского от перекрестка с улицей Пролетарской в сторону Центрального рынка',
+            },
+            geometry: {
+              type: 'Point',
+              coordinates: [20.51386685760422, 54.72050671081034],
+            },
+          },
+          {
+            type: 'Feature',
+            properties: {
+              camera: 'https://599da0b457148.streamlock.net:1936/traffic/trafcam6zel.stream/playlist.m3u8',
+              name:
+                'Зеленоградск, Площадь «Роза ветров»',
+            },
+            geometry: {
+              type: 'Point',
+              coordinates: [20.48100443275342, 54.963763226782596],
+            },
+          },
+          {
+            type: 'Feature',
+            properties: {
+              camera: 'https://599da0b457148.streamlock.net:1936/traffic/trafcam12svetlogorsk1.stream/playlist.m3u8',
+              name:
+                'Новые виды променада Светлогорска',
+            },
+            geometry: {
+              type: 'Point',
+              coordinates: [20.15453131587895, 54.94653517621926],
+            },
+          },
+          {
+            type: 'Feature',
+            properties: {
+              camera: 'https://599da0b457148.streamlock.net:1936/gov39cams/mapp_bagrat.stream/playlist.m3u8',
+              name:
+                'Вид на польскую сторону пункта пропуска Багратионовск-Безледы',
+            },
+            geometry: {
+              type: 'Point',
+              coordinates: [20.660117965984956, 54.3717357479662],
+            },
+          },
+          {
+            type: 'Feature',
+            properties: {
+              camera: 'https://599da0b457148.streamlock.net:1936/gov39cams/mapp_gronovo.stream/playlist.m3u8',
+              name:
+                'Вид на польскую сторону пункта пропуска Мамоново-Гроново',
+            },
+            geometry: {
+              type: 'Point',
+              coordinates: [19.897232614406583, 54.43405979411537],
+            },
+          },
+          {
+            type: 'Feature',
+            properties: {
+              camera: 'https://599da0b457148.streamlock.net:1936/gov39cams/mapp_gzhehodki.stream/playlist.m3u8',
+              name:
+                'Вид на польскую сторону пункта пропуска Мамоново-Гжехотки',
+            },
+            geometry: {
+              type: 'Point',
+              coordinates: [20.069194398769337, 54.42216191832768],
+            },
+          },
+        ],
       };
 
-      ngwMap.emitter.on('layer:click', function (e) {
-        if (e.layer.id === 'cameras') {
-          if (e.selected) {
-            updateCameraPanel(e.feature.id);
+      NgwMap.create({
+        baseUrl: 'https://demo.nextgis.com',
+        target: 'map',
+        qmsId: 448,
+        maxZoom: 22,
+      }).then(function (ngwMap) {
+        // add layer with cameras
+        ngwMap.addGeoJsonLayer({
+          id: 'cameras',
+          data: geojson,
+          fit: true,
+          paint: { color: 'red', radius: 5 },
+          selectedPaint: { color: 'green', radius: 5 },
+          selectable: true
+        });
+
+        // create camera panel control
+        var cameraPanel = document.createElement('div');
+        cameraPanel.className = 'camera-panel';
+        cameraPanel.innerHTML =
+          '<div class="camera-wrapper" style="display: none;">' +
+          '<p class="camera-title"></p>' +
+          '<video-js id="vid1" width="250" height="250" class="vjs-default-skin" controls></video-js>' +
+          '</div>' +
+          '<div class="no-active-camera-block">Select camera</div>';
+
+        var cameraPanelControl = ngwMap.createControl(
+          {
+            onAdd: function () {
+              return cameraPanel;
+            },
+          },
+          { bar: true }
+        );
+
+        ngwMap.addControl(cameraPanelControl, 'bottom-right');
+
+        // define some element after the panel is added to dom the DOM
+        var wrapper = cameraPanel.querySelector('.camera-wrapper');
+        var title = cameraPanel.querySelector('.camera-title');
+        var player = videojs(cameraPanel.querySelector('#vid1'));
+
+        function updateCameraPanel(feature) {
+          if (feature) {
+            wrapper.style.display = 'block';
+            title.innerHTML = 'Camera #' + feature.properties.name;
+            player.src({
+              src: feature.properties.camera,
+              type: 'application/x-mpegURL',
+              overrideNative: true,
+            });
+            player.play();
           } else {
-            updateCameraPanel();
+            wrapper.style.display = 'none';
+            player.pause();
           }
         }
+
+        ngwMap.emitter.on('layer:click', function (e) {
+          if (e.layer.id === 'cameras') {
+            if (e.selected) {
+              updateCameraPanel(e.feature);
+            } else {
+              updateCameraPanel();
+            }
+          }
+        });
       });
-    });
-
-  </script>
-</body>
-
+    </script>
+  </body>
 </html>
