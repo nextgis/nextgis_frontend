@@ -1,0 +1,145 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "azimuth": 174,
+        "angle": 60,
+        "focalLength": 400,
+        "camera": "https://cctv1.dreamnet.su:8090/hls/328196/ff4ab9714d2a44be5ae5/playlist.m3u8",
+        "name": "Фитнес-клуб «Весна», в сторону ТРК «Комсомолл»"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [104.28627133369447, 52.27081311587854]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "azimuth": -122,
+        "angle": 60,
+        "focalLength": 200,
+        "camera": "https://cctv1.dreamnet.su:8090/hls/310892/ab63a9ebd85a063a1902/playlist.m3u8",
+        "name": "Краеведческий музей - ул. Карла Маркса, 2"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [104.27788138389589, 52.275745020738945]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "azimuth": -146,
+        "angle": 60,
+        "focalLength": 300,
+        "camera": "https://cctv1.dreamnet.su:8090/hls/310912/074617d62d2c1b71ab29/playlist.m3u8",
+        "name": "Вид на стадион \"Труд\" - ул. Дзержинского, 1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [104.2850911617279, 52.27833302547037]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "azimuth": 78,
+        "angle": 60,
+        "focalLength": 400,
+        "camera": "https://cctv1.dreamnet.su:8090/hls/275774/f29d054dcc4591318dff/playlist.m3u8",
+        "name": "Сквер - ул. Мира, 100"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [104.21804666519166, 52.3480586486507]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "azimuth": -90,
+        "angle": 60,
+        "focalLength": 400,
+        "camera": "https://cctv1.dreamnet.su:8090/hls/310882/dbec74231687371d1586/playlist.m3u8",
+        "name": "Сквер им. Кирова - ул. Сухэ-Батора, 7"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [104.28216218948366, 52.287764752706906]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "azimuth": 101,
+        "angle": 60,
+        "focalLength": 400,
+        "camera": "https://cctv1.dreamnet.su:8090/hls/1214669/4d44ef1b9b612bcb6d06/playlist.m3u8",
+        "name": "г.Иркутск, ул.Старокузьмихинская, СТО Кузя"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [104.28791821002962, 52.2393968931547]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "azimuth": 37,
+        "angle": 60,
+        "focalLength": 400,
+        "camera": "https://cctv1.dreamnet.su:8090/hls/1214524/dbd362177b406cfdfc13/playlist.m3u8",
+        "name": "Иркутный мост - ул.Джамбула, реконструкция путепровода"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [104.24961090087892, 52.29201067175563]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "azimuth": -66,
+        "angle": 60,
+        "focalLength": 200,
+        "camera": "https://cctv1.dreamnet.su:8090/hls/566858/1cd76859bb20ae8a963a/playlist.m3u8",
+        "name": "Ледовый дворец \"Байкал\""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [104.27238821983339, 52.25176309811361]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "azimuth": -119,
+        "angle": 60,
+        "focalLength": 120,
+        "camera": "https://cctv1.dreamnet.su:8090/hls/1087531/3a1dd204564e4c929b83/playlist.m3u8",
+        "name": "Ледовый дворец \"Байкал\""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [104.28202271461488, 52.280318646361266]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "azimuth": 167,
+        "angle": 120,
+        "focalLength": 400,
+        "camera": "https://cctv1.dreamnet.su:8090/hls/437878/9433b04355188a524ed2/playlist.m3u8",
+        "name": "Вид на Байкальское кольцо и плотину ГЭС"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [104.34171795845033, 52.25428189977079]
+      }
+    }
+  ]
+}
