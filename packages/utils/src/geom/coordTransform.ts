@@ -9,7 +9,7 @@ export function degrees2meters(lng: number, lat: number): [number, number] {
   return [x, y];
 }
 
-export function meters2degress(x: number, y: number): LngLatArray {
+export function meters2degrees(x: number, y: number): LngLatArray {
   const lon = (x * 180) / 20037508.34;
   const lat =
     (Math.atan(Math.exp((y * Math.PI) / 20037508.34)) * 360) / Math.PI - 90;
