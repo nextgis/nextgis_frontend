@@ -1,0 +1,173 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "azimuth": 90,
+        "angle": 60,
+        "focalLength": 400,
+        "camera": "https://599da0b457148.streamlock.net:1936/traffic/trafcam2gorkogo.stream/playlist.m3u8",
+        "name": "Центральный рынок, вид на перекрёсток ул. Горького и ул. Черняховского"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.507788971975938, 54.720059550307376]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "azimuth": -44,
+        "angle": 90,
+        "focalLength": 120,
+        "camera": "https://599da0b457148.streamlock.net:1936/traffic/trafcam3frunze.stream/playlist.m3u8",
+        "name": "Вторая эстакада, вид на перекрёсток ул. Фрунзе и ул. 9 апреля"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.52304029464722, 54.71170572279607]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "azimuth": -32,
+        "angle": 90,
+        "focalLength": 120,
+        "camera": "https://599da0b457148.streamlock.net:1936/traffic/trafcam4shevl.stream/playlist.m3u8",
+        "name": "Вид на Ленинский проспект в сторону площади Победы от перекрёстка с ул. Шевченко"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.509312748909, 54.7114423090372]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "azimuth": 20,
+        "angle": 90,
+        "focalLength": 120,
+        "camera": "https://599da0b457148.streamlock.net:1936/traffic/trafcam5sheve.stream/playlist.m3u8",
+        "name": "Вид на Ленинский проспект и эстакадный мост со стороны перекрёстка с ул. Шевченко<br><a href=\"/traffic/camera/17-jestakadnyj-most\">Смотреть</a>"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.508674100951488, 54.71027044940315]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "azimuth": -20,
+        "angle": 90,
+        "focalLength": 300,
+        "camera": "https://599da0b457148.streamlock.net:1936/traffic/trafcam9dsgost.stream/playlist.m3u8",
+        "name": "Виды с Дома Советов"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.5125367641449, 54.710026043378775]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "azimuth": -132,
+        "angle": 90,
+        "focalLength": 300,
+        "camera": "https://599da0b457148.streamlock.net:1936/traffic/trafcam8korona.stream/playlist.m3u8",
+        "name": "Вид на перекрёсток Литовского вала и Московского проспекта в сторону окружной"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.538382530212406, 54.70993616927193]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "azimuth": 45,
+        "angle": 90,
+        "focalLength": 120,
+        "camera": "https://599da0b457148.streamlock.net:1936/traffic/trafcam11prol.stream/playlist.m3u8",
+        "name": "Вид на улицу Черняховского от перекрестка с улицей Пролетарской в сторону Центрального рынка"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.513706207275394, 54.72024869772626]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "azimuth": 42,
+        "angle": 90,
+        "focalLength": 300,
+        "camera": "https://599da0b457148.streamlock.net:1936/traffic/trafcam6zel.stream/playlist.m3u8",
+        "name": "Зеленоградск, Площадь «Роза ветров»"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.480419993400577, 54.96324009849611]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "azimuth": -109,
+        "angle": 90,
+        "focalLength": 300,
+        "camera": "https://599da0b457148.streamlock.net:1936/traffic/trafcam12svetlogorsk1.stream/playlist.m3u8",
+        "name": "Новые виды променада Светлогорска"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.15462547540665, 54.94653529192566]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "azimuth": -41,
+        "angle": 90,
+        "focalLength": 150,
+        "camera": "https://599da0b457148.streamlock.net:1936/gov39cams/mapp_bagrat.stream/playlist.m3u8",
+        "name": "Вид на польскую сторону пункта пропуска Багратионовск-Безледы"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.660444498062137, 54.37155234762031]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "azimuth": -122,
+        "angle": 90,
+        "focalLength": 120,
+        "camera": "https://599da0b457148.streamlock.net:1936/gov39cams/mapp_gronovo.stream/playlist.m3u8",
+        "name": "Вид на польскую сторону пункта пропуска Мамоново-Гроново"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.897474050521854, 54.434040564180854]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "azimuth": -128,
+        "angle": 90,
+        "focalLength": 300,
+        "camera": "https://599da0b457148.streamlock.net:1936/gov39cams/mapp_gzhehodki.stream/playlist.m3u8",
+        "name": "Вид на польскую сторону пункта пропуска Мамоново-Гжехотки"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.069194398769337, 54.42216191832768]
+      }
+    }
+  ]
+}
