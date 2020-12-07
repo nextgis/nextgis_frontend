@@ -3212,10 +3212,10 @@ center-align@^0.1.1:
     align-text "^0.1.3"
     lazy-cache "^1.0.3"
 
-cesium@^1.75.0:
-  version "1.75.0"
-  resolved "https://registry.yarnpkg.com/cesium/-/cesium-1.75.0.tgz#47552aeda7e4a4a864bf51f02c961ffcc684518a"
-  integrity sha512-CPf1XHkOBXeabRrZD/fDDGf5ajA+13eXv5GciDmKx151umL7WVnd8Pfgdz0dWcCBIMI7arSK7ZaVyQKMLdUZ+Q==
+cesium@^1.76.0:
+  version "1.76.0"
+  resolved "https://registry.yarnpkg.com/cesium/-/cesium-1.76.0.tgz#f3e253263750c6cae0637236e730b0b1c8685d34"
+  integrity sha512-7HgGdEbGmKp8HYxO6x4FqXE1rpCQ0gLTigokhr/MVL9piQKdIMiRLm8ycioEbZG7qyJi+BAgvMjeu1FJYEb6tQ==
 
 chai@^4.2.0:
   version "4.2.0"
