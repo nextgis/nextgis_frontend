@@ -26,8 +26,6 @@ export class ImageAdapter implements MainLayerAdapter {
         },
         projection: undefined,
       };
-      if (ratio > 1) {
-      }
       const updateWmsParams = options.updateWmsParams;
 
       imageOptions.imageLoadFunction = (image, src) => {
@@ -69,7 +67,7 @@ export class ImageAdapter implements MainLayerAdapter {
       if (ratio > 1) {
         imageOptions.ratio = ratio;
         imageOptions.serverType = WMSServerType.MAPSERVER;
-        class CanvasImageLayerRendererExtended extends CanvasImageLayerRenderer {
+        class CanvasILRendererExtended extends CanvasImageLayerRenderer {
           renderFrame(frameState: any, target: any) {
             frameState.pixelRatio = ratio;
             // @ts-ignore
@@ -79,7 +77,7 @@ export class ImageAdapter implements MainLayerAdapter {
         class ImageLayerExtended extends ImageLayer {
           // @ts-ignore
           createRenderer() {
-            return new CanvasImageLayerRendererExtended(this);
+            return new CanvasILRendererExtended(this);
           }
         }
         ImLayer = ImageLayerExtended;
