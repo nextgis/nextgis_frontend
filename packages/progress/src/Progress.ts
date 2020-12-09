@@ -10,27 +10,29 @@ export class Progress {
   private loading = 0;
   private loaded = 0;
 
-  get percent() {
+  get percent(): number {
     return (this.loaded / this.loading) * 100;
   }
 
   /**
    * Increment the count of loading tiles.
    */
-  addLoading() {
+  addLoading(): void {
     if (this.loading === 0) {
       this._emitStartEvent();
     }
     ++this.loading;
+    this._emitAddEvent();
     this.update();
   }
 
   /**
    * Increment the count of loaded tiles.
    */
-  addLoaded() {
+  addLoaded(): void {
     setTimeout(() => {
       ++this.loaded;
+      this._emitRemoveEvent();
       this.update();
     }, 100);
   }
@@ -38,7 +40,7 @@ export class Progress {
   /**
    * Update the progress bar.
    */
-  update() {
+  update(): void {
     if (this.loading === this.loaded) {
       this.loading = 0;
       this.loaded = 0;
