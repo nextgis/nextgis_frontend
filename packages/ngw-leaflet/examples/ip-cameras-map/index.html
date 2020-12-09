@@ -37,7 +37,7 @@
     </style>
 
     <!-- <script src="https://unpkg.com/@nextgis/ngw-leaflet"></script> -->
-    <script src="../../../packages/ngw-leaflet/lib/ngw-leaflet.global.js"></script>
+    <script src="../../lib/ngw-leaflet.global.js"></script>
 
     <!-- Video Player libraries -->
     <link href="//vjs.zencdn.net/7.3.0/video-js.min.css" rel="stylesheet" />
@@ -69,8 +69,7 @@
         });
         ngwMap.addGeoJsonLayer({
           id: 'sectors',
-          type: 'polygon',
-          paint: { color: 'green',  },
+          paint: { color: 'green' },
         });
         ngwMap.emitter.on('layer:click', function (e) {
           if (e.layer.id === 'cameras') {

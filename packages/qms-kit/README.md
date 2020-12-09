@@ -2,4 +2,4 @@
 
 Build webmap with [QuickMapServices](https://qms.nextgis.com/) baselayers.
 
-[![http://nextgis.com](http://nextgis.ru/img/nextgis.png)](http://nextgis.com)
+[![http://nextgis.com](https://nextgis.ru/img/nextgis.png)](http://nextgis.com)
