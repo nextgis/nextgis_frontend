@@ -17,14 +17,13 @@ export class UrlRuntimeParams implements RuntimeParams {
       params[key] = true;
       return ''; // does not matter
     });
-    window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (
-      m,
-      key,
-      value
-    ) {
-      params[key] = decodeURIComponent(value);
-      return ''; // does not matter
-    });
+    window.location.href.replace(
+      /[?&]+([^=&]+)=([^&]*)/gi,
+      function (m, key, value) {
+        params[key] = decodeURIComponent(value);
+        return ''; // does not matter
+      }
+    );
     this._params = params;
     return params;
   }
@@ -81,9 +80,9 @@ export class UrlRuntimeParams implements RuntimeParams {
     return data;
   }
 
-  private _pushState(data: any): void {
+  private _pushState(data: StateData): void {
     if (history) {
-      history.replaceState(data.state, document.title, data.url);
+      history.replaceState(null, document.title, data.url);
     }
   }
 }
