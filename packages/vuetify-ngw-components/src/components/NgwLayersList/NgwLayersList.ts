@@ -278,7 +278,7 @@ export class NgwLayersList extends Vue {
       item.children.forEach((x) => this.items.push(x));
       webMapLayer.layer && webMapLayer.layer.properties.set('visibility', true);
     } else {
-      if (visible && !this.independent) {
+      if (visible && this.independent) {
         this.selection.push(item.id);
       }
       this.items.push(item);
