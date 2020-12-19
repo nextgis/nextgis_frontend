@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.3](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2020-12-19)
+
+
+### Features
+
+* add new library `progress` ([5a75e8c](https://github.com/nextgis/nextgis_frontend/commit/5a75e8c219e0c8c0aef2f9e4f0536709b93cd59c))
+
+
+
+
+
 # [1.0.0-beta.2](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2020-11-28)
 
 **Note:** Version bump only for package @nextgis/cancelable-promise
