@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-export declare type ResourceItemDatatype = 'STRING' | 'REAL' | 'DATE' | 'TIME' | 'DATETIME' | 'BIGINT' | 'INTEGER';
+export declare type ResourceItemDatatype = 'STRING' | 'REAL' | 'DATE' | 'TIME' | 'DATETIME' | 'BIGINT' | 'INTEGER' | 'BOOLEAN';
 ```

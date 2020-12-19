@@ -14,7 +14,7 @@ export interface ResourceCreateOptions
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [id](./ngw-uploader.resourcecreateoptions.id.md) | number |  |
-|  [name](./ngw-uploader.resourcecreateoptions.name.md) | string |  |
-|  [parentId](./ngw-uploader.resourcecreateoptions.parentid.md) | number |  |
+|  [id?](./ngw-uploader.resourcecreateoptions.id.md) | number | <i>(Optional)</i> |
+|  [name?](./ngw-uploader.resourcecreateoptions.name.md) | string | <i>(Optional)</i> |
+|  [parentId?](./ngw-uploader.resourcecreateoptions.parentid.md) | number | <i>(Optional)</i> |
 

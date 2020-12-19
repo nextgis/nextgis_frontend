@@ -38,5 +38,5 @@ const toggleControl = ngwMap.createToggleControl({
 webMap.addControl(toggleControl, 'top-right');
 
 ```
-[Toggle button control example](http://code.nextgis.com/demo-examples-toggle_control)
+[Toggle button control example](http://code.nextgis.com/demo-examples-toggle-control)
 

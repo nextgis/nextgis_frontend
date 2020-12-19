@@ -16,6 +16,6 @@ export interface MvtAdapterOptions<F extends Feature = Feature> extends VectorAd
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [sourceLayer](./webmap.mvtadapteroptions.sourcelayer.md) | string |  |
+|  [sourceLayer?](./webmap.mvtadapteroptions.sourcelayer.md) | string | <i>(Optional)</i> |
 |  [url](./webmap.mvtadapteroptions.url.md) | string |  |
 

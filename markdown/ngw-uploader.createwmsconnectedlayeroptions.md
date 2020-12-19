@@ -16,8 +16,8 @@ export interface CreateWmsConnectedLayerOptions extends ResourceCreateOptions
 |  Property | Type | Description |
 |  --- | --- | --- |
 |  [connection](./ngw-uploader.createwmsconnectedlayeroptions.connection.md) | { id: 18; } |  |
-|  [imgformat](./ngw-uploader.createwmsconnectedlayeroptions.imgformat.md) | string |  |
-|  [srs](./ngw-uploader.createwmsconnectedlayeroptions.srs.md) | { id: number; } |  |
-|  [vendor\_params](./ngw-uploader.createwmsconnectedlayeroptions.vendor_params.md) | { \[paramName: string\]: string; } |  |
+|  [imgformat?](./ngw-uploader.createwmsconnectedlayeroptions.imgformat.md) | string | <i>(Optional)</i> |
+|  [srs?](./ngw-uploader.createwmsconnectedlayeroptions.srs.md) | { id: number; } | <i>(Optional)</i> |
+|  [vendor\_params?](./ngw-uploader.createwmsconnectedlayeroptions.vendor_params.md) | { \[paramName: string\]: string; } | <i>(Optional)</i> |
 |  [wmslayers](./ngw-uploader.createwmsconnectedlayeroptions.wmslayers.md) | string \| string\[\] |  |
 

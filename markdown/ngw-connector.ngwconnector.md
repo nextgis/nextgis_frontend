@@ -23,32 +23,37 @@ export declare class NgwConnector
 |  [emitter](./ngw-connector.ngwconnector.emitter.md) |  | EventEmitter |  |
 |  [errors](./ngw-connector.ngwconnector.errors.md) | <code>static</code> | { NgwError: typeof NgwError; ResourceNotFoundError: typeof ResourceNotFoundError; } |  |
 |  [options](./ngw-connector.ngwconnector.options.md) |  | [NgwConnectorOptions](./ngw-connector.ngwconnectoroptions.md) |  |
-|  [user](./ngw-connector.ngwconnector.user.md) |  | [UserInfo](./ngw-connector.userinfo.md) |  |
+|  [resources](./ngw-connector.ngwconnector.resources.md) |  | ResourcesControl |  |
+|  [user?](./ngw-connector.ngwconnector.user.md) |  | [UserInfo](./ngw-connector.userinfo.md) | <i>(Optional)</i> |
 
 ## Methods
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
-|  [apiRequest(name, params, options)](./ngw-connector.ngwconnector.apirequest.md) |  |  |
+|  [apiRequest(name, params, options)](./ngw-connector.ngwconnector.apirequest.md) |  | Send request to NGW api router. |
 |  [connect()](./ngw-connector.ngwconnector.connect.md) |  | Establishing a connection with NextGIS Web to fulfill all other requests. |
-|  [delete(name, options, params)](./ngw-connector.ngwconnector.delete.md) |  |  |
+|  [create(options)](./ngw-connector.ngwconnector.create.md) | <code>static</code> |  |
+|  [delete(name, options, params)](./ngw-connector.ngwconnector.delete.md) |  | Shortcut method for send DELETE request to NGW. |
 |  [deleteResource(resource)](./ngw-connector.ngwconnector.deleteresource.md) |  |  |
-|  [get(name, options, params)](./ngw-connector.ngwconnector.get.md) |  |  |
-|  [getAuthorizationHeaders(credentials)](./ngw-connector.ngwconnector.getauthorizationheaders.md) |  |  |
+|  [get(name, options, params)](./ngw-connector.ngwconnector.get.md) |  | Shortcut method for send GET request to NGW. |
+|  [getAuthorizationHeaders(credentials)](./ngw-connector.ngwconnector.getauthorizationheaders.md) |  | Obtaining the required Headers for authentication of requests in the NGW. |
 |  [getResource(resource)](./ngw-connector.ngwconnector.getresource.md) |  |  |
 |  [getResourceBy(resource)](./ngw-connector.ngwconnector.getresourceby.md) |  |  |
 |  [getResourceById(id)](./ngw-connector.ngwconnector.getresourcebyid.md) |  |  |
 |  [getResourceByKeyname(keyname)](./ngw-connector.ngwconnector.getresourcebykeyname.md) |  |  |
 |  [getResourceChildren(optOrResource)](./ngw-connector.ngwconnector.getresourcechildren.md) |  |  |
 |  [getResourceId(resource)](./ngw-connector.ngwconnector.getresourceid.md) |  |  |
+|  [getResourceIdOrFail(resource)](./ngw-connector.ngwconnector.getresourceidorfail.md) |  |  |
+|  [getResourceOrFail(resource)](./ngw-connector.ngwconnector.getresourceorfail.md) |  |  |
 |  [getResourcesBy(resource)](./ngw-connector.ngwconnector.getresourcesby.md) |  |  |
 |  [getUserInfo(credentials)](./ngw-connector.ngwconnector.getuserinfo.md) |  |  |
 |  [login(credentials)](./ngw-connector.ngwconnector.login.md) |  | Quick way to change NextGIS Web user. |
-|  [logout()](./ngw-connector.ngwconnector.logout.md) |  |  |
+|  [logout()](./ngw-connector.ngwconnector.logout.md) |  | Disconnecting a user. Aborting all current requests |
 |  [makeClientId(credentials)](./ngw-connector.ngwconnector.makeclientid.md) |  |  |
-|  [makeQuery(url, params, options)](./ngw-connector.ngwconnector.makequery.md) |  |  |
-|  [patch(name, options, params)](./ngw-connector.ngwconnector.patch.md) |  |  |
-|  [post(name, options, params)](./ngw-connector.ngwconnector.post.md) |  |  |
-|  [put(name, options, params)](./ngw-connector.ngwconnector.put.md) |  |  |
+|  [makeQuery(url, params, options)](./ngw-connector.ngwconnector.makequery.md) |  | Send request to NGW. |
+|  [patch(name, options, params)](./ngw-connector.ngwconnector.patch.md) |  | Shortcut method for send PATCH request to NGW. |
+|  [post(name, options, params)](./ngw-connector.ngwconnector.post.md) |  | Shortcut method for send POST request to NGW. |
+|  [put(name, options, params)](./ngw-connector.ngwconnector.put.md) |  | Shortcut method for send PUT request to NGW. |
 |  [setNgw(baseUrl)](./ngw-connector.ngwconnector.setngw.md) |  | Fast way to specify the connection address to NextGIS Web. The current connection will be severed. |
+|  [updateResource(resource, data)](./ngw-connector.ngwconnector.updateresource.md) |  |  |
 

@@ -15,5 +15,5 @@ export interface QmsAdapter extends MainLayerAdapter
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [qms](./qms-kit.qmsadapter.qms.md) | [QmsBasemap](./qms-kit.qmsbasemap.md) |  |
+|  [qms?](./qms-kit.qmsadapter.qms.md) | [QmsBasemap](./qms-kit.qmsbasemap.md) | <i>(Optional)</i> |
 

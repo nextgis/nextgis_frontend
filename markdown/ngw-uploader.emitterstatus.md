@@ -14,8 +14,8 @@ export interface EmitterStatus
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [data](./ngw-uploader.emitterstatus.data.md) | any |  |
-|  [message](./ngw-uploader.emitterstatus.message.md) | string |  |
+|  [data?](./ngw-uploader.emitterstatus.data.md) | any | <i>(Optional)</i> |
+|  [message?](./ngw-uploader.emitterstatus.message.md) | string | <i>(Optional)</i> |
 |  [state](./ngw-uploader.emitterstatus.state.md) | 'begin' \| 'end' \| 'progress' \| 'error' |  |
 |  [status](./ngw-uploader.emitterstatus.status.md) | [AvailableStatus](./ngw-uploader.availablestatus.md) |  |
 

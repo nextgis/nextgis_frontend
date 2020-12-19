@@ -10,7 +10,7 @@
 ```typescript
 export declare type NgwLayerOptions<T extends NgwLayerAdapterType = NgwLayerAdapterType, P = {
     [name: string]: any;
-}> = ResourceNgwLayerOptions<T, P> | ResourceIdNgwLayerOptions<T, P> | KeynamedNgwLayerOptions<T, P>;
+}> = ResourceNgwLayerOptions<T, P>;
 ```
-<b>References:</b> [NgwLayerAdapterType](./ngw-kit.ngwlayeradaptertype.md)<!-- -->, [ResourceNgwLayerOptions](./ngw-kit.resourcengwlayeroptions.md)<!-- -->, [ResourceIdNgwLayerOptions](./ngw-kit.resourceidngwlayeroptions.md)<!-- -->, [KeynamedNgwLayerOptions](./ngw-kit.keynamedngwlayeroptions.md)
+<b>References:</b> [NgwLayerAdapterType](./ngw-kit.ngwlayeradaptertype.md)<!-- -->, [ResourceNgwLayerOptions](./ngw-kit.resourcengwlayeroptions.md)
 

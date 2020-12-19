@@ -14,14 +14,14 @@ export interface UploadInputOptions
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [addTimestampToName](./ngw-uploader.uploadinputoptions.addtimestamptoname.md) | boolean |  |
-|  [createName](./ngw-uploader.uploadinputoptions.createname.md) | (name: string) =&gt; string |  |
-|  [element](./ngw-uploader.uploadinputoptions.element.md) | string \| HTMLElement |  |
-|  [error](./ngw-uploader.uploadinputoptions.error.md) | (er: Error) =&gt; void |  |
-|  [html](./ngw-uploader.uploadinputoptions.html.md) | string |  |
-|  [image](./ngw-uploader.uploadinputoptions.image.md) | boolean |  |
-|  [name](./ngw-uploader.uploadinputoptions.name.md) | string |  |
-|  [parentId](./ngw-uploader.uploadinputoptions.parentid.md) | number |  |
-|  [success](./ngw-uploader.uploadinputoptions.success.md) | (newRes: ResourceCreateResp) =&gt; void |  |
-|  [vector](./ngw-uploader.uploadinputoptions.vector.md) | boolean |  |
+|  [addTimestampToName?](./ngw-uploader.uploadinputoptions.addtimestamptoname.md) | boolean | <i>(Optional)</i> |
+|  [createName?](./ngw-uploader.uploadinputoptions.createname.md) | (name: string) =&gt; string | <i>(Optional)</i> |
+|  [element?](./ngw-uploader.uploadinputoptions.element.md) | string \| HTMLElement | <i>(Optional)</i> |
+|  [error?](./ngw-uploader.uploadinputoptions.error.md) | (er: Error) =&gt; void | <i>(Optional)</i> |
+|  [html?](./ngw-uploader.uploadinputoptions.html.md) | string | <i>(Optional)</i> |
+|  [image?](./ngw-uploader.uploadinputoptions.image.md) | boolean | <i>(Optional)</i> |
+|  [name?](./ngw-uploader.uploadinputoptions.name.md) | string | <i>(Optional)</i> |
+|  [parentId?](./ngw-uploader.uploadinputoptions.parentid.md) | number | <i>(Optional)</i> |
+|  [success?](./ngw-uploader.uploadinputoptions.success.md) | (newRes: ResourceCreateResp) =&gt; void | <i>(Optional)</i> |
+|  [vector?](./ngw-uploader.uploadinputoptions.vector.md) | boolean | <i>(Optional)</i> |
 

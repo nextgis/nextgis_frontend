@@ -4,6 +4,7 @@
 
 ## NgwConnector.deleteResource() method
 
+
 <b>Signature:</b>
 
 ```typescript

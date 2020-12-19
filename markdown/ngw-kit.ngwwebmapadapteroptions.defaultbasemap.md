@@ -4,7 +4,7 @@
 
 ## NgwWebmapAdapterOptions.defaultBasemap property
 
-Add baselayer from OsmLayerAdapter if no \[webmap\_resource\].basemap\_webmap set has been set.
+Add baselayer from OsmLayerAdapter if no \[webmap\_resource\].basemap\_webmap has been set.
 
 <b>Signature:</b>
 

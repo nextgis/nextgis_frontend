@@ -20,7 +20,7 @@ export declare class NgwUploader
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [connector](./ngw-uploader.ngwuploader.connector.md) |  | NgwConnector |  |
+|  [connector?](./ngw-uploader.ngwuploader.connector.md) |  | NgwConnector | <i>(Optional)</i> |
 |  [emitter](./ngw-uploader.ngwuploader.emitter.md) |  | EventEmitter |  |
 |  [isLoaded](./ngw-uploader.ngwuploader.isloaded.md) |  | boolean |  |
 |  [options](./ngw-uploader.ngwuploader.options.md) |  | [NgwUploadOptions](./ngw-uploader.ngwuploadoptions.md) |  |

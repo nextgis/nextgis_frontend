@@ -14,10 +14,12 @@ export interface FeatureRequestParams
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [fields](./ngw-kit.featurerequestparams.fields.md) | string |  |
-|  [geom\_format](./ngw-kit.featurerequestparams.geom_format.md) | string |  |
-|  [intersects](./ngw-kit.featurerequestparams.intersects.md) | string |  |
-|  [limit](./ngw-kit.featurerequestparams.limit.md) | number |  |
-|  [order\_by](./ngw-kit.featurerequestparams.order_by.md) | string |  |
-|  [srs](./ngw-kit.featurerequestparams.srs.md) | number |  |
+|  [extensions?](./ngw-kit.featurerequestparams.extensions.md) | string | <i>(Optional)</i> |
+|  [fields?](./ngw-kit.featurerequestparams.fields.md) | string | <i>(Optional)</i> |
+|  [geom\_format?](./ngw-kit.featurerequestparams.geom_format.md) | string | <i>(Optional)</i> |
+|  [geom?](./ngw-kit.featurerequestparams.geom.md) | 'yes' \| 'no' | <i>(Optional)</i> |
+|  [intersects?](./ngw-kit.featurerequestparams.intersects.md) | string | <i>(Optional)</i> |
+|  [limit?](./ngw-kit.featurerequestparams.limit.md) | number | <i>(Optional)</i> |
+|  [order\_by?](./ngw-kit.featurerequestparams.order_by.md) | string | <i>(Optional)</i> |
+|  [srs?](./ngw-kit.featurerequestparams.srs.md) | number | <i>(Optional)</i> |
 

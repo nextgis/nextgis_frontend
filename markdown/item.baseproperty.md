@@ -21,8 +21,8 @@ export declare abstract class BaseProperty<V = any, O extends ItemBasePropertyOp
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [\_blocked](./item.baseproperty._blocked.md) |  | boolean |  |
-|  [\_container](./item.baseproperty._container.md) |  | HTMLElement |  |
-|  [\_value](./item.baseproperty._value.md) |  | V |  |
+|  [\_container?](./item.baseproperty._container.md) |  | HTMLElement | <i>(Optional)</i> |
+|  [\_value?](./item.baseproperty._value.md) |  | V | <i>(Optional)</i> |
 |  [emitter](./item.baseproperty.emitter.md) |  | EventEmitter |  |
 |  [item](./item.baseproperty.item.md) |  | [Item](./item.item.md) |  |
 |  [name](./item.baseproperty.name.md) |  | string |  |

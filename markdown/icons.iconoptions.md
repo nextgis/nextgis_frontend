@@ -14,10 +14,10 @@ export interface IconOptions
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [color](./icons.iconoptions.color.md) | string |  |
-|  [rotate](./icons.iconoptions.rotate.md) | number |  |
-|  [shape](./icons.iconoptions.shape.md) | 'circle' \| 'brill' \| 'rect' \| 'marker' \| 'star' \| 'asterisk' \| 'triangle' \| 'plus' \| 'minus' |  |
-|  [size](./icons.iconoptions.size.md) | number |  |
-|  [stroke](./icons.iconoptions.stroke.md) | number |  |
-|  [strokeColor](./icons.iconoptions.strokecolor.md) | string |  |
+|  [color?](./icons.iconoptions.color.md) | string | <i>(Optional)</i> |
+|  [rotate?](./icons.iconoptions.rotate.md) | number | <i>(Optional)</i> |
+|  [shape?](./icons.iconoptions.shape.md) | 'circle' \| 'brill' \| 'rect' \| 'marker' \| 'star' \| 'asterisk' \| 'triangle' \| 'plus' \| 'minus' | <i>(Optional)</i> |
+|  [size?](./icons.iconoptions.size.md) | number | <i>(Optional)</i> |
+|  [stroke?](./icons.iconoptions.stroke.md) | number | <i>(Optional)</i> |
+|  [strokeColor?](./icons.iconoptions.strokecolor.md) | string | <i>(Optional)</i> |
 

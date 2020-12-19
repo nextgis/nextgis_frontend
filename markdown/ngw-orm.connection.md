@@ -40,6 +40,7 @@ export declare class Connection
 |  [getOrCreateResource(Resource, options)](./ngw-orm.connection.getorcreateresource.md) |  |  |
 |  [getResource(resource)](./ngw-orm.connection.getresource.md) |  |  |
 |  [getResourceItem(resource)](./ngw-orm.connection.getresourceitem.md) |  |  |
-|  [getResourceNgwPayload(resource, parent, options)](./ngw-orm.connection.getresourcengwpayload.md) |  |  |
+|  [getResourceNgwPayload(resource, parent, opt)](./ngw-orm.connection.getresourcengwpayload.md) |  |  |
 |  [receiveResource(resource)](./ngw-orm.connection.receiveresource.md) |  |  |
+|  [updateResource(Resource)](./ngw-orm.connection.updateresource.md) |  |  |
 

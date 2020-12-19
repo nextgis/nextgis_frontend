@@ -14,5 +14,5 @@ export interface GetPaintCallback<F = Feature>
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [type](./paint.getpaintcallback.type.md) | [PaintType](./paint.painttype.md) |  |
+|  [type?](./paint.getpaintcallback.type.md) | [PaintType](./paint.painttype.md) | <i>(Optional)</i> |
 

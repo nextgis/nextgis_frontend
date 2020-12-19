@@ -14,9 +14,9 @@ export interface TreeItem
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [\_layer](./ngw-connector.treeitem._layer.md) | any |  |
-|  [\_parent](./ngw-connector.treeitem._parent.md) | [TreeGroup](./ngw-connector.treegroup.md) |  |
-|  [display\_name](./ngw-connector.treeitem.display_name.md) | string |  |
-|  [id](./ngw-connector.treeitem.id.md) | number |  |
+|  [\_layer?](./ngw-connector.treeitem._layer.md) | any | <i>(Optional)</i> |
+|  [\_parent?](./ngw-connector.treeitem._parent.md) | [TreeGroup](./ngw-connector.treegroup.md) | <i>(Optional)</i> |
+|  [display\_name?](./ngw-connector.treeitem.display_name.md) | string | <i>(Optional)</i> |
+|  [id?](./ngw-connector.treeitem.id.md) | number | <i>(Optional)</i> |
 |  [item\_type](./ngw-connector.treeitem.item_type.md) | 'root' \| 'group' \| 'layer' |  |
 

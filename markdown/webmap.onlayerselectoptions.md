@@ -15,6 +15,6 @@ export interface OnLayerSelectOptions
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [features](./webmap.onlayerselectoptions.features.md) | Feature\[\] \| undefined |  |
+|  [features?](./webmap.onlayerselectoptions.features.md) | Feature\[\] \| undefined | <i>(Optional)</i> |
 |  [layer](./webmap.onlayerselectoptions.layer.md) | [LayerAdapter](./webmap.layeradapter.md) |  |
 

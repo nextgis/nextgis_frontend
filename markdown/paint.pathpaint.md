@@ -15,5 +15,5 @@ export interface PathPaint extends BasePaint
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [type](./paint.pathpaint.type.md) | 'path' |  |
+|  [type?](./paint.pathpaint.type.md) | 'path' | <i>(Optional)</i> |
 

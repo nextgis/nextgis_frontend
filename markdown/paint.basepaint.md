@@ -15,14 +15,14 @@ export interface BasePaint extends BaesePaintTypes
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [color](./paint.basepaint.color.md) | string \| [Expression](./paint.expression.md) |  |
-|  [extrude3d](./paint.basepaint.extrude3d.md) | number \| [Expression](./paint.expression.md) |  |
-|  [fill](./paint.basepaint.fill.md) | boolean |  |
-|  [fillColor](./paint.basepaint.fillcolor.md) | string \| [Expression](./paint.expression.md) |  |
-|  [fillOpacity](./paint.basepaint.fillopacity.md) | number \| [Expression](./paint.expression.md) |  |
-|  [opacity](./paint.basepaint.opacity.md) | number \| [Expression](./paint.expression.md) |  |
-|  [stroke](./paint.basepaint.stroke.md) | boolean |  |
-|  [strokeColor](./paint.basepaint.strokecolor.md) | string \| [Expression](./paint.expression.md) |  |
-|  [strokeOpacity](./paint.basepaint.strokeopacity.md) | number \| [Expression](./paint.expression.md) |  |
-|  [weight](./paint.basepaint.weight.md) | number \| [Expression](./paint.expression.md) | stroke width TODO: rename to width \* |
+|  [color?](./paint.basepaint.color.md) | string \| [Expression](./paint.expression.md) | <i>(Optional)</i> |
+|  [extrude3d?](./paint.basepaint.extrude3d.md) | number \| [Expression](./paint.expression.md) | <i>(Optional)</i> |
+|  [fill?](./paint.basepaint.fill.md) | boolean | <i>(Optional)</i> |
+|  [fillColor?](./paint.basepaint.fillcolor.md) | string \| [Expression](./paint.expression.md) | <i>(Optional)</i> |
+|  [fillOpacity?](./paint.basepaint.fillopacity.md) | number \| [Expression](./paint.expression.md) | <i>(Optional)</i> |
+|  [opacity?](./paint.basepaint.opacity.md) | number \| [Expression](./paint.expression.md) | <i>(Optional)</i> |
+|  [stroke?](./paint.basepaint.stroke.md) | boolean | <i>(Optional)</i> |
+|  [strokeColor?](./paint.basepaint.strokecolor.md) | string \| [Expression](./paint.expression.md) | <i>(Optional)</i> |
+|  [strokeOpacity?](./paint.basepaint.strokeopacity.md) | number \| [Expression](./paint.expression.md) | <i>(Optional)</i> |
+|  [weight?](./paint.basepaint.weight.md) | number \| [Expression](./paint.expression.md) | <i>(Optional)</i> stroke width TODO: rename to width \* |
 

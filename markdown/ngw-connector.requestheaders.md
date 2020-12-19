@@ -14,8 +14,8 @@ export interface RequestHeaders
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  ["Access-Control-Allow-Headers"](./ngw-connector.requestheaders._access-control-allow-headers_.md) | string |  |
-|  ["Access-Control-Allow-Origin"](./ngw-connector.requestheaders._access-control-allow-origin_.md) | string |  |
-|  [Accept](./ngw-connector.requestheaders.accept.md) | string |  |
-|  [Authorization](./ngw-connector.requestheaders.authorization.md) | string |  |
+|  ["Access-Control-Allow-Headers"?](./ngw-connector.requestheaders._access-control-allow-headers_.md) | string | <i>(Optional)</i> |
+|  ["Access-Control-Allow-Origin"?](./ngw-connector.requestheaders._access-control-allow-origin_.md) | string | <i>(Optional)</i> |
+|  [Accept?](./ngw-connector.requestheaders.accept.md) | string | <i>(Optional)</i> |
+|  [Authorization?](./ngw-connector.requestheaders.authorization.md) | string | <i>(Optional)</i> |
 

@@ -8,7 +8,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface NgwWebmapAdapterOptions extends A 
+export interface NgwWebmapAdapterOptions<M = any> extends A 
 ```
 <b>Extends:</b> A
 
@@ -17,10 +17,9 @@ export interface NgwWebmapAdapterOptions extends A
 |  Property | Type | Description |
 |  --- | --- | --- |
 |  [connector](./ngw-kit.ngwwebmapadapteroptions.connector.md) | NgwConnector |  |
-|  [defaultBasemap](./ngw-kit.ngwwebmapadapteroptions.defaultbasemap.md) | boolean | Add baselayer from OsmLayerAdapter if no \[webmap\_resource\].basemap\_webmap set has been set. |
-|  [identification](./ngw-kit.ngwwebmapadapteroptions.identification.md) | boolean | Get information from NGW webmap layers by click. |
-|  [pixelRadius](./ngw-kit.ngwwebmapadapteroptions.pixelradius.md) | number | Radius for searching objects in pixels |
+|  [defaultBasemap?](./ngw-kit.ngwwebmapadapteroptions.defaultbasemap.md) | boolean | <i>(Optional)</i> Add baselayer from OsmLayerAdapter if no \[webmap\_resource\].basemap\_webmap has been set. |
+|  [pixelRadius?](./ngw-kit.ngwwebmapadapteroptions.pixelradius.md) | number | <i>(Optional)</i> Radius for searching objects in pixels |
 |  [resourceId](./ngw-kit.ngwwebmapadapteroptions.resourceid.md) | number \| \[number, string\] |  |
-|  [selectable](./ngw-kit.ngwwebmapadapteroptions.selectable.md) | boolean |  |
-|  [webMap](./ngw-kit.ngwwebmapadapteroptions.webmap.md) | [WebMap](./webmap.webmap.md) |  |
+|  [selectable?](./ngw-kit.ngwwebmapadapteroptions.selectable.md) | boolean | <i>(Optional)</i> |
+|  [webMap](./ngw-kit.ngwwebmapadapteroptions.webmap.md) | [WebMap](./webmap.webmap.md)<!-- -->&lt;M&gt; |  |
 

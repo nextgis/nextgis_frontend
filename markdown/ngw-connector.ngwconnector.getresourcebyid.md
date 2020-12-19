@@ -4,6 +4,11 @@
 
 ## NgwConnector.getResourceById() method
 
+> Warning: This API is now obsolete.
+> 
+> - use [NgwConnector.getResource()](./ngw-connector.ngwconnector.getresource.md)
+> 
+
 <b>Signature:</b>
 
 ```typescript

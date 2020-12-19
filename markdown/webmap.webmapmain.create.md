@@ -4,20 +4,13 @@
 
 ## WebMapMain.create() method
 
-Manual way to create a map. On default
+Manual way to create a map (If [MapOptions.create](./webmap.mapoptions.create.md) is `false`<!-- -->).
 
 <b>Signature:</b>
 
 ```typescript
-create(options?: MapOptions): Promise<this>;
+create(): Promise<this>;
 ```
-
-## Parameters
-
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  options | [MapOptions](./webmap.mapoptions.md) |  |
-
 <b>Returns:</b>
 
 Promise&lt;this&gt;
@@ -27,7 +20,7 @@ Promise&lt;this&gt;
 
 ```javascript
 const webMap = new WebMap(options);
-webMap.create(mapOptions).then(() => doSomething());
+webMap.create().then(() => doSomething());
 
 ```
 

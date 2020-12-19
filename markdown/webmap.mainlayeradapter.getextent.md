@@ -7,9 +7,9 @@
 <b>Signature:</b>
 
 ```typescript
-getExtent?(): LngLatBoundsArray | Promise<LngLatBoundsArray> | undefined;
+getExtent?(): LngLatBoundsArray | Promise<LngLatBoundsArray | undefined> | undefined;
 ```
 <b>Returns:</b>
 
-[LngLatBoundsArray](./utils.lnglatboundsarray.md) \| Promise&lt;[LngLatBoundsArray](./utils.lnglatboundsarray.md)<!-- -->&gt; \| undefined
+[LngLatBoundsArray](./utils.lnglatboundsarray.md) \| Promise&lt;[LngLatBoundsArray](./utils.lnglatboundsarray.md) \| undefined&gt; \| undefined
 
