@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.3](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2020-12-19)
+
+
+### Features
+
+* **cancelable-promise:** add timeout ([3c207b5](https://github.com/nextgis/nextgis_frontend/commit/3c207b54d2910a67ae71c2fa09542d1b06b97ed9))
+
+
+
+
+
 # [1.0.0-beta.2](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2020-11-28)
 
 **Note:** Version bump only for package @nextgis/cancelable-promise

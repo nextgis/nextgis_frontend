@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.3](https://github.com/nextgis/nextgisweb_frontend/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2020-12-19)
+
+
+### Bug Fixes
+
+* **cesium-map-adapter:** extent from bounding sphere ([336bbe9](https://github.com/nextgis/nextgisweb_frontend/commit/336bbe901ca8d982b32eadbdcf2d603886667815))
+* **ngw-kit:** show only one enabled webmap basemap ([18a6022](https://github.com/nextgis/nextgisweb_frontend/commit/18a6022f5b58b45ee6b5bd92c6053fe3d3842866))
+* **utils:** function name typos ([06d7a75](https://github.com/nextgis/nextgisweb_frontend/commit/06d7a753a26211ca4ac374d166cf457437fdccb6))
+* **vue:** NgwlayersList independent mode ([57e1c35](https://github.com/nextgis/nextgisweb_frontend/commit/57e1c35b4d57f9edff31318df8036777ed8f8657))
+* **vuetify:** NgwLayersList init select ([46ec3cb](https://github.com/nextgis/nextgisweb_frontend/commit/46ec3cbcd9159c27b30ceda3523a9a9c53432c98))
+* provide support for map preclick event ([9400b31](https://github.com/nextgis/nextgisweb_frontend/commit/9400b31c116d15f6ae9e68b7b2c0369fa1f906b9)), closes [#8](https://github.com/nextgis/nextgisweb_frontend/issues/8)
+* **webmap:** set zero zoom ([059e6ea](https://github.com/nextgis/nextgisweb_frontend/commit/059e6ea243a0ba0b6cce58905dde58485bc5d372))
+
+
+### Features
+
+* **cancelable-promise:** add timeout ([3c207b5](https://github.com/nextgis/nextgisweb_frontend/commit/3c207b54d2910a67ae71c2fa09542d1b06b97ed9))
+* **cesium-map-adapter:** add watchTerrainChange geojson option ([15f1d8e](https://github.com/nextgis/nextgisweb_frontend/commit/15f1d8ef5ba427b5dc27f6c9d9b470887947ab4d))
+* add new library `progress` ([5a75e8c](https://github.com/nextgis/nextgisweb_frontend/commit/5a75e8c219e0c8c0aef2f9e4f0536709b93cd59c))
+
+
+
+
+
 # [1.0.0-beta.2](https://github.com/nextgis/nextgisweb_frontend/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2020-11-28)
 
 
