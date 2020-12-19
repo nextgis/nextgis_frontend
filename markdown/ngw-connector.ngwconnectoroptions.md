@@ -14,7 +14,7 @@ export interface NgwConnectorOptions
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [auth](./ngw-connector.ngwconnectoroptions.auth.md) | [Credentials](./ngw-connector.credentials.md) |  |
-|  [baseUrl](./ngw-connector.ngwconnectoroptions.baseurl.md) | string |  |
-|  [route](./ngw-connector.ngwconnectoroptions.route.md) | string |  |
+|  [auth?](./ngw-connector.ngwconnectoroptions.auth.md) | [Credentials](./ngw-connector.credentials.md) | <i>(Optional)</i> |
+|  [baseUrl?](./ngw-connector.ngwconnectoroptions.baseurl.md) | string | <i>(Optional)</i> |
+|  [route?](./ngw-connector.ngwconnectoroptions.route.md) | string | <i>(Optional)</i> |
 

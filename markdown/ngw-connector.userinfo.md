@@ -14,7 +14,7 @@ export interface UserInfo
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [clientId](./ngw-connector.userinfo.clientid.md) | string |  |
+|  [clientId?](./ngw-connector.userinfo.clientid.md) | string | <i>(Optional)</i> |
 |  [display\_name](./ngw-connector.userinfo.display_name.md) | string |  |
 |  [id](./ngw-connector.userinfo.id.md) | number |  |
 |  [keyname](./ngw-connector.userinfo.keyname.md) | 'guest' \| string |  |

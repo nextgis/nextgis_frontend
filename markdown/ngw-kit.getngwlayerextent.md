@@ -4,6 +4,11 @@
 
 ## getNgwLayerExtent() function
 
+> Warning: This API is now obsolete.
+> 
+> use [fetchNgwLayerExtent()](./ngw-kit.fetchngwlayerextent.md) instead
+> 
+
 <b>Signature:</b>
 
 ```typescript

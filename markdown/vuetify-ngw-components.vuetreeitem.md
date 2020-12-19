@@ -14,8 +14,8 @@ export interface VueTreeItem
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [children](./vuetify-ngw-components.vuetreeitem.children.md) | [VueTreeItem](./vuetify-ngw-components.vuetreeitem.md)<!-- -->\[\] |  |
+|  [children?](./vuetify-ngw-components.vuetreeitem.children.md) | [VueTreeItem](./vuetify-ngw-components.vuetreeitem.md)<!-- -->\[\] | <i>(Optional)</i> |
 |  [id](./vuetify-ngw-components.vuetreeitem.id.md) | string |  |
-|  [layer](./vuetify-ngw-components.vuetreeitem.layer.md) | string |  |
+|  [layer?](./vuetify-ngw-components.vuetreeitem.layer.md) | string | <i>(Optional)</i> |
 |  [name](./vuetify-ngw-components.vuetreeitem.name.md) | string |  |
 

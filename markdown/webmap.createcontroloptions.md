@@ -15,7 +15,7 @@ export interface CreateControlOptions
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [addClass](./webmap.createcontroloptions.addclass.md) | string |  |
-|  [bar](./webmap.createcontroloptions.bar.md) | boolean |  |
-|  [margin](./webmap.createcontroloptions.margin.md) | boolean |  |
+|  [addClass?](./webmap.createcontroloptions.addclass.md) | string | <i>(Optional)</i> |
+|  [bar?](./webmap.createcontroloptions.bar.md) | boolean | <i>(Optional)</i> |
+|  [margin?](./webmap.createcontroloptions.margin.md) | boolean | <i>(Optional)</i> |
 

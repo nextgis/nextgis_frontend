@@ -16,16 +16,16 @@ export interface TreeLayer extends TreeItem
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [adapter](./ngw-kit.treelayer.adapter.md) | string |  |
+|  [adapter?](./ngw-kit.treelayer.adapter.md) | string | <i>(Optional)</i> |
 |  [draw\_order\_position](./ngw-kit.treelayer.draw_order_position.md) | number |  |
 |  [item\_type](./ngw-kit.treelayer.item_type.md) | 'layer' |  |
 |  [layer\_adapter](./ngw-kit.treelayer.layer_adapter.md) | string |  |
 |  [layer\_enabled](./ngw-kit.treelayer.layer_enabled.md) | boolean |  |
-|  [layer\_max\_scale\_denom](./ngw-kit.treelayer.layer_max_scale_denom.md) | number |  |
-|  [layer\_min\_scale\_denom](./ngw-kit.treelayer.layer_min_scale_denom.md) | number |  |
+|  [layer\_max\_scale\_denom?](./ngw-kit.treelayer.layer_max_scale_denom.md) | number | <i>(Optional)</i> |
+|  [layer\_min\_scale\_denom?](./ngw-kit.treelayer.layer_min_scale_denom.md) | number | <i>(Optional)</i> |
 |  [layer\_style\_id](./ngw-kit.treelayer.layer_style_id.md) | number |  |
 |  [layer\_transparency](./ngw-kit.treelayer.layer_transparency.md) | number |  |
-|  [layer\_url](./ngw-kit.treelayer.layer_url.md) | string |  |
-|  [updateWmsParams](./ngw-kit.treelayer.updatewmsparams.md) | (parans: any) =&gt; any |  |
-|  [url](./ngw-kit.treelayer.url.md) | string |  |
+|  [layer\_url?](./ngw-kit.treelayer.layer_url.md) | string | <i>(Optional)</i> |
+|  [updateWmsParams?](./ngw-kit.treelayer.updatewmsparams.md) | (parans: any) =&gt; any | <i>(Optional)</i> |
+|  [url?](./ngw-kit.treelayer.url.md) | string | <i>(Optional)</i> |
 

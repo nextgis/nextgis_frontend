@@ -4,21 +4,30 @@
 
 ## getNgwLayerFeatures() function
 
+> Warning: This API is now obsolete.
+> 
+> use [fetchNgwLayerFeatures()](./ngw-kit.fetchngwlayerfeatures.md) instead
+> 
+
 <b>Signature:</b>
 
 ```typescript
-export declare function getNgwLayerFeatures<G extends Geometry | null = Geometry, P extends Record<string, any> = Record<string, any>>(options: {
+export declare function getNgwLayerFeatures<G extends Geometry | null = Geometry, P extends {
+    [field: string]: any;
+} = {
+    [field: string]: any;
+}>(options: {
     resourceId: number;
     connector: NgwConnector;
     filters?: PropertiesFilter;
-} & FilterOptions): CancelablePromise<FeatureCollection<G, P>>;
+} & NgwFeatureRequestOptions<P>): CancelablePromise<FeatureCollection<G, P>>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | { resourceId: number; connector: NgwConnector; filters?: [PropertiesFilter](./properties-filter.propertiesfilter.md)<!-- -->; } &amp; [FilterOptions](./webmap.filteroptions.md) |  |
+|  options | { resourceId: number; connector: NgwConnector; filters?: [PropertiesFilter](./properties-filter.propertiesfilter.md)<!-- -->; } &amp; [NgwFeatureRequestOptions](./ngw-kit.ngwfeaturerequestoptions.md)<!-- -->&lt;P&gt; |  |
 
 <b>Returns:</b>
 

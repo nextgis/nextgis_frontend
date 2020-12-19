@@ -15,6 +15,6 @@ export interface GroupOptions extends ResourceCreateOptions
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [description](./ngw-uploader.groupoptions.description.md) | string |  |
-|  [keyname](./ngw-uploader.groupoptions.keyname.md) | string |  |
+|  [description?](./ngw-uploader.groupoptions.description.md) | string | <i>(Optional)</i> |
+|  [keyname?](./ngw-uploader.groupoptions.keyname.md) | string | <i>(Optional)</i> |
 

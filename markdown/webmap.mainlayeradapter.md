@@ -15,23 +15,23 @@ export interface MainLayerAdapter<M = any, L = any, O extends AdapterOptions = A
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [id](./webmap.mainlayeradapter.id.md) | string |  |
-|  [layer](./webmap.mainlayeradapter.layer.md) | L |  |
-|  [map](./webmap.mainlayeradapter.map.md) | M |  |
-|  [name](./webmap.mainlayeradapter.name.md) | string |  |
+|  [id?](./webmap.mainlayeradapter.id.md) | string | <i>(Optional)</i> |
+|  [layer?](./webmap.mainlayeradapter.layer.md) | L | <i>(Optional)</i> |
+|  [map?](./webmap.mainlayeradapter.map.md) | M | <i>(Optional)</i> |
+|  [name?](./webmap.mainlayeradapter.name.md) | string | <i>(Optional)</i> |
 |  [options](./webmap.mainlayeradapter.options.md) | O |  |
-|  [order](./webmap.mainlayeradapter.order.md) | number |  |
+|  [order?](./webmap.mainlayeradapter.order.md) | number | <i>(Optional)</i> |
 
 ## Methods
 
 |  Method | Description |
 |  --- | --- |
 |  [addLayer(options)](./webmap.mainlayeradapter.addlayer.md) |  |
-|  [beforeRemove()](./webmap.mainlayeradapter.beforeremove.md) |  |
-|  [getDependLayers()](./webmap.mainlayeradapter.getdependlayers.md) |  |
-|  [getExtent()](./webmap.mainlayeradapter.getextent.md) |  |
-|  [hideLayer(layer)](./webmap.mainlayeradapter.hidelayer.md) |  |
-|  [removeLayer()](./webmap.mainlayeradapter.removelayer.md) |  |
-|  [showLayer(layer)](./webmap.mainlayeradapter.showlayer.md) |  |
-|  [updateLayer()](./webmap.mainlayeradapter.updatelayer.md) |  |
+|  [beforeRemove()?](./webmap.mainlayeradapter.beforeremove.md) | <i>(Optional)</i> |
+|  [getDependLayers()?](./webmap.mainlayeradapter.getdependlayers.md) | <i>(Optional)</i> |
+|  [getExtent()?](./webmap.mainlayeradapter.getextent.md) | <i>(Optional)</i> |
+|  [hideLayer(layer)?](./webmap.mainlayeradapter.hidelayer.md) | <i>(Optional)</i> |
+|  [removeLayer()?](./webmap.mainlayeradapter.removelayer.md) | <i>(Optional)</i> |
+|  [showLayer(layer)?](./webmap.mainlayeradapter.showlayer.md) | <i>(Optional)</i> |
+|  [updateLayer()?](./webmap.mainlayeradapter.updatelayer.md) | <i>(Optional)</i> |
 

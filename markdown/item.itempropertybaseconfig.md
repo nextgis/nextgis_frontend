@@ -14,6 +14,6 @@ export interface ItemPropertyBaseConfig<K extends keyof ItemPropertyTypes = any>
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [name](./item.itempropertybaseconfig.name.md) | string |  |
-|  [type](./item.itempropertybaseconfig.type.md) | [ItemPropertyTypes](./item.itempropertytypes.md)<!-- -->\[K\] |  |
+|  [name?](./item.itempropertybaseconfig.name.md) | string | <i>(Optional)</i> |
+|  [type?](./item.itempropertybaseconfig.type.md) | [ItemPropertyTypes](./item.itempropertytypes.md)<!-- -->\[K\] | <i>(Optional)</i> |
 

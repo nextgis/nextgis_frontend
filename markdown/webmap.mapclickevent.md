@@ -16,7 +16,8 @@ export interface MapClickEvent
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [latLng](./webmap.mapclickevent.latlng.md) | [LatLng](./utils.latlng.md) | The geographical point where the mouse event occurred. |
+|  [latLng?](./webmap.mapclickevent.latlng.md) | [LatLng](./utils.latlng.md) | <i>(Optional)</i> The geographical point where the mouse event occurred. |
+|  [lngLat](./webmap.mapclickevent.lnglat.md) | [LngLatArray](./utils.lnglatarray.md) | The geographical point where the mouse event occurred. |
 |  [pixel](./webmap.mapclickevent.pixel.md) | [Pixel](./webmap.pixel.md) | Pixel coordinates of the point where the mouse event occurred relative to the map container. |
-|  [source](./webmap.mapclickevent.source.md) | any | Map adapter original click event |
+|  [source?](./webmap.mapclickevent.source.md) | unknown | <i>(Optional)</i> Map adapter original click event |
 

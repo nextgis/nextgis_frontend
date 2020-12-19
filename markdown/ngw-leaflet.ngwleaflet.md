@@ -18,12 +18,12 @@ declare class NgwLeaflet extends NgwMap
 
 ```javascript
 // Base initialization
-// [live demo](http://code.nextgis.com/ngw-leaflet-examples-ngw_webmap)
+// [live demo](http://code.nextgis.com/ngw-leaflet-examples-ngw-webmap)
 import { NgwMap } from '@nextgis/ngw-leaflet';
 
 const ngwMap = new NgwMap({
   target: 'map',
-  qmsId: 487,
+  qmsId: 448,
   baseUrl: 'https://demo.nextgis.com',
   webmapId: 3985
 });

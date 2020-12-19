@@ -4,17 +4,18 @@
 
 ## NgwConnector.getResourceId() method
 
+
 <b>Signature:</b>
 
 ```typescript
-getResourceId(resource: ResourceDefinition): CancelablePromise<number | undefined>;
+getResourceId(resource: ResourceDefinition | DeepPartial<Resource>): CancelablePromise<number | undefined>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  resource | [ResourceDefinition](./ngw-connector.resourcedefinition.md) |  |
+|  resource | [ResourceDefinition](./ngw-connector.resourcedefinition.md) \| [DeepPartial](./utils.deeppartial.md)<!-- -->&lt;[Resource](./ngw-connector.resource.md)<!-- -->&gt; |  |
 
 <b>Returns:</b>
 

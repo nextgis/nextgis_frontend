@@ -15,11 +15,11 @@ export interface AppSettings
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [bookmark\_resource](./ngw-kit.appsettings.bookmark_resource.md) | any |  |
-|  [draw\_order\_enabled](./ngw-kit.appsettings.draw_order_enabled.md) | any |  |
-|  [extent\_bottom](./ngw-kit.appsettings.extent_bottom.md) | number |  |
-|  [extent\_left](./ngw-kit.appsettings.extent_left.md) | number |  |
-|  [extent\_right](./ngw-kit.appsettings.extent_right.md) | number |  |
-|  [extent\_top](./ngw-kit.appsettings.extent_top.md) | number |  |
-|  [root\_item](./ngw-kit.appsettings.root_item.md) | [TreeGroup](./ngw-kit.treegroup.md) |  |
+|  [bookmark\_resource?](./ngw-kit.appsettings.bookmark_resource.md) | any | <i>(Optional)</i> |
+|  [draw\_order\_enabled?](./ngw-kit.appsettings.draw_order_enabled.md) | any | <i>(Optional)</i> |
+|  [extent\_bottom?](./ngw-kit.appsettings.extent_bottom.md) | number | <i>(Optional)</i> |
+|  [extent\_left?](./ngw-kit.appsettings.extent_left.md) | number | <i>(Optional)</i> |
+|  [extent\_right?](./ngw-kit.appsettings.extent_right.md) | number | <i>(Optional)</i> |
+|  [extent\_top?](./ngw-kit.appsettings.extent_top.md) | number | <i>(Optional)</i> |
+|  [root\_item?](./ngw-kit.appsettings.root_item.md) | [TreeGroup](./ngw-kit.treegroup.md) | <i>(Optional)</i> |
 

@@ -4,6 +4,7 @@
 
 ## NgwConnector.getResourcesBy() method
 
+
 <b>Signature:</b>
 
 ```typescript

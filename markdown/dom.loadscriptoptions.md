@@ -14,8 +14,8 @@ export interface LoadScriptOptions
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [async](./dom.loadscriptoptions.async.md) | boolean |  |
-|  [crossOrigin](./dom.loadscriptoptions.crossorigin.md) | 'anonymous' \| string |  |
-|  [defer](./dom.loadscriptoptions.defer.md) | boolean |  |
-|  [id](./dom.loadscriptoptions.id.md) | string |  |
+|  [async?](./dom.loadscriptoptions.async.md) | boolean | <i>(Optional)</i> |
+|  [crossOrigin?](./dom.loadscriptoptions.crossorigin.md) | 'anonymous' \| string | <i>(Optional)</i> |
+|  [defer?](./dom.loadscriptoptions.defer.md) | boolean | <i>(Optional)</i> |
+|  [id?](./dom.loadscriptoptions.id.md) | string | <i>(Optional)</i> |
 

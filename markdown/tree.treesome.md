@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function treeSome<F extends DefaultTreeItem = DefaultTreeItem>(item: F | F[], filter: PropertyFilter | SelfFilter<F>, relation: RelationFunction<F> | string): boolean;
+export declare function treeSome<F extends DefaultTreeItem = DefaultTreeItem>(item: F | F[], filter?: PropertyFilter | SelfFilter<F>, relation?: RelationFunction<F> | string): boolean;
 ```
 
 ## Parameters
@@ -15,8 +15,8 @@ export declare function treeSome<F extends DefaultTreeItem = DefaultTreeItem>(it
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  item | F \| F\[\] |  |
-|  filter | [PropertyFilter](./properties-filter.propertyfilter.md) \| [SelfFilter](./tree.selffilter.md)<!-- -->&lt;F&gt; |  |
-|  relation | [RelationFunction](./tree.relationfunction.md)<!-- -->&lt;F&gt; \| string |  |
+|  filter | [PropertyFilter](./properties-filter.propertyfilter.md) \| SelfFilter&lt;F&gt; |  |
+|  relation | RelationFunction&lt;F&gt; \| string |  |
 
 <b>Returns:</b>
 

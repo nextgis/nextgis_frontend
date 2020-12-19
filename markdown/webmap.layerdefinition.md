@@ -15,7 +15,7 @@ export interface LayerDefinition<F extends Feature = Feature, L = any>
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [feature](./webmap.layerdefinition.feature.md) | F |  |
-|  [layer](./webmap.layerdefinition.layer.md) | L |  |
-|  [visible](./webmap.layerdefinition.visible.md) | boolean |  |
+|  [feature?](./webmap.layerdefinition.feature.md) | F | <i>(Optional)</i> |
+|  [layer?](./webmap.layerdefinition.layer.md) | L | <i>(Optional)</i> |
+|  [visible?](./webmap.layerdefinition.visible.md) | boolean | <i>(Optional)</i> |
 
