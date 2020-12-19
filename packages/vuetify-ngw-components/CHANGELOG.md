@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.3](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2020-12-19)
+
+
+### Bug Fixes
+
+* **vue:** NgwlayersList independent mode ([57e1c35](https://github.com/nextgis/nextgis_frontend/commit/57e1c35b4d57f9edff31318df8036777ed8f8657))
+* **vuetify:** NgwLayersList init select ([46ec3cb](https://github.com/nextgis/nextgis_frontend/commit/46ec3cbcd9159c27b30ceda3523a9a9c53432c98))
+
+
+
+
+
 # [1.0.0-beta.2](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2020-11-28)
 
 
