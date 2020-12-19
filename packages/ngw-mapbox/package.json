@@ -11,7 +11,6 @@
   "dependencies": {
     "@nextgis/mapboxgl-map-adapter": "^1.0.0-beta.2",
     "@nextgis/ngw-map": "^1.0.0-beta.2",
-    "@types/mapbox-gl": "^1.12.8",
     "canvg": "^3.0.7"
   },
   "devDependencies": {
