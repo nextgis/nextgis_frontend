@@ -35,9 +35,9 @@ export async function createRasterAdapter({
     }
   }
 
-  const adapterClass = webMap.mapAdapter.layerAdapters[adapter] as Type<
-    MainLayerAdapter
-  >;
+  const adapterClass = webMap.mapAdapter.layerAdapters[
+    adapter
+  ] as Type<MainLayerAdapter>;
   if (adapterClass) {
     const resourceId = await resourceIdFromLayerOptions(
       layerOptions,

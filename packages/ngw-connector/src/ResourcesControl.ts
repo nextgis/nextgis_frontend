@@ -2,9 +2,7 @@ import CancelablePromise from '@nextgis/cancelable-promise';
 import { DeepPartial, defined } from '@nextgis/utils';
 
 import { ResourceItem, Resource } from './types/ResourceItem';
-import {
-  ResourceDefinition,
-} from './interfaces';
+import { ResourceDefinition } from './interfaces';
 
 import { resourceToQuery } from './utils/resourceToQuery';
 import { resourceCompare } from './utils/resourceCompare';
@@ -170,7 +168,7 @@ export class ResourcesControl {
         parent,
       });
     if (keyname) {
-      return this._fetchResourceBy({keyname}).then((item) => {
+      return this._fetchResourceBy({ keyname }).then((item) => {
         if (item) {
           parent = item.resource.id;
         }
@@ -211,7 +209,9 @@ export class ResourcesControl {
     });
   }
 
-  private _fetchResourceById(id: number): CancelablePromise<ResourceItem | undefined> {
+  private _fetchResourceById(
+    id: number
+  ): CancelablePromise<ResourceItem | undefined> {
     const item: ResourceItem = this._resourcesCache[id];
     if (!item) {
       return this.connector
