@@ -101,7 +101,8 @@ export class CancelablePromise<T = any> implements Promise<T> {
           } else {
             this._isPending = false;
           }
-          resolve(value);
+          // TODO: fix types, `undefined` not allowed since 19.12.2020
+          resolve(value as T | PromiseLike<T>);
         };
 
         const onReject = (error: any) => {

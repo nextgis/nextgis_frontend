@@ -70,7 +70,7 @@
         ngwMap.addGeoJsonLayer({
           id: 'sectors',
           type: 'polygon',
-          paint: { color: 'green' },
+          paint: { color: 'green',  },
         });
         ngwMap.emitter.on('layer:click', function (e) {
           if (e.layer.id === 'cameras') {
