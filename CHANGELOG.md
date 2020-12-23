@@ -233,7 +233,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* **cancelable-promise:** шьзкщму PromisesControl ([ca5fabb](https://gitlab.com/nextgis_private/aeronetservice/commit/ca5fabb60e998f19713704011db58588487aebe7))
+* **cancelable-promise:** improve PromisesControl ([ca5fabb](https://gitlab.com/nextgis_private/aeronetservice/commit/ca5fabb60e998f19713704011db58588487aebe7))
 * **cancelable-promise:** create abort control ([9768157](https://gitlab.com/nextgis_private/aeronetservice/commit/976815713d25b1da20a96b678668648caf2c0489))
 * **utils:** add `arrayCompareStrict` function ([9d65949](https://gitlab.com/nextgis_private/aeronetservice/commit/9d659496fbcf4dd0e2f467d3e18ad7253fcb7041))
 * **utils:** add `full` method ([00eb185](https://gitlab.com/nextgis_private/aeronetservice/commit/00eb185fe1859a8bb30b2e9f8d8d10c08c88eb7f))

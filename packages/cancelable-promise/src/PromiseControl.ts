@@ -86,7 +86,7 @@ export class PromiseControl {
     return this.WaitForMe(name);
   }
 
-  private _onStop() {
+  private _onStop(): void {
     if (this.options.onStop && !this.isLoaded) {
       this.options.onStop();
     }
