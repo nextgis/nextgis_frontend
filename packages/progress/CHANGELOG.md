@@ -75,7 +75,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* **cancelable-promise:** шьзкщму PromisesControl ([ca5fabb](https://github.com/nextgis/nextgis_frontend/commit/ca5fabb60e998f19713704011db58588487aebe7))
+* **cancelable-promise:** improve PromisesControl ([ca5fabb](https://github.com/nextgis/nextgis_frontend/commit/ca5fabb60e998f19713704011db58588487aebe7))
 * **cancelable-promise:** create abort control ([9768157](https://github.com/nextgis/nextgis_frontend/commit/976815713d25b1da20a96b678668648caf2c0489))
 
 
