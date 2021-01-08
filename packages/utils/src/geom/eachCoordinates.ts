@@ -1,5 +1,11 @@
 import { GeoJSON, Position, Geometry } from 'geojson';
 
+export function coordinatesCount(geojson: GeoJSON): number {
+  let count = 0;
+  eachCoordinates(geojson, () => count++);
+  return count;
+}
+
 export function eachCoordinates(
   geojson: GeoJSON,
   cb: (position: Position) => void
@@ -36,7 +42,7 @@ export function eachGeometry(
     });
   } else if (geojson.type === 'Feature') {
     cb(geojson.geometry);
-  } else if ('geometry' in geojson) {
+  } else if ('coordinates' in geojson) {
     cb(geojson);
   }
 }
