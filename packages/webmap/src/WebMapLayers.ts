@@ -1,6 +1,6 @@
 import { Feature, GeoJsonObject } from 'geojson';
 import { preparePaint } from '@nextgis/paint';
-import { Type } from '@nextgis/utils';
+import { TileJson, Type } from '@nextgis/utils';
 import { PropertiesFilter, propertiesFilter } from '@nextgis/properties-filter';
 
 import {
@@ -18,6 +18,7 @@ import {
   LayerAdapterDefinition,
   OnLayerSelectOptions,
   MainLayerAdapter,
+  TileAdapterOptions,
 } from './interfaces/LayerAdapter';
 
 import { LayerDef } from './interfaces/BaseTypes';
@@ -49,6 +50,14 @@ export class WebMapLayers<
   private readonly _baselayers: string[] = [];
   private readonly _layers: AddedLayers = {};
   private readonly _selectedLayers: string[] = [];
+
+  constructor(mapOptions: O) {
+    super(mapOptions);
+    const tileJson = this.options.tileJson;
+    if (tileJson) {
+      this.emitter.once('build-map', () => this.addTileJsonLayer(tileJson));
+    }
+  }
 
   /**
    * Try to fit map view by given layer bounds.
@@ -757,13 +766,29 @@ export class WebMapLayers<
     return attributions;
   }
 
-  getActiveBaseLayer(): MainLayerAdapter<any, any, AdapterOptions> | undefined {
+  getActiveBaseLayer(): MainLayerAdapter<M, any, AdapterOptions> | undefined {
     const visibleLayerBaseLayer = this.getBaseLayers().find((x) => {
       return this.isLayerVisible(x);
     });
     if (visibleLayerBaseLayer) {
       return this.getLayer(visibleLayerBaseLayer);
     }
+  }
+
+  addTileJsonLayer(
+    tileJson: TileJson
+  ): Promise<MainLayerAdapter<M, any, TileAdapterOptions>> {
+    // if (this.mapAdapter.createTileJsonlayer) {
+    // } else {
+
+    const url = tileJson.tiles[0];
+    return this.addLayer('TILE', {
+      url,
+      maxZoom: tileJson.maxzoom,
+      minZoom: tileJson.minzoom,
+      subdomains: tileJson.scheme,
+      attribution: tileJson.attribution,
+    }) as Promise<MainLayerAdapter<M, any, TileAdapterOptions>>;
   }
 
   private async _onLayerClick(options: OnLayerClickOptions) {
