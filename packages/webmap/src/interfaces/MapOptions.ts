@@ -1,3 +1,4 @@
+import { TileJson } from '@nextgis/utils';
 import { GeometryPaint } from '@nextgis/paint';
 import { StarterKit } from './StarterKit';
 import { RuntimeParams } from './RuntimeParams';
@@ -140,6 +141,7 @@ export interface MapOptions<C = any> {
    * ```
    */
   controlsOptions?: ControlsOptions;
+  tileJson?: TileJson;
 }
 
 /**

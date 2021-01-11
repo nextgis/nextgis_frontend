@@ -46,6 +46,7 @@
  * ...and there will be compatibility issues
  */
 
+import { TileJson } from '@nextgis/utils';
 import { WebMapEvents } from './interfaces/Events';
 
 import { WebMapLayers } from './WebMapLayers';
@@ -133,7 +134,7 @@ export class WebMap<
     }
   }
 
-  private _addControls() {
+  private _addControls(): void {
     if (this.options.controls) {
       this.options.controls.forEach((x) => {
         let controlAdapterName = x;
