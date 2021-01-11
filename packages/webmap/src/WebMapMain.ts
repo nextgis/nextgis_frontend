@@ -2,7 +2,13 @@ import { EventEmitter } from 'events';
 import StrictEventEmitter from 'strict-event-emitter-types';
 import { Feature, Polygon } from 'geojson';
 
-import { deepmerge, defined, Type, getBoundsFeature } from '@nextgis/utils';
+import {
+  deepmerge,
+  defined,
+  Type,
+  getBoundsFeature,
+  TileJson,
+} from '@nextgis/utils';
 import { GetPaintFunction } from '@nextgis/paint';
 import CancelablePromise from '@nextgis/cancelable-promise';
 import { deprecatedMapClick } from '@nextgis/utils';
@@ -116,6 +122,10 @@ export class WebMapMain<
       this.runtimeParams = this.options.runtimeParams;
     }
     this._addEventsListeners();
+
+    if (this.options.tileJson) {
+      this._setTileJsonOptions(this.options.tileJson);
+    }
     if (this.options.create) {
       this.create();
     }
@@ -452,7 +462,7 @@ export class WebMapMain<
           const cursor: Cursor = this.getCursor() || 'grab';
           this._removeEventListeners({ include: ['click'] });
           this.setCursor('crosshair');
-          const onCancel_ = () => {
+          const onCancel_ = (): void => {
             this.setCursor(cursor);
             this._addEventsListeners({ include: ['click'] });
             this.mapAdapter.emitter.off('click', onMapClick);
@@ -491,7 +501,7 @@ export class WebMapMain<
     //
   }
 
-  private async _setupMap() {
+  private async _setupMap(): Promise<this> {
     if (!this.mapAdapter) {
       throw new Error('WebMap `mapAdapter` option is not set');
     }
@@ -505,7 +515,22 @@ export class WebMapMain<
     return this;
   }
 
-  private _zoomToInitialExtent() {
+  private _setTileJsonOptions(tileJson: TileJson): void {
+    if (tileJson.center) {
+      this.options.center = tileJson.center;
+    }
+    if (tileJson.bounds) {
+      this.options.bounds = tileJson.bounds;
+    }
+    if (defined(tileJson.maxzoom)) {
+      this.options.maxZoom = tileJson.maxzoom;
+    }
+    if (defined(tileJson.minzoom)) {
+      this.options.minZoom = tileJson.minzoom;
+    }
+  }
+
+  private _zoomToInitialExtent(): void {
     const { center, zoom, bounds } = this.options;
     if (this._extent) {
       this.fitBounds(this._extent);
@@ -516,7 +541,7 @@ export class WebMapMain<
     }
   }
 
-  private _setInitMapState(states: Type<StateItem>[]) {
+  private _setInitMapState(states: Type<StateItem>[]): void {
     for (const X of states) {
       const state = new X(this);
       this._mapState.push(state);
@@ -526,7 +551,6 @@ export class WebMapMain<
           const val = state.parse(str);
           // state.setValue(val);
           this._initMapState[state.name] = val;
-          // @ts-ignore
           this.options[state.name] = val;
           break;
         }
@@ -550,7 +574,7 @@ export class WebMapMain<
       events = events.filter((x) => opt.include.includes(x));
     }
     events.forEach((x) => {
-      this._mapEvents[x] = (data) => {
+      this._mapEvents[x] = (data): void => {
         if (this.runtimeParams.length) {
           const mapStatusEvent = this._mapState.find((y) => y.event === x);
           if (mapStatusEvent) {
