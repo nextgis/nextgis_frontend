@@ -91,6 +91,7 @@ export class ImageLayer extends Layer {
 
   onRemove(map: L.Map): this {
     if (this._currentOverlay) {
+      this._currentOverlay.cancelLoad();
       map.removeLayer(this._currentOverlay);
       delete this._currentOverlay;
     }
@@ -131,6 +132,9 @@ export class ImageLayer extends Layer {
       headers: this.options.headers,
     });
     overlay.addTo(this._map);
+    if (this._currentOverlay) {
+      this._currentOverlay.cancelLoad();
+    }
     overlay.once(
       'load',
       () => {
