@@ -2,7 +2,7 @@ export function callAjax(
   src: string,
   callback: (resp: any) => any,
   headers: Record<string, any>
-): void {
+): () => void {
   const xhr = new XMLHttpRequest();
   xhr.open('GET', src);
   xhr.responseType = 'arraybuffer';
@@ -19,4 +19,9 @@ export function callAjax(
     callback(imageUrl);
   };
   xhr.send();
+  return () => {
+    console.log(xhr);
+    xhr.abort();
+    console.log(xhr);
+  };
 }
