@@ -58,6 +58,7 @@ export interface ItemOptions {
   crossOrigin?: 'anonymous';
   drawOrderEnabled?: boolean;
   ratio?: number;
+  setViewDelay?: number;
 }
 
 export interface ChangeEvent<

@@ -4,6 +4,7 @@ import {
   GetClassAdapterOptions,
 } from '../interfaces';
 import { MainLayerAdapter, Type, ImageAdapterOptions } from '@nextgis/webmap';
+import { defined } from '@nextgis/utils';
 import { ResourceItem, ResourceCls } from '@nextgis/ngw-connector';
 
 import { getLayerAdapterOptions } from '../utils/getLayerAdapterOptions';
@@ -58,11 +59,15 @@ export async function createRasterAdapter({
         if (opt) {
           const layerAdapterOptions: ImageAdapterOptions = {
             ...opt,
+            setViewDelay: layerOptions.adapterOptions?.setViewDelay,
             params: { resource: resourceId },
             // @deprecated
             layers: String(resourceId),
             resourceId: resourceId,
           };
+          if (layerOptions.adapterOptions && defined(layerOptions.adapterOptions.setViewDelay)) {
+            layerAdapterOptions.setViewDelay = layerOptions.adapterOptions.setViewDelay;
+          }
           this.options = { ...this.options, ...layerAdapterOptions };
           // if (__DEV__) {
           //   Object.defineProperty(this.options, 'layers', {
