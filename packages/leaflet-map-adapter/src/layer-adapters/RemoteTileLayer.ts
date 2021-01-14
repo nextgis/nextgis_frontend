@@ -1,14 +1,28 @@
-import { DomUtil, TileLayerOptions, Util } from 'leaflet';
+import { DomUtil, GridLayer, Util } from 'leaflet';
+import { debounce } from '../../../utils/src';
 import { callAjax } from './layersUtility';
+import { TileLayerOptionsExtended } from './TileAdapter/TileLayer';
 
 type Constructor = new (...args: any[]) => {};
 
 export function makeRemote<
   TBase extends Constructor,
-  O extends TileLayerOptions = TileLayerOptions
+  O extends TileLayerOptionsExtended = TileLayerOptionsExtended
 >(Base: TBase) {
   return class RemoteTileLayer extends Base {
     options!: O;
+
+    constructor(...args: any[]) {
+      super(...args);
+      if (this.options.setViewDelay) {
+        // @ts-ignore
+        this._update = debounce((...a: any[]) => {
+          console.log(1243);
+          // @ts-ignore
+          GridLayer.prototype._update.call(this, ...a);
+        }, this.options.setViewDelay);
+      }
+    }
 
     createTile(
       coords: Record<string, unknown>,
