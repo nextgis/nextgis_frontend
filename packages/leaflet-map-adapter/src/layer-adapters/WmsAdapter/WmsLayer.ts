@@ -1,13 +1,14 @@
 import { TileLayer as TL, WMSOptions } from 'leaflet';
-import { applyMixins } from '@nextgis/utils';
-import { RemoteTileLayer } from '../RemoteTileLayer';
+import { makeRemote } from '../RemoteTileLayer';
 
 type LayerOptions = WMSOptions & { headers: any };
 
-export class WmsLayer extends TL.WMS {
+class WmsLayerBase extends TL.WMS {
   constructor(urlTemplate: string, options: LayerOptions) {
     super(urlTemplate, options);
   }
 }
 
-applyMixins(WmsLayer, [RemoteTileLayer]);
+export const WmsLayer = makeRemote(WmsLayerBase);
+
+// applyMixins(WmsLayer, [RemoteTileLayer]);

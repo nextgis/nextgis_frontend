@@ -20,6 +20,7 @@ export function applyMixins(
           name
         );
         if (descriptor) {
+          console.log(name);
           Object.defineProperty(derivedCtor.prototype, name, descriptor);
         }
       }

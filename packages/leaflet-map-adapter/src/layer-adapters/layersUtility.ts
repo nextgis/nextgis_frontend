@@ -20,8 +20,6 @@ export function callAjax(
   };
   xhr.send();
   return () => {
-    console.log(xhr);
     xhr.abort();
-    console.log(xhr);
   };
 }
