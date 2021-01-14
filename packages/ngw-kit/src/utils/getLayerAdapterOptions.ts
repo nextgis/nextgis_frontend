@@ -19,7 +19,7 @@ export function getLayerAdapterOptions(
   const isImageAllowed = layerAdapters ? layerAdapters.IMAGE : true;
 
   const resourceId = options.resource;
-  const nd: TileNoData = options.tileNoData ? options.tileNoData : 204;
+  const nd: TileNoData = options.tileNoData ? options.tileNoData : 404;
 
   if (typeof resourceId === 'number') {
     if (adapter === 'IMAGE') {

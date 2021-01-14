@@ -1,13 +1,17 @@
-import { TileLayer as TL, TileLayerOptions } from 'leaflet';
-import { applyMixins } from '@nextgis/utils';
-import { RemoteTileLayer } from '../RemoteTileLayer';
+import { TileLayer as TL, TileLayerOptions, } from 'leaflet';
+
+import { makeRemote } from '../RemoteTileLayer';
+
+
 
 type TLOptions = TileLayerOptions & { headers: any };
 
-export class TileLayer extends TL {
+class TileLayerBase extends TL {
   constructor(urlTemplate: string, options?: TLOptions) {
     super(urlTemplate, options);
   }
 }
 
-applyMixins(TileLayer, [RemoteTileLayer]);
+export const TileLayer = makeRemote(TileLayerBase);
+
+// applyMixins(TileLayer, [RemoteTileLayer]);
