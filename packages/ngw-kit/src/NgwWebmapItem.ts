@@ -166,6 +166,7 @@ export class NgwWebmapItem extends Item<ItemOptions> {
         visibility: false,
         headers: this.options.headers,
         crossOrigin: this.options.crossOrigin,
+        setViewDelay: this.options.setViewDelay,
         params: { resource: this.item.resourceId },
       };
       if (this.options.order) {
