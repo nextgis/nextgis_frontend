@@ -82,6 +82,9 @@ export interface NgwMapOptions<C = any> extends MapOptions<C> {
   pixelRadius?: number;
 
   runtimeParams?: RuntimeParams[];
+
+  /** {@inheritDoc AdapterOptions.setViewDelay} */
+  setViewDelay?: number;
 }
 
 export interface NgwMapEvents extends WebMapEvents {
