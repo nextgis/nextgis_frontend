@@ -15,6 +15,7 @@ export class TileAdapter
           attribution: opt.attribution,
           minZoom: opt.minZoom,
           maxZoom: opt.maxZoom,
+
           ...opt.nativeOptions,
         };
         if (opt.subdomains) {
@@ -22,7 +23,11 @@ export class TileAdapter
         }
         let layer;
         if (opt.headers) {
-          layer = new TL(url, { ...tileLayerOptions, headers: opt.headers });
+          layer = new TL(url, {
+            ...tileLayerOptions,
+            headers: opt.headers,
+            setViewDelay: opt.setViewDelay,
+          });
         } else {
           layer = new TileLayer(url, tileLayerOptions);
         }

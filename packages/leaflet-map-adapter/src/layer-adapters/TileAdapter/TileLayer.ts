@@ -4,14 +4,15 @@ import { makeRemote } from '../RemoteTileLayer';
 
 
 
-type TLOptions = TileLayerOptions & { headers: any };
+export type TileLayerOptionsExtended = TileLayerOptions & {
+  headers: Record<string, any>;
+  setViewDelay?: number;
+};
 
 class TileLayerBase extends TL {
-  constructor(urlTemplate: string, options?: TLOptions) {
+  constructor(urlTemplate: string, options?: TileLayerOptionsExtended) {
     super(urlTemplate, options);
   }
 }
 
 export const TileLayer = makeRemote(TileLayerBase);
-
-// applyMixins(TileLayer, [RemoteTileLayer]);
