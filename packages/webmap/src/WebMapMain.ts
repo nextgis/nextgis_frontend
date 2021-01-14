@@ -524,9 +524,14 @@ export class WebMapMain<
     }
     if (defined(tileJson.maxzoom)) {
       this.options.maxZoom = tileJson.maxzoom;
+      this.options.zoom = tileJson.maxzoom;
     }
     if (defined(tileJson.minzoom)) {
       this.options.minZoom = tileJson.minzoom;
+      this.options.zoom = tileJson.minzoom;
+    }
+    if (defined(tileJson.maxzoom) && defined(tileJson.minzoom)) {
+      this.options.zoom = (tileJson.maxzoom + tileJson.minzoom) / 2;
     }
   }
 
