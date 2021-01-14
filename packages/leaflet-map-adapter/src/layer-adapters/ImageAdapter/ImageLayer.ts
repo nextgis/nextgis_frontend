@@ -6,6 +6,7 @@
  */
 
 import { Layer, Util, CRS } from 'leaflet';
+import { debounce } from '@nextgis/utils';
 import { ImageOverlay } from './ImageOverlay';
 
 interface OverlayOptions {
@@ -20,6 +21,7 @@ interface OverlayOptions {
   pane?: string;
   headers?: any;
   viewPortBuffer?: number;
+  setViewDelay?: number;
 }
 
 /*
@@ -50,6 +52,7 @@ export class ImageLayer extends Layer {
     pane: 'tilePane',
     headers: null,
     viewPortBuffer: 0,
+    setViewDelay: 100,
   };
 
   private wmsParams: any;
@@ -57,14 +60,15 @@ export class ImageLayer extends Layer {
   private _currentUrl?: string;
   private _currentOverlay?: ImageOverlay;
 
-  constructor(url: string, options: Record<string, any>) {
+  constructor(url: string, options: OverlayOptions) {
     super(options);
     this._url = url;
 
     // Move WMS parameters to params object
     const params: any = {};
     const opts: any = {};
-    for (const opt in options) {
+    let opt: keyof OverlayOptions;
+    for (opt in options) {
       if (opt in this.options) {
         opts[opt] = options[opt];
       } else {
@@ -105,7 +109,7 @@ export class ImageLayer extends Layer {
     moveend: () => void;
   } {
     return {
-      moveend: this.update,
+      moveend: debounce(this.update, this.options.setViewDelay),
     };
   }
 

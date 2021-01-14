@@ -11,6 +11,7 @@
   "dependencies": {
     "@nextgis/paint": "^1.0.0-beta.3",
     "@nextgis/webmap": "^1.0.0-beta.3",
+    "@nextgis/utils": "^1.0.0-beta.3",
     "@types/events": "^3.0.0",
     "@types/leaflet": "^1.5.19",
     "@types/node": "^14.14.10",
