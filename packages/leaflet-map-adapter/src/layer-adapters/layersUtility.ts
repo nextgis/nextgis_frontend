@@ -9,7 +9,6 @@ export function callAjax(
   for (const h in headers) {
     xhr.setRequestHeader(h, headers[h]);
   }
-
   xhr.onload = function () {
     const arrayBufferView = new Uint8Array(this.response);
     const blob = new Blob([arrayBufferView], { type: 'image/png' });
@@ -20,8 +19,6 @@ export function callAjax(
   };
   xhr.send();
   return () => {
-    console.log(xhr);
     xhr.abort();
-    console.log(xhr);
   };
 }
