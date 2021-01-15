@@ -18,6 +18,7 @@ export class ImageAdapter
       this.layer = new ImageLayer(url, {
         pane: this.pane,
         headers: options.headers,
+        setViewDelay: options.setViewDelay,
         /**
          * TODO: safe remove, use only options.params
          */
