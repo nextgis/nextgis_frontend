@@ -142,6 +142,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
               options.headers = headers;
             }
           }
+          options.setViewDelay = this.options.setViewDelay;
           options.order = this.options.order;
           options.ratio = this.options.ratio;
           options.crossOrigin = this.options.crossOrigin;

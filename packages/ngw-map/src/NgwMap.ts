@@ -1,7 +1,7 @@
 import StrictEventEmitter from 'strict-event-emitter-types';
 import { EventEmitter } from 'events';
 import CancelablePromise from '@nextgis/cancelable-promise';
-import { isObject, JsonMap } from '@nextgis/utils';
+import { defined, isObject, JsonMap } from '@nextgis/utils';
 import {
   WebMap,
   ControlPosition,
@@ -180,6 +180,12 @@ export class NgwMap<
     }
     if (this.options.baseUrl || this.options.baseUrl === '') {
       try {
+        if (defined(this.options.setViewDelay)) {
+          options.adapterOptions = options.adapterOptions || {};
+          if (!defined(options.adapterOptions.setViewDelay)) {
+            options.adapterOptions.setViewDelay = this.options.setViewDelay;
+          }
+        }
         const adapter = addNgwLayer(options, this, this.connector);
 
         const layer = (await this.addLayer(adapter, {
