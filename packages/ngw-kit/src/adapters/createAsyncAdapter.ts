@@ -3,7 +3,7 @@ import NgwConnector, {
   ResourceItem,
 } from '@nextgis/ngw-connector';
 import { WebMap } from '@nextgis/webmap';
-import { Type, applyMixins } from '@nextgis/utils';
+import { Type, applyMixins, defined } from '@nextgis/utils';
 
 import {
   ResourceAdapter,
@@ -67,7 +67,6 @@ export async function createAsyncAdapter(
 ): Promise<Type<ResourceAdapter> | undefined> {
   let adapter: ClassAdapter | undefined;
   let item: ResourceItem | undefined;
-
   const adapterType = options.adapter;
   const resourceId = await resourceIdFromLayerOptions(options, connector);
   if (resourceId) {
