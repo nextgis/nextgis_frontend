@@ -3,12 +3,12 @@ import { debounce } from '../../../utils/src';
 import { callAjax } from './layersUtility';
 import { TileLayerOptionsExtended } from './TileAdapter/TileLayer';
 
-type Constructor = new (...args: any[]) => {};
+type Constructor = new (...args: any[]) => any;
 
 export function makeRemote<
   TBase extends Constructor,
   O extends TileLayerOptionsExtended = TileLayerOptionsExtended
->(Base: TBase) {
+>(Base: TBase): TBase {
   return class RemoteTileLayer extends Base {
     options!: O;
 
@@ -58,7 +58,7 @@ export function makeRemote<
       const tiles = this._tiles;
       // @ts-ignore
       const tileZoom = this._tileZoom;
-      for (let i in tiles) {
+      for (const i in tiles) {
         if (tiles[i].coords.z !== tileZoom) {
           const tile = tiles[i].el;
 

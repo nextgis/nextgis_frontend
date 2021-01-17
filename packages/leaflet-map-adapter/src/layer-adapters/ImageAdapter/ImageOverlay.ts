@@ -18,7 +18,7 @@ export class ImageOverlay extends LImageOverlay {
     super(imageUrl, bounds, options);
   }
 
-  cancelLoad() {
+  cancelLoad(): void {
     if (this._abort) {
       this._abort.forEach((x) => x());
       this._abort = [];

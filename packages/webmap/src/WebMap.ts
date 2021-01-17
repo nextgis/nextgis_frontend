@@ -46,7 +46,6 @@
  * ...and there will be compatibility issues
  */
 
-import { TileJson } from '@nextgis/utils';
 import { WebMapEvents } from './interfaces/Events';
 
 import { WebMapLayers } from './WebMapLayers';

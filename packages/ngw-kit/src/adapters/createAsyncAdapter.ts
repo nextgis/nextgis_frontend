@@ -3,7 +3,7 @@ import NgwConnector, {
   ResourceItem,
 } from '@nextgis/ngw-connector';
 import { WebMap } from '@nextgis/webmap';
-import { Type, applyMixins, defined } from '@nextgis/utils';
+import { Type, applyMixins } from '@nextgis/utils';
 
 import {
   ResourceAdapter,
