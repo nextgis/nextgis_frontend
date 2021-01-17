@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.4](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2021-01-17)
+
+
+### Features
+
+* **utils:** geom coordinates count ([0455afa](https://github.com/nextgis/nextgis_frontend/commit/0455afa68865ec1759499ece16e93fed00ea541f))
+* **webmap:** create webmap from TileJson ([9e84ea1](https://github.com/nextgis/nextgis_frontend/commit/9e84ea18653104030884f6fec76e7680436d71bd))
+
+
+### Performance Improvements
+
+* **leaflet:** abort image overlay request on view change ([d8613f0](https://github.com/nextgis/nextgis_frontend/commit/d8613f0be10e730d1ec9bb4ee0f2fa27c1687009))
+
+
+
+
+
 # [1.0.0-beta.3](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2020-12-19)
 
 
