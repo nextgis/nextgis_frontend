@@ -65,8 +65,12 @@ export async function createRasterAdapter({
             layers: String(resourceId),
             resourceId: resourceId,
           };
-          if (layerOptions.adapterOptions && defined(layerOptions.adapterOptions.setViewDelay)) {
-            layerAdapterOptions.setViewDelay = layerOptions.adapterOptions.setViewDelay;
+          if (
+            layerOptions.adapterOptions &&
+            defined(layerOptions.adapterOptions.setViewDelay)
+          ) {
+            layerAdapterOptions.setViewDelay =
+              layerOptions.adapterOptions.setViewDelay;
           }
           this.options = { ...this.options, ...layerAdapterOptions };
           // if (__DEV__) {

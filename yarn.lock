@@ -1262,10 +1262,10 @@
     glob-to-regexp "^0.3.0"
 
 "@nextgis/build-tools@file:packages/build-tools":
-  version "1.0.0-beta.2"
+  version "1.0.0-beta.3"
   dependencies:
     "@microsoft/api-extractor" "^7.12.0"
-    "@nextgis/eslint-config" "^1.0.0-beta.2"
+    "@nextgis/eslint-config" "^1.0.0-beta.3"
     "@rollup/plugin-alias" "^3.1.1"
     "@rollup/plugin-commonjs" "^16.0.0"
     "@rollup/plugin-image" "^2.0.5"
@@ -1641,10 +1641,10 @@
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.6.tgz#f4c7ec43e81b319a9815115031709f26987891f0"
   integrity sha512-3c+yGKvVP5Y9TYBEibGNR+kLtijnj7mYrXRg+WpFb2X9xm04g/DXYkfg4hmzJQosc9snFNUPkbYIhu+KAm6jJw==
 
-"@types/leaflet@^1.5.19":
-  version "1.5.19"
-  resolved "https://registry.yarnpkg.com/@types/leaflet/-/leaflet-1.5.19.tgz#f290e21fe7a4744d68bb4b0709e99ce490120e6e"
-  integrity sha512-ZAKqfvdU/+KFoCpf8aUba09F8mfSc8R2esq++Cha3E2DgwS5K/I/4eJ+0JylrVHZivgY7PSAeXFv/izP+81/MQ==
+"@types/leaflet@^1.5.21":
+  version "1.5.21"
+  resolved "https://registry.yarnpkg.com/@types/leaflet/-/leaflet-1.5.21.tgz#994c44f2bfc45744120f01924c8973c5e960e051"
+  integrity sha512-b+BOkwJDq6DK4m+jFUOHNCFinIkO4CF1MjnOwYgZFX+oElpYpXCCIsxZ3+zQWIRSLVUbRXvaQq2K935jGIyp7A==
   dependencies:
     "@types/geojson" "*"
 
@@ -1684,6 +1684,11 @@
   version "10.17.13"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.17.13.tgz#ccebcdb990bd6139cd16e84c39dc2fb1023ca90c"
   integrity sha512-pMCcqU2zT4TjqYFrWtYHKal7Sl30Ims6ulZ4UFXxI4xbtQqK/qqKwkDoBFCfooRqqmRu9vY3xaJRwxSh673aYg==
+
+"@types/node@^14.14.21":
+  version "14.14.21"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.21.tgz#d934aacc22424fe9622ebf6857370c052eae464e"
+  integrity sha512-cHYfKsnwllYhjOzuC5q1VpguABBeecUp24yFluHpn/BQaVxB1CuQ1FSRZCzrPxrkIfWISXV2LbeoBthLWg0+0A==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
@@ -9048,10 +9053,10 @@ ol-mapbox-style@^6.1.1:
     mapbox-to-css-font "^2.4.0"
     webfont-matcher "^1.1.0"
 
-ol@^6.4.3:
-  version "6.4.3"
-  resolved "https://registry.yarnpkg.com/ol/-/ol-6.4.3.tgz#2277bb583fe2848e4b2062f85f1c5136b4b0c1b2"
-  integrity sha512-JcoZ/VJE9cUoxfhpa2EFYH0AHFYty1x47aITsQgLkyvWIWWigWp1N9LBcCSlCuu2QkE+DutomI2oKfnFbQA/xw==
+ol@^6.5.0:
+  version "6.5.0"
+  resolved "https://registry.yarnpkg.com/ol/-/ol-6.5.0.tgz#d9cd59081ac34dc4caf0509c3f667748a8207a21"
+  integrity sha512-a5ebahrjF5yCPFle1rc0aHzKp/9A4LlUnjh+S3I+x4EgcvcddDhpOX3WDOs0Pg9/wEElrikHSGEvbeej2Hh4Ug==
   dependencies:
     ol-mapbox-style "^6.1.1"
     pbf "3.2.1"

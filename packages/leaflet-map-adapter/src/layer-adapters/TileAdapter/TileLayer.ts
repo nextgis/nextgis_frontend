@@ -1,8 +1,6 @@
-import { TileLayer as TL, TileLayerOptions, } from 'leaflet';
+import { TileLayer as TL, TileLayerOptions } from 'leaflet';
 
 import { makeRemote } from '../RemoteTileLayer';
-
-
 
 export type TileLayerOptionsExtended = TileLayerOptions & {
   headers: Record<string, any>;
