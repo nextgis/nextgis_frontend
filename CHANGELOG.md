@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.4](https://github.com/nextgis/nextgisweb_frontend/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2021-01-17)
+
+
+### Bug Fixes
+
+* **leaflet:** remove forgotten console logs ([4954cde](https://github.com/nextgis/nextgisweb_frontend/commit/4954cdebbb5c4859126c9ac5d1599b7d8ec04f78))
+
+
+### Features
+
+* add setViewDelay options to control map update ([3c50948](https://github.com/nextgis/nextgisweb_frontend/commit/3c50948d8ce31d79879cf566f827cee78fc1af31))
+* **tree:** TreeHelper ([4bd96b9](https://github.com/nextgis/nextgisweb_frontend/commit/4bd96b994beab84283dc79398ee9a9b4b98a7790))
+* **utils:** geom coordinates count ([0455afa](https://github.com/nextgis/nextgisweb_frontend/commit/0455afa68865ec1759499ece16e93fed00ea541f))
+* **webmap:** create webmap from TileJson ([9e84ea1](https://github.com/nextgis/nextgisweb_frontend/commit/9e84ea18653104030884f6fec76e7680436d71bd))
+* **webmap:** get zoom from tilejson ([80ded2f](https://github.com/nextgis/nextgisweb_frontend/commit/80ded2f2a908b54c046dd4e4f01046edd88e398c))
+
+
+### Performance Improvements
+
+* **leaflet:** abort image overlay request on view change ([d8613f0](https://github.com/nextgis/nextgisweb_frontend/commit/d8613f0be10e730d1ec9bb4ee0f2fa27c1687009))
+* **leaflet:** abort xhr tile loading on setView ([f7e9ed0](https://github.com/nextgis/nextgisweb_frontend/commit/f7e9ed044ed39fbc95c73ad381560e692dda6046))
+* **leaflet:** setViewDelay for tile layer ([229ef92](https://github.com/nextgis/nextgisweb_frontend/commit/229ef9211a9aac27b5d7ca86f04118e291579d8b))
+
+
+
+
+
 # [1.0.0-beta.3](https://github.com/nextgis/nextgisweb_frontend/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2020-12-19)
 
 
