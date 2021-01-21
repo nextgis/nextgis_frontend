@@ -106,6 +106,12 @@ Download and include with a script tag. \[Package\] will be registered as a glob
 </script>
 ```
 
+```html
+<script type="module">
+  import Package from 'https://unpkg.com/@nextgis/[package]/lib/[package].esm-browser.prod.js';
+</script>
+```
+
 #### CDN
 
 unpkg
@@ -123,7 +129,16 @@ jsdelivr
 <script src="https://cdn.jsdelivr.net/npm/@nextgis/[package]@[version]/lib/[file]"></script>
 ```
 
-We recommend linking to a specific version number that you can update manually:
+`[file]` - `[package].[format].prod.js`
+
+`[format]`:
+
+- `global` - browser script
+- `cjs` - node module
+- `esm-browser` - browser module
+- `esm-bundler` - module for bundler systems
+
+We recommend linking to a specific `[version]` number that you can update manually
 
 ### In Node.js
 
