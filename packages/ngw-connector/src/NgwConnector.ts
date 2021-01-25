@@ -1,5 +1,5 @@
 import CancelablePromise from '@nextgis/cancelable-promise';
-import { DeepPartial } from '@nextgis/utils';
+import { DeepPartial, fixUrlStr } from '@nextgis/utils';
 import { EventEmitter } from 'events';
 
 import { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
@@ -9,7 +9,6 @@ import {
   GetRequestItemsResponseMap,
   RequestOptions,
   Params,
-  LoadingQueue,
   UserInfo,
   Credentials,
   PyramidRoute,
@@ -47,9 +46,6 @@ export class NgwConnector {
 
   private routeStr = '/api/component/pyramid/route';
   private route?: PyramidRoute;
-  private _loadingQueue: { [name: string]: LoadingQueue } = {};
-  private _loadingStatus: { [url: string]: boolean } = {};
-  private _queriesCache: { [url: string]: any } = {};
 
   constructor(public options: NgwConnectorOptions) {
     if (this.options.route) {
@@ -136,8 +132,6 @@ export class NgwConnector {
    */
   logout(): void {
     removeConnector(this);
-    this._rejectLoadingQueue();
-    this._loadingStatus = {};
     this.options.auth = undefined;
     this.route = undefined;
     this.user = undefined;
@@ -313,7 +307,6 @@ export class NgwConnector {
   ): CancelablePromise<PostRequestItemsResponseMap[K]> {
     options = options || {};
     options.method = 'POST';
-    options.nocache = true;
     return this.apiRequest<K, PostRequestItemsResponseMap>(
       name,
       params,
@@ -334,7 +327,6 @@ export class NgwConnector {
   ): CancelablePromise<GetRequestItemsResponseMap[K]> {
     options = options || {};
     options.method = 'GET';
-    options.nocache = true;
     return this.apiRequest<K, GetRequestItemsResponseMap>(
       name,
       params,
@@ -355,7 +347,6 @@ export class NgwConnector {
   ): CancelablePromise<PatchRequestItemsResponseMap[K]> {
     options = options || {};
     options.method = 'PATCH';
-    options.nocache = true;
     return this.apiRequest<K, PatchRequestItemsResponseMap>(
       name,
       params,
@@ -376,7 +367,6 @@ export class NgwConnector {
   ): CancelablePromise<PutRequestItemsResponseMap[K]> {
     options = options || {};
     options.method = 'PUT';
-    options.nocache = true;
     return this.apiRequest<K, PutRequestItemsResponseMap>(
       name,
       params,
@@ -397,7 +387,6 @@ export class NgwConnector {
   ): CancelablePromise<DeleteRequestItemsResponseMap[K]> {
     options = options || {};
     options.method = 'DELETE';
-    options.nocache = true;
     return this.apiRequest<K, DeleteRequestItemsResponseMap>(
       name,
       params,
@@ -422,32 +411,8 @@ export class NgwConnector {
         url = template(url, params);
       }
       // remove double slash
-      url = url.replace(/([^:]\/)\/+/g, '$1');
-      if (options.cache && this._queriesCache[url]) {
-        return this._queriesCache[url];
-      }
-      if (!this._loadingStatus[url] || options.nocache) {
-        this._loadingStatus[url] = true;
-        return this._loadData(url, options)
-          .then((data) => {
-            this._loadingStatus[url] = false;
-            if (options.cache) {
-              this._queriesCache[url] = data;
-            }
-            this._executeLoadingQueue(url, data);
-            return data;
-          })
-          .catch((er) => {
-            this._loadingStatus[url] = false;
-            this._executeLoadingQueue(url, er, true);
-            throw er;
-          });
-      } else {
-        this._loadingStatus[url] = false;
-        return new CancelablePromise((resolve, reject) => {
-          this._setLoadingQueue(url, resolve, reject);
-        });
-      }
+      url = fixUrlStr(url);
+      return this._loadData(url, options);
     } else {
       throw new Error('No `url` parameter set for option ' + name);
     }
@@ -558,62 +523,6 @@ export class NgwConnector {
    */
   deleteResource(resource: ResourceDefinition): CancelablePromise<void> {
     return this.resources.delete(resource);
-  }
-
-  /**
-   * @internal
-   */
-  protected _setLoadingQueue(
-    name: string,
-    resolve: (...args: any[]) => any,
-    reject: (...args: any[]) => any
-  ): void {
-    this._loadingQueue[name] = this._loadingQueue[name] || {
-      name,
-      waiting: [],
-    };
-    this._loadingQueue[name].waiting.push({
-      resolve,
-      reject,
-      timestamp: new Date(),
-    });
-  }
-
-  /**
-   * @internal
-   */
-  protected _rejectLoadingQueue(): void {
-    for (const q in this._loadingQueue) {
-      const queue = this._loadingQueue[q];
-      queue.waiting.forEach((x) => {
-        x.reject();
-      });
-      delete this._loadingQueue[q];
-    }
-  }
-
-  /**
-   * @internal
-   */
-  protected _executeLoadingQueue(
-    name: string,
-    data: unknown,
-    isError?: boolean
-  ): void {
-    const queue = this._loadingQueue[name];
-    if (queue) {
-      for (let fry = 0; fry < queue.waiting.length; fry++) {
-        const wait = queue.waiting[fry];
-        if (isError) {
-          if (wait.reject) {
-            wait.reject();
-          }
-        } else {
-          wait.resolve(data);
-        }
-      }
-      queue.waiting = [];
-    }
   }
 
   /**

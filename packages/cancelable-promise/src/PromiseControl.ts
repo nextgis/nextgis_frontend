@@ -58,6 +58,18 @@ export class PromiseControl {
     }
   }
 
+  waitFunc<T>(
+    func: () => any,
+    name = ''
+  ): CancelablePromise<T> {
+    name = name || func.name;
+    const exist = this.get(name);
+    if (exist) {
+      return exist;
+    }
+    return this.add(func(), name);
+  }
+
   WaitForMe(name: string | symbol = ''): MethodDecorator {
     const get = this.get.bind(this);
     const add = this.add.bind(this);

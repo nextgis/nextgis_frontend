@@ -137,10 +137,6 @@ export interface RequestOptions<M = RequestMethods> {
   file?: File;
   responseType?: 'json' | 'blob';
   onProgress?: (percentComplete: number, event: ProgressEvent) => void;
-  /** Save response data to return for similar query url */
-  cache?: boolean;
-  /** TODO: rename. Do not wait while query with equal url is completed */
-  nocache?: boolean;
 }
 
 export type RequestItemAdditionalParams = { [name: string]: any } & {
