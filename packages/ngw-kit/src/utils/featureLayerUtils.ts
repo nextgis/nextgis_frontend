@@ -21,7 +21,7 @@ import {
   GetNgwLayerItemsOptions,
   NgwFeatureRequestOptions,
 } from '../interfaces';
-import { JsonMap } from '@nextgis/utils';
+import { defined, JsonMap } from '@nextgis/utils';
 import { fetchNgwLayerItem } from './fetchNgwLayerItem';
 import { fetchNgwLayerFeature } from './fetchNgwLayerFeature';
 import { fetchNgwLayerFeatureCollection } from './fetchNgwLayerFeatureCollection';
@@ -111,13 +111,16 @@ export function updateItemRequestParam(
   params: FeatureRequestParams,
   options: NgwFeatureRequestOptions
 ): void {
-  const { extensions, geom, fields } = options;
+  const { extensions, geom, fields, srs } = options;
   params.extensions = extensions ? extensions.join(',') : '';
   if (fields !== undefined) {
     params.fields = Array.isArray(fields) ? fields.join(',') : '';
   }
   if (geom !== undefined) {
     params.geom = geom ? 'yes' : 'no';
+  }
+  if (defined(srs)) {
+    params.srs = srs;
   }
 }
 
