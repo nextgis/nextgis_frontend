@@ -33,15 +33,16 @@ export class ResourcesControl {
     resource: ResourceDefinition | DeepPartial<Resource>,
     requestOptions?: RequestOptions
   ): CancelablePromise<ResourceItem | undefined> {
-    if (typeof resource === 'string') {
-      return this._fetchResourceBy({ keyname: resource }, requestOptions);
-    } else if (typeof resource === 'number') {
-      return this._fetchResourceById(resource, requestOptions);
-    } else if (isObject(resource)) {
-      return this._fetchResourceBy(resource, requestOptions);
-    }
-
-    return CancelablePromise.resolve(undefined);
+    return promiseControl.waitFunc(() => {
+      if (typeof resource === 'string') {
+        return this._fetchResourceBy({ keyname: resource }, requestOptions);
+      } else if (typeof resource === 'number') {
+        return this._fetchResourceById(resource, requestOptions);
+      } else if (isObject(resource)) {
+        return this._fetchResourceBy(resource, requestOptions);
+      }
+      return CancelablePromise.resolve(undefined);
+    }, String(resource));
   }
 
   getOneOrFail(
