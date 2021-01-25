@@ -24,6 +24,9 @@ export abstract class ResourceStore<
 
   resources: { [key in ResourceDef]?: number } = {};
 
+  /**
+   * @deprecated
+   */
   foreignResources: { [key in ResourceDef]: ForeignResource } = {};
 
   resourceItems: ResourceStoreItem<P>[] = [];
@@ -112,7 +115,7 @@ export abstract class ResourceStore<
   @Action({ commit: 'UPDATE_RESOURCES' })
   async getResources(): Promise<Record<ResourceDef, number>> {
     const promises: Array<Promise<any>> = [];
-    const resourceDefs = [this.resource, ...Object.keys(this.foreignResources)];
+    const resourceDefs = [this.resource]; // ...Object.keys(this.foreignResources)
     if (!this._promises.getResources) {
       resourceDefs.forEach((resourceDef) => {
         if (!(resourceDef in this.resources)) {
