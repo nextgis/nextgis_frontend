@@ -7,7 +7,7 @@ export async function getCompanyLogo(
 ): Promise<HTMLElement | undefined> {
   const settings = await connector.get(
     'pyramid.settings',
-    { cache: true },
+    null,
     { component: 'pyramid' }
   );
   if (settings && settings.company_logo && settings.company_logo.enabled) {

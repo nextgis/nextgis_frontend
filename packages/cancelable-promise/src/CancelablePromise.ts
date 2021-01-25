@@ -69,6 +69,7 @@ let ID = 0;
 export class CancelablePromise<T = any> implements Promise<T> {
   static CancelError = CancelError;
   static TimeoutError = TimeoutError;
+  static PromiseControl = PromiseControl;
 
   readonly [Symbol.toStringTag]: string;
   readonly id = ID++;
