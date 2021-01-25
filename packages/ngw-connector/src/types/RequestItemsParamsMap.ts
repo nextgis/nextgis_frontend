@@ -66,4 +66,13 @@ export interface RequestItemsParamsMap {
   'webmap.display': { id: number };
   'wfsserver.wfs': { id: number };
   'wmsserver.wms': { id: number };
+  'spatial_ref_sys.collection': null;
+  'spatial_ref_sys.convert': null;
+  'spatial_ref_sys.geom_area': { id: number };
+  'spatial_ref_sys.geom_length': { id: number };
+  'spatial_ref_sys.geom_transform': { id: number };
+  'spatial_ref_sys.get': { id: number };
+  'srs.create': null;
+  'srs.delete': { id: number };
+  'srs.edit': { id: number };
 }
