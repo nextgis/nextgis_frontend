@@ -373,6 +373,7 @@ export interface NgwFeatureRequestOptions<
 > extends FilterOptions<P> {
   extensions?: Extensions[] | string[] | null | false;
   geom?: boolean;
+  srs?: number;
 }
 
 export interface GetNgwLayerItemsOptions {
