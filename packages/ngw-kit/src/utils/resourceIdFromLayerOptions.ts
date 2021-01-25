@@ -37,7 +37,7 @@ export async function resourceIdFromLayerOptions(
     }
   }
   if (!resourceId && keyname) {
-    const resourceItem = await connector.getResourceByKeyname(keyname);
+    const resourceItem = await connector.getResource(keyname);
     if (resourceItem) {
       resourceId = resourceItem.resource.id;
     }
