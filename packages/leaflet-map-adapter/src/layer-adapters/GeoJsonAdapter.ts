@@ -29,8 +29,9 @@ import {
   Map,
   Layer,
   LeafletMouseEvent,
+  LatLng,
 } from 'leaflet';
-import { GeoJsonObject, Feature } from 'geojson';
+import { GeoJsonObject, Feature, Point } from 'geojson';
 import { BaseAdapter } from './BaseAdapter';
 import {
   detectType,
@@ -354,12 +355,14 @@ export class GeoJsonAdapter
 
     if (typeof paint === 'function') {
       if (type === 'point') {
-        lopt = {
-          pointToLayer: (feature, latLng) => {
-            const iconOpt = paint(feature);
-            const pointToLayer = this.createPaintToLayer(iconOpt as IconPaint);
-            return pointToLayer(feature, latLng);
-          },
+        // TODO: fix types (@geoman-io/leaflet-geoman-free)
+        (lopt as any).pointToLayer = (
+          feature: Feature<Point, any>,
+          latLng: LatLng
+        ) => {
+          const iconOpt = paint(feature);
+          const pointToLayer = this.createPaintToLayer(iconOpt as IconPaint);
+          return pointToLayer(feature, latLng);
         };
       } else {
         lopt = {
@@ -514,7 +517,7 @@ export class GeoJsonAdapter
       };
     }
     if (type === 'point') {
-      geoJsonOptions.pointToLayer = this.createPaintToLayer(
+      (geoJsonOptions as any).pointToLayer = this.createPaintToLayer(
         paintOptions as IconPaint
       );
     } else if (type === 'line') {
