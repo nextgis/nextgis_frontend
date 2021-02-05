@@ -46,6 +46,7 @@ import { getCameraFocus } from './utils/getCameraFocus';
 import { whenSampleTerrainMostDetailed } from './utils/whenSampleTerrainMostDetailed';
 import { cartesian3ToLngLat } from './utils/cartesian3ToLngLat';
 import { CesiumAdapterMapClickEvent, CesiumMapClickEvent } from './interfaces';
+import { MeasureControl } from './controls/MeasureControl';
 
 type Layer = any;
 type Control = any;
@@ -76,6 +77,7 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
   static controlAdapters: Record<string, Type<MapControl>> = {
     ZOOM: ControlContainer.controls.ZOOM,
     // ATTRIBUTION: Attribution
+    MEASURE: MeasureControl,
   };
 
   layerAdapters = CesiumMapAdapter.layerAdapters;
