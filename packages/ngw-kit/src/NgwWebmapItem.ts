@@ -126,7 +126,7 @@ export class NgwWebmapItem extends Item<ItemOptions> {
 
   initItem(item: TreeGroup | TreeLayer): Promise<void> {
     const i = item;
-    // let newLayer = item._layer;
+    const options: Partial<ImageAdapterOptions> = this.getItemOptions(item);
     const setNewLayer = (l: LayerAdapter) => {
       i._layer = l;
       this.layer = l;
@@ -134,18 +134,12 @@ export class NgwWebmapItem extends Item<ItemOptions> {
       if (enabled) {
         this.properties.set('visibility', true);
       }
-      // if (this.properties && item.item_type === 'layer' && item.layer_enabled) {
-      //   this.properties.property('visibility').set(true);
-      // }
 
-      if (opacity !== undefined) {
-        this.webMap.setLayerOpacity(l, opacity);
+      if (options.opacity !== undefined) {
+        this.webMap.setLayerOpacity(l, options.opacity);
       }
     };
 
-    const transparency = item.item_type === 'layer' && item.layer_transparency;
-    const opacity =
-      typeof transparency === 'number' ? (100 - transparency) / 100 : undefined;
     if (item.item_type === 'group' || item.item_type === 'root') {
       if (item.children && item.children.length) {
         this.getChildren(item).forEach((x) => {
@@ -162,46 +156,14 @@ export class NgwWebmapItem extends Item<ItemOptions> {
       return Promise.resolve();
     } else {
       let adapter: LayerAdapterDefinition | undefined;
-      const options: Partial<ImageAdapterOptions> = {
-        visibility: false,
-        headers: this.options.headers,
-        crossOrigin: this.options.crossOrigin,
-        setViewDelay: this.options.setViewDelay,
-        params: { resource: this.item.resourceId },
-      };
-      if (this.options.order) {
-        const subOrder =
-          this.options.drawOrderEnabled && 'draw_order_position' in item
-            ? this._rootDescendantsCount - item.draw_order_position
-            : this.id;
-        options.order = Number((this.options.order | 0) + '.' + subOrder);
-      }
       if (item.item_type === 'layer') {
         adapter = item.adapter || item.layer_adapter.toUpperCase();
-        const maxZoom = item.layer_max_scale_denom
-          ? this._mapScaleToZoomLevel(item.layer_max_scale_denom)
-          : this.webMap.options.maxZoom;
-        const minZoom = item.layer_min_scale_denom
-          ? this._mapScaleToZoomLevel(item.layer_min_scale_denom)
-          : this.webMap.options.minZoom;
-        objectAssign(options, {
-          updateWmsParams: item.updateWmsParams,
-          url: item.url,
-          headers: this.options.headers,
-          ratio: this.options.ratio,
-          maxZoom,
-          minZoom,
-          minScale: item.layer_min_scale_denom,
-          maxScale: item.layer_max_scale_denom,
-        });
       } else if (NgwWebmapItem.GetAdapterFromLayerType[item.item_type]) {
         const getAdapter =
           NgwWebmapItem.GetAdapterFromLayerType[item.item_type];
         adapter = getAdapter(item, options, this.webMap, this.connector);
       }
-      if (opacity !== undefined) {
-        options.opacity = opacity;
-      }
+
       if (adapter) {
         return this.webMap.addLayer(adapter, options).then((newLayer) => {
           setNewLayer(newLayer);
@@ -222,6 +184,48 @@ export class NgwWebmapItem extends Item<ItemOptions> {
     if (this.item.item_type === 'layer') {
       // console.log(this.item);
     }
+  }
+
+  protected getItemOptions(item: TreeGroup | TreeLayer): Record<string, any> {
+    const transparency = item.item_type === 'layer' && item.layer_transparency;
+    const opacity =
+      typeof transparency === 'number' ? (100 - transparency) / 100 : undefined;
+    const options: Partial<ImageAdapterOptions> = {
+      visibility: false,
+      headers: this.options.headers,
+      crossOrigin: this.options.crossOrigin,
+      setViewDelay: this.options.setViewDelay,
+      params: { resource: this.item.resourceId },
+    };
+    if (this.options.order) {
+      const subOrder =
+        this.options.drawOrderEnabled && 'draw_order_position' in item
+          ? this._rootDescendantsCount - item.draw_order_position
+          : this.id;
+      options.order = Number((this.options.order | 0) + '.' + subOrder);
+    }
+    if (item.item_type === 'layer') {
+      const maxZoom = item.layer_max_scale_denom
+        ? this._mapScaleToZoomLevel(item.layer_max_scale_denom)
+        : this.webMap.options.maxZoom;
+      const minZoom = item.layer_min_scale_denom
+        ? this._mapScaleToZoomLevel(item.layer_min_scale_denom)
+        : this.webMap.options.minZoom;
+      objectAssign(options, {
+        updateWmsParams: item.updateWmsParams,
+        url: item.url,
+        headers: this.options.headers,
+        ratio: this.options.ratio,
+        maxZoom,
+        minZoom,
+        minScale: item.layer_min_scale_denom,
+        maxScale: item.layer_max_scale_denom,
+      });
+    }
+    if (opacity !== undefined) {
+      options.opacity = opacity;
+    }
+    return options;
   }
 
   protected getChildren(item: TreeGroup): (TreeGroup | TreeLayer)[] {

@@ -1,5 +1,12 @@
 import { Tileset3DAdapterOptions, LngLatBoundsArray } from '@nextgis/webmap';
-import { Cesium3DTileset, Matrix4, Cartesian3, Cartographic } from 'cesium';
+import {
+  Cesium3DTileset,
+  Matrix4,
+  Cartesian3,
+  Cartographic,
+  Cesium3DTileStyle,
+  Color,
+} from 'cesium';
 import { debugLog } from '@nextgis/utils';
 import { getExtentFromBoundingSphere } from '../utils/getExtentFromBoundingSphere';
 import { makeUrl } from '../utils/makeUrl';
@@ -62,6 +69,18 @@ export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
     });
     layer.show = false;
 
+    if (
+      this.options.paint &&
+      'color' in this.options.paint &&
+      typeof this.options.paint.color === 'string'
+    ) {
+      layer.style = new Cesium3DTileStyle({
+        // use lead toCssColorString to format color as rbg(,,,) or rgba(,,,,) string
+        color: Color.fromCssColorString(
+          this.options.paint.color
+        ).toCssColorString(),
+      });
+    }
     try {
       const tileset = await layer.readyPromise;
       this.layer = tileset;
