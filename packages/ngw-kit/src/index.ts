@@ -69,7 +69,8 @@ export * from './utils/fetchNgwExtent';
 export * from './utils/resourceIdFromLayerOptions';
 export * from './utils/parseDateFromNgw';
 
-export * from './adapters/createBasemapWebmapItemAdapter';
+export * from './adapters/createOnFirstShowNgwAdapter';
+export * from './adapters/createOnFirstShowAdapter';
 export * from './adapters/createGeoJsonAdapter';
 export * from './adapters/createRasterAdapter';
 

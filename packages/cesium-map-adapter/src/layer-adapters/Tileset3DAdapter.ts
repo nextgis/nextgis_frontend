@@ -20,7 +20,7 @@ export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
   async addLayer(
     opt: Tileset3DAdapterOptions
   ): Promise<Cesium3DTileset | undefined> {
-    this.options = { ...opt };
+    this.options = { ...this.options, ...opt };
     const tileset = await this._addLayer();
     return tileset;
   }

@@ -16,7 +16,7 @@ import StrictEventEmitter from 'strict-event-emitter-types';
 import { EventEmitter } from 'events';
 
 import { NgwWebmapItem } from './NgwWebmapItem';
-import { createOnFirstShowAdapter } from './adapters/createBasemapWebmapItemAdapter';
+import { createOnFirstShowNgwAdapter } from './adapters/createOnFirstShowNgwAdapter';
 import { getLayerAdapterOptions } from './utils/getLayerAdapterOptions';
 import { updateImageParams } from './utils/utils';
 
@@ -194,7 +194,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
     const webMap = this.options.webMap;
     let enabledAlreadySet = false;
     baseWebmap.basemaps.forEach((x) => {
-      createOnFirstShowAdapter({
+      createOnFirstShowNgwAdapter({
         webMap,
         connector: this.options.connector,
         item: x,

@@ -44,7 +44,7 @@ export async function fetchNgwResourceExtent(
     return getNgwWebmapExtent(item.webmap);
   } else {
     const resource = item.resource;
-    if (resource.cls.indexOf('style') !== -1) {
+    if (resource.cls && resource.cls.indexOf('style') !== -1) {
       return connector.getResource(resource.parent.id).then((res) => {
         if (res) {
           return fetchNgwLayerExtent(res.resource.id, connector);
