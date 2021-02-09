@@ -11,7 +11,7 @@ export class TerrainAdapter extends BaseAdapter<TileAdapterOptions, Layer> {
   private _layer?: Layer;
 
   addLayer(opt: TileAdapterOptions): CesiumTerrainProvider {
-    this.options = { ...opt };
+    this.options = { ...this.options, ...opt };
     const url = makeUrl(this.options.url, this.options.headers);
     const layer = new CesiumTerrainProvider({
       url,
