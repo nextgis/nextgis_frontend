@@ -12,7 +12,7 @@ export class TileAdapter extends BaseAdapter<TileAdapterOptions, Layer> {
   private _added = false;
 
   addLayer(opt: TileAdapterOptions): ImageryLayer {
-    this.options = { ...opt };
+    this.options = { ...this.options, ...opt };
     const url = makeUrl(this.options.url, this.options.headers);
     const imageProviderOpt: UrlTemplateImageryProvider.ConstructorOptions = {
       url,
