@@ -70,13 +70,13 @@ export class GeoJsonAdapter
     this.watchHeight();
   };
 
-  addLayer(options: AdapterOptions): GeoJsonDataSource {
-    this.options = { ...options };
+  addLayer(opt: AdapterOptions): GeoJsonDataSource {
+    this.options = { ...this.options, ...opt };
     this._paint = this.options.paint;
-    const source = new GeoJsonDataSource(options.id);
+    const source = new GeoJsonDataSource(opt.id);
     this._source = source;
-    if (options.data) {
-      this.addData(options.data);
+    if (opt.data) {
+      this.addData(opt.data);
     }
     return source;
   }

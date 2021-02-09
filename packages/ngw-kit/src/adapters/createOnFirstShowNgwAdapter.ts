@@ -15,7 +15,7 @@ interface CreateOnFirstShowAdapterOptions {
   idPrefix?: string;
 }
 
-export async function createOnFirstShowAdapter({
+export async function createOnFirstShowNgwAdapter({
   webMap,
   connector,
   item,
