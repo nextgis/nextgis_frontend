@@ -41,8 +41,24 @@ export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
   }
 
   showLayer(): void {
-    if (this.layer) {
-      this.layer.show = true;
+    const tileset = this.layer;
+    if (tileset) {
+      tileset.show = true;
+      if (
+        this.options.paint &&
+        'color' in this.options.paint &&
+        this.options.paint.color &&
+        typeof this.options.paint.color === 'string'
+      ) {
+        const colorFromCss = Color.fromCssColorString(this.options.paint.color);
+        if (colorFromCss) {
+          // use lead toCssColorString to format color as rbg(,,,) or rgba(,,,,) stringCssColorString();
+          const color = colorFromCss.toCssColorString();
+          tileset.style = new Cesium3DTileStyle({
+            color,
+          });
+        }
+      }
     }
     super.showLayer();
   }
@@ -69,21 +85,10 @@ export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
     });
     layer.show = false;
 
-    if (
-      this.options.paint &&
-      'color' in this.options.paint &&
-      typeof this.options.paint.color === 'string'
-    ) {
-      layer.style = new Cesium3DTileStyle({
-        // use lead toCssColorString to format color as rbg(,,,) or rgba(,,,,) string
-        color: Color.fromCssColorString(
-          this.options.paint.color
-        ).toCssColorString(),
-      });
-    }
     try {
       const tileset = await layer.readyPromise;
       this.layer = tileset;
+
       this._extent = this._calculateExtent();
       this.map.scene.primitives.add(this.layer);
       this.watchHeight();
