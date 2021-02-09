@@ -328,7 +328,9 @@ export interface TileAdapterOptions extends RasterAdapterOptions {
 /**
  * @public
  */
-export interface Tileset3DAdapterOptions extends RasterAdapterOptions {
+export interface Tileset3DAdapterOptions
+  extends RasterAdapterOptions,
+    VectorAdapterOptions {
   useTerrainHeight?: boolean;
   heightOffset?: number;
 }
