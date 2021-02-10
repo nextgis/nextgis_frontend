@@ -52,7 +52,9 @@ export async function createOnFirstShowAdapter({
           const adapter = new Adapter(webMap.mapAdapter.map, {
             ...adapterOptions,
           });
-          const realLayer: MainLayerAdapter = await adapter.addLayer({});
+          const realLayer: MainLayerAdapter = await adapter.addLayer({
+            order: this.options.order,
+          });
           Object.assign(adapter.options, adapterOptions);
           adapter.layer = realLayer;
           if (this._removed) {
