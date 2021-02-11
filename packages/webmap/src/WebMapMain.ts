@@ -556,7 +556,11 @@ export class WebMapMain<
           const val = state.parse(str);
           // state.setValue(val);
           this._initMapState[state.name] = val;
-          this.options[state.name] = val;
+          Object.defineProperty(this.options, state.name, {
+            value: val,
+            configurable: true,
+            enumerable: true,
+          });
           break;
         }
       }
