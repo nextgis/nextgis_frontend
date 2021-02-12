@@ -148,13 +148,11 @@ function createConfig(format, output, plugins = []) {
   if (format !== 'cjs') {
     [
       require('@rollup/plugin-node-resolve').nodeResolve({
-        preferBuiltins: true,
+        preferBuiltins: false,
       }),
       require('@rollup/plugin-commonjs')({
         sourceMap: false,
       }),
-      require('rollup-plugin-node-builtins')(),
-      require('rollup-plugin-node-globals')(),
     ].forEach((x) => nodePlugins.push(x));
   }
 

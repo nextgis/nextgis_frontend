@@ -3,7 +3,7 @@ const webpack = require('webpack');
 let alias = {};
 try {
   const { getAliases } = require('../scripts/aliases');
-  alias = getAliases();
+  alias = { ...alias, ...getAliases() };
 } catch (er) {
   // ignore
 }
@@ -29,8 +29,12 @@ module.exports = (opt = { coverage: false }) => {
       use: [{ loader: 'css-loader', options: { sourceMap: true } }],
     },
     {
-      test: /\.(jpe?g|png|ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
-      use: 'base64-inline-loader?limit=1000&name=[name].[ext]',
+      test: /\.(png|svg|jpg|jpeg|gif)$/i,
+      type: 'asset/resource',
+    },
+    {
+      test: /\.(woff|woff2|eot|ttf|otf)$/i,
+      type: 'asset/resource',
     },
   ];
   if (opt.coverage) {
@@ -50,12 +54,34 @@ module.exports = (opt = { coverage: false }) => {
     resolve: {
       extensions: ['.js', '.ts', '.json'],
       alias,
+      fallback: { util: require.resolve('util/') },
       // modules: ['node_modules'],
     },
     module: {
       rules,
     },
+    stats: {
+      modules: false,
+      colors: true,
+    },
+    optimization: {
+      runtimeChunk: 'single',
+      splitChunks: {
+        chunks: 'all',
+        minSize: 0,
+        cacheGroups: {
+          commons: {
+            name: 'commons',
+            chunks: 'initial',
+            minChunks: 1,
+          },
+        },
+      },
+    },
     plugins: [
+      new webpack.ProvidePlugin({
+        process: 'process/browser',
+      }),
       new webpack.DefinePlugin({
         __BROWSER__: true,
         __DEV__: true,

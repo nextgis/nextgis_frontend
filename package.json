@@ -19,10 +19,10 @@
     "prerelease": "npm run test:build && lerna version --conventional-commits --conventional-prerelease -m \"chore(release): publish %s\" --no-push --create-release github"
   },
   "devDependencies": {
-    "@types/node": "^14.11.5",
-    "@microsoft/api-documenter": "^7.9.7",
+    "@types/node": "^14.14.26",
+    "@microsoft/api-documenter": "^7.12.7",
     "lerna": "^3.22.1",
-    "lint-staged": "^10.4.0",
+    "lint-staged": "^10.5.4",
     "rimraf": "^3.0.2",
     "yorkie": "^2.0.0"
   },

@@ -1,9 +1,7 @@
 import { Vue, Component, Watch } from 'vue-property-decorator';
 import HtmlExample from './components/Examples/HtmlExample/HtmlExample.vue';
 import Readme from './components/Readme/Readme.vue';
-import ApiComponent from './components/ApiComponent/ApiComponent.vue';
 import Logo from './components/Logo/Logo.vue';
-import { ApiItem } from './components/ApiComponent/ApiItem';
 
 export interface Package {
   name: string;
@@ -22,7 +20,6 @@ export interface Item {
   model?: boolean;
   component?: any;
   icon?: string;
-  api?: ApiItem;
   priority?: number;
   ngwMaps?: Package[];
   _parent?: Item;
@@ -37,8 +34,6 @@ export class MainPage extends Vue {
   open: string[] = [];
 
   drawer = null;
-
-  api?: ApiItem;
 
   search: string | null = null;
 
@@ -137,33 +132,12 @@ export class MainPage extends Vue {
 
   private async _build() {
     // this.api = this.$store.state.api.api;
-    const api = await this.$store.dispatch('api/loadApi');
-    this.api = api as ApiItem;
+
     const prepareItem = (conf: Item, _parent?) => {
       const item: Item = { ...conf };
       if (conf.children) {
         item.model = true;
         item.children = conf.children.map((i) => prepareItem(i, item));
-
-        const apiModule = this.$store.getters['api/getApiModule'](item.name);
-        if (apiModule) {
-          const apiItem: Item = {
-            name: 'API',
-            id: item.id + '-api',
-            page: 'api',
-            component: ApiComponent,
-            icon: 'mdi-power-plug',
-            api: apiModule,
-          };
-          const readmeIndex = item.children.findIndex(
-            (x) => x.page === 'readme'
-          );
-          if (readmeIndex !== -1) {
-            item.children.splice(readmeIndex + 1, 0, apiItem);
-          } else {
-            item.children.unshift(apiItem);
-          }
-        }
       } else {
         item._parent = _parent;
       }
