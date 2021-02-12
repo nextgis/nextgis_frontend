@@ -51,27 +51,18 @@ module.exports = (env, argv) => {
       },
     },
     {
-      test: /\.(png|jpg|gif|svg)$/,
-      loader: 'file-loader',
-      options: {
-        name: '[name].[ext]?[hash]',
-      },
-    },
-    {
       test: /\.(html)$/,
       use: {
         loader: 'html-loader',
       },
     },
     {
-      test: /\.(png|woff|woff2|eot|ttf)$/,
-      use: {
-        loader: 'url-loader',
-        options: {
-          limit: 50000,
-          name: './fonts/[name].[ext]', // Output below ./fonts
-        },
-      },
+      test: /\.(png|svg|jpg|jpeg|gif)$/i,
+      type: 'asset/resource',
+    },
+    {
+      test: /\.(woff|woff2|eot|ttf|otf)$/i,
+      type: 'asset/resource',
     },
     {
       test: /\.css$/i,
@@ -120,7 +111,7 @@ module.exports = (env, argv) => {
     {
       mode: argv.mode || 'development',
 
-      devtool: isProd ? '#source-map' : 'eval-source-map',
+      devtool: isProd ? 'source-map' : 'eval-source-map',
 
       entry,
 
@@ -141,13 +132,9 @@ module.exports = (env, argv) => {
           vue$: 'vue/dist/vue.esm.js',
         },
       },
+
       devServer: {
-        contentBase: './dist',
         historyApiFallback: true,
-        noInfo: true,
-      },
-      performance: {
-        hints: false,
       },
 
       optimization: {
