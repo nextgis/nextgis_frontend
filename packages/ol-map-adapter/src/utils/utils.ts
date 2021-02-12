@@ -8,7 +8,7 @@ import { Options as TextOptions } from 'ol/style/Text';
 import IconAnchorUnits from 'ol/style/IconAnchorUnits';
 import Icon, { Options as IconOptions } from 'ol/style/Icon';
 
-import { VectorAdapterLayerType } from '@nextgis/webmap';
+import { GeoJsonAdapterOptions, VectorAdapterLayerType } from '@nextgis/webmap';
 import {
   GeometryPaint,
   Paint,
@@ -129,9 +129,13 @@ export function styleFunction(
   }
 }
 
-export function labelStyleFunction(type: VectorAdapterLayerType): Style {
+export function labelStyleFunction(
+  type: VectorAdapterLayerType,
+  opt: GeoJsonAdapterOptions
+): Style {
+  const fontSize = 12; //* (opt.ratio || 1);
   let options: TextOptions = {
-    font: '12px Calibri,sans-serif',
+    font: fontSize + 'px Calibri,sans-serif',
     overflow: true,
     fill: new Fill({
       color: '#000',
