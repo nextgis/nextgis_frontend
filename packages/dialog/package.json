@@ -9,7 +9,7 @@
   "types": "lib/index.d.ts",
   "dependencies": {
     "@types/dialog-polyfill": "^0.5.0",
-    "dialog-polyfill": "^0.5.4"
+    "dialog-polyfill": "^0.5.6"
   },
   "devDependencies": {
     "@nextgis/build-tools": "^1.0.0-beta.3"
