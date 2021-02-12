@@ -58,10 +58,7 @@ export class PromiseControl {
     }
   }
 
-  waitFunc<T>(
-    func: () => any,
-    name = ''
-  ): CancelablePromise<T> {
+  waitFunc<T>(func: () => any, name = ''): CancelablePromise<T> {
     name = name || func.name;
     const exist = this.get(name);
     if (exist) {

@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import api from './modules/api';
 import app from './modules/app';
 // import createLogger from '../../../src/plugins/logger';
 
@@ -15,7 +14,6 @@ const debug = process.env.NODE_ENV !== 'production';
 
 export default new Vuex.Store({
   modules: {
-    api,
     app,
   },
   strict: debug,
