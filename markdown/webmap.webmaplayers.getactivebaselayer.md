@@ -7,9 +7,9 @@
 <b>Signature:</b>
 
 ```typescript
-getActiveBaseLayer(): MainLayerAdapter<any, any, AdapterOptions> | undefined;
+getActiveBaseLayer(): MainLayerAdapter<M, any, AdapterOptions> | undefined;
 ```
 <b>Returns:</b>
 
-[MainLayerAdapter](./webmap.mainlayeradapter.md)<!-- -->&lt;any, any, [AdapterOptions](./webmap.adapteroptions.md)<!-- -->&gt; \| undefined
+[MainLayerAdapter](./webmap.mainlayeradapter.md)<!-- -->&lt;M, any, [AdapterOptions](./webmap.adapteroptions.md)<!-- -->&gt; \| undefined
 

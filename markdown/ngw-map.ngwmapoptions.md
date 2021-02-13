@@ -25,6 +25,7 @@ export interface NgwMapOptions<C = any> extends MapOptions<C>
 |  [qmsId?](./ngw-map.ngwmapoptions.qmsid.md) | number \| \[number, string\] | <i>(Optional)</i> |
 |  [resources?](./ngw-map.ngwmapoptions.resources.md) | [NgwResourceDefinition](./ngw-map.ngwresourcedefinition.md)<!-- -->\[\] | <i>(Optional)</i> Id number of resource from \[QMS\](https://qms.nextgis.com/). If specified through an array, the first element will be the resource identifier, and the second will be the name for identification in the application. |
 |  [runtimeParams?](./ngw-map.ngwmapoptions.runtimeparams.md) | [RuntimeParams](./webmap.runtimeparams.md)<!-- -->\[\] | <i>(Optional)</i> |
+|  [setViewDelay?](./ngw-map.ngwmapoptions.setviewdelay.md) | number | <i>(Optional)</i> |
 |  [webmapId?](./ngw-map.ngwmapoptions.webmapid.md) | [NgwResourceDefinition](./ngw-map.ngwresourcedefinition.md) | <i>(Optional)</i> Id number of webmap resource from NGW cloud. If specified through an array, the first element will be the webmapId from NGW, and the second will be the name for identification in the application. |
 |  [whitlabel?](./ngw-map.ngwmapoptions.whitlabel.md) | boolean | <i>(Optional)</i> |
 

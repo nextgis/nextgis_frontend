@@ -4,6 +4,10 @@
 
 ## ResourceStore.foreignResources property
 
+> Warning: This API is now obsolete.
+> 
+> 
+
 <b>Signature:</b>
 
 ```typescript

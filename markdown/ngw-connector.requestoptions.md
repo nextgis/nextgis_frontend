@@ -14,12 +14,10 @@ export interface RequestOptions<M = RequestMethods>
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [cache?](./ngw-connector.requestoptions.cache.md) | boolean | <i>(Optional)</i> Save response data to return for similar query url |
 |  [data?](./ngw-connector.requestoptions.data.md) | any | <i>(Optional)</i> |
 |  [file?](./ngw-connector.requestoptions.file.md) | File | <i>(Optional)</i> |
 |  [headers?](./ngw-connector.requestoptions.headers.md) | [RequestHeaders](./ngw-connector.requestheaders.md) | <i>(Optional)</i> |
 |  [method?](./ngw-connector.requestoptions.method.md) | M | <i>(Optional)</i> |
-|  [nocache?](./ngw-connector.requestoptions.nocache.md) | boolean | <i>(Optional)</i> TODO: rename. Do not wait while query with equal url is completed |
 |  [onProgress?](./ngw-connector.requestoptions.onprogress.md) | (percentComplete: number, event: ProgressEvent) =&gt; void | <i>(Optional)</i> |
 |  [responseType?](./ngw-connector.requestoptions.responsetype.md) | 'json' \| 'blob' | <i>(Optional)</i> |
 |  [withCredentials?](./ngw-connector.requestoptions.withcredentials.md) | boolean | <i>(Optional)</i> |

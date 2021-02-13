@@ -7,16 +7,16 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function createOnFirstShowAdapter({ webMap, connector, item, adapterOptions, idPrefix, }: CreateOnFirstShowAdapterOptions): Promise<Type<MainLayerAdapter>>;
+export declare function createOnFirstShowAdapter({ webMap, adapterOptions, createAdapter, }: CreateOnFirstShowAdapterOptions): Promise<Type<FirstShowAdapter>>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  { webMap, connector, item, adapterOptions, idPrefix, } | CreateOnFirstShowAdapterOptions |  |
+|  { webMap, adapterOptions, createAdapter, } | CreateOnFirstShowAdapterOptions |  |
 
 <b>Returns:</b>
 
-Promise&lt;[Type](./utils.type.md)<!-- -->&lt;[MainLayerAdapter](./webmap.mainlayeradapter.md)<!-- -->&gt;&gt;
+Promise&lt;[Type](./utils.type.md)<!-- -->&lt;FirstShowAdapter&gt;&gt;
 

@@ -20,4 +20,5 @@ export interface ItemOptions
 |  [order?](./item.itemoptions.order.md) | number | <i>(Optional)</i> |
 |  [properties?](./item.itemoptions.properties.md) | Array&lt;[ItemPropertyConfig](./item.itempropertyconfig.md)<!-- -->&lt;keyof [ItemPropertyTypes](./item.itempropertytypes.md)<!-- -->&gt;&gt; | <i>(Optional)</i> |
 |  [ratio?](./item.itemoptions.ratio.md) | number | <i>(Optional)</i> |
+|  [setViewDelay?](./item.itemoptions.setviewdelay.md) | number | <i>(Optional)</i> |
 

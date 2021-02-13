@@ -14,7 +14,7 @@ tileNoData?: TileNoData;
 
 ## Remarks
 
-In NGW api this parameter is written as follows: `nd=204|404|200`<!-- -->, 200 by default. But in frontend libraries default value id 204 (no content) for performance purpose.
+In NGW api this parameter is written as follows: `nd=204|404|200`<!-- -->, 200 by default. But in frontend libraries default value id 404 (not founded) for performance purpose.
 
  204
 

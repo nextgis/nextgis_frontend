@@ -64,6 +64,7 @@ Make sure CORS is registered in the [NextGIS Web settings](https://docs.nextgis.
 |  [ResourceItem](./ngw-connector.resourceitem.md) |  |
 |  [ResourceItemMain](./ngw-connector.resourceitemmain.md) |  |
 |  [ResourceStoreItemDefault](./ngw-connector.resourcestoreitemdefault.md) |  |
+|  [SrsItem](./ngw-connector.srsitem.md) |  |
 |  [TreeGroup](./ngw-connector.treegroup.md) |  |
 |  [TreeItem](./ngw-connector.treeitem.md) |  |
 |  [TreeLayer](./ngw-connector.treelayer.md) |  |
