@@ -138,11 +138,8 @@ module.exports = (env, argv) => {
       },
 
       optimization: {
-        runtimeChunk: 'single',
         splitChunks: {
           chunks: 'all',
-          minSize: 10000,
-          maxSize: 250000,
         },
       },
     },
