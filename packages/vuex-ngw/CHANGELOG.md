@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.5](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2021-02-13)
+
+
+### Performance Improvements
+
+* **ngw-commector:** decrease get resource queries count ([598e6e8](https://github.com/nextgis/nextgis_frontend/commit/598e6e81c1e57b00d49dc7027ac9d3f017949814))
+
+
+
+
+
 # [1.0.0-beta.4](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2021-01-17)
 
 **Note:** Version bump only for package @nextgis/vuex-ngw
