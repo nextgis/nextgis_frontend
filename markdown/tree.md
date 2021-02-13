@@ -4,12 +4,18 @@
 
 ## tree package
 
+## Classes
+
+|  Class | Description |
+|  --- | --- |
+|  [Tree](./tree.tree.md) |  |
+
 ## Functions
 
 |  Function | Description |
 |  --- | --- |
-|  [treeEvery(item, filter, relation)](./tree.treeevery.md) |  |
-|  [treeFilter(item, filter, relation)](./tree.treefilter.md) |  |
-|  [treeFind(item, filter, relation)](./tree.treefind.md) |  |
-|  [treeSome(item, filter, relation)](./tree.treesome.md) |  |
+|  [treeEvery(item, filter, relation, itemPrepare)](./tree.treeevery.md) |  |
+|  [treeFilter(item, filter, relation, itemPrepare)](./tree.treefilter.md) |  |
+|  [treeFind(item, filter, relation, itemPrepare)](./tree.treefind.md) |  |
+|  [treeSome(item, filter, relation, itemPrepare)](./tree.treesome.md) |  |
 

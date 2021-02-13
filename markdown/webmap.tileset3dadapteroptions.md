@@ -8,9 +8,9 @@
 <b>Signature:</b>
 
 ```typescript
-export interface Tileset3DAdapterOptions extends RasterAdapterOptions 
+export interface Tileset3DAdapterOptions extends RasterAdapterOptions, VectorAdapterOptions 
 ```
-<b>Extends:</b> [RasterAdapterOptions](./webmap.rasteradapteroptions.md)
+<b>Extends:</b> [RasterAdapterOptions](./webmap.rasteradapteroptions.md)<!-- -->, [VectorAdapterOptions](./webmap.vectoradapteroptions.md)
 
 ## Properties
 

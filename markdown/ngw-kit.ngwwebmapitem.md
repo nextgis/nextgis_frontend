@@ -38,5 +38,6 @@ export declare class NgwWebmapItem extends Item<ItemOptions>
 |  [create(webMap, item, options, connector, parent)](./ngw-kit.ngwwebmapitem.create.md) | <code>static</code> |  |
 |  [fit()](./ngw-kit.ngwwebmapitem.fit.md) |  |  |
 |  [getChildren(item)](./ngw-kit.ngwwebmapitem.getchildren.md) |  |  |
+|  [getItemOptions(item)](./ngw-kit.ngwwebmapitem.getitemoptions.md) |  |  |
 |  [initItem(item)](./ngw-kit.ngwwebmapitem.inititem.md) |  |  |
 

@@ -21,4 +21,5 @@ export interface NgwFeatureRequestOptions<P extends {
 |  --- | --- | --- |
 |  [extensions?](./ngw-kit.ngwfeaturerequestoptions.extensions.md) | Extensions\[\] \| string\[\] \| null \| false | <i>(Optional)</i> |
 |  [geom?](./ngw-kit.ngwfeaturerequestoptions.geom.md) | boolean | <i>(Optional)</i> |
+|  [srs?](./ngw-kit.ngwfeaturerequestoptions.srs.md) | number | <i>(Optional)</i> |
 

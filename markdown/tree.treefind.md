@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function treeFind<F extends DefaultTreeItem = DefaultTreeItem>(item: F | F[], filter?: PropertyFilter | SelfFilter<F>, relation?: RelationFunction<F> | string): F | undefined;
+export declare function treeFind<F extends D = D>(item: F | F[], filter?: PropertyFilter | SelfFilter<F>, relation?: TreeRelation<F>, itemPrepare?: ItemPrepareFunction<F>): F | undefined;
 ```
 
 ## Parameters
@@ -16,7 +16,8 @@ export declare function treeFind<F extends DefaultTreeItem = DefaultTreeItem>(it
 |  --- | --- | --- |
 |  item | F \| F\[\] |  |
 |  filter | [PropertyFilter](./properties-filter.propertyfilter.md) \| SelfFilter&lt;F&gt; |  |
-|  relation | RelationFunction&lt;F&gt; \| string |  |
+|  relation | TreeRelation&lt;F&gt; |  |
+|  itemPrepare | ItemPrepareFunction&lt;F&gt; |  |
 
 <b>Returns:</b>
 

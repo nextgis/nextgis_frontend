@@ -32,6 +32,7 @@ export interface MapOptions<C = any>
 |  [selectedPaint?](./webmap.mapoptions.selectedpaint.md) | [GeometryPaint](./paint.geometrypaint.md) | <i>(Optional)</i> |
 |  [starterKits?](./webmap.mapoptions.starterkits.md) | [StarterKit](./webmap.starterkit.md)<!-- -->\[\] | <i>(Optional)</i> One way to extend WebMap functionality with the help of kits. |
 |  [target?](./webmap.mapoptions.target.md) | string \| HTMLElement | <i>(Optional)</i> The HTML element in which NgwMap will render the map, or the element's string id. The specified element must have no children. |
+|  [tileJson?](./webmap.mapoptions.tilejson.md) | [TileJson](./utils.tilejson.md) | <i>(Optional)</i> |
 |  [view?](./webmap.mapoptions.view.md) | '2D' \| '3D' \| '2.5D' | <i>(Optional)</i> |
 |  [zoom?](./webmap.mapoptions.zoom.md) | number | <i>(Optional)</i> The initial zoom level of the map (0-24). |
 

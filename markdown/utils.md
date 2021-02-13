@@ -24,6 +24,7 @@
 |  [bindAll(fns, context)](./utils.bindall.md) | Given an array of member function names as strings, replace all of them with bound versions that will always refer to <code>context</code> as <code>this</code>. This is useful for classes where otherwise event bindings would reassign <code>this</code> to the evented object or some other value: this lets you ensure the <code>this</code> value always. Taken from: https://github.com/mapbox/mapbox-gl-js/blob/v1.0.0/src/util/util.js\#L243 |
 |  [camelize(str)](./utils.camelize.md) |  |
 |  [capitalize(str)](./utils.capitalize.md) |  |
+|  [coordinatesCount(geojson)](./utils.coordinatescount.md) |  |
 |  [debounce(cb, wait)](./utils.debounce.md) |  |
 |  [DebounceDecorator(wait)](./utils.debouncedecorator.md) |  |
 |  [debugLog(message)](./utils.debuglog.md) |  |
@@ -37,6 +38,7 @@
 |  [fixUrlStr(url)](./utils.fixurlstr.md) |  |
 |  [flatten(data)](./utils.flatten.md) |  |
 |  [full(val)](./utils.full.md) | from https://github.com/CesiumGS/cesium/blob/master/Source/Core/defined.js |
+|  [getBoundsCoordinates(b)](./utils.getboundscoordinates.md) |  |
 |  [getBoundsFeature(b)](./utils.getboundsfeature.md) |  |
 |  [getBoundsPolygon(b)](./utils.getboundspolygon.md) |  |
 |  [getCircleFeature(lng, lat, radius, points)](./utils.getcirclefeature.md) |  |
@@ -70,6 +72,7 @@
 |  [ApplyMixinOptions](./utils.applymixinoptions.md) |  |
 |  [JsonMap](./utils.jsonmap.md) |  |
 |  [LatLng](./utils.latlng.md) | Longitude and latitude coordinate, measured in degrees. |
+|  [TileJson](./utils.tilejson.md) | This specification attempts to create a standard for representing metadata about multiple types of web-based layers, to aid clients in configuration and browsing.<!-- -->From  |
 
 ## Variables
 
@@ -88,7 +91,7 @@
 |  [JsonArray](./utils.jsonarray.md) |  |
 |  [LngLatArray](./utils.lnglatarray.md) | Array of two numbers representing longitude and latitude. |
 |  [LngLatBoundsArray](./utils.lnglatboundsarray.md) | Array of coordinates, measured in degrees, in \[west, south, east, north\] order. [GeoJSON standard](https://tools.ietf.org/html/rfc7946#section-5) |
-|  [Position\_2](./utils.position_2.md) | A Position is an array of coordinates. [GeoJSON standard](https://tools.ietf.org/html/rfc7946#section-3.1.1) Array should contain between two and three elements. The previous GeoJSON specification allowed more elements (e.g., which could be used to represent M values), but the current specification only allows X, Y, and (optionally) Z to be defined. |
+|  [Position](./utils.position.md) | A Position is an array of coordinates. [GeoJSON standard](https://tools.ietf.org/html/rfc7946#section-3.1.1) Array should contain between two and three elements. The previous GeoJSON specification allowed more elements (e.g., which could be used to represent M values), but the current specification only allows X, Y, and (optionally) Z to be defined. |
 |  [Type](./utils.type.md) |  |
 |  [ZoomLevel](./utils.zoomlevel.md) | Map zoom level. |
 

@@ -74,6 +74,7 @@ promise.cancel();
 |  [\[Symbol.toStringTag\]](./cancelable-promise.cancelablepromise._symbol.tostringtag_.md) |  | string |  |
 |  [CancelError](./cancelable-promise.cancelablepromise.cancelerror.md) | <code>static</code> | typeof CancelError |  |
 |  [id](./cancelable-promise.cancelablepromise.id.md) |  | number |  |
+|  [PromiseControl](./cancelable-promise.cancelablepromise.promisecontrol.md) | <code>static</code> | typeof PromiseControl |  |
 |  [TimeoutError](./cancelable-promise.cancelablepromise.timeouterror.md) | <code>static</code> | typeof TimeoutError |  |
 
 ## Methods

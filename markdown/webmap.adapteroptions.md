@@ -28,6 +28,8 @@ export interface AdapterOptions<N extends Record<string, any> = Record<string, a
 |  [nativeOptions?](./webmap.adapteroptions.nativeoptions.md) | N | <i>(Optional)</i> |
 |  [opacity?](./webmap.adapteroptions.opacity.md) | number | <i>(Optional)</i> Layer transparency. From 0-transparent to 1-visible |
 |  [order?](./webmap.adapteroptions.order.md) | number | <i>(Optional)</i> Indicates the map layers display sequence. A layer with a larger order value overlaps smaller ones. Zero value used to indicate baselayer. If the value is not specified explicitly, it will be assigned automatically with an increase of one for each new layer. |
+|  [ratio?](./webmap.adapteroptions.ratio.md) | number | <i>(Optional)</i> |
+|  [setViewDelay?](./webmap.adapteroptions.setviewdelay.md) | number | <i>(Optional)</i> Experimental option to set the map loading delay when changing position |
 |  [visibility?](./webmap.adapteroptions.visibility.md) | boolean | <i>(Optional)</i> Show layer on the map immediately after adding. Such layers are always under others. Only one base layer can be displayed on the map at a time. |
 |  [waitFullLoad?](./webmap.adapteroptions.waitfullload.md) | boolean | <i>(Optional)</i> Wait until the layer data is fully loaded before allowing added to the map. |
 
