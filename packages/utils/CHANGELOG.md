@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.5](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2021-02-13)
+
+
+### Features
+
+* **utils:** add function to get coordinates from bbox ([d7b2ea7](https://github.com/nextgis/nextgis_frontend/commit/d7b2ea7cef1b53e01f4a8aacf929d0b115a01778))
+
+
+
+
+
 # [1.0.0-beta.4](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2021-01-17)
 
 
