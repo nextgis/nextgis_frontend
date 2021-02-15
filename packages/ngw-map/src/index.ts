@@ -1,5 +1,5 @@
 import { NgwMap } from './NgwMap';
-import { NgwMapOptions } from './interfaces';
+import type { NgwMapOptions } from './interfaces';
 
 export * from '@nextgis/webmap';
 
