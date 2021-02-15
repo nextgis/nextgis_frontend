@@ -4,4 +4,5 @@ import {
   VueSelectItem,
 } from './BaselayerSelect/BaselayerSelect';
 
-export { NgwLayersList, VueTreeItem, BaselayerSelect, VueSelectItem };
+export { NgwLayersList, BaselayerSelect };
+export type { VueSelectItem, VueTreeItem };
