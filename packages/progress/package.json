@@ -9,6 +9,7 @@
   "types": "lib/index.d.ts",
   "devDependencies": {
     "@nextgis/build-tools": "^1.0.0-beta.5",
+    "@types/events": "^3.0.0",
     "events": "^3.2.0",
     "strict-event-emitter-types": "^2.0.0"
   },
