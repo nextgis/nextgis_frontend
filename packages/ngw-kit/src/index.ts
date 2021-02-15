@@ -50,8 +50,6 @@
  */
 import { NgwKit } from './NgwKit';
 
-export * from './interfaces';
-
 export * from './NgwResource';
 export * from './NgwWebmapLayerAdapter';
 export * from './NgwWebmapItem';
@@ -75,3 +73,5 @@ export * from './adapters/createGeoJsonAdapter';
 export * from './adapters/createRasterAdapter';
 
 export { NgwKit };
+
+export * from './interfaces';
