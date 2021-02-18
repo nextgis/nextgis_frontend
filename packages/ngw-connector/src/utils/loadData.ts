@@ -176,6 +176,13 @@ if (__BROWSER__) {
           typeof options.data === 'string'
             ? options.data
             : JSON.stringify(options.data);
+        // https://stackoverflow.com/questions/35589109/node-http-delete-request-no-longer-works-after-upgrading-from-0-10-40
+        if (body !== undefined && options.method !== 'POST') {
+          Object.assign(requestOpt.headers, {
+            'Content-Type': 'application/json',
+            'Content-Length': Buffer.byteLength(body),
+          });
+        }
         const req = adapter.request(url, requestOpt, (resp: any) => {
           let data = '';
           resp.on('data', (chunk: any) => {
