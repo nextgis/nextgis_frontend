@@ -6,6 +6,12 @@ export function coordinatesCount(geojson: GeoJSON): number {
   return count;
 }
 
+export function getCoordinates(geojson: GeoJSON): Position[] {
+  const coordinates: Position[] = [];
+  eachCoordinates(geojson, (pos) => coordinates.push(pos));
+  return coordinates;
+}
+
 export function eachCoordinates(
   geojson: GeoJSON,
   cb: (position: Position) => void
