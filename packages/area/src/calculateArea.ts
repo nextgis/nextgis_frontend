@@ -50,6 +50,9 @@ function getQbar(x: number): number {
   return cosx * (mQbarA + cosx2 * (mQbarB + cosx2 * (mQbarC + cosx2 * mQbarD)));
 }
 
+/**
+ * @returns Area in meters
+ */
 export function calculateArea(points: Position[]): number {
   const thresh = 1e-6;
   let area = 0.0;
@@ -102,6 +105,9 @@ export function calculateArea(points: Position[]): number {
   return area;
 }
 
+/**
+ * @returns Area in meters
+ */
 export function geojsonArea(geojson: GeoJSON): number {
   const points = getCoordinates(geojson);
   return calculateArea(points);
