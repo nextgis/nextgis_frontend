@@ -18,7 +18,13 @@ Simply download and include with a script tag, `Area` will be registered as a gl
 <script src="../lib/area.global.js"></script>
 
 <script>
-  var area = Area.calculateArea(geojson);
+  var area = Area.calculateArea([
+    [51.82, 63.8],
+    [43.48, 55.62],
+    [75.38, 59.13],
+    [51.82, 63.8], // the first and last positions MUST contain identical values
+  ]);
+  var area = Area.geojsonArea(geojson);
 </script>
 ```
 
