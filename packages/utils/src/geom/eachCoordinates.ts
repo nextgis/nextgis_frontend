@@ -1,4 +1,4 @@
-import { GeoJSON, Position, Geometry } from 'geojson';
+import { GeoJSON, Position, Geometry, Polygon } from 'geojson';
 
 export function coordinatesCount(geojson: GeoJSON): number {
   let count = 0;
@@ -36,6 +36,23 @@ export function eachCoordinates(
     }
     return geom;
   });
+}
+
+export function getPolygons(geojson: GeoJSON): Position[][] {
+  const polygons: Position[][] = [];
+  eachGeometry(geojson, (geom) => {
+    if ('coordinates' in geom) {
+      if (geom.type === 'Polygon') {
+        geom.coordinates.forEach((x) => polygons.push(x));
+      } else if (geom.type === 'MultiPolygon') {
+        geom.coordinates.forEach((x) => {
+          x.forEach((y) => polygons.push(y));
+        });
+      }
+    }
+    return geom;
+  });
+  return polygons;
 }
 
 export function eachGeometry(
