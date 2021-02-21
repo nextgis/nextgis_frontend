@@ -37,8 +37,6 @@ class NgwMapbox extends NgwMap<Map, string[], any, MapboxglMapAdapterOptions> {
 
 export default NgwMapbox;
 
-// @ts-ignore
-if (window && !window.NgwMap) {
-  // @ts-ignore
-  window.NgwMap = NgwMapbox;
+if ((window as any) && !(window as any).NgwMap) {
+  (window as any).NgwMap = NgwMapbox;
 }
