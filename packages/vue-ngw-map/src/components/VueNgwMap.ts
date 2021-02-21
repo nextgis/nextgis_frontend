@@ -9,9 +9,9 @@ import NgwConnector from '@nextgis/ngw-connector';
 
 @Component
 export class VueNgwMap<M = any> extends Vue {
-  @Prop({ type: Object }) readonly mapAdapter!: MapAdapter;
+  @Prop({ type: Function }) readonly mapAdapter!: () => MapAdapter;
+  @Prop({ type: Function }) readonly connector!: () => NgwConnector;
   @Prop({ type: Boolean }) readonly fullFilling!: boolean;
-  @Prop({ type: NgwConnector }) readonly connector!: NgwConnector;
   @Prop({ type: String }) readonly baseUrl!: string;
   @Prop({ type: Number }) readonly qmsId!: string;
   @Prop({ type: String }) readonly webMapId!: string;
@@ -22,21 +22,25 @@ export class VueNgwMap<M = any> extends Vue {
   @Prop({ type: String }) readonly cursor!: Cursor;
 
   // @ProvideReactive() ngwMap!: NgwMap<M>;
-  ngwMap!: NgwMap<M>;
+  _ngwMap!: NgwMap<M>;
 
   name = 'vue-ngw-map';
   ready = false;
 
+  get ngwMap(): NgwMap {
+    return this._ngwMap;
+  }
+
   @Watch('bounds')
   onBoundsChange(bounds: LngLatBoundsArray): void {
-    if (this.ngwMap) {
-      this.ngwMap.fitBounds(bounds);
+    if (this._ngwMap) {
+      this._ngwMap.fitBounds(bounds);
     }
   }
 
   @Watch('cursor')
   onCursorChange(cursor: Cursor): void {
-    this.ngwMap.setCursor(cursor || 'default');
+    this._ngwMap.setCursor(cursor || 'default');
   }
 
   getMapOptions(): NgwMapOptions {
@@ -51,13 +55,18 @@ export class VueNgwMap<M = any> extends Vue {
         props[p] = prop;
       }
     }
-    this.ngwMap = new NgwMap({
-      mapAdapter: this.mapAdapter,
+    if (this.mapAdapter) {
+      props.mapAdapter = this.mapAdapter();
+    }
+    if (this.connector) {
+      props.connector = this.connector();
+    }
+    this._ngwMap = new NgwMap({
       ...this.getMapOptions(),
       ...props,
       target: this.$el as HTMLElement,
     });
-    this.ngwMap.onLoad().then(() => {
+    this._ngwMap.onLoad().then(() => {
       this.$nextTick().then(() => {
         this._onReady();
         this.ready = true;
@@ -68,8 +77,8 @@ export class VueNgwMap<M = any> extends Vue {
   }
 
   beforeDestroy(): void {
-    if (this.ngwMap) {
-      this.ngwMap.destroy();
+    if (this._ngwMap) {
+      this._ngwMap.destroy();
     }
   }
 
@@ -99,7 +108,7 @@ export class VueNgwMap<M = any> extends Vue {
   }
 
   private _addEventsListener() {
-    this.ngwMap.emitter.on('click', (e) => {
+    this._ngwMap.emitter.on('click', (e) => {
       this.$emit('click', e);
     });
   }
