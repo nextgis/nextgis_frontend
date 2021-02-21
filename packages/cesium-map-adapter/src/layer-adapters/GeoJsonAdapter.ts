@@ -320,9 +320,11 @@ export class GeoJsonAdapter
         dataSource.entities.values.forEach((y) => {
           const height = this._getEntityHeight(y, paint);
           if (height && y.polygon) {
-            y.polygon.extrudedHeight = new CallbackProperty(() => {
-              return height;
-            }, false);
+            y.polygon.extrudedHeight = height as any;
+            // if define through CallbackProperty, then fps drops dramatically
+            // y.polygon.extrudedHeight = new CallbackProperty(() => {
+            //   return height;
+            // }, false);
           }
           const description =
             this.options.popupOptions?.createPopupContent &&
