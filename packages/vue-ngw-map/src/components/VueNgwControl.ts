@@ -5,7 +5,7 @@ import { NgwMap } from '@nextgis/ngw-map';
 import {
   MapControl,
   CreateControlOptions,
-  ControlPositions,
+  ControlPosition,
   MapControls,
 } from '@nextgis/webmap';
 import { findNgwMapParent, propsBinder } from '../utils';
@@ -13,7 +13,7 @@ import { VueNgwMap } from './VueNgwMap';
 
 @Component
 export class VueNgwControl extends Vue {
-  @Prop({ type: String }) readonly position!: ControlPositions;
+  @Prop({ type: String }) readonly position!: ControlPosition;
   @Prop({ type: Boolean }) readonly bar!: boolean;
   @Prop({ type: Boolean }) readonly margin!: boolean;
   @Prop({ type: String }) readonly addClass!: string;
