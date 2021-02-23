@@ -10,7 +10,9 @@ import NgwConnector from '@nextgis/ngw-connector';
 @Component
 export class VueNgwMap<M = any> extends Vue {
   @Prop({ type: Function }) readonly mapAdapter!: () => MapAdapter;
-  @Prop({ type: Function }) readonly connector!: () => NgwConnector;
+  @Prop({ type: [Function, Object] }) readonly connector!:
+    | (() => NgwConnector)
+    | NgwConnector;
   @Prop({ type: Boolean }) readonly fullFilling!: boolean;
   @Prop({ type: String }) readonly baseUrl!: string;
   @Prop({ type: Number }) readonly qmsId!: string;
@@ -55,10 +57,10 @@ export class VueNgwMap<M = any> extends Vue {
         props[p] = prop;
       }
     }
-    if (this.mapAdapter) {
+    if (typeof this.mapAdapter === 'function') {
       props.mapAdapter = this.mapAdapter();
     }
-    if (this.connector) {
+    if (typeof this.connector === 'function') {
       props.connector = this.connector();
     }
     this._ngwMap = new NgwMap({
