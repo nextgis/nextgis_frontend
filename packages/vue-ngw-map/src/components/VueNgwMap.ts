@@ -29,7 +29,7 @@ export class VueNgwMap<M = any> extends Vue {
   name = 'vue-ngw-map';
   ready = false;
 
-  get ngwMap(): NgwMap {
+  get ngwMap(): NgwMap<M> {
     return this._ngwMap;
   }
 
