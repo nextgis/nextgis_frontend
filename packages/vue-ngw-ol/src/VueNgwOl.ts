@@ -10,7 +10,7 @@ import Map from 'ol/Map';
 import { Mixins, Prop, Component } from 'vue-property-decorator';
 
 @Component
-export class VueNgwOl extends Mixins(VueNgwMap) implements VueNgwMap<Map> {
+export class VueNgwOl extends Mixins<VueNgwMap<Map>>(VueNgwMap) {
   @Prop({ type: Function, default: () => new MapAdapter() })
   readonly mapAdapter!: () => MapAdapter;
   _ngwMap!: NgwMap<Map>;
