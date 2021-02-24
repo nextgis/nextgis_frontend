@@ -6,7 +6,6 @@ import {
   Cartesian3,
   VerticalOrigin,
   Property,
-  CallbackProperty,
   Cartographic,
   Entity,
   HeightReference,
@@ -320,11 +319,8 @@ export class GeoJsonAdapter
         dataSource.entities.values.forEach((y) => {
           const height = this._getEntityHeight(y, paint);
           if (height && y.polygon) {
-            y.polygon.extrudedHeight = height as any;
             // if define through CallbackProperty, then fps drops dramatically
-            // y.polygon.extrudedHeight = new CallbackProperty(() => {
-            //   return height;
-            // }, false);
+            y.polygon.extrudedHeight = height as any;
           }
           const description =
             this.options.popupOptions?.createPopupContent &&
@@ -403,14 +399,13 @@ export class GeoJsonAdapter
                 terrainSamplePosition.height
               ) {
                 const terrainHeight = terrainSamplePosition.height;
-                entity.polygon.height = new CallbackProperty(() => {
-                  return terrainHeight;
-                }, false);
+                // if define through CallbackProperty, then fps drops dramatically
+                entity.polygon.height = terrainHeight as any;
                 const height = this._getEntityHeight(entity);
                 if (height !== undefined) {
-                  entity.polygon.extrudedHeight = new CallbackProperty(() => {
-                    return height + terrainHeight;
-                  }, false);
+                  // if define through CallbackProperty, then fps drops dramatically
+                  entity.polygon.extrudedHeight = (height +
+                    terrainHeight) as any;
                 }
               }
             }
