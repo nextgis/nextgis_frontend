@@ -291,7 +291,7 @@ export function fetchNgwLayerItemsRequest<
   }) as CancelablePromise<FeatureItem<P, G>[]>;
 }
 
-export function prepareFieldsToNgw<T extends any>(
+export function prepareFieldsToNgw<T extends Record<string, unknown>>(
   item: T,
   resourceFields: Pick<FeatureLayerField, 'keyname' | 'datatype'>[]
 ): Record<keyof T, any> {
