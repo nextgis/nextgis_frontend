@@ -38,7 +38,9 @@ export interface OnLayerClickOptions {
  * Parameters that can be used to create any map layer adapter.
  * @public
  */
-export interface AdapterOptions<N extends Record<string, any> = Record<string, any>> {
+export interface AdapterOptions<
+  N extends Record<string, any> = Record<string, any>
+> {
   /**
    * Unique Layer ID.
    * If not specified, will be added automatically.
@@ -120,6 +122,8 @@ export interface AdapterOptions<N extends Record<string, any> = Record<string, a
    * Refer to {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin | CORS Settings} for valid String values.
    */
   crossOrigin?: 'anonymous';
+
+  headers?: Record<string, any>;
 
   /**
    * Experimental option to set the  map loading delay  when changing position
@@ -313,7 +317,6 @@ export interface GeoJsonAdapterOptions<
 export interface RasterAdapterOptions extends AdapterOptions {
   url: string;
   subdomains?: string | string[];
-  headers?: Record<string, any>;
 }
 
 /**
