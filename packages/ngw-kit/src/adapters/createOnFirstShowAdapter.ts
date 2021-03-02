@@ -54,6 +54,7 @@ export async function createOnFirstShowAdapter({
           });
           const realLayer: MainLayerAdapter = await adapter.addLayer({
             order: this.options.order,
+            headers: this.options.headers,
           });
           Object.assign(adapter.options, adapterOptions);
           adapter.layer = realLayer;
