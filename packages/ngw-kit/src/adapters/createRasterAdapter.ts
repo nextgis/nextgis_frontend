@@ -46,7 +46,7 @@ export async function createRasterAdapter({
     );
     return class Adapter extends adapterClass implements ResourceAdapter {
       // options = {};
-      item?: ResourceItem;
+      item?: ResourceItem = item;
       resourceId = resourceId;
 
       constructor(public map: any, _options: any) {

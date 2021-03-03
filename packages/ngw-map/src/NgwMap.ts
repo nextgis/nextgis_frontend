@@ -22,15 +22,18 @@ import NgwConnector, {
   LayerFeature,
 } from '@nextgis/ngw-connector';
 import { QmsAdapterOptions } from '@nextgis/qms-kit';
-import {
-  addNgwLayer,
+import type {
   NgwLayerOptions,
-  ResourceAdapter,
-  NgwWebmapItem,
   NgwLayerOptionsAdditional,
-  NgwIdentify,
   KeynamedNgwLayerOptions,
   ResourceIdNgwLayerOptions,
+} from '@nextgis/ngw-kit';
+import {
+  addNgwLayer,
+  ResourceAdapter,
+  NgwWebmapItem,
+  NgwIdentify,
+
   fetchNgwLayerItem,
   fetchNgwLayerItems,
   fetchNgwLayerFeature,
@@ -49,7 +52,7 @@ import { PropertiesFilter } from '@nextgis/properties-filter';
 import { appendNgwResources } from './utils/appendNgwResources';
 import { prepareWebMapOptions } from './utils/prepareWebMapOptions';
 
-import { NgwMapOptions, NgwMapEvents, NgwLayers } from './interfaces';
+import type { NgwMapOptions, NgwMapEvents, NgwLayers } from './interfaces';
 import {
   Geometry,
   Feature,
@@ -425,8 +428,8 @@ export class NgwMap<
   enableSelection(): void {
     if (!this.$$selectFromNgwRaster) {
       this.$$selectFromNgwRaster = (ev: MapClickEvent) => {
-        this.emitter.listenerCount('ngw:select');
-        if (this.emitter.listenerCount('ngw:select')) {
+        const count = this.emitter.listenerCount('ngw:select');
+        if (count) {
           this._selectFromNgwRaster(ev);
         }
       };
