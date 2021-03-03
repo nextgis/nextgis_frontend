@@ -157,10 +157,11 @@ export async function createAsyncAdapter(
     return adapter.then((x) => {
       if (x) {
         const resourceAdapter = x as Type<ResourceAdapter>;
-
-        resourceAdapter.prototype.item = item;
-        resourceAdapter.prototype.resourceId = item?.resource.id;
-        resourceAdapter.prototype.connector = connector;
+        if (item) {
+          resourceAdapter.prototype.item = item;
+          resourceAdapter.prototype.resourceId = item.resource.id;
+          resourceAdapter.prototype.connector = connector;
+        }
 
         applyMixins(resourceAdapter, [NgwResource], { replace: false });
         return resourceAdapter;
