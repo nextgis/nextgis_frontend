@@ -1,4 +1,4 @@
-import {
+import type {
   Type,
   ZoomLevel,
   LatLng,
