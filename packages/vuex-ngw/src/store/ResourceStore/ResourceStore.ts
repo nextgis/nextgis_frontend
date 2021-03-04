@@ -145,7 +145,10 @@ export abstract class ResourceStore<
     const featureFields = (await this.context.dispatch(
       'getFields'
     )) as FeatureLayerField[];
-    const fields = prepareFieldsToNgw(opt.item.properties, featureFields);
+    const fields = prepareFieldsToNgw(
+      opt.item.properties,
+      featureFields
+    );
     return {
       fields,
       geom,
