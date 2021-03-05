@@ -1,15 +1,17 @@
 import Vue, { CreateElement, VNode, VNodeData } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import { NgwMap } from '@nextgis/ngw-map';
-import {
+
+import { findNgwMapParent, propsBinder } from '../utils';
+
+import type { NgwMap } from '@nextgis/ngw-map';
+import type {
   MapControl,
   CreateControlOptions,
   ControlPosition,
   MapControls,
 } from '@nextgis/webmap';
-import { findNgwMapParent, propsBinder } from '../utils';
-import { VueNgwMap } from './VueNgwMap';
+import type { VueNgwMap } from './VueNgwMap';
 
 @Component
 export class VueNgwControl extends Vue {
