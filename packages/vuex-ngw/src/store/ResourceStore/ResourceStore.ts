@@ -9,6 +9,7 @@ import {
 import NgwConnector from '@nextgis/ngw-connector';
 
 import type {
+  ResourceItemDatatype,
   ResourceStoreItem,
   FeatureLayerField,
   FeatureItem,
@@ -43,6 +44,13 @@ export abstract class ResourceStore<
 
   _promises: Record<string, Promise<any>> = {};
 
+  formatters: {
+    date?: (date: string) => string;
+    datetime?: (date: string) => string;
+  } = {}
+
+
+
   hooks: {
     onNewItem?: (opt: PatchOptions<G, P>) => Promise<void>;
     onBeforeDelete?: (opt: { fid: number }) => Promise<void>;
@@ -51,7 +59,6 @@ export abstract class ResourceStore<
       opt: { id: number }
     ) => Promise<void>;
     delete?: (resourceId: number, featureId: number) => Promise<void>;
-    dateFormat?: (ngwDate: string) => string;
   } = {};
   private _connector!: NgwConnector;
 
@@ -147,10 +154,7 @@ export abstract class ResourceStore<
     const featureFields = (await this.context.dispatch(
       'getFields'
     )) as FeatureLayerField[];
-    const fields = prepareFieldsToNgw(
-      opt.item.properties,
-      featureFields
-    );
+    const fields = prepareFieldsToNgw(opt.item.properties, featureFields);
     return {
       fields,
       geom,
@@ -234,20 +238,22 @@ export abstract class ResourceStore<
   @Mutation
   protected SET_STORE(store: ResourceStoreItem<P>[]): void {
     let prepared = store;
+    const dateFields: ResourceItemDatatype[] = ['DATE', 'DATETIME'];
     const datefields = this.fields
-      .filter((x) => x.datatype === 'DATE')
-      .map((x) => x.keyname);
+      .filter((x) => dateFields.includes(x.datatype))
     if (datefields.length) {
       prepared = store.map((x) => {
         for (const k in x) {
-          if (datefields.includes(k)) {
+          const dateField = datefields.find((d) => d.keyname === k);
+          if (dateField) {
             let date = parseDate(x[k]);
             if (date) {
-              if (this.hooks.dateFormat) {
-                date = this.hooks.dateFormat(date);
+              if (dateField.datatype === 'DATE' && this.formatters.date) {
+                date = this.formatters.date(date);
+              } else if (dateField.datatype === 'DATETIME' && this.formatters.datetime) {
+                date = this.formatters.datetime(date);
               }
-              // @ts-ignore
-              x[k] = date;
+              (x as any)[k] = date;
             }
           }
         }
