@@ -1,5 +1,5 @@
-import { NgwResourceDefinition, NgwLayerOptions } from '../interfaces';
-import { NgwLayerOptionsAdditional } from '@nextgis/ngw-kit';
+import type { NgwLayerOptionsAdditional, NgwLayerOptions } from '@nextgis/ngw-kit';
+import type { NgwResourceDefinition } from '../interfaces';
 
 export function appendNgwResources(
   options: NgwLayerOptions[],
