@@ -10,7 +10,7 @@ import { LayerAdapter } from './LayerAdapter';
 /**
  * @deprecated - import from {@link @nextgis/utils} instead
  */
-export { Type, ZoomLevel, LatLng, LngLatBoundsArray, LngLatArray };
+export type { Type, ZoomLevel, LatLng, LngLatBoundsArray, LngLatArray };
 
 /**
  * Screen coordinates in pixels.

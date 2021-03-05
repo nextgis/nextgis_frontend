@@ -6,13 +6,15 @@ import {
   FEATURE_REQUEST_PARAMS,
   parseDate,
 } from '@nextgis/ngw-kit';
-import NgwConnector, {
+import NgwConnector from '@nextgis/ngw-connector';
+
+import type {
   ResourceStoreItem,
   FeatureLayerField,
   FeatureItem,
 } from '@nextgis/ngw-connector';
-import { Type } from '@nextgis/webmap';
-import { ForeignResource, PatchOptions } from '../../interfaces';
+import type { Type } from '@nextgis/utils';
+import type { ForeignResource, PatchOptions } from '../../interfaces';
 
 type ResourceDef = string | number;
 
