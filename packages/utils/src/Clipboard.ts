@@ -1,14 +1,16 @@
 export class Clipboard {
   silent = true;
 
-  constructor(text: string) {
+  constructor(text?: string) {
     if (text) {
       this.copy(text);
     }
   }
 
   static copy(text: string): Clipboard {
-    return new Clipboard(text);
+    const clipboard = new Clipboard();
+    clipboard.copy(text);
+    return clipboard;
   }
 
   copy(text: string): void {
