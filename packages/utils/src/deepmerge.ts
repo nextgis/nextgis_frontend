@@ -1,12 +1,12 @@
 export function deepmerge<T>(
   x: Partial<T>,
   y: Partial<T>,
-  mergeArray?: boolean
+  mergeArray?: boolean,
 ): T;
 export function deepmerge<T1, T2>(
   target: Partial<T1>,
   src: Partial<T2>,
-  mergeArray = false
+  mergeArray = false,
 ): T1 & T2 {
   let target_ = target as any;
   const src_ = src as any;

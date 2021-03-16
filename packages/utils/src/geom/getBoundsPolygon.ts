@@ -1,5 +1,5 @@
-import { Feature, Polygon } from 'geojson';
-import { LngLatBoundsArray } from './interfaces';
+import type { Feature, Polygon } from 'geojson';
+import type { LngLatBoundsArray } from './interfaces';
 
 /**
  * @public

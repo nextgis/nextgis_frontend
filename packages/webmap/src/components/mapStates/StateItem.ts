@@ -1,7 +1,7 @@
-import { MapStateItem } from '../../interfaces/MapState';
-import { WebMapEvents } from '../../interfaces/Events';
-import { WebMap } from '../../WebMap';
-import { MapOptions } from '../../interfaces/MapOptions';
+import type { WebMap } from '../../WebMap';
+import type { MapStateItem } from '../../interfaces/MapState';
+import type { WebMapEvents } from '../../interfaces/Events';
+import type { MapOptions } from '../../interfaces/MapOptions';
 
 export abstract class StateItem<V extends any | undefined = any | undefined>
   implements MapStateItem<V | undefined> {
@@ -11,7 +11,7 @@ export abstract class StateItem<V extends any | undefined = any | undefined>
 
   constructor(
     protected webMap: WebMap,
-    opt?: { name?: keyof MapOptions; event?: keyof WebMapEvents; value?: V }
+    opt?: { name?: keyof MapOptions; event?: keyof WebMapEvents; value?: V },
   ) {
     if (opt) {
       if (opt.value) {

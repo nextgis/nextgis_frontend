@@ -1,4 +1,4 @@
-import { LngLatArray } from './interfaces';
+import type { LngLatArray } from './interfaces';
 
 export function degrees2meters(lng: number, lat: number): [number, number] {
   lat = lat > 85.06 ? 85.06 : lat < -85.06 ? -85.06 : lat;
