@@ -5,7 +5,7 @@ import type {
   LngLatBoundsArray,
   LngLatArray,
 } from '@nextgis/utils';
-import { LayerAdapter } from './LayerAdapter';
+import type { LayerAdapter } from './LayerAdapter';
 
 /**
  * @deprecated - import from {@link @nextgis/utils} instead

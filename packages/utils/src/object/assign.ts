@@ -21,7 +21,7 @@ export function assign<T, U, V, W>(
   target: T,
   source1: U,
   source2: V,
-  source3: W
+  source3: W,
 ): T & U & V & W;
 
 /**

@@ -1,9 +1,10 @@
 import { isPaint } from '@nextgis/paint';
-import {
+import { detectGeometryType } from './geometryTypes';
+
+import type {
   GeoJsonAdapterOptions,
   VectorAdapterLayerType,
 } from '../interfaces/LayerAdapter';
-import { detectGeometryType } from './geometryTypes';
 
 /**
  * @internal
@@ -30,7 +31,7 @@ export const typeAlias: { [x: string]: VectorAdapterLayerType } = {
  * @internal
  */
 export function updateGeoJsonAdapterOptions(
-  opt: GeoJsonAdapterOptions
+  opt: GeoJsonAdapterOptions,
 ): GeoJsonAdapterOptions {
   if (opt.data) {
     const geomType = typeAlias[detectGeometryType(opt.data)];

@@ -1,4 +1,4 @@
-import { GeoJSON, Position, Geometry, Polygon } from 'geojson';
+import type { GeoJSON, Position, Geometry } from 'geojson';
 
 export function coordinatesCount(geojson: GeoJSON): number {
   let count = 0;
@@ -14,7 +14,7 @@ export function getCoordinates(geojson: GeoJSON): Position[] {
 
 export function eachCoordinates(
   geojson: GeoJSON,
-  cb: (position: Position) => void
+  cb: (position: Position) => void,
 ): void {
   eachGeometry(geojson, (geom) => {
     if ('coordinates' in geom) {
@@ -57,7 +57,7 @@ export function getPolygons(geojson: GeoJSON): Position[][] {
 
 export function eachGeometry(
   geojson: GeoJSON,
-  cb: (position: Geometry) => void
+  cb: (position: Geometry) => void,
 ): void {
   if (geojson.type === 'FeatureCollection') {
     geojson.features.forEach((f) => {

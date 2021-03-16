@@ -39,7 +39,7 @@
  * @packageDocumentation
  */
 import { WebMap } from './WebMap';
-import { MapOptions } from './interfaces/MapOptions';
+import type { MapOptions } from './interfaces/MapOptions';
 
 export { createToggleControl } from './components/controls/createToggleControl';
 

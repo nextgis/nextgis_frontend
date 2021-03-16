@@ -1,6 +1,7 @@
 import { debugLog } from '../debug/debugLog';
-import { LatLng } from '../geom/interfaces';
-import { LngLatArray } from '../geom/interfaces';
+
+import type { LatLng } from '../geom/interfaces';
+import type { LngLatArray } from '../geom/interfaces';
 
 interface DeprecatedMapClickEvent {
   lngLat: LngLatArray;
