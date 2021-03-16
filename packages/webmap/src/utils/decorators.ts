@@ -1,5 +1,5 @@
-import { WebMap } from '../WebMap';
-import { WebMapEvents } from '../interfaces/Events';
+import type { WebMap } from '../WebMap';
+import type { WebMapEvents } from '../interfaces/Events';
 
 /**
  * @internal
@@ -8,7 +8,7 @@ export function onLoad<E extends WebMapEvents = WebMapEvents>(event: keyof E) {
   return function (
     _target: WebMap,
     _propertyKey: string,
-    descriptor: PropertyDescriptor
+    descriptor: PropertyDescriptor,
   ): PropertyDescriptor {
     const originalMethod = descriptor.value;
 

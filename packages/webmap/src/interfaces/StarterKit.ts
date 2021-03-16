@@ -1,6 +1,6 @@
-import { MapClickEvent } from './MapAdapter';
-import { MapOptions } from './MapOptions';
-import { WebMap, Type, LayerAdapter } from '../index';
+import type { MapClickEvent } from './MapAdapter';
+import type { MapOptions } from './MapOptions';
+import type { WebMap, Type, LayerAdapter } from '../index';
 
 /**
  * @public

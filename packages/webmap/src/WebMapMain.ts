@@ -1,20 +1,25 @@
 import { EventEmitter } from 'events';
-import StrictEventEmitter from 'strict-event-emitter-types';
-import { Feature, Polygon } from 'geojson';
 
-import {
-  deepmerge,
-  defined,
-  Type,
-  getBoundsFeature,
-  TileJson,
-} from '@nextgis/utils';
+import { deepmerge, defined, getBoundsFeature } from '@nextgis/utils';
 import { GetPaintFunction } from '@nextgis/paint';
 import CancelablePromise from '@nextgis/cancelable-promise';
 import { deprecatedMapClick } from '@nextgis/utils';
 
-import { LngLatBoundsArray, Cursor, LngLatArray } from './interfaces/BaseTypes';
-import {
+import { Keys } from './components/keys/Keys';
+import { CenterState } from './components/mapStates/CenterState';
+import { StateItem } from './components/mapStates/StateItem';
+import { ZoomState } from './components/mapStates/ZoomState';
+import { clearObject } from './utils/clearObject';
+
+import type StrictEventEmitter from 'strict-event-emitter-types';
+import type { Feature, Polygon } from 'geojson';
+import type { Type, TileJson } from '@nextgis/utils';
+import type {
+  LngLatBoundsArray,
+  Cursor,
+  LngLatArray,
+} from './interfaces/BaseTypes';
+import type {
   Locate,
   MapAdapter,
   FitOptions,
@@ -22,18 +27,11 @@ import {
   LocationEvents,
   MapClickEvent,
 } from './interfaces/MapAdapter';
-import { StarterKit } from './interfaces/StarterKit';
-import { LayerAdapter } from './interfaces/LayerAdapter';
-import { RuntimeParams } from './interfaces/RuntimeParams';
-import { MapOptions } from './interfaces/MapOptions';
-import { WebMapEvents, MainMapEvents } from './interfaces/Events';
-
-import { Keys } from './components/keys/Keys';
-import { CenterState } from './components/mapStates/CenterState';
-import { StateItem } from './components/mapStates/StateItem';
-import { ZoomState } from './components/mapStates/ZoomState';
-
-import { clearObject } from './utils/clearObject';
+import type { StarterKit } from './interfaces/StarterKit';
+import type { LayerAdapter } from './interfaces/LayerAdapter';
+import type { RuntimeParams } from './interfaces/RuntimeParams';
+import type { MapOptions } from './interfaces/MapOptions';
+import type { WebMapEvents, MainMapEvents } from './interfaces/Events';
 
 type EmitStatusEventData = any;
 
@@ -475,7 +473,7 @@ export class WebMapMain<
           };
           this.mapAdapter.emitter.once('click', onMapClick);
           onCancel(onCancel_);
-        }
+        },
       );
     } else {
       return this.getCoordFromMapClick();
@@ -485,7 +483,7 @@ export class WebMapMain<
 
   protected _emitStatusEvent(
     eventName: keyof E,
-    data?: EmitStatusEventData
+    data?: EmitStatusEventData,
   ): void {
     // ugly hack to disable type checking error
     const _eventName = eventName as keyof WebMapEvents;
@@ -607,7 +605,7 @@ export class WebMapMain<
   private _removeEventListeners(opt?: AddEventsListenersOptions): void {
     let events = Object.entries(this._mapEvents) as [
       keyof MainMapEvents,
-      ((...args: any[]) => void) | undefined
+      ((...args: any[]) => void) | undefined,
     ][];
     if (opt && opt.include) {
       events = events.filter((x) => opt.include.includes(x[0]));
