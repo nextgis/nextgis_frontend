@@ -46,13 +46,13 @@
  * ...and there will be compatibility issues
  */
 
-import { WebMapEvents } from './interfaces/Events';
-
-import { WebMapLayers } from './WebMapLayers';
 import { WebMapMain, WEB_MAP_CONTAINER } from './WebMapMain';
 import { WebMapControls } from './WebMapControls';
-import { MapOptions } from './interfaces/MapOptions';
-import { ControlOptions } from './interfaces/MapControl';
+
+import type { MapOptions } from './interfaces/MapOptions';
+import type { ControlOptions } from './interfaces/MapControl';
+import type { WebMapEvents } from './interfaces/Events';
+import type { WebMapLayers } from './WebMapLayers';
 
 /**
  * The core component for managing map adapters.

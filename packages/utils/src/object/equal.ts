@@ -2,7 +2,7 @@ import { isObject } from '..';
 
 export function deepEqual<T extends Record<string, any> = Record<string, any>>(
   obj1: T,
-  obj2: T
+  obj2: T,
 ): boolean {
   const keys1 = Object.keys(obj1);
   const keys2 = Object.keys(obj2);

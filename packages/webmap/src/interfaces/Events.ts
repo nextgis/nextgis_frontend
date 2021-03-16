@@ -1,6 +1,6 @@
-import { WebMap } from '../WebMap';
-import { MapAdapter, MapClickEvent, DataLoadError } from './MapAdapter';
-import {
+import type { WebMap } from '../WebMap';
+import type { MapAdapter, MapClickEvent, DataLoadError } from './MapAdapter';
+import type {
   LayerAdapter,
   OnLayerClickOptions,
   OnLayerSelectOptions,
