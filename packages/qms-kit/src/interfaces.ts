@@ -1,4 +1,4 @@
-import { MainLayerAdapter, RasterAdapterOptions } from '@nextgis/webmap';
+import type { MainLayerAdapter, RasterAdapterOptions } from '@nextgis/webmap';
 export interface QmsOptions {
   url: string;
 }

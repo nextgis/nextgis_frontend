@@ -1,13 +1,19 @@
-import { WebMap, MainLayerAdapter } from '@nextgis/webmap';
-import { Type, mixinProperties } from '@nextgis/utils';
-import { QmsAdapterOptions, QmsBasemap, QmsAdapter as QA } from '../interfaces';
+import { mixinProperties } from '@nextgis/utils';
 import { alias, updateQmsOptions } from './updateQmsOptions';
 import { loadJson } from './loadJson';
 import { getSubdomainsOriginUrl } from './getSubmodulesFromOriginUrl';
 
+import type { Type } from '@nextgis/utils';
+import type { WebMap, MainLayerAdapter } from '@nextgis/webmap';
+import type {
+  QmsAdapterOptions,
+  QmsBasemap,
+  QmsAdapter as QA,
+} from '../interfaces';
+
 export function createQmsAdapter(
   webMap: WebMap,
-  url = 'https://qms.nextgis.com'
+  url = 'https://qms.nextgis.com',
 ): Type<MainLayerAdapter> {
   class QmsAdapter<M = any> implements MainLayerAdapter<M>, QA {
     qms?: QmsBasemap;
@@ -26,7 +32,7 @@ export function createQmsAdapter(
       if (!this.qms && options.qmsId) {
         try {
           this.qms = await loadJson<QmsBasemap>(
-            url + '/api/v1/geoservices/' + options.qmsId
+            url + '/api/v1/geoservices/' + options.qmsId,
           );
         } catch (er) {
           console.error(er);
