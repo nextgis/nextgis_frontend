@@ -1,5 +1,5 @@
-import Map from 'ol/Map';
-import { AdapterOptions } from '@nextgis/webmap';
+import type Map from 'ol/Map';
+import type { AdapterOptions } from '@nextgis/webmap';
 
 const DPI = 1000 / 39.37 / 0.28;
 const IPM = 39.37;
@@ -15,7 +15,7 @@ interface ResolutionOptions {
 
 export function resolutionOptions(
   map: Map,
-  opt: AdapterOptions
+  opt: AdapterOptions,
 ): ResolutionOptions {
   return {
     minResolution:
@@ -29,7 +29,7 @@ export function getResolution(map: Map, scale: number): number | undefined {
   if (scale) {
     return getResolutionForScale(
       scale,
-      map.getView().getProjection().getMetersPerUnit() || 1
+      map.getView().getProjection().getMetersPerUnit() || 1,
     );
   }
 }
