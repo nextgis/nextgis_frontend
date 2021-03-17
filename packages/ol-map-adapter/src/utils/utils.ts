@@ -1,21 +1,20 @@
-import { Feature } from 'geojson';
 import GeoJSON from 'ol/format/GeoJSON';
 import CircleStyle from 'ol/style/Circle';
 import { asArray, Color } from 'ol/color';
-import OlFeature from 'ol/Feature';
 import { Fill, Stroke, Style, Text } from 'ol/style';
-import { Options as TextOptions } from 'ol/style/Text';
 import IconAnchorUnits from 'ol/style/IconAnchorUnits';
-import Icon, { Options as IconOptions } from 'ol/style/Icon';
+import Icon from 'ol/style/Icon';
+import { isPaintCallback, isPaint } from '@nextgis/paint';
 
-import { GeoJsonAdapterOptions, VectorAdapterLayerType } from '@nextgis/webmap';
-import {
-  GeometryPaint,
-  Paint,
-  isPaintCallback,
-  isPaint,
-  PaintType,
-} from '@nextgis/paint';
+import type { Feature } from 'geojson';
+import type OlFeature from 'ol/Feature';
+import type { Options as TextOptions } from 'ol/style/Text';
+import type { Options as IconOptions } from 'ol/style/Icon';
+import type {
+  GeoJsonAdapterOptions,
+  VectorAdapterLayerType,
+} from '@nextgis/webmap';
+import type { GeometryPaint, Paint, PaintType } from '@nextgis/paint';
 
 const typeAlias: { [x: string]: VectorAdapterLayerType } = {
   Point: 'point',
@@ -51,7 +50,7 @@ export function getColor(colorStr: string, opacity?: number): Color {
 
 export function styleFunction(
   feature: OlFeature<any>,
-  paint: Paint = {}
+  paint: Paint = {},
 ): Style | undefined {
   if (isPaintCallback(paint)) {
     const f: Feature = getFeature(feature);
@@ -131,7 +130,7 @@ export function styleFunction(
 
 export function labelStyleFunction(
   type: VectorAdapterLayerType,
-  opt: GeoJsonAdapterOptions
+  opt: GeoJsonAdapterOptions,
 ): Style {
   const fontSize = 12; //* (opt.ratio || 1);
   let options: TextOptions = {
@@ -192,7 +191,7 @@ export function queryToObject(str: string): Record<string, any> {
 
 export function objectToQuery(
   obj: { [x: string]: any },
-  prefix?: string
+  prefix?: string,
 ): string {
   const str = [];
   let p;
@@ -202,7 +201,7 @@ export function objectToQuery(
     str.push(
       v !== null && typeof v === 'object'
         ? objectToQuery(v, k)
-        : encodeURIComponent(k) + '=' + encodeURIComponent(v)
+        : encodeURIComponent(k) + '=' + encodeURIComponent(v),
     );
   }
   return str.join('&');

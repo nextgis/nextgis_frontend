@@ -1,11 +1,11 @@
-import Map from 'ol/Map';
-import OlFeature from 'ol/Feature';
-import Base from 'ol/layer/Base';
 import GeoJSON from 'ol/format/GeoJSON';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 
-import { Feature, GeoJsonObject } from 'geojson';
+import type Base from 'ol/layer/Base';
+import type Map from 'ol/Map';
+import type OlFeature from 'ol/Feature';
+import type { Feature, GeoJsonObject } from 'geojson';
 
 import {
   DataLayerFilter,
@@ -123,7 +123,7 @@ export class GeoJsonAdapter
   select(findFeatureCb?: DataLayerFilter<Feature> | PropertiesFilter): void {
     if (findFeatureCb) {
       const feature = this._selectedFeatures.filter((x) =>
-        Object.create({ feature: x })
+        Object.create({ feature: x }),
       );
       feature.forEach((x) => {
         this._selectFeature(x);
@@ -139,7 +139,7 @@ export class GeoJsonAdapter
   unselect(findFeatureCb?: DataLayerFilter<Feature> | PropertiesFilter): void {
     if (findFeatureCb) {
       const feature = this._selectedFeatures.filter((x) =>
-        Object.create({ feature: x })
+        Object.create({ feature: x }),
       );
       feature.forEach((x) => {
         this._unselectFeature(x);
@@ -193,7 +193,7 @@ export class GeoJsonAdapter
       const extent = transformExtent(
         bounds,
         this.displayProjection,
-        this.lonlatProjection
+        this.lonlatProjection,
       );
       return extent as LngLatBoundsArray;
     }
@@ -214,7 +214,7 @@ export class GeoJsonAdapter
 
   private _addSelectListener() {
     const _forEachFeatureAtPixel = this.map.get(
-      '_forEachFeatureAtPixel'
+      '_forEachFeatureAtPixel',
     ) as ForEachFeatureAtPixelCallback[];
     _forEachFeatureAtPixel.push((feature, layer) => {
       if (layer === this.layer) {
