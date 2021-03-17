@@ -1,10 +1,10 @@
-import Tile from 'ol/Tile';
-import ImageWrapper from 'ol/Image';
+import type Tile from 'ol/Tile';
+import type ImageWrapper from 'ol/Image';
 
 export function setTileLoadFunction(
   tile: Tile | ImageWrapper,
   src: string,
-  headers: Record<string, any>
+  headers: Record<string, any>,
 ): void {
   const xhr = new XMLHttpRequest();
   xhr.open('GET', src);

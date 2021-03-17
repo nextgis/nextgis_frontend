@@ -1,10 +1,3 @@
-import { PropertyFilter } from '@nextgis/properties-filter';
-import {
-  DefaultTreeItem,
-  SelfFilter,
-  TreeOptions,
-  TreeRelation,
-} from './interfaces';
 import {
   getChildren,
   treeEvery,
@@ -12,6 +5,14 @@ import {
   treeFind,
   treeSome,
 } from './treeFilter';
+
+import type { PropertyFilter } from '@nextgis/properties-filter';
+import type {
+  DefaultTreeItem,
+  SelfFilter,
+  TreeOptions,
+  TreeRelation,
+} from './interfaces';
 
 export class Tree<TREE_ITEM = any> {
   relation: TreeRelation = 'children';
@@ -21,7 +22,7 @@ export class Tree<TREE_ITEM = any> {
 
   constructor(
     public item: DefaultTreeItem = { children: [] },
-    options: TreeOptions<any> = {}
+    options: TreeOptions<any> = {},
   ) {
     if (options.relation) {
       this.relation = options.relation;

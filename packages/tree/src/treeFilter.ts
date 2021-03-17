@@ -1,5 +1,7 @@
-import { propertiesFilter, PropertyFilter } from '@nextgis/properties-filter';
-import {
+import { propertiesFilter } from '@nextgis/properties-filter';
+
+import type { PropertyFilter } from '@nextgis/properties-filter';
+import type {
   DefaultTreeItem,
   RelationFunction,
   SelfFilter,
@@ -11,7 +13,7 @@ type D = DefaultTreeItem;
 type TreeFunction<X extends D> = (
   item: X | X[],
   filter: SelfFilter<X>,
-  relation: TreeRelation<X>
+  relation: TreeRelation<X>,
 ) => X | X[] | boolean | undefined;
 
 type ItemPrepareFunction<F extends D> = (item: D) => F;
@@ -20,7 +22,7 @@ export function treeEvery<F extends D = D>(
   item: F | F[],
   filter?: PropertyFilter | SelfFilter<F>,
   relation?: TreeRelation<F>,
-  itemPrepare?: ItemPrepareFunction<F>
+  itemPrepare?: ItemPrepareFunction<F>,
 ): boolean {
   return !!treeWrapper<F>(item, filter, relation, treeEvery_, itemPrepare);
 }
@@ -29,7 +31,7 @@ export function treeSome<F extends D = D>(
   item: F | F[],
   filter?: PropertyFilter | SelfFilter<F>,
   relation?: TreeRelation<F>,
-  itemPrepare?: ItemPrepareFunction<F>
+  itemPrepare?: ItemPrepareFunction<F>,
 ): boolean {
   return !!treeWrapper<F>(item, filter, relation, treeFind_, itemPrepare);
 }
@@ -38,7 +40,7 @@ export function treeFind<F extends D = D>(
   item: F | F[],
   filter?: PropertyFilter | SelfFilter<F>,
   relation?: TreeRelation<F>,
-  itemPrepare?: ItemPrepareFunction<F>
+  itemPrepare?: ItemPrepareFunction<F>,
 ): F | undefined {
   return treeWrapper<F>(item, filter, relation, treeFind_, itemPrepare) as F;
 }
@@ -47,20 +49,20 @@ export function treeFilter<F extends D = D>(
   item: F | F[],
   filter?: PropertyFilter | SelfFilter<F>,
   relation?: TreeRelation<F>,
-  itemPrepare?: ItemPrepareFunction<F>
+  itemPrepare?: ItemPrepareFunction<F>,
 ): F[] {
   return treeWrapper<F>(
     item,
     filter,
     relation,
     treeFilter_,
-    itemPrepare
+    itemPrepare,
   ) as F[];
 }
 
 export function getChildren<F extends D = D>(
   item: F,
-  relation: TreeRelation<F> = 'children'
+  relation: TreeRelation<F> = 'children',
 ): F[] | undefined {
   let children: F[] = [];
   const relationFunction: RelationFunction<F> =
@@ -81,7 +83,7 @@ function treeWrapper<F extends D = D>(
   filter: PropertyFilter | SelfFilter<F> = (x: F): boolean => !!x,
   relation: TreeRelation<F> = 'children',
   treeFunction: TreeFunction<F>,
-  itemPrepare?: ItemPrepareFunction<F>
+  itemPrepare?: ItemPrepareFunction<F>,
 ): F[] | F | boolean | undefined {
   const filterFunction: SelfFilter<F> =
     typeof filter === 'function'
@@ -91,7 +93,7 @@ function treeWrapper<F extends D = D>(
     return treeFunction(
       item,
       (i: F): boolean => filterFunction(itemPrepare(i)),
-      relation
+      relation,
     );
   }
   return treeFunction(item, filterFunction, relation);
@@ -101,7 +103,7 @@ function treeFind_<F extends D = D>(
   item: F | F[],
   filterFunc: SelfFilter<F> = (x: F): boolean => !!x,
   relation: TreeRelation<F>,
-  _filtered: F[] = []
+  _filtered: F[] = [],
 ): F | undefined {
   let children: F[] = [];
   if (Array.isArray(item)) {
@@ -131,7 +133,7 @@ function treeFilter_<F extends D = D>(
   item: F | F[],
   filterFunc: SelfFilter<F> = (x: F): boolean => !!x,
   relation: TreeRelation<F>,
-  _filtered: F[] = []
+  _filtered: F[] = [],
 ): F[] {
   let children: F[] = [];
   if (Array.isArray(item)) {
@@ -160,7 +162,7 @@ function treeEvery_<F extends D = D>(
   item: F | F[],
   filterFunc: SelfFilter<F> = (x: F): boolean => !!x,
   relation: TreeRelation<F>,
-  _filtered: F[] = []
+  _filtered: F[] = [],
 ): boolean {
   let children: F[] = [];
   if (Array.isArray(item)) {
