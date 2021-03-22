@@ -10,6 +10,7 @@ export type TileLayerOptionsExtended = TileLayerOptions & {
 class TileLayerBase extends TL {
   constructor(urlTemplate: string, options?: TileLayerOptionsExtended) {
     super(urlTemplate, options);
+    Object.assign(this.options, options);
   }
 }
 
