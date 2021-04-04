@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.6](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2021-04-04)
+
+
+### Bug Fixes
+
+* **vue:** fix vue observable leaks ([612ea1f](https://github.com/nextgis/nextgis_frontend/commit/612ea1fc72898e1061d4bb3b2a107e59230afd20))
+* **vue:** prop definition ([5ccbd4c](https://github.com/nextgis/nextgis_frontend/commit/5ccbd4c605231dabe4bbf233ab597f070f7be413))
+* **vue:** set types for VueNgwMap adapter components ([d1e0782](https://github.com/nextgis/nextgis_frontend/commit/d1e078208701e0fe81c552e18af88a7f8cab5c06))
+
+
+
+
+
 # [1.0.0-beta.5](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2021-02-13)
 
 **Note:** Version bump only for package @nextgis/vue-ngw-ol

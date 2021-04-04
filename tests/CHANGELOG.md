@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.6](https://github.com/nextgis/nextgisweb_frontend/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2021-04-04)
+
+
+### Features
+
+* **area:** add new Area package ([6658344](https://github.com/nextgis/nextgisweb_frontend/commit/665834493f2d25f2163b57bf41f9b25cc3c2e086))
+
+
+
+
+
 # [1.0.0-beta.5](https://github.com/nextgis/nextgisweb_frontend/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2021-02-13)
 
 **Note:** Version bump only for package @nextgis/frontend_test

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.6](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2021-04-04)
+
+
+### Bug Fixes
+
+* **cesium:** change geojson extrude height set ([96df3c2](https://github.com/nextgis/nextgis_frontend/commit/96df3c257c6ef07ca9139bdb456936399f1a539f))
+* **vue:** fix vue observable leaks ([612ea1f](https://github.com/nextgis/nextgis_frontend/commit/612ea1fc72898e1061d4bb3b2a107e59230afd20))
+
+
+
+
+
 # [1.0.0-beta.5](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2021-02-13)
 
 
