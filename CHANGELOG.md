@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.6](https://github.com/nextgis/nextgisweb_frontend/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2021-04-04)
+
+
+### Bug Fixes
+
+* **cesium:** change geojson extrude height set ([96df3c2](https://github.com/nextgis/nextgisweb_frontend/commit/96df3c257c6ef07ca9139bdb456936399f1a539f))
+* **demo:** import utils from cdn ([f064e84](https://github.com/nextgis/nextgisweb_frontend/commit/f064e84214cc4347722c34e966fb67fac184db7f))
+* **leafelet-map-adapter:** safe make remote options ([70dc9d6](https://github.com/nextgis/nextgisweb_frontend/commit/70dc9d66faf75d9344d2532dba16112081f13861))
+* **ngw-connector:** node request write data for no POST mode ([e31533f](https://github.com/nextgis/nextgisweb_frontend/commit/e31533fb888b91e655804abb51951b0a744fe618))
+* **ngw-kit:** inject item into the createRasterAdapter class factory ([567809b](https://github.com/nextgis/nextgisweb_frontend/commit/567809b366231f4b78453f52e544e6bc134cd486))
+* **ngw-kit:** insert headers into createOnFirstShowAdapter addLayer method ([d230fe2](https://github.com/nextgis/nextgisweb_frontend/commit/d230fe2f484f42ff1e0a99f9ff33d60526b55bdd))
+* **vue:** fix vue observable leaks ([612ea1f](https://github.com/nextgis/nextgisweb_frontend/commit/612ea1fc72898e1061d4bb3b2a107e59230afd20))
+* **vue:** prop definition ([5ccbd4c](https://github.com/nextgis/nextgisweb_frontend/commit/5ccbd4c605231dabe4bbf233ab597f070f7be413))
+* **vue:** set types for VueNgwMap adapter components ([d1e0782](https://github.com/nextgis/nextgisweb_frontend/commit/d1e078208701e0fe81c552e18af88a7f8cab5c06))
+
+
+### Features
+
+* **area:** add new Area package ([6658344](https://github.com/nextgis/nextgisweb_frontend/commit/665834493f2d25f2163b57bf41f9b25cc3c2e086))
+* **eslint:** add prettier rules ([457c0a1](https://github.com/nextgis/nextgisweb_frontend/commit/457c0a1c6362fb99020e536ee48860ed03ca7aa7))
+* **ngw-kit:** add datetime ngw formatter ([2d75cca](https://github.com/nextgis/nextgisweb_frontend/commit/2d75cca95106aa6eeeb9ae3bd8348f8e92b72bc8))
+* **utils:** add getPolygons coordinates function ([ff5864b](https://github.com/nextgis/nextgisweb_frontend/commit/ff5864b9070712c62bb7060bdcb75a9c7dddff99))
+* **utils:** clipbord static create may throw error ([102a843](https://github.com/nextgis/nextgisweb_frontend/commit/102a8432158a3e6c345daaea40e0055bdfd76812))
+
+
+
+
+
 # [1.0.0-beta.5](https://github.com/nextgis/nextgisweb_frontend/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2021-02-13)
 
 

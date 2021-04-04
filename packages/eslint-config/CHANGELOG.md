@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.6](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2021-04-04)
+
+
+### Features
+
+* **eslint:** add prettier rules ([457c0a1](https://github.com/nextgis/nextgis_frontend/commit/457c0a1c6362fb99020e536ee48860ed03ca7aa7))
+
+
+
+
+
 # [1.0.0-beta.5](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2021-02-13)
 
 **Note:** Version bump only for package @nextgis/eslint-config
