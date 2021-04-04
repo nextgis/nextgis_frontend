@@ -9,7 +9,7 @@ Constructs a new instance of the `Clipboard` class
 <b>Signature:</b>
 
 ```typescript
-constructor(text: string);
+constructor(text?: string);
 ```
 
 ## Parameters

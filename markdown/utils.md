@@ -18,6 +18,7 @@
 |  [\_allProperties(obj, \_props)](./utils._allproperties.md) |  |
 |  [allProperties(obj)](./utils.allproperties.md) |  |
 |  [applyMixins(derivedCtor, baseCtors, opt)](./utils.applymixins.md) |  |
+|  [arrayChunk(arr, size)](./utils.arraychunk.md) |  |
 |  [arrayCompare(array1, array2)](./utils.arraycompare.md) | Comparison of the contents of two arrays. Position of elements is ignored. |
 |  [arrayCompareStrict(array1, array2)](./utils.arraycomparestrict.md) | Comparing content and position of elements of two arrays. |
 |  [arrayUnique(arr)](./utils.arrayunique.md) |  |
@@ -43,7 +44,9 @@
 |  [getBoundsPolygon(b)](./utils.getboundspolygon.md) |  |
 |  [getCircleFeature(lng, lat, radius, points)](./utils.getcirclefeature.md) |  |
 |  [getCirclePolygonCoordinates(lng, lat, radius, points)](./utils.getcirclepolygoncoordinates.md) |  |
+|  [getCoordinates(geojson)](./utils.getcoordinates.md) |  |
 |  [getGlobalVariable()](./utils.getglobalvariable.md) |  |
+|  [getPolygons(geojson)](./utils.getpolygons.md) |  |
 |  [isAnyJson(val)](./utils.isanyjson.md) |  |
 |  [isArray(val)](./utils.isarray.md) |  |
 |  [isJsonArray(val)](./utils.isjsonarray.md) |  |
