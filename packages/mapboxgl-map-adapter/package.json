@@ -14,7 +14,7 @@
     "@nextgis/webmap": "^1.0.0-beta.5",
     "@types/events": "^3.0.0",
     "@types/mapbox-gl": "^1.12.8",
-    "events": "^3.2.0",
+    "events": "^3.3.0",
     "mapbox-gl": "1.13.0"
   },
   "optionalDependencies": {
