@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.6](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2021-04-04)
+
+
+### Bug Fixes
+
+* **demo:** import utils from cdn ([f064e84](https://github.com/nextgis/nextgis_frontend/commit/f064e84214cc4347722c34e966fb67fac184db7f))
+
+
+
+
+
 # [1.0.0-beta.5](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2021-02-13)
 
 **Note:** Version bump only for package @nextgis/ngw-ol
