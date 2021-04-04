@@ -16,6 +16,5 @@ hooks: {
             id: number;
         }) => Promise<void>;
         delete?: (resourceId: number, featureId: number) => Promise<void>;
-        dateFormat?: (ngwDate: string) => string;
     };
 ```

@@ -19,7 +19,8 @@ export declare abstract class ResourceStore<P extends GeoJsonProperties = GeoJso
 |  [connector](./vuex-ngw.resourcestore.connector.md) |  | NgwConnector |  |
 |  [fields](./vuex-ngw.resourcestore.fields.md) |  | [FeatureLayerField](./ngw-connector.featurelayerfield.md)<!-- -->\[\] |  |
 |  [foreignResources](./vuex-ngw.resourcestore.foreignresources.md) |  | { \[key in ResourceDef\]: [ForeignResource](./vuex-ngw.foreignresource.md)<!-- -->; } |  |
-|  [hooks](./vuex-ngw.resourcestore.hooks.md) |  | { onNewItem?: (opt: [PatchOptions](./vuex-ngw.patchoptions.md)<!-- -->&lt;G, P&gt;) =&gt; Promise&lt;void&gt;; onBeforeDelete?: (opt: { fid: number; }) =&gt; Promise&lt;void&gt;; onBeforePatch?: (data: Partial&lt;[FeatureItem](./ngw-connector.featureitem.md)<!-- -->&lt;P, Geometry&gt;&gt;\[\], opt: { id: number; }) =&gt; Promise&lt;void&gt;; delete?: (resourceId: number, featureId: number) =&gt; Promise&lt;void&gt;; dateFormat?: (ngwDate: string) =&gt; string; } |  |
+|  [formatters](./vuex-ngw.resourcestore.formatters.md) |  | { date?: (date: string) =&gt; string; datetime?: (date: string) =&gt; string; } |  |
+|  [hooks](./vuex-ngw.resourcestore.hooks.md) |  | { onNewItem?: (opt: [PatchOptions](./vuex-ngw.patchoptions.md)<!-- -->&lt;G, P&gt;) =&gt; Promise&lt;void&gt;; onBeforeDelete?: (opt: { fid: number; }) =&gt; Promise&lt;void&gt;; onBeforePatch?: (data: Partial&lt;[FeatureItem](./ngw-connector.featureitem.md)<!-- -->&lt;P, Geometry&gt;&gt;\[\], opt: { id: number; }) =&gt; Promise&lt;void&gt;; delete?: (resourceId: number, featureId: number) =&gt; Promise&lt;void&gt;; } |  |
 |  [resource](./vuex-ngw.resourcestore.resource.md) |  | string |  |
 |  [resourceItems](./vuex-ngw.resourcestore.resourceitems.md) |  | [ResourceStoreItem](./ngw-connector.resourcestoreitem.md)<!-- -->&lt;P&gt;\[\] |  |
 |  [resources](./vuex-ngw.resourcestore.resources.md) |  | { \[key in ResourceDef\]?: number; } |  |

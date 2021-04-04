@@ -7,14 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function parseDateFromNgw(date: NgwDateFormat): string;
+export declare function parseDateFromNgw(date: NgwDateTimeFormat): string;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  date | [NgwDateFormat](./ngw-connector.ngwdateformat.md) |  |
+|  date | [NgwDateTimeFormat](./ngw-connector.ngwdatetimeformat.md) |  |
 
 <b>Returns:</b>
 

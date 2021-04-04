@@ -1,37 +1,39 @@
-import {
-  VectorAdapterLayerType,
-  VectorLayerAdapter,
-  VectorAdapterOptions,
-  DataLayerFilter,
-  FilterOptions,
-} from '@nextgis/webmap';
-
-import { Paint, IconOptions, isPaint, isIcon } from '@nextgis/paint';
-
+import { isPaint, isIcon } from '@nextgis/paint';
 import {
   checkIfPropertyFilter,
-  PropertiesFilter,
-  Operations,
-  PropertyFilter,
 } from '@nextgis/properties-filter';
-import {
+
+import { getImage } from '../util/imageIcons';
+import { typeAliasForFilter, allowedByType } from '../util/geomType';
+import { BaseAdapter } from './BaseAdapter';
+
+import type {
   Feature as F,
   GeometryObject,
   Geometry,
   GeoJsonProperties,
 } from 'geojson';
-import {
+import type {
   Map,
   MapLayerMouseEvent,
   AnySourceData,
   AnyLayout,
   Layer,
 } from 'mapbox-gl';
-
-import { getImage } from '../util/imageIcons';
-import { TLayer } from '../MapboxglMapAdapter';
-import { BaseAdapter } from './BaseAdapter';
-import { typeAliasForFilter, allowedByType } from '../util/geomType';
+import type { Paint, IconPaint } from '@nextgis/paint';
+import type {
+  VectorAdapterLayerType,
+  VectorLayerAdapter,
+  VectorAdapterOptions,
+  DataLayerFilter,
+  FilterOptions,
+} from '@nextgis/webmap';
+import type { TLayer } from '../MapboxglMapAdapter';
+import type {
+  PropertiesFilter,
+  Operations,
+  PropertyFilter,
+} from '@nextgis/properties-filter';
 
 export const operationsAliases: { [key in Operations]: string } = {
   gt: '>',
@@ -448,7 +450,7 @@ export abstract class VectorAdapter<
     return feature.id;
   }
 
-  protected async _registerImage(paint: IconOptions): Promise<void> {
+  protected async _registerImage(paint: IconPaint): Promise<void> {
     if (isIcon(paint) && paint.html && this.map) {
       const imageExist = this.map.hasImage(paint.html);
       if (!imageExist) {

@@ -21,6 +21,7 @@ export interface AdapterOptions<N extends Record<string, any> = Record<string, a
 |  [baselayer?](./webmap.adapteroptions.baselayer.md) | boolean | <i>(Optional)</i> Indicate on a cartographic base layer. |
 |  [crossOrigin?](./webmap.adapteroptions.crossorigin.md) | 'anonymous' | <i>(Optional)</i> Parameter added when forming a request for layer data. This is needed if you want to access tile pixel data. Refer to [CORS Settings](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin) for valid String values. |
 |  [fit?](./webmap.adapteroptions.fit.md) | boolean | <i>(Optional)</i> Fit map to layer extent |
+|  [headers?](./webmap.adapteroptions.headers.md) | Record&lt;string, any&gt; | <i>(Optional)</i> |
 |  [id?](./webmap.adapteroptions.id.md) | string | <i>(Optional)</i> Unique Layer ID. If not specified, will be added automatically. |
 |  [maxZoom?](./webmap.adapteroptions.maxzoom.md) | number | <i>(Optional)</i> Maximum zoom level of the map. |
 |  [minZoom?](./webmap.adapteroptions.minzoom.md) | number | <i>(Optional)</i> Minimum zoom level of the map. |

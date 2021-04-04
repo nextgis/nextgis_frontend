@@ -7,14 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function isIcon(paint: IconOptions): paint is IconPaint;
+export declare function isIcon(paint: IconPaint): paint is IconPaint;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  paint | [IconOptions](./paint.iconoptions.md) |  |
+|  paint | [IconPaint](./paint.iconpaint.md) |  |
 
 <b>Returns:</b>
 
