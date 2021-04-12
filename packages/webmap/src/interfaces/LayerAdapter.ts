@@ -129,7 +129,10 @@ export interface AdapterOptions<
    * Experimental option to set the  map loading delay  when changing position
    */
   setViewDelay?: number;
-
+  /** Any properties to save in layer.
+   * May be useful to get additional info from layer event.  */
+  props?: Record<string, any>;
+  /** Map and layer adapter base options */
   nativeOptions?: N;
   ratio?: number;
 }
@@ -158,7 +161,11 @@ export interface PopupOptions {
   fromProperties?: boolean;
   createPopupContent?: (
     layerDef: LayerDefinition,
-  ) => HTMLElement | string | undefined;
+  ) =>
+    | HTMLElement
+    | string
+    | undefined
+    | Promise<HTMLElement | string | undefined>;
 }
 
 type _VectorAdapterOptionsToExtend<
@@ -403,6 +410,7 @@ export interface LayerDefinition<F extends Feature = Feature, L = any> {
   layer?: L;
   feature?: F;
   visible?: boolean;
+  target?: LayerAdapter;
 }
 
 /**
