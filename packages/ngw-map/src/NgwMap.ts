@@ -33,7 +33,6 @@ import {
   ResourceAdapter,
   NgwWebmapItem,
   NgwIdentify,
-
   fetchNgwLayerItem,
   fetchNgwLayerItems,
   fetchNgwLayerFeature,
@@ -138,7 +137,7 @@ export class NgwMap<
   async addControl<K extends keyof MapControls>(
     controlDef: K | C,
     position: ControlPosition,
-    options?: MapControls[K]
+    options?: MapControls[K],
   ): Promise<any> {
     await this.onLoad('controls:create');
     return super.addControl(controlDef, position, options);
@@ -161,7 +160,7 @@ export class NgwMap<
    * ```
    */
   async addNgwLayer(
-    options: NgwLayerOptions
+    options: NgwLayerOptions,
   ): Promise<ResourceAdapter | undefined> {
     await this.onMapLoad();
     // @ts-ignore for backward compatibility
@@ -171,14 +170,14 @@ export class NgwMap<
 
     if (keyname || resourceId !== undefined) {
       deprecatedWarn(
-        'set `resource` options instead of `keyname` or `resourceId`'
+        'set `resource` options instead of `keyname` or `resourceId`',
       );
     }
 
     const resource = options.resource;
     if (!keyname && !resourceId && !resource) {
       throw new Error(
-        'resource, resourceId or keyname is required parameter to add NGW layer'
+        'resource, resourceId or keyname is required parameter to add NGW layer',
       );
     }
     if (this.options.baseUrl || this.options.baseUrl === '') {
@@ -249,7 +248,7 @@ export class NgwMap<
       resourceId: number;
       connector?: NgwConnector;
       filters?: PropertiesFilter;
-    } & FilterOptions
+    } & FilterOptions,
   ): CancelablePromise<FeatureItem[]> {
     return fetchNgwLayerItems({
       connector: this.connector,
@@ -278,7 +277,7 @@ export class NgwMap<
       resourceId: number;
       connector?: NgwConnector;
       filters?: PropertiesFilter;
-    } & FilterOptions
+    } & FilterOptions,
   ): CancelablePromise<FeatureCollection<G, P>> {
     return fetchNgwLayerFeatureCollection({
       connector: this.connector,
@@ -291,7 +290,7 @@ export class NgwMap<
     P extends GeoJsonProperties = GeoJsonProperties
   >(
     identify: NgwIdentify,
-    requestOptions?: NgwFeatureRequestOptions
+    requestOptions?: NgwFeatureRequestOptions,
     // multiple = false
   ): CancelablePromise<NgwFeatureItemResponse<P, G> | undefined> {
     const promise = fetchIdentifyItem<G, P>({
@@ -307,7 +306,7 @@ export class NgwMap<
 
   fetchIdentifyGeoJson(
     identify: NgwIdentify,
-    multiple = false
+    multiple = false,
   ): CancelablePromise<Feature | undefined> {
     const promise = fetchIdentifyGeoJson({
       identify,
@@ -327,7 +326,7 @@ export class NgwMap<
    */
   getIdentifyGeoJson(
     identify: NgwIdentify,
-    multiple = false
+    multiple = false,
   ): CancelablePromise<Feature | undefined> {
     return this.fetchIdentifyGeoJson(identify, multiple);
   }
@@ -470,7 +469,7 @@ export class NgwMap<
       resourceId: number;
       connector?: NgwConnector;
       filters?: PropertiesFilter;
-    } & FilterOptions
+    } & FilterOptions,
   ): CancelablePromise<FeatureItem[]> {
     return this.fetchNgwLayerItems(options);
   }
@@ -499,7 +498,7 @@ export class NgwMap<
       resourceId: number;
       connector?: NgwConnector;
       filters?: PropertiesFilter;
-    } & FilterOptions
+    } & FilterOptions,
   ): CancelablePromise<FeatureCollection<G, P>> {
     return this.fetchNgwLayerFeatures(options);
   }
@@ -605,7 +604,7 @@ export class NgwMap<
   }
 
   private _selectFromNgwVector(
-    ev: OnLayerClickOptions
+    ev: OnLayerClickOptions,
   ): FeatureLayersIdentify | undefined {
     const layer: ResourceAdapter = ev.layer as ResourceAdapter;
     // item property means layer is NgwResource
@@ -654,7 +653,11 @@ export class NgwMap<
     });
     layers.forEach((l) => {
       const layer = l.layer;
-      if (layer.getIdentificationIds && layer.options.selectable) {
+      if (
+        layer.getIdentificationIds &&
+        layer.options.selectable &&
+        this.isLayerVisible(layer)
+      ) {
         promises.push(layer.getIdentificationIds());
       }
     });
@@ -707,7 +710,7 @@ export class NgwMap<
     if (container) {
       const logo = await getCompanyLogo(
         this.connector,
-        this.options.companyLogoOptions
+        this.options.companyLogoOptions,
       );
       if (logo) {
         container.appendChild(logo);

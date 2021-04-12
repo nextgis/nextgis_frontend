@@ -1,45 +1,47 @@
 import {
-  VectorLayerAdapter,
-  GeoJsonAdapterOptions,
+  CircleMarker,
+  FeatureGroup,
+  DomEvent,
+  GeoJSON,
+  DivIcon,
+  Marker,
+} from 'leaflet';
+import { isPaintCallback, isPaint } from '@nextgis/paint';
+import { BaseAdapter } from './BaseAdapter';
+import {
+  PAINT,
+  typeAlias,
+  detectType,
+  filterGeometries,
+  convertMapClickEvent,
+} from '../utils/utils';
+
+import type { GeoJsonObject, Feature, Point } from 'geojson';
+import type {
+  CircleMarkerOptions,
+  LeafletMouseEvent,
+  LatLngExpression,
+  GeoJSONOptions,
+  PathOptions,
+  LatLng,
+  Layer,
+  Map,
+} from 'leaflet';
+import type {
+  Paint,
+  IconPaint,
+  PathPaint,
+  VectorAdapterLayerPaint,
+} from '@nextgis/paint';
+import type {
   VectorAdapterLayerType,
+  GeoJsonAdapterOptions,
+  VectorLayerAdapter,
+  LngLatBoundsArray,
   LayerDefinition,
   DataLayerFilter,
   PopupOptions,
-  LngLatBoundsArray,
 } from '@nextgis/webmap';
-import {
-  PathPaint,
-  Paint,
-  VectorAdapterLayerPaint,
-  isPaintCallback,
-  isPaint,
-  IconPaint,
-} from '@nextgis/paint';
-import {
-  GeoJSON,
-  CircleMarker,
-  GeoJSONOptions,
-  PathOptions,
-  CircleMarkerOptions,
-  DivIcon,
-  Marker,
-  FeatureGroup,
-  DomEvent,
-  LatLngExpression,
-  Map,
-  Layer,
-  LeafletMouseEvent,
-  LatLng,
-} from 'leaflet';
-import { GeoJsonObject, Feature, Point } from 'geojson';
-import { BaseAdapter } from './BaseAdapter';
-import {
-  detectType,
-  typeAlias,
-  filterGeometries,
-  PAINT,
-  convertMapClickEvent,
-} from '../utils/utils';
 
 type LayerMem = LayerDefinition<Feature>;
 
@@ -255,14 +257,14 @@ export class GeoJsonAdapter
     }
   }
 
-  private _openPopup(layer: Layer, options?: PopupOptions) {
+  private async _openPopup(layer: Layer, options?: PopupOptions) {
     // @ts-ignore
     const feature = layer.feature;
     options = options || {};
     const { minWidth, autoPan } = { minWidth: 300, ...options };
     const content =
       options && options.createPopupContent
-        ? options.createPopupContent({ layer, feature })
+        ? await options.createPopupContent({ layer, feature, target: this })
         : '';
     if (content) {
       const popup = layer.bindPopup(content, { minWidth, autoPan });
@@ -348,7 +350,7 @@ export class GeoJsonAdapter
 
   private getGeoJsonOptions(
     options: GeoJsonAdapterOptions,
-    type: VectorAdapterLayerType
+    type: VectorAdapterLayerType,
   ): GeoJSONOptions {
     const paint = options.paint;
     let lopt: GeoJSONOptions = {};
@@ -358,7 +360,7 @@ export class GeoJsonAdapter
         // TODO: fix types (@geoman-io/leaflet-geoman-free)
         (lopt as any).pointToLayer = (
           feature: Feature<Point, any>,
-          latLng: LatLng
+          latLng: LatLng,
         ) => {
           const iconOpt = paint(feature);
           const pointToLayer = this.createPaintToLayer(iconOpt as IconPaint);
@@ -404,7 +406,7 @@ export class GeoJsonAdapter
             layer.on(
               'click',
               (e) => this._onLayerClick(e as LeafletMouseEvent),
-              this
+              this,
             );
           }
         }
@@ -419,7 +421,6 @@ export class GeoJsonAdapter
   }
 
   private _onLayerClick(e: LeafletMouseEvent) {
-    // @ts-ignore
     DomEvent.stopPropagation(e);
     const layer = e.target;
     let isSelected = this._selectedLayers.indexOf(layer) !== -1;
@@ -507,7 +508,7 @@ export class GeoJsonAdapter
 
   private createPaintOptions(
     paintOptions: VectorAdapterLayerPaint,
-    type: VectorAdapterLayerType
+    type: VectorAdapterLayerType,
   ): GeoJSONOptions {
     const geoJsonOptions: GeoJSONOptions = {};
     const paint = (paintOptions && this.preparePaint(paintOptions)) || {};
@@ -518,7 +519,7 @@ export class GeoJsonAdapter
     }
     if (type === 'point') {
       (geoJsonOptions as any).pointToLayer = this.createPaintToLayer(
-        paintOptions as IconPaint
+        paintOptions as IconPaint,
       );
     } else if (type === 'line') {
       paint.stroke = true;

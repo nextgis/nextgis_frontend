@@ -1,35 +1,39 @@
-import {
-  MapAdapter,
-  MapOptions,
-  MapControl,
-  CreateControlOptions,
-  ButtonControlOptions,
-  LayerAdapter,
-  LngLatArray,
-  LngLatBoundsArray,
-  LocateOptions,
-  LocationEvents,
-  Locate,
-  MainMapEvents,
-} from '@nextgis/webmap';
+
+  import { EventEmitter } from 'events';
 import {
   Map,
   Control,
-  Layer,
-  ControlPosition,
-  LeafletMouseEvent,
-  GridLayer,
 } from 'leaflet';
-import { EventEmitter } from 'events';
-import { TileAdapter } from './layer-adapters/TileAdapter/TileAdapter';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 import { AttributionControl } from './controls/Attribution';
-import { ImageAdapter } from './layer-adapters/ImageAdapter/ImageAdapter';
-import { createControl } from './controls/createControl';
-import { createButtonControl } from './controls/createButtonControl';
 import { convertMapClickEvent } from './utils/utils';
+import { createButtonControl } from './controls/createButtonControl';
+import { createControl } from './controls/createControl';
+import { ImageAdapter } from './layer-adapters/ImageAdapter/ImageAdapter';
+import { TileAdapter } from './layer-adapters/TileAdapter/TileAdapter';
 import { WmsAdapter } from './layer-adapters/WmsAdapter/WmsAdapter';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
+
+import type {
+  CreateControlOptions,
+  ButtonControlOptions,
+  LngLatBoundsArray,
+  LocationEvents,
+  LocateOptions,
+  MainMapEvents,
+  LayerAdapter,
+  LngLatArray,
+  MapAdapter,
+  MapOptions,
+  MapControl,
+  Locate,
+} from '@nextgis/webmap';
+import type {
+  Layer,
+  GridLayer,
+  ControlPosition,
+  LeafletMouseEvent,
+} from 'leaflet';
 
 export type Type<T> = new (...args: any[]) => T;
 
