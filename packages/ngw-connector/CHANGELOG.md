@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.7](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.6...v1.0.0-beta.7) (2021-04-23)
+
+
+### Bug Fixes
+
+* **ngw-connector:** get resource children resourceId zero check ([73d50ec](https://github.com/nextgis/nextgis_frontend/commit/73d50ecd07d023ed53699ac7e4b151c6b879e1ab))
+* **ngw-connector:** use `this` in fabric method ([f7d5763](https://github.com/nextgis/nextgis_frontend/commit/f7d5763379057623f645cbe099f4372c076def61))
+
+
+
+
+
 # [1.0.0-beta.6](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2021-04-04)
 
 
