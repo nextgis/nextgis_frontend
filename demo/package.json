@@ -1,12 +1,12 @@
 {
   "name": "@nextgis/demo-app",
-  "version": "1.0.0-beta.6",
+  "version": "1.0.0-beta.7",
   "_priority": 1,
   "description": "",
   "private": true,
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
-    "@nextgis/ngw-uploader": "^1.0.0-beta.6",
+    "@nextgis/ngw-uploader": "^1.0.0-beta.7",
     "favicons": "^6.2.0",
     "highlight.js": "^10.6.0",
     "showdown-highlight": "^2.1.6",
@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@mdi/font": "^5.9.55",
-    "@nextgis/eslint-config": "^1.0.0-beta.6",
+    "@nextgis/eslint-config": "^1.0.0-beta.7",
     "@types/lodash": "^4.14.168",
     "@types/showdown": "^1.9.3",
     "css-loader": "^5.0.2",
