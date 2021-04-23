@@ -151,7 +151,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
             this.options.webMap,
             webmap.root_item,
             options,
-            this.options.connector
+            this.options.connector,
           );
           layer.emitter.on('init', () => resolve(layer));
         });
@@ -217,13 +217,13 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
   private _updateItemsParams(
     item: TreeGroup | TreeLayer,
     webMap: WebMap,
-    data: ResourceItem
+    data: ResourceItem,
   ) {
     if (item) {
       if (item.item_type === 'group' || item.item_type === 'root') {
         if (item.children) {
           item.children = item.children.map((x) =>
-            this._updateItemsParams(x, webMap, data)
+            this._updateItemsParams(x, webMap, data),
           );
         }
         if (item.item_type === 'root') {
@@ -231,7 +231,8 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
         }
       } else if (item.item_type === 'layer') {
         const url = fixUrlStr(
-          this.options.connector.options.baseUrl + '/api/component/render/image'
+          this.options.connector.options.baseUrl +
+            '/api/component/render/image',
         );
         const resourceId = item.layer_style_id;
         item.url = url;
@@ -245,7 +246,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
             resource: resourceId,
           },
           webMap,
-          this.options.connector.options.baseUrl || ''
+          this.options.connector.options.baseUrl || '',
         ) as RasterAdapterOptions;
         item = {
           ...item,

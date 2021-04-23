@@ -1,9 +1,5 @@
-
-  import { EventEmitter } from 'events';
-import {
-  Map,
-  Control,
-} from 'leaflet';
+import { EventEmitter } from 'events';
+import { Map, Control } from 'leaflet';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 import { AttributionControl } from './controls/Attribution';
 import { convertMapClickEvent } from './utils/utils';
@@ -225,7 +221,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   setLayerOrder(
     layer: Layer,
     order: number,
-    layers: { [x: string]: LayerAdapter }
+    layers: { [x: string]: LayerAdapter },
   ): void {
     // const baseLayers: string[] = [];
     // const orderedLayers = Object.keys(layers).filter((x) => {

@@ -44,6 +44,6 @@ export function createButtonControl(options: ButtonControlOptions): Control {
         }
       },
     },
-    { bar: true }
+    { bar: true },
   );
 }

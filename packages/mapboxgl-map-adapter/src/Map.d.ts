@@ -9,7 +9,7 @@ declare namespace mapboxgl {
   export interface Map {
     transformRequests: ((
       url: string,
-      resourceType: ResourceType
+      resourceType: ResourceType,
     ) =>
       | { url: string; headers: Record<string, any> | undefined }
       | undefined)[];

@@ -13,7 +13,7 @@ export class ImageOverlay extends LImageOverlay {
   constructor(
     imageUrl: string,
     bounds: LatLngBoundsExpression,
-    options?: IOptions
+    options?: IOptions,
   ) {
     super(imageUrl, bounds, options);
   }
@@ -41,8 +41,8 @@ export class ImageOverlay extends LImageOverlay {
           (response) => {
             img.src = response;
           },
-          headers
-        )
+          headers,
+        ),
       );
     }
   }

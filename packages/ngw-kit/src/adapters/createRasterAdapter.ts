@@ -42,7 +42,7 @@ export async function createRasterAdapter({
   if (adapterClass) {
     const resourceId = await resourceIdFromLayerOptions(
       layerOptions,
-      connector
+      connector,
     );
     return class Adapter extends adapterClass implements ResourceAdapter {
       // options = {};
@@ -54,7 +54,7 @@ export async function createRasterAdapter({
         const opt = getLayerAdapterOptions(
           layerOptions,
           webMap,
-          connector.options.baseUrl || ''
+          connector.options.baseUrl || '',
         );
         if (opt) {
           const layerAdapterOptions: ImageAdapterOptions = {

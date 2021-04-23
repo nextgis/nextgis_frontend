@@ -10,7 +10,7 @@ import { NgwWebmapLayerAdapter } from '../NgwWebmapLayerAdapter';
 
 export function updateImageParams(
   params: Record<string, any>,
-  resourceId: number
+  resourceId: number,
 ): Record<string, any> {
   const { bbox, width, height, nd } = params;
   return {
@@ -43,7 +43,7 @@ export const vectorLayerGeomToPaintTypeAlias: Record<
 export function addNgwLayer(
   options: NgwLayerOptions,
   webMap: WebMap,
-  connector: NgwConnector
+  connector: NgwConnector,
 ): Promise<Type<ResourceAdapter> | undefined> {
   const headers = connector.getAuthorizationHeaders();
   if (headers) {
@@ -60,7 +60,7 @@ export interface ExtendNgwWebmapLayerAdapterOptions {
 }
 
 export function extendNgwWebmapLayerAdapter(
-  opt: ExtendNgwWebmapLayerAdapterOptions
+  opt: ExtendNgwWebmapLayerAdapterOptions,
 ): Type<NgwWebmapLayerAdapter> {
   class A extends NgwWebmapLayerAdapter {
     constructor(map: any, options: NgwWebmapAdapterOptions) {

@@ -30,7 +30,7 @@ export class NgwLayersList extends Vue {
     | 'independent'
     | 'leaf';
   @Prop({ type: Function }) showResourceAdapter!: (
-    adapter: LayerAdapter | ResourceAdapter
+    adapter: LayerAdapter | ResourceAdapter,
   ) => boolean;
   /** @deprecated for backward compatibility */
   @Prop({ type: NgwMap }) ngwMap!: NgwMap;
@@ -359,7 +359,7 @@ export class NgwLayersList extends Vue {
         // );
         this.webMap.emitter.removeListener(
           'layer:preremove',
-          this.__updateItems
+          this.__updateItems,
         );
       }
       if (this.__onLayerAdd) {
@@ -381,7 +381,7 @@ export class NgwLayersList extends Vue {
   }
 
   private _getLayerId(
-    layer: LayerAdapter | ResourceAdapter | NgwWebmapItem
+    layer: LayerAdapter | ResourceAdapter | NgwWebmapItem,
   ): string {
     const webMap = layer as NgwWebmapItem;
     const webMapTree = webMap.tree;

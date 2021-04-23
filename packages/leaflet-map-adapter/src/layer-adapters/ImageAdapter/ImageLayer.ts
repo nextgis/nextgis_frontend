@@ -154,7 +154,7 @@ export class ImageLayer extends Layer {
         }
         this._currentOverlay = overlay;
         overlay.setOpacity(
-          this.options.opacity !== undefined ? this.options.opacity : 1
+          this.options.opacity !== undefined ? this.options.opacity : 1,
         );
         if (this.options.isBack === true) {
           overlay.bringToBack();
@@ -166,7 +166,7 @@ export class ImageLayer extends Layer {
           overlay.setZIndex(this.options.zIndex);
         }
       },
-      this
+      this,
     );
     const { minZoom, maxZoom } = this.options;
     if (

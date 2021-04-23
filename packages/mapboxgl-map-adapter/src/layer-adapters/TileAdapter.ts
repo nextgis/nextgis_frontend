@@ -71,7 +71,7 @@ export class TileAdapter<O extends RasterAdapterOptions = TileAdapterOptions>
       this.map.addLayer(
         layerOptions,
         // @ts-ignore
-        options.before
+        options.before,
       );
       const layer = (this.layer = [this._layerId]);
       return layer;

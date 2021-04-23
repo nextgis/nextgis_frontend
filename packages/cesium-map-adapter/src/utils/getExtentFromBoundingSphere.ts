@@ -1,7 +1,7 @@
 import { BoundingSphere, Ellipsoid, Math as CMath } from 'cesium';
 
 export function getExtentFromBoundingSphere(
-  boundingSphere: BoundingSphere
+  boundingSphere: BoundingSphere,
 ): number[] | undefined {
   const minBS = boundingSphere.clone();
   const maxBS = boundingSphere.clone();

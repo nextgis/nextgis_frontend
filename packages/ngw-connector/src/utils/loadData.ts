@@ -26,7 +26,7 @@ type LoadData = (
   callback: (...args: any[]) => any,
   options: NgwRequestOptions<RequestMethods> | undefined,
   error: (reason?: any) => void,
-  onCancel: (cancelHandler: () => void) => void
+  onCancel: (cancelHandler: () => void) => void,
 ) => void;
 
 let loadData: LoadData;
@@ -37,7 +37,7 @@ if (__BROWSER__) {
     callback: (...args: any[]) => any,
     options: NgwRequestOptions = {},
     error: (reason?: any) => void,
-    onCancel: (cancelHandler: () => void) => void
+    onCancel: (cancelHandler: () => void) => void,
   ): void => {
     options.method = options.method || 'GET';
 
@@ -163,7 +163,7 @@ if (__BROWSER__) {
     callback: (...args: any[]) => any,
     options: NgwRequestOptions<RequestMethods> = {},
     error: (reason?: any) => void,
-    onCancel: (cancelHandler: () => void) => void
+    onCancel: (cancelHandler: () => void) => void,
   ): Promise<unknown> => {
     const request = new Promise((resolve, reject) => {
       const adapter = adapterFor(url);

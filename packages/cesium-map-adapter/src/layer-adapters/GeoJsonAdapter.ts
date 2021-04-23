@@ -123,7 +123,7 @@ export class GeoJsonAdapter
     if (this._source) {
       const boundingSphere = getEntitiesBoundingSphere(
         this.map,
-        this._source.entities.values
+        this._source.entities.values,
       );
       if (boundingSphere) {
         return getExtentFromBoundingSphere(boundingSphere);
@@ -211,7 +211,7 @@ export class GeoJsonAdapter
     if (source) {
       const colorStr = paint.fillColor || paint.color;
       const color = Color.fromCssColorString(
-        typeof colorStr === 'string' && colorStr ? colorStr : 'blue'
+        typeof colorStr === 'string' && colorStr ? colorStr : 'blue',
       );
       const size = typeof paint.size === 'number' ? paint.size : 42;
       const iconFont = paint.iconfont || 'maki';
@@ -276,7 +276,7 @@ export class GeoJsonAdapter
 
   private _addFromGeoJson(
     feature: Feature,
-    paint: GeometryPaint
+    paint: GeometryPaint,
   ): Promise<void> {
     const source = this._source;
     if (source) {
@@ -337,7 +337,7 @@ export class GeoJsonAdapter
 
   private _getFeaturePaint(
     feature: Feature,
-    paint?: Paint
+    paint?: Paint,
   ): VectorAdapterLayerPaint {
     if (paint) {
       if (isPaintCallback(paint)) {
@@ -409,7 +409,7 @@ export class GeoJsonAdapter
                 }
               }
             }
-          }
+          },
         );
       }
     }

@@ -11,7 +11,7 @@ import { updateImageParams } from './utils';
 export function getLayerAdapterOptions(
   options: NgwLayerOptions,
   webMap: WebMap,
-  baseUrl: string
+  baseUrl: string,
 ): RasterAdapterOptions | ImageAdapterOptions | undefined {
   let adapter = options.adapter || 'IMAGE';
   let url: string;
@@ -81,7 +81,7 @@ export function getLayerAdapterOptions(
     }
   } else if (resourceId !== undefined) {
     throw new Error(
-      'Option `resource` must be number, not ' + typeof resourceId
+      'Option `resource` must be number, not ' + typeof resourceId,
     );
   } else {
     console.log('Option `resource` not set');
