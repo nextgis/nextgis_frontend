@@ -4,23 +4,7 @@ import { EventEmitter } from 'events';
 
 import { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
 import { ResourceItem, Resource } from './types/ResourceItem';
-import {
-  NgwConnectorOptions,
-  GetRequestItemsResponseMap,
-  RequestOptions,
-  Params,
-  UserInfo,
-  Credentials,
-  PyramidRoute,
-  RequestHeaders,
-  PostRequestItemsResponseMap,
-  PatchRequestItemsResponseMap,
-  RequestItemKeys,
-  DeleteRequestItemsResponseMap,
-  PutRequestItemsResponseMap,
-  RequestItemsParams,
-  ResourceDefinition,
-} from './interfaces';
+
 import { loadData } from './utils/loadData';
 import { template } from './utils/template';
 import { ResourceNotFoundError } from './errors/ResourceNotFoundError';
@@ -32,6 +16,24 @@ import {
   removeConnector,
 } from './activeConnectors';
 import { ResourcesControl } from './ResourcesControl';
+
+import type {
+  DeleteRequestItemsResponseMap,
+  PatchRequestItemsResponseMap,
+  PostRequestItemsResponseMap,
+  GetRequestItemsResponseMap,
+  PutRequestItemsResponseMap,
+  NgwConnectorOptions,
+  RequestItemsParams,
+  ResourceDefinition,
+  RequestItemKeys,
+  RequestHeaders,
+  RequestOptions,
+  PyramidRoute,
+  Credentials,
+  UserInfo,
+  Params,
+} from './interfaces';
 
 export class NgwConnector {
   static errors = {
@@ -60,7 +62,7 @@ export class NgwConnector {
     if (exist) {
       return exist;
     } else {
-      const connector = new NgwConnector(options);
+      const connector = new this(options);
       return connector;
     }
   }
