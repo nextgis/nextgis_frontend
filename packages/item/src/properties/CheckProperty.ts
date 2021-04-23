@@ -35,7 +35,7 @@ export class CheckProperty<
         if (property) {
           property.set(
             value,
-            Object.assign({}, options, { bubble: true, propagation: false })
+            Object.assign({}, options, { bubble: true, propagation: false }),
           );
         }
       }

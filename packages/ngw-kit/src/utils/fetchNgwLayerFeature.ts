@@ -15,7 +15,7 @@ export function fetchNgwLayerFeature<
     resourceId: number;
     featureId: number;
     connector: NgwConnector;
-  } & NgwFeatureRequestOptions
+  } & NgwFeatureRequestOptions,
 ): CancelablePromise<Feature<G, P>> {
   return fetchNgwLayerItem<G, P>(options).then((item) => {
     return createGeoJsonFeature<G, P>(item);

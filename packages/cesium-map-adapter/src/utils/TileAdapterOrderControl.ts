@@ -5,7 +5,7 @@ const catalog: [ImageryLayerCollection, [ImageryLayer, number][]][] = [];
 export function addToTileCatalog(
   collection: ImageryLayerCollection,
   layer: ImageryLayer,
-  order = 0
+  order = 0,
 ): void {
   let exist = catalog.find((x) => x[0] === collection);
   if (!exist) {
@@ -19,7 +19,7 @@ export function addToTileCatalog(
 }
 
 export function updateCollectionOrder(
-  collection: ImageryLayerCollection
+  collection: ImageryLayerCollection,
 ): void {
   const exist = catalog.find((x) => x[0] === collection);
   if (exist) {
@@ -38,7 +38,7 @@ export function updateCollectionOrder(
 
 export function removeFromTileCatalog(
   collection: ImageryLayerCollection,
-  layer: ImageryLayer
+  layer: ImageryLayer,
 ): void {
   const collectionExist = catalog.find((x) => x[0] === collection);
   if (collectionExist) {

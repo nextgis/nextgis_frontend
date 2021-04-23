@@ -3,7 +3,7 @@ import { IControl } from 'mapbox-gl';
 
 export function createControl(
   control: MapControl,
-  options: CreateControlOptions = {}
+  options: CreateControlOptions = {},
 ): IControl {
   class Control implements IControl {
     private _container?: HTMLElement;

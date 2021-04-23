@@ -22,7 +22,7 @@ import { fetchNgwLayerItem } from './fetchNgwLayerItem';
 
 export function getIdentifyItems(
   identify: NgwIdentify,
-  multiple = false
+  multiple = false,
 ): NgwIdentifyItem[] {
   let params:
     | { resourceId: number; featureId: number; feature: LayerFeature }
@@ -68,7 +68,7 @@ export function fetchIdentifyGeoJson<
   G extends Geometry = Geometry,
   P extends JsonMap = JsonMap
 >(
-  options: GetIdentifyGeoJsonOptions
+  options: GetIdentifyGeoJsonOptions,
 ): CancelablePromise<Feature<G, P> | undefined> {
   const { connector, identify } = options;
   for (const l in identify) {
@@ -84,7 +84,7 @@ export function fetchIdentifyGeoJson<
             createGeoJsonFeature({
               ...withGeom,
               geom,
-            })
+            }),
           );
         }
       }
@@ -102,7 +102,7 @@ export function fetchIdentifyItem<
   G extends Geometry = Geometry,
   P extends GeoJsonProperties = GeoJsonProperties
 >(
-  options: GetIdentifyGeoJsonOptions
+  options: GetIdentifyGeoJsonOptions,
 ): CancelablePromise<NgwFeatureItemResponse<P, G> | undefined> {
   const { connector, identify } = options;
 
@@ -124,14 +124,14 @@ export function getIdentifyGeoJson<
   G extends Geometry = Geometry,
   P extends JsonMap = JsonMap
 >(
-  options: GetIdentifyGeoJsonOptions
+  options: GetIdentifyGeoJsonOptions,
 ): CancelablePromise<Feature<G, P> | undefined> {
   return fetchIdentifyGeoJson(options);
 }
 
 export function sendIdentifyRequest(
   ev: MapClickEvent,
-  options: IdentifyRequestOptions
+  options: IdentifyRequestOptions,
   // webMap: WebMap
 ): CancelablePromise<FeatureLayersIdentify> {
   deprecatedMapClick(ev);

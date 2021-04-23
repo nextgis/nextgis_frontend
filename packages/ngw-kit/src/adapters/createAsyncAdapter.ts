@@ -55,7 +55,7 @@ async function createAdapterFromFirstStyle({
     return createAsyncAdapter(
       { ...layerOptions, resource: firstStyle.resource.id },
       webMap,
-      connector
+      connector,
     );
   }
 }
@@ -63,7 +63,7 @@ async function createAdapterFromFirstStyle({
 export async function createAsyncAdapter(
   options: NgwLayerOptions,
   webMap: WebMap,
-  connector: NgwConnector
+  connector: NgwConnector,
 ): Promise<Type<ResourceAdapter> | undefined> {
   let adapter: ClassAdapter | undefined;
   let item: ResourceItem | undefined;
@@ -115,7 +115,7 @@ export async function createAsyncAdapter(
         } else {
           if (adapterType === 'GEOJSON') {
             const parentItem = await connector.getResource(
-              item.resource.parent.id
+              item.resource.parent.id,
             );
             if (parentItem) {
               const parentOptions: NgwLayerOptions = {

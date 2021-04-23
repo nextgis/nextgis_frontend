@@ -11,7 +11,6 @@ export function makeRemote<
   O extends TileLayerOptionsExtended = TileLayerOptionsExtended
 >(Base: TBase): TBase {
   return class RemoteTileLayer extends Base {
-
     constructor(...args: any[]) {
       super(...args);
       if (this.options.setViewDelay) {
@@ -25,7 +24,7 @@ export function makeRemote<
 
     createTile(
       coords: Record<string, unknown>,
-      done: (error: any, tile: HTMLImageElement) => void
+      done: (error: any, tile: HTMLImageElement) => void,
     ): HTMLImageElement {
       // @ts-ignore
       const url = this.getTileUrl(coords);
@@ -38,7 +37,7 @@ export function makeRemote<
           done(null, tile);
         },
         // @ts-ignore
-        this.options.headers
+        this.options.headers,
       );
 
       if (this.options.crossOrigin || this.options.crossOrigin === '') {

@@ -52,7 +52,7 @@ export async function createOnFirstShowNgwAdapter({
             },
           },
           webMap,
-          connector
+          connector,
         ).then((Adapter) => {
           if (Adapter) {
             const adapter = new Adapter(webMap.mapAdapter.map, {

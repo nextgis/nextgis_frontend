@@ -29,7 +29,7 @@ export class PromiseControl {
 
   add<T extends CancelablePromise = CancelablePromise>(
     promise: T,
-    name?: string | number | symbol
+    name?: string | number | symbol,
   ): CancelablePromise<T> {
     const key = name ? name : promise;
     const exist = this._promises.get(key);
@@ -73,7 +73,7 @@ export class PromiseControl {
     return function (
       target: unknown,
       key: string | symbol,
-      descriptor: PropertyDescriptor
+      descriptor: PropertyDescriptor,
     ): PropertyDescriptor {
       const originalMethod = descriptor.value;
       name = name || key;

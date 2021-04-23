@@ -56,7 +56,7 @@ export class NgwProvider extends BaseProvider<NgwProviderOptions> {
         {
           id: resource.id,
           like,
-        }
+        },
       );
       this.requests.push(request);
       request.catch((er) => {

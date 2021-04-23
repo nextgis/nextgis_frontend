@@ -47,16 +47,14 @@ export abstract class ResourceStore<
   formatters: {
     date?: (date: string) => string;
     datetime?: (date: string) => string;
-  } = {}
-
-
+  } = {};
 
   hooks: {
     onNewItem?: (opt: PatchOptions<G, P>) => Promise<void>;
     onBeforeDelete?: (opt: { fid: number }) => Promise<void>;
     onBeforePatch?: (
       data: Partial<FeatureItem<P, Geometry>>[],
-      opt: { id: number }
+      opt: { id: number },
     ) => Promise<void>;
     delete?: (resourceId: number, featureId: number) => Promise<void>;
   } = {};
@@ -152,7 +150,7 @@ export abstract class ResourceStore<
   >(opt: { item: Feature<G, P> }): Promise<Partial<FeatureItem<P>>> {
     const geom = opt.item.geometry as Geometry;
     const featureFields = (await this.context.dispatch(
-      'getFields'
+      'getFields',
     )) as FeatureLayerField[];
     const fields = prepareFieldsToNgw(opt.item.properties, featureFields);
     return {
@@ -168,7 +166,7 @@ export abstract class ResourceStore<
     if (id) {
       const feature: Partial<FeatureItem<P>> = await this.context.dispatch(
         'prepareFeatureToNgw',
-        opt
+        opt,
       );
       try {
         const { fid } = opt;
@@ -182,7 +180,7 @@ export abstract class ResourceStore<
         const item = await this.connector.patch(
           'feature_layer.feature.collection',
           { data },
-          { id, ...FEATURE_REQUEST_PARAMS }
+          { id, ...FEATURE_REQUEST_PARAMS },
         );
         const newFeature = feature as FeatureItem<P>;
         const newItem = item && item[0];
@@ -239,8 +237,9 @@ export abstract class ResourceStore<
   protected SET_STORE(store: ResourceStoreItem<P>[]): void {
     let prepared = store;
     const dateFields: ResourceItemDatatype[] = ['DATE', 'DATETIME'];
-    const datefields = this.fields
-      .filter((x) => dateFields.includes(x.datatype))
+    const datefields = this.fields.filter((x) =>
+      dateFields.includes(x.datatype),
+    );
     if (datefields.length) {
       prepared = store.map((x) => {
         for (const k in x) {
@@ -250,7 +249,10 @@ export abstract class ResourceStore<
             if (date) {
               if (dateField.datatype === 'DATE' && this.formatters.date) {
                 date = this.formatters.date(date);
-              } else if (dateField.datatype === 'DATETIME' && this.formatters.datetime) {
+              } else if (
+                dateField.datatype === 'DATETIME' &&
+                this.formatters.datetime
+              ) {
                 date = this.formatters.datetime(date);
               }
               (x as any)[k] = date;

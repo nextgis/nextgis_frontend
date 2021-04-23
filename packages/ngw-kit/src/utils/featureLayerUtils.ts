@@ -57,7 +57,7 @@ export function getNgwLayerItem<
     resourceId: number;
     featureId: number;
     connector: NgwConnector;
-  } & NgwFeatureRequestOptions
+  } & NgwFeatureRequestOptions,
 ): CancelablePromise<FeatureItem<P, G>> {
   return fetchNgwLayerItem(options);
 }
@@ -73,7 +73,7 @@ export function getNgwLayerFeature<
     resourceId: number;
     featureId: number;
     connector: NgwConnector;
-  } & NgwFeatureRequestOptions
+  } & NgwFeatureRequestOptions,
 ): CancelablePromise<Feature<G, P>> {
   return fetchNgwLayerFeature(options);
 }
@@ -90,7 +90,7 @@ export function getNgwLayerFeatures<
     resourceId: number;
     connector: NgwConnector;
     filters?: PropertiesFilter;
-  } & NgwFeatureRequestOptions<P>
+  } & NgwFeatureRequestOptions<P>,
 ): CancelablePromise<FeatureCollection<G, P>> {
   return fetchNgwLayerFeatureCollection(options);
 }
@@ -102,14 +102,14 @@ export function getNgwLayerItems<
   G extends Geometry = Geometry,
   P extends JsonMap = JsonMap
 >(
-  options: GetNgwLayerItemsOptions & NgwFeatureRequestOptions<P>
+  options: GetNgwLayerItemsOptions & NgwFeatureRequestOptions<P>,
 ): CancelablePromise<FeatureItem<P, G>[]> {
   return fetchNgwLayerItems(options);
 }
 
 export function updateItemRequestParam(
   params: FeatureRequestParams,
-  options: NgwFeatureRequestOptions
+  options: NgwFeatureRequestOptions,
 ): void {
   const { extensions, geom, fields, srs } = options;
   params.extensions = extensions ? extensions.join(',') : '';
@@ -139,7 +139,7 @@ export function idFilterWorkAround<
       : value.split(',').map((x: string) => Number(x));
   if (options.filterById[1] !== 'eq' && options.filterById[1] !== 'in') {
     throw new Error(
-      'Unable to filter by object id. Except `eq` or `in` operator'
+      'Unable to filter by object id. Except `eq` or `in` operator',
     );
   }
   const promises: Promise<FeatureItem<P, G>>[] = featureIds.map((featureId) => {
@@ -160,7 +160,7 @@ export function createFeatureFieldFilterQueries<
 >(
   opt: Required<GetNgwLayerItemsOptions> & NgwFeatureRequestOptions<P>,
   _queries: CancelablePromise<FeatureItem<P, G>[]>[] = [],
-  _parentAllParams: [string, any][] = []
+  _parentAllParams: [string, any][] = [],
 ): CancelablePromise<FeatureItem<P, G>[]> {
   const { filters, connector, resourceId } = opt;
 
@@ -177,7 +177,7 @@ export function createFeatureFieldFilterQueries<
     filters_.forEach((f) => {
       if (f[0] === 'id') {
         _queries.push(
-          idFilterWorkAround({ filterById: f, connector, resourceId })
+          idFilterWorkAround({ filterById: f, connector, resourceId }),
         );
       }
       if (checkIfPropertyFilter(f)) {
@@ -185,7 +185,7 @@ export function createFeatureFieldFilterQueries<
           fetchNgwLayerItemsRequest<G, P>({
             ...opt,
             paramList: [..._parentAllParams, createParam(f)],
-          })
+          }),
         );
       } else {
         createFeatureFieldFilterQueries(
@@ -194,7 +194,7 @@ export function createFeatureFieldFilterQueries<
             filters: f,
           },
           _queries,
-          [..._parentAllParams]
+          [..._parentAllParams],
         );
       }
     });
@@ -221,7 +221,7 @@ export function createFeatureFieldFilterQueries<
               filters: x,
             },
             _queries,
-            [..._parentAllParams, ...filters]
+            [..._parentAllParams, ...filters],
           );
         });
       } else {
@@ -229,7 +229,7 @@ export function createFeatureFieldFilterQueries<
           fetchNgwLayerItemsRequest<G, P>({
             ...opt,
             paramList: [..._parentAllParams, ...filters],
-          })
+          }),
         );
       }
     }
@@ -251,7 +251,7 @@ export function fetchNgwLayerItemsRequest<
   P extends { [field: string]: any } = { [field: string]: any }
 >(
   options: GetNgwLayerItemsOptions &
-    NgwFeatureRequestOptions<P> & { paramList?: [string, any][] }
+    NgwFeatureRequestOptions<P> & { paramList?: [string, any][] },
 ): CancelablePromise<FeatureItem<P, G>[]> {
   const params: FeatureRequestParams & RequestItemAdditionalParams = {
     ...FEATURE_REQUEST_PARAMS,
@@ -293,7 +293,7 @@ export function fetchNgwLayerItemsRequest<
 
 export function prepareFieldsToNgw<T extends GeoJsonProperties>(
   item: T,
-  resourceFields: Pick<FeatureLayerField, 'keyname' | 'datatype'>[]
+  resourceFields: Pick<FeatureLayerField, 'keyname' | 'datatype'>[],
 ): Record<keyof T, any> {
   const fields = {} as Record<keyof T, any>;
   if (item) {

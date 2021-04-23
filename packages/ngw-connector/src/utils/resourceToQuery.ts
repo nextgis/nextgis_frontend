@@ -8,7 +8,7 @@ import { isObject } from './isObject';
  */
 export function resourceToQuery(
   resource: DeepPartial<Resource>,
-  prefix = ''
+  prefix = '',
 ): Record<string, unknown> {
   prefix = prefix ? prefix + '__' : '';
   const query: Record<string, any> = {};

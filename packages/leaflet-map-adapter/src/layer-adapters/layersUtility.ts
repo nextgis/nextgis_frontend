@@ -1,7 +1,7 @@
 export function callAjax(
   src: string,
   callback: (resp: any) => any,
-  headers: Record<string, any>
+  headers: Record<string, any>,
 ): () => void {
   const xhr = new XMLHttpRequest();
   xhr.open('GET', src);
