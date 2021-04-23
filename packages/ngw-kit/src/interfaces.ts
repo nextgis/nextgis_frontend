@@ -332,7 +332,7 @@ export type ClassAdapter = Promise<Type<LayerAdapter> | undefined>;
  * @public
  */
 export type GetClassAdapterCallback = (
-  options: GetClassAdapterOptions
+  options: GetClassAdapterOptions,
 ) => Promise<Type<LayerAdapter> | undefined> | undefined;
 
 /**

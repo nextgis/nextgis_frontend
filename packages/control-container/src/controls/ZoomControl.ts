@@ -59,14 +59,14 @@ export class ZoomControl implements MapControl {
       const zoomInBtn = dom.create(
         'button',
         'webmap-ctrl-zoom-in',
-        this._container
+        this._container,
       );
       zoomInBtn.innerHTML =
         '<span class="webmap-ctrl-icon" aria-hidden="true"></span>';
       const zoomOutBtn = dom.create(
         'button',
         'webmap-ctrl-zoom-out',
-        this._container
+        this._container,
       );
       zoomOutBtn.innerHTML =
         '<span class="webmap-ctrl-icon" aria-hidden="true"></span>';

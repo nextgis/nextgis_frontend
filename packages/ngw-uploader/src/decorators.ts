@@ -11,7 +11,7 @@ export function evented(options?: {
   return function (
     target: NgwUploader,
     propertyKey: string,
-    descriptor: PropertyDescriptor
+    descriptor: PropertyDescriptor,
   ): PropertyDescriptor {
     const originalMethod = descriptor.value;
 
@@ -65,7 +65,7 @@ export function onLoad() {
   return function (
     target: NgwUploader,
     propertyKey: string,
-    descriptor: PropertyDescriptor
+    descriptor: PropertyDescriptor,
   ): PropertyDescriptor {
     const originalMethod = descriptor.value;
 

@@ -24,7 +24,7 @@ export class NominatimProvider extends BaseProvider {
     // RFC2616 accept - language string
     const url = fixUrlStr(
       // `${this.baseUrl}/search?format=geojson&polygon_geojson=1${window.locale === 'ru' ? '&accept-language=ru-RU,en-US' : ''}&q=${val}`
-      `${this.searchUrl}/search?format=geojson&polygon_geojson=1&q=${val}`
+      `${this.searchUrl}/search?format=geojson&polygon_geojson=1&q=${val}`,
     );
     const request = new CancelablePromise<SearchItem[]>(
       (resolve, reject, onCancel) => {
@@ -56,7 +56,7 @@ export class NominatimProvider extends BaseProvider {
         });
 
         xhr.send();
-      }
+      },
     ).catch((er) => {
       if (er.name === 'CancelError') {
         //

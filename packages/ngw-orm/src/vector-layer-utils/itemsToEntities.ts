@@ -5,7 +5,7 @@ import { getMetadataArgsStorage } from '..';
 
 export function itemsToEntities(
   Resource: typeof VectorLayer,
-  items: FeatureItem[]
+  items: FeatureItem[],
 ): VectorLayer[] {
   const entities: VectorLayer[] = [];
   items.forEach((x) => {
@@ -17,7 +17,7 @@ export function itemsToEntities(
 
 export function itemToEntity(
   Resource: typeof VectorLayer,
-  item: FeatureItem
+  item: FeatureItem,
 ): VectorLayer {
   const fields = getMetadataArgsStorage().filterColumns(Resource);
   const itemFields = item.fields;

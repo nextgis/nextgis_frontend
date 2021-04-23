@@ -3,7 +3,7 @@ import { Control, DomEvent } from 'leaflet';
 
 export function createControl(
   control: MapControl,
-  options: CreateControlOptions = {}
+  options: CreateControlOptions = {},
 ): Control {
   const C = Control.extend({
     onAdd() {

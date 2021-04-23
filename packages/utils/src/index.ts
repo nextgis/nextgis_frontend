@@ -30,7 +30,7 @@ export * from './tileJson';
  */
 export function bindAll(
   fns: string[],
-  context: { [method: string]: (...args: any[]) => any }
+  context: { [method: string]: (...args: any[]) => any },
 ): void {
   fns.forEach((fn) => {
     if (!context[fn]) {

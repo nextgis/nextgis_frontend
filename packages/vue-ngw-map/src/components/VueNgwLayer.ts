@@ -39,10 +39,10 @@ export class VueNgwLayer extends Vue {
 
   addLayer(
     adapter: LayerAdapterDefinition,
-    options: AdapterOptions = {}
+    options: AdapterOptions = {},
   ): Promise<LayerAdapter | undefined> {
     return Promise.resolve(
-      this.ngwMap && this.ngwMap.addLayer(adapter, options)
+      this.ngwMap && this.ngwMap.addLayer(adapter, options),
     );
   }
 

@@ -12,18 +12,18 @@ export class MetadataArgsStorage {
   readonly columns: ColumnMetadataArgs[] = [];
 
   filterTables(
-    target: (Function | string) | (Function | string)[]
+    target: (Function | string) | (Function | string)[],
   ): ResourceMetadataArgs[] {
     // @ts-ignore TODO: fix types
     return this.filterByTarget(this.resources, target);
   }
 
   filterColumns(
-    target: (Function | string) | (Function | string)[]
+    target: (Function | string) | (Function | string)[],
   ): ColumnMetadataArgs[] {
     return this.filterByTargetAndWithoutDuplicateProperties(
       this.columns,
-      target
+      target,
     );
   }
 
@@ -32,7 +32,7 @@ export class MetadataArgsStorage {
    */
   protected filterByTarget<T extends { target: Function | string }>(
     array: T[],
-    target: (Function | string) | (Function | string)[]
+    target: (Function | string) | (Function | string)[],
   ): T[] {
     return array.filter((table) => {
       return Array.isArray(target)
@@ -55,7 +55,7 @@ export class MetadataArgsStorage {
       if (sameTarget) {
         if (
           !newArray.find(
-            (newItem) => newItem.propertyName === item.propertyName
+            (newItem) => newItem.propertyName === item.propertyName,
           )
         )
           newArray.push(item);

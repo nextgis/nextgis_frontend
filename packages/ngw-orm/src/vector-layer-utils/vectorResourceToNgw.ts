@@ -13,7 +13,7 @@ export interface VectorResourceToNgwOptions {
 }
 
 export function vectorResourceToNgw(
-  opt: VectorResourceToNgwOptions
+  opt: VectorResourceToNgwOptions,
 ): Partial<FeatureItem<GeoJsonProperties, Geometry>>[] {
   // const features: Partial<FeatureItem<GeoJsonProperties, string>>[] = [];
   return opt.items.map((item) => {

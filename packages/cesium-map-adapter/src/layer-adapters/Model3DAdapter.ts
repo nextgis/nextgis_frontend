@@ -82,7 +82,7 @@ export class Model3DAdapter extends BaseAdapter<Model3DOptions, Layer> {
             const modelMatrix = this._getModelMatrix({ height });
             this._layer.modelMatrix = modelMatrix;
           }
-        }
+        },
       );
     }
   }

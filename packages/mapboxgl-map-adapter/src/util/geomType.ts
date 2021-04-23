@@ -66,7 +66,7 @@ for (const a in typeAlias) {
 }
 
 export function findMostFrequentGeomType(
-  arr: GeoJsonGeometryTypes[]
+  arr: GeoJsonGeometryTypes[],
 ): GeoJsonGeometryTypes {
   const counts: { [x: string]: number } = {};
   for (let fry = 0; fry < arr.length; fry++) {
@@ -86,12 +86,12 @@ export function detectType(geojson: GeoJsonObject): GeoJsonGeometryTypes {
   let geometry: GeoJsonGeometryTypes;
   if (geojson.type === 'FeatureCollection') {
     const featuresTypes = (geojson as FeatureCollection).features.map(
-      (f) => f.geometry.type
+      (f) => f.geometry.type,
     );
     geometry = findMostFrequentGeomType(featuresTypes);
   } else if (geojson.type === 'GeometryCollection') {
     const geometryTypes = (geojson as GeometryCollection).geometries.map(
-      (g) => g.type
+      (g) => g.type,
     );
     geometry = findMostFrequentGeomType(geometryTypes);
   } else if (geojson.type === 'Feature') {
@@ -105,7 +105,7 @@ export function detectType(geojson: GeoJsonObject): GeoJsonGeometryTypes {
 // Static functions
 export function geometryFilter(
   geometry: GeoJsonGeometryTypes,
-  type: VectorAdapterLayerType
+  type: VectorAdapterLayerType,
 ): boolean {
   const backType = backAliases[type];
   if (backType) {

@@ -3,7 +3,7 @@ import { CompanyLogoOptions } from '../interfaces';
 
 export async function getCompanyLogo(
   connector: NgwConnector,
-  options?: CompanyLogoOptions
+  options?: CompanyLogoOptions,
 ): Promise<HTMLElement | undefined> {
   const settings = await connector.get('pyramid.settings', null, {
     component: 'pyramid',

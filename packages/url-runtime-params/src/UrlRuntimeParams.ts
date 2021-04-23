@@ -22,7 +22,7 @@ export class UrlRuntimeParams implements RuntimeParams {
       function (m, key, value) {
         params[key] = decodeURIComponent(value);
         return ''; // does not matter
-      }
+      },
     );
     this._params = params;
     return params;
@@ -36,7 +36,7 @@ export class UrlRuntimeParams implements RuntimeParams {
       if (existUrlParam) {
         search = location.search.replace(
           new RegExp('([?|&]' + name + '=)' + '(.+?)(&|$)'),
-          '$1' + urlComponent + '$3'
+          '$1' + urlComponent + '$3',
         );
       } else if (location.search.length) {
         search = location.search + '&' + name + '=' + urlComponent;

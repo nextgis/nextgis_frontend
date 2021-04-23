@@ -13,7 +13,7 @@ export interface ItemBasePropertyOptions<V> {
   onSet?: (
     value?: V,
     options?: ItemBasePropertyOptions<V>,
-    item?: Item
+    item?: Item,
   ) => void;
 }
 
@@ -40,7 +40,7 @@ export interface ItemPropertyConfig<K extends keyof ItemPropertyTypes>
   getProperty?(): ItemPropertyTypes[K];
   onSet?(
     value: ItemPropertyTypes[K],
-    options?: ItemBasePropertyOptions<ItemPropertyTypes[K]>
+    options?: ItemBasePropertyOptions<ItemPropertyTypes[K]>,
   ): void;
 }
 
