@@ -45,7 +45,7 @@ export class NgwUploader {
   @onLoad()
   uploadRaster(
     file: File,
-    options: RasterUploadOptions
+    options: RasterUploadOptions,
   ): Promise<any> | undefined {
     const fileUpload = this.fileUpload(file, options);
     if (fileUpload) {
@@ -76,7 +76,7 @@ export class NgwUploader {
   @evented({ status: 'create-group', template: 'group creation' })
   createGroup(
     name: string,
-    options: GroupOptions = {}
+    options: GroupOptions = {},
   ): CancelablePromise<CreatedResource> | undefined {
     const data = {
       resource: {
@@ -103,7 +103,7 @@ export class NgwUploader {
   createResource(
     meta: Record<string, any>,
     name: string,
-    options: RasterUploadOptions
+    options: RasterUploadOptions,
   ): CancelablePromise<CreatedResource> | undefined {
     const data = {
       resource: {
@@ -138,7 +138,7 @@ export class NgwUploader {
   })
   createStyle(
     newRes: Record<string, any>,
-    name?: string
+    name?: string,
   ): CancelablePromise<CreatedResource & { name: string }> | undefined {
     name = name || newRes.name || newRes.id;
     const styleData = {
@@ -173,7 +173,7 @@ export class NgwUploader {
   })
   createWms(
     options: Record<string, any>,
-    name?: string
+    name?: string,
   ): CancelablePromise<CreatedResource> | undefined {
     name = name || options.name || options.id;
     let layers = options.layers || [
@@ -221,7 +221,7 @@ export class NgwUploader {
   })
   createWmsConnection(
     options: CreateWmsConnectionOptions,
-    name?: string
+    name?: string,
   ): CancelablePromise<CreatedResource> | undefined {
     name = name || options.name || String(options.id);
     const wmsData = {
@@ -257,7 +257,7 @@ export class NgwUploader {
   })
   createWmsConnectedLayer(
     options: CreateWmsConnectedLayerOptions,
-    name?: string
+    name?: string,
   ): CancelablePromise<CreatedResource> | undefined {
     name = name || options.name || String(options.id);
     const wmslayers =
@@ -298,7 +298,7 @@ export class NgwUploader {
   @evented({ status: 'upload', template: 'file upload' })
   fileUpload(
     file: File,
-    options: RasterUploadOptions = {}
+    options: RasterUploadOptions = {},
   ): CancelablePromise<Record<string, any>> | undefined {
     return (
       this.connector &&
@@ -378,7 +378,7 @@ export class NgwUploader {
   }
 
   getResource(
-    id: number
+    id: number,
   ): CancelablePromise<ResourceItem | undefined> | undefined {
     return this.connector && this.connector.getResource(id);
   }
@@ -419,7 +419,7 @@ export class NgwUploader {
   private _createDialogHtml(
     defAuth: Credentials,
     resolve: (cred: Credentials) => void,
-    reject: (...args: any[]) => void
+    reject: (...args: any[]) => void,
   ): HTMLElement | undefined {
     if (defAuth && defAuth.login && defAuth.password) {
       const { login, password } = defAuth;
@@ -437,16 +437,16 @@ export class NgwUploader {
     `;
       form.innerHTML = formHtml;
       const loginElement = form.getElementsByClassName(
-        'name'
+        'name',
       )[0] as HTMLInputElement;
       const passwordElement = form.getElementsByClassName(
-        'password'
+        'password',
       )[0] as HTMLInputElement;
       const loginBtn = form.getElementsByClassName(
-        'login'
+        'login',
       )[0] as HTMLButtonElement;
       const cancelBtn = form.getElementsByClassName(
-        'cancel'
+        'cancel',
       )[0] as HTMLButtonElement;
       const getAuthOpt: () => Credentials = () => {
         return {
@@ -469,14 +469,14 @@ export class NgwUploader {
       const addEventListener = () => {
         [loginElement, passwordElement].forEach((x) => {
           ['change', 'input'].forEach((y) =>
-            x.addEventListener(y, onInputChange)
+            x.addEventListener(y, onInputChange),
           );
         });
       };
       const removeEventListener = () => {
         [loginElement, passwordElement].forEach((x) => {
           ['change', 'input'].forEach((y) =>
-            x.removeEventListener(y, onInputChange)
+            x.removeEventListener(y, onInputChange),
           );
         });
       };

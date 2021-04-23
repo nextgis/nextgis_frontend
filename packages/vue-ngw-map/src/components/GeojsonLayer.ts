@@ -71,7 +71,7 @@ export class GeojsonLayer extends Mixins(VueNgwLayer) {
 
   addLayer(
     adapter: 'GEOJSON',
-    options: VectorAdapterOptions = {}
+    options: VectorAdapterOptions = {},
   ): Promise<LayerAdapter | undefined> {
     if (this.paint) {
       options.paint = this.paint;
@@ -87,7 +87,7 @@ export class GeojsonLayer extends Mixins(VueNgwLayer) {
           .then((layer) => {
             this.onSelectedChange();
             return layer;
-          })
+          }),
     );
   }
 }

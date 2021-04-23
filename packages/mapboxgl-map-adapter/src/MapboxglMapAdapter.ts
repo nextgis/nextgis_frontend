@@ -221,7 +221,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   // [extent_left, extent_bottom, extent_right, extent_top];
   async fitBounds(
     e: LngLatBoundsArray,
-    options: FitOptions = {}
+    options: FitOptions = {},
   ): Promise<void> {
     if (this.map) {
       const fitBoundOptions: FitBoundsOptions = {
@@ -235,7 +235,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
           [e[0], e[1]],
           [e[2], e[3]],
         ],
-        fitBoundOptions
+        fitBoundOptions,
       );
       sleep(fitBoundOptions.duration);
     }
@@ -275,7 +275,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   setLayerOrder(
     layerIds: string[],
     order: number,
-    layers: { [x: string]: TLayerAdapter }
+    layers: { [x: string]: TLayerAdapter },
   ): void {
     this.__setLayerOrder(layers);
   }
@@ -309,7 +309,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
 
   addControl(
     control: IControl,
-    position: ControlPositions
+    position: ControlPositions,
   ): IControl | undefined {
     if (this.map) {
       this.map.addControl(control, position);
@@ -438,7 +438,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
       _map.setLayoutProperty(
         layerId,
         'visibility',
-        status ? 'visible' : 'none'
+        status ? 'visible' : 'none',
       );
     });
   }
@@ -454,7 +454,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   }
 
   private _onMapError(
-    data: mapboxgl.ErrorEvent & mapboxgl.MapSourceDataEvent & EventData
+    data: mapboxgl.ErrorEvent & mapboxgl.MapSourceDataEvent & EventData,
   ) {
     if (this._sourceDataLoading[data.sourceId]) {
       const isLoaded = data.isSourceLoaded;
@@ -468,7 +468,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   private _onDataLoad(
     data: { sourceId: string; tile: any },
     isLoaded = false,
-    emit: (sourceId: string) => void
+    emit: (sourceId: string) => void,
   ) {
     // if all sources is loaded emmit event for all and clean mem
     if (isLoaded) {
@@ -495,7 +495,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
 
   private _transformRequest(
     url: string,
-    resourceType: ResourceType
+    resourceType: ResourceType,
   ): RequestParameters | undefined {
     // @ts-ignore
     const transformRequests = this.map && this.map.transformRequests;

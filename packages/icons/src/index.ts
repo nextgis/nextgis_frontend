@@ -42,7 +42,7 @@ function insertSvg(
   width: number,
   height: number,
   stroke = 0,
-  content?: string
+  content?: string,
 ) {
   const s = stroke / 2;
   const svg = `<svg

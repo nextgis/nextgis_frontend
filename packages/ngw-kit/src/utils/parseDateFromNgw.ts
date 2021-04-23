@@ -2,7 +2,9 @@ import { isObject, defined } from '@nextgis/utils';
 
 import type { NgwDateFormat, NgwDateTimeFormat } from '@nextgis/ngw-connector';
 
-export function parseDate(date: string | NgwDateFormat | NgwDateTimeFormat): string | undefined {
+export function parseDate(
+  date: string | NgwDateFormat | NgwDateTimeFormat,
+): string | undefined {
   if (
     isObject(date) &&
     defined(date.year) &&

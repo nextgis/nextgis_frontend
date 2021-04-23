@@ -116,7 +116,7 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
   static receive(item: VectorLayerResourceItem): typeof VectorLayer {
     const ReceivedResource = BaseResource.receive(
       item,
-      this
+      this,
     ) as typeof VectorLayer;
     ReceivedResource.geometryType = item.vector_layer.geometry_type;
     item.feature_layer.fields.forEach((x) => {
@@ -126,7 +126,7 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
         {
           enumerable: true,
           writable: true,
-        }
+        },
       );
       const column = Column({
         ...x,
@@ -174,7 +174,7 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
   static getNgwPayload(
     resource: typeof VectorLayer,
     parent: number,
-    options: SyncOptions
+    options: SyncOptions,
   ):
     | DeepPartial<VectorResourceSyncItem | VectorResourceUpdateItem>
     | undefined {
@@ -269,7 +269,7 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
   static async save<T extends VectorLayer>(
     this: ObjectType<T>,
     entityOrEntities: T | T[],
-    options?: UpdateOptions
+    options?: UpdateOptions,
   ): Promise<T[]> {
     const Resource = this as typeof VectorLayer;
     const connection = Resource.connection;
@@ -337,7 +337,7 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
    */
   static async count<T extends VectorLayer>(
     this: ObjectType<T>,
-    optionsOrConditions?: FindManyOptions<T> | PropertiesFilter<T>
+    optionsOrConditions?: FindManyOptions<T> | PropertiesFilter<T>,
   ): Promise<number> {
     const Resource = this as typeof VectorLayer;
     const connection = Resource.connection;
@@ -350,7 +350,7 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
         null,
         {
           id: Resource.item.resource.id,
-        }
+        },
       );
       return count.total_count;
     } else {
@@ -363,7 +363,7 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
    */
   static async find<T extends VectorLayer>(
     this: ObjectType<T>,
-    optionsOrConditions?: FindManyOptions<T> | PropertiesFilter<T>
+    optionsOrConditions?: FindManyOptions<T> | PropertiesFilter<T>,
   ): Promise<T[]> {
     const Resource = this as typeof VectorLayer;
     const connection = Resource.connection;
@@ -433,7 +433,7 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
   static async findOne<T extends VectorLayer>(
     this: ObjectType<T>,
     optionsOrConditions?: number | FindOneOptions<T> | FindConditions<T>,
-    maybeOptions?: FindOneOptions<T>
+    maybeOptions?: FindOneOptions<T>,
   ): Promise<T | undefined> {
     const Resource = this as typeof VectorLayer;
     const connection = Resource.connection;
@@ -476,7 +476,7 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
   static async findOneOrFail<T extends VectorLayer>(
     this: ObjectType<T>,
     optionsOrConditions?: number | FindOneOptions<T> | FindConditions<T>,
-    maybeOptions?: FindOneOptions<T>
+    maybeOptions?: FindOneOptions<T>,
   ): Promise<T> {
     const Resource = this as typeof VectorLayer;
     const item = await Resource.findOne<T>(optionsOrConditions, maybeOptions);

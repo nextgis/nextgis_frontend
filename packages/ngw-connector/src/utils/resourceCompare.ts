@@ -3,7 +3,7 @@ import { Resource } from '../types/ResourceItem';
 
 export function resourceCompare(
   res1: DeepPartial<Resource>,
-  res2: DeepPartial<Resource>
+  res2: DeepPartial<Resource>,
 ): boolean {
   return objectCompare(res1, res2);
 }
@@ -13,7 +13,7 @@ function isObject(val: unknown): val is Record<string | number, any> {
 }
 function objectCompare<T = Record<string | number, any>>(
   obj1: T,
-  obj2: T
+  obj2: T,
 ): boolean {
   return Object.entries(obj1).every(([key, value]) => {
     const value2 = obj2[key as keyof T];

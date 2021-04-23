@@ -28,7 +28,7 @@ export function Column(options: ColumnOptions): Function;
  */
 export function Column(
   typeOrOptions?: ColumnType | ColumnOptions,
-  options?: ColumnOptions
+  options?: ColumnOptions,
 ): Function {
   return function (object: Record<string, any>, propertyName: string) {
     // normalize parameters

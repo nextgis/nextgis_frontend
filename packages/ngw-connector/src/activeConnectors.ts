@@ -9,7 +9,7 @@ export function addConnector(connector: NgwConnector): void {
 }
 
 export function findConnector(
-  options: NgwConnectorOptions
+  options: NgwConnectorOptions,
 ): NgwConnector | undefined {
   return CONNECTORS.find((x) => {
     if (x.options.baseUrl === options.baseUrl) {

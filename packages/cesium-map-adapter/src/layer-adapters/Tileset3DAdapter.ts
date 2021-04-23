@@ -18,7 +18,7 @@ export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
   private _extent?: LngLatBoundsArray;
 
   async addLayer(
-    opt: Tileset3DAdapterOptions
+    opt: Tileset3DAdapterOptions,
   ): Promise<Cesium3DTileset | undefined> {
     this.options = { ...this.options, ...opt };
     const tileset = await this._addLayer();
@@ -126,7 +126,7 @@ export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
         const translation = Cartesian3.subtract(
           offset,
           surface,
-          new Cartesian3()
+          new Cartesian3(),
         );
         this.layer.modelMatrix = Matrix4.fromTranslation(translation);
       }
@@ -145,7 +145,7 @@ export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
         () => {
           const heightOffset = terrainSamplePositions[0].height;
           this._setHeight(heightOffset);
-        }
+        },
       );
     }
   }

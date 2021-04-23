@@ -74,7 +74,7 @@ export class Connection {
   }
 
   async receiveResource<P extends Record<string, any> = any>(
-    resource: ResourceDefinition
+    resource: ResourceDefinition,
   ): Promise<typeof BaseResource & P> {
     const res = await this.getResourceItem(resource);
     if (res) {
@@ -96,19 +96,19 @@ export class Connection {
 
   async getOrCreateResource<P extends typeof BaseResource>(
     Resource: P,
-    options: SyncOptions
+    options: SyncOptions,
   ): Promise<[P, boolean]> {
     const [resource, isCreated] = await this._getOrCreateResource(
       Resource,
       options,
-      true
+      true,
     );
     return [resource as P, isCreated];
   }
 
   async createResource(
     Resource: typeof BaseResource,
-    options: SyncOptions
+    options: SyncOptions,
   ): Promise<typeof BaseResource> {
     const [resource] = await this._getOrCreateResource(Resource, options);
     return resource;
@@ -119,7 +119,7 @@ export class Connection {
     if (item && item.resource) {
       const payload = this.getResourceNgwPayload(
         Resource,
-        item.resource.parent.id
+        item.resource.parent.id,
       );
       delete payload?.resource?.cls;
 
@@ -129,13 +129,13 @@ export class Connection {
         {
           data: payload,
         },
-        { id: item.resource.id }
+        { id: item.resource.id },
       );
     }
   }
 
   async getResourceItem(
-    resource: ResourceDefinition | DeepPartial<Resource>
+    resource: ResourceDefinition | DeepPartial<Resource>,
   ): Promise<ResourceItem | undefined> {
     return this.driver.getResource(resource);
   }
@@ -144,7 +144,7 @@ export class Connection {
    * @deprecated use getResourceItem instead
    */
   async getResource(
-    resource: ResourceDefinition | DeepPartial<Resource>
+    resource: ResourceDefinition | DeepPartial<Resource>,
   ): Promise<ResourceItem | undefined> {
     try {
       return this.getResourceItem(resource);
@@ -167,10 +167,10 @@ export class Connection {
   getResourceNgwPayload(
     resource: typeof BaseResource,
     parent: number,
-    opt: Partial<SyncOptions> = {}
+    opt: Partial<SyncOptions> = {},
   ): DeepPartial<ResourceSyncItem> | undefined {
     const table = getMetadataArgsStorage().filterTables(
-      resource
+      resource,
     )[0] as ResourceMetadataArgs;
     if (table) {
       const options = { ...table, ...opt } as SyncOptions;
@@ -207,7 +207,7 @@ export class Connection {
   private async _getOrCreateResource(
     resource: typeof BaseResource,
     options: SyncOptions,
-    getExisted = false
+    getExisted = false,
   ): Promise<[typeof BaseResource, boolean]> {
     let isCreated = false;
     if (resource.item && resource.connection) {
@@ -229,7 +229,7 @@ export class Connection {
     const payload = this.getResourceNgwPayload(
       resource,
       parentResource.resource.id,
-      options
+      options,
     );
     if (!payload) {
       throw Error('resource is not serializable');

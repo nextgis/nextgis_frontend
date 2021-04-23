@@ -30,7 +30,7 @@ const layerAlias: Partial<Record<GeometryType, string>> = {
 
 export function toTypescript(
   Resource: typeof VectorLayer,
-  opt: ToTypescriptOptions = {}
+  opt: ToTypescriptOptions = {},
 ): ToTypescript {
   const item = Resource.item as VectorLayerResourceItem;
   if (!item) {
@@ -67,7 +67,7 @@ export function toTypescript(
   ts.push(`})`);
 
   ts.push(
-    `export default class ${name ? name + ' ' : ''}extends VectorLayer {`
+    `export default class ${name ? name + ' ' : ''}extends VectorLayer {`,
   );
 
   item.feature_layer.fields.forEach((x, i) => {

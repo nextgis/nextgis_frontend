@@ -3,7 +3,7 @@ import { ResourceItem } from '@nextgis/ngw-connector';
 
 export function createPopupContent(
   feature: Feature,
-  item?: ResourceItem
+  item?: ResourceItem,
 ): HTMLElement | string {
   if (__BROWSER__) {
     const element = document.createElement('div');
