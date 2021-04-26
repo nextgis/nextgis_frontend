@@ -653,12 +653,12 @@ export class NgwMap<
     });
     layers.forEach((l) => {
       const layer = l.layer;
-      if (
-        layer.getIdentificationIds &&
-        layer.options.selectable &&
-        this.isLayerVisible(layer)
-      ) {
-        promises.push(layer.getIdentificationIds());
+      const identFunc =
+        typeof layer.getIdentificationIds === 'function'
+          ? layer.getIdentificationIds
+          : false;
+      if (identFunc && layer.options.selectable && this.isLayerVisible(layer)) {
+        promises.push(identFunc());
       }
     });
     const getIdsPromise = Promise.all(promises);

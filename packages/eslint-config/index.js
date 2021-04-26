@@ -27,20 +27,6 @@ module.exports = {
         '@typescript-eslint/ban-ts-comment': 'off',
         '@typescript-eslint/no-use-before-define': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
-        '@typescript-eslint/member-ordering': 'error',
-        '@typescript-eslint/no-unused-vars': [
-          1,
-          {
-            args: 'none',
-          },
-        ],
-        '@typescript-eslint/explicit-member-accessibility': [
-          'error',
-          {
-            accessibility: 'off',
-          },
-        ],
-        '@typescript-eslint/no-var-requires': 'off',
       },
     },
   ],
@@ -63,5 +49,20 @@ module.exports = {
       'error',
       { singleQuote: true, printWidth: 80, trailingComma: 'all' },
     ],
+    // do not place in overrides rules
+    '@typescript-eslint/member-ordering': 'error',
+    '@typescript-eslint/no-unused-vars': [
+      1,
+      {
+        args: 'none',
+      },
+    ],
+    '@typescript-eslint/explicit-member-accessibility': [
+      'error',
+      {
+        accessibility: 'off',
+      },
+    ],
+    '@typescript-eslint/no-var-requires': 'off',
   },
 };
