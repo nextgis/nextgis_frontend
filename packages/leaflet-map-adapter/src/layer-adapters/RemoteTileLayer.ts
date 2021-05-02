@@ -2,13 +2,13 @@ import { DomUtil, GridLayer, Util } from 'leaflet';
 import { debounce } from '../../../utils/src';
 import { callAjax } from './layersUtility';
 
-import type { TileLayerOptionsExtended } from './TileAdapter/TileLayer';
+// import type { TileLayerOptionsExtended } from './TileAdapter/TileLayer';
 
 type Constructor = new (...args: any[]) => any;
 
 export function makeRemote<
-  TBase extends Constructor,
-  O extends TileLayerOptionsExtended = TileLayerOptionsExtended
+  TBase extends Constructor
+  // O extends TileLayerOptionsExtended = TileLayerOptionsExtended
 >(Base: TBase): TBase {
   return class RemoteTileLayer extends Base {
     constructor(...args: any[]) {
