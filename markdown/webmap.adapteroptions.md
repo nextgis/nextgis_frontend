@@ -26,9 +26,10 @@ export interface AdapterOptions<N extends Record<string, any> = Record<string, a
 |  [maxZoom?](./webmap.adapteroptions.maxzoom.md) | number | <i>(Optional)</i> Maximum zoom level of the map. |
 |  [minZoom?](./webmap.adapteroptions.minzoom.md) | number | <i>(Optional)</i> Minimum zoom level of the map. |
 |  [name?](./webmap.adapteroptions.name.md) | string | <i>(Optional)</i> Non-unique name of the layer. Can be used for user interfaces. |
-|  [nativeOptions?](./webmap.adapteroptions.nativeoptions.md) | N | <i>(Optional)</i> |
+|  [nativeOptions?](./webmap.adapteroptions.nativeoptions.md) | N | <i>(Optional)</i> Map and layer adapter base options |
 |  [opacity?](./webmap.adapteroptions.opacity.md) | number | <i>(Optional)</i> Layer transparency. From 0-transparent to 1-visible |
 |  [order?](./webmap.adapteroptions.order.md) | number | <i>(Optional)</i> Indicates the map layers display sequence. A layer with a larger order value overlaps smaller ones. Zero value used to indicate baselayer. If the value is not specified explicitly, it will be assigned automatically with an increase of one for each new layer. |
+|  [props?](./webmap.adapteroptions.props.md) | Record&lt;string, any&gt; | <i>(Optional)</i> Any properties to save in layer. May be useful to get additional info from layer event. |
 |  [ratio?](./webmap.adapteroptions.ratio.md) | number | <i>(Optional)</i> |
 |  [setViewDelay?](./webmap.adapteroptions.setviewdelay.md) | number | <i>(Optional)</i> Experimental option to set the map loading delay when changing position |
 |  [visibility?](./webmap.adapteroptions.visibility.md) | boolean | <i>(Optional)</i> Show layer on the map immediately after adding. Such layers are always under others. Only one base layer can be displayed on the map at a time. |
