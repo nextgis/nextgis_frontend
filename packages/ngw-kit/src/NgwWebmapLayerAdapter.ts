@@ -1,26 +1,30 @@
-import {
-  WebMap,
-  LngLatBoundsArray,
-  RasterAdapterOptions,
-} from '@nextgis/webmap';
-import {
-  ResourceItem,
-  WebmapResource,
-  BasemapWebmap,
-} from '@nextgis/ngw-connector';
-import CancelablePromise from '@nextgis/cancelable-promise';
-import { fixUrlStr, Type } from '@nextgis/utils';
-import { ItemOptions } from '@nextgis/item';
-
-import StrictEventEmitter from 'strict-event-emitter-types';
 import { EventEmitter } from 'events';
+
+import CancelablePromise from '@nextgis/cancelable-promise';
+import { fixUrlStr } from '@nextgis/utils';
+import { fetchNgwLayerItems } from '@nextgis/ngw-kit';
 
 import { NgwWebmapItem } from './NgwWebmapItem';
 import { createOnFirstShowNgwAdapter } from './adapters/createOnFirstShowNgwAdapter';
 import { getLayerAdapterOptions } from './utils/getLayerAdapterOptions';
+import { getNgwWebmapExtent } from './utils/fetchNgwExtent';
 import { updateImageParams } from './utils/utils';
+import { BookmarkItem } from './BookmarkItem';
 
-import {
+import type { Type } from '@nextgis/utils';
+import type { ItemOptions } from '@nextgis/item';
+import type StrictEventEmitter from 'strict-event-emitter-types';
+import type {
+  ResourceItem,
+  WebmapResource,
+  BasemapWebmap,
+} from '@nextgis/ngw-connector';
+import type {
+  WebMap,
+  LngLatBoundsArray,
+  RasterAdapterOptions,
+} from '@nextgis/webmap';
+import type {
   TreeGroup,
   TreeLayer,
   NgwLayerAdapterType,
@@ -28,7 +32,6 @@ import {
   NgwWebmapLayerAdapterEvents,
   ResourceAdapter,
 } from './interfaces';
-import { getNgwWebmapExtent } from './utils/fetchNgwExtent';
 
 export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
   layer?: NgwWebmapItem;
@@ -103,6 +106,47 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
 
   getDependLayers(): Array<NgwWebmapItem> {
     return (this.layer && this.layer.tree.getDescendants()) || [];
+  }
+
+  getBookmarksResourceId(): number | undefined {
+    const webmap = this.response && this.response.webmap;
+    if (webmap) {
+      return webmap.bookmark_resource.id;
+    }
+  }
+
+  fetchBookmarks(): CancelablePromise<BookmarkItem[]> {
+    const bookmarkResId = this.getBookmarksResourceId();
+    const connector = this.options.connector;
+    if (bookmarkResId) {
+      return connector.getResourceOrFail(bookmarkResId).then((item) => {
+        const labelField = item.feature_layer?.fields.find(
+          (x) => x.label_field,
+        );
+        const keyname = labelField && labelField.keyname;
+        return fetchNgwLayerItems({
+          connector,
+          resourceId: bookmarkResId,
+          geom: false,
+          fields: keyname ? [keyname] : undefined,
+        }).then((items) => {
+          const bookmarks: BookmarkItem[] = [];
+          for (const i of items) {
+            const bookmark = new BookmarkItem({
+              item: i,
+              resourceId: bookmarkResId,
+              labelField: keyname,
+              connector,
+            });
+            bookmarks.push(bookmark);
+          }
+          return bookmarks;
+        });
+      });
+    }
+    throw new Error(
+      'Webmap was not loaded correctly, it is impossible to extract bookmarks',
+    );
   }
 
   async getIdentificationIds(): Promise<number[]> {
