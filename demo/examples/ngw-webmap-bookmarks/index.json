@@ -1,0 +1,5 @@
+{
+  "name": "NGW Webmap Bookmarks",
+  "description": "Loading and show bookmarks from NextGIS Web Webmap resource",
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
+}
