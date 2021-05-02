@@ -1,7 +1,7 @@
 {
   "name": "@nextgis/ngw-ol",
   "_priority": 10,
-  "version": "1.0.0-beta.7",
+  "version": "1.0.0-beta.8",
   "description": "Single-file bundle for rapid deployment of OpenLayers-based web-gis applications with NextGIS services",
   "main": "lib/ngw-ol.global.prod.js",
   "module": "lib/ngw-ol.esm-bundler.js",
@@ -9,13 +9,13 @@
   "jsdelivr": "lib/ngw-ol.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/ngw-map": "^1.0.0-beta.7",
-    "@nextgis/ol-map-adapter": "^1.0.0-beta.7",
+    "@nextgis/ngw-map": "^1.0.0-beta.8",
+    "@nextgis/ol-map-adapter": "^1.0.0-beta.8",
     "@types/events": "^3.0.0",
     "events": "^3.3.0"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "^1.0.0-beta.7"
+    "@nextgis/build-tools": "^1.0.0-beta.8"
   },
   "buildOptions": {
     "name": "NgwOl",
