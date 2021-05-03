@@ -1,0 +1,5 @@
+{
+  "name": "Webmap identification multiply",
+  "description": "Select webmap identify features",
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
+}

@@ -1,24 +1,31 @@
-import { Geometry, Feature, GeoJsonProperties } from 'geojson';
-import { LayerFeature, FeatureLayersIdentify } from '@nextgis/ngw-connector';
 import CancelablePromise from '@nextgis/cancelable-promise';
-import { MapClickEvent } from '@nextgis/webmap';
 import {
   JsonMap,
   degrees2meters,
   getCirclePolygonCoordinates,
   deprecatedMapClick,
 } from '@nextgis/utils';
-import {
+import { createGeoJsonFeature } from './featureLayerUtils';
+import { fetchNgwLayerFeature } from './fetchNgwLayerFeature';
+import { fetchNgwLayerItem } from './fetchNgwLayerItem';
+
+import type { Geometry, Feature, GeoJsonProperties } from 'geojson';
+import type { MapClickEvent } from '@nextgis/webmap';
+import type {
+  LayerFeature,
+  FeatureLayersIdentify,
+  FeatureLayerFields,
+} from '@nextgis/ngw-connector';
+import type {
   GetIdentifyGeoJsonOptions,
   NgwIdentify,
   NgwIdentifyItem,
   IdentifyRequestOptions,
   FeatureIdentifyRequestOptions,
   NgwFeatureItemResponse,
+  IdentifyItemOptions,
 } from '../interfaces';
-import { createGeoJsonFeature } from './featureLayerUtils';
-import { fetchNgwLayerFeature } from './fetchNgwLayerFeature';
-import { fetchNgwLayerItem } from './fetchNgwLayerItem';
+import { IdentifyItem } from '../IdentifyItem';
 
 export function getIdentifyItems(
   identify: NgwIdentify,
@@ -157,4 +164,11 @@ export function sendIdentifyRequest(
   };
 
   return options.connector.post('feature_layer.identify', { data });
+}
+
+export function createIdentifyItem<
+  F = FeatureLayerFields,
+  G extends Geometry = Geometry
+>(opt: IdentifyItemOptions): IdentifyItem {
+  return new IdentifyItem<F, G>(opt);
 }

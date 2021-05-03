@@ -403,3 +403,8 @@ export interface NgwFeatureItemResponse<
    */
   toGeojson(): CancelablePromise<Feature<G, F>>;
 }
+
+export interface IdentifyItemOptions {
+  feature: LayerFeature;
+  connector: NgwConnector;
+}

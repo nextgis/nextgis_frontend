@@ -53,6 +53,7 @@ import { NgwKit } from './NgwKit';
 export * from './NgwResource';
 export * from './NgwWebmapLayerAdapter';
 export * from './NgwWebmapItem';
+export * from './IdentifyItem';
 
 export * from './utils/utils';
 export * from './utils/identifyUtils';
