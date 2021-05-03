@@ -34,6 +34,11 @@ export interface FeatureItemAttachment {
   is_image: boolean;
 }
 
+export interface FeatureItemExtensions {
+  description?: string;
+  attachment?: FeatureItemAttachment[];
+}
+
 export interface FeatureItem<
   F = FeatureLayerFields,
   G extends Geometry | string = Geometry
@@ -41,10 +46,7 @@ export interface FeatureItem<
   id: number;
   geom: G;
   fields: F;
-  extensions: {
-    description?: string;
-    attachment?: FeatureItemAttachment[];
-  };
+  extensions: FeatureItemExtensions;
 }
 
 export type FeatureItemToNgw<

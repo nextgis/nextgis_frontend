@@ -4,18 +4,20 @@
  * The `ts-mixin` plugin worked fine, but led to errors in IE.
  *
  * Now inheritance is as follow:
- * BaseWebMap > WebMapLayers > WebMap
+ * BaseWebMap \> WebMapLayers \> WebMap
  *
  * Will need to be done this way:
+ * ```javascript
  * class WebMap extend mixin(WebMapLayers, WebMapControls) {}
+ * ```
  *
  * This approach can also be considered
- *
+ * ```javascript
  * class WebMap {
  *   layers: WebMapLayers;
  *   controls  WebMapControls
  * }
- *
+ * ```
  * and then
  *
  * const webMap = new WebMap(...);
@@ -24,15 +26,15 @@
  * looks good, but will add difficulty in inheriting from WebMap
  *
  * old:
- *
+ * ```javascript
  * class NgwMap extends WebMap {
  *   addLayer(...) {
  *      super.addLayer(...)
  *   }
  * }
- *
+ * ```
  * new:
- *
+ * ```javascript
  * class NgwLayers extends WebMapLayers {
  *   addLayer(...) {
  *     super.addLayer(...)
@@ -42,7 +44,7 @@
  * class NgwMap extends WebMap {
  *   layersClass = NgwLayers
  * }
- *
+ * ```
  * ...and there will be compatibility issues
  */
 
