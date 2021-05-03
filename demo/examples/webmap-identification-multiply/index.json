@@ -1,5 +1,5 @@
 {
-  "name": "Webmap identification multiply",
-  "description": "Select webmap identify features",
+  "name": "Web map feature identification",
+  "description": "Highlight and identify features on a Web map",
   "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
 }
