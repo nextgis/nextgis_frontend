@@ -3,7 +3,7 @@ import { Feature, Polygon } from 'geojson';
 import { geojsonArea } from '../../packages/area/src';
 
 const AREA = 730215205638.4752;
-// const PERIMETER = 4311624.9901016206;
+const PERIMETER = 4311624.9901016206;
 
 const testGeojson: Feature<Polygon> = {
   type: 'Feature',
