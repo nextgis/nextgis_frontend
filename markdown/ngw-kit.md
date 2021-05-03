@@ -63,6 +63,7 @@ getNgwLayerItems({
 
 |  Class | Description |
 |  --- | --- |
+|  [IdentifyItem](./ngw-kit.identifyitem.md) |  |
 |  [NgwKit](./ngw-kit.ngwkit.md) |  |
 |  [NgwResource](./ngw-kit.ngwresource.md) |  |
 |  [NgwWebmapItem](./ngw-kit.ngwwebmapitem.md) |  |
@@ -76,6 +77,7 @@ getNgwLayerItems({
 |  [createFeatureFieldFilterQueries(opt, \_queries, \_parentAllParams)](./ngw-kit.createfeaturefieldfilterqueries.md) |  |
 |  [createGeoJsonAdapter(opt)](./ngw-kit.creategeojsonadapter.md) |  |
 |  [createGeoJsonFeature(item)](./ngw-kit.creategeojsonfeature.md) |  |
+|  [createIdentifyItem(opt)](./ngw-kit.createidentifyitem.md) |  |
 |  [createOnFirstShowAdapter({ webMap, adapterOptions, createAdapter, })](./ngw-kit.createonfirstshowadapter.md) |  |
 |  [createOnFirstShowNgwAdapter({ webMap, connector, item, adapterOptions, idPrefix, })](./ngw-kit.createonfirstshowngwadapter.md) |  |
 |  [createRasterAdapter({ layerOptions, webMap, connector, item, })](./ngw-kit.createrasteradapter.md) |  |
@@ -126,6 +128,7 @@ getNgwLayerItems({
 |  [GetIdentifyGeoJsonOptions](./ngw-kit.getidentifygeojsonoptions.md) |  |
 |  [GetNgwLayerItemsOptions](./ngw-kit.getngwlayeritemsoptions.md) |  |
 |  [IdentifyEvent](./ngw-kit.identifyevent.md) |  |
+|  [IdentifyItemOptions](./ngw-kit.identifyitemoptions.md) |  |
 |  [IdentifyRequestOptions](./ngw-kit.identifyrequestoptions.md) |  |
 |  [NgwConfig](./ngw-kit.ngwconfig.md) |  |
 |  [NgwFeatureItemResponse](./ngw-kit.ngwfeatureitemresponse.md) |  |

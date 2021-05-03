@@ -29,6 +29,7 @@ Make sure CORS is registered in the [NextGIS Web settings](https://docs.nextgis.
 |  [DeleteRequestItemsResponseMap](./ngw-connector.deleterequestitemsresponsemap.md) |  |
 |  [FeatureItem](./ngw-connector.featureitem.md) |  |
 |  [FeatureItemAttachment](./ngw-connector.featureitemattachment.md) |  |
+|  [FeatureItemExtensions](./ngw-connector.featureitemextensions.md) |  |
 |  [FeatureLayerCount](./ngw-connector.featurelayercount.md) |  |
 |  [FeatureLayerField](./ngw-connector.featurelayerfield.md) |  |
 |  [FeatureLayersIdentify](./ngw-connector.featurelayersidentify.md) |  |
