@@ -1,12 +1,12 @@
 {
   "name": "@nextgis/demo-app",
-  "version": "1.0.0-beta.8",
+  "version": "1.0.0-beta.9",
   "_priority": 1,
   "description": "",
   "private": true,
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
-    "@nextgis/ngw-uploader": "^1.0.0-beta.8",
+    "@nextgis/ngw-uploader": "^1.0.0-beta.9",
     "favicons": "^6.2.1",
     "highlight.js": "^10.7.2",
     "showdown-highlight": "^2.1.7",
@@ -46,8 +46,8 @@
     "vue-template-compiler": "^2.6.12",
     "vuetify-loader": "^1.7.2",
     "webpack": "^5.36.2",
-    "webpack-cli": "^4.6.0",
     "webpack-bundle-analyzer": "^4.4.1",
+    "webpack-cli": "^4.6.0",
     "webpack-dev-server": "^3.11.2"
   },
   "optionalDependencies": {
