@@ -1,5 +1,5 @@
 {
-  "name": "Webmap identification",
-  "description": "Highlight first feature from webmap on mouse click",
+  "name": "Web map feature highlighting",
+  "description": "Highlight first Web map feature on mouse click",
   "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
 }
