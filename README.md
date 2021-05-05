@@ -15,15 +15,17 @@ Some universal examples:
 - [Add layer from NGW Cloud](http://code.nextgis.com/demo-examples-ngw-layer)
 - [Add webmap from NGW Cloud](http://code.nextgis.com/demo-examples-ngw-webmap)
 - [Highlight features from NGW webmap](https://code.nextgis.com/demo-examples-webmap-identification)
-- [Expression paint](http://code.nextgis.com/demo-examples-expression-paint-match)
-- [Layer properties filters](http://code.nextgis.com/demo-examples-ngw-layer-properties-filters)
-- [BBOX strategy for vector layer](http://code.nextgis.com/demo-examples-ngw-bbox-strategy)
-- [Custom layers control](http://code.nextgis.com/demo-examples-custom-layer-controls)
-- [Events](http://code.nextgis.com/demo-examples-events)
-- [Data management in the vector layer](http://code.nextgis.com/demo-examples-geojson-data)
-- [GeoJSON data](http://code.nextgis.com/demo-examples-geojson-layer)
-- [Toggle button control](http://code.nextgis.com/demo-examples-toggle-control)
-- [Vector selection](http://code.nextgis.com/demo-examples-vector-selection)
+- [Expression paint](https://code.nextgis.com/demo-examples-expression-paint-match)
+- [Layer properties filters](https://code.nextgis.com/demo-examples-ngw-layer-properties-filters)
+- [BBOX strategy for vector layer](https://code.nextgis.com/demo-examples-ngw-bbox-strategy)
+- [Custom layers control](https://code.nextgis.com/demo-examples-custom-layer-controls)
+- [Events](https://code.nextgis.com/demo-examples-events)
+- [Data management in the vector layer](https://code.nextgis.com/demo-examples-geojson-data)
+- [GeoJSON data](https://code.nextgis.com/demo-examples-geojson-layer)
+- [Toggle button control](https://code.nextgis.com/demo-examples-toggle-control)
+- [Vector selection](https://code.nextgis.com/demo-examples-vector-selection)
+- [Web map feature identification](https://code.nextgis.com/demo-examples-webmap-identification-multiply)
+- [Web map bookmarks](https://code.nextgis.com/demo-examples-ngw-webmap-bookmarks)
 
 ## Packages `@nextgis/`
 
@@ -83,13 +85,14 @@ Map-free tools for common purpose
 
 See how nextgis frontend libraries are used in real projects
 
-- [wwf-oilspill](https://github.com/nextgis/wwf-oilspill) – Emergency situations with oil spills ([LIVE](http://nextgis.ru/demo/oilspill/build/))
-- [oralhistory](https://github.com/nextgis/oralhistory) ([LIVE](https://nextgis.ru/demo/oralhistory/dist/))
-- [clear_horizon_frontend](https://github.com/nextgis/clear_horizon_frontend) – Clear horizon frontend.
-- [petro2020](https://github.com/rendrom/petro2020) ([LIVE](http://petro2020.igc.irk.ru/))
-- [russia-history](https://github.com/nextgis/russia-history) – Russia history live web map ([LIVE](https://map.runivers.ru))
-- [nextgisweb_viewer](https://github.com/nextgis/nextgisweb_viewer) – Service for viewing map resources from NextGIS Web ([LIVE](http://viewer.nextgis.com))
-- [ngw_frontend_boilerplate](https://github.com/nextgis/ngw_frontend_boilerplate)
+- [webpack-template](https://github.com/rendrom/nextgis-frontend-webpack-template) – Webpack based JavaScript template project.
+- [wwf-oilspill](https://github.com/nextgis/wwf-oilspill) – Emergency situations with oil spills ([LIVE](http://nextgis.ru/demo/oilspill/build/)), minimal dependency typescript project with Leaflet.
+- [oralhistory](https://github.com/nextgis/oralhistory) ([LIVE](https://nextgis.ru/demo/oralhistory/dist/)) – Typescript, Vuetify, Mapbox-gl-js and properties filter usage example.
+- [clear_horizon_frontend](https://github.com/nextgis/clear_horizon_frontend) – Clear horizon frontend. NGW auth system, leaflet typescript based webpack project.
+- [petro2020](https://github.com/rendrom/petro2020) ([LIVE](http://petro2020.igc.irk.ru/)). Native JavaScript for leaflet and mapbox-gl-gs in one project.
+- [russia-history](https://github.com/nextgis/russia-history) – Russia history live web map ([LIVE](https://map.runivers.ru)). Mapbox-gs-js, NGW MTV api, layer load event listener. Webpacj and typescript.
+- [nextgisweb_viewer](https://github.com/nextgis/nextgisweb_viewer) – Service for viewing map resources from NextGIS Web ([LIVE](http://viewer.nextgis.com)). Vuetify, typescript (outdated).
+- [ngw_frontend_boilerplate](https://github.com/nextgis/ngw_frontend_boilerplate). Parcel build (outdated).
 
 ## Install
 
