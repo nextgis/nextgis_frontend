@@ -1,5 +1,7 @@
-import { CesiumMapAdapter, MapAdapterOptions } from './CesiumMapAdapter';
-
 export * from './interfaces';
-export { CesiumMapAdapter, MapAdapterOptions };
+
+import { CesiumMapAdapter } from './CesiumMapAdapter';
+import type { MapAdapterOptions } from './CesiumMapAdapter';
+
+export type { CesiumMapAdapter, MapAdapterOptions };
 export default CesiumMapAdapter;
