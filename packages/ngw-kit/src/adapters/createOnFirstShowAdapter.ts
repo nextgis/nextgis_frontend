@@ -62,7 +62,7 @@ export async function createOnFirstShowAdapter({
             webMap.removeLayer(adapter);
           }
           if (this.options.visibility) {
-            webMap.showLayer(adapter);
+            await webMap.showLayer(adapter);
           }
           this.layer.push(adapter);
         }
