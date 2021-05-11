@@ -48,13 +48,14 @@
  * ...and there will be compatibility issues
  */
 
-import { WebMapMain, WEB_MAP_CONTAINER } from './WebMapMain';
+import { WebMapMain } from './WebMapMain';
 import { WebMapControls } from './WebMapControls';
 
 import type { MapOptions } from './interfaces/MapOptions';
 import type { ControlOptions } from './interfaces/MapControl';
 import type { WebMapEvents } from './interfaces/Events';
 import type { WebMapLayers } from './WebMapLayers';
+import { getWebMap, setWebMap } from './container';
 
 /**
  * The core component for managing map adapters.
@@ -91,10 +92,11 @@ export class WebMap<
   constructor(mapOptions: O) {
     super(mapOptions);
     this._addControls();
+    setWebMap(this.id, this);
   }
 
   static get<T extends WebMap = WebMap>(id: number): T {
-    return WEB_MAP_CONTAINER[id];
+    return getWebMap<T>(id);
   }
 
   /**

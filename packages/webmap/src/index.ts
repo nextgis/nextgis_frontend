@@ -52,6 +52,7 @@ export { updateGeoJsonAdapterOptions } from './utils/updateGeoJsonAdapterOptions
 export * from './WebMapLayers';
 export * from './WebMapControls';
 export * from './WebMapMain';
+export { getWebMap } from './container';
 
 export * from './interfaces/Events';
 export * from './interfaces/BaseTypes';
@@ -68,3 +69,5 @@ export async function createWebMap(options: MapOptions): Promise<WebMap> {
   const webMap = new WebMap(options);
   return webMap.onLoad();
 }
+
+
