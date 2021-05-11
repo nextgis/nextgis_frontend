@@ -37,11 +37,6 @@ type EmitStatusEventData = any;
 
 let ID = 0;
 
-/**
- * @internal
- */
-export const WEB_MAP_CONTAINER: Record<number, any> = {};
-
 const OPTIONS: MapOptions = {
   minZoom: 0,
   maxZoom: 21,
@@ -110,7 +105,6 @@ export class WebMapMain<
   } = {};
 
   constructor(mapOptions: O) {
-    WEB_MAP_CONTAINER[this.id] = this;
     this.mapAdapter = mapOptions.mapAdapter as MapAdapter<M>;
     this._starterKits = mapOptions.starterKits || [];
     if (mapOptions) {
