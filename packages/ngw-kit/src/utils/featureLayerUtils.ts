@@ -118,6 +118,10 @@ export function updateItemRequestParam(
   }
   if (geom !== undefined) {
     params.geom = geom ? 'yes' : 'no';
+    if (!geom) {
+      delete params.srs;
+      delete params.geom_format;
+    }
   }
 }
 
