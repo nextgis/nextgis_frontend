@@ -6,7 +6,7 @@ import {
   FilterOptions,
 } from '@nextgis/webmap';
 
-import { Paint, IconOptions, isPaint, isIcon } from '@nextgis/paint';
+import { Paint, IconPaint, isPaint, isIcon } from '@nextgis/paint';
 
 import {
   checkIfPropertyFilter,
@@ -25,6 +25,7 @@ import {
   MapLayerMouseEvent,
   AnySourceData,
   AnyLayout,
+  AnyLayer,
   Layer,
 } from 'mapbox-gl';
 
@@ -325,7 +326,7 @@ export abstract class VectorAdapter<
     }
     const map = this.map;
     if (map) {
-      map.addLayer(layerOpt);
+      map.addLayer(layerOpt as AnyLayer);
 
       const filters = ['all', ...(filter || [])].filter((x) => x);
       if (filters.length > 1) {
@@ -448,7 +449,7 @@ export abstract class VectorAdapter<
     return feature.id;
   }
 
-  protected async _registerImage(paint: IconOptions): Promise<void> {
+  protected async _registerImage(paint: IconPaint): Promise<void> {
     if (isIcon(paint) && paint.html && this.map) {
       const imageExist = this.map.hasImage(paint.html);
       if (!imageExist) {
