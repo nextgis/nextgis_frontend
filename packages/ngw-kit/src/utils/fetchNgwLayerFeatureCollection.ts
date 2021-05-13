@@ -15,7 +15,7 @@ export function fetchNgwLayerFeatureCollection<
     resourceId: number;
     connector: NgwConnector;
     filters?: PropertiesFilter;
-  } & NgwFeatureRequestOptions<P>
+  } & NgwFeatureRequestOptions<P>,
 ): CancelablePromise<FeatureCollection<G, P>> {
   return fetchNgwLayerFeatures<G, P>(options).then((features) => {
     const featureCollection: FeatureCollection<G, P> = {

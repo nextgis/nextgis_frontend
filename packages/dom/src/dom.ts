@@ -1,7 +1,7 @@
 export function create<K extends keyof HTMLElementTagNameMap>(
   tagName: K,
   className?: string | null,
-  container?: HTMLElement
+  container?: HTMLElement,
 ): HTMLElementTagNameMap[K] {
   const el = window.document.createElement(tagName);
   if (className !== undefined && className !== null) {

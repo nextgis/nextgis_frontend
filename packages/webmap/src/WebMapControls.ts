@@ -1,6 +1,10 @@
-import { WebMapEvents } from './interfaces/Events';
+import { WebMapLayers } from './WebMapLayers';
+import { createToggleControl } from './components/controls/createToggleControl';
 
-import {
+import type { WebMapMain } from './WebMapMain';
+import type { MapOptions } from './interfaces/MapOptions';
+import type { WebMapEvents } from './interfaces/Events';
+import type {
   MapControl,
   CreateControlOptions,
   ButtonControlOptions,
@@ -8,12 +12,7 @@ import {
   ToggleControl,
   MapControls,
 } from './interfaces/MapControl';
-
-import { ControlPosition } from './interfaces/MapAdapter';
-import { WebMapLayers } from './WebMapLayers';
-import { WebMapMain } from './WebMapMain';
-import { createToggleControl } from './components/controls/createToggleControl';
-import { MapOptions } from './interfaces/MapOptions';
+import type { ControlPosition } from './interfaces/MapAdapter';
 
 /**
  * Collection of methods for managing map controls
@@ -36,7 +35,7 @@ export class WebMapControls<
       options: {
         control: MapControl;
         options?: CreateControlOptions;
-      }
+      },
     ) => {
       return webMap.createControl(options.control, options.options);
     },
@@ -66,7 +65,7 @@ export class WebMapControls<
   async addControl<K extends keyof MapControls>(
     controlDef: K | C,
     position: ControlPosition,
-    options?: MapControls[K]
+    options?: MapControls[K],
   ): Promise<any> {
     let control: C | undefined;
     position = position ?? 'top-left';
@@ -101,7 +100,7 @@ export class WebMapControls<
    */
   async createControl(
     control: MapControl,
-    options?: CreateControlOptions
+    options?: CreateControlOptions,
   ): Promise<C | undefined> {
     await this.onLoad('build-map');
     if (this.mapAdapter.createControl) {
@@ -110,7 +109,7 @@ export class WebMapControls<
   }
 
   async createButtonControl(
-    options: ButtonControlOptions
+    options: ButtonControlOptions,
   ): Promise<C | undefined> {
     await this.onLoad('build-map');
     if (this.mapAdapter.createButtonControl) {
@@ -139,7 +138,7 @@ export class WebMapControls<
    * @public
    */
   async createToggleControl(
-    options: ToggleControlOptions
+    options: ToggleControlOptions,
   ): Promise<(C & ToggleControl) | undefined> {
     await this.onLoad('build-map');
     if (this.mapAdapter.createToggleControl) {
@@ -148,7 +147,7 @@ export class WebMapControls<
       if (this.mapAdapter.createButtonControl) {
         return createToggleControl<C>(
           this.mapAdapter.createButtonControl,
-          options
+          options,
         );
       }
     }
@@ -179,7 +178,7 @@ export class WebMapControls<
    */
   getControl<K extends keyof MapControls>(
     control: K,
-    options?: MapControls[K]
+    options?: MapControls[K],
   ): C | undefined {
     const engine = this.mapAdapter.controlAdapters[control];
     if (engine) {

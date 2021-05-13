@@ -14,7 +14,7 @@ interface VueElement extends Vue {
 
 export function propsBinder(
   vueElement: VueElement,
-  props: Record<string, any>
+  props: Record<string, any>,
 ): void {
   for (const key in props) {
     const setMethodName = 'set' + capitalizeFirstLetter(key);
@@ -31,14 +31,14 @@ export function propsBinder(
         },
         {
           deep: deepValue,
-        }
+        },
       );
     }
   }
 }
 
 export const findNgwMapParent = (
-  firstVueParent: Vue | VueNgwMap
+  firstVueParent: Vue | VueNgwMap,
 ): VueNgwMap => {
   let found = false;
   while (firstVueParent && !found) {

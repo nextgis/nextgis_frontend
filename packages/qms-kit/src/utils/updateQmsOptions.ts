@@ -1,13 +1,13 @@
-import { LayerAdaptersOptions, AdapterOptions } from '@nextgis/webmap';
+import type { LayerAdaptersOptions, AdapterOptions } from '@nextgis/webmap';
 
-import { QmsBasemap, QmsLayerType } from '../interfaces';
+import type { QmsBasemap, QmsLayerType } from '../interfaces';
 
 export const alias: { [key in QmsLayerType]: keyof LayerAdaptersOptions } = {
   tms: 'TILE',
 };
 
 export function updateQmsOptions(
-  qms: QmsBasemap
+  qms: QmsBasemap,
 ): AdapterOptions & { url: string } {
   const protocol = (location.protocol === 'https:' ? 'https' : 'http') + '://';
   let serviceUrl = qms.url.replace(/^(https?|ftp):\/\//, protocol);

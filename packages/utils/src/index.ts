@@ -19,6 +19,7 @@ export * from './number';
 export * from './typeHelpers';
 export * from './url';
 export * from './Clipboard';
+export * from './tileJson';
 /**
  * Given an array of member function names as strings, replace all of them
  * with bound versions that will always refer to `context` as `this`. This
@@ -29,7 +30,7 @@ export * from './Clipboard';
  */
 export function bindAll(
   fns: string[],
-  context: { [method: string]: (...args: any[]) => any }
+  context: { [method: string]: (...args: any[]) => any },
 ): void {
   fns.forEach((fn) => {
     if (!context[fn]) {

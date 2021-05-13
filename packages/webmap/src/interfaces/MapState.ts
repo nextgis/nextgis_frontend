@@ -1,4 +1,4 @@
-import { WebMapEvents } from './Events';
+import type { WebMapEvents } from './Events';
 
 /**
  * @public

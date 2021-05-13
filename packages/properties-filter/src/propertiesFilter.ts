@@ -1,6 +1,6 @@
-import { Feature, GeoJsonProperties } from 'geojson';
 import { reEscape } from '@nextgis/utils';
 
+import type { Feature, GeoJsonProperties } from 'geojson';
 /**
  * gt - greater (\>)
  * lt - lower (\<)
@@ -33,7 +33,7 @@ type Properties = GeoJsonProperties;
 export type PropertyFilter<T extends Properties = Properties> = [
   keyof T | string,
   Operations,
-  any
+  any,
 ];
 
 export type PropertiesFilter<T extends Properties = Properties> = (
@@ -81,7 +81,7 @@ export const operationsAliases: {
 };
 
 export function checkIfPropertyFilter(
-  filter: PropertyFilter | PropertiesFilter | string
+  filter: PropertyFilter | PropertiesFilter | string,
 ): filter is PropertyFilter {
   const pf = filter as PropertyFilter;
   if (
@@ -96,7 +96,7 @@ export function checkIfPropertyFilter(
 
 export function featureFilter(
   feature: Feature,
-  filters: PropertiesFilter
+  filters: PropertiesFilter,
 ): boolean {
   const properties: GeoJsonProperties = { ...feature.properties };
   if (properties) {
@@ -109,7 +109,7 @@ export function featureFilter(
 
 export function propertiesFilter(
   properties: { [field: string]: any },
-  filters: PropertiesFilter
+  filters: PropertiesFilter,
 ): boolean {
   const logic = typeof filters[0] === 'string' ? filters[0] : 'all';
   const filterFunction = (p: PropertyFilter | PropertiesFilter) => {

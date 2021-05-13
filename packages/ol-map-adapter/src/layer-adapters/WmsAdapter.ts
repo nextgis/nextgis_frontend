@@ -1,12 +1,13 @@
-import Map from 'ol/Map';
 import TileLayer from 'ol/layer/Tile';
-import TileWMS, { Options as TileWMSOptions } from 'ol/source/TileWMS';
-
-import { MainLayerAdapter, WmsAdapterOptions } from '@nextgis/webmap';
+import TileWMS from 'ol/source/TileWMS';
 
 import { resolutionOptions } from '../utils/gerResolution';
 import { queryToObject, objectToQuery } from '../utils/utils';
 import { setTileLoadFunction } from '../utils/setTileLoadFunction';
+
+import type Map from 'ol/Map';
+import type { Options as TileWMSOptions } from 'ol/source/TileWMS';
+import type { MainLayerAdapter, WmsAdapterOptions } from '@nextgis/webmap';
 
 export class WmsAdapter implements MainLayerAdapter {
   layer: any;
@@ -32,7 +33,7 @@ export class WmsAdapter implements MainLayerAdapter {
             bbox: BBOX,
             width: WIDTH,
             height: HEIGHT,
-          })
+          }),
         );
         const headers = options.headers;
         const _src = url + '?' + queryString;

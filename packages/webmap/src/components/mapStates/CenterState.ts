@@ -1,7 +1,7 @@
 import { StateItem } from './StateItem';
-import { WebMapEvents } from '../../interfaces/Events';
-import { LngLatArray } from '../../interfaces/BaseTypes';
-import { MapOptions } from '../../interfaces/MapOptions';
+import type { WebMapEvents } from '../../interfaces/Events';
+import type { LngLatArray } from '../../interfaces/BaseTypes';
+import type { MapOptions } from '../../interfaces/MapOptions';
 
 export class CenterState extends StateItem<LngLatArray> {
   name: keyof MapOptions = 'center';

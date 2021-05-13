@@ -6,13 +6,16 @@ import {
   FEATURE_REQUEST_PARAMS,
   parseDate,
 } from '@nextgis/ngw-kit';
-import NgwConnector, {
+import NgwConnector from '@nextgis/ngw-connector';
+
+import type {
+  ResourceItemDatatype,
   ResourceStoreItem,
   FeatureLayerField,
   FeatureItem,
 } from '@nextgis/ngw-connector';
-import { Type } from '@nextgis/webmap';
-import { ForeignResource, PatchOptions } from '../../interfaces';
+import type { Type } from '@nextgis/utils';
+import type { ForeignResource, PatchOptions } from '../../interfaces';
 
 type ResourceDef = string | number;
 
@@ -24,6 +27,9 @@ export abstract class ResourceStore<
 
   resources: { [key in ResourceDef]?: number } = {};
 
+  /**
+   * @deprecated
+   */
   foreignResources: { [key in ResourceDef]: ForeignResource } = {};
 
   resourceItems: ResourceStoreItem<P>[] = [];
@@ -38,15 +44,19 @@ export abstract class ResourceStore<
 
   _promises: Record<string, Promise<any>> = {};
 
+  formatters: {
+    date?: (date: string) => string;
+    datetime?: (date: string) => string;
+  } = {};
+
   hooks: {
     onNewItem?: (opt: PatchOptions<G, P>) => Promise<void>;
     onBeforeDelete?: (opt: { fid: number }) => Promise<void>;
     onBeforePatch?: (
       data: Partial<FeatureItem<P, Geometry>>[],
-      opt: { id: number }
+      opt: { id: number },
     ) => Promise<void>;
     delete?: (resourceId: number, featureId: number) => Promise<void>;
-    dateFormat?: (ngwDate: string) => string;
   } = {};
   private _connector!: NgwConnector;
 
@@ -112,7 +122,7 @@ export abstract class ResourceStore<
   @Action({ commit: 'UPDATE_RESOURCES' })
   async getResources(): Promise<Record<ResourceDef, number>> {
     const promises: Array<Promise<any>> = [];
-    const resourceDefs = [this.resource, ...Object.keys(this.foreignResources)];
+    const resourceDefs = [this.resource]; // ...Object.keys(this.foreignResources)
     if (!this._promises.getResources) {
       resourceDefs.forEach((resourceDef) => {
         if (!(resourceDef in this.resources)) {
@@ -140,7 +150,7 @@ export abstract class ResourceStore<
   >(opt: { item: Feature<G, P> }): Promise<Partial<FeatureItem<P>>> {
     const geom = opt.item.geometry as Geometry;
     const featureFields = (await this.context.dispatch(
-      'getFields'
+      'getFields',
     )) as FeatureLayerField[];
     const fields = prepareFieldsToNgw(opt.item.properties, featureFields);
     return {
@@ -156,7 +166,7 @@ export abstract class ResourceStore<
     if (id) {
       const feature: Partial<FeatureItem<P>> = await this.context.dispatch(
         'prepareFeatureToNgw',
-        opt
+        opt,
       );
       try {
         const { fid } = opt;
@@ -170,7 +180,7 @@ export abstract class ResourceStore<
         const item = await this.connector.patch(
           'feature_layer.feature.collection',
           { data },
-          { id, ...FEATURE_REQUEST_PARAMS }
+          { id, ...FEATURE_REQUEST_PARAMS },
         );
         const newFeature = feature as FeatureItem<P>;
         const newItem = item && item[0];
@@ -226,20 +236,26 @@ export abstract class ResourceStore<
   @Mutation
   protected SET_STORE(store: ResourceStoreItem<P>[]): void {
     let prepared = store;
-    const datefields = this.fields
-      .filter((x) => x.datatype === 'DATE')
-      .map((x) => x.keyname);
+    const dateFields: ResourceItemDatatype[] = ['DATE', 'DATETIME'];
+    const datefields = this.fields.filter((x) =>
+      dateFields.includes(x.datatype),
+    );
     if (datefields.length) {
       prepared = store.map((x) => {
         for (const k in x) {
-          if (datefields.includes(k)) {
+          const dateField = datefields.find((d) => d.keyname === k);
+          if (dateField) {
             let date = parseDate(x[k]);
             if (date) {
-              if (this.hooks.dateFormat) {
-                date = this.hooks.dateFormat(date);
+              if (dateField.datatype === 'DATE' && this.formatters.date) {
+                date = this.formatters.date(date);
+              } else if (
+                dateField.datatype === 'DATETIME' &&
+                this.formatters.datetime
+              ) {
+                date = this.formatters.datetime(date);
               }
-              // @ts-ignore
-              x[k] = date;
+              (x as any)[k] = date;
             }
           }
         }

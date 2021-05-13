@@ -29,7 +29,7 @@ export class PromiseControl {
 
   add<T extends CancelablePromise = CancelablePromise>(
     promise: T,
-    name?: string | number | symbol
+    name?: string | number | symbol,
   ): CancelablePromise<T> {
     const key = name ? name : promise;
     const exist = this._promises.get(key);
@@ -58,13 +58,22 @@ export class PromiseControl {
     }
   }
 
+  waitFunc<T>(func: () => any, name = ''): CancelablePromise<T> {
+    name = name || func.name;
+    const exist = this.get(name);
+    if (exist) {
+      return exist;
+    }
+    return this.add(func(), name);
+  }
+
   WaitForMe(name: string | symbol = ''): MethodDecorator {
     const get = this.get.bind(this);
     const add = this.add.bind(this);
     return function (
       target: unknown,
       key: string | symbol,
-      descriptor: PropertyDescriptor
+      descriptor: PropertyDescriptor,
     ): PropertyDescriptor {
       const originalMethod = descriptor.value;
       name = name || key;
@@ -86,7 +95,7 @@ export class PromiseControl {
     return this.WaitForMe(name);
   }
 
-  private _onStop() {
+  private _onStop(): void {
     if (this.options.onStop && !this.isLoaded) {
       this.options.onStop();
     }

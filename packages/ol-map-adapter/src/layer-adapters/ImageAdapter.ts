@@ -1,15 +1,16 @@
-import Map from 'ol/Map';
 import ImageLayer from 'ol/layer/Image';
 import CanvasImageLayerRenderer from 'ol/renderer/canvas/ImageLayer';
-import ImageWMS, { Options as ImageWMSOptions } from 'ol/source/ImageWMS';
-
-import { MainLayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
+import ImageWMS from 'ol/source/ImageWMS';
+import WMSServerType from 'ol/source/WMSServerType';
 
 import { resolutionOptions } from '../utils/gerResolution';
 import { queryToObject, objectToQuery } from '../utils/utils';
 import { setTileLoadFunction } from '../utils/setTileLoadFunction';
-import { Extent } from 'ol/extent';
-import WMSServerType from 'ol/source/WMSServerType';
+
+import type { Extent } from 'ol/extent';
+import type Map from 'ol/Map';
+import type { Options as ImageWMSOptions } from 'ol/source/ImageWMS';
+import type { MainLayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
 
 export class ImageAdapter implements MainLayerAdapter {
   layer: any;
@@ -32,7 +33,7 @@ export class ImageAdapter implements MainLayerAdapter {
         const url = src.split('?')[0];
         const query = src.split('?')[1];
         const { resource, BBOX, WIDTH, HEIGHT, ...params } = queryToObject(
-          query
+          query,
         );
 
         const queryParams = {
@@ -43,7 +44,7 @@ export class ImageAdapter implements MainLayerAdapter {
           ...params,
         };
         const queryString = objectToQuery(
-          updateWmsParams ? updateWmsParams(queryParams) : params
+          updateWmsParams ? updateWmsParams(queryParams) : params,
         );
         const headers = options.headers;
 
@@ -87,13 +88,13 @@ export class ImageAdapter implements MainLayerAdapter {
             extent: Extent,
             resolution: number,
             pixelRatio: number,
-            projection: any
+            projection: any,
           ) {
             return super.getImageInternal(
               extent,
               resolution,
               ratio,
-              projection
+              projection,
             );
           }
         }

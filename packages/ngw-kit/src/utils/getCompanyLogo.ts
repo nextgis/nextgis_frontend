@@ -3,13 +3,11 @@ import { CompanyLogoOptions } from '../interfaces';
 
 export async function getCompanyLogo(
   connector: NgwConnector,
-  options?: CompanyLogoOptions
+  options?: CompanyLogoOptions,
 ): Promise<HTMLElement | undefined> {
-  const settings = await connector.get(
-    'pyramid.settings',
-    { cache: true },
-    { component: 'pyramid' }
-  );
+  const settings = await connector.get('pyramid.settings', null, {
+    component: 'pyramid',
+  });
   if (settings && settings.company_logo && settings.company_logo.enabled) {
     const anchor = document.createElement('a');
     anchor.style.position = 'absolute';

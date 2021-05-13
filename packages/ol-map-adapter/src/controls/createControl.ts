@@ -1,9 +1,9 @@
-import { MapControl, CreateControlOptions } from '@nextgis/webmap';
 import Control from 'ol/control/Control';
+import type { MapControl, CreateControlOptions } from '@nextgis/webmap';
 
 export function createControl(
   control: MapControl,
-  options: CreateControlOptions = {}
+  options: CreateControlOptions = {},
 ): Control {
   const newControl = (function (C) {
     function NewControl(this: Control) {

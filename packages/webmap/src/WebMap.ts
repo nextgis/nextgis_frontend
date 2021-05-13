@@ -4,18 +4,20 @@
  * The `ts-mixin` plugin worked fine, but led to errors in IE.
  *
  * Now inheritance is as follow:
- * BaseWebMap > WebMapLayers > WebMap
+ * BaseWebMap \> WebMapLayers \> WebMap
  *
  * Will need to be done this way:
+ * ```javascript
  * class WebMap extend mixin(WebMapLayers, WebMapControls) {}
+ * ```
  *
  * This approach can also be considered
- *
+ * ```javascript
  * class WebMap {
  *   layers: WebMapLayers;
  *   controls  WebMapControls
  * }
- *
+ * ```
  * and then
  *
  * const webMap = new WebMap(...);
@@ -24,15 +26,15 @@
  * looks good, but will add difficulty in inheriting from WebMap
  *
  * old:
- *
+ * ```javascript
  * class NgwMap extends WebMap {
  *   addLayer(...) {
  *      super.addLayer(...)
  *   }
  * }
- *
+ * ```
  * new:
- *
+ * ```javascript
  * class NgwLayers extends WebMapLayers {
  *   addLayer(...) {
  *     super.addLayer(...)
@@ -42,17 +44,18 @@
  * class NgwMap extends WebMap {
  *   layersClass = NgwLayers
  * }
- *
+ * ```
  * ...and there will be compatibility issues
  */
 
-import { WebMapEvents } from './interfaces/Events';
-
-import { WebMapLayers } from './WebMapLayers';
-import { WebMapMain, WEB_MAP_CONTAINER } from './WebMapMain';
+import { WebMapMain } from './WebMapMain';
 import { WebMapControls } from './WebMapControls';
-import { MapOptions } from './interfaces/MapOptions';
-import { ControlOptions } from './interfaces/MapControl';
+
+import type { MapOptions } from './interfaces/MapOptions';
+import type { ControlOptions } from './interfaces/MapControl';
+import type { WebMapEvents } from './interfaces/Events';
+import type { WebMapLayers } from './WebMapLayers';
+import { getWebMap, setWebMap } from './container';
 
 /**
  * The core component for managing map adapters.
@@ -89,10 +92,11 @@ export class WebMap<
   constructor(mapOptions: O) {
     super(mapOptions);
     this._addControls();
+    setWebMap(this.id, this);
   }
 
   static get<T extends WebMap = WebMap>(id: number): T {
-    return WEB_MAP_CONTAINER[id];
+    return getWebMap<T>(id);
   }
 
   /**
@@ -133,7 +137,7 @@ export class WebMap<
     }
   }
 
-  private _addControls() {
+  private _addControls(): void {
     if (this.options.controls) {
       this.options.controls.forEach((x) => {
         let controlAdapterName = x;

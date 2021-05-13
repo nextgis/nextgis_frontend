@@ -1,26 +1,30 @@
-import {
-  WebMap,
-  LngLatBoundsArray,
-  RasterAdapterOptions,
-} from '@nextgis/webmap';
-import {
+import { EventEmitter } from 'events';
+
+import CancelablePromise from '@nextgis/cancelable-promise';
+import { fixUrlStr } from '@nextgis/utils';
+import { fetchNgwLayerItems } from '@nextgis/ngw-kit';
+
+import { NgwWebmapItem } from './NgwWebmapItem';
+import { createOnFirstShowNgwAdapter } from './adapters/createOnFirstShowNgwAdapter';
+import { getLayerAdapterOptions } from './utils/getLayerAdapterOptions';
+import { getNgwWebmapExtent } from './utils/fetchNgwExtent';
+import { updateImageParams } from './utils/utils';
+import { BookmarkItem } from './BookmarkItem';
+
+import type { Type } from '@nextgis/utils';
+import type { ItemOptions } from '@nextgis/item';
+import type StrictEventEmitter from 'strict-event-emitter-types';
+import type {
   ResourceItem,
   WebmapResource,
   BasemapWebmap,
 } from '@nextgis/ngw-connector';
-import CancelablePromise from '@nextgis/cancelable-promise';
-import { fixUrlStr, Type } from '@nextgis/utils';
-import { ItemOptions } from '@nextgis/item';
-
-import StrictEventEmitter from 'strict-event-emitter-types';
-import { EventEmitter } from 'events';
-
-import { NgwWebmapItem } from './NgwWebmapItem';
-import { createOnFirstShowAdapter } from './adapters/createBasemapWebmapItemAdapter';
-import { getLayerAdapterOptions } from './utils/getLayerAdapterOptions';
-import { updateImageParams } from './utils/utils';
-
-import {
+import type {
+  WebMap,
+  LngLatBoundsArray,
+  RasterAdapterOptions,
+} from '@nextgis/webmap';
+import type {
   TreeGroup,
   TreeLayer,
   NgwLayerAdapterType,
@@ -28,7 +32,6 @@ import {
   NgwWebmapLayerAdapterEvents,
   ResourceAdapter,
 } from './interfaces';
-import { getNgwWebmapExtent } from './utils/fetchNgwExtent';
 
 export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
   layer?: NgwWebmapItem;
@@ -105,6 +108,47 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
     return (this.layer && this.layer.tree.getDescendants()) || [];
   }
 
+  getBookmarksResourceId(): number | undefined {
+    const webmap = this.response && this.response.webmap;
+    if (webmap) {
+      return webmap.bookmark_resource.id;
+    }
+  }
+
+  fetchBookmarks(): CancelablePromise<BookmarkItem[]> {
+    const bookmarkResId = this.getBookmarksResourceId();
+    const connector = this.options.connector;
+    if (bookmarkResId) {
+      return connector.getResourceOrFail(bookmarkResId).then((item) => {
+        const labelField = item.feature_layer?.fields.find(
+          (x) => x.label_field,
+        );
+        const keyname = labelField && labelField.keyname;
+        return fetchNgwLayerItems({
+          connector,
+          resourceId: bookmarkResId,
+          geom: false,
+          fields: keyname ? [keyname] : undefined,
+        }).then((items) => {
+          const bookmarks: BookmarkItem[] = [];
+          for (const i of items) {
+            const bookmark = new BookmarkItem({
+              item: i,
+              resourceId: bookmarkResId,
+              labelField: keyname,
+              connector,
+            });
+            bookmarks.push(bookmark);
+          }
+          return bookmarks;
+        });
+      });
+    }
+    throw new Error(
+      'Webmap was not loaded correctly, it is impossible to extract bookmarks',
+    );
+  }
+
   async getIdentificationIds(): Promise<number[]> {
     const visibleLayers: number[] = [];
     let ids = this._webmapLayersIds;
@@ -142,6 +186,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
               options.headers = headers;
             }
           }
+          options.setViewDelay = this.options.setViewDelay;
           options.order = this.options.order;
           options.ratio = this.options.ratio;
           options.crossOrigin = this.options.crossOrigin;
@@ -150,7 +195,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
             this.options.webMap,
             webmap.root_item,
             options,
-            this.options.connector
+            this.options.connector,
           );
           layer.emitter.on('init', () => resolve(layer));
         });
@@ -193,7 +238,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
     const webMap = this.options.webMap;
     let enabledAlreadySet = false;
     baseWebmap.basemaps.forEach((x) => {
-      createOnFirstShowAdapter({
+      createOnFirstShowNgwAdapter({
         webMap,
         connector: this.options.connector,
         item: x,
@@ -216,13 +261,13 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
   private _updateItemsParams(
     item: TreeGroup | TreeLayer,
     webMap: WebMap,
-    data: ResourceItem
+    data: ResourceItem,
   ) {
     if (item) {
       if (item.item_type === 'group' || item.item_type === 'root') {
         if (item.children) {
           item.children = item.children.map((x) =>
-            this._updateItemsParams(x, webMap, data)
+            this._updateItemsParams(x, webMap, data),
           );
         }
         if (item.item_type === 'root') {
@@ -230,7 +275,8 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
         }
       } else if (item.item_type === 'layer') {
         const url = fixUrlStr(
-          this.options.connector.options.baseUrl + '/api/component/render/image'
+          this.options.connector.options.baseUrl +
+            '/api/component/render/image',
         );
         const resourceId = item.layer_style_id;
         item.url = url;
@@ -244,7 +290,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
             resource: resourceId,
           },
           webMap,
-          this.options.connector.options.baseUrl || ''
+          this.options.connector.options.baseUrl || '',
         ) as RasterAdapterOptions;
         item = {
           ...item,

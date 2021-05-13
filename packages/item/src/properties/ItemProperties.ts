@@ -21,7 +21,7 @@ export class ItemProperties {
 
   constructor(
     public item: Item,
-    propertiesList?: ItemPropertyConfig<keyof ItemPropertyTypes>[]
+    propertiesList?: ItemPropertyConfig<keyof ItemPropertyTypes>[],
   ) {
     this._propertiesList = []; // ordered list
     if (propertiesList) {
@@ -34,7 +34,7 @@ export class ItemProperties {
   }
 
   _setPropertyHandler(
-    propOpt: ItemPropertyConfig<keyof ItemPropertyTypes>
+    propOpt: ItemPropertyConfig<keyof ItemPropertyTypes>,
   ): void {
     const handlers = ItemProperties.handlers;
     let handler = propOpt.handler;
@@ -55,7 +55,7 @@ export class ItemProperties {
       this._properties[propOpt.name] = new handler(
         propOpt.name,
         this.item,
-        options
+        options,
       );
       this._propertiesList.push(propOpt.name);
     }
@@ -77,7 +77,7 @@ export class ItemProperties {
   set<K extends keyof ItemPropertyTypes>(
     name: string,
     value: ItemPropertyTypes[K],
-    options?: ItemBasePropertyOptions<ItemPropertyTypes[K]>
+    options?: ItemBasePropertyOptions<ItemPropertyTypes[K]>,
   ): void {
     const prop = this.property(name);
     if (prop) {

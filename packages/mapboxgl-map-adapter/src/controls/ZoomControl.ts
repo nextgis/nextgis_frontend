@@ -12,13 +12,13 @@ export class ZoomControl extends NavigationControl {
   _createButton(
     className: string,
     ariaLabel: string,
-    fn: () => any
+    fn: () => any,
   ): HTMLElement {
     // @ts-ignore
     const element = super._createButton(
       className,
       ariaLabel,
-      fn
+      fn,
     ) as HTMLElement;
     const aliases: any = {
       'Zoom in': 'zoomInTitle',
