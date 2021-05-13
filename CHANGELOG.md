@@ -3,6 +3,151 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.9](https://github.com/nextgis/nextgisweb_frontend/compare/v1.0.0-beta.8...v1.0.0-beta.9) (2021-05-03)
+
+
+### Bug Fixes
+
+* **demo:** show codepen icon ([4ed6968](https://github.com/nextgis/nextgisweb_frontend/commit/4ed6968e7afac56e19c332cd02ebbb40c9043259))
+
+
+### Features
+
+* **ngw-kit:** add identify item for speedup ngw selection ([b051f9f](https://github.com/nextgis/nextgisweb_frontend/commit/b051f9f6f596f3a54645e5ccbc628907ed83fca1))
+
+
+
+
+
+# [1.0.0-beta.8](https://github.com/nextgis/nextgisweb_frontend/compare/v1.0.0-beta.7...v1.0.0-beta.8) (2021-05-02)
+
+
+### Features
+
+* **ngw-kit:** ngw webmap item bookmarks handler ([edd02b9](https://github.com/nextgis/nextgisweb_frontend/commit/edd02b9025e5d5572c9c79f627044c6f0fceab93))
+
+
+
+
+
+# [1.0.0-beta.7](https://github.com/nextgis/nextgisweb_frontend/compare/v1.0.0-beta.6...v1.0.0-beta.7) (2021-04-23)
+
+
+### Bug Fixes
+
+* **ngw-connector:** get resource children resourceId zero check ([73d50ec](https://github.com/nextgis/nextgisweb_frontend/commit/73d50ecd07d023ed53699ac7e4b151c6b879e1ab))
+* **ngw-connector:** use `this` in fabric method ([f7d5763](https://github.com/nextgis/nextgisweb_frontend/commit/f7d5763379057623f645cbe099f4372c076def61))
+* **ngw-kit:** ngw-webmap tree sublevel order ([25dc798](https://github.com/nextgis/nextgisweb_frontend/commit/25dc798f63f4f20b0bb1011c849efec11248c683))
+
+
+
+
+
+# [1.0.0-beta.6](https://github.com/nextgis/nextgisweb_frontend/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2021-04-04)
+
+
+### Bug Fixes
+
+* **cesium:** change geojson extrude height set ([96df3c2](https://github.com/nextgis/nextgisweb_frontend/commit/96df3c257c6ef07ca9139bdb456936399f1a539f))
+* **demo:** import utils from cdn ([f064e84](https://github.com/nextgis/nextgisweb_frontend/commit/f064e84214cc4347722c34e966fb67fac184db7f))
+* **leafelet-map-adapter:** safe make remote options ([70dc9d6](https://github.com/nextgis/nextgisweb_frontend/commit/70dc9d66faf75d9344d2532dba16112081f13861))
+* **ngw-connector:** node request write data for no POST mode ([e31533f](https://github.com/nextgis/nextgisweb_frontend/commit/e31533fb888b91e655804abb51951b0a744fe618))
+* **ngw-kit:** inject item into the createRasterAdapter class factory ([567809b](https://github.com/nextgis/nextgisweb_frontend/commit/567809b366231f4b78453f52e544e6bc134cd486))
+* **ngw-kit:** insert headers into createOnFirstShowAdapter addLayer method ([d230fe2](https://github.com/nextgis/nextgisweb_frontend/commit/d230fe2f484f42ff1e0a99f9ff33d60526b55bdd))
+* **vue:** fix vue observable leaks ([612ea1f](https://github.com/nextgis/nextgisweb_frontend/commit/612ea1fc72898e1061d4bb3b2a107e59230afd20))
+* **vue:** prop definition ([5ccbd4c](https://github.com/nextgis/nextgisweb_frontend/commit/5ccbd4c605231dabe4bbf233ab597f070f7be413))
+* **vue:** set types for VueNgwMap adapter components ([d1e0782](https://github.com/nextgis/nextgisweb_frontend/commit/d1e078208701e0fe81c552e18af88a7f8cab5c06))
+
+
+### Features
+
+* **area:** add new Area package ([6658344](https://github.com/nextgis/nextgisweb_frontend/commit/665834493f2d25f2163b57bf41f9b25cc3c2e086))
+* **eslint:** add prettier rules ([457c0a1](https://github.com/nextgis/nextgisweb_frontend/commit/457c0a1c6362fb99020e536ee48860ed03ca7aa7))
+* **ngw-kit:** add datetime ngw formatter ([2d75cca](https://github.com/nextgis/nextgisweb_frontend/commit/2d75cca95106aa6eeeb9ae3bd8348f8e92b72bc8))
+* **utils:** add getPolygons coordinates function ([ff5864b](https://github.com/nextgis/nextgisweb_frontend/commit/ff5864b9070712c62bb7060bdcb75a9c7dddff99))
+* **utils:** clipbord static create may throw error ([102a843](https://github.com/nextgis/nextgisweb_frontend/commit/102a8432158a3e6c345daaea40e0055bdfd76812))
+
+
+
+
+
+# [1.0.0-beta.5](https://github.com/nextgis/nextgisweb_frontend/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2021-02-13)
+
+
+### Bug Fixes
+
+* **cesium:** TileLayer ordering ([41a8f05](https://github.com/nextgis/nextgisweb_frontend/commit/41a8f05dc5050b54886b1bac22fbd31fb6218f14))
+* **cesium:** Tilset3D adapter paint ([5f6160a](https://github.com/nextgis/nextgisweb_frontend/commit/5f6160af45867a3a31697c0b1659619a5a09fcee))
+
+
+### Features
+
+* **cesium:** add tilset3d adapter paint options ([a9caba5](https://github.com/nextgis/nextgisweb_frontend/commit/a9caba56225609202ff350e232ada5af77bbfa6a))
+* **ngw-kit:** add feature request srs param ([3deb546](https://github.com/nextgis/nextgisweb_frontend/commit/3deb54649789736aacd2ebf6f3f71f388938debb))
+* **ngw-kit:** improve createOnFirstShowAdapter ([7a522d7](https://github.com/nextgis/nextgisweb_frontend/commit/7a522d7ca715ef49c41e219b955b4eba573973dd))
+* **utils:** add function to get coordinates from bbox ([d7b2ea7](https://github.com/nextgis/nextgisweb_frontend/commit/d7b2ea7cef1b53e01f4a8aacf929d0b115a01778))
+* **webmap:** ratio in vectorlayer adapter interface ([cc3d835](https://github.com/nextgis/nextgisweb_frontend/commit/cc3d835879c5223e73e6db1026db1a419980182f))
+
+
+### Performance Improvements
+
+* **ngw-commector:** decrease get resource queries count ([598e6e8](https://github.com/nextgis/nextgisweb_frontend/commit/598e6e81c1e57b00d49dc7027ac9d3f017949814))
+
+
+
+
+
+# [1.0.0-beta.4](https://github.com/nextgis/nextgisweb_frontend/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2021-01-17)
+
+
+### Bug Fixes
+
+* **leaflet:** remove forgotten console logs ([4954cde](https://github.com/nextgis/nextgisweb_frontend/commit/4954cdebbb5c4859126c9ac5d1599b7d8ec04f78))
+
+
+### Features
+
+* add setViewDelay options to control map update ([3c50948](https://github.com/nextgis/nextgisweb_frontend/commit/3c50948d8ce31d79879cf566f827cee78fc1af31))
+* **tree:** TreeHelper ([4bd96b9](https://github.com/nextgis/nextgisweb_frontend/commit/4bd96b994beab84283dc79398ee9a9b4b98a7790))
+* **utils:** geom coordinates count ([0455afa](https://github.com/nextgis/nextgisweb_frontend/commit/0455afa68865ec1759499ece16e93fed00ea541f))
+* **webmap:** create webmap from TileJson ([9e84ea1](https://github.com/nextgis/nextgisweb_frontend/commit/9e84ea18653104030884f6fec76e7680436d71bd))
+* **webmap:** get zoom from tilejson ([80ded2f](https://github.com/nextgis/nextgisweb_frontend/commit/80ded2f2a908b54c046dd4e4f01046edd88e398c))
+
+
+### Performance Improvements
+
+* **leaflet:** abort image overlay request on view change ([d8613f0](https://github.com/nextgis/nextgisweb_frontend/commit/d8613f0be10e730d1ec9bb4ee0f2fa27c1687009))
+* **leaflet:** abort xhr tile loading on setView ([f7e9ed0](https://github.com/nextgis/nextgisweb_frontend/commit/f7e9ed044ed39fbc95c73ad381560e692dda6046))
+* **leaflet:** setViewDelay for tile layer ([229ef92](https://github.com/nextgis/nextgisweb_frontend/commit/229ef9211a9aac27b5d7ca86f04118e291579d8b))
+
+
+
+
+
+# [1.0.0-beta.3](https://github.com/nextgis/nextgisweb_frontend/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2020-12-19)
+
+
+### Bug Fixes
+
+* **cesium-map-adapter:** extent from bounding sphere ([336bbe9](https://github.com/nextgis/nextgisweb_frontend/commit/336bbe901ca8d982b32eadbdcf2d603886667815))
+* **ngw-kit:** show only one enabled webmap basemap ([18a6022](https://github.com/nextgis/nextgisweb_frontend/commit/18a6022f5b58b45ee6b5bd92c6053fe3d3842866))
+* **utils:** function name typos ([06d7a75](https://github.com/nextgis/nextgisweb_frontend/commit/06d7a753a26211ca4ac374d166cf457437fdccb6))
+* **vue:** NgwlayersList independent mode ([57e1c35](https://github.com/nextgis/nextgisweb_frontend/commit/57e1c35b4d57f9edff31318df8036777ed8f8657))
+* **vuetify:** NgwLayersList init select ([46ec3cb](https://github.com/nextgis/nextgisweb_frontend/commit/46ec3cbcd9159c27b30ceda3523a9a9c53432c98))
+* provide support for map preclick event ([9400b31](https://github.com/nextgis/nextgisweb_frontend/commit/9400b31c116d15f6ae9e68b7b2c0369fa1f906b9)), closes [#8](https://github.com/nextgis/nextgisweb_frontend/issues/8)
+* **webmap:** set zero zoom ([059e6ea](https://github.com/nextgis/nextgisweb_frontend/commit/059e6ea243a0ba0b6cce58905dde58485bc5d372))
+
+
+### Features
+
+* **cancelable-promise:** add timeout ([3c207b5](https://github.com/nextgis/nextgisweb_frontend/commit/3c207b54d2910a67ae71c2fa09542d1b06b97ed9))
+* **cesium-map-adapter:** add watchTerrainChange geojson option ([15f1d8e](https://github.com/nextgis/nextgisweb_frontend/commit/15f1d8ef5ba427b5dc27f6c9d9b470887947ab4d))
+* add new library `progress` ([5a75e8c](https://github.com/nextgis/nextgisweb_frontend/commit/5a75e8c219e0c8c0aef2f9e4f0536709b93cd59c))
+
+
+
+
+
 # [1.0.0-beta.2](https://github.com/nextgis/nextgisweb_frontend/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2020-11-28)
 
 
@@ -209,7 +354,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* **cancelable-promise:** шьзкщму PromisesControl ([ca5fabb](https://gitlab.com/nextgis_private/aeronetservice/commit/ca5fabb60e998f19713704011db58588487aebe7))
+* **cancelable-promise:** improve PromisesControl ([ca5fabb](https://gitlab.com/nextgis_private/aeronetservice/commit/ca5fabb60e998f19713704011db58588487aebe7))
 * **cancelable-promise:** create abort control ([9768157](https://gitlab.com/nextgis_private/aeronetservice/commit/976815713d25b1da20a96b678668648caf2c0489))
 * **utils:** add `arrayCompareStrict` function ([9d65949](https://gitlab.com/nextgis_private/aeronetservice/commit/9d659496fbcf4dd0e2f467d3e18ad7253fcb7041))
 * **utils:** add `full` method ([00eb185](https://gitlab.com/nextgis_private/aeronetservice/commit/00eb185fe1859a8bb30b2e9f8d8d10c08c88eb7f))

@@ -158,7 +158,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     if (find) {
       if (typeof find === 'function') {
         const features = this._getFeatures().filter((x) =>
-          find({ feature: x })
+          find({ feature: x }),
         );
         this._selectFeature(features);
       } else {
@@ -177,7 +177,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     if (find) {
       if (typeof find === 'function') {
         const features = this._getFeatures().filter((x) =>
-          find({ feature: x })
+          find({ feature: x }),
         );
         this._unselectFeature(features);
         this.selected = Array.isArray(this._selectedFeatureIds) ? true : false;
@@ -253,7 +253,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   protected async _createPaintForType(
     paint: VectorAdapterLayerPaint | GetPaintCallback,
     type: VectorAdapterLayerType,
-    name: string
+    name: string,
   ): Promise<any> {
     if (typeof paint === 'function') {
       return await this._getPaintFromCallback(paint, type, name);
@@ -264,7 +264,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
 
   protected _selectFeature(
     feature: Feature | Feature[],
-    opt: { silent: boolean } = { silent: false }
+    opt: { silent: boolean } = { silent: false },
   ): Feature[] {
     let selectedFeatureIds = this._selectedFeatureIds || [];
     if (this.options && !this.options.multiselect) {
@@ -293,7 +293,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
 
   protected _unselectFeature(
     feature?: Feature | Feature[],
-    opt: { silent: boolean } = { silent: false }
+    opt: { silent: boolean } = { silent: false },
   ): void {
     if (feature) {
       let features: Feature[] = [];
@@ -410,12 +410,12 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
 
   private filterGeometries(
     data: GeoJsonObject,
-    type: VectorAdapterLayerType
+    type: VectorAdapterLayerType,
   ): Feature[] {
     let newFeatures: Feature[] = [];
     if (data.type === 'FeatureCollection') {
       const features = (data as FeatureCollection).features.filter((f) =>
-        geometryFilter(f.geometry.type, type)
+        geometryFilter(f.geometry.type, type),
       ) as Feature[];
       (data as FeatureCollection).features = features;
       newFeatures = features;
@@ -428,7 +428,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     } else if (data.type === 'GeometryCollection') {
       const geomCollection = data as GeometryCollection;
       geomCollection.geometries = geomCollection.geometries.filter((g) =>
-        geometryFilter(g.type, type)
+        geometryFilter(g.type, type),
       );
       newFeatures = geomCollection.geometries.map((x) => {
         const f: Feature = {
@@ -453,7 +453,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   private async _getPaintFromCallback(
     paint: GetPaintCallback,
     type: VectorAdapterLayerType,
-    name: string
+    name: string,
   ) {
     const style: any = {};
     style.type = paint.type;

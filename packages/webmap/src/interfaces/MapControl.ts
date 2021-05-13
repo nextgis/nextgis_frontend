@@ -1,4 +1,4 @@
-import { ControlPosition } from './MapAdapter';
+import type { ControlPosition } from './MapAdapter';
 
 /**
  * @public

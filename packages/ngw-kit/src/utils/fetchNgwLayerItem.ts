@@ -22,7 +22,7 @@ export function fetchNgwLayerItem<
     resourceId: number;
     featureId: number;
     connector: NgwConnector;
-  } & NgwFeatureRequestOptions
+  } & NgwFeatureRequestOptions,
 ): CancelablePromise<NgwFeatureItemResponse<P, G>> {
   const params: FeatureRequestParams & { [name: string]: any } = {
     ...FEATURE_REQUEST_PARAMS,

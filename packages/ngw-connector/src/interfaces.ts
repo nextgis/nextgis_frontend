@@ -19,6 +19,14 @@ export interface NgwExtent {
   };
 }
 
+export interface SrsItem {
+  auth_name: string;
+  auth_srid: number;
+  display_name: string;
+  id: number;
+  wkt: string;
+}
+
 export interface FeatureLayerCount {
   total_count: number;
 }
@@ -82,6 +90,7 @@ export interface GetRequestItemsResponseMap extends RequestItemKeys {
   'feature_layer.feature.item_extent': NgwExtent;
   'feature_layer.feature.count': FeatureLayerCount;
   'pyramid.company_logo': string;
+  'spatial_ref_sys.collection': SrsItem[];
 }
 
 export interface CreatedResource {
@@ -137,10 +146,6 @@ export interface RequestOptions<M = RequestMethods> {
   file?: File;
   responseType?: 'json' | 'blob';
   onProgress?: (percentComplete: number, event: ProgressEvent) => void;
-  /** Save response data to return for similar query url */
-  cache?: boolean;
-  /** TODO: rename. Do not wait while query with equal url is completed */
-  nocache?: boolean;
 }
 
 export type RequestItemAdditionalParams = { [name: string]: any } & {

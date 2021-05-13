@@ -1,27 +1,9 @@
 import { EventEmitter } from 'events';
 
 import Map from 'ol/Map';
-import Feature from 'ol/Feature';
-import Base from 'ol/layer/Base';
+import View from 'ol/View';
 import { Extent } from 'ol/extent';
-import BaseEvent from 'ol/events/Event';
-import Control from 'ol/control/Control';
-import View, { ViewOptions } from 'ol/View';
-import { MapOptions as OlMapOptions } from 'ol/PluggableMap';
-import MapBrowserPointerEvent from 'ol/MapBrowserEvent';
 import { fromLonLat, transformExtent, transform } from 'ol/proj';
-
-import {
-  MapControl,
-  MapAdapter,
-  MapOptions,
-  LngLatArray,
-  ControlPosition,
-  LngLatBoundsArray,
-  CreateControlOptions,
-  ButtonControlOptions,
-  MapClickEvent,
-} from '@nextgis/webmap';
 
 import { WmsAdapter } from './layer-adapters/WmsAdapter';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
@@ -35,6 +17,25 @@ import { PanelControl } from './controls/PanelControl';
 import { createControl } from './controls/createControl';
 import { createButtonControl } from './controls/createButtonControl';
 
+import type Base from 'ol/layer/Base';
+import type Feature from 'ol/Feature';
+import type { ViewOptions } from 'ol/View';
+import type BaseEvent from 'ol/events/Event';
+import type Control from 'ol/control/Control';
+import type MapBrowserPointerEvent from 'ol/MapBrowserEvent';
+import type { MapOptions as OlMapOptions } from 'ol/PluggableMap';
+import type {
+  MapControl,
+  MapAdapter,
+  MapOptions,
+  LngLatArray,
+  ControlPosition,
+  LngLatBoundsArray,
+  CreateControlOptions,
+  ButtonControlOptions,
+  MapClickEvent,
+} from '@nextgis/webmap';
+
 type Layer = Base;
 
 interface PositionMem {
@@ -45,7 +46,7 @@ interface PositionMem {
 export type ForEachFeatureAtPixelCallback = (
   feature: Feature<any>,
   layer: Layer,
-  evt: MapBrowserPointerEvent
+  evt: MapBrowserPointerEvent,
 ) => void;
 export class OlMapAdapter implements MapAdapter<Map, Layer> {
   static layerAdapters = {
@@ -149,7 +150,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
         const transformedCenter = transform(
           center,
           this.displayProjection,
-          this.lonlatProjection
+          this.lonlatProjection,
         );
         return transformedCenter as [number, number];
       }
@@ -175,7 +176,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
       const toExtent = transformExtent(
         extent,
         this.lonlatProjection,
-        this.displayProjection
+        this.displayProjection,
       );
       this._olView.fit(toExtent);
       this._emitMoveEndEvents({ zoom });
@@ -188,7 +189,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     const extent = transformExtent(
       mapExtent,
       this.displayProjection,
-      this.lonlatProjection
+      this.lonlatProjection,
     );
     return extent as LngLatBoundsArray;
   }
@@ -252,7 +253,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     const [lng, lat] = transform(
       evt.coordinate,
       this.displayProjection,
-      this.lonlatProjection
+      this.lonlatProjection,
     );
     const latLng = {
       lat,
@@ -318,7 +319,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     const map = this.map;
     if (map) {
       map.on('click', (evt: BaseEvent | Event) =>
-        this.onMapClick(evt as MapBrowserPointerEvent)
+        this.onMapClick(evt as MapBrowserPointerEvent),
       );
 
       const center = this.getCenter();

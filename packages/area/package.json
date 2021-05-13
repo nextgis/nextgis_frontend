@@ -1,0 +1,50 @@
+{
+  "name": "@nextgis/area",
+  "version": "1.0.0-beta.8",
+  "description": "QGIS ellipsoidal area calculation reproduced in JavaScript",
+  "main": "index.js",
+  "module": "lib/area.esm-bundler.js",
+  "unpkg": "lib/area.global.prod.js",
+  "jsdelivr": "lib/area.global.prod.js",
+  "types": "lib/index.d.ts",
+  "dependencies": {
+    "@nextgis/utils": "^1.0.0-beta.8"
+  },
+  "devDependencies": {
+    "@nextgis/build-tools": "^1.0.0-beta.8"
+  },
+  "buildOptions": {
+    "name": "Area",
+    "formats": [
+      "esm-bundler",
+      "esm-browser",
+      "cjs",
+      "global"
+    ]
+  },
+  "scripts": {
+    "clean": "rimraf ./lib",
+    "dev": "node ../build-tools/lib/build.js",
+    "prod": "npm run dev -- --release",
+    "lint": "eslint ./src/**/*.ts --fix --c ../../.eslintrc",
+    "watch": "npm run dev -- --watch"
+  },
+  "keywords": [
+    "NextGIS",
+    "MAP"
+  ],
+  "author": "NextGIS",
+  "files": [
+    "index.js",
+    "lib"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/nextgis/nextgis_frontend/tree/master/packages/area#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nextgis/nextgis_frontend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nextgis/nextgis_frontend/issues"
+  }
+}

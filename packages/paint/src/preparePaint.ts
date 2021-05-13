@@ -1,6 +1,10 @@
 import { featureFilter } from '@nextgis/properties-filter';
-import { Feature } from 'geojson';
-import {
+
+import { createExpressionCallback } from './fromPaintExpression';
+import { isPaintCallback, isPropertiesPaint } from './typeHelpers';
+
+import type { Feature } from 'geojson';
+import type {
   Paint,
   VectorAdapterLayerPaint,
   GeometryPaint,
@@ -10,12 +14,10 @@ import {
   PropertyPaint,
   GetPaintCallback,
 } from './interfaces';
-import { isPaintCallback, isPropertiesPaint } from './typeHelpers';
-import { createExpressionCallback } from './fromPaintExpression';
 
 function updatePaintOptionFromCallback(
   paint: GetCustomPaintOptions,
-  getPaintFunctions?: { [name: string]: GetPaintFunction }
+  getPaintFunctions?: { [name: string]: GetPaintFunction },
 ): VectorAdapterLayerPaint | undefined {
   if (typeof paint.from === 'function') {
     return paint.from(paint.options);
@@ -28,7 +30,7 @@ function updatePaintOptionFromCallback(
 }
 
 function createPropertiesPaint(
-  propertiesPaint: PropertiesPaint
+  propertiesPaint: PropertiesPaint,
 ): GetPaintFunction {
   let mask: VectorAdapterLayerPaint = {};
   const paintsFilters: PropertyPaint[] = [];
@@ -54,7 +56,7 @@ function createPropertiesPaint(
 export function preparePaint(
   paint: Paint,
   defaultPaint?: GeometryPaint,
-  getPaintFunctions?: { [name: string]: GetPaintFunction }
+  getPaintFunctions?: { [name: string]: GetPaintFunction },
 ): Paint {
   if (!paint) {
     throw new Error('paint is empty');
@@ -65,7 +67,7 @@ export function preparePaint(
       const getPaint = preparePaint(
         paint(feature),
         defaultPaint,
-        getPaintFunctions
+        getPaintFunctions,
       ) as VectorAdapterLayerPaint;
       getPaint.type = paint.type;
       return getPaint;
@@ -77,7 +79,7 @@ export function preparePaint(
       return preparePaint(
         createPropertiesPaint(paint)(feature),
         defaultPaint,
-        getPaintFunctions
+        getPaintFunctions,
       ) as VectorAdapterLayerPaint;
     };
   } else if (paint.type === 'get-paint') {
@@ -94,7 +96,7 @@ export function preparePaint(
         return preparePaint(
           expressionCallback(feature),
           defaultPaint,
-          getPaintFunctions
+          getPaintFunctions,
         ) as VectorAdapterLayerPaint;
       };
     }

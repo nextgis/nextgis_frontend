@@ -4,6 +4,10 @@ import { UrlTemplateImageryProvider, ImageryLayer } from 'cesium';
 import { makeUrl } from '../utils/makeUrl';
 
 import { BaseAdapter } from './BaseAdapter';
+import {
+  addToTileCatalog,
+  removeFromTileCatalog,
+} from '../utils/TileAdapterOrderControl';
 
 type Layer = ImageryLayer;
 
@@ -12,7 +16,7 @@ export class TileAdapter extends BaseAdapter<TileAdapterOptions, Layer> {
   private _added = false;
 
   addLayer(opt: TileAdapterOptions): ImageryLayer {
-    this.options = { ...opt };
+    this.options = { ...this.options, ...opt };
     const url = makeUrl(this.options.url, this.options.headers);
     const imageProviderOpt: UrlTemplateImageryProvider.ConstructorOptions = {
       url,
@@ -42,7 +46,8 @@ export class TileAdapter extends BaseAdapter<TileAdapterOptions, Layer> {
         this.options.order !== undefined
           ? this.options.order * 1000
           : undefined;
-      this.map.imageryLayers.add(layer, order);
+      this.map.imageryLayers.add(layer);
+      addToTileCatalog(this.map.imageryLayers, layer, order);
       this._added = true;
     }
 
@@ -57,6 +62,7 @@ export class TileAdapter extends BaseAdapter<TileAdapterOptions, Layer> {
 
   beforeRemove(): void {
     if (this._layer) {
+      removeFromTileCatalog(this.map.imageryLayers, this._layer);
       this.map.imageryLayers.remove(this._layer, true);
     }
     super.beforeRemove();

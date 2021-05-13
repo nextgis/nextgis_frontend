@@ -4,6 +4,7 @@ import {
   GetClassAdapterOptions,
 } from '../interfaces';
 import { MainLayerAdapter, Type, ImageAdapterOptions } from '@nextgis/webmap';
+import { defined } from '@nextgis/utils';
 import { ResourceItem, ResourceCls } from '@nextgis/ngw-connector';
 
 import { getLayerAdapterOptions } from '../utils/getLayerAdapterOptions';
@@ -35,17 +36,17 @@ export async function createRasterAdapter({
     }
   }
 
-  const adapterClass = webMap.mapAdapter.layerAdapters[adapter] as Type<
-    MainLayerAdapter
-  >;
+  const adapterClass = webMap.mapAdapter.layerAdapters[
+    adapter
+  ] as Type<MainLayerAdapter>;
   if (adapterClass) {
     const resourceId = await resourceIdFromLayerOptions(
       layerOptions,
-      connector
+      connector,
     );
     return class Adapter extends adapterClass implements ResourceAdapter {
       // options = {};
-      item?: ResourceItem;
+      item?: ResourceItem = item;
       resourceId = resourceId;
 
       constructor(public map: any, _options: any) {
@@ -53,16 +54,24 @@ export async function createRasterAdapter({
         const opt = getLayerAdapterOptions(
           layerOptions,
           webMap,
-          connector.options.baseUrl || ''
+          connector.options.baseUrl || '',
         );
         if (opt) {
           const layerAdapterOptions: ImageAdapterOptions = {
             ...opt,
+            setViewDelay: layerOptions.adapterOptions?.setViewDelay,
             params: { resource: resourceId },
             // @deprecated
             layers: String(resourceId),
             resourceId: resourceId,
           };
+          if (
+            layerOptions.adapterOptions &&
+            defined(layerOptions.adapterOptions.setViewDelay)
+          ) {
+            layerAdapterOptions.setViewDelay =
+              layerOptions.adapterOptions.setViewDelay;
+          }
           this.options = { ...this.options, ...layerAdapterOptions };
           // if (__DEV__) {
           //   Object.defineProperty(this.options, 'layers', {

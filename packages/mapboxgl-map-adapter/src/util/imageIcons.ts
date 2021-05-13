@@ -25,7 +25,7 @@ interface GetImgOpt {
 // // from /mapbox-gl/src/util/browser.js
 export function getImageData(
   img: string | HTMLImageElement,
-  opt: GetImgOpt
+  opt: GetImgOpt,
 ): ImageData {
   const canvas = window.document.createElement('canvas');
   const context = canvas.getContext('2d');

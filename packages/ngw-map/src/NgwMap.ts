@@ -1,9 +1,39 @@
 import StrictEventEmitter from 'strict-event-emitter-types';
 import { EventEmitter } from 'events';
 import CancelablePromise from '@nextgis/cancelable-promise';
-import { isObject, JsonMap } from '@nextgis/utils';
+import { defined, isObject } from '@nextgis/utils';
+import { WebMap } from '@nextgis/webmap';
+import NgwConnector from '@nextgis/ngw-connector';
+
 import {
-  WebMap,
+  addNgwLayer,
+  fetchNgwLayerItem,
+  fetchNgwLayerItems,
+  fetchNgwLayerFeature,
+  fetchNgwLayerFeatureCollection,
+  fetchIdentifyGeoJson,
+  fetchNgwResourceExtent,
+  sendIdentifyRequest,
+  getCompanyLogo,
+  fetchIdentifyItem,
+  getIdentifyItems,
+  createIdentifyItem,
+} from '@nextgis/ngw-kit';
+import { deprecatedWarn } from '@nextgis/utils';
+import { getIcon } from '@nextgis/icons';
+
+import { appendNgwResources } from './utils/appendNgwResources';
+import { prepareWebMapOptions } from './utils/prepareWebMapOptions';
+
+import type { JsonMap } from '@nextgis/utils';
+import type {
+  ResourceItem,
+  FeatureLayersIdentify,
+  FeatureItem,
+  FeatureLayersIdentifyItems,
+  LayerFeature,
+} from '@nextgis/ngw-connector';
+import type {
   ControlPosition,
   MapControls,
   WebMapEvents,
@@ -14,49 +44,28 @@ import {
   OnLayerClickOptions,
   FitOptions,
 } from '@nextgis/webmap';
-import NgwConnector, {
-  ResourceItem,
-  FeatureLayersIdentify,
-  FeatureItem,
-  FeatureLayersIdentifyItems,
-  LayerFeature,
-} from '@nextgis/ngw-connector';
-import { QmsAdapterOptions } from '@nextgis/qms-kit';
-import {
-  addNgwLayer,
-  NgwLayerOptions,
+import type {
   ResourceAdapter,
   NgwWebmapItem,
-  NgwLayerOptionsAdditional,
   NgwIdentify,
-  KeynamedNgwLayerOptions,
-  ResourceIdNgwLayerOptions,
-  fetchNgwLayerItem,
-  fetchNgwLayerItems,
-  fetchNgwLayerFeature,
-  fetchNgwLayerFeatureCollection,
-  fetchIdentifyGeoJson,
-  fetchNgwResourceExtent,
-  sendIdentifyRequest,
-  getCompanyLogo,
-  fetchIdentifyItem,
   NgwFeatureItemResponse,
   NgwFeatureRequestOptions,
 } from '@nextgis/ngw-kit';
-import { getIcon } from '@nextgis/icons';
-import { PropertiesFilter } from '@nextgis/properties-filter';
-
-import { appendNgwResources } from './utils/appendNgwResources';
-import { prepareWebMapOptions } from './utils/prepareWebMapOptions';
-
-import { NgwMapOptions, NgwMapEvents, NgwLayers } from './interfaces';
-import {
+import type { PropertiesFilter } from '@nextgis/properties-filter';
+import type { QmsAdapterOptions } from '@nextgis/qms-kit';
+import type {
+  NgwLayerOptions,
+  NgwLayerOptionsAdditional,
+  KeynamedNgwLayerOptions,
+  ResourceIdNgwLayerOptions,
+} from '@nextgis/ngw-kit';
+import type {
   Geometry,
   Feature,
   FeatureCollection,
   GeoJsonProperties,
 } from 'geojson';
-import { deprecatedWarn } from '@nextgis/utils';
+import type { NgwMapOptions, NgwMapEvents, NgwLayers } from './interfaces';
 
 type PromiseGroup = 'select' | 'identify';
 
@@ -124,7 +133,7 @@ export class NgwMap<
    * @param control - object with onAdd and onRemove methods
    *                or a string value indicating the name of the control installed in the map adapter
    * @param position - position relative to the map angles
-   * @param [options] - initialization parameters if the control is set as a string value
+   * @param options - initialization parameters if the control is set as a string value
    *
    * @example
    * ```javascript
@@ -135,7 +144,7 @@ export class NgwMap<
   async addControl<K extends keyof MapControls>(
     controlDef: K | C,
     position: ControlPosition,
-    options?: MapControls[K]
+    options?: MapControls[K],
   ): Promise<any> {
     await this.onLoad('controls:create');
     return super.addControl(controlDef, position, options);
@@ -158,7 +167,7 @@ export class NgwMap<
    * ```
    */
   async addNgwLayer(
-    options: NgwLayerOptions
+    options: NgwLayerOptions,
   ): Promise<ResourceAdapter | undefined> {
     await this.onMapLoad();
     // @ts-ignore for backward compatibility
@@ -168,18 +177,24 @@ export class NgwMap<
 
     if (keyname || resourceId !== undefined) {
       deprecatedWarn(
-        'set `resource` options instead of `keyname` or `resourceId`'
+        'set `resource` options instead of `keyname` or `resourceId`',
       );
     }
 
     const resource = options.resource;
     if (!keyname && !resourceId && !resource) {
       throw new Error(
-        'resource, resourceId or keyname is required parameter to add NGW layer'
+        'resource, resourceId or keyname is required parameter to add NGW layer',
       );
     }
     if (this.options.baseUrl || this.options.baseUrl === '') {
       try {
+        if (defined(this.options.setViewDelay)) {
+          options.adapterOptions = options.adapterOptions || {};
+          if (!defined(options.adapterOptions.setViewDelay)) {
+            options.adapterOptions.setViewDelay = this.options.setViewDelay;
+          }
+        }
         const adapter = addNgwLayer(options, this, this.connector);
 
         const layer = (await this.addLayer(adapter, {
@@ -240,7 +255,7 @@ export class NgwMap<
       resourceId: number;
       connector?: NgwConnector;
       filters?: PropertiesFilter;
-    } & FilterOptions
+    } & FilterOptions,
   ): CancelablePromise<FeatureItem[]> {
     return fetchNgwLayerItems({
       connector: this.connector,
@@ -269,7 +284,7 @@ export class NgwMap<
       resourceId: number;
       connector?: NgwConnector;
       filters?: PropertiesFilter;
-    } & FilterOptions
+    } & FilterOptions,
   ): CancelablePromise<FeatureCollection<G, P>> {
     return fetchNgwLayerFeatureCollection({
       connector: this.connector,
@@ -282,7 +297,7 @@ export class NgwMap<
     P extends GeoJsonProperties = GeoJsonProperties
   >(
     identify: NgwIdentify,
-    requestOptions?: NgwFeatureRequestOptions
+    requestOptions?: NgwFeatureRequestOptions,
     // multiple = false
   ): CancelablePromise<NgwFeatureItemResponse<P, G> | undefined> {
     const promise = fetchIdentifyItem<G, P>({
@@ -298,7 +313,7 @@ export class NgwMap<
 
   fetchIdentifyGeoJson(
     identify: NgwIdentify,
-    multiple = false
+    multiple = false,
   ): CancelablePromise<Feature | undefined> {
     const promise = fetchIdentifyGeoJson({
       identify,
@@ -318,7 +333,7 @@ export class NgwMap<
    */
   getIdentifyGeoJson(
     identify: NgwIdentify,
-    multiple = false
+    multiple = false,
   ): CancelablePromise<Feature | undefined> {
     return this.fetchIdentifyGeoJson(identify, multiple);
   }
@@ -419,8 +434,8 @@ export class NgwMap<
   enableSelection(): void {
     if (!this.$$selectFromNgwRaster) {
       this.$$selectFromNgwRaster = (ev: MapClickEvent) => {
-        this.emitter.listenerCount('ngw:select');
-        if (this.emitter.listenerCount('ngw:select')) {
+        const count = this.emitter.listenerCount('ngw:select');
+        if (count) {
           this._selectFromNgwRaster(ev);
         }
       };
@@ -461,7 +476,7 @@ export class NgwMap<
       resourceId: number;
       connector?: NgwConnector;
       filters?: PropertiesFilter;
-    } & FilterOptions
+    } & FilterOptions,
   ): CancelablePromise<FeatureItem[]> {
     return this.fetchNgwLayerItems(options);
   }
@@ -490,7 +505,7 @@ export class NgwMap<
       resourceId: number;
       connector?: NgwConnector;
       filters?: PropertiesFilter;
-    } & FilterOptions
+    } & FilterOptions,
   ): CancelablePromise<FeatureCollection<G, P>> {
     return this.fetchNgwLayerFeatures(options);
   }
@@ -596,7 +611,7 @@ export class NgwMap<
   }
 
   private _selectFromNgwVector(
-    ev: OnLayerClickOptions
+    ev: OnLayerClickOptions,
   ): FeatureLayersIdentify | undefined {
     const layer: ResourceAdapter = ev.layer as ResourceAdapter;
     // item property means layer is NgwResource
@@ -622,11 +637,14 @@ export class NgwMap<
           featureCount: 1,
           [id]: items,
         };
-        this._emitStatusEvent('ngw:select', {
-          ...identify,
-          resources: [id],
-          sourceType: 'vector',
-        });
+        this._emitStatusEvent(
+          'ngw:select',
+          this._prepareToIdentify({
+            ...identify,
+            resources: [id],
+            sourceType: 'vector',
+          } as NgwIdentify),
+        );
         return identify;
       }
     }
@@ -645,8 +663,12 @@ export class NgwMap<
     });
     layers.forEach((l) => {
       const layer = l.layer;
-      if (layer.getIdentificationIds && layer.options.selectable) {
-        promises.push(layer.getIdentificationIds());
+      const identFunc =
+        typeof layer.getIdentificationIds === 'function'
+          ? layer.getIdentificationIds
+          : false;
+      if (identFunc && layer.options.selectable && this.isLayerVisible(layer)) {
+        promises.push(identFunc.call(layer));
       }
     });
     const getIdsPromise = Promise.all(promises);
@@ -681,16 +703,34 @@ export class NgwMap<
       connector: this.connector,
       radius,
     }).then((resp) => {
-      this._emitStatusEvent('ngw:select', {
-        ...resp,
-        resources: ids,
-        sourceType: 'raster',
-        event: ev,
-      });
+      this._emitStatusEvent(
+        'ngw:select',
+        this._prepareToIdentify({
+          ...resp,
+          resources: ids,
+          sourceType: 'raster',
+          event: ev,
+        }),
+      );
       return resp;
     });
     this._addPromise('select', selectPromise);
     return selectPromise;
+  }
+
+  private _prepareToIdentify(identify: NgwIdentify) {
+    const getIdentifyItems_ = () => {
+      return getIdentifyItems(identify, true).map((x) => {
+        return createIdentifyItem({
+          feature: x.feature,
+          connector: this.connector,
+        });
+      });
+    };
+    return {
+      ...identify,
+      getIdentifyItems: getIdentifyItems_,
+    };
   }
 
   private async _whiteLabel() {
@@ -698,7 +738,7 @@ export class NgwMap<
     if (container) {
       const logo = await getCompanyLogo(
         this.connector,
-        this.options.companyLogoOptions
+        this.options.companyLogoOptions,
       );
       if (logo) {
         container.appendChild(logo);

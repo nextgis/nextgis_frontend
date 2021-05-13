@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/ol-map-adapter",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0-beta.9",
   "_priority": 16,
   "description": "",
   "main": "lib/ol-map-adapter.global.prod.js",
@@ -9,16 +9,17 @@
   "jsdelivr": "lib/ol-map-adapter.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/control-container": "^1.0.0-beta.2",
-    "@nextgis/paint": "^1.0.0-beta.2",
-    "@nextgis/properties-filter": "^1.0.0-beta.2",
-    "@nextgis/webmap": "^1.0.0-beta.2",
+    "@nextgis/control-container": "^1.0.0-beta.9",
+    "@nextgis/paint": "^1.0.0-beta.8",
+    "@nextgis/properties-filter": "^1.0.0-beta.8",
+    "@nextgis/webmap": "^1.0.0-beta.9",
+    "@types/events": "^3.0.0",
     "@types/ol": "^6.4.2",
-    "events": "^3.2.0",
-    "ol": "^6.4.3"
+    "events": "^3.3.0",
+    "ol": "^6.5.0"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "^1.0.0-beta.2"
+    "@nextgis/build-tools": "^1.0.0-beta.8"
   },
   "buildOptions": {
     "name": "OlMapAdapter",

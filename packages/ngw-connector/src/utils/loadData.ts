@@ -26,7 +26,7 @@ type LoadData = (
   callback: (...args: any[]) => any,
   options: NgwRequestOptions<RequestMethods> | undefined,
   error: (reason?: any) => void,
-  onCancel: (cancelHandler: () => void) => void
+  onCancel: (cancelHandler: () => void) => void,
 ) => void;
 
 let loadData: LoadData;
@@ -37,7 +37,7 @@ if (__BROWSER__) {
     callback: (...args: any[]) => any,
     options: NgwRequestOptions = {},
     error: (reason?: any) => void,
-    onCancel: (cancelHandler: () => void) => void
+    onCancel: (cancelHandler: () => void) => void,
   ): void => {
     options.method = options.method || 'GET';
 
@@ -163,7 +163,7 @@ if (__BROWSER__) {
     callback: (...args: any[]) => any,
     options: NgwRequestOptions<RequestMethods> = {},
     error: (reason?: any) => void,
-    onCancel: (cancelHandler: () => void) => void
+    onCancel: (cancelHandler: () => void) => void,
   ): Promise<unknown> => {
     const request = new Promise((resolve, reject) => {
       const adapter = adapterFor(url);
@@ -176,6 +176,13 @@ if (__BROWSER__) {
           typeof options.data === 'string'
             ? options.data
             : JSON.stringify(options.data);
+        // https://stackoverflow.com/questions/35589109/node-http-delete-request-no-longer-works-after-upgrading-from-0-10-40
+        if (body !== undefined && options.method !== 'POST') {
+          Object.assign(requestOpt.headers, {
+            'Content-Type': 'application/json',
+            'Content-Length': Buffer.byteLength(body),
+          });
+        }
         const req = adapter.request(url, requestOpt, (resp: any) => {
           let data = '';
           resp.on('data', (chunk: any) => {

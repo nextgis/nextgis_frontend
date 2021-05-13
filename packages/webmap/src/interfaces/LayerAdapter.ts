@@ -1,9 +1,9 @@
-import { GeoJsonObject, Feature } from 'geojson';
-import { PropertiesFilter } from '@nextgis/properties-filter';
-import { Paint } from '@nextgis/paint';
-import { Type } from '@nextgis/utils';
-import { LngLatBoundsArray } from './BaseTypes';
-import { MapClickEvent } from './MapAdapter';
+import type { GeoJsonObject, Feature } from 'geojson';
+import type { PropertiesFilter } from '@nextgis/properties-filter';
+import type { Paint } from '@nextgis/paint';
+import type { Type } from '@nextgis/utils';
+import type { LngLatBoundsArray } from './BaseTypes';
+import type { MapClickEvent } from './MapAdapter';
 
 export type AdapterConstructor = () => Promise<Type<LayerAdapter> | any>;
 
@@ -123,7 +123,18 @@ export interface AdapterOptions<
    */
   crossOrigin?: 'anonymous';
 
+  headers?: Record<string, any>;
+
+  /**
+   * Experimental option to set the  map loading delay  when changing position
+   */
+  setViewDelay?: number;
+  /** Any properties to save in layer.
+   * May be useful to get additional info from layer event.  */
+  props?: Record<string, any>;
+  /** Map and layer adapter base options */
   nativeOptions?: N;
+  ratio?: number;
 }
 
 /**
@@ -149,8 +160,12 @@ export interface PopupOptions {
   popupContent?: string | HTMLElement;
   fromProperties?: boolean;
   createPopupContent?: (
-    layerDef: LayerDefinition
-  ) => HTMLElement | string | undefined;
+    layerDef: LayerDefinition,
+  ) =>
+    | HTMLElement
+    | string
+    | undefined
+    | Promise<HTMLElement | string | undefined>;
 }
 
 type _VectorAdapterOptionsToExtend<
@@ -309,8 +324,6 @@ export interface GeoJsonAdapterOptions<
 export interface RasterAdapterOptions extends AdapterOptions {
   url: string;
   subdomains?: string | string[];
-  headers?: Record<string, any>;
-  ratio?: number;
 }
 
 /**
@@ -323,7 +336,9 @@ export interface TileAdapterOptions extends RasterAdapterOptions {
 /**
  * @public
  */
-export interface Tileset3DAdapterOptions extends RasterAdapterOptions {
+export interface Tileset3DAdapterOptions
+  extends RasterAdapterOptions,
+    VectorAdapterOptions {
   useTerrainHeight?: boolean;
   heightOffset?: number;
 }
@@ -395,13 +410,14 @@ export interface LayerDefinition<F extends Feature = Feature, L = any> {
   layer?: L;
   feature?: F;
   visible?: boolean;
+  target?: LayerAdapter;
 }
 
 /**
  * @public
  */
 export type CallbackFilter<F extends Feature = Feature, L = any> = (
-  opt: LayerDefinition<F, L>
+  opt: LayerDefinition<F, L>,
 ) => boolean;
 
 /**
@@ -589,7 +605,7 @@ export interface VectorLayerAdapter<
 
   openPopup?(
     findFeatureCb?: DataLayerFilter<F, L>,
-    options?: PopupOptions
+    options?: PopupOptions,
   ): void;
 
   closePopup?(findFeatureCb?: DataLayerFilter<F, L>): void;

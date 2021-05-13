@@ -7,7 +7,7 @@ type Ctor = any;
 export function applyMixins(
   derivedCtor: Ctor,
   baseCtors: Ctor[],
-  opt: ApplyMixinOptions = {}
+  opt: ApplyMixinOptions = {},
 ): void {
   const derivedProperties = allProperties(derivedCtor.prototype);
   const replace = opt.replace !== undefined ? opt.replace : true;
@@ -17,7 +17,7 @@ export function applyMixins(
       if ((!replace && !isSomeProp) || replace) {
         const descriptor = Object.getOwnPropertyDescriptor(
           baseCtor.prototype,
-          name
+          name,
         );
         if (descriptor) {
           Object.defineProperty(derivedCtor.prototype, name, descriptor);
@@ -33,7 +33,7 @@ export function allProperties(obj: Record<string, unknown>): string[] {
 
 export function _allProperties(
   obj: Record<string, unknown>,
-  _props: string[] = []
+  _props: string[] = [],
 ): string[] {
   for (; obj !== null; obj = Object.getPrototypeOf(obj)) {
     const op = Object.getOwnPropertyNames(obj);
@@ -49,12 +49,12 @@ export function _allProperties(
 export function mixinProperties(
   derivedCtor: Ctor,
   baseCtor: Ctor,
-  properties: string[]
+  properties: string[],
 ): void {
   properties.forEach((name) => {
     const descriptor = Object.getOwnPropertyDescriptor(
       baseCtor.prototype,
-      name
+      name,
     );
     if (descriptor) {
       Object.defineProperty(derivedCtor.prototype, name, descriptor);

@@ -3,6 +3,79 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.8](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.7...v1.0.0-beta.8) (2021-05-02)
+
+**Note:** Version bump only for package @nextgis/utils
+
+
+
+
+
+# [1.0.0-beta.7](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.6...v1.0.0-beta.7) (2021-04-23)
+
+**Note:** Version bump only for package @nextgis/utils
+
+
+
+
+
+# [1.0.0-beta.6](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2021-04-04)
+
+
+### Bug Fixes
+
+* **ngw-connector:** node request write data for no POST mode ([e31533f](https://github.com/nextgis/nextgis_frontend/commit/e31533fb888b91e655804abb51951b0a744fe618))
+
+
+### Features
+
+* **area:** add new Area package ([6658344](https://github.com/nextgis/nextgis_frontend/commit/665834493f2d25f2163b57bf41f9b25cc3c2e086))
+* **utils:** add getPolygons coordinates function ([ff5864b](https://github.com/nextgis/nextgis_frontend/commit/ff5864b9070712c62bb7060bdcb75a9c7dddff99))
+* **utils:** clipbord static create may throw error ([102a843](https://github.com/nextgis/nextgis_frontend/commit/102a8432158a3e6c345daaea40e0055bdfd76812))
+
+
+
+
+
+# [1.0.0-beta.5](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2021-02-13)
+
+
+### Features
+
+* **utils:** add function to get coordinates from bbox ([d7b2ea7](https://github.com/nextgis/nextgis_frontend/commit/d7b2ea7cef1b53e01f4a8aacf929d0b115a01778))
+
+
+
+
+
+# [1.0.0-beta.4](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2021-01-17)
+
+
+### Features
+
+* **utils:** geom coordinates count ([0455afa](https://github.com/nextgis/nextgis_frontend/commit/0455afa68865ec1759499ece16e93fed00ea541f))
+* **webmap:** create webmap from TileJson ([9e84ea1](https://github.com/nextgis/nextgis_frontend/commit/9e84ea18653104030884f6fec76e7680436d71bd))
+
+
+### Performance Improvements
+
+* **leaflet:** abort image overlay request on view change ([d8613f0](https://github.com/nextgis/nextgis_frontend/commit/d8613f0be10e730d1ec9bb4ee0f2fa27c1687009))
+
+
+
+
+
+# [1.0.0-beta.3](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2020-12-19)
+
+
+### Bug Fixes
+
+* **utils:** function name typos ([06d7a75](https://github.com/nextgis/nextgis_frontend/commit/06d7a753a26211ca4ac374d166cf457437fdccb6))
+
+
+
+
+
 # [1.0.0-beta.2](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2020-11-28)
 
 

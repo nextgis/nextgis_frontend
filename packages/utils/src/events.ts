@@ -1,4 +1,4 @@
-import { EventEmitter } from 'events';
+import type { EventEmitter } from 'events';
 
 export class Events<E = any> {
   private readonly _eventsStatus: { [key in keyof E]?: boolean } = {};
@@ -23,7 +23,7 @@ export class Events<E = any> {
               res(this);
             });
           }
-        })
+        }),
     );
     return Promise.all(promises).then(() => this);
   }

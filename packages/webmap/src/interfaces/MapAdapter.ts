@@ -1,18 +1,23 @@
-import StrictEventEmitter from 'strict-event-emitter-types';
-import { Type } from '@nextgis/utils';
-import { LayerAdapter } from './LayerAdapter';
-import { ZoomLevel } from './BaseTypes';
-import { EventEmitter } from 'events';
-import {
+import type StrictEventEmitter from 'strict-event-emitter-types';
+import type { Type } from '@nextgis/utils';
+import type { LayerAdapter } from './LayerAdapter';
+import type { ZoomLevel } from './BaseTypes';
+import type { EventEmitter } from 'events';
+import type {
   MapControls,
   MapControl,
   CreateControlOptions,
   ButtonControlOptions,
   ToggleControlOptions,
 } from './MapControl';
-import { MapOptions } from './MapOptions';
-import { LatLng, LngLatArray, LngLatBoundsArray, Pixel } from './BaseTypes';
-import { MapAdapterEvents } from './Events';
+import type { MapOptions } from './MapOptions';
+import type {
+  LatLng,
+  LngLatArray,
+  LngLatBoundsArray,
+  Pixel,
+} from './BaseTypes';
+import type { MapAdapterEvents } from './Events';
 
 /**
  * Parameters passed to the arguments of the callback function when clicking on the map
@@ -157,7 +162,7 @@ export interface MapAdapter<M = any, L = any, C = any> {
   setLayerOrder(
     layer: L,
     order: number,
-    layers?: { [name: string]: LayerAdapter }
+    layers?: { [name: string]: LayerAdapter },
   ): void;
 
   /** @deprecated use fitBounds instead */
@@ -196,7 +201,7 @@ export interface MapAdapter<M = any, L = any, C = any> {
   addControl<K extends keyof MapControls>(
     controlName: K | any,
     position: ControlPosition,
-    options?: MapControls[K]
+    options?: MapControls[K],
   ): any;
   removeControl(control: any): void;
 

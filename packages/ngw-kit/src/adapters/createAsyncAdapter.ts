@@ -55,7 +55,7 @@ async function createAdapterFromFirstStyle({
     return createAsyncAdapter(
       { ...layerOptions, resource: firstStyle.resource.id },
       webMap,
-      connector
+      connector,
     );
   }
 }
@@ -63,11 +63,10 @@ async function createAdapterFromFirstStyle({
 export async function createAsyncAdapter(
   options: NgwLayerOptions,
   webMap: WebMap,
-  connector: NgwConnector
+  connector: NgwConnector,
 ): Promise<Type<ResourceAdapter> | undefined> {
   let adapter: ClassAdapter | undefined;
   let item: ResourceItem | undefined;
-
   const adapterType = options.adapter;
   const resourceId = await resourceIdFromLayerOptions(options, connector);
   if (resourceId) {
@@ -116,7 +115,7 @@ export async function createAsyncAdapter(
         } else {
           if (adapterType === 'GEOJSON') {
             const parentItem = await connector.getResource(
-              item.resource.parent.id
+              item.resource.parent.id,
             );
             if (parentItem) {
               const parentOptions: NgwLayerOptions = {
@@ -158,10 +157,11 @@ export async function createAsyncAdapter(
     return adapter.then((x) => {
       if (x) {
         const resourceAdapter = x as Type<ResourceAdapter>;
-
-        resourceAdapter.prototype.item = item;
-        resourceAdapter.prototype.resourceId = item?.resource.id;
-        resourceAdapter.prototype.connector = connector;
+        if (item) {
+          resourceAdapter.prototype.item = item;
+          resourceAdapter.prototype.resourceId = item.resource.id;
+          resourceAdapter.prototype.connector = connector;
+        }
 
         applyMixins(resourceAdapter, [NgwResource], { replace: false });
         return resourceAdapter;

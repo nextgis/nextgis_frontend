@@ -1,11 +1,12 @@
-import { Feature } from 'geojson';
-import {
+import { isExpression } from './typeHelpers';
+
+import type { Feature } from 'geojson';
+import type {
   VectorAdapterLayerPaint,
   GetPaintCallback,
   Expression,
   ExpressionName,
 } from './interfaces';
-import { isExpression } from './typeHelpers';
 
 type ExpressionFun = (feature: Feature, args: any[]) => SimpleType;
 
@@ -50,7 +51,7 @@ function featureExpression(feature: Feature, expression: Expression) {
 }
 
 function createPropertyExpressionCb(
-  expression: Expression
+  expression: Expression,
 ): PropertyExpressionCb {
   return (feature: Feature) => {
     return featureExpression(feature, expression);
@@ -60,7 +61,7 @@ function createPropertyExpressionCb(
 const excludeExpressionList = ['iconSize', 'iconAnchor'];
 
 export function createExpressionCallback(
-  paint: VectorAdapterLayerPaint
+  paint: VectorAdapterLayerPaint,
 ): GetPaintCallback | undefined {
   let withExpression = false;
   const expressions: {

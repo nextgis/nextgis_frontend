@@ -1,4 +1,4 @@
-import {
+import type {
   ToggleControlOptions,
   ToggleControl,
   ButtonControlOptions,
@@ -10,7 +10,7 @@ import {
  */
 export function createToggleControl<C = any>(
   createButtonControl: (options: ButtonControlOptions) => C,
-  options: ToggleControlOptions
+  options: ToggleControlOptions,
 ): C & ToggleControl {
   const link = document.createElement('div');
 

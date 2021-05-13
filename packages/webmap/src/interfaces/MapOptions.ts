@@ -1,10 +1,11 @@
-import { GeometryPaint } from '@nextgis/paint';
-import { StarterKit } from './StarterKit';
-import { RuntimeParams } from './RuntimeParams';
-import { MapAdapter, FitOptions } from './MapAdapter';
-import { LayerAdapter, AdapterOptions } from './LayerAdapter';
-import { LngLatArray, LngLatBoundsArray, Type } from './BaseTypes';
-import { ControlsOptions, MapControls } from './MapControl';
+import type { TileJson } from '@nextgis/utils';
+import type { GeometryPaint } from '@nextgis/paint';
+import type { StarterKit } from './StarterKit';
+import type { RuntimeParams } from './RuntimeParams';
+import type { MapAdapter, FitOptions } from './MapAdapter';
+import type { LayerAdapter, AdapterOptions } from './LayerAdapter';
+import type { LngLatArray, LngLatBoundsArray, Type } from './BaseTypes';
+import type { ControlsOptions, MapControls } from './MapControl';
 
 /**
  * @public
@@ -140,6 +141,7 @@ export interface MapOptions<C = any> {
    * ```
    */
   controlsOptions?: ControlsOptions;
+  tileJson?: TileJson;
 }
 
 /**

@@ -1,6 +1,6 @@
 import { StateItem } from './StateItem';
-import { WebMapEvents } from '../../interfaces/Events';
-import { MapOptions } from '../../interfaces/MapOptions';
+import type { WebMapEvents } from '../../interfaces/Events';
+import type { MapOptions } from '../../interfaces/MapOptions';
 
 export class ZoomState extends StateItem<number> {
   name: keyof MapOptions = 'zoom';

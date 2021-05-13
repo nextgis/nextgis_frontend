@@ -15,7 +15,7 @@ export function fetchNgwLayerFeatures<
     resourceId: number;
     connector: NgwConnector;
     filters?: PropertiesFilter;
-  } & NgwFeatureRequestOptions<P>
+  } & NgwFeatureRequestOptions<P>,
 ): CancelablePromise<Feature<G, P>[]> {
   return fetchNgwLayerItems(options).then((x: FeatureItem[]) => {
     const features: Array<Feature<G, P>> = [];

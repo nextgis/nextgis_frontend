@@ -52,6 +52,6 @@ export function createButtonControl(options: ButtonControlOptions): IControl {
         }
       },
     },
-    { bar: true, addClass: 'mapboxgl-ctrl-group' }
+    { bar: true, addClass: 'mapboxgl-ctrl-group' },
   );
 }

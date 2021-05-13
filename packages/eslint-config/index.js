@@ -1,8 +1,9 @@
 module.exports = {
   extends: [
     'eslint:recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
-    'prettier/@typescript-eslint',
+    'prettier',
     'plugin:prettier/recommended',
   ],
   env: {
@@ -44,6 +45,11 @@ module.exports = {
         ignoreTemplateLiterals: true,
       },
     ],
+    'prettier/prettier': [
+      'error',
+      { singleQuote: true, printWidth: 80, trailingComma: 'all' },
+    ],
+    // do not place in overrides rules
     '@typescript-eslint/member-ordering': 'error',
     '@typescript-eslint/no-unused-vars': [
       1,

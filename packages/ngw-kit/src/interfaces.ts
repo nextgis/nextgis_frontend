@@ -119,7 +119,7 @@ export interface NgwLayerOptionsAdditional<
    *
    * @remarks
    * In NGW api this parameter is written as follows: `nd=204|404|200`, 200 by default.
-   * But in frontend libraries default value id 204 (no content) for performance purpose.
+   * But in frontend libraries default value id 404 (not founded) for performance purpose.
    *
    * @default 204
    */
@@ -332,7 +332,7 @@ export type ClassAdapter = Promise<Type<LayerAdapter> | undefined>;
  * @public
  */
 export type GetClassAdapterCallback = (
-  options: GetClassAdapterOptions
+  options: GetClassAdapterOptions,
 ) => Promise<Type<LayerAdapter> | undefined> | undefined;
 
 /**
@@ -373,6 +373,7 @@ export interface NgwFeatureRequestOptions<
 > extends FilterOptions<P> {
   extensions?: Extensions[] | string[] | null | false;
   geom?: boolean;
+  srs?: number;
 }
 
 export interface GetNgwLayerItemsOptions {
@@ -401,4 +402,9 @@ export interface NgwFeatureItemResponse<
    * if geometry is not available (see {@link NgwFeatureRequestOptions.geom}), this method will return it anyway
    */
   toGeojson(): CancelablePromise<Feature<G, F>>;
+}
+
+export interface IdentifyItemOptions {
+  feature: LayerFeature;
+  connector: NgwConnector;
 }

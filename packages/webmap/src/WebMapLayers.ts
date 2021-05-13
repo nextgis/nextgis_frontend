@@ -1,9 +1,14 @@
-import { Feature, GeoJsonObject } from 'geojson';
 import { preparePaint } from '@nextgis/paint';
-import { Type } from '@nextgis/utils';
-import { PropertiesFilter, propertiesFilter } from '@nextgis/properties-filter';
+import { propertiesFilter } from '@nextgis/properties-filter';
 
-import {
+import { updateGeoJsonAdapterOptions } from './utils/updateGeoJsonAdapterOptions';
+import { WebMapMain } from './WebMapMain';
+
+import type { Feature, GeoJsonObject } from 'geojson';
+import type { TileJson, Type } from '@nextgis/utils';
+import type { PropertiesFilter } from '@nextgis/properties-filter';
+
+import type {
   LayerAdapter,
   LayerAdapters,
   AdapterConstructor,
@@ -18,20 +23,16 @@ import {
   LayerAdapterDefinition,
   OnLayerSelectOptions,
   MainLayerAdapter,
+  TileAdapterOptions,
 } from './interfaces/LayerAdapter';
-
-import { LayerDef } from './interfaces/BaseTypes';
-
-import { updateGeoJsonAdapterOptions } from './utils/updateGeoJsonAdapterOptions';
-import { WebMapMain } from './WebMapMain';
-
-import {
+import type { LayerDef } from './interfaces/BaseTypes';
+import type {
   GetAttributionsOptions,
   MapOptions,
   ToggleLayerOptions,
 } from './interfaces/MapOptions';
-import { WebMapEvents } from './interfaces/Events';
-import { FitOptions } from './interfaces/MapAdapter';
+import type { WebMapEvents } from './interfaces/Events';
+import type { FitOptions } from './interfaces/MapAdapter';
 
 type AddedLayers = { [id: string]: LayerAdapter };
 
@@ -49,6 +50,14 @@ export class WebMapLayers<
   private readonly _baselayers: string[] = [];
   private readonly _layers: AddedLayers = {};
   private readonly _selectedLayers: string[] = [];
+
+  constructor(mapOptions: O) {
+    super(mapOptions);
+    const tileJson = this.options.tileJson;
+    if (tileJson) {
+      this.emitter.once('build-map', () => this.addTileJsonLayer(tileJson));
+    }
+  }
 
   /**
    * Try to fit map view by given layer bounds.
@@ -94,7 +103,7 @@ export class WebMapLayers<
    * Helper method to return added layer object by any definition type.
    */
   getLayer<LA extends LayerAdapter = LayerAdapter>(
-    layerDef: LayerDef
+    layerDef: LayerDef,
   ): LA | undefined {
     if (typeof layerDef === 'string') {
       return this._layers[layerDef] as LA;
@@ -127,7 +136,7 @@ export class WebMapLayers<
   }
 
   findLayer<T extends LayerAdapter = LayerAdapter>(
-    filter: (adapter: T) => boolean
+    filter: (adapter: T) => boolean,
   ): T | undefined {
     for (const l in this._layers) {
       const layerAdapter = this._layers[l] as T;
@@ -156,7 +165,7 @@ export class WebMapLayers<
     O extends AdapterOptions = AdapterOptions
   >(
     adapter: K | Type<LayerAdapters[K]>,
-    options?: O | LayerAdaptersOptions[K]
+    options?: O | LayerAdaptersOptions[K],
   ): Promise<LayerAdapter> {
     const layer = await this.addLayer(adapter, {
       ...options,
@@ -186,7 +195,7 @@ export class WebMapLayers<
   >(
     adapter: LayerAdapterDefinition<K>,
     options: O | LayerAdaptersOptions[K] = {},
-    order?: number
+    order?: number,
   ): Promise<LayerAdapter> {
     const id = this._layersIdCounter++;
     const _order =
@@ -312,7 +321,7 @@ export class WebMapLayers<
   >(
     adapter: AdapterConstructor,
     options: O | LayerAdaptersOptions[K],
-    order?: number
+    order?: number,
   ): Promise<LayerAdapter> {
     const _order =
       order || options.order !== undefined
@@ -331,7 +340,7 @@ export class WebMapLayers<
    * Remove all layer from map and memory.
    */
   removeLayers(
-    allowCb?: (layer: string, adapter: LayerAdapter) => boolean
+    allowCb?: (layer: string, adapter: LayerAdapter) => boolean,
   ): void {
     for (const l in this._layers) {
       let allow = true;
@@ -423,7 +432,7 @@ export class WebMapLayers<
   // @onMapLoad()
   async addGeoJsonLayer<K extends keyof LayerAdaptersOptions>(
     opt: GeoJsonAdapterOptions,
-    adapter?: K | Type<LayerAdapter>
+    adapter?: K | Type<LayerAdapter>,
   ): Promise<VectorLayerAdapter<any, any, AdapterOptions>> {
     opt = opt || {};
     opt.multiselect = opt.multiselect !== undefined ? opt.multiselect : false;
@@ -445,7 +454,7 @@ export class WebMapLayers<
    */
   showLayer(
     layerDef: LayerDef,
-    options: ToggleLayerOptions = {}
+    options: ToggleLayerOptions = {},
   ): Promise<void> {
     return this.toggleLayer(layerDef, true, options);
   }
@@ -455,7 +464,7 @@ export class WebMapLayers<
    */
   hideLayer(
     layerDef: LayerDef,
-    options: ToggleLayerOptions = {}
+    options: ToggleLayerOptions = {},
   ): Promise<void> {
     return this.toggleLayer(layerDef, false, options);
   }
@@ -476,7 +485,7 @@ export class WebMapLayers<
   toggleLayer(
     layerDef: LayerDef,
     status?: boolean,
-    options: ToggleLayerOptions = {}
+    options: ToggleLayerOptions = {},
   ): Promise<void> {
     const layer = this.getLayer(layerDef);
     const onMap = layer && layer.options.visibility;
@@ -631,7 +640,7 @@ export class WebMapLayers<
    */
   filterLayer(
     layerDef: LayerDef,
-    filter: DataLayerFilter<Feature, L>
+    filter: DataLayerFilter<Feature, L>,
   ): LayerDefinition<Feature, L>[] {
     const layer = this.getLayer(layerDef);
     const adapter = layer as VectorLayerAdapter;
@@ -644,7 +653,7 @@ export class WebMapLayers<
   propertiesFilter(
     layerDef: LayerDef,
     filters: PropertiesFilter,
-    options?: FilterOptions
+    options?: FilterOptions,
   ): void {
     const layer = this.getLayer(layerDef);
     const adapter = layer as VectorLayerAdapter;
@@ -757,13 +766,29 @@ export class WebMapLayers<
     return attributions;
   }
 
-  getActiveBaseLayer(): MainLayerAdapter<any, any, AdapterOptions> | undefined {
+  getActiveBaseLayer(): MainLayerAdapter<M, any, AdapterOptions> | undefined {
     const visibleLayerBaseLayer = this.getBaseLayers().find((x) => {
       return this.isLayerVisible(x);
     });
     if (visibleLayerBaseLayer) {
       return this.getLayer(visibleLayerBaseLayer);
     }
+  }
+
+  addTileJsonLayer(
+    tileJson: TileJson,
+  ): Promise<MainLayerAdapter<M, any, TileAdapterOptions>> {
+    // if (this.mapAdapter.createTileJsonlayer) {
+    // } else {
+
+    const url = tileJson.tiles[0];
+    return this.addLayer('TILE', {
+      url,
+      maxZoom: tileJson.maxzoom,
+      minZoom: tileJson.minzoom,
+      subdomains: tileJson.scheme,
+      attribution: tileJson.attribution,
+    }) as Promise<MainLayerAdapter<M, any, TileAdapterOptions>>;
   }
 
   private async _onLayerClick(options: OnLayerClickOptions) {
@@ -798,14 +823,14 @@ export class WebMapLayers<
         options.paint = preparePaint(
           options.paint || {},
           this.options.paint,
-          this.getPaintFunctions
+          this.getPaintFunctions,
         );
       }
       if (options.selectedPaint && this.options.selectedPaint) {
         options.selectedPaint = preparePaint(
           options.selectedPaint,
           this.options.selectedPaint,
-          this.getPaintFunctions
+          this.getPaintFunctions,
         );
       }
     }

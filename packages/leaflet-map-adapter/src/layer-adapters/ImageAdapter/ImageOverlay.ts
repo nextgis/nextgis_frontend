@@ -8,12 +8,21 @@ import { callAjax } from '../layersUtility';
 type IOptions = ImageOverlayOptions & { headers?: any };
 
 export class ImageOverlay extends LImageOverlay {
+  private _abort: (() => void)[] = [];
+
   constructor(
     imageUrl: string,
     bounds: LatLngBoundsExpression,
-    options?: IOptions
+    options?: IOptions,
   ) {
     super(imageUrl, bounds, options);
+  }
+
+  cancelLoad(): void {
+    if (this._abort) {
+      this._abort.forEach((x) => x());
+      this._abort = [];
+    }
   }
 
   _initImage(): void {
@@ -26,12 +35,14 @@ export class ImageOverlay extends LImageOverlay {
       const img: HTMLImageElement = this._image;
       const src = img.src;
       img.src = '';
-      callAjax(
-        src,
-        (response) => {
-          img.src = response;
-        },
-        headers
+      this._abort.push(
+        callAjax(
+          src,
+          (response) => {
+            img.src = response;
+          },
+          headers,
+        ),
       );
     }
   }

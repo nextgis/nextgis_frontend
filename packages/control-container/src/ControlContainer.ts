@@ -72,7 +72,7 @@ export class ControlContainer {
       ) {
         positionContainer.insertBefore(
           newContainer,
-          positionContainer.firstChild
+          positionContainer.firstChild,
         );
       } else {
         positionContainer.appendChild(newContainer);
