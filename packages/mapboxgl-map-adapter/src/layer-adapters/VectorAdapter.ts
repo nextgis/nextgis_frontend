@@ -1,13 +1,9 @@
 import { isPaint, isIcon } from '@nextgis/paint';
 import { checkIfPropertyFilter } from '@nextgis/properties-filter';
 
-<<<<<<< HEAD
-import { Paint, IconPaint, isPaint, isIcon } from '@nextgis/paint';
-=======
 import { getImage } from '../util/imageIcons';
 import { typeAliasForFilter, allowedByType } from '../util/geomType';
 import { BaseAdapter } from './BaseAdapter';
->>>>>>> f0a1491a471ccfa2538c48c1b307d6d5fa3d713c
 
 import type {
   Feature as F,
