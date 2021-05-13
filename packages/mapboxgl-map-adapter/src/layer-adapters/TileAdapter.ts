@@ -4,7 +4,7 @@ import {
   RasterAdapterOptions,
 } from '@nextgis/webmap';
 import { BaseAdapter } from './BaseAdapter';
-import { RasterSource, ResourceType, Layer } from 'mapbox-gl';
+import { RasterSource, ResourceType, Layer, AnyLayer } from 'mapbox-gl';
 
 export class TileAdapter<O extends RasterAdapterOptions = TileAdapterOptions>
   extends BaseAdapter<O>
@@ -69,7 +69,7 @@ export class TileAdapter<O extends RasterAdapterOptions = TileAdapterOptions>
     }
     if (this.map) {
       this.map.addLayer(
-        layerOptions,
+        layerOptions as AnyLayer,
         // @ts-ignore
         options.before
       );
