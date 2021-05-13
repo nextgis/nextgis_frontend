@@ -2,15 +2,16 @@ import { GeoJsonObject } from 'geojson';
 import Component from 'vue-class-component';
 import { Prop, Mixins, Watch, Emit, Model } from 'vue-property-decorator';
 
-import { Paint } from '@nextgis/paint';
-import {
+import { VueNgwLayer } from './VueNgwLayer';
+
+import type { Paint } from '@nextgis/paint';
+import type {
   LayerAdapters,
   LayerAdapter,
   VectorLayerAdapter,
   OnLayerClickOptions,
   VectorAdapterOptions,
 } from '@nextgis/webmap';
-import { VueNgwLayer } from './VueNgwLayer';
 
 @Component
 export class GeojsonLayer extends Mixins(VueNgwLayer) {
@@ -70,7 +71,7 @@ export class GeojsonLayer extends Mixins(VueNgwLayer) {
 
   addLayer(
     adapter: 'GEOJSON',
-    options: VectorAdapterOptions = {}
+    options: VectorAdapterOptions = {},
   ): Promise<LayerAdapter | undefined> {
     if (this.paint) {
       options.paint = this.paint;
@@ -86,7 +87,7 @@ export class GeojsonLayer extends Mixins(VueNgwLayer) {
           .then((layer) => {
             this.onSelectedChange();
             return layer;
-          })
+          }),
     );
   }
 }

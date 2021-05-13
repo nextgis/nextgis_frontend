@@ -17,5 +17,5 @@ export interface MapControl<M extends any = any>
 |  --- | --- |
 |  [onAdd(map)](./webmap.mapcontrol.onadd.md) |  |
 |  [onRemove(map)](./webmap.mapcontrol.onremove.md) |  |
-|  [remove()](./webmap.mapcontrol.remove.md) |  |
+|  [remove()?](./webmap.mapcontrol.remove.md) | <i>(Optional)</i> |
 

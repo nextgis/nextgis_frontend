@@ -16,14 +16,14 @@ export interface ResourceAdapter<M = any, L = any, O extends GeoJsonAdapterOptio
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [baselayer](./ngw-kit.resourceadapter.baselayer.md) | boolean |  |
-|  [item](./ngw-kit.resourceadapter.item.md) | [ResourceItem](./ngw-connector.resourceitem.md) |  |
+|  [baselayer?](./ngw-kit.resourceadapter.baselayer.md) | boolean | <i>(Optional)</i> |
+|  [item?](./ngw-kit.resourceadapter.item.md) | [ResourceItem](./ngw-connector.resourceitem.md) | <i>(Optional)</i> |
 |  [resourceId](./ngw-kit.resourceadapter.resourceid.md) | number |  |
 
 ## Methods
 
 |  Method | Description |
 |  --- | --- |
-|  [getExtent()](./ngw-kit.resourceadapter.getextent.md) |  |
+|  [getExtent()?](./ngw-kit.resourceadapter.getextent.md) | <i>(Optional)</i> |
 |  [getIdentificationIds()](./ngw-kit.resourceadapter.getidentificationids.md) |  |
 

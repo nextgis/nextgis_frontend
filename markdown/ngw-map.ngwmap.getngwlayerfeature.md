@@ -4,10 +4,15 @@
 
 ## NgwMap.getNgwLayerFeature() method
 
+> Warning: This API is now obsolete.
+> 
+> use [NgwMap.fetchNgwLayerFeature()](./ngw-map.ngwmap.fetchngwlayerfeature.md) instead
+> 
+
 <b>Signature:</b>
 
 ```typescript
-getNgwLayerFeature<G extends Geometry | null = Geometry, P extends JsonMap = JsonMap>(options: {
+getNgwLayerFeature<G extends Geometry = Geometry, P extends JsonMap = JsonMap>(options: {
         resourceId: number;
         featureId: number;
     }): CancelablePromise<Feature<G, P>>;

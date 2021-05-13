@@ -14,11 +14,11 @@ export interface ItemBasePropertyOptions<V>
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [bubble](./item.itembasepropertyoptions.bubble.md) | boolean |  |
-|  [getProperty](./item.itembasepropertyoptions.getproperty.md) | (item?: [Item](./item.item.md)<!-- -->) =&gt; V |  |
-|  [hierarchy](./item.itembasepropertyoptions.hierarchy.md) | boolean |  |
-|  [onSet](./item.itembasepropertyoptions.onset.md) | (value?: V, options?: [ItemBasePropertyOptions](./item.itembasepropertyoptions.md)<!-- -->&lt;V&gt;, item?: [Item](./item.item.md)<!-- -->) =&gt; void |  |
-|  [propagation](./item.itembasepropertyoptions.propagation.md) | boolean |  |
-|  [silent](./item.itembasepropertyoptions.silent.md) | boolean |  |
-|  [value](./item.itembasepropertyoptions.value.md) | V |  |
+|  [bubble?](./item.itembasepropertyoptions.bubble.md) | boolean | <i>(Optional)</i> |
+|  [getProperty?](./item.itembasepropertyoptions.getproperty.md) | (item?: [Item](./item.item.md)<!-- -->) =&gt; V | <i>(Optional)</i> |
+|  [hierarchy?](./item.itembasepropertyoptions.hierarchy.md) | boolean | <i>(Optional)</i> |
+|  [onSet?](./item.itembasepropertyoptions.onset.md) | (value?: V, options?: [ItemBasePropertyOptions](./item.itembasepropertyoptions.md)<!-- -->&lt;V&gt;, item?: [Item](./item.item.md)<!-- -->) =&gt; void | <i>(Optional)</i> |
+|  [propagation?](./item.itembasepropertyoptions.propagation.md) | boolean | <i>(Optional)</i> |
+|  [silent?](./item.itembasepropertyoptions.silent.md) | boolean | <i>(Optional)</i> |
+|  [value?](./item.itembasepropertyoptions.value.md) | V | <i>(Optional)</i> |
 

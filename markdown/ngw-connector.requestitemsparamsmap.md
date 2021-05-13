@@ -75,6 +75,15 @@ export interface RequestItemsParamsMap
 |  ["resource.tree"](./ngw-connector.requestitemsparamsmap._resource.tree_.md) | { id: number; } |  |
 |  ["resource.update"](./ngw-connector.requestitemsparamsmap._resource.update_.md) | { id: number; } |  |
 |  ["resource.widget"](./ngw-connector.requestitemsparamsmap._resource.widget_.md) | null |  |
+|  ["spatial\_ref\_sys.collection"](./ngw-connector.requestitemsparamsmap._spatial_ref_sys.collection_.md) | null |  |
+|  ["spatial\_ref\_sys.convert"](./ngw-connector.requestitemsparamsmap._spatial_ref_sys.convert_.md) | null |  |
+|  ["spatial\_ref\_sys.geom\_area"](./ngw-connector.requestitemsparamsmap._spatial_ref_sys.geom_area_.md) | { id: number; } |  |
+|  ["spatial\_ref\_sys.geom\_length"](./ngw-connector.requestitemsparamsmap._spatial_ref_sys.geom_length_.md) | { id: number; } |  |
+|  ["spatial\_ref\_sys.geom\_transform"](./ngw-connector.requestitemsparamsmap._spatial_ref_sys.geom_transform_.md) | { id: number; } |  |
+|  ["spatial\_ref\_sys.get"](./ngw-connector.requestitemsparamsmap._spatial_ref_sys.get_.md) | { id: number; } |  |
+|  ["srs.create"](./ngw-connector.requestitemsparamsmap._srs.create_.md) | null |  |
+|  ["srs.delete"](./ngw-connector.requestitemsparamsmap._srs.delete_.md) | { id: number; } |  |
+|  ["srs.edit"](./ngw-connector.requestitemsparamsmap._srs.edit_.md) | { id: number; } |  |
 |  ["webmap.display.tiny"](./ngw-connector.requestitemsparamsmap._webmap.display.tiny_.md) | { id: number; } |  |
 |  ["webmap.display"](./ngw-connector.requestitemsparamsmap._webmap.display_.md) | { id: number; } |  |
 |  ["wfsserver.wfs"](./ngw-connector.requestitemsparamsmap._wfsserver.wfs_.md) | { id: number; } |  |

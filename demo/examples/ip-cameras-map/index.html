@@ -39,6 +39,9 @@
     <!-- <script src="https://unpkg.com/@nextgis/ngw-leaflet"></script> -->
     <script src="../../../packages/ngw-leaflet/lib/ngw-leaflet.global.js"></script>
 
+    <!-- Import Utils.degrees2Radian, Utils.meters2degrees and Utils.degrees2meters -->
+    <script src="../../../packages/utils/lib/utils.global.js"></script>
+
     <!-- Video Player libraries -->
     <link href="//vjs.zencdn.net/7.3.0/video-js.min.css" rel="stylesheet" />
     <script src="//vjs.zencdn.net/7.3.0/video.min.js"></script>
@@ -49,14 +52,14 @@
     <div id="map"></div>
 
     <script>
-      // initialize webmap
+      // initialize map
       NgwMap.create({
         baseUrl: 'https://demo.nextgis.com',
         target: 'map',
         qmsId: 448,
         maxZoom: 22,
       }).then(function (ngwMap) {
-        // add layer with cameras
+        // add ngw layer with cameras
         ngwMap.addNgwLayer({
           resource: 5021,
           id: 'cameras',
@@ -67,10 +70,11 @@
             selectable: true,
           },
         });
+        // add empty geojson to show highlighted cameras sector
         ngwMap.addGeoJsonLayer({
           id: 'sectors',
           type: 'polygon',
-          paint: { color: 'green',  },
+          paint: { color: 'green' },
         });
         ngwMap.emitter.on('layer:click', function (e) {
           if (e.layer.id === 'cameras') {
@@ -82,7 +86,7 @@
           }
         });
 
-        // create camera panel control
+        // create camera element
         var cameraPanel = document.createElement('div');
         cameraPanel.className = 'camera-panel';
         cameraPanel.innerHTML =
@@ -92,6 +96,7 @@
           '</div>' +
           '<div class="no-active-camera-block">Select camera</div>';
 
+        // create camera panel control
         var cameraPanelControl = ngwMap.createControl(
           {
             onAdd: function () {
@@ -100,9 +105,10 @@
           },
           { bar: true }
         );
+        // add control to the map
         ngwMap.addControl(cameraPanelControl, 'bottom-right');
 
-        // define some element after the panel is added to dom the DOM
+        // define some element after the panel is added to the DOM
         var wrapper = cameraPanel.querySelector('.camera-wrapper');
         var title = cameraPanel.querySelector('.camera-title');
         var player = videojs(cameraPanel.querySelector('#vid1'));
@@ -127,13 +133,16 @@
 
         function cameraSectorPoly(feature) {
           var props = feature.properties;
-          var xy = degrees2meters.apply(this, feature.geometry.coordinates);
+          var xy = Utils.degrees2meters.apply(
+            this,
+            feature.geometry.coordinates
+          );
           var x = xy[0];
           var y = xy[1];
-          var azimuth = degrees2Radian(
+          var azimuth = Utils.degrees2Radian(
             90 - (props.azimuth !== undefined ? props.azimuth : 90)
           );
-          var angle = degrees2Radian(
+          var angle = Utils.degrees2Radian(
             props.angle !== undefined ? props.angle : 60
           );
           var focalLength =
@@ -152,7 +161,7 @@
                 -l * Math.cos(azimuth) + y + focalLength * Math.sin(azimuth),
               ],
             ].map(function (x) {
-              return meters2degrees.apply(this, x);
+              return Utils.meters2degrees.apply(this, x);
             }),
             [feature.geometry.coordinates]
           );
@@ -161,28 +170,6 @@
             properties: feature.properties,
             geometry: { type: 'Polygon', coordinates: [coordinates] },
           };
-        }
-
-        function degrees2Radian(deg) {
-          return (deg * Math.PI) / 180;
-        }
-
-        function degrees2meters(lng, lat) {
-          lat = lat > 85.06 ? 85.06 : lat < -85.06 ? -85.06 : lat;
-
-          var x = (lng * 20037508.34) / 180;
-          var y =
-            Math.log(Math.tan(((90 + lat) * Math.PI) / 360)) / (Math.PI / 180);
-          y = (y * 20037508.34) / 180;
-          return [x, y];
-        }
-
-        function meters2degrees(x, y) {
-          var lon = (x * 180) / 20037508.34;
-          var lat =
-            (Math.atan(Math.exp((y * Math.PI) / 20037508.34)) * 360) / Math.PI -
-            90;
-          return [lon, lat];
         }
       });
     </script>

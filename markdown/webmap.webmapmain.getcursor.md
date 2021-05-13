@@ -11,5 +11,5 @@ getCursor(): Cursor | undefined;
 ```
 <b>Returns:</b>
 
-Cursor \| undefined
+[Cursor](./webmap.cursor.md) \| undefined
 

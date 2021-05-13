@@ -3,6 +3,85 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.9](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.8...v1.0.0-beta.9) (2021-05-03)
+
+**Note:** Version bump only for package @nextgis/cesium-map-adapter
+
+
+
+
+
+# [1.0.0-beta.8](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.7...v1.0.0-beta.8) (2021-05-02)
+
+**Note:** Version bump only for package @nextgis/cesium-map-adapter
+
+
+
+
+
+# [1.0.0-beta.7](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.6...v1.0.0-beta.7) (2021-04-23)
+
+**Note:** Version bump only for package @nextgis/cesium-map-adapter
+
+
+
+
+
+# [1.0.0-beta.6](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2021-04-04)
+
+
+### Bug Fixes
+
+* **cesium:** change geojson extrude height set ([96df3c2](https://github.com/nextgis/nextgis_frontend/commit/96df3c257c6ef07ca9139bdb456936399f1a539f))
+* **vue:** fix vue observable leaks ([612ea1f](https://github.com/nextgis/nextgis_frontend/commit/612ea1fc72898e1061d4bb3b2a107e59230afd20))
+
+
+
+
+
+# [1.0.0-beta.5](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2021-02-13)
+
+
+### Bug Fixes
+
+* **cesium:** TileLayer ordering ([41a8f05](https://github.com/nextgis/nextgis_frontend/commit/41a8f05dc5050b54886b1bac22fbd31fb6218f14))
+* **cesium:** Tilset3D adapter paint ([5f6160a](https://github.com/nextgis/nextgis_frontend/commit/5f6160af45867a3a31697c0b1659619a5a09fcee))
+
+
+### Features
+
+* **cesium:** add tilset3d adapter paint options ([a9caba5](https://github.com/nextgis/nextgis_frontend/commit/a9caba56225609202ff350e232ada5af77bbfa6a))
+* **ngw-kit:** improve createOnFirstShowAdapter ([7a522d7](https://github.com/nextgis/nextgis_frontend/commit/7a522d7ca715ef49c41e219b955b4eba573973dd))
+
+
+
+
+
+# [1.0.0-beta.4](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2021-01-17)
+
+**Note:** Version bump only for package @nextgis/cesium-map-adapter
+
+
+
+
+
+# [1.0.0-beta.3](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2020-12-19)
+
+
+### Bug Fixes
+
+* **cesium-map-adapter:** extent from bounding sphere ([336bbe9](https://github.com/nextgis/nextgis_frontend/commit/336bbe901ca8d982b32eadbdcf2d603886667815))
+* **ngw-kit:** show only one enabled webmap basemap ([18a6022](https://github.com/nextgis/nextgis_frontend/commit/18a6022f5b58b45ee6b5bd92c6053fe3d3842866))
+
+
+### Features
+
+* **cesium-map-adapter:** add watchTerrainChange geojson option ([15f1d8e](https://github.com/nextgis/nextgis_frontend/commit/15f1d8ef5ba427b5dc27f6c9d9b470887947ab4d))
+
+
+
+
+
 # [1.0.0-beta.2](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2020-11-28)
 
 

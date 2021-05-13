@@ -27,7 +27,7 @@ import MapAdapter from "@nextgis/leaflet-map-adapter";
 
 const webMap = new WebMap({
   mapAdapter: new MapAdapter(),
-  mapOptions: { target: 'map' }
+  target: 'map',
 });
 
 console.log(!!webMap.mapAdapter.map); // false
@@ -61,9 +61,10 @@ webMap.onLoad().then(() => {
 |  Interface | Description |
 |  --- | --- |
 |  [AdapterOptions](./webmap.adapteroptions.md) | Parameters that can be used to create any map layer adapter. |
-|  [AppOptions](./webmap.appoptions.md) |  |
 |  [AttributionControlOptions](./webmap.attributioncontroloptions.md) |  |
 |  [ButtonControlOptions](./webmap.buttoncontroloptions.md) | Options for creating a [button control](./webmap.webmapcontrols.createbuttoncontrol.md)<!-- -->. |
+|  [ControlOptions](./webmap.controloptions.md) |  |
+|  [ControlsOptions](./webmap.controlsoptions.md) |  |
 |  [CreateControlOptions](./webmap.createcontroloptions.md) |  |
 |  [DataLoadError](./webmap.dataloaderror.md) |  |
 |  [FilterOptions](./webmap.filteroptions.md) |  |
@@ -113,9 +114,11 @@ webMap.onLoad().then(() => {
 
 |  Type Alias | Description |
 |  --- | --- |
+|  [AdapterConstructor](./webmap.adapterconstructor.md) |  |
 |  [CallbackFilter](./webmap.callbackfilter.md) |  |
 |  [ControlPosition](./webmap.controlposition.md) |  |
 |  [ControlPositions](./webmap.controlpositions.md) |  |
+|  [Cursor](./webmap.cursor.md) | Available cursor names from [https://developer.mozilla.org/ru/docs/Web/CSS/cursor](https://developer.mozilla.org/ru/docs/Web/CSS/cursor)  |
 |  [DataLayerFilter](./webmap.datalayerfilter.md) |  |
 |  [HtmlDef](./webmap.htmldef.md) |  |
 |  [LayerAdapter](./webmap.layeradapter.md) |  |

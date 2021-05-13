@@ -1,5 +1,5 @@
 export function unflatten(
-  data: Record<string, any> | any[]
+  data: Record<string, any> | any[],
 ): Record<string, any> {
   if (Object(data) !== data || Array.isArray(data)) return data;
   const regex = /\.?([^.[\]]+)|\[(\d+)\]/g;

@@ -5,7 +5,7 @@ import NgwConnector, {
 } from '@nextgis/ngw-connector';
 
 export function getNgwWebmapExtent(
-  webmap: WebmapResource
+  webmap: WebmapResource,
 ): LngLatBoundsArray | undefined {
   const bottom = webmap['extent_bottom'];
   const left = webmap['extent_left'];
@@ -25,7 +25,7 @@ export function getNgwWebmapExtent(
 
 export function fetchNgwLayerExtent(
   id: number,
-  connector: NgwConnector
+  connector: NgwConnector,
 ): Promise<LngLatBoundsArray | undefined> {
   return connector.get('layer.extent', null, { id }).then((resp) => {
     if (resp) {
@@ -38,13 +38,13 @@ export function fetchNgwLayerExtent(
 
 export async function fetchNgwResourceExtent(
   item: ResourceItem,
-  connector: NgwConnector
+  connector: NgwConnector,
 ): Promise<LngLatBoundsArray | undefined> {
   if (item.webmap) {
     return getNgwWebmapExtent(item.webmap);
   } else {
     const resource = item.resource;
-    if (resource.cls.indexOf('style') !== -1) {
+    if (resource.cls && resource.cls.indexOf('style') !== -1) {
       return connector.getResource(resource.parent.id).then((res) => {
         if (res) {
           return fetchNgwLayerExtent(res.resource.id, connector);
@@ -61,7 +61,7 @@ export async function fetchNgwResourceExtent(
  */
 export function getNgwLayerExtent(
   id: number,
-  connector: NgwConnector
+  connector: NgwConnector,
 ): Promise<LngLatBoundsArray | undefined> {
   return fetchNgwLayerExtent(id, connector);
 }
@@ -70,7 +70,7 @@ export function getNgwLayerExtent(
  */
 export async function getNgwResourceExtent(
   item: ResourceItem,
-  connector: NgwConnector
+  connector: NgwConnector,
 ): Promise<LngLatBoundsArray | undefined> {
   return fetchNgwResourceExtent(item, connector);
 }

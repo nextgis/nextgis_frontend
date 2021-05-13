@@ -8,13 +8,13 @@
 <b>Signature:</b>
 
 ```typescript
-export interface GeoJsonAdapterOptions<F extends Feature = Feature, L = any> extends VectorAdapterOptions<F, L> 
+export interface GeoJsonAdapterOptions<F extends Feature = Feature, L = any, N = Record<string, any>> extends VectorAdapterOptions<F, L, N> 
 ```
-<b>Extends:</b> [VectorAdapterOptions](./webmap.vectoradapteroptions.md)<!-- -->&lt;F, L&gt;
+<b>Extends:</b> [VectorAdapterOptions](./webmap.vectoradapteroptions.md)<!-- -->&lt;F, L, N&gt;
 
 ## Properties
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [data](./webmap.geojsonadapteroptions.data.md) | GeoJsonObject | Geojson data |
+|  [data?](./webmap.geojsonadapteroptions.data.md) | GeoJsonObject | <i>(Optional)</i> Geojson data |
 

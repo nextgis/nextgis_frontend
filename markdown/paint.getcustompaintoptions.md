@@ -7,15 +7,15 @@
 <b>Signature:</b>
 
 ```typescript
-export interface GetCustomPaintOptions extends BaesePaintTypes 
+export interface GetCustomPaintOptions extends BasePaintTypes 
 ```
-<b>Extends:</b> BaesePaintTypes
+<b>Extends:</b> BasePaintTypes
 
 ## Properties
 
 |  Property | Type | Description |
 |  --- | --- | --- |
 |  [from](./paint.getcustompaintoptions.from.md) | string \| [GetPaintFunction](./paint.getpaintfunction.md) |  |
-|  [options](./paint.getcustompaintoptions.options.md) | any |  |
+|  [options?](./paint.getcustompaintoptions.options.md) | any | <i>(Optional)</i> |
 |  [type](./paint.getcustompaintoptions.type.md) | 'get-paint' |  |
 

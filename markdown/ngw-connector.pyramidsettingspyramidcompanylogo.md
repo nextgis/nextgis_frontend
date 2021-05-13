@@ -15,5 +15,5 @@ export interface PyramidSettingsPyramidCompanyLogo
 |  Property | Type | Description |
 |  --- | --- | --- |
 |  [enabled](./ngw-connector.pyramidsettingspyramidcompanylogo.enabled.md) | boolean |  |
-|  [link](./ngw-connector.pyramidsettingspyramidcompanylogo.link.md) | 'string' |  |
+|  [link?](./ngw-connector.pyramidsettingspyramidcompanylogo.link.md) | 'string' | <i>(Optional)</i> |
 

@@ -18,40 +18,41 @@ export interface MapAdapter<M = any, L = any, C = any>
 |  --- | --- | --- |
 |  [controlAdapters](./webmap.mapadapter.controladapters.md) | { \[name: string\]: [Type](./utils.type.md)<!-- -->&lt;C&gt;; } | Named map controls specific for each framework. |
 |  [emitter](./webmap.mapadapter.emitter.md) | StrictEventEmitter&lt;EventEmitter, [MapAdapterEvents](./webmap.mapadapterevents.md)<!-- -->&gt; | An instance of the EventEmitter class for listen and emit events |
-|  [isLoaded](./webmap.mapadapter.isloaded.md) | boolean | State of readiness of the card for use. |
+|  [isLoaded?](./webmap.mapadapter.isloaded.md) | boolean | <i>(Optional)</i> State of readiness of the card for use. |
 |  [layerAdapters](./webmap.mapadapter.layeradapters.md) | { \[name: string\]: [Type](./utils.type.md)<!-- -->&lt;[LayerAdapter](./webmap.layeradapter.md)<!-- -->&lt;M, L, any&gt;&gt;; } | Named adapters for map layers through a generic interface. |
-|  [map](./webmap.mapadapter.map.md) | M | Original map object of GIS framework (Leaflet.Map, Openlayers.Map, Mapboxgl.Map or other) |
+|  [map?](./webmap.mapadapter.map.md) | M | <i>(Optional)</i> Original map object of GIS framework (Leaflet.Map, Openlayers.Map, Mapboxgl.Map or other) |
 
 ## Methods
 
 |  Method | Description |
 |  --- | --- |
 |  [addControl(controlName, position, options)](./webmap.mapadapter.addcontrol.md) |  |
-|  [beforeRemove()](./webmap.mapadapter.beforeremove.md) |  |
+|  [beforeRemove()?](./webmap.mapadapter.beforeremove.md) | <i>(Optional)</i> |
 |  [create(options)](./webmap.mapadapter.create.md) |  |
-|  [createButtonControl(options)](./webmap.mapadapter.createbuttoncontrol.md) |  |
-|  [createControl(control, options)](./webmap.mapadapter.createcontrol.md) |  |
-|  [createToggleControl(options)](./webmap.mapadapter.createtogglecontrol.md) |  |
+|  [createButtonControl(options)?](./webmap.mapadapter.createbuttoncontrol.md) | <i>(Optional)</i> |
+|  [createControl(control, options)?](./webmap.mapadapter.createcontrol.md) | <i>(Optional)</i> |
+|  [createToggleControl(options)?](./webmap.mapadapter.createtogglecontrol.md) | <i>(Optional)</i> |
 |  [destroy()](./webmap.mapadapter.destroy.md) |  |
-|  [fit(extent, options)](./webmap.mapadapter.fit.md) |  |
+|  [fetchZoom()?](./webmap.mapadapter.fetchzoom.md) | <i>(Optional)</i> Temporal async method. |
+|  [fit(extent, options)?](./webmap.mapadapter.fit.md) | <i>(Optional)</i> |
 |  [fitBounds(extent, options)](./webmap.mapadapter.fitbounds.md) |  |
-|  [getBounds()](./webmap.mapadapter.getbounds.md) |  |
+|  [getBounds()?](./webmap.mapadapter.getbounds.md) | <i>(Optional)</i> |
 |  [getCenter()](./webmap.mapadapter.getcenter.md) |  |
 |  [getContainer()](./webmap.mapadapter.getcontainer.md) |  |
-|  [getCursor()](./webmap.mapadapter.getcursor.md) |  |
+|  [getCursor()?](./webmap.mapadapter.getcursor.md) | <i>(Optional)</i> |
 |  [getZoom()](./webmap.mapadapter.getzoom.md) |  |
 |  [hideLayer(layer)](./webmap.mapadapter.hidelayer.md) |  |
-|  [locate(opt, events)](./webmap.mapadapter.locate.md) | Tries to locate the user using the Geolocation API, firing a locationfound event with location data on success or a locationerror event on failure, and optionally sets the map view to the user's location with respect to detection accuracy (or to the world view if geolocation failed). Note that, if your page doesn't use HTTPS, this method will fail in modern browsers (Chrome 50 and newer) See Locate options for more details. |
+|  [locate(opt, events)?](./webmap.mapadapter.locate.md) | <i>(Optional)</i> Tries to locate the user using the Geolocation API, firing a locationfound event with location data on success or a locationerror event on failure, and optionally sets the map view to the user's location with respect to detection accuracy (or to the world view if geolocation failed). Note that, if your page doesn't use HTTPS, this method will fail in modern browsers (Chrome 50 and newer) See Locate options for more details. |
 |  [onMapClick(evt)](./webmap.mapadapter.onmapclick.md) |  |
 |  [removeControl(control)](./webmap.mapadapter.removecontrol.md) |  |
 |  [removeLayer(layer)](./webmap.mapadapter.removelayer.md) | Remove layer from Map |
 |  [setCenter(latLng)](./webmap.mapadapter.setcenter.md) |  |
-|  [setCursor(cursor)](./webmap.mapadapter.setcursor.md) |  |
+|  [setCursor(cursor)?](./webmap.mapadapter.setcursor.md) | <i>(Optional)</i> |
 |  [setLayerOpacity(layer, opacity)](./webmap.mapadapter.setlayeropacity.md) | Set the transparency of given layer. |
 |  [setLayerOrder(layer, order, layers)](./webmap.mapadapter.setlayerorder.md) |  |
-|  [setView(lngLat, zoom)](./webmap.mapadapter.setview.md) |  |
+|  [setView(lngLat, zoom)?](./webmap.mapadapter.setview.md) | <i>(Optional)</i> |
 |  [setZoom(zoom)](./webmap.mapadapter.setzoom.md) |  |
 |  [showLayer(layer)](./webmap.mapadapter.showlayer.md) |  |
-|  [zoomIn()](./webmap.mapadapter.zoomin.md) | zoom the map by one quantile of the current adapter |
-|  [zoomOut()](./webmap.mapadapter.zoomout.md) | zoom out the map by one quantile of the current adapter |
+|  [zoomIn()?](./webmap.mapadapter.zoomin.md) | <i>(Optional)</i> zoom the map by one quantile of the current adapter |
+|  [zoomOut()?](./webmap.mapadapter.zoomout.md) | <i>(Optional)</i> zoom out the map by one quantile of the current adapter |
 

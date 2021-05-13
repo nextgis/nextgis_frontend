@@ -55,7 +55,7 @@ export class BaseResource {
 
   static receive(
     item: ResourceItem,
-    ResCls?: typeof BaseResource
+    ResCls?: typeof BaseResource,
   ): typeof BaseResource {
     ResCls = ResCls ?? this;
     const options: NgwResourceOptions = {
@@ -75,7 +75,7 @@ export class BaseResource {
   static clone(options: Partial<NgwResourceOptions> = {}): typeof BaseResource {
     const metadataArgsStorage = getMetadataArgsStorage();
     const table = metadataArgsStorage.filterTables(
-      this
+      this,
     )[0] as ResourceMetadataArgs;
     const tableOptions = { ...table };
     // keyname is unique resource property
@@ -97,14 +97,14 @@ export class BaseResource {
   static getNgwPayload(
     resource: Type<BaseResource>,
     parent: number,
-    options: SyncOptions
+    options: SyncOptions,
   ): Record<string, any> | undefined {
     return undefined;
   }
 
   static async connect<T extends typeof BaseResource = typeof BaseResource>(
     resourceOptions: ResourceDefinition,
-    connectionOrOptions: Connection | ConnectionOptions
+    connectionOrOptions: Connection | ConnectionOptions,
   ): Promise<T> {
     const connection = Connection.create(connectionOrOptions);
     await connection.connect();
@@ -120,14 +120,14 @@ export class BaseResource {
 
   static sync(
     options: SyncOptions,
-    connectionOrOptions: Connection | ConnectionOptions
+    connectionOrOptions: Connection | ConnectionOptions,
   ): void {
     console.log('upload');
   }
 
   static toTypescript(opt?: ToTypescriptOptions): ToTypescript {
     throw Error(
-      'TypeScript code generation is not implement for this resource'
+      'TypeScript code generation is not implement for this resource',
     );
   }
 }

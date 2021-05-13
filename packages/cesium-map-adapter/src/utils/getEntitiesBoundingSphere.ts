@@ -4,7 +4,7 @@ const boundingSphereScratch = new BoundingSphere();
 
 export function getEntitiesBoundingSphere(
   viewer: Viewer,
-  entities: Entity[]
+  entities: Entity[],
 ): BoundingSphere | undefined {
   if (!defined(entities) || viewer.scene.mode === SceneMode.MORPHING) {
     return;
@@ -16,7 +16,7 @@ export function getEntitiesBoundingSphere(
     const state = viewer._dataSourceDisplay.getBoundingSphere(
       entities[i],
       false,
-      boundingSphereScratch
+      boundingSphereScratch,
     );
     if (state !== 0) {
       return;

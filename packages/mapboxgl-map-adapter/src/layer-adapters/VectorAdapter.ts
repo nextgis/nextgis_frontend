@@ -1,26 +1,21 @@
-import {
-  VectorAdapterLayerType,
-  VectorLayerAdapter,
-  VectorAdapterOptions,
-  DataLayerFilter,
-  FilterOptions,
-} from '@nextgis/webmap';
+import { isPaint, isIcon } from '@nextgis/paint';
+import { checkIfPropertyFilter } from '@nextgis/properties-filter';
 
+<<<<<<< HEAD
 import { Paint, IconPaint, isPaint, isIcon } from '@nextgis/paint';
+=======
+import { getImage } from '../util/imageIcons';
+import { typeAliasForFilter, allowedByType } from '../util/geomType';
+import { BaseAdapter } from './BaseAdapter';
+>>>>>>> f0a1491a471ccfa2538c48c1b307d6d5fa3d713c
 
-import {
-  checkIfPropertyFilter,
-  PropertiesFilter,
-  Operations,
-  PropertyFilter,
-} from '@nextgis/properties-filter';
-import {
+import type {
   Feature as F,
   GeometryObject,
   Geometry,
   GeoJsonProperties,
 } from 'geojson';
-import {
+import type {
   Map,
   MapLayerMouseEvent,
   AnySourceData,
@@ -28,11 +23,20 @@ import {
   AnyLayer,
   Layer,
 } from 'mapbox-gl';
-
-import { getImage } from '../util/imageIcons';
-import { TLayer } from '../MapboxglMapAdapter';
-import { BaseAdapter } from './BaseAdapter';
-import { typeAliasForFilter, allowedByType } from '../util/geomType';
+import type { Paint, IconPaint } from '@nextgis/paint';
+import type {
+  VectorAdapterLayerType,
+  VectorLayerAdapter,
+  VectorAdapterOptions,
+  DataLayerFilter,
+  FilterOptions,
+} from '@nextgis/webmap';
+import type { TLayer } from '../MapboxglMapAdapter';
+import type {
+  PropertiesFilter,
+  Operations,
+  PropertyFilter,
+} from '@nextgis/properties-filter';
 
 export const operationsAliases: { [key in Operations]: string } = {
   gt: '>',
@@ -158,7 +162,7 @@ export abstract class VectorAdapter<
               selectionLayer,
               type,
               [geomFilter, ['in', this.featureIdName, '']],
-              this.options.selectedLayout
+              this.options.selectedLayout,
             );
             this.layer.push(selectionLayer);
           }
@@ -223,7 +227,7 @@ export abstract class VectorAdapter<
   }
 
   _onLayerClick(
-    e: MapLayerMouseEvent
+    e: MapLayerMouseEvent,
   ): Feature<Geometry, GeoJsonProperties> | undefined {
     e.preventDefault();
     // not work correct
@@ -290,7 +294,7 @@ export abstract class VectorAdapter<
     name: string,
     type: VectorAdapterLayerType,
     filter?: any[],
-    layout?: AnyLayout
+    layout?: AnyLayout,
   ): Promise<void> {
     const { minZoom, maxZoom } = this.options;
     let mType: MapboxLayerType | undefined;
@@ -340,7 +344,7 @@ export abstract class VectorAdapter<
   }
 
   protected async _updateLayerPaint(
-    type: VectorAdapterLayerType
+    type: VectorAdapterLayerType,
   ): Promise<void> {
     const layerName = this._getLayerNameFromType(type);
 
@@ -387,7 +391,7 @@ export abstract class VectorAdapter<
   }
 
   protected _getSelectionLayerNameFromType(
-    type: VectorAdapterLayerType
+    type: VectorAdapterLayerType,
   ): string {
     return type + '-' + this._selectionName;
   }
@@ -395,7 +399,7 @@ export abstract class VectorAdapter<
   protected async _createPaintForType(
     paint: Paint,
     type: VectorAdapterLayerType,
-    name?: string
+    name?: string,
   ): Promise<any> {
     if (isPaint(paint)) {
       const mapboxPaint: any = {};
@@ -472,7 +476,7 @@ export abstract class VectorAdapter<
 
   protected _selectFeature(
     feature: Feature | Feature[],
-    opt?: { silent: boolean }
+    opt?: { silent: boolean },
   ): Feature[] {
     const features = Array.isArray(feature) ? feature : [feature];
     this.select([
@@ -480,7 +484,7 @@ export abstract class VectorAdapter<
         this.featureIdName,
         'in',
         features.map(
-          (x) => (x.properties && x.properties[this.featureIdName]) || x.id
+          (x) => (x.properties && x.properties[this.featureIdName]) || x.id,
         ),
       ],
     ]);
@@ -489,7 +493,7 @@ export abstract class VectorAdapter<
 
   protected _unselectFeature(
     feature: Feature | Feature[],
-    opt?: { silent: boolean }
+    opt?: { silent: boolean },
   ): void {
     // ignore
   }
@@ -546,7 +550,7 @@ export abstract class VectorAdapter<
             if (selectProperties) {
               const selectFilters = this._convertToMapboxFilter(
                 selectProperties,
-                true
+                true,
               );
               selectFilters.forEach((x) => filters_.push(x));
             } else if (this._selectedFeatureIds) {
@@ -568,7 +572,7 @@ export abstract class VectorAdapter<
 
   protected _convertToMapboxFilter(
     filters: PropertiesFilter,
-    reverse = false
+    reverse = false,
   ): (any[] | 'all' | 'any' | undefined)[] {
     const _operationsAliases = reverse ? reversOperations : operationsAliases;
     const filter = filters.map((x) => {

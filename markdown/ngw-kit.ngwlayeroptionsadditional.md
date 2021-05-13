@@ -17,11 +17,12 @@ export interface NgwLayerOptionsAdditional<T extends NgwLayerAdapterType = NgwLa
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [adapter](./ngw-kit.ngwlayeroptionsadditional.adapter.md) | T |  |
-|  [adapterOptions](./ngw-kit.ngwlayeroptionsadditional.adapteroptions.md) | LayerAdaptersOptions\[T\] |  |
-|  [fit](./ngw-kit.ngwlayeroptionsadditional.fit.md) | boolean |  |
-|  [headers](./ngw-kit.ngwlayeroptionsadditional.headers.md) | any |  |
-|  [id](./ngw-kit.ngwlayeroptionsadditional.id.md) | string |  |
-|  [meta](./ngw-kit.ngwlayeroptionsadditional.meta.md) | P |  |
-|  [simplification](./ngw-kit.ngwlayeroptionsadditional.simplification.md) | number |  |
+|  [adapter?](./ngw-kit.ngwlayeroptionsadditional.adapter.md) | T | <i>(Optional)</i> |
+|  [adapterOptions?](./ngw-kit.ngwlayeroptionsadditional.adapteroptions.md) | LayerAdaptersOptions\[T\] | <i>(Optional)</i> |
+|  [fit?](./ngw-kit.ngwlayeroptionsadditional.fit.md) | boolean | <i>(Optional)</i> |
+|  [headers?](./ngw-kit.ngwlayeroptionsadditional.headers.md) | any | <i>(Optional)</i> |
+|  [id?](./ngw-kit.ngwlayeroptionsadditional.id.md) | string | <i>(Optional)</i> |
+|  [meta?](./ngw-kit.ngwlayeroptionsadditional.meta.md) | P | <i>(Optional)</i> |
+|  [simplification?](./ngw-kit.ngwlayeroptionsadditional.simplification.md) | number | <i>(Optional)</i> |
+|  [tileNoData?](./ngw-kit.ngwlayeroptionsadditional.tilenodata.md) | [TileNoData](./ngw-kit.tilenodata.md) | <i>(Optional)</i> Parameter for <code>TILE</code> and <code>IMAGE</code> adapters to say NGW what will be returned if there is no data to render. |
 

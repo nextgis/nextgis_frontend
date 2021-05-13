@@ -48,7 +48,7 @@ export class ImageAdapter
           paint: {},
         },
         // @ts-ignore
-        options.before
+        options.before,
       );
       this.layer = [this._layerId];
       return this.layer;

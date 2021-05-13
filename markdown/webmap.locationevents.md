@@ -15,6 +15,6 @@ export interface LocationEvents
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [locationerror](./webmap.locationevents.locationerror.md) | () =&gt; void |  |
+|  [locationerror?](./webmap.locationevents.locationerror.md) | () =&gt; void | <i>(Optional)</i> |
 |  [locationfound](./webmap.locationevents.locationfound.md) | (e: [LocationEvent](./webmap.locationevent.md)<!-- -->) =&gt; void |  |
 

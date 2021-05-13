@@ -65,7 +65,7 @@ promise.cancel();
 
 |  Constructor | Modifiers | Description |
 |  --- | --- | --- |
-|  [(constructor)(executor)](./cancelable-promise.cancelablepromise._constructor_.md) |  | Constructs a new instance of the <code>CancelablePromise</code> class |
+|  [(constructor)(executor, timeout)](./cancelable-promise.cancelablepromise._constructor_.md) |  | Constructs a new instance of the <code>CancelablePromise</code> class |
 
 ## Properties
 
@@ -74,6 +74,8 @@ promise.cancel();
 |  [\[Symbol.toStringTag\]](./cancelable-promise.cancelablepromise._symbol.tostringtag_.md) |  | string |  |
 |  [CancelError](./cancelable-promise.cancelablepromise.cancelerror.md) | <code>static</code> | typeof CancelError |  |
 |  [id](./cancelable-promise.cancelablepromise.id.md) |  | number |  |
+|  [PromiseControl](./cancelable-promise.cancelablepromise.promisecontrol.md) | <code>static</code> | typeof PromiseControl |  |
+|  [TimeoutError](./cancelable-promise.cancelablepromise.timeouterror.md) | <code>static</code> | typeof TimeoutError |  |
 
 ## Methods
 
@@ -83,6 +85,7 @@ promise.cancel();
 |  [attach(p)](./cancelable-promise.cancelablepromise.attach.md) |  |  |
 |  [cancel()](./cancelable-promise.cancelablepromise.cancel.md) |  |  |
 |  [catch(onrejected)](./cancelable-promise.cancelablepromise.catch.md) |  |  |
+|  [createControl(opt)](./cancelable-promise.cancelablepromise.createcontrol.md) | <code>static</code> |  |
 |  [finally(onfinally)](./cancelable-promise.cancelablepromise.finally.md) |  |  |
 |  [reject(value)](./cancelable-promise.cancelablepromise.reject.md) | <code>static</code> |  |
 |  [resolve(value)](./cancelable-promise.cancelablepromise.resolve.md) | <code>static</code> |  |

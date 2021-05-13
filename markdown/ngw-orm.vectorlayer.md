@@ -18,7 +18,7 @@ export declare class VectorLayer<G extends Geometry = Geometry> extends BaseReso
 |  [coordinates](./ngw-orm.vectorlayer.coordinates.md) |  | G\['coordinates'\] |  |
 |  [geom](./ngw-orm.vectorlayer.geom.md) |  | G |  |
 |  [geometryType](./ngw-orm.vectorlayer.geometrytype.md) | <code>static</code> | [GeometryType](./ngw-connector.geometrytype.md) |  |
-|  [id](./ngw-orm.vectorlayer.id.md) |  | number |  |
+|  [id?](./ngw-orm.vectorlayer.id.md) |  | number | <i>(Optional)</i> |
 
 ## Methods
 
@@ -37,4 +37,5 @@ export declare class VectorLayer<G extends Geometry = Geometry> extends BaseReso
 |  [toGeoJson()](./ngw-orm.vectorlayer.togeojson.md) |  |  |
 |  [toJSON()](./ngw-orm.vectorlayer.tojson.md) |  |  |
 |  [toTypescript(opt)](./ngw-orm.vectorlayer.totypescript.md) | <code>static</code> |  |
+|  [validate()](./ngw-orm.vectorlayer.validate.md) | <code>static</code> |  |
 

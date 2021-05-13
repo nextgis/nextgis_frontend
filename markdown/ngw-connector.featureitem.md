@@ -7,14 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-export interface FeatureItem<F = FeatureLayerFields, G extends GeometryObject | string = GeometryObject> 
+export interface FeatureItem<F = FeatureLayerFields, G extends Geometry | string = Geometry> 
 ```
 
 ## Properties
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [extensions](./ngw-connector.featureitem.extensions.md) | { description?: string; attachment?: [FeatureItemAttachment](./ngw-connector.featureitemattachment.md)<!-- -->\[\]; } |  |
+|  [extensions](./ngw-connector.featureitem.extensions.md) | [FeatureItemExtensions](./ngw-connector.featureitemextensions.md) |  |
 |  [fields](./ngw-connector.featureitem.fields.md) | F |  |
 |  [geom](./ngw-connector.featureitem.geom.md) | G |  |
 |  [id](./ngw-connector.featureitem.id.md) | number |  |

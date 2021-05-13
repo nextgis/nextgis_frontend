@@ -1,11 +1,10 @@
-import {
+import type {
   Expression,
   Paint,
   PropertiesPaint,
   VectorAdapterLayerPaint,
   GeometryPaint,
   GetPaintCallback,
-  IconOptions,
   IconPaint,
 } from './interfaces';
 
@@ -47,6 +46,6 @@ export function isPaintCallback(paint: Paint): paint is GetPaintCallback {
   return false;
 }
 
-export function isIcon(paint: IconOptions): paint is IconPaint {
+export function isIcon(paint: IconPaint): paint is IconPaint {
   return paint.type === 'icon' || 'html' in paint;
 }

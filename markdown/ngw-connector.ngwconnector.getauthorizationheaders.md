@@ -4,6 +4,8 @@
 
 ## NgwConnector.getAuthorizationHeaders() method
 
+Obtaining the required Headers for authentication of requests in the NGW.
+
 <b>Signature:</b>
 
 ```typescript

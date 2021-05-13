@@ -1,4 +1,4 @@
-import { LngLatArray, LatLng } from './interfaces';
+import type { LngLatArray, LatLng } from './interfaces';
 
 export function latLngToLngLatArray(latLng: LatLng): LngLatArray {
   return [latLng.lng, latLng.lat];

@@ -17,25 +17,25 @@ export interface VectorLayerAdapter<M = any, L = any, O extends VectorAdapterOpt
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [selected](./webmap.vectorlayeradapter.selected.md) | boolean | True if there are selected features in the layer |
-|  [source](./webmap.vectorlayeradapter.source.md) | unknown | Experimental option, only for MVT. Points to a data source instead of loading data into a layer. |
+|  [selected?](./webmap.vectorlayeradapter.selected.md) | boolean | <i>(Optional)</i> True if there are selected features in the layer |
+|  [source?](./webmap.vectorlayeradapter.source.md) | unknown | <i>(Optional)</i> Experimental option, only for MVT. Points to a data source instead of loading data into a layer. |
 
 ## Methods
 
 |  Method | Description |
 |  --- | --- |
-|  [addData(geojson)](./webmap.vectorlayeradapter.adddata.md) | Add GeoJson data to layer. |
-|  [clearLayer(cb)](./webmap.vectorlayeradapter.clearlayer.md) | Remove layer data. |
-|  [closePopup(findFeatureCb)](./webmap.vectorlayeradapter.closepopup.md) |  |
-|  [filter(cb)](./webmap.vectorlayeradapter.filter.md) | Ability to filter a layer with a callback function. It is necessary for the adapter to provide access to the layer objects before output to the map. It is not possible to apply such a filter to vector tiles and data on the remote server. So, where possible, use the [VectorLayerAdapter.propertiesFilter()](./webmap.vectorlayeradapter.propertiesfilter.md)<!-- -->. |
-|  [getFiltered()](./webmap.vectorlayeradapter.getfiltered.md) | Get the filtered objects of the vector layer. |
-|  [getLayers()](./webmap.vectorlayeradapter.getlayers.md) | Allows to get all vector objects of the layer. Does not work for vector tiles. |
-|  [getSelected()](./webmap.vectorlayeradapter.getselected.md) | Get the selected objects of the vector layer. |
-|  [openPopup(findFeatureCb, options)](./webmap.vectorlayeradapter.openpopup.md) |  |
-|  [propertiesFilter(filters, options)](./webmap.vectorlayeradapter.propertiesfilter.md) | The way to filter layer objects through serializable expressions. To clear the filter, pass <code>null</code> or <code>undefined</code> as the second parameter. |
-|  [removeFilter()](./webmap.vectorlayeradapter.removefilter.md) | Cancel the filter, return all objects to the map. |
-|  [select(findFeatureCb)](./webmap.vectorlayeradapter.select.md) | Method for selecting objects on the map. The <code>selectedPaint</code> option will be applied to the selected objects. |
-|  [setData(geojson)](./webmap.vectorlayeradapter.setdata.md) | Update layer with new geojson. |
-|  [unselect(findFeatureCb)](./webmap.vectorlayeradapter.unselect.md) | Deselect all objects in the vector layer. |
-|  [updateTooltip(layerDef)](./webmap.vectorlayeradapter.updatetooltip.md) |  |
+|  [addData(geojson)?](./webmap.vectorlayeradapter.adddata.md) | <i>(Optional)</i> Add GeoJson data to layer. |
+|  [clearLayer(cb)?](./webmap.vectorlayeradapter.clearlayer.md) | <i>(Optional)</i> Remove layer data. |
+|  [closePopup(findFeatureCb)?](./webmap.vectorlayeradapter.closepopup.md) | <i>(Optional)</i> |
+|  [filter(cb)?](./webmap.vectorlayeradapter.filter.md) | <i>(Optional)</i> Ability to filter a layer with a callback function. It is necessary for the adapter to provide access to the layer objects before output to the map. It is not possible to apply such a filter to vector tiles and data on the remote server. So, where possible, use the [VectorLayerAdapter.propertiesFilter()](./webmap.vectorlayeradapter.propertiesfilter.md)<!-- -->. |
+|  [getFiltered()?](./webmap.vectorlayeradapter.getfiltered.md) | <i>(Optional)</i> Get the filtered objects of the vector layer. |
+|  [getLayers()?](./webmap.vectorlayeradapter.getlayers.md) | <i>(Optional)</i> Allows to get all vector objects of the layer. Does not work for vector tiles. |
+|  [getSelected()?](./webmap.vectorlayeradapter.getselected.md) | <i>(Optional)</i> Get the selected objects of the vector layer. |
+|  [openPopup(findFeatureCb, options)?](./webmap.vectorlayeradapter.openpopup.md) | <i>(Optional)</i> |
+|  [propertiesFilter(filters, options)?](./webmap.vectorlayeradapter.propertiesfilter.md) | <i>(Optional)</i> The way to filter layer objects through serializable expressions. To clear the filter, pass <code>null</code> or <code>undefined</code> as the second parameter. |
+|  [removeFilter()?](./webmap.vectorlayeradapter.removefilter.md) | <i>(Optional)</i> Cancel the filter, return all objects to the map. |
+|  [select(findFeatureCb)?](./webmap.vectorlayeradapter.select.md) | <i>(Optional)</i> Method for selecting objects on the map. The <code>selectedPaint</code> option will be applied to the selected objects. |
+|  [setData(geojson)?](./webmap.vectorlayeradapter.setdata.md) | <i>(Optional)</i> Update layer with new geojson. |
+|  [unselect(findFeatureCb)?](./webmap.vectorlayeradapter.unselect.md) | <i>(Optional)</i> Deselect all objects in the vector layer. |
+|  [updateTooltip(layerDef)?](./webmap.vectorlayeradapter.updatetooltip.md) | <i>(Optional)</i> |
 

@@ -15,7 +15,7 @@ export function fetchNgwLayerItems<
   G extends Geometry = Geometry,
   P extends { [field: string]: any } = { [field: string]: any }
 >(
-  options: GetNgwLayerItemsOptions & NgwFeatureRequestOptions<P>
+  options: GetNgwLayerItemsOptions & NgwFeatureRequestOptions<P>,
 ): CancelablePromise<FeatureItem<P, G>[]> {
   const filters = options.filters;
   if (filters) {

@@ -4,6 +4,11 @@
 
 ## NgwMap.getIdentifyGeoJson() method
 
+> Warning: This API is now obsolete.
+> 
+> use  instead
+> 
+
 <b>Signature:</b>
 
 ```typescript

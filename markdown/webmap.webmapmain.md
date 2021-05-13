@@ -8,14 +8,14 @@
 <b>Signature:</b>
 
 ```typescript
-export declare class WebMapMain<M = any, L = any, C = any, E extends WebMapEvents = WebMapEvents> 
+export declare class WebMapMain<M = any, E extends WebMapEvents = WebMapEvents, O extends MapOptions = MapOptions> 
 ```
 
 ## Constructors
 
 |  Constructor | Modifiers | Description |
 |  --- | --- | --- |
-|  [(constructor)(appOptions)](./webmap.webmapmain._constructor_.md) |  | Constructs a new instance of the <code>WebMapMain</code> class |
+|  [(constructor)(mapOptions)](./webmap.webmapmain._constructor_.md) |  | Constructs a new instance of the <code>WebMapMain</code> class |
 
 ## Properties
 
@@ -23,7 +23,6 @@ export declare class WebMapMain<M = any, L = any, C = any, E extends WebMapEvent
 |  --- | --- | --- | --- |
 |  [\_initMapState](./webmap.webmapmain._initmapstate.md) |  | Record&lt;string, any&gt; | From runtime params |
 |  [\_starterKits](./webmap.webmapmain._starterkits.md) |  | [StarterKit](./webmap.starterkit.md)<!-- -->\[\] |  |
-|  [decorators](./webmap.webmapmain.decorators.md) | <code>static</code> | { onLoad: typeof onLoad; } |  |
 |  [emitter](./webmap.webmapmain.emitter.md) |  | StrictEventEmitter&lt;EventEmitter, [WebMapEvents](./webmap.webmapevents.md)<!-- -->&gt; |  |
 |  [getPaintFunctions](./webmap.webmapmain.getpaintfunctions.md) |  | { \[name: string\]: [GetPaintFunction](./paint.getpaintfunction.md)<!-- -->; } |  |
 |  [getPaintFunctions](./webmap.webmapmain.getpaintfunctions.md) | <code>static</code> | { \[name: string\]: [GetPaintFunction](./paint.getpaintfunction.md)<!-- -->; } |  |
@@ -32,9 +31,8 @@ export declare class WebMapMain<M = any, L = any, C = any, E extends WebMapEvent
 |  [keys](./webmap.webmapmain.keys.md) | <code>static</code> | Keys |  |
 |  [mapAdapter](./webmap.webmapmain.mapadapter.md) |  | [MapAdapter](./webmap.mapadapter.md)<!-- -->&lt;M&gt; |  |
 |  [mapState](./webmap.webmapmain.mapstate.md) |  | [Type](./utils.type.md)<!-- -->&lt;StateItem&gt;\[\] |  |
-|  [options](./webmap.webmapmain.options.md) |  | [MapOptions](./webmap.mapoptions.md) |  |
+|  [options](./webmap.webmapmain.options.md) |  | O |  |
 |  [runtimeParams](./webmap.webmapmain.runtimeparams.md) |  | [RuntimeParams](./webmap.runtimeparams.md)<!-- -->\[\] |  |
-|  [utils](./webmap.webmapmain.utils.md) | <code>static</code> | { detectGeometryType: typeof detectGeometryType; findMostFrequentGeomType: typeof findMostFrequentGeomType; updateGeoJsonAdapterOptions: typeof updateGeoJsonAdapterOptions; propertiesFilter: typeof propertiesFilter; createToggleControl: typeof createToggleControl; getBoundsPolygon: typeof getBoundsPolygon; } |  |
 
 ## Methods
 
@@ -43,7 +41,7 @@ export declare class WebMapMain<M = any, L = any, C = any, E extends WebMapEvent
 |  [\_addLayerProviders()](./webmap.webmapmain._addlayerproviders.md) |  |  |
 |  [\_emitStatusEvent(eventName, data)](./webmap.webmapmain._emitstatusevent.md) |  |  |
 |  [\_onLoadSync()](./webmap.webmapmain._onloadsync.md) |  |  |
-|  [create(options)](./webmap.webmapmain.create.md) |  | Manual way to create a map. On default |
+|  [create()](./webmap.webmapmain.create.md) |  | Manual way to create a map (If [MapOptions.create](./webmap.mapoptions.create.md) is <code>false</code>). |
 |  [destroy()](./webmap.webmapmain.destroy.md) |  | Destroys WebMap, MapAdapter, clears all layers and turn off all event listeners |
 |  [fitBounds(bounds, options)](./webmap.webmapmain.fitbounds.md) |  | Sets a map view that contains the given geographical bounds. |
 |  [getBounds()](./webmap.webmapmain.getbounds.md) |  |  |

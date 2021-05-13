@@ -8,23 +8,31 @@
 <b>Signature:</b>
 
 ```typescript
-export interface MapOptions 
+export interface MapOptions<C = any> 
 ```
 
 ## Properties
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [bounds](./webmap.mapoptions.bounds.md) | [LngLatBoundsArray](./utils.lnglatboundsarray.md) | Initial extent of the map, array of degrees in \[\_west\_, \_south\_, \_east\_, \_north\_\] order. |
-|  [center](./webmap.mapoptions.center.md) | [LngLatArray](./utils.lnglatarray.md) | Initial position of the map, array of two degrees \[longitude, latitude\]. \[LngLatArray\](webmap-api\#LngLatArray) |
-|  [fitOptions](./webmap.mapoptions.fitoptions.md) | [FitOptions](./webmap.fitoptions.md) | options to specify the initial position of the map |
-|  [mapAdapterOptions](./webmap.mapoptions.mapadapteroptions.md) | Record&lt;string, any&gt; | special settings for the selected map adapter |
-|  [maxZoom](./webmap.mapoptions.maxzoom.md) | number | The maximum zoom level of the map (0-24). |
-|  [minZoom](./webmap.mapoptions.minzoom.md) | number | The minimum zoom level of the map (0-24). |
-|  [onBeforeAddLayer](./webmap.mapoptions.onbeforeaddlayer.md) | [OnBeforeLayerAdd](./webmap.onbeforelayeradd.md) | The callback function is calling before adding each layer |
-|  [paint](./webmap.mapoptions.paint.md) | [GeometryPaint](./paint.geometrypaint.md) |  |
-|  [selectedPaint](./webmap.mapoptions.selectedpaint.md) | [GeometryPaint](./paint.geometrypaint.md) |  |
-|  [target](./webmap.mapoptions.target.md) | string \| HTMLElement | The HTML element in which NgwMap will render the map, or the element's string id. The specified element must have no children. |
-|  [view](./webmap.mapoptions.view.md) | '2D' \| '3D' \| '2.5D' |  |
-|  [zoom](./webmap.mapoptions.zoom.md) | number | The initial zoom level of the map (0-24). |
+|  [bounds?](./webmap.mapoptions.bounds.md) | [LngLatBoundsArray](./utils.lnglatboundsarray.md) | <i>(Optional)</i> Initial extent of the map, array of degrees in \[\_west\_, \_south\_, \_east\_, \_north\_\] order. |
+|  [center?](./webmap.mapoptions.center.md) | [LngLatArray](./utils.lnglatarray.md) | <i>(Optional)</i> Initial position of the map, array of two degrees \[longitude, latitude\]. \[LngLatArray\](webmap-api\#LngLatArray) |
+|  [controls?](./webmap.mapoptions.controls.md) | Array&lt;keyof [MapControls](./webmap.mapcontrols.md) \| C&gt; | <i>(Optional)</i> List of controls that will be initialized when creating a map instance. It can be defined as a string, then points to the corresponding entry in the \[controlAdapters\](webmap-api\#MapAdapter). |
+|  [controlsOptions?](./webmap.mapoptions.controlsoptions.md) | [ControlsOptions](./webmap.controlsoptions.md) | <i>(Optional)</i> Set options for those controls that are specified by name. |
+|  [create?](./webmap.mapoptions.create.md) | boolean | <i>(Optional)</i> Аutomatic creation of a map from the constructor |
+|  [fitOptions?](./webmap.mapoptions.fitoptions.md) | [FitOptions](./webmap.fitoptions.md) | <i>(Optional)</i> options to specify the initial position of the map |
+|  [mapAdapter?](./webmap.mapoptions.mapadapter.md) | [MapAdapter](./webmap.mapadapter.md) | <i>(Optional)</i> The main initialization property of WebMap. Determines the way of interaction with the selected GIS framework. Available: \[Leaflet\](leaflet-map-adapter); \[Openlayers\](ol-map-adapter); \[MapboxGL\](mapboxgl-map-adapter) |
+|  [mapAdapterOptions?](./webmap.mapoptions.mapadapteroptions.md) | Record&lt;string, any&gt; | <i>(Optional)</i> special settings for the selected map adapter |
+|  [maxBounds?](./webmap.mapoptions.maxbounds.md) | [LngLatBoundsArray](./utils.lnglatboundsarray.md) | <i>(Optional)</i> |
+|  [maxZoom?](./webmap.mapoptions.maxzoom.md) | number | <i>(Optional)</i> The maximum zoom level of the map (0-24). |
+|  [minZoom?](./webmap.mapoptions.minzoom.md) | number | <i>(Optional)</i> The minimum zoom level of the map (0-24). |
+|  [onBeforeAddLayer?](./webmap.mapoptions.onbeforeaddlayer.md) | [OnBeforeLayerAdd](./webmap.onbeforelayeradd.md) | <i>(Optional)</i> The callback function is calling before adding each layer |
+|  [paint?](./webmap.mapoptions.paint.md) | [GeometryPaint](./paint.geometrypaint.md) | <i>(Optional)</i> |
+|  [runtimeParams?](./webmap.mapoptions.runtimeparams.md) | [RuntimeParams](./webmap.runtimeparams.md)<!-- -->\[\] | <i>(Optional)</i> A way to save the state of a map to external services |
+|  [selectedPaint?](./webmap.mapoptions.selectedpaint.md) | [GeometryPaint](./paint.geometrypaint.md) | <i>(Optional)</i> |
+|  [starterKits?](./webmap.mapoptions.starterkits.md) | [StarterKit](./webmap.starterkit.md)<!-- -->\[\] | <i>(Optional)</i> One way to extend WebMap functionality with the help of kits. |
+|  [target?](./webmap.mapoptions.target.md) | string \| HTMLElement | <i>(Optional)</i> The HTML element in which NgwMap will render the map, or the element's string id. The specified element must have no children. |
+|  [tileJson?](./webmap.mapoptions.tilejson.md) | [TileJson](./utils.tilejson.md) | <i>(Optional)</i> |
+|  [view?](./webmap.mapoptions.view.md) | '2D' \| '3D' \| '2.5D' | <i>(Optional)</i> |
+|  [zoom?](./webmap.mapoptions.zoom.md) | number | <i>(Optional)</i> The initial zoom level of the map (0-24). |
 

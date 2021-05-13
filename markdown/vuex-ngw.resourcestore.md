@@ -17,13 +17,12 @@ export declare abstract class ResourceStore<P extends GeoJsonProperties = GeoJso
 |  --- | --- | --- | --- |
 |  [\_promises](./vuex-ngw.resourcestore._promises.md) |  | Record&lt;string, Promise&lt;any&gt;&gt; |  |
 |  [connector](./vuex-ngw.resourcestore.connector.md) |  | NgwConnector |  |
-|  [events](./vuex-ngw.resourcestore.events.md) |  | { onNewItem?: (opt: [PatchOptions](./vuex-ngw.patchoptions.md)<!-- -->&lt;G, P&gt;) =&gt; Promise&lt;void&gt;; onBeforeDelete?: (opt: { fid: number; }) =&gt; void; } |  |
 |  [fields](./vuex-ngw.resourcestore.fields.md) |  | [FeatureLayerField](./ngw-connector.featurelayerfield.md)<!-- -->\[\] |  |
 |  [foreignResources](./vuex-ngw.resourcestore.foreignresources.md) |  | { \[key in ResourceDef\]: [ForeignResource](./vuex-ngw.foreignresource.md)<!-- -->; } |  |
-|  [lookupTableResourceGroupId](./vuex-ngw.resourcestore.lookuptableresourcegroupid.md) |  | number \| string |  |
-|  [lookupTables](./vuex-ngw.resourcestore.lookuptables.md) |  | [LookupTables](./vuex-ngw.lookuptables.md) |  |
+|  [formatters](./vuex-ngw.resourcestore.formatters.md) |  | { date?: (date: string) =&gt; string; datetime?: (date: string) =&gt; string; } |  |
+|  [hooks](./vuex-ngw.resourcestore.hooks.md) |  | { onNewItem?: (opt: [PatchOptions](./vuex-ngw.patchoptions.md)<!-- -->&lt;G, P&gt;) =&gt; Promise&lt;void&gt;; onBeforeDelete?: (opt: { fid: number; }) =&gt; Promise&lt;void&gt;; onBeforePatch?: (data: Partial&lt;[FeatureItem](./ngw-connector.featureitem.md)<!-- -->&lt;P, Geometry&gt;&gt;\[\], opt: { id: number; }) =&gt; Promise&lt;void&gt;; delete?: (resourceId: number, featureId: number) =&gt; Promise&lt;void&gt;; } |  |
 |  [resource](./vuex-ngw.resourcestore.resource.md) |  | string |  |
-|  [resourceItem](./vuex-ngw.resourcestore.resourceitem.md) |  | [ResourceStoreItem](./ngw-connector.resourcestoreitem.md)<!-- -->&lt;P&gt;\[\] |  |
+|  [resourceItems](./vuex-ngw.resourcestore.resourceitems.md) |  | [ResourceStoreItem](./ngw-connector.resourcestoreitem.md)<!-- -->&lt;P&gt;\[\] |  |
 |  [resources](./vuex-ngw.resourcestore.resources.md) |  | { \[key in ResourceDef\]?: number; } |  |
 
 ## Methods
@@ -34,12 +33,10 @@ export declare abstract class ResourceStore<P extends GeoJsonProperties = GeoJso
 |  [getFields()](./vuex-ngw.resourcestore.getfields.md) |  |  |
 |  [getResources()](./vuex-ngw.resourcestore.getresources.md) |  |  |
 |  [getStore()](./vuex-ngw.resourcestore.getstore.md) |  |  |
-|  [loadLookupTables()](./vuex-ngw.resourcestore.loadlookuptables.md) |  |  |
 |  [patch(opt)](./vuex-ngw.resourcestore.patch.md) |  |  |
 |  [prepareFeatureToNgw(opt)](./vuex-ngw.resourcestore.preparefeaturetongw.md) |  |  |
 |  [SET\_STORE(store)](./vuex-ngw.resourcestore.set_store.md) |  |  |
 |  [UPDATE\_FIELDS(fields)](./vuex-ngw.resourcestore.update_fields.md) |  |  |
-|  [UPDATE\_LOOKUP\_TABLES(lookupTables)](./vuex-ngw.resourcestore.update_lookup_tables.md) |  |  |
 |  [UPDATE\_RESOURCES(resources)](./vuex-ngw.resourcestore.update_resources.md) |  |  |
 |  [updateStore(opt)](./vuex-ngw.resourcestore.updatestore.md) |  |  |
 

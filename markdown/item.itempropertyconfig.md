@@ -15,12 +15,12 @@ export interface ItemPropertyConfig<K extends keyof ItemPropertyTypes> extends I
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [handler](./item.itempropertyconfig.handler.md) | [Type](./item.type.md)<!-- -->&lt;[BaseProperty](./item.baseproperty.md)<!-- -->&lt;[ItemPropertyTypes](./item.itempropertytypes.md)<!-- -->\[K\]&gt;&gt; |  |
+|  [handler?](./item.itempropertyconfig.handler.md) | [Type](./item.type.md)<!-- -->&lt;[BaseProperty](./item.baseproperty.md)<!-- -->&lt;[ItemPropertyTypes](./item.itempropertytypes.md)<!-- -->\[K\]&gt;&gt; | <i>(Optional)</i> |
 
 ## Methods
 
 |  Method | Description |
 |  --- | --- |
-|  [getProperty()](./item.itempropertyconfig.getproperty.md) |  |
-|  [onSet(value, options)](./item.itempropertyconfig.onset.md) |  |
+|  [getProperty()?](./item.itempropertyconfig.getproperty.md) | <i>(Optional)</i> |
+|  [onSet(value, options)?](./item.itempropertyconfig.onset.md) | <i>(Optional)</i> |
 

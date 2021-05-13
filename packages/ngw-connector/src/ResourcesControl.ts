@@ -1,17 +1,18 @@
 import CancelablePromise from '@nextgis/cancelable-promise';
-import { DeepPartial, defined } from '@nextgis/utils';
-
-import { ResourceItem, Resource } from './types/ResourceItem';
-import {
-  ResourceDefinition,
-} from './interfaces';
+import { defined } from '@nextgis/utils';
 
 import { resourceToQuery } from './utils/resourceToQuery';
 import { resourceCompare } from './utils/resourceCompare';
 import { ResourceNotFoundError } from './errors/ResourceNotFoundError';
 
 import { isObject } from './utils/isObject';
-import { NgwConnector } from './NgwConnector';
+
+import type { DeepPartial } from '@nextgis/utils';
+import type { NgwConnector } from './NgwConnector';
+import type { ResourceItem, Resource } from './types/ResourceItem';
+import type { RequestOptions, ResourceDefinition } from './interfaces';
+
+const promiseControl = new CancelablePromise.PromiseControl();
 
 export class ResourcesControl {
   private _resourcesCache: Record<number, ResourceItem> = {};
@@ -30,20 +31,23 @@ export class ResourcesControl {
    * Fetching resource would be cached to speed up next call
    */
   getOne(
-    resource: ResourceDefinition | DeepPartial<Resource>
+    resource: ResourceDefinition | DeepPartial<Resource>,
+    requestOptions?: RequestOptions,
   ): CancelablePromise<ResourceItem | undefined> {
-    if (typeof resource === 'string') {
-      return this._fetchResourceBy({ keyname: resource });
-    } else if (typeof resource === 'number') {
-      return this._fetchResourceById(resource);
-    } else if (isObject(resource)) {
-      return this._fetchResourceBy(resource);
-    }
-    return CancelablePromise.resolve(undefined);
+    return promiseControl.waitFunc(() => {
+      if (typeof resource === 'string') {
+        return this._fetchResourceBy({ keyname: resource }, requestOptions);
+      } else if (typeof resource === 'number') {
+        return this._fetchResourceById(resource, requestOptions);
+      } else if (isObject(resource)) {
+        return this._fetchResourceBy(resource, requestOptions);
+      }
+      return CancelablePromise.resolve(undefined);
+    }, String(resource));
   }
 
   getOneOrFail(
-    resource: ResourceDefinition | DeepPartial<Resource>
+    resource: ResourceDefinition | DeepPartial<Resource>,
   ): CancelablePromise<ResourceItem> {
     return this.getOne(resource).then((res) => {
       if (res) {
@@ -64,7 +68,7 @@ export class ResourcesControl {
    * if the resource is specified through a keyname or other parameters.
    */
   getId(
-    resource: ResourceDefinition | DeepPartial<Resource>
+    resource: ResourceDefinition | DeepPartial<Resource>,
   ): CancelablePromise<number | undefined> {
     if (typeof resource === 'number') {
       return CancelablePromise.resolve(resource);
@@ -87,7 +91,7 @@ export class ResourcesControl {
    * To not make one more checks if the resource is definitely exists
    */
   getIdOrFail(
-    resource: ResourceDefinition | DeepPartial<Resource>
+    resource: ResourceDefinition | DeepPartial<Resource>,
   ): CancelablePromise<number> {
     return this.getId(resource).then((resp) => {
       if (resp === undefined) {
@@ -97,7 +101,10 @@ export class ResourcesControl {
     });
   }
 
-  getMany(resource: DeepPartial<Resource>): CancelablePromise<ResourceItem[]> {
+  getMany(
+    resource: DeepPartial<Resource>,
+    requestOptions?: RequestOptions,
+  ): CancelablePromise<ResourceItem[]> {
     let items: ResourceItem[] = [];
     if (resource.id) {
       const existId = this._resourcesCache[resource.id];
@@ -115,7 +122,7 @@ export class ResourcesControl {
         Object.assign(query, resourceToQuery(resource));
       }
       return this.connector
-        .get('resource.search', null, {
+        .get('resource.search', requestOptions, {
           serialization: 'full',
           ...query,
         })
@@ -139,7 +146,7 @@ export class ResourcesControl {
           keyname?: string;
           resourceId?: number;
           resource?: string | number;
-        }
+        },
   ): CancelablePromise<ResourceItem[]> {
     let opt: {
       keyname?: string;
@@ -155,7 +162,7 @@ export class ResourcesControl {
     }
     let parent = opt.resourceId;
     let keyname = opt.keyname;
-    if (!opt.keyname && !opt.resourceId && !opt.resource) {
+    if (!opt.keyname && !defined(opt.resourceId) && !opt.resource) {
       throw new Error('No keyname or resourceId is set');
     }
     if (opt.resource) {
@@ -170,7 +177,7 @@ export class ResourcesControl {
         parent,
       });
     if (keyname) {
-      return this._fetchResourceBy({keyname}).then((item) => {
+      return this._fetchResourceBy({ keyname }).then((item) => {
         if (item) {
           parent = item.resource.id;
         }
@@ -182,7 +189,7 @@ export class ResourcesControl {
 
   update(
     resource: ResourceDefinition,
-    data: DeepPartial<ResourceItem>
+    data: DeepPartial<ResourceItem>,
   ): CancelablePromise<ResourceItem | undefined> {
     return this.getId(resource).then((id) => {
       if (id !== undefined) {
@@ -211,11 +218,14 @@ export class ResourcesControl {
     });
   }
 
-  private _fetchResourceById(id: number): CancelablePromise<ResourceItem | undefined> {
+  private _fetchResourceById(
+    id: number,
+    requestOptions?: RequestOptions,
+  ): CancelablePromise<ResourceItem | undefined> {
     const item: ResourceItem = this._resourcesCache[id];
     if (!item) {
       return this.connector
-        .get('resource.item', null, { id })
+        .get('resource.item', requestOptions, { id })
         .then((item) => {
           if (item) {
             this._resourcesCache[id] = item;
@@ -233,15 +243,16 @@ export class ResourcesControl {
   }
 
   private _fetchResourceBy(
-    resource: DeepPartial<Resource>
+    resource: DeepPartial<Resource>,
+    requestOptions?: RequestOptions,
   ): CancelablePromise<ResourceItem | undefined> {
-    return this.getMany(resource).then((resources) => {
+    return this.getMany(resource, requestOptions).then((resources) => {
       return resources[0];
     });
   }
 
   private _resourceCacheFilter(
-    resource: DeepPartial<Resource>
+    resource: DeepPartial<Resource>,
   ): ResourceItem[] {
     const items: ResourceItem[] = Object.values(this._resourcesCache).filter(
       (x) => {
@@ -253,7 +264,7 @@ export class ResourcesControl {
           return resource.id === x.resource.id;
         }
         return resourceCompare(resource, x.resource);
-      }
+      },
     );
     return items;
   }

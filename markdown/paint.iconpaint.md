@@ -7,18 +7,18 @@
 <b>Signature:</b>
 
 ```typescript
-export interface IconPaint extends BaesePaintTypes 
+export interface IconPaint extends BasePaintTypes 
 ```
-<b>Extends:</b> BaesePaintTypes
+<b>Extends:</b> BasePaintTypes
 
 ## Properties
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [className](./paint.iconpaint.classname.md) | string |  |
-|  [html](./paint.iconpaint.html.md) | string |  |
-|  [iconAnchor](./paint.iconpaint.iconanchor.md) | \[number, number\] |  |
-|  [iconSize](./paint.iconpaint.iconsize.md) | \[number, number\] |  |
-|  [svg](./paint.iconpaint.svg.md) | HTMLElement |  |
+|  [className?](./paint.iconpaint.classname.md) | string | <i>(Optional)</i> |
+|  [html?](./paint.iconpaint.html.md) | string | <i>(Optional)</i> |
+|  [iconAnchor?](./paint.iconpaint.iconanchor.md) | \[number, number\] | <i>(Optional)</i> |
+|  [iconSize?](./paint.iconpaint.iconsize.md) | \[number, number\] | <i>(Optional)</i> |
+|  [svg?](./paint.iconpaint.svg.md) | HTMLElement | <i>(Optional)</i> |
 |  [type](./paint.iconpaint.type.md) | 'icon' |  |
 

@@ -46,6 +46,7 @@ import { getCameraFocus } from './utils/getCameraFocus';
 import { whenSampleTerrainMostDetailed } from './utils/whenSampleTerrainMostDetailed';
 import { cartesian3ToLngLat } from './utils/cartesian3ToLngLat';
 import { CesiumAdapterMapClickEvent, CesiumMapClickEvent } from './interfaces';
+import { MeasureControl } from './controls/MeasureControl';
 
 type Layer = any;
 type Control = any;
@@ -76,6 +77,7 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
   static controlAdapters: Record<string, Type<MapControl>> = {
     ZOOM: ControlContainer.controls.ZOOM,
     // ATTRIBUTION: Attribution
+    MEASURE: MeasureControl,
   };
 
   layerAdapters = CesiumMapAdapter.layerAdapters;
@@ -145,7 +147,7 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
       }
 
       viewer.scene.globe.baseColor = Color.fromCssColorString(
-        String(ma.baseColor)
+        String(ma.baseColor),
       );
       viewer.scene.globe.depthTestAgainstTerrain = !!ma.depthTestAgainstTerrain;
       viewer.scene.postProcessStages.fxaa.enabled = !!ma.fxaaEnabled;
@@ -154,7 +156,7 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
       this._terrainProviderChangedListener = t.addEventListener(
         (e: TerrainProvider) => {
           this._onTerrainChange(e);
-        }
+        },
       );
 
       if (options.view) {
@@ -197,7 +199,7 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
       if (viewerContainer) {
         viewerContainer.insertBefore(
           controlContainer,
-          viewerContainer.firstChild
+          viewerContainer.firstChild,
         );
       }
 
@@ -258,7 +260,7 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
           [cartographic],
           () => {
             resolve(cartographic.height);
-          }
+          },
         );
       }
     });
@@ -280,7 +282,7 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
       if (this.map.scene.mode === SceneMode.SCENE3D) {
         const rectangle = Rectangle.fromDegrees(west, south, east, north);
         const cartesian = this.map.camera.getRectangleCameraCoordinates(
-          rectangle
+          rectangle,
         );
 
         const cartographic = Cartographic.fromCartesian(cartesian);
@@ -288,13 +290,13 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
         destination = Cartesian3.fromRadians(
           cartographic.longitude,
           cartographic.latitude,
-          cartographic.height
+          cartographic.height,
         );
       } else {
         const pts = [west, south, west, north, east, north, east, south];
         // @ts-ignore
         destination = Rectangle.fromCartesianArray(
-          Cartesian3.fromDegreesArray(pts)
+          Cartesian3.fromDegreesArray(pts),
         );
       }
 
@@ -312,7 +314,7 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
     if (viewer) {
       const rect = viewer.camera.computeViewRectangle(
         viewer.scene.globe.ellipsoid,
-        this._scratchRectangle
+        this._scratchRectangle,
       );
       if (rect) {
         const [x1, y1, x2, y2] = [
@@ -383,17 +385,17 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
       const direction = Cartesian3.subtract(
         focus,
         camera.position,
-        cartesian3Scratch
+        cartesian3Scratch,
       );
       const movementVector = Cartesian3.multiplyByScalar(
         direction,
         scalar,
-        cartesian3Scratch
+        cartesian3Scratch,
       );
       let destination = Cartesian3.add(
         camera.position,
         movementVector,
-        cartesian3Scratch
+        cartesian3Scratch,
       );
       const z = Ellipsoid.WGS84.cartesianToCartographic(destination).height;
       const cartographic = Cartographic.fromCartesian(destination);
@@ -440,7 +442,7 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
         const creditContainer = widget._creditContainer as HTMLElement;
 
         const logoContainer = creditContainer.getElementsByClassName(
-          'cesium-credit-logoContainer'
+          'cesium-credit-logoContainer',
         )[0];
         if (logoContainer && logoContainer.parentNode) {
           logoContainer.parentNode.removeChild(logoContainer);
@@ -481,7 +483,7 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
     const viewer = this.map;
     if (viewer) {
       const clickHandler = viewer.screenSpaceEventHandler.getInputAction(
-        ScreenSpaceEventType.LEFT_CLICK
+        ScreenSpaceEventType.LEFT_CLICK,
       );
 
       viewer.screenSpaceEventHandler.setInputAction(
@@ -493,7 +495,7 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
           // Mouse over the globe to see the cartographic position
           const cartesian = viewer.camera.pickEllipsoid(
             new Cartesian3(ct2.x, ct2.y),
-            ellipsoid
+            ellipsoid,
           );
           const top = scene.canvas.clientHeight - ct2.y;
           const clickData: CesiumAdapterMapClickEvent = {
@@ -523,7 +525,7 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
           clickHandler(e);
           this.emitter.emit('click', clickData);
         },
-        ScreenSpaceEventType.LEFT_CLICK
+        ScreenSpaceEventType.LEFT_CLICK,
       );
     }
   }

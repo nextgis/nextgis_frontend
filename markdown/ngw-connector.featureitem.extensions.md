@@ -7,8 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-extensions: {
-        description?: string;
-        attachment?: FeatureItemAttachment[];
-    };
+extensions: FeatureItemExtensions;
 ```

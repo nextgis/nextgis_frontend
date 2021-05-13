@@ -10,7 +10,7 @@ const handleCallback = <T = never>(
   resolve: Resolve,
   reject: Reject,
   callback: Resolve,
-  r: T
+  r: T,
 ) => {
   try {
     resolve(callback(r));
@@ -69,6 +69,7 @@ let ID = 0;
 export class CancelablePromise<T = any> implements Promise<T> {
   static CancelError = CancelError;
   static TimeoutError = TimeoutError;
+  static PromiseControl = PromiseControl;
 
   readonly [Symbol.toStringTag]: string;
   readonly id = ID++;
@@ -85,9 +86,9 @@ export class CancelablePromise<T = any> implements Promise<T> {
     executor: (
       resolve: (value?: T | PromiseLike<T>) => void,
       reject: (reason?: any) => void,
-      onCancel: OnCancelFunction
+      onCancel: OnCancelFunction,
     ) => void,
-    timeout?: number
+    timeout?: number,
   ) {
     this._cancelPromise = new Promise<any>((resolve_, reject_) => {
       this._setCanceledCallback = (er) => resolve_(er || new CancelError());
@@ -101,7 +102,8 @@ export class CancelablePromise<T = any> implements Promise<T> {
           } else {
             this._isPending = false;
           }
-          resolve(value);
+          // TODO: fix types, `undefined` not allowed since 19.12.2020
+          resolve(value as T | PromiseLike<T>);
         };
 
         const onReject = (error: any) => {
@@ -112,7 +114,7 @@ export class CancelablePromise<T = any> implements Promise<T> {
         const onCancel: OnCancelFunction = (handler) => {
           if (!this._isPending) {
             throw new Error(
-              'The `onCancel` handler was attached after the promise settled.'
+              'The `onCancel` handler was attached after the promise settled.',
             );
           }
 
@@ -134,7 +136,7 @@ export class CancelablePromise<T = any> implements Promise<T> {
               }
             }
           }, timeout);
-        })
+        }),
       );
     }
     this._promise = Promise.race(promises);
@@ -174,7 +176,7 @@ export class CancelablePromise<T = any> implements Promise<T> {
     onrejected?:
       | ((reason: any) => TResult2 | PromiseLike<TResult2>)
       | undefined
-      | null
+      | null,
   ): CancelablePromise<TResult1 | TResult2> {
     const p = new CancelablePromise((resolve, reject) => {
       if (this._promise) {
@@ -207,7 +209,7 @@ export class CancelablePromise<T = any> implements Promise<T> {
     onrejected?:
       | ((reason: Error) => TResult | PromiseLike<TResult>)
       | undefined
-      | null
+      | null,
   ): CancelablePromise<T | TResult> {
     if (this._isCanceled && onrejected) {
       onrejected(new CancelError());

@@ -14,7 +14,7 @@ export declare class NgwResource
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [\_extent](./ngw-kit.ngwresource._extent.md) |  | [LngLatBoundsArray](./utils.lnglatboundsarray.md) |  |
+|  [\_extent?](./ngw-kit.ngwresource._extent.md) |  | [LngLatBoundsArray](./utils.lnglatboundsarray.md) | <i>(Optional)</i> |
 |  [connector](./ngw-kit.ngwresource.connector.md) |  | NgwConnector |  |
 |  [item](./ngw-kit.ngwresource.item.md) |  | [ResourceItem](./ngw-connector.resourceitem.md) |  |
 

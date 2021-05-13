@@ -15,6 +15,6 @@ export interface GetAttributionsOptions
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [onlyBaselayer](./webmap.getattributionsoptions.onlybaselayer.md) | boolean |  |
-|  [onlyVisible](./webmap.getattributionsoptions.onlyvisible.md) | boolean |  |
+|  [onlyBaselayer?](./webmap.getattributionsoptions.onlybaselayer.md) | boolean | <i>(Optional)</i> |
+|  [onlyVisible?](./webmap.getattributionsoptions.onlyvisible.md) | boolean | <i>(Optional)</i> |
 

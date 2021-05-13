@@ -8,7 +8,7 @@ import {
 
 export async function resourceIdFromLayerOptions(
   options: NgwLayerOptions,
-  connector: NgwConnector
+  connector: NgwConnector,
 ): Promise<number> {
   const resource = (options as ResourceNgwLayerOptions).resource;
   const item = resource as ResourceItem;
@@ -32,12 +32,12 @@ export async function resourceIdFromLayerOptions(
     } else {
       resourceId = await resourceIdFromLayerOptions(
         resource as ResourceNgwLayerOptions,
-        connector
+        connector,
       );
     }
   }
   if (!resourceId && keyname) {
-    const resourceItem = await connector.getResourceByKeyname(keyname);
+    const resourceItem = await connector.getResource(keyname);
     if (resourceItem) {
       resourceId = resourceItem.resource.id;
     }

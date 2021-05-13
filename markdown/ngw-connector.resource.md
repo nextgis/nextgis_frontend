@@ -16,11 +16,11 @@ export interface Resource
 |  --- | --- | --- |
 |  [children](./ngw-connector.resource.children.md) | boolean |  |
 |  [cls](./ngw-connector.resource.cls.md) | [ResourceCls](./ngw-connector.resourcecls.md) |  |
-|  [description](./ngw-connector.resource.description.md) | string \| null |  |
+|  [description?](./ngw-connector.resource.description.md) | string \| null | <i>(Optional)</i> |
 |  [display\_name](./ngw-connector.resource.display_name.md) | string |  |
 |  [id](./ngw-connector.resource.id.md) | number |  |
 |  [interfaces](./ngw-connector.resource.interfaces.md) | any\[\] |  |
-|  [keyname](./ngw-connector.resource.keyname.md) | string \| null |  |
+|  [keyname?](./ngw-connector.resource.keyname.md) | string \| null | <i>(Optional)</i> |
 |  [owner\_user](./ngw-connector.resource.owner_user.md) | { id: number; } |  |
 |  [parent](./ngw-connector.resource.parent.md) | { id: number; } |  |
 |  [permissions](./ngw-connector.resource.permissions.md) | [Permission](./ngw-connector.permission.md)<!-- -->\[\] |  |

@@ -15,6 +15,6 @@ export interface CompanyLogoOptions
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [cssClass](./ngw-kit.companylogooptions.cssclass.md) | string |  |
-|  [padding](./ngw-kit.companylogooptions.padding.md) | string |  |
+|  [cssClass?](./ngw-kit.companylogooptions.cssclass.md) | string | <i>(Optional)</i> |
+|  [padding?](./ngw-kit.companylogooptions.padding.md) | string | <i>(Optional)</i> |
 

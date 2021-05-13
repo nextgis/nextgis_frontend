@@ -30,7 +30,7 @@ export class TreeHelper {
       return treeFilter<I>(
         parent,
         filterFunc,
-        (x: I) => x.tree.getParent() as I
+        (x: I) => x.tree.getParent() as I,
       );
     }
     return [];

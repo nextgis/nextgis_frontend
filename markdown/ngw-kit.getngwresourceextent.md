@@ -4,6 +4,11 @@
 
 ## getNgwResourceExtent() function
 
+> Warning: This API is now obsolete.
+> 
+> use [fetchNgwResourceExtent()](./ngw-kit.fetchngwresourceextent.md) instead
+> 
+
 <b>Signature:</b>
 
 ```typescript

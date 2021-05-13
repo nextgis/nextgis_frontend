@@ -9,9 +9,9 @@ Collection of methods for managing map controls
 <b>Signature:</b>
 
 ```typescript
-export declare class WebMapControls<M = any, L = any, C = any, E extends WebMapEvents = WebMapEvents> extends WebMapLayers<M, L, C, E> implements WebMapLayers, WebMapMain 
+export declare class WebMapControls<M = any, L = any, C = any, E extends WebMapEvents = WebMapEvents, O extends MapOptions = MapOptions> extends WebMapLayers<M, L, E, O> implements WebMapLayers, WebMapMain 
 ```
-<b>Extends:</b> [WebMapLayers](./webmap.webmaplayers.md)<!-- -->&lt;M, L, C, E&gt;
+<b>Extends:</b> [WebMapLayers](./webmap.webmaplayers.md)<!-- -->&lt;M, L, E, O&gt;
 
 <b>Implements:</b> [WebMapLayers](./webmap.webmaplayers.md)<!-- -->, [WebMapMain](./webmap.webmapmain.md)
 

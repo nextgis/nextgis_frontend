@@ -9,7 +9,7 @@ Sets the GeoJSON data for given vector layer.
 <b>Signature:</b>
 
 ```typescript
-setLayerData(layerDef: LayerDef, data: GeoJsonObject): void;
+setLayerData(layerDef: LayerDef, data: GeoJsonObject): void | Promise<void>;
 ```
 
 ## Parameters
@@ -21,7 +21,7 @@ setLayerData(layerDef: LayerDef, data: GeoJsonObject): void;
 
 <b>Returns:</b>
 
-void
+void \| Promise&lt;void&gt;
 
 ## Example
 

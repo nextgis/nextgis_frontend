@@ -16,5 +16,6 @@ export interface ImageAdapterOptions extends WmsAdapterOptions
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [resourceId](./webmap.imageadapteroptions.resourceid.md) | string \| number |  |
+|  [params](./webmap.imageadapteroptions.params.md) | Record&lt;string, any&gt; |  |
+|  [resourceId?](./webmap.imageadapteroptions.resourceid.md) | string \| number | <i>(Optional)</i> |
 

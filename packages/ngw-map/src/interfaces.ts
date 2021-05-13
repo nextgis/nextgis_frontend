@@ -1,4 +1,4 @@
-import {
+import type {
   MapOptions,
   // CirclePaint,
   // PathPaint,
@@ -6,16 +6,16 @@ import {
   WebMapEvents,
   RuntimeParams,
 } from '@nextgis/webmap';
-import {
+import type NgwConnector from '@nextgis/ngw-connector';
+import type { Credentials } from '@nextgis/ngw-connector';
+import type { NgwMap } from './NgwMap';
+
+import type {
   NgwLayerOptions,
   ResourceAdapter,
   NgwIdentify,
   CompanyLogoOptions,
 } from '@nextgis/ngw-kit';
-import NgwConnector, { Credentials } from '@nextgis/ngw-connector';
-import { NgwMap } from './NgwMap';
-
-export { NgwLayerOptions };
 
 export type NgwResourceDefinition = number | [number, string] | NgwLayerOptions;
 
@@ -82,6 +82,9 @@ export interface NgwMapOptions<C = any> extends MapOptions<C> {
   pixelRadius?: number;
 
   runtimeParams?: RuntimeParams[];
+
+  /** {@inheritDoc AdapterOptions.setViewDelay} */
+  setViewDelay?: number;
 }
 
 export interface NgwMapEvents extends WebMapEvents {

@@ -15,5 +15,5 @@ export interface ToggleLayerOptions
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [silent](./webmap.togglelayeroptions.silent.md) | boolean |  |
+|  [silent?](./webmap.togglelayeroptions.silent.md) | boolean | <i>(Optional)</i> |
 

@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/eslint-config",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0-beta.8",
   "description": "ESLint config for NextGIS Frontend TS and JS projects",
   "main": "index.js",
   "repository": {
@@ -14,11 +14,11 @@
   "author": "NextGIS",
   "license": "MIT",
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.8.2",
-    "@typescript-eslint/parser": "^4.8.2",
-    "eslint": "^7.14.0",
-    "eslint-config-prettier": "^6.15.0",
-    "eslint-plugin-prettier": "^3.1.4",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "eslint": "^7.24.0",
+    "eslint-config-prettier": "^8.2.0",
+    "eslint-plugin-prettier": "^3.4.0",
     "prettier": "^2.2.1"
   },
   "eslintConfig": {

@@ -7,16 +7,16 @@
 <b>Signature:</b>
 
 ```typescript
-export interface QmsAdapterOptions extends AdapterOptions 
+export interface QmsAdapterOptions extends RasterAdapterOptions 
 ```
-<b>Extends:</b> [AdapterOptions](./webmap.adapteroptions.md)
+<b>Extends:</b> [RasterAdapterOptions](./webmap.rasteradapteroptions.md)
 
 ## Properties
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [name](./qms-kit.qmsadapteroptions.name.md) | string |  |
-|  [qms](./qms-kit.qmsadapteroptions.qms.md) | [QmsBasemap](./qms-kit.qmsbasemap.md) |  |
-|  [qmsId](./qms-kit.qmsadapteroptions.qmsid.md) | number |  |
+|  [name?](./qms-kit.qmsadapteroptions.name.md) | string | <i>(Optional)</i> |
+|  [qms?](./qms-kit.qmsadapteroptions.qms.md) | [QmsBasemap](./qms-kit.qmsbasemap.md) | <i>(Optional)</i> |
+|  [qmsId?](./qms-kit.qmsadapteroptions.qmsid.md) | number | <i>(Optional)</i> |
 |  [url](./qms-kit.qmsadapteroptions.url.md) | string |  |
 

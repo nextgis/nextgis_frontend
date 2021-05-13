@@ -1,4 +1,4 @@
-import './images/codepen.svg';
+import codepenIcon from './images/codepen.svg';
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 import { Item } from '../../MainPage';
 
@@ -101,12 +101,11 @@ export class SendToCodepen extends Vue {
       // Quotes will screw up the JSON
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&apos;');
-
     this.$el.innerHTML = `
     <form action="https://codepen.io/pen/define" method="POST" target="_blank">
       <input type="hidden" name="data" value='${value}'>
       <input type="image"
-        src="./codepen.svg"
+        src="${codepenIcon}"
         class="codepen-mover-button"
         width="40"
         height="40"
