@@ -3,6 +3,57 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.8](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.7...v1.0.0-beta.8) (2021-05-02)
+
+**Note:** Version bump only for package @nextgis/progress
+
+
+
+
+
+# [1.0.0-beta.7](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.6...v1.0.0-beta.7) (2021-04-23)
+
+**Note:** Version bump only for package @nextgis/progress
+
+
+
+
+
+# [1.0.0-beta.6](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2021-04-04)
+
+**Note:** Version bump only for package @nextgis/progress
+
+
+
+
+
+# [1.0.0-beta.5](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2021-02-13)
+
+**Note:** Version bump only for package @nextgis/progress
+
+
+
+
+
+# [1.0.0-beta.4](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2021-01-17)
+
+**Note:** Version bump only for package @nextgis/progress
+
+
+
+
+
+# [1.0.0-beta.3](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2020-12-19)
+
+
+### Features
+
+* add new library `progress` ([5a75e8c](https://github.com/nextgis/nextgis_frontend/commit/5a75e8c219e0c8c0aef2f9e4f0536709b93cd59c))
+
+
+
+
+
 # [1.0.0-beta.2](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2020-11-28)
 
 **Note:** Version bump only for package @nextgis/cancelable-promise
@@ -64,7 +115,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* **cancelable-promise:** шьзкщму PromisesControl ([ca5fabb](https://github.com/nextgis/nextgis_frontend/commit/ca5fabb60e998f19713704011db58588487aebe7))
+* **cancelable-promise:** improve PromisesControl ([ca5fabb](https://github.com/nextgis/nextgis_frontend/commit/ca5fabb60e998f19713704011db58588487aebe7))
 * **cancelable-promise:** create abort control ([9768157](https://github.com/nextgis/nextgis_frontend/commit/976815713d25b1da20a96b678668648caf2c0489))
 
 

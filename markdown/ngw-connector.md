@@ -29,6 +29,7 @@ Make sure CORS is registered in the [NextGIS Web settings](https://docs.nextgis.
 |  [DeleteRequestItemsResponseMap](./ngw-connector.deleterequestitemsresponsemap.md) |  |
 |  [FeatureItem](./ngw-connector.featureitem.md) |  |
 |  [FeatureItemAttachment](./ngw-connector.featureitemattachment.md) |  |
+|  [FeatureItemExtensions](./ngw-connector.featureitemextensions.md) |  |
 |  [FeatureLayerCount](./ngw-connector.featurelayercount.md) |  |
 |  [FeatureLayerField](./ngw-connector.featurelayerfield.md) |  |
 |  [FeatureLayersIdentify](./ngw-connector.featurelayersidentify.md) |  |
@@ -43,8 +44,10 @@ Make sure CORS is registered in the [NextGIS Web settings](https://docs.nextgis.
 |  [LookupTableResource](./ngw-connector.lookuptableresource.md) |  |
 |  [NgwConnectorOptions](./ngw-connector.ngwconnectoroptions.md) |  |
 |  [NgwDateFormat](./ngw-connector.ngwdateformat.md) |  |
+|  [NgwDateTimeFormat](./ngw-connector.ngwdatetimeformat.md) |  |
 |  [NgwExtent](./ngw-connector.ngwextent.md) |  |
 |  [NgwFile](./ngw-connector.ngwfile.md) |  |
+|  [NgwLayerIdentifyError](./ngw-connector.ngwlayeridentifyerror.md) |  |
 |  [Params](./ngw-connector.params.md) |  |
 |  [PatchRequestItemsResponseMap](./ngw-connector.patchrequestitemsresponsemap.md) |  |
 |  [Permission](./ngw-connector.permission.md) |  |
@@ -62,6 +65,7 @@ Make sure CORS is registered in the [NextGIS Web settings](https://docs.nextgis.
 |  [ResourceItem](./ngw-connector.resourceitem.md) |  |
 |  [ResourceItemMain](./ngw-connector.resourceitemmain.md) |  |
 |  [ResourceStoreItemDefault](./ngw-connector.resourcestoreitemdefault.md) |  |
+|  [SrsItem](./ngw-connector.srsitem.md) |  |
 |  [TreeGroup](./ngw-connector.treegroup.md) |  |
 |  [TreeItem](./ngw-connector.treeitem.md) |  |
 |  [TreeLayer](./ngw-connector.treelayer.md) |  |

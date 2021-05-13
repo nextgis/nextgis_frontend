@@ -1,14 +1,25 @@
 import { EventEmitter } from 'events';
-import StrictEventEmitter from 'strict-event-emitter-types';
-import { Feature, Polygon } from 'geojson';
 
-import { deepmerge, defined, Type, getBoundsFeature } from '@nextgis/utils';
+import { deepmerge, defined, getBoundsFeature } from '@nextgis/utils';
 import { GetPaintFunction } from '@nextgis/paint';
 import CancelablePromise from '@nextgis/cancelable-promise';
 import { deprecatedMapClick } from '@nextgis/utils';
 
-import { LngLatBoundsArray, Cursor, LngLatArray } from './interfaces/BaseTypes';
-import {
+import { Keys } from './components/keys/Keys';
+import { CenterState } from './components/mapStates/CenterState';
+import { StateItem } from './components/mapStates/StateItem';
+import { ZoomState } from './components/mapStates/ZoomState';
+import { clearObject } from './utils/clearObject';
+
+import type StrictEventEmitter from 'strict-event-emitter-types';
+import type { Feature, Polygon } from 'geojson';
+import type { Type, TileJson } from '@nextgis/utils';
+import type {
+  LngLatBoundsArray,
+  Cursor,
+  LngLatArray,
+} from './interfaces/BaseTypes';
+import type {
   Locate,
   MapAdapter,
   FitOptions,
@@ -16,27 +27,15 @@ import {
   LocationEvents,
   MapClickEvent,
 } from './interfaces/MapAdapter';
-import { StarterKit } from './interfaces/StarterKit';
-import { LayerAdapter } from './interfaces/LayerAdapter';
-import { RuntimeParams } from './interfaces/RuntimeParams';
-import { MapOptions } from './interfaces/MapOptions';
-import { WebMapEvents, MainMapEvents } from './interfaces/Events';
-
-import { Keys } from './components/keys/Keys';
-import { CenterState } from './components/mapStates/CenterState';
-import { StateItem } from './components/mapStates/StateItem';
-import { ZoomState } from './components/mapStates/ZoomState';
-
-import { clearObject } from './utils/clearObject';
+import type { StarterKit } from './interfaces/StarterKit';
+import type { LayerAdapter } from './interfaces/LayerAdapter';
+import type { RuntimeParams } from './interfaces/RuntimeParams';
+import type { MapOptions } from './interfaces/MapOptions';
+import type { WebMapEvents, MainMapEvents } from './interfaces/Events';
 
 type EmitStatusEventData = any;
 
 let ID = 0;
-
-/**
- * @internal
- */
-export const WEB_MAP_CONTAINER: Record<number, any> = {};
 
 const OPTIONS: MapOptions = {
   minZoom: 0,
@@ -106,7 +105,6 @@ export class WebMapMain<
   } = {};
 
   constructor(mapOptions: O) {
-    WEB_MAP_CONTAINER[this.id] = this;
     this.mapAdapter = mapOptions.mapAdapter as MapAdapter<M>;
     this._starterKits = mapOptions.starterKits || [];
     if (mapOptions) {
@@ -116,6 +114,10 @@ export class WebMapMain<
       this.runtimeParams = this.options.runtimeParams;
     }
     this._addEventsListeners();
+
+    if (this.options.tileJson) {
+      this._setTileJsonOptions(this.options.tileJson);
+    }
     if (this.options.create) {
       this.create();
     }
@@ -452,7 +454,7 @@ export class WebMapMain<
           const cursor: Cursor = this.getCursor() || 'grab';
           this._removeEventListeners({ include: ['click'] });
           this.setCursor('crosshair');
-          const onCancel_ = () => {
+          const onCancel_ = (): void => {
             this.setCursor(cursor);
             this._addEventsListeners({ include: ['click'] });
             this.mapAdapter.emitter.off('click', onMapClick);
@@ -465,7 +467,7 @@ export class WebMapMain<
           };
           this.mapAdapter.emitter.once('click', onMapClick);
           onCancel(onCancel_);
-        }
+        },
       );
     } else {
       return this.getCoordFromMapClick();
@@ -475,7 +477,7 @@ export class WebMapMain<
 
   protected _emitStatusEvent(
     eventName: keyof E,
-    data?: EmitStatusEventData
+    data?: EmitStatusEventData,
   ): void {
     // ugly hack to disable type checking error
     const _eventName = eventName as keyof WebMapEvents;
@@ -491,7 +493,7 @@ export class WebMapMain<
     //
   }
 
-  private async _setupMap() {
+  private async _setupMap(): Promise<this> {
     if (!this.mapAdapter) {
       throw new Error('WebMap `mapAdapter` option is not set');
     }
@@ -505,7 +507,27 @@ export class WebMapMain<
     return this;
   }
 
-  private _zoomToInitialExtent() {
+  private _setTileJsonOptions(tileJson: TileJson): void {
+    if (tileJson.center) {
+      this.options.center = tileJson.center;
+    }
+    if (tileJson.bounds) {
+      this.options.bounds = tileJson.bounds;
+    }
+    if (defined(tileJson.maxzoom)) {
+      this.options.maxZoom = tileJson.maxzoom;
+      this.options.zoom = tileJson.maxzoom;
+    }
+    if (defined(tileJson.minzoom)) {
+      this.options.minZoom = tileJson.minzoom;
+      this.options.zoom = tileJson.minzoom;
+    }
+    if (defined(tileJson.maxzoom) && defined(tileJson.minzoom)) {
+      this.options.zoom = (tileJson.maxzoom + tileJson.minzoom) / 2;
+    }
+  }
+
+  private _zoomToInitialExtent(): void {
     const { center, zoom, bounds } = this.options;
     if (this._extent) {
       this.fitBounds(this._extent);
@@ -516,7 +538,7 @@ export class WebMapMain<
     }
   }
 
-  private _setInitMapState(states: Type<StateItem>[]) {
+  private _setInitMapState(states: Type<StateItem>[]): void {
     for (const X of states) {
       const state = new X(this);
       this._mapState.push(state);
@@ -526,8 +548,11 @@ export class WebMapMain<
           const val = state.parse(str);
           // state.setValue(val);
           this._initMapState[state.name] = val;
-          // @ts-ignore
-          this.options[state.name] = val;
+          Object.defineProperty(this.options, state.name, {
+            value: val,
+            configurable: true,
+            enumerable: true,
+          });
           break;
         }
       }
@@ -550,7 +575,7 @@ export class WebMapMain<
       events = events.filter((x) => opt.include.includes(x));
     }
     events.forEach((x) => {
-      this._mapEvents[x] = (data) => {
+      this._mapEvents[x] = (data): void => {
         if (this.runtimeParams.length) {
           const mapStatusEvent = this._mapState.find((y) => y.event === x);
           if (mapStatusEvent) {
@@ -574,7 +599,7 @@ export class WebMapMain<
   private _removeEventListeners(opt?: AddEventsListenersOptions): void {
     let events = Object.entries(this._mapEvents) as [
       keyof MainMapEvents,
-      ((...args: any[]) => void) | undefined
+      ((...args: any[]) => void) | undefined,
     ][];
     if (opt && opt.include) {
       events = events.filter((x) => opt.include.includes(x[0]));

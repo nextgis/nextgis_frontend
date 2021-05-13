@@ -24,8 +24,6 @@ class NgwOl extends NgwMap {
 
 export default NgwOl;
 
-// @ts-ignore
-if (window && !window.NgwMap) {
-  // @ts-ignore
-  window.NgwMap = NgwOl;
+if ((window as any) && !(window as any).NgwMap) {
+  (window as any).NgwMap = NgwOl;
 }

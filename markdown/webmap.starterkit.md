@@ -15,8 +15,8 @@ export interface StarterKit
 
 |  Method | Description |
 |  --- | --- |
-|  [getLayerAdapters()](./webmap.starterkit.getlayeradapters.md) |  |
-|  [getSettings(webMap)](./webmap.starterkit.getsettings.md) |  |
-|  [onLoadSync(webMap)](./webmap.starterkit.onloadsync.md) |  |
-|  [onMapClick(evt, webMap)](./webmap.starterkit.onmapclick.md) |  |
+|  [getLayerAdapters()?](./webmap.starterkit.getlayeradapters.md) | <i>(Optional)</i> |
+|  [getSettings(webMap)?](./webmap.starterkit.getsettings.md) | <i>(Optional)</i> |
+|  [onLoadSync(webMap)?](./webmap.starterkit.onloadsync.md) | <i>(Optional)</i> |
+|  [onMapClick(evt, webMap)?](./webmap.starterkit.onmapclick.md) | <i>(Optional)</i> |
 

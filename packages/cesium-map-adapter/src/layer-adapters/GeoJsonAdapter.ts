@@ -6,7 +6,6 @@ import {
   Cartesian3,
   VerticalOrigin,
   Property,
-  CallbackProperty,
   Cartographic,
   Entity,
   HeightReference,
@@ -70,13 +69,13 @@ export class GeoJsonAdapter
     this.watchHeight();
   };
 
-  addLayer(options: AdapterOptions): GeoJsonDataSource {
-    this.options = { ...options };
+  addLayer(opt: AdapterOptions): GeoJsonDataSource {
+    this.options = { ...this.options, ...opt };
     this._paint = this.options.paint;
-    const source = new GeoJsonDataSource(options.id);
+    const source = new GeoJsonDataSource(opt.id);
     this._source = source;
-    if (options.data) {
-      this.addData(options.data);
+    if (opt.data) {
+      this.addData(opt.data);
     }
     return source;
   }
@@ -124,7 +123,7 @@ export class GeoJsonAdapter
     if (this._source) {
       const boundingSphere = getEntitiesBoundingSphere(
         this.map,
-        this._source.entities.values
+        this._source.entities.values,
       );
       if (boundingSphere) {
         return getExtentFromBoundingSphere(boundingSphere);
@@ -212,7 +211,7 @@ export class GeoJsonAdapter
     if (source) {
       const colorStr = paint.fillColor || paint.color;
       const color = Color.fromCssColorString(
-        typeof colorStr === 'string' && colorStr ? colorStr : 'blue'
+        typeof colorStr === 'string' && colorStr ? colorStr : 'blue',
       );
       const size = typeof paint.size === 'number' ? paint.size : 42;
       const iconFont = paint.iconfont || 'maki';
@@ -277,7 +276,7 @@ export class GeoJsonAdapter
 
   private _addFromGeoJson(
     feature: Feature,
-    paint: GeometryPaint
+    paint: GeometryPaint,
   ): Promise<void> {
     const source = this._source;
     if (source) {
@@ -320,9 +319,8 @@ export class GeoJsonAdapter
         dataSource.entities.values.forEach((y) => {
           const height = this._getEntityHeight(y, paint);
           if (height && y.polygon) {
-            y.polygon.extrudedHeight = new CallbackProperty(() => {
-              return height;
-            }, false);
+            // if define through CallbackProperty, then fps drops dramatically
+            y.polygon.extrudedHeight = height as any;
           }
           const description =
             this.options.popupOptions?.createPopupContent &&
@@ -339,7 +337,7 @@ export class GeoJsonAdapter
 
   private _getFeaturePaint(
     feature: Feature,
-    paint?: Paint
+    paint?: Paint,
   ): VectorAdapterLayerPaint {
     if (paint) {
       if (isPaintCallback(paint)) {
@@ -401,18 +399,17 @@ export class GeoJsonAdapter
                 terrainSamplePosition.height
               ) {
                 const terrainHeight = terrainSamplePosition.height;
-                entity.polygon.height = new CallbackProperty(() => {
-                  return terrainHeight;
-                }, false);
+                // if define through CallbackProperty, then fps drops dramatically
+                entity.polygon.height = terrainHeight as any;
                 const height = this._getEntityHeight(entity);
                 if (height !== undefined) {
-                  entity.polygon.extrudedHeight = new CallbackProperty(() => {
-                    return height + terrainHeight;
-                  }, false);
+                  // if define through CallbackProperty, then fps drops dramatically
+                  entity.polygon.extrudedHeight = (height +
+                    terrainHeight) as any;
                 }
               }
             }
-          }
+          },
         );
       }
     }

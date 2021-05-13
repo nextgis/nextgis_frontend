@@ -9,5 +9,5 @@ Map adapter original click event
 <b>Signature:</b>
 
 ```typescript
-source?: any;
+source?: unknown;
 ```

@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function prepareFieldsToNgw<T extends any>(item: T, resourceFields: Pick<FeatureLayerField, 'keyname' | 'datatype'>[]): Record<keyof T, any>;
+export declare function prepareFieldsToNgw<T extends GeoJsonProperties>(item: T, resourceFields: Pick<FeatureLayerField, 'keyname' | 'datatype'>[]): Record<keyof T, any>;
 ```
 
 ## Parameters

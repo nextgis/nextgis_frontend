@@ -21,9 +21,9 @@ export declare class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [\_extent](./ngw-kit.ngwwebmaplayeradapter._extent.md) |  | [LngLatBoundsArray](./utils.lnglatboundsarray.md) |  |
+|  [\_extent?](./ngw-kit.ngwwebmaplayeradapter._extent.md) |  | [LngLatBoundsArray](./utils.lnglatboundsarray.md) | <i>(Optional)</i> |
 |  [emitter](./ngw-kit.ngwwebmaplayeradapter.emitter.md) |  | StrictEventEmitter&lt;EventEmitter, [NgwWebmapLayerAdapterEvents](./ngw-kit.ngwwebmaplayeradapterevents.md)<!-- -->&gt; |  |
-|  [layer](./ngw-kit.ngwwebmaplayeradapter.layer.md) |  | [NgwWebmapItem](./ngw-kit.ngwwebmapitem.md) |  |
+|  [layer?](./ngw-kit.ngwwebmaplayeradapter.layer.md) |  | [NgwWebmapItem](./ngw-kit.ngwwebmapitem.md) | <i>(Optional)</i> |
 |  [map](./ngw-kit.ngwwebmaplayeradapter.map.md) |  | M |  |
 |  [NgwWebmapItem](./ngw-kit.ngwwebmaplayeradapter.ngwwebmapitem.md) |  | [Type](./utils.type.md)<!-- -->&lt;[NgwWebmapItem](./ngw-kit.ngwwebmapitem.md)<!-- -->&gt; |  |
 |  [options](./ngw-kit.ngwwebmaplayeradapter.options.md) |  | [NgwWebmapAdapterOptions](./ngw-kit.ngwwebmapadapteroptions.md) |  |
@@ -35,7 +35,10 @@ export declare class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
+|  [\_getWebMapLayerItem()](./ngw-kit.ngwwebmaplayeradapter._getwebmaplayeritem.md) |  |  |
 |  [addLayer(options)](./ngw-kit.ngwwebmaplayeradapter.addlayer.md) |  |  |
+|  [fetchBookmarks()](./ngw-kit.ngwwebmaplayeradapter.fetchbookmarks.md) |  |  |
+|  [getBookmarksResourceId()](./ngw-kit.ngwwebmaplayeradapter.getbookmarksresourceid.md) |  |  |
 |  [getDependLayers()](./ngw-kit.ngwwebmaplayeradapter.getdependlayers.md) |  |  |
 |  [getExtent()](./ngw-kit.ngwwebmaplayeradapter.getextent.md) |  |  |
 |  [getIdentificationIds()](./ngw-kit.ngwwebmaplayeradapter.getidentificationids.md) |  |  |

@@ -16,9 +16,9 @@ export interface Model3DOptions extends RasterAdapterOptions
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [height](./webmap.model3doptions.height.md) | number |  |
+|  [height?](./webmap.model3doptions.height.md) | number | <i>(Optional)</i> |
 |  [lat](./webmap.model3doptions.lat.md) | number |  |
 |  [lon](./webmap.model3doptions.lon.md) | number |  |
-|  [rotate](./webmap.model3doptions.rotate.md) | number |  |
-|  [scale](./webmap.model3doptions.scale.md) | number |  |
+|  [rotate?](./webmap.model3doptions.rotate.md) | number | <i>(Optional)</i> |
+|  [scale?](./webmap.model3doptions.scale.md) | number | <i>(Optional)</i> |
 

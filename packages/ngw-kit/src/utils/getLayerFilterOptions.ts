@@ -9,7 +9,7 @@ const filterOptionsKeys: (keyof FilterOptions)[] = [
 ];
 
 export function getLayerFilterOptions(
-  options: GeoJsonAdapterOptions
+  options: GeoJsonAdapterOptions,
 ): FilterOptions {
   const filterOptions: Record<string, any> = {};
   filterOptionsKeys.forEach((x) => {

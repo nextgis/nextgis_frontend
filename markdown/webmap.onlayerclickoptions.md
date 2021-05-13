@@ -15,9 +15,9 @@ export interface OnLayerClickOptions
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [event](./webmap.onlayerclickoptions.event.md) | [MapClickEvent](./webmap.mapclickevent.md) |  |
-|  [feature](./webmap.onlayerclickoptions.feature.md) | Feature |  |
+|  [event?](./webmap.onlayerclickoptions.event.md) | [MapClickEvent](./webmap.mapclickevent.md) | <i>(Optional)</i> |
+|  [feature?](./webmap.onlayerclickoptions.feature.md) | Feature | <i>(Optional)</i> |
 |  [layer](./webmap.onlayerclickoptions.layer.md) | [LayerAdapter](./webmap.layeradapter.md) |  |
-|  [selected](./webmap.onlayerclickoptions.selected.md) | boolean |  |
-|  [source](./webmap.onlayerclickoptions.source.md) | any |  |
+|  [selected?](./webmap.onlayerclickoptions.selected.md) | boolean | <i>(Optional)</i> |
+|  [source?](./webmap.onlayerclickoptions.source.md) | any | <i>(Optional)</i> |
 

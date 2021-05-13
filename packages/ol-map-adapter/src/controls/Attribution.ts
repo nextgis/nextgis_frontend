@@ -1,5 +1,5 @@
 import Attr from 'ol/control/Attribution';
-import { AttributionControlOptions } from '@nextgis/webmap';
+import type { AttributionControlOptions } from '@nextgis/webmap';
 
 const OPTIONS = {
   collapsible: false,

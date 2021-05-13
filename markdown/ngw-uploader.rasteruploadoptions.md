@@ -14,9 +14,9 @@ export interface RasterUploadOptions
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [addTimestampToName](./ngw-uploader.rasteruploadoptions.addtimestamptoname.md) | boolean |  |
-|  [createName](./ngw-uploader.rasteruploadoptions.createname.md) | (name: string) =&gt; string |  |
-|  [name](./ngw-uploader.rasteruploadoptions.name.md) | string |  |
-|  [onProgress](./ngw-uploader.rasteruploadoptions.onprogress.md) | (percentComplete: number) =&gt; void |  |
-|  [parentId](./ngw-uploader.rasteruploadoptions.parentid.md) | number |  |
+|  [addTimestampToName?](./ngw-uploader.rasteruploadoptions.addtimestamptoname.md) | boolean | <i>(Optional)</i> |
+|  [createName?](./ngw-uploader.rasteruploadoptions.createname.md) | (name: string) =&gt; string | <i>(Optional)</i> |
+|  [name?](./ngw-uploader.rasteruploadoptions.name.md) | string | <i>(Optional)</i> |
+|  [onProgress?](./ngw-uploader.rasteruploadoptions.onprogress.md) | (percentComplete: number) =&gt; void | <i>(Optional)</i> |
+|  [parentId?](./ngw-uploader.rasteruploadoptions.parentid.md) | number | <i>(Optional)</i> |
 

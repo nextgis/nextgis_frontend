@@ -15,9 +15,9 @@ export interface CreateWmsConnectionOptions extends ResourceCreateOptions
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [capcache](./ngw-uploader.createwmsconnectionoptions.capcache.md) | string | If equal query - query capabilities from service |
-|  [password](./ngw-uploader.createwmsconnectionoptions.password.md) | string | Password to connect to service |
+|  [capcache?](./ngw-uploader.createwmsconnectionoptions.capcache.md) | string | <i>(Optional)</i> If equal query - query capabilities from service |
+|  [password?](./ngw-uploader.createwmsconnectionoptions.password.md) | string | <i>(Optional)</i> Password to connect to service |
 |  [url](./ngw-uploader.createwmsconnectionoptions.url.md) | string | WMS service url |
-|  [username](./ngw-uploader.createwmsconnectionoptions.username.md) | string | User name to connect to service |
-|  [version](./ngw-uploader.createwmsconnectionoptions.version.md) | string | WMS version |
+|  [username?](./ngw-uploader.createwmsconnectionoptions.username.md) | string | <i>(Optional)</i> User name to connect to service |
+|  [version?](./ngw-uploader.createwmsconnectionoptions.version.md) | string | <i>(Optional)</i> WMS version |
 

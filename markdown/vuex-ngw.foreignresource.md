@@ -14,5 +14,5 @@ export interface ForeignResource
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [relationField](./vuex-ngw.foreignresource.relationfield.md) | string |  |
+|  [relationField?](./vuex-ngw.foreignresource.relationfield.md) | string | <i>(Optional)</i> |
 

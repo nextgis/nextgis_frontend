@@ -30,4 +30,5 @@ export interface GetRequestItemsResponseMap extends RequestItemKeys
 |  ["resource.collection"](./ngw-connector.getrequestitemsresponsemap._resource.collection_.md) | [ResourceItem](./ngw-connector.resourceitem.md)<!-- -->\[\] |  |
 |  ["resource.item"](./ngw-connector.getrequestitemsresponsemap._resource.item_.md) | [ResourceItem](./ngw-connector.resourceitem.md) |  |
 |  ["resource.search"](./ngw-connector.getrequestitemsresponsemap._resource.search_.md) | [ResourceItem](./ngw-connector.resourceitem.md)<!-- -->\[\] |  |
+|  ["spatial\_ref\_sys.collection"](./ngw-connector.getrequestitemsresponsemap._spatial_ref_sys.collection_.md) | [SrsItem](./ngw-connector.srsitem.md)<!-- -->\[\] |  |
 

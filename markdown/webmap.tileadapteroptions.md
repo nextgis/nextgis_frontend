@@ -16,5 +16,5 @@ export interface TileAdapterOptions extends RasterAdapterOptions
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [tileSize](./webmap.tileadapteroptions.tilesize.md) | number |  |
+|  [tileSize?](./webmap.tileadapteroptions.tilesize.md) | number | <i>(Optional)</i> |
 

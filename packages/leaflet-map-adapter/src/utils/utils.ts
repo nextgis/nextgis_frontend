@@ -37,7 +37,7 @@ for (const a in typeAlias) {
 }
 
 export function findMostFrequentGeomType(
-  arr: GeoJsonGeometryTypes[]
+  arr: GeoJsonGeometryTypes[],
 ): GeoJsonGeometryTypes {
   const counts: { [x: string]: number } = {};
   for (let fry = 0; fry < arr.length; fry++) {
@@ -57,12 +57,12 @@ export function detectType(geojson: GeoJsonObject): GeoJsonGeometryTypes {
   let geometry: GeoJsonGeometryTypes;
   if (geojson.type === 'FeatureCollection') {
     const featuresTypes = (geojson as FeatureCollection).features.map(
-      (f) => f.geometry.type
+      (f) => f.geometry.type,
     );
     geometry = findMostFrequentGeomType(featuresTypes);
   } else if (geojson.type === 'GeometryCollection') {
     const geometryTypes = (geojson as GeometryCollection).geometries.map(
-      (g) => g.type
+      (g) => g.type,
     );
     geometry = findMostFrequentGeomType(geometryTypes);
   } else if (geojson.type === 'Feature') {
@@ -75,7 +75,7 @@ export function detectType(geojson: GeoJsonObject): GeoJsonGeometryTypes {
 
 export function geometryFilter(
   geometry: GeoJsonGeometryTypes,
-  type: VectorAdapterLayerType
+  type: VectorAdapterLayerType,
 ): boolean {
   const geoJsonGeometry = backAliases[type] || [];
   return geoJsonGeometry.indexOf(geometry) !== -1;
@@ -83,12 +83,12 @@ export function geometryFilter(
 
 export function filterGeometries(
   data: GeoJsonObject,
-  type: VectorAdapterLayerType
+  type: VectorAdapterLayerType,
 ): GeoJsonObject | false {
   if (data.type === 'FeatureCollection') {
     const _data = data as FeatureCollection;
     _data.features = _data.features.filter((f) =>
-      geometryFilter(f.geometry.type, type)
+      geometryFilter(f.geometry.type, type),
     );
   } else if (data.type === 'Feature') {
     const allow = geometryFilter((data as Feature).geometry.type, type);
@@ -98,7 +98,7 @@ export function filterGeometries(
   } else if (data.type === 'GeometryCollection') {
     const _data = data as GeometryCollection;
     _data.geometries = _data.geometries.filter((g) =>
-      geometryFilter(g.type, type)
+      geometryFilter(g.type, type),
     );
   }
   return data;

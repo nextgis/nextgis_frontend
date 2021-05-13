@@ -1,27 +1,10 @@
 import CancelablePromise from '@nextgis/cancelable-promise';
-import { DeepPartial } from '@nextgis/utils';
+import { DeepPartial, fixUrlStr } from '@nextgis/utils';
 import { EventEmitter } from 'events';
 
 import { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
 import { ResourceItem, Resource } from './types/ResourceItem';
-import {
-  NgwConnectorOptions,
-  GetRequestItemsResponseMap,
-  RequestOptions,
-  Params,
-  LoadingQueue,
-  UserInfo,
-  Credentials,
-  PyramidRoute,
-  RequestHeaders,
-  PostRequestItemsResponseMap,
-  PatchRequestItemsResponseMap,
-  RequestItemKeys,
-  DeleteRequestItemsResponseMap,
-  PutRequestItemsResponseMap,
-  RequestItemsParams,
-  ResourceDefinition,
-} from './interfaces';
+
 import { loadData } from './utils/loadData';
 import { template } from './utils/template';
 import { ResourceNotFoundError } from './errors/ResourceNotFoundError';
@@ -33,6 +16,24 @@ import {
   removeConnector,
 } from './activeConnectors';
 import { ResourcesControl } from './ResourcesControl';
+
+import type {
+  DeleteRequestItemsResponseMap,
+  PatchRequestItemsResponseMap,
+  PostRequestItemsResponseMap,
+  GetRequestItemsResponseMap,
+  PutRequestItemsResponseMap,
+  NgwConnectorOptions,
+  RequestItemsParams,
+  ResourceDefinition,
+  RequestItemKeys,
+  RequestHeaders,
+  RequestOptions,
+  PyramidRoute,
+  Credentials,
+  UserInfo,
+  Params,
+} from './interfaces';
 
 export class NgwConnector {
   static errors = {
@@ -47,9 +48,6 @@ export class NgwConnector {
 
   private routeStr = '/api/component/pyramid/route';
   private route?: PyramidRoute;
-  private _loadingQueue: { [name: string]: LoadingQueue } = {};
-  private _loadingStatus: { [url: string]: boolean } = {};
-  private _queriesCache: { [url: string]: any } = {};
 
   constructor(public options: NgwConnectorOptions) {
     if (this.options.route) {
@@ -64,7 +62,7 @@ export class NgwConnector {
     if (exist) {
       return exist;
     } else {
-      const connector = new NgwConnector(options);
+      const connector = new this(options);
       return connector;
     }
   }
@@ -136,8 +134,6 @@ export class NgwConnector {
    */
   logout(): void {
     removeConnector(this);
-    this._rejectLoadingQueue();
-    this._loadingStatus = {};
     this.options.auth = undefined;
     this.route = undefined;
     this.user = undefined;
@@ -174,7 +170,7 @@ export class NgwConnector {
    * Obtaining the required Headers for authentication of requests in the NGW.
    */
   getAuthorizationHeaders(
-    credentials?: Credentials
+    credentials?: Credentials,
   ): RequestHeaders | undefined {
     const client = this.makeClientId(credentials);
     if (client) {
@@ -233,7 +229,7 @@ export class NgwConnector {
   >(
     name: K,
     params: RequestItemsParams<K> = {},
-    options?: RequestOptions
+    options?: RequestOptions,
   ): CancelablePromise<P[K]> {
     return new CancelablePromise((resolve, reject) => {
       this.connect()
@@ -251,7 +247,7 @@ export class NgwConnector {
                 replaceParams[fry] = '{' + arg + '}';
                 if (params[arg] === undefined) {
                   throw new Error(
-                    '`' + arg + '`' + ' url api argument is not specified'
+                    '`' + arg + '`' + ' url api argument is not specified',
                   );
                 }
               }
@@ -309,15 +305,14 @@ export class NgwConnector {
   post<K extends keyof RequestItemsParamsMap>(
     name: K,
     options?: RequestOptions<'POST'>,
-    params?: RequestItemsParams<K>
+    params?: RequestItemsParams<K>,
   ): CancelablePromise<PostRequestItemsResponseMap[K]> {
     options = options || {};
     options.method = 'POST';
-    options.nocache = true;
     return this.apiRequest<K, PostRequestItemsResponseMap>(
       name,
       params,
-      options
+      options,
     );
   }
 
@@ -330,15 +325,14 @@ export class NgwConnector {
   get<K extends keyof RequestItemsParamsMap>(
     name: K,
     options?: RequestOptions | undefined | null,
-    params?: RequestItemsParams<K>
+    params?: RequestItemsParams<K>,
   ): CancelablePromise<GetRequestItemsResponseMap[K]> {
     options = options || {};
     options.method = 'GET';
-    options.nocache = true;
     return this.apiRequest<K, GetRequestItemsResponseMap>(
       name,
       params,
-      options
+      options,
     );
   }
 
@@ -351,15 +345,14 @@ export class NgwConnector {
   patch<K extends keyof RequestItemsParamsMap>(
     name: K,
     options?: RequestOptions,
-    params?: RequestItemsParams<K>
+    params?: RequestItemsParams<K>,
   ): CancelablePromise<PatchRequestItemsResponseMap[K]> {
     options = options || {};
     options.method = 'PATCH';
-    options.nocache = true;
     return this.apiRequest<K, PatchRequestItemsResponseMap>(
       name,
       params,
-      options
+      options,
     );
   }
 
@@ -372,15 +365,14 @@ export class NgwConnector {
   put<K extends keyof RequestItemsParamsMap>(
     name: K,
     options?: RequestOptions,
-    params?: RequestItemsParams<K>
+    params?: RequestItemsParams<K>,
   ): CancelablePromise<PutRequestItemsResponseMap[K]> {
     options = options || {};
     options.method = 'PUT';
-    options.nocache = true;
     return this.apiRequest<K, PutRequestItemsResponseMap>(
       name,
       params,
-      options
+      options,
     );
   }
 
@@ -393,15 +385,14 @@ export class NgwConnector {
   delete<K extends keyof RequestItemsParamsMap>(
     name: K,
     options?: RequestOptions | undefined | null,
-    params?: RequestItemsParams<K>
+    params?: RequestItemsParams<K>,
   ): CancelablePromise<DeleteRequestItemsResponseMap[K]> {
     options = options || {};
     options.method = 'DELETE';
-    options.nocache = true;
     return this.apiRequest<K, DeleteRequestItemsResponseMap>(
       name,
       params,
-      options
+      options,
     );
   }
 
@@ -414,7 +405,7 @@ export class NgwConnector {
   makeQuery(
     url: string,
     params?: Params,
-    options: RequestOptions = {}
+    options: RequestOptions = {},
   ): CancelablePromise<any> {
     url = (this.options.baseUrl ? this.options.baseUrl : '') + url;
     if (url) {
@@ -422,32 +413,8 @@ export class NgwConnector {
         url = template(url, params);
       }
       // remove double slash
-      url = url.replace(/([^:]\/)\/+/g, '$1');
-      if (options.cache && this._queriesCache[url]) {
-        return this._queriesCache[url];
-      }
-      if (!this._loadingStatus[url] || options.nocache) {
-        this._loadingStatus[url] = true;
-        return this._loadData(url, options)
-          .then((data) => {
-            this._loadingStatus[url] = false;
-            if (options.cache) {
-              this._queriesCache[url] = data;
-            }
-            this._executeLoadingQueue(url, data);
-            return data;
-          })
-          .catch((er) => {
-            this._loadingStatus[url] = false;
-            this._executeLoadingQueue(url, er, true);
-            throw er;
-          });
-      } else {
-        this._loadingStatus[url] = false;
-        return new CancelablePromise((resolve, reject) => {
-          this._setLoadingQueue(url, resolve, reject);
-        });
-      }
+      url = fixUrlStr(url);
+      return this._loadData(url, options);
     } else {
       throw new Error('No `url` parameter set for option ' + name);
     }
@@ -461,7 +428,7 @@ export class NgwConnector {
    * {@inheritDoc ResourcesControl.getOne}
    */
   getResource(
-    resource: ResourceDefinition | DeepPartial<Resource>
+    resource: ResourceDefinition | DeepPartial<Resource>,
   ): CancelablePromise<ResourceItem | undefined> {
     return this.resources.getOne(resource);
   }
@@ -470,7 +437,7 @@ export class NgwConnector {
    * {@inheritDoc ResourcesControl.getOneOrFail}
    */
   getResourceOrFail(
-    resource: ResourceDefinition | DeepPartial<Resource>
+    resource: ResourceDefinition | DeepPartial<Resource>,
   ): CancelablePromise<ResourceItem> {
     return this.resources.getOneOrFail(resource);
   }
@@ -479,7 +446,7 @@ export class NgwConnector {
    * @deprecated - use {@link NgwConnector.getResource}
    */
   getResourceBy(
-    resource: DeepPartial<Resource>
+    resource: DeepPartial<Resource>,
   ): CancelablePromise<ResourceItem | undefined> {
     return this.resources.getOne(resource);
   }
@@ -488,7 +455,7 @@ export class NgwConnector {
    * @deprecated - use {@link NgwConnector.getResource}
    */
   getResourceByKeyname(
-    keyname: string
+    keyname: string,
   ): CancelablePromise<ResourceItem | undefined> {
     return this.resources.getOne(keyname);
   }
@@ -504,7 +471,7 @@ export class NgwConnector {
    * {@inheritDoc ResourcesControl.getId}
    */
   getResourceId(
-    resource: ResourceDefinition | DeepPartial<Resource>
+    resource: ResourceDefinition | DeepPartial<Resource>,
   ): CancelablePromise<number | undefined> {
     return this.resources.getId(resource);
   }
@@ -513,7 +480,7 @@ export class NgwConnector {
    * {@inheritDoc ResourcesControl.getIdOrFail}
    */
   getResourceIdOrFail(
-    resource: ResourceDefinition | DeepPartial<Resource>
+    resource: ResourceDefinition | DeepPartial<Resource>,
   ): CancelablePromise<number> {
     return this.resources.getIdOrFail(resource);
   }
@@ -522,7 +489,7 @@ export class NgwConnector {
    * {@inheritDoc ResourcesControl.getMany}
    */
   getResourcesBy(
-    resource: DeepPartial<Resource>
+    resource: DeepPartial<Resource>,
   ): CancelablePromise<ResourceItem[]> {
     return this.resources.getMany(resource);
   }
@@ -538,7 +505,7 @@ export class NgwConnector {
           keyname?: string;
           resourceId?: number;
           resource?: string | number;
-        }
+        },
   ): CancelablePromise<ResourceItem[]> {
     return this.resources.getChildrenOf(optOrResource);
   }
@@ -548,7 +515,7 @@ export class NgwConnector {
    */
   updateResource(
     resource: ResourceDefinition,
-    data: DeepPartial<ResourceItem>
+    data: DeepPartial<ResourceItem>,
   ): CancelablePromise<ResourceItem | undefined> {
     return this.resources.update(resource, data);
   }
@@ -563,65 +530,9 @@ export class NgwConnector {
   /**
    * @internal
    */
-  protected _setLoadingQueue(
-    name: string,
-    resolve: (...args: any[]) => any,
-    reject: (...args: any[]) => any
-  ): void {
-    this._loadingQueue[name] = this._loadingQueue[name] || {
-      name,
-      waiting: [],
-    };
-    this._loadingQueue[name].waiting.push({
-      resolve,
-      reject,
-      timestamp: new Date(),
-    });
-  }
-
-  /**
-   * @internal
-   */
-  protected _rejectLoadingQueue(): void {
-    for (const q in this._loadingQueue) {
-      const queue = this._loadingQueue[q];
-      queue.waiting.forEach((x) => {
-        x.reject();
-      });
-      delete this._loadingQueue[q];
-    }
-  }
-
-  /**
-   * @internal
-   */
-  protected _executeLoadingQueue(
-    name: string,
-    data: unknown,
-    isError?: boolean
-  ): void {
-    const queue = this._loadingQueue[name];
-    if (queue) {
-      for (let fry = 0; fry < queue.waiting.length; fry++) {
-        const wait = queue.waiting[fry];
-        if (isError) {
-          if (wait.reject) {
-            wait.reject();
-          }
-        } else {
-          wait.resolve(data);
-        }
-      }
-      queue.waiting = [];
-    }
-  }
-
-  /**
-   * @internal
-   */
   protected _loadData(
     url: string,
-    options: RequestOptions
+    options: RequestOptions,
   ): CancelablePromise<any> {
     options.responseType = options.responseType || 'json';
     return new CancelablePromise((resolve, reject, onCancel) => {

@@ -14,7 +14,7 @@ export class NgwResource {
     if (this.item) {
       this._extent = await fetchNgwResourceExtent(
         this.item,
-        this.connector
+        this.connector,
       ).then();
       return this._extent;
     }

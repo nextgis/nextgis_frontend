@@ -4,10 +4,15 @@
 
 ## getIdentifyGeoJson() function
 
+> Warning: This API is now obsolete.
+> 
+> use [fetchIdentifyGeoJson()](./ngw-kit.fetchidentifygeojson.md) instead
+> 
+
 <b>Signature:</b>
 
 ```typescript
-export declare function getIdentifyGeoJson<G extends Geometry | null = Geometry, P extends JsonMap = JsonMap>(options: GetIdentifyGeoJsonOptions): CancelablePromise<Feature<G, P>> | Feature<G, P> | undefined;
+export declare function getIdentifyGeoJson<G extends Geometry = Geometry, P extends JsonMap = JsonMap>(options: GetIdentifyGeoJsonOptions): CancelablePromise<Feature<G, P> | undefined>;
 ```
 
 ## Parameters
@@ -18,5 +23,5 @@ export declare function getIdentifyGeoJson<G extends Geometry | null = Geometry,
 
 <b>Returns:</b>
 
-CancelablePromise&lt;Feature&lt;G, P&gt;&gt; \| Feature&lt;G, P&gt; \| undefined
+CancelablePromise&lt;Feature&lt;G, P&gt; \| undefined&gt;
 

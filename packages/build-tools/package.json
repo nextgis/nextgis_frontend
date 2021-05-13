@@ -1,32 +1,30 @@
 {
   "name": "@nextgis/build-tools",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0-beta.8",
   "description": "",
   "dependencies": {
-    "@microsoft/api-extractor": "^7.12.0",
-    "@nextgis/eslint-config": "^1.0.0-beta.2",
-    "@rollup/plugin-alias": "^3.1.1",
-    "@rollup/plugin-commonjs": "^16.0.0",
-    "@rollup/plugin-image": "^2.0.5",
+    "@microsoft/api-extractor": "^7.13.2",
+    "@nextgis/eslint-config": "^1.0.0-beta.8",
+    "@rollup/plugin-alias": "^3.1.2",
+    "@rollup/plugin-commonjs": "^18.0.0",
+    "@rollup/plugin-image": "^2.0.6",
     "@rollup/plugin-json": "^4.1.0",
-    "@rollup/plugin-node-resolve": "^10.0.0",
-    "@rollup/plugin-replace": "^2.3.4",
-    "autoprefixer": "9.8.6",
+    "@rollup/plugin-node-resolve": "^11.2.1",
+    "@rollup/plugin-replace": "^2.4.2",
+    "autoprefixer": "10.2.4",
     "brotli": "^1.3.2",
     "chalk": "^4.1.0",
     "cssnano": "^4.1.10",
-    "execa": "^4.1.0",
-    "fs-extra": "^9.0.1",
-    "postcss": "8.1.1",
-    "postcss-url": "8.0.0",
+    "execa": "^5.0.0",
+    "fs-extra": "^9.1.0",
+    "postcss": "8.2.6",
+    "postcss-url": "10.1.1",
     "rimraf": "^3.0.2",
-    "rollup": "^2.33.3",
-    "rollup-plugin-node-builtins": "^2.1.2",
-    "rollup-plugin-node-globals": "^1.4.0",
-    "rollup-plugin-postcss": "3.1.8",
+    "rollup": "^2.44.0",
+    "rollup-plugin-postcss": "4.0.0",
     "rollup-plugin-terser": "^7.0.2",
-    "rollup-plugin-typescript2": "^0.29.0",
-    "typescript": "^4.1.2"
+    "rollup-plugin-typescript2": "^0.30.0",
+    "typescript": "^4.1.5"
   },
   "scripts": {
     "clean": "exit 0",
@@ -51,7 +49,7 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "rollup-plugin-visualizer": "^4.2.0"
+    "rollup-plugin-visualizer": "^5.3.0"
   },
   "gitHead": "902bc588de905d567f54f8f53838b921ee3a3436"
 }

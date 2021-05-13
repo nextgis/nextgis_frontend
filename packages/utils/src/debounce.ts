@@ -2,7 +2,7 @@
 
 export function debounce<T extends (...args: any[]) => void>(
   cb: T,
-  wait = 10
+  wait = 10,
 ): T & { clear: () => void } {
   let timeoutId: any;
 
@@ -29,7 +29,7 @@ export function DebounceDecorator(wait = 10) {
   return function (
     target: unknown,
     key: string,
-    descriptor: PropertyDescriptor
+    descriptor: PropertyDescriptor,
   ): PropertyDescriptor {
     return {
       configurable: true,

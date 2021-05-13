@@ -4,10 +4,15 @@
 
 ## MapClickEvent.latLng property
 
+> Warning: This API is now obsolete.
+> 
+> use `lngLat: number[]` instead
+> 
+
 The geographical point where the mouse event occurred.
 
 <b>Signature:</b>
 
 ```typescript
-latLng: LatLng;
+latLng?: LatLng;
 ```

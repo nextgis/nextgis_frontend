@@ -5,7 +5,7 @@ import { Item, Package } from '../../../MainPage';
 const changeHtmlMapAdapter: (
   html: string,
   adapter: Package,
-  adapters: Package[]
+  adapters: Package[],
 ) => string = require('../../../../scripts/changeHtmlMapAdapter');
 
 @Component({
@@ -39,7 +39,7 @@ export class HtmlExample extends Vue {
         this.item.html = changeHtmlMapAdapter(
           this.item.html,
           exist,
-          this.item.ngwMaps
+          this.item.ngwMaps,
         );
       }
     }
@@ -70,7 +70,7 @@ export class HtmlExample extends Vue {
 
   private _writeIFrame(html: string) {
     const wrapper = document.getElementById(
-      'example-iframe'
+      'example-iframe',
     ) as HTMLFrameElement;
     wrapper.innerHTML = '';
     const iframe = document.createElement('iframe');

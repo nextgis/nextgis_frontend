@@ -8,9 +8,15 @@
 <b>Signature:</b>
 
 ```typescript
-export declare class WebMapLayers<M = any, L = any, C = any, E extends WebMapEvents = WebMapEvents> extends WebMapMain<M, L, C, E> 
+export declare class WebMapLayers<M = any, L = any, E extends WebMapEvents = WebMapEvents, O extends MapOptions = MapOptions> extends WebMapMain<M, E, O> 
 ```
-<b>Extends:</b> [WebMapMain](./webmap.webmapmain.md)<!-- -->&lt;M, L, C, E&gt;
+<b>Extends:</b> [WebMapMain](./webmap.webmapmain.md)<!-- -->&lt;M, E, O&gt;
+
+## Constructors
+
+|  Constructor | Modifiers | Description |
+|  --- | --- | --- |
+|  [(constructor)(mapOptions)](./webmap.webmaplayers._constructor_.md) |  | Constructs a new instance of the <code>WebMapLayers</code> class |
 
 ## Methods
 
@@ -21,6 +27,7 @@ export declare class WebMapLayers<M = any, L = any, C = any, E extends WebMapEve
 |  [addLayer(adapter, options, order)](./webmap.webmaplayers.addlayer.md) |  | Registration of map layer. |
 |  [addLayerData(layerDef, data)](./webmap.webmaplayers.addlayerdata.md) |  | Push new the GeoJSON features into given vector layer. |
 |  [addLayerFromAsyncAdapter(adapter, options, order)](./webmap.webmaplayers.addlayerfromasyncadapter.md) |  |  |
+|  [addTileJsonLayer(tileJson)](./webmap.webmaplayers.addtilejsonlayer.md) |  |  |
 |  [allLayers()](./webmap.webmaplayers.alllayers.md) |  |  |
 |  [clearLayerData(layerDef, cb)](./webmap.webmaplayers.clearlayerdata.md) |  | Remove from vector layer all features. it is possible to remove only some objects if you specify a callback function. |
 |  [filterLayer(layerDef, filter)](./webmap.webmaplayers.filterlayer.md) |  | Hide features from a vector layer using a callback function. |

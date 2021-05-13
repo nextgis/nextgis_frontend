@@ -9,7 +9,11 @@ field, operation, value \['foo', 'eq', 'bar'\] \['count', 'ge', 20\]
 <b>Signature:</b>
 
 ```typescript
-export declare type PropertyFilter<T extends Properties = Properties> = [keyof T | string, Operations, any];
+export declare type PropertyFilter<T extends Properties = Properties> = [
+    keyof T | string,
+    Operations,
+    any
+];
 ```
 <b>References:</b> [Operations](./properties-filter.operations.md)
 

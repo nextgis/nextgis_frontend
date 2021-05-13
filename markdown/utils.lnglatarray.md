@@ -11,3 +11,5 @@ Array of two numbers representing longitude and latitude.
 ```typescript
 export declare type LngLatArray = Position | number[];
 ```
+<b>References:</b> [Position](./utils.position.md)
+

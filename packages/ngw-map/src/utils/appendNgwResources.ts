@@ -1,11 +1,14 @@
-import { NgwResourceDefinition, NgwLayerOptions } from '../interfaces';
-import { NgwLayerOptionsAdditional } from '@nextgis/ngw-kit';
+import type {
+  NgwLayerOptionsAdditional,
+  NgwLayerOptions,
+} from '@nextgis/ngw-kit';
+import type { NgwResourceDefinition } from '../interfaces';
 
 export function appendNgwResources(
   options: NgwLayerOptions[],
   resource?: NgwResourceDefinition,
   defOptions?: NgwLayerOptionsAdditional,
-  overwriteOptions?: NgwLayerOptionsAdditional
+  overwriteOptions?: NgwLayerOptionsAdditional,
 ): void {
   if (typeof resource === 'number' || typeof resource === 'string') {
     resource = Number(resource);

@@ -1,9 +1,9 @@
-import { MainLayerAdapter, AdapterOptions } from '@nextgis/webmap';
 import OSM from 'ol/source/OSM';
 import { ATTRIBUTION } from 'ol/source/OSM';
 import TileLayer from 'ol/layer/Tile';
-import Map from 'ol/Map';
 
+import type Map from 'ol/Map';
+import type { MainLayerAdapter, AdapterOptions } from '@nextgis/webmap';
 export class OsmAdapter implements MainLayerAdapter {
   name = 'osm';
 

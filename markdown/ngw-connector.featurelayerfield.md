@@ -20,5 +20,5 @@ export interface FeatureLayerField
 |  [id](./ngw-connector.featurelayerfield.id.md) | number |  |
 |  [keyname](./ngw-connector.featurelayerfield.keyname.md) | string |  |
 |  [label\_field](./ngw-connector.featurelayerfield.label_field.md) | boolean |  |
-|  [typemod](./ngw-connector.featurelayerfield.typemod.md) | unknown |  |
+|  [typemod?](./ngw-connector.featurelayerfield.typemod.md) | unknown | <i>(Optional)</i> |
 

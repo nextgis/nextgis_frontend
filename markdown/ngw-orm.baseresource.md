@@ -16,8 +16,8 @@ export declare class BaseResource
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [connection](./ngw-orm.baseresource.connection.md) | <code>static</code> | [Connection](./ngw-orm.connection.md) |  |
-|  [item](./ngw-orm.baseresource.item.md) | <code>static</code> | [ResourceItem](./ngw-connector.resourceitem.md) |  |
+|  [connection?](./ngw-orm.baseresource.connection.md) | <code>static</code> | [Connection](./ngw-orm.connection.md) | <i>(Optional)</i> |
+|  [item?](./ngw-orm.baseresource.item.md) | <code>static</code> | [ResourceItem](./ngw-connector.resourceitem.md) | <i>(Optional)</i> |
 
 ## Methods
 
@@ -29,4 +29,5 @@ export declare class BaseResource
 |  [receive(item, ResCls)](./ngw-orm.baseresource.receive.md) | <code>static</code> |  |
 |  [sync(options, connectionOrOptions)](./ngw-orm.baseresource.sync.md) | <code>static</code> |  |
 |  [toTypescript(opt)](./ngw-orm.baseresource.totypescript.md) | <code>static</code> |  |
+|  [validate()](./ngw-orm.baseresource.validate.md) | <code>static</code> |  |
 

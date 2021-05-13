@@ -3,6 +3,68 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.9](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.8...v1.0.0-beta.9) (2021-05-03)
+
+
+### Features
+
+* **ngw-kit:** add identify item for speedup ngw selection ([b051f9f](https://github.com/nextgis/nextgis_frontend/commit/b051f9f6f596f3a54645e5ccbc628907ed83fca1))
+
+
+
+
+
+# [1.0.0-beta.8](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.7...v1.0.0-beta.8) (2021-05-02)
+
+**Note:** Version bump only for package @nextgis/ngw-leaflet
+
+
+
+
+
+# [1.0.0-beta.7](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.6...v1.0.0-beta.7) (2021-04-23)
+
+**Note:** Version bump only for package @nextgis/ngw-leaflet
+
+
+
+
+
+# [1.0.0-beta.6](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2021-04-04)
+
+
+### Bug Fixes
+
+* **demo:** import utils from cdn ([f064e84](https://github.com/nextgis/nextgis_frontend/commit/f064e84214cc4347722c34e966fb67fac184db7f))
+
+
+
+
+
+# [1.0.0-beta.5](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2021-02-13)
+
+**Note:** Version bump only for package @nextgis/ngw-leaflet
+
+
+
+
+
+# [1.0.0-beta.4](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2021-01-17)
+
+**Note:** Version bump only for package @nextgis/ngw-leaflet
+
+
+
+
+
+# [1.0.0-beta.3](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2020-12-19)
+
+**Note:** Version bump only for package @nextgis/ngw-leaflet
+
+
+
+
+
 # [1.0.0-beta.2](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2020-11-28)
 
 

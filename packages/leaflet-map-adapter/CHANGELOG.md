@@ -3,6 +3,84 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.9](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.8...v1.0.0-beta.9) (2021-05-03)
+
+**Note:** Version bump only for package @nextgis/leaflet-map-adapter
+
+
+
+
+
+# [1.0.0-beta.8](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.7...v1.0.0-beta.8) (2021-05-02)
+
+**Note:** Version bump only for package @nextgis/leaflet-map-adapter
+
+
+
+
+
+# [1.0.0-beta.7](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.6...v1.0.0-beta.7) (2021-04-23)
+
+**Note:** Version bump only for package @nextgis/leaflet-map-adapter
+
+
+
+
+
+# [1.0.0-beta.6](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2021-04-04)
+
+
+### Bug Fixes
+
+* **leafelet-map-adapter:** safe make remote options ([70dc9d6](https://github.com/nextgis/nextgis_frontend/commit/70dc9d66faf75d9344d2532dba16112081f13861))
+
+
+
+
+
+# [1.0.0-beta.5](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2021-02-13)
+
+**Note:** Version bump only for package @nextgis/leaflet-map-adapter
+
+
+
+
+
+# [1.0.0-beta.4](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2021-01-17)
+
+
+### Bug Fixes
+
+* **leaflet:** remove forgotten console logs ([4954cde](https://github.com/nextgis/nextgis_frontend/commit/4954cdebbb5c4859126c9ac5d1599b7d8ec04f78))
+
+
+### Features
+
+* add setViewDelay options to control map update ([3c50948](https://github.com/nextgis/nextgis_frontend/commit/3c50948d8ce31d79879cf566f827cee78fc1af31))
+
+
+### Performance Improvements
+
+* **leaflet:** abort image overlay request on view change ([d8613f0](https://github.com/nextgis/nextgis_frontend/commit/d8613f0be10e730d1ec9bb4ee0f2fa27c1687009))
+* **leaflet:** abort xhr tile loading on setView ([f7e9ed0](https://github.com/nextgis/nextgis_frontend/commit/f7e9ed044ed39fbc95c73ad381560e692dda6046))
+* **leaflet:** setViewDelay for tile layer ([229ef92](https://github.com/nextgis/nextgis_frontend/commit/229ef9211a9aac27b5d7ca86f04118e291579d8b))
+
+
+
+
+
+# [1.0.0-beta.3](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2020-12-19)
+
+
+### Bug Fixes
+
+* provide support for map preclick event ([9400b31](https://github.com/nextgis/nextgis_frontend/commit/9400b31c116d15f6ae9e68b7b2c0369fa1f906b9)), closes [#8](https://github.com/nextgis/nextgis_frontend/issues/8)
+* **webmap:** set zero zoom ([059e6ea](https://github.com/nextgis/nextgis_frontend/commit/059e6ea243a0ba0b6cce58905dde58485bc5d372))
+
+
+
+
+
 # [1.0.0-beta.2](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2020-11-28)
 
 
@@ -94,7 +172,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* **cancelable-promise:** шьзкщму PromisesControl ([ca5fabb](https://github.com/nextgis/nextgis_frontend/commit/ca5fabb60e998f19713704011db58588487aebe7))
+* **cancelable-promise:** improve PromisesControl ([ca5fabb](https://github.com/nextgis/nextgis_frontend/commit/ca5fabb60e998f19713704011db58588487aebe7))
 * **utils:** add `arrayCompareStrict` function ([9d65949](https://github.com/nextgis/nextgis_frontend/commit/9d659496fbcf4dd0e2f467d3e18ad7253fcb7041))
 * **webmap:** remove control from promise ([fbeae95](https://github.com/nextgis/nextgis_frontend/commit/fbeae956a3dc7ad01fd90ac3807f484d3ab79424))
 

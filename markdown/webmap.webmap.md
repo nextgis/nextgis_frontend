@@ -9,9 +9,9 @@ The core component for managing map adapters. It contains methods for adding and
 <b>Signature:</b>
 
 ```typescript
-export declare class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEvents> extends WebMapControls<M, L, C, E> implements WebMapControls, WebMapLayers, WebMapMain 
+export declare class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEvents, O extends MapOptions = MapOptions> extends WebMapControls<M, L, C, E, O> implements WebMapControls, WebMapLayers, WebMapMain 
 ```
-<b>Extends:</b> [WebMapControls](./webmap.webmapcontrols.md)<!-- -->&lt;M, L, C, E&gt;
+<b>Extends:</b> [WebMapControls](./webmap.webmapcontrols.md)<!-- -->&lt;M, L, C, E, O&gt;
 
 <b>Implements:</b> [WebMapControls](./webmap.webmapcontrols.md)<!-- -->, [WebMapLayers](./webmap.webmaplayers.md)<!-- -->, [WebMapMain](./webmap.webmapmain.md)
 
@@ -24,10 +24,16 @@ import MapAdapter from '@nextgis/ol-map-adapter';
 
 const webMap = new WebMap({
   mapAdapter: new MapAdapter(),
-  mapOptions: { target: 'map' },
+  target: 'map',
 });
 
 ```
+
+## Constructors
+
+|  Constructor | Modifiers | Description |
+|  --- | --- | --- |
+|  [(constructor)(mapOptions)](./webmap.webmap._constructor_.md) |  | Constructs a new instance of the <code>WebMap</code> class |
 
 ## Methods
 

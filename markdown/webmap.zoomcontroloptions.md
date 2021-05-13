@@ -15,8 +15,8 @@ export interface ZoomControlOptions
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [zoomInText](./webmap.zoomcontroloptions.zoomintext.md) | string | The text set on the 'zoom in' button. |
-|  [zoomInTitle](./webmap.zoomcontroloptions.zoomintitle.md) | string | The title set on the 'zoom in' button. |
-|  [zoomOutText](./webmap.zoomcontroloptions.zoomouttext.md) | string | The text set on the 'zoom out' button. |
-|  [zoomOutTitle](./webmap.zoomcontroloptions.zoomouttitle.md) | string | The title set on the 'zoom out' button. |
+|  [zoomInText?](./webmap.zoomcontroloptions.zoomintext.md) | string | <i>(Optional)</i> The text set on the 'zoom in' button. |
+|  [zoomInTitle?](./webmap.zoomcontroloptions.zoomintitle.md) | string | <i>(Optional)</i> The title set on the 'zoom in' button. |
+|  [zoomOutText?](./webmap.zoomcontroloptions.zoomouttext.md) | string | <i>(Optional)</i> The text set on the 'zoom out' button. |
+|  [zoomOutTitle?](./webmap.zoomcontroloptions.zoomouttitle.md) | string | <i>(Optional)</i> The title set on the 'zoom out' button. |
 

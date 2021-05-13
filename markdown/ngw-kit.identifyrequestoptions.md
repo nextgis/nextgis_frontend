@@ -17,5 +17,5 @@ export interface IdentifyRequestOptions
 |  --- | --- | --- |
 |  [connector](./ngw-kit.identifyrequestoptions.connector.md) | NgwConnector |  |
 |  [layers](./ngw-kit.identifyrequestoptions.layers.md) | number\[\] |  |
-|  [radius](./ngw-kit.identifyrequestoptions.radius.md) | number |  |
+|  [radius?](./ngw-kit.identifyrequestoptions.radius.md) | number | <i>(Optional)</i> |
 

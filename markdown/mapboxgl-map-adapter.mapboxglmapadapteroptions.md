@@ -15,6 +15,6 @@ export interface MapboxglMapAdapterOptions extends MapOptions
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [accessToken](./mapboxgl-map-adapter.mapboxglmapadapteroptions.accesstoken.md) | string |  |
-|  [style](./mapboxgl-map-adapter.mapboxglmapadapteroptions.style.md) | Partial&lt;mapboxgl.Style&gt; \| string |  |
+|  [accessToken?](./mapboxgl-map-adapter.mapboxglmapadapteroptions.accesstoken.md) | string | <i>(Optional)</i> |
+|  [style?](./mapboxgl-map-adapter.mapboxglmapadapteroptions.style.md) | Partial&lt;mapboxgl.Style&gt; \| string | <i>(Optional)</i> |
 

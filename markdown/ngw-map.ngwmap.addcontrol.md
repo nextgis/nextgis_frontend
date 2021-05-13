@@ -9,7 +9,7 @@ Organized addition to the map design and controls elements, calling `control.onA
 <b>Signature:</b>
 
 ```typescript
-addControl<K extends keyof MapControls>(controlDef: K | C, position: ControlPositions, options?: MapControls[K]): Promise<any>;
+addControl<K extends keyof MapControls>(controlDef: K | C, position: ControlPosition, options?: MapControls[K]): Promise<any>;
 ```
 
 ## Parameters
@@ -17,7 +17,7 @@ addControl<K extends keyof MapControls>(controlDef: K | C, position: ControlPosi
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  controlDef | K \| C |  |
-|  position | [ControlPositions](./webmap.controlpositions.md) | position relative to the map angles |
+|  position | [ControlPosition](./webmap.controlposition.md) | position relative to the map angles |
 |  options | [MapControls](./webmap.mapcontrols.md)<!-- -->\[K\] | initialization parameters if the control is set as a string value |
 
 <b>Returns:</b>

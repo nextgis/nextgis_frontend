@@ -1,5 +1,12 @@
 import { Tileset3DAdapterOptions, LngLatBoundsArray } from '@nextgis/webmap';
-import { Cesium3DTileset, Matrix4, Cartesian3, Cartographic } from 'cesium';
+import {
+  Cesium3DTileset,
+  Matrix4,
+  Cartesian3,
+  Cartographic,
+  Cesium3DTileStyle,
+  Color,
+} from 'cesium';
 import { debugLog } from '@nextgis/utils';
 import { getExtentFromBoundingSphere } from '../utils/getExtentFromBoundingSphere';
 import { makeUrl } from '../utils/makeUrl';
@@ -11,9 +18,9 @@ export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
   private _extent?: LngLatBoundsArray;
 
   async addLayer(
-    opt: Tileset3DAdapterOptions
+    opt: Tileset3DAdapterOptions,
   ): Promise<Cesium3DTileset | undefined> {
-    this.options = { ...opt };
+    this.options = { ...this.options, ...opt };
     const tileset = await this._addLayer();
     return tileset;
   }
@@ -34,8 +41,24 @@ export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
   }
 
   showLayer(): void {
-    if (this.layer) {
-      this.layer.show = true;
+    const tileset = this.layer;
+    if (tileset) {
+      tileset.show = true;
+      if (
+        this.options.paint &&
+        'color' in this.options.paint &&
+        this.options.paint.color &&
+        typeof this.options.paint.color === 'string'
+      ) {
+        const colorFromCss = Color.fromCssColorString(this.options.paint.color);
+        if (colorFromCss) {
+          // use lead toCssColorString to format color as rbg(,,,) or rgba(,,,,) stringCssColorString();
+          const color = colorFromCss.toCssColorString();
+          tileset.style = new Cesium3DTileStyle({
+            color,
+          });
+        }
+      }
     }
     super.showLayer();
   }
@@ -65,6 +88,7 @@ export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
     try {
       const tileset = await layer.readyPromise;
       this.layer = tileset;
+
       this._extent = this._calculateExtent();
       this.map.scene.primitives.add(this.layer);
       this.watchHeight();
@@ -102,7 +126,7 @@ export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
         const translation = Cartesian3.subtract(
           offset,
           surface,
-          new Cartesian3()
+          new Cartesian3(),
         );
         this.layer.modelMatrix = Matrix4.fromTranslation(translation);
       }
@@ -121,7 +145,7 @@ export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
         () => {
           const heightOffset = terrainSamplePositions[0].height;
           this._setHeight(heightOffset);
-        }
+        },
       );
     }
   }

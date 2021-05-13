@@ -1,8 +1,9 @@
 import './PanelControl.css';
 
 import Control from 'ol/control/Control';
-import { ControlPositions } from '@nextgis/webmap';
 import ControlContainer from '@nextgis/control-container';
+
+import type { ControlPosition } from '@nextgis/webmap';
 
 interface PanelControlOptions {
   collapsible?: boolean;
@@ -22,10 +23,7 @@ export class PanelControl extends Control {
     this.panelContainer = panelContainer;
   }
 
-  async addControl(
-    control: Control,
-    position: ControlPositions
-  ): Promise<void> {
+  async addControl(control: Control, position: ControlPosition): Promise<void> {
     const map = this.getMap();
     const target = this.panelContainer.newPositionContainer(position);
     if (target) {

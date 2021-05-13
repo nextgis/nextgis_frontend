@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Webmap identification multiply</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body,
+      #map {
+        width: 100%;
+        height: 100%;
+      }
+      .identify-panel {
+        background-color: rgba(255,255,255,.8);
+      }
+    </style>
+
+    <script src="../../lib/ngw-leaflet.global.js"></script>
+  </head>
+
+  <body>
+    <div id="map"></div>
+    <script>
+      var ngwMap = new NgwMap({
+        baseUrl: 'https://demo.nextgis.com',
+        target: 'map',
+        qmsId: 448,
+        resources: [{ resource: 4226, fit: true, selectable: true }],
+      });
+      // stop all current identification requests on each click before making new requests
+      ngwMap.emitter.on('click', function (e) {
+        ngwMap.cancelPromise('select', 'identify');
+        ngwMap.removeLayer('geojson');
+        identifyPanel.innerHTML = '...loading';
+      });
+
+      // Identify panel control
+      var identifyPanel = document.createElement('div');
+      identifyPanel.className = 'identify-panel';
+      identifyPanel.innerHTML = 'Click on the map for webmap identify';
+
+      var fillIdentifyPanel = function (items) {
+        identifyPanel.innerHTML = '';
+        var select = document.createElement('select');
+        items.forEach(function (item, i) {
+          const option = document.createElement('option');
+          option.innerHTML = item.label;
+          option.setAttribute('value', i);
+          select.appendChild(option);
+        });
+        select.addEventListener('change', function (opt) {
+          setSelected(items[event.target.value]);
+        });
+        identifyPanel.appendChild(select);
+
+        var info = document.createElement('div');
+        identifyPanel.appendChild(info);
+        var setSelected = function (item) {
+          info.innerHTML = '...loading';
+          ngwMap.removeLayer('geojson');
+
+          item.geojson().then(function (feature) {
+            ngwMap.addGeoJsonLayer({ data: feature, id: 'geojson' });
+            item.resource().then(function (resource) {
+              info.innerHTML = '';
+              resource.fields.forEach(function (field) {
+                var prop =
+                  '<div>' +
+                  field.display_name +
+                  ': ' +
+                  feature.properties[field.keyname] +
+                  '</div>';
+                info.innerHTML += prop;
+              });
+            });
+          });
+        };
+        setSelected(items[0]);
+      };
+      var identifyControl = ngwMap.createControl(
+        {
+          onAdd: function () {
+            return identifyPanel;
+          },
+        },
+        { bar: true },
+      );
+      ngwMap.addControl(identifyControl, 'top-right');
+
+      // handle map click
+      ngwMap.emitter.on('ngw:select', function (e) {
+        if (e) {
+          fillIdentifyPanel(e.getIdentifyItems());
+        }
+      });
+    </script>
+  </body>
+</html>

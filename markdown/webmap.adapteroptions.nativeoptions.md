@@ -4,6 +4,8 @@
 
 ## AdapterOptions.nativeOptions property
 
+Map and layer adapter base options
+
 <b>Signature:</b>
 
 ```typescript

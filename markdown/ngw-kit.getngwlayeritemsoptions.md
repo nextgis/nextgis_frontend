@@ -15,6 +15,6 @@ export interface GetNgwLayerItemsOptions
 |  Property | Type | Description |
 |  --- | --- | --- |
 |  [connector](./ngw-kit.getngwlayeritemsoptions.connector.md) | NgwConnector |  |
-|  [filters](./ngw-kit.getngwlayeritemsoptions.filters.md) | [PropertiesFilter](./properties-filter.propertiesfilter.md) |  |
+|  [filters?](./ngw-kit.getngwlayeritemsoptions.filters.md) | [PropertiesFilter](./properties-filter.propertiesfilter.md) | <i>(Optional)</i> |
 |  [resourceId](./ngw-kit.getngwlayeritemsoptions.resourceid.md) | number |  |
 

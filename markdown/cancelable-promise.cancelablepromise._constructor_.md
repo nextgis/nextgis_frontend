@@ -9,7 +9,7 @@ Constructs a new instance of the `CancelablePromise` class
 <b>Signature:</b>
 
 ```typescript
-constructor(executor: (resolve: (value?: T | PromiseLike<T>) => void, reject: (reason?: any) => void, onCancel: OnCancelFunction) => void);
+constructor(executor: (resolve: (value?: T | PromiseLike<T>) => void, reject: (reason?: any) => void, onCancel: OnCancelFunction) => void, timeout?: number);
 ```
 
 ## Parameters
@@ -17,4 +17,5 @@ constructor(executor: (resolve: (value?: T | PromiseLike<T>) => void, reject: (r
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  executor | (resolve: (value?: T \| PromiseLike&lt;T&gt;) =&gt; void, reject: (reason?: any) =&gt; void, onCancel: OnCancelFunction) =&gt; void |  |
+|  timeout | number |  |
 

@@ -15,9 +15,9 @@ export interface PopupOptions
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [autoPan](./webmap.popupoptions.autopan.md) | boolean |  |
-|  [createPopupContent](./webmap.popupoptions.createpopupcontent.md) | (layerDef: [LayerDefinition](./webmap.layerdefinition.md)<!-- -->) =&gt; HTMLElement \| string \| undefined |  |
-|  [fromProperties](./webmap.popupoptions.fromproperties.md) | boolean |  |
-|  [minWidth](./webmap.popupoptions.minwidth.md) | number |  |
-|  [popupContent](./webmap.popupoptions.popupcontent.md) | string \| HTMLElement |  |
+|  [autoPan?](./webmap.popupoptions.autopan.md) | boolean | <i>(Optional)</i> |
+|  [createPopupContent?](./webmap.popupoptions.createpopupcontent.md) | (layerDef: [LayerDefinition](./webmap.layerdefinition.md)<!-- -->) =&gt; HTMLElement \| string \| undefined \| Promise&lt;HTMLElement \| string \| undefined&gt; | <i>(Optional)</i> |
+|  [fromProperties?](./webmap.popupoptions.fromproperties.md) | boolean | <i>(Optional)</i> |
+|  [minWidth?](./webmap.popupoptions.minwidth.md) | number | <i>(Optional)</i> |
+|  [popupContent?](./webmap.popupoptions.popupcontent.md) | string \| HTMLElement | <i>(Optional)</i> |
 

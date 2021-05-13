@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-subdomains?: string;
+subdomains?: string | string[];
 ```

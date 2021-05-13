@@ -14,9 +14,11 @@ export interface ItemOptions
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [crossOrigin](./item.itemoptions.crossorigin.md) | 'anonymous' |  |
-|  [drawOrderEnabled](./item.itemoptions.draworderenabled.md) | boolean |  |
-|  [headers](./item.itemoptions.headers.md) | any |  |
-|  [order](./item.itemoptions.order.md) | number |  |
-|  [properties](./item.itemoptions.properties.md) | Array&lt;[ItemPropertyConfig](./item.itempropertyconfig.md)<!-- -->&lt;keyof [ItemPropertyTypes](./item.itempropertytypes.md)<!-- -->&gt;&gt; |  |
+|  [crossOrigin?](./item.itemoptions.crossorigin.md) | 'anonymous' | <i>(Optional)</i> |
+|  [drawOrderEnabled?](./item.itemoptions.draworderenabled.md) | boolean | <i>(Optional)</i> |
+|  [headers?](./item.itemoptions.headers.md) | any | <i>(Optional)</i> |
+|  [order?](./item.itemoptions.order.md) | number | <i>(Optional)</i> |
+|  [properties?](./item.itemoptions.properties.md) | Array&lt;[ItemPropertyConfig](./item.itempropertyconfig.md)<!-- -->&lt;keyof [ItemPropertyTypes](./item.itempropertytypes.md)<!-- -->&gt;&gt; | <i>(Optional)</i> |
+|  [ratio?](./item.itemoptions.ratio.md) | number | <i>(Optional)</i> |
+|  [setViewDelay?](./item.itemoptions.setviewdelay.md) | number | <i>(Optional)</i> |
 

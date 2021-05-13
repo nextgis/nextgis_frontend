@@ -8,12 +8,12 @@
  */
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-import { NgwMap, NgwLayerOptions, NgwMapOptions } from '@nextgis/ngw-map';
-import MapboxglMapAdapter, {
-  MapboxglMapAdapterOptions,
-} from '@nextgis/mapboxgl-map-adapter';
-import { ResourceAdapter } from '@nextgis/ngw-kit';
-import { Map } from 'mapbox-gl';
+import { NgwMap, NgwMapOptions } from '@nextgis/ngw-map';
+import MapboxglMapAdapter from '@nextgis/mapboxgl-map-adapter';
+
+import type { Map } from 'mapbox-gl';
+import type { MapboxglMapAdapterOptions } from '@nextgis/mapboxgl-map-adapter';
+import type { ResourceAdapter, NgwLayerOptions } from '@nextgis/ngw-kit';
 
 class NgwMapbox extends NgwMap<Map, string[], any, MapboxglMapAdapterOptions> {
   constructor(options: NgwMapOptions) {
@@ -37,8 +37,6 @@ class NgwMapbox extends NgwMap<Map, string[], any, MapboxglMapAdapterOptions> {
 
 export default NgwMapbox;
 
-// @ts-ignore
-if (window && !window.NgwMap) {
-  // @ts-ignore
-  window.NgwMap = NgwMapbox;
+if ((window as any) && !(window as any).NgwMap) {
+  (window as any).NgwMap = NgwMapbox;
 }

@@ -24,7 +24,7 @@ export declare class NgwKit implements StarterKit
 |  [connector](./ngw-kit.ngwkit.connector.md) |  | NgwConnector |  |
 |  [options](./ngw-kit.ngwkit.options.md) |  | [NgwKitOptions](./ngw-kit.ngwkitoptions.md) |  |
 |  [url](./ngw-kit.ngwkit.url.md) |  | string |  |
-|  [webMap](./ngw-kit.ngwkit.webmap.md) |  | [WebMap](./webmap.webmap.md) |  |
+|  [webMap?](./ngw-kit.ngwkit.webmap.md) |  | [WebMap](./webmap.webmap.md) | <i>(Optional)</i> |
 
 ## Methods
 

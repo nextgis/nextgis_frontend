@@ -23,7 +23,7 @@ interface FilterArgs {
 }
 
 export async function createGeoJsonAdapter(
-  opt: GetClassAdapterOptions
+  opt: GetClassAdapterOptions,
 ): Promise<Type<VectorLayerAdapter>> {
   const { webMap, connector, item } = opt;
   const addLayerOptionsPriority =
@@ -53,7 +53,7 @@ export async function createGeoJsonAdapter(
 
   const geoJsonAdapterCb = async (
     filters?: PropertiesFilter,
-    opt?: FilterOptions
+    opt?: FilterOptions,
   ) => {
     abort();
     _lastFilterArgs = { filters, options: opt };
@@ -75,7 +75,7 @@ export async function createGeoJsonAdapter(
     }
   };
 
-  return class NgwGeoJsonAdapter extends GeoJsonAdapter {
+  class NgwGeoJsonAdapter extends GeoJsonAdapter {
     emitter = new EventEmitter();
     _count?: number;
     __onMapMove?: () => void;
@@ -184,9 +184,9 @@ export async function createGeoJsonAdapter(
       try {
         const data = await geoJsonAdapterCb(
           filterArgs.filters,
-          filterArgs.options
+          filterArgs.options,
         );
-        webMap.setLayerData(this, data);
+        await webMap.setLayerData(this, data);
         this.emitter.emit('updated');
       } catch (er) {
         if (er.name !== 'CancelError') {
@@ -287,4 +287,6 @@ export async function createGeoJsonAdapter(
       }
     }
   };
+
+  return NgwGeoJsonAdapter;
 }

@@ -15,11 +15,11 @@ export interface ResourceItem extends ResourceItemMain
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [basemap\_layer](./ngw-connector.resourceitem.basemap_layer.md) | [BasemapResource](./ngw-connector.basemapresource.md) |  |
-|  [basemap\_webmap](./ngw-connector.resourceitem.basemap_webmap.md) | [BasemapWebmap](./ngw-connector.basemapwebmap.md) |  |
-|  [feature\_layer](./ngw-connector.resourceitem.feature_layer.md) | [FeatureResource](./ngw-connector.featureresource.md) |  |
-|  [file\_bucket](./ngw-connector.resourceitem.file_bucket.md) | [FileBucket](./ngw-connector.filebucket.md) |  |
-|  [lookup\_table](./ngw-connector.resourceitem.lookup_table.md) | [LookupTableResource](./ngw-connector.lookuptableresource.md) |  |
-|  [vector\_layer](./ngw-connector.resourceitem.vector_layer.md) | [VectorLayer](./ngw-connector.vectorlayer.md) |  |
-|  [webmap](./ngw-connector.resourceitem.webmap.md) | [WebmapResource](./ngw-connector.webmapresource.md) |  |
+|  [basemap\_layer?](./ngw-connector.resourceitem.basemap_layer.md) | [BasemapResource](./ngw-connector.basemapresource.md) | <i>(Optional)</i> |
+|  [basemap\_webmap?](./ngw-connector.resourceitem.basemap_webmap.md) | [BasemapWebmap](./ngw-connector.basemapwebmap.md) | <i>(Optional)</i> |
+|  [feature\_layer?](./ngw-connector.resourceitem.feature_layer.md) | [FeatureResource](./ngw-connector.featureresource.md) | <i>(Optional)</i> |
+|  [file\_bucket?](./ngw-connector.resourceitem.file_bucket.md) | [FileBucket](./ngw-connector.filebucket.md) | <i>(Optional)</i> |
+|  [lookup\_table?](./ngw-connector.resourceitem.lookup_table.md) | [LookupTableResource](./ngw-connector.lookuptableresource.md) | <i>(Optional)</i> |
+|  [vector\_layer?](./ngw-connector.resourceitem.vector_layer.md) | [VectorLayer](./ngw-connector.vectorlayer.md) | <i>(Optional)</i> |
+|  [webmap?](./ngw-connector.resourceitem.webmap.md) | [WebmapResource](./ngw-connector.webmapresource.md) | <i>(Optional)</i> |
 

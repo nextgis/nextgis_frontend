@@ -7,7 +7,7 @@ import {
 
 export function saveVectorLayer(
   opt: VectorResourceToNgwOptions,
-  connection: Connection
+  connection: Connection,
 ): Promise<{ id: number }[]> {
   const features = vectorResourceToNgw(opt);
 
@@ -15,7 +15,7 @@ export function saveVectorLayer(
     .patch(
       'feature_layer.feature.collection',
       { data: features },
-      { id: opt.resource.resource.id, ...FEATURE_REQUEST_PARAMS }
+      { id: opt.resource.resource.id, ...FEATURE_REQUEST_PARAMS },
     )
     .then((resp) => {
       opt.items.forEach((x, i) => {

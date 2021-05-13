@@ -19,7 +19,7 @@ module.exports = (config) => {
     frameworks: ['mocha'],
     files: [
       { pattern: 'tests/specs/*.ts', type: 'ts' },
-      // { pattern: 'tests/specs/ol-map-adapter.spec.ts', type: 'ts' },
+      // { pattern: 'tests/specs/area.spec.ts', type: 'ts' },
       // { pattern: 'tests/internet-specs/*.spec.ts', type: 'ts' },
     ],
     preprocessors: {

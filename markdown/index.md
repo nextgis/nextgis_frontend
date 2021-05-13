@@ -8,9 +8,12 @@
 
 |  Package | Description |
 |  --- | --- |
+|  [@nextgis/area](./area.md) | Dependencies free QGIS ellipsoidal area calculation reproduced in JavaScript. |
 |  [@nextgis/cancelable-promise](./cancelable-promise.md) | A promise you can stop |
 |  [@nextgis/control-container](./control-container.md) |  |
+|  [@nextgis/dialog](./dialog.md) |  |
 |  [@nextgis/dom](./dom.md) |  |
+|  [@nextgis/geocoder](./geocoder.md) | Modern geocoder on async generators. May use different data providers. |
 |  [@nextgis/icons](./icons.md) |  |
 |  [@nextgis/item](./item.md) |  |
 |  [@nextgis/leaflet-map-adapter](./leaflet-map-adapter.md) |  |
@@ -25,12 +28,12 @@
 |  [@nextgis/ngw-uploader](./ngw-uploader.md) |  |
 |  [@nextgis/ol-map-adapter](./ol-map-adapter.md) |  |
 |  [@nextgis/paint](./paint.md) |  |
+|  [@nextgis/progress](./progress.md) |  |
 |  [@nextgis/properties-filter](./properties-filter.md) |  |
 |  [@nextgis/qms-kit](./qms-kit.md) |  |
 |  [@nextgis/tree](./tree.md) |  |
 |  [@nextgis/url-runtime-params](./url-runtime-params.md) |  |
 |  [@nextgis/utils](./utils.md) |  |
-|  [@nextgis/vue-ngw-map](./vue-ngw-map.md) |  |
 |  [@nextgis/vuetify-ngw-components](./vuetify-ngw-components.md) |  |
 |  [@nextgis/vuex-ngw](./vuex-ngw.md) |  |
 |  [@nextgis/webmap](./webmap.md) | The library that allows to use a single interface for managing various interactive map frameworks. |

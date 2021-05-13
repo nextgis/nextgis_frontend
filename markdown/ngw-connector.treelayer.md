@@ -19,8 +19,8 @@ export interface TreeLayer extends TreeItem
 |  [item\_type](./ngw-connector.treelayer.item_type.md) | 'layer' |  |
 |  [layer\_adapter](./ngw-connector.treelayer.layer_adapter.md) | string |  |
 |  [layer\_enabled](./ngw-connector.treelayer.layer_enabled.md) | boolean |  |
-|  [layer\_max\_scale\_denom](./ngw-connector.treelayer.layer_max_scale_denom.md) | number |  |
-|  [layer\_min\_scale\_denom](./ngw-connector.treelayer.layer_min_scale_denom.md) | number |  |
+|  [layer\_max\_scale\_denom?](./ngw-connector.treelayer.layer_max_scale_denom.md) | number | <i>(Optional)</i> |
+|  [layer\_min\_scale\_denom?](./ngw-connector.treelayer.layer_min_scale_denom.md) | number | <i>(Optional)</i> |
 |  [layer\_style\_id](./ngw-connector.treelayer.layer_style_id.md) | number |  |
 |  [layer\_transparency](./ngw-connector.treelayer.layer_transparency.md) | number |  |
 

@@ -15,7 +15,7 @@ export declare class BaselayerSelect extends Vue
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [\_\_updateItems](./vuetify-ngw-components.baselayerselect.__updateitems.md) |  | () =&gt; Promise&lt;void&gt; |  |
+|  [\_\_updateItems?](./vuetify-ngw-components.baselayerselect.__updateitems.md) |  | () =&gt; Promise&lt;void&gt; | <i>(Optional)</i> |
 |  [\_layers](./vuetify-ngw-components.baselayerselect._layers.md) |  | Array&lt;[LayerAdapter](./webmap.layeradapter.md) \| [ResourceAdapter](./ngw-kit.resourceadapter.md)<!-- -->&gt; |  |
 |  [active](./vuetify-ngw-components.baselayerselect.active.md) |  | string \| false |  |
 |  [allowEmpty](./vuetify-ngw-components.baselayerselect.allowempty.md) |  | boolean |  |

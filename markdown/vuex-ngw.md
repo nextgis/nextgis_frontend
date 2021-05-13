@@ -23,9 +23,3 @@
 |  [ForeignResource](./vuex-ngw.foreignresource.md) |  |
 |  [PatchOptions](./vuex-ngw.patchoptions.md) |  |
 
-## Type Aliases
-
-|  Type Alias | Description |
-|  --- | --- |
-|  [LookupTables](./vuex-ngw.lookuptables.md) |  |
-

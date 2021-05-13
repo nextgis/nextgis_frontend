@@ -8,14 +8,14 @@
 <b>Signature:</b>
 
 ```typescript
-export interface Tileset3DAdapterOptions extends RasterAdapterOptions 
+export interface Tileset3DAdapterOptions extends RasterAdapterOptions, VectorAdapterOptions 
 ```
-<b>Extends:</b> [RasterAdapterOptions](./webmap.rasteradapteroptions.md)
+<b>Extends:</b> [RasterAdapterOptions](./webmap.rasteradapteroptions.md)<!-- -->, [VectorAdapterOptions](./webmap.vectoradapteroptions.md)
 
 ## Properties
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [heightOffset](./webmap.tileset3dadapteroptions.heightoffset.md) | number |  |
-|  [useTerrainHeight](./webmap.tileset3dadapteroptions.useterrainheight.md) | boolean |  |
+|  [heightOffset?](./webmap.tileset3dadapteroptions.heightoffset.md) | number | <i>(Optional)</i> |
+|  [useTerrainHeight?](./webmap.tileset3dadapteroptions.useterrainheight.md) | boolean | <i>(Optional)</i> |
 

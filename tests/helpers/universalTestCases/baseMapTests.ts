@@ -8,7 +8,7 @@ import {
   Type,
   MapOptions,
   LngLatArray,
-  WebMap
+  WebMap,
 } from '../../../packages/webmap/src';
 import { mapHtml } from '../mapHtml';
 import sleep from '../utils/asyncTimeout';
@@ -104,8 +104,8 @@ export const baseMapTests = (
         expect(Math.floor(zoom)).to.eql(8);
       });
 
-      it('Snaps zoom level to integer by default', done => {
-        mapAdapterCreate(MA, { zoom: 21 }).then(map => {
+      it('Snaps zoom level to integer by default', (done) => {
+        mapAdapterCreate(MA, { zoom: 21 }).then((map) => {
           (map as WebMap).emitter.once('zoomend', () => {
             expect(Math.floor(map.getZoom() as number)).to.eql(8);
             const center = map.getCenter() as LngLatArray;
