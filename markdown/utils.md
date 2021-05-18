@@ -32,6 +32,7 @@
 |  [deepmerge(x, y, mergeArray)](./utils.deepmerge.md) |  |
 |  [defined(val)](./utils.defined.md) | from https://github.com/CesiumGS/cesium/blob/master/Source/Core/defined.js |
 |  [degrees2meters(lng, lat)](./utils.degrees2meters.md) |  |
+|  [degrees2Radian(deg)](./utils.degrees2radian.md) |  |
 |  [deprecatedMapClick(ev)](./utils.deprecatedmapclick.md) |  |
 |  [deprecatedWarn(message)](./utils.deprecatedwarn.md) |  |
 |  [eachCoordinates(geojson, cb)](./utils.eachcoordinates.md) |  |

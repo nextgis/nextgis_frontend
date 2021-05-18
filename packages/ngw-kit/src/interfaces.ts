@@ -1,5 +1,5 @@
-import { Feature, Geometry } from 'geojson';
-import {
+import type { Feature, Geometry, Polygon } from 'geojson';
+import type {
   WebMap,
   AdapterOptions,
   LayerAdaptersOptions,
@@ -14,16 +14,17 @@ import {
   FilterOptions,
   RasterAdapterOptions,
 } from '@nextgis/webmap';
-import { PropertiesFilter } from '@nextgis/properties-filter';
-import NgwConnector, {
+import type { PropertiesFilter } from '@nextgis/properties-filter';
+import type NgwConnector from '@nextgis/ngw-connector';
+import type {
   ResourceItem,
   LayerFeature,
   FeatureItem,
   FeatureLayerFields,
 } from '@nextgis/ngw-connector';
-import { FeatureLayersIdentify } from '@nextgis/ngw-connector';
-import { Type } from '@nextgis/utils';
-import CancelablePromise from '@nextgis/cancelable-promise';
+import type { FeatureLayersIdentify } from '@nextgis/ngw-connector';
+import type { Type } from '@nextgis/utils';
+import type CancelablePromise from '@nextgis/cancelable-promise';
 
 declare module '@nextgis/webmap' {
   interface LayerAdaptersOptions {
@@ -222,6 +223,7 @@ export interface IdentifyRequestOptions {
   layers: number[];
   connector: NgwConnector;
   radius?: number;
+  geom?: Feature<Polygon> | Polygon;
 }
 
 /**

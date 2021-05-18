@@ -22,6 +22,7 @@ export declare class NgwLayersList extends Vue
 |  [ngwMap](./vuetify-ngw-components.ngwlayerslist.ngwmap.md) |  | [NgwMap](./ngw-map.ngwmap.md) |  |
 |  [notOnlyNgwLayer](./vuetify-ngw-components.ngwlayerslist.notonlyngwlayer.md) |  | boolean |  |
 |  [open](./vuetify-ngw-components.ngwlayerslist.open.md) |  | string\[\] |  |
+|  [removeLayerIcon](./vuetify-ngw-components.ngwlayerslist.removelayericon.md) |  | string |  |
 |  [selection](./vuetify-ngw-components.ngwlayerslist.selection.md) |  | string\[\] |  |
 |  [selectionType](./vuetify-ngw-components.ngwlayerslist.selectiontype.md) |  | 'independent' \| 'leaf' |  |
 |  [showLayer](./vuetify-ngw-components.ngwlayerslist.showlayer.md) |  | (layer: [NgwWebmapItem](./ngw-kit.ngwwebmapitem.md)<!-- -->) =&gt; boolean |  |
