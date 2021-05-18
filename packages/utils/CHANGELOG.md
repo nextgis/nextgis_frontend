@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.10](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.9...v1.0.0-beta.10) (2021-05-18)
+
+
+### Features
+
+* **utils:** add degrees to radian transform function ([9ce078a](https://github.com/nextgis/nextgis_frontend/commit/9ce078a4aef77ed58efad8a7e1736a7d49172a1d))
+
+
+
+
+
 # [1.0.0-beta.8](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.7...v1.0.0-beta.8) (2021-05-02)
 
 **Note:** Version bump only for package @nextgis/utils
