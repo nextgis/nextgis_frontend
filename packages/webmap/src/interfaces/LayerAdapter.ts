@@ -38,9 +38,7 @@ export interface OnLayerClickOptions {
  * Parameters that can be used to create any map layer adapter.
  * @public
  */
-export interface AdapterOptions<
-  N extends Record<string, any> = Record<string, any>
-> {
+export interface AdapterOptions<N extends Record<string, any> = Record<string, any>> {
   /**
    * Unique Layer ID.
    * If not specified, will be added automatically.
@@ -85,11 +83,13 @@ export interface AdapterOptions<
   /**
    * TODO: replace by minZoom
    * @internal
+   * @deprecated use minZoom instead
    */
   minScale?: number;
   /**
    * TODO: replace by maxZoom
    * @internal
+   * @deprecated use maxZoom instead
    */
   maxScale?: number;
   /**
@@ -130,7 +130,8 @@ export interface AdapterOptions<
    */
   setViewDelay?: number;
   /** Any properties to save in layer.
-   * May be useful to get additional info from layer event.  */
+   * May be useful to get additional info from layer event.
+   */
   props?: Record<string, any>;
   /** Map and layer adapter base options */
   nativeOptions?: N;
