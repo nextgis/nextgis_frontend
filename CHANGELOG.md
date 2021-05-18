@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.10](https://github.com/nextgis/nextgisweb_frontend/compare/v1.0.0-beta.9...v1.0.0-beta.10) (2021-05-18)
+
+
+### Bug Fixes
+
+* **ngw-kit:** on first adapter wait while show layer ([32fe7a0](https://github.com/nextgis/nextgisweb_frontend/commit/32fe7a0afde48fc8a46626fac1b5f8aa0b942775))
+
+
+### Features
+
+* **ngw-kit:** update features request params on no geom ([352fd22](https://github.com/nextgis/nextgisweb_frontend/commit/352fd220dca87de7018b86206aac31008f5a7e20))
+* **utils:** add degrees to radian transform function ([9ce078a](https://github.com/nextgis/nextgisweb_frontend/commit/9ce078a4aef77ed58efad8a7e1736a7d49172a1d))
+* **vuetify:** NgwLayersList remove layer ability ([320ce0e](https://github.com/nextgis/nextgisweb_frontend/commit/320ce0effd76c6562036c6558564cecc06e83231)), closes [#CU-jzby65](https://github.com/nextgis/nextgisweb_frontend/issues/CU-jzby65)
+* **webmap:** webmap container get set functions ([f0a1491](https://github.com/nextgis/nextgisweb_frontend/commit/f0a1491a471ccfa2538c48c1b307d6d5fa3d713c))
+
+
+
+
+
 # [1.0.0-beta.9](https://github.com/nextgis/nextgisweb_frontend/compare/v1.0.0-beta.8...v1.0.0-beta.9) (2021-05-03)
 
 
