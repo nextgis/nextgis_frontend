@@ -143,7 +143,23 @@ export function sendIdentifyRequest(
 ): CancelablePromise<FeatureLayersIdentify> {
   deprecatedMapClick(ev);
   const [lng, lat] = ev.lngLat;
-  const geom = getCirclePolygonCoordinates(lng, lat, options.radius);
+
+  let geom: number[][] = [];
+
+  if (options.geom) {
+    const polygon =
+      options.geom.type === 'Feature'
+        ? options.geom.geometry
+        : options.geom.type === 'Polygon'
+        ? options.geom
+        : false;
+    if (polygon) {
+      geom = polygon.coordinates[0];
+    }
+  }
+  if (!geom) {
+    geom = getCirclePolygonCoordinates(lng, lat, options.radius);
+  }
 
   // create wkt string
   const polygon: string[] = [];
