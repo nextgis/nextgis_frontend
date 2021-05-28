@@ -157,7 +157,7 @@ export function sendIdentifyRequest(
       geom = polygon.coordinates[0];
     }
   }
-  if (!geom) {
+  if (!geom.length) {
     geom = getCirclePolygonCoordinates(lng, lat, options.radius);
   }
 
