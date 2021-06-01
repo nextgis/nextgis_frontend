@@ -10,14 +10,13 @@ export async function createBasemapLayerAdapter({
     const qms = item.basemap_layer.qms;
     const url = item.basemap_layer.url;
     if (qms) {
-      const adapter = Promise.resolve(QmsKit.utils.createQmsAdapter(webMap));
-      adapter.then((x) => {
-        if (x && item) {
-          const qms_ = JSON.parse(qms);
-          x.prototype.qms = qms_;
-          x.prototype.baselayer = true;
-        }
-      });
+      const qms_ = JSON.parse(qms);
+      const adapter = Promise.resolve(
+        QmsKit.utils.createQmsAdapter(webMap, undefined, {
+          qms: qms_,
+          baselayer: true,
+        }),
+      );
       return adapter;
     } else if (url) {
       const TileAdapter = webMap.mapAdapter.layerAdapters.TILE as Type<
