@@ -547,13 +547,12 @@ export class NgwConnector {
       loadData(url, resolve, options, reject, onCancel);
     }).catch((httpError) => {
       if (httpError instanceof CancelablePromise.CancelError) {
-        // not need to handle cancel error because used onCancel
+        // not need to handle cancel error because onCancel method is used
       } else {
         // @ts-ignore
         if (__DEV__) {
           console.warn(httpError);
         }
-        console.log(httpError);
         const er = this._handleHttpError(httpError);
         if (er) {
           throw er;
