@@ -3,8 +3,7 @@ import { FeatureItem } from '@nextgis/ngw-connector';
 import { propertiesFilter } from '@nextgis/properties-filter';
 import CancelablePromise from '@nextgis/cancelable-promise';
 import {
-  GetNgwLayerItemsOptions,
-  NgwFeatureRequestOptions,
+  FetchNgwLayerItemsOptions,
 } from '../interfaces';
 import {
   createFeatureFieldFilterQueries,
@@ -15,7 +14,7 @@ export function fetchNgwLayerItems<
   G extends Geometry = Geometry,
   P extends { [field: string]: any } = { [field: string]: any }
 >(
-  options: GetNgwLayerItemsOptions & NgwFeatureRequestOptions<P>,
+  options: FetchNgwLayerItemsOptions<P>,
 ): CancelablePromise<FeatureItem<P, G>[]> {
   const filters = options.filters;
   if (filters) {
