@@ -384,6 +384,10 @@ export interface GetNgwLayerItemsOptions {
   filters?: PropertiesFilter;
 }
 
+export type FetchNgwLayerItemsOptions<
+  P extends { [field: string]: any } = { [field: string]: any }
+> = GetNgwLayerItemsOptions & NgwFeatureRequestOptions<P>;
+
 export interface FeatureIdentifyRequestOptions {
   /**
    * WKT Polygon geometry
