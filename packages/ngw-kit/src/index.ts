@@ -64,7 +64,8 @@ export * from './utils/featureLayerUtils';
 export * from './utils/fetchNgwLayerItem';
 export * from './utils/fetchNgwLayerItems';
 export * from './utils/fetchNgwLayerFeature';
-export * from './utils/mapFeatureDisplayName'
+export * from './utils/uploadFeatureAttachment';
+export * from './utils/mapFeatureDisplayName';
 export * from './utils/fetchNgwLayerFeatures';
 export * from './utils/resourceIdFromLayerOptions';
 export * from './utils/fetchNgwLayerFeatureCollection';

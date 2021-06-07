@@ -1,10 +1,10 @@
 import { Geometry, GeoJsonProperties } from 'geojson';
 
-import NgwConnector from '@nextgis/ngw-connector';
 import CancelablePromise from '@nextgis/cancelable-promise';
 
 import {
   FeatureRequestParams,
+  GetNgwItemOptions,
   NgwFeatureItemResponse,
   NgwFeatureRequestOptions,
 } from '../interfaces';
@@ -18,11 +18,7 @@ export function fetchNgwLayerItem<
   G extends Geometry = Geometry,
   P extends GeoJsonProperties = GeoJsonProperties
 >(
-  options: {
-    resourceId: number;
-    featureId: number;
-    connector: NgwConnector;
-  } & NgwFeatureRequestOptions,
+  options: GetNgwItemOptions & NgwFeatureRequestOptions,
 ): CancelablePromise<NgwFeatureItemResponse<P, G>> {
   const params: FeatureRequestParams & { [name: string]: any } = {
     ...FEATURE_REQUEST_PARAMS,
