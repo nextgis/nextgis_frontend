@@ -1,7 +1,8 @@
-import { ResourceItem, FeatureLayerField } from './types/ResourceItem';
-import { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
-import { FeatureLayersIdentify, FeatureItem } from './types/FeatureLayer';
-import { ResourceStoreItem } from './types/ResourceStore';
+import type { DeepPartial } from '@nextgis/utils';
+import type { ResourceItem, FeatureLayerField, Resource } from './types/ResourceItem';
+import type { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
+import type { FeatureLayersIdentify, FeatureItem } from './types/FeatureLayer';
+import type { ResourceStoreItem } from './types/ResourceStore';
 
 export interface FileMeta {
   id: string;
@@ -31,7 +32,8 @@ export interface FeatureLayerCount {
   total_count: number;
 }
 
-export type ResourceDefinition = string | number;
+export type ResourceIdKeynameDef = string | number;
+export type ResourceDefinition = ResourceIdKeynameDef | DeepPartial<Resource>;
 
 export interface FileUploadResp {
   upload_meta: FileMeta[];
