@@ -16,7 +16,7 @@ Simply download and include with a script tag. NgwLeaflet will be registered as 
 <script>
   var uploader = document.getElementById('uploader');
   var ngwUploader = new NgwUploader({
-      baseUrl: 'http://dev.nextgis.com/sandbox'
+      baseUrl: 'https://sandbox.nextgis.com'
   });
   const input = ngwUploader.createInput();
   uploader.appendChild(input);
@@ -48,7 +48,7 @@ $ npm install @nextgis/ngw-uploader
 import NgwUploader from '@nextgis/ngw-uploader';
 
 const ngwUploader = new NgwUploader({
-    baseUrl: 'http://dev.nextgis.com/sandbox'
+    baseUrl: 'https://sandbox.nextgis.com'
 });
 
 ```
