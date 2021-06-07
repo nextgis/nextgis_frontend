@@ -10,7 +10,7 @@ import { isObject } from './utils/isObject';
 import type { DeepPartial } from '@nextgis/utils';
 import type { NgwConnector } from './NgwConnector';
 import type { ResourceItem, Resource } from './types/ResourceItem';
-import type { RequestOptions, ResourceDefinition } from './interfaces';
+import type { RequestOptions, ResourceIdKeynameDef } from './interfaces';
 
 const promiseControl = new CancelablePromise.PromiseControl();
 
@@ -31,7 +31,7 @@ export class ResourcesControl {
    * Fetching resource would be cached to speed up next call
    */
   getOne(
-    resource: ResourceDefinition | DeepPartial<Resource>,
+    resource: ResourceIdKeynameDef | DeepPartial<Resource>,
     requestOptions?: RequestOptions,
   ): CancelablePromise<ResourceItem | undefined> {
     return promiseControl.waitFunc(() => {
@@ -47,7 +47,7 @@ export class ResourcesControl {
   }
 
   getOneOrFail(
-    resource: ResourceDefinition | DeepPartial<Resource>,
+    resource: ResourceIdKeynameDef | DeepPartial<Resource>,
   ): CancelablePromise<ResourceItem> {
     return this.getOne(resource).then((res) => {
       if (res) {
@@ -68,7 +68,7 @@ export class ResourcesControl {
    * if the resource is specified through a keyname or other parameters.
    */
   getId(
-    resource: ResourceDefinition | DeepPartial<Resource>,
+    resource: ResourceIdKeynameDef | DeepPartial<Resource>,
   ): CancelablePromise<number | undefined> {
     if (typeof resource === 'number') {
       return CancelablePromise.resolve(resource);
@@ -91,7 +91,7 @@ export class ResourcesControl {
    * To not make one more checks if the resource is definitely exists
    */
   getIdOrFail(
-    resource: ResourceDefinition | DeepPartial<Resource>,
+    resource: ResourceIdKeynameDef | DeepPartial<Resource>,
   ): CancelablePromise<number> {
     return this.getId(resource).then((resp) => {
       if (resp === undefined) {
@@ -188,7 +188,7 @@ export class ResourcesControl {
   }
 
   update(
-    resource: ResourceDefinition,
+    resource: ResourceIdKeynameDef,
     data: DeepPartial<ResourceItem>,
   ): CancelablePromise<ResourceItem | undefined> {
     return this.getId(resource).then((id) => {
@@ -207,7 +207,7 @@ export class ResourcesControl {
    * Fast way to delete resource from NGW and clean cache.
    * @param resource - Resource definition
    */
-  delete(resource: ResourceDefinition): CancelablePromise<void> {
+  delete(resource: ResourceIdKeynameDef): CancelablePromise<void> {
     return this.getId(resource).then((id) => {
       if (id !== undefined) {
         return this.connector.delete('resource.item', null, { id }).then(() => {
