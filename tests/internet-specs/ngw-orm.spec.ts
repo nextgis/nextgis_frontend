@@ -13,7 +13,7 @@ function getConnection(): Promise<Connection> {
     return Promise.resolve(CONNECTION);
   }
   return Connection.connect({
-    // baseUrl: 'http://dev.nextgis.com/sandbox/',
+    // baseUrl: 'https://sandbox.nextgis.com/',
     baseUrl: 'http://geonote.nextgis.com',
     auth: {
       login: 'nextgis',

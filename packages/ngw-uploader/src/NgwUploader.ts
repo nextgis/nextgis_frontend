@@ -1,15 +1,14 @@
 import './ngw-uploader.css';
 
-import NgwConnector, {
-  Credentials,
-  CreatedResource,
-  ResourceItem,
-} from '@nextgis/ngw-connector';
+import NgwConnector from '@nextgis/ngw-connector';
+
 import CancelablePromise from '@nextgis/cancelable-promise';
-import Dialog from '@nextgis/dialog';
+
 import { EventEmitter } from 'events';
-import { evented, onLoad } from './decorators';
-import {
+import { evented, onLoad } from './utils/decorators';
+
+import type { CreatedResource, ResourceItem } from '@nextgis/ngw-connector';
+import type {
   NgwUploadOptions,
   UploadInputOptions,
   RasterUploadOptions,
@@ -18,6 +17,8 @@ import {
   EmitterStatus,
   GroupOptions,
 } from './interfaces';
+import { showLoginDialog } from './utils/dialog';
+import { createInput } from './utils/input';
 
 type ImageTypes = 'image/tif' | 'image/tiff' | '.tif';
 
@@ -333,48 +334,7 @@ export class NgwUploader {
 
   createInput(opt: UploadInputOptions = {}): HTMLElement {
     opt = { ...this.options.inputOptions, ...opt };
-    const allowImage = opt.image || true;
-    const input = document.createElement('input');
-    input.setAttribute('type', 'file');
-    let accept: ImageTypes[] = [];
-    if (allowImage) {
-      accept = Object.keys(imageTypesAccept).reduce((a: ImageTypes[], b) => {
-        const imageTypes = imageTypesAccept[b];
-        return a.concat(imageTypes);
-      }, []);
-    }
-    input.setAttribute('accept', accept.join(','));
-    if (opt.html) {
-      input.innerHTML = opt.html;
-    }
-    input.addEventListener('change', () => {
-      const file = input && input.files && input.files[0];
-      if (file) {
-        const uploadPromise = this.uploadRaster(file, opt);
-        if (uploadPromise) {
-          if (opt.success) {
-            uploadPromise.then(opt.success);
-          }
-          if (opt.error) {
-            uploadPromise.then(opt.error);
-          }
-        }
-      }
-    });
-    if (opt.element) {
-      let element;
-      if (typeof opt.element === 'string') {
-        element = document.getElementById(opt.element);
-      } else if (opt.element instanceof HTMLElement) {
-        element = opt.element;
-      }
-      if (element) {
-        element.appendChild(input);
-      } else {
-        throw new Error('target element not founded');
-      }
-    }
-    return input;
+    return createInput(opt, (file, opt_) => this.uploadRaster(file, opt_));
   }
 
   getResource(
@@ -384,113 +344,20 @@ export class NgwUploader {
   }
 
   private async _initialize() {
-    if (this.options.loginDialog) {
-      try {
-        const loginOpt = await this._showLoginDialog(this.options.auth);
-        this.options.auth = loginOpt;
-      } catch (er) {
-        // ignore
+    if (this.options.connector) {
+      this.connector = this.options.connector;
+    } else {
+      if (this.options.loginDialog) {
+        try {
+          const loginOpt = await showLoginDialog(this.options.auth);
+          this.options.auth = loginOpt;
+        } catch (er) {
+          // ignore
+        }
       }
+      this.connector = new NgwConnector(this.options);
     }
-    this.connector = new NgwConnector(this.options);
     this.isLoaded = true;
     this.emitter.emit('load');
-  }
-
-  private _showLoginDialog(defAuth?: Credentials): Promise<Credentials> {
-    return new Promise((resolve, reject) => {
-      const dialog = new Dialog();
-      const onResolve = (auth: Credentials) => {
-        dialog.close();
-        resolve(auth);
-      };
-      const onReject = (er: Error) => {
-        dialog.close();
-        reject(er);
-      };
-      if (defAuth) {
-        const html = this._createDialogHtml(defAuth, onResolve, onReject);
-        dialog.updateContent(html);
-        dialog.show();
-      }
-    });
-  }
-
-  private _createDialogHtml(
-    defAuth: Credentials,
-    resolve: (cred: Credentials) => void,
-    reject: (...args: any[]) => void,
-  ): HTMLElement | undefined {
-    if (defAuth && defAuth.login && defAuth.password) {
-      const { login, password } = defAuth;
-      const form = document.createElement('div');
-      form.className = 'ngw-uploader__login-dialog--form';
-      const formHtml = `
-      <div><label><div>Name:</div>
-        <input value=${login} class="ngw-uploader__login-dialog--input name"></input>
-      </label></div>
-      <div><label><div>Password:</div>
-        <input value=${password} type="password" class="ngw-uploader__login-dialog--input password"></input>
-      </label></div>
-      <button class="ngw-uploader__login-dialog--button login">Login</button>
-      <button class="ngw-uploader__login-dialog--button cancel">Cancel</button>
-    `;
-      form.innerHTML = formHtml;
-      const loginElement = form.getElementsByClassName(
-        'name',
-      )[0] as HTMLInputElement;
-      const passwordElement = form.getElementsByClassName(
-        'password',
-      )[0] as HTMLInputElement;
-      const loginBtn = form.getElementsByClassName(
-        'login',
-      )[0] as HTMLButtonElement;
-      const cancelBtn = form.getElementsByClassName(
-        'cancel',
-      )[0] as HTMLButtonElement;
-      const getAuthOpt: () => Credentials = () => {
-        return {
-          login: loginElement.value,
-          password: passwordElement.value,
-        };
-      };
-      const validate = () => {
-        const auth = getAuthOpt();
-        if (auth.login && auth.password) {
-          loginBtn.disabled = false;
-        } else {
-          loginBtn.disabled = true;
-        }
-      };
-      const onInputChange = () => {
-        validate();
-      };
-
-      const addEventListener = () => {
-        [loginElement, passwordElement].forEach((x) => {
-          ['change', 'input'].forEach((y) =>
-            x.addEventListener(y, onInputChange),
-          );
-        });
-      };
-      const removeEventListener = () => {
-        [loginElement, passwordElement].forEach((x) => {
-          ['change', 'input'].forEach((y) =>
-            x.removeEventListener(y, onInputChange),
-          );
-        });
-      };
-      loginBtn.onclick = () => {
-        removeEventListener();
-        resolve(getAuthOpt());
-      };
-      cancelBtn.onclick = () => {
-        removeEventListener();
-        reject('Login cancel');
-      };
-      validate();
-      addEventListener();
-      return form;
-    }
   }
 }
