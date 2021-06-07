@@ -1,6 +1,6 @@
 import './ngw-uploader.css';
 
-import NgwConnector from '@nextgis/ngw-connector';
+import NgwConnector, { FileMeta } from '@nextgis/ngw-connector';
 
 import CancelablePromise from '@nextgis/cancelable-promise';
 
@@ -19,12 +19,6 @@ import type {
 } from './interfaces';
 import { showLoginDialog } from './utils/dialog';
 import { createInput } from './utils/input';
-
-type ImageTypes = 'image/tif' | 'image/tiff' | '.tif';
-
-const imageTypesAccept: { [format: string]: ImageTypes[] } = {
-  tiff: ['image/tif', 'image/tiff', '.tif'],
-};
 
 export class NgwUploader {
   options: NgwUploadOptions = {
@@ -300,10 +294,9 @@ export class NgwUploader {
   fileUpload(
     file: File,
     options: RasterUploadOptions = {},
-  ): CancelablePromise<Record<string, any>> | undefined {
-    return (
-      this.connector &&
-      this.connector
+  ): CancelablePromise<FileMeta | undefined> {
+    if (this.connector) {
+      return this.connector
         .post('file_upload.upload', {
           file,
           onProgress: (percentComplete) => {
@@ -328,8 +321,9 @@ export class NgwUploader {
             meta = resp.upload_meta[0];
           }
           return meta;
-        })
-    );
+        });
+    }
+    throw new Error('Connector is not set yet');
   }
 
   createInput(opt: UploadInputOptions = {}): HTMLElement {

@@ -73,7 +73,7 @@ describe('NgwOrm', function () {
         Clone,
         {
           parent: SandboxGroup,
-        }
+        },
       );
       expect(Clone.connection && Clone.connection.isConnected).to.be.true;
       expect(created1).to.be.true;
@@ -81,7 +81,7 @@ describe('NgwOrm', function () {
         Clone,
         {
           parent: SandboxGroup,
-        }
+        },
       );
       expect(created2).to.be.false;
       Clone.item = undefined;
@@ -89,7 +89,7 @@ describe('NgwOrm', function () {
         Clone,
         {
           parent: SandboxGroup,
-        }
+        },
       );
       expect(created3).to.be.false;
     });
@@ -123,17 +123,17 @@ describe('NgwOrm', function () {
         }),
         {
           parent: SandboxGroup,
-        }
+        },
       );
       expect(Point.item).to.be.exist;
       if (Point.item) {
         const ReceivedPoint = (await connection.receiveResource<typeof Point>(
-          Point.item.resource.id
+          Point.item.resource.id,
         )) as typeof SandboxPointLayer;
         expect(ReceivedPoint.item).to.be.exist;
         if (ReceivedPoint.item) {
           expect(ReceivedPoint.item.resource.id).to.be.eq(
-            Point.item.resource.id
+            Point.item.resource.id,
           );
           const p = new ReceivedPoint();
           p.test = 'test';
@@ -146,7 +146,7 @@ describe('NgwOrm', function () {
             {
               id: ReceivedPoint.item.resource.id,
               fid: p.id,
-            }
+            },
           );
           expect(ngwFeature.fields);
           if (ngwFeature.fields) {
@@ -165,7 +165,7 @@ describe('NgwOrm', function () {
         SandboxPointLayer,
         {
           parent: SandboxGroup,
-        }
+        },
       );
       expect(point).to.be.exist;
     });
@@ -176,7 +176,7 @@ describe('NgwOrm', function () {
         SandboxPointLayer.clone({ display_name: 'Clone of Point layer' }),
         {
           parent: SandboxGroup,
-        }
+        },
       );
       expect(Point).to.be.exist;
       if (Point) {
@@ -186,7 +186,7 @@ describe('NgwOrm', function () {
           if (Point.item.feature_layer) {
             const columns = getMetadataArgsStorage().filterColumns(Point);
             expect(Point.item.feature_layer.fields.length).to.be.eq(
-              columns.length
+              columns.length,
             );
           }
         }
@@ -199,7 +199,7 @@ describe('NgwOrm', function () {
         SandboxPointLayer,
         {
           parent: SandboxGroup,
-        }
+        },
       );
       const p = new Point();
       p.test = 'test';
@@ -216,7 +216,7 @@ describe('NgwOrm', function () {
           {
             id: Point.item.resource.id,
             fid: p.id,
-          }
+          },
         );
         expect(ngwFeature.id).to.eq(1);
       }
@@ -240,7 +240,7 @@ describe('NgwOrm', function () {
 
     it(`.findOne`, async () => {
       const Point = await newPointLayer(
-        'Clone of Point layer for .findOne test'
+        'Clone of Point layer for .findOne test',
       );
 
       const entities = Array.from(Array(5)).map((x, i) => {
