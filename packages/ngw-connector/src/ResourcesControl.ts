@@ -10,7 +10,11 @@ import { isObject } from './utils/isObject';
 import type { DeepPartial } from '@nextgis/utils';
 import type { NgwConnector } from './NgwConnector';
 import type { ResourceItem, Resource } from './types/ResourceItem';
-import type { RequestOptions, ResourceIdKeynameDef } from './interfaces';
+import type {
+  RequestOptions,
+  ResourceDefinition,
+  ResourceIdKeynameDef,
+} from './interfaces';
 
 const promiseControl = new CancelablePromise.PromiseControl();
 
@@ -24,14 +28,14 @@ export class ResourcesControl {
   // -------------------------------------------------------------------------
 
   /**
-   * Receive resource from NGW by id, keyname or serch-object parameter.
+   * Receive resource from NGW by id, keyname or search-object parameter.
    * @param resource - Resource id, keyname or search-object
    *
    * @remarks
    * Fetching resource would be cached to speed up next call
    */
   getOne(
-    resource: ResourceIdKeynameDef | DeepPartial<Resource>,
+    resource: ResourceDefinition,
     requestOptions?: RequestOptions,
   ): CancelablePromise<ResourceItem | undefined> {
     return promiseControl.waitFunc(() => {
@@ -46,9 +50,7 @@ export class ResourcesControl {
     }, String(resource));
   }
 
-  getOneOrFail(
-    resource: ResourceIdKeynameDef | DeepPartial<Resource>,
-  ): CancelablePromise<ResourceItem> {
+  getOneOrFail(resource: ResourceDefinition): CancelablePromise<ResourceItem> {
     return this.getOne(resource).then((res) => {
       if (res) {
         return res;
@@ -67,9 +69,7 @@ export class ResourcesControl {
    * then this method will come in handy to facilitate the extraction of the identifier
    * if the resource is specified through a keyname or other parameters.
    */
-  getId(
-    resource: ResourceIdKeynameDef | DeepPartial<Resource>,
-  ): CancelablePromise<number | undefined> {
+  getId(resource: ResourceDefinition): CancelablePromise<number | undefined> {
     if (typeof resource === 'number') {
       return CancelablePromise.resolve(resource);
     } else if (typeof resource === 'string' || isObject(resource)) {
@@ -90,9 +90,7 @@ export class ResourcesControl {
    * Similar with {@link NgwConnector.getResourceId | getResourceId} but rise error if resource is not exist.
    * To not make one more checks if the resource is definitely exists
    */
-  getIdOrFail(
-    resource: ResourceIdKeynameDef | DeepPartial<Resource>,
-  ): CancelablePromise<number> {
+  getIdOrFail(resource: ResourceDefinition): CancelablePromise<number> {
     return this.getId(resource).then((resp) => {
       if (resp === undefined) {
         throw new Error();
@@ -188,7 +186,7 @@ export class ResourcesControl {
   }
 
   update(
-    resource: ResourceIdKeynameDef,
+    resource: ResourceDefinition,
     data: DeepPartial<ResourceItem>,
   ): CancelablePromise<ResourceItem | undefined> {
     return this.getId(resource).then((id) => {
@@ -207,7 +205,7 @@ export class ResourcesControl {
    * Fast way to delete resource from NGW and clean cache.
    * @param resource - Resource definition
    */
-  delete(resource: ResourceIdKeynameDef): CancelablePromise<void> {
+  delete(resource: ResourceDefinition): CancelablePromise<void> {
     return this.getId(resource).then((id) => {
       if (id !== undefined) {
         return this.connector.delete('resource.item', null, { id }).then(() => {

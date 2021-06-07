@@ -1,5 +1,9 @@
 import type { DeepPartial } from '@nextgis/utils';
-import type { ResourceItem, FeatureLayerField, Resource } from './types/ResourceItem';
+import type {
+  Resource,
+  ResourceItem,
+  FeatureLayerField,
+} from './types/ResourceItem';
 import type { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
 import type { FeatureLayersIdentify, FeatureItem } from './types/FeatureLayer';
 import type { ResourceStoreItem } from './types/ResourceStore';
@@ -95,24 +99,27 @@ export interface GetRequestItemsResponseMap extends RequestItemKeys {
   'spatial_ref_sys.collection': SrsItem[];
 }
 
-export interface CreatedResource {
+export interface IdOnly {
   id: number;
-  parent: {
-    id: number;
-  };
+}
+
+export interface CreatedResource extends IdOnly {
+  parent: IdOnly;
 }
 
 export interface PostRequestItemsResponseMap extends RequestItemKeys {
   'resource.collection': CreatedResource;
   'feature_layer.identify': FeatureLayersIdentify;
+  'file_upload.upload': FileUploadResp;
+  'feature_attachment.collection': IdOnly;
 }
 
 export interface PatchRequestItemsResponseMap extends RequestItemKeys {
-  'feature_layer.feature.collection': { id: number }[];
+  'feature_layer.feature.collection': IdOnly[];
 }
 
 export interface PutRequestItemsResponseMap extends RequestItemKeys {
-  'feature_layer.feature.item': { id: number };
+  'feature_layer.feature.item': IdOnly;
 }
 
 export interface DeleteRequestItemsResponseMap extends RequestItemKeys {

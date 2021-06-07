@@ -378,6 +378,12 @@ export interface NgwFeatureRequestOptions<
   srs?: number;
 }
 
+export interface GetNgwItemOptions {
+  resourceId: number;
+  featureId: number;
+  connector: NgwConnector;
+}
+
 export interface GetNgwLayerItemsOptions {
   resourceId: number;
   connector: NgwConnector;
