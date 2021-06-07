@@ -23,9 +23,10 @@ import type {
   PostRequestItemsResponseMap,
   GetRequestItemsResponseMap,
   PutRequestItemsResponseMap,
+  ResourceIdKeynameDef,
   NgwConnectorOptions,
-  RequestItemsParams,
   ResourceDefinition,
+  RequestItemsParams,
   RequestItemKeys,
   RequestHeaders,
   RequestOptions,
@@ -428,7 +429,7 @@ export class NgwConnector {
    * {@inheritDoc ResourcesControl.getOne}
    */
   getResource(
-    resource: ResourceDefinition | DeepPartial<Resource>,
+    resource: ResourceDefinition,
   ): CancelablePromise<ResourceItem | undefined> {
     return this.resources.getOne(resource);
   }
@@ -437,7 +438,7 @@ export class NgwConnector {
    * {@inheritDoc ResourcesControl.getOneOrFail}
    */
   getResourceOrFail(
-    resource: ResourceDefinition | DeepPartial<Resource>,
+    resource: ResourceDefinition,
   ): CancelablePromise<ResourceItem> {
     return this.resources.getOneOrFail(resource);
   }
@@ -471,7 +472,7 @@ export class NgwConnector {
    * {@inheritDoc ResourcesControl.getId}
    */
   getResourceId(
-    resource: ResourceDefinition | DeepPartial<Resource>,
+    resource: ResourceIdKeynameDef | DeepPartial<Resource>,
   ): CancelablePromise<number | undefined> {
     return this.resources.getId(resource);
   }
@@ -480,7 +481,7 @@ export class NgwConnector {
    * {@inheritDoc ResourcesControl.getIdOrFail}
    */
   getResourceIdOrFail(
-    resource: ResourceDefinition | DeepPartial<Resource>,
+    resource: ResourceIdKeynameDef | DeepPartial<Resource>,
   ): CancelablePromise<number> {
     return this.resources.getIdOrFail(resource);
   }
@@ -514,7 +515,7 @@ export class NgwConnector {
    * {@inheritDoc ResourcesControl.update}
    */
   updateResource(
-    resource: ResourceDefinition,
+    resource: ResourceIdKeynameDef,
     data: DeepPartial<ResourceItem>,
   ): CancelablePromise<ResourceItem | undefined> {
     return this.resources.update(resource, data);
@@ -523,7 +524,7 @@ export class NgwConnector {
   /**
    * {@inheritDoc ResourcesControl.delete}
    */
-  deleteResource(resource: ResourceDefinition): CancelablePromise<void> {
+  deleteResource(resource: ResourceIdKeynameDef): CancelablePromise<void> {
     return this.resources.delete(resource);
   }
 

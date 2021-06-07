@@ -180,7 +180,7 @@ export interface NgwConfig {
 /**
  * @public
  */
-export type ResourceDef = number | [number, string];
+export type ResourceIdDef = number | [resourceId: number, layerId: string];
 
 /**
  * @public
@@ -190,7 +190,7 @@ export interface NgwKitOptions {
   connector?: NgwConnector;
   /** Radius for searching objects in pixels */
   pixelRadius?: number;
-  resourceId?: ResourceDef;
+  resourceId?: ResourceIdDef;
   auth?: {
     login: string;
     password: string;
@@ -203,7 +203,7 @@ type A = AdapterOptions & RasterAdapterOptions;
  * @public
  */
 export interface NgwWebmapAdapterOptions<M = any> extends A {
-  resourceId: number | [number, string];
+  resourceId: ResourceIdDef;
   webMap: WebMap<M>;
   connector: NgwConnector;
   selectable?: boolean;
