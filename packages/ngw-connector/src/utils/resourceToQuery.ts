@@ -3,7 +3,9 @@ import { Resource } from '../types/ResourceItem';
 import { isObject } from './isObject';
 
 /**
+ * ```
  * { keyname, parent: { id }} > { keyname, parent__id }
+ * ```
  * @param resource - Any property from NGW resource item
  */
 export function resourceToQuery(

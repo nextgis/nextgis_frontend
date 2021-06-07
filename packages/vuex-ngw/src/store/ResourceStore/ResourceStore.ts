@@ -28,7 +28,7 @@ export abstract class ResourceStore<
   resources: { [key in ResourceDef]?: number } = {};
 
   /**
-   * @deprecated
+   * @deprecated not used
    */
   foreignResources: { [key in ResourceDef]: ForeignResource } = {};
 
