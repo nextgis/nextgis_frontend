@@ -20,7 +20,6 @@ export function degrees2Radian(deg: number): number {
   return (deg * Math.PI) / 180;
 }
 
-
 // export function degrees2meters2(lon: number, lat: number): [number, number] {
 //   const radius = 6378137.0;
 //   const x = (radius * lon * Math.PI) / 180.0;

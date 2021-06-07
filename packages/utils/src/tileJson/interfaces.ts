@@ -2,7 +2,7 @@
  * This specification attempts to create a standard for representing metadata
  * about multiple types of web-based layers, to aid clients in configuration and browsing.
  *
- * From {@link https:github.com/mapbox/tilejson-spec/tree/master/2.2.0}
+ * From {@link https://github.com/mapbox/tilejson-spec/tree/master/2.2.0}
  */
 
 export interface TileJson {
@@ -62,15 +62,15 @@ export interface TileJson {
    */
   scheme?: string;
   /**
-   * REQUIRED. An array of tile endpoints. {z}, {x} and {y}, if present,
+   * REQUIRED. An array of tile endpoints. `{z}`, `{x}` and `{y}`, if present,
    * are replaced with the corresponding integers. If multiple endpoints are specified, clients
    * may use any combination of endpoints. All endpoints MUST return the same
    * content for the same URL. The array MUST contain at least one endpoint.
    */
   tiles: string[];
   /**
-   * Default: []. An array of interactivity endpoints. {z}, {x}
-   * and {y}, if present, are replaced with the corresponding integers. If multiple
+   * Default: []. An array of interactivity endpoints. `{z}`, `{x}`
+   * and `{y}`, if present, are replaced with the corresponding integers. If multiple
    * endpoints are specified, clients may use any combination of endpoints.
    * All endpoints MUST return the same content for the same URL.
    * If the array doesn't contain any entries, interactivity is not supported
@@ -81,7 +81,7 @@ export interface TileJson {
   grids?: string[];
   /**
    * Default: []. An array of data files in GeoJSON format.
-   * {z}, {x} and {y}, if present,
+   * `{z}`, `{x}` and `{y}`, if present,
    * are replaced with the corresponding integers. If multiple
    * endpoints are specified, clients may use any combination of endpoints.
    * All endpoints MUST return the same content for the same URL.
@@ -90,13 +90,13 @@ export interface TileJson {
    */
   data?: string[];
   /**
-   * Default: 0. >= 0, <= 30.
+   * Default: 0.`>= 0, <= 30.`
    * An integer specifying the minimum zoom level.
    */
   minzoom?: number;
   /**
-   * Default: 30. >= 0, <= 30.
-   * An integer specifying the maximum zoom level. MUST be >= minzoom.
+   * Default: 30. `>= 0, <= 30.`
+   * An integer specifying the maximum zoom level. MUST be `>= minzoom`.
    */
   maxzoom?: number;
   /**
