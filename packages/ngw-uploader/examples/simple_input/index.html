@@ -8,11 +8,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-  <!-- <script src="https://unpkg.com/@nextgis/ngw-uploader"></script> -->
-  <script type="text/javascript" src="../../lib/ngw-uploader.js"></script>
+  <script type="text/javascript" src="../../lib/ngw-uploader.global.js"></script>
 
 <body>
-  <p>Select GEOTIFF file</p>
+  <p>Select GEOTIFF file  (<a href="https://demo.nextgis.com/resource/4004/export" target="_blank">example</a>)</p>
   <div id='uploader'></div>
   <p id='status'></p>
 
@@ -21,7 +20,7 @@
     var statusUpload = document.getElementById('status');
 
     var ngwUploader = new NgwUploader({
-      baseUrl: 'http://dev.nextgis.com/sandbox'
+      baseUrl: 'https://sandbox.nextgis.com'
     });
 
     ngwUploader.emitter.on('status:change', function (evt) {
