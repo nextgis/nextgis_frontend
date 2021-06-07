@@ -32,5 +32,5 @@ export interface ColumnOptions {
   /**
    * Custom fields properties
    */
-  meta?: Record<string, unknown>
+  meta?: Record<string, unknown>;
 }

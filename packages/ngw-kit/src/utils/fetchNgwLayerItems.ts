@@ -2,9 +2,7 @@ import { Geometry } from 'geojson';
 import { FeatureItem } from '@nextgis/ngw-connector';
 import { propertiesFilter } from '@nextgis/properties-filter';
 import CancelablePromise from '@nextgis/cancelable-promise';
-import {
-  FetchNgwLayerItemsOptions,
-} from '../interfaces';
+import { FetchNgwLayerItemsOptions } from '../interfaces';
 import {
   createFeatureFieldFilterQueries,
   fetchNgwLayerItemsRequest,

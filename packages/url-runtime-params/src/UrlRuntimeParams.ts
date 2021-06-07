@@ -12,19 +12,16 @@ export class UrlRuntimeParams implements RuntimeParams {
     // if (this._params) {
     //   return this._params;
     // }
-    const href = window.location.href.replace(/\#$/, '');
+    const href = window.location.href.replace(/#$/, '');
     const params: Params = {};
     href.replace(/[?&]+(\w+)([^&]*)/gi, function (m, key) {
       params[key] = true;
       return ''; // does not matter
     });
-    href.replace(
-      /[?&]+([^=&]+)=([^&]*)/gi,
-      function (m, key, value) {
-        params[key] = decodeURIComponent(value);
-        return ''; // does not matter
-      },
-    );
+    href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+      params[key] = decodeURIComponent(value);
+      return ''; // does not matter
+    });
     this._params = params;
     return params;
   }

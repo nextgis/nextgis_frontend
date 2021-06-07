@@ -10,11 +10,7 @@ import { isObject } from './utils/isObject';
 import type { DeepPartial } from '@nextgis/utils';
 import type { NgwConnector } from './NgwConnector';
 import type { ResourceItem, Resource } from './types/ResourceItem';
-import type {
-  RequestOptions,
-  ResourceDefinition,
-  ResourceIdKeynameDef,
-} from './interfaces';
+import type { RequestOptions, ResourceDefinition } from './interfaces';
 
 const promiseControl = new CancelablePromise.PromiseControl();
 

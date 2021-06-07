@@ -1,6 +1,5 @@
 import { EventEmitter } from 'events';
 import { Map, Control } from 'leaflet';
-import {defined} from '@nextgis/utils';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 import { AttributionControl } from './controls/Attribution';
 import { convertMapClickEvent } from './utils/utils';

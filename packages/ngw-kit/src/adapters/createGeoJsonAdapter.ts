@@ -286,7 +286,7 @@ export async function createGeoJsonAdapter(
         return `POLYGON((${polygon.join(', ')}))`;
       }
     }
-  };
+  }
 
   return NgwGeoJsonAdapter;
 }
