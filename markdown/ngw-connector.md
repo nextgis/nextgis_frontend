@@ -39,6 +39,7 @@ Make sure CORS is registered in the [NextGIS Web settings](https://docs.nextgis.
 |  [FileMeta](./ngw-connector.filemeta.md) |  |
 |  [FileUploadResp](./ngw-connector.fileuploadresp.md) |  |
 |  [GetRequestItemsResponseMap](./ngw-connector.getrequestitemsresponsemap.md) |  |
+|  [IdOnly](./ngw-connector.idonly.md) |  |
 |  [LayerFeature](./ngw-connector.layerfeature.md) |  |
 |  [LoadingQueue](./ngw-connector.loadingqueue.md) |  |
 |  [LookupTableResource](./ngw-connector.lookuptableresource.md) |  |
@@ -89,6 +90,7 @@ Make sure CORS is registered in the [NextGIS Web settings](https://docs.nextgis.
 |  [RequestMethods](./ngw-connector.requestmethods.md) |  |
 |  [ResourceCls](./ngw-connector.resourcecls.md) |  |
 |  [ResourceDefinition](./ngw-connector.resourcedefinition.md) |  |
+|  [ResourceIdKeynameDef](./ngw-connector.resourceidkeynamedef.md) |  |
 |  [ResourceItemDatatype](./ngw-connector.resourceitemdatatype.md) |  |
 |  [ResourceStoreItem](./ngw-connector.resourcestoreitem.md) |  |
 |  [ResourceStoreItemProperties](./ngw-connector.resourcestoreitemproperties.md) |  |

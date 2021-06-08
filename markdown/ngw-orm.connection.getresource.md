@@ -12,14 +12,14 @@
 <b>Signature:</b>
 
 ```typescript
-getResource(resource: ResourceDefinition | DeepPartial<Resource>): Promise<ResourceItem | undefined>;
+getResource(resource: ResourceIdKeynameDef | DeepPartial<Resource>): Promise<ResourceItem | undefined>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  resource | [ResourceDefinition](./ngw-connector.resourcedefinition.md) \| DeepPartial&lt;[Resource](./ngw-connector.resource.md)<!-- -->&gt; |  |
+|  resource | [ResourceIdKeynameDef](./ngw-connector.resourceidkeynamedef.md) \| DeepPartial&lt;[Resource](./ngw-connector.resource.md)<!-- -->&gt; |  |
 
 <b>Returns:</b>
 

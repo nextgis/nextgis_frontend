@@ -15,5 +15,5 @@ export interface PutRequestItemsResponseMap extends RequestItemKeys
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  ["feature\_layer.feature.item"](./ngw-connector.putrequestitemsresponsemap._feature_layer.feature.item_.md) | { id: number; } |  |
+|  ["feature\_layer.feature.item"](./ngw-connector.putrequestitemsresponsemap._feature_layer.feature.item_.md) | [IdOnly](./ngw-connector.idonly.md) |  |
 

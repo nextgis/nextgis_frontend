@@ -7,7 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-'feature_layer.feature.item': {
-        id: number;
-    };
+'feature_layer.feature.item': IdOnly;
 ```

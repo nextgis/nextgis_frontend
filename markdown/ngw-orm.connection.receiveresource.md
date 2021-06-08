@@ -7,14 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-receiveResource<P extends Record<string, any> = any>(resource: ResourceDefinition): Promise<typeof BaseResource & P>;
+receiveResource<P extends Record<string, any> = any>(resource: ResourceIdKeynameDef): Promise<typeof BaseResource & P>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  resource | [ResourceDefinition](./ngw-connector.resourcedefinition.md) |  |
+|  resource | [ResourceIdKeynameDef](./ngw-connector.resourceidkeynamedef.md) |  |
 
 <b>Returns:</b>
 
