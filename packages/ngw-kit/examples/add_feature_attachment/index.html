@@ -22,7 +22,10 @@
       }
     </style>
     <!-- import NgwConnector to create vector resource -->
-    <script type="text/javascript" src="../../../ngw-connector/lib/ngw-connector.global.js"></script>
+    <script
+      type="text/javascript"
+      src="../../../ngw-connector/lib/ngw-connector.global.js"
+    ></script>
     <script type="text/javascript" src="../../lib/ngw-kit.global.js"></script>
   </head>
 
@@ -37,7 +40,6 @@
       var log = function (message) {
         logBlock.innerHTML = message;
       };
-
       var vectorLayerKeyName = 'add-attachment-example-layer';
 
       // 1. Preparation
@@ -134,7 +136,13 @@
           geom: false,
           extensions: ['attachment'],
         }).then(function (items) {
-          log('Features:');
+          var link =
+            '<a href="' +
+            connector.options.baseUrl +
+            '/resource/' +
+            resourceId +
+            '" target="_blank">open in ngw</a>';
+          log('Features (' + link + '):');
           for (var i = 0; i < items.length; i++) {
             var itemBlock = createFeatureItemBlock(resourceId, items[i]);
             featuresListBlock.appendChild(itemBlock);
@@ -205,7 +213,9 @@
         });
 
         if (attach.is_image) {
-          var imgWrapper = imgBlock.getElementsByClassName('image-wrap' + attach.id)[0];
+          var imgWrapper = imgBlock.getElementsByClassName(
+            'image-wrap' + attach.id,
+          )[0];
           // Show image preview.
           // Using connector here is necessary to display attachment with BASE authorization
           connector
