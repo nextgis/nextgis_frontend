@@ -9,8 +9,8 @@
 
     <style>
       .feature-item {
-        min-height: 60px;
-        line-height: 60px;
+        min-height: 45px;
+        line-height: 45px;
       }
       .item-part {
         display: inline-block;
@@ -21,19 +21,13 @@
         vertical-align: middle;
       }
     </style>
-
-    <!-- import connector to create vector resource -->
-    <script
-      type="text/javascript"
-      src="../../../ngw-connector/lib/ngw-connector.global.js"
-    ></script>
-
+    <!-- import NgwConnector to create vector resource -->
+    <script type="text/javascript" src="../../../ngw-connector/lib/ngw-connector.global.js"></script>
     <script type="text/javascript" src="../../lib/ngw-kit.global.js"></script>
   </head>
 
   <body>
     <div id="log">Start</div>
-
     <div id="features-list"></div>
 
     <script>
@@ -45,9 +39,9 @@
       };
 
       var vectorLayerKeyName = 'add-attachment-example-layer';
-      var RESOURCE_ID;
+
       // 1. Preparation
-      // Get or create vector layer first
+      // Get or create vector layer
       var connector = new NgwConnector({
         baseUrl: 'https://sandbox.nextgis.com',
         auth: {
@@ -140,12 +134,18 @@
           geom: false,
           extensions: ['attachment'],
         }).then(function (items) {
-          log('Features list');
+          log('Features:');
           for (var i = 0; i < items.length; i++) {
             var itemBlock = createFeatureItemBlock(resourceId, items[i]);
             featuresListBlock.appendChild(itemBlock);
           }
         });
+      }
+
+      // A quick way to redraw the list without updating each changed element
+      function redraw(resourceId) {
+        log('Updating...');
+        buildFeaturesList(resourceId);
       }
 
       function createFeatureItemBlock(resourceId, item) {
@@ -179,34 +179,35 @@
         return block;
       }
 
-      function createImageBlock(resourceId, featureId, attachment) {
+      function createImageBlock(resourceId, featureId, attach) {
         var imgBlock = document.createElement('div');
         imgBlock.innerHTML = [
-          '<div class="item-part">' + attachment.name + '</div>',
-          '<div class="item-part image' + attachment.id + '"></div>',
-          '<div class="item-part"><button class="atach-del-btn-' +
-            attachment.id +
+          '<div class="item-part">' + attach.name + '</div>',
+          '<div class="item-part image-wrap' + attach.id + '"></div>',
+          '<div class="item-part"><button class="attach-del-btn-' +
+            attach.id +
             '">✕</button></div>',
         ].join('');
 
-        var deleteAtachBtn = imgBlock.getElementsByClassName(
-          'atach-del-btn-' + attachment.id,
+        var deleteAttachBtn = imgBlock.getElementsByClassName(
+          'attach-del-btn-' + attach.id,
         )[0];
-        deleteAtachBtn.addEventListener('click', function () {
+        deleteAttachBtn.addEventListener('click', function () {
           connector
             .delete('feature_attachment.item', null, {
               id: resourceId,
               fid: featureId,
-              aid: attachment.id,
+              aid: attach.id,
             })
             .then(function (resp) {
-              // redraw features list
-              buildFeaturesList(resourceId);
+              redraw(resourceId);
             });
         });
 
-        if (attachment.is_image) {
-          var img = imgBlock.getElementsByClassName('image' + attachment.id)[0];
+        if (attach.is_image) {
+          var imgWrapper = imgBlock.getElementsByClassName('image-wrap' + attach.id)[0];
+          // Show image preview.
+          // Using connector here is necessary to display attachment with BASE authorization
           connector
             .get(
               'feature_attachment.image',
@@ -214,14 +215,14 @@
               {
                 id: resourceId,
                 fid: featureId,
-                aid: attachment.id,
-                size: '50x50',
+                aid: attach.id,
+                size: '40x40',
               },
             )
             .then(function (src) {
               var urlCreator = window.URL || window.webkitURL;
               var imageUrl = urlCreator.createObjectURL(src);
-              img.innerHTML = '<img src="' + imageUrl + '">';
+              imgWrapper.innerHTML = '<img src="' + imageUrl + '">';
             });
         }
         return imgBlock;
@@ -234,8 +235,7 @@
           featureId: fid,
           file: file,
         }).then(function (resp) {
-          // redraw features list
-          buildFeaturesList(rid);
+          redraw(rid);
         });
       }
     </script>

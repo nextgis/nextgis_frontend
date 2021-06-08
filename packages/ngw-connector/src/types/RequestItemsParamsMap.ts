@@ -31,6 +31,7 @@ export interface RequestItemsParamsMap {
   'feature_layer.store.item': { id: number; feature_id: number };
   'feature_layer.store': { id: number };
   'file_upload.upload': null;
+  'file_upload.item': { id: number };
   'layer.extent': { id: number };
   'mapserver.qml_transform': null;
   'pyramid.cors': null;

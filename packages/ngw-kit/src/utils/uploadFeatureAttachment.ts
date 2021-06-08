@@ -18,6 +18,16 @@ export function uploadFeatureAttachment(
     });
 }
 
+export function deleteFeatureAttachment(
+  options: GetNgwItemOptions & { attachmentId: number },
+): Promise<void> {
+  return options.connector.delete('feature_attachment.item', null, {
+    id: options.resourceId,
+    fid: options.featureId,
+    aid: options.attachmentId,
+  });
+}
+
 export function addFeatureAttachment(
   options: GetNgwItemOptions & { fileMeta: FileMeta },
 ): IdOnly {

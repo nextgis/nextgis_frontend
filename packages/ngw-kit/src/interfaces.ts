@@ -384,15 +384,15 @@ export interface GetNgwItemOptions {
   connector: NgwConnector;
 }
 
-export interface GetNgwLayerItemsOptions {
+export interface GetNgwItemsOptions {
   resourceId: number;
   connector: NgwConnector;
   filters?: PropertiesFilter;
 }
 
-export type FetchNgwLayerItemsOptions<
+export type FetchNgwItemsOptions<
   P extends { [field: string]: any } = { [field: string]: any }
-> = GetNgwLayerItemsOptions & NgwFeatureRequestOptions<P>;
+> = GetNgwItemsOptions & NgwFeatureRequestOptions<P>;
 
 export interface FeatureIdentifyRequestOptions {
   /**
