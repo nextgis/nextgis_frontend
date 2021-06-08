@@ -4,7 +4,7 @@
 
 ## TileJson.data property
 
-Default: \[\]. An array of data files in GeoJSON format. {<!-- -->z<!-- -->}<!-- -->, {<!-- -->x<!-- -->} and {<!-- -->y<!-- -->}<!-- -->, if present, are replaced with the corresponding integers. If multiple endpoints are specified, clients may use any combination of endpoints. All endpoints MUST return the same content for the same URL. If the array doesn't contain any entries, then no data is present in the map.
+Default: \[\]. An array of data files in GeoJSON format. `{z}`<!-- -->, `{x}` and `{y}`<!-- -->, if present, are replaced with the corresponding integers. If multiple endpoints are specified, clients may use any combination of endpoints. All endpoints MUST return the same content for the same URL. If the array doesn't contain any entries, then no data is present in the map.
 
 <b>Signature:</b>
 

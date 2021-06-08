@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function createQmsAdapter(webMap: WebMap, url?: string): Type<MainLayerAdapter>;
+export declare function createQmsAdapter(webMap: WebMap, url?: string, createOpt?: Partial<QmsAdapterOptions>): Type<MainLayerAdapter>;
 ```
 
 ## Parameters
@@ -16,6 +16,7 @@ export declare function createQmsAdapter(webMap: WebMap, url?: string): Type<Mai
 |  --- | --- | --- |
 |  webMap | [WebMap](./webmap.webmap.md) |  |
 |  url | string |  |
+|  createOpt | Partial&lt;[QmsAdapterOptions](./qms-kit.qmsadapteroptions.md)<!-- -->&gt; |  |
 
 <b>Returns:</b>
 

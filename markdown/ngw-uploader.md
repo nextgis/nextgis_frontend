@@ -34,4 +34,5 @@
 |  Type Alias | Description |
 |  --- | --- |
 |  [AvailableStatus](./ngw-uploader.availablestatus.md) |  |
+|  [ImageTypes](./ngw-uploader.imagetypes.md) |  |
 

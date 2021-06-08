@@ -4,7 +4,7 @@
 
 ## TileJson.minzoom property
 
-Default: 0. &gt;<!-- -->= 0, &lt;<!-- -->= 30. An integer specifying the minimum zoom level.
+Default: 0.`>= 0, <= 30.` An integer specifying the minimum zoom level.
 
 <b>Signature:</b>
 

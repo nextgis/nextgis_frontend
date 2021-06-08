@@ -7,7 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-parent: {
-        id: number;
-    };
+parent: IdOnly;
 ```

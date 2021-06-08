@@ -7,5 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare type ResourceDefinition = string | number;
+export declare type ResourceDefinition = ResourceIdKeynameDef | DeepPartial<Resource>;
 ```
+<b>References:</b> [ResourceIdKeynameDef](./ngw-connector.resourceidkeynamedef.md)<!-- -->, [DeepPartial](./utils.deeppartial.md)<!-- -->, [Resource](./ngw-connector.resource.md)
+

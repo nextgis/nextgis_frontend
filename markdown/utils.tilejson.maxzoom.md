@@ -4,7 +4,7 @@
 
 ## TileJson.maxzoom property
 
-Default: 30. &gt;<!-- -->= 0, &lt;<!-- -->= 30. An integer specifying the maximum zoom level. MUST be &gt;<!-- -->= minzoom.
+Default: 30. `>= 0, <= 30.` An integer specifying the maximum zoom level. MUST be `>= minzoom`<!-- -->.
 
 <b>Signature:</b>
 
