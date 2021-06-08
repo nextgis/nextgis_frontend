@@ -18,7 +18,7 @@ import {
 } from '@nextgis/properties-filter';
 import {
   FeatureRequestParams,
-  GetNgwLayerItemsOptions,
+  GetNgwItemsOptions,
   NgwFeatureRequestOptions,
 } from '../interfaces';
 import { defined, JsonMap } from '@nextgis/utils';
@@ -102,7 +102,7 @@ export function getNgwLayerItems<
   G extends Geometry = Geometry,
   P extends JsonMap = JsonMap
 >(
-  options: GetNgwLayerItemsOptions & NgwFeatureRequestOptions<P>,
+  options: GetNgwItemsOptions & NgwFeatureRequestOptions<P>,
 ): CancelablePromise<FeatureItem<P, G>[]> {
   return fetchNgwLayerItems(options);
 }
@@ -162,7 +162,7 @@ export function createFeatureFieldFilterQueries<
   G extends Geometry = Geometry,
   P extends { [field: string]: any } = { [field: string]: any }
 >(
-  opt: Required<GetNgwLayerItemsOptions> & NgwFeatureRequestOptions<P>,
+  opt: Required<GetNgwItemsOptions> & NgwFeatureRequestOptions<P>,
   _queries: CancelablePromise<FeatureItem<P, G>[]>[] = [],
   _parentAllParams: [string, any][] = [],
 ): CancelablePromise<FeatureItem<P, G>[]> {
@@ -254,7 +254,7 @@ export function fetchNgwLayerItemsRequest<
   G extends Geometry = Geometry,
   P extends { [field: string]: any } = { [field: string]: any }
 >(
-  options: GetNgwLayerItemsOptions &
+  options: GetNgwItemsOptions &
     NgwFeatureRequestOptions<P> & { paramList?: [string, any][] },
 ): CancelablePromise<FeatureItem<P, G>[]> {
   const params: FeatureRequestParams & RequestItemAdditionalParams = {

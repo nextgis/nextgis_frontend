@@ -2,7 +2,7 @@ import { Geometry } from 'geojson';
 import { FeatureItem } from '@nextgis/ngw-connector';
 import { propertiesFilter } from '@nextgis/properties-filter';
 import CancelablePromise from '@nextgis/cancelable-promise';
-import { FetchNgwLayerItemsOptions } from '../interfaces';
+import { FetchNgwItemsOptions } from '../interfaces';
 import {
   createFeatureFieldFilterQueries,
   fetchNgwLayerItemsRequest,
@@ -11,9 +11,7 @@ import {
 export function fetchNgwLayerItems<
   G extends Geometry = Geometry,
   P extends { [field: string]: any } = { [field: string]: any }
->(
-  options: FetchNgwLayerItemsOptions<P>,
-): CancelablePromise<FeatureItem<P, G>[]> {
+>(options: FetchNgwItemsOptions<P>): CancelablePromise<FeatureItem<P, G>[]> {
   const filters = options.filters;
   if (filters) {
     return createFeatureFieldFilterQueries({
