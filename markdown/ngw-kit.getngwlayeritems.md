@@ -12,14 +12,14 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function getNgwLayerItems<G extends Geometry = Geometry, P extends JsonMap = JsonMap>(options: GetNgwLayerItemsOptions & NgwFeatureRequestOptions<P>): CancelablePromise<FeatureItem<P, G>[]>;
+export declare function getNgwLayerItems<G extends Geometry = Geometry, P extends JsonMap = JsonMap>(options: GetNgwItemsOptions & NgwFeatureRequestOptions<P>): CancelablePromise<FeatureItem<P, G>[]>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | [GetNgwLayerItemsOptions](./ngw-kit.getngwlayeritemsoptions.md) &amp; [NgwFeatureRequestOptions](./ngw-kit.ngwfeaturerequestoptions.md)<!-- -->&lt;P&gt; |  |
+|  options | [GetNgwItemsOptions](./ngw-kit.getngwitemsoptions.md) &amp; [NgwFeatureRequestOptions](./ngw-kit.ngwfeaturerequestoptions.md)<!-- -->&lt;P&gt; |  |
 
 <b>Returns:</b>
 
