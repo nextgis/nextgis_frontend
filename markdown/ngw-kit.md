@@ -82,6 +82,7 @@ getNgwLayerItems({
 |  [createOnFirstShowAdapter({ webMap, adapterOptions, createAdapter, })](./ngw-kit.createonfirstshowadapter.md) |  |
 |  [createOnFirstShowNgwAdapter({ webMap, connector, item, adapterOptions, idPrefix, })](./ngw-kit.createonfirstshowngwadapter.md) |  |
 |  [createRasterAdapter({ layerOptions, webMap, connector, item, })](./ngw-kit.createrasteradapter.md) |  |
+|  [deleteFeatureAttachment(options)](./ngw-kit.deletefeatureattachment.md) |  |
 |  [extendNgwWebmapLayerAdapter(opt)](./ngw-kit.extendngwwebmaplayeradapter.md) |  |
 |  [fetchIdentifyGeoJson(options)](./ngw-kit.fetchidentifygeojson.md) |  |
 |  [fetchIdentifyItem(options)](./ngw-kit.fetchidentifyitem.md) |  |
@@ -130,7 +131,7 @@ getNgwLayerItems({
 |  [GetClassAdapterOptions](./ngw-kit.getclassadapteroptions.md) |  |
 |  [GetIdentifyGeoJsonOptions](./ngw-kit.getidentifygeojsonoptions.md) |  |
 |  [GetNgwItemOptions](./ngw-kit.getngwitemoptions.md) |  |
-|  [GetNgwLayerItemsOptions](./ngw-kit.getngwlayeritemsoptions.md) |  |
+|  [GetNgwItemsOptions](./ngw-kit.getngwitemsoptions.md) |  |
 |  [IdentifyEvent](./ngw-kit.identifyevent.md) |  |
 |  [IdentifyItemOptions](./ngw-kit.identifyitemoptions.md) |  |
 |  [IdentifyRequestOptions](./ngw-kit.identifyrequestoptions.md) |  |
@@ -162,7 +163,7 @@ getNgwLayerItems({
 |  Type Alias | Description |
 |  --- | --- |
 |  [ClassAdapter](./ngw-kit.classadapter.md) |  |
-|  [FetchNgwLayerItemsOptions](./ngw-kit.fetchngwlayeritemsoptions.md) |  |
+|  [FetchNgwItemsOptions](./ngw-kit.fetchngwitemsoptions.md) |  |
 |  [GetClassAdapter](./ngw-kit.getclassadapter.md) |  |
 |  [GetClassAdapterByType](./ngw-kit.getclassadapterbytype.md) |  |
 |  [GetClassAdapterCallback](./ngw-kit.getclassadaptercallback.md) |  |
