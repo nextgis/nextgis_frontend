@@ -158,7 +158,7 @@ export class Connection {
     if (resource.item) {
       id = resource.item.resource.id;
     }
-    if (id) {
+    if (defined(id)) {
       await this.driver.deleteResource(id);
       resource.item = undefined;
     }

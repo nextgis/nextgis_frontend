@@ -14,6 +14,7 @@ import type {
   FeatureLayerField,
   FeatureItem,
 } from '@nextgis/ngw-connector';
+import { defined } from '@nextgis/utils';
 import type { Type } from '@nextgis/utils';
 import type { ForeignResource, PatchOptions } from '../../interfaces';
 
@@ -67,7 +68,7 @@ export abstract class ResourceStore<
     }
     await this.context.dispatch('getResources');
     const id = this.resources[this.resource];
-    if (id) {
+    if (defined(id)) {
       try {
         const item = await this.connector.getResource(id);
         if (item) {
@@ -87,7 +88,7 @@ export abstract class ResourceStore<
       return this.resourceItems;
     }
     const id = this.resources[this.resource];
-    if (id) {
+    if (defined(id)) {
       const store = (await this.connector.get('feature_layer.store', null, {
         id,
       })) as ResourceStoreItem<P>[];
@@ -163,7 +164,7 @@ export abstract class ResourceStore<
   async patch(opt: PatchOptions<G, P>): Promise<FeatureItem<P> | undefined> {
     await this.context.dispatch('getResources');
     const id = this.resources[this.resource];
-    if (id) {
+    if (defined(id)) {
       const feature: Partial<FeatureItem<P>> = await this.context.dispatch(
         'prepareFeatureToNgw',
         opt,
