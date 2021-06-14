@@ -95,7 +95,7 @@ export async function createRasterAdapter({
 
       async getIdentificationIds() {
         const id = this.item && this.item.resource.parent.id;
-        if (id) {
+        if (defined(id)) {
           return [id];
         }
       }
