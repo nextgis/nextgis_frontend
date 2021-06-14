@@ -32,6 +32,7 @@ import type {
   FeatureItem,
   FeatureLayersIdentifyItems,
   LayerFeature,
+  FeatureLayerFields,
 } from '@nextgis/ngw-connector';
 import type {
   ControlPosition,
@@ -250,14 +251,17 @@ export class NgwMap<
     });
   }
 
-  fetchNgwLayerItems(
+  fetchNgwLayerItems<
+    F extends FeatureLayerFields = FeatureLayerFields,
+    G extends Geometry = Geometry
+  >(
     options: {
       resourceId: number;
       connector?: NgwConnector;
       filters?: PropertiesFilter;
     } & FilterOptions,
-  ): CancelablePromise<FeatureItem[]> {
-    return fetchNgwLayerItems({
+  ): CancelablePromise<FeatureItem<F, G>[]> {
+    return fetchNgwLayerItems<G, F>({
       connector: this.connector,
       ...options,
     });

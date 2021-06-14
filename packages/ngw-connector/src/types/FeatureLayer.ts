@@ -1,6 +1,6 @@
-import { Geometry, GeoJsonProperties, GeoJsonObject } from 'geojson';
+import type { Geometry, GeoJsonObject } from 'geojson';
 
-export type FeatureLayerFields = GeoJsonProperties;
+export type FeatureLayerFields = { [name: string]: any; }; // GeoJsonProperties;
 
 export interface NgwLayerIdentifyError {
   error: 'Not implemented';
