@@ -30,6 +30,7 @@ export async function resourceIdFromLayerOptions(
     ) {
       resourceId = (resource as ResourceItem).resource.id;
     } else {
+      // TODO: safe remove this case
       resourceId = await resourceIdFromLayerOptions(
         resource as ResourceNgwLayerOptions,
         connector,
