@@ -472,7 +472,7 @@ export class NgwConnector {
    * {@inheritDoc ResourcesControl.getId}
    */
   getResourceId(
-    resource: ResourceIdKeynameDef | DeepPartial<Resource>,
+    resource: ResourceDefinition,
   ): CancelablePromise<number | undefined> {
     return this.resources.getId(resource);
   }
@@ -480,9 +480,7 @@ export class NgwConnector {
   /**
    * {@inheritDoc ResourcesControl.getIdOrFail}
    */
-  getResourceIdOrFail(
-    resource: ResourceIdKeynameDef | DeepPartial<Resource>,
-  ): CancelablePromise<number> {
+  getResourceIdOrFail(resource: ResourceDefinition): CancelablePromise<number> {
     return this.resources.getIdOrFail(resource);
   }
 
