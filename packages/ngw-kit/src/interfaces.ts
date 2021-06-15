@@ -21,6 +21,7 @@ import type {
   LayerFeature,
   FeatureItem,
   FeatureLayerFields,
+  ResourceDefinition,
 } from '@nextgis/ngw-connector';
 import type { FeatureLayersIdentify } from '@nextgis/ngw-connector';
 import type { Type } from '@nextgis/utils';
@@ -156,7 +157,7 @@ export interface ResourceNgwLayerOptions<
   T extends NgwLayerAdapterType = NgwLayerAdapterType,
   P = { [name: string]: any }
 > extends NgwLayerOptionsAdditional<T, P> {
-  resource: number | string | NgwLayerOptions | ResourceItem;
+  resource: ResourceDefinition;
 }
 
 /**
