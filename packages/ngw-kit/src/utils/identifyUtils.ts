@@ -9,12 +9,12 @@ import { createGeoJsonFeature } from './featureLayerUtils';
 import { fetchNgwLayerFeature } from './fetchNgwLayerFeature';
 import { fetchNgwLayerItem } from './fetchNgwLayerItem';
 
-import type { Geometry, Feature, GeoJsonProperties } from 'geojson';
+import type { Geometry, Feature } from 'geojson';
 import type { MapClickEvent } from '@nextgis/webmap';
 import type {
   LayerFeature,
   FeatureLayersIdentify,
-  FeatureLayerFields,
+  FeatureProperties,
 } from '@nextgis/ngw-connector';
 import type {
   GetIdentifyGeoJsonOptions,
@@ -107,7 +107,7 @@ export function fetchIdentifyGeoJson<
 
 export function fetchIdentifyItem<
   G extends Geometry = Geometry,
-  P extends GeoJsonProperties = GeoJsonProperties
+  P extends FeatureProperties = FeatureProperties
 >(
   options: GetIdentifyGeoJsonOptions,
 ): CancelablePromise<NgwFeatureItemResponse<P, G> | undefined> {
@@ -183,7 +183,7 @@ export function sendIdentifyRequest(
 }
 
 export function createIdentifyItem<
-  F = FeatureLayerFields,
+  F = FeatureProperties,
   G extends Geometry = Geometry
 >(opt: IdentifyItemOptions): IdentifyItem {
   return new IdentifyItem<F, G>(opt);
