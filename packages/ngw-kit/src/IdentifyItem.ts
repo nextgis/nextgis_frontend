@@ -5,20 +5,20 @@ import type { NgwFeatureItemResponse } from '.';
 import type { GeoJsonObject, Geometry, Feature } from 'geojson';
 import type {
   FeatureItemExtensions,
-  FeatureLayerFields,
+  FeatureProperties,
   FeatureResource,
   LayerFeature,
   VectorLayerResourceItem,
 } from '@nextgis/ngw-connector';
 import type NgwConnector from '@nextgis/ngw-connector';
 
-export class IdentifyItem<F = FeatureLayerFields, G extends Geometry = Geometry>
+export class IdentifyItem<F = FeatureProperties, G extends Geometry = Geometry>
   implements LayerFeature {
   readonly id: number;
   readonly label: string;
   readonly layerId: number;
   readonly parent: string;
-  readonly fields: FeatureLayerFields;
+  readonly fields: FeatureProperties;
   geom?: GeoJsonObject;
   extensions?: FeatureItemExtensions;
 
