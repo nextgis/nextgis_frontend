@@ -1,5 +1,4 @@
 import { Store } from 'vuex';
-import { Geometry, GeoJsonProperties, Feature } from 'geojson';
 import { VuexModule, Mutation, Action, Module } from 'vuex-module-decorators';
 import {
   prepareFieldsToNgw,
@@ -8,6 +7,8 @@ import {
 } from '@nextgis/ngw-kit';
 import NgwConnector from '@nextgis/ngw-connector';
 
+import type { Geometry, Feature } from 'geojson';
+import type { FeatureProperties } from '@nextgis/ngw-connector';
 import type {
   ResourceItemDatatype,
   ResourceStoreItem,
@@ -21,7 +22,7 @@ import type { ForeignResource, PatchOptions } from '../../interfaces';
 type ResourceDef = string | number;
 
 export abstract class ResourceStore<
-  P extends GeoJsonProperties = GeoJsonProperties,
+  P extends FeatureProperties = FeatureProperties,
   G extends Geometry | null = Geometry
 > extends VuexModule {
   resource!: string;
@@ -147,7 +148,7 @@ export abstract class ResourceStore<
   @Action({ commit: '' })
   async prepareFeatureToNgw<
     G extends Geometry | null = Geometry,
-    P = GeoJsonProperties
+    P extends FeatureProperties = FeatureProperties
   >(opt: { item: Feature<G, P> }): Promise<Partial<FeatureItem<P>>> {
     const geom = opt.item.geometry as Geometry;
     const featureFields = (await this.context.dispatch(
@@ -273,7 +274,7 @@ export abstract class ResourceStore<
 }
 
 export function createResourceStore<
-  P extends GeoJsonProperties = GeoJsonProperties,
+  P extends FeatureProperties = FeatureProperties,
   G extends Geometry | null = Geometry
 >(options: {
   connector: NgwConnector;

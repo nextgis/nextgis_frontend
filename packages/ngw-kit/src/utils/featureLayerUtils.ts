@@ -1,31 +1,29 @@
-import {
-  Geometry,
-  Feature,
-  FeatureCollection,
-  GeoJsonProperties,
-} from 'geojson';
-
-import NgwConnector, {
-  FeatureItem,
-  RequestItemAdditionalParams,
-  FeatureLayerField,
-} from '@nextgis/ngw-connector';
 import CancelablePromise from '@nextgis/cancelable-promise';
 import {
   checkIfPropertyFilter,
   PropertyFilter,
   PropertiesFilter,
 } from '@nextgis/properties-filter';
-import {
-  FeatureRequestParams,
-  GetNgwItemsOptions,
-  NgwFeatureRequestOptions,
-} from '../interfaces';
+
 import { defined, JsonMap } from '@nextgis/utils';
 import { fetchNgwLayerItem } from './fetchNgwLayerItem';
 import { fetchNgwLayerFeature } from './fetchNgwLayerFeature';
 import { fetchNgwLayerFeatureCollection } from './fetchNgwLayerFeatureCollection';
 import { fetchNgwLayerItems } from './fetchNgwLayerItems';
+
+import type { Geometry, Feature, FeatureCollection } from 'geojson';
+import type NgwConnector from '@nextgis/ngw-connector';
+import type {
+  FeatureItem,
+  RequestItemAdditionalParams,
+  FeatureLayerField,
+  FeatureProperties,
+} from '@nextgis/ngw-connector';
+import type {
+  FeatureRequestParams,
+  GetNgwItemsOptions,
+  NgwFeatureRequestOptions,
+} from '../interfaces';
 
 export const FEATURE_REQUEST_PARAMS: FeatureRequestParams = {
   srs: 4326,
@@ -34,7 +32,7 @@ export const FEATURE_REQUEST_PARAMS: FeatureRequestParams = {
 
 export function createGeoJsonFeature<
   G extends Geometry | null = Geometry,
-  P extends GeoJsonProperties = GeoJsonProperties
+  P extends FeatureProperties = FeatureProperties
 >(item: Pick<FeatureItem, 'id' | 'geom' | 'fields'>): Feature<G, P> {
   const geometry = item.geom as G;
   const feature: Feature<G, P> = {
@@ -51,7 +49,7 @@ export function createGeoJsonFeature<
  */
 export function getNgwLayerItem<
   G extends Geometry = Geometry,
-  P extends GeoJsonProperties = GeoJsonProperties
+  P extends FeatureProperties = FeatureProperties
 >(
   options: {
     resourceId: number;
@@ -295,9 +293,9 @@ export function fetchNgwLayerItemsRequest<
   }) as CancelablePromise<FeatureItem<P, G>[]>;
 }
 
-export function prepareFieldsToNgw<T extends GeoJsonProperties>(
+export function prepareFieldsToNgw<T extends FeatureProperties = FeatureProperties>(
   item: T,
-  resourceFields: Pick<FeatureLayerField, 'keyname' | 'datatype'>[],
+  resourceFields: Pick<FeatureProperties, 'keyname' | 'datatype'>[],
 ): Record<keyof T, any> {
   const fields = {} as Record<keyof T, any>;
   if (item) {

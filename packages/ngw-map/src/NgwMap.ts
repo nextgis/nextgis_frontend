@@ -32,7 +32,7 @@ import type {
   FeatureItem,
   FeatureLayersIdentifyItems,
   LayerFeature,
-  FeatureLayerFields,
+  FeatureProperties,
 } from '@nextgis/ngw-connector';
 import type {
   ControlPosition,
@@ -64,7 +64,6 @@ import type {
   Geometry,
   Feature,
   FeatureCollection,
-  GeoJsonProperties,
 } from 'geojson';
 import type { NgwMapOptions, NgwMapEvents, NgwLayers } from './interfaces';
 
@@ -252,7 +251,7 @@ export class NgwMap<
   }
 
   fetchNgwLayerItems<
-    F extends FeatureLayerFields = FeatureLayerFields,
+    F extends FeatureProperties = FeatureProperties,
     G extends Geometry = Geometry
   >(
     options: {
@@ -298,7 +297,7 @@ export class NgwMap<
 
   fetchIdentifyItem<
     G extends Geometry = Geometry,
-    P extends GeoJsonProperties = GeoJsonProperties
+    P extends FeatureProperties = FeatureProperties
   >(
     identify: NgwIdentify,
     requestOptions?: NgwFeatureRequestOptions,
@@ -627,7 +626,7 @@ export class NgwMap<
       if (featureId) {
         const identifyFeature: LayerFeature = {
           id: Number(featureId),
-          fields: feature.properties,
+          fields: feature.properties || {},
           label: `#${id}`,
           layerId: Number(id),
           parent: '',
