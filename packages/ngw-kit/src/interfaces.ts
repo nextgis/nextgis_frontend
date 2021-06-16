@@ -20,7 +20,7 @@ import type {
   ResourceItem,
   LayerFeature,
   FeatureItem,
-  FeatureLayerFields,
+  FeatureProperties,
   ResourceDefinition,
 } from '@nextgis/ngw-connector';
 import type { FeatureLayersIdentify } from '@nextgis/ngw-connector';
@@ -405,7 +405,7 @@ export interface FeatureIdentifyRequestOptions {
 }
 
 export interface NgwFeatureItemResponse<
-  F = FeatureLayerFields,
+  F = FeatureProperties,
   G extends Geometry = Geometry
 > extends FeatureItem<F, G> {
   /**
