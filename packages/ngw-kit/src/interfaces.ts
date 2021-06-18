@@ -372,7 +372,7 @@ export interface FeatureRequestParams {
 type Extensions = keyof FeatureItem['extensions'];
 
 export interface NgwFeatureRequestOptions<
-  P extends { [field: string]: any } = { [field: string]: any }
+  P extends FeatureProperties = FeatureProperties
 > extends FilterOptions<P> {
   extensions?: Extensions[] | string[] | null | false;
   geom?: boolean;
@@ -385,15 +385,15 @@ export interface GetNgwItemOptions {
   connector: NgwConnector;
 }
 
-export interface GetNgwItemsOptions {
+export interface GetNgwItemsOptions<P extends FeatureProperties = FeatureProperties> {
   resourceId: number;
   connector: NgwConnector;
-  filters?: PropertiesFilter;
+  filters?: PropertiesFilter<P>;
 }
 
 export type FetchNgwItemsOptions<
-  P extends { [field: string]: any } = { [field: string]: any }
-> = GetNgwItemsOptions & NgwFeatureRequestOptions<P>;
+  P extends FeatureProperties = FeatureProperties
+> = GetNgwItemsOptions<P> & NgwFeatureRequestOptions<P>;
 
 export interface FeatureIdentifyRequestOptions {
   /**
