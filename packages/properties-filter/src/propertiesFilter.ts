@@ -31,7 +31,7 @@ type Properties = GeoJsonProperties;
  * ['count', 'ge', 20]
  */
 export type PropertyFilter<T extends Properties = Properties> = [
-  keyof T | string,
+  T extends null ? string : keyof T,
   Operations,
   any,
 ];
