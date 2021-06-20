@@ -5,7 +5,7 @@ import {
   FEATURE_REQUEST_PARAMS,
   parseDate,
 } from '@nextgis/ngw-kit';
-import NgwConnector from '@nextgis/ngw-connector';
+import NgwConnector, { NgwDateTimeFormat } from '@nextgis/ngw-connector';
 
 import type { Geometry, Feature } from 'geojson';
 import type { FeatureProperties } from '@nextgis/ngw-connector';
@@ -15,7 +15,7 @@ import type {
   FeatureLayerField,
   FeatureItem,
 } from '@nextgis/ngw-connector';
-import { defined } from '@nextgis/utils';
+import { defined, isObject } from '@nextgis/utils';
 import type { Type } from '@nextgis/utils';
 import type { ForeignResource, PatchOptions } from '../../interfaces';
 
@@ -246,8 +246,9 @@ export abstract class ResourceStore<
       prepared = store.map((x) => {
         for (const k in x) {
           const dateField = datefields.find((d) => d.keyname === k);
-          if (dateField) {
-            let date = parseDate(x[k]);
+          const val = x[k] as string;
+          if (dateField && val) {
+            let date = parseDate(val);
             if (date) {
               if (dateField.datatype === 'DATE' && this.formatters.date) {
                 date = this.formatters.date(date);
