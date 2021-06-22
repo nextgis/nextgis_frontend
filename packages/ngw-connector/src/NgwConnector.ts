@@ -417,7 +417,7 @@ export class NgwConnector {
       url = fixUrlStr(url);
       return this._loadData(url, options);
     } else {
-      throw new Error('No `url` parameter set for option ' + name);
+      throw new Error('Empty `url` not allowed');
     }
   }
 
@@ -489,7 +489,7 @@ export class NgwConnector {
    */
   getResourcesBy(
     resource: DeepPartial<Resource>,
-  ): CancelablePromise<ResourceItem[]> {
+  ): Promise<ResourceItem[]> {
     return this.resources.getMany(resource);
   }
 
@@ -505,7 +505,7 @@ export class NgwConnector {
           resourceId?: number;
           resource?: string | number;
         },
-  ): CancelablePromise<ResourceItem[]> {
+  ): Promise<ResourceItem[]> {
     return this.resources.getChildrenOf(optOrResource);
   }
 
