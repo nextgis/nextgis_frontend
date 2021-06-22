@@ -1,6 +1,6 @@
 import { isObject } from '..';
 
-export function deepEqual<T extends Record<string, any> = Record<string, any>>(
+export function objectDeepEqual<T extends Record<string, any> = Record<string, any>>(
   obj1: T,
   obj2: T,
 ): boolean {
@@ -16,7 +16,7 @@ export function deepEqual<T extends Record<string, any> = Record<string, any>>(
     const val2 = obj2[key];
     const areObjects = isObject(val1) && isObject(val2);
     if (
-      (areObjects && !deepEqual(val1, val2)) ||
+      (areObjects && !objectDeepEqual(val1, val2)) ||
       (!areObjects && val1 !== val2)
     ) {
       return false;
