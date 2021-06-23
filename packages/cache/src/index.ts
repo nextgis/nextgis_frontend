@@ -1,8 +1,8 @@
 /**
- * Key-value storage.
+ * Caching for asynchronous functions
  *
  * @packageDocumentation
  */
-import {Cache } from './Cache';
+import { Cache } from './Cache';
 
 export default Cache;
