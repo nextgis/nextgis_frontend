@@ -73,7 +73,7 @@ export function getIdentifyItems(
 
 export function fetchIdentifyGeoJson<
   G extends Geometry = Geometry,
-  P extends JsonMap = JsonMap
+  P extends JsonMap = JsonMap,
 >(
   options: GetIdentifyGeoJsonOptions,
 ): CancelablePromise<Feature<G, P> | undefined> {
@@ -107,7 +107,7 @@ export function fetchIdentifyGeoJson<
 
 export function fetchIdentifyItem<
   G extends Geometry = Geometry,
-  P extends FeatureProperties = FeatureProperties
+  P extends FeatureProperties = FeatureProperties,
 >(
   options: GetIdentifyGeoJsonOptions,
 ): CancelablePromise<NgwFeatureItemResponse<P, G> | undefined> {
@@ -129,7 +129,7 @@ export function fetchIdentifyItem<
  */
 export function getIdentifyGeoJson<
   G extends Geometry = Geometry,
-  P extends JsonMap = JsonMap
+  P extends JsonMap = JsonMap,
 >(
   options: GetIdentifyGeoJsonOptions,
 ): CancelablePromise<Feature<G, P> | undefined> {
@@ -184,7 +184,7 @@ export function sendIdentifyRequest(
 
 export function createIdentifyItem<
   F = FeatureProperties,
-  G extends Geometry = Geometry
+  G extends Geometry = Geometry,
 >(opt: IdentifyItemOptions): IdentifyItem {
   return new IdentifyItem<F, G>(opt);
 }
