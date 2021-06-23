@@ -1,4 +1,4 @@
-import '@babel/polyfill';
+import 'core-js';
 import Vue from 'vue';
 import store from './store';
 import { router } from './routers';
