@@ -9,6 +9,7 @@
 |  Package | Description |
 |  --- | --- |
 |  [@nextgis/area](./area.md) | Dependencies free QGIS ellipsoidal area calculation reproduced in JavaScript. |
+|  [@nextgis/cache](./cache.md) | Caching for asynchronous functions |
 |  [@nextgis/cancelable-promise](./cancelable-promise.md) | A promise you can stop |
 |  [@nextgis/control-container](./control-container.md) |  |
 |  [@nextgis/dialog](./dialog.md) |  |
