@@ -148,7 +148,7 @@ describe('CancelablePromise', () => {
           if (er.name === 'CancelError') {
             done();
           }
-        })
+        }),
       );
     });
 

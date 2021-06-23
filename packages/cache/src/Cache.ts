@@ -11,19 +11,23 @@ interface CacheItem<T extends any = any, O = any> {
 
 export class Cache<
   T extends any = any,
-  O extends Record<string, any> = Record<string, any>
+  O extends Record<string, any> = Record<string, any>,
 > {
   private static instance: Cache<any, any>;
   private readonly cache: CacheItem<T, O>[] = [];
 
   constructor() {
-    if (!!Cache.instance) {
+    if (Cache.instance) {
       return Cache.instance;
     }
 
     Cache.instance = this;
 
     return this;
+  }
+
+  clean(): void {
+    this.cache.length = 0;
   }
 
   add(
@@ -47,19 +51,14 @@ export class Cache<
 
       this.cache.push(cacheItem);
       if (value instanceof Promise) {
-        return value
-          .then((result) => {
-            cacheItem.value = result;
-            return result;
-          })
-          .catch((er) => {
-            this.delete(key, options);
-            throw er;
-          });
+        return value.catch((er) => {
+          this.delete(key, options);
+          throw er;
+        });
       }
-      return Promise.resolve(value);
+      return value;
     } else {
-      return Promise.resolve(exist.value);
+      return exist.value;
     }
   }
 
@@ -80,9 +79,9 @@ export class Cache<
   }
 
   delete(key: string, options?: CacheOptions<O>): void {
-    const exist = this._find(key, options);
-    if (exist) {
-      const index = this.cache.indexOf(exist);
+    const exist = this.cache.filter((x) => this._filter(x, key, options));
+    for (const e of exist) {
+      const index = this.cache.indexOf(e);
       this.cache.splice(index, 1);
     }
   }
