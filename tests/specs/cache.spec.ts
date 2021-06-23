@@ -54,6 +54,26 @@ describe(`Cache`, () => {
     const onAdd = await cache.add('test', cb);
     expect(onAdd).to.be.equal('test');
   });
+  it(`add options with promise`, (done) => {
+    const cache = new Cache();
+    const spy = sinon.spy();
+    const cb = () => {
+      return sleep(10).then(() => {
+        spy();
+      });
+    };
+    Promise.all([
+      cache.add('test', cb),
+      cache.add('test', cb, { id: 1 }),
+      cache.add('test', cb, { id: 1 }),
+      cache.add('test', cb, { id: 2 }),
+      cache.add('test', cb, { id: 2 }),
+    ]).then(() => {
+      if (spy.callCount === 3) {
+        done();
+      }
+    });
+  });
   it(`match promise immediately`, () => {
     const cache = new Cache();
     const cb = () => {
