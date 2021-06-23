@@ -385,11 +385,19 @@ export interface GetNgwItemOptions {
   connector: NgwConnector;
 }
 
-export interface GetNgwItemsOptions<P extends FeatureProperties = FeatureProperties> {
+export interface GetNgwItemsOptions<
+  P extends FeatureProperties = FeatureProperties
+> {
   resourceId: number;
   connector: NgwConnector;
+  paramList?: [string, any][];
   filters?: PropertiesFilter<P>;
+  cache?: boolean;
 }
+
+export type FetchNgwItemOptions<
+  P extends FeatureProperties = FeatureProperties
+> = GetNgwItemOptions & NgwFeatureRequestOptions<P>;
 
 export type FetchNgwItemsOptions<
   P extends FeatureProperties = FeatureProperties

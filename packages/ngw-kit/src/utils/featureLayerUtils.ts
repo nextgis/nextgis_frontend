@@ -5,23 +5,20 @@ import {
   PropertiesFilter,
 } from '@nextgis/properties-filter';
 
+import Cache from '@nextgis/cache';
 import { defined, JsonMap } from '@nextgis/utils';
 import { fetchNgwLayerItem } from './fetchNgwLayerItem';
-import { fetchNgwLayerFeature } from './fetchNgwLayerFeature';
-import { fetchNgwLayerFeatureCollection } from './fetchNgwLayerFeatureCollection';
-import { fetchNgwLayerItems } from './fetchNgwLayerItems';
 
-import type { Geometry, Feature, FeatureCollection } from 'geojson';
+import type { Geometry, Feature } from 'geojson';
 import type NgwConnector from '@nextgis/ngw-connector';
 import type {
   FeatureItem,
   RequestItemAdditionalParams,
-  FeatureLayerField,
   FeatureProperties,
 } from '@nextgis/ngw-connector';
 import type {
   FeatureRequestParams,
-  GetNgwItemsOptions,
+  FetchNgwItemsOptions,
   NgwFeatureRequestOptions,
 } from '../interfaces';
 
@@ -44,71 +41,9 @@ export function createGeoJsonFeature<
   return feature;
 }
 
-/**
- * @deprecated use {@link fetchNgwLayerItem} instead
- */
-export function getNgwLayerItem<
-  G extends Geometry = Geometry,
+export function updateItemRequestParam<
   P extends FeatureProperties = FeatureProperties
->(
-  options: {
-    resourceId: number;
-    featureId: number;
-    connector: NgwConnector;
-  } & NgwFeatureRequestOptions,
-): CancelablePromise<FeatureItem<P, G>> {
-  return fetchNgwLayerItem(options);
-}
-
-/**
- * @deprecated use {@link fetchNgwLayerFeature} instead
- */
-export function getNgwLayerFeature<
-  G extends Geometry = Geometry,
-  P extends Record<string, any> = Record<string, any>
->(
-  options: {
-    resourceId: number;
-    featureId: number;
-    connector: NgwConnector;
-  } & NgwFeatureRequestOptions,
-): CancelablePromise<Feature<G, P>> {
-  return fetchNgwLayerFeature(options);
-}
-
-/**
- * @deprecated use {@link fetchNgwLayerFeatures} instead
- */
-
-export function getNgwLayerFeatures<
-  G extends Geometry | null = Geometry,
-  P extends { [field: string]: any } = { [field: string]: any }
->(
-  options: {
-    resourceId: number;
-    connector: NgwConnector;
-    filters?: PropertiesFilter;
-  } & NgwFeatureRequestOptions<P>,
-): CancelablePromise<FeatureCollection<G, P>> {
-  return fetchNgwLayerFeatureCollection(options);
-}
-
-/**
- * @deprecated use {@link fetchNgwLayerItems} instead
- */
-export function getNgwLayerItems<
-  G extends Geometry = Geometry,
-  P extends JsonMap = JsonMap
->(
-  options: GetNgwItemsOptions & NgwFeatureRequestOptions<P>,
-): CancelablePromise<FeatureItem<P, G>[]> {
-  return fetchNgwLayerItems(options);
-}
-
-export function updateItemRequestParam(
-  params: FeatureRequestParams,
-  options: NgwFeatureRequestOptions,
-): void {
+>(params: FeatureRequestParams, options: NgwFeatureRequestOptions<P>): void {
   const { extensions, geom, fields, srs } = options;
   params.extensions = extensions ? extensions.join(',') : '';
   if (fields !== undefined) {
@@ -160,7 +95,8 @@ export function createFeatureFieldFilterQueries<
   G extends Geometry = Geometry,
   P extends { [field: string]: any } = { [field: string]: any }
 >(
-  opt: Required<GetNgwItemsOptions> & NgwFeatureRequestOptions<P>,
+  opt: FetchNgwItemsOptions<P> &
+    Required<Pick<FetchNgwItemsOptions, 'filters'>>,
   _queries: CancelablePromise<FeatureItem<P, G>[]>[] = [],
   _parentAllParams: [string, any][] = [],
 ): CancelablePromise<FeatureItem<P, G>[]> {
@@ -251,10 +187,7 @@ export function createFeatureFieldFilterQueries<
 export function fetchNgwLayerItemsRequest<
   G extends Geometry = Geometry,
   P extends { [field: string]: any } = { [field: string]: any }
->(
-  options: GetNgwItemsOptions &
-    NgwFeatureRequestOptions<P> & { paramList?: [string, any][] },
-): CancelablePromise<FeatureItem<P, G>[]> {
+>(options: FetchNgwItemsOptions<P>): CancelablePromise<FeatureItem<P, G>[]> {
   const params: FeatureRequestParams & RequestItemAdditionalParams = {
     ...FEATURE_REQUEST_PARAMS,
   };
@@ -269,6 +202,9 @@ export function fetchNgwLayerItemsRequest<
   } = options;
   if (limit) {
     params.limit = limit;
+  } else {
+    // strict restriction on loading data from large layers
+    params.limit = 7000;
   }
   if (offset) {
     params.offset = offset;
@@ -286,14 +222,35 @@ export function fetchNgwLayerItemsRequest<
   if (paramList) {
     params.paramList = paramList;
   }
-
-  return connector.get('feature_layer.feature.collection', null, {
+  const reqParams = {
     id: resourceId,
     ...params,
-  }) as CancelablePromise<FeatureItem<P, G>[]>;
+  };
+  if (options.cache) {
+    const cache = new Cache();
+    const cacheParams: Record<string, any> = { ...reqParams };
+    if (cacheParams.paramList) {
+      // make paramList string to simplify find in cache
+      cacheParams.paramList = cacheParams.paramList.join(';');
+    }
+    const createRequest = () =>
+      connector.get('feature_layer.feature.collection', null, reqParams);
+
+    return CancelablePromise.resolve(
+      cache.add('feature_layer.feature.collection', createRequest, cacheParams),
+    );
+  }
+
+  return connector.get(
+    'feature_layer.feature.collection',
+    null,
+    reqParams,
+  ) as CancelablePromise<FeatureItem<P, G>[]>;
 }
 
-export function prepareFieldsToNgw<T extends FeatureProperties = FeatureProperties>(
+export function prepareFieldsToNgw<
+  T extends FeatureProperties = FeatureProperties
+>(
   item: T,
   resourceFields: Pick<FeatureProperties, 'keyname' | 'datatype'>[],
 ): Record<keyof T, any> {
