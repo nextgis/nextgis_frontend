@@ -62,8 +62,6 @@ export async function createGeoJsonAdapter(
       filters,
       connector,
       ...opt,
-      // strict restriction on loading data from large layers
-      limit: opt?.limit !== undefined ? opt.limit : 3000,
     });
     return await _dataPromise;
   };
