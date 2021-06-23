@@ -1,7 +1,7 @@
 {
   "name": "@nextgis/cache",
   "version": "1.0.1",
-  "description": "Key-value storage",
+  "description": "Caching for asynchronous functions",
   "main": "index.js",
   "module": "lib/cache.esm-bundler.js",
   "unpkg": "lib/cache.global.prod.js",
