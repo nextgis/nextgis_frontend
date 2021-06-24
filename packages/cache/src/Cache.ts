@@ -1,6 +1,6 @@
 import { objectDeepEqual } from '@nextgis/utils';
 
-type CacheValue<T> = T | Promise<T>;
+type CacheValue<T> = T;
 type CacheOptions<T> = Record<keyof T, T[keyof T]>;
 
 interface CacheItem<T extends any = any, O = any> {
@@ -11,7 +11,7 @@ interface CacheItem<T extends any = any, O = any> {
 
 export class Cache<
   T extends any = any,
-  O extends Record<string, any> = Record<string, any>,
+  O extends Record<string, any> = Record<string, any>
 > {
   private static instance: Cache<any, any>;
   private readonly cache: CacheItem<T, O>[] = [];
@@ -51,10 +51,11 @@ export class Cache<
 
       this.cache.push(cacheItem);
       if (value instanceof Promise) {
-        return value.catch((er) => {
+        value.catch((er) => {
           this.delete(key, options);
           throw er;
         });
+        return value;
       }
       return value;
     } else {
@@ -70,12 +71,10 @@ export class Cache<
     }
   }
 
-  matchAll(key: string, options?: CacheOptions<O>): Promise<T[]> {
-    return Promise.all(
-      this.cache
-        .filter((x) => this._filter(x, key, options))
-        .map((x) => x.value),
-    );
+  matchAll(key: string, options?: CacheOptions<O>): CacheValue<T>[] {
+    return this.cache
+      .filter((x) => this._filter(x, key, options))
+      .map((x) => x.value);
   }
 
   delete(key: string, options?: CacheOptions<O>): void {
