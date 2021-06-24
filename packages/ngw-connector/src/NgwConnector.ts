@@ -489,7 +489,7 @@ export class NgwConnector {
    */
   getResourcesBy(
     resource: DeepPartial<Resource>,
-  ): Promise<ResourceItem[]> {
+  ): CancelablePromise<ResourceItem[]> {
     return this.resources.getMany(resource);
   }
 
@@ -505,7 +505,7 @@ export class NgwConnector {
           resourceId?: number;
           resource?: string | number;
         },
-  ): Promise<ResourceItem[]> {
+  ): CancelablePromise<ResourceItem[]> {
     return this.resources.getChildrenOf(optOrResource);
   }
 

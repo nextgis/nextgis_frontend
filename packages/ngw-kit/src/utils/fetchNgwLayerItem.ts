@@ -30,8 +30,8 @@ export function fetchNgwLayerItem<
     fid: options.featureId,
     ...params,
   };
-  const cache = new Cache();
-  const promise = cache.add(
+  const cache = new Cache<CancelablePromise<NgwFeatureItemResponse<P, G>>>();
+  return cache.add(
     'feature_layer.feature.item',
     () =>
       options.connector
@@ -60,5 +60,4 @@ export function fetchNgwLayerItem<
         }),
     queryParams,
   );
-  return CancelablePromise.resolve(promise);
 }
