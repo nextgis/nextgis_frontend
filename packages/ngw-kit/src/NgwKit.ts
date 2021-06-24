@@ -1,16 +1,16 @@
 import NgwConnector from '@nextgis/ngw-connector';
-import {
-  WebMap,
-  StarterKit,
-  Type,
-  LayerAdapterCreators,
-} from '@nextgis/webmap';
 
 import { extendNgwWebmapLayerAdapter } from './utils/utils';
 import { NgwWebmapLayerAdapter } from './NgwWebmapLayerAdapter';
 import { classAdapters } from './adapters/createAsyncAdapter';
 
-import {
+import type {
+  WebMap,
+  StarterKit,
+  Type,
+  LayerAdapterCreators,
+} from '@nextgis/webmap';
+import type {
   NgwKitOptions,
   NgwWebmapAdapterOptions,
   GetClassAdapter,

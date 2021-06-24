@@ -226,26 +226,22 @@ export function fetchNgwLayerItemsRequest<
     id: resourceId,
     ...params,
   };
+  const createRequest = () =>
+    connector.get(
+      'feature_layer.feature.collection',
+      null,
+      reqParams,
+    ) as CancelablePromise<FeatureItem<P, G>[]>;
   if (options.cache) {
-    const cache = new Cache();
+    const cache = new Cache<CancelablePromise<FeatureItem<P, G>[]>>();
     const cacheParams: Record<string, any> = { ...reqParams };
-    if (cacheParams.paramList) {
-      // make paramList string to simplify find in cache
-      cacheParams.paramList = cacheParams.paramList.join(';');
-    }
-    const createRequest = () =>
-      connector.get('feature_layer.feature.collection', null, reqParams);
-
-    return CancelablePromise.resolve(
-      cache.add('feature_layer.feature.collection', createRequest, cacheParams),
+    return cache.add(
+      'feature_layer.feature.collection',
+      createRequest,
+      cacheParams,
     );
   }
-
-  return connector.get(
-    'feature_layer.feature.collection',
-    null,
-    reqParams,
-  ) as CancelablePromise<FeatureItem<P, G>[]>;
+  return createRequest();
 }
 
 export function prepareFieldsToNgw<
