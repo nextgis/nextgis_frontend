@@ -16,7 +16,10 @@ import type { RequestOptions, ResourceDefinition } from './interfaces';
 const promiseControl = new CancelablePromise.PromiseControl();
 
 export class ResourcesControl {
-  private _resourcesCache = new Cache<ResourceItem, { id?: number }>();
+  private _resourcesCache = new Cache<
+    CancelablePromise<ResourceItem>,
+    { id?: number }
+  >();
 
   constructor(private connector: NgwConnector) {}
 
@@ -99,7 +102,7 @@ export class ResourcesControl {
   getMany(
     resource: DeepPartial<Resource>,
     requestOptions?: RequestOptions,
-  ): Promise<ResourceItem[]> {
+  ): CancelablePromise<ResourceItem[]> {
     return this._resourceCacheFilter(resource).then((items) => {
       if (!items.length) {
         const query: Record<string, unknown> = {};
@@ -116,9 +119,13 @@ export class ResourcesControl {
           .then((resources) => {
             if (resources) {
               resources.forEach((x) => {
-                this._resourcesCache.add('resource.item', x, {
-                  id: x.resource.id,
-                });
+                this._resourcesCache.add(
+                  'resource.item',
+                  CancelablePromise.resolve(x),
+                  {
+                    id: x.resource.id,
+                  },
+                );
               });
             }
             return resources;
@@ -137,7 +144,7 @@ export class ResourcesControl {
           resourceId?: number;
           resource?: string | number;
         },
-  ): Promise<ResourceItem[]> {
+  ): CancelablePromise<ResourceItem[]> {
     let opt: {
       keyname?: string;
       resourceId?: number;
@@ -214,22 +221,22 @@ export class ResourcesControl {
     const promise = () =>
       this.connector.get('resource.item', requestOptions, { id });
 
-    return CancelablePromise.resolve(
-      this._resourcesCache.add('resource.item', promise, {
+    return this._resourcesCache
+      .add('resource.item', promise, {
         id,
-      }),
-    ).catch((er) => {
-      if (!(er instanceof ResourceNotFoundError)) {
-        throw er;
-      }
-      return undefined;
-    });
+      })
+      .catch((er) => {
+        if (!(er instanceof ResourceNotFoundError)) {
+          throw er;
+        }
+        return undefined;
+      });
   }
 
   private _fetchResourceBy(
     resource: DeepPartial<Resource>,
     requestOptions?: RequestOptions,
-  ): Promise<ResourceItem | undefined> {
+  ): CancelablePromise<ResourceItem | undefined> {
     return this.getMany(resource, requestOptions).then((resources) => {
       return resources[0];
     });
@@ -237,8 +244,10 @@ export class ResourcesControl {
 
   private _resourceCacheFilter(
     resource: DeepPartial<Resource>,
-  ): Promise<ResourceItem[]> {
-    return this._resourcesCache.matchAll('resource.item').then((resources) => {
+  ): CancelablePromise<ResourceItem[]> {
+    return CancelablePromise.all(
+      this._resourcesCache.matchAll('resource.item'),
+    ).then((resources) => {
       const items: ResourceItem[] = [];
       resources.filter((x) => {
         // identical by uniq props
