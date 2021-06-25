@@ -69,7 +69,7 @@ interface AddEventsListenersOptions {
 export class WebMapMain<
   M = any,
   E extends WebMapEvents = WebMapEvents,
-  O extends MapOptions = MapOptions
+  O extends MapOptions = MapOptions,
 > {
   static keys: Keys = new Keys();
 
@@ -77,10 +77,8 @@ export class WebMapMain<
 
   options: O = OPTIONS as O;
   // `WebMapEvents` must be `E` but its not work correct
-  readonly emitter: StrictEventEmitter<
-    EventEmitter,
-    WebMapEvents
-  > = new EventEmitter();
+  readonly emitter: StrictEventEmitter<EventEmitter, WebMapEvents> =
+    new EventEmitter();
   readonly keys = WebMapMain.keys;
 
   readonly mapAdapter: MapAdapter<M>;

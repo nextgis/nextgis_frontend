@@ -9,7 +9,7 @@ import { fetchNgwLayerFeatures } from './fetchNgwLayerFeatures';
 
 export function fetchNgwLayerFeatureCollection<
   G extends Geometry | null = Geometry,
-  P extends { [field: string]: any } = { [field: string]: any }
+  P extends { [field: string]: any } = { [field: string]: any },
 >(
   options: {
     resourceId: number;

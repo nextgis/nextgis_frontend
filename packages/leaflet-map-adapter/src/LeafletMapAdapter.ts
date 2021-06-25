@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events';
-import { Map, Control } from 'leaflet';
+import { Map, Control, FitBoundsOptions } from 'leaflet';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 import { AttributionControl } from './controls/Attribution';
 import { convertMapClickEvent } from './utils/utils';
@@ -21,6 +21,7 @@ import type {
   LngLatArray,
   MapAdapter,
   MapOptions,
+  FitOptions,
   MapControl,
   Locate,
 } from '@nextgis/webmap';
@@ -162,13 +163,27 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   }
 
   // [west, south, east, north]
-  fitBounds(e: LngLatBoundsArray): void {
+  fitBounds(e: LngLatBoundsArray, options: FitOptions = {}): void {
     if (this.map) {
+      const { maxZoom, offset, padding } = options;
+      const opt: FitBoundsOptions = {};
+      if (maxZoom) {
+        opt.maxZoom = maxZoom;
+      }
+      if (padding) {
+        opt.padding = [padding, padding];
+      }
+      if (offset) {
+        opt.padding = offset;
+      }
       // top, left, bottom, right
-      this.map.fitBounds([
-        [e[3], e[0]],
-        [e[1], e[2]],
-      ]);
+      this.map.fitBounds(
+        [
+          [e[3], e[0]],
+          [e[1], e[2]],
+        ],
+        opt,
+      );
     }
   }
 
