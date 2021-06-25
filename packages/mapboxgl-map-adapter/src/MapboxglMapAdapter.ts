@@ -219,25 +219,24 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   }
 
   // [extent_left, extent_bottom, extent_right, extent_top];
-  async fitBounds(
-    e: LngLatBoundsArray,
-    options: FitOptions = {},
-  ): Promise<void> {
+  fitBounds(e: LngLatBoundsArray, options: FitOptions = {}): void {
     if (this.map) {
-      const fitBoundOptions: FitBoundsOptions = {
+      const opt: FitBoundsOptions = {
         linear: true,
         duration: 0,
         ...options,
         ...fitBoundsOptions,
       };
+      if (options.maxZoom) {
+        opt.maxZoom = options.maxZoom - 1;
+      }
       this.map.fitBounds(
         [
           [e[0], e[1]],
           [e[2], e[3]],
         ],
-        fitBoundOptions,
+        opt,
       );
-      sleep(fitBoundOptions.duration);
     }
   }
 
