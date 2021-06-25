@@ -9,7 +9,7 @@ type PreparedValue = any;
 
 export class CheckProperty<
   V extends VAL = VAL,
-  O extends CheckOptions<VAL> = CheckOptions<VAL>
+  O extends CheckOptions<VAL> = CheckOptions<VAL>,
 > extends BaseProperty<VAL, CheckOptions<VAL>> {
   static options: CheckOptions = {
     hierarchy: true,

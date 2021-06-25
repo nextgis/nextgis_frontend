@@ -13,11 +13,9 @@ import type { NgwConnector } from './NgwConnector';
 import type { ResourceItem, Resource } from './types/ResourceItem';
 import type { RequestOptions, ResourceDefinition } from './interfaces';
 
-const promiseControl = new CancelablePromise.PromiseControl();
-
 export class ResourcesControl {
-  private _resourcesCache = new Cache<
-    CancelablePromise<ResourceItem>,
+  cache = new Cache<
+    CancelablePromise<ResourceItem | undefined>,
     { id?: number }
   >();
 
@@ -38,7 +36,8 @@ export class ResourcesControl {
     resource: ResourceDefinition,
     requestOptions?: RequestOptions,
   ): CancelablePromise<ResourceItem | undefined> {
-    return promiseControl.waitFunc(() => {
+    const cache = new Cache();
+    const makeRequest = () => {
       if (typeof resource === 'string') {
         return this._fetchResourceBy({ keyname: resource }, requestOptions);
       } else if (typeof resource === 'number') {
@@ -47,7 +46,8 @@ export class ResourcesControl {
         return this._fetchResourceBy(resource, requestOptions);
       }
       return CancelablePromise.resolve(undefined);
-    }, String(resource));
+    };
+    return cache.add('resource', makeRequest, { resource });
   }
 
   getOneOrFail(resource: ResourceDefinition): CancelablePromise<ResourceItem> {
@@ -119,13 +119,9 @@ export class ResourcesControl {
           .then((resources) => {
             if (resources) {
               resources.forEach((x) => {
-                this._resourcesCache.add(
-                  'resource.item',
-                  CancelablePromise.resolve(x),
-                  {
-                    id: x.resource.id,
-                  },
-                );
+                this.cache.add('resource.item', CancelablePromise.resolve(x), {
+                  id: x.resource.id,
+                });
               });
             }
             return resources;
@@ -136,52 +132,27 @@ export class ResourcesControl {
   }
 
   getChildrenOf(
-    optOrResource:
-      | string
-      | number
-      | {
-          keyname?: string;
-          resourceId?: number;
-          resource?: string | number;
-        },
+    resource: ResourceDefinition,
   ): CancelablePromise<ResourceItem[]> {
-    let opt: {
-      keyname?: string;
-      resourceId?: number;
-      resource?: string | number;
-    } = {};
-    if (typeof optOrResource === 'string') {
-      opt.keyname = optOrResource;
-    } else if (typeof optOrResource === 'number') {
-      opt.resourceId = optOrResource;
-    } else {
-      opt = optOrResource;
-    }
-    let parent = opt.resourceId;
-    let keyname = opt.keyname;
-    if (!opt.keyname && !defined(opt.resourceId) && !opt.resource) {
-      throw new Error('No keyname or resourceId is set');
-    }
-    if (opt.resource) {
-      if (typeof opt.resource === 'string') {
-        keyname = opt.resource;
-      } else if (typeof opt.resource === 'number') {
-        parent = opt.resource;
-      }
-    }
-    const collection = () =>
-      this.connector.get('resource.collection', null, {
-        parent,
-      });
-    if (keyname) {
-      return this._fetchResourceBy({ keyname }).then((item) => {
-        if (item) {
-          parent = item.resource.id;
-        }
-        return collection();
-      });
-    }
-    return collection();
+    return this.getId(resource).then((parent) => {
+      return this.connector
+        .get(
+          'resource.collection',
+          { cache: true },
+          {
+            parent,
+          },
+        )
+        .then((items) => {
+          for (const i of items) {
+            console.log(i.resource.id);
+            this.cache.add('resource.item', CancelablePromise.resolve(i), {
+              id: i.resource.id,
+            });
+          }
+          return items;
+        });
+    });
   }
 
   update(
@@ -190,7 +161,7 @@ export class ResourcesControl {
   ): CancelablePromise<ResourceItem | undefined> {
     return this.getId(resource).then((id) => {
       if (id !== undefined) {
-        return this._resourcesCache.add(
+        return this.cache.add(
           'resource.item',
           () => this.connector.put('resource.item', { data }, { id }),
           { id },
@@ -207,7 +178,7 @@ export class ResourcesControl {
     return this.getId(resource).then((id) => {
       if (id !== undefined) {
         return this.connector.delete('resource.item', null, { id }).then(() => {
-          this._resourcesCache.delete('resource.item', { id });
+          this.cache.delete('resource.item', { id });
           return undefined;
         });
       }
@@ -221,7 +192,7 @@ export class ResourcesControl {
     const promise = () =>
       this.connector.get('resource.item', requestOptions, { id });
 
-    return this._resourcesCache
+    return this.cache
       .add('resource.item', promise, {
         id,
       })
@@ -245,21 +216,23 @@ export class ResourcesControl {
   private _resourceCacheFilter(
     resource: DeepPartial<Resource>,
   ): CancelablePromise<ResourceItem[]> {
-    return CancelablePromise.all(
-      this._resourcesCache.matchAll('resource.item'),
-    ).then((resources) => {
-      const items: ResourceItem[] = [];
-      resources.filter((x) => {
-        // identical by uniq props
-        if (resource.keyname && x.resource.keyname) {
-          return resource.keyname === x.resource.keyname;
-        }
-        if (defined(resource.id) && defined(x.resource.id)) {
-          return resource.id === x.resource.id;
-        }
-        return resourceCompare(resource, x.resource);
-      });
-      return items;
-    });
+    return CancelablePromise.all(this.cache.matchAll('resource.item')).then(
+      (resources) => {
+        const items: ResourceItem[] = [];
+        resources.filter((x) => {
+          if (x) {
+            // identical by uniq props
+            if (resource.keyname && x.resource.keyname) {
+              return resource.keyname === x.resource.keyname;
+            }
+            if (defined(resource.id) && defined(x.resource.id)) {
+              return resource.id === x.resource.id;
+            }
+            return resourceCompare(resource, x.resource);
+          }
+        });
+        return items;
+      },
+    );
   }
 }

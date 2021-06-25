@@ -5,7 +5,6 @@ import {
   PropertiesFilter,
 } from '@nextgis/properties-filter';
 
-import Cache from '@nextgis/cache';
 import { defined, JsonMap } from '@nextgis/utils';
 import { fetchNgwLayerItem } from './fetchNgwLayerItem';
 
@@ -29,7 +28,7 @@ export const FEATURE_REQUEST_PARAMS: FeatureRequestParams = {
 
 export function createGeoJsonFeature<
   G extends Geometry | null = Geometry,
-  P extends FeatureProperties = FeatureProperties
+  P extends FeatureProperties = FeatureProperties,
 >(item: Pick<FeatureItem, 'id' | 'geom' | 'fields'>): Feature<G, P> {
   const geometry = item.geom as G;
   const feature: Feature<G, P> = {
@@ -42,7 +41,7 @@ export function createGeoJsonFeature<
 }
 
 export function updateItemRequestParam<
-  P extends FeatureProperties = FeatureProperties
+  P extends FeatureProperties = FeatureProperties,
 >(params: FeatureRequestParams, options: NgwFeatureRequestOptions<P>): void {
   const { extensions, geom, fields, srs } = options;
   params.extensions = extensions ? extensions.join(',') : '';
@@ -63,7 +62,7 @@ export function updateItemRequestParam<
 
 export function idFilterWorkAround<
   G extends Geometry = Geometry,
-  P extends JsonMap = JsonMap
+  P extends JsonMap = JsonMap,
 >(options: {
   filterById: PropertyFilter;
   resourceId: number;
@@ -93,7 +92,7 @@ export function idFilterWorkAround<
 // therefore the filter is divided into several requests
 export function createFeatureFieldFilterQueries<
   G extends Geometry = Geometry,
-  P extends { [field: string]: any } = { [field: string]: any }
+  P extends { [field: string]: any } = { [field: string]: any },
 >(
   opt: FetchNgwItemsOptions<P> &
     Required<Pick<FetchNgwItemsOptions, 'filters'>>,
@@ -186,7 +185,7 @@ export function createFeatureFieldFilterQueries<
 
 export function fetchNgwLayerItemsRequest<
   G extends Geometry = Geometry,
-  P extends { [field: string]: any } = { [field: string]: any }
+  P extends { [field: string]: any } = { [field: string]: any },
 >(options: FetchNgwItemsOptions<P>): CancelablePromise<FeatureItem<P, G>[]> {
   const params: FeatureRequestParams & RequestItemAdditionalParams = {
     ...FEATURE_REQUEST_PARAMS,
@@ -226,26 +225,16 @@ export function fetchNgwLayerItemsRequest<
     id: resourceId,
     ...params,
   };
-  const createRequest = () =>
-    connector.get(
-      'feature_layer.feature.collection',
-      null,
-      reqParams,
-    ) as CancelablePromise<FeatureItem<P, G>[]>;
-  if (options.cache) {
-    const cache = new Cache<CancelablePromise<FeatureItem<P, G>[]>>();
-    const cacheParams: Record<string, any> = { ...reqParams };
-    return cache.add(
-      'feature_layer.feature.collection',
-      createRequest,
-      cacheParams,
-    );
-  }
-  return createRequest();
+
+  return connector.get(
+    'feature_layer.feature.collection',
+    { cache: options.cache },
+    reqParams,
+  ) as CancelablePromise<FeatureItem<P, G>[]>;
 }
 
 export function prepareFieldsToNgw<
-  T extends FeatureProperties = FeatureProperties
+  T extends FeatureProperties = FeatureProperties,
 >(
   item: T,
   resourceFields: Pick<FeatureProperties, 'keyname' | 'datatype'>[],

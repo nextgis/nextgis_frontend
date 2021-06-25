@@ -1,7 +1,6 @@
 import { Geometry } from 'geojson';
 
 import CancelablePromise from '@nextgis/cancelable-promise';
-import Cache from '@nextgis/cache';
 
 import type { FeatureProperties } from '@nextgis/ngw-connector';
 import {
@@ -17,7 +16,7 @@ import {
 
 export function fetchNgwLayerItem<
   G extends Geometry = Geometry,
-  P extends FeatureProperties = FeatureProperties
+  P extends FeatureProperties = FeatureProperties,
 >(
   options: FetchNgwItemOptions<P>,
 ): CancelablePromise<NgwFeatureItemResponse<P, G>> {
@@ -30,34 +29,27 @@ export function fetchNgwLayerItem<
     fid: options.featureId,
     ...params,
   };
-  const cache = new Cache<CancelablePromise<NgwFeatureItemResponse<P, G>>>();
-  return cache.add(
-    'feature_layer.feature.item',
-    () =>
-      options.connector
-        .get('feature_layer.feature.item', null, queryParams)
-        .then((resp) => {
-          return {
-            ...resp,
-            toGeojson: () => {
-              if (resp.geom) {
-                return CancelablePromise.resolve(
-                  createGeoJsonFeature<G, P>(resp),
-                );
-              } else {
-                return fetchNgwLayerItem({
-                  ...options,
-                  geom: true,
-                  fields: null,
-                  extensions: null,
-                }).then((onlyGeomItem) => {
-                  const geom = onlyGeomItem.geom;
-                  return createGeoJsonFeature<G, P>({ ...resp, geom });
-                });
-              }
-            },
-          } as NgwFeatureItemResponse<P, G>;
-        }),
-    queryParams,
-  );
+  const cache = options.cache || true;
+  return options.connector
+    .get('feature_layer.feature.item', { cache }, queryParams)
+    .then((resp) => {
+      return {
+        ...resp,
+        toGeojson: () => {
+          if (resp.geom) {
+            return CancelablePromise.resolve(createGeoJsonFeature<G, P>(resp));
+          } else {
+            return fetchNgwLayerItem({
+              ...options,
+              geom: true,
+              fields: null,
+              extensions: null,
+            }).then((onlyGeomItem) => {
+              const geom = onlyGeomItem.geom;
+              return createGeoJsonFeature<G, P>({ ...resp, geom });
+            });
+          }
+        },
+      } as NgwFeatureItemResponse<P, G>;
+    });
 }

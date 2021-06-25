@@ -27,7 +27,8 @@ type Layer = Base;
 type Layers = LayerDefinition<Feature, Layer>;
 
 export class GeoJsonAdapter
-  implements VectorLayerAdapter<Map, Layer, GeoJsonAdapterOptions> {
+  implements VectorLayerAdapter<Map, Layer, GeoJsonAdapterOptions>
+{
   layer?: VectorLayer;
   paint?: Paint;
   selectedPaint?: Paint;

@@ -8,6 +8,3 @@ export function resourceCompare(
 ): boolean {
   return objectDeepEqual(res1, res2);
 }
-
-
-
