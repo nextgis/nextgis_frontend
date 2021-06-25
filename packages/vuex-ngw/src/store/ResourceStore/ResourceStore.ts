@@ -5,7 +5,7 @@ import {
   FEATURE_REQUEST_PARAMS,
   parseDate,
 } from '@nextgis/ngw-kit';
-import NgwConnector, { NgwDateTimeFormat } from '@nextgis/ngw-connector';
+import NgwConnector from '@nextgis/ngw-connector';
 
 import type { Geometry, Feature } from 'geojson';
 import type { FeatureProperties } from '@nextgis/ngw-connector';
@@ -15,7 +15,7 @@ import type {
   FeatureLayerField,
   FeatureItem,
 } from '@nextgis/ngw-connector';
-import { defined, isObject } from '@nextgis/utils';
+import { defined } from '@nextgis/utils';
 import type { Type } from '@nextgis/utils';
 import type { ForeignResource, PatchOptions } from '../../interfaces';
 
@@ -23,7 +23,7 @@ type ResourceDef = string | number;
 
 export abstract class ResourceStore<
   P extends FeatureProperties = FeatureProperties,
-  G extends Geometry | null = Geometry
+  G extends Geometry | null = Geometry,
 > extends VuexModule {
   resource!: string;
 
@@ -148,7 +148,7 @@ export abstract class ResourceStore<
   @Action({ commit: '' })
   async prepareFeatureToNgw<
     G extends Geometry | null = Geometry,
-    P extends FeatureProperties = FeatureProperties
+    P extends FeatureProperties = FeatureProperties,
   >(opt: { item: Feature<G, P> }): Promise<Partial<FeatureItem<P>>> {
     const geom = opt.item.geometry as Geometry;
     const featureFields = (await this.context.dispatch(
@@ -276,7 +276,7 @@ export abstract class ResourceStore<
 
 export function createResourceStore<
   P extends FeatureProperties = FeatureProperties,
-  G extends Geometry | null = Geometry
+  G extends Geometry | null = Geometry,
 >(options: {
   connector: NgwConnector;
   keyname: string;

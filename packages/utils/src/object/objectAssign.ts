@@ -7,7 +7,11 @@ export function objectAssign<T, U>(target: T, source: U): T & U;
  * @param source1 - The first source object from which to copy properties.
  * @param source2 - The second source object from which to copy properties.
  */
-export function objectAssign<T, U, V>(target: T, source1: U, source2: V): T & U & V;
+export function objectAssign<T, U, V>(
+  target: T,
+  source1: U,
+  source2: V,
+): T & U & V;
 
 /**
  * Copy the values of all of the enumerable own properties from one or more source objects to a

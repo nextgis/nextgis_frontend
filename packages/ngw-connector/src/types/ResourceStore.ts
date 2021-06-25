@@ -1,7 +1,7 @@
 export type ResourceStoreItemProperties = { [name: string]: any } | null;
 
 export type ResourceStoreItem<
-  P extends ResourceStoreItemProperties = ResourceStoreItemProperties
+  P extends ResourceStoreItemProperties = ResourceStoreItemProperties,
 > = ResourceStoreItemDefault & P;
 
 export interface ResourceStoreItemDefault {

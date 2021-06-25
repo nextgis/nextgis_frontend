@@ -1,5 +1,6 @@
 import CancelablePromise from '@nextgis/cancelable-promise';
-import { DeepPartial, fixUrlStr } from '@nextgis/utils';
+import { fixUrlStr } from '@nextgis/utils';
+import Cache from '@nextgis/cache';
 import { EventEmitter } from 'events';
 
 import { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
@@ -17,6 +18,7 @@ import {
 } from './activeConnectors';
 import { ResourcesControl } from './ResourcesControl';
 
+import type { DeepPartial } from '@nextgis/utils';
 import type {
   DeleteRequestItemsResponseMap,
   PatchRequestItemsResponseMap,
@@ -35,6 +37,7 @@ import type {
   UserInfo,
   Params,
 } from './interfaces';
+import { apiRequest } from './utils/apiRequest';
 
 export class NgwConnector {
   static errors = {
@@ -48,7 +51,6 @@ export class NgwConnector {
   resources: ResourcesControl;
 
   private routeStr = '/api/component/pyramid/route';
-  private route?: PyramidRoute;
 
   constructor(public options: NgwConnectorOptions) {
     if (this.options.route) {
@@ -93,20 +95,18 @@ export class NgwConnector {
    * ```
    */
   connect(): CancelablePromise<PyramidRoute> {
-    return new CancelablePromise((resolve, reject) => {
-      const makeQuery = () => {
-        return this.makeQuery(this.routeStr, {}, {})
-          .then((route: PyramidRoute) => {
-            this.route = route;
-            resolve(route);
-          })
-          .catch((er) => {
-            reject(er);
-          });
-      };
-      if (this.route) {
-        return resolve(this.route);
-      } else {
+    const cache = new Cache();
+    const makeConnect = () =>
+      new CancelablePromise((resolve, reject) => {
+        const makeQuery = () => {
+          return this.makeQuery(this.routeStr, {}, {})
+            .then((route: PyramidRoute) => {
+              resolve(route);
+            })
+            .catch((er) => {
+              reject(er);
+            });
+        };
         if (this.options.auth) {
           const { login, password } = this.options.auth;
           if (login && password) {
@@ -116,8 +116,8 @@ export class NgwConnector {
           }
         }
         return makeQuery();
-      }
-    });
+      });
+    return cache.add('route', makeConnect);
   }
 
   /**
@@ -136,12 +136,11 @@ export class NgwConnector {
   logout(): void {
     removeConnector(this);
     this.options.auth = undefined;
-    this.route = undefined;
     this.user = undefined;
     this.emitter.emit('logout');
+    this.resources.cache.clean();
   }
 
-  // TODO: rename
   getUserInfo(credentials?: Credentials): CancelablePromise<UserInfo> {
     if (this.user && this.user.id) {
       return CancelablePromise.resolve(this.user);
@@ -199,7 +198,7 @@ export class NgwConnector {
    * Send request to NGW api router.
    * @param name - NGW route name from {@link https://docs.nextgis.com/docs_ngweb_dev/doc/developer/resource.html#routes | routes}
    * @param params - Request item params or query params
-   * @param options - Request options
+   * @param requestOptions - Request options
    *
    * @example
    * ```javascript
@@ -226,68 +225,25 @@ export class NgwConnector {
    */
   apiRequest<
     K extends keyof RequestItemsParamsMap,
-    P extends RequestItemKeys = RequestItemKeys
+    P extends RequestItemKeys = RequestItemKeys,
   >(
     name: K,
     params: RequestItemsParams<K> = {},
-    options?: RequestOptions,
+    requestOptions: RequestOptions = {},
   ): CancelablePromise<P[K]> {
-    return new CancelablePromise((resolve, reject) => {
-      this.connect()
-        .then((apiItems) => {
-          let apiItem = apiItems && apiItems[name];
-          if (apiItem) {
-            apiItem = [...apiItem];
-            let url = apiItem.shift();
-            if (apiItem.length) {
-              const replaceParams: {
-                [num: number]: string;
-              } = {};
-              for (let fry = 0; fry < apiItem.length; fry++) {
-                const arg = apiItem[fry];
-                replaceParams[fry] = '{' + arg + '}';
-                if (params[arg] === undefined) {
-                  throw new Error(
-                    '`' + arg + '`' + ' url api argument is not specified',
-                  );
-                }
-              }
-              if (url) {
-                url = template(url, replaceParams);
-              }
-            }
-            // Transfer part of the parameters from `params` to the URL string
-            if (params) {
-              const paramArray = [];
-              const paramList = params.paramList;
-              if (Array.isArray(paramList)) {
-                delete params.paramList;
-                paramList.forEach((x) => {
-                  paramArray.push(`${x[0]}=${x[1]}`);
-                });
-              }
-              for (const p in params) {
-                if (apiItem.indexOf(p) === -1) {
-                  paramArray.push(`${p}=${params[p]}`);
-                }
-              }
-              if (paramArray.length) {
-                url = url + '?' + paramArray.join('&');
-              }
-            }
-            if (url) {
-              resolve(this.makeQuery(url, params, options));
-            } else {
-              reject(new Error('request url is not set'));
-            }
-          } else {
-            resolve(undefined);
-          }
-        })
-        .catch((er) => {
-          reject(er);
-        });
-    });
+    const { method, headers, withCredentials, responseType } = requestOptions;
+    const makeApiRequest = () =>
+      apiRequest({ name, params, requestOptions, connector: this });
+    if (requestOptions.cache && method === 'GET') {
+      const cache = new Cache<CancelablePromise<P[K]>>();
+      return cache.add(name, makeApiRequest, {
+        params,
+        headers,
+        withCredentials,
+        responseType,
+      });
+    }
+    return makeApiRequest();
   }
 
   /**
@@ -497,16 +453,9 @@ export class NgwConnector {
    * {@inheritDoc ResourcesControl.getChildrenOf}
    */
   getResourceChildren(
-    optOrResource:
-      | string
-      | number
-      | {
-          keyname?: string;
-          resourceId?: number;
-          resource?: string | number;
-        },
+    resource: ResourceDefinition,
   ): CancelablePromise<ResourceItem[]> {
-    return this.resources.getChildrenOf(optOrResource);
+    return this.resources.getChildrenOf(resource);
   }
 
   /**

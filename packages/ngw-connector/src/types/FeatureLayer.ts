@@ -1,6 +1,6 @@
 import type { Geometry, GeoJsonObject } from 'geojson';
 
-export type FeatureProperties = { [name: string]: any; }; // GeoJsonProperties;
+export type FeatureProperties = { [name: string]: any }; // GeoJsonProperties;
 
 export interface NgwLayerIdentifyError {
   error: 'Not implemented';
@@ -41,7 +41,7 @@ export interface FeatureItemExtensions {
 
 export interface FeatureItem<
   F = FeatureProperties,
-  G extends Geometry | string = Geometry
+  G extends Geometry | string = Geometry,
 > {
   id: number;
   geom: G;
@@ -51,5 +51,5 @@ export interface FeatureItem<
 
 export type FeatureItemToNgw<
   F = FeatureProperties,
-  G extends Geometry | string = Geometry
+  G extends Geometry | string = Geometry,
 > = FeatureItem<F, G>;
