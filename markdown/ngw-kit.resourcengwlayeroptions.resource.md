@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-resource: number | string | NgwLayerOptions | ResourceItem;
+resource: ResourceDefinition;
 ```

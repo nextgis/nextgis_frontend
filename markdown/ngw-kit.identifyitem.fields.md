@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-readonly fields: FeatureLayerFields;
+readonly fields: FeatureProperties;
 ```

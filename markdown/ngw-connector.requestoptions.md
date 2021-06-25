@@ -14,6 +14,7 @@ export interface RequestOptions<M = RequestMethods>
 
 |  Property | Type | Description |
 |  --- | --- | --- |
+|  [cache?](./ngw-connector.requestoptions.cache.md) | boolean | <i>(Optional)</i> |
 |  [data?](./ngw-connector.requestoptions.data.md) | any | <i>(Optional)</i> |
 |  [file?](./ngw-connector.requestoptions.file.md) | File | <i>(Optional)</i> |
 |  [headers?](./ngw-connector.requestoptions.headers.md) | [RequestHeaders](./ngw-connector.requestheaders.md) | <i>(Optional)</i> |
