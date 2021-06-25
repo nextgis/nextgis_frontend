@@ -63,7 +63,7 @@
 |  [objectAssign(target, source)](./utils.objectassign.md) |  |
 |  [objectAssign(target, source1, source2)](./utils.objectassign_1.md) | Copy the values of all of the enumerable own properties from one or more source objects to a target object. Returns the target object. |
 |  [objectAssign(target, source1, source2, source3)](./utils.objectassign_2.md) | Copy the values of all of the enumerable own properties from one or more source objects to a target object. Returns the target object. |
-|  [objectDeepEqual(obj1, obj2)](./utils.objectdeepequal.md) |  |
+|  [objectDeepEqual(o, p)](./utils.objectdeepequal.md) |  |
 |  [reEscape(s)](./utils.reescape.md) |  |
 |  [round(val, toFixed)](./utils.round.md) |  |
 |  [sleep(delay)](./utils.sleep.md) |  |

@@ -7,17 +7,16 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function fetchNgwLayerExtent(id: number, connector: NgwConnector): Promise<LngLatBoundsArray | undefined>;
+export declare function fetchNgwLayerExtent({ resourceId, connector, cache, }: FetchNgwLayerExtentOptions): CancelablePromise<LngLatBoundsArray | undefined>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  id | number |  |
-|  connector | NgwConnector |  |
+|  { resourceId, connector, cache, } | [FetchNgwLayerExtentOptions](./ngw-kit.fetchngwlayerextentoptions.md) |  |
 
 <b>Returns:</b>
 
-Promise&lt;[LngLatBoundsArray](./utils.lnglatboundsarray.md) \| undefined&gt;
+CancelablePromise&lt;[LngLatBoundsArray](./utils.lnglatboundsarray.md) \| undefined&gt;
 

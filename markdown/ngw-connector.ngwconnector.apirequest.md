@@ -9,7 +9,7 @@ Send request to NGW api router.
 <b>Signature:</b>
 
 ```typescript
-apiRequest<K extends keyof RequestItemsParamsMap, P extends RequestItemKeys = RequestItemKeys>(name: K, params?: RequestItemsParams<K>, options?: RequestOptions): CancelablePromise<P[K]>;
+apiRequest<K extends keyof RequestItemsParamsMap, P extends RequestItemKeys = RequestItemKeys>(name: K, params?: RequestItemsParams<K>, requestOptions?: RequestOptions): CancelablePromise<P[K]>;
 ```
 
 ## Parameters
@@ -18,7 +18,7 @@ apiRequest<K extends keyof RequestItemsParamsMap, P extends RequestItemKeys = Re
 |  --- | --- | --- |
 |  name | K | NGW route name from [routes](https://docs.nextgis.com/docs_ngweb_dev/doc/developer/resource.html#routes) |
 |  params | [RequestItemsParams](./ngw-connector.requestitemsparams.md)<!-- -->&lt;K&gt; | Request item params or query params |
-|  options | [RequestOptions](./ngw-connector.requestoptions.md) | Request options |
+|  requestOptions | [RequestOptions](./ngw-connector.requestoptions.md) | Request options |
 
 <b>Returns:</b>
 

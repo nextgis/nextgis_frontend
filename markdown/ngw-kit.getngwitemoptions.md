@@ -7,14 +7,13 @@
 <b>Signature:</b>
 
 ```typescript
-export interface GetNgwItemOptions 
+export interface GetNgwItemOptions extends FetchNgwLayerExtentOptions 
 ```
+<b>Extends:</b> [FetchNgwLayerExtentOptions](./ngw-kit.fetchngwlayerextentoptions.md)
 
 ## Properties
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [connector](./ngw-kit.getngwitemoptions.connector.md) | NgwConnector |  |
 |  [featureId](./ngw-kit.getngwitemoptions.featureid.md) | number |  |
-|  [resourceId](./ngw-kit.getngwitemoptions.resourceid.md) | number |  |
 

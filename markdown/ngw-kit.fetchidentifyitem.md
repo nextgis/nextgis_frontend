@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function fetchIdentifyItem<G extends Geometry = Geometry, P extends GeoJsonProperties = GeoJsonProperties>(options: GetIdentifyGeoJsonOptions): CancelablePromise<NgwFeatureItemResponse<P, G> | undefined>;
+export declare function fetchIdentifyItem<G extends Geometry = Geometry, P extends FeatureProperties = FeatureProperties>(options: GetIdentifyGeoJsonOptions): CancelablePromise<NgwFeatureItemResponse<P, G> | undefined>;
 ```
 
 ## Parameters

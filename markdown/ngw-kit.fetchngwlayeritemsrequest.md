@@ -11,16 +11,14 @@ export declare function fetchNgwLayerItemsRequest<G extends Geometry = Geometry,
     [field: string]: any;
 } = {
     [field: string]: any;
-}>(options: GetNgwItemsOptions & NgwFeatureRequestOptions<P> & {
-    paramList?: [string, any][];
-}): CancelablePromise<FeatureItem<P, G>[]>;
+}>(options: FetchNgwItemsOptions<P>): CancelablePromise<FeatureItem<P, G>[]>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | [GetNgwItemsOptions](./ngw-kit.getngwitemsoptions.md) &amp; [NgwFeatureRequestOptions](./ngw-kit.ngwfeaturerequestoptions.md)<!-- -->&lt;P&gt; &amp; { paramList?: \[string, any\]\[\]; } |  |
+|  options | [FetchNgwItemsOptions](./ngw-kit.fetchngwitemsoptions.md)<!-- -->&lt;P&gt; |  |
 
 <b>Returns:</b>
 

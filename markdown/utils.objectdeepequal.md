@@ -7,15 +7,15 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function deepEqual<T extends Record<string, any> = Record<string, any>>(obj1: T, obj2: T): boolean;
+export declare function objectDeepEqual<T extends Record<string, any> = Record<string, any>>(o: T, p: T): boolean;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  obj1 | T |  |
-|  obj2 | T |  |
+|  o | T |  |
+|  p | T |  |
 
 <b>Returns:</b>
 

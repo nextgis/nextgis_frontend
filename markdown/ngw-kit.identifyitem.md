@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare class IdentifyItem<F = FeatureLayerFields, G extends Geometry = Geometry> implements LayerFeature 
+export declare class IdentifyItem<F = FeatureProperties, G extends Geometry = Geometry> implements LayerFeature 
 ```
 <b>Implements:</b> [LayerFeature](./ngw-connector.layerfeature.md)
 
@@ -22,7 +22,7 @@ export declare class IdentifyItem<F = FeatureLayerFields, G extends Geometry = G
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [extensions?](./ngw-kit.identifyitem.extensions.md) |  | [FeatureItemExtensions](./ngw-connector.featureitemextensions.md) | <i>(Optional)</i> |
-|  [fields](./ngw-kit.identifyitem.fields.md) |  | [FeatureLayerFields](./ngw-connector.featurelayerfields.md) |  |
+|  [fields](./ngw-kit.identifyitem.fields.md) |  | [FeatureProperties](./ngw-connector.featureproperties.md) |  |
 |  [geom?](./ngw-kit.identifyitem.geom.md) |  | GeoJsonObject | <i>(Optional)</i> |
 |  [id](./ngw-kit.identifyitem.id.md) |  | number |  |
 |  [label](./ngw-kit.identifyitem.label.md) |  | string |  |

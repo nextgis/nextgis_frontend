@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface NgwFeatureItemResponse<F = FeatureLayerFields, G extends Geometry = Geometry> extends FeatureItem<F, G> 
+export interface NgwFeatureItemResponse<F = FeatureProperties, G extends Geometry = Geometry> extends FeatureItem<F, G> 
 ```
 <b>Extends:</b> [FeatureItem](./ngw-connector.featureitem.md)<!-- -->&lt;F, G&gt;
 

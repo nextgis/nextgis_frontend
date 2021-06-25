@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-filters?: PropertiesFilter;
+filters?: PropertiesFilter<P>;
 ```
