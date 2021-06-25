@@ -46,9 +46,7 @@ async function createAdapterFromFirstStyle({
   item,
 }: GetClassAdapterOptions) {
   const parent = item.resource.id;
-  const childrenStyles = await connector.get('resource.collection', null, {
-    parent,
-  });
+  const childrenStyles = await connector.getResourceChildren(parent);
   const firstStyle = childrenStyles && childrenStyles[0];
   if (firstStyle) {
     // eslint-disable-next-line @typescript-eslint/no-use-before-define

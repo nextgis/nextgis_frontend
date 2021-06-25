@@ -148,12 +148,13 @@ export interface RequestHeaders {
 export type RequestMethods = 'POST' | 'GET' | 'PATCH' | 'DELETE' | 'PUT';
 
 export interface RequestOptions<M = RequestMethods> {
-  method?: M;
   data?: any;
+  file?: File;
+  method?: M;
   headers?: RequestHeaders;
   withCredentials?: boolean;
-  file?: File;
   responseType?: 'json' | 'blob';
+  cache?: boolean;
   onProgress?: (percentComplete: number, event: ProgressEvent) => void;
 }
 

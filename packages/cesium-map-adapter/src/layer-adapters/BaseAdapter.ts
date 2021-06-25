@@ -6,8 +6,9 @@ type Layer = any;
 
 export abstract class BaseAdapter<
   O extends AdapterOptions = AdapterOptions,
-  L = Layer
-> implements MainLayerAdapter<Map, L, O> {
+  L = Layer,
+> implements MainLayerAdapter<Map, L, O>
+{
   protected onTerrainChange?: () => void;
   private _terrainProviderChangedListener?: Event.RemoveCallback;
 

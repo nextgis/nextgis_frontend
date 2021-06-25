@@ -11,7 +11,7 @@ import { ItemBasePropertyOptions, ItemOptions } from '../interfaces';
 
 export abstract class BaseProperty<
   V = any,
-  O extends ItemBasePropertyOptions<V> = ItemBasePropertyOptions<V>
+  O extends ItemBasePropertyOptions<V> = ItemBasePropertyOptions<V>,
 > {
   options: O;
 

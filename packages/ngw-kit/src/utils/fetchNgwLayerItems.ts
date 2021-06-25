@@ -11,7 +11,7 @@ import type { FetchNgwItemsOptions } from '../interfaces';
 
 export function fetchNgwLayerItems<
   G extends Geometry = Geometry,
-  P extends FeatureProperties = FeatureProperties
+  P extends FeatureProperties = FeatureProperties,
 >(options: FetchNgwItemsOptions<P>): CancelablePromise<FeatureItem<P, G>[]> {
   const filters = options.filters;
   if (filters) {

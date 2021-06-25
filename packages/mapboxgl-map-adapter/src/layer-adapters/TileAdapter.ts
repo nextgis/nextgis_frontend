@@ -8,7 +8,8 @@ import { RasterSource, ResourceType, Layer, AnyLayer } from 'mapbox-gl';
 
 export class TileAdapter<O extends RasterAdapterOptions = TileAdapterOptions>
   extends BaseAdapter<O>
-  implements MainLayerAdapter {
+  implements MainLayerAdapter
+{
   addLayer(options: O): string[] | undefined {
     options = { ...this.options, ...(options || {}) };
     const { minZoom, maxZoom } = options;
