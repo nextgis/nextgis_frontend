@@ -145,7 +145,6 @@ export class ResourcesControl {
         )
         .then((items) => {
           for (const i of items) {
-            console.log(i.resource.id);
             this.cache.add('resource.item', CancelablePromise.resolve(i), {
               id: i.resource.id,
             });

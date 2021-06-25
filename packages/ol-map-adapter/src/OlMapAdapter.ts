@@ -17,6 +17,7 @@ import { PanelControl } from './controls/PanelControl';
 import { createControl } from './controls/createControl';
 import { createButtonControl } from './controls/createButtonControl';
 
+import type { FitOptions as OlFitOptions } from 'ol/View';
 import type Base from 'ol/layer/Base';
 import type Feature from 'ol/Feature';
 import type { ViewOptions } from 'ol/View';
@@ -25,6 +26,7 @@ import type Control from 'ol/control/Control';
 import type MapBrowserPointerEvent from 'ol/MapBrowserEvent';
 import type { MapOptions as OlMapOptions } from 'ol/PluggableMap';
 import type {
+  FitOptions,
   MapControl,
   MapAdapter,
   MapOptions,
@@ -169,8 +171,9 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     }
   }
 
-  fitBounds(e: LngLatBoundsArray): void {
+  fitBounds(e: LngLatBoundsArray, options: FitOptions = {}): void {
     if (this._olView) {
+      const { padding, maxZoom, offset } = options;
       const zoom = this.getZoom();
       const extent = e as Extent;
       const toExtent = transformExtent(
@@ -178,7 +181,18 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
         this.lonlatProjection,
         this.displayProjection,
       );
-      this._olView.fit(toExtent);
+      const opt: OlFitOptions = {};
+      if (maxZoom) {
+        opt.maxZoom = maxZoom;
+      }
+      if (padding) {
+        opt.padding = [padding, padding];
+      }
+      if (offset) {
+        opt.padding = offset;
+      }
+
+      this._olView.fit(toExtent, opt);
       this._emitMoveEndEvents({ zoom });
     }
   }
