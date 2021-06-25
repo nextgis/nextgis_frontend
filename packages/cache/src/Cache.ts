@@ -11,7 +11,7 @@ interface CacheItem<T extends any = any, O = any> {
 
 export class Cache<
   T extends any = any,
-  O extends Record<string, any> = Record<string, any>
+  O extends Record<string, any> = Record<string, any>,
 > {
   private static instance: Cache<any, any>;
   private readonly cache: CacheItem<T, O>[] = [];
