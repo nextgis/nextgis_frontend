@@ -152,9 +152,50 @@ describe(`Cache`, () => {
     onAdd.catch((er) => {
       if (er.name === 'CancelError') {
         const fromCacheOnCancel = cache.match('test');
-        if (!fromCacheOnCancel) done();
+        expect(fromCacheOnCancel).to.be.undefined;
+        done();
       }
     });
     onAdd.cancel();
+  });
+
+  it(`add callback`, (done) => {
+    const cache = new Cache();
+    let callCount = 0;
+    const makePromise = function () {
+      return new Promise((resolve) => {
+        sleep(20).then(() => resolve(callCount++));
+      });
+    };
+    Promise.all([
+      cache.add('key', makePromise),
+      cache.add('key', makePromise, { id: 1 }),
+      cache.add('key', makePromise, { id: 1 }),
+      cache.add('key', makePromise, { id: 2 }),
+      cache.add('key', makePromise, { id: 2 }),
+    ])
+      .then((resp) => {
+        return expect(resp).deep.equal([0, 1, 1, 2, 2]);
+      })
+      .then(() => done(), done);
+  });
+  it(`match all`, (done) => {
+    const cache = new Cache();
+    let callCount = 0;
+    const makePromise = function () {
+      return new Promise((resolve) => {
+        sleep(20).then(() => resolve(callCount++));
+      });
+    };
+    cache.add('key', makePromise); // added to cache
+    cache.add('key', makePromise, { id: 1 }); // added to the cache
+    cache.add('key', makePromise, { id: 1 }); // NOT added to the cache
+    cache.add('key', makePromise, { id: 2 }); // added to the cache
+    cache.add('key', makePromise, { id: 2 }); // NOT added to the cache
+    Promise.all(cache.matchAll('key'))
+      .then((resp) => {
+        return expect(resp).deep.equal([0, 1, 2]);
+      })
+      .then(() => done(), done);
   });
 });
