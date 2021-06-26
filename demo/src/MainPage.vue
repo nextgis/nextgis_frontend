@@ -20,7 +20,7 @@
         href="https://github.com/nextgis/nextgis_frontend"
         target="_blank"
       >
-        <v-icon large>mdi-github-circle</v-icon>
+        <v-icon large>{{ icons.github }}</v-icon>
       </v-btn>
     </v-app-bar>
 
@@ -125,7 +125,7 @@ kbd:before {
 .v-application code {
   /* rewrite vuetify */
   color: #444;
-  background: #F0F0F0;
+  background: #f0f0f0;
 }
 
 code {
