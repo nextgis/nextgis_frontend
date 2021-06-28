@@ -1,0 +1,4 @@
+{
+  "name": "Fetch NGW Layer items",
+  "description": "Use NgwKit to load items from NGW vector layer"
+}

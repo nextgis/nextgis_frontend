@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Fetch NGW Layer items</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- import NgwConnector to create vector resource -->
+    <script
+      type="text/javascript"
+      src="../../../ngw-connector/lib/ngw-connector.global.js"
+    ></script>
+    <script type="text/javascript" src="../../lib/ngw-kit.global.js"></script>
+  </head>
+
+  <body>
+    <div id="feature-list"></div>
+
+    <script>
+      // NGW resource keyname
+      const keyname = 'eat-here';
+      const featureListBlock = document.getElementById('feature-list');
+
+      const connector = new NgwConnector({
+        baseUrl: 'https://demo.nextgis.com',
+      });
+
+      connector.getResourceId(keyname).then((resourceId) => {
+        NgwKit.fetchNgwLayerItems({
+          connector,
+          resourceId,
+          // it is good practice to only ask for fields that will be used
+          fields: ['NAME'],
+          // geom: false,
+          filters: [['NAME', 'eq', 'Subway']],
+          limit: 10,
+          // Use the cache for lists carefully, it can overflow memory and break the browser.
+          cache: true,
+        }).then((items) => {
+          featureListBlock.innerHTML = '';
+          for (const i of items) {
+            featureListBlock.innerHTML += `<p>${i.fields.NAME}</p>`;
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
