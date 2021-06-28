@@ -6,7 +6,7 @@ import {
   Cesium3DTileStyle,
   Color,
 } from 'cesium';
-import { debugLog, defined } from '@nextgis/utils';
+import { debugLog } from '@nextgis/utils';
 import { getExtentFromBoundingSphere } from '../utils/getExtentFromBoundingSphere';
 import { makeUrl } from '../utils/makeUrl';
 import { whenSampleTerrainMostDetailed } from '../utils/whenSampleTerrainMostDetailed';
@@ -87,7 +87,7 @@ export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
     // if (defined(maximumScreenSpaceError)) {
     //   options.maximumScreenSpaceError = maximumScreenSpaceError;
     // }
-      options.maximumScreenSpaceError = maximumScreenSpaceError || 1;
+    options.maximumScreenSpaceError = maximumScreenSpaceError || 1;
 
     const layer = new Cesium3DTileset(options);
     layer.show = false;
