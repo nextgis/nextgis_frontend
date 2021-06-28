@@ -446,7 +446,7 @@ export interface FilterOptions<
    * set fields for order
    *
    * @remarks
-   * TODO: use typescript 4.1 template string type for map -${field}
+   * TODO: use typescript 4.1 template string type for map -`${field}`
    *
    * @example
    * ```javascript
