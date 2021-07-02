@@ -4,12 +4,9 @@ import {
   PropertyFilter,
   PropertiesFilter,
 } from '@nextgis/properties-filter';
-
-import { defined, JsonMap } from '@nextgis/utils';
-import { fetchNgwLayerItem } from './fetchNgwLayerItem';
+import { defined } from '@nextgis/utils';
 
 import type { Geometry, Feature } from 'geojson';
-import type NgwConnector from '@nextgis/ngw-connector';
 import type {
   FeatureItem,
   RequestItemAdditionalParams,
@@ -60,34 +57,6 @@ export function updateItemRequestParam<
   }
 }
 
-export function idFilterWorkAround<
-  G extends Geometry = Geometry,
-  P extends JsonMap = JsonMap,
->(options: {
-  filterById: PropertyFilter;
-  resourceId: number;
-  connector: NgwConnector;
-}): CancelablePromise<FeatureItem<P, G>[]> {
-  const value = options.filterById[2];
-  const featureIds: number[] =
-    typeof value === 'number'
-      ? [value]
-      : value.split(',').map((x: string) => Number(x));
-  if (options.filterById[1] !== 'eq' && options.filterById[1] !== 'in') {
-    throw new Error(
-      'Unable to filter by object id. Except `eq` or `in` operator',
-    );
-  }
-  const promises: Promise<FeatureItem<P, G>>[] = featureIds.map((featureId) => {
-    return fetchNgwLayerItem<G, P>({
-      connector: options.connector,
-      resourceId: options.resourceId,
-      featureId,
-    });
-  });
-  return CancelablePromise.all(promises);
-}
-
 // NGW REST API is not able to filtering by combined queries
 // therefore the filter is divided into several requests
 export function createFeatureFieldFilterQueries<
@@ -99,7 +68,7 @@ export function createFeatureFieldFilterQueries<
   _queries: CancelablePromise<FeatureItem<P, G>[]>[] = [],
   _parentAllParams: [string, any][] = [],
 ): CancelablePromise<FeatureItem<P, G>[]> {
-  const { filters, connector, resourceId } = opt;
+  const { filters } = opt;
 
   const logic = typeof filters[0] === 'string' ? filters[0] : 'all';
 
@@ -107,16 +76,12 @@ export function createFeatureFieldFilterQueries<
 
   const createParam = (pf: PropertyFilter): [string, any] => {
     const [field, operation, value] = pf;
-    return [`fld_${field}__${operation}`, value];
+    const isFldStr = field !== 'id' ? 'fld_' : '';
+    return [`${isFldStr}${field}__${operation}`, value];
   };
 
   if (logic === 'any') {
     filters_.forEach((f) => {
-      if (f[0] === 'id') {
-        _queries.push(
-          idFilterWorkAround({ filterById: f, connector, resourceId }),
-        );
-      }
       if (checkIfPropertyFilter(f)) {
         _queries.push(
           fetchNgwLayerItemsRequest<G, P>({
@@ -136,39 +101,34 @@ export function createFeatureFieldFilterQueries<
       }
     });
   } else if (logic === 'all') {
-    const filterById = filters_.find((x) => x[0] === 'id');
-    if (filterById) {
-      _queries.push(idFilterWorkAround({ filterById, connector, resourceId }));
-    } else {
-      const filters: [string, any][] = [];
-      const propertiesFilterList: PropertiesFilter[] = [];
-      filters_.forEach((f) => {
-        if (checkIfPropertyFilter(f)) {
-          filters.push(createParam(f));
-        } else {
-          propertiesFilterList.push(f);
-        }
-      });
-
-      if (propertiesFilterList.length) {
-        propertiesFilterList.forEach((x) => {
-          createFeatureFieldFilterQueries(
-            {
-              ...opt,
-              filters: x,
-            },
-            _queries,
-            [..._parentAllParams, ...filters],
-          );
-        });
+    const filters: [string, any][] = [];
+    const propertiesFilterList: PropertiesFilter[] = [];
+    filters_.forEach((f) => {
+      if (checkIfPropertyFilter(f)) {
+        filters.push(createParam(f));
       } else {
-        _queries.push(
-          fetchNgwLayerItemsRequest<G, P>({
-            ...opt,
-            paramList: [..._parentAllParams, ...filters],
-          }),
-        );
+        propertiesFilterList.push(f);
       }
+    });
+
+    if (propertiesFilterList.length) {
+      propertiesFilterList.forEach((x) => {
+        createFeatureFieldFilterQueries(
+          {
+            ...opt,
+            filters: x,
+          },
+          _queries,
+          [..._parentAllParams, ...filters],
+        );
+      });
+    } else {
+      _queries.push(
+        fetchNgwLayerItemsRequest<G, P>({
+          ...opt,
+          paramList: [..._parentAllParams, ...filters],
+        }),
+      );
     }
   }
 
