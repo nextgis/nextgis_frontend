@@ -30,6 +30,10 @@ export class Cache<
     this.cache.length = 0;
   }
 
+  all() {
+    return this.cache;
+  }
+
   add(
     key: string,
     valueToSet: CacheValue<T> | (() => CacheValue<T>),
@@ -71,10 +75,13 @@ export class Cache<
     }
   }
 
-  matchAll(key: string, options?: CacheOptions<O>): CacheValue<T>[] {
-    return this.cache
-      .filter((x) => this._filter(x, key, options))
-      .map((x) => x.value);
+  matchAll(key?: string, options?: CacheOptions<O>): CacheValue<T>[] {
+    if (key) {
+      return this.cache
+        .filter((x) => this._filter(x, key, options))
+        .map((x) => x.value);
+    }
+    return this.cache.map(x => x.value);
   }
 
   delete(key: string, options?: CacheOptions<O>): void {
