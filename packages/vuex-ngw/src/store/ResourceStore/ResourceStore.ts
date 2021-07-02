@@ -6,6 +6,8 @@ import {
   parseDate,
 } from '@nextgis/ngw-kit';
 import NgwConnector from '@nextgis/ngw-connector';
+import Cache from '@nextgis/cache';
+import CancelablePromise from '@nextgis/cancelable-promise';
 
 import type { Geometry, Feature } from 'geojson';
 import type { FeatureProperties } from '@nextgis/ngw-connector';
@@ -184,6 +186,18 @@ export abstract class ResourceStore<
           { data },
           { id, ...FEATURE_REQUEST_PARAMS },
         );
+
+        // clean cache on update
+        const cache = new Cache();
+        cache.all().forEach((item) => {
+          if (item.key === 'feature_layer.feature.item') {
+            const params = item.options && item.options.params;
+            if (params.id === id && params.fid === fid) {
+              item.value = CancelablePromise.resolve(item);
+            }
+          }
+        });
+
         const newFeature = feature as FeatureItem<P>;
         const newItem = item && item[0];
         if (newItem) {
