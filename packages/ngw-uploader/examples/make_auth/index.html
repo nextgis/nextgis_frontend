@@ -9,7 +9,7 @@
 
 
   <!-- <script src="https://unpkg.com/@nextgis/ngw-uploader"></script> -->
-  <script type="text/javascript" src="../../lib/ngw-uploader.js"></script>
+  <script type="text/javascript" src="../../lib/ngw-uploader.global.js"></script>
 
 <body>
 
@@ -21,7 +21,7 @@
     var statusUpload = document.getElementById('status');
 
     var ngwUploader = new NgwUploader({
-      baseUrl: 'http://dev.nextgis.com/sandbox',
+      baseUrl: 'https://sandbox.nextgis.com',
       auth: {
         login: 'administrator',
         password: 'admin'

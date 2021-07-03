@@ -5,7 +5,8 @@ import { TLayer } from '../MapboxglMapAdapter';
 let ID = 0;
 
 export abstract class BaseAdapter<O extends AdapterOptions = AdapterOptions>
-  implements MainLayerAdapter<Map, TLayer, O> {
+  implements MainLayerAdapter<Map, TLayer, O>
+{
   layer?: TLayer;
   map?: Map;
   protected readonly _layerId: string;

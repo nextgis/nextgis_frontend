@@ -20,7 +20,8 @@ import type {
   ResourceItem,
   LayerFeature,
   FeatureItem,
-  FeatureLayerFields,
+  FeatureProperties,
+  ResourceDefinition,
 } from '@nextgis/ngw-connector';
 import type { FeatureLayersIdentify } from '@nextgis/ngw-connector';
 import type { Type } from '@nextgis/utils';
@@ -106,7 +107,7 @@ export type TileNoData = 200 | 404 | 204;
  */
 export interface NgwLayerOptionsAdditional<
   T extends NgwLayerAdapterType = NgwLayerAdapterType,
-  P = { [name: string]: unknown }
+  P = { [name: string]: unknown },
 > {
   id?: string;
   adapter?: T;
@@ -133,7 +134,7 @@ export interface NgwLayerOptionsAdditional<
  */
 export interface ResourceIdNgwLayerOptions<
   T extends NgwLayerAdapterType = NgwLayerAdapterType,
-  P = { [name: string]: any }
+  P = { [name: string]: any },
 > extends NgwLayerOptionsAdditional<T, P> {
   resourceId: number;
 }
@@ -144,7 +145,7 @@ export interface ResourceIdNgwLayerOptions<
  */
 export interface KeynamedNgwLayerOptions<
   T extends NgwLayerAdapterType = NgwLayerAdapterType,
-  P = { [name: string]: any }
+  P = { [name: string]: any },
 > extends NgwLayerOptionsAdditional<T, P> {
   keyname: string;
 }
@@ -154,9 +155,9 @@ export interface KeynamedNgwLayerOptions<
  */
 export interface ResourceNgwLayerOptions<
   T extends NgwLayerAdapterType = NgwLayerAdapterType,
-  P = { [name: string]: any }
+  P = { [name: string]: any },
 > extends NgwLayerOptionsAdditional<T, P> {
-  resource: number | string | NgwLayerOptions | ResourceItem;
+  resource: ResourceDefinition;
 }
 
 /**
@@ -164,7 +165,7 @@ export interface ResourceNgwLayerOptions<
  */
 export type NgwLayerOptions<
   T extends NgwLayerAdapterType = NgwLayerAdapterType,
-  P = { [name: string]: any }
+  P = { [name: string]: any },
 > = ResourceNgwLayerOptions<T, P>;
 
 /**
@@ -180,7 +181,7 @@ export interface NgwConfig {
 /**
  * @public
  */
-export type ResourceDef = number | [number, string];
+export type ResourceIdDef = number | [resourceId: number, layerId: string];
 
 /**
  * @public
@@ -190,7 +191,7 @@ export interface NgwKitOptions {
   connector?: NgwConnector;
   /** Radius for searching objects in pixels */
   pixelRadius?: number;
-  resourceId?: ResourceDef;
+  resourceId?: ResourceIdDef;
   auth?: {
     login: string;
     password: string;
@@ -203,7 +204,7 @@ type A = AdapterOptions & RasterAdapterOptions;
  * @public
  */
 export interface NgwWebmapAdapterOptions<M = any> extends A {
-  resourceId: number | [number, string];
+  resourceId: ResourceIdDef;
   webMap: WebMap<M>;
   connector: NgwConnector;
   selectable?: boolean;
@@ -248,7 +249,7 @@ export interface ResourceAdapter<
   M = any,
   L = any,
   O extends GeoJsonAdapterOptions = GeoJsonAdapterOptions,
-  F extends Feature = Feature
+  F extends Feature = Feature,
 > extends VectorLayerAdapter<M, L, O, F> {
   resourceId: number;
   item?: ResourceItem;
@@ -267,7 +268,7 @@ export type VectorResourceAdapter<
   M = any,
   L = any,
   O extends GeoJsonAdapterOptions = GeoJsonAdapterOptions,
-  F extends Feature = Feature
+  F extends Feature = Feature,
 > = ResourceAdapter<M, L, O, F> & VectorLayerAdapter<M, L, O, F>;
 
 /**
@@ -371,18 +372,42 @@ export interface FeatureRequestParams {
 type Extensions = keyof FeatureItem['extensions'];
 
 export interface NgwFeatureRequestOptions<
-  P extends { [field: string]: any } = { [field: string]: any }
+  P extends FeatureProperties = FeatureProperties,
 > extends FilterOptions<P> {
   extensions?: Extensions[] | string[] | null | false;
   geom?: boolean;
   srs?: number;
 }
 
-export interface GetNgwLayerItemsOptions {
+export interface GetNgwItemOptions extends FetchNgwLayerExtentOptions {
+  featureId: number;
+}
+
+export interface FetchNgwLayerExtentOptions {
   resourceId: number;
   connector: NgwConnector;
-  filters?: PropertiesFilter;
+  cache?: boolean;
 }
+
+export interface FetchNgwLayerItemExtentOptions
+  extends FetchNgwLayerExtentOptions {
+  featureId: number;
+}
+
+export interface GetNgwItemsOptions<
+  P extends FeatureProperties = FeatureProperties,
+> extends FetchNgwLayerExtentOptions {
+  paramList?: [string, any][];
+  filters?: PropertiesFilter<P>;
+}
+
+export type FetchNgwItemOptions<
+  P extends FeatureProperties = FeatureProperties,
+> = GetNgwItemOptions & NgwFeatureRequestOptions<P>;
+
+export type FetchNgwItemsOptions<
+  P extends FeatureProperties = FeatureProperties,
+> = GetNgwItemsOptions<P> & NgwFeatureRequestOptions<P>;
 
 export interface FeatureIdentifyRequestOptions {
   /**
@@ -394,8 +419,8 @@ export interface FeatureIdentifyRequestOptions {
 }
 
 export interface NgwFeatureItemResponse<
-  F = FeatureLayerFields,
-  G extends Geometry = Geometry
+  F = FeatureProperties,
+  G extends Geometry = Geometry,
 > extends FeatureItem<F, G> {
   /**
    * To get GeoJson from ngw item

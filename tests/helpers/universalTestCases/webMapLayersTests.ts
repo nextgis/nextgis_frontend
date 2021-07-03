@@ -7,7 +7,7 @@ import { MapAdapterCreateOptions } from './baseMapTests';
 
 export const webMapLayersTests = <
   K extends keyof LayerAdapters,
-  W extends WebMap = WebMap
+  W extends WebMap = WebMap,
 >(
   layerAdapter:
     | K
@@ -15,8 +15,8 @@ export const webMapLayersTests = <
     | Promise<Type<LayerAdapters[K]> | undefined>,
   buildWebMap: (
     mapOptions: MapOptions,
-    opt?: MapAdapterCreateOptions
-  ) => Promise<W>
+    opt?: MapAdapterCreateOptions,
+  ) => Promise<W>,
 ): any => {
   const layerAdapterName =
     typeof layerAdapter === 'string' ? layerAdapter : 'Layer';

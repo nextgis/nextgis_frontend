@@ -38,7 +38,9 @@ export interface OnLayerClickOptions {
  * Parameters that can be used to create any map layer adapter.
  * @public
  */
-export interface AdapterOptions<N extends Record<string, any> = Record<string, any>> {
+export interface AdapterOptions<
+  N extends Record<string, any> = Record<string, any>,
+> {
   /**
    * Unique Layer ID.
    * If not specified, will be added automatically.
@@ -170,7 +172,7 @@ export interface PopupOptions {
 }
 
 type _VectorAdapterOptionsToExtend<
-  N extends Record<string, any> = Record<string, any>
+  N extends Record<string, any> = Record<string, any>,
 > = AdapterOptions<N> & FilterOptions;
 
 /**
@@ -179,7 +181,7 @@ type _VectorAdapterOptionsToExtend<
 export interface VectorAdapterOptions<
   F extends Feature = Feature,
   L = any,
-  N = Record<string, any>
+  N = Record<string, any>,
 > extends _VectorAdapterOptionsToExtend<N> {
   /** Type for geometries painting, for each layer may be only one of: `point`, `polygon` or `line`. */
   type?: VectorAdapterLayerType;
@@ -313,7 +315,7 @@ export interface VectorAdapterOptions<
 export interface GeoJsonAdapterOptions<
   F extends Feature = Feature,
   L = any,
-  N = Record<string, any>
+  N = Record<string, any>,
 > extends VectorAdapterOptions<F, L, N> {
   /** Geojson data */
   data?: GeoJsonObject;
@@ -425,7 +427,7 @@ export type CallbackFilter<F extends Feature = Feature, L = any> = (
  * @public
  */
 export interface FilterOptions<
-  P extends { [field: string]: any } = { [field: string]: any }
+  P extends { [field: string]: any } = { [field: string]: any },
 > {
   /**
    * Offset (paginated) where from entities should be taken.
@@ -444,7 +446,7 @@ export interface FilterOptions<
    * set fields for order
    *
    * @remarks
-   * TODO: use typescript 4.1 template string type for map -${field}
+   * TODO: use typescript 4.1 template string type for map -`${field}`
    *
    * @example
    * ```javascript
@@ -459,7 +461,7 @@ export interface FilterOptions<
  */
 export type DataLayerFilter<
   F extends Feature = Feature,
-  L = any
+  L = any,
 > = CallbackFilter<F, L>;
 
 /**
@@ -468,7 +470,7 @@ export type DataLayerFilter<
 export type LayerAdapter<
   M = any,
   L = any,
-  O extends AdapterOptions = AdapterOptions
+  O extends AdapterOptions = AdapterOptions,
 > = MainLayerAdapter<M, L, O> | VectorLayerAdapter<M, L, O>;
 
 /**
@@ -477,7 +479,7 @@ export type LayerAdapter<
 export interface MainLayerAdapter<
   M = any,
   L = any,
-  O extends AdapterOptions = AdapterOptions
+  O extends AdapterOptions = AdapterOptions,
 > {
   options: O;
   id?: string;
@@ -511,7 +513,7 @@ export interface VectorLayerAdapter<
   M = any,
   L = any,
   O extends VectorAdapterOptions = VectorAdapterOptions,
-  F extends Feature = Feature
+  F extends Feature = Feature,
 > extends MainLayerAdapter<M, L, O> {
   /** True if there are selected features in the layer  */
   selected?: boolean;

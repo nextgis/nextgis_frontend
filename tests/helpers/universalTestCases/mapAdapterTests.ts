@@ -5,7 +5,7 @@ import { baseMapTests } from './baseMapTests';
 
 const mapAdapterCreate = async (
   MA: Type<MapAdapter>,
-  opt?: MapOptions
+  opt?: MapOptions,
 ): Promise<MapAdapter> => {
   const mapAdapter = new MA();
   return new Promise((resolve) => {
@@ -35,7 +35,7 @@ export const mapAdapterTests = (MA: Type<MapAdapter>): any => {
         document.body.innerHTML = '<div id="custom-map"></div>';
         await mapAdapterCreate(MA, { target: 'custom-map' });
         const mapContainer = document.getElementById(
-          'custom-map'
+          'custom-map',
         ) as HTMLElement;
         expect(mapContainer.childElementCount).greaterThan(0);
       });

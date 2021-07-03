@@ -32,9 +32,8 @@ export class ImageAdapter implements MainLayerAdapter {
       imageOptions.imageLoadFunction = (image, src) => {
         const url = src.split('?')[0];
         const query = src.split('?')[1];
-        const { resource, BBOX, WIDTH, HEIGHT, ...params } = queryToObject(
-          query,
-        );
+        const { resource, BBOX, WIDTH, HEIGHT, ...params } =
+          queryToObject(query);
 
         const queryParams = {
           resource,

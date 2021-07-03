@@ -57,7 +57,8 @@ interface GeoJsonDataSourceLoadOptions {
 
 export class GeoJsonAdapter
   extends BaseAdapter<AdapterOptions>
-  implements VectorLayerAdapter<Map> {
+  implements VectorLayerAdapter<Map>
+{
   selected = false;
 
   private readonly _pinBuilder = new PinBuilder();
