@@ -24,6 +24,7 @@ export async function createOnFirstShowAdapter({
     options: AdapterOptions = {};
     layer: MainLayerAdapter[] = [];
     _removed = false;
+    _creatingInProgress = false;
 
     addLayer() {
       return this.layer;
@@ -46,7 +47,8 @@ export async function createOnFirstShowAdapter({
     }
 
     async loadLayer() {
-      if (!this.layer.length) {
+      if (!this.layer.length && !this._creatingInProgress) {
+        this._creatingInProgress = true;
         const Adapter = await createAdapter();
         if (Adapter) {
           const adapter = new Adapter(webMap.mapAdapter.map, {
@@ -65,6 +67,7 @@ export async function createOnFirstShowAdapter({
             await webMap.showLayer(adapter);
           }
           this.layer.push(adapter);
+          this._creatingInProgress = false;
         }
       }
       return this.layer;

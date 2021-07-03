@@ -2,7 +2,8 @@ import { MainLayerAdapter, AdapterOptions } from '@nextgis/webmap';
 import { Map } from 'leaflet';
 
 export class BaseAdapter<O extends AdapterOptions = AdapterOptions, L = any>
-  implements MainLayerAdapter<Map, L, O> {
+  implements MainLayerAdapter<Map, L, O>
+{
   layer?: L;
   protected pane = 'order-0';
 

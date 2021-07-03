@@ -1,7 +1,7 @@
 {
   "name": "@nextgis/ngw-leaflet",
   "_priority": 10,
-  "version": "1.0.0-beta.10",
+  "version": "1.1.2",
   "description": "Single-file bundle for rapid deployment of Laeflet-based web-gis applications with NextGIS services",
   "main": "lib/ngw-leaflet.global.prod.js",
   "module": "lib/ngw-leaflet.esm-bundler.js",
@@ -9,12 +9,12 @@
   "jsdelivr": "lib/ngw-leaflet.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/leaflet-map-adapter": "^1.0.0-beta.10",
-    "@nextgis/ngw-map": "^1.0.0-beta.10",
+    "@nextgis/leaflet-map-adapter": "^1.1.2",
+    "@nextgis/ngw-map": "^1.1.2",
     "leaflet.wms": "^0.2.0"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "^1.0.0-beta.10"
+    "@nextgis/build-tools": "^1.1.0"
   },
   "buildOptions": {
     "name": "NgwLeaflet",
@@ -50,5 +50,5 @@
   "bugs": {
     "url": "https://github.com/nextgis/nextgis_frontend/issues"
   },
-  "gitHead": "902bc588de905d567f54f8f53838b921ee3a3436"
+  "gitHead": "edc68033f914f6c95c4125b9738bba6d36e990b4"
 }

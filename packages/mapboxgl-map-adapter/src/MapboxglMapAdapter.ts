@@ -1,18 +1,23 @@
-import mapboxgl, {
-  Map,
-  IControl,
-  MapEventType,
-  EventData,
-  MapboxOptions,
-  RequestParameters,
-  ResourceType,
-  FitBoundsOptions,
-} from 'mapbox-gl';
-import {
+import { EventEmitter } from 'events';
+import mapboxgl, { Map } from 'mapbox-gl';
+
+import { debounce } from '@nextgis/utils';
+import { WmsAdapter } from './layer-adapters/WmsAdapter';
+import { MvtAdapter } from './layer-adapters/MvtAdapter';
+import { OsmAdapter } from './layer-adapters/OsmAdapter';
+import { TileAdapter } from './layer-adapters/TileAdapter';
+import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
+import { ZoomControl } from './controls/ZoomControl';
+import { createControl } from './controls/createControl';
+import { CompassControl } from './controls/CompassControl';
+import { AttributionControl } from './controls/AttributionControl';
+import { createButtonControl } from './controls/createButtonControl';
+
+import type {
   MapAdapter,
   FitOptions,
   MapControl,
-  ControlPositions,
+  ControlPosition,
   ButtonControlOptions,
   LngLatArray,
   MapOptions,
@@ -22,18 +27,15 @@ import {
   CreateControlOptions,
   MapClickEvent,
 } from '@nextgis/webmap';
-import { sleep, debounce } from '@nextgis/utils';
-import { MvtAdapter } from './layer-adapters/MvtAdapter';
-import { OsmAdapter } from './layer-adapters/OsmAdapter';
-import { TileAdapter } from './layer-adapters/TileAdapter';
-import { EventEmitter } from 'events';
-import { ZoomControl } from './controls/ZoomControl';
-import { CompassControl } from './controls/CompassControl';
-import { AttributionControl } from './controls/AttributionControl';
-import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
-import { createControl } from './controls/createControl';
-import { createButtonControl } from './controls/createButtonControl';
-import { WmsAdapter } from './layer-adapters/WmsAdapter';
+import type {
+  IControl,
+  MapEventType,
+  EventData,
+  MapboxOptions,
+  RequestParameters,
+  ResourceType,
+  FitBoundsOptions,
+} from 'mapbox-gl';
 
 export type TLayer = string[];
 type TLayerAdapter = LayerAdapter<Map, TLayer>;
@@ -219,25 +221,24 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   }
 
   // [extent_left, extent_bottom, extent_right, extent_top];
-  async fitBounds(
-    e: LngLatBoundsArray,
-    options: FitOptions = {},
-  ): Promise<void> {
+  fitBounds(e: LngLatBoundsArray, options: FitOptions = {}): void {
     if (this.map) {
-      const fitBoundOptions: FitBoundsOptions = {
+      const opt: FitBoundsOptions = {
         linear: true,
         duration: 0,
         ...options,
         ...fitBoundsOptions,
       };
+      if (options.maxZoom) {
+        opt.maxZoom = options.maxZoom - 1;
+      }
       this.map.fitBounds(
         [
           [e[0], e[1]],
           [e[2], e[3]],
         ],
-        fitBoundOptions,
+        opt,
       );
-      sleep(fitBoundOptions.duration);
     }
   }
 
@@ -309,7 +310,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
 
   addControl(
     control: IControl,
-    position: ControlPositions,
+    position: ControlPosition,
   ): IControl | undefined {
     if (this.map) {
       this.map.addControl(control, position);

@@ -18,7 +18,8 @@ export function findConnector(
           return objectDeepEqual(x.options.auth, options.auth);
         }
       } else {
-        x.options.auth === undefined;
+        // if auth not in find options; use first connector with same url
+        return true;
       }
     }
   });
