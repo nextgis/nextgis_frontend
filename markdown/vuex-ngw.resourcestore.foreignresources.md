@@ -6,6 +6,7 @@
 
 > Warning: This API is now obsolete.
 > 
+> not used
 > 
 
 <b>Signature:</b>

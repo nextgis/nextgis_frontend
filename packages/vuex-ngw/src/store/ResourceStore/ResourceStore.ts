@@ -1,5 +1,4 @@
 import { Store } from 'vuex';
-import { Geometry, GeoJsonProperties, Feature } from 'geojson';
 import { VuexModule, Mutation, Action, Module } from 'vuex-module-decorators';
 import {
   prepareFieldsToNgw,
@@ -7,28 +6,33 @@ import {
   parseDate,
 } from '@nextgis/ngw-kit';
 import NgwConnector from '@nextgis/ngw-connector';
+import Cache from '@nextgis/cache';
+import CancelablePromise from '@nextgis/cancelable-promise';
 
+import type { Geometry, Feature } from 'geojson';
+import type { FeatureProperties } from '@nextgis/ngw-connector';
 import type {
   ResourceItemDatatype,
   ResourceStoreItem,
   FeatureLayerField,
   FeatureItem,
 } from '@nextgis/ngw-connector';
+import { defined } from '@nextgis/utils';
 import type { Type } from '@nextgis/utils';
 import type { ForeignResource, PatchOptions } from '../../interfaces';
 
 type ResourceDef = string | number;
 
 export abstract class ResourceStore<
-  P extends GeoJsonProperties = GeoJsonProperties,
-  G extends Geometry | null = Geometry
+  P extends FeatureProperties = FeatureProperties,
+  G extends Geometry | null = Geometry,
 > extends VuexModule {
   resource!: string;
 
   resources: { [key in ResourceDef]?: number } = {};
 
   /**
-   * @deprecated
+   * @deprecated not used
    */
   foreignResources: { [key in ResourceDef]: ForeignResource } = {};
 
@@ -67,7 +71,7 @@ export abstract class ResourceStore<
     }
     await this.context.dispatch('getResources');
     const id = this.resources[this.resource];
-    if (id) {
+    if (defined(id)) {
       try {
         const item = await this.connector.getResource(id);
         if (item) {
@@ -87,7 +91,7 @@ export abstract class ResourceStore<
       return this.resourceItems;
     }
     const id = this.resources[this.resource];
-    if (id) {
+    if (defined(id)) {
       const store = (await this.connector.get('feature_layer.store', null, {
         id,
       })) as ResourceStoreItem<P>[];
@@ -146,7 +150,7 @@ export abstract class ResourceStore<
   @Action({ commit: '' })
   async prepareFeatureToNgw<
     G extends Geometry | null = Geometry,
-    P = GeoJsonProperties
+    P extends FeatureProperties = FeatureProperties,
   >(opt: { item: Feature<G, P> }): Promise<Partial<FeatureItem<P>>> {
     const geom = opt.item.geometry as Geometry;
     const featureFields = (await this.context.dispatch(
@@ -163,7 +167,7 @@ export abstract class ResourceStore<
   async patch(opt: PatchOptions<G, P>): Promise<FeatureItem<P> | undefined> {
     await this.context.dispatch('getResources');
     const id = this.resources[this.resource];
-    if (id) {
+    if (defined(id)) {
       const feature: Partial<FeatureItem<P>> = await this.context.dispatch(
         'prepareFeatureToNgw',
         opt,
@@ -182,6 +186,18 @@ export abstract class ResourceStore<
           { data },
           { id, ...FEATURE_REQUEST_PARAMS },
         );
+
+        // clean cache on update
+        const cache = new Cache();
+        cache.all().forEach((item) => {
+          if (item.key === 'feature_layer.feature.item') {
+            const params = item.options && item.options.params;
+            if (params.id === id && params.fid === fid) {
+              item.value = CancelablePromise.resolve(item);
+            }
+          }
+        });
+
         const newFeature = feature as FeatureItem<P>;
         const newItem = item && item[0];
         if (newItem) {
@@ -244,8 +260,9 @@ export abstract class ResourceStore<
       prepared = store.map((x) => {
         for (const k in x) {
           const dateField = datefields.find((d) => d.keyname === k);
-          if (dateField) {
-            let date = parseDate(x[k]);
+          const val = x[k] as string;
+          if (dateField && val) {
+            let date = parseDate(val);
             if (date) {
               if (dateField.datatype === 'DATE' && this.formatters.date) {
                 date = this.formatters.date(date);
@@ -272,8 +289,8 @@ export abstract class ResourceStore<
 }
 
 export function createResourceStore<
-  P extends GeoJsonProperties = GeoJsonProperties,
-  G extends Geometry | null = Geometry
+  P extends FeatureProperties = FeatureProperties,
+  G extends Geometry | null = Geometry,
 >(options: {
   connector: NgwConnector;
   keyname: string;

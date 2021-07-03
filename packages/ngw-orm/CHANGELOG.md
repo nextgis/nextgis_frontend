@@ -3,9 +3,60 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [1.0.0-beta.10](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.9...v1.0.0-beta.10) (2021-05-18)
+## [1.1.2](https://github.com/nextgis/nextgis_frontend/compare/v1.1.1...v1.1.2) (2021-06-28)
 
 **Note:** Version bump only for package @nextgis/ngw-orm
+
+
+
+
+
+## [1.1.1](https://github.com/nextgis/nextgis_frontend/compare/v1.1.0...v1.1.1) (2021-06-25)
+
+**Note:** Version bump only for package @nextgis/ngw-orm
+
+
+
+
+
+# [1.1.0](https://github.com/nextgis/nextgis_frontend/compare/v1.0.1...v1.1.0) (2021-06-25)
+
+
+### types
+
+* **ngw-connector:** rename ([0e7f0b9](https://github.com/nextgis/nextgis_frontend/commit/0e7f0b979a774ea27ad45a0f7d7576ff11ad8d56))
+
+
+### BREAKING CHANGES
+
+* **ngw-connector:** FeatureLayerFields type is now FeatureProperties
+
+
+
+
+
+## [1.0.1](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0...v1.0.1) (2021-06-08)
+
+
+### types
+
+* rename interface ([b8e5f7c](https://github.com/nextgis/nextgis_frontend/commit/b8e5f7cd4a2bdb289a34fb7a11b3f560b5dd897c))
+
+
+### BREAKING CHANGES
+
+* change GetNgwLayerItemsOptions to GetNgwItemsOptions
+
+
+
+
+
+# [1.0.0](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.9...v1.0.0) (2021-06-07)
+
+
+### Bug Fixes
+
+* **ngw-connector:** do not throw error on node data load6 use promise reject ([c33c178](https://github.com/nextgis/nextgis_frontend/commit/c33c178dadcf30cfe12e9f6bf07bbc6e59da4188))
 
 
 

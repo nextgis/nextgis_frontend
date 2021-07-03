@@ -11,18 +11,14 @@ export declare function fetchNgwLayerFeatures<G extends Geometry | null = Geomet
     [field: string]: any;
 } = {
     [field: string]: any;
-}>(options: {
-    resourceId: number;
-    connector: NgwConnector;
-    filters?: PropertiesFilter;
-} & NgwFeatureRequestOptions<P>): CancelablePromise<Feature<G, P>[]>;
+}>(options: FetchNgwItemsOptions<P>): CancelablePromise<Feature<G, P>[]>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | { resourceId: number; connector: NgwConnector; filters?: [PropertiesFilter](./properties-filter.propertiesfilter.md)<!-- -->; } &amp; [NgwFeatureRequestOptions](./ngw-kit.ngwfeaturerequestoptions.md)<!-- -->&lt;P&gt; |  |
+|  options | [FetchNgwItemsOptions](./ngw-kit.fetchngwitemsoptions.md)<!-- -->&lt;P&gt; |  |
 
 <b>Returns:</b>
 

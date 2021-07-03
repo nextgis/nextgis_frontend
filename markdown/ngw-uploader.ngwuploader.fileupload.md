@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-fileUpload(file: File, options?: RasterUploadOptions): CancelablePromise<Record<string, any>> | undefined;
+fileUpload(file: File, options?: RasterUploadOptions): CancelablePromise<FileMeta | undefined>;
 ```
 
 ## Parameters
@@ -19,5 +19,5 @@ fileUpload(file: File, options?: RasterUploadOptions): CancelablePromise<Record<
 
 <b>Returns:</b>
 
-CancelablePromise&lt;Record&lt;string, any&gt;&gt; \| undefined
+CancelablePromise&lt;[FileMeta](./ngw-connector.filemeta.md) \| undefined&gt;
 

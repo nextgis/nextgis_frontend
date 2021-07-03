@@ -63,7 +63,7 @@
 |  [objectAssign(target, source)](./utils.objectassign.md) |  |
 |  [objectAssign(target, source1, source2)](./utils.objectassign_1.md) | Copy the values of all of the enumerable own properties from one or more source objects to a target object. Returns the target object. |
 |  [objectAssign(target, source1, source2, source3)](./utils.objectassign_2.md) | Copy the values of all of the enumerable own properties from one or more source objects to a target object. Returns the target object. |
-|  [objectDeepEqual(obj1, obj2)](./utils.objectdeepequal.md) |  |
+|  [objectDeepEqual(o, p)](./utils.objectdeepequal.md) |  |
 |  [reEscape(s)](./utils.reescape.md) |  |
 |  [round(val, toFixed)](./utils.round.md) |  |
 |  [sleep(delay)](./utils.sleep.md) |  |
@@ -76,7 +76,7 @@
 |  [ApplyMixinOptions](./utils.applymixinoptions.md) |  |
 |  [JsonMap](./utils.jsonmap.md) |  |
 |  [LatLng](./utils.latlng.md) | Longitude and latitude coordinate, measured in degrees. |
-|  [TileJson](./utils.tilejson.md) | This specification attempts to create a standard for representing metadata about multiple types of web-based layers, to aid clients in configuration and browsing.<!-- -->From  |
+|  [TileJson](./utils.tilejson.md) | This specification attempts to create a standard for representing metadata about multiple types of web-based layers, to aid clients in configuration and browsing.<!-- -->From [https://github.com/mapbox/tilejson-spec/tree/master/2.2.0](https://github.com/mapbox/tilejson-spec/tree/master/2.2.0) |
 
 ## Variables
 

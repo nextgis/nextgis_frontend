@@ -194,7 +194,7 @@ if (__BROWSER__) {
               try {
                 json = JSON.parse(data);
                 if (json && json.status_code && json.status_code) {
-                  throw new Error(json.message);
+                  reject(json.message);
                 }
               } catch (er) {
                 reject(er);

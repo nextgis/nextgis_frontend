@@ -18,5 +18,5 @@ export interface ResourceNgwLayerOptions<T extends NgwLayerAdapterType = NgwLaye
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [resource](./ngw-kit.resourcengwlayeroptions.resource.md) | number \| string \| [NgwLayerOptions](./ngw-kit.ngwlayeroptions.md) \| [ResourceItem](./ngw-connector.resourceitem.md) |  |
+|  [resource](./ngw-kit.resourcengwlayeroptions.resource.md) | [ResourceDefinition](./ngw-connector.resourcedefinition.md) |  |
 

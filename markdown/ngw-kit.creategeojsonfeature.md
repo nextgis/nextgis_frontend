@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function createGeoJsonFeature<G extends Geometry | null = Geometry, P extends GeoJsonProperties = GeoJsonProperties>(item: Pick<FeatureItem, 'id' | 'geom' | 'fields'>): Feature<G, P>;
+export declare function createGeoJsonFeature<G extends Geometry | null = Geometry, P extends FeatureProperties = FeatureProperties>(item: Pick<FeatureItem, 'id' | 'geom' | 'fields'>): Feature<G, P>;
 ```
 
 ## Parameters

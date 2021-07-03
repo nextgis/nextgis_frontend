@@ -64,7 +64,7 @@ const reversOperations: { [key in Operations]: string } = {
 
 export interface Feature<
   G extends GeometryObject | null = Geometry,
-  P = GeoJsonProperties
+  P = GeoJsonProperties,
 > extends F<G, P> {
   _featureFilterId?: string;
 }
@@ -84,10 +84,11 @@ const mapboxTypeAlias: Record<VectorAdapterLayerType, MapboxLayerType> = {
 };
 
 export abstract class VectorAdapter<
-    O extends VectorAdapterOptions = VectorAdapterOptions
+    O extends VectorAdapterOptions = VectorAdapterOptions,
   >
   extends BaseAdapter<O>
-  implements VectorLayerAdapter<Map, TLayer, O, Feature> {
+  implements VectorLayerAdapter<Map, TLayer, O, Feature>
+{
   selected = false;
   map?: Map;
   protected featureIdName = 'id';
@@ -281,9 +282,9 @@ export abstract class VectorAdapter<
   }
 
   protected _getNativeFilter(): PropertyFilter<GeoJsonProperties> {
-    return (this.options.nativeFilter
-      ? this.options.nativeFilter
-      : []) as PropertyFilter;
+    return (
+      this.options.nativeFilter ? this.options.nativeFilter : []
+    ) as PropertyFilter;
   }
 
   protected async _addLayer(

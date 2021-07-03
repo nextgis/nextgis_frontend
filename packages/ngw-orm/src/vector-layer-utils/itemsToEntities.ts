@@ -1,5 +1,5 @@
 import { defined } from '@nextgis/utils';
-import { FeatureItem, FeatureLayerFields } from '@nextgis/ngw-connector';
+import { FeatureItem, FeatureProperties } from '@nextgis/ngw-connector';
 import { VectorLayer } from '../repository/VectorLayer';
 import { getMetadataArgsStorage } from '..';
 
@@ -24,7 +24,7 @@ export function itemToEntity(
   if ('coordinates' in item.geom && defined(itemFields)) {
     const entity = new Resource();
     fields.forEach((x) => {
-      const propertyName = x.propertyName as keyof FeatureLayerFields;
+      const propertyName = x.propertyName as keyof FeatureProperties;
       if (propertyName in itemFields) {
         let value = itemFields[propertyName];
         if (x.options.datatype === 'BOOLEAN') {

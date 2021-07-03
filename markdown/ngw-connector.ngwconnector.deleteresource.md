@@ -8,14 +8,14 @@
 <b>Signature:</b>
 
 ```typescript
-deleteResource(resource: ResourceDefinition): CancelablePromise<void>;
+deleteResource(resource: ResourceIdKeynameDef): CancelablePromise<void>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  resource | [ResourceDefinition](./ngw-connector.resourcedefinition.md) |  |
+|  resource | [ResourceIdKeynameDef](./ngw-connector.resourceidkeynamedef.md) |  |
 
 <b>Returns:</b>
 
