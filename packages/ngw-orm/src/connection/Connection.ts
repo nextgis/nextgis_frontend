@@ -1,7 +1,7 @@
 import NgwConnector, {
   ResourceItem,
   Resource,
-  ResourceDefinition,
+  ResourceIdKeynameDef,
 } from '@nextgis/ngw-connector';
 import { objectAssign, defined } from '@nextgis/utils';
 import { ConnectionOptions } from './ConnectionOptions';
@@ -74,7 +74,7 @@ export class Connection {
   }
 
   async receiveResource<P extends Record<string, any> = any>(
-    resource: ResourceDefinition,
+    resource: ResourceIdKeynameDef,
   ): Promise<typeof BaseResource & P> {
     const res = await this.getResourceItem(resource);
     if (res) {
@@ -135,7 +135,7 @@ export class Connection {
   }
 
   async getResourceItem(
-    resource: ResourceDefinition | DeepPartial<Resource>,
+    resource: ResourceIdKeynameDef | DeepPartial<Resource>,
   ): Promise<ResourceItem | undefined> {
     return this.driver.getResource(resource);
   }
@@ -144,7 +144,7 @@ export class Connection {
    * @deprecated use getResourceItem instead
    */
   async getResource(
-    resource: ResourceDefinition | DeepPartial<Resource>,
+    resource: ResourceIdKeynameDef | DeepPartial<Resource>,
   ): Promise<ResourceItem | undefined> {
     try {
       return this.getResourceItem(resource);
@@ -158,7 +158,7 @@ export class Connection {
     if (resource.item) {
       id = resource.item.resource.id;
     }
-    if (id) {
+    if (defined(id)) {
       await this.driver.deleteResource(id);
       resource.item = undefined;
     }
@@ -213,7 +213,7 @@ export class Connection {
     if (resource.item && resource.connection) {
       return [resource, isCreated];
     }
-    let parent: ResourceDefinition | undefined;
+    let parent: ResourceIdKeynameDef | undefined;
     if (typeof options.parent === 'function') {
       parent = options.parent.item?.resource.id;
     } else {

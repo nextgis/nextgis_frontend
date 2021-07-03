@@ -57,16 +57,18 @@ export * from './IdentifyItem';
 
 export * from './utils/utils';
 export * from './utils/identifyUtils';
+export * from './utils/fetchNgwExtent';
 export * from './utils/getCompanyLogo';
+export * from './utils/parseDateFromNgw';
 export * from './utils/featureLayerUtils';
-export * from './utils/fetchNgwLayerFeature';
-export * from './utils/fetchNgwLayerFeatures';
-export * from './utils/fetchNgwLayerFeatureCollection';
 export * from './utils/fetchNgwLayerItem';
 export * from './utils/fetchNgwLayerItems';
-export * from './utils/fetchNgwExtent';
+export * from './utils/fetchNgwLayerFeature';
+export * from './utils/uploadFeatureAttachment';
+export * from './utils/mapFeatureDisplayName';
+export * from './utils/fetchNgwLayerFeatures';
 export * from './utils/resourceIdFromLayerOptions';
-export * from './utils/parseDateFromNgw';
+export * from './utils/fetchNgwLayerFeatureCollection';
 
 export * from './adapters/createOnFirstShowNgwAdapter';
 export * from './adapters/createOnFirstShowAdapter';

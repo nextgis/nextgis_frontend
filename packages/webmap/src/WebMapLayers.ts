@@ -43,7 +43,7 @@ export class WebMapLayers<
   M = any,
   L = any,
   E extends WebMapEvents = WebMapEvents,
-  O extends MapOptions = MapOptions
+  O extends MapOptions = MapOptions,
 > extends WebMapMain<M, E, O> {
   private _layersIdCounter = 1;
   private _layersOrderCounter = 1;
@@ -162,7 +162,7 @@ export class WebMapLayers<
    */
   async addBaseLayer<
     K extends keyof LayerAdapters,
-    O extends AdapterOptions = AdapterOptions
+    O extends AdapterOptions = AdapterOptions,
   >(
     adapter: K | Type<LayerAdapters[K]>,
     options?: O | LayerAdaptersOptions[K],
@@ -191,7 +191,7 @@ export class WebMapLayers<
    */
   async addLayer<
     K extends keyof LayerAdapters,
-    O extends AdapterOptions = AdapterOptions
+    O extends AdapterOptions = AdapterOptions,
   >(
     adapter: LayerAdapterDefinition<K>,
     options: O | LayerAdaptersOptions[K] = {},
@@ -317,7 +317,7 @@ export class WebMapLayers<
 
   async addLayerFromAsyncAdapter<
     K extends keyof LayerAdapters,
-    O extends AdapterOptions = AdapterOptions
+    O extends AdapterOptions = AdapterOptions,
   >(
     adapter: AdapterConstructor,
     options: O | LayerAdaptersOptions[K],

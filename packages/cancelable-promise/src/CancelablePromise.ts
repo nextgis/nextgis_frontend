@@ -228,7 +228,8 @@ export class CancelablePromise<T = any> implements Promise<T> {
   }
 
   cancel(): this {
-    if (this._isCanceled) {
+    // No reason to run cancel action if promise is already complete
+    if (this._isCanceled || !this._isPending) {
       return this;
     }
     this._isCanceled = true;

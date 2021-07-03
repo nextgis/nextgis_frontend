@@ -8,8 +8,7 @@ export function parseDate(
   if (
     isObject(date) &&
     defined(date.year) &&
-    defined(date.month) &&
-    defined(date.month)
+    (defined(date.month) || defined(date.month))
   ) {
     return parseDateFromNgw(date as NgwDateTimeFormat);
   } else if (typeof date === 'string') {

@@ -30,7 +30,7 @@ export declare class NgwConnector
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
-|  [apiRequest(name, params, options)](./ngw-connector.ngwconnector.apirequest.md) |  | Send request to NGW api router. |
+|  [apiRequest(name, params, requestOptions)](./ngw-connector.ngwconnector.apirequest.md) |  | Send request to NGW api router. |
 |  [connect()](./ngw-connector.ngwconnector.connect.md) |  | Establishing a connection with NextGIS Web to fulfill all other requests. |
 |  [create(options)](./ngw-connector.ngwconnector.create.md) | <code>static</code> |  |
 |  [delete(name, options, params)](./ngw-connector.ngwconnector.delete.md) |  | Shortcut method for send DELETE request to NGW. |
@@ -41,7 +41,7 @@ export declare class NgwConnector
 |  [getResourceBy(resource)](./ngw-connector.ngwconnector.getresourceby.md) |  |  |
 |  [getResourceById(id)](./ngw-connector.ngwconnector.getresourcebyid.md) |  |  |
 |  [getResourceByKeyname(keyname)](./ngw-connector.ngwconnector.getresourcebykeyname.md) |  |  |
-|  [getResourceChildren(optOrResource)](./ngw-connector.ngwconnector.getresourcechildren.md) |  |  |
+|  [getResourceChildren(resource)](./ngw-connector.ngwconnector.getresourcechildren.md) |  |  |
 |  [getResourceId(resource)](./ngw-connector.ngwconnector.getresourceid.md) |  |  |
 |  [getResourceIdOrFail(resource)](./ngw-connector.ngwconnector.getresourceidorfail.md) |  |  |
 |  [getResourceOrFail(resource)](./ngw-connector.ngwconnector.getresourceorfail.md) |  |  |

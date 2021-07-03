@@ -7,8 +7,7 @@ const prop = {
   str: 'Foo Bar',
   true: true,
   false: false,
-  text:
-    'JavaScript - язык программирования типа C++, основан на св ст. UNIX и отличается от языка C при программировании в С++ из-за большого числа потоков кода и большого количества операций.',
+  text: 'JavaScript - язык программирования типа C++, основан на св ст. UNIX и отличается от языка C при программировании в С++ из-за большого числа потоков кода и большого количества операций.',
 };
 
 const props = [
@@ -163,20 +162,20 @@ describe(`PropertiesFilter`, () => {
       pf(prop, [
         ['str', 'eq', 'Foo Bar'],
         ['two', 'in', [1, 2, 3]],
-      ])
+      ]),
     ).to.be.true;
     expect(
       pf(prop, [
         ['str', 'eq', 'str'],
         ['two', 'in', [1, 2, 3]],
-      ])
+      ]),
     ).to.be.false;
     expect(
       pf(prop, [
         ['str', 'eq', 'Foo Bar'],
         ['text%', 'like', 'JavaScript'],
         ['two', 'in', [1, 2, 3]],
-      ])
+      ]),
     ).to.be.true;
     expect(pf(prop, ['all', ['str', 'eq', 'Foo Bar'], ['two', 'eq', 2]])).to.be
       .true;
@@ -193,7 +192,7 @@ describe(`PropertiesFilter`, () => {
         ['str', 'eq', 'str'],
         ['str%', 'like', 'string'],
         ['two', 'in', [1, 2, 3]],
-      ])
+      ]),
     ).to.be.true;
   });
 
@@ -206,14 +205,14 @@ describe(`PropertiesFilter`, () => {
           ['a', 'le', 10],
         ],
         ['b', 'eq', false],
-      ])
+      ]),
     );
     const filtered2 = props.filter((p) =>
       pf(p, [
         'any',
         ['all', ['b', 'eq', true], ['any', ['a', 'eq', 10], ['a', 'eq', -2]]],
         ['b', 'eq', false],
-      ])
+      ]),
     );
     expect(filtered.length).to.be.eq(4);
     expect(filtered2.length).to.be.eq(4);

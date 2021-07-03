@@ -1,4 +1,4 @@
-import { ResourceDefinition, ResourceItem } from '@nextgis/ngw-connector';
+import { ResourceIdKeynameDef, ResourceItem } from '@nextgis/ngw-connector';
 import { Type } from '@nextgis/utils';
 
 // import { DeepPartial } from '../common/DeepPartial';
@@ -103,7 +103,7 @@ export class BaseResource {
   }
 
   static async connect<T extends typeof BaseResource = typeof BaseResource>(
-    resourceOptions: ResourceDefinition,
+    resourceOptions: ResourceIdKeynameDef,
     connectionOrOptions: Connection | ConnectionOptions,
   ): Promise<T> {
     const connection = Connection.create(connectionOrOptions);

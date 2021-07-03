@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-prepareFeatureToNgw<G extends Geometry | null = Geometry, P = GeoJsonProperties>(opt: {
+prepareFeatureToNgw<G extends Geometry | null = Geometry, P extends FeatureProperties = FeatureProperties>(opt: {
         item: Feature<G, P>;
     }): Promise<Partial<FeatureItem<P>>>;
 ```

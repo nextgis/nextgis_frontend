@@ -18,7 +18,7 @@
         height: 100%;
       }
       .identify-panel {
-        background-color: rgba(255,255,255,.8);
+        background-color: rgba(255, 255, 255, 0.8);
       }
     </style>
 
@@ -48,41 +48,43 @@
 
       var fillIdentifyPanel = function (items) {
         identifyPanel.innerHTML = '';
+
+        var info = document.createElement('div');
+
         var select = document.createElement('select');
         items.forEach(function (item, i) {
-          const option = document.createElement('option');
+          var option = document.createElement('option');
           option.innerHTML = item.label;
           option.setAttribute('value', i);
           select.appendChild(option);
         });
         select.addEventListener('change', function (opt) {
-          setSelected(items[event.target.value]);
+          setSelected(items[event.target.value], info);
         });
         identifyPanel.appendChild(select);
-
-        var info = document.createElement('div');
         identifyPanel.appendChild(info);
-        var setSelected = function (item) {
-          info.innerHTML = '...loading';
-          ngwMap.removeLayer('geojson');
 
-          item.geojson().then(function (feature) {
-            ngwMap.addGeoJsonLayer({ data: feature, id: 'geojson' });
-            item.resource().then(function (resource) {
-              info.innerHTML = '';
-              resource.fields.forEach(function (field) {
-                var prop =
-                  '<div>' +
-                  field.display_name +
-                  ': ' +
-                  feature.properties[field.keyname] +
-                  '</div>';
-                info.innerHTML += prop;
-              });
+        setSelected(items[0], info);
+      };
+      var setSelected = function (item, info) {
+        info.innerHTML = '...loading';
+        ngwMap.removeLayer('geojson');
+
+        item.geojson().then(function (feature) {
+          ngwMap.addGeoJsonLayer({ data: feature, id: 'geojson' });
+          item.resource().then(function (resource) {
+            info.innerHTML = '';
+            resource.fields.forEach(function (field) {
+              var prop =
+                '<div>' +
+                field.display_name +
+                ': ' +
+                feature.properties[field.keyname] +
+                '</div>';
+              info.innerHTML += prop;
             });
           });
-        };
-        setSelected(items[0]);
+        });
       };
       var identifyControl = ngwMap.createControl(
         {

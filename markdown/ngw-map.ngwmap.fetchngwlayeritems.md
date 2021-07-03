@@ -7,11 +7,11 @@
 <b>Signature:</b>
 
 ```typescript
-fetchNgwLayerItems(options: {
+fetchNgwLayerItems<F extends FeatureProperties = FeatureProperties, G extends Geometry = Geometry>(options: {
         resourceId: number;
         connector?: NgwConnector;
         filters?: PropertiesFilter;
-    } & FilterOptions): CancelablePromise<FeatureItem[]>;
+    } & FilterOptions): CancelablePromise<FeatureItem<F, G>[]>;
 ```
 
 ## Parameters
@@ -22,5 +22,5 @@ fetchNgwLayerItems(options: {
 
 <b>Returns:</b>
 
-CancelablePromise&lt;[FeatureItem](./ngw-connector.featureitem.md)<!-- -->\[\]&gt;
+CancelablePromise&lt;[FeatureItem](./ngw-connector.featureitem.md)<!-- -->&lt;F, G&gt;\[\]&gt;
 

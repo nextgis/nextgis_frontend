@@ -1,5 +1,6 @@
 import CancelablePromise from '@nextgis/cancelable-promise';
 import { defined } from '@nextgis/utils';
+import Cache from '@nextgis/cache';
 
 import { resourceToQuery } from './utils/resourceToQuery';
 import { resourceCompare } from './utils/resourceCompare';
@@ -12,10 +13,11 @@ import type { NgwConnector } from './NgwConnector';
 import type { ResourceItem, Resource } from './types/ResourceItem';
 import type { RequestOptions, ResourceDefinition } from './interfaces';
 
-const promiseControl = new CancelablePromise.PromiseControl();
-
 export class ResourcesControl {
-  private _resourcesCache: Record<number, ResourceItem> = {};
+  cache = new Cache<
+    CancelablePromise<ResourceItem | undefined>,
+    { id?: number }
+  >();
 
   constructor(private connector: NgwConnector) {}
 
@@ -24,17 +26,18 @@ export class ResourcesControl {
   // -------------------------------------------------------------------------
 
   /**
-   * Receive resource from NGW by id, keyname or serch-object parameter.
+   * Receive resource from NGW by id, keyname or search-object parameter.
    * @param resource - Resource id, keyname or search-object
    *
    * @remarks
    * Fetching resource would be cached to speed up next call
    */
   getOne(
-    resource: ResourceDefinition | DeepPartial<Resource>,
+    resource: ResourceDefinition,
     requestOptions?: RequestOptions,
   ): CancelablePromise<ResourceItem | undefined> {
-    return promiseControl.waitFunc(() => {
+    const cache = new Cache();
+    const makeRequest = () => {
       if (typeof resource === 'string') {
         return this._fetchResourceBy({ keyname: resource }, requestOptions);
       } else if (typeof resource === 'number') {
@@ -43,12 +46,11 @@ export class ResourcesControl {
         return this._fetchResourceBy(resource, requestOptions);
       }
       return CancelablePromise.resolve(undefined);
-    }, String(resource));
+    };
+    return cache.add('resource', makeRequest, { resource });
   }
 
-  getOneOrFail(
-    resource: ResourceDefinition | DeepPartial<Resource>,
-  ): CancelablePromise<ResourceItem> {
+  getOneOrFail(resource: ResourceDefinition): CancelablePromise<ResourceItem> {
     return this.getOne(resource).then((res) => {
       if (res) {
         return res;
@@ -67,9 +69,7 @@ export class ResourcesControl {
    * then this method will come in handy to facilitate the extraction of the identifier
    * if the resource is specified through a keyname or other parameters.
    */
-  getId(
-    resource: ResourceDefinition | DeepPartial<Resource>,
-  ): CancelablePromise<number | undefined> {
+  getId(resource: ResourceDefinition): CancelablePromise<number | undefined> {
     if (typeof resource === 'number') {
       return CancelablePromise.resolve(resource);
     } else if (typeof resource === 'string' || isObject(resource)) {
@@ -90,9 +90,7 @@ export class ResourcesControl {
    * Similar with {@link NgwConnector.getResourceId | getResourceId} but rise error if resource is not exist.
    * To not make one more checks if the resource is definitely exists
    */
-  getIdOrFail(
-    resource: ResourceDefinition | DeepPartial<Resource>,
-  ): CancelablePromise<number> {
+  getIdOrFail(resource: ResourceDefinition): CancelablePromise<number> {
     return this.getId(resource).then((resp) => {
       if (resp === undefined) {
         throw new Error();
@@ -105,86 +103,55 @@ export class ResourcesControl {
     resource: DeepPartial<Resource>,
     requestOptions?: RequestOptions,
   ): CancelablePromise<ResourceItem[]> {
-    let items: ResourceItem[] = [];
-    if (resource.id) {
-      const existId = this._resourcesCache[resource.id];
-      if (existId) {
-        items.push(existId);
+    return this._resourceCacheFilter(resource).then((items) => {
+      if (!items.length) {
+        const query: Record<string, unknown> = {};
+        if (resource.keyname) {
+          query.keyname = resource.keyname;
+        } else {
+          Object.assign(query, resourceToQuery(resource));
+        }
+        return this.connector
+          .get('resource.search', requestOptions, {
+            serialization: 'full',
+            ...query,
+          })
+          .then((resources) => {
+            if (resources) {
+              resources.forEach((x) => {
+                this.cache.add('resource.item', CancelablePromise.resolve(x), {
+                  id: x.resource.id,
+                });
+              });
+            }
+            return resources;
+          });
       }
-    } else {
-      items = this._resourceCacheFilter(resource);
-    }
-    if (!items.length) {
-      const query: Record<string, unknown> = {};
-      if (resource.keyname) {
-        query.keyname = resource.keyname;
-      } else {
-        Object.assign(query, resourceToQuery(resource));
-      }
-      return this.connector
-        .get('resource.search', requestOptions, {
-          serialization: 'full',
-          ...query,
-        })
-        .then((resources) => {
-          if (resources) {
-            resources.forEach((x) => {
-              this._resourcesCache[x.resource.id] = x;
-            });
-          }
-          return resources;
-        });
-    }
-    return CancelablePromise.resolve(items);
+      return items;
+    });
   }
 
   getChildrenOf(
-    optOrResource:
-      | string
-      | number
-      | {
-          keyname?: string;
-          resourceId?: number;
-          resource?: string | number;
-        },
+    resource: ResourceDefinition,
   ): CancelablePromise<ResourceItem[]> {
-    let opt: {
-      keyname?: string;
-      resourceId?: number;
-      resource?: string | number;
-    } = {};
-    if (typeof optOrResource === 'string') {
-      opt.keyname = optOrResource;
-    } else if (typeof optOrResource === 'number') {
-      opt.resourceId = optOrResource;
-    } else {
-      opt = optOrResource;
-    }
-    let parent = opt.resourceId;
-    let keyname = opt.keyname;
-    if (!opt.keyname && !defined(opt.resourceId) && !opt.resource) {
-      throw new Error('No keyname or resourceId is set');
-    }
-    if (opt.resource) {
-      if (typeof opt.resource === 'string') {
-        keyname = opt.resource;
-      } else if (typeof opt.resource === 'number') {
-        parent = opt.resource;
-      }
-    }
-    const collection = () =>
-      this.connector.get('resource.collection', null, {
-        parent,
-      });
-    if (keyname) {
-      return this._fetchResourceBy({ keyname }).then((item) => {
-        if (item) {
-          parent = item.resource.id;
-        }
-        return collection();
-      });
-    }
-    return collection();
+    return this.getId(resource).then((parent) => {
+      return this.connector
+        .get(
+          'resource.collection',
+          { cache: true },
+          {
+            parent,
+          },
+        )
+        .then((items) => {
+          for (const i of items) {
+            this.cache.add('resource.item', CancelablePromise.resolve(i), {
+              id: i.resource.id,
+            });
+          }
+          return items;
+        });
+    });
   }
 
   update(
@@ -193,12 +160,11 @@ export class ResourcesControl {
   ): CancelablePromise<ResourceItem | undefined> {
     return this.getId(resource).then((id) => {
       if (id !== undefined) {
-        return this.connector
-          .put('resource.item', { data }, { id })
-          .then((res) => {
-            this._resourcesCache[id] = res;
-            return res as ResourceItem;
-          });
+        return this.cache.add(
+          'resource.item',
+          () => this.connector.put('resource.item', { data }, { id }),
+          { id },
+        );
       }
     });
   }
@@ -211,7 +177,7 @@ export class ResourcesControl {
     return this.getId(resource).then((id) => {
       if (id !== undefined) {
         return this.connector.delete('resource.item', null, { id }).then(() => {
-          delete this._resourcesCache[id];
+          this.cache.delete('resource.item', { id });
           return undefined;
         });
       }
@@ -222,24 +188,19 @@ export class ResourcesControl {
     id: number,
     requestOptions?: RequestOptions,
   ): CancelablePromise<ResourceItem | undefined> {
-    const item: ResourceItem = this._resourcesCache[id];
-    if (!item) {
-      return this.connector
-        .get('resource.item', requestOptions, { id })
-        .then((item) => {
-          if (item) {
-            this._resourcesCache[id] = item;
-          }
-          return item;
-        })
-        .catch((er) => {
-          if (!(er instanceof ResourceNotFoundError)) {
-            throw er;
-          }
-          return undefined;
-        });
-    }
-    return CancelablePromise.resolve(item);
+    const promise = () =>
+      this.connector.get('resource.item', requestOptions, { id });
+
+    return this.cache
+      .add('resource.item', promise, {
+        id,
+      })
+      .catch((er) => {
+        if (!(er instanceof ResourceNotFoundError)) {
+          throw er;
+        }
+        return undefined;
+      });
   }
 
   private _fetchResourceBy(
@@ -253,19 +214,24 @@ export class ResourcesControl {
 
   private _resourceCacheFilter(
     resource: DeepPartial<Resource>,
-  ): ResourceItem[] {
-    const items: ResourceItem[] = Object.values(this._resourcesCache).filter(
-      (x) => {
-        // identical by uniq props
-        if (resource.keyname && x.resource.keyname) {
-          return resource.keyname === x.resource.keyname;
-        }
-        if (defined(resource.id) && defined(x.resource.id)) {
-          return resource.id === x.resource.id;
-        }
-        return resourceCompare(resource, x.resource);
+  ): CancelablePromise<ResourceItem[]> {
+    return CancelablePromise.all(this.cache.matchAll('resource.item')).then(
+      (resources) => {
+        const items: ResourceItem[] = [];
+        resources.filter((x) => {
+          if (x) {
+            // identical by uniq props
+            if (resource.keyname && x.resource.keyname) {
+              return resource.keyname === x.resource.keyname;
+            }
+            if (defined(resource.id) && defined(x.resource.id)) {
+              return resource.id === x.resource.id;
+            }
+            return resourceCompare(resource, x.resource);
+          }
+        });
+        return items;
       },
     );
-    return items;
   }
 }

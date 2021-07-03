@@ -1,4 +1,3 @@
-import { Tileset3DAdapterOptions, LngLatBoundsArray } from '@nextgis/webmap';
 import {
   Cesium3DTileset,
   Matrix4,
@@ -12,6 +11,12 @@ import { getExtentFromBoundingSphere } from '../utils/getExtentFromBoundingSpher
 import { makeUrl } from '../utils/makeUrl';
 import { whenSampleTerrainMostDetailed } from '../utils/whenSampleTerrainMostDetailed';
 import { BaseAdapter } from './BaseAdapter';
+
+import type Resource from 'cesium/Source/Core/Resource';
+import type {
+  Tileset3DAdapterOptions,
+  LngLatBoundsArray,
+} from '@nextgis/webmap';
 
 export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
   layer?: Cesium3DTileset;
@@ -72,17 +77,19 @@ export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
 
   private async _addLayer() {
     const url = makeUrl(this.options.url, this.options.headers);
-
-    const layer = new Cesium3DTileset({
+    const options: Partial<Cesium3DTileset> & { url: string | Resource } = {
       url,
       skipLevelOfDetail: true,
-      maximumScreenSpaceError:
-        this.options.nativeOptions &&
-        this.options.nativeOptions.maximumScreenSpaceError &&
-        this.options.nativeOptions.maximumScreenSpaceError !== undefined
-          ? this.options.nativeOptions.maximumScreenSpaceError
-          : 16,
-    });
+    };
+    const maximumScreenSpaceError =
+      this.options.nativeOptions &&
+      this.options.nativeOptions.maximumScreenSpaceError;
+    // if (defined(maximumScreenSpaceError)) {
+    //   options.maximumScreenSpaceError = maximumScreenSpaceError;
+    // }
+    options.maximumScreenSpaceError = maximumScreenSpaceError || 1;
+
+    const layer = new Cesium3DTileset(options);
     layer.show = false;
 
     try {

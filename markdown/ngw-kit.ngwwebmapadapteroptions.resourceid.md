@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-resourceId: number | [number, string];
+resourceId: ResourceIdDef;
 ```

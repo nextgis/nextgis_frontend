@@ -15,6 +15,7 @@ export interface NgwUploadOptions extends NgwConnectorOptions
 
 |  Property | Type | Description |
 |  --- | --- | --- |
+|  [connector?](./ngw-uploader.ngwuploadoptions.connector.md) | NgwConnector | <i>(Optional)</i> |
 |  [inputOptions?](./ngw-uploader.ngwuploadoptions.inputoptions.md) | [UploadInputOptions](./ngw-uploader.uploadinputoptions.md) | <i>(Optional)</i> |
 |  [loginDialog?](./ngw-uploader.ngwuploadoptions.logindialog.md) | boolean | <i>(Optional)</i> |
 

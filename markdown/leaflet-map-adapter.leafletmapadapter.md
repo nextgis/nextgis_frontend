@@ -33,7 +33,7 @@ export declare class LeafletMapAdapter implements MapAdapter<Map, any, Control>
 |  [createButtonControl(options)](./leaflet-map-adapter.leafletmapadapter.createbuttoncontrol.md) |  |  |
 |  [createControl(control, options)](./leaflet-map-adapter.leafletmapadapter.createcontrol.md) |  |  |
 |  [destroy()](./leaflet-map-adapter.leafletmapadapter.destroy.md) |  |  |
-|  [fitBounds(e)](./leaflet-map-adapter.leafletmapadapter.fitbounds.md) |  |  |
+|  [fitBounds(e, options)](./leaflet-map-adapter.leafletmapadapter.fitbounds.md) |  |  |
 |  [getBounds()](./leaflet-map-adapter.leafletmapadapter.getbounds.md) |  |  |
 |  [getCenter()](./leaflet-map-adapter.leafletmapadapter.getcenter.md) |  |  |
 |  [getContainer()](./leaflet-map-adapter.leafletmapadapter.getcontainer.md) |  |  |
