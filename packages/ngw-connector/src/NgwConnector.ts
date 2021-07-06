@@ -39,35 +39,37 @@ import type {
 } from './interfaces';
 import { apiRequest } from './utils/apiRequest';
 
+let ID = 0;
+
 export class NgwConnector {
   static errors = {
     NgwError,
     ResourceNotFoundError,
   };
+  id = ID++;
 
   emitter = new EventEmitter();
   user?: UserInfo;
 
-  resources: ResourcesControl;
+  resources!: ResourcesControl;
 
   private routeStr = '/api/component/pyramid/route';
 
   constructor(public options: NgwConnectorOptions) {
-    if (this.options.route) {
-      this.routeStr = this.options.route;
-    }
-    this.resources = new ResourcesControl(this);
-    addConnector(this);
-  }
-
-  static create(options: NgwConnectorOptions): NgwConnector {
     const exist = findConnector(options);
     if (exist) {
       return exist;
     } else {
-      const connector = new this(options);
-      return connector;
+      if (this.options.route) {
+        this.routeStr = this.options.route;
+      }
+      this.resources = new ResourcesControl(this);
+      addConnector(this);
     }
+  }
+
+  static create(options: NgwConnectorOptions): NgwConnector {
+    return new this(options);
   }
 
   /**
@@ -96,6 +98,7 @@ export class NgwConnector {
    */
   connect(): CancelablePromise<PyramidRoute> {
     const cache = new Cache();
+    const auth = this.options.auth;
     const makeConnect = () =>
       new CancelablePromise((resolve, reject) => {
         const makeQuery = () => {
@@ -107,17 +110,23 @@ export class NgwConnector {
               reject(er);
             });
         };
-        if (this.options.auth) {
-          const { login, password } = this.options.auth;
+        if (auth) {
+          const { login, password } = auth;
           if (login && password) {
             return this.getUserInfo({ login, password })
-              .then(() => makeQuery())
+              .then(() => {
+                makeQuery();
+              })
               .catch((er) => reject(er));
           }
         }
         return makeQuery();
       });
-    return cache.add('route', makeConnect);
+    return cache.add('route', makeConnect, {
+      id: this.id,
+      auth,
+      baseUrl: this.options.baseUrl,
+    });
   }
 
   /**
@@ -241,6 +250,8 @@ export class NgwConnector {
         headers,
         withCredentials,
         responseType,
+        baseUrl: this.options.baseUrl,
+        auth: this.options.auth,
       });
     }
     return makeApiRequest();
