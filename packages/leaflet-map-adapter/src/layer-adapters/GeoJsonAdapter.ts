@@ -6,6 +6,7 @@ import {
   DivIcon,
   Marker,
 } from 'leaflet';
+import { defined } from '@nextgis/utils';
 import { isPaintCallback, isPaint } from '@nextgis/paint';
 import { BaseAdapter } from './BaseAdapter';
 import {
@@ -38,6 +39,7 @@ import type {
   GeoJsonAdapterOptions,
   VectorLayerAdapter,
   LngLatBoundsArray,
+  OnLayerSelectType,
   LayerDefinition,
   DataLayerFilter,
   PopupOptions,
@@ -85,7 +87,7 @@ export class GeoJsonAdapter
     if (findFeatureFun) {
       const feature = this._layers.filter(findFeatureFun);
       feature.forEach((x) => {
-        this._selectLayer(x.layer);
+        this._selectLayer(x.layer, 'api');
       });
     } else if (!this.selected) {
       this.selected = true;
@@ -215,7 +217,7 @@ export class GeoJsonAdapter
     if (findFeatureFun) {
       const feature = this._layers.filter(findFeatureFun);
       feature.forEach((x) => {
-        this._openPopup(x.layer, options);
+        this._openPopup(x.layer, options, 'api');
       });
     }
   }
@@ -258,14 +260,22 @@ export class GeoJsonAdapter
     }
   }
 
-  private async _openPopup(layer: Layer, options?: PopupOptions) {
+  private async _openPopup(
+    layer: Layer,
+    options: PopupOptions = {},
+    type: OnLayerSelectType,
+  ) {
     // @ts-ignore
     const feature = layer.feature;
-    options = options || {};
     const { minWidth, autoPan } = { minWidth: 300, ...options };
     const content =
       options && options.createPopupContent
-        ? await options.createPopupContent({ layer, feature, target: this })
+        ? await options.createPopupContent({
+            layer,
+            feature,
+            target: this,
+            type,
+          })
         : '';
     if (content) {
       const popup = layer.bindPopup(content, { minWidth, autoPan });
@@ -391,14 +401,15 @@ export class GeoJsonAdapter
         ok = this._filterFun({ feature, layer });
       }
       if (ok) {
+        const { popup, popupOptions, selectable, interactive, selectOnHover } =
+          this.options;
         // @ts-ignore
-        layer.options.interactive =
-          this.options.selectable || this.options.interactive;
+        layer.options.interactive = defined(interactive) ? interactive : true;
         this.layer.addLayer(layer);
-        if (options.selectable) {
-          if (options.selectOnHover) {
+        if (selectable) {
+          if (selectOnHover) {
             layer.on('mouseover', () => {
-              this._selectLayer(layer);
+              this._selectLayer(layer, 'hover');
             });
             layer.on('mouseout', () => {
               this._unSelectLayer(layer);
@@ -406,13 +417,14 @@ export class GeoJsonAdapter
           } else {
             layer.on(
               'click',
-              (e) => this._onLayerClick(e as LeafletMouseEvent),
+              (e) => this._selectOnLayerClick(e as LeafletMouseEvent),
               this,
             );
           }
         }
-        if (this.options.popup) {
-          this._openPopup(layer, this.options.popupOptions);
+        this._handleMouseEvents(layer);
+        if (popup) {
+          this._openPopup(layer, popupOptions, 'api');
         }
         this._updateTooltip({ layer, feature });
       }
@@ -421,9 +433,55 @@ export class GeoJsonAdapter
     return lopt;
   }
 
-  private _onLayerClick(e: LeafletMouseEvent) {
+  private _handleMouseEvents(layer: Layer) {
+    const isSelected = (l: LayerMem) => this._selectedLayers.indexOf(l) !== -1;
+    const createMouseOptions = (e: LeafletMouseEvent) => {
+      const layer_ = e.target as LayerMem;
+      return {
+        layer: this,
+        feature: layer_.feature,
+        event: convertMapClickEvent(e),
+        source: e,
+      };
+    };
+    const { onClick, onLayerClick, onMouseOut, onMouseOver } = this.options;
+    // TODO: remove backward compatibility for onLayerClick
+    const onClick_ = onClick || onLayerClick;
+    if (onClick_) {
+      layer.on(
+        'click',
+        (e) => {
+          onClick_({
+            selected: isSelected(e.target),
+            ...createMouseOptions(e as LeafletMouseEvent),
+          });
+        },
+        this,
+      );
+    }
+    if (onMouseOut) {
+      layer.on(
+        'mouseout',
+        (e) => {
+          onMouseOut(createMouseOptions(e as LeafletMouseEvent));
+        },
+        this,
+      );
+    }
+    if (onMouseOver) {
+      layer.on(
+        'mouseover',
+        (e) => {
+          onMouseOver(createMouseOptions(e as LeafletMouseEvent));
+        },
+        this,
+      );
+    }
+  }
+
+  private _selectOnLayerClick(e: LeafletMouseEvent) {
     DomEvent.stopPropagation(e);
-    const layer = e.target;
+    const layer = e.target as LayerMem;
     let isSelected = this._selectedLayers.indexOf(layer) !== -1;
     if (isSelected) {
       if (this.options && this.options.unselectOnSecondClick) {
@@ -431,21 +489,12 @@ export class GeoJsonAdapter
         isSelected = false;
       }
     } else {
-      this._selectLayer(layer);
+      this._selectLayer(layer, 'click');
       isSelected = true;
-    }
-    if (this.options.onLayerClick) {
-      this.options.onLayerClick({
-        layer: this,
-        feature: layer.feature,
-        selected: isSelected,
-        event: convertMapClickEvent(e),
-        source: e,
-      });
     }
   }
 
-  private _selectLayer(layer: any) {
+  private _selectLayer(layer: any, type: OnLayerSelectType) {
     if (this.options && !this.options.multiselect) {
       this._selectedLayers.forEach((x) => this._unSelectLayer(x));
     }
@@ -456,7 +505,14 @@ export class GeoJsonAdapter
         this.setPaint(layer, this.options.selectedPaint);
       }
       if (this.options.popupOnSelect) {
-        this._openPopup(layer, this.options.popupOptions);
+        this._openPopup(layer, this.options.popupOptions, type);
+      }
+      if (this.options.onSelect) {
+        this.options.onSelect({
+          type,
+          layer: this,
+          features: [layer.feature],
+        });
       }
     }
   }
