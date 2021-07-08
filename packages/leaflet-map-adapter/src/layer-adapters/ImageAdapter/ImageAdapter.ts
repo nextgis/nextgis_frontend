@@ -7,7 +7,8 @@ import { BaseAdapter } from '../BaseAdapter';
 
 export class ImageAdapter
   extends BaseAdapter<ImageAdapterOptions>
-  implements MainLayerAdapter<Map> {
+  implements MainLayerAdapter<Map>
+{
   layer: any;
 
   addLayer(options: ImageAdapterOptions): any {

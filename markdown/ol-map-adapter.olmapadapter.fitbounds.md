@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-fitBounds(e: LngLatBoundsArray): void;
+fitBounds(e: LngLatBoundsArray, options?: FitOptions): void;
 ```
 
 ## Parameters
@@ -15,6 +15,7 @@ fitBounds(e: LngLatBoundsArray): void;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  e | [LngLatBoundsArray](./utils.lnglatboundsarray.md) |  |
+|  options | [FitOptions](./webmap.fitoptions.md) |  |
 
 <b>Returns:</b>
 

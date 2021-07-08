@@ -2,17 +2,6 @@ import GeoJSON from 'ol/format/GeoJSON';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 
-import type Base from 'ol/layer/Base';
-import type Map from 'ol/Map';
-import type OlFeature from 'ol/Feature';
-import type { Feature, GeoJsonObject } from 'geojson';
-
-import {
-  DataLayerFilter,
-  VectorLayerAdapter,
-  GeoJsonAdapterOptions,
-  LayerDefinition,
-} from '@nextgis/webmap';
 import { Paint } from '@nextgis/paint';
 import { defined, LngLatBoundsArray } from '@nextgis/utils';
 import { PropertiesFilter } from '@nextgis/properties-filter';
@@ -20,8 +9,26 @@ import { PropertiesFilter } from '@nextgis/properties-filter';
 import { resolutionOptions } from '../utils/gerResolution';
 import { styleFunction, labelStyleFunction, getFeature } from '../utils/utils';
 
-import { ForEachFeatureAtPixelCallback } from '../OlMapAdapter';
 import { transformExtent } from 'ol/proj';
+
+import type { Feature, GeoJsonObject } from 'geojson';
+import type MapBrowserPointerEvent from 'ol/MapBrowserEvent';
+import type { Pixel } from 'ol/pixel';
+import type Base from 'ol/layer/Base';
+import type Map from 'ol/Map';
+import type OlFeature from 'ol/Feature';
+import type {
+  DataLayerFilter,
+  VectorLayerAdapter,
+  GeoJsonAdapterOptions,
+  LayerDefinition,
+  OnLayerSelectType,
+} from '@nextgis/webmap';
+import type {
+  ForEachFeatureAtPixelCallback,
+  MouseEventType,
+} from '../OlMapAdapter';
+import { convertMapClickEvent } from '../utils/convertMapClickEvent';
 
 type Layer = Base;
 type Layers = LayerDefinition<Feature, Layer>;
@@ -38,10 +45,13 @@ export class GeoJsonAdapter
   private _features: OlFeature<any>[] = [];
   private _selectedFeatures: OlFeature<any>[] = [];
   private _filterFun?: DataLayerFilter<Feature>;
+  private _mouseOver?: boolean;
 
   // TODO: get from OlMapAdapter
   private displayProjection = 'EPSG:3857';
   private lonlatProjection = 'EPSG:4326';
+
+  private _forEachFeatureAtPixel: ForEachFeatureAtPixelCallback[] = [];
 
   constructor(public map: Map, public options: GeoJsonAdapterOptions) {}
 
@@ -80,12 +90,28 @@ export class GeoJsonAdapter
       },
       ...resolutionOptions(this.map, options),
     });
-
-    if (options.selectable) {
-      this._addSelectListener();
+    const interactive = defined(options.interactive)
+      ? options.interactive
+      : true;
+    if (interactive) {
+      this._addEventListener();
     }
 
     return this.layer;
+  }
+
+  removeLayer(): void {
+    const _forEachFeatureAtPixel = this.map.get(
+      '_forEachFeatureAtPixel',
+    ) as ForEachFeatureAtPixelCallback[];
+    for (let i = _forEachFeatureAtPixel.length; i--; ) {
+      const cb = _forEachFeatureAtPixel[i];
+      const index = this._forEachFeatureAtPixel.indexOf(cb);
+      if (index !== -1) {
+        _forEachFeatureAtPixel.splice(i, 1);
+      }
+    }
+    this._forEachFeatureAtPixel.length = 0;
   }
 
   clearLayer(cb?: (feature: Feature) => boolean): void {
@@ -122,12 +148,12 @@ export class GeoJsonAdapter
   }
 
   select(findFeatureCb?: DataLayerFilter<Feature> | PropertiesFilter): void {
-    if (findFeatureCb) {
-      const feature = this._selectedFeatures.filter((x) =>
-        Object.create({ feature: x }),
+    if (typeof findFeatureCb === 'function') {
+      const feature = this._features.filter((x) =>
+        findFeatureCb({ feature: getFeature(x) }),
       );
       feature.forEach((x) => {
-        this._selectFeature(x);
+        this._selectFeature(x, 'api');
       });
     } else if (!this.selected) {
       this.selected = true;
@@ -138,9 +164,9 @@ export class GeoJsonAdapter
   }
 
   unselect(findFeatureCb?: DataLayerFilter<Feature> | PropertiesFilter): void {
-    if (findFeatureCb) {
+    if (typeof findFeatureCb === 'function') {
       const feature = this._selectedFeatures.filter((x) =>
-        Object.create({ feature: x }),
+        findFeatureCb({ feature: getFeature(x) }),
       );
       feature.forEach((x) => {
         this._unselectFeature(x);
@@ -213,39 +239,81 @@ export class GeoJsonAdapter
     }
   }
 
-  private _addSelectListener() {
+  private _addEventListener() {
     const _forEachFeatureAtPixel = this.map.get(
       '_forEachFeatureAtPixel',
     ) as ForEachFeatureAtPixelCallback[];
-    _forEachFeatureAtPixel.push((feature, layer) => {
-      if (layer === this.layer) {
-        this._onFeatureClick(feature);
-      }
-    });
+    const cb: ForEachFeatureAtPixelCallback = (pixel, evt, type) => {
+      this._onFeatureAtPixel(pixel, evt, type);
+    };
+    this._forEachFeatureAtPixel.push(cb);
+    _forEachFeatureAtPixel.push(cb);
   }
 
-  private _onFeatureClick(feature: OlFeature<any>) {
-    let isSelected = this._selectedFeatures.indexOf(feature) !== -1;
-    if (isSelected) {
-      if (this.options && this.options.unselectOnSecondClick) {
-        this._unselectFeature(feature);
-        isSelected = false;
+  private _onFeatureAtPixel(
+    pixel: Pixel,
+    evt: MapBrowserPointerEvent,
+    type: MouseEventType,
+  ) {
+    const feature = this.map.getFeaturesAtPixel(pixel, {
+      layerFilter: (l) => l === this.layer,
+    })[0] as OlFeature<any>;
+    const createMouseOptions = (e: MapBrowserPointerEvent) => {
+      return {
+        layer: this,
+        feature: feature && getFeature(feature),
+        event: convertMapClickEvent(e),
+        source: e,
+      };
+    };
+    if (feature) {
+      let isSelected = this._selectedFeatures.indexOf(feature) !== -1;
+
+      if (this.options.selectable) {
+        if (
+          (type === 'hover' && this.options.selectOnHover) ||
+          type === 'click'
+        ) {
+          if (isSelected) {
+            if (this.options && this.options.unselectOnSecondClick) {
+              this._unselectFeature(feature);
+              isSelected = false;
+            }
+          } else {
+            this._selectFeature(feature, type);
+            isSelected = true;
+          }
+        }
+      }
+
+      if (type === 'click') {
+        if (this.options.onClick) {
+          this.options.onClick({
+            selected: isSelected,
+            ...createMouseOptions(evt),
+          });
+        }
+      }
+      if (type === 'hover') {
+        this._mouseOver = true;
+        if (this.options.onMouseOver) {
+          this.options.onMouseOver(createMouseOptions(evt));
+        }
       }
     } else {
-      this._selectFeature(feature);
-      isSelected = true;
-    }
-
-    if (this.options.onLayerClick) {
-      this.options.onLayerClick({
-        layer: this,
-        feature: getFeature(feature),
-        selected: isSelected,
-      });
+      if (type === 'hover' && this._mouseOver) {
+        this._mouseOver = false;
+        if (this.options.onMouseOut) {
+          this.options.onMouseOut(createMouseOptions(evt));
+        }
+        if (this.options.selectOnHover) {
+          this.unselect();
+        }
+      }
     }
   }
 
-  private _selectFeature(feature: OlFeature<any>) {
+  private _selectFeature(feature: OlFeature<any>, type: OnLayerSelectType) {
     const options = this.options;
     if (options && !options.multiselect) {
       this._selectedFeatures.forEach((x) => this._unselectFeature(x));
@@ -257,6 +325,13 @@ export class GeoJsonAdapter
       if (style) {
         feature.setStyle(style);
       }
+    }
+    if (this.options.onSelect) {
+      this.options.onSelect({
+        layer: this,
+        features: [getFeature(feature)],
+        type,
+      });
     }
   }
 

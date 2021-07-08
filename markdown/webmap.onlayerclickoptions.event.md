@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-event?: MapClickEvent;
+event: MapClickEvent;
 ```

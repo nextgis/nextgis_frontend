@@ -15,23 +15,28 @@ export type LayerAdapterDefinition<K extends keyof LayerAdapters = string> =
   | Type<LayerAdapters[K]>
   | Promise<Type<LayerAdapters[K]> | undefined>;
 
+export type OnLayerSelectType = 'api' | 'click' | 'hover';
+
 /**
  * @public
  */
 export interface OnLayerSelectOptions {
   layer: LayerAdapter;
   features?: Feature[] | undefined;
+  type: OnLayerSelectType;
 }
+
+export type OnLayerMouseOptions = OnLayerClickOptions;
 
 /**
  * @public
  */
 export interface OnLayerClickOptions {
   layer: LayerAdapter;
-  selected?: boolean;
+  event: MapClickEvent;
+  source: any;
   feature?: Feature;
-  event?: MapClickEvent;
-  source?: any;
+  selected?: boolean;
 }
 
 /**
@@ -154,6 +159,10 @@ export interface MvtAdapterOptions<F extends Feature = Feature>
  */
 export type VectorAdapterLayerType = 'polygon' | 'point' | 'line';
 
+export interface CreatePopupContentProps extends LayerDefinition {
+  type: OnLayerSelectType;
+}
+
 /**
  * @public
  */
@@ -163,7 +172,7 @@ export interface PopupOptions {
   popupContent?: string | HTMLElement;
   fromProperties?: boolean;
   createPopupContent?: (
-    layerDef: LayerDefinition,
+    props: CreatePopupContentProps,
   ) =>
     | HTMLElement
     | string
@@ -305,7 +314,17 @@ export interface VectorAdapterOptions<
    */
   selectedLayout?: any;
 
+  onClick?(opt: OnLayerClickOptions): void;
+  onSelect?(opt: OnLayerSelectOptions): void;
+
+  /** Fired when the mouse enters the layer. */
+  onMouseOver?(opt: OnLayerClickOptions): void;
+  /** Fired when the mouse leaves the layer. */
+  onMouseOut?(opt: OnLayerClickOptions): void;
+
+  // @deprecated use {@link VectorAdapterOptions.onClick} instead
   onLayerClick?(opt: OnLayerClickOptions): Promise<any>;
+  // @deprecated use {@link VectorAdapterOptions.onSelect} instead
   onLayerSelect?(opt: OnLayerSelectOptions): Promise<any>;
 }
 

@@ -5,7 +5,8 @@ import { BaseAdapter } from '../BaseAdapter';
 
 export class WmsAdapter
   extends BaseAdapter<WmsAdapterOptions, TileLayer.WMS>
-  implements MainLayerAdapter {
+  implements MainLayerAdapter
+{
   addLayer(options: WmsAdapterOptions): TileLayer.WMS | undefined {
     if (options) {
       const { url, ...opt } = options;

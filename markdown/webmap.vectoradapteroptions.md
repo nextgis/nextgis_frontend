@@ -40,6 +40,10 @@ export interface VectorAdapterOptions<F extends Feature = Feature, L = any, N = 
 
 |  Method | Description |
 |  --- | --- |
+|  [onClick(opt)?](./webmap.vectoradapteroptions.onclick.md) | <i>(Optional)</i> |
 |  [onLayerClick(opt)?](./webmap.vectoradapteroptions.onlayerclick.md) | <i>(Optional)</i> |
 |  [onLayerSelect(opt)?](./webmap.vectoradapteroptions.onlayerselect.md) | <i>(Optional)</i> |
+|  [onMouseOut(opt)?](./webmap.vectoradapteroptions.onmouseout.md) | <i>(Optional)</i> Fired when the mouse leaves the layer. |
+|  [onMouseOver(opt)?](./webmap.vectoradapteroptions.onmouseover.md) | <i>(Optional)</i> Fired when the mouse enters the layer. |
+|  [onSelect(opt)?](./webmap.vectoradapteroptions.onselect.md) | <i>(Optional)</i> |
 

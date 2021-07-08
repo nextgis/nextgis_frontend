@@ -22,6 +22,7 @@ export declare class NgwConnector
 |  --- | --- | --- | --- |
 |  [emitter](./ngw-connector.ngwconnector.emitter.md) |  | EventEmitter |  |
 |  [errors](./ngw-connector.ngwconnector.errors.md) | <code>static</code> | { NgwError: typeof NgwError; ResourceNotFoundError: typeof ResourceNotFoundError; } |  |
+|  [id](./ngw-connector.ngwconnector.id.md) |  | number |  |
 |  [options](./ngw-connector.ngwconnector.options.md) |  | [NgwConnectorOptions](./ngw-connector.ngwconnectoroptions.md) |  |
 |  [resources](./ngw-connector.ngwconnector.resources.md) |  | ResourcesControl |  |
 |  [user?](./ngw-connector.ngwconnector.user.md) |  | [UserInfo](./ngw-connector.userinfo.md) | <i>(Optional)</i> |
@@ -45,6 +46,7 @@ export declare class NgwConnector
 |  [getResourceId(resource)](./ngw-connector.ngwconnector.getresourceid.md) |  |  |
 |  [getResourceIdOrFail(resource)](./ngw-connector.ngwconnector.getresourceidorfail.md) |  |  |
 |  [getResourceOrFail(resource)](./ngw-connector.ngwconnector.getresourceorfail.md) |  |  |
+|  [getResourceParent(resource)](./ngw-connector.ngwconnector.getresourceparent.md) |  |  |
 |  [getResourcesBy(resource)](./ngw-connector.ngwconnector.getresourcesby.md) |  |  |
 |  [getUserInfo(credentials)](./ngw-connector.ngwconnector.getuserinfo.md) |  |  |
 |  [login(credentials)](./ngw-connector.ngwconnector.login.md) |  | Quick way to change NextGIS Web user. |

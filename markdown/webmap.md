@@ -67,6 +67,7 @@ webMap.onLoad().then(() => {
 |  [ControlOptions](./webmap.controloptions.md) |  |
 |  [ControlsOptions](./webmap.controlsoptions.md) |  |
 |  [CreateControlOptions](./webmap.createcontroloptions.md) |  |
+|  [CreatePopupContentProps](./webmap.createpopupcontentprops.md) |  |
 |  [DataLoadError](./webmap.dataloaderror.md) |  |
 |  [FilterOptions](./webmap.filteroptions.md) |  |
 |  [FitOptions](./webmap.fitoptions.md) | Parameters that control how the fit to object will be work. |
@@ -129,5 +130,7 @@ webMap.onLoad().then(() => {
 |  [OnClick](./webmap.onclick.md) |  |
 |  [onClickAsync](./webmap.onclickasync.md) |  |
 |  [OnClickSync](./webmap.onclicksync.md) |  |
+|  [OnLayerMouseOptions](./webmap.onlayermouseoptions.md) |  |
+|  [OnLayerSelectType](./webmap.onlayerselecttype.md) |  |
 |  [VectorAdapterLayerType](./webmap.vectoradapterlayertype.md) |  |
 

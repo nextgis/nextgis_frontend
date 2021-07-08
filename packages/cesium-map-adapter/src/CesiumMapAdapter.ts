@@ -223,8 +223,9 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
   setCenter(lonLat: LngLatArray): void {
     const viewer = this.map;
     if (viewer) {
-      const z = Ellipsoid.WGS84.cartesianToCartographic(viewer.camera.position)
-        .height;
+      const z = Ellipsoid.WGS84.cartesianToCartographic(
+        viewer.camera.position,
+      ).height;
       const destination = Cartesian3.fromDegrees(lonLat[0], lonLat[1], z);
       viewer.camera.setView({
         destination,
@@ -281,9 +282,8 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
 
       if (this.map.scene.mode === SceneMode.SCENE3D) {
         const rectangle = Rectangle.fromDegrees(west, south, east, north);
-        const cartesian = this.map.camera.getRectangleCameraCoordinates(
-          rectangle,
-        );
+        const cartesian =
+          this.map.camera.getRectangleCameraCoordinates(rectangle);
 
         const cartographic = Cartographic.fromCartesian(cartesian);
         cartographic.height += 500;
@@ -402,8 +402,9 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
       const zoomId = ++this._ZOOM_SET_ID;
       whenSampleTerrainMostDetailed(map.terrainProvider, [cartographic], () => {
         if (zoomId === this._ZOOM_SET_ID) {
-          const newZ = Ellipsoid.WGS84.cartesianToCartographic(camera.position)
-            .height;
+          const newZ = Ellipsoid.WGS84.cartesianToCartographic(
+            camera.position,
+          ).height;
           const isUnderGround = cartographic.height + 100 - newZ > 0;
           if (isUnderGround) {
             cartographic.height = cartographic.height + 100;

@@ -30,7 +30,7 @@ export class Cache<
     this.cache.length = 0;
   }
 
-  all() {
+  all(): CacheItem<T, O>[] {
     return this.cache;
   }
 
@@ -81,7 +81,7 @@ export class Cache<
         .filter((x) => this._filter(x, key, options))
         .map((x) => x.value);
     }
-    return this.cache.map(x => x.value);
+    return this.cache.map((x) => x.value);
   }
 
   delete(key: string, options?: CacheOptions<O>): void {
