@@ -23,10 +23,11 @@ export class WebMapControls<
     L = any,
     C = any,
     E extends WebMapEvents = WebMapEvents,
-    O extends MapOptions = MapOptions
+    O extends MapOptions = MapOptions,
   >
   extends WebMapLayers<M, L, E, O>
-  implements WebMapLayers, WebMapMain {
+  implements WebMapLayers, WebMapMain
+{
   static controls: {
     [name: string]: (webMap: WebMapControls, options?: any) => any;
   } = {

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Select on hover</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body,
+      #map {
+        width: 100%;
+        height: 100%;
+      }
+
+      .material-icons {
+        line-height: 30px !important;
+      }
+
+      .config-panel {
+        padding: 10px;
+        background: white;
+      }
+    </style>
+
+    <script src="../../lib/ngw-mapbox.global.js"></script>
+  </head>
+
+  <body>
+    <div id="map"></div>
+
+    <script>
+      const ID = 'layer-id';
+
+      NgwMap.create({
+        baseUrl: 'https://demo.nextgis.com',
+        target: 'map',
+        osm: true,
+      }).then(function (ngwMap) {
+        ngwMap.addNgwLayer({
+          id: ID,
+          resource: 4222,
+          fit: true,
+          adapterOptions: {
+            limit: 100,
+            onClick: function (e) {
+              console.log('`click` - from options');
+            },
+            onMouseOver: function (e) {
+              console.log('`mouseover` - from options');
+            },
+            onMouseOut: function (e) {
+              console.log('`mouseout` - from options');
+            },
+          },
+        });
+
+        ngwMap.emitter.on('layer-' + ID + ':click', function (ev) {
+          console.log('`click` -- from specific layer emitter');
+        });
+
+        ngwMap.emitter.on('layer-' + ID + ':mouseover', function (ev) {
+          console.log('`mouseover` -- from specific layer emitter');
+        });
+
+        ngwMap.emitter.on('layer-' + ID + ':mouseout', function (ev) {
+          console.log('`mouseout` -- from specific layer emitter');
+        });
+
+        ngwMap.emitter.on('layer:click', function (ev) {
+          if (ev.layer.id === ID) {
+            console.log('`click` --- from global emitter');
+          }
+        });
+        ngwMap.emitter.on('layer:mouseover', function (ev) {
+          if (ev.layer.id === ID) {
+            console.log('`mouseover` --- from global emitter');
+          }
+        });
+        ngwMap.emitter.on('layer:mouseout', function (ev) {
+          if (ev.layer.id === ID) {
+            console.log('`mouseout` --- from global emitter');
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

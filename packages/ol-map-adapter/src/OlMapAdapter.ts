@@ -16,10 +16,11 @@ import { Attribution } from './controls/Attribution';
 import { PanelControl } from './controls/PanelControl';
 import { createControl } from './controls/createControl';
 import { createButtonControl } from './controls/createButtonControl';
+import { convertMapClickEvent } from './utils/convertMapClickEvent';
 
 import type { FitOptions as OlFitOptions } from 'ol/View';
 import type Base from 'ol/layer/Base';
-import type Feature from 'ol/Feature';
+import type { Pixel } from 'ol/pixel';
 import type { ViewOptions } from 'ol/View';
 import type BaseEvent from 'ol/events/Event';
 import type Control from 'ol/control/Control';
@@ -35,21 +36,22 @@ import type {
   LngLatBoundsArray,
   CreateControlOptions,
   ButtonControlOptions,
-  MapClickEvent,
 } from '@nextgis/webmap';
 
-type Layer = Base;
+export type MouseEventType = 'click' | 'hover';
 
+type Layer = Base;
 interface PositionMem {
   center: LngLatArray | undefined;
   zoom: number | undefined;
 }
 
 export type ForEachFeatureAtPixelCallback = (
-  feature: Feature<any>,
-  layer: Layer,
+  pixel: Pixel,
   evt: MapBrowserPointerEvent,
+  type: MouseEventType,
 ) => void;
+
 export class OlMapAdapter implements MapAdapter<Map, Layer> {
   static layerAdapters = {
     IMAGE: ImageAdapter,
@@ -123,7 +125,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
 
   destroy(): void {
     if (this.map) {
-      // ignore
+      this.map.dispose();
     }
   }
 
@@ -264,39 +266,29 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
   }
 
   onMapClick(evt: MapBrowserPointerEvent): void {
-    const [lng, lat] = transform(
-      evt.coordinate,
-      this.displayProjection,
-      this.lonlatProjection,
-    );
-    const latLng = {
-      lat,
-      lng,
-    };
-
-    const emitData: MapClickEvent = {
-      latLng,
-      lngLat: [lng, lat],
-      pixel: { left: evt.pixel[0], top: evt.pixel[1] },
-      source: evt,
-    };
+    const emitData = convertMapClickEvent(evt);
     this.emitter.emit('preclick', emitData);
 
     this._mapClickEvents.forEach((x) => {
       x(evt);
     });
 
+    this._callEachFeatureAtPixel(evt, 'click');
+
+    this.emitter.emit('click', emitData);
+  }
+
+  private _callEachFeatureAtPixel(
+    evt: MapBrowserPointerEvent,
+    type: MouseEventType,
+  ) {
     if (this._forEachFeatureAtPixel.length) {
       if (this.map) {
-        this.map.forEachFeatureAtPixel(evt.pixel, (feature, layer) => {
-          this._forEachFeatureAtPixel.forEach((x) => {
-            x(feature as Feature<any>, layer, evt);
-          });
+        this._forEachFeatureAtPixel.forEach((x) => {
+          x(evt.pixel, evt, type);
         });
       }
     }
-
-    this.emitter.emit('click', emitData);
   }
 
   // requestGeomString(pixel: { top: number, left: number }, pixelRadius = 5) {
@@ -334,6 +326,9 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     if (map) {
       map.on('click', (evt: BaseEvent | Event) =>
         this.onMapClick(evt as MapBrowserPointerEvent),
+      );
+      map.on('pointermove', (evt: BaseEvent | Event) =>
+        this._callEachFeatureAtPixel(evt as MapBrowserPointerEvent, 'hover'),
       );
 
       const center = this.getCenter();

@@ -285,8 +285,8 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     this._selectProperties = undefined;
     this._selectedFeatureIds = selectedFeatureIds;
     this._updateFilter();
-    if (!opt.silent && this.options.onLayerSelect) {
-      this.options.onLayerSelect({ layer: this, features });
+    if (!opt.silent && this.options.onSelect) {
+      this.options.onSelect({ layer: this, features, type: 'api' });
     }
     return features;
   }
@@ -318,8 +318,8 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
       this._selectedFeatureIds = false;
     }
     this._updateFilter();
-    if (!opt.silent && this.options.onLayerSelect) {
-      this.options.onLayerSelect({ layer: this, features: undefined });
+    if (!opt.silent && this.options.onSelect) {
+      this.options.onSelect({ layer: this, features: undefined, type: 'api' });
     }
   }
 
@@ -484,7 +484,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   }
 
   private _fireOnLayerSelectEvent() {
-    if (this.options.onLayerSelect) {
+    if (this.options.onSelect) {
       const features_: Feature[] = [];
       this.getSelected().forEach((x) => {
         if (x.feature) {
@@ -492,9 +492,10 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
         }
       });
       const features = features_.length ? features_ : undefined;
-      this.options.onLayerSelect({
+      this.options.onSelect({
         layer: this,
         features,
+        type: 'api',
       });
     }
   }

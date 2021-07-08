@@ -131,6 +131,17 @@ export class ResourcesControl {
     });
   }
 
+  getParent(
+    resource: ResourceDefinition,
+  ): CancelablePromise<ResourceItem | undefined> {
+    return this.connector.getResource(resource).then((child) => {
+      if (child) {
+        return this.connector.getResource(child.resource.parent.id);
+      }
+      return CancelablePromise.resolve(undefined);
+    });
+  }
+
   getChildrenOf(
     resource: ResourceDefinition,
   ): CancelablePromise<ResourceItem[]> {

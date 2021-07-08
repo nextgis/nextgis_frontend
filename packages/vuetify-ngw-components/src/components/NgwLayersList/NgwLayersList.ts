@@ -192,8 +192,8 @@ export class NgwLayersList extends Vue {
           if (webMap && item.layer) {
             webMap.removeLayer(item.layer);
           }
-        }
-      }
+        },
+      },
     };
     return h(VBtn, data, [
       h(VIcon, {
