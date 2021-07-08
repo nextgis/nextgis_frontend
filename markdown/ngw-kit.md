@@ -101,7 +101,6 @@ getNgwLayerItems({
 |  [getMapWidthForLanInMeters(lat)](./ngw-kit.getmapwidthforlaninmeters.md) |  |
 |  [getNgwWebmapExtent(webmap)](./ngw-kit.getngwwebmapextent.md) |  |
 |  [getZoomFromScale(scale)](./ngw-kit.getzoomfromscale.md) |  |
-|  [idFilterWorkAround(options)](./ngw-kit.idfilterworkaround.md) |  |
 |  [mapFeatureDisplayName({ connector, resource, fields, })](./ngw-kit.mapfeaturedisplayname.md) |  |
 |  [parseDate(date)](./ngw-kit.parsedate.md) |  |
 |  [parseDateFromNgw(date)](./ngw-kit.parsedatefromngw.md) |  |

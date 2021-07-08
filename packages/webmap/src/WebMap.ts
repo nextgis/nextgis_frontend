@@ -85,10 +85,11 @@ export class WebMap<
     L = any,
     C = any,
     E extends WebMapEvents = WebMapEvents,
-    O extends MapOptions = MapOptions
+    O extends MapOptions = MapOptions,
   >
   extends WebMapControls<M, L, C, E, O>
-  implements WebMapControls, WebMapLayers, WebMapMain {
+  implements WebMapControls, WebMapLayers, WebMapMain
+{
   constructor(mapOptions: O) {
     super(mapOptions);
     this._addControls();

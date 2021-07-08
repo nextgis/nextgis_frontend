@@ -69,5 +69,3 @@ export async function createWebMap(options: MapOptions): Promise<WebMap> {
   const webMap = new WebMap(options);
   return webMap.onLoad();
 }
-
-

@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-matchAll(key: string, options?: CacheOptions<O>): CacheValue<T>[];
+matchAll(key?: string, options?: CacheOptions<O>): CacheValue<T>[];
 ```
 
 ## Parameters

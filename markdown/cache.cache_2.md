@@ -21,6 +21,7 @@ export declare class Cache<T extends any = any, O extends Record<string, any> = 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
 |  [add(key, valueToSet, options)](./cache.cache_2.add.md) |  |  |
+|  [all()](./cache.cache_2.all.md) |  |  |
 |  [clean()](./cache.cache_2.clean.md) |  |  |
 |  [delete(key, options)](./cache.cache_2.delete.md) |  |  |
 |  [match(key, options)](./cache.cache_2.match.md) |  |  |

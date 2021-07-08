@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-fitBounds(e: LngLatBoundsArray, options?: FitOptions): Promise<void>;
+fitBounds(e: LngLatBoundsArray, options?: FitOptions): void;
 ```
 
 ## Parameters
@@ -19,5 +19,5 @@ fitBounds(e: LngLatBoundsArray, options?: FitOptions): Promise<void>;
 
 <b>Returns:</b>
 
-Promise&lt;void&gt;
+void
 

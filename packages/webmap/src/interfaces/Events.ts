@@ -69,6 +69,14 @@ export interface WebMapEvents extends MainMapEvents {
   /**
    * @eventProperty
    */
+  'layer:mouseover': OnLayerClickOptions;
+  /**
+   * @eventProperty
+   */
+  'layer:mouseout': OnLayerClickOptions;
+  /**
+   * @eventProperty
+   */
   'layer:select': OnLayerSelectOptions;
   /**
    * @eventProperty

@@ -461,6 +461,15 @@ export class NgwConnector {
   }
 
   /**
+   * {@inheritDoc ResourcesControl.getParent}
+   */
+  getResourceParent(
+    resource: ResourceDefinition,
+  ): CancelablePromise<ResourceItem | undefined> {
+    return this.resources.getParent(resource);
+  }
+
+  /**
    * {@inheritDoc ResourcesControl.getChildrenOf}
    */
   getResourceChildren(

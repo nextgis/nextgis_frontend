@@ -21,6 +21,8 @@ export interface WebMapEvents extends MainMapEvents
 |  ["layer:add"](./webmap.webmapevents._layer_add_.md) | [LayerAdapter](./webmap.layeradapter.md) |  |
 |  ["layer:click"](./webmap.webmapevents._layer_click_.md) | [OnLayerClickOptions](./webmap.onlayerclickoptions.md) |  |
 |  ["layer:hide"](./webmap.webmapevents._layer_hide_.md) | [LayerAdapter](./webmap.layeradapter.md) |  |
+|  ["layer:mouseout"](./webmap.webmapevents._layer_mouseout_.md) | [OnLayerClickOptions](./webmap.onlayerclickoptions.md) |  |
+|  ["layer:mouseover"](./webmap.webmapevents._layer_mouseover_.md) | [OnLayerClickOptions](./webmap.onlayerclickoptions.md) |  |
 |  ["layer:preadd"](./webmap.webmapevents._layer_preadd_.md) | [LayerAdapter](./webmap.layeradapter.md) |  |
 |  ["layer:prehide"](./webmap.webmapevents._layer_prehide_.md) | [LayerAdapter](./webmap.layeradapter.md) |  |
 |  ["layer:preremove"](./webmap.webmapevents._layer_preremove_.md) | [LayerAdapter](./webmap.layeradapter.md) |  |

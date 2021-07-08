@@ -12,28 +12,28 @@ import { createControl } from './controls/createControl';
 import { CompassControl } from './controls/CompassControl';
 import { AttributionControl } from './controls/AttributionControl';
 import { createButtonControl } from './controls/createButtonControl';
+import { convertMapClickEvent } from './util/convertMapClickEvent';
 
 import type {
+  CreateControlOptions,
+  ButtonControlOptions,
+  LngLatBoundsArray,
+  ControlPosition,
+  LayerAdapter,
+  WebMapEvents,
+  LngLatArray,
   MapAdapter,
   FitOptions,
   MapControl,
-  ControlPosition,
-  ButtonControlOptions,
-  LngLatArray,
   MapOptions,
-  LayerAdapter,
-  LngLatBoundsArray,
-  WebMapEvents,
-  CreateControlOptions,
-  MapClickEvent,
 } from '@nextgis/webmap';
 import type {
   IControl,
-  MapEventType,
   EventData,
+  ResourceType,
+  MapEventType,
   MapboxOptions,
   RequestParameters,
-  ResourceType,
   FitBoundsOptions,
 } from 'mapbox-gl';
 
@@ -325,14 +325,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   }
 
   onMapClick(evt: MapEventType['click'] & EventData): void {
-    const latLng = evt.lngLat;
-    const { lng, lat } = latLng;
-    const { x, y } = evt.point;
-    const emitData: MapClickEvent = {
-      latLng,
-      lngLat: [lng, lat],
-      pixel: { top: y, left: x },
-    };
+    const emitData = convertMapClickEvent(evt);
     this.emitter.emit('preclick', emitData);
     if (this.map) {
       // @ts-ignore

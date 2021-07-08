@@ -13,7 +13,8 @@ import type {
 import type NgwConnector from '@nextgis/ngw-connector';
 
 export class IdentifyItem<F = FeatureProperties, G extends Geometry = Geometry>
-  implements LayerFeature {
+  implements LayerFeature
+{
   readonly id: number;
   readonly label: string;
   readonly layerId: number;

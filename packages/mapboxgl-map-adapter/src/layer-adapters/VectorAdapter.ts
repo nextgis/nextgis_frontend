@@ -3,6 +3,7 @@ import { checkIfPropertyFilter } from '@nextgis/properties-filter';
 
 import { getImage } from '../util/imageIcons';
 import { typeAliasForFilter, allowedByType } from '../util/geomType';
+import { convertMapClickEvent } from '../util/convertMapClickEvent';
 import { BaseAdapter } from './BaseAdapter';
 
 import type {
@@ -18,6 +19,8 @@ import type {
   AnyLayout,
   AnyLayer,
   Layer,
+  MapEventType,
+  EventData,
 } from 'mapbox-gl';
 import type { Paint, IconPaint } from '@nextgis/paint';
 import type {
@@ -120,10 +123,8 @@ export abstract class VectorAdapter<
     this._selectionName = this._layerId + '-highlighted';
     this.$onLayerMouseLeave = this._onLayerMouseLeave.bind(this);
     this.$onLayerMouseMove = this._onLayerMouseMove.bind(this);
-    if (this.options.selectable) {
-      // @ts-ignore
-      this.map._onMapClickLayers.push(this);
-    }
+    // @ts-ignore
+    this.map._onMapClickLayers.push(this);
   }
 
   async addLayer(options: O): Promise<TLayer> {
@@ -188,8 +189,10 @@ export abstract class VectorAdapter<
       this._updateFilter();
     }
     this.selected = true;
-    if (this.options.onLayerSelect) {
-      this.options.onLayerSelect({ layer: this, features: [] });
+    const { onSelect, onLayerSelect } = this.options;
+    const onSelect_ = onSelect || onLayerSelect;
+    if (onSelect_) {
+      onSelect_({ layer: this, features: [], type: 'api' });
     }
   }
 
@@ -197,8 +200,10 @@ export abstract class VectorAdapter<
     this._selectProperties = undefined;
     this._updateFilter();
     this.selected = false;
-    if (this.options.onLayerSelect) {
-      this.options.onLayerSelect({ layer: this, features: undefined });
+    const { onSelect, onLayerSelect } = this.options;
+    const onSelect_ = onSelect || onLayerSelect;
+    if (onSelect_) {
+      onSelect_({ layer: this, features: undefined, type: 'api' });
     }
   }
 
@@ -227,46 +232,37 @@ export abstract class VectorAdapter<
     e: MapLayerMouseEvent,
   ): Feature<Geometry, GeoJsonProperties> | undefined {
     e.preventDefault();
-    // not work correct
-    // const features = this.map.queryRenderedFeatures(e.point, {
-    //   layers: this.layer
-    // });
     let feature: Feature | undefined;
     const map = this.map;
     if (!map) {
       return;
     }
     if (this.layer) {
-      this.layer.find((a) => {
-        const features_ = map.queryRenderedFeatures(e.point, {
-          layers: [a],
-        });
-        if (features_.length) {
-          feature = features_[0] as Feature;
-          return true;
-        }
-        return false;
-      });
+      feature = this._getFeatureFromPoint(e);
       if (feature) {
-        let features: Feature[] | undefined = undefined;
         let isSelected = this.isFeatureSelected(feature);
-        if (isSelected) {
-          if (this.options && this.options.unselectOnSecondClick) {
-            this._unselectFeature(feature, { silent: true });
+        if (this.options.selectable) {
+          let features: Feature[] | undefined = undefined;
+          if (isSelected) {
+            if (this.options && this.options.unselectOnSecondClick) {
+              this._unselectFeature(feature, { silent: true });
+            }
+          } else {
+            features = this._selectFeature(feature, { silent: true });
           }
-        } else {
-          features = this._selectFeature(feature, { silent: true });
+          isSelected = this.isFeatureSelected(feature);
+          if (this.options.onSelect) {
+            this.options.onSelect({ layer: this, features, type: 'click' });
+          }
         }
-        isSelected = this.isFeatureSelected(feature);
-        if (this.options.onLayerClick) {
-          this.options.onLayerClick({
+        if (this.options.onClick) {
+          this.options.onClick({
             layer: this,
             feature,
             selected: isSelected,
+            event: convertMapClickEvent(e),
+            source: e,
           });
-        }
-        if (this.options.onLayerSelect) {
-          this.options.onLayerSelect({ layer: this, features });
         }
       }
     }
@@ -597,14 +593,60 @@ export abstract class VectorAdapter<
     return false;
   }
 
-  private _onLayerMouseMove() {
-    if (this.map) {
-      this.map.getCanvas().style.cursor = 'pointer';
+  private _getFeatureFromPoint(
+    evt: MapEventType['click'] & EventData,
+  ): Feature | undefined {
+    // not work correct
+    // const features = this.map.queryRenderedFeatures(e.point, {
+    //   layers: this.layer
+    // });
+
+    const map = this.map;
+    if (map) {
+      if (this.options.onMouseOver && this.layer) {
+        let feature: Feature | undefined;
+        this.layer.find((a) => {
+          const features_ = map.queryRenderedFeatures(evt.point, {
+            layers: [a],
+          });
+          if (features_.length) {
+            feature = features_[0] as Feature;
+            return true;
+          }
+          return false;
+        });
+        return feature;
+      }
     }
   }
 
-  private _onLayerMouseLeave() {
+  private _onLayerMouseMove(evt: MapEventType['mousemove'] & EventData) {
+    const map = this.map;
+    if (map) {
+      if (this.options.onMouseOver && this.layer) {
+        const feature = this._getFeatureFromPoint(evt);
+        this.options.onMouseOver({
+          event: convertMapClickEvent(evt),
+          layer: this,
+          feature,
+          source: evt,
+        });
+      }
+      if (this.options.selectable) {
+        map.getCanvas().style.cursor = 'pointer';
+      }
+    }
+  }
+
+  private _onLayerMouseLeave(evt: MapEventType['mousemove'] & EventData) {
     if (this.map) {
+      if (this.options.onMouseOut) {
+        this.options.onMouseOut({
+          event: convertMapClickEvent(evt),
+          layer: this,
+          source: evt,
+        });
+      }
       this.map.getCanvas().style.cursor = '';
     }
   }
@@ -627,11 +669,8 @@ export abstract class VectorAdapter<
   }
 
   private _addEventsListeners() {
-    if (this.layer && this.options && this.options.selectable) {
+    if (this.layer && this.options) {
       this.layer.forEach((x) => {
-        // if (this.$onLayerClick) {
-        //   this.map.on('click', x, this.$onLayerClick);
-        // }
         if (this.$onLayerMouseMove && this.map) {
           this.map.on('mousemove', x, this.$onLayerMouseMove);
         }

@@ -264,6 +264,7 @@ export class GeoJsonAdapter
         if (this.options.popupOptions?.createPopupContent) {
           const content = this.options.popupOptions.createPopupContent({
             feature,
+            type: 'api',
           });
           if (content instanceof HTMLElement) {
             return content.outerHTML;

@@ -82,7 +82,7 @@ export class GeojsonLayer extends Mixins(VueNgwLayer) {
           .addLayer(adapter, {
             ...options,
             data: this.data,
-            onLayerClick: this.onLayerClick,
+            onClick: this.onLayerClick,
           })
           .then((layer) => {
             this.onSelectedChange();
