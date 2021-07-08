@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/nextgis/nextgis_frontend/compare/v1.1.2...v1.2.0) (2021-07-08)
+
+
+### Features
+
+* **vue:** update cache on resource store patch ([3f0cac7](https://github.com/nextgis/nextgis_frontend/commit/3f0cac7923d59bdbe1589f00dbdc581564deb02f))
+
+
+
+
+
 ## [1.1.2](https://github.com/nextgis/nextgis_frontend/compare/v1.1.1...v1.1.2) (2021-06-28)
 
 **Note:** Version bump only for package @nextgis/vuex-ngw
