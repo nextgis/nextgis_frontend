@@ -17,7 +17,7 @@ export class ImageAdapter implements MainLayerAdapter {
 
   constructor(public map: Map, public options: ImageAdapterOptions) {}
 
-  addLayer(options: ImageAdapterOptions): ImageLayer | undefined {
+  addLayer(options: ImageAdapterOptions): ImageLayer<ImageWMS> | undefined {
     if (options.url) {
       const ratio = options.ratio !== undefined ? options.ratio : 1;
       const imageOptions: ImageWMSOptions = {
@@ -74,12 +74,13 @@ export class ImageAdapter implements MainLayerAdapter {
             return super.renderFrame(frameState, target);
           }
         }
-        class ImageLayerExtended extends ImageLayer {
+        class ImageLayerExtended extends ImageLayer<ImageWMS> {
           // @ts-ignore
           createRenderer() {
             return new CanvasILRendererExtended(this);
           }
         }
+        // @ts-ignore
         ImLayer = ImageLayerExtended;
 
         class ImageWmsExtended extends ImageWMS {
