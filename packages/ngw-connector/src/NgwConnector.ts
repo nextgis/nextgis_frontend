@@ -38,6 +38,7 @@ import type {
   Params,
 } from './interfaces';
 import { apiRequest } from './utils/apiRequest';
+import { removeEmpty } from './utils/removeEmpty';
 
 let ID = 0;
 
@@ -237,21 +238,24 @@ export class NgwConnector {
     P extends RequestItemKeys = RequestItemKeys,
   >(
     name: K,
-    params: RequestItemsParams<K> = {},
+    params_: RequestItemsParams<K> = {},
     requestOptions: RequestOptions = {},
   ): CancelablePromise<P[K]> {
     const { method, headers, withCredentials, responseType } = requestOptions;
+    const params = removeEmpty(params_);
     const makeApiRequest = () =>
       apiRequest({ name, params, requestOptions, connector: this });
     if (requestOptions.cache && method === 'GET') {
       const cache = new Cache<CancelablePromise<P[K]>>();
       return cache.add(name, makeApiRequest, {
         params,
-        headers,
-        withCredentials,
-        responseType,
-        baseUrl: this.options.baseUrl,
-        auth: this.options.auth,
+        ...removeEmpty({
+          headers,
+          withCredentials,
+          responseType,
+          baseUrl: this.options.baseUrl,
+          auth: this.options.auth,
+        }),
       });
     }
     return makeApiRequest();
