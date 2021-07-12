@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.1](https://github.com/nextgis/nextgis_frontend/compare/v1.2.0...v1.2.1) (2021-07-12)
+
+
+### Bug Fixes
+
+* **ol-map-adapter:** geojson adapter layer remove ([3705f27](https://github.com/nextgis/nextgis_frontend/commit/3705f27c5d75aba9f385ceda27aa26ef94cb0533))
+* **utils:** fix objectDeepEqual function ([720eabe](https://github.com/nextgis/nextgis_frontend/commit/720eabe7645a66fc3addd118c724679af6264652))
+
+
+
+
+
 # [1.2.0](https://github.com/nextgis/nextgis_frontend/compare/v1.1.2...v1.2.0) (2021-07-08)
 
 **Note:** Version bump only for package @nextgis/utils

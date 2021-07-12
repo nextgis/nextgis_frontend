@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.1](https://github.com/nextgis/nextgis_frontend/compare/v1.2.0...v1.2.1) (2021-07-12)
+
+
+### Bug Fixes
+
+* **ol-map-adapter:** geojson adapter layer remove ([3705f27](https://github.com/nextgis/nextgis_frontend/commit/3705f27c5d75aba9f385ceda27aa26ef94cb0533))
+
+
+### Performance Improvements
+
+* **ol-map-adapter:** style function for each feature ([fed8575](https://github.com/nextgis/nextgis_frontend/commit/fed8575d7beb6dd23b22cc2eff2e02b73f0c8f7b))
+
+
+
+
+
 # [1.2.0](https://github.com/nextgis/nextgis_frontend/compare/v1.1.2...v1.2.0) (2021-07-08)
 
 

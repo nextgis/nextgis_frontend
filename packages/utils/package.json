@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/utils",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Common development tools",
   "main": "index.js",
   "module": "lib/utils.esm-bundler.js",
