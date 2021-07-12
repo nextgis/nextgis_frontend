@@ -32,7 +32,6 @@ export function objectDeepEqual<
   for (let i = 0; i < keysO.length; i++) {
     const oVal = o[keysO[i]];
     const pVal = p[keysP[i]];
-    console.log(oVal, pVal);
     if (!isEqual(oVal, pVal, o, p)) {
       return false;
     }
