@@ -1,7 +1,6 @@
 import GeoJSON from 'ol/format/GeoJSON';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
-import { transformExtent } from 'ol/proj';
 
 import { Paint } from '@nextgis/paint';
 import { defined, LngLatBoundsArray } from '@nextgis/utils';
@@ -10,7 +9,7 @@ import { PropertiesFilter } from '@nextgis/properties-filter';
 import { resolutionOptions } from '../utils/gerResolution';
 import { styleFunction, labelStyleFunction, getFeature } from '../utils/utils';
 
-import { convertMapClickEvent } from '../utils/convertMapClickEvent';
+import { transformExtent } from 'ol/proj';
 
 import type { Feature, GeoJsonObject } from 'geojson';
 import type MapBrowserPointerEvent from 'ol/MapBrowserEvent';
@@ -29,7 +28,7 @@ import type {
   ForEachFeatureAtPixelCallback,
   MouseEventType,
 } from '../OlMapAdapter';
-import type { FeatureLike } from 'ol/Feature';
+import { convertMapClickEvent } from '../utils/convertMapClickEvent';
 
 type Layer = Base;
 type Layers = LayerDefinition<Feature, Layer>;
@@ -69,6 +68,26 @@ export class GeoJsonAdapter
 
     this.layer = new VectorLayer({
       source: this.vectorSource,
+      style: (f) => {
+        const style = [];
+        const vectorStyle = styleFunction(f as OlFeature<any>, options.paint);
+        if (vectorStyle) {
+          style.push(vectorStyle);
+        }
+        const labelField = this.options.labelField;
+        if (labelField) {
+          const label = f.get(labelField);
+          const text = defined(label) ? String(label) : '';
+          if (text) {
+            const labelStyle = labelStyleFunction(options.type || 'polygon', {
+              // ratio: this.options.ratio,
+            });
+            labelStyle.getText().setText(text);
+            style.push(labelStyle);
+          }
+        }
+        return style;
+      },
       ...resolutionOptions(this.map, options),
     });
     const interactive = defined(options.interactive)
@@ -77,17 +96,17 @@ export class GeoJsonAdapter
     if (interactive) {
       this._addEventListener();
     }
-
     return this.layer;
   }
 
-  removeLayer(): void {
+  beforeRemove(): void {
     const _forEachFeatureAtPixel = this.map.get(
       '_forEachFeatureAtPixel',
     ) as ForEachFeatureAtPixelCallback[];
     for (let i = _forEachFeatureAtPixel.length; i--; ) {
       const cb = _forEachFeatureAtPixel[i];
       const index = this._forEachFeatureAtPixel.indexOf(cb);
+      console.log(index);
       if (index !== -1) {
         _forEachFeatureAtPixel.splice(i, 1);
       }
@@ -125,9 +144,6 @@ export class GeoJsonAdapter
       this.filter(this._filterFun);
     } else {
       this.vectorSource.addFeatures(features);
-      if (this.paint) {
-        this.setPaintEachLayer(this.paint);
-      }
     }
   }
 
@@ -210,35 +226,12 @@ export class GeoJsonAdapter
     }
   }
 
-  private getFeatureStyle(f: FeatureLike, paint: Paint) {
-    console.count();
-    const options = this.options;
-    const style = [];
-    const vectorStyle = styleFunction(f as OlFeature<any>, paint);
-    if (vectorStyle) {
-      style.push(vectorStyle);
-    }
-    const labelField = this.options.labelField;
-    if (labelField) {
-      const label = f.get(labelField);
-      const text = defined(label) ? String(label) : '';
-      if (text) {
-        const labelStyle = labelStyleFunction(options.type || 'polygon', {
-          // ratio: this.options.ratio,
-        });
-        labelStyle.getText().setText(text);
-        style.push(labelStyle);
-      }
-    }
-    return style;
-  }
-
   private setPaintEachLayer(paint: Paint) {
     if (this.layer) {
       const source = this.layer.getSource();
       const features = source.getFeatures();
       features.forEach((f) => {
-        const style = this.getFeatureStyle(f, paint);
+        const style = styleFunction(f, paint);
         if (style) {
           f.setStyle(style);
         }
