@@ -24,7 +24,7 @@ import type { Pixel } from 'ol/pixel';
 import type { ViewOptions } from 'ol/View';
 import type BaseEvent from 'ol/events/Event';
 import type Control from 'ol/control/Control';
-import type MapBrowserPointerEvent from 'ol/MapBrowserEvent';
+import type MapBrowserEvent from 'ol/MapBrowserEvent';
 import type { MapOptions as OlMapOptions } from 'ol/PluggableMap';
 import type {
   FitOptions,
@@ -39,6 +39,8 @@ import type {
 } from '@nextgis/webmap';
 
 export type MouseEventType = 'click' | 'hover';
+
+type MapBrowserPointerEvent = MapBrowserEvent<any>;
 
 type Layer = Base;
 interface PositionMem {
