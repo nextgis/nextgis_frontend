@@ -4,7 +4,7 @@ import type MapBrowserPointerEvent from 'ol/MapBrowserEvent';
 import { MapClickEvent } from '@nextgis/webmap';
 
 export function convertMapClickEvent(
-  evt: MapBrowserPointerEvent,
+  evt: MapBrowserPointerEvent<any>,
   displayProjection = 'EPSG:3857',
   lonlatProjection = 'EPSG:4326',
 ): MapClickEvent {

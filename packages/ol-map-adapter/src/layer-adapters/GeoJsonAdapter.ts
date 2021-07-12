@@ -12,7 +12,7 @@ import { styleFunction, labelStyleFunction, getFeature } from '../utils/utils';
 import { transformExtent } from 'ol/proj';
 
 import type { Feature, GeoJsonObject } from 'geojson';
-import type MapBrowserPointerEvent from 'ol/MapBrowserEvent';
+import type MapBrowserEvent from 'ol/MapBrowserEvent';
 import type { Pixel } from 'ol/pixel';
 import type Base from 'ol/layer/Base';
 import type Map from 'ol/Map';
@@ -30,13 +30,16 @@ import type {
 } from '../OlMapAdapter';
 import { convertMapClickEvent } from '../utils/convertMapClickEvent';
 
+type MapBrowserPointerEvent = MapBrowserEvent<any>;
 type Layer = Base;
 type Layers = LayerDefinition<Feature, Layer>;
+
+type VectorLayerType = VectorSource<any>;
 
 export class GeoJsonAdapter
   implements VectorLayerAdapter<Map, Layer, GeoJsonAdapterOptions>
 {
-  layer?: VectorLayer;
+  layer?: VectorLayer<VectorLayerType>;
   paint?: Paint;
   selectedPaint?: Paint;
   selected = false;
@@ -55,7 +58,7 @@ export class GeoJsonAdapter
 
   constructor(public map: Map, public options: GeoJsonAdapterOptions) {}
 
-  addLayer(options: GeoJsonAdapterOptions): VectorLayer {
+  addLayer(options: GeoJsonAdapterOptions): VectorLayer<VectorLayerType> {
     this.options = options;
     this.paint = options.paint;
 
