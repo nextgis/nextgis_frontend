@@ -11,7 +11,7 @@ import type { MainLayerAdapter, TileAdapterOptions } from '@nextgis/webmap';
 export class TileAdapter implements MainLayerAdapter {
   constructor(public map: Map, public options: TileAdapterOptions) {}
 
-  addLayer(options: TileAdapterOptions): TileLayer {
+  addLayer(options: TileAdapterOptions): TileLayer<XYZ> {
     const urls: string[] = [];
     const subdomains: string[] | undefined =
       typeof options.subdomains === 'string'

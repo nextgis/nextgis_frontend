@@ -14,9 +14,8 @@
     "@nextgis/properties-filter": "^1.2.0",
     "@nextgis/webmap": "^1.2.0",
     "@types/events": "^3.0.0",
-    "@types/ol": "^6.4.2",
     "events": "^3.3.0",
-    "ol": "~6.5.0"
+    "ol": "^6.6.0"
   },
   "devDependencies": {
     "@nextgis/build-tools": "^1.2.0"
