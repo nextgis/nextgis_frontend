@@ -63,9 +63,9 @@
               popup: true,
               popupOptions: {
                 createPopupContent: function (e) {
-                  var element = document.createElement('div');
                   // get vector layer item
                   return ngwMap.connector.getResourceParent(4249).then(function (item) {
+                    var element = document.createElement('div');
                     // link properties field names with layer attributes names
                     item.feature_layer.fields.forEach(function (x) {
                       if (x.grid_visibility) {
@@ -80,6 +80,7 @@
                           '<span></span>';
                       }
                     });
+                    return element;
                   });
                 },
               },
