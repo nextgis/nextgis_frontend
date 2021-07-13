@@ -5,6 +5,7 @@
  * Styles images and other assets are already in bundle, you don't need to include anything except one JS file!
  *
  * @packageDocumentation
+ * @module ngw-mapbox
  */
 import 'mapbox-gl/dist/mapbox-gl.css';
 
