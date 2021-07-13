@@ -47,6 +47,7 @@
  * ```
  *
  * @packageDocumentation
+ * @module ngw-kit
  */
 import { NgwKit } from './NgwKit';
 
