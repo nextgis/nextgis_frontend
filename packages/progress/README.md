@@ -17,7 +17,7 @@ Simply download and include with a script tag, `Progress` will be registered as 
 
 <script>
   var progress = new Progress();
-  TODO: add usage examples
+  // TODO: add usage examples
 </script>
 ```
 

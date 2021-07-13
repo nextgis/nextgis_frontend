@@ -1,3 +1,7 @@
+/**
+ * @module tree
+ */
+
 import { Tree } from './Tree';
 import { treeEvery, treeFilter, treeFind, treeSome } from './treeFilter';
 
