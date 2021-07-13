@@ -1,3 +1,7 @@
+/**
+ * @module mapboxgl-map-adapter
+ */
+
 import {
   MapboxglMapAdapter,
   MapboxglMapAdapterOptions,
