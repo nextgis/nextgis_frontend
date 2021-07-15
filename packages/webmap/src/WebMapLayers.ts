@@ -658,6 +658,7 @@ export class WebMapLayers<
     options?: FilterOptions,
   ): void {
     const layer = this.getLayer(layerDef);
+    if (!layer) return;
     const adapter = layer as VectorLayerAdapter;
     if (adapter.propertiesFilter) {
       adapter.propertiesFilter(filters, options);
