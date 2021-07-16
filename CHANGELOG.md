@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.2](https://github.com/nextgis/nextgisweb_frontend/compare/v1.2.1...v1.2.2) (2021-07-16)
+
+
+### Bug Fixes
+
+* **mapbox-map-adapter:** change osm adapter url ([9af5679](https://github.com/nextgis/nextgisweb_frontend/commit/9af56796fa35ad4ef635d747aaf90cf9a29481a9))
+* **ngw-connector:** disable request params list convert to object ([f67aeae](https://github.com/nextgis/nextgisweb_frontend/commit/f67aeae8aa35d8c6adbc1f8229d1e3bdc09f9acc))
+* **webmap:** add check for layer exist on properties filter ([dbcd588](https://github.com/nextgis/nextgisweb_frontend/commit/dbcd588cd29d66f8927f1c748f8aeec74a13d9e4))
+
+
+### Features
+
+* **ngw-kit:** handle Infinity in fetchNgwItems query limit param ([8a634d7](https://github.com/nextgis/nextgisweb_frontend/commit/8a634d7d8fe0e1ef926802f7eec36f8b097170fd))
+
+
+
+
+
 ## [1.2.1](https://github.com/nextgis/nextgisweb_frontend/compare/v1.2.0...v1.2.1) (2021-07-12)
 
 
