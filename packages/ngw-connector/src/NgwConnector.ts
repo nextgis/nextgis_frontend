@@ -1,15 +1,12 @@
+import { EventEmitter } from 'events';
 import CancelablePromise from '@nextgis/cancelable-promise';
 import { fixUrlStr } from '@nextgis/utils';
 import Cache from '@nextgis/cache';
-import { EventEmitter } from 'events';
-
-import { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
-import { ResourceItem, Resource } from './types/ResourceItem';
 
 import { loadData } from './utils/loadData';
 import { template } from './utils/template';
-import { ResourceNotFoundError } from './errors/ResourceNotFoundError';
 import { NgwError } from './errors/NgwError';
+import { ResourceNotFoundError } from './errors/ResourceNotFoundError';
 import { InsufficientPermissionsError } from './errors/InsufficientPermissionsError';
 import {
   addConnector,
@@ -37,6 +34,8 @@ import type {
   UserInfo,
   Params,
 } from './interfaces';
+import type { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
+import type { ResourceItem, Resource } from './types/ResourceItem';
 import { apiRequest } from './utils/apiRequest';
 import { removeEmpty } from './utils/removeEmpty';
 
