@@ -157,6 +157,15 @@ export class CancelablePromise<T = any> implements Promise<T> {
   static all<T>(values: (T | PromiseLike<T>)[]): CancelablePromise<T[]> {
     return new CancelablePromise((resolve, reject) => {
       Promise.all(values).then(resolve).catch(reject);
+    }).catch((er) => {
+      if (er instanceof this.CancelError) {
+        for (const v of values) {
+          if ('cancel' in v) {
+            (v as CancelablePromise).cancel();
+          }
+        }
+      }
+      throw er;
     });
   }
 
