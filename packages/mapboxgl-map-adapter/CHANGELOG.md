@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.2](https://github.com/nextgis/nextgis_frontend/compare/v1.2.1...v1.2.2) (2021-07-16)
+
+
+### Bug Fixes
+
+* **mapbox-map-adapter:** change osm adapter url ([9af5679](https://github.com/nextgis/nextgis_frontend/commit/9af56796fa35ad4ef635d747aaf90cf9a29481a9))
+
+
+
+
+
 ## [1.2.1](https://github.com/nextgis/nextgis_frontend/compare/v1.2.0...v1.2.1) (2021-07-12)
 
 **Note:** Version bump only for package @nextgis/mapboxgl-map-adapter
