@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.2](https://github.com/nextgis/nextgis_frontend/compare/v1.2.1...v1.2.2) (2021-07-16)
+
+
+### Bug Fixes
+
+* **webmap:** add check for layer exist on properties filter ([dbcd588](https://github.com/nextgis/nextgis_frontend/commit/dbcd588cd29d66f8927f1c748f8aeec74a13d9e4))
+
+
+
+
+
 ## [1.2.1](https://github.com/nextgis/nextgis_frontend/compare/v1.2.0...v1.2.1) (2021-07-12)
 
 **Note:** Version bump only for package @nextgis/webmap

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.2](https://github.com/nextgis/nextgis_frontend/compare/v1.2.1...v1.2.2) (2021-07-16)
+
+
+### Bug Fixes
+
+* **ngw-connector:** disable request params list convert to object ([f67aeae](https://github.com/nextgis/nextgis_frontend/commit/f67aeae8aa35d8c6adbc1f8229d1e3bdc09f9acc))
+
+
+
+
+
 ## [1.2.1](https://github.com/nextgis/nextgis_frontend/compare/v1.2.0...v1.2.1) (2021-07-12)
 
 
