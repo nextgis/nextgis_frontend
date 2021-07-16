@@ -160,9 +160,11 @@ export function fetchNgwLayerItemsRequest<
     paramList,
   } = options;
   if (limit) {
-    params.limit = limit;
+    if (limit !== Number.POSITIVE_INFINITY) {
+      params.limit = limit;
+    }
   } else {
-    // strict restriction on loading data from large layers
+    // Strict restriction on loading data from large layers
     params.limit = 7000;
   }
   if (offset) {
