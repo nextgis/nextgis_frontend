@@ -1,4 +1,4 @@
-import { Map } from 'mapbox-gl';
+import { Map } from 'maplibre-gl';
 import { MainLayerAdapter, AdapterOptions } from '@nextgis/webmap';
 import { TLayer } from '../MapboxglMapAdapter';
 

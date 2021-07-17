@@ -1,5 +1,5 @@
 import { MvtAdapterOptions } from '@nextgis/webmap';
-import { Layer } from 'mapbox-gl';
+import { Layer } from 'maplibre-gl';
 import { VectorAdapter } from './VectorAdapter';
 import { TLayer } from '../MapboxglMapAdapter';
 

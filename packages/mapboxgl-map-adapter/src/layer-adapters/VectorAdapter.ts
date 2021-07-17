@@ -21,7 +21,7 @@ import type {
   Layer,
   MapEventType,
   EventData,
-} from 'mapbox-gl';
+} from 'maplibre-gl';
 import type { Paint, IconPaint } from '@nextgis/paint';
 import type {
   VectorAdapterLayerType,
