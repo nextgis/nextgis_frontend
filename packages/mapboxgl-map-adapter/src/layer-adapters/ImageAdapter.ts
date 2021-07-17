@@ -1,5 +1,5 @@
 import { MainLayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
-import { Map } from 'mapbox-gl';
+import { Map } from 'maplibre-gl';
 import { TLayer } from '../MapboxglMapAdapter';
 import { BaseAdapter } from './BaseAdapter';
 

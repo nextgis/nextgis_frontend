@@ -1,4 +1,4 @@
-import { MapEventType, EventData, ResourceType } from 'mapbox-gl';
+import { MapEventType, EventData, ResourceType } from 'maplibre-gl';
 
 interface OnLayerClickLayer {
   _onLayerClick: (e: MapEventType['click'] & EventData) => any;
