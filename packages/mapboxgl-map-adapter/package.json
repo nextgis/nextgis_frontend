@@ -13,9 +13,8 @@
     "@nextgis/properties-filter": "^1.2.2",
     "@nextgis/webmap": "^1.2.2",
     "@types/events": "^3.0.0",
-    "@types/mapbox-gl": "^2.1.2",
     "events": "^3.3.0",
-    "mapbox-gl": "1.13.0"
+    "maplibre-gl": "^1.15.2"
   },
   "optionalDependencies": {
     "canvg": "^3.0.7"

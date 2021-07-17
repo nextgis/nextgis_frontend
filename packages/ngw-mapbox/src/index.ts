@@ -7,12 +7,12 @@
  * @packageDocumentation
  * @module ngw-mapbox
  */
-import 'mapbox-gl/dist/mapbox-gl.css';
+import 'maplibre-gl/dist/maplibre-gl.css';
 
 import { NgwMap, NgwMapOptions } from '@nextgis/ngw-map';
 import MapboxglMapAdapter from '@nextgis/mapboxgl-map-adapter';
 
-import type { Map } from 'mapbox-gl';
+import type { Map } from 'maplibre-gl';
 import type { MapboxglMapAdapterOptions } from '@nextgis/mapboxgl-map-adapter';
 import type { ResourceAdapter, NgwLayerOptions } from '@nextgis/ngw-kit';
 

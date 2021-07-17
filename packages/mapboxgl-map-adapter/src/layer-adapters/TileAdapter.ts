@@ -4,7 +4,7 @@ import {
   RasterAdapterOptions,
 } from '@nextgis/webmap';
 import { BaseAdapter } from './BaseAdapter';
-import { RasterSource, ResourceType, Layer, AnyLayer } from 'mapbox-gl';
+import { RasterSource, ResourceType, Layer, AnyLayer } from 'maplibre-gl';
 
 export class TileAdapter<O extends RasterAdapterOptions = TileAdapterOptions>
   extends BaseAdapter<O>

@@ -1,4 +1,4 @@
-// import 'mapbox-gl/dist/mapbox-gl.css';
+// import 'maplibre-gl/dist/maplibre-gl.css';
 
 // import { MapboxglMapAdapter } from '../../packages/mapboxgl-map-adapter/src/MapboxglMapAdapter';
 // import { webMapTests } from '../helpers/universalTestCases/webMapTests';

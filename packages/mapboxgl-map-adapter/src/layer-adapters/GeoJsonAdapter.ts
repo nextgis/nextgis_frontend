@@ -1,4 +1,9 @@
-import { Map, GeoJSONSource, GeoJSONSourceRaw, LngLatBounds } from 'mapbox-gl';
+import {
+  Map,
+  GeoJSONSource,
+  GeoJSONSourceRaw,
+  LngLatBounds,
+} from 'maplibre-gl';
 import {
   GeoJsonAdapterOptions,
   VectorAdapterLayerType,
