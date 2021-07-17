@@ -1,4 +1,4 @@
-import { NavigationControl } from 'mapbox-gl';
+import { NavigationControl } from 'maplibre-gl';
 
 export class CompassControl extends NavigationControl {
   constructor(options = {}) {

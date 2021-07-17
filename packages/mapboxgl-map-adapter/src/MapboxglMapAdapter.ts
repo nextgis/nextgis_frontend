@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events';
-import mapboxgl, { Map } from 'mapbox-gl';
+import mapboxgl, { Map } from 'maplibre-gl';
 
 import { debounce } from '@nextgis/utils';
 import { WmsAdapter } from './layer-adapters/WmsAdapter';
@@ -35,7 +35,7 @@ import type {
   MapboxOptions,
   RequestParameters,
   FitBoundsOptions,
-} from 'mapbox-gl';
+} from 'maplibre-gl';
 
 export type TLayer = string[];
 type TLayerAdapter = LayerAdapter<Map, TLayer>;

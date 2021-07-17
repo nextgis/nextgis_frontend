@@ -1,5 +1,5 @@
 import type { MapClickEvent } from '@nextgis/webmap';
-import type { EventData, MapEventType } from 'mapbox-gl';
+import type { EventData, MapEventType } from 'maplibre-gl';
 
 export function convertMapClickEvent(
   evt: MapEventType['click'] & EventData,
