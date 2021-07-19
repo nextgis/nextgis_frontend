@@ -23,6 +23,8 @@ export class BaselayerSelect extends Vue {
 
   items: VueSelectItem[] = [];
 
+  emptyValue = emptyValue;
+
   active: string | false = emptyValue;
 
   protected __updateItems?: () => Promise<void>;
@@ -33,7 +35,8 @@ export class BaselayerSelect extends Vue {
   }
 
   @Watch('active')
-  setVisibleLayers(active: string): void {
+  setVisibleLayers(active: string, old: string): void {
+    if (active === old) return;
     const activeLayer = this._layers.find((x) => x.id === active);
     if (this.webMap) {
       if (activeLayer) {
@@ -68,7 +71,9 @@ export class BaselayerSelect extends Vue {
       },
       on: {
         input: (event: any) => {
-          this.active = event;
+          if (this.active !== event) {
+            this.active = event;
+          }
         },
       },
       attrs: {
