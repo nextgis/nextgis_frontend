@@ -1,36 +1,37 @@
 import { EventEmitter } from 'events';
 
 import {
-  Viewer,
-  Ellipsoid,
-  Event,
-  Rectangle,
-  SceneMode,
-  Cartesian3,
-  Math as CesiumMath,
-  Cartographic,
-  GeoJsonDataSource,
-  WebMercatorProjection,
-  TerrainProvider,
   Color,
+  Event,
+  Viewer,
+  SceneMode,
+  Rectangle,
+  Ellipsoid,
+  Cartesian3,
+  Cartesian2,
+  Cartographic,
+  TerrainProvider,
+  GeoJsonDataSource,
+  Math as CesiumMath,
+  GridImageryProvider,
+  ScreenSpaceEventType,
+  WebMercatorProjection,
   viewerCesiumInspectorMixin,
   viewerCesium3DTilesInspectorMixin,
-  ScreenSpaceEventType,
-  Cartesian2,
 } from 'cesium';
 
 import {
+  FitOptions,
   MapControl,
   MapOptions,
   MapAdapter,
   LngLatArray,
   WebMapEvents,
+  MapClickEvent,
   ControlPosition,
   LngLatBoundsArray,
   CreateControlOptions,
   ButtonControlOptions,
-  FitOptions,
-  MapClickEvent,
 } from '@nextgis/webmap';
 import { Type } from '@nextgis/utils';
 import { PathPaint } from '@nextgis/paint';
@@ -41,10 +42,10 @@ import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 import { TerrainAdapter } from './layer-adapters/TerrainAdapter';
 import { Model3DAdapter } from './layer-adapters/Model3DAdapter';
 import { Tileset3DAdapter } from './layer-adapters/Tileset3DAdapter';
-import { getDefaultTerrain } from './utils/getDefaultTerrain';
 import { getCameraFocus } from './utils/getCameraFocus';
-import { whenSampleTerrainMostDetailed } from './utils/whenSampleTerrainMostDetailed';
+import { getDefaultTerrain } from './utils/getDefaultTerrain';
 import { cartesian3ToLngLat } from './utils/cartesian3ToLngLat';
+import { whenSampleTerrainMostDetailed } from './utils/whenSampleTerrainMostDetailed';
 import { CesiumAdapterMapClickEvent, CesiumMapClickEvent } from './interfaces';
 import { MeasureControl } from './controls/MeasureControl';
 
@@ -108,6 +109,10 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
       //   Camera.DEFAULT_VIEW_FACTOR = 0;
       // }
 
+      // This layer will be removed immediately.
+      // Needed to avoid BING api loading on start
+      const defaultImageryProvider = new GridImageryProvider({});
+
       const viewer = new Viewer(this.options.target, {
         animation: false,
         baseLayerPicker: false,
@@ -127,7 +132,7 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
         sceneMode: SceneMode.SCENE3D,
         // terrainProvider: createWorldTerrain()
         terrainProvider: ellipsoidProvider,
-        imageryProvider: undefined,
+        imageryProvider: defaultImageryProvider,
         // mapProjection: new Cesium.WebMercatorProjection()
         // contextOptions: { requestWebgl2: true }
       });
