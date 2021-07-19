@@ -63,6 +63,7 @@ export * from './utils/getCompanyLogo';
 export * from './utils/parseDateFromNgw';
 export * from './utils/featureLayerUtils';
 export * from './utils/fetchNgwLayerItem';
+export * from './utils/createPopupContent';
 export * from './utils/fetchNgwLayerItems';
 export * from './utils/fetchNgwLayerFeature';
 export * from './utils/uploadFeatureAttachment';
