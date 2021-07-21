@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.3](https://github.com/nextgis/nextgis_frontend/compare/v1.2.2...v1.2.3) (2021-07-21)
+
+
+### Bug Fixes
+
+* **cancelable-promise:** handle error for CancelablePromise.all ([0a47b11](https://github.com/nextgis/nextgis_frontend/commit/0a47b11f11fbb4b6bac1fcba22fa7a9573b4969f))
+
+
+
+
+
 ## [1.2.2](https://github.com/nextgis/nextgis_frontend/compare/v1.2.1...v1.2.2) (2021-07-16)
 
 **Note:** Version bump only for package @nextgis/cancelable-promise
