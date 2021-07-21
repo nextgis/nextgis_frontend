@@ -230,6 +230,7 @@ export abstract class VectorAdapter<
         this.map._onMapClickLayers.splice(index, 1);
       }
     }
+    this._removeAllPopup();
     this._removeEventListeners();
     this.$onLayerMouseLeave = undefined;
     this.$onLayerMouseMove = undefined;
