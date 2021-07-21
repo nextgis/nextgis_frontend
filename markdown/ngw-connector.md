@@ -10,6 +10,8 @@ A lightweight HTTP client optimized for use with [NextGIS Web](http://docs.nextg
 
 Make sure CORS is registered in the [NextGIS Web settings](https://docs.nextgis.com/docs_ngcom/source/CORS.html) to be able to send requests.
 
+ ngw-connector
+
 ## Classes
 
 |  Class | Description |

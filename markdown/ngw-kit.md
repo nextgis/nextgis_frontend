@@ -58,6 +58,7 @@ getNgwLayerItems({
 }).then((items) => { ... });
 
 ```
+ ngw-kit
 
 ## Classes
 

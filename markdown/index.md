@@ -9,12 +9,12 @@
 |  Package | Description |
 |  --- | --- |
 |  [@nextgis/area](./area.md) | Dependencies free QGIS ellipsoidal area calculation reproduced in JavaScript. |
-|  [@nextgis/cache](./cache.md) | Caching for asynchronous functions |
-|  [@nextgis/cancelable-promise](./cancelable-promise.md) | A promise you can stop |
+|  [@nextgis/cache](./cache.md) | Caching for asynchronous functions cache |
+|  [@nextgis/cancelable-promise](./cancelable-promise.md) | A promise you can stop cancelable-promise |
 |  [@nextgis/control-container](./control-container.md) |  |
 |  [@nextgis/dialog](./dialog.md) |  |
 |  [@nextgis/dom](./dom.md) |  |
-|  [@nextgis/geocoder](./geocoder.md) | Modern geocoder on async generators. May use different data providers. |
+|  [@nextgis/geocoder](./geocoder.md) | Modern geocoder on async generators. May use different data providers. geocoder |
 |  [@nextgis/icons](./icons.md) |  |
 |  [@nextgis/item](./item.md) |  |
 |  [@nextgis/leaflet-map-adapter](./leaflet-map-adapter.md) |  |
