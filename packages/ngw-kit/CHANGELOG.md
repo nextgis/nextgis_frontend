@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.3](https://github.com/nextgis/nextgis_frontend/compare/v1.2.2...v1.2.3) (2021-07-21)
+
+
+### Features
+
+* **ngw-kit:** export createPopupContent util ([a7f00dc](https://github.com/nextgis/nextgis_frontend/commit/a7f00dcffbf21d5516fc27a3e704c85785fc07c0))
+
+
+
+
+
 ## [1.2.2](https://github.com/nextgis/nextgis_frontend/compare/v1.2.1...v1.2.2) (2021-07-16)
 
 

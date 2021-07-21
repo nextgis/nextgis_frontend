@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.3](https://github.com/nextgis/nextgis_frontend/compare/v1.2.2...v1.2.3) (2021-07-21)
+
+
+### Bug Fixes
+
+* **cesium:** empty default imagery provider ([f17c211](https://github.com/nextgis/nextgis_frontend/commit/f17c2113e24a2af46bd6283eb64eb10b5b987ac9))
+
+
+
+
+
 ## [1.2.2](https://github.com/nextgis/nextgis_frontend/compare/v1.2.1...v1.2.2) (2021-07-16)
 
 **Note:** Version bump only for package @nextgis/cesium-map-adapter
