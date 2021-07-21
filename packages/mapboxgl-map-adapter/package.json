@@ -13,8 +13,10 @@
     "@nextgis/properties-filter": "^1.2.2",
     "@nextgis/webmap": "^1.2.2",
     "@types/events": "^3.0.0",
+    "@types/polylabel": "^1.0.5",
     "events": "^3.3.0",
-    "maplibre-gl": "^1.15.2"
+    "maplibre-gl": "^1.15.2",
+    "polylabel": "^1.1.0"
   },
   "optionalDependencies": {
     "canvg": "^3.0.7"

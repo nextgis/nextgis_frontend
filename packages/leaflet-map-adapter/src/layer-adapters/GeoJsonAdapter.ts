@@ -267,18 +267,17 @@ export class GeoJsonAdapter
   ) {
     // @ts-ignore
     const feature = layer.feature;
-    const { minWidth, autoPan } = { minWidth: 300, ...options };
-    const content =
-      options && options.createPopupContent
-        ? await options.createPopupContent({
-            layer,
-            feature,
-            target: this,
-            type,
-          })
-        : '';
+    const { minWidth, autoPan, maxWidth } = { minWidth: 300, ...options };
+    const content = options.createPopupContent
+      ? await options.createPopupContent({
+          layer,
+          feature,
+          target: this,
+          type,
+        })
+      : options.popupContent;
     if (content) {
-      const popup = layer.bindPopup(content, { minWidth, autoPan });
+      const popup = layer.bindPopup(content, { minWidth, autoPan, maxWidth });
       setTimeout(() => {
         popup.openPopup();
       }, 0);

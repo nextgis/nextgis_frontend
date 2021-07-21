@@ -20,8 +20,8 @@
     </style>
 
     <!-- <script src="https://unpkg.com/@nextgis/ngw-leaflet"></script> -->
-    <!-- <script src="../../../packages/ngw-leaflet/lib/ngw-leaflet.global.js"></script> -->
-    <script src="../../../packages/ngw-mapbox/lib/ngw-mapbox.global.js"></script>
+    <script src="../../../packages/ngw-leaflet/lib/ngw-leaflet.global.js"></script>
+    <!-- <script src="../../../packages/ngw-mapbox/lib/ngw-mapbox.global.js"></script> -->
   </head>
 
   <body>
@@ -31,7 +31,7 @@
       var ngwMap = new NgwMap({
         baseUrl: 'https://demo.nextgis.com',
         target: 'map',
-        qmsId: 448,
+        osm: true,
       });
 
       ngwMap.addNgwLayer({
