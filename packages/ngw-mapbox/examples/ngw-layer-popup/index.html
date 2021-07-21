@@ -21,6 +21,7 @@
 
     <!-- <script src="https://unpkg.com/@nextgis/ngw-mapbox"></script> -->
     <script src="../../lib/ngw-mapbox.global.js"></script>
+    <!-- <script src="../../lib/ngw-mapbox.global.js"></script> -->
   </head>
 
   <body>
@@ -28,9 +29,9 @@
 
     <script>
       var ngwMap = new NgwMap({
-        baseUrl: "https://demo.nextgis.com",
-        target: "map",
-        qmsId: 448,
+        baseUrl: 'https://demo.nextgis.com',
+        target: 'map',
+        osm: true,
       });
 
       ngwMap.addNgwLayer({
@@ -47,7 +48,7 @@
         if (getFeaturePromise) {
           getFeaturePromise.cancel();
         }
-        ngwMap.removeLayer("highlight");
+        ngwMap.removeLayer('highlight');
       };
 
       var drawLayer = function (identify) {
@@ -56,44 +57,39 @@
           .getIdentifyGeoJson(identify)
           .then(function (geojson) {
             getFeaturePromise = null;
-            ngwMap.addLayer("GEOJSON", {
-              id: "highlight",
+            ngwMap.addLayer('GEOJSON', {
+              id: 'highlight',
               data: geojson,
-              paint: { color: "green", stroke: true, fillOpacity: "0.8" },
+              paint: { color: 'green', stroke: true, fillOpacity: '0.8' },
               popup: true,
               popupOptions: {
                 createPopupContent: function (e) {
-                  var element = document.createElement("div");
-                  // get style resource item
-                  ngwMap.connector.getResource(4249).then(function (style) {
-                    // get vector layer item
-                    ngwMap.connector
-                      .getResource(style.resource.parent.id)
-                      .then(function (item) {
-                        // link properties field names with layer attributes names
-                        item.feature_layer.fields.forEach(function (x) {
-                          if (x.grid_visibility) {
-                            var value = e.feature.properties[x.keyname];
-                            var propElem = document.createElement("div");
-                            element.appendChild(propElem);
-                            propElem.innerHTML =
-                              "<span>" +
-                              x.display_name +
-                              "</span>:" +
-                              value +
-                              "<span></span>";
-                          }
-                        });
-                      });
+                  // get vector layer item
+                  return ngwMap.connector.getResourceParent(4249).then(function (item) {
+                    var element = document.createElement('div');
+                    // link properties field names with layer attributes names
+                    item.feature_layer.fields.forEach(function (x) {
+                      if (x.grid_visibility) {
+                        var value = e.feature.properties[x.keyname];
+                        var propElem = document.createElement('div');
+                        element.appendChild(propElem);
+                        propElem.innerHTML =
+                          '<span>' +
+                          x.display_name +
+                          '</span>:' +
+                          value +
+                          '<span></span>';
+                      }
+                    });
+                    return element;
                   });
-                  return element;
                 },
               },
             });
           });
       };
 
-      ngwMap.emitter.on("ngw:select", drawLayer);
+      ngwMap.emitter.on('ngw:select', drawLayer);
     </script>
   </body>
 </html>

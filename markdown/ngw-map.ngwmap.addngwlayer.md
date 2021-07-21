@@ -4,7 +4,7 @@
 
 ## NgwMap.addNgwLayer() method
 
-Add any (style, vector, webmap) NGW layer by resource id.
+Add any (style, vector, webmap) NGW layer by resource definition.
 
 <b>Signature:</b>
 
@@ -27,10 +27,10 @@ Promise&lt;[ResourceAdapter](./ngw-kit.resourceadapter.md) \| undefined&gt;
 
 ```javascript
 // add raster layer resourceId is the style of 4004 layer
-ngwMap.addNgwLayer({ resourceId: 4005 });
+ngwMap.addNgwLayer({ resource: 4005 });
 // add vector data from layer GEOJSON source
 ngwMap.addNgwLayer({
-  resourceId: 4038,
+  resource: 4038,
   adapter: 'GEOJSON',
   adapterOptions: { paint: { color: 'red' } }
 });

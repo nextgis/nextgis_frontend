@@ -168,6 +168,7 @@ export interface CreatePopupContentProps extends LayerDefinition {
  */
 export interface PopupOptions {
   minWidth?: number;
+  maxWidth?: number;
   autoPan?: boolean;
   popupContent?: string | HTMLElement;
   fromProperties?: boolean;

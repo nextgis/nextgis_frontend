@@ -6,6 +6,8 @@
 
 Caching for asynchronous functions
 
+ cache
+
 ## Classes
 
 |  Class | Description |

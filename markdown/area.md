@@ -21,6 +21,7 @@ const area2 = calculateArea([
 ]);
 
 ```
+ area
 
 ## Functions
 

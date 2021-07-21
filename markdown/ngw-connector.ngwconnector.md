@@ -31,7 +31,7 @@ export declare class NgwConnector
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
-|  [apiRequest(name, params, requestOptions)](./ngw-connector.ngwconnector.apirequest.md) |  | Send request to NGW api router. |
+|  [apiRequest(name, params\_, requestOptions)](./ngw-connector.ngwconnector.apirequest.md) |  | Send request to NGW api router. |
 |  [connect()](./ngw-connector.ngwconnector.connect.md) |  | Establishing a connection with NextGIS Web to fulfill all other requests. |
 |  [create(options)](./ngw-connector.ngwconnector.create.md) | <code>static</code> |  |
 |  [delete(name, options, params)](./ngw-connector.ngwconnector.delete.md) |  | Shortcut method for send DELETE request to NGW. |
