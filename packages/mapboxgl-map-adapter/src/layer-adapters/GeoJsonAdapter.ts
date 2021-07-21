@@ -83,14 +83,21 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     }
     if (data && type) {
       const features = this.filterGeometries(data, type);
-      features.forEach((x) => {
+      for (const x of features) {
         // to avoid id = 0 is false
         const fid = '_' + ID++;
         x._featureFilterId = fid;
         if (x.properties) {
           x.properties[this.featureIdName] = fid;
         }
-      });
+        if (this.options.popup) {
+          this._openPopup({
+            feature: x,
+            type: 'api',
+            options: this.options.popupOptions,
+          });
+        }
+      }
       if (this._filterFun) {
         this._filter(this._filterFun);
       }
@@ -191,6 +198,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
       this.selected = false;
       this._unselectFeature();
     }
+    this._removeAllPopup();
   }
 
   getExtent(): LngLatBoundsArray {
