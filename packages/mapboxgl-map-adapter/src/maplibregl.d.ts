@@ -17,7 +17,7 @@ declare namespace maplibregl {
       | undefined)[];
     _onMapClickLayers: OnLayerClickLayer[];
   }
-  export interface VectorSource {
+  export interface GeoJSONSource {
     _data: { features: GeoJSON.Feature[] };
   }
 }

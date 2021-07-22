@@ -17,6 +17,8 @@ import { NgwLayerOptions, GetClassAdapterOptions } from '../interfaces';
 import { fetchNgwLayerFeatureCollection } from '../utils/fetchNgwLayerFeatureCollection';
 import { fetchNgwResourceExtent } from '../utils/fetchNgwExtent';
 
+import type { FeatureCollection } from 'geojson';
+
 interface FilterArgs {
   filters?: PropertiesFilter;
   options?: FilterOptions;
@@ -35,8 +37,8 @@ export async function createGeoJsonAdapter(
     (opt.Adapter as Type<VectorLayerAdapter>) ||
     (webMap.mapAdapter.layerAdapters.GEOJSON as Type<VectorLayerAdapter>);
 
-  let _dataPromise: CancelablePromise<any> | undefined;
-  const _fullDataLoad = false;
+  let _dataPromise: CancelablePromise<FeatureCollection> | undefined;
+  let _fullDataLoad = false;
   let _lastFilterArgs: FilterArgs | undefined;
 
   const resourceId = await resourceIdFromLayerOptions(options, connector);
@@ -165,6 +167,7 @@ export async function createGeoJsonAdapter(
         .then((resp) => {
           if (resp) {
             this._count = resp.total_count;
+            return this._count;
           }
         });
     }
@@ -184,6 +187,8 @@ export async function createGeoJsonAdapter(
           filterArgs.filters,
           filterArgs.options,
         );
+        const count = await this.getCount();
+        _fullDataLoad = count === data.features.length;
         await webMap.setLayerData(this, data);
         this.emitter.emit('updated');
       } catch (er) {
