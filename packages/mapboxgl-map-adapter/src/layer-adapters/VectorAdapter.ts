@@ -130,8 +130,7 @@ export abstract class VectorAdapter<
     this._selectionName = this._layerId + '-highlighted';
     this.$onLayerMouseLeave = this._onLayerMouseLeave.bind(this);
     this.$onLayerMouseMove = this._onLayerMouseMove.bind(this);
-    // @ts-ignore
-    this.map._onMapClickLayers.push(this);
+    map._onMapClickLayers.push(this);
   }
 
   async addLayer(options: O): Promise<TLayer> {
@@ -223,11 +222,9 @@ export abstract class VectorAdapter<
           map.removeLayer(layerId);
         });
       }
-      // @ts-ignore
       const index = map._onMapClickLayers.indexOf(this);
       if (index !== -1) {
-        // @ts-ignore
-        this.map._onMapClickLayers.splice(index, 1);
+        map._onMapClickLayers.splice(index, 1);
       }
     }
     this._removeAllPopup();
@@ -429,7 +426,8 @@ export abstract class VectorAdapter<
         };
       } else {
         const mapboxType = mapboxTypeAlias[type];
-        for (const p in _paint) {
+        let p: keyof typeof _paint;
+        for (p in _paint) {
           const allowed = allowedByType[type];
           if (allowed) {
             const allowedType = allowed.find((x) => {
@@ -444,7 +442,7 @@ export abstract class VectorAdapter<
               const paramName = Array.isArray(allowedType)
                 ? allowedType[1]
                 : allowedType;
-              // @ts-ignore
+
               mapboxPaint[mapboxType + '-' + paramName] = _paint[p];
             }
           }
