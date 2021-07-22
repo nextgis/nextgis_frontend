@@ -19,6 +19,7 @@
       }
     </style>
 
+    <!-- <script src="../../lib/ngw-leaflet.global.js"></script> -->
     <script src="../../lib/ngw-leaflet.global.js"></script>
   </head>
 
@@ -28,9 +29,17 @@
       NgwMap.create({
         baseUrl: 'https://demo.nextgis.com',
         target: 'map',
-        resources: [{ resource: 5248, fit: true, labelField: 'NAME', labelOnHover: false }],
+        resources: [
+          {
+            resource: 5248,
+            adapterOptions: {
+              fit: true,
+              labelField: 'NAME',
+            },
+          },
+        ],
         osm: true,
-      })
+      });
     </script>
   </body>
 </html>
