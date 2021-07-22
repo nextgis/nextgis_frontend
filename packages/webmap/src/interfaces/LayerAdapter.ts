@@ -286,7 +286,7 @@ export interface VectorAdapterOptions<
    * @defaultValue 50
    */
   clusterRadius?: number;
-
+  labelOnHover?: boolean;
   labelField?: string;
   label?: (e: LayerDefinition<F, L>) => void | string;
 
