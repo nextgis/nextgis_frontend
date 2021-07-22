@@ -155,14 +155,14 @@ export abstract class VectorAdapter<
           const geomFilter =
             types.length > 1 ? ['==', '$type', geomType] : undefined;
 
-          await this._addLayer(layer, type, [
+          await this._addGeomLayer(layer, type, [
             geomFilter,
             this._getNativeFilter(),
           ]);
           this.layer.push(layer);
           if (options.selectedPaint) {
             const selectionLayer = this._getSelectionLayerNameFromType(t);
-            await this._addLayer(
+            await this._addGeomLayer(
               selectionLayer,
               type,
               [geomFilter, ['in', this.featureIdName, '']],
@@ -305,21 +305,18 @@ export abstract class VectorAdapter<
     ) as PropertyFilter;
   }
 
-  protected async _addLayer(
+  protected async _addGeomLayer(
     name: string,
     type: VectorAdapterLayerType,
     filter?: any[],
     layout?: AnyLayout,
   ): Promise<void> {
-    const { minZoom, maxZoom } = this.options;
     let mType: MapboxLayerType | undefined;
-
     if (this.options.paint) {
       if ('type' in this.options.paint && this.options.paint.type === 'icon') {
         mType = 'symbol';
       }
     }
-
     if (mType === undefined) {
       mType = mapboxTypeAlias[type];
     }
@@ -328,6 +325,7 @@ export abstract class VectorAdapter<
       id: name,
       type: mType,
       source: this._sourceId,
+      filter,
       layout: {
         visibility: 'none',
         ...layout,
@@ -337,19 +335,25 @@ export abstract class VectorAdapter<
     if (this.options.nativeOptions) {
       Object.assign(layerOpt, this.options.nativeOptions);
     }
+    this._addLayer(layerOpt);
+  }
+
+  protected _addLayer(layerOpt: Layer): void {
+    const { filter, ...opt } = layerOpt;
+    const { minZoom, maxZoom } = this.options;
     if (minZoom) {
-      layerOpt.minzoom = minZoom - 1;
+      opt.minzoom = minZoom - 1;
     }
     if (maxZoom) {
-      layerOpt.maxzoom = maxZoom - 1;
+      opt.maxzoom = maxZoom - 1;
     }
     const map = this.map;
     if (map) {
-      map.addLayer(layerOpt as AnyLayer);
+      map.addLayer(opt as AnyLayer);
 
       const filters = ['all', ...(filter || [])].filter((x) => x);
       if (filters.length > 1) {
-        map.setFilter(layerOpt.id, filters);
+        map.setFilter(opt.id, filters);
       }
     }
   }
@@ -401,7 +405,7 @@ export abstract class VectorAdapter<
     }
   }
 
-  protected _getLayerNameFromType(type: VectorAdapterLayerType): string {
+  protected _getLayerNameFromType(type: string): string {
     return type + '-' + this._layerId;
   }
 
