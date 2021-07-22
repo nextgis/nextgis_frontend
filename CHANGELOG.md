@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.5](https://github.com/nextgis/nextgisweb_frontend/compare/v1.2.4...v1.2.5) (2021-07-22)
+
+
+### Bug Fixes
+
+* **mapbox-map-adapter:** show label not only for filtered layer ([8caa4c3](https://github.com/nextgis/nextgisweb_frontend/commit/8caa4c399a2a2e8cf38c172c4208c80987da1c1c))
+
+
+
+
+
 ## [1.2.4](https://github.com/nextgis/nextgisweb_frontend/compare/v1.2.3...v1.2.4) (2021-07-22)
 
 
