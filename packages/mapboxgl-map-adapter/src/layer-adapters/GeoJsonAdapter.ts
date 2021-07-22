@@ -528,8 +528,8 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
         }
         style['icon-image'] = `{_icon-image-${name}}`;
       } else {
-        for (const p in _paint) {
-          // @ts-ignore
+        let p: keyof typeof _paint;
+        for (p in _paint) {
           const toSave = _paint[p];
           if (feature.properties) {
             feature.properties[`_paint_${p}_${name}`] = toSave;
@@ -575,10 +575,11 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     const field = this.options.labelField;
     if (field) {
       for (const f of features) {
-        if (
-          defined(f._featureFilterId) &&
-          filtered.indexOf(f._featureFilterId) !== -1
-        ) {
+        const inFilter = filtered.length
+          ? defined(f._featureFilterId) &&
+            filtered.indexOf(f._featureFilterId) !== -1
+          : true;
+        if (inFilter) {
           const text = f.properties && f.properties[field];
           if (text) {
             const popup = new Popup(popupOpt);
