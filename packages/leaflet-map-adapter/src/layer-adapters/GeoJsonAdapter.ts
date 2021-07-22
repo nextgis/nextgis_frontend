@@ -607,7 +607,7 @@ export class GeoJsonAdapter
   private _addMapMoveListener() {
     const map = this.map;
     if (map) {
-      if (this.options.labelField) {
+      if (this.options.labelField && !this.options.labelOnHover) {
         map.on('zoomend', this.$updateTooltip);
         map.on('moveend', this.$updateTooltip);
       }

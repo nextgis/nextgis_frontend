@@ -20,6 +20,8 @@
     </style>
 
     <script src="../../../packages/ngw-leaflet/lib/ngw-leaflet.global.js"></script>
+    <!-- <script src="../../../packages/ngw-ol/lib/ngw-ol.global.js"></script> -->
+    <!-- <script src="../../../packages/ngw-mapbox/lib/ngw-mapbox.global.js"></script> -->
   </head>
 
   <body>
@@ -31,7 +33,10 @@
         // bounds: [43.5, 45.5, 45.5, 35],
         osm: true,
       }).then(function (ngwMap) {
-        ngwMap.addNgwLayer({ resource: 5248, fit: true, labelField: 'NAME', labelOnHover: false });
+        ngwMap.addNgwLayer({ id: '1a', resource: 5248, fit: true, labelField: 'NAME', labelOnHover: false }).then(() => {
+          console.log(1234);
+          ngwMap.propertiesFilter('1a', [['OSM_ID', 'eq', 365283]])
+        })
       });
     </script>
   </body>
