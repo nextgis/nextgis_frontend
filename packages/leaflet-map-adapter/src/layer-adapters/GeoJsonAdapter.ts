@@ -6,7 +6,7 @@ import {
   DivIcon,
   Marker,
 } from 'leaflet';
-import { defined } from '@nextgis/utils';
+import { debounce, defined } from '@nextgis/utils';
 import { isPaintCallback, isPaint } from '@nextgis/paint';
 import { BaseAdapter } from './BaseAdapter';
 import {
@@ -45,7 +45,7 @@ import type {
   PopupOptions,
 } from '@nextgis/webmap';
 
-type LayerMem = LayerDefinition<Feature>;
+type LayerMem = LayerDefinition<Feature, Layer>;
 
 export class GeoJsonAdapter
   extends BaseAdapter<GeoJsonAdapterOptions>
@@ -63,24 +63,35 @@ export class GeoJsonAdapter
   private _filteredLayers: LayerMem[] = [];
   private _filterFun?: DataLayerFilter<Feature>;
 
+  private $updateTooltip = debounce(() => {
+    setTimeout(() => {
+      this.updateTooltip();
+    });
+  }, 100);
+
   constructor(map: L.Map, options: GeoJsonAdapterOptions) {
     super(map, options);
     this.layer = new FeatureGroup([], { pane: this.pane });
   }
 
   addLayer(options: GeoJsonAdapterOptions): FeatureGroup<any> | undefined {
-    if (options) {
-      this.options = options;
-      this.paint = options.paint;
+    this.options = options;
+    this.paint = options.paint;
 
-      this.selectedPaint = options.selectedPaint;
-      options.paint = this.paint;
+    this.selectedPaint = options.selectedPaint;
+    options.paint = this.paint;
 
-      if (options.data) {
-        this.addData(options.data);
-      }
-      return this.layer;
+    if (options.data) {
+      this.addData(options.data);
     }
+
+    this._addMapMoveListener();
+
+    return this.layer;
+  }
+
+  removeLayer(): void {
+    this._removeMapMoveListener();
   }
 
   select(findFeatureFun?: DataLayerFilter): void {
@@ -152,14 +163,14 @@ export class GeoJsonAdapter
     this.filter();
   }
 
-  getLayers(): LayerDefinition<Feature, LayerMem>[] {
+  getLayers(): LayerMem[] {
     return this._layers.map(({ layer, feature }) => {
-      // @ts-ignore
-      const visible = layer && layer._map;
+      const visible = layer && !!(layer as any)._map;
       return {
         feature,
         layer,
         visible,
+        target: this,
       };
     });
   }
@@ -168,10 +179,15 @@ export class GeoJsonAdapter
     if (cb) {
       for (let fry = this._layers.length; fry--; ) {
         const layerMem = this._layers[fry];
-        const exist = layerMem.feature && cb(layerMem.feature);
-        if (exist) {
-          this.layer.removeLayer(layerMem.layer);
-          this._layers.splice(fry, 1);
+        if (layerMem) {
+          const { feature, layer } = layerMem;
+          if (feature && layer) {
+            const exist = cb(feature);
+            if (exist) {
+              this.layer.removeLayer(layer);
+              this._layers.splice(fry, 1);
+            }
+          }
         }
       }
     } else {
@@ -217,7 +233,7 @@ export class GeoJsonAdapter
     if (findFeatureFun) {
       const feature = this._layers.filter(findFeatureFun);
       feature.forEach((x) => {
-        this._openPopup(x.layer, options, 'api');
+        this._openPopup(x, options, 'api');
       });
     }
   }
@@ -228,7 +244,7 @@ export class GeoJsonAdapter
       : this._layers;
 
     featuresToClosePopup.forEach((x) => {
-      this._closePopup(x.layer);
+      this._closePopup(x);
     });
   }
 
@@ -236,7 +252,9 @@ export class GeoJsonAdapter
     if (layerDef) {
       this._updateTooltip(layerDef);
     } else {
-      this.getLayers().forEach((x) => this._updateTooltip(x));
+      this.getLayers().forEach((x) =>
+        this._updateTooltip({ feature: x.feature, layer: x.layer }),
+      );
     }
   }
 
@@ -249,34 +267,34 @@ export class GeoJsonAdapter
     }
   }
 
-  private _updateTooltip(layerDef: LayerDefinition) {
+  private _updateTooltip(layerDef: LayerMem) {
     const { feature, layer } = layerDef;
-    if (this.options.labelField && feature && feature.properties) {
+    if (feature && layer && feature.properties && this.options.labelField) {
       layer.unbindTooltip();
       const message = feature.properties[this.options.labelField];
       if (message !== undefined) {
-        layer.bindTooltip(String(message), { permanent: true }).openTooltip();
+        const permanent = !this.options.labelOnHover;
+        layer.bindTooltip(String(message), { permanent });
       }
     }
   }
 
   private async _openPopup(
-    layer: Layer,
+    mem: LayerMem,
     options: PopupOptions = {},
     type: OnLayerSelectType,
   ) {
-    // @ts-ignore
-    const feature = layer.feature;
+    const { feature, layer } = mem;
     const { minWidth, autoPan, maxWidth } = { minWidth: 300, ...options };
     const content = options.createPopupContent
       ? await options.createPopupContent({
-          layer,
+          layer: mem,
           feature,
           target: this,
           type,
         })
       : options.popupContent;
-    if (content) {
+    if (content && layer) {
       const popup = layer.bindPopup(content, { minWidth, autoPan, maxWidth });
       setTimeout(() => {
         popup.openPopup();
@@ -284,8 +302,10 @@ export class GeoJsonAdapter
     }
   }
 
-  private _closePopup(layer: Layer) {
-    layer.closePopup().unbindPopup();
+  private _closePopup(layerMem: LayerMem) {
+    if (layerMem.layer) {
+      layerMem.layer.closePopup().unbindPopup();
+    }
   }
 
   private setPaintEachLayer(paint: Paint) {
@@ -423,8 +443,9 @@ export class GeoJsonAdapter
         }
         this._handleMouseEvents(layer);
         if (popup) {
-          this._openPopup(layer, popupOptions, 'api');
+          this._openPopup({ layer }, popupOptions, 'api');
         }
+
         this._updateTooltip({ layer, feature });
       }
     };
@@ -581,5 +602,20 @@ export class GeoJsonAdapter
       paint.stroke = true;
     }
     return geoJsonOptions;
+  }
+
+  private _addMapMoveListener() {
+    const map = this.map;
+    if (map) {
+      if (this.options.labelField) {
+        map.on('zoomend', this.$updateTooltip);
+        map.on('moveend', this.$updateTooltip);
+      }
+    }
+  }
+
+  private _removeMapMoveListener() {
+    this.map.off('zoomend', this.$updateTooltip);
+    this.map.off('moveend', this.$updateTooltip);
   }
 }
