@@ -1,11 +1,13 @@
-import { MapEventType, EventData, ResourceType } from 'maplibre-gl';
+/// <reference types="geojson" />
 
 interface OnLayerClickLayer {
-  _onLayerClick: (e: MapEventType['click'] & EventData) => any;
+  _onLayerClick: (
+    e: maplibregl.MapEventType['click'] & maplibregl.EventData,
+  ) => any;
   options: { order?: number };
 }
 
-declare namespace mapboxgl {
+declare namespace maplibregl {
   export interface Map {
     transformRequests: ((
       url: string,
@@ -14,5 +16,8 @@ declare namespace mapboxgl {
       | { url: string; headers: Record<string, any> | undefined }
       | undefined)[];
     _onMapClickLayers: OnLayerClickLayer[];
+  }
+  export interface VectorSource {
+    _data: { features: GeoJSON.Feature[] };
   }
 }

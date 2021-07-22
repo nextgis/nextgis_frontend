@@ -7,7 +7,9 @@ export class ImageAdapter
   extends BaseAdapter<ImageAdapterOptions>
   implements MainLayerAdapter<Map, TLayer, ImageAdapterOptions>
 {
-  addLayer(options: ImageAdapterOptions): string[] | undefined {
+  addLayer(
+    options: ImageAdapterOptions & { before?: string },
+  ): string[] | undefined {
     if (this.options) {
       options = { ...this.options, ...options };
     }
@@ -49,7 +51,6 @@ export class ImageAdapter
           },
           paint: {},
         },
-        // @ts-ignore
         options.before,
       );
       this.layer = [this._layerId];

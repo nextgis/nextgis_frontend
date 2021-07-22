@@ -1,19 +1,22 @@
+import { LngLatBounds } from 'maplibre-gl';
+
+import { featureFilter } from '@nextgis/properties-filter';
+import { VectorAdapter } from './VectorAdapter';
 import {
+  detectType,
+  typeAlias,
+  typeAliasForFilter,
+  geometryFilter,
+} from '../util/geomType';
+
+import type {
   Map,
   GeoJSONSource,
   GeoJSONSourceRaw,
-  LngLatBounds,
+  GeoJSONSourceOptions,
+  VectorSource,
 } from 'maplibre-gl';
-import {
-  GeoJsonAdapterOptions,
-  VectorAdapterLayerType,
-  DataLayerFilter,
-  LayerDefinition,
-  LngLatBoundsArray,
-} from '@nextgis/webmap';
-import { VectorAdapterLayerPaint, GetPaintCallback } from '@nextgis/paint';
-import { featureFilter, PropertiesFilter } from '@nextgis/properties-filter';
-import {
+import type {
   GeoJsonObject,
   FeatureCollection,
   GeometryCollection,
@@ -21,14 +24,17 @@ import {
   Geometry,
   GeoJsonProperties,
 } from 'geojson';
-import { TLayer } from '../MapboxglMapAdapter';
-import { VectorAdapter, Feature } from './VectorAdapter';
-import {
-  detectType,
-  typeAlias,
-  typeAliasForFilter,
-  geometryFilter,
-} from '../util/geomType';
+import type { VectorAdapterLayerPaint, GetPaintCallback } from '@nextgis/paint';
+import type { PropertiesFilter } from '@nextgis/properties-filter';
+import type {
+  GeoJsonAdapterOptions,
+  VectorAdapterLayerType,
+  DataLayerFilter,
+  LayerDefinition,
+  LngLatBoundsArray,
+} from '@nextgis/webmap';
+import type { Feature } from './VectorAdapter';
+import type { TLayer } from '../MapboxglMapAdapter';
 
 let ID = 0;
 
@@ -242,18 +248,17 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
           features: [],
         },
       };
-      const _opts: (keyof GeoJsonAdapterOptions)[] = [
+      const _opts: (keyof (GeoJsonAdapterOptions | GeoJSONSourceOptions))[] = [
         'cluster',
         'clusterMaxZoom',
         'clusterRadius',
       ];
-      _opts.forEach((x) => {
-        const opt = this.options[x] as GeoJsonAdapterOptions;
+      for (const x of _opts) {
+        const opt = this.options[x];
         if (opt !== undefined) {
-          //@ts-ignore
           sourceOpt[x] = opt;
         }
-      });
+      }
       this.map.addSource(sourceId, sourceOpt);
       source = this.map.getSource(sourceId) as GeoJSONSource;
     }
@@ -399,9 +404,8 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
       // const features = this.map.querySourceFeatures(this.source);
       // return features;
 
-      const source = this.map.getSource(this.source);
+      const source = this.map.getSource(this.source) as VectorSource;
       if (source) {
-        // @ts-ignore
         return source._data ? source._data.features : [];
       }
     }
