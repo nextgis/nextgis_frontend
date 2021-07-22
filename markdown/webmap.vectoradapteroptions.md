@@ -24,6 +24,7 @@ export interface VectorAdapterOptions<F extends Feature = Feature, L = any, N = 
 |  [interactive?](./webmap.vectoradapteroptions.interactive.md) | boolean | <i>(Optional)</i> |
 |  [label?](./webmap.vectoradapteroptions.label.md) | (e: [LayerDefinition](./webmap.layerdefinition.md)<!-- -->&lt;F, L&gt;) =&gt; void \| string | <i>(Optional)</i> |
 |  [labelField?](./webmap.vectoradapteroptions.labelfield.md) | string | <i>(Optional)</i> |
+|  [labelOnHover?](./webmap.vectoradapteroptions.labelonhover.md) | boolean | <i>(Optional)</i> |
 |  [multiselect?](./webmap.vectoradapteroptions.multiselect.md) | boolean | <i>(Optional)</i> Indicates whether several objects can be selected in one layer. |
 |  [paint?](./webmap.vectoradapteroptions.paint.md) | [Paint](./paint.paint.md) | <i>(Optional)</i> Determine the appearance of the vector data geometries. |
 |  [popup?](./webmap.vectoradapteroptions.popup.md) | boolean | <i>(Optional)</i> |

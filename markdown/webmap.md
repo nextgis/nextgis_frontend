@@ -22,7 +22,7 @@ import MapAdapter from "@nextgis/leaflet-map-adapter";
 // import 'ol/ol.css';
 // import MapAdapter from '@nextgis/ol-map-adapter';
 // OR
-// import 'mapbox-gl/dist/mapbox-gl.css';
+// import 'maplibre-gl/dist/maplibre-gl.css';
 // import MapAdapter from '@nextgis/mapboxgl-map-adapter';
 
 const webMap = new WebMap({

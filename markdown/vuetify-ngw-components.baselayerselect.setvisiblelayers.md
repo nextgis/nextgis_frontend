@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-setVisibleLayers(active: string): void;
+setVisibleLayers(active: string, old: string): void;
 ```
 
 ## Parameters
@@ -15,6 +15,7 @@ setVisibleLayers(active: string): void;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  active | string |  |
+|  old | string |  |
 
 <b>Returns:</b>
 
