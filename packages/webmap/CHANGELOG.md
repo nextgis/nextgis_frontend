@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.4](https://github.com/nextgis/nextgis_frontend/compare/v1.2.3...v1.2.4) (2021-07-22)
+
+
+### Features
+
+* **leaflet-map-adapter:** label redraw on map position change ([241efc1](https://github.com/nextgis/nextgis_frontend/commit/241efc142ef29eef898e5b4adadff3e8208a3091))
+
+
+
+
+
 ## [1.2.3](https://github.com/nextgis/nextgis_frontend/compare/v1.2.2...v1.2.3) (2021-07-21)
 
 
