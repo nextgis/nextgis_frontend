@@ -82,6 +82,7 @@ getNgwLayerItems({
 |  [createIdentifyItem(opt)](./ngw-kit.createidentifyitem.md) |  |
 |  [createOnFirstShowAdapter({ webMap, adapterOptions, createAdapter, })](./ngw-kit.createonfirstshowadapter.md) |  |
 |  [createOnFirstShowNgwAdapter({ webMap, connector, item, adapterOptions, idPrefix, })](./ngw-kit.createonfirstshowngwadapter.md) |  |
+|  [createPopupContent(feature, item)](./ngw-kit.createpopupcontent.md) |  |
 |  [createRasterAdapter({ layerOptions, webMap, connector, item, })](./ngw-kit.createrasteradapter.md) |  |
 |  [deleteFeatureAttachment(options)](./ngw-kit.deletefeatureattachment.md) |  |
 |  [extendNgwWebmapLayerAdapter(opt)](./ngw-kit.extendngwwebmaplayeradapter.md) |  |
