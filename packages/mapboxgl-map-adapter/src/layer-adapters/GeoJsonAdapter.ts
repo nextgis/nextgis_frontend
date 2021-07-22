@@ -1,12 +1,13 @@
-import { LngLatBounds } from 'maplibre-gl';
+import { LngLatBounds, Popup } from 'maplibre-gl';
 
+import { defined } from '@nextgis/utils';
 import { featureFilter } from '@nextgis/properties-filter';
 import { VectorAdapter } from './VectorAdapter';
 import {
-  detectType,
-  typeAlias,
   typeAliasForFilter,
   geometryFilter,
+  detectType,
+  typeAlias,
 } from '../util/geomType';
 
 import type {
@@ -14,27 +15,27 @@ import type {
   GeoJSONSource,
   GeoJSONSourceRaw,
   GeoJSONSourceOptions,
-  VectorSource,
 } from 'maplibre-gl';
 import type {
-  GeoJsonObject,
-  FeatureCollection,
   GeometryCollection,
+  GeoJsonProperties,
+  FeatureCollection,
+  GeoJsonObject,
   GeometryObject,
   Geometry,
-  GeoJsonProperties,
 } from 'geojson';
 import type { VectorAdapterLayerPaint, GetPaintCallback } from '@nextgis/paint';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type {
+  LayerDefinition,
+  DataLayerFilter,
+  LngLatBoundsArray,
   GeoJsonAdapterOptions,
   VectorAdapterLayerType,
-  DataLayerFilter,
-  LayerDefinition,
-  LngLatBoundsArray,
 } from '@nextgis/webmap';
 import type { Feature } from './VectorAdapter';
 import type { TLayer } from '../MapboxglMapAdapter';
+import { getCentroid } from '../util/getCentroid';
 
 let ID = 0;
 
@@ -55,6 +56,14 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
 
   async addLayer(options: GeoJsonAdapterOptions): Promise<TLayer> {
     const layer = await super.addLayer(options);
+
+    // While this is difficult to achieve. Need to download fonts in PBF or learn how to convert text into icon-image
+    // if (options.labelField) {
+    //   this._labelSource = 'label-source-' + this._layerId;
+    //   const labellayer = await this._addLabelLayer();
+    //   labellayer && layer.push(labellayer);
+    // }
+
     return layer;
   }
 
@@ -113,6 +122,9 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
         type: 'FeatureCollection',
         features: this._features,
       });
+      if (this.options.labelField) {
+        this._updateLabels();
+      }
     }
   }
 
@@ -399,12 +411,44 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     }
   }
 
+  // TODO: need to download fonts in PBF or learn how to convert text into icon-image
+  // private _addLabelLayer() {
+  //   if (!this._labelSource) return;
+
+  //   const type = 'symbol';
+  //   const id = this._getLayerNameFromType(type);
+  //   this.map.addSource(this._labelSource, {
+  //     type: 'geojson',
+  //     data: {
+  //       type: 'FeatureCollection',
+  //       features: [],
+  //     },
+  //   });
+
+  //   const symbolLayer: SymbolLayer = {
+  //     id,
+  //     type,
+  //     source: this._labelSource,
+  //     layout: {
+  //       'icon-image': 'custom-marker',
+  //       // 'text-field': ['get', this.options.labelField],
+  //       // 'text-variable-anchor': ['top', 'bottom', 'left', 'right'],
+  //       // 'text-anchor': 'top',
+  //       // 'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
+  //       // 'text-justify': 'auto',
+  //       // 'icon-image': ['get', 'icon'],
+  //     },
+  //   };
+  //   this._addLayer(symbolLayer);
+  //   return id;
+  // }
+
   private _getFeatures(): Feature[] {
     if (this.source) {
       // const features = this.map.querySourceFeatures(this.source);
       // return features;
 
-      const source = this.map.getSource(this.source) as VectorSource;
+      const source = this.map.getSource(this.source) as GeoJSONSource;
       if (source) {
         return source._data ? source._data.features : [];
       }
@@ -423,6 +467,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     });
     this._filteredFeatureIds = filtered;
     this._updateFilter();
+    this._updateLabels();
   }
 
   private filterGeometries(
@@ -514,6 +559,37 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
         features,
         type: 'api',
       });
+    }
+  }
+
+  // Workaround for displaying labels.
+  // It is necessary to achieve that the labels are shown through vector layer symbols
+  private _updateLabels() {
+    this._removeAllPopup();
+    const popupOpt: maplibregl.PopupOptions = {
+      closeButton: false,
+      closeOnClick: false,
+    };
+    const filtered = this._filteredFeatureIds || [];
+    const features = this._features;
+    const field = this.options.labelField;
+    if (field) {
+      for (const f of features) {
+        if (
+          defined(f._featureFilterId) &&
+          filtered.indexOf(f._featureFilterId) !== -1
+        ) {
+          const text = f.properties && f.properties[field];
+          if (text) {
+            const popup = new Popup(popupOpt);
+            popup
+              .setLngLat(getCentroid(f) as [number, number])
+              .setText(text)
+              .addTo(this.map);
+            this._openedPopup.push([f, popup]);
+          }
+        }
+      }
     }
   }
 }
