@@ -1,5 +1,6 @@
 import { EventEmitter } from 'events';
-import mapboxgl, { Map } from 'maplibre-gl';
+
+import mapboxgl, { LngLatBoundsLike, Map } from 'maplibre-gl';
 
 import { debounce } from '@nextgis/utils';
 import { WmsAdapter } from './layer-adapters/WmsAdapter';
@@ -33,8 +34,8 @@ import type {
   ResourceType,
   MapEventType,
   MapboxOptions,
-  RequestParameters,
   FitBoundsOptions,
+  RequestParameters,
 } from 'maplibre-gl';
 
 export type TLayer = string[];
@@ -90,7 +91,6 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     this.__setLayerOrder = debounce((layers) => this._setLayerOrder(layers));
   }
 
-  // create(options: MapOptions = {target: 'map'}) {
   create(options: MapboxglMapAdapterOptions): Promise<unknown> {
     return new Promise((resolve, reject) => {
       if (!this.map) {
@@ -102,8 +102,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
           const mapOpt: MapboxOptions = {
             container: options.target,
             attributionControl: false,
-            // @ts-ignore
-            bounds: options.bounds,
+            bounds: options.bounds as LngLatBoundsLike,
             fitBoundsOptions: {
               ...options.fitOptions,
               ...fitBoundsOptions,
@@ -147,9 +146,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
           }
           this.map = new Map(mapOpt);
           this.map.once('load', () => {
-            // @ts-ignore
             this.map._onMapClickLayers = [];
-            // @ts-ignore
             this.map.transformRequests = [];
             this.isLoaded = true;
             this.emitter.emit('create', this);
@@ -328,16 +325,13 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     const emitData = convertMapClickEvent(evt);
     this.emitter.emit('preclick', emitData);
     if (this.map) {
-      // @ts-ignore
       this.map._onMapClickLayers
-        // @ts-ignore
         .sort((a, b) => {
           if (a.options && a.options.order && b.options && b.options.order) {
             return b.options.order - a.options.order;
           }
           return 1;
         })
-        // @ts-ignore
         .find((x) => {
           return x._onLayerClick(evt);
         });
@@ -491,7 +485,6 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     url: string,
     resourceType: ResourceType,
   ): RequestParameters | undefined {
-    // @ts-ignore
     const transformRequests = this.map && this.map.transformRequests;
     if (transformRequests) {
       for (const r of transformRequests) {
