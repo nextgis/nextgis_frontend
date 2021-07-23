@@ -86,7 +86,7 @@
         var wrap = document.createElement('div');
         var layer = layers[f];
         var radio = document.createElement('input');
-        radio.id = layer.resourceId;
+        radio.id = layer.resource;
         radio.setAttribute('name', 'layers');
         radio.setAttribute('type', 'radio');
         radio.onchange = function () {
@@ -94,7 +94,7 @@
         };
         setRadioListener(radio, layer);
         var label = document.createElement('label');
-        label.innerHTML = 'id: ' + layer.resourceId;
+        label.innerHTML = 'id: ' + layer.resource;
         if (layer.adapter) {
           label.innerHTML += ', adapter: ' + layer.adapter;
         }
