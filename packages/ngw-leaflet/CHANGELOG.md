@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.6](https://github.com/nextgis/nextgis_frontend/compare/v1.2.5...v1.2.6) (2021-07-23)
+
+
+### Bug Fixes
+
+* **leaflet-map-adapter:** resolve geojson adapter layerdefinition problem ([071fd5a](https://github.com/nextgis/nextgis_frontend/commit/071fd5ae4f0e6b41d1644ba050cd201e806f7445))
+
+
+
+
+
 ## [1.2.5](https://github.com/nextgis/nextgis_frontend/compare/v1.2.4...v1.2.5) (2021-07-22)
 
 **Note:** Version bump only for package @nextgis/ngw-leaflet
