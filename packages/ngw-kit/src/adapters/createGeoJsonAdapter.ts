@@ -18,6 +18,7 @@ import { fetchNgwLayerFeatureCollection } from '../utils/fetchNgwLayerFeatureCol
 import { fetchNgwResourceExtent } from '../utils/fetchNgwExtent';
 
 import type { FeatureCollection } from 'geojson';
+import { prepareNgwFieldsToPropertiesFilter } from '../utils/prepareNgwFieldsToPropertiesFilter';
 
 interface FilterArgs {
   filters?: PropertiesFilter;
@@ -205,8 +206,12 @@ export async function createGeoJsonAdapter(
       abort();
       if (this.filter && _fullDataLoad) {
         this.filter((e) => {
-          if (e.feature && e.feature.properties) {
-            return propertiesFilter(e.feature.properties, filters);
+          const props =
+            e.feature &&
+            e.feature.properties &&
+            prepareNgwFieldsToPropertiesFilter({ ...e.feature.properties });
+          if (props) {
+            return propertiesFilter(props, filters);
           }
           return true;
         });
