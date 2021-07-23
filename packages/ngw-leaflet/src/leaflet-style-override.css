@@ -1,3 +1,7 @@
 .ngw-map-container.leaflet-container {
   background: #fff;
 }
+
+.leaflet-pane .leaflet-popup-pane {
+  z-index: 9999999999;
+}
