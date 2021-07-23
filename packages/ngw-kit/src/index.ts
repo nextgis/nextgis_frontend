@@ -71,6 +71,7 @@ export * from './utils/mapFeatureDisplayName';
 export * from './utils/fetchNgwLayerFeatures';
 export * from './utils/resourceIdFromLayerOptions';
 export * from './utils/fetchNgwLayerFeatureCollection';
+export * from './utils/prepareNgwFieldsToPropertiesFilter';
 
 export * from './adapters/createOnFirstShowNgwAdapter';
 export * from './adapters/createOnFirstShowAdapter';
