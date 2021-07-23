@@ -23,9 +23,7 @@ export function fetchNgwLayerItems<
       // Additional client-side filter check
       return data.filter((y) => {
         const fields = prepareNgwFieldsToPropertiesFilter({ ...y.fields });
-        if (fields) {
-          propertiesFilter(fields, filters);
-        }
+        return propertiesFilter(fields, filters);
       });
     }) as CancelablePromise<FeatureItem<P, G>[]>;
   } else {

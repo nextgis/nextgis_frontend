@@ -20,7 +20,7 @@ export function prepareNgwFieldsToPropertiesFilter(
             dt.push(x);
           });
         }
-        fields[f] = new Date(...dt).toISOString();
+        fields[f] = new Date(...dt).getTime();
       }
     }
   }
