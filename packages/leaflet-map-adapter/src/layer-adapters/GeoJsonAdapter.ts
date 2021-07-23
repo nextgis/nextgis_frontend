@@ -65,10 +65,8 @@ export class GeoJsonAdapter
   private _filterFun?: DataLayerFilter<Feature>;
 
   private $updateTooltip = debounce(() => {
-    setTimeout(() => {
-      this.updateTooltip();
-    });
-  }, 100);
+    this.updateTooltip();
+  }, 300);
 
   constructor(map: L.Map, options: GeoJsonAdapterOptions) {
     super(map, options);
@@ -275,7 +273,8 @@ export class GeoJsonAdapter
       const message = feature.properties[this.options.labelField];
       if (message !== undefined) {
         const permanent = !this.options.labelOnHover;
-        layer.bindTooltip(String(message), { permanent });
+
+        layer.bindTooltip(String(message), { permanent, sticky: false });
       }
     }
   }
