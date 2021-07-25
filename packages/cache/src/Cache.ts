@@ -1,4 +1,4 @@
-import { objectDeepEqual } from '@nextgis/utils';
+import { objectDeepEqual, objectRemoveEmpty } from '@nextgis/utils';
 
 type CacheValue<T> = T;
 type CacheOptions<T> = Record<keyof T, T[keyof T]>;
@@ -47,10 +47,13 @@ export class Cache<
       } else {
         value = valueToSet;
       }
+      const options_ =
+        options && JSON.parse(JSON.stringify(objectRemoveEmpty(options)));
+
       const cacheItem = {
         key,
         value,
-        options,
+        options: options_,
       } as CacheItem<T, O>;
 
       this.cache.push(cacheItem);
@@ -106,7 +109,7 @@ export class Cache<
   ): boolean {
     if (item.key === key) {
       if (options) {
-        return objectDeepEqual(item.options || {}, options);
+        return objectDeepEqual(item.options || {}, objectRemoveEmpty(options));
       }
       return true;
     }

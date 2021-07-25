@@ -64,6 +64,7 @@ export async function createGeoJsonAdapter(
       resourceId,
       filters,
       connector,
+      cache: true,
       ...opt,
     });
     return await _dataPromise;
@@ -129,7 +130,7 @@ export async function createGeoJsonAdapter(
       if (waitFullLoad && updatePromise) {
         await updatePromise;
       }
-      if (this.options.strategy === 'BBOX') {
+      if (this.options.strategy === 'BBOX' && !_fullDataLoad) {
         this._addBboxEventListener();
       }
       return layer;
@@ -162,9 +163,13 @@ export async function createGeoJsonAdapter(
         return this._count;
       }
       return connector
-        .get('feature_layer.feature.count', null, {
-          id: resourceId,
-        })
+        .get(
+          'feature_layer.feature.count',
+          { cache: true },
+          {
+            id: resourceId,
+          },
+        )
         .then((resp) => {
           if (resp) {
             this._count = resp.total_count;
