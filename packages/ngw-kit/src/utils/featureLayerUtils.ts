@@ -103,16 +103,16 @@ export function createFeatureFieldFilterQueries<
   } else if (logic === 'all') {
     const filters: [string, any][] = [];
     const propertiesFilterList: PropertiesFilter[] = [];
-    filters_.forEach((f) => {
+    for (const f of filters_) {
       if (checkIfPropertyFilter(f)) {
         filters.push(createParam(f));
       } else {
         propertiesFilterList.push(f);
       }
-    });
+    }
 
     if (propertiesFilterList.length) {
-      propertiesFilterList.forEach((x) => {
+      for (const x of propertiesFilterList) {
         createFeatureFieldFilterQueries(
           {
             ...opt,
@@ -121,7 +121,7 @@ export function createFeatureFieldFilterQueries<
           _queries,
           [..._parentAllParams, ...filters],
         );
-      });
+      }
     } else {
       _queries.push(
         fetchNgwLayerItemsRequest<G, P>({
