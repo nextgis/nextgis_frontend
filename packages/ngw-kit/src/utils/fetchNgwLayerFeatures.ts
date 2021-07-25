@@ -1,14 +1,14 @@
-import { Geometry, Feature } from 'geojson';
-
-import { FeatureItem } from '@nextgis/ngw-connector';
-import CancelablePromise from '@nextgis/cancelable-promise';
-import { FetchNgwItemsOptions } from '../interfaces';
 import { fetchNgwLayerItems } from './fetchNgwLayerItems';
 import { createGeoJsonFeature } from './featureLayerUtils';
 
+import type { Geometry, Feature } from 'geojson';
+import type CancelablePromise from '@nextgis/cancelable-promise';
+import type { FeatureItem, FeatureProperties } from '@nextgis/ngw-connector';
+import type { FetchNgwItemsOptions } from '../interfaces';
+
 export function fetchNgwLayerFeatures<
   G extends Geometry | null = Geometry,
-  P extends { [field: string]: any } = { [field: string]: any },
+  P extends FeatureProperties = FeatureProperties,
 >(options: FetchNgwItemsOptions<P>): CancelablePromise<Feature<G, P>[]> {
   return fetchNgwLayerItems(options).then((x: FeatureItem[]) => {
     const features: Array<Feature<G, P>> = [];
