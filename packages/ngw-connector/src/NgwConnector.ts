@@ -1,5 +1,6 @@
 import { EventEmitter } from 'events';
 import CancelablePromise from '@nextgis/cancelable-promise';
+import { objectRemoveEmpty } from '@nextgis/utils';
 import { fixUrlStr } from '@nextgis/utils';
 import Cache from '@nextgis/cache';
 
@@ -37,7 +38,6 @@ import type {
 import type { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
 import type { ResourceItem, Resource } from './types/ResourceItem';
 import { apiRequest } from './utils/apiRequest';
-import { removeEmpty } from './utils/removeEmpty';
 
 let ID = 0;
 
@@ -241,14 +241,14 @@ export class NgwConnector {
     requestOptions: RequestOptions = {},
   ): CancelablePromise<P[K]> {
     const { method, headers, withCredentials, responseType } = requestOptions;
-    const params = removeEmpty(params_);
+    const params = objectRemoveEmpty(params_);
     const makeApiRequest = () =>
       apiRequest({ name, params, requestOptions, connector: this });
     if (requestOptions.cache && method === 'GET') {
       const cache = new Cache<CancelablePromise<P[K]>>();
       return cache.add(name, makeApiRequest, {
         params,
-        ...removeEmpty({
+        ...objectRemoveEmpty({
           headers,
           withCredentials,
           responseType,

@@ -51,6 +51,7 @@ import type {
   NgwIdentify,
   NgwFeatureItemResponse,
   NgwFeatureRequestOptions,
+  FetchNgwItemsOptions,
 } from '@nextgis/ngw-kit';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type { QmsAdapterOptions } from '@nextgis/qms-kit';
@@ -62,6 +63,7 @@ import type {
 } from '@nextgis/ngw-kit';
 import type { Geometry, Feature, FeatureCollection } from 'geojson';
 import type { NgwMapOptions, NgwMapEvents, NgwLayers } from './interfaces';
+import { FetchNgwItemOptions } from '@nextgis/ngw-kit';
 
 type PromiseGroup = 'select' | 'identify';
 
@@ -234,11 +236,13 @@ export class NgwMap<
     }
   }
 
-  fetchNgwLayerItem(options: {
-    resourceId: number;
-    featureId: number;
-  }): CancelablePromise<FeatureItem> {
-    return fetchNgwLayerItem({
+  fetchNgwLayerItem<
+    G extends Geometry = Geometry,
+    P extends FeatureProperties = FeatureProperties,
+  >(
+    options: Omit<FetchNgwItemOptions<P>, 'connector'>,
+  ): CancelablePromise<FeatureItem> {
+    return fetchNgwLayerItem<G, P>({
       connector: this.connector,
       ...options,
     });
@@ -248,11 +252,7 @@ export class NgwMap<
     F extends FeatureProperties = FeatureProperties,
     G extends Geometry = Geometry,
   >(
-    options: {
-      resourceId: number;
-      connector?: NgwConnector;
-      filters?: PropertiesFilter;
-    } & FilterOptions,
+    options: Omit<FetchNgwItemsOptions<F>, 'connector'>,
   ): CancelablePromise<FeatureItem<F, G>[]> {
     return fetchNgwLayerItems<G, F>({
       connector: this.connector,
@@ -262,11 +262,10 @@ export class NgwMap<
 
   fetchNgwLayerFeature<
     G extends Geometry = Geometry,
-    P extends JsonMap = JsonMap,
-  >(options: {
-    resourceId: number;
-    featureId: number;
-  }): CancelablePromise<Feature<G, P>> {
+    P extends FeatureProperties = FeatureProperties,
+  >(
+    options: Omit<FetchNgwItemOptions<P>, 'connector'>,
+  ): CancelablePromise<Feature<G, P>> {
     return fetchNgwLayerFeature<G, P>({
       connector: this.connector,
       ...options,
@@ -275,13 +274,9 @@ export class NgwMap<
 
   fetchNgwLayerFeatures<
     G extends Geometry | null = Geometry,
-    P extends JsonMap = JsonMap,
+    P extends FeatureProperties = FeatureProperties,
   >(
-    options: {
-      resourceId: number;
-      connector?: NgwConnector;
-      filters?: PropertiesFilter;
-    } & FilterOptions,
+    options: Omit<FetchNgwItemsOptions<P>, 'connector'>,
   ): CancelablePromise<FeatureCollection<G, P>> {
     return fetchNgwLayerFeatureCollection({
       connector: this.connector,
@@ -498,11 +493,7 @@ export class NgwMap<
     G extends Geometry | null = Geometry,
     P extends JsonMap = JsonMap,
   >(
-    options: {
-      resourceId: number;
-      connector?: NgwConnector;
-      filters?: PropertiesFilter;
-    } & FilterOptions,
+    options: FetchNgwItemsOptions<P>,
   ): CancelablePromise<FeatureCollection<G, P>> {
     return this.fetchNgwLayerFeatures(options);
   }
