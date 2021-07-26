@@ -8,7 +8,6 @@
   "jsdelivr": "lib/dialog.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@types/dialog-polyfill": "^0.5.0",
     "dialog-polyfill": "^0.5.6"
   },
   "devDependencies": {
