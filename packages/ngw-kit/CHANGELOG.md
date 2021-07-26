@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.7](https://github.com/nextgis/nextgis_frontend/compare/v1.2.6...v1.2.7) (2021-07-26)
+
+
+### Bug Fixes
+
+* **ngw-kit:** createGeojsonAdapter propertiesFilter ([8beacb0](https://github.com/nextgis/nextgis_frontend/commit/8beacb0b0f2f8599c73be934fadcf2bae5ab5f85))
+* **ngw-kit:** duplication of the server filter by the client ([3561426](https://github.com/nextgis/nextgis_frontend/commit/3561426999cd58bceed008e974caeb9f0b8f5e2a))
+
+
+### Features
+
+* **ngw-kit:** duplication of the server filter by the client ([5fc0e92](https://github.com/nextgis/nextgis_frontend/commit/5fc0e92e625ecebae49a793f15e641a7a68716e7))
+* **ngw-kit:** update loaded date before property filter ([b40df4d](https://github.com/nextgis/nextgis_frontend/commit/b40df4d8742e970060e3eee60c6549d53567b938))
+
+
+
+
+
 ## [1.2.4](https://github.com/nextgis/nextgis_frontend/compare/v1.2.3...v1.2.4) (2021-07-22)
 
 
