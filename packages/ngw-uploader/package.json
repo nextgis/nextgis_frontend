@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/ngw-uploader",
-  "version": "1.2.3",
+  "version": "1.2.7",
   "_priority": 13,
   "description": "",
   "main": "index.js",
@@ -10,8 +10,8 @@
   "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/cancelable-promise": "^1.2.3",
-    "@nextgis/dialog": "^1.2.2",
-    "@nextgis/ngw-connector": "^1.2.3",
+    "@nextgis/dialog": "^1.2.7",
+    "@nextgis/ngw-connector": "^1.2.7",
     "@types/events": "^3.0.0",
     "events": "^3.3.0"
   },
