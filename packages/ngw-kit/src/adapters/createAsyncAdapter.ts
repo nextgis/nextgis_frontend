@@ -5,23 +5,22 @@ import NgwConnector, {
 import { WebMap } from '@nextgis/webmap';
 import { Type, applyMixins } from '@nextgis/utils';
 
-import {
-  ResourceAdapter,
-  NgwLayerOptions,
-  GetClassAdapterCallback,
-  GetClassAdapterByType,
-  GetClassAdapter,
-  GetClassAdapterOptions,
-  ClassAdapter,
-  ResourceNgwLayerOptions,
-} from '../interfaces';
-
 import { createGeoJsonAdapter } from './createGeoJsonAdapter';
 import { createRasterAdapter } from './createRasterAdapter';
 import { createWebMapAdapter } from './createNgwWebmapAdapter';
 import { NgwResource } from '../NgwResource';
 import { resourceIdFromLayerOptions } from '../utils/resourceIdFromLayerOptions';
 import { createBasemapLayerAdapter } from './createBasemapLayerAdapter';
+
+import type {
+  GetClassAdapterCallback,
+  GetClassAdapterOptions,
+  GetClassAdapterByType,
+  ResourceAdapter,
+  NgwLayerOptions,
+  GetClassAdapter,
+  ClassAdapter,
+} from '../interfaces';
 
 export const classAdapters: Record<string, GetClassAdapter> = {};
 
@@ -68,7 +67,7 @@ export async function createAsyncAdapter(
   const adapterType = options.adapter;
   const resourceId = await resourceIdFromLayerOptions(options, connector);
   if (resourceId) {
-    const resourceOptions = options as ResourceNgwLayerOptions;
+    const resourceOptions = options as NgwLayerOptions;
     const itemFromResOpt = resourceOptions.resource as ResourceItem;
     if (
       itemFromResOpt &&
