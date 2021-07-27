@@ -6,9 +6,7 @@ import type {
   OnLayerSelectOptions,
 } from './LayerAdapter';
 
-/**
- * @public
- */
+
 export interface WebMapEvents extends MainMapEvents {
   /**
    * @eventProperty
@@ -84,9 +82,7 @@ export interface WebMapEvents extends MainMapEvents {
   'controls:create': any;
 }
 
-/**
- * @public
- */
+
 export interface MapAdapterEvents extends MainMapEvents {
   /**
    * @eventProperty
@@ -102,9 +98,7 @@ export interface MapAdapterEvents extends MainMapEvents {
   create: MapAdapter;
 }
 
-/**
- * @public
- */
+
 export interface MainMapEvents {
   /**
    * Fired before the map is clicked.

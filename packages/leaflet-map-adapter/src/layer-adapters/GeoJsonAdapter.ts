@@ -504,8 +504,9 @@ export class GeoJsonAdapter
 
   private _selectOnLayerClick(e: LeafletMouseEvent) {
     DomEvent.stopPropagation(e);
-    const def = e.target as LayerDef;
-    let isSelected = this._selectedLayers.indexOf(def) !== -1;
+    const layer = e.target as Layer;
+    const def: LayerDef = {layer, feature: (layer as any).feature};
+    let isSelected = !!this._selectedLayers.find((x) => x.layer === layer);
     if (isSelected) {
       if (this.options && this.options.unselectOnSecondClick) {
         this._unSelectLayer(def);
