@@ -44,6 +44,7 @@ export interface OnLayerClickOptions {
  * @public
  */
 export interface AdapterOptions<
+  A extends Record<string, any> = Record<string, any>,
   N extends Record<string, any> = Record<string, any>,
 > {
   /**
@@ -139,7 +140,7 @@ export interface AdapterOptions<
   /** Any properties to save in layer.
    * May be useful to get additional info from layer event.
    */
-  props?: Record<string, any>;
+  props?: A;
   /** Map and layer adapter base options */
   nativeOptions?: N;
   ratio?: number;
@@ -182,8 +183,9 @@ export interface PopupOptions {
 }
 
 type _VectorAdapterOptionsToExtend<
+  A extends Record<string, any> = Record<string, any>,
   N extends Record<string, any> = Record<string, any>,
-> = AdapterOptions<N> & FilterOptions;
+> = AdapterOptions<A, N> & FilterOptions;
 
 /**
  * @public
@@ -191,8 +193,9 @@ type _VectorAdapterOptionsToExtend<
 export interface VectorAdapterOptions<
   F extends Feature = Feature,
   L = any,
+  A = Record<string, any>,
   N = Record<string, any>,
-> extends _VectorAdapterOptionsToExtend<N> {
+> extends _VectorAdapterOptionsToExtend<A, N> {
   /** Type for geometries painting, for each layer may be only one of: `point`, `polygon` or `line`. */
   type?: VectorAdapterLayerType;
   /**
@@ -335,8 +338,9 @@ export interface VectorAdapterOptions<
 export interface GeoJsonAdapterOptions<
   F extends Feature = Feature,
   L = any,
+  A = Record<string, any>,
   N = Record<string, any>,
-> extends VectorAdapterOptions<F, L, N> {
+> extends VectorAdapterOptions<F, L, A, N> {
   /** Geojson data */
   data?: GeoJsonObject;
 }

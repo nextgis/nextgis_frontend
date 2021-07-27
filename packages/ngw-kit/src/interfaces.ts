@@ -33,9 +33,6 @@ declare module '@nextgis/webmap' {
   }
 }
 
-/**
- * @public
- */
 export type NgwLayerAdapterType =
   | 'IMAGE'
   | 'TILE'
@@ -46,9 +43,6 @@ export type NgwLayerAdapterType =
   | 'MODEL_3D'
   | 'NGW:WEBMAP';
 
-/**
- * @public
- */
 export interface AppSettings {
   extent_left?: number;
   extent_right?: number;
@@ -59,9 +53,6 @@ export interface AppSettings {
   root_item?: TreeGroup;
 }
 
-/**
- * @public
- */
 export interface TreeItem {
   item_type: 'root' | 'group' | 'layer' | string;
   display_name?: string;
@@ -70,18 +61,12 @@ export interface TreeItem {
   _layer?: any;
 }
 
-/**
- * @public
- */
 export interface TreeGroup extends TreeItem {
   item_type: 'root' | 'group';
   group_expanded?: boolean;
   children: Array<TreeLayer | TreeGroup>;
 }
 
-/**
- * @public
- */
 export interface TreeLayer extends TreeItem {
   item_type: 'layer';
   layer_adapter: string;
@@ -102,19 +87,18 @@ export interface TreeLayer extends TreeItem {
 
 export type TileNoData = 200 | 404 | 204;
 
-/**
- * @public
- */
-export interface NgwLayerOptionsAdditional<
+export interface NgwLayerOptions<
   T extends NgwLayerAdapterType = NgwLayerAdapterType,
-  P = { [name: string]: unknown },
+  P = FeatureProperties,
+  A = Record<string, any>,
 > {
+  resource: ResourceDefinition;
   id?: string;
   adapter?: T;
-  adapterOptions?: LayerAdaptersOptions[T];
-  headers?: any;
+  adapterOptions?: Partial<LayerAdaptersOptions[T] & AdapterOptions<A>>;
   fit?: boolean;
   meta?: P;
+  headers?: any;
   simplification?: number;
   /**
    * Parameter for `TILE` and `IMAGE` adapters to say NGW what will be returned if there is no data to render.
@@ -128,49 +112,12 @@ export interface NgwLayerOptionsAdditional<
   tileNoData?: TileNoData;
 }
 
-/**
- * @internal
- * @deprecated use resource instead
- */
-export interface ResourceIdNgwLayerOptions<
+/** @deprecated use {@link NgwLayerOptions} instead */
+export type ResourceNgwLayerOptions<
   T extends NgwLayerAdapterType = NgwLayerAdapterType,
   P = { [name: string]: any },
-> extends NgwLayerOptionsAdditional<T, P> {
-  resourceId: number;
-}
+> = NgwLayerOptions<T, P>;
 
-/**
- * @internal
- * @deprecated use resource instead
- */
-export interface KeynamedNgwLayerOptions<
-  T extends NgwLayerAdapterType = NgwLayerAdapterType,
-  P = { [name: string]: any },
-> extends NgwLayerOptionsAdditional<T, P> {
-  keyname: string;
-}
-
-/**
- * @public
- */
-export interface ResourceNgwLayerOptions<
-  T extends NgwLayerAdapterType = NgwLayerAdapterType,
-  P = { [name: string]: any },
-> extends NgwLayerOptionsAdditional<T, P> {
-  resource: ResourceDefinition;
-}
-
-/**
- * @public
- */
-export type NgwLayerOptions<
-  T extends NgwLayerAdapterType = NgwLayerAdapterType,
-  P = { [name: string]: any },
-> = ResourceNgwLayerOptions<T, P>;
-
-/**
- * @public
- */
 export interface NgwConfig {
   applicationUrl: string;
   assetUrl: string;
@@ -178,14 +125,8 @@ export interface NgwConfig {
   id: number;
 }
 
-/**
- * @public
- */
 export type ResourceIdDef = number | [resourceId: number, layerId: string];
 
-/**
- * @public
- */
 export interface NgwKitOptions {
   baseUrl?: string;
   connector?: NgwConnector;
@@ -200,9 +141,6 @@ export interface NgwKitOptions {
 
 type A = AdapterOptions & RasterAdapterOptions;
 
-/**
- * @public
- */
 export interface NgwWebmapAdapterOptions<M = any> extends A {
   resourceId: ResourceIdDef;
   webMap: WebMap<M>;
@@ -217,9 +155,6 @@ export interface NgwWebmapAdapterOptions<M = any> extends A {
   defaultBasemap?: boolean;
 }
 
-/**
- * @public
- */
 export interface IdentifyRequestOptions {
   layers: number[];
   connector: NgwConnector;
@@ -227,24 +162,15 @@ export interface IdentifyRequestOptions {
   geom?: Feature<Polygon> | Polygon;
 }
 
-/**
- * @public
- */
 export interface IdentifyEvent {
   ev: MapClickEvent;
   data: FeatureLayersIdentify;
 }
 
-/**
- * @public
- */
 export interface NgwWebmapLayerAdapterEvents extends WebMapEvents {
   identify: IdentifyEvent;
 }
 
-/**
- * @public
- */
 export interface ResourceAdapter<
   M = any,
   L = any,
@@ -261,9 +187,6 @@ export interface ResourceAdapter<
   getIdentificationIds(): Promise<number[] | undefined>;
 }
 
-/**
- * @public
- */
 export type VectorResourceAdapter<
   M = any,
   L = any,
@@ -271,42 +194,27 @@ export type VectorResourceAdapter<
   F extends Feature = Feature,
 > = ResourceAdapter<M, L, O, F> & VectorLayerAdapter<M, L, O, F>;
 
-/**
- * @public
- */
 interface NgwVectorIdentify {
   resources?: number[];
   sourceType: 'vector';
   event: OnLayerClickOptions;
 }
 
-/**
- * @public
- */
 interface NgwRasterIdentify {
   resources?: number[];
   sourceType: 'raster';
   event: MapClickEvent;
 }
 
-/**
- * @public
- */
 export interface NgwIdentifyItem {
   resourceId: number;
   featureId: number;
   feature: LayerFeature;
 }
 
-/**
- * @public
- */
 export type NgwIdentify = FeatureLayersIdentify &
   (NgwVectorIdentify | NgwRasterIdentify);
 
-/**
- * @public
- */
 export interface GetIdentifyGeoJsonOptions {
   identify: NgwIdentify;
   connector: NgwConnector;
@@ -314,9 +222,6 @@ export interface GetIdentifyGeoJsonOptions {
   requestOptions?: NgwFeatureRequestOptions;
 }
 
-/**
- * @public
- */
 export interface GetClassAdapterOptions {
   layerOptions: NgwLayerOptions;
   webMap: WebMap;
@@ -326,33 +231,18 @@ export interface GetClassAdapterOptions {
   addLayerOptionsPriority?: false;
 }
 
-/**
- * @public
- */
 export type ClassAdapter = Promise<Type<LayerAdapter> | undefined>;
 
-/**
- * @public
- */
 export type GetClassAdapterCallback = (
   options: GetClassAdapterOptions,
 ) => Promise<Type<LayerAdapter> | undefined> | undefined;
 
-/**
- * @public
- */
 export type GetClassAdapterByType = {
   [adapterType: string]: GetClassAdapterCallback;
 };
 
-/**
- * @public
- */
 export type GetClassAdapter = GetClassAdapterCallback | GetClassAdapterByType;
 
-/**
- * @public
- */
 export interface CompanyLogoOptions {
   padding?: string;
   cssClass?: string;
