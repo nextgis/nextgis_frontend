@@ -1,13 +1,13 @@
 {
   "name": "@nextgis/vuex-ngw",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "description": "Vuex store for NGW feature layers",
   "main": "index.js",
   "module": "lib/vuex-ngw.esm-bundler.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/ngw-connector": "^1.2.7",
-    "@nextgis/webmap": "^1.2.7",
+    "@nextgis/ngw-connector": "^1.2.8",
+    "@nextgis/webmap": "^1.2.8",
     "vue": "^2.6.12",
     "vue-class-component": "^7.2.6",
     "vue-property-decorator": "^9.1.2",
