@@ -11,19 +11,19 @@ import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type {
   LayerAdapter,
   LayerAdapters,
-  AdapterConstructor,
-  LayerAdaptersOptions,
-  AdapterOptions,
-  GeoJsonAdapterOptions,
-  VectorLayerAdapter,
-  DataLayerFilter,
-  OnLayerClickOptions,
   FilterOptions,
+  AdapterOptions,
   LayerDefinition,
-  LayerAdapterDefinition,
-  OnLayerSelectOptions,
+  DataLayerFilter,
   MainLayerAdapter,
+  AdapterConstructor,
+  VectorLayerAdapter,
   TileAdapterOptions,
+  OnLayerClickOptions,
+  LayerAdaptersOptions,
+  OnLayerSelectOptions,
+  GeoJsonAdapterOptions,
+  LayerAdapterDefinition,
 } from './interfaces/LayerAdapter';
 import type { LayerDef } from './interfaces/BaseTypes';
 import type {
@@ -36,9 +36,7 @@ import type { FitOptions } from './interfaces/MapAdapter';
 
 type AddedLayers = { [id: string]: LayerAdapter };
 
-/**
- * @public
- */
+
 export class WebMapLayers<
   M = any,
   L = any,

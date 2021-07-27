@@ -63,9 +63,7 @@ interface AddEventsListenersOptions {
   include: (keyof MainMapEvents)[];
 }
 
-/**
- * @public
- */
+
 export class WebMapMain<
   M = any,
   E extends WebMapEvents = WebMapEvents,

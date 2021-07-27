@@ -18,6 +18,7 @@ import {
   fetchIdentifyItem,
   getIdentifyItems,
   createIdentifyItem,
+  NgwLayerAdapterType,
 } from '@nextgis/ngw-kit';
 import { deprecatedWarn } from '@nextgis/utils';
 import { getIcon } from '@nextgis/icons';
@@ -55,12 +56,7 @@ import type {
 } from '@nextgis/ngw-kit';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type { QmsAdapterOptions } from '@nextgis/qms-kit';
-import type {
-  NgwLayerOptions,
-  NgwLayerOptionsAdditional,
-  KeynamedNgwLayerOptions,
-  ResourceIdNgwLayerOptions,
-} from '@nextgis/ngw-kit';
+import type { NgwLayerOptions } from '@nextgis/ngw-kit';
 import type { Geometry, Feature, FeatureCollection } from 'geojson';
 import type { NgwMapOptions, NgwMapEvents, NgwLayers } from './interfaces';
 import { FetchNgwItemOptions } from '@nextgis/ngw-kit';
@@ -162,14 +158,13 @@ export class NgwMap<
    * });
    * ```
    */
-  async addNgwLayer(
-    options: NgwLayerOptions,
-  ): Promise<ResourceAdapter | undefined> {
+  async addNgwLayer<
+    T extends NgwLayerAdapterType = NgwLayerAdapterType,
+    P = FeatureProperties,
+  >(options: NgwLayerOptions<T, P>): Promise<ResourceAdapter | undefined> {
     await this.onMapLoad();
     // @ts-ignore for backward compatibility
-    const keyname = (options as KeynamedNgwLayerOptions).keyname;
-    // @ts-ignore for backward compatibility
-    const resourceId = (options as ResourceIdNgwLayerOptions).resourceId;
+    const { keyname, resourceId } = options;
 
     if (keyname || resourceId !== undefined) {
       deprecatedWarn(
@@ -183,7 +178,7 @@ export class NgwMap<
         'resource, resourceId or keyname is required parameter to add NGW layer',
       );
     }
-    if (this.options.baseUrl || this.options.baseUrl === '') {
+    if (defined(this.options.baseUrl)) {
       try {
         if (defined(this.options.setViewDelay)) {
           options.adapterOptions = options.adapterOptions || {};
@@ -557,7 +552,7 @@ export class NgwMap<
     }
     if (this.options.resources && Array.isArray(this.options.resources)) {
       this.options.resources.forEach((x) => {
-        const overwriteOptions = {} as NgwLayerOptionsAdditional;
+        const overwriteOptions: Partial<NgwLayerOptions> = {};
         if (!layerFitAllowed) {
           overwriteOptions.fit = false;
         }
