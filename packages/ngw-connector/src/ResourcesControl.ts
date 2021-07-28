@@ -171,11 +171,7 @@ export class ResourcesControl {
   ): CancelablePromise<ResourceItem | undefined> {
     return this.getId(resource).then((id) => {
       if (id !== undefined) {
-        return this.cache.add(
-          'resource.item',
-          () => this.connector.put('resource.item', { data }, { id }),
-          { id },
-        );
+        return this.connector.put('resource.item', { data }, { id });
       }
     });
   }
