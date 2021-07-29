@@ -26,6 +26,7 @@ module.exports = (config) => {
     ],
     files: [
       { pattern: 'tests/specs/*.ts', type: 'ts' },
+      // { pattern: 'tests/specs/properties-filter.spec.ts', type: 'ts' },
       // { pattern: 'tests/specs/cache.spec.ts', type: 'ts' },
       // { pattern: 'tests/specs/area.spec.ts', type: 'ts' },
       // { pattern: 'tests/internet-specs/*.spec.ts', type: 'ts' },
