@@ -1,10 +1,10 @@
 import { EventEmitter } from 'events';
 import { Map, Control, FitBoundsOptions } from 'leaflet';
-import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
-import { AttributionControl } from './controls/Attribution';
 import { convertMapClickEvent } from './utils/utils';
 import { createButtonControl } from './controls/createButtonControl';
+import { AttributionControl } from './controls/Attribution';
 import { createControl } from './controls/createControl';
+import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 import { ImageAdapter } from './layer-adapters/ImageAdapter/ImageAdapter';
 import { TileAdapter } from './layer-adapters/TileAdapter/TileAdapter';
 import { WmsAdapter } from './layer-adapters/WmsAdapter/WmsAdapter';
@@ -38,9 +38,9 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   static layerAdapters: {
     [name: string]: Type<LayerAdapter<Map, any, any>>;
   } = {
+    GEOJSON: GeoJsonAdapter,
     IMAGE: ImageAdapter,
     TILE: TileAdapter,
-    GEOJSON: GeoJsonAdapter,
     WMS: WmsAdapter,
     // // MVT: MvtAdapter,
     OSM: OsmAdapter,
@@ -61,36 +61,36 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   map?: Map;
 
   private _universalEvents: (keyof MainMapEvents)[] = [
-    'zoomstart',
-    'zoom',
-    'zoomend',
-    'movestart',
     'move',
+    'zoom',
     'moveend',
+    'zoomend',
+    'zoomstart',
+    'movestart',
   ];
 
   create(options: MapOptions): void {
     this.options = { ...options };
     if (this.options.target) {
       const {
-        maxZoom,
-        minZoom,
         zoom,
         center,
+        maxZoom,
+        minZoom,
         maxBounds: mb,
         mapAdapterOptions,
       } = this.options;
       this.map = new Map(this.options.target, {
-        zoomControl: false,
         attributionControl: false,
-        maxZoom,
-        minZoom,
-        zoom,
+        zoomControl: false,
         maxBounds: mb && [
           [mb[1], mb[0]],
           [mb[3], mb[2]],
         ],
+        maxZoom,
+        minZoom,
         center: center && [center[1], center[0]],
+        zoom,
         ...mapAdapterOptions,
       });
       // create default pane
