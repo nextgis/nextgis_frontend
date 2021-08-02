@@ -192,6 +192,12 @@ export class WebMapControls<
     }
   }
 
+  getControlContainer(): HTMLElement | undefined {
+    if (this.mapAdapter.getControlContainer) {
+      return this.mapAdapter.getControlContainer();
+    }
+  }
+
   private _setControlQueue(position: ControlPosition, cb: () => Promise<any>) {
     this._loadControlQueue[position].push(cb);
     if (!this._isControlLoading[position]) {

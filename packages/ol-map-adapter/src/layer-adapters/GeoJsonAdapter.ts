@@ -109,7 +109,6 @@ export class GeoJsonAdapter
     for (let i = _forEachFeatureAtPixel.length; i--; ) {
       const cb = _forEachFeatureAtPixel[i];
       const index = this._forEachFeatureAtPixel.indexOf(cb);
-      console.log(index);
       if (index !== -1) {
         _forEachFeatureAtPixel.splice(i, 1);
       }
