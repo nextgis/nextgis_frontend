@@ -41,7 +41,6 @@ export interface MapControls {
 }
 
 export interface ControlOptions {
-  [param: string]: any;
   position?: ControlPosition;
   control?: string;
 }
