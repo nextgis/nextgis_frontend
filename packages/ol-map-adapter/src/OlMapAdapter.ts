@@ -143,6 +143,15 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     }
   }
 
+  getControlContainer(): HTMLElement {
+    if (this._panelControl) {
+      return this._panelControl.getContainer();
+    }
+    throw new Error(
+      'The ol-map-adapter ControlPanel has not been initialized yet',
+    );
+  }
+
   setCenter(lonLat: LngLatArray): void {
     if (this._olView) {
       this._olView.setCenter(fromLonLat(lonLat));

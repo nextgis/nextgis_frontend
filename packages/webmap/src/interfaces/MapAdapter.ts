@@ -178,6 +178,7 @@ export interface MapAdapter<M = any, L = any, C = any> {
   setCenter(latLng: LngLatArray): void;
 
   getContainer(): HTMLElement | undefined;
+  getControlContainer?(): HTMLElement;
 
   setCursor?(cursor: string): void;
   getCursor?(): string | undefined;

@@ -42,4 +42,8 @@ export class PanelControl extends Control {
     const map = this.getMap();
     map.removeControl(control);
   }
+
+  getContainer(): HTMLElement {
+    return this.panelContainer.getContainer();
+  }
 }
