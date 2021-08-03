@@ -30,6 +30,10 @@
   right: inherit;
 }
 
+.webmap-ctrl-left .openlayers-ctrl .webmap-ctrl {
+  height: 100%;
+}
+
 
 
 

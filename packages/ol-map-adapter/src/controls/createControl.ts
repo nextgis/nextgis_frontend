@@ -1,9 +1,10 @@
 import Control from 'ol/control/Control';
-import type { MapControl, CreateControlOptions } from '@nextgis/webmap';
+import type { MapControl, CreateControlOptions, MapAdapter } from '@nextgis/webmap';
 
 export function createControl(
   control: MapControl,
   options: CreateControlOptions = {},
+  map: MapAdapter
 ): Control {
   const newControl = (function (C) {
     function NewControl(this: Control) {
@@ -13,7 +14,7 @@ export function createControl(
         'ol-unselectable' +
         (options.bar ? ' webmap-ctrl-group' : '') +
         (options.margin ? ' ol-control-margin' : '');
-      const content = control.onAdd();
+      const content = control.onAdd(map);
       if (content) {
         element.appendChild(content);
       }
