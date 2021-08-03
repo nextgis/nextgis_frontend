@@ -51,12 +51,16 @@ export class WebMapControls<
   private _loadControlQueue: {
     [key in ControlPosition]: (() => Promise<any>)[];
   } = {
+    'left': [],
+    'right': [],
     'top-right': [],
     'bottom-right': [],
     'top-left': [],
     'bottom-left': [],
   };
   private _isControlLoading: { [key in ControlPosition]: boolean } = {
+    'left': false,
+    'right': false,
     'top-right': false,
     'bottom-right': false,
     'top-left': false,
