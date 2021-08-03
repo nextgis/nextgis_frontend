@@ -1,7 +1,7 @@
 import './ControlContainer.css';
 
 import * as dom from '@nextgis/dom';
-import { ControlPositions, MapControl, MapAdapter } from '@nextgis/webmap';
+import { ControlPosition, MapControl, MapAdapter } from '@nextgis/webmap';
 
 import { ZoomControl } from './controls/ZoomControl';
 import { ControlContainerOptions } from './interfaces';
@@ -19,12 +19,14 @@ export class ControlContainer {
   private readonly map?: MapAdapter;
   private _container: HTMLElement;
   private _positionsContainers: {
-    [key in ControlPositions]: HTMLElement | null;
+    [key in ControlPosition]: HTMLElement | null;
   } = {
     'bottom-left': null,
     'bottom-right': null,
     'top-left': null,
     'top-right': null,
+    'left': null,
+    'right': null,
   };
 
   constructor(opt: ControlContainerOptions = {}) {
@@ -53,14 +55,14 @@ export class ControlContainer {
     return this._container;
   }
 
-  getPositionContainer(position: ControlPositions): HTMLElement | undefined {
+  getPositionContainer(position: ControlPosition): HTMLElement | undefined {
     const positionContainer = this._positionsContainers[position];
     if (positionContainer) {
       return positionContainer;
     }
   }
 
-  newPositionContainer(position: ControlPositions): HTMLElement | undefined {
+  newPositionContainer(position: ControlPosition): HTMLElement | undefined {
     const positionContainer = this.getPositionContainer(position);
     if (positionContainer) {
       const newContainer = document.createElement('div');
@@ -81,14 +83,14 @@ export class ControlContainer {
     }
   }
 
-  addControl(control: MapControl, position: ControlPositions): void {
+  addControl(control: MapControl, position: ControlPosition): void {
     const controlContainer = control.onAdd(this.map);
     if (controlContainer instanceof HTMLElement) {
       this.append(controlContainer, position);
     }
   }
 
-  append(element: HTMLElement | string, position: ControlPositions): void {
+  append(element: HTMLElement | string, position: ControlPosition): void {
     const positionContainer = this._positionsContainers[position];
     if (positionContainer) {
       if (typeof element === 'string') {
@@ -106,7 +108,9 @@ export class ControlContainer {
       `${this.classPrefix}-control-container` +
       (this.addClass ? ' ' + this.addClass : '');
 
-    const positions: ControlPositions[] = [
+    const positions: ControlPosition[] = [
+      'left',
+      'right',
       'top-right',
       'top-left',
       'bottom-right',
@@ -121,7 +125,7 @@ export class ControlContainer {
     return element;
   }
 
-  private _createPositionContainer(position: ControlPositions): HTMLElement {
+  private _createPositionContainer(position: ControlPosition): HTMLElement {
     const positionContainer = document.createElement('div');
     positionContainer.className = `${this.classPrefix}-ctrl-${position}`;
     return positionContainer;

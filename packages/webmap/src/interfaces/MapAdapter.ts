@@ -63,24 +63,23 @@ export interface FitOptions {
  */
 export type ControlPositions = ControlPosition;
 
-
 export type ControlPosition =
   | 'top-right'
   | 'top-left'
   | 'bottom-right'
-  | 'bottom-left';
-
+  | 'bottom-left'
+  // experimental
+  | 'left'
+  | 'right';
 
 export interface Locate {
   stop: () => void;
 }
 
-
 export interface LocationEvent {
   lngLat: LngLatArray;
   bounds?: LngLatBoundsArray;
 }
-
 
 export interface LocateOptions {
   // watch?: boolean;
@@ -91,11 +90,9 @@ export interface LocateOptions {
   // enableHighAccuracy?: boolean;
 }
 
-
 export interface DataLoadError {
   target: string;
 }
-
 
 export interface LocationEvents {
   locationfound: (e: LocationEvent) => void;
