@@ -34,8 +34,11 @@ export interface AttributionControlOptions {
 }
 
 
-export interface MapControls {
+export interface MapControls extends ContribControlsOptions {
   [name: string]: Record<string, any>;
+}
+
+export interface ContribControlsOptions {
   ZOOM: ZoomControlOptions;
   ATTRIBUTION: AttributionControlOptions;
 }
@@ -45,9 +48,9 @@ export interface ControlOptions {
   control?: string;
 }
 
-export interface ControlsOptions {
-  [control: string]: ControlOptions;
-}
+export type ControlsOptions<O extends MapControls = MapControls, K extends keyof O = keyof O> = {
+  [control in K]: O[K];
+};
 
 
 export interface MapControl<M extends any = any> {

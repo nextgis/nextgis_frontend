@@ -14,8 +14,10 @@
     "@nextgis/properties-filter": "^1.2.8",
     "@nextgis/webmap": "^1.2.8",
     "@types/events": "^3.0.0",
+    "@types/polylabel": "^1.0.5",
     "events": "^3.3.0",
-    "ol": "^6.6.1"
+    "ol": "^6.6.1",
+    "polylabel": "^1.1.0"
   },
   "devDependencies": {
     "@nextgis/build-tools": "^1.2.0"

@@ -256,7 +256,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
   }
 
   createControl(control: MapControl, options: CreateControlOptions): Control {
-    return createControl(control, options);
+    return createControl(control, options, this);
   }
 
   createButtonControl(options: ButtonControlOptions): Control {

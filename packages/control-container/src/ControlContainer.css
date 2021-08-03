@@ -1,176 +1,191 @@
 /* https: //github.com/mapbox/mapbox-gl-js/blob/master/src/css/mapbox-gl.css */
-.webmap-ctrl-top-left, .webmap-ctrl-top-right, .webmap-ctrl-bottom-left, .webmap-ctrl-bottom-right {
-    position: absolute;
-    pointer-events: none;
-    z-index: 2;
+.webmap-ctrl-left,
+.webmap-ctrl-right,
+.webmap-ctrl-top-left,
+.webmap-ctrl-top-right,
+.webmap-ctrl-bottom-left,
+.webmap-ctrl-bottom-right {
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.webmap-ctrl-left, .webmap-ctrl-right {
+    height: 100%;
+}
+
+.webmap-ctrl-left {
+    padding-right: 0;
+}
+
+.webmap-ctrl-right {
+    padding-left: 0;
 }
 
 .webmap-ctrl-top-left {
-    top: 0;
-    left: 0;
+  top: 0;
+  left: 0;
 }
 
 .webmap-ctrl-top-right {
-    top: 0;
-    right: 0;
+  top: 0;
+  right: 0;
 }
 
 .webmap-ctrl-bottom-left {
-    bottom: 0;
-    left: 0;
+  bottom: 0;
+  left: 0;
 }
 
 .webmap-ctrl-bottom-right {
-    right: 0;
-    bottom: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .webmap-ctrl {
-    clear: both;
-    pointer-events: auto;
-    /* workaround for a Safari bug https://github.com/mapbox/mapbox-gl-js/issues/8185 */
-    transform: translate(0, 0);
+  clear: both;
+  pointer-events: auto;
+  /* workaround for a Safari bug https://github.com/mapbox/mapbox-gl-js/issues/8185 */
+  transform: translate(0, 0);
 }
 
 .webmap-ctrl-top-left .webmap-ctrl {
-    margin: 10px 0 0 10px;
-    float: left;
+  margin: 10px 0 0 10px;
+  float: left;
 }
 
 .webmap-ctrl-top-right .webmap-ctrl {
-    margin: 10px 10px 0 0;
-    float: right;
+  margin: 10px 10px 0 0;
+  float: right;
 }
 
 .webmap-ctrl-bottom-left .webmap-ctrl {
-    margin: 0 0 10px 10px;
-    float: left;
+  margin: 0 0 10px 10px;
+  float: left;
 }
 
 .webmap-ctrl-bottom-right .webmap-ctrl {
-    margin: 0 10px 10px 0;
-    float: right;
+  margin: 0 10px 10px 0;
+  float: right;
 }
 
 .webmap-ctrl-group {
-    border-radius: 4px;
-    background: #fff;
+  border-radius: 4px;
+  background: #fff;
 }
 
 .webmap-ctrl-group:not(:empty) {
-    -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
-    -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
-    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
 }
 
 @media (-ms-high-contrast: active) {
-    .webmap-ctrl-group:not(:empty) {
-        box-shadow: 0 0 0 2px ButtonText;
-    }
+  .webmap-ctrl-group:not(:empty) {
+    box-shadow: 0 0 0 2px ButtonText;
+  }
 }
 
 .webmap-ctrl-group button {
-    width: 29px;
-    height: 29px;
-    display: block;
-    padding: 0;
-    outline: none;
-    border: 0;
-    box-sizing: border-box;
-    background-color: transparent;
-    cursor: pointer;
+  width: 29px;
+  height: 29px;
+  display: block;
+  padding: 0;
+  outline: none;
+  border: 0;
+  box-sizing: border-box;
+  background-color: transparent;
+  cursor: pointer;
 }
 
-.webmap-ctrl-group button+button {
-    border-top: 1px solid #ddd;
+.webmap-ctrl-group button + button {
+  border-top: 1px solid #ddd;
 }
 
 .webmap-ctrl button .webmap-ctrl-icon {
-    display: block;
-    width: 100%;
-    height: 100%;
-    background-repeat: no-repeat;
-    background-position: center center;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 @media (-ms-high-contrast: active) {
-    .webmap-ctrl-icon {
-        background-color: transparent;
-    }
-    .webmap-ctrl-group button+button {
-        border-top: 1px solid ButtonText;
-    }
+  .webmap-ctrl-icon {
+    background-color: transparent;
+  }
+  .webmap-ctrl-group button + button {
+    border-top: 1px solid ButtonText;
+  }
 }
 
 /* https://bugzilla.mozilla.org/show_bug.cgi?id=140562 */
 
 .webmap-ctrl button::-moz-focus-inner {
-    border: 0;
-    padding: 0;
+  border: 0;
+  padding: 0;
 }
 
 .webmap-ctrl-group button:focus {
-    box-shadow: 0 0 2px 2px rgba(0, 150, 255, 1);
+  box-shadow: 0 0 2px 2px rgba(0, 150, 255, 1);
 }
 
 .webmap-ctrl button:disabled {
-    cursor: not-allowed;
+  cursor: not-allowed;
 }
 
 .webmap-ctrl button:disabled .webmap-ctrl-icon {
-    opacity: 0.25;
+  opacity: 0.25;
 }
 
 .webmap-ctrl button:not(:disabled):hover {
-    background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 .webmap-ctrl-group button:focus:focus-visible {
-    box-shadow: 0 0 2px 2px rgba(0, 150, 255, 1);
+  box-shadow: 0 0 2px 2px rgba(0, 150, 255, 1);
 }
 
 .webmap-ctrl-group button:focus:not(:focus-visible) {
-    box-shadow: none;
+  box-shadow: none;
 }
 
 .webmap-ctrl-group button:focus:first-child {
-    border-radius: 4px 4px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 
 .webmap-ctrl-group button:focus:last-child {
-    border-radius: 0 0 4px 4px;
+  border-radius: 0 0 4px 4px;
 }
 
 .webmap-ctrl-group button:focus:only-child {
-    border-radius: inherit;
+  border-radius: inherit;
 }
 
 .webmap-ctrl button.webmap-ctrl-zoom-out .webmap-ctrl-icon {
-    background-image: url('svg/mapboxgl-ctrl-zoom-out.svg');
+  background-image: url('svg/mapboxgl-ctrl-zoom-out.svg');
 }
 
 .webmap-ctrl button.webmap-ctrl-zoom-in .webmap-ctrl-icon {
-    background-image: url('svg/mapboxgl-ctrl-zoom-in.svg');
+  background-image: url('svg/mapboxgl-ctrl-zoom-in.svg');
 }
 
 @media (-ms-high-contrast: active) {
-    .webmap-ctrl button.webmap-ctrl-zoom-out .webmap-ctrl-icon {
-        background-image: url('svg/mapboxgl-ctrl-zoom-out.svg');
-    }
-    .webmap-ctrl button.webmap-ctrl-zoom-in .webmap-ctrl-icon {
-        background-image: url('svg/mapboxgl-ctrl-zoom-in.svg');
-    }
+  .webmap-ctrl button.webmap-ctrl-zoom-out .webmap-ctrl-icon {
+    background-image: url('svg/mapboxgl-ctrl-zoom-out.svg');
+  }
+  .webmap-ctrl button.webmap-ctrl-zoom-in .webmap-ctrl-icon {
+    background-image: url('svg/mapboxgl-ctrl-zoom-in.svg');
+  }
 }
 
 @media (-ms-high-contrast: black-on-white) {
-    .webmap-ctrl button.webmap-ctrl-zoom-out .webmap-ctrl-icon {
-        background-image: url('svg/mapboxgl-ctrl-zoom-out.svg');
-    }
-    .webmap-ctrl button.webmap-ctrl-zoom-in .webmap-ctrl-icon {
-        background-image: url('svg/mapboxgl-ctrl-zoom-in.svg');
-    }
+  .webmap-ctrl button.webmap-ctrl-zoom-out .webmap-ctrl-icon {
+    background-image: url('svg/mapboxgl-ctrl-zoom-out.svg');
+  }
+  .webmap-ctrl button.webmap-ctrl-zoom-in .webmap-ctrl-icon {
+    background-image: url('svg/mapboxgl-ctrl-zoom-in.svg');
+  }
 }
-
-
 
 /* stylelint-disable-next-line selector-class-pattern */
