@@ -11,6 +11,12 @@ import { WmsAdapter } from './layer-adapters/WmsAdapter/WmsAdapter';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
 
 import type {
+  Layer,
+  GridLayer,
+  ControlPosition,
+  LeafletMouseEvent,
+} from 'leaflet';
+import type {
   CreateControlOptions,
   ButtonControlOptions,
   LngLatBoundsArray,
@@ -25,12 +31,6 @@ import type {
   MapControl,
   Locate,
 } from '@nextgis/webmap';
-import type {
-  Layer,
-  GridLayer,
-  ControlPosition,
-  LeafletMouseEvent,
-} from 'leaflet';
 
 export type Type<T> = new (...args: any[]) => T;
 
@@ -109,6 +109,14 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
 
   getContainer(): HTMLElement | undefined {
     return this.map && this.map.getContainer();
+  }
+
+  getControlContainer(): HTMLElement {
+    const controlContainer = this.map && (this.map as any)._controlContainer;
+    if (controlContainer) {
+      return controlContainer;
+    }
+    throw new Error('Leaflet Map is not initialized yet');
   }
 
   setCursor(cursor: string): void {
@@ -192,11 +200,11 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   }
 
   createControl(control: MapControl, options: CreateControlOptions): L.Control {
-    return createControl(control, options);
+    return createControl(control, options, this);
   }
 
   createButtonControl(options: ButtonControlOptions): L.Control {
-    return createButtonControl(options);
+    return createButtonControl(options, this);
   }
 
   addControl(control: Control, position: string): Control | undefined {
@@ -238,41 +246,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     order: number,
     layers: { [x: string]: LayerAdapter },
   ): void {
-    // const baseLayers: string[] = [];
-    // const orderedLayers = Object.keys(layers).filter((x) => {
-    //   if (layers[x].options.baselayer) {
-    //     baseLayers.push(x);
-    //     return false;
-    //   }
-    //   return true;
-    // }).sort((a, b) => {
-    //   const layerAOrder = layers[a] && layers[a].options.order;
-    //   const layerBOrder = layers[b] && layers[b].options.order;
-    //   if (layerAOrder !== undefined && layerBOrder !== undefined) {
-    //     return layerAOrder - layerBOrder;
-    //   }
-    //   return 0;
-    // });
-    // baseLayers.forEach((x) => {
-    //   layers[x].layer.bringToBack();
-    // });
-    // if (layer.setZIndex) {
-    //   layer.setZIndex(order);
-    // } else {
-    //   for (let fry = 0; fry < orderedLayers.length; fry++) {
-    //     if (layers[orderedLayers[fry]].options.visibility) {
-    //       layers[orderedLayers[fry]].layer.bringToFront();
-    //     }
-    //   }
-    // }
-    // orderedLayers.forEach((x) => {
-    //   const l = layers[x];
-    //   const map = l.layer._map;
-    //   if (l.options.visibility && map) {
-    //     l.layer.remove();
-    //     l.layer.addTo(map);
-    //   }
-    // });
+    //
   }
 
   onMapClick(evt: LeafletMouseEvent): void {
