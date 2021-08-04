@@ -78,6 +78,6 @@ export class TreeHelper {
   }
 
   getChildren<T extends Item = Item>(): T[] {
-    return this._children as T[];
+    return [...this._children] as T[];
   }
 }
