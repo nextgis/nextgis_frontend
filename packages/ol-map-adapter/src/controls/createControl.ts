@@ -1,12 +1,16 @@
 import Control from 'ol/control/Control';
-import type { MapControl, CreateControlOptions, MapAdapter } from '@nextgis/webmap';
+import type {
+  MapControl,
+  CreateControlOptions,
+  MapAdapter,
+} from '@nextgis/webmap';
 
 export function createControl(
   control: MapControl,
   options: CreateControlOptions = {},
-  map: MapAdapter
+  map: MapAdapter,
 ): Control {
-  const newControl = (function (C) {
+  const NewControl = (function (C) {
     function NewControl(this: Control) {
       const element = document.createElement('div');
       element.className =
@@ -37,6 +41,6 @@ export function createControl(
     return NewControl;
   })(Control);
   // @ts-ignore
-  return new newControl();
+  return new NewControl();
   // return control;
 }
