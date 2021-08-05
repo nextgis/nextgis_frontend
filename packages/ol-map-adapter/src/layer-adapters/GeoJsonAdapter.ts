@@ -1,10 +1,13 @@
-import { transformExtent } from 'ol/proj';
+import './Popup.css';
+
+import { transformExtent, transform } from 'ol/proj';
 import Overlay from 'ol/Overlay';
 import GeoJSON from 'ol/format/GeoJSON';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 
 import { Paint } from '@nextgis/paint';
+import { create } from '@nextgis/dom';
 import { defined, LngLatArray, LngLatBoundsArray } from '@nextgis/utils';
 import { PropertiesFilter } from '@nextgis/properties-filter';
 
@@ -25,6 +28,7 @@ import type {
   OnLayerSelectType,
   VectorLayerAdapter,
   GeoJsonAdapterOptions,
+  PopupOnCloseFunction,
 } from '@nextgis/webmap';
 import type {
   ForEachFeatureAtPixelCallback,
@@ -41,7 +45,8 @@ type Layers = LayerDefinition<Feature, Layer>;
 type VectorLayerType = VectorSource<any>;
 
 export class GeoJsonAdapter
-  implements VectorLayerAdapter<Map, Layer, GeoJsonAdapterOptions> {
+  implements VectorLayerAdapter<Map, Layer, GeoJsonAdapterOptions>
+{
   layer?: VectorLayer<VectorLayerType>;
   paint?: Paint;
   selectedPaint?: Paint;
@@ -52,15 +57,17 @@ export class GeoJsonAdapter
   private _selectedFeatures: OlFeature<any>[] = [];
   private _filterFun?: DataLayerFilter<Feature>;
   private _mouseOver?: boolean;
-  protected _openedPopup: [Feature, Overlay][] = [];
+  private _openedPopup: [OlFeature<any>, Overlay, PopupOnCloseFunction[]][] =
+    [];
 
-  // TODO: get from OlMapAdapter
   private displayProjection = 'EPSG:3857';
   private lonlatProjection = 'EPSG:4326';
 
   private _forEachFeatureAtPixel: ForEachFeatureAtPixelCallback[] = [];
 
-  constructor(public map: Map, public options: GeoJsonAdapterOptions) {}
+  constructor(public map: Map, public options: GeoJsonAdapterOptions) {
+    this.displayProjection = map.getView().getProjection().getCode();
+  }
 
   addLayer(options: GeoJsonAdapterOptions): VectorLayer<VectorLayerType> {
     this.options = options;
@@ -152,9 +159,12 @@ export class GeoJsonAdapter
     } else {
       this.vectorSource.addFeatures(features);
       if (this.options.popup) {
-        for (const f of this._features) {
-          const feature = getFeature(f);
-          this._openPopup({ feature, type: 'api' });
+        for (const feature of this._features) {
+          this._openPopup({
+            feature,
+            type: 'api',
+            options: this.options.popupOptions,
+          });
         }
       }
     }
@@ -238,14 +248,6 @@ export class GeoJsonAdapter
       );
       return extent as LngLatBoundsArray;
     }
-  }
-
-  private _removeAllPopup(): void {
-    const map = this.map;
-    for (const p of this._openedPopup) {
-      map.removeOverlay(p[1]);
-    }
-    this._openedPopup.length = 0;
   }
 
   private setPaintEachLayer(paint: Paint) {
@@ -353,7 +355,7 @@ export class GeoJsonAdapter
     if (this.options.popupOnSelect) {
       this._openPopup({
         coordinates,
-        feature: getFeature(feature),
+        feature,
         options: this.options.popupOptions,
         type: 'click',
       });
@@ -381,41 +383,113 @@ export class GeoJsonAdapter
     }
   }
 
-  protected async _openPopup({
+  private async _openPopup({
     coordinates,
-    feature,
+    feature: f,
     options = {},
     type,
   }: {
     coordinates?: LngLatArray;
-    feature: Feature;
+    feature: OlFeature<any>;
     options?: PopupOptions;
     type: OnLayerSelectType;
   }): Promise<void> {
     const map = this.map;
     if (!map) return;
+    let popup: Overlay;
+    const _closeHandlers: PopupOnCloseFunction[] = [];
+    const onClose = (handler: PopupOnCloseFunction) => {
+      _closeHandlers.push(handler);
+    };
+    const close = () => {
+      if (popup) {
+        this._removePopup(popup);
+      }
+    };
     const { createPopupContent, popupContent } = options;
+    const feature = getFeature(f);
     const content = createPopupContent
       ? await createPopupContent({
           feature,
           target: this,
+          close,
+          onClose,
           type,
         })
       : popupContent;
     coordinates =
       coordinates || (feature && (getCentroid(feature) as [number, number]));
     if (content && coordinates) {
-      const element =
+      const popupContent =
         typeof content === 'string' ? makeHtmlFromString(content) : content;
+      const element = this._createPopupElement({
+        ...options,
+        popupContent,
+        close,
+      });
       const popupOpt: OverlayOptions = {
         element,
       };
-
-      const popup = new Overlay(popupOpt);
-
-      popup.setPosition(coordinates);
+      popup = new Overlay(popupOpt);
+      popup.setPosition(
+        transform(coordinates, this.lonlatProjection, this.displayProjection),
+      );
       map.addOverlay(popup);
-      this._openedPopup.push([feature, popup]);
+      this._openedPopup.push([f, popup, _closeHandlers]);
+    }
+  }
+
+  private _createPopupElement({
+    closeButton,
+    popupContent,
+    maxWidth,
+    minWidth,
+    close,
+  }: PopupOptions & { popupContent: HTMLElement; close: () => void }) {
+    closeButton = closeButton ?? !this.options.selectOnHover;
+    const popup = create('div', 'ol-popup');
+    if (maxWidth) {
+      popup.style.maxWidth = maxWidth + 'px';
+    }
+    if (minWidth) {
+      popup.style.minWidth = minWidth + 'px';
+    }
+    if (closeButton) {
+      const closer = create('a', 'ol-popup-closer', popup);
+      closer.setAttribute('href', '#');
+      closer.addEventListener('click', close);
+    }
+    const content = create('div', 'popup-content', popup);
+    content.appendChild(popupContent);
+    return popup;
+  }
+
+  private _removeAllPopup(): void {
+    for (const p of this._openedPopup) {
+      this._removePopup(p[1]);
+    }
+    this._openedPopup.length = 0;
+  }
+
+  private _removePopup(popup: Overlay) {
+    const map = this.map;
+    if (map) {
+      map.removeOverlay(popup);
+      const index = this._openedPopup.findIndex((x) => x[1] === popup);
+      if (index !== -1) {
+        const [feature, , closeHandlers] = this._openedPopup[index];
+        const unselectOnClose =
+          this.options.popupOptions?.unselectOnClose ?? true;
+
+        for (const h of closeHandlers) {
+          h({ feature: getFeature(feature) });
+        }
+        closeHandlers.length = 1;
+        if (unselectOnClose) {
+          this._unselectFeature(feature);
+        }
+        this._openedPopup.splice(index, 1);
+      }
     }
   }
 }
