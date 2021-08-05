@@ -1,7 +1,7 @@
 import type { GeoJsonObject, Feature } from 'geojson';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type { Paint } from '@nextgis/paint';
-import type { Type } from '@nextgis/utils';
+import type { LngLatArray, Type } from '@nextgis/utils';
 import type { LngLatBoundsArray } from './BaseTypes';
 import type { MapClickEvent } from './MapAdapter';
 
@@ -281,6 +281,11 @@ export interface VectorAdapterOptions<
    */
   unselectOnSecondClick?: boolean;
   /**
+   * If false, the selection will be reset when the user clicks the map.
+   * @default true
+   */
+  unselectOnClick?: boolean;
+  /**
    * Make the feature selected while mouseover.
    */
   selectOnHover?: boolean;
@@ -475,7 +480,7 @@ export interface FilterOptions<
   limit?: number;
   fields?: (keyof P)[] | false | null;
   /** WKT polygon geometry */
-  intersects?: string;
+  intersects?: string | LngLatArray[] | LngLatBoundsArray;
   strategy?: 'BBOX';
   /**
    * set fields for order

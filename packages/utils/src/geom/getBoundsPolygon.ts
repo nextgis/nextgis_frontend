@@ -1,7 +1,6 @@
 import type { Feature, Polygon } from 'geojson';
 import type { LngLatBoundsArray } from './interfaces';
 
-
 export function getBoundsPolygon(b: LngLatBoundsArray): Polygon {
   const polygon: Polygon = {
     type: 'Polygon',
@@ -18,7 +17,6 @@ export function getBoundsCoordinates(b: LngLatBoundsArray): number[][] {
 
   return [westNorth, eastNorth, eastSouth, westSouth, westNorth];
 }
-
 
 export function getBoundsFeature(b: LngLatBoundsArray): Feature<Polygon> {
   const feature: Feature<Polygon> = {
