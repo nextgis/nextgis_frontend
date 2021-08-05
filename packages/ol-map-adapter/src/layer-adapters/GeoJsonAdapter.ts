@@ -370,6 +370,7 @@ export class GeoJsonAdapter
   }
 
   private _selectFeature(feature: OlFeature<any>, coordinates?: number[]) {
+    this.addUnselectCb(() => this._unselectFeature(feature));
     const options = this.options;
     const type: OnLayerSelectType = coordinates ? 'click' : 'api';
     if (options && !options.multiselect) {
@@ -398,7 +399,6 @@ export class GeoJsonAdapter
         type,
       });
     }
-    this.addUnselectCb(() => this._unselectFeature(feature));
   }
 
   private _unselectFeature(feature: OlFeature<any>) {
