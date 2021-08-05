@@ -29,6 +29,7 @@ import {
 import type { Paint, IconPaint } from '@nextgis/paint';
 import type {
   VectorAdapterLayerType,
+  PopupOnCloseFunction,
   VectorAdapterOptions,
   VectorLayerAdapter,
   OnLayerSelectType,
@@ -108,7 +109,7 @@ export abstract class VectorAdapter<
 
   protected _selectProperties?: PropertiesFilter;
   protected _filterProperties?: PropertiesFilter;
-  protected _openedPopup: [Feature, Popup][] = [];
+  protected _openedPopup: [Feature, Popup, PopupOnCloseFunction[]][] = [];
 
   private $onLayerMouseMove?: (e: MapLayerMouseEvent) => void;
   private $onLayerMouseLeave?: (e: MapLayerMouseEvent) => void;
@@ -299,7 +300,7 @@ export abstract class VectorAdapter<
     return filter;
   }
 
-  protected _getNativeFilter(): PropertyFilter<GeoJsonProperties> {
+  protected _getNativeFilter(): PropertyFilter {
     return (
       this.options.nativeFilter ? this.options.nativeFilter : []
     ) as PropertyFilter;
@@ -639,14 +640,31 @@ export abstract class VectorAdapter<
   }): Promise<void> {
     const map = this.map;
     if (!map) return;
-    const { maxWidth, createPopupContent, popupContent } = options;
-    const closeButton = !this.options.selectOnHover;
+    let popup: Popup;
+    const _closeHandlers: PopupOnCloseFunction[] = [];
+    const onClose = (handler: PopupOnCloseFunction) => {
+      _closeHandlers.push(handler);
+    };
+    const close = () => {
+      if (popup) {
+        this._removePopup(popup);
+      }
+    };
+    const {
+      maxWidth,
+      createPopupContent,
+      popupContent,
+      closeButton: closeBtn,
+    } = options;
+    const closeButton = closeBtn ?? !this.options.selectOnHover;
 
     const content = createPopupContent
       ? await createPopupContent({
           feature,
           target: this,
           type,
+          close,
+          onClose,
         })
       : popupContent;
     coordinates =
@@ -661,9 +679,30 @@ export abstract class VectorAdapter<
       if (maxWidth) {
         popupOpt.maxWidth = typeof maxWidth === 'number' ? maxWidth + 'px' : '';
       }
-      const popup = new Popup(popupOpt);
+      popup = new Popup(popupOpt);
       popup.setLngLat(coordinates).setDOMContent(html).addTo(map);
-      this._openedPopup.push([feature, popup]);
+      this._openedPopup.push([feature, popup, _closeHandlers]);
+    }
+  }
+
+  private _removePopup(popup: Popup) {
+    const map = this.map;
+    if (map) {
+      popup.remove();
+      const index = this._openedPopup.findIndex((x) => x[1] === popup);
+      if (index !== -1) {
+        const unselectOnClose =
+          this.options.popupOptions?.unselectOnClose ?? true;
+        const [feature, , closeHandlers] = this._openedPopup[index];
+        for (const h of closeHandlers) {
+          h({ feature });
+        }
+        closeHandlers.length = 1;
+        if (unselectOnClose) {
+          this._unselectFeature(feature);
+        }
+        this._openedPopup.splice(index, 1);
+      }
     }
   }
 

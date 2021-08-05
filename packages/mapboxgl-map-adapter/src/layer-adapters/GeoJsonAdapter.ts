@@ -354,6 +354,9 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   }
 
   protected _updateFilter(): void {
+    const map = this.map;
+    if (!map) return;
+
     // it is not yet possible to use callbacks and properties filters together
     if (this._filterProperties || this._selectProperties) {
       super._updateFilter();
@@ -389,7 +392,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
           const selLayerName = this._getSelectionLayerNameFromType(t);
           if (layers.indexOf(selLayerName) !== -1) {
             if (this._selectionName) {
-              this.map.setFilter(selLayerName, [
+              map.setFilter(selLayerName, [
                 'all',
                 geomFilter,
                 ['in', this.featureIdName, ...selectionArray],
@@ -404,7 +407,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
               filter_.push(['!in', this.featureIdName, ...selectionArray]);
               this._updateWithNativeFilter(filter_);
             }
-            this.map.setFilter(layerName, filter_);
+            map.setFilter(layerName, filter_);
           }
         }
       });
@@ -587,7 +590,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
               .setLngLat(getCentroid(f) as [number, number])
               .setText(text)
               .addTo(this.map);
-            this._openedPopup.push([f, popup]);
+            this._openedPopup.push([f, popup, []]);
           }
         }
       }
