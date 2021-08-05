@@ -331,7 +331,7 @@ export class GeoJsonAdapter
         maxWidth,
         closeButton,
         closeOnClick: false,
-        autoClose: true,
+        autoClose: false,
       });
       const unselectOnClose =
         this.options.popupOptions?.unselectOnClose ?? true;
@@ -589,25 +589,28 @@ export class GeoJsonAdapter
     type: OnLayerSelectType,
     latlng?: LatLngExpression,
   ) {
+    this.map._addUnselectCb(() => {
+      this._unSelectLayer(def);
+    });
     if (this.options && !this.options.multiselect) {
       this._selectedLayers.forEach((x) => this._unSelectLayer(x));
     }
     this._selectedLayers.push(def);
     this.selected = true;
-    if (this.options) {
-      if (this.options.selectedPaint && def.layer) {
-        this.setPaint(def, this.options.selectedPaint);
-      }
-      if (this.options.popupOnSelect) {
-        this._openPopup(def, this.options.popupOptions, type, latlng);
-      }
-      if (this.options.onSelect) {
-        this.options.onSelect({
-          type,
-          layer: this,
-          features: def.feature ? [def.feature] : [],
-        });
-      }
+    const { selectedPaint, popupOnSelect, popupOptions } = this.options;
+
+    if (selectedPaint && def.layer) {
+      this.setPaint(def, selectedPaint);
+    }
+    if (popupOnSelect) {
+      this._openPopup(def, popupOptions, type, latlng);
+    }
+    if (this.options.onSelect) {
+      this.options.onSelect({
+        type,
+        layer: this,
+        features: def.feature ? [def.feature] : [],
+      });
     }
   }
 

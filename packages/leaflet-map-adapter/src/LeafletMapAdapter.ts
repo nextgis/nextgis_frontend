@@ -33,7 +33,8 @@ import type {
 } from '@nextgis/webmap';
 
 export type Type<T> = new (...args: any[]) => T;
-
+export type UnselectCb = () => void;
+export type UnselectDef = UnselectCb;
 export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   static layerAdapters: {
     [name: string]: Type<LayerAdapter<Map, any, any>>;
@@ -60,6 +61,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   emitter = new EventEmitter();
   map?: Map;
 
+  private _unselectCb: UnselectDef[] = [];
   private _universalEvents: (keyof MainMapEvents)[] = [
     'move',
     'zoom',
@@ -95,6 +97,9 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
       });
       // create default pane
       const defPane = this.map.createPane('order-0');
+      this.map._addUnselectCb = (def) => {
+        this._addUnselectCb(def);
+      };
       defPane.style.zIndex = String(0);
       this.emitter.emit('create', this);
       this._addMapListeners();
@@ -285,6 +290,14 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     }
     const stop = () => void 'fake function';
     return { stop };
+  }
+
+  private _addUnselectCb(cb: UnselectDef) {
+    for (const p of this._unselectCb) {
+      p();
+    }
+    this._unselectCb.length = 0;
+    this._unselectCb.push(cb);
   }
 
   private _addMapListeners() {
