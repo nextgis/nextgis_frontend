@@ -6,7 +6,7 @@ import {
   FilterOptions,
   LayerAdapter,
 } from '@nextgis/webmap';
-import { debounce, LngLatArray } from '@nextgis/utils';
+import { debounce } from '@nextgis/utils';
 import { PropertiesFilter, propertiesFilter } from '@nextgis/properties-filter';
 import CancelablePromise from '@nextgis/cancelable-promise';
 import { vectorLayerGeomToPaintTypeAlias } from '../utils/utils';
