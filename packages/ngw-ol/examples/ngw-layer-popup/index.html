@@ -21,6 +21,7 @@
 
     <!-- <script src="https://unpkg.com/@nextgis/ngw-ol"></script> -->
     <!-- <script src="../../lib/ngw-ol.global.js"></script> -->
+    <!-- <script src="../../lib/ngw-ol.global.js"></script> -->
     <script src="../../lib/ngw-ol.global.js"></script>
   </head>
 
@@ -66,40 +67,35 @@
                 // disable close button to use custom one
                 closeButton: false,
                 createPopupContent: function (e) {
-                  var element = document.createElement('div');
-                  // get style resource item
+                  // get vector item from style resource
                   return ngwMap.connector
-                    .getResource(4249)
-                    .then(function (style) {
-                      // get vector layer item
-                      return ngwMap.connector
-                        .getResource(style.resource.parent.id)
-                        .then(function (item) {
-                          // set up event on popup close
-                          e.onClose(function () {
-                            clean();
-                          });
-                          // link properties field names with layer attributes names
-                          item.feature_layer.fields.forEach(function (x) {
-                            if (x.grid_visibility) {
-                              var value = e.feature.properties[x.keyname];
-                              var propElem = document.createElement('div');
-                              element.appendChild(propElem);
-                              propElem.innerHTML =
-                                '<span>' +
-                                x.display_name +
-                                '</span>:' +
-                                value +
-                                '<span></span>';
-                            }
-                          });
-                          // create custom close button
-                          const closeBtn = document.createElement('button');
-                          closeBtn.innerHTML = 'Close';
-                          closeBtn.onclick = e.close;
-                          element.appendChild(closeBtn);
-                          return element;
-                        });
+                    .getResourceParent(4249)
+                    .then(function (item) {
+                      var element = document.createElement('table');
+                      element.innerHTML = '<tbody>';
+                      // set up event on popup close
+                      e.onClose(function () {
+                        clean();
+                      });
+                      // link properties field names with layer attributes names
+                      item.feature_layer.fields.forEach(function (x) {
+                        if (x.grid_visibility) {
+                          var value = e.feature.properties[x.keyname];
+                          element.innerHTML +=
+                            '<tr><th>' +
+                            x.display_name +
+                            '</th><td>' +
+                            value +
+                            '</td></tr>';
+                        }
+                      });
+                      element.innerHTML += '</tbody>';
+                      // create custom close button
+                      const closeBtn = document.createElement('button');
+                      closeBtn.innerHTML = 'Close';
+                      closeBtn.onclick = e.close;
+                      element.appendChild(closeBtn);
+                      return element;
                     });
                 },
               },
