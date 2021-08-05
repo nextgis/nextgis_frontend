@@ -31,8 +31,11 @@ import type {
   PopupOnCloseFunction,
 } from '@nextgis/webmap';
 import type {
-  ForEachFeatureAtPixelCallback,
+  UnselectCb,
+  MapClickEvent,
   MouseEventType,
+  ForEachFeatureAtPixelOrderedCallback,
+  ForEachFeatureAtPixelCallback,
 } from '../OlMapAdapter';
 import { convertMapClickEvent } from '../utils/convertMapClickEvent';
 import { makeHtmlFromString } from '../utils/makeHtmlFromString';
@@ -41,6 +44,7 @@ import { getCentroid } from '../utils/getCentroid';
 type MapBrowserPointerEvent = MapBrowserEvent<any>;
 type Layer = Base;
 type Layers = LayerDefinition<Feature, Layer>;
+type OpenedPopup = [OlFeature<any>, Overlay, PopupOnCloseFunction[]];
 
 type VectorLayerType = VectorSource<any>;
 
@@ -57,16 +61,26 @@ export class GeoJsonAdapter
   private _selectedFeatures: OlFeature<any>[] = [];
   private _filterFun?: DataLayerFilter<Feature>;
   private _mouseOver?: boolean;
-  private _openedPopup: [OlFeature<any>, Overlay, PopupOnCloseFunction[]][] =
-    [];
-
   private displayProjection = 'EPSG:3857';
   private lonlatProjection = 'EPSG:4326';
-
-  private _forEachFeatureAtPixel: ForEachFeatureAtPixelCallback[] = [];
+  private _openedPopup: OpenedPopup[] = [];
+  private _forEachFeatureAtPixel: ForEachFeatureAtPixelOrderedCallback[] = [];
+  private _mapClickEvents: MapClickEvent[] = [];
 
   constructor(public map: Map, public options: GeoJsonAdapterOptions) {
     this.displayProjection = map.getView().getProjection().getCode();
+  }
+
+  private get addUnselectCb() {
+    return this.map.get('_addUnselectCb') as (args: UnselectCb) => void;
+  }
+  private get mapClickEvents() {
+    return this.map.get('_mapClickEvents') as MapClickEvent[];
+  }
+  private get forEachFeatureAtPixel() {
+    return this.map.get(
+      '_forEachFeatureAtPixel',
+    ) as ForEachFeatureAtPixelOrderedCallback[];
   }
 
   addLayer(options: GeoJsonAdapterOptions): VectorLayer<VectorLayerType> {
@@ -104,9 +118,7 @@ export class GeoJsonAdapter
       },
       ...resolutionOptions(this.map, options),
     });
-    const interactive = defined(options.interactive)
-      ? options.interactive
-      : true;
+    const interactive = options.interactive ?? true;
     if (interactive) {
       this._addEventListener();
     }
@@ -114,21 +126,30 @@ export class GeoJsonAdapter
   }
 
   beforeRemove(): void {
-    const _forEachFeatureAtPixel = this.map.get(
-      '_forEachFeatureAtPixel',
-    ) as ForEachFeatureAtPixelCallback[];
-    for (let i = _forEachFeatureAtPixel.length; i--; ) {
-      const cb = _forEachFeatureAtPixel[i];
-      const index = this._forEachFeatureAtPixel.indexOf(cb);
+    const glob = this.forEachFeatureAtPixel;
+    for (let i = glob.length; i--; ) {
+      const cb = glob[i][1];
+      const index = this._forEachFeatureAtPixel.findIndex((x) => x[1] === cb);
       if (index !== -1) {
-        _forEachFeatureAtPixel.splice(i, 1);
+        glob.splice(i, 1);
       }
     }
     this._forEachFeatureAtPixel.length = 0;
+
+    const globSelect = this.mapClickEvents;
+    for (let i = globSelect.length; i--; ) {
+      const cb = globSelect[i];
+      const index = this._mapClickEvents.indexOf(cb);
+      if (index !== -1) {
+        globSelect.splice(i, 1);
+      }
+    }
+    this._mapClickEvents.length = 0;
     this._removeAllPopup();
   }
 
   clearLayer(cb?: (feature: Feature) => boolean): void {
+    this.unselect();
     if (cb) {
       const features = this.vectorSource.getFeatures().values();
       let entry;
@@ -264,14 +285,21 @@ export class GeoJsonAdapter
   }
 
   private _addEventListener() {
-    const _forEachFeatureAtPixel = this.map.get(
-      '_forEachFeatureAtPixel',
-    ) as ForEachFeatureAtPixelCallback[];
-    const cb: ForEachFeatureAtPixelCallback = (pixel, evt, type) => {
+    const glob = this.forEachFeatureAtPixel;
+    const cb: ForEachFeatureAtPixelCallback = (pixel, evt, type) =>
       this._onFeatureAtPixel(pixel, evt, type);
-    };
-    this._forEachFeatureAtPixel.push(cb);
-    _forEachFeatureAtPixel.push(cb);
+    const orderedCb: ForEachFeatureAtPixelOrderedCallback = [
+      this.options.order || 0,
+      cb,
+    ];
+    this._forEachFeatureAtPixel.push(orderedCb);
+    glob.push(orderedCb);
+
+    const unselectOnClick = this.options.unselectOnClick ?? true;
+    if (unselectOnClick) {
+      this._mapClickEvents.push(() => this.unselect());
+      this.mapClickEvents.push(() => this.unselect());
+    }
   }
 
   private _onFeatureAtPixel(
@@ -325,6 +353,8 @@ export class GeoJsonAdapter
           this.options.onMouseOver(mouseOptions);
         }
       }
+
+      return true;
     } else {
       if (type === 'hover' && this._mouseOver) {
         this._mouseOver = false;
@@ -336,6 +366,7 @@ export class GeoJsonAdapter
         }
       }
     }
+    return false;
   }
 
   private _selectFeature(feature: OlFeature<any>, coordinates?: number[]) {
@@ -367,12 +398,17 @@ export class GeoJsonAdapter
         type,
       });
     }
+    this.addUnselectCb(() => this._unselectFeature(feature));
   }
 
   private _unselectFeature(feature: OlFeature<any>) {
     const index = this._selectedFeatures.indexOf(feature);
     if (index !== -1) {
       this._selectedFeatures.splice(index, 1);
+      const popup = this._openedPopup.find((x) => x[0] === feature);
+      if (popup) {
+        this._removePopup(popup[1]);
+      }
     }
     this.selected = this._selectedFeatures.length > 0;
     if (this.options && this.options.paint) {
@@ -484,7 +520,7 @@ export class GeoJsonAdapter
         for (const h of closeHandlers) {
           h({ feature: getFeature(feature) });
         }
-        closeHandlers.length = 1;
+        closeHandlers.length = 0;
         if (unselectOnClose) {
           this._unselectFeature(feature);
         }

@@ -697,7 +697,7 @@ export abstract class VectorAdapter<
         for (const h of closeHandlers) {
           h({ feature });
         }
-        closeHandlers.length = 1;
+        closeHandlers.length = 0;
         if (unselectOnClose) {
           this._unselectFeature(feature);
         }
