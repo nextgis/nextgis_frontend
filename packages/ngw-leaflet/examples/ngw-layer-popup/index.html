@@ -20,8 +20,8 @@
     </style>
 
     <!-- <script src="https://unpkg.com/@nextgis/ngw-leaflet"></script> -->
-    <script src="../../lib/ngw-leaflet.global.js"></script>
     <!-- <script src="../../lib/ngw-leaflet.global.js"></script> -->
+    <script src="../../lib/ngw-leaflet.global.js"></script>
   </head>
 
   <body>
@@ -60,29 +60,47 @@
             ngwMap.addLayer('GEOJSON', {
               id: 'highlight',
               data: geojson,
-              paint: { color: 'green', stroke: true, fillOpacity: '0.8' },
+              paint: { color: 'green', stroke: true, fillOpacity: 0.8 },
               popup: true,
               popupOptions: {
+                // disable close button to use custom one
+                closeButton: false,
                 createPopupContent: function (e) {
-                  // get vector layer item
-                  return ngwMap.connector.getResourceParent(4249).then(function (item) {
-                    var element = document.createElement('div');
-                    // link properties field names with layer attributes names
-                    item.feature_layer.fields.forEach(function (x) {
-                      if (x.grid_visibility) {
-                        var value = e.feature.properties[x.keyname];
-                        var propElem = document.createElement('div');
-                        element.appendChild(propElem);
-                        propElem.innerHTML =
-                          '<span>' +
-                          x.display_name +
-                          '</span>:' +
-                          value +
-                          '<span></span>';
-                      }
+                  var element = document.createElement('div');
+                  // get style resource item
+                  return ngwMap.connector
+                    .getResource(4249)
+                    .then(function (style) {
+                      // get vector layer item
+                      return ngwMap.connector
+                        .getResource(style.resource.parent.id)
+                        .then(function (item) {
+                          // set up event on popup close
+                          e.onClose(function () {
+                            clean();
+                          });
+                          // link properties field names with layer attributes names
+                          item.feature_layer.fields.forEach(function (x) {
+                            if (x.grid_visibility) {
+                              var value = e.feature.properties[x.keyname];
+                              var propElem = document.createElement('div');
+                              element.appendChild(propElem);
+                              propElem.innerHTML =
+                                '<span>' +
+                                x.display_name +
+                                '</span>:' +
+                                value +
+                                '<span></span>';
+                            }
+                          });
+                          // create custom close button
+                          const closeBtn = document.createElement('button');
+                          closeBtn.innerHTML = 'Close';
+                          closeBtn.onclick = e.close;
+                          element.appendChild(closeBtn);
+                          return element;
+                        });
                     });
-                    return element;
-                  });
                 },
               },
             });

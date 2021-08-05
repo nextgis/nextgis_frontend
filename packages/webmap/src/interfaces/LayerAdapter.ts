@@ -60,6 +60,8 @@ export interface AdapterOptions<
    * Show layer on the map immediately after adding.
    * Such layers are always under others.
    * Only one base layer can be displayed on the map at a time.
+   * @remarks
+   * TODO: replace by show
    *
    * @defaultValue true
    */
@@ -160,8 +162,12 @@ export interface MvtAdapterOptions<F extends Feature = Feature>
  */
 export type VectorAdapterLayerType = 'polygon' | 'point' | 'line';
 
+export type PopupOnCloseFunction = (args: LayerDefinition) => void;
+
 export interface CreatePopupContentProps extends LayerDefinition {
   type: OnLayerSelectType;
+  close: () => void;
+  onClose: (cb: PopupOnCloseFunction) => void;
 }
 
 /**
@@ -173,6 +179,11 @@ export interface PopupOptions {
   autoPan?: boolean;
   popupContent?: string | HTMLElement;
   fromProperties?: boolean;
+  closeButton?: boolean;
+  /** Unselect feature on popup close
+   * @default true
+   */
+  unselectOnClose?: boolean;
   createPopupContent?: (
     props: CreatePopupContentProps,
   ) =>
