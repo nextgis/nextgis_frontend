@@ -39,8 +39,8 @@ import type {
 } from 'maplibre-gl';
 
 export type TLayer = string[];
+export type UnselectCb = () => void;
 type TLayerAdapter = LayerAdapter<Map, TLayer>;
-
 const fitBoundsOptions: FitOptions = {
   // padding: 100
 };
@@ -83,7 +83,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     'move',
     'moveend',
   ];
-
+  private _unselectCb: UnselectCb[] = [];
   private _sourceDataLoading: { [name: string]: any[] } = {};
   private __setLayerOrder: (layers: { [x: string]: TLayerAdapter }) => void;
 
@@ -146,8 +146,9 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
           }
           this.map = new Map(mapOpt);
           this.map.once('load', () => {
-            this.map._onMapClickLayers = [];
             this.map.transformRequests = [];
+            this.map._onMapClickLayers = [];
+            this.map._addUnselectCb = (args) => this._addUnselectCb(args);
             this.isLoaded = true;
             this.emitter.emit('create', this);
             resolve(this);
@@ -325,6 +326,12 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     const emitData = convertMapClickEvent(evt);
     this.emitter.emit('preclick', emitData);
     if (this.map) {
+      this.map._onMapClickLayers.forEach((x) => {
+        const unselectOnClick = x.options.unselectOnClick ?? true;
+        if (unselectOnClick) {
+          x.unselect();
+        }
+      });
       this.map._onMapClickLayers
         .sort((a, b) => {
           if (a.options && a.options.order && b.options && b.options.order) {
@@ -479,6 +486,14 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
         }
       }
     }
+  }
+
+  private _addUnselectCb(cb: UnselectCb) {
+    for (const p of this._unselectCb) {
+      p();
+    }
+    this._unselectCb.length = 0;
+    this._unselectCb.push(cb);
   }
 
   private _transformRequest(

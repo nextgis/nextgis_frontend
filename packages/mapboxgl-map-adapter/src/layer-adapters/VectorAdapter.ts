@@ -266,6 +266,7 @@ export abstract class VectorAdapter<
     feature: Feature,
     coordinates?: LngLatLike,
   ): boolean {
+    this.map && this.map._addUnselectCb(() => this.unselect());
     let isSelected = this.isFeatureSelected(feature);
     if (this.options.selectable) {
       let features: Feature[] | undefined = undefined;
@@ -652,8 +653,8 @@ export abstract class VectorAdapter<
     };
     const {
       maxWidth,
-      createPopupContent,
       popupContent,
+      createPopupContent,
       closeButton: closeBtn,
     } = options;
     const closeButton = closeBtn ?? !this.options.selectOnHover;
@@ -674,13 +675,22 @@ export abstract class VectorAdapter<
         typeof content === 'string' ? makeHtmlFromString(content) : content;
       const popupOpt: maplibregl.PopupOptions = {
         closeButton,
-        // closeOnClick: false,
+        closeOnClick: false,
       };
       if (maxWidth) {
         popupOpt.maxWidth = typeof maxWidth === 'number' ? maxWidth + 'px' : '';
       }
       popup = new Popup(popupOpt);
       popup.setLngLat(coordinates).setDOMContent(html).addTo(map);
+
+      const unselectOnClose =
+        this.options.popupOptions?.unselectOnClose ?? true;
+      if (unselectOnClose) {
+        popup.once('close', () => {
+          close();
+        });
+      }
+
       this._openedPopup.push([feature, popup, _closeHandlers]);
     }
   }
