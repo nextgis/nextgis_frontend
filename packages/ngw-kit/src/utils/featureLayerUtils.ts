@@ -1,17 +1,23 @@
 import CancelablePromise from '@nextgis/cancelable-promise';
 import {
   checkIfPropertyFilter,
-  PropertyFilter,
   PropertiesFilter,
+  PropertyFilter,
 } from '@nextgis/properties-filter';
-import { defined } from '@nextgis/utils';
+import {
+  defined,
+  degrees2meters,
+  getBoundsCoordinates,
+  isLngLatBoundsArray,
+} from '@nextgis/utils';
 
 import type { Geometry, Feature } from 'geojson';
 import type {
   FeatureItem,
-  RequestItemAdditionalParams,
   FeatureProperties,
+  RequestItemAdditionalParams,
 } from '@nextgis/ngw-connector';
+import type { LngLatArray } from '@nextgis/utils';
 import type {
   FeatureRequestParams,
   FetchNgwItemsOptions,
@@ -143,6 +149,14 @@ export function createFeatureFieldFilterQueries<
   });
 }
 
+function createWktFromCoordArray(coord: LngLatArray[]): string {
+  const polygon = coord.map(([lng, lat]) => {
+    const [x, y] = degrees2meters(lng, lat);
+    return x + ' ' + y;
+  });
+  return `POLYGON((${polygon.join(', ')}))`;
+}
+
 export function fetchNgwLayerItemsRequest<
   G extends Geometry = Geometry,
   P extends { [field: string]: any } = { [field: string]: any },
@@ -176,7 +190,13 @@ export function fetchNgwLayerItemsRequest<
   if (orderBy) {
     params.order_by = orderBy.join(',');
   }
-  if (intersects) {
+  if (Array.isArray(intersects)) {
+    const coordinates = isLngLatBoundsArray(intersects)
+      ? getBoundsCoordinates(intersects)
+      : intersects;
+
+    params.intersects = createWktFromCoordArray(coordinates);
+  } else if (typeof intersects === 'string') {
     params.intersects = intersects;
   }
 
