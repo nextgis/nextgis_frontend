@@ -6,7 +6,7 @@ import {
   FilterOptions,
   LayerAdapter,
 } from '@nextgis/webmap';
-import { debounce, degrees2meters } from '@nextgis/utils';
+import { debounce, LngLatArray } from '@nextgis/utils';
 import { PropertiesFilter, propertiesFilter } from '@nextgis/properties-filter';
 import CancelablePromise from '@nextgis/cancelable-promise';
 import { vectorLayerGeomToPaintTypeAlias } from '../utils/utils';
@@ -183,7 +183,7 @@ export async function createGeoJsonAdapter(
       if (this.options.strategy === 'BBOX') {
         await webMap.onLoad('create');
         filterArgs.options = filterArgs.options || {};
-        filterArgs.options.intersects = this._getMapBbox();
+        filterArgs.options.intersects = webMap.getBounds();
       }
       if (removed) {
         return;
@@ -279,24 +279,6 @@ export async function createGeoJsonAdapter(
       }
       if (this.__onMapMoveStart) {
         webMap.emitter.removeListener('movestart', this.__onMapMoveStart);
-      }
-    }
-
-    _getMapBbox(): string | undefined {
-      const bounds = webMap.getBounds();
-      if (bounds) {
-        const [s, w, n, e] = bounds;
-        const polygon = [
-          [s, w],
-          [n, w],
-          [n, e],
-          [s, e],
-          [s, w],
-        ].map(([lng, lat]) => {
-          const [x, y] = degrees2meters(lng, lat);
-          return x + ' ' + y;
-        });
-        return `POLYGON((${polygon.join(', ')}))`;
       }
     }
   }
