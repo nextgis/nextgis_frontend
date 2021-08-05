@@ -129,7 +129,7 @@ export class GeoJsonAdapter
     const glob = this.forEachFeatureAtPixel;
     for (let i = glob.length; i--; ) {
       const cb = glob[i][1];
-      const index = this._forEachFeatureAtPixel.findIndex((x) => x[1] === cb);
+      const index = glob.findIndex((x) => x[1] === cb);
       if (index !== -1) {
         glob.splice(i, 1);
       }
@@ -139,7 +139,7 @@ export class GeoJsonAdapter
     const globSelect = this.mapClickEvents;
     for (let i = globSelect.length; i--; ) {
       const cb = globSelect[i];
-      const index = this._mapClickEvents.indexOf(cb);
+      const index = globSelect.indexOf(cb);
       if (index !== -1) {
         globSelect.splice(i, 1);
       }
@@ -501,10 +501,11 @@ export class GeoJsonAdapter
   }
 
   private _removeAllPopup(): void {
-    for (const p of this._openedPopup) {
+    const _openedPopup = [...this._openedPopup];
+    this._openedPopup = [];
+    for (const p of _openedPopup) {
       this._removePopup(p[1]);
     }
-    this._openedPopup.length = 0;
   }
 
   private _removePopup(popup: Overlay) {
