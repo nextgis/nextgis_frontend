@@ -1,5 +1,5 @@
+import { IControl } from 'maplibre-gl';
 import { MapControl, CreateControlOptions } from '@nextgis/webmap';
-import { IControl } from 'mapbox-gl';
 
 export function createControl(
   control: MapControl,

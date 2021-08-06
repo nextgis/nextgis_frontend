@@ -1,0 +1,13 @@
+{
+  "name": "@nextgis/frontend_docs",
+  "private": true,
+  "version": "1.2.0",
+  "scripts": {
+    "doc": "typedoc"
+  },
+  "devDependencies": {
+    "typedoc": "^0.21.5"
+  },
+  "license": "MIT",
+  "dependencies": {}
+}

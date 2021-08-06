@@ -2,6 +2,7 @@
  * A promise you can stop
  *
  * @packageDocumentation
+ * @module cancelable-promise
  */
 import { CancelablePromise } from './CancelablePromise';
 

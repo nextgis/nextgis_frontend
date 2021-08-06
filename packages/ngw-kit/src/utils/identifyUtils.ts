@@ -9,12 +9,12 @@ import { createGeoJsonFeature } from './featureLayerUtils';
 import { fetchNgwLayerFeature } from './fetchNgwLayerFeature';
 import { fetchNgwLayerItem } from './fetchNgwLayerItem';
 
-import type { Geometry, Feature, GeoJsonProperties } from 'geojson';
+import type { Geometry, Feature } from 'geojson';
 import type { MapClickEvent } from '@nextgis/webmap';
 import type {
   LayerFeature,
   FeatureLayersIdentify,
-  FeatureLayerFields,
+  FeatureProperties,
 } from '@nextgis/ngw-connector';
 import type {
   GetIdentifyGeoJsonOptions,
@@ -73,7 +73,7 @@ export function getIdentifyItems(
 
 export function fetchIdentifyGeoJson<
   G extends Geometry = Geometry,
-  P extends JsonMap = JsonMap
+  P extends JsonMap = JsonMap,
 >(
   options: GetIdentifyGeoJsonOptions,
 ): CancelablePromise<Feature<G, P> | undefined> {
@@ -107,7 +107,7 @@ export function fetchIdentifyGeoJson<
 
 export function fetchIdentifyItem<
   G extends Geometry = Geometry,
-  P extends GeoJsonProperties = GeoJsonProperties
+  P extends FeatureProperties = FeatureProperties,
 >(
   options: GetIdentifyGeoJsonOptions,
 ): CancelablePromise<NgwFeatureItemResponse<P, G> | undefined> {
@@ -129,7 +129,7 @@ export function fetchIdentifyItem<
  */
 export function getIdentifyGeoJson<
   G extends Geometry = Geometry,
-  P extends JsonMap = JsonMap
+  P extends JsonMap = JsonMap,
 >(
   options: GetIdentifyGeoJsonOptions,
 ): CancelablePromise<Feature<G, P> | undefined> {
@@ -143,7 +143,23 @@ export function sendIdentifyRequest(
 ): CancelablePromise<FeatureLayersIdentify> {
   deprecatedMapClick(ev);
   const [lng, lat] = ev.lngLat;
-  const geom = getCirclePolygonCoordinates(lng, lat, options.radius);
+
+  let geom: number[][] = [];
+
+  if (options.geom) {
+    const polygon =
+      options.geom.type === 'Feature'
+        ? options.geom.geometry
+        : options.geom.type === 'Polygon'
+        ? options.geom
+        : false;
+    if (polygon) {
+      geom = polygon.coordinates[0];
+    }
+  }
+  if (!geom.length) {
+    geom = getCirclePolygonCoordinates(lng, lat, options.radius);
+  }
 
   // create wkt string
   const polygon: string[] = [];
@@ -167,8 +183,8 @@ export function sendIdentifyRequest(
 }
 
 export function createIdentifyItem<
-  F = FeatureLayerFields,
-  G extends Geometry = Geometry
+  F = FeatureProperties,
+  G extends Geometry = Geometry,
 >(opt: IdentifyItemOptions): IdentifyItem {
   return new IdentifyItem<F, G>(opt);
 }

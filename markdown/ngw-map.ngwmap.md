@@ -52,7 +52,7 @@ const ngwMap = new NgwMap({
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
 |  [addControl(controlDef, position, options)](./ngw-map.ngwmap.addcontrol.md) |  | Organized addition to the map design and controls elements, calling <code>control.onAdd(this.webMap.mapAdapter)</code> |
-|  [addNgwLayer(options)](./ngw-map.ngwmap.addngwlayer.md) |  | Add any (style, vector, webmap) NGW layer by resource id. |
+|  [addNgwLayer(options)](./ngw-map.ngwmap.addngwlayer.md) |  | Add any (style, vector, webmap) NGW layer by resource definition. |
 |  [cancelPromise(args)](./ngw-map.ngwmap.cancelpromise.md) |  |  |
 |  [cancelPromises(args)](./ngw-map.ngwmap.cancelpromises.md) |  |  |
 |  [disableSelection()](./ngw-map.ngwmap.disableselection.md) |  |  |

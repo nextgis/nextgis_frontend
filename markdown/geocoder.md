@@ -6,6 +6,8 @@
 
 Modern geocoder on async generators. May use different data providers.
 
+ geocoder
+
 ## Classes
 
 |  Class | Description |

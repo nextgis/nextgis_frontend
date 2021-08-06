@@ -27,7 +27,10 @@
   "include": [
     "packages/global.d.ts",
     "packages/*/src",
-    "tests"
+  ],
+  "exclude": [
+    "tests",
+    "node_modules"
   ]
 }
 

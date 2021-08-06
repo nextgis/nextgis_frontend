@@ -4,7 +4,6 @@
 
 ## GetAttributionsOptions interface
 
-
 <b>Signature:</b>
 
 ```typescript

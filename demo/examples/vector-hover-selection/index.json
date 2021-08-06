@@ -1,7 +1,6 @@
 {
   "name": "Vector selection on hover",
   "description": "",
-  "#ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"],
-  "ngwMaps": ["ngw-leaflet"],
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"],
   "onlyForDemo": true
 }

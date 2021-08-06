@@ -39,6 +39,7 @@ export interface MapAdapter<M = any, L = any, C = any>
 |  [getBounds()?](./webmap.mapadapter.getbounds.md) | <i>(Optional)</i> |
 |  [getCenter()](./webmap.mapadapter.getcenter.md) |  |
 |  [getContainer()](./webmap.mapadapter.getcontainer.md) |  |
+|  [getControlContainer()?](./webmap.mapadapter.getcontrolcontainer.md) | <i>(Optional)</i> |
 |  [getCursor()?](./webmap.mapadapter.getcursor.md) | <i>(Optional)</i> |
 |  [getZoom()](./webmap.mapadapter.getzoom.md) |  |
 |  [hideLayer(layer)](./webmap.mapadapter.hidelayer.md) |  |

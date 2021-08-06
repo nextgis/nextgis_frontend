@@ -7,14 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-static connect<T extends typeof BaseResource = typeof BaseResource>(resourceOptions: ResourceDefinition, connectionOrOptions: Connection | ConnectionOptions): Promise<T>;
+static connect<T extends typeof BaseResource = typeof BaseResource>(resourceOptions: ResourceIdKeynameDef, connectionOrOptions: Connection | ConnectionOptions): Promise<T>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  resourceOptions | [ResourceDefinition](./ngw-connector.resourcedefinition.md) |  |
+|  resourceOptions | [ResourceIdKeynameDef](./ngw-connector.resourceidkeynamedef.md) |  |
 |  connectionOrOptions | [Connection](./ngw-orm.connection.md) \| ConnectionOptions |  |
 
 <b>Returns:</b>

@@ -22,7 +22,7 @@ import MapAdapter from "@nextgis/leaflet-map-adapter";
 // import 'ol/ol.css';
 // import MapAdapter from '@nextgis/ol-map-adapter';
 // OR
-// import 'mapbox-gl/dist/mapbox-gl.css';
+// import 'maplibre-gl/dist/maplibre-gl.css';
 // import MapAdapter from '@nextgis/mapboxgl-map-adapter';
 
 const webMap = new WebMap({
@@ -40,6 +40,7 @@ webMap.onLoad().then(() => {
 });
 
 ```
+ webmap
 
 ## Classes
 
@@ -55,6 +56,7 @@ webMap.onLoad().then(() => {
 |  Function | Description |
 |  --- | --- |
 |  [createWebMap(options)](./webmap.createwebmap.md) |  |
+|  [getWebMap(id)](./webmap.getwebmap.md) |  |
 
 ## Interfaces
 
@@ -63,9 +65,10 @@ webMap.onLoad().then(() => {
 |  [AdapterOptions](./webmap.adapteroptions.md) | Parameters that can be used to create any map layer adapter. |
 |  [AttributionControlOptions](./webmap.attributioncontroloptions.md) |  |
 |  [ButtonControlOptions](./webmap.buttoncontroloptions.md) | Options for creating a [button control](./webmap.webmapcontrols.createbuttoncontrol.md)<!-- -->. |
+|  [ContribControlsOptions](./webmap.contribcontrolsoptions.md) |  |
 |  [ControlOptions](./webmap.controloptions.md) |  |
-|  [ControlsOptions](./webmap.controlsoptions.md) |  |
 |  [CreateControlOptions](./webmap.createcontroloptions.md) |  |
+|  [CreatePopupContentProps](./webmap.createpopupcontentprops.md) |  |
 |  [DataLoadError](./webmap.dataloaderror.md) |  |
 |  [FilterOptions](./webmap.filteroptions.md) |  |
 |  [FitOptions](./webmap.fitoptions.md) | Parameters that control how the fit to object will be work. |
@@ -118,6 +121,7 @@ webMap.onLoad().then(() => {
 |  [CallbackFilter](./webmap.callbackfilter.md) |  |
 |  [ControlPosition](./webmap.controlposition.md) |  |
 |  [ControlPositions](./webmap.controlpositions.md) |  |
+|  [ControlsOptions](./webmap.controlsoptions.md) |  |
 |  [Cursor](./webmap.cursor.md) | Available cursor names from [https://developer.mozilla.org/ru/docs/Web/CSS/cursor](https://developer.mozilla.org/ru/docs/Web/CSS/cursor)  |
 |  [DataLayerFilter](./webmap.datalayerfilter.md) |  |
 |  [HtmlDef](./webmap.htmldef.md) |  |
@@ -128,5 +132,8 @@ webMap.onLoad().then(() => {
 |  [OnClick](./webmap.onclick.md) |  |
 |  [onClickAsync](./webmap.onclickasync.md) |  |
 |  [OnClickSync](./webmap.onclicksync.md) |  |
+|  [OnLayerMouseOptions](./webmap.onlayermouseoptions.md) |  |
+|  [OnLayerSelectType](./webmap.onlayerselecttype.md) |  |
+|  [PopupOnCloseFunction](./webmap.popuponclosefunction.md) |  |
 |  [VectorAdapterLayerType](./webmap.vectoradapterlayertype.md) |  |
 

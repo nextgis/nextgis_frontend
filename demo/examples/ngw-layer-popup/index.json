@@ -1,7 +1,9 @@
 {
-  "name": "NGW layer popup",
+  "name": "NGW layer popup on select",
   "description": "",
   "ngwMaps": [
-    "ngw-leaflet"
+    "ngw-leaflet",
+    "ngw-mapbox",
+    "ngw-ol"
   ]
 }

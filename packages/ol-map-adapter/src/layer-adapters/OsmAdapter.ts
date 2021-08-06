@@ -9,7 +9,7 @@ export class OsmAdapter implements MainLayerAdapter {
 
   constructor(public map: Map, public options: AdapterOptions) {}
 
-  addLayer(): TileLayer {
+  addLayer(): TileLayer<OSM> {
     const attributions = [ATTRIBUTION];
     const layer = new TileLayer({
       source: new OSM({

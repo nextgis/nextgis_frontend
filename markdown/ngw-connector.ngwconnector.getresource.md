@@ -8,14 +8,14 @@
 <b>Signature:</b>
 
 ```typescript
-getResource(resource: ResourceDefinition | DeepPartial<Resource>): CancelablePromise<ResourceItem | undefined>;
+getResource(resource: ResourceDefinition): CancelablePromise<ResourceItem | undefined>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  resource | [ResourceDefinition](./ngw-connector.resourcedefinition.md) \| [DeepPartial](./utils.deeppartial.md)<!-- -->&lt;[Resource](./ngw-connector.resource.md)<!-- -->&gt; |  |
+|  resource | [ResourceDefinition](./ngw-connector.resourcedefinition.md) |  |
 
 <b>Returns:</b>
 

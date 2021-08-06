@@ -43,6 +43,7 @@ export interface RequestItemsParamsMap
 |  ["feature\_layer.identify"](./ngw-connector.requestitemsparamsmap._feature_layer.identify_.md) | null |  |
 |  ["feature\_layer.store.item"](./ngw-connector.requestitemsparamsmap._feature_layer.store.item_.md) | { id: number; feature\_id: number; } |  |
 |  ["feature\_layer.store"](./ngw-connector.requestitemsparamsmap._feature_layer.store_.md) | { id: number; } |  |
+|  ["file\_upload.item"](./ngw-connector.requestitemsparamsmap._file_upload.item_.md) | { id: number; } |  |
 |  ["file\_upload.upload"](./ngw-connector.requestitemsparamsmap._file_upload.upload_.md) | null |  |
 |  ["layer.extent"](./ngw-connector.requestitemsparamsmap._layer.extent_.md) | { id: number; } |  |
 |  ["mapserver.qml\_transform"](./ngw-connector.requestitemsparamsmap._mapserver.qml_transform_.md) | null |  |

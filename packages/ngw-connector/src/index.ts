@@ -5,6 +5,7 @@
  * Make sure CORS is registered in the {@link https://docs.nextgis.com/docs_ngcom/source/CORS.html | NextGIS Web settings } to be able to send requests.
  *
  * @packageDocumentation
+ * @module ngw-connector
  */
 import { NgwConnector } from './NgwConnector';
 

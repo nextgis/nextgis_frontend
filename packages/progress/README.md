@@ -17,7 +17,11 @@ Simply download and include with a script tag, `Progress` will be registered as 
 
 <script>
   var progress = new Progress();
-  TODO: add usage examples
+  progress.emitter.on('stop', function () {
+    console.log('STOP LOADING')
+  })
+  progress.addLoading();
+  progress.addLoaded();
 </script>
 ```
 
@@ -48,6 +52,31 @@ $ yarn add @nextgis/progress
 ## Usage
 
 ```javascript
+import Progress from '@nextgis/progress';
+
+const progress = new Progress();
+
+// emitted when the first loader is added
+progress.emitter.on('start', () => {
+
+});
+// emitted when the last loader is removed
+progress.emitter.on('stop', () => {
+
+});
+// emitted on each loader is added
+progress.emitter.on('add', () => {
+
+});
+// emmitted on each loader is removed
+progress.emitter.on('remove', () => {
+
+});
+
+progress.addLoading();
+fetch(url).finally(() => {
+  progress.addLoaded();
+})
 
 ```
 

@@ -4,7 +4,6 @@
 
 ## RuntimeParams interface
 
-
 <b>Signature:</b>
 
 ```typescript

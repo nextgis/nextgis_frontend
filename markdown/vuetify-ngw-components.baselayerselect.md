@@ -20,6 +20,7 @@ export declare class BaselayerSelect extends Vue
 |  [active](./vuetify-ngw-components.baselayerselect.active.md) |  | string \| false |  |
 |  [allowEmpty](./vuetify-ngw-components.baselayerselect.allowempty.md) |  | boolean |  |
 |  [emptyLayerText](./vuetify-ngw-components.baselayerselect.emptylayertext.md) |  | string |  |
+|  [emptyValue](./vuetify-ngw-components.baselayerselect.emptyvalue.md) |  | string |  |
 |  [items](./vuetify-ngw-components.baselayerselect.items.md) |  | [VueSelectItem](./vuetify-ngw-components.vueselectitem.md)<!-- -->\[\] |  |
 |  [webMap](./vuetify-ngw-components.baselayerselect.webmap.md) |  | [WebMap](./webmap.webmap.md) |  |
 |  [webMapId](./vuetify-ngw-components.baselayerselect.webmapid.md) |  | number |  |
@@ -34,7 +35,7 @@ export declare class BaselayerSelect extends Vue
 |  [destroy()](./vuetify-ngw-components.baselayerselect.destroy.md) |  |  |
 |  [mounted()](./vuetify-ngw-components.baselayerselect.mounted.md) |  |  |
 |  [render(h)](./vuetify-ngw-components.baselayerselect.render.md) |  |  |
-|  [setVisibleLayers(active)](./vuetify-ngw-components.baselayerselect.setvisiblelayers.md) |  |  |
+|  [setVisibleLayers(active, old)](./vuetify-ngw-components.baselayerselect.setvisiblelayers.md) |  |  |
 |  [updateItems()](./vuetify-ngw-components.baselayerselect.updateitems.md) |  |  |
 |  [updateWebMap()](./vuetify-ngw-components.baselayerselect.updatewebmap.md) |  |  |
 

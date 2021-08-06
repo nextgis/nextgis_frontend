@@ -1,121 +1,124 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Ngw WebMap Tree</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
 
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Ngw WebMap Tree</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-    }
+      html,
+      body,
+      #wrap,
+      #map {
+        width: 100%;
+        height: 100%;
+      }
 
-    html,
-    body,
-    #wrap,
-    #map {
-      width: 100%;
-      height: 100%;
-    }
+      #wrap {
+        display: flex;
+      }
 
-    #wrap {
-      display: flex;
-    }
+      #tree {
+        width: 35%;
+        min-width: 300px;
+        overflow: auto;
+      }
 
-    #tree {
-      width: 35%;
-      min-width: 300px;
-      overflow: auto;
-    }
+      .tree-container__item {
+        padding-top: 0.3rem;
+      }
 
-    .tree-container__item {
-      padding-top: .3rem;
-    }
+      .tree-container__item input {
+        margin-right: 3px;
+      }
 
-    .tree-container__item input {
-      margin-right: 3px;
-    }
+      .tree-container__item-children {
+        padding: 0;
+        padding-top: 3px;
+        padding-left: 15px;
+      }
+    </style>
 
-    .tree-container__item-children {
-      padding: 0;
-      padding-top: 3px;
-      padding-left: 15px;
-    }
-  </style>
+    <script src="../../lib/ngw-ol.global.js"></script>
+  </head>
 
-  <script src="../../lib/ngw-ol.global.js"></script>
-</head>
-
-<body>
-  <div id="wrap">
-    <div id='tree'></div>
-    <div id='map'></div>
-  </div>
-  <script>
-    var tree = document.getElementById('tree');
-    var ngwMap = new NgwMap({
-      baseUrl: 'https://demo.nextgis.com',
-      target: 'map',
-      qmsId: 448
-    });
-    ngwMap.onLoad().then(function () {
-      var webMapLayer = ngwMap.addLayer('WEBMAP', {
-        resource: 4355,
-        fit: true
-      }).then(function (webmap) {
-        tree.appendChild(createTreeItem(webmap.layer));
+  <body>
+    <div id="wrap">
+      <div id="tree"></div>
+      <div id="map"></div>
+    </div>
+    <script>
+      var tree = document.getElementById('tree');
+      var ngwMap = new NgwMap({
+        baseUrl: 'https://demo.nextgis.com',
+        target: 'map',
+        osm: true,
       });
-    });
-
-    function createTreeBranch(layers) {
-      var elem = document.createElement('div');
-      elem.className = 'tree-container__item-children';
-      layers.forEach((x) => {
-        if (x.item) {
-          var item = createTreeItem(x);
-          elem.appendChild(item);
-        }
-      });
-      return elem;
-    }
-
-    function createTreeItem(layer) {
-      var item = layer.item;
-      var elem = document.createElement('div');
-      elem.className = 'tree-container__item';
-      if (item.display_name) {
-        var input = document.createElement('input');
-        input.setAttribute('type', 'checkbox');
-        var value = item.item_type === 'layer' ? item.layer_enabled : true;
-        input.checked = value;
-
-        var visibility = layer.properties.property('visibility');
-        if (visibility) {
-          visibility.emitter.on('change', function (ev) {
-            input.checked = ev.value;
+      ngwMap.onLoad().then(function () {
+        var webMapLayer = ngwMap
+          .addNgwLayer({
+            resource: 4355,
+            fit: true,
+          })
+          .then(function (webmap) {
+            tree.appendChild(createTreeItem(webmap.layer));
           });
-          input.onclick = function () {
-            visibility.set(input.checked, {
-              propagation: NgwMap.keys.pressed('ctrl')
+      });
+
+      function createTreeBranch(layers) {
+        var elem = document.createElement('div');
+        elem.className = 'tree-container__item-children';
+        layers.forEach((x) => {
+          if (x.item) {
+            var item = createTreeItem(x);
+            elem.appendChild(item);
+          }
+        });
+        return elem;
+      }
+
+      function createTreeItem(layer) {
+        var item = layer.item;
+        var elem = document.createElement('div');
+        elem.className = 'tree-container__item';
+        if (item.display_name) {
+          var input = document.createElement('input');
+          input.setAttribute('type', 'checkbox');
+          var value = item.item_type === 'layer' ? item.layer_enabled : true;
+          input.checked = value;
+
+          var visibility = layer.properties.property('visibility');
+          if (visibility) {
+            visibility.emitter.on('change', function (ev) {
+              input.checked = ev.value;
             });
-          };
+            input.onclick = function () {
+              visibility.set(input.checked, {
+                propagation: NgwMap.keys.pressed('ctrl'),
+              });
+            };
+          }
+          var name = document.createElement('span');
+          name.innerHTML = item.display_name;
+          elem.appendChild(input);
+          elem.appendChild(name);
         }
-        var name = document.createElement('span');
-        name.innerHTML = item.display_name;
-        elem.appendChild(input);
-        elem.appendChild(name);
-      }
 
-      if (item.item_type === 'group' || item.item_type === 'root' && item.children.length) {
-        var children = layer.tree.getChildren();
-        var treeBranch = createTreeBranch(children.reverse());
-        elem.appendChild(treeBranch);
+        if (
+          item.item_type === 'group' ||
+          (item.item_type === 'root' && item.children.length)
+        ) {
+          var children = layer.tree.getChildren();
+          var treeBranch = createTreeBranch(children.reverse());
+          elem.appendChild(treeBranch);
+        }
+        return elem;
       }
-      return elem;
-    }
-  </script>
-</body>
-
+    </script>
+  </body>
 </html>

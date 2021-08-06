@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function createResourceStore<P extends GeoJsonProperties = GeoJsonProperties, G extends Geometry | null = Geometry>(options: {
+export declare function createResourceStore<P extends FeatureProperties = FeatureProperties, G extends Geometry | null = Geometry>(options: {
     connector: NgwConnector;
     keyname: string;
     store: Store<any>;

@@ -9,9 +9,9 @@
 
 
   <!-- <script src="https://unpkg.com/@nextgis/ngw-leaflet"></script> -->
-  <script type="text/javascript" src="../../../ngw-leaflet/lib/ngw-leaflet.js"></script>
+  <script type="text/javascript" src="../../../ngw-leaflet/lib/ngw-leaflet.global.js"></script>
   <!-- <script src="https://unpkg.com/@nextgis/ngw-uploader"></script> -->
-  <script type="text/javascript" src="../../lib/ngw-uploader.js"></script>
+  <script type="text/javascript" src="../../lib/ngw-uploader.global.js"></script>
   <style>
     * {
       margin: 0;
@@ -34,7 +34,7 @@
 
 <body>
   <div id="control-element">
-    <p>Select GEOTIFF file</p>
+    <p>Select GEOTIFF file (<a href="https://demo.nextgis.com/resource/4004/export" target="_blank">example</a>)</p>
     <input id="resource-input" type="file" />
     <div id='uploader'></div>
     <p id='status'></p>
@@ -44,7 +44,7 @@
     var uploader = document.getElementById('uploader');
     var statusUpload = document.getElementById('status');
     var input = document.getElementById('resource-input');
-    var baseUrl = 'http://dev.nextgis.com/sandbox';
+    var baseUrl = 'https://sandbox.nextgis.com';
 
     var element = document.getElementById('control-element');
     element.parentNode.removeChild(element);

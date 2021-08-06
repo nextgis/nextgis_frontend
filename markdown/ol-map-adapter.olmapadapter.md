@@ -32,10 +32,11 @@ export declare class OlMapAdapter implements MapAdapter<Map, Layer>
 |  [createButtonControl(options)](./ol-map-adapter.olmapadapter.createbuttoncontrol.md) |  |  |
 |  [createControl(control, options)](./ol-map-adapter.olmapadapter.createcontrol.md) |  |  |
 |  [destroy()](./ol-map-adapter.olmapadapter.destroy.md) |  |  |
-|  [fitBounds(e)](./ol-map-adapter.olmapadapter.fitbounds.md) |  |  |
+|  [fitBounds(e, options)](./ol-map-adapter.olmapadapter.fitbounds.md) |  |  |
 |  [getBounds()](./ol-map-adapter.olmapadapter.getbounds.md) |  |  |
 |  [getCenter()](./ol-map-adapter.olmapadapter.getcenter.md) |  |  |
 |  [getContainer()](./ol-map-adapter.olmapadapter.getcontainer.md) |  |  |
+|  [getControlContainer()](./ol-map-adapter.olmapadapter.getcontrolcontainer.md) |  |  |
 |  [getZoom()](./ol-map-adapter.olmapadapter.getzoom.md) |  |  |
 |  [hideLayer(layer)](./ol-map-adapter.olmapadapter.hidelayer.md) |  |  |
 |  [onMapClick(evt)](./ol-map-adapter.olmapadapter.onmapclick.md) |  |  |

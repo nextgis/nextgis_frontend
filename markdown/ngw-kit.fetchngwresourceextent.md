@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function fetchNgwResourceExtent(item: ResourceItem, connector: NgwConnector): Promise<LngLatBoundsArray | undefined>;
+export declare function fetchNgwResourceExtent(item: ResourceItem, connector: NgwConnector): CancelablePromise<LngLatBoundsArray | undefined>;
 ```
 
 ## Parameters
@@ -19,5 +19,5 @@ export declare function fetchNgwResourceExtent(item: ResourceItem, connector: Ng
 
 <b>Returns:</b>
 
-Promise&lt;[LngLatBoundsArray](./utils.lnglatboundsarray.md) \| undefined&gt;
+CancelablePromise&lt;[LngLatBoundsArray](./utils.lnglatboundsarray.md) \| undefined&gt;
 

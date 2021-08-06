@@ -16,15 +16,18 @@ import { Attribution } from './controls/Attribution';
 import { PanelControl } from './controls/PanelControl';
 import { createControl } from './controls/createControl';
 import { createButtonControl } from './controls/createButtonControl';
+import { convertMapClickEvent } from './utils/convertMapClickEvent';
 
+import type { FitOptions as OlFitOptions } from 'ol/View';
 import type Base from 'ol/layer/Base';
-import type Feature from 'ol/Feature';
+import type { Pixel } from 'ol/pixel';
 import type { ViewOptions } from 'ol/View';
 import type BaseEvent from 'ol/events/Event';
 import type Control from 'ol/control/Control';
-import type MapBrowserPointerEvent from 'ol/MapBrowserEvent';
+import type MapBrowserEvent from 'ol/MapBrowserEvent';
 import type { MapOptions as OlMapOptions } from 'ol/PluggableMap';
 import type {
+  FitOptions,
   MapControl,
   MapAdapter,
   MapOptions,
@@ -33,21 +36,28 @@ import type {
   LngLatBoundsArray,
   CreateControlOptions,
   ButtonControlOptions,
-  MapClickEvent,
 } from '@nextgis/webmap';
 
-type Layer = Base;
+export type MouseEventType = 'click' | 'hover';
 
+type MapBrowserPointerEvent = MapBrowserEvent<any>;
+
+type Layer = Base;
 interface PositionMem {
   center: LngLatArray | undefined;
   zoom: number | undefined;
 }
-
+export type ForEachFeatureAtPixelOrderedCallback = [
+  order: number,
+  cb: ForEachFeatureAtPixelCallback,
+];
+export type MapClickEvent = (evt: MapBrowserPointerEvent) => void;
 export type ForEachFeatureAtPixelCallback = (
-  feature: Feature<any>,
-  layer: Layer,
+  pixel: Pixel,
   evt: MapBrowserPointerEvent,
-) => void;
+  type: MouseEventType,
+) => boolean;
+export type UnselectCb = () => void;
 export class OlMapAdapter implements MapAdapter<Map, Layer> {
   static layerAdapters = {
     IMAGE: ImageAdapter,
@@ -75,8 +85,9 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
   private displayProjection = 'EPSG:3857';
   private lonlatProjection = 'EPSG:4326';
 
-  private _mapClickEvents: Array<(evt: MapBrowserPointerEvent) => void> = [];
-  private _forEachFeatureAtPixel: ForEachFeatureAtPixelCallback[] = [];
+  private _mapClickEvents: MapClickEvent[] = [];
+  private _forEachFeatureAtPixel: ForEachFeatureAtPixelOrderedCallback[] = [];
+  private _unselectCb: UnselectCb[] = [];
   private _olView?: View;
   private _panelControl?: PanelControl;
   private _isLoaded = false;
@@ -112,6 +123,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
 
     this.map.set('_mapClickEvents', this._mapClickEvents);
     this.map.set('_forEachFeatureAtPixel', this._forEachFeatureAtPixel);
+    this.map.set('_addUnselectCb', (cb: UnselectCb) => this._addUnselectCb(cb));
 
     this.emitter.emit('create', this);
     this._olView = this.map.getView();
@@ -121,7 +133,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
 
   destroy(): void {
     if (this.map) {
-      // ignore
+      this.map.dispose();
     }
   }
 
@@ -135,6 +147,15 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
       }
       return element;
     }
+  }
+
+  getControlContainer(): HTMLElement {
+    if (this._panelControl) {
+      return this._panelControl.getContainer();
+    }
+    throw new Error(
+      'The ol-map-adapter ControlPanel has not been initialized yet',
+    );
   }
 
   setCenter(lonLat: LngLatArray): void {
@@ -169,8 +190,9 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     }
   }
 
-  fitBounds(e: LngLatBoundsArray): void {
+  fitBounds(e: LngLatBoundsArray, options: FitOptions = {}): void {
     if (this._olView) {
+      const { padding, maxZoom, offset } = options;
       const zoom = this.getZoom();
       const extent = e as Extent;
       const toExtent = transformExtent(
@@ -178,7 +200,18 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
         this.lonlatProjection,
         this.displayProjection,
       );
-      this._olView.fit(toExtent);
+      const opt: OlFitOptions = {};
+      if (maxZoom) {
+        opt.maxZoom = maxZoom;
+      }
+      if (padding) {
+        opt.padding = [padding, padding];
+      }
+      if (offset) {
+        opt.padding = offset;
+      }
+
+      this._olView.fit(toExtent, opt);
       this._emitMoveEndEvents({ zoom });
     }
   }
@@ -229,7 +262,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
   }
 
   createControl(control: MapControl, options: CreateControlOptions): Control {
-    return createControl(control, options);
+    return createControl(control, options, this);
   }
 
   createButtonControl(options: ButtonControlOptions): Control {
@@ -250,39 +283,34 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
   }
 
   onMapClick(evt: MapBrowserPointerEvent): void {
-    const [lng, lat] = transform(
-      evt.coordinate,
-      this.displayProjection,
-      this.lonlatProjection,
-    );
-    const latLng = {
-      lat,
-      lng,
-    };
-
-    const emitData: MapClickEvent = {
-      latLng,
-      lngLat: [lng, lat],
-      pixel: { left: evt.pixel[0], top: evt.pixel[1] },
-      source: evt,
-    };
+    const emitData = convertMapClickEvent(evt);
     this.emitter.emit('preclick', emitData);
-
     this._mapClickEvents.forEach((x) => {
       x(evt);
     });
 
-    if (this._forEachFeatureAtPixel.length) {
-      if (this.map) {
-        this.map.forEachFeatureAtPixel(evt.pixel, (feature, layer) => {
-          this._forEachFeatureAtPixel.forEach((x) => {
-            x(feature as Feature<any>, layer, evt);
-          });
-        });
-      }
-    }
+    this._callEachFeatureAtPixel(evt, 'click');
 
     this.emitter.emit('click', emitData);
+  }
+
+  private _callEachFeatureAtPixel(
+    evt: MapBrowserPointerEvent,
+    type: MouseEventType,
+  ) {
+    if (this._forEachFeatureAtPixel.length) {
+      if (this.map) {
+        // select only top feature
+        for (const e of this._forEachFeatureAtPixel.sort(
+          (a, b) => b[0] - a[0],
+        )) {
+          const stop = e[1](evt.pixel, evt, type);
+          if (stop) {
+            break;
+          }
+        }
+      }
+    }
   }
 
   // requestGeomString(pixel: { top: number, left: number }, pixelRadius = 5) {
@@ -321,6 +349,9 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
       map.on('click', (evt: BaseEvent | Event) =>
         this.onMapClick(evt as MapBrowserPointerEvent),
       );
+      map.on('pointermove', (evt: BaseEvent | Event) =>
+        this._callEachFeatureAtPixel(evt as MapBrowserPointerEvent, 'hover'),
+      );
 
       const center = this.getCenter();
       const zoom = this.getZoom();
@@ -343,6 +374,14 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
         });
       }
     }
+  }
+
+  private _addUnselectCb(cb: UnselectCb) {
+    for (const p of this._unselectCb) {
+      p();
+    }
+    this._unselectCb.length = 0;
+    this._unselectCb.push(cb);
   }
 
   private _emitPositionChangeEvent(eventName: 'movestart' | 'moveend') {

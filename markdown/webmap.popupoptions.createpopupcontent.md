@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-createPopupContent?: (layerDef: LayerDefinition) => HTMLElement | string | undefined | Promise<HTMLElement | string | undefined>;
+createPopupContent?: (props: CreatePopupContentProps) => HTMLElement | string | undefined | Promise<HTMLElement | string | undefined>;
 ```

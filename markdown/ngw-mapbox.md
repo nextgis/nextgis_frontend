@@ -10,6 +10,8 @@ Single-file bundle for rapid deployment of [Mapbox GL JS](https://docs.mapbox.co
 
 Styles images and other assets are already in bundle, you don't need to include anything except one JS file!
 
+ ngw-mapbox
+
 ## Classes
 
 |  Class | Description |

@@ -1,4 +1,5 @@
-import { assign as objectAssign } from './assign';
-import { deepEqual as objectDeepEqual } from './equal';
+import { objectAssign } from './objectAssign';
+import { objectDeepEqual } from './objectDeepEqual';
+import { objectRemoveEmpty } from './objectRemoveEmpty';
 
-export { objectDeepEqual, objectAssign };
+export { objectDeepEqual, objectAssign, objectRemoveEmpty };

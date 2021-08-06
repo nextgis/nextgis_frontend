@@ -79,13 +79,13 @@ export type PropertiesPaint = [
 export type VectorAdapterLayerPaint =
   | CirclePaint
   | PathPaint
-  | IconOptions
+  | IconPaint
   | PinPaint
   | GetCustomPaintOptions;
 
 export interface GetPaintCallback<F = Feature> {
-  type?: PaintType;
   (feature: F): VectorAdapterLayerPaint;
+  type?: PaintType;
 }
 
 export type Paint =

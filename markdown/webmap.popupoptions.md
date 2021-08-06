@@ -16,8 +16,11 @@ export interface PopupOptions
 |  Property | Type | Description |
 |  --- | --- | --- |
 |  [autoPan?](./webmap.popupoptions.autopan.md) | boolean | <i>(Optional)</i> |
-|  [createPopupContent?](./webmap.popupoptions.createpopupcontent.md) | (layerDef: [LayerDefinition](./webmap.layerdefinition.md)<!-- -->) =&gt; HTMLElement \| string \| undefined \| Promise&lt;HTMLElement \| string \| undefined&gt; | <i>(Optional)</i> |
+|  [closeButton?](./webmap.popupoptions.closebutton.md) | boolean | <i>(Optional)</i> |
+|  [createPopupContent?](./webmap.popupoptions.createpopupcontent.md) | (props: [CreatePopupContentProps](./webmap.createpopupcontentprops.md)<!-- -->) =&gt; HTMLElement \| string \| undefined \| Promise&lt;HTMLElement \| string \| undefined&gt; | <i>(Optional)</i> |
 |  [fromProperties?](./webmap.popupoptions.fromproperties.md) | boolean | <i>(Optional)</i> |
+|  [maxWidth?](./webmap.popupoptions.maxwidth.md) | number | <i>(Optional)</i> |
 |  [minWidth?](./webmap.popupoptions.minwidth.md) | number | <i>(Optional)</i> |
 |  [popupContent?](./webmap.popupoptions.popupcontent.md) | string \| HTMLElement | <i>(Optional)</i> |
+|  [unselectOnClose?](./webmap.popupoptions.unselectonclose.md) | boolean | <i>(Optional)</i> Unselect feature on popup close  true |
 

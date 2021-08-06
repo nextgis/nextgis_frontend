@@ -12,18 +12,14 @@
 <b>Signature:</b>
 
 ```typescript
-getNgwLayerFeatures<G extends Geometry | null = Geometry, P extends JsonMap = JsonMap>(options: {
-        resourceId: number;
-        connector?: NgwConnector;
-        filters?: PropertiesFilter;
-    } & FilterOptions): CancelablePromise<FeatureCollection<G, P>>;
+getNgwLayerFeatures<G extends Geometry | null = Geometry, P extends JsonMap = JsonMap>(options: FetchNgwItemsOptions<P>): CancelablePromise<FeatureCollection<G, P>>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | { resourceId: number; connector?: NgwConnector; filters?: [PropertiesFilter](./properties-filter.propertiesfilter.md)<!-- -->; } &amp; [FilterOptions](./webmap.filteroptions.md) |  |
+|  options | [FetchNgwItemsOptions](./ngw-kit.fetchngwitemsoptions.md)<!-- -->&lt;P&gt; |  |
 
 <b>Returns:</b>
 

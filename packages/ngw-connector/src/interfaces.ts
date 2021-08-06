@@ -1,7 +1,12 @@
-import { ResourceItem, FeatureLayerField } from './types/ResourceItem';
-import { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
-import { FeatureLayersIdentify, FeatureItem } from './types/FeatureLayer';
-import { ResourceStoreItem } from './types/ResourceStore';
+import type { DeepPartial } from '@nextgis/utils';
+import type {
+  Resource,
+  ResourceItem,
+  FeatureLayerField,
+} from './types/ResourceItem';
+import type { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
+import type { FeatureLayersIdentify, FeatureItem } from './types/FeatureLayer';
+import type { ResourceStoreItem } from './types/ResourceStore';
 
 export interface FileMeta {
   id: string;
@@ -31,7 +36,8 @@ export interface FeatureLayerCount {
   total_count: number;
 }
 
-export type ResourceDefinition = string | number;
+export type ResourceIdKeynameDef = string | number;
+export type ResourceDefinition = ResourceIdKeynameDef | DeepPartial<Resource>;
 
 export interface FileUploadResp {
   upload_meta: FileMeta[];
@@ -93,24 +99,27 @@ export interface GetRequestItemsResponseMap extends RequestItemKeys {
   'spatial_ref_sys.collection': SrsItem[];
 }
 
-export interface CreatedResource {
+export interface IdOnly {
   id: number;
-  parent: {
-    id: number;
-  };
+}
+
+export interface CreatedResource extends IdOnly {
+  parent: IdOnly;
 }
 
 export interface PostRequestItemsResponseMap extends RequestItemKeys {
   'resource.collection': CreatedResource;
   'feature_layer.identify': FeatureLayersIdentify;
+  'file_upload.upload': FileUploadResp;
+  'feature_attachment.collection': IdOnly;
 }
 
 export interface PatchRequestItemsResponseMap extends RequestItemKeys {
-  'feature_layer.feature.collection': { id: number }[];
+  'feature_layer.feature.collection': IdOnly[];
 }
 
 export interface PutRequestItemsResponseMap extends RequestItemKeys {
-  'feature_layer.feature.item': { id: number };
+  'feature_layer.feature.item': IdOnly;
 }
 
 export interface DeleteRequestItemsResponseMap extends RequestItemKeys {
@@ -139,12 +148,13 @@ export interface RequestHeaders {
 export type RequestMethods = 'POST' | 'GET' | 'PATCH' | 'DELETE' | 'PUT';
 
 export interface RequestOptions<M = RequestMethods> {
-  method?: M;
   data?: any;
+  file?: File;
+  method?: M;
   headers?: RequestHeaders;
   withCredentials?: boolean;
-  file?: File;
   responseType?: 'json' | 'blob';
+  cache?: boolean;
   onProgress?: (percentComplete: number, event: ProgressEvent) => void;
 }
 

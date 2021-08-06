@@ -63,33 +63,21 @@ export interface FitOptions {
  */
 export type ControlPositions = ControlPosition;
 
-/**
- * @public
- */
 export type ControlPosition =
   | 'top-right'
   | 'top-left'
   | 'bottom-right'
-  | 'bottom-left';
+  | 'bottom-left'
 
-/**
- * @public
- */
 export interface Locate {
   stop: () => void;
 }
 
-/**
- * @public
- */
 export interface LocationEvent {
   lngLat: LngLatArray;
   bounds?: LngLatBoundsArray;
 }
 
-/**
- * @public
- */
 export interface LocateOptions {
   // watch?: boolean;
   setView?: boolean;
@@ -99,16 +87,10 @@ export interface LocateOptions {
   // enableHighAccuracy?: boolean;
 }
 
-/**
- * @public
- */
 export interface DataLoadError {
   target: string;
 }
 
-/**
- * @public
- */
 export interface LocationEvents {
   locationfound: (e: LocationEvent) => void;
   locationerror?: () => void;
@@ -190,6 +172,7 @@ export interface MapAdapter<M = any, L = any, C = any> {
   setCenter(latLng: LngLatArray): void;
 
   getContainer(): HTMLElement | undefined;
+  getControlContainer?(): HTMLElement;
 
   setCursor?(cursor: string): void;
   getCursor?(): string | undefined;

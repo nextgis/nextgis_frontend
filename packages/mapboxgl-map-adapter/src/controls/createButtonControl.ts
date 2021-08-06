@@ -1,4 +1,4 @@
-import { IControl } from 'mapbox-gl';
+import { IControl } from 'maplibre-gl';
 import { ButtonControlOptions } from '@nextgis/webmap';
 import { createControl } from './createControl';
 

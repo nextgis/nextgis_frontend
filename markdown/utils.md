@@ -32,6 +32,7 @@
 |  [deepmerge(x, y, mergeArray)](./utils.deepmerge.md) |  |
 |  [defined(val)](./utils.defined.md) | from https://github.com/CesiumGS/cesium/blob/master/Source/Core/defined.js |
 |  [degrees2meters(lng, lat)](./utils.degrees2meters.md) |  |
+|  [degrees2Radian(deg)](./utils.degrees2radian.md) |  |
 |  [deprecatedMapClick(ev)](./utils.deprecatedmapclick.md) |  |
 |  [deprecatedWarn(message)](./utils.deprecatedwarn.md) |  |
 |  [eachCoordinates(geojson, cb)](./utils.eachcoordinates.md) |  |
@@ -51,6 +52,7 @@
 |  [isArray(val)](./utils.isarray.md) |  |
 |  [isJsonArray(val)](./utils.isjsonarray.md) |  |
 |  [isJsonMap(val)](./utils.isjsonmap.md) |  |
+|  [isLngLatBoundsArray(array)](./utils.islnglatboundsarray.md) |  |
 |  [isObject(val)](./utils.isobject.md) |  |
 |  [isObjKey(obj, key)](./utils.isobjkey.md) |  |
 |  [keyInObj(obj, key)](./utils.keyinobj.md) |  |
@@ -62,7 +64,8 @@
 |  [objectAssign(target, source)](./utils.objectassign.md) |  |
 |  [objectAssign(target, source1, source2)](./utils.objectassign_1.md) | Copy the values of all of the enumerable own properties from one or more source objects to a target object. Returns the target object. |
 |  [objectAssign(target, source1, source2, source3)](./utils.objectassign_2.md) | Copy the values of all of the enumerable own properties from one or more source objects to a target object. Returns the target object. |
-|  [objectDeepEqual(obj1, obj2)](./utils.objectdeepequal.md) |  |
+|  [objectDeepEqual(o, p)](./utils.objectdeepequal.md) |  |
+|  [objectRemoveEmpty(obj)](./utils.objectremoveempty.md) |  |
 |  [reEscape(s)](./utils.reescape.md) |  |
 |  [round(val, toFixed)](./utils.round.md) |  |
 |  [sleep(delay)](./utils.sleep.md) |  |
@@ -75,7 +78,7 @@
 |  [ApplyMixinOptions](./utils.applymixinoptions.md) |  |
 |  [JsonMap](./utils.jsonmap.md) |  |
 |  [LatLng](./utils.latlng.md) | Longitude and latitude coordinate, measured in degrees. |
-|  [TileJson](./utils.tilejson.md) | This specification attempts to create a standard for representing metadata about multiple types of web-based layers, to aid clients in configuration and browsing.<!-- -->From  |
+|  [TileJson](./utils.tilejson.md) | This specification attempts to create a standard for representing metadata about multiple types of web-based layers, to aid clients in configuration and browsing.<!-- -->From [https://github.com/mapbox/tilejson-spec/tree/master/2.2.0](https://github.com/mapbox/tilejson-spec/tree/master/2.2.0) |
 
 ## Variables
 
