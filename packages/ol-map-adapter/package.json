@@ -9,7 +9,7 @@
   "jsdelivr": "lib/ol-map-adapter.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/dom": "^1.2.8",
+    "@nextgis/dom": "^1.2.2",
     "@nextgis/control-container": "^1.2.8",
     "@nextgis/paint": "^1.2.8",
     "@nextgis/properties-filter": "^1.2.8",

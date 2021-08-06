@@ -13,7 +13,11 @@ import { vectorLayerGeomToPaintTypeAlias } from '../utils/utils';
 import { createPopupContent } from '../utils/createPopupContent';
 import { getLayerFilterOptions } from '../utils/getLayerFilterOptions';
 import { resourceIdFromLayerOptions } from '../utils/resourceIdFromLayerOptions';
-import { NgwLayerOptions, GetClassAdapterOptions } from '../interfaces';
+import {
+  NgwLayerOptions,
+  GetClassAdapterOptions,
+  NgwFeatureRequestOptions,
+} from '../interfaces';
 import { fetchNgwLayerFeatureCollection } from '../utils/fetchNgwLayerFeatureCollection';
 import { fetchNgwResourceExtent } from '../utils/fetchNgwExtent';
 
@@ -26,46 +30,45 @@ interface FilterArgs {
 }
 
 export async function createGeoJsonAdapter(
-  opt: GetClassAdapterOptions,
+  props: GetClassAdapterOptions,
 ): Promise<Type<VectorLayerAdapter>> {
-  const { webMap, connector, item } = opt;
-  const addLayerOptionsPriority =
-    opt.addLayerOptionsPriority !== undefined
-      ? opt.addLayerOptionsPriority
-      : true;
-  const options = opt.layerOptions as NgwLayerOptions<'GEOJSON'>;
-  const GeoJsonAdapter =
-    (opt.Adapter as Type<VectorLayerAdapter>) ||
-    (webMap.mapAdapter.layerAdapters.GEOJSON as Type<VectorLayerAdapter>);
+  const {
+    item,
+    webMap,
+    Adapter,
+    connector,
+    layerOptions,
+    addLayerOptionsPriority: alop,
+  } = props;
+  const addLayerOptionsPriority = alop ?? true;
+  const options = layerOptions as NgwLayerOptions<'GEOJSON'>;
+  const GeoJsonAdapter: Type<VectorLayerAdapter> =
+    Adapter || webMap.mapAdapter.layerAdapters.GEOJSON;
 
-  let _dataPromise: CancelablePromise<FeatureCollection> | undefined;
   let _fullDataLoad = false;
   let _lastFilterArgs: FilterArgs | undefined;
+  let _dataPromise: CancelablePromise<FeatureCollection> | undefined;
 
   const resourceId = await resourceIdFromLayerOptions(options, connector);
 
-  if (
-    options.adapterOptions &&
-    options.adapterOptions.popupOptions &&
-    options.adapterOptions.popupOptions.fromProperties
-  ) {
+  if (options.adapterOptions?.popupOptions?.fromProperties) {
     options.adapterOptions.popupOptions.createPopupContent = ({ feature }) => {
       return feature && createPopupContent(feature, item);
     };
   }
 
-  const geoJsonAdapterCb = async (
+  const getData = async (
     filters?: PropertiesFilter,
-    opt?: FilterOptions,
+    filterOpt?: NgwFeatureRequestOptions,
   ) => {
     abort();
-    _lastFilterArgs = { filters, options: opt };
+    _lastFilterArgs = { filters, options: filterOpt };
     _dataPromise = fetchNgwLayerFeatureCollection({
       resourceId,
       filters,
       connector,
       cache: true,
-      ...opt,
+      ...filterOpt,
     });
     return await _dataPromise;
   };
@@ -85,15 +88,15 @@ export async function createGeoJsonAdapter(
     __enableMapMoveListener?: (e: LayerAdapter) => void;
     __disableMapMoveListener?: (e: LayerAdapter) => void;
 
-    async addLayer(opt_: GeoJsonAdapterOptions) {
-      let needUpdate = !opt_.data;
+    async addLayer(opt: GeoJsonAdapterOptions) {
+      let needUpdate = !opt.data;
       const waitFullLoad =
-        opt_.waitFullLoad !== undefined ? opt_.waitFullLoad : true;
+        opt.waitFullLoad !== undefined ? opt.waitFullLoad : true;
       if (options.id !== undefined) {
-        opt_.id = options.id;
+        opt.id = options.id;
       }
       if (item && item.vector_layer) {
-        opt_.type =
+        opt.type =
           vectorLayerGeomToPaintTypeAlias[item.vector_layer.geometry_type];
       }
       if (options.adapterOptions) {
@@ -101,27 +104,27 @@ export async function createGeoJsonAdapter(
         // in some cases, addLayer options must be used,
         // but in others factory method options needs first
         if (addLayerOptionsPriority) {
-          opt_ = {
+          opt = {
             ...options.adapterOptions,
-            ...opt_,
+            ...opt,
           };
         } else {
-          opt_ = {
-            ...opt_,
+          opt = {
+            ...opt,
             ...options.adapterOptions,
           };
         }
       }
-      if (opt_.data && Object.keys(opt_.data).length === 0) {
-        opt_.data = undefined;
+      if (opt.data && Object.keys(opt.data).length === 0) {
+        opt.data = undefined;
         needUpdate = false;
       }
-      const layer = super.addLayer(opt_);
-      this.options.strategy = opt_.strategy || undefined;
+      const layer = super.addLayer(opt);
+      this.options.strategy = opt.strategy || undefined;
 
       _lastFilterArgs = {
-        filters: opt_.propertiesFilter,
-        options: getLayerFilterOptions(opt_),
+        filters: opt.propertiesFilter,
+        options: getLayerFilterOptions(opt),
       };
       let updatePromise: Promise<any> | undefined;
       if (needUpdate) {
@@ -189,10 +192,10 @@ export async function createGeoJsonAdapter(
         return;
       }
       try {
-        const data = await geoJsonAdapterCb(
-          filterArgs.filters,
-          filterArgs.options,
-        );
+        const data = await getData(filterArgs.filters, {
+          ...filterArgs.options,
+          srs: this.options.srs,
+        });
         const count = await this.getCount();
         _fullDataLoad = count === data.features.length;
         await webMap.setLayerData(this, data);
@@ -211,12 +214,12 @@ export async function createGeoJsonAdapter(
       abort();
       if (this.filter && _fullDataLoad) {
         this.filter((e) => {
-          const props =
+          const props_ =
             e.feature &&
             e.feature.properties &&
             prepareNgwFieldsToPropertiesFilter({ ...e.feature.properties });
-          if (props) {
-            return propertiesFilter(props, filters);
+          if (props_) {
+            return propertiesFilter(props_, filters);
           }
           return true;
         });
@@ -224,7 +227,10 @@ export async function createGeoJsonAdapter(
         if (this.clearLayer) {
           this.clearLayer();
         }
-        const data = await geoJsonAdapterCb(filters, opt);
+        const data = await getData(filters, {
+          ...opt,
+          srs: this.options.srs,
+        });
         this.setData(data);
       }
     }

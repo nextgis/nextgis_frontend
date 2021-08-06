@@ -170,9 +170,12 @@ export class GeoJsonAdapter
   }
 
   addData(data: GeoJsonObject): void {
+    const srs = this.options.srs;
+    const dataProjection = 'EPSG:' + (srs ?? '4326');
+
     const features = new GeoJSON().readFeatures(data, {
-      dataProjection: 'EPSG:4326',
-      featureProjection: 'EPSG:3857',
+      dataProjection,
+      featureProjection: this.displayProjection,
     });
     this._features = this._features.concat(features);
     if (this._filterFun) {
