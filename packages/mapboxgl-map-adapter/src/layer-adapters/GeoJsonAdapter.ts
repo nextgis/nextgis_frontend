@@ -2,13 +2,13 @@ import { LngLatBounds, Popup } from 'maplibre-gl';
 
 import { defined } from '@nextgis/utils';
 import { featureFilter } from '@nextgis/properties-filter';
-import { VectorAdapter } from './VectorAdapter';
+import { EventOptions, VectorAdapter } from './VectorAdapter';
 import {
   typeAliasForFilter,
   geometryFilter,
   detectType,
   typeAlias,
-} from '../util/geomType';
+} from '../utils/geomType';
 
 import type {
   Map,
@@ -35,7 +35,7 @@ import type {
 } from '@nextgis/webmap';
 import type { Feature } from './VectorAdapter';
 import type { TLayer } from '../MapboxglMapAdapter';
-import { getCentroid } from '../util/getCentroid';
+import { getCentroid } from '../utils/getCentroid';
 
 let ID = 0;
 
@@ -294,7 +294,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
 
   protected _selectFeature(
     feature: Feature | Feature[],
-    opt: { silent: boolean } = { silent: false },
+    opt?: { silent: boolean },
   ): Feature[] {
     let selectedFeatureIds = this._selectedFeatureIds || [];
     if (this.options && !this.options.multiselect) {
@@ -314,16 +314,13 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     });
     this._selectProperties = undefined;
     this._selectedFeatureIds = selectedFeatureIds;
-    this._updateFilter();
-    if (!opt.silent && this.options.onSelect) {
-      this.options.onSelect({ layer: this, features, type: 'api' });
-    }
+    this._updateFilter(opt);
     return features;
   }
 
   protected _unselectFeature(
     feature?: Feature | Feature[],
-    opt: { silent: boolean } = { silent: false },
+    opt?: EventOptions,
   ): void {
     if (feature) {
       let features: Feature[] = [];
@@ -347,20 +344,20 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     } else {
       this._selectedFeatureIds = false;
     }
-    this._updateFilter();
-    if (!opt.silent && this.options.onSelect) {
-      this.options.onSelect({ layer: this, features: undefined, type: 'api' });
-    }
+    this._updateFilter(opt);
   }
 
-  protected _updateFilter(): void {
+  protected _updateFilter(opt: EventOptions = {}): void {
     const map = this.map;
     if (!map) return;
 
     // it is not yet possible to use callbacks and properties filters together
     if (this._filterProperties || this._selectProperties) {
-      super._updateFilter();
-      this._fireOnLayerSelectEvent();
+      super._updateFilter(opt);
+      const silent = opt.silent ?? false;
+      if (!silent) {
+        this._fireOnLayerSelectEvent();
+      }
       return;
     }
     const selected = this._selectedFeatureIds;
