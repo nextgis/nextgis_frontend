@@ -13,7 +13,7 @@ import { createControl } from './controls/createControl';
 import { CompassControl } from './controls/CompassControl';
 import { AttributionControl } from './controls/AttributionControl';
 import { createButtonControl } from './controls/createButtonControl';
-import { convertMapClickEvent } from './util/convertMapClickEvent';
+import { convertMapClickEvent } from './utils/convertMapClickEvent';
 
 import type {
   CreateControlOptions,
@@ -37,6 +37,7 @@ import type {
   FitBoundsOptions,
   RequestParameters,
 } from 'maplibre-gl';
+import { Feature } from './layer-adapters/VectorAdapter';
 
 export type TLayer = string[];
 export type UnselectCb = () => void;
@@ -323,28 +324,35 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   }
 
   onMapClick(evt: MapEventType['click'] & EventData): void {
+    const map = this.map;
     const emitData = convertMapClickEvent(evt);
     this.emitter.emit('preclick', emitData);
-    if (this.map) {
-      this.map._onMapClickLayers.forEach((x) => {
-        const unselectOnClick = x.options.unselectOnClick ?? true;
-        if (unselectOnClick) {
-          x.unselect();
+    if (map) {
+      const topFirst = map._onMapClickLayers.sort((a, b) => {
+        if (a.options && a.options.order && b.options && b.options.order) {
+          return b.options.order - a.options.order;
         }
+        return 1;
       });
-      this.map._onMapClickLayers
-        .sort((a, b) => {
-          if (a.options && a.options.order && b.options && b.options.order) {
-            return b.options.order - a.options.order;
+      let firstSelectedLayer: Feature | undefined = undefined;
+      for (const l of topFirst) {
+        let firstSelectedLayer_: Feature | undefined = undefined;
+        if (!firstSelectedLayer) {
+          firstSelectedLayer_ = l._onLayerClick(evt);
+        }
+        if (!firstSelectedLayer_) {
+          const unselectOnClick = l.options.unselectOnClick ?? true;
+          if (unselectOnClick) {
+            l.unselect();
           }
-          return 1;
-        })
-        .find((x) => {
-          return x._onLayerClick(evt);
-        });
-    }
+        }
+        if (!firstSelectedLayer && firstSelectedLayer_) {
+          firstSelectedLayer = firstSelectedLayer_;
+        }
+      }
 
-    this.emitter.emit('click', emitData);
+      this.emitter.emit('click', emitData);
+    }
   }
 
   private _onMapLoad(cb?: () => any): Promise<Map> {
