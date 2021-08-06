@@ -146,6 +146,9 @@ export interface AdapterOptions<
   /** Map and layer adapter base options */
   nativeOptions?: N;
   ratio?: number;
+
+  /** Experimental only for Ol yet */
+  srs?: number;
 }
 
 /**
