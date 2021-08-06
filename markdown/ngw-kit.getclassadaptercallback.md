@@ -4,7 +4,6 @@
 
 ## GetClassAdapterCallback type
 
-
 <b>Signature:</b>
 
 ```typescript

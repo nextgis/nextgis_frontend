@@ -4,7 +4,6 @@
 
 ## NgwConfig interface
 
-
 <b>Signature:</b>
 
 ```typescript

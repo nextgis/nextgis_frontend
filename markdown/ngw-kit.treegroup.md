@@ -4,7 +4,6 @@
 
 ## TreeGroup interface
 
-
 <b>Signature:</b>
 
 ```typescript

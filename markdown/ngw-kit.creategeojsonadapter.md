@@ -7,14 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function createGeoJsonAdapter(opt: GetClassAdapterOptions): Promise<Type<VectorLayerAdapter>>;
+export declare function createGeoJsonAdapter(props: GetClassAdapterOptions): Promise<Type<VectorLayerAdapter>>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  opt | [GetClassAdapterOptions](./ngw-kit.getclassadapteroptions.md) |  |
+|  props | [GetClassAdapterOptions](./ngw-kit.getclassadapteroptions.md) |  |
 
 <b>Returns:</b>
 

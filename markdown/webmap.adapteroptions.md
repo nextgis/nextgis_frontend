@@ -9,7 +9,7 @@ Parameters that can be used to create any map layer adapter.
 <b>Signature:</b>
 
 ```typescript
-export interface AdapterOptions<N extends Record<string, any> = Record<string, any>> 
+export interface AdapterOptions<A extends Record<string, any> = Record<string, any>, N extends Record<string, any> = Record<string, any>> 
 ```
 
 ## Properties
@@ -29,9 +29,10 @@ export interface AdapterOptions<N extends Record<string, any> = Record<string, a
 |  [nativeOptions?](./webmap.adapteroptions.nativeoptions.md) | N | <i>(Optional)</i> Map and layer adapter base options |
 |  [opacity?](./webmap.adapteroptions.opacity.md) | number | <i>(Optional)</i> Layer transparency. From 0-transparent to 1-visible |
 |  [order?](./webmap.adapteroptions.order.md) | number | <i>(Optional)</i> Indicates the map layers display sequence. A layer with a larger order value overlaps smaller ones. Zero value used to indicate baselayer. If the value is not specified explicitly, it will be assigned automatically with an increase of one for each new layer. |
-|  [props?](./webmap.adapteroptions.props.md) | Record&lt;string, any&gt; | <i>(Optional)</i> Any properties to save in layer. May be useful to get additional info from layer event. |
+|  [props?](./webmap.adapteroptions.props.md) | A | <i>(Optional)</i> Any properties to save in layer. May be useful to get additional info from layer event. |
 |  [ratio?](./webmap.adapteroptions.ratio.md) | number | <i>(Optional)</i> |
 |  [setViewDelay?](./webmap.adapteroptions.setviewdelay.md) | number | <i>(Optional)</i> Experimental option to set the map loading delay when changing position |
+|  [srs?](./webmap.adapteroptions.srs.md) | number | <i>(Optional)</i> Experimental only for Ol yet |
 |  [visibility?](./webmap.adapteroptions.visibility.md) | boolean | <i>(Optional)</i> Show layer on the map immediately after adding. Such layers are always under others. Only one base layer can be displayed on the map at a time. |
 |  [waitFullLoad?](./webmap.adapteroptions.waitfullload.md) | boolean | <i>(Optional)</i> Wait until the layer data is fully loaded before allowing added to the map. |
 

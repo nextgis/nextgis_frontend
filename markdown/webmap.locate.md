@@ -4,7 +4,6 @@
 
 ## Locate interface
 
-
 <b>Signature:</b>
 
 ```typescript

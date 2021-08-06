@@ -4,7 +4,6 @@
 
 ## getCircleFeature() function
 
-
 <b>Signature:</b>
 
 ```typescript

@@ -4,7 +4,6 @@
 
 ## IdentifyRequestOptions interface
 
-
 <b>Signature:</b>
 
 ```typescript

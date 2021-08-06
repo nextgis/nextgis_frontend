@@ -4,6 +4,8 @@
 
 ## GetClassAdapterOptions.addLayerOptionsPriority property
 
+This is some kind of dirty hack. Get rid of
+
 <b>Signature:</b>
 
 ```typescript

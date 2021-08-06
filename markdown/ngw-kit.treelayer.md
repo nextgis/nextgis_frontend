@@ -4,7 +4,6 @@
 
 ## TreeLayer interface
 
-
 <b>Signature:</b>
 
 ```typescript
