@@ -1,11 +1,11 @@
 import { isPaint, isIcon } from '@nextgis/paint';
 import { checkIfPropertyFilter } from '@nextgis/properties-filter';
 
-import { getImage } from '../util/imageIcons';
-import { getCentroid } from '../util/getCentroid';
-import { makeHtmlFromString } from '../util/makeHtmlFromString';
-import { convertMapClickEvent } from '../util/convertMapClickEvent';
-import { typeAliasForFilter, allowedByType } from '../util/geomType';
+import { getImage } from '../utils/imageIcons';
+import { getCentroid } from '../utils/getCentroid';
+import { makeHtmlFromString } from '../utils/makeHtmlFromString';
+import { convertMapClickEvent } from '../utils/convertMapClickEvent';
+import { typeAliasForFilter, allowedByType } from '../utils/geomType';
 import { BaseAdapter } from './BaseAdapter';
 
 import type {
@@ -71,6 +71,10 @@ const reversOperations: { [key in Operations]: string } = {
   like: operationsAliases.ne,
   ilike: operationsAliases.ne,
 };
+
+export interface EventOptions {
+  silent?: boolean
+}
 
 export interface Feature<
   G extends GeometryObject | null = Geometry,
@@ -266,8 +270,8 @@ export abstract class VectorAdapter<
     feature: Feature,
     coordinates?: LngLatLike,
   ): boolean {
-    this.map && this.map._addUnselectCb(() => this.unselect());
     let isSelected = this.isFeatureSelected(feature);
+
     if (this.options.selectable) {
       let features: Feature[] | undefined = undefined;
       if (isSelected) {
@@ -275,6 +279,10 @@ export abstract class VectorAdapter<
           this._unselectFeature(feature, { silent: true });
         }
       } else {
+        this.map &&
+          this.map._addUnselectCb(() =>
+            this._unselectFeature(feature, { silent: true }),
+          );
         features = this._selectFeature(feature, { silent: true });
       }
       isSelected = this.isFeatureSelected(feature);
@@ -290,6 +298,7 @@ export abstract class VectorAdapter<
         type: 'click',
       });
     }
+    this.selected = isSelected;
     return isSelected;
   }
 
@@ -523,7 +532,7 @@ export abstract class VectorAdapter<
     return {};
   }
 
-  protected _updateFilter(): void {
+  protected _updateFilter(opt?: EventOptions): void {
     this._updatePropertiesFilter();
   }
 
