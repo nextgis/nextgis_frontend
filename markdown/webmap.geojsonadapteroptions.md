@@ -8,9 +8,9 @@
 <b>Signature:</b>
 
 ```typescript
-export interface GeoJsonAdapterOptions<F extends Feature = Feature, L = any, N = Record<string, any>> extends VectorAdapterOptions<F, L, N> 
+export interface GeoJsonAdapterOptions<F extends Feature = Feature, L = any, A = Record<string, any>, N = Record<string, any>> extends VectorAdapterOptions<F, L, A, N> 
 ```
-<b>Extends:</b> [VectorAdapterOptions](./webmap.vectoradapteroptions.md)<!-- -->&lt;F, L, N&gt;
+<b>Extends:</b> [VectorAdapterOptions](./webmap.vectoradapteroptions.md)<!-- -->&lt;F, L, A, N&gt;
 
 ## Properties
 

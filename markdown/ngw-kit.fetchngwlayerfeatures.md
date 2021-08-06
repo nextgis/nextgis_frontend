@@ -7,11 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function fetchNgwLayerFeatures<G extends Geometry | null = Geometry, P extends {
-    [field: string]: any;
-} = {
-    [field: string]: any;
-}>(options: FetchNgwItemsOptions<P>): CancelablePromise<Feature<G, P>[]>;
+export declare function fetchNgwLayerFeatures<G extends Geometry | null = Geometry, P extends FeatureProperties = FeatureProperties>(options: FetchNgwItemsOptions<P>): CancelablePromise<Feature<G, P>[]>;
 ```
 
 ## Parameters

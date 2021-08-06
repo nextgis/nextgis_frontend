@@ -4,7 +4,6 @@
 
 ## ToggleLayerOptions interface
 
-
 <b>Signature:</b>
 
 ```typescript

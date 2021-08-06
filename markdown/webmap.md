@@ -65,8 +65,8 @@ webMap.onLoad().then(() => {
 |  [AdapterOptions](./webmap.adapteroptions.md) | Parameters that can be used to create any map layer adapter. |
 |  [AttributionControlOptions](./webmap.attributioncontroloptions.md) |  |
 |  [ButtonControlOptions](./webmap.buttoncontroloptions.md) | Options for creating a [button control](./webmap.webmapcontrols.createbuttoncontrol.md)<!-- -->. |
+|  [ContribControlsOptions](./webmap.contribcontrolsoptions.md) |  |
 |  [ControlOptions](./webmap.controloptions.md) |  |
-|  [ControlsOptions](./webmap.controlsoptions.md) |  |
 |  [CreateControlOptions](./webmap.createcontroloptions.md) |  |
 |  [CreatePopupContentProps](./webmap.createpopupcontentprops.md) |  |
 |  [DataLoadError](./webmap.dataloaderror.md) |  |
@@ -121,6 +121,7 @@ webMap.onLoad().then(() => {
 |  [CallbackFilter](./webmap.callbackfilter.md) |  |
 |  [ControlPosition](./webmap.controlposition.md) |  |
 |  [ControlPositions](./webmap.controlpositions.md) |  |
+|  [ControlsOptions](./webmap.controlsoptions.md) |  |
 |  [Cursor](./webmap.cursor.md) | Available cursor names from [https://developer.mozilla.org/ru/docs/Web/CSS/cursor](https://developer.mozilla.org/ru/docs/Web/CSS/cursor)  |
 |  [DataLayerFilter](./webmap.datalayerfilter.md) |  |
 |  [HtmlDef](./webmap.htmldef.md) |  |
@@ -133,5 +134,6 @@ webMap.onLoad().then(() => {
 |  [OnClickSync](./webmap.onclicksync.md) |  |
 |  [OnLayerMouseOptions](./webmap.onlayermouseoptions.md) |  |
 |  [OnLayerSelectType](./webmap.onlayerselecttype.md) |  |
+|  [PopupOnCloseFunction](./webmap.popuponclosefunction.md) |  |
 |  [VectorAdapterLayerType](./webmap.vectoradapterlayertype.md) |  |
 

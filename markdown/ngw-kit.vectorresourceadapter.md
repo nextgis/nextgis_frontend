@@ -4,7 +4,6 @@
 
 ## VectorResourceAdapter type
 
-
 <b>Signature:</b>
 
 ```typescript

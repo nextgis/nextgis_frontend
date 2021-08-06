@@ -4,7 +4,6 @@
 
 ## ResourceIdDef type
 
-
 <b>Signature:</b>
 
 ```typescript

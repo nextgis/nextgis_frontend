@@ -4,7 +4,6 @@
 
 ## WebMapEvents interface
 
-
 <b>Signature:</b>
 
 ```typescript

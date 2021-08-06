@@ -4,7 +4,6 @@
 
 ## MapOptions interface
 
-
 <b>Signature:</b>
 
 ```typescript
