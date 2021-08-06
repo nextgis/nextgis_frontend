@@ -22,6 +22,7 @@ export declare class NgwConnector
 |  --- | --- | --- | --- |
 |  [emitter](./ngw-connector.ngwconnector.emitter.md) |  | EventEmitter |  |
 |  [errors](./ngw-connector.ngwconnector.errors.md) | <code>static</code> | { NgwError: typeof NgwError; ResourceNotFoundError: typeof ResourceNotFoundError; } |  |
+|  [id](./ngw-connector.ngwconnector.id.md) |  | number |  |
 |  [options](./ngw-connector.ngwconnector.options.md) |  | [NgwConnectorOptions](./ngw-connector.ngwconnectoroptions.md) |  |
 |  [resources](./ngw-connector.ngwconnector.resources.md) |  | ResourcesControl |  |
 |  [user?](./ngw-connector.ngwconnector.user.md) |  | [UserInfo](./ngw-connector.userinfo.md) | <i>(Optional)</i> |
@@ -30,7 +31,7 @@ export declare class NgwConnector
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
-|  [apiRequest(name, params, options)](./ngw-connector.ngwconnector.apirequest.md) |  | Send request to NGW api router. |
+|  [apiRequest(name, params\_, requestOptions)](./ngw-connector.ngwconnector.apirequest.md) |  | Send request to NGW api router. |
 |  [connect()](./ngw-connector.ngwconnector.connect.md) |  | Establishing a connection with NextGIS Web to fulfill all other requests. |
 |  [create(options)](./ngw-connector.ngwconnector.create.md) | <code>static</code> |  |
 |  [delete(name, options, params)](./ngw-connector.ngwconnector.delete.md) |  | Shortcut method for send DELETE request to NGW. |
@@ -41,10 +42,11 @@ export declare class NgwConnector
 |  [getResourceBy(resource)](./ngw-connector.ngwconnector.getresourceby.md) |  |  |
 |  [getResourceById(id)](./ngw-connector.ngwconnector.getresourcebyid.md) |  |  |
 |  [getResourceByKeyname(keyname)](./ngw-connector.ngwconnector.getresourcebykeyname.md) |  |  |
-|  [getResourceChildren(optOrResource)](./ngw-connector.ngwconnector.getresourcechildren.md) |  |  |
+|  [getResourceChildren(resource)](./ngw-connector.ngwconnector.getresourcechildren.md) |  |  |
 |  [getResourceId(resource)](./ngw-connector.ngwconnector.getresourceid.md) |  |  |
 |  [getResourceIdOrFail(resource)](./ngw-connector.ngwconnector.getresourceidorfail.md) |  |  |
 |  [getResourceOrFail(resource)](./ngw-connector.ngwconnector.getresourceorfail.md) |  |  |
+|  [getResourceParent(resource)](./ngw-connector.ngwconnector.getresourceparent.md) |  |  |
 |  [getResourcesBy(resource)](./ngw-connector.ngwconnector.getresourcesby.md) |  |  |
 |  [getUserInfo(credentials)](./ngw-connector.ngwconnector.getuserinfo.md) |  |  |
 |  [login(credentials)](./ngw-connector.ngwconnector.login.md) |  | Quick way to change NextGIS Web user. |

@@ -3,6 +3,132 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/nextgis/nextgis_frontend/compare/v1.2.8...v1.3.0) (2021-08-06)
+
+
+### Bug Fixes
+
+* **webmap:** disable experimental left and right control positions ([c8c6fb7](https://github.com/nextgis/nextgis_frontend/commit/c8c6fb73c33985b19ecfc908f7d25d6a2f23d778))
+
+
+### Features
+
+* improve popup, add new options, ol support ([75e73fa](https://github.com/nextgis/nextgis_frontend/commit/75e73faac7f393d0c62f9966786da78c7f54c039))
+* **mapbox-gl-js:** improve popup ([31694bc](https://github.com/nextgis/nextgis_frontend/commit/31694bc94aebb53eff3ff2422b148cd956f5166b))
+* **ol-map-adapter:** add srs options to draw vector layer ([6a76486](https://github.com/nextgis/nextgis_frontend/commit/6a76486e75bd6a6fb5e00a45b0815f3a27aba03e))
+* **webmap:** add getControlContainer method ([26a51bc](https://github.com/nextgis/nextgis_frontend/commit/26a51bc53c2f2a7219ed05a4ef4d6b3eaab03560))
+
+
+
+
+
+## [1.2.8](https://github.com/nextgis/nextgis_frontend/compare/v1.2.7...v1.2.8) (2021-07-27)
+
+**Note:** Version bump only for package @nextgis/ol-map-adapter
+
+
+
+
+
+## [1.2.7](https://github.com/nextgis/nextgis_frontend/compare/v1.2.6...v1.2.7) (2021-07-26)
+
+**Note:** Version bump only for package @nextgis/ol-map-adapter
+
+
+
+
+
+## [1.2.4](https://github.com/nextgis/nextgis_frontend/compare/v1.2.3...v1.2.4) (2021-07-22)
+
+**Note:** Version bump only for package @nextgis/ol-map-adapter
+
+
+
+
+
+## [1.2.3](https://github.com/nextgis/nextgis_frontend/compare/v1.2.2...v1.2.3) (2021-07-21)
+
+**Note:** Version bump only for package @nextgis/ol-map-adapter
+
+
+
+
+
+## [1.2.2](https://github.com/nextgis/nextgis_frontend/compare/v1.2.1...v1.2.2) (2021-07-16)
+
+**Note:** Version bump only for package @nextgis/ol-map-adapter
+
+
+
+
+
+## [1.2.1](https://github.com/nextgis/nextgis_frontend/compare/v1.2.0...v1.2.1) (2021-07-12)
+
+
+### Bug Fixes
+
+* **ol-map-adapter:** geojson adapter layer remove ([3705f27](https://github.com/nextgis/nextgis_frontend/commit/3705f27c5d75aba9f385ceda27aa26ef94cb0533))
+
+
+### Performance Improvements
+
+* **ol-map-adapter:** style function for each feature ([fed8575](https://github.com/nextgis/nextgis_frontend/commit/fed8575d7beb6dd23b22cc2eff2e02b73f0c8f7b))
+
+
+
+
+
+# [1.2.0](https://github.com/nextgis/nextgis_frontend/compare/v1.1.2...v1.2.0) (2021-07-08)
+
+
+### Features
+
+* handle vector layer mouse over and out events ([2e94152](https://github.com/nextgis/nextgis_frontend/commit/2e94152fac64b8e022dab7940614487763ce57af))
+
+
+
+
+
+## [1.1.2](https://github.com/nextgis/nextgis_frontend/compare/v1.1.1...v1.1.2) (2021-06-28)
+
+**Note:** Version bump only for package @nextgis/ol-map-adapter
+
+
+
+
+
+## [1.1.1](https://github.com/nextgis/nextgis_frontend/compare/v1.1.0...v1.1.1) (2021-06-25)
+
+**Note:** Version bump only for package @nextgis/ol-map-adapter
+
+
+
+
+
+# [1.1.0](https://github.com/nextgis/nextgis_frontend/compare/v1.0.1...v1.1.0) (2021-06-25)
+
+**Note:** Version bump only for package @nextgis/ol-map-adapter
+
+
+
+
+
+## [1.0.1](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0...v1.0.1) (2021-06-08)
+
+**Note:** Version bump only for package @nextgis/ol-map-adapter
+
+
+
+
+
+# [1.0.0](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.9...v1.0.0) (2021-06-07)
+
+**Note:** Version bump only for package @nextgis/ol-map-adapter
+
+
+
+
+
 # [1.0.0-beta.9](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.8...v1.0.0-beta.9) (2021-05-03)
 
 **Note:** Version bump only for package @nextgis/ol-map-adapter

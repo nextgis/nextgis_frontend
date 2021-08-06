@@ -7,11 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface NgwFeatureRequestOptions<P extends {
-    [field: string]: any;
-} = {
-    [field: string]: any;
-}> extends FilterOptions<P> 
+export interface NgwFeatureRequestOptions<P extends FeatureProperties = FeatureProperties> extends FilterOptions<P> 
 ```
 <b>Extends:</b> [FilterOptions](./webmap.filteroptions.md)<!-- -->&lt;P&gt;
 

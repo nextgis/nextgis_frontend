@@ -2,10 +2,14 @@
 
 [Home](./index.md) &gt; [@nextgis/webmap](./webmap.md) &gt; [ControlsOptions](./webmap.controlsoptions.md)
 
-## ControlsOptions interface
+## ControlsOptions type
 
 <b>Signature:</b>
 
 ```typescript
-export interface ControlsOptions 
+export declare type ControlsOptions<O extends MapControls = MapControls, K extends keyof O = keyof O> = {
+    [control in K]: O[K];
+};
 ```
+<b>References:</b> [MapControls](./webmap.mapcontrols.md)
+

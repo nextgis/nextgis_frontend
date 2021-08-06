@@ -4,7 +4,6 @@
 
 ## OnClick type
 
-
 <b>Signature:</b>
 
 ```typescript

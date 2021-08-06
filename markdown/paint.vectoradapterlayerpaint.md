@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare type VectorAdapterLayerPaint = CirclePaint | PathPaint | IconOptions | PinPaint | GetCustomPaintOptions;
+export declare type VectorAdapterLayerPaint = CirclePaint | PathPaint | IconPaint | PinPaint | GetCustomPaintOptions;
 ```
-<b>References:</b> [CirclePaint](./paint.circlepaint.md)<!-- -->, [PathPaint](./paint.pathpaint.md)<!-- -->, [IconOptions](./paint.iconoptions.md)<!-- -->, [PinPaint](./paint.pinpaint.md)<!-- -->, [GetCustomPaintOptions](./paint.getcustompaintoptions.md)
+<b>References:</b> [CirclePaint](./paint.circlepaint.md)<!-- -->, [PathPaint](./paint.pathpaint.md)<!-- -->, [IconPaint](./paint.iconpaint.md)<!-- -->, [PinPaint](./paint.pinpaint.md)<!-- -->, [GetCustomPaintOptions](./paint.getcustompaintoptions.md)
 

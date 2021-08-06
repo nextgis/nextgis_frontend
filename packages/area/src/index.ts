@@ -1,4 +1,5 @@
 /**
+ *
  * Dependencies free QGIS ellipsoidal area calculation reproduced in JavaScript.
  *
  * @example
@@ -15,5 +16,6 @@
  * ```
  *
  * @packageDocumentation
+ * @module area
  */
 export * from './calculateArea';

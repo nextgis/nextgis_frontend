@@ -10,7 +10,7 @@ field, operation, value \['foo', 'eq', 'bar'\] \['count', 'ge', 20\]
 
 ```typescript
 export declare type PropertyFilter<T extends Properties = Properties> = [
-    keyof T | string,
+    T extends null ? string : keyof T | `%${string & keyof T}` | `%${string & keyof T}%` | `${string & keyof T}%`,
     Operations,
     any
 ];

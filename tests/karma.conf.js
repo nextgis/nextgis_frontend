@@ -16,9 +16,18 @@ module.exports = (config) => {
       // 'Firefox',
       'Chrome',
     ],
-    frameworks: ['mocha'],
+    frameworks: ['mocha', 'webpack'],
+
+    plugins: [
+      'karma-mocha',
+      'karma-webpack',
+      'karma-sourcemap-loader',
+      'karma-chrome-launcher',
+    ],
     files: [
       { pattern: 'tests/specs/*.ts', type: 'ts' },
+      // { pattern: 'tests/specs/properties-filter.spec.ts', type: 'ts' },
+      // { pattern: 'tests/specs/cache.spec.ts', type: 'ts' },
       // { pattern: 'tests/specs/area.spec.ts', type: 'ts' },
       // { pattern: 'tests/internet-specs/*.spec.ts', type: 'ts' },
     ],

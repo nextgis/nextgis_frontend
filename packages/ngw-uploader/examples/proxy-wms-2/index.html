@@ -9,7 +9,7 @@
 
 
   <!-- <script src="https://unpkg.com/@nextgis/ngw-uploader"></script> -->
-  <script type="text/javascript" src="../../lib/ngw-uploader.js"></script>
+  <script type="text/javascript" src="../../lib/ngw-uploader.global.js"></script>
 
   <style>
     #connect-wms {
@@ -107,7 +107,7 @@
     var layersSelect = document.getElementById('layers-select');
 
     var ngwUploader = new NgwUploader({
-      baseUrl: 'http://dev.nextgis.com/sandbox'
+      baseUrl: 'https://sandbox.nextgis.com'
     });
 
     ngwUploader.emitter.on('status:change', function (evt) {

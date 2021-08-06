@@ -18,4 +18,5 @@ export interface VueTreeItem
 |  [id](./vuetify-ngw-components.vuetreeitem.id.md) | string |  |
 |  [layer?](./vuetify-ngw-components.vuetreeitem.layer.md) | string | <i>(Optional)</i> |
 |  [name](./vuetify-ngw-components.vuetreeitem.name.md) | string |  |
+|  [removable?](./vuetify-ngw-components.vuetreeitem.removable.md) | boolean | <i>(Optional)</i> |
 

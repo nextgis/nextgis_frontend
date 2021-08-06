@@ -1,14 +1,15 @@
-import { MapControl, CreateControlOptions } from '@nextgis/webmap';
 import { Control, DomEvent } from 'leaflet';
+import type { MapControl, CreateControlOptions, MapAdapter } from '@nextgis/webmap';
 
 export function createControl(
   control: MapControl,
   options: CreateControlOptions = {},
+  map: MapAdapter,
 ): Control {
   const C = Control.extend({
     onAdd() {
       const element = document.createElement('div');
-      const content = control.onAdd();
+      const content = control.onAdd(map);
       element.classList.add('leaflet-control');
       if (options.bar) {
         element.classList.add('leaflet-bar');

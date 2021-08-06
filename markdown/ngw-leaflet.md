@@ -10,6 +10,8 @@ Single-file bundle for rapid deployment of [Leaflet](https://leafletjs.com/)<!--
 
 Styles images and other assets are already in bundle, you don't need to include anything except one JS file!
 
+ ngw-leaflet
+
 ## Classes
 
 |  Class | Description |

@@ -4,7 +4,6 @@
 
 ## NgwWebmapAdapterOptions interface
 
-
 <b>Signature:</b>
 
 ```typescript
@@ -19,7 +18,7 @@ export interface NgwWebmapAdapterOptions<M = any> extends A
 |  [connector](./ngw-kit.ngwwebmapadapteroptions.connector.md) | NgwConnector |  |
 |  [defaultBasemap?](./ngw-kit.ngwwebmapadapteroptions.defaultbasemap.md) | boolean | <i>(Optional)</i> Add baselayer from OsmLayerAdapter if no \[webmap\_resource\].basemap\_webmap has been set. |
 |  [pixelRadius?](./ngw-kit.ngwwebmapadapteroptions.pixelradius.md) | number | <i>(Optional)</i> Radius for searching objects in pixels |
-|  [resourceId](./ngw-kit.ngwwebmapadapteroptions.resourceid.md) | number \| \[number, string\] |  |
+|  [resourceId](./ngw-kit.ngwwebmapadapteroptions.resourceid.md) | [ResourceIdDef](./ngw-kit.resourceiddef.md) |  |
 |  [selectable?](./ngw-kit.ngwwebmapadapteroptions.selectable.md) | boolean | <i>(Optional)</i> |
 |  [webMap](./ngw-kit.ngwwebmapadapteroptions.webmap.md) | [WebMap](./webmap.webmap.md)<!-- -->&lt;M&gt; |  |
 

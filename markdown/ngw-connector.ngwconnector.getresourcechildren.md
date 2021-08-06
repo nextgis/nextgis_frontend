@@ -8,18 +8,14 @@
 <b>Signature:</b>
 
 ```typescript
-getResourceChildren(optOrResource: string | number | {
-        keyname?: string;
-        resourceId?: number;
-        resource?: string | number;
-    }): CancelablePromise<ResourceItem[]>;
+getResourceChildren(resource: ResourceDefinition): CancelablePromise<ResourceItem[]>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  optOrResource | string \| number \| { keyname?: string; resourceId?: number; resource?: string \| number; } |  |
+|  resource | [ResourceDefinition](./ngw-connector.resourcedefinition.md) |  |
 
 <b>Returns:</b>
 

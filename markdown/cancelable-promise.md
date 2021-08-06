@@ -6,6 +6,8 @@
 
 A promise you can stop
 
+ cancelable-promise
+
 ## Classes
 
 |  Class | Description |

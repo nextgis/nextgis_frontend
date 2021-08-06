@@ -4,7 +4,6 @@
 
 ## NgwIdentifyItem interface
 
-
 <b>Signature:</b>
 
 ```typescript

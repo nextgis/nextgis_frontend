@@ -1,8 +1,13 @@
+/**
+ * @module mapboxgl-map-adapter
+ */
+
 import {
   MapboxglMapAdapter,
-  MapboxglMapAdapterOptions,
 } from './MapboxglMapAdapter';
 
-export { MapboxglMapAdapterOptions };
+import type {  MapboxglMapAdapterOptions} from './MapboxglMapAdapter';
+
+export type { MapboxglMapAdapterOptions };
 
 export default MapboxglMapAdapter;

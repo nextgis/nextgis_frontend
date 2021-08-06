@@ -27,9 +27,7 @@ export function getCirclePolygonCoordinates(
   return extp;
 }
 
-/**
- * @public
- */
+
 export function getCircleFeature(
   lng: number,
   lat: number,

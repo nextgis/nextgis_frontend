@@ -5,7 +5,8 @@ import { BaseAdapter } from '../BaseAdapter';
 
 export class TileAdapter
   extends BaseAdapter<TileAdapterOptions, TileLayer>
-  implements MainLayerAdapter {
+  implements MainLayerAdapter
+{
   addLayer(options: TileAdapterOptions): TileLayer | undefined {
     if (options) {
       const { url, ...opt } = options;

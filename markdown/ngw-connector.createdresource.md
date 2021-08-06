@@ -7,13 +7,13 @@
 <b>Signature:</b>
 
 ```typescript
-export interface CreatedResource 
+export interface CreatedResource extends IdOnly 
 ```
+<b>Extends:</b> [IdOnly](./ngw-connector.idonly.md)
 
 ## Properties
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [id](./ngw-connector.createdresource.id.md) | number |  |
-|  [parent](./ngw-connector.createdresource.parent.md) | { id: number; } |  |
+|  [parent](./ngw-connector.createdresource.parent.md) | [IdOnly](./ngw-connector.idonly.md) |  |
 

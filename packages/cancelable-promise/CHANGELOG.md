@@ -3,6 +3,68 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.3](https://github.com/nextgis/nextgis_frontend/compare/v1.2.2...v1.2.3) (2021-07-21)
+
+
+### Bug Fixes
+
+* **cancelable-promise:** handle error for CancelablePromise.all ([0a47b11](https://github.com/nextgis/nextgis_frontend/commit/0a47b11f11fbb4b6bac1fcba22fa7a9573b4969f))
+
+
+
+
+
+## [1.2.2](https://github.com/nextgis/nextgis_frontend/compare/v1.2.1...v1.2.2) (2021-07-16)
+
+**Note:** Version bump only for package @nextgis/cancelable-promise
+
+
+
+
+
+# [1.2.0](https://github.com/nextgis/nextgis_frontend/compare/v1.1.2...v1.2.0) (2021-07-08)
+
+**Note:** Version bump only for package @nextgis/cancelable-promise
+
+
+
+
+
+## [1.1.2](https://github.com/nextgis/nextgis_frontend/compare/v1.1.1...v1.1.2) (2021-06-28)
+
+
+### Bug Fixes
+
+* **cancelable-promise:** do not cancel already complate promise ([c01c871](https://github.com/nextgis/nextgis_frontend/commit/c01c8716f88ee00658ae1e2041af15fbf4631564))
+
+
+
+
+
+# [1.1.0](https://github.com/nextgis/nextgis_frontend/compare/v1.0.1...v1.1.0) (2021-06-25)
+
+**Note:** Version bump only for package @nextgis/cancelable-promise
+
+
+
+
+
+## [1.0.1](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0...v1.0.1) (2021-06-08)
+
+**Note:** Version bump only for package @nextgis/cancelable-promise
+
+
+
+
+
+# [1.0.0](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.9...v1.0.0) (2021-06-07)
+
+**Note:** Version bump only for package @nextgis/cancelable-promise
+
+
+
+
+
 # [1.0.0-beta.8](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.7...v1.0.0-beta.8) (2021-05-02)
 
 **Note:** Version bump only for package @nextgis/cancelable-promise

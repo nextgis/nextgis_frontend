@@ -11,10 +11,16 @@ import type {
   QmsAdapter as QA,
 } from '../interfaces';
 
+const URL = 'https://qms.nextgis.com';
+
 export function createQmsAdapter(
   webMap: WebMap,
-  url = 'https://qms.nextgis.com',
+  url = URL,
+  createOpt: Partial<QmsAdapterOptions> = {},
 ): Type<MainLayerAdapter> {
+  if (!url) {
+    url = URL;
+  }
   class QmsAdapter<M = any> implements MainLayerAdapter<M>, QA {
     qms?: QmsBasemap;
 
@@ -23,8 +29,12 @@ export function createQmsAdapter(
 
     constructor(map: M, options: QmsAdapterOptions) {
       this.map = map;
-      this.options = options;
+      const opt = { ...createOpt, ...options };
+      this.options = opt;
       this.options.baselayer = true;
+      if (opt.qms) {
+        this.qms = opt.qms;
+      }
     }
 
     async addLayer(options: QmsAdapterOptions): Promise<any> {
@@ -41,9 +51,9 @@ export function createQmsAdapter(
       const qms = this.qms;
       if (qms) {
         const type = alias[qms.type || 'tms'];
-        const webMapAdapter = webMap.mapAdapter.layerAdapters[type];
-        if (webMapAdapter) {
-          mixinProperties(QmsAdapter, webMapAdapter, [
+        const WebMapAdapter = webMap.mapAdapter.layerAdapters[type];
+        if (WebMapAdapter) {
+          mixinProperties(QmsAdapter, WebMapAdapter, [
             'showLayer',
             'hideLayer',
           ]);
@@ -63,7 +73,7 @@ export function createQmsAdapter(
               }
             }
             this.options = options;
-            const adapter = new webMapAdapter(this.map, options);
+            const adapter = new WebMapAdapter(this.map, options);
             return adapter.addLayer(options);
           }
         }

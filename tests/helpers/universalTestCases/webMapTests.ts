@@ -14,7 +14,7 @@ export async function buildWebMap<W extends WebMap = WebMap>(
   MA: Type<MapAdapter>,
   mapOptions: MapOptions,
   opt?: MapAdapterCreateOptions,
-  createWebMap_ = createWebMap
+  createWebMap_ = createWebMap,
 ): Promise<W> {
   const webMap = createWebMap_(MA, {
     target: 'map',
@@ -27,13 +27,13 @@ export async function buildWebMap<W extends WebMap = WebMap>(
 export const webMapTests = <W extends WebMap = WebMap>(
   MA: Type<MapAdapter>,
   webMapName = 'WebMap',
-  createWebMap_?: (MA: Type<MapAdapter>, options?: MapOptions) => W
+  createWebMap_?: (MA: Type<MapAdapter>, options?: MapOptions) => W,
 ): any => {
   const adapterName = MA.name;
 
   const _buildWebMap = async (
     mapOptions: MapOptions,
-    opt?: MapAdapterCreateOptions
+    opt?: MapAdapterCreateOptions,
   ): Promise<W> => {
     return buildWebMap(MA, mapOptions, opt, createWebMap_);
   };
@@ -64,7 +64,7 @@ export const webMapTests = <W extends WebMap = WebMap>(
     });
 
     baseMapTests(MA, (MA: Type<MapAdapter>, opt: MapOptions = {}) =>
-      _buildWebMap(opt)
+      _buildWebMap(opt),
     );
 
     const layerAdapters: string[] =

@@ -4,12 +4,13 @@ import {
   RasterAdapterOptions,
 } from '@nextgis/webmap';
 import { BaseAdapter } from './BaseAdapter';
-import { RasterSource, ResourceType, Layer, AnyLayer } from 'mapbox-gl';
+import { RasterSource, ResourceType, Layer, AnyLayer } from 'maplibre-gl';
 
 export class TileAdapter<O extends RasterAdapterOptions = TileAdapterOptions>
   extends BaseAdapter<O>
-  implements MainLayerAdapter {
-  addLayer(options: O): string[] | undefined {
+  implements MainLayerAdapter
+{
+  addLayer(options: O & { before?: string }): string[] | undefined {
     options = { ...this.options, ...(options || {}) };
     const { minZoom, maxZoom } = options;
     const tiles: string[] = [];
@@ -24,8 +25,7 @@ export class TileAdapter<O extends RasterAdapterOptions = TileAdapterOptions>
     } else {
       tiles.push(options.url);
     }
-    if (options.headers) {
-      // @ts-ignore
+    if (options.headers && this.map) {
       const transformRequests = this.map.transformRequests;
       transformRequests.push((url: string, resourceType: ResourceType) => {
         let staticUrl = url;
@@ -68,11 +68,7 @@ export class TileAdapter<O extends RasterAdapterOptions = TileAdapterOptions>
       layerOptions.maxzoom = maxZoom - 1;
     }
     if (this.map) {
-      this.map.addLayer(
-        layerOptions as AnyLayer,
-        // @ts-ignore
-        options.before,
-      );
+      this.map.addLayer(layerOptions as AnyLayer, options.before);
       const layer = (this.layer = [this._layerId]);
       return layer;
     }

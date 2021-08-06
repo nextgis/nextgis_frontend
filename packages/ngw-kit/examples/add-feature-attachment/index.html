@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Add attachment to feature</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <style>
+      .feature-item {
+        min-height: 45px;
+        line-height: 45px;
+      }
+      .item-part {
+        display: inline-block;
+        padding-right: 10px;
+        vertical-align: top;
+      }
+      .item-part img {
+        vertical-align: middle;
+      }
+    </style>
+    <!-- import NgwConnector to create vector resource -->
+    <script
+      type="text/javascript"
+      src="../../../ngw-connector/lib/ngw-connector.global.js"
+    ></script>
+    <script type="text/javascript" src="../../lib/ngw-kit.global.js"></script>
+  </head>
+
+  <body>
+    <div id="log">Start</div>
+    <div id="features-list"></div>
+
+    <script>
+      var logBlock = document.getElementById('log');
+      var featuresListBlock = document.getElementById('features-list');
+
+      var log = function (message) {
+        logBlock.innerHTML = message;
+      };
+      var vectorLayerKeyName = 'add-attachment-example-layer';
+
+      // 1. Preparation
+      // Get or create vector layer
+      var connector = new NgwConnector({
+        baseUrl: 'https://sandbox.nextgis.com',
+        auth: {
+          login: 'administrator',
+          password: 'demodemo',
+        },
+      });
+      connector.getResource(vectorLayerKeyName).then(function (res) {
+        if (!res) {
+          log('Create vector resource');
+          createVectorResource().then(function (newRes) {
+            fillFeatures(newRes);
+          });
+        } else {
+          fillFeatures(res);
+        }
+      });
+
+      function createVectorResource() {
+        return connector.post('resource.collection', {
+          data: {
+            resource: {
+              cls: 'vector_layer',
+              parent: {
+                id: 0,
+              },
+              display_name: 'Add attachment example layer',
+              keyname: vectorLayerKeyName,
+              description: null,
+            },
+            resmeta: {
+              items: {},
+            },
+            vector_layer: {
+              srs: { id: 4326 },
+              geometry_type: 'POINT',
+              fields: [],
+            },
+          },
+        });
+      }
+      // Fill vector layer with random features
+      function fillFeatures(res) {
+        var id = res.resource.id;
+        connector
+          .get('feature_layer.feature.count', null, { id: id })
+          .then(function (resp) {
+            var count = resp.total_count;
+            var promises = [];
+            for (var i = count; i < 5; i++) {
+              promises.push(addFeaturePromise(id));
+            }
+            if (promises.length) {
+              log('Add vector layer features');
+            }
+            Promise.all(promises).then(buildFeaturesList.bind(this, id));
+          });
+      }
+
+      function addFeaturePromise(resourceId) {
+        return connector.post(
+          'feature_layer.feature.collection',
+          {
+            data: {
+              extensions: {},
+              fields: {},
+              geom: 'POINT (' + getRandomPointCoord().join(' ') + ')',
+            },
+          },
+          { id: resourceId, srs: 4326 },
+        );
+      }
+
+      function getRandomPointCoord() {
+        var plusOrMinus = Math.random() < 0.5 ? -1 : 1;
+        return [
+          Math.round(Math.random() * 180),
+          Math.round(Math.random() * 90 * plusOrMinus),
+        ];
+      }
+      // end of preparation
+
+      // 2. Create features list html block with add attachment button
+      function buildFeaturesList(resourceId) {
+        featuresListBlock.innerHTML = '';
+        NgwKit.fetchNgwLayerItems({
+          connector: connector,
+          resourceId: resourceId,
+          limit: 5,
+          geom: false,
+          extensions: ['attachment'],
+        }).then(function (items) {
+          var link =
+            '<a href="' +
+            connector.options.baseUrl +
+            '/resource/' +
+            resourceId +
+            '" target="_blank">open in ngw</a>';
+          log('Features (' + link + '):');
+          for (var i = 0; i < items.length; i++) {
+            var itemBlock = createFeatureItemBlock(resourceId, items[i]);
+            featuresListBlock.appendChild(itemBlock);
+          }
+        });
+      }
+
+      // A quick way to redraw the list without updating each changed element
+      function redraw(resourceId) {
+        log('Updating...');
+        buildFeaturesList(resourceId);
+      }
+
+      function createFeatureItemBlock(resourceId, item) {
+        var block = document.createElement('div');
+        block.className = 'feature-item';
+
+        block.innerHTML = [
+          '<div class="item-part">#' + item.id + '</div>',
+          '<div class="item-part"><input class="input' +
+            item.id +
+            '"type="file" /></div>',
+          '<div class="item-part images' + item.id + '"></div>',
+        ].join('');
+        var input = block.getElementsByClassName('input' + item.id)[0];
+        input.addEventListener('change', function () {
+          addFeatureAttachment(resourceId, item.id, input.files[0]);
+        });
+
+        var images = block.getElementsByClassName('images' + item.id)[0];
+        var attachments = item.extensions.attachment;
+        if (attachments) {
+          for (var i = 0; i < attachments.length; i++) {
+            var attachmentBlock = createImageBlock(
+              resourceId,
+              item.id,
+              attachments[i],
+            );
+            images.appendChild(attachmentBlock);
+          }
+        }
+        return block;
+      }
+
+      function createImageBlock(resourceId, featureId, attach) {
+        var imgBlock = document.createElement('div');
+        imgBlock.innerHTML = [
+          '<div class="item-part">' + attach.name + '</div>',
+          '<div class="item-part image-wrap' + attach.id + '"></div>',
+          '<div class="item-part"><button class="attach-del-btn-' +
+            attach.id +
+            '">✕</button></div>',
+        ].join('');
+
+        var deleteAttachBtn = imgBlock.getElementsByClassName(
+          'attach-del-btn-' + attach.id,
+        )[0];
+        deleteAttachBtn.addEventListener('click', function () {
+          connector
+            .delete('feature_attachment.item', null, {
+              id: resourceId,
+              fid: featureId,
+              aid: attach.id,
+            })
+            .then(function (resp) {
+              redraw(resourceId);
+            });
+        });
+
+        if (attach.is_image) {
+          var imgWrapper = imgBlock.getElementsByClassName(
+            'image-wrap' + attach.id,
+          )[0];
+          // Show image preview.
+          // Using connector here is necessary to display attachment with BASE authorization
+          connector
+            .get(
+              'feature_attachment.image',
+              { responseType: 'blob' },
+              {
+                id: resourceId,
+                fid: featureId,
+                aid: attach.id,
+                size: '40x40',
+              },
+            )
+            .then(function (src) {
+              var urlCreator = window.URL || window.webkitURL;
+              var imageUrl = urlCreator.createObjectURL(src);
+              imgWrapper.innerHTML = '<img src="' + imageUrl + '">';
+            });
+        }
+        return imgBlock;
+      }
+
+      function addFeatureAttachment(rid, fid, file) {
+        return NgwKit.uploadFeatureAttachment({
+          connector: connector,
+          resourceId: rid,
+          featureId: fid,
+          file: file,
+        }).then(function (resp) {
+          redraw(rid);
+        });
+      }
+    </script>
+  </body>
+</html>

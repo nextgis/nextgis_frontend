@@ -10,6 +10,8 @@ A lightweight HTTP client optimized for use with [NextGIS Web](http://docs.nextg
 
 Make sure CORS is registered in the [NextGIS Web settings](https://docs.nextgis.com/docs_ngcom/source/CORS.html) to be able to send requests.
 
+ ngw-connector
+
 ## Classes
 
 |  Class | Description |
@@ -39,15 +41,16 @@ Make sure CORS is registered in the [NextGIS Web settings](https://docs.nextgis.
 |  [FileMeta](./ngw-connector.filemeta.md) |  |
 |  [FileUploadResp](./ngw-connector.fileuploadresp.md) |  |
 |  [GetRequestItemsResponseMap](./ngw-connector.getrequestitemsresponsemap.md) |  |
+|  [IdOnly](./ngw-connector.idonly.md) |  |
 |  [LayerFeature](./ngw-connector.layerfeature.md) |  |
 |  [LoadingQueue](./ngw-connector.loadingqueue.md) |  |
 |  [LookupTableResource](./ngw-connector.lookuptableresource.md) |  |
 |  [NgwConnectorOptions](./ngw-connector.ngwconnectoroptions.md) |  |
 |  [NgwDateFormat](./ngw-connector.ngwdateformat.md) |  |
-|  [NgwDateTimeFormat](./ngw-connector.ngwdatetimeformat.md) |  |
 |  [NgwExtent](./ngw-connector.ngwextent.md) |  |
 |  [NgwFile](./ngw-connector.ngwfile.md) |  |
 |  [NgwLayerIdentifyError](./ngw-connector.ngwlayeridentifyerror.md) |  |
+|  [NgwTimeFormat](./ngw-connector.ngwtimeformat.md) |  |
 |  [Params](./ngw-connector.params.md) |  |
 |  [PatchRequestItemsResponseMap](./ngw-connector.patchrequestitemsresponsemap.md) |  |
 |  [Permission](./ngw-connector.permission.md) |  |
@@ -79,8 +82,9 @@ Make sure CORS is registered in the [NextGIS Web settings](https://docs.nextgis.
 |  Type Alias | Description |
 |  --- | --- |
 |  [FeatureItemToNgw](./ngw-connector.featureitemtongw.md) |  |
-|  [FeatureLayerFields](./ngw-connector.featurelayerfields.md) |  |
+|  [FeatureProperties](./ngw-connector.featureproperties.md) |  |
 |  [GeometryType](./ngw-connector.geometrytype.md) |  |
+|  [NgwDateTimeFormat](./ngw-connector.ngwdatetimeformat.md) |  |
 |  [NgwExceptions](./ngw-connector.ngwexceptions.md) |  |
 |  [PyramidSettings](./ngw-connector.pyramidsettings.md) |  |
 |  [RequestItemAdditionalParams](./ngw-connector.requestitemadditionalparams.md) |  |
@@ -89,6 +93,7 @@ Make sure CORS is registered in the [NextGIS Web settings](https://docs.nextgis.
 |  [RequestMethods](./ngw-connector.requestmethods.md) |  |
 |  [ResourceCls](./ngw-connector.resourcecls.md) |  |
 |  [ResourceDefinition](./ngw-connector.resourcedefinition.md) |  |
+|  [ResourceIdKeynameDef](./ngw-connector.resourceidkeynamedef.md) |  |
 |  [ResourceItemDatatype](./ngw-connector.resourceitemdatatype.md) |  |
 |  [ResourceStoreItem](./ngw-connector.resourcestoreitem.md) |  |
 |  [ResourceStoreItemProperties](./ngw-connector.resourcestoreitemproperties.md) |  |

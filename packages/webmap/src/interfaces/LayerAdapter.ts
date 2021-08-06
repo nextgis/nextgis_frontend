@@ -1,7 +1,7 @@
 import type { GeoJsonObject, Feature } from 'geojson';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type { Paint } from '@nextgis/paint';
-import type { Type } from '@nextgis/utils';
+import type { LngLatArray, Type } from '@nextgis/utils';
 import type { LngLatBoundsArray } from './BaseTypes';
 import type { MapClickEvent } from './MapAdapter';
 
@@ -15,23 +15,28 @@ export type LayerAdapterDefinition<K extends keyof LayerAdapters = string> =
   | Type<LayerAdapters[K]>
   | Promise<Type<LayerAdapters[K]> | undefined>;
 
+export type OnLayerSelectType = 'api' | 'click' | 'hover';
+
 /**
  * @public
  */
 export interface OnLayerSelectOptions {
   layer: LayerAdapter;
   features?: Feature[] | undefined;
+  type: OnLayerSelectType;
 }
+
+export type OnLayerMouseOptions = OnLayerClickOptions;
 
 /**
  * @public
  */
 export interface OnLayerClickOptions {
   layer: LayerAdapter;
-  selected?: boolean;
+  event: MapClickEvent;
+  source: any;
   feature?: Feature;
-  event?: MapClickEvent;
-  source?: any;
+  selected?: boolean;
 }
 
 /**
@@ -39,7 +44,8 @@ export interface OnLayerClickOptions {
  * @public
  */
 export interface AdapterOptions<
-  N extends Record<string, any> = Record<string, any>
+  A extends Record<string, any> = Record<string, any>,
+  N extends Record<string, any> = Record<string, any>,
 > {
   /**
    * Unique Layer ID.
@@ -54,6 +60,8 @@ export interface AdapterOptions<
    * Show layer on the map immediately after adding.
    * Such layers are always under others.
    * Only one base layer can be displayed on the map at a time.
+   * @remarks
+   * TODO: replace by show
    *
    * @defaultValue true
    */
@@ -85,11 +93,13 @@ export interface AdapterOptions<
   /**
    * TODO: replace by minZoom
    * @internal
+   * @deprecated use minZoom instead
    */
   minScale?: number;
   /**
    * TODO: replace by maxZoom
    * @internal
+   * @deprecated use maxZoom instead
    */
   maxScale?: number;
   /**
@@ -130,11 +140,15 @@ export interface AdapterOptions<
    */
   setViewDelay?: number;
   /** Any properties to save in layer.
-   * May be useful to get additional info from layer event.  */
-  props?: Record<string, any>;
+   * May be useful to get additional info from layer event.
+   */
+  props?: A;
   /** Map and layer adapter base options */
   nativeOptions?: N;
   ratio?: number;
+
+  /** Experimental only for Ol yet */
+  srs?: number;
 }
 
 /**
@@ -151,16 +165,30 @@ export interface MvtAdapterOptions<F extends Feature = Feature>
  */
 export type VectorAdapterLayerType = 'polygon' | 'point' | 'line';
 
+export type PopupOnCloseFunction = (args: LayerDefinition) => void;
+
+export interface CreatePopupContentProps extends LayerDefinition {
+  type: OnLayerSelectType;
+  close: () => void;
+  onClose: (cb: PopupOnCloseFunction) => void;
+}
+
 /**
  * @public
  */
 export interface PopupOptions {
   minWidth?: number;
+  maxWidth?: number;
   autoPan?: boolean;
   popupContent?: string | HTMLElement;
   fromProperties?: boolean;
+  closeButton?: boolean;
+  /** Unselect feature on popup close
+   * @default true
+   */
+  unselectOnClose?: boolean;
   createPopupContent?: (
-    layerDef: LayerDefinition,
+    props: CreatePopupContentProps,
   ) =>
     | HTMLElement
     | string
@@ -169,8 +197,9 @@ export interface PopupOptions {
 }
 
 type _VectorAdapterOptionsToExtend<
-  N extends Record<string, any> = Record<string, any>
-> = AdapterOptions<N> & FilterOptions;
+  A extends Record<string, any> = Record<string, any>,
+  N extends Record<string, any> = Record<string, any>,
+> = AdapterOptions<A, N> & FilterOptions;
 
 /**
  * @public
@@ -178,8 +207,9 @@ type _VectorAdapterOptionsToExtend<
 export interface VectorAdapterOptions<
   F extends Feature = Feature,
   L = any,
-  N = Record<string, any>
-> extends _VectorAdapterOptionsToExtend<N> {
+  A = Record<string, any>,
+  N = Record<string, any>,
+> extends _VectorAdapterOptionsToExtend<A, N> {
   /** Type for geometries painting, for each layer may be only one of: `point`, `polygon` or `line`. */
   type?: VectorAdapterLayerType;
   /**
@@ -254,6 +284,11 @@ export interface VectorAdapterOptions<
    */
   unselectOnSecondClick?: boolean;
   /**
+   * If false, the selection will be reset when the user clicks the map.
+   * @default true
+   */
+  unselectOnClick?: boolean;
+  /**
    * Make the feature selected while mouseover.
    */
   selectOnHover?: boolean;
@@ -273,7 +308,7 @@ export interface VectorAdapterOptions<
    * @defaultValue 50
    */
   clusterRadius?: number;
-
+  labelOnHover?: boolean;
   labelField?: string;
   label?: (e: LayerDefinition<F, L>) => void | string;
 
@@ -302,7 +337,17 @@ export interface VectorAdapterOptions<
    */
   selectedLayout?: any;
 
+  onClick?(opt: OnLayerClickOptions): void;
+  onSelect?(opt: OnLayerSelectOptions): void;
+
+  /** Fired when the mouse enters the layer. */
+  onMouseOver?(opt: OnLayerClickOptions): void;
+  /** Fired when the mouse leaves the layer. */
+  onMouseOut?(opt: OnLayerClickOptions): void;
+
+  // @deprecated use {@link VectorAdapterOptions.onClick} instead
   onLayerClick?(opt: OnLayerClickOptions): Promise<any>;
+  // @deprecated use {@link VectorAdapterOptions.onSelect} instead
   onLayerSelect?(opt: OnLayerSelectOptions): Promise<any>;
 }
 
@@ -312,8 +357,9 @@ export interface VectorAdapterOptions<
 export interface GeoJsonAdapterOptions<
   F extends Feature = Feature,
   L = any,
-  N = Record<string, any>
-> extends VectorAdapterOptions<F, L, N> {
+  A = Record<string, any>,
+  N = Record<string, any>,
+> extends VectorAdapterOptions<F, L, A, N> {
   /** Geojson data */
   data?: GeoJsonObject;
 }
@@ -424,7 +470,7 @@ export type CallbackFilter<F extends Feature = Feature, L = any> = (
  * @public
  */
 export interface FilterOptions<
-  P extends { [field: string]: any } = { [field: string]: any }
+  P extends { [field: string]: any } = { [field: string]: any },
 > {
   /**
    * Offset (paginated) where from entities should be taken.
@@ -437,13 +483,13 @@ export interface FilterOptions<
   limit?: number;
   fields?: (keyof P)[] | false | null;
   /** WKT polygon geometry */
-  intersects?: string;
+  intersects?: string | LngLatArray[] | LngLatBoundsArray;
   strategy?: 'BBOX';
   /**
    * set fields for order
    *
    * @remarks
-   * TODO: use typescript 4.1 template string type for map -${field}
+   * TODO: use typescript 4.1 template string type for map -`${field}`
    *
    * @example
    * ```javascript
@@ -458,7 +504,7 @@ export interface FilterOptions<
  */
 export type DataLayerFilter<
   F extends Feature = Feature,
-  L = any
+  L = any,
 > = CallbackFilter<F, L>;
 
 /**
@@ -467,7 +513,7 @@ export type DataLayerFilter<
 export type LayerAdapter<
   M = any,
   L = any,
-  O extends AdapterOptions = AdapterOptions
+  O extends AdapterOptions = AdapterOptions,
 > = MainLayerAdapter<M, L, O> | VectorLayerAdapter<M, L, O>;
 
 /**
@@ -476,7 +522,7 @@ export type LayerAdapter<
 export interface MainLayerAdapter<
   M = any,
   L = any,
-  O extends AdapterOptions = AdapterOptions
+  O extends AdapterOptions = AdapterOptions,
 > {
   options: O;
   id?: string;
@@ -510,7 +556,7 @@ export interface VectorLayerAdapter<
   M = any,
   L = any,
   O extends VectorAdapterOptions = VectorAdapterOptions,
-  F extends Feature = Feature
+  F extends Feature = Feature,
 > extends MainLayerAdapter<M, L, O> {
   /** True if there are selected features in the layer  */
   selected?: boolean;

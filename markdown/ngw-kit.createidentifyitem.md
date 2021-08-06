@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function createIdentifyItem<F = FeatureLayerFields, G extends Geometry = Geometry>(opt: IdentifyItemOptions): IdentifyItem;
+export declare function createIdentifyItem<F = FeatureProperties, G extends Geometry = Geometry>(opt: IdentifyItemOptions): IdentifyItem;
 ```
 
 ## Parameters

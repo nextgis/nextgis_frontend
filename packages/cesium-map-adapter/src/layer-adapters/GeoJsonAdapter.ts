@@ -57,7 +57,8 @@ interface GeoJsonDataSourceLoadOptions {
 
 export class GeoJsonAdapter
   extends BaseAdapter<AdapterOptions>
-  implements VectorLayerAdapter<Map> {
+  implements VectorLayerAdapter<Map>
+{
   selected = false;
 
   private readonly _pinBuilder = new PinBuilder();
@@ -263,6 +264,7 @@ export class GeoJsonAdapter
         if (this.options.popupOptions?.createPopupContent) {
           const content = this.options.popupOptions.createPopupContent({
             feature,
+            type: 'api',
           });
           if (content instanceof HTMLElement) {
             return content.outerHTML;

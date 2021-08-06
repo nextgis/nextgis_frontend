@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/dialog",
-  "version": "1.0.0-beta.8",
+  "version": "1.2.7",
   "description": "Modal window management",
   "main": "lib/dialog.global.prod.js",
   "module": "lib/dialog.esm-bundler.js",
@@ -8,11 +8,10 @@
   "jsdelivr": "lib/dialog.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@types/dialog-polyfill": "^0.5.0",
     "dialog-polyfill": "^0.5.6"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "^1.0.0-beta.8"
+    "@nextgis/build-tools": "^1.2.0"
   },
   "buildOptions": {
     "name": "Dialog",
@@ -47,5 +46,5 @@
   "bugs": {
     "url": "https://github.com/nextgis/nextgis_frontend/issues"
   },
-  "gitHead": "902bc588de905d567f54f8f53838b921ee3a3436"
+  "gitHead": "edc68033f914f6c95c4125b9738bba6d36e990b4"
 }

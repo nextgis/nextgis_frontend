@@ -8,9 +8,9 @@
 <b>Signature:</b>
 
 ```typescript
-export interface VectorAdapterOptions<F extends Feature = Feature, L = any, N = Record<string, any>> extends _VectorAdapterOptionsToExtend<N> 
+export interface VectorAdapterOptions<F extends Feature = Feature, L = any, A = Record<string, any>, N = Record<string, any>> extends _VectorAdapterOptionsToExtend<A, N> 
 ```
-<b>Extends:</b> \_VectorAdapterOptionsToExtend&lt;N&gt;
+<b>Extends:</b> \_VectorAdapterOptionsToExtend&lt;A, N&gt;
 
 ## Properties
 
@@ -24,6 +24,7 @@ export interface VectorAdapterOptions<F extends Feature = Feature, L = any, N = 
 |  [interactive?](./webmap.vectoradapteroptions.interactive.md) | boolean | <i>(Optional)</i> |
 |  [label?](./webmap.vectoradapteroptions.label.md) | (e: [LayerDefinition](./webmap.layerdefinition.md)<!-- -->&lt;F, L&gt;) =&gt; void \| string | <i>(Optional)</i> |
 |  [labelField?](./webmap.vectoradapteroptions.labelfield.md) | string | <i>(Optional)</i> |
+|  [labelOnHover?](./webmap.vectoradapteroptions.labelonhover.md) | boolean | <i>(Optional)</i> |
 |  [multiselect?](./webmap.vectoradapteroptions.multiselect.md) | boolean | <i>(Optional)</i> Indicates whether several objects can be selected in one layer. |
 |  [paint?](./webmap.vectoradapteroptions.paint.md) | [Paint](./paint.paint.md) | <i>(Optional)</i> Determine the appearance of the vector data geometries. |
 |  [popup?](./webmap.vectoradapteroptions.popup.md) | boolean | <i>(Optional)</i> |
@@ -34,12 +35,17 @@ export interface VectorAdapterOptions<F extends Feature = Feature, L = any, N = 
 |  [selectedPaint?](./webmap.vectoradapteroptions.selectedpaint.md) | [Paint](./paint.paint.md) | <i>(Optional)</i> The paint that applies to the features after it becomes selected. |
 |  [selectOnHover?](./webmap.vectoradapteroptions.selectonhover.md) | boolean | <i>(Optional)</i> Make the feature selected while mouseover. |
 |  [type?](./webmap.vectoradapteroptions.type.md) | [VectorAdapterLayerType](./webmap.vectoradapterlayertype.md) | <i>(Optional)</i> Type for geometries painting, for each layer may be only one of: <code>point</code>, <code>polygon</code> or <code>line</code>. |
+|  [unselectOnClick?](./webmap.vectoradapteroptions.unselectonclick.md) | boolean | <i>(Optional)</i> If false, the selection will be reset when the user clicks the map.  true |
 |  [unselectOnSecondClick?](./webmap.vectoradapteroptions.unselectonsecondclick.md) | boolean | <i>(Optional)</i> Deselects layer feature by second click. |
 
 ## Methods
 
 |  Method | Description |
 |  --- | --- |
+|  [onClick(opt)?](./webmap.vectoradapteroptions.onclick.md) | <i>(Optional)</i> |
 |  [onLayerClick(opt)?](./webmap.vectoradapteroptions.onlayerclick.md) | <i>(Optional)</i> |
 |  [onLayerSelect(opt)?](./webmap.vectoradapteroptions.onlayerselect.md) | <i>(Optional)</i> |
+|  [onMouseOut(opt)?](./webmap.vectoradapteroptions.onmouseout.md) | <i>(Optional)</i> Fired when the mouse leaves the layer. |
+|  [onMouseOver(opt)?](./webmap.vectoradapteroptions.onmouseover.md) | <i>(Optional)</i> Fired when the mouse enters the layer. |
+|  [onSelect(opt)?](./webmap.vectoradapteroptions.onselect.md) | <i>(Optional)</i> |
 

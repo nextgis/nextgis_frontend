@@ -1,43 +1,46 @@
-import mapboxgl, {
-  Map,
-  IControl,
-  MapEventType,
-  EventData,
-  MapboxOptions,
-  RequestParameters,
-  ResourceType,
-  FitBoundsOptions,
-} from 'mapbox-gl';
-import {
-  MapAdapter,
-  FitOptions,
-  MapControl,
-  ControlPositions,
-  ButtonControlOptions,
-  LngLatArray,
-  MapOptions,
-  LayerAdapter,
-  LngLatBoundsArray,
-  WebMapEvents,
-  CreateControlOptions,
-  MapClickEvent,
-} from '@nextgis/webmap';
-import { sleep, debounce } from '@nextgis/utils';
+import { EventEmitter } from 'events';
+
+import mapboxgl, { LngLatBoundsLike, Map } from 'maplibre-gl';
+
+import { debounce } from '@nextgis/utils';
+import { WmsAdapter } from './layer-adapters/WmsAdapter';
 import { MvtAdapter } from './layer-adapters/MvtAdapter';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
 import { TileAdapter } from './layer-adapters/TileAdapter';
-import { EventEmitter } from 'events';
+import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 import { ZoomControl } from './controls/ZoomControl';
+import { createControl } from './controls/createControl';
 import { CompassControl } from './controls/CompassControl';
 import { AttributionControl } from './controls/AttributionControl';
-import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
-import { createControl } from './controls/createControl';
 import { createButtonControl } from './controls/createButtonControl';
-import { WmsAdapter } from './layer-adapters/WmsAdapter';
+import { convertMapClickEvent } from './util/convertMapClickEvent';
+
+import type {
+  CreateControlOptions,
+  ButtonControlOptions,
+  LngLatBoundsArray,
+  ControlPosition,
+  LayerAdapter,
+  WebMapEvents,
+  LngLatArray,
+  MapAdapter,
+  FitOptions,
+  MapControl,
+  MapOptions,
+} from '@nextgis/webmap';
+import type {
+  IControl,
+  EventData,
+  ResourceType,
+  MapEventType,
+  MapboxOptions,
+  FitBoundsOptions,
+  RequestParameters,
+} from 'maplibre-gl';
 
 export type TLayer = string[];
+export type UnselectCb = () => void;
 type TLayerAdapter = LayerAdapter<Map, TLayer>;
-
 const fitBoundsOptions: FitOptions = {
   // padding: 100
 };
@@ -80,7 +83,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     'move',
     'moveend',
   ];
-
+  private _unselectCb: UnselectCb[] = [];
   private _sourceDataLoading: { [name: string]: any[] } = {};
   private __setLayerOrder: (layers: { [x: string]: TLayerAdapter }) => void;
 
@@ -88,7 +91,6 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     this.__setLayerOrder = debounce((layers) => this._setLayerOrder(layers));
   }
 
-  // create(options: MapOptions = {target: 'map'}) {
   create(options: MapboxglMapAdapterOptions): Promise<unknown> {
     return new Promise((resolve, reject) => {
       if (!this.map) {
@@ -100,8 +102,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
           const mapOpt: MapboxOptions = {
             container: options.target,
             attributionControl: false,
-            // @ts-ignore
-            bounds: options.bounds,
+            bounds: options.bounds as LngLatBoundsLike,
             fitBoundsOptions: {
               ...options.fitOptions,
               ...fitBoundsOptions,
@@ -145,10 +146,9 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
           }
           this.map = new Map(mapOpt);
           this.map.once('load', () => {
-            // @ts-ignore
-            this.map._onMapClickLayers = [];
-            // @ts-ignore
             this.map.transformRequests = [];
+            this.map._onMapClickLayers = [];
+            this.map._addUnselectCb = (args) => this._addUnselectCb(args);
             this.isLoaded = true;
             this.emitter.emit('create', this);
             resolve(this);
@@ -219,25 +219,24 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   }
 
   // [extent_left, extent_bottom, extent_right, extent_top];
-  async fitBounds(
-    e: LngLatBoundsArray,
-    options: FitOptions = {},
-  ): Promise<void> {
+  fitBounds(e: LngLatBoundsArray, options: FitOptions = {}): void {
     if (this.map) {
-      const fitBoundOptions: FitBoundsOptions = {
+      const opt: FitBoundsOptions = {
         linear: true,
         duration: 0,
         ...options,
         ...fitBoundsOptions,
       };
+      if (options.maxZoom) {
+        opt.maxZoom = options.maxZoom - 1;
+      }
       this.map.fitBounds(
         [
           [e[0], e[1]],
           [e[2], e[3]],
         ],
-        fitBoundOptions,
+        opt,
       );
-      sleep(fitBoundOptions.duration);
     }
   }
 
@@ -309,7 +308,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
 
   addControl(
     control: IControl,
-    position: ControlPositions,
+    position: ControlPosition,
   ): IControl | undefined {
     if (this.map) {
       this.map.addControl(control, position);
@@ -324,26 +323,22 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   }
 
   onMapClick(evt: MapEventType['click'] & EventData): void {
-    const latLng = evt.lngLat;
-    const { lng, lat } = latLng;
-    const { x, y } = evt.point;
-    const emitData: MapClickEvent = {
-      latLng,
-      lngLat: [lng, lat],
-      pixel: { top: y, left: x },
-    };
+    const emitData = convertMapClickEvent(evt);
     this.emitter.emit('preclick', emitData);
     if (this.map) {
-      // @ts-ignore
+      this.map._onMapClickLayers.forEach((x) => {
+        const unselectOnClick = x.options.unselectOnClick ?? true;
+        if (unselectOnClick) {
+          x.unselect();
+        }
+      });
       this.map._onMapClickLayers
-        // @ts-ignore
         .sort((a, b) => {
           if (a.options && a.options.order && b.options && b.options.order) {
             return b.options.order - a.options.order;
           }
           return 1;
         })
-        // @ts-ignore
         .find((x) => {
           return x._onLayerClick(evt);
         });
@@ -493,11 +488,18 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     }
   }
 
+  private _addUnselectCb(cb: UnselectCb) {
+    for (const p of this._unselectCb) {
+      p();
+    }
+    this._unselectCb.length = 0;
+    this._unselectCb.push(cb);
+  }
+
   private _transformRequest(
     url: string,
     resourceType: ResourceType,
   ): RequestParameters | undefined {
-    // @ts-ignore
     const transformRequests = this.map && this.map.transformRequests;
     if (transformRequests) {
       for (const r of transformRequests) {

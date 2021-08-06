@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare abstract class ResourceStore<P extends GeoJsonProperties = GeoJsonProperties, G extends Geometry | null = Geometry> extends VuexModule 
+export declare abstract class ResourceStore<P extends FeatureProperties = FeatureProperties, G extends Geometry | null = Geometry> extends VuexModule 
 ```
 <b>Extends:</b> VuexModule
 

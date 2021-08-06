@@ -4,7 +4,6 @@
 
 ## IdentifyRequestOptions interface
 
-
 <b>Signature:</b>
 
 ```typescript
@@ -16,6 +15,7 @@ export interface IdentifyRequestOptions
 |  Property | Type | Description |
 |  --- | --- | --- |
 |  [connector](./ngw-kit.identifyrequestoptions.connector.md) | NgwConnector |  |
+|  [geom?](./ngw-kit.identifyrequestoptions.geom.md) | Feature&lt;Polygon&gt; \| Polygon | <i>(Optional)</i> |
 |  [layers](./ngw-kit.identifyrequestoptions.layers.md) | number\[\] |  |
 |  [radius?](./ngw-kit.identifyrequestoptions.radius.md) | number | <i>(Optional)</i> |
 

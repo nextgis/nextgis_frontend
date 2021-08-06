@@ -14,7 +14,7 @@
 
 |  Function | Description |
 |  --- | --- |
-|  [createQmsAdapter(webMap, url)](./qms-kit.createqmsadapter.md) |  |
+|  [createQmsAdapter(webMap, url, createOpt)](./qms-kit.createqmsadapter.md) |  |
 |  [updateQmsOptions(qms)](./qms-kit.updateqmsoptions.md) |  |
 
 ## Interfaces

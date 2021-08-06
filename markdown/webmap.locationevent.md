@@ -4,7 +4,6 @@
 
 ## LocationEvent interface
 
-
 <b>Signature:</b>
 
 ```typescript
