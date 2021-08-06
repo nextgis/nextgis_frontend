@@ -1,14 +1,15 @@
 import { expect } from 'chai';
 import { propertiesFilter as pf } from '../../packages/properties-filter/src';
 
+type OBJ = Record<string, any>;
+
 const prop = {
   zero: 0,
   two: 2,
   str: 'Foo Bar',
   true: true,
   false: false,
-  text:
-    'JavaScript - язык программирования типа C++, основан на св ст. UNIX и отличается от языка C при программировании в С++ из-за большого числа потоков кода и большого количества операций.',
+  text: 'JavaScript - язык программирования типа C++, основан на св ст. UNIX и отличается от языка C при программировании в С++ из-за большого числа потоков кода и большого количества операций.',
 };
 
 const props = [
@@ -22,7 +23,7 @@ const props = [
 describe(`PropertiesFilter`, () => {
   it(`eq`, () => {
     expect(pf(prop, [['zero', 'eq', 0]])).to.be.true;
-    expect(pf(prop, [['notexist', 'eq', 'any']])).to.be.false;
+    expect(pf<OBJ>(prop, [['notexist', 'eq', 'any']])).to.be.false;
 
     expect(pf(prop, [['two', 'eq', 2]])).to.be.true;
     expect(pf(prop, [['str', 'eq', 'Foo Bar']])).to.be.true;
@@ -39,7 +40,7 @@ describe(`PropertiesFilter`, () => {
 
   it(`ne`, () => {
     expect(pf(prop, [['zero', 'ne', 0]])).to.be.false;
-    expect(pf(prop, [['notexist', 'ne', 'any']])).to.be.true;
+    expect(pf<OBJ>(prop, [['notexist', 'ne', 'any']])).to.be.true;
 
     expect(pf(prop, [['two', 'ne', 2]])).to.be.false;
     expect(pf(prop, [['str', 'ne', 'Foo Bar']])).to.be.false;
@@ -57,8 +58,8 @@ describe(`PropertiesFilter`, () => {
     expect(pf(prop, [['zero', 'gt', -1]])).to.be.true;
     expect(pf(prop, [['zero', 'gt', 1]])).to.be.false;
     expect(pf(prop, [['zero', 'gt', 0]])).to.be.false;
-    expect(pf(prop, [['notexist', 'gt', 1]])).to.be.false;
-    expect(pf(prop, [['notexist', 'gt', 0]])).to.be.false;
+    expect(pf<OBJ>(prop, [['notexist', 'gt', 1]])).to.be.false;
+    expect(pf<OBJ>(prop, [['notexist', 'gt', 0]])).to.be.false;
 
     expect(pf(prop, [['two', 'gt', 1]])).to.be.true;
     expect(pf(prop, [['two', 'gt', 300]])).to.be.false;
@@ -68,8 +69,8 @@ describe(`PropertiesFilter`, () => {
     expect(pf(prop, [['zero', 'ge', -1]])).to.be.true;
     expect(pf(prop, [['zero', 'ge', 1]])).to.be.false;
     expect(pf(prop, [['zero', 'ge', 0]])).to.be.true;
-    expect(pf(prop, [['notexist', 'ge', 1]])).to.be.false;
-    expect(pf(prop, [['notexist', 'ge', 0]])).to.be.false;
+    expect(pf<OBJ>(prop, [['notexist', 'ge', 1]])).to.be.false;
+    expect(pf<OBJ>(prop, [['notexist', 'ge', 0]])).to.be.false;
 
     expect(pf(prop, [['two', 'ge', 1]])).to.be.true;
     expect(pf(prop, [['two', 'ge', 2]])).to.be.true;
@@ -80,8 +81,8 @@ describe(`PropertiesFilter`, () => {
     expect(pf(prop, [['zero', 'lt', -1]])).to.be.false;
     expect(pf(prop, [['zero', 'lt', 1]])).to.be.true;
     expect(pf(prop, [['zero', 'lt', 0]])).to.be.false;
-    expect(pf(prop, [['notexist', 'lt', 1]])).to.be.false;
-    expect(pf(prop, [['notexist', 'lt', 0]])).to.be.false;
+    expect(pf<OBJ>(prop, [['notexist', 'lt', 1]])).to.be.false;
+    expect(pf<OBJ>(prop, [['notexist', 'lt', 0]])).to.be.false;
 
     expect(pf(prop, [['two', 'lt', 1]])).to.be.false;
     expect(pf(prop, [['two', 'lt', 2]])).to.be.false;
@@ -92,8 +93,8 @@ describe(`PropertiesFilter`, () => {
     expect(pf(prop, [['zero', 'le', -1]])).to.be.false;
     expect(pf(prop, [['zero', 'le', 1]])).to.be.true;
     expect(pf(prop, [['zero', 'le', 0]])).to.be.true;
-    expect(pf(prop, [['notexist', 'le', 1]])).to.be.false;
-    expect(pf(prop, [['notexist', 'le', 0]])).to.be.false;
+    expect(pf<OBJ>(prop, [['notexist', 'le', 1]])).to.be.false;
+    expect(pf<OBJ>(prop, [['notexist', 'le', 0]])).to.be.false;
 
     expect(pf(prop, [['two', 'le', 1]])).to.be.false;
     expect(pf(prop, [['two', 'le', 2]])).to.be.true;
@@ -134,8 +135,8 @@ describe(`PropertiesFilter`, () => {
     const toBeTrue: boolean[] = [];
     const toBeFalse: boolean[] = [];
     keys.forEach((x) => {
-      x[1].forEach((y) => toBeTrue.push(pf(prop, [[x[0], 'like', y]])));
-      x[2].forEach((y) => toBeFalse.push(pf(prop, [[x[0], 'like', y]])));
+      x[1].forEach((y) => toBeTrue.push(pf<OBJ>(prop, [[x[0], 'like', y]])));
+      x[2].forEach((y) => toBeFalse.push(pf<OBJ>(prop, [[x[0], 'like', y]])));
     });
     expect(toBeTrue.every((x) => x === true)).to.be.true;
     expect(toBeFalse.every((x) => x === false)).to.be.true;
@@ -151,8 +152,8 @@ describe(`PropertiesFilter`, () => {
     const toBeTrue: boolean[] = [];
     const toBeFalse: boolean[] = [];
     keys.forEach((x) => {
-      x[1].forEach((y) => toBeTrue.push(pf(prop, [[x[0], 'ilike', y]])));
-      x[2].forEach((y) => toBeFalse.push(pf(prop, [[x[0], 'ilike', y]])));
+      x[1].forEach((y) => toBeTrue.push(pf<OBJ>(prop, [[x[0], 'ilike', y]])));
+      x[2].forEach((y) => toBeFalse.push(pf<OBJ>(prop, [[x[0], 'ilike', y]])));
     });
     expect(toBeTrue.every((x) => x === true)).to.be.true;
     expect(toBeFalse.every((x) => x === false)).to.be.true;
@@ -163,20 +164,20 @@ describe(`PropertiesFilter`, () => {
       pf(prop, [
         ['str', 'eq', 'Foo Bar'],
         ['two', 'in', [1, 2, 3]],
-      ])
+      ]),
     ).to.be.true;
     expect(
       pf(prop, [
         ['str', 'eq', 'str'],
         ['two', 'in', [1, 2, 3]],
-      ])
+      ]),
     ).to.be.false;
     expect(
       pf(prop, [
         ['str', 'eq', 'Foo Bar'],
         ['text%', 'like', 'JavaScript'],
         ['two', 'in', [1, 2, 3]],
-      ])
+      ]),
     ).to.be.true;
     expect(pf(prop, ['all', ['str', 'eq', 'Foo Bar'], ['two', 'eq', 2]])).to.be
       .true;
@@ -193,7 +194,7 @@ describe(`PropertiesFilter`, () => {
         ['str', 'eq', 'str'],
         ['str%', 'like', 'string'],
         ['two', 'in', [1, 2, 3]],
-      ])
+      ]),
     ).to.be.true;
   });
 
@@ -206,16 +207,29 @@ describe(`PropertiesFilter`, () => {
           ['a', 'le', 10],
         ],
         ['b', 'eq', false],
-      ])
+      ]),
     );
     const filtered2 = props.filter((p) =>
       pf(p, [
         'any',
         ['all', ['b', 'eq', true], ['any', ['a', 'eq', 10], ['a', 'eq', -2]]],
         ['b', 'eq', false],
-      ])
+      ]),
     );
     expect(filtered.length).to.be.eq(4);
     expect(filtered2.length).to.be.eq(4);
+  });
+
+  it(`in null`, () => {
+    const propsWithNull = {
+      a: null,
+      b: 'b',
+    };
+    expect(
+      pf(propsWithNull, [
+        ['a', 'in', ['1', null]],
+        ['b', 'in', ['b', 'a']],
+      ]),
+    ).to.be.true;
   });
 });

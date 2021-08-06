@@ -3,6 +3,145 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/nextgis/nextgis_frontend/compare/v1.2.8...v1.3.0) (2021-08-06)
+
+
+### Features
+
+* improve popup, add new options, ol support ([75e73fa](https://github.com/nextgis/nextgis_frontend/commit/75e73faac7f393d0c62f9966786da78c7f54c039))
+* **mapbox-gl-js:** improve popup ([31694bc](https://github.com/nextgis/nextgis_frontend/commit/31694bc94aebb53eff3ff2422b148cd956f5166b))
+
+
+
+
+
+## [1.2.8](https://github.com/nextgis/nextgis_frontend/compare/v1.2.7...v1.2.8) (2021-07-27)
+
+**Note:** Version bump only for package @nextgis/mapboxgl-map-adapter
+
+
+
+
+
+## [1.2.7](https://github.com/nextgis/nextgis_frontend/compare/v1.2.6...v1.2.7) (2021-07-26)
+
+**Note:** Version bump only for package @nextgis/mapboxgl-map-adapter
+
+
+
+
+
+## [1.2.5](https://github.com/nextgis/nextgis_frontend/compare/v1.2.4...v1.2.5) (2021-07-22)
+
+
+### Bug Fixes
+
+* **mapbox-map-adapter:** show label not only for filtered layer ([8caa4c3](https://github.com/nextgis/nextgis_frontend/commit/8caa4c399a2a2e8cf38c172c4208c80987da1c1c))
+
+
+
+
+
+## [1.2.4](https://github.com/nextgis/nextgis_frontend/compare/v1.2.3...v1.2.4) (2021-07-22)
+
+
+### Bug Fixes
+
+* **mapboxgl-map-adapter:** clean popup on vectorlayer remove ([7851b73](https://github.com/nextgis/nextgis_frontend/commit/7851b7310b11f269d6632f5b72d8c5eeb99a7959))
+
+
+### Features
+
+* **mapbox-map-adapter:** GeoJson layer label workaround ([b7fa371](https://github.com/nextgis/nextgis_frontend/commit/b7fa371e5a22943e726962e92244d9d164da685e))
+
+
+
+
+
+## [1.2.3](https://github.com/nextgis/nextgis_frontend/compare/v1.2.2...v1.2.3) (2021-07-21)
+
+
+### Features
+
+* **mapboxgl-map-adapter:** add popup for selected feature ([ef87167](https://github.com/nextgis/nextgis_frontend/commit/ef87167a8df611a0e7b55c04b8090af14c053adc))
+
+
+
+
+
+## [1.2.2](https://github.com/nextgis/nextgis_frontend/compare/v1.2.1...v1.2.2) (2021-07-16)
+
+
+### Bug Fixes
+
+* **mapbox-map-adapter:** change osm adapter url ([9af5679](https://github.com/nextgis/nextgis_frontend/commit/9af56796fa35ad4ef635d747aaf90cf9a29481a9))
+
+
+
+
+
+## [1.2.1](https://github.com/nextgis/nextgis_frontend/compare/v1.2.0...v1.2.1) (2021-07-12)
+
+**Note:** Version bump only for package @nextgis/mapboxgl-map-adapter
+
+
+
+
+
+# [1.2.0](https://github.com/nextgis/nextgis_frontend/compare/v1.1.2...v1.2.0) (2021-07-08)
+
+
+### Features
+
+* handle vector layer mouse over and out events ([2e94152](https://github.com/nextgis/nextgis_frontend/commit/2e94152fac64b8e022dab7940614487763ce57af))
+
+
+
+
+
+## [1.1.2](https://github.com/nextgis/nextgis_frontend/compare/v1.1.1...v1.1.2) (2021-06-28)
+
+**Note:** Version bump only for package @nextgis/mapboxgl-map-adapter
+
+
+
+
+
+## [1.1.1](https://github.com/nextgis/nextgis_frontend/compare/v1.1.0...v1.1.1) (2021-06-25)
+
+**Note:** Version bump only for package @nextgis/mapboxgl-map-adapter
+
+
+
+
+
+# [1.1.0](https://github.com/nextgis/nextgis_frontend/compare/v1.0.1...v1.1.0) (2021-06-25)
+
+**Note:** Version bump only for package @nextgis/mapboxgl-map-adapter
+
+
+
+
+
+## [1.0.1](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0...v1.0.1) (2021-06-08)
+
+**Note:** Version bump only for package @nextgis/mapboxgl-map-adapter
+
+
+
+
+
+# [1.0.0](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.9...v1.0.0) (2021-06-07)
+
+
+### Features
+
+* **ngw-kit:** update features request params on no geom ([352fd22](https://github.com/nextgis/nextgis_frontend/commit/352fd220dca87de7018b86206aac31008f5a7e20))
+
+
+
+
+
 # [1.0.0-beta.9](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.8...v1.0.0-beta.9) (2021-05-03)
 
 **Note:** Version bump only for package @nextgis/mapboxgl-map-adapter

@@ -13,34 +13,19 @@
   <body>
     <script>
       var connector = new NgwConnector({
-        baseUrl: "http://geonote.nextgis.com",
+        baseUrl: 'https://barents-kara-xprojects.nextgis.com',
         auth: {
-          login: "nextgis",
-          password: "nextgis",
+          login: 'maximdubinin',
+          password: 'nextgis',
         },
       });
-      var metadata = {
-        resource: {
-          cls: "resource_group",
-          parent: { id: 446 },
-          display_name: "ngw-orm-tests",
-          keyname: "",
-          description:
-            "Automatically created resource group when running tests for @nextgis/ngw-orm",
-        },
-        resmeta: { items: {} },
-      };
-      connector.post("resource.collection", {
-        data: metadata,
-      }).then(function (resp) {
-        console.log(resp);
-        connector.delete("resource.item", null, { id: resp.id }).then(function (resp2) {
-          console.log(resp2);
-        }).catch(function (er) {
-          console.log(er);
-        })
-      }).catch(function (er)  {
-        console.log(er);
+
+      connector.getResourceChildren(511).then(function (resp) {
+        connector.getResourceChildren(511).then(function (resp) {
+          connector.getResourceChildren(360).then(function (resp) {
+            console.log(resp);
+          });
+        });
       });
     </script>
   </body>

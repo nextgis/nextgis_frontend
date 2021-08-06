@@ -1,8 +1,11 @@
-import { LngLatBoundsArray } from '@nextgis/webmap';
-import NgwConnector, {
-  WebmapResource,
-  ResourceItem,
-} from '@nextgis/ngw-connector';
+import CancelablePromise from '@nextgis/cancelable-promise';
+import type { LngLatBoundsArray } from '@nextgis/webmap';
+import type NgwConnector from '@nextgis/ngw-connector';
+import type { WebmapResource, ResourceItem } from '@nextgis/ngw-connector';
+import type {
+  FetchNgwLayerExtentOptions,
+  FetchNgwLayerItemExtentOptions,
+} from '../interfaces';
 
 export function getNgwWebmapExtent(
   webmap: WebmapResource,
@@ -23,54 +26,66 @@ export function getNgwWebmapExtent(
   }
 }
 
-export function fetchNgwLayerExtent(
-  id: number,
-  connector: NgwConnector,
-): Promise<LngLatBoundsArray | undefined> {
-  return connector.get('layer.extent', null, { id }).then((resp) => {
-    if (resp) {
-      const { maxLat, maxLon, minLat, minLon } = resp.extent;
-      const extenrArray: LngLatBoundsArray = [minLon, minLat, maxLon, maxLat];
-      return extenrArray;
-    }
-  });
+export function fetchNgwLayerExtent({
+  resourceId,
+  connector,
+  cache = true,
+}: FetchNgwLayerExtentOptions): CancelablePromise<
+  LngLatBoundsArray | undefined
+> {
+  return connector
+    .get('layer.extent', { cache }, { id: resourceId })
+    .then((resp) => {
+      if (resp) {
+        const { maxLat, maxLon, minLat, minLon } = resp.extent;
+        const extentArray: LngLatBoundsArray = [minLon, minLat, maxLon, maxLat];
+        return extentArray;
+      }
+    });
 }
 
-export async function fetchNgwResourceExtent(
+export function fetchNgwLayerItemExtent({
+  resourceId,
+  featureId,
+  connector,
+  cache = true,
+}: FetchNgwLayerItemExtentOptions): CancelablePromise<
+  LngLatBoundsArray | undefined
+> {
+  return connector
+    .get(
+      'feature_layer.feature.item_extent',
+      { cache },
+      { id: resourceId, fid: featureId },
+    )
+    .then((resp) => {
+      if (resp) {
+        const { maxLat, maxLon, minLat, minLon } = resp.extent;
+        const extentArray: LngLatBoundsArray = [minLon, minLat, maxLon, maxLat];
+        return extentArray;
+      }
+    });
+}
+
+export function fetchNgwResourceExtent(
   item: ResourceItem,
   connector: NgwConnector,
-): Promise<LngLatBoundsArray | undefined> {
+): CancelablePromise<LngLatBoundsArray | undefined> {
   if (item.webmap) {
-    return getNgwWebmapExtent(item.webmap);
+    return CancelablePromise.resolve(getNgwWebmapExtent(item.webmap));
   } else {
     const resource = item.resource;
     if (resource.cls && resource.cls.indexOf('style') !== -1) {
       return connector.getResource(resource.parent.id).then((res) => {
         if (res) {
-          return fetchNgwLayerExtent(res.resource.id, connector);
+          return fetchNgwLayerExtent({
+            resourceId: res.resource.id,
+            connector,
+          });
         }
       });
     } else {
-      return fetchNgwLayerExtent(resource.id, connector);
+      return fetchNgwLayerExtent({ resourceId: resource.id, connector });
     }
   }
-}
-
-/**
- * @deprecated use {@link fetchNgwLayerExtent} instead
- */
-export function getNgwLayerExtent(
-  id: number,
-  connector: NgwConnector,
-): Promise<LngLatBoundsArray | undefined> {
-  return fetchNgwLayerExtent(id, connector);
-}
-/**
- * @deprecated use {@link fetchNgwResourceExtent} instead
- */
-export async function getNgwResourceExtent(
-  item: ResourceItem,
-  connector: NgwConnector,
-): Promise<LngLatBoundsArray | undefined> {
-  return fetchNgwResourceExtent(item, connector);
 }

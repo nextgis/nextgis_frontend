@@ -1,22 +1,14 @@
 import type { ControlPosition } from './MapAdapter';
 
-/**
- * @public
- */
+
 export type OnClickSync = (status?: boolean) => void;
-/**
- * @public
- */
+
 export type onClickAsync = (status?: boolean) => Promise<void>;
-/**
- * @public
- */
+
 export type OnClick = OnClickSync | onClickAsync;
 
 // like in https://leafletjs.com/reference-1.3.4.html#control-zoom
-/**
- * @public
- */
+
 export interface ZoomControlOptions {
   /** The text set on the 'zoom in' button. */
   zoomInText?: string;
@@ -28,9 +20,7 @@ export interface ZoomControlOptions {
   zoomOutTitle?: string;
 }
 
-/**
- * @public
- */
+
 export interface AttributionControlOptions {
   /**
    * If true force a compact attribution that shows the full attribution on mouse hover,
@@ -43,28 +33,26 @@ export interface AttributionControlOptions {
   customAttribution?: string | string[];
 }
 
-/**
- * @public
- */
-export interface MapControls {
+
+export interface MapControls extends ContribControlsOptions {
   [name: string]: Record<string, any>;
+}
+
+export interface ContribControlsOptions {
   ZOOM: ZoomControlOptions;
   ATTRIBUTION: AttributionControlOptions;
 }
 
 export interface ControlOptions {
-  [param: string]: any;
   position?: ControlPosition;
   control?: string;
 }
 
-export interface ControlsOptions {
-  [control: string]: ControlOptions;
-}
+export type ControlsOptions<O extends MapControls = MapControls, K extends keyof O = keyof O> = {
+  [control in K]: O[K];
+};
 
-/**
- * @public
- */
+
 export interface MapControl<M extends any = any> {
   onAdd(map?: M): HTMLElement | undefined;
   onRemove(map?: M): unknown;
@@ -86,9 +74,7 @@ export interface ButtonControlOptions {
   title?: string;
 }
 
-/**
- * @public
- */
+
 export type HtmlDef = string | HTMLElement;
 
 /**
@@ -133,18 +119,14 @@ export interface ToggleControlOptions {
   getStatus?: () => boolean;
 }
 
-/**
- * @public
- */
+
 export interface CreateControlOptions {
   bar?: boolean;
   margin?: boolean;
   addClass?: string;
 }
 
-/**
- * @public
- */
+
 export interface ToggleControl {
   onClick: OnClick;
   changeStatus: OnClickSync;

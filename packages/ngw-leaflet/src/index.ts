@@ -5,6 +5,7 @@
  * Styles images and other assets are already in bundle, you don't need to include anything except one JS file!
  *
  * @packageDocumentation
+ * @module ngw-leaflet
  */
 import 'leaflet/dist/leaflet.css';
 import './leaflet-style-override.css';

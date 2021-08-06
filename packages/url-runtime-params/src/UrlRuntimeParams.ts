@@ -1,5 +1,5 @@
-import { RuntimeParams } from '@nextgis/webmap';
-import { Params, StateData } from './interfaces';
+import type { RuntimeParams } from '@nextgis/webmap';
+import type { Params, StateData } from './interfaces';
 
 export class UrlRuntimeParams implements RuntimeParams {
   private _params: Params = {};
@@ -12,18 +12,16 @@ export class UrlRuntimeParams implements RuntimeParams {
     // if (this._params) {
     //   return this._params;
     // }
+    const href = window.location.href.replace(/#$/, '');
     const params: Params = {};
-    window.location.href.replace(/[?&]+(\w+)([^&]*)/gi, function (m, key) {
+    href.replace(/[?&]+(\w+)([^&]*)/gi, function (m, key) {
       params[key] = true;
       return ''; // does not matter
     });
-    window.location.href.replace(
-      /[?&]+([^=&]+)=([^&]*)/gi,
-      function (m, key, value) {
-        params[key] = decodeURIComponent(value);
-        return ''; // does not matter
-      },
-    );
+    href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+      params[key] = decodeURIComponent(value);
+      return ''; // does not matter
+    });
     this._params = params;
     return params;
   }

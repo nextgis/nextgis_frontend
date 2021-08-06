@@ -1,4 +1,4 @@
-import { NavigationControl } from 'mapbox-gl';
+import { NavigationControl } from 'maplibre-gl';
 import { ZoomControlOptions } from '@nextgis/webmap';
 
 export class ZoomControl extends NavigationControl {

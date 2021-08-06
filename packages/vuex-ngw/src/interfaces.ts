@@ -6,7 +6,7 @@ export interface ForeignResource {
 
 export interface PatchOptions<
   G extends Geometry | null = Geometry,
-  P extends GeoJsonProperties = GeoJsonProperties
+  P extends GeoJsonProperties = GeoJsonProperties,
 > {
   item: Feature<G, P>;
   fid?: number;

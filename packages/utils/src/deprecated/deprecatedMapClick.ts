@@ -13,7 +13,7 @@ interface DeprecatedMapClickEvent {
  * @param ev @deprecated
  */
 export function deprecatedMapClick<
-  T extends DeprecatedMapClickEvent = DeprecatedMapClickEvent
+  T extends DeprecatedMapClickEvent = DeprecatedMapClickEvent,
 >(ev: T): T {
   if (!ev.lngLat && ev.latLng) {
     debugLog('deprecated use of latLng in MapClickEvent, use lngLat instead');

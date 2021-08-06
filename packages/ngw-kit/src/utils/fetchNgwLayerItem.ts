@@ -1,12 +1,12 @@
-import { Geometry, GeoJsonProperties } from 'geojson';
+import { Geometry } from 'geojson';
 
-import NgwConnector from '@nextgis/ngw-connector';
 import CancelablePromise from '@nextgis/cancelable-promise';
 
+import type { FeatureProperties } from '@nextgis/ngw-connector';
 import {
-  FeatureRequestParams,
   NgwFeatureItemResponse,
-  NgwFeatureRequestOptions,
+  FeatureRequestParams,
+  FetchNgwItemOptions,
 } from '../interfaces';
 import {
   createGeoJsonFeature,
@@ -16,24 +16,22 @@ import {
 
 export function fetchNgwLayerItem<
   G extends Geometry = Geometry,
-  P extends GeoJsonProperties = GeoJsonProperties
+  P extends FeatureProperties = FeatureProperties,
 >(
-  options: {
-    resourceId: number;
-    featureId: number;
-    connector: NgwConnector;
-  } & NgwFeatureRequestOptions,
+  options: FetchNgwItemOptions<P>,
 ): CancelablePromise<NgwFeatureItemResponse<P, G>> {
   const params: FeatureRequestParams & { [name: string]: any } = {
     ...FEATURE_REQUEST_PARAMS,
   };
   updateItemRequestParam(params, options);
+  const queryParams = {
+    id: options.resourceId,
+    fid: options.featureId,
+    ...params,
+  };
+  const cache = options.cache || true;
   return options.connector
-    .get('feature_layer.feature.item', null, {
-      id: options.resourceId,
-      fid: options.featureId,
-      ...params,
-    })
+    .get('feature_layer.feature.item', { cache }, queryParams)
     .then((resp) => {
       return {
         ...resp,

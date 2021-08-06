@@ -7,9 +7,7 @@ import type { LayerAdapter, AdapterOptions } from './LayerAdapter';
 import type { LngLatArray, LngLatBoundsArray, Type } from './BaseTypes';
 import type { ControlsOptions, MapControls } from './MapControl';
 
-/**
- * @public
- */
+
 export interface MapOptions<C = any> {
   /**
    * The main initialization property of WebMap.
@@ -144,24 +142,18 @@ export interface MapOptions<C = any> {
   tileJson?: TileJson;
 }
 
-/**
- * @public
- */
+
 export type OnBeforeLayerAdd = (e: {
   adapter?: Type<LayerAdapter>;
   options: AdapterOptions & Record<string, any>;
 }) => { adapter?: Type<LayerAdapter>; options?: AdapterOptions } | undefined;
 
-/**
- * @public
- */
+
 export interface ToggleLayerOptions {
   silent?: boolean;
 }
 
-/**
- * @public
- */
+
 export interface GetAttributionsOptions {
   onlyVisible?: boolean;
   onlyBaselayer?: boolean;

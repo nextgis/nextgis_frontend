@@ -232,7 +232,7 @@ bower_components
 ### Project Specific
 dist
 lib
-docs
+docs/build
 packages/demo/src/api.json
 temp
 input

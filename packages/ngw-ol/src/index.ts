@@ -5,6 +5,7 @@
  * Styles images and other assets are already in bundle, you don't need to include anything except one JS file!
  *
  * @packageDocumentation
+ * @module ngw-ol
  */
 import 'ol/ol.css';
 import '@nextgis/control-container/lib/control-container.css';

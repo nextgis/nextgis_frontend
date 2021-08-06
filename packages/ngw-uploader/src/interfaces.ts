@@ -1,4 +1,7 @@
-import { NgwConnectorOptions } from '@nextgis/ngw-connector';
+import type NgwConnector from '@nextgis/ngw-connector';
+import type { NgwConnectorOptions } from '@nextgis/ngw-connector';
+
+export type ImageTypes = 'image/tif' | 'image/tiff' | '.tif';
 
 export interface UploadInputOptions {
   html?: string;
@@ -58,6 +61,7 @@ interface ResourceCreateResp {
 export interface NgwUploadOptions extends NgwConnectorOptions {
   inputOptions?: UploadInputOptions;
   loginDialog?: boolean;
+  connector?: NgwConnector;
 }
 
 export interface RasterUploadResp {

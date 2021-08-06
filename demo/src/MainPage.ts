@@ -1,3 +1,4 @@
+import { mdiGithub } from '@mdi/js';
 import { Vue, Component, Watch } from 'vue-property-decorator';
 import HtmlExample from './components/Examples/HtmlExample/HtmlExample.vue';
 import Readme from './components/Readme/Readme.vue';
@@ -39,6 +40,10 @@ export class MainPage extends Vue {
 
   items: Item[] = null;
   currentItemId: string;
+
+  icons = {
+    github: mdiGithub,
+  };
 
   @Watch('$route')
   onPathChange() {

@@ -3,10 +3,8 @@ import type StrictEventEmitter from 'strict-event-emitter-types';
 import type { ProgressEvents } from './ProgressEvents';
 
 export class Progress {
-  readonly emitter: StrictEventEmitter<
-    EventEmitter,
-    ProgressEvents
-  > = new EventEmitter();
+  readonly emitter: StrictEventEmitter<EventEmitter, ProgressEvents> =
+    new EventEmitter();
   private loading = 0;
   private loaded = 0;
 

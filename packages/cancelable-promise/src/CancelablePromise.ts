@@ -157,6 +157,15 @@ export class CancelablePromise<T = any> implements Promise<T> {
   static all<T>(values: (T | PromiseLike<T>)[]): CancelablePromise<T[]> {
     return new CancelablePromise((resolve, reject) => {
       Promise.all(values).then(resolve).catch(reject);
+    }).catch((er) => {
+      if (er instanceof this.CancelError) {
+        for (const v of values) {
+          if ('cancel' in v) {
+            (v as CancelablePromise).cancel();
+          }
+        }
+      }
+      throw er;
     });
   }
 
@@ -228,7 +237,8 @@ export class CancelablePromise<T = any> implements Promise<T> {
   }
 
   cancel(): this {
-    if (this._isCanceled) {
+    // No reason to run cancel action if promise is already complete
+    if (this._isCanceled || !this._isPending) {
       return this;
     }
     this._isCanceled = true;
