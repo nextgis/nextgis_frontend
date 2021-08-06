@@ -28,4 +28,9 @@ export interface ColumnOptions {
    * Is this field used to display the name of an object
    */
   label_field?: boolean;
+
+  /**
+   * Custom fields properties
+   */
+  meta?: Record<string, unknown>;
 }

@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/url-runtime-params",
-  "version": "1.0.0-beta.9",
+  "version": "1.3.0",
   "description": "Сontrol of writing and reading URL parameters",
   "main": "lib/url-runtime-params.global.prod.js",
   "module": "lib/url-runtime-params.esm-bundler.js",
@@ -8,10 +8,10 @@
   "jsdelivr": "lib/url-runtime-params.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/webmap": "^1.0.0-beta.9"
+    "@nextgis/webmap": "^1.3.0"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "^1.0.0-beta.8"
+    "@nextgis/build-tools": "^1.2.0"
   },
   "buildOptions": {
     "name": "UrlRuntimeParams",
@@ -46,5 +46,5 @@
   "bugs": {
     "url": "https://github.com/nextgis/nextgis_frontend/issues"
   },
-  "gitHead": "902bc588de905d567f54f8f53838b921ee3a3436"
+  "gitHead": "edc68033f914f6c95c4125b9738bba6d36e990b4"
 }

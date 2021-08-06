@@ -1,15 +1,21 @@
 import { EventEmitter } from 'events';
-import { Map, Control } from 'leaflet';
-import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
-import { AttributionControl } from './controls/Attribution';
+import { Map, Control, FitBoundsOptions } from 'leaflet';
 import { convertMapClickEvent } from './utils/utils';
 import { createButtonControl } from './controls/createButtonControl';
+import { AttributionControl } from './controls/Attribution';
 import { createControl } from './controls/createControl';
+import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 import { ImageAdapter } from './layer-adapters/ImageAdapter/ImageAdapter';
 import { TileAdapter } from './layer-adapters/TileAdapter/TileAdapter';
 import { WmsAdapter } from './layer-adapters/WmsAdapter/WmsAdapter';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
 
+import type {
+  Layer,
+  GridLayer,
+  ControlPosition,
+  LeafletMouseEvent,
+} from 'leaflet';
 import type {
   CreateControlOptions,
   ButtonControlOptions,
@@ -21,25 +27,21 @@ import type {
   LngLatArray,
   MapAdapter,
   MapOptions,
+  FitOptions,
   MapControl,
   Locate,
 } from '@nextgis/webmap';
-import type {
-  Layer,
-  GridLayer,
-  ControlPosition,
-  LeafletMouseEvent,
-} from 'leaflet';
 
 export type Type<T> = new (...args: any[]) => T;
-
+export type UnselectCb = () => void;
+export type UnselectDef = UnselectCb;
 export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   static layerAdapters: {
     [name: string]: Type<LayerAdapter<Map, any, any>>;
   } = {
+    GEOJSON: GeoJsonAdapter,
     IMAGE: ImageAdapter,
     TILE: TileAdapter,
-    GEOJSON: GeoJsonAdapter,
     WMS: WmsAdapter,
     // // MVT: MvtAdapter,
     OSM: OsmAdapter,
@@ -59,41 +61,45 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   emitter = new EventEmitter();
   map?: Map;
 
+  private _unselectCb: UnselectDef[] = [];
   private _universalEvents: (keyof MainMapEvents)[] = [
-    'zoomstart',
-    'zoom',
-    'zoomend',
-    'movestart',
     'move',
+    'zoom',
     'moveend',
+    'zoomend',
+    'zoomstart',
+    'movestart',
   ];
 
   create(options: MapOptions): void {
     this.options = { ...options };
     if (this.options.target) {
       const {
-        maxZoom,
-        minZoom,
         zoom,
         center,
+        maxZoom,
+        minZoom,
         maxBounds: mb,
         mapAdapterOptions,
       } = this.options;
       this.map = new Map(this.options.target, {
-        zoomControl: false,
         attributionControl: false,
-        maxZoom,
-        minZoom,
-        zoom,
+        zoomControl: false,
         maxBounds: mb && [
           [mb[1], mb[0]],
           [mb[3], mb[2]],
         ],
+        maxZoom,
+        minZoom,
         center: center && [center[1], center[0]],
+        zoom,
         ...mapAdapterOptions,
       });
       // create default pane
       const defPane = this.map.createPane('order-0');
+      this.map._addUnselectCb = (def) => {
+        this._addUnselectCb(def);
+      };
       defPane.style.zIndex = String(0);
       this.emitter.emit('create', this);
       this._addMapListeners();
@@ -108,6 +114,14 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
 
   getContainer(): HTMLElement | undefined {
     return this.map && this.map.getContainer();
+  }
+
+  getControlContainer(): HTMLElement {
+    const controlContainer = this.map && (this.map as any)._controlContainer;
+    if (controlContainer) {
+      return controlContainer;
+    }
+    throw new Error('Leaflet Map is not initialized yet');
   }
 
   setCursor(cursor: string): void {
@@ -162,13 +176,27 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   }
 
   // [west, south, east, north]
-  fitBounds(e: LngLatBoundsArray): void {
+  fitBounds(e: LngLatBoundsArray, options: FitOptions = {}): void {
     if (this.map) {
+      const { maxZoom, offset, padding } = options;
+      const opt: FitBoundsOptions = {};
+      if (maxZoom) {
+        opt.maxZoom = maxZoom;
+      }
+      if (padding) {
+        opt.padding = [padding, padding];
+      }
+      if (offset) {
+        opt.padding = offset;
+      }
       // top, left, bottom, right
-      this.map.fitBounds([
-        [e[3], e[0]],
-        [e[1], e[2]],
-      ]);
+      this.map.fitBounds(
+        [
+          [e[3], e[0]],
+          [e[1], e[2]],
+        ],
+        opt,
+      );
     }
   }
 
@@ -177,11 +205,11 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   }
 
   createControl(control: MapControl, options: CreateControlOptions): L.Control {
-    return createControl(control, options);
+    return createControl(control, options, this);
   }
 
   createButtonControl(options: ButtonControlOptions): L.Control {
-    return createButtonControl(options);
+    return createButtonControl(options, this);
   }
 
   addControl(control: Control, position: string): Control | undefined {
@@ -223,41 +251,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     order: number,
     layers: { [x: string]: LayerAdapter },
   ): void {
-    // const baseLayers: string[] = [];
-    // const orderedLayers = Object.keys(layers).filter((x) => {
-    //   if (layers[x].options.baselayer) {
-    //     baseLayers.push(x);
-    //     return false;
-    //   }
-    //   return true;
-    // }).sort((a, b) => {
-    //   const layerAOrder = layers[a] && layers[a].options.order;
-    //   const layerBOrder = layers[b] && layers[b].options.order;
-    //   if (layerAOrder !== undefined && layerBOrder !== undefined) {
-    //     return layerAOrder - layerBOrder;
-    //   }
-    //   return 0;
-    // });
-    // baseLayers.forEach((x) => {
-    //   layers[x].layer.bringToBack();
-    // });
-    // if (layer.setZIndex) {
-    //   layer.setZIndex(order);
-    // } else {
-    //   for (let fry = 0; fry < orderedLayers.length; fry++) {
-    //     if (layers[orderedLayers[fry]].options.visibility) {
-    //       layers[orderedLayers[fry]].layer.bringToFront();
-    //     }
-    //   }
-    // }
-    // orderedLayers.forEach((x) => {
-    //   const l = layers[x];
-    //   const map = l.layer._map;
-    //   if (l.options.visibility && map) {
-    //     l.layer.remove();
-    //     l.layer.addTo(map);
-    //   }
-    // });
+    //
   }
 
   onMapClick(evt: LeafletMouseEvent): void {
@@ -296,6 +290,14 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     }
     const stop = () => void 'fake function';
     return { stop };
+  }
+
+  private _addUnselectCb(cb: UnselectDef) {
+    for (const p of this._unselectCb) {
+      p();
+    }
+    this._unselectCb.length = 0;
+    this._unselectCb.push(cb);
   }
 
   private _addMapListeners() {

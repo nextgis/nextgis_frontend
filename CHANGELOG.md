@@ -3,6 +3,260 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/nextgis/nextgisweb_frontend/compare/v1.2.8...v1.3.0) (2021-08-06)
+
+
+### Bug Fixes
+
+* **ngw-connector:** remove caching for update put request ([0a7f621](https://github.com/nextgis/nextgisweb_frontend/commit/0a7f621538f6ed6ff3150d4c1589ae70a5a7dd14))
+* **webmap:** disable experimental left and right control positions ([c8c6fb7](https://github.com/nextgis/nextgisweb_frontend/commit/c8c6fb73c33985b19ecfc908f7d25d6a2f23d778))
+
+
+### Features
+
+* improve popup, add new options, ol support ([75e73fa](https://github.com/nextgis/nextgisweb_frontend/commit/75e73faac7f393d0c62f9966786da78c7f54c039))
+* **mapbox-gl-js:** improve popup ([31694bc](https://github.com/nextgis/nextgisweb_frontend/commit/31694bc94aebb53eff3ff2422b148cd956f5166b))
+* **ol-map-adapter:** add srs options to draw vector layer ([6a76486](https://github.com/nextgis/nextgisweb_frontend/commit/6a76486e75bd6a6fb5e00a45b0815f3a27aba03e))
+* **webmap:** add getControlContainer method ([26a51bc](https://github.com/nextgis/nextgisweb_frontend/commit/26a51bc53c2f2a7219ed05a4ef4d6b3eaab03560))
+
+
+
+
+
+## [1.2.8](https://github.com/nextgis/nextgisweb_frontend/compare/v1.2.7...v1.2.8) (2021-07-27)
+
+
+### Bug Fixes
+
+* **leaflet-map-adapter:** geojson selection ([1022e71](https://github.com/nextgis/nextgisweb_frontend/commit/1022e71d46f5513f0ff3a60f4be7d96a84ff4f15))
+
+
+
+
+
+## [1.2.7](https://github.com/nextgis/nextgisweb_frontend/compare/v1.2.6...v1.2.7) (2021-07-26)
+
+
+### Bug Fixes
+
+* **ngw-kit:** createGeojsonAdapter propertiesFilter ([8beacb0](https://github.com/nextgis/nextgisweb_frontend/commit/8beacb0b0f2f8599c73be934fadcf2bae5ab5f85))
+* **ngw-kit:** duplication of the server filter by the client ([3561426](https://github.com/nextgis/nextgisweb_frontend/commit/3561426999cd58bceed008e974caeb9f0b8f5e2a))
+
+
+### Features
+
+* **ngw-kit:** duplication of the server filter by the client ([5fc0e92](https://github.com/nextgis/nextgisweb_frontend/commit/5fc0e92e625ecebae49a793f15e641a7a68716e7))
+* **ngw-kit:** update loaded date before property filter ([b40df4d](https://github.com/nextgis/nextgisweb_frontend/commit/b40df4d8742e970060e3eee60c6549d53567b938))
+
+
+
+
+
+## [1.2.6](https://github.com/nextgis/nextgisweb_frontend/compare/v1.2.5...v1.2.6) (2021-07-23)
+
+
+### Bug Fixes
+
+* **leaflet-map-adapter:** resolve geojson adapter layerdefinition problem ([071fd5a](https://github.com/nextgis/nextgisweb_frontend/commit/071fd5ae4f0e6b41d1644ba050cd201e806f7445))
+
+
+
+
+
+## [1.2.5](https://github.com/nextgis/nextgisweb_frontend/compare/v1.2.4...v1.2.5) (2021-07-22)
+
+
+### Bug Fixes
+
+* **mapbox-map-adapter:** show label not only for filtered layer ([8caa4c3](https://github.com/nextgis/nextgisweb_frontend/commit/8caa4c399a2a2e8cf38c172c4208c80987da1c1c))
+
+
+
+
+
+## [1.2.4](https://github.com/nextgis/nextgisweb_frontend/compare/v1.2.3...v1.2.4) (2021-07-22)
+
+
+### Bug Fixes
+
+* **mapboxgl-map-adapter:** clean popup on vectorlayer remove ([7851b73](https://github.com/nextgis/nextgisweb_frontend/commit/7851b7310b11f269d6632f5b72d8c5eeb99a7959))
+
+
+### Features
+
+* **leaflet-map-adapter:** label redraw on map position change ([241efc1](https://github.com/nextgis/nextgisweb_frontend/commit/241efc142ef29eef898e5b4adadff3e8208a3091))
+* **mapbox-map-adapter:** GeoJson layer label workaround ([b7fa371](https://github.com/nextgis/nextgisweb_frontend/commit/b7fa371e5a22943e726962e92244d9d164da685e))
+
+
+
+
+
+## [1.2.3](https://github.com/nextgis/nextgisweb_frontend/compare/v1.2.2...v1.2.3) (2021-07-21)
+
+
+### Bug Fixes
+
+* **cancelable-promise:** handle error for CancelablePromise.all ([0a47b11](https://github.com/nextgis/nextgisweb_frontend/commit/0a47b11f11fbb4b6bac1fcba22fa7a9573b4969f))
+* **cesium:** empty default imagery provider ([f17c211](https://github.com/nextgis/nextgisweb_frontend/commit/f17c2113e24a2af46bd6283eb64eb10b5b987ac9))
+* **vuetify:** improve BaselayerSelect ([89d8ef5](https://github.com/nextgis/nextgisweb_frontend/commit/89d8ef5c25b6858fae345e4061f471ba52bb2c7d))
+
+
+### Features
+
+* **mapboxgl-map-adapter:** add popup for selected feature ([ef87167](https://github.com/nextgis/nextgisweb_frontend/commit/ef87167a8df611a0e7b55c04b8090af14c053adc))
+* **ngw-kit:** export createPopupContent util ([a7f00dc](https://github.com/nextgis/nextgisweb_frontend/commit/a7f00dcffbf21d5516fc27a3e704c85785fc07c0))
+
+
+
+
+
+## [1.2.2](https://github.com/nextgis/nextgisweb_frontend/compare/v1.2.1...v1.2.2) (2021-07-16)
+
+
+### Bug Fixes
+
+* **mapbox-map-adapter:** change osm adapter url ([9af5679](https://github.com/nextgis/nextgisweb_frontend/commit/9af56796fa35ad4ef635d747aaf90cf9a29481a9))
+* **ngw-connector:** disable request params list convert to object ([f67aeae](https://github.com/nextgis/nextgisweb_frontend/commit/f67aeae8aa35d8c6adbc1f8229d1e3bdc09f9acc))
+* **webmap:** add check for layer exist on properties filter ([dbcd588](https://github.com/nextgis/nextgisweb_frontend/commit/dbcd588cd29d66f8927f1c748f8aeec74a13d9e4))
+
+
+### Features
+
+* **ngw-kit:** handle Infinity in fetchNgwItems query limit param ([8a634d7](https://github.com/nextgis/nextgisweb_frontend/commit/8a634d7d8fe0e1ef926802f7eec36f8b097170fd))
+
+
+
+
+
+## [1.2.1](https://github.com/nextgis/nextgisweb_frontend/compare/v1.2.0...v1.2.1) (2021-07-12)
+
+
+### Bug Fixes
+
+* **ol-map-adapter:** geojson adapter layer remove ([3705f27](https://github.com/nextgis/nextgisweb_frontend/commit/3705f27c5d75aba9f385ceda27aa26ef94cb0533))
+* **utils:** fix objectDeepEqual function ([720eabe](https://github.com/nextgis/nextgisweb_frontend/commit/720eabe7645a66fc3addd118c724679af6264652))
+
+
+### Performance Improvements
+
+* **ol-map-adapter:** style function for each feature ([fed8575](https://github.com/nextgis/nextgisweb_frontend/commit/fed8575d7beb6dd23b22cc2eff2e02b73f0c8f7b))
+
+
+
+
+
+# [1.2.0](https://github.com/nextgis/nextgisweb_frontend/compare/v1.1.2...v1.2.0) (2021-07-08)
+
+
+### Bug Fixes
+
+* **ngw-connector:** do not create new instance on same url and auth ([2ddb39f](https://github.com/nextgis/nextgisweb_frontend/commit/2ddb39fd8376420d5b1bbd0d617485cb9ff82f67))
+
+
+### Features
+
+* handle vector layer mouse over and out events ([2e94152](https://github.com/nextgis/nextgisweb_frontend/commit/2e94152fac64b8e022dab7940614487763ce57af))
+* **vue:** update cache on resource store patch ([3f0cac7](https://github.com/nextgis/nextgisweb_frontend/commit/3f0cac7923d59bdbe1589f00dbdc581564deb02f))
+
+
+
+# [1.0.0-beta.10](https://github.com/nextgis/nextgisweb_frontend/compare/v1.0.0-beta.9...v1.0.0-beta.10) (2021-05-18)
+
+
+
+
+
+## [1.1.2](https://github.com/nextgis/nextgis_frontend/compare/v1.1.1...v1.1.2) (2021-06-28)
+
+
+### Bug Fixes
+
+* **cancelable-promise:** do not cancel already complate promise ([c01c871](https://github.com/nextgis/nextgis_frontend/commit/c01c8716f88ee00658ae1e2041af15fbf4631564))
+* **ngw-kit:** protect firstShowAdapter from multiple creation ([55061f8](https://github.com/nextgis/nextgis_frontend/commit/55061f8f1d2cb2102ca05ecf7430f40182c361f6))
+
+
+### Features
+
+* **cesium:** change default screenSpaceError value ([9a417d6](https://github.com/nextgis/nextgis_frontend/commit/9a417d6c3b64a01f6e6d94abfa08cbdd942b1038))
+
+
+
+
+
+## [1.1.1](https://github.com/nextgis/nextgis_frontend/compare/v1.1.0...v1.1.1) (2021-06-25)
+
+**Note:** Version bump only for package root
+
+
+
+
+
+# [1.1.0](https://github.com/nextgis/nextgis_frontend/compare/v1.0.1...v1.1.0) (2021-06-25)
+
+
+### Features
+
+* **cache:** add array to match options deep compare ([b3e6717](https://github.com/nextgis/nextgis_frontend/commit/b3e67174977f0985678580a2ef1096220a787ff5))
+* **cache:** new package to cache key value with async ability ([4b429a9](https://github.com/nextgis/nextgis_frontend/commit/4b429a93f2ef7d5a362ae708375ee87c18e2c464))
+* **ngw-connector:** get already created connector by url only ([0eb5e2f](https://github.com/nextgis/nextgis_frontend/commit/0eb5e2f58fd82485ee825cae3bab3f3ff598b8eb))
+* **ngw-kit:** features request cache option ([1182bc7](https://github.com/nextgis/nextgis_frontend/commit/1182bc7b9d74f958f49804b7ceeb840869e3f232))
+
+
+### types
+
+* **ngw-connector:** rename ([0e7f0b9](https://github.com/nextgis/nextgis_frontend/commit/0e7f0b979a774ea27ad45a0f7d7576ff11ad8d56))
+
+
+### BREAKING CHANGES
+
+* **ngw-connector:** FeatureLayerFields type is now FeatureProperties
+
+
+
+
+
+## [1.0.1](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0...v1.0.1) (2021-06-08)
+
+
+### types
+
+* rename interface ([b8e5f7c](https://github.com/nextgis/nextgis_frontend/commit/b8e5f7cd4a2bdb289a34fb7a11b3f560b5dd897c))
+
+
+### BREAKING CHANGES
+
+* change GetNgwLayerItemsOptions to GetNgwItemsOptions
+
+
+
+
+
+# [1.0.0](https://github.com/nextgis/nextgis_frontend/compare/v1.0.0-beta.9...v1.0.0) (2021-06-07)
+
+
+### Bug Fixes
+
+* **ngw-connect:** remove unnecessary console log ([ef6bd02](https://github.com/nextgis/nextgis_frontend/commit/ef6bd026e69132694fbc6b83fdab480712d0377e))
+* **ngw-connector:** do not throw error on node data load6 use promise reject ([c33c178](https://github.com/nextgis/nextgis_frontend/commit/c33c178dadcf30cfe12e9f6bf07bbc6e59da4188))
+* **ngw-kit:** fix emppty identify geometry ([9bc2342](https://github.com/nextgis/nextgis_frontend/commit/9bc2342aae5441497acf0ade2b9fc993ab6a3f09))
+* **ngw-kit:** on first adapter wait while show layer ([32fe7a0](https://github.com/nextgis/nextgis_frontend/commit/32fe7a0afde48fc8a46626fac1b5f8aa0b942775))
+* **ngw-uploader:** correct imports and sandbox url ([d27891d](https://github.com/nextgis/nextgis_frontend/commit/d27891db05360167842efbbfcc43ee7a15d3008f))
+* **qms:** add createQmsAdapter options ([65cf6ee](https://github.com/nextgis/nextgis_frontend/commit/65cf6eec97cf9d12db118c9a0ccdb8e50bad4e88))
+
+
+### Features
+
+* **nge-kit:** add uploadFeatureAttachment util ([14fa802](https://github.com/nextgis/nextgis_frontend/commit/14fa802d237976f8b2c75584cfb0659ed31bd2b8)), closes [#CU-m356](https://github.com/nextgis/nextgis_frontend/issues/CU-m356)
+* **ngw-kit:** update features request params on no geom ([352fd22](https://github.com/nextgis/nextgis_frontend/commit/352fd220dca87de7018b86206aac31008f5a7e20))
+* **url-runtime-params:** remove trailing sharp from hash ([514adec](https://github.com/nextgis/nextgis_frontend/commit/514adec69c697beacb6d2aee88c0dfd50f540006))
+* **utils:** add degrees to radian transform function ([9ce078a](https://github.com/nextgis/nextgis_frontend/commit/9ce078a4aef77ed58efad8a7e1736a7d49172a1d))
+* **vuetify:** NgwLayersList remove layer ability ([320ce0e](https://github.com/nextgis/nextgis_frontend/commit/320ce0effd76c6562036c6558564cecc06e83231)), closes [#CU-jzby65](https://github.com/nextgis/nextgis_frontend/issues/CU-jzby65)
+* **webmap:** webmap container get set functions ([f0a1491](https://github.com/nextgis/nextgis_frontend/commit/f0a1491a471ccfa2538c48c1b307d6d5fa3d713c))
+
+
+
+
+
 # [1.0.0-beta.9](https://github.com/nextgis/nextgisweb_frontend/compare/v1.0.0-beta.8...v1.0.0-beta.9) (2021-05-03)
 
 

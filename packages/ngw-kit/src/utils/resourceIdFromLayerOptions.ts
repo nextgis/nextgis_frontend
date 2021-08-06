@@ -1,22 +1,15 @@
 import NgwConnector, { ResourceItem } from '@nextgis/ngw-connector';
-import {
-  NgwLayerOptions,
-  KeynamedNgwLayerOptions,
-  ResourceIdNgwLayerOptions,
-  ResourceNgwLayerOptions,
-} from '../interfaces';
+import type { NgwLayerOptions } from '../interfaces';
 
 export async function resourceIdFromLayerOptions(
   options: NgwLayerOptions,
   connector: NgwConnector,
 ): Promise<number> {
-  const resource = (options as ResourceNgwLayerOptions).resource;
+  const resource = options.resource;
   const item = resource as ResourceItem;
 
   // @ts-ignore @deprecated
-  let keyname = (options as KeynamedNgwLayerOptions).keyname;
-  // @ts-ignore @deprecated
-  let resourceId = (options as ResourceIdNgwLayerOptions).resourceId;
+  let { keyname, resourceId } = options;
 
   if (resource) {
     if (typeof resource === 'string') {
@@ -26,12 +19,13 @@ export async function resourceIdFromLayerOptions(
     } else if (
       item.resource &&
       item.resource !== undefined &&
-      'resmeta' in item
+      'resource' in item
     ) {
       resourceId = (resource as ResourceItem).resource.id;
     } else {
+      // TODO: safe remove this case
       resourceId = await resourceIdFromLayerOptions(
-        resource as ResourceNgwLayerOptions,
+        resource as NgwLayerOptions,
         connector,
       );
     }

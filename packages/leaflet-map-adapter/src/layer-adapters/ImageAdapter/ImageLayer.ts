@@ -232,9 +232,10 @@ export class ImageLayer extends Layer {
         height: size.y,
       };
       params[projectionKey] = crs.code;
-      params.bbox = (wmsVersion >= 1.3 && crs === CRS.EPSG4326
-        ? [se.y, nw.x, nw.y, se.x]
-        : [nw.x, se.y, se.x, nw.y]
+      params.bbox = (
+        wmsVersion >= 1.3 && crs === CRS.EPSG4326
+          ? [se.y, nw.x, nw.y, se.x]
+          : [nw.x, se.y, se.x, nw.y]
       ).join(',');
 
       Util.extend(this.wmsParams, params);

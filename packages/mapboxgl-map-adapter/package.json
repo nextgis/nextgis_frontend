@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/mapboxgl-map-adapter",
-  "version": "1.0.0-beta.9",
+  "version": "1.3.0",
   "_priority": 16,
   "description": "Webmap adapter to use Mapbox GL JS GIS framework.",
   "main": "lib/mapboxgl-map-adapter.global.prod.js",
@@ -9,19 +9,20 @@
   "jsdelivr": "lib/mapboxgl-map-adapter.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/paint": "^1.0.0-beta.8",
-    "@nextgis/properties-filter": "^1.0.0-beta.8",
-    "@nextgis/webmap": "^1.0.0-beta.9",
+    "@nextgis/paint": "^1.3.0",
+    "@nextgis/properties-filter": "^1.3.0",
+    "@nextgis/webmap": "^1.3.0",
     "@types/events": "^3.0.0",
-    "@types/mapbox-gl": "^1.12.8",
+    "@types/polylabel": "^1.0.5",
     "events": "^3.3.0",
-    "mapbox-gl": "1.13.0"
+    "maplibre-gl": "^1.15.2",
+    "polylabel": "^1.1.0"
   },
   "optionalDependencies": {
     "canvg": "^3.0.7"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "^1.0.0-beta.8"
+    "@nextgis/build-tools": "^1.2.0"
   },
   "buildOptions": {
     "name": "MapboxglMapAdapter",
@@ -56,5 +57,5 @@
   "bugs": {
     "url": "https://github.com/nextgis/nextgis_frontend/issues"
   },
-  "gitHead": "902bc588de905d567f54f8f53838b921ee3a3436"
+  "gitHead": "edc68033f914f6c95c4125b9738bba6d36e990b4"
 }

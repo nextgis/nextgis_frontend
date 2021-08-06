@@ -5,25 +5,25 @@ import { updateGeoJsonAdapterOptions } from './utils/updateGeoJsonAdapterOptions
 import { WebMapMain } from './WebMapMain';
 
 import type { Feature, GeoJsonObject } from 'geojson';
-import type { TileJson, Type } from '@nextgis/utils';
+import { defined, TileJson, Type } from '@nextgis/utils';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 
 import type {
   LayerAdapter,
   LayerAdapters,
-  AdapterConstructor,
-  LayerAdaptersOptions,
-  AdapterOptions,
-  GeoJsonAdapterOptions,
-  VectorLayerAdapter,
-  DataLayerFilter,
-  OnLayerClickOptions,
   FilterOptions,
+  AdapterOptions,
   LayerDefinition,
-  LayerAdapterDefinition,
-  OnLayerSelectOptions,
+  DataLayerFilter,
   MainLayerAdapter,
+  AdapterConstructor,
+  VectorLayerAdapter,
   TileAdapterOptions,
+  OnLayerClickOptions,
+  LayerAdaptersOptions,
+  OnLayerSelectOptions,
+  GeoJsonAdapterOptions,
+  LayerAdapterDefinition,
 } from './interfaces/LayerAdapter';
 import type { LayerDef } from './interfaces/BaseTypes';
 import type {
@@ -36,14 +36,11 @@ import type { FitOptions } from './interfaces/MapAdapter';
 
 type AddedLayers = { [id: string]: LayerAdapter };
 
-/**
- * @public
- */
 export class WebMapLayers<
   M = any,
   L = any,
   E extends WebMapEvents = WebMapEvents,
-  O extends MapOptions = MapOptions
+  O extends MapOptions = MapOptions,
 > extends WebMapMain<M, E, O> {
   private _layersIdCounter = 1;
   private _layersOrderCounter = 1;
@@ -162,7 +159,7 @@ export class WebMapLayers<
    */
   async addBaseLayer<
     K extends keyof LayerAdapters,
-    O extends AdapterOptions = AdapterOptions
+    O extends AdapterOptions = AdapterOptions,
   >(
     adapter: K | Type<LayerAdapters[K]>,
     options?: O | LayerAdaptersOptions[K],
@@ -191,7 +188,7 @@ export class WebMapLayers<
    */
   async addLayer<
     K extends keyof LayerAdapters,
-    O extends AdapterOptions = AdapterOptions
+    O extends AdapterOptions = AdapterOptions,
   >(
     adapter: LayerAdapterDefinition<K>,
     options: O | LayerAdaptersOptions[K] = {},
@@ -265,7 +262,7 @@ export class WebMapLayers<
         layerId = String(_adapter.options.id);
         this._layers[layerId] = _adapter;
       }
-      this.emitter.emit('layer:preadd', _adapter);
+      this._emitLayerEvent('layer:preadd', layerId || '', _adapter);
       await this.onMapLoad();
       _adapter.map = this.mapAdapter.map;
       const layer = await _adapter.addLayer(_adapter.options);
@@ -309,7 +306,7 @@ export class WebMapLayers<
           await this.fitBounds(extent);
         }
       }
-      this.emitter.emit('layer:add', _adapter);
+      this._emitLayerEvent('layer:add', layerId, _adapter);
       return _adapter;
     }
     return Promise.reject('No adapter');
@@ -317,7 +314,7 @@ export class WebMapLayers<
 
   async addLayerFromAsyncAdapter<
     K extends keyof LayerAdapters,
-    O extends AdapterOptions = AdapterOptions
+    O extends AdapterOptions = AdapterOptions,
   >(
     adapter: AdapterConstructor,
     options: O | LayerAdaptersOptions[K],
@@ -488,15 +485,17 @@ export class WebMapLayers<
     options: ToggleLayerOptions = {},
   ): Promise<void> {
     const layer = this.getLayer(layerDef);
+
     const onMap = layer && layer.options.visibility;
     const toStatus = status !== undefined ? status : !onMap;
     const silent = options.silent !== undefined ? options.silent : false;
     const action = (l: LayerAdapter) => {
+      const id = String(l.id);
       const preEventName = toStatus ? 'layer:preshow' : 'layer:prehide';
       const eventName = toStatus ? 'layer:show' : 'layer:hide';
       if (!silent) {
-        this.emitter.emit(preEventName, l);
-        this.emitter.emit('layer:pretoggle', l);
+        this._emitLayerEvent(preEventName, id, l);
+        this._emitLayerEvent('layer:pretoggle', id, l);
       }
       if (toStatus && this.mapAdapter) {
         const order = l.options.baselayer ? 0 : l.options.order;
@@ -527,8 +526,8 @@ export class WebMapLayers<
         }
       }
       if (!silent) {
-        this.emitter.emit(eventName, l);
-        this.emitter.emit('layer:toggle', l);
+        this._emitLayerEvent(eventName, id, l);
+        this._emitLayerEvent('layer:toggle', id, l);
       }
       l.options.visibility = toStatus;
     };
@@ -656,6 +655,7 @@ export class WebMapLayers<
     options?: FilterOptions,
   ): void {
     const layer = this.getLayer(layerDef);
+    if (!layer) return;
     const adapter = layer as VectorLayerAdapter;
     if (adapter.propertiesFilter) {
       adapter.propertiesFilter(filters, options);
@@ -792,26 +792,52 @@ export class WebMapLayers<
   }
 
   private async _onLayerClick(options: OnLayerClickOptions) {
-    this.emitter.emit('layer:click', options);
+    const id = options.layer.id;
+    this._emitLayerEvent('layer:click', id || '', options);
     return Promise.resolve(options);
   }
 
   private async _onLayerSelect(options: OnLayerSelectOptions) {
-    this.emitter.emit('layer:select', options);
+    this._emitLayerEvent('layer:select', options.layer.id || '', options);
     return Promise.resolve(options);
   }
 
   private _updateGeoJsonOptions(options: GeoJsonAdapterOptions) {
-    const onLayerClickFromOpt = options.onLayerClick;
-    options.onLayerClick = (e) => {
+    const {
+      onSelect,
+      onLayerSelect,
+      onClick,
+      onLayerClick,
+      onMouseOut,
+      onMouseOver,
+    } = options;
+    const onLayerClickFromOpt = onClick || onLayerClick;
+    options.onClick = (e) => {
       if (onLayerClickFromOpt) {
         onLayerClickFromOpt(e);
       }
       return this._onLayerClick(e);
     };
 
-    const onLayerSelectFromOpt = options.onLayerSelect;
-    options.onLayerSelect = (e) => {
+    options.onMouseOut = (e) => {
+      const id = e.layer.id;
+      onMouseOut && onMouseOut(e);
+      if (defined(id)) {
+        this._emitLayerEvent(`layer:mouseout`, id, e);
+      }
+    };
+
+    options.onMouseOver = (e) => {
+      const id = e.layer.id;
+      onMouseOver && onMouseOver(e);
+      if (defined(id)) {
+        this._emitLayerEvent(`layer:mouseover`, id, e);
+      }
+    };
+
+    // TODO: remove backward compatibility for onLayerSelect
+    const onLayerSelectFromOpt = onSelect || onLayerSelect;
+    options.onSelect = (e) => {
       if (onLayerSelectFromOpt) {
         onLayerSelectFromOpt(e);
       }
@@ -834,5 +860,18 @@ export class WebMapLayers<
         );
       }
     }
+  }
+
+  private _emitLayerEvent(
+    name: keyof WebMapEvents,
+    id: string,
+    options: unknown,
+  ) {
+    if (defined(id) && name.startsWith('layer:')) {
+      const specificLayerName = name.replace('layer:', 'layer-' + id + ':');
+      // @ts-ignore can't paste template literal key for interface
+      this.emitter.emit(specificLayerName, options);
+    }
+    this.emitter.emit(name, options);
   }
 }

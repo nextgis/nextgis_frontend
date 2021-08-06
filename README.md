@@ -14,6 +14,7 @@ Some universal examples:
 
 - [Add layer from NGW Cloud](http://code.nextgis.com/demo-examples-ngw-layer)
 - [Add webmap from NGW Cloud](http://code.nextgis.com/demo-examples-ngw-webmap)
+- [Zoom to NGW layer feature, partial data load](https://code.nextgis.com/demo-examples-ngw-zoom-to-feature)
 - [Highlight features from NGW webmap](https://code.nextgis.com/demo-examples-webmap-identification)
 - [Expression paint](https://code.nextgis.com/demo-examples-expression-paint-match)
 - [Layer properties filters](https://code.nextgis.com/demo-examples-ngw-layer-properties-filters)
@@ -27,7 +28,7 @@ Some universal examples:
 - [Web map feature identification](https://code.nextgis.com/demo-examples-webmap-identification-multiply)
 - [Web map bookmarks](https://code.nextgis.com/demo-examples-ngw-webmap-bookmarks)
 
-## Packages `@nextgis/`
+## Packages `@nextgis/[package-name]`
 
 ### Ready-to-use maps
 
@@ -53,24 +54,26 @@ Bricks for build custom Web GIS frontend
 - [properties-filter](https://github.com/nextgis/nextgis_frontend/tree/master/packages/properties-filter) – filtering objects by its properties using JSON-serializable expressions;
 - [url-runtime-params](https://github.com/nextgis/nextgis_frontend/tree/master/packages/url-runtime-params) – writing and reading URL parameters;
 - [item](https://github.com/nextgis/nextgis_frontend/tree/master/packages/item) – hierarchical layers control;
-- [ngw-kit](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-kit) – build webmap with [NextGIS Web](http://nextgis.ru/nextgis-web/) instance;
-- [ngw-map](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-map) – abstract map to simplify work with NextGIS services;
+- [geocoder](https://github.com/nextgis/nextgis_frontend/tree/master/packages/geocoder) - modern geocoder on async generators. May use different data providers.
 
 ### NextGIS Web tools
 
 Map-free libraries to interaction with NextGIS Web
 
 - [ngw-connector](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-connector) – module to interact with [NextGIS Web](http://docs.nextgis.ru/docs_ngweb_dev/doc/developer/toc.html) REST API;
+- [ngw-kit](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-kit) – build webmap with [NextGIS Web](http://nextgis.ru/nextgis-web/) instance. Lots of useful utilities for interacting with the NGW API;
 - [ngw-orm](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-orm) – NextGIS Web Object-Relational Mapping;
 - [ngw-uploader](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-uploader) – library providing tools for uploading data to [nextgis.com](http://nextgis.com/nextgis-com/) cloud;
+- [ngw-map](https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-map) – abstract map to simplify work with NextGIS services;
 
 ### Utilities
 
 Map-free tools for common purpose
 
 - [utils](https://github.com/nextgis/nextgis_frontend/tree/master/packages/utils) – common development tools;
-- [dom](https://github.com/nextgis/nextgis_frontend/tree/master/packages/dom) – collection of libraries for working with the DOM;
+- [cache](https://github.com/nextgis/nextgis_frontend/tree/master/packages/cache) - caching for asynchronous functions;
 - [cancelable-promise](https://github.com/nextgis/nextgis_frontend/tree/master/packages/cancelable-promise) – a promise you can stop;
+- [dom](https://github.com/nextgis/nextgis_frontend/tree/master/packages/dom) – collection of libraries for working with the DOM;
 
 ### Vue
 
@@ -176,7 +179,7 @@ import MapAdapter from '@nextgis/leaflet-map-adapter';
 // import 'ol/ol.css';
 // import MapAdapter from '@nextgis/ol-map-adapter';
 // OR
-// import 'mapbox-gl/dist/mapbox-gl.css';
+// import 'maplibre-gl/dist/maplibre-gl.css';
 // import MapAdapter from '@nextgis/mapboxgl-map-adapter';
 
 const ngwMap = new NgwMap(new MapAdapter(), {

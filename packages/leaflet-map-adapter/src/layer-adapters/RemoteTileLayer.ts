@@ -7,7 +7,7 @@ import { callAjax } from './layersUtility';
 type Constructor = new (...args: any[]) => any;
 
 export function makeRemote<
-  TBase extends Constructor
+  TBase extends Constructor,
   // O extends TileLayerOptionsExtended = TileLayerOptionsExtended
 >(Base: TBase): TBase {
   return class RemoteTileLayer extends Base {

@@ -28,8 +28,7 @@ export class PanelControl extends Control {
     const target = this.panelContainer.newPositionContainer(position);
     if (target) {
       const _control = await control;
-      // @ts-ignore
-      const element = _control.element as HTMLElement;
+      const element = (_control as any).element as HTMLElement;
       if (element) {
         element.classList.add('webmap-ctrl');
       }
@@ -41,5 +40,9 @@ export class PanelControl extends Control {
   removeControl(control: Control): void {
     const map = this.getMap();
     map.removeControl(control);
+  }
+
+  getContainer(): HTMLElement {
+    return this.panelContainer.getContainer();
   }
 }

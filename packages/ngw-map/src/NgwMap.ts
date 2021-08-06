@@ -18,6 +18,7 @@ import {
   fetchIdentifyItem,
   getIdentifyItems,
   createIdentifyItem,
+  NgwLayerAdapterType,
 } from '@nextgis/ngw-kit';
 import { deprecatedWarn } from '@nextgis/utils';
 import { getIcon } from '@nextgis/icons';
@@ -32,6 +33,7 @@ import type {
   FeatureItem,
   FeatureLayersIdentifyItems,
   LayerFeature,
+  FeatureProperties,
 } from '@nextgis/ngw-connector';
 import type {
   ControlPosition,
@@ -50,22 +52,14 @@ import type {
   NgwIdentify,
   NgwFeatureItemResponse,
   NgwFeatureRequestOptions,
+  FetchNgwItemsOptions,
 } from '@nextgis/ngw-kit';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type { QmsAdapterOptions } from '@nextgis/qms-kit';
-import type {
-  NgwLayerOptions,
-  NgwLayerOptionsAdditional,
-  KeynamedNgwLayerOptions,
-  ResourceIdNgwLayerOptions,
-} from '@nextgis/ngw-kit';
-import type {
-  Geometry,
-  Feature,
-  FeatureCollection,
-  GeoJsonProperties,
-} from 'geojson';
+import type { NgwLayerOptions } from '@nextgis/ngw-kit';
+import type { Geometry, Feature, FeatureCollection } from 'geojson';
 import type { NgwMapOptions, NgwMapEvents, NgwLayers } from './interfaces';
+import { FetchNgwItemOptions } from '@nextgis/ngw-kit';
 
 type PromiseGroup = 'select' | 'identify';
 
@@ -93,14 +87,12 @@ export class NgwMap<
   M = unknown,
   L = unknown,
   C = unknown,
-  O extends NgwMapOptions<C> = NgwMapOptions<C>
+  O extends NgwMapOptions<C> = NgwMapOptions<C>,
 > extends WebMap<M, L, C, NgwMapEvents, O> {
   static getIcon = getIcon;
 
-  readonly emitter: StrictEventEmitter<
-    EventEmitter,
-    NgwMapEvents
-  > = new EventEmitter();
+  readonly emitter: StrictEventEmitter<EventEmitter, NgwMapEvents> =
+    new EventEmitter();
   connector!: NgwConnector;
 
   protected _ngwLayers: NgwLayers = {};
@@ -151,29 +143,28 @@ export class NgwMap<
   }
 
   /**
-   * Add any (style, vector, webmap) NGW layer by resource id.
+   * Add any (style, vector, webmap) NGW layer by resource definition.
    * @param options - set layer identification parameters and render method.
    *
    * @example
    * ```javascript
    * // add raster layer resourceId is the style of 4004 layer
-   * ngwMap.addNgwLayer({ resourceId: 4005 });
+   * ngwMap.addNgwLayer({ resource: 4005 });
    * // add vector data from layer GEOJSON source
    * ngwMap.addNgwLayer({
-   *   resourceId: 4038,
+   *   resource: 4038,
    *   adapter: 'GEOJSON',
    *   adapterOptions: { paint: { color: 'red' } }
    * });
    * ```
    */
-  async addNgwLayer(
-    options: NgwLayerOptions,
-  ): Promise<ResourceAdapter | undefined> {
+  async addNgwLayer<
+    T extends NgwLayerAdapterType = NgwLayerAdapterType,
+    P = FeatureProperties,
+  >(options: NgwLayerOptions<T, P>): Promise<ResourceAdapter | undefined> {
     await this.onMapLoad();
     // @ts-ignore for backward compatibility
-    const keyname = (options as KeynamedNgwLayerOptions).keyname;
-    // @ts-ignore for backward compatibility
-    const resourceId = (options as ResourceIdNgwLayerOptions).resourceId;
+    const { keyname, resourceId } = options;
 
     if (keyname || resourceId !== undefined) {
       deprecatedWarn(
@@ -187,7 +178,7 @@ export class NgwMap<
         'resource, resourceId or keyname is required parameter to add NGW layer',
       );
     }
-    if (this.options.baseUrl || this.options.baseUrl === '') {
+    if (defined(this.options.baseUrl)) {
       try {
         if (defined(this.options.setViewDelay)) {
           options.adapterOptions = options.adapterOptions || {};
@@ -240,24 +231,25 @@ export class NgwMap<
     }
   }
 
-  fetchNgwLayerItem(options: {
-    resourceId: number;
-    featureId: number;
-  }): CancelablePromise<FeatureItem> {
-    return fetchNgwLayerItem({
+  fetchNgwLayerItem<
+    G extends Geometry = Geometry,
+    P extends FeatureProperties = FeatureProperties,
+  >(
+    options: Omit<FetchNgwItemOptions<P>, 'connector'>,
+  ): CancelablePromise<FeatureItem> {
+    return fetchNgwLayerItem<G, P>({
       connector: this.connector,
       ...options,
     });
   }
 
-  fetchNgwLayerItems(
-    options: {
-      resourceId: number;
-      connector?: NgwConnector;
-      filters?: PropertiesFilter;
-    } & FilterOptions,
-  ): CancelablePromise<FeatureItem[]> {
-    return fetchNgwLayerItems({
+  fetchNgwLayerItems<
+    F extends FeatureProperties = FeatureProperties,
+    G extends Geometry = Geometry,
+  >(
+    options: Omit<FetchNgwItemsOptions<F>, 'connector'>,
+  ): CancelablePromise<FeatureItem<F, G>[]> {
+    return fetchNgwLayerItems<G, F>({
       connector: this.connector,
       ...options,
     });
@@ -265,11 +257,10 @@ export class NgwMap<
 
   fetchNgwLayerFeature<
     G extends Geometry = Geometry,
-    P extends JsonMap = JsonMap
-  >(options: {
-    resourceId: number;
-    featureId: number;
-  }): CancelablePromise<Feature<G, P>> {
+    P extends FeatureProperties = FeatureProperties,
+  >(
+    options: Omit<FetchNgwItemOptions<P>, 'connector'>,
+  ): CancelablePromise<Feature<G, P>> {
     return fetchNgwLayerFeature<G, P>({
       connector: this.connector,
       ...options,
@@ -278,13 +269,9 @@ export class NgwMap<
 
   fetchNgwLayerFeatures<
     G extends Geometry | null = Geometry,
-    P extends JsonMap = JsonMap
+    P extends FeatureProperties = FeatureProperties,
   >(
-    options: {
-      resourceId: number;
-      connector?: NgwConnector;
-      filters?: PropertiesFilter;
-    } & FilterOptions,
+    options: Omit<FetchNgwItemsOptions<P>, 'connector'>,
   ): CancelablePromise<FeatureCollection<G, P>> {
     return fetchNgwLayerFeatureCollection({
       connector: this.connector,
@@ -294,7 +281,7 @@ export class NgwMap<
 
   fetchIdentifyItem<
     G extends Geometry = Geometry,
-    P extends GeoJsonProperties = GeoJsonProperties
+    P extends FeatureProperties = FeatureProperties,
   >(
     identify: NgwIdentify,
     requestOptions?: NgwFeatureRequestOptions,
@@ -486,7 +473,7 @@ export class NgwMap<
    */
   getNgwLayerFeature<
     G extends Geometry = Geometry,
-    P extends JsonMap = JsonMap
+    P extends JsonMap = JsonMap,
   >(options: {
     resourceId: number;
     featureId: number;
@@ -499,13 +486,9 @@ export class NgwMap<
    */
   getNgwLayerFeatures<
     G extends Geometry | null = Geometry,
-    P extends JsonMap = JsonMap
+    P extends JsonMap = JsonMap,
   >(
-    options: {
-      resourceId: number;
-      connector?: NgwConnector;
-      filters?: PropertiesFilter;
-    } & FilterOptions,
+    options: FetchNgwItemsOptions<P>,
   ): CancelablePromise<FeatureCollection<G, P>> {
     return this.fetchNgwLayerFeatures(options);
   }
@@ -569,7 +552,7 @@ export class NgwMap<
     }
     if (this.options.resources && Array.isArray(this.options.resources)) {
       this.options.resources.forEach((x) => {
-        const overwriteOptions = {} as NgwLayerOptionsAdditional;
+        const overwriteOptions: Partial<NgwLayerOptions> = {};
         if (!layerFitAllowed) {
           overwriteOptions.fit = false;
         }
@@ -623,7 +606,7 @@ export class NgwMap<
       if (featureId) {
         const identifyFeature: LayerFeature = {
           id: Number(featureId),
-          fields: feature.properties,
+          fields: feature.properties || {},
           label: `#${id}`,
           layerId: Number(id),
           parent: '',

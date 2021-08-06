@@ -3,7 +3,7 @@ import CancelablePromise from '@nextgis/cancelable-promise';
 import { SearchItem } from './types/SearchItem';
 
 export abstract class BaseGeocoder<
-  O extends Record<string, any> = Record<string, any>
+  O extends Record<string, any> = Record<string, any>,
 > {
   constructor(options?: O) {
     if (options) {

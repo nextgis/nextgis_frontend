@@ -75,7 +75,7 @@
       var features = [];
       for (var fry = 0; fry < 100; fry++) {
         var color = colors[Math.floor(Math.random() * colors.length)];
-        features.push(craeteFeature(color));
+        features.push(createFeature(color));
       }
       for (var c = 0; c < colors.length; c++) {
         var color = colors[c];
@@ -83,7 +83,7 @@
           html: '<div style="background:' + color + '" title="Add one ' + color + ' color point">+</div>',
           onClick: (function (c) {
             return function () {
-              ngwMap.addLayerData('geojson', craeteFeature(c))
+              ngwMap.addLayerData('geojson', createFeature(c))
             };
           })(color)
         });
@@ -98,7 +98,7 @@
       });
     });
 
-    function craeteFeature(color) {
+    function createFeature(color) {
       return {
         type: 'Feature',
         geometry: { type: 'Point', coordinates: getRandomPointCoord() },

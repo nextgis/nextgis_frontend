@@ -2,6 +2,7 @@
  * Modern geocoder on async generators. May use different data providers.
  *
  * @packageDocumentation
+ * @module geocoder
  */
 import { GeocoderOptions } from './GeocoderOptions';
 import { Geocoder } from './Geocoder';

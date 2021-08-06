@@ -1,4 +1,4 @@
-export function assign<T, U>(target: T, source: U): T & U;
+export function objectAssign<T, U>(target: T, source: U): T & U;
 
 /**
  * Copy the values of all of the enumerable own properties from one or more source objects to a
@@ -7,7 +7,11 @@ export function assign<T, U>(target: T, source: U): T & U;
  * @param source1 - The first source object from which to copy properties.
  * @param source2 - The second source object from which to copy properties.
  */
-export function assign<T, U, V>(target: T, source1: U, source2: V): T & U & V;
+export function objectAssign<T, U, V>(
+  target: T,
+  source1: U,
+  source2: V,
+): T & U & V;
 
 /**
  * Copy the values of all of the enumerable own properties from one or more source objects to a
@@ -17,7 +21,7 @@ export function assign<T, U, V>(target: T, source1: U, source2: V): T & U & V;
  * @param source2 - The second source object from which to copy properties.
  * @param source3 - The third source object from which to copy properties.
  */
-export function assign<T, U, V, W>(
+export function objectAssign<T, U, V, W>(
   target: T,
   source1: U,
   source2: V,
@@ -30,7 +34,7 @@ export function assign<T, U, V, W>(
  * @param target - The target object to copy to.
  * @param sources - One or more source objects from which to copy properties
  */
-export function assign(
+export function objectAssign(
   target: Record<string, unknown>,
   ...sources: any[]
 ): any {

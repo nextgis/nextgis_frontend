@@ -1,29 +1,41 @@
-import { Map, GeoJSONSource, GeoJSONSourceRaw, LngLatBounds } from 'mapbox-gl';
+import { LngLatBounds, Popup } from 'maplibre-gl';
+
+import { defined } from '@nextgis/utils';
+import { featureFilter } from '@nextgis/properties-filter';
+import { VectorAdapter } from './VectorAdapter';
 import {
-  GeoJsonAdapterOptions,
-  VectorAdapterLayerType,
-  DataLayerFilter,
-  LayerDefinition,
-  LngLatBoundsArray,
-} from '@nextgis/webmap';
-import { VectorAdapterLayerPaint, GetPaintCallback } from '@nextgis/paint';
-import { featureFilter, PropertiesFilter } from '@nextgis/properties-filter';
-import {
-  GeoJsonObject,
-  FeatureCollection,
-  GeometryCollection,
-  GeometryObject,
-  Geometry,
-  GeoJsonProperties,
-} from 'geojson';
-import { TLayer } from '../MapboxglMapAdapter';
-import { VectorAdapter, Feature } from './VectorAdapter';
-import {
-  detectType,
-  typeAlias,
   typeAliasForFilter,
   geometryFilter,
+  detectType,
+  typeAlias,
 } from '../util/geomType';
+
+import type {
+  Map,
+  GeoJSONSource,
+  GeoJSONSourceRaw,
+  GeoJSONSourceOptions,
+} from 'maplibre-gl';
+import type {
+  GeometryCollection,
+  GeoJsonProperties,
+  FeatureCollection,
+  GeoJsonObject,
+  GeometryObject,
+  Geometry,
+} from 'geojson';
+import type { VectorAdapterLayerPaint, GetPaintCallback } from '@nextgis/paint';
+import type { PropertiesFilter } from '@nextgis/properties-filter';
+import type {
+  LayerDefinition,
+  DataLayerFilter,
+  LngLatBoundsArray,
+  GeoJsonAdapterOptions,
+  VectorAdapterLayerType,
+} from '@nextgis/webmap';
+import type { Feature } from './VectorAdapter';
+import type { TLayer } from '../MapboxglMapAdapter';
+import { getCentroid } from '../util/getCentroid';
 
 let ID = 0;
 
@@ -44,6 +56,14 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
 
   async addLayer(options: GeoJsonAdapterOptions): Promise<TLayer> {
     const layer = await super.addLayer(options);
+
+    // While this is difficult to achieve. Need to download fonts in PBF or learn how to convert text into icon-image
+    // if (options.labelField) {
+    //   this._labelSource = 'label-source-' + this._layerId;
+    //   const labellayer = await this._addLabelLayer();
+    //   labellayer && layer.push(labellayer);
+    // }
+
     return layer;
   }
 
@@ -78,14 +98,21 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     }
     if (data && type) {
       const features = this.filterGeometries(data, type);
-      features.forEach((x) => {
+      for (const x of features) {
         // to avoid id = 0 is false
         const fid = '_' + ID++;
         x._featureFilterId = fid;
         if (x.properties) {
           x.properties[this.featureIdName] = fid;
         }
-      });
+        if (this.options.popup) {
+          this._openPopup({
+            feature: x,
+            type: 'api',
+            options: this.options.popupOptions,
+          });
+        }
+      }
       if (this._filterFun) {
         this._filter(this._filterFun);
       }
@@ -95,6 +122,9 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
         type: 'FeatureCollection',
         features: this._features,
       });
+      if (this.options.labelField) {
+        this._updateLabels();
+      }
     }
   }
 
@@ -186,6 +216,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
       this.selected = false;
       this._unselectFeature();
     }
+    this._removeAllPopup();
   }
 
   getExtent(): LngLatBoundsArray {
@@ -229,18 +260,17 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
           features: [],
         },
       };
-      const _opts: (keyof GeoJsonAdapterOptions)[] = [
+      const _opts: (keyof (GeoJsonAdapterOptions | GeoJSONSourceOptions))[] = [
         'cluster',
         'clusterMaxZoom',
         'clusterRadius',
       ];
-      _opts.forEach((x) => {
-        const opt = this.options[x] as GeoJsonAdapterOptions;
+      for (const x of _opts) {
+        const opt = this.options[x];
         if (opt !== undefined) {
-          //@ts-ignore
           sourceOpt[x] = opt;
         }
-      });
+      }
       this.map.addSource(sourceId, sourceOpt);
       source = this.map.getSource(sourceId) as GeoJSONSource;
     }
@@ -285,8 +315,8 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     this._selectProperties = undefined;
     this._selectedFeatureIds = selectedFeatureIds;
     this._updateFilter();
-    if (!opt.silent && this.options.onLayerSelect) {
-      this.options.onLayerSelect({ layer: this, features });
+    if (!opt.silent && this.options.onSelect) {
+      this.options.onSelect({ layer: this, features, type: 'api' });
     }
     return features;
   }
@@ -318,12 +348,15 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
       this._selectedFeatureIds = false;
     }
     this._updateFilter();
-    if (!opt.silent && this.options.onLayerSelect) {
-      this.options.onLayerSelect({ layer: this, features: undefined });
+    if (!opt.silent && this.options.onSelect) {
+      this.options.onSelect({ layer: this, features: undefined, type: 'api' });
     }
   }
 
   protected _updateFilter(): void {
+    const map = this.map;
+    if (!map) return;
+
     // it is not yet possible to use callbacks and properties filters together
     if (this._filterProperties || this._selectProperties) {
       super._updateFilter();
@@ -359,7 +392,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
           const selLayerName = this._getSelectionLayerNameFromType(t);
           if (layers.indexOf(selLayerName) !== -1) {
             if (this._selectionName) {
-              this.map.setFilter(selLayerName, [
+              map.setFilter(selLayerName, [
                 'all',
                 geomFilter,
                 ['in', this.featureIdName, ...selectionArray],
@@ -374,21 +407,52 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
               filter_.push(['!in', this.featureIdName, ...selectionArray]);
               this._updateWithNativeFilter(filter_);
             }
-            this.map.setFilter(layerName, filter_);
+            map.setFilter(layerName, filter_);
           }
         }
       });
     }
   }
 
+  // TODO: need to download fonts in PBF or learn how to convert text into icon-image
+  // private _addLabelLayer() {
+  //   if (!this._labelSource) return;
+
+  //   const type = 'symbol';
+  //   const id = this._getLayerNameFromType(type);
+  //   this.map.addSource(this._labelSource, {
+  //     type: 'geojson',
+  //     data: {
+  //       type: 'FeatureCollection',
+  //       features: [],
+  //     },
+  //   });
+
+  //   const symbolLayer: SymbolLayer = {
+  //     id,
+  //     type,
+  //     source: this._labelSource,
+  //     layout: {
+  //       'icon-image': 'custom-marker',
+  //       // 'text-field': ['get', this.options.labelField],
+  //       // 'text-variable-anchor': ['top', 'bottom', 'left', 'right'],
+  //       // 'text-anchor': 'top',
+  //       // 'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
+  //       // 'text-justify': 'auto',
+  //       // 'icon-image': ['get', 'icon'],
+  //     },
+  //   };
+  //   this._addLayer(symbolLayer);
+  //   return id;
+  // }
+
   private _getFeatures(): Feature[] {
     if (this.source) {
       // const features = this.map.querySourceFeatures(this.source);
       // return features;
 
-      const source = this.map.getSource(this.source);
+      const source = this.map.getSource(this.source) as GeoJSONSource;
       if (source) {
-        // @ts-ignore
         return source._data ? source._data.features : [];
       }
     }
@@ -406,6 +470,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     });
     this._filteredFeatureIds = filtered;
     this._updateFilter();
+    this._updateLabels();
   }
 
   private filterGeometries(
@@ -466,8 +531,8 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
         }
         style['icon-image'] = `{_icon-image-${name}}`;
       } else {
-        for (const p in _paint) {
-          // @ts-ignore
+        let p: keyof typeof _paint;
+        for (p in _paint) {
           const toSave = _paint[p];
           if (feature.properties) {
             feature.properties[`_paint_${p}_${name}`] = toSave;
@@ -484,7 +549,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   }
 
   private _fireOnLayerSelectEvent() {
-    if (this.options.onLayerSelect) {
+    if (this.options.onSelect) {
       const features_: Feature[] = [];
       this.getSelected().forEach((x) => {
         if (x.feature) {
@@ -492,10 +557,43 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
         }
       });
       const features = features_.length ? features_ : undefined;
-      this.options.onLayerSelect({
+      this.options.onSelect({
         layer: this,
         features,
+        type: 'api',
       });
+    }
+  }
+
+  // Workaround for displaying labels.
+  // It is necessary to achieve that the labels are shown through vector layer symbols
+  private _updateLabels() {
+    this._removeAllPopup();
+    const popupOpt: maplibregl.PopupOptions = {
+      closeButton: false,
+      closeOnClick: false,
+    };
+    const filtered = this._filteredFeatureIds || [];
+    const features = this._features;
+    const field = this.options.labelField;
+    if (field) {
+      for (const f of features) {
+        const inFilter = filtered.length
+          ? defined(f._featureFilterId) &&
+            filtered.indexOf(f._featureFilterId) !== -1
+          : true;
+        if (inFilter) {
+          const text = f.properties && f.properties[field];
+          if (text) {
+            const popup = new Popup(popupOpt);
+            popup
+              .setLngLat(getCentroid(f) as [number, number])
+              .setText(text)
+              .addTo(this.map);
+            this._openedPopup.push([f, popup, []]);
+          }
+        }
+      }
     }
   }
 }

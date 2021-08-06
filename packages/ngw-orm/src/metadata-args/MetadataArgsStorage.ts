@@ -45,7 +45,7 @@ export class MetadataArgsStorage {
    * Filters given array by a given target or targets and prevents duplicate property names.
    */
   protected filterByTargetAndWithoutDuplicateProperties<
-    T extends { target: Function | string; propertyName: string }
+    T extends { target: Function | string; propertyName: string },
   >(array: T[], target: (Function | string) | (Function | string)[]): T[] {
     const newArray: T[] = [];
     array.forEach((item) => {

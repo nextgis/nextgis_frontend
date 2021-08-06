@@ -1,8 +1,8 @@
-import { ButtonControlOptions } from '@nextgis/webmap';
+import { ButtonControlOptions, MapAdapter } from '@nextgis/webmap';
 import { createControl } from './createControl';
 import { DomEvent, Control } from 'leaflet';
 
-export function createButtonControl(options: ButtonControlOptions): Control {
+export function createButtonControl(options: ButtonControlOptions, map: MapAdapter): Control {
   const link = document.createElement('a');
 
   const title = options.title || '';
@@ -45,5 +45,6 @@ export function createButtonControl(options: ButtonControlOptions): Control {
       },
     },
     { bar: true },
+    map
   );
 }

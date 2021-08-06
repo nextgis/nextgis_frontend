@@ -2,9 +2,9 @@ import { MainLayerAdapter, TileAdapterOptions } from '@nextgis/webmap';
 import { TileAdapter } from './TileAdapter';
 
 const OPTIONS = {
-  url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
   attribution:
-    '&copy; <a href="http://osm.org/copyright" target="_blank">OpenStreetMap</a> contributors',
+    '&copy; <a href="https://osm.org/copyright" target="_blank">OpenStreetMap</a> contributors',
   subdomains: 'abc',
 };
 

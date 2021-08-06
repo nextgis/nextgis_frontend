@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/utils",
-  "version": "1.0.0-beta.8",
+  "version": "1.3.0",
   "description": "Common development tools",
   "main": "index.js",
   "module": "lib/utils.esm-bundler.js",
@@ -8,8 +8,8 @@
   "jsdelivr": "lib/utils.global.prod.js",
   "types": "lib/index.d.ts",
   "devDependencies": {
-    "@nextgis/build-tools": "^1.0.0-beta.8",
-    "@types/geojson": "^7946.0.7"
+    "@nextgis/build-tools": "^1.2.0",
+    "@types/geojson": "^7946.0.8"
   },
   "buildOptions": {
     "name": "Utils",
@@ -45,5 +45,5 @@
   "bugs": {
     "url": "https://github.com/nextgis/nextgis_frontend/issues"
   },
-  "gitHead": "902bc588de905d567f54f8f53838b921ee3a3436"
+  "gitHead": "edc68033f914f6c95c4125b9738bba6d36e990b4"
 }

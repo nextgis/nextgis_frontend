@@ -18,7 +18,7 @@
  * // import 'ol/ol.css';
  * // import MapAdapter from '@nextgis/ol-map-adapter';
  * // OR
- * // import 'mapbox-gl/dist/mapbox-gl.css';
+ * // import 'maplibre-gl/dist/maplibre-gl.css';
  * // import MapAdapter from '@nextgis/mapboxgl-map-adapter';
  *
  * const webMap = new WebMap({
@@ -37,6 +37,7 @@
  * ```
  *
  * @packageDocumentation
+ * @module webmap
  */
 import { WebMap } from './WebMap';
 import type { MapOptions } from './interfaces/MapOptions';
@@ -69,5 +70,3 @@ export async function createWebMap(options: MapOptions): Promise<WebMap> {
   const webMap = new WebMap(options);
   return webMap.onLoad();
 }
-
-

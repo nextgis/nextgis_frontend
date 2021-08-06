@@ -14,7 +14,7 @@ export class WmsAdapter implements MainLayerAdapter {
 
   constructor(public map: Map, public options: WmsAdapterOptions) {}
 
-  addLayer(options: WmsAdapterOptions): TileLayer {
+  addLayer(options: WmsAdapterOptions): TileLayer<TileWMS> {
     const wmsOptions: TileWMSOptions = {
       url: options.url,
       params: { LAYERS: options.layers, VERSION: options.version },

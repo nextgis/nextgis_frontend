@@ -25,7 +25,7 @@ export interface ItemPropertyTypes {
 }
 
 export interface ItemPropertyBaseConfig<
-  K extends keyof ItemPropertyTypes = any
+  K extends keyof ItemPropertyTypes = any,
 > {
   type?: ItemPropertyTypes[K];
   name?: string;
@@ -63,7 +63,7 @@ export interface ItemOptions {
 
 export interface ChangeEvent<
   V = any,
-  O extends ItemBasePropertyOptions<V> = ItemBasePropertyOptions<V>
+  O extends ItemBasePropertyOptions<V> = ItemBasePropertyOptions<V>,
 > {
   value: V;
   options: O;

@@ -12,7 +12,7 @@ import { FilterOptions } from '@nextgis/webmap';
 import { PropertiesFilter } from '@nextgis/properties-filter';
 import { DeepPartial } from '@nextgis/utils';
 import {
-  GetNgwLayerItemsOptions,
+  GetNgwItemsOptions,
   fetchNgwLayerItems,
   fetchNgwLayerItem,
 } from '@nextgis/ngw-kit';
@@ -371,7 +371,7 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
       throw new CannotExecuteNotConnectedError();
     }
     const connector = connection.driver;
-    const options: GetNgwLayerItemsOptions & FilterOptions<T> = {
+    const options: GetNgwItemsOptions & FilterOptions<T> = {
       connector,
       resourceId: Resource.item.resource.id,
     };
@@ -441,7 +441,7 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
       throw new CannotExecuteNotConnectedError();
     }
     const connector = connection.driver;
-    const options: GetNgwLayerItemsOptions & FilterOptions = {
+    const options: GetNgwItemsOptions & FilterOptions = {
       connector,
       resourceId: Resource.item.resource.id,
     };

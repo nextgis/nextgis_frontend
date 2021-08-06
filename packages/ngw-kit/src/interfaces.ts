@@ -1,5 +1,5 @@
-import { Feature, Geometry } from 'geojson';
-import {
+import type { Feature, Geometry, Polygon } from 'geojson';
+import type {
   WebMap,
   AdapterOptions,
   LayerAdaptersOptions,
@@ -14,16 +14,18 @@ import {
   FilterOptions,
   RasterAdapterOptions,
 } from '@nextgis/webmap';
-import { PropertiesFilter } from '@nextgis/properties-filter';
-import NgwConnector, {
+import type { PropertiesFilter } from '@nextgis/properties-filter';
+import type NgwConnector from '@nextgis/ngw-connector';
+import type {
   ResourceItem,
   LayerFeature,
   FeatureItem,
-  FeatureLayerFields,
+  FeatureProperties,
+  ResourceDefinition,
 } from '@nextgis/ngw-connector';
-import { FeatureLayersIdentify } from '@nextgis/ngw-connector';
-import { Type } from '@nextgis/utils';
-import CancelablePromise from '@nextgis/cancelable-promise';
+import type { FeatureLayersIdentify } from '@nextgis/ngw-connector';
+import type { Type } from '@nextgis/utils';
+import type CancelablePromise from '@nextgis/cancelable-promise';
 
 declare module '@nextgis/webmap' {
   interface LayerAdaptersOptions {
@@ -31,9 +33,6 @@ declare module '@nextgis/webmap' {
   }
 }
 
-/**
- * @public
- */
 export type NgwLayerAdapterType =
   | 'IMAGE'
   | 'TILE'
@@ -44,9 +43,6 @@ export type NgwLayerAdapterType =
   | 'MODEL_3D'
   | 'NGW:WEBMAP';
 
-/**
- * @public
- */
 export interface AppSettings {
   extent_left?: number;
   extent_right?: number;
@@ -57,9 +53,6 @@ export interface AppSettings {
   root_item?: TreeGroup;
 }
 
-/**
- * @public
- */
 export interface TreeItem {
   item_type: 'root' | 'group' | 'layer' | string;
   display_name?: string;
@@ -68,18 +61,12 @@ export interface TreeItem {
   _layer?: any;
 }
 
-/**
- * @public
- */
 export interface TreeGroup extends TreeItem {
   item_type: 'root' | 'group';
   group_expanded?: boolean;
   children: Array<TreeLayer | TreeGroup>;
 }
 
-/**
- * @public
- */
 export interface TreeLayer extends TreeItem {
   item_type: 'layer';
   layer_adapter: string;
@@ -100,19 +87,18 @@ export interface TreeLayer extends TreeItem {
 
 export type TileNoData = 200 | 404 | 204;
 
-/**
- * @public
- */
-export interface NgwLayerOptionsAdditional<
+export interface NgwLayerOptions<
   T extends NgwLayerAdapterType = NgwLayerAdapterType,
-  P = { [name: string]: unknown }
+  P = FeatureProperties,
+  A = Record<string, any>,
 > {
+  resource: ResourceDefinition;
   id?: string;
   adapter?: T;
-  adapterOptions?: LayerAdaptersOptions[T];
-  headers?: any;
+  adapterOptions?: Partial<LayerAdaptersOptions[T] & AdapterOptions<A>>;
   fit?: boolean;
   meta?: P;
+  headers?: any;
   simplification?: number;
   /**
    * Parameter for `TILE` and `IMAGE` adapters to say NGW what will be returned if there is no data to render.
@@ -126,49 +112,12 @@ export interface NgwLayerOptionsAdditional<
   tileNoData?: TileNoData;
 }
 
-/**
- * @internal
- * @deprecated use resource instead
- */
-export interface ResourceIdNgwLayerOptions<
+/** @deprecated use {@link NgwLayerOptions} instead */
+export type ResourceNgwLayerOptions<
   T extends NgwLayerAdapterType = NgwLayerAdapterType,
-  P = { [name: string]: any }
-> extends NgwLayerOptionsAdditional<T, P> {
-  resourceId: number;
-}
+  P = { [name: string]: any },
+> = NgwLayerOptions<T, P>;
 
-/**
- * @internal
- * @deprecated use resource instead
- */
-export interface KeynamedNgwLayerOptions<
-  T extends NgwLayerAdapterType = NgwLayerAdapterType,
-  P = { [name: string]: any }
-> extends NgwLayerOptionsAdditional<T, P> {
-  keyname: string;
-}
-
-/**
- * @public
- */
-export interface ResourceNgwLayerOptions<
-  T extends NgwLayerAdapterType = NgwLayerAdapterType,
-  P = { [name: string]: any }
-> extends NgwLayerOptionsAdditional<T, P> {
-  resource: number | string | NgwLayerOptions | ResourceItem;
-}
-
-/**
- * @public
- */
-export type NgwLayerOptions<
-  T extends NgwLayerAdapterType = NgwLayerAdapterType,
-  P = { [name: string]: any }
-> = ResourceNgwLayerOptions<T, P>;
-
-/**
- * @public
- */
 export interface NgwConfig {
   applicationUrl: string;
   assetUrl: string;
@@ -176,20 +125,14 @@ export interface NgwConfig {
   id: number;
 }
 
-/**
- * @public
- */
-export type ResourceDef = number | [number, string];
+export type ResourceIdDef = number | [resourceId: number, layerId: string];
 
-/**
- * @public
- */
 export interface NgwKitOptions {
   baseUrl?: string;
   connector?: NgwConnector;
   /** Radius for searching objects in pixels */
   pixelRadius?: number;
-  resourceId?: ResourceDef;
+  resourceId?: ResourceIdDef;
   auth?: {
     login: string;
     password: string;
@@ -198,11 +141,8 @@ export interface NgwKitOptions {
 
 type A = AdapterOptions & RasterAdapterOptions;
 
-/**
- * @public
- */
 export interface NgwWebmapAdapterOptions<M = any> extends A {
-  resourceId: number | [number, string];
+  resourceId: ResourceIdDef;
   webMap: WebMap<M>;
   connector: NgwConnector;
   selectable?: boolean;
@@ -215,38 +155,27 @@ export interface NgwWebmapAdapterOptions<M = any> extends A {
   defaultBasemap?: boolean;
 }
 
-/**
- * @public
- */
 export interface IdentifyRequestOptions {
   layers: number[];
   connector: NgwConnector;
   radius?: number;
+  geom?: Feature<Polygon> | Polygon;
 }
 
-/**
- * @public
- */
 export interface IdentifyEvent {
   ev: MapClickEvent;
   data: FeatureLayersIdentify;
 }
 
-/**
- * @public
- */
 export interface NgwWebmapLayerAdapterEvents extends WebMapEvents {
   identify: IdentifyEvent;
 }
 
-/**
- * @public
- */
 export interface ResourceAdapter<
   M = any,
   L = any,
   O extends GeoJsonAdapterOptions = GeoJsonAdapterOptions,
-  F extends Feature = Feature
+  F extends Feature = Feature,
 > extends VectorLayerAdapter<M, L, O, F> {
   resourceId: number;
   item?: ResourceItem;
@@ -258,52 +187,34 @@ export interface ResourceAdapter<
   getIdentificationIds(): Promise<number[] | undefined>;
 }
 
-/**
- * @public
- */
 export type VectorResourceAdapter<
   M = any,
   L = any,
   O extends GeoJsonAdapterOptions = GeoJsonAdapterOptions,
-  F extends Feature = Feature
+  F extends Feature = Feature,
 > = ResourceAdapter<M, L, O, F> & VectorLayerAdapter<M, L, O, F>;
 
-/**
- * @public
- */
 interface NgwVectorIdentify {
   resources?: number[];
   sourceType: 'vector';
   event: OnLayerClickOptions;
 }
 
-/**
- * @public
- */
 interface NgwRasterIdentify {
   resources?: number[];
   sourceType: 'raster';
   event: MapClickEvent;
 }
 
-/**
- * @public
- */
 export interface NgwIdentifyItem {
   resourceId: number;
   featureId: number;
   feature: LayerFeature;
 }
 
-/**
- * @public
- */
 export type NgwIdentify = FeatureLayersIdentify &
   (NgwVectorIdentify | NgwRasterIdentify);
 
-/**
- * @public
- */
 export interface GetIdentifyGeoJsonOptions {
   identify: NgwIdentify;
   connector: NgwConnector;
@@ -311,45 +222,28 @@ export interface GetIdentifyGeoJsonOptions {
   requestOptions?: NgwFeatureRequestOptions;
 }
 
-/**
- * @public
- */
 export interface GetClassAdapterOptions {
   layerOptions: NgwLayerOptions;
   webMap: WebMap;
   connector: NgwConnector;
   item: ResourceItem;
   Adapter?: Type<MainLayerAdapter>;
+  /** This is some kind of dirty hack. Get rid of */
   addLayerOptionsPriority?: false;
 }
 
-/**
- * @public
- */
 export type ClassAdapter = Promise<Type<LayerAdapter> | undefined>;
 
-/**
- * @public
- */
 export type GetClassAdapterCallback = (
   options: GetClassAdapterOptions,
 ) => Promise<Type<LayerAdapter> | undefined> | undefined;
 
-/**
- * @public
- */
 export type GetClassAdapterByType = {
   [adapterType: string]: GetClassAdapterCallback;
 };
 
-/**
- * @public
- */
 export type GetClassAdapter = GetClassAdapterCallback | GetClassAdapterByType;
 
-/**
- * @public
- */
 export interface CompanyLogoOptions {
   padding?: string;
   cssClass?: string;
@@ -369,18 +263,42 @@ export interface FeatureRequestParams {
 type Extensions = keyof FeatureItem['extensions'];
 
 export interface NgwFeatureRequestOptions<
-  P extends { [field: string]: any } = { [field: string]: any }
+  P extends FeatureProperties = FeatureProperties,
 > extends FilterOptions<P> {
   extensions?: Extensions[] | string[] | null | false;
   geom?: boolean;
   srs?: number;
 }
 
-export interface GetNgwLayerItemsOptions {
+export interface GetNgwItemOptions extends FetchNgwLayerExtentOptions {
+  featureId: number;
+}
+
+export interface FetchNgwLayerExtentOptions {
   resourceId: number;
   connector: NgwConnector;
-  filters?: PropertiesFilter;
+  cache?: boolean;
 }
+
+export interface FetchNgwLayerItemExtentOptions
+  extends FetchNgwLayerExtentOptions {
+  featureId: number;
+}
+
+export interface GetNgwItemsOptions<
+  P extends FeatureProperties = FeatureProperties,
+> extends FetchNgwLayerExtentOptions {
+  paramList?: [string, any][];
+  filters?: PropertiesFilter<P>;
+}
+
+export type FetchNgwItemOptions<
+  P extends FeatureProperties = FeatureProperties,
+> = GetNgwItemOptions & NgwFeatureRequestOptions<P>;
+
+export type FetchNgwItemsOptions<
+  P extends FeatureProperties = FeatureProperties,
+> = GetNgwItemsOptions<P> & NgwFeatureRequestOptions<P>;
 
 export interface FeatureIdentifyRequestOptions {
   /**
@@ -392,8 +310,8 @@ export interface FeatureIdentifyRequestOptions {
 }
 
 export interface NgwFeatureItemResponse<
-  F = FeatureLayerFields,
-  G extends Geometry = Geometry
+  F = FeatureProperties,
+  G extends Geometry = Geometry,
 > extends FeatureItem<F, G> {
   /**
    * To get GeoJson from ngw item

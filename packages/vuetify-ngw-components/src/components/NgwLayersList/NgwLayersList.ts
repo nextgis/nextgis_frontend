@@ -9,7 +9,7 @@ import {
 } from '@nextgis/ngw-kit';
 import { CreateElement, VNode, VNodeData } from 'vue';
 // @ts-ignore
-import { VTreeview } from 'vuetify/lib';
+import { VTreeview, VBtn, VIcon } from 'vuetify/lib';
 import { debounce } from '@nextgis/utils';
 
 export interface VueTreeItem {
@@ -17,6 +17,7 @@ export interface VueTreeItem {
   name: string;
   layer?: string;
   children?: VueTreeItem[];
+  removable?: boolean;
 }
 
 @Component
@@ -26,6 +27,7 @@ export class NgwLayersList extends Vue {
   @Prop({ type: Boolean, default: false }) hideWebmapRoot!: boolean;
   @Prop({ type: Boolean, default: false }) notOnlyNgwLayer!: boolean;
   @Prop({ type: Function }) showLayer!: (layer: NgwWebmapItem) => boolean;
+  @Prop({ type: String, default: 'mdi-cancel' }) removeLayerIcon!: string;
   @Prop({ type: String, default: 'independent' }) selectionType!:
     | 'independent'
     | 'leaf';
@@ -144,9 +146,15 @@ export class NgwLayersList extends Vue {
             },
           });
         },
+        append: (props) => {
+          const item = props.item as VueTreeItem;
+          if (item.removable) {
+            return this._appendRemoveBtn(h, item);
+          }
+          return null;
+        },
         ...this.$scopedSlots,
       },
-      // domProps: { id: this.id }
     };
     return h(VTreeview, data, this.$slots.default);
   }
@@ -170,6 +178,30 @@ export class NgwLayersList extends Vue {
 
   private destroy() {
     this._stopUpdateItemListeners();
+  }
+
+  private _appendRemoveBtn(h: CreateElement, item: VueTreeItem): VNode {
+    const data: VNodeData = {
+      props: {
+        icon: true,
+        'x-small': true,
+      },
+      on: {
+        click: () => {
+          const webMap = this.webMap;
+          if (webMap && item.layer) {
+            webMap.removeLayer(item.layer);
+          }
+        },
+      },
+    };
+    return h(VBtn, data, [
+      h(VIcon, {
+        domProps: {
+          textContent: this.removeLayerIcon,
+        },
+      }),
+    ]);
   }
 
   private _onLayerAdd(l: LayerAdapter) {
@@ -241,6 +273,7 @@ export class NgwLayersList extends Vue {
       name,
       layer: layer.id || '',
       children: [],
+      removable: layer.options.props && layer.options.props.removable,
     };
     if (this.include) {
       const isInclude = this.include.find((x) => {
