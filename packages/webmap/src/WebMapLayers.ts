@@ -188,12 +188,12 @@ export class WebMapLayers<
    */
   async addLayer<
     K extends keyof LayerAdapters,
-    O extends AdapterOptions = AdapterOptions,
+    LO extends AdapterOptions = AdapterOptions,
   >(
     adapter: LayerAdapterDefinition<K>,
-    options: O | LayerAdaptersOptions[K] = {},
+    options: LO | LayerAdaptersOptions[K] = {},
     order?: number,
-  ): Promise<LayerAdapter> {
+  ): Promise<LayerAdapter<M, L, LO>> {
     const id = this._layersIdCounter++;
     const _order =
       order !== undefined
@@ -201,15 +201,17 @@ export class WebMapLayers<
         : options.order !== undefined
         ? options.order
         : this.reserveOrder();
-    let adapterEngine: Type<LayerAdapter> | undefined;
+    let adapterEngine: Type<LayerAdapter<M, L, LO>> | undefined;
     if (typeof adapter === 'string') {
-      adapterEngine = this.getLayerAdapter(adapter);
+      adapterEngine = this.getLayerAdapter(adapter) as Type<
+        LayerAdapter<M, L, LO>
+      >;
     } else if (typeof adapter === 'function') {
-      adapterEngine = adapter as Type<LayerAdapter>;
+      adapterEngine = adapter as Type<LayerAdapter<M, L, LO>>;
     } else if (
       'then' in (adapter as Promise<Type<LayerAdapters[K]> | undefined>)
     ) {
-      adapterEngine = (await adapter) as Type<LayerAdapters[K]>;
+      adapterEngine = (await adapter) as Type<LayerAdapter<M, L, LO>>;
     }
 
     const geoJsonOptions = options as GeoJsonAdapterOptions;
@@ -243,7 +245,7 @@ export class WebMapLayers<
           options = modified.options;
         }
         if (modified.adapter) {
-          adapterEngine = modified.adapter;
+          adapterEngine = modified.adapter as Type<LayerAdapter<M, L, LO>>;
         }
       }
     }
@@ -426,11 +428,13 @@ export class WebMapLayers<
    * webMap.showLayer(layer);
    * ```
    */
-  // @onMapLoad()
-  async addGeoJsonLayer<K extends keyof LayerAdaptersOptions>(
-    opt: GeoJsonAdapterOptions,
-    adapter?: K | Type<LayerAdapter>,
-  ): Promise<VectorLayerAdapter<any, any, AdapterOptions>> {
+  addGeoJsonLayer<
+    K extends keyof LayerAdapters = keyof LayerAdapters,
+    O extends GeoJsonAdapterOptions<any, any> = GeoJsonAdapterOptions,
+  >(
+    opt: O = {} as O,
+    adapter?: LayerAdapterDefinition<K>,
+  ): Promise<VectorLayerAdapter<any, any, any>> {
     opt = opt || {};
     opt.multiselect = opt.multiselect !== undefined ? opt.multiselect : false;
     opt.unselectOnSecondClick =
@@ -441,9 +445,7 @@ export class WebMapLayers<
       opt = updateGeoJsonAdapterOptions(opt);
     }
     opt.paint = opt.paint || {};
-    const layer = await this.addLayer(adapter || 'GEOJSON', opt);
-    this.showLayer(layer);
-    return layer;
+    return this.addLayer(adapter || 'GEOJSON', opt);
   }
 
   /**
