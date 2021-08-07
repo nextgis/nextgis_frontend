@@ -566,29 +566,17 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   // It is necessary to achieve that the labels are shown through vector layer symbols
   private _updateLabels() {
     this._removeAllPopup();
-    const popupOpt: maplibregl.PopupOptions = {
-      closeButton: false,
-      closeOnClick: false,
-    };
     const filtered = this._filteredFeatureIds || [];
     const features = this._features;
-    const field = this.options.labelField;
-    if (field) {
+    const { labelField, labelOnHover } = this.options;
+    if (labelField && !labelOnHover) {
       for (const f of features) {
         const inFilter = filtered.length
           ? defined(f._featureFilterId) &&
             filtered.indexOf(f._featureFilterId) !== -1
           : true;
         if (inFilter) {
-          const text = f.properties && f.properties[field];
-          if (text) {
-            const popup = new Popup(popupOpt);
-            popup
-              .setLngLat(getCentroid(f) as [number, number])
-              .setText(text)
-              .addTo(this.map);
-            this._openedPopup.push([f, popup, []]);
-          }
+          this._openLabel(f);
         }
       }
     }
