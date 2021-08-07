@@ -209,6 +209,7 @@ export interface VectorAdapterOptions<
   L = any,
   A = Record<string, any>,
   N = Record<string, any>,
+  P = F['properties']
 > extends _VectorAdapterOptionsToExtend<A, N> {
   /** Type for geometries painting, for each layer may be only one of: `point`, `polygon` or `line`. */
   type?: VectorAdapterLayerType;
@@ -295,8 +296,8 @@ export interface VectorAdapterOptions<
   popup?: boolean;
   popupOnSelect?: boolean;
   popupOptions?: PopupOptions;
-  filter?: DataLayerFilter;
-  propertiesFilter?: PropertiesFilter;
+  filter?: DataLayerFilter<F, L>;
+  propertiesFilter?: PropertiesFilter<P>;
   featureIdName?: string;
   cluster?: boolean;
   /**
@@ -309,7 +310,7 @@ export interface VectorAdapterOptions<
    */
   clusterRadius?: number;
   labelOnHover?: boolean;
-  labelField?: string;
+  labelField?: keyof P extends null ? string : keyof P;
   label?: (e: LayerDefinition<F, L>) => void | string;
 
   /**
