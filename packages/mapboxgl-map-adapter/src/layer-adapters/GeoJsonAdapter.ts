@@ -1,4 +1,4 @@
-import { LngLatBounds, Popup } from 'maplibre-gl';
+import { LngLatBounds } from 'maplibre-gl';
 
 import { defined } from '@nextgis/utils';
 import { featureFilter } from '@nextgis/properties-filter';
