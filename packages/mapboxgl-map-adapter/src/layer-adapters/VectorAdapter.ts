@@ -1,5 +1,5 @@
 import { isPaint, isIcon } from '@nextgis/paint';
-import { checkIfPropertyFilter } from '@nextgis/properties-filter';
+import { isPropertyFilter, featureFilter } from '@nextgis/properties-filter';
 
 import { getImage } from '../utils/imageIcons';
 import { getCentroid } from '../utils/getCentroid';
@@ -608,7 +608,7 @@ export abstract class VectorAdapter<
     const filter = filters.map((x) => {
       if (typeof x === 'string') {
         return x;
-      } else if (checkIfPropertyFilter(x)) {
+      } else if (isPropertyFilter(x)) {
         const [field, operation, value] = x;
         const operationAlias = _operationsAliases[operation];
         if (operation === 'in' || operation === 'notin') {
@@ -621,11 +621,13 @@ export abstract class VectorAdapter<
   }
 
   protected isFeatureSelected(feature: Feature): boolean {
-    if (this._selectedFeatureIds) {
+    if (this._selectedFeatureIds && this._selectedFeatureIds.length) {
       const filterId = this._getFeatureFilterId(feature);
       if (filterId) {
         return this._selectedFeatureIds.indexOf(filterId) !== -1;
       }
+    } else if (this._selectProperties && this._selectProperties.length) {
+      return featureFilter(feature, this._selectProperties);
     }
     return false;
   }
