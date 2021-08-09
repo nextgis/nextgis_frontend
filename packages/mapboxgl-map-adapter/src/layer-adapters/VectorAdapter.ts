@@ -734,7 +734,7 @@ export abstract class VectorAdapter<
     this._removeAllPopup();
   }
 
-  private _removePopup(popup: Popup) {
+  private _removePopup(popup: Popup, isLabel = false) {
     const map = this.map;
     if (map) {
       popup.remove();
@@ -747,7 +747,7 @@ export abstract class VectorAdapter<
           h({ feature });
         }
         closeHandlers.length = 0;
-        if (unselectOnClose) {
+        if (unselectOnClose && !isLabel) {
           this._unselectFeature(feature);
         }
         this._openedPopup.splice(index, 1);
@@ -804,7 +804,7 @@ export abstract class VectorAdapter<
           if (labelOnHover) {
             for (const o of this._openedPopup) {
               if (o[0].id !== feature.id) {
-                this._removePopup(o[1]);
+                this._removePopup(o[1], true);
               }
             }
             this._openLabel(feature);
