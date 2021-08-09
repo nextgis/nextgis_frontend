@@ -3,6 +3,7 @@ export interface LoadScriptOptions {
   id?: string;
   async?: boolean;
   defer?: boolean;
+  data?: Record<string, string | number | boolean>;
 }
 
 export function loadScript(
@@ -29,6 +30,12 @@ export function loadScript(
     }
     if (options.id) {
       s.setAttribute('id', options.id);
+    }
+    if (options.data) {
+      for (const k in options.data) {
+        const dataKey = k.replace(/^data\-/, '')
+        s.setAttribute('data-' + dataKey, String(options.data[k]));
+      }
     }
     document.head.appendChild(s);
   });
