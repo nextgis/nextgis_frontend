@@ -23,17 +23,17 @@ export function loadScript(
     // s.setAttribute('SameSite', 'None');
     // s.referrerPolicy = 'unsafe-url'; // 'same-origin';
     if (options.async) {
-      s.setAttribute('async', '');
+      s.async = true;
     }
     if (options.defer) {
-      s.setAttribute('defer', '');
+      s.defer = true;
     }
     if (options.id) {
       s.setAttribute('id', options.id);
     }
     if (options.data) {
       for (const k in options.data) {
-        const dataKey = k.replace(/^data\-/, '')
+        const dataKey = k.replace(/^data\-/, '').replace(/_/g, '-')
         s.setAttribute('data-' + dataKey, String(options.data[k]));
       }
     }
