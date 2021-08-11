@@ -69,11 +69,16 @@ export interface GetCustomPaintOptions extends BasePaintTypes {
   options?: any;
 }
 
-export type PropertyPaint = [PropertiesFilter, VectorAdapterLayerPaint];
+type Properties = { [name: string]: any };
 
-export type PropertiesPaint = [
+export type PropertyPaint<P extends Properties = Properties> = [
+  PropertiesFilter<P>,
+  VectorAdapterLayerPaint,
+];
+
+export type PropertiesPaint<P extends Properties = Properties> = [
   VectorAdapterLayerPaint | undefined,
-  ...PropertyPaint[]
+  ...PropertyPaint<P>[]
 ];
 
 export type VectorAdapterLayerPaint =
@@ -83,15 +88,18 @@ export type VectorAdapterLayerPaint =
   | PinPaint
   | GetCustomPaintOptions;
 
-export interface GetPaintCallback<F = Feature> {
+export interface GetPaintCallback<F extends Feature = Feature> {
   (feature: F): VectorAdapterLayerPaint;
   type?: PaintType;
 }
 
-export type Paint =
+export type Paint<
+  F extends Feature = Feature,
+  P extends Properties | null = F['properties'],
+> =
   | VectorAdapterLayerPaint
-  | GetPaintCallback
-  | PropertiesPaint;
+  | GetPaintCallback<F>
+  | PropertiesPaint<P extends null ? Properties : P>;
 
 // MAPBOX
 export type ExpressionName =
