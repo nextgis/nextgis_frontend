@@ -13,7 +13,7 @@ export class Clipboard {
     return clipboard;
   }
 
-  copy(text: string): void {
+  copy(text: string): boolean {
     try {
       if ((navigator as any).clipboard) {
         (navigator as any).clipboard.writeText(text);
@@ -23,9 +23,11 @@ export class Clipboard {
         this.copyToClipboard(text);
       }
       !this.silent && console.log('Copied to Clipboard');
+      return true
     } catch (e) {
-      !this.silent && console.log('Please copy coupon manually');
+      !this.silent && console.log('Please copy manually');
     }
+    return false;
   }
 
   private copyToClipboard(text: string) {
