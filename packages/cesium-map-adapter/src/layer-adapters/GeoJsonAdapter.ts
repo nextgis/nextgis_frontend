@@ -42,7 +42,7 @@ interface NativeGeojsonOptions {
   watchTerrainChange?: boolean;
 }
 
-type AdapterOptions = GeoJsonAdapterOptions<any, any, NativeGeojsonOptions>;
+type AdapterOptions = GeoJsonAdapterOptions<Feature, any, NativeGeojsonOptions>;
 
 interface GeoJsonDataSourceLoadOptions {
   sourceUri?: string;
@@ -235,7 +235,7 @@ export class GeoJsonAdapter
         const lonLat = obj.geometry.coordinates;
         const canvas = await pin;
 
-        const nameField = this.options.labelField || 'name';
+        const nameField = String(this.options.labelField || 'name');
         let name = '';
         if (obj.properties && nameField in obj.properties) {
           name = obj.properties && obj.properties[nameField];
@@ -258,6 +258,12 @@ export class GeoJsonAdapter
   }
 
   private _getDescription(feature: Feature): Property {
+    const close = () => {
+      // ignore
+    };
+    const onClose = () => {
+      // ignore
+    };
     //@ts-ignore
     return {
       getValue: () => {
@@ -265,6 +271,8 @@ export class GeoJsonAdapter
           const content = this.options.popupOptions.createPopupContent({
             feature,
             type: 'api',
+            close,
+            onClose,
           });
           if (content instanceof HTMLElement) {
             return content.outerHTML;
