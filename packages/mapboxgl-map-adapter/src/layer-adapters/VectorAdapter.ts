@@ -25,6 +25,7 @@ import {
   MapEventType,
   AnySourceData,
   MapLayerMouseEvent,
+  LngLat,
 } from 'maplibre-gl';
 import type { Paint, IconPaint } from '@nextgis/paint';
 import type {
@@ -706,7 +707,7 @@ export abstract class VectorAdapter<
     }
   }
 
-  protected _openLabel(f: Feature) {
+  protected _openLabel(f: Feature, lngLat?: [number, number]) {
     const map = this.map;
     const { labelField } = this.options;
     if (map && labelField) {
@@ -720,10 +721,8 @@ export abstract class VectorAdapter<
         const isOpened = this._openedPopup.find((x) => x[0].id === f.id);
         if (!isOpened) {
           const popup = new Popup(popupOpt);
-          popup
-            .setLngLat(getCentroid(f) as [number, number])
-            .setText(text)
-            .addTo(map);
+          lngLat = lngLat ?? (getCentroid(f) as [number, number]);
+          popup.setLngLat(lngLat).setText(text).addTo(map);
           this._openedPopup.push([f, popup, []]);
         }
       }
@@ -787,11 +786,12 @@ export abstract class VectorAdapter<
     if (map) {
       const { onMouseOver, selectOnHover, selectable, labelOnHover } =
         this.options;
+      const event = convertMapClickEvent(evt);
       if (onMouseOver || selectOnHover || labelOnHover) {
         const feature = this._getFeatureFromPoint(evt);
         if (onMouseOver && this.layer) {
           onMouseOver({
-            event: convertMapClickEvent(evt),
+            event,
             layer: this,
             feature,
             source: evt,
@@ -803,11 +803,11 @@ export abstract class VectorAdapter<
           }
           if (labelOnHover) {
             for (const o of this._openedPopup) {
-              if (o[0].id !== feature.id) {
-                this._removePopup(o[1], true);
-              }
+              this._removePopup(o[1], true);
+              // if (o[0].id !== feature.id) {
+              // }
             }
-            this._openLabel(feature);
+            this._openLabel(feature, event.lngLat as [number, number]);
           }
         }
       }
