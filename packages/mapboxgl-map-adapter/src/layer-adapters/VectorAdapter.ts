@@ -145,8 +145,7 @@ export abstract class VectorAdapter<
     this.layer = [];
     const types = (this._types = options.type ? [options.type] : this._types);
     if (options.paint) {
-      this._onAddLayer(this._sourceId);
-      // const types = this._types;
+      this._beforeLayerLayer(this._sourceId);
       for (const t of types) {
         const geomType = typeAliasForFilter[t];
         if (geomType) {
@@ -178,6 +177,7 @@ export abstract class VectorAdapter<
           }
         }
       }
+      await this._onLayerAdd(this._sourceId);
     }
 
     this._addEventsListeners();
@@ -370,7 +370,10 @@ export abstract class VectorAdapter<
     }
   }
 
-  protected _onAddLayer(sourceId: string, options?: AnySourceData): void {
+  protected async _beforeLayerLayer(sourceId: string, options?: AnySourceData): Promise<void> {
+    // ignore
+  }
+  protected async _onLayerAdd(sourceId: string, options?: AnySourceData): Promise<void> {
     // ignore
   }
 
