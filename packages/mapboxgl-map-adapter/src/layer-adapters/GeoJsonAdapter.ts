@@ -35,7 +35,6 @@ import type {
 } from '@nextgis/webmap';
 import type { Feature } from './VectorAdapter';
 import type { TLayer } from '../MapboxglMapAdapter';
-import { getCentroid } from '../utils/getCentroid';
 
 let ID = 0;
 
@@ -135,7 +134,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
       this._updateWithNativeFilter(filterProperties);
     }
     return this._getFeatures().map((feature) => {
-      let visible = false;
+      let visible = true;
       if (filterProperties && feature.properties) {
         visible = featureFilter(feature, filterProperties);
       } else if (filtered) {
@@ -247,10 +246,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     return [sw.lng, sw.lat, ne.lng, ne.lat];
   }
 
-  protected _onAddLayer(sourceId: string): void {
-    if (this.options.data) {
-      this.addData(this.options.data);
-    }
+  protected async _beforeLayerLayer(sourceId: string): Promise<void> {
     let source = this.map.getSource(sourceId) as GeoJSONSource;
     if (!source) {
       const sourceOpt: GeoJSONSourceRaw = {
@@ -275,8 +271,13 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
       source = this.map.getSource(sourceId) as GeoJSONSource;
     }
     this._sources[sourceId] = source;
-    if (this.options.type) {
-      this._updateLayerPaint(this.options.type);
+  }
+
+  protected async _onLayerAdd(): Promise<void> {
+    if (this.options.data) {
+      await this.addData(this.options.data);
+    } else if (this.options.type) {
+      await this._updateLayerPaint(this.options.type);
     }
   }
 
