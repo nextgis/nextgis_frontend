@@ -641,6 +641,16 @@ export class WebMapLayers<
       }
     }
   }
+  /** Remove selection from any selected selectable layer */
+  unSelectLayers(): void {
+    const layers = Object.values(this.allLayers());
+    let l: VectorLayerAdapter
+    for (l of layers) {
+      if (l.unselect) {
+        l.unselect();
+      }
+    }
+  }
 
   /**
    * Hide features from a vector layer using a callback function.
