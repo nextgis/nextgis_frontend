@@ -1,14 +1,14 @@
-import { LngLatBounds, Popup } from 'maplibre-gl';
+import { LngLatBounds } from 'maplibre-gl';
 
 import { defined } from '@nextgis/utils';
 import { featureFilter } from '@nextgis/properties-filter';
-import { VectorAdapter } from './VectorAdapter';
+import { EventOptions, VectorAdapter } from './VectorAdapter';
 import {
   typeAliasForFilter,
   geometryFilter,
   detectType,
   typeAlias,
-} from '../util/geomType';
+} from '../utils/geomType';
 
 import type {
   Map,
@@ -35,7 +35,6 @@ import type {
 } from '@nextgis/webmap';
 import type { Feature } from './VectorAdapter';
 import type { TLayer } from '../MapboxglMapAdapter';
-import { getCentroid } from '../util/getCentroid';
 
 let ID = 0;
 
@@ -135,7 +134,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
       this._updateWithNativeFilter(filterProperties);
     }
     return this._getFeatures().map((feature) => {
-      let visible = false;
+      let visible = true;
       if (filterProperties && feature.properties) {
         visible = featureFilter(feature, filterProperties);
       } else if (filtered) {
@@ -247,10 +246,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     return [sw.lng, sw.lat, ne.lng, ne.lat];
   }
 
-  protected _onAddLayer(sourceId: string): void {
-    if (this.options.data) {
-      this.addData(this.options.data);
-    }
+  protected async _beforeLayerLayer(sourceId: string): Promise<void> {
     let source = this.map.getSource(sourceId) as GeoJSONSource;
     if (!source) {
       const sourceOpt: GeoJSONSourceRaw = {
@@ -275,8 +271,13 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
       source = this.map.getSource(sourceId) as GeoJSONSource;
     }
     this._sources[sourceId] = source;
-    if (this.options.type) {
-      this._updateLayerPaint(this.options.type);
+  }
+
+  protected async _onLayerAdd(): Promise<void> {
+    if (this.options.data) {
+      await this.addData(this.options.data);
+    } else if (this.options.type) {
+      await this._updateLayerPaint(this.options.type);
     }
   }
 
@@ -294,7 +295,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
 
   protected _selectFeature(
     feature: Feature | Feature[],
-    opt: { silent: boolean } = { silent: false },
+    opt?: { silent: boolean },
   ): Feature[] {
     let selectedFeatureIds = this._selectedFeatureIds || [];
     if (this.options && !this.options.multiselect) {
@@ -314,16 +315,13 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     });
     this._selectProperties = undefined;
     this._selectedFeatureIds = selectedFeatureIds;
-    this._updateFilter();
-    if (!opt.silent && this.options.onSelect) {
-      this.options.onSelect({ layer: this, features, type: 'api' });
-    }
+    this._updateFilter(opt);
     return features;
   }
 
   protected _unselectFeature(
     feature?: Feature | Feature[],
-    opt: { silent: boolean } = { silent: false },
+    opt?: EventOptions,
   ): void {
     if (feature) {
       let features: Feature[] = [];
@@ -347,17 +345,20 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     } else {
       this._selectedFeatureIds = false;
     }
-    this._updateFilter();
-    if (!opt.silent && this.options.onSelect) {
-      this.options.onSelect({ layer: this, features: undefined, type: 'api' });
-    }
+    this._updateFilter(opt);
   }
 
-  protected _updateFilter(): void {
+  protected _updateFilter(opt: EventOptions = {}): void {
+    const map = this.map;
+    if (!map) return;
+
     // it is not yet possible to use callbacks and properties filters together
     if (this._filterProperties || this._selectProperties) {
-      super._updateFilter();
-      this._fireOnLayerSelectEvent();
+      super._updateFilter(opt);
+      const silent = opt.silent ?? false;
+      if (!silent) {
+        this._fireOnLayerSelectEvent();
+      }
       return;
     }
     const selected = this._selectedFeatureIds;
@@ -389,7 +390,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
           const selLayerName = this._getSelectionLayerNameFromType(t);
           if (layers.indexOf(selLayerName) !== -1) {
             if (this._selectionName) {
-              this.map.setFilter(selLayerName, [
+              map.setFilter(selLayerName, [
                 'all',
                 geomFilter,
                 ['in', this.featureIdName, ...selectionArray],
@@ -404,7 +405,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
               filter_.push(['!in', this.featureIdName, ...selectionArray]);
               this._updateWithNativeFilter(filter_);
             }
-            this.map.setFilter(layerName, filter_);
+            map.setFilter(layerName, filter_);
           }
         }
       });
@@ -566,29 +567,17 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   // It is necessary to achieve that the labels are shown through vector layer symbols
   private _updateLabels() {
     this._removeAllPopup();
-    const popupOpt: maplibregl.PopupOptions = {
-      closeButton: false,
-      closeOnClick: false,
-    };
     const filtered = this._filteredFeatureIds || [];
     const features = this._features;
-    const field = this.options.labelField;
-    if (field) {
+    const { labelField, labelOnHover } = this.options;
+    if (labelField && !labelOnHover) {
       for (const f of features) {
         const inFilter = filtered.length
           ? defined(f._featureFilterId) &&
             filtered.indexOf(f._featureFilterId) !== -1
           : true;
         if (inFilter) {
-          const text = f.properties && f.properties[field];
-          if (text) {
-            const popup = new Popup(popupOpt);
-            popup
-              .setLngLat(getCentroid(f) as [number, number])
-              .setText(text)
-              .addTo(this.map);
-            this._openedPopup.push([f, popup]);
-          }
+          this._openLabel(f);
         }
       }
     }

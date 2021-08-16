@@ -4,7 +4,6 @@
 
 ## onClickAsync type
 
-
 <b>Signature:</b>
 
 ```typescript

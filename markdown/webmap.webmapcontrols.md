@@ -30,5 +30,6 @@ export declare class WebMapControls<M = any, L = any, C = any, E extends WebMapE
 |  [createControl(control, options)](./webmap.webmapcontrols.createcontrol.md) |  | Creating a universal map layout control element. Can be used with any map adapter. |
 |  [createToggleControl(options)](./webmap.webmapcontrols.createtogglecontrol.md) |  | Create any toggler control button |
 |  [getControl(control, options)](./webmap.webmapcontrols.getcontrol.md) |  | Get instance of registered control |
+|  [getControlContainer()](./webmap.webmapcontrols.getcontrolcontainer.md) |  |  |
 |  [removeControl(control)](./webmap.webmapcontrols.removecontrol.md) |  |  |
 

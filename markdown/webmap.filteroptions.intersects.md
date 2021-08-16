@@ -9,5 +9,5 @@ WKT polygon geometry
 <b>Signature:</b>
 
 ```typescript
-intersects?: string;
+intersects?: string | LngLatArray[] | LngLatBoundsArray;
 ```

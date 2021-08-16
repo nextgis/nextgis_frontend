@@ -11,3 +11,8 @@ Show layer on the map immediately after adding. Such layers are always under oth
 ```typescript
 visibility?: boolean;
 ```
+
+## Remarks
+
+TODO: replace by show
+

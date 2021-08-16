@@ -47,10 +47,10 @@ Make sure CORS is registered in the [NextGIS Web settings](https://docs.nextgis.
 |  [LookupTableResource](./ngw-connector.lookuptableresource.md) |  |
 |  [NgwConnectorOptions](./ngw-connector.ngwconnectoroptions.md) |  |
 |  [NgwDateFormat](./ngw-connector.ngwdateformat.md) |  |
-|  [NgwDateTimeFormat](./ngw-connector.ngwdatetimeformat.md) |  |
 |  [NgwExtent](./ngw-connector.ngwextent.md) |  |
 |  [NgwFile](./ngw-connector.ngwfile.md) |  |
 |  [NgwLayerIdentifyError](./ngw-connector.ngwlayeridentifyerror.md) |  |
+|  [NgwTimeFormat](./ngw-connector.ngwtimeformat.md) |  |
 |  [Params](./ngw-connector.params.md) |  |
 |  [PatchRequestItemsResponseMap](./ngw-connector.patchrequestitemsresponsemap.md) |  |
 |  [Permission](./ngw-connector.permission.md) |  |
@@ -84,6 +84,7 @@ Make sure CORS is registered in the [NextGIS Web settings](https://docs.nextgis.
 |  [FeatureItemToNgw](./ngw-connector.featureitemtongw.md) |  |
 |  [FeatureProperties](./ngw-connector.featureproperties.md) |  |
 |  [GeometryType](./ngw-connector.geometrytype.md) |  |
+|  [NgwDateTimeFormat](./ngw-connector.ngwdatetimeformat.md) |  |
 |  [NgwExceptions](./ngw-connector.ngwexceptions.md) |  |
 |  [PyramidSettings](./ngw-connector.pyramidsettings.md) |  |
 |  [RequestItemAdditionalParams](./ngw-connector.requestitemadditionalparams.md) |  |

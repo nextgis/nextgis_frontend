@@ -15,5 +15,7 @@ export interface CreatePopupContentProps extends LayerDefinition
 
 |  Property | Type | Description |
 |  --- | --- | --- |
+|  [close](./webmap.createpopupcontentprops.close.md) | () =&gt; void |  |
+|  [onClose](./webmap.createpopupcontentprops.onclose.md) | (cb: [PopupOnCloseFunction](./webmap.popuponclosefunction.md)<!-- -->) =&gt; void |  |
 |  [type](./webmap.createpopupcontentprops.type.md) | [OnLayerSelectType](./webmap.onlayerselecttype.md) |  |
 

@@ -228,6 +228,7 @@ export interface GetClassAdapterOptions {
   connector: NgwConnector;
   item: ResourceItem;
   Adapter?: Type<MainLayerAdapter>;
+  /** This is some kind of dirty hack. Get rid of */
   addLayerOptionsPriority?: false;
 }
 

@@ -52,6 +52,7 @@
 |  [isArray(val)](./utils.isarray.md) |  |
 |  [isJsonArray(val)](./utils.isjsonarray.md) |  |
 |  [isJsonMap(val)](./utils.isjsonmap.md) |  |
+|  [isLngLatBoundsArray(array)](./utils.islnglatboundsarray.md) |  |
 |  [isObject(val)](./utils.isobject.md) |  |
 |  [isObjKey(obj, key)](./utils.isobjkey.md) |  |
 |  [keyInObj(obj, key)](./utils.keyinobj.md) |  |
@@ -64,6 +65,7 @@
 |  [objectAssign(target, source1, source2)](./utils.objectassign_1.md) | Copy the values of all of the enumerable own properties from one or more source objects to a target object. Returns the target object. |
 |  [objectAssign(target, source1, source2, source3)](./utils.objectassign_2.md) | Copy the values of all of the enumerable own properties from one or more source objects to a target object. Returns the target object. |
 |  [objectDeepEqual(o, p)](./utils.objectdeepequal.md) |  |
+|  [objectRemoveEmpty(obj)](./utils.objectremoveempty.md) |  |
 |  [reEscape(s)](./utils.reescape.md) |  |
 |  [round(val, toFixed)](./utils.round.md) |  |
 |  [sleep(delay)](./utils.sleep.md) |  |

@@ -2,7 +2,7 @@ import StrictEventEmitter from 'strict-event-emitter-types';
 import { EventEmitter } from 'events';
 import CancelablePromise from '@nextgis/cancelable-promise';
 import { defined, isObject } from '@nextgis/utils';
-import { WebMap } from '@nextgis/webmap';
+import { AdapterOptions, WebMap } from '@nextgis/webmap';
 import NgwConnector from '@nextgis/ngw-connector';
 
 import {
@@ -187,13 +187,16 @@ export class NgwMap<
           }
         }
         const adapter = addNgwLayer(options, this, this.connector);
-
-        const layer = (await this.addLayer(adapter, {
+        const adapterOpts = {
           visibility: true,
           // TODO: do not merge options, use only `adapterOptions`
           ...options,
           ...options.adapterOptions,
-        })) as ResourceAdapter;
+        } as AdapterOptions;
+        const layer = (await this.addLayer(
+          adapter,
+          adapterOpts,
+        )) as ResourceAdapter<M, L, AdapterOptions>;
         const id = layer && this.getLayerId(layer);
         if (layer && id) {
           this._ngwLayers[id] = { layer, resourceId: layer.resourceId };

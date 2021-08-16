@@ -4,7 +4,6 @@
 
 ## getBoundsFeature() function
 
-
 <b>Signature:</b>
 
 ```typescript

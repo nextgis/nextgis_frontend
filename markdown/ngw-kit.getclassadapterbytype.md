@@ -4,7 +4,6 @@
 
 ## GetClassAdapterByType type
 
-
 <b>Signature:</b>
 
 ```typescript

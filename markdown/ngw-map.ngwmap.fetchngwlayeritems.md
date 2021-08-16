@@ -7,18 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-fetchNgwLayerItems<F extends FeatureProperties = FeatureProperties, G extends Geometry = Geometry>(options: {
-        resourceId: number;
-        connector?: NgwConnector;
-        filters?: PropertiesFilter;
-    } & FilterOptions): CancelablePromise<FeatureItem<F, G>[]>;
+fetchNgwLayerItems<F extends FeatureProperties = FeatureProperties, G extends Geometry = Geometry>(options: Omit<FetchNgwItemsOptions<F>, 'connector'>): CancelablePromise<FeatureItem<F, G>[]>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | { resourceId: number; connector?: NgwConnector; filters?: [PropertiesFilter](./properties-filter.propertiesfilter.md)<!-- -->; } &amp; [FilterOptions](./webmap.filteroptions.md) |  |
+|  options | Omit&lt;[FetchNgwItemsOptions](./ngw-kit.fetchngwitemsoptions.md)<!-- -->&lt;F&gt;, 'connector'&gt; |  |
 
 <b>Returns:</b>
 

@@ -4,7 +4,6 @@
 
 ## NgwWebmapLayerAdapterEvents interface
 
-
 <b>Signature:</b>
 
 ```typescript

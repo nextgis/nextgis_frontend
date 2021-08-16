@@ -4,17 +4,10 @@
 
 ## MapControls interface
 
-
 <b>Signature:</b>
 
 ```typescript
-export interface MapControls 
+export interface MapControls extends ContribControlsOptions 
 ```
-
-## Properties
-
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [ATTRIBUTION](./webmap.mapcontrols.attribution.md) | [AttributionControlOptions](./webmap.attributioncontroloptions.md) |  |
-|  [ZOOM](./webmap.mapcontrols.zoom.md) | [ZoomControlOptions](./webmap.zoomcontroloptions.md) |  |
+<b>Extends:</b> [ContribControlsOptions](./webmap.contribcontrolsoptions.md)
 

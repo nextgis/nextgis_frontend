@@ -2,20 +2,12 @@
 
 [Home](./index.md) &gt; [@nextgis/ngw-connector](./ngw-connector.md) &gt; [NgwDateTimeFormat](./ngw-connector.ngwdatetimeformat.md)
 
-## NgwDateTimeFormat interface
+## NgwDateTimeFormat type
 
 <b>Signature:</b>
 
 ```typescript
-export interface NgwDateTimeFormat extends NgwDateFormat 
+export declare type NgwDateTimeFormat = NgwDateFormat & NgwTimeFormat;
 ```
-<b>Extends:</b> [NgwDateFormat](./ngw-connector.ngwdateformat.md)
-
-## Properties
-
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [hour](./ngw-connector.ngwdatetimeformat.hour.md) | number |  |
-|  [minute](./ngw-connector.ngwdatetimeformat.minute.md) | number |  |
-|  [second](./ngw-connector.ngwdatetimeformat.second.md) | number |  |
+<b>References:</b> [NgwDateFormat](./ngw-connector.ngwdateformat.md)<!-- -->, [NgwTimeFormat](./ngw-connector.ngwtimeformat.md)
 

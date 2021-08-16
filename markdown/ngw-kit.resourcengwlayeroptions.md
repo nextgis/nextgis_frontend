@@ -2,21 +2,19 @@
 
 [Home](./index.md) &gt; [@nextgis/ngw-kit](./ngw-kit.md) &gt; [ResourceNgwLayerOptions](./ngw-kit.resourcengwlayeroptions.md)
 
-## ResourceNgwLayerOptions interface
+## ResourceNgwLayerOptions type
 
+> Warning: This API is now obsolete.
+> 
+> use [NgwLayerOptions](./ngw-kit.ngwlayeroptions.md) instead
+> 
 
 <b>Signature:</b>
 
 ```typescript
-export interface ResourceNgwLayerOptions<T extends NgwLayerAdapterType = NgwLayerAdapterType, P = {
+export declare type ResourceNgwLayerOptions<T extends NgwLayerAdapterType = NgwLayerAdapterType, P = {
     [name: string]: any;
-}> extends NgwLayerOptionsAdditional<T, P> 
+}> = NgwLayerOptions<T, P>;
 ```
-<b>Extends:</b> [NgwLayerOptionsAdditional](./ngw-kit.ngwlayeroptionsadditional.md)<!-- -->&lt;T, P&gt;
-
-## Properties
-
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [resource](./ngw-kit.resourcengwlayeroptions.resource.md) | [ResourceDefinition](./ngw-connector.resourcedefinition.md) |  |
+<b>References:</b> [NgwLayerAdapterType](./ngw-kit.ngwlayeradaptertype.md)<!-- -->, [NgwLayerOptions](./ngw-kit.ngwlayeroptions.md)
 

@@ -4,7 +4,6 @@
 
 ## TreeItem interface
 
-
 <b>Signature:</b>
 
 ```typescript
