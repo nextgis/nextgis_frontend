@@ -4,7 +4,6 @@
 
 ## ZoomControlOptions interface
 
-
 <b>Signature:</b>
 
 ```typescript

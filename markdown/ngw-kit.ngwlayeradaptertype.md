@@ -4,7 +4,6 @@
 
 ## NgwLayerAdapterType type
 
-
 <b>Signature:</b>
 
 ```typescript

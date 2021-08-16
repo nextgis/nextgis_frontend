@@ -4,7 +4,6 @@
 
 ## NgwIdentify type
 
-
 <b>Signature:</b>
 
 ```typescript

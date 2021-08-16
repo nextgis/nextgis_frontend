@@ -4,7 +4,6 @@
 
 ## NgwKitOptions interface
 
-
 <b>Signature:</b>
 
 ```typescript

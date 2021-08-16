@@ -37,6 +37,7 @@ export declare class LeafletMapAdapter implements MapAdapter<Map, any, Control>
 |  [getBounds()](./leaflet-map-adapter.leafletmapadapter.getbounds.md) |  |  |
 |  [getCenter()](./leaflet-map-adapter.leafletmapadapter.getcenter.md) |  |  |
 |  [getContainer()](./leaflet-map-adapter.leafletmapadapter.getcontainer.md) |  |  |
+|  [getControlContainer()](./leaflet-map-adapter.leafletmapadapter.getcontrolcontainer.md) |  |  |
 |  [getLayerAdapter(name)](./leaflet-map-adapter.leafletmapadapter.getlayeradapter.md) |  |  |
 |  [getZoom()](./leaflet-map-adapter.leafletmapadapter.getzoom.md) |  |  |
 |  [hideLayer(layer)](./leaflet-map-adapter.leafletmapadapter.hidelayer.md) |  |  |

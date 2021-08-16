@@ -4,7 +4,6 @@
 
 ## MainMapEvents interface
 
-
 <b>Signature:</b>
 
 ```typescript

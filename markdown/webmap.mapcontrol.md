@@ -4,7 +4,6 @@
 
 ## MapControl interface
 
-
 <b>Signature:</b>
 
 ```typescript

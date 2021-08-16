@@ -4,7 +4,6 @@
 
 ## StarterKit interface
 
-
 <b>Signature:</b>
 
 ```typescript

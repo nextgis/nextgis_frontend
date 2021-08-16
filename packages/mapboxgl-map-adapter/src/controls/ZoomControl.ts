@@ -1,12 +1,11 @@
 import { NavigationControl } from 'maplibre-gl';
-import { ZoomControlOptions } from '@nextgis/webmap';
+import type { ZoomControlOptions } from '@nextgis/webmap';
 
 export class ZoomControl extends NavigationControl {
-  options: ZoomControlOptions & any;
+  options = {} as ZoomControlOptions & any;
 
   constructor(options: ZoomControlOptions & any = {}) {
-    options = { ...options, showCompass: false };
-    super(options);
+    super({ ...options, showCompass: false });
   }
 
   _createButton(

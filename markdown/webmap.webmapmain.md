@@ -4,7 +4,6 @@
 
 ## WebMapMain class
 
-
 <b>Signature:</b>
 
 ```typescript

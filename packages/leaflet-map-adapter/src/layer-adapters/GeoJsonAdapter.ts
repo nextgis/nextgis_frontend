@@ -38,6 +38,7 @@ import type {
 import type {
   VectorAdapterLayerType,
   GeoJsonAdapterOptions,
+  PopupOnCloseFunction,
   VectorLayerAdapter,
   LngLatBoundsArray,
   OnLayerSelectType,
@@ -63,6 +64,7 @@ export class GeoJsonAdapter
   private _selectedLayers: LayerDef[] = [];
   private _filteredLayers: LayerDef[] = [];
   private _filterFun?: DataLayerFilter<Feature>;
+  private _openedPopup: [Layer, PopupOnCloseFunction[], LayerDef][] = [];
 
   private $updateTooltip = debounce(() => {
     this.updateTooltip();
@@ -84,13 +86,13 @@ export class GeoJsonAdapter
       this.addData(options.data);
     }
 
-    this._addMapMoveListener();
+    this._addMapListener();
 
     return this.layer;
   }
 
   beforeRemove(): void {
-    this._removeMapMoveListener();
+    this._removeMapListener();
   }
 
   select(findFeatureFun?: DataLayerFilter): void {
@@ -111,13 +113,17 @@ export class GeoJsonAdapter
     if (findFeatureFun) {
       const feature = this._layers.filter(findFeatureFun);
       feature.forEach((x) => {
-        this._unSelectLayer(x.layer);
+        this._unSelectLayer(x);
       });
     } else if (this.selected) {
-      this.selected = false;
+      for (const p of this._openedPopup) {
+        this._removePopup(p[0]);
+      }
       if (this.paint) {
         this.setPaintEachLayer(this.paint);
       }
+      this._selectedLayers.length = 0;
+      this.selected = false;
     }
   }
 
@@ -175,6 +181,7 @@ export class GeoJsonAdapter
   }
 
   clearLayer(cb?: (feature: Feature) => boolean): void {
+    this.unselect();
     if (cb) {
       for (let fry = this._layers.length; fry--; ) {
         const def = this._layers[fry];
@@ -238,12 +245,12 @@ export class GeoJsonAdapter
   }
 
   closePopup(findFeatureFun?: DataLayerFilter): void {
-    const featuresToClosePopup = findFeatureFun
-      ? this._layers.filter(findFeatureFun)
-      : this._layers;
+    const popupToClose = findFeatureFun
+      ? this._openedPopup.filter((x) => findFeatureFun(x[2]))
+      : this._openedPopup;
 
-    featuresToClosePopup.forEach((x) => {
-      this._closePopup(x);
+    popupToClose.forEach((x) => {
+      this._removePopup(x[0]);
     });
   }
 
@@ -266,6 +273,10 @@ export class GeoJsonAdapter
     }
   }
 
+  private $unselect = () => {
+    this.unselect();
+  };
+
   private _updateTooltip(layerDef: LayerDef) {
     const { feature, layer } = layerDef;
     if (feature && layer && feature.properties && this.options.labelField) {
@@ -283,28 +294,83 @@ export class GeoJsonAdapter
     def: LayerDef,
     options: PopupOptions = {},
     type: OnLayerSelectType,
+    latlng?: LatLngExpression,
   ) {
     const { feature, layer } = def;
-    const { minWidth, autoPan, maxWidth } = { minWidth: 300, ...options };
+    const {
+      minWidth,
+      autoPan,
+      maxWidth,
+      closeButton: closeButton_,
+    } = { minWidth: 300, ...options };
+    const closeButton = closeButton_ ?? !this.options.selectOnHover;
+    let popup: Layer;
+    const _closeHandlers: PopupOnCloseFunction[] = [];
+    const onClose = (handler: PopupOnCloseFunction) => {
+      _closeHandlers.push(handler);
+    };
+    const close = () => {
+      if (popup) {
+        this._removePopup(popup);
+      }
+    };
     const content = options.createPopupContent
       ? await options.createPopupContent({
           layer,
           feature,
           target: this,
           type,
+          close,
+          onClose,
         })
       : options.popupContent;
     if (content && layer) {
-      const popup = layer.bindPopup(content, { minWidth, autoPan, maxWidth });
+      popup = layer.bindPopup(content, {
+        minWidth,
+        autoPan,
+        maxWidth,
+        closeButton,
+        closeOnClick: false,
+        autoClose: false,
+      });
+      const unselectOnClose =
+        this.options.popupOptions?.unselectOnClose ?? true;
+      if (unselectOnClose) {
+        const p = layer.getPopup();
+        p &&
+          p.once(
+            'remove',
+            () => {
+              close();
+            },
+            this,
+          );
+      }
+      this._openedPopup.push([popup, _closeHandlers, def]);
       setTimeout(() => {
-        popup.openPopup();
+        popup.openPopup(latlng);
       }, 0);
     }
   }
 
-  private _closePopup(def: LayerDef) {
-    if (def.layer) {
-      def.layer.closePopup().unbindPopup();
+  private _removePopup(popup: Layer) {
+    const map = this.map;
+    if (map) {
+      popup.closePopup().unbindPopup();
+      const index = this._openedPopup.findIndex((x) => x[0] === popup);
+      if (index !== -1) {
+        const unselectOnClose =
+          this.options.popupOptions?.unselectOnClose ?? true;
+        const [, closeHandlers, def] = this._openedPopup[index];
+        for (const h of closeHandlers) {
+          h(def);
+        }
+        closeHandlers.length = 0;
+        if (unselectOnClose) {
+          this._unSelectLayer(def);
+        }
+        this._openedPopup.splice(index, 1);
+      }
     }
   }
 
@@ -434,7 +500,7 @@ export class GeoJsonAdapter
               this._selectLayer({ feature, layer }, 'hover');
             });
             layer.on('mouseout', () => {
-              this._unSelectLayer(layer);
+              this._unSelectLayer({ feature, layer });
             });
           } else {
             layer.on(
@@ -505,7 +571,7 @@ export class GeoJsonAdapter
   private _selectOnLayerClick(e: LeafletMouseEvent) {
     DomEvent.stopPropagation(e);
     const layer = e.target as Layer;
-    const def: LayerDef = {layer, feature: (layer as any).feature};
+    const def: LayerDef = { layer, feature: (layer as any).feature };
     let isSelected = !!this._selectedLayers.find((x) => x.layer === layer);
     if (isSelected) {
       if (this.options && this.options.unselectOnSecondClick) {
@@ -513,49 +579,56 @@ export class GeoJsonAdapter
         isSelected = false;
       }
     } else {
-      this._selectLayer(def, 'click');
+      this._selectLayer(def, 'click', e.latlng);
       isSelected = true;
     }
   }
 
-  private _selectLayer(def: LayerDef, type: OnLayerSelectType) {
+  private _selectLayer(
+    def: LayerDef,
+    type: OnLayerSelectType,
+    latlng?: LatLngExpression,
+  ) {
+    this.map._addUnselectCb(() => {
+      this._unSelectLayer(def);
+    });
     if (this.options && !this.options.multiselect) {
       this._selectedLayers.forEach((x) => this._unSelectLayer(x));
     }
     this._selectedLayers.push(def);
     this.selected = true;
-    if (this.options) {
-      if (this.options.selectedPaint && def.layer) {
-        this.setPaint(def, this.options.selectedPaint);
-      }
-      if (this.options.popupOnSelect) {
-        this._openPopup(def, this.options.popupOptions, type);
-      }
-      if (this.options.onSelect) {
-        this.options.onSelect({
-          type,
-          layer: this,
-          features: def.feature ? [def.feature] : [],
-        });
-      }
+    const { selectedPaint, popupOnSelect, popupOptions } = this.options;
+
+    if (selectedPaint && def.layer) {
+      this.setPaint(def, selectedPaint);
+    }
+    if (popupOnSelect) {
+      this._openPopup(def, popupOptions, type, latlng);
+    }
+    if (this.options.onSelect) {
+      this.options.onSelect({
+        type,
+        layer: this,
+        features: def.feature ? [def.feature] : [],
+      });
     }
   }
 
-  private _unSelectLayer(layer: any) {
-    const index = this._selectedLayers.indexOf(layer);
+  private _unSelectLayer(def: LayerDef) {
+    const index = this._selectedLayers.indexOf(def);
     if (index !== -1) {
       this._selectedLayers.splice(index, 1);
+      if (this.options) {
+        if (this.options.paint) {
+          this.setPaint(def, this.options.paint);
+        }
+
+        if (this.options.popupOnSelect && def.layer) {
+          this._removePopup(def.layer);
+        }
+      }
     }
     this.selected = this._selectedLayers.length > 0;
-    if (this.options) {
-      if (this.options.paint) {
-        this.setPaint(layer, this.options.paint);
-      }
-
-      if (this.options.popupOnSelect) {
-        this._closePopup(layer);
-      }
-    }
   }
 
   private createDivIcon(icon: IconPaint) {
@@ -608,18 +681,24 @@ export class GeoJsonAdapter
     return geoJsonOptions;
   }
 
-  private _addMapMoveListener() {
+  private _addMapListener() {
     const map = this.map;
     if (map) {
-      if (this.options.labelField && !this.options.labelOnHover) {
+      const { labelField, labelOnHover, unselectOnClick } = this.options;
+      const uoc = unselectOnClick ?? true;
+      if (uoc) {
+        map.on('click', this.$unselect);
+      }
+      if (labelField && !labelOnHover) {
         map.on('zoomend', this.$updateTooltip);
         map.on('moveend', this.$updateTooltip);
       }
     }
   }
 
-  private _removeMapMoveListener() {
+  private _removeMapListener() {
     this.map.off('zoomend', this.$updateTooltip);
     this.map.off('moveend', this.$updateTooltip);
+    this.map.off('click', this.$unselect);
   }
 }

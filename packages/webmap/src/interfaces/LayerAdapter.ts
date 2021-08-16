@@ -1,9 +1,10 @@
-import type { GeoJsonObject, Feature } from 'geojson';
+import type { GeoJsonObject, Feature, Geometry } from 'geojson';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type { Paint } from '@nextgis/paint';
-import type { Type } from '@nextgis/utils';
+import type { LngLatArray, Type } from '@nextgis/utils';
 import type { LngLatBoundsArray } from './BaseTypes';
 import type { MapClickEvent } from './MapAdapter';
+import { FeatureProperties } from '../../../ngw-connector/src';
 
 export type AdapterConstructor = () => Promise<Type<LayerAdapter> | any>;
 
@@ -20,9 +21,9 @@ export type OnLayerSelectType = 'api' | 'click' | 'hover';
 /**
  * @public
  */
-export interface OnLayerSelectOptions {
-  layer: LayerAdapter;
-  features?: Feature[] | undefined;
+export interface OnLayerSelectOptions<F extends Feature = Feature, L = LayerAdapter> {
+  layer: L;
+  features?: F[] | undefined;
   type: OnLayerSelectType;
 }
 
@@ -31,11 +32,11 @@ export type OnLayerMouseOptions = OnLayerClickOptions;
 /**
  * @public
  */
-export interface OnLayerClickOptions {
-  layer: LayerAdapter;
+export interface OnLayerClickOptions<F extends Feature = Feature, L = LayerAdapter>  {
+  layer: L;
   event: MapClickEvent;
   source: any;
-  feature?: Feature;
+  feature?: F;
   selected?: boolean;
 }
 
@@ -60,6 +61,8 @@ export interface AdapterOptions<
    * Show layer on the map immediately after adding.
    * Such layers are always under others.
    * Only one base layer can be displayed on the map at a time.
+   * @remarks
+   * TODO: replace by show
    *
    * @defaultValue true
    */
@@ -144,6 +147,9 @@ export interface AdapterOptions<
   /** Map and layer adapter base options */
   nativeOptions?: N;
   ratio?: number;
+
+  /** Experimental only for Ol yet */
+  srs?: number;
 }
 
 /**
@@ -160,8 +166,12 @@ export interface MvtAdapterOptions<F extends Feature = Feature>
  */
 export type VectorAdapterLayerType = 'polygon' | 'point' | 'line';
 
+export type PopupOnCloseFunction = (args: LayerDefinition) => void;
+
 export interface CreatePopupContentProps extends LayerDefinition {
   type: OnLayerSelectType;
+  close: () => void;
+  onClose: (cb: PopupOnCloseFunction) => void;
 }
 
 /**
@@ -173,6 +183,11 @@ export interface PopupOptions {
   autoPan?: boolean;
   popupContent?: string | HTMLElement;
   fromProperties?: boolean;
+  closeButton?: boolean;
+  /** Unselect feature on popup close
+   * @default true
+   */
+  unselectOnClose?: boolean;
   createPopupContent?: (
     props: CreatePopupContentProps,
   ) =>
@@ -195,6 +210,7 @@ export interface VectorAdapterOptions<
   L = any,
   A = Record<string, any>,
   N = Record<string, any>,
+  P = F['properties'],
 > extends _VectorAdapterOptionsToExtend<A, N> {
   /** Type for geometries painting, for each layer may be only one of: `point`, `polygon` or `line`. */
   type?: VectorAdapterLayerType;
@@ -223,7 +239,7 @@ export interface VectorAdapterOptions<
    * }
    * ```
    */
-  paint?: Paint;
+  paint?: Paint<F>;
   /**
    * The paint that applies to the features after it becomes selected.
    *
@@ -235,7 +251,7 @@ export interface VectorAdapterOptions<
    * });
    * ```
    */
-  selectedPaint?: Paint;
+  selectedPaint?: Paint<F>;
   // selectedPaintDiff?: VectorAdapterLayerPaint;
   /**
    * Determines whether objects are selected by mouse click.
@@ -270,14 +286,19 @@ export interface VectorAdapterOptions<
    */
   unselectOnSecondClick?: boolean;
   /**
+   * If false, the selection will be reset when the user clicks the map.
+   * @default true
+   */
+  unselectOnClick?: boolean;
+  /**
    * Make the feature selected while mouseover.
    */
   selectOnHover?: boolean;
   popup?: boolean;
   popupOnSelect?: boolean;
   popupOptions?: PopupOptions;
-  filter?: DataLayerFilter;
-  propertiesFilter?: PropertiesFilter;
+  filter?: DataLayerFilter<F, L>;
+  propertiesFilter?: PropertiesFilter<P>;
   featureIdName?: string;
   cluster?: boolean;
   /**
@@ -290,7 +311,7 @@ export interface VectorAdapterOptions<
    */
   clusterRadius?: number;
   labelOnHover?: boolean;
-  labelField?: string;
+  labelField?: keyof P extends null ? string : keyof P;
   label?: (e: LayerDefinition<F, L>) => void | string;
 
   /**
@@ -318,18 +339,18 @@ export interface VectorAdapterOptions<
    */
   selectedLayout?: any;
 
-  onClick?(opt: OnLayerClickOptions): void;
-  onSelect?(opt: OnLayerSelectOptions): void;
+  onClick?(opt: OnLayerClickOptions<F, L>): void;
+  onSelect?(opt: OnLayerSelectOptions<F, L>): void;
 
   /** Fired when the mouse enters the layer. */
-  onMouseOver?(opt: OnLayerClickOptions): void;
+  onMouseOver?(opt: OnLayerClickOptions<F, L>): void;
   /** Fired when the mouse leaves the layer. */
-  onMouseOut?(opt: OnLayerClickOptions): void;
+  onMouseOut?(opt: OnLayerClickOptions<F, L>): void;
 
   // @deprecated use {@link VectorAdapterOptions.onClick} instead
-  onLayerClick?(opt: OnLayerClickOptions): Promise<any>;
+  onLayerClick?(opt: OnLayerClickOptions<F, L>): Promise<any>;
   // @deprecated use {@link VectorAdapterOptions.onSelect} instead
-  onLayerSelect?(opt: OnLayerSelectOptions): Promise<any>;
+  onLayerSelect?(opt: OnLayerSelectOptions<F, L>): Promise<any>;
 }
 
 /**
@@ -464,7 +485,7 @@ export interface FilterOptions<
   limit?: number;
   fields?: (keyof P)[] | false | null;
   /** WKT polygon geometry */
-  intersects?: string;
+  intersects?: string | LngLatArray[] | LngLatBoundsArray;
   strategy?: 'BBOX';
   /**
    * set fields for order
@@ -530,6 +551,17 @@ export interface MainLayerAdapter<
 }
 
 /**
+ * Generic shortcut to define VectorLayerAdapter from feature
+ */
+export type FeatureLayerAdapter<
+  P extends FeatureProperties = FeatureProperties,
+  G extends Geometry = Geometry,
+  O extends VectorAdapterOptions = VectorAdapterOptions,
+  M = any,
+  L = any,
+> = VectorLayerAdapter<M, L, O, Feature<G, P>>;
+
+/**
  * Adapter for vector data display control.
  * @public
  */
@@ -538,6 +570,12 @@ export interface VectorLayerAdapter<
   L = any,
   O extends VectorAdapterOptions = VectorAdapterOptions,
   F extends Feature = Feature,
+  PROP extends Record<string, any> | null = F extends Feature
+    ? F['properties']
+    : Record<string, string>,
+  P extends Record<string, any> = PROP extends null
+    ? Record<string, any>
+    : PROP,
 > extends MainLayerAdapter<M, L, O> {
   /** True if there are selected features in the layer  */
   selected?: boolean;
@@ -603,7 +641,10 @@ export interface VectorLayerAdapter<
    * ]);
    * ```
    */
-  propertiesFilter?(filters: PropertiesFilter, options?: FilterOptions): void;
+  propertiesFilter?(
+    filters: PropertiesFilter<P>,
+    options?: FilterOptions<P>,
+  ): void;
   /**
    * Cancel the filter, return all objects to the map.
    */
@@ -622,7 +663,7 @@ export interface VectorLayerAdapter<
    * Remove layer data.
    * @param cb - Delete only those objects that match the filter.
    */
-  clearLayer?(cb?: (feature: Feature) => boolean): void | Promise<void>;
+  clearLayer?(cb?: (feature: F) => boolean): void | Promise<void>;
   /**
    * Callback function that will be called when clicking on a layer.
    * @param event - Data that is transmitted when you click on a layer.

@@ -77,7 +77,7 @@ getNgwLayerItems({
 |  [addFeatureAttachment(options)](./ngw-kit.addfeatureattachment.md) |  |
 |  [addNgwLayer(options, webMap, connector)](./ngw-kit.addngwlayer.md) |  |
 |  [createFeatureFieldFilterQueries(opt, \_queries, \_parentAllParams)](./ngw-kit.createfeaturefieldfilterqueries.md) |  |
-|  [createGeoJsonAdapter(opt)](./ngw-kit.creategeojsonadapter.md) |  |
+|  [createGeoJsonAdapter(props)](./ngw-kit.creategeojsonadapter.md) |  |
 |  [createGeoJsonFeature(item)](./ngw-kit.creategeojsonfeature.md) |  |
 |  [createIdentifyItem(opt)](./ngw-kit.createidentifyitem.md) |  |
 |  [createOnFirstShowAdapter({ webMap, adapterOptions, createAdapter, })](./ngw-kit.createonfirstshowadapter.md) |  |
@@ -108,6 +108,7 @@ getNgwLayerItems({
 |  [parseDateFromNgw(date)](./ngw-kit.parsedatefromngw.md) |  |
 |  [pixelsInMeterWidth()](./ngw-kit.pixelsinmeterwidth.md) |  |
 |  [prepareFieldsToNgw(item, resourceFields)](./ngw-kit.preparefieldstongw.md) |  |
+|  [prepareNgwFieldsToPropertiesFilter(fields)](./ngw-kit.preparengwfieldstopropertiesfilter.md) |  |
 |  [resourceIdFromLayerOptions(options, connector)](./ngw-kit.resourceidfromlayeroptions.md) |  |
 |  [sendIdentifyRequest(ev, options)](./ngw-kit.sendidentifyrequest.md) |  |
 |  [setScaleRatio(scale, lat)](./ngw-kit.setscaleratio.md) |  |
@@ -139,11 +140,10 @@ getNgwLayerItems({
 |  [NgwFeatureRequestOptions](./ngw-kit.ngwfeaturerequestoptions.md) |  |
 |  [NgwIdentifyItem](./ngw-kit.ngwidentifyitem.md) |  |
 |  [NgwKitOptions](./ngw-kit.ngwkitoptions.md) |  |
-|  [NgwLayerOptionsAdditional](./ngw-kit.ngwlayeroptionsadditional.md) |  |
+|  [NgwLayerOptions](./ngw-kit.ngwlayeroptions.md) |  |
 |  [NgwWebmapAdapterOptions](./ngw-kit.ngwwebmapadapteroptions.md) |  |
 |  [NgwWebmapLayerAdapterEvents](./ngw-kit.ngwwebmaplayeradapterevents.md) |  |
 |  [ResourceAdapter](./ngw-kit.resourceadapter.md) |  |
-|  [ResourceNgwLayerOptions](./ngw-kit.resourcengwlayeroptions.md) |  |
 |  [TreeGroup](./ngw-kit.treegroup.md) |  |
 |  [TreeItem](./ngw-kit.treeitem.md) |  |
 |  [TreeLayer](./ngw-kit.treelayer.md) |  |
@@ -168,8 +168,8 @@ getNgwLayerItems({
 |  [GetClassAdapterCallback](./ngw-kit.getclassadaptercallback.md) |  |
 |  [NgwIdentify](./ngw-kit.ngwidentify.md) |  |
 |  [NgwLayerAdapterType](./ngw-kit.ngwlayeradaptertype.md) |  |
-|  [NgwLayerOptions](./ngw-kit.ngwlayeroptions.md) |  |
 |  [ResourceIdDef](./ngw-kit.resourceiddef.md) |  |
+|  [ResourceNgwLayerOptions](./ngw-kit.resourcengwlayeroptions.md) |  |
 |  [TileNoData](./ngw-kit.tilenodata.md) |  |
 |  [VectorResourceAdapter](./ngw-kit.vectorresourceadapter.md) |  |
 

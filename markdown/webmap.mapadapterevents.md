@@ -4,7 +4,6 @@
 
 ## MapAdapterEvents interface
 
-
 <b>Signature:</b>
 
 ```typescript
