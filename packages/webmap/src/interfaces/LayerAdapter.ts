@@ -1,10 +1,9 @@
 import type { GeoJsonObject, Feature, Geometry } from 'geojson';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type { Paint } from '@nextgis/paint';
-import type { LngLatArray, Type } from '@nextgis/utils';
+import type { FeatureProperties, LngLatArray, Type } from '@nextgis/utils';
 import type { LngLatBoundsArray } from './BaseTypes';
 import type { MapClickEvent } from './MapAdapter';
-import { FeatureProperties } from '../../../ngw-connector/src';
 
 export type AdapterConstructor = () => Promise<Type<LayerAdapter> | any>;
 
@@ -21,7 +20,10 @@ export type OnLayerSelectType = 'api' | 'click' | 'hover';
 /**
  * @public
  */
-export interface OnLayerSelectOptions<F extends Feature = Feature, L = LayerAdapter> {
+export interface OnLayerSelectOptions<
+  F extends Feature = Feature,
+  L = LayerAdapter,
+> {
   layer: L;
   features?: F[] | undefined;
   type: OnLayerSelectType;
@@ -32,7 +34,10 @@ export type OnLayerMouseOptions = OnLayerClickOptions;
 /**
  * @public
  */
-export interface OnLayerClickOptions<F extends Feature = Feature, L = LayerAdapter>  {
+export interface OnLayerClickOptions<
+  F extends Feature = Feature,
+  L = LayerAdapter,
+> {
   layer: L;
   event: MapClickEvent;
   source: any;
@@ -168,7 +173,8 @@ export type VectorAdapterLayerType = 'polygon' | 'point' | 'line';
 
 export type PopupOnCloseFunction = (args: LayerDefinition) => void;
 
-export interface CreatePopupContentProps extends LayerDefinition {
+export interface CreatePopupContentProps<F extends Feature = Feature, L = any>
+  extends LayerDefinition<F, L> {
   type: OnLayerSelectType;
   close: () => void;
   onClose: (cb: PopupOnCloseFunction) => void;
@@ -177,7 +183,7 @@ export interface CreatePopupContentProps extends LayerDefinition {
 /**
  * @public
  */
-export interface PopupOptions {
+export interface PopupOptions<F extends Feature = Feature, L = any> {
   minWidth?: number;
   maxWidth?: number;
   autoPan?: boolean;
@@ -189,7 +195,7 @@ export interface PopupOptions {
    */
   unselectOnClose?: boolean;
   createPopupContent?: (
-    props: CreatePopupContentProps,
+    props: CreatePopupContentProps<F, L>,
   ) =>
     | HTMLElement
     | string
@@ -296,7 +302,7 @@ export interface VectorAdapterOptions<
   selectOnHover?: boolean;
   popup?: boolean;
   popupOnSelect?: boolean;
-  popupOptions?: PopupOptions;
+  popupOptions?: PopupOptions<F, L>;
   filter?: DataLayerFilter<F, L>;
   propertiesFilter?: PropertiesFilter<P>;
   featureIdName?: string;

@@ -26,40 +26,39 @@ import { getIcon } from '@nextgis/icons';
 import { appendNgwResources } from './utils/appendNgwResources';
 import { prepareWebMapOptions } from './utils/prepareWebMapOptions';
 
-import type { JsonMap } from '@nextgis/utils';
+import type { JsonMap, FeatureProperties } from '@nextgis/utils';
 import type {
+  FeatureItem,
+  LayerFeature,
   ResourceItem,
   FeatureLayersIdentify,
-  FeatureItem,
   FeatureLayersIdentifyItems,
-  LayerFeature,
-  FeatureProperties,
 } from '@nextgis/ngw-connector';
 import type {
+  OnLayerClickOptions,
   ControlPosition,
-  MapControls,
-  WebMapEvents,
-  LayerDef,
+  FilterOptions,
   MapClickEvent,
   LayerAdapter,
-  FilterOptions,
-  OnLayerClickOptions,
+  WebMapEvents,
+  MapControls,
   FitOptions,
+  LayerDef,
 } from '@nextgis/webmap';
 import type {
-  ResourceAdapter,
-  NgwWebmapItem,
   NgwIdentify,
+  NgwWebmapItem,
+  ResourceAdapter,
+  FetchNgwItemsOptions,
   NgwFeatureItemResponse,
   NgwFeatureRequestOptions,
-  FetchNgwItemsOptions,
 } from '@nextgis/ngw-kit';
+import type { Geometry, Feature, FeatureCollection } from 'geojson';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type { QmsAdapterOptions } from '@nextgis/qms-kit';
 import type { NgwLayerOptions } from '@nextgis/ngw-kit';
-import type { Geometry, Feature, FeatureCollection } from 'geojson';
 import type { NgwMapOptions, NgwMapEvents, NgwLayers } from './interfaces';
-import { FetchNgwItemOptions } from '@nextgis/ngw-kit';
+import type { FetchNgwItemOptions } from '@nextgis/ngw-kit';
 
 type PromiseGroup = 'select' | 'identify';
 

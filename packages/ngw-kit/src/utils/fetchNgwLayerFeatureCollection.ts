@@ -1,8 +1,8 @@
 import { fetchNgwLayerFeatures } from './fetchNgwLayerFeatures';
 
 import type { Geometry, FeatureCollection } from 'geojson';
-import { FeatureProperties } from '@nextgis/ngw-connector';
 import type CancelablePromise from '@nextgis/cancelable-promise';
+import type { FeatureProperties } from '@nextgis/utils';
 import type { FetchNgwItemsOptions } from '../interfaces';
 
 export function fetchNgwLayerFeatureCollection<
