@@ -4,11 +4,12 @@ import {
   createFeatureFieldFilterQueries,
   fetchNgwLayerItemsRequest,
 } from './featureLayerUtils';
+import { prepareNgwFieldsToPropertiesFilter } from './prepareNgwFieldsToPropertiesFilter';
 
 import type { Geometry } from 'geojson';
-import type { FeatureItem, FeatureProperties } from '@nextgis/ngw-connector';
+import type { FeatureItem } from '@nextgis/ngw-connector';
 import type { FetchNgwItemsOptions } from '../interfaces';
-import { prepareNgwFieldsToPropertiesFilter } from './prepareNgwFieldsToPropertiesFilter';
+import type { FeatureProperties } from '@nextgis/utils';
 
 export function fetchNgwLayerItems<
   G extends Geometry = Geometry,

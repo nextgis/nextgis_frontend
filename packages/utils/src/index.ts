@@ -24,6 +24,7 @@ export * from './typeHelpers';
 export * from './url';
 export * from './Clipboard';
 export * from './tileJson';
+export * from './interfaces';
 /**
  * Given an array of member function names as strings, replace all of them
  * with bound versions that will always refer to `context` as `this`. This
