@@ -86,7 +86,7 @@ export const operationsAliases: {
   },
 };
 
-export function checkIfPropertyFilter(
+export function isPropertyFilter(
   filter: PropertyFilter | PropertiesFilter | string,
 ): filter is PropertyFilter {
   const pf = filter as PropertyFilter;
@@ -98,6 +98,13 @@ export function checkIfPropertyFilter(
     return true;
   }
   return false;
+}
+
+/** @deprecated use {@link isPropertyFilter} instead */
+export function checkIfPropertyFilter(
+  filter: PropertyFilter | PropertiesFilter | string,
+): filter is PropertyFilter {
+  return isPropertyFilter(filter);
 }
 
 export function featureFilter(

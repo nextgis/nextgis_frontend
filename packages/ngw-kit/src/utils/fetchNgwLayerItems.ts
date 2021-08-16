@@ -21,10 +21,12 @@ export function fetchNgwLayerItems<
       filters,
     }).then((data) => {
       // Additional client-side filter check
-      return data.filter((y) => {
+      data.filter((y) => {
         const fields = prepareNgwFieldsToPropertiesFilter({ ...y.fields });
-        return propertiesFilter(fields, filters);
+        const result = propertiesFilter(fields, filters);
+        return result;
       });
+      return data;
     }) as CancelablePromise<FeatureItem<P, G>[]>;
   } else {
     return fetchNgwLayerItemsRequest<G, P>(options);
