@@ -47,13 +47,17 @@ interface PositionMem {
   center: LngLatArray | undefined;
   zoom: number | undefined;
 }
-
+export type ForEachFeatureAtPixelOrderedCallback = [
+  order: number,
+  cb: ForEachFeatureAtPixelCallback,
+];
+export type MapClickEvent = (evt: MapBrowserPointerEvent) => void;
 export type ForEachFeatureAtPixelCallback = (
   pixel: Pixel,
   evt: MapBrowserPointerEvent,
   type: MouseEventType,
-) => void;
-
+) => boolean;
+export type UnselectCb = () => void;
 export class OlMapAdapter implements MapAdapter<Map, Layer> {
   static layerAdapters = {
     IMAGE: ImageAdapter,
@@ -81,8 +85,9 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
   private displayProjection = 'EPSG:3857';
   private lonlatProjection = 'EPSG:4326';
 
-  private _mapClickEvents: Array<(evt: MapBrowserPointerEvent) => void> = [];
-  private _forEachFeatureAtPixel: ForEachFeatureAtPixelCallback[] = [];
+  private _mapClickEvents: MapClickEvent[] = [];
+  private _forEachFeatureAtPixel: ForEachFeatureAtPixelOrderedCallback[] = [];
+  private _unselectCb: UnselectCb[] = [];
   private _olView?: View;
   private _panelControl?: PanelControl;
   private _isLoaded = false;
@@ -118,6 +123,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
 
     this.map.set('_mapClickEvents', this._mapClickEvents);
     this.map.set('_forEachFeatureAtPixel', this._forEachFeatureAtPixel);
+    this.map.set('_addUnselectCb', (cb: UnselectCb) => this._addUnselectCb(cb));
 
     this.emitter.emit('create', this);
     this._olView = this.map.getView();
@@ -279,7 +285,6 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
   onMapClick(evt: MapBrowserPointerEvent): void {
     const emitData = convertMapClickEvent(evt);
     this.emitter.emit('preclick', emitData);
-
     this._mapClickEvents.forEach((x) => {
       x(evt);
     });
@@ -295,9 +300,15 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
   ) {
     if (this._forEachFeatureAtPixel.length) {
       if (this.map) {
-        this._forEachFeatureAtPixel.forEach((x) => {
-          x(evt.pixel, evt, type);
-        });
+        // select only top feature
+        for (const e of this._forEachFeatureAtPixel.sort(
+          (a, b) => b[0] - a[0],
+        )) {
+          const stop = e[1](evt.pixel, evt, type);
+          if (stop) {
+            break;
+          }
+        }
       }
     }
   }
@@ -363,6 +374,14 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
         });
       }
     }
+  }
+
+  private _addUnselectCb(cb: UnselectCb) {
+    for (const p of this._unselectCb) {
+      p();
+    }
+    this._unselectCb.length = 0;
+    this._unselectCb.push(cb);
   }
 
   private _emitPositionChangeEvent(eventName: 'movestart' | 'moveend') {

@@ -30,9 +30,9 @@ export const typeAlias: { [x: string]: VectorAdapterLayerType } = {
 /**
  * @internal
  */
-export function updateGeoJsonAdapterOptions(
-  opt: GeoJsonAdapterOptions,
-): GeoJsonAdapterOptions {
+export function updateGeoJsonAdapterOptions<
+  O extends GeoJsonAdapterOptions = GeoJsonAdapterOptions,
+>(opt: O): O {
   if (opt.data) {
     const geomType = typeAlias[detectGeometryType(opt.data)];
     const p = opt.paint;

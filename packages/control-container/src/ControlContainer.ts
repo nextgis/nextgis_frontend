@@ -25,8 +25,6 @@ export class ControlContainer {
     'bottom-right': null,
     'top-left': null,
     'top-right': null,
-    'left': null,
-    'right': null,
   };
 
   constructor(opt: ControlContainerOptions = {}) {
@@ -109,8 +107,6 @@ export class ControlContainer {
       (this.addClass ? ' ' + this.addClass : '');
 
     const positions: ControlPosition[] = [
-      'left',
-      'right',
       'top-right',
       'top-left',
       'bottom-right',
