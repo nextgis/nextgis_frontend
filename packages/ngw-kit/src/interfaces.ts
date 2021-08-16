@@ -1,30 +1,29 @@
 import type { Feature, Geometry, Polygon } from 'geojson';
 import type {
   WebMap,
-  AdapterOptions,
-  LayerAdaptersOptions,
   WebMapEvents,
+  LayerAdapter,
+  FilterOptions,
   MapClickEvent,
+  AdapterOptions,
+  MainLayerAdapter,
   LngLatBoundsArray,
   VectorLayerAdapter,
-  GeoJsonAdapterOptions,
   OnLayerClickOptions,
-  LayerAdapter,
-  MainLayerAdapter,
-  FilterOptions,
   RasterAdapterOptions,
+  LayerAdaptersOptions,
+  GeoJsonAdapterOptions,
 } from '@nextgis/webmap';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type NgwConnector from '@nextgis/ngw-connector';
 import type {
+  ResourceDefinition,
   ResourceItem,
   LayerFeature,
   FeatureItem,
-  FeatureProperties,
-  ResourceDefinition,
 } from '@nextgis/ngw-connector';
 import type { FeatureLayersIdentify } from '@nextgis/ngw-connector';
-import type { Type } from '@nextgis/utils';
+import type { FeatureProperties, Type } from '@nextgis/utils';
 import type CancelablePromise from '@nextgis/cancelable-promise';
 
 declare module '@nextgis/webmap' {
@@ -215,11 +214,14 @@ export interface NgwIdentifyItem {
 export type NgwIdentify = FeatureLayersIdentify &
   (NgwVectorIdentify | NgwRasterIdentify);
 
-export interface GetIdentifyGeoJsonOptions {
+export interface GetIdentifyGeoJsonOptions<
+  G extends Geometry = Geometry,
+  P extends FeatureProperties = FeatureProperties,
+> {
   identify: NgwIdentify;
   connector: NgwConnector;
   multiple?: boolean;
-  requestOptions?: NgwFeatureRequestOptions;
+  requestOptions?: NgwFeatureRequestOptions<P>;
 }
 
 export interface GetClassAdapterOptions {

@@ -14,10 +14,9 @@ import {
 import type { Geometry, Feature } from 'geojson';
 import type {
   FeatureItem,
-  FeatureProperties,
   RequestItemAdditionalParams,
 } from '@nextgis/ngw-connector';
-import type { LngLatArray } from '@nextgis/utils';
+import type { LngLatArray, FeatureProperties } from '@nextgis/utils';
 import type {
   FeatureRequestParams,
   FetchNgwItemsOptions,
