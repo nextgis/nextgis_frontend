@@ -5,27 +5,27 @@ import {
   getCirclePolygonCoordinates,
   deprecatedMapClick,
 } from '@nextgis/utils';
+import { IdentifyItem } from '../IdentifyItem';
 import { createGeoJsonFeature } from './featureLayerUtils';
 import { fetchNgwLayerFeature } from './fetchNgwLayerFeature';
 import { fetchNgwLayerItem } from './fetchNgwLayerItem';
 
 import type { Geometry, Feature } from 'geojson';
 import type { MapClickEvent } from '@nextgis/webmap';
+import type { FeatureProperties } from '@nextgis/utils';
 import type {
   LayerFeature,
   FeatureLayersIdentify,
-  FeatureProperties,
 } from '@nextgis/ngw-connector';
 import type {
-  GetIdentifyGeoJsonOptions,
-  NgwIdentify,
-  NgwIdentifyItem,
-  IdentifyRequestOptions,
   FeatureIdentifyRequestOptions,
+  GetIdentifyGeoJsonOptions,
+  IdentifyRequestOptions,
   NgwFeatureItemResponse,
   IdentifyItemOptions,
+  NgwIdentifyItem,
+  NgwIdentify,
 } from '../interfaces';
-import { IdentifyItem } from '../IdentifyItem';
 
 export function getIdentifyItems(
   identify: NgwIdentify,
@@ -109,13 +109,13 @@ export function fetchIdentifyItem<
   G extends Geometry = Geometry,
   P extends FeatureProperties = FeatureProperties,
 >(
-  options: GetIdentifyGeoJsonOptions,
+  options: GetIdentifyGeoJsonOptions<G, P>,
 ): CancelablePromise<NgwFeatureItemResponse<P, G> | undefined> {
   const { connector, identify } = options;
 
   const params = getIdentifyItems(identify);
   if (params && params.length) {
-    return fetchNgwLayerItem({
+    return fetchNgwLayerItem<G, P>({
       connector,
       ...options.requestOptions,
       ...params[0],
@@ -139,7 +139,6 @@ export function getIdentifyGeoJson<
 export function sendIdentifyRequest(
   ev: MapClickEvent,
   options: IdentifyRequestOptions,
-  // webMap: WebMap
 ): CancelablePromise<FeatureLayersIdentify> {
   deprecatedMapClick(ev);
   const [lng, lat] = ev.lngLat;

@@ -4,8 +4,8 @@ import { propertiesFilter } from '@nextgis/properties-filter';
 import { updateGeoJsonAdapterOptions } from './utils/updateGeoJsonAdapterOptions';
 import { WebMapMain } from './WebMapMain';
 
-import type { Feature, GeoJsonObject } from 'geojson';
-import { defined, TileJson, Type } from '@nextgis/utils';
+import type { Feature, GeoJsonObject, Geometry } from 'geojson';
+import { defined, FeatureProperties, TileJson, Type } from '@nextgis/utils';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 
 import type {
@@ -24,6 +24,7 @@ import type {
   OnLayerSelectOptions,
   GeoJsonAdapterOptions,
   LayerAdapterDefinition,
+  FeatureLayerAdapter,
 } from './interfaces/LayerAdapter';
 import type { LayerDef } from './interfaces/BaseTypes';
 import type {
@@ -446,6 +447,19 @@ export class WebMapLayers<
     }
     opt.paint = opt.paint || {};
     return this.addLayer(adapter || 'GEOJSON', opt);
+  }
+
+  /** Shortcut for {@link WebMapLayers.addGeoJsonLayer} to initialize adapter with generic types for working in typescript */
+  addFeatureLayer<
+    P extends FeatureProperties = FeatureProperties,
+    G extends Geometry = Geometry,
+    O extends GeoJsonAdapterOptions<Feature<G, P>> = GeoJsonAdapterOptions<
+      Feature<G, P>
+    >,
+  >(options = {} as O): Promise<FeatureLayerAdapter<P, G>> {
+    return this.addGeoJsonLayer<'GEOJSON', O>(options) as Promise<
+      FeatureLayerAdapter<P, G>
+    >;
   }
 
   /**

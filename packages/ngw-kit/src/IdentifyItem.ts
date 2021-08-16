@@ -5,12 +5,12 @@ import type { NgwFeatureItemResponse } from '.';
 import type { GeoJsonObject, Geometry, Feature } from 'geojson';
 import type {
   FeatureItemExtensions,
-  FeatureProperties,
   FeatureResource,
   LayerFeature,
   VectorLayerResourceItem,
 } from '@nextgis/ngw-connector';
 import type NgwConnector from '@nextgis/ngw-connector';
+import type { FeatureProperties } from '@nextgis/utils';
 
 export class IdentifyItem<F = FeatureProperties, G extends Geometry = Geometry>
   implements LayerFeature
