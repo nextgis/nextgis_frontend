@@ -285,19 +285,19 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
   onMapClick(evt: MapBrowserPointerEvent): void {
     const emitData = convertMapClickEvent(evt);
     this.emitter.emit('preclick', emitData);
-    this._mapClickEvents.forEach((x) => {
-      x(evt);
-    });
-
-    this._callEachFeatureAtPixel(evt, 'click');
-
+    const onFeature = this._callEachFeatureAtPixel(evt, 'click');
+    if (!onFeature) {
+      this._mapClickEvents.forEach((x) => {
+        x(evt);
+      });
+    }
     this.emitter.emit('click', emitData);
   }
 
   private _callEachFeatureAtPixel(
     evt: MapBrowserPointerEvent,
     type: MouseEventType,
-  ) {
+  ): boolean {
     if (this._forEachFeatureAtPixel.length) {
       if (this.map) {
         // select only top feature
@@ -306,11 +306,12 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
         )) {
           const stop = e[1](evt.pixel, evt, type);
           if (stop) {
-            break;
+            return !!'on feature';
           }
         }
       }
     }
+    return false;
   }
 
   // requestGeomString(pixel: { top: number, left: number }, pixelRadius = 5) {
