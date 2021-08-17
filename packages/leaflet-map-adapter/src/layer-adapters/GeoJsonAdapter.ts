@@ -572,15 +572,13 @@ export class GeoJsonAdapter
     DomEvent.stopPropagation(e);
     const layer = e.target as Layer;
     const def: LayerDef = { layer, feature: (layer as any).feature };
-    let isSelected = !!this._selectedLayers.find((x) => x.layer === layer);
+    const isSelected = this._selectedLayers.find((x) => x.layer === layer);
     if (isSelected) {
       if (this.options && this.options.unselectOnSecondClick) {
-        this._unSelectLayer(def);
-        isSelected = false;
+        this._unSelectLayer(isSelected);
       }
     } else {
       this._selectLayer(def, 'click', e.latlng);
-      isSelected = true;
     }
   }
 
