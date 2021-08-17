@@ -5,7 +5,11 @@ interface OnLayerClickLayer {
   _onLayerClick: (
     e: maplibregl.MapEventType['click'] & maplibregl.EventData,
   ) => any;
-  options: { order?: number; unselectOnClick?: boolean };
+  options: {
+    order?: number;
+    unselectOnClick?: boolean;
+    unselectOnSecondClick?: boolean;
+  };
 }
 
 declare namespace maplibregl {
