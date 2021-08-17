@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/nextgis/nextgisweb_frontend/compare/v1.3.0...v1.4.0) (2021-08-17)
+
+
+### Bug Fixes
+
+* **cesium-map-adapter:** update geojson adapter ([a964c45](https://github.com/nextgis/nextgisweb_frontend/commit/a964c453b3eee87341e6f24f4df29843f41d9fb6))
+* **item:** protect tree children arrays from modiffy ([8cdf728](https://github.com/nextgis/nextgisweb_frontend/commit/8cdf7281c0efbea522e2663846cfd396d65d6c5b))
+* **leaflet-map-adapter:** repain unSelectOnSecondClick ([c2c0cab](https://github.com/nextgis/nextgisweb_frontend/commit/c2c0cab0302dc80fc776b9f27c778f18de148c77))
+* **mapbox-gl-js:** fix for babel build ([099b024](https://github.com/nextgis/nextgisweb_frontend/commit/099b02413c142f192e5d69beb4a7f6462b17990e))
+* **mapboxgl-map-adapter:** disable unselect on label hover out ([8b330ec](https://github.com/nextgis/nextgisweb_frontend/commit/8b330ec3cd63b3dea4c2b110d5530fe29b512bd6))
+* **mapboxgl-map-adapter:** fix onSelect event ([c5c5369](https://github.com/nextgis/nextgisweb_frontend/commit/c5c5369767046ca1bac52b1ce21a598f28b8c9e5))
+* **mapboxgl-map-adapter:** geojson addlayer protected methods ([cd97194](https://github.com/nextgis/nextgisweb_frontend/commit/cd971940fea380ee8b25e4f7684c207ad2382aed))
+* **mapboxgl-map-adapter:** repair unselectOnSecondClick ([c484589](https://github.com/nextgis/nextgisweb_frontend/commit/c4845897458d9da73a37ecd57879d038103f3f57))
+* **mapboxgl-map-adapter:** select features by propertiesfilter improve ([ba0cf64](https://github.com/nextgis/nextgisweb_frontend/commit/ba0cf64c46611051fa0258525b9342d1a7832b65))
+* **ol-map-adapter:** repair unselect on second click ([a85d87c](https://github.com/nextgis/nextgisweb_frontend/commit/a85d87cbf7ad8f19caa8212d532d51a3dd886bd6))
+
+
+### Features
+
+* **dom:** add new options o loadScript function ([0b62145](https://github.com/nextgis/nextgisweb_frontend/commit/0b62145ae19923956a267b87e01fe4200dff222e))
+* **mapboxgl-map-adapter:** implement labelOnHover option ([b0f7507](https://github.com/nextgis/nextgisweb_frontend/commit/b0f75075fdbbc3d7a8cceb6ff329a1e629ac169e))
+* **mapboxgl-map-adapter:** label on hover improve ([6e946ff](https://github.com/nextgis/nextgisweb_frontend/commit/6e946ff16a04c7ee45fd06f565f6207619f8ea70))
+* **webmap:** add WebMapLayers.unSelectLayers method ([2e479ce](https://github.com/nextgis/nextgisweb_frontend/commit/2e479ceb547c99f2e1c0cc30c08c435e61298b6d))
+
+
+
+
+
 # [1.3.0](https://github.com/nextgis/nextgisweb_frontend/compare/v1.2.8...v1.3.0) (2021-08-06)
 
 

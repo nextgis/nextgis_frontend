@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/nextgis/nextgis_frontend/compare/v1.3.0...v1.4.0) (2021-08-17)
+
+
+### Bug Fixes
+
+* **mapboxgl-map-adapter:** disable unselect on label hover out ([8b330ec](https://github.com/nextgis/nextgis_frontend/commit/8b330ec3cd63b3dea4c2b110d5530fe29b512bd6))
+
+
+### Features
+
+* **dom:** add new options o loadScript function ([0b62145](https://github.com/nextgis/nextgis_frontend/commit/0b62145ae19923956a267b87e01fe4200dff222e))
+
+
+
+
+
 ## [1.2.2](https://github.com/nextgis/nextgis_frontend/compare/v1.2.1...v1.2.2) (2021-07-16)
 
 **Note:** Version bump only for package @nextgis/dom
