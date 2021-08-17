@@ -25,6 +25,7 @@ Some universal examples:
 - [GeoJSON data](https://code.nextgis.com/demo-examples-geojson-layer)
 - [Toggle button control](https://code.nextgis.com/demo-examples-toggle-control)
 - [Vector selection](https://code.nextgis.com/demo-examples-vector-selection)
+- [Vector popup](https://code.nextgis.com/demo-examples-vector-popup)
 - [Web map feature identification](https://code.nextgis.com/demo-examples-webmap-identification-multiply)
 - [Web map bookmarks](https://code.nextgis.com/demo-examples-ngw-webmap-bookmarks)
 
@@ -89,6 +90,7 @@ Map-free tools for common purpose
 See how nextgis frontend libraries are used in real projects
 
 - [webpack-template](https://github.com/rendrom/nextgis-frontend-webpack-template) – Webpack based JavaScript template project.
+- [walrus-ais](https://github.com/nextgis/walrus-ais) – NgwMapbox map with React.
 - [wwf-oilspill](https://github.com/nextgis/wwf-oilspill) – Emergency situations with oil spills ([LIVE](http://nextgis.ru/demo/oilspill/build/)), minimal dependency typescript project with Leaflet.
 - [oralhistory](https://github.com/nextgis/oralhistory) ([LIVE](https://nextgis.ru/demo/oralhistory/dist/)) – Typescript, Vuetify, Mapbox-gl-js and properties filter usage example.
 - [clear_horizon_frontend](https://github.com/nextgis/clear_horizon_frontend) – Clear horizon frontend. NGW auth system, leaflet typescript based webpack project.
