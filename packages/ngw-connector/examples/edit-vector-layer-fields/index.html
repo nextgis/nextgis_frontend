@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Edit vector layer fields</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <script src="../../lib/ngw-connector.global.js"></script>
+  </head>
+
+  <body>
+    <div id="fields-block"></div>
+    <script>
+      const fieldsBlock = document.getElementById('fields-block');
+      const vectorLayerKeyName = 'edit-resource-fields-example-layer';
+
+      const connector = new NgwConnector({
+        baseUrl: 'https://sandbox.nextgis.com',
+        auth: {
+          login: 'administrator',
+          password: 'demodemo',
+        },
+      });
+
+      update();
+
+      function update() {
+        connector.resources.cache.clean();
+        // get or create test resource
+        connector.getResource(vectorLayerKeyName).then((resource) => {
+          if (resource) {
+            drawFieldsBlock(resource);
+          } else {
+            createVectorResource().then(() => {
+              update();
+            });
+          }
+        });
+      }
+
+      function createVectorResource() {
+        return connector.post('resource.collection', {
+          data: {
+            resource: {
+              cls: 'vector_layer',
+              parent: {
+                id: 0,
+              },
+              display_name: 'NGF - Edit resource fields example layer',
+              keyname: vectorLayerKeyName,
+              description: null,
+            },
+            resmeta: {
+              items: {},
+            },
+            vector_layer: {
+              srs: { id: 4326 },
+              geometry_type: 'POINT',
+              fields: [],
+            },
+          },
+        });
+      }
+
+      function drawFieldsBlock(resource) {
+        fieldsBlock.innerHTML = '';
+        const fields = resource.feature_layer.fields;
+        for (const f of fields) {
+          fieldsBlock.appendChild(createFieldInput(f).element);
+        }
+        const newField = createFieldInput();
+        fieldsBlock.appendChild(newField.element);
+      }
+
+      function createFieldInput(field) {
+        const element = document.createElement('div');
+        const keyname = document.createElement('input');
+        keyname.placeholder = 'keyname';
+        element.appendChild(keyname);
+        const displayName = document.createElement('input');
+        displayName.placeholder = 'display_name';
+        element.appendChild(displayName);
+        const dataType = document.createElement('select');
+        element.appendChild(dataType);
+        ['STRING', 'REAL'].forEach((x) => {
+          const option = document.createElement('option');
+          option.innerHTML = x;
+          option.value = x;
+          dataType.appendChild(option);
+        });
+
+        if (field) {
+          dataType.disabled = true;
+          keyname.value = field.keyname;
+          displayName.value = field.display_name;
+          dataType.value = field.datatype;
+          const removeBtn = document.createElement('button');
+          removeBtn.innerHTML = 'удалить';
+          element.appendChild(removeBtn);
+          removeBtn.onclick = () => {
+            connector
+              .updateResource(vectorLayerKeyName, {
+                feature_layer: {
+                  fields: [{ id: field.id, delete: true }],
+                },
+              })
+              .then(() => {
+                update();
+              });
+          };
+          const updateBtn = document.createElement('button');
+          updateBtn.innerHTML = 'обновить';
+          element.appendChild(updateBtn);
+          updateBtn.onclick = () => {
+            connector
+              .updateResource(vectorLayerKeyName, {
+                feature_layer: {
+                  fields: [{ ...field, ...values() }],
+                },
+              })
+              .then(() => {
+                update();
+              });
+          };
+        } else {
+          const addBtn = document.createElement('button');
+          addBtn.innerHTML = 'добавить';
+          element.appendChild(addBtn);
+          addBtn.onclick = () => {
+            connector
+              .updateResource(vectorLayerKeyName, {
+                feature_layer: {
+                  fields: [values()],
+                },
+              })
+              .then(() => {
+                update();
+              });
+          };
+        }
+        const values = () => {
+          return {
+            keyname: keyname.value,
+            display_name: displayName.value || keyname.value,
+            datatype: dataType.value,
+          };
+        };
+        return { element, values };
+      }
+    </script>
+  </body>
+</html>
