@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/nextgis/nextgis_frontend/compare/v1.3.0...v1.4.0) (2021-08-17)
+
+
+### Bug Fixes
+
+* **ol-map-adapter:** repair unselect on second click ([a85d87c](https://github.com/nextgis/nextgis_frontend/commit/a85d87cbf7ad8f19caa8212d532d51a3dd886bd6))
+
+
+
+
+
 # [1.3.0](https://github.com/nextgis/nextgis_frontend/compare/v1.2.8...v1.3.0) (2021-08-06)
 
 
