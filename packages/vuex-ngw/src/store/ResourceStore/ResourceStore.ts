@@ -8,16 +8,16 @@ import {
 import NgwConnector from '@nextgis/ngw-connector';
 import Cache from '@nextgis/cache';
 import CancelablePromise from '@nextgis/cancelable-promise';
+import { defined } from '@nextgis/utils';
 
 import type { Geometry, Feature } from 'geojson';
-import type { FeatureProperties } from '@nextgis/ngw-connector';
 import type {
   ResourceItemDatatype,
   ResourceStoreItem,
   FeatureLayerField,
   FeatureItem,
 } from '@nextgis/ngw-connector';
-import { defined } from '@nextgis/utils';
+import type { FeatureProperties } from '@nextgis/utils';
 import type { Type } from '@nextgis/utils';
 import type { ForeignResource, PatchOptions } from '../../interfaces';
 
