@@ -1,0 +1,4 @@
+{
+  "name": "Edit vector layer fields",
+  "description": "Use PUT request to create update or delete NGW vector resource field"
+}
