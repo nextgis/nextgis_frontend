@@ -7,9 +7,9 @@
 <b>Signature:</b>
 
 ```typescript
-export declare type PropertiesPaint = [
+export declare type PropertiesPaint<P extends Properties = Properties> = [
     VectorAdapterLayerPaint | undefined,
-    ...PropertyPaint[]
+    ...PropertyPaint<P>[]
 ];
 ```
 <b>References:</b> [VectorAdapterLayerPaint](./paint.vectoradapterlayerpaint.md)<!-- -->, [PropertyPaint](./paint.propertypaint.md)

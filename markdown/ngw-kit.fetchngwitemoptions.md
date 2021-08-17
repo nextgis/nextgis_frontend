@@ -9,5 +9,5 @@
 ```typescript
 export declare type FetchNgwItemOptions<P extends FeatureProperties = FeatureProperties> = GetNgwItemOptions & NgwFeatureRequestOptions<P>;
 ```
-<b>References:</b> [FeatureProperties](./ngw-connector.featureproperties.md)<!-- -->, [GetNgwItemOptions](./ngw-kit.getngwitemoptions.md)<!-- -->, [NgwFeatureRequestOptions](./ngw-kit.ngwfeaturerequestoptions.md)
+<b>References:</b> [FeatureProperties](./utils.featureproperties.md)<!-- -->, [GetNgwItemOptions](./ngw-kit.getngwitemoptions.md)<!-- -->, [NgwFeatureRequestOptions](./ngw-kit.ngwfeaturerequestoptions.md)
 

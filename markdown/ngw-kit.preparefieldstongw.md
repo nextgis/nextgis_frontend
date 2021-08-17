@@ -15,7 +15,7 @@ export declare function prepareFieldsToNgw<T extends FeatureProperties = Feature
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  item | T |  |
-|  resourceFields | Pick&lt;[FeatureProperties](./ngw-connector.featureproperties.md)<!-- -->, 'keyname' \| 'datatype'&gt;\[\] |  |
+|  resourceFields | Pick&lt;[FeatureProperties](./utils.featureproperties.md)<!-- -->, 'keyname' \| 'datatype'&gt;\[\] |  |
 
 <b>Returns:</b>
 

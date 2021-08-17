@@ -8,7 +8,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface PopupOptions 
+export interface PopupOptions<F extends Feature = Feature, L = any> 
 ```
 
 ## Properties
@@ -17,7 +17,7 @@ export interface PopupOptions
 |  --- | --- | --- |
 |  [autoPan?](./webmap.popupoptions.autopan.md) | boolean | <i>(Optional)</i> |
 |  [closeButton?](./webmap.popupoptions.closebutton.md) | boolean | <i>(Optional)</i> |
-|  [createPopupContent?](./webmap.popupoptions.createpopupcontent.md) | (props: [CreatePopupContentProps](./webmap.createpopupcontentprops.md)<!-- -->) =&gt; HTMLElement \| string \| undefined \| Promise&lt;HTMLElement \| string \| undefined&gt; | <i>(Optional)</i> |
+|  [createPopupContent?](./webmap.popupoptions.createpopupcontent.md) | (props: [CreatePopupContentProps](./webmap.createpopupcontentprops.md)<!-- -->&lt;F, L&gt;) =&gt; HTMLElement \| string \| undefined \| Promise&lt;HTMLElement \| string \| undefined&gt; | <i>(Optional)</i> |
 |  [fromProperties?](./webmap.popupoptions.fromproperties.md) | boolean | <i>(Optional)</i> |
 |  [maxWidth?](./webmap.popupoptions.maxwidth.md) | number | <i>(Optional)</i> |
 |  [minWidth?](./webmap.popupoptions.minwidth.md) | number | <i>(Optional)</i> |

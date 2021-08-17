@@ -8,7 +8,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface OnLayerClickOptions 
+export interface OnLayerClickOptions<F extends Feature = Feature, L = LayerAdapter> 
 ```
 
 ## Properties
@@ -16,8 +16,8 @@ export interface OnLayerClickOptions
 |  Property | Type | Description |
 |  --- | --- | --- |
 |  [event](./webmap.onlayerclickoptions.event.md) | [MapClickEvent](./webmap.mapclickevent.md) |  |
-|  [feature?](./webmap.onlayerclickoptions.feature.md) | Feature | <i>(Optional)</i> |
-|  [layer](./webmap.onlayerclickoptions.layer.md) | [LayerAdapter](./webmap.layeradapter.md) |  |
+|  [feature?](./webmap.onlayerclickoptions.feature.md) | F | <i>(Optional)</i> |
+|  [layer](./webmap.onlayerclickoptions.layer.md) | L |  |
 |  [selected?](./webmap.onlayerclickoptions.selected.md) | boolean | <i>(Optional)</i> |
 |  [source](./webmap.onlayerclickoptions.source.md) | any |  |
 
