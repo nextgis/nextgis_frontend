@@ -211,18 +211,16 @@ export class GeoJsonAdapter
   }
 
   unselect(findFeatureCb?: DataLayerFilter<Feature> | PropertiesFilter): void {
+    let features = this._selectedFeatures;
     if (typeof findFeatureCb === 'function') {
-      const feature = this._selectedFeatures.filter((x) =>
+      features = this._selectedFeatures.filter((x) =>
         findFeatureCb({ feature: getFeature(x) }),
       );
-      feature.forEach((x) => {
-        this._unselectFeature(x);
-      });
     } else if (this.selected) {
       this.selected = false;
-      if (this.paint) {
-        this.setPaintEachLayer(this.paint);
-      }
+    }
+    for (const f of features) {
+      this._unselectFeature(f);
     }
     this._removeAllPopup();
   }
