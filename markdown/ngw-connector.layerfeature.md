@@ -14,7 +14,7 @@ export interface LayerFeature
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [fields](./ngw-connector.layerfeature.fields.md) | [FeatureProperties](./ngw-connector.featureproperties.md) |  |
+|  [fields](./ngw-connector.layerfeature.fields.md) | [FeatureProperties](./utils.featureproperties.md) |  |
 |  [geom?](./ngw-connector.layerfeature.geom.md) | GeoJsonObject | <i>(Optional)</i> |
 |  [id](./ngw-connector.layerfeature.id.md) | number |  |
 |  [label](./ngw-connector.layerfeature.label.md) | string |  |

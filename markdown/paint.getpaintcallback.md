@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface GetPaintCallback<F = Feature> 
+export interface GetPaintCallback<F extends Feature = Feature> 
 ```
 
 ## Properties

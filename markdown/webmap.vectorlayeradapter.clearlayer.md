@@ -9,14 +9,14 @@ Remove layer data.
 <b>Signature:</b>
 
 ```typescript
-clearLayer?(cb?: (feature: Feature) => boolean): void | Promise<void>;
+clearLayer?(cb?: (feature: F) => boolean): void | Promise<void>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  cb | (feature: Feature) =&gt; boolean | Delete only those objects that match the filter. |
+|  cb | (feature: F) =&gt; boolean | Delete only those objects that match the filter. |
 
 <b>Returns:</b>
 

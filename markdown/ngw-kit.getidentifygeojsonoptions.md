@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface GetIdentifyGeoJsonOptions 
+export interface GetIdentifyGeoJsonOptions<G extends Geometry = Geometry, P extends FeatureProperties = FeatureProperties> 
 ```
 
 ## Properties
@@ -17,5 +17,5 @@ export interface GetIdentifyGeoJsonOptions
 |  [connector](./ngw-kit.getidentifygeojsonoptions.connector.md) | NgwConnector |  |
 |  [identify](./ngw-kit.getidentifygeojsonoptions.identify.md) | [NgwIdentify](./ngw-kit.ngwidentify.md) |  |
 |  [multiple?](./ngw-kit.getidentifygeojsonoptions.multiple.md) | boolean | <i>(Optional)</i> |
-|  [requestOptions?](./ngw-kit.getidentifygeojsonoptions.requestoptions.md) | [NgwFeatureRequestOptions](./ngw-kit.ngwfeaturerequestoptions.md) | <i>(Optional)</i> |
+|  [requestOptions?](./ngw-kit.getidentifygeojsonoptions.requestoptions.md) | [NgwFeatureRequestOptions](./ngw-kit.ngwfeaturerequestoptions.md)<!-- -->&lt;P&gt; | <i>(Optional)</i> |
 

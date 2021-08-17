@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-popupOptions?: PopupOptions;
+popupOptions?: PopupOptions<F, L>;
 ```

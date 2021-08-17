@@ -8,14 +8,14 @@
 <b>Signature:</b>
 
 ```typescript
-export interface OnLayerSelectOptions 
+export interface OnLayerSelectOptions<F extends Feature = Feature, L = LayerAdapter> 
 ```
 
 ## Properties
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [features?](./webmap.onlayerselectoptions.features.md) | Feature\[\] \| undefined | <i>(Optional)</i> |
-|  [layer](./webmap.onlayerselectoptions.layer.md) | [LayerAdapter](./webmap.layeradapter.md) |  |
+|  [features?](./webmap.onlayerselectoptions.features.md) | F\[\] \| undefined | <i>(Optional)</i> |
+|  [layer](./webmap.onlayerselectoptions.layer.md) | L |  |
 |  [type](./webmap.onlayerselectoptions.type.md) | [OnLayerSelectType](./webmap.onlayerselecttype.md) |  |
 

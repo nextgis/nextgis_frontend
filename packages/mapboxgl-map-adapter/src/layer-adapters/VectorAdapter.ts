@@ -25,7 +25,6 @@ import {
   MapEventType,
   AnySourceData,
   MapLayerMouseEvent,
-  LngLat,
 } from 'maplibre-gl';
 import type { Paint, IconPaint } from '@nextgis/paint';
 import type {

@@ -4,6 +4,11 @@
 
 ## checkIfPropertyFilter() function
 
+> Warning: This API is now obsolete.
+> 
+> use [isPropertyFilter()](./properties-filter.ispropertyfilter.md) instead
+> 
+
 <b>Signature:</b>
 
 ```typescript

@@ -82,7 +82,6 @@ Make sure CORS is registered in the [NextGIS Web settings](https://docs.nextgis.
 |  Type Alias | Description |
 |  --- | --- |
 |  [FeatureItemToNgw](./ngw-connector.featureitemtongw.md) |  |
-|  [FeatureProperties](./ngw-connector.featureproperties.md) |  |
 |  [GeometryType](./ngw-connector.geometrytype.md) |  |
 |  [NgwDateTimeFormat](./ngw-connector.ngwdatetimeformat.md) |  |
 |  [NgwExceptions](./ngw-connector.ngwexceptions.md) |  |
