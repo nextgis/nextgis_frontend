@@ -64,7 +64,10 @@
       }
 
       function drawFieldsBlock(resource) {
-        fieldsBlock.innerHTML = '';
+        fieldsBlock.innerHTML =
+          '<a href="https://sandbox.nextgis.com/resource/' +
+          resource.resource.id +
+          '" target="_blank">Open in NGW</a><p></p>';
         const fields = resource.feature_layer.fields;
         for (const f of fields) {
           fieldsBlock.appendChild(createFieldInput(f).element);
