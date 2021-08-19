@@ -35,7 +35,7 @@ import type {
 import type { WebMapEvents } from './interfaces/Events';
 import type { FitOptions } from './interfaces/MapAdapter';
 
-type AddedLayers = { [id: string]: LayerAdapter };
+type AddedLayers<M = any, L = any> = { [id: string]: LayerAdapter<M, L> };
 
 export class WebMapLayers<
   M = any,
@@ -46,7 +46,7 @@ export class WebMapLayers<
   private _layersIdCounter = 1;
   private _layersOrderCounter = 1;
   private readonly _baselayers: string[] = [];
-  private readonly _layers: AddedLayers = {};
+  private readonly _layers: AddedLayers<M, L> = {};
   private readonly _selectedLayers: string[] = [];
 
   constructor(mapOptions: O) {
@@ -129,8 +129,14 @@ export class WebMapLayers<
   }
 
   // TODO: rename to getLayers, getLayers rename to getLayersIds
-  allLayers(): AddedLayers {
+  allLayers(): AddedLayers<M, L> {
     return this._layers;
+  }
+
+  orderedLayers<LA extends LayerAdapter<M, L> = LayerAdapter<M, L>>(): LA[] {
+    return Object.values(this._layers).sort((a, b) =>
+      a.order && b.order ? a.order - b.order : 0,
+    ) as LA[];
   }
 
   findLayer<T extends LayerAdapter = LayerAdapter>(
@@ -571,10 +577,10 @@ export class WebMapLayers<
   setLayerOpacity(layerDef: LayerDef, value: number): void {
     const layer = this.getLayer(layerDef);
     if (layer) {
-      if (this.mapAdapter.setLayerOpacity) {
-        if (layer) {
-          this.mapAdapter.setLayerOpacity(layer.layer, value);
-        }
+      if (layer.setOpacity) {
+        layer.setOpacity(value);
+      } else if (this.mapAdapter.setLayerOpacity) {
+        this.mapAdapter.setLayerOpacity(layer.layer, value);
       }
     }
   }
@@ -644,7 +650,7 @@ export class WebMapLayers<
   /** Remove selection from any selected selectable layer */
   unSelectLayers(): void {
     const layers = Object.values(this.allLayers());
-    let l: VectorLayerAdapter
+    let l: VectorLayerAdapter;
     for (l of layers) {
       if (l.unselect) {
         l.unselect();
