@@ -8,8 +8,9 @@ export class BaseAdapter implements Partial<MainLayerAdapter> {
   constructor(public map: Map, public options: AdapterOptions) {}
 
   setOpacity(val: number): void {
+    this.options.opacity = Number(val);
     if (this.layer && this.layer.setOpacity) {
-      this.layer.setOpacity(Number(val));
+      this.layer.setOpacity(this.options.opacity);
     }
   }
 }
