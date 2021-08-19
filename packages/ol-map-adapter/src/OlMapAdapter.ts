@@ -251,8 +251,10 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     }
   }
 
-  setLayerOpacity(): void {
-    // ignore
+  setLayerOpacity(layer: Layer, val: number): void {
+    if (layer.setOpacity) {
+      layer.setOpacity(Number(val));
+    }
   }
 
   setLayerOrder(layer: Layer, order: number): void {
