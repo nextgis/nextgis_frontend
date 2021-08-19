@@ -49,6 +49,7 @@
         v-if="items"
         :active.sync="active"
         :search="search"
+        :filter="filter"
         :items="items"
         :open="open"
         dense
