@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/nextgis/nextgis_frontend/compare/v1.4.0...v1.5.0) (2021-08-19)
+
+
+### Features
+
+* **mapboxgl-map-adapter:** add setLayerOpacity methods ([6d18193](https://github.com/nextgis/nextgis_frontend/commit/6d18193b617a42ad50640ec659aa755962954e1b))
+* **ol-map-adapter:** add setLayerOpacity mapAdapter and each layer methods ([b291921](https://github.com/nextgis/nextgis_frontend/commit/b2919210d44be4f6cf5b00d8e7fa735b98961702))
+
+
+
+
+
 # [1.4.0](https://github.com/nextgis/nextgis_frontend/compare/v1.3.0...v1.4.0) (2021-08-17)
 
 
