@@ -32,6 +32,11 @@ export interface MainLayerAdapter<M = any, L = any, O extends AdapterOptions = A
 |  [getExtent()?](./webmap.mainlayeradapter.getextent.md) | <i>(Optional)</i> |
 |  [hideLayer(layer)?](./webmap.mainlayeradapter.hidelayer.md) | <i>(Optional)</i> |
 |  [removeLayer()?](./webmap.mainlayeradapter.removelayer.md) | <i>(Optional)</i> |
+|  [setOpacity(val)?](./webmap.mainlayeradapter.setopacity.md) | <i>(Optional)</i> |
+|  [setPaint(paint)?](./webmap.mainlayeradapter.setpaint.md) | <i>(Optional)</i> |
+|  [setSelectedPaint(paint)?](./webmap.mainlayeradapter.setselectedpaint.md) | <i>(Optional)</i> |
 |  [showLayer(layer)?](./webmap.mainlayeradapter.showlayer.md) | <i>(Optional)</i> |
 |  [updateLayer()?](./webmap.mainlayeradapter.updatelayer.md) | <i>(Optional)</i> |
+|  [updatePaint(paint)?](./webmap.mainlayeradapter.updatepaint.md) | <i>(Optional)</i> |
+|  [updateSelectedPaint(paint)?](./webmap.mainlayeradapter.updateselectedpaint.md) | <i>(Optional)</i> |
 

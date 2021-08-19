@@ -43,7 +43,7 @@ export declare class OlMapAdapter implements MapAdapter<Map, Layer>
 |  [removeControl(control)](./ol-map-adapter.olmapadapter.removecontrol.md) |  |  |
 |  [removeLayer(layer)](./ol-map-adapter.olmapadapter.removelayer.md) |  |  |
 |  [setCenter(lonLat)](./ol-map-adapter.olmapadapter.setcenter.md) |  |  |
-|  [setLayerOpacity()](./ol-map-adapter.olmapadapter.setlayeropacity.md) |  |  |
+|  [setLayerOpacity(layer, val)](./ol-map-adapter.olmapadapter.setlayeropacity.md) |  |  |
 |  [setLayerOrder(layer, order)](./ol-map-adapter.olmapadapter.setlayerorder.md) |  |  |
 |  [setRotation(angle)](./ol-map-adapter.olmapadapter.setrotation.md) |  |  |
 |  [setZoom(zoom)](./ol-map-adapter.olmapadapter.setzoom.md) |  |  |

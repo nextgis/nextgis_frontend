@@ -7,8 +7,16 @@
 <b>Signature:</b>
 
 ```typescript
-setLayerOpacity(): void;
+setLayerOpacity(layer: Layer, val: number): void;
 ```
+
+## Parameters
+
+|  Parameter | Type | Description |
+|  --- | --- | --- |
+|  layer | Layer |  |
+|  val | number |  |
+
 <b>Returns:</b>
 
 void
