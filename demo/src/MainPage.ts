@@ -91,7 +91,25 @@ export class MainPage extends Vue {
     }
   }
 
-  _setActive(): void {
+  filter(item: Item, search: string): boolean {
+    const getHtml = () => {
+      const match =
+        item.html && item.html.match(/<script[\s\S]*?>[\s\S]*?<\/script>/gi);
+      return match && match.join(' ');
+    };
+    return [
+      item.name,
+      item.description,
+      item.tags && item.tags.join(' '),
+      getHtml,
+    ].some((x) => {
+      const text =
+        x && (typeof x === 'string' ? x : search.length > 2 ? x() : '');
+      return text && text.indexOf(search) !== -1;
+    });
+  }
+
+  private _setActive(): void {
     const id = this.$route.params && this.$route.params.id;
     const treeItem = id && this.findItem(id);
     if (treeItem) {
