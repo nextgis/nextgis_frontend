@@ -239,6 +239,13 @@ export abstract class VectorAdapter<
     super.beforeRemove();
   }
 
+  setOpacity(val: number): void {
+    this.options.opacity = Number(val);
+    if (this.options.type) {
+      this._updateLayerPaint(this.options.type);
+    }
+  }
+
   _onLayerClick(
     e: MapLayerMouseEvent,
   ): Feature<Geometry, GeoJsonProperties> | undefined {
@@ -470,8 +477,15 @@ export abstract class VectorAdapter<
               const paramName = Array.isArray(allowedType)
                 ? allowedType[1]
                 : allowedType;
-
-              mapboxPaint[mapboxType + '-' + paramName] = _paint[p];
+              const opacity = this.options.opacity;
+              let prop = _paint[p];
+              if (
+                opacity !== undefined &&
+                paramName.indexOf('opacity') !== -1
+              ) {
+                prop = Number(prop) * opacity;
+              }
+              mapboxPaint[mapboxType + '-' + paramName] = prop;
             }
           }
         }
