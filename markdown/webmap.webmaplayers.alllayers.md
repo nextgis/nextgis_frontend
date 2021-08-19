@@ -7,9 +7,9 @@
 <b>Signature:</b>
 
 ```typescript
-allLayers(): AddedLayers;
+allLayers(): AddedLayers<M, L>;
 ```
 <b>Returns:</b>
 
-AddedLayers
+AddedLayers&lt;M, L&gt;
 

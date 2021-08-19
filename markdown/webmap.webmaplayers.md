@@ -43,6 +43,7 @@ export declare class WebMapLayers<M = any, L = any, E extends WebMapEvents = Web
 |  [hideLayer(layerDef, options)](./webmap.webmaplayers.hidelayer.md) |  | Hide added layer on the map by it definition. |
 |  [isBaseLayer(layerDef)](./webmap.webmaplayers.isbaselayer.md) |  | Check if given layer is baselayer |
 |  [isLayerVisible(layerDef)](./webmap.webmaplayers.islayervisible.md) |  | Check if the given layer on the map |
+|  [orderedLayers()](./webmap.webmaplayers.orderedlayers.md) |  |  |
 |  [propertiesFilter(layerDef, filters, options)](./webmap.webmaplayers.propertiesfilter.md) |  |  |
 |  [removeLayer(layerDef)](./webmap.webmaplayers.removelayer.md) |  | Remove specific layer from map and memory by its definition. |
 |  [removeLayerFilter(layerDef)](./webmap.webmaplayers.removelayerfilter.md) |  |  |
