@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Layers opacity</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body,
+      #map {
+        width: 100%;
+        height: 100%;
+      }
+      .opacity-control-panel {
+        background-color: rgba(255, 255, 255, 0.5);
+        padding: 3px;
+      }
+    </style>
+
+    <script src="../../../packages/ngw-leaflet/lib/ngw-leaflet.global.js"></script>
+  </head>
+
+  <body>
+    <div id="map"></div>
+    <script>
+      NgwMap.create({
+        baseUrl: 'https://demo.nextgis.com/',
+        target: 'map',
+        osm: true,
+        resources: [
+          4116,
+          { resource: 4114, fit: true, adapterOptions: { opacity: 0.3 } },
+          {
+            resource: 4112,
+            fit: true,
+            adapterOptions: { paint: { color: 'orange' } },
+          },
+          {
+            resource: 4110,
+            adapterOptions: {
+              opacity: 0.3,
+              paint: { color: 'red', fillOpacity: 0.1, weight: 3 },
+            },
+          },
+        ],
+      }).then((ngwMap) => {
+        ngwMap.addControl('CONTROL', 'top-right', {
+          control: {
+            onAdd: function () {
+              return createOpacityControlPanel(
+                ngwMap.orderedLayers().reverse(),
+              );
+            },
+          },
+          options: { bar: true },
+        });
+
+        function createOpacityControlPanel(layers) {
+          const block = document.createElement('div');
+          block.className = 'opacity-control-panel';
+          for (const l of layers) {
+            block.appendChild(createLayerOpacitySlider(l));
+          }
+          return block;
+        }
+        function createLayerOpacitySlider(layer) {
+          const wrapper = document.createElement('div');
+          const slider = document.createElement('input');
+          slider.id = layer.id;
+          [
+            ['type', 'range'],
+            ['min', '0'],
+            ['max', '1'],
+            ['step', '0.1'],
+          ].forEach(slider.setAttribute.call);
+          slider.value =
+            layer.options.opacity !== undefined ? layer.options.opacity : 1;
+
+          slider.addEventListener('change', () => {
+            ngwMap.setLayerOpacity(layer, slider.value);
+          });
+          wrapper.appendChild(slider);
+
+          const label = document.createElement('label');
+          label.setAttribute('for', layer.id);
+          label.innerHTML = layer.options.name;
+          wrapper.appendChild(label);
+          return wrapper;
+        }
+      });
+    </script>
+  </body>
+</html>
