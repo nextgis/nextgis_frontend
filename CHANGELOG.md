@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/nextgis/nextgisweb_frontend/compare/v1.4.0...v1.5.0) (2021-08-19)
+
+
+### Features
+
+* **leaflet-map-adapter:** change geojson layer opacity ([3d75fb2](https://github.com/nextgis/nextgisweb_frontend/commit/3d75fb2f20d0759839dcaa7650c10740a1f35d22))
+* **mapboxgl-map-adapter:** add setLayerOpacity methods ([6d18193](https://github.com/nextgis/nextgisweb_frontend/commit/6d18193b617a42ad50640ec659aa755962954e1b))
+* **ol-map-adapter:** add setLayerOpacity mapAdapter and each layer methods ([b291921](https://github.com/nextgis/nextgisweb_frontend/commit/b2919210d44be4f6cf5b00d8e7fa735b98961702))
+
+
+
+
+
 # [1.4.0](https://github.com/nextgis/nextgisweb_frontend/compare/v1.3.0...v1.4.0) (2021-08-17)
 
 
