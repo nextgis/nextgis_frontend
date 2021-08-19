@@ -26,7 +26,7 @@ function replaceAbsolutePathToCdn(line, packages) {
     const emptyCharsCount = line.search(/\S/);
 
     const isLibPath = line.match(
-      /(?:src|href)=("|').*?(lib\/).*?([-\w.]+)\.(?:([-\w.]+)\.)((?:js|css))/
+      /(?:src|href)=("|').*?(lib\/).*?([-\w.]+)\.(?:([-\w.]+)\.)((?:js|css))/,
     );
 
     if (isLibPath) {
@@ -96,7 +96,7 @@ function getExamples(libPath, package, packages) {
             const html = prepareHtml(
               readFileSync(htmlPath, 'utf8'),
               package,
-              packages
+              packages,
             );
 
             const filteredPackages = !meta.ngwMaps
@@ -119,6 +119,7 @@ function getExamples(libPath, package, packages) {
               page: 'example',
               name: meta.name,
               description: meta.description,
+              tags: meta.tags || [],
               ngwMaps,
             };
             examples.push(example);
@@ -142,7 +143,7 @@ function generate() {
     {
       libPath: join(pkgRoot, 'demo'),
       package: JSON.parse(
-        readFileSync(join(pkgRoot, 'demo', 'package.json'), 'utf8')
+        readFileSync(join(pkgRoot, 'demo', 'package.json'), 'utf8'),
       ),
       name: 'demo',
     },
