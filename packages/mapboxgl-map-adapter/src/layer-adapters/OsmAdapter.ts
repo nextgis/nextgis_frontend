@@ -6,6 +6,7 @@ const OPTIONS = {
   attribution:
     '&copy; <a href="https://osm.org/copyright" target="_blank">OpenStreetMap</a> contributors',
   subdomains: 'abc',
+  name: 'OpenStreetMap',
 };
 
 export class OsmAdapter extends TileAdapter implements MainLayerAdapter {

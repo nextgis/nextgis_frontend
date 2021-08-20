@@ -1,5 +1,5 @@
-import { defined } from '@nextgis/utils';
-import { FeatureItem, FeatureProperties } from '@nextgis/ngw-connector';
+import { defined, FeatureProperties } from '@nextgis/utils';
+import { FeatureItem } from '@nextgis/ngw-connector';
 import { VectorLayer } from '../repository/VectorLayer';
 import { getMetadataArgsStorage } from '..';
 

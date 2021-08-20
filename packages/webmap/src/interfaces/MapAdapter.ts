@@ -67,7 +67,7 @@ export type ControlPosition =
   | 'top-right'
   | 'top-left'
   | 'bottom-right'
-  | 'bottom-left'
+  | 'bottom-left';
 
 export interface Locate {
   stop: () => void;

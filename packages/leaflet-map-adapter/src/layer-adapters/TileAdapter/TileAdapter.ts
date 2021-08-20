@@ -8,6 +8,7 @@ export class TileAdapter
   implements MainLayerAdapter
 {
   addLayer(options: TileAdapterOptions): TileLayer | undefined {
+    this.options = Object.assign(this.options, options);
     if (options) {
       const { url, ...opt } = options;
       if (url) {

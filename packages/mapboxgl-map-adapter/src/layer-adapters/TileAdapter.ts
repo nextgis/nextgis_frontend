@@ -3,15 +3,16 @@ import {
   TileAdapterOptions,
   RasterAdapterOptions,
 } from '@nextgis/webmap';
-import { BaseAdapter } from './BaseAdapter';
+import { BaseRasterAdapter } from './BaseRasterAdapter';
 import { RasterSource, ResourceType, Layer, AnyLayer } from 'maplibre-gl';
 
 export class TileAdapter<O extends RasterAdapterOptions = TileAdapterOptions>
-  extends BaseAdapter<O>
+  extends BaseRasterAdapter<O>
   implements MainLayerAdapter
 {
   addLayer(options: O & { before?: string }): string[] | undefined {
     options = { ...this.options, ...(options || {}) };
+    this.options = options;
     const { minZoom, maxZoom } = options;
     const tiles: string[] = [];
     const subdomains: string[] | undefined =
@@ -69,8 +70,9 @@ export class TileAdapter<O extends RasterAdapterOptions = TileAdapterOptions>
     }
     if (this.map) {
       this.map.addLayer(layerOptions as AnyLayer, options.before);
-      const layer = (this.layer = [this._layerId]);
-      return layer;
+      this.layer = [this._layerId];
+      this.updateOpacity();
+      return this.layer;
     }
   }
 }
