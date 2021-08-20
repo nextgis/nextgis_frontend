@@ -11,6 +11,7 @@ import type {
 } from '@nextgis/ngw-connector';
 import type NgwConnector from '@nextgis/ngw-connector';
 import type { FeatureProperties } from '@nextgis/utils';
+import { FetchNgwItemOptions } from './interfaces';
 
 export class IdentifyItem<F = FeatureProperties, G extends Geometry = Geometry>
   implements LayerFeature
@@ -39,7 +40,9 @@ export class IdentifyItem<F = FeatureProperties, G extends Geometry = Geometry>
     this.connector = options.connector;
   }
 
-  identify(): CancelablePromise<NgwFeatureItemResponse<F, G>> {
+  identify(
+    options: Partial<FetchNgwItemOptions<F>> = {},
+  ): CancelablePromise<NgwFeatureItemResponse<F, G>> {
     if (this._item) {
       return CancelablePromise.resolve(this._item);
     }
@@ -49,6 +52,7 @@ export class IdentifyItem<F = FeatureProperties, G extends Geometry = Geometry>
       resourceId: this.layerId,
       fields: null,
       extensions: ['attachment', 'description'],
+      ...options,
     }).then((resp) => {
       this._item = resp;
       this.geom = resp.geom;

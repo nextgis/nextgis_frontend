@@ -1,3 +1,4 @@
+import type { Geometry } from 'geojson';
 import type {
   MapOptions,
   // CirclePaint,
@@ -11,11 +12,13 @@ import type { Credentials } from '@nextgis/ngw-connector';
 import type { NgwMap } from './NgwMap';
 
 import type {
+  CompanyLogoOptions,
   NgwLayerOptions,
   ResourceAdapter,
   NgwIdentify,
-  CompanyLogoOptions,
+  IdentifyItem,
 } from '@nextgis/ngw-kit';
+import type { FeatureProperties } from '@nextgis/utils';
 
 export type NgwResourceDefinition = number | [number, string] | NgwLayerOptions;
 
@@ -89,7 +92,7 @@ export interface NgwMapOptions<C = any> extends MapOptions<C> {
 
 export interface NgwMapEvents extends WebMapEvents {
   'ngw-map:create': NgwMap;
-  'ngw:select': NgwIdentify | null;
+  'ngw:select': NgwIdentifyEvent | null;
   'ngw:preselect': void;
 }
 
@@ -101,3 +104,10 @@ export interface NgwLayersMem {
 export interface NgwLayers {
   [layerId: string]: NgwLayersMem;
 }
+
+export type NgwIdentifyEvent<
+  F = FeatureProperties,
+  G extends Geometry = Geometry,
+> = NgwIdentify & {
+  getIdentifyItems: () => IdentifyItem<F, G>[];
+};
