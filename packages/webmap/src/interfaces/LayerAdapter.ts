@@ -533,8 +533,8 @@ export interface MainLayerAdapter<
   O extends AdapterOptions = AdapterOptions,
 > {
   options: O;
-  id?: string;
   order?: number;
+  id?: string;
   name?: string;
   layer?: L;
   map?: M;
@@ -552,8 +552,14 @@ export interface MainLayerAdapter<
     | Promise<LngLatBoundsArray | undefined>
     | undefined;
 
-  // remove from this place
+  // TODO: remove from here
   getDependLayers?(): L[];
+
+  setPaint?(paint: Paint): void;
+  updatePaint?(paint: Partial<Paint>): void;
+  setSelectedPaint?(paint: Paint): void;
+  updateSelectedPaint?(paint: Partial<Paint>): void;
+  setOpacity?(val: number): void;
 }
 
 /**

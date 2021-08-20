@@ -22,6 +22,7 @@ export declare class WebMapLayers<M = any, L = any, E extends WebMapEvents = Web
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
 |  [addBaseLayer(adapter, options)](./webmap.webmaplayers.addbaselayer.md) |  | Shortcut method to create base layer |
+|  [addFeatureLayer(options)](./webmap.webmaplayers.addfeaturelayer.md) |  | Shortcut for [WebMapLayers.addGeoJsonLayer()](./webmap.webmaplayers.addgeojsonlayer.md) to initialize adapter with generic types for working in typescript |
 |  [addGeoJsonLayer(opt, adapter)](./webmap.webmaplayers.addgeojsonlayer.md) |  | Create layer from GeoJson data. Set style and behavior for selection. |
 |  [addLayer(adapter, options, order)](./webmap.webmaplayers.addlayer.md) |  | Registration of map layer. |
 |  [addLayerData(layerDef, data)](./webmap.webmaplayers.addlayerdata.md) |  | Push new the GeoJSON features into given vector layer. |
@@ -42,6 +43,7 @@ export declare class WebMapLayers<M = any, L = any, E extends WebMapEvents = Web
 |  [hideLayer(layerDef, options)](./webmap.webmaplayers.hidelayer.md) |  | Hide added layer on the map by it definition. |
 |  [isBaseLayer(layerDef)](./webmap.webmaplayers.isbaselayer.md) |  | Check if given layer is baselayer |
 |  [isLayerVisible(layerDef)](./webmap.webmaplayers.islayervisible.md) |  | Check if the given layer on the map |
+|  [orderedLayers()](./webmap.webmaplayers.orderedlayers.md) |  |  |
 |  [propertiesFilter(layerDef, filters, options)](./webmap.webmaplayers.propertiesfilter.md) |  |  |
 |  [removeLayer(layerDef)](./webmap.webmaplayers.removelayer.md) |  | Remove specific layer from map and memory by its definition. |
 |  [removeLayerFilter(layerDef)](./webmap.webmaplayers.removelayerfilter.md) |  |  |
@@ -54,5 +56,6 @@ export declare class WebMapLayers<M = any, L = any, E extends WebMapEvents = Web
 |  [showLayer(layerDef, options)](./webmap.webmaplayers.showlayer.md) |  | Show added layer on the map by it definition. |
 |  [toggleLayer(layerDef, status, options)](./webmap.webmaplayers.togglelayer.md) |  | Change added layer visibility on the map by given status or inverse current status. |
 |  [unSelectLayer(layerDef, findFeatureFun)](./webmap.webmaplayers.unselectlayer.md) |  | Unselect the given layer. If the adapter is a vector layer and supports data selection, you can pass a callback function to specify which data will be unselected. |
+|  [unSelectLayers()](./webmap.webmaplayers.unselectlayers.md) |  | Remove selection from any selected selectable layer |
 |  [updateLayer(layerDef)](./webmap.webmaplayers.updatelayer.md) |  |  |
 

@@ -94,6 +94,7 @@
 |  --- | --- |
 |  [AnyJson](./utils.anyjson.md) |  |
 |  [DeepPartial](./utils.deeppartial.md) | Same as Partial<T> but goes deeper and makes Partial<T> all its properties and sub-properties. |
+|  [FeatureProperties](./utils.featureproperties.md) |  |
 |  [JsonArray](./utils.jsonarray.md) |  |
 |  [LngLatArray](./utils.lnglatarray.md) | Array of two numbers representing longitude and latitude. |
 |  [LngLatBoundsArray](./utils.lnglatboundsarray.md) | Array of coordinates, measured in degrees, in \[west, south, east, north\] order. [GeoJSON standard](https://tools.ietf.org/html/rfc7946#section-5) |

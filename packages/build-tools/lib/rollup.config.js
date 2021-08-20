@@ -118,7 +118,7 @@ function createConfig(format, output, plugins = []) {
         ...dependencies
           .filter((e) => /^@nextgis\//.test(e))
           .map((e) =>
-            path.resolve(packagesDir, e.replace('@nextgis/', ''), 'src')
+            path.resolve(packagesDir, e.replace('@nextgis/', ''), 'src'),
           ),
       ],
     },
@@ -141,7 +141,7 @@ function createConfig(format, output, plugins = []) {
           const find = new RegExp(x.find);
           return { ...x, find };
         }),
-      })
+      }),
     );
   }
 
@@ -165,7 +165,7 @@ function createConfig(format, output, plugins = []) {
         require('autoprefixer'),
         require('cssnano')(),
       ],
-    })
+    }),
   );
 
   // nodePlugins.push(require('rollup-plugin-visualizer')());
@@ -174,7 +174,12 @@ function createConfig(format, output, plugins = []) {
     input: resolve(entryFile),
     // Global and Browser ESM builds inlines everything so that they can be
     // used alone.
-    external,
+    external: (id) => {
+      if (!id.startsWith('.')) {
+        return external.some((x) => id.startsWith(x));
+      }
+      return false;
+    },
     plugins: [
       json({
         namedExports: false,
@@ -187,7 +192,7 @@ function createConfig(format, output, plugins = []) {
         // isBrowserBuild?
         isGlobalBuild || isBrowserESMBuild || isBundlerESMBuild,
         isGlobalBuild,
-        isNodeBuild
+        isNodeBuild,
       ),
       ...nodePlugins,
       ...plugins,
@@ -213,7 +218,7 @@ function createReplacePlugin(
   isBrowserESMBuild,
   isBrowserBuild,
   isGlobalBuild,
-  isNodeBuild
+  isNodeBuild,
 ) {
   const replacements = {
     __COMMIT__: `"${process.env.COMMIT}"`,
@@ -247,7 +252,7 @@ function createReplacePlugin(
   });
   return replace({
     preventAssignment: true,
-    values: replacements
+    values: replacements,
   });
 }
 
@@ -274,7 +279,7 @@ function createMinifiedConfig(format) {
           pure_getters: true,
         },
       }),
-    ]
+    ],
   );
 }
 

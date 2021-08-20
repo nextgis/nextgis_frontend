@@ -7,14 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-onLayerSelect?(opt: OnLayerSelectOptions): Promise<any>;
+onLayerSelect?(opt: OnLayerSelectOptions<F, L>): Promise<any>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  opt | [OnLayerSelectOptions](./webmap.onlayerselectoptions.md) |  |
+|  opt | [OnLayerSelectOptions](./webmap.onlayerselectoptions.md)<!-- -->&lt;F, L&gt; |  |
 
 <b>Returns:</b>
 

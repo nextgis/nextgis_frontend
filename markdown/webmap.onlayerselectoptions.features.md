@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-features?: Feature[] | undefined;
+features?: F[] | undefined;
 ```

@@ -331,7 +331,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
         features = [feature];
       }
       if (features.length) {
-        features.forEach((f) => {
+        for (const f of features) {
           const id = this._getFeatureFilterId(f);
           const selected = this._selectedFeatureIds;
           if (selected && id !== undefined) {
@@ -340,7 +340,8 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
               selected.splice(index, 1);
             }
           }
-        });
+          this._removeFeaturePopup(f, true);
+        }
       }
     } else {
       this._selectedFeatureIds = false;

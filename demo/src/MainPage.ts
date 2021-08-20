@@ -13,6 +13,7 @@ export interface Package {
 export interface Item {
   id: string;
   name: string;
+  tags: string[];
   page?: 'example' | 'readme' | 'api';
   description?: string;
   html?: string;
@@ -46,11 +47,11 @@ export class MainPage extends Vue {
   };
 
   @Watch('$route')
-  onPathChange() {
+  onPathChange(): void {
     this._setActive();
   }
 
-  get current() {
+  get current(): Item {
     if (!this.active.length) {
       return undefined;
     }
@@ -61,11 +62,11 @@ export class MainPage extends Vue {
     return item;
   }
 
-  mounted() {
+  mounted(): void {
     this._build();
   }
 
-  onOpen(data: string[]) {
+  onOpen(data: string[]): void {
     this.open = data;
   }
 
@@ -90,7 +91,25 @@ export class MainPage extends Vue {
     }
   }
 
-  _setActive() {
+  filter(item: Item, search: string): boolean {
+    const getHtml = () => {
+      const match =
+        item.html && item.html.match(/<script[\s\S]*?>[\s\S]*?<\/script>/gi);
+      return match && match.join(' ');
+    };
+    return [
+      item.name,
+      item.description,
+      item.tags && item.tags.join(' '),
+      getHtml,
+    ].some((x) => {
+      const text =
+        x && (typeof x === 'string' ? x : search.length > 2 ? x() : '');
+      return text && text.indexOf(search) !== -1;
+    });
+  }
+
+  private _setActive(): void {
     const id = this.$route.params && this.$route.params.id;
     const treeItem = id && this.findItem(id);
     if (treeItem) {
@@ -119,7 +138,7 @@ export class MainPage extends Vue {
     }
   }
 
-  _setPath(id?: string) {
+  private _setPath(id?: string): void {
     const paramsId = this.$router.currentRoute.params.id;
     if (paramsId !== id) {
       let path = this.$router.currentRoute.fullPath;
@@ -156,8 +175,8 @@ export class MainPage extends Vue {
       return item;
     };
     let config = process.env.EXAMPLES;
-    // @ts-ignore
-    this.items = config = config.map((x) => {
+
+    this.items = config = (config as any).map((x) => {
       return prepareItem(x);
     });
 

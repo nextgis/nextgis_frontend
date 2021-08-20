@@ -25,7 +25,6 @@ import {
   MapEventType,
   AnySourceData,
   MapLayerMouseEvent,
-  LngLat,
 } from 'maplibre-gl';
 import type { Paint, IconPaint } from '@nextgis/paint';
 import type {
@@ -240,6 +239,13 @@ export abstract class VectorAdapter<
     super.beforeRemove();
   }
 
+  setOpacity(val: number): void {
+    this.options.opacity = Number(val);
+    if (this.options.type) {
+      this._updateLayerPaint(this.options.type);
+    }
+  }
+
   _onLayerClick(
     e: MapLayerMouseEvent,
   ): Feature<Geometry, GeoJsonProperties> | undefined {
@@ -271,13 +277,15 @@ export abstract class VectorAdapter<
     feature: Feature,
     coordinates?: LngLatLike,
   ): boolean {
-    let isSelected = this.isFeatureSelected(feature);
+    const alreadySelected = this.isFeatureSelected(feature);
+    let becameSelected = alreadySelected;
 
     if (this.options.selectable) {
       let features: Feature[] | undefined = undefined;
-      if (isSelected) {
+      if (alreadySelected) {
         if (this.options && this.options.unselectOnSecondClick) {
           this._unselectFeature(feature, { silent: true });
+          becameSelected = false;
         }
       } else {
         this.map &&
@@ -285,22 +293,24 @@ export abstract class VectorAdapter<
             this._unselectFeature(feature, { silent: true }),
           );
         features = this._selectFeature(feature, { silent: true });
+        becameSelected = true;
       }
-      isSelected = this.isFeatureSelected(feature);
+      // alreadySelected = this.isFeatureSelected(feature);
       if (this.options.onSelect) {
         this.options.onSelect({ layer: this, features, type: 'click' });
       }
     }
-    if (this.options.popupOnSelect) {
+    if (becameSelected && this.options.popupOnSelect) {
       this._openPopup({
         coordinates,
         feature,
         options: this.options.popupOptions,
         type: 'click',
+        refresh: true,
       });
     }
-    this.selected = isSelected;
-    return isSelected;
+    this.selected = becameSelected;
+    return this.selected;
   }
 
   protected _updateWithNativeFilter(filter: any[]): any[] {
@@ -370,10 +380,16 @@ export abstract class VectorAdapter<
     }
   }
 
-  protected async _beforeLayerLayer(sourceId: string, options?: AnySourceData): Promise<void> {
+  protected async _beforeLayerLayer(
+    sourceId: string,
+    options?: AnySourceData,
+  ): Promise<void> {
     // ignore
   }
-  protected async _onLayerAdd(sourceId: string, options?: AnySourceData): Promise<void> {
+  protected async _onLayerAdd(
+    sourceId: string,
+    options?: AnySourceData,
+  ): Promise<void> {
     // ignore
   }
 
@@ -461,8 +477,15 @@ export abstract class VectorAdapter<
               const paramName = Array.isArray(allowedType)
                 ? allowedType[1]
                 : allowedType;
-
-              mapboxPaint[mapboxType + '-' + paramName] = _paint[p];
+              const opacity = this.options.opacity;
+              let prop = _paint[p];
+              if (
+                opacity !== undefined &&
+                paramName.indexOf('opacity') !== -1
+              ) {
+                prop = Number(prop) * opacity;
+              }
+              mapboxPaint[mapboxType + '-' + paramName] = prop;
             }
           }
         }
@@ -648,12 +671,21 @@ export abstract class VectorAdapter<
     feature,
     options = {},
     type,
+    refresh,
   }: {
     coordinates?: LngLatLike;
     feature: Feature;
     options?: PopupOptions;
     type: OnLayerSelectType;
+    refresh?: boolean;
   }): Promise<void> {
+    if (refresh && coordinates) {
+      const openedPopup = this._openedPopup.find((x) => x[0].id === feature.id);
+      if (openedPopup) {
+        openedPopup[1].setLngLat(coordinates);
+        return;
+      }
+    }
     const map = this.map;
     if (!map) return;
     let popup: Popup;
@@ -710,7 +742,7 @@ export abstract class VectorAdapter<
     }
   }
 
-  protected _openLabel(f: Feature, lngLat?: [number, number]) {
+  protected _openLabel(f: Feature, lngLat?: [number, number]): void {
     const map = this.map;
     const { labelField } = this.options;
     if (map && labelField) {
@@ -732,11 +764,18 @@ export abstract class VectorAdapter<
     }
   }
 
-  protected _closeLabel() {
+  protected _closeLabel(): void {
     this._removeAllPopup();
   }
 
-  private _removePopup(popup: Popup, isLabel = false) {
+  protected _removeFeaturePopup(feature: Feature, doNotUnselect = false): void {
+    const openedPopup = this._openedPopup.find((x) => x[0].id === feature.id);
+    if (openedPopup) {
+      this._removePopup(openedPopup[1], doNotUnselect);
+    }
+  }
+
+  private _removePopup(popup: Popup, doNotUnselect = false) {
     const map = this.map;
     if (map) {
       popup.remove();
@@ -749,7 +788,7 @@ export abstract class VectorAdapter<
           h({ feature });
         }
         closeHandlers.length = 0;
-        if (unselectOnClose && !isLabel) {
+        if (unselectOnClose && !doNotUnselect) {
           this._unselectFeature(feature);
         }
         this._openedPopup.splice(index, 1);

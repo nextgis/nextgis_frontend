@@ -9,7 +9,7 @@ Adapter for vector data display control.
 <b>Signature:</b>
 
 ```typescript
-export interface VectorLayerAdapter<M = any, L = any, O extends VectorAdapterOptions = VectorAdapterOptions, F extends Feature = Feature> extends MainLayerAdapter<M, L, O> 
+export interface VectorLayerAdapter<M = any, L = any, O extends VectorAdapterOptions = VectorAdapterOptions, F extends Feature = Feature, PROP extends Record<string, any> | null = F extends Feature ? F['properties'] : Record<string, string>, P extends Record<string, any> = PROP extends null ? Record<string, any> : PROP> extends MainLayerAdapter<M, L, O> 
 ```
 <b>Extends:</b> [MainLayerAdapter](./webmap.mainlayeradapter.md)<!-- -->&lt;M, L, O&gt;
 

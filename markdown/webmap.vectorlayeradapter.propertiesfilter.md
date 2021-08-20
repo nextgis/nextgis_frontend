@@ -9,15 +9,15 @@ The way to filter layer objects through serializable expressions. To clear the f
 <b>Signature:</b>
 
 ```typescript
-propertiesFilter?(filters: PropertiesFilter, options?: FilterOptions): void;
+propertiesFilter?(filters: PropertiesFilter<P>, options?: FilterOptions<P>): void;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  filters | [PropertiesFilter](./properties-filter.propertiesfilter.md) | Filter, conforming to the PropertiesFilter expression specification's. |
-|  options | [FilterOptions](./webmap.filteroptions.md) | Options object. |
+|  filters | [PropertiesFilter](./properties-filter.propertiesfilter.md)<!-- -->&lt;P&gt; | Filter, conforming to the PropertiesFilter expression specification's. |
+|  options | [FilterOptions](./webmap.filteroptions.md)<!-- -->&lt;P&gt; | Options object. |
 
 <b>Returns:</b>
 

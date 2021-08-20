@@ -22,7 +22,7 @@ export declare class IdentifyItem<F = FeatureProperties, G extends Geometry = Ge
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [extensions?](./ngw-kit.identifyitem.extensions.md) |  | [FeatureItemExtensions](./ngw-connector.featureitemextensions.md) | <i>(Optional)</i> |
-|  [fields](./ngw-kit.identifyitem.fields.md) |  | [FeatureProperties](./ngw-connector.featureproperties.md) |  |
+|  [fields](./ngw-kit.identifyitem.fields.md) |  | [FeatureProperties](./utils.featureproperties.md) |  |
 |  [geom?](./ngw-kit.identifyitem.geom.md) |  | GeoJsonObject | <i>(Optional)</i> |
 |  [id](./ngw-kit.identifyitem.id.md) |  | number |  |
 |  [label](./ngw-kit.identifyitem.label.md) |  | string |  |

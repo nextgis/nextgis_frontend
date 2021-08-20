@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-labelField?: string;
+labelField?: keyof P extends null ? string : keyof P;
 ```

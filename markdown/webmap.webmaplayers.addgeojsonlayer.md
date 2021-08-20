@@ -9,19 +9,19 @@ Create layer from GeoJson data. Set style and behavior for selection.
 <b>Signature:</b>
 
 ```typescript
-addGeoJsonLayer<K extends keyof LayerAdaptersOptions>(opt: GeoJsonAdapterOptions, adapter?: K | Type<LayerAdapter>): Promise<VectorLayerAdapter<any, any, AdapterOptions>>;
+addGeoJsonLayer<K extends keyof LayerAdapters = keyof LayerAdapters, O extends GeoJsonAdapterOptions<any, any> = GeoJsonAdapterOptions>(opt?: O, adapter?: LayerAdapterDefinition<K>): Promise<VectorLayerAdapter<any, any, any>>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  opt | [GeoJsonAdapterOptions](./webmap.geojsonadapteroptions.md) |  |
-|  adapter | K \| [Type](./utils.type.md)<!-- -->&lt;[LayerAdapter](./webmap.layeradapter.md)<!-- -->&gt; |  |
+|  opt | O |  |
+|  adapter | [LayerAdapterDefinition](./webmap.layeradapterdefinition.md)<!-- -->&lt;K&gt; |  |
 
 <b>Returns:</b>
 
-Promise&lt;[VectorLayerAdapter](./webmap.vectorlayeradapter.md)<!-- -->&lt;any, any, [AdapterOptions](./webmap.adapteroptions.md)<!-- -->&gt;&gt;
+Promise&lt;[VectorLayerAdapter](./webmap.vectorlayeradapter.md)<!-- -->&lt;any, any, any&gt;&gt;
 
 ## Example
 

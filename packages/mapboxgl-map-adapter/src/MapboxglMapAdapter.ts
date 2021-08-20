@@ -345,6 +345,8 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
           if (unselectOnClick) {
             l.unselect();
           }
+        } else if (l.options.unselectOnSecondClick) {
+          // l.unselect();
         }
         if (!firstSelectedLayer && firstSelectedLayer_) {
           firstSelectedLayer = firstSelectedLayer_;
