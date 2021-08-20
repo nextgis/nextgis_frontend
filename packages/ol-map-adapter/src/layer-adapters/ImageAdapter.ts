@@ -6,16 +6,19 @@ import WMSServerType from 'ol/source/WMSServerType';
 import { resolutionOptions } from '../utils/gerResolution';
 import { queryToObject, objectToQuery } from '../utils/utils';
 import { setTileLoadFunction } from '../utils/setTileLoadFunction';
+import { BaseAdapter } from './BaseAdapter';
 
 import type { Extent } from 'ol/extent';
 import type Map from 'ol/Map';
 import type { Options as ImageWMSOptions } from 'ol/source/ImageWMS';
 import type { MainLayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
 
-export class ImageAdapter implements MainLayerAdapter {
+export class ImageAdapter extends BaseAdapter implements MainLayerAdapter {
   layer: any;
 
-  constructor(public map: Map, public options: ImageAdapterOptions) {}
+  constructor(public map: Map, public options: ImageAdapterOptions) {
+    super(map, options);
+  }
 
   addLayer(options: ImageAdapterOptions): ImageLayer<ImageWMS> | undefined {
     if (options.url) {

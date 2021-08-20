@@ -40,6 +40,7 @@ import type {
 import { convertMapClickEvent } from '../utils/convertMapClickEvent';
 import { makeHtmlFromString } from '../utils/makeHtmlFromString';
 import { getCentroid } from '../utils/getCentroid';
+import { BaseAdapter } from './BaseAdapter';
 
 type MapBrowserPointerEvent = MapBrowserEvent<any>;
 type Layer = Base;
@@ -49,6 +50,7 @@ type OpenedPopup = [OlFeature<any>, Overlay, PopupOnCloseFunction[]];
 type VectorLayerType = VectorSource<any>;
 
 export class GeoJsonAdapter
+  extends BaseAdapter
   implements VectorLayerAdapter<Map, Layer, GeoJsonAdapterOptions>
 {
   layer?: VectorLayer<VectorLayerType>;
@@ -56,18 +58,19 @@ export class GeoJsonAdapter
   selectedPaint?: Paint;
   selected = false;
 
+  private displayProjection = 'EPSG:3857';
+  private lonlatProjection = 'EPSG:4326';
   private vectorSource = new VectorSource();
   private _features: OlFeature<any>[] = [];
   private _selectedFeatures: OlFeature<any>[] = [];
   private _filterFun?: DataLayerFilter<Feature>;
   private _mouseOver?: boolean;
-  private displayProjection = 'EPSG:3857';
-  private lonlatProjection = 'EPSG:4326';
   private _openedPopup: OpenedPopup[] = [];
   private _forEachFeatureAtPixel: ForEachFeatureAtPixelOrderedCallback[] = [];
   private _mapClickEvents: MapClickEvent[] = [];
 
   constructor(public map: Map, public options: GeoJsonAdapterOptions) {
+    super(map, options);
     this.displayProjection = map.getView().getProjection().getCode();
   }
 
@@ -211,18 +214,16 @@ export class GeoJsonAdapter
   }
 
   unselect(findFeatureCb?: DataLayerFilter<Feature> | PropertiesFilter): void {
+    let features = this._selectedFeatures;
     if (typeof findFeatureCb === 'function') {
-      const feature = this._selectedFeatures.filter((x) =>
+      features = this._selectedFeatures.filter((x) =>
         findFeatureCb({ feature: getFeature(x) }),
       );
-      feature.forEach((x) => {
-        this._unselectFeature(x);
-      });
     } else if (this.selected) {
       this.selected = false;
-      if (this.paint) {
-        this.setPaintEachLayer(this.paint);
-      }
+    }
+    for (const f of features) {
+      this._unselectFeature(f);
     }
     this._removeAllPopup();
   }

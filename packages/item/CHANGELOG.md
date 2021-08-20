@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/nextgis/nextgis_frontend/compare/v1.3.0...v1.4.0) (2021-08-17)
+
+
+### Bug Fixes
+
+* **item:** protect tree children arrays from modiffy ([8cdf728](https://github.com/nextgis/nextgis_frontend/commit/8cdf7281c0efbea522e2663846cfd396d65d6c5b))
+
+
+
+
+
 # [1.3.0](https://github.com/nextgis/nextgis_frontend/compare/v1.2.8...v1.3.0) (2021-08-06)
 
 **Note:** Version bump only for package @nextgis/item

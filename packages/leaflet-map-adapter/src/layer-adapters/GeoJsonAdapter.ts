@@ -104,7 +104,7 @@ export class GeoJsonAdapter
     } else if (!this.selected) {
       this.selected = true;
       if (this.selectedPaint) {
-        this.setPaintEachLayer(this.selectedPaint);
+        this._setPaintEachLayer(this.selectedPaint);
       }
     }
   }
@@ -120,7 +120,7 @@ export class GeoJsonAdapter
         this._removePopup(p[0]);
       }
       if (this.paint) {
-        this.setPaintEachLayer(this.paint);
+        this._setPaintEachLayer(this.paint);
       }
       this._selectedLayers.length = 0;
       this.selected = false;
@@ -228,7 +228,7 @@ export class GeoJsonAdapter
 
         data = filterGeometries(data, type);
         if (data) {
-          geoJsonOptions = this.getGeoJsonOptions(options, type);
+          geoJsonOptions = this._getGeoJsonOptions(options, type);
         }
       }
       new GeoJSON(data || undefined, geoJsonOptions);
@@ -270,6 +270,41 @@ export class GeoJsonAdapter
     const sw = bounds.getSouthWest();
     if (ne && sw) {
       return [sw.lng, sw.lat, ne.lng, ne.lat];
+    }
+  }
+
+  setOpacity(value: number): void {
+    this.options.opacity = value;
+    this.setPaint(this.paint);
+    this.setSelectedPaint(this.selectedPaint);
+  }
+
+  setPaint(paint?: Paint | null): void {
+    if (paint) {
+      this.paint = paint;
+      for (const l of this._layers) {
+        this._setPaint(l, paint);
+      }
+    }
+  }
+  setSelectedPaint(paint?: Paint | null): void {
+    if (paint) {
+      this.selectedPaint = paint;
+      for (const l of this._selectedLayers) {
+        this._setPaint(l, paint);
+      }
+    }
+  }
+  updatePaint(paint: Partial<Paint>): void {
+    this.paint = { ...this.paint, ...paint } as Paint;
+    for (const l of this._layers) {
+      this._setPaint(l, this.paint);
+    }
+  }
+  updateSelectedPaint(paint: Partial<Paint>): void {
+    this.selectedPaint = { ...this.selectedPaint, ...paint } as Paint;
+    for (const l of this._selectedLayers) {
+      this._setPaint(l, this.selectedPaint);
     }
   }
 
@@ -374,13 +409,13 @@ export class GeoJsonAdapter
     }
   }
 
-  private setPaintEachLayer(paint: Paint) {
+  private _setPaintEachLayer(paint: Paint) {
     this._layers.forEach((l) => {
-      this.setPaint(l, paint);
+      this._setPaint(l, paint);
     });
   }
 
-  private setPaint(def: LayerDef, paint: Paint) {
+  private _setPaint(def: LayerDef, paint: Paint) {
     let style: VectorAdapterLayerPaint | undefined = undefined;
     const { layer, feature } = def;
     if (layer && feature) {
@@ -392,16 +427,16 @@ export class GeoJsonAdapter
       if (style) {
         if (this.type === 'point' && style.type === 'icon') {
           const marker = layer as Marker;
-          const divIcon = this.createDivIcon(style);
+          const divIcon = this._createDivIcon(style);
           marker.setIcon(divIcon);
         } else if ('setStyle' in layer) {
-          (layer as Path).setStyle(this.preparePaint(style));
+          (layer as Path).setStyle(this._preparePaint(style));
         }
       }
     }
   }
 
-  private preparePaint(paint: VectorAdapterLayerPaint): PathOptions {
+  private _preparePaint(paint: VectorAdapterLayerPaint): PathOptions {
     if (paint.type !== 'get-paint') {
       // const path: CircleMarkerOptions | PathOptions = paint as CircleMarkerOptions | PathOptions;
       // if (path.opacity) {
@@ -432,22 +467,29 @@ export class GeoJsonAdapter
       if ('radius' in paint && typeof paint.radius === 'number') {
         readyPaint.radius = paint.radius;
       }
-      aliases.forEach(([to, from]: [keyof PathOptions, keyof PathPaint]) => {
-        const paintProp = (paint as PathPaint)[from];
+      for (const [to, from] of aliases) {
+        let paintProp = (paint as PathPaint)[from];
+        if (
+          defined(this.options.opacity) &&
+          from.toLowerCase().indexOf('opacity') !== -1
+        ) {
+          paintProp = Number(paintProp) * this.options.opacity;
+        }
+
         if (paintProp !== undefined) {
           Object.defineProperty(readyPaint, to, {
             enumerable: true,
             value: paintProp,
           });
         }
-      });
+      }
 
       return readyPaint;
     }
     return PAINT;
   }
 
-  private getGeoJsonOptions(
+  private _getGeoJsonOptions(
     options: GeoJsonAdapterOptions,
     type: VectorAdapterLayerType,
   ): GeoJSONOptions {
@@ -462,22 +504,22 @@ export class GeoJsonAdapter
           latLng: LatLng,
         ) => {
           const iconOpt = paint(feature);
-          const pointToLayer = this.createPaintToLayer(iconOpt as IconPaint);
+          const pointToLayer = this._createPaintToLayer(iconOpt as IconPaint);
           return pointToLayer(feature, latLng);
         };
       } else {
         lopt = {
           style: (feature) => {
             if (feature) {
-              return this.preparePaint({ ...PAINT, ...paint(feature) });
+              return this._preparePaint({ ...PAINT, ...paint(feature) });
             } else {
-              return this.preparePaint({ ...PAINT, type: 'path' });
+              return this._preparePaint({ ...PAINT, type: 'path' });
             }
           },
         };
       }
     } else {
-      lopt = this.createPaintOptions(paint as VectorAdapterLayerPaint, type);
+      lopt = this._createPaintOptions(paint as VectorAdapterLayerPaint, type);
     }
 
     lopt.onEachFeature = (feature: Feature, layer) => {
@@ -572,15 +614,13 @@ export class GeoJsonAdapter
     DomEvent.stopPropagation(e);
     const layer = e.target as Layer;
     const def: LayerDef = { layer, feature: (layer as any).feature };
-    let isSelected = !!this._selectedLayers.find((x) => x.layer === layer);
+    const isSelected = this._selectedLayers.find((x) => x.layer === layer);
     if (isSelected) {
       if (this.options && this.options.unselectOnSecondClick) {
-        this._unSelectLayer(def);
-        isSelected = false;
+        this._unSelectLayer(isSelected);
       }
     } else {
       this._selectLayer(def, 'click', e.latlng);
-      isSelected = true;
     }
   }
 
@@ -600,7 +640,7 @@ export class GeoJsonAdapter
     const { selectedPaint, popupOnSelect, popupOptions } = this.options;
 
     if (selectedPaint && def.layer) {
-      this.setPaint(def, selectedPaint);
+      this._setPaint(def, selectedPaint);
     }
     if (popupOnSelect) {
       this._openPopup(def, popupOptions, type, latlng);
@@ -620,7 +660,7 @@ export class GeoJsonAdapter
       this._selectedLayers.splice(index, 1);
       if (this.options) {
         if (this.options.paint) {
-          this.setPaint(def, this.options.paint);
+          this._setPaint(def, this.options.paint);
         }
 
         if (this.options.popupOnSelect && def.layer) {
@@ -631,19 +671,19 @@ export class GeoJsonAdapter
     this.selected = this._selectedLayers.length > 0;
   }
 
-  private createDivIcon(icon: IconPaint) {
+  private _createDivIcon(icon: IconPaint) {
     const { ...toLIconOpt } = icon;
     return new DivIcon({ className: '', ...toLIconOpt });
   }
 
-  private createPaintToLayer(icon: IconPaint) {
+  private _createPaintToLayer(icon: IconPaint) {
     if (icon && icon.type) {
       if (icon.type === 'icon') {
         const iconClassName = icon.className;
         const html = icon.html;
         if (iconClassName || html) {
           return (geoJsonPoint: any, latlng: LatLngExpression) => {
-            const divIcon = this.createDivIcon(icon);
+            const divIcon = this._createDivIcon(icon);
             return new Marker(latlng, { icon: divIcon });
           };
         }
@@ -656,23 +696,23 @@ export class GeoJsonAdapter
     }
     return (geoJsonPoint: any, latlng: LatLngExpression) => {
       const p: any = PAINT;
-      return new CircleMarker(latlng, this.preparePaint({ ...p, ...icon }));
+      return new CircleMarker(latlng, this._preparePaint({ ...p, ...icon }));
     };
   }
 
-  private createPaintOptions(
+  private _createPaintOptions(
     paintOptions: VectorAdapterLayerPaint,
     type: VectorAdapterLayerType,
   ): GeoJSONOptions {
     const geoJsonOptions: GeoJSONOptions = {};
-    const paint = (paintOptions && this.preparePaint(paintOptions)) || {};
+    const paint = (paintOptions && this._preparePaint(paintOptions)) || {};
     if (paintOptions) {
       geoJsonOptions.style = () => {
         return paint;
       };
     }
     if (type === 'point') {
-      (geoJsonOptions as any).pointToLayer = this.createPaintToLayer(
+      (geoJsonOptions as any).pointToLayer = this._createPaintToLayer(
         paintOptions as IconPaint,
       );
     } else if (type === 'line') {

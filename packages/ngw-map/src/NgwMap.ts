@@ -200,7 +200,9 @@ export class NgwMap<
         const id = layer && this.getLayerId(layer);
         if (layer && id) {
           this._ngwLayers[id] = { layer, resourceId: layer.resourceId };
-
+          layer.options.name =
+            layer.options.name ||
+            (layer.item && layer.item.resource.display_name);
           if (layer.options.baselayer) {
             const visibleLayerBaseLayer = this.getActiveBaseLayer();
             if (visibleLayerBaseLayer) {
