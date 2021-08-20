@@ -16,6 +16,7 @@ export interface LoadScriptOptions
 |  --- | --- | --- |
 |  [async?](./dom.loadscriptoptions.async.md) | boolean | <i>(Optional)</i> |
 |  [crossOrigin?](./dom.loadscriptoptions.crossorigin.md) | 'anonymous' \| string | <i>(Optional)</i> |
+|  [data?](./dom.loadscriptoptions.data.md) | Record&lt;string, string \| number \| boolean&gt; | <i>(Optional)</i> |
 |  [defer?](./dom.loadscriptoptions.defer.md) | boolean | <i>(Optional)</i> |
 |  [id?](./dom.loadscriptoptions.id.md) | string | <i>(Optional)</i> |
 

@@ -3,13 +3,16 @@ import TileLayer from 'ol/layer/Tile';
 
 import { setTileLoadFunction } from '../utils/setTileLoadFunction';
 import { resolutionOptions } from '../utils/gerResolution';
+import { BaseAdapter } from './BaseAdapter';
 
 import type { Options } from 'ol/source/XYZ';
 import type Map from 'ol/Map';
 import type { MainLayerAdapter, TileAdapterOptions } from '@nextgis/webmap';
 
-export class TileAdapter implements MainLayerAdapter {
-  constructor(public map: Map, public options: TileAdapterOptions) {}
+export class TileAdapter extends BaseAdapter implements MainLayerAdapter {
+  constructor(public map: Map, public options: TileAdapterOptions) {
+    super(map, options);
+  }
 
   addLayer(options: TileAdapterOptions): TileLayer<XYZ> {
     const urls: string[] = [];

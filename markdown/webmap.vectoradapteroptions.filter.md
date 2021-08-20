@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-filter?: DataLayerFilter;
+filter?: DataLayerFilter<F, L>;
 ```

@@ -20,6 +20,5 @@ export abstract class BaseAdapter<O extends AdapterOptions = AdapterOptions>
     Object.assign(this, { map: undefined });
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   abstract addLayer(options: O): TLayer | Promise<TLayer> | undefined;
 }

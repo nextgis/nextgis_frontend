@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-requestOptions?: NgwFeatureRequestOptions;
+requestOptions?: NgwFeatureRequestOptions<P>;
 ```

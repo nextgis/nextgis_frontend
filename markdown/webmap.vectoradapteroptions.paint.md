@@ -9,7 +9,7 @@ Determine the appearance of the vector data geometries.
 <b>Signature:</b>
 
 ```typescript
-paint?: Paint;
+paint?: Paint<F>;
 ```
 
 ## Example 1

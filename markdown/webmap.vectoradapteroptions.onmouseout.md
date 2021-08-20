@@ -9,14 +9,14 @@ Fired when the mouse leaves the layer.
 <b>Signature:</b>
 
 ```typescript
-onMouseOut?(opt: OnLayerClickOptions): void;
+onMouseOut?(opt: OnLayerClickOptions<F, L>): void;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  opt | [OnLayerClickOptions](./webmap.onlayerclickoptions.md) |  |
+|  opt | [OnLayerClickOptions](./webmap.onlayerclickoptions.md)<!-- -->&lt;F, L&gt; |  |
 
 <b>Returns:</b>
 

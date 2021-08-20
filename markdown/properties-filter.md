@@ -10,6 +10,7 @@
 |  --- | --- |
 |  [checkIfPropertyFilter(filter)](./properties-filter.checkifpropertyfilter.md) |  |
 |  [featureFilter(feature, filters)](./properties-filter.featurefilter.md) |  |
+|  [isPropertyFilter(filter)](./properties-filter.ispropertyfilter.md) |  |
 |  [propertiesFilter(properties, filters)](./properties-filter.propertiesfilter.md) |  |
 
 ## Variables

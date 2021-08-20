@@ -1,6 +1,5 @@
 import type { ControlPosition } from './MapAdapter';
 
-
 export type OnClickSync = (status?: boolean) => void;
 
 export type onClickAsync = (status?: boolean) => Promise<void>;
@@ -20,7 +19,6 @@ export interface ZoomControlOptions {
   zoomOutTitle?: string;
 }
 
-
 export interface AttributionControlOptions {
   /**
    * If true force a compact attribution that shows the full attribution on mouse hover,
@@ -32,7 +30,6 @@ export interface AttributionControlOptions {
    */
   customAttribution?: string | string[];
 }
-
 
 export interface MapControls extends ContribControlsOptions {
   [name: string]: Record<string, any>;
@@ -48,10 +45,12 @@ export interface ControlOptions {
   control?: string;
 }
 
-export type ControlsOptions<O extends MapControls = MapControls, K extends keyof O = keyof O> = {
+export type ControlsOptions<
+  O extends MapControls = MapControls,
+  K extends keyof O = keyof O,
+> = {
   [control in K]: O[K];
 };
-
 
 export interface MapControl<M extends any = any> {
   onAdd(map?: M): HTMLElement | undefined;
@@ -73,7 +72,6 @@ export interface ButtonControlOptions {
   /** Button HTMLElement title */
   title?: string;
 }
-
 
 export type HtmlDef = string | HTMLElement;
 
@@ -119,13 +117,11 @@ export interface ToggleControlOptions {
   getStatus?: () => boolean;
 }
 
-
 export interface CreateControlOptions {
   bar?: boolean;
   margin?: boolean;
   addClass?: string;
 }
-
 
 export interface ToggleControl {
   onClick: OnClick;

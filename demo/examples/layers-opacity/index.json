@@ -1,0 +1,5 @@
+{
+  "name": "Layers opacity",
+  "description": "Set transparency with parameters and with method",
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
+}

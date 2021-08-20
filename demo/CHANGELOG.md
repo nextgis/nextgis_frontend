@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/nextgis/nextgis_frontend/compare/v1.4.0...v1.5.0) (2021-08-19)
+
+
+### Features
+
+* **leaflet-map-adapter:** change geojson layer opacity ([3d75fb2](https://github.com/nextgis/nextgis_frontend/commit/3d75fb2f20d0759839dcaa7650c10740a1f35d22))
+* **mapboxgl-map-adapter:** add setLayerOpacity methods ([6d18193](https://github.com/nextgis/nextgis_frontend/commit/6d18193b617a42ad50640ec659aa755962954e1b))
+* **ol-map-adapter:** add setLayerOpacity mapAdapter and each layer methods ([b291921](https://github.com/nextgis/nextgis_frontend/commit/b2919210d44be4f6cf5b00d8e7fa735b98961702))
+
+
+
+
+
+# [1.4.0](https://github.com/nextgis/nextgis_frontend/compare/v1.3.0...v1.4.0) (2021-08-17)
+
+
+### Bug Fixes
+
+* **leaflet-map-adapter:** repain unSelectOnSecondClick ([c2c0cab](https://github.com/nextgis/nextgis_frontend/commit/c2c0cab0302dc80fc776b9f27c778f18de148c77))
+* **mapboxgl-map-adapter:** repair unselectOnSecondClick ([c484589](https://github.com/nextgis/nextgis_frontend/commit/c4845897458d9da73a37ecd57879d038103f3f57))
+* **ol-map-adapter:** repair unselect on second click ([a85d87c](https://github.com/nextgis/nextgis_frontend/commit/a85d87cbf7ad8f19caa8212d532d51a3dd886bd6))
+
+
+
+
+
 # [1.3.0](https://github.com/nextgis/nextgis_frontend/compare/v1.2.8...v1.3.0) (2021-08-06)
 
 

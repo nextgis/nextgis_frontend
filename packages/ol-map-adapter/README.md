@@ -18,6 +18,7 @@ import { WebMap } from '@nextgis/webmap';
 import OlMapAdapter from '@nextgis/ol-map-adapter';
 // manually added styles
 import 'ol/ol.css';
+import  '@nextgis/ol-map-adapter/lib/ol-map-adapter.css';
 
 const webMap = new WebMap({
   mapAdapter: new OlMapAdapter()

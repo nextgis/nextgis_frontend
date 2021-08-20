@@ -11,14 +11,14 @@ const _getters = {};
 
 // actions
 const actions = {
-  setDefaultNgwMap({ commit }, ngwMap: string) {
+  setDefaultNgwMap({ commit }, ngwMap: string): void {
     commit('setDefaultNgwMap', ngwMap);
   },
 };
 
 // mutations
 const mutations = {
-  setDefaultNgwMap(state: AppState, ngwMap: string) {
+  setDefaultNgwMap(state: AppState, ngwMap: string): void {
     state.defaultNgwMap = ngwMap;
   },
 };

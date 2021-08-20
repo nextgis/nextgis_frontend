@@ -9,7 +9,7 @@ The paint that applies to the features after it becomes selected.
 <b>Signature:</b>
 
 ```typescript
-selectedPaint?: Paint;
+selectedPaint?: Paint<F>;
 ```
 
 ## Example

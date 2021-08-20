@@ -1,10 +1,10 @@
 import { MainLayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
 import { Map } from 'maplibre-gl';
 import { TLayer } from '../MapboxglMapAdapter';
-import { BaseAdapter } from './BaseAdapter';
+import { BaseRasterAdapter } from './BaseRasterAdapter';
 
 export class ImageAdapter
-  extends BaseAdapter<ImageAdapterOptions>
+  extends BaseRasterAdapter<ImageAdapterOptions>
   implements MainLayerAdapter<Map, TLayer, ImageAdapterOptions>
 {
   addLayer(
@@ -54,6 +54,7 @@ export class ImageAdapter
         options.before,
       );
       this.layer = [this._layerId];
+      this.updateOpacity();
       return this.layer;
     }
   }
