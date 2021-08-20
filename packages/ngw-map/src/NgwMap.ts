@@ -19,6 +19,7 @@ import {
   getIdentifyItems,
   createIdentifyItem,
   NgwLayerAdapterType,
+  IdentifyItem,
 } from '@nextgis/ngw-kit';
 import { deprecatedWarn } from '@nextgis/utils';
 import { getIcon } from '@nextgis/icons';
@@ -57,7 +58,7 @@ import type { Geometry, Feature, FeatureCollection } from 'geojson';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type { QmsAdapterOptions } from '@nextgis/qms-kit';
 import type { NgwLayerOptions } from '@nextgis/ngw-kit';
-import type { NgwMapOptions, NgwMapEvents, NgwLayers } from './interfaces';
+import type { NgwMapOptions, NgwMapEvents, NgwLayers, NgwIdentifyEvent } from './interfaces';
 import type { FetchNgwItemOptions } from '@nextgis/ngw-kit';
 
 type PromiseGroup = 'select' | 'identify';
@@ -703,10 +704,15 @@ export class NgwMap<
     return selectPromise;
   }
 
-  private _prepareToIdentify(identify: NgwIdentify) {
+  private _prepareToIdentify<
+    F = FeatureProperties,
+    G extends Geometry = Geometry,
+  >(
+    identify: NgwIdentify,
+  ): NgwIdentifyEvent {
     const getIdentifyItems_ = () => {
       return getIdentifyItems(identify, true).map((x) => {
-        return createIdentifyItem({
+        return createIdentifyItem<F, G>({
           feature: x.feature,
           connector: this.connector,
         });
