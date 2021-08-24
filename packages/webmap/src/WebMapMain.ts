@@ -39,7 +39,7 @@ let ID = 0;
 
 const OPTIONS: MapOptions = {
   minZoom: 0,
-  maxZoom: 21,
+  maxZoom: 20,
   paint: {
     color: 'blue',
     opacity: 0.4,
