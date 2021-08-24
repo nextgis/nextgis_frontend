@@ -29,7 +29,8 @@
       const apiKey = '67f622354b0e6302cb2b59f4d1b634e8';
       NgwMap.create({
         target: 'map',
-        bounds: [-68, 25, 268, 80]
+        center: [37.6831, 55.7618],
+        zoom: 8,
       }).then((ngwMap) => {
         ngwMap.addLayer('TILE', {
           url:
@@ -45,7 +46,6 @@
             apiKey,
           maxZoom: 18
         });
-        window.ngwMap = ngwMap;
       });
     </script>
   </body>
