@@ -1,4 +1,5 @@
-import { LngLatArray, MapClickEvent } from '@nextgis/webmap';
+import { LngLatArray } from '@nextgis/utils';
+import { MapClickEvent } from '@nextgis/webmap';
 import { Cartesian2, Cartesian3 } from 'cesium';
 
 export interface CesiumMapClickEvent {

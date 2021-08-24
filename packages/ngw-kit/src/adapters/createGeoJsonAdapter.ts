@@ -1,28 +1,29 @@
 import { EventEmitter } from 'events';
-import {
-  VectorLayerAdapter,
-  Type,
+import { debounce } from '@nextgis/utils';
+import { propertiesFilter } from '@nextgis/properties-filter';
+import { createPopupContent } from '../utils/createPopupContent';
+import { getLayerFilterOptions } from '../utils/getLayerFilterOptions';
+import { fetchNgwResourceExtent } from '../utils/fetchNgwExtent';
+import { resourceIdFromLayerOptions } from '../utils/resourceIdFromLayerOptions';
+import { fetchNgwLayerFeatureCollection } from '../utils/fetchNgwLayerFeatureCollection';
+import { vectorLayerGeomToPaintTypeAlias } from '../utils/utils';
+import { prepareNgwFieldsToPropertiesFilter } from '../utils/prepareNgwFieldsToPropertiesFilter';
+
+import type { FeatureCollection } from 'geojson';
+import type { PropertiesFilter } from '@nextgis/properties-filter';
+import type CancelablePromise from '@nextgis/cancelable-promise';
+import type { Type } from '@nextgis/utils';
+import type {
   GeoJsonAdapterOptions,
+  VectorLayerAdapter,
   FilterOptions,
   LayerAdapter,
 } from '@nextgis/webmap';
-import { debounce } from '@nextgis/utils';
-import { PropertiesFilter, propertiesFilter } from '@nextgis/properties-filter';
-import CancelablePromise from '@nextgis/cancelable-promise';
-import { vectorLayerGeomToPaintTypeAlias } from '../utils/utils';
-import { createPopupContent } from '../utils/createPopupContent';
-import { getLayerFilterOptions } from '../utils/getLayerFilterOptions';
-import { resourceIdFromLayerOptions } from '../utils/resourceIdFromLayerOptions';
-import {
+import type {
   NgwLayerOptions,
   GetClassAdapterOptions,
   NgwFeatureRequestOptions,
 } from '../interfaces';
-import { fetchNgwLayerFeatureCollection } from '../utils/fetchNgwLayerFeatureCollection';
-import { fetchNgwResourceExtent } from '../utils/fetchNgwExtent';
-
-import type { FeatureCollection } from 'geojson';
-import { prepareNgwFieldsToPropertiesFilter } from '../utils/prepareNgwFieldsToPropertiesFilter';
 
 interface FilterArgs {
   filters?: PropertiesFilter;

@@ -11,26 +11,22 @@ import { getNgwWebmapExtent } from './utils/fetchNgwExtent';
 import { updateImageParams } from './utils/utils';
 import { BookmarkItem } from './BookmarkItem';
 
-import type { Type } from '@nextgis/utils';
-import type { ItemOptions } from '@nextgis/item';
 import type StrictEventEmitter from 'strict-event-emitter-types';
+import type { Type, LngLatBoundsArray } from '@nextgis/utils';
+import type { ItemOptions } from '@nextgis/item';
 import type {
-  ResourceItem,
   WebmapResource,
   BasemapWebmap,
+  ResourceItem,
 } from '@nextgis/ngw-connector';
-import type {
-  WebMap,
-  LngLatBoundsArray,
-  RasterAdapterOptions,
-} from '@nextgis/webmap';
+import type { WebMap, RasterAdapterOptions } from '@nextgis/webmap';
 import type {
   TreeGroup,
   TreeLayer,
+  ResourceAdapter,
   NgwLayerAdapterType,
   NgwWebmapAdapterOptions,
   NgwWebmapLayerAdapterEvents,
-  ResourceAdapter,
 } from './interfaces';
 
 export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {

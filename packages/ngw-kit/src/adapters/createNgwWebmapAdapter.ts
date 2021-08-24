@@ -1,7 +1,8 @@
-import { Type } from '@nextgis/webmap';
-import { GetClassAdapterOptions } from '../interfaces';
 import { NgwWebmapLayerAdapter as NWLayerAdapter } from '../NgwWebmapLayerAdapter';
 import { resourceIdFromLayerOptions } from '../utils/resourceIdFromLayerOptions';
+
+import type { Type } from '@nextgis/utils';
+import type { GetClassAdapterOptions } from '../interfaces';
 
 export async function createWebMapAdapter({
   layerOptions: options,

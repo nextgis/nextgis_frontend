@@ -1,6 +1,8 @@
-import { Type, MainLayerAdapter, TileAdapterOptions } from '@nextgis/webmap';
 import { QmsKit } from '@nextgis/qms-kit';
-import { GetClassAdapterOptions } from '../interfaces';
+
+import type { Type } from '@nextgis/utils';
+import type { MainLayerAdapter, TileAdapterOptions } from '@nextgis/webmap';
+import type { GetClassAdapterOptions } from '../interfaces';
 
 export async function createBasemapLayerAdapter({
   webMap,

@@ -26,14 +26,13 @@ import type BaseEvent from 'ol/events/Event';
 import type Control from 'ol/control/Control';
 import type MapBrowserEvent from 'ol/MapBrowserEvent';
 import type { MapOptions as OlMapOptions } from 'ol/PluggableMap';
+import type { LngLatArray, LngLatBoundsArray } from '@nextgis/utils';
 import type {
   FitOptions,
   MapControl,
   MapAdapter,
   MapOptions,
-  LngLatArray,
   ControlPosition,
-  LngLatBoundsArray,
   CreateControlOptions,
   ButtonControlOptions,
 } from '@nextgis/webmap';

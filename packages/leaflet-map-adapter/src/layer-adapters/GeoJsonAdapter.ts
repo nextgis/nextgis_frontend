@@ -35,12 +35,12 @@ import type {
   PathPaint,
   VectorAdapterLayerPaint,
 } from '@nextgis/paint';
+import type { LngLatBoundsArray } from '@nextgis/utils';
 import type {
   VectorAdapterLayerType,
   GeoJsonAdapterOptions,
   PopupOnCloseFunction,
   VectorLayerAdapter,
-  LngLatBoundsArray,
   OnLayerSelectType,
   LayerDefinition,
   DataLayerFilter,
