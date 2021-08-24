@@ -1,12 +1,10 @@
 const findPackages = require('../scripts/findPackages');
 
-const packages = findPackages();
+const filteredPackages = findPackages().filter((x) => {
+  return !x.name.includes('vue');
+});
 
-const entryPoints = packages
-  .filter((x) => {
-    return !x.name.includes('vue');
-  })
-  .map((x) => x.path + '/src/index.ts');
+const entryPoints = filteredPackages.map((x) => x.path + '/src/index.ts');
 
 module.exports = {
   out: 'build',
