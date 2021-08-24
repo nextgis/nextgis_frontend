@@ -1,5 +1,6 @@
 import CancelablePromise from '@nextgis/cancelable-promise';
-import type { LngLatBoundsArray } from '@nextgis/webmap';
+
+import type { LngLatBoundsArray } from '@nextgis/utils';
 import type NgwConnector from '@nextgis/ngw-connector';
 import type { WebmapResource, ResourceItem } from '@nextgis/ngw-connector';
 import type {

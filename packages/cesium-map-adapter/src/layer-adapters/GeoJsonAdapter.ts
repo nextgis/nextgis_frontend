@@ -11,23 +11,21 @@ import {
   HeightReference,
   JulianDate,
 } from 'cesium';
+import { isPaintCallback, isBasePaint, isPaint } from '@nextgis/paint';
 
-import {
+import type { LngLatBoundsArray } from '@nextgis/utils';
+import type {
+  LayerDefinition,
+  DataLayerFilter,
   VectorLayerAdapter,
   GeoJsonAdapterOptions,
-  DataLayerFilter,
-  LayerDefinition,
-  LngLatBoundsArray,
 } from '@nextgis/webmap';
 import { PropertiesFilter } from '@nextgis/properties-filter';
-import {
+import type {
   VectorAdapterLayerPaint,
-  isPaintCallback,
-  Paint,
-  isBasePaint,
-  isPaint,
   GeometryPaint,
   PinPaint,
+  Paint,
 } from '@nextgis/paint';
 
 import { BaseAdapter, Map } from './BaseAdapter';

@@ -1,12 +1,14 @@
-import { WebMap, Type, VectorAdapterLayerType } from '@nextgis/webmap';
 import NgwConnector, { GeometryType } from '@nextgis/ngw-connector';
-import {
-  NgwLayerOptions,
-  NgwWebmapAdapterOptions,
-  ResourceAdapter,
-} from '../interfaces';
 import { createAsyncAdapter } from '../adapters/createAsyncAdapter';
 import { NgwWebmapLayerAdapter } from '../NgwWebmapLayerAdapter';
+
+import type { Type } from '@nextgis/utils';
+import type { WebMap, VectorAdapterLayerType } from '@nextgis/webmap';
+import type {
+  ResourceAdapter,
+  NgwLayerOptions,
+  NgwWebmapAdapterOptions,
+} from '../interfaces';
 
 export function updateImageParams(
   params: Record<string, any>,

@@ -1,6 +1,7 @@
 import { StateItem } from './StateItem';
+
+import type { LngLatArray } from '@nextgis/utils';
 import type { WebMapEvents } from '../../interfaces/Events';
-import type { LngLatArray } from '../../interfaces/BaseTypes';
 import type { MapOptions } from '../../interfaces/MapOptions';
 
 export class CenterState extends StateItem<LngLatArray> {

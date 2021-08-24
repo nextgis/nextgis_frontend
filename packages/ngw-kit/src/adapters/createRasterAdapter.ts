@@ -1,14 +1,16 @@
-import {
+import { defined } from '@nextgis/utils';
+
+import { getLayerAdapterOptions } from '../utils/getLayerAdapterOptions';
+import { resourceIdFromLayerOptions } from '../utils/resourceIdFromLayerOptions';
+
+import type { Type } from '@nextgis/utils';
+import type { ResourceItem, ResourceCls } from '@nextgis/ngw-connector';
+import type { MainLayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
+import type {
   ResourceAdapter,
   NgwLayerAdapterType,
   GetClassAdapterOptions,
 } from '../interfaces';
-import { MainLayerAdapter, Type, ImageAdapterOptions } from '@nextgis/webmap';
-import { defined } from '@nextgis/utils';
-import { ResourceItem, ResourceCls } from '@nextgis/ngw-connector';
-
-import { getLayerAdapterOptions } from '../utils/getLayerAdapterOptions';
-import { resourceIdFromLayerOptions } from '../utils/resourceIdFromLayerOptions';
 
 export async function createRasterAdapter({
   layerOptions,

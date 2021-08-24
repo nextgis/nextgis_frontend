@@ -16,15 +16,14 @@ import type {
   ControlPosition,
   LeafletMouseEvent,
 } from 'leaflet';
+import type { LngLatBoundsArray, LngLatArray } from '@nextgis/utils';
 import type {
   CreateControlOptions,
   ButtonControlOptions,
-  LngLatBoundsArray,
   LocationEvents,
   LocateOptions,
   MainMapEvents,
   LayerAdapter,
-  LngLatArray,
   MapAdapter,
   MapOptions,
   FitOptions,
