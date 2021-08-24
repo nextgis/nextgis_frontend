@@ -35,6 +35,7 @@ export class TileAdapter extends BaseAdapter<TileAdapterOptions, Layer> {
     }
     this._layer = layer;
 
+
     return layer;
   }
 
