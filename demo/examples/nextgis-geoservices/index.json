@@ -1,0 +1,6 @@
+{
+  "name": "NextGIS Geoservices",
+  "description": "Add map layers from NextGIS Geoservices",
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"],
+  "tags": ["nextgis", "Geoservices"]
+}

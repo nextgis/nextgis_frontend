@@ -5,3 +5,4 @@ if (process.env.NODE_ENV === 'production') {
 } else {
   module.exports = require('./lib/area.cjs.js');
 }
+//# sourceMappingURL=./lib/area.esm-bundler.js.map
