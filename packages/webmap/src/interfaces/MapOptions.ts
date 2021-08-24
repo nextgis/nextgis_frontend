@@ -1,12 +1,15 @@
-import type { TileJson } from '@nextgis/utils';
+import type {
+  Type,
+  TileJson,
+  LngLatArray,
+  LngLatBoundsArray,
+} from '@nextgis/utils';
 import type { GeometryPaint } from '@nextgis/paint';
 import type { StarterKit } from './StarterKit';
 import type { RuntimeParams } from './RuntimeParams';
 import type { MapAdapter, FitOptions } from './MapAdapter';
 import type { LayerAdapter, AdapterOptions } from './LayerAdapter';
-import type { LngLatArray, LngLatBoundsArray, Type } from './BaseTypes';
 import type { ControlsOptions, MapControls } from './MapControl';
-
 
 export interface MapOptions<C = any> {
   /**
@@ -142,17 +145,14 @@ export interface MapOptions<C = any> {
   tileJson?: TileJson;
 }
 
-
 export type OnBeforeLayerAdd = (e: {
   adapter?: Type<LayerAdapter>;
   options: AdapterOptions & Record<string, any>;
 }) => { adapter?: Type<LayerAdapter>; options?: AdapterOptions } | undefined;
 
-
 export interface ToggleLayerOptions {
   silent?: boolean;
 }
-
 
 export interface GetAttributionsOptions {
   onlyVisible?: boolean;

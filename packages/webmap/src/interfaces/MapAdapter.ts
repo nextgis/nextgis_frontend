@@ -1,8 +1,13 @@
-import type StrictEventEmitter from 'strict-event-emitter-types';
-import type { Type } from '@nextgis/utils';
-import type { LayerAdapter } from './LayerAdapter';
-import type { ZoomLevel } from './BaseTypes';
 import type { EventEmitter } from 'events';
+import type StrictEventEmitter from 'strict-event-emitter-types';
+import type {
+  Type,
+  LatLng,
+  ZoomLevel,
+  LngLatArray,
+  LngLatBoundsArray,
+} from '@nextgis/utils';
+import type { LayerAdapter } from './LayerAdapter';
 import type {
   MapControls,
   MapControl,
@@ -10,13 +15,8 @@ import type {
   ButtonControlOptions,
   ToggleControlOptions,
 } from './MapControl';
+import type { Pixel } from './BaseTypes';
 import type { MapOptions } from './MapOptions';
-import type {
-  LatLng,
-  LngLatArray,
-  LngLatBoundsArray,
-  Pixel,
-} from './BaseTypes';
 import type { MapAdapterEvents } from './Events';
 
 /**

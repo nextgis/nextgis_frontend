@@ -3,6 +3,7 @@ import { EventEmitter } from 'events';
 import mapboxgl, { LngLatBoundsLike, Map } from 'maplibre-gl';
 
 import { debounce } from '@nextgis/utils';
+
 import { WmsAdapter } from './layer-adapters/WmsAdapter';
 import { MvtAdapter } from './layer-adapters/MvtAdapter';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
@@ -15,14 +16,13 @@ import { AttributionControl } from './controls/AttributionControl';
 import { createButtonControl } from './controls/createButtonControl';
 import { convertMapClickEvent } from './utils/convertMapClickEvent';
 
+import type { LngLatBoundsArray, LngLatArray } from '@nextgis/utils';
 import type {
   CreateControlOptions,
   ButtonControlOptions,
-  LngLatBoundsArray,
   ControlPosition,
   LayerAdapter,
   WebMapEvents,
-  LngLatArray,
   MapAdapter,
   FitOptions,
   MapControl,

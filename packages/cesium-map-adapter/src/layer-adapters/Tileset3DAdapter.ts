@@ -13,10 +13,8 @@ import { whenSampleTerrainMostDetailed } from '../utils/whenSampleTerrainMostDet
 import { BaseAdapter } from './BaseAdapter';
 
 import type Resource from 'cesium/Source/Core/Resource';
-import type {
-  Tileset3DAdapterOptions,
-  LngLatBoundsArray,
-} from '@nextgis/webmap';
+import type { LngLatBoundsArray } from '@nextgis/utils';
+import type { Tileset3DAdapterOptions } from '@nextgis/webmap';
 
 export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
   layer?: Cesium3DTileset;

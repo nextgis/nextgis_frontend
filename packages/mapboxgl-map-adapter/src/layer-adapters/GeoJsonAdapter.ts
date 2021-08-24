@@ -20,16 +20,16 @@ import type {
   GeometryCollection,
   GeoJsonProperties,
   FeatureCollection,
-  GeoJsonObject,
   GeometryObject,
+  GeoJsonObject,
   Geometry,
 } from 'geojson';
 import type { VectorAdapterLayerPaint, GetPaintCallback } from '@nextgis/paint';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
+import type { LngLatBoundsArray } from '@nextgis/utils';
 import type {
   LayerDefinition,
   DataLayerFilter,
-  LngLatBoundsArray,
   GeoJsonAdapterOptions,
   VectorAdapterLayerType,
 } from '@nextgis/webmap';

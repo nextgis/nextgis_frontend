@@ -1,4 +1,5 @@
 import { EventEmitter } from 'events';
+import ControlContainer from '@nextgis/control-container';
 
 import {
   Color,
@@ -20,23 +21,6 @@ import {
   viewerCesium3DTilesInspectorMixin,
 } from 'cesium';
 
-import {
-  FitOptions,
-  MapControl,
-  MapOptions,
-  MapAdapter,
-  LngLatArray,
-  WebMapEvents,
-  MapClickEvent,
-  ControlPosition,
-  LngLatBoundsArray,
-  CreateControlOptions,
-  ButtonControlOptions,
-} from '@nextgis/webmap';
-import { Type } from '@nextgis/utils';
-import { PathPaint } from '@nextgis/paint';
-import ControlContainer from '@nextgis/control-container';
-
 import { TileAdapter } from './layer-adapters/TileAdapter';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 import { TerrainAdapter } from './layer-adapters/TerrainAdapter';
@@ -46,8 +30,25 @@ import { getCameraFocus } from './utils/getCameraFocus';
 import { getDefaultTerrain } from './utils/getDefaultTerrain';
 import { cartesian3ToLngLat } from './utils/cartesian3ToLngLat';
 import { whenSampleTerrainMostDetailed } from './utils/whenSampleTerrainMostDetailed';
-import { CesiumAdapterMapClickEvent, CesiumMapClickEvent } from './interfaces';
 import { MeasureControl } from './controls/MeasureControl';
+
+import type {
+  FitOptions,
+  MapControl,
+  MapOptions,
+  MapAdapter,
+  WebMapEvents,
+  MapClickEvent,
+  ControlPosition,
+  CreateControlOptions,
+  ButtonControlOptions,
+} from '@nextgis/webmap';
+import type { Type, LngLatArray, LngLatBoundsArray } from '@nextgis/utils';
+import type { PathPaint } from '@nextgis/paint';
+import type {
+  CesiumAdapterMapClickEvent,
+  CesiumMapClickEvent,
+} from './interfaces';
 
 type Layer = any;
 type Control = any;
