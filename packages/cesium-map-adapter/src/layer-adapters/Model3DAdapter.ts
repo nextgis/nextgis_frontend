@@ -1,7 +1,8 @@
 /**
  * UNDER DEVELOPMENT
  */
-import { LngLatBoundsArray, Model3DOptions } from '@nextgis/webmap';
+import { LngLatBoundsArray } from '@nextgis/utils';
+import { Model3DOptions } from '@nextgis/webmap';
 import {
   Model,
   Transforms,

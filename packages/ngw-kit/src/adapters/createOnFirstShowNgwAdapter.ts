@@ -1,9 +1,5 @@
-import {
-  WebMap,
-  Type,
-  MainLayerAdapter,
-  AdapterOptions,
-} from '@nextgis/webmap';
+import { Type } from '@nextgis/utils';
+import { WebMap, MainLayerAdapter, AdapterOptions } from '@nextgis/webmap';
 import NgwConnector, { BasemapWebmapItem } from '@nextgis/ngw-connector';
 import { createAsyncAdapter } from './createAsyncAdapter';
 

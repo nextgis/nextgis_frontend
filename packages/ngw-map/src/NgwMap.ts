@@ -6,20 +6,18 @@ import { AdapterOptions, WebMap } from '@nextgis/webmap';
 import NgwConnector from '@nextgis/ngw-connector';
 
 import {
-  addNgwLayer,
-  fetchNgwLayerItem,
-  fetchNgwLayerItems,
-  fetchNgwLayerFeature,
   fetchNgwLayerFeatureCollection,
-  fetchIdentifyGeoJson,
   fetchNgwResourceExtent,
+  fetchNgwLayerFeature,
+  fetchIdentifyGeoJson,
   sendIdentifyRequest,
-  getCompanyLogo,
-  fetchIdentifyItem,
-  getIdentifyItems,
   createIdentifyItem,
-  NgwLayerAdapterType,
-  IdentifyItem,
+  fetchNgwLayerItems,
+  fetchIdentifyItem,
+  fetchNgwLayerItem,
+  getIdentifyItems,
+  getCompanyLogo,
+  addNgwLayer,
 } from '@nextgis/ngw-kit';
 import { deprecatedWarn } from '@nextgis/utils';
 import { getIcon } from '@nextgis/icons';
@@ -50,6 +48,7 @@ import type {
   NgwIdentify,
   NgwWebmapItem,
   ResourceAdapter,
+  NgwLayerAdapterType,
   FetchNgwItemsOptions,
   NgwFeatureItemResponse,
   NgwFeatureRequestOptions,
@@ -58,8 +57,14 @@ import type { Geometry, Feature, FeatureCollection } from 'geojson';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type { QmsAdapterOptions } from '@nextgis/qms-kit';
 import type { NgwLayerOptions } from '@nextgis/ngw-kit';
-import type { NgwMapOptions, NgwMapEvents, NgwLayers, NgwIdentifyEvent } from './interfaces';
+import type {
+  NgwIdentifyEvent,
+  NgwMapOptions,
+  NgwMapEvents,
+  NgwLayers,
+} from './interfaces';
 import type { FetchNgwItemOptions } from '@nextgis/ngw-kit';
+import { getIdentifyRadius } from './utils/getIentifyRadius';
 
 type PromiseGroup = 'select' | 'identify';
 
@@ -542,10 +547,10 @@ export class NgwMap<
   private async _createWebMap() {
     await this.create();
     if (this.options.qmsId) {
-      this.addQmsBaseLayer();
+      this._addQmsBaseLayer();
     }
     if (this.options.osm) {
-      this.addOsmBaseLayer();
+      this._addOsmBaseLayer();
     }
 
     const resources: NgwLayerOptions[] = [];
@@ -575,11 +580,11 @@ export class NgwMap<
     this.enableSelection();
   }
 
-  private addOsmBaseLayer() {
+  private _addOsmBaseLayer() {
     this.addBaseLayer('OSM');
   }
 
-  private addQmsBaseLayer() {
+  private _addQmsBaseLayer() {
     let qmsId: number;
     let qmsLayerName: string | undefined;
     if (Array.isArray(this.options.qmsId)) {
@@ -681,10 +686,7 @@ export class NgwMap<
       this._emitStatusEvent('ngw:select', null);
       return;
     }
-    const metresPerPixel =
-      (40075016.686 * Math.abs(Math.cos((center[1] * 180) / Math.PI))) /
-      Math.pow(2, zoom + 8);
-    const radius = pixelRadius * metresPerPixel * 0.0005;
+    const radius = getIdentifyRadius(center, zoom, pixelRadius);
 
     const selectPromise = sendIdentifyRequest(ev, {
       layers: ids,
@@ -709,9 +711,7 @@ export class NgwMap<
   private _prepareToIdentify<
     F = FeatureProperties,
     G extends Geometry = Geometry,
-  >(
-    identify: NgwIdentify,
-  ): NgwIdentifyEvent {
+  >(identify: NgwIdentify): NgwIdentifyEvent {
     const getIdentifyItems_ = () => {
       return getIdentifyItems(identify, true).map((x) => {
         return createIdentifyItem<F, G>({

@@ -13,19 +13,20 @@ import { clearObject } from './utils/clearObject';
 
 import type StrictEventEmitter from 'strict-event-emitter-types';
 import type { Feature, Polygon } from 'geojson';
-import type { Type, TileJson } from '@nextgis/utils';
 import type {
-  LngLatBoundsArray,
-  Cursor,
+  Type,
+  TileJson,
   LngLatArray,
-} from './interfaces/BaseTypes';
+  LngLatBoundsArray,
+} from '@nextgis/utils';
+import type { Cursor } from './interfaces/BaseTypes';
 import type {
-  Locate,
-  MapAdapter,
-  FitOptions,
-  LocateOptions,
   LocationEvents,
   MapClickEvent,
+  LocateOptions,
+  FitOptions,
+  MapAdapter,
+  Locate,
 } from './interfaces/MapAdapter';
 import type { StarterKit } from './interfaces/StarterKit';
 import type { LayerAdapter } from './interfaces/LayerAdapter';
@@ -62,7 +63,6 @@ const OPTIONS: MapOptions = {
 interface AddEventsListenersOptions {
   include: (keyof MainMapEvents)[];
 }
-
 
 export class WebMapMain<
   M = any,
@@ -233,7 +233,7 @@ export class WebMapMain<
 
   /**
    * Returns the map's geographical centerpoint.
-   * @return lngLat Array of two numbers representing longitude and latitude of the center of the map view.
+   * @returns lngLat Array of two numbers representing longitude and latitude of the center of the map view.
    *
    * @example
    * ```javascript
@@ -270,7 +270,7 @@ export class WebMapMain<
 
   /**
    * Returns the map's current zoom level.
-   * @return The map's current zoom level (0-24).
+   * @returns The map's current zoom level (0-24).
    */
   getZoom(): number | undefined {
     return this.mapAdapter.getZoom();

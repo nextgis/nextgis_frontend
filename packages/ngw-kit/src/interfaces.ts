@@ -7,7 +7,6 @@ import type {
   MapClickEvent,
   AdapterOptions,
   MainLayerAdapter,
-  LngLatBoundsArray,
   VectorLayerAdapter,
   OnLayerClickOptions,
   RasterAdapterOptions,
@@ -23,7 +22,11 @@ import type {
   FeatureItem,
 } from '@nextgis/ngw-connector';
 import type { FeatureLayersIdentify } from '@nextgis/ngw-connector';
-import type { FeatureProperties, Type } from '@nextgis/utils';
+import type {
+  Type,
+  FeatureProperties,
+  LngLatBoundsArray,
+} from '@nextgis/utils';
 import type CancelablePromise from '@nextgis/cancelable-promise';
 
 declare module '@nextgis/webmap' {

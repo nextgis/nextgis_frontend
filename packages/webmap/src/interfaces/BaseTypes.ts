@@ -1,16 +1,4 @@
-import type {
-  Type,
-  ZoomLevel,
-  LatLng,
-  LngLatBoundsArray,
-  LngLatArray,
-} from '@nextgis/utils';
 import type { LayerAdapter } from './LayerAdapter';
-
-/**
- * @deprecated - import from {@link @nextgis/utils} instead
- */
-export type { Type, ZoomLevel, LatLng, LngLatBoundsArray, LngLatArray };
 
 /**
  * Screen coordinates in pixels.

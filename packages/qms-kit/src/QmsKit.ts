@@ -1,9 +1,9 @@
 import { createQmsAdapter } from './utils/createQmsAdapter';
 
+import type { Type } from '@nextgis/utils';
 import type {
   WebMap,
   StarterKit,
-  Type,
   MainLayerAdapter,
   LayerAdapterCreators,
 } from '@nextgis/webmap';
