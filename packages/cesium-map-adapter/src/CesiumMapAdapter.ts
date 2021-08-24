@@ -55,12 +55,12 @@ type Control = any;
 
 export interface MapAdapterOptions {
   baseColor: string;
-  depthTestAgainstTerrain: boolean;
   fxaaEnabled: boolean;
-  requestRenderMode: boolean;
-  viewerCesium3DTilesInspectorMixin: boolean;
-  viewerCesiumInspectorMixin: boolean;
   highlightLayer?: PathPaint;
+  requestRenderMode: boolean;
+  depthTestAgainstTerrain: boolean;
+  viewerCesiumInspectorMixin: boolean;
+  viewerCesium3DTilesInspectorMixin: boolean;
 }
 
 export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
