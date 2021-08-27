@@ -60,7 +60,6 @@ export interface MapControl<M extends any = any> {
 
 /**
  * Options for creating a {@link WebMapControls.createButtonControl | button control}.
- * @public
  */
 export interface ButtonControlOptions {
   /** Button content. */
@@ -77,7 +76,6 @@ export type HtmlDef = string | HTMLElement;
 
 /**
  * Values to be in the button content in accordance with the status of the toggle control
- * @public
  */
 export interface HtmlToggle {
   on: HtmlDef;
@@ -86,7 +84,6 @@ export interface HtmlToggle {
 
 /**
  * Values to be in the title in accordance with the status of the toggle control
- * @public
  */
 export interface TitleToggle {
   on: string;
@@ -96,7 +93,6 @@ export interface TitleToggle {
 /**
  * Options for creating a {@link WebMapControls.createToggleControl | toggle control}
  * to layout customization and assigning a callback function
- * @public
  */
 export interface ToggleControlOptions {
   /** Boolean state of control. */

@@ -31,7 +31,7 @@ export function allProperties(obj: Record<string, unknown>): string[] {
   return _allProperties(obj);
 }
 
-export function _allProperties(
+function _allProperties(
   obj: Record<string, unknown>,
   _props: string[] = [],
 ): string[] {
