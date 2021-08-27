@@ -102,7 +102,7 @@ export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
       }
       return this.layer;
     } catch (er) {
-      debugLog(er);
+      typeof er === 'string' && debugLog(er);
     }
   }
 
