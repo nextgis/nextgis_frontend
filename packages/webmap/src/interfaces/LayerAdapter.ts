@@ -11,9 +11,6 @@ import type { MapClickEvent } from './MapAdapter';
 
 export type AdapterConstructor = () => Promise<Type<LayerAdapter> | any>;
 
-/**
- * @public
- */
 export type LayerAdapterDefinition<K extends keyof LayerAdapters = string> =
   | K
   | Type<LayerAdapters[K]>
@@ -21,9 +18,6 @@ export type LayerAdapterDefinition<K extends keyof LayerAdapters = string> =
 
 export type OnLayerSelectType = 'api' | 'click' | 'hover';
 
-/**
- * @public
- */
 export interface OnLayerSelectOptions<
   F extends Feature = Feature,
   L = LayerAdapter,
@@ -35,9 +29,6 @@ export interface OnLayerSelectOptions<
 
 export type OnLayerMouseOptions = OnLayerClickOptions;
 
-/**
- * @public
- */
 export interface OnLayerClickOptions<
   F extends Feature = Feature,
   L = LayerAdapter,
@@ -51,7 +42,6 @@ export interface OnLayerClickOptions<
 
 /**
  * Parameters that can be used to create any map layer adapter.
- * @public
  */
 export interface AdapterOptions<
   A extends Record<string, any> = Record<string, any>,
@@ -161,18 +151,12 @@ export interface AdapterOptions<
   srs?: number;
 }
 
-/**
- * @public
- */
 export interface MvtAdapterOptions<F extends Feature = Feature>
   extends VectorAdapterOptions<F> {
   url: string;
   sourceLayer?: string;
 }
 
-/**
- * @public
- */
 export type VectorAdapterLayerType = 'polygon' | 'point' | 'line';
 
 export type PopupOnCloseFunction = (args: LayerDefinition) => void;
@@ -184,9 +168,6 @@ export interface CreatePopupContentProps<F extends Feature = Feature, L = any>
   onClose: (cb: PopupOnCloseFunction) => void;
 }
 
-/**
- * @public
- */
 export interface PopupOptions<F extends Feature = Feature, L = any> {
   minWidth?: number;
   maxWidth?: number;
@@ -212,9 +193,6 @@ type _VectorAdapterOptionsToExtend<
   N extends Record<string, any> = Record<string, any>,
 > = AdapterOptions<A, N> & FilterOptions;
 
-/**
- * @public
- */
 export interface VectorAdapterOptions<
   F extends Feature = Feature,
   L = any,
@@ -363,9 +341,6 @@ export interface VectorAdapterOptions<
   onLayerSelect?(opt: OnLayerSelectOptions<F, L>): Promise<any>;
 }
 
-/**
- * @public
- */
 export interface GeoJsonAdapterOptions<
   F extends Feature = Feature,
   L = any,
@@ -376,24 +351,15 @@ export interface GeoJsonAdapterOptions<
   data?: GeoJsonObject;
 }
 
-/**
- * @public
- */
 export interface RasterAdapterOptions extends AdapterOptions {
   url: string;
   subdomains?: string | string[];
 }
 
-/**
- * @public
- */
 export interface TileAdapterOptions extends RasterAdapterOptions {
   tileSize?: number;
 }
 
-/**
- * @public
- */
 export interface Tileset3DAdapterOptions
   extends RasterAdapterOptions,
     VectorAdapterOptions {
@@ -401,9 +367,6 @@ export interface Tileset3DAdapterOptions
   heightOffset?: number;
 }
 
-/**
- * @public
- */
 export interface Model3DOptions extends RasterAdapterOptions {
   lon: number;
   lat: number;
@@ -412,9 +375,6 @@ export interface Model3DOptions extends RasterAdapterOptions {
   scale?: number;
 }
 
-/**
- * @public
- */
 export interface WmsAdapterOptions extends RasterAdapterOptions {
   layers?: string;
   format?: 'image/png' | 'image/jpeg' | string;
@@ -426,18 +386,12 @@ export interface WmsAdapterOptions extends RasterAdapterOptions {
   transparent?: boolean;
 }
 
-/**
- * @public
- */
 export interface ImageAdapterOptions extends WmsAdapterOptions {
   /** @deprecated use `params` option instead */
   resourceId?: string | number;
   params: Record<string, any>;
 }
 
-/**
- * @public
- */
 export interface LayerAdapters {
   [name: string]: MainLayerAdapter;
   MVT: VectorLayerAdapter;
@@ -448,9 +402,6 @@ export interface LayerAdapters {
   GEOJSON: VectorLayerAdapter<any, any, GeoJsonAdapterOptions>;
 }
 
-/**
- * @public
- */
 export interface LayerAdaptersOptions {
   [name: string]: AdapterOptions;
   MVT: MvtAdapterOptions;
@@ -461,9 +412,6 @@ export interface LayerAdaptersOptions {
   GEOJSON: GeoJsonAdapterOptions;
 }
 
-/**
- * @public
- */
 export interface LayerDefinition<F extends Feature = Feature, L = any> {
   layer?: L;
   feature?: F;
@@ -471,16 +419,10 @@ export interface LayerDefinition<F extends Feature = Feature, L = any> {
   target?: LayerAdapter;
 }
 
-/**
- * @public
- */
 export type CallbackFilter<F extends Feature = Feature, L = any> = (
   opt: LayerDefinition<F, L>,
 ) => boolean;
 
-/**
- * @public
- */
 export interface FilterOptions<
   P extends { [field: string]: any } = { [field: string]: any },
 > {
@@ -511,26 +453,17 @@ export interface FilterOptions<
   orderBy?: (keyof P | string)[];
 }
 
-/**
- * @public
- */
 export type DataLayerFilter<
   F extends Feature = Feature,
   L = any,
 > = CallbackFilter<F, L>;
 
-/**
- * @public
- */
 export type LayerAdapter<
   M = any,
   L = any,
   O extends AdapterOptions = AdapterOptions,
 > = MainLayerAdapter<M, L, O> | VectorLayerAdapter<M, L, O>;
 
-/**
- * @public
- */
 export interface MainLayerAdapter<
   M = any,
   L = any,
@@ -579,7 +512,6 @@ export type FeatureLayerAdapter<
 
 /**
  * Adapter for vector data display control.
- * @public
  */
 export interface VectorLayerAdapter<
   M = any,

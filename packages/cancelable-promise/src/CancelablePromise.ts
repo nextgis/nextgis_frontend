@@ -64,7 +64,6 @@ let ID = 0;
  *
  * promise.cancel();
  * ```
- * @public
  */
 export class CancelablePromise<T = any> implements Promise<T> {
   static CancelError = CancelError;

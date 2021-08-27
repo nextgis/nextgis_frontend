@@ -86,7 +86,6 @@ type PromiseGroup = 'select' | 'identify';
  *   webmapId: 3985
  * });
  * ```
- * @public
  */
 export class NgwMap<
   M = unknown,

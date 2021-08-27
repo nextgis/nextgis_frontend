@@ -9,8 +9,7 @@ interface DeprecatedMapClickEvent {
 }
 
 /**
- *
- * @param ev @deprecated
+ * @internal
  */
 export function deprecatedMapClick<
   T extends DeprecatedMapClickEvent = DeprecatedMapClickEvent,
