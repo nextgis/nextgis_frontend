@@ -104,22 +104,18 @@ export class WebMap<
    * @internal
    */
   protected async _addLayerProviders(): Promise<void> {
-    try {
-      for await (const kit of this._starterKits) {
-        if (kit.getLayerAdapters) {
-          const adapters = await kit.getLayerAdapters.call(kit);
-          if (adapters) {
-            for await (const adapter of adapters) {
-              const newAdapter = await adapter.createAdapter(this);
-              if (newAdapter) {
-                this.mapAdapter.layerAdapters[adapter.name] = newAdapter;
-              }
+    for await (const kit of this._starterKits) {
+      if (kit.getLayerAdapters) {
+        const adapters = await kit.getLayerAdapters.call(kit);
+        if (adapters) {
+          for await (const adapter of adapters) {
+            const newAdapter = await adapter.createAdapter(this);
+            if (newAdapter) {
+              this.mapAdapter.layerAdapters[adapter.name] = newAdapter;
             }
           }
         }
       }
-    } catch (er) {
-      throw new Error(er);
     }
   }
 
