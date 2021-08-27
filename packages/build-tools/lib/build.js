@@ -102,13 +102,13 @@ async function build(target) {
         .filter(Boolean)
         .join(','),
     ],
-    { stdio: 'inherit', cwd: rootPath }
+    { stdio: 'inherit', cwd: rootPath },
   );
 
   if (buildTypes && pkg.types) {
     console.log();
     console.log(
-      chalk.bold(chalk.yellow(`Rolling up type definitions for ${target}...`))
+      chalk.bold(chalk.yellow(`Rolling up type definitions for ${target}...`)),
     );
 
     // build types
@@ -132,7 +132,7 @@ async function build(target) {
           'packages',
           target,
           'src',
-          'index.d.ts'
+          'index.d.ts',
         ),
         compiler: {
           tsconfigFilePath: path.resolve(`${rootPath}/tsconfig.json`),
@@ -205,17 +205,17 @@ async function build(target) {
           const toAdd = await Promise.all(
             typeFiles.map((file) => {
               return fs.readFile(path.resolve(typesDir, file), 'utf-8');
-            })
+            }),
           );
           await fs.writeFile(dtsPath, existing + '\n' + toAdd.join('\n'));
         }
         console.log(
-          chalk.bold(chalk.green(`API Extractor completed successfully.`))
+          chalk.bold(chalk.green(`API Extractor completed successfully.`)),
         );
       } else {
         console.error(
           `API Extractor completed with ${extractorResult.errorCount} errors` +
-            ` and ${extractorResult.warningCount} warnings`
+            ` and ${extractorResult.warningCount} warnings`,
         );
         process.exitCode = 1;
       }
@@ -255,7 +255,7 @@ function checkFileSize(filePath) {
   const compressedSize = (compressed.length / 1024).toFixed(2) + 'kb';
   console.log(
     `${chalk.gray(
-      chalk.bold(path.basename(filePath))
-    )} min:${minSize} / gzip:${gzippedSize} / brotli:${compressedSize}`
+      chalk.bold(path.basename(filePath)),
+    )} min:${minSize} / gzip:${gzippedSize} / brotli:${compressedSize}`,
   );
 }

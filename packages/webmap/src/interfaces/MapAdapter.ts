@@ -21,7 +21,6 @@ import type { MapAdapterEvents } from './Events';
 
 /**
  * Parameters passed to the arguments of the callback function when clicking on the map
- * @public
  */
 export interface MapClickEvent {
   /**
@@ -46,7 +45,6 @@ export interface MapClickEvent {
 
 /**
  * Parameters that control how the fit to object will be work.
- * @public
  */
 export interface FitOptions {
   /**
@@ -101,7 +99,6 @@ export interface LocationEvents {
  * @typeParam M - WEB-GIS framework map interface
  * @typeParam L - WEB-GIS framework layer interface
  * @typeParam C - WEB-GIS framework control interface
- * @public
  */
 export interface MapAdapter<M = any, L = any, C = any> {
   /**

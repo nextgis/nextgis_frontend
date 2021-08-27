@@ -78,7 +78,6 @@ import { getWebMap, setWebMap } from './container';
  * @typeParam C - Control
  * @typeParam E - Events
  *
- * @public
  */
 export class WebMap<
     M = any,
