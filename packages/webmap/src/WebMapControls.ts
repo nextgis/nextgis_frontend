@@ -16,7 +16,6 @@ import type { ControlPosition } from './interfaces/MapAdapter';
 
 /**
  * Collection of methods for managing map controls
- * @public
  */
 export class WebMapControls<
     M = any,
@@ -136,7 +135,6 @@ export class WebMapControls<
    * webMap.addControl(toggleControl, 'top-right');
    * ```
    * {@link http://code.nextgis.com/demo-examples-toggle-control | Toggle button control example}
-   * @public
    */
   async createToggleControl(
     options: ToggleControlOptions,
@@ -158,7 +156,6 @@ export class WebMapControls<
    *
    * @param control - Instance of WEB-GIS framework control.
    *                  What is returned by the {@Link WebMapControls.createControl | create} method
-   * @public
    */
   removeControl(control: C): void {
     if ('remove' in control) {
@@ -175,7 +172,6 @@ export class WebMapControls<
    * Get instance of registered control
    * @param control - Any registered control string name
    * @param options - Custom control options
-   * @public
    */
   getControl<K extends keyof MapControls>(
     control: K,

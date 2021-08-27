@@ -2,7 +2,6 @@ import type { LayerAdapter } from './LayerAdapter';
 
 /**
  * Screen coordinates in pixels.
- * @public
  */
 export interface Pixel {
   top: number;
@@ -21,14 +20,13 @@ export interface Pixel {
  *   webMap.addLayerData('my_layer', geojson);
  * });
  * ```
- * @public
  */
 export type LayerDef = string | LayerAdapter;
 
 /**
  * Available cursor names from
  * {@link https://developer.mozilla.org/ru/docs/Web/CSS/cursor}
- * @ignore
+ * @internal
  */
 export type Cursor =
   | 'auto'

@@ -1,36 +1,10 @@
 /**
- * Map zoom level.
- * @public
+ * Map zoom level. From 0 to 22
  */
-export type ZoomLevel =
-  | 0
-  | 1
-  | 2
-  | 3
-  | 4
-  | 5
-  | 6
-  | 7
-  | 8
-  | 9
-  | 10
-  | 11
-  | 12
-  | 13
-  | 14
-  | 15
-  | 16
-  | 17
-  | 18
-  | 19
-  | 20
-  | 21
-  | 22
-  | number;
+export type ZoomLevel = number;
 
 /**
  * Longitude and latitude coordinate, measured in degrees.
- * @public
  */
 export interface LatLng {
   /**
@@ -55,12 +29,10 @@ export type Position = [number, number]; // | [number, number, number];
 /**
  * Array of coordinates, measured in degrees, in [west, south, east, north] order.
  * {@link https://tools.ietf.org/html/rfc7946#section-5 | GeoJSON standard}
- * @public
  */
 export type LngLatBoundsArray = [number, number, number, number] | number[];
 
 /**
  * Array of two numbers representing longitude and latitude.
- * @public
  */
 export type LngLatArray = Position | number[];
