@@ -202,7 +202,7 @@ export async function createGeoJsonAdapter(
         await webMap.setLayerData(this, data);
         this.emitter.emit('updated');
       } catch (er) {
-        if (er.name !== 'CancelError') {
+        if (er instanceof Error && er.name !== 'CancelError') {
           throw er;
         }
       }
