@@ -165,6 +165,14 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
         },
       );
 
+      // While the inertia spin and zoom are enabled by default and look kinda cool,
+      // they can be disabled very easily.
+      // This will make it so the moveEnd event is fired as expected.
+      // Here is how you can disable the inertia.
+      viewer.scene.screenSpaceCameraController.inertiaSpin = 0;
+      viewer.scene.screenSpaceCameraController.inertiaTranslate = 0;
+      viewer.scene.screenSpaceCameraController.inertiaZoom = 0;
+
       if (options.view) {
         switch (options.view) {
           case '2D':
