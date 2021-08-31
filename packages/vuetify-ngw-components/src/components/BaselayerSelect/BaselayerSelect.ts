@@ -117,6 +117,7 @@ export class BaselayerSelect extends Vue {
         this.updateItems();
         webMap.emitter.on('layer:add', __updateItems);
         webMap.emitter.on('layer:remove', __updateItems);
+        webMap.emitter.on('layer:toggle', __updateItems);
       });
     }
   }
@@ -125,6 +126,7 @@ export class BaselayerSelect extends Vue {
     if (this.__updateItems && this.webMap) {
       this.webMap.emitter.removeListener('layer:add', this.__updateItems);
       this.webMap.emitter.removeListener('layer:remove', this.__updateItems);
+      this.webMap.emitter.removeListener('layer:toggle', this.__updateItems);
     }
   }
 
