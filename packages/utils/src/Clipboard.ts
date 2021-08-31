@@ -7,10 +7,9 @@ export class Clipboard {
     }
   }
 
-  static copy(text: string): Clipboard {
+  static copy(text: string): boolean {
     const clipboard = new Clipboard();
-    clipboard.copy(text);
-    return clipboard;
+    return clipboard.copy(text);
   }
 
   copy(text: string): boolean {
@@ -23,7 +22,7 @@ export class Clipboard {
         this.copyToClipboard(text);
       }
       !this.silent && console.log('Copied to Clipboard');
-      return true
+      return true;
     } catch (e) {
       !this.silent && console.log('Please copy manually');
     }
