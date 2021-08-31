@@ -56,6 +56,8 @@ export * from './NgwWebmapLayerAdapter';
 export * from './NgwWebmapItem';
 export * from './IdentifyItem';
 
+export * from './constants';
+
 export * from './utils/utils';
 export * from './utils/identifyUtils';
 export * from './utils/fetchNgwExtent';
