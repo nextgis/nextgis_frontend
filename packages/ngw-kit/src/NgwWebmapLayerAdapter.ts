@@ -2,7 +2,10 @@ import { EventEmitter } from 'events';
 
 import CancelablePromise from '@nextgis/cancelable-promise';
 import { fixUrlStr } from '@nextgis/utils';
-import { fetchNgwLayerItems } from '@nextgis/ngw-kit';
+import {
+  fetchNgwLayerItems,
+  WEBMAP_BASELAYER_ID_PREFIX,
+} from '@nextgis/ngw-kit';
 
 import { NgwWebmapItem } from './NgwWebmapItem';
 import { createOnFirstShowNgwAdapter } from './adapters/createOnFirstShowNgwAdapter';
@@ -243,6 +246,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
         // to avoid set many basemaps on init
         const visibility = enabledAlreadySet ? false : x.enabled;
         webMap.addBaseLayer(adapter, {
+          id: WEBMAP_BASELAYER_ID_PREFIX + x.resource_id,
           name: x.display_name,
           opacity: x.opacity,
           visibility,
