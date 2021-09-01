@@ -4,16 +4,23 @@ import type { Type } from '@nextgis/utils';
 interface CreateOnFirstShowAdapterOptions {
   webMap: WebMap;
   adapterOptions?: Record<string, any>;
-  createAdapter: () => Promise<Type<MainLayerAdapter> | undefined>;
+  onLayerAdded?: <L extends MainLayerAdapter = MainLayerAdapter>(
+    layer: L,
+  ) => void;
+  createAdapter: (
+    firstShowAdapter: FirstShowAdapter,
+  ) => Promise<Type<MainLayerAdapter> | undefined>;
 }
 
 interface FirstShowAdapter extends MainLayerAdapter {
   loadLayer: () => Promise<MainLayerAdapter[]>;
+  destroyed: () => boolean;
 }
 
 export async function createOnFirstShowAdapter({
   webMap,
   adapterOptions = {},
+  onLayerAdded,
   createAdapter,
 }: CreateOnFirstShowAdapterOptions): Promise<Type<FirstShowAdapter>> {
   class OnFirstShowAdapter implements MainLayerAdapter {
@@ -31,6 +38,10 @@ export async function createOnFirstShowAdapter({
       this.layer.forEach((x) => webMap.removeLayer(x));
     }
 
+    destroyed() {
+      return this._removed;
+    }
+
     showLayer() {
       this.options.visibility = true;
       if (this.layer.length) {
@@ -45,7 +56,7 @@ export async function createOnFirstShowAdapter({
     async loadLayer() {
       if (!this.layer.length && !this._creatingInProgress) {
         this._creatingInProgress = true;
-        const Adapter = await createAdapter();
+        const Adapter = await createAdapter(this);
         if (Adapter) {
           const adapter = new Adapter(webMap.mapAdapter.map, {
             ...adapterOptions,
@@ -53,7 +64,11 @@ export async function createOnFirstShowAdapter({
           const realLayer: MainLayerAdapter = await adapter.addLayer({
             order: this.options.order,
             headers: this.options.headers,
+            baselayer: this.options.baselayer,
           });
+          if (onLayerAdded) {
+            onLayerAdded(adapter);
+          }
           Object.assign(adapter.options, adapterOptions);
           adapter.layer = realLayer;
           if (this._removed) {
