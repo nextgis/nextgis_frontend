@@ -171,10 +171,14 @@ export class WebMapLayers<
     adapter: K | Type<LayerAdapters[K]>,
     options?: O | LayerAdaptersOptions[K],
   ): Promise<LayerAdapter> {
-    const layer = await this.addLayer(adapter, {
-      ...options,
-      baselayer: true,
-    });
+    const layer = await this.addLayer(
+      adapter,
+      {
+        ...options,
+        baselayer: true,
+      },
+      undefined,
+    );
 
     return layer;
   }
@@ -202,12 +206,11 @@ export class WebMapLayers<
     order?: number,
   ): Promise<LayerAdapter<M, L, LO>> {
     const id = this._layersIdCounter++;
-    const _order =
-      order !== undefined
-        ? order
-        : options.order !== undefined
-        ? options.order
-        : this.reserveOrder();
+    const _order = defined(order)
+      ? order
+      : options.order !== undefined
+      ? options.order
+      : this.reserveOrder();
     let adapterEngine: Type<LayerAdapter<M, L, LO>> | undefined;
     if (typeof adapter === 'string') {
       adapterEngine = this.getLayerAdapter(adapter) as Type<
@@ -269,6 +272,7 @@ export class WebMapLayers<
       let layerId: string | undefined;
       if (_adapter.options.id) {
         layerId = String(_adapter.options.id);
+
         this._layers[layerId] = _adapter;
       }
       this._emitLayerEvent('layer:preadd', layerId || '', _adapter);
@@ -294,6 +298,7 @@ export class WebMapLayers<
       }
       if (layerId) {
         this._layers[layerId] = _adapter;
+
         if (geoJsonOptions.filter) {
           this.filterLayer(_adapter, geoJsonOptions.filter);
         }
@@ -511,7 +516,7 @@ export class WebMapLayers<
     const onMap = layer && layer.options.visibility;
     const toStatus = status !== undefined ? status : !onMap;
     const silent = options.silent !== undefined ? options.silent : false;
-    const action = (l: LayerAdapter) => {
+    const action = async (l: LayerAdapter) => {
       const id = String(l.id);
       const preEventName = toStatus ? 'layer:preshow' : 'layer:prehide';
       const eventName = toStatus ? 'layer:show' : 'layer:hide';
@@ -528,7 +533,7 @@ export class WebMapLayers<
             return x !== l.id && this.isLayerVisible(x);
           });
           if (anotherVisibleLayerBaseLayer) {
-            this.hideLayer(anotherVisibleLayerBaseLayer);
+            await this.hideLayer(anotherVisibleLayerBaseLayer);
           }
         }
 

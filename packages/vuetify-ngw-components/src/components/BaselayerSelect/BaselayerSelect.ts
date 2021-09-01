@@ -26,8 +26,8 @@ export class BaselayerSelect extends Vue {
   emptyValue = emptyValue;
 
   active: string | false = emptyValue;
-
-  protected __updateItems?: () => Promise<void>;
+  internalUpdate = false;
+  protected __updateItems?: (e?: LayerAdapter) => Promise<void>;
   protected _layers: Array<LayerAdapter | ResourceAdapter> = [];
 
   get webMap(): WebMap {
@@ -36,7 +36,7 @@ export class BaselayerSelect extends Vue {
 
   @Watch('active')
   setVisibleLayers(active: string, old: string): void {
-    if (active === old) return;
+    if (active === old || this.internalUpdate) return;
     const activeLayer = this._layers.find((x) => x.id === active);
     if (this.webMap) {
       if (activeLayer) {
@@ -109,15 +109,22 @@ export class BaselayerSelect extends Vue {
     if (webMap) {
       webMap.onLoad().then(() => {
         this.destroy();
-        const __updateItems = debounce(async () => {
-          const items = await this._updateItems();
-          this.items = items;
+        const updateItems = async (e?: LayerAdapter) => {
+          if (this._checkLayer(e)) {
+            debouncedUpdateItems(e);
+          }
+        };
+        const debouncedUpdateItems = debounce(async (e?: LayerAdapter) => {
+          const items = await this._updateItems(e);
+          if (items) {
+            this.items = items;
+          }
         });
-        this.__updateItems = __updateItems;
-        this.updateItems();
-        webMap.emitter.on('layer:add', __updateItems);
-        webMap.emitter.on('layer:remove', __updateItems);
-        webMap.emitter.on('layer:toggle', __updateItems);
+        this.__updateItems = updateItems;
+        updateItems();
+        webMap.emitter.on('layer:add', updateItems);
+        webMap.emitter.on('layer:remove', updateItems);
+        webMap.emitter.addListener('layer:toggle', updateItems);
       });
     }
   }
@@ -130,7 +137,16 @@ export class BaselayerSelect extends Vue {
     }
   }
 
-  protected async _updateItems(): Promise<VueSelectItem[]> {
+  protected _checkLayer(e?: LayerAdapter): boolean {
+    if (e && !e.options.baselayer) {
+      return false;
+    }
+    return true;
+  }
+
+  protected async _updateItems(
+    e?: LayerAdapter,
+  ): Promise<VueSelectItem[] | undefined> {
     const webMap = this.webMap;
     const items: VueSelectItem[] = [];
     if (webMap) {
@@ -143,16 +159,19 @@ export class BaselayerSelect extends Vue {
           value: emptyValue,
         });
       }
-
+      let active = emptyValue;
       baseLayers.forEach((baselayer) => {
         items.push({
           value: baselayer.id || '',
           text: baselayer.options.name || baselayer.id || '',
         });
         if (baselayer.id && webMap.isLayerVisible(baselayer)) {
-          this.active = baselayer.id;
+          active = baselayer.id;
         }
       });
+      this.internalUpdate = true;
+      this.active = active;
+      this.internalUpdate = false;
       this._layers = baseLayers;
     }
     return items;
