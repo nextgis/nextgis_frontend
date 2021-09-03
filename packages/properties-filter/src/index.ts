@@ -2,4 +2,14 @@
  * @module properties-filter
  */
 
-export * from './propertiesFilter';
+export {
+  checkIfPropertyFilter,
+  propertiesFilter,
+  isPropertyFilter,
+  featureFilter,
+} from './propertiesFilter';
+export type {
+  Operations,
+  PropertyFilter,
+  PropertiesFilter,
+} from './interfaces';
