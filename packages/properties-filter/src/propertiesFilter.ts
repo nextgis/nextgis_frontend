@@ -1,53 +1,9 @@
-import { reEscape } from '@nextgis/utils';
-
 import type { Feature } from 'geojson';
-/**
- * gt - greater (\>)
- * lt - lower (\<)
- * ge - greater or equal (\>=)
- * le - lower or equal (\<=)
- * eq - equal (=)
- * ne - not equal (!=)
- * like - LIKE SQL statement (for strings compare)
- * ilike - ILIKE SQL statement (for strings compare)
- */
-export type Operations =
-  | 'gt'
-  | 'lt'
-  | 'ge'
-  | 'le'
-  | 'eq'
-  | 'ne'
-  | 'in'
-  | 'notin'
-  | 'like'
-  | 'ilike';
+import type { Operations, Properties, PropertiesFilter, PropertyFilter } from './interfaces';
 
-type Properties = { [name: string]: any };
-
-/**
- * field, operation, value
- * ['foo', 'eq', 'bar']
- * ['count', 'ge', 20]
- */
-export type PropertyFilter<T extends Properties = Properties> = [
-  T extends null
-    ? string
-    :
-        | keyof T
-        | `%${string & keyof T}`
-        | `%${string & keyof T}%`
-        | `${string & keyof T}%`,
-  Operations,
-  any,
-];
-
-export type PropertiesFilter<T extends Properties = Properties> = (
-  | 'all'
-  | 'any'
-  | PropertyFilter<T>
-  | PropertiesFilter<T>
-)[];
+function reEscape(s: string): string {
+  return s.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
+}
 
 function like(b: string, a: string, iLike?: boolean): boolean {
   a = String(a);
@@ -126,7 +82,7 @@ export function propertiesFilter<T extends Properties = Properties>(
 ): boolean {
   const logic = typeof filters[0] === 'string' ? filters[0] : 'all';
   const filterFunction = (p: PropertyFilter | PropertiesFilter) => {
-    if (checkIfPropertyFilter(p)) {
+    if (isPropertyFilter(p)) {
       const [field, operation, value] = p;
       const operationExec = operationsAliases[operation];
       if (operationExec) {
