@@ -12,7 +12,7 @@ export function isObjKey<O extends Obj = Obj>(
 
 /**
  *
- * @deprecated - use isObjectKey instead
+ * @deprecated - use isObjKey instead
  */
 export function keyInObj<O extends Obj = Obj>(
   obj: O,

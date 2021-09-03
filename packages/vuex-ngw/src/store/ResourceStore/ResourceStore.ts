@@ -172,47 +172,44 @@ export abstract class ResourceStore<
         'prepareFeatureToNgw',
         opt,
       );
-      try {
-        const { fid } = opt;
-        if (fid) {
-          feature.id = Number(fid);
-        }
-        const data = [feature];
-        if (this.hooks.onBeforePatch) {
-          await this.hooks.onBeforePatch(data, { id });
-        }
-        const item = await this.connector.patch(
-          'feature_layer.feature.collection',
-          { data },
-          { id, ...FEATURE_REQUEST_PARAMS },
-        );
 
-        // clean cache on update
-        const cache = new Cache();
-        cache.all().forEach((item) => {
-          if (item.key === 'feature_layer.feature.item') {
-            const params = item.options && item.options.params;
-            if (params.id === id && params.fid === fid) {
-              item.value = CancelablePromise.resolve(item);
-            }
-          }
-        });
-
-        const newFeature = feature as FeatureItem<P>;
-        const newItem = item && item[0];
-        if (newItem) {
-          newFeature.id = newItem.id;
-          if (this.hooks.onNewItem) {
-            await this.hooks.onNewItem({ ...opt, fid: newItem.id });
-          }
-        } else {
-          throw new Error('Error on save');
-        }
-        await this.context.dispatch('updateStore', { item: newFeature });
-        return newFeature;
-      } catch (er) {
-        throw new Error(er);
+      const { fid } = opt;
+      if (fid) {
+        feature.id = Number(fid);
       }
+      const data = [feature];
+      if (this.hooks.onBeforePatch) {
+        await this.hooks.onBeforePatch(data, { id });
+      }
+      const item = await this.connector.patch(
+        'feature_layer.feature.collection',
+        { data },
+        { id, ...FEATURE_REQUEST_PARAMS },
+      );
+
+      // clean cache on update
+      const cache = new Cache();
+      cache.all().forEach((item) => {
+        if (item.key === 'feature_layer.feature.item') {
+          const params = item.options && item.options.params;
+          if (params.id === id && params.fid === fid) {
+            item.value = CancelablePromise.resolve(item);
+          }
+        }
+      });
+
+      const newFeature = feature as FeatureItem<P>;
+      const newItem = item && item[0];
+      if (newItem) {
+        newFeature.id = newItem.id;
+        if (this.hooks.onNewItem) {
+          await this.hooks.onNewItem({ ...opt, fid: newItem.id });
+        }
+      } else {
+        throw new Error('Error on save');
+      }
+      await this.context.dispatch('updateStore', { item: newFeature });
+      return newFeature;
     }
   }
 
