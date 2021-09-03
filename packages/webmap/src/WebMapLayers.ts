@@ -204,7 +204,7 @@ export class WebMapLayers<
     adapter: LayerAdapterDefinition<K>,
     options: LO | LayerAdaptersOptions[K] = {},
     order?: number,
-  ): Promise<LayerAdapter<M, L, LO>> {
+  ): Promise<LayerAdapter> {
     const id = this._layersIdCounter++;
     const _order = defined(order)
       ? order

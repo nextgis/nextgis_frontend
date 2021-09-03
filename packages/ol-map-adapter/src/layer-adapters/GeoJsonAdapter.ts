@@ -11,8 +11,9 @@ import { create } from '@nextgis/dom';
 import { defined, LngLatArray, LngLatBoundsArray } from '@nextgis/utils';
 import { PropertiesFilter } from '@nextgis/properties-filter';
 
+import { getFeature } from '../utils/utils';
 import { resolutionOptions } from '../utils/gerResolution';
-import { styleFunction, labelStyleFunction, getFeature } from '../utils/utils';
+import { styleFunction, labelStyleFunction } from '../utils/styleFunction';
 
 import type { Feature, GeoJsonObject } from 'geojson';
 import type MapBrowserEvent from 'ol/MapBrowserEvent';
@@ -27,15 +28,15 @@ import type {
   DataLayerFilter,
   OnLayerSelectType,
   VectorLayerAdapter,
-  GeoJsonAdapterOptions,
   PopupOnCloseFunction,
+  GeoJsonAdapterOptions,
 } from '@nextgis/webmap';
 import type {
   UnselectCb,
   MapClickEvent,
   MouseEventType,
-  ForEachFeatureAtPixelOrderedCallback,
   ForEachFeatureAtPixelCallback,
+  ForEachFeatureAtPixelOrderedCallback,
 } from '../OlMapAdapter';
 import { convertMapClickEvent } from '../utils/convertMapClickEvent';
 import { makeHtmlFromString } from '../utils/makeHtmlFromString';
