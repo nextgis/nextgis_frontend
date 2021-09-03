@@ -1,11 +1,11 @@
 import type {
-  Expression,
-  Paint,
-  PropertiesPaint,
   VectorAdapterLayerPaint,
-  GeometryPaint,
   GetPaintCallback,
+  PropertiesPaint,
+  GeometryPaint,
+  Expression,
   IconPaint,
+  Paint,
 } from './interfaces';
 
 export function isExpression(value: unknown): value is Expression {
