@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.1](https://github.com/nextgis/nextgis_frontend/compare/v1.5.0...v1.5.1) (2021-09-06)
+
+
+### Features
+
+* **cesium-map-adapter:** remove camera inertion ([45924fc](https://github.com/nextgis/nextgis_frontend/commit/45924fcb8622aabab777d643278fd543f672b918))
+* **webmap:** change default maxZoom option to 20 ([11d2e99](https://github.com/nextgis/nextgis_frontend/commit/11d2e99fcc53976cfb00acc4b5d711cdf2e28fc3))
+
+
+
+
+
 # [1.5.0](https://github.com/nextgis/nextgis_frontend/compare/v1.4.0...v1.5.0) (2021-08-19)
 
 **Note:** Version bump only for package @nextgis/cesium-map-adapter

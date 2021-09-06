@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.1](https://github.com/nextgis/nextgisweb_frontend/compare/v1.5.0...v1.5.1) (2021-09-06)
+
+
+### Bug Fixes
+
+* **ol-map-adapter:** do not return nothing from poinermove cb ([62b9aff](https://github.com/nextgis/nextgisweb_frontend/commit/62b9aff0a3b93fedb83d33fa770e77c407412a32))
+* **ol-map-adapter:** geojson adapter style function type detection ([b731e04](https://github.com/nextgis/nextgisweb_frontend/commit/b731e04977529a30515dbb86dad537f76ecc7fe3))
+
+
+### Features
+
+* **cesium-map-adapter:** remove camera inertion ([45924fc](https://github.com/nextgis/nextgisweb_frontend/commit/45924fcb8622aabab777d643278fd543f672b918))
+* **clipboard:** on static copy return operation status ([251d722](https://github.com/nextgis/nextgisweb_frontend/commit/251d722f29a3d0e2d672f258412bf9b7a901a59f))
+* **vue:** add layer toggle listener for baselayerselect ([4b5fa94](https://github.com/nextgis/nextgisweb_frontend/commit/4b5fa94e6a718255c8721c4fcc1d4ebb08a7ca4b))
+* **webmap:** change default maxZoom option to 20 ([11d2e99](https://github.com/nextgis/nextgisweb_frontend/commit/11d2e99fcc53976cfb00acc4b5d711cdf2e28fc3))
+
+
+
+
+
 # [1.5.0](https://github.com/nextgis/nextgisweb_frontend/compare/v1.4.0...v1.5.0) (2021-08-19)
 
 
