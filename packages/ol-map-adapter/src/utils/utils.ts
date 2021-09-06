@@ -3,7 +3,6 @@ import GeoJSON from 'ol/format/GeoJSON';
 import type { Feature } from 'geojson';
 import type OlFeature from 'ol/Feature';
 
-
 export function getFeature(feature: OlFeature<any>): Feature {
   const geojson = new GeoJSON();
   // @ts-ignore writeFeatureObject return JSON type, need Feature
