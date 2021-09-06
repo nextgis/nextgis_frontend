@@ -8,13 +8,14 @@
  * @module ngw-ol
  */
 import 'ol/ol.css';
+import Map from 'ol/Map'
 import '@nextgis/control-container/lib/control-container.css';
 import '@nextgis/ol-map-adapter/lib/ol-map-adapter.css';
 
 import { NgwMap, NgwMapOptions } from '@nextgis/ngw-map';
 import OlMapAdapter from '@nextgis/ol-map-adapter';
 
-class NgwOl extends NgwMap {
+class NgwOl extends NgwMap<Map> {
   constructor(options: NgwMapOptions) {
     super({ ...options, mapAdapter: new OlMapAdapter() });
   }
