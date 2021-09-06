@@ -8,7 +8,7 @@
  * @module ngw-ol
  */
 import 'ol/ol.css';
-import Map from 'ol/Map'
+import Map from 'ol/Map';
 import '@nextgis/control-container/lib/control-container.css';
 import '@nextgis/ol-map-adapter/lib/ol-map-adapter.css';
 

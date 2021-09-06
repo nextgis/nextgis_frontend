@@ -1,4 +1,3 @@
-
 export interface RuntimeParams {
   params(): { [paramName: string]: any };
   get(name: string): any;

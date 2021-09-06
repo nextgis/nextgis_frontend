@@ -48,7 +48,6 @@ import type {
   NgwIdentify,
   NgwWebmapItem,
   ResourceAdapter,
-  NgwLayerAdapterType,
   FetchNgwItemsOptions,
   NgwFeatureItemResponse,
   NgwFeatureRequestOptions,
@@ -162,7 +161,9 @@ export class NgwMap<
    * });
    * ```
    */
-  async addNgwLayer(options: NgwLayerOptions): Promise<ResourceAdapter | undefined> {
+  async addNgwLayer(
+    options: NgwLayerOptions,
+  ): Promise<ResourceAdapter | undefined> {
     await this.onMapLoad();
     // @ts-ignore for backward compatibility
     const { keyname, resourceId } = options;

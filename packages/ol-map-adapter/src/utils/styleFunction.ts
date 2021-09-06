@@ -13,7 +13,12 @@ import type {
   GeoJsonAdapterOptions,
   VectorAdapterLayerType,
 } from '@nextgis/webmap';
-import type { GeometryPaint, Paint, PaintType } from '@nextgis/paint';
+import type {
+  Paint,
+  PaintType,
+  GeometryPaint,
+  VectorAdapterLayerPaint,
+} from '@nextgis/paint';
 import { getFeature } from './utils';
 
 const typeAlias: { [x: string]: VectorAdapterLayerType } = {
@@ -62,8 +67,7 @@ export function styleFunction(
           ? 'icon'
           : paintTypeAlias[ta];
       if (t) {
-        // @ts-expect-error
-        paint.type = t;
+        (paint as VectorAdapterLayerPaint).type = t;
       }
     }
     if (paint.type === 'path' || paint.type === 'circle') {
