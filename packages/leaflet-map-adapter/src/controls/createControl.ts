@@ -1,5 +1,9 @@
 import { Control, DomEvent } from 'leaflet';
-import type { MapControl, CreateControlOptions, MapAdapter } from '@nextgis/webmap';
+import type {
+  MapControl,
+  CreateControlOptions,
+  MapAdapter,
+} from '@nextgis/webmap';
 
 export function createControl(
   control: MapControl,

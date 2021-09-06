@@ -33,7 +33,7 @@ export function loadScript(
     }
     if (options.data) {
       for (const k in options.data) {
-        const dataKey = k.replace(/^data\-/, '').replace(/_/g, '-')
+        const dataKey = k.replace(/^data-/, '').replace(/_/g, '-');
         s.setAttribute('data-' + dataKey, String(options.data[k]));
       }
     }

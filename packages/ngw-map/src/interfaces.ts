@@ -1,12 +1,5 @@
 import type { Geometry } from 'geojson';
-import type {
-  MapOptions,
-  // CirclePaint,
-  // PathPaint,
-  // IconOptions,
-  WebMapEvents,
-  RuntimeParams,
-} from '@nextgis/webmap';
+import type { MapOptions, WebMapEvents, RuntimeParams } from '@nextgis/webmap';
 import type NgwConnector from '@nextgis/ngw-connector';
 import type { Credentials } from '@nextgis/ngw-connector';
 import type { NgwMap } from './NgwMap';

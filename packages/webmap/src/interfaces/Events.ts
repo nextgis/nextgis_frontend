@@ -6,7 +6,6 @@ import type {
   OnLayerSelectOptions,
 } from './LayerAdapter';
 
-
 export interface WebMapEvents extends MainMapEvents {
   /**
    * @eventProperty
@@ -82,7 +81,6 @@ export interface WebMapEvents extends MainMapEvents {
   'controls:create': any;
 }
 
-
 export interface MapAdapterEvents extends MainMapEvents {
   /**
    * @eventProperty
@@ -97,7 +95,6 @@ export interface MapAdapterEvents extends MainMapEvents {
    */
   create: MapAdapter;
 }
-
 
 export interface MainMapEvents {
   /**
