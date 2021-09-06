@@ -299,12 +299,13 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     evt: MapBrowserPointerEvent,
     type: MouseEventType,
   ): boolean {
-    if (this._forEachFeatureAtPixel.length) {
+    if (evt && evt.pixel && this._forEachFeatureAtPixel.length) {
       if (this.map) {
-        // select only top feature
-        for (const e of this._forEachFeatureAtPixel.sort(
+        const orderedFeatures = this._forEachFeatureAtPixel.sort(
           (a, b) => b[0] - a[0],
-        )) {
+        );
+        // select only top feature
+        for (const e of orderedFeatures) {
           const stop = e[1](evt.pixel, evt, type);
           if (stop) {
             return !!'on feature';
@@ -348,12 +349,12 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
   private _addMapListeners() {
     const map = this.map;
     if (map) {
-      map.on('click', (evt: BaseEvent | Event) =>
-        this.onMapClick(evt as MapBrowserPointerEvent),
-      );
-      map.on('pointermove', (evt: BaseEvent | Event) =>
-        this._callEachFeatureAtPixel(evt as MapBrowserPointerEvent, 'hover'),
-      );
+      map.on('click', (evt: BaseEvent | Event) => {
+        this.onMapClick(evt as MapBrowserPointerEvent);
+      });
+      map.on('pointermove', (evt: BaseEvent | Event) => {
+        this._callEachFeatureAtPixel(evt as MapBrowserPointerEvent, 'hover');
+      });
 
       const center = this.getCenter();
       const zoom = this.getZoom();

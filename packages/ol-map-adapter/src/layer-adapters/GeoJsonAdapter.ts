@@ -311,10 +311,12 @@ export class GeoJsonAdapter
     pixel: Pixel,
     evt: MapBrowserPointerEvent,
     type: MouseEventType,
-  ) {
-    const feature = this.map.getFeaturesAtPixel(pixel, {
-      layerFilter: (l) => l === this.layer,
-    })[0] as OlFeature<any>;
+  ): boolean {
+    const feature =
+      pixel &&
+      (this.map.getFeaturesAtPixel(pixel, {
+        layerFilter: (l) => l === this.layer,
+      })[0] as OlFeature<any>);
     const createMouseOptions = (e: MapBrowserPointerEvent) => {
       return {
         layer: this,
@@ -358,7 +360,6 @@ export class GeoJsonAdapter
           this.options.onMouseOver(mouseOptions);
         }
       }
-
       return true;
     } else {
       if (type === 'hover' && this._mouseOver) {
