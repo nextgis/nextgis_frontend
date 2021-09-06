@@ -17,6 +17,9 @@ import LeafletMapAdapter from '@nextgis/leaflet-map-adapter';
 import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
 import iconUrl from 'leaflet/dist/images/marker-icon.png';
 import shadowUrl from 'leaflet/dist/images/marker-shadow.png';
+
+import { Map } from 'leaflet';
+
 // @ts-ignore
 delete Icon.Default.prototype._getIconUrl;
 
@@ -44,7 +47,7 @@ Icon.Default.mergeOptions({
  * });
  * ```
  */
-class NgwLeaflet extends NgwMap {
+class NgwLeaflet extends NgwMap<Map> {
   constructor(options: NgwMapOptions) {
     options = { ...options, mapAdapter: new LeafletMapAdapter() };
     super(options);
