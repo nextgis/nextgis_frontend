@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.1](https://github.com/nextgis/nextgis_frontend/compare/v1.5.0...v1.5.1) (2021-09-06)
+
+
+### Features
+
+* **vue:** add layer toggle listener for baselayerselect ([4b5fa94](https://github.com/nextgis/nextgis_frontend/commit/4b5fa94e6a718255c8721c4fcc1d4ebb08a7ca4b))
+
+
+
+
+
 # [1.5.0](https://github.com/nextgis/nextgis_frontend/compare/v1.4.0...v1.5.0) (2021-08-19)
 
 **Note:** Version bump only for package @nextgis/ngw-kit
