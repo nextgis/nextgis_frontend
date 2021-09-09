@@ -4,7 +4,6 @@
 
 ## VectorAdapterOptions interface
 
-
 <b>Signature:</b>
 
 ```typescript

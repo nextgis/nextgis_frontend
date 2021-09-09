@@ -21,6 +21,5 @@ TODO: use typescript 4.1 template string type for map -`${field}`
 
 ```javascript
 { "orderBy": ["field1", "-field2"] }
-
 ```
 

@@ -4,7 +4,7 @@
 
 ## WebMapMain.getCenter() method
 
-Returns the map's geographical centerpoint.  lngLat Array of two numbers representing longitude and latitude of the center of the map view.
+Returns the map's geographical centerpoint.
 
 <b>Signature:</b>
 
@@ -15,12 +15,13 @@ getCenter(): LngLatArray | undefined;
 
 [LngLatArray](./utils.lnglatarray.md) \| undefined
 
+lngLat Array of two numbers representing longitude and latitude of the center of the map view.
+
 ## Example
 
 
 ```javascript
 // Mount Everest 27° 59′ 17″ N, 86° 55′ 31″ E
 webMap.getCenter(); // [86.925278, 27.988056]
-
 ```
 

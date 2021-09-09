@@ -4,6 +4,11 @@
 
 ## addNgwLayer() function
 
+> Warning: This API is now obsolete.
+> 
+> use [createNgwLayerAdapter()](./ngw-kit.createngwlayeradapter.md) instead
+> 
+
 <b>Signature:</b>
 
 ```typescript

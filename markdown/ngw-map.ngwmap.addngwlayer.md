@@ -9,14 +9,14 @@ Add any (style, vector, webmap) NGW layer by resource definition.
 <b>Signature:</b>
 
 ```typescript
-addNgwLayer<T extends NgwLayerAdapterType = NgwLayerAdapterType, P = FeatureProperties>(options: NgwLayerOptions<T, P>): Promise<ResourceAdapter | undefined>;
+addNgwLayer(options: NgwLayerOptions): Promise<ResourceAdapter | undefined>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | [NgwLayerOptions](./ngw-kit.ngwlayeroptions.md)<!-- -->&lt;T, P&gt; | set layer identification parameters and render method. |
+|  options | [NgwLayerOptions](./ngw-kit.ngwlayeroptions.md) | set layer identification parameters and render method. |
 
 <b>Returns:</b>
 
@@ -34,6 +34,5 @@ ngwMap.addNgwLayer({
   adapter: 'GEOJSON',
   adapterOptions: { paint: { color: 'red' } }
 });
-
 ```
 

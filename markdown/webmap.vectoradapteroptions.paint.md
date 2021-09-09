@@ -20,7 +20,6 @@ const circlePaint = { paint: { color: 'green', radius: 6 } };
 const paintCb = (feature) => {
  return { color: 'red', opacity: feature.properties.opacity }
 }
-
 ```
 
 ## Example 2
@@ -38,6 +37,5 @@ webMap.addLayer('GEOJSON', {
     options: {}
   }
 }
-
 ```
 

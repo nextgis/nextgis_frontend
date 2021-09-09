@@ -7,9 +7,16 @@
 <b>Signature:</b>
 
 ```typescript
-protected _updateItems(): Promise<VueSelectItem[]>;
+protected _updateItems(e?: LayerAdapter): Promise<VueSelectItem[] | undefined>;
 ```
+
+## Parameters
+
+|  Parameter | Type | Description |
+|  --- | --- | --- |
+|  e | [LayerAdapter](./webmap.layeradapter.md) |  |
+
 <b>Returns:</b>
 
-Promise&lt;[VueSelectItem](./vuetify-ngw-components.vueselectitem.md)<!-- -->\[\]&gt;
+Promise&lt;[VueSelectItem](./vuetify-ngw-components.vueselectitem.md)<!-- -->\[\] \| undefined&gt;
 

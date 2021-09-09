@@ -45,7 +45,7 @@ export declare class WebMapMain<M = any, E extends WebMapEvents = WebMapEvents, 
 |  [fitBounds(bounds, options)](./webmap.webmapmain.fitbounds.md) |  | Sets a map view that contains the given geographical bounds. |
 |  [getBounds()](./webmap.webmapmain.getbounds.md) |  |  |
 |  [getBoundsPolygon()](./webmap.webmapmain.getboundspolygon.md) |  |  |
-|  [getCenter()](./webmap.webmapmain.getcenter.md) |  | Returns the map's geographical centerpoint.  lngLat Array of two numbers representing longitude and latitude of the center of the map view. |
+|  [getCenter()](./webmap.webmapmain.getcenter.md) |  | Returns the map's geographical centerpoint. |
 |  [getContainer()](./webmap.webmapmain.getcontainer.md) |  | Returns the HTML element that contains the map. |
 |  [getCoordFromMapClick()](./webmap.webmapmain.getcoordfrommapclick.md) |  |  |
 |  [getCursor()](./webmap.webmapmain.getcursor.md) |  |  |
@@ -55,7 +55,7 @@ export declare class WebMapMain<M = any, E extends WebMapEvents = WebMapEvents, 
 |  [getLayerAdapters()](./webmap.webmapmain.getlayeradapters.md) |  |  |
 |  [getRuntimeParams()](./webmap.webmapmain.getruntimeparams.md) |  |  |
 |  [getState()](./webmap.webmapmain.getstate.md) |  |  |
-|  [getZoom()](./webmap.webmapmain.getzoom.md) |  | Returns the map's current zoom level.  The map's current zoom level (0-24). |
+|  [getZoom()](./webmap.webmapmain.getzoom.md) |  | Returns the map's current zoom level. |
 |  [locate(opt, events)](./webmap.webmapmain.locate.md) |  |  |
 |  [onLoad(event)](./webmap.webmapmain.onload.md) |  | helper method to wait for events to load. By default, card creation is tracked |
 |  [onMapLoad(cb)](./webmap.webmapmain.onmapload.md) |  |  |

@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function createIdentifyItem<F = FeatureProperties, G extends Geometry = Geometry>(opt: IdentifyItemOptions): IdentifyItem;
+export declare function createIdentifyItem<F = FeatureProperties, G extends Geometry = Geometry>(opt: IdentifyItemOptions): IdentifyItem<F, G>;
 ```
 
 ## Parameters
@@ -18,5 +18,5 @@ export declare function createIdentifyItem<F = FeatureProperties, G extends Geom
 
 <b>Returns:</b>
 
-[IdentifyItem](./ngw-kit.identifyitem.md)
+[IdentifyItem](./ngw-kit.identifyitem.md)<!-- -->&lt;F, G&gt;
 

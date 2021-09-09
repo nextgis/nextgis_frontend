@@ -7,8 +7,15 @@
 <b>Signature:</b>
 
 ```typescript
-identify(): CancelablePromise<NgwFeatureItemResponse<F, G>>;
+identify(options?: Partial<FetchNgwItemOptions<F>>): CancelablePromise<NgwFeatureItemResponse<F, G>>;
 ```
+
+## Parameters
+
+|  Parameter | Type | Description |
+|  --- | --- | --- |
+|  options | Partial&lt;[FetchNgwItemOptions](./ngw-kit.fetchngwitemoptions.md)<!-- -->&lt;F&gt;&gt; |  |
+
 <b>Returns:</b>
 
 CancelablePromise&lt;[NgwFeatureItemResponse](./ngw-kit.ngwfeatureitemresponse.md)<!-- -->&lt;F, G&gt;&gt;

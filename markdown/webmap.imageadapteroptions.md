@@ -4,7 +4,6 @@
 
 ## ImageAdapterOptions interface
 
-
 <b>Signature:</b>
 
 ```typescript

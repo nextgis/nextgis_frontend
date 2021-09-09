@@ -15,12 +15,13 @@ export declare class BaselayerSelect extends Vue
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [\_\_updateItems?](./vuetify-ngw-components.baselayerselect.__updateitems.md) |  | () =&gt; Promise&lt;void&gt; | <i>(Optional)</i> |
+|  [\_\_updateItems?](./vuetify-ngw-components.baselayerselect.__updateitems.md) |  | (e?: [LayerAdapter](./webmap.layeradapter.md)<!-- -->) =&gt; Promise&lt;void&gt; | <i>(Optional)</i> |
 |  [\_layers](./vuetify-ngw-components.baselayerselect._layers.md) |  | Array&lt;[LayerAdapter](./webmap.layeradapter.md) \| [ResourceAdapter](./ngw-kit.resourceadapter.md)<!-- -->&gt; |  |
 |  [active](./vuetify-ngw-components.baselayerselect.active.md) |  | string \| false |  |
 |  [allowEmpty](./vuetify-ngw-components.baselayerselect.allowempty.md) |  | boolean |  |
 |  [emptyLayerText](./vuetify-ngw-components.baselayerselect.emptylayertext.md) |  | string |  |
 |  [emptyValue](./vuetify-ngw-components.baselayerselect.emptyvalue.md) |  | string |  |
+|  [internalUpdate](./vuetify-ngw-components.baselayerselect.internalupdate.md) |  | boolean |  |
 |  [items](./vuetify-ngw-components.baselayerselect.items.md) |  | [VueSelectItem](./vuetify-ngw-components.vueselectitem.md)<!-- -->\[\] |  |
 |  [webMap](./vuetify-ngw-components.baselayerselect.webmap.md) |  | [WebMap](./webmap.webmap.md) |  |
 |  [webMapId](./vuetify-ngw-components.baselayerselect.webmapid.md) |  | number |  |
@@ -29,7 +30,8 @@ export declare class BaselayerSelect extends Vue
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
-|  [\_updateItems()](./vuetify-ngw-components.baselayerselect._updateitems.md) |  |  |
+|  [\_checkLayer(e)](./vuetify-ngw-components.baselayerselect._checklayer.md) |  |  |
+|  [\_updateItems(e)](./vuetify-ngw-components.baselayerselect._updateitems.md) |  |  |
 |  [beforeDestroy()](./vuetify-ngw-components.baselayerselect.beforedestroy.md) |  |  |
 |  [create()](./vuetify-ngw-components.baselayerselect.create.md) |  |  |
 |  [destroy()](./vuetify-ngw-components.baselayerselect.destroy.md) |  |  |

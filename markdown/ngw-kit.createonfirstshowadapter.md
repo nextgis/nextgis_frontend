@@ -7,14 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function createOnFirstShowAdapter({ webMap, adapterOptions, createAdapter, }: CreateOnFirstShowAdapterOptions): Promise<Type<FirstShowAdapter>>;
+export declare function createOnFirstShowAdapter({ webMap, adapterOptions, onLayerAdded, createAdapter, }: CreateOnFirstShowAdapterOptions): Promise<Type<FirstShowAdapter>>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  { webMap, adapterOptions, createAdapter, } | CreateOnFirstShowAdapterOptions |  |
+|  { webMap, adapterOptions, onLayerAdded, createAdapter, } | CreateOnFirstShowAdapterOptions |  |
 
 <b>Returns:</b>
 

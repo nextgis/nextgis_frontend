@@ -4,7 +4,6 @@
 
 ## VectorAdapterLayerType type
 
-
 <b>Signature:</b>
 
 ```typescript

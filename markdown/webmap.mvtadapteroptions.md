@@ -4,7 +4,6 @@
 
 ## MvtAdapterOptions interface
 
-
 <b>Signature:</b>
 
 ```typescript

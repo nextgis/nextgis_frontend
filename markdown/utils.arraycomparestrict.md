@@ -31,6 +31,5 @@ arrayCompareStrict(['a', 'b'], ['a', 'b']) // true
 arrayCompareStrict(['a', 'b'], ['b', 'a']) // false
 arrayCompareStrict('asdf1234', 'asdf1234') // true
 arrayCompareStrict('asdf1234', '1234asdf') // false
-
 ```
 

@@ -29,7 +29,6 @@ const ngwMap = new NgwMap({
   baseUrl: 'https://demo.nextgis.com',
   webmapId: 3985
 });
-
 ```
 
 ## Constructors

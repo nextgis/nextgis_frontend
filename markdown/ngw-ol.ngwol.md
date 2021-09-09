@@ -7,9 +7,9 @@
 <b>Signature:</b>
 
 ```typescript
-declare class NgwOl extends NgwMap 
+declare class NgwOl extends NgwMap<Map> 
 ```
-<b>Extends:</b> [NgwMap](./ngw-map.ngwmap.md)
+<b>Extends:</b> [NgwMap](./ngw-map.ngwmap.md)<!-- -->&lt;Map&gt;
 
 ## Constructors
 

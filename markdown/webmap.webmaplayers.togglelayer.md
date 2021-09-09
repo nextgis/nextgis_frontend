@@ -34,6 +34,5 @@ webMap.addLayer('TILE', {id: 'my_layer', url: ''}).then((layer) => {
   webMap.toggleLayer('my_layer');
   webMap.isLayerVisible(layer); // true
 });
-
 ```
 

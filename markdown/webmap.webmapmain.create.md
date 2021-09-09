@@ -21,6 +21,5 @@ Promise&lt;this&gt;
 ```javascript
 const webMap = new WebMap(options);
 webMap.create().then(() => doSomething());
-
 ```
 

@@ -37,6 +37,5 @@ async function () {
   doSomething();
 }
 
-
 ```
 

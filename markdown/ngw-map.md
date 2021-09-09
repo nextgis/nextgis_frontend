@@ -29,5 +29,6 @@
 
 |  Type Alias | Description |
 |  --- | --- |
+|  [NgwIdentifyEvent](./ngw-map.ngwidentifyevent.md) |  |
 |  [NgwResourceDefinition](./ngw-map.ngwresourcedefinition.md) |  |
 

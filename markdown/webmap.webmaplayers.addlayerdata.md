@@ -32,6 +32,5 @@ const layer = webMap.addLayer('GEOJSON', {data: geojson_features_5}).then((layer
   webMap.addLayerData(layer, geojson_features_3);
   console.log(layer.getLayers().length) // > 8;
 });
-
 ```
 

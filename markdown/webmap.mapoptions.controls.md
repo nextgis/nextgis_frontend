@@ -22,6 +22,5 @@ controls?: Array<keyof MapControls | C>;
     new CustomControl()
   ]
 }
-
 ```
 

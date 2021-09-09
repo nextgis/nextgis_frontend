@@ -23,6 +23,5 @@ const layer = webMap.addLayer('GEOJSON', {
 });
 // programmatically selection - ok, but not on mouse click
 layer.select(({ feature }) => feature.properties.id === ID_FOR_SELECT);
-
 ```
 

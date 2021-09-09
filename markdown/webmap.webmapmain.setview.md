@@ -29,6 +29,5 @@ void
 ```javascript
 // Mount Everest 27° 59′ 17″ N, 86° 55′ 31″ E
 webMap.setView([86.925278, 27.988056], 12)
-
 ```
 

@@ -4,7 +4,7 @@
 
 ## WebMapLayers.addFeatureLayer() method
 
-Shortcut for [WebMapLayers.addGeoJsonLayer()](./webmap.webmaplayers.addgeojsonlayer.md) to initialize adapter with generic types for working in typescript
+Shortcut for [WebMapLayers.addGeoJsonLayer()](./webmap.webmaplayers.addgeojsonlayer.md) to create GeoJson adapter with generic types for working in typescript
 
 <b>Signature:</b>
 

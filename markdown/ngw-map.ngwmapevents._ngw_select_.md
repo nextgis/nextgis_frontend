@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-'ngw:select': NgwIdentify | null;
+'ngw:select': NgwIdentifyEvent | null;
 ```

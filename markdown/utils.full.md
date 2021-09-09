@@ -32,6 +32,5 @@ full('foo') // true
 full('') // false
 full(undefined) // false
 full(0) // true
-
 ```
 

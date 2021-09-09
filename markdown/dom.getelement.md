@@ -29,6 +29,5 @@ HTMLElement \| undefined
 let el = getElement(HTMLElement || 'element-id');
 el = getElement('#element-id .sub-class');
 el = getElement('.element-class');
-
 ```
 

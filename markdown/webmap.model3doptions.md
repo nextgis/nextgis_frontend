@@ -4,7 +4,6 @@
 
 ## Model3DOptions interface
 
-
 <b>Signature:</b>
 
 ```typescript

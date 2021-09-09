@@ -31,6 +31,5 @@ const layer = webMap.addLayer('GEOJSON', {data: geojson}).then((layer) => {
   webMap.clearLayerData(layer, (feture) => feture.id === 42);
   webMap.clearLayerData(layer);
 });
-
 ```
 

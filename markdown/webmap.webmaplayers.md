@@ -22,12 +22,14 @@ export declare class WebMapLayers<M = any, L = any, E extends WebMapEvents = Web
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
 |  [addBaseLayer(adapter, options)](./webmap.webmaplayers.addbaselayer.md) |  | Shortcut method to create base layer |
-|  [addFeatureLayer(options)](./webmap.webmaplayers.addfeaturelayer.md) |  | Shortcut for [WebMapLayers.addGeoJsonLayer()](./webmap.webmaplayers.addgeojsonlayer.md) to initialize adapter with generic types for working in typescript |
+|  [addFeatureLayer(options)](./webmap.webmaplayers.addfeaturelayer.md) |  | Shortcut for [WebMapLayers.addGeoJsonLayer()](./webmap.webmaplayers.addgeojsonlayer.md) to create GeoJson adapter with generic types for working in typescript |
 |  [addGeoJsonLayer(opt, adapter)](./webmap.webmaplayers.addgeojsonlayer.md) |  | Create layer from GeoJson data. Set style and behavior for selection. |
+|  [addImageLayer(url, options)](./webmap.webmaplayers.addimagelayer.md) |  | Shortcut for [WebMapLayers.addLayer()](./webmap.webmaplayers.addlayer.md) to create TileLayer adapter |
 |  [addLayer(adapter, options, order)](./webmap.webmaplayers.addlayer.md) |  | Registration of map layer. |
 |  [addLayerData(layerDef, data)](./webmap.webmaplayers.addlayerdata.md) |  | Push new the GeoJSON features into given vector layer. |
 |  [addLayerFromAsyncAdapter(adapter, options, order)](./webmap.webmaplayers.addlayerfromasyncadapter.md) |  |  |
 |  [addTileJsonLayer(tileJson)](./webmap.webmaplayers.addtilejsonlayer.md) |  |  |
+|  [addTileLayer(url, options)](./webmap.webmaplayers.addtilelayer.md) |  | Shortcut for [WebMapLayers.addLayer()](./webmap.webmaplayers.addlayer.md) to create TileLayer adapter |
 |  [allLayers()](./webmap.webmaplayers.alllayers.md) |  |  |
 |  [clearLayerData(layerDef, cb)](./webmap.webmaplayers.clearlayerdata.md) |  | Remove from vector layer all features. it is possible to remove only some objects if you specify a callback function. |
 |  [filterLayer(layerDef, filter)](./webmap.webmaplayers.filterlayer.md) |  | Hide features from a vector layer using a callback function. |

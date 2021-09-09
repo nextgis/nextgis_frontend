@@ -6,7 +6,7 @@
 
 > Warning: This API is now obsolete.
 > 
-> - use isObjectKey instead
+> - use isObjKey instead
 > 
 
 <b>Signature:</b>

@@ -22,6 +22,5 @@ new WebMap({
   mapAdapter: new MapAdapter(),
   runtimeParams: [new RuntimeParams]
 })
-
 ```
 

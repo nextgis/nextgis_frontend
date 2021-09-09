@@ -33,6 +33,5 @@ if (defined(positions)) {
 } else {
   doSomethingElse();
 }
-
 ```
 

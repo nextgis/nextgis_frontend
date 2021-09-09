@@ -4,7 +4,6 @@
 
 ## OnLayerSelectOptions interface
 
-
 <b>Signature:</b>
 
 ```typescript

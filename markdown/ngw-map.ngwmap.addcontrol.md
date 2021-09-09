@@ -30,6 +30,5 @@ Promise&lt;any&gt;
 ```javascript
 ngwMap.addControl(new CustomControl(), 'bottom-left');
 ngwMap.addControl('ZOOM', 'top-right')
-
 ```
 

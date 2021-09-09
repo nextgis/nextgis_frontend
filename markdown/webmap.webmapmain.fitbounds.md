@@ -29,6 +29,5 @@ this
 ```javascript
 // Whole world
 webMap.fitBounds([0, -90, 180, 90]);
-
 ```
 

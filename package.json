@@ -12,7 +12,7 @@
     "test:build": "node ./scripts/testBuildCmd.js",
     "karma": "karma start tests/karma.conf.js",
     "doc": "cd ./docs && yarn doc",
-    "docs:md": "api-documenter markdown",
+    "doc:md": "api-documenter markdown",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "publish": "npm run test:build && lerna publish from-package",
     "patch": "npm run test:build && lerna version patch --conventional-commits -m \"chore(release): publish %s\" --no-push --create-release github",

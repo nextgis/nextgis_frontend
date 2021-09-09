@@ -35,6 +35,5 @@ layer.propertiesFilter([[
 ],
   ['year', 'gt', 2011]
 ]);
-
 ```
 

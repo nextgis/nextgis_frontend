@@ -15,14 +15,12 @@
 
 |  Function | Description |
 |  --- | --- |
-|  [\_allProperties(obj, \_props)](./utils._allproperties.md) |  |
 |  [allProperties(obj)](./utils.allproperties.md) |  |
 |  [applyMixins(derivedCtor, baseCtors, opt)](./utils.applymixins.md) |  |
 |  [arrayChunk(arr, size)](./utils.arraychunk.md) |  |
 |  [arrayCompare(array1, array2)](./utils.arraycompare.md) | Comparison of the contents of two arrays. Position of elements is ignored. |
 |  [arrayCompareStrict(array1, array2)](./utils.arraycomparestrict.md) | Comparing content and position of elements of two arrays. |
 |  [arrayUnique(arr)](./utils.arrayunique.md) |  |
-|  [bindAll(fns, context)](./utils.bindall.md) | Given an array of member function names as strings, replace all of them with bound versions that will always refer to <code>context</code> as <code>this</code>. This is useful for classes where otherwise event bindings would reassign <code>this</code> to the evented object or some other value: this lets you ensure the <code>this</code> value always. Taken from: https://github.com/mapbox/mapbox-gl-js/blob/v1.0.0/src/util/util.js\#L243 |
 |  [camelize(str)](./utils.camelize.md) |  |
 |  [capitalize(str)](./utils.capitalize.md) |  |
 |  [coordinatesCount(geojson)](./utils.coordinatescount.md) |  |
@@ -33,8 +31,6 @@
 |  [defined(val)](./utils.defined.md) | from https://github.com/CesiumGS/cesium/blob/master/Source/Core/defined.js |
 |  [degrees2meters(lng, lat)](./utils.degrees2meters.md) |  |
 |  [degrees2Radian(deg)](./utils.degrees2radian.md) |  |
-|  [deprecatedMapClick(ev)](./utils.deprecatedmapclick.md) |  |
-|  [deprecatedWarn(message)](./utils.deprecatedwarn.md) |  |
 |  [eachCoordinates(geojson, cb)](./utils.eachcoordinates.md) |  |
 |  [eachGeometry(geojson, cb)](./utils.eachgeometry.md) |  |
 |  [fixUrlStr(url)](./utils.fixurlstr.md) |  |
@@ -100,5 +96,5 @@
 |  [LngLatBoundsArray](./utils.lnglatboundsarray.md) | Array of coordinates, measured in degrees, in \[west, south, east, north\] order. [GeoJSON standard](https://tools.ietf.org/html/rfc7946#section-5) |
 |  [Position](./utils.position.md) | A Position is an array of coordinates. [GeoJSON standard](https://tools.ietf.org/html/rfc7946#section-3.1.1) Array should contain between two and three elements. The previous GeoJSON specification allowed more elements (e.g., which could be used to represent M values), but the current specification only allows X, Y, and (optionally) Z to be defined. |
 |  [Type](./utils.type.md) |  |
-|  [ZoomLevel](./utils.zoomlevel.md) | Map zoom level. |
+|  [ZoomLevel](./utils.zoomlevel.md) | Map zoom level. From 0 to 22 |
 
