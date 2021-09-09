@@ -8,14 +8,23 @@ import {
 import { NgwLayerOptions, TileNoData } from '../interfaces';
 import { updateImageParams } from './utils';
 
-export function getLayerAdapterOptions(
-  options: NgwLayerOptions,
-  webMap: WebMap,
-  baseUrl: string,
-): RasterAdapterOptions | ImageAdapterOptions | undefined {
+export interface GetLayerAdapterOptions {
+  options: NgwLayerOptions;
+  webMap?: WebMap;
+  baseUrl?: string;
+}
+
+export function ngwApiToAdapterOptions({
+  options,
+  webMap,
+  baseUrl,
+}: GetLayerAdapterOptions):
+  | RasterAdapterOptions
+  | ImageAdapterOptions
+  | undefined {
   let adapter = options.adapter || 'IMAGE';
   let url: string;
-  const layerAdapters = webMap.getLayerAdapters();
+  const layerAdapters = webMap && webMap.getLayerAdapters();
   const isImageAllowed = layerAdapters ? layerAdapters.IMAGE : true;
 
   const resourceId = options.resource;
@@ -86,4 +95,13 @@ export function getLayerAdapterOptions(
   } else {
     console.log('Option `resource` not set');
   }
+}
+
+/** @deprecated use {@link ngwApiToAdapterOptions} instead */
+export function getLayerAdapterOptions(
+  options: NgwLayerOptions,
+  webMap: WebMap,
+  baseUrl: string,
+): RasterAdapterOptions | ImageAdapterOptions | undefined {
+  return ngwApiToAdapterOptions({ options, webMap, baseUrl });
 }

@@ -1,6 +1,6 @@
 import { defined } from '@nextgis/utils';
 
-import { getLayerAdapterOptions } from '../utils/getLayerAdapterOptions';
+import { ngwApiToAdapterOptions } from '../utils/ngwApiToAdapterOptions';
 import { resourceIdFromLayerOptions } from '../utils/resourceIdFromLayerOptions';
 
 import type { Type } from '@nextgis/utils';
@@ -38,26 +38,26 @@ export async function createRasterAdapter({
     }
   }
 
-  const adapterClass = webMap.mapAdapter.layerAdapters[
+  const AdapterClass = webMap.mapAdapter.layerAdapters[
     adapter
   ] as Type<MainLayerAdapter>;
-  if (adapterClass) {
+  if (AdapterClass) {
     const resourceId = await resourceIdFromLayerOptions(
       layerOptions,
       connector,
     );
-    return class Adapter extends adapterClass implements ResourceAdapter {
+    return class RasterAdapter extends AdapterClass implements ResourceAdapter {
       // options = {};
       item?: ResourceItem = item;
       resourceId = resourceId;
 
       constructor(public map: any, _options: any) {
         super(map, _options);
-        const opt = getLayerAdapterOptions(
-          layerOptions,
+        const opt = ngwApiToAdapterOptions({
+          options: layerOptions,
           webMap,
-          connector.options.baseUrl || '',
-        );
+          baseUrl: connector.options.baseUrl || '',
+        });
         if (opt) {
           const layerAdapterOptions: ImageAdapterOptions = {
             ...opt,
