@@ -42,7 +42,7 @@ export const vectorLayerGeomToPaintTypeAlias: Record<
   MULTIPOLYGONZ: 'polygon',
 };
 
-export function addNgwLayer(
+export function createNgwLayerAdapter(
   options: NgwLayerOptions,
   webMap: WebMap,
   connector: NgwConnector,
@@ -53,6 +53,15 @@ export function addNgwLayer(
   }
 
   return createAsyncAdapter(options, webMap, connector);
+}
+
+/** @deprecated use {@link createNgwLayerAdapter} instead */
+export function addNgwLayer(
+  options: NgwLayerOptions,
+  webMap: WebMap,
+  connector: NgwConnector,
+): Promise<Type<ResourceAdapter> | undefined> {
+  return createNgwLayerAdapter(options, webMap, connector);
 }
 
 export interface ExtendNgwWebmapLayerAdapterOptions {

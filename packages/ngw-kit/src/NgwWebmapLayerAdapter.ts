@@ -9,7 +9,7 @@ import {
 
 import { NgwWebmapItem } from './NgwWebmapItem';
 import { createOnFirstShowNgwAdapter } from './adapters/createOnFirstShowNgwAdapter';
-import { getLayerAdapterOptions } from './utils/getLayerAdapterOptions';
+import { ngwApiToAdapterOptions } from './utils/ngwApiToAdapterOptions';
 import { getNgwWebmapExtent } from './utils/fetchNgwExtent';
 import { updateImageParams } from './utils/utils';
 import { BookmarkItem } from './BookmarkItem';
@@ -284,14 +284,14 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
         item.updateWmsParams = (params) =>
           updateImageParams(params, resourceId);
         const adapter = item.layer_adapter.toUpperCase() as NgwLayerAdapterType;
-        const layerAdapterOptions = getLayerAdapterOptions(
-          {
+        const layerAdapterOptions = ngwApiToAdapterOptions({
+          options: {
             adapter,
             resource: resourceId,
           },
           webMap,
-          this.options.connector.options.baseUrl || '',
-        ) as RasterAdapterOptions;
+          baseUrl: this.options.connector.options.baseUrl || '',
+        }) as RasterAdapterOptions;
         item = {
           ...item,
           ...layerAdapterOptions,
