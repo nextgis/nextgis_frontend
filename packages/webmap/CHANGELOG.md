@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/nextgis/nextgis_frontend/compare/v1.5.1...v1.6.0) (2021-09-09)
+
+
+### Features
+
+* **webmap:** new addImageLayer shortcut WebMap method ([a0e452c](https://github.com/nextgis/nextgis_frontend/commit/a0e452ccc980440c3a2b563bf8efb73f961f2ff8))
+* **webmap:** new addTileLayer shortcut WebMap method ([421198a](https://github.com/nextgis/nextgis_frontend/commit/421198a0181b8c817e3ed7736d0734f143de3eeb))
+
+
+
+
+
 ## [1.5.1](https://github.com/nextgis/nextgis_frontend/compare/v1.5.0...v1.5.1) (2021-09-06)
 
 
