@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>NextGIS Geoservices</title>
+    <title>NGW TMS example</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
       * {
@@ -25,21 +25,15 @@
   <body>
     <div id="map"></div>
     <script>
-      // this key for demonstrations only
-      const apiKey = '67f622354b0e6302cb2b59f4d1b634e8';
       NgwMap.create({
         target: 'map',
-        center: [37.6831, 55.7618],
-        zoom: 8,
+        center: [37.666, 55.666],
+        zoom: 5,
+        osm: true,
       }).then((ngwMap) => {
-        ngwMap.addLayer('TILE', {
-          url:
-            'https://geoservices.nextgis.com/raster/osm/klokantech-3d/{z}/{x}/{y}.png?apikey=' +
-            apiKey,
-          maxZoom: 18,
-          attribution:
-            'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        });
+        ngwMap.addTileLayer(
+          'https://trolleway.nextgis.com/api/component/render/tile?resource=62&x={x}&y={y}&z={z}',
+        );
       });
     </script>
   </body>
