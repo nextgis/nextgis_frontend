@@ -19,12 +19,12 @@ import type {
   AdapterConstructor,
   VectorLayerAdapter,
   TileAdapterOptions,
+  FeatureLayerAdapter,
   OnLayerClickOptions,
   LayerAdaptersOptions,
   OnLayerSelectOptions,
   GeoJsonAdapterOptions,
   LayerAdapterDefinition,
-  FeatureLayerAdapter,
 } from './interfaces/LayerAdapter';
 import type { LayerDef } from './interfaces/BaseTypes';
 import type {
@@ -460,7 +460,7 @@ export class WebMapLayers<
     return this.addLayer(adapter || 'GEOJSON', opt);
   }
 
-  /** Shortcut for {@link WebMapLayers.addGeoJsonLayer} to initialize adapter with generic types for working in typescript */
+  /** Shortcut for {@link WebMapLayers.addGeoJsonLayer} to create GeoJson adapter with generic types for working in typescript */
   addFeatureLayer<
     P extends FeatureProperties = FeatureProperties,
     G extends Geometry = Geometry,
@@ -470,6 +470,16 @@ export class WebMapLayers<
   >(options = {} as O): Promise<FeatureLayerAdapter<P, G>> {
     return this.addGeoJsonLayer<'GEOJSON', O>(options) as Promise<
       FeatureLayerAdapter<P, G>
+    >;
+  }
+
+  /** Shortcut for {@link WebMapLayers.addLayer} to create TileLayer adapter */
+  addTileLayer(
+    url: string,
+    options: Omit<TileAdapterOptions, 'url'>,
+  ): Promise<MainLayerAdapter<M, L, TileAdapterOptions>> {
+    return this.addLayer('TILE', { ...options, url }) as Promise<
+      MainLayerAdapter<M, L, TileAdapterOptions>
     >;
   }
 
