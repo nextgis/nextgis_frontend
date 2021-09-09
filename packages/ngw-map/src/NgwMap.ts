@@ -8,6 +8,7 @@ import NgwConnector from '@nextgis/ngw-connector';
 import {
   fetchNgwLayerFeatureCollection,
   fetchNgwResourceExtent,
+  createNgwLayerAdapter,
   fetchNgwLayerFeature,
   fetchIdentifyGeoJson,
   sendIdentifyRequest,
@@ -17,7 +18,6 @@ import {
   fetchNgwLayerItem,
   getIdentifyItems,
   getCompanyLogo,
-  addNgwLayer,
 } from '@nextgis/ngw-kit';
 import { deprecatedWarn } from '@nextgis/utils';
 import { getIcon } from '@nextgis/icons';
@@ -188,7 +188,7 @@ export class NgwMap<
             options.adapterOptions.setViewDelay = this.options.setViewDelay;
           }
         }
-        const adapter = addNgwLayer(options, this, this.connector);
+        const adapter = createNgwLayerAdapter(options, this, this.connector);
         const adapterOpts = {
           visibility: true,
           // TODO: do not merge options, use only `adapterOptions`

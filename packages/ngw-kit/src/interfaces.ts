@@ -107,9 +107,7 @@ export interface NgwLayerOptions<
    *
    * @remarks
    * In NGW api this parameter is written as follows: `nd=204|404|200`, 200 by default.
-   * But in frontend libraries default value id 404 (not founded) for performance purpose.
-   *
-   * @default 204
+   * @default 200
    */
   tileNoData?: TileNoData;
 }
