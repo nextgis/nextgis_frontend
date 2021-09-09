@@ -20,6 +20,7 @@ import type {
   VectorLayerAdapter,
   TileAdapterOptions,
   FeatureLayerAdapter,
+  ImageAdapterOptions,
   OnLayerClickOptions,
   LayerAdaptersOptions,
   OnLayerSelectOptions,
@@ -29,8 +30,8 @@ import type {
 import type { LayerDef } from './interfaces/BaseTypes';
 import type {
   GetAttributionsOptions,
-  MapOptions,
   ToggleLayerOptions,
+  MapOptions,
 } from './interfaces/MapOptions';
 import type { WebMapEvents } from './interfaces/Events';
 import type { FitOptions } from './interfaces/MapAdapter';
@@ -480,6 +481,16 @@ export class WebMapLayers<
   ): Promise<MainLayerAdapter<M, L, TileAdapterOptions>> {
     return this.addLayer('TILE', { ...options, url }) as Promise<
       MainLayerAdapter<M, L, TileAdapterOptions>
+    >;
+  }
+
+  /** Shortcut for {@link WebMapLayers.addLayer} to create TileLayer adapter */
+  addImageLayer(
+    url: string,
+    options: Omit<ImageAdapterOptions, 'url'>,
+  ): Promise<MainLayerAdapter<M, L, ImageAdapterOptions>> {
+    return this.addLayer('IMAGE', { ...options, url }) as Promise<
+      MainLayerAdapter<M, L, ImageAdapterOptions>
     >;
   }
 
