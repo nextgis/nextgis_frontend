@@ -16,7 +16,7 @@ setCursor(cursor: Cursor): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  cursor | [Cursor](./webmap.cursor.md) | Available cursor name from https://developer.mozilla.org/ru/docs/Web/CSS/cursor |
+|  cursor | Cursor | Available cursor name from https://developer.mozilla.org/ru/docs/Web/CSS/cursor |
 
 <b>Returns:</b>
 

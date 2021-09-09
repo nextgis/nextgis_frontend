@@ -4,7 +4,6 @@
 
 ## RasterAdapterOptions interface
 
-
 <b>Signature:</b>
 
 ```typescript

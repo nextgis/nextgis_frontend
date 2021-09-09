@@ -4,7 +4,6 @@
 
 ## LayerAdaptersOptions interface
 
-
 <b>Signature:</b>
 
 ```typescript

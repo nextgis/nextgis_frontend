@@ -47,6 +47,5 @@ connector.apiRequest('feature_layer.feature.item', {
 }, { method: 'GET' });
 // send get-request to 'https://example.nextgis.com/api/resource/2011/feature/101?srs=4326&geom_format=geojson'
 
-
 ```
 

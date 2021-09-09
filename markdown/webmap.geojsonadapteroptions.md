@@ -4,7 +4,6 @@
 
 ## GeoJsonAdapterOptions interface
 
-
 <b>Signature:</b>
 
 ```typescript

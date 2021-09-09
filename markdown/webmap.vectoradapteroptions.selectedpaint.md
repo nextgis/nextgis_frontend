@@ -20,6 +20,5 @@ webMap.addLayer('GEOJSON', {
   paint: { color: 'red' },
   selectedPaint: { color: 'green' }
 });
-
 ```
 

@@ -4,7 +4,6 @@
 
 ## DataLayerFilter type
 
-
 <b>Signature:</b>
 
 ```typescript

@@ -30,6 +30,5 @@ Promise&lt;void&gt;
 const ngwLayer = ngwMap.addNgwLayer({ id: 'ngw_layer_name', resourceId: 4005 });
 ngwMap.fitLayer(ngwLayer);
 ngwMap.fitLayer('ngw_layer_name');
-
 ```
 

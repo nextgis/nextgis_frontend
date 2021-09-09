@@ -4,7 +4,7 @@
 
 ## WebMapMain.getZoom() method
 
-Returns the map's current zoom level.  The map's current zoom level (0-24).
+Returns the map's current zoom level.
 
 <b>Signature:</b>
 
@@ -14,4 +14,6 @@ getZoom(): number | undefined;
 <b>Returns:</b>
 
 number \| undefined
+
+The map's current zoom level (0-24).
 

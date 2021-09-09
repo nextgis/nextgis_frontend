@@ -30,7 +30,6 @@ const promise = new CancelablePromise((resolve, reject) => {
 });
 
 promise.cancel();
-
 ```
 
 ## Example 2
@@ -58,7 +57,6 @@ const promise = new CancelablePromise((resolve, reject, onCancel) => {
 });
 
 promise.cancel();
-
 ```
 
 ## Constructors

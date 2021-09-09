@@ -32,6 +32,5 @@ const control = webMap.createControl({
     return document.createElement('div');
   }
 });
-
 ```
 

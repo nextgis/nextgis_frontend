@@ -30,6 +30,5 @@ filterLayer(layerDef: LayerDef, filter: DataLayerFilter<Feature, L>): LayerDefin
 const layer = webMap.addLayer('GEOJSON', {data: geojson}).then((layer) => {
   webMap.filterLayer(layer, ({feature}) => feature.id === '42');
 });
-
 ```
 

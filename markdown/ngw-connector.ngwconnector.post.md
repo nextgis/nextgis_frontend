@@ -31,6 +31,5 @@ CancelablePromise&lt;[PostRequestItemsResponseMap](./ngw-connector.postrequestit
 connector.post('resource.collection', { data: POST_PAYLOAD })
   .then((newResource) => console.log(newResource))
   .catch((error) => console.warn(error));
-
 ```
 

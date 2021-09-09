@@ -13,12 +13,6 @@
 |  [isPropertyFilter(filter)](./properties-filter.ispropertyfilter.md) |  |
 |  [propertiesFilter(properties, filters)](./properties-filter.propertiesfilter.md) |  |
 
-## Variables
-
-|  Variable | Description |
-|  --- | --- |
-|  [operationsAliases](./properties-filter.operationsaliases.md) |  |
-
 ## Type Aliases
 
 |  Type Alias | Description |

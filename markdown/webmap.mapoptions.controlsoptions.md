@@ -24,6 +24,5 @@ controlsOptions?: ControlsOptions;
     'button2': { control: 'BUTTON' },
   }
 }
-
 ```
 

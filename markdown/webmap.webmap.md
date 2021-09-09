@@ -26,7 +26,6 @@ const webMap = new WebMap({
   mapAdapter: new MapAdapter(),
   target: 'map',
 });
-
 ```
 
 ## Constructors

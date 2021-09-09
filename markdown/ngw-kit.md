@@ -30,7 +30,6 @@ createWebMap({
     }),
   ],
 });
-
 ```
 
 ## Example 2
@@ -56,7 +55,6 @@ getNgwLayerItems({
   fields: ['name', 'year', 'Ni', 'Cu', 'Pt', 'Pd', 'Au']
   orderBy: ['year']
 }).then((items) => { ... });
-
 ```
  ngw-kit
 
@@ -80,7 +78,8 @@ getNgwLayerItems({
 |  [createGeoJsonAdapter(props)](./ngw-kit.creategeojsonadapter.md) |  |
 |  [createGeoJsonFeature(item)](./ngw-kit.creategeojsonfeature.md) |  |
 |  [createIdentifyItem(opt)](./ngw-kit.createidentifyitem.md) |  |
-|  [createOnFirstShowAdapter({ webMap, adapterOptions, createAdapter, })](./ngw-kit.createonfirstshowadapter.md) |  |
+|  [createNgwLayerAdapter(options, webMap, connector)](./ngw-kit.createngwlayeradapter.md) |  |
+|  [createOnFirstShowAdapter({ webMap, adapterOptions, onLayerAdded, createAdapter, })](./ngw-kit.createonfirstshowadapter.md) |  |
 |  [createOnFirstShowNgwAdapter({ webMap, connector, item, adapterOptions, idPrefix, })](./ngw-kit.createonfirstshowngwadapter.md) |  |
 |  [createPopupContent(feature, item)](./ngw-kit.createpopupcontent.md) |  |
 |  [createRasterAdapter({ layerOptions, webMap, connector, item, })](./ngw-kit.createrasteradapter.md) |  |
@@ -155,6 +154,7 @@ getNgwLayerItems({
 |  --- | --- |
 |  [FEATURE\_REQUEST\_PARAMS](./ngw-kit.feature_request_params.md) |  |
 |  [vectorLayerGeomToPaintTypeAlias](./ngw-kit.vectorlayergeomtopainttypealias.md) |  |
+|  [WEBMAP\_BASELAYER\_ID\_PREFIX](./ngw-kit.webmap_baselayer_id_prefix.md) |  |
 
 ## Type Aliases
 

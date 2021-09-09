@@ -36,7 +36,6 @@ const toggleControl = ngwMap.createToggleControl({
   title: 'Toggle layer visibility'
 });
 webMap.addControl(toggleControl, 'top-right');
-
 ```
 [Toggle button control example](http://code.nextgis.com/demo-examples-toggle-control)
 

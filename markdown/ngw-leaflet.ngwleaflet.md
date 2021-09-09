@@ -9,9 +9,9 @@ Displaying the \[NgwMap\](ngw-map-api) using the \[LeafletMapAdapter\](leaflet-m
 <b>Signature:</b>
 
 ```typescript
-declare class NgwLeaflet extends NgwMap 
+declare class NgwLeaflet extends NgwMap<Map> 
 ```
-<b>Extends:</b> [NgwMap](./ngw-map.ngwmap.md)
+<b>Extends:</b> [NgwMap](./ngw-map.ngwmap.md)<!-- -->&lt;Map&gt;
 
 ## Example
 
@@ -27,7 +27,6 @@ const ngwMap = new NgwMap({
   baseUrl: 'https://demo.nextgis.com',
   webmapId: 3985
 });
-
 ```
 
 ## Constructors

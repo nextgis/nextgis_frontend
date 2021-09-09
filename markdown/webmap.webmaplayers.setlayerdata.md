@@ -30,6 +30,5 @@ void \| Promise&lt;void&gt;
 const layer = webMap.addLayer('GEOJSON').then((layer) => {
   webMap.setLayerData(layer, geojson);
 });
-
 ```
 

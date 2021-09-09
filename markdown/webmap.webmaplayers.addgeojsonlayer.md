@@ -52,6 +52,5 @@ const layer = webMap.addGeoJsonLayer({ data: geojson, id: 'my_layer_name'});
 webMap.showLayer('my_layer_name');
 // or access layer by instance
 webMap.showLayer(layer);
-
 ```
 

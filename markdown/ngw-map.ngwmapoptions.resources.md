@@ -18,6 +18,5 @@ resources?: NgwResourceDefinition[];
 ```javascript
   var ngwMap = new NgwMap({qmsId: [465, 'qms-basemap']});
   ngwMap.hideLayer('qms-basemap');
-
 ```
 

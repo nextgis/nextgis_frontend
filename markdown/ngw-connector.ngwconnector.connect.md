@@ -27,6 +27,5 @@ const connector = new NgwConnector({baseUrl: 'https://demo.nextgis.com'});
 connector.connect()
   .then(() => console.log('Ok'))
   .catch((er) => console.log('Connection problem', er));
-
 ```
 

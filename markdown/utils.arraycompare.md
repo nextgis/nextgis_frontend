@@ -30,6 +30,5 @@ boolean
 arrayCompare(['a', 'b'], ['b', 'a']) // true
 arrayCompare(['a', 'b'], ['b']) // false
 arrayCompare('asdf1234', '1234asdf') // true
-
 ```
 

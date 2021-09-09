@@ -30,6 +30,5 @@ void
 const layer = webMap.addLayer('GEOJSON', {data: geojson}).then((layer) => {
   webMap.unSelectLayer(layer, ({feature}) => feature.id === '42');
 });
-
 ```
 

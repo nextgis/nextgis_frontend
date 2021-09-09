@@ -21,6 +21,5 @@ const webMap = new WebMap(options);
 webMap.create().then(() => doSomething());
 // create: true
 webMap.emitter.on('created', () => doSomething());
-
 ```
 

@@ -20,6 +20,5 @@ multiselect?: boolean;
 layer.select(({ feature }) => feature.properties.color === 'green'); // one feature will be selected
 // multiselect: true
 layer.select(({ feature }) => feature.properties.color === 'green'); // all 'green' features will be selected
-
 ```
 

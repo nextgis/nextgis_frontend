@@ -19,7 +19,6 @@ const area2 = calculateArea([
   [75.38, 59.13],
   [51.82, 63.8], // the first and last positions MUST contain identical values
 ]);
-
 ```
  area
 

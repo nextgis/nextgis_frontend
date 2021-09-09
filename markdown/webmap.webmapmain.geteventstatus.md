@@ -31,6 +31,5 @@ webMap.getEventStatus('create'); // false
 webMap.emitter.on('create', function () {
   webMap.getEventStatus('create'); // true
 })
-
 ```
 

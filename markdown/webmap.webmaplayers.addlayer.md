@@ -9,7 +9,7 @@ Registration of map layer.
 <b>Signature:</b>
 
 ```typescript
-addLayer<K extends keyof LayerAdapters, LO extends AdapterOptions = AdapterOptions>(adapter: LayerAdapterDefinition<K>, options?: LO | LayerAdaptersOptions[K], order?: number): Promise<LayerAdapter<M, L, LO>>;
+addLayer<K extends keyof LayerAdapters, LO extends AdapterOptions = AdapterOptions>(adapter: LayerAdapterDefinition<K>, options?: LO | LayerAdaptersOptions[K], order?: number): Promise<LayerAdapter>;
 ```
 
 ## Parameters
@@ -22,7 +22,7 @@ addLayer<K extends keyof LayerAdapters, LO extends AdapterOptions = AdapterOptio
 
 <b>Returns:</b>
 
-Promise&lt;[LayerAdapter](./webmap.layeradapter.md)<!-- -->&lt;M, L, LO&gt;&gt;
+Promise&lt;[LayerAdapter](./webmap.layeradapter.md)<!-- -->&gt;
 
 ## Example
 
@@ -31,6 +31,5 @@ Promise&lt;[LayerAdapter](./webmap.layeradapter.md)<!-- -->&lt;M, L, LO&gt;&gt;
 webMap.addLayer('TILE', options).then((layer) => webMap.showLayer(layer));
 
 webMap.addLayer(CustomLayerAdapter, options);
-
 ```
 

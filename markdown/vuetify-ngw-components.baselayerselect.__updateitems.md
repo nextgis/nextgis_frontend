@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-protected __updateItems?: () => Promise<void>;
+protected __updateItems?: (e?: LayerAdapter) => Promise<void>;
 ```
