@@ -1,5 +1,4 @@
 import 'dialog-polyfill/dialog-polyfill.css';
-// @ts-ignore
 import dialogPolyfill from 'dialog-polyfill';
 import { DialogAdapter, DialogAdapterOptions } from './interfaces';
 
@@ -27,8 +26,8 @@ export class Dialog implements DialogAdapter {
     closeBtn: true,
     closeBtnTemplate: closeBtn,
   };
-
-  private _dialog: HTMLDialogElement;
+  // TODO: rewrite this component for no browser dialog HTMLDialogElement because is deprecated
+  private _dialog: any;
   private _isNativeDialog: boolean;
   private _content: HTMLElement;
   private _parent: Node;
