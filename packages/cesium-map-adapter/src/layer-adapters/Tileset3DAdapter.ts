@@ -7,7 +7,7 @@ import {
   Color,
 } from 'cesium';
 import { debugLog } from '@nextgis/utils';
-import { getExtentFromBoundingSphere } from '../utils/getExtentFromBoundingSphere';
+import { getBoundsFromBoundingSphere } from '../utils/getBoundsFromBoundingSphere';
 import { makeUrl } from '../utils/makeUrl';
 import { whenSampleTerrainMostDetailed } from '../utils/whenSampleTerrainMostDetailed';
 import { BaseAdapter } from './BaseAdapter';
@@ -39,7 +39,12 @@ export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
     super.beforeRemove();
   }
 
+  /** @deprecated use {@link GeoJsonAdapter.getBounds} instead */
   getExtent(): LngLatBoundsArray | undefined {
+    return this.getBounds();
+  }
+
+  getBounds(): LngLatBoundsArray | undefined {
     return this._extent;
   }
 
@@ -109,7 +114,7 @@ export class Tileset3DAdapter extends BaseAdapter<Tileset3DAdapterOptions> {
   private _calculateExtent() {
     const tileset = this.layer;
     if (tileset) {
-      return getExtentFromBoundingSphere(tileset.boundingSphere);
+      return getBoundsFromBoundingSphere(tileset.boundingSphere);
     }
   }
 

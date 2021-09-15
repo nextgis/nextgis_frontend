@@ -1,12 +1,16 @@
-import { VectorAdapterLayerType, MapClickEvent } from '@nextgis/webmap';
-import {
-  GeoJsonObject,
-  GeoJsonGeometryTypes,
-  FeatureCollection,
+import { GeoJSON } from 'leaflet';
+import { boundsToArray } from './boundsToArray';
+
+import type {
   Feature,
+  GeoJsonObject,
+  FeatureCollection,
   GeometryCollection,
+  GeoJsonGeometryTypes,
 } from 'geojson';
-import { LeafletMouseEvent } from 'leaflet';
+import type { LatLngBounds } from 'leaflet';
+import type { LayerPosition, VectorAdapterLayerType } from '@nextgis/webmap';
+import type { LngLatArray, LngLatBoundsArray } from '@nextgis/utils';
 
 export const typeAlias: {
   [key in GeoJsonGeometryTypes]: VectorAdapterLayerType;
@@ -34,43 +38,6 @@ for (const a in typeAlias) {
   const backAlias = backAliases[layerType] || [];
   backAlias.push(a as GeoJsonGeometryTypes);
   backAliases[layerType] = backAlias;
-}
-
-export function findMostFrequentGeomType(
-  arr: GeoJsonGeometryTypes[],
-): GeoJsonGeometryTypes {
-  const counts: { [x: string]: number } = {};
-  for (let fry = 0; fry < arr.length; fry++) {
-    counts[arr[fry]] = 1 + (counts[arr[fry]] || 0);
-  }
-  let maxName = '';
-  for (const c in counts) {
-    const maxCount = maxName ? counts[maxName] : 0;
-    if (counts[c] > maxCount) {
-      maxName = c;
-    }
-  }
-  return maxName as GeoJsonGeometryTypes;
-}
-
-export function detectType(geojson: GeoJsonObject): GeoJsonGeometryTypes {
-  let geometry: GeoJsonGeometryTypes;
-  if (geojson.type === 'FeatureCollection') {
-    const featuresTypes = (geojson as FeatureCollection).features.map(
-      (f) => f.geometry.type,
-    );
-    geometry = findMostFrequentGeomType(featuresTypes);
-  } else if (geojson.type === 'GeometryCollection') {
-    const geometryTypes = (geojson as GeometryCollection).geometries.map(
-      (g) => g.type,
-    );
-    geometry = findMostFrequentGeomType(geometryTypes);
-  } else if (geojson.type === 'Feature') {
-    geometry = (geojson as Feature).geometry.type;
-  } else {
-    geometry = geojson.type;
-  }
-  return geometry;
 }
 
 export function geometryFilter(
@@ -104,14 +71,29 @@ export function filterGeometries(
   return data;
 }
 
-export function convertMapClickEvent(evt: LeafletMouseEvent): MapClickEvent {
-  const coord = evt.containerPoint;
-  const latLng = evt.latlng;
-  const { lat, lng } = latLng;
+function featuresBounds(features: Feature | Feature[]): LatLngBounds {
+  const geoJsonLayer = new GeoJSON();
+  const features_ = Array.isArray(features) ? features : [features];
+  features_.forEach((f) => geoJsonLayer.addData(f));
+  return geoJsonLayer.getBounds();
+}
+
+export function getFeaturesBounds(
+  features: Feature | Feature[],
+): LngLatBoundsArray {
+  return boundsToArray(featuresBounds(features));
+}
+
+export function getFeaturesCenter(features: Feature | Feature[]): LngLatArray {
+  const { lat, lng } = featuresBounds(features).getCenter();
+  return [lng, lat];
+}
+
+export function createFeaturePositionOptions(
+  features: Feature | Feature[],
+): LayerPosition {
   return {
-    latLng,
-    lngLat: [lng, lat],
-    pixel: { left: coord.x, top: coord.y },
-    source: evt,
+    getBounds: () => getFeaturesBounds(features),
+    getCenter: () => getFeaturesCenter(features),
   };
 }

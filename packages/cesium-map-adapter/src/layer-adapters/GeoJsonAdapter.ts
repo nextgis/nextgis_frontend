@@ -32,7 +32,7 @@ import { BaseAdapter, Map } from './BaseAdapter';
 import { whenSampleTerrainMostDetailed } from '../utils/whenSampleTerrainMostDetailed';
 import { isFeature3D } from '../utils/isFeature3D';
 import { getEntitiesBoundingSphere } from '../utils/getEntitiesBoundingSphere';
-import { getExtentFromBoundingSphere } from '../utils/getExtentFromBoundingSphere';
+import { getBoundsFromBoundingSphere } from '../utils/getBoundsFromBoundingSphere';
 
 type Layer = GeoJsonDataSource;
 
@@ -118,14 +118,19 @@ export class GeoJsonAdapter
     return Promise.resolve();
   }
 
+  /** @deprecated use {@link GeoJsonAdapter.getBounds} instead */
   getExtent(): LngLatBoundsArray | undefined {
+    return this.getBounds();
+  }
+
+  getBounds(): LngLatBoundsArray | undefined {
     if (this._source) {
       const boundingSphere = getEntitiesBoundingSphere(
         this.map,
         this._source.entities.values,
       );
       if (boundingSphere) {
-        return getExtentFromBoundingSphere(boundingSphere);
+        return getBoundsFromBoundingSphere(boundingSphere);
       }
     }
     return undefined;

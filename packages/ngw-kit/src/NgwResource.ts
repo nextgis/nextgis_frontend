@@ -9,15 +9,17 @@ export class NgwResource {
 
   protected _extent?: LngLatBoundsArray;
 
+  /** @deprecated use {@link NgwResource.getBounds} instead */
   async getExtent(): Promise<LngLatBoundsArray | undefined> {
+    return this.getBounds();
+  }
+
+  async getBounds(): Promise<LngLatBoundsArray | undefined> {
     if (this._extent) {
       return this._extent;
     }
     if (this.item) {
-      this._extent = await fetchNgwResourceExtent(
-        this.item,
-        this.connector,
-      ).then();
+      this._extent = await fetchNgwResourceExtent(this.item, this.connector);
       return this._extent;
     }
   }
