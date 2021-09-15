@@ -21,18 +21,22 @@ export type OnLayerSelectType = 'api' | 'click' | 'hover';
 export interface OnLayerSelectOptions<
   F extends Feature = Feature,
   L = LayerAdapter,
-> {
+> extends LayerPosition {
   layer: L;
   features?: F[] | undefined;
   type: OnLayerSelectType;
 }
 
-export type OnLayerMouseOptions = OnLayerClickOptions;
-
-export interface OnLayerClickOptions<
+/** @deprecated use {@link OnLayerMouseOptions} instead */
+export type OnLayerClickOptions<
   F extends Feature = Feature,
   L = LayerAdapter,
-> {
+> = OnLayerMouseOptions<F, L>;
+
+export interface OnLayerMouseOptions<
+  F extends Feature = Feature,
+  L = LayerAdapter,
+> extends LayerPosition {
   layer: L;
   event: MapClickEvent;
   source: any;
@@ -327,16 +331,16 @@ export interface VectorAdapterOptions<
    */
   selectedLayout?: any;
 
-  onClick?(opt: OnLayerClickOptions<F, L>): void;
+  onClick?(opt: OnLayerMouseOptions<F, L>): void;
   onSelect?(opt: OnLayerSelectOptions<F, L>): void;
 
   /** Fired when the mouse enters the layer. */
-  onMouseOver?(opt: OnLayerClickOptions<F, L>): void;
+  onMouseOver?(opt: OnLayerMouseOptions<F, L>): void;
   /** Fired when the mouse leaves the layer. */
-  onMouseOut?(opt: OnLayerClickOptions<F, L>): void;
+  onMouseOut?(opt: OnLayerMouseOptions<F, L>): void;
 
   // @deprecated use {@link VectorAdapterOptions.onClick} instead
-  onLayerClick?(opt: OnLayerClickOptions<F, L>): Promise<any>;
+  onLayerClick?(opt: OnLayerMouseOptions<F, L>): Promise<any>;
   // @deprecated use {@link VectorAdapterOptions.onSelect} instead
   onLayerSelect?(opt: OnLayerSelectOptions<F, L>): Promise<any>;
 }
@@ -412,11 +416,17 @@ export interface LayerAdaptersOptions {
   GEOJSON: GeoJsonAdapterOptions;
 }
 
-export interface LayerDefinition<F extends Feature = Feature, L = any> {
+export interface LayerPosition {
+  getBounds: () => LngLatBoundsArray;
+  getCenter: () => LngLatArray;
+}
+
+export interface LayerDefinition<F extends Feature = Feature, L = any>
+  extends LayerPosition {
+  target: LayerAdapter;
+  feature: F;
   layer?: L;
-  feature?: F;
   visible?: boolean;
-  target?: LayerAdapter;
 }
 
 export type CallbackFilter<F extends Feature = Feature, L = any> = (
@@ -483,12 +493,16 @@ export interface MainLayerAdapter<
 
   showLayer?(layer?: L): void;
   hideLayer?(layer?: L): void;
-  // TODO: always return Promise
+  /** @deprecated use {@link MainLayerAdapter.getBounds} instead */
   getExtent?():
     | LngLatBoundsArray
     | Promise<LngLatBoundsArray | undefined>
     | undefined;
-
+  // TODO: always return Promise
+  getBounds?():
+    | LngLatBoundsArray
+    | Promise<LngLatBoundsArray | undefined>
+    | undefined;
   // TODO: remove from here
   getDependLayers?(): L[];
 
@@ -617,7 +631,7 @@ export interface VectorLayerAdapter<
    * @param event - Data that is transmitted when you click on a layer.
    * @internal
    */
-  onLayerClick?(event: OnLayerClickOptions): Promise<any>;
+  onLayerClick?(event: OnLayerMouseOptions): Promise<any>;
 
   openPopup?(
     findFeatureCb?: DataLayerFilter<F, L>,

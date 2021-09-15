@@ -218,7 +218,12 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     this._removeAllPopup();
   }
 
-  getExtent(): LngLatBoundsArray {
+  /** @deprecated use {@link GeoJsonAdapter.getBounds} instead */
+  getExtent(): LngLatBoundsArray | undefined {
+    return this.getBounds();
+  }
+
+  getBounds(): LngLatBoundsArray {
     const features = this._features;
     const bounds = new LngLatBounds();
     const coordinates: (number[] | [number, number])[] = [];

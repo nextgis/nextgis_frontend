@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
 import { Map, Control, FitBoundsOptions } from 'leaflet';
-import { convertMapClickEvent } from './utils/utils';
+import { convertMapClickEvent } from './utils/convertMapClickEvent';
 import { createButtonControl } from './controls/createButtonControl';
 import { AttributionControl } from './controls/Attribution';
 import { createControl } from './controls/createControl';

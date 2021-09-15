@@ -180,10 +180,16 @@ export interface ResourceAdapter<
   resourceId: number;
   item?: ResourceItem;
   baselayer?: boolean;
+  getBounds?():
+    | LngLatBoundsArray
+    | Promise<LngLatBoundsArray | undefined>
+    | undefined;
+  /** @deprecated use {@link ResourceAdapter.getBounds} */
   getExtent?():
     | LngLatBoundsArray
     | Promise<LngLatBoundsArray | undefined>
     | undefined;
+
   getIdentificationIds(): Promise<number[] | undefined>;
 }
 

@@ -8,7 +8,7 @@
   "dependencies": {
     "@nextgis/ngw-connector": "^1.5.1",
     "@nextgis/webmap": "^1.6.0",
-    "vue": "^2.6.12",
+    "vue": "^2.6.14",
     "vue-class-component": "^7.2.6",
     "vue-property-decorator": "^9.1.2",
     "vuex-module-decorators": "^1.0.1"
