@@ -1,17 +1,21 @@
-import { fetchNgwLayerItem, IdentifyItemOptions } from '.';
+import {
+  fetchNgwLayerItem,
+  IdentifyItemOptions,
+  fetchNgwLayerItemExtent,
+} from '.';
 import CancelablePromise from '@nextgis/cancelable-promise';
 
 import type { NgwFeatureItemResponse } from '.';
 import type { GeoJsonObject, Geometry, Feature } from 'geojson';
 import type {
+  VectorLayerResourceItem,
   FeatureItemExtensions,
   FeatureResource,
   LayerFeature,
-  VectorLayerResourceItem,
 } from '@nextgis/ngw-connector';
 import type NgwConnector from '@nextgis/ngw-connector';
-import type { FeatureProperties } from '@nextgis/utils';
-import { FetchNgwItemOptions } from './interfaces';
+import type { FeatureProperties, LngLatBoundsArray } from '@nextgis/utils';
+import type { FetchNgwItemOptions } from './interfaces';
 
 export class IdentifyItem<F = FeatureProperties, G extends Geometry = Geometry>
   implements LayerFeature
@@ -28,15 +32,16 @@ export class IdentifyItem<F = FeatureProperties, G extends Geometry = Geometry>
   private _item?: NgwFeatureItemResponse<F, G>;
   private _geojson?: Feature<G, F>;
   private _resource?: VectorLayerResourceItem;
+  private _extent?: LngLatBoundsArray;
 
   constructor(options: IdentifyItemOptions) {
     const f = options.feature;
     this.id = f.id;
+    this.geom = f.geom;
     this.label = f.label;
-    this.layerId = f.layerId;
     this.parent = f.parent;
     this.fields = f.fields;
-    this.geom = f.geom;
+    this.layerId = f.layerId;
     this.connector = options.connector;
   }
 
@@ -68,6 +73,17 @@ export class IdentifyItem<F = FeatureProperties, G extends Geometry = Geometry>
     return this.connector.getResource(this.layerId).then((resp) => {
       this._resource = resp as VectorLayerResourceItem;
       return this._resource.feature_layer;
+    });
+  }
+
+  getBounds(): CancelablePromise<LngLatBoundsArray | undefined> {
+    if (this._extent) {
+      return CancelablePromise.resolve(this._extent);
+    }
+    return fetchNgwLayerItemExtent({
+      connector: this.connector,
+      featureId: this.id,
+      resourceId: this.layerId,
     });
   }
 

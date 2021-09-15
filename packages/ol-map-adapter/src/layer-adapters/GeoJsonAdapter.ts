@@ -263,7 +263,12 @@ export class GeoJsonAdapter
     this.filter();
   }
 
+  /** @deprecated use {@link GeoJsonAdapter.getBounds} instead */
   getExtent(): LngLatBoundsArray | undefined {
+    return this.getBounds();
+  }
+
+  getBounds(): LngLatBoundsArray | undefined {
     if (this.layer) {
       const source = this.layer.getSource();
       const bounds = source.getExtent();

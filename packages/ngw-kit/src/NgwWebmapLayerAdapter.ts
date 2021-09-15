@@ -96,7 +96,12 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
     }
   }
 
+  /** @deprecated use {@link NgwWebmapLayerAdapter.getBounds} instead */
   getExtent(): LngLatBoundsArray | undefined {
+    return this.getBounds();
+  }
+
+  getBounds(): LngLatBoundsArray | undefined {
     const webmap = this.response && this.response.webmap;
     if (webmap) {
       return getNgwWebmapExtent(webmap);

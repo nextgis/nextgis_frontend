@@ -379,10 +379,10 @@ export class NgwMap<
     }
     const ngwLayer = id && this._ngwLayers[id];
     if (ngwLayer) {
-      if (ngwLayer.layer.getExtent) {
-        const extent = await ngwLayer.layer.getExtent();
-        if (extent) {
-          this.fitBounds(extent, options);
+      if (ngwLayer.layer.getBounds) {
+        const bounds = await ngwLayer.layer.getBounds();
+        if (bounds) {
+          this.fitBounds(bounds, options);
         }
       } else {
         let item: ResourceItem | undefined;

@@ -1,12 +1,13 @@
 import { EventEmitter } from 'events';
-import { debounce } from '@nextgis/utils';
+import { debounce, LngLatBoundsArray } from '@nextgis/utils';
 import { propertiesFilter } from '@nextgis/properties-filter';
+
 import { createPopupContent } from '../utils/createPopupContent';
 import { getLayerFilterOptions } from '../utils/getLayerFilterOptions';
 import { fetchNgwResourceExtent } from '../utils/fetchNgwExtent';
 import { resourceIdFromLayerOptions } from '../utils/resourceIdFromLayerOptions';
-import { fetchNgwLayerFeatureCollection } from '../utils/fetchNgwLayerFeatureCollection';
 import { vectorLayerGeomToPaintTypeAlias } from '../utils/utils';
+import { fetchNgwLayerFeatureCollection } from '../utils/fetchNgwLayerFeatureCollection';
 import { prepareNgwFieldsToPropertiesFilter } from '../utils/prepareNgwFieldsToPropertiesFilter';
 
 import type { FeatureCollection } from 'geojson';
@@ -140,13 +141,18 @@ export async function createGeoJsonAdapter(
       return layer;
     }
 
-    getExtent() {
+    /** @deprecated use {@link NgwGeoJsonAdapter.getBounds} instead */
+    getExtent(): Promise<LngLatBoundsArray | undefined> {
+      return this.getBounds();
+    }
+
+    async getBounds(): Promise<LngLatBoundsArray | undefined> {
       const hasData = this.getLayers && this.getLayers().length;
       if (this.options.strategy === 'BBOX' || hasData) {
         return fetchNgwResourceExtent(item, connector);
       } else {
-        if (super.getExtent) {
-          return super.getExtent();
+        if (super.getBounds) {
+          return super.getBounds();
         }
       }
     }
