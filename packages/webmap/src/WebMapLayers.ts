@@ -64,8 +64,10 @@ export class WebMapLayers<
    */
   async fitLayer(layerDef: LayerDef, options?: FitOptions): Promise<void> {
     const layer = this.getLayer(layerDef);
-    if (layer && layer.getExtent) {
-      const extent = await layer.getExtent();
+    // TODO: remove backward compatibility for `getExtent`
+    const getBounds = layer && (layer.getBounds || layer.getExtent);
+    if (getBounds) {
+      const extent = await getBounds.call(layer);
       if (extent) {
         this.fitBounds(extent, options);
       }
@@ -315,8 +317,10 @@ export class WebMapLayers<
       if (opacity !== undefined && opacity <= 1) {
         this.setLayerOpacity(_adapter, opacity);
       }
-      if (options.fit && _adapter.getExtent) {
-        const extent = await _adapter.getExtent();
+      // TODO: remove backward compatibility for `getExtent`
+      const getBounds = layer && (_adapter.getBounds || _adapter.getExtent);
+      if (options.fit && getBounds) {
+        const extent = await getBounds.call(_adapter);
         if (extent) {
           await this.fitBounds(extent);
         }

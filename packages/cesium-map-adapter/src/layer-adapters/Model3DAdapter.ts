@@ -44,7 +44,12 @@ export class Model3DAdapter extends BaseAdapter<Model3DOptions, Layer> {
     return this._layer;
   }
 
+  /** @deprecated use {@link GeoJsonAdapter.getBounds} instead */
   getExtent(): LngLatBoundsArray | undefined {
+    return this.getBounds();
+  }
+
+  getBounds(): LngLatBoundsArray | undefined {
     return this._extent;
   }
 
