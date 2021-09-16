@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-target?: LayerAdapter;
+target: LayerAdapter;
 ```

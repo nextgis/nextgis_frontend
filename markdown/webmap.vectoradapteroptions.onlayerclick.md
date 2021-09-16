@@ -7,14 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-onLayerClick?(opt: OnLayerClickOptions<F, L>): Promise<any>;
+onLayerClick?(opt: OnLayerMouseOptions<F, L>): Promise<any>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  opt | [OnLayerClickOptions](./webmap.onlayerclickoptions.md)<!-- -->&lt;F, L&gt; |  |
+|  opt | [OnLayerMouseOptions](./webmap.onlayermouseoptions.md)<!-- -->&lt;F, L&gt; |  |
 
 <b>Returns:</b>
 

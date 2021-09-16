@@ -7,8 +7,9 @@
 <b>Signature:</b>
 
 ```typescript
-export interface OnLayerSelectOptions<F extends Feature = Feature, L = LayerAdapter> 
+export interface OnLayerSelectOptions<F extends Feature = Feature, L = LayerAdapter> extends LayerPosition 
 ```
+<b>Extends:</b> [LayerPosition](./webmap.layerposition.md)
 
 ## Properties
 

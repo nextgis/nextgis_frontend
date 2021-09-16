@@ -4,6 +4,11 @@
 
 ## NgwWebmapLayerAdapter.getExtent() method
 
+> Warning: This API is now obsolete.
+> 
+> use [NgwWebmapLayerAdapter.getBounds()](./ngw-kit.ngwwebmaplayeradapter.getbounds.md) instead
+> 
+
 <b>Signature:</b>
 
 ```typescript

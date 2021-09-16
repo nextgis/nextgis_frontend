@@ -4,6 +4,11 @@
 
 ## MainLayerAdapter.getExtent() method
 
+> Warning: This API is now obsolete.
+> 
+> use [MainLayerAdapter.getBounds()](./webmap.mainlayeradapter.getbounds.md) instead
+> 
+
 <b>Signature:</b>
 
 ```typescript

@@ -2,12 +2,22 @@
 
 [Home](./index.md) &gt; [@nextgis/webmap](./webmap.md) &gt; [OnLayerMouseOptions](./webmap.onlayermouseoptions.md)
 
-## OnLayerMouseOptions type
+## OnLayerMouseOptions interface
 
 <b>Signature:</b>
 
 ```typescript
-export declare type OnLayerMouseOptions = OnLayerClickOptions;
+export interface OnLayerMouseOptions<F extends Feature = Feature, L = LayerAdapter> extends LayerPosition 
 ```
-<b>References:</b> [OnLayerClickOptions](./webmap.onlayerclickoptions.md)
+<b>Extends:</b> [LayerPosition](./webmap.layerposition.md)
+
+## Properties
+
+|  Property | Type | Description |
+|  --- | --- | --- |
+|  [event](./webmap.onlayermouseoptions.event.md) | [MapClickEvent](./webmap.mapclickevent.md) |  |
+|  [feature?](./webmap.onlayermouseoptions.feature.md) | F | <i>(Optional)</i> |
+|  [layer](./webmap.onlayermouseoptions.layer.md) | L |  |
+|  [selected?](./webmap.onlayermouseoptions.selected.md) | boolean | <i>(Optional)</i> |
+|  [source](./webmap.onlayermouseoptions.source.md) | any |  |
 

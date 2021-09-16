@@ -4,6 +4,11 @@
 
 ## NgwResource.getExtent() method
 
+> Warning: This API is now obsolete.
+> 
+> use [NgwResource.getBounds()](./ngw-kit.ngwresource.getbounds.md) instead
+> 
+
 <b>Signature:</b>
 
 ```typescript

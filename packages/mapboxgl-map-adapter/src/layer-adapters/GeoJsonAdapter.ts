@@ -1,8 +1,10 @@
-import { LngLatBounds } from 'maplibre-gl';
-
 import { defined } from '@nextgis/utils';
 import { featureFilter } from '@nextgis/properties-filter';
 import { EventOptions, VectorAdapter } from './VectorAdapter';
+import {
+  createFeaturePositionOptions,
+  getFeatureBounds,
+} from '../utils/getFeaturePosition';
 import {
   typeAliasForFilter,
   geometryFilter,
@@ -28,8 +30,8 @@ import type { VectorAdapterLayerPaint, GetPaintCallback } from '@nextgis/paint';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type { LngLatBoundsArray } from '@nextgis/utils';
 import type {
-  LayerDefinition,
   DataLayerFilter,
+  LayerDefinition,
   GeoJsonAdapterOptions,
   VectorAdapterLayerType,
 } from '@nextgis/webmap';
@@ -144,8 +146,8 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
         }
       }
       return {
-        feature,
         visible,
+        ...this._createLayerOptions(feature),
       };
     });
   }
@@ -162,7 +164,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   }
 
   getSelected(): Layers {
-    const features: LayerDefinition<Feature, TLayer>[] = [];
+    const selected: LayerDefinition<Feature, TLayer>[] = [];
     const selectedFeatureIds = this._selectedFeatureIds;
     const selectProperties = this._selectProperties;
     const allFeatures = this._getFeatures();
@@ -170,24 +172,24 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
       allFeatures.forEach((x) => {
         const id = this._getFeatureFilterId(x);
         if (id && selectedFeatureIds.indexOf(id) !== -1) {
-          features.push({ feature: x });
+          selected.push(this._createLayerOptions(x));
         }
       });
     } else if (this.source && selectProperties) {
       allFeatures
         .filter((x) => featureFilter(x, selectProperties))
         .forEach((x) => {
-          features.push({ feature: x });
+          selected.push(this._createLayerOptions(x));
         });
     }
-    return features;
+    return selected;
   }
 
   select(find?: DataLayerFilter<Feature, TLayer> | PropertiesFilter): void {
     if (find) {
       if (typeof find === 'function') {
         const features = this._getFeatures().filter((x) =>
-          find({ feature: x }),
+          find(this._createLayerOptions(x)),
         );
         this._selectFeature(features);
       } else {
@@ -206,7 +208,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
     if (find) {
       if (typeof find === 'function') {
         const features = this._getFeatures().filter((x) =>
-          find({ feature: x }),
+          find(this._createLayerOptions(x)),
         );
         this._unselectFeature(features);
         this.selected = Array.isArray(this._selectedFeatureIds) ? true : false;
@@ -224,31 +226,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   }
 
   getBounds(): LngLatBoundsArray {
-    const features = this._features;
-    const bounds = new LngLatBounds();
-    const coordinates: (number[] | [number, number])[] = [];
-    features.forEach((feature) => {
-      const geom = feature.geometry;
-      if (geom.type === 'Polygon' || geom.type === 'MultiLineString') {
-        geom.coordinates.forEach((x) => {
-          x.forEach((y) => coordinates.push(y));
-        });
-      } else if (geom.type === 'MultiPolygon') {
-        geom.coordinates.forEach((x) => {
-          x.forEach((y) => y.forEach((z) => coordinates.push(z)));
-        });
-      } else if (geom.type === 'Point') {
-        coordinates.push(geom.coordinates);
-      } else if (geom.type === 'MultiPoint' || geom.type === 'LineString') {
-        geom.coordinates.forEach((x) => {
-          coordinates.push(x);
-        });
-      }
-    });
-    coordinates.forEach((c) => bounds.extend(c as [number, number]));
-    const ne = bounds.getNorthEast();
-    const sw = bounds.getSouthWest();
-    return [sw.lng, sw.lat, ne.lng, ne.lat];
+    return getFeatureBounds(this._features);
   }
 
   protected async _beforeLayerLayer(sourceId: string): Promise<void> {
@@ -466,7 +444,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   private _filter(fun: DataLayerFilter<Feature, TLayer>) {
     const filtered: (string | number)[] = [];
     this._getFeatures().forEach((feature) => {
-      const ok = fun({ feature });
+      const ok = fun(this._createLayerOptions(feature));
       const id = this._getFeatureFilterId(feature);
       if (ok && id) {
         filtered.push(id);
@@ -565,6 +543,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
         layer: this,
         features,
         type: 'api',
+        ...createFeaturePositionOptions(features || []),
       });
     }
   }

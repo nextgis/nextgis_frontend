@@ -79,6 +79,7 @@ webMap.onLoad().then(() => {
 |  [LayerAdapters](./webmap.layeradapters.md) |  |
 |  [LayerAdaptersOptions](./webmap.layeradaptersoptions.md) |  |
 |  [LayerDefinition](./webmap.layerdefinition.md) |  |
+|  [LayerPosition](./webmap.layerposition.md) |  |
 |  [Locate](./webmap.locate.md) |  |
 |  [LocateOptions](./webmap.locateoptions.md) |  |
 |  [LocationEvent](./webmap.locationevent.md) |  |
@@ -93,7 +94,7 @@ webMap.onLoad().then(() => {
 |  [MapOptions](./webmap.mapoptions.md) |  |
 |  [Model3DOptions](./webmap.model3doptions.md) |  |
 |  [MvtAdapterOptions](./webmap.mvtadapteroptions.md) |  |
-|  [OnLayerClickOptions](./webmap.onlayerclickoptions.md) |  |
+|  [OnLayerMouseOptions](./webmap.onlayermouseoptions.md) |  |
 |  [OnLayerSelectOptions](./webmap.onlayerselectoptions.md) |  |
 |  [Pixel](./webmap.pixel.md) | Screen coordinates in pixels. |
 |  [PopupOptions](./webmap.popupoptions.md) |  |
@@ -131,7 +132,7 @@ webMap.onLoad().then(() => {
 |  [OnClick](./webmap.onclick.md) |  |
 |  [onClickAsync](./webmap.onclickasync.md) |  |
 |  [OnClickSync](./webmap.onclicksync.md) |  |
-|  [OnLayerMouseOptions](./webmap.onlayermouseoptions.md) |  |
+|  [OnLayerClickOptions](./webmap.onlayerclickoptions.md) |  |
 |  [OnLayerSelectType](./webmap.onlayerselecttype.md) |  |
 |  [PopupOnCloseFunction](./webmap.popuponclosefunction.md) |  |
 |  [VectorAdapterLayerType](./webmap.vectoradapterlayertype.md) |  |

@@ -4,6 +4,11 @@
 
 ## ResourceAdapter.getExtent() method
 
+> Warning: This API is now obsolete.
+> 
+> use [ResourceAdapter.getBounds()](./ngw-kit.resourceadapter.getbounds.md)
+> 
+
 <b>Signature:</b>
 
 ```typescript

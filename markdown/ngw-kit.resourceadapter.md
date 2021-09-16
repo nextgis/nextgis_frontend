@@ -23,6 +23,7 @@ export interface ResourceAdapter<M = any, L = any, O extends GeoJsonAdapterOptio
 
 |  Method | Description |
 |  --- | --- |
+|  [getBounds()?](./ngw-kit.resourceadapter.getbounds.md) | <i>(Optional)</i> |
 |  [getExtent()?](./ngw-kit.resourceadapter.getextent.md) | <i>(Optional)</i> |
 |  [getIdentificationIds()](./ngw-kit.resourceadapter.getidentificationids.md) |  |
 
