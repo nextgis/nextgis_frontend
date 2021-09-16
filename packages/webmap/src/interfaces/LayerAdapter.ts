@@ -337,7 +337,7 @@ export interface VectorAdapterOptions<
   /** Fired when the mouse enters the layer. */
   onMouseOver?(opt: OnLayerMouseOptions<F, L>): void;
   /** Fired when the mouse leaves the layer. */
-  onMouseOut?(opt: OnLayerMouseOptions<F, L>): void;
+  onMouseOut?(opt: Omit<OnLayerMouseOptions<F, L>, keyof LayerPosition>): void;
 
   // @deprecated use {@link VectorAdapterOptions.onClick} instead
   onLayerClick?(opt: OnLayerMouseOptions<F, L>): Promise<any>;

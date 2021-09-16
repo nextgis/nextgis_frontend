@@ -1,19 +1,23 @@
 import './Popup.css';
 
-import { transformExtent, transform } from 'ol/proj';
 import Overlay from 'ol/Overlay';
 import GeoJSON from 'ol/format/GeoJSON';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
+import { transformExtent, transform } from 'ol/proj';
 
 import { Paint } from '@nextgis/paint';
 import { create } from '@nextgis/dom';
-import { defined, LngLatArray, LngLatBoundsArray } from '@nextgis/utils';
-import { PropertiesFilter } from '@nextgis/properties-filter';
+import { defined } from '@nextgis/utils';
 
 import { getFeature } from '../utils/utils';
+import { getCentroid } from '../utils/getCentroid';
 import { resolutionOptions } from '../utils/gerResolution';
+import { makeHtmlFromString } from '../utils/makeHtmlFromString';
+import { convertMapClickEvent } from '../utils/convertMapClickEvent';
+import { createFeaturePositionOptions } from '../utils/createFeaturePositionOptions';
 import { styleFunction, labelStyleFunction } from '../utils/styleFunction';
+import { BaseAdapter } from './BaseAdapter';
 
 import type { Feature, GeoJsonObject } from 'geojson';
 import type MapBrowserEvent from 'ol/MapBrowserEvent';
@@ -22,6 +26,8 @@ import type { Options as OverlayOptions } from 'ol/Overlay';
 import type { Pixel } from 'ol/pixel';
 import type Base from 'ol/layer/Base';
 import type Map from 'ol/Map';
+import type { LngLatArray, LngLatBoundsArray } from '@nextgis/utils';
+import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type {
   PopupOptions,
   LayerDefinition,
@@ -32,16 +38,12 @@ import type {
   GeoJsonAdapterOptions,
 } from '@nextgis/webmap';
 import type {
-  UnselectCb,
-  MapClickEvent,
-  MouseEventType,
-  ForEachFeatureAtPixelCallback,
   ForEachFeatureAtPixelOrderedCallback,
+  ForEachFeatureAtPixelCallback,
+  MouseEventType,
+  MapClickEvent,
+  UnselectCb,
 } from '../OlMapAdapter';
-import { convertMapClickEvent } from '../utils/convertMapClickEvent';
-import { makeHtmlFromString } from '../utils/makeHtmlFromString';
-import { getCentroid } from '../utils/getCentroid';
-import { BaseAdapter } from './BaseAdapter';
 
 type MapBrowserPointerEvent = MapBrowserEvent<any>;
 type Layer = Base;
@@ -201,7 +203,7 @@ export class GeoJsonAdapter
   select(findFeatureCb?: DataLayerFilter<Feature> | PropertiesFilter): void {
     if (typeof findFeatureCb === 'function') {
       const feature = this._features.filter((x) =>
-        findFeatureCb({ feature: getFeature(x) }),
+        findFeatureCb(this._createLayerDefOpts(getFeature(x))),
       );
       feature.forEach((x) => {
         this._selectFeature(x);
@@ -218,7 +220,7 @@ export class GeoJsonAdapter
     let features = this._selectedFeatures;
     if (typeof findFeatureCb === 'function') {
       features = this._selectedFeatures.filter((x) =>
-        findFeatureCb({ feature: getFeature(x) }),
+        findFeatureCb(this._createLayerDefOpts(getFeature(x))),
       );
     } else if (this.selected) {
       this.selected = false;
@@ -231,13 +233,13 @@ export class GeoJsonAdapter
 
   getLayers(): Layers[] {
     return this._features.map((x) => {
-      return { feature: getFeature(x) };
+      return this._createLayerDefOpts(getFeature(x));
     });
   }
 
   getSelected(): Layers[] {
     return this._selectedFeatures.map((x) => {
-      return { feature: getFeature(x) };
+      return this._createLayerDefOpts(getFeature(x));
     });
   }
 
@@ -246,7 +248,7 @@ export class GeoJsonAdapter
     const features = this._features;
     const filtered = fun
       ? features.filter((feature) => {
-          return fun({ feature: getFeature(feature) });
+          return fun(this._createLayerDefOpts(getFeature(feature)));
         })
       : features;
     this.vectorSource.clear();
@@ -255,7 +257,7 @@ export class GeoJsonAdapter
       this.vectorSource.addFeature(filtered[fry]);
     }
     return filtered.map((x) => {
-      return { feature: getFeature(x) };
+      return this._createLayerDefOpts(getFeature(x));
     });
   }
 
@@ -279,6 +281,18 @@ export class GeoJsonAdapter
       );
       return extent as LngLatBoundsArray;
     }
+  }
+
+  private _createLayerDefOpts(feature: Feature): LayerDefinition {
+    return {
+      target: this,
+      feature,
+      ...createFeaturePositionOptions({
+        feature,
+        dataProjection: this.lonlatProjection,
+        featureProjection: this.displayProjection,
+      }),
+    };
   }
 
   private setPaintEachLayer(paint: Paint) {
@@ -325,13 +339,16 @@ export class GeoJsonAdapter
     const createMouseOptions = (e: MapBrowserPointerEvent) => {
       return {
         layer: this,
-        feature: feature && getFeature(feature),
         event: convertMapClickEvent(e),
         source: e,
       };
     };
     const mouseOptions = createMouseOptions(evt);
     if (feature) {
+      const featureMouseOptions = {
+        ...mouseOptions,
+        ...this._createLayerDefOpts(getFeature(feature)),
+      };
       let isSelected = this._selectedFeatures.indexOf(feature) !== -1;
 
       if (this.options.selectable) {
@@ -345,7 +362,7 @@ export class GeoJsonAdapter
               isSelected = false;
             }
           } else {
-            this._selectFeature(feature, mouseOptions.event.lngLat);
+            this._selectFeature(feature, featureMouseOptions.event.lngLat);
             isSelected = true;
           }
         }
@@ -355,14 +372,14 @@ export class GeoJsonAdapter
         if (this.options.onClick) {
           this.options.onClick({
             selected: isSelected,
-            ...mouseOptions,
+            ...featureMouseOptions,
           });
         }
       }
       if (type === 'hover') {
         this._mouseOver = true;
         if (this.options.onMouseOver) {
-          this.options.onMouseOver(mouseOptions);
+          this.options.onMouseOver(featureMouseOptions);
         }
       }
       return true;
@@ -404,10 +421,16 @@ export class GeoJsonAdapter
       });
     }
     if (this.options.onSelect) {
+      const feature_ = getFeature(feature);
       this.options.onSelect({
         layer: this,
-        features: [getFeature(feature)],
+        features: [],
         type,
+        ...createFeaturePositionOptions({
+          feature: feature_,
+          dataProjection: this.lonlatProjection,
+          featureProjection: this.displayProjection,
+        }),
       });
     }
   }
@@ -457,11 +480,10 @@ export class GeoJsonAdapter
     const feature = getFeature(f);
     const content = createPopupContent
       ? await createPopupContent({
-          feature,
-          target: this,
           close,
           onClose,
           type,
+          ...this._createLayerDefOpts(feature),
         })
       : popupContent;
     coordinates =
@@ -530,7 +552,7 @@ export class GeoJsonAdapter
           this.options.popupOptions?.unselectOnClose ?? true;
 
         for (const h of closeHandlers) {
-          h({ feature: getFeature(feature) });
+          h(this._createLayerDefOpts(getFeature(feature)));
         }
         closeHandlers.length = 0;
         if (unselectOnClose) {
