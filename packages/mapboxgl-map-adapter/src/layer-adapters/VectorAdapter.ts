@@ -6,6 +6,7 @@ import { getCentroid } from '../utils/getCentroid';
 import { makeHtmlFromString } from '../utils/makeHtmlFromString';
 import { convertMapClickEvent } from '../utils/convertMapClickEvent';
 import { typeAliasForFilter, allowedByType } from '../utils/geomType';
+import { createFeaturePositionOptions } from '../utils/getFeaturePosition';
 import { BaseAdapter } from './BaseAdapter';
 
 import type {
@@ -36,6 +37,7 @@ import type {
   DataLayerFilter,
   FilterOptions,
   PopupOptions,
+  LayerDefinition,
 } from '@nextgis/webmap';
 import type { TLayer } from '../MapboxglMapAdapter';
 import type {
@@ -203,7 +205,13 @@ export abstract class VectorAdapter<
     const { onSelect, onLayerSelect } = this.options;
     const onSelect_ = onSelect || onLayerSelect;
     if (onSelect_) {
-      onSelect_({ layer: this, features: [], type: 'api' });
+      const features: Feature[] = [];
+      onSelect_({
+        layer: this,
+        features,
+        type: 'api',
+        ...createFeaturePositionOptions(features),
+      });
     }
   }
 
@@ -214,7 +222,12 @@ export abstract class VectorAdapter<
     const { onSelect, onLayerSelect } = this.options;
     const onSelect_ = onSelect || onLayerSelect;
     if (onSelect_) {
-      onSelect_({ layer: this, features: undefined, type: 'api' });
+      onSelect_({
+        layer: this,
+        features: undefined,
+        type: 'api',
+        ...createFeaturePositionOptions([]),
+      });
     }
     this._removeAllPopup();
   }
@@ -262,10 +275,10 @@ export abstract class VectorAdapter<
         if (this.options.onClick) {
           this.options.onClick({
             layer: this,
-            feature,
             selected: isSelected,
             event: convertMapClickEvent(e),
             source: e,
+            ...this._createLayerOptions(feature),
           });
         }
       }
@@ -297,7 +310,12 @@ export abstract class VectorAdapter<
       }
       // alreadySelected = this.isFeatureSelected(feature);
       if (this.options.onSelect) {
-        this.options.onSelect({ layer: this, features, type: 'click' });
+        this.options.onSelect({
+          layer: this,
+          features,
+          type: 'click',
+          ...createFeaturePositionOptions(feature),
+        });
       }
     }
     if (becameSelected && this.options.popupOnSelect) {
@@ -708,11 +726,10 @@ export abstract class VectorAdapter<
 
     const content = createPopupContent
       ? await createPopupContent({
-          feature,
-          target: this,
           type,
           close,
           onClose,
+          ...this._createLayerOptions(feature),
         })
       : popupContent;
     coordinates =
@@ -775,6 +792,14 @@ export abstract class VectorAdapter<
     }
   }
 
+  protected _createLayerOptions(feature: Feature): LayerDefinition {
+    return {
+      target: this,
+      feature,
+      ...createFeaturePositionOptions(feature),
+    };
+  }
+
   private _removePopup(popup: Popup, doNotUnselect = false) {
     const map = this.map;
     if (map) {
@@ -785,7 +810,7 @@ export abstract class VectorAdapter<
           this.options.popupOptions?.unselectOnClose ?? true;
         const [feature, , closeHandlers] = this._openedPopup[index];
         for (const h of closeHandlers) {
-          h({ feature });
+          h(this._createLayerOptions(feature));
         }
         closeHandlers.length = 0;
         if (unselectOnClose && !doNotUnselect) {
@@ -835,8 +860,9 @@ export abstract class VectorAdapter<
           onMouseOver({
             event,
             layer: this,
-            feature,
             source: evt,
+            feature,
+            ...createFeaturePositionOptions(feature || []),
           });
         }
         if (feature) {

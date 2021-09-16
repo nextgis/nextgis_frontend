@@ -160,6 +160,7 @@ export class GeoJsonAdapter
 
   getLayers(): LayerDefinition[] {
     if (this._source) {
+      // @ts-ignore
       return this._source?.entities.values.map((x) => {
         return {
           layer: x,
@@ -271,6 +272,7 @@ export class GeoJsonAdapter
     return {
       getValue: () => {
         if (this.options.popupOptions?.createPopupContent) {
+          // @ts-ignore
           const content = this.options.popupOptions.createPopupContent({
             feature,
             type: 'api',
