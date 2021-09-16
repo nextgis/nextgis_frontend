@@ -19,19 +19,19 @@ export function eachCoordinates(
   eachGeometry(geojson, (geom) => {
     if ('coordinates' in geom) {
       if (geom.type === 'Polygon' || geom.type === 'MultiLineString') {
-        geom.coordinates.forEach((x) => {
+        for (const x of geom.coordinates) {
           x.forEach((y) => cb(y));
-        });
+        }
       } else if (geom.type === 'MultiPolygon') {
-        geom.coordinates.forEach((x) => {
+        for (const x of geom.coordinates) {
           x.forEach((y) => y.forEach((z) => cb(z)));
-        });
+        }
       } else if (geom.type === 'Point') {
         cb(geom.coordinates);
       } else if (geom.type === 'MultiPoint' || geom.type === 'LineString') {
-        geom.coordinates.forEach((x) => {
+        for (const x of geom.coordinates) {
           cb(x);
-        });
+        }
       }
     }
     return geom;
@@ -45,9 +45,11 @@ export function getPolygons(geojson: GeoJSON): Position[][] {
       if (geom.type === 'Polygon') {
         geom.coordinates.forEach((x) => polygons.push(x));
       } else if (geom.type === 'MultiPolygon') {
-        geom.coordinates.forEach((x) => {
-          x.forEach((y) => polygons.push(y));
-        });
+        for (const x of geom.coordinates) {
+          for (const y of x) {
+            polygons.push(y);
+          }
+        }
       }
     }
     return geom;
@@ -60,9 +62,9 @@ export function eachGeometry(
   cb: (position: Geometry) => void,
 ): void {
   if (geojson.type === 'FeatureCollection') {
-    geojson.features.forEach((f) => {
+    for (const f of geojson.features) {
       cb(f.geometry);
-    });
+    }
   } else if (geojson.type === 'Feature') {
     cb(geojson.geometry);
   } else if ('coordinates' in geojson) {

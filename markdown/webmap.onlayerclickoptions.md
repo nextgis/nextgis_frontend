@@ -2,21 +2,17 @@
 
 [Home](./index.md) &gt; [@nextgis/webmap](./webmap.md) &gt; [OnLayerClickOptions](./webmap.onlayerclickoptions.md)
 
-## OnLayerClickOptions interface
+## OnLayerClickOptions type
+
+> Warning: This API is now obsolete.
+> 
+> use [OnLayerMouseOptions](./webmap.onlayermouseoptions.md) instead
+> 
 
 <b>Signature:</b>
 
 ```typescript
-export interface OnLayerClickOptions<F extends Feature = Feature, L = LayerAdapter> 
+export declare type OnLayerClickOptions<F extends Feature = Feature, L = LayerAdapter> = OnLayerMouseOptions<F, L>;
 ```
-
-## Properties
-
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [event](./webmap.onlayerclickoptions.event.md) | [MapClickEvent](./webmap.mapclickevent.md) |  |
-|  [feature?](./webmap.onlayerclickoptions.feature.md) | F | <i>(Optional)</i> |
-|  [layer](./webmap.onlayerclickoptions.layer.md) | L |  |
-|  [selected?](./webmap.onlayerclickoptions.selected.md) | boolean | <i>(Optional)</i> |
-|  [source](./webmap.onlayerclickoptions.source.md) | any |  |
+<b>References:</b> [LayerAdapter](./webmap.layeradapter.md)<!-- -->, [OnLayerMouseOptions](./webmap.onlayermouseoptions.md)
 

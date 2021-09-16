@@ -9,14 +9,14 @@ Fired when the mouse enters the layer.
 <b>Signature:</b>
 
 ```typescript
-onMouseOver?(opt: OnLayerClickOptions<F, L>): void;
+onMouseOver?(opt: OnLayerMouseOptions<F, L>): void;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  opt | [OnLayerClickOptions](./webmap.onlayerclickoptions.md)<!-- -->&lt;F, L&gt; |  |
+|  opt | [OnLayerMouseOptions](./webmap.onlayermouseoptions.md)<!-- -->&lt;F, L&gt; |  |
 
 <b>Returns:</b>
 

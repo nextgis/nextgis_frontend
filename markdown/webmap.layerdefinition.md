@@ -7,15 +7,16 @@
 <b>Signature:</b>
 
 ```typescript
-export interface LayerDefinition<F extends Feature = Feature, L = any> 
+export interface LayerDefinition<F extends Feature = Feature, L = any> extends LayerPosition 
 ```
+<b>Extends:</b> [LayerPosition](./webmap.layerposition.md)
 
 ## Properties
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [feature?](./webmap.layerdefinition.feature.md) | F | <i>(Optional)</i> |
+|  [feature](./webmap.layerdefinition.feature.md) | F |  |
 |  [layer?](./webmap.layerdefinition.layer.md) | L | <i>(Optional)</i> |
-|  [target?](./webmap.layerdefinition.target.md) | [LayerAdapter](./webmap.layeradapter.md) | <i>(Optional)</i> |
+|  [target](./webmap.layerdefinition.target.md) | [LayerAdapter](./webmap.layeradapter.md) |  |
 |  [visible?](./webmap.layerdefinition.visible.md) | boolean | <i>(Optional)</i> |
 

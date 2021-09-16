@@ -27,6 +27,7 @@ export interface MainLayerAdapter<M = any, L = any, O extends AdapterOptions = A
 |  --- | --- |
 |  [addLayer(options)](./webmap.mainlayeradapter.addlayer.md) |  |
 |  [beforeRemove()?](./webmap.mainlayeradapter.beforeremove.md) | <i>(Optional)</i> |
+|  [getBounds()?](./webmap.mainlayeradapter.getbounds.md) | <i>(Optional)</i> |
 |  [getDependLayers()?](./webmap.mainlayeradapter.getdependlayers.md) | <i>(Optional)</i> |
 |  [getExtent()?](./webmap.mainlayeradapter.getextent.md) | <i>(Optional)</i> |
 |  [hideLayer(layer)?](./webmap.mainlayeradapter.hidelayer.md) | <i>(Optional)</i> |

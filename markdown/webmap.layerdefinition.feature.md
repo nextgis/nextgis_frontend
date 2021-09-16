@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-feature?: F;
+feature: F;
 ```

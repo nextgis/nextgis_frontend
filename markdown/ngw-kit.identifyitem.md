@@ -34,6 +34,7 @@ export declare class IdentifyItem<F = FeatureProperties, G extends Geometry = Ge
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
 |  [geojson()](./ngw-kit.identifyitem.geojson.md) |  |  |
+|  [getBounds()](./ngw-kit.identifyitem.getbounds.md) |  |  |
 |  [identify(options)](./ngw-kit.identifyitem.identify.md) |  |  |
 |  [resource()](./ngw-kit.identifyitem.resource.md) |  |  |
 
