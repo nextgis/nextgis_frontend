@@ -1,9 +1,9 @@
 import { convertMapClickEvent } from './convertMapClickEvent';
+import { createFeaturePositionOptions } from './geometries';
 
 import type { LeafletMouseEvent } from 'leaflet';
 import type { LayerAdapter, OnLayerMouseOptions } from '@nextgis/webmap';
 import type { LayerDef } from '../layer-adapters/GeoJsonAdapter';
-import { getFeaturesBounds, getFeaturesCenter } from './geometries';
 
 export interface CreateMouseEventOptions {
   layer: LayerAdapter;
@@ -21,10 +21,7 @@ export function createMouseEvent({
     feature,
     event: convertMapClickEvent(source),
     source,
+    ...createFeaturePositionOptions(feature),
   };
-  if (feature) {
-    opt.getBounds = () => getFeaturesBounds([feature]);
-    opt.getCenter = () => getFeaturesCenter([feature]);
-  }
   return opt;
 }
