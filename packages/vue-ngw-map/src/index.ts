@@ -1,4 +1,4 @@
-import { VueNgwMapData, VueNgwMapProps } from './components/VueNgwMapNew';
+import type { VueNgwMapData, VueNgwMapProps } from './interfaces';
 
 export type { VueNgwMapData, VueNgwMapProps };
 
