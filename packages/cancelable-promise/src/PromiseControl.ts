@@ -50,7 +50,7 @@ export class PromiseControl {
     if (this.isLoaded) {
       this._promises.forEach((x) => {
         if (x.cancel) {
-          x.cancel();
+          x.cancel()
         }
       });
       this._promises.clear();
