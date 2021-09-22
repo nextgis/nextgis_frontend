@@ -1,7 +1,9 @@
-import { MainLayerAdapter, TileAdapterOptions } from '@nextgis/webmap';
-import { TileLayer, TileLayerOptions } from 'leaflet';
+import { TileLayer } from 'leaflet';
 import { TileLayer as TL } from './TileLayer';
 import { BaseAdapter } from '../BaseAdapter';
+
+import type { MainLayerAdapter, TileAdapterOptions } from '@nextgis/webmap';
+import type { TileLayerOptions } from 'leaflet';
 
 export class TileAdapter
   extends BaseAdapter<TileAdapterOptions, TileLayer>
