@@ -15,6 +15,7 @@ export class TileAdapter extends BaseAdapter implements MainLayerAdapter {
   }
 
   addLayer(options: TileAdapterOptions): TileLayer<XYZ> {
+    Object.assign(this.options, options);
     const urls: string[] = [];
     const subdomains: string[] | undefined =
       typeof options.subdomains === 'string'
@@ -45,8 +46,8 @@ export class TileAdapter extends BaseAdapter implements MainLayerAdapter {
     const layer = new TileLayer({
       source,
       opacity: options.opacity,
-
       ...resolutionOptions(this.map, options),
+      ...options.nativeOptions,
     });
     return layer;
   }
