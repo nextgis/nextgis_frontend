@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/cancelable-promise",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "A promise you can stop",
   "main": "index.js",
   "module": "lib/cancelable-promise.esm-bundler.js",
