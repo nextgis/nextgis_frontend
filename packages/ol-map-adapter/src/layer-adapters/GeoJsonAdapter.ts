@@ -24,6 +24,7 @@ import type MapBrowserEvent from 'ol/MapBrowserEvent';
 import type OlFeature from 'ol/Feature';
 import type { Options as OverlayOptions } from 'ol/Overlay';
 import type { Pixel } from 'ol/pixel';
+import type { Style } from 'ol/style';
 import type Base from 'ol/layer/Base';
 import type Map from 'ol/Map';
 import type { LngLatArray, LngLatBoundsArray } from '@nextgis/utils';
@@ -71,6 +72,7 @@ export class GeoJsonAdapter
   private _openedPopup: OpenedPopup[] = [];
   private _forEachFeatureAtPixel: ForEachFeatureAtPixelOrderedCallback[] = [];
   private _mapClickEvents: MapClickEvent[] = [];
+  private _styleCache: Record<string | number, Style[]> = {};
 
   constructor(public map: Map, public options: GeoJsonAdapterOptions) {
     super(map, options);
@@ -90,7 +92,7 @@ export class GeoJsonAdapter
   }
 
   addLayer(options: GeoJsonAdapterOptions): VectorLayer<VectorLayerType> {
-    this.options = options;
+    Object.assign(this.options, options);
     this.paint = options.paint;
 
     this.selectedPaint = options.selectedPaint;
@@ -99,11 +101,15 @@ export class GeoJsonAdapter
     if (data) {
       this.addData(data);
     }
-
     this.layer = new VectorLayer({
       source: this.vectorSource,
       style: (f) => {
         const style = [];
+        const id = f.getId();
+        const fromCache = id !== undefined && this._styleCache[id];
+        if (fromCache) {
+          return fromCache;
+        }
         const vectorStyle = styleFunction(f as OlFeature<any>, options.paint);
         if (vectorStyle) {
           style.push(vectorStyle);
@@ -120,9 +126,13 @@ export class GeoJsonAdapter
             style.push(labelStyle);
           }
         }
+        if (id !== undefined) {
+          this._styleCache[id] = style;
+        }
         return style;
       },
       ...resolutionOptions(this.map, options),
+      ...options.nativeOptions,
     });
     const interactive = options.interactive ?? true;
     if (interactive) {

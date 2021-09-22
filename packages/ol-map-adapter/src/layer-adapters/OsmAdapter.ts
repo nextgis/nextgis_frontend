@@ -4,7 +4,11 @@ import TileLayer from 'ol/layer/Tile';
 import { BaseAdapter } from './BaseAdapter';
 
 import type Map from 'ol/Map';
-import type { MainLayerAdapter, AdapterOptions } from '@nextgis/webmap';
+import type {
+  MainLayerAdapter,
+  AdapterOptions,
+  TileAdapterOptions,
+} from '@nextgis/webmap';
 export class OsmAdapter extends BaseAdapter implements MainLayerAdapter {
   name = 'OpenStreetMap';
 
@@ -12,13 +16,15 @@ export class OsmAdapter extends BaseAdapter implements MainLayerAdapter {
     super(map, options);
   }
 
-  addLayer(): TileLayer<OSM> {
+  addLayer(options: Omit<TileAdapterOptions, 'url'>): TileLayer<OSM> {
+    Object.assign(this.options, options);
     this.options.name = this.name;
     const attributions = [ATTRIBUTION];
     const layer = new TileLayer({
       source: new OSM({
         attributions,
       }),
+      ...options.nativeOptions,
     });
     return layer;
   }

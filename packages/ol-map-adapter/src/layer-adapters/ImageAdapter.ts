@@ -21,6 +21,7 @@ export class ImageAdapter extends BaseAdapter implements MainLayerAdapter {
   }
 
   addLayer(options: ImageAdapterOptions): ImageLayer<ImageWMS> | undefined {
+    Object.assign(this.options, options);
     if (options.url) {
       const ratio = options.ratio !== undefined ? options.ratio : 1;
       const imageOptions: ImageWMSOptions = {
@@ -109,6 +110,7 @@ export class ImageAdapter extends BaseAdapter implements MainLayerAdapter {
         source,
         opacity: options.opacity,
         ...resolutionOptions(this.map, options),
+        ...options.nativeOptions,
       });
       this.layer = layer;
       return layer;

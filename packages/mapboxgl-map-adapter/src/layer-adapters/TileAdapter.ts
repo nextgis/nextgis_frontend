@@ -61,12 +61,14 @@ export class TileAdapter<O extends RasterAdapterOptions = TileAdapterOptions>
       },
       source: sourceOptions,
     };
-
     if (minZoom) {
       layerOptions.minzoom = minZoom - 1;
     }
     if (maxZoom) {
       layerOptions.maxzoom = maxZoom - 1;
+    }
+    if (options.nativeOptions) {
+      Object.assign(options, options.nativeOptions);
     }
     if (this.map) {
       this.map.addLayer(layerOptions as AnyLayer, options.before);

@@ -10,7 +10,7 @@ const OPTIONS = {
 };
 
 export class OsmAdapter extends TileAdapter implements MainLayerAdapter {
-  addLayer(options: TileAdapterOptions): string[] | undefined {
+  addLayer(options: Omit<TileAdapterOptions, 'url'>): string[] | undefined {
     return super.addLayer(Object.assign({}, OPTIONS, options));
   }
 }

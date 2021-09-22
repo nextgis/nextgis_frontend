@@ -1,9 +1,9 @@
-import { MainLayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
-// @ts-ignore
+import { MainLayerAdapter } from '@nextgis/webmap';
 import { ImageLayer } from './ImageLayer';
-
-import { Map } from 'leaflet';
 import { BaseAdapter } from '../BaseAdapter';
+
+import type { Map } from 'leaflet';
+import type { ImageAdapterOptions } from '@nextgis/webmap';
 
 export class ImageAdapter
   extends BaseAdapter<ImageAdapterOptions>
@@ -21,10 +21,11 @@ export class ImageAdapter
         headers: options.headers,
         setViewDelay: options.setViewDelay,
         /**
-         * TODO: safe remove, use only options.params
+         * TODO: safe remove, use only options.nativeOptions
          */
         ...options,
         ...options.params,
+        ...options.nativeOptions,
       });
       if (updateWmsParamsFromOpt) {
         const updateWmsParams = this.layer.updateWmsParams;

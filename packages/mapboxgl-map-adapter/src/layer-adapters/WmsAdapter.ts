@@ -7,6 +7,7 @@ export class WmsAdapter
   implements MainLayerAdapter
 {
   addLayer(options: WmsAdapterOptions): string[] | undefined {
+    Object.assign(this.options, options);
     const params: Record<string, string | number> = {
       bbox: '{bbox-epsg-3857}',
       format: options.format || 'image/png',
@@ -23,6 +24,9 @@ export class WmsAdapter
       .map((x) => `${x}=${params[x]}`)
       .join('&');
     options.url = options.url + '?' + paramsStr;
+    if (options.nativeOptions) {
+      Object.assign(options, this.options.nativeOptions);
+    }
     return super.addLayer(options);
   }
 }

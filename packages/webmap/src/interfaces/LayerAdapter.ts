@@ -48,8 +48,8 @@ export interface OnLayerMouseOptions<
  * Parameters that can be used to create any map layer adapter.
  */
 export interface AdapterOptions<
-  A extends Record<string, any> = Record<string, any>,
-  N extends Record<string, any> = Record<string, any>,
+  ANYPROPS extends Record<string, any> = Record<string, any>,
+  NATIVE extends Record<string, any> = Record<string, any>,
 > {
   /**
    * Unique Layer ID.
@@ -146,9 +146,13 @@ export interface AdapterOptions<
   /** Any properties to save in layer.
    * May be useful to get additional info from layer event.
    */
-  props?: A;
-  /** Map and layer adapter base options */
-  nativeOptions?: N;
+  props?: ANYPROPS;
+  /**
+   * Map and layer adapter base options
+   * Use with care.
+   * There may be a conflict in the addLayer method by the adapter of the NextGIS Frontend library
+   */
+  nativeOptions?: NATIVE;
   ratio?: number;
 
   /** Experimental only for Ol yet */
@@ -193,9 +197,10 @@ export interface PopupOptions<F extends Feature = Feature, L = any> {
 }
 
 type _VectorAdapterOptionsToExtend<
+  P extends Record<string, any> = Record<string, any>,
   A extends Record<string, any> = Record<string, any>,
   N extends Record<string, any> = Record<string, any>,
-> = AdapterOptions<A, N> & FilterOptions;
+> = AdapterOptions<A, N> & FilterOptions<P>;
 
 export interface VectorAdapterOptions<
   F extends Feature = Feature,
@@ -203,7 +208,7 @@ export interface VectorAdapterOptions<
   A = Record<string, any>,
   N = Record<string, any>,
   P = F['properties'],
-> extends _VectorAdapterOptionsToExtend<A, N> {
+> extends _VectorAdapterOptionsToExtend<P, A, N> {
   /** Type for geometries painting, for each layer may be only one of: `point`, `polygon` or `line`. */
   type?: VectorAdapterLayerType;
   /**
