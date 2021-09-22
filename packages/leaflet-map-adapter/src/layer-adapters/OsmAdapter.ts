@@ -4,9 +4,8 @@ import { TileLayer } from 'leaflet';
 import { TileAdapter } from './TileAdapter/TileAdapter';
 
 export class OsmAdapter extends TileAdapter implements MainLayerAdapter {
-  addLayer(options: TileAdapterOptions): TileLayer | undefined {
-    const url =
-      options.url || 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+  addLayer(options: Omit<TileAdapterOptions, 'url'>): TileLayer | undefined {
+    const url = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
     return super.addLayer({
       name: 'OpenStreetMap',
       attribution:

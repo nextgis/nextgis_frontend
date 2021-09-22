@@ -58,7 +58,7 @@ export class GeoJsonAdapter
   extends BaseAdapter<GeoJsonAdapterOptions>
   implements VectorLayerAdapter<Map>
 {
-  layer: FeatureGroup;
+  layer?: FeatureGroup;
   selected = false;
 
   private paint?: Paint;
@@ -77,13 +77,15 @@ export class GeoJsonAdapter
 
   constructor(map: L.Map, options: GeoJsonAdapterOptions) {
     super(map, options);
-    this.layer = new FeatureGroup([], { pane: this.pane });
   }
 
   addLayer(options: GeoJsonAdapterOptions): FeatureGroup<any> | undefined {
-    this.options = options;
+    Object.assign(this.options, options);
     this.paint = options.paint;
-
+    this.layer = new FeatureGroup([], {
+      ...options.nativeOptions,
+      pane: this.pane,
+    });
     this.selectedPaint = options.selectedPaint;
     options.paint = this.paint;
 
@@ -150,38 +152,38 @@ export class GeoJsonAdapter
   filter(fun?: DataLayerFilter): LayerDef[] {
     // Some optimization
     this._filterFun = fun;
-    // @ts-ignore
-    const _map = this.layer._map;
-    if (_map) {
-      this.layer.remove();
-    }
-    const filteredLayers: LayerDef[] = [];
-    this._layers.forEach(({ feature, layer }) => {
-      if (layer) {
-        const ok = fun
-          ? fun({
+    const layer_ = this.layer;
+    const map = layer_ && (layer_ as any)._map;
+    if (layer_ && map) {
+      layer_.remove();
+
+      const filteredLayers: LayerDef[] = [];
+      this._layers.forEach(({ feature, layer }) => {
+        if (layer) {
+          const ok = fun
+            ? fun({
+                target: this,
+                feature,
+                layer,
+                ...createFeaturePositionOptions(feature),
+              })
+            : true;
+          if (ok) {
+            layer_.addLayer(layer);
+            filteredLayers.push({
               target: this,
               feature,
               layer,
               ...createFeaturePositionOptions(feature),
-            })
-          : true;
-        if (ok) {
-          this.layer.addLayer(layer);
-          filteredLayers.push({
-            target: this,
-            feature,
-            layer,
-            ...createFeaturePositionOptions(feature),
-          });
-        } else {
-          this.layer.removeLayer(layer);
+            });
+          } else {
+            layer_.removeLayer(layer);
+          }
         }
-      }
-    });
-    this._filteredLayers = filteredLayers;
-    if (_map) {
-      this.layer.addTo(_map);
+      });
+      this._filteredLayers = filteredLayers;
+
+      layer_.addTo(map);
     }
     return this._filteredLayers;
   }
@@ -205,23 +207,26 @@ export class GeoJsonAdapter
 
   clearLayer(cb?: (feature: Feature) => boolean): void {
     this.unselect();
-    if (cb) {
-      for (let fry = this._layers.length; fry--; ) {
-        const def = this._layers[fry];
-        if (def) {
-          const { feature, layer } = def;
-          if (feature && layer) {
-            const exist = cb(feature);
-            if (exist) {
-              this.layer.removeLayer(layer);
-              this._layers.splice(fry, 1);
+    const layer_ = this.layer;
+    if (layer_) {
+      if (cb) {
+        for (let fry = this._layers.length; fry--; ) {
+          const def = this._layers[fry];
+          if (def) {
+            const { feature, layer } = def;
+            if (feature && layer) {
+              const exist = cb(feature);
+              if (exist) {
+                layer_.removeLayer(layer);
+                this._layers.splice(fry, 1);
+              }
             }
           }
         }
+      } else {
+        layer_.clearLayers();
+        this._layers = [];
       }
-    } else {
-      this.layer.clearLayers();
-      this._layers = [];
     }
   }
 
@@ -293,8 +298,10 @@ export class GeoJsonAdapter
   }
 
   getBounds(): LngLatBoundsArray | undefined {
-    const bounds = this.layer.getBounds();
-    return boundsToArray(bounds);
+    if (this.layer) {
+      const bounds = this.layer.getBounds();
+      return boundsToArray(bounds);
+    }
   }
 
   setOpacity(value: number): void {
@@ -548,6 +555,15 @@ export class GeoJsonAdapter
     }
 
     lopt.onEachFeature = (feature: Feature, layer) => {
+      this._onEachFeature(feature, layer);
+    };
+
+    return lopt;
+  }
+
+  private _onEachFeature(feature: Feature, layer: Layer) {
+    const layer_ = this.layer;
+    if (layer_) {
       const def = {
         target: this,
         feature,
@@ -567,7 +583,7 @@ export class GeoJsonAdapter
           this.options;
         // @ts-ignore
         layer.options.interactive = defined(interactive) ? interactive : true;
-        this.layer.addLayer(layer);
+        layer_.addLayer(layer);
         if (selectable) {
           if (selectOnHover) {
             layer.on('mouseover', () => {
@@ -600,9 +616,7 @@ export class GeoJsonAdapter
 
         this._updateTooltip({ layer, feature });
       }
-    };
-
-    return lopt;
+    }
   }
 
   private _handleMouseEvents(layer: Layer) {

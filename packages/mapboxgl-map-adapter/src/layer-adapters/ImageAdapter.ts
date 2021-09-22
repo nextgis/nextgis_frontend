@@ -50,6 +50,7 @@ export class ImageAdapter
             tileSize: 256,
           },
           paint: {},
+          ...options.nativeOptions,
         },
         options.before,
       );

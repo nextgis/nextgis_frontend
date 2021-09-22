@@ -3,7 +3,7 @@ import {
   LatLngBoundsExpression,
   ImageOverlayOptions,
 } from 'leaflet';
-import { callAjax } from '../layersUtility';
+import { callAjax } from '../../utils/callAjax';
 
 type IOptions = ImageOverlayOptions & { headers?: any };
 

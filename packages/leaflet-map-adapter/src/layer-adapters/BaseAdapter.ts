@@ -19,7 +19,8 @@ export class BaseAdapter<O extends AdapterOptions = AdapterOptions, L = any>
     }
   }
 
-  addLayer(_options: O): L | Promise<L> | undefined {
+  addLayer(options: O): L | Promise<L> | undefined {
+    Object.assign(this.options, options);
     return undefined;
   }
 }
