@@ -37,22 +37,22 @@ export class ItemProperties {
     propOpt: ItemPropertyConfig<keyof ItemPropertyTypes>,
   ): void {
     const handlers = ItemProperties.handlers;
-    let handler = propOpt.handler;
-    if (!handler && propOpt.type) {
+    let Handler = propOpt.handler;
+    if (!Handler && propOpt.type) {
       switch (propOpt.type) {
         case 'boolean':
-          handler = handlers.CheckProperty;
+          Handler = handlers.CheckProperty;
           break;
         case 'string':
-          handler = handlers.BaseProperty;
+          Handler = handlers.BaseProperty;
           break;
         default:
-          handler = handlers.BaseProperty;
+          Handler = handlers.BaseProperty;
       }
     }
-    if (handler && propOpt.name) {
+    if (Handler && propOpt.name) {
       const options = { ...(propOpt || {}) };
-      this._properties[propOpt.name] = new handler(
+      this._properties[propOpt.name] = new Handler(
         propOpt.name,
         this.item,
         options,

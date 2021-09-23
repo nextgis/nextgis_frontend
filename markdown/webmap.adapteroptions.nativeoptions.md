@@ -4,10 +4,10 @@
 
 ## AdapterOptions.nativeOptions property
 
-Map and layer adapter base options
+Map and layer adapter base options Use with care. There may be a conflict in the addLayer method by the adapter of the NextGIS Frontend library
 
 <b>Signature:</b>
 
 ```typescript
-nativeOptions?: N;
+nativeOptions?: NATIVE;
 ```

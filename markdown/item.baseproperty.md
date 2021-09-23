@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare abstract class BaseProperty<V = any, O extends ItemBasePropertyOptions<V> = ItemBasePropertyOptions<V>> 
+export declare abstract class BaseProperty<V = any, O extends ItemBasePropertyOptions<V> = ItemBasePropertyOptions<V>, I extends Item = Item> 
 ```
 
 ## Constructors
@@ -24,7 +24,7 @@ export declare abstract class BaseProperty<V = any, O extends ItemBasePropertyOp
 |  [\_container?](./item.baseproperty._container.md) |  | HTMLElement | <i>(Optional)</i> |
 |  [\_value?](./item.baseproperty._value.md) |  | V | <i>(Optional)</i> |
 |  [emitter](./item.baseproperty.emitter.md) |  | EventEmitter |  |
-|  [item](./item.baseproperty.item.md) |  | [Item](./item.item.md) |  |
+|  [item](./item.baseproperty.item.md) |  | I |  |
 |  [name](./item.baseproperty.name.md) |  | string |  |
 |  [options](./item.baseproperty.options.md) |  | O |  |
 
@@ -37,6 +37,7 @@ export declare abstract class BaseProperty<V = any, O extends ItemBasePropertyOp
 |  [\_prepareValue(value)](./item.baseproperty._preparevalue.md) |  |  |
 |  [destroy()](./item.baseproperty.destroy.md) |  |  |
 |  [get()](./item.baseproperty.get.md) |  |  |
+|  [getChildren()](./item.baseproperty.getchildren.md) |  |  |
 |  [getContainer()](./item.baseproperty.getcontainer.md) |  |  |
 |  [getParent()](./item.baseproperty.getparent.md) |  |  |
 |  [getParents()](./item.baseproperty.getparents.md) |  |  |
