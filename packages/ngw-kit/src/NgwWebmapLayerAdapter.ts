@@ -84,15 +84,21 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
     delete this._webmapLayersIds;
   }
 
-  showLayer(): void {
+  async showLayer(): Promise<void> {
     if (this.layer && this.layer.properties) {
-      this.layer.properties.property('visibility').set(true);
+      return this.layer.properties.property('visibility').set(true);
     }
   }
 
-  hideLayer(): void {
+  async hideLayer(): Promise<void> {
     if (this.layer && this.layer.properties) {
-      this.layer.properties.property('visibility').set(false);
+      return this.layer.properties.property('visibility').set(false);
+    }
+  }
+
+  async setOpacity(val: number): Promise<void> {
+    if (this.layer && this.layer.properties) {
+      return this.layer.properties.property('opacity').set(val);
     }
   }
 
