@@ -9,7 +9,7 @@ Constructs a new instance of the `BaseProperty` class
 <b>Signature:</b>
 
 ```typescript
-constructor(name: string, item: Item, options: O);
+constructor(name: string, item: I, options: O);
 ```
 
 ## Parameters
@@ -17,6 +17,6 @@ constructor(name: string, item: Item, options: O);
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  name | string |  |
-|  item | [Item](./item.item.md) |  |
+|  item | I |  |
 |  options | O |  |
 

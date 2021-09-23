@@ -7,9 +7,9 @@
 <b>Signature:</b>
 
 ```typescript
-export interface VectorAdapterOptions<F extends Feature = Feature, L = any, A = Record<string, any>, N = Record<string, any>, P = F['properties']> extends _VectorAdapterOptionsToExtend<A, N> 
+export interface VectorAdapterOptions<F extends Feature = Feature, L = any, A = Record<string, any>, N = Record<string, any>, P = F['properties']> extends _VectorAdapterOptionsToExtend<P, A, N> 
 ```
-<b>Extends:</b> \_VectorAdapterOptionsToExtend&lt;A, N&gt;
+<b>Extends:</b> \_VectorAdapterOptionsToExtend&lt;P, A, N&gt;
 
 ## Properties
 
