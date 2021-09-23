@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
-import { Item } from '../Item';
-import { ItemBasePropertyOptions, ItemOptions } from '../interfaces';
+import type { Item } from '../Item';
+import type { ItemBasePropertyOptions, ItemOptions } from '../interfaces';
 
 // import StrictEventEmitter from 'strict-event-emitter-types/types/src';
 
@@ -12,6 +12,7 @@ import { ItemBasePropertyOptions, ItemOptions } from '../interfaces';
 export abstract class BaseProperty<
   V = any,
   O extends ItemBasePropertyOptions<V> = ItemBasePropertyOptions<V>,
+  I extends Item = Item,
 > {
   options: O;
 
@@ -19,14 +20,14 @@ export abstract class BaseProperty<
   emitter = new EventEmitter();
   name: string;
 
-  item: Item;
+  item: I;
   protected _blocked = false;
   protected _container?: HTMLElement;
   protected _value?: V;
 
   private _removeEventsListener?: () => void;
 
-  constructor(name: string, item: Item, options: O) {
+  constructor(name: string, item: I, options: O) {
     this.item = item;
     this.options = Object.assign({}, options);
     this.name = name;
@@ -46,6 +47,10 @@ export abstract class BaseProperty<
 
   getParent(): Item<ItemOptions> | undefined {
     return this.item.tree.getParent();
+  }
+
+  getChildren(): Item<ItemOptions>[] {
+    return this.item.tree.getChildren();
   }
 
   isGroup(): number {
