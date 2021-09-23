@@ -39,5 +39,6 @@ export declare class NgwWebmapItem extends Item<ItemOptions>
 |  [fit()](./ngw-kit.ngwwebmapitem.fit.md) |  |  |
 |  [getChildren(item)](./ngw-kit.ngwwebmapitem.getchildren.md) |  |  |
 |  [getItemOptions(item)](./ngw-kit.ngwwebmapitem.getitemoptions.md) |  |  |
+|  [getLayer()](./ngw-kit.ngwwebmapitem.getlayer.md) |  |  |
 |  [initItem(item)](./ngw-kit.ngwwebmapitem.inititem.md) |  |  |
 

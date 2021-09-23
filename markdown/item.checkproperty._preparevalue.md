@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-_prepareValue(value?: PreparedValue): V | undefined;
+protected _prepareValue(value?: PreparedValue): V | undefined;
 ```
 
 ## Parameters

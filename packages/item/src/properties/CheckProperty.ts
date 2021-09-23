@@ -1,7 +1,7 @@
 import { BaseProperty } from './BaseProperty';
-import { Item } from '../Item';
 
-import { CheckOptions } from '../interfaces';
+import type { Item } from '../Item';
+import type { CheckOptions } from '../interfaces';
 
 type VAL = boolean;
 
@@ -62,37 +62,9 @@ export class CheckProperty<
     );
   }
 
-  _prepareValue(value?: PreparedValue): V | undefined {
-    return value;
-  }
-
-  _turnOff(options?: O): void {
-    if (this.options.turnOff) {
-      this.options.turnOff.call(this, options);
-    }
-    this._callOnSet(false, options);
-    if (this.options.hierarchy && this.isGroup()) {
-      this.blockChild(options);
-    }
-  }
-
-  _turnOn(options?: O): void {
-    if (this.options.turnOn) {
-      this.options.turnOn.call(this, options);
-    }
-    this._callOnSet(true, options);
-    if (this.options.hierarchy && this.isGroup()) {
-      this.unblockChild(options);
-    }
-  }
-
   block(options?: O): void {
     this._blocked = true;
     this._block(options);
-  }
-
-  _block(options?: O): void {
-    this._turnOff(options);
   }
 
   unBlock(options?: O): void {
@@ -100,10 +72,6 @@ export class CheckProperty<
     if (this.getValue()) {
       this._unBlock(options);
     }
-  }
-
-  _unBlock(options?: O): void {
-    this._turnOn(options);
   }
 
   blockChild(options?: O): void {
@@ -116,7 +84,39 @@ export class CheckProperty<
     this.item.tree.getChildren().forEach((x) => this._unBlockChild(x, options));
   }
 
-  _blockChild(item: Item, options?: O): void {
+  protected _prepareValue(value?: PreparedValue): V | undefined {
+    return value;
+  }
+
+  private _turnOff(options?: O): void {
+    if (this.options.turnOff) {
+      this.options.turnOff.call(this, options);
+    }
+    this._callOnSet(false, options);
+    if (this.options.hierarchy && this.isGroup()) {
+      this.blockChild(options);
+    }
+  }
+
+  private _turnOn(options?: O): void {
+    if (this.options.turnOn) {
+      this.options.turnOn.call(this, options);
+    }
+    this._callOnSet(true, options);
+    if (this.options.hierarchy && this.isGroup()) {
+      this.unblockChild(options);
+    }
+  }
+
+  private _block(options?: O): void {
+    this._turnOff(options);
+  }
+
+  private _unBlock(options?: O): void {
+    this._turnOn(options);
+  }
+
+  private _blockChild(item: Item, options?: O): void {
     const prop =
       item.properties &&
       (item.properties.property(this.name) as CheckProperty<V, O>);
@@ -125,7 +125,7 @@ export class CheckProperty<
     }
   }
 
-  _unBlockChild(item: Item, options?: O): void {
+  private _unBlockChild(item: Item, options?: O): void {
     const prop =
       item.properties &&
       (item.properties.property(this.name) as CheckProperty<V, O>);
@@ -134,7 +134,7 @@ export class CheckProperty<
     }
   }
 
-  _propagation(value?: V, options?: O): void {
+  private _propagation(value?: V, options?: O): void {
     if (this.isGroup()) {
       const children = this.item.tree.getChildren();
       for (let fry = 0; fry < children.length; fry++) {

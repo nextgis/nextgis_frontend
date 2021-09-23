@@ -27,14 +27,7 @@ export declare class CheckProperty<V extends VAL = VAL, O extends CheckOptions<V
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
-|  [\_block(options)](./item.checkproperty._block.md) |  |  |
-|  [\_blockChild(item, options)](./item.checkproperty._blockchild.md) |  |  |
 |  [\_prepareValue(value)](./item.checkproperty._preparevalue.md) |  |  |
-|  [\_propagation(value, options)](./item.checkproperty._propagation.md) |  |  |
-|  [\_turnOff(options)](./item.checkproperty._turnoff.md) |  |  |
-|  [\_turnOn(options)](./item.checkproperty._turnon.md) |  |  |
-|  [\_unBlock(options)](./item.checkproperty._unblock.md) |  |  |
-|  [\_unBlockChild(item, options)](./item.checkproperty._unblockchild.md) |  |  |
 |  [block(options)](./item.checkproperty.block.md) |  |  |
 |  [blockChild(options)](./item.checkproperty.blockchild.md) |  |  |
 |  [getHierarchyValue()](./item.checkproperty.gethierarchyvalue.md) |  |  |

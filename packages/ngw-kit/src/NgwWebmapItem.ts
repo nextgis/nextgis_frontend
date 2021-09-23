@@ -12,6 +12,7 @@ import { objectAssign } from '@nextgis/utils';
 
 import { setScaleRatio } from './utils/utils';
 import { TreeGroup, TreeLayer, TreeItem } from './interfaces';
+import { WebmapLayerOpacityPropertyHandler } from './utils/WebmapLayerOpacityPropertyHandler';
 
 export class NgwWebmapItem extends Item<ItemOptions> {
   static GetAdapterFromLayerType: {
@@ -64,6 +65,10 @@ export class NgwWebmapItem extends Item<ItemOptions> {
             item.item['layer_enabled'] = value;
           }
         },
+      },
+      {
+        name: 'opacity',
+        handler: WebmapLayerOpacityPropertyHandler,
       },
     ],
   };
@@ -184,6 +189,10 @@ export class NgwWebmapItem extends Item<ItemOptions> {
     if (this.item.item_type === 'layer') {
       // console.log(this.item);
     }
+  }
+
+  getLayer() {
+    return this.layer;
   }
 
   protected getItemOptions(item: TreeGroup | TreeLayer): Record<string, any> {
