@@ -1,5 +1,5 @@
 {
   "name": "Webmap layers tree",
-  "description": "Create tree control to show and hide layers from webmap. Click on the checkboxes to switch the visibility of layers and groups. If you click on the group checkbox with pressed CTRL key, then the action will be propagate to all the nested layers of the group.",
+  "description": "Create tree control to show and hide layers from webmap. Click on the checkboxes to switch the visibility of layers and groups. If you click on the group checkbox with pressed CTRL key, then the action will be propagate to all the nested layers of the group. Use the sliders to change the opacity hierarchically",
   "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
 }

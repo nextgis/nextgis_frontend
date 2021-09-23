@@ -9,5 +9,5 @@ Any properties to save in layer. May be useful to get additional info from layer
 <b>Signature:</b>
 
 ```typescript
-props?: A;
+props?: ANYPROPS;
 ```

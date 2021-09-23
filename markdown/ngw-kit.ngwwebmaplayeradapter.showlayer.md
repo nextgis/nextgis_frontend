@@ -7,9 +7,9 @@
 <b>Signature:</b>
 
 ```typescript
-showLayer(): void;
+showLayer(): Promise<void>;
 ```
 <b>Returns:</b>
 
-void
+Promise&lt;void&gt;
 
