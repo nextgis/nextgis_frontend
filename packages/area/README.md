@@ -67,7 +67,7 @@ const area2 = calculateArea([
 console.log(area2); // 730215205638.4752
 ```
 
-Check out the [API Documentation](https://github.com/nextgis/nextgis_frontend/blob/master/markdown/area.md)
+Check out the [API Documentation](https://code-api.nextgis.com/modules/area.html)
 
 ## Notes
 

@@ -61,7 +61,7 @@ getNgwLayerItems({
 }).then((items) => { ... });
 ```
 
-Check out the [API Documentation](https://github.com/nextgis/nextgis_frontend/blob/master/markdown/ngw-kit.md)
+Check out the [API Documentation](https://code-api.nextgis.com/modules/ngw_kit.html)
 
 ## Commercial support
 
