@@ -6,7 +6,8 @@ import {
   DivIcon,
   Marker,
   Layer,
-  LeafletEvent,
+
+
 } from 'leaflet';
 import { debounce, defined } from '@nextgis/utils';
 
@@ -24,10 +25,12 @@ import { BaseAdapter } from './BaseAdapter';
 
 import type { GeoJsonObject, Feature, Point } from 'geojson';
 import type {
+  PopupOptions as LPopupOptions,
   CircleMarkerOptions,
   LeafletMouseEvent,
   LatLngExpression,
   GeoJSONOptions,
+  LeafletEvent,
   PathOptions,
   LatLng,
   Path,
@@ -380,26 +383,35 @@ export class GeoJsonAdapter
         this._removePopup(popup);
       }
     };
-    const content = options.createPopupContent
-      ? await options.createPopupContent({
-          layer,
-          feature,
-          target: this,
-          type,
-          close,
-          onClose,
-          ...createFeaturePositionOptions(feature),
-        })
-      : options.popupContent;
+    let content;
+    if (options.createPopupContent) {
+      content = await options.createPopupContent({
+        layer,
+        feature,
+        target: this,
+        type,
+        close,
+        onClose,
+        ...createFeaturePositionOptions(feature),
+      });
+    } else {
+      content = options.popupContent;
+    }
+
     if (content && layer) {
-      popup = layer.bindPopup(content, {
+      const popupOptions: LPopupOptions = {
         minWidth,
         autoPan,
-        maxWidth,
+        // maxWidth,
         closeButton,
         closeOnClick: false,
         autoClose: false,
-      });
+      };
+      if (defined(maxWidth)) {
+        popupOptions.maxWidth = maxWidth;
+      }
+      popup = layer.bindPopup(content, popupOptions);
+
       const unselectOnClose =
         this.options.popupOptions?.unselectOnClose ?? true;
       if (unselectOnClose) {
@@ -414,9 +426,7 @@ export class GeoJsonAdapter
           );
       }
       this._openedPopup.push([popup, _closeHandlers, def]);
-      setTimeout(() => {
-        popup.openPopup(latlng);
-      }, 0);
+      popup.openPopup(latlng);
     }
   }
 
