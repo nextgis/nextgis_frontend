@@ -72,7 +72,7 @@ webMap.emitter.on('move', onMapMove);
 
 ```
 
-Check out the [API Documentation](https://github.com/nextgis/nextgis_frontend/blob/master/markdown/utils.md)
+Check out the [API Documentation](https://code-api.nextgis.com/modules/progress.html)
 
 ## Commercial support
 

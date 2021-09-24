@@ -141,7 +141,7 @@ onAdd.catch((er) => {
 onAdd.cancel();
 ```
 
-Check out the [API Documentation](https://github.com/nextgis/nextgis_frontend/blob/master/markdown/cache.md)
+Check out the [API Documentation](https://code-api.nextgis.com/modules/cache.html)
 
 ## Commercial support
 
