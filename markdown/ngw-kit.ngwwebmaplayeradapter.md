@@ -45,5 +45,6 @@ export declare class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M
 |  [getIdentificationIds()](./ngw-kit.ngwwebmaplayeradapter.getidentificationids.md) |  |  |
 |  [hideLayer()](./ngw-kit.ngwwebmaplayeradapter.hidelayer.md) |  |  |
 |  [removeLayer()](./ngw-kit.ngwwebmaplayeradapter.removelayer.md) |  |  |
+|  [setOpacity(val)](./ngw-kit.ngwwebmaplayeradapter.setopacity.md) |  |  |
 |  [showLayer()](./ngw-kit.ngwwebmaplayeradapter.showlayer.md) |  |  |
 

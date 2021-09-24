@@ -56,7 +56,7 @@ const ngwConnector = new Geocoder({
 });
 ```
 
-Check out the [API Documentation](https://github.com/nextgis/nextgis_frontend/blob/master/markdown/geocoder.md)
+Check out the [API Documentation](https://code-api.nextgis.com/modules/geocoder.html)
 
 ## Commercial support
 
