@@ -588,16 +588,18 @@ export class WebMapLayers<
     return Promise.resolve();
   }
 
-  updateLayer(layerDef: LayerDef): void {
+  updateLayer(layerDef: LayerDef): Promise<void> {
     const layer = this.getLayer(layerDef);
     if (layer) {
       if (layer.updateLayer) {
-        layer.updateLayer();
+        return Promise.resolve(layer.updateLayer());
       } else if (this.isLayerVisible(layer)) {
-        this.hideLayer(layer, { silent: true });
-        this.showLayer(layer, { silent: true });
+        return this.hideLayer(layer, { silent: true }).then(() => {
+          return this.showLayer(layer, { silent: true });
+        });
       }
     }
+    return Promise.resolve();
   }
 
   /**
