@@ -6,8 +6,6 @@ import {
   DivIcon,
   Marker,
   Layer,
-
-
 } from 'leaflet';
 import { debounce, defined } from '@nextgis/utils';
 
@@ -303,7 +301,9 @@ export class GeoJsonAdapter
   getBounds(): LngLatBoundsArray | undefined {
     if (this.layer) {
       const bounds = this.layer.getBounds();
-      return boundsToArray(bounds);
+      if (bounds.isValid()) {
+        return boundsToArray(bounds);
+      }
     }
   }
 
