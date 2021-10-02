@@ -27,7 +27,7 @@
 <body>
   <div id='map'></div>
   <script>
-    var ngwMap = new NgwMap({
+    const  ngwMap = new NgwMap({
       baseUrl: 'https://demo.nextgis.com',
       target: 'map',
       bounds: [0, -90, 180 ,90],
@@ -54,21 +54,15 @@
           control: 'BUTTON',
           html: '>>',
           title: 'Switch basemap layer',
-          onClick: function () {
-            var activeBaseLayer = ngwMap.getActiveBaseLayer();
-            var baseLayers = ngwMap.getBaseLayersIds();
-            var index = baseLayers.indexOf(activeBaseLayer.id);
-            var nextBaseLayer = baseLayers[(index + 1) % baseLayers.length];
+          onClick: () => {
+            const  activeBaseLayer = ngwMap.getActiveBaseLayer();
+            const  baseLayers = ngwMap.getBaseLayersIds();
+            const  index = baseLayers.indexOf(activeBaseLayer.id);
+            const  nextBaseLayer = baseLayers[(index + 1) % baseLayers.length];
             ngwMap.showLayer(nextBaseLayer);
           }
         }
       }
-    });
-
-
-
-    ngwMap.onLoad().then(function() {
-
     });
   </script>
 </body>
