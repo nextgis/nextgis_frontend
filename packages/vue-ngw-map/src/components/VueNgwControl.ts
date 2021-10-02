@@ -76,6 +76,7 @@ export class VueNgwControl extends Vue {
 
     this.$nextTick(() => {
       this.$emit('ready', this.control);
+      this.$emit('load', this.ngwMap);
     });
   }
 
