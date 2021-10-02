@@ -58,7 +58,7 @@
         target: 'map',
         qmsId: 448,
         maxZoom: 22,
-      }).then(function (ngwMap) {
+      }).then((ngwMap) => {
         // add ngw layer with cameras
         ngwMap.addNgwLayer({
           resource: 5021,
@@ -76,7 +76,7 @@
           type: 'polygon',
           paint: { color: 'green' },
         });
-        ngwMap.emitter.on('layer:click', function (e) {
+        ngwMap.emitter.on('layer:click', (e) => {
           if (e.layer.id === 'cameras') {
             if (e.selected) {
               updateCameraPanel(e.feature);
@@ -87,7 +87,7 @@
         });
 
         // create camera element
-        var cameraPanel = document.createElement('div');
+        const cameraPanel = document.createElement('div');
         cameraPanel.className = 'camera-panel';
         cameraPanel.innerHTML =
           '<div class="camera-wrapper" style="display: none;">' +
@@ -97,9 +97,9 @@
           '<div class="no-active-camera-block">Select camera</div>';
 
         // create camera panel control
-        var cameraPanelControl = ngwMap.createControl(
+        const cameraPanelControl = ngwMap.createControl(
           {
-            onAdd: function () {
+            onAdd: () => {
               return cameraPanel;
             },
           },
@@ -109,9 +109,9 @@
         ngwMap.addControl(cameraPanelControl, 'bottom-right');
 
         // define some element after the panel is added to the DOM
-        var wrapper = cameraPanel.querySelector('.camera-wrapper');
-        var title = cameraPanel.querySelector('.camera-title');
-        var player = videojs(cameraPanel.querySelector('#vid1'));
+        const wrapper = cameraPanel.querySelector('.camera-wrapper');
+        const title = cameraPanel.querySelector('.camera-title');
+        const player = videojs(cameraPanel.querySelector('#vid1'));
 
         function updateCameraPanel(feature) {
           if (feature) {
@@ -132,25 +132,25 @@
         }
 
         function cameraSectorPoly(feature) {
-          var props = feature.properties;
-          var xy = Utils.degrees2meters.apply(
+          const props = feature.properties;
+          const xy = Utils.degrees2meters.apply(
             this,
             feature.geometry.coordinates
           );
-          var x = xy[0];
-          var y = xy[1];
-          var azimuth = Utils.degrees2Radian(
+          const x = xy[0];
+          const y = xy[1];
+          const azimuth = Utils.degrees2Radian(
             90 - (props.azimuth !== undefined ? props.azimuth : 90)
           );
-          var angle = Utils.degrees2Radian(
+          const angle = Utils.degrees2Radian(
             props.angle !== undefined ? props.angle : 60
           );
-          var focalLength =
+          const focalLength =
             props.focalLength !== undefined ? props.focalLength : 300;
 
           // get a formula from the NextGIS best mathematician
-          var l = focalLength * Math.tan(angle / 2);
-          var coordinates = [feature.geometry.coordinates].concat(
+          const l = focalLength * Math.tan(angle / 2);
+          const coordinates = [feature.geometry.coordinates].concat(
             [
               [
                 -l * Math.sin(azimuth) + x + focalLength * Math.cos(azimuth),
@@ -160,7 +160,7 @@
                 l * Math.sin(azimuth) + x + focalLength * Math.cos(azimuth),
                 -l * Math.cos(azimuth) + y + focalLength * Math.sin(azimuth),
               ],
-            ].map(function (x) {
+            ].map((x) => {
               return Utils.meters2degrees.apply(this, x);
             }),
             [feature.geometry.coordinates]

@@ -33,9 +33,9 @@ function generateTypes(router) {
     () => {
       insertRequestItemsParamsMap(newLines, router);
       require('fs').writeFile(typePath, '', () =>
-        writeLines(typePath, newLines)
+        writeLines(typePath, newLines),
       );
-    }
+    },
   );
 }
 
