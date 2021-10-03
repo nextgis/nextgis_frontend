@@ -45,7 +45,7 @@
   <div id='map'></div>
   <script>
 
-    var log = document.createElement('div');
+    const log = document.createElement('div');
     log.className = 'log';
 
     const ngwMap = new NgwMap({
@@ -54,19 +54,19 @@
       qmsId: [487, 'baselayer'],
     })
 
-    ngwMap.onLoad().then(function () {
+    ngwMap.onLoad().then(() => {
 
       ngwMap.setZoom(0);
       ngwMap.setCenter([0, 0]);
 
-      var eventControl = ngwMap.createControl({
-        onAdd: function () { return log }
+      const eventControl = ngwMap.createControl({
+        onAdd: () => { return log }
       }, { bar: true });
 
-      var addLayerControl = ngwMap.createButtonControl({
+      const addLayerControl = ngwMap.createButtonControl({
         html: 'A',
-        onClick: function () {
-          var plusOrMinus = Math.random() < 0.5 ? -1 : 1;
+        onClick: () => {
+          const plusOrMinus = Math.random() < 0.5 ? -1 : 1;
           ngwMap.addLayer('GEOJSON', {
             data: {
               "type": "Point", "coordinates": [
@@ -74,32 +74,32 @@
                 Math.round(Math.random() * 90 * plusOrMinus)
               ]
             },
-            paint: function (feature) {
+            paint: (feature) => {
               return { color: randomRgb() }
             },
           });
         }
       });
 
-      var removeLayersControl = ngwMap.createButtonControl({
+      const removeLayersControl = ngwMap.createButtonControl({
         html: 'R',
         title: 'Remove all layer',
-        onClick: function () {
+        onClick: () => {
           // Use callback to disallow remove base layer
-          ngwMap.removeLayers(function (x) { return x !== 'baselayer'; });
+          ngwMap.removeLayers((x) => { return x !== 'baselayer'; });
         }
       });
 
-      var hideLayersControl = ngwMap.createButtonControl({
+      const hideLayersControl = ngwMap.createButtonControl({
         html: 'H',
         title: 'Hide all layers',
-        onClick: function () { toggleLayers(false); }
+        onClick: () => { toggleLayers(false); }
       });
 
-      var showLayersControl = ngwMap.createButtonControl({
+      const showLayersControl = ngwMap.createButtonControl({
         html: 'S',
         title: 'Show all hidden layers',
-        onClick: function () { toggleLayers(true); }
+        onClick: () => { toggleLayers(true); }
       })
 
       ngwMap.addControl(addLayerControl, 'top-left');
@@ -110,8 +110,8 @@
       ngwMap.addControl(eventControl, 'top-right');
 
       function toggleLayers(status) {
-        var layers = ngwMap.getLayers();
-        for (var l = 0; l < layers.length; l++) {
+        const layers = ngwMap.getLayers();
+        for (let l = 0; l < layers.length; l++) {
           // Base layer is always ON
           if (layers[l] !== 'baselayer') {
             ngwMap.toggleLayer(layers[l], status);
@@ -120,7 +120,7 @@
       }
     });
 
-    var events = [
+    const events = [
       'create',
       'zoomstart',
       'zoom',
@@ -139,9 +139,9 @@
       'layer:hide',
     ];
 
-    for (var fry = 0; fry < events.length; fry++) {
-      var event = events[fry];
-      var element = document.createElement('div');
+    for (let fry = 0; fry < events.length; fry++) {
+      const event = events[fry];
+      const element = document.createElement('div');
       element.innerHTML = event;
       element.id = event;
       element.className = 'event-log';
@@ -150,16 +150,16 @@
     }
 
 
-    var timeout = {};
+    const timeout = {};
     function addListener(event, el) {
       ngwMap.emitter.on(event, function (data) {
         el.classList.add('ok');
         el.classList.add('action');
-        var timeoutId = timeout[event];
+        const timeoutId = timeout[event];
         if (timeoutId) {
           clearTimeout(timeoutId);
         }
-        timeout[event] = setTimeout(function () {
+        timeout[event] = setTimeout(() => {
           el.classList.remove('action');
         }, 750);
         console.log(event, data)
@@ -167,7 +167,7 @@
     }
 
     function randomRgb() {
-      var o = Math.round, r = Math.random, s = 255;
+      const o = Math.round, r = Math.random, s = 255;
       return 'rgb(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ')';
     }
   </script>

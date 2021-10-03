@@ -56,8 +56,7 @@
       <div id="map"></div>
     </div>
     <script>
-      // ngwMap.addNgwLayer({resource...});
-      var layers = [
+      const layers = [
         { resource: 4119, description: 'Webmap resource' },
         { resource: 4110, description: 'Vector resource' },
         {
@@ -75,32 +74,32 @@
         { resource: 4115, description: 'Image style resource' },
       ];
 
-      var layersBlock = document.getElementById('layers');
-      var ngwMap = new NgwMap({
+      const layersBlock = document.getElementById('layers');
+      const ngwMap = new NgwMap({
         baseUrl: 'https://demo.nextgis.com',
         target: 'map',
         qmsId: 448,
       });
 
-      for (var f = 0; f < layers.length; f++) {
-        var wrap = document.createElement('div');
-        var layer = layers[f];
-        var radio = document.createElement('input');
+      for (let f = 0; f < layers.length; f++) {
+        const wrap = document.createElement('div');
+        const layer = layers[f];
+        const radio = document.createElement('input');
         radio.id = layer.resource;
         radio.setAttribute('name', 'layers');
         radio.setAttribute('type', 'radio');
-        radio.onchange = function () {
+        radio.onchange = () => {
           onRadioChange(layer);
         };
         setRadioListener(radio, layer);
-        var label = document.createElement('label');
+        const label = document.createElement('label');
         label.innerHTML = 'id: ' + layer.resource;
         if (layer.adapter) {
           label.innerHTML += ', adapter: ' + layer.adapter;
         }
         label.setAttribute('for', radio.id);
 
-        var description = document.createElement('div');
+        const description = document.createElement('div');
         description.className = 'description';
         description.innerHTML = layer.description;
 
@@ -112,15 +111,15 @@
       }
 
       function setRadioListener(radio, layer) {
-        radio.onchange = function () {
+        radio.onchange = () => {
           onRadioChange(layer);
         };
       }
 
       function onRadioChange(options) {
         ngwMap.removeOverlays();
-        ngwMap.addNgwLayer(options).then(function (layer) {
-          Promise.resolve(layer.getExtent()).then(function (extent) {
+        ngwMap.addNgwLayer(options).then((layer) => {
+          Promise.resolve(layer.getExtent()).then((extent) => {
             if (extent) {
               ngwMap.fitBounds(extent);
             }

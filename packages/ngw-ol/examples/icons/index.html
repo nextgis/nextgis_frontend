@@ -26,7 +26,7 @@
   <body>
     <div id="map"></div>
     <script>
-      var data = [
+      const data = [
         [{ color: "red", shape: "circle" }, [81.9833, 53.0426]],
         [{ color: "red", shape: "circle", size: 20 }, [81.9883, 53.0385]],
         [{ color: "red", shape: "circle", size: 15 }, [81.994, 53.0333]],
@@ -56,23 +56,23 @@
         qmsId: 465,
         center: [81.973, 53.026],
         zoom: 13,
-      }).then(function (ngwMap) {
+      }).then((ngwMap) => {
         // create geojson features from data
-        var features = [];
-        for (var fry = 0; fry < data.length; fry++) {
+        const features = [];
+        for (let fry = 0; fry < data.length; fry++) {
           features.push({
             type: "Feature",
             properties: data[fry][0],
             geometry: { type: "Point", coordinates: data[fry][1] },
           });
         }
-        var geojson = {
+        const geojson = {
           type: "FeatureCollection",
           features: features,
         };
 
         function getPaint(feature) {
-          var prop = feature.properties;
+          const prop = feature.properties;
           return Icons.getIcon({
             color: prop.color || "blue",
             shape: prop.shape || "rect",

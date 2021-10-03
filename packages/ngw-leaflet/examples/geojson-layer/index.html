@@ -27,14 +27,14 @@
 <body>
   <div id='map'></div>
   <script>
-    var boat = {
+    const boat = {
       "type": "FeatureCollection",
       "features": [
         { "type": "Feature", "properties": {}, "geometry": { "type": "MultiPolygon", "coordinates": [[[[107.12654, 53.21777], [107.14559, 53.20551], [107.22415, 53.20836], [107.25034, 53.22461], [107.25034, 53.22461], [107.12654, 53.21777]]]] } },
         { "type": "Feature", "properties": {}, "geometry": { "type": "MultiPolygon", "coordinates": [[[[107.18797, 53.22148], [107.18368, 53.26137], [107.23225, 53.24143], [107.18797, 53.22148]]]] } }
       ]
     };
-    var waves = {
+    const waves = {
       "type": "FeatureCollection",
       "features": [
         { "type": "Feature", "properties": {}, "geometry": { "type": "MultiLineString", "coordinates": [[[107.22412, 53.20843], [107.20972, 53.21402], [107.19198, 53.20736]]] } },
@@ -47,7 +47,7 @@
       qmsId: 448,
       center: [107.17, 53.22],
       zoom: 12
-    }).then(function (ngwMap) {
+    }).then((ngwMap) => {
       ngwMap.addGeoJsonLayer({ data: boat, paint: { color: 'red' } });
       ngwMap.addGeoJsonLayer({ data: waves, paint: { color: 'blue', opacity: 0.8, 'weight': 3 } });
       ngwMap.addGeoJsonLayer({
@@ -72,7 +72,7 @@
         adapter: 'GEOJSON',
         adapterOptions: {
           // use callback to set paint dynamically
-          paint: function (feature) {
+          paint: (feature) => {
             return { color: 'rgb(126, 192, ' + Math.round(Math.random() * 255) + ')', opacity: 1 }
           }
         }

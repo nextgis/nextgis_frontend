@@ -30,9 +30,9 @@
   <body>
     <div id="map"></div>
     <script>
-      var webMapName = 'webmap';
-      var qmsBaseLayerName = 'qmsbasemap';
-      var ngwMap = undefined;
+      const webMapName = 'webmap';
+      const qmsBaseLayerName = 'qmsbasemap';
+      let ngwMap = undefined;
       NgwMap.create({
         baseUrl: 'https://demo.nextgis.com',
         target: 'map',
@@ -50,14 +50,14 @@
             },
           },
         },
-      }).then(function (ngwMap_) {
+      }).then((ngwMap_) => {
         ngwMap = ngwMap_;
-        var toggleHeatMapControl = ngwMap.createButtonControl({
+        const toggleHeatMapControl = ngwMap.createButtonControl({
           html: 'D',
           title: 'Toggle DEM',
-          onClick: function () {
-            var ngwLayer = ngwMap.getLayer(webMapName);
-            var mapLayer = ngwLayer.layer.tree.getDescendants(function (x) {
+          onClick: () => {
+            const ngwLayer = ngwMap.getLayer(webMapName);
+            const mapLayer = ngwLayer.layer.tree.getDescendants((x) => {
               return x.item.display_name === 'Digital Elevation Model (DEM)';
             })[0];
             mapLayer.properties.set(
@@ -74,36 +74,39 @@
         // 2 ngwMap.addControl(MyControl, 'bottom-right')
         ngwMap.addControl('CONTROL', 'bottom-right', {
           control: {
-            onAdd: function () {
-              var list = document.createElement('div');
+            onAdd: () => {
+              const list = document.createElement('div');
               list.className = 'ngw-layers';
-              var webmap = ngwMap.getLayer(webMapName);
+              const webmap = ngwMap.getLayer(webMapName);
               // find all layer from ngw webmap tree
-              webmap.layer.tree.getDescendants().reverse().forEach(function (node) {
-                if (node.item.item_type === 'layer') {
-                  var layerElement = document.createElement('div');
+              webmap.layer.tree
+                .getDescendants()
+                .reverse()
+                .forEach((node) => {
+                  if (node.item.item_type === 'layer') {
+                    const layerElement = document.createElement('div');
 
-                  var checkbox = document.createElement('input');
-                  checkbox.id = 'layer-' + node.layer.id;
-                  checkbox.checked = node.item.layer_enabled;
-                  checkbox.setAttribute('type', 'checkbox');
-                  checkbox.addEventListener('click', function () {
-                    node.properties.set('visibility', checkbox.checked);
-                  });
+                    const checkbox = document.createElement('input');
+                    checkbox.id = 'layer-' + node.layer.id;
+                    checkbox.checked = node.item.layer_enabled;
+                    checkbox.setAttribute('type', 'checkbox');
+                    checkbox.addEventListener('click', () => {
+                      node.properties.set('visibility', checkbox.checked);
+                    });
 
-                  var name = document.createElement('span');
-                  name.innerHTML = node.item.display_name;
+                    const name = document.createElement('span');
+                    name.innerHTML = node.item.display_name;
 
-                  layerElement.appendChild(checkbox);
-                  layerElement.appendChild(name);
-                  list.appendChild(layerElement);
-                }
-              });
-              var visibility = webmap.layer.properties.property('visibility');
+                    layerElement.appendChild(checkbox);
+                    layerElement.appendChild(name);
+                    list.appendChild(layerElement);
+                  }
+                });
+              const visibility = webmap.layer.properties.property('visibility');
               // listen any layer visibility change
-              visibility.emitter.on('change-tree', function (data) {
-                var itemId = data.item.layer.id;
-                var checkbox = list.querySelector('#layer-' + itemId);
+              visibility.emitter.on('change-tree', (data) => {
+                const itemId = data.item.layer.id;
+                const checkbox = list.querySelector('#layer-' + itemId);
                 checkbox.checked = data.value;
               });
               return list;

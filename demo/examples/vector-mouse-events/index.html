@@ -29,7 +29,7 @@
         width: 400px;
       }
 
-      #log :nth-child(-n+3) {
+      #log :nth-child(-n + 3) {
         color: green;
       }
     </style>
@@ -44,9 +44,9 @@
     </div>
 
     <script>
-      var ID = 'layer-id';
-      var logBlock = document.getElementById('log');
-      var log = function (msg) {
+      const ID = 'layer-id';
+      const logBlock = document.getElementById('log');
+      const log = (msg) => {
         logBlock.innerHTML = '<p>' + msg + '</p>' + logBlock.innerHTML;
         console.log(msg);
       };
@@ -55,48 +55,48 @@
         baseUrl: 'https://demo.nextgis.com',
         target: 'map',
         osm: true,
-      }).then(function (ngwMap) {
+      }).then((ngwMap) => {
         ngwMap.addNgwLayer({
           id: ID,
           resource: 4222,
           fit: true,
           adapterOptions: {
             limit: 100,
-            onClick: function (e) {
+            onClick: (e) => {
               log('`click` - from options');
             },
-            onMouseOver: function (e) {
+            onMouseOver: (e) => {
               log('`mouseover` - from options');
             },
-            onMouseOut: function (e) {
+            onMouseOut: (e) => {
               log('`mouseout` - from options');
             },
           },
         });
 
-        ngwMap.emitter.on('layer-' + ID + ':click', function (ev) {
+        ngwMap.emitter.on('layer-' + ID + ':click', (ev) => {
           log('`click` -- from specific layer emitter');
         });
 
-        ngwMap.emitter.on('layer-' + ID + ':mouseover', function (ev) {
+        ngwMap.emitter.on('layer-' + ID + ':mouseover', (ev) => {
           log('`mouseover` -- from specific layer emitter');
         });
 
-        ngwMap.emitter.on('layer-' + ID + ':mouseout', function (ev) {
+        ngwMap.emitter.on('layer-' + ID + ':mouseout', (ev) => {
           log('`mouseout` -- from specific layer emitter');
         });
 
-        ngwMap.emitter.on('layer:click', function (ev) {
+        ngwMap.emitter.on('layer:click', (ev) => {
           if (ev.layer.id === ID) {
             log('`click` --- from global emitter');
           }
         });
-        ngwMap.emitter.on('layer:mouseover', function (ev) {
+        ngwMap.emitter.on('layer:mouseover', (ev) => {
           if (ev.layer.id === ID) {
             log('`mouseover` --- from global emitter');
           }
         });
-        ngwMap.emitter.on('layer:mouseout', function (ev) {
+        ngwMap.emitter.on('layer:mouseout', (ev) => {
           if (ev.layer.id === ID) {
             log('`mouseout` --- from global emitter');
           }

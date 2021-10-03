@@ -41,10 +41,10 @@
         target: 'map',
         qmsId: 487,
       }).then((ngwMap) => {
-        var bookmarksList = document.createElement('div');
+        const bookmarksList = document.createElement('div');
         bookmarksList.className = 'bookmarks-panel';
-        var appendBookmarkItem = (bookmark) => {
-          var elem = document.createElement('div');
+        const appendBookmarkItem = (bookmark) => {
+          const elem = document.createElement('div');
           elem.innerHTML = bookmark.name;
           elem.addEventListener('click', () => {
             bookmark.extent().then((bound) => {
@@ -59,9 +59,9 @@
           });
         });
 
-        var bookmarksControl = ngwMap.createControl(
+        const bookmarksControl = ngwMap.createControl(
           {
-            onAdd: function () {
+            onAdd: () => {
               return bookmarksList;
             },
           },

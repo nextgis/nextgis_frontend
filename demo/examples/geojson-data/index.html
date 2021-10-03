@@ -64,7 +64,7 @@
 
           updateInputValue(input);
 
-          btn.onclick = function () {
+          btn.onclick = () => {
             if (btn.innerHTML === '+') {
               const v = input.value.split(' ');
               if (v.length > 2) {

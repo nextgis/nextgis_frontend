@@ -27,15 +27,15 @@
 <body>
   <div id='map'></div>
   <script>
-    var amenityList = [];
+    let amenityList = [];
 
-    var ngwMap = new NgwMap({
+    const ngwMap = new NgwMap({
       baseUrl: 'https://demo.nextgis.com/',
       target: 'map',
       qmsId: 448
     });
 
-    var filterFunction = function (e) {
+    const filterFunction = (e) => {
       return;
     };
 
@@ -86,9 +86,9 @@
             ]
           ]
         ],
-        paint: function (e) {
-          var name = e.properties.NAME.toLowerCase();
-          var color = name.indexOf('subway') !== -1 ? 'green' :
+        paint: (e) => {
+          const name = e.properties.NAME.toLowerCase();
+          const color = name.indexOf('subway') !== -1 ? 'green' :
             name.indexOf('caribou') !== -1 ? 'orange' :
               'gray';
           return { color: color, radius: 4}
