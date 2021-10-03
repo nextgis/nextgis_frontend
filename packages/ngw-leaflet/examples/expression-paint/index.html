@@ -1,73 +1,77 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
 
-<head>
-  <meta charset="utf-8" />
-
-  <title>Expression Paint</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-    }
-
-    html,
-    body,
-    #map {
-      width: 100%;
-      height: 100%;
-    }
-  </style>
-  <!-- <script src="https://unpkg.com/@nextgis/ngw-leaflet"></script> -->
-  <script src="../../lib/ngw-leaflet.global.js"></script>
-</head>
-
-<body>
-  <div id='map'></div>
-  <script>
-    NgwMap.create({
-      baseUrl: 'https://demo.nextgis.com',
-      target: 'map',
-      qmsId: 465,
-      bounds: [0, 80, 170, 0],
-    }).then(function (ngwMap) {
-      ngwMap.addGeoJsonLayer({
-        data: generateGeoJson(),
-        paint: {
-          color: ['get', 'color'],
-          radius: ['get', 'radius'],
-          stroke: true,
-          fillOpacity: 0.7
-        }
-      });
-    });
-
-    // HELPER FUNCTIONS TO GENERATE GEOJSON
-    function getRandomIntInclusive(min, max) {
-      min = Math.ceil(min);
-      max = Math.floor(max);
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-    var colors = ['red', 'green', 'blue', 'purple', 'yellow', 'white'];
-    function generateGeoJson() {
-      var points = {
-        "type": "FeatureCollection",
-        "features": []
-      };
-      for (var fry = 0; fry < 300; fry++) {
-        points.features.push({
-          "type": "Feature",
-          "properties": {
-            color: colors[Math.floor(Math.random() * colors.length)],
-            radius: getRandomIntInclusive(3, 10)
-          },
-          "geometry": { "type": "Point", "coordinates": [Math.ceil((Math.random() * 170)), Math.ceil((Math.random() * 80))] }
-        });
+    <title>Expression Paint</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
       }
-      return points;
-    };
-  </script>
-</body>
 
+      html,
+      body,
+      #map {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+    <!-- <script src="https://unpkg.com/@nextgis/ngw-leaflet"></script> -->
+    <script src="../../lib/ngw-leaflet.global.js"></script>
+  </head>
+
+  <body>
+    <div id="map"></div>
+    <script>
+      NgwMap.create({
+        baseUrl: 'https://demo.nextgis.com',
+        target: 'map',
+        qmsId: 465,
+        bounds: [0, 80, 170, 0],
+      }).then((ngwMap) => {
+        ngwMap.addGeoJsonLayer({
+          data: generateGeoJson(),
+          paint: {
+            color: ['get', 'color'],
+            radius: ['get', 'radius'],
+            stroke: true,
+            fillOpacity: 0.7,
+          },
+        });
+      });
+
+      // HELPER FUNCTIONS TO GENERATE GEOJSON
+      function getRandomIntInclusive(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+      const colors = ['red', 'green', 'blue', 'purple', 'yellow', 'white'];
+      function generateGeoJson() {
+        const points = {
+          type: 'FeatureCollection',
+          features: [],
+        };
+        for (let fry = 0; fry < 300; fry++) {
+          points.features.push({
+            type: 'Feature',
+            properties: {
+              color: colors[Math.floor(Math.random() * colors.length)],
+              radius: getRandomIntInclusive(3, 10),
+            },
+            geometry: {
+              type: 'Point',
+              coordinates: [
+                Math.ceil(Math.random() * 170),
+                Math.ceil(Math.random() * 80),
+              ],
+            },
+          });
+        }
+        return points;
+      }
+    </script>
+  </body>
 </html>

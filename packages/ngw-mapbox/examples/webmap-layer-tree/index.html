@@ -53,29 +53,29 @@
       <div id="map"></div>
     </div>
     <script>
-      var tree = document.getElementById('tree');
-      var ngwMap = new NgwMap({
+      const tree = document.getElementById('tree');
+      const ngwMap = new NgwMap({
         baseUrl: 'https://demo.nextgis.com',
         target: 'map',
         osm: true,
       });
-      ngwMap.onLoad().then(function () {
-        var webMapLayer = ngwMap
+      ngwMap.onLoad().then(() => {
+        const webMapLayer = ngwMap
           .addNgwLayer({
             resource: 4355,
             fit: true,
           })
-          .then(function (webmap) {
+          .then((webmap) => {
             tree.appendChild(createTreeItem(webmap.layer));
           });
       });
 
       function createTreeBranch(layers) {
-        var elem = document.createElement('div');
+        const elem = document.createElement('div');
         elem.className = 'tree-container__item-children';
         layers.forEach((x) => {
           if (x.item) {
-            var item = createTreeItem(x);
+            const item = createTreeItem(x);
             elem.appendChild(item);
           }
         });
@@ -83,31 +83,31 @@
       }
 
       function createTreeItem(layer) {
-        var item = layer.item;
-        var elem = document.createElement('div');
+        const item = layer.item;
+        const elem = document.createElement('div');
         elem.className = 'tree-container__item';
         if (item.display_name) {
-          var input = document.createElement('input');
+          const input = document.createElement('input');
           input.setAttribute('type', 'checkbox');
-          var value = item.item_type === 'layer' ? item.layer_enabled : true;
+          const value = item.item_type === 'layer' ? item.layer_enabled : true;
           input.checked = value;
 
-          var visibility = layer.properties.property('visibility');
+          const visibility = layer.properties.property('visibility');
           if (visibility) {
-            visibility.emitter.on('change', function (ev) {
+            visibility.emitter.on('change', (ev) => {
               input.checked = ev.value;
             });
-            input.onclick = function () {
+            input.onclick = () => {
               visibility.set(input.checked, {
                 propagation: NgwMap.keys.pressed('ctrl'),
               });
             };
           }
           elem.appendChild(input);
-          var slider = createLayerOpacitySlider(layer);
+          const slider = createLayerOpacitySlider(layer);
           elem.appendChild(slider);
 
-          var name = document.createElement('span');
+          const name = document.createElement('span');
           name.innerHTML = item.display_name;
           elem.appendChild(name);
         }
@@ -116,16 +116,16 @@
           item.item_type === 'group' ||
           (item.item_type === 'root' && item.children.length)
         ) {
-          var children = layer.tree.getChildren();
-          var treeBranch = createTreeBranch(children.reverse());
+          const children = layer.tree.getChildren();
+          const treeBranch = createTreeBranch(children.reverse());
           elem.appendChild(treeBranch);
         }
         return elem;
       }
 
       function createLayerOpacitySlider(layer) {
-        var wrapper = document.createElement('span');
-        var slider = document.createElement('input');
+        const wrapper = document.createElement('span');
+        const slider = document.createElement('input');
         slider.style.width = '30px';
         slider.id = layer.id;
         [
@@ -137,7 +137,7 @@
         slider.value =
           layer.options.opacity !== undefined ? layer.options.opacity : 1;
 
-        slider.onchange = function () {
+        slider.onchange = () => {
           layer.properties.set('opacity', slider.value);
         };
         wrapper.appendChild(slider);

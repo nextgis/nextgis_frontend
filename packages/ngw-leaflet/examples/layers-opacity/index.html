@@ -51,7 +51,7 @@
       }).then((ngwMap) => {
         ngwMap.addControl('CONTROL', 'top-right', {
           control: {
-            onAdd: function () {
+            onAdd: () => {
               return createOpacityControlPanel(
                 ngwMap.orderedLayers().reverse(),
               );

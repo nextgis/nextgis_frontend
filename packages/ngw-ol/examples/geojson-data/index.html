@@ -1,109 +1,118 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>GeoJson Data</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-    }
-
-    html,
-    body,
-    #map {
-      width: 100%;
-      height: 100%;
-    }
-  </style>
-
-  <script src="../../lib/ngw-ol.global.js"></script>
-</head>
-
-<body>
-  <div id='map'></div>
-  <script>
-    NgwMap.create({
-      baseUrl: 'https://demo.nextgis.com',
-      target: 'map',
-      qmsId: 448,
-      bounds: [0, -90, 180, 90]
-    }).then(function (ngwMap) {
-      ngwMap.addLayer('GEOJSON', {
-        id: 'data',
-        paint: { color: ['get', 'color'] }
-      });
-      var list = document.createElement('div');
-
-      var dataControl = ngwMap.createControl({
-        onAdd: function () {
-          return list;
-        }
-      }, { margin: true });
-      ngwMap.addControl(dataControl, 'top-right');
-      createItem();
-      var ID = 0;
-      function createItem() {
-        var item = document.createElement('div');
-        item.id = ID++;
-        item.className = 'data-item';
-        var input = document.createElement('input');
-        var btn = document.createElement('button');
-        btn.innerHTML = '+';
-
-        item.appendChild(input);
-        item.appendChild(btn);
-
-        list.appendChild(item);
-
-        updateInputValue(input);
-
-        btn.onclick = function () {
-          if (btn.innerHTML === '+') {
-            var v = input.value.split(' ');
-            if (v.length > 2) {
-              createItem();
-              btn.innerHTML = '-';
-              input.disabled = true;
-              input.style.backgroundColor = v[2];
-              ngwMap.addLayerData('data', {
-                'type': 'Feature',
-                'id': item.id,
-                'geometry': { 'type': 'Point', 'coordinates': [Number(v[0]), Number(v[1])] },
-                'properties': { 'color': v[2] }
-              });
-            } else {
-              updateInputValue(input);
-            }
-          } else {
-            ngwMap.clearLayerData('data', function (f) {
-              return f.id === item.id;
-            });
-            item.parentNode.removeChild(item);
-          }
-        }
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>GeoJson Data</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
       }
-    });
 
-    function updateInputValue(input) {
-      input.value = getRandomPointCoord() + ' ' + randomRgb();
-    }
+      html,
+      body,
+      #map {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
 
-    function getRandomPointCoord() {
-      var plusOrMinus = Math.random() < 0.5 ? -1 : 1;
-      return Math.round(Math.random() * 180) + " " +
-        Math.round(Math.random() * 90 * plusOrMinus)
-    }
+    <script src="../../lib/ngw-ol.global.js"></script>
+  </head>
 
-    function randomRgb() {
-      var o = Math.round, r = Math.random, s = 255;
-      return 'rgb(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ')';
-    }
+  <body>
+    <div id="map"></div>
+    <script>
+      let ID = 0;
+      NgwMap.create({
+        baseUrl: 'https://demo.nextgis.com',
+        target: 'map',
+        qmsId: 448,
+        bounds: [0, -90, 180, 90],
+      }).then((ngwMap) => {
+        ngwMap.addLayer('GEOJSON', {
+          id: 'data',
+          paint: { color: ['get', 'color'] },
+        });
+        const list = document.createElement('div');
 
-  </script>
-</body>
+        const dataControl = ngwMap.createControl(
+          {
+            onAdd: () => {
+              return list;
+            },
+          },
+          { margin: true },
+        );
+        ngwMap.addControl(dataControl, 'top-right');
+        createItem();
 
+        function createItem() {
+          const item = document.createElement('div');
+          item.id = ID++;
+          item.className = 'data-item';
+          const input = document.createElement('input');
+          const btn = document.createElement('button');
+          btn.innerHTML = '+';
+
+          item.appendChild(input);
+          item.appendChild(btn);
+
+          list.appendChild(item);
+
+          updateInputValue(input);
+
+          btn.onclick = () => {
+            if (btn.innerHTML === '+') {
+              const v = input.value.split(' ');
+              if (v.length > 2) {
+                createItem();
+                btn.innerHTML = '-';
+                input.disabled = true;
+                input.style.backgroundColor = v[2];
+                ngwMap.addLayerData('data', {
+                  type: 'Feature',
+                  id: item.id,
+                  geometry: {
+                    type: 'Point',
+                    coordinates: [Number(v[0]), Number(v[1])],
+                  },
+                  properties: { color: v[2] },
+                });
+              } else {
+                updateInputValue(input);
+              }
+            } else {
+              ngwMap.clearLayerData('data', (f) => {
+                return f.id === item.id;
+              });
+              item.parentNode.removeChild(item);
+            }
+          };
+        }
+      });
+
+      function updateInputValue(input) {
+        input.value = getRandomPointCoord() + ' ' + randomRgb();
+      }
+
+      function getRandomPointCoord() {
+        const plusOrMinus = Math.random() < 0.5 ? -1 : 1;
+        return (
+          Math.round(Math.random() * 180) +
+          ' ' +
+          Math.round(Math.random() * 90 * plusOrMinus)
+        );
+      }
+
+      function randomRgb() {
+        const o = Math.round;
+        const r = Math.random;
+        const  s = 255;
+        return 'rgb(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ')';
+      }
+    </script>
+  </body>
 </html>

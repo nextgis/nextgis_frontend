@@ -28,37 +28,37 @@
   <body>
     <div id="map"></div>
     <script>
-      var ngwMap = new NgwMap({
+      const ngwMap = new NgwMap({
         baseUrl: 'https://demo.nextgis.com',
         target: 'map',
         qmsId: 448,
         resources: [{ resource: 4226, fit: true, selectable: true }],
       });
       // stop all current identification requests on each click before making new requests
-      ngwMap.emitter.on('click', function (e) {
+      ngwMap.emitter.on('click', (e) => {
         ngwMap.cancelPromise('select', 'identify');
         ngwMap.removeLayer('geojson');
         identifyPanel.innerHTML = '...loading';
       });
 
       // Identify panel control
-      var identifyPanel = document.createElement('div');
+      const identifyPanel = document.createElement('div');
       identifyPanel.className = 'identify-panel';
       identifyPanel.innerHTML = 'Click on the map for webmap identify';
 
-      var fillIdentifyPanel = function (items) {
+      const fillIdentifyPanel = (items) => {
         identifyPanel.innerHTML = '';
 
-        var info = document.createElement('div');
+        const info = document.createElement('div');
 
-        var select = document.createElement('select');
-        items.forEach(function (item, i) {
-          var option = document.createElement('option');
+        const select = document.createElement('select');
+        items.forEach((item, i) => {
+          const option = document.createElement('option');
           option.innerHTML = item.label;
           option.setAttribute('value', i);
           select.appendChild(option);
         });
-        select.addEventListener('change', function (opt) {
+        select.addEventListener('change', (opt) => {
           setSelected(items[event.target.value], info);
         });
         identifyPanel.appendChild(select);
@@ -66,16 +66,16 @@
 
         setSelected(items[0], info);
       };
-      var setSelected = function (item, info) {
+      const setSelected = (item, info) => {
         info.innerHTML = '...loading';
         ngwMap.removeLayer('geojson');
 
-        item.geojson().then(function (feature) {
+        item.geojson().then((feature) => {
           ngwMap.addGeoJsonLayer({ data: feature, id: 'geojson' });
-          item.resource().then(function (resource) {
+          item.resource().then((resource) => {
             info.innerHTML = '';
-            resource.fields.forEach(function (field) {
-              var prop =
+            resource.fields.forEach((field) => {
+              const prop =
                 '<div>' +
                 field.display_name +
                 ': ' +
@@ -86,9 +86,9 @@
           });
         });
       };
-      var identifyControl = ngwMap.createControl(
+      const identifyControl = ngwMap.createControl(
         {
-          onAdd: function () {
+          onAdd: () => {
             return identifyPanel;
           },
         },
@@ -97,7 +97,7 @@
       ngwMap.addControl(identifyControl, 'top-right');
 
       // handle map click
-      ngwMap.emitter.on('ngw:select', function (e) {
+      ngwMap.emitter.on('ngw:select', (e) => {
         if (e) {
           fillIdentifyPanel(e.getIdentifyItems());
         }

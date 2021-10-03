@@ -27,23 +27,23 @@
     <script>
       const bounds = [37.65972, 55.7299, 37.66735, 55.73278];
 
-      var adapterOptions = function (resourceId, opt) {
+      const adapterOptions = (resourceId, opt) => {
         return Object.assign(
           {
             intersects: bounds,
             selectable: true,
             popupOnSelect: true,
             popupOptions: {
-              createPopupContent: function (e) {
-                var element = document.createElement('table');
+              createPopupContent: (e) => {
+                const element = document.createElement('table');
                 return ngwMap.connector
                   .getResource(resourceId)
-                  .then(function (item) {
+                  .then((item) => {
                     element.innerHTML = '<tbody>';
                     // link properties field names with layer attributes names
-                    item.feature_layer.fields.forEach(function (x) {
+                    item.feature_layer.fields.forEach((x) => {
                       if (x.grid_visibility) {
-                        var value = e.feature.properties[x.keyname];
+                        const value = e.feature.properties[x.keyname];
                         element.innerHTML +=
                           '<tr><th>' +
                           x.display_name +
@@ -62,7 +62,7 @@
         );
       };
 
-      var ngwMap = new NgwMap({
+      const ngwMap = new NgwMap({
         baseUrl: 'https://demo.nextgis.com',
         target: 'map',
         bounds: bounds,
@@ -88,7 +88,7 @@
         }),
       });
 
-      var stationPaint = {
+      const stationPaint = {
         opacity: 1,
         color: 'orange',
         strokeColor: 'white',

@@ -61,13 +61,15 @@
     </div>
     <script>
       // NGW resource keyname
-      var keyname = 'eat-here';
-      var pageSize = 10;
-      var PAGE = 1;
-      var featureListBlock = document.getElementById('feature-list');
+      const keyname = 'eat-here';
+      const pageSize = 10;
+      let PAGE = 1;
+      const featureListBlock = document.getElementById('feature-list');
 
-      var connector = new NgwConnector({ baseUrl: 'https://demo.nextgis.com' });
-      var ngwMap = new NgwMap({
+      const connector = new NgwConnector({
+        baseUrl: 'https://demo.nextgis.com',
+      });
+      const ngwMap = new NgwMap({
         connector: connector,
         target: 'map',
         center: [-89.84, 44.55],
@@ -83,7 +85,7 @@
         // Do not worry about calling this (and other api) method  much time,
         // because the first response will be cached
         // and requests to the server will no longer be executed
-        connector.getResourceId(keyname).then(function (resourceId) {
+        connector.getResourceId(keyname).then((resourceId) => {
           NgwKit.fetchNgwLayerItems({
             // and that would work too: connector: ngwMap.connector
             connector: connector,
@@ -97,7 +99,7 @@
             // We recommend do not use the returned geometry to get extent of feature.
             // Sometimes it can be a very large polygon!!! (^0-0^)
             geom: false,
-          }).then(function (items) {
+          }).then((items) => {
             drawHtml(items);
           });
         });
@@ -105,25 +107,25 @@
 
       function drawHtml(items) {
         featureListBlock.innerHTML = '';
-        for (var i = 0; i < items.length; i++) {
+        for (let i = 0; i < items.length; i++) {
           featureListBlock.appendChild(createItemBlock(items[i]));
         }
-        makePagination().then(function (paginationBlock) {
+        makePagination().then((paginationBlock) => {
           featureListBlock.appendChild(paginationBlock);
         });
       }
 
       function createItemBlock(item) {
-        var itemBlock = document.createElement('div');
+        const itemBlock = document.createElement('div');
         itemBlock.className = 'item-block';
         itemBlock.innerHTML = item.fields.NAME;
-        itemBlock.addEventListener('click', function () {
-          return connector.getResourceId(keyname).then(function (resourceId) {
+        itemBlock.addEventListener('click', () => {
+          return connector.getResourceId(keyname).then((resourceId) => {
             return NgwKit.fetchNgwLayerItemExtent({
               featureId: item.id,
               resourceId: resourceId,
               connector: connector,
-            }).then(function (extent) {
+            }).then((extent) => {
               ngwMap.fitBounds(extent, { maxZoom: 18 });
             });
           });
@@ -132,7 +134,7 @@
       }
 
       function makePagination() {
-        return connector.getResourceId(keyname).then(function (resourceId) {
+        return connector.getResourceId(keyname).then((resourceId) => {
           // You see! You can simply cache any GET request!
           // But be careful... signals are very strong tonight!
           return connector
@@ -141,14 +143,14 @@
               { cache: true },
               { id: resourceId },
             )
-            .then(function (resp) {
-              var count = resp.total_count;
-              var paginationBlock = document.createElement('div');
+            .then((resp) => {
+              const count = resp.total_count;
+              const paginationBlock = document.createElement('div');
               paginationBlock.className = 'pagination-block';
-              var items = pagination(PAGE, Math.ceil(count / pageSize));
-              for (var i = 0; i < items.length; i++) {
-                var p = items[i];
-                var numPageBlock = document.createElement('div');
+              const items = pagination(PAGE, Math.ceil(count / pageSize));
+              for (let i = 0; i < items.length; i++) {
+                const p = items[i];
+                const numPageBlock = document.createElement('div');
                 numPageBlock.className = 'pagination-block-item';
                 numPageBlock.innerHTML =
                   PAGE === Number(p) ? '<strong>' + p + '</strong>' : p;
@@ -175,7 +177,7 @@
 
       // from here https://gist.github.com/kottenator/9d936eb3e4e3c3e02598#gistcomment-3413141
       function pagination(current, total) {
-        var center = [current - 1, current, current + 1],
+        const center = [current - 1, current, current + 1],
           filteredCenter = center.filter((p) => p > 1 && p < total),
           includeThreeLeft = current === 5,
           includeThreeRight = current === total - 4,

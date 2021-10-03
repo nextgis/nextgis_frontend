@@ -25,30 +25,30 @@
   <body>
     <div id="map"></div>
     <script>
-      var amenityList = [];
+      const amenityList = [];
 
-      var ngwMap = new NgwMap({
+      const ngwMap = new NgwMap({
         baseUrl: 'https://demo.nextgis.com/',
         target: 'map',
         qmsId: 448,
       });
 
-      var filterInput = document.createElement('select');
-      var filterLabel = document.createElement('label');
+      const filterInput = document.createElement('select');
+      const filterLabel = document.createElement('label');
       filterLabel.appendChild(document.createTextNode('Filter: '));
       filterLabel.appendChild(filterInput);
 
-      filterInput.onchange = function () {
+      filterInput.onchange = () => {
         setLayerFilter();
       };
 
-      var filterFunction = function (e) {
+      const filterFunction = (e) => {
         return e.feature.properties.AMENITY === filterInput.value;
       };
 
-      var filterControl = ngwMap.createControl(
+      const filterControl = ngwMap.createControl(
         {
-          onAdd: function () {
+          onAdd: () => {
             return filterLabel;
           },
         },
@@ -81,10 +81,10 @@
           },
         })
         .then((layer) => {
-          var updateFilter = function() {
-            var features = layer.getLayers();
-            for (var f = 0; f < features.length; f++) {
-              var amenity = features[f].feature.properties.AMENITY;
+          const updateFilter = () => {
+            const features = layer.getLayers();
+            for (let f = 0; f < features.length; f++) {
+              const amenity = features[f].feature.properties.AMENITY;
               if (amenityList.indexOf(amenity) === -1) {
                 amenityList.push(amenity);
               }
@@ -102,8 +102,8 @@
       }
 
       function updateSelectOptions() {
-        for (var fry = 0; fry < amenityList.length; fry++) {
-          var option = document.createElement('option');
+        for (let fry = 0; fry < amenityList.length; fry++) {
+          const option = document.createElement('option');
           option.innerHTML = amenityList[fry];
           filterInput.appendChild(option);
         }
