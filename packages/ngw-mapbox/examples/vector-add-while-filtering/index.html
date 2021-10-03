@@ -1,120 +1,124 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Vector layers filtering</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-    }
-
-    html,
-    body,
-    #map {
-      width: 100%;
-      height: 100%;
-    }
-  </style>
-
-  <!-- <script src="../../lib/ngw-mapbox.global.js"></script> -->
-  <script src="../../lib/ngw-mapbox.global.js"></script>
-</head>
-
-<body>
-  <div id='map'></div>
-  <script>
-    NgwMap.create({
-      target: 'map',
-      qmsId: 448,
-      bounds: [0, -90, 180, 90]
-    }).then(function (ngwMap) {
-
-      var colors = ['red', 'green', 'blue'];
-      var filterInput = document.createElement('select');
-
-      var filterLabel = document.createElement('label');
-      filterLabel.appendChild(document.createTextNode('Filter: '));
-      filterLabel.appendChild(filterInput);
-
-      var options = ['all'].concat(colors);
-      for (var fry = 0; fry < options.length; fry++) {
-        var option = document.createElement('option');
-        option.innerHTML = options[fry];
-        filterInput.appendChild(option);
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Vector layers filtering</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
       }
 
-      filterInput.onchange = function () {
-        setLayerFilter();
+      html,
+      body,
+      #map {
+        width: 100%;
+        height: 100%;
       }
+    </style>
 
-      var filterFunction = function (e) {
-        var value = filterInput.value;
-        return value === 'all' ? true : e.feature.properties.color === value;
-      };
+    <!-- <script src="../../lib/ngw-mapbox.global.js"></script> -->
+    <script src="../../lib/ngw-mapbox.global.js"></script>
+  </head>
 
-      function setLayerFilter() {
-        if (filterInput.value === 'all') {
-          ngwMap.removeLayerFilter('geojson');
-        } else {
-          ngwMap.filterLayer('geojson', filterFunction);
+  <body>
+    <div id="map"></div>
+    <script>
+      NgwMap.create({
+        target: 'map',
+        qmsId: 448,
+        bounds: [0, -90, 180, 90],
+      }).then((ngwMap) => {
+        const colors = ['red', 'green', 'blue'];
+        const filterInput = document.createElement('select');
+
+        const filterLabel = document.createElement('label');
+        filterLabel.appendChild(document.createTextNode('Filter: '));
+        filterLabel.appendChild(filterInput);
+
+        const options = ['all'].concat(colors);
+        for (let fry = 0; fry < options.length; fry++) {
+          const option = document.createElement('option');
+          option.innerHTML = options[fry];
+          filterInput.appendChild(option);
         }
-      }
 
-      var filterControl = ngwMap.createControl({
-        onAdd: function () {
-          return filterLabel;
+        filterInput.onchange = () => {
+          setLayerFilter();
+        };
+
+        const filterFunction = (e) => {
+          const value = filterInput.value;
+          return value === 'all' ? true : e.feature.properties.color === value;
+        };
+
+        function setLayerFilter() {
+          if (filterInput.value === 'all') {
+            ngwMap.removeLayerFilter('geojson');
+          } else {
+            ngwMap.filterLayer('geojson', filterFunction);
+          }
         }
-      }, { margin: true });
 
-      ngwMap.addControl(filterControl, 'top-right');
+        const filterControl = ngwMap.createControl(
+          {
+            onAdd: () => {
+              return filterLabel;
+            },
+          },
+          { margin: true },
+        );
 
-      var features = [];
-      for (var fry = 0; fry < 100; fry++) {
-        var color = colors[Math.floor(Math.random() * colors.length)];
-        features.push(createFeature(color));
-      }
-      for (var c = 0; c < colors.length; c++) {
-        var color = colors[c];
-        var addColorControl = ngwMap.createButtonControl({
-          html: '<div style="background:' + color + '" title="Add one ' + color + ' color point">+</div>',
-          onClick: (function (c) {
-            return function () {
-              ngwMap.addLayerData('geojson', createFeature(c))
-            };
-          })(color)
+        ngwMap.addControl(filterControl, 'top-right');
+
+        const features = [];
+        for (let fry = 0; fry < 100; fry++) {
+          const color = colors[Math.floor(Math.random() * colors.length)];
+          features.push(createFeature(color));
+        }
+        for (let c = 0; c < colors.length; c++) {
+          const color = colors[c];
+          const addColorControl = ngwMap.createButtonControl({
+            html:
+              '<div style="background:' +
+              color +
+              '" title="Add one ' +
+              color +
+              ' color point">+</div>',
+            onClick: ((c) => {
+              return () => {
+                ngwMap.addLayerData('geojson', createFeature(c));
+              };
+            })(color),
+          });
+          ngwMap.addControl(addColorControl, 'top-left');
+        }
+
+        ngwMap.addLayer('GEOJSON', {
+          id: 'geojson',
+          data: { type: 'FeatureCollection', features: features },
+          filter: filterFunction,
+          paint: { color: ['get', 'color'] },
         });
-        ngwMap.addControl(addColorControl, 'top-left');
+      });
+
+      function createFeature(color) {
+        return {
+          type: 'Feature',
+          geometry: { type: 'Point', coordinates: getRandomPointCoord() },
+          properties: { color: color },
+        };
       }
 
-      ngwMap.addLayer('GEOJSON', {
-        id: 'geojson',
-        data: { type: 'FeatureCollection', features: features },
-        filter: filterFunction,
-        paint: { color: ['get', 'color'] }
-      });
-    });
-
-    function createFeature(color) {
-      return {
-        type: 'Feature',
-        geometry: { type: 'Point', coordinates: getRandomPointCoord() },
-        properties: { color: color }
-      };
-    }
-
-
-    function getRandomPointCoord() {
-      var plusOrMinus = Math.random() < 0.5 ? -1 : 1;
-      return [
-        Math.round(Math.random() * 180),
-        Math.round(Math.random() * 90 * plusOrMinus)
-      ]
-    }
-  </script>
-</body>
-
+      function getRandomPointCoord() {
+        const plusOrMinus = Math.random() < 0.5 ? -1 : 1;
+        return [
+          Math.round(Math.random() * 180),
+          Math.round(Math.random() * 90 * plusOrMinus),
+        ];
+      }
+    </script>
+  </body>
 </html>

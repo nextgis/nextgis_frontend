@@ -1,77 +1,81 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
 
-<head>
-  <meta charset="utf-8" />
-
-  <title>Ngw resources</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-    }
-
-    html,
-    body,
-    #map {
-      width: 100%;
-      height: 100%;
-    }
-  </style>
-
-  <!-- <script src="https://unpkg.com/@nextgis/ngw-ol"></script> -->
-  <script src="../../lib/ngw-ol.global.js"></script>
-</head>
-
-<body>
-  <div id='map'></div>
-  <script>
-    var ngwMap = new NgwMap({
-      baseUrl: 'https://demo.nextgis.com',
-      target: 'map',
-      qmsId: 448,
-      resources: [
-        { resource: 4354, id: 'frame', fit: true, adapter: 'GEOJSON', paint: { fillOpacity: 0.3, stroke: true } },
-        [4334, 'Faults'],
-        { resource: 4338, id: 'q4', selectable: true, opacity: 0.8 },
-        // 4340,
-        // 4342,
-        // 4344,
-        // 4346,
-        // 4348,
-        // 4350,
-        // 4352,
-      ]
-    });
-
-    var getFeaturePromise;
-
-    var clean = function () {
-      if (getFeaturePromise) {
-        getFeaturePromise.cancel();
+    <title>Ngw resources</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
       }
-      ngwMap.removeLayer('highlight');
-    }
 
-    var drawLayer = function (identify) {
-      clean();
-      getFeaturePromise = ngwMap.getIdentifyGeoJson(identify).then(function (geojson) {
-        getFeaturePromise = null;
-        ngwMap.addLayer('GEOJSON', {
-          id: 'highlight',
-          data: geojson,
-          type: 'polygon',
-          paint: { color: 'red', stroke: true, fillOpacity: 0.5 }
-        });
-        console.log(geojson);
+      html,
+      body,
+      #map {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+
+    <!-- <script src="https://unpkg.com/@nextgis/ngw-ol"></script> -->
+    <script src="../../lib/ngw-ol.global.js"></script>
+  </head>
+
+  <body>
+    <div id="map"></div>
+    <script>
+      const ngwMap = new NgwMap({
+        baseUrl: 'https://demo.nextgis.com',
+        target: 'map',
+        qmsId: 448,
+        resources: [
+          {
+            resource: 4354,
+            id: 'frame',
+            fit: true,
+            adapter: 'GEOJSON',
+            paint: { fillOpacity: 0.3, stroke: true },
+          },
+          [4334, 'Faults'],
+          { resource: 4338, id: 'q4', selectable: true, opacity: 0.8 },
+          // 4340,
+          // 4342,
+          // 4344,
+          // 4346,
+          // 4348,
+          // 4350,
+          // 4352,
+        ],
       });
-    }
 
-    ngwMap.emitter.on('ngw:select', drawLayer);
+      let getFeaturePromise;
 
+      const clean = () => {
+        if (getFeaturePromise) {
+          getFeaturePromise.cancel();
+        }
+        ngwMap.removeLayer('highlight');
+      };
 
-  </script>
-</body>
+      const drawLayer = (identify) => {
+        clean();
+        getFeaturePromise = ngwMap
+          .getIdentifyGeoJson(identify)
+          .then((geojson) => {
+            getFeaturePromise = null;
+            ngwMap.addLayer('GEOJSON', {
+              id: 'highlight',
+              data: geojson,
+              type: 'polygon',
+              paint: { color: 'red', stroke: true, fillOpacity: 0.5 },
+            });
+            console.log(geojson);
+          });
+      };
 
+      ngwMap.emitter.on('ngw:select', drawLayer);
+    </script>
+  </body>
 </html>

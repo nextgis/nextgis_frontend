@@ -41,12 +41,12 @@
     <div id="map"></div>
 
     <script>
-      var config = {
+      const config = {
         interval: { value: 500, type: 'number' },
         selectableLayer: { value: 'toys', type: 'string' },
       };
 
-      var _intervalId;
+      let _intervalId;
 
       // initialize webmap
       NgwMap.create({
@@ -55,7 +55,7 @@
         qmsId: 448,
         center: [50.0113, 19.9845],
         zoom: 10,
-      }).then(function (ngwMap) {
+      }).then((ngwMap) => {
         // tree
         ngwMap.addNgwLayer({
           id: 'tree',
@@ -106,8 +106,8 @@
         });
 
         // Animation control craeation
-        var animationControl = ngwMap.createToggleControl({
-          onClick: function (status) {
+        const animationControl = ngwMap.createToggleControl({
+          onClick: (status) => {
             if (status) {
               startRandomSelection();
             } else {
@@ -123,18 +123,18 @@
         ngwMap.addControl(animationControl, 'top-left');
 
         // Create configuration control
-        var configElement = document.createElement('div');
+        const configElement = document.createElement('div');
         configElement.className = 'config-panel';
         configElement.innerHTML =
           '<label>Animation delay: <input type="number" name="interval"></input></label>';
-        var intervalInput = configElement.querySelector('input');
+        const intervalInput = configElement.querySelector('input');
         intervalInput.value = config.interval.value;
         intervalInput.addEventListener('change', onConfigUpdate);
         intervalInput.addEventListener('input', onConfigUpdate);
 
-        var configControl = ngwMap.createControl(
+        const configControl = ngwMap.createControl(
           {
-            onAdd: function () {
+            onAdd: () => {
               return configElement;
             },
           },
@@ -144,16 +144,16 @@
         ngwMap.addControl(configControl, 'top-right');
 
 
-        ngwMap.emitter.on('layer:select', function (e) {
+        ngwMap.emitter.on('layer:select', (e) => {
           console.log(e);
         })
         // helper functions
 
         function startRandomSelection() {
-          var selectableLayer = ngwMap.getLayer(config.selectableLayer.value);
-          var layers = selectableLayer.getLayers();
-          _intervalId = setInterval(function () {
-            var randomLayer = layers[Math.floor(Math.random() * layers.length)];
+          const selectableLayer = ngwMap.getLayer(config.selectableLayer.value);
+          const layers = selectableLayer.getLayers();
+          _intervalId = setInterval(() => {
+            const randomLayer = layers[Math.floor(Math.random() * layers.length)];
             selectLayerFeatureById(selectableLayer, randomLayer.feature.id);
           }, config.interval.value);
         }
@@ -163,8 +163,8 @@
         }
 
         function selectLayerFeatureById(layer, id) {
-          var selectableLayer = ngwMap.getLayer(layer);
-          selectableLayer.select(function (e) {
+          const selectableLayer = ngwMap.getLayer(layer);
+          selectableLayer.select((e) =>{
             return e.feature.id === id;
           });
         }

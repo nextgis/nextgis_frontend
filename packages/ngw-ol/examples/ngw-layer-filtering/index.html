@@ -1,115 +1,117 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Ngw layers filtering</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-    }
-
-    html,
-    body,
-    #map {
-      width: 100%;
-      height: 100%;
-    }
-  </style>
-
-  <script src="../../lib/ngw-ol.global.js"></script>
-
-</head>
-
-<body>
-  <div id='map'></div>
-  <script>
-    var amenityList = [];
-
-    var ngwMap = new NgwMap({
-      baseUrl: 'https://demo.nextgis.com/',
-      target: 'map',
-      qmsId: 448
-    });
-
-    var filtrContainer = document.createElement('div');
-
-    var filterInput = document.createElement('select');
-    var filterLabel = document.createElement('label');
-    filterLabel.appendChild(document.createTextNode('Filter: '));
-    filterLabel.appendChild(filterInput);
-
-    var limitInput = document.createElement('input');
-    limitInput.value = 300;
-    var limitLabel = document.createElement('label');
-    limitLabel.appendChild(document.createTextNode('Limit: '));
-    limitLabel.appendChild(limitInput);
-
-    filterInput.onchange = function () {
-      setLayerFilter();
-    }
-    limitInput.onchange = function () {
-      setLayerFilter();
-    }
-
-    filtrContainer.appendChild(filterLabel);
-    filtrContainer.appendChild(limitLabel);
-
-
-    var filterFunction = function (e) {
-      return [['AMENITY', 'eq', filterInput.value]];
-    };
-
-    amenityList = ['cafe', 'restaurant'];
-    updateSelectOptions();
-
-    function updateSelectOptions() {
-      for (var fry = 0; fry < amenityList.length; fry++) {
-        var option = document.createElement('option');
-        option.innerHTML = amenityList[fry];
-        filterInput.appendChild(option);
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Ngw layers filtering</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
       }
-    }
 
-    var filterControl = ngwMap.createControl({
-      onAdd: function () {
-        return filtrContainer;
+      html,
+      body,
+      #map {
+        width: 100%;
+        height: 100%;
       }
-    }, { margin: true });
+    </style>
 
-    ngwMap.addControl(filterControl, 'top-right');
+    <script src="../../lib/ngw-ol.global.js"></script>
+  </head>
 
-    ngwMap.addNgwLayer({
-      id: 'geojson',
-      resource: 1733,
-      adapter: 'GEOJSON',
-      fit: true,
-      adapterOptions: {
-        propertiesFilter: filterFunction(),
-        waitFullLoad: true,
-        paint: {
+  <body>
+    <div id="map"></div>
+    <script>
+      let amenityList = [];
+
+      const ngwMap = new NgwMap({
+        baseUrl: 'https://demo.nextgis.com/',
+        target: 'map',
+        qmsId: 448,
+      });
+
+      const filterContainer = document.createElement('div');
+
+      const filterInput = document.createElement('select');
+      const filterLabel = document.createElement('label');
+      filterLabel.appendChild(document.createTextNode('Filter: '));
+      filterLabel.appendChild(filterInput);
+
+      const limitInput = document.createElement('input');
+      limitInput.value = 300;
+      const limitLabel = document.createElement('label');
+      limitLabel.appendChild(document.createTextNode('Limit: '));
+      limitLabel.appendChild(limitInput);
+
+      filterInput.onchange = () => {
+        setLayerFilter();
+      };
+      limitInput.onchange = () => {
+        setLayerFilter();
+      };
+
+      filterContainer.appendChild(filterLabel);
+      filterContainer.appendChild(limitLabel);
+
+      const filterFunction = (e) => {
+        return [['AMENITY', 'eq', filterInput.value]];
+      };
+
+      amenityList = ['cafe', 'restaurant'];
+      updateSelectOptions();
+
+      function updateSelectOptions() {
+        for (let fry = 0; fry < amenityList.length; fry++) {
+          const option = document.createElement('option');
+          option.innerHTML = amenityList[fry];
+          filterInput.appendChild(option);
+        }
+      }
+
+      const filterControl = ngwMap.createControl(
+        {
+          onAdd: () => {
+            return filterContainer;
+          },
+        },
+        { margin: true },
+      );
+
+      ngwMap.addControl(filterControl, 'top-right');
+
+      ngwMap.addNgwLayer({
+        id: 'geojson',
+        resource: 1733,
+        adapter: 'GEOJSON',
+        fit: true,
+        adapterOptions: {
+          propertiesFilter: filterFunction(),
+          waitFullLoad: true,
+          paint: {
             color: [
-              'match', ['get', 'AMENITY'],
-              'cafe', 'blue',
-              'restaurant', 'red',
-              'gray' // last item is default value
+              'match',
+              ['get', 'AMENITY'],
+              'cafe',
+              'blue',
+              'restaurant',
+              'red',
+              'gray', // last item is default value
             ],
             fillOpacity: 0.8,
             stroke: true,
-            radius: 6
-          }
+            radius: 6,
+          },
+        },
+      });
+
+      function setLayerFilter() {
+        ngwMap.propertiesFilter('geojson', filterFunction(), {
+          limit: limitInput.value,
+        });
       }
-    })
-
-    function setLayerFilter() {
-      ngwMap.propertiesFilter('geojson', filterFunction(), { limit: limitInput.value });
-    }
-
-
-  </script>
-</body>
-
+    </script>
+  </body>
 </html>
