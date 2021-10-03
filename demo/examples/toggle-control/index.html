@@ -39,14 +39,14 @@
         target: 'map',
         qmsId: 448,
         resources: [{ resource: 146, id: 'webmap', fit: true }],
-      }).then(function (ngwMap) {
-        var toggleControl = ngwMap.createToggleControl({
-          getStatus: function () {
+      }).then((ngwMap) => {
+        const toggleControl = ngwMap.createToggleControl({
+          getStatus: () => {
             console.log(1);
             return ngwMap.isLayerVisible('webmap');
           },
 
-          onClick: function (status) {
+          onClick: (status) => {
             ngwMap.toggleLayer('webmap', status);
           },
 

@@ -26,7 +26,7 @@
   <body>
     <div id="map"></div>
     <script>
-      var ngwMap = new NgwMap({
+      const ngwMap = new NgwMap({
         baseUrl: 'https://demo.nextgis.com',
         target: 'map',
         qmsId: 448,
@@ -40,10 +40,10 @@
         resource: 4069,
         adapter: 'GEOJSON',
         adapterOptions: {
-          paint: function (feature) {
+          paint: (feature) => {
             return { color: feature.properties.color, opacity: 0.8 };
           },
-          selectedPaint: function (feature) {
+          selectedPaint: (feature) => {
             return { color: feature.properties.selcolor, opacity: 1 };
           },
           selectable: true,
@@ -57,10 +57,10 @@
         resource: 4061,
         adapter: 'GEOJSON',
         adapterOptions: {
-          paint: function (feature) {
+          paint: (feature) => {
             return { color: feature.properties.color, opacity: 0.5 };
           },
-          selectedPaint: function (feature) {
+          selectedPaint: (feature) => {
             return { color: feature.properties.selcolor, opacity: 1 };
           },
           selectable: true,
@@ -90,15 +90,15 @@
         },
       });
 
-      ngwMap.emitter.on('layer:click', function (e) {
+      ngwMap.emitter.on('layer:click', (e) => {
         if (e.layer.id === 'toys') {
-          var selected = e.layer.getSelected();
-          var tree = ngwMap.getLayer('tree');
+          const selected = e.layer.getSelected();
+          const tree = ngwMap.getLayer('tree');
 
           if (selected.length >= 9) {
-            var treeSelected = tree.getSelected() || [];
+            const treeSelected = tree.getSelected() || [];
             // hint: make tree normal first
-            var treeIsNormal =
+            const treeIsNormal =
               treeSelected[0] &&
               treeSelected[0].feature.properties.color === '#25741f';
             if (treeIsNormal) {
