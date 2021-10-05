@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.2](https://github.com/nextgis/nextgisweb_frontend/compare/v1.8.1...v1.8.2) (2021-10-05)
+
+
+### Bug Fixes
+
+* **leaflet-map-adapter:** add getBounds validation ([e9657a2](https://github.com/nextgis/nextgisweb_frontend/commit/e9657a2cbb5a9b4db017c8ed4bdcccb2fad54676))
+* **leaflet-map-adapter:** popup content height ([4072c3c](https://github.com/nextgis/nextgisweb_frontend/commit/4072c3c12becf1dd2d537844a5046e670e6718be))
+* **webmap:** layer upadate is async ([764eb9c](https://github.com/nextgis/nextgisweb_frontend/commit/764eb9ce199d6062caf6152392ff4be26c940e91))
+
+
+### Features
+
+* **utils:** add options to flatten ([53a182c](https://github.com/nextgis/nextgisweb_frontend/commit/53a182c13f5f874f2521ac9c2a728f5fc7dff96a))
+* **vue:** add load emit in VueNgwControl ([ff00a1a](https://github.com/nextgis/nextgisweb_frontend/commit/ff00a1a154317e9ca6d923e7ef8346ae75bd56ff))
+
+
+
+
+
 ## [1.8.1](https://github.com/nextgis/nextgisweb_frontend/compare/v1.8.0...v1.8.1) (2021-09-23)
 
 
