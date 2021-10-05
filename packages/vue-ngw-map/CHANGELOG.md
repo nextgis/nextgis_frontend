@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.2](https://github.com/nextgis/nextgis_frontend/compare/v1.8.1...v1.8.2) (2021-10-05)
+
+
+### Features
+
+* **vue:** add load emit in VueNgwControl ([ff00a1a](https://github.com/nextgis/nextgis_frontend/commit/ff00a1a154317e9ca6d923e7ef8346ae75bd56ff))
+
+
+
+
+
 ## [1.8.1](https://github.com/nextgis/nextgis_frontend/compare/v1.8.0...v1.8.1) (2021-09-23)
 
 **Note:** Version bump only for package @nextgis/vue-ngw-map
