@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.2](https://github.com/nextgis/nextgis_frontend/compare/v1.8.1...v1.8.2) (2021-10-05)
+
+
+### Bug Fixes
+
+* **webmap:** layer upadate is async ([764eb9c](https://github.com/nextgis/nextgis_frontend/commit/764eb9ce199d6062caf6152392ff4be26c940e91))
+
+
+
+
+
 ## [1.8.1](https://github.com/nextgis/nextgis_frontend/compare/v1.8.0...v1.8.1) (2021-09-23)
 
 

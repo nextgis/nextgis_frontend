@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.2](https://github.com/nextgis/nextgis_frontend/compare/v1.8.1...v1.8.2) (2021-10-05)
+
+
+### Bug Fixes
+
+* **leaflet-map-adapter:** add getBounds validation ([e9657a2](https://github.com/nextgis/nextgis_frontend/commit/e9657a2cbb5a9b4db017c8ed4bdcccb2fad54676))
+* **leaflet-map-adapter:** popup content height ([4072c3c](https://github.com/nextgis/nextgis_frontend/commit/4072c3c12becf1dd2d537844a5046e670e6718be))
+
+
+
+
+
 ## [1.8.1](https://github.com/nextgis/nextgis_frontend/compare/v1.8.0...v1.8.1) (2021-09-23)
 
 **Note:** Version bump only for package @nextgis/leaflet-map-adapter
