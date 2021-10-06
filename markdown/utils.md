@@ -34,7 +34,7 @@
 |  [eachCoordinates(geojson, cb)](./utils.eachcoordinates.md) |  |
 |  [eachGeometry(geojson, cb)](./utils.eachgeometry.md) |  |
 |  [fixUrlStr(url)](./utils.fixurlstr.md) |  |
-|  [flatten(data)](./utils.flatten.md) |  |
+|  [flatten(data, opt)](./utils.flatten.md) |  |
 |  [full(val)](./utils.full.md) | from https://github.com/CesiumGS/cesium/blob/master/Source/Core/defined.js |
 |  [getBoundsCoordinates(b)](./utils.getboundscoordinates.md) |  |
 |  [getBoundsFeature(b)](./utils.getboundsfeature.md) |  |
@@ -72,6 +72,7 @@
 |  Interface | Description |
 |  --- | --- |
 |  [ApplyMixinOptions](./utils.applymixinoptions.md) |  |
+|  [FlattenOptions](./utils.flattenoptions.md) |  |
 |  [JsonMap](./utils.jsonmap.md) |  |
 |  [LatLng](./utils.latlng.md) | Longitude and latitude coordinate, measured in degrees. |
 |  [TileJson](./utils.tilejson.md) | This specification attempts to create a standard for representing metadata about multiple types of web-based layers, to aid clients in configuration and browsing.<!-- -->From [https://github.com/mapbox/tilejson-spec/tree/master/2.2.0](https://github.com/mapbox/tilejson-spec/tree/master/2.2.0) |
