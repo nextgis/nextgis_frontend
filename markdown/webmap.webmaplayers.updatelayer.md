@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-updateLayer(layerDef: LayerDef): void;
+updateLayer(layerDef: LayerDef): Promise<void>;
 ```
 
 ## Parameters
@@ -18,5 +18,5 @@ updateLayer(layerDef: LayerDef): void;
 
 <b>Returns:</b>
 
-void
+Promise&lt;void&gt;
 

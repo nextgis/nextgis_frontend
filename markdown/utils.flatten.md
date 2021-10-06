@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function flatten(data: Record<string, any>): Record<string, any>;
+export declare function flatten(data: Record<string, any>, opt?: FlattenOptions): Record<string, any>;
 ```
 
 ## Parameters
@@ -15,6 +15,7 @@ export declare function flatten(data: Record<string, any>): Record<string, any>;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  data | Record&lt;string, any&gt; |  |
+|  opt | [FlattenOptions](./utils.flattenoptions.md) |  |
 
 <b>Returns:</b>
 
