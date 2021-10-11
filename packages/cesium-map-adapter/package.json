@@ -14,7 +14,7 @@
     "@nextgis/utils": "^1.8.2",
     "@nextgis/webmap": "^1.8.2",
     "@types/events": "^3.0.0",
-    "cesium": "^1.85.0",
+    "cesium": "^1.86.0",
     "events": "^3.3.0"
   },
   "devDependencies": {

@@ -19,7 +19,7 @@
     "polylabel": "^1.1.0"
   },
   "optionalDependencies": {
-    "canvg": "^3.0.8"
+    "canvg": "^3.0.9"
   },
   "devDependencies": {
     "@nextgis/build-tools": "^1.7.0"
