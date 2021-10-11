@@ -562,18 +562,18 @@ export class WebMapLayers<
           }
         }
         if (l.showLayer) {
-          l.showLayer.call(l, l.layer);
+          await l.showLayer.call(l, l.layer);
         } else if (l.layer !== undefined) {
-          this.mapAdapter.showLayer(l.layer);
+          await this.mapAdapter.showLayer(l.layer);
         }
         if (order !== undefined) {
           this.mapAdapter.setLayerOrder(l.layer, order, this._layers);
         }
       } else {
         if (l.hideLayer) {
-          l.hideLayer.call(l, l.layer);
+          await l.hideLayer.call(l, l.layer);
         } else if (l.layer !== undefined) {
-          this.mapAdapter.hideLayer(l.layer);
+          await this.mapAdapter.hideLayer(l.layer);
         }
       }
       if (!silent) {
