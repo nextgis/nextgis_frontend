@@ -1,0 +1,4 @@
+{
+  "name": "Take layer control in the OnFirstShowAdapter",
+  "description": "The ability to access the layer in the OnFirstShowAdapter"
+}

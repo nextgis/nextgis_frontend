@@ -42,14 +42,23 @@ export async function createOnFirstShowAdapter({
       return this._removed;
     }
 
-    showLayer() {
+    async showLayer() {
       this.options.visibility = true;
       if (this.layer.length) {
-        this.layer.forEach((x) => {
-          webMap.showLayer(x);
-        });
+        for (const x of this.layer) {
+          await webMap.showLayer(x);
+        }
       } else {
-        this.loadLayer();
+        await this.loadLayer();
+      }
+    }
+
+    async hideLayer() {
+      this.options.visibility = false;
+      if (this.layer) {
+        for (const x of this.layer) {
+          await webMap.hideLayer(x);
+        }
       }
     }
 
@@ -74,21 +83,14 @@ export async function createOnFirstShowAdapter({
           if (this._removed) {
             webMap.removeLayer(adapter);
           }
+          this.layer.push(adapter);
           if (this.options.visibility) {
             await webMap.showLayer(adapter);
           }
-          this.layer.push(adapter);
           this._creatingInProgress = false;
         }
       }
       return this.layer;
-    }
-
-    hideLayer() {
-      this.options.visibility = false;
-      if (this.layer) {
-        this.layer.forEach((x) => webMap.hideLayer(x));
-      }
     }
   }
   return OnFirstShowAdapter;

@@ -7,10 +7,10 @@
     "karma": "karma start karma.conf.js"
   },
   "devDependencies": {
-    "@types/chai": "^4.2.21",
+    "@types/chai": "^4.2.22",
     "@types/mocha": "^9.0.0",
     "@types/rimraf": "^3.0.2",
-    "@types/sinon": "^10.0.2",
+    "@types/sinon": "^10.0.4",
     "chai": "^4.3.4",
     "codecov": "^3.8.3",
     "istanbul-instrumenter-loader": "^3.0.1",
@@ -23,19 +23,19 @@
     "karma-sourcemap-loader": "^0.3.8",
     "karma-spec-reporter": "0.0.32",
     "karma-webpack": "^5.0.0",
-    "mocha": "^9.1.1",
+    "mocha": "^9.1.2",
     "process": "^0.11.10",
     "sinon": "^11.1.2",
     "sinon-chai": "^3.7.0",
-    "ts-loader": "^9.2.5",
-    "ts-node": "^10.2.1",
+    "ts-loader": "^9.2.6",
+    "ts-node": "^10.3.0",
     "typescript": "^4.4.3",
     "util": "^0.12.4",
-    "webpack": "^5.52.1",
-    "webpack-cli": "^4.8.0"
+    "webpack": "^5.58.1",
+    "webpack-cli": "^4.9.0"
   },
   "license": "MIT",
   "dependencies": {
-    "base64-inline-loader": "^1.1.1"
+    "base64-inline-loader": "^2.0.1"
   }
 }
