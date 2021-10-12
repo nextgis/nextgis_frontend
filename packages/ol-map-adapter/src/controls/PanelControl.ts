@@ -25,21 +25,25 @@ export class PanelControl extends Control {
 
   async addControl(control: Control, position: ControlPosition): Promise<void> {
     const map = this.getMap();
-    const target = this.panelContainer.newPositionContainer(position);
-    if (target) {
-      const _control = await control;
-      const element = (_control as any).element as HTMLElement;
-      if (element) {
-        element.classList.add('webmap-ctrl');
+    if (map) {
+      const target = this.panelContainer.newPositionContainer(position);
+      if (target) {
+        const _control = await control;
+        const element = (_control as any).element as HTMLElement;
+        if (element) {
+          element.classList.add('webmap-ctrl');
+        }
+        _control.setTarget(target);
+        map.addControl(_control);
       }
-      _control.setTarget(target);
-      map.addControl(_control);
     }
   }
 
   removeControl(control: Control): void {
     const map = this.getMap();
-    map.removeControl(control);
+    if (map) {
+      map.removeControl(control);
+    }
   }
 
   getContainer(): HTMLElement {
