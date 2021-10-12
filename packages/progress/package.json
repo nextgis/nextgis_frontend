@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/progress",
-  "version": "1.8.2",
+  "version": "1.8.3",
   "description": "A promise you can stop",
   "main": "index.js",
   "module": "lib/progress.esm-bundler.js",
@@ -8,7 +8,7 @@
   "jsdelivr": "lib/progress.global.prod.js",
   "types": "lib/index.d.ts",
   "devDependencies": {
-    "@nextgis/build-tools": "^1.7.0",
+    "@nextgis/build-tools": "^1.8.3",
     "@types/events": "^3.0.0",
     "events": "^3.3.0",
     "strict-event-emitter-types": "^2.0.0"
