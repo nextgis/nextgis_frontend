@@ -8,6 +8,7 @@
   "unpkg": "lib/ngw-kit.global.prod.js",
   "jsdelivr": "lib/ngw-kit.global.prod.js",
   "types": "lib/index.d.ts",
+  "sideEffects": false,
   "dependencies": {
     "@nextgis/cancelable-promise": "^1.8.2",
     "@nextgis/item": "^1.8.2",
