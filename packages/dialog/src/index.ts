@@ -5,6 +5,6 @@
 import { Dialog } from './dialog';
 import { DialogAdapterOptions } from './interfaces';
 
-export { DialogAdapterOptions };
+export type { DialogAdapterOptions };
 
 export default Dialog;
