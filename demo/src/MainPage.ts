@@ -46,11 +46,6 @@ export class MainPage extends Vue {
     github: mdiGithub,
   };
 
-  @Watch('$route')
-  onPathChange(): void {
-    this._setActive();
-  }
-
   get current(): Item {
     if (!this.active.length) {
       return undefined;
@@ -60,6 +55,11 @@ export class MainPage extends Vue {
     this._setPath(item.id);
 
     return item;
+  }
+
+  @Watch('$route')
+  onPathChange(): void {
+    this._setActive();
   }
 
   mounted(): void {
