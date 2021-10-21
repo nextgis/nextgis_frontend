@@ -1,18 +1,20 @@
 import { EventEmitter } from 'events';
-import { ItemOptions, Item } from '@nextgis/item';
+import { Item } from '@nextgis/item';
 import { treeSome } from '@nextgis/tree';
 import {
   WebMap,
   LayerAdapter,
-  LayerAdapterDefinition,
   ImageAdapterOptions,
+  LayerAdapterDefinition,
 } from '@nextgis/webmap';
-import NgwConnector from '@nextgis/ngw-connector';
 import { objectAssign } from '@nextgis/utils';
 
 import { setScaleRatio } from './utils/utils';
-import { TreeGroup, TreeLayer, TreeItem } from './interfaces';
 import { WebmapLayerOpacityPropertyHandler } from './utils/WebmapLayerOpacityPropertyHandler';
+
+import type { ItemOptions } from '@nextgis/item';
+import type NgwConnector from '@nextgis/ngw-connector';
+import type { TreeGroup, TreeLayer, TreeItem } from './interfaces';
 
 export class NgwWebmapItem extends Item<ItemOptions> {
   static GetAdapterFromLayerType: {
@@ -218,12 +220,8 @@ export class NgwWebmapItem extends Item<ItemOptions> {
       options.order = Number((this.options.order | 0) + '.' + subLevel);
     }
     if (item.item_type === 'layer') {
-      const maxZoom = item.layer_max_scale_denom
-        ? this._mapScaleToZoomLevel(item.layer_max_scale_denom)
-        : this.webMap.options.maxZoom;
-      const minZoom = item.layer_min_scale_denom
-        ? this._mapScaleToZoomLevel(item.layer_min_scale_denom)
-        : this.webMap.options.minZoom;
+      const { maxZoom, minZoom } = this._getZoomRange(item);
+
       objectAssign(options, {
         updateWmsParams: item.updateWmsParams,
         url: item.url,
@@ -247,6 +245,31 @@ export class NgwWebmapItem extends Item<ItemOptions> {
 
   private _mapScaleToZoomLevel(scale: number) {
     return setScaleRatio(scale);
+  }
+
+  private _getZoomRange(item: TreeLayer) {
+    const minZoomMap = this.webMap.options.minZoom;
+    const maxZoomMap = this.webMap.options.maxZoom;
+
+    const minZoomWebmap = this.options.minZoom;
+    const maxZoomWebmap = this.options.maxZoom;
+
+    const minZoomLayer = item.layer_min_scale_denom
+      ? this._mapScaleToZoomLevel(item.layer_min_scale_denom)
+      : undefined;
+    const maxZoomLayer = item.layer_max_scale_denom
+      ? this._mapScaleToZoomLevel(item.layer_max_scale_denom)
+      : undefined;
+
+    const minZooms = [minZoomMap, minZoomWebmap, minZoomLayer].filter(
+      Boolean,
+    ) as number[];
+    const maxZooms = [maxZoomMap, maxZoomWebmap, maxZoomLayer].filter(
+      Boolean,
+    ) as number[];
+    const minZoom = Math.max(...minZooms);
+    const maxZoom = Math.min(...maxZooms);
+    return { minZoom, maxZoom };
   }
 
   private _init(item: TreeGroup | TreeLayer) {

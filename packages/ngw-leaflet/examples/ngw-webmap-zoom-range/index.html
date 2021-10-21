@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Ngw WebMap show in show in range</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body,
+      #map {
+        width: 100%;
+        height: 100%;
+      }
+      .show-zoom {
+        font-size: 24pt;
+        font-weight: bold;
+      }
+    </style>
+
+    <script src="../../lib/ngw-leaflet.global.js"></script>
+  </head>
+
+  <body>
+    <div id="map"></div>
+    <script>
+      const minZoom = 11;
+      const maxZoom = 15;
+
+      NgwMap.create({
+        baseUrl: 'https://demo.nextgis.com',
+        target: 'map',
+        qmsId: 448,
+        minZoom: minZoom - 3,
+        maxZoom: maxZoom + 3,
+      }).then((ngwMap) => {
+        ngwMap.addNgwLayer({ resource: 5469, fit: true, minZoom, maxZoom });
+
+        const zoomLevelControl = ngwMap.createControl(
+          {
+            onAdd: () => {
+              zoomEl = document.createElement('div');
+              zoomEl.className = 'show-zoom';
+              const updateZoom = () => {
+                const zoom = ngwMap.getZoom();
+                zoomEl.style.color = zoom > 15 || zoom < 11 ? 'red' : 'inherit';
+                zoomEl.innerHTML = zoom;
+              };
+              updateZoom();
+              ngwMap.emitter.on('zoom', updateZoom);
+              return zoomEl;
+            },
+          },
+          { margin: true },
+        );
+        ngwMap.addControl(zoomLevelControl, 'top-right');
+      });
+    </script>
+  </body>
+</html>
