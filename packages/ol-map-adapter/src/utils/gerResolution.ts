@@ -9,20 +9,27 @@ function getResolutionForScale(scale: number, metersPerUnit: number) {
 }
 
 interface ResolutionOptions {
-  minResolution: number | undefined;
-  maxResolution: number | undefined;
+  minResolution?: number;
+  maxResolution?: number;
+  minZoom?: number;
+  maxZoom?: number;
 }
 
 export function resolutionOptions(
   map: Map,
   opt: AdapterOptions,
 ): ResolutionOptions {
-  return {
-    minResolution:
-      (opt.maxScale && getResolution(map, opt.maxScale)) || undefined,
-    maxResolution:
-      (opt.minScale && getResolution(map, opt.minScale)) || undefined,
+  const resOpt: ResolutionOptions = {
+    minZoom: opt.minZoom,
+    maxZoom: opt.maxZoom,
   };
+  if (opt.maxScale) {
+    resOpt.minResolution = getResolution(map, opt.maxScale);
+  }
+  if (opt.minScale) {
+    resOpt.maxResolution = getResolution(map, opt.minScale);
+  }
+  return resOpt;
 }
 
 export function getResolution(map: Map, scale: number): number | undefined {
