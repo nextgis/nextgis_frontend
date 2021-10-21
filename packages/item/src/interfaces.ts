@@ -1,5 +1,6 @@
-import { BaseProperty } from './properties/BaseProperty';
-import { Item } from './Item';
+import type { AdapterOptions } from '@nextgis/webmap';
+import type { BaseProperty } from './properties/BaseProperty';
+import type { Item } from './Item';
 
 export type Type<T> = new (...args: any[]) => T;
 
@@ -51,14 +52,20 @@ export interface CheckOptions<V = boolean> extends ItemBasePropertyOptions<V> {
   turnOn?: <O = CheckOptions>(options?: O) => void;
 }
 
-export interface ItemOptions {
+export interface ItemOptions
+  extends Pick<
+    AdapterOptions,
+    | 'minZoom'
+    | 'maxZoom'
+    | 'crossOrigin'
+    | 'ratio'
+    | 'order'
+    | 'headers'
+    | 'setViewDelay'
+  > {
+  // TODO: check usage and sage remove
   properties?: Array<ItemPropertyConfig<keyof ItemPropertyTypes>>;
-  headers?: any;
-  order?: number;
-  crossOrigin?: 'anonymous';
   drawOrderEnabled?: boolean;
-  ratio?: number;
-  setViewDelay?: number;
 }
 
 export interface ChangeEvent<
