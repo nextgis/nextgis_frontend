@@ -1,12 +1,12 @@
 {
   "name": "@nextgis/vue-ngw-ol",
-  "version": "1.8.4",
+  "version": "1.8.5",
   "description": "Vue ngw map component for openlayer",
   "main": "index.js",
   "module": "lib/vue-ngw-ol.esm-bundler.js",
   "#types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/ol-map-adapter": "^1.8.4",
+    "@nextgis/ol-map-adapter": "^1.8.5",
     "@nextgis/vue-ngw-map": "^1.8.4"
   },
   "devDependencies": {
