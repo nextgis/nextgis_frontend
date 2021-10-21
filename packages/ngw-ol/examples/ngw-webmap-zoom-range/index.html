@@ -49,7 +49,7 @@
               const updateZoom = () => {
                 const zoom = ngwMap.getZoom();
                 zoomEl.style.color = zoom > 15 || zoom < 11 ? 'red' : 'inherit';
-                zoomEl.innerHTML = zoom.toFixed(1);
+                zoomEl.innerHTML = zoom;
               };
               updateZoom();
               ngwMap.emitter.on('zoom', updateZoom);
