@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.5](https://github.com/nextgis/nextgisweb_frontend/compare/v1.8.4...v1.8.5) (2021-10-21)
+
+
+### Bug Fixes
+
+* **ngw-ol:** layer min-max zoom options ([e59861b](https://github.com/nextgis/nextgisweb_frontend/commit/e59861b491cb3aea418872bf038c65fc4848a694))
+
+
+
+
+
 ## [1.8.4](https://github.com/nextgis/nextgisweb_frontend/compare/v1.8.3...v1.8.4) (2021-10-21)
 
 
