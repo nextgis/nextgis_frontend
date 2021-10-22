@@ -135,7 +135,7 @@ export async function createGeoJsonAdapter(
       if (waitFullLoad && updatePromise) {
         await updatePromise;
       }
-      if (this.options.strategy === 'BBOX' && !_fullDataLoad) {
+      if (this.options.strategy?.startsWith('BBOX') && !_fullDataLoad) {
         this._addBboxEventListener();
       }
       return layer;
@@ -190,10 +190,19 @@ export async function createGeoJsonAdapter(
 
     async updateLayer(filterArgs?: FilterArgs) {
       filterArgs = filterArgs || _lastFilterArgs || {};
-      if (this.options.strategy === 'BBOX') {
+
+      if (this.options.strategy?.startsWith('BBOX')) {
         await webMap.onLoad('create');
         filterArgs.options = filterArgs.options || {};
         filterArgs.options.intersects = webMap.getBounds();
+        const { minZoom, maxZoom } = this.options;
+        const zoom = webMap.getZoom();
+        if (minZoom !== undefined && zoom < minZoom) {
+          return;
+        }
+        if (maxZoom !== undefined && zoom > maxZoom) {
+          return;
+        }
       }
       if (removed) {
         return;
