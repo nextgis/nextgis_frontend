@@ -363,7 +363,7 @@ export class GeoJsonAdapter
     def: LayerDef,
     options: PopupOptions = {},
     type: OnLayerSelectType,
-    latlng?: LatLngExpression,
+    latLng?: LatLngExpression,
   ) {
     const { feature, layer } = def;
     const {
@@ -426,7 +426,7 @@ export class GeoJsonAdapter
           );
       }
       this._openedPopup.push([popup, _closeHandlers, def]);
-      popup.openPopup(latlng);
+      popup.openPopup(latLng);
     }
   }
 
@@ -611,20 +611,23 @@ export class GeoJsonAdapter
           }
         }
         this._handleMouseEvents(layer);
-        if (popup) {
-          this._openPopup(
-            {
-              target: this,
-              layer,
-              feature,
-              ...createFeaturePositionOptions(feature),
-            },
-            popupOptions,
-            'api',
-          );
-        }
-
-        this._updateTooltip({ layer, feature });
+        // The timeout is needed to display the popup immediately when adding a layer to the map.
+        // Without a timeout, the layer may not yet have a _map object
+        setTimeout(() => {
+          if (popup) {
+            this._openPopup(
+              {
+                target: this,
+                layer,
+                feature,
+                ...createFeaturePositionOptions(feature),
+              },
+              popupOptions,
+              'api',
+            );
+          }
+          this._updateTooltip({ layer, feature });
+        });
       }
     }
   }
