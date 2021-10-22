@@ -34,7 +34,7 @@ import type {
   FeatureLayersIdentifyItems,
 } from '@nextgis/ngw-connector';
 import type {
-  OnLayerClickOptions,
+  OnLayerMouseOptions,
   ControlPosition,
   FilterOptions,
   MapClickEvent,
@@ -100,7 +100,7 @@ export class NgwMap<
 
   protected _ngwLayers: NgwLayers = {};
   private $$selectFromNgwRaster?: (ev: MapClickEvent) => void;
-  private $$selectFromNgwVector?: (ev: OnLayerClickOptions) => void;
+  private $$selectFromNgwVector?: (ev: OnLayerMouseOptions) => void;
   private _promises: Record<PromiseGroup, CancelablePromise[]> = {
     select: [],
     identify: [],
@@ -433,7 +433,7 @@ export class NgwMap<
           this._selectFromNgwRaster(ev);
         }
       };
-      this.$$selectFromNgwVector = (ev: OnLayerClickOptions) => {
+      this.$$selectFromNgwVector = (ev: OnLayerMouseOptions) => {
         if (this.emitter.listenerCount('ngw:select')) {
           this._selectFromNgwVector(ev);
         }
@@ -601,7 +601,7 @@ export class NgwMap<
   }
 
   private _selectFromNgwVector(
-    ev: OnLayerClickOptions,
+    ev: OnLayerMouseOptions,
   ): FeatureLayersIdentify | undefined {
     const layer: ResourceAdapter = ev.layer as ResourceAdapter;
     // item property means layer is NgwResource

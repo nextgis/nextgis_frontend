@@ -272,8 +272,14 @@ export class WebMapMain<
    * Returns the map's current zoom level.
    * @returns The map's current zoom level (0-24).
    */
-  getZoom(): number | undefined {
-    return this.mapAdapter.getZoom();
+  getZoom(): number {
+    const zoom = this.mapAdapter.getZoom();
+    if (typeof zoom === 'number') {
+      return zoom;
+    }
+    throw Error(
+      'Unable to get zoom level. Perhaps the map is not have been initialized yet',
+    );
   }
 
   zoomIn(): void {
