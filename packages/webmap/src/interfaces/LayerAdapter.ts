@@ -453,7 +453,7 @@ export interface FilterOptions<
   fields?: (keyof P)[] | false | null;
   /** WKT polygon geometry */
   intersects?: string | LngLatArray[] | LngLatBoundsArray;
-  strategy?: 'BBOX';
+  strategy?: 'BBOX' | 'BBOX+';
   /**
    * set fields for order
    *
