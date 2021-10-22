@@ -335,3 +335,9 @@ export interface IdentifyItemOptions {
   feature: LayerFeature;
   connector: NgwConnector;
 }
+
+export interface FetchNgwLayerCountOptions {
+  connector: NgwConnector;
+  resourceId: number;
+  cache?: boolean;
+}

@@ -25,6 +25,7 @@ import type {
   GetClassAdapterOptions,
   NgwFeatureRequestOptions,
 } from '../interfaces';
+import { fetchNgwLayerCount } from '../utils/fetchNgwLayerCount';
 
 interface FilterArgs {
   filters?: PropertiesFilter;
@@ -47,6 +48,7 @@ export async function createGeoJsonAdapter(
   const GeoJsonAdapter: Type<VectorLayerAdapter> =
     Adapter || webMap.mapAdapter.layerAdapters.GEOJSON;
 
+  const _loadedIds: string[] = [];
   let _fullDataLoad = false;
   let _lastFilterArgs: FilterArgs | undefined;
   let _dataPromise: CancelablePromise<FeatureCollection> | undefined;
@@ -84,7 +86,6 @@ export async function createGeoJsonAdapter(
 
   class NgwGeoJsonAdapter extends GeoJsonAdapter {
     emitter = new EventEmitter();
-    _count?: number;
     __onMapMove?: () => void;
     __onMapMoveStart?: () => void;
     __enableMapMoveListener?: (e: LayerAdapter) => void;
@@ -122,8 +123,8 @@ export async function createGeoJsonAdapter(
         needUpdate = false;
       }
       const layer = super.addLayer(opt);
-      this.options.strategy = opt.strategy || undefined;
-
+      const strategy = opt.strategy || undefined;
+      this.options.strategy = strategy;
       _lastFilterArgs = {
         filters: opt.propertiesFilter,
         options: getLayerFilterOptions(opt),
@@ -135,7 +136,7 @@ export async function createGeoJsonAdapter(
       if (waitFullLoad && updatePromise) {
         await updatePromise;
       }
-      if (this.options.strategy?.startsWith('BBOX') && !_fullDataLoad) {
+      if (strategy && strategy.startsWith('BBOX') && !_fullDataLoad) {
         this._addBboxEventListener();
       }
       return layer;
@@ -148,7 +149,8 @@ export async function createGeoJsonAdapter(
 
     async getBounds(): Promise<LngLatBoundsArray | undefined> {
       const hasData = this.getLayers && this.getLayers().length;
-      if (this.options.strategy === 'BBOX' || hasData) {
+      const strategy = this.options.strategy;
+      if (strategy?.startsWith('BBOX') || hasData) {
         return fetchNgwResourceExtent(item, connector);
       } else {
         if (super.getBounds) {
@@ -169,23 +171,7 @@ export async function createGeoJsonAdapter(
     }
 
     getCount() {
-      if (this._count !== undefined) {
-        return this._count;
-      }
-      return connector
-        .get(
-          'feature_layer.feature.count',
-          { cache: true },
-          {
-            id: resourceId,
-          },
-        )
-        .then((resp) => {
-          if (resp) {
-            this._count = resp.total_count;
-            return this._count;
-          }
-        });
+      return fetchNgwLayerCount({ connector, resourceId, cache: true });
     }
 
     async updateLayer(filterArgs?: FilterArgs) {
@@ -203,6 +189,9 @@ export async function createGeoJsonAdapter(
         if (maxZoom !== undefined && zoom > maxZoom) {
           return;
         }
+        if (_fullDataLoad) {
+          return;
+        }
       }
       if (removed) {
         return;
@@ -212,10 +201,32 @@ export async function createGeoJsonAdapter(
           ...filterArgs.options,
           srs: this.options.srs,
         });
+        let newData: FeatureCollection = data;
         const count = await this.getCount();
-        _fullDataLoad = count === data.features.length;
-        await webMap.setLayerData(this, data);
-        this.emitter.emit('updated');
+
+        if (this.options.strategy === 'BBOX+') {
+          newData = {
+            type: 'FeatureCollection',
+            features: [],
+          };
+          for (const f of data.features) {
+            if (_loadedIds.indexOf(String(f.id)) === -1) {
+              _loadedIds.push(String(f.id));
+              newData.features.push(f);
+            }
+          }
+          _fullDataLoad = count !== undefined && _loadedIds.length >= count;
+          await webMap.addLayerData(this, newData);
+        } else {
+          _fullDataLoad = count !== undefined && data.features.length >= count;
+          await webMap.setLayerData(this, data);
+        }
+        this.emitter.emit('updated', data);
+        webMap._emitLayerEvent('layer:updated', options.id || '', {
+          data,
+          newData: data,
+          isFull: _fullDataLoad,
+        });
       } catch (er) {
         if (er instanceof Error && er.name !== 'CancelError') {
           throw er;
