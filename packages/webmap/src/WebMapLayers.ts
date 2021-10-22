@@ -21,7 +21,7 @@ import type {
   TileAdapterOptions,
   FeatureLayerAdapter,
   ImageAdapterOptions,
-  OnLayerClickOptions,
+  OnLayerMouseOptions,
   LayerAdaptersOptions,
   OnLayerSelectOptions,
   GeoJsonAdapterOptions,
@@ -231,13 +231,13 @@ export class WebMapLayers<
 
     this._updateGeoJsonOptions(geoJsonOptions);
 
-    const { maxZoom, minZoom } = this.options;
+    // const { maxZoom, minZoom } = this.options;
 
     options = {
       id: String(id),
       order: _order,
-      maxZoom,
-      minZoom,
+      // maxZoom,
+      // minZoom,
       ...options,
     };
 
@@ -854,7 +854,19 @@ export class WebMapLayers<
     }) as Promise<MainLayerAdapter<M, any, TileAdapterOptions>>;
   }
 
-  private async _onLayerClick(options: OnLayerClickOptions) {
+  /** @internal */
+  _emitLayerEvent(name: keyof E, id: string, options: unknown) {
+    const name_ = String(name);
+    if (defined(id) && name_.startsWith('layer:')) {
+      const specificLayerName = name_.replace('layer:', 'layer-' + id + ':');
+      // @ts-ignore can't paste template literal key for interface
+      this.emitter.emit(specificLayerName, options);
+    }
+    // @ts-ignore
+    this.emitter.emit(name, options);
+  }
+
+  private async _onLayerClick(options: OnLayerMouseOptions) {
     const id = options.layer.id;
     this._emitLayerEvent('layer:click', id || '', options);
     return Promise.resolve(options);
@@ -923,18 +935,5 @@ export class WebMapLayers<
         );
       }
     }
-  }
-
-  private _emitLayerEvent(
-    name: keyof WebMapEvents,
-    id: string,
-    options: unknown,
-  ) {
-    if (defined(id) && name.startsWith('layer:')) {
-      const specificLayerName = name.replace('layer:', 'layer-' + id + ':');
-      // @ts-ignore can't paste template literal key for interface
-      this.emitter.emit(specificLayerName, options);
-    }
-    this.emitter.emit(name, options);
   }
 }

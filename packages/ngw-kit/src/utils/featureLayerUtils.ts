@@ -1,6 +1,6 @@
 import CancelablePromise from '@nextgis/cancelable-promise';
 import {
-  checkIfPropertyFilter,
+  isPropertyFilter,
   PropertiesFilter,
   PropertyFilter,
 } from '@nextgis/properties-filter';
@@ -87,7 +87,7 @@ export function createFeatureFieldFilterQueries<
 
   if (logic === 'any') {
     filters_.forEach((f) => {
-      if (checkIfPropertyFilter(f)) {
+      if (isPropertyFilter(f)) {
         _queries.push(
           fetchNgwLayerItemsRequest<G, P>({
             ...opt,
@@ -109,7 +109,7 @@ export function createFeatureFieldFilterQueries<
     const filters: [string, any][] = [];
     const propertiesFilterList: PropertiesFilter[] = [];
     for (const f of filters_) {
-      if (checkIfPropertyFilter(f)) {
+      if (isPropertyFilter(f)) {
         filters.push(createParam(f));
       } else {
         propertiesFilterList.push(f);
