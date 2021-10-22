@@ -248,9 +248,6 @@ export class NgwWebmapItem extends Item<ItemOptions> {
   }
 
   private _getZoomRange(item: TreeLayer) {
-    const minZoomMap = this.webMap.options.minZoom;
-    const maxZoomMap = this.webMap.options.maxZoom;
-
     const minZoomWebmap = this.options.minZoom;
     const maxZoomWebmap = this.options.maxZoom;
 
@@ -261,12 +258,8 @@ export class NgwWebmapItem extends Item<ItemOptions> {
       ? this._mapScaleToZoomLevel(item.layer_max_scale_denom)
       : undefined;
 
-    const minZooms = [minZoomMap, minZoomWebmap, minZoomLayer].filter(
-      Boolean,
-    ) as number[];
-    const maxZooms = [maxZoomMap, maxZoomWebmap, maxZoomLayer].filter(
-      Boolean,
-    ) as number[];
+    const minZooms = [minZoomWebmap, minZoomLayer].filter(Boolean) as number[];
+    const maxZooms = [maxZoomWebmap, maxZoomLayer].filter(Boolean) as number[];
     const minZoom = Math.max(...minZooms);
     const maxZoom = Math.min(...maxZooms);
     return { minZoom, maxZoom };
