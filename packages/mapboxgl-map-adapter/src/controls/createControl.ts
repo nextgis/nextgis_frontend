@@ -15,10 +15,11 @@ export function createControl(
     onAdd() {
       const element = document.createElement('div');
       const content = control.onAdd();
-      element.classList.add('mapboxgl-ctrl');
+      element.classList.add('maplibregl-ctrl');
       if (options.bar) {
         // add custom css for boarder style
-        element.classList.add('mapboxgl-bar');
+        element.classList.add('maplibregl-bar');
+        element.classList.add('maplibregl-ctrl-group');
       }
       if (options.addClass) {
         element.classList.add(options.addClass);
