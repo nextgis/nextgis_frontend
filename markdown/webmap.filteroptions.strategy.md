@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-strategy?: 'BBOX';
+strategy?: 'BBOX' | 'BBOX+';
 ```

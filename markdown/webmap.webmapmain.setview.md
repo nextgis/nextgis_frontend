@@ -9,14 +9,14 @@ Sets the view of the map geographical center and zoom
 <b>Signature:</b>
 
 ```typescript
-setView(lngLat?: LngLatArray, zoom?: number): void;
+setView(lngLatOr: LngLatArray, zoom?: number): void;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  lngLat | [LngLatArray](./utils.lnglatarray.md) | Array of two numbers representing longitude and latitude of the center of the map view. |
+|  lngLatOr | [LngLatArray](./utils.lnglatarray.md) |  |
 |  zoom | number | The zoom level to set (0-24). |
 
 <b>Returns:</b>

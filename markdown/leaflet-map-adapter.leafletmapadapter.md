@@ -33,7 +33,7 @@ export declare class LeafletMapAdapter implements MapAdapter<Map, any, Control>
 |  [createButtonControl(options)](./leaflet-map-adapter.leafletmapadapter.createbuttoncontrol.md) |  |  |
 |  [createControl(control, options)](./leaflet-map-adapter.leafletmapadapter.createcontrol.md) |  |  |
 |  [destroy()](./leaflet-map-adapter.leafletmapadapter.destroy.md) |  |  |
-|  [fitBounds(e, options)](./leaflet-map-adapter.leafletmapadapter.fitbounds.md) |  |  |
+|  [fitBounds(bounds, options)](./leaflet-map-adapter.leafletmapadapter.fitbounds.md) |  |  |
 |  [getBounds()](./leaflet-map-adapter.leafletmapadapter.getbounds.md) |  |  |
 |  [getCenter()](./leaflet-map-adapter.leafletmapadapter.getcenter.md) |  |  |
 |  [getContainer()](./leaflet-map-adapter.leafletmapadapter.getcontainer.md) |  |  |
@@ -50,6 +50,7 @@ export declare class LeafletMapAdapter implements MapAdapter<Map, any, Control>
 |  [setLayerOpacity(layer, value)](./leaflet-map-adapter.leafletmapadapter.setlayeropacity.md) |  |  |
 |  [setLayerOrder(layer, order, layers)](./leaflet-map-adapter.leafletmapadapter.setlayerorder.md) |  |  |
 |  [setView(lngLat, zoom)](./leaflet-map-adapter.leafletmapadapter.setview.md) |  |  |
+|  [setView(options)](./leaflet-map-adapter.leafletmapadapter.setview_1.md) |  |  |
 |  [setZoom(zoom)](./leaflet-map-adapter.leafletmapadapter.setzoom.md) |  |  |
 |  [showLayer(layer)](./leaflet-map-adapter.leafletmapadapter.showlayer.md) |  |  |
 

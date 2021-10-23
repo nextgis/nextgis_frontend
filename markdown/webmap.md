@@ -109,6 +109,7 @@ webMap.onLoad().then(() => {
 |  [ToggleLayerOptions](./webmap.togglelayeroptions.md) |  |
 |  [VectorAdapterOptions](./webmap.vectoradapteroptions.md) |  |
 |  [VectorLayerAdapter](./webmap.vectorlayeradapter.md) | Adapter for vector data display control. |
+|  [ViewOptions](./webmap.viewoptions.md) |  |
 |  [WebMapEvents](./webmap.webmapevents.md) |  |
 |  [WmsAdapterOptions](./webmap.wmsadapteroptions.md) |  |
 |  [ZoomControlOptions](./webmap.zoomcontroloptions.md) |  |

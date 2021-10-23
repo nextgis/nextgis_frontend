@@ -52,7 +52,8 @@ export declare class MapboxglMapAdapter implements MapAdapter<Map, TLayer, ICont
 |  [setLayerOpacity(layerIds, opacity)](./mapboxgl-map-adapter.mapboxglmapadapter.setlayeropacity.md) |  |  |
 |  [setLayerOrder(layerIds, order, layers)](./mapboxgl-map-adapter.mapboxglmapadapter.setlayerorder.md) |  |  |
 |  [setRotation(angle)](./mapboxgl-map-adapter.mapboxglmapadapter.setrotation.md) |  |  |
-|  [setView(center, zoom)](./mapboxgl-map-adapter.mapboxglmapadapter.setview.md) |  |  |
+|  [setView(lngLat, zoom)](./mapboxgl-map-adapter.mapboxglmapadapter.setview.md) |  |  |
+|  [setView(options)](./mapboxgl-map-adapter.mapboxglmapadapter.setview_1.md) |  |  |
 |  [setZoom(zoom)](./mapboxgl-map-adapter.mapboxglmapadapter.setzoom.md) |  |  |
 |  [showLayer(layerIds)](./mapboxgl-map-adapter.mapboxglmapadapter.showlayer.md) |  |  |
 

@@ -52,6 +52,7 @@ export interface MapAdapter<M = any, L = any, C = any>
 |  [setLayerOpacity(layer, opacity)](./webmap.mapadapter.setlayeropacity.md) | Set the transparency of given layer. |
 |  [setLayerOrder(layer, order, layers)](./webmap.mapadapter.setlayerorder.md) |  |
 |  [setView(lngLat, zoom)?](./webmap.mapadapter.setview.md) | <i>(Optional)</i> |
+|  [setView(viewOptions)?](./webmap.mapadapter.setview_1.md) | <i>(Optional)</i> |
 |  [setZoom(zoom)](./webmap.mapadapter.setzoom.md) |  |
 |  [showLayer(layer)](./webmap.mapadapter.showlayer.md) |  |
 |  [zoomIn()?](./webmap.mapadapter.zoomin.md) | <i>(Optional)</i> zoom the map by one quantile of the current adapter |

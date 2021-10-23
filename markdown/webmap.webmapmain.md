@@ -62,7 +62,8 @@ export declare class WebMapMain<M = any, E extends WebMapEvents = WebMapEvents, 
 |  [setCenter(lngLat)](./webmap.webmapmain.setcenter.md) |  | Set the center of the current view. |
 |  [setCursor(cursor)](./webmap.webmapmain.setcursor.md) |  | Set the cursor icon to be displayed when hover icon on the map container. |
 |  [setRuntimeParams(params)](./webmap.webmapmain.setruntimeparams.md) |  |  |
-|  [setView(lngLat, zoom)](./webmap.webmapmain.setview.md) |  | Sets the view of the map geographical center and zoom |
+|  [setView(lngLatOr, zoom)](./webmap.webmapmain.setview.md) |  | Sets the view of the map geographical center and zoom |
+|  [setView(options)](./webmap.webmapmain.setview_1.md) |  |  |
 |  [setZoom(zoom)](./webmap.webmapmain.setzoom.md) |  | Zoom to a specific zoom level. |
 |  [stopGetCoordFromMapClick()](./webmap.webmapmain.stopgetcoordfrommapclick.md) |  |  |
 |  [zoomIn()](./webmap.webmapmain.zoomin.md) |  |  |

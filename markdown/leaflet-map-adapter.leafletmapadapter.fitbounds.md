@@ -7,14 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-fitBounds(e: LngLatBoundsArray, options?: FitOptions): void;
+fitBounds(bounds: LngLatBoundsArray, options?: FitOptions): void;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  e | [LngLatBoundsArray](./utils.lnglatboundsarray.md) |  |
+|  bounds | [LngLatBoundsArray](./utils.lnglatboundsarray.md) |  |
 |  options | [FitOptions](./webmap.fitoptions.md) |  |
 
 <b>Returns:</b>
