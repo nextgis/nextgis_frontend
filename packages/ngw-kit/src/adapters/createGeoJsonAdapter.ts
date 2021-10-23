@@ -122,9 +122,10 @@ export async function createGeoJsonAdapter(
         opt.data = undefined;
         needUpdate = false;
       }
-      const layer = super.addLayer(opt);
       const strategy = opt.strategy || undefined;
       this.options.strategy = strategy;
+
+      const layer = super.addLayer(opt);
       _lastFilterArgs = {
         filters: opt.propertiesFilter,
         options: getLayerFilterOptions(opt),
@@ -176,7 +177,6 @@ export async function createGeoJsonAdapter(
 
     async updateLayer(filterArgs?: FilterArgs) {
       filterArgs = filterArgs || _lastFilterArgs || {};
-
       if (this.options.strategy?.startsWith('BBOX')) {
         await webMap.onLoad('create');
         filterArgs.options = filterArgs.options || {};
@@ -224,7 +224,7 @@ export async function createGeoJsonAdapter(
         this.emitter.emit('updated', data);
         webMap._emitLayerEvent('layer:updated', options.id || '', {
           data,
-          newData: data,
+          newData,
           isFull: _fullDataLoad,
         });
       } catch (er) {

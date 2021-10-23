@@ -21,7 +21,7 @@ import { convertMapClickEvent } from './utils/convertMapClickEvent';
 import type { FitOptions as OlFitOptions } from 'ol/View';
 import type Base from 'ol/layer/Base';
 import type { Pixel } from 'ol/pixel';
-import type { ViewOptions } from 'ol/View';
+import type { ViewOptions as OlViewOptions } from 'ol/View';
 import type BaseEvent from 'ol/events/Event';
 import type Control from 'ol/control/Control';
 import type MapBrowserEvent from 'ol/MapBrowserEvent';
@@ -32,6 +32,7 @@ import type {
   MapControl,
   MapAdapter,
   MapOptions,
+  ViewOptions,
   ControlPosition,
   CreateControlOptions,
   ButtonControlOptions,
@@ -94,13 +95,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
 
   create(options: MapOptions): void {
     this.options = { ...options };
-    const viewOptions: ViewOptions = {
-      center: this.options.center,
-      zoom: this.options.zoom,
-      minZoom: this.options.minZoom,
-      maxZoom: this.options.maxZoom,
-      projection: this.displayProjection,
-    };
+    const viewOptions: OlViewOptions = this.getViewOptions(this.options);
     const view = new View(viewOptions);
 
     const defOpt: OlMapOptions = {
@@ -128,6 +123,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     this._olView = this.map.getView();
     this._isLoaded = true;
     this._addMapListeners();
+    this._addViewListeners();
   }
 
   destroy(): void {
@@ -157,9 +153,9 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     );
   }
 
-  setCenter(lonLat: LngLatArray): void {
+  setCenter(lngLat: LngLatArray): void {
     if (this._olView) {
-      this._olView.setCenter(fromLonLat(lonLat));
+      this._olView.setCenter(fromLonLat(lngLat));
     }
   }
 
@@ -232,6 +228,29 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     }
   }
 
+  setView(lngLat: LngLatArray, zoom?: number): void;
+  setView(options: ViewOptions): void;
+  setView(lngLatOrOpt: LngLatArray | ViewOptions, zoom?: number): void {
+    const map = this.map;
+    if (!map) return;
+    if (Array.isArray(lngLatOrOpt)) {
+      const lngLat = lngLatOrOpt;
+      this._setView({
+        zoom: zoom,
+        center: fromLonLat(lngLat),
+      });
+    } else {
+      const { bounds } = lngLatOrOpt;
+      const olViewOpt = this.getViewOptions(lngLatOrOpt);
+      if (Object.values(olViewOpt).some(Boolean)) {
+        this._setView(olViewOpt);
+      }
+      if (bounds) {
+        this.fitBounds(bounds);
+      }
+    }
+  }
+
   removeLayer(layer: Layer): void {
     if (this.map) {
       this.map.removeLayer(layer);
@@ -293,6 +312,29 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
       });
     }
     this.emitter.emit('click', emitData);
+  }
+
+  private getViewOptions(opt: ViewOptions): OlViewOptions {
+    const { zoom, center, maxBounds, minZoom, maxZoom } = opt;
+    const olViewOpt: OlViewOptions = {
+      zoom,
+      minZoom,
+      maxZoom,
+      projection: this.displayProjection,
+    };
+    if (center) {
+      olViewOpt.center = fromLonLat(center);
+    }
+    if (maxBounds) {
+      const extent = maxBounds as Extent;
+      const toExtent = transformExtent(
+        extent,
+        this.lonlatProjection,
+        this.displayProjection,
+      );
+      olViewOpt.extent = toExtent;
+    }
+    return olViewOpt;
   }
 
   private _callEachFeatureAtPixel(
@@ -366,15 +408,47 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
           this._emitPositionChangeEvent(x);
         });
       });
+    }
+  }
 
-      if (this._olView) {
-        this._olView.on('change:resolution', () => {
-          this.emitter.emit('zoom', this);
-        });
+  private _addViewListeners() {
+    if (this._olView) {
+      this._olView.on('change:resolution', () => {
+        this.emitter.emit('zoom', this);
+      });
 
-        this._olView.on('change:center', () => {
-          this.emitter.emit('move', this);
-        });
+      this._olView.on('change:center', () => {
+        this.emitter.emit('move', this);
+      });
+    }
+  }
+
+  private _setView(opt: OlViewOptions): void {
+    const { center, zoom, extent, minZoom, maxZoom } = opt;
+    const map = this.map;
+    if (!map) return;
+
+    const curView = map.getView();
+    // Optimization to not recreate view each setView. Only then need to set new extent.
+    // Only when need to set new extent.
+    if (extent !== undefined) {
+      curView.dispose();
+      const newView = new View(opt);
+      this._olView = newView;
+      this._addViewListeners();
+      map.setView(newView);
+    } else {
+      if (center) {
+        curView.setCenter(center);
+      }
+      if (zoom !== undefined) {
+        curView.setZoom(zoom);
+      }
+      if (minZoom !== undefined) {
+        curView.setMinZoom(minZoom);
+      }
+      if (maxZoom !== undefined) {
+        curView.setMaxZoom(maxZoom);
       }
     }
   }

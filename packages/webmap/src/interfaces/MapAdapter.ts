@@ -18,6 +18,7 @@ import type {
 import type { Pixel } from './BaseTypes';
 import type { MapOptions } from './MapOptions';
 import type { MapAdapterEvents } from './Events';
+import { ViewOptions } from '@nextgis/webmap';
 
 /**
  * Parameters passed to the arguments of the callback function when clicking on the map
@@ -148,7 +149,9 @@ export interface MapAdapter<M = any, L = any, C = any> {
   fit?(extent: LngLatBoundsArray, options?: FitOptions): void;
   fitBounds(extent: LngLatBoundsArray, options?: FitOptions): void;
   // setRotation?(angle: number): void;
+
   setView?(lngLat: LngLatArray, zoom?: number): void;
+  setView?(viewOptions: ViewOptions): void;
 
   getBounds?(): LngLatBoundsArray | undefined;
 

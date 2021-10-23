@@ -24,12 +24,14 @@ import type {
   LocateOptions,
   MainMapEvents,
   LayerAdapter,
+  ViewOptions,
   MapAdapter,
   MapOptions,
   FitOptions,
   MapControl,
   Locate,
 } from '@nextgis/webmap';
+import { arrayToBoundsExpression } from './utils/arrayToBoundsExpression';
 
 export type Type<T> = new (...args: any[]) => T;
 export type UnselectCb = () => void;
@@ -84,10 +86,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
       this.map = new Map(this.options.target, {
         attributionControl: false,
         zoomControl: false,
-        maxBounds: mb && [
-          [mb[1], mb[0]],
-          [mb[3], mb[2]],
-        ],
+        maxBounds: mb ? arrayToBoundsExpression(mb) : undefined,
         maxZoom,
         minZoom,
         center: center && [center[1], center[0]],
@@ -129,13 +128,49 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     }
   }
 
-  setView(lngLat: LngLatArray, zoom?: number): void {
-    const [lng, lat] = lngLat;
-    if (this.map) {
-      if (typeof zoom === 'number') {
-        this.map.setView([lat, lng], zoom, { animate: false });
+  setView(lngLat: LngLatArray, zoom?: number): void;
+  setView(options: ViewOptions): void;
+  setView(lngLatOrOpt: LngLatArray | ViewOptions, zoom?: number): void {
+    const map = this.map;
+    if (!map) return;
+    if (Array.isArray(lngLatOrOpt)) {
+      const lngLat = lngLatOrOpt;
+      const [lng, lat] = lngLat;
+      if (this.map) {
+        if (typeof zoom === 'number') {
+          this.map.setView([lat, lng], zoom, { animate: false });
+        } else {
+          this.setCenter([lng, lat]);
+        }
+      }
+    } else {
+      const { zoom, center, maxBounds, bounds, minZoom, maxZoom } = lngLatOrOpt;
+      if (center && zoom !== undefined) {
+        this.setView(center, zoom);
       } else {
-        this.setCenter([lng, lat]);
+        if (zoom !== undefined) {
+          this.setZoom(zoom);
+        }
+        if (center) {
+          this.setCenter(center);
+        }
+      }
+      if (bounds) {
+        this.fitBounds(bounds);
+      }
+      if (maxBounds !== undefined) {
+        if (maxBounds) {
+          map.setMaxBounds(arrayToBoundsExpression(maxBounds));
+        } else {
+          // @ts-ignore `null` works for unset maxBounds, but not in typing
+          map.setMaxBounds(null);
+        }
+      }
+      if (maxZoom !== undefined) {
+        map.setMaxZoom(maxZoom);
+      }
+      if (minZoom !== undefined) {
+        map.setMinZoom(minZoom);
       }
     }
   }
@@ -175,7 +210,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   }
 
   // [west, south, east, north]
-  fitBounds(e: LngLatBoundsArray, options: FitOptions = {}): void {
+  fitBounds(bounds: LngLatBoundsArray, options: FitOptions = {}): void {
     if (this.map) {
       const { maxZoom, offset, padding } = options;
       const opt: FitBoundsOptions = {};
@@ -188,14 +223,8 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
       if (offset) {
         opt.padding = offset;
       }
-      // top, left, bottom, right
-      this.map.fitBounds(
-        [
-          [e[3], e[0]],
-          [e[1], e[2]],
-        ],
-        opt,
-      );
+
+      this.map.fitBounds(arrayToBoundsExpression(bounds), opt);
     }
   }
 
