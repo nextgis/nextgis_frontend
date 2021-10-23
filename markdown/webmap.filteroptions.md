@@ -23,5 +23,5 @@ export interface FilterOptions<P extends {
 |  [limit?](./webmap.filteroptions.limit.md) | number | <i>(Optional)</i> Limit (paginated) - max number of entities should be taken. |
 |  [offset?](./webmap.filteroptions.offset.md) | number | <i>(Optional)</i> Offset (paginated) where from entities should be taken. |
 |  [orderBy?](./webmap.filteroptions.orderby.md) | (keyof P \| string)\[\] | <i>(Optional)</i> set fields for order |
-|  [strategy?](./webmap.filteroptions.strategy.md) | 'BBOX' | <i>(Optional)</i> |
+|  [strategy?](./webmap.filteroptions.strategy.md) | 'BBOX' \| 'BBOX+' | <i>(Optional)</i> |
 

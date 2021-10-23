@@ -7,14 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-setCenter(lonLat: LngLatArray): void;
+setCenter(lngLat: LngLatArray): void;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  lonLat | [LngLatArray](./utils.lnglatarray.md) |  |
+|  lngLat | [LngLatArray](./utils.lnglatarray.md) |  |
 
 <b>Returns:</b>
 
