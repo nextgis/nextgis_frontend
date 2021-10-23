@@ -1,5 +1,5 @@
 {
-  "name": "BBOX strategy for vector layer",
-  "description": "Use BBOX strategy to show large vector data resource. Change the position of the map to update of the vector layer. Try to fetch all layer data and then loading will be stopped",
+  "name": "BBOX+ strategy for vector layer",
+  "description": "Use BBOX+ strategy to show large vector data resource. Reposition the map to add new data in parts. Try to fetch all layer data and then loading will be stopped. Use minZoom, maxBounds and another limitation to avoid the situation with full data load on start",
   "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
 }
