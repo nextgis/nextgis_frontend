@@ -4,7 +4,7 @@ import { createControl } from './createControl';
 
 export function createButtonControl(options: ButtonControlOptions): IControl {
   const link = document.createElement('button');
-  link.className = 'mapboxgl-ctrl-icon';
+  link.className = 'maplibregl-ctrl-icon';
 
   link.setAttribute('role', 'button');
   if (options.title) {
@@ -52,6 +52,6 @@ export function createButtonControl(options: ButtonControlOptions): IControl {
         }
       },
     },
-    { bar: true, addClass: 'mapboxgl-ctrl-group' },
+    { bar: true, addClass: 'maplibregl-ctrl-group' },
   );
 }
