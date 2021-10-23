@@ -231,13 +231,9 @@ export class WebMapLayers<
 
     this._updateGeoJsonOptions(geoJsonOptions);
 
-    // const { maxZoom, minZoom } = this.options;
-
     options = {
       id: String(id),
       order: _order,
-      // maxZoom,
-      // minZoom,
       ...options,
     };
 

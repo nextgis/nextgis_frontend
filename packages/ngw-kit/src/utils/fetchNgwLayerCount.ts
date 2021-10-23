@@ -5,7 +5,7 @@ import type { FetchNgwLayerCountOptions } from '../interfaces';
 export function fetchNgwLayerCount({
   connector,
   resourceId,
-  cache,
+  cache = true,
 }: FetchNgwLayerCountOptions): CancelablePromise<number> {
   return connector
     .get(

@@ -23,6 +23,7 @@ import type {
   ControlPosition,
   LayerAdapter,
   WebMapEvents,
+  ViewOptions,
   MapAdapter,
   FitOptions,
   MapControl,
@@ -38,6 +39,7 @@ import type {
   RequestParameters,
 } from 'maplibre-gl';
 import { Feature } from './layer-adapters/VectorAdapter';
+import { arrayToBoundsLike } from './utils/arrayToBoundsLike';
 
 export type TLayer = string[];
 export type UnselectCb = () => void;
@@ -170,15 +172,44 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     return this.map && this.map.getContainer();
   }
 
-  setView(center: LngLatArray, zoom?: number): void {
-    if (this.map) {
+  setView(lngLat: LngLatArray, zoom?: number): void;
+  setView(options: ViewOptions): void;
+  setView(lngLatOrOpt: LngLatArray | ViewOptions, zoom?: number): void {
+    const map = this.map;
+    if (!map) return;
+    if (Array.isArray(lngLatOrOpt)) {
+      const c = lngLatOrOpt;
       const options: mapboxgl.CameraOptions = {
-        center: [center[0], center[1]],
+        center: [c[0], c[1]],
       };
       if (zoom) {
         options.zoom = zoom - 1;
       }
       this.map.jumpTo(options);
+    } else {
+      const { zoom, center, maxBounds, bounds, minZoom, maxZoom } = lngLatOrOpt;
+      if (maxBounds !== undefined) {
+        map.setMaxBounds(maxBounds ? arrayToBoundsLike(maxBounds) : undefined);
+      }
+      if (center && zoom !== undefined) {
+        this.setView(center, zoom);
+      } else {
+        if (zoom !== undefined) {
+          this.setZoom(zoom);
+        }
+        if (center) {
+          this.setCenter(center);
+        }
+      }
+      if (maxZoom !== undefined) {
+        map.setMaxZoom(maxZoom - 1);
+      }
+      if (minZoom !== undefined) {
+        map.setMinZoom(minZoom - 1);
+      }
+      if (bounds) {
+        this.fitBounds(bounds);
+      }
     }
   }
 
@@ -231,13 +262,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
       if (options.maxZoom) {
         opt.maxZoom = options.maxZoom - 1;
       }
-      this.map.fitBounds(
-        [
-          [e[0], e[1]],
-          [e[2], e[3]],
-        ],
-        opt,
-      );
+      this.map.fitBounds(arrayToBoundsLike(e), opt);
     }
   }
 

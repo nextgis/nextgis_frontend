@@ -31,7 +31,7 @@ import type {
 import type { StarterKit } from './interfaces/StarterKit';
 import type { LayerAdapter } from './interfaces/LayerAdapter';
 import type { RuntimeParams } from './interfaces/RuntimeParams';
-import type { MapOptions } from './interfaces/MapOptions';
+import type { MapOptions, ViewOptions } from './interfaces/MapOptions';
 import type { WebMapEvents, MainMapEvents } from './interfaces/Events';
 
 type EmitStatusEventData = any;
@@ -317,15 +317,27 @@ export class WebMapMain<
    * webMap.setView([86.925278, 27.988056], 12)
    * ```
    */
-  setView(lngLat?: LngLatArray, zoom?: number): void {
-    if (this.mapAdapter.setView && lngLat && defined(zoom)) {
-      this.mapAdapter.setView(lngLat, zoom);
-    } else {
-      if (lngLat) {
-        this.mapAdapter.setCenter(lngLat);
+  setView(lngLatOr: LngLatArray, zoom?: number): void;
+
+  setView(options: ViewOptions): void;
+
+  setView(lngLatOrOpt: LngLatArray | ViewOptions, zoom?: number): void {
+    if (Array.isArray(lngLatOrOpt)) {
+      const lngLat = lngLatOrOpt;
+      if (this.mapAdapter.setView && lngLat && defined(zoom)) {
+        this.mapAdapter.setView(lngLat, zoom);
+      } else {
+        if (lngLat) {
+          this.mapAdapter.setCenter(lngLat);
+        }
+        if (defined(zoom)) {
+          this.mapAdapter.setZoom(zoom);
+        }
       }
-      if (defined(zoom)) {
-        this.mapAdapter.setZoom(zoom);
+    } else {
+      const viewOpt = lngLatOrOpt;
+      if (this.mapAdapter.setView) {
+        this.mapAdapter.setView(viewOpt);
       }
     }
   }
