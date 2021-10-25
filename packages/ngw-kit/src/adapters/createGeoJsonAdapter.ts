@@ -197,6 +197,9 @@ export async function createGeoJsonAdapter(
         return;
       }
       try {
+        this.emitter.emit('preupdate', filterArgs);
+        webMap._emitLayerEvent('layer:preupdate', options.id || '', filterArgs);
+
         const data = await getData(filterArgs.filters, {
           ...filterArgs.options,
           srs: this.options.srs,
@@ -272,7 +275,7 @@ export async function createGeoJsonAdapter(
       }
     }
 
-    _addBboxEventListener() {
+    private _addBboxEventListener() {
       this.__enableMapMoveListener = (e: LayerAdapter) => {
         if (e === this) {
           this._removeMoveEventListener();
@@ -290,7 +293,7 @@ export async function createGeoJsonAdapter(
       this.__enableMapMoveListener(this);
     }
 
-    _removeBboxEventListener() {
+    private _removeBboxEventListener() {
       if (this.__enableMapMoveListener) {
         webMap.emitter.on('layer:show', this.__enableMapMoveListener);
       }
@@ -299,14 +302,14 @@ export async function createGeoJsonAdapter(
       }
     }
 
-    _addMoveEventListener() {
+    private _addMoveEventListener() {
       this.__onMapMove = debounce(() => this.updateLayer());
       this.__onMapMoveStart = abort;
       webMap.emitter.on('movestart', this.__onMapMoveStart);
       webMap.emitter.on('moveend', this.__onMapMove);
     }
 
-    _removeMoveEventListener() {
+    private _removeMoveEventListener() {
       if (this.__onMapMove) {
         webMap.emitter.removeListener('moveend', this.__onMapMove);
       }
