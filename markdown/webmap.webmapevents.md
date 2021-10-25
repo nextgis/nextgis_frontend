@@ -27,6 +27,7 @@ export interface WebMapEvents extends MainMapEvents
 |  ["layer:preremove"](./webmap.webmapevents._layer_preremove_.md) | [LayerAdapter](./webmap.layeradapter.md) |  |
 |  ["layer:preshow"](./webmap.webmapevents._layer_preshow_.md) | [LayerAdapter](./webmap.layeradapter.md) |  |
 |  ["layer:pretoggle"](./webmap.webmapevents._layer_pretoggle_.md) | [LayerAdapter](./webmap.layeradapter.md) |  |
+|  ["layer:preupdate"](./webmap.webmapevents._layer_preupdate_.md) | [LayerAdapter](./webmap.layeradapter.md) |  |
 |  ["layer:remove"](./webmap.webmapevents._layer_remove_.md) | [LayerAdapter](./webmap.layeradapter.md) |  |
 |  ["layer:select"](./webmap.webmapevents._layer_select_.md) | [OnLayerSelectOptions](./webmap.onlayerselectoptions.md) |  |
 |  ["layer:show"](./webmap.webmapevents._layer_show_.md) | [LayerAdapter](./webmap.layeradapter.md) |  |
