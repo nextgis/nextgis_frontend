@@ -851,7 +851,7 @@ export class WebMapLayers<
   }
 
   /** @internal */
-  _emitLayerEvent(name: keyof E, id: string, options: unknown) {
+  _emitLayerEvent(name: keyof E, id: string, options?: unknown) {
     const name_ = String(name);
     if (defined(id) && name_.startsWith('layer:')) {
       const specificLayerName = name_.replace('layer:', 'layer-' + id + ':');
