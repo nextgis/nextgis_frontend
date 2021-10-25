@@ -25,7 +25,6 @@
       }
     </style>
 
-    <script src="../../lib/ngw-mapbox.global.js"></script>
     <script src="../../../ngw-kit/lib/ngw-kit.global.js"></script>
   </head>
 
@@ -82,6 +81,9 @@
         ngwMap.addControl(loadControl, 'top-right');
 
         let loadedCount = 0;
+        ngwMap.emitter.on('layer-' + id + ':preupdate', (e) => {
+          loadStatusBlock.innerHTML = 'Loading new data...'
+        })
         ngwMap.emitter.on('layer-' + id + ':updated', (e) => {
           // Feel free to execute this method each time, the request for count is cached.
           NgwKit.fetchNgwLayerCount({
