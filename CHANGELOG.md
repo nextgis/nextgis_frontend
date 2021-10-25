@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.1](https://github.com/nextgis/nextgisweb_frontend/compare/v1.9.0...v1.9.1) (2021-10-25)
+
+
+### Features
+
+* **ngw-kit:** add bbox strategy layer preupdate event ([a3e2b93](https://github.com/nextgis/nextgisweb_frontend/commit/a3e2b93b729e361546b030b9d865dbcf66b58101))
+
+
+
+
+
 # [1.9.0](https://github.com/nextgis/nextgisweb_frontend/compare/v1.8.5...v1.9.0) (2021-10-23)
 
 
