@@ -34,6 +34,10 @@ export interface WebMapEvents extends MainMapEvents {
   /**
    * @eventProperty
    */
+  'layer:preupdate': LayerAdapter;
+  /**
+   * @eventProperty
+   */
   'layer:updated': LayerAdapter;
   /**
    * @eventProperty
