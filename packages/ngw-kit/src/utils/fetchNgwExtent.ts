@@ -68,6 +68,17 @@ export function fetchNgwLayerItemExtent({
     });
 }
 
+export function fetchNgwExtent(
+  options: FetchNgwLayerExtentOptions,
+): CancelablePromise<LngLatBoundsArray | undefined> {
+  return options.connector.getResource(options.resourceId).then((resource) => {
+    if (resource) {
+      return fetchNgwResourceExtent(resource, options.connector);
+    }
+  });
+}
+
+/** @deprecated use {@link fetchNgwExtent} instead */
 export function fetchNgwResourceExtent(
   item: ResourceItem,
   connector: NgwConnector,
