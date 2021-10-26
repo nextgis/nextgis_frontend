@@ -35,7 +35,9 @@ export async function createOnFirstShowAdapter({
 
     removeLayer() {
       this._removed = true;
-      this.layer.forEach((x) => webMap.removeLayer(x));
+      for (const l of this.layer) {
+        webMap.removeLayer(l);
+      }
     }
 
     destroyed() {

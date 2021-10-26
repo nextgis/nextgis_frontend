@@ -294,6 +294,12 @@ export interface FetchNgwLayerItemExtentOptions
   featureId: number;
 }
 
+export interface FetchNgwResourceExtent {
+  resource?: ResourceDefinition | ResourceItem;
+  connector: NgwConnector;
+  cache?: boolean;
+}
+
 export interface GetNgwItemsOptions<
   P extends FeatureProperties = FeatureProperties,
 > extends FetchNgwLayerExtentOptions {

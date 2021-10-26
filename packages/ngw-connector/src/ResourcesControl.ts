@@ -50,8 +50,11 @@ export class ResourcesControl {
     return cache.add('resource', makeRequest, { resource });
   }
 
-  getOneOrFail(resource: ResourceDefinition): CancelablePromise<ResourceItem> {
-    return this.getOne(resource).then((res) => {
+  getOneOrFail(
+    resource: ResourceDefinition,
+    requestOptions?: Pick<RequestOptions, 'cache'>,
+  ): CancelablePromise<ResourceItem> {
+    return this.getOne(resource, requestOptions).then((res) => {
       if (res) {
         return res;
       }
@@ -69,11 +72,14 @@ export class ResourcesControl {
    * then this method will come in handy to facilitate the extraction of the identifier
    * if the resource is specified through a keyname or other parameters.
    */
-  getId(resource: ResourceDefinition): CancelablePromise<number | undefined> {
+  getId(
+    resource: ResourceDefinition,
+    requestOptions?: Pick<RequestOptions, 'cache'>,
+  ): CancelablePromise<number | undefined> {
     if (typeof resource === 'number') {
       return CancelablePromise.resolve(resource);
     } else if (typeof resource === 'string' || isObject(resource)) {
-      return this.getOne(resource).then((res) => {
+      return this.getOne(resource, requestOptions).then((res) => {
         if (res) {
           return res.resource.id;
         }
@@ -90,8 +96,11 @@ export class ResourcesControl {
    * Similar with {@link NgwConnector.getResourceId | getResourceId} but rise error if resource is not exist.
    * To not make one more checks if the resource is definitely exists
    */
-  getIdOrFail(resource: ResourceDefinition): CancelablePromise<number> {
-    return this.getId(resource).then((resp) => {
+  getIdOrFail(
+    resource: ResourceDefinition,
+    requestOptions?: Pick<RequestOptions, 'cache'>,
+  ): CancelablePromise<number> {
+    return this.getId(resource, requestOptions).then((resp) => {
       if (resp === undefined) {
         throw new Error();
       }
@@ -133,10 +142,11 @@ export class ResourcesControl {
 
   getParent(
     resource: ResourceDefinition,
+    requestOptions?: Pick<RequestOptions, 'cache'>,
   ): CancelablePromise<ResourceItem | undefined> {
-    return this.connector.getResource(resource).then((child) => {
+    return this.getOne(resource, requestOptions).then((child) => {
       if (child) {
-        return this.connector.getResource(child.resource.parent.id);
+        return this.getOne(child.resource.parent.id, requestOptions);
       }
       return CancelablePromise.resolve(undefined);
     });
@@ -144,12 +154,13 @@ export class ResourcesControl {
 
   getChildrenOf(
     resource: ResourceDefinition,
+    requestOptions?: Pick<RequestOptions, 'cache'>,
   ): CancelablePromise<ResourceItem[]> {
     return this.getId(resource).then((parent) => {
       return this.connector
         .get(
           'resource.collection',
-          { cache: true },
+          { cache: true, ...requestOptions },
           {
             parent,
           },
