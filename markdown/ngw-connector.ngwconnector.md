@@ -38,16 +38,16 @@ export declare class NgwConnector
 |  [deleteResource(resource)](./ngw-connector.ngwconnector.deleteresource.md) |  |  |
 |  [get(name, options, params)](./ngw-connector.ngwconnector.get.md) |  | Shortcut method for send GET request to NGW. |
 |  [getAuthorizationHeaders(credentials)](./ngw-connector.ngwconnector.getauthorizationheaders.md) |  | Obtaining the required Headers for authentication of requests in the NGW. |
-|  [getResource(resource)](./ngw-connector.ngwconnector.getresource.md) |  |  |
+|  [getResource(resource, requestOptions)](./ngw-connector.ngwconnector.getresource.md) |  |  |
 |  [getResourceBy(resource)](./ngw-connector.ngwconnector.getresourceby.md) |  |  |
 |  [getResourceById(id)](./ngw-connector.ngwconnector.getresourcebyid.md) |  |  |
 |  [getResourceByKeyname(keyname)](./ngw-connector.ngwconnector.getresourcebykeyname.md) |  |  |
-|  [getResourceChildren(resource)](./ngw-connector.ngwconnector.getresourcechildren.md) |  |  |
-|  [getResourceId(resource)](./ngw-connector.ngwconnector.getresourceid.md) |  |  |
-|  [getResourceIdOrFail(resource)](./ngw-connector.ngwconnector.getresourceidorfail.md) |  |  |
-|  [getResourceOrFail(resource)](./ngw-connector.ngwconnector.getresourceorfail.md) |  |  |
-|  [getResourceParent(resource)](./ngw-connector.ngwconnector.getresourceparent.md) |  |  |
-|  [getResourcesBy(resource)](./ngw-connector.ngwconnector.getresourcesby.md) |  |  |
+|  [getResourceChildren(resource, requestOptions)](./ngw-connector.ngwconnector.getresourcechildren.md) |  |  |
+|  [getResourceId(resource, requestOptions)](./ngw-connector.ngwconnector.getresourceid.md) |  |  |
+|  [getResourceIdOrFail(resource, requestOptions)](./ngw-connector.ngwconnector.getresourceidorfail.md) |  |  |
+|  [getResourceOrFail(resource, requestOptions)](./ngw-connector.ngwconnector.getresourceorfail.md) |  |  |
+|  [getResourceParent(resource, requestOptions)](./ngw-connector.ngwconnector.getresourceparent.md) |  |  |
+|  [getResourcesBy(resource, requestOptions)](./ngw-connector.ngwconnector.getresourcesby.md) |  |  |
 |  [getUserInfo(credentials)](./ngw-connector.ngwconnector.getuserinfo.md) |  |  |
 |  [login(credentials)](./ngw-connector.ngwconnector.login.md) |  | Quick way to change NextGIS Web user. |
 |  [logout()](./ngw-connector.ngwconnector.logout.md) |  | Disconnecting a user. Aborting all current requests |
