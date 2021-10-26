@@ -87,6 +87,7 @@ getNgwLayerItems({
 |  [extendNgwWebmapLayerAdapter(opt)](./ngw-kit.extendngwwebmaplayeradapter.md) |  |
 |  [fetchIdentifyGeoJson(options)](./ngw-kit.fetchidentifygeojson.md) |  |
 |  [fetchIdentifyItem(options)](./ngw-kit.fetchidentifyitem.md) |  |
+|  [fetchNgwExtent(options)](./ngw-kit.fetchngwextent.md) |  |
 |  [fetchNgwLayerCount({ connector, resourceId, cache, })](./ngw-kit.fetchngwlayercount.md) |  |
 |  [fetchNgwLayerExtent({ resourceId, connector, cache, })](./ngw-kit.fetchngwlayerextent.md) |  |
 |  [fetchNgwLayerFeature(options)](./ngw-kit.fetchngwlayerfeature.md) |  |
@@ -128,6 +129,7 @@ getNgwLayerItems({
 |  [FetchNgwLayerCountOptions](./ngw-kit.fetchngwlayercountoptions.md) |  |
 |  [FetchNgwLayerExtentOptions](./ngw-kit.fetchngwlayerextentoptions.md) |  |
 |  [FetchNgwLayerItemExtentOptions](./ngw-kit.fetchngwlayeritemextentoptions.md) |  |
+|  [FetchNgwResourceExtent](./ngw-kit.fetchngwresourceextent.md) |  |
 |  [GetClassAdapterOptions](./ngw-kit.getclassadapteroptions.md) |  |
 |  [GetIdentifyGeoJsonOptions](./ngw-kit.getidentifygeojsonoptions.md) |  |
 |  [GetNgwItemOptions](./ngw-kit.getngwitemoptions.md) |  |
