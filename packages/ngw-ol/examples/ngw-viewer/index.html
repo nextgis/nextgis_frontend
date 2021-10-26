@@ -133,7 +133,6 @@
             el.insertBefore(showBtn, nameBlock);
 
             showBtn.addEventListener('click', () => {
-              console.log(item.resource.cls);
               resourcePreview(item);
             });
           }
@@ -160,7 +159,6 @@
           });
 
           activePreview = () => {
-            console.log(1234);
             ngwMap.removeLayer('active-layer');
             promise.cancel();
           };
