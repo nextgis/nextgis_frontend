@@ -49,6 +49,8 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
   protected _extent?: LngLatBoundsArray;
   private response?: ResourceItem;
   private _webmapLayersIds?: number[];
+  private _webmapBaselayersIds: string[] = [];
+  private _lastActiveBaselayer?: string;
 
   constructor(public map: M, public options: NgwWebmapAdapterOptions) {
     const r = options.resourceId;
@@ -78,7 +80,16 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
       // @ts-ignore Update x interface
       mapAdapter.removeLayer(x.layer.layer);
     });
-    // delete this.options;
+
+    if (this._webmapBaselayersIds.length) {
+      for (const b of this._webmapBaselayersIds) {
+        this.options.webMap.removeLayer(b);
+      }
+      if (this._lastActiveBaselayer) {
+        this.options.webMap.showLayer(this._lastActiveBaselayer);
+      }
+    }
+
     delete this.layer;
     delete this.response;
     delete this._webmapLayersIds;
@@ -222,10 +233,14 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
       const webmap = data[
         this.webmapClassName as keyof ResourceItem
       ] as WebmapResource;
+      const webMap = this.options.webMap;
       if (data.basemap_webmap && data.basemap_webmap.basemaps.length) {
+        const activeBaselayer = webMap.getActiveBaseLayer();
+        this._lastActiveBaselayer = activeBaselayer
+          ? activeBaselayer.id
+          : undefined;
         this._setBasemaps(data.basemap_webmap);
       } else if (this.options.defaultBasemap) {
-        const webMap = this.options.webMap;
         webMap.addBaseLayer('OSM', {
           id: 'webmap-default-baselayer',
           name: 'OpenStreetMap',
@@ -249,7 +264,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
   private _setBasemaps(baseWebmap: BasemapWebmap) {
     const webMap = this.options.webMap;
     let enabledAlreadySet = false;
-    baseWebmap.basemaps.forEach((x) => {
+    for (const x of baseWebmap.basemaps) {
       createOnFirstShowNgwAdapter({
         webMap,
         connector: this.options.connector,
@@ -258,17 +273,21 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
       }).then((adapter) => {
         // to avoid set many basemaps on init
         const visibility = enabledAlreadySet ? false : x.enabled;
-        webMap.addBaseLayer(adapter, {
-          id: WEBMAP_BASELAYER_ID_PREFIX + x.resource_id,
-          name: x.display_name,
-          opacity: x.opacity,
-          visibility,
-        });
+        webMap
+          .addBaseLayer(adapter, {
+            id: WEBMAP_BASELAYER_ID_PREFIX + x.resource_id,
+            name: x.display_name,
+            opacity: x.opacity,
+            visibility,
+          })
+          .then((l) => {
+            l.id && this._webmapBaselayersIds.push(l.id);
+          });
         if (x.enabled) {
           enabledAlreadySet = true;
         }
       });
-    });
+    }
   }
 
   private _updateItemsParams(

@@ -2,14 +2,9 @@
  * Tests that must be performed for each MapAdapter and for any Class extended from WebMap.
  */
 
+import { LngLatArray, Type } from '@nextgis/utils';
 import { expect } from 'chai';
-import {
-  MapAdapter,
-  Type,
-  MapOptions,
-  LngLatArray,
-  WebMap,
-} from '../../../packages/webmap/src';
+import { MapAdapter, MapOptions, WebMap } from '../../../packages/webmap/src';
 import { mapHtml } from '../mapHtml';
 import sleep from '../utils/asyncTimeout';
 
@@ -22,8 +17,8 @@ export const baseMapTests = (
   mapAdapterCreate: (
     MA: Type<MapAdapter>,
     opt?: MapOptions,
-    param?: MapAdapterCreateOptions
-  ) => Promise<MapAdapter | WebMap>
+    param?: MapAdapterCreateOptions,
+  ) => Promise<MapAdapter | WebMap>,
 ) => {
   // let map: MapAdapter;
   beforeEach(() => {

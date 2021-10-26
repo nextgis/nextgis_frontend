@@ -117,11 +117,15 @@ export class WebMapLayers<
    */
   getLayerId(layerDef: LayerDef): string | undefined {
     const layer = this.getLayer(layerDef);
-    if (layer && layer.options) {
-      return layer.options.id;
-    } else {
-      throw new Error('No id for layer');
+    if (layer) {
+      if (layer.id) {
+        return layer?.id;
+      }
+      if (layer && layer.options) {
+        return layer.options.id;
+      }
     }
+    throw new Error('No id for layer');
   }
 
   /**
