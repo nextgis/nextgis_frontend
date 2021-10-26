@@ -1,5 +1,5 @@
 {
-  "name": "Add webmap from NGW Cloud",
-  "description": "Add webmap resource from NGW cloud to the map",
+  "name": "Ngw viewer",
+  "description": "Navigate the resource tree and open the allowed layers map preview",
   "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"]
 }
