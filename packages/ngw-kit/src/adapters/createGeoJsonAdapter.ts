@@ -183,14 +183,16 @@ export async function createGeoJsonAdapter(
         filterArgs.options.intersects = webMap.getBounds();
         const { minZoom, maxZoom } = this.options;
         const zoom = webMap.getZoom();
-        if (minZoom !== undefined && zoom < minZoom) {
-          return;
-        }
-        if (maxZoom !== undefined && zoom > maxZoom) {
-          return;
-        }
-        if (_fullDataLoad) {
-          return;
+        if (zoom !== undefined) {
+          if (minZoom !== undefined && zoom < minZoom) {
+            return;
+          }
+          if (maxZoom !== undefined && zoom > maxZoom) {
+            return;
+          }
+          if (_fullDataLoad) {
+            return;
+          }
         }
       }
       if (removed) {
