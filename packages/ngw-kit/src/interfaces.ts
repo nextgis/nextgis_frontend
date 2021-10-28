@@ -300,11 +300,14 @@ export interface FetchNgwResourceExtent {
   cache?: boolean;
 }
 
-export interface GetNgwItemsOptions<
+export type PropertiesForNgwFilter<
   P extends FeatureProperties = FeatureProperties,
-> extends FetchNgwLayerExtentOptions {
+> = P & { id: number };
+
+export interface GetNgwItemsOptions<P extends FeatureProperties = FeatureProperties>
+  extends FetchNgwLayerExtentOptions {
   paramList?: [string, any][];
-  filters?: PropertiesFilter<P>;
+  filters?: PropertiesFilter<PropertiesForNgwFilter<P>>;
 }
 
 export type FetchNgwItemOptions<
