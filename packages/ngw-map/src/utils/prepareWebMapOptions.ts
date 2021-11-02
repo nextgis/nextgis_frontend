@@ -41,10 +41,10 @@ export function prepareWebMapOptions(options: NgwMapOptions): MapOptions {
   }
   options = deepmerge(OPTIONS, options);
 
-  if (!options.center && !options.bounds) {
-    options.bounds = [-179, -90, 180, 90];
-    options.maxBounds = options.bounds;
-  }
+  // if (!options.center && !options.bounds) {
+  //   options.bounds = [-179, -90, 180, 90];
+  //   options.maxBounds = options.bounds;
+  // }
 
   if (options.connector) {
     kits.push(
