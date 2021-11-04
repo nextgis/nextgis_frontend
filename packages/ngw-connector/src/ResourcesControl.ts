@@ -127,11 +127,11 @@ export class ResourcesControl {
           })
           .then((resources) => {
             if (resources) {
-              resources.forEach((x) => {
+              for (const x of resources) {
                 this.cache.add('resource.item', CancelablePromise.resolve(x), {
                   id: x.resource.id,
                 });
-              });
+              }
             }
             return resources;
           });
