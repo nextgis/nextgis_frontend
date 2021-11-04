@@ -558,13 +558,13 @@ export class NgwMap<
       });
     }
     if (this.options.resources && Array.isArray(this.options.resources)) {
-      this.options.resources.forEach((x) => {
+      for (const x of this.options.resources) {
         const overwriteOptions: Partial<NgwLayerOptions> = {};
         if (!layerFitAllowed) {
           overwriteOptions.fit = false;
         }
         appendNgwResources(resources, x, {}, overwriteOptions);
-      });
+      }
     }
     for (const r of resources) {
       try {
