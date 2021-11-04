@@ -5,7 +5,7 @@ import { SandboxPointLayer } from '../helpers/ngw-orm/SandboxPointLayer';
 import { getMetadataArgsStorage } from '../../packages/ngw-orm/src';
 
 let CONNECTION: Connection;
-const TESTS_GROUP_ID = 446;
+const TESTS_GROUP_ID = 0;
 // const TESTS_GROUP_ID = 3;
 
 function getConnection(): Promise<Connection> {
@@ -13,17 +13,11 @@ function getConnection(): Promise<Connection> {
     return Promise.resolve(CONNECTION);
   }
   return Connection.connect({
-    // baseUrl: 'https://sandbox.nextgis.com/',
-    baseUrl: 'http://geonote.nextgis.com',
+    baseUrl: 'https://sandbox.nextgis.com',
     auth: {
-      login: 'nextgis',
-      password: 'nextgis',
+      login: 'administrator',
+      password: 'demodemo',
     },
-    // baseUrl: 'https://dory.nextgis.com',
-    // auth: {
-    //   login: 'administrator',
-    //   password: 'admin',
-    // },
   }).then((connection) => {
     CONNECTION = connection;
     return connection;
@@ -195,11 +189,8 @@ describe('NgwOrm', function () {
     it(`create feature`, async () => {
       const connection = await getConnection();
 
-      const [Point, created] = await connection.getOrCreateResource(
-        SandboxPointLayer,
-        {
-          parent: SandboxGroup,
-        },
+      const Point = await newPointLayer(
+        'Clone of Point layer for .create feature test',
       );
       const p = new Point();
       p.test = 'test';
@@ -230,7 +221,6 @@ describe('NgwOrm', function () {
         p.coordinates = [104, 52];
         return p;
       });
-
       const savedEntities = await Point.save(entities);
       const ok = savedEntities.every((x) => {
         return String(x.id) === x.test;

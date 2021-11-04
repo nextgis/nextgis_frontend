@@ -25,14 +25,15 @@ module.exports = (config) => {
       'karma-chrome-launcher',
     ],
     files: [
-      { pattern: 'tests/specs/*.ts', type: 'ts' },
+      // { pattern: 'tests/specs/*.spec.ts', type: 'ts' },
       // { pattern: 'tests/specs/properties-filter.spec.ts', type: 'ts' },
       // { pattern: 'tests/specs/cache.spec.ts', type: 'ts' },
       // { pattern: 'tests/specs/area.spec.ts', type: 'ts' },
-      // { pattern: 'tests/internet-specs/*.spec.ts', type: 'ts' },
+      { pattern: 'tests/internet-specs/**/*.spec.ts', type: 'ts' },
     ],
     preprocessors: {
       'tests/specs/*.spec.ts': ['webpack', 'sourcemap'],
+      'tests/internet-specs/**/*.spec.ts': ['webpack', 'sourcemap'],
     },
     webpack: createWebpack({ coverage }),
     webpackMiddleware: {
