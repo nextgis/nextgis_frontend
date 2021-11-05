@@ -463,7 +463,7 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
           logoContainer.parentNode.removeChild(logoContainer);
         }
       } catch (er) {
-        console.log(er);
+        console.warn(er);
       }
       // const credit = new Credit('<div></div>');
       // @ts-ignore

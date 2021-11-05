@@ -30,7 +30,7 @@ export async function getCompanyLogo(
       const imageUrl = urlCreator.createObjectURL(src);
       img.src = imageUrl;
     } catch (er) {
-      console.log(er);
+      console.warn(er);
     }
 
     if (
