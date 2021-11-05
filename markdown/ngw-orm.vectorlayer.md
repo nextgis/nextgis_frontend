@@ -7,9 +7,15 @@
 <b>Signature:</b>
 
 ```typescript
-export declare class VectorLayer<G extends Geometry = Geometry> extends BaseResource 
+export declare class VectorLayer<G extends Geometry = Geometry, P extends GeoJsonProperties = GeoJsonProperties> extends BaseResource 
 ```
 <b>Extends:</b> [BaseResource](./ngw-orm.baseresource.md)
+
+## Constructors
+
+|  Constructor | Modifiers | Description |
+|  --- | --- | --- |
+|  [(constructor)(opt)](./ngw-orm.vectorlayer._constructor_.md) |  | Constructs a new instance of the <code>VectorLayer</code> class |
 
 ## Properties
 

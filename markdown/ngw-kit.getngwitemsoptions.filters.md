@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-filters?: PropertiesFilter<P>;
+filters?: PropertiesFilter<PropertiesForNgwFilter<P>>;
 ```

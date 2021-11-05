@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare class Cache<T extends any = any, O extends Record<string, any> = Record<string, any>> 
+export declare class Cache<T = any, O extends Record<string, any> = Record<string, any>> 
 ```
 
 ## Constructors
@@ -20,10 +20,12 @@ export declare class Cache<T extends any = any, O extends Record<string, any> = 
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
-|  [add(key, valueToSet, options)](./cache.cache_2.add.md) |  |  |
+|  [add(key, valueToSet, options, onlyFull)](./cache.cache_2.add.md) |  |  |
+|  [addFull(key, valueToSet, options)](./cache.cache_2.addfull.md) |  |  |
 |  [all()](./cache.cache_2.all.md) |  |  |
 |  [clean()](./cache.cache_2.clean.md) |  |  |
-|  [delete(key, options)](./cache.cache_2.delete.md) |  |  |
+|  [delete(item)](./cache.cache_2.delete.md) |  |  |
+|  [delete(key, options)](./cache.cache_2.delete_1.md) |  |  |
 |  [match(key, options)](./cache.cache_2.match.md) |  |  |
 |  [matchAll(key, options)](./cache.cache_2.matchall.md) |  |  |
 
