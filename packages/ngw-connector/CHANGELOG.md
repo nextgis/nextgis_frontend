@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.3](https://github.com/nextgis/nextgis_frontend/compare/v1.9.2...v1.9.3) (2021-11-05)
+
+
+### Bug Fixes
+
+* **ngw-сщттусещк:** resource search query parent_id param ([06d44d7](https://github.com/nextgis/nextgis_frontend/commit/06d44d776cd222f75b01f59d929a25c494234f9a))
+* **ngw-connector:** clean cache on resource delete ([0816107](https://github.com/nextgis/nextgis_frontend/commit/0816107542757838811a7ed9b9e814e51912254c))
+* **ngw-kit:** fix like and ilike filter requests ([911f7e3](https://github.com/nextgis/nextgis_frontend/commit/911f7e35159b4dbe171177aa3ab014b1d505fbce))
+
+
+
+
+
 ## [1.9.2](https://github.com/nextgis/nextgis_frontend/compare/v1.9.1...v1.9.2) (2021-10-26)
 
 **Note:** Version bump only for package @nextgis/ngw-connector
