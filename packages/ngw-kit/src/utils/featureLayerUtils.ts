@@ -82,7 +82,17 @@ export function createFeatureFieldFilterQueries<
   const createParam = (pf: PropertyFilter): [string, any] => {
     const [field, operation, value] = pf;
     const isFldStr = field !== 'id' ? 'fld_' : '';
-    return [`${isFldStr}${field}__${operation}`, value];
+    let vStart = '';
+    let vEnd = '';
+    const field_ = String(field)
+      .trim()
+      .replace(/^(%?)(.+?)(%?)$/, (m, a, b, c) => {
+        vStart = a;
+        vEnd = c;
+        return b;
+      });
+    const v = vStart + value + vEnd;
+    return [`${isFldStr}${field_}__${operation}`, v];
   };
 
   if (logic === 'any') {
