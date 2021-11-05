@@ -16,7 +16,7 @@ import type { RequestOptions, ResourceDefinition } from './interfaces';
 export class ResourcesControl {
   cache = new Cache<
     CancelablePromise<ResourceItem | undefined>,
-    { id?: number }
+    { id?: number | string }
   >();
 
   constructor(private connector: NgwConnector) {}
@@ -37,17 +37,27 @@ export class ResourcesControl {
     requestOptions?: RequestOptions,
   ): CancelablePromise<ResourceItem | undefined> {
     const cache = new Cache();
+    const forCache: { keyname?: string; id?: number } = {};
+    const opt = { ...requestOptions, cache: false };
+    if (typeof resource === 'string') {
+      forCache.keyname = resource;
+    } else if (typeof resource === 'number') {
+      forCache.id = resource;
+    } else if (isObject(resource)) {
+      forCache.id = resource.id;
+    }
     const makeRequest = () => {
       if (typeof resource === 'string') {
-        return this._fetchResourceBy({ keyname: resource }, requestOptions);
+        return this._fetchResourceBy({ keyname: resource }, opt);
       } else if (typeof resource === 'number') {
-        return this._fetchResourceById(resource, requestOptions);
+        return this._fetchResourceById(resource, opt);
       } else if (isObject(resource)) {
-        return this._fetchResourceBy(resource, requestOptions);
+        return this._fetchResourceBy(resource, opt);
       }
       return CancelablePromise.resolve(undefined);
     };
-    return cache.add('resource', makeRequest, { resource });
+
+    return cache.addFull('resource', makeRequest, forCache);
   }
 
   getOneOrFail(
@@ -195,11 +205,34 @@ export class ResourcesControl {
     return this.getId(resource).then((id) => {
       if (id !== undefined) {
         return this.connector.delete('resource.item', null, { id }).then(() => {
-          this.cache.delete('resource.item', { id });
+          this._cleanResourceItemCache(id);
           return undefined;
         });
       }
     });
+  }
+
+  private async _cleanResourceItemCache(id: number) {
+    const all = this.cache.all();
+    const toDelete: typeof all = [];
+    for (const c of all) {
+      const cid = c.options && c.options.id;
+      if (['resource.item', 'resource'].includes(c.key) && cid !== undefined) {
+        if (typeof cid === 'number') {
+          if (cid === id) {
+            toDelete.push(c);
+          }
+        } else {
+          const rid = await this.getId(cid);
+          if (rid === id) {
+            toDelete.push(c);
+          }
+        }
+      }
+    }
+    for (const d of toDelete) {
+      this.cache.delete(d);
+    }
   }
 
   private _fetchResourceById(
@@ -207,7 +240,7 @@ export class ResourcesControl {
     requestOptions?: RequestOptions,
   ): CancelablePromise<ResourceItem | undefined> {
     const promise = () =>
-      this.connector.get('resource.item', requestOptions, { id });
+      this.connector.get('resource.item', requestOptions, { id }).catch();
 
     return this.cache
       .add('resource.item', promise, {
