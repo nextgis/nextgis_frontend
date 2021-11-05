@@ -172,6 +172,7 @@ getNgwLayerItems({
 |  [GetClassAdapterCallback](./ngw-kit.getclassadaptercallback.md) |  |
 |  [NgwIdentify](./ngw-kit.ngwidentify.md) |  |
 |  [NgwLayerAdapterType](./ngw-kit.ngwlayeradaptertype.md) |  |
+|  [PropertiesForNgwFilter](./ngw-kit.propertiesforngwfilter.md) |  |
 |  [ResourceIdDef](./ngw-kit.resourceiddef.md) |  |
 |  [ResourceNgwLayerOptions](./ngw-kit.resourcengwlayeroptions.md) |  |
 |  [TileNoData](./ngw-kit.tilenodata.md) |  |
