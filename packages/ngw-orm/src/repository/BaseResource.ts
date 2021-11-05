@@ -72,7 +72,9 @@ export class BaseResource {
     return [];
   }
 
-  static clone(options: Partial<NgwResourceOptions> = {}): typeof BaseResource {
+  static clone<T extends typeof BaseResource = typeof BaseResource>(
+    options: Partial<NgwResourceOptions> = {},
+  ): T {
     const metadataArgsStorage = getMetadataArgsStorage();
     const table = metadataArgsStorage.filterTables(
       this,
