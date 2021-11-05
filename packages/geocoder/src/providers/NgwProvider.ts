@@ -60,7 +60,7 @@ export class NgwProvider extends BaseProvider<NgwProviderOptions> {
       );
       this.requests.push(request);
       request.catch((er) => {
-        console.log(er);
+        console.warn(er);
       });
       const resp = await request;
       const entries: ResourceStoreItem[] = [];

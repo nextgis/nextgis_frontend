@@ -43,14 +43,14 @@ describe('NgwOrm', function () {
 
   before(async () => {
     const connection = await getConnection();
-    await connection.getOrCreateResource(SandboxGroup, {
+    return await connection.getOrCreateResource(SandboxGroup, {
       parent: TESTS_GROUP_ID,
     });
   });
 
   after(async () => {
     const connection = await getConnection();
-    await connection.deleteResource(SandboxGroup);
+    return await connection.deleteResource(SandboxGroup);
   });
 
   describe('Connection', () => {
@@ -63,28 +63,19 @@ describe('NgwOrm', function () {
       const Clone = SandboxGroup.clone({
         display_name: 'Resource Group Clone',
       });
-      const [resource1, created1] = await connection.getOrCreateResource(
-        Clone,
-        {
-          parent: SandboxGroup,
-        },
-      );
-      expect(Clone.connection && Clone.connection.isConnected).to.be.true;
+      const [Res1, created1] = await connection.getOrCreateResource(Clone, {
+        parent: SandboxGroup,
+      });
+      expect(Res1.connection && Res1.connection.isConnected).to.be.true;
       expect(created1).to.be.true;
-      const [resource2, created2] = await connection.getOrCreateResource(
-        Clone,
-        {
-          parent: SandboxGroup,
-        },
-      );
+      const [, created2] = await connection.getOrCreateResource(Clone, {
+        parent: SandboxGroup,
+      });
       expect(created2).to.be.false;
       Clone.item = undefined;
-      const [resource3, created3] = await connection.getOrCreateResource(
-        Clone,
-        {
-          parent: SandboxGroup,
-        },
-      );
+      const [Res3, created3] = await connection.getOrCreateResource(Clone, {
+        parent: SandboxGroup,
+      });
       expect(created3).to.be.false;
     });
     it(`#deleteResource`, async () => {
@@ -92,7 +83,7 @@ describe('NgwOrm', function () {
       const Clone = SandboxGroup.clone({
         display_name: 'Resource Group Clone',
       });
-      const [Res] = await connection.getOrCreateResource(Clone, {
+      const [Res, created] = await connection.getOrCreateResource(Clone, {
         parent: SandboxGroup,
       });
       let notExist = false;
@@ -103,7 +94,8 @@ describe('NgwOrm', function () {
           await connection.deleteResource(Res);
 
           expect(Res.item).to.be.undefined;
-          const afterDelete = await connection.getResource(id);
+          const afterDelete = await connection.getResourceItem(id);
+
           notExist = afterDelete === undefined ? true : false;
         }
       }
