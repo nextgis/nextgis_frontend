@@ -570,7 +570,7 @@ export class NgwMap<
       try {
         await this.addNgwLayer(r);
       } catch (er) {
-        console.log(er);
+        console.warn(er);
       }
     }
     this._emitStatusEvent('ngw-map:create', this);

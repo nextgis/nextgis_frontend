@@ -531,7 +531,7 @@ export class NgwConnector {
       } else {
         // @ts-ignore
         if (__DEV__) {
-          console.warn(httpError);
+          console.warn('DEV WARN', httpError);
         }
         const er = this._handleHttpError(httpError);
         if (er) {
