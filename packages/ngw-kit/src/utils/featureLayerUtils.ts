@@ -149,6 +149,7 @@ export function createFeatureFieldFilterQueries<
 
   return CancelablePromise.all(_queries).then((itemsParts) => {
     const items = itemsParts.reduce((a, b) => a.concat(b), []);
+
     const offset = opt.offset !== undefined ? opt.offset : 0;
     const limit = opt.limit !== undefined ? opt.limit : items.length;
     if (opt.offset || opt.limit) {
