@@ -1,24 +1,24 @@
 import { GeoJsonObject, Feature, FeatureCollection } from 'geojson';
 import {
-  GeoJsonDataSource,
   Color,
-  PinBuilder,
-  Cartesian3,
-  VerticalOrigin,
-  Property,
-  Cartographic,
   Entity,
-  HeightReference,
+  Property,
+  Cartesian3,
+  PinBuilder,
   JulianDate,
+  Cartographic,
+  VerticalOrigin,
+  HeightReference,
+  GeoJsonDataSource,
 } from 'cesium';
 import { isPaintCallback, isBasePaint, isPaint } from '@nextgis/paint';
 
 import type { LngLatBoundsArray } from '@nextgis/utils';
 import type {
-  LayerDefinition,
-  DataLayerFilter,
-  VectorLayerAdapter,
   GeoJsonAdapterOptions,
+  VectorLayerAdapter,
+  DataLayerFilter,
+  LayerDefinition,
 } from '@nextgis/webmap';
 import { PropertiesFilter } from '@nextgis/properties-filter';
 import type {
@@ -29,10 +29,10 @@ import type {
 } from '@nextgis/paint';
 
 import { BaseAdapter, Map } from './BaseAdapter';
-import { whenSampleTerrainMostDetailed } from '../utils/whenSampleTerrainMostDetailed';
 import { isFeature3D } from '../utils/isFeature3D';
 import { getEntitiesBoundingSphere } from '../utils/getEntitiesBoundingSphere';
 import { getBoundsFromBoundingSphere } from '../utils/getBoundsFromBoundingSphere';
+import { whenSampleTerrainMostDetailed } from '../utils/whenSampleTerrainMostDetailed';
 
 type Layer = GeoJsonDataSource;
 
@@ -43,14 +43,14 @@ interface NativeGeojsonOptions {
 type AdapterOptions = GeoJsonAdapterOptions<Feature, any, NativeGeojsonOptions>;
 
 interface GeoJsonDataSourceLoadOptions {
-  sourceUri?: string;
-  markerSize?: number;
-  markerSymbol?: string;
-  markerColor?: Color;
+  fill?: Color;
   stroke?: Color;
   strokeWidth?: number;
-  fill?: Color;
+  markerColor?: Color;
+  markerSize?: number;
+  markerSymbol?: string;
   clampToGround?: boolean;
+  sourceUri?: string;
 }
 
 export class GeoJsonAdapter
@@ -109,7 +109,7 @@ export class GeoJsonAdapter
         this._features.push(data as Feature);
       } else if (data.type === 'FeatureCollection') {
         const featureCollection = data as FeatureCollection;
-        featureCollection.features.forEach((x) => this._features.push(x));
+        this._features.push(...featureCollection.features);
       }
       return this._updateSource().then(() => {
         this.map.scene.requestRender();
@@ -194,7 +194,7 @@ export class GeoJsonAdapter
     if (source) {
       source.entities.removeAll();
       const promises: Promise<any>[] = [];
-      this._features.forEach((x) => {
+      for (const x of this._features) {
         const paint = this._getFeaturePaint(x, this.options.paint);
         if (isBasePaint(paint)) {
           if (paint.type === 'pin') {
@@ -203,7 +203,7 @@ export class GeoJsonAdapter
             promises.push(this._addFromGeoJson(x, paint));
           }
         }
-      });
+      }
       return Promise.all(promises).then((x) => {
         this.watchHeight();
       });
