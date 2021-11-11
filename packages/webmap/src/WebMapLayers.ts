@@ -576,11 +576,11 @@ export class WebMapLayers<
           await this.mapAdapter.hideLayer(l.layer);
         }
       }
+      l.options.visibility = toStatus;
       if (!silent) {
         this._emitLayerEvent(eventName, id, l);
         this._emitLayerEvent('layer:toggle', id, l);
       }
-      l.options.visibility = toStatus;
     };
     if (layer && layer.options.visibility !== toStatus) {
       return this.onMapLoad().then(() => action(layer));
