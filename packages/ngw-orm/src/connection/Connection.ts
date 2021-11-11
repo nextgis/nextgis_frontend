@@ -123,7 +123,6 @@ export class Connection {
       );
       delete payload?.resource?.cls;
 
-      // console.log(JSON.stringify(payload, null, ' '));
       await this.driver.put(
         'resource.item',
         {
@@ -242,7 +241,7 @@ export class Connection {
           res = await resource.connect(exist.resource.id, this);
         }
       } catch (er) {
-        console.log(er);
+        // console.warn(er);
       }
     }
     if (!res) {

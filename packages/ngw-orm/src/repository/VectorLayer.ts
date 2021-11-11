@@ -1,12 +1,14 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import {
   Point,
+  Polygon,
+  Feature,
   MultiPoint,
   LineString,
-  MultiLineString,
-  Polygon,
   MultiPolygon,
   GeoJsonTypes,
-  Feature,
+  MultiLineString,
+  GeoJsonProperties,
 } from 'geojson';
 import { FilterOptions } from '@nextgis/webmap';
 import { PropertiesFilter } from '@nextgis/properties-filter';
@@ -71,41 +73,45 @@ type Geometry =
   | Polygon
   | MultiPolygon;
 
-export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
+const aliases: Record<GeometryType, GeoJsonTypes> = {
+  POINT: 'Point',
+  MULTIPOINT: 'MultiPoint',
+  LINESTRING: 'LineString',
+  MULTILINESTRING: 'MultiLineString',
+  POLYGON: 'Polygon',
+  MULTIPOLYGON: 'MultiPolygon',
+  POINTZ: 'Point',
+  MULTIPOINTZ: 'MultiPoint',
+  LINESTRINGZ: 'LineString',
+  MULTILINESTRINGZ: 'MultiLineString',
+  POLYGONZ: 'Polygon',
+  MULTIPOLYGONZ: 'MultiPolygon',
+};
+
+export class VectorLayer<
+  G extends Geometry = Geometry,
+  P extends GeoJsonProperties = GeoJsonProperties,
+> extends BaseResource {
   static geometryType: GeometryType;
+
   id?: number;
+
   private _geom!: G;
-
-  get coordinates(): G['coordinates'] {
-    return this.geom.coordinates;
-  }
-
-  set coordinates(coordinates: G['coordinates']) {
-    const constructor = this.getConstructor();
-    const aliases: Record<GeometryType, GeoJsonTypes> = {
-      POINT: 'Point',
-      MULTIPOINT: 'MultiPoint',
-      LINESTRING: 'LineString',
-      MULTILINESTRING: 'MultiLineString',
-      POLYGON: 'Polygon',
-      MULTIPOLYGON: 'MultiPolygon',
-      POINTZ: 'Point',
-      MULTIPOINTZ: 'MultiPoint',
-      LINESTRINGZ: 'LineString',
-      MULTILINESTRINGZ: 'MultiLineString',
-      POLYGONZ: 'Polygon',
-      MULTIPOLYGONZ: 'MultiPolygon',
-    };
-    const type: GeoJsonTypes = aliases[constructor.geometryType];
-    const geom = { type, coordinates } as G;
-    this._geom = geom;
-  }
 
   get geom(): G {
     return this._geom;
   }
-
   set geom(geom: G) {
+    this._geom = geom;
+  }
+
+  get coordinates(): G['coordinates'] {
+    return this.geom.coordinates;
+  }
+  set coordinates(coordinates: G['coordinates']) {
+    const constructor = this.getConstructor();
+    const type: GeoJsonTypes = aliases[constructor.geometryType];
+    const geom = { type, coordinates } as G;
     this._geom = geom;
   }
 
@@ -504,6 +510,20 @@ export class VectorLayer<G extends Geometry = Geometry> extends BaseResource {
   // ): Promise<void> {
   //   return this.getRepository().clear();
   // }
+  constructor(opt?: { properties?: P; coordinates?: G['coordinates'] }) {
+    super();
+    if (opt) {
+      const { properties, coordinates } = opt;
+      if (coordinates) {
+        this.coordinates = coordinates;
+      }
+      if (properties) {
+        for (const [k, value] of Object.entries(properties)) {
+          Object.defineProperty(this, k, { value, enumerable: true });
+        }
+      }
+    }
+  }
   // // -------------------------------------------------------------------------
   // // Public Methods
   // // -------------------------------------------------------------------------
