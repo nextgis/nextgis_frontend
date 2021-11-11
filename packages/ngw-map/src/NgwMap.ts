@@ -558,19 +558,19 @@ export class NgwMap<
       });
     }
     if (this.options.resources && Array.isArray(this.options.resources)) {
-      this.options.resources.forEach((x) => {
+      for (const x of this.options.resources) {
         const overwriteOptions: Partial<NgwLayerOptions> = {};
         if (!layerFitAllowed) {
           overwriteOptions.fit = false;
         }
         appendNgwResources(resources, x, {}, overwriteOptions);
-      });
+      }
     }
     for (const r of resources) {
       try {
         await this.addNgwLayer(r);
       } catch (er) {
-        console.log(er);
+        console.warn(er);
       }
     }
     this._emitStatusEvent('ngw-map:create', this);

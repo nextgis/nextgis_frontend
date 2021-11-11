@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-static clone(options?: Partial<NgwResourceOptions>): typeof BaseResource;
+static clone<T extends typeof BaseResource = typeof BaseResource>(options?: Partial<NgwResourceOptions>): T;
 ```
 
 ## Parameters
@@ -18,5 +18,5 @@ static clone(options?: Partial<NgwResourceOptions>): typeof BaseResource;
 
 <b>Returns:</b>
 
-typeof [BaseResource](./ngw-orm.baseresource.md)
+T
 

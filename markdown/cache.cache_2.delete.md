@@ -7,15 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-delete(key: string, options?: CacheOptions<O>): void;
+delete(item: CacheItem): void;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  key | string |  |
-|  options | CacheOptions&lt;O&gt; |  |
+|  item | CacheItem |  |
 
 <b>Returns:</b>
 
