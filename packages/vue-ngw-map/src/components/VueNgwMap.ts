@@ -19,6 +19,7 @@ export class VueNgwMap<M = any> extends Vue {
   @Prop({ type: Number }) readonly qmsId!: string;
   @Prop({ type: String }) readonly webMapId!: string;
   @Prop({ type: Object }) readonly mapOptions!: NgwMapOptions;
+  @Prop({ type: Object }) readonly mapAdapterOptions!: Record<string, unknown>;
   @Prop({ type: Array }) readonly bounds!: LngLatBoundsArray;
   @Prop({ type: Boolean }) readonly osm!: boolean;
   @Prop({ type: Number }) readonly setViewDelay!: number;
