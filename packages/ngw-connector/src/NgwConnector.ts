@@ -385,7 +385,7 @@ export class NgwConnector {
       }
       // remove double slash
       url = fixUrlStr(url);
-      return this._loadData(url, options);
+      return this._loadData(encodeURI(url), options);
     } else {
       throw new Error('Empty `url` not allowed');
     }
@@ -531,7 +531,7 @@ export class NgwConnector {
       } else {
         // @ts-ignore
         if (__DEV__) {
-          console.warn(httpError);
+          console.warn('DEV WARN', httpError);
         }
         const er = this._handleHttpError(httpError);
         if (er) {
