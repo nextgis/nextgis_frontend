@@ -104,6 +104,9 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
       view,
       layers: [],
     };
+    if (options.mapAdapterOptions) {
+      Object.assign(defOpt, options.mapAdapterOptions);
+    }
     const mapInitOptions: OlMapOptions = {
       ...defOpt,
       target: this.options.target || 'map',
