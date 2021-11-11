@@ -21,44 +21,51 @@ General view of expression
 
 - E - expression:
 
-    `[key, operator, value]`
+  `[key, operator, value]`
 
-    - key - property name;
-    - operator - `gt`, `lt`, `ge`, `le`, `eq`, `ne`, `in`, `notin`, `like`, `ilike`;
-    - value - anything to compare with property by operator
+  - key - property name;
+  - operator - `gt`, `lt`, `ge`, `le`, `eq`, `ne`, `in`, `notin`, `like`, `ilike`;
+  - value - anything to compare with property by operator
 
-    `in` and `notin`:
+  `in` and `notin`:
 
-        [['id', 'in', [1,2,3]], ['id', 'notin', [1,2,3]]]
+  - [['id', 'in', [1,2,3]], ['id', 'notin', [1,2,3]]]
 
-    `like` and `ilike`:
+  `like` and `ilike`:
 
-        Place `%`-character after or before `key` string to determine the direction of search.
+  Place `%`-character after or before `key` string to determine the direction of search.
 
-        - ['str%', 'like', 'hello']
-        - ['%str%', 'ilike', 'Worl']
+  - ['str%', 'like', 'hello']
+  - ['%str%', 'ilike', 'Worl']
 
 Nesting
 
 `[ [E1], ['any', [E2], [E3, E4] ], ['any', [E5], [E6] ] ] ]`
 
-
-
+Example
 
 ```javascript
 import { propertiesFilter, featureFilter } from '@nextgis/properties-filter';
 
 const properties = {
-    place: 'Tofalaria',
-    area: 21
+  place: 'Tofalaria',
+  area: 21,
 };
 
-propertiesFilter(properties, [['name', 'eq', 'Tofalaria']]);
-propertiesFilter(properties, [['name', 'in', ['Tofalaria', 'Siberia']]]);
-propertiesFilter(properties, [['name%', 'like', 'Tof']]);
+propertiesFilter(properties, [['place', 'eq', 'Tofalaria']]); // true
+propertiesFilter(properties, [['place', 'in', ['Tofalaria', 'Siberia']]]); // true
+propertiesFilter(properties, [['place%', 'like', 'Tof']]); // true
 
-propertiesFilter(properties, [['name', 'eq', 'Tofalaria'], ['area', 'ge', 21]]);
-propertiesFilter(properties, ['any', ['name', 'eq', 'Siberia'], ['area', 'gt', 10]]);
+propertiesFilter(properties, [
+  // 'and', // - by default
+  ['place', 'eq', 'Tofalaria'],
+  ['area', 'ge', 21],
+]); // true
+propertiesFilter(properties, [
+  'any',
+  ['place', 'eq', 'Siberia'],
+  ['area', 'gt', 10],
+]); // true
 ```
 
 ## Commercial support
