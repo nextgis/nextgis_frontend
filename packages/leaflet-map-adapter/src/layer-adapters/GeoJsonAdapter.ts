@@ -57,8 +57,7 @@ export type LayerDef = LayerDefinition<Feature, Layer>;
 
 export class GeoJsonAdapter
   extends BaseAdapter<GeoJsonAdapterOptions>
-  implements VectorLayerAdapter<Map>
-{
+  implements VectorLayerAdapter<Map> {
   layer?: FeatureGroup;
   selected = false;
 
@@ -366,12 +365,10 @@ export class GeoJsonAdapter
     latLng?: LatLngExpression,
   ) {
     const { feature, layer } = def;
-    const {
-      minWidth,
-      autoPan,
-      maxWidth,
-      closeButton: closeButton_,
-    } = { minWidth: 300, ...options };
+    const { minWidth, autoPan, maxWidth, closeButton: closeButton_ } = {
+      minWidth: 300,
+      ...options,
+    };
     const closeButton = closeButton_ ?? !this.options.selectOnHover;
     let popup: Layer;
     const _closeHandlers: PopupOnCloseFunction[] = [];
@@ -589,8 +586,13 @@ export class GeoJsonAdapter
         ok = this._filterFun(def);
       }
       if (ok) {
-        const { popup, popupOptions, selectable, interactive, selectOnHover } =
-          this.options;
+        const {
+          popup,
+          popupOptions,
+          selectable,
+          interactive,
+          selectOnHover,
+        } = this.options;
         // @ts-ignore
         layer.options.interactive = defined(interactive) ? interactive : true;
         layer_.addLayer(layer);
@@ -633,7 +635,7 @@ export class GeoJsonAdapter
   }
 
   private _handleMouseEvents(layer: Layer) {
-    const isSelected = (l: LayerDef) => this._selectedLayers.indexOf(l) !== -1;
+
 
     const { onClick, onLayerClick, onMouseOut, onMouseOver } = this.options;
     // TODO: remove backward compatibility for onLayerClick
@@ -642,8 +644,9 @@ export class GeoJsonAdapter
       layer.on(
         'click',
         (e) => {
+          const selected = !!this._getSelected(layer);
           onClick_({
-            selected: isSelected(e.target),
+            selected,
             ...this._createMouseEvent(e),
           });
         },
@@ -677,6 +680,10 @@ export class GeoJsonAdapter
     });
   }
 
+  private _getSelected(layer: LayerDef["layer"]) {
+    return this._selectedLayers.find((x) => x.layer === layer);
+  }
+
   private _selectOnLayerClick(e: LeafletMouseEvent) {
     DomEvent.stopPropagation(e);
     const layer = e.target as Layer;
@@ -687,7 +694,7 @@ export class GeoJsonAdapter
       feature,
       ...createFeaturePositionOptions(feature),
     };
-    const isSelected = this._selectedLayers.find((x) => x.layer === layer);
+    const isSelected = this._getSelected(layer);
     if (isSelected) {
       if (this.options && this.options.unselectOnSecondClick) {
         this._unSelectLayer(isSelected);

@@ -5,6 +5,7 @@ export function createPopupContent(
   feature: Feature,
   item?: ResourceItem,
 ): HTMLElement | string {
+  // @ts-ignore
   if (__BROWSER__) {
     const element = document.createElement('div');
     if (item && item.feature_layer) {
