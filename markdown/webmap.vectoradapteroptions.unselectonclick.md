@@ -4,7 +4,7 @@
 
 ## VectorAdapterOptions.unselectOnClick property
 
-If false, the selection will be reset when the user clicks the map.  true
+If false, the selection will be reset when the user clicks the map.
 
 <b>Signature:</b>
 

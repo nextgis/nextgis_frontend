@@ -107,7 +107,7 @@ export interface NgwLayerOptions<
    *
    * @remarks
    * In NGW api this parameter is written as follows: `nd=204|404|200`, 200 by default.
-   * @default 200
+   * @defaultValue 200
    */
   tileNoData?: TileNoData;
 }
@@ -304,8 +304,9 @@ export type PropertiesForNgwFilter<
   P extends FeatureProperties = FeatureProperties,
 > = P & { id: number };
 
-export interface GetNgwItemsOptions<P extends FeatureProperties = FeatureProperties>
-  extends FetchNgwLayerExtentOptions {
+export interface GetNgwItemsOptions<
+  P extends FeatureProperties = FeatureProperties,
+> extends FetchNgwLayerExtentOptions {
   paramList?: [string, any][];
   filters?: PropertiesFilter<PropertiesForNgwFilter<P>>;
 }

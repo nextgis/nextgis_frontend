@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-delete(key: string, options?: CacheOptions<O>): void;
+delete(key: string, props?: CacheMatchProps<O>): void;
 ```
 
 ## Parameters
@@ -15,7 +15,7 @@ delete(key: string, options?: CacheOptions<O>): void;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  key | string |  |
-|  options | CacheOptions&lt;O&gt; |  |
+|  props | CacheMatchProps&lt;O&gt; |  |
 
 <b>Returns:</b>
 

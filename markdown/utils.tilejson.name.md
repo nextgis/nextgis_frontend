@@ -4,7 +4,7 @@
 
 ## TileJson.name property
 
-Default: null. A name describing the tileset. The name can contain any legal character. Implementations SHOULD NOT interpret the name as HTML.  null
+Default: null. A name describing the tileset. The name can contain any legal character. Implementations SHOULD NOT interpret the name as HTML.
 
 <b>Signature:</b>
 

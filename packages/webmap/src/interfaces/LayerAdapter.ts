@@ -184,7 +184,7 @@ export interface PopupOptions<F extends Feature = Feature, L = any> {
   fromProperties?: boolean;
   closeButton?: boolean;
   /** Unselect feature on popup close
-   * @default true
+   * @defaultValue true
    */
   unselectOnClose?: boolean;
   createPopupContent?: (
@@ -284,7 +284,7 @@ export interface VectorAdapterOptions<
   unselectOnSecondClick?: boolean;
   /**
    * If false, the selection will be reset when the user clicks the map.
-   * @default true
+   * @defaultValue true
    */
   unselectOnClick?: boolean;
   /**

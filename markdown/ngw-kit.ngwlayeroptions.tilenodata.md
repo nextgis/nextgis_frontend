@@ -14,5 +14,5 @@ tileNoData?: TileNoData;
 
 ## Remarks
 
-In NGW api this parameter is written as follows: `nd=204|404|200`<!-- -->, 200 by default.  200
+In NGW api this parameter is written as follows: `nd=204|404|200`<!-- -->, 200 by default.
 
