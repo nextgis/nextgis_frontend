@@ -180,7 +180,7 @@ export interface LoadingQueue {
 export interface UserInfo {
   display_name: string;
   id: number;
-  // @defaultValue 'guest'
+  /** @defaultValue 'guest' */
   keyname: 'guest' | string;
   clientId?: string;
 }
