@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.4](https://github.com/nextgis/nextgisweb_frontend/compare/v1.9.3...v1.9.4) (2021-11-16)
+
+
+### Bug Fixes
+
+* **leafelt-map-adapter:** selected layer click event param ([751427a](https://github.com/nextgis/nextgisweb_frontend/commit/751427ac854a940b4d7caccb4ad602fab89133ac))
+
+
+### Features
+
+* **cache:** add namespaces support ([5426fa6](https://github.com/nextgis/nextgisweb_frontend/commit/5426fa63e7cc89d79824a3d0ef38881511534bf9))
+* **ol-map-adapter:** add map native adapterOptions parameter ([3368e27](https://github.com/nextgis/nextgisweb_frontend/commit/3368e2750ab1701aa914c1c288c89f5364ea029e))
+
+
+
+
+
 ## [1.9.3](https://github.com/nextgis/nextgisweb_frontend/compare/v1.9.2...v1.9.3) (2021-11-05)
 
 
