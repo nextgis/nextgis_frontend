@@ -15,7 +15,7 @@ export interface TileJson {
    * Default: null. A name describing the tileset. The name can
    * contain any legal character. Implementations SHOULD NOT interpret the
    * name as HTML.
-   * @default null
+   * @defaultValue null
    */
   name?: string;
   /**

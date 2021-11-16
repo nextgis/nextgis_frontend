@@ -1,28 +1,70 @@
 import { objectDeepEqual, objectRemoveEmpty, full } from '@nextgis/utils';
 
 type CacheValue<T> = T;
-type CacheOptions<T> = Record<keyof T, T[keyof T]>;
+type CacheMatchProps<T> = Record<keyof T, T[keyof T]>;
 
 interface CacheItem<T = any, O = any> {
   key: string;
   value: CacheValue<T>;
-  options?: CacheOptions<O>;
+  props?: CacheMatchProps<O>;
+  /** @deprecated use {@link CacheItem.props} instead */
+  options?: CacheMatchProps<O>;
 }
 
+export interface CacheOptions {
+  /**
+   * Cache Scope Separator
+   * @defaultValue 'default'
+   */
+  namespace?: string;
+}
+
+/**
+ * @example
+ * ```javascript
+ * const cache1 = new Cache();
+ * cache1.add('foo', 'value');
+ *
+ * const cache2 = new Cache();
+ * cache2.match('foo'); // value
+ *
+ * const cache3 = new Cache({ namespace: 'foo' });
+ * cache3.match('foo'); // undefined
+ * ```
+ *
+ * @example
+ * ```javascript
+ * let COUNTER = 0;
+ * const createPromise = () => new Promise((res) => {
+ *   COUNTER++
+ *   setTimeout(() => res('Ok'), 300)
+ * });
+ *
+ * const cache = new Cache();
+ * for (let i = 0; i < 10; i++) {
+ *   cache.add('foo', createPromise).then((data) => {
+ *     console.log(data); // 'Ok'
+ *   });
+ * }
+ * console.log(COUNTER); // 1
+ * ```
+ */
 export class Cache<
-  T = any,
-  O extends Record<string, any> = Record<string, any>,
+  V = any,
+  O extends Record<string, unknown> = Record<string, unknown>,
 > {
-  private static instance: Cache<any, any>;
-  private readonly cache: CacheItem<T, O>[] = [];
+  private static instance: Record<
+    string,
+    Cache<unknown, Record<string, unknown>>
+  > = {};
+  private readonly cache: CacheItem<V, O>[] = [];
 
-  constructor() {
-    if (Cache.instance) {
-      return Cache.instance;
+  constructor(options: CacheOptions = {}) {
+    const namespace = options.namespace ?? 'default';
+    if (Cache.instance[namespace]) {
+      return Cache.instance[namespace] as Cache<V, O>;
     }
-
-    Cache.instance = this;
-
+    Cache.instance[namespace] = this;
     return this;
   }
 
@@ -30,53 +72,77 @@ export class Cache<
     this.cache.length = 0;
   }
 
-  all(): CacheItem<T, O>[] {
+  all(): CacheItem<V, O>[] {
     return this.cache;
   }
 
+  /**
+   * Caching only a non-empty value.
+   *
+   * Useful for get or create strategy
+   * @example
+   * ```javascript
+   * const cache = new Cache();
+   * const getItemFunc = () => fetch(url).then((data) => {
+   *  return data.json(); // undefined
+   * });
+   * const item = await cache.addFull('foo', getItemFunc);
+   * if (!item) {
+   *   await createItem(); // 'New item'
+   * }
+   *
+   * // somewhere else in the code
+   * const item = await cache.addFull('foo', getItemFunc).then((resp) => {
+   *   console.log(resp); // 'New item'
+   * })
+   *
+   * ```
+   */
   addFull(
     key: string,
-    valueToSet: CacheValue<T> | (() => CacheValue<T>),
-    options?: CacheOptions<O>,
-  ): CacheValue<T> {
-    return this.add(key, valueToSet, options, true);
+    valueToSet: CacheValue<V> | (() => CacheValue<V>),
+    props?: CacheMatchProps<O>,
+  ): CacheValue<V> {
+    return this.add(key, valueToSet, props, true);
   }
 
   add(
     key: string,
-    valueToSet: CacheValue<T> | (() => CacheValue<T>),
-    options?: CacheOptions<O>,
+    valueToSet: CacheValue<V> | (() => CacheValue<V>),
+    props?: CacheMatchProps<O>,
     onlyFull?: boolean,
-  ): CacheValue<T> {
-    const exist = this._find(key, options);
+  ): CacheValue<V> {
+    const exist = this._find(key, props);
     if (!exist) {
-      let value: CacheValue<T>;
+      let value: CacheValue<V>;
       if (valueToSet instanceof Function) {
         value = valueToSet();
       } else {
         value = valueToSet;
       }
-      const options_ =
-        options && JSON.parse(JSON.stringify(objectRemoveEmpty(options)));
+      const props_ =
+        props && JSON.parse(JSON.stringify(objectRemoveEmpty(props)));
 
-      const cacheItem = {
+      const cacheItem: CacheItem<V, O> = {
         key,
         value,
-        options: options_,
-      } as CacheItem<T, O>;
+        props: props_,
+        // TODO: remove backward compatibility use only props
+        options: props_,
+      };
       if (onlyFull && !full(value)) {
         return value;
       }
       this.cache.push(cacheItem);
       if (value instanceof Promise) {
         value.catch((er) => {
-          this.delete(key, options);
+          this.delete(key, props);
           throw er;
         });
         if (onlyFull) {
           value.then((x) => {
             if (!full(x)) {
-              this.delete(key, options);
+              this.delete(key, props);
             }
             return x;
           });
@@ -89,29 +155,29 @@ export class Cache<
     }
   }
 
-  match(key: string, options?: CacheOptions<O>): CacheValue<T> | undefined {
-    const cacheRecord = this._find(key, options);
+  match(key: string, props?: CacheMatchProps<O>): CacheValue<V> | undefined {
+    const cacheRecord = this._find(key, props);
 
     if (cacheRecord) {
       return cacheRecord.value;
     }
   }
 
-  matchAll(key?: string, options?: CacheOptions<O>): CacheValue<T>[] {
+  matchAll(key?: string, props?: CacheMatchProps<O>): CacheValue<V>[] {
     if (key) {
       return this.cache
-        .filter((x) => this._filter(x, key, options))
+        .filter((x) => this._filter(x, key, props))
         .map((x) => x.value);
     }
     return this.cache.map((x) => x.value);
   }
 
   delete(item: CacheItem): void;
-  delete(key: string, options?: CacheOptions<O>): void;
-  delete(keyOrItem: string | CacheItem, options?: CacheOptions<O>): void {
+  delete(key: string, props?: CacheMatchProps<O>): void;
+  delete(keyOrItem: string | CacheItem, props?: CacheMatchProps<O>): void {
     let exist: CacheItem[] = [];
     if (typeof keyOrItem === 'string') {
-      exist = this.cache.filter((x) => this._filter(x, keyOrItem, options));
+      exist = this.cache.filter((x) => this._filter(x, keyOrItem, props));
     } else {
       exist.push(keyOrItem);
     }
@@ -123,19 +189,21 @@ export class Cache<
 
   private _find(
     key: string,
-    options?: CacheOptions<O>,
-  ): CacheItem<T> | undefined {
-    return this.cache.find((x) => this._filter(x, key, options));
+    props?: CacheMatchProps<O>,
+  ): CacheItem<V> | undefined {
+    return this.cache.find((x) => this._filter(x, key, props));
   }
 
   private _filter(
     item: CacheItem,
     key: string,
-    options?: CacheOptions<O>,
+    props?: CacheMatchProps<O>,
   ): boolean {
     if (item.key === key) {
-      if (options) {
-        return objectDeepEqual(item.options || {}, objectRemoveEmpty(options));
+      if (props) {
+        // TODO: remove backward compatibility
+        const itemProps = item.props || item.options;
+        return objectDeepEqual(itemProps || {}, objectRemoveEmpty(props));
       }
       return true;
     }
