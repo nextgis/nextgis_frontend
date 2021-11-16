@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-match(key: string, options?: CacheOptions<O>): CacheValue<T> | undefined;
+match(key: string, props?: CacheMatchProps<O>): CacheValue<V> | undefined;
 ```
 
 ## Parameters
@@ -15,9 +15,9 @@ match(key: string, options?: CacheOptions<O>): CacheValue<T> | undefined;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  key | string |  |
-|  options | CacheOptions&lt;O&gt; |  |
+|  props | CacheMatchProps&lt;O&gt; |  |
 
 <b>Returns:</b>
 
-CacheValue&lt;T&gt; \| undefined
+CacheValue&lt;V&gt; \| undefined
 

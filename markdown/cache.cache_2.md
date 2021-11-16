@@ -7,25 +7,58 @@
 <b>Signature:</b>
 
 ```typescript
-export declare class Cache<T = any, O extends Record<string, any> = Record<string, any>> 
+export declare class Cache<V = any, O extends Record<string, unknown> = Record<string, unknown>> 
+```
+
+## Example 1
+
+
+```javascript
+const cache1 = new Cache();
+cache1.add('foo', 'value');
+
+const cache2 = new Cache();
+cache2.match('foo'); // value
+
+const cache3 = new Cache({ namespace: 'foo' });
+cache3.match('foo'); // undefined
+```
+
+## Example 2
+
+
+```javascript
+let COUNTER = 0;
+const createPromise = () => new Promise((res) => {
+  COUNTER++
+  setTimeout(() => res('Ok'), 300)
+});
+
+const cache = new Cache();
+for (let i = 0; i < 10; i++) {
+  cache.add('foo', createPromise).then((data) => {
+    console.log(data); // 'Ok'
+  });
+}
+console.log(COUNTER); // 1
 ```
 
 ## Constructors
 
 |  Constructor | Modifiers | Description |
 |  --- | --- | --- |
-|  [(constructor)()](./cache.cache_2._constructor_.md) |  | Constructs a new instance of the <code>Cache</code> class |
+|  [(constructor)(options)](./cache.cache_2._constructor_.md) |  | Constructs a new instance of the <code>Cache</code> class |
 
 ## Methods
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
-|  [add(key, valueToSet, options, onlyFull)](./cache.cache_2.add.md) |  |  |
-|  [addFull(key, valueToSet, options)](./cache.cache_2.addfull.md) |  |  |
+|  [add(key, valueToSet, props, onlyFull)](./cache.cache_2.add.md) |  |  |
+|  [addFull(key, valueToSet, props)](./cache.cache_2.addfull.md) |  | Caching only a non-empty value.<!-- -->Useful for get or create strategy |
 |  [all()](./cache.cache_2.all.md) |  |  |
 |  [clean()](./cache.cache_2.clean.md) |  |  |
 |  [delete(item)](./cache.cache_2.delete.md) |  |  |
-|  [delete(key, options)](./cache.cache_2.delete_1.md) |  |  |
-|  [match(key, options)](./cache.cache_2.match.md) |  |  |
-|  [matchAll(key, options)](./cache.cache_2.matchall.md) |  |  |
+|  [delete(key, props)](./cache.cache_2.delete_1.md) |  |  |
+|  [match(key, props)](./cache.cache_2.match.md) |  |  |
+|  [matchAll(key, props)](./cache.cache_2.matchall.md) |  |  |
 

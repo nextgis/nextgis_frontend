@@ -21,5 +21,5 @@ export interface PopupOptions<F extends Feature = Feature, L = any>
 |  [maxWidth?](./webmap.popupoptions.maxwidth.md) | number | <i>(Optional)</i> |
 |  [minWidth?](./webmap.popupoptions.minwidth.md) | number | <i>(Optional)</i> |
 |  [popupContent?](./webmap.popupoptions.popupcontent.md) | string \| HTMLElement | <i>(Optional)</i> |
-|  [unselectOnClose?](./webmap.popupoptions.unselectonclose.md) | boolean | <i>(Optional)</i> Unselect feature on popup close  true |
+|  [unselectOnClose?](./webmap.popupoptions.unselectonclose.md) | boolean | <i>(Optional)</i> Unselect feature on popup close |
 

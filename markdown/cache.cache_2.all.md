@@ -7,9 +7,9 @@
 <b>Signature:</b>
 
 ```typescript
-all(): CacheItem<T, O>[];
+all(): CacheItem<V, O>[];
 ```
 <b>Returns:</b>
 
-CacheItem&lt;T, O&gt;\[\]
+CacheItem&lt;V, O&gt;\[\]
 

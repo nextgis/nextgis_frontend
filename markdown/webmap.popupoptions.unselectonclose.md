@@ -4,7 +4,7 @@
 
 ## PopupOptions.unselectOnClose property
 
-Unselect feature on popup close  true
+Unselect feature on popup close
 
 <b>Signature:</b>
 

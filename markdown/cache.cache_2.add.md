@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-add(key: string, valueToSet: CacheValue<T> | (() => CacheValue<T>), options?: CacheOptions<O>, onlyFull?: boolean): CacheValue<T>;
+add(key: string, valueToSet: CacheValue<V> | (() => CacheValue<V>), props?: CacheMatchProps<O>, onlyFull?: boolean): CacheValue<V>;
 ```
 
 ## Parameters
@@ -15,11 +15,11 @@ add(key: string, valueToSet: CacheValue<T> | (() => CacheValue<T>), options?: Ca
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  key | string |  |
-|  valueToSet | CacheValue&lt;T&gt; \| (() =&gt; CacheValue&lt;T&gt;) |  |
-|  options | CacheOptions&lt;O&gt; |  |
+|  valueToSet | CacheValue&lt;V&gt; \| (() =&gt; CacheValue&lt;V&gt;) |  |
+|  props | CacheMatchProps&lt;O&gt; |  |
 |  onlyFull | boolean |  |
 
 <b>Returns:</b>
 
-CacheValue&lt;T&gt;
+CacheValue&lt;V&gt;
 

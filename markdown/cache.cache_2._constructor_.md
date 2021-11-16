@@ -9,5 +9,12 @@ Constructs a new instance of the `Cache` class
 <b>Signature:</b>
 
 ```typescript
-constructor();
+constructor(options?: CacheOptions);
 ```
+
+## Parameters
+
+|  Parameter | Type | Description |
+|  --- | --- | --- |
+|  options | CacheOptions |  |
+

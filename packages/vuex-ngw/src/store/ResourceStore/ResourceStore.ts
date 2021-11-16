@@ -39,13 +39,6 @@ export abstract class ResourceStore<
   resourceItems: ResourceStoreItem<P>[] = [];
   fields: FeatureLayerField[] = [];
 
-  get connector(): NgwConnector {
-    return this._connector;
-  }
-  set connector(val: NgwConnector) {
-    this._connector = val;
-  }
-
   _promises: Record<string, Promise<any>> = {};
 
   formatters: {
@@ -63,6 +56,13 @@ export abstract class ResourceStore<
     delete?: (resourceId: number, featureId: number) => Promise<void>;
   } = {};
   private _connector!: NgwConnector;
+
+  get connector(): NgwConnector {
+    return this._connector;
+  }
+  set connector(val: NgwConnector) {
+    this._connector = val;
+  }
 
   @Action({ commit: 'UPDATE_FIELDS' })
   async getFields(): Promise<FeatureLayerField[] | undefined> {
@@ -187,16 +187,16 @@ export abstract class ResourceStore<
         { id, ...FEATURE_REQUEST_PARAMS },
       );
 
-      // clean cache on update
-      const cache = new Cache();
-      cache.all().forEach((item) => {
+      // Clean cache on update
+      const cache = new Cache<any, { params: { id: number; fid: number } }>();
+      for (const item of cache.all()) {
         if (item.key === 'feature_layer.feature.item') {
-          const params = item.options && item.options.params;
-          if (params.id === id && params.fid === fid) {
+          const params = item.props && item.props.params;
+          if (params && params.id === id && params.fid === fid) {
             item.value = CancelablePromise.resolve(item);
           }
         }
-      });
+      }
 
       const newFeature = feature as FeatureItem<P>;
       const newItem = item && item[0];
@@ -295,10 +295,10 @@ export function createResourceStore<
 }): Type<ResourceStore<P, G>> {
   @Module({ dynamic: true, store: options.store, name: options.keyname })
   class RS extends ResourceStore<P, G> {
+    resource = options.keyname;
     get connector() {
       return options.connector;
     }
-    resource = options.keyname;
   }
   return RS;
 }
