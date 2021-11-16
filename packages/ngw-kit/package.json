@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/ngw-kit",
-  "version": "1.9.3",
+  "version": "1.9.4",
   "_priority": 20,
   "description": "This library contains a plugin, a set of utilities and adapters that allow you to interact with NextGIS Web",
   "main": "index.js",
@@ -11,12 +11,12 @@
   "sideEffects": false,
   "dependencies": {
     "@nextgis/cancelable-promise": "^1.8.4",
-    "@nextgis/item": "^1.8.4",
-    "@nextgis/ngw-connector": "^1.9.3",
-    "@nextgis/properties-filter": "^1.8.4",
-    "@nextgis/qms-kit": "^1.9.2",
-    "@nextgis/utils": "^1.8.4",
-    "@nextgis/webmap": "^1.9.2",
+    "@nextgis/item": "^1.9.4",
+    "@nextgis/ngw-connector": "^1.9.4",
+    "@nextgis/properties-filter": "^1.9.4",
+    "@nextgis/qms-kit": "^1.9.4",
+    "@nextgis/utils": "^1.9.4",
+    "@nextgis/webmap": "^1.9.4",
     "@types/events": "^3.0.0",
     "events": "^3.3.0",
     "strict-event-emitter-types": "^2.0.0"
