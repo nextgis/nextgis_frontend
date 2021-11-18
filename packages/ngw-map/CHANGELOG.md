@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.5](https://github.com/nextgis/nextgis_frontend/compare/v1.9.4...v1.9.5) (2021-11-18)
+
+
+### Bug Fixes
+
+* **ngw-map:** return default map bounds ([77b57fc](https://github.com/nextgis/nextgis_frontend/commit/77b57fcfbb49aa1d1d261c9d6bf67be85cddfe1f))
+
+
+
+
+
 ## [1.9.4](https://github.com/nextgis/nextgis_frontend/compare/v1.9.3...v1.9.4) (2021-11-16)
 
 **Note:** Version bump only for package @nextgis/ngw-map
