@@ -260,8 +260,8 @@ export class NgwWebmapItem extends Item<ItemOptions> {
 
     const minZooms = [minZoomWebmap, minZoomLayer].filter(Boolean) as number[];
     const maxZooms = [maxZoomWebmap, maxZoomLayer].filter(Boolean) as number[];
-    const minZoom = Math.max(...minZooms);
-    const maxZoom = Math.min(...maxZooms);
+    const minZoom = minZooms.length ? Math.max(...minZooms) : undefined;
+    const maxZoom = maxZooms.length ? Math.min(...maxZooms) : undefined;
     return { minZoom, maxZoom };
   }
 
