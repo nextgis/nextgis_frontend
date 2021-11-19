@@ -9,7 +9,6 @@
  */
 import 'ol/ol.css';
 import Map from 'ol/Map';
-import '@nextgis/control-container/lib/control-container.css';
 import '@nextgis/ol-map-adapter/lib/ol-map-adapter.css';
 
 import { NgwMap, NgwMapOptions } from '@nextgis/ngw-map';
