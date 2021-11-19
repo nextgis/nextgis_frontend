@@ -233,19 +233,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
       const webmap = data[
         this.webmapClassName as keyof ResourceItem
       ] as WebmapResource;
-      const webMap = this.options.webMap;
-      if (data.basemap_webmap && data.basemap_webmap.basemaps.length) {
-        const activeBaselayer = webMap.getActiveBaseLayer();
-        this._lastActiveBaselayer = activeBaselayer
-          ? activeBaselayer.id
-          : undefined;
-        this._setBasemaps(data.basemap_webmap);
-      } else if (this.options.defaultBasemap) {
-        webMap.addBaseLayer('OSM', {
-          id: 'webmap-default-baselayer',
-          name: 'OpenStreetMap',
-        });
-      }
+      this._setupBaselayers(data);
       if (webmap) {
         this._extent = [
           webmap.extent_left,
@@ -257,6 +245,25 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
         return webmap;
       } else {
         // TODO: resource is no webmap
+      }
+    }
+  }
+
+  private _setupBaselayers(data: ResourceItem) {
+    const webMap = this.options.webMap;
+    const basemap = this.options.useBasemap ?? true;
+    if (basemap) {
+      if (data.basemap_webmap && data.basemap_webmap.basemaps.length) {
+        const activeBaselayer = webMap.getActiveBaseLayer();
+        this._lastActiveBaselayer = activeBaselayer
+          ? activeBaselayer.id
+          : undefined;
+        this._setBasemaps(data.basemap_webmap);
+      } else if (this.options.defaultBasemap) {
+        webMap.addBaseLayer('OSM', {
+          id: 'webmap-default-baselayer',
+          name: 'OpenStreetMap',
+        });
       }
     }
   }

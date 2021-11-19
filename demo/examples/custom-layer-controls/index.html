@@ -32,12 +32,13 @@
     <script>
       const webMapName = 'webmap';
       const qmsBaseLayerName = 'qmsbasemap';
-      let ngwMap = undefined;
-      NgwMap.create({
+      const ngwMap = new NgwMap({
         baseUrl: 'https://demo.nextgis.com',
         target: 'map',
         qmsId: [448, qmsBaseLayerName],
-        webmapId: [4119, webMapName],
+        resources: [
+          { resource: 4119, id: webMapName, useBasemap: false, fit: true },
+        ],
         controls: ['ZOOM', 'ATTRIBUTION', 'ToggleBaseMap'],
         controlsOptions: {
           ToggleBaseMap: {
@@ -50,8 +51,8 @@
             },
           },
         },
-      }).then((ngwMap_) => {
-        ngwMap = ngwMap_;
+      });
+      ngwMap.onLoad().then(() => {
         const toggleHeatMapControl = ngwMap.createButtonControl({
           html: 'D',
           title: 'Toggle DEM',
