@@ -149,6 +149,11 @@ export interface NgwWebmapAdapterOptions<M = any> extends A {
   /** Radius for searching objects in pixels */
   pixelRadius?: number;
   /**
+   * Add baselayers from ngw webmap basemap settings
+   * @defaultValue true;
+   */
+  useBasemap?: boolean;
+  /**
    * Add baselayer from OsmLayerAdapter if no [webmap_resource].basemap_webmap has been set.
    * @defaultValue false
    */
