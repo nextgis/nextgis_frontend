@@ -52,7 +52,7 @@ export type ControlsOptions<
   [control in K]: O[K];
 };
 
-export interface MapControl<M extends any = any> {
+export interface MapControl<M = any> {
   onAdd(map?: M): HTMLElement | undefined;
   onRemove(map?: M): unknown;
   remove?(): void;
