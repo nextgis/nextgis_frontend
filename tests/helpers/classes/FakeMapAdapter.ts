@@ -8,7 +8,6 @@ import {
 } from '../../../packages/webmap/src/interfaces/MapAdapter';
 
 import { LayerAdapter } from '../../../packages/webmap/src/interfaces/LayerAdapter';
-import { Type } from '../../../packages/webmap/src/interfaces/BaseTypes';
 import { EventEmitter } from 'events';
 import {
   MapControls,
@@ -17,16 +16,16 @@ import {
   ButtonControlOptions,
   ToggleControlOptions,
 } from '../../../packages/webmap/src/interfaces/MapControl';
-import { MapOptions } from '../../../packages/webmap/src/interfaces/MapOptions';
 import {
-  LngLatArray,
-  LngLatBoundsArray,
-} from '../../../packages/webmap/src/interfaces/BaseTypes';
+  MapOptions,
+  ViewOptions,
+} from '../../../packages/webmap/src/interfaces/MapOptions';
+
 import { FakeGeoJsonLayerAdapter } from './FakeGeojsonLayerAdapter';
 import { FakeLayerAdapter } from './FakeLayerAdapter';
+import { LngLatArray, LngLatBoundsArray, Type } from '@nextgis/utils';
 
-export class FakeMapAdapter<M extends any = {}, L = any, C extends any = any>
-  implements MA {
+export class FakeMapAdapter<M = any, L = any, C = any> implements MA {
   static layerAdapters = {
     TILE: FakeLayerAdapter,
     IMAGE: FakeLayerAdapter,
@@ -87,7 +86,7 @@ export class FakeMapAdapter<M extends any = {}, L = any, C extends any = any>
   setLayerOrder(
     layer: L,
     order: number,
-    layers?: { [name: string]: LayerAdapter }
+    layers?: { [name: string]: LayerAdapter },
   ): void {
     //
   }
@@ -100,10 +99,14 @@ export class FakeMapAdapter<M extends any = {}, L = any, C extends any = any>
     this.emitter.emit('zoomend');
   }
 
-  setView(lngLat: LngLatArray, zoom?: number): void {
-    this.options.center = lngLat;
-    if (zoom) {
-      this.setZoom(zoom);
+  setView(lngLat: LngLatArray, zoom?: number): void;
+  setView(options: ViewOptions): void;
+  setView(lngLatOrOpt: LngLatArray | ViewOptions, zoom?: number): void {
+    if (Array.isArray(lngLatOrOpt)) {
+      this.options.center = lngLatOrOpt;
+      if (zoom) {
+        this.setZoom(zoom);
+      }
     }
   }
 
@@ -152,7 +155,7 @@ export class FakeMapAdapter<M extends any = {}, L = any, C extends any = any>
   addControl<K extends keyof MapControls>(
     controlName: K | any,
     position: ControlPositions,
-    options?: MapControls[K]
+    options?: MapControls[K],
   ): any {
     //
   }
