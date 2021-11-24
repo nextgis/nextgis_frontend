@@ -27,7 +27,7 @@ export async function getCompanyLogo(
         responseType: 'blob',
       });
       const urlCreator = window.URL || window.webkitURL;
-      const imageUrl = urlCreator.createObjectURL(src);
+      const imageUrl = urlCreator.createObjectURL(src as any);
       img.src = imageUrl;
     } catch (er) {
       console.warn(er);
