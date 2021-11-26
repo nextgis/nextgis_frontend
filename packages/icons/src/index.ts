@@ -2,8 +2,7 @@
  * @module icons
  */
 
-// tslint:disable:max-line-length
-import { IconOptions as WebmapIcoOptions } from '@nextgis/paint';
+import { IconPaint } from '@nextgis/paint';
 
 const svgPath: { [name: string]: string | GetPathCallback } = {
   brill: '<path d="m6 0-5 6 5 6 5-6z"/>',
@@ -62,7 +61,7 @@ function insertSvg(
 
 type GetPathCallback = (opt?: IconOptions) => string;
 
-export function getIcon(opt: IconOptions = {}): WebmapIcoOptions {
+export function getIcon(opt: IconOptions = {}): IconPaint {
   // default values
   const shape = opt.shape || 'circle';
   const color = opt.color || 'blue';
