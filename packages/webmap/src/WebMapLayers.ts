@@ -452,7 +452,7 @@ export class WebMapLayers<
     opt: O = {} as O,
     adapter?: LayerAdapterDefinition<K>,
   ): Promise<VectorLayerAdapter<any, any, any>> {
-    opt = opt || {} as O;
+    opt = opt || ({} as O);
     opt.multiselect = opt.multiselect !== undefined ? opt.multiselect : false;
     opt.unselectOnSecondClick =
       opt.unselectOnSecondClick !== undefined

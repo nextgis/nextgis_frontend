@@ -24,10 +24,7 @@ export async function resourceIdFromLayerOptions(
       resourceId = (resource as ResourceItem).resource.id;
     } else {
       // TODO: safe remove this case
-      resourceId = await resourceIdFromLayerOptions(
-        resource as any,
-        connector,
-      );
+      resourceId = await resourceIdFromLayerOptions(resource as any, connector);
     }
   }
   if (!resourceId && keyname) {
