@@ -34,7 +34,7 @@ export interface NgwMapOptions<C = any> extends MapOptions<C> {
    *
    * @example
    * ```javascript
-   *   var ngwMap = new NgwMap({webmapId: [3985, 'my-webmap']});
+   *   const ngwMap = new NgwMap({webmapId: [3985, 'my-webmap']});
    *   ngwMap.hideLayer('my-webmap');
    * ```
    */
@@ -47,15 +47,49 @@ export interface NgwMapOptions<C = any> extends MapOptions<C> {
    *
    * @example
    * ```javascript
-   *   var ngwMap = new NgwMap({qmsId: [465, 'qms-basemap']});
+   *   const ngwMap = new NgwMap({qmsId: [465, 'qms-basemap']});
    *   ngwMap.hideLayer('qms-basemap');
    * ```
    */
-  resources?: NgwResourceDefinition[];
-
   qmsId?: number | [number, string];
   /**
-   * Shortcut to add OSM baselayer
+   * List of NGW resources to be displayed on the map.
+   *
+   * The resources list may include:
+   *
+   * - number - resource id; // also for resource
+   * - string - resource keyname; // also for resource
+   * - object - configuration of the layer to be added
+   * with the one required parameter `resource` (the comment "also for resource" above refers to it)
+   *
+   * @example
+   * ```javascript
+   * NgwMap.create({
+   *   baseUrl: "https://demo.nextgis.com",
+   *   target: "map",
+   *   resources: [
+   *     // Basemap resource
+   *     1665,
+   *     // Digital Elevation Model (DEM)-style
+   *     4117,
+   *     // Hillshade-style
+   *     { resource: 4115, adapter: "TILE", opacity: 0.3 },
+   *     // Elevation contours-style
+   *     'contours-style',
+   *     // Vector from Order boundary-style
+   *     {
+   *       resource: 4111,
+   *       fit: true,
+   *       adapter: "GEOJSON",
+   *       adapterOptions: { paint: { color: "red", fill: false, weight: 4 } },
+   *     },
+   *   ],
+   * });
+   * ```
+   */
+  resources?: NgwResourceDefinition[];
+  /**
+   * Shortcut to add OSM baselayer.
    */
   osm?: boolean;
   /**
@@ -66,10 +100,12 @@ export interface NgwMapOptions<C = any> extends MapOptions<C> {
   //   path: PathPaint,
   //   icon: IconOptions
   // };
+
   /**
    * Get information from NGW webmap layers by click.
-   *
+   * TODO: find usage
    * @defaultValue false
+   * @internal
    */
   identification?: boolean;
   whitlabel?: boolean;
