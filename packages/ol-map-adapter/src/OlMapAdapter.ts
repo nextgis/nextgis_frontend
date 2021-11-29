@@ -7,6 +7,7 @@ import { fromLonLat, transformExtent, transform } from 'ol/proj';
 
 import { WmsAdapter } from './layer-adapters/WmsAdapter';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
+import { CogAdapter } from './layer-adapters/CogAdapter';
 import { TileAdapter } from './layer-adapters/TileAdapter';
 import { ImageAdapter } from './layer-adapters/ImageAdapter';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
@@ -64,6 +65,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     TILE: TileAdapter,
     WMS: WmsAdapter,
     // MVT: MvtAdapter,
+    // COG: CogAdapter,
     OSM: OsmAdapter,
     GEOJSON: GeoJsonAdapter,
   };
