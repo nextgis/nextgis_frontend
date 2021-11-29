@@ -427,6 +427,7 @@ export interface ImageAdapterOptions extends WmsAdapterOptions {
 export interface LayerAdapters {
   [name: string]: MainLayerAdapter;
   MVT: VectorLayerAdapter;
+  COG: MainLayerAdapter<any, any, RasterAdapterOptions>;
   IMAGE: MainLayerAdapter<any, any, ImageAdapterOptions>;
   WMS: MainLayerAdapter<any, any, WmsAdapterOptions>;
   OSM: MainLayerAdapter;
@@ -442,6 +443,7 @@ export interface LayerAdaptersOptions {
   OSM: RasterAdapterOptions;
   TILE: TileAdapterOptions;
   GEOJSON: GeoJsonAdapterOptions;
+  COG: RasterAdapterOptions;
 }
 
 export interface FeaturePosition {
