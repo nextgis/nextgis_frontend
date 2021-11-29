@@ -1,7 +1,7 @@
 import { LngLatBounds } from 'maplibre-gl';
 import { getCoordinates } from '@nextgis/utils';
 import type { Feature } from 'geojson';
-import type { LayerPosition } from '@nextgis/webmap';
+import type { FeaturePosition } from '@nextgis/webmap';
 import type { LngLatBoundsArray, LngLatArray } from '@nextgis/utils';
 
 function getFeatureLngLatBounds(
@@ -40,7 +40,7 @@ export function getFeatureCenter(
 
 export function createFeaturePositionOptions(
   featureOrFeatures: Feature | Feature[],
-): LayerPosition {
+): FeaturePosition {
   return {
     getBounds: () => getFeatureBounds(featureOrFeatures),
     getCenter: () => getFeatureCenter(featureOrFeatures),

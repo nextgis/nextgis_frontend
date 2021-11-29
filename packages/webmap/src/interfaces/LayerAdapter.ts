@@ -21,7 +21,7 @@ export type OnLayerSelectType = 'api' | 'click' | 'hover';
 export interface OnLayerSelectOptions<
   F extends Feature = Feature,
   L = LayerAdapter,
-> extends LayerPosition {
+> extends FeaturePosition {
   layer: L;
   features?: F[] | undefined;
   type: OnLayerSelectType;
@@ -36,7 +36,7 @@ export type OnLayerClickOptions<
 export interface OnLayerMouseOptions<
   F extends Feature = Feature,
   L = LayerAdapter,
-> extends LayerPosition {
+> extends FeaturePosition {
   layer: L;
   event: MapClickEvent;
   source: any;
@@ -171,8 +171,29 @@ export type PopupOnCloseFunction = (args: LayerDefinition) => void;
 
 export interface CreatePopupContentProps<F extends Feature = Feature, L = any>
   extends LayerDefinition<F, L> {
+  /**
+   * The source of the event call. User `click`, `hover`, or programmatic `api` call
+   */
   type: OnLayerSelectType;
+  /**
+   * Close the pop-up programmatically
+   */
   close: () => void;
+  /**
+   * The callback function that is called when the popup is closed
+   *
+   * @example
+   * ```javascript
+   * createPopupContent: (e) => {
+   *   const onZoomEnd = () => e.close();
+   *   ngwMap.emitter.on('zoomend', onZoomEnd)
+   *   e.onClose(() => {
+   *     ngwMap.emitter.off('zoomend', onZoomEnd)
+   *   })
+   *   return createContentFunc(e);
+   * },
+   * ```
+   */
   onClose: (cb: PopupOnCloseFunction) => void;
 }
 
@@ -342,7 +363,9 @@ export interface VectorAdapterOptions<
   /** Fired when the mouse enters the layer. */
   onMouseOver?(opt: OnLayerMouseOptions<F, L>): void;
   /** Fired when the mouse leaves the layer. */
-  onMouseOut?(opt: Omit<OnLayerMouseOptions<F, L>, keyof LayerPosition>): void;
+  onMouseOut?(
+    opt: Omit<OnLayerMouseOptions<F, L>, keyof FeaturePosition>,
+  ): void;
 
   /** @deprecated use {@link VectorAdapterOptions.onClick} instead */
   onLayerClick?(opt: OnLayerMouseOptions<F, L>): Promise<any>;
@@ -421,16 +444,22 @@ export interface LayerAdaptersOptions {
   GEOJSON: GeoJsonAdapterOptions;
 }
 
-export interface LayerPosition {
+export interface FeaturePosition {
+  /** Get the extent for the geometry on which the action was executed. */
   getBounds: () => LngLatBoundsArray;
+  /** Get the center for the geometry on which the action was executed. */
   getCenter: () => LngLatArray;
 }
 
 export interface LayerDefinition<F extends Feature = Feature, L = any>
-  extends LayerPosition {
+  extends FeaturePosition {
+  /** The adapter in which the layer is created. */
   target: LayerAdapter;
+  /** A vector layer object in geojson format. */
   feature: F;
+  /** Native layer for a specific adapter layers of a specific map adapter. */
   layer?: L;
+  /** Is layer on the map */
   visible?: boolean;
 }
 

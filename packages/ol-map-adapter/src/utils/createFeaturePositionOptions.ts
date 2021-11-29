@@ -5,7 +5,7 @@ import { getCenter } from 'ol/extent';
 
 import type { Feature } from 'geojson';
 import type Geometry from 'ol/geom/Geometry';
-import type { LayerPosition } from '@nextgis/webmap';
+import type { FeaturePosition } from '@nextgis/webmap';
 import type { LngLatArray, LngLatBoundsArray } from '@nextgis/utils';
 
 interface GetFeaturePositionOptions {
@@ -55,7 +55,7 @@ export function getFeaturesCenter(opt: GetFeaturePositionOptions): LngLatArray {
 
 export function createFeaturePositionOptions(
   opt: GetFeaturePositionOptions,
-): LayerPosition {
+): FeaturePosition {
   return {
     getBounds: () => getFeaturesBounds(opt),
     getCenter: () => getFeaturesCenter(opt),
