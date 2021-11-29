@@ -57,7 +57,8 @@ export type LayerDef = LayerDefinition<Feature, Layer>;
 
 export class GeoJsonAdapter
   extends BaseAdapter<GeoJsonAdapterOptions>
-  implements VectorLayerAdapter<Map> {
+  implements VectorLayerAdapter<Map>
+{
   layer?: FeatureGroup;
   selected = false;
 
@@ -365,7 +366,12 @@ export class GeoJsonAdapter
     latLng?: LatLngExpression,
   ) {
     const { feature, layer } = def;
-    const { minWidth, autoPan, maxWidth, closeButton: closeButton_ } = {
+    const {
+      minWidth,
+      autoPan,
+      maxWidth,
+      closeButton: closeButton_,
+    } = {
       minWidth: 300,
       ...options,
     };
@@ -586,13 +592,8 @@ export class GeoJsonAdapter
         ok = this._filterFun(def);
       }
       if (ok) {
-        const {
-          popup,
-          popupOptions,
-          selectable,
-          interactive,
-          selectOnHover,
-        } = this.options;
+        const { popup, popupOptions, selectable, interactive, selectOnHover } =
+          this.options;
         // @ts-ignore
         layer.options.interactive = defined(interactive) ? interactive : true;
         layer_.addLayer(layer);
@@ -635,8 +636,6 @@ export class GeoJsonAdapter
   }
 
   private _handleMouseEvents(layer: Layer) {
-
-
     const { onClick, onLayerClick, onMouseOut, onMouseOver } = this.options;
     // TODO: remove backward compatibility for onLayerClick
     const onClick_ = onClick || onLayerClick;
@@ -680,7 +679,7 @@ export class GeoJsonAdapter
     });
   }
 
-  private _getSelected(layer: LayerDef["layer"]) {
+  private _getSelected(layer: LayerDef['layer']) {
     return this._selectedLayers.find((x) => x.layer === layer);
   }
 
