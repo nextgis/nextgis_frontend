@@ -1,6 +1,7 @@
 import XYZ from 'ol/source/XYZ';
 import TileLayer from 'ol/layer/Tile';
 
+import { getUrlsWithSubdomains } from '../utils/getUrlsWithSubdomains';
 import { setTileLoadFunction } from '../utils/setTileLoadFunction';
 import { resolutionOptions } from '../utils/gerResolution';
 import { BaseAdapter } from './BaseAdapter';
@@ -16,18 +17,10 @@ export class TileAdapter extends BaseAdapter implements MainLayerAdapter {
 
   addLayer(options: TileAdapterOptions): TileLayer<XYZ> {
     Object.assign(this.options, options);
-    const urls: string[] = [];
-    const subdomains: string[] | undefined =
-      typeof options.subdomains === 'string'
-        ? options.subdomains.split('')
-        : options.subdomains;
-    if (subdomains?.length) {
-      subdomains.forEach((x) => {
-        urls.push(options.url.replace(/{s}/, x));
-      });
-    } else {
-      urls.push(options.url);
-    }
+    const urls: string[] = getUrlsWithSubdomains(
+      options.url,
+      options.subdomains,
+    );
     const xyzOpt: Options = {
       attributions: options.attribution ? [options.attribution] : [],
       urls,
