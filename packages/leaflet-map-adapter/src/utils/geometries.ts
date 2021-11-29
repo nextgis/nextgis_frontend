@@ -9,7 +9,7 @@ import type {
   GeoJsonGeometryTypes,
 } from 'geojson';
 import type { LatLngBounds } from 'leaflet';
-import type { LayerPosition, VectorAdapterLayerType } from '@nextgis/webmap';
+import type { FeaturePosition, VectorAdapterLayerType } from '@nextgis/webmap';
 import type { LngLatArray, LngLatBoundsArray } from '@nextgis/utils';
 
 export const typeAlias: {
@@ -91,7 +91,7 @@ export function getFeaturesCenter(features: Feature | Feature[]): LngLatArray {
 
 export function createFeaturePositionOptions(
   features: Feature | Feature[],
-): LayerPosition {
+): FeaturePosition {
   return {
     getBounds: () => getFeaturesBounds(features),
     getCenter: () => getFeaturesCenter(features),
