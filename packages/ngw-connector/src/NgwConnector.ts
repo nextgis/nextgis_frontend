@@ -162,7 +162,7 @@ export class NgwConnector {
       // withCredentials: true
     };
 
-    // Do not use request('auth.current_user') to avoid circular-references
+    // Do not use apiRequest('auth.current_user') to avoid circular-references
     return this.makeQuery('/api/component/auth/current_user', {}, options)
       .then((data: UserInfo) => {
         this.user = data;
