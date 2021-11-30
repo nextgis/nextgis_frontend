@@ -20,5 +20,6 @@ export interface NgwWebmapAdapterOptions<M = any> extends A
 |  [pixelRadius?](./ngw-kit.ngwwebmapadapteroptions.pixelradius.md) | number | <i>(Optional)</i> Radius for searching objects in pixels |
 |  [resourceId](./ngw-kit.ngwwebmapadapteroptions.resourceid.md) | [ResourceIdDef](./ngw-kit.resourceiddef.md) |  |
 |  [selectable?](./ngw-kit.ngwwebmapadapteroptions.selectable.md) | boolean | <i>(Optional)</i> |
+|  [useBasemap?](./ngw-kit.ngwwebmapadapteroptions.usebasemap.md) | boolean | <i>(Optional)</i> Add baselayers from ngw webmap basemap settings |
 |  [webMap](./ngw-kit.ngwwebmapadapteroptions.webmap.md) | [WebMap](./webmap.webmap.md)<!-- -->&lt;M&gt; |  |
 

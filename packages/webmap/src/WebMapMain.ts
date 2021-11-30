@@ -42,7 +42,7 @@ const OPTIONS: MapOptions = {
   minZoom: 0,
   maxZoom: 20,
   paint: {
-    color: 'blue',
+    color: '#0000ff', // blue
     opacity: 0.4,
     strokeOpacity: 1,
     stroke: true,
@@ -50,7 +50,7 @@ const OPTIONS: MapOptions = {
     weight: 1,
   },
   selectedPaint: {
-    color: 'darkblue',
+    color: '#00008b', // darkblue
     opacity: 0.4,
     strokeOpacity: 1,
     stroke: true,

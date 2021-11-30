@@ -1,4 +1,4 @@
-import { preparePaint } from '@nextgis/paint';
+import { Paint, preparePaint } from '@nextgis/paint';
 import { propertiesFilter } from '@nextgis/properties-filter';
 
 import { updateGeoJsonAdapterOptions } from './utils/updateGeoJsonAdapterOptions';
@@ -805,6 +805,31 @@ export class WebMapLayers<
     const adapter = layerMem as VectorLayerAdapter;
     if (adapter && adapter.clearLayer) {
       adapter.clearLayer(cb);
+    }
+  }
+
+  setLayerPaint(layerDef: LayerDef, paint?: Paint | null): void {
+    const layer = this.getLayer(layerDef);
+    if (paint && layer && layer.setPaint) {
+      layer.setPaint(paint);
+    }
+  }
+  setLayerSelectedPaint(layerDef: LayerDef, paint?: Paint | null): void {
+    const layer = this.getLayer(layerDef);
+    if (paint && layer && layer.setSelectedPaint) {
+      layer.setSelectedPaint(paint);
+    }
+  }
+  updateLayerPaint(layerDef: LayerDef, paint: Partial<Paint>): void {
+    const layer = this.getLayer(layerDef);
+    if (paint && layer && layer.updatePaint) {
+      layer.updatePaint(paint);
+    }
+  }
+  updateLayerSelectedPaint(layerDef: LayerDef, paint: Partial<Paint>): void {
+    const layer = this.getLayer(layerDef);
+    if (paint && layer && layer.updateSelectedPaint) {
+      layer.updateSelectedPaint(paint);
     }
   }
 

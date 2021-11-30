@@ -1,4 +1,4 @@
-import { isPaint, isIcon } from '@nextgis/paint';
+import { isPaint, isIcon, PathPaint } from '@nextgis/paint';
 import { isPropertyFilter, featureFilter } from '@nextgis/properties-filter';
 
 import { getImage } from '../utils/imageIcons';
@@ -259,6 +259,38 @@ export abstract class VectorAdapter<
     }
   }
 
+  setPaint(paint?: Paint | null): void {
+    if (paint) {
+      this.options.paint = paint;
+      if (this.options.type) {
+        this._updateLayerPaint(this.options.type);
+      }
+    }
+  }
+  setSelectedPaint(paint?: Paint | null): void {
+    if (paint) {
+      this.options.selectedPaint = paint;
+      if (this.options.type) {
+        this._updateLayerPaint(this.options.type);
+      }
+    }
+  }
+  updatePaint(paint: Partial<Paint>): void {
+    this.options.paint = { ...this.options.paint, ...paint } as Paint;
+    if (this.options.type) {
+      this._updateLayerPaint(this.options.type);
+    }
+  }
+  updateSelectedPaint(paint: Partial<Paint>): void {
+    this.options.selectedPaint = {
+      ...this.options.selectedPaint,
+      ...paint,
+    } as Paint;
+    if (this.options.type) {
+      this._updateLayerPaint(this.options.type);
+    }
+  }
+
   _onLayerClick(
     e: MapLayerMouseEvent,
   ): Feature<Geometry, GeoJsonProperties> | undefined {
@@ -471,39 +503,50 @@ export abstract class VectorAdapter<
   ): Promise<any> {
     if (isPaint(paint)) {
       const mapboxPaint: any = {};
-      const _paint = { ...PAINT, ...(paint || {}) };
+      const paint_ = { ...PAINT, ...(paint || {}) };
       if (paint.type === 'icon' && paint.html) {
         await this._registerImage(paint);
         return {
           'icon-image': paint.html,
         };
       } else {
+        const pathPaint = paint_ as PathPaint;
         const mapboxType = mapboxTypeAlias[type];
-        let p: keyof typeof _paint;
-        for (p in _paint) {
-          const allowed = allowedByType[type];
-          if (allowed) {
-            const allowedType = allowed.find((x) => {
-              if (typeof x === 'string') {
-                return x === p;
-              } else if (Array.isArray(x)) {
-                return x[0] === p;
+        const allowed = allowedByType[type];
+        if (allowed) {
+          let p: keyof typeof pathPaint;
+          for (p in pathPaint) {
+            // Special case for strokeColor
+            if (
+              type === 'polygon' &&
+              (p === 'color' || p === 'strokeColor') &&
+              pathPaint.stroke
+            ) {
+              mapboxPaint['fill-outline-color'] = pathPaint[p];
+            }
+            if (p !== 'strokeColor') {
+              const allowedType = allowed.find((x) => {
+                if (typeof x === 'string') {
+                  return x === p;
+                } else if (Array.isArray(x)) {
+                  return x[0] === p;
+                }
+                return false;
+              });
+              if (allowedType) {
+                const paramName = Array.isArray(allowedType)
+                  ? allowedType[1]
+                  : allowedType;
+                const opacity = this.options.opacity;
+                let prop = pathPaint[p];
+                if (
+                  opacity !== undefined &&
+                  paramName.indexOf('opacity') !== -1
+                ) {
+                  prop = Number(prop) * opacity;
+                }
+                mapboxPaint[mapboxType + '-' + paramName] = prop;
               }
-              return false;
-            });
-            if (allowedType) {
-              const paramName = Array.isArray(allowedType)
-                ? allowedType[1]
-                : allowedType;
-              const opacity = this.options.opacity;
-              let prop = _paint[p];
-              if (
-                opacity !== undefined &&
-                paramName.indexOf('opacity') !== -1
-              ) {
-                prop = Number(prop) * opacity;
-              }
-              mapboxPaint[mapboxType + '-' + paramName] = prop;
             }
           }
         }

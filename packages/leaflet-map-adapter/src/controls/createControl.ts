@@ -18,6 +18,9 @@ export function createControl(
       if (options.bar) {
         element.classList.add('leaflet-bar');
       }
+      if (options.addClass) {
+        element.classList.add(options.addClass);
+      }
       if (!options.margin && !options.bar) {
         element.style.marginBottom = '0px';
         element.style.marginTop = '0px';
