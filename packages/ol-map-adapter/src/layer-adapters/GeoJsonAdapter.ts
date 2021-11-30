@@ -221,7 +221,7 @@ export class GeoJsonAdapter
     } else if (!this.selected) {
       this.selected = true;
       if (this.selectedPaint) {
-        this.setPaintEachLayer(this.selectedPaint);
+        this._setPaintEachLayer(this.selectedPaint);
       }
     }
   }
@@ -293,6 +293,27 @@ export class GeoJsonAdapter
     }
   }
 
+  setPaint(paint?: Paint | null): void {
+    if (paint) {
+      this.paint = paint;
+      this._setPaintEachLayer(this.paint);
+    }
+  }
+  setSelectedPaint(paint?: Paint | null): void {
+    if (paint) {
+      this.selectedPaint = paint;
+      this._setPaintEachLayer(this.selectedPaint);
+    }
+  }
+  updatePaint(paint: Partial<Paint>): void {
+    this.paint = { ...this.paint, ...paint } as Paint;
+    this._setPaintEachLayer(this.paint);
+  }
+  updateSelectedPaint(paint: Partial<Paint>): void {
+    this.selectedPaint = { ...this.selectedPaint, ...paint } as Paint;
+    this._setPaintEachLayer(this.selectedPaint);
+  }
+
   private _createLayerDefOpts(feature: Feature): LayerDefinition {
     return {
       target: this,
@@ -305,7 +326,7 @@ export class GeoJsonAdapter
     };
   }
 
-  private setPaintEachLayer(paint: Paint) {
+  private _setPaintEachLayer(paint: Paint) {
     if (this.layer) {
       const source = this.layer.getSource();
       const features = source.getFeatures();
