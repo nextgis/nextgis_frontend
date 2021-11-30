@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.10.0](https://github.com/nextgis/nextgisweb_frontend/compare/v1.9.7...v1.10.0) (2021-11-30)
+
+
+### Features
+
+* **webmap:** add setLayerPaint method ([b1ddac5](https://github.com/nextgis/nextgisweb_frontend/commit/b1ddac5140670aba4f40f0861d6792065653c508))
+
+
+
+
+
 ## [1.9.7](https://github.com/nextgis/nextgisweb_frontend/compare/v1.9.6...v1.9.7) (2021-11-19)
 
 
