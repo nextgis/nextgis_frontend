@@ -240,7 +240,7 @@ export class ResourcesControl {
     requestOptions?: RequestOptions,
   ): CancelablePromise<ResourceItem | undefined> {
     const promise = () =>
-      this.connector.get('resource.item', requestOptions, { id }).catch();
+      this.connector.get('resource.item', requestOptions, { id });
 
     return this.cache
       .add('resource.item', promise, {
