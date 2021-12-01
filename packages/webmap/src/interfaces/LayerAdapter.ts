@@ -140,7 +140,7 @@ export interface AdapterOptions<
   headers?: Record<string, any>;
 
   /**
-   * Experimental option to set the  map loading delay  when changing position
+   * Experimental option to set the map loading delay when changing position
    */
   setViewDelay?: number;
   /** Any properties to save in layer.
