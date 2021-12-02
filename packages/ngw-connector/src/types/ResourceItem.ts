@@ -138,7 +138,7 @@ export interface LookupTableResource {
   items: Record<string, string>;
 }
 
-export type ResourceItemDatatype =
+export type VectorFieldDatatype =
   | 'STRING'
   | 'REAL'
   | 'DATE'
@@ -148,8 +148,11 @@ export type ResourceItemDatatype =
   | 'INTEGER'
   | 'BOOLEAN';
 
+/** @deprecated - use {@link VectorFieldDatatype} instead */
+export type ResourceItemDatatype = VectorFieldDatatype;
+
 export interface FeatureLayerField {
-  datatype: ResourceItemDatatype;
+  datatype: VectorFieldDatatype;
   display_name: string;
   grid_visibility: boolean;
   id: number;
