@@ -6,6 +6,7 @@ import { Extent } from 'ol/extent';
 import { fromLonLat, transformExtent, transform } from 'ol/proj';
 
 import { WmsAdapter } from './layer-adapters/WmsAdapter';
+// import { CogAdapter } from './layer-adapters/CogAdapter';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
 import { TileAdapter } from './layer-adapters/TileAdapter';
 import { ImageAdapter } from './layer-adapters/ImageAdapter';
