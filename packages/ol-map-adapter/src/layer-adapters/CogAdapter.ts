@@ -1,9 +1,8 @@
 import GeoTIFF from 'ol/source/GeoTIFF';
 import TileLayer from 'ol/layer/WebGLTile';
 
-import { resolutionOptions } from '../utils/gerResolution';
-
 import { BaseAdapter } from './BaseAdapter';
+import { resolutionOptions } from '../utils/gerResolution';
 
 import type Map from 'ol/Map';
 import type { Options } from 'ol/source/GeoTIFF';
