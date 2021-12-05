@@ -12,7 +12,7 @@ import { defined } from '@nextgis/utils';
 
 import type { Geometry, Feature } from 'geojson';
 import type {
-  ResourceItemDatatype,
+  VectorFieldDatatype,
   ResourceStoreItem,
   FeatureLayerField,
   FeatureItem,
@@ -249,7 +249,7 @@ export abstract class ResourceStore<
   @Mutation
   protected SET_STORE(store: ResourceStoreItem<P>[]): void {
     let prepared = store;
-    const dateFields: ResourceItemDatatype[] = ['DATE', 'DATETIME'];
+    const dateFields: VectorFieldDatatype[] = ['DATE', 'DATETIME'];
     const datefields = this.fields.filter((x) =>
       dateFields.includes(x.datatype),
     );
