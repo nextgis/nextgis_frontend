@@ -8,11 +8,20 @@ Suite of frontend JavaScript-libraries that allow you to speed up building your 
 
 NextGIS Frontend support three main open-source GIS frameworks with common interfaces.
 
-Read more in the [article](http://nextgis.com/blog/nextgis-frontend/).
+## Links
 
-API Documentation [open](https://code-api.nextgis.com/)
+- [NGF Live examples and docs](https://code.nextgis.com)
+- [NGF API](https://code-api.nextgis.com)
+- [NGF Repository](https://github.com/nextgis/nextgis_frontend)
+- [NGF Article](https://nextgis.com/blog/nextgis-frontend)
+- [NGF Tutorials repo](https://github.com/nextgis/ngf-tutorial)
+- [NextGIS official](https://nextgis.com)
+- [NextGIS Web](https://nextgis.com/nextgis-web)
+- [Cloud plans](https://nextgis.com/pricing-base)
+- [On premise](https://nextgis.ru/pricing)
+- [Telegram chat](https://t.me/nextgis_chat)
 
-Some universal examples:
+## Examples
 
 - [Add layer from NGW Cloud](http://code.nextgis.com/demo-examples-ngw-layer)
 - [Add webmap from NGW Cloud](http://code.nextgis.com/demo-examples-ngw-webmap)
@@ -212,7 +221,7 @@ ngwMap.addNgwLayer({ resource: "vector_keyname", adapter: "TILE" });
 
 The `resource` can be id or keyname.
 
-#### Examples
+Examples
 
 [Add different NGW resource](http://code.nextgis.com/demo-examples-ngw-layers)
 
