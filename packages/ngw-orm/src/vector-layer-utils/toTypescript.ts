@@ -1,7 +1,7 @@
 import {
   GeometryType,
   VectorLayerResourceItem,
-  ResourceItemDatatype,
+  VectorFieldDatatype,
 } from '@nextgis/ngw-connector';
 import { capitalize, camelize } from '@nextgis/utils';
 import { VectorLayer } from '../repository/VectorLayer';
@@ -11,7 +11,7 @@ import {
   ToTypescript,
 } from '../options/ToTypescriptOptions';
 
-const dataTypeAlias: Record<ResourceItemDatatype, string> = {
+const dataTypeAlias: Record<VectorFieldDatatype, string> = {
   STRING: 'string',
   REAL: 'number',
   DATE: 'Date',
