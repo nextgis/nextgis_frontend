@@ -7,13 +7,6 @@ To specify the package to build, simply pass its name and the desired build
 formats to output (defaults to `buildOptions.formats` specified in that package,
 or "esm,cjs"):
 
-```
-# name supports fuzzy match. will build all packages with name containing "dom":
-yarn build dom
-
-# specify the format to output
-yarn build core --formats cjs
-```
 */
 
 const fs = require('fs-extra');
@@ -22,7 +15,7 @@ const chalk = require('chalk');
 const execa = require('execa');
 const { gzipSync } = require('zlib');
 const { compress } = require('brotli');
-// const { targets: allTargets, fuzzyMatchTarget } = require('./utils');
+const { getTargets, fuzzyMatchTarget } = require('./utils');
 
 const args = require('minimist')(process.argv.slice(2));
 const targets = args._;
@@ -34,36 +27,60 @@ const sourceMap = args.sourcemap || args.s || watch;
 const isRelease = args.release;
 const buildTypes = args.t || args.types || isRelease;
 const buildAllMatching = args.all || args.a;
+
 const commit = execa.sync('git', ['rev-parse', 'HEAD']).stdout.slice(0, 7);
+const cwd = process.cwd();
+const isSelfPackage_ = cwd.match(/packages[\\, /](\D+)$/);
+const isSelfPackage = isSelfPackage_ && isSelfPackage_[0];
 
 run();
 
 async function run() {
-  const cwd = process.cwd();
-  const target = cwd.match(/packages[\\, /](\D+)$/)[1];
+  if (isRelease) {
+    // remove build cache for release builds to avoid outdated enum values
+    await fs.remove(path.resolve(__dirname, '../node_modules/.rts2_cache'));
+  }
+  const target = isSelfPackage;
   if (target) {
     await build(target);
-    if (!watch) {
-      checkAllSizes([target]);
-    }
+    checkAllSizes([target]);
   } else if (!targets.length) {
-    // await buildAll(allTargets);
-    // checkAllSizes(allTargets);
+    const allTargets = getTargets();
+    await buildAll(allTargets);
+    checkAllSizes(allTargets);
   } else {
-    // await buildAll(fuzzyMatchTarget(targets, buildAllMatching));
-    // checkAllSizes(fuzzyMatchTarget(targets, buildAllMatching));
+    await buildAll(fuzzyMatchTarget(targets, buildAllMatching));
+    checkAllSizes(fuzzyMatchTarget(targets, buildAllMatching));
   }
 }
-
 async function buildAll(targets) {
-  for (const target of targets) {
-    await build(target);
+  await runParallel(require('os').cpus().length, targets, build);
+}
+
+async function runParallel(maxConcurrency, source, iteratorFn) {
+  const ret = [];
+  const executing = [];
+  for (const item of source) {
+    const p = Promise.resolve().then(() => iteratorFn(item, source));
+    ret.push(p);
+
+    if (maxConcurrency <= source.length) {
+      const e = p.then(() => executing.splice(executing.indexOf(e), 1));
+      executing.push(e);
+      if (executing.length >= maxConcurrency) {
+        await Promise.race(executing);
+      }
+    }
   }
+  return Promise.all(ret);
 }
 
 async function build(target) {
   const rootPath = path.resolve(__dirname, '..', '..', '..');
-  const pkgPath = `../${target}`;
+  let pkgPath = `packages/${target}`;
+  if (isSelfPackage) {
+    pkgPath = `../../${target}`;
+  }
   const pkgDir = path.resolve(pkgPath);
   const pkgFullPath = `${pkgDir}/package.json`;
   const pkg = require(pkgFullPath);
@@ -93,7 +110,7 @@ async function build(target) {
       [
         `COMMIT:${commit}`,
         `NODE_ENV:${env}`,
-        `TARGET:${target}`,
+        `TARGET:${target.replace('packages\\', '')}`,
         formats ? `FORMATS:${formats}` : ``,
         buildTypes ? `TYPES:true` : ``,
         prodOnly ? `PROD_ONLY:true` : ``,
@@ -228,7 +245,7 @@ async function build(target) {
 }
 
 function checkAllSizes(targets) {
-  if (devOnly) {
+  if (devOnly && watch) {
     return;
   }
   console.log();
