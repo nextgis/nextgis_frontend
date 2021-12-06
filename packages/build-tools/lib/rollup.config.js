@@ -14,6 +14,7 @@ const rootPath = path.resolve(__dirname, '..', '..', '..');
 const masterVersion = require('../../../lerna.json').version;
 const packagesDir = path.resolve(rootPath, 'packages');
 const packageDir = path.resolve(packagesDir, process.env.TARGET);
+
 const name = path.basename(packageDir);
 const resolve = (p) => path.resolve(packageDir, p);
 const pkg = require(resolve(`package.json`));
@@ -279,6 +280,7 @@ function createMinifiedConfig(format) {
           ecma: 2015,
           pure_getters: true,
         },
+        safari10: true,
       }),
     ],
   );
