@@ -57,7 +57,6 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
   private _lastActiveBaselayer?: string;
 
   constructor(public map: M, public options: NgwWebmapAdapterOptions) {
-    this.options = { ...this.defaultOptions, ...this.options };
     const r = options.resourceId;
 
     if (Array.isArray(r)) {
