@@ -150,7 +150,7 @@ export interface NgwWebmapAdapterOptions<M = any> extends A {
   pixelRadius?: number;
   /**
    * Add baselayers from ngw webmap basemap settings
-   * @defaultValue true;
+   * @defaultValue true
    */
   useBasemap?: boolean;
   /**
@@ -158,6 +158,11 @@ export interface NgwWebmapAdapterOptions<M = any> extends A {
    * @defaultValue false
    */
   defaultBasemap?: boolean;
+  /**
+   * Set max extent from ngw webmap basemap settings
+   * @defaultValue false;
+   */
+  useExtentConstrained?: boolean;
 }
 
 export interface IdentifyRequestOptions {
