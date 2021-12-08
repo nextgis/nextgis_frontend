@@ -109,6 +109,7 @@ export interface WebmapResource {
   extent_right: number;
   extent_bottom: number;
   extent_top: number;
+  extent_constrained: boolean;
   draw_order_enabled: boolean;
   bookmark_resource: ResourceHierarchy;
   root_item: TreeGroup;
