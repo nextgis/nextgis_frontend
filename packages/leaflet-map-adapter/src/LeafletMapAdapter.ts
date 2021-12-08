@@ -1,5 +1,10 @@
 import { EventEmitter } from 'events';
-import { Map, Control, FitBoundsOptions } from 'leaflet';
+import {
+  Map,
+  Control,
+  FitBoundsOptions,
+  LatLngBoundsExpression,
+} from 'leaflet';
 import { convertMapClickEvent } from './utils/convertMapClickEvent';
 import { createButtonControl } from './controls/createButtonControl';
 import { AttributionControl } from './controls/Attribution';
@@ -62,6 +67,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   emitter = new EventEmitter();
   map?: Map;
 
+  private _resizeObserver?: ResizeObserver;
   private _unselectCb: UnselectDef[] = [];
   private _universalEvents: (keyof MainMapEvents)[] = [
     'move',
@@ -108,6 +114,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     if (this.map) {
       this.map.remove();
     }
+    this._stopWatchSizeChangeToUpdateMinZoom();
   }
 
   getContainer(): HTMLElement | undefined {
@@ -160,16 +167,21 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
       }
       if (maxBounds !== undefined) {
         if (maxBounds) {
-          map.setMaxBounds(arrayToBoundsExpression(maxBounds));
+          const b = arrayToBoundsExpression(maxBounds);
+          map.setMaxBounds(b);
+          map.setMinZoom(map.getBoundsZoom(b));
+          this._watchSizeChangeToUpdateMinZoom(b);
         } else {
           // @ts-ignore `null` works for unset maxBounds, but not in typing
           map.setMaxBounds(null);
+          this._stopWatchSizeChangeToUpdateMinZoom();
         }
       }
       if (maxZoom !== undefined) {
         map.setMaxZoom(maxZoom);
       }
       if (minZoom !== undefined) {
+        this._stopWatchSizeChangeToUpdateMinZoom();
         map.setMinZoom(minZoom);
       }
     }
@@ -326,6 +338,29 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     }
     this._unselectCb.length = 0;
     this._unselectCb.push(cb);
+  }
+
+  private _watchSizeChangeToUpdateMinZoom(bounds: LatLngBoundsExpression) {
+    this._stopWatchSizeChangeToUpdateMinZoom();
+    const container = this.getContainer();
+    const map = this.map;
+    if (container && map && window.ResizeObserver) {
+      this._resizeObserver = new ResizeObserver(() => {
+        map.setMinZoom(map.getBoundsZoom(bounds));
+      });
+      this._resizeObserver.observe(container);
+    }
+  }
+
+  private _stopWatchSizeChangeToUpdateMinZoom() {
+    const map = this.map;
+    if (map) {
+      map.setMinZoom(0);
+    }
+    if (this._resizeObserver) {
+      this._resizeObserver.disconnect();
+      this._resizeObserver = undefined;
+    }
   }
 
   private _addMapListeners() {

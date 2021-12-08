@@ -33,6 +33,10 @@ import type {
 } from './interfaces';
 
 export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
+  private defaultOptions: Partial<NgwWebmapAdapterOptions> = {
+    useExtentConstrained: false,
+  };
+
   layer?: NgwWebmapItem;
 
   NgwWebmapItem: Type<NgwWebmapItem> = NgwWebmapItem;
@@ -53,7 +57,9 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
   private _lastActiveBaselayer?: string;
 
   constructor(public map: M, public options: NgwWebmapAdapterOptions) {
+    this.options = { ...this.defaultOptions, ...this.options };
     const r = options.resourceId;
+
     if (Array.isArray(r)) {
       this.resourceId = r[0];
       this.options.id = r[1];
@@ -69,6 +75,11 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
   async addLayer(options: NgwWebmapAdapterOptions): Promise<any> {
     this.options = { ...this.options, ...options };
     this.layer = await this._getWebMapLayerItem();
+    if (this.options.useExtentConstrained && this._extent) {
+      this.options.webMap.setView({ maxBounds: this._extent });
+      // @ts-ignore
+      window.webmap = this.options.webMap;
+    }
     return this.layer;
   }
 
@@ -88,6 +99,10 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
       if (this._lastActiveBaselayer) {
         this.options.webMap.showLayer(this._lastActiveBaselayer);
       }
+    }
+
+    if (this.options.useExtentConstrained && this._extent) {
+      this.options.webMap.setView({ maxBounds: null });
     }
 
     delete this.layer;
