@@ -74,7 +74,12 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
   async addLayer(options: NgwWebmapAdapterOptions): Promise<any> {
     this.options = { ...this.options, ...options };
     this.layer = await this._getWebMapLayerItem();
-    if (this.options.useExtentConstrained && this._extent) {
+    const extentConstrained = this.response?.webmap?.extent_constrained;
+    if (
+      this.options.useExtentConstrained &&
+      this._extent &&
+      extentConstrained
+    ) {
       this.options.webMap.setView({ maxBounds: this._extent });
       // @ts-ignore
       window.webmap = this.options.webMap;
