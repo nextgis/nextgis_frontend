@@ -114,10 +114,15 @@ export class GeoJsonAdapter
         if (vectorStyle) {
           style.push(vectorStyle);
         }
-        const labelField = this.options.labelField;
+        const { labelField, label } = this.options;
+        let labelStr = '';
         if (labelField) {
-          const label = f.get(labelField);
-          const text = defined(label) ? String(label) : '';
+          labelStr = f.get(labelField);
+        } else if (label) {
+          labelStr = label(this._createLayerDefOpts(getFeature(f)));
+        }
+        if (labelStr) {
+          const text = defined(labelStr) ? String(labelStr) : '';
           if (text) {
             const labelStyle = labelStyleFunction(options.type || 'polygon', {
               // ratio: this.options.ratio,

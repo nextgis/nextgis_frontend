@@ -330,7 +330,7 @@ export interface VectorAdapterOptions<
   clusterRadius?: number;
   labelOnHover?: boolean;
   labelField?: keyof P extends null ? string : keyof P;
-  label?: (e: LayerDefinition<F, L>) => void | string;
+  label?: (e: LayerDefinition<F, L>) => string;
 
   /**
    * @internal
