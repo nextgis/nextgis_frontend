@@ -142,6 +142,7 @@ export class GeoJsonAdapter
       if (values.length) {
         this.selected = true;
         const entry = values[values.length - 1];
+
         this.map.selectedEntity = entry;
         this.map.scene.requestRender();
       }
@@ -331,7 +332,7 @@ export class GeoJsonAdapter
 
       const dataSource = new GeoJsonDataSource();
       return dataSource.load(feature, options).then((x) => {
-        dataSource.entities.values.forEach((y) => {
+        for (const y of dataSource.entities.values) {
           const height = this._getEntityHeight(y, paint);
           if (height && y.polygon) {
             // if define through CallbackProperty, then fps drops dramatically
@@ -344,7 +345,7 @@ export class GeoJsonAdapter
             y.description = description;
           }
           source.entities.add(y);
-        });
+        }
       });
     }
     return Promise.resolve();
@@ -377,6 +378,16 @@ export class GeoJsonAdapter
     }
   }
 
+  private _getEntityPosition(entity: Entity): Cartesian3 | undefined {
+    let position: Cartesian3 | undefined;
+    if (entity.polygon) {
+      position = entity.polygon.hierarchy?.getValue(JulianDate.now()).positions[0];
+    } else if (entity.point) {
+      console.log(entity.point);
+    }
+    return position;
+  }
+
   private watchHeight() {
     const watchTerrainChange =
       this.options.nativeOptions &&
@@ -387,19 +398,13 @@ export class GeoJsonAdapter
       const entities = this._source.entities.values;
       const entriesOnTerrain: Entity[] = [];
       const terrainSamplePositions: Cartographic[] = [];
-      entities.forEach((x) => {
-        let position: Cartesian3 | undefined;
-        if (x.polygon) {
-          position = x.polygon.hierarchy?.getValue(JulianDate.now())
-            .positions[0];
-        } else if (x.point) {
-          console.log(x.point);
-        }
+      for (const x of entities) {
+        const position = this._getEntityPosition(x);
         if (position) {
           terrainSamplePositions.push(Cartographic.fromCartesian(position));
           entriesOnTerrain.push(x);
         }
-      });
+      }
       if (entriesOnTerrain.length) {
         whenSampleTerrainMostDetailed(
           this.map.terrainProvider,
