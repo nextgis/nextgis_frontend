@@ -116,7 +116,7 @@ export class GeoJsonAdapter
         }
         const { labelField, label } = this.options;
         let labelStr = '';
-        if (labelField) {
+        if (typeof labelField === 'string') {
           labelStr = f.get(labelField);
         } else if (label) {
           labelStr = label(this._createLayerDefOpts(getFeature(f)));
