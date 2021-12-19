@@ -1,13 +1,16 @@
-const NgwUploader = require('../../lib/ngw-uploader.cjs');
+const NgwUploader = require('@nextgis/ngw-uploader');
+// const NgwUploader = require('../../lib/ngw-uploader.cjs');
 
 const fs = require('fs');
 const path = require('path');
+
+const baseUrl = 'https://sandbox.nextgis.com';
 
 async function upload(filename, paint) {
   const file = fs.readFileSync(path.join(__dirname, filename));
 
   const uploader = new NgwUploader({
-    baseUrl: 'https://sandbox.nextgis.com',
+    baseUrl,
     auth: { login: 'administrator', password: 'demodemo' },
   });
   try {
@@ -21,7 +24,7 @@ async function upload(filename, paint) {
         paint,
       },
     );
-    console.log(resp);
+    console.log(`${baseUrl}/resource/${resp.id}/preview`);
   } catch (er) {
     console.log(er);
   }
