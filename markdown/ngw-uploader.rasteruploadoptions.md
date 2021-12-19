@@ -19,4 +19,6 @@ export interface RasterUploadOptions
 |  [name?](./ngw-uploader.rasteruploadoptions.name.md) | string | <i>(Optional)</i> |
 |  [onProgress?](./ngw-uploader.rasteruploadoptions.onprogress.md) | (percentComplete: number) =&gt; void | <i>(Optional)</i> |
 |  [parentId?](./ngw-uploader.rasteruploadoptions.parentid.md) | number | <i>(Optional)</i> |
+|  [put?](./ngw-uploader.rasteruploadoptions.put.md) | boolean | <i>(Optional)</i> |
+|  [srs?](./ngw-uploader.rasteruploadoptions.srs.md) | { id: number; } | <i>(Optional)</i> |
 

@@ -76,6 +76,10 @@ Make sure CORS is registered in the [NextGIS Web settings](https://docs.nextgis.
 |  [VectorLayer](./ngw-connector.vectorlayer.md) |  |
 |  [VectorLayerResourceItem](./ngw-connector.vectorlayerresourceitem.md) |  |
 |  [WebmapResource](./ngw-connector.webmapresource.md) |  |
+|  [WmsClientConnection](./ngw-connector.wmsclientconnection.md) |  |
+|  [WmsClientLayer](./ngw-connector.wmsclientlayer.md) |  |
+|  [WmsServerService](./ngw-connector.wmsserverservice.md) |  |
+|  [WmsServerServiceLayer](./ngw-connector.wmsserverservicelayer.md) |  |
 
 ## Type Aliases
 
@@ -97,4 +101,5 @@ Make sure CORS is registered in the [NextGIS Web settings](https://docs.nextgis.
 |  [ResourceStoreItem](./ngw-connector.resourcestoreitem.md) |  |
 |  [ResourceStoreItemProperties](./ngw-connector.resourcestoreitemproperties.md) |  |
 |  [Router](./ngw-connector.router.md) |  |
+|  [VectorFieldDatatype](./ngw-connector.vectorfielddatatype.md) |  |
 

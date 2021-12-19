@@ -7,9 +7,9 @@
 <b>Signature:</b>
 
 ```typescript
-export interface OnLayerMouseOptions<F extends Feature = Feature, L = LayerAdapter> extends LayerPosition 
+export interface OnLayerMouseOptions<F extends Feature = Feature, L = LayerAdapter> extends FeaturePosition 
 ```
-<b>Extends:</b> [LayerPosition](./webmap.layerposition.md)
+<b>Extends:</b> [FeaturePosition](./webmap.featureposition.md)
 
 ## Properties
 

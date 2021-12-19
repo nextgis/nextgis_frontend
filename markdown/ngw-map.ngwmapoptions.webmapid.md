@@ -16,7 +16,7 @@ webmapId?: NgwResourceDefinition;
 
 
 ```javascript
-  var ngwMap = new NgwMap({webmapId: [3985, 'my-webmap']});
+  const ngwMap = new NgwMap({webmapId: [3985, 'my-webmap']});
   ngwMap.hideLayer('my-webmap');
 ```
 

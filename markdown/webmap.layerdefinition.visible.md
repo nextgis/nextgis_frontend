@@ -4,6 +4,8 @@
 
 ## LayerDefinition.visible property
 
+Is layer on the map
+
 <b>Signature:</b>
 
 ```typescript

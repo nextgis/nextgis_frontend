@@ -69,6 +69,7 @@ webMap.onLoad().then(() => {
 |  [CreateControlOptions](./webmap.createcontroloptions.md) |  |
 |  [CreatePopupContentProps](./webmap.createpopupcontentprops.md) |  |
 |  [DataLoadError](./webmap.dataloaderror.md) |  |
+|  [FeaturePosition](./webmap.featureposition.md) |  |
 |  [FilterOptions](./webmap.filteroptions.md) |  |
 |  [FitOptions](./webmap.fitoptions.md) | Parameters that control how the fit to object will be work. |
 |  [GeoJsonAdapterOptions](./webmap.geojsonadapteroptions.md) |  |
@@ -79,7 +80,6 @@ webMap.onLoad().then(() => {
 |  [LayerAdapters](./webmap.layeradapters.md) |  |
 |  [LayerAdaptersOptions](./webmap.layeradaptersoptions.md) |  |
 |  [LayerDefinition](./webmap.layerdefinition.md) |  |
-|  [LayerPosition](./webmap.layerposition.md) |  |
 |  [Locate](./webmap.locate.md) |  |
 |  [LocateOptions](./webmap.locateoptions.md) |  |
 |  [LocationEvent](./webmap.locationevent.md) |  |

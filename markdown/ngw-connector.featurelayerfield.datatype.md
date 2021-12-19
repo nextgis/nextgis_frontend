@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-datatype: ResourceItemDatatype;
+datatype: VectorFieldDatatype;
 ```

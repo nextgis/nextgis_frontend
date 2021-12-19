@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-connector?: NgwConnector;
+connector: NgwConnector;
 ```

@@ -20,7 +20,7 @@ export declare class NgwUploader
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [connector?](./ngw-uploader.ngwuploader.connector.md) |  | NgwConnector | <i>(Optional)</i> |
+|  [connector](./ngw-uploader.ngwuploader.connector.md) |  | NgwConnector |  |
 |  [emitter](./ngw-uploader.ngwuploader.emitter.md) |  | EventEmitter |  |
 |  [isLoaded](./ngw-uploader.ngwuploader.isloaded.md) |  | boolean |  |
 |  [options](./ngw-uploader.ngwuploader.options.md) |  | [NgwUploadOptions](./ngw-uploader.ngwuploadoptions.md) |  |
@@ -29,14 +29,17 @@ export declare class NgwUploader
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
-|  [createGroup(name, options)](./ngw-uploader.ngwuploader.creategroup.md) |  |  |
-|  [createInput(opt)](./ngw-uploader.ngwuploader.createinput.md) |  |  |
+|  [\_initialize()](./ngw-uploader.ngwuploader._initialize.md) |  |  |
+|  [createGroup(nameOrOptions, options)](./ngw-uploader.ngwuploader.creategroup.md) |  |  |
+|  [createRaster(options)](./ngw-uploader.ngwuploader.createraster.md) |  |  |
 |  [createResource(meta, name, options)](./ngw-uploader.ngwuploader.createresource.md) |  |  |
-|  [createStyle(newRes, name)](./ngw-uploader.ngwuploader.createstyle.md) |  |  |
+|  [createStyle(opt, name)](./ngw-uploader.ngwuploader.createstyle.md) |  |  |
+|  [createVector(options)](./ngw-uploader.ngwuploader.createvector.md) |  |  |
 |  [createWms(options, name)](./ngw-uploader.ngwuploader.createwms.md) |  |  |
 |  [createWmsConnectedLayer(options, name)](./ngw-uploader.ngwuploader.createwmsconnectedlayer.md) |  |  |
 |  [createWmsConnection(options, name)](./ngw-uploader.ngwuploader.createwmsconnection.md) |  |  |
 |  [fileUpload(file, options)](./ngw-uploader.ngwuploader.fileupload.md) |  |  |
 |  [getResource(id)](./ngw-uploader.ngwuploader.getresource.md) |  |  |
 |  [uploadRaster(file, options)](./ngw-uploader.ngwuploader.uploadraster.md) |  |  |
+|  [uploadVector(file, options)](./ngw-uploader.ngwuploader.uploadvector.md) |  |  |
 

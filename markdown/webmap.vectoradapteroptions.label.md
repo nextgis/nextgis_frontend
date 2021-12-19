@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-label?: (e: LayerDefinition<F, L>) => void | string;
+label?: (e: LayerDefinition<F, L>) => string;
 ```

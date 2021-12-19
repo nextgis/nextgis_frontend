@@ -7,14 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function fetchIdentifyItem<G extends Geometry = Geometry, P extends FeatureProperties = FeatureProperties>(options: GetIdentifyGeoJsonOptions<G, P>): CancelablePromise<NgwFeatureItemResponse<P, G> | undefined>;
+export declare function fetchIdentifyItem<G extends Geometry = Geometry, P extends FeatureProperties = FeatureProperties>(options: GetIdentifyGeoJsonOptions<P>): CancelablePromise<NgwFeatureItemResponse<P, G> | undefined>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | [GetIdentifyGeoJsonOptions](./ngw-kit.getidentifygeojsonoptions.md)<!-- -->&lt;G, P&gt; |  |
+|  options | [GetIdentifyGeoJsonOptions](./ngw-kit.getidentifygeojsonoptions.md)<!-- -->&lt;P&gt; |  |
 
 <b>Returns:</b>
 

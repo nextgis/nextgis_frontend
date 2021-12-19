@@ -9,7 +9,7 @@
 ```typescript
 export interface ItemOptions extends Pick<AdapterOptions, 'minZoom' | 'maxZoom' | 'crossOrigin' | 'ratio' | 'order' | 'headers' | 'setViewDelay'> 
 ```
-<b>Extends:</b> Pick&lt;AdapterOptions, 'minZoom' \| 'maxZoom' \| 'crossOrigin' \| 'ratio' \| 'order' \| 'headers' \| 'setViewDelay'&gt;
+<b>Extends:</b> Pick&lt;[AdapterOptions](./webmap.adapteroptions.md)<!-- -->, 'minZoom' \| 'maxZoom' \| 'crossOrigin' \| 'ratio' \| 'order' \| 'headers' \| 'setViewDelay'&gt;
 
 ## Properties
 

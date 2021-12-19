@@ -7,19 +7,17 @@
 <b>Signature:</b>
 
 ```typescript
-createStyle(newRes: Record<string, any>, name?: string): CancelablePromise<CreatedResource & {
-        name: string;
-    }> | undefined;
+createStyle(opt: CreateStyleOptions, name?: string | number): CancelablePromise<CreatedRes>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  newRes | Record&lt;string, any&gt; |  |
-|  name | string |  |
+|  opt | [CreateStyleOptions](./ngw-uploader.createstyleoptions.md) |  |
+|  name | string \| number |  |
 
 <b>Returns:</b>
 
-CancelablePromise&lt;[CreatedResource](./ngw-connector.createdresource.md) &amp; { name: string; }&gt; \| undefined
+CancelablePromise&lt;[CreatedRes](./ngw-uploader.createdres.md)<!-- -->&gt;
 

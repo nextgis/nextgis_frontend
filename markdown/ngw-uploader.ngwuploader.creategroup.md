@@ -7,17 +7,17 @@
 <b>Signature:</b>
 
 ```typescript
-createGroup(name: string, options?: GroupOptions): CancelablePromise<CreatedResource> | undefined;
+createGroup(nameOrOptions: string | GroupOptions, options?: GroupOptions): CancelablePromise<CreatedResource>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  name | string |  |
+|  nameOrOptions | string \| [GroupOptions](./ngw-uploader.groupoptions.md) |  |
 |  options | [GroupOptions](./ngw-uploader.groupoptions.md) |  |
 
 <b>Returns:</b>
 
-CancelablePromise&lt;[CreatedResource](./ngw-connector.createdresource.md)<!-- -->&gt; \| undefined
+CancelablePromise&lt;[CreatedResource](./ngw-connector.createdresource.md)<!-- -->&gt;
 

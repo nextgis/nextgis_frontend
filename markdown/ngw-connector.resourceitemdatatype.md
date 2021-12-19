@@ -4,8 +4,15 @@
 
 ## ResourceItemDatatype type
 
+> Warning: This API is now obsolete.
+> 
+> - use [VectorFieldDatatype](./ngw-connector.vectorfielddatatype.md) instead
+> 
+
 <b>Signature:</b>
 
 ```typescript
-export declare type ResourceItemDatatype = 'STRING' | 'REAL' | 'DATE' | 'TIME' | 'DATETIME' | 'BIGINT' | 'INTEGER' | 'BOOLEAN';
+export declare type ResourceItemDatatype = VectorFieldDatatype;
 ```
+<b>References:</b> [VectorFieldDatatype](./ngw-connector.vectorfielddatatype.md)
+

@@ -2,22 +2,12 @@
 
 [Home](./index.md) &gt; [@nextgis/ngw-uploader](./ngw-uploader.md) &gt; [CreateWmsConnectionOptions](./ngw-uploader.createwmsconnectionoptions.md)
 
-## CreateWmsConnectionOptions interface
+## CreateWmsConnectionOptions type
 
 <b>Signature:</b>
 
 ```typescript
-export interface CreateWmsConnectionOptions extends ResourceCreateOptions 
+export declare type CreateWmsConnectionOptions = ResourceCreateOptions & WmsClientConnection;
 ```
-<b>Extends:</b> [ResourceCreateOptions](./ngw-uploader.resourcecreateoptions.md)
-
-## Properties
-
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [capcache?](./ngw-uploader.createwmsconnectionoptions.capcache.md) | string | <i>(Optional)</i> If equal query - query capabilities from service |
-|  [password?](./ngw-uploader.createwmsconnectionoptions.password.md) | string | <i>(Optional)</i> Password to connect to service |
-|  [url](./ngw-uploader.createwmsconnectionoptions.url.md) | string | WMS service url |
-|  [username?](./ngw-uploader.createwmsconnectionoptions.username.md) | string | <i>(Optional)</i> User name to connect to service |
-|  [version?](./ngw-uploader.createwmsconnectionoptions.version.md) | string | <i>(Optional)</i> WMS version |
+<b>References:</b> [ResourceCreateOptions](./ngw-uploader.resourcecreateoptions.md)<!-- -->, [WmsClientConnection](./ngw-connector.wmsclientconnection.md)
 

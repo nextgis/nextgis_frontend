@@ -22,4 +22,7 @@ export interface ResourceItem extends ResourceItemMain
 |  [lookup\_table?](./ngw-connector.resourceitem.lookup_table.md) | [LookupTableResource](./ngw-connector.lookuptableresource.md) | <i>(Optional)</i> |
 |  [vector\_layer?](./ngw-connector.resourceitem.vector_layer.md) | [VectorLayer](./ngw-connector.vectorlayer.md) | <i>(Optional)</i> |
 |  [webmap?](./ngw-connector.resourceitem.webmap.md) | [WebmapResource](./ngw-connector.webmapresource.md) | <i>(Optional)</i> |
+|  [wmsclient\_connection?](./ngw-connector.resourceitem.wmsclient_connection.md) | [WmsClientConnection](./ngw-connector.wmsclientconnection.md) | <i>(Optional)</i> |
+|  [wmsclient\_layer?](./ngw-connector.resourceitem.wmsclient_layer.md) | [WmsClientLayer](./ngw-connector.wmsclientlayer.md) | <i>(Optional)</i> |
+|  [wmsserver\_service?](./ngw-connector.resourceitem.wmsserver_service.md) | [WmsServerService](./ngw-connector.wmsserverservice.md) | <i>(Optional)</i> |
 

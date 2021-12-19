@@ -7,17 +7,17 @@
 <b>Signature:</b>
 
 ```typescript
-fileUpload(file: File, options?: RasterUploadOptions): CancelablePromise<FileMeta | undefined>;
+fileUpload<F extends File = File>(file: F, options?: RasterUploadOptions): CancelablePromise<FileMeta>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  file | File |  |
+|  file | F |  |
 |  options | [RasterUploadOptions](./ngw-uploader.rasteruploadoptions.md) |  |
 
 <b>Returns:</b>
 
-CancelablePromise&lt;[FileMeta](./ngw-connector.filemeta.md) \| undefined&gt;
+CancelablePromise&lt;[FileMeta](./ngw-connector.filemeta.md)<!-- -->&gt;
 

@@ -7,17 +7,17 @@
 <b>Signature:</b>
 
 ```typescript
-uploadRaster(file: File, options: RasterUploadOptions): Promise<any> | undefined;
+uploadRaster<F extends File = File>(file: F, options: RasterUploadOptions): Promise<CreatedRes>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  file | File |  |
+|  file | F |  |
 |  options | [RasterUploadOptions](./ngw-uploader.rasteruploadoptions.md) |  |
 
 <b>Returns:</b>
 
-Promise&lt;any&gt; \| undefined
+Promise&lt;[CreatedRes](./ngw-uploader.createdres.md)<!-- -->&gt;
 

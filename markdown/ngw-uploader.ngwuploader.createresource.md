@@ -4,6 +4,11 @@
 
 ## NgwUploader.createResource() method
 
+> Warning: This API is now obsolete.
+> 
+> - use [NgwUploader.createRaster()](./ngw-uploader.ngwuploader.createraster.md) instead
+> 
+
 <b>Signature:</b>
 
 ```typescript

@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface MapControl<M extends any = any> 
+export interface MapControl<M = any> 
 ```
 
 ## Methods

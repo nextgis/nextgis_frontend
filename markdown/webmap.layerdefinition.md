@@ -7,16 +7,16 @@
 <b>Signature:</b>
 
 ```typescript
-export interface LayerDefinition<F extends Feature = Feature, L = any> extends LayerPosition 
+export interface LayerDefinition<F extends Feature = Feature, L = any> extends FeaturePosition 
 ```
-<b>Extends:</b> [LayerPosition](./webmap.layerposition.md)
+<b>Extends:</b> [FeaturePosition](./webmap.featureposition.md)
 
 ## Properties
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [feature](./webmap.layerdefinition.feature.md) | F |  |
-|  [layer?](./webmap.layerdefinition.layer.md) | L | <i>(Optional)</i> |
-|  [target](./webmap.layerdefinition.target.md) | [LayerAdapter](./webmap.layeradapter.md) |  |
-|  [visible?](./webmap.layerdefinition.visible.md) | boolean | <i>(Optional)</i> |
+|  [feature](./webmap.layerdefinition.feature.md) | F | A vector layer object in geojson format. |
+|  [layer?](./webmap.layerdefinition.layer.md) | L | <i>(Optional)</i> Native layer for a specific adapter layers of a specific map adapter. |
+|  [target](./webmap.layerdefinition.target.md) | [LayerAdapter](./webmap.layeradapter.md) | The adapter in which the layer is created. |
+|  [visible?](./webmap.layerdefinition.visible.md) | boolean | <i>(Optional)</i> Is layer on the map |
 

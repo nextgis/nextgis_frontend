@@ -14,10 +14,11 @@
 
 |  Interface | Description |
 |  --- | --- |
-|  [CreateWmsConnectedLayerOptions](./ngw-uploader.createwmsconnectedlayeroptions.md) |  |
-|  [CreateWmsConnectionOptions](./ngw-uploader.createwmsconnectionoptions.md) |  |
+|  [CreateMapserverStyleOptions](./ngw-uploader.createmapserverstyleoptions.md) |  |
+|  [CreateRasterOptions](./ngw-uploader.createrasteroptions.md) |  |
+|  [CreateStyleOptions](./ngw-uploader.createstyleoptions.md) |  |
+|  [CreateWmsOptions](./ngw-uploader.createwmsoptions.md) |  |
 |  [EmitterStatus](./ngw-uploader.emitterstatus.md) |  |
-|  [GroupOptions](./ngw-uploader.groupoptions.md) |  |
 |  [NgwUploadOptions](./ngw-uploader.ngwuploadoptions.md) |  |
 |  [RasterLayerSourceOptions](./ngw-uploader.rasterlayersourceoptions.md) |  |
 |  [RasterRequestLayerOptions](./ngw-uploader.rasterrequestlayeroptions.md) |  |
@@ -27,12 +28,17 @@
 |  [RasterUploadResp](./ngw-uploader.rasteruploadresp.md) |  |
 |  [ResourceCreateOptions](./ngw-uploader.resourcecreateoptions.md) |  |
 |  [RespError](./ngw-uploader.resperror.md) |  |
-|  [UploadInputOptions](./ngw-uploader.uploadinputoptions.md) |  |
+|  [UploadedFile](./ngw-uploader.uploadedfile.md) |  |
+|  [VectorUploadOptions](./ngw-uploader.vectoruploadoptions.md) |  |
 
 ## Type Aliases
 
 |  Type Alias | Description |
 |  --- | --- |
 |  [AvailableStatus](./ngw-uploader.availablestatus.md) |  |
+|  [CreatedRes](./ngw-uploader.createdres.md) |  |
+|  [CreateWmsConnectedLayerOptions](./ngw-uploader.createwmsconnectedlayeroptions.md) |  |
+|  [CreateWmsConnectionOptions](./ngw-uploader.createwmsconnectionoptions.md) |  |
+|  [GroupOptions](./ngw-uploader.groupoptions.md) |  |
 |  [ImageTypes](./ngw-uploader.imagetypes.md) |  |
 

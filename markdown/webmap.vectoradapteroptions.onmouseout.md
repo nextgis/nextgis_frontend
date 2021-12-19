@@ -9,14 +9,14 @@ Fired when the mouse leaves the layer.
 <b>Signature:</b>
 
 ```typescript
-onMouseOut?(opt: Omit<OnLayerMouseOptions<F, L>, keyof LayerPosition>): void;
+onMouseOut?(opt: Omit<OnLayerMouseOptions<F, L>, keyof FeaturePosition>): void;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  opt | Omit&lt;[OnLayerMouseOptions](./webmap.onlayermouseoptions.md)<!-- -->&lt;F, L&gt;, keyof [LayerPosition](./webmap.layerposition.md)<!-- -->&gt; |  |
+|  opt | Omit&lt;[OnLayerMouseOptions](./webmap.onlayermouseoptions.md)<!-- -->&lt;F, L&gt;, keyof [FeaturePosition](./webmap.featureposition.md)<!-- -->&gt; |  |
 
 <b>Returns:</b>
 
