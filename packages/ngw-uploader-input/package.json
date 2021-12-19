@@ -1,31 +1,28 @@
 {
-  "name": "@nextgis/ngw-uploader",
+  "name": "@nextgis/ngw-uploader-input",
   "version": "1.9.4",
   "_priority": 13,
   "description": "",
   "main": "index.js",
-  "module": "lib/ngw-uploader.esm-bundler.js",
-  "unpkg": "lib/ngw-uploader.global.prod.js",
-  "jsdelivr": "lib/ngw-uploader.global.prod.js",
+  "module": "lib/ngw-uploader-input.esm-bundler.js",
+  "unpkg": "lib/ngw-uploader-input.global.prod.js",
+  "jsdelivr": "lib/ngw-uploader-input.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/cancelable-promise": "^1.8.4",
+    "@nextgis/ngw-uploader": "^1.9.4",
     "@nextgis/dialog": "^1.8.4",
     "@nextgis/ngw-connector": "^1.9.4",
-    "@types/color": "^3.0.2",
     "@types/events": "^3.0.0",
-    "color": "^4.1.0",
     "events": "^3.3.0"
   },
   "devDependencies": {
     "@nextgis/build-tools": "^1.8.4"
   },
   "buildOptions": {
-    "name": "NgwUploader",
+    "name": "NgwUploaderInput",
     "formats": [
       "esm-bundler",
       "esm-browser",
-      "cjs",
       "global"
     ]
   },
@@ -46,13 +43,12 @@
     "lib"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-uploader#readme",
+  "homepage": "https://github.com/nextgis/nextgis_frontend/tree/master/packages/ngw-uploader-input#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nextgis/nextgis_frontend.git"
   },
   "bugs": {
     "url": "https://github.com/nextgis/nextgis_frontend/issues"
-  },
-  "gitHead": "edc68033f914f6c95c4125b9738bba6d36e990b4"
+  }
 }

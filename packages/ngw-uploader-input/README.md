@@ -1,6 +1,6 @@
-# Ngw Uploader
+# Ngw Uploader Input
 
-Library providing tools for uploading data to the NGW cloud
+Library for simplifying uploading data to the NGW cloud from the browser
 
 ## Installation
 
@@ -8,15 +8,18 @@ Library providing tools for uploading data to the NGW cloud
 
 #### Include assets
 
-Simply download and include with a script tag. `NgwUploader` will be registered as a global variable.
+Simply download and include with a script tag. `NgwUploaderInput` will be registered as a global variable.
 
 ```html
 <script src="../lib/ngw-uploader.global.prod.js"></script>
-
+<div id='uploader'></div>
 <script>
-  const ngwUploader = new NgwUploader({
-    baseUrl: 'https://sandbox.nextgis.com',
+  var uploader = document.getElementById('uploader');
+  var ngwUploader = new NgwUploader({
+      baseUrl: 'https://sandbox.nextgis.com'
   });
+  const input = ngwUploader.createInput();
+  uploader.appendChild(input);
 </script>
 ```
 
@@ -38,19 +41,20 @@ NPM is the recommended installation method when building large scale application
 
 ```bash
 # latest stable
-$ npm install @nextgis/ngw-uploader
+$ npm install @nextgis/ngw-uploader-input
 ```
 
 ```javascript
-import NgwUploader from '@nextgis/ngw-uploader';
+import NgwUploader from '@nextgis/ngw-uploader-input';
 
 const ngwUploader = new NgwUploader({
-  baseUrl: 'https://sandbox.nextgis.com',
+    baseUrl: 'https://sandbox.nextgis.com'
 });
+
 ```
 
 ## Commercial support
 
-Need to fix a bug or add a feature to `@nextgis/ngw-uploader`? We provide custom development and support for this software. [Contact us](http://nextgis.com/contact/) to discuss options!
+Need to fix a bug or add a feature to `@nextgis/ngw-uploader-input`? We provide custom development and support for this software. [Contact us](http://nextgis.com/contact/) to discuss options!
 
 [![http://nextgis.com](https://nextgis.ru/img/nextgis.png)](http://nextgis.com)
