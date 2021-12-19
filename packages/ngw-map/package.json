@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/ngw-map",
-  "version": "1.10.0",
+  "version": "1.11.0",
   "_priority": 11,
   "description": "",
   "main": "index.js",
@@ -9,18 +9,18 @@
   "jsdelivr": "lib/ngw-map.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/icons": "^1.10.0",
-    "@nextgis/ngw-connector": "^1.9.4",
-    "@nextgis/ngw-kit": "^1.10.0",
-    "@nextgis/qms-kit": "^1.10.0",
-    "@nextgis/utils": "^1.9.4",
-    "@nextgis/webmap": "^1.10.0",
+    "@nextgis/icons": "^1.11.0",
+    "@nextgis/ngw-connector": "^1.11.0",
+    "@nextgis/ngw-kit": "^1.11.0",
+    "@nextgis/qms-kit": "^1.11.0",
+    "@nextgis/utils": "^1.11.0",
+    "@nextgis/webmap": "^1.11.0",
     "@types/events": "^3.0.0",
     "events": "^3.3.0",
     "strict-event-emitter-types": "^2.0.0"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "^1.8.4"
+    "@nextgis/build-tools": "^1.11.0"
   },
   "buildOptions": {
     "name": "NgwMap",

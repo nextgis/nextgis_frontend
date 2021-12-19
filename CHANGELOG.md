@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.11.0](https://github.com/nextgis/nextgisweb_frontend/compare/v1.10.0...v1.11.0) (2021-12-19)
+
+
+### Bug Fixes
+
+* **ngw-kit:** NgwWebmapLayerAdapter constuctor options ([2122b7d](https://github.com/nextgis/nextgisweb_frontend/commit/2122b7d3017bd896fa9c6aac204914cf2e603f39))
+* **ngw-kit:** NgwWebMapLayerAdapter exent constrained ([eedbaeb](https://github.com/nextgis/nextgisweb_frontend/commit/eedbaeb79c13d9774c30a3dc2837e33d04328807))
+* **ol-map-adapter:** geojson labelField only for string ([afa2c93](https://github.com/nextgis/nextgisweb_frontend/commit/afa2c938e2d0efce99d6ea6d990d1a59e77e9168))
+* **ol-map-adapter:** label type for geojson adapter ([f50ceb0](https://github.com/nextgis/nextgisweb_frontend/commit/f50ceb062ffaf13cc76bbea7dc00b99b45908020))
+
+
+### Features
+
+* **leaflet-map-adapter:** setMinZoom on maxExtent ([56cf3b6](https://github.com/nextgis/nextgisweb_frontend/commit/56cf3b6eed50f9b6d8c78a21e733eb015bd67712))
+* **ngw-uploader:** make ability to upload vector resources ([393f0c0](https://github.com/nextgis/nextgisweb_frontend/commit/393f0c0c92fed7da88f9009efd6faf44be912627))
+* **ol-map-adapter:** use geojson layer label calback option ([a849ec7](https://github.com/nextgis/nextgisweb_frontend/commit/a849ec7012d04709ebec00bc4a40a90691b7855c))
+
+
+### BREAKING CHANGES
+
+* **ngw-uploader:** `createInput` and `dialog` methods have been moved from the `@nextgis/ngw-uploader` to the new `@nextgis/ngw-uploader-input`
+
+
+
+
+
 # [1.10.0](https://github.com/nextgis/nextgisweb_frontend/compare/v1.9.7...v1.10.0) (2021-11-30)
 
 

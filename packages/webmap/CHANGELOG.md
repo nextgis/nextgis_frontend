@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.11.0](https://github.com/nextgis/nextgis_frontend/compare/v1.10.0...v1.11.0) (2021-12-19)
+
+
+### Features
+
+* **ol-map-adapter:** use geojson layer label calback option ([a849ec7](https://github.com/nextgis/nextgis_frontend/commit/a849ec7012d04709ebec00bc4a40a90691b7855c))
+
+
+
+
+
 # [1.10.0](https://github.com/nextgis/nextgis_frontend/compare/v1.9.7...v1.10.0) (2021-11-30)
 
 
