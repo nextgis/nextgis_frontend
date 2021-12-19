@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.11.0](https://github.com/nextgis/nextgis_frontend/compare/v1.10.0...v1.11.0) (2021-12-19)
+
+
+### Bug Fixes
+
+* **ol-map-adapter:** geojson labelField only for string ([afa2c93](https://github.com/nextgis/nextgis_frontend/commit/afa2c938e2d0efce99d6ea6d990d1a59e77e9168))
+* **ol-map-adapter:** label type for geojson adapter ([f50ceb0](https://github.com/nextgis/nextgis_frontend/commit/f50ceb062ffaf13cc76bbea7dc00b99b45908020))
+
+
+### Features
+
+* **ol-map-adapter:** use geojson layer label calback option ([a849ec7](https://github.com/nextgis/nextgis_frontend/commit/a849ec7012d04709ebec00bc4a40a90691b7855c))
+
+
+
+
+
 # [1.10.0](https://github.com/nextgis/nextgis_frontend/compare/v1.9.7...v1.10.0) (2021-11-30)
 
 
