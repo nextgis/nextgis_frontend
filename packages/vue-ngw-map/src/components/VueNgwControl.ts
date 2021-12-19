@@ -24,15 +24,13 @@ export class VueNgwControl extends Vue {
   readonly controlOptions!: CreateControlOptions;
 
   parentContainer?: VueNgwMap;
+  name = 'vue-ngw-control';
+  control?: unknown;
+  ready = false;
 
   get ngwMap(): NgwMap | undefined {
     return this.parentContainer && this.parentContainer.ngwMap;
   }
-
-  name = 'vue-ngw-control';
-
-  control?: unknown;
-  ready = false;
 
   beforeDestroy(): void {
     if (this.ngwMap && this.control) {

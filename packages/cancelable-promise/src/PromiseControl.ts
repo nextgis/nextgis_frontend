@@ -10,11 +10,11 @@ type Key = CancelablePromise | string | number | symbol;
 export class PromiseControl {
   private _promises: Map<Key, CancelablePromise> = new Map();
 
+  constructor(private options: PromiseControlOptions = {}) {}
+
   get isLoaded(): boolean {
     return this._promises.size > 0;
   }
-
-  constructor(private options: PromiseControlOptions = {}) {}
 
   remove(promise: Key): void {
     if (this._promises.has(promise)) {
@@ -50,7 +50,7 @@ export class PromiseControl {
     if (this.isLoaded) {
       this._promises.forEach((x) => {
         if (x.cancel) {
-          x.cancel()
+          x.cancel();
         }
       });
       this._promises.clear();

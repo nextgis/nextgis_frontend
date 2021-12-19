@@ -8,7 +8,7 @@ import type {
   AdapterOptions,
   MainLayerAdapter,
   VectorLayerAdapter,
-  OnLayerClickOptions,
+  OnLayerMouseOptions,
   RasterAdapterOptions,
   LayerAdaptersOptions,
   GeoJsonAdapterOptions,
@@ -213,7 +213,7 @@ export type VectorResourceAdapter<
 interface NgwVectorIdentify {
   resources?: number[];
   sourceType: 'vector';
-  event: OnLayerClickOptions;
+  event: OnLayerMouseOptions;
 }
 
 interface NgwRasterIdentify {
@@ -232,7 +232,6 @@ export type NgwIdentify = FeatureLayersIdentify &
   (NgwVectorIdentify | NgwRasterIdentify);
 
 export interface GetIdentifyGeoJsonOptions<
-  G extends Geometry = Geometry,
   P extends FeatureProperties = FeatureProperties,
 > {
   identify: NgwIdentify;

@@ -381,7 +381,8 @@ export class GeoJsonAdapter
   private _getEntityPosition(entity: Entity): Cartesian3 | undefined {
     let position: Cartesian3 | undefined;
     if (entity.polygon) {
-      position = entity.polygon.hierarchy?.getValue(JulianDate.now()).positions[0];
+      position = entity.polygon.hierarchy?.getValue(JulianDate.now())
+        .positions[0];
     } else if (entity.point) {
       console.log(entity.point);
     }

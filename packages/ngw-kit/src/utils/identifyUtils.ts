@@ -109,7 +109,7 @@ export function fetchIdentifyItem<
   G extends Geometry = Geometry,
   P extends FeatureProperties = FeatureProperties,
 >(
-  options: GetIdentifyGeoJsonOptions<G, P>,
+  options: GetIdentifyGeoJsonOptions<P>,
 ): CancelablePromise<NgwFeatureItemResponse<P, G> | undefined> {
   const { connector, identify } = options;
 
