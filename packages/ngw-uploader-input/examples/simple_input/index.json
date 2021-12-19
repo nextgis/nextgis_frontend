@@ -1,0 +1,4 @@
+{
+  "name": "Raster upload with createInput",
+  "description": "A simple example showing how to use ngw-uploader-input to upload a GEOTIFF to the NextGIS Web cloud"
+}

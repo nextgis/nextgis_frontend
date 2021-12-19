@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Ngw Uploader Input Example</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script type="text/javascript" src="../../lib/ngw-uploader-input.global.js"></script>
+
+<body>
+
+  <div id='uploader'></div>
+  <p id='status'></p>
+
+  <script>
+    const uploader = document.getElementById('uploader');
+    const statusUpload = document.getElementById('status');
+
+    const ngwUploader = new NgwUploaderInput({
+      baseUrl: 'https://sandbox.nextgis.com',
+      loginDialog: true,
+      // default values
+      auth: {
+        login: 'administrator',
+        password: 'demodemo'
+      }
+    });
+
+    ngwUploader.emitter.on('status:change', (evt) => {
+      statusUpload.innerHTML = evt.message;
+    });
+
+    const input = ngwUploader.createInput({
+      parentId: 0,
+      addTimestampToName: true,
+      element: uploader
+    });
+  </script>
+
+</body>
+
+</html>

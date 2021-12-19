@@ -191,6 +191,69 @@ export interface FileBucket {
   main_tileset?: string;
 }
 
+export interface WmsServerService {
+  /**
+   * Array or WMS service layers. keyname, display_name and resource_id are mandatory.
+   */
+  layers: WmsServerServiceLayer[];
+}
+
+export interface WmsClientLayer {
+  /** WMS connection. */
+  connection: {
+    id: number;
+  };
+  srs: {
+    id: number;
+  };
+  /**
+   *  Image format. Available values can fetched from WMS connection ('image/png').
+   */
+  imgformat: string;
+  /**
+   * String with layer identifiers separated with comma. Available layers can fetched from WMS connection.
+   */
+  wmslayers: string;
+  /** Additional parameters added to each request. This is key and value list. */
+  vendor_params: Record<string, string>;
+}
+
+export interface WmsClientConnection {
+  /** WMS service url */
+  url: string;
+  /** User name to connect to service */
+  username?: string;
+  /** Password to connect to service */
+  password?: string;
+  /** WMS version */
+  version?: string;
+  /** If equal query - query capabilities from service */
+  capcache?: string;
+}
+
+export interface WmsServerServiceLayer {
+  /**
+   * Key name for WMS service item. Name may be only ASCII symbols without spaces.
+   * */
+  keyname: string;
+  /**
+   * Service item name.
+   * */
+  display_name: string;
+  /**
+   * Resource identifier which will be WMS layer datasource. Supported types are: vector layer style, raster style, WMS layer.
+   * */
+  resource_id: number;
+  /**
+   * Minimum scale to show WMS layer. String in form of `1 : 100000`.
+   */
+  min_scale_denom?: string | null;
+  /**
+   *  Maximum scale to show WMS layer. String in form of `1 : 100000`.
+   */
+  max_scale_denom?: string | null;
+}
+
 export interface NgwFile {
   name: string;
   mime_type: string;
@@ -214,6 +277,9 @@ export interface ResourceItem extends ResourceItemMain {
   basemap_webmap?: BasemapWebmap;
   lookup_table?: LookupTableResource;
   file_bucket?: FileBucket;
+  wmsserver_service?: WmsServerService;
+  wmsclient_layer?: WmsClientLayer;
+  wmsclient_connection?: WmsClientConnection;
 }
 
 export interface VectorLayerResourceItem extends ResourceItemMain {
