@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/geocoder",
-  "version": "1.9.4",
+  "version": "1.11.0",
   "description": "",
   "main": "index.js",
   "module": "lib/geocoder.esm-bundler.js",
@@ -8,15 +8,15 @@
   "jsdelivr": "lib/geocoder.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/cancelable-promise": "^1.8.4",
-    "@nextgis/ngw-connector": "^1.9.4",
-    "@nextgis/utils": "^1.9.4",
+    "@nextgis/cancelable-promise": "^1.11.0",
+    "@nextgis/ngw-connector": "^1.11.0",
+    "@nextgis/utils": "^1.11.0",
     "@types/events": "^3.0.0",
     "@types/geojson": "^7946.0.8",
     "events": "^3.3.0"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "^1.8.4"
+    "@nextgis/build-tools": "^1.11.0"
   },
   "buildOptions": {
     "name": "Geocoder",
