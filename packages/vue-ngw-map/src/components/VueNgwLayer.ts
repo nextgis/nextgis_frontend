@@ -21,14 +21,12 @@ export class VueNgwLayer extends Vue {
   // @InjectReactive() readonly ngwMap!: NgwMap;
 
   parentContainer?: VueNgwMap;
+  name = 'vue-ngw-layer';
+  layer?: LayerAdapter;
 
   get ngwMap(): NgwMap | undefined {
     return this.parentContainer && this.parentContainer.ngwMap;
   }
-
-  name = 'vue-ngw-layer';
-
-  layer?: LayerAdapter;
 
   beforeDestroy(): void {
     if (this.ngwMap && this.layer) {

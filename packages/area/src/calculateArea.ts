@@ -5,7 +5,7 @@ import { getCoordinates } from '@nextgis/utils';
 const mSemiMajor = 6378137.0;
 const mSemiMinor = 6356752.3142;
 
-const mPI = 3.14159265358979323846;
+const mPI = Math.PI;
 const a2 = mSemiMajor * mSemiMajor;
 // e2 = 1 - (a2 / (mSemiMinor * mSemiMinor)) - bad one from QGIS 2.x https://github.com/qgis/QGIS/commit/297dbe0786d30b7b05462c8dac49b51f13175a19
 const e2 = 1 - (mSemiMinor * mSemiMinor) / a2;

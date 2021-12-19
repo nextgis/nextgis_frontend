@@ -33,10 +33,6 @@ import type {
 } from './interfaces';
 
 export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
-  private defaultOptions: Partial<NgwWebmapAdapterOptions> = {
-    useExtentConstrained: false,
-  };
-
   layer?: NgwWebmapItem;
 
   NgwWebmapItem: Type<NgwWebmapItem> = NgwWebmapItem;
@@ -51,6 +47,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
     NgwWebmapLayerAdapterEvents
   > = new EventEmitter();
   protected _extent?: LngLatBoundsArray;
+
   private response?: ResourceItem;
   private _webmapLayersIds?: number[];
   private _webmapBaselayersIds: string[] = [];
