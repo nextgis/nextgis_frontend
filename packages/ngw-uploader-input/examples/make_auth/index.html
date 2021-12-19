@@ -4,12 +4,10 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Ngw Uploader Example</title>
+  <title>Ngw Uploader Input Example</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
-
-  <script type="text/javascript" src="../../lib/ngw-uploader.global.js"></script>
+  <script type="text/javascript" src="../../lib/ngw-uploader-input.global.js"></script>
 
 <body>
 
@@ -20,11 +18,11 @@
     var uploader = document.getElementById('uploader');
     var statusUpload = document.getElementById('status');
 
-    var ngwUploader = new NgwUploader({
+    var ngwUploader = new NgwUploaderInput({
       baseUrl: 'https://sandbox.nextgis.com',
       auth: {
         login: 'administrator',
-        password: 'admin'
+        password: 'demodemo'
       }
     });
 
@@ -32,7 +30,7 @@
       statusUpload.innerHTML = evt.message;
     });
 
-    const input = ngwUploader.createInput({ addTimestampToName: true });
+    const input = ngwUploader.createInput({ addTimestampToName: true, parentId: 0 });
     uploader.appendChild(input);
   </script>
 

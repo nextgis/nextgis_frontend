@@ -137,20 +137,22 @@ async function build(target) {
 
     const publicTrimmedFilePath = path.resolve(`${pkgPath}/lib/index.d.ts`);
 
+    const mainEntryPointFilePath = path.resolve(
+      pkgPath,
+      'lib',
+      isSelfPackage ? '' : 'packages',
+      target,
+      'src',
+      'index.d.ts',
+    );
+
     const extractorConfig = ExtractorConfig.prepare({
       packageJson: pkg,
       packageJsonFullPath: pkgFullPath,
       configObjectFullPath: pkgDir,
       configObject: {
         projectFolder: pkgDir,
-        mainEntryPointFilePath: path.resolve(
-          pkgPath,
-          'lib',
-          'packages',
-          target,
-          'src',
-          'index.d.ts',
-        ),
+        mainEntryPointFilePath,
         compiler: {
           tsconfigFilePath: path.resolve(`${rootPath}/tsconfig.json`),
           overrideTsconfig: {

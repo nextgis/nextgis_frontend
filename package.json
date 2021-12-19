@@ -44,5 +44,6 @@
     "packages/*",
     "demo",
     "tests"
-  ]
+  ],
+  "dependencies": {}
 }

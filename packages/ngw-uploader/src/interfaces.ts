@@ -1,66 +1,48 @@
 import type NgwConnector from '@nextgis/ngw-connector';
-import type { NgwConnectorOptions } from '@nextgis/ngw-connector';
+import type {
+  FileMeta,
+  ResourceCls,
+  GeometryType,
+  WmsClientLayer,
+  CreatedResource,
+  NgwConnectorOptions,
+  WmsClientConnection,
+  WmsServerServiceLayer,
+} from '@nextgis/ngw-connector';
+import type { GeometryPaint } from '@nextgis/paint';
 
 export type ImageTypes = 'image/tif' | 'image/tiff' | '.tif';
 
-export interface UploadInputOptions {
-  html?: string;
-  name?: string;
-  parentId?: number;
-  addTimestampToName?: boolean;
-  success?: (newRes: ResourceCreateResp) => void;
-  error?: (er: Error) => void;
-  createName?: (name: string) => string;
-  element?: string | HTMLElement;
-  image?: boolean;
-  vector?: boolean;
-}
-
 export interface ResourceCreateOptions {
-  name?: string;
   id?: number;
+  name?: string;
   parentId?: number;
-}
-
-export interface GroupOptions extends ResourceCreateOptions {
   keyname?: string;
+  display_name?: string;
   description?: string;
 }
 
-export interface CreateWmsConnectionOptions extends ResourceCreateOptions {
-  /** WMS service url */
-  url: string;
-  /** User name to connect to service */
-  username?: string;
-  /** Password to connect to service */
-  password?: string;
-  /** WMS version */
-  version?: string;
-  /** If equal query - query capabilities from service */
-  capcache?: string;
+export type GroupOptions = ResourceCreateOptions;
+
+export interface CreateWmsOptions extends ResourceCreateOptions {
+  /** @deprecated use {@link CreateWmsOptions.resourceId} instead */
+  id?: number;
+  resourceId?: number;
+  layers: WmsServerServiceLayer[];
 }
 
-export interface CreateWmsConnectedLayerOptions extends ResourceCreateOptions {
-  connection: {
-    id: 18;
-  };
-  srs?: {
-    id: number; // 3857
-  };
-  wmslayers: string | string[]; // '1,2'
-  imgformat?: string; // 'image/png'
-  vendor_params?: { [paramName: string]: string };
+export interface CreateMapserverStyleOptions extends ResourceCreateOptions {
+  paint?: GeometryPaint;
+  geometryType: GeometryType;
 }
 
-interface ResourceCreateResp {
-  id: number;
-  name?: string;
-  parent?: { id: number };
-}
+export type CreateWmsConnectionOptions = ResourceCreateOptions &
+  WmsClientConnection;
+
+export type CreateWmsConnectedLayerOptions = ResourceCreateOptions &
+  WmsClientLayer;
 
 export interface NgwUploadOptions extends NgwConnectorOptions {
-  inputOptions?: UploadInputOptions;
-  loginDialog?: boolean;
   connector?: NgwConnector;
 }
 
@@ -90,12 +72,34 @@ export interface RasterRequestOptions {
   raster_layer: RasterRequestLayerOptions;
 }
 
+export interface CreateRasterOptions extends ResourceCreateOptions {
+  source: Record<string, any>;
+  srs?: {
+    id: number;
+  };
+}
+
 export interface RasterUploadOptions {
   name?: string;
   parentId?: number;
+  srs?: {
+    id: number;
+  };
+  put?: boolean;
   onProgress?: (percentComplete: number) => void;
   addTimestampToName?: boolean;
   createName?: (name: string) => string;
+}
+
+export interface VectorUploadOptions extends RasterUploadOptions {
+  paint: GeometryPaint;
+}
+
+export type CreatedRes = CreatedResource & { name: string };
+
+export interface UploadedFile {
+  meta: FileMeta;
+  name: string;
 }
 
 export interface RespError {
@@ -106,7 +110,8 @@ export interface RespError {
 
 export type AvailableStatus =
   | 'upload'
-  | 'create-resource'
+  | 'create-vector'
+  | 'create-raster'
   | 'create-style'
   | 'create-wms'
   | 'create-wms-connection'
@@ -118,4 +123,9 @@ export interface EmitterStatus {
   state: 'begin' | 'end' | 'progress' | 'error';
   message?: string;
   data?: any;
+}
+
+export interface CreateStyleOptions extends ResourceCreateOptions {
+  cls?: ResourceCls;
+  style?: unknown;
 }
