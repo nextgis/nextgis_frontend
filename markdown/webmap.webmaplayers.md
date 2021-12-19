@@ -55,9 +55,13 @@ export declare class WebMapLayers<M = any, L = any, E extends WebMapEvents = Web
 |  [selectLayer(layerDef, findFeatureFun)](./webmap.webmaplayers.selectlayer.md) |  | Mark the layer as selected. If the adapter is a vector layer and supports data selection, you can pass a callback function to specify which data will be selected. |
 |  [setLayerData(layerDef, data)](./webmap.webmaplayers.setlayerdata.md) |  | Sets the GeoJSON data for given vector layer. |
 |  [setLayerOpacity(layerDef, value)](./webmap.webmaplayers.setlayeropacity.md) |  | Set transparency for a given layer by number from 0 to 1 |
+|  [setLayerPaint(layerDef, paint)](./webmap.webmaplayers.setlayerpaint.md) |  |  |
+|  [setLayerSelectedPaint(layerDef, paint)](./webmap.webmaplayers.setlayerselectedpaint.md) |  |  |
 |  [showLayer(layerDef, options)](./webmap.webmaplayers.showlayer.md) |  | Show added layer on the map by it definition. |
 |  [toggleLayer(layerDef, status, options)](./webmap.webmaplayers.togglelayer.md) |  | Change added layer visibility on the map by given status or inverse current status. |
 |  [unSelectLayer(layerDef, findFeatureFun)](./webmap.webmaplayers.unselectlayer.md) |  | Unselect the given layer. If the adapter is a vector layer and supports data selection, you can pass a callback function to specify which data will be unselected. |
 |  [unSelectLayers()](./webmap.webmaplayers.unselectlayers.md) |  | Remove selection from any selected selectable layer |
 |  [updateLayer(layerDef)](./webmap.webmaplayers.updatelayer.md) |  |  |
+|  [updateLayerPaint(layerDef, paint)](./webmap.webmaplayers.updatelayerpaint.md) |  |  |
+|  [updateLayerSelectedPaint(layerDef, paint)](./webmap.webmaplayers.updatelayerselectedpaint.md) |  |  |
 

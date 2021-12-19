@@ -4,6 +4,8 @@
 
 ## LayerDefinition.layer property
 
+Native layer for a specific adapter layers of a specific map adapter.
+
 <b>Signature:</b>
 
 ```typescript

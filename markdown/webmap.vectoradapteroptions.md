@@ -21,7 +21,7 @@ export interface VectorAdapterOptions<F extends Feature = Feature, L = any, A = 
 |  [featureIdName?](./webmap.vectoradapteroptions.featureidname.md) | string | <i>(Optional)</i> |
 |  [filter?](./webmap.vectoradapteroptions.filter.md) | [DataLayerFilter](./webmap.datalayerfilter.md)<!-- -->&lt;F, L&gt; | <i>(Optional)</i> |
 |  [interactive?](./webmap.vectoradapteroptions.interactive.md) | boolean | <i>(Optional)</i> |
-|  [label?](./webmap.vectoradapteroptions.label.md) | (e: [LayerDefinition](./webmap.layerdefinition.md)<!-- -->&lt;F, L&gt;) =&gt; void \| string | <i>(Optional)</i> |
+|  [label?](./webmap.vectoradapteroptions.label.md) | (e: [LayerDefinition](./webmap.layerdefinition.md)<!-- -->&lt;F, L&gt;) =&gt; string | <i>(Optional)</i> |
 |  [labelField?](./webmap.vectoradapteroptions.labelfield.md) | keyof P extends null ? string : keyof P | <i>(Optional)</i> |
 |  [labelOnHover?](./webmap.vectoradapteroptions.labelonhover.md) | boolean | <i>(Optional)</i> |
 |  [multiselect?](./webmap.vectoradapteroptions.multiselect.md) | boolean | <i>(Optional)</i> Indicates whether several objects can be selected in one layer. |

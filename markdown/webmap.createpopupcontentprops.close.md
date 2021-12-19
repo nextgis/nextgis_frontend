@@ -4,6 +4,8 @@
 
 ## CreatePopupContentProps.close property
 
+Close the pop-up programmatically
+
 <b>Signature:</b>
 
 ```typescript

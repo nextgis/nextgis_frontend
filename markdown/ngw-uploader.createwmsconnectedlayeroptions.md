@@ -2,22 +2,12 @@
 
 [Home](./index.md) &gt; [@nextgis/ngw-uploader](./ngw-uploader.md) &gt; [CreateWmsConnectedLayerOptions](./ngw-uploader.createwmsconnectedlayeroptions.md)
 
-## CreateWmsConnectedLayerOptions interface
+## CreateWmsConnectedLayerOptions type
 
 <b>Signature:</b>
 
 ```typescript
-export interface CreateWmsConnectedLayerOptions extends ResourceCreateOptions 
+export declare type CreateWmsConnectedLayerOptions = ResourceCreateOptions & WmsClientLayer;
 ```
-<b>Extends:</b> [ResourceCreateOptions](./ngw-uploader.resourcecreateoptions.md)
-
-## Properties
-
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [connection](./ngw-uploader.createwmsconnectedlayeroptions.connection.md) | { id: 18; } |  |
-|  [imgformat?](./ngw-uploader.createwmsconnectedlayeroptions.imgformat.md) | string | <i>(Optional)</i> |
-|  [srs?](./ngw-uploader.createwmsconnectedlayeroptions.srs.md) | { id: number; } | <i>(Optional)</i> |
-|  [vendor\_params?](./ngw-uploader.createwmsconnectedlayeroptions.vendor_params.md) | { \[paramName: string\]: string; } | <i>(Optional)</i> |
-|  [wmslayers](./ngw-uploader.createwmsconnectedlayeroptions.wmslayers.md) | string \| string\[\] |  |
+<b>References:</b> [ResourceCreateOptions](./ngw-uploader.resourcecreateoptions.md)<!-- -->, [WmsClientLayer](./ngw-connector.wmsclientlayer.md)
 

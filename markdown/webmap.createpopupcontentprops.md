@@ -15,7 +15,7 @@ export interface CreatePopupContentProps<F extends Feature = Feature, L = any> e
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [close](./webmap.createpopupcontentprops.close.md) | () =&gt; void |  |
-|  [onClose](./webmap.createpopupcontentprops.onclose.md) | (cb: [PopupOnCloseFunction](./webmap.popuponclosefunction.md)<!-- -->) =&gt; void |  |
-|  [type](./webmap.createpopupcontentprops.type.md) | [OnLayerSelectType](./webmap.onlayerselecttype.md) |  |
+|  [close](./webmap.createpopupcontentprops.close.md) | () =&gt; void | Close the pop-up programmatically |
+|  [onClose](./webmap.createpopupcontentprops.onclose.md) | (cb: [PopupOnCloseFunction](./webmap.popuponclosefunction.md)<!-- -->) =&gt; void | The callback function that is called when the popup is closed |
+|  [type](./webmap.createpopupcontentprops.type.md) | [OnLayerSelectType](./webmap.onlayerselecttype.md) | The source of the event call. User <code>click</code>, <code>hover</code>, or programmatic <code>api</code> call |
 

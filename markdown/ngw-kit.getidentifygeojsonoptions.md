@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface GetIdentifyGeoJsonOptions<G extends Geometry = Geometry, P extends FeatureProperties = FeatureProperties> 
+export interface GetIdentifyGeoJsonOptions<P extends FeatureProperties = FeatureProperties> 
 ```
 
 ## Properties

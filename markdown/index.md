@@ -27,6 +27,7 @@
 |  [@nextgis/ngw-ol](./ngw-ol.md) | Single-file bundle for rapid deployment of [OpenLayers](https://openlayers.org/)<!-- -->-based web-gis applications with NextGIS services |
 |  [@nextgis/ngw-orm](./ngw-orm.md) |  |
 |  [@nextgis/ngw-uploader](./ngw-uploader.md) |  |
+|  [@nextgis/ngw-uploader-input](./ngw-uploader-input.md) |  |
 |  [@nextgis/ol-map-adapter](./ol-map-adapter.md) |  |
 |  [@nextgis/paint](./paint.md) |  |
 |  [@nextgis/progress](./progress.md) |  |

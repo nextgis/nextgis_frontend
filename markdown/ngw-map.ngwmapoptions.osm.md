@@ -4,7 +4,7 @@
 
 ## NgwMapOptions.osm property
 
-Shortcut to add OSM baselayer
+Shortcut to add OSM baselayer.
 
 <b>Signature:</b>
 

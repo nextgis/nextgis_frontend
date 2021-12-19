@@ -4,6 +4,8 @@
 
 ## LayerDefinition.feature property
 
+A vector layer object in geojson format.
+
 <b>Signature:</b>
 
 ```typescript

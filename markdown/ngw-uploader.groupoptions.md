@@ -2,19 +2,12 @@
 
 [Home](./index.md) &gt; [@nextgis/ngw-uploader](./ngw-uploader.md) &gt; [GroupOptions](./ngw-uploader.groupoptions.md)
 
-## GroupOptions interface
+## GroupOptions type
 
 <b>Signature:</b>
 
 ```typescript
-export interface GroupOptions extends ResourceCreateOptions 
+export declare type GroupOptions = ResourceCreateOptions;
 ```
-<b>Extends:</b> [ResourceCreateOptions](./ngw-uploader.resourcecreateoptions.md)
-
-## Properties
-
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [description?](./ngw-uploader.groupoptions.description.md) | string | <i>(Optional)</i> |
-|  [keyname?](./ngw-uploader.groupoptions.keyname.md) | string | <i>(Optional)</i> |
+<b>References:</b> [ResourceCreateOptions](./ngw-uploader.resourcecreateoptions.md)
 

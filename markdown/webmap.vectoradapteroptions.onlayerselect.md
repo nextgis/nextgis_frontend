@@ -4,6 +4,11 @@
 
 ## VectorAdapterOptions.onLayerSelect() method
 
+> Warning: This API is now obsolete.
+> 
+> use [VectorAdapterOptions.onSelect()](./webmap.vectoradapteroptions.onselect.md) instead
+> 
+
 <b>Signature:</b>
 
 ```typescript

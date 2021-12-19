@@ -14,6 +14,7 @@ export interface LayerAdapters
 
 |  Property | Type | Description |
 |  --- | --- | --- |
+|  [COG](./webmap.layeradapters.cog.md) | [MainLayerAdapter](./webmap.mainlayeradapter.md)<!-- -->&lt;any, any, [RasterAdapterOptions](./webmap.rasteradapteroptions.md)<!-- -->&gt; |  |
 |  [GEOJSON](./webmap.layeradapters.geojson.md) | [VectorLayerAdapter](./webmap.vectorlayeradapter.md)<!-- -->&lt;any, any, [GeoJsonAdapterOptions](./webmap.geojsonadapteroptions.md)<!-- -->&gt; |  |
 |  [IMAGE](./webmap.layeradapters.image.md) | [MainLayerAdapter](./webmap.mainlayeradapter.md)<!-- -->&lt;any, any, [ImageAdapterOptions](./webmap.imageadapteroptions.md)<!-- -->&gt; |  |
 |  [MVT](./webmap.layeradapters.mvt.md) | [VectorLayerAdapter](./webmap.vectorlayeradapter.md) |  |

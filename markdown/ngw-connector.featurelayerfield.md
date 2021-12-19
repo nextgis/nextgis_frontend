@@ -14,7 +14,7 @@ export interface FeatureLayerField
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [datatype](./ngw-connector.featurelayerfield.datatype.md) | [ResourceItemDatatype](./ngw-connector.resourceitemdatatype.md) |  |
+|  [datatype](./ngw-connector.featurelayerfield.datatype.md) | [VectorFieldDatatype](./ngw-connector.vectorfielddatatype.md) |  |
 |  [display\_name](./ngw-connector.featurelayerfield.display_name.md) | string |  |
 |  [grid\_visibility](./ngw-connector.featurelayerfield.grid_visibility.md) | boolean |  |
 |  [id](./ngw-connector.featurelayerfield.id.md) | number |  |

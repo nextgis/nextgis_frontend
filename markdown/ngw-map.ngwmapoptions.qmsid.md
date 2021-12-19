@@ -4,8 +4,19 @@
 
 ## NgwMapOptions.qmsId property
 
+Id number of resource from \[QMS\](https://qms.nextgis.com/). If specified through an array, the first element will be the resource identifier, and the second will be the name for identification in the application.
+
 <b>Signature:</b>
 
 ```typescript
 qmsId?: number | [number, string];
 ```
+
+## Example
+
+
+```javascript
+  const ngwMap = new NgwMap({qmsId: [465, 'qms-basemap']});
+  ngwMap.hideLayer('qms-basemap');
+```
+

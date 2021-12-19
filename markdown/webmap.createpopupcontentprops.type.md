@@ -4,6 +4,8 @@
 
 ## CreatePopupContentProps.type property
 
+The source of the event call. User `click`<!-- -->, `hover`<!-- -->, or programmatic `api` call
+
 <b>Signature:</b>
 
 ```typescript

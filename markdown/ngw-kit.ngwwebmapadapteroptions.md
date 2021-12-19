@@ -21,5 +21,6 @@ export interface NgwWebmapAdapterOptions<M = any> extends A
 |  [resourceId](./ngw-kit.ngwwebmapadapteroptions.resourceid.md) | [ResourceIdDef](./ngw-kit.resourceiddef.md) |  |
 |  [selectable?](./ngw-kit.ngwwebmapadapteroptions.selectable.md) | boolean | <i>(Optional)</i> |
 |  [useBasemap?](./ngw-kit.ngwwebmapadapteroptions.usebasemap.md) | boolean | <i>(Optional)</i> Add baselayers from ngw webmap basemap settings |
+|  [useExtentConstrained?](./ngw-kit.ngwwebmapadapteroptions.useextentconstrained.md) | boolean | <i>(Optional)</i> Set max extent from ngw webmap basemap settings |
 |  [webMap](./ngw-kit.ngwwebmapadapteroptions.webmap.md) | [WebMap](./webmap.webmap.md)<!-- -->&lt;M&gt; |  |
 

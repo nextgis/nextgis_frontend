@@ -4,6 +4,11 @@
 
 ## VectorAdapterOptions.onLayerClick() method
 
+> Warning: This API is now obsolete.
+> 
+> use [VectorAdapterOptions.onClick()](./webmap.vectoradapteroptions.onclick.md) instead
+> 
+
 <b>Signature:</b>
 
 ```typescript

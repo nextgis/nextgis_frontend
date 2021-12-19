@@ -4,6 +4,8 @@
 
 ## LayerDefinition.target property
 
+The adapter in which the layer is created.
+
 <b>Signature:</b>
 
 ```typescript
