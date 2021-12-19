@@ -1,8 +1,7 @@
 import Vue, { VNode, VNodeData, CreateElement } from 'vue';
 
-import { NgwMap} from '@nextgis/ngw-map';
+import { NgwMap } from '@nextgis/ngw-map';
 import type { VueNgwMapData, VueNgwMapProps } from '../interfaces';
-
 
 export const VueNgwMap = Vue.extend<VueNgwMapData, any, any, VueNgwMapProps>({
   props: {
