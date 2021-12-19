@@ -1,222 +1,232 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Ngw Uploader Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Ngw Uploader Example</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script
+      type="text/javascript"
+      src="../../lib/ngw-uploader.global.js"
+    ></script>
 
-
-
-  <script type="text/javascript" src="../../lib/ngw-uploader.global.js"></script>
-
-  <style>
-    #connect-wms {
-      display: block;
-    }
-
-    #wms-url {
-      width: 550px;
-      margin: 1rem 0;
-    }
-  </style>
-
-<body>
-
-  <div id="wms-connect-block">
-    <label>
-      <div>WMS service URLs:</div>
-      <ul id="wms-urls-to-connect"></ul>
-    </label>
-    <button id="connect-wms">Step 1: Create WMS connection</button>
-  </div>
-
-  <div id="wms-layers-block" style="display: none">
-    <p>Create layers with additional WMS params for new WMS Service</p>
-    <button id="create-wms-layers">Step 2: Create WMS layers</button>
-  </div>
-
-  <div id="result-block" style="display: none;">
-    <p>Result:</p>
-    <div id='wms-data-block'>Loading...</div>
-  </div>
-
-
-  <p>Status:</p>
-  <ul id='status'></ul>
-
-  <script>
-
-    var configs = [
-      {
-        url: 'http://maps.kosmosnimki.ru/rest/ver1/service/wms?apikey=84RY0J61QQ&BGCOLOR=0xFFFFFF',
-        name: 'kosmosnimki_white',
-        proxyLayers: [
-          {
-            id: '04C9E7CE82C34172910ACDBF8F1DF49A',
-            name: 'white_2012',
-            vendorParams: {
-              StartDate: '01.01.2012 12:59:59',
-              EndDate: '31.12.2012 12:59:59'
-            }
-          },
-          {
-            id: '04C9E7CE82C34172910ACDBF8F1DF49A',
-            name: 'white_2013',
-            vendorParams: {
-              StartDate: '01.01.2013 12:59:59',
-              EndDate: '31.12.2013 12:59:59'
-            }
-          }
-        ]
-      },
-      {
-        url: 'http://maps.kosmosnimki.ru/rest/ver1/service/wms?apikey=84RY0J61QQ&BGCOLOR=0xFF0000',
-        name: 'kosmosnimki_red',
-        proxyLayers: [
-          {
-            id: '04C9E7CE82C34172910ACDBF8F1DF49A',
-            name: 'red_2012',
-            vendorParams: {
-              StartDate: '01.01.2012 12:59:59',
-              EndDate: '31.12.2012 12:59:59'
-            }
-          },
-          {
-            id: '04C9E7CE82C34172910ACDBF8F1DF49A',
-            name: 'red_2013',
-            vendorParams: {
-              StartDate: '01.01.2013 12:59:59',
-              EndDate: '31.12.2013 12:59:59'
-            }
-          }
-        ]
+    <style>
+      #connect-wms {
+        display: block;
       }
-    ];
 
-    var wmsUrlsToConnect = document.getElementById('wms-urls-to-connect');
-    var button = document.getElementById('connect-wms');
-    var resultBlock = document.getElementById('result-block');
-    var statusUpload = document.getElementById('status');
-    var wmsDataBlock = document.getElementById('wms-data-block');
-    var wmsConnectBlock = document.getElementById('wms-connect-block');
+      #wms-url {
+        width: 550px;
+        margin: 1rem 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wms-connect-block">
+      <label>
+        <div>WMS service URLs:</div>
+        <ul id="wms-urls-to-connect"></ul>
+      </label>
+      <button id="connect-wms">Step 1: Create WMS connection</button>
+    </div>
 
-    var wmsLayersBlock = document.getElementById('wms-layers-block');
-    var createWmsLayersBtn = document.getElementById('create-wms-layers');
-    var layersSelect = document.getElementById('layers-select');
+    <div id="wms-layers-block" style="display: none">
+      <p>Create layers with additional WMS params for new WMS Service</p>
+      <button id="create-wms-layers">Step 2: Create WMS layers</button>
+    </div>
 
-    var ngwUploader = new NgwUploader({
-      baseUrl: 'https://sandbox.nextgis.com'
-    });
+    <div id="result-block" style="display: none">
+      <p>Result:</p>
+      <div id="wms-data-block">Loading...</div>
+    </div>
 
-    ngwUploader.emitter.on('status:change', function (evt) {
-      statusUpload.innerHTML += '<li>' + evt.message + '</li>';
-    });
+    <p>Status:</p>
+    <ul id="status"></ul>
 
-    for (var fry = 0; fry < configs.length; fry++) {
-      // insert urls to document
-      wmsUrlsToConnect.innerHTML += '<li>' + configs[fry].url + '</li>';
-    }
-    var parentId = 0;
+    <script>
+      const configs = [
+        {
+          url: 'http://maps.kosmosnimki.ru/rest/ver1/service/wms?apikey=84RY0J61QQ&BGCOLOR=0xFFFFFF',
+          name: 'kosmosnimki_white',
+          proxyLayers: [
+            {
+              id: '04C9E7CE82C34172910ACDBF8F1DF49A',
+              name: 'white_2012',
+              vendorParams: {
+                StartDate: '01.01.2012 12:59:59',
+                EndDate: '31.12.2012 12:59:59',
+              },
+            },
+            {
+              id: '04C9E7CE82C34172910ACDBF8F1DF49A',
+              name: 'white_2013',
+              vendorParams: {
+                StartDate: '01.01.2013 12:59:59',
+                EndDate: '31.12.2013 12:59:59',
+              },
+            },
+          ],
+        },
+        {
+          url: 'http://maps.kosmosnimki.ru/rest/ver1/service/wms?apikey=84RY0J61QQ&BGCOLOR=0xFF0000',
+          name: 'kosmosnimki_red',
+          proxyLayers: [
+            {
+              id: '04C9E7CE82C34172910ACDBF8F1DF49A',
+              name: 'red_2012',
+              vendorParams: {
+                StartDate: '01.01.2012 12:59:59',
+                EndDate: '31.12.2012 12:59:59',
+              },
+            },
+            {
+              id: '04C9E7CE82C34172910ACDBF8F1DF49A',
+              name: 'red_2013',
+              vendorParams: {
+                StartDate: '01.01.2013 12:59:59',
+                EndDate: '31.12.2013 12:59:59',
+              },
+            },
+          ],
+        },
+      ];
 
-    button.onclick = function () {
-      // Create group for all new resources
-      ngwUploader.createGroup('wms_params_example_' + new Date().toISOString()).then(function (group) {
-        parentId = group.id;
-        var connectionPromises = [];
-        for (var fry = 0; fry < configs.length; fry++) {
-          // crate WMS connection query
-          var connectionQuery = ngwUploader.createWmsConnection({
-            name: 'custom_' + configs[fry].name,
-            parentId: parentId,
-            url: configs[fry].url,
-            version: "1.1.1"
-          }).then(function (newWmsConnection) {
-            return ngwUploader.getResource(newWmsConnection.id)
-          });
+      const wmsUrlsToConnect = document.getElementById('wms-urls-to-connect');
+      const button = document.getElementById('connect-wms');
+      const resultBlock = document.getElementById('result-block');
+      const statusUpload = document.getElementById('status');
+      const wmsDataBlock = document.getElementById('wms-data-block');
+      const wmsConnectBlock = document.getElementById('wms-connect-block');
 
-          connectionPromises.push(connectionQuery);
-        }
+      const wmsLayersBlock = document.getElementById('wms-layers-block');
+      const createWmsLayersBtn = document.getElementById('create-wms-layers');
 
-        Promise.all(connectionPromises).then(onWmsConectionCreated);
+      const ngwUploader = new NgwUploader({
+        baseUrl: 'https://sandbox.nextgis.com',
       });
-    };
 
-    function createConectLayerPromise(wmsData, id, title, vendorParams) {
-      return ngwUploader.createWmsConnectedLayer({
-        id: wmsData.resource.id,
-        parentId: wmsData.resource.parent.id,
-        name: title,
-        wmslayers: [id],
-        vendor_params: vendorParams
-      }).then(function (newLayer) {
-        newLayer.name = title;
-        return newLayer;
-      })
-    }
+      ngwUploader.emitter.on('status:change', (evt) => {
+        statusUpload.innerHTML += '<li>' + evt.message + '</li>';
+      });
 
-    function onWmsConectionCreated(newWmsConnection) {
-      // update DOM, show list of conected WMS resources
-      resultBlock.style.display = 'block';
-      wmsConnectBlock.style.display = 'none';
-      wmsDataBlock.innerHTML = '';
-      wmsLayersBlock.style.display = 'block';
-      wmsDataBlock.appendChild(document.createElement('pre')).innerHTML = JSON.stringify(newWmsConnection, null, 2);
+      for (let fry = 0; fry < configs.length; fry++) {
+        // insert urls to document
+        wmsUrlsToConnect.innerHTML += '<li>' + configs[fry].url + '</li>';
+      }
+      let parentId = 0;
 
-      createWmsLayersBtn.onclick = function () {
-        var conectLayerPromises = []
-        for (var fry = 0; fry < newWmsConnection.length; fry++) {
-          var wmsData = newWmsConnection[fry];
-          var layers = wmsData.wmsclient_connection.capcache.layers;
-          var config = configs[fry];
-          for (var f = 0; f < config.proxyLayers.length; f++) {
-            var proxyLayer = config.proxyLayers[f];
-            var exist = layers.find(function (x) { return x.id === proxyLayer.id });
-            if (exist) {
-              // Create conection with updating WMS parameters from config
-              conectLayerPromises.push(
-                createConectLayerPromise(
-                  wmsData, exist.id, proxyLayer.name, proxyLayer.vendorParams
-                )
-              );
+      button.onclick = function () {
+        const name = 'wms_params_example_' + new Date().toISOString();
+        // Create group for all new resources
+        ngwUploader.createGroup({ name, parentId: 0 }).then((group) => {
+          parentId = group.id;
+          const connectionPromises = [];
+          for (let fry = 0; fry < configs.length; fry++) {
+            // crate WMS connection query
+            const connectionQuery = ngwUploader
+              .createWmsConnection({
+                name: 'custom_' + configs[fry].name,
+                parentId: parentId,
+                url: configs[fry].url,
+                version: '1.1.1',
+              })
+              .then((newWmsConnection) => {
+                return ngwUploader.getResource(newWmsConnection.id);
+              });
+
+            connectionPromises.push(connectionQuery);
+          }
+
+          Promise.all(connectionPromises).then(onWmsConectionCreated);
+        });
+      };
+
+      function createConectLayerPromise(wmsData, id, title, vendorParams) {
+        return ngwUploader
+          .createWmsConnectedLayer({
+            id: wmsData.resource.id,
+            parentId: wmsData.resource.parent.id,
+            name: title,
+            wmslayers: [id],
+            vendor_params: vendorParams,
+          })
+          .then((newLayer) => {
+            newLayer.name = title;
+            return newLayer;
+          });
+      }
+
+      function onWmsConectionCreated(newWmsConnection) {
+        // update DOM, show list of conected WMS resources
+        resultBlock.style.display = 'block';
+        wmsConnectBlock.style.display = 'none';
+        wmsDataBlock.innerHTML = '';
+        wmsLayersBlock.style.display = 'block';
+        wmsDataBlock.appendChild(document.createElement('pre')).innerHTML =
+          JSON.stringify(newWmsConnection, null, 2);
+
+        createWmsLayersBtn.onclick = () => {
+          const conectLayerPromises = [];
+          for (let fry = 0; fry < newWmsConnection.length; fry++) {
+            const wmsData = newWmsConnection[fry];
+            const layers = wmsData.wmsclient_connection.capcache.layers;
+            const config = configs[fry];
+            for (let f = 0; f < config.proxyLayers.length; f++) {
+              const proxyLayer = config.proxyLayers[f];
+              const exist = layers.find((x) => {
+                return x.id === proxyLayer.id;
+              });
+              if (exist) {
+                // Create conection with updating WMS parameters from config
+                conectLayerPromises.push(
+                  createConectLayerPromise(
+                    wmsData,
+                    exist.id,
+                    proxyLayer.name,
+                    proxyLayer.vendorParams,
+                  ),
+                );
+              }
             }
           }
-        }
 
-        if (conectLayerPromises.length) {
-          createWmsLayersBtn.disabled = true;
+          if (conectLayerPromises.length) {
+            createWmsLayersBtn.disabled = true;
 
-          Promise.all(conectLayerPromises).then(function (values) {
-            var layers = [];
-            for (var fry = 0; fry < values.length; fry++) {
-              var layer = values[fry];
-              layers.push({
-                keyname: 'image' + fry,
-                display_name: layer.name,
-                resource_id: layer.id,
-              })
-            }
-            // Create wms service with updated layers
-            ngwUploader.createWms({
-              name: 'custom',
-              parentId: parentId,
-              layers: layers
-            }).then(function (newWmsService) {
-              // Update DOM with data from result WMS service
-              ngwUploader.getResource(newWmsService.id).then(function (wmsService) {
-                wmsLayersBlock.style.display = 'none';
-                wmsDataBlock.innerHTML = '';
-                wmsDataBlock.appendChild(document.createElement('pre')).innerHTML = JSON.stringify(wmsService, null, 2);
-              });
-            })
-          })
-        }
+            Promise.all(conectLayerPromises).then((values) => {
+              const layers = [];
+              for (let fry = 0; fry < values.length; fry++) {
+                const layer = values[fry];
+                layers.push({
+                  keyname: 'image' + fry,
+                  display_name: layer.name,
+                  resource_id: layer.id,
+                });
+              }
+              // Create wms service with updated layers
+              ngwUploader
+                .createWms({
+                  name: 'custom',
+                  parentId: parentId,
+                  layers: layers,
+                })
+                .then((newWmsService) => {
+                  // Update DOM with data from result WMS service
+                  ngwUploader
+                    .getResource(newWmsService.id)
+                    .then((wmsService) => {
+                      wmsLayersBlock.style.display = 'none';
+                      wmsDataBlock.innerHTML = '';
+                      wmsDataBlock.appendChild(
+                        document.createElement('pre'),
+                      ).innerHTML = JSON.stringify(wmsService, null, 2);
+                    });
+                });
+            });
+          }
+        };
       }
-    }
-
-  </script>
-
-</body>
-
+    </script>
+  </body>
 </html>

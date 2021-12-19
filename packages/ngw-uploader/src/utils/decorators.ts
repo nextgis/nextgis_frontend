@@ -18,7 +18,7 @@ export function evented(options?: {
     const originalMethod = descriptor.value;
 
     descriptor.value = function (this: NgwUploader, ...args: any[]) {
-      let message = status || propertyKey;
+      let message = propertyKey;
       if (options) {
         if (options.template && typeof args[0] === 'object') {
           message = template(options.template, args[0]);

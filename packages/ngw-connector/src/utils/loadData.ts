@@ -4,6 +4,7 @@ import {
 } from '../interfaces';
 import { NgwError } from '../errors/NgwError';
 import { NetworkError } from '../errors/NetworkError';
+import { isObject } from './isObject';
 
 // readyState
 // Holds the status of the XMLHttpRequest.
@@ -67,7 +68,7 @@ if (__BROWSER__) {
       }
     };
     xhr.onload = () => {
-      if ([401, 403, 404, 500].indexOf(xhr.status) !== -1) {
+      if ([401, 403, 404, 422, 500].indexOf(xhr.status) !== -1) {
         error(new NgwError(getResponseText()));
       }
       processingResponse();
@@ -126,7 +127,7 @@ if (__BROWSER__) {
       data = new FormData();
       data.append('file', options.file);
       if (options.data) {
-        for (const d in data) {
+        for (const d in options.data) {
           data.append(d, data[d]);
         }
       }
@@ -148,6 +149,7 @@ if (__BROWSER__) {
   const url = require('url');
   const http = require('http');
   const https = require('https');
+  const FormData = require('form-data');
 
   const adapterFor = (inputUrl: string) => {
     const adapters: Record<string, any> = {
@@ -165,22 +167,45 @@ if (__BROWSER__) {
     error: (reason?: any) => void,
     onCancel: (cancelHandler: () => void) => void,
   ): Promise<unknown> => {
+    const { file, headers, method, data, responseType } = options;
+
     const request = new Promise((resolve, reject) => {
       const adapter = adapterFor(url);
       if (adapter) {
         const requestOpt = {
-          headers: options.headers || {},
-          method: options.method,
+          headers: headers || {},
+          method,
         };
-        const body =
-          typeof options.data === 'string'
-            ? options.data
-            : JSON.stringify(options.data);
+        const body = typeof data === 'string' ? data : JSON.stringify(data);
         // https://stackoverflow.com/questions/35589109/node-http-delete-request-no-longer-works-after-upgrading-from-0-10-40
-        if (body !== undefined && options.method !== 'POST') {
+        let form;
+        let uploadedFile = file;
+        if (file) {
+          const fileMeta = {};
+          if (isObject(file) && 'file' in file && 'filename' in file) {
+            const { file: file_, ...fileMeta_ } = file as Record<
+              string,
+              unknown
+            >;
+            Object.assign(fileMeta, fileMeta_);
+            uploadedFile = file_ as File;
+          }
+          form = new FormData();
+          form.append('file', uploadedFile, fileMeta);
+          if (data) {
+            for (const d in data) {
+              form.append(d, data[d]);
+            }
+          }
           Object.assign(requestOpt.headers, {
-            'Content-Type': 'application/json',
-            'Content-Length': Buffer.byteLength(body),
+            // 'content-length': form.getLengthSync(),
+            ...form.getHeaders(),
+          });
+        }
+        if (body !== undefined && method !== 'POST') {
+          Object.assign(requestOpt.headers, {
+            'content-type': 'application/json',
+            'content-length': Buffer.byteLength(body),
           });
         }
         const req = adapter.request(url, requestOpt, (resp: any) => {
@@ -190,23 +215,30 @@ if (__BROWSER__) {
           });
           resp.on('end', () => {
             if (data) {
-              let json: Record<string, any> | undefined;
-              try {
-                json = JSON.parse(data);
-                if (json && json.status_code && json.status_code) {
-                  reject(json.message);
+              if (responseType === 'blob') {
+                resolve(data);
+              } else {
+                let json: Record<string, any> | undefined;
+                try {
+                  json = JSON.parse(data);
+                  if (json && json.status_code && json.status_code) {
+                    reject(json.message);
+                  }
+                } catch (er) {
+                  reject(er);
+                  // throw new Error(er);
                 }
-              } catch (er) {
-                reject(er);
-                // throw new Error(er);
-              }
-              if (json !== undefined) {
-                resolve(json);
+                if (json !== undefined) {
+                  resolve(json);
+                }
               }
             }
             reject('no data');
           });
         });
+        if (form) {
+          form.pipe(req);
+        }
         req.on('error', (err: any) => {
           reject(err);
         });

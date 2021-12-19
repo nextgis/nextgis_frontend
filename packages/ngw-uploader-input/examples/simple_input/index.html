@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-  <script type="text/javascript" src="../../lib/ngw-uploader.global.js"></script>
+  <script type="text/javascript" src="../../lib/ngw-uploader-input.global.js"></script>
 
 <body>
   <p>Select GEOTIFF file  (<a href="https://demo.nextgis.com/resource/4004/export" target="_blank">example</a>)</p>
@@ -16,16 +16,16 @@
   <p id='status'></p>
 
   <script>
-    var uploader = document.getElementById('uploader');
-    var statusUpload = document.getElementById('status');
+    const uploader = document.getElementById('uploader');
+    const statusUpload = document.getElementById('status');
 
-    var ngwUploader = new NgwUploader({
+    const ngwUploader = new NgwUploaderInput({
       baseUrl: 'https://sandbox.nextgis.com'
     });
 
     ngwUploader.emitter.on('status:change', function (evt) {
       statusUpload.innerHTML = evt.message;
-      var color;
+      let color;
       switch (evt.state) {
         case 'begin':
           color = 'black';
@@ -48,7 +48,7 @@
       statusUpload.style.color = color;
     });
 
-    const input = ngwUploader.createInput({ addTimestampToName: true });
+    const input = ngwUploader.createInput({ parentId: 0, addTimestampToName: true });
     uploader.appendChild(input);
   </script>
 

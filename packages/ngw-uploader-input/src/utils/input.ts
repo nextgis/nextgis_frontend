@@ -1,9 +1,7 @@
-import type {
-  ImageTypes,
-  RasterUploadOptions,
-  UploadInputOptions,
-} from '../interfaces';
 import { imageTypesAccept } from './constants';
+
+import type { RasterUploadOptions, ImageTypes } from '@nextgis/ngw-uploader';
+import type { UploadInputOptions } from '../interfaces';
 
 export function createInput(
   opt: UploadInputOptions = {},
