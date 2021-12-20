@@ -37,7 +37,7 @@ try {
   // console.log('tus not founded');
 }
 
-const DEFAULT_CHUNK_SIZE = 16777216;
+const DEFAULT_CHUNK_SIZE = 16 * 2 ** 20; // 16Mb
 
 export class NgwUploader {
   options: NgwUploadOptions = {
