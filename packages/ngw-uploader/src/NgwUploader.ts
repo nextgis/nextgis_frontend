@@ -1,9 +1,10 @@
 import NgwConnector, { ResourceCls } from '@nextgis/ngw-connector';
+import CancelablePromise from '@nextgis/cancelable-promise';
 import { EventEmitter } from 'events';
 import { evented, onLoad } from './utils/decorators';
 import { createResourceOptions } from './utils/createResourceOptions';
 
-import type CancelablePromise from '@nextgis/cancelable-promise';
+import type { Upload } from 'tus-js-client';
 import type { CreatedResource, ResourceItem } from '@nextgis/ngw-connector';
 import type {
   WmsServerServiceLayer,
@@ -20,12 +21,23 @@ import type {
   NgwUploadOptions,
   CreateStyleOptions,
   RasterUploadOptions,
+  VectorUploadOptions,
   CreateRasterOptions,
   CreateWmsConnectionOptions,
   CreateWmsConnectedLayerOptions,
-  VectorUploadOptions,
 } from './interfaces';
 import { mapserverStyle } from './utils/mapserverStyle';
+import { isObject } from '../../utils/src';
+
+let TusUpload: typeof Upload | undefined;
+try {
+  const tus = require('tus-js-client');
+  TusUpload = tus.Upload;
+} catch (er) {
+  // console.log('tus not founded');
+}
+
+const DEFAULT_CHUNK_SIZE = 16777216;
 
 export class NgwUploader {
   options: NgwUploadOptions = {
@@ -274,41 +286,104 @@ export class NgwUploader {
 
   @evented({ status: 'upload', template: 'file upload' })
   fileUpload<F extends File = File>(
-    file: F,
+    file: F | { file: F; name: string },
     options: RasterUploadOptions = {},
   ): CancelablePromise<FileMeta> {
-    if (!this.connector) {
+    const connector = this.connector;
+    if (!connector) {
       throw new Error('Connector is not set yet');
     }
-    const request = options.put ? this.connector.put : this.connector.post;
-    return request
-      .call(this.connector, 'file_upload.upload', {
-        file,
-        onProgress: (percentComplete) => {
-          const message = percentComplete.toFixed(2) + '% uploaded';
-          if (options.onProgress) {
-            options.onProgress(percentComplete);
-          }
-          const eventProgress: EmitterStatus = {
-            status: 'upload',
-            state: 'progress',
-            message,
-            data: {
-              percentComplete,
-            },
-          };
-          this.emitter.emit('status:change', eventProgress);
+
+    const onProgress = (percentComplete: number) => {
+      const message = percentComplete.toFixed(2) + '% uploaded';
+      if (options.onProgress) {
+        options.onProgress(percentComplete);
+      }
+      const eventProgress: EmitterStatus = {
+        status: 'upload',
+        state: 'progress',
+        message,
+        data: {
+          percentComplete,
         },
-      })
-      .then((resp) => {
-        if (resp) {
-          if (resp.upload_meta) {
-            return resp.upload_meta[0];
-          } else if (options.put) {
-            return resp;
-          }
+      };
+      this.emitter.emit('status:change', eventProgress);
+    };
+    const TU = TusUpload;
+
+    if (TU) {
+      return connector.connect().then((routers) => {
+        const endpoint = routers['file_upload.collection'];
+
+        const fileName = file.name;
+        if (isObject(file) && 'file' in file) {
+          file = file.file;
         }
+
+        return new CancelablePromise<FileMeta>((resolve, reject, onCancel) => {
+          const headers = connector.getAuthorizationHeaders() as Record<
+            string,
+            string
+          >;
+          const baseUrl = connector.options.baseUrl || '';
+          const url = baseUrl + endpoint[0];
+
+          const uploader = new TU(file as F, {
+            endpoint: url,
+            storeFingerprintForResuming: false,
+            chunkSize: DEFAULT_CHUNK_SIZE,
+            metadata: { name: fileName },
+            headers: headers ? headers : {},
+
+            onProgress: function (bytesUploaded, bytesTotal) {
+              onProgress((bytesUploaded / bytesTotal) * 100);
+            },
+
+            onError: (err: unknown) => {
+              reject(err);
+            },
+
+            onSuccess: () => {
+              if (uploader.url) {
+                connector
+                  .makeQuery<FileMeta>(
+                    uploader.url.replace(baseUrl, ''),
+                    null,
+                    {
+                      method: 'GET',
+                    },
+                  )
+                  .then((createdFile) => {
+                    resolve(createdFile);
+                  });
+              } else {
+                reject('Tus upload problem');
+              }
+            },
+          });
+          uploader.start();
+          onCancel(() => {
+            uploader.abort();
+          });
+        });
       });
+    } else {
+      const request = options.put ? this.connector.put : this.connector.post;
+      return request
+        .call(connector, 'file_upload.upload', {
+          file: file as F,
+          onProgress,
+        })
+        .then((resp) => {
+          if (resp) {
+            if (resp.upload_meta) {
+              return resp.upload_meta[0];
+            } else if (options.put) {
+              return resp;
+            }
+          }
+        });
+    }
   }
 
   /**@deprecated - use {@link NgwUploader.createRaster} instead */

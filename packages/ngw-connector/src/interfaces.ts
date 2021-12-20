@@ -59,7 +59,7 @@ export interface PyramidSettingsPyramid {
 export type PyramidSettings = PyramidSettingsPyramid | Record<string, any>;
 
 export interface PyramidRoute {
-  [requestItemName: string]: string[];
+  [requestItemName: string]: [url: string, ...params: string[]];
 }
 export type Router = PyramidRoute;
 

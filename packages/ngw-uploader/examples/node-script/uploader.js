@@ -17,7 +17,7 @@ async function upload(filename, paint) {
     console.log(`start "${filename}" uploading`);
 
     const resp = await uploader.uploadVector(
-      { file, filename },
+      { file, name: filename },
       {
         addTimestampToName: true,
         parentId: 0,

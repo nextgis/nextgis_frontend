@@ -102,8 +102,8 @@ export class NgwConnector {
     const makeConnect = () =>
       new CancelablePromise((resolve, reject) => {
         const makeQuery = () => {
-          return this.makeQuery(this.routeStr, {}, {})
-            .then((route: PyramidRoute) => {
+          return this.makeQuery<PyramidRoute>(this.routeStr, {}, {})
+            .then((route) => {
               resolve(route);
             })
             .catch((er) => {
@@ -163,8 +163,12 @@ export class NgwConnector {
     };
 
     // Do not use apiRequest('auth.current_user') to avoid circular-references
-    return this.makeQuery('/api/component/auth/current_user', {}, options)
-      .then((data: UserInfo) => {
+    return this.makeQuery<UserInfo>(
+      '/api/component/auth/current_user',
+      {},
+      options,
+    )
+      .then((data) => {
         this.user = data;
         this.emitter.emit('login', data);
         return data;
@@ -373,11 +377,11 @@ export class NgwConnector {
    * @param params - Query params
    * @param options - Request options
    */
-  makeQuery(
+  makeQuery<R = unknown>(
     url: string,
-    params?: Params,
+    params?: Params | null,
     options: RequestOptions = {},
-  ): CancelablePromise<any> {
+  ): CancelablePromise<R> {
     url = (this.options.baseUrl ? this.options.baseUrl : '') + url;
     if (url) {
       if (params) {
