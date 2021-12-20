@@ -182,11 +182,19 @@ if (__BROWSER__) {
         let uploadedFile = file;
         if (file) {
           const fileMeta = {};
-          if (isObject(file) && 'file' in file && 'filename' in file) {
-            const { file: file_, ...fileMeta_ } = file as Record<
-              string,
-              unknown
-            >;
+          if (
+            isObject(file) &&
+            'file' in file &&
+            ('filename' in file || 'name' in file)
+          ) {
+            const {
+              file: file_,
+              name,
+              ...fileMeta_
+            } = file as Record<string, unknown>;
+            if (name && !fileMeta_.filename) {
+              fileMeta_.filename = name;
+            }
             Object.assign(fileMeta, fileMeta_);
             uploadedFile = file_ as File;
           }
