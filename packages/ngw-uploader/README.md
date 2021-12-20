@@ -29,7 +29,7 @@ Simply download and include with a script tag. `NgwUploader` will be registered 
 We recommend linking to a specific version number that you can update manually:
 
 ```html
-<script src="https://unpkg.com/@nextgis/ngw-uploader@0.19.0"></script>
+<script src="https://unpkg.com/@nextgis/ngw-uploader@[verion]"></script>
 ```
 
 ### In Node.js
@@ -47,6 +47,8 @@ import NgwUploader from '@nextgis/ngw-uploader';
 const ngwUploader = new NgwUploader({
   baseUrl: 'https://sandbox.nextgis.com',
 });
+ngwUploader.uploadVector(File, { parentId, pain });
+ngwUploader.uploadRaster(File, { parentId });
 ```
 
 ## Commercial support
