@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Use leaflet-geoman draw plugin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body,
+      #map {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+
+    <script src="../../lib/ngw-leaflet.global.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.css"
+    />
+    <script src="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.min.js"></script>
+  </head>
+
+  <body>
+    <div id="map"></div>
+    <script>
+
+      const bounds = [37.65972, 55.7299, 37.66735, 55.73278];
+      NgwMap.create({
+        baseUrl: 'https://demo.nextgis.com',
+        target: 'map',
+        osm: true,
+        bounds,
+      }).then((ngwMap) => {
+
+        console.log(L.PM);
+
+        ngwMap.mapAdapter.map.pm.addControls({
+          position: 'topleft',
+          drawCircle: false,
+        });
+      });
+    </script>
+  </body>
+</html>
