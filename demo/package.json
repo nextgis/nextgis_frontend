@@ -76,5 +76,9 @@
   "files": [
     "dist"
   ],
+  "dockerpkg": {
+    "name": "code-nextgis",
+    "registry": "registry.nextgis.com"
+  },
   "license": "MIT"
 }
