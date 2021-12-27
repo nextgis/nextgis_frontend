@@ -191,7 +191,7 @@ if (__BROWSER__) {
               file: file_,
               name,
               ...fileMeta_
-            } = file as Record<string, unknown>;
+            } = file as Record<string, any>;
             if (name && !fileMeta_.filename) {
               fileMeta_.filename = name;
             }
