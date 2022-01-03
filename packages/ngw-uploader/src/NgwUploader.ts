@@ -71,7 +71,6 @@ export class NgwUploader {
         ...createResourceOptions('resource_group', options),
       },
     };
-
     return this.connector.post('resource.collection', {
       data,
       headers: { Accept: '*/*' },

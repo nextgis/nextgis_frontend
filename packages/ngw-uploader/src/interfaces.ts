@@ -15,11 +15,14 @@ export type ImageTypes = 'image/tif' | 'image/tiff' | '.tif';
 
 export interface ResourceCreateOptions {
   id?: number;
-  name?: string;
   parentId?: number;
   keyname?: string;
-  display_name?: string;
+  displayName?: string;
   description?: string;
+  /** @deprecated - use {@link ResourceCreateOptions.displayName} instead */
+  name?: string;
+  /** @deprecated - use {@link ResourceCreateOptions.displayName} instead */
+  display_name?: string;
 }
 
 export type GroupOptions = ResourceCreateOptions;
