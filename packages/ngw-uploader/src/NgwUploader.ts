@@ -1,10 +1,11 @@
 import { EventEmitter } from 'events';
-import { fixUrlStr } from '@nextgis/utils';
+import { fixUrlStr, isObject } from '@nextgis/utils';
 import NgwConnector from '@nextgis/ngw-connector';
 import CancelablePromise from '@nextgis/cancelable-promise';
 
-import { evented, onLoad } from './utils/decorators';
 import { createResourceOptions } from './utils/createResourceOptions';
+import { mapserverStyle } from './utils/mapserverStyle';
+import { evented, onLoad } from './utils/decorators';
 
 import type { Upload } from 'tus-js-client';
 import type { ResourceCls } from '@nextgis/ngw-connector';
@@ -26,11 +27,10 @@ import type {
   RasterUploadOptions,
   VectorUploadOptions,
   CreateRasterOptions,
+  CreateVectorOptions,
   CreateWmsConnectionOptions,
   CreateWmsConnectedLayerOptions,
 } from './interfaces';
-import { mapserverStyle } from './utils/mapserverStyle';
-import { isObject } from '../../utils/src';
 
 let TusUpload: typeof Upload | undefined;
 try {
@@ -123,7 +123,7 @@ export class NgwUploader {
 
   @evented({ status: 'create-vector', template: 'vector creation' })
   createVector(
-    options: CreateRasterOptions,
+    options: CreateVectorOptions,
   ): CancelablePromise<CreatedResource> {
     return this._createResource('vector_layer', options);
   }
@@ -390,7 +390,7 @@ export class NgwUploader {
 
   /**@deprecated - use {@link NgwUploader.createRaster} instead */
   createResource(
-    meta: Record<string, any>,
+    meta: FileMeta,
     name: string,
     options: RasterUploadOptions,
   ): CancelablePromise<CreatedResource> | undefined {
