@@ -76,11 +76,13 @@ export interface RasterRequestOptions {
 }
 
 export interface CreateRasterOptions extends ResourceCreateOptions {
-  source: Record<string, any>;
+  source: FileMeta;
   srs?: {
     id: number;
   };
 }
+
+export type CreateVectorOptions = CreateRasterOptions;
 
 export interface RasterUploadOptions {
   name?: string;
