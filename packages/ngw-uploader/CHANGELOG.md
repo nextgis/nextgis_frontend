@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.3](https://github.com/nextgis/nextgis_frontend/compare/v1.11.2...v1.11.3) (2022-01-03)
+
+
+### Bug Fixes
+
+* **ngw-uploader:** fix createGroup helper method ([6ee71e1](https://github.com/nextgis/nextgis_frontend/commit/6ee71e15a0fb1b405a1a9c585b0ab6b81ecab473))
+
+
+
+
+
 ## [1.11.2](https://github.com/nextgis/nextgis_frontend/compare/v1.11.1...v1.11.2) (2021-12-20)
 
 
