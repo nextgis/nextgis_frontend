@@ -1,10 +1,13 @@
-import NgwConnector, { ResourceCls } from '@nextgis/ngw-connector';
-import CancelablePromise from '@nextgis/cancelable-promise';
 import { EventEmitter } from 'events';
+import { fixUrlStr } from '@nextgis/utils';
+import NgwConnector from '@nextgis/ngw-connector';
+import CancelablePromise from '@nextgis/cancelable-promise';
+
 import { evented, onLoad } from './utils/decorators';
 import { createResourceOptions } from './utils/createResourceOptions';
 
 import type { Upload } from 'tus-js-client';
+import type { ResourceCls } from '@nextgis/ngw-connector';
 import type { CreatedResource, ResourceItem } from '@nextgis/ngw-connector';
 import type {
   WmsServerServiceLayer,
@@ -328,7 +331,7 @@ export class NgwUploader {
           const url = baseUrl + endpoint[0];
 
           const uploader = new TU(file as F, {
-            endpoint: url,
+            endpoint: fixUrlStr(url),
             storeFingerprintForResuming: false,
             chunkSize: DEFAULT_CHUNK_SIZE,
             metadata: { name: fileName },
