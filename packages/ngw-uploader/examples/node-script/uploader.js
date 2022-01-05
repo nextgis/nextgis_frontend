@@ -25,6 +25,7 @@ async function upload(filename, parentId, paint) {
         addTimestampToName: true,
         parentId,
         paint,
+        style: { name: filename + '-style' },
       },
     );
     console.log(`${baseUrl}/resource/${resp.id}/preview`);

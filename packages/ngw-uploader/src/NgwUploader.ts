@@ -90,8 +90,12 @@ export class NgwUploader {
         source: meta,
         ...{ ...options, name },
       }).then((newRes) => {
-        (newRes as any).name = (newRes as any).name || name;
-        return this.createStyle(newRes);
+        const styleOptions: CreateStyleOptions = {
+          name: (newRes as any).name || name,
+          ...options.style,
+          parentId: newRes.id,
+        };
+        return this.createStyle(styleOptions);
       });
     });
   }
@@ -110,12 +114,19 @@ export class NgwUploader {
           if (!v.vector_layer) {
             throw new Error('Vector resource creation error');
           }
-          const geometryType = v.vector_layer.geometry_type;
-          const style = mapserverStyle({
-            geometryType,
-            paint: options.paint,
+          const styleOptions = options.style || {};
+          if (!styleOptions.style) {
+            const geometryType = v.vector_layer.geometry_type;
+            styleOptions.style = mapserverStyle({
+              geometryType,
+              paint: options.paint,
+            });
+          }
+          return this.createStyle({
+            ...styleOptions,
+            cls: 'mapserver_style',
+            parentId: newRes.id,
           });
-          return this.createStyle({ style, cls: 'mapserver_style', ...newRes });
         });
       });
     });
