@@ -84,7 +84,7 @@ export interface CreateRasterOptions extends ResourceCreateOptions {
 
 export type CreateVectorOptions = CreateRasterOptions;
 
-export interface RasterUploadOptions {
+export interface ResourceUploadOptions {
   name?: string;
   parentId?: number;
   srs?: {
@@ -96,8 +96,13 @@ export interface RasterUploadOptions {
   createName?: (name: string) => string;
 }
 
-export interface VectorUploadOptions extends RasterUploadOptions {
+export interface RasterUploadOptions extends ResourceUploadOptions {
+  style?: ResourceCreateOptions;
+}
+
+export interface VectorUploadOptions extends ResourceUploadOptions {
   paint: GeometryPaint;
+  style?: CreateStyleOptions;
 }
 
 export type CreatedRes = CreatedResource & { name: string };
