@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.4](https://github.com/nextgis/nextgis_frontend/compare/v1.11.3...v1.11.4) (2022-01-05)
+
+
+### Bug Fixes
+
+* **ngw-uploader:** fixUrlStr for tus uploader ([db32e16](https://github.com/nextgis/nextgis_frontend/commit/db32e16ee7b4d09fe8910da6733dc3a210e1c4ab))
+
+
+### Features
+
+* **ngw-uploader:** style resource options in upload rasetr and vector methods ([776a183](https://github.com/nextgis/nextgis_frontend/commit/776a183cf5a0028d855a04acf6fcff6598db7ec8))
+
+
+
+
+
 ## [1.11.3](https://github.com/nextgis/nextgis_frontend/compare/v1.11.2...v1.11.3) (2022-01-03)
 
 
