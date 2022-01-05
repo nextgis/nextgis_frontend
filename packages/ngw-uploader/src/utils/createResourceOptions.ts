@@ -10,7 +10,7 @@ export function createResourceOptions(
     parent: {
       id: opt.parentId !== undefined ? opt.parentId : opt.id,
     },
-    display_name: opt.display_name || opt.displayName || opt.name,
+    display_name: opt.displayName || opt.display_name || opt.name,
     keyname: opt.keyname || null,
     description: opt.description || null,
   };
