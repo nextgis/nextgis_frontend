@@ -1,12 +1,12 @@
 {
   "name": "@nextgis/demo-app",
-  "version": "1.11.4",
+  "version": "1.11.5",
   "_priority": 1,
   "description": "",
   "private": true,
   "dependencies": {
     "@mdi/js": "^6.3.95",
-    "@nextgis/ngw-uploader": "^1.11.4",
+    "@nextgis/ngw-uploader": "^1.11.5",
     "core-js": "^3.18.3",
     "favicons": "^6.2.2",
     "highlight.js": "^11.3.1",
