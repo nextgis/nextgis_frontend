@@ -3,9 +3,10 @@ import { fixUrlStr, isObject } from '@nextgis/utils';
 import NgwConnector from '@nextgis/ngw-connector';
 import CancelablePromise from '@nextgis/cancelable-promise';
 
+import { createStyleName, nameFromOpt } from './utils/createName';
 import { createResourceOptions } from './utils/createResourceOptions';
-import { mapserverStyle } from './utils/mapserverStyle';
 import { evented, onLoad } from './utils/decorators';
+import { mapserverStyle } from './utils/mapserverStyle';
 
 import type { Upload } from 'tus-js-client';
 import type { ResourceCls } from '@nextgis/ngw-connector';
@@ -18,11 +19,11 @@ import type {
 } from '@nextgis/ngw-connector';
 import type {
   CreatedRes,
-  UploadedFile,
   GroupOptions,
   EmitterStatus,
   CreateWmsOptions,
   NgwUploadOptions,
+  FileUploadOptions,
   CreateStyleOptions,
   RasterUploadOptions,
   VectorUploadOptions,
@@ -85,17 +86,16 @@ export class NgwUploader {
     file: F,
     options: RasterUploadOptions,
   ): Promise<CreatedRes> {
-    return this._uploadFile(file, options).then(({ meta, name }) => {
+    return this.fileUpload(file, options).then((source) => {
       return this.createRaster({
-        source: meta,
-        ...{ ...options, name },
+        source,
+        ...options,
       }).then((newRes) => {
-        const styleOptions: CreateStyleOptions = {
-          name: (newRes as any).name || name,
+        return this.createStyle({
           ...options.style,
+          displayName: createStyleName({ source, ...options }, options.style),
           parentId: newRes.id,
-        };
-        return this.createStyle(styleOptions);
+        });
       });
     });
   }
@@ -105,10 +105,10 @@ export class NgwUploader {
     file: F,
     options: VectorUploadOptions,
   ): Promise<CreatedResource> {
-    return this._uploadFile(file, options).then(({ meta, name }) => {
+    return this.fileUpload(file, options).then((source) => {
       return this.createVector({
-        source: meta,
-        ...{ ...options, name },
+        source,
+        ...options,
       }).then((newRes) => {
         return this.connector.getResourceOrFail(newRes.id).then((v) => {
           if (!v.vector_layer) {
@@ -122,9 +122,14 @@ export class NgwUploader {
               paint: options.paint,
             });
           }
+          const styleName = createStyleName(
+            { source, ...options },
+            styleOptions,
+          );
           return this.createStyle({
             ...styleOptions,
             cls: 'mapserver_style',
+            displayName: styleName,
             parentId: newRes.id,
           });
         });
@@ -157,12 +162,14 @@ export class NgwUploader {
     if (!this.connector) {
       throw new Error('Connector is not set yet');
     }
+    // for backward compatibility, use always displayName from opt
+    if (name) {
+      opt.displayName = String(name);
+    }
     const cls = opt.cls || 'raster_style';
-    name = name || opt.display_name || opt.name || opt.id;
     const styleData: Record<string, unknown> = {
       resource: {
         ...createResourceOptions(cls, opt),
-        display_name: name + '_style',
       },
     };
     if (opt.style) {
@@ -171,11 +178,7 @@ export class NgwUploader {
     return this.connector
       .post('resource.collection', { data: styleData })
       .then((newStyle) => {
-        return {
-          ...newStyle,
-          // FIXME: check `name` exist in response for all resource created
-          name: (newStyle as any).name || name,
-        };
+        return newStyle;
       });
   }
 
@@ -187,7 +190,6 @@ export class NgwUploader {
     options: CreateWmsOptions,
     name?: string,
   ): CancelablePromise<CreatedResource> | undefined {
-    name = String(name || options.display_name || options.name || options.id);
     let layers: WmsServerServiceLayer[] = options.layers || [
       {
         keyname: [options.keyname, 'image1'].filter(Boolean).join('-'),
@@ -206,7 +208,7 @@ export class NgwUploader {
     });
     const wmsData = {
       resource: {
-        ...createResourceOptions('wmsserver_service', options),
+        ...createResourceOptions('wmsserver_service', { name, ...options }),
         display_name: 'WMS_' + name,
       },
       resmeta: {
@@ -230,7 +232,6 @@ export class NgwUploader {
     options: CreateWmsConnectionOptions,
     name?: string,
   ): CancelablePromise<CreatedResource> | undefined {
-    name = name || options.display_name || options.name || String(options.id);
     const { url, password, username, version, capcache } = options;
 
     const wmsclient_connection: WmsClientConnection = {
@@ -243,7 +244,7 @@ export class NgwUploader {
 
     const wmsData = {
       resource: {
-        ...createResourceOptions('wmsclient_connection', options),
+        ...createResourceOptions('wmsclient_connection', { name, ...options }),
       },
       resmeta: {
         items: {},
@@ -265,7 +266,6 @@ export class NgwUploader {
     name?: string,
   ): CancelablePromise<CreatedResource> | undefined {
     const { id, vendor_params, imgformat, srs, connection } = options;
-    name = name || options.name || String(options.id);
     const wmslayers =
       options.wmslayers && Array.isArray(options.wmslayers)
         ? options.wmslayers.join(',')
@@ -284,7 +284,7 @@ export class NgwUploader {
     };
     const wmsData = {
       resource: {
-        ...createResourceOptions('wmsclient_layer', options),
+        ...createResourceOptions('wmsclient_layer', { name, ...options }),
       },
       resmeta: {
         items: {},
@@ -300,7 +300,7 @@ export class NgwUploader {
   @evented({ status: 'upload', template: 'file upload' })
   fileUpload<F extends File = File>(
     file: F | { file: F; name: string },
-    options: RasterUploadOptions = {},
+    options: FileUploadOptions = {},
   ): CancelablePromise<FileMeta> {
     const connector = this.connector;
     if (!connector) {
@@ -424,23 +424,6 @@ export class NgwUploader {
     this.emitter.emit('load');
   }
 
-  private _uploadFile<F extends File = File>(
-    file: F,
-    options: RasterUploadOptions,
-  ): Promise<UploadedFile> {
-    const fileUpload = this.fileUpload(file, options);
-
-    return fileUpload.then((meta) => {
-      let name = String(options.name || meta.name || meta.id);
-      if (options.createName) {
-        name = options.createName(name);
-      } else if (options.addTimestampToName) {
-        name += '_' + new Date().toISOString();
-      }
-      return { meta, name };
-    });
-  }
-
   private _createResource(
     cls: ResourceCls,
     options: CreateRasterOptions,
@@ -449,7 +432,6 @@ export class NgwUploader {
       throw new Error('Connector is not set yet');
     }
     const { source } = options;
-
     const data = {
       resource: {
         ...createResourceOptions(cls, options),
@@ -463,6 +445,7 @@ export class NgwUploader {
         srs: options.srs || { id: 3857 },
       },
     };
+
     return this.connector.post('resource.collection', {
       data,
       headers: { Accept: '*/*' },
