@@ -18,5 +18,5 @@ export declare function getIcon(opt?: IconOptions): IconPaint;
 
 <b>Returns:</b>
 
-IconPaint
+[IconPaint](./paint.iconpaint.md)
 

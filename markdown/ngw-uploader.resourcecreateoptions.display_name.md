@@ -4,6 +4,11 @@
 
 ## ResourceCreateOptions.display\_name property
 
+> Warning: This API is now obsolete.
+> 
+> - use [ResourceCreateOptions.displayName](./ngw-uploader.resourcecreateoptions.displayname.md) instead
+> 
+
 <b>Signature:</b>
 
 ```typescript

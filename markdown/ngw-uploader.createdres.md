@@ -7,9 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare type CreatedRes = CreatedResource & {
-    name: string;
-};
+export declare type CreatedRes = CreatedResource;
 ```
 <b>References:</b> [CreatedResource](./ngw-connector.createdresource.md)
 

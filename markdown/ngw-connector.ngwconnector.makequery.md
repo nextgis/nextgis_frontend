@@ -9,7 +9,7 @@ Send request to NGW.
 <b>Signature:</b>
 
 ```typescript
-makeQuery(url: string, params?: Params, options?: RequestOptions): CancelablePromise<any>;
+makeQuery<R = unknown>(url: string, params?: Params | null, options?: RequestOptions): CancelablePromise<R>;
 ```
 
 ## Parameters
@@ -17,10 +17,10 @@ makeQuery(url: string, params?: Params, options?: RequestOptions): CancelablePro
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  url | string | URL address to NGW |
-|  params | [Params](./ngw-connector.params.md) | Query params |
+|  params | [Params](./ngw-connector.params.md) \| null | Query params |
 |  options | [RequestOptions](./ngw-connector.requestoptions.md) | Request options |
 
 <b>Returns:</b>
 
-CancelablePromise&lt;any&gt;
+CancelablePromise&lt;R&gt;
 

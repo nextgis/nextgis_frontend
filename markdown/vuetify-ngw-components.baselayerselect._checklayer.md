@@ -14,7 +14,7 @@ protected _checkLayer(e?: LayerAdapter): boolean;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  e | LayerAdapter |  |
+|  e | [LayerAdapter](./webmap.layeradapter.md) |  |
 
 <b>Returns:</b>
 

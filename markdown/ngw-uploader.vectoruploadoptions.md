@@ -7,13 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-export interface VectorUploadOptions extends RasterUploadOptions 
+export interface VectorUploadOptions extends FileUploadOptions 
 ```
-<b>Extends:</b> [RasterUploadOptions](./ngw-uploader.rasteruploadoptions.md)
+<b>Extends:</b> [FileUploadOptions](./ngw-uploader.fileuploadoptions.md)
 
 ## Properties
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [paint](./ngw-uploader.vectoruploadoptions.paint.md) | GeometryPaint |  |
+|  [paint](./ngw-uploader.vectoruploadoptions.paint.md) | [GeometryPaint](./paint.geometrypaint.md) |  |
+|  [style?](./ngw-uploader.vectoruploadoptions.style.md) | [CreateStyleOptions](./ngw-uploader.createstyleoptions.md) | <i>(Optional)</i> |
 

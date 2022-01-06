@@ -7,18 +7,13 @@
 <b>Signature:</b>
 
 ```typescript
-export interface RasterUploadOptions 
+export interface RasterUploadOptions extends FileUploadOptions 
 ```
+<b>Extends:</b> [FileUploadOptions](./ngw-uploader.fileuploadoptions.md)
 
 ## Properties
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [addTimestampToName?](./ngw-uploader.rasteruploadoptions.addtimestamptoname.md) | boolean | <i>(Optional)</i> |
-|  [createName?](./ngw-uploader.rasteruploadoptions.createname.md) | (name: string) =&gt; string | <i>(Optional)</i> |
-|  [name?](./ngw-uploader.rasteruploadoptions.name.md) | string | <i>(Optional)</i> |
-|  [onProgress?](./ngw-uploader.rasteruploadoptions.onprogress.md) | (percentComplete: number) =&gt; void | <i>(Optional)</i> |
-|  [parentId?](./ngw-uploader.rasteruploadoptions.parentid.md) | number | <i>(Optional)</i> |
-|  [put?](./ngw-uploader.rasteruploadoptions.put.md) | boolean | <i>(Optional)</i> |
-|  [srs?](./ngw-uploader.rasteruploadoptions.srs.md) | { id: number; } | <i>(Optional)</i> |
+|  [style?](./ngw-uploader.rasteruploadoptions.style.md) | [ResourceCreateOptions](./ngw-uploader.resourcecreateoptions.md) | <i>(Optional)</i> |
 
