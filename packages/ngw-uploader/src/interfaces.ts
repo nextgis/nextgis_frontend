@@ -19,10 +19,21 @@ export interface ResourceCreateOptions {
   keyname?: string;
   displayName?: string;
   description?: string;
+  srs?: {
+    id: number;
+  };
+  addTimestampToName?: boolean;
   /** @deprecated - use {@link ResourceCreateOptions.displayName} instead */
   name?: string;
   /** @deprecated - use {@link ResourceCreateOptions.displayName} instead */
   display_name?: string;
+
+  createName?: (name: string) => string;
+}
+
+export interface FileUploadOptions extends ResourceCreateOptions {
+  onProgress?: (percentComplete: number) => void;
+  put?: boolean;
 }
 
 export type GroupOptions = ResourceCreateOptions;
@@ -84,33 +95,16 @@ export interface CreateRasterOptions extends ResourceCreateOptions {
 
 export type CreateVectorOptions = CreateRasterOptions;
 
-export interface ResourceUploadOptions {
-  name?: string;
-  parentId?: number;
-  srs?: {
-    id: number;
-  };
-  put?: boolean;
-  onProgress?: (percentComplete: number) => void;
-  addTimestampToName?: boolean;
-  createName?: (name: string) => string;
-}
-
-export interface RasterUploadOptions extends ResourceUploadOptions {
+export interface RasterUploadOptions extends FileUploadOptions {
   style?: ResourceCreateOptions;
 }
 
-export interface VectorUploadOptions extends ResourceUploadOptions {
+export interface VectorUploadOptions extends FileUploadOptions {
   paint: GeometryPaint;
   style?: CreateStyleOptions;
 }
 
-export type CreatedRes = CreatedResource & { name: string };
-
-export interface UploadedFile {
-  meta: FileMeta;
-  name: string;
-}
+export type CreatedRes = CreatedResource;
 
 export interface RespError {
   exception: 'ValidationError';

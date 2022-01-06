@@ -13,19 +13,24 @@ const connector = new NgwConnector({
 });
 const uploader = new NgwUploader({ connector });
 
+const ts = new Date().getTime();
+
 async function upload(filename, parentId, paint) {
   const file = fs.readFileSync(path.join(__dirname, filename));
 
   try {
     console.log(`start "${filename}" uploading`);
-
+    const vectorKey = filename.split('.')[0];
+    const styleKey = vectorKey + '-style';
     const resp = await uploader.uploadVector(
       { file, name: filename },
       {
+        displayName: vectorKey,
         addTimestampToName: true,
+        keyname: vectorKey + ts,
         parentId,
         paint,
-        style: { name: filename + '-style' },
+        style: { displayName: styleKey, keyname: styleKey + ts },
       },
     );
     console.log(`${baseUrl}/resource/${resp.id}/preview`);
