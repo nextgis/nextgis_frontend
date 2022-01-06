@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.6](https://github.com/nextgis/nextgisweb_frontend/compare/v1.11.5...v1.11.6) (2022-01-06)
+
+
+### Bug Fixes
+
+* **ngw-uploader:** unification of resource createion options ([a3a3773](https://github.com/nextgis/nextgisweb_frontend/commit/a3a3773f3d42fdcffeea1da0298b302a99082280))
+
+
+
+
+
 ## [1.11.5](https://github.com/nextgis/nextgisweb_frontend/compare/v1.11.4...v1.11.5) (2022-01-05)
 
 **Note:** Version bump only for package root

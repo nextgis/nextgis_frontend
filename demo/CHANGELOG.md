@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.6](https://github.com/nextgis/nextgis_frontend/compare/v1.11.5...v1.11.6) (2022-01-06)
+
+**Note:** Version bump only for package @nextgis/demo-app
+
+
+
+
+
 ## [1.11.5](https://github.com/nextgis/nextgis_frontend/compare/v1.11.4...v1.11.5) (2022-01-05)
 
 **Note:** Version bump only for package @nextgis/demo-app
