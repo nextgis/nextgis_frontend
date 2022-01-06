@@ -7,14 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-createVector(options: CreateRasterOptions): CancelablePromise<CreatedResource>;
+createVector(options: CreateVectorOptions): CancelablePromise<CreatedResource>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | [CreateRasterOptions](./ngw-uploader.createrasteroptions.md) |  |
+|  options | [CreateVectorOptions](./ngw-uploader.createvectoroptions.md) |  |
 
 <b>Returns:</b>
 

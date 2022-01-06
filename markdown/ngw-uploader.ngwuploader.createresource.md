@@ -12,14 +12,14 @@
 <b>Signature:</b>
 
 ```typescript
-createResource(meta: Record<string, any>, name: string, options: RasterUploadOptions): CancelablePromise<CreatedResource> | undefined;
+createResource(meta: FileMeta, name: string, options: RasterUploadOptions): CancelablePromise<CreatedResource> | undefined;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  meta | Record&lt;string, any&gt; |  |
+|  meta | [FileMeta](./ngw-connector.filemeta.md) |  |
 |  name | string |  |
 |  options | [RasterUploadOptions](./ngw-uploader.rasteruploadoptions.md) |  |
 

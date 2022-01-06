@@ -14,10 +14,14 @@ export interface ResourceCreateOptions
 
 |  Property | Type | Description |
 |  --- | --- | --- |
+|  [addTimestampToName?](./ngw-uploader.resourcecreateoptions.addtimestamptoname.md) | boolean | <i>(Optional)</i> |
+|  [createName?](./ngw-uploader.resourcecreateoptions.createname.md) | (name: string) =&gt; string | <i>(Optional)</i> |
 |  [description?](./ngw-uploader.resourcecreateoptions.description.md) | string | <i>(Optional)</i> |
 |  [display\_name?](./ngw-uploader.resourcecreateoptions.display_name.md) | string | <i>(Optional)</i> |
+|  [displayName?](./ngw-uploader.resourcecreateoptions.displayname.md) | string | <i>(Optional)</i> |
 |  [id?](./ngw-uploader.resourcecreateoptions.id.md) | number | <i>(Optional)</i> |
 |  [keyname?](./ngw-uploader.resourcecreateoptions.keyname.md) | string | <i>(Optional)</i> |
 |  [name?](./ngw-uploader.resourcecreateoptions.name.md) | string | <i>(Optional)</i> |
 |  [parentId?](./ngw-uploader.resourcecreateoptions.parentid.md) | number | <i>(Optional)</i> |
+|  [srs?](./ngw-uploader.resourcecreateoptions.srs.md) | { id: number; } | <i>(Optional)</i> |
 
