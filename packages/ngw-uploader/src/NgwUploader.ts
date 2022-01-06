@@ -3,7 +3,7 @@ import { fixUrlStr, isObject } from '@nextgis/utils';
 import NgwConnector from '@nextgis/ngw-connector';
 import CancelablePromise from '@nextgis/cancelable-promise';
 
-import { createStyleName, nameFromOpt } from './utils/createName';
+import { createStyleName } from './utils/createName';
 import { createResourceOptions } from './utils/createResourceOptions';
 import { evented, onLoad } from './utils/decorators';
 import { mapserverStyle } from './utils/mapserverStyle';
