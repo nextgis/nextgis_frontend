@@ -517,14 +517,12 @@ export abstract class VectorAdapter<
           let p: keyof typeof pathPaint;
           for (p in pathPaint) {
             // Special case for strokeColor
-            if (
-              type === 'polygon' &&
-              (p === 'color' || p === 'strokeColor') &&
-              pathPaint.stroke
-            ) {
+            const polyStroke =
+              type === 'polygon' && (p === 'color' || p === 'strokeColor');
+            if (polyStroke && pathPaint.stroke) {
               mapboxPaint['fill-outline-color'] = pathPaint[p];
             }
-            if (p !== 'strokeColor') {
+            if (!polyStroke) {
               const allowedType = allowed.find((x) => {
                 if (typeof x === 'string') {
                   return x === p;
