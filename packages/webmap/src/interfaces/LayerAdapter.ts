@@ -96,13 +96,11 @@ export interface AdapterOptions<
   minZoom?: number;
   /**
    * TODO: replace by minZoom
-   * @internal
    * @deprecated use minZoom instead
    */
   minScale?: number;
   /**
    * TODO: replace by maxZoom
-   * @internal
    * @deprecated use maxZoom instead
    */
   maxScale?: number;
@@ -332,27 +330,20 @@ export interface VectorAdapterOptions<
   labelField?: keyof P extends null ? string : keyof P;
   label?: (e: LayerDefinition<F, L>) => string;
 
-  /**
-   * @internal
-   */
   source?: unknown;
   /**
-   * @internal
    * @deprecated - TODO: move to nativeOptions
    */
   nativePaint?: boolean | Record<string, any>;
   /**
-   * @internal
    * @deprecated - TODO: move to nativeOptions
    */
   nativeFilter?: unknown;
   /**
-   * @internal
    * @deprecated - TODO: move to nativeOptions
    */
   layout?: any;
   /**
-   * @internal
    * @deprecated - TODO: move to nativeOptions
    */
   selectedLayout?: any;
@@ -665,7 +656,6 @@ export interface VectorLayerAdapter<
   /**
    * Callback function that will be called when clicking on a layer.
    * @param event - Data that is transmitted when you click on a layer.
-   * @internal
    */
   onLayerClick?(event: OnLayerMouseOptions): Promise<any>;
 

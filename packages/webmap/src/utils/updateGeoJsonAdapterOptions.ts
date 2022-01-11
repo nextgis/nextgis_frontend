@@ -15,9 +15,6 @@ export const paintTypeAlias: Record<VectorAdapterLayerType, any> = {
   point: 'circle',
 };
 
-/**
- * @internal
- */
 export const typeAlias: { [x: string]: VectorAdapterLayerType } = {
   Point: 'point',
   LineString: 'line',
