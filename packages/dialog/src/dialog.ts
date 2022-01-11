@@ -14,9 +14,6 @@ const closeBtn = `
   </a>
 `;
 
-/**
- * @alpha
- */
 export class Dialog implements DialogAdapter {
   static dialogs: Dialog[] = [];
   options: DialogAdapterOptions = {
