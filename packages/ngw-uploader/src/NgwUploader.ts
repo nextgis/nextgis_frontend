@@ -33,7 +33,7 @@ import type {
   CreateWmsConnectedLayerOptions,
 } from './interfaces';
 
-type FileType = File | { file: File; name: string };
+type FileType = File | { file: File | Buffer; name: string };
 
 let TusUpload: typeof Upload | undefined;
 try {
