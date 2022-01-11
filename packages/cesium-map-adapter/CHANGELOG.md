@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.7](https://github.com/nextgis/nextgis_frontend/compare/v1.11.6...v1.11.7) (2022-01-11)
+
+**Note:** Version bump only for package @nextgis/cesium-map-adapter
+
+
+
+
+
 # [1.11.0](https://github.com/nextgis/nextgis_frontend/compare/v1.10.0...v1.11.0) (2021-12-19)
 
 **Note:** Version bump only for package @nextgis/cesium-map-adapter

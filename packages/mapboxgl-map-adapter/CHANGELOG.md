@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.7](https://github.com/nextgis/nextgis_frontend/compare/v1.11.6...v1.11.7) (2022-01-11)
+
+
+### Bug Fixes
+
+* **mapbox-map-adapter:** point paint stroke color ([4b982de](https://github.com/nextgis/nextgis_frontend/commit/4b982de5876b2019f72ecadc1329b2ca286aae32))
+
+
+
+
+
 # [1.11.0](https://github.com/nextgis/nextgis_frontend/compare/v1.10.0...v1.11.0) (2021-12-19)
 
 **Note:** Version bump only for package @nextgis/mapboxgl-map-adapter
