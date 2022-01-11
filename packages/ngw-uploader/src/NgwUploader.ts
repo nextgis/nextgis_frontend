@@ -33,6 +33,8 @@ import type {
   CreateWmsConnectedLayerOptions,
 } from './interfaces';
 
+type FileType = File | { file: File; name: string };
+
 let TusUpload: typeof Upload | undefined;
 try {
   const tus = require('tus-js-client');
@@ -82,7 +84,7 @@ export class NgwUploader {
   }
 
   @onLoad()
-  uploadRaster<F extends File = File>(
+  uploadRaster<F extends FileType = FileType>(
     file: F,
     options: RasterUploadOptions,
   ): Promise<CreatedRes> {
@@ -101,7 +103,7 @@ export class NgwUploader {
   }
 
   @onLoad()
-  uploadVector<F extends File = File>(
+  uploadVector<F extends FileType = FileType>(
     file: F,
     options: VectorUploadOptions,
   ): Promise<CreatedResource> {
@@ -298,8 +300,8 @@ export class NgwUploader {
   }
 
   @evented({ status: 'upload', template: 'file upload' })
-  fileUpload<F extends File = File>(
-    file: F | { file: F; name: string },
+  fileUpload(
+    file: FileType,
     options: FileUploadOptions = {},
   ): CancelablePromise<FileMeta> {
     const connector = this.connector;
@@ -341,7 +343,7 @@ export class NgwUploader {
           const baseUrl = connector.options.baseUrl || '';
           const url = baseUrl + endpoint[0];
 
-          const uploader = new TU(file as F, {
+          const uploader = new TU(file as File, {
             endpoint: fixUrlStr(url),
             storeFingerprintForResuming: false,
             chunkSize: DEFAULT_CHUNK_SIZE,
@@ -384,7 +386,7 @@ export class NgwUploader {
       const request = options.put ? this.connector.put : this.connector.post;
       return request
         .call(connector, 'file_upload.upload', {
-          file: file as F,
+          file: file as File,
           onProgress,
         })
         .then((resp) => {
