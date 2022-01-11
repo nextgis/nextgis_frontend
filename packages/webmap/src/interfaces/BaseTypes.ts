@@ -26,7 +26,6 @@ export type LayerDef = string | LayerAdapter;
 /**
  * Available cursor names from
  * {@link https://developer.mozilla.org/ru/docs/Web/CSS/cursor}
- * @internal
  */
 export type Cursor =
   | 'auto'

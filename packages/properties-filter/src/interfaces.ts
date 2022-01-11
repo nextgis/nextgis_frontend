@@ -20,7 +20,6 @@ export type Operations =
   | 'like'
   | 'ilike';
 
-/** @internal */
 export type Properties = { [name: string]: any };
 
 /**
