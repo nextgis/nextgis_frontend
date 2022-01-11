@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/properties-filter",
-  "version": "1.11.0",
+  "version": "1.11.7",
   "description": "Filtering objects by its properties using expressions",
   "main": "index.js",
   "module": "lib/properties-filter.esm-bundler.js",
