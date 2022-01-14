@@ -100,13 +100,14 @@ Map-free tools for common purpose
 
 See how nextgis frontend libraries are used in real projects
 
+- [nglink](https://github.com/nextgis/nglink) ([LIVE](https://show.nextgis.com)) – Server side - express.js with ngw-uploader; client - webpack, typescript, ngw-map.
+- [russia-history](https://github.com/nextgis/russia-history) – Russia history live web map ([LIVE](https://map.runivers.ru)). Mapbox-gl-js, NGW MTV api, layer load event listener. Webpacj and typescript.
+- [clear_horizon_frontend](https://github.com/nextgis/clear_horizon_frontend) – Clear horizon frontend. NGW auth system, leaflet typescript based webpack project.
 - [webpack-template](https://github.com/rendrom/nextgis-frontend-webpack-template) – Webpack based JavaScript template project.
 - [walrus-ais](https://github.com/nextgis/walrus-ais) – NgwMapbox map with React.
 - [wwf-oilspill](https://github.com/nextgis/wwf-oilspill) – Emergency situations with oil spills ([LIVE](http://nextgis.ru/demo/oilspill/build/)), minimal dependency typescript project with Leaflet.
-- [oralhistory](https://github.com/nextgis/oralhistory) ([LIVE](https://nextgis.ru/demo/oralhistory/dist/)) – Typescript, Vuetify, Mapbox-gl-js and properties filter usage example.
-- [clear_horizon_frontend](https://github.com/nextgis/clear_horizon_frontend) – Clear horizon frontend. NGW auth system, leaflet typescript based webpack project.
-- [petro2020](https://github.com/rendrom/petro2020) ([LIVE](http://petro2020.igc.irk.ru/)). Native JavaScript for leaflet and mapbox-gl-gs in one project.
-- [russia-history](https://github.com/nextgis/russia-history) – Russia history live web map ([LIVE](https://map.runivers.ru)). Mapbox-gs-js, NGW MTV api, layer load event listener. Webpacj and typescript.
+- [oralhistory](https://github.com/nextgis/oralhistory) ([LIVE](https://pastandnow.ru/)) – Typescript, Vuetify, Mapbox-gl-js and properties filter usage example.
+- [petro2020](https://github.com/rendrom/petro2020) ([LIVE](http://petro2020.igc.irk.ru/)). Native JavaScript for leaflet and Mapbox-gl-gs in one project.
 - [nextgisweb_viewer](https://github.com/nextgis/nextgisweb_viewer) – Service for viewing map resources from NextGIS Web ([LIVE](http://viewer.nextgis.com)). Vuetify, typescript (outdated).
 - [ngw_frontend_boilerplate](https://github.com/nextgis/ngw_frontend_boilerplate). Parcel build (outdated).
 
