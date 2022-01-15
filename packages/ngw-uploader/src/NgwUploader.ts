@@ -3,7 +3,7 @@ import { fixUrlStr, isObject } from '@nextgis/utils';
 import NgwConnector from '@nextgis/ngw-connector';
 import CancelablePromise from '@nextgis/cancelable-promise';
 
-import { createStyleName } from './utils/createName';
+import { createStyleName, nameFromOpt } from './utils/createName';
 import { createResourceOptions } from './utils/createResourceOptions';
 import { evented, onLoad } from './utils/decorators';
 import { mapserverStyle } from './utils/mapserverStyle';
@@ -33,7 +33,7 @@ import type {
   CreateWmsConnectedLayerOptions,
 } from './interfaces';
 
-type FileType = File | { file: File | Buffer; name: string };
+type FileType = File | Buffer | { file: File | Buffer; name: string };
 
 let TusUpload: typeof Upload | undefined;
 try {
@@ -62,19 +62,22 @@ export class NgwUploader {
   @evented({ status: 'create-group', template: 'group creation' })
   createGroup(
     nameOrOptions: string | GroupOptions,
-    options: GroupOptions = {},
+    opt: GroupOptions = {},
   ): CancelablePromise<CreatedResource> {
     if (!this.connector) {
       throw new Error('Connector is not set yet');
     }
     if (typeof nameOrOptions === 'string') {
-      options.name = nameOrOptions;
+      opt.name = nameOrOptions;
     } else {
-      options = nameOrOptions;
+      opt = nameOrOptions;
     }
     const data = {
       resource: {
-        ...createResourceOptions('resource_group', options),
+        ...createResourceOptions('resource_group', opt),
+      },
+      resmeta: opt.resmeta || {
+        items: {},
       },
     };
     return this.connector.post('resource.collection', {
@@ -173,6 +176,9 @@ export class NgwUploader {
       resource: {
         ...createResourceOptions(cls, opt),
       },
+      resmeta: opt.resmeta || {
+        items: {},
+      },
     };
     if (opt.style) {
       styleData[cls] = opt.style;
@@ -189,14 +195,14 @@ export class NgwUploader {
     template: 'wms creation for resource ID {id}',
   })
   createWms(
-    options: CreateWmsOptions,
+    opt: CreateWmsOptions,
     name?: string,
   ): CancelablePromise<CreatedResource> | undefined {
-    let layers: WmsServerServiceLayer[] = options.layers || [
+    let layers: WmsServerServiceLayer[] = opt.layers || [
       {
-        keyname: [options.keyname, 'image1'].filter(Boolean).join('-'),
+        keyname: [opt.keyname, 'image1'].filter(Boolean).join('-'),
         display_name: name,
-        resource_id: options.resourceId ?? options.id,
+        resource_id: opt.resourceId ?? opt.id,
       },
     ];
     layers = layers.map((x: any) => {
@@ -210,10 +216,10 @@ export class NgwUploader {
     });
     const wmsData = {
       resource: {
-        ...createResourceOptions('wmsserver_service', { name, ...options }),
+        ...createResourceOptions('wmsserver_service', { name, ...opt }),
         display_name: 'WMS_' + name,
       },
-      resmeta: {
+      resmeta: opt.resmeta || {
         items: {},
       },
       wmsserver_service: {
@@ -231,10 +237,10 @@ export class NgwUploader {
     template: 'create wms connection',
   })
   createWmsConnection(
-    options: CreateWmsConnectionOptions,
+    opt: CreateWmsConnectionOptions,
     name?: string,
   ): CancelablePromise<CreatedResource> | undefined {
-    const { url, password, username, version, capcache } = options;
+    const { url, password, username, version, capcache } = opt;
 
     const wmsclient_connection: WmsClientConnection = {
       url,
@@ -246,9 +252,9 @@ export class NgwUploader {
 
     const wmsData = {
       resource: {
-        ...createResourceOptions('wmsclient_connection', { name, ...options }),
+        ...createResourceOptions('wmsclient_connection', { name, ...opt }),
       },
-      resmeta: {
+      resmeta: opt.resmeta || {
         items: {},
       },
       wmsclient_connection,
@@ -264,14 +270,14 @@ export class NgwUploader {
     template: 'create WMS layer for conected resource ID {id}',
   })
   createWmsConnectedLayer(
-    options: CreateWmsConnectedLayerOptions,
+    opt: CreateWmsConnectedLayerOptions,
     name?: string,
   ): CancelablePromise<CreatedResource> | undefined {
-    const { id, vendor_params, imgformat, srs, connection } = options;
+    const { id, vendor_params, imgformat, srs, connection } = opt;
     const wmslayers =
-      options.wmslayers && Array.isArray(options.wmslayers)
-        ? options.wmslayers.join(',')
-        : options.wmslayers;
+      opt.wmslayers && Array.isArray(opt.wmslayers)
+        ? opt.wmslayers.join(',')
+        : opt.wmslayers;
 
     const wmsClientLayer: WmsClientLayer = {
       connection: connection || {
@@ -286,9 +292,9 @@ export class NgwUploader {
     };
     const wmsData = {
       resource: {
-        ...createResourceOptions('wmsclient_layer', { name, ...options }),
+        ...createResourceOptions('wmsclient_layer', { name, ...opt }),
       },
-      resmeta: {
+      resmeta: opt.resmeta || {
         items: {},
       },
       wmsclient_layer: wmsClientLayer,
@@ -330,7 +336,10 @@ export class NgwUploader {
       return connector.connect().then((routers) => {
         const endpoint = routers['file_upload.collection'];
 
-        const fileName = file.name;
+        const fileName = 'name' in file ? file.name : nameFromOpt(options);
+        if (!fileName) {
+          throw new Error('File `name` is not defined');
+        }
         if (isObject(file) && 'file' in file) {
           file = file.file;
         }
@@ -428,15 +437,18 @@ export class NgwUploader {
 
   private _createResource(
     cls: ResourceCls,
-    options: CreateRasterOptions,
+    opt: CreateRasterOptions,
   ): CancelablePromise<CreatedResource> {
     if (!this.connector) {
       throw new Error('Connector is not set yet');
     }
-    const { source } = options;
+    const { source } = opt;
     const data = {
       resource: {
-        ...createResourceOptions(cls, options),
+        ...createResourceOptions(cls, opt),
+      },
+      resmeta: opt.resmeta || {
+        items: {},
       },
       [cls]: {
         source: {
@@ -444,7 +456,7 @@ export class NgwUploader {
           mime_type: source.mime_type,
           size: source.size,
         },
-        srs: options.srs || { id: 3857 },
+        srs: opt.srs || { id: 3857 },
       },
     };
 

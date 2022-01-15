@@ -1,10 +1,11 @@
+import { defined } from '@nextgis/utils';
 import type { FileMeta } from '@nextgis/ngw-connector';
 import type { ResourceCreateOptions } from '../interfaces';
 
-export function nameFromOpt(
-  opt: ResourceCreateOptions,
-): string | number | undefined {
-  return opt.displayName || opt.display_name || opt.name || opt.id;
+export function nameFromOpt(opt: ResourceCreateOptions): string | undefined {
+  return opt.displayName || opt.display_name || opt.name || defined(opt.id)
+    ? String(opt.id)
+    : undefined;
 }
 
 export function createResourceName(
