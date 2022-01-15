@@ -260,11 +260,13 @@ export interface NgwFile {
   size: number;
 }
 
+export interface Resmeta {
+  items: Record<string, any>;
+}
+
 export interface ResourceItemMain {
   resource: Resource;
-  resmeta: {
-    items: Record<string, any>;
-  };
+  resmeta: Resmeta;
 }
 
 // Ngw api settings

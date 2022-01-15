@@ -1,5 +1,6 @@
 import type NgwConnector from '@nextgis/ngw-connector';
 import type {
+  Resmeta,
   FileMeta,
   ResourceCls,
   GeometryType,
@@ -22,6 +23,7 @@ export interface ResourceCreateOptions {
   srs?: {
     id: number;
   };
+  resmeta?: Resmeta;
   addTimestampToName?: boolean;
   /** @deprecated - use {@link ResourceCreateOptions.displayName} instead */
   name?: string;
