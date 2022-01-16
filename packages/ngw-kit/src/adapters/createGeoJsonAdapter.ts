@@ -4,7 +4,7 @@ import { propertiesFilter } from '@nextgis/properties-filter';
 
 import { createPopupContent } from '../utils/createPopupContent';
 import { getLayerFilterOptions } from '../utils/getLayerFilterOptions';
-import { fetchNgwResourceExtent } from '../utils/fetchNgwExtent';
+import { fetchNgwExtent } from '../utils/fetchNgwExtent';
 import { resourceIdFromLayerOptions } from '../utils/resourceIdFromLayerOptions';
 import { vectorLayerGeomToPaintTypeAlias } from '../utils/utils';
 import { fetchNgwLayerFeatureCollection } from '../utils/fetchNgwLayerFeatureCollection';
@@ -152,7 +152,7 @@ export async function createGeoJsonAdapter(
       const hasData = this.getLayers && this.getLayers().length;
       const strategy = this.options.strategy;
       if (strategy?.startsWith('BBOX') || hasData) {
-        return fetchNgwResourceExtent(item, connector);
+        return fetchNgwExtent({ connector, resourceId: item.resource.id });
       } else {
         if (super.getBounds) {
           return super.getBounds();

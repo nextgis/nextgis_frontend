@@ -151,9 +151,9 @@ export class NgwMap<
    *
    * @example
    * ```javascript
-   * // add raster layer resourceId is the style of 4004 layer
+   * // Add raster layer resourceId is the style of 4004 layer
    * ngwMap.addNgwLayer({ resource: 4005 });
-   * // add vector data from layer GEOJSON source
+   * // Add vector data from layer GEOJSON source
    * ngwMap.addNgwLayer({
    *   resource: 4038,
    *   adapter: 'GEOJSON',
@@ -365,7 +365,7 @@ export class NgwMap<
    *
    * @example
    * ```javascript
-   * const ngwLayer = ngwMap.addNgwLayer({ id: 'ngw_layer_name', resourceId: 4005 });
+   * const ngwLayer = ngwMap.addNgwLayer({ id: 'ngw_layer_name', resource: 4005 });
    * ngwMap.fitLayer(ngwLayer);
    * ngwMap.fitLayer('ngw_layer_name');
    * ```
