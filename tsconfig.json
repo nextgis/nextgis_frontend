@@ -17,6 +17,8 @@
     "types": ["node"],
     "rootDir": ".",
 
+    "jsx": "react",
+
     "emitDecoratorMetadata": true,
     "noImplicitReturns": false,
 
@@ -24,13 +26,6 @@
       "@nextgis/*": ["./packages/*/src/"]
     }
   },
-  "include": [
-    "packages/global.d.ts",
-    "packages/*/src",
-  ],
-  "exclude": [
-    "tests",
-    "node_modules"
-  ]
+  "include": ["packages/global.d.ts", "packages/*/src"],
+  "exclude": ["tests", "node_modules"]
 }
-
