@@ -1,0 +1,4 @@
+{
+  "name": "Select NGW Layer distinct",
+  "description": "Show a list of unique values by fields from the resource of the NGV vector layer"
+}

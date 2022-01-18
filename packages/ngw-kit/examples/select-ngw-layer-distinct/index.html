@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Select NGW Layer distinct</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <script
+      type="text/javascript"
+      src="../../../ngw-connector/lib/ngw-connector.global.js"
+    ></script>
+    <script type="text/javascript" src="../../lib/ngw-kit.global.js"></script>
+  </head>
+
+  <body>
+    <div id="feature-list"></div>
+
+    <script>
+      // NGW resource keyname
+      const keyname = 'eat-here';
+      const featureListBlock = document.getElementById('feature-list');
+      const fields = ['AMENITY', 'NAME'];
+      const connector = new NgwConnector({
+        baseUrl: 'https://demo.nextgis.com',
+      });
+
+      connector.getResource(keyname).then((res) => {
+        const resourceId = res.resource.id;
+        return NgwKit.mapFeatureDisplayName({
+          connector,
+          resourceId,
+          fields,
+        }).then((displayFields) => {
+          NgwKit.selectNgwLayerDistinct({
+            fields,
+            connector,
+            resourceId,
+          }).then((select) => {
+            featureListBlock.innerHTML = '';
+            for (const k in select) {
+              featureListBlock.innerHTML += `<p></p><p><b>${
+                displayFields[fields.indexOf(k)]
+              }</b></p><ul>`;
+
+              for (const i of select[k]) {
+                featureListBlock.innerHTML += `<li>${i}</li>`;
+              }
+              featureListBlock.innerHTML += `</ul>`;
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
