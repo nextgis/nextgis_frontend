@@ -70,9 +70,32 @@ export function createFeatureFieldFilterQueries<
 >(
   opt: FetchNgwItemsOptions<P> &
     Required<Pick<FetchNgwItemsOptions, 'filters'>>,
+): CancelablePromise<FeatureItem<P, G>[]> {
+  const queries: CancelablePromise<FeatureItem<P, G>[]>[] = getQueries<G, P>(
+    opt,
+  );
+
+  return CancelablePromise.all(queries).then((itemsParts) => {
+    const items = itemsParts.reduce((a, b) => a.concat(b), []);
+
+    const offset = opt.offset !== undefined ? opt.offset : 0;
+    const limit = opt.limit !== undefined ? opt.limit : items.length;
+    if (opt.offset || opt.limit) {
+      return items.splice(offset, limit);
+    }
+    return items;
+  });
+}
+
+function getQueries<
+  G extends Geometry = Geometry,
+  P extends { [field: string]: any } = { [field: string]: any },
+>(
+  opt: FetchNgwItemsOptions<P> &
+    Required<Pick<FetchNgwItemsOptions, 'filters'>>,
   _queries: CancelablePromise<FeatureItem<P, G>[]>[] = [],
   _parentAllParams: [string, any][] = [],
-): CancelablePromise<FeatureItem<P, G>[]> {
+): CancelablePromise<FeatureItem<P, G>[]>[] {
   const { filters } = opt;
 
   const logic = typeof filters[0] === 'string' ? filters[0] : 'all';
@@ -96,7 +119,7 @@ export function createFeatureFieldFilterQueries<
   };
 
   if (logic === 'any') {
-    filters_.forEach((f) => {
+    for (const f of filters_) {
       if (isPropertyFilter(f)) {
         _queries.push(
           fetchNgwLayerItemsRequest<G, P>({
@@ -105,7 +128,7 @@ export function createFeatureFieldFilterQueries<
           }),
         );
       } else {
-        createFeatureFieldFilterQueries(
+        getQueries(
           {
             ...opt,
             filters: f,
@@ -114,7 +137,7 @@ export function createFeatureFieldFilterQueries<
           [..._parentAllParams],
         );
       }
-    });
+    }
   } else if (logic === 'all') {
     const filters: [string, any][] = [];
     const propertiesFilterList: PropertiesFilter[] = [];
@@ -128,7 +151,7 @@ export function createFeatureFieldFilterQueries<
 
     if (propertiesFilterList.length) {
       for (const x of propertiesFilterList) {
-        createFeatureFieldFilterQueries(
+        getQueries(
           {
             ...opt,
             filters: x,
@@ -146,17 +169,7 @@ export function createFeatureFieldFilterQueries<
       );
     }
   }
-
-  return CancelablePromise.all(_queries).then((itemsParts) => {
-    const items = itemsParts.reduce((a, b) => a.concat(b), []);
-
-    const offset = opt.offset !== undefined ? opt.offset : 0;
-    const limit = opt.limit !== undefined ? opt.limit : items.length;
-    if (opt.offset || opt.limit) {
-      return items.splice(offset, limit);
-    }
-    return items;
-  });
+  return _queries;
 }
 
 function createWktFromCoordArray(coord: LngLatArray[]): string {
@@ -223,68 +236,4 @@ export function fetchNgwLayerItemsRequest<
     { cache: options.cache },
     reqParams,
   ) as CancelablePromise<FeatureItem<P, G>[]>;
-}
-
-export function prepareFieldsToNgw<
-  T extends FeatureProperties = FeatureProperties,
->(
-  item: T,
-  resourceFields: Pick<FeatureProperties, 'keyname' | 'datatype'>[],
-): Record<keyof T, any> {
-  const fields = {} as Record<keyof T, any>;
-  if (item) {
-    resourceFields.forEach((x) => {
-      if (x.keyname in item) {
-        const keyname = x.keyname;
-        const prop = item[keyname];
-        let value: any;
-        if (prop !== undefined) {
-          if (x.datatype === 'STRING') {
-            value = prop ? String(prop) : null;
-            // TODO: remove after v 3.0.0. For backward compatibility
-            if (value === 'null') {
-              value = null;
-            }
-          } else if (x.datatype === 'BIGINT' || x.datatype === 'INTEGER') {
-            value = typeof prop === 'string' ? parseInt(prop, 10) : prop;
-          } else if (x.datatype === 'REAL') {
-            value = typeof prop === 'string' ? parseFloat(prop) : prop;
-          } else if (x.datatype === 'BOOLEAN') {
-            value =
-              typeof prop === 'boolean' || typeof prop === 'number'
-                ? Number(!!prop)
-                : null;
-          } else if (x.datatype === 'DATE' || x.datatype === 'DATETIME') {
-            let dt: Date | undefined;
-            if (typeof prop === 'object' && !((prop as any) instanceof Date)) {
-              value = prop;
-            } else {
-              if ((prop as any) instanceof Date) {
-                dt = prop as any;
-              } else {
-                const parse = Date.parse(String(prop));
-                if (parse) {
-                  dt = new Date(parse);
-                }
-              }
-              if (dt) {
-                value = {
-                  year: dt.getFullYear(),
-                  month: dt.getMonth(),
-                  day: dt.getDay(),
-                };
-                if (x.datatype === 'DATETIME') {
-                  value.hour = dt.getHours();
-                  value.minute = dt.getMinutes();
-                  value.second = dt.getSeconds();
-                }
-              }
-            }
-          }
-        }
-        fields[keyname as keyof T] = value ?? null;
-      }
-    });
-  }
-  return fields;
 }
