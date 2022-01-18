@@ -1,25 +1,40 @@
+import CancelablePromise from '@nextgis/cancelable-promise';
 import type NgwConnector from '@nextgis/ngw-connector';
 import type { ResourceDefinition } from '@nextgis/ngw-connector';
+import { defined } from '../../../utils/src';
 
 export interface MapFeatureDisplayNameOptions {
   connector: NgwConnector;
-  resource: ResourceDefinition;
+  resource?: ResourceDefinition;
+  /**
+   * @deprecated - use {@link MapFeatureDisplayNameOptions.resource} instead
+   */
+  resourceId?: number;
   fields: string[];
 }
 
-export async function mapFeatureDisplayName({
+export function mapFeatureDisplayName({
   connector,
   resource,
+  resourceId,
   fields,
-}: MapFeatureDisplayNameOptions): Promise<string[]> {
-  return connector.getResource(resource).then((res) => {
+}: MapFeatureDisplayNameOptions): CancelablePromise<string[]> {
+  const id = resource || resourceId;
+  if (!defined(id)) {
+    throw new Error(
+      'The `resource` or `resourceId` is required option for mapFeatureDisplayName function',
+    );
+  }
+  return connector.getResource(id).then((res) => {
     const featureLayer = res && res.feature_layer;
     if (featureLayer) {
-      return fields.map((x) => {
-        const alias = featureLayer.fields.find((y) => y.keyname === x);
-        return alias ? alias.display_name : x;
-      });
+      return CancelablePromise.resolve(
+        fields.map((x) => {
+          const alias = featureLayer.fields.find((y) => y.keyname === x);
+          return alias ? alias.display_name : x;
+        }),
+      );
     }
-    return fields;
+    return CancelablePromise.resolve(fields);
   });
 }
