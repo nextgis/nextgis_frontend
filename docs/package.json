@@ -6,7 +6,7 @@
     "doc": "node ./node_modules/typedoc/bin/typedoc"
   },
   "devDependencies": {
-    "typedoc": "^0.22.10"
+    "typedoc": "^0.22.11"
   },
   "license": "MIT",
   "dependencies": {}
