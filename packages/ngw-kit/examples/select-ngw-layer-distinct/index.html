@@ -7,10 +7,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <script
-      type="text/javascript"
-      src="../../../ngw-connector/lib/ngw-connector.global.js"
-    ></script>
+    <script type="text/javascript" src="../../../ngw-connector/lib/ngw-connector.global.js"></script>
     <script type="text/javascript" src="../../lib/ngw-kit.global.js"></script>
   </head>
 
@@ -37,6 +34,7 @@
             fields,
             connector,
             resourceId,
+            filters: [['NAME', 'ilike', '%Cafe%']],
           }).then((select) => {
             featureListBlock.innerHTML = '';
             for (const k in select) {

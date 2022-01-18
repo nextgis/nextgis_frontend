@@ -22,7 +22,7 @@ export function fetchNgwLayerItems<
       filters,
     }).then((data) => {
       // Additional client-side filter check
-      data.filter((y) => {
+      data = data.filter((y) => {
         const fields = prepareNgwFieldsToPropertiesFilter({ ...y.fields });
         const result = propertiesFilter(fields, filters);
         return result;
