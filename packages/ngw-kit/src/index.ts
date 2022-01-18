@@ -51,10 +51,10 @@
  */
 import { NgwKit } from './NgwKit';
 
-export * from './NgwResource';
 export * from './NgwWebmapLayerAdapter';
 export * from './NgwWebmapItem';
 export * from './IdentifyItem';
+export * from './NgwResource';
 
 export * from './constants';
 
@@ -71,6 +71,7 @@ export * from './utils/fetchNgwLayerItems';
 export * from './utils/fetchNgwLayerFeature';
 export * from './utils/mapFeatureDisplayName';
 export * from './utils/fetchNgwLayerFeatures';
+export * from './utils/selectNgwLayerDistinct';
 export * from './utils/uploadFeatureAttachment';
 export * from './utils/resourceIdFromLayerOptions';
 export * from './utils/fetchNgwLayerFeatureCollection';
