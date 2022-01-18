@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.8](https://github.com/nextgis/nextgis_frontend/compare/v1.11.7...v1.11.8) (2022-01-18)
+
+
+### Features
+
+* **ngw-uplader:** save meta on upload ([3f4ec99](https://github.com/nextgis/nextgis_frontend/commit/3f4ec99b8986833970516de3c14c35c4cfcc8986))
+
+
+
+
+
 ## [1.11.3](https://github.com/nextgis/nextgis_frontend/compare/v1.11.2...v1.11.3) (2022-01-03)
 
 **Note:** Version bump only for package @nextgis/ngw-connector

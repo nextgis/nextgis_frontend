@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.8](https://github.com/nextgis/nextgisweb_frontend/compare/v1.11.7...v1.11.8) (2022-01-18)
+
+
+### Features
+
+* **ngw-kit:** add new selectNgwLayerDistinct util ([cf1ee23](https://github.com/nextgis/nextgisweb_frontend/commit/cf1ee23e3cc7ddb401e22035710ee0d272c51096))
+* **ngw-uplader:** save meta on upload ([3f4ec99](https://github.com/nextgis/nextgisweb_frontend/commit/3f4ec99b8986833970516de3c14c35c4cfcc8986))
+
+
+
+
+
 ## [1.11.7](https://github.com/nextgis/nextgisweb_frontend/compare/v1.11.6...v1.11.7) (2022-01-11)
 
 
