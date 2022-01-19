@@ -1,21 +1,5 @@
 import { createContext, useContext } from 'react';
-import type { NgwMap } from '@nextgis/ngw-map';
-import type { LayerAdapter } from '@nextgis/ngw-map';
-
-export const CONTEXT_VERSION = 1;
-
-export interface ControlledLayer {
-  addLayer(layer: LayerAdapter): void;
-  removeLayer(layer: LayerAdapter): void;
-}
-
-export interface NgwMapContextInterface {
-  __version: number;
-  ngwMap: NgwMap;
-  layerContainer?: ControlledLayer;
-  overlayContainer?: LayerAdapter;
-  pane?: string;
-}
+import type { NgwMapContextInterface } from './interfaces';
 
 export const NgwMapContext = createContext<NgwMapContextInterface | null>(null);
 
