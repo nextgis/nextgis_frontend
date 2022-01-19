@@ -1,20 +1,11 @@
-import React,{
-  useEffect,
-  useState,
-  useRef,
-  useMemo,
-} from 'react';
+import { createElement, useEffect, useState, useRef, useMemo } from 'react';
 
-import { CONTEXT_VERSION, NgwMapProvider } from './context';
+import { NgwMapProvider } from './context';
 import { useMapElement } from './hooks/useMapElement';
 
-import type { MapContainerProps } from './interfaces';
+import type { ReactNgwMapProps } from './interfaces';
 
-
-
-export function ReactNgwMap<
-  Props extends MapContainerProps = MapContainerProps,
->({
+export function ReactNgwMap<Props extends ReactNgwMapProps = ReactNgwMapProps>({
   whenCreated,
   placeholder,
   className,
@@ -46,23 +37,14 @@ export function ReactNgwMap<
   }, []);
 
   const [props] = useState({ className, id, style });
-  const context = useMemo(
-    () => (ngwMap ? { __version: CONTEXT_VERSION, ngwMap } : null),
-    [ngwMap],
-  );
+  const context = useMemo(() => (ngwMap ? { ngwMap } : null), [ngwMap]);
 
-  const contents = context ? (
-    <NgwMapProvider value={context}>{children}</NgwMapProvider>
-  ) : (
-    placeholder ?? null
-  );
+  const contents = context
+    ? createElement(NgwMapProvider, { value: context }, children)
+    : placeholder ?? null;
   const p = { ...props };
   if (!p.id) {
     p.id = 'map';
   }
-  return (
-    <div {...p} ref={mapRef}>
-      {contents}
-    </div>
-  );
+  return createElement('div', { ...p, ref: mapRef }, contents);
 }

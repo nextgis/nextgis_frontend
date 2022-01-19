@@ -1,31 +1,31 @@
 import type { CSSProperties, ReactNode } from 'react';
+import type { NgwMap, NgwMapOptions, LayerAdapter } from '@nextgis/ngw-map';
 
-import type { MapAdapter } from '@nextgis/webmap';
-
-import type { NgwMap, NgwMapOptions } from '@nextgis/ngw-map';
-
-import type NgwConnector from '@nextgis/ngw-connector';
-
-export interface ReactNgwMapData<M = any> {
-  ngwMap: NgwMap<M>;
-  ready: boolean;
+export interface ControlledLayer {
+  addLayer(layer: LayerAdapter): void;
+  removeLayer(layer: LayerAdapter): void;
 }
 
-export interface ReactNgwMapProps {
-  mapAdapter: MapAdapter;
-  fullFilling: boolean;
-  connector: NgwConnector;
-  baseUrl: string;
-  qmsId: string;
-  webMapId: string;
-  mapOptions: NgwMapOptions;
+export interface NgwMapContextInterface {
+  ngwMap: NgwMap;
+  layerContainer?: ControlledLayer;
+  overlayContainer?: LayerAdapter;
+  pane?: string;
 }
 
-export interface MapContainerProps extends NgwMapOptions {
+export type ReactNgwMapProps = MapContainerProps &
+  Required<Pick<MapContainerProps, 'mapAdapter'>>;
+
+export interface MapContainerProps<
+  M = any,
+  L = any,
+  C = any,
+  O extends NgwMapOptions<C> = NgwMapOptions<C>,
+> extends NgwMapOptions {
   children?: ReactNode;
   className?: string;
   id?: string;
   placeholder?: ReactNode;
   style?: CSSProperties;
-  whenCreated?: (map: NgwMap) => void;
+  whenCreated?: (map: NgwMap<M, L, C, O>) => void;
 }
