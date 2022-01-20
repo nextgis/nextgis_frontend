@@ -1,5 +1,7 @@
 # Control Container
 
+![size](https://img.shields.io/bundlephobia/minzip/@nextgis/control-container) ![version](https://img.shields.io/npm/v/@nextgis/cache)
+
 This library allows placing control elements in the corners of the map container.
 
 Libraries such as `Leaflet` and `Mapbox GL JS` are already doing this,

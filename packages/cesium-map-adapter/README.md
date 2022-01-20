@@ -1,6 +1,6 @@
-# OpenLayers map adapter
+# Cesium map adapter
 
-Webmap adapter to use [OpenLayers](https://openlayers.org/) GIS framework
+Webmap adapter to use [Cesuim](https://openlayers.org/) GIS framework
 
 This library is not intended for using directly in the browser.
 
@@ -8,19 +8,17 @@ Use OlMapAdapter with NPM installation method for building large scale applicati
 
 ```bash
 # latest stable
-$ npm install --save-dev @nextgis/ol-map-adapter
+$ npm install --save-dev @nextgis/cesium-map-adapter
 # or
-$ yarn add @nextgis/ol-map-adapter
+$ yarn add @nextgis/cesium-map-adapter
 ```
 
 ```javascript
 import { WebMap } from '@nextgis/webmap';
-import OlMapAdapter from '@nextgis/ol-map-adapter';
-// manually added styles
-import 'ol/ol.css';
+import MapAdapter from '@nextgis/cesium-map-adapter';
 
 const webMap = new WebMap({
-  mapAdapter: new OlMapAdapter()
+  mapAdapter: new MapAdapter()
 });
 
 webMap.create(options).then(() => {
@@ -30,6 +28,6 @@ webMap.create(options).then(() => {
 
 ## Commercial support
 
-Need to fix a bug or add a feature to `@nextgis/ol-map-adapter`? We provide custom development and support for this software. [Contact us](http://nextgis.com/contact/) to discuss options!
+Need to fix a bug or add a feature to `@nextgis/cesium-map-adapter`? We provide custom development and support for this software. [Contact us](http://nextgis.com/contact/) to discuss options!
 
 [![http://nextgis.com](https://nextgis.ru/img/nextgis.png)](http://nextgis.com)

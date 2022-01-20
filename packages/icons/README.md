@@ -1,5 +1,7 @@
 # Icons
 
+![size](https://img.shields.io/bundlephobia/minzip/@nextgis/icons) ![version](https://img.shields.io/npm/v/@nextgis/icons)
+
 Svg icons pack
 
 ## Installation

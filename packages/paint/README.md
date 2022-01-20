@@ -1,5 +1,7 @@
 # Paint
 
+![size](https://img.shields.io/bundlephobia/minzip/@nextgis/paint) ![version](https://img.shields.io/npm/v/@nextgis/paint)
+
 An auxiliary library for working with the style of vector layers
 
 ## Installation
