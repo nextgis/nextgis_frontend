@@ -1,5 +1,7 @@
 # Properties Filter
 
+![size](https://img.shields.io/bundlephobia/minzip/@nextgis/properties-filter) ![version](https://img.shields.io/npm/v/@nextgis/properties-filter)
+
 An auxiliary library that allows filtering objects by its properties using JSON-serializable expressions
 
 ## Installation
