@@ -13,15 +13,13 @@
       "ignore": [
         "@nextgis/demo-app",
         "@nextgis/build-tools",
-        "@nextgis/eslint-config",
-        "@nextgis/react-ngw-map"
+        "@nextgis/eslint-config"
       ]
     },
     "publish": {
       "ignoreChanges": [
         "@nextgis/frontend_test",
-        "@nextgis/demo-app",
-        "@nextgis/react-ngw-map"
+        "@nextgis/demo-app"
       ]
     }
   }
