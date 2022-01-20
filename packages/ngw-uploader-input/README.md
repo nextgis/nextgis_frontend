@@ -1,5 +1,7 @@
 # Ngw Uploader Input
 
+![size](https://img.shields.io/bundlephobia/minzip/@nextgis/ngw-uploader-input) ![version](https://img.shields.io/npm/v/@nextgis/ngw-uploader-input)
+
 Library for simplifying uploading data to the NGW cloud from the browser
 
 ## Installation
