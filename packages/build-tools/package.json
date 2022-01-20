@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/build-tools",
-  "version": "1.11.0",
+  "version": "1.11.10",
   "description": "",
   "dependencies": {
     "@microsoft/api-extractor": "^7.18.19",
