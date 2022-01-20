@@ -1,5 +1,7 @@
 # Mapbox GL JS map adapter
 
+![size](https://img.shields.io/bundlephobia/minzip/@nextgis/mapboxgl-map-adapter) ![version](https://img.shields.io/npm/v/@nextgis/mapboxgl-map-adapter)
+
 Webmap adapter to use [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/) framework.
 
 This library is not intended for using directly in the browser.

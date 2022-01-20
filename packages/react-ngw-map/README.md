@@ -1,5 +1,7 @@
 # ReactNgwMap component
 
+![size](https://img.shields.io/bundlephobia/minzip/@nextgis/react-ngw-map) ![version](https://img.shields.io/npm/v/@nextgis/react-ngw-map)
+
 Plugin to integrate NGW maps into react web framework
 
 ```html

@@ -1,6 +1,8 @@
 # NgwMap
 
-Abstract map for ngw
+![size](https://img.shields.io/bundlephobia/minzip/@nextgis/ngw-map) ![version](https://img.shields.io/npm/v/@nextgis/ngw-map)
+
+Abstract Map for NGW
 
 This library is not intended for using directly in the browser.
 
