@@ -326,7 +326,8 @@ export type FetchNgwItemOptions<
 
 export type FetchNgwItemsOptions<
   P extends FeatureProperties = FeatureProperties,
-> = GetNgwItemsOptions<P> & NgwFeatureRequestOptions<P>;
+> = GetNgwItemsOptions<P> &
+  NgwFeatureRequestOptions<P> & { clientFilterValidate?: boolean };
 
 export interface FeatureIdentifyRequestOptions {
   /**
