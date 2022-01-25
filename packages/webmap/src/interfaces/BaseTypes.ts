@@ -28,6 +28,7 @@ export type LayerDef = string | LayerAdapter;
  * {@link https://developer.mozilla.org/ru/docs/Web/CSS/cursor}
  */
 export type Cursor =
+  | ''
   | 'auto'
   | 'crosshair'
   | 'default'

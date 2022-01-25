@@ -21,6 +21,7 @@ export interface TreeLayer extends TreeItem {
   layer_max_scale_denom?: number;
   layer_min_scale_denom?: number;
   layer_style_id: number;
+  style_parent_id: number;
   layer_transparency: number;
 }
 
