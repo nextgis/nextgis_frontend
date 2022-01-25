@@ -1,3 +1,4 @@
+import { defined } from '@nextgis/utils';
 import { Paint, preparePaint } from '@nextgis/paint';
 import { propertiesFilter } from '@nextgis/properties-filter';
 
@@ -5,7 +6,7 @@ import { updateGeoJsonAdapterOptions } from './utils/updateGeoJsonAdapterOptions
 import { WebMapMain } from './WebMapMain';
 
 import type { Feature, GeoJsonObject, Geometry } from 'geojson';
-import { defined, FeatureProperties, TileJson, Type } from '@nextgis/utils';
+import type { FeatureProperties, TileJson, Type } from '@nextgis/utils';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 
 import type {
@@ -324,6 +325,9 @@ export class WebMapLayers<
         if (extent) {
           await this.fitBounds(extent);
         }
+      }
+      if (options.onAdded) {
+        options.onAdded(_adapter);
       }
       this._emitLayerEvent('layer:add', layerId, _adapter);
       return _adapter;
