@@ -155,6 +155,8 @@ export interface AdapterOptions<
 
   /** Experimental only for Ol yet */
   srs?: number;
+
+  onAdded?: (layer: LayerAdapter) => void;
 }
 
 export interface MvtAdapterOptions<F extends Feature = Feature>
