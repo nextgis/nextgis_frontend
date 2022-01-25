@@ -25,7 +25,10 @@ export function fetchNgwLayerItems<
       // Additional client-side filter check
       if (clientFilterValidate) {
         data = data.filter((y) => {
-          const fields = prepareNgwFieldsToPropertiesFilter({ ...y.fields, id: y.id });
+          const fields = prepareNgwFieldsToPropertiesFilter({
+            ...y.fields,
+            id: y.id,
+          });
           const result = propertiesFilter(fields, filters);
           return result;
         });

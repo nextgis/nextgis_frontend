@@ -1,10 +1,13 @@
 import type { ControlPosition } from './MapAdapter';
 
-export type OnClickSync = (status?: boolean) => void;
+export type OnClickSync = () => void;
+export type onClickAsync = () => Promise<void>;
 
-export type onClickAsync = (status?: boolean) => Promise<void>;
+export type OnToggleClickSync = (status: boolean) => void;
+export type onToggleClickAsync = (status: boolean) => Promise<void>;
 
 export type OnClick = OnClickSync | onClickAsync;
+export type OnToggleClick = OnToggleClickSync | onToggleClickAsync;
 
 // like in https://leafletjs.com/reference-1.3.4.html#control-zoom
 
@@ -108,7 +111,7 @@ export interface ToggleControlOptions {
   /** Button HTMLElement title, can be set for each state (`on` or `off`). */
   title?: string | TitleToggle;
   /** Set an action to execute when button clicked. */
-  onClick?: OnClick;
+  onClick?: OnToggleClick;
   /** Get current control status. */
   getStatus?: () => boolean;
 }

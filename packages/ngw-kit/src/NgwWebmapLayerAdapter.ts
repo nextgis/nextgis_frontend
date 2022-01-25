@@ -286,6 +286,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
 
   private _setBasemaps(baseWebmap: BasemapWebmap) {
     const webMap = this.options.webMap;
+    // to avoid set many basemaps on init
     let enabledAlreadySet = false;
     for (const x of baseWebmap.basemaps) {
       createOnFirstShowNgwAdapter({
@@ -294,9 +295,11 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
         item: x,
         adapterOptions: { crossOrigin: this.options.crossOrigin },
       }).then((adapter) => {
-        // to avoid set many basemaps on init
         const visibility = enabledAlreadySet ? false : x.enabled;
-        webMap
+        if (x.enabled) {
+          enabledAlreadySet = true;
+        }
+        return webMap
           .addBaseLayer(adapter, {
             id: WEBMAP_BASELAYER_ID_PREFIX + x.resource_id,
             name: x.display_name,
@@ -306,9 +309,6 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
           .then((l) => {
             l.id && this._webmapBaselayersIds.push(l.id);
           });
-        if (x.enabled) {
-          enabledAlreadySet = true;
-        }
       });
     }
   }
