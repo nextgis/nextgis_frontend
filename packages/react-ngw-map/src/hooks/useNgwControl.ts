@@ -21,11 +21,5 @@ export function useNgwControl(
     [context.ngwMap, instance],
   );
 
-  useEffect(function addControl() {
-    return function removeControl() {
-      console.log(123);
-    };
-  }, []);
-
   return instance;
 }
