@@ -15,6 +15,10 @@ export function createButtonControl(
   link.setAttribute('role', 'button');
   link.setAttribute('aria-label', title);
 
+  if (options.addClass) {
+    link.classList.add(options.addClass);
+  }
+
   DomEvent.disableClickPropagation(link);
   DomEvent.on(link, 'click', DomEvent.stop);
 

@@ -1,8 +1,9 @@
-import { MutableRefObject } from 'react';
+import { useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { useNgwMapContext } from './context';
-import { mapControlCreator } from './mapControlCreator';
+import { useNgwControl } from './hooks/useNgwControl';
 
-import type { ReactNode } from 'react';
+import type { ReactNode, MutableRefObject } from 'react';
 import type { ControlOptions, CreateControlOptions } from '@nextgis/webmap';
 
 interface MapControlProps extends CreateControlOptions, ControlOptions {
@@ -12,7 +13,7 @@ interface MapControlProps extends CreateControlOptions, ControlOptions {
 export function MapControl<P extends MapControlProps = MapControlProps>(
   props: P,
 ) {
-  const { bar, margin, addClass } = props;
+  const { bar, margin, addClass, children } = props;
   const context = useNgwMapContext();
 
   function createControl(portal: MutableRefObject<HTMLDivElement>) {
@@ -32,5 +33,11 @@ export function MapControl<P extends MapControlProps = MapControlProps>(
     );
   }
 
-  return mapControlCreator({ ...props, context, createControl });
+  const el = document.createElement('div');
+  const portal = useRef(el);
+
+  const instance = useRef(createControl(portal));
+  useNgwControl(context, instance, props.position);
+
+  return createPortal(children, portal.current);
 }

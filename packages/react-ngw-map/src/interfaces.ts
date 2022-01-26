@@ -1,9 +1,20 @@
-import type { CSSProperties, ReactNode } from 'react';
-import type { NgwMap, NgwMapOptions, LayerAdapter } from '@nextgis/ngw-map';
+import type { CSSProperties, MutableRefObject, ReactNode } from 'react';
+import type {
+  NgwMap,
+  NgwMapOptions,
+  LayerAdapter,
+  ControlOptions,
+} from '@nextgis/ngw-map';
 
 export interface ControlledLayer {
   addLayer(layer: LayerAdapter): void;
   removeLayer(layer: LayerAdapter): void;
+}
+
+export interface MapControlProps extends ControlOptions {
+  children?: ReactNode;
+  context: NgwMapContextInterface;
+  createControl: (portal: MutableRefObject<HTMLDivElement>) => Promise<unknown>;
 }
 
 export interface NgwMapContextInterface {
