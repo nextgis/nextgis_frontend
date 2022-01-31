@@ -1,5 +1,5 @@
-import type { Feature, Polygon } from 'geojson';
 import { EARTHS_RADIUS } from './constants';
+import type { Feature, Polygon, Position } from 'geojson';
 
 const d2r = Math.PI / 180; // degrees to radians
 const r2d = 180 / Math.PI; // radians to degrees
@@ -9,7 +9,7 @@ export function getCirclePolygonCoordinates(
   lat: number,
   radius = 10,
   points = 6,
-): number[][] {
+): Position[] {
   // find the radius in lat/lon
   const rlat = (radius / EARTHS_RADIUS) * r2d;
   const rlng = rlat / Math.cos(lat * d2r);

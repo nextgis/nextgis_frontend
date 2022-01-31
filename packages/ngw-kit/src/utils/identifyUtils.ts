@@ -2,15 +2,15 @@ import CancelablePromise from '@nextgis/cancelable-promise';
 import {
   JsonMap,
   degrees2meters,
-  getCirclePolygonCoordinates,
   deprecatedMapClick,
+  getCirclePolygonCoordinates,
 } from '@nextgis/utils';
 import { IdentifyItem } from '../IdentifyItem';
 import { createGeoJsonFeature } from './featureLayerUtils';
 import { fetchNgwLayerFeature } from './fetchNgwLayerFeature';
 import { fetchNgwLayerItem } from './fetchNgwLayerItem';
 
-import type { Geometry, Feature } from 'geojson';
+import type { Geometry, Feature, Position } from 'geojson';
 import type { MapClickEvent } from '@nextgis/webmap';
 import type { FeatureProperties } from '@nextgis/utils';
 import type {
@@ -19,16 +19,16 @@ import type {
 } from '@nextgis/ngw-connector';
 import type {
   FeatureIdentifyRequestOptions,
+  FeatureLayerIdentifyOptions,
   GetIdentifyGeoJsonOptions,
   IdentifyRequestOptions,
   NgwFeatureItemResponse,
   IdentifyItemOptions,
   NgwIdentifyItem,
-  NgwIdentify,
 } from '../interfaces';
 
 export function getIdentifyItems(
-  identify: NgwIdentify,
+  identify: FeatureLayersIdentify & { resources?: number[] },
   multiple = false,
 ): NgwIdentifyItem[] {
   let params:
@@ -136,6 +136,43 @@ export function getIdentifyGeoJson<
   return fetchIdentifyGeoJson(options);
 }
 
+export function featureLayerIdentify(options: FeatureLayerIdentifyOptions) {
+  const g = options.geom;
+  let geom: Position[] = [];
+  if (Array.isArray(g)) {
+    geom = g;
+  } else {
+    const polygon =
+      g.type === 'Feature' ? g.geometry : g.type === 'Polygon' ? g : false;
+    if (polygon) {
+      geom = polygon.coordinates[0];
+    }
+  }
+  if (geom) {
+    // create wkt string
+    const polygonStr: string[] = [];
+
+    for (const [lng, lat] of geom) {
+      const [x, y] = degrees2meters(lng, lat);
+      polygonStr.push(x + ' ' + y);
+    }
+
+    const wkt = `POLYGON((${polygonStr.join(', ')}))`;
+
+    const layers: number[] = options.layers;
+
+    const data: FeatureIdentifyRequestOptions = {
+      geom: wkt,
+      srs: 3857,
+      layers,
+    };
+
+    return options.connector.post('feature_layer.identify', { data });
+  } else {
+    throw new Error('Not valid geometry format to make intersection');
+  }
+}
+
 export function sendIdentifyRequest(
   ev: MapClickEvent,
   options: IdentifyRequestOptions,
@@ -143,42 +180,10 @@ export function sendIdentifyRequest(
   deprecatedMapClick(ev);
   const [lng, lat] = ev.lngLat;
 
-  let geom: number[][] = [];
+  const geom =
+    options.geom ?? getCirclePolygonCoordinates(lng, lat, options.radius);
 
-  if (options.geom) {
-    const polygon =
-      options.geom.type === 'Feature'
-        ? options.geom.geometry
-        : options.geom.type === 'Polygon'
-        ? options.geom
-        : false;
-    if (polygon) {
-      geom = polygon.coordinates[0];
-    }
-  }
-  if (!geom.length) {
-    geom = getCirclePolygonCoordinates(lng, lat, options.radius);
-  }
-
-  // create wkt string
-  const polygon: string[] = [];
-
-  geom.forEach(([lng, lat]) => {
-    const [x, y] = degrees2meters(lng, lat);
-    polygon.push(x + ' ' + y);
-  });
-
-  const wkt = `POLYGON((${polygon.join(', ')}))`;
-
-  const layers: number[] = options.layers;
-
-  const data: FeatureIdentifyRequestOptions = {
-    geom: wkt,
-    srs: 3857,
-    layers,
-  };
-
-  return options.connector.post('feature_layer.identify', { data });
+  return featureLayerIdentify({ ...options, geom });
 }
 
 export function createIdentifyItem<
