@@ -1,4 +1,4 @@
-import type { Feature, Geometry, Polygon } from 'geojson';
+import type { Feature, Geometry, Polygon, Position } from 'geojson';
 import type {
   WebMap,
   WebMapEvents,
@@ -164,6 +164,12 @@ export interface NgwWebmapAdapterOptions<M = any> extends A {
    * @defaultValue false;
    */
   useExtentConstrained?: boolean;
+}
+
+export interface FeatureLayerIdentifyOptions {
+  layers: number[];
+  connector: NgwConnector;
+  geom: Feature<Polygon> | Polygon | Position[];
 }
 
 export interface IdentifyRequestOptions {
