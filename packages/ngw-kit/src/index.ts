@@ -72,6 +72,7 @@ export * from './utils/prepareFieldsToNgw';
 export * from './utils/fetchNgwLayerFeature';
 export * from './utils/mapFeatureDisplayName';
 export * from './utils/fetchNgwLayerFeatures';
+export * from './utils/ngwApiToAdapterOptions';
 export * from './utils/selectNgwLayerDistinct';
 export * from './utils/uploadFeatureAttachment';
 export * from './utils/resourceIdFromLayerOptions';
