@@ -1,17 +1,45 @@
-import {
+import { updateImageParams } from './utils';
+
+import type {
   WebMap,
   RasterAdapterOptions,
   ImageAdapterOptions,
   WmsAdapterOptions,
 } from '@nextgis/webmap';
-
-import { NgwLayerOptions, TileNoData } from '../interfaces';
-import { updateImageParams } from './utils';
+import type { NgwLayerOptions, TileNoData } from '../interfaces';
 
 export interface GetLayerAdapterOptions {
   options: NgwLayerOptions;
   webMap?: WebMap;
   baseUrl?: string;
+}
+
+export interface GetImageAdapterOptionsParams {
+  resourceId: number;
+  baseUrl?: string;
+  nd?: TileNoData;
+  headers: any;
+}
+
+export function getImageAdapterOptions({
+  resourceId,
+  baseUrl,
+  nd,
+  headers,
+}: GetImageAdapterOptionsParams): ImageAdapterOptions {
+  const url = baseUrl + '/api/component/render/image';
+  const params: Record<string, any> = { resource: resourceId };
+  if (nd) {
+    params.nd = nd;
+  }
+  return {
+    url,
+    resourceId,
+    headers,
+    params,
+    updateWmsParams: (params: Record<string, any>) =>
+      updateImageParams({ nd, ...params }, resourceId),
+  } as ImageAdapterOptions;
 }
 
 export function ngwApiToAdapterOptions({
@@ -33,15 +61,12 @@ export function ngwApiToAdapterOptions({
   if (typeof resourceId === 'number') {
     if (adapter === 'IMAGE') {
       if (isImageAllowed) {
-        url = baseUrl + '/api/component/render/image';
-        return {
-          url,
+        return getImageAdapterOptions({
           resourceId,
           headers: options.headers,
-          params: { resource: resourceId, nd: nd },
-          updateWmsParams: (params: Record<string, any>) =>
-            updateImageParams({ nd: nd, ...params }, resourceId),
-        } as ImageAdapterOptions;
+          nd,
+          baseUrl,
+        });
       } else {
         adapter = 'TILE';
       }
