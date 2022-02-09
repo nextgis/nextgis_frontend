@@ -496,7 +496,22 @@ export class WebMapLayers<
   addImageLayer(
     url: string,
     options: Omit<ImageAdapterOptions, 'url'>,
+  ): Promise<MainLayerAdapter<M, L, ImageAdapterOptions>>;
+  addImageLayer(
+    options: ImageAdapterOptions,
+  ): Promise<MainLayerAdapter<M, L, ImageAdapterOptions>>;
+  addImageLayer(
+    urlOrOptions: string | ImageAdapterOptions,
+    options?: Omit<ImageAdapterOptions, 'url'>,
   ): Promise<MainLayerAdapter<M, L, ImageAdapterOptions>> {
+    let url;
+    if (typeof urlOrOptions === 'string') {
+      url = urlOrOptions;
+    } else {
+      url = urlOrOptions.url;
+      options = urlOrOptions;
+    }
+
     return this.addLayer('IMAGE', { ...options, url }) as Promise<
       MainLayerAdapter<M, L, ImageAdapterOptions>
     >;
