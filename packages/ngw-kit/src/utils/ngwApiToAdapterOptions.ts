@@ -15,7 +15,7 @@ export interface GetLayerAdapterOptions {
 }
 
 export interface GetImageAdapterOptionsParams {
-  resourceId: number;
+  resourceId: number | number[];
   baseUrl?: string;
   nd?: TileNoData;
   headers: any;
@@ -37,8 +37,12 @@ export function getImageAdapterOptions({
     resourceId,
     headers,
     params,
-    updateWmsParams: (params: Record<string, any>) =>
-      updateImageParams({ nd, ...params }, resourceId),
+    updateWmsParams: (params_: Record<string, any>) => {
+      if (nd) {
+        params_.nd = nd;
+      }
+      return updateImageParams(params_, resourceId);
+    },
   } as ImageAdapterOptions;
 }
 
