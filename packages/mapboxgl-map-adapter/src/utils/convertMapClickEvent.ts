@@ -1,8 +1,8 @@
 import type { MapClickEvent } from '@nextgis/webmap';
-import type { EventData, MapEventType } from 'maplibre-gl';
+import type { MapMouseEvent, MapEventType } from 'maplibre-gl';
 
 export function convertMapClickEvent(
-  evt: MapEventType['click'] & EventData,
+  evt: MapEventType['click'] & MapMouseEvent,
 ): MapClickEvent {
   const latLng = evt.lngLat;
   const { lng, lat } = latLng;
