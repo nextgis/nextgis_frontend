@@ -3,7 +3,7 @@
     /* Basic Options */
     "baseUrl": ".",
     "sourceMap": false,
-    "target": "es2019", // "es5",
+    "target": "es5",
     "module": "esnext",
     "moduleResolution": "node",
     "allowJs": false,

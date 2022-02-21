@@ -1,4 +1,4 @@
 // import { MapControl } from '@nextgis/webmap';
-import { AttributionControl as AC } from 'maplibre-gl';
+import { AttributionControl } from 'maplibre-gl';
 
-export class AttributionControl extends AC {}
+export { AttributionControl };
