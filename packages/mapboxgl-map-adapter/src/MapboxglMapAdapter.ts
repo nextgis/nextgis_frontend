@@ -9,7 +9,7 @@ import { MvtAdapter } from './layer-adapters/MvtAdapter';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
 import { TileAdapter } from './layer-adapters/TileAdapter';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
-import { zoomControl } from './controls/ZoomControl';
+import { ZoomControl } from './controls/ZoomControl';
 import { createControl } from './controls/createControl';
 import { CompassControl } from './controls/CompassControl';
 import { AttributionControl } from './controls/AttributionControl';
@@ -65,7 +65,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   };
 
   static controlAdapters: { [name: string]: any } = {
-    ZOOM: zoomControl(),
+    ZOOM: ZoomControl,
     COMPASS: CompassControl,
     ATTRIBUTION: AttributionControl,
   };
