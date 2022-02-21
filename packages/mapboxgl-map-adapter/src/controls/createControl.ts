@@ -1,5 +1,5 @@
-import { IControl } from 'maplibre-gl';
-import { MapControl, CreateControlOptions } from '@nextgis/webmap';
+import type { ControlPosition, IControl } from 'maplibre-gl';
+import type { MapControl, CreateControlOptions } from '@nextgis/webmap';
 
 export function createControl(
   control: MapControl,
@@ -9,7 +9,7 @@ export function createControl(
     private _container?: HTMLElement;
 
     getDefaultPosition() {
-      return 'top-left';
+      return 'top-left' as ControlPosition;
     }
 
     onAdd() {

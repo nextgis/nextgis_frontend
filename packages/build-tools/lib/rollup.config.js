@@ -148,14 +148,16 @@ function createConfig(format, output, plugins = []) {
   }
 
   if (format !== 'cjs') {
-    [
-      require('@rollup/plugin-node-resolve').nodeResolve({
-        preferBuiltins: false,
-      }),
-      require('@rollup/plugin-commonjs')({
-        sourceMap: false,
-      }),
-    ].forEach((x) => nodePlugins.push(x));
+    nodePlugins.push(
+      ...[
+        require('@rollup/plugin-node-resolve').nodeResolve({
+          preferBuiltins: false,
+        }),
+        require('@rollup/plugin-commonjs')({
+          sourceMap: false,
+        }),
+      ],
+    );
   }
 
   nodePlugins.push(require('@rollup/plugin-image')());
