@@ -1,9 +1,10 @@
 import { NavigationControl } from 'maplibre-gl';
 import type { ZoomControlOptions } from '@nextgis/webmap';
 
-const N = NavigationControl;
+export class ZoomControl extends NavigationControl {
+  options = {} as ZoomControlOptions & any;
 
-export function zoomControl(options = {} as ZoomControlOptions & any) {
-  console.log(N);
-  return class ZoomControl extends N {};
+  constructor(options: ZoomControlOptions & any = {}) {
+    super({ ...options, showCompass: false });
+  }
 }
