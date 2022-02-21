@@ -12,11 +12,12 @@ import {
   typeAlias,
 } from '../utils/geomType';
 
-import type {
+import {
   Map,
   GeoJSONSource,
-  GeoJSONSourceRaw,
-  GeoJSONSourceOptions,
+  FilterSpecification,
+  GeoJSONSourceSpecification,
+  FilterSpecificationInputType,
 } from 'maplibre-gl';
 import type {
   GeometryCollection,
@@ -232,22 +233,22 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   protected async _beforeLayerLayer(sourceId: string): Promise<void> {
     let source = this.map.getSource(sourceId) as GeoJSONSource;
     if (!source) {
-      const sourceOpt: GeoJSONSourceRaw = {
+      const sourceOpt: GeoJSONSourceSpecification = {
         type: 'geojson',
         data: {
           type: 'FeatureCollection',
           features: [],
         },
       };
-      const _opts: (keyof (GeoJsonAdapterOptions | GeoJSONSourceOptions))[] = [
+      const _opts: (keyof GeoJSONSourceSpecification)[] = [
         'cluster',
         'clusterMaxZoom',
         'clusterRadius',
       ];
       for (const x of _opts) {
-        const opt = this.options[x];
-        if (opt !== undefined) {
-          sourceOpt[x] = opt;
+        const value = (this.options as Record<string, unknown>)[x];
+        if (value !== undefined) {
+          Object.defineProperty(sourceOpt, x, { value });
         }
       }
       this.map.addSource(sourceId, sourceOpt);
@@ -346,11 +347,12 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
       return;
     }
     const selected = this._selectedFeatureIds;
-    let selectionArray: (string | number)[] = [];
-    const filteredArray: (string | number)[] = [];
+    let selectionArray: FilterSpecificationInputType[] = [];
+    const filteredArray: FilterSpecificationInputType[] = [];
     const filtered = this._filteredFeatureIds;
     if (filtered) {
-      this._getFeatures().forEach((x) => {
+      const features = this._getFeatures();
+      for (const x of features) {
         const id = this._getFeatureFilterId(x);
         if (id !== undefined && filtered.indexOf(id) !== -1) {
           if (selected && selected.indexOf(id) !== -1) {
@@ -359,14 +361,14 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
             filteredArray.push(id);
           }
         }
-      });
+      }
     } else if (selected) {
       selectionArray = selected;
     }
     this.selected = !!selected;
     const layers = this.layer;
     if (layers) {
-      this._types.forEach((t) => {
+      for (const t of this._types) {
         const geomType = typeAliasForFilter[t];
         if (geomType) {
           const geomFilter = ['==', '$type', geomType];
@@ -374,11 +376,13 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
           const selLayerName = this._getSelectionLayerNameFromType(t);
           if (layers.indexOf(selLayerName) !== -1) {
             if (this._selectionName) {
-              map.setFilter(selLayerName, [
-                'all',
-                geomFilter,
-                ['in', this.featureIdName, ...selectionArray],
-              ]);
+              const selectFilter: FilterSpecification = [
+                'in',
+                this.featureIdName as FilterSpecificationInputType,
+              ];
+              selectFilter.push(...selectionArray);
+
+              map.setFilter(selLayerName, ['all', geomFilter, selectFilter]);
             }
           }
           if (layers.indexOf(layerName) !== -1) {
@@ -392,7 +396,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
             map.setFilter(layerName, filter_);
           }
         }
-      });
+      }
     }
   }
 
@@ -435,7 +439,18 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
 
       const source = this.map.getSource(this.source) as GeoJSONSource;
       if (source) {
-        return source._data ? source._data.features : [];
+        const geojson =
+          typeof source._data === 'string'
+            ? (JSON.parse(source._data) as GeoJSON.GeoJSON)
+            : source._data;
+        if (geojson) {
+          if (geojson.type === 'Feature') {
+            return [geojson];
+          } else if (geojson.type === 'FeatureCollection') {
+            return geojson.features;
+          }
+        }
+        return [];
       }
     }
     return this._features;

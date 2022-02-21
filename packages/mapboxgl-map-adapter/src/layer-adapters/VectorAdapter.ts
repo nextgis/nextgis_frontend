@@ -17,15 +17,15 @@ import type {
 } from 'geojson';
 import {
   Map,
-  Layer,
   Popup,
-  AnyLayer,
-  AnyLayout,
-  EventData,
+  Layout,
   LngLatLike,
   MapEventType,
-  AnySourceData,
+  MapMouseEvent,
+  LayerSpecification,
+  SourceSpecification,
   MapLayerMouseEvent,
+  FilterSpecification,
 } from 'maplibre-gl';
 import type { Paint, IconPaint } from '@nextgis/paint';
 import type {
@@ -45,6 +45,9 @@ import type {
   PropertyFilter,
   Operations,
 } from '@nextgis/properties-filter';
+import type { VectorLayerSpecification } from '../interfaces';
+
+type Layer = VectorLayerSpecification;
 
 export const operationsAliases: { [key in Operations]: string } = {
   gt: '>',
@@ -381,7 +384,7 @@ export abstract class VectorAdapter<
     name: string,
     type: VectorAdapterLayerType,
     filter?: any[],
-    layout?: AnyLayout,
+    layout?: Layout<any>,
   ): Promise<void> {
     let mType: MapboxLayerType | undefined;
     if (this.options.paint) {
@@ -392,7 +395,7 @@ export abstract class VectorAdapter<
     if (mType === undefined) {
       mType = mapboxTypeAlias[type];
     }
-    layout = (layout || this.options.layout || {}) as AnyLayout;
+    layout = (layout || this.options.layout || {}) as Layout<any>;
     const layerOpt: Layer = {
       id: name,
       type: mType,
@@ -421,24 +424,23 @@ export abstract class VectorAdapter<
     }
     const map = this.map;
     if (map) {
-      map.addLayer(opt as AnyLayer);
-
-      const filters = ['all', ...(filter || [])].filter((x) => x);
-      if (filters.length > 1) {
-        map.setFilter(opt.id, filters);
+      map.addLayer(opt as LayerSpecification);
+      if (filter) {
+        const filters = ['all', ...(filter || [])].filter(Boolean);
+        map.setFilter(opt.id, filters as FilterSpecification);
       }
     }
   }
 
   protected async _beforeLayerLayer(
     sourceId: string,
-    options?: AnySourceData,
+    options?: SourceSpecification,
   ): Promise<void> {
     // ignore
   }
   protected async _onLayerAdd(
     sourceId: string,
-    options?: AnySourceData,
+    options?: SourceSpecification,
   ): Promise<void> {
     // ignore
   }
@@ -863,7 +865,7 @@ export abstract class VectorAdapter<
   }
 
   private _getFeatureFromPoint(
-    evt: MapEventType['click'] & EventData,
+    evt: MapEventType['click'] & MapMouseEvent,
   ): Feature | undefined {
     // not work correct
     // const features = this.map.queryRenderedFeatures(e.point, {
@@ -889,7 +891,7 @@ export abstract class VectorAdapter<
     }
   }
 
-  private _onLayerMouseMove(evt: MapEventType['mousemove'] & EventData) {
+  private _onLayerMouseMove(evt: MapEventType['mousemove'] & MapMouseEvent) {
     const map = this.map;
     if (map) {
       const { onMouseOver, selectOnHover, selectable, labelOnHover } =
@@ -926,7 +928,7 @@ export abstract class VectorAdapter<
     }
   }
 
-  private _onLayerMouseLeave(evt: MapEventType['mousemove'] & EventData) {
+  private _onLayerMouseLeave(evt: MapEventType['mousemove'] & MapMouseEvent) {
     const { onMouseOut, labelOnHover, selectOnHover } = this.options;
     if (this.map) {
       if (onMouseOut) {

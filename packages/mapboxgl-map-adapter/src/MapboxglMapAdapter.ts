@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
 
-import mapboxgl, { LngLatBoundsLike, Map } from 'maplibre-gl';
+import { Map } from 'maplibre-gl';
 
 import { debounce } from '@nextgis/utils';
 
@@ -9,7 +9,7 @@ import { MvtAdapter } from './layer-adapters/MvtAdapter';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
 import { TileAdapter } from './layer-adapters/TileAdapter';
 import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
-import { ZoomControl } from './controls/ZoomControl';
+import { zoomControl } from './controls/ZoomControl';
 import { createControl } from './controls/createControl';
 import { CompassControl } from './controls/CompassControl';
 import { AttributionControl } from './controls/AttributionControl';
@@ -22,7 +22,6 @@ import type {
   ButtonControlOptions,
   ControlPosition,
   LayerAdapter,
-  WebMapEvents,
   ViewOptions,
   MapAdapter,
   FitOptions,
@@ -31,12 +30,15 @@ import type {
 } from '@nextgis/webmap';
 import type {
   IControl,
-  EventData,
-  ResourceType,
   MapEventType,
-  MapboxOptions,
+  MapMouseEvent,
+  ResourceTypeEnum,
+  LngLatBoundsLike,
   FitBoundsOptions,
   RequestParameters,
+  MapSourceDataEvent,
+  StyleSpecification,
+  MapOptions as MapboxOptions,
 } from 'maplibre-gl';
 import { Feature } from './layer-adapters/VectorAdapter';
 import { arrayToBoundsLike } from './utils/arrayToBoundsLike';
@@ -49,8 +51,7 @@ const fitBoundsOptions: FitOptions = {
 };
 
 export interface MapboxglMapAdapterOptions extends MapOptions {
-  style?: Partial<mapboxgl.Style> | string;
-  accessToken?: string;
+  style?: Partial<StyleSpecification> | string;
 }
 
 export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
@@ -64,7 +65,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   };
 
   static controlAdapters: { [name: string]: any } = {
-    ZOOM: ZoomControl,
+    ZOOM: zoomControl(),
     COMPASS: CompassControl,
     ATTRIBUTION: AttributionControl,
   };
@@ -78,7 +79,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
   controlAdapters = MapboxglMapAdapter.controlAdapters;
   isLoaded = false;
 
-  private _universalEvents: (keyof WebMapEvents)[] = [
+  private _universalEvents: (keyof MapEventType)[] = [
     'zoomstart',
     'zoom',
     'zoomend',
@@ -98,11 +99,21 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     return new Promise((resolve, reject) => {
       if (!this.map) {
         this.options = options;
-        if (options.accessToken) {
-          mapboxgl.accessToken = options.accessToken;
-        }
         if (options.target) {
+          const style: StyleSpecification | string =
+            typeof options.style === 'string'
+              ? options.style
+              : {
+                  ...{
+                    version: 8,
+                    name: 'Empty style',
+                    sources: {},
+                    layers: [],
+                  },
+                  ...options.style,
+                };
           const mapOpt: MapboxOptions = {
+            style,
             container: options.target,
             attributionControl: false,
             bounds: options.bounds as LngLatBoundsLike,
@@ -110,7 +121,10 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
               ...options.fitOptions,
               ...fitBoundsOptions,
             },
-            transformRequest: (url: string, resourceType: ResourceType) => {
+            transformRequest: (
+              url: string,
+              resourceType?: ResourceTypeEnum,
+            ) => {
               const transformed = this._transformRequest(url, resourceType);
               if (transformed) {
                 return transformed;
@@ -121,19 +135,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
               }
             },
           };
-          if (typeof options.style === 'string') {
-            mapOpt.style = options.style;
-          } else {
-            mapOpt.style = {
-              ...{
-                version: 8,
-                name: 'Empty style',
-                sources: {},
-                layers: [],
-              },
-              ...options.style,
-            };
-          }
+
           if (options.center !== undefined) {
             const center = options.center;
             mapOpt.center = [center[0], center[1]];
@@ -179,7 +181,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     if (!map) return;
     if (Array.isArray(lngLatOrOpt)) {
       const c = lngLatOrOpt;
-      const options: mapboxgl.CameraOptions = {
+      const options: maplibregl.CameraOptions = {
         center: [c[0], c[1]],
       };
       if (zoom) {
@@ -189,7 +191,10 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     } else {
       const { zoom, center, maxBounds, bounds, minZoom, maxZoom } = lngLatOrOpt;
       if (maxBounds !== undefined) {
-        map.setMaxBounds(maxBounds ? arrayToBoundsLike(maxBounds) : undefined);
+        // TODO: remove `as` after maplibre type fix
+        map.setMaxBounds(
+          arrayToBoundsLike(maxBounds as [number, number, number, number]),
+        );
       }
       if (center && zoom !== undefined) {
         this.setView(center, zoom);
@@ -348,7 +353,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     }
   }
 
-  onMapClick(evt: MapEventType['click'] & EventData): void {
+  onMapClick(evt: MapEventType['click'] & MapMouseEvent): void {
     const map = this.map;
     const emitData = convertMapClickEvent(evt);
     this.emitter.emit('preclick', emitData);
@@ -473,7 +478,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     });
   }
 
-  private _onMapSourceData(data: mapboxgl.MapSourceDataEvent & EventData) {
+  private _onMapSourceData(data: MapSourceDataEvent) {
     if (data.dataType === 'source') {
       const isLoaded = data.isSourceLoaded;
       const emit = (target: string) => {
@@ -483,9 +488,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     }
   }
 
-  private _onMapError(
-    data: mapboxgl.ErrorEvent & mapboxgl.MapSourceDataEvent & EventData,
-  ) {
+  private _onMapError(data: ErrorEvent & MapSourceDataEvent) {
     if (this._sourceDataLoading[data.sourceId]) {
       const isLoaded = data.isSourceLoaded;
       const emit = (target: string) => {
@@ -533,7 +536,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
 
   private _transformRequest(
     url: string,
-    resourceType: ResourceType,
+    resourceType?: ResourceTypeEnum,
   ): RequestParameters | undefined {
     const transformRequests = this.map && this.map.transformRequests;
     if (transformRequests) {
@@ -565,9 +568,9 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
         this.onMapClick(evt);
       });
 
-      this._universalEvents.forEach((e) => {
+      for (const e of this._universalEvents) {
         _map.on(e, () => this.emitter.emit(e, this));
-      });
+      }
     }
   }
 }
