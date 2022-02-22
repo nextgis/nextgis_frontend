@@ -29,6 +29,18 @@ function getConnection(): Promise<Connection> {
 }
 
 const features: [ISandboxPointLayer, Position][] = [
+  [{ number: 111, test: 'VAL_a' }, [1, 1]],
+  [{ number: 112, test: 'VAL_a' }, [1, 1]],
+  [{ number: 113, test: 'VAL_a' }, [1, 1]],
+
+  [{ number: 111, test: 'VAL_b' }, [1, 1]],
+  [{ number: 112, test: 'VAL_b' }, [1, 1]],
+  [{ number: 113, test: 'VAL_b' }, [1, 1]],
+
+  [{ number: 111, test: 'VAL_c' }, [1, 1]],
+  [{ number: 112, test: 'VAL_c' }, [1, 1]],
+  [{ number: 113, test: 'VAL_c' }, [1, 1]],
+
   [{ number: 12, test: 'foofoo' }, [1, 1]],
   [{ number: 11, test: 'FooFoo' }, [0, 1]],
   [{ number: 11, test: 'barbar' }, [0, 0]],
@@ -153,28 +165,44 @@ describe('NgwKit', function () {
         expect(items4.length).to.be.equal(1);
       });
 
-      // it(`ilike cyrillic`, async () => {
-      //   const connection = await getConnection();
-      //   const pointLayer = await newPointLayer('NgwKit items');
-      //   const resourceId = pointLayer.item.resource.id;
-      //   const items1 = await fetchNgwLayerItems<Point, ISandboxPointLayer>({
-      //     connector: connection.driver,
-      //     resourceId,
-      //     filters: [['%test%', 'ilike', 'Да Выпей']],
-      //   });
-      //   expect(items1.length).to.be.equal(2);
-      // });
-      // it(`like cyrillic`, async () => {
-      //   const connection = await getConnection();
-      //   const pointLayer = await newPointLayer('NgwKit items');
-      //   const resourceId = pointLayer.item.resource.id;
-      //   const items1 = await fetchNgwLayerItems<Point, ISandboxPointLayer>({
-      //     connector: connection.driver,
-      //     resourceId,
-      //     filters: [['%test%', 'like', 'Да Выпей']],
-      //   });
-      //   expect(items1.length).to.be.equal(1);
-      // });
+      it(`eq all any`, async () => {
+        const connection = await getConnection();
+        const pointLayer = await newPointLayer('NgwKit items');
+        const resourceId = pointLayer.item.resource.id;
+        const items1 = await fetchNgwLayerItems<Point, ISandboxPointLayer>({
+          connector: connection.driver,
+          resourceId,
+          filters: [
+            'all',
+            ['any', ['test', 'eq', 'VAL_a'], ['test', 'eq', 'VAL_b']],
+            ['number', 'eq', 111],
+          ],
+        });
+        expect(items1.length).to.be.equal(2);
+      });
+
+      it(`ilike cyrillic`, async () => {
+        const connection = await getConnection();
+        const pointLayer = await newPointLayer('NgwKit items');
+        const resourceId = pointLayer.item.resource.id;
+        const items1 = await fetchNgwLayerItems<Point, ISandboxPointLayer>({
+          connector: connection.driver,
+          resourceId,
+          filters: [['%test%', 'ilike', 'Да Выпей']],
+        });
+        expect(items1.length).to.be.equal(2);
+      });
+      it(`like cyrillic`, async () => {
+        const connection = await getConnection();
+        const pointLayer = await newPointLayer('NgwKit items');
+        const resourceId = pointLayer.item.resource.id;
+        const items1 = await fetchNgwLayerItems<Point, ISandboxPointLayer>({
+          connector: connection.driver,
+          resourceId,
+          filters: [['%test%', 'like', 'Да Выпей']],
+        });
+        expect(items1.length).to.be.equal(1);
+      });
 
       // it(`ne null`, async () => {
       //   const connection = await getConnection();
