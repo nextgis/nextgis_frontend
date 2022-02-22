@@ -174,11 +174,16 @@ describe('NgwKit', function () {
           resourceId,
           filters: [
             'all',
-            ['any', ['test', 'eq', 'VAL_a'], ['test', 'eq', 'VAL_b']],
+            [
+              'any',
+              ['test', 'eq', 'VAL_a'],
+              ['test', 'eq', 'VAL_b'],
+              ['test', 'eq', 'VAL_c'],
+            ],
             ['number', 'eq', 111],
           ],
         });
-        expect(items1.length).to.be.equal(2);
+        expect(items1.length).to.be.equal(3);
       });
 
       it(`ilike cyrillic`, async () => {
