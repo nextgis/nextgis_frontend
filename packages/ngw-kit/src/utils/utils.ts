@@ -12,11 +12,11 @@ import type {
 
 export function updateImageParams(
   params: Record<string, any>,
-  resourceId: number,
+  resourceId: number | number[],
 ): Record<string, any> {
   const { bbox, width, height, nd } = params;
   return {
-    resource: resourceId,
+    resource: Array.isArray(resourceId) ? resourceId.join(',') : resourceId,
     extent: bbox,
     size: width + ',' + height,
     timestamp: Date.now(),
