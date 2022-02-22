@@ -1,8 +1,5 @@
 import { NavigationControl } from 'maplibre-gl';
 
-export class CompassControl extends NavigationControl {
-  constructor(options = {}) {
-    options = Object.assign({}, options, { showZoom: false });
-    super(options);
-  }
+export function CompassControl(options: Record<string, unknown>) {
+  return new NavigationControl({ ...options, showZoom: false });
 }
