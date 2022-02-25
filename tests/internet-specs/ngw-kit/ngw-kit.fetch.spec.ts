@@ -41,6 +41,9 @@ const features: [ISandboxPointLayer, Position][] = [
   [{ number: 112, test: 'VAL_c' }, [1, 1]],
   [{ number: 113, test: 'VAL_c' }, [1, 1]],
 
+  [{ number: 211, test: 'VAL_d' }, [1, 1]],
+  [{ number: 212, test: 'VAL_d' }, [1, 1]],
+
   [{ number: 12, test: 'foofoo' }, [1, 1]],
   [{ number: 11, test: 'FooFoo' }, [0, 1]],
   [{ number: 11, test: 'barbar' }, [0, 0]],
@@ -184,6 +187,29 @@ describe('NgwKit', function () {
           ],
         });
         expect(items1.length).to.be.equal(3);
+      });
+
+      it(`eq all any any`, async () => {
+        const connection = await getConnection();
+        const pointLayer = await newPointLayer('NgwKit items');
+        const resourceId = pointLayer.item.resource.id;
+        const items1 = await fetchNgwLayerItems<Point, ISandboxPointLayer>({
+          connector: connection.driver,
+          resourceId,
+          filters: [
+            'all',
+            ['any', ['test', 'eq', 'VAL_d'], ['test', 'eq', 'VAL_c']],
+            ['any', ['number', 'eq', 211], ['number', 'eq', 111]],
+          ],
+        });
+        // result
+        // [
+        //   { test: 'VAL_d', number: 211 },
+        //   { test: 'VAL_c', number: 111 },
+        //   { test: 'VAL_d', number: 211 },
+        //   { test: 'VAL_c', number: 111 },
+        // ];
+        expect(items1.length).to.be.equal(4);
       });
 
       it(`ilike cyrillic`, async () => {
