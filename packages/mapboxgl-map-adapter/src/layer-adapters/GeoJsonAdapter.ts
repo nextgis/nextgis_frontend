@@ -1,5 +1,14 @@
 import { defined } from '@nextgis/utils';
 import { featureFilter } from '@nextgis/properties-filter';
+
+import {
+  Map,
+  GeoJSONSource,
+  FilterSpecification,
+  GeoJSONSourceSpecification,
+  FilterSpecificationInputType,
+} from 'maplibre-gl';
+
 import { EventOptions, VectorAdapter } from './VectorAdapter';
 import {
   createFeaturePositionOptions,
@@ -12,13 +21,6 @@ import {
   typeAlias,
 } from '../utils/geomType';
 
-import {
-  Map,
-  GeoJSONSource,
-  FilterSpecification,
-  GeoJSONSourceSpecification,
-  FilterSpecificationInputType,
-} from 'maplibre-gl';
 import type {
   GeometryCollection,
   GeoJsonProperties,

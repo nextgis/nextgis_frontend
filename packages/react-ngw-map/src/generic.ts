@@ -4,9 +4,9 @@ import { createElementHook } from './element';
 
 import type { ControlOptions } from '@nextgis/webmap';
 import type { NgwMapElement } from './element';
-import type { NgwMapContextInterface } from './context';
+import type { NgwMapContextInterface } from './interfaces';
 
-export function createControlComponent<E extends any, P extends ControlOptions>(
+export function createControlComponent<E, P extends ControlOptions>(
   createInstance: (props: P, context: NgwMapContextInterface) => E,
 ) {
   function createElement(
