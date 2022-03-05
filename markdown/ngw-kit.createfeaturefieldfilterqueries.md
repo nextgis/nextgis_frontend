@@ -11,7 +11,7 @@ export declare function createFeatureFieldFilterQueries<G extends Geometry = Geo
     [field: string]: any;
 } = {
     [field: string]: any;
-}>(opt: FetchNgwItemsOptions<P> & Required<Pick<FetchNgwItemsOptions, 'filters'>>, _queries?: CancelablePromise<FeatureItem<P, G>[]>[], _parentAllParams?: [string, any][]): CancelablePromise<FeatureItem<P, G>[]>;
+}>(opt: FetchNgwItemsOptions<P> & Required<Pick<FetchNgwItemsOptions, 'filters'>>): CancelablePromise<FeatureItem<P, G>[]>;
 ```
 
 ## Parameters
@@ -19,8 +19,6 @@ export declare function createFeatureFieldFilterQueries<G extends Geometry = Geo
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  opt | [FetchNgwItemsOptions](./ngw-kit.fetchngwitemsoptions.md)<!-- -->&lt;P&gt; &amp; Required&lt;Pick&lt;[FetchNgwItemsOptions](./ngw-kit.fetchngwitemsoptions.md)<!-- -->, 'filters'&gt;&gt; |  |
-|  \_queries | CancelablePromise&lt;[FeatureItem](./ngw-connector.featureitem.md)<!-- -->&lt;P, G&gt;\[\]&gt;\[\] |  |
-|  \_parentAllParams | \[string, any\]\[\] |  |
 
 <b>Returns:</b>
 

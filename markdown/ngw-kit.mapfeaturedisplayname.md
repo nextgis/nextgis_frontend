@@ -7,16 +7,16 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function mapFeatureDisplayName({ connector, resource, fields, }: MapFeatureDisplayNameOptions): Promise<string[]>;
+export declare function mapFeatureDisplayName({ connector, resource, resourceId, fields, }: MapFeatureDisplayNameOptions): CancelablePromise<string[]>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  { connector, resource, fields, } | [MapFeatureDisplayNameOptions](./ngw-kit.mapfeaturedisplaynameoptions.md) |  |
+|  { connector, resource, resourceId, fields, } | [MapFeatureDisplayNameOptions](./ngw-kit.mapfeaturedisplaynameoptions.md) |  |
 
 <b>Returns:</b>
 
-Promise&lt;string\[\]&gt;
+CancelablePromise&lt;string\[\]&gt;
 

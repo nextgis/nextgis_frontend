@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-uploadVector<F extends File = File>(file: F, options: VectorUploadOptions): Promise<CreatedResource>;
+uploadVector<F extends FileType = FileType>(file: F, options: VectorUploadOptions): Promise<CreatedResource>;
 ```
 
 ## Parameters

@@ -7,17 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-fileUpload<F extends File = File>(file: F | {
-        file: F;
-        name: string;
-    }, options?: FileUploadOptions): CancelablePromise<FileMeta>;
+fileUpload(file: FileType, options?: FileUploadOptions): CancelablePromise<FileMeta>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  file | F \| { file: F; name: string; } |  |
+|  file | FileType |  |
 |  options | [FileUploadOptions](./ngw-uploader.fileuploadoptions.md) |  |
 
 <b>Returns:</b>

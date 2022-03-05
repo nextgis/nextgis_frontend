@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-export declare type onClickAsync = (status?: boolean) => Promise<void>;
+export declare type onClickAsync = () => Promise<void>;
 ```

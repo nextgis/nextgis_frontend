@@ -7,7 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-resmeta: {
-        items: Record<string, any>;
-    };
+resmeta: Resmeta;
 ```

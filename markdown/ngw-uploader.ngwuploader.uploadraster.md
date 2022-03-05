@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-uploadRaster<F extends File = File>(file: F, options: RasterUploadOptions): Promise<CreatedRes>;
+uploadRaster<F extends FileType = FileType>(file: F, options: RasterUploadOptions): Promise<CreatedRes>;
 ```
 
 ## Parameters

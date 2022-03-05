@@ -23,4 +23,5 @@ export interface TreeLayer extends TreeItem
 |  [layer\_min\_scale\_denom?](./ngw-connector.treelayer.layer_min_scale_denom.md) | number | <i>(Optional)</i> |
 |  [layer\_style\_id](./ngw-connector.treelayer.layer_style_id.md) | number |  |
 |  [layer\_transparency](./ngw-connector.treelayer.layer_transparency.md) | number |  |
+|  [style\_parent\_id](./ngw-connector.treelayer.style_parent_id.md) | number |  |
 
