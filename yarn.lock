@@ -7052,10 +7052,10 @@ mapbox-to-css-font@^2.4.0:
   resolved "https://registry.yarnpkg.com/mapbox-to-css-font/-/mapbox-to-css-font-2.4.0.tgz#a23b51664a1ee839beaefade013f2655bee9a390"
   integrity sha512-v674D0WtpxCXlA6E+sBlG1QJWdUkz/s9qAD91bJSXBGuBL5lL4tJXpoJEftecphCh2SVQCjWMS2vhylc3AIQTg==
 
-maplibre-gl@^2.1.6:
-  version "2.1.6"
-  resolved "https://registry.yarnpkg.com/maplibre-gl/-/maplibre-gl-2.1.6.tgz#774dea8043d3b898b881e33b1f4684b733997f5e"
-  integrity sha512-UHdw4YeCkIyfG7vMdNK6e/sDNPB7jjUN5MUytKE1DFQB7sKM9V19ar1GUyn0uYRvQwJ5iC01fWhH3r/5bbHlKQ==
+maplibre-gl@^2.1.7:
+  version "2.1.7"
+  resolved "https://registry.yarnpkg.com/maplibre-gl/-/maplibre-gl-2.1.7.tgz#c3d3d8882deb537a0fe04665a669642de076c7a3"
+  integrity sha512-NWVIvz3ZHMAdvtieSEkSu9SnVOiQ/Jo/TJszUV3p29tv0dpanJbtbq6L3pHwzwe/rGbOm2MMj0hFVW+GTRoI1Q==
   dependencies:
     "@mapbox/geojson-rewind" "^0.5.1"
     "@mapbox/jsonlint-lines-primitives" "^2.0.2"
