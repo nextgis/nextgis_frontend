@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.12.0](https://github.com/nextgis/nextgisweb_frontend/compare/v1.11.10...v1.12.0) (2022-03-05)
+
+
+### Bug Fixes
+
+* **mapboxgl-map-adapter:** remove image source on layer remove ([416a181](https://github.com/nextgis/nextgisweb_frontend/commit/416a1815550391fecc108564a76a324d18421a33))
+* **ngw-kit:** remove duplicates from a query with filter by ANY condition ([95ecce5](https://github.com/nextgis/nextgisweb_frontend/commit/95ecce5135a9bd534287ea1925a959fdf4edbd20))
+
+
+### Features
+
+* **mapbox-map-adapter:** upgrade maplibre to 2.x.x ([f322c96](https://github.com/nextgis/nextgisweb_frontend/commit/f322c964538c75655178c96524a514f1765c2f91))
+* **ngw-kit:** add ability to render multilayers image adapter ([4aa5c6e](https://github.com/nextgis/nextgisweb_frontend/commit/4aa5c6e0aa56134600cfae7b43721f87b037060b))
+* **ngw-kit:** add polygon intersection identify util ([7686231](https://github.com/nextgis/nextgisweb_frontend/commit/7686231f10fb0cd258946187a0e1dc80bb5306f8))
+* **ngw-kit:** export getImageAdapterOptions method ([2cd5969](https://github.com/nextgis/nextgisweb_frontend/commit/2cd5969b83ad55b039a14df091bcb2a100c28777))
+* **react-ngw-map:** add getContext hook to module export ([d6ff2e1](https://github.com/nextgis/nextgisweb_frontend/commit/d6ff2e1967068ed3707c3debd610e62af82ef4b9))
+* **react:** add mapbox and ol packages ([1151da6](https://github.com/nextgis/nextgisweb_frontend/commit/1151da6ed36e772fbe94f028bbd2583c8fbf375c))
+* **react:** add react map toggle control component ([95a9639](https://github.com/nextgis/nextgisweb_frontend/commit/95a9639fb39d0a6dcf9db9d647d22f1bcbd0acfa))
+* **webmap:** add addLayer onAdded option ([212b7b0](https://github.com/nextgis/nextgisweb_frontend/commit/212b7b082e4ed6a4bec6dd96c7d63d595bbc6743))
+
+
+
+
+
 ## [1.11.10](https://github.com/nextgis/nextgisweb_frontend/compare/v1.11.9...v1.11.10) (2022-01-20)
 
 
