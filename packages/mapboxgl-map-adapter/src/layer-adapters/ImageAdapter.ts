@@ -1,8 +1,8 @@
 import { MainLayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
-import { Map } from 'maplibre-gl';
 import { TLayer } from '../MapboxglMapAdapter';
 import { BaseRasterAdapter } from './BaseRasterAdapter';
 
+import type { Map, RasterSourceSpecification } from 'maplibre-gl';
 export class ImageAdapter
   extends BaseRasterAdapter<ImageAdapterOptions>
   implements MainLayerAdapter<Map, TLayer, ImageAdapterOptions>
@@ -29,6 +29,17 @@ export class ImageAdapter
         tiles = [url];
       }
 
+      const sourceOptions: RasterSourceSpecification = {
+        type: 'raster',
+        tiles,
+        tileSize: 256,
+      };
+      if (options.attribution) {
+        sourceOptions.attribution = options.attribution;
+      }
+
+      this.map.addSource(this._layerId + '_source', sourceOptions);
+
       this.map.addLayer(
         {
           id: this._layerId,
@@ -44,11 +55,7 @@ export class ImageAdapter
             this.options.maxZoom !== undefined
               ? this.options.maxZoom - 1
               : undefined,
-          source: {
-            type: 'raster',
-            tiles,
-            tileSize: 256,
-          },
+          source: this._layerId + '_source',
           paint: {},
           ...options.nativeOptions,
         },
