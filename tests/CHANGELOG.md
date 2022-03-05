@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.12.0](https://github.com/nextgis/nextgisweb_frontend/compare/v1.11.10...v1.12.0) (2022-03-05)
+
+
+### Bug Fixes
+
+* **ngw-kit:** remove duplicates from a query with filter by ANY condition ([95ecce5](https://github.com/nextgis/nextgisweb_frontend/commit/95ecce5135a9bd534287ea1925a959fdf4edbd20))
+
+
+
+
+
 # [1.11.0](https://github.com/nextgis/nextgisweb_frontend/compare/v1.10.0...v1.11.0) (2021-12-19)
 
 **Note:** Version bump only for package @nextgis/frontend_test

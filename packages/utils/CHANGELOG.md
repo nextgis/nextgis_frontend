@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.12.0](https://github.com/nextgis/nextgis_frontend/compare/v1.11.10...v1.12.0) (2022-03-05)
+
+
+### Features
+
+* **ngw-kit:** add polygon intersection identify util ([7686231](https://github.com/nextgis/nextgis_frontend/commit/7686231f10fb0cd258946187a0e1dc80bb5306f8))
+
+
+
+
+
 ## [1.11.10](https://github.com/nextgis/nextgis_frontend/compare/v1.11.9...v1.11.10) (2022-01-20)
 
 **Note:** Version bump only for package @nextgis/utils

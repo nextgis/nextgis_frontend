@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.12.0](https://github.com/nextgis/nextgis_frontend/compare/v1.11.10...v1.12.0) (2022-03-05)
+
+
+### Features
+
+* **react:** add react map toggle control component ([95a9639](https://github.com/nextgis/nextgis_frontend/commit/95a9639fb39d0a6dcf9db9d647d22f1bcbd0acfa))
+
+
+
+
+
 ## [1.11.10](https://github.com/nextgis/nextgis_frontend/compare/v1.11.9...v1.11.10) (2022-01-20)
 
 **Note:** Version bump only for package @nextgis/leaflet-map-adapter
