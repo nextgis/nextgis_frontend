@@ -7,20 +7,20 @@ import {
 import {
   defined,
   degrees2meters,
-  getBoundsCoordinates,
   isLngLatBoundsArray,
+  getBoundsCoordinates,
 } from '@nextgis/utils';
 
 import type { Geometry, Feature } from 'geojson';
 import type {
-  FeatureItem,
   RequestItemAdditionalParams,
+  FeatureItem,
 } from '@nextgis/ngw-connector';
 import type { LngLatArray, FeatureProperties } from '@nextgis/utils';
 import type {
+  NgwFeatureRequestOptions,
   FeatureRequestParams,
   FetchNgwItemsOptions,
-  NgwFeatureRequestOptions,
 } from '../interfaces';
 
 export const FEATURE_REQUEST_PARAMS: FeatureRequestParams = {
@@ -34,10 +34,10 @@ export function createGeoJsonFeature<
 >(item: Pick<FeatureItem, 'id' | 'geom' | 'fields'>): Feature<G, P> {
   const geometry = item.geom as G;
   const feature: Feature<G, P> = {
+    geometry,
     id: item.id,
     type: 'Feature',
     properties: item.fields as P,
-    geometry,
   };
   return feature;
 }
@@ -76,8 +76,17 @@ export function createFeatureFieldFilterQueries<
   );
 
   return CancelablePromise.all(queries).then((itemsParts) => {
-    const items = itemsParts.reduce((a, b) => a.concat(b), []);
-
+    // this list of ids used for optimization
+    const ids: number[] = [];
+    const items: FeatureItem<P, G>[] = [];
+    for (const part of itemsParts) {
+      for (const item of part) {
+        if (!ids.includes(item.id)) {
+          items.push(item);
+          ids.push(item.id);
+        }
+      }
+    }
     const offset = opt.offset !== undefined ? opt.offset : 0;
     const limit = opt.limit !== undefined ? opt.limit : items.length;
     if (opt.offset || opt.limit) {
@@ -85,6 +94,22 @@ export function createFeatureFieldFilterQueries<
     }
     return items;
   });
+}
+
+function createParam(pf: PropertyFilter): [string, any] {
+  const [field, operation, value] = pf;
+  const isFldStr = field !== 'id' ? 'fld_' : '';
+  let vStart = '';
+  let vEnd = '';
+  const field_ = String(field)
+    .trim()
+    .replace(/^(%?)(.+?)(%?)$/, (m, a, b, c) => {
+      vStart = a;
+      vEnd = c;
+      return b;
+    });
+  const v = vStart + value + vEnd;
+  return [`${isFldStr}${field_}__${operation}`, v];
 }
 
 function getQueries<
@@ -101,22 +126,6 @@ function getQueries<
   const logic = typeof filters[0] === 'string' ? filters[0] : 'all';
 
   const filters_ = filters.filter((x) => Array.isArray(x)) as PropertyFilter[];
-
-  const createParam = (pf: PropertyFilter): [string, any] => {
-    const [field, operation, value] = pf;
-    const isFldStr = field !== 'id' ? 'fld_' : '';
-    let vStart = '';
-    let vEnd = '';
-    const field_ = String(field)
-      .trim()
-      .replace(/^(%?)(.+?)(%?)$/, (m, a, b, c) => {
-        vStart = a;
-        vEnd = c;
-        return b;
-      });
-    const v = vStart + value + vEnd;
-    return [`${isFldStr}${field_}__${operation}`, v];
-  };
 
   if (logic === 'any') {
     for (const f of filters_) {
@@ -188,13 +197,13 @@ export function fetchNgwLayerItemsRequest<
     ...FEATURE_REQUEST_PARAMS,
   };
   const {
-    connector,
     limit,
     offset,
-    intersects,
     orderBy,
-    resourceId,
     paramList,
+    connector,
+    intersects,
+    resourceId,
   } = options;
   if (limit) {
     if (limit !== Number.POSITIVE_INFINITY) {
@@ -207,8 +216,7 @@ export function fetchNgwLayerItemsRequest<
   if (offset) {
     params.offset = offset;
   }
-  // TODO: fix type for options
-  updateItemRequestParam(params, options as { [field: string]: any });
+  updateItemRequestParam(params, options);
 
   if (orderBy) {
     params.order_by = orderBy.join(',');
