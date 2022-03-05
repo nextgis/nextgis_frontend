@@ -30,14 +30,14 @@ export declare class NgwUploader
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
 |  [\_initialize()](./ngw-uploader.ngwuploader._initialize.md) |  |  |
-|  [createGroup(nameOrOptions, options)](./ngw-uploader.ngwuploader.creategroup.md) |  |  |
+|  [createGroup(nameOrOptions, opt)](./ngw-uploader.ngwuploader.creategroup.md) |  |  |
 |  [createRaster(options)](./ngw-uploader.ngwuploader.createraster.md) |  |  |
 |  [createResource(meta, name, options)](./ngw-uploader.ngwuploader.createresource.md) |  |  |
 |  [createStyle(opt, name)](./ngw-uploader.ngwuploader.createstyle.md) |  |  |
 |  [createVector(options)](./ngw-uploader.ngwuploader.createvector.md) |  |  |
-|  [createWms(options, name)](./ngw-uploader.ngwuploader.createwms.md) |  |  |
-|  [createWmsConnectedLayer(options, name)](./ngw-uploader.ngwuploader.createwmsconnectedlayer.md) |  |  |
-|  [createWmsConnection(options, name)](./ngw-uploader.ngwuploader.createwmsconnection.md) |  |  |
+|  [createWms(opt, name)](./ngw-uploader.ngwuploader.createwms.md) |  |  |
+|  [createWmsConnectedLayer(opt, name)](./ngw-uploader.ngwuploader.createwmsconnectedlayer.md) |  |  |
+|  [createWmsConnection(opt, name)](./ngw-uploader.ngwuploader.createwmsconnection.md) |  |  |
 |  [fileUpload(file, options)](./ngw-uploader.ngwuploader.fileupload.md) |  |  |
 |  [getResource(id)](./ngw-uploader.ngwuploader.getresource.md) |  |  |
 |  [uploadRaster(file, options)](./ngw-uploader.ngwuploader.uploadraster.md) |  |  |

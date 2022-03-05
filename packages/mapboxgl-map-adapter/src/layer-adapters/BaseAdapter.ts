@@ -17,6 +17,13 @@ export abstract class BaseAdapter<O extends AdapterOptions = AdapterOptions>
   }
 
   beforeRemove(): void {
+    if (this.map) {
+      const sourceId = this._layerId + '_source';
+      const source = this.map.getSource(sourceId);
+      if (source) {
+        this.map.removeSource(sourceId);
+      }
+    }
     Object.assign(this, { map: undefined });
   }
 

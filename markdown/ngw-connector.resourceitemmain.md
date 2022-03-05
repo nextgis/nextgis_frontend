@@ -14,6 +14,6 @@ export interface ResourceItemMain
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [resmeta](./ngw-connector.resourceitemmain.resmeta.md) | { items: Record&lt;string, any&gt;; } |  |
+|  [resmeta](./ngw-connector.resourceitemmain.resmeta.md) | [Resmeta](./ngw-connector.resmeta.md) |  |
 |  [resource](./ngw-connector.resourceitemmain.resource.md) | [Resource](./ngw-connector.resource.md) |  |
 

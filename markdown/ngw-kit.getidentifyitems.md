@@ -7,14 +7,16 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function getIdentifyItems(identify: NgwIdentify, multiple?: boolean): NgwIdentifyItem[];
+export declare function getIdentifyItems(identify: FeatureLayersIdentify & {
+    resources?: number[];
+}, multiple?: boolean): NgwIdentifyItem[];
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  identify | [NgwIdentify](./ngw-kit.ngwidentify.md) |  |
+|  identify | [FeatureLayersIdentify](./ngw-connector.featurelayersidentify.md) &amp; { resources?: number\[\]; } |  |
 |  multiple | boolean |  |
 
 <b>Returns:</b>

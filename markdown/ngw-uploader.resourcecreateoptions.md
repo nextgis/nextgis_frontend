@@ -23,5 +23,6 @@ export interface ResourceCreateOptions
 |  [keyname?](./ngw-uploader.resourcecreateoptions.keyname.md) | string | <i>(Optional)</i> |
 |  [name?](./ngw-uploader.resourcecreateoptions.name.md) | string | <i>(Optional)</i> |
 |  [parentId?](./ngw-uploader.resourcecreateoptions.parentid.md) | number | <i>(Optional)</i> |
+|  [resmeta?](./ngw-uploader.resourcecreateoptions.resmeta.md) | [Resmeta](./ngw-connector.resmeta.md) | <i>(Optional)</i> |
 |  [srs?](./ngw-uploader.resourcecreateoptions.srs.md) | { id: number; } | <i>(Optional)</i> |
 

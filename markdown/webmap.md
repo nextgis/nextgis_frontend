@@ -123,6 +123,7 @@ webMap.onLoad().then(() => {
 |  [ControlPosition](./webmap.controlposition.md) |  |
 |  [ControlPositions](./webmap.controlpositions.md) |  |
 |  [ControlsOptions](./webmap.controlsoptions.md) |  |
+|  [Cursor](./webmap.cursor.md) | Available cursor names from [https://developer.mozilla.org/ru/docs/Web/CSS/cursor](https://developer.mozilla.org/ru/docs/Web/CSS/cursor) |
 |  [DataLayerFilter](./webmap.datalayerfilter.md) |  |
 |  [FeatureLayerAdapter](./webmap.featurelayeradapter.md) | Generic shortcut to define VectorLayerAdapter from feature |
 |  [HtmlDef](./webmap.htmldef.md) |  |
@@ -135,6 +136,9 @@ webMap.onLoad().then(() => {
 |  [OnClickSync](./webmap.onclicksync.md) |  |
 |  [OnLayerClickOptions](./webmap.onlayerclickoptions.md) |  |
 |  [OnLayerSelectType](./webmap.onlayerselecttype.md) |  |
+|  [OnToggleClick](./webmap.ontoggleclick.md) |  |
+|  [onToggleClickAsync](./webmap.ontoggleclickasync.md) |  |
+|  [OnToggleClickSync](./webmap.ontoggleclicksync.md) |  |
 |  [PopupOnCloseFunction](./webmap.popuponclosefunction.md) |  |
 |  [VectorAdapterLayerType](./webmap.vectoradapterlayertype.md) |  |
 

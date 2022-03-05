@@ -25,6 +25,7 @@ export declare class WebMapLayers<M = any, L = any, E extends WebMapEvents = Web
 |  [addFeatureLayer(options)](./webmap.webmaplayers.addfeaturelayer.md) |  | Shortcut for [WebMapLayers.addGeoJsonLayer()](./webmap.webmaplayers.addgeojsonlayer.md) to create GeoJson adapter with generic types for working in typescript |
 |  [addGeoJsonLayer(opt, adapter)](./webmap.webmaplayers.addgeojsonlayer.md) |  | Create layer from GeoJson data. Set style and behavior for selection. |
 |  [addImageLayer(url, options)](./webmap.webmaplayers.addimagelayer.md) |  | Shortcut for [WebMapLayers.addLayer()](./webmap.webmaplayers.addlayer.md) to create TileLayer adapter |
+|  [addImageLayer(options)](./webmap.webmaplayers.addimagelayer_1.md) |  |  |
 |  [addLayer(adapter, options, order)](./webmap.webmaplayers.addlayer.md) |  | Registration of map layer. |
 |  [addLayerData(layerDef, data)](./webmap.webmaplayers.addlayerdata.md) |  | Push new the GeoJSON features into given vector layer. |
 |  [addLayerFromAsyncAdapter(adapter, options, order)](./webmap.webmaplayers.addlayerfromasyncadapter.md) |  |  |

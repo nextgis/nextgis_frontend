@@ -25,6 +25,7 @@ export interface TreeLayer extends TreeItem
 |  [layer\_style\_id](./ngw-kit.treelayer.layer_style_id.md) | number |  |
 |  [layer\_transparency](./ngw-kit.treelayer.layer_transparency.md) | number |  |
 |  [layer\_url?](./ngw-kit.treelayer.layer_url.md) | string | <i>(Optional)</i> |
+|  [style\_parent\_id](./ngw-kit.treelayer.style_parent_id.md) | number |  |
 |  [updateWmsParams?](./ngw-kit.treelayer.updatewmsparams.md) | (parans: any) =&gt; any | <i>(Optional)</i> |
 |  [url?](./ngw-kit.treelayer.url.md) | string | <i>(Optional)</i> |
 

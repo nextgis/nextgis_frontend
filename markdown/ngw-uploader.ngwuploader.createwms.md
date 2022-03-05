@@ -7,14 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-createWms(options: CreateWmsOptions, name?: string): CancelablePromise<CreatedResource> | undefined;
+createWms(opt: CreateWmsOptions, name?: string): CancelablePromise<CreatedResource> | undefined;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | [CreateWmsOptions](./ngw-uploader.createwmsoptions.md) |  |
+|  opt | [CreateWmsOptions](./ngw-uploader.createwmsoptions.md) |  |
 |  name | string |  |
 
 <b>Returns:</b>

@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-resource: ResourceDefinition;
+resource?: ResourceDefinition;
 ```

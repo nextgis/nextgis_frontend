@@ -4,3 +4,9 @@
 
 ## dialog package
 
+## Classes
+
+|  Class | Description |
+|  --- | --- |
+|  [Dialog](./dialog.dialog.md) |  |
+

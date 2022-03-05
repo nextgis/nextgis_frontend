@@ -26,9 +26,9 @@ Promise&lt;[ResourceAdapter](./ngw-kit.resourceadapter.md) \| undefined&gt;
 
 
 ```javascript
-// add raster layer resourceId is the style of 4004 layer
+// Add raster layer resourceId is the style of 4004 layer
 ngwMap.addNgwLayer({ resource: 4005 });
-// add vector data from layer GEOJSON source
+// Add vector data from layer GEOJSON source
 ngwMap.addNgwLayer({
   resource: 4038,
   adapter: 'GEOJSON',

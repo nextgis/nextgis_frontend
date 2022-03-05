@@ -63,6 +63,7 @@ Make sure CORS is registered in the [NextGIS Web settings](https://docs.nextgis.
 |  [RequestItemsParamsMap](./ngw-connector.requestitemsparamsmap.md) |  |
 |  [RequestItemsResponseMap](./ngw-connector.requestitemsresponsemap.md) |  |
 |  [RequestOptions](./ngw-connector.requestoptions.md) |  |
+|  [Resmeta](./ngw-connector.resmeta.md) |  |
 |  [Resource](./ngw-connector.resource.md) |  |
 |  [ResourceHierarchy](./ngw-connector.resourcehierarchy.md) |  |
 |  [ResourceItem](./ngw-connector.resourceitem.md) |  |

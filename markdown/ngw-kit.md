@@ -74,7 +74,7 @@ getNgwLayerItems({
 |  --- | --- |
 |  [addFeatureAttachment(options)](./ngw-kit.addfeatureattachment.md) |  |
 |  [addNgwLayer(options, webMap, connector)](./ngw-kit.addngwlayer.md) |  |
-|  [createFeatureFieldFilterQueries(opt, \_queries, \_parentAllParams)](./ngw-kit.createfeaturefieldfilterqueries.md) |  |
+|  [createFeatureFieldFilterQueries(opt)](./ngw-kit.createfeaturefieldfilterqueries.md) |  |
 |  [createGeoJsonAdapter(props)](./ngw-kit.creategeojsonadapter.md) |  |
 |  [createGeoJsonFeature(item)](./ngw-kit.creategeojsonfeature.md) |  |
 |  [createIdentifyItem(opt)](./ngw-kit.createidentifyitem.md) |  |
@@ -85,6 +85,7 @@ getNgwLayerItems({
 |  [createRasterAdapter({ layerOptions, webMap, connector, item, })](./ngw-kit.createrasteradapter.md) |  |
 |  [deleteFeatureAttachment(options)](./ngw-kit.deletefeatureattachment.md) |  |
 |  [extendNgwWebmapLayerAdapter(opt)](./ngw-kit.extendngwwebmaplayeradapter.md) |  |
+|  [featureLayerIdentify(options)](./ngw-kit.featurelayeridentify.md) |  |
 |  [fetchIdentifyGeoJson(options)](./ngw-kit.fetchidentifygeojson.md) |  |
 |  [fetchIdentifyItem(options)](./ngw-kit.fetchidentifyitem.md) |  |
 |  [fetchNgwExtent(options)](./ngw-kit.fetchngwextent.md) |  |
@@ -101,16 +102,20 @@ getNgwLayerItems({
 |  [getCompanyLogo(connector, options)](./ngw-kit.getcompanylogo.md) |  |
 |  [getIdentifyGeoJson(options)](./ngw-kit.getidentifygeojson.md) |  |
 |  [getIdentifyItems(identify, multiple)](./ngw-kit.getidentifyitems.md) |  |
+|  [getImageAdapterOptions({ resourceId, baseUrl, nd, headers, })](./ngw-kit.getimageadapteroptions.md) |  |
+|  [getLayerAdapterOptions(options, webMap, baseUrl)](./ngw-kit.getlayeradapteroptions.md) |  |
 |  [getMapWidthForLanInMeters(lat)](./ngw-kit.getmapwidthforlaninmeters.md) |  |
 |  [getNgwWebmapExtent(webmap)](./ngw-kit.getngwwebmapextent.md) |  |
 |  [getZoomFromScale(scale)](./ngw-kit.getzoomfromscale.md) |  |
-|  [mapFeatureDisplayName({ connector, resource, fields, })](./ngw-kit.mapfeaturedisplayname.md) |  |
+|  [mapFeatureDisplayName({ connector, resource, resourceId, fields, })](./ngw-kit.mapfeaturedisplayname.md) |  |
+|  [ngwApiToAdapterOptions({ options, webMap, baseUrl, })](./ngw-kit.ngwapitoadapteroptions.md) |  |
 |  [parseDate(date)](./ngw-kit.parsedate.md) |  |
 |  [parseDateFromNgw(date)](./ngw-kit.parsedatefromngw.md) |  |
 |  [pixelsInMeterWidth()](./ngw-kit.pixelsinmeterwidth.md) |  |
 |  [prepareFieldsToNgw(item, resourceFields)](./ngw-kit.preparefieldstongw.md) |  |
 |  [prepareNgwFieldsToPropertiesFilter(fields)](./ngw-kit.preparengwfieldstopropertiesfilter.md) |  |
 |  [resourceIdFromLayerOptions(options, connector)](./ngw-kit.resourceidfromlayeroptions.md) |  |
+|  [selectNgwLayerDistinct(options)](./ngw-kit.selectngwlayerdistinct.md) |  |
 |  [sendIdentifyRequest(ev, options)](./ngw-kit.sendidentifyrequest.md) |  |
 |  [setScaleRatio(scale, lat)](./ngw-kit.setscaleratio.md) |  |
 |  [updateImageParams(params, resourceId)](./ngw-kit.updateimageparams.md) |  |
@@ -125,6 +130,7 @@ getNgwLayerItems({
 |  [CompanyLogoOptions](./ngw-kit.companylogooptions.md) |  |
 |  [ExtendNgwWebmapLayerAdapterOptions](./ngw-kit.extendngwwebmaplayeradapteroptions.md) |  |
 |  [FeatureIdentifyRequestOptions](./ngw-kit.featureidentifyrequestoptions.md) |  |
+|  [FeatureLayerIdentifyOptions](./ngw-kit.featurelayeridentifyoptions.md) |  |
 |  [FeatureRequestParams](./ngw-kit.featurerequestparams.md) |  |
 |  [FetchNgwLayerCountOptions](./ngw-kit.fetchngwlayercountoptions.md) |  |
 |  [FetchNgwLayerExtentOptions](./ngw-kit.fetchngwlayerextentoptions.md) |  |
@@ -132,12 +138,15 @@ getNgwLayerItems({
 |  [FetchNgwResourceExtent](./ngw-kit.fetchngwresourceextent.md) |  |
 |  [GetClassAdapterOptions](./ngw-kit.getclassadapteroptions.md) |  |
 |  [GetIdentifyGeoJsonOptions](./ngw-kit.getidentifygeojsonoptions.md) |  |
+|  [GetImageAdapterOptionsParams](./ngw-kit.getimageadapteroptionsparams.md) |  |
+|  [GetLayerAdapterOptions](./ngw-kit.getlayeradapteroptions.md) |  |
 |  [GetNgwItemOptions](./ngw-kit.getngwitemoptions.md) |  |
 |  [GetNgwItemsOptions](./ngw-kit.getngwitemsoptions.md) |  |
 |  [IdentifyEvent](./ngw-kit.identifyevent.md) |  |
 |  [IdentifyItemOptions](./ngw-kit.identifyitemoptions.md) |  |
 |  [IdentifyRequestOptions](./ngw-kit.identifyrequestoptions.md) |  |
 |  [MapFeatureDisplayNameOptions](./ngw-kit.mapfeaturedisplaynameoptions.md) |  |
+|  [MapSelectNgwLayerDistinctOptions](./ngw-kit.mapselectngwlayerdistinctoptions.md) |  |
 |  [NgwConfig](./ngw-kit.ngwconfig.md) |  |
 |  [NgwFeatureItemResponse](./ngw-kit.ngwfeatureitemresponse.md) |  |
 |  [NgwFeatureRequestOptions](./ngw-kit.ngwfeaturerequestoptions.md) |  |

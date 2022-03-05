@@ -7,14 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-createWmsConnectedLayer(options: CreateWmsConnectedLayerOptions, name?: string): CancelablePromise<CreatedResource> | undefined;
+createWmsConnectedLayer(opt: CreateWmsConnectedLayerOptions, name?: string): CancelablePromise<CreatedResource> | undefined;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | [CreateWmsConnectedLayerOptions](./ngw-uploader.createwmsconnectedlayeroptions.md) |  |
+|  opt | [CreateWmsConnectedLayerOptions](./ngw-uploader.createwmsconnectedlayeroptions.md) |  |
 |  name | string |  |
 
 <b>Returns:</b>
