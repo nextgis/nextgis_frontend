@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.12.0](https://github.com/nextgis/nextgis_frontend/compare/v1.11.10...v1.12.0) (2022-03-05)
+
+
+### Bug Fixes
+
+* **mapboxgl-map-adapter:** remove image source on layer remove ([416a181](https://github.com/nextgis/nextgis_frontend/commit/416a1815550391fecc108564a76a324d18421a33))
+
+
+### Features
+
+* **mapbox-map-adapter:** upgrade maplibre to 2.x.x ([f322c96](https://github.com/nextgis/nextgis_frontend/commit/f322c964538c75655178c96524a514f1765c2f91))
+
+
+
+
+
 ## [1.11.10](https://github.com/nextgis/nextgis_frontend/compare/v1.11.9...v1.11.10) (2022-01-20)
 
 **Note:** Version bump only for package @nextgis/mapboxgl-map-adapter
