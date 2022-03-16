@@ -44,7 +44,11 @@ export class ResourcesControl {
     } else if (typeof resource === 'number') {
       forCache.id = resource;
     } else if (isObject(resource)) {
-      forCache.id = resource.id;
+      if (resource.id !== undefined) {
+        forCache.id = resource.id;
+      } else if (resource.keyname) {
+        forCache.keyname = resource.keyname;
+      }
     }
     const makeRequest = () => {
       if (typeof resource === 'string') {
