@@ -11,7 +11,11 @@ import { isObject } from './utils/isObject';
 import type { DeepPartial } from '@nextgis/utils';
 import type { NgwConnector } from './NgwConnector';
 import type { ResourceItem, Resource } from './types/ResourceItem';
-import type { RequestOptions, ResourceDefinition } from './interfaces';
+import type {
+  GetChildrenOfOptions,
+  ResourceDefinition,
+  RequestOptions,
+} from './interfaces';
 
 export class ResourcesControl {
   cache = new Cache<
@@ -168,26 +172,46 @@ export class ResourcesControl {
 
   getChildrenOf(
     resource: ResourceDefinition,
-    requestOptions?: Pick<RequestOptions, 'cache'>,
+    requestOptions?: GetChildrenOfOptions,
   ): CancelablePromise<ResourceItem[]> {
-    return this.getId(resource).then((parent) => {
-      return this.connector
-        .get(
-          'resource.collection',
-          { cache: true, ...requestOptions },
-          {
-            parent,
-          },
-        )
-        .then((items) => {
-          for (const i of items) {
-            this.cache.add('resource.item', CancelablePromise.resolve(i), {
-              id: i.resource.id,
-            });
+    return this.getIdOrFail(resource).then((parent) =>
+      this._getChildrenOf(parent, requestOptions),
+    );
+  }
+
+  private _getChildrenOf(
+    parent: ResourceDefinition,
+    requestOptions?: GetChildrenOfOptions,
+    _items: ResourceItem[] = [],
+  ): CancelablePromise<ResourceItem[]> {
+    return this.connector
+      .get(
+        'resource.collection',
+        { cache: true, ...requestOptions },
+        {
+          parent,
+        },
+      )
+      .then((items) => {
+        const recursivePromises = [];
+        for (const item of items) {
+          this.cache.add('resource.item', CancelablePromise.resolve(item), {
+            id: item.resource.id,
+          });
+          _items.push(item);
+          if (requestOptions?.recursive && item.resource.children) {
+            recursivePromises.push(
+              this._getChildrenOf(item.resource.id, requestOptions, _items),
+            );
           }
-          return items;
-        });
-    });
+        }
+        if (recursivePromises.length) {
+          return CancelablePromise.all(recursivePromises).then(() => {
+            return _items;
+          });
+        }
+        return _items;
+      });
   }
 
   update(

@@ -147,6 +147,10 @@ export interface RequestHeaders {
 
 export type RequestMethods = 'POST' | 'GET' | 'PATCH' | 'DELETE' | 'PUT';
 
+export type NgwExceptions =
+  | 'nextgisweb.resource.exception.ResourceNotFound'
+  | 'nextgisweb.core.exception.InsufficientPermissions';
+
 export interface RequestOptions<M = RequestMethods> {
   data?: any;
   file?: File;
@@ -185,6 +189,6 @@ export interface UserInfo {
   clientId?: string;
 }
 
-export type NgwExceptions =
-  | 'nextgisweb.resource.exception.ResourceNotFound'
-  | 'nextgisweb.core.exception.InsufficientPermissions';
+export interface GetChildrenOfOptions extends Pick<RequestOptions, 'cache'> {
+  recursive?: boolean;
+}
