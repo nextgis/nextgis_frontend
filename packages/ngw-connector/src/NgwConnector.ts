@@ -23,6 +23,7 @@ import type {
   PostRequestItemsResponseMap,
   GetRequestItemsResponseMap,
   PutRequestItemsResponseMap,
+  GetChildrenOfOptions,
   ResourceIdKeynameDef,
   NgwConnectorOptions,
   ResourceDefinition,
@@ -489,7 +490,7 @@ export class NgwConnector {
    */
   getResourceChildren(
     resource: ResourceDefinition,
-    requestOptions?: Pick<RequestOptions, 'cache'>,
+    requestOptions?: GetChildrenOfOptions,
   ): CancelablePromise<ResourceItem[]> {
     return this.resources.getChildrenOf(resource, requestOptions);
   }
