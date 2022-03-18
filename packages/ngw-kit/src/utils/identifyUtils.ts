@@ -31,9 +31,6 @@ export function getIdentifyItems(
   identify: FeatureLayersIdentify & { resources?: number[] },
   multiple = false,
 ): NgwIdentifyItem[] {
-  let params:
-    | { resourceId: number; featureId: number; feature: LayerFeature }
-    | undefined;
   const resources = [];
   const paramsList = [];
   for (const l in identify) {
@@ -48,20 +45,20 @@ export function getIdentifyItems(
       return sortingArr.indexOf(a) - sortingArr.indexOf(b);
     });
   }
+
   for (let fry = 0; fry < resources.length; fry++) {
     const l = resources[fry];
     const identifyItem = identify[l];
     if ('features' in identifyItem) {
       const layerFeatures = identifyItem.features;
       const resourceId = Number(l);
-      const feature: LayerFeature | undefined = layerFeatures[0];
-      if (feature) {
-        params = {
-          featureId: feature.id,
-          resourceId,
-          feature,
-        };
-        paramsList.push(params);
+      const featureParams: NgwIdentifyItem[] = createParamsFromFeatures(
+        layerFeatures,
+        resourceId,
+        multiple,
+      );
+      if (featureParams.length) {
+        paramsList.push(...featureParams);
         if (!multiple) {
           break;
         }
@@ -69,6 +66,26 @@ export function getIdentifyItems(
     }
   }
   return paramsList;
+}
+
+function createParamsFromFeatures(
+  features: LayerFeature[],
+  resourceId: number,
+  multiple: boolean,
+): NgwIdentifyItem[] {
+  const featureParams: NgwIdentifyItem[] = [];
+  for (const feature of features) {
+    const params = {
+      featureId: feature.id,
+      resourceId,
+      feature,
+    };
+    featureParams.push(params);
+    if (!multiple) {
+      break;
+    }
+  }
+  return featureParams;
 }
 
 export function fetchIdentifyGeoJson<
