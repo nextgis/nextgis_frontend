@@ -153,7 +153,9 @@ export function getIdentifyGeoJson<
   return fetchIdentifyGeoJson(options);
 }
 
-export function featureLayerIdentify(options: FeatureLayerIdentifyOptions) {
+export function featureLayerIdentify(
+  options: FeatureLayerIdentifyOptions,
+): CancelablePromise<FeatureLayersIdentify> {
   const g = options.geom;
   let geom: Position[] = [];
   if (Array.isArray(g)) {
