@@ -8,7 +8,8 @@ import { prepareNgwFieldsToPropertiesFilter } from './prepareNgwFieldsToProperti
 
 import type { Geometry } from 'geojson';
 import type { FeatureItem } from '@nextgis/ngw-connector';
-import type { FeatureProperties } from '@nextgis/utils';
+import { FeatureProperties, isArray } from '@nextgis/utils';
+import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type { FetchNgwItemsOptions } from '../interfaces';
 
 export function fetchNgwLayerItems<
@@ -21,7 +22,8 @@ export function fetchNgwLayerItems<
       ...options,
       filters,
     }).then((data) => {
-      const clientFilterValidate = options.clientFilterValidate ?? true;
+      const clientFilterValidate =
+        options.clientFilterValidate ?? isFilterWithAnyCase(filters);
       // Additional client-side filter check
       if (clientFilterValidate) {
         data = data.filter((y) => {
@@ -38,4 +40,20 @@ export function fetchNgwLayerItems<
   } else {
     return fetchNgwLayerItemsRequest<G, P>(options);
   }
+}
+
+function isFilterWithAnyCase(filters: PropertiesFilter): boolean {
+  if (filters[0] === 'any') {
+    return true;
+  }
+  for (let i = 1; i < filters.length; i++) {
+    const p = filters[i];
+    if (isArray(p)) {
+      const deep = isFilterWithAnyCase(p);
+      if (deep) {
+        return true;
+      }
+    }
+  }
+  return false;
 }
