@@ -4,6 +4,7 @@ import type { NgwDateFormat, NgwDateTimeFormat } from '@nextgis/ngw-connector';
 export function prepareNgwFieldsToPropertiesFilter(
   fields: Record<string, any>,
 ): Record<string, any> {
+  console.log(fields);
   let f: keyof typeof fields;
   for (f in fields) {
     const field = fields[f];
@@ -22,7 +23,10 @@ export function prepareNgwFieldsToPropertiesFilter(
         }
         fields[f] = new Date(...dt).toISOString();
       }
+    } else if (f === 'id' && typeof field === 'string') {
+      fields[f] = field.split(',').map(Number)
     }
+
   }
   return fields;
 }
