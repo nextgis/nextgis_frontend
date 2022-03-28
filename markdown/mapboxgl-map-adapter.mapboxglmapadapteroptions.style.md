@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-style?: Partial<mapboxgl.Style> | string;
+style?: Partial<StyleSpecification> | string;
 ```

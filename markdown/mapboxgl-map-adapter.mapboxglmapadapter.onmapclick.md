@@ -7,14 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-onMapClick(evt: MapEventType['click'] & EventData): void;
+onMapClick(evt: MapEventType['click'] & MapMouseEvent): void;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  evt | MapEventType\['click'\] &amp; EventData |  |
+|  evt | MapEventType\['click'\] &amp; MapMouseEvent |  |
 
 <b>Returns:</b>
 

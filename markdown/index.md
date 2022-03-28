@@ -18,6 +18,7 @@
 |  [@nextgis/icons](./icons.md) |  |
 |  [@nextgis/item](./item.md) |  |
 |  [@nextgis/leaflet-map-adapter](./leaflet-map-adapter.md) |  |
+|  [@nextgis/logging](./logging.md) |  |
 |  [@nextgis/mapboxgl-map-adapter](./mapboxgl-map-adapter.md) |  |
 |  [@nextgis/ngw-connector](./ngw-connector.md) | A lightweight HTTP client optimized for use with [NextGIS Web](http://docs.nextgis.ru/docs_ngweb_dev/doc/developer/toc.html) API |
 |  [@nextgis/ngw-kit](./ngw-kit.md) | WebMap plugin and utilities that allow you to interact with NextGIS Web. |
