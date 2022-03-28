@@ -1,20 +1,18 @@
 {
-  "name": "@nextgis/progress",
+  "name": "@nextgis/logging",
   "version": "1.12.0",
-  "description": "Tracking the progress of asynchronous operations",
+  "description": "Logging control",
   "main": "index.js",
-  "module": "lib/progress.esm-bundler.js",
-  "unpkg": "lib/progress.global.prod.js",
-  "jsdelivr": "lib/progress.global.prod.js",
+  "module": "lib/logging.esm-bundler.js",
+  "unpkg": "lib/logging.global.prod.js",
+  "jsdelivr": "lib/logging.global.prod.js",
   "types": "lib/index.d.ts",
   "devDependencies": {
     "@nextgis/build-tools": "^1.12.0",
-    "@types/events": "^3.0.0",
-    "events": "^3.3.0",
-    "strict-event-emitter-types": "^2.0.0"
+    "@nextgis/ngw-connector": "^1.12.0"
   },
   "buildOptions": {
-    "name": "Progress",
+    "name": "Logging",
     "formats": [
       "esm-bundler",
       "esm-browser",
@@ -39,13 +37,12 @@
     "lib"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/nextgis/nextgis_frontend/tree/master/packages/progress#readme",
+  "homepage": "https://github.com/nextgis/nextgis_frontend/tree/master/packages/logging#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nextgis/nextgis_frontend.git"
   },
   "bugs": {
     "url": "https://github.com/nextgis/nextgis_frontend/issues"
-  },
-  "gitHead": "edc68033f914f6c95c4125b9738bba6d36e990b4"
+  }
 }
