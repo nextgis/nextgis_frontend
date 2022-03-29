@@ -8,7 +8,7 @@ import type {
 export class ConsoleEngine<D = null> implements LogEngine<D> {
   enabled = true;
 
-  constructor(options: ConsoleEngineOptions) {
+  constructor(options: ConsoleEngineOptions = {}) {
     this.enabled = options.enabled ?? this.enabled;
     Object.assign(this, options);
   }
