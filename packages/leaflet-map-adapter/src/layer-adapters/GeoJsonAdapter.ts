@@ -76,7 +76,7 @@ export class GeoJsonAdapter
     this.updateTooltip();
   }, 300);
 
-  constructor(map: L.Map, options: GeoJsonAdapterOptions) {
+  constructor(map: Map, options: GeoJsonAdapterOptions) {
     super(map, options);
   }
 
@@ -708,7 +708,7 @@ export class GeoJsonAdapter
     type: OnLayerSelectType,
     latlng?: LatLngExpression,
   ) {
-    this.map._addUnselectCb(() => {
+    (this.map as any)._addUnselectCb(() => {
       this._unSelectLayer(def);
     });
     if (this.options && !this.options.multiselect) {
