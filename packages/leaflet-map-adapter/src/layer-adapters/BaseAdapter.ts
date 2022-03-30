@@ -1,5 +1,5 @@
-import { MainLayerAdapter, AdapterOptions } from '@nextgis/webmap';
-import { Map } from 'leaflet';
+import type { MainLayerAdapter, AdapterOptions } from '@nextgis/webmap';
+import type { Map } from 'leaflet';
 
 export class BaseAdapter<O extends AdapterOptions = AdapterOptions, L = any>
   implements MainLayerAdapter<Map, L, O>
@@ -7,7 +7,7 @@ export class BaseAdapter<O extends AdapterOptions = AdapterOptions, L = any>
   layer?: L;
   protected pane = 'order-0';
 
-  constructor(public map: L.Map, public options: O) {
+  constructor(public map: Map, public options: O) {
     if (options.order !== undefined) {
       const pane = 'order-' + options.order;
       let exist = map.getPane(pane);

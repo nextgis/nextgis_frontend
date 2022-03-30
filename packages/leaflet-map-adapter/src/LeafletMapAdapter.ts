@@ -18,6 +18,8 @@ import { OsmAdapter } from './layer-adapters/OsmAdapter';
 import type {
   Layer,
   GridLayer,
+  LeafletEvent,
+  LocationEvent,
   ControlPosition,
   LeafletMouseEvent,
 } from 'leaflet';
@@ -101,7 +103,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
       });
       // create default pane
       const defPane = this.map.createPane('order-0');
-      this.map._addUnselectCb = (def) => {
+      (this.map as any)._addUnselectCb = (def: UnselectDef) => {
         this._addUnselectCb(def);
       };
       defPane.style.zIndex = String(0);
@@ -240,15 +242,15 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     }
   }
 
-  getLayerAdapter(name: string): Type<LayerAdapter<L.Map, any, any>> {
+  getLayerAdapter(name: string): Type<LayerAdapter<Map, any, any>> {
     return LeafletMapAdapter.layerAdapters[name];
   }
 
-  createControl(control: MapControl, options: CreateControlOptions): L.Control {
+  createControl(control: MapControl, options: CreateControlOptions): Control {
     return createControl(control, options, this);
   }
 
-  createButtonControl(options: ButtonControlOptions): L.Control {
+  createButtonControl(options: ButtonControlOptions): Control {
     return createButtonControl(options, this);
   }
 
@@ -306,8 +308,8 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
       map.locate(opt);
       if (events) {
         const { locationfound, locationerror } = events;
-        const locationFound = (e: L.LeafletEvent) => {
-          const event = e as L.LocationEvent;
+        const locationFound = (e: LeafletEvent) => {
+          const event = e as LocationEvent;
           const lngLat: [number, number] = [event.latlng.lng, event.latlng.lat];
           locationfound({ lngLat });
         };
