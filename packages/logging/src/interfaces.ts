@@ -27,21 +27,27 @@ export type LogLevel =
   | 'DEBUG'
   | 'NOTSET';
 
-export interface Log<D = unknown> {
+export interface Log<D = any> {
   message: string;
   timestamp: Date;
   logLevel: LogLevel;
-  operationId?: number;
   data?: D;
 }
 
-export type LogShortcutOptions<D = unknown> = Pick<
-  Log<D>,
-  'operationId' | 'data'
->;
-export type LogOptions<D = unknown> = LogShortcutOptions<D> & {
+export type LogShortcutOptions<D = any> = Pick<Log<D>, 'data'>;
+
+export interface NgLog<D = any> extends Log<D> {
+  operationId?: string;
+}
+
+export type LogOptions<D = any> = LogShortcutOptions<D> & {
   logLevel?: LogLevel;
 };
+
+export type NgLogEngineOperationId<D = any> =
+  | null
+  | number
+  | ((log: Log<D>) => string);
 
 export interface NgLogEngineOptions {
   clientId: string;
@@ -49,6 +55,11 @@ export interface NgLogEngineOptions {
   delay?: number;
   nglogUrl?: string;
   enabled?: boolean;
+  /**
+   * Add `operationId` to each log. Use number to set random generated string length
+   */
+  operationId?: NgLogEngineOperationId;
+  stopOnConnectionError?: boolean;
 }
 
 export type LogPostBulk = Log[];
