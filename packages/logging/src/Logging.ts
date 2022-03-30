@@ -5,7 +5,7 @@ import type {
   LogShortcutOptions,
 } from './interfaces';
 
-export class Logging<D = null> implements LogEngine<D> {
+export class Logging<D> implements LogEngine<D> {
   engines: LogEngine<D>[] = [];
   enabled = true;
 
