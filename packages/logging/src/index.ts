@@ -3,7 +3,7 @@
  */
 
 import { Logging } from './Logging';
-import { NgLogEngine } from './engines/NgLogEngine';
+import { NgLogEngine } from './engines/NgLogEngine/NgLogEngine';
 import { ConsoleEngine } from './engines/ConsoleEngine';
 
 export * from './interfaces';
