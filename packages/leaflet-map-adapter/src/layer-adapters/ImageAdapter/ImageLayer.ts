@@ -5,9 +5,11 @@
  * MIT License
  */
 
-import { Layer, Util, CRS } from 'leaflet';
 import { debounce } from '@nextgis/utils';
+import { Layer, Util, CRS } from 'leaflet';
 import { ImageOverlay } from './ImageOverlay';
+
+import type { Map } from 'leaflet';
 
 interface OverlayOptions {
   crs?: null;
@@ -93,7 +95,7 @@ export class ImageLayer extends Layer {
     return this;
   }
 
-  onRemove(map: L.Map): this {
+  onRemove(map: Map): this {
     if (this._currentOverlay) {
       this._currentOverlay.cancelLoad();
       map.removeLayer(this._currentOverlay);
@@ -206,7 +208,7 @@ export class ImageLayer extends Layer {
   }
 
   // See L.TileLayer.WMS: onAdd() & getTileUrl()
-  updateWmsParams(map?: L.Map): void {
+  updateWmsParams(map?: Map): void {
     if (!map) {
       map = this._map;
     }
