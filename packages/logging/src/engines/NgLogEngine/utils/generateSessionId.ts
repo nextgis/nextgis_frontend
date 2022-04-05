@@ -1,4 +1,4 @@
-export function generateOperationId(length = 8) {
+export function generateSessionId(length = 8) {
   const chars =
     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let str = '';

@@ -7,9 +7,9 @@ import type {
   LogPostBulk,
   LogShortcutOptions,
   NgLogEngineOptions,
-  NgLogEngineOperationId,
+  NgLogEngineSessionId,
 } from '../../interfaces';
-import { generateOperationId } from './utils/generateOperationId';
+import { generateSessionId } from './utils/generateSessionId';
 
 export class NgLogEngine<D = null> implements LogEngine<D> {
   clientId: string;
@@ -20,9 +20,9 @@ export class NgLogEngine<D = null> implements LogEngine<D> {
   stopOnConnectionError?: false;
 
   /**
-   * Add `operationId` to each log. Use number to set random generated string length
+   * Add `sessionId` to each log. Use number to set random generated string length
    */
-  operationId: NgLogEngineOperationId<D> = 8;
+  sessionId: NgLogEngineSessionId<D> = 8;
 
   private _logQueue: NgLog<D>[] = [];
   private _stopTimer?: () => void;
@@ -54,18 +54,21 @@ export class NgLogEngine<D = null> implements LogEngine<D> {
     this.log(message, { ...options, logLevel: 'DEBUG' });
   }
   log(message: string, options: LogOptions<D> = {}) {
-    const operationId = this.operationId;
+    const sessionId = this.sessionId;
     const ngLog: NgLog<D> = {
       ...options,
       message,
       logLevel: options.logLevel || 'NOTSET',
       timestamp: new Date(),
     };
-    if (operationId) {
-      if (typeof operationId === 'function') {
-        ngLog.operationId = operationId(ngLog);
-      } else if (typeof operationId === 'number') {
-        ngLog.operationId = generateOperationId(operationId);
+    if (ngLog.duration !== undefined) {
+      ngLog.duration = Math.round(ngLog.duration);
+    }
+    if (sessionId) {
+      if (typeof sessionId === 'function') {
+        ngLog.sessionId = sessionId(ngLog);
+      } else if (typeof sessionId === 'number') {
+        ngLog.sessionId = generateSessionId(sessionId);
       }
     }
 
