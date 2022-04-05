@@ -31,20 +31,25 @@ export interface Log<D = any> {
   message: string;
   timestamp: Date;
   logLevel: LogLevel;
+  operationId?: string;
+  duration?: number;
   data?: D;
 }
 
-export type LogShortcutOptions<D = any> = Pick<Log<D>, 'data'>;
+export type LogShortcutOptions<D = any> = Pick<
+  Log<D>,
+  'data' | 'operationId' | 'duration'
+>;
 
 export interface NgLog<D = any> extends Log<D> {
-  operationId?: string;
+  sessionId?: string;
 }
 
 export type LogOptions<D = any> = LogShortcutOptions<D> & {
   logLevel?: LogLevel;
 };
 
-export type NgLogEngineOperationId<D = any> =
+export type NgLogEngineSessionId<D = any> =
   | null
   | number
   | ((log: Log<D>) => string);
@@ -56,9 +61,9 @@ export interface NgLogEngineOptions {
   nglogUrl?: string;
   enabled?: boolean;
   /**
-   * Add `operationId` to each log. Use number to set random generated string length
+   * Add `sessionId` to each log. Use number to set random generated string length
    */
-  operationId?: NgLogEngineOperationId;
+  sessionId?: NgLogEngineSessionId;
   stopOnConnectionError?: boolean;
 }
 
