@@ -159,6 +159,7 @@ export interface RequestOptions<M = RequestMethods> {
   withCredentials?: boolean;
   responseType?: 'json' | 'blob';
   cache?: boolean;
+  signal?: AbortSignal;
   onProgress?: (percentComplete: number, event: ProgressEvent) => void;
 }
 
