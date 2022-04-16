@@ -143,6 +143,12 @@ if (__BROWSER__) {
         xhr.abort();
       });
     }
+
+    if (options.signal) {
+      options.signal.addEventListener('abort', () => {
+        xhr.abort();
+      });
+    }
     xhr.send(data);
   };
 } else {
