@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.12.1](https://github.com/nextgis/nextgisweb_frontend/compare/v1.12.0...v1.12.1) (2022-04-21)
+
+
+### Bug Fixes
+
+* **ngw-connector:** getResource cache when keyname ([b893433](https://github.com/nextgis/nextgisweb_frontend/commit/b893433ac58ee4564162ffd241098fa9cccb79d5))
+* **ngw-kit:** getIdentifyItems multiple ([fb058d1](https://github.com/nextgis/nextgisweb_frontend/commit/fb058d1ec4bca530c4908edf2039eb370d07af44))
+
+
+### Features
+
+* **logging:** add logging package ([c4b72a6](https://github.com/nextgis/nextgisweb_frontend/commit/c4b72a6173b47281eb511cf72fda3fb17cec1b27))
+* **logging:** add new options ([43e5593](https://github.com/nextgis/nextgisweb_frontend/commit/43e559325cd5c26a39a9df952eb3ee3bfe00bd0d))
+* **nglog:** add session and duration fields ([0d76784](https://github.com/nextgis/nextgisweb_frontend/commit/0d76784280081c818d9858a6070073b18f1b90c2))
+* **ngw-connector:** add abort signal to request options ([34af90e](https://github.com/nextgis/nextgisweb_frontend/commit/34af90e1af1dca1e03304e21dde4dac81dd06149))
+* **ngw-connector:** add recursive option to getChildrenOf ([18b9832](https://github.com/nextgis/nextgisweb_frontend/commit/18b9832edde4d9e0ed36b1371cc73d318e120453))
+* **ngw-kit:** disable api clien filter without any case ([8a41394](https://github.com/nextgis/nextgisweb_frontend/commit/8a413945ba6673027ab7f1d53f5e71e72c8fb6b3))
+* **ngw-kit:** id fields as number for client filter ([b49e818](https://github.com/nextgis/nextgisweb_frontend/commit/b49e8189485bf1f6067b987e7532e83674b6d6d1))
+* **webmap:** add map mouse move events ([2a2eba3](https://github.com/nextgis/nextgisweb_frontend/commit/2a2eba3c2a582093386189106d3bb456c5eb85c0))
+
+
+
+
+
 # [1.12.0](https://github.com/nextgis/nextgisweb_frontend/compare/v1.11.10...v1.12.0) (2022-03-05)
 
 
