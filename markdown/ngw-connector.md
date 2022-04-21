@@ -40,6 +40,7 @@ Make sure CORS is registered in the [NextGIS Web settings](https://docs.nextgis.
 |  [FileBucket](./ngw-connector.filebucket.md) |  |
 |  [FileMeta](./ngw-connector.filemeta.md) |  |
 |  [FileUploadResp](./ngw-connector.fileuploadresp.md) |  |
+|  [GetChildrenOfOptions](./ngw-connector.getchildrenofoptions.md) |  |
 |  [GetRequestItemsResponseMap](./ngw-connector.getrequestitemsresponsemap.md) |  |
 |  [IdOnly](./ngw-connector.idonly.md) |  |
 |  [LayerFeature](./ngw-connector.layerfeature.md) |  |
