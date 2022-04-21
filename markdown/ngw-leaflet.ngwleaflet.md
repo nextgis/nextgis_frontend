@@ -11,7 +11,7 @@ Displaying the \[NgwMap\](ngw-map-api) using the \[LeafletMapAdapter\](leaflet-m
 ```typescript
 declare class NgwLeaflet extends NgwMap<Map> 
 ```
-<b>Extends:</b> [NgwMap](./ngw-map.ngwmap.md)<!-- -->&lt;Map&gt;
+<b>Extends:</b> NgwMap&lt;Map&gt;
 
 ## Example
 
