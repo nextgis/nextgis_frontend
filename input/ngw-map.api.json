@@ -1,0 +1,3220 @@
+{
+  "metadata": {
+    "toolPackage": "@microsoft/api-extractor",
+    "toolVersion": "7.18.19",
+    "schemaVersion": 1004,
+    "oldestForwardsCompatibleVersion": 1001,
+    "tsdocConfig": {
+      "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
+      "noStandardTags": true,
+      "tagDefinitions": [
+        {
+          "tagName": "@alpha",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@beta",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@defaultValue",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@decorator",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@deprecated",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@eventProperty",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@example",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@experimental",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@inheritDoc",
+          "syntaxKind": "inline"
+        },
+        {
+          "tagName": "@internal",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@label",
+          "syntaxKind": "inline"
+        },
+        {
+          "tagName": "@link",
+          "syntaxKind": "inline",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@override",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@packageDocumentation",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@param",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@privateRemarks",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@public",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@readonly",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@remarks",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@returns",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@sealed",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@see",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@throws",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@typeParam",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@virtual",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@betaDocumentation",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@internalRemarks",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@preapproved",
+          "syntaxKind": "modifier"
+        }
+      ],
+      "supportForTags": {
+        "@alpha": true,
+        "@beta": true,
+        "@defaultValue": true,
+        "@decorator": true,
+        "@deprecated": true,
+        "@eventProperty": true,
+        "@example": true,
+        "@experimental": true,
+        "@inheritDoc": true,
+        "@internal": true,
+        "@label": true,
+        "@link": true,
+        "@override": true,
+        "@packageDocumentation": true,
+        "@param": true,
+        "@privateRemarks": true,
+        "@public": true,
+        "@readonly": true,
+        "@remarks": true,
+        "@returns": true,
+        "@sealed": true,
+        "@see": true,
+        "@throws": true,
+        "@typeParam": true,
+        "@virtual": true,
+        "@betaDocumentation": true,
+        "@internalRemarks": true,
+        "@preapproved": true
+      }
+    }
+  },
+  "kind": "Package",
+  "canonicalReference": "@nextgis/ngw-map!",
+  "docComment": "",
+  "name": "@nextgis/ngw-map",
+  "members": [
+    {
+      "kind": "EntryPoint",
+      "canonicalReference": "@nextgis/ngw-map!",
+      "name": "",
+      "members": [
+        {
+          "kind": "Function",
+          "canonicalReference": "@nextgis/ngw-map!createNgwMap:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function createNgwMap(options: "
+            },
+            {
+              "kind": "Reference",
+              "text": "NgwMapOptions",
+              "canonicalReference": "@nextgis/ngw-map!NgwMapOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "Promise",
+              "canonicalReference": "!Promise:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "NgwMap",
+              "canonicalReference": "@nextgis/ngw-map!NgwMap:class"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 7
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "options",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "name": "createNgwMap"
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "@nextgis/ngw-map!NgwIdentifyEvent:type",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type NgwIdentifyEvent<F = "
+            },
+            {
+              "kind": "Reference",
+              "text": "FeatureProperties",
+              "canonicalReference": "@nextgis/utils!FeatureProperties:type"
+            },
+            {
+              "kind": "Content",
+              "text": ", G extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Geometry",
+              "canonicalReference": "@types/geojson!Geometry:type"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            },
+            {
+              "kind": "Content",
+              "text": "= "
+            },
+            {
+              "kind": "Reference",
+              "text": "Geometry",
+              "canonicalReference": "@types/geojson!Geometry:type"
+            },
+            {
+              "kind": "Content",
+              "text": "> = "
+            },
+            {
+              "kind": "Reference",
+              "text": "NgwIdentify",
+              "canonicalReference": "@nextgis/ngw-kit!NgwIdentify:type"
+            },
+            {
+              "kind": "Content",
+              "text": " & {\n    getIdentifyItems: () => "
+            },
+            {
+              "kind": "Reference",
+              "text": "IdentifyItem",
+              "canonicalReference": "@nextgis/ngw-kit!IdentifyItem:class"
+            },
+            {
+              "kind": "Content",
+              "text": "<F, G>[];\n}"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "NgwIdentifyEvent",
+          "typeParameters": [
+            {
+              "typeParameterName": "F",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "typeParameterName": "G",
+              "constraintTokenRange": {
+                "startIndex": 3,
+                "endIndex": 5
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 7
+              }
+            }
+          ],
+          "typeTokenRange": {
+            "startIndex": 8,
+            "endIndex": 12
+          }
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@nextgis/ngw-map!NgwLayers:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface NgwLayers "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "NgwLayers",
+          "members": [
+            {
+              "kind": "IndexSignature",
+              "canonicalReference": "@nextgis/ngw-map!NgwLayers:index(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "[layerId: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NgwLayersMem",
+                  "canonicalReference": "@nextgis/ngw-map!NgwLayersMem:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "layerId",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ]
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@nextgis/ngw-map!NgwLayersMem:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface NgwLayersMem "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "NgwLayersMem",
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/ngw-map!NgwLayersMem#layer:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "layer: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceAdapter",
+                  "canonicalReference": "@nextgis/ngw-kit!ResourceAdapter:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "layer",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/ngw-map!NgwLayersMem#resourceId:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "resourceId: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "resourceId",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "@nextgis/ngw-map!NgwMap:class",
+          "docComment": "/**\n * Base class containing the logic of interaction WebMap with NextGIS services.\n *\n * @example\n * ```javascript\n * import { NgwMap } from '@nextgis/ngw-map';\n * import MapAdapter from '@nextgis/leaflet-map-adapter';\n * // styles are not included in the leaflet-map-adapter\n * import 'leaflet/dist/leaflet.css';\n *\n * const ngwMap = new NgwMap({\n *   mapAdapter: new MapAdapter(),\n *   target: 'map',\n *   qmsId: 448,\n *   baseUrl: 'https://demo.nextgis.com',\n *   webmapId: 3985\n * });\n * ```\n *\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class NgwMap<M = "
+            },
+            {
+              "kind": "Content",
+              "text": "unknown"
+            },
+            {
+              "kind": "Content",
+              "text": ", L = "
+            },
+            {
+              "kind": "Content",
+              "text": "unknown"
+            },
+            {
+              "kind": "Content",
+              "text": ", C = "
+            },
+            {
+              "kind": "Content",
+              "text": "unknown"
+            },
+            {
+              "kind": "Content",
+              "text": ", O extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "NgwMapOptions",
+              "canonicalReference": "@nextgis/ngw-map!NgwMapOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<C> "
+            },
+            {
+              "kind": "Content",
+              "text": "= "
+            },
+            {
+              "kind": "Reference",
+              "text": "NgwMapOptions",
+              "canonicalReference": "@nextgis/ngw-map!NgwMapOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<C>"
+            },
+            {
+              "kind": "Content",
+              "text": "> extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "WebMap",
+              "canonicalReference": "@nextgis/webmap!WebMap:class"
+            },
+            {
+              "kind": "Content",
+              "text": "<M, L, C, "
+            },
+            {
+              "kind": "Reference",
+              "text": "NgwMapEvents",
+              "canonicalReference": "@nextgis/ngw-map!NgwMapEvents:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", O> "
+            }
+          ],
+          "releaseTag": "Public",
+          "typeParameters": [
+            {
+              "typeParameterName": "M",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "typeParameterName": "L",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              }
+            },
+            {
+              "typeParameterName": "C",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              }
+            },
+            {
+              "typeParameterName": "O",
+              "constraintTokenRange": {
+                "startIndex": 7,
+                "endIndex": 9
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 10,
+                "endIndex": 12
+              }
+            }
+          ],
+          "name": "NgwMap",
+          "members": [
+            {
+              "kind": "Property",
+              "canonicalReference": "@nextgis/ngw-map!NgwMap#_ngwLayers:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "protected _ngwLayers: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NgwLayers",
+                  "canonicalReference": "@nextgis/ngw-map!NgwLayers:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "_ngwLayers",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false
+            },
+            {
+              "kind": "Constructor",
+              "canonicalReference": "@nextgis/ngw-map!NgwMap:constructor(1)",
+              "docComment": "/**\n * Constructs a new instance of the `NgwMap` class\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "constructor(options: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "O"
+                },
+                {
+                  "kind": "Content",
+                  "text": ");"
+                }
+              ],
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-map!NgwMap#addControl:member(1)",
+              "docComment": "/**\n * Organized addition to the map design and controls elements, calling `control.onAdd(this.webMap.mapAdapter)`\n *\n * @param control - object with onAdd and onRemove methods or a string value indicating the name of the control installed in the map adapter\n *\n * @param position - position relative to the map angles\n *\n * @param options - initialization parameters if the control is set as a string value\n *\n * @example\n * ```javascript\n * ngwMap.addControl(new CustomControl(), 'bottom-left');\n * ngwMap.addControl('ZOOM', 'top-right')\n * ```\n *\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "addControl<K extends "
+                },
+                {
+                  "kind": "Content",
+                  "text": "keyof "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "MapControls",
+                  "canonicalReference": "@nextgis/webmap!MapControls:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">(controlDef: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "K | C"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", position: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ControlPosition",
+                  "canonicalReference": "@nextgis/webmap!ControlPosition:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", options?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "MapControls",
+                  "canonicalReference": "@nextgis/webmap!MapControls:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[K]"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<any>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 11,
+                "endIndex": 13
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "controlDef",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  }
+                },
+                {
+                  "parameterName": "position",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 7
+                  }
+                },
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 8,
+                    "endIndex": 10
+                  }
+                }
+              ],
+              "typeParameters": [
+                {
+                  "typeParameterName": "K",
+                  "constraintTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  }
+                }
+              ],
+              "name": "addControl"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-map!NgwMap#addNgwLayer:member(1)",
+              "docComment": "/**\n * Add any (style, vector, webmap) NGW layer by resource definition.\n *\n * @param options - set layer identification parameters and render method.\n *\n * @example\n * ```javascript\n * // Add raster layer resourceId is the style of 4004 layer\n * ngwMap.addNgwLayer({ resource: 4005 });\n * // Add vector data from layer GEOJSON source\n * ngwMap.addNgwLayer({\n *   resource: 4038,\n *   adapter: 'GEOJSON',\n *   adapterOptions: { paint: { color: 'red' } }\n * });\n * ```\n *\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "addNgwLayer(options: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NgwLayerOptions",
+                  "canonicalReference": "@nextgis/ngw-kit!NgwLayerOptions:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceAdapter",
+                  "canonicalReference": "@nextgis/ngw-kit!ResourceAdapter:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 7
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "addNgwLayer"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-map!NgwMap#cancelPromise:member(1)",
+              "docComment": "/**\n * @deprecated\n *\n * use {@link NgwMap.cancelPromises} instead\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "cancelPromise(...args: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "PromiseGroup",
+                  "canonicalReference": "@nextgis/ngw-map!~PromiseGroup:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 5
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "args",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  }
+                }
+              ],
+              "name": "cancelPromise"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-map!NgwMap#cancelPromises:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "cancelPromises(...args: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "PromiseGroup",
+                  "canonicalReference": "@nextgis/ngw-map!~PromiseGroup:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 5
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "args",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  }
+                }
+              ],
+              "name": "cancelPromises"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@nextgis/ngw-map!NgwMap#connector:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "connector: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NgwConnector",
+                  "canonicalReference": "@nextgis/ngw-connector!~NgwConnector:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "connector",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-map!NgwMap#disableSelection:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "disableSelection(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "disableSelection"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@nextgis/ngw-map!NgwMap#emitter:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly emitter: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "StrictEventEmitter",
+                  "canonicalReference": "strict-event-emitter-types!StrictEventEmitter:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "EventEmitter",
+                  "canonicalReference": "!EventEmitter:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NgwMapEvents",
+                  "canonicalReference": "@nextgis/ngw-map!NgwMapEvents:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "emitter",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 7
+              },
+              "isStatic": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-map!NgwMap#enableSelection:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "enableSelection(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "enableSelection"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-map!NgwMap#fetchIdentifyGeoJson:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "fetchIdentifyGeoJson(identify: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NgwIdentify",
+                  "canonicalReference": "@nextgis/ngw-kit!NgwIdentify:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", multiple?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CancelablePromise",
+                  "canonicalReference": "@nextgis/cancelable-promise!~CancelablePromise:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Feature",
+                  "canonicalReference": "@types/geojson!Feature:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 9
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "identify",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "parameterName": "multiple",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  }
+                }
+              ],
+              "name": "fetchIdentifyGeoJson"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-map!NgwMap#fetchIdentifyItem:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "fetchIdentifyItem<G extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Geometry",
+                  "canonicalReference": "@types/geojson!Geometry:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": " "
+                },
+                {
+                  "kind": "Content",
+                  "text": "= "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Geometry",
+                  "canonicalReference": "@types/geojson!Geometry:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", P extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FeatureProperties",
+                  "canonicalReference": "@nextgis/utils!FeatureProperties:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": " "
+                },
+                {
+                  "kind": "Content",
+                  "text": "= "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FeatureProperties",
+                  "canonicalReference": "@nextgis/utils!FeatureProperties:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">(identify: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NgwIdentify",
+                  "canonicalReference": "@nextgis/ngw-kit!NgwIdentify:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", requestOptions?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NgwFeatureRequestOptions",
+                  "canonicalReference": "@nextgis/ngw-kit!NgwFeatureRequestOptions:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CancelablePromise",
+                  "canonicalReference": "@nextgis/cancelable-promise!~CancelablePromise:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NgwFeatureItemResponse",
+                  "canonicalReference": "@nextgis/ngw-kit!NgwFeatureItemResponse:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<P, G> | undefined>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 15,
+                "endIndex": 19
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "identify",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 11,
+                    "endIndex": 12
+                  }
+                },
+                {
+                  "parameterName": "requestOptions",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 13,
+                    "endIndex": 14
+                  }
+                }
+              ],
+              "typeParameters": [
+                {
+                  "typeParameterName": "G",
+                  "constraintTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  }
+                },
+                {
+                  "typeParameterName": "P",
+                  "constraintTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 8
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 9,
+                    "endIndex": 10
+                  }
+                }
+              ],
+              "name": "fetchIdentifyItem"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-map!NgwMap#fetchNgwLayerFeature:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "fetchNgwLayerFeature<G extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Geometry",
+                  "canonicalReference": "@types/geojson!Geometry:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": " "
+                },
+                {
+                  "kind": "Content",
+                  "text": "= "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Geometry",
+                  "canonicalReference": "@types/geojson!Geometry:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", P extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FeatureProperties",
+                  "canonicalReference": "@nextgis/utils!FeatureProperties:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": " "
+                },
+                {
+                  "kind": "Content",
+                  "text": "= "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FeatureProperties",
+                  "canonicalReference": "@nextgis/utils!FeatureProperties:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">(options: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Omit",
+                  "canonicalReference": "!Omit:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FetchNgwItemOptions",
+                  "canonicalReference": "@nextgis/ngw-kit!FetchNgwItemOptions:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<P>, 'connector'>"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CancelablePromise",
+                  "canonicalReference": "@nextgis/cancelable-promise!~CancelablePromise:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Feature",
+                  "canonicalReference": "@types/geojson!Feature:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<G, P>>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 16,
+                "endIndex": 20
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 11,
+                    "endIndex": 15
+                  }
+                }
+              ],
+              "typeParameters": [
+                {
+                  "typeParameterName": "G",
+                  "constraintTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  }
+                },
+                {
+                  "typeParameterName": "P",
+                  "constraintTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 8
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 9,
+                    "endIndex": 10
+                  }
+                }
+              ],
+              "name": "fetchNgwLayerFeature"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-map!NgwMap#fetchNgwLayerFeatures:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "fetchNgwLayerFeatures<G extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Geometry",
+                  "canonicalReference": "@types/geojson!Geometry:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | null "
+                },
+                {
+                  "kind": "Content",
+                  "text": "= "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Geometry",
+                  "canonicalReference": "@types/geojson!Geometry:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", P extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FeatureProperties",
+                  "canonicalReference": "@nextgis/utils!FeatureProperties:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": " "
+                },
+                {
+                  "kind": "Content",
+                  "text": "= "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FeatureProperties",
+                  "canonicalReference": "@nextgis/utils!FeatureProperties:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">(options: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Omit",
+                  "canonicalReference": "!Omit:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FetchNgwItemsOptions",
+                  "canonicalReference": "@nextgis/ngw-kit!FetchNgwItemsOptions:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<P>, 'connector'>"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CancelablePromise",
+                  "canonicalReference": "@nextgis/cancelable-promise!~CancelablePromise:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FeatureCollection",
+                  "canonicalReference": "@types/geojson!FeatureCollection:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<G, P>>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 16,
+                "endIndex": 20
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 11,
+                    "endIndex": 15
+                  }
+                }
+              ],
+              "typeParameters": [
+                {
+                  "typeParameterName": "G",
+                  "constraintTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  }
+                },
+                {
+                  "typeParameterName": "P",
+                  "constraintTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 8
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 9,
+                    "endIndex": 10
+                  }
+                }
+              ],
+              "name": "fetchNgwLayerFeatures"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-map!NgwMap#fetchNgwLayerItem:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "fetchNgwLayerItem<G extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Geometry",
+                  "canonicalReference": "@types/geojson!Geometry:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": " "
+                },
+                {
+                  "kind": "Content",
+                  "text": "= "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Geometry",
+                  "canonicalReference": "@types/geojson!Geometry:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", P extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FeatureProperties",
+                  "canonicalReference": "@nextgis/utils!FeatureProperties:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": " "
+                },
+                {
+                  "kind": "Content",
+                  "text": "= "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FeatureProperties",
+                  "canonicalReference": "@nextgis/utils!FeatureProperties:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">(options: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Omit",
+                  "canonicalReference": "!Omit:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FetchNgwItemOptions",
+                  "canonicalReference": "@nextgis/ngw-kit!FetchNgwItemOptions:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<P>, 'connector'>"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CancelablePromise",
+                  "canonicalReference": "@nextgis/cancelable-promise!~CancelablePromise:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FeatureItem",
+                  "canonicalReference": "@nextgis/ngw-connector!FeatureItem:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 16,
+                "endIndex": 20
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 11,
+                    "endIndex": 15
+                  }
+                }
+              ],
+              "typeParameters": [
+                {
+                  "typeParameterName": "G",
+                  "constraintTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  }
+                },
+                {
+                  "typeParameterName": "P",
+                  "constraintTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 8
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 9,
+                    "endIndex": 10
+                  }
+                }
+              ],
+              "name": "fetchNgwLayerItem"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-map!NgwMap#fetchNgwLayerItems:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "fetchNgwLayerItems<F extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FeatureProperties",
+                  "canonicalReference": "@nextgis/utils!FeatureProperties:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": " "
+                },
+                {
+                  "kind": "Content",
+                  "text": "= "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FeatureProperties",
+                  "canonicalReference": "@nextgis/utils!FeatureProperties:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", G extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Geometry",
+                  "canonicalReference": "@types/geojson!Geometry:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": " "
+                },
+                {
+                  "kind": "Content",
+                  "text": "= "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Geometry",
+                  "canonicalReference": "@types/geojson!Geometry:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">(options: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Omit",
+                  "canonicalReference": "!Omit:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FetchNgwItemsOptions",
+                  "canonicalReference": "@nextgis/ngw-kit!FetchNgwItemsOptions:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<F>, 'connector'>"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CancelablePromise",
+                  "canonicalReference": "@nextgis/cancelable-promise!~CancelablePromise:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FeatureItem",
+                  "canonicalReference": "@nextgis/ngw-connector!FeatureItem:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<F, G>[]>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 16,
+                "endIndex": 20
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 11,
+                    "endIndex": 15
+                  }
+                }
+              ],
+              "typeParameters": [
+                {
+                  "typeParameterName": "F",
+                  "constraintTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  }
+                },
+                {
+                  "typeParameterName": "G",
+                  "constraintTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 8
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 9,
+                    "endIndex": 10
+                  }
+                }
+              ],
+              "name": "fetchNgwLayerItems"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-map!NgwMap#fit:member(1)",
+              "docComment": "/**\n * Pans and zooms the map to the initial position specified in the options\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "fit(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "fit"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-map!NgwMap#fitLayer:member(1)",
+              "docComment": "/**\n * Move map to layer. If the layer is NGW resource, extent will be received from the server\n *\n * @example\n * ```javascript\n * const ngwLayer = ngwMap.addNgwLayer({ id: 'ngw_layer_name', resource: 4005 });\n * ngwMap.fitLayer(ngwLayer);\n * ngwMap.fitLayer('ngw_layer_name');\n * ```\n *\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "fitLayer(layerDef: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "LayerDef",
+                  "canonicalReference": "@nextgis/webmap!LayerDef:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", options?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FitOptions",
+                  "canonicalReference": "@nextgis/webmap!FitOptions:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<void>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 7
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "layerDef",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  }
+                }
+              ],
+              "name": "fitLayer"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@nextgis/ngw-map!NgwMap.getIcon:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "static getIcon: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "typeof "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "getIcon",
+                  "canonicalReference": "@nextgis/icons!getIcon:function"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "getIcon",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": true
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-map!NgwMap#getIdentifyGeoJson:member(1)",
+              "docComment": "/**\n * @deprecated\n *\n * use {@link fetchIdentifyGeoJson} instead\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getIdentifyGeoJson(identify: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NgwIdentify",
+                  "canonicalReference": "@nextgis/ngw-kit!NgwIdentify:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", multiple?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CancelablePromise",
+                  "canonicalReference": "@nextgis/cancelable-promise!~CancelablePromise:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Feature",
+                  "canonicalReference": "@types/geojson!Feature:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 9
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "identify",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "parameterName": "multiple",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  }
+                }
+              ],
+              "name": "getIdentifyGeoJson"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-map!NgwMap#getNgwLayerByResourceId:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getNgwLayerByResourceId(id: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "LayerAdapter",
+                  "canonicalReference": "@nextgis/webmap!LayerAdapter:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 7
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "id",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "getNgwLayerByResourceId"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-map!NgwMap#getNgwLayerFeature:member(1)",
+              "docComment": "/**\n * @deprecated\n *\n * use {@link NgwMap.fetchNgwLayerFeature} instead\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getNgwLayerFeature<G extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Geometry",
+                  "canonicalReference": "@types/geojson!Geometry:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": " "
+                },
+                {
+                  "kind": "Content",
+                  "text": "= "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Geometry",
+                  "canonicalReference": "@types/geojson!Geometry:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", P extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "JsonMap",
+                  "canonicalReference": "@nextgis/utils!JsonMap:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " "
+                },
+                {
+                  "kind": "Content",
+                  "text": "= "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "JsonMap",
+                  "canonicalReference": "@nextgis/utils!JsonMap:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">(options: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        resourceId: number;\n        featureId: number;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CancelablePromise",
+                  "canonicalReference": "@nextgis/cancelable-promise!~CancelablePromise:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Feature",
+                  "canonicalReference": "@types/geojson!Feature:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<G, P>>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 13,
+                "endIndex": 17
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 11,
+                    "endIndex": 12
+                  }
+                }
+              ],
+              "typeParameters": [
+                {
+                  "typeParameterName": "G",
+                  "constraintTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  }
+                },
+                {
+                  "typeParameterName": "P",
+                  "constraintTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 8
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 9,
+                    "endIndex": 10
+                  }
+                }
+              ],
+              "name": "getNgwLayerFeature"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-map!NgwMap#getNgwLayerFeatures:member(1)",
+              "docComment": "/**\n * @deprecated\n *\n * use {@link NgwMap.fetchNgwLayerFeatures} instead\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getNgwLayerFeatures<G extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Geometry",
+                  "canonicalReference": "@types/geojson!Geometry:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | null "
+                },
+                {
+                  "kind": "Content",
+                  "text": "= "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Geometry",
+                  "canonicalReference": "@types/geojson!Geometry:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", P extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "JsonMap",
+                  "canonicalReference": "@nextgis/utils!JsonMap:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " "
+                },
+                {
+                  "kind": "Content",
+                  "text": "= "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "JsonMap",
+                  "canonicalReference": "@nextgis/utils!JsonMap:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">(options: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FetchNgwItemsOptions",
+                  "canonicalReference": "@nextgis/ngw-kit!FetchNgwItemsOptions:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<P>"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CancelablePromise",
+                  "canonicalReference": "@nextgis/cancelable-promise!~CancelablePromise:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FeatureCollection",
+                  "canonicalReference": "@types/geojson!FeatureCollection:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<G, P>>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 14,
+                "endIndex": 18
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 11,
+                    "endIndex": 13
+                  }
+                }
+              ],
+              "typeParameters": [
+                {
+                  "typeParameterName": "G",
+                  "constraintTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  }
+                },
+                {
+                  "typeParameterName": "P",
+                  "constraintTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 8
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 9,
+                    "endIndex": 10
+                  }
+                }
+              ],
+              "name": "getNgwLayerFeatures"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-map!NgwMap#getNgwLayerItem:member(1)",
+              "docComment": "/**\n * @deprecated\n *\n * use {@link NgwMap.fetchNgwLayerItem} instead\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getNgwLayerItem(options: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        resourceId: number;\n        featureId: number;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CancelablePromise",
+                  "canonicalReference": "@nextgis/cancelable-promise!~CancelablePromise:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FeatureItem",
+                  "canonicalReference": "@nextgis/ngw-connector!FeatureItem:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 7
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "getNgwLayerItem"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-map!NgwMap#getNgwLayerItems:member(1)",
+              "docComment": "/**\n * @deprecated\n *\n * use {@link NgwMap.fetchNgwLayerItems} instead\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getNgwLayerItems(options: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        resourceId: number;\n        connector?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NgwConnector",
+                  "canonicalReference": "@nextgis/ngw-connector!~NgwConnector:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        filters?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "PropertiesFilter",
+                  "canonicalReference": "@nextgis/properties-filter!PropertiesFilter:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n    } & "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FilterOptions",
+                  "canonicalReference": "@nextgis/webmap!FilterOptions:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CancelablePromise",
+                  "canonicalReference": "@nextgis/cancelable-promise!~CancelablePromise:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FeatureItem",
+                  "canonicalReference": "@nextgis/ngw-connector!FeatureItem:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 8,
+                "endIndex": 12
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 7
+                  }
+                }
+              ],
+              "name": "getNgwLayerItems"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-map!NgwMap#getNgwLayers:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getNgwLayers(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NgwLayers",
+                  "canonicalReference": "@nextgis/ngw-map!NgwLayers:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "getNgwLayers"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-map!NgwMap#onLoad:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "onLoad(event?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "keyof "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NgwMapEvents",
+                  "canonicalReference": "@nextgis/ngw-map!NgwMapEvents:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<this>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 6
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "event",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  }
+                }
+              ],
+              "name": "onLoad"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-map!NgwMap#removeLayer:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "removeLayer(layerDef: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "LayerDef",
+                  "canonicalReference": "@nextgis/webmap!LayerDef:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "layerDef",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "removeLayer"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-map!NgwMap#zoomToLayer:member(1)",
+              "docComment": "/**\n * @deprecated\n *\n * use {@link NgwMap.fitLayer} instead\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "zoomToLayer(layerDef: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceAdapter",
+                  "canonicalReference": "@nextgis/ngw-kit!ResourceAdapter:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<void>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 6
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "layerDef",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  }
+                }
+              ],
+              "name": "zoomToLayer"
+            }
+          ],
+          "extendsTokenRange": {
+            "startIndex": 13,
+            "endIndex": 17
+          },
+          "implementsTokenRanges": []
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@nextgis/ngw-map!NgwMapEvents:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface NgwMapEvents extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "WebMapEvents",
+              "canonicalReference": "@nextgis/webmap!WebMapEvents:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "NgwMapEvents",
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/ngw-map!NgwMapEvents#\"ngw-map:create\":member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "'ngw-map:create': "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NgwMap",
+                  "canonicalReference": "@nextgis/ngw-map!NgwMap:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"ngw-map:create\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/ngw-map!NgwMapEvents#\"ngw:preselect\":member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "'ngw:preselect': "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"ngw:preselect\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/ngw-map!NgwMapEvents#\"ngw:select\":member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "'ngw:select': "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NgwIdentifyEvent",
+                  "canonicalReference": "@nextgis/ngw-map!NgwIdentifyEvent:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | null"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"ngw:select\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            }
+          ],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 3
+            }
+          ]
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@nextgis/ngw-map!NgwMapOptions:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface NgwMapOptions<C = "
+            },
+            {
+              "kind": "Content",
+              "text": "any"
+            },
+            {
+              "kind": "Content",
+              "text": "> extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "MapOptions",
+              "canonicalReference": "@nextgis/webmap!MapOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<C> "
+            }
+          ],
+          "releaseTag": "Public",
+          "typeParameters": [
+            {
+              "typeParameterName": "C",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "name": "NgwMapOptions",
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/ngw-map!NgwMapOptions#auth:member",
+              "docComment": "/**\n * User credentials for authorization in NGW. Provides the ability to display protected resources\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "auth?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Credentials",
+                  "canonicalReference": "@nextgis/ngw-connector!Credentials:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "auth",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/ngw-map!NgwMapOptions#baseUrl:member",
+              "docComment": "/**\n * Url of NGW server like this https://demo.nextgis.com\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "baseUrl?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "baseUrl",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/ngw-map!NgwMapOptions#companyLogoOptions:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "companyLogoOptions?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CompanyLogoOptions",
+                  "canonicalReference": "@nextgis/ngw-kit!CompanyLogoOptions:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "companyLogoOptions",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/ngw-map!NgwMapOptions#connector:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "connector?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NgwConnector",
+                  "canonicalReference": "@nextgis/ngw-connector!~NgwConnector:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "connector",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/ngw-map!NgwMapOptions#osm:member",
+              "docComment": "/**\n * Shortcut to add OSM baselayer.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "osm?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "osm",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/ngw-map!NgwMapOptions#pixelRadius:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "pixelRadius?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "pixelRadius",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/ngw-map!NgwMapOptions#qmsId:member",
+              "docComment": "/**\n * Id number of resource from [QMS](https://qms.nextgis.com/). If specified through an array, the first element will be the resource identifier, and the second will be the name for identification in the application.\n *\n * @example\n * ```javascript\n *   const ngwMap = new NgwMap({qmsId: [465, 'qms-basemap']});\n *   ngwMap.hideLayer('qms-basemap');\n * ```\n *\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "qmsId?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number | [number, string]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "qmsId",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/ngw-map!NgwMapOptions#resources:member",
+              "docComment": "/**\n * List of NGW resources to be displayed on the map.\n *\n * The resources list may include:\n *\n * - number - resource id; // also for resource - string - resource keyname; // also for resource - object - configuration of the layer to be added with the one required parameter `resource` (the comment \"also for resource\" above refers to it)\n *\n * @example\n * ```javascript\n * NgwMap.create({\n *   baseUrl: \"https://demo.nextgis.com\",\n *   target: \"map\",\n *   resources: [\n *     // Basemap resource\n *     1665,\n *     // Digital Elevation Model (DEM)-style\n *     4117,\n *     // Hillshade-style\n *     { resource: 4115, adapter: \"TILE\", opacity: 0.3 },\n *     // Elevation contours-style\n *     'contours-style',\n *     // Vector from Order boundary-style\n *     {\n *       resource: 4111,\n *       fit: true,\n *       adapter: \"GEOJSON\",\n *       adapterOptions: { paint: { color: \"red\", fill: false, weight: 4 } },\n *     },\n *   ],\n * });\n * ```\n *\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "resources?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NgwResourceDefinition",
+                  "canonicalReference": "@nextgis/ngw-map!NgwResourceDefinition:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "resources",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/ngw-map!NgwMapOptions#runtimeParams:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "runtimeParams?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RuntimeParams",
+                  "canonicalReference": "@nextgis/webmap!RuntimeParams:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "runtimeParams",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/ngw-map!NgwMapOptions#setViewDelay:member",
+              "docComment": "/**\n * {@inheritDoc AdapterOptions.setViewDelay}\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setViewDelay?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "setViewDelay",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/ngw-map!NgwMapOptions#webmapId:member",
+              "docComment": "/**\n * Id number of webmap resource from NGW cloud. If specified through an array, the first element will be the webmapId from NGW, and the second will be the name for identification in the application.\n *\n * @example\n * ```javascript\n *   const ngwMap = new NgwMap({webmapId: [3985, 'my-webmap']});\n *   ngwMap.hideLayer('my-webmap');\n * ```\n *\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "webmapId?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NgwResourceDefinition",
+                  "canonicalReference": "@nextgis/ngw-map!NgwResourceDefinition:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "webmapId",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/ngw-map!NgwMapOptions#whitlabel:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "whitlabel?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "whitlabel",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 3,
+              "endIndex": 5
+            }
+          ]
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "@nextgis/ngw-map!NgwResourceDefinition:type",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type NgwResourceDefinition = "
+            },
+            {
+              "kind": "Content",
+              "text": "number | [number, string] | "
+            },
+            {
+              "kind": "Reference",
+              "text": "NgwLayerOptions",
+              "canonicalReference": "@nextgis/ngw-kit!NgwLayerOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "NgwResourceDefinition",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 3
+          }
+        }
+      ]
+    }
+  ]
+}

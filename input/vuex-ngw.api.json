@@ -1,0 +1,1611 @@
+{
+  "metadata": {
+    "toolPackage": "@microsoft/api-extractor",
+    "toolVersion": "7.18.19",
+    "schemaVersion": 1004,
+    "oldestForwardsCompatibleVersion": 1001,
+    "tsdocConfig": {
+      "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
+      "noStandardTags": true,
+      "tagDefinitions": [
+        {
+          "tagName": "@alpha",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@beta",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@defaultValue",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@decorator",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@deprecated",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@eventProperty",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@example",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@experimental",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@inheritDoc",
+          "syntaxKind": "inline"
+        },
+        {
+          "tagName": "@internal",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@label",
+          "syntaxKind": "inline"
+        },
+        {
+          "tagName": "@link",
+          "syntaxKind": "inline",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@override",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@packageDocumentation",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@param",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@privateRemarks",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@public",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@readonly",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@remarks",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@returns",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@sealed",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@see",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@throws",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@typeParam",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@virtual",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@betaDocumentation",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@internalRemarks",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@preapproved",
+          "syntaxKind": "modifier"
+        }
+      ],
+      "supportForTags": {
+        "@alpha": true,
+        "@beta": true,
+        "@defaultValue": true,
+        "@decorator": true,
+        "@deprecated": true,
+        "@eventProperty": true,
+        "@example": true,
+        "@experimental": true,
+        "@inheritDoc": true,
+        "@internal": true,
+        "@label": true,
+        "@link": true,
+        "@override": true,
+        "@packageDocumentation": true,
+        "@param": true,
+        "@privateRemarks": true,
+        "@public": true,
+        "@readonly": true,
+        "@remarks": true,
+        "@returns": true,
+        "@sealed": true,
+        "@see": true,
+        "@throws": true,
+        "@typeParam": true,
+        "@virtual": true,
+        "@betaDocumentation": true,
+        "@internalRemarks": true,
+        "@preapproved": true
+      }
+    }
+  },
+  "kind": "Package",
+  "canonicalReference": "@nextgis/vuex-ngw!",
+  "docComment": "",
+  "name": "@nextgis/vuex-ngw",
+  "members": [
+    {
+      "kind": "EntryPoint",
+      "canonicalReference": "@nextgis/vuex-ngw!",
+      "name": "",
+      "members": [
+        {
+          "kind": "Function",
+          "canonicalReference": "@nextgis/vuex-ngw!createResourceStore:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function createResourceStore<P extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "FeatureProperties",
+              "canonicalReference": "@nextgis/utils!FeatureProperties:type"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            },
+            {
+              "kind": "Content",
+              "text": "= "
+            },
+            {
+              "kind": "Reference",
+              "text": "FeatureProperties",
+              "canonicalReference": "@nextgis/utils!FeatureProperties:type"
+            },
+            {
+              "kind": "Content",
+              "text": ", G extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Geometry",
+              "canonicalReference": "@types/geojson!Geometry:type"
+            },
+            {
+              "kind": "Content",
+              "text": " | null "
+            },
+            {
+              "kind": "Content",
+              "text": "= "
+            },
+            {
+              "kind": "Reference",
+              "text": "Geometry",
+              "canonicalReference": "@types/geojson!Geometry:type"
+            },
+            {
+              "kind": "Content",
+              "text": ">(options: "
+            },
+            {
+              "kind": "Content",
+              "text": "{\n    connector: "
+            },
+            {
+              "kind": "Reference",
+              "text": "NgwConnector",
+              "canonicalReference": "@nextgis/ngw-connector!~NgwConnector:class"
+            },
+            {
+              "kind": "Content",
+              "text": ";\n    keyname: string;\n    store: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Store",
+              "canonicalReference": "vuex!Store:class"
+            },
+            {
+              "kind": "Content",
+              "text": "<any>;\n}"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "Type",
+              "canonicalReference": "@nextgis/utils!Type:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "ResourceStore",
+              "canonicalReference": "@nextgis/vuex-ngw!ResourceStore:class"
+            },
+            {
+              "kind": "Content",
+              "text": "<P, G>>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 17,
+            "endIndex": 21
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "options",
+              "parameterTypeTokenRange": {
+                "startIndex": 11,
+                "endIndex": 16
+              }
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "P",
+              "constraintTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 5
+              }
+            },
+            {
+              "typeParameterName": "G",
+              "constraintTokenRange": {
+                "startIndex": 6,
+                "endIndex": 8
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 9,
+                "endIndex": 10
+              }
+            }
+          ],
+          "name": "createResourceStore"
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@nextgis/vuex-ngw!ForeignResource:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface ForeignResource "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "ForeignResource",
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/vuex-ngw!ForeignResource#relationField:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "relationField?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "relationField",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@nextgis/vuex-ngw!PatchOptions:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface PatchOptions<G extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Geometry",
+              "canonicalReference": "@types/geojson!Geometry:type"
+            },
+            {
+              "kind": "Content",
+              "text": " | null "
+            },
+            {
+              "kind": "Content",
+              "text": "= "
+            },
+            {
+              "kind": "Reference",
+              "text": "Geometry",
+              "canonicalReference": "@types/geojson!Geometry:type"
+            },
+            {
+              "kind": "Content",
+              "text": ", P extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "GeoJsonProperties",
+              "canonicalReference": "@types/geojson!GeoJsonProperties:type"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            },
+            {
+              "kind": "Content",
+              "text": "= "
+            },
+            {
+              "kind": "Reference",
+              "text": "GeoJsonProperties",
+              "canonicalReference": "@types/geojson!GeoJsonProperties:type"
+            },
+            {
+              "kind": "Content",
+              "text": "> "
+            }
+          ],
+          "releaseTag": "Public",
+          "typeParameters": [
+            {
+              "typeParameterName": "G",
+              "constraintTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 5
+              }
+            },
+            {
+              "typeParameterName": "P",
+              "constraintTokenRange": {
+                "startIndex": 6,
+                "endIndex": 8
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 9,
+                "endIndex": 10
+              }
+            }
+          ],
+          "name": "PatchOptions",
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/vuex-ngw!PatchOptions#fid:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "fid?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "fid",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/vuex-ngw!PatchOptions#item:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "item: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Feature",
+                  "canonicalReference": "@types/geojson!Feature:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<G, P>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "item",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "@nextgis/vuex-ngw!ResourceStore:class",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare abstract class ResourceStore<P extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "FeatureProperties",
+              "canonicalReference": "@nextgis/utils!FeatureProperties:type"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            },
+            {
+              "kind": "Content",
+              "text": "= "
+            },
+            {
+              "kind": "Reference",
+              "text": "FeatureProperties",
+              "canonicalReference": "@nextgis/utils!FeatureProperties:type"
+            },
+            {
+              "kind": "Content",
+              "text": ", G extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Geometry",
+              "canonicalReference": "@types/geojson!Geometry:type"
+            },
+            {
+              "kind": "Content",
+              "text": " | null "
+            },
+            {
+              "kind": "Content",
+              "text": "= "
+            },
+            {
+              "kind": "Reference",
+              "text": "Geometry",
+              "canonicalReference": "@types/geojson!Geometry:type"
+            },
+            {
+              "kind": "Content",
+              "text": "> extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "VuexModule",
+              "canonicalReference": "vuex-module-decorators!VuexModule:class"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "typeParameters": [
+            {
+              "typeParameterName": "P",
+              "constraintTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 5
+              }
+            },
+            {
+              "typeParameterName": "G",
+              "constraintTokenRange": {
+                "startIndex": 6,
+                "endIndex": 8
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 9,
+                "endIndex": 10
+              }
+            }
+          ],
+          "name": "ResourceStore",
+          "members": [
+            {
+              "kind": "Property",
+              "canonicalReference": "@nextgis/vuex-ngw!ResourceStore#_promises:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "_promises: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Record",
+                  "canonicalReference": "!Record:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<string, "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<any>>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "_promises",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              },
+              "isStatic": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@nextgis/vuex-ngw!ResourceStore#connector:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get connector(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NgwConnector",
+                  "canonicalReference": "@nextgis/ngw-connector!~NgwConnector:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                },
+                {
+                  "kind": "Content",
+                  "text": "\n\nset connector(val: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NgwConnector",
+                  "canonicalReference": "@nextgis/ngw-connector!~NgwConnector:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ");"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "connector",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/vuex-ngw!ResourceStore#delete:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "delete(fid: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceStoreItem",
+                  "canonicalReference": "@nextgis/ngw-connector!ResourceStoreItem:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<P>[]>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 7
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "fid",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "delete"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@nextgis/vuex-ngw!ResourceStore#fields:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "fields: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FeatureLayerField",
+                  "canonicalReference": "@nextgis/ngw-connector!FeatureLayerField:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "fields",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@nextgis/vuex-ngw!ResourceStore#foreignResources:member",
+              "docComment": "/**\n * @deprecated\n *\n * not used\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "foreignResources: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        [key in "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceDef",
+                  "canonicalReference": "@nextgis/vuex-ngw!~ResourceDef:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ForeignResource",
+                  "canonicalReference": "@nextgis/vuex-ngw!ForeignResource:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "foreignResources",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 6
+              },
+              "isStatic": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@nextgis/vuex-ngw!ResourceStore#formatters:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "formatters: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        date?: (date: string) => string;\n        datetime?: (date: string) => string;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "formatters",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/vuex-ngw!ResourceStore#getFields:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getFields(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FeatureLayerField",
+                  "canonicalReference": "@nextgis/ngw-connector!FeatureLayerField:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[] | undefined>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "getFields"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/vuex-ngw!ResourceStore#getResources:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getResources(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Record",
+                  "canonicalReference": "!Record:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceDef",
+                  "canonicalReference": "@nextgis/vuex-ngw!~ResourceDef:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", number>>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 7
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "getResources"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/vuex-ngw!ResourceStore#getStore:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getStore(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceStoreItem",
+                  "canonicalReference": "@nextgis/ngw-connector!ResourceStoreItem:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<P>[] | undefined>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "getStore"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@nextgis/vuex-ngw!ResourceStore#hooks:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "hooks: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        onNewItem?: (opt: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "PatchOptions",
+                  "canonicalReference": "@nextgis/vuex-ngw!PatchOptions:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<G, P>) => "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<void>;\n        onBeforeDelete?: (opt: {\n            fid: number;\n        }) => "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<void>;\n        onBeforePatch?: (data: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Partial",
+                  "canonicalReference": "!Partial:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FeatureItem",
+                  "canonicalReference": "@nextgis/ngw-connector!FeatureItem:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<P, "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Geometry",
+                  "canonicalReference": "@types/geojson!Geometry:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">>[], opt: {\n            id: number;\n        }) => "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<void>;\n        delete?: (resourceId: number, featureId: number) => "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<void>;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "hooks",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 18
+              },
+              "isStatic": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/vuex-ngw!ResourceStore#patch:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "patch(opt: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "PatchOptions",
+                  "canonicalReference": "@nextgis/vuex-ngw!PatchOptions:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<G, P>"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FeatureItem",
+                  "canonicalReference": "@nextgis/ngw-connector!FeatureItem:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<P> | undefined>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 8
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "opt",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  }
+                }
+              ],
+              "name": "patch"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/vuex-ngw!ResourceStore#prepareFeatureToNgw:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "prepareFeatureToNgw<G extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Geometry",
+                  "canonicalReference": "@types/geojson!Geometry:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | null "
+                },
+                {
+                  "kind": "Content",
+                  "text": "= "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Geometry",
+                  "canonicalReference": "@types/geojson!Geometry:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", P extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FeatureProperties",
+                  "canonicalReference": "@nextgis/utils!FeatureProperties:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": " "
+                },
+                {
+                  "kind": "Content",
+                  "text": "= "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FeatureProperties",
+                  "canonicalReference": "@nextgis/utils!FeatureProperties:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">(opt: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        item: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Feature",
+                  "canonicalReference": "@types/geojson!Feature:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<G, P>;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Partial",
+                  "canonicalReference": "!Partial:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FeatureItem",
+                  "canonicalReference": "@nextgis/ngw-connector!FeatureItem:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<P>>>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 15,
+                "endIndex": 21
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "opt",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 11,
+                    "endIndex": 14
+                  }
+                }
+              ],
+              "typeParameters": [
+                {
+                  "typeParameterName": "G",
+                  "constraintTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  }
+                },
+                {
+                  "typeParameterName": "P",
+                  "constraintTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 8
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 9,
+                    "endIndex": 10
+                  }
+                }
+              ],
+              "name": "prepareFeatureToNgw"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@nextgis/vuex-ngw!ResourceStore#resource:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "resource: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "resource",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@nextgis/vuex-ngw!ResourceStore#resourceItems:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "resourceItems: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceStoreItem",
+                  "canonicalReference": "@nextgis/ngw-connector!ResourceStoreItem:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<P>[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "resourceItems",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@nextgis/vuex-ngw!ResourceStore#resources:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "resources: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        [key in "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceDef",
+                  "canonicalReference": "@nextgis/vuex-ngw!~ResourceDef:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]?: number;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "resources",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 4
+              },
+              "isStatic": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/vuex-ngw!ResourceStore#SET_STORE:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "protected SET_STORE(store: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceStoreItem",
+                  "canonicalReference": "@nextgis/ngw-connector!ResourceStoreItem:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<P>[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 5
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "store",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  }
+                }
+              ],
+              "name": "SET_STORE"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/vuex-ngw!ResourceStore#UPDATE_FIELDS:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "protected UPDATE_FIELDS(fields: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FeatureLayerField",
+                  "canonicalReference": "@nextgis/ngw-connector!FeatureLayerField:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 5
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "fields",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  }
+                }
+              ],
+              "name": "UPDATE_FIELDS"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/vuex-ngw!ResourceStore#UPDATE_RESOURCES:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "protected UPDATE_RESOURCES(resources?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Record",
+                  "canonicalReference": "!Record:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceDef",
+                  "canonicalReference": "@nextgis/vuex-ngw!~ResourceDef:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", number>"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 7
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "resources",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 5
+                  }
+                }
+              ],
+              "name": "UPDATE_RESOURCES"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/vuex-ngw!ResourceStore#updateStore:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "updateStore(opt: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        item: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FeatureItem",
+                  "canonicalReference": "@nextgis/ngw-connector!FeatureItem:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<P>;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceStoreItem",
+                  "canonicalReference": "@nextgis/ngw-connector!ResourceStoreItem:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<P>[] | undefined>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 9
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "opt",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 4
+                  }
+                }
+              ],
+              "name": "updateStore"
+            }
+          ],
+          "extendsTokenRange": {
+            "startIndex": 11,
+            "endIndex": 13
+          },
+          "implementsTokenRanges": []
+        }
+      ]
+    }
+  ]
+}

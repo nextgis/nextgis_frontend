@@ -4,7 +4,7 @@
   "description": "Development tools",
   "main": "index.js",
   "module": "lib/react-ngw-map.esm-bundler.js",
-  "#types": "lib/index.d.ts",
+  "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/ngw-map": "^1.12.1",
     "@nextgis/utils": "^1.12.0",
