@@ -583,6 +583,9 @@ export class WebMapMain<
       'movestart',
       'move',
       'moveend',
+      'mousemove',
+      'mouseout',
+      'mouseover',
     ];
 
     if (opt && opt.include) {

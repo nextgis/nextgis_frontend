@@ -87,6 +87,11 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     'move',
     'moveend',
   ];
+  private _positionEvents: (keyof MapEventType)[] = [
+    'mousemove',
+    'mouseout',
+    'mouseover',
+  ];
   private _unselectCb: UnselectCb[] = [];
   private _sourceDataLoading: { [name: string]: any[] } = {};
   private __setLayerOrder: (layers: { [x: string]: TLayerAdapter }) => void;
@@ -570,6 +575,11 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
 
       for (const e of this._universalEvents) {
         _map.on(e, () => this.emitter.emit(e, this));
+      }
+      for (const e of this._positionEvents) {
+        _map.on(e, (evt) =>
+          this.emitter.emit(e, convertMapClickEvent(evt as MapMouseEvent)),
+        );
       }
     }
   }

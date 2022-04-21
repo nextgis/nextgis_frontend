@@ -396,23 +396,48 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
   private _addMapListeners() {
     const map = this.map;
     if (map) {
+      const viewport = map.getViewport();
       map.on('click', (evt: BaseEvent | Event) => {
         this.onMapClick(evt as MapBrowserPointerEvent);
       });
-      map.on('pointermove', (evt: BaseEvent | Event) => {
+      map.on('pointermove', (evt: MapBrowserPointerEvent) => {
+        this.emitter.emit('mousemove', convertMapClickEvent(evt));
         this._callEachFeatureAtPixel(evt as MapBrowserPointerEvent, 'hover');
       });
+      const mouseEventEventToMapMouseEvent = (evt: MouseEvent) => {
+        const pixel = [evt.x, evt.y];
+        const mapEvent = {
+          pixel,
+          coordinate: map.getCoordinateFromPixel(pixel),
+          ...evt,
+        };
+        return convertMapClickEvent(mapEvent);
+      };
+      viewport.addEventListener(
+        'mouseout',
+        (evt) => {
+          this.emitter.emit('mouseout', mouseEventEventToMapMouseEvent(evt));
+        },
+        false,
+      );
+      viewport.addEventListener(
+        'mouseover',
+        (evt) => {
+          this.emitter.emit('mouseover', mouseEventEventToMapMouseEvent(evt));
+        },
+        false,
+      );
 
       const center = this.getCenter();
       const zoom = this.getZoom();
 
       const events: ['movestart', 'moveend'] = ['movestart', 'moveend'];
-      events.forEach((x) => {
+      for (const x of events) {
         this._positionMem[x] = { center, zoom };
         map.on(x, () => {
           this._emitPositionChangeEvent(x);
         });
-      });
+      }
     }
   }
 
