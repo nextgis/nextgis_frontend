@@ -74,10 +74,15 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   private _universalEvents: (keyof MainMapEvents)[] = [
     'move',
     'zoom',
-    'moveend',
     'zoomend',
     'zoomstart',
+    'moveend',
     'movestart',
+  ];
+  private _positionEvents: (keyof MainMapEvents)[] = [
+    'mousemove',
+    'mouseout',
+    'mouseover',
   ];
 
   create(options: MapOptions): void {
@@ -371,9 +376,21 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
       map.on('click', (evt) => {
         this.onMapClick(evt as LeafletMouseEvent);
       });
-      this._universalEvents.forEach((e) => {
+      for (const e of this._universalEvents) {
         map.on(e, () => this.emitter.emit(e, this), map);
-      });
+      }
+
+      for (const e of this._positionEvents) {
+        map.on(
+          e,
+          (evt) =>
+            this.emitter.emit(
+              e,
+              convertMapClickEvent(evt as LeafletMouseEvent),
+            ),
+          map,
+        );
+      }
     }
   }
 }

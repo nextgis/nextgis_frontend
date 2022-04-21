@@ -141,4 +141,19 @@ export interface MainMapEvents {
    * @eventProperty
    */
   moveend: MapAdapter;
+  /**
+   * 	Fired while the mouse moves over the map.
+   * @eventProperty
+   */
+  mousemove: MapAdapter;
+  /**
+   * 	Fired when the mouse leaves the map.
+   * @eventProperty
+   */
+  mouseout: MapAdapter;
+  /**
+   * Fired when the mouse enters the map.
+   * @eventProperty
+   */
+  mouseover: MapAdapter;
 }
