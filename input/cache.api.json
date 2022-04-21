@@ -1,0 +1,807 @@
+{
+  "metadata": {
+    "toolPackage": "@microsoft/api-extractor",
+    "toolVersion": "7.18.19",
+    "schemaVersion": 1004,
+    "oldestForwardsCompatibleVersion": 1001,
+    "tsdocConfig": {
+      "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
+      "noStandardTags": true,
+      "tagDefinitions": [
+        {
+          "tagName": "@alpha",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@beta",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@defaultValue",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@decorator",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@deprecated",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@eventProperty",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@example",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@experimental",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@inheritDoc",
+          "syntaxKind": "inline"
+        },
+        {
+          "tagName": "@internal",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@label",
+          "syntaxKind": "inline"
+        },
+        {
+          "tagName": "@link",
+          "syntaxKind": "inline",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@override",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@packageDocumentation",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@param",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@privateRemarks",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@public",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@readonly",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@remarks",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@returns",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@sealed",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@see",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@throws",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@typeParam",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@virtual",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@betaDocumentation",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@internalRemarks",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@preapproved",
+          "syntaxKind": "modifier"
+        }
+      ],
+      "supportForTags": {
+        "@alpha": true,
+        "@beta": true,
+        "@defaultValue": true,
+        "@decorator": true,
+        "@deprecated": true,
+        "@eventProperty": true,
+        "@example": true,
+        "@experimental": true,
+        "@inheritDoc": true,
+        "@internal": true,
+        "@label": true,
+        "@link": true,
+        "@override": true,
+        "@packageDocumentation": true,
+        "@param": true,
+        "@privateRemarks": true,
+        "@public": true,
+        "@readonly": true,
+        "@remarks": true,
+        "@returns": true,
+        "@sealed": true,
+        "@see": true,
+        "@throws": true,
+        "@typeParam": true,
+        "@virtual": true,
+        "@betaDocumentation": true,
+        "@internalRemarks": true,
+        "@preapproved": true
+      }
+    }
+  },
+  "kind": "Package",
+  "canonicalReference": "@nextgis/cache!",
+  "docComment": "/**\n * Caching for asynchronous functions\n *\n * @module cache\n *\n * @packageDocumentation\n */\n",
+  "name": "@nextgis/cache",
+  "members": [
+    {
+      "kind": "EntryPoint",
+      "canonicalReference": "@nextgis/cache!",
+      "name": "",
+      "members": [
+        {
+          "kind": "Class",
+          "canonicalReference": "@nextgis/cache!Cache_2:class",
+          "docComment": "/**\n * @example\n * ```javascript\n * const cache1 = new Cache();\n * cache1.add('foo', 'value');\n *\n * const cache2 = new Cache();\n * cache2.match('foo'); // value\n *\n * const cache3 = new Cache({ namespace: 'foo' });\n * cache3.match('foo'); // undefined\n * ```\n *\n * @example\n * ```javascript\n * let COUNTER = 0;\n * const createPromise = () => new Promise((res) => {\n *   COUNTER++\n *   setTimeout(() => res('Ok'), 300)\n * });\n *\n * const cache = new Cache();\n * for (let i = 0; i < 10; i++) {\n *   cache.add('foo', createPromise).then((data) => {\n *     console.log(data); // 'Ok'\n *   });\n * }\n * console.log(COUNTER); // 1\n * ```\n *\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class Cache<V = "
+            },
+            {
+              "kind": "Content",
+              "text": "any"
+            },
+            {
+              "kind": "Content",
+              "text": ", O extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Record",
+              "canonicalReference": "!Record:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<string, unknown> "
+            },
+            {
+              "kind": "Content",
+              "text": "= "
+            },
+            {
+              "kind": "Reference",
+              "text": "Record",
+              "canonicalReference": "!Record:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<string, unknown>"
+            },
+            {
+              "kind": "Content",
+              "text": "> "
+            }
+          ],
+          "releaseTag": "Public",
+          "typeParameters": [
+            {
+              "typeParameterName": "V",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "typeParameterName": "O",
+              "constraintTokenRange": {
+                "startIndex": 3,
+                "endIndex": 5
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 8
+              }
+            }
+          ],
+          "name": "Cache_2",
+          "members": [
+            {
+              "kind": "Constructor",
+              "canonicalReference": "@nextgis/cache!Cache_2:constructor(1)",
+              "docComment": "/**\n * Constructs a new instance of the `Cache` class\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "constructor(options?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CacheOptions",
+                  "canonicalReference": "@nextgis/cache!CacheOptions:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ");"
+                }
+              ],
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/cache!Cache_2#add:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "add(key: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", valueToSet: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CacheValue",
+                  "canonicalReference": "@nextgis/cache!~CacheValue:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<V> | (() => "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CacheValue",
+                  "canonicalReference": "@nextgis/cache!~CacheValue:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<V>)"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", props?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CacheMatchProps",
+                  "canonicalReference": "@nextgis/cache!~CacheMatchProps:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<O>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", onlyFull?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CacheValue",
+                  "canonicalReference": "@nextgis/cache!~CacheValue:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<V>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 13,
+                "endIndex": 15
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "key",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "parameterName": "valueToSet",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 7
+                  }
+                },
+                {
+                  "parameterName": "props",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 8,
+                    "endIndex": 10
+                  }
+                },
+                {
+                  "parameterName": "onlyFull",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 11,
+                    "endIndex": 12
+                  }
+                }
+              ],
+              "name": "add"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/cache!Cache_2#addFull:member(1)",
+              "docComment": "/**\n * Caching only a non-empty value.\n *\n * Useful for get or create strategy\n *\n * @example\n * ```javascript\n * const cache = new Cache();\n * const getItemFunc = () => fetch(url).then((data) => {\n *  return data.json(); // undefined\n * });\n * const item = await cache.addFull('foo', getItemFunc);\n * if (!item) {\n *   await createItem(); // 'New item'\n * }\n *\n * // somewhere else in the code\n * const item = await cache.addFull('foo', getItemFunc).then((resp) => {\n *   console.log(resp); // 'New item'\n * })\n *\n * ```\n *\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "addFull(key: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", valueToSet: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CacheValue",
+                  "canonicalReference": "@nextgis/cache!~CacheValue:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<V> | (() => "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CacheValue",
+                  "canonicalReference": "@nextgis/cache!~CacheValue:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<V>)"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", props?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CacheMatchProps",
+                  "canonicalReference": "@nextgis/cache!~CacheMatchProps:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<O>"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CacheValue",
+                  "canonicalReference": "@nextgis/cache!~CacheValue:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<V>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 11,
+                "endIndex": 13
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "key",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "parameterName": "valueToSet",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 7
+                  }
+                },
+                {
+                  "parameterName": "props",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 8,
+                    "endIndex": 10
+                  }
+                }
+              ],
+              "name": "addFull"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/cache!Cache_2#all:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "all(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CacheItem",
+                  "canonicalReference": "@nextgis/cache!~CacheItem:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<V, O>[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "all"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/cache!Cache_2#clean:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "clean(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "clean"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/cache!Cache_2#delete:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "delete(item: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CacheItem",
+                  "canonicalReference": "@nextgis/cache!~CacheItem:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "item",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "delete"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/cache!Cache_2#delete:member(2)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "delete(key: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", props?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CacheMatchProps",
+                  "canonicalReference": "@nextgis/cache!~CacheMatchProps:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<O>"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 7
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 2,
+              "parameters": [
+                {
+                  "parameterName": "key",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "parameterName": "props",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 5
+                  }
+                }
+              ],
+              "name": "delete"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/cache!Cache_2#match:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "match(key: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", props?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CacheMatchProps",
+                  "canonicalReference": "@nextgis/cache!~CacheMatchProps:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<O>"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CacheValue",
+                  "canonicalReference": "@nextgis/cache!~CacheValue:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<V> | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 8
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "key",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "parameterName": "props",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 5
+                  }
+                }
+              ],
+              "name": "match"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/cache!Cache_2#matchAll:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "matchAll(key?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", props?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CacheMatchProps",
+                  "canonicalReference": "@nextgis/cache!~CacheMatchProps:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<O>"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CacheValue",
+                  "canonicalReference": "@nextgis/cache!~CacheValue:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<V>[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 8
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "key",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "parameterName": "props",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 5
+                  }
+                }
+              ],
+              "name": "matchAll"
+            }
+          ],
+          "implementsTokenRanges": []
+        }
+      ]
+    }
+  ]
+}

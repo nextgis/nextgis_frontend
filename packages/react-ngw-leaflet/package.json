@@ -4,7 +4,7 @@
   "description": "React NGW map component for leaflet",
   "main": "lib/index.js",
   "module": "lib/react-ngw-leaflet.esm-bundler.js",
-  "#types": "lib/index.d.ts",
+  "types": "lib/index.d.ts",
   "dependencies": {
     "@nextgis/leaflet-map-adapter": "^1.12.1",
     "@nextgis/react-ngw-map": "^1.12.1"

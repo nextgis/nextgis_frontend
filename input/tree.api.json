@@ -1,0 +1,1284 @@
+{
+  "metadata": {
+    "toolPackage": "@microsoft/api-extractor",
+    "toolVersion": "7.18.19",
+    "schemaVersion": 1004,
+    "oldestForwardsCompatibleVersion": 1001,
+    "tsdocConfig": {
+      "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
+      "noStandardTags": true,
+      "tagDefinitions": [
+        {
+          "tagName": "@alpha",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@beta",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@defaultValue",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@decorator",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@deprecated",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@eventProperty",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@example",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@experimental",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@inheritDoc",
+          "syntaxKind": "inline"
+        },
+        {
+          "tagName": "@internal",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@label",
+          "syntaxKind": "inline"
+        },
+        {
+          "tagName": "@link",
+          "syntaxKind": "inline",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@override",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@packageDocumentation",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@param",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@privateRemarks",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@public",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@readonly",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@remarks",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@returns",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@sealed",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@see",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@throws",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@typeParam",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@virtual",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@betaDocumentation",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@internalRemarks",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@preapproved",
+          "syntaxKind": "modifier"
+        }
+      ],
+      "supportForTags": {
+        "@alpha": true,
+        "@beta": true,
+        "@defaultValue": true,
+        "@decorator": true,
+        "@deprecated": true,
+        "@eventProperty": true,
+        "@example": true,
+        "@experimental": true,
+        "@inheritDoc": true,
+        "@internal": true,
+        "@label": true,
+        "@link": true,
+        "@override": true,
+        "@packageDocumentation": true,
+        "@param": true,
+        "@privateRemarks": true,
+        "@public": true,
+        "@readonly": true,
+        "@remarks": true,
+        "@returns": true,
+        "@sealed": true,
+        "@see": true,
+        "@throws": true,
+        "@typeParam": true,
+        "@virtual": true,
+        "@betaDocumentation": true,
+        "@internalRemarks": true,
+        "@preapproved": true
+      }
+    }
+  },
+  "kind": "Package",
+  "canonicalReference": "@nextgis/tree!",
+  "docComment": "",
+  "name": "@nextgis/tree",
+  "members": [
+    {
+      "kind": "EntryPoint",
+      "canonicalReference": "@nextgis/tree!",
+      "name": "",
+      "members": [
+        {
+          "kind": "Class",
+          "canonicalReference": "@nextgis/tree!Tree:class",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class Tree<TREE_ITEM = "
+            },
+            {
+              "kind": "Content",
+              "text": "any"
+            },
+            {
+              "kind": "Content",
+              "text": "> "
+            }
+          ],
+          "releaseTag": "Public",
+          "typeParameters": [
+            {
+              "typeParameterName": "TREE_ITEM",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "name": "Tree",
+          "members": [
+            {
+              "kind": "Property",
+              "canonicalReference": "@nextgis/tree!Tree#_parent:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "protected _parent?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Tree",
+                  "canonicalReference": "@nextgis/tree!Tree:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<TREE_ITEM>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "_parent",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false
+            },
+            {
+              "kind": "Constructor",
+              "canonicalReference": "@nextgis/tree!Tree:constructor(1)",
+              "docComment": "/**\n * Constructs a new instance of the `Tree` class\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "constructor(item?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DefaultTreeItem",
+                  "canonicalReference": "@nextgis/tree!DefaultTreeItem:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", options?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "TreeOptions",
+                  "canonicalReference": "@nextgis/tree!TreeOptions:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<any>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ");"
+                }
+              ],
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "item",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 5
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/tree!Tree#addChild:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "addChild(treeItem: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "TREE_ITEM"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "treeItem",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "addChild"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@nextgis/tree!Tree#children:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "children: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Tree",
+                  "canonicalReference": "@nextgis/tree!Tree:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<TREE_ITEM>[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "children",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/tree!Tree#every:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "every(filter?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "PropertyFilter",
+                  "canonicalReference": "@nextgis/properties-filter!PropertyFilter:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SelfFilter",
+                  "canonicalReference": "@nextgis/tree!SelfFilter:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "filter",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 4
+                  }
+                }
+              ],
+              "name": "every"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/tree!Tree#filter:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "filter(filter?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "PropertyFilter",
+                  "canonicalReference": "@nextgis/properties-filter!PropertyFilter:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SelfFilter",
+                  "canonicalReference": "@nextgis/tree!SelfFilter:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<TREE_ITEM>"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Tree",
+                  "canonicalReference": "@nextgis/tree!Tree:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 8
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "filter",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 5
+                  }
+                }
+              ],
+              "name": "filter"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/tree!Tree#find:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "find(filter?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "PropertyFilter",
+                  "canonicalReference": "@nextgis/properties-filter!PropertyFilter:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SelfFilter",
+                  "canonicalReference": "@nextgis/tree!SelfFilter:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<TREE_ITEM>"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Tree",
+                  "canonicalReference": "@nextgis/tree!Tree:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 7
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "filter",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 5
+                  }
+                }
+              ],
+              "name": "find"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/tree!Tree#getParents:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getParents(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Tree",
+                  "canonicalReference": "@nextgis/tree!Tree:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "getParents"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@nextgis/tree!Tree#item:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "item: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DefaultTreeItem",
+                  "canonicalReference": "@nextgis/tree!DefaultTreeItem:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "item",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@nextgis/tree!Tree#relation:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "relation: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "TreeRelation",
+                  "canonicalReference": "@nextgis/tree!TreeRelation:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "relation",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/tree!Tree#some:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "some(filter?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "PropertyFilter",
+                  "canonicalReference": "@nextgis/properties-filter!PropertyFilter:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SelfFilter",
+                  "canonicalReference": "@nextgis/tree!SelfFilter:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "filter",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 4
+                  }
+                }
+              ],
+              "name": "some"
+            }
+          ],
+          "implementsTokenRanges": []
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@nextgis/tree!treeEvery:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function treeEvery<F extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "D",
+              "canonicalReference": "@nextgis/tree!~D:type"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            },
+            {
+              "kind": "Content",
+              "text": "= "
+            },
+            {
+              "kind": "Reference",
+              "text": "D",
+              "canonicalReference": "@nextgis/tree!~D:type"
+            },
+            {
+              "kind": "Content",
+              "text": ">(item: "
+            },
+            {
+              "kind": "Content",
+              "text": "F | F[]"
+            },
+            {
+              "kind": "Content",
+              "text": ", filter?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "PropertyFilter",
+              "canonicalReference": "@nextgis/properties-filter!PropertyFilter:type"
+            },
+            {
+              "kind": "Content",
+              "text": " | "
+            },
+            {
+              "kind": "Reference",
+              "text": "SelfFilter",
+              "canonicalReference": "@nextgis/tree!SelfFilter:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<F>"
+            },
+            {
+              "kind": "Content",
+              "text": ", relation?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "TreeRelation",
+              "canonicalReference": "@nextgis/tree!TreeRelation:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<F>"
+            },
+            {
+              "kind": "Content",
+              "text": ", itemPrepare?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "ItemPrepareFunction",
+              "canonicalReference": "@nextgis/tree!~ItemPrepareFunction:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<F>"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "boolean"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 19,
+            "endIndex": 20
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "item",
+              "parameterTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 7
+              }
+            },
+            {
+              "parameterName": "filter",
+              "parameterTypeTokenRange": {
+                "startIndex": 8,
+                "endIndex": 12
+              }
+            },
+            {
+              "parameterName": "relation",
+              "parameterTypeTokenRange": {
+                "startIndex": 13,
+                "endIndex": 15
+              }
+            },
+            {
+              "parameterName": "itemPrepare",
+              "parameterTypeTokenRange": {
+                "startIndex": 16,
+                "endIndex": 18
+              }
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "F",
+              "constraintTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 5
+              }
+            }
+          ],
+          "name": "treeEvery"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@nextgis/tree!treeFilter:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function treeFilter<F extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "D",
+              "canonicalReference": "@nextgis/tree!~D:type"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            },
+            {
+              "kind": "Content",
+              "text": "= "
+            },
+            {
+              "kind": "Reference",
+              "text": "D",
+              "canonicalReference": "@nextgis/tree!~D:type"
+            },
+            {
+              "kind": "Content",
+              "text": ">(item: "
+            },
+            {
+              "kind": "Content",
+              "text": "F | F[]"
+            },
+            {
+              "kind": "Content",
+              "text": ", filter?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "PropertyFilter",
+              "canonicalReference": "@nextgis/properties-filter!PropertyFilter:type"
+            },
+            {
+              "kind": "Content",
+              "text": " | "
+            },
+            {
+              "kind": "Reference",
+              "text": "SelfFilter",
+              "canonicalReference": "@nextgis/tree!SelfFilter:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<F>"
+            },
+            {
+              "kind": "Content",
+              "text": ", relation?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "TreeRelation",
+              "canonicalReference": "@nextgis/tree!TreeRelation:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<F>"
+            },
+            {
+              "kind": "Content",
+              "text": ", itemPrepare?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "ItemPrepareFunction",
+              "canonicalReference": "@nextgis/tree!~ItemPrepareFunction:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<F>"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "F[]"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 19,
+            "endIndex": 20
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "item",
+              "parameterTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 7
+              }
+            },
+            {
+              "parameterName": "filter",
+              "parameterTypeTokenRange": {
+                "startIndex": 8,
+                "endIndex": 12
+              }
+            },
+            {
+              "parameterName": "relation",
+              "parameterTypeTokenRange": {
+                "startIndex": 13,
+                "endIndex": 15
+              }
+            },
+            {
+              "parameterName": "itemPrepare",
+              "parameterTypeTokenRange": {
+                "startIndex": 16,
+                "endIndex": 18
+              }
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "F",
+              "constraintTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 5
+              }
+            }
+          ],
+          "name": "treeFilter"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@nextgis/tree!treeFind:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function treeFind<F extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "D",
+              "canonicalReference": "@nextgis/tree!~D:type"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            },
+            {
+              "kind": "Content",
+              "text": "= "
+            },
+            {
+              "kind": "Reference",
+              "text": "D",
+              "canonicalReference": "@nextgis/tree!~D:type"
+            },
+            {
+              "kind": "Content",
+              "text": ">(item: "
+            },
+            {
+              "kind": "Content",
+              "text": "F | F[]"
+            },
+            {
+              "kind": "Content",
+              "text": ", filter?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "PropertyFilter",
+              "canonicalReference": "@nextgis/properties-filter!PropertyFilter:type"
+            },
+            {
+              "kind": "Content",
+              "text": " | "
+            },
+            {
+              "kind": "Reference",
+              "text": "SelfFilter",
+              "canonicalReference": "@nextgis/tree!SelfFilter:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<F>"
+            },
+            {
+              "kind": "Content",
+              "text": ", relation?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "TreeRelation",
+              "canonicalReference": "@nextgis/tree!TreeRelation:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<F>"
+            },
+            {
+              "kind": "Content",
+              "text": ", itemPrepare?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "ItemPrepareFunction",
+              "canonicalReference": "@nextgis/tree!~ItemPrepareFunction:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<F>"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "F | undefined"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 19,
+            "endIndex": 20
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "item",
+              "parameterTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 7
+              }
+            },
+            {
+              "parameterName": "filter",
+              "parameterTypeTokenRange": {
+                "startIndex": 8,
+                "endIndex": 12
+              }
+            },
+            {
+              "parameterName": "relation",
+              "parameterTypeTokenRange": {
+                "startIndex": 13,
+                "endIndex": 15
+              }
+            },
+            {
+              "parameterName": "itemPrepare",
+              "parameterTypeTokenRange": {
+                "startIndex": 16,
+                "endIndex": 18
+              }
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "F",
+              "constraintTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 5
+              }
+            }
+          ],
+          "name": "treeFind"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@nextgis/tree!treeSome:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function treeSome<F extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "D",
+              "canonicalReference": "@nextgis/tree!~D:type"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            },
+            {
+              "kind": "Content",
+              "text": "= "
+            },
+            {
+              "kind": "Reference",
+              "text": "D",
+              "canonicalReference": "@nextgis/tree!~D:type"
+            },
+            {
+              "kind": "Content",
+              "text": ">(item: "
+            },
+            {
+              "kind": "Content",
+              "text": "F | F[]"
+            },
+            {
+              "kind": "Content",
+              "text": ", filter?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "PropertyFilter",
+              "canonicalReference": "@nextgis/properties-filter!PropertyFilter:type"
+            },
+            {
+              "kind": "Content",
+              "text": " | "
+            },
+            {
+              "kind": "Reference",
+              "text": "SelfFilter",
+              "canonicalReference": "@nextgis/tree!SelfFilter:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<F>"
+            },
+            {
+              "kind": "Content",
+              "text": ", relation?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "TreeRelation",
+              "canonicalReference": "@nextgis/tree!TreeRelation:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<F>"
+            },
+            {
+              "kind": "Content",
+              "text": ", itemPrepare?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "ItemPrepareFunction",
+              "canonicalReference": "@nextgis/tree!~ItemPrepareFunction:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<F>"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "boolean"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 19,
+            "endIndex": 20
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "item",
+              "parameterTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 7
+              }
+            },
+            {
+              "parameterName": "filter",
+              "parameterTypeTokenRange": {
+                "startIndex": 8,
+                "endIndex": 12
+              }
+            },
+            {
+              "parameterName": "relation",
+              "parameterTypeTokenRange": {
+                "startIndex": 13,
+                "endIndex": 15
+              }
+            },
+            {
+              "parameterName": "itemPrepare",
+              "parameterTypeTokenRange": {
+                "startIndex": 16,
+                "endIndex": 18
+              }
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "F",
+              "constraintTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 5
+              }
+            }
+          ],
+          "name": "treeSome"
+        }
+      ]
+    }
+  ]
+}

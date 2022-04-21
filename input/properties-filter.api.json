@@ -1,0 +1,639 @@
+{
+  "metadata": {
+    "toolPackage": "@microsoft/api-extractor",
+    "toolVersion": "7.18.19",
+    "schemaVersion": 1004,
+    "oldestForwardsCompatibleVersion": 1001,
+    "tsdocConfig": {
+      "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
+      "noStandardTags": true,
+      "tagDefinitions": [
+        {
+          "tagName": "@alpha",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@beta",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@defaultValue",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@decorator",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@deprecated",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@eventProperty",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@example",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@experimental",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@inheritDoc",
+          "syntaxKind": "inline"
+        },
+        {
+          "tagName": "@internal",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@label",
+          "syntaxKind": "inline"
+        },
+        {
+          "tagName": "@link",
+          "syntaxKind": "inline",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@override",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@packageDocumentation",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@param",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@privateRemarks",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@public",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@readonly",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@remarks",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@returns",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@sealed",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@see",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@throws",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@typeParam",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@virtual",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@betaDocumentation",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@internalRemarks",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@preapproved",
+          "syntaxKind": "modifier"
+        }
+      ],
+      "supportForTags": {
+        "@alpha": true,
+        "@beta": true,
+        "@defaultValue": true,
+        "@decorator": true,
+        "@deprecated": true,
+        "@eventProperty": true,
+        "@example": true,
+        "@experimental": true,
+        "@inheritDoc": true,
+        "@internal": true,
+        "@label": true,
+        "@link": true,
+        "@override": true,
+        "@packageDocumentation": true,
+        "@param": true,
+        "@privateRemarks": true,
+        "@public": true,
+        "@readonly": true,
+        "@remarks": true,
+        "@returns": true,
+        "@sealed": true,
+        "@see": true,
+        "@throws": true,
+        "@typeParam": true,
+        "@virtual": true,
+        "@betaDocumentation": true,
+        "@internalRemarks": true,
+        "@preapproved": true
+      }
+    }
+  },
+  "kind": "Package",
+  "canonicalReference": "@nextgis/properties-filter!",
+  "docComment": "",
+  "name": "@nextgis/properties-filter",
+  "members": [
+    {
+      "kind": "EntryPoint",
+      "canonicalReference": "@nextgis/properties-filter!",
+      "name": "",
+      "members": [
+        {
+          "kind": "Function",
+          "canonicalReference": "@nextgis/properties-filter!checkIfPropertyFilter:function(1)",
+          "docComment": "/**\n * @deprecated\n *\n * use {@link isPropertyFilter} instead\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function checkIfPropertyFilter(filter: "
+            },
+            {
+              "kind": "Reference",
+              "text": "PropertyFilter",
+              "canonicalReference": "@nextgis/properties-filter!PropertyFilter:type"
+            },
+            {
+              "kind": "Content",
+              "text": " | "
+            },
+            {
+              "kind": "Reference",
+              "text": "PropertiesFilter",
+              "canonicalReference": "@nextgis/properties-filter!PropertiesFilter:type"
+            },
+            {
+              "kind": "Content",
+              "text": " | string"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "filter",
+              "canonicalReference": "@nextgis/properties-filter!~filter"
+            },
+            {
+              "kind": "Content",
+              "text": " is "
+            },
+            {
+              "kind": "Reference",
+              "text": "PropertyFilter",
+              "canonicalReference": "@nextgis/properties-filter!PropertyFilter:type"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 6,
+            "endIndex": 9
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "filter",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              }
+            }
+          ],
+          "name": "checkIfPropertyFilter"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@nextgis/properties-filter!featureFilter:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function featureFilter(feature: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Feature",
+              "canonicalReference": "@types/geojson!Feature:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", filters: "
+            },
+            {
+              "kind": "Reference",
+              "text": "PropertiesFilter",
+              "canonicalReference": "@nextgis/properties-filter!PropertiesFilter:type"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "boolean"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 5,
+            "endIndex": 6
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "feature",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "parameterName": "filters",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              }
+            }
+          ],
+          "name": "featureFilter"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@nextgis/properties-filter!isPropertyFilter:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function isPropertyFilter(filter: "
+            },
+            {
+              "kind": "Reference",
+              "text": "PropertyFilter",
+              "canonicalReference": "@nextgis/properties-filter!PropertyFilter:type"
+            },
+            {
+              "kind": "Content",
+              "text": " | "
+            },
+            {
+              "kind": "Reference",
+              "text": "PropertiesFilter",
+              "canonicalReference": "@nextgis/properties-filter!PropertiesFilter:type"
+            },
+            {
+              "kind": "Content",
+              "text": " | string"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "filter",
+              "canonicalReference": "@nextgis/properties-filter!~filter"
+            },
+            {
+              "kind": "Content",
+              "text": " is "
+            },
+            {
+              "kind": "Reference",
+              "text": "PropertyFilter",
+              "canonicalReference": "@nextgis/properties-filter!PropertyFilter:type"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 6,
+            "endIndex": 9
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "filter",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              }
+            }
+          ],
+          "name": "isPropertyFilter"
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "@nextgis/properties-filter!Operations:type",
+          "docComment": "/**\n * gt - greater (\\>) lt - lower (\\<) ge - greater or equal (\\>=) le - lower or equal (\\<=) eq - equal (=) ne - not equal (!=) like - LIKE SQL statement (for strings compare) ilike - ILIKE SQL statement (for strings compare)\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type Operations = "
+            },
+            {
+              "kind": "Content",
+              "text": "'gt' | 'lt' | 'ge' | 'le' | 'eq' | 'ne' | 'in' | 'notin' | 'like' | 'ilike'"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "Operations",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          }
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@nextgis/properties-filter!propertiesFilter:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function propertiesFilter<T extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Properties",
+              "canonicalReference": "@nextgis/properties-filter!Properties:type"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            },
+            {
+              "kind": "Content",
+              "text": "= "
+            },
+            {
+              "kind": "Reference",
+              "text": "Properties",
+              "canonicalReference": "@nextgis/properties-filter!Properties:type"
+            },
+            {
+              "kind": "Content",
+              "text": ">(properties: "
+            },
+            {
+              "kind": "Content",
+              "text": "T"
+            },
+            {
+              "kind": "Content",
+              "text": ", filters: "
+            },
+            {
+              "kind": "Reference",
+              "text": "PropertiesFilter",
+              "canonicalReference": "@nextgis/properties-filter!PropertiesFilter:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "boolean"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 11,
+            "endIndex": 12
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "properties",
+              "parameterTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 7
+              }
+            },
+            {
+              "parameterName": "filters",
+              "parameterTypeTokenRange": {
+                "startIndex": 8,
+                "endIndex": 10
+              }
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 5
+              }
+            }
+          ],
+          "name": "propertiesFilter"
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "@nextgis/properties-filter!PropertiesFilter:type",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type PropertiesFilter<T extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Properties",
+              "canonicalReference": "@nextgis/properties-filter!Properties:type"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            },
+            {
+              "kind": "Content",
+              "text": "= "
+            },
+            {
+              "kind": "Reference",
+              "text": "Properties",
+              "canonicalReference": "@nextgis/properties-filter!Properties:type"
+            },
+            {
+              "kind": "Content",
+              "text": "> = "
+            },
+            {
+              "kind": "Content",
+              "text": "('all' | 'any' | "
+            },
+            {
+              "kind": "Reference",
+              "text": "PropertyFilter",
+              "canonicalReference": "@nextgis/properties-filter!PropertyFilter:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<T> | "
+            },
+            {
+              "kind": "Reference",
+              "text": "PropertiesFilter",
+              "canonicalReference": "@nextgis/properties-filter!PropertiesFilter:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<T>)[]"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "PropertiesFilter",
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 5
+              }
+            }
+          ],
+          "typeTokenRange": {
+            "startIndex": 6,
+            "endIndex": 11
+          }
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "@nextgis/properties-filter!PropertyFilter:type",
+          "docComment": "/**\n * field, operation, value ['foo', 'eq', 'bar'] ['count', 'ge', 20]\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type PropertyFilter<T extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Properties",
+              "canonicalReference": "@nextgis/properties-filter!Properties:type"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            },
+            {
+              "kind": "Content",
+              "text": "= "
+            },
+            {
+              "kind": "Reference",
+              "text": "Properties",
+              "canonicalReference": "@nextgis/properties-filter!Properties:type"
+            },
+            {
+              "kind": "Content",
+              "text": "> = "
+            },
+            {
+              "kind": "Content",
+              "text": "[\n    T extends null ? string : keyof T | `%${string & keyof T}` | `%${string & keyof T}%` | `${string & keyof T}%`,\n    "
+            },
+            {
+              "kind": "Reference",
+              "text": "Operations",
+              "canonicalReference": "@nextgis/properties-filter!Operations:type"
+            },
+            {
+              "kind": "Content",
+              "text": ",\n    any\n]"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "PropertyFilter",
+          "typeParameters": [
+            {
+              "typeParameterName": "T",
+              "constraintTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 5
+              }
+            }
+          ],
+          "typeTokenRange": {
+            "startIndex": 6,
+            "endIndex": 9
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3419 @@
+{
+  "metadata": {
+    "toolPackage": "@microsoft/api-extractor",
+    "toolVersion": "7.18.19",
+    "schemaVersion": 1004,
+    "oldestForwardsCompatibleVersion": 1001,
+    "tsdocConfig": {
+      "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
+      "noStandardTags": true,
+      "tagDefinitions": [
+        {
+          "tagName": "@alpha",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@beta",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@defaultValue",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@decorator",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@deprecated",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@eventProperty",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@example",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@experimental",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@inheritDoc",
+          "syntaxKind": "inline"
+        },
+        {
+          "tagName": "@internal",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@label",
+          "syntaxKind": "inline"
+        },
+        {
+          "tagName": "@link",
+          "syntaxKind": "inline",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@override",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@packageDocumentation",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@param",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@privateRemarks",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@public",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@readonly",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@remarks",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@returns",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@sealed",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@see",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@throws",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@typeParam",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@virtual",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@betaDocumentation",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@internalRemarks",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@preapproved",
+          "syntaxKind": "modifier"
+        }
+      ],
+      "supportForTags": {
+        "@alpha": true,
+        "@beta": true,
+        "@defaultValue": true,
+        "@decorator": true,
+        "@deprecated": true,
+        "@eventProperty": true,
+        "@example": true,
+        "@experimental": true,
+        "@inheritDoc": true,
+        "@internal": true,
+        "@label": true,
+        "@link": true,
+        "@override": true,
+        "@packageDocumentation": true,
+        "@param": true,
+        "@privateRemarks": true,
+        "@public": true,
+        "@readonly": true,
+        "@remarks": true,
+        "@returns": true,
+        "@sealed": true,
+        "@see": true,
+        "@throws": true,
+        "@typeParam": true,
+        "@virtual": true,
+        "@betaDocumentation": true,
+        "@internalRemarks": true,
+        "@preapproved": true
+      }
+    }
+  },
+  "kind": "Package",
+  "canonicalReference": "@nextgis/ngw-orm!",
+  "docComment": "",
+  "name": "@nextgis/ngw-orm",
+  "members": [
+    {
+      "kind": "EntryPoint",
+      "canonicalReference": "@nextgis/ngw-orm!",
+      "name": "",
+      "members": [
+        {
+          "kind": "Class",
+          "canonicalReference": "@nextgis/ngw-orm!BaseResource:class",
+          "docComment": "/**\n * Base abstract resource for all resources.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class BaseResource "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "BaseResource",
+          "members": [
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-orm!BaseResource.clone:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "static clone<T extends "
+                },
+                {
+                  "kind": "Content",
+                  "text": "typeof "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "BaseResource",
+                  "canonicalReference": "@nextgis/ngw-orm!BaseResource:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": " "
+                },
+                {
+                  "kind": "Content",
+                  "text": "= "
+                },
+                {
+                  "kind": "Content",
+                  "text": "typeof "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "BaseResource",
+                  "canonicalReference": "@nextgis/ngw-orm!BaseResource:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">(options?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Partial",
+                  "canonicalReference": "!Partial:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NgwResourceOptions",
+                  "canonicalReference": "@nextgis/ngw-orm!NgwResourceOptions:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "T"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": true,
+              "returnTypeTokenRange": {
+                "startIndex": 13,
+                "endIndex": 14
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 8,
+                    "endIndex": 12
+                  }
+                }
+              ],
+              "typeParameters": [
+                {
+                  "typeParameterName": "T",
+                  "constraintTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 4
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 5,
+                    "endIndex": 7
+                  }
+                }
+              ],
+              "name": "clone"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-orm!BaseResource.connect:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "static connect<T extends "
+                },
+                {
+                  "kind": "Content",
+                  "text": "typeof "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "BaseResource",
+                  "canonicalReference": "@nextgis/ngw-orm!BaseResource:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": " "
+                },
+                {
+                  "kind": "Content",
+                  "text": "= "
+                },
+                {
+                  "kind": "Content",
+                  "text": "typeof "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "BaseResource",
+                  "canonicalReference": "@nextgis/ngw-orm!BaseResource:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">(resourceOptions: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceIdKeynameDef",
+                  "canonicalReference": "@nextgis/ngw-connector!ResourceIdKeynameDef:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", connectionOrOptions: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Connection",
+                  "canonicalReference": "@nextgis/ngw-orm!Connection:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ConnectionOptions",
+                  "canonicalReference": "@nextgis/ngw-orm!ConnectionOptions:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<T>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": true,
+              "returnTypeTokenRange": {
+                "startIndex": 14,
+                "endIndex": 16
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "resourceOptions",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 8,
+                    "endIndex": 9
+                  }
+                },
+                {
+                  "parameterName": "connectionOrOptions",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 10,
+                    "endIndex": 13
+                  }
+                }
+              ],
+              "typeParameters": [
+                {
+                  "typeParameterName": "T",
+                  "constraintTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 4
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 5,
+                    "endIndex": 7
+                  }
+                }
+              ],
+              "name": "connect"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@nextgis/ngw-orm!BaseResource.connection:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "static connection?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Connection",
+                  "canonicalReference": "@nextgis/ngw-orm!Connection:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "connection",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": true
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-orm!BaseResource.getNgwPayload:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "static getNgwPayload(resource: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Type",
+                  "canonicalReference": "@nextgis/utils!Type:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "BaseResource",
+                  "canonicalReference": "@nextgis/ngw-orm!BaseResource:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", parent: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", options: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SyncOptions",
+                  "canonicalReference": "@nextgis/ngw-orm!SyncOptions:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Record",
+                  "canonicalReference": "!Record:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<string, any> | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": true,
+              "returnTypeTokenRange": {
+                "startIndex": 10,
+                "endIndex": 12
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "resource",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 5
+                  }
+                },
+                {
+                  "parameterName": "parent",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 7
+                  }
+                },
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 8,
+                    "endIndex": 9
+                  }
+                }
+              ],
+              "name": "getNgwPayload"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@nextgis/ngw-orm!BaseResource.item:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "static item?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceItem",
+                  "canonicalReference": "@nextgis/ngw-connector!ResourceItem:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "item",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": true
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-orm!BaseResource.receive:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "static receive(item: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceItem",
+                  "canonicalReference": "@nextgis/ngw-connector!ResourceItem:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", ResCls?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "typeof "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "BaseResource",
+                  "canonicalReference": "@nextgis/ngw-orm!BaseResource:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "typeof "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "BaseResource",
+                  "canonicalReference": "@nextgis/ngw-orm!BaseResource:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": true,
+              "returnTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 8
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "item",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "parameterName": "ResCls",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 5
+                  }
+                }
+              ],
+              "name": "receive"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-orm!BaseResource.sync:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "static sync(options: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SyncOptions",
+                  "canonicalReference": "@nextgis/ngw-orm!SyncOptions:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", connectionOrOptions: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Connection",
+                  "canonicalReference": "@nextgis/ngw-orm!Connection:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ConnectionOptions",
+                  "canonicalReference": "@nextgis/ngw-orm!ConnectionOptions:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": true,
+              "returnTypeTokenRange": {
+                "startIndex": 7,
+                "endIndex": 8
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "parameterName": "connectionOrOptions",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 6
+                  }
+                }
+              ],
+              "name": "sync"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-orm!BaseResource.toTypescript:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "static toTypescript(opt?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ToTypescriptOptions",
+                  "canonicalReference": "@nextgis/ngw-orm!ToTypescriptOptions:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ToTypescript",
+                  "canonicalReference": "@nextgis/ngw-orm!ToTypescript:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": true,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "opt",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "toTypescript"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-orm!BaseResource.validate:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "static validate(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ValidateErrorType",
+                  "canonicalReference": "@nextgis/ngw-orm!ValidateErrorType:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": true,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "validate"
+            }
+          ],
+          "implementsTokenRanges": []
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@nextgis/ngw-orm!Column:function(1)",
+          "docComment": "/**\n * Column decorator is used to mark a specific class property as a table column. Only properties decorated with this decorator will be persisted to the database when entity be saved.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function Column(): "
+            },
+            {
+              "kind": "Reference",
+              "text": "Function",
+              "canonicalReference": "!Function:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [],
+          "name": "Column"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@nextgis/ngw-orm!Column:function(2)",
+          "docComment": "/**\n * Column decorator is used to mark a specific class property as a table column. Only properties decorated with this decorator will be persisted to the database when entity be saved.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function Column(type: "
+            },
+            {
+              "kind": "Reference",
+              "text": "ColumnType",
+              "canonicalReference": "@nextgis/ngw-orm!ColumnType:type"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "Function",
+              "canonicalReference": "!Function:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 4
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 2,
+          "parameters": [
+            {
+              "parameterName": "type",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "name": "Column"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@nextgis/ngw-orm!Column:function(3)",
+          "docComment": "/**\n * Column decorator is used to mark a specific class property as a table column. Only properties decorated with this decorator will be persisted to the database when entity be saved.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function Column(options: "
+            },
+            {
+              "kind": "Reference",
+              "text": "ColumnOptions",
+              "canonicalReference": "@nextgis/ngw-orm!ColumnOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "Function",
+              "canonicalReference": "!Function:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 4
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 3,
+          "parameters": [
+            {
+              "parameterName": "options",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "name": "Column"
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "@nextgis/ngw-orm!Connection:class",
+          "docComment": "/**\n * Connection is a single NGW connection. You can have multiple connections to multiple NGW in your application.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class Connection "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "Connection",
+          "members": [
+            {
+              "kind": "Constructor",
+              "canonicalReference": "@nextgis/ngw-orm!Connection:constructor(1)",
+              "docComment": "/**\n * Constructs a new instance of the `Connection` class\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "constructor(options: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ConnectionOptions",
+                  "canonicalReference": "@nextgis/ngw-orm!ConnectionOptions:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ");"
+                }
+              ],
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@nextgis/ngw-orm!Connection#baseUrl:member",
+              "docComment": "/**\n * Connection url.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly baseUrl: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "baseUrl",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-orm!Connection#connect:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "connect(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<this>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "connect"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-orm!Connection.connect:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "static connect(options: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Connection",
+                  "canonicalReference": "@nextgis/ngw-orm!Connection:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ConnectionOptions",
+                  "canonicalReference": "@nextgis/ngw-orm!ConnectionOptions:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Connection",
+                  "canonicalReference": "@nextgis/ngw-orm!Connection:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": true,
+              "returnTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 9
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 4
+                  }
+                }
+              ],
+              "name": "connect"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@nextgis/ngw-orm!Connection.connections:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "static connections: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Connection",
+                  "canonicalReference": "@nextgis/ngw-orm!Connection:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "connections",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": true
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-orm!Connection.create:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "static create(options: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Connection",
+                  "canonicalReference": "@nextgis/ngw-orm!Connection:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ConnectionOptions",
+                  "canonicalReference": "@nextgis/ngw-orm!ConnectionOptions:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Connection",
+                  "canonicalReference": "@nextgis/ngw-orm!Connection:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": true,
+              "returnTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 4
+                  }
+                }
+              ],
+              "name": "create"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-orm!Connection#createResource:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "createResource(Resource: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "typeof "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "BaseResource",
+                  "canonicalReference": "@nextgis/ngw-orm!BaseResource:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", options: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SyncOptions",
+                  "canonicalReference": "@nextgis/ngw-orm!SyncOptions:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<typeof "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "BaseResource",
+                  "canonicalReference": "@nextgis/ngw-orm!BaseResource:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 10
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "Resource",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  }
+                },
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  }
+                }
+              ],
+              "name": "createResource"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-orm!Connection#deleteResource:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "deleteResource(resource: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "typeof "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "BaseResource",
+                  "canonicalReference": "@nextgis/ngw-orm!BaseResource:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<void>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 6
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "resource",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  }
+                }
+              ],
+              "name": "deleteResource"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@nextgis/ngw-orm!Connection#driver:member",
+              "docComment": "/**\n * NGW driver used by this connection.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly driver: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NgwConnector",
+                  "canonicalReference": "@nextgis/ngw-connector!~NgwConnector:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "driver",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-orm!Connection#getOrCreateResource:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getOrCreateResource<P extends "
+                },
+                {
+                  "kind": "Content",
+                  "text": "typeof "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "BaseResource",
+                  "canonicalReference": "@nextgis/ngw-orm!BaseResource:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">(Resource: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "P"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", options: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SyncOptions",
+                  "canonicalReference": "@nextgis/ngw-orm!SyncOptions:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<[P, boolean]>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 8,
+                "endIndex": 10
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "Resource",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  }
+                },
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 7
+                  }
+                }
+              ],
+              "typeParameters": [
+                {
+                  "typeParameterName": "P",
+                  "constraintTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  }
+                }
+              ],
+              "name": "getOrCreateResource"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-orm!Connection#getResource:member(1)",
+              "docComment": "/**\n * @deprecated\n *\n * use getResourceItem instead\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getResource(resource: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceIdKeynameDef",
+                  "canonicalReference": "@nextgis/ngw-connector!ResourceIdKeynameDef:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DeepPartial",
+                  "canonicalReference": "@nextgis/ngw-orm!DeepPartial:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Resource",
+                  "canonicalReference": "@nextgis/ngw-connector!Resource:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceItem",
+                  "canonicalReference": "@nextgis/ngw-connector!ResourceItem:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 8,
+                "endIndex": 12
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "resource",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 7
+                  }
+                }
+              ],
+              "name": "getResource"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-orm!Connection#getResourceItem:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getResourceItem(resource: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceIdKeynameDef",
+                  "canonicalReference": "@nextgis/ngw-connector!ResourceIdKeynameDef:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DeepPartial",
+                  "canonicalReference": "@nextgis/ngw-orm!DeepPartial:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Resource",
+                  "canonicalReference": "@nextgis/ngw-connector!Resource:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceItem",
+                  "canonicalReference": "@nextgis/ngw-connector!ResourceItem:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 8,
+                "endIndex": 12
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "resource",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 7
+                  }
+                }
+              ],
+              "name": "getResourceItem"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-orm!Connection#getResourceNgwPayload:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getResourceNgwPayload(resource: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "typeof "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "BaseResource",
+                  "canonicalReference": "@nextgis/ngw-orm!BaseResource:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", parent: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", opt?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Partial",
+                  "canonicalReference": "!Partial:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SyncOptions",
+                  "canonicalReference": "@nextgis/ngw-orm!SyncOptions:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DeepPartial",
+                  "canonicalReference": "@nextgis/ngw-orm!DeepPartial:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceSyncItem",
+                  "canonicalReference": "@nextgis/ngw-orm!ResourceSyncItem:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "> | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 11,
+                "endIndex": 15
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "resource",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  }
+                },
+                {
+                  "parameterName": "parent",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  }
+                },
+                {
+                  "parameterName": "opt",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 10
+                  }
+                }
+              ],
+              "name": "getResourceNgwPayload"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@nextgis/ngw-orm!Connection#isConnected:member",
+              "docComment": "/**\n * Indicates if connection is initialized or not.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly isConnected: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "isConnected",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@nextgis/ngw-orm!Connection#options:member",
+              "docComment": "/**\n * Connection options.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly options: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ConnectionOptions",
+                  "canonicalReference": "@nextgis/ngw-orm!ConnectionOptions:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "options",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-orm!Connection#receiveResource:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "receiveResource<P extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Record",
+                  "canonicalReference": "!Record:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<string, any> "
+                },
+                {
+                  "kind": "Content",
+                  "text": "= "
+                },
+                {
+                  "kind": "Content",
+                  "text": "any"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">(resource: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ResourceIdKeynameDef",
+                  "canonicalReference": "@nextgis/ngw-connector!ResourceIdKeynameDef:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<typeof "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "BaseResource",
+                  "canonicalReference": "@nextgis/ngw-orm!BaseResource:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": " & P>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 8,
+                "endIndex": 12
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "resource",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 7
+                  }
+                }
+              ],
+              "typeParameters": [
+                {
+                  "typeParameterName": "P",
+                  "constraintTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  }
+                }
+              ],
+              "name": "receiveResource"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-orm!Connection#updateResource:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "updateResource(Resource: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "typeof "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "BaseResource",
+                  "canonicalReference": "@nextgis/ngw-orm!BaseResource:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<void>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 6
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "Resource",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  }
+                }
+              ],
+              "name": "updateResource"
+            }
+          ],
+          "implementsTokenRanges": []
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@nextgis/ngw-orm!getMetadataArgsStorage:function(1)",
+          "docComment": "/**\n * Gets metadata args storage.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function getMetadataArgsStorage(): "
+            },
+            {
+              "kind": "Reference",
+              "text": "MetadataArgsStorage",
+              "canonicalReference": "@nextgis/ngw-orm!MetadataArgsStorage:class"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [],
+          "name": "getMetadataArgsStorage"
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "@nextgis/ngw-orm!LineLayer:class",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class LineLayer extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "VectorLayer",
+              "canonicalReference": "@nextgis/ngw-orm!VectorLayer:class"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "LineString",
+              "canonicalReference": "@types/geojson!LineString:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "> "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "LineLayer",
+          "members": [
+            {
+              "kind": "Property",
+              "canonicalReference": "@nextgis/ngw-orm!LineLayer.geometryType:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "static geometryType: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "GeometryType",
+                  "canonicalReference": "@nextgis/ngw-connector!GeometryType:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "geometryType",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": true
+            }
+          ],
+          "extendsTokenRange": {
+            "startIndex": 1,
+            "endIndex": 5
+          },
+          "implementsTokenRanges": []
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@nextgis/ngw-orm!NgwResource:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function NgwResource(options: "
+            },
+            {
+              "kind": "Reference",
+              "text": "NgwResourceOptions",
+              "canonicalReference": "@nextgis/ngw-orm!NgwResourceOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "Function",
+              "canonicalReference": "!Function:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 4
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "options",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "name": "NgwResource"
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "@nextgis/ngw-orm!PointLayer:class",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class PointLayer extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "VectorLayer",
+              "canonicalReference": "@nextgis/ngw-orm!VectorLayer:class"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "Point",
+              "canonicalReference": "@types/geojson!Point:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "> "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "PointLayer",
+          "members": [
+            {
+              "kind": "Property",
+              "canonicalReference": "@nextgis/ngw-orm!PointLayer.geometryType:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "static geometryType: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "GeometryType",
+                  "canonicalReference": "@nextgis/ngw-connector!GeometryType:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "geometryType",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": true
+            }
+          ],
+          "extendsTokenRange": {
+            "startIndex": 1,
+            "endIndex": 5
+          },
+          "implementsTokenRanges": []
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "@nextgis/ngw-orm!PolygonLayer:class",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class PolygonLayer extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "VectorLayer",
+              "canonicalReference": "@nextgis/ngw-orm!VectorLayer:class"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "Polygon",
+              "canonicalReference": "@types/geojson!Polygon:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "> "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "PolygonLayer",
+          "members": [
+            {
+              "kind": "Property",
+              "canonicalReference": "@nextgis/ngw-orm!PolygonLayer.geometryType:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "static geometryType: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "GeometryType",
+                  "canonicalReference": "@nextgis/ngw-connector!GeometryType:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "geometryType",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": true
+            }
+          ],
+          "extendsTokenRange": {
+            "startIndex": 1,
+            "endIndex": 5
+          },
+          "implementsTokenRanges": []
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "@nextgis/ngw-orm!ResourceGroup:class",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class ResourceGroup extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "BaseResource",
+              "canonicalReference": "@nextgis/ngw-orm!BaseResource:class"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "ResourceGroup",
+          "members": [],
+          "extendsTokenRange": {
+            "startIndex": 1,
+            "endIndex": 3
+          },
+          "implementsTokenRanges": []
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "@nextgis/ngw-orm!VectorLayer:class",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class VectorLayer<G extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Geometry",
+              "canonicalReference": "@nextgis/ngw-orm!~Geometry:type"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            },
+            {
+              "kind": "Content",
+              "text": "= "
+            },
+            {
+              "kind": "Reference",
+              "text": "Geometry",
+              "canonicalReference": "@nextgis/ngw-orm!~Geometry:type"
+            },
+            {
+              "kind": "Content",
+              "text": ", P extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "GeoJsonProperties",
+              "canonicalReference": "@types/geojson!GeoJsonProperties:type"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            },
+            {
+              "kind": "Content",
+              "text": "= "
+            },
+            {
+              "kind": "Reference",
+              "text": "GeoJsonProperties",
+              "canonicalReference": "@types/geojson!GeoJsonProperties:type"
+            },
+            {
+              "kind": "Content",
+              "text": "> extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "BaseResource",
+              "canonicalReference": "@nextgis/ngw-orm!BaseResource:class"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "typeParameters": [
+            {
+              "typeParameterName": "G",
+              "constraintTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 5
+              }
+            },
+            {
+              "typeParameterName": "P",
+              "constraintTokenRange": {
+                "startIndex": 6,
+                "endIndex": 8
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 9,
+                "endIndex": 10
+              }
+            }
+          ],
+          "name": "VectorLayer",
+          "members": [
+            {
+              "kind": "Constructor",
+              "canonicalReference": "@nextgis/ngw-orm!VectorLayer:constructor(1)",
+              "docComment": "/**\n * Constructs a new instance of the `VectorLayer` class\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "constructor(opt?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        properties?: P;\n        coordinates?: G['coordinates'];\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ");"
+                }
+              ],
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "opt",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@nextgis/ngw-orm!VectorLayer#coordinates:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get coordinates(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "G['coordinates']"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                },
+                {
+                  "kind": "Content",
+                  "text": "\n\nset coordinates(coordinates: G['coordinates']);"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "coordinates",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-orm!VectorLayer.count:member(1)",
+              "docComment": "/**\n * Counts entities that match given find options or conditions.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "static count<T extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "VectorLayer",
+                  "canonicalReference": "@nextgis/ngw-orm!VectorLayer:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">(this: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ObjectType",
+                  "canonicalReference": "@nextgis/ngw-orm!ObjectType:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<T>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", optionsOrConditions?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FindManyOptions",
+                  "canonicalReference": "@nextgis/ngw-orm!FindManyOptions:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<T> | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "PropertiesFilter",
+                  "canonicalReference": "@nextgis/properties-filter!PropertiesFilter:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<T>"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<number>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": true,
+              "returnTypeTokenRange": {
+                "startIndex": 11,
+                "endIndex": 13
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "this",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 5
+                  }
+                },
+                {
+                  "parameterName": "optionsOrConditions",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 10
+                  }
+                }
+              ],
+              "typeParameters": [
+                {
+                  "typeParameterName": "T",
+                  "constraintTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  }
+                }
+              ],
+              "name": "count"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-orm!VectorLayer.find:member(1)",
+              "docComment": "/**\n * Finds entities that match given find options or conditions.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "static find<T extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "VectorLayer",
+                  "canonicalReference": "@nextgis/ngw-orm!VectorLayer:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">(this: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ObjectType",
+                  "canonicalReference": "@nextgis/ngw-orm!ObjectType:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<T>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", optionsOrConditions?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FindManyOptions",
+                  "canonicalReference": "@nextgis/ngw-orm!FindManyOptions:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<T> | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "PropertiesFilter",
+                  "canonicalReference": "@nextgis/properties-filter!PropertiesFilter:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<T>"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<T[]>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": true,
+              "returnTypeTokenRange": {
+                "startIndex": 11,
+                "endIndex": 13
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "this",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 5
+                  }
+                },
+                {
+                  "parameterName": "optionsOrConditions",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 10
+                  }
+                }
+              ],
+              "typeParameters": [
+                {
+                  "typeParameterName": "T",
+                  "constraintTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  }
+                }
+              ],
+              "name": "find"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-orm!VectorLayer.findOne:member(1)",
+              "docComment": "/**\n * Finds first entity that matches given conditions.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "static findOne<T extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "VectorLayer",
+                  "canonicalReference": "@nextgis/ngw-orm!VectorLayer:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">(this: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ObjectType",
+                  "canonicalReference": "@nextgis/ngw-orm!ObjectType:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<T>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", optionsOrConditions?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FindOneOptions",
+                  "canonicalReference": "@nextgis/ngw-orm!FindOneOptions:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<T> | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FindConditions",
+                  "canonicalReference": "@nextgis/ngw-orm!FindConditions:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<T>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", maybeOptions?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FindOneOptions",
+                  "canonicalReference": "@nextgis/ngw-orm!FindOneOptions:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<T>"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<T | undefined>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": true,
+              "returnTypeTokenRange": {
+                "startIndex": 15,
+                "endIndex": 17
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "this",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 5
+                  }
+                },
+                {
+                  "parameterName": "optionsOrConditions",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 11
+                  }
+                },
+                {
+                  "parameterName": "maybeOptions",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 12,
+                    "endIndex": 14
+                  }
+                }
+              ],
+              "typeParameters": [
+                {
+                  "typeParameterName": "T",
+                  "constraintTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  }
+                }
+              ],
+              "name": "findOne"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-orm!VectorLayer.findOneOrFail:member(1)",
+              "docComment": "/**\n * Finds first entity that matches given conditions.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "static findOneOrFail<T extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "VectorLayer",
+                  "canonicalReference": "@nextgis/ngw-orm!VectorLayer:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">(this: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ObjectType",
+                  "canonicalReference": "@nextgis/ngw-orm!ObjectType:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<T>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", optionsOrConditions?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FindOneOptions",
+                  "canonicalReference": "@nextgis/ngw-orm!FindOneOptions:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<T> | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FindConditions",
+                  "canonicalReference": "@nextgis/ngw-orm!FindConditions:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<T>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", maybeOptions?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FindOneOptions",
+                  "canonicalReference": "@nextgis/ngw-orm!FindOneOptions:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<T>"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<T>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": true,
+              "returnTypeTokenRange": {
+                "startIndex": 15,
+                "endIndex": 17
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "this",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 5
+                  }
+                },
+                {
+                  "parameterName": "optionsOrConditions",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 11
+                  }
+                },
+                {
+                  "parameterName": "maybeOptions",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 12,
+                    "endIndex": 14
+                  }
+                }
+              ],
+              "typeParameters": [
+                {
+                  "typeParameterName": "T",
+                  "constraintTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  }
+                }
+              ],
+              "name": "findOneOrFail"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@nextgis/ngw-orm!VectorLayer#geom:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get geom(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "G"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                },
+                {
+                  "kind": "Content",
+                  "text": "\n\nset geom(geom: G);"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "geom",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@nextgis/ngw-orm!VectorLayer.geometryType:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "static geometryType: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "GeometryType",
+                  "canonicalReference": "@nextgis/ngw-connector!GeometryType:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "geometryType",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": true
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-orm!VectorLayer#getConstructor:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getConstructor(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "typeof "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "VectorLayer",
+                  "canonicalReference": "@nextgis/ngw-orm!VectorLayer:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "getConstructor"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-orm!VectorLayer.getNgwPayload:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "static getNgwPayload(resource: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "typeof "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "VectorLayer",
+                  "canonicalReference": "@nextgis/ngw-orm!VectorLayer:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", parent: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", options: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SyncOptions",
+                  "canonicalReference": "@nextgis/ngw-orm!SyncOptions:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DeepPartial",
+                  "canonicalReference": "@nextgis/utils!DeepPartial:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "VectorResourceSyncItem",
+                  "canonicalReference": "@nextgis/ngw-orm!VectorResourceSyncItem:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "VectorResourceUpdateItem",
+                  "canonicalReference": "@nextgis/ngw-orm!VectorResourceUpdateItem:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "> | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": true,
+              "returnTypeTokenRange": {
+                "startIndex": 8,
+                "endIndex": 14
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "resource",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  }
+                },
+                {
+                  "parameterName": "parent",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  }
+                },
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 7
+                  }
+                }
+              ],
+              "name": "getNgwPayload"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-orm!VectorLayer#hasId:member(1)",
+              "docComment": "/**\n * Checks if entity has an id.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "hasId(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "hasId"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@nextgis/ngw-orm!VectorLayer#id:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "id?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "id",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-orm!VectorLayer.receive:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "static receive(item: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "VectorLayerResourceItem",
+                  "canonicalReference": "@nextgis/ngw-connector!VectorLayerResourceItem:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "typeof "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "VectorLayer",
+                  "canonicalReference": "@nextgis/ngw-orm!VectorLayer:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": true,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 5
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "item",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "receive"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-orm!VectorLayer#save:member(1)",
+              "docComment": "/**\n * Saves current entity in the NGW target layer. If entity does not exist in the NGW layer then inserts, otherwise updates.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "save(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<this>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "save"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-orm!VectorLayer.save:member(1)",
+              "docComment": "/**\n * Saves one or many given entities.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "static save<T extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "VectorLayer",
+                  "canonicalReference": "@nextgis/ngw-orm!VectorLayer:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">(this: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ObjectType",
+                  "canonicalReference": "@nextgis/ngw-orm!ObjectType:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<T>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", entityOrEntities: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "T | T[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", options?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "UpdateOptions",
+                  "canonicalReference": "@nextgis/ngw-orm!UpdateOptions:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<T[]>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": true,
+              "returnTypeTokenRange": {
+                "startIndex": 10,
+                "endIndex": 12
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "this",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 5
+                  }
+                },
+                {
+                  "parameterName": "entityOrEntities",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 7
+                  }
+                },
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 8,
+                    "endIndex": 9
+                  }
+                }
+              ],
+              "typeParameters": [
+                {
+                  "typeParameterName": "T",
+                  "constraintTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  }
+                }
+              ],
+              "name": "save"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-orm!VectorLayer#toGeoJson:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "toGeoJson(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Feature",
+                  "canonicalReference": "@types/geojson!Feature:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<G, this>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "toGeoJson"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-orm!VectorLayer#toJSON:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "toJSON(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "toJSON"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-orm!VectorLayer.toTypescript:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "static toTypescript(opt?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ToTypescriptOptions",
+                  "canonicalReference": "@nextgis/ngw-orm!ToTypescriptOptions:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ToTypescript",
+                  "canonicalReference": "@nextgis/ngw-orm!ToTypescript:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": true,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "opt",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "toTypescript"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-orm!VectorLayer.validate:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "static validate(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ValidateErrorType",
+                  "canonicalReference": "@nextgis/ngw-orm!ValidateErrorType:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": true,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "validate"
+            }
+          ],
+          "extendsTokenRange": {
+            "startIndex": 11,
+            "endIndex": 13
+          },
+          "implementsTokenRanges": []
+        }
+      ]
+    }
+  ]
+}
