@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.12.1](https://github.com/nextgis/nextgis_frontend/compare/v1.12.0...v1.12.1) (2022-04-21)
+
+
+### Bug Fixes
+
+* **ngw-connector:** getResource cache when keyname ([b893433](https://github.com/nextgis/nextgis_frontend/commit/b893433ac58ee4564162ffd241098fa9cccb79d5))
+
+
+### Features
+
+* **ngw-connector:** add abort signal to request options ([34af90e](https://github.com/nextgis/nextgis_frontend/commit/34af90e1af1dca1e03304e21dde4dac81dd06149))
+* **ngw-connector:** add recursive option to getChildrenOf ([18b9832](https://github.com/nextgis/nextgis_frontend/commit/18b9832edde4d9e0ed36b1371cc73d318e120453))
+
+
+
+
+
 # [1.12.0](https://github.com/nextgis/nextgis_frontend/compare/v1.11.10...v1.12.0) (2022-03-05)
 
 **Note:** Version bump only for package @nextgis/ngw-connector
