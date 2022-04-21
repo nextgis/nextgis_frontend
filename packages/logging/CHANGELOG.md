@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.12.1](https://github.com/nextgis/nextgis_frontend/compare/v1.12.0...v1.12.1) (2022-04-21)
+
+
+### Features
+
+* **logging:** add logging package ([c4b72a6](https://github.com/nextgis/nextgis_frontend/commit/c4b72a6173b47281eb511cf72fda3fb17cec1b27))
+* **logging:** add new options ([43e5593](https://github.com/nextgis/nextgis_frontend/commit/43e559325cd5c26a39a9df952eb3ee3bfe00bd0d))
+* **nglog:** add session and duration fields ([0d76784](https://github.com/nextgis/nextgis_frontend/commit/0d76784280081c818d9858a6070073b18f1b90c2))
+
+
+
+
+
 # [1.12.0](https://github.com/nextgis/nextgis_frontend/compare/v1.11.10...v1.12.0) (2022-03-05)
 
 **Note:** Version bump only for package @nextgis/progress

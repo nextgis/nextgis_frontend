@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.12.1](https://github.com/nextgis/nextgis_frontend/compare/v1.12.0...v1.12.1) (2022-04-21)
+
+
+### Bug Fixes
+
+* **ngw-kit:** getIdentifyItems multiple ([fb058d1](https://github.com/nextgis/nextgis_frontend/commit/fb058d1ec4bca530c4908edf2039eb370d07af44))
+
+
+### Features
+
+* **ngw-kit:** disable api clien filter without any case ([8a41394](https://github.com/nextgis/nextgis_frontend/commit/8a413945ba6673027ab7f1d53f5e71e72c8fb6b3))
+* **ngw-kit:** id fields as number for client filter ([b49e818](https://github.com/nextgis/nextgis_frontend/commit/b49e8189485bf1f6067b987e7532e83674b6d6d1))
+
+
+
+
+
 # [1.12.0](https://github.com/nextgis/nextgis_frontend/compare/v1.11.10...v1.12.0) (2022-03-05)
 
 
