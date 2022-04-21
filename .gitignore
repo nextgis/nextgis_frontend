@@ -235,7 +235,6 @@ lib
 docs/build
 packages/demo/src/api.json
 temp
-input
 !packages/build-tools/lib
 stats.html
 *.tgz
