@@ -7,14 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-create(options: MapOptions): void;
+create(options: MapOptions<Map>): void;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | [MapOptions](./webmap.mapoptions.md) |  |
+|  options | [MapOptions](./webmap.mapoptions.md)<!-- -->&lt;Map&gt; |  |
 
 <b>Returns:</b>
 

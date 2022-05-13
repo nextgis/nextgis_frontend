@@ -26,6 +26,8 @@ export declare class NgLogEngine<D = null> implements LogEngine<D>
 |  [enabled](./logging.nglogengine.enabled.md) |  | boolean |  |
 |  [nglogUrl](./logging.nglogengine.nglogurl.md) |  | string |  |
 |  [ngwConnector](./logging.nglogengine.ngwconnector.md) |  | NgwConnector |  |
+|  [sessionId](./logging.nglogengine.sessionid.md) |  | [NgLogEngineSessionId](./logging.nglogenginesessionid.md)<!-- -->&lt;D&gt; | Add <code>sessionId</code> to each log. Use number to set random generated string length |
+|  [stopOnConnectionError?](./logging.nglogengine.stoponconnectionerror.md) |  | false | <i>(Optional)</i> |
 
 ## Methods
 

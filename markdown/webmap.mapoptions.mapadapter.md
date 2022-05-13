@@ -9,5 +9,5 @@ The main initialization property of WebMap. Determines the way of interaction wi
 <b>Signature:</b>
 
 ```typescript
-mapAdapter?: MapAdapter;
+mapAdapter?: MapAdapter<M>;
 ```

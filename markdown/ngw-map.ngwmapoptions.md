@@ -7,9 +7,9 @@
 <b>Signature:</b>
 
 ```typescript
-export interface NgwMapOptions<C = any> extends MapOptions<C> 
+export interface NgwMapOptions<M = any, C = any> extends MapOptions<M, C> 
 ```
-<b>Extends:</b> [MapOptions](./webmap.mapoptions.md)<!-- -->&lt;C&gt;
+<b>Extends:</b> [MapOptions](./webmap.mapoptions.md)<!-- -->&lt;M, C&gt;
 
 ## Properties
 

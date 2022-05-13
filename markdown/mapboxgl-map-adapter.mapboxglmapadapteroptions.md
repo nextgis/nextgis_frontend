@@ -7,9 +7,9 @@
 <b>Signature:</b>
 
 ```typescript
-export interface MapboxglMapAdapterOptions extends MapOptions 
+export interface MapboxglMapAdapterOptions extends MapOptions<Map> 
 ```
-<b>Extends:</b> [MapOptions](./webmap.mapoptions.md)
+<b>Extends:</b> [MapOptions](./webmap.mapoptions.md)<!-- -->&lt;Map&gt;
 
 ## Properties
 

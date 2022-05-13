@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-options: any;
+options: MapOptions<Map>;
 ```

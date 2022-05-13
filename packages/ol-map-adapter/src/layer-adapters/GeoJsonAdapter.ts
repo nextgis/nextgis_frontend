@@ -289,13 +289,15 @@ export class GeoJsonAdapter
   getBounds(): LngLatBoundsArray | undefined {
     if (this.layer) {
       const source = this.layer.getSource();
-      const bounds = source.getExtent();
-      const extent = transformExtent(
-        bounds,
-        this.displayProjection,
-        this.lonlatProjection,
-      );
-      return extent as LngLatBoundsArray;
+      if (source) {
+        const bounds = source.getExtent();
+        const extent = transformExtent(
+          bounds,
+          this.displayProjection,
+          this.lonlatProjection,
+        );
+        return extent as LngLatBoundsArray;
+      }
     }
   }
 
@@ -335,13 +337,15 @@ export class GeoJsonAdapter
   private _setPaintEachLayer(paint: Paint) {
     if (this.layer) {
       const source = this.layer.getSource();
-      const features = source.getFeatures();
-      features.forEach((f) => {
-        const style = styleFunction(f, paint);
-        if (style) {
-          f.setStyle(style);
-        }
-      });
+      if (source) {
+        const features = source.getFeatures();
+        features.forEach((f) => {
+          const style = styleFunction(f, paint);
+          if (style) {
+            f.setStyle(style);
+          }
+        });
+      }
     }
   }
 

@@ -1638,7 +1638,16 @@
             },
             {
               "kind": "Content",
-              "text": " "
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "Map",
+              "canonicalReference": "maplibre-gl!Map:class"
+            },
+            {
+              "kind": "Content",
+              "text": "> "
             }
           ],
           "releaseTag": "Public",
@@ -1688,7 +1697,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 5
             }
           ]
         }
