@@ -90,7 +90,7 @@ export class NgwMap<
   M = unknown,
   L = unknown,
   C = unknown,
-  O extends NgwMapOptions<C> = NgwMapOptions<C>,
+  O extends NgwMapOptions<M, C> = NgwMapOptions<M, C>,
 > extends WebMap<M, L, C, NgwMapEvents, O> {
   static getIcon = getIcon;
 
