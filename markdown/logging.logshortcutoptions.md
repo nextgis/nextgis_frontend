@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare type LogShortcutOptions<D = unknown> = Pick<Log<D>, 'operationId' | 'data'>;
+export declare type LogShortcutOptions<D = any> = Pick<Log<D>, 'data' | 'operationId' | 'duration'>;
 ```
 <b>References:</b> [Log](./logging.log.md)
 

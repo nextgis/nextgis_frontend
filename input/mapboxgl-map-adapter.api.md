@@ -147,7 +147,7 @@ class MapboxglMapAdapter implements MapAdapter<Map_2, TLayer, IControl> {
 export default MapboxglMapAdapter;
 
 // @public (undocumented)
-export interface MapboxglMapAdapterOptions extends MapOptions {
+export interface MapboxglMapAdapterOptions extends MapOptions<Map_2> {
     // (undocumented)
     style?: Partial<StyleSpecification> | string;
 }
@@ -159,7 +159,7 @@ export interface MapboxglMapAdapterOptions extends MapOptions {
 // src/MapboxglMapAdapter.ts:61:7 - (ae-forgotten-export) The symbol "MvtAdapter" needs to be exported by the entry point index.d.ts
 // src/MapboxglMapAdapter.ts:62:7 - (ae-forgotten-export) The symbol "OsmAdapter" needs to be exported by the entry point index.d.ts
 // src/MapboxglMapAdapter.ts:63:7 - (ae-forgotten-export) The symbol "GeoJsonAdapter" needs to be exported by the entry point index.d.ts
-// src/MapboxglMapAdapter.ts:313:15 - (ae-forgotten-export) The symbol "TLayerAdapter" needs to be exported by the entry point index.d.ts
+// src/MapboxglMapAdapter.ts:321:15 - (ae-forgotten-export) The symbol "TLayerAdapter" needs to be exported by the entry point index.d.ts
 
 // (No @packageDocumentation comment for this package)
 

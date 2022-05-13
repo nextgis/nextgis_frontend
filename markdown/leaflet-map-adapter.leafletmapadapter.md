@@ -22,7 +22,7 @@ export declare class LeafletMapAdapter implements MapAdapter<Map, any, Control>
 |  [layerAdapters](./leaflet-map-adapter.leafletmapadapter.layeradapters.md) | <code>static</code> | { \[name: string\]: Type&lt;[LayerAdapter](./webmap.layeradapter.md)<!-- -->&lt;Map, any, any&gt;&gt;; } |  |
 |  [map?](./leaflet-map-adapter.leafletmapadapter.map.md) |  | Map | <i>(Optional)</i> |
 |  [Map](./leaflet-map-adapter.leafletmapadapter.map.md) | <code>static</code> | typeof Map |  |
-|  [options](./leaflet-map-adapter.leafletmapadapter.options.md) |  | [MapOptions](./webmap.mapoptions.md) |  |
+|  [options](./leaflet-map-adapter.leafletmapadapter.options.md) |  | [MapOptions](./webmap.mapoptions.md)<!-- -->&lt;Map&gt; |  |
 
 ## Methods
 

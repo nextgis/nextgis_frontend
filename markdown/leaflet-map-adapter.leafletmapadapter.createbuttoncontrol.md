@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-createButtonControl(options: ButtonControlOptions): L.Control;
+createButtonControl(options: ButtonControlOptions): Control;
 ```
 
 ## Parameters
@@ -18,5 +18,5 @@ createButtonControl(options: ButtonControlOptions): L.Control;
 
 <b>Returns:</b>
 
-L.Control
+Control
 
