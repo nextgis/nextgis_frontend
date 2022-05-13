@@ -393,7 +393,7 @@
             },
             {
               "kind": "Content",
-              "text": "<C> "
+              "text": "<M, C> "
             },
             {
               "kind": "Content",
@@ -406,7 +406,7 @@
             },
             {
               "kind": "Content",
-              "text": "<C>"
+              "text": "<M, C>"
             },
             {
               "kind": "Content",

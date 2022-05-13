@@ -15,7 +15,7 @@ import type { FeatureProperties } from '@nextgis/utils';
 
 export type NgwResourceDefinition = number | [number, string] | NgwLayerOptions;
 
-export interface NgwMapOptions<C = any> extends MapOptions<C> {
+export interface NgwMapOptions<M = any, C = any> extends MapOptions<M, C> {
   /**
    * Url of NGW server like this https://demo.nextgis.com
    */
