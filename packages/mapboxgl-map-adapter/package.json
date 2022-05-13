@@ -15,7 +15,7 @@
     "@types/events": "^3.0.0",
     "@types/polylabel": "^1.0.5",
     "events": "^3.3.0",
-    "maplibre-gl": "^2.1.7",
+    "maplibre-gl": "^2.1.9",
     "polylabel": "^1.1.0"
   },
   "optionalDependencies": {

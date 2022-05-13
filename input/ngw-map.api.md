@@ -62,7 +62,7 @@ export interface NgwLayersMem {
 }
 
 // @public
-export class NgwMap<M = unknown, L = unknown, C = unknown, O extends NgwMapOptions<C> = NgwMapOptions<C>> extends WebMap<M, L, C, NgwMapEvents, O> {
+export class NgwMap<M = unknown, L = unknown, C = unknown, O extends NgwMapOptions<M, C> = NgwMapOptions<M, C>> extends WebMap<M, L, C, NgwMapEvents, O> {
     constructor(options: O);
     addControl<K extends keyof MapControls>(controlDef: K | C, position: ControlPosition, options?: MapControls[K]): Promise<any>;
     addNgwLayer(options: NgwLayerOptions): Promise<ResourceAdapter | undefined>;
@@ -143,7 +143,7 @@ export interface NgwMapEvents extends WebMapEvents {
 }
 
 // @public (undocumented)
-export interface NgwMapOptions<C = any> extends MapOptions<C> {
+export interface NgwMapOptions<M = any, C = any> extends MapOptions<M, C> {
     auth?: Credentials;
     baseUrl?: string;
     // (undocumented)

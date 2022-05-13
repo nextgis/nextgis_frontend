@@ -33,7 +33,7 @@ export interface ControlledLayer {
 }
 
 // @public (undocumented)
-export interface MapContainerProps<M = any, L = any, C = any, O extends NgwMapOptions<C> = NgwMapOptions<C>> extends NgwMapOptions {
+export interface MapContainerProps<M = any, L = any, C = any, O extends NgwMapOptions<M, C> = NgwMapOptions<M, C>> extends NgwMapOptions {
     // (undocumented)
     children?: ReactNode;
     // (undocumented)
