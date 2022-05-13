@@ -62,7 +62,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
 
   static Map = Map;
 
-  options: MapOptions = { target: 'map' };
+  options: MapOptions<Map> = { target: 'map' };
 
   layerAdapters = LeafletMapAdapter.layerAdapters;
   controlAdapters = LeafletMapAdapter.controlAdapters;
@@ -85,7 +85,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
     'mouseover',
   ];
 
-  create(options: MapOptions): void {
+  create(options: MapOptions<Map>): void {
     this.options = { ...options };
     if (this.options.target) {
       const {
@@ -96,16 +96,19 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
         maxBounds: mb,
         mapAdapterOptions,
       } = this.options;
-      this.map = new Map(this.options.target, {
-        attributionControl: false,
-        zoomControl: false,
-        maxBounds: mb ? arrayToBoundsExpression(mb) : undefined,
-        maxZoom,
-        minZoom,
-        center: center && [center[1], center[0]],
-        zoom,
-        ...mapAdapterOptions,
-      });
+
+      this.map =
+        this.options.map ||
+        new Map(this.options.target, {
+          attributionControl: false,
+          zoomControl: false,
+          maxBounds: mb ? arrayToBoundsExpression(mb) : undefined,
+          maxZoom,
+          minZoom,
+          center: center && [center[1], center[0]],
+          zoom,
+          ...mapAdapterOptions,
+        });
       // create default pane
       const defPane = this.map.createPane('order-0');
       (this.map as any)._addUnselectCb = (def: UnselectDef) => {
