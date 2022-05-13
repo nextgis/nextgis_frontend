@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.13.1](https://github.com/nextgis/nextgis_frontend/compare/v1.13.0...v1.13.1) (2022-05-13)
+
+
+### Bug Fixes
+
+* **ngw-kit:** remove forgotten log ([5b4eaec](https://github.com/nextgis/nextgis_frontend/commit/5b4eaecd8d63e9367e6d69013498133d09533bef))
+
+
+
+
+
 # [1.13.0](https://github.com/nextgis/nextgis_frontend/compare/v1.12.1...v1.13.0) (2022-05-13)
 
 **Note:** Version bump only for package @nextgis/ngw-kit
