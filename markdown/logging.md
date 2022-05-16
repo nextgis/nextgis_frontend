@@ -8,6 +8,7 @@
 
 |  Class | Description |
 |  --- | --- |
+|  [ConsoleEngine](./logging.consoleengine.md) |  |
 |  [Logging](./logging.logging.md) |  |
 |  [NgLogEngine](./logging.nglogengine.md) |  |
 
@@ -19,6 +20,7 @@
 |  [Log](./logging.log.md) |  |
 |  [LogEngine](./logging.logengine.md) |  |
 |  [LoggingOptions](./logging.loggingoptions.md) |  |
+|  [NgLog](./logging.nglog.md) |  |
 |  [NgLogEngineOptions](./logging.nglogengineoptions.md) |  |
 
 ## Type Aliases
@@ -29,4 +31,5 @@
 |  [LogOptions](./logging.logoptions.md) |  |
 |  [LogPostBulk](./logging.logpostbulk.md) |  |
 |  [LogShortcutOptions](./logging.logshortcutoptions.md) |  |
+|  [NgLogEngineSessionId](./logging.nglogenginesessionid.md) |  |
 

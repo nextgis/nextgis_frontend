@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare type LogOptions<D = unknown> = LogShortcutOptions<D> & {
+export declare type LogOptions<D = any> = LogShortcutOptions<D> & {
     logLevel?: LogLevel;
 };
 ```

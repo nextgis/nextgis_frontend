@@ -382,6 +382,19 @@
                 },
                 {
                   "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Map",
+                  "canonicalReference": "ol!~Map:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
                   "text": "): "
                 },
                 {
@@ -396,8 +409,8 @@
               "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 4
+                "startIndex": 6,
+                "endIndex": 7
               },
               "releaseTag": "Public",
               "overloadIndex": 1,
@@ -406,7 +419,7 @@
                   "parameterName": "options",
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
-                    "endIndex": 2
+                    "endIndex": 5
                   }
                 }
               ],
@@ -1076,8 +1089,22 @@
                   "text": "options: "
                 },
                 {
+                  "kind": "Reference",
+                  "text": "MapOptions",
+                  "canonicalReference": "@nextgis/webmap!MapOptions:interface"
+                },
+                {
                   "kind": "Content",
-                  "text": "any"
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Map",
+                  "canonicalReference": "ol!~Map:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
                 },
                 {
                   "kind": "Content",
@@ -1089,7 +1116,7 @@
               "name": "options",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 2
+                "endIndex": 5
               },
               "isStatic": false
             },

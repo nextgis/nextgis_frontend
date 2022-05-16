@@ -63,7 +63,7 @@ class OlMapAdapter implements MapAdapter<Map_2, Layer> {
         ATTRIBUTION: typeof Attribution;
     };
     // (undocumented)
-    create(options: MapOptions): void;
+    create(options: MapOptions<Map_2>): void;
     // (undocumented)
     createButtonControl(options: ButtonControlOptions): Control;
     // (undocumented)
@@ -109,7 +109,7 @@ class OlMapAdapter implements MapAdapter<Map_2, Layer> {
     // (undocumented)
     onMapClick(evt: MapBrowserPointerEvent): void;
     // (undocumented)
-    options: any;
+    options: MapOptions<Map_2>;
     // (undocumented)
     removeControl(control: Control): void;
     // (undocumented)

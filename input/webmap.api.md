@@ -496,12 +496,13 @@ export interface MapControls extends ContribControlsOptions {
 }
 
 // @public (undocumented)
-export interface MapOptions<C = any> extends ViewOptions {
+export interface MapOptions<M = any, C = any> extends ViewOptions {
     controls?: Array<keyof MapControls | C>;
     controlsOptions?: ControlsOptions;
     create?: boolean;
     fitOptions?: FitOptions;
-    mapAdapter?: MapAdapter;
+    map?: M;
+    mapAdapter?: MapAdapter<M>;
     mapAdapterOptions?: Record<string, any>;
     onBeforeAddLayer?: OnBeforeLayerAdd;
     // (undocumented)

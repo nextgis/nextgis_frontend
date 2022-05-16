@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-getLayerAdapter(name: string): Type<LayerAdapter<L.Map, any, any>>;
+getLayerAdapter(name: string): Type<LayerAdapter<Map, any, any>>;
 ```
 
 ## Parameters
@@ -18,5 +18,5 @@ getLayerAdapter(name: string): Type<LayerAdapter<L.Map, any, any>>;
 
 <b>Returns:</b>
 
-Type&lt;[LayerAdapter](./webmap.layeradapter.md)<!-- -->&lt;L.Map, any, any&gt;&gt;
+Type&lt;[LayerAdapter](./webmap.layeradapter.md)<!-- -->&lt;Map, any, any&gt;&gt;
 

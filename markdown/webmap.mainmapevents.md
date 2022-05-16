@@ -15,6 +15,9 @@ export interface MainMapEvents
 |  Property | Type | Description |
 |  --- | --- | --- |
 |  [click](./webmap.mainmapevents.click.md) | [MapClickEvent](./webmap.mapclickevent.md) | Fired every time a map is clicked. |
+|  [mousemove](./webmap.mainmapevents.mousemove.md) | [MapAdapter](./webmap.mapadapter.md) | Fired while the mouse moves over the map. |
+|  [mouseout](./webmap.mainmapevents.mouseout.md) | [MapAdapter](./webmap.mapadapter.md) | Fired when the mouse leaves the map. |
+|  [mouseover](./webmap.mainmapevents.mouseover.md) | [MapAdapter](./webmap.mapadapter.md) | Fired when the mouse enters the map. |
 |  [move](./webmap.mainmapevents.move.md) | [MapAdapter](./webmap.mapadapter.md) | Fired repeatedly during any movement of the map. |
 |  [moveend](./webmap.mainmapevents.moveend.md) | [MapAdapter](./webmap.mapadapter.md) | Fired when the center of the map stops changing. |
 |  [movestart](./webmap.mainmapevents.movestart.md) | [MapAdapter](./webmap.mapadapter.md) | Fired when the view of the map starts changing (e.g. user starts dragging the map). |

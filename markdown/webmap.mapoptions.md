@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface MapOptions<C = any> extends ViewOptions 
+export interface MapOptions<M = any, C = any> extends ViewOptions 
 ```
 <b>Extends:</b> [ViewOptions](./webmap.viewoptions.md)
 
@@ -19,7 +19,8 @@ export interface MapOptions<C = any> extends ViewOptions
 |  [controlsOptions?](./webmap.mapoptions.controlsoptions.md) | [ControlsOptions](./webmap.controlsoptions.md) | <i>(Optional)</i> Set options for those controls that are specified by name. |
 |  [create?](./webmap.mapoptions.create.md) | boolean | <i>(Optional)</i> Аutomatic creation of a map from the constructor |
 |  [fitOptions?](./webmap.mapoptions.fitoptions.md) | [FitOptions](./webmap.fitoptions.md) | <i>(Optional)</i> options to specify the initial position of the map |
-|  [mapAdapter?](./webmap.mapoptions.mapadapter.md) | [MapAdapter](./webmap.mapadapter.md) | <i>(Optional)</i> The main initialization property of WebMap. Determines the way of interaction with the selected GIS framework. Available: \[Leaflet\](leaflet-map-adapter); \[Openlayers\](ol-map-adapter); \[MapboxGL\](mapboxgl-map-adapter) |
+|  [map?](./webmap.mapoptions.map.md) | M | <i>(Optional)</i> A pre-initialized instance of the map |
+|  [mapAdapter?](./webmap.mapoptions.mapadapter.md) | [MapAdapter](./webmap.mapadapter.md)<!-- -->&lt;M&gt; | <i>(Optional)</i> The main initialization property of WebMap. Determines the way of interaction with the selected GIS framework. Available: \[Leaflet\](leaflet-map-adapter); \[Openlayers\](ol-map-adapter); \[MapboxGL\](mapboxgl-map-adapter) |
 |  [mapAdapterOptions?](./webmap.mapoptions.mapadapteroptions.md) | Record&lt;string, any&gt; | <i>(Optional)</i> special settings for the selected map adapter |
 |  [onBeforeAddLayer?](./webmap.mapoptions.onbeforeaddlayer.md) | [OnBeforeLayerAdd](./webmap.onbeforelayeradd.md) | <i>(Optional)</i> The callback function is calling before adding each layer |
 |  [paint?](./webmap.mapoptions.paint.md) | [GeometryPaint](./paint.geometrypaint.md) | <i>(Optional)</i> |
