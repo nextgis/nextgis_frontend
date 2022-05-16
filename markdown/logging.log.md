@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export interface Log<D = unknown> 
+export interface Log<D = any> 
 ```
 
 ## Properties
@@ -15,8 +15,9 @@ export interface Log<D = unknown>
 |  Property | Type | Description |
 |  --- | --- | --- |
 |  [data?](./logging.log.data.md) | D | <i>(Optional)</i> |
+|  [duration?](./logging.log.duration.md) | number | <i>(Optional)</i> |
 |  [logLevel](./logging.log.loglevel.md) | [LogLevel](./logging.loglevel.md) |  |
 |  [message](./logging.log.message.md) | string |  |
-|  [operationId?](./logging.log.operationid.md) | number | <i>(Optional)</i> |
+|  [operationId?](./logging.log.operationid.md) | string | <i>(Optional)</i> |
 |  [timestamp](./logging.log.timestamp.md) | Date |  |
 

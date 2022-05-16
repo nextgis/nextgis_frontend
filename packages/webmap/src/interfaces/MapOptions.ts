@@ -11,13 +11,18 @@ import type { MapAdapter, FitOptions } from './MapAdapter';
 import type { LayerAdapter, AdapterOptions } from './LayerAdapter';
 import type { ControlsOptions, MapControls } from './MapControl';
 
-export interface MapOptions<C = any> extends ViewOptions {
+export interface MapOptions<M = any, C = any> extends ViewOptions {
   /**
    * The main initialization property of WebMap.
    * Determines the way of interaction with the selected GIS framework.
    * Available: [Leaflet](leaflet-map-adapter); [Openlayers](ol-map-adapter); [MapboxGL](mapboxgl-map-adapter)
    */
-  mapAdapter?: MapAdapter;
+  mapAdapter?: MapAdapter<M>;
+
+  /**
+   * A pre-initialized instance of the map
+   */
+  map?: M;
   /**
    * One way to extend WebMap functionality with the help of kits.
    */

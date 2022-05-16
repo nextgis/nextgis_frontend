@@ -75,7 +75,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
     ATTRIBUTION: Attribution,
   };
 
-  options: any = { target: 'map' };
+  options: MapOptions<Map> = { target: 'map' };
 
   layerAdapters = OlMapAdapter.layerAdapters;
   controlAdapters = OlMapAdapter.controlAdapters;
@@ -95,7 +95,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
   private _isLoaded = false;
   private _positionMem: { [key in 'movestart' | 'moveend']?: PositionMem } = {};
 
-  create(options: MapOptions): void {
+  create(options: MapOptions<Map>): void {
     this.options = { ...options };
     const viewOptions: OlViewOptions = this.getViewOptions(this.options);
     const view = new View(viewOptions);
@@ -115,7 +115,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
       // logo: options.logo,
     };
 
-    this.map = new Map(mapInitOptions);
+    this.map = this.options.map || new Map(mapInitOptions);
 
     this._panelControl = new PanelControl();
     this.map.addControl(this._panelControl);
@@ -145,7 +145,7 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
       } else if (this.options.target instanceof HTMLElement) {
         element = this.options.target;
       }
-      return element;
+      return element as HTMLElement | undefined;
     }
   }
 

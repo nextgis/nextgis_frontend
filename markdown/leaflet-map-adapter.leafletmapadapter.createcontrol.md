@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-createControl(control: MapControl, options: CreateControlOptions): L.Control;
+createControl(control: MapControl, options: CreateControlOptions): Control;
 ```
 
 ## Parameters
@@ -19,5 +19,5 @@ createControl(control: MapControl, options: CreateControlOptions): L.Control;
 
 <b>Returns:</b>
 
-L.Control
+Control
 

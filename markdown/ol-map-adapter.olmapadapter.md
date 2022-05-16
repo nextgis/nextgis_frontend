@@ -21,7 +21,7 @@ export declare class OlMapAdapter implements MapAdapter<Map, Layer>
 |  [layerAdapters](./ol-map-adapter.olmapadapter.layeradapters.md) |  | { IMAGE: typeof ImageAdapter; TILE: typeof TileAdapter; WMS: typeof WmsAdapter; OSM: typeof OsmAdapter; GEOJSON: typeof GeoJsonAdapter; } |  |
 |  [layerAdapters](./ol-map-adapter.olmapadapter.layeradapters.md) | <code>static</code> | { IMAGE: typeof ImageAdapter; TILE: typeof TileAdapter; WMS: typeof WmsAdapter; OSM: typeof OsmAdapter; GEOJSON: typeof GeoJsonAdapter; } |  |
 |  [map?](./ol-map-adapter.olmapadapter.map.md) |  | Map | <i>(Optional)</i> |
-|  [options](./ol-map-adapter.olmapadapter.options.md) |  | any |  |
+|  [options](./ol-map-adapter.olmapadapter.options.md) |  | [MapOptions](./webmap.mapoptions.md)<!-- -->&lt;Map&gt; |  |
 
 ## Methods
 

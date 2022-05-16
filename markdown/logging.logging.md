@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare class Logging<D = null> implements LogEngine<D> 
+export declare class Logging<D> implements LogEngine<D> 
 ```
 <b>Implements:</b> [LogEngine](./logging.logengine.md)<!-- -->&lt;D&gt;
 

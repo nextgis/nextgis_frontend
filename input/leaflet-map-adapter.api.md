@@ -43,7 +43,7 @@ class LeafletMapAdapter implements MapAdapter<Map_2, any, Control> {
         ATTRIBUTION: typeof AttributionControl;
     };
     // (undocumented)
-    create(options: MapOptions): void;
+    create(options: MapOptions<Map_2>): void;
     // (undocumented)
     createButtonControl(options: ButtonControlOptions): Control;
     // (undocumented)
@@ -85,7 +85,7 @@ class LeafletMapAdapter implements MapAdapter<Map_2, any, Control> {
     // (undocumented)
     onMapClick(evt: LeafletMouseEvent): void;
     // (undocumented)
-    options: MapOptions;
+    options: MapOptions<Map_2>;
     // (undocumented)
     removeControl(control: Control): void;
     // (undocumented)

@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-operationId?: number;
+operationId?: string;
 ```
