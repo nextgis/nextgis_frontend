@@ -50,7 +50,7 @@ const fitBoundsOptions: FitOptions = {
   // padding: 100
 };
 
-export interface MapboxglMapAdapterOptions extends MapOptions {
+export interface MapboxglMapAdapterOptions extends MapOptions<Map> {
   style?: Partial<StyleSpecification> | string;
 }
 
@@ -154,15 +154,23 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
           if (options.minZoom) {
             mapOpt.minZoom = options.minZoom - 1;
           }
-          this.map = new Map(mapOpt);
-          this.map.once('load', () => {
+          this.map = options.map || new Map(mapOpt);
+
+          const onMapLoaded = () => {
             this.map.transformRequests = [];
             this.map._onMapClickLayers = [];
             this.map._addUnselectCb = (args) => this._addUnselectCb(args);
             this.isLoaded = true;
             this.emitter.emit('create', this);
             resolve(this);
-          });
+          };
+          if (this.map.loaded()) {
+            onMapLoaded();
+          } else {
+            this.map.once('load', () => {
+              onMapLoaded();
+            });
+          }
           this._addEventsListeners();
         }
       }

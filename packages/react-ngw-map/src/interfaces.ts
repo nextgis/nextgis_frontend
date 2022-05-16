@@ -31,7 +31,7 @@ export interface MapContainerProps<
   M = any,
   L = any,
   C = any,
-  O extends NgwMapOptions<C> = NgwMapOptions<C>,
+  O extends NgwMapOptions<M, C> = NgwMapOptions<M, C>,
 > extends NgwMapOptions {
   children?: ReactNode;
   className?: string;
