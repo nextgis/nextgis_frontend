@@ -1,4 +1,6 @@
+import { isObject } from '@nextgis/utils';
 import type {
+  EachLog,
   LogEngine,
   LogOptions,
   LoggingOptions,
@@ -8,10 +10,12 @@ import type {
 export class Logging<D> implements LogEngine<D> {
   engines: LogEngine<D>[] = [];
   enabled = true;
+  eachLog?: EachLog<D>;
 
   constructor(options: LoggingOptions) {
     this.engines = options.engines;
     this.enabled = options.enabled ?? this.enabled;
+    this.eachLog = options.eachLog;
   }
 
   critical(message: string, options?: LogShortcutOptions<D>) {
@@ -31,6 +35,17 @@ export class Logging<D> implements LogEngine<D> {
   }
   log(message: string, options?: LogOptions<D>) {
     if (this.enabled) {
+      let eachLog = this.eachLog;
+      if (eachLog) {
+        if (typeof eachLog === 'function') {
+          eachLog = eachLog(message, options);
+        }
+        if (isObject(eachLog)) {
+          const { message: message_, ...options_ } = eachLog;
+          message = message_ || message;
+          options = options_ || options;
+        }
+      }
       for (const e of this.engines) {
         e.log(message, options);
       }
