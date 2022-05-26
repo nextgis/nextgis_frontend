@@ -73,7 +73,7 @@ export function fetchNgwExtent(
 ): CancelablePromise<LngLatBoundsArray | undefined> {
   return options.connector.getResource(options.resourceId).then((resource) => {
     if (resource) {
-      return fetchNgwResourceExtent(resource, options.connector);
+      return fetchNgwResourceExtent(resource, options.connector, options);
     }
   });
 }
@@ -82,6 +82,7 @@ export function fetchNgwExtent(
 export function fetchNgwResourceExtent(
   item: ResourceItem,
   connector: NgwConnector,
+  options?: FetchNgwLayerExtentOptions,
 ): CancelablePromise<LngLatBoundsArray | undefined> {
   if (item.webmap) {
     return CancelablePromise.resolve(getNgwWebmapExtent(item.webmap));
@@ -91,13 +92,18 @@ export function fetchNgwResourceExtent(
       return connector.getResource(resource.parent.id).then((res) => {
         if (res) {
           return fetchNgwLayerExtent({
+            ...options,
             resourceId: res.resource.id,
             connector,
           });
         }
       });
     } else {
-      return fetchNgwLayerExtent({ resourceId: resource.id, connector });
+      return fetchNgwLayerExtent({
+        ...options,
+        resourceId: resource.id,
+        connector,
+      });
     }
   }
 }

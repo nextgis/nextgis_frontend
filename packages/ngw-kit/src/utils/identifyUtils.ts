@@ -94,7 +94,7 @@ export function fetchIdentifyGeoJson<
 >(
   options: GetIdentifyGeoJsonOptions,
 ): CancelablePromise<Feature<G, P> | undefined> {
-  const { connector, identify } = options;
+  const { connector, identify, requestOptions } = options;
   for (const l in identify) {
     const id = Number(l);
     if (!isNaN(id)) {
@@ -117,7 +117,7 @@ export function fetchIdentifyGeoJson<
 
   const params = getIdentifyItems(identify);
   if (params && params.length) {
-    return fetchNgwLayerFeature({ connector, ...params[0] });
+    return fetchNgwLayerFeature({ ...requestOptions, connector, ...params[0] });
   }
   return CancelablePromise.resolve(undefined);
 }
@@ -156,22 +156,26 @@ export function getIdentifyGeoJson<
 export function featureLayerIdentify(
   options: FeatureLayerIdentifyOptions,
 ): CancelablePromise<FeatureLayersIdentify> {
-  const g = options.geom;
-  let geom: Position[] = [];
-  if (Array.isArray(g)) {
-    geom = g;
+  const { geom, signal, cache } = options;
+  let geom_: Position[] = [];
+  if (Array.isArray(geom)) {
+    geom_ = geom;
   } else {
     const polygon =
-      g.type === 'Feature' ? g.geometry : g.type === 'Polygon' ? g : false;
+      geom.type === 'Feature'
+        ? geom.geometry
+        : geom.type === 'Polygon'
+        ? geom
+        : false;
     if (polygon) {
-      geom = polygon.coordinates[0];
+      geom_ = polygon.coordinates[0];
     }
   }
-  if (geom) {
+  if (geom_) {
     // create wkt string
     const polygonStr: string[] = [];
 
-    for (const [lng, lat] of geom) {
+    for (const [lng, lat] of geom_) {
       const [x, y] = degrees2meters(lng, lat);
       polygonStr.push(x + ' ' + y);
     }
@@ -186,7 +190,11 @@ export function featureLayerIdentify(
       layers,
     };
 
-    return options.connector.post('feature_layer.identify', { data });
+    return options.connector.post('feature_layer.identify', {
+      data,
+      signal,
+      cache,
+    });
   } else {
     throw new Error('Not valid geometry format to make intersection');
   }
@@ -198,11 +206,10 @@ export function sendIdentifyRequest(
 ): CancelablePromise<FeatureLayersIdentify> {
   deprecatedMapClick(ev);
   const [lng, lat] = ev.lngLat;
+  const { geom, radius, signal, cache } = options;
+  const geom_ = geom ?? getCirclePolygonCoordinates(lng, lat, radius);
 
-  const geom =
-    options.geom ?? getCirclePolygonCoordinates(lng, lat, options.radius);
-
-  return featureLayerIdentify({ ...options, geom });
+  return featureLayerIdentify({ ...options, geom: geom_, signal, cache });
 }
 
 export function createIdentifyItem<

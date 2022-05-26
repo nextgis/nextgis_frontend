@@ -3,6 +3,7 @@ import { fetchNgwResourceExtent } from './utils/fetchNgwExtent';
 import type NgwConnector from '@nextgis/ngw-connector';
 import type { ResourceItem } from '@nextgis/ngw-connector';
 import type { LngLatBoundsArray } from '@nextgis/utils';
+import { FetchNgwLayerExtentOptions } from './interfaces';
 export class NgwResource {
   item!: ResourceItem;
   connector!: NgwConnector;
@@ -14,12 +15,18 @@ export class NgwResource {
     return this.getBounds();
   }
 
-  async getBounds(): Promise<LngLatBoundsArray | undefined> {
+  async getBounds(
+    options?: FetchNgwLayerExtentOptions,
+  ): Promise<LngLatBoundsArray | undefined> {
     if (this._extent) {
       return this._extent;
     }
     if (this.item) {
-      this._extent = await fetchNgwResourceExtent(this.item, this.connector);
+      this._extent = await fetchNgwResourceExtent(
+        this.item,
+        this.connector,
+        options,
+      );
       return this._extent;
     }
   }

@@ -70,6 +70,7 @@ export class CancelablePromise<T = any> implements Promise<T> {
   static TimeoutError = TimeoutError;
   static PromiseControl = PromiseControl;
 
+  // @ts-ignore
   readonly [Symbol.toStringTag]: string;
   readonly id = ID++;
   private _isCanceled = false;

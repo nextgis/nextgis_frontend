@@ -455,24 +455,25 @@ export class NgwMap<
   /**
    * @deprecated use {@link NgwMap.fetchNgwLayerItem} instead
    */
-  getNgwLayerItem(options: {
-    resourceId: number;
-    featureId: number;
-  }): CancelablePromise<FeatureItem> {
-    return this.fetchNgwLayerItem(options);
+  getNgwLayerItem<
+    G extends Geometry = Geometry,
+    P extends FeatureProperties = FeatureProperties,
+  >(
+    options: Omit<FetchNgwItemOptions<P>, 'connector'>,
+  ): CancelablePromise<FeatureItem> {
+    return this.fetchNgwLayerItem<G, P>(options);
   }
 
   /**
    * @deprecated use {@link NgwMap.fetchNgwLayerItems} instead
    */
-  getNgwLayerItems(
-    options: {
-      resourceId: number;
-      connector?: NgwConnector;
-      filters?: PropertiesFilter;
-    } & FilterOptions,
-  ): CancelablePromise<FeatureItem[]> {
-    return this.fetchNgwLayerItems(options);
+  getNgwLayerItems<
+    F extends FeatureProperties = FeatureProperties,
+    G extends Geometry = Geometry,
+  >(
+    options: Omit<FetchNgwItemsOptions<F>, 'connector'>,
+  ): CancelablePromise<FeatureItem<F, G>[]> {
+    return this.fetchNgwLayerItems<F, G>(options);
   }
 
   /**
@@ -480,12 +481,11 @@ export class NgwMap<
    */
   getNgwLayerFeature<
     G extends Geometry = Geometry,
-    P extends JsonMap = JsonMap,
-  >(options: {
-    resourceId: number;
-    featureId: number;
-  }): CancelablePromise<Feature<G, P>> {
-    return this.fetchNgwLayerFeature(options);
+    P extends FeatureProperties = FeatureProperties,
+  >(
+    options: Omit<FetchNgwItemOptions<P>, 'connector'>,
+  ): CancelablePromise<Feature<G, P>> {
+    return this.fetchNgwLayerFeature<G, P>(options);
   }
 
   /**
