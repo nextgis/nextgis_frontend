@@ -198,6 +198,8 @@ export function fetchNgwLayerItemsRequest<
   };
   const {
     limit,
+    cache,
+    signal,
     offset,
     orderBy,
     paramList,
@@ -241,7 +243,7 @@ export function fetchNgwLayerItemsRequest<
 
   return connector.get(
     'feature_layer.feature.collection',
-    { cache: options.cache },
+    { cache, signal },
     reqParams,
   ) as CancelablePromise<FeatureItem<P, G>[]>;
 }
