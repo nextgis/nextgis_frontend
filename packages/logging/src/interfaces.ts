@@ -15,13 +15,13 @@ type ShortcutLogFunc<D = unknown> = (
 type LogFunc<D = unknown> = (message: string, options?: LogOptions<D>) => void;
 
 export type EachLog<D = any> =
-  | Log<D>
-  | ((message: string, options?: LogOptions<D>) => Log<D>);
+  | Partial<Log<D>>
+  | ((message?: string, options?: LogOptions<D>) => Partial<Log<D>>);
 
 export interface LoggingOptions<D = any> {
   engines: LogEngine[];
   enabled?: boolean;
-  eachLog?: EachLog;
+  eachLog?: EachLog<D>;
 }
 
 export type LogLevel =

@@ -20,6 +20,7 @@ import type {
   ResourceItem,
   LayerFeature,
   FeatureItem,
+  RequestOptions,
 } from '@nextgis/ngw-connector';
 import type { FeatureLayersIdentify } from '@nextgis/ngw-connector';
 import type {
@@ -166,13 +167,13 @@ export interface NgwWebmapAdapterOptions<M = any> extends A {
   useExtentConstrained?: boolean;
 }
 
-export interface FeatureLayerIdentifyOptions {
+export interface FeatureLayerIdentifyOptions extends NgwRequestOptions {
   layers: number[];
   connector: NgwConnector;
   geom: Feature<Polygon> | Polygon | Position[];
 }
 
-export interface IdentifyRequestOptions {
+export interface IdentifyRequestOptions extends NgwRequestOptions {
   layers: number[];
   connector: NgwConnector;
   radius?: number;
@@ -299,10 +300,11 @@ export interface GetNgwItemOptions extends FetchNgwLayerExtentOptions {
   featureId: number;
 }
 
-export interface FetchNgwLayerExtentOptions {
+export type NgwRequestOptions = Pick<RequestOptions, 'cache' | 'signal'>;
+
+export interface FetchNgwLayerExtentOptions extends NgwRequestOptions {
   resourceId: number;
   connector: NgwConnector;
-  cache?: boolean;
 }
 
 export interface FetchNgwLayerItemExtentOptions
@@ -310,10 +312,9 @@ export interface FetchNgwLayerItemExtentOptions
   featureId: number;
 }
 
-export interface FetchNgwResourceExtent {
+export interface FetchNgwResourceExtent extends NgwRequestOptions {
   resource?: ResourceDefinition | ResourceItem;
   connector: NgwConnector;
-  cache?: boolean;
 }
 
 export type PropertiesForNgwFilter<

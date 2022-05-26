@@ -415,7 +415,7 @@ export class NgwConnector {
    */
   getResourceOrFail(
     resource: ResourceDefinition,
-    requestOptions?: Pick<RequestOptions, 'cache'>,
+    requestOptions?: Pick<RequestOptions, 'cache' | 'signal'>,
   ): CancelablePromise<ResourceItem> {
     return this.resources.getOneOrFail(resource, requestOptions);
   }
@@ -520,7 +520,7 @@ export class NgwConnector {
     options: RequestOptions,
   ): CancelablePromise<any> {
     options.responseType = options.responseType || 'json';
-    return new CancelablePromise((resolve, reject, onCancel) => {
+    const request = new CancelablePromise((resolve, reject, onCancel) => {
       if (this.user) {
         options = options || {};
         // options.withCredentials = true;
@@ -544,6 +544,15 @@ export class NgwConnector {
         }
       }
     });
+    if (
+      options.signal &&
+      typeof options.signal.addEventListener === 'function'
+    ) {
+      options.signal.addEventListener('abort', () => {
+        request.cancel();
+      });
+    }
+    return request;
   }
 
   private _handleHttpError(er: Error) {
