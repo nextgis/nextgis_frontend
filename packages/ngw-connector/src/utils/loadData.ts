@@ -210,6 +210,11 @@ if (__BROWSER__) {
             ...form.getHeaders(),
           });
         }
+
+        Object.assign(requestOpt.headers, {
+          'transfer-encoding': '',
+        });
+
         if (body !== undefined && method !== 'POST') {
           Object.assign(requestOpt.headers, {
             'content-type': 'application/json',
