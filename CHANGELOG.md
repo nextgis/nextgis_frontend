@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.13.2](https://github.com/nextgis/nextgisweb_frontend/compare/v1.13.1...v1.13.2) (2022-05-30)
+
+
+### Features
+
+* **nglog:** add eachLog option ([19e17c9](https://github.com/nextgis/nextgisweb_frontend/commit/19e17c929c8d896f04eae5f3ad7fd6cfe30fed7f))
+* **ngw-connector:** disable transfer-encoding for node requests ([c3ab8e9](https://github.com/nextgis/nextgisweb_frontend/commit/c3ab8e9c296fbc0f809637ed591af97d865a327b))
+* **ngw-connector:** disable transfer-encoding for node requests II ([a68c416](https://github.com/nextgis/nextgisweb_frontend/commit/a68c41665a3df49c2d371783f57c1fb53193c816))
+* **ngw-kit:** use abort signal in fetch requests ([c68a8f1](https://github.com/nextgis/nextgisweb_frontend/commit/c68a8f1223806ea1820428566d7b7fa6a7cb97a2))
+
+
+
+
+
 ## [1.13.1](https://github.com/nextgis/nextgisweb_frontend/compare/v1.13.0...v1.13.1) (2022-05-13)
 
 
