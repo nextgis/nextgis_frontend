@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/ngw-orm",
-  "version": "1.13.1",
+  "version": "1.13.2",
   "description": "NextGIS Web Object-Relational Mapping",
   "main": "index.js",
   "module": "lib/ngw-orm.esm-bundler.js",
@@ -8,10 +8,10 @@
   "jsdelivr": "lib/ngw-orm.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/ngw-connector": "^1.12.1",
-    "@nextgis/ngw-kit": "^1.13.1",
-    "@nextgis/utils": "^1.12.0",
-    "@nextgis/webmap": "^1.13.0",
+    "@nextgis/ngw-connector": "^1.13.2",
+    "@nextgis/ngw-kit": "^1.13.2",
+    "@nextgis/utils": "^1.13.2",
+    "@nextgis/webmap": "^1.13.2",
     "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
