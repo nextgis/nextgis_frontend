@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/cache",
-  "version": "1.12.0",
+  "version": "1.13.2",
   "description": "Caching for asynchronous functions",
   "main": "index.js",
   "module": "lib/cache.esm-bundler.js",
@@ -8,7 +8,7 @@
   "jsdelivr": "lib/cache.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/utils": "^1.12.0"
+    "@nextgis/utils": "^1.13.2"
   },
   "devDependencies": {
     "@nextgis/build-tools": "^1.12.0"
