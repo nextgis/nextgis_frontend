@@ -2120,8 +2120,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "JsonMap",
-                  "canonicalReference": "@nextgis/utils!JsonMap:interface"
+                  "text": "FeatureProperties",
+                  "canonicalReference": "@nextgis/utils!FeatureProperties:type"
                 },
                 {
                   "kind": "Content",
@@ -2133,16 +2133,30 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "JsonMap",
-                  "canonicalReference": "@nextgis/utils!JsonMap:interface"
+                  "text": "FeatureProperties",
+                  "canonicalReference": "@nextgis/utils!FeatureProperties:type"
                 },
                 {
                   "kind": "Content",
                   "text": ">(options: "
                 },
                 {
+                  "kind": "Reference",
+                  "text": "Omit",
+                  "canonicalReference": "!Omit:type"
+                },
+                {
                   "kind": "Content",
-                  "text": "{\n        resourceId: number;\n        featureId: number;\n    }"
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FetchNgwItemOptions",
+                  "canonicalReference": "@nextgis/ngw-kit!FetchNgwItemOptions:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<P>, 'connector'>"
                 },
                 {
                   "kind": "Content",
@@ -2174,8 +2188,8 @@
               "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 13,
-                "endIndex": 17
+                "startIndex": 16,
+                "endIndex": 20
               },
               "releaseTag": "Public",
               "overloadIndex": 1,
@@ -2184,7 +2198,7 @@
                   "parameterName": "options",
                   "parameterTypeTokenRange": {
                     "startIndex": 11,
-                    "endIndex": 12
+                    "endIndex": 15
                   }
                 }
               ],
@@ -2353,11 +2367,69 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "getNgwLayerItem(options: "
+                  "text": "getNgwLayerItem<G extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Geometry",
+                  "canonicalReference": "@types/geojson!Geometry:type"
                 },
                 {
                   "kind": "Content",
-                  "text": "{\n        resourceId: number;\n        featureId: number;\n    }"
+                  "text": " "
+                },
+                {
+                  "kind": "Content",
+                  "text": "= "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Geometry",
+                  "canonicalReference": "@types/geojson!Geometry:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", P extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FeatureProperties",
+                  "canonicalReference": "@nextgis/utils!FeatureProperties:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": " "
+                },
+                {
+                  "kind": "Content",
+                  "text": "= "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FeatureProperties",
+                  "canonicalReference": "@nextgis/utils!FeatureProperties:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">(options: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Omit",
+                  "canonicalReference": "!Omit:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FetchNgwItemOptions",
+                  "canonicalReference": "@nextgis/ngw-kit!FetchNgwItemOptions:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<P>, 'connector'>"
                 },
                 {
                   "kind": "Content",
@@ -2389,8 +2461,8 @@
               "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 7
+                "startIndex": 16,
+                "endIndex": 20
               },
               "releaseTag": "Public",
               "overloadIndex": 1,
@@ -2398,8 +2470,32 @@
                 {
                   "parameterName": "options",
                   "parameterTypeTokenRange": {
+                    "startIndex": 11,
+                    "endIndex": 15
+                  }
+                }
+              ],
+              "typeParameters": [
+                {
+                  "typeParameterName": "G",
+                  "constraintTokenRange": {
                     "startIndex": 1,
-                    "endIndex": 2
+                    "endIndex": 3
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  }
+                },
+                {
+                  "typeParameterName": "P",
+                  "constraintTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 8
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 9,
+                    "endIndex": 10
                   }
                 }
               ],
@@ -2412,34 +2508,69 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "getNgwLayerItems(options: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "{\n        resourceId: number;\n        connector?: "
+                  "text": "getNgwLayerItems<F extends "
                 },
                 {
                   "kind": "Reference",
-                  "text": "NgwConnector",
-                  "canonicalReference": "@nextgis/ngw-connector!~NgwConnector:class"
+                  "text": "FeatureProperties",
+                  "canonicalReference": "@nextgis/utils!FeatureProperties:type"
                 },
                 {
                   "kind": "Content",
-                  "text": ";\n        filters?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "PropertiesFilter",
-                  "canonicalReference": "@nextgis/properties-filter!PropertiesFilter:type"
+                  "text": " "
                 },
                 {
                   "kind": "Content",
-                  "text": ";\n    } & "
+                  "text": "= "
                 },
                 {
                   "kind": "Reference",
-                  "text": "FilterOptions",
-                  "canonicalReference": "@nextgis/webmap!FilterOptions:interface"
+                  "text": "FeatureProperties",
+                  "canonicalReference": "@nextgis/utils!FeatureProperties:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", G extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Geometry",
+                  "canonicalReference": "@types/geojson!Geometry:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": " "
+                },
+                {
+                  "kind": "Content",
+                  "text": "= "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Geometry",
+                  "canonicalReference": "@types/geojson!Geometry:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">(options: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Omit",
+                  "canonicalReference": "!Omit:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FetchNgwItemsOptions",
+                  "canonicalReference": "@nextgis/ngw-kit!FetchNgwItemsOptions:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<F>, 'connector'>"
                 },
                 {
                   "kind": "Content",
@@ -2461,7 +2592,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "[]>"
+                  "text": "<F, G>[]>"
                 },
                 {
                   "kind": "Content",
@@ -2471,8 +2602,8 @@
               "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 8,
-                "endIndex": 12
+                "startIndex": 16,
+                "endIndex": 20
               },
               "releaseTag": "Public",
               "overloadIndex": 1,
@@ -2480,8 +2611,32 @@
                 {
                   "parameterName": "options",
                   "parameterTypeTokenRange": {
+                    "startIndex": 11,
+                    "endIndex": 15
+                  }
+                }
+              ],
+              "typeParameters": [
+                {
+                  "typeParameterName": "F",
+                  "constraintTokenRange": {
                     "startIndex": 1,
-                    "endIndex": 7
+                    "endIndex": 3
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  }
+                },
+                {
+                  "typeParameterName": "G",
+                  "constraintTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 8
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 9,
+                    "endIndex": 10
                   }
                 }
               ],

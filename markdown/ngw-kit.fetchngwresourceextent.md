@@ -7,14 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-export interface FetchNgwResourceExtent 
+export interface FetchNgwResourceExtent extends NgwRequestOptions 
 ```
+<b>Extends:</b> [NgwRequestOptions](./ngw-kit.ngwrequestoptions.md)
 
 ## Properties
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [cache?](./ngw-kit.fetchngwresourceextent.cache.md) | boolean | <i>(Optional)</i> |
 |  [connector](./ngw-kit.fetchngwresourceextent.connector.md) | NgwConnector |  |
 |  [resource?](./ngw-kit.fetchngwresourceextent.resource.md) | [ResourceDefinition](./ngw-connector.resourcedefinition.md) \| [ResourceItem](./ngw-connector.resourceitem.md) | <i>(Optional)</i> |
 

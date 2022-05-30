@@ -32,6 +32,9 @@ export interface ConsoleEngineOptions {
 }
 
 // @public (undocumented)
+export type EachLog<D = any> = Partial<Log<D>> | ((message?: string, options?: LogOptions<D>) => Partial<Log<D>>);
+
+// @public (undocumented)
 export interface Log<D = any> {
     // (undocumented)
     data?: D;
@@ -77,6 +80,8 @@ export class Logging<D> implements LogEngine<D> {
     // (undocumented)
     debug(message: string, options?: LogShortcutOptions<D>): void;
     // (undocumented)
+    eachLog?: EachLog<D>;
+    // (undocumented)
     enabled: boolean;
     // (undocumented)
     engines: LogEngine<D>[];
@@ -91,7 +96,9 @@ export class Logging<D> implements LogEngine<D> {
 }
 
 // @public (undocumented)
-export interface LoggingOptions {
+export interface LoggingOptions<D = any> {
+    // (undocumented)
+    eachLog?: EachLog<D>;
     // (undocumented)
     enabled?: boolean;
     // (undocumented)

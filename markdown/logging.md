@@ -27,6 +27,7 @@
 
 |  Type Alias | Description |
 |  --- | --- |
+|  [EachLog](./logging.eachlog.md) |  |
 |  [LogLevel](./logging.loglevel.md) |  |
 |  [LogOptions](./logging.logoptions.md) |  |
 |  [LogPostBulk](./logging.logpostbulk.md) |  |

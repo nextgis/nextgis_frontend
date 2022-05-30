@@ -13,4 +13,5 @@ A promise you can stop
 |  Class | Description |
 |  --- | --- |
 |  [CancelablePromise](./cancelable-promise.cancelablepromise.md) | Promise that can be canceled |
+|  [CancelError](./cancelable-promise.cancelerror.md) |  |
 
