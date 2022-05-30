@@ -36,7 +36,6 @@ import type {
 import type {
   OnLayerMouseOptions,
   ControlPosition,
-  FilterOptions,
   MapClickEvent,
   LayerAdapter,
   WebMapEvents,
@@ -53,7 +52,6 @@ import type {
   NgwFeatureRequestOptions,
 } from '@nextgis/ngw-kit';
 import type { Geometry, Feature, FeatureCollection } from 'geojson';
-import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type { QmsAdapterOptions } from '@nextgis/qms-kit';
 import type { NgwLayerOptions } from '@nextgis/ngw-kit';
 import type {
