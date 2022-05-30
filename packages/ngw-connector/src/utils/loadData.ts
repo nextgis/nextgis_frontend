@@ -3,7 +3,6 @@ import {
   RequestMethods,
 } from '../interfaces';
 import { NetworkError } from '../errors/NetworkError';
-import { extractError } from '../errors/extractError';
 import { NgwError } from '../errors/NgwError';
 import { isError } from '../errors/isError';
 import { isObject } from './isObject';

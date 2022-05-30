@@ -21,6 +21,7 @@ export declare class Logging<D> implements LogEngine<D>
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
+|  [eachLog?](./logging.logging.eachlog.md) |  | [EachLog](./logging.eachlog.md)<!-- -->&lt;D&gt; | <i>(Optional)</i> |
 |  [enabled](./logging.logging.enabled.md) |  | boolean |  |
 |  [engines](./logging.logging.engines.md) |  | [LogEngine](./logging.logengine.md)<!-- -->&lt;D&gt;\[\] |  |
 

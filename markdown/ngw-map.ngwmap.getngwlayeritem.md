@@ -12,17 +12,14 @@
 <b>Signature:</b>
 
 ```typescript
-getNgwLayerItem(options: {
-        resourceId: number;
-        featureId: number;
-    }): CancelablePromise<FeatureItem>;
+getNgwLayerItem<G extends Geometry = Geometry, P extends FeatureProperties = FeatureProperties>(options: Omit<FetchNgwItemOptions<P>, 'connector'>): CancelablePromise<FeatureItem>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | { resourceId: number; featureId: number; } |  |
+|  options | Omit&lt;[FetchNgwItemOptions](./ngw-kit.fetchngwitemoptions.md)<!-- -->&lt;P&gt;, 'connector'&gt; |  |
 
 <b>Returns:</b>
 

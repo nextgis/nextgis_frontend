@@ -98,7 +98,7 @@ getNgwLayerItems({
 |  [fetchNgwLayerItemExtent({ resourceId, featureId, connector, cache, })](./ngw-kit.fetchngwlayeritemextent.md) |  |
 |  [fetchNgwLayerItems(options)](./ngw-kit.fetchngwlayeritems.md) |  |
 |  [fetchNgwLayerItemsRequest(options)](./ngw-kit.fetchngwlayeritemsrequest.md) |  |
-|  [fetchNgwResourceExtent(item, connector)](./ngw-kit.fetchngwresourceextent.md) |  |
+|  [fetchNgwResourceExtent(item, connector, options)](./ngw-kit.fetchngwresourceextent.md) |  |
 |  [getCompanyLogo(connector, options)](./ngw-kit.getcompanylogo.md) |  |
 |  [getIdentifyGeoJson(options)](./ngw-kit.getidentifygeojson.md) |  |
 |  [getIdentifyItems(identify, multiple)](./ngw-kit.getidentifyitems.md) |  |
@@ -181,6 +181,7 @@ getNgwLayerItems({
 |  [GetClassAdapterCallback](./ngw-kit.getclassadaptercallback.md) |  |
 |  [NgwIdentify](./ngw-kit.ngwidentify.md) |  |
 |  [NgwLayerAdapterType](./ngw-kit.ngwlayeradaptertype.md) |  |
+|  [NgwRequestOptions](./ngw-kit.ngwrequestoptions.md) |  |
 |  [PropertiesForNgwFilter](./ngw-kit.propertiesforngwfilter.md) |  |
 |  [ResourceIdDef](./ngw-kit.resourceiddef.md) |  |
 |  [ResourceNgwLayerOptions](./ngw-kit.resourcengwlayeroptions.md) |  |

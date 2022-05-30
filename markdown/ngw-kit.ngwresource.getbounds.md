@@ -7,8 +7,15 @@
 <b>Signature:</b>
 
 ```typescript
-getBounds(): Promise<LngLatBoundsArray | undefined>;
+getBounds(options?: FetchNgwLayerExtentOptions): Promise<LngLatBoundsArray | undefined>;
 ```
+
+## Parameters
+
+|  Parameter | Type | Description |
+|  --- | --- | --- |
+|  options | [FetchNgwLayerExtentOptions](./ngw-kit.fetchngwlayerextentoptions.md) |  |
+
 <b>Returns:</b>
 
 Promise&lt;[LngLatBoundsArray](./utils.lnglatboundsarray.md) \| undefined&gt;

@@ -320,7 +320,7 @@ class NgwConnector {
     // Warning: (ae-unresolved-inheritdoc-reference) The @inheritDoc reference could not be resolved: The package "@nextgis/ngw-connector" does not have an export "ResourcesControl"
     //
     // (undocumented)
-    getResourceOrFail(resource: ResourceDefinition, requestOptions?: Pick<RequestOptions, 'cache'>): CancelablePromise<ResourceItem>;
+    getResourceOrFail(resource: ResourceDefinition, requestOptions?: Pick<RequestOptions, 'cache' | 'signal'>): CancelablePromise<ResourceItem>;
     // Warning: (ae-unresolved-inheritdoc-reference) The @inheritDoc reference could not be resolved: The package "@nextgis/ngw-connector" does not have an export "ResourcesControl"
     //
     // (undocumented)
