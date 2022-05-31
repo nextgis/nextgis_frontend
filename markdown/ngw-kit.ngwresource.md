@@ -22,6 +22,6 @@ export declare class NgwResource
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
-|  [getBounds()](./ngw-kit.ngwresource.getbounds.md) |  |  |
+|  [getBounds(options)](./ngw-kit.ngwresource.getbounds.md) |  |  |
 |  [getExtent()](./ngw-kit.ngwresource.getextent.md) |  |  |
 

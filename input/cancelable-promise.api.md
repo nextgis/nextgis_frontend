@@ -16,8 +16,6 @@ class CancelablePromise<T = any> implements Promise<T> {
     attach(p: CancelablePromise): void;
     // (undocumented)
     cancel(): this;
-    // Warning: (ae-forgotten-export) The symbol "CancelError" needs to be exported by the entry point index.d.ts
-    //
     // (undocumented)
     static CancelError: typeof CancelError;
     // (undocumented)
@@ -45,8 +43,13 @@ class CancelablePromise<T = any> implements Promise<T> {
     // (undocumented)
     static TimeoutError: typeof TimeoutError;
 }
-
 export default CancelablePromise;
 
+// @public (undocumented)
+export class CancelError extends Error {
+    constructor();
+    // (undocumented)
+    name: string;
+}
 
 ```

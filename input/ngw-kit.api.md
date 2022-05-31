@@ -45,6 +45,7 @@ import type { Polygon } from 'geojson';
 import type { Position } from 'geojson';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type { RasterAdapterOptions } from '@nextgis/webmap';
+import type { RequestOptions } from '@nextgis/ngw-connector';
 import type { ResourceDefinition } from '@nextgis/ngw-connector';
 import { ResourceItem } from '@nextgis/ngw-connector';
 import type { StarterKit } from '@nextgis/webmap';
@@ -163,7 +164,7 @@ export interface FeatureIdentifyRequestOptions {
 export function featureLayerIdentify(options: FeatureLayerIdentifyOptions): CancelablePromise<FeatureLayersIdentify>;
 
 // @public (undocumented)
-export interface FeatureLayerIdentifyOptions {
+export interface FeatureLayerIdentifyOptions extends NgwRequestOptions {
     // (undocumented)
     connector: NgwConnector;
     // (undocumented)
@@ -226,9 +227,7 @@ export interface FetchNgwLayerCountOptions {
 export function fetchNgwLayerExtent({ resourceId, connector, cache, }: FetchNgwLayerExtentOptions): CancelablePromise<LngLatBoundsArray | undefined>;
 
 // @public (undocumented)
-export interface FetchNgwLayerExtentOptions {
-    // (undocumented)
-    cache?: boolean;
+export interface FetchNgwLayerExtentOptions extends NgwRequestOptions {
     // (undocumented)
     connector: NgwConnector;
     // (undocumented)
@@ -267,9 +266,7 @@ export function fetchNgwLayerItemsRequest<G extends Geometry = Geometry, P exten
 }>(options: FetchNgwItemsOptions<P>): CancelablePromise<FeatureItem<P, G>[]>;
 
 // @public (undocumented)
-export interface FetchNgwResourceExtent {
-    // (undocumented)
-    cache?: boolean;
+export interface FetchNgwResourceExtent extends NgwRequestOptions {
     // (undocumented)
     connector: NgwConnector;
     // (undocumented)
@@ -277,7 +274,7 @@ export interface FetchNgwResourceExtent {
 }
 
 // @public @deprecated (undocumented)
-export function fetchNgwResourceExtent(item: ResourceItem, connector: NgwConnector): CancelablePromise<LngLatBoundsArray | undefined>;
+export function fetchNgwResourceExtent(item: ResourceItem, connector: NgwConnector, options?: FetchNgwLayerExtentOptions): CancelablePromise<LngLatBoundsArray | undefined>;
 
 // @public (undocumented)
 export type GetClassAdapter = GetClassAdapterCallback | GetClassAdapterByType;
@@ -423,7 +420,7 @@ export interface IdentifyItemOptions {
 }
 
 // @public (undocumented)
-export interface IdentifyRequestOptions {
+export interface IdentifyRequestOptions extends NgwRequestOptions {
     // (undocumented)
     connector: NgwConnector;
     // (undocumented)
@@ -563,13 +560,16 @@ export interface NgwLayerOptions<T extends NgwLayerAdapterType = NgwLayerAdapter
 }
 
 // @public (undocumented)
+export type NgwRequestOptions = Pick<RequestOptions, 'cache' | 'signal'>;
+
+// @public (undocumented)
 export class NgwResource {
     // (undocumented)
     connector: NgwConnector;
     // (undocumented)
     protected _extent?: LngLatBoundsArray;
     // (undocumented)
-    getBounds(): Promise<LngLatBoundsArray | undefined>;
+    getBounds(options?: FetchNgwLayerExtentOptions): Promise<LngLatBoundsArray | undefined>;
     // @deprecated (undocumented)
     getExtent(): Promise<LngLatBoundsArray | undefined>;
     // (undocumented)

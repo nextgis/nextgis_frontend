@@ -17,7 +17,6 @@ import type { FeatureItem } from '@nextgis/ngw-connector';
 import type { FeatureProperties } from '@nextgis/utils';
 import type { FetchNgwItemOptions } from '@nextgis/ngw-kit';
 import type { FetchNgwItemsOptions } from '@nextgis/ngw-kit';
-import type { FilterOptions } from '@nextgis/webmap';
 import type { FitOptions } from '@nextgis/webmap';
 import type { Geometry } from 'geojson';
 import { getIcon } from '@nextgis/icons';
@@ -32,7 +31,6 @@ import type { NgwFeatureItemResponse } from '@nextgis/ngw-kit';
 import type { NgwFeatureRequestOptions } from '@nextgis/ngw-kit';
 import type { NgwIdentify } from '@nextgis/ngw-kit';
 import type { NgwLayerOptions } from '@nextgis/ngw-kit';
-import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type { ResourceAdapter } from '@nextgis/ngw-kit';
 import type { RuntimeParams } from '@nextgis/webmap';
 import StrictEventEmitter from 'strict-event-emitter-types';
@@ -103,23 +101,13 @@ export class NgwMap<M = unknown, L = unknown, C = unknown, O extends NgwMapOptio
     // (undocumented)
     getNgwLayerByResourceId(id: number): Promise<LayerAdapter | undefined>;
     // @deprecated (undocumented)
-    getNgwLayerFeature<G extends Geometry = Geometry, P extends JsonMap = JsonMap>(options: {
-        resourceId: number;
-        featureId: number;
-    }): CancelablePromise<Feature<G, P>>;
+    getNgwLayerFeature<G extends Geometry = Geometry, P extends FeatureProperties = FeatureProperties>(options: Omit<FetchNgwItemOptions<P>, 'connector'>): CancelablePromise<Feature<G, P>>;
     // @deprecated (undocumented)
     getNgwLayerFeatures<G extends Geometry | null = Geometry, P extends JsonMap = JsonMap>(options: FetchNgwItemsOptions<P>): CancelablePromise<FeatureCollection<G, P>>;
     // @deprecated (undocumented)
-    getNgwLayerItem(options: {
-        resourceId: number;
-        featureId: number;
-    }): CancelablePromise<FeatureItem>;
+    getNgwLayerItem<G extends Geometry = Geometry, P extends FeatureProperties = FeatureProperties>(options: Omit<FetchNgwItemOptions<P>, 'connector'>): CancelablePromise<FeatureItem>;
     // @deprecated (undocumented)
-    getNgwLayerItems(options: {
-        resourceId: number;
-        connector?: NgwConnector;
-        filters?: PropertiesFilter;
-    } & FilterOptions): CancelablePromise<FeatureItem[]>;
+    getNgwLayerItems<F extends FeatureProperties = FeatureProperties, G extends Geometry = Geometry>(options: Omit<FetchNgwItemsOptions<F>, 'connector'>): CancelablePromise<FeatureItem<F, G>[]>;
     // (undocumented)
     getNgwLayers(): Promise<NgwLayers>;
     // (undocumented)

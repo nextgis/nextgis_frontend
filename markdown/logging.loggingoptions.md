@@ -7,13 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-export interface LoggingOptions 
+export interface LoggingOptions<D = any> 
 ```
 
 ## Properties
 
 |  Property | Type | Description |
 |  --- | --- | --- |
+|  [eachLog?](./logging.loggingoptions.eachlog.md) | [EachLog](./logging.eachlog.md)<!-- -->&lt;D&gt; | <i>(Optional)</i> |
 |  [enabled?](./logging.loggingoptions.enabled.md) | boolean | <i>(Optional)</i> |
 |  [engines](./logging.loggingoptions.engines.md) | [LogEngine](./logging.logengine.md)<!-- -->\[\] |  |
 
