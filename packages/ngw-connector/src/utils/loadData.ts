@@ -2,8 +2,9 @@ import {
   RequestOptions as NgwRequestOptions,
   RequestMethods,
 } from '../interfaces';
-import { NgwError } from '../errors/NgwError';
 import { NetworkError } from '../errors/NetworkError';
+import { NgwError } from '../errors/NgwError';
+import { isError } from '../errors/isError';
 import { isObject } from './isObject';
 
 // readyState
@@ -210,7 +211,8 @@ if (__BROWSER__) {
             ...form.getHeaders(),
           });
         }
-        if (body !== undefined && method !== 'POST') {
+
+        if (body !== undefined) {
           Object.assign(requestOpt.headers, {
             'content-type': 'application/json',
             'content-length': Buffer.byteLength(body),
@@ -234,10 +236,13 @@ if (__BROWSER__) {
                   }
                 } catch (er) {
                   reject(er);
-                  // throw new Error(er);
                 }
                 if (json !== undefined) {
-                  resolve(json);
+                  if (isError(json)) {
+                    reject('extractError(json)');
+                  } else {
+                    resolve(json);
+                  }
                 }
               }
             }
