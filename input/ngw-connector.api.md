@@ -270,6 +270,7 @@ export interface LookupTableResource {
 // @public (undocumented)
 class NgwConnector {
     constructor(options: NgwConnectorOptions);
+    abort(): void;
     apiRequest<K extends keyof RequestItemsParamsMap, P extends RequestItemKeys = RequestItemKeys>(name: K, params_?: RequestItemsParams<K>, requestOptions?: RequestOptions): CancelablePromise<P[K]>;
     // Warning: (ae-unresolved-link) The @link reference could not be resolved: The package "@nextgis/ngw-connector" does not have an export "NgwConnector"
     connect(): CancelablePromise<PyramidRoute>;
@@ -288,11 +289,13 @@ class NgwConnector {
         ResourceNotFoundError: typeof ResourceNotFoundError;
     };
     get<K extends keyof RequestItemsParamsMap>(name: K, options?: RequestOptions | undefined | null, params?: RequestItemsParams<K>): CancelablePromise<GetRequestItemsResponseMap[K]>;
+    // (undocumented)
+    getActiveApiRequests(): CancelablePromise<any>[];
     getAuthorizationHeaders(credentials?: Credentials): RequestHeaders | undefined;
     // Warning: (ae-unresolved-inheritdoc-reference) The @inheritDoc reference could not be resolved: The package "@nextgis/ngw-connector" does not have an export "ResourcesControl"
     //
     // (undocumented)
-    getResource(resource: ResourceDefinition, requestOptions?: Pick<RequestOptions, 'cache'>): CancelablePromise<ResourceItem | undefined>;
+    getResource(resource: ResourceDefinition, requestOptions?: RequestOptions): CancelablePromise<ResourceItem | undefined>;
     // Warning: (ae-unresolved-link) The @link reference could not be resolved: The package "@nextgis/ngw-connector" does not have an export "NgwConnector"
     //
     // @deprecated (undocumented)
@@ -312,23 +315,23 @@ class NgwConnector {
     // Warning: (ae-unresolved-inheritdoc-reference) The @inheritDoc reference could not be resolved: The package "@nextgis/ngw-connector" does not have an export "ResourcesControl"
     //
     // (undocumented)
-    getResourceId(resource: ResourceDefinition, requestOptions?: Pick<RequestOptions, 'cache'>): CancelablePromise<number | undefined>;
+    getResourceId(resource: ResourceDefinition, requestOptions?: RequestOptions): CancelablePromise<number | undefined>;
     // Warning: (ae-unresolved-inheritdoc-reference) The @inheritDoc reference could not be resolved: The package "@nextgis/ngw-connector" does not have an export "ResourcesControl"
     //
     // (undocumented)
-    getResourceIdOrFail(resource: ResourceDefinition, requestOptions?: Pick<RequestOptions, 'cache'>): CancelablePromise<number>;
+    getResourceIdOrFail(resource: ResourceDefinition, requestOptions?: RequestOptions): CancelablePromise<number>;
     // Warning: (ae-unresolved-inheritdoc-reference) The @inheritDoc reference could not be resolved: The package "@nextgis/ngw-connector" does not have an export "ResourcesControl"
     //
     // (undocumented)
-    getResourceOrFail(resource: ResourceDefinition, requestOptions?: Pick<RequestOptions, 'cache' | 'signal'>): CancelablePromise<ResourceItem>;
+    getResourceOrFail(resource: ResourceDefinition, requestOptions?: RequestOptions): CancelablePromise<ResourceItem>;
     // Warning: (ae-unresolved-inheritdoc-reference) The @inheritDoc reference could not be resolved: The package "@nextgis/ngw-connector" does not have an export "ResourcesControl"
     //
     // (undocumented)
-    getResourceParent(resource: ResourceDefinition, requestOptions?: Pick<RequestOptions, 'cache'>): CancelablePromise<ResourceItem | undefined>;
+    getResourceParent(resource: ResourceDefinition, requestOptions?: RequestOptions): CancelablePromise<ResourceItem | undefined>;
     // Warning: (ae-unresolved-inheritdoc-reference) The @inheritDoc reference could not be resolved: The package "@nextgis/ngw-connector" does not have an export "ResourcesControl"
     //
     // (undocumented)
-    getResourcesBy(resource: DeepPartial<Resource>, requestOptions?: Pick<RequestOptions, 'cache'>): CancelablePromise<ResourceItem[]>;
+    getResourcesBy(resource: DeepPartial<Resource>, requestOptions?: RequestOptions): CancelablePromise<ResourceItem[]>;
     // (undocumented)
     getUserInfo(credentials?: Credentials): CancelablePromise<UserInfo>;
     // (undocumented)

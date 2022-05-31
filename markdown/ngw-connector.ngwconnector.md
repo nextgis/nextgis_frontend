@@ -31,12 +31,14 @@ export declare class NgwConnector
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
+|  [abort()](./ngw-connector.ngwconnector.abort.md) |  | Stop all api requests |
 |  [apiRequest(name, params\_, requestOptions)](./ngw-connector.ngwconnector.apirequest.md) |  | Send request to NGW api router. |
 |  [connect()](./ngw-connector.ngwconnector.connect.md) |  | Establishing a connection with NextGIS Web to fulfill all other requests. |
 |  [create(options)](./ngw-connector.ngwconnector.create.md) | <code>static</code> |  |
 |  [delete(name, options, params)](./ngw-connector.ngwconnector.delete.md) |  | Shortcut method for send DELETE request to NGW. |
 |  [deleteResource(resource)](./ngw-connector.ngwconnector.deleteresource.md) |  |  |
 |  [get(name, options, params)](./ngw-connector.ngwconnector.get.md) |  | Shortcut method for send GET request to NGW. |
+|  [getActiveApiRequests()](./ngw-connector.ngwconnector.getactiveapirequests.md) |  |  |
 |  [getAuthorizationHeaders(credentials)](./ngw-connector.ngwconnector.getauthorizationheaders.md) |  | Obtaining the required Headers for authentication of requests in the NGW. |
 |  [getResource(resource, requestOptions)](./ngw-connector.ngwconnector.getresource.md) |  |  |
 |  [getResourceBy(resource)](./ngw-connector.ngwconnector.getresourceby.md) |  |  |

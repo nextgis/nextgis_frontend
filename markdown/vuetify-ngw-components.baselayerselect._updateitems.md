@@ -14,7 +14,7 @@ protected _updateItems(e?: LayerAdapter): Promise<VueSelectItem[] | undefined>;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  e | [LayerAdapter](./webmap.layeradapter.md) |  |
+|  e | LayerAdapter |  |
 
 <b>Returns:</b>
 

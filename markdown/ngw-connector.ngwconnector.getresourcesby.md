@@ -8,7 +8,7 @@
 <b>Signature:</b>
 
 ```typescript
-getResourcesBy(resource: DeepPartial<Resource>, requestOptions?: Pick<RequestOptions, 'cache'>): CancelablePromise<ResourceItem[]>;
+getResourcesBy(resource: DeepPartial<Resource>, requestOptions?: RequestOptions): CancelablePromise<ResourceItem[]>;
 ```
 
 ## Parameters
@@ -16,7 +16,7 @@ getResourcesBy(resource: DeepPartial<Resource>, requestOptions?: Pick<RequestOpt
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  resource | [DeepPartial](./utils.deeppartial.md)<!-- -->&lt;[Resource](./ngw-connector.resource.md)<!-- -->&gt; |  |
-|  requestOptions | Pick&lt;[RequestOptions](./ngw-connector.requestoptions.md)<!-- -->, 'cache'&gt; |  |
+|  requestOptions | [RequestOptions](./ngw-connector.requestoptions.md) |  |
 
 <b>Returns:</b>
 

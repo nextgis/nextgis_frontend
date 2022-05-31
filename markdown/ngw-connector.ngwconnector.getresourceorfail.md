@@ -8,7 +8,7 @@
 <b>Signature:</b>
 
 ```typescript
-getResourceOrFail(resource: ResourceDefinition, requestOptions?: Pick<RequestOptions, 'cache' | 'signal'>): CancelablePromise<ResourceItem>;
+getResourceOrFail(resource: ResourceDefinition, requestOptions?: RequestOptions): CancelablePromise<ResourceItem>;
 ```
 
 ## Parameters
@@ -16,7 +16,7 @@ getResourceOrFail(resource: ResourceDefinition, requestOptions?: Pick<RequestOpt
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  resource | [ResourceDefinition](./ngw-connector.resourcedefinition.md) |  |
-|  requestOptions | Pick&lt;[RequestOptions](./ngw-connector.requestoptions.md)<!-- -->, 'cache' \| 'signal'&gt; |  |
+|  requestOptions | [RequestOptions](./ngw-connector.requestoptions.md) |  |
 
 <b>Returns:</b>
 
