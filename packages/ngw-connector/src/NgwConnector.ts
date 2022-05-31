@@ -145,6 +145,7 @@ export class NgwConnector {
    * Disconnecting a user. Aborting all current requests
    */
   logout(): void {
+    this.abort();
     removeConnector(this);
     this.options.auth = undefined;
     this.user = undefined;

@@ -2721,7 +2721,7 @@
                 {
                   "kind": "Reference",
                   "text": "NgwConnector",
-                  "canonicalReference": "!unknown"
+                  "canonicalReference": "@nextgis/ngw-connector!~NgwConnector:class"
                 },
                 {
                   "kind": "Content",
