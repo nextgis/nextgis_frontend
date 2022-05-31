@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.13.5](https://github.com/nextgis/nextgis_frontend/compare/v1.13.4...v1.13.5) (2022-05-31)
+
+**Note:** Version bump only for package @nextgis/react-ngw-leaflet
+
+
+
+
+
 ## [1.13.4](https://github.com/nextgis/nextgis_frontend/compare/v1.13.3...v1.13.4) (2022-05-31)
 
 **Note:** Version bump only for package @nextgis/react-ngw-leaflet
