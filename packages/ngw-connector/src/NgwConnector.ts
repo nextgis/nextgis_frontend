@@ -405,7 +405,7 @@ export class NgwConnector {
    */
   getResource(
     resource: ResourceDefinition,
-    requestOptions?: Pick<RequestOptions, 'cache'>,
+    requestOptions?: RequestOptions,
   ): CancelablePromise<ResourceItem | undefined> {
     return this.resources.getOne(resource, requestOptions);
   }
@@ -415,7 +415,7 @@ export class NgwConnector {
    */
   getResourceOrFail(
     resource: ResourceDefinition,
-    requestOptions?: Pick<RequestOptions, 'cache' | 'signal'>,
+    requestOptions?: RequestOptions,
   ): CancelablePromise<ResourceItem> {
     return this.resources.getOneOrFail(resource, requestOptions);
   }
@@ -450,7 +450,7 @@ export class NgwConnector {
    */
   getResourceId(
     resource: ResourceDefinition,
-    requestOptions?: Pick<RequestOptions, 'cache'>,
+    requestOptions?: RequestOptions,
   ): CancelablePromise<number | undefined> {
     return this.resources.getId(resource, requestOptions);
   }
@@ -460,7 +460,7 @@ export class NgwConnector {
    */
   getResourceIdOrFail(
     resource: ResourceDefinition,
-    requestOptions?: Pick<RequestOptions, 'cache'>,
+    requestOptions?: RequestOptions,
   ): CancelablePromise<number> {
     return this.resources.getIdOrFail(resource, requestOptions);
   }
@@ -470,7 +470,7 @@ export class NgwConnector {
    */
   getResourcesBy(
     resource: DeepPartial<Resource>,
-    requestOptions?: Pick<RequestOptions, 'cache'>,
+    requestOptions?: RequestOptions,
   ): CancelablePromise<ResourceItem[]> {
     return this.resources.getMany(resource, requestOptions);
   }
@@ -480,7 +480,7 @@ export class NgwConnector {
    */
   getResourceParent(
     resource: ResourceDefinition,
-    requestOptions?: Pick<RequestOptions, 'cache'>,
+    requestOptions?: RequestOptions,
   ): CancelablePromise<ResourceItem | undefined> {
     return this.resources.getParent(resource, requestOptions);
   }
