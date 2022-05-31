@@ -55,6 +55,7 @@ export class NgwConnector {
   resources!: ResourcesControl;
 
   private routeStr = '/api/component/pyramid/route';
+  private activeRequests: CancelablePromise[] = [];
 
   constructor(public options: NgwConnectorOptions) {
     const exist = findConnector(options);
@@ -206,6 +207,18 @@ export class NgwConnector {
         return Buffer.from(str).toString('base64');
       }
     }
+  }
+
+  /** Stop all api requests */
+  abort() {
+    for (const req of this.activeRequests) {
+      req.cancel();
+    }
+    this.activeRequests = [];
+  }
+
+  getActiveApiRequests() {
+    return [...this.activeRequests];
   }
 
   /**
@@ -520,6 +533,7 @@ export class NgwConnector {
     options: RequestOptions,
   ): CancelablePromise<any> {
     options.responseType = options.responseType || 'json';
+
     const request = new CancelablePromise((resolve, reject, onCancel) => {
       if (this.user) {
         options = options || {};
@@ -530,20 +544,26 @@ export class NgwConnector {
         };
       }
       loadData(url, resolve, options, reject, onCancel);
-    }).catch((httpError) => {
-      if (httpError instanceof CancelablePromise.CancelError) {
-        // not need to handle cancel error because onCancel method is used
-      } else {
-        // @ts-ignore
-        if (__DEV__) {
-          console.warn('DEV WARN', httpError);
+    })
+      .then((resp) => {
+        this._cleanActiveRequests(request);
+        return resp;
+      })
+      .catch((httpError) => {
+        this._cleanActiveRequests(request);
+        if (httpError instanceof CancelablePromise.CancelError) {
+          // not need to handle cancel error because onCancel method is used
+        } else {
+          // @ts-ignore
+          if (__DEV__) {
+            console.warn('DEV WARN', httpError);
+          }
+          const er = this._handleHttpError(httpError);
+          if (er) {
+            throw er;
+          }
         }
-        const er = this._handleHttpError(httpError);
-        if (er) {
-          throw er;
-        }
-      }
-    });
+      });
     if (
       options.signal &&
       typeof options.signal.addEventListener === 'function'
@@ -552,7 +572,15 @@ export class NgwConnector {
         request.cancel();
       });
     }
+    this.activeRequests.push(request);
     return request;
+  }
+
+  private _cleanActiveRequests(request: CancelablePromise) {
+    const activeRequestIndex = this.activeRequests.indexOf(request);
+    if (activeRequestIndex !== -1) {
+      this.activeRequests.splice(activeRequestIndex, 1);
+    }
   }
 
   private _handleHttpError(er: Error) {
