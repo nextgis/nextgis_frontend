@@ -181,7 +181,7 @@
             {
               "kind": "Reference",
               "text": "MapContainerProps",
-              "canonicalReference": "@nextgis/react-ngw-map!MapContainerProps:interface"
+              "canonicalReference": "!unknown"
             },
             {
               "kind": "Content",
@@ -194,7 +194,7 @@
             {
               "kind": "Reference",
               "text": "MapContainerProps",
-              "canonicalReference": "@nextgis/react-ngw-map!MapContainerProps:interface"
+              "canonicalReference": "!unknown"
             },
             {
               "kind": "Content",

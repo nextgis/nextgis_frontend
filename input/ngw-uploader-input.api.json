@@ -181,7 +181,7 @@
             {
               "kind": "Reference",
               "text": "NgwUploader",
-              "canonicalReference": "!unknown"
+              "canonicalReference": "@nextgis/ngw-uploader!~NgwUploader:class"
             },
             {
               "kind": "Content",
@@ -377,7 +377,7 @@
             {
               "kind": "Reference",
               "text": "NgwUploadOptions",
-              "canonicalReference": "!unknown"
+              "canonicalReference": "@nextgis/ngw-uploader!NgwUploadOptions:interface"
             },
             {
               "kind": "Content",
