@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Aborting requests</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <script
+      type="text/javascript"
+      src="../../lib/ngw-connector.global.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../../../ngw-kit/lib/ngw-kit.global.js"
+    ></script>
+    <style></style>
+  </head>
+
+  <body>
+    <div>
+      <button id="abort-btn">Make request with immediately abort</button>
+      <button id="global-abort-btn">
+        Make request with immediately global abort
+      </button>
+    </div>
+    <div id="result-block"></div>
+
+    <script>
+      let abortController = null;
+      const abortBtn = document.getElementById('abort-btn');
+      const globalAbortBtn = document.getElementById('global-abort-btn');
+      const resultBlock = document.getElementById('result-block');
+
+      const connector = new NgwConnector({
+        baseUrl: 'https://demo.nextgis.com',
+      });
+
+      const showResourceMetaItems = async (resourceId) => {
+        abortController = new AbortController();
+        resultBlock.innerHTML = `<p>Loading...</p>`;
+        try {
+          const features = await NgwKit.fetchNgwLayerFeatures({
+            connector,
+            resourceId,
+            limit: Infinity,
+            signal: abortController.signal,
+          });
+          resultBlock.innerHTML = `<p>Loaded ${features.length} features</p>`;
+        } catch (er) {
+          if (er.name === 'CancelError') {
+            handleCancelError();
+          }
+        }
+      };
+
+      const abort = () => {
+        if (abortController) {
+          abortController.abort();
+        }
+        abortController = null;
+      };
+
+      const globalAbort = () => {
+        connector.abort();
+      };
+
+      const handleCancelError = () => {
+        const activeRequests = connector.getActiveApiRequests();
+        resultBlock.innerHTML = `<p>Request is canceled (check at the Network tab in the console).</p>
+        <p>There are ${activeRequests.length} active requests.</p>`;
+      };
+
+      const makeRequestAndAbort = () => {
+        showResourceMetaItems(3988);
+        setTimeout(abort, 200);
+      };
+
+      const makeRequestAndGlobalAbort = () => {
+        showResourceMetaItems(3988);
+        setTimeout(globalAbort, 200);
+      };
+
+      abortBtn.addEventListener('click', makeRequestAndAbort);
+      globalAbortBtn.addEventListener('click', makeRequestAndGlobalAbort);
+    </script>
+  </body>
+</html>
