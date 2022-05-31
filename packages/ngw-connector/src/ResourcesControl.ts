@@ -70,7 +70,7 @@ export class ResourcesControl {
 
   getOneOrFail(
     resource: ResourceDefinition,
-    requestOptions?: Pick<RequestOptions, 'cache'>,
+    requestOptions?: RequestOptions,
   ): CancelablePromise<ResourceItem> {
     return this.getOne(resource, requestOptions).then((res) => {
       if (res) {
@@ -92,7 +92,7 @@ export class ResourcesControl {
    */
   getId(
     resource: ResourceDefinition,
-    requestOptions?: Pick<RequestOptions, 'cache'>,
+    requestOptions?: RequestOptions,
   ): CancelablePromise<number | undefined> {
     if (typeof resource === 'number') {
       return CancelablePromise.resolve(resource);
@@ -116,7 +116,7 @@ export class ResourcesControl {
    */
   getIdOrFail(
     resource: ResourceDefinition,
-    requestOptions?: Pick<RequestOptions, 'cache'>,
+    requestOptions?: RequestOptions,
   ): CancelablePromise<number> {
     return this.getId(resource, requestOptions).then((resp) => {
       if (resp === undefined) {
@@ -160,7 +160,7 @@ export class ResourcesControl {
 
   getParent(
     resource: ResourceDefinition,
-    requestOptions?: Pick<RequestOptions, 'cache'>,
+    requestOptions?: RequestOptions,
   ): CancelablePromise<ResourceItem | undefined> {
     return this.getOne(resource, requestOptions).then((child) => {
       if (child) {
