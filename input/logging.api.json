@@ -711,6 +711,93 @@
           "extendsTokenRanges": []
         },
         {
+          "kind": "TypeAlias",
+          "canonicalReference": "@nextgis/logging!EachLog:type",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type EachLog<D = "
+            },
+            {
+              "kind": "Content",
+              "text": "any"
+            },
+            {
+              "kind": "Content",
+              "text": "> = "
+            },
+            {
+              "kind": "Reference",
+              "text": "Partial",
+              "canonicalReference": "!Partial:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "Log",
+              "canonicalReference": "@nextgis/logging!Log:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<D>> | ((message?: string, options?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "LogOptions",
+              "canonicalReference": "@nextgis/logging!LogOptions:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<D>) => "
+            },
+            {
+              "kind": "Reference",
+              "text": "Partial",
+              "canonicalReference": "!Partial:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "Log",
+              "canonicalReference": "@nextgis/logging!Log:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<D>>)"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "EachLog",
+          "typeParameters": [
+            {
+              "typeParameterName": "D",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "typeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 13
+          }
+        },
+        {
           "kind": "Interface",
           "canonicalReference": "@nextgis/logging!Log:interface",
           "docComment": "",
@@ -1352,6 +1439,38 @@
             },
             {
               "kind": "Property",
+              "canonicalReference": "@nextgis/logging!Logging#eachLog:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "eachLog?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "EachLog",
+                  "canonicalReference": "@nextgis/logging!EachLog:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<D>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "eachLog",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false
+            },
+            {
+              "kind": "Property",
               "canonicalReference": "@nextgis/logging!Logging#enabled:member",
               "docComment": "",
               "excerptTokens": [
@@ -1684,12 +1803,64 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface LoggingOptions "
+              "text": "export interface LoggingOptions<D = "
+            },
+            {
+              "kind": "Content",
+              "text": "any"
+            },
+            {
+              "kind": "Content",
+              "text": "> "
             }
           ],
           "releaseTag": "Public",
+          "typeParameters": [
+            {
+              "typeParameterName": "D",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
           "name": "LoggingOptions",
           "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/logging!LoggingOptions#eachLog:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "eachLog?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "EachLog",
+                  "canonicalReference": "@nextgis/logging!EachLog:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<D>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "eachLog",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            },
             {
               "kind": "PropertySignature",
               "canonicalReference": "@nextgis/logging!LoggingOptions#enabled:member",
@@ -2550,7 +2721,7 @@
                 {
                   "kind": "Reference",
                   "text": "NgwConnector",
-                  "canonicalReference": "@nextgis/ngw-connector!~NgwConnector:class"
+                  "canonicalReference": "!unknown"
                 },
                 {
                   "kind": "Content",

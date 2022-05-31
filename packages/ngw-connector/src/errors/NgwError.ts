@@ -14,7 +14,7 @@ export class NgwError extends Error {
   data?: Record<string, any>;
   guru_meditation!: string;
 
-  constructor(er?: NgwError) {
+  constructor(er?: Partial<NgwError>) {
     super();
     Object.assign(this, er);
     Object.setPrototypeOf(this, NgwError.prototype);

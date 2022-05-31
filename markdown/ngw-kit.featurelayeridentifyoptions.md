@@ -7,8 +7,9 @@
 <b>Signature:</b>
 
 ```typescript
-export interface FeatureLayerIdentifyOptions 
+export interface FeatureLayerIdentifyOptions extends NgwRequestOptions 
 ```
+<b>Extends:</b> [NgwRequestOptions](./ngw-kit.ngwrequestoptions.md)
 
 ## Properties
 
