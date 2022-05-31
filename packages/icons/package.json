@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/icons",
-  "version": "1.13.2",
+  "version": "1.13.3",
   "description": "Svg icon pack",
   "main": "lib/icons.global.prod.js",
   "module": "lib/icons.esm-bundler.js",
@@ -8,7 +8,7 @@
   "jsdelivr": "lib/icons.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/paint": "^1.13.2"
+    "@nextgis/paint": "^1.13.3"
   },
   "devDependencies": {
     "@nextgis/build-tools": "^1.12.0"
