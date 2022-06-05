@@ -3,6 +3,7 @@ import { isPropertyFilter, featureFilter } from '@nextgis/properties-filter';
 
 import { getImage } from '../utils/imageIcons';
 import { getCentroid } from '../utils/getCentroid';
+import { convertZoomLevel } from '../utils/convertZoomLevel';
 import { makeHtmlFromString } from '../utils/makeHtmlFromString';
 import { convertMapClickEvent } from '../utils/convertMapClickEvent';
 import { typeAliasForFilter, allowedByType } from '../utils/geomType';
@@ -35,9 +36,9 @@ import type {
   VectorLayerAdapter,
   OnLayerSelectType,
   DataLayerFilter,
+  LayerDefinition,
   FilterOptions,
   PopupOptions,
-  LayerDefinition,
 } from '@nextgis/webmap';
 import type { TLayer } from '../MapboxglMapAdapter';
 import type {
@@ -417,10 +418,10 @@ export abstract class VectorAdapter<
     const { filter, ...opt } = layerOpt;
     const { minZoom, maxZoom } = this.options;
     if (minZoom) {
-      opt.minzoom = minZoom - 1;
+      opt.minzoom = convertZoomLevel(minZoom);
     }
     if (maxZoom) {
-      opt.maxzoom = maxZoom - 1;
+      opt.maxzoom = convertZoomLevel(maxZoom);
     }
     const map = this.map;
     if (map) {

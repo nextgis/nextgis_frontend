@@ -1,8 +1,9 @@
 import { MainLayerAdapter, ImageAdapterOptions } from '@nextgis/webmap';
-import { TLayer } from '../MapboxglMapAdapter';
+import { convertZoomLevel } from '../utils/convertZoomLevel';
 import { BaseRasterAdapter } from './BaseRasterAdapter';
 
 import type { Map, RasterSourceSpecification } from 'maplibre-gl';
+import type { TLayer } from '../MapboxglMapAdapter';
 export class ImageAdapter
   extends BaseRasterAdapter<ImageAdapterOptions>
   implements MainLayerAdapter<Map, TLayer, ImageAdapterOptions>
@@ -49,11 +50,11 @@ export class ImageAdapter
           },
           minzoom:
             this.options.minZoom !== undefined
-              ? this.options.minZoom - 1
+              ? convertZoomLevel(this.options.minZoom)
               : undefined,
           maxzoom:
             this.options.maxZoom !== undefined
-              ? this.options.maxZoom - 1
+              ? convertZoomLevel(this.options.maxZoom)
               : undefined,
           source: this._layerId + '_source',
           paint: {},
