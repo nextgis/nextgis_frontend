@@ -154,12 +154,12 @@ export interface MapboxglMapAdapterOptions extends MapOptions<Map_2> {
 
 // Warnings were encountered during analysis:
 //
-// src/MapboxglMapAdapter.ts:59:7 - (ae-forgotten-export) The symbol "TileAdapter" needs to be exported by the entry point index.d.ts
-// src/MapboxglMapAdapter.ts:60:7 - (ae-forgotten-export) The symbol "WmsAdapter" needs to be exported by the entry point index.d.ts
-// src/MapboxglMapAdapter.ts:61:7 - (ae-forgotten-export) The symbol "MvtAdapter" needs to be exported by the entry point index.d.ts
-// src/MapboxglMapAdapter.ts:62:7 - (ae-forgotten-export) The symbol "OsmAdapter" needs to be exported by the entry point index.d.ts
-// src/MapboxglMapAdapter.ts:63:7 - (ae-forgotten-export) The symbol "GeoJsonAdapter" needs to be exported by the entry point index.d.ts
-// src/MapboxglMapAdapter.ts:321:15 - (ae-forgotten-export) The symbol "TLayerAdapter" needs to be exported by the entry point index.d.ts
+// src/MapboxglMapAdapter.ts:60:7 - (ae-forgotten-export) The symbol "TileAdapter" needs to be exported by the entry point index.d.ts
+// src/MapboxglMapAdapter.ts:61:7 - (ae-forgotten-export) The symbol "WmsAdapter" needs to be exported by the entry point index.d.ts
+// src/MapboxglMapAdapter.ts:62:7 - (ae-forgotten-export) The symbol "MvtAdapter" needs to be exported by the entry point index.d.ts
+// src/MapboxglMapAdapter.ts:63:7 - (ae-forgotten-export) The symbol "OsmAdapter" needs to be exported by the entry point index.d.ts
+// src/MapboxglMapAdapter.ts:64:7 - (ae-forgotten-export) The symbol "GeoJsonAdapter" needs to be exported by the entry point index.d.ts
+// src/MapboxglMapAdapter.ts:342:15 - (ae-forgotten-export) The symbol "TLayerAdapter" needs to be exported by the entry point index.d.ts
 
 // (No @packageDocumentation comment for this package)
 

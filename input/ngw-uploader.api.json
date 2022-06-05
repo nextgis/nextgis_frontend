@@ -281,7 +281,7 @@
                 {
                   "kind": "Reference",
                   "text": "GeometryPaint",
-                  "canonicalReference": "@nextgis/paint!GeometryPaint:type"
+                  "canonicalReference": "!unknown"
                 },
                 {
                   "kind": "Content",
@@ -2985,7 +2985,7 @@
                 {
                   "kind": "Reference",
                   "text": "GeometryPaint",
-                  "canonicalReference": "@nextgis/paint!GeometryPaint:type"
+                  "canonicalReference": "!unknown"
                 },
                 {
                   "kind": "Content",
