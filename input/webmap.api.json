@@ -16077,7 +16077,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": ", options: "
+                  "text": ", options?: "
                 },
                 {
                   "kind": "Reference",

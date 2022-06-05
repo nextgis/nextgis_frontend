@@ -901,7 +901,7 @@ export class WebMapLayers<M = any, L = any, E extends WebMapEvents = WebMapEvent
     addLayerFromAsyncAdapter<K extends keyof LayerAdapters, O extends AdapterOptions = AdapterOptions>(adapter: AdapterConstructor, options: O | LayerAdaptersOptions[K], order?: number): Promise<LayerAdapter>;
     // (undocumented)
     addTileJsonLayer(tileJson: TileJson): Promise<MainLayerAdapter<M, any, TileAdapterOptions>>;
-    addTileLayer(url: string, options: Omit<TileAdapterOptions, 'url'>): Promise<MainLayerAdapter<M, L, TileAdapterOptions>>;
+    addTileLayer(url: string, options?: Omit<TileAdapterOptions, 'url'>): Promise<MainLayerAdapter<M, L, TileAdapterOptions>>;
     // Warning: (ae-forgotten-export) The symbol "AddedLayers" needs to be exported by the entry point index.d.ts
     //
     // (undocumented)
