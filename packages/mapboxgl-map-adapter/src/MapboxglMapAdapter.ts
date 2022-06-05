@@ -4,17 +4,19 @@ import { Map } from 'maplibre-gl';
 
 import { debounce } from '@nextgis/utils';
 
+import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 import { WmsAdapter } from './layer-adapters/WmsAdapter';
 import { MvtAdapter } from './layer-adapters/MvtAdapter';
 import { OsmAdapter } from './layer-adapters/OsmAdapter';
 import { TileAdapter } from './layer-adapters/TileAdapter';
-import { GeoJsonAdapter } from './layer-adapters/GeoJsonAdapter';
 import { ZoomControl } from './controls/ZoomControl';
 import { createControl } from './controls/createControl';
 import { CompassControl } from './controls/CompassControl';
 import { AttributionControl } from './controls/AttributionControl';
 import { createButtonControl } from './controls/createButtonControl';
 import { convertMapClickEvent } from './utils/convertMapClickEvent';
+import { arrayToBoundsLike } from './utils/arrayToBoundsLike';
+import { convertZoomLevel } from './utils/convertZoomLevel';
 
 import type { LngLatBoundsArray, LngLatArray } from '@nextgis/utils';
 import type {
@@ -40,8 +42,7 @@ import type {
   StyleSpecification,
   MapOptions as MapboxOptions,
 } from 'maplibre-gl';
-import { Feature } from './layer-adapters/VectorAdapter';
-import { arrayToBoundsLike } from './utils/arrayToBoundsLike';
+import type { Feature } from './layer-adapters/VectorAdapter';
 
 export type TLayer = string[];
 export type UnselectCb = () => void;
@@ -104,32 +105,61 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
     return new Promise((resolve, reject) => {
       if (!this.map) {
         this.options = options;
-        if (options.target) {
-          const style: StyleSpecification | string =
-            typeof options.style === 'string'
-              ? options.style
-              : {
-                  ...{
-                    version: 8,
-                    name: 'Empty style',
-                    sources: {},
-                    layers: [],
-                  },
-                  ...options.style,
-                };
-          const mapOpt: MapboxOptions = {
-            style,
-            container: options.target,
-            attributionControl: false,
-            bounds: options.bounds as LngLatBoundsLike,
-            fitBoundsOptions: {
-              ...options.fitOptions,
-              ...fitBoundsOptions,
-            },
-            transformRequest: (
-              url: string,
-              resourceType?: ResourceTypeEnum,
-            ) => {
+        if (options.target || options.map) {
+          if (options.map) {
+            this.map = options.map;
+          } else {
+            if (!options.target) {
+              throw new Error('Map target container is not set');
+            }
+            const style: StyleSpecification | string =
+              typeof options.style === 'string'
+                ? options.style
+                : {
+                    ...{
+                      version: 8,
+                      name: 'Empty style',
+                      sources: {},
+                      layers: [],
+                    },
+                    ...options.style,
+                  };
+            const mapOpt: MapboxOptions = {
+              style,
+              container: options.target,
+              attributionControl: false,
+              bounds: options.bounds as LngLatBoundsLike,
+              fitBoundsOptions: {
+                ...options.fitOptions,
+                ...fitBoundsOptions,
+              },
+              ...(options.mapAdapterOptions || {}),
+            };
+
+            if (options.center !== undefined) {
+              const center = options.center;
+              mapOpt.center = [center[0], center[1]];
+            }
+            if (options.zoom !== undefined) {
+              mapOpt.zoom = convertZoomLevel(options.zoom);
+            }
+            if (options.maxZoom) {
+              mapOpt.maxZoom = convertZoomLevel(options.maxZoom);
+            }
+            if (options.minZoom) {
+              mapOpt.minZoom = convertZoomLevel(options.minZoom);
+            }
+            this.map = new Map(mapOpt);
+          }
+          if (
+            this.map &&
+            this.map._requestManager &&
+            this.map._requestManager._transformRequestFn !== null
+          ) {
+            console.warn('The maplibre transformRequest has been overwritten');
+          }
+          this.map.setTransformRequest(
+            (url: string, resourceType?: ResourceTypeEnum) => {
               const transformed = this._transformRequest(url, resourceType);
               if (transformed) {
                 return transformed;
@@ -139,22 +169,13 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
                 };
               }
             },
+          );
+          this.map.setTransformRequest = () => {
+            throw new Error(
+              `You can no longer overwrite 'transformRequest' with 'setTransformRequest' method.
+              This ability is used for correct work of '@nextgis/mapboxgl-map-adapter'.`,
+            );
           };
-
-          if (options.center !== undefined) {
-            const center = options.center;
-            mapOpt.center = [center[0], center[1]];
-          }
-          if (options.zoom !== undefined) {
-            mapOpt.zoom = options.zoom - 1;
-          }
-          if (options.maxZoom) {
-            mapOpt.maxZoom = options.maxZoom - 1;
-          }
-          if (options.minZoom) {
-            mapOpt.minZoom = options.minZoom - 1;
-          }
-          this.map = options.map || new Map(mapOpt);
 
           const onMapLoaded = () => {
             this.map.transformRequests = [];
@@ -198,7 +219,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
         center: [c[0], c[1]],
       };
       if (zoom) {
-        options.zoom = zoom - 1;
+        options.zoom = convertZoomLevel(zoom);
       }
       this.map.jumpTo(options);
     } else {
@@ -220,10 +241,10 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
         }
       }
       if (maxZoom !== undefined) {
-        map.setMaxZoom(maxZoom - 1);
+        map.setMaxZoom(convertZoomLevel(maxZoom));
       }
       if (minZoom !== undefined) {
-        map.setMinZoom(minZoom - 1);
+        map.setMinZoom(convertZoomLevel(minZoom));
       }
       if (bounds) {
         this.fitBounds(bounds);
@@ -246,7 +267,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
 
   setZoom(zoom: number): void {
     if (this.map) {
-      this.map.setZoom(zoom - 1);
+      this.map.setZoom(convertZoomLevel(zoom));
     }
   }
 
@@ -278,7 +299,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
         ...fitBoundsOptions,
       };
       if (options.maxZoom) {
-        opt.maxZoom = options.maxZoom - 1;
+        opt.maxZoom = convertZoomLevel(options.maxZoom);
       }
       this.map.fitBounds(arrayToBoundsLike(e), opt);
     }

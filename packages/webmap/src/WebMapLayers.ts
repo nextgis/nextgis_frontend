@@ -485,7 +485,7 @@ export class WebMapLayers<
   /** Shortcut for {@link WebMapLayers.addLayer} to create TileLayer adapter */
   addTileLayer(
     url: string,
-    options: Omit<TileAdapterOptions, 'url'>,
+    options: Omit<TileAdapterOptions, 'url'> = {},
   ): Promise<MainLayerAdapter<M, L, TileAdapterOptions>> {
     return this.addLayer('TILE', { ...options, url }) as Promise<
       MainLayerAdapter<M, L, TileAdapterOptions>
