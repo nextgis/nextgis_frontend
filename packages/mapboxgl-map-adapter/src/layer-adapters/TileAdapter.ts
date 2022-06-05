@@ -1,15 +1,16 @@
+import { convertZoomLevel } from '../utils/convertZoomLevel';
 import { BaseRasterAdapter } from './BaseRasterAdapter';
 
-import type {
-  MainLayerAdapter,
-  TileAdapterOptions,
-  RasterAdapterOptions,
-} from '@nextgis/webmap';
 import type {
   RasterSourceSpecification,
   RasterLayerSpecification,
   LayerSpecification,
 } from 'maplibre-gl';
+import type {
+  MainLayerAdapter,
+  TileAdapterOptions,
+  RasterAdapterOptions,
+} from '@nextgis/webmap';
 
 type Layer = RasterLayerSpecification;
 
@@ -73,10 +74,10 @@ export class TileAdapter<O extends RasterAdapterOptions = TileAdapterOptions>
         source: this._layerId + '_source',
       };
       if (minZoom) {
-        layerOptions.minzoom = minZoom - 1;
+        layerOptions.minzoom = convertZoomLevel(minZoom);
       }
       if (maxZoom) {
-        layerOptions.maxzoom = maxZoom - 1;
+        layerOptions.maxzoom = convertZoomLevel(maxZoom);
       }
       if (options.nativeOptions) {
         Object.assign(options, options.nativeOptions);
