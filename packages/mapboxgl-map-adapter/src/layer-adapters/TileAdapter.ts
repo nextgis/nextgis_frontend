@@ -1,4 +1,5 @@
 import { convertZoomLevel } from '../utils/convertZoomLevel';
+import { setupLayerTransformRequest } from '../utils/setupLayerTransformRequest';
 import { BaseRasterAdapter } from './BaseRasterAdapter';
 
 import type {
@@ -36,18 +37,10 @@ export class TileAdapter<O extends RasterAdapterOptions = TileAdapterOptions>
         tiles.push(options.url);
       }
       if (options.headers) {
-        const transformRequests = this.map.transformRequests;
-        transformRequests.push((url: string) => {
-          let staticUrl = url;
-          staticUrl = staticUrl.replace(/(z=\d+)/, 'z={z}');
-          staticUrl = staticUrl.replace(/(x=\d+)/, 'x={x}');
-          staticUrl = staticUrl.replace(/(y=\d+)/, 'y={y}');
-          if (staticUrl === options.url) {
-            return {
-              url,
-              headers: options.headers,
-            };
-          }
+        setupLayerTransformRequest({
+          map: this.map,
+          url: options.url,
+          headers: options.headers,
         });
       }
 
