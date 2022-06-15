@@ -36,6 +36,7 @@ import type { LayerFeature } from '@nextgis/ngw-connector';
 import type { LngLatBoundsArray } from '@nextgis/utils';
 import { MainLayerAdapter } from '@nextgis/webmap';
 import type { MapClickEvent } from '@nextgis/webmap';
+import type { MvtAdapterOptions } from '@nextgis/webmap';
 import NgwConnector from '@nextgis/ngw-connector';
 import type { NgwDateFormat } from '@nextgis/ngw-connector';
 import type { NgwDateTimeFormat } from '@nextgis/ngw-connector';
@@ -453,7 +454,7 @@ export interface MapSelectNgwLayerDistinctOptions<P extends FeatureProperties = 
 }
 
 // @public (undocumented)
-export function ngwApiToAdapterOptions({ options, webMap, baseUrl, }: GetLayerAdapterOptions): RasterAdapterOptions | ImageAdapterOptions | undefined;
+export function ngwApiToAdapterOptions({ options, webMap, baseUrl, }: GetLayerAdapterOptions): MvtAdapterOptions | RasterAdapterOptions | ImageAdapterOptions | undefined;
 
 // @public (undocumented)
 export interface NgwConfig {

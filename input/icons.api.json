@@ -190,7 +190,7 @@
             {
               "kind": "Reference",
               "text": "IconPaint",
-              "canonicalReference": "!unknown"
+              "canonicalReference": "@nextgis/paint!IconPaint:interface"
             },
             {
               "kind": "Content",
