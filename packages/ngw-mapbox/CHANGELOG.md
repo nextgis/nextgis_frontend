@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.13.7](https://github.com/nextgis/nextgis_frontend/compare/v1.13.6...v1.13.7) (2022-06-15)
+
+
+### Features
+
+* **ngw-mapbox:** add MVT support for addNgwlayer ([21f695e](https://github.com/nextgis/nextgis_frontend/commit/21f695e0f9a150b66a8c492c5bf30d31b1e21afb))
+
+
+
+
+
 ## [1.13.6](https://github.com/nextgis/nextgis_frontend/compare/v1.13.5...v1.13.6) (2022-06-05)
 
 **Note:** Version bump only for package @nextgis/ngw-mapbox
