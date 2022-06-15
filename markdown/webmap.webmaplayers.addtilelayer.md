@@ -9,7 +9,7 @@ Shortcut for [WebMapLayers.addLayer()](./webmap.webmaplayers.addlayer.md) to cre
 <b>Signature:</b>
 
 ```typescript
-addTileLayer(url: string, options: Omit<TileAdapterOptions, 'url'>): Promise<MainLayerAdapter<M, L, TileAdapterOptions>>;
+addTileLayer(url: string, options?: Omit<TileAdapterOptions, 'url'>): Promise<MainLayerAdapter<M, L, TileAdapterOptions>>;
 ```
 
 ## Parameters

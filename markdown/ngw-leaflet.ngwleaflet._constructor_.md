@@ -16,5 +16,5 @@ constructor(options: NgwMapOptions);
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | NgwMapOptions |  |
+|  options | [NgwMapOptions](./ngw-map.ngwmapoptions.md) |  |
 

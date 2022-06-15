@@ -6535,6 +6535,15 @@
             },
             {
               "kind": "Reference",
+              "text": "MvtAdapterOptions",
+              "canonicalReference": "@nextgis/webmap!MvtAdapterOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " | "
+            },
+            {
+              "kind": "Reference",
               "text": "RasterAdapterOptions",
               "canonicalReference": "@nextgis/webmap!RasterAdapterOptions:interface"
             },
@@ -6558,7 +6567,7 @@
           ],
           "returnTypeTokenRange": {
             "startIndex": 3,
-            "endIndex": 7
+            "endIndex": 9
           },
           "releaseTag": "Public",
           "overloadIndex": 1,

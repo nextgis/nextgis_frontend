@@ -14,7 +14,7 @@ static create(options: NgwMapOptions): Promise<NgwLeaflet>;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | NgwMapOptions |  |
+|  options | [NgwMapOptions](./ngw-map.ngwmapoptions.md) |  |
 
 <b>Returns:</b>
 

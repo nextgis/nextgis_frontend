@@ -9,7 +9,7 @@
 ```typescript
 export interface NgwUploadInputOptions extends NgwUploadOptions 
 ```
-<b>Extends:</b> [NgwUploadOptions](./ngw-uploader.ngwuploadoptions.md)
+<b>Extends:</b> NgwUploadOptions
 
 ## Properties
 
