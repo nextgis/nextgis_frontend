@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Use addNgwLayer to add MVT layer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body,
+      #wrapper,
+      #map {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+
+    <script src="../../lib/ngw-mapbox.global.js"></script>
+  </head>
+
+  <body>
+    <div id="map"></div>
+
+    <script>
+      NgwMap.create({
+        target: 'map',
+        baseUrl: 'https://demo.nextgis.com',
+        osm: true,
+        auth: { login: 'test', password: 'test123' },
+      }).then((ngwMap) => {
+        ngwMap.addNgwLayer({
+          resource: 6067,
+          adapter: 'MVT',
+          fit: true,
+          adapterOptions: {
+            type: 'point',
+            visible: true,
+            selectable: true,
+            paint: {
+              color: 'red',
+              radius: 6,
+              fillOpacity: 1,
+              stroke: true,
+              strokeColor: 'white',
+            },
+            selectedPaint: {
+              color: 'blue',
+              radius: 8,
+              fillOpacity: 1,
+              stroke: true,
+              strokeColor: 'white',
+            },
+          },
+        });
+      });
+    </script>
+  </body>
+</html>

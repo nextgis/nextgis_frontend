@@ -1,10 +1,11 @@
 import { updateImageParams } from './utils';
 
 import type {
-  WebMap,
   RasterAdapterOptions,
   ImageAdapterOptions,
   WmsAdapterOptions,
+  MvtAdapterOptions,
+  WebMap,
 } from '@nextgis/webmap';
 import type { NgwLayerOptions, TileNoData } from '../interfaces';
 
@@ -51,6 +52,7 @@ export function ngwApiToAdapterOptions({
   webMap,
   baseUrl,
 }: GetLayerAdapterOptions):
+  | MvtAdapterOptions
   | RasterAdapterOptions
   | ImageAdapterOptions
   | undefined {
@@ -97,6 +99,8 @@ export function ngwApiToAdapterOptions({
       // url = baseUrl + '/api/resource/' + options.resourceId + '/{z}/{x}/{y}.mvt';
       return {
         url,
+        sourceLayer: 'ngw:' + resourceId,
+        featureIdName: '$id',
       };
     }
     if (adapter === 'TERRAIN') {

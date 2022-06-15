@@ -146,6 +146,9 @@ export abstract class VectorAdapter<
 
   async addLayer(options: O): Promise<TLayer> {
     options = this.options = { ...this.options, ...(options || {}) };
+    if (options.featureIdName) {
+      this.featureIdName = options.featureIdName;
+    }
 
     this.layer = [];
     const types = (this._types = options.type ? [options.type] : this._types);
