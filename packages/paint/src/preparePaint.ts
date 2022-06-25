@@ -6,13 +6,13 @@ import { isPaintCallback, isPropertiesPaint } from './typeHelpers';
 import type { Feature } from 'geojson';
 import type {
   Paint,
-  VectorAdapterLayerPaint,
+  PropertyPaint,
   GeometryPaint,
+  PropertiesPaint,
+  GetPaintCallback,
   GetPaintFunction,
   GetCustomPaintOptions,
-  PropertiesPaint,
-  PropertyPaint,
-  GetPaintCallback,
+  VectorAdapterLayerPaint,
 } from './interfaces';
 
 function updatePaintOptionFromCallback(
@@ -34,15 +34,15 @@ function createPropertiesPaint(
 ): GetPaintFunction {
   let mask: VectorAdapterLayerPaint = {};
   const paintsFilters: PropertyPaint[] = [];
-  propertiesPaint.forEach((x) => {
-    if (x) {
-      if (Array.isArray(x)) {
-        paintsFilters.push(x);
+  for (const p of propertiesPaint) {
+    if (p) {
+      if (Array.isArray(p)) {
+        paintsFilters.push(p);
       } else {
-        mask = x as VectorAdapterLayerPaint;
+        mask = p as VectorAdapterLayerPaint;
       }
     }
-  });
+  }
 
   return (feature: Feature) => {
     const paint = paintsFilters.find((x) => featureFilter(feature, x[0]));
@@ -92,13 +92,15 @@ export function preparePaint(
   } else {
     const expressionCallback = createExpressionCallback(paint);
     if (expressionCallback) {
-      return (feature: Feature) => {
+      const expressionPaintCb = (feature: Feature) => {
         return preparePaint(
           expressionCallback(feature),
           defaultPaint,
           getPaintFunctions,
         ) as VectorAdapterLayerPaint;
       };
+      expressionPaintCb.paint = paint;
+      return expressionPaintCb;
     }
 
     newPaint = { ...newPaint, ...paint };

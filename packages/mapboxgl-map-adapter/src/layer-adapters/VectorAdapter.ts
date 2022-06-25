@@ -1,4 +1,4 @@
-import { isPaint, isIcon, PathPaint } from '@nextgis/paint';
+import { isPaint, isIcon, PathPaint, isPaintCallback } from '@nextgis/paint';
 import { isPropertyFilter, featureFilter } from '@nextgis/properties-filter';
 
 import { getImage } from '../utils/imageIcons';
@@ -223,20 +223,22 @@ export abstract class VectorAdapter<
   }
 
   unselect(): void {
-    this._selectProperties = undefined;
-    this._updateFilter();
-    this.selected = false;
-    const { onSelect, onLayerSelect } = this.options;
-    const onSelect_ = onSelect || onLayerSelect;
-    if (onSelect_) {
-      onSelect_({
-        layer: this,
-        features: undefined,
-        type: 'api',
-        ...createFeaturePositionOptions([]),
-      });
+    if (this.options.selectable) {
+      this._selectProperties = undefined;
+      this._updateFilter();
+      this.selected = false;
+      const { onSelect, onLayerSelect } = this.options;
+      const onSelect_ = onSelect || onLayerSelect;
+      if (onSelect_) {
+        onSelect_({
+          layer: this,
+          features: undefined,
+          type: 'api',
+          ...createFeaturePositionOptions([]),
+        });
+      }
+      this._removeAllPopup();
     }
-    this._removeAllPopup();
   }
 
   beforeRemove(): void {
@@ -523,8 +525,7 @@ export abstract class VectorAdapter<
           let p: keyof typeof pathPaint;
           for (p in pathPaint) {
             // Special case for strokeColor
-            const polyStroke =
-              type === 'polygon' && (p === 'color' || p === 'strokeColor');
+            const polyStroke = type === 'polygon' && p === 'strokeColor';
             if (polyStroke && pathPaint.stroke) {
               mapboxPaint['fill-outline-color'] = pathPaint[p];
             }
@@ -559,6 +560,8 @@ export abstract class VectorAdapter<
         };
         return mapboxPaint;
       }
+    } else if (isPaintCallback(paint) && paint.paint) {
+      return this._createPaintForType(paint.paint, type);
     }
   }
 
@@ -631,7 +634,7 @@ export abstract class VectorAdapter<
   protected _updatePropertiesFilter(): void {
     const layers = this.layer;
     if (layers) {
-      this._types.forEach((t) => {
+      for (const t of this._types) {
         const geomType = typeAliasForFilter[t];
         if (geomType) {
           const geomFilter = ['==', '$type', geomType];
@@ -688,7 +691,7 @@ export abstract class VectorAdapter<
             this.map.setFilter(layerName, filters_);
           }
         }
-      });
+      }
     }
   }
 

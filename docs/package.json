@@ -7,7 +7,7 @@
     "docker": "docmypkg -r registry.nextgis.com -n code-api-nextgis -l -d ./docker"
   },
   "devDependencies": {
-    "typedoc": "^0.22.15",
+    "typedoc": "^0.22.18",
     "docmypkg": "^0.0.1"
   },
   "license": "MIT",

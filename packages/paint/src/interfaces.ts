@@ -91,6 +91,7 @@ export type VectorAdapterLayerPaint =
 export interface GetPaintCallback<F extends Feature = Feature> {
   (feature: F): VectorAdapterLayerPaint;
   type?: PaintType;
+  paint?: CirclePaint | PathPaint | PinPaint;
 }
 
 export type Paint<
