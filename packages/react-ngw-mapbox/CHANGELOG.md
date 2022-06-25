@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.13.8](https://github.com/nextgis/nextgis_frontend/compare/v1.13.7...v1.13.8) (2022-06-25)
+
+**Note:** Version bump only for package @nextgis/react-ngw-mapbox
+
+
+
+
+
 ## [1.13.7](https://github.com/nextgis/nextgis_frontend/compare/v1.13.6...v1.13.7) (2022-06-15)
 
 **Note:** Version bump only for package @nextgis/react-ngw-mapbox
