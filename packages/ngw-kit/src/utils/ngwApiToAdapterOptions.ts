@@ -95,7 +95,7 @@ export function ngwApiToAdapterOptions({
         'resource=' +
         resourceId +
         '&simplification=' +
-        (options.simplification || 0);
+        (options.simplification ?? 8);
       // url = baseUrl + '/api/resource/' + options.resourceId + '/{z}/{x}/{y}.mvt';
       return {
         url,

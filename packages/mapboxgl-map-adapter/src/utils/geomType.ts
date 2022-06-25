@@ -15,7 +15,9 @@ export const allowedByType: {
   [key in VectorAdapterLayerType]: ([string, string] | string)[];
 } = {
   point: [
+    ['color', 'color'],
     ['fillColor', 'color'],
+    ['opacity', 'opacity'],
     ['fillOpacity', 'opacity'],
     ['strokeColor', 'stroke-color'],
     ['strokeOpacity', 'stroke-opacity'],
@@ -23,13 +25,16 @@ export const allowedByType: {
     'radius',
   ],
   line: [
+    ['color', 'color'],
     ['strokeColor', 'color'],
+    ['opacity', 'opacity'],
     ['strokeOpacity', 'opacity'],
     ['weight', 'width'],
   ],
   polygon: [
     ['color', 'color'],
     ['fillColor', 'color'],
+    ['opacity', 'opacity'],
     ['fillOpacity', 'opacity'],
   ],
 };
