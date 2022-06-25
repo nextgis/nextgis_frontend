@@ -61,7 +61,7 @@ export async function createRasterAdapter({
         if (opt) {
           const layerAdapterOptions: ImageAdapterOptions = {
             ...opt,
-            setViewDelay: layerOptions.adapterOptions?.setViewDelay,
+            ...layerOptions.adapterOptions,
             params: { resource: resourceId },
             // @deprecated
             layers: String(resourceId),
@@ -95,11 +95,17 @@ export async function createRasterAdapter({
         return super.addLayer({ ...this.options, ...addOptions });
       }
 
-      async getIdentificationIds() {
-        const id = this.item && this.item.resource.parent.id;
-        if (defined(id)) {
-          return [id];
+      async getIdentificationIds(): Promise<number[]> {
+        if (this.item) {
+          if (adapter === 'MVT') {
+            return [this.item.resource.id];
+          }
+          const id = this.item.resource.parent.id;
+          if (defined(id)) {
+            return [id];
+          }
         }
+        return [];
       }
       // beforeRemove() {
 

@@ -649,7 +649,7 @@ export class NgwMap<
       }
       return 1;
     });
-    layers.forEach((l) => {
+    for (const l of layers) {
       const layer = l.layer;
       const identFunc =
         typeof layer.getIdentificationIds === 'function'
@@ -658,7 +658,7 @@ export class NgwMap<
       if (identFunc && layer.options.selectable && this.isLayerVisible(layer)) {
         promises.push(identFunc.call(layer));
       }
-    });
+    }
     const getIdsPromise = Promise.all(promises);
     const getIds = await getIdsPromise;
     const ids: number[] = [];
