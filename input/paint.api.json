@@ -944,6 +944,51 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/paint!GetPaintCallback#paint:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "paint?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CirclePaint",
+                  "canonicalReference": "@nextgis/paint!CirclePaint:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "PathPaint",
+                  "canonicalReference": "@nextgis/paint!PathPaint:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "PinPaint",
+                  "canonicalReference": "@nextgis/paint!PinPaint:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "paint",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 6
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@nextgis/paint!GetPaintCallback#type:member",
               "docComment": "",
               "excerptTokens": [

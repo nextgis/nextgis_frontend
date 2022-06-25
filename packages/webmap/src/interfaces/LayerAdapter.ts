@@ -157,6 +157,9 @@ export interface AdapterOptions<
   srs?: number;
 
   onAdded?: (layer: LayerAdapter) => void;
+
+  /** Type for geometries painting, for each layer may be only one of: `point`, `polygon` or `line`. */
+  type?: VectorAdapterLayerType;
 }
 
 export interface MvtAdapterOptions<F extends Feature = Feature>
@@ -230,8 +233,6 @@ export interface VectorAdapterOptions<
   N = Record<string, any>,
   P = F['properties'],
 > extends _VectorAdapterOptionsToExtend<P, A, N> {
-  /** Type for geometries painting, for each layer may be only one of: `point`, `polygon` or `line`. */
-  type?: VectorAdapterLayerType;
   /**
    * Determine the appearance of the vector data geometries.
    *

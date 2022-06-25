@@ -67,6 +67,8 @@ export interface GetPaintCallback<F extends Feature = Feature> {
     // (undocumented)
     (feature: F): VectorAdapterLayerPaint;
     // (undocumented)
+    paint?: CirclePaint | PathPaint | PinPaint;
+    // (undocumented)
     type?: PaintType;
 }
 

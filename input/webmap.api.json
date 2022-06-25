@@ -846,6 +846,33 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/webmap!AdapterOptions#type:member",
+              "docComment": "/**\n * Type for geometries painting, for each layer may be only one of: `point`, `polygon` or `line`.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "type?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "VectorAdapterLayerType",
+                  "canonicalReference": "@nextgis/webmap!VectorAdapterLayerType:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "type",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@nextgis/webmap!AdapterOptions#visibility:member",
               "docComment": "/**\n * Show layer on the map immediately after adding. Such layers are always under others. Only one base layer can be displayed on the map at a time.\n *\n * @remarks\n *\n * TODO: replace by show\n *\n * @defaultValue\n *\n * true\n */\n",
               "excerptTokens": [
@@ -11941,33 +11968,6 @@
               "isOptional": true,
               "releaseTag": "Public",
               "name": "source",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@nextgis/webmap!VectorAdapterOptions#type:member",
-              "docComment": "/**\n * Type for geometries painting, for each layer may be only one of: `point`, `polygon` or `line`.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "type?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "VectorAdapterLayerType",
-                  "canonicalReference": "@nextgis/webmap!VectorAdapterLayerType:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "type",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2

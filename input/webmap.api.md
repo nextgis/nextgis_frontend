@@ -58,6 +58,7 @@ export interface AdapterOptions<ANYPROPS extends Record<string, any> = Record<st
     ratio?: number;
     setViewDelay?: number;
     srs?: number;
+    type?: VectorAdapterLayerType;
     visibility?: boolean;
     waitFullLoad?: boolean;
 }
@@ -774,7 +775,6 @@ export interface VectorAdapterOptions<F extends Feature = Feature, L = any, A = 
     selectOnHover?: boolean;
     // (undocumented)
     source?: unknown;
-    type?: VectorAdapterLayerType;
     unselectOnClick?: boolean;
     unselectOnSecondClick?: boolean;
 }

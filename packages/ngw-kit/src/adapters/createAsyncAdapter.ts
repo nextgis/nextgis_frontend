@@ -5,10 +5,11 @@ import NgwConnector, {
 import { WebMap } from '@nextgis/webmap';
 import { Type, applyMixins } from '@nextgis/utils';
 
+import { vectorLayerGeomToPaintTypeAlias } from '../utils/utils';
+import { NgwResource } from '../NgwResource';
 import { createGeoJsonAdapter } from './createGeoJsonAdapter';
 import { createRasterAdapter } from './createRasterAdapter';
 import { createWebMapAdapter } from './createNgwWebmapAdapter';
-import { NgwResource } from '../NgwResource';
 import { resourceIdFromLayerOptions } from '../utils/resourceIdFromLayerOptions';
 import { createBasemapLayerAdapter } from './createBasemapLayerAdapter';
 
@@ -96,6 +97,14 @@ export async function createAsyncAdapter(
         if (cls === 'webmap') {
           adapter = createWebMapAdapter(adapterOptions);
         } else if (cls === 'vector_layer') {
+          const type =
+            item.vector_layer &&
+            vectorLayerGeomToPaintTypeAlias[item.vector_layer.geometry_type];
+          const adapterOptions_ =
+            adapterOptions.layerOptions.adapterOptions || {};
+          adapterOptions_.type = adapterOptions_.type || type;
+          adapterOptions.layerOptions.adapterOptions = adapterOptions_;
+          options.adapterOptions = adapterOptions;
           if (adapterType !== undefined && adapterType !== 'GEOJSON') {
             if (adapterType === 'MVT') {
               adapter = createRasterAdapter(adapterOptions);
