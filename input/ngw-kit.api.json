@@ -5295,7 +5295,7 @@
                 {
                   "kind": "Reference",
                   "text": "PropertiesFilter",
-                  "canonicalReference": "@nextgis/properties-filter!PropertiesFilter:type"
+                  "canonicalReference": "!unknown"
                 },
                 {
                   "kind": "Content",
