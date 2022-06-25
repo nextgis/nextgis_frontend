@@ -38,7 +38,6 @@ export interface VectorAdapterOptions<F extends Feature = Feature, L = any, A = 
 |  [selectedPaint?](./webmap.vectoradapteroptions.selectedpaint.md) | [Paint](./paint.paint.md)<!-- -->&lt;F&gt; | <i>(Optional)</i> The paint that applies to the features after it becomes selected. |
 |  [selectOnHover?](./webmap.vectoradapteroptions.selectonhover.md) | boolean | <i>(Optional)</i> Make the feature selected while mouseover. |
 |  [source?](./webmap.vectoradapteroptions.source.md) | unknown | <i>(Optional)</i> |
-|  [type?](./webmap.vectoradapteroptions.type.md) | [VectorAdapterLayerType](./webmap.vectoradapterlayertype.md) | <i>(Optional)</i> Type for geometries painting, for each layer may be only one of: <code>point</code>, <code>polygon</code> or <code>line</code>. |
 |  [unselectOnClick?](./webmap.vectoradapteroptions.unselectonclick.md) | boolean | <i>(Optional)</i> If false, the selection will be reset when the user clicks the map. |
 |  [unselectOnSecondClick?](./webmap.vectoradapteroptions.unselectonsecondclick.md) | boolean | <i>(Optional)</i> Deselects layer feature by second click. |
 

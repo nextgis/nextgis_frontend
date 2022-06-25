@@ -36,6 +36,7 @@ export interface AdapterOptions<ANYPROPS extends Record<string, any> = Record<st
 |  [ratio?](./webmap.adapteroptions.ratio.md) | number | <i>(Optional)</i> |
 |  [setViewDelay?](./webmap.adapteroptions.setviewdelay.md) | number | <i>(Optional)</i> Experimental option to set the map loading delay when changing position |
 |  [srs?](./webmap.adapteroptions.srs.md) | number | <i>(Optional)</i> Experimental only for Ol yet |
+|  [type?](./webmap.adapteroptions.type.md) | [VectorAdapterLayerType](./webmap.vectoradapterlayertype.md) | <i>(Optional)</i> Type for geometries painting, for each layer may be only one of: <code>point</code>, <code>polygon</code> or <code>line</code>. |
 |  [visibility?](./webmap.adapteroptions.visibility.md) | boolean | <i>(Optional)</i> Show layer on the map immediately after adding. Such layers are always under others. Only one base layer can be displayed on the map at a time. |
 |  [waitFullLoad?](./webmap.adapteroptions.waitfullload.md) | boolean | <i>(Optional)</i> Wait until the layer data is fully loaded before allowing added to the map. |
 

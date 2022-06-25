@@ -14,5 +14,6 @@ export interface GetPaintCallback<F extends Feature = Feature>
 
 |  Property | Type | Description |
 |  --- | --- | --- |
+|  [paint?](./paint.getpaintcallback.paint.md) | [CirclePaint](./paint.circlepaint.md) \| [PathPaint](./paint.pathpaint.md) \| [PinPaint](./paint.pinpaint.md) | <i>(Optional)</i> |
 |  [type?](./paint.getpaintcallback.type.md) | [PaintType](./paint.painttype.md) | <i>(Optional)</i> |
 

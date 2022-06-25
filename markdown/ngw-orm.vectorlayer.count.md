@@ -17,7 +17,7 @@ static count<T extends VectorLayer>(this: ObjectType<T>, optionsOrConditions?: F
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  this | ObjectType&lt;T&gt; |  |
-|  optionsOrConditions | FindManyOptions&lt;T&gt; \| [PropertiesFilter](./properties-filter.propertiesfilter.md)<!-- -->&lt;T&gt; |  |
+|  optionsOrConditions | FindManyOptions&lt;T&gt; \| PropertiesFilter&lt;T&gt; |  |
 
 <b>Returns:</b>
 
