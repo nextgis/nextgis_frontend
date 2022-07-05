@@ -50,7 +50,6 @@ export class ImageLayer extends Layer {
     opacity: 1,
     isBack: false,
     minZoom: 0,
-    maxZoom: 18,
     pane: 'tilePane',
     headers: null,
     viewPortBuffer: 0,

@@ -11,5 +11,3 @@ class WmsLayerBase extends TileLayer.WMS {
 }
 
 export const WmsLayer = makeRemote(WmsLayerBase);
-
-// applyMixins(WmsLayer, [RemoteTileLayer]);

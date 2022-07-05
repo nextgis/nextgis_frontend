@@ -426,13 +426,14 @@ export class NgwMap<
   enableSelection(): void {
     if (!this.$$selectFromNgwRaster) {
       this.$$selectFromNgwRaster = (ev: MapClickEvent) => {
-        const count = this.emitter.listenerCount('ngw:select');
+        const count = this._getSelectListenersCount();
         if (count) {
           this._selectFromNgwRaster(ev);
         }
       };
       this.$$selectFromNgwVector = (ev: OnLayerMouseOptions) => {
-        if (this.emitter.listenerCount('ngw:select')) {
+        const count = this._getSelectListenersCount();
+        if (count) {
           this._selectFromNgwVector(ev);
         }
       };
@@ -444,8 +445,11 @@ export class NgwMap<
   disableSelection(): void {
     if (this.$$selectFromNgwRaster) {
       this.emitter.removeListener('click', this.$$selectFromNgwRaster);
-      this.emitter.removeListener('click', this._selectFromNgwVector);
       this.$$selectFromNgwRaster = undefined;
+    }
+    if (this.$$selectFromNgwVector) {
+      this.emitter.removeListener('layer:click', this.$$selectFromNgwVector);
+
       this.$$selectFromNgwVector = undefined;
     }
   }
@@ -602,7 +606,11 @@ export class NgwMap<
     ev: OnLayerMouseOptions,
   ): FeatureLayersIdentify | undefined {
     const layer: ResourceAdapter = ev.layer as ResourceAdapter;
-    // item property means layer is NgwResource
+    const selectable = layer.options.selectable && this.isLayerVisible(layer);
+    if (!selectable) {
+      return undefined;
+    }
+    // Item property means layer is NgwResource
     const id = layer.item && layer.item.resource.id;
     const feature = ev.feature;
 
@@ -662,11 +670,11 @@ export class NgwMap<
     const getIdsPromise = Promise.all(promises);
     const getIds = await getIdsPromise;
     const ids: number[] = [];
-    getIds.forEach((x) => {
+    for (const x of getIds) {
       if (x) {
-        x.forEach((y) => ids.push(y));
+        ids.push(...x);
       }
-    });
+    }
 
     if (!ids.length) {
       this._emitStatusEvent('ngw:select', null);
@@ -719,6 +727,10 @@ export class NgwMap<
       ...identify,
       getIdentifyItems: getIdentifyItems_,
     };
+  }
+
+  private _getSelectListenersCount() {
+    return this.emitter.listenerCount('ngw:select');
   }
 
   private async _whiteLabel() {

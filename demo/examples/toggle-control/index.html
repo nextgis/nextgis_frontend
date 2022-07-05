@@ -27,7 +27,6 @@
       }
     </style>
 
-
     <script src="../../../packages/ngw-leaflet/lib/ngw-leaflet.global.js"></script>
   </head>
 
@@ -42,7 +41,6 @@
       }).then((ngwMap) => {
         const toggleControl = ngwMap.createToggleControl({
           getStatus: () => {
-            console.log(1);
             return ngwMap.isLayerVisible('webmap');
           },
 
@@ -54,9 +52,7 @@
             on: 'ON',
             off: 'OFF',
           },
-
           // html: 'W'
-
           // html: {
           //   on: '<span style="color:green;">ON</span>',
           //   off: '<span style="color: red">OFF</span>'
@@ -66,7 +62,6 @@
             on: 'Turn webmap off',
             off: 'Turn webmap on',
           },
-
           // title: 'Toggle webmap visibility'
 
           addClassOn: 'toggle-button--on',

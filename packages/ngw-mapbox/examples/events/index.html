@@ -58,9 +58,7 @@
 
         const eventControl = ngwMap.createControl(
           {
-            onAdd: () => {
-              return log;
-            },
+            onAdd: () => log,
           },
           { bar: true },
         );
@@ -77,9 +75,7 @@
                   Math.round(Math.random() * 90 * plusOrMinus),
                 ],
               },
-              paint: (feature) => {
-                return { color: randomRgb() };
-              },
+              paint: (feature) => ({ color: randomRgb() }),
             });
           },
         });
@@ -89,9 +85,7 @@
           title: 'Remove all layer',
           onClick: () => {
             // Use callback to disallow remove base layer
-            ngwMap.removeLayers((x) => {
-              return x !== 'baselayer';
-            });
+            ngwMap.removeLayers((x) => x !== 'baselayer');
           },
         });
 
@@ -163,7 +157,7 @@
 
       const timeout = {};
       function addListener(event, el) {
-        ngwMap.emitter.on(event, function (data) {
+        ngwMap.emitter.on(event, (data) => {
           el.classList.add('ok');
           el.classList.add('action');
           const timeoutId = timeout[event];
@@ -178,9 +172,9 @@
       }
 
       function randomRgb() {
-        const o = Math.round,
-          r = Math.random,
-          s = 255;
+        const o = Math.round;
+        const r = Math.random;
+        const s = 255;
         return 'rgb(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ')';
       }
     </script>

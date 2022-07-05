@@ -41,7 +41,7 @@
         const resourceId = 1733;
 
         // helper layer to control fetching of vector data
-        ngwMap.addNgwLayer({resource: resourceId, adapter: 'IMAGE'});
+        ngwMap.addNgwLayer({ resource: resourceId, adapter: 'IMAGE' });
 
         NgwKit.fetchNgwLayerExtent({
           connector: ngwMap.connector,
@@ -73,9 +73,7 @@
 
         const loadControl = ngwMap.createControl(
           {
-            onAdd: () => {
-              return loadStatusBlock;
-            },
+            onAdd: () => loadStatusBlock,
           },
           { bar: true },
         );
@@ -83,8 +81,8 @@
 
         let loadedCount = 0;
         ngwMap.emitter.on('layer-' + id + ':preupdate', (e) => {
-          loadStatusBlock.innerHTML = 'Loading new data...'
-        })
+          loadStatusBlock.innerHTML = 'Loading new data...';
+        });
         ngwMap.emitter.on('layer-' + id + ':updated', (e) => {
           // Feel free to execute this method each time, the request for count is cached.
           NgwKit.fetchNgwLayerCount({
@@ -96,9 +94,10 @@
               str = 'All layer data loaded';
             } else {
               loadedCount += e.newData.features.length;
-              str = `+${e.newData.features.length} (${
-                ((loadedCount / total) * 100).toFixed(0)
-              }%)`;
+              str = `+${e.newData.features.length} (${(
+                (loadedCount / total) *
+                100
+              ).toFixed(0)}%)`;
             }
             loadStatusBlock.innerHTML = str;
           });

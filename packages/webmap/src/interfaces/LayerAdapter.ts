@@ -160,6 +160,8 @@ export interface AdapterOptions<
 
   /** Type for geometries painting, for each layer may be only one of: `point`, `polygon` or `line`. */
   type?: VectorAdapterLayerType;
+
+  layers?: string;
 }
 
 export interface MvtAdapterOptions<F extends Feature = Feature>
@@ -402,7 +404,6 @@ export interface Model3DOptions extends RasterAdapterOptions {
 }
 
 export interface WmsAdapterOptions extends RasterAdapterOptions {
-  layers?: string;
   format?: 'image/png' | 'image/jpeg' | string;
   version?: string;
   tileSize?: number;
