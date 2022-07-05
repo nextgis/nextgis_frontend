@@ -19,7 +19,6 @@
       }
     </style>
 
-
     <script src="../../../packages/ngw-leaflet/lib/ngw-leaflet.global.js"></script>
   </head>
 
@@ -29,7 +28,6 @@
       NgwMap.create({
         target: 'map',
         qmsId: 448,
-        bounds: [0, -90, 180, 90],
       }).then((ngwMap) => {
         const colors = ['red', 'green', 'blue'];
         const filterInput = document.createElement('select');
@@ -54,6 +52,7 @@
           return value === 'all' ? true : e.feature.properties.color === value;
         };
 
+        // Create select filter control
         function setLayerFilter() {
           if (filterInput.value === 'all') {
             ngwMap.removeLayerFilter('geojson');
@@ -61,23 +60,22 @@
             ngwMap.filterLayer('geojson', filterFunction);
           }
         }
-
         const filterControl = ngwMap.createControl(
           {
-            onAdd: () => {
-              return filterLabel;
-            },
+            onAdd: () => filterLabel,
           },
           { margin: true },
         );
-
         ngwMap.addControl(filterControl, 'top-right');
 
+        // Create random initial features
         const features = [];
         for (let fry = 0; fry < 100; fry++) {
           const color = colors[Math.floor(Math.random() * colors.length)];
           features.push(createFeature(color));
         }
+
+        // Add color button controls for points creation
         for (let c = 0; c < colors.length; c++) {
           const color = colors[c];
           const addColorControl = ngwMap.createButtonControl({
@@ -96,6 +94,7 @@
           ngwMap.addControl(addColorControl, 'top-left');
         }
 
+        // Add geojson with property base paint
         ngwMap.addLayer('GEOJSON', {
           id: 'geojson',
           data: { type: 'FeatureCollection', features: features },

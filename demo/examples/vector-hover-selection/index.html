@@ -30,7 +30,6 @@
 
     <script src="../../../packages/ngw-leaflet/lib/ngw-leaflet.global.js"></script>
 
-
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
@@ -52,7 +51,7 @@
       NgwMap.create({
         baseUrl: 'https://demo.nextgis.com',
         target: 'map',
-        qmsId: 448,
+        osm: true,
         center: [50.0113, 19.9845],
         zoom: 10,
       }).then((ngwMap) => {
@@ -134,26 +133,24 @@
 
         const configControl = ngwMap.createControl(
           {
-            onAdd: () => {
-              return configElement;
-            },
+            onAdd: () => configElement,
           },
           { bar: true },
         );
 
         ngwMap.addControl(configControl, 'top-right');
 
-
         ngwMap.emitter.on('layer:select', (e) => {
           console.log(e);
-        })
-        // helper functions
+        });
 
+        // helper functions
         function startRandomSelection() {
           const selectableLayer = ngwMap.getLayer(config.selectableLayer.value);
           const layers = selectableLayer.getLayers();
           _intervalId = setInterval(() => {
-            const randomLayer = layers[Math.floor(Math.random() * layers.length)];
+            const randomLayer =
+              layers[Math.floor(Math.random() * layers.length)];
             selectLayerFeatureById(selectableLayer, randomLayer.feature.id);
           }, config.interval.value);
         }
@@ -164,7 +161,7 @@
 
         function selectLayerFeatureById(layer, id) {
           const selectableLayer = ngwMap.getLayer(layer);
-          selectableLayer.select((e) =>{
+          selectableLayer.select((e) => {
             return e.feature.id === id;
           });
         }

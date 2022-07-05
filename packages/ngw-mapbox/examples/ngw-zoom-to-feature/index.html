@@ -50,7 +50,6 @@
     <script src="../../lib/ngw-mapbox.global.js"></script>
     <script src="../../../ngw-connector/lib/ngw-connector.global.js"></script>
 
-
     <script src="../../../ngw-kit/lib/ngw-kit.global.js"></script>
   </head>
 
@@ -69,12 +68,13 @@
       const connector = new NgwConnector({
         baseUrl: 'https://demo.nextgis.com',
       });
+
       const ngwMap = new NgwMap({
-        connector: connector,
+        connector,
         target: 'map',
         center: [-89.84, 44.55],
         zoom: 6,
-        qmsId: 448,
+        osm: true,
         resources: [{ resource: keyname, fit: true, adapter: 'TILE' }],
       });
 

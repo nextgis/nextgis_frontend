@@ -41,6 +41,8 @@ export interface AdapterOptions<ANYPROPS extends Record<string, any> = Record<st
     // (undocumented)
     headers?: Record<string, any>;
     id?: string;
+    // (undocumented)
+    layers?: string;
     // @deprecated
     maxScale?: number;
     maxZoom?: number;
@@ -1051,8 +1053,6 @@ export class WebMapMain<M = any, E extends WebMapEvents = WebMapEvents, O extend
 export interface WmsAdapterOptions extends RasterAdapterOptions {
     // (undocumented)
     format?: 'image/png' | 'image/jpeg' | string;
-    // (undocumented)
-    layers?: string;
     // (undocumented)
     tileSize?: number;
     // (undocumented)

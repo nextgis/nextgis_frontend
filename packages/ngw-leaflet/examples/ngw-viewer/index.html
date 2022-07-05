@@ -74,7 +74,7 @@
         osm: true,
       }).then((ngwMap) => {
         const connector = ngwMap.connector;
-        let activePreview = undefined;
+        let cancelActivePreview = undefined;
         updateTreeItems(tree, 0);
 
         function updateTreeItems(treeNode, resourceId) {
@@ -82,9 +82,9 @@
           childBlock.innerHTML = 'loading...';
           connector.getResourceChildren(resourceId).then((childItem) => {
             childBlock.innerHTML = '';
-            childItem.forEach((c) => {
+            for (const c of childItem) {
               childBlock.appendChild(createTreeElement(c));
-            });
+            }
           });
           treeNode.appendChild(childBlock);
         }
@@ -140,8 +140,8 @@
         }
 
         function resourcePreview(item) {
-          if (activePreview) {
-            activePreview();
+          if (cancelActivePreview) {
+            cancelActivePreview();
           }
           const promise = NgwKit.fetchNgwExtent({
             connector,
@@ -158,12 +158,15 @@
             });
           });
 
-          activePreview = () => {
+          cancelActivePreview = () => {
             ngwMap.removeLayer('active-layer');
             promise.cancel();
           };
         }
       });
+
+      // If this example helped you, you can ★star★ our repository on github
+      // https://github.com/nextgis/nextgis_frontend
     </script>
   </body>
 </html>

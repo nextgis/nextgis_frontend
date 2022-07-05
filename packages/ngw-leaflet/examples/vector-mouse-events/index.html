@@ -27,6 +27,7 @@
       #log {
         overflow: scroll;
         width: 400px;
+        font-family: monospace;
       }
 
       #log :nth-child(-n + 3) {
@@ -63,42 +64,42 @@
           adapterOptions: {
             limit: 100,
             onClick: (e) => {
-              log('`click` - from options');
+              log('click - from options');
             },
             onMouseOver: (e) => {
-              log('`mouseover` - from options');
+              log('mouseover - from options');
             },
             onMouseOut: (e) => {
-              log('`mouseout` - from options');
+              log('mouseout - from options');
             },
           },
         });
 
         ngwMap.emitter.on('layer-' + ID + ':click', (ev) => {
-          log('`click` -- from specific layer emitter');
+          log('click -- from specific layer emitter');
         });
 
         ngwMap.emitter.on('layer-' + ID + ':mouseover', (ev) => {
-          log('`mouseover` -- from specific layer emitter');
+          log('mouseover -- from specific layer emitter');
         });
 
         ngwMap.emitter.on('layer-' + ID + ':mouseout', (ev) => {
-          log('`mouseout` -- from specific layer emitter');
+          log('mouseout -- from specific layer emitter');
         });
 
         ngwMap.emitter.on('layer:click', (ev) => {
           if (ev.layer.id === ID) {
-            log('`click` --- from global emitter');
+            log('click --- from global emitter');
           }
         });
         ngwMap.emitter.on('layer:mouseover', (ev) => {
           if (ev.layer.id === ID) {
-            log('`mouseover` --- from global emitter');
+            log('mouseover --- from global emitter');
           }
         });
         ngwMap.emitter.on('layer:mouseout', (ev) => {
           if (ev.layer.id === ID) {
-            log('`mouseout` --- from global emitter');
+            log('mouseout --- from global emitter');
           }
         });
       });

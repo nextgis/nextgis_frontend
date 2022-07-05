@@ -16,7 +16,7 @@ export interface IconOptions {
     // (undocumented)
     rotate?: number;
     // (undocumented)
-    shape?: 'circle' | 'brill' | 'rect' | 'marker' | 'star' | 'asterisk' | 'triangle' | 'plus' | 'minus';
+    shape?: 'rect' | 'star' | 'plus' | 'minus' | 'brill' | 'circle' | 'marker' | 'triangle' | 'asterisk';
     // (undocumented)
     size?: number;
     // (undocumented)

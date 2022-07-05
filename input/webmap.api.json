@@ -499,6 +499,32 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/webmap!AdapterOptions#layers:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "layers?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "layers",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@nextgis/webmap!AdapterOptions#maxScale:member",
               "docComment": "/**\n * TODO: replace by maxZoom\n *\n * @deprecated\n *\n * use maxZoom instead\n */\n",
               "excerptTokens": [
@@ -19983,32 +20009,6 @@
               "isOptional": true,
               "releaseTag": "Public",
               "name": "format",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "@nextgis/webmap!WmsAdapterOptions#layers:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "layers?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "layers",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2

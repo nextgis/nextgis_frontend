@@ -40,13 +40,12 @@
 
         const dataControl = ngwMap.createControl(
           {
-            onAdd: () => {
-              return list;
-            },
+            onAdd: () => list,
           },
           { margin: true },
         );
         ngwMap.addControl(dataControl, 'top-right');
+
         createItem();
 
         function createItem() {
@@ -85,9 +84,7 @@
                 updateInputValue(input);
               }
             } else {
-              ngwMap.clearLayerData('data', (f) => {
-                return f.id === item.id;
-              });
+              ngwMap.clearLayerData('data', (f) => f.id === item.id);
               item.parentNode.removeChild(item);
             }
           };
@@ -110,7 +107,7 @@
       function randomRgb() {
         const o = Math.round;
         const r = Math.random;
-        const  s = 255;
+        const s = 255;
         return 'rgb(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ')';
       }
     </script>

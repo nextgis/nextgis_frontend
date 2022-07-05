@@ -190,7 +190,7 @@
             {
               "kind": "Reference",
               "text": "IconPaint",
-              "canonicalReference": "!unknown"
+              "canonicalReference": "@nextgis/paint!IconPaint:interface"
             },
             {
               "kind": "Content",
@@ -290,7 +290,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "'circle' | 'brill' | 'rect' | 'marker' | 'star' | 'asterisk' | 'triangle' | 'plus' | 'minus'"
+                  "text": "'rect' | 'star' | 'plus' | 'minus' | 'brill' | 'circle' | 'marker' | 'triangle' | 'asterisk'"
                 },
                 {
                   "kind": "Content",

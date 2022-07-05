@@ -22,15 +22,15 @@ const svgPath: { [name: string]: string | GetPathCallback } = {
 
 export interface IconOptions {
   shape?:
-    | 'circle'
-    | 'brill'
     | 'rect'
-    | 'marker'
     | 'star'
-    | 'asterisk'
-    | 'triangle'
     | 'plus'
-    | 'minus';
+    | 'minus'
+    | 'brill'
+    | 'circle'
+    | 'marker'
+    | 'triangle'
+    | 'asterisk';
   color?: string;
   size?: number;
   stroke?: number;
