@@ -73,12 +73,12 @@
       function createTreeBranch(layers) {
         const elem = document.createElement('div');
         elem.className = 'tree-container__item-children';
-        layers.forEach((x) => {
+        for (const x of layers) {
           if (x.item) {
             const item = createTreeItem(x);
             elem.appendChild(item);
           }
-        });
+        }
         return elem;
       }
 
@@ -112,10 +112,9 @@
           elem.appendChild(name);
         }
 
-        if (
-          item.item_type === 'group' ||
-          (item.item_type === 'root' && item.children.length)
-        ) {
+        const itemHasChildren =
+          ['group', 'root'].includes(item.item_type) && item.children.length;
+        if (itemHasChildren) {
           const children = layer.tree.getChildren();
           const treeBranch = createTreeBranch(children.reverse());
           elem.appendChild(treeBranch);
@@ -133,7 +132,9 @@
           ['min', '0'],
           ['max', '1'],
           ['step', '0.1'],
-        ].forEach((x) => slider.setAttribute(...x));
+        ].forEach((x) => {
+          slider.setAttribute(...x);
+        });
         slider.value =
           layer.options.opacity !== undefined ? layer.options.opacity : 1;
 

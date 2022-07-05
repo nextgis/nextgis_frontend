@@ -51,11 +51,8 @@
       }).then((ngwMap) => {
         ngwMap.addControl('CONTROL', 'top-right', {
           control: {
-            onAdd: () => {
-              return createOpacityControlPanel(
-                ngwMap.orderedLayers().reverse(),
-              );
-            },
+            onAdd: () =>
+              createOpacityControlPanel(ngwMap.orderedLayers().reverse()),
           },
           options: { bar: true },
         });
@@ -68,6 +65,7 @@
           }
           return block;
         }
+
         function createLayerOpacitySlider(layer) {
           const wrapper = document.createElement('div');
 
