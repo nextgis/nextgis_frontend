@@ -463,16 +463,33 @@ export abstract class VectorAdapter<
         layers.push([selName, this.options.selectedPaint]);
       }
 
+      const mapboxType = mapboxTypeAlias[type];
       for (const [name, paint] of layers) {
         let _paint: any;
+        let nativePaint: Record<string, any> | null = null;
+        let typePaint = null;
         if (this.options.nativePaint) {
-          _paint =
+          nativePaint =
             typeof this.options.nativePaint === 'boolean'
               ? paint
               : this.options.nativePaint;
+          const opacity = this.options.opacity;
+          if (opacity !== undefined && nativePaint) {
+            const allowedNativePaint = allowedByType[type]
+            const opacityProp = allowedNativePaint.find((x) => x[0] === 'opacity');
+            if (opacityProp) {
+              nativePaint[mapboxType + '-' + opacityProp[1]]
+            }
+            for (const p in nativePaint) {
+              if (p.indexOf('opacity') !== -1) {
+                nativePaint[p] = opacity;
+              }
+            }
+          }
         } else {
-          _paint = await this._createPaintForType(paint, type, name);
+          typePaint = await this._createPaintForType(paint, type, name);
         }
+        _paint = typePaint || nativePaint;
         if (this.map) {
           if ('icon-image' in _paint) {
             // If true, the icon will be visible even if it collides with other previously drawn symbols.
@@ -542,6 +559,7 @@ export abstract class VectorAdapter<
                 const paramName = Array.isArray(allowedType)
                   ? allowedType[1]
                   : allowedType;
+
                 const opacity = this.options.opacity;
                 let prop = pathPaint[p];
                 if (
@@ -550,6 +568,7 @@ export abstract class VectorAdapter<
                 ) {
                   prop = Number(prop) * opacity;
                 }
+
                 mapboxPaint[mapboxType + '-' + paramName] = prop;
               }
             }
