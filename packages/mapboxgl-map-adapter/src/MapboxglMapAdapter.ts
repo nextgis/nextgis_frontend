@@ -52,6 +52,7 @@ const fitBoundsOptions: FitOptions = {
 };
 
 export interface MapboxglMapAdapterOptions extends MapOptions<Map> {
+  /** @deprecated use mapAdapterOptions.style instead */
   style?: Partial<StyleSpecification> | string;
 }
 
@@ -112,6 +113,8 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
             if (!options.target) {
               throw new Error('Map target container is not set');
             }
+            const { style: mapAdapterStyle, ...mapAdapterOptions } =
+              options.mapAdapterOptions || {};
             const style: StyleSpecification | string =
               typeof options.style === 'string'
                 ? options.style
@@ -123,6 +126,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
                       layers: [],
                     },
                     ...options.style,
+                    ...mapAdapterStyle,
                   };
             const mapOpt: MapboxOptions = {
               style,
@@ -133,7 +137,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
                 ...options.fitOptions,
                 ...fitBoundsOptions,
               },
-              ...(options.mapAdapterOptions || {}),
+              ...mapAdapterOptions,
             };
 
             if (options.center !== undefined) {
