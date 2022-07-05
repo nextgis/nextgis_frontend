@@ -52,7 +52,7 @@
             return filterLabel;
           },
         },
-        { margin: true }
+        { margin: true },
       );
 
       ngwMap.addControl(filterControl, 'top-right');
@@ -68,10 +68,8 @@
               color: [
                 'match',
                 ['get', 'AMENITY'],
-                'cafe',
-                'blue',
-                'restaurant',
-                'red',
+                'cafe', 'blue',
+                'restaurant', 'red',
                 'gray', // last item is default value
               ],
               fillOpacity: 0.8,
@@ -91,7 +89,7 @@
             }
             updateSelectOptions();
             setLayerFilter();
-          }
+          };
           ngwMap.zoomToLayer(layer);
           layer.emitter.on('updated', updateFilter);
           updateFilter();

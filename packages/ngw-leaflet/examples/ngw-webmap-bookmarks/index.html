@@ -18,7 +18,9 @@
         height: 100%;
       }
       .bookmarks-panel {
-        background: rgba(255,255,255,.8);
+        background: rgba(255, 255, 255, 0.8);
+        max-height: 80vh;
+        overflow: auto;
       }
       .bookmarks-panel div {
         height: 1.5rem;
@@ -39,36 +41,38 @@
       NgwMap.create({
         baseUrl: 'https://demo.nextgis.com',
         target: 'map',
-        qmsId: 487,
+        osm: true,
       }).then((ngwMap) => {
+        // Create bookmark panel control
         const bookmarksList = document.createElement('div');
         bookmarksList.className = 'bookmarks-panel';
+        const bookmarksControl = ngwMap.createControl(
+          {
+            onAdd: () => bookmarksList,
+          },
+          { bar: true },
+        );
+
+        ngwMap.addControl(bookmarksControl, 'top-right');
+
+        // Method to fill bookmark panel
         const appendBookmarkItem = (bookmark) => {
           const elem = document.createElement('div');
           elem.innerHTML = bookmark.name;
           elem.addEventListener('click', () => {
             bookmark.extent().then((bound) => {
               ngwMap.fitBounds(bound);
-            })
+            });
           });
           bookmarksList.appendChild(elem);
-        }
-        ngwMap.addNgwLayer({ resource: 4046, fit: true }).then((layer) => {
+        };
+
+        // Add Webmap resource with bookmarks
+        ngwMap.addNgwLayer({ resource: 4226, fit: true }).then((layer) => {
           layer.fetchBookmarks().then((bookmarks) => {
             bookmarks.forEach(appendBookmarkItem);
           });
         });
-
-        const bookmarksControl = ngwMap.createControl(
-          {
-            onAdd: () => {
-              return bookmarksList;
-            },
-          },
-          { bar: true },
-        );
-
-        ngwMap.addControl(bookmarksControl, 'top-right');
       });
     </script>
   </body>

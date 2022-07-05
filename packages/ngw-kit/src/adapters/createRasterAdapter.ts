@@ -63,8 +63,7 @@ export async function createRasterAdapter({
             ...opt,
             ...layerOptions.adapterOptions,
             params: { resource: resourceId },
-            // @deprecated
-            layers: String(resourceId),
+            layers: opt.layers || String(resourceId),
             resourceId: resourceId,
           };
           if (
@@ -75,20 +74,6 @@ export async function createRasterAdapter({
               layerOptions.adapterOptions.setViewDelay;
           }
           this.options = { ...this.options, ...layerAdapterOptions };
-          // if (__DEV__) {
-          //   Object.defineProperty(this.options, 'layers', {
-          //     get: () => {
-          //       console.warn('Do not use `layers` in ImageAdapterOptions');
-          //       return String(resourceId);
-          //     },
-          //   });
-          //   Object.defineProperty(this.options, 'resourceId', {
-          //     get: () => {
-          //       console.warn('Do not use `resourceId` in ImageAdapterOptions');
-          //       return resourceId;
-          //     },
-          //   });
-          // }
         }
       }
       addLayer(addOptions: any) {

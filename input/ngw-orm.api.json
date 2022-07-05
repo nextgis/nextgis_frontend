@@ -2387,7 +2387,7 @@
                 {
                   "kind": "Reference",
                   "text": "PropertiesFilter",
-                  "canonicalReference": "!unknown"
+                  "canonicalReference": "@nextgis/properties-filter!PropertiesFilter:type"
                 },
                 {
                   "kind": "Content",
@@ -2493,7 +2493,7 @@
                 {
                   "kind": "Reference",
                   "text": "PropertiesFilter",
-                  "canonicalReference": "!unknown"
+                  "canonicalReference": "@nextgis/properties-filter!PropertiesFilter:type"
                 },
                 {
                   "kind": "Content",

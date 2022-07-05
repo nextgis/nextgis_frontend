@@ -31,7 +31,7 @@
         qmsId: 448,
         resources: [{ resource: 4226, fit: true, selectable: true }],
       });
-      // stop all current identification requests on each click before making new requests
+      // Stop all current identification requests on each click before making new requests
       ngwMap.emitter.on('click', (e) => {
         ngwMap.cancelPromise('select', 'identify');
         ngwMap.removeLayer('geojson');

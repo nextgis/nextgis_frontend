@@ -26,14 +26,15 @@
     <div id="map"></div>
     <script>
       const ngwMap = new NgwMap({
-        baseUrl: "https://demo.nextgis.com",
-        target: "map",
+        baseUrl: 'https://demo.nextgis.com',
+        target: 'map',
         qmsId: 448,
       });
       ngwMap
         .addNgwLayer({
           resource: 4005,
           fit: true,
+          // adapter: 'IMAGE', // IMAGE - default, TILE, GEOJSON and MVT for mapbox
         })
         .then((layer) => {
           // The same as using the `fit` option
