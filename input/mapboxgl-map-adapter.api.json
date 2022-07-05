@@ -1656,7 +1656,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "@nextgis/mapboxgl-map-adapter!MapboxglMapAdapterOptions#style:member",
-              "docComment": "",
+              "docComment": "/**\n * @deprecated\n *\n * use mapAdapterOptions.style instead\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
