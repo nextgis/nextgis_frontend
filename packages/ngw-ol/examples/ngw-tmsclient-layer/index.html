@@ -29,12 +29,12 @@
         osm: true,
         baseUrl: 'https://demo.nextgis.com',
         target: 'map',
-
-      }).then((ngwMap) => {
-        ngwMap.addNgwLayer({
-          resource: 4980,
-          fit: true,
-        });
+        resources: [
+          {
+            resource: 4980,
+            fit: true,
+          },
+        ],
       });
     </script>
   </body>
