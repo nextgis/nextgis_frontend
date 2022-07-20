@@ -1,0 +1,6 @@
+{
+  "name": "NGW TMS Client layer",
+  "description": "Add a tile layer from NGW tms connection layer",
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"],
+  "tags": ["tms", "tile", "tmsclient_layer"]
+}
