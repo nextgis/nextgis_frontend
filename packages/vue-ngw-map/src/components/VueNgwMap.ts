@@ -65,9 +65,10 @@ export class VueNgwMap<M = any> extends Vue {
     if (typeof this.connector === 'function') {
       props.connector = this.connector();
     }
+
     this._ngwMap = new NgwMap({
-      ...this.getMapOptions(),
       ...props,
+      ...this.getMapOptions(),
       target: this.$el as HTMLElement,
     });
     this._ngwMap.onLoad().then(() => {
