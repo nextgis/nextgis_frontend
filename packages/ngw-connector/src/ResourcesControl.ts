@@ -179,6 +179,32 @@ export class ResourcesControl {
     );
   }
 
+  update(
+    resource: ResourceDefinition,
+    data: DeepPartial<ResourceItem>,
+  ): CancelablePromise<ResourceItem | undefined> {
+    return this.getId(resource).then((id) => {
+      if (id !== undefined) {
+        return this.connector.put('resource.item', { data }, { id });
+      }
+    });
+  }
+
+  /**
+   * Fast way to delete resource from NGW and clean cache.
+   * @param resource - Resource definition
+   */
+  delete(resource: ResourceDefinition): CancelablePromise<void> {
+    return this.getId(resource).then((id) => {
+      if (id !== undefined) {
+        return this.connector.delete('resource.item', null, { id }).then(() => {
+          this._cleanResourceItemCache(id);
+          return undefined;
+        });
+      }
+    });
+  }
+
   private _getChildrenOf(
     parent: ResourceDefinition,
     requestOptions?: GetChildrenOfOptions,
@@ -212,32 +238,6 @@ export class ResourcesControl {
         }
         return _items;
       });
-  }
-
-  update(
-    resource: ResourceDefinition,
-    data: DeepPartial<ResourceItem>,
-  ): CancelablePromise<ResourceItem | undefined> {
-    return this.getId(resource).then((id) => {
-      if (id !== undefined) {
-        return this.connector.put('resource.item', { data }, { id });
-      }
-    });
-  }
-
-  /**
-   * Fast way to delete resource from NGW and clean cache.
-   * @param resource - Resource definition
-   */
-  delete(resource: ResourceDefinition): CancelablePromise<void> {
-    return this.getId(resource).then((id) => {
-      if (id !== undefined) {
-        return this.connector.delete('resource.item', null, { id }).then(() => {
-          this._cleanResourceItemCache(id);
-          return undefined;
-        });
-      }
-    });
   }
 
   private async _cleanResourceItemCache(id: number) {
