@@ -2818,7 +2818,7 @@
             {
               "kind": "Reference",
               "text": "LngLatBoundsArray",
-              "canonicalReference": "!unknown"
+              "canonicalReference": "@nextgis/utils!LngLatBoundsArray:type"
             },
             {
               "kind": "Content",

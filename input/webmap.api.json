@@ -7126,7 +7126,7 @@
                 {
                   "kind": "Reference",
                   "text": "ViewOptions",
-                  "canonicalReference": "!unknown"
+                  "canonicalReference": "@nextgis/webmap!ViewOptions:interface"
                 },
                 {
                   "kind": "Content",
