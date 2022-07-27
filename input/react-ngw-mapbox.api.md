@@ -6,13 +6,11 @@
 
 import { FunctionComponentElement } from 'react';
 import type { Map as Map_2 } from 'maplibre-gl';
-import MapAdapter from '@nextgis/mapboxgl-map-adapter';
 import type { MapContainerProps } from '@nextgis/react-ngw-map';
+import { ReactNgwMapProps } from '@nextgis/react-ngw-map';
 
 // @public (undocumented)
-function ReactNgwMapbox<Props extends MapContainerProps = MapContainerProps<Map_2>>(props: Props): FunctionComponentElement<Props & {
-mapAdapter: MapAdapter;
-}>;
+function ReactNgwMapbox<Props extends MapContainerProps = MapContainerProps<Map_2>>(props: Props): FunctionComponentElement<ReactNgwMapProps>;
 export default ReactNgwMapbox;
 
 // (No @packageDocumentation comment for this package)
