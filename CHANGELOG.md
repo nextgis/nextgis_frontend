@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.15.0](https://github.com/nextgis/nextgisweb_frontend/compare/v1.14.0...v1.15.0) (2022-07-27)
+
+
+### Features
+
+* **mapbox-map-adapter:** set opacity with native paint ([c227ee3](https://github.com/nextgis/nextgisweb_frontend/commit/c227ee32cb6656cdc3f2c4086b373b49e28245ca))
+* **mapbox-map-adapter:** use direct mapAdapteOptions style ([89cd703](https://github.com/nextgis/nextgisweb_frontend/commit/89cd70338f3a75748966017b5f1935f8c992bf56))
+
+
+
+
+
 # [1.14.0](https://github.com/nextgis/nextgisweb_frontend/compare/v1.13.8...v1.14.0) (2022-07-05)
 
 **Note:** Version bump only for package root
