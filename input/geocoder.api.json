@@ -1,8 +1,8 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.18.19",
-    "schemaVersion": 1004,
+    "toolVersion": "7.28.6",
+    "schemaVersion": 1009,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
       "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
@@ -156,18 +156,21 @@
         "@betaDocumentation": true,
         "@internalRemarks": true,
         "@preapproved": true
-      }
+      },
+      "reportUnsupportedHtmlElements": false
     }
   },
   "kind": "Package",
   "canonicalReference": "@nextgis/geocoder!",
   "docComment": "/**\n * Modern geocoder on async generators. May use different data providers.\n *\n * @module geocoder\n *\n * @packageDocumentation\n */\n",
   "name": "@nextgis/geocoder",
+  "preserveMemberOrder": false,
   "members": [
     {
       "kind": "EntryPoint",
       "canonicalReference": "@nextgis/geocoder!",
       "name": "",
+      "preserveMemberOrder": false,
       "members": [
         {
           "kind": "Class",
@@ -216,7 +219,7 @@
               "typeParameterName": "O",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -225,6 +228,7 @@
             }
           ],
           "name": "BaseProvider",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "Property",
@@ -244,6 +248,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "label",
@@ -251,7 +256,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Property",
@@ -271,6 +277,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "searchUrl",
@@ -278,12 +285,13 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             }
           ],
           "extendsTokenRange": {
             "startIndex": 6,
-            "endIndex": 8
+            "endIndex": 7
           },
           "implementsTokenRanges": []
         },
@@ -299,6 +307,7 @@
           ],
           "releaseTag": "Public",
           "name": "BaseProviderOptions",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -318,6 +327,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "label",
@@ -344,6 +354,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "searchUrl",
@@ -395,7 +406,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "create"
@@ -430,6 +442,7 @@
           ],
           "releaseTag": "Public",
           "name": "Geocoder",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "Constructor",
@@ -451,6 +464,7 @@
                 }
               ],
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -458,7 +472,8 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 }
               ]
             },
@@ -480,15 +495,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "abort"
             },
             {
@@ -514,6 +530,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "providers",
@@ -521,7 +538,8 @@
                 "startIndex": 1,
                 "endIndex": 3
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Method",
@@ -555,13 +573,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 5
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -569,9 +587,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "result"
             },
             {
@@ -614,13 +634,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 7
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -628,15 +648,17 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "search"
             }
           ],
           "extendsTokenRange": {
             "startIndex": 1,
-            "endIndex": 5
+            "endIndex": 4
           },
           "implementsTokenRanges": []
         },
@@ -652,6 +674,7 @@
           ],
           "releaseTag": "Public",
           "name": "GeocoderOptions",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -676,6 +699,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "providers",
@@ -717,6 +741,7 @@
           ],
           "releaseTag": "Public",
           "name": "NgwProvider",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "Method",
@@ -754,13 +779,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 4,
                 "endIndex": 6
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -768,9 +793,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 3
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "_items"
             },
             {
@@ -793,6 +820,7 @@
                 }
               ],
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -800,7 +828,8 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 }
               ]
             },
@@ -822,15 +851,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "abort"
             },
             {
@@ -851,6 +881,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "caseInsensitive",
@@ -858,7 +889,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Method",
@@ -901,13 +933,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 7
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -915,9 +947,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "result"
             },
             {
@@ -960,13 +994,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 7
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -974,9 +1008,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "search"
             },
             {
@@ -1002,6 +1038,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "searchResources",
@@ -1009,7 +1046,8 @@
                 "startIndex": 1,
                 "endIndex": 3
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Property",
@@ -1029,6 +1067,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "searchUrl",
@@ -1036,12 +1075,13 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             }
           ],
           "extendsTokenRange": {
             "startIndex": 1,
-            "endIndex": 5
+            "endIndex": 4
           },
           "implementsTokenRanges": []
         },
@@ -1066,6 +1106,7 @@
           ],
           "releaseTag": "Public",
           "name": "NominatimProvider",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "Constructor",
@@ -1087,6 +1128,7 @@
                 }
               ],
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -1094,7 +1136,8 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": true
                 }
               ]
             },
@@ -1116,15 +1159,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "abort"
             },
             {
@@ -1168,13 +1212,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 7
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -1182,9 +1226,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "result"
             },
             {
@@ -1227,13 +1273,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 7
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -1241,9 +1287,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "search"
             },
             {
@@ -1264,6 +1312,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "searchUrl",
@@ -1271,12 +1320,13 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             }
           ],
           "extendsTokenRange": {
             "startIndex": 1,
-            "endIndex": 3
+            "endIndex": 2
           },
           "implementsTokenRanges": []
         },
@@ -1292,6 +1342,7 @@
           ],
           "releaseTag": "Public",
           "name": "ResultItem",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -1312,6 +1363,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "extent",
@@ -1339,6 +1391,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "geom",
@@ -1365,6 +1418,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "text",
@@ -1388,6 +1442,7 @@
           ],
           "releaseTag": "Public",
           "name": "SearchItem",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -1407,6 +1462,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "_id",
@@ -1441,6 +1497,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "returnTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 4
@@ -1453,7 +1510,8 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 }
               ]
             },
@@ -1476,6 +1534,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "extent",
@@ -1503,6 +1562,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "geom",
@@ -1530,6 +1590,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "provider",
@@ -1556,6 +1617,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "query",
@@ -1600,6 +1662,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "result",
@@ -1626,6 +1689,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "text",

@@ -1,8 +1,8 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.18.19",
-    "schemaVersion": 1004,
+    "toolVersion": "7.28.6",
+    "schemaVersion": 1009,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
       "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
@@ -156,18 +156,21 @@
         "@betaDocumentation": true,
         "@internalRemarks": true,
         "@preapproved": true
-      }
+      },
+      "reportUnsupportedHtmlElements": false
     }
   },
   "kind": "Package",
   "canonicalReference": "@nextgis/paint!",
   "docComment": "",
   "name": "@nextgis/paint",
+  "preserveMemberOrder": false,
   "members": [
     {
       "kind": "EntryPoint",
       "canonicalReference": "@nextgis/paint!",
       "name": "",
+      "preserveMemberOrder": false,
       "members": [
         {
           "kind": "Interface",
@@ -190,6 +193,7 @@
           ],
           "releaseTag": "Public",
           "name": "BasePaint",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -214,6 +218,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "color",
@@ -245,6 +250,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "extrude3d",
@@ -271,6 +277,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "fill",
@@ -302,6 +309,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "fillColor",
@@ -333,6 +341,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "fillOpacity",
@@ -364,6 +373,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "opacity",
@@ -390,6 +400,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "stroke",
@@ -421,6 +432,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "strokeColor",
@@ -452,6 +464,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "strokeOpacity",
@@ -483,6 +496,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "weight",
@@ -495,7 +509,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -520,6 +534,7 @@
           ],
           "releaseTag": "Public",
           "name": "CirclePaint",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -544,6 +559,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "radius",
@@ -570,6 +586,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "type",
@@ -582,7 +599,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -630,7 +647,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "createExpressionCallback"
@@ -759,6 +777,7 @@
           ],
           "releaseTag": "Public",
           "name": "GetCustomPaintOptions",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -783,6 +802,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "from",
@@ -809,6 +829,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "options",
@@ -835,6 +856,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "type",
@@ -847,7 +869,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -889,7 +911,7 @@
               "typeParameterName": "F",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -898,6 +920,7 @@
             }
           ],
           "name": "GetPaintCallback",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "CallSignature",
@@ -938,7 +961,8 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 }
               ]
             },
@@ -979,6 +1003,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "paint",
@@ -1006,6 +1031,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "type",
@@ -1103,6 +1129,7 @@
           ],
           "releaseTag": "Public",
           "name": "IconPaint",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -1122,6 +1149,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "className",
@@ -1148,6 +1176,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "html",
@@ -1174,6 +1203,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "iconAnchor",
@@ -1200,6 +1230,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "iconSize",
@@ -1227,6 +1258,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "svg",
@@ -1253,6 +1285,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "type",
@@ -1265,7 +1298,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -1318,7 +1351,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "isBasePaint"
@@ -1371,7 +1405,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "isExpression"
@@ -1425,7 +1460,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "isIcon"
@@ -1479,7 +1515,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "isPaint"
@@ -1533,7 +1570,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "isPaintCallback"
@@ -1587,7 +1625,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "isPropertiesPaint"
@@ -1692,7 +1731,7 @@
               "typeParameterName": "F",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -1703,7 +1742,7 @@
               "typeParameterName": "P",
               "constraintTokenRange": {
                 "startIndex": 6,
-                "endIndex": 8
+                "endIndex": 7
               },
               "defaultTypeTokenRange": {
                 "startIndex": 9,
@@ -1762,6 +1801,7 @@
           ],
           "releaseTag": "Public",
           "name": "PathPaint",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -1781,6 +1821,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "type",
@@ -1793,7 +1834,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -1818,6 +1859,7 @@
           ],
           "releaseTag": "Public",
           "name": "PinPaint",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -1851,6 +1893,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "icon",
@@ -1877,6 +1920,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "iconfont",
@@ -1908,6 +1952,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "size",
@@ -1939,6 +1984,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "symbol",
@@ -1965,6 +2011,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "type",
@@ -1977,7 +2024,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -2047,21 +2094,24 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "defaultPaint",
               "parameterTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 4
-              }
+              },
+              "isOptional": true
             },
             {
               "parameterName": "getPaintFunctions",
               "parameterTypeTokenRange": {
                 "startIndex": 5,
                 "endIndex": 8
-              }
+              },
+              "isOptional": true
             }
           ],
           "name": "preparePaint"
@@ -2131,7 +2181,7 @@
               "typeParameterName": "P",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -2209,7 +2259,7 @@
               "typeParameterName": "P",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,

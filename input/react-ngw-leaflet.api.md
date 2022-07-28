@@ -6,13 +6,11 @@
 
 import { FunctionComponentElement } from 'react';
 import type { Map as Map_2 } from 'leaflet';
-import MapAdapter from '@nextgis/leaflet-map-adapter';
 import type { MapContainerProps } from '@nextgis/react-ngw-map';
+import { ReactNgwMapProps } from '@nextgis/react-ngw-map';
 
 // @public (undocumented)
-function ReactNgwLeaflet<Props extends MapContainerProps = MapContainerProps<Map_2>>(props: Props): FunctionComponentElement<Props & {
-mapAdapter: MapAdapter;
-}>;
+function ReactNgwLeaflet<Props extends MapContainerProps = MapContainerProps<Map_2>>(props: Props): FunctionComponentElement<ReactNgwMapProps>;
 export default ReactNgwLeaflet;
 
 // (No @packageDocumentation comment for this package)

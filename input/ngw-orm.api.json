@@ -1,8 +1,8 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.18.19",
-    "schemaVersion": 1004,
+    "toolVersion": "7.28.6",
+    "schemaVersion": 1009,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
       "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
@@ -156,18 +156,21 @@
         "@betaDocumentation": true,
         "@internalRemarks": true,
         "@preapproved": true
-      }
+      },
+      "reportUnsupportedHtmlElements": false
     }
   },
   "kind": "Package",
   "canonicalReference": "@nextgis/ngw-orm!",
   "docComment": "",
   "name": "@nextgis/ngw-orm",
+  "preserveMemberOrder": false,
   "members": [
     {
       "kind": "EntryPoint",
       "canonicalReference": "@nextgis/ngw-orm!",
       "name": "",
+      "preserveMemberOrder": false,
       "members": [
         {
           "kind": "Class",
@@ -181,6 +184,7 @@
           ],
           "releaseTag": "Public",
           "name": "BaseResource",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "Method",
@@ -252,29 +256,12 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
-              "isStatic": true,
-              "returnTypeTokenRange": {
-                "startIndex": 13,
-                "endIndex": 14
-              },
-              "releaseTag": "Public",
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "options",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 8,
-                    "endIndex": 12
-                  }
-                }
-              ],
               "typeParameters": [
                 {
                   "typeParameterName": "T",
                   "constraintTokenRange": {
                     "startIndex": 1,
-                    "endIndex": 4
+                    "endIndex": 3
                   },
                   "defaultTypeTokenRange": {
                     "startIndex": 5,
@@ -282,6 +269,25 @@
                   }
                 }
               ],
+              "isStatic": true,
+              "returnTypeTokenRange": {
+                "startIndex": 13,
+                "endIndex": 14
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 8,
+                    "endIndex": 12
+                  },
+                  "isOptional": true
+                }
+              ],
+              "isOptional": false,
               "name": "clone"
             },
             {
@@ -364,36 +370,12 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
-              "isStatic": true,
-              "returnTypeTokenRange": {
-                "startIndex": 14,
-                "endIndex": 16
-              },
-              "releaseTag": "Public",
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "resourceOptions",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 8,
-                    "endIndex": 9
-                  }
-                },
-                {
-                  "parameterName": "connectionOrOptions",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 10,
-                    "endIndex": 13
-                  }
-                }
-              ],
               "typeParameters": [
                 {
                   "typeParameterName": "T",
                   "constraintTokenRange": {
                     "startIndex": 1,
-                    "endIndex": 4
+                    "endIndex": 3
                   },
                   "defaultTypeTokenRange": {
                     "startIndex": 5,
@@ -401,6 +383,33 @@
                   }
                 }
               ],
+              "isStatic": true,
+              "returnTypeTokenRange": {
+                "startIndex": 14,
+                "endIndex": 16
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "resourceOptions",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 8,
+                    "endIndex": 9
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "connectionOrOptions",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 10,
+                    "endIndex": 13
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
               "name": "connect"
             },
             {
@@ -422,6 +431,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "connection",
@@ -429,7 +439,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": true
+              "isStatic": true,
+              "isProtected": false
             },
             {
               "kind": "Method",
@@ -493,13 +504,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": true,
               "returnTypeTokenRange": {
                 "startIndex": 10,
                 "endIndex": 12
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -507,23 +518,27 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 5
-                  }
+                  },
+                  "isOptional": false
                 },
                 {
                   "parameterName": "parent",
                   "parameterTypeTokenRange": {
                     "startIndex": 6,
                     "endIndex": 7
-                  }
+                  },
+                  "isOptional": false
                 },
                 {
                   "parameterName": "options",
                   "parameterTypeTokenRange": {
                     "startIndex": 8,
                     "endIndex": 9
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "getNgwPayload"
             },
             {
@@ -545,6 +560,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "item",
@@ -552,7 +568,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": true
+              "isStatic": true,
+              "isProtected": false
             },
             {
               "kind": "Method",
@@ -599,13 +616,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": true,
               "returnTypeTokenRange": {
                 "startIndex": 6,
                 "endIndex": 8
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -613,16 +630,19 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 },
                 {
                   "parameterName": "ResCls",
                   "parameterTypeTokenRange": {
                     "startIndex": 3,
                     "endIndex": 5
-                  }
+                  },
+                  "isOptional": true
                 }
               ],
+              "isOptional": false,
               "name": "receive"
             },
             {
@@ -670,13 +690,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": true,
               "returnTypeTokenRange": {
                 "startIndex": 7,
                 "endIndex": 8
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -684,16 +704,19 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 },
                 {
                   "parameterName": "connectionOrOptions",
                   "parameterTypeTokenRange": {
                     "startIndex": 3,
                     "endIndex": 6
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "sync"
             },
             {
@@ -724,13 +747,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": true,
               "returnTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 4
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -738,9 +761,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": true
                 }
               ],
+              "isOptional": false,
               "name": "toTypescript"
             },
             {
@@ -766,15 +791,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": true,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "validate"
             }
           ],
@@ -848,7 +874,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "Column"
@@ -893,7 +920,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "Column"
@@ -910,6 +938,7 @@
           ],
           "releaseTag": "Public",
           "name": "Connection",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "Constructor",
@@ -931,6 +960,7 @@
                 }
               ],
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -938,7 +968,8 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 }
               ]
             },
@@ -960,6 +991,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "baseUrl",
@@ -967,7 +999,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Method",
@@ -992,15 +1025,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "connect"
             },
             {
@@ -1053,13 +1087,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": true,
               "returnTypeTokenRange": {
                 "startIndex": 5,
                 "endIndex": 9
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -1067,9 +1101,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 4
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "connect"
             },
             {
@@ -1095,6 +1131,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "connections",
@@ -1102,7 +1139,8 @@
                 "startIndex": 1,
                 "endIndex": 3
               },
-              "isStatic": true
+              "isStatic": true,
+              "isProtected": false
             },
             {
               "kind": "Method",
@@ -1141,13 +1179,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": true,
               "returnTypeTokenRange": {
                 "startIndex": 5,
                 "endIndex": 6
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -1155,9 +1193,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 4
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "create"
             },
             {
@@ -1214,13 +1254,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 6,
                 "endIndex": 10
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -1228,16 +1268,19 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 3
-                  }
+                  },
+                  "isOptional": false
                 },
                 {
                   "parameterName": "options",
                   "parameterTypeTokenRange": {
                     "startIndex": 4,
                     "endIndex": 5
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "createResource"
             },
             {
@@ -1276,13 +1319,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 4,
                 "endIndex": 6
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -1290,9 +1333,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 3
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "deleteResource"
             },
             {
@@ -1314,6 +1359,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "driver",
@@ -1321,7 +1367,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Method",
@@ -1376,30 +1423,6 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 8,
-                "endIndex": 10
-              },
-              "releaseTag": "Public",
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "Resource",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 4,
-                    "endIndex": 5
-                  }
-                },
-                {
-                  "parameterName": "options",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 6,
-                    "endIndex": 7
-                  }
-                }
-              ],
               "typeParameters": [
                 {
                   "typeParameterName": "P",
@@ -1413,6 +1436,33 @@
                   }
                 }
               ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 8,
+                "endIndex": 10
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "Resource",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 7
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
               "name": "getOrCreateResource"
             },
             {
@@ -1478,13 +1528,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 8,
                 "endIndex": 12
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -1492,9 +1542,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 7
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "getResource"
             },
             {
@@ -1560,13 +1612,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 8,
                 "endIndex": 12
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -1574,9 +1626,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 7
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "getResourceItem"
             },
             {
@@ -1654,13 +1708,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 11,
                 "endIndex": 15
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -1668,23 +1722,27 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 3
-                  }
+                  },
+                  "isOptional": false
                 },
                 {
                   "parameterName": "parent",
                   "parameterTypeTokenRange": {
                     "startIndex": 4,
                     "endIndex": 5
-                  }
+                  },
+                  "isOptional": false
                 },
                 {
                   "parameterName": "opt",
                   "parameterTypeTokenRange": {
                     "startIndex": 6,
                     "endIndex": 10
-                  }
+                  },
+                  "isOptional": true
                 }
               ],
+              "isOptional": false,
               "name": "getResourceNgwPayload"
             },
             {
@@ -1705,6 +1763,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "isConnected",
@@ -1712,7 +1771,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Property",
@@ -1733,6 +1793,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "options",
@@ -1740,7 +1801,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Method",
@@ -1804,29 +1866,12 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 8,
-                "endIndex": 12
-              },
-              "releaseTag": "Public",
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "resource",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 6,
-                    "endIndex": 7
-                  }
-                }
-              ],
               "typeParameters": [
                 {
                   "typeParameterName": "P",
                   "constraintTokenRange": {
                     "startIndex": 1,
-                    "endIndex": 3
+                    "endIndex": 2
                   },
                   "defaultTypeTokenRange": {
                     "startIndex": 4,
@@ -1834,6 +1879,25 @@
                   }
                 }
               ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 8,
+                "endIndex": 12
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "resource",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 7
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
               "name": "receiveResource"
             },
             {
@@ -1872,13 +1936,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 4,
                 "endIndex": 6
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -1886,9 +1950,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 3
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "updateResource"
             }
           ],
@@ -1952,6 +2018,7 @@
           ],
           "releaseTag": "Public",
           "name": "LineLayer",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "Property",
@@ -1972,6 +2039,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "geometryType",
@@ -1979,12 +2047,13 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": true
+              "isStatic": true,
+              "isProtected": false
             }
           ],
           "extendsTokenRange": {
             "startIndex": 1,
-            "endIndex": 5
+            "endIndex": 4
           },
           "implementsTokenRanges": []
         },
@@ -2028,7 +2097,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "NgwResource"
@@ -2063,6 +2133,7 @@
           ],
           "releaseTag": "Public",
           "name": "PointLayer",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "Property",
@@ -2083,6 +2154,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "geometryType",
@@ -2090,12 +2162,13 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": true
+              "isStatic": true,
+              "isProtected": false
             }
           ],
           "extendsTokenRange": {
             "startIndex": 1,
-            "endIndex": 5
+            "endIndex": 4
           },
           "implementsTokenRanges": []
         },
@@ -2129,6 +2202,7 @@
           ],
           "releaseTag": "Public",
           "name": "PolygonLayer",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "Property",
@@ -2149,6 +2223,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "geometryType",
@@ -2156,12 +2231,13 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": true
+              "isStatic": true,
+              "isProtected": false
             }
           ],
           "extendsTokenRange": {
             "startIndex": 1,
-            "endIndex": 5
+            "endIndex": 4
           },
           "implementsTokenRanges": []
         },
@@ -2186,10 +2262,11 @@
           ],
           "releaseTag": "Public",
           "name": "ResourceGroup",
+          "preserveMemberOrder": false,
           "members": [],
           "extendsTokenRange": {
             "startIndex": 1,
-            "endIndex": 3
+            "endIndex": 2
           },
           "implementsTokenRanges": []
         },
@@ -2262,7 +2339,7 @@
               "typeParameterName": "G",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -2273,7 +2350,7 @@
               "typeParameterName": "P",
               "constraintTokenRange": {
                 "startIndex": 6,
-                "endIndex": 8
+                "endIndex": 7
               },
               "defaultTypeTokenRange": {
                 "startIndex": 9,
@@ -2282,6 +2359,7 @@
             }
           ],
           "name": "VectorLayer",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "Constructor",
@@ -2302,6 +2380,7 @@
                 }
               ],
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -2309,7 +2388,8 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": true
                 }
               ]
             },
@@ -2335,6 +2415,7 @@
                   "text": "\n\nset coordinates(coordinates: G['coordinates']);"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "coordinates",
@@ -2342,7 +2423,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Method",
@@ -2411,30 +2493,6 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
-              "isStatic": true,
-              "returnTypeTokenRange": {
-                "startIndex": 11,
-                "endIndex": 13
-              },
-              "releaseTag": "Public",
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "this",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 3,
-                    "endIndex": 5
-                  }
-                },
-                {
-                  "parameterName": "optionsOrConditions",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 6,
-                    "endIndex": 10
-                  }
-                }
-              ],
               "typeParameters": [
                 {
                   "typeParameterName": "T",
@@ -2448,6 +2506,33 @@
                   }
                 }
               ],
+              "isStatic": true,
+              "returnTypeTokenRange": {
+                "startIndex": 11,
+                "endIndex": 13
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "this",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 5
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "optionsOrConditions",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 10
+                  },
+                  "isOptional": true
+                }
+              ],
+              "isOptional": false,
               "name": "count"
             },
             {
@@ -2517,30 +2602,6 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
-              "isStatic": true,
-              "returnTypeTokenRange": {
-                "startIndex": 11,
-                "endIndex": 13
-              },
-              "releaseTag": "Public",
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "this",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 3,
-                    "endIndex": 5
-                  }
-                },
-                {
-                  "parameterName": "optionsOrConditions",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 6,
-                    "endIndex": 10
-                  }
-                }
-              ],
               "typeParameters": [
                 {
                   "typeParameterName": "T",
@@ -2554,6 +2615,33 @@
                   }
                 }
               ],
+              "isStatic": true,
+              "returnTypeTokenRange": {
+                "startIndex": 11,
+                "endIndex": 13
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "this",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 5
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "optionsOrConditions",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 10
+                  },
+                  "isOptional": true
+                }
+              ],
+              "isOptional": false,
               "name": "find"
             },
             {
@@ -2640,37 +2728,6 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
-              "isStatic": true,
-              "returnTypeTokenRange": {
-                "startIndex": 15,
-                "endIndex": 17
-              },
-              "releaseTag": "Public",
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "this",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 3,
-                    "endIndex": 5
-                  }
-                },
-                {
-                  "parameterName": "optionsOrConditions",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 6,
-                    "endIndex": 11
-                  }
-                },
-                {
-                  "parameterName": "maybeOptions",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 12,
-                    "endIndex": 14
-                  }
-                }
-              ],
               "typeParameters": [
                 {
                   "typeParameterName": "T",
@@ -2684,6 +2741,41 @@
                   }
                 }
               ],
+              "isStatic": true,
+              "returnTypeTokenRange": {
+                "startIndex": 15,
+                "endIndex": 17
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "this",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 5
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "optionsOrConditions",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 11
+                  },
+                  "isOptional": true
+                },
+                {
+                  "parameterName": "maybeOptions",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 12,
+                    "endIndex": 14
+                  },
+                  "isOptional": true
+                }
+              ],
+              "isOptional": false,
               "name": "findOne"
             },
             {
@@ -2770,37 +2862,6 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
-              "isStatic": true,
-              "returnTypeTokenRange": {
-                "startIndex": 15,
-                "endIndex": 17
-              },
-              "releaseTag": "Public",
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "this",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 3,
-                    "endIndex": 5
-                  }
-                },
-                {
-                  "parameterName": "optionsOrConditions",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 6,
-                    "endIndex": 11
-                  }
-                },
-                {
-                  "parameterName": "maybeOptions",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 12,
-                    "endIndex": 14
-                  }
-                }
-              ],
               "typeParameters": [
                 {
                   "typeParameterName": "T",
@@ -2814,6 +2875,41 @@
                   }
                 }
               ],
+              "isStatic": true,
+              "returnTypeTokenRange": {
+                "startIndex": 15,
+                "endIndex": 17
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "this",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 5
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "optionsOrConditions",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 11
+                  },
+                  "isOptional": true
+                },
+                {
+                  "parameterName": "maybeOptions",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 12,
+                    "endIndex": 14
+                  },
+                  "isOptional": true
+                }
+              ],
+              "isOptional": false,
               "name": "findOneOrFail"
             },
             {
@@ -2838,6 +2934,7 @@
                   "text": "\n\nset geom(geom: G);"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "geom",
@@ -2845,7 +2942,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Property",
@@ -2866,6 +2964,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "geometryType",
@@ -2873,7 +2972,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": true
+              "isStatic": true,
+              "isProtected": false
             },
             {
               "kind": "Method",
@@ -2898,15 +2998,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "getConstructor"
             },
             {
@@ -2980,13 +3081,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": true,
               "returnTypeTokenRange": {
                 "startIndex": 8,
                 "endIndex": 14
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -2994,23 +3095,27 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 3
-                  }
+                  },
+                  "isOptional": false
                 },
                 {
                   "parameterName": "parent",
                   "parameterTypeTokenRange": {
                     "startIndex": 4,
                     "endIndex": 5
-                  }
+                  },
+                  "isOptional": false
                 },
                 {
                   "parameterName": "options",
                   "parameterTypeTokenRange": {
                     "startIndex": 6,
                     "endIndex": 7
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "getNgwPayload"
             },
             {
@@ -3031,15 +3136,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "hasId"
             },
             {
@@ -3060,6 +3166,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "id",
@@ -3067,7 +3174,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Method",
@@ -3101,13 +3209,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": true,
               "returnTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 5
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -3115,9 +3223,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "receive"
             },
             {
@@ -3143,15 +3253,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "save"
             },
             {
@@ -3216,37 +3327,6 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
-              "isStatic": true,
-              "returnTypeTokenRange": {
-                "startIndex": 10,
-                "endIndex": 12
-              },
-              "releaseTag": "Public",
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "this",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 3,
-                    "endIndex": 5
-                  }
-                },
-                {
-                  "parameterName": "entityOrEntities",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 6,
-                    "endIndex": 7
-                  }
-                },
-                {
-                  "parameterName": "options",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 8,
-                    "endIndex": 9
-                  }
-                }
-              ],
               "typeParameters": [
                 {
                   "typeParameterName": "T",
@@ -3260,6 +3340,41 @@
                   }
                 }
               ],
+              "isStatic": true,
+              "returnTypeTokenRange": {
+                "startIndex": 10,
+                "endIndex": 12
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "this",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 5
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "entityOrEntities",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 7
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 8,
+                    "endIndex": 9
+                  },
+                  "isOptional": true
+                }
+              ],
+              "isOptional": false,
               "name": "save"
             },
             {
@@ -3285,15 +3400,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "toGeoJson"
             },
             {
@@ -3314,15 +3430,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "toJSON"
             },
             {
@@ -3353,13 +3470,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": true,
               "returnTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 4
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -3367,9 +3484,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": true
                 }
               ],
+              "isOptional": false,
               "name": "toTypescript"
             },
             {
@@ -3395,21 +3514,22 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": true,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "validate"
             }
           ],
           "extendsTokenRange": {
             "startIndex": 11,
-            "endIndex": 13
+            "endIndex": 12
           },
           "implementsTokenRanges": []
         }

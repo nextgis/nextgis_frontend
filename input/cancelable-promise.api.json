@@ -1,8 +1,8 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.18.19",
-    "schemaVersion": 1004,
+    "toolVersion": "7.28.6",
+    "schemaVersion": 1009,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
       "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
@@ -156,18 +156,21 @@
         "@betaDocumentation": true,
         "@internalRemarks": true,
         "@preapproved": true
-      }
+      },
+      "reportUnsupportedHtmlElements": false
     }
   },
   "kind": "Package",
   "canonicalReference": "@nextgis/cancelable-promise!",
   "docComment": "/**\n * A promise you can stop\n *\n * @module cancelable-promise\n *\n * @packageDocumentation\n */\n",
   "name": "@nextgis/cancelable-promise",
+  "preserveMemberOrder": false,
   "members": [
     {
       "kind": "EntryPoint",
       "canonicalReference": "@nextgis/cancelable-promise!",
       "name": "",
+      "preserveMemberOrder": false,
       "members": [
         {
           "kind": "Class",
@@ -211,6 +214,7 @@
             }
           ],
           "name": "CancelablePromise",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "Property",
@@ -239,6 +243,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "[Symbol.toStringTag]",
@@ -246,7 +251,8 @@
                 "startIndex": 3,
                 "endIndex": 4
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Constructor",
@@ -293,6 +299,7 @@
                 }
               ],
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -300,14 +307,16 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 6
-                  }
+                  },
+                  "isOptional": false
                 },
                 {
                   "parameterName": "timeout",
                   "parameterTypeTokenRange": {
                     "startIndex": 7,
                     "endIndex": 8
-                  }
+                  },
+                  "isOptional": true
                 }
               ]
             },
@@ -351,23 +360,6 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
-              "isStatic": true,
-              "returnTypeTokenRange": {
-                "startIndex": 5,
-                "endIndex": 7
-              },
-              "releaseTag": "Public",
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "values",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 4
-                  }
-                }
-              ],
               "typeParameters": [
                 {
                   "typeParameterName": "T",
@@ -381,6 +373,25 @@
                   }
                 }
               ],
+              "isStatic": true,
+              "returnTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 7
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "values",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 4
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
               "name": "all"
             },
             {
@@ -410,13 +421,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 4
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -424,9 +435,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "attach"
             },
             {
@@ -447,15 +460,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "cancel"
             },
             {
@@ -481,6 +495,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "CancelError",
@@ -488,7 +503,8 @@
                 "startIndex": 1,
                 "endIndex": 3
               },
-              "isStatic": true
+              "isStatic": true,
+              "isProtected": false
             },
             {
               "kind": "Method",
@@ -547,23 +563,6 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 9,
-                "endIndex": 11
-              },
-              "releaseTag": "Public",
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "onrejected",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 3,
-                    "endIndex": 8
-                  }
-                }
-              ],
               "typeParameters": [
                 {
                   "typeParameterName": "TResult",
@@ -577,6 +576,25 @@
                   }
                 }
               ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 9,
+                "endIndex": 11
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "onrejected",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 8
+                  },
+                  "isOptional": true
+                }
+              ],
+              "isOptional": false,
               "name": "catch"
             },
             {
@@ -607,13 +625,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": true,
               "returnTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 4
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -621,9 +639,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": true
                 }
               ],
+              "isOptional": false,
               "name": "createControl"
             },
             {
@@ -657,13 +677,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 5
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -671,9 +691,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": true
                 }
               ],
+              "isOptional": false,
               "name": "finally"
             },
             {
@@ -694,6 +716,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "id",
@@ -701,7 +724,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Property",
@@ -726,6 +750,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "PromiseControl",
@@ -733,7 +758,8 @@
                 "startIndex": 1,
                 "endIndex": 3
               },
-              "isStatic": true
+              "isStatic": true,
+              "isProtected": false
             },
             {
               "kind": "Method",
@@ -775,23 +801,6 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
-              "isStatic": true,
-              "returnTypeTokenRange": {
-                "startIndex": 5,
-                "endIndex": 7
-              },
-              "releaseTag": "Public",
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "value",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 4
-                  }
-                }
-              ],
               "typeParameters": [
                 {
                   "typeParameterName": "T",
@@ -805,6 +814,25 @@
                   }
                 }
               ],
+              "isStatic": true,
+              "returnTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 7
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "value",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 4
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
               "name": "reject"
             },
             {
@@ -847,23 +875,6 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
-              "isStatic": true,
-              "returnTypeTokenRange": {
-                "startIndex": 5,
-                "endIndex": 7
-              },
-              "releaseTag": "Public",
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "value",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 4
-                  }
-                }
-              ],
               "typeParameters": [
                 {
                   "typeParameterName": "T",
@@ -877,6 +888,25 @@
                   }
                 }
               ],
+              "isStatic": true,
+              "returnTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 7
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "value",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 4
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
               "name": "resolve"
             },
             {
@@ -952,30 +982,6 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 13,
-                "endIndex": 15
-              },
-              "releaseTag": "Public",
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "onfulfilled",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 5,
-                    "endIndex": 8
-                  }
-                },
-                {
-                  "parameterName": "onrejected",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 9,
-                    "endIndex": 12
-                  }
-                }
-              ],
               "typeParameters": [
                 {
                   "typeParameterName": "TResult1",
@@ -1000,6 +1006,33 @@
                   }
                 }
               ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 13,
+                "endIndex": 15
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "onfulfilled",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 5,
+                    "endIndex": 8
+                  },
+                  "isOptional": true
+                },
+                {
+                  "parameterName": "onrejected",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 9,
+                    "endIndex": 12
+                  },
+                  "isOptional": true
+                }
+              ],
+              "isOptional": false,
               "name": "then"
             },
             {
@@ -1025,6 +1058,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "TimeoutError",
@@ -1032,13 +1066,14 @@
                 "startIndex": 1,
                 "endIndex": 3
               },
-              "isStatic": true
+              "isStatic": true,
+              "isProtected": false
             }
           ],
           "implementsTokenRanges": [
             {
               "startIndex": 3,
-              "endIndex": 5
+              "endIndex": 4
             }
           ]
         },
@@ -1063,6 +1098,7 @@
           ],
           "releaseTag": "Public",
           "name": "CancelError",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "Constructor",
@@ -1075,6 +1111,7 @@
                 }
               ],
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": []
             },
@@ -1096,6 +1133,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "name",
@@ -1103,12 +1141,13 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             }
           ],
           "extendsTokenRange": {
             "startIndex": 1,
-            "endIndex": 3
+            "endIndex": 2
           },
           "implementsTokenRanges": []
         }

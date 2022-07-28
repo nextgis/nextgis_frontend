@@ -1,8 +1,8 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.18.19",
-    "schemaVersion": 1004,
+    "toolVersion": "7.28.6",
+    "schemaVersion": 1009,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
       "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
@@ -156,18 +156,21 @@
         "@betaDocumentation": true,
         "@internalRemarks": true,
         "@preapproved": true
-      }
+      },
+      "reportUnsupportedHtmlElements": false
     }
   },
   "kind": "Package",
   "canonicalReference": "@nextgis/vuex-ngw!",
   "docComment": "",
   "name": "@nextgis/vuex-ngw",
+  "preserveMemberOrder": false,
   "members": [
     {
       "kind": "EntryPoint",
       "canonicalReference": "@nextgis/vuex-ngw!",
       "name": "",
+      "preserveMemberOrder": false,
       "members": [
         {
           "kind": "Function",
@@ -283,7 +286,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 11,
                 "endIndex": 16
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -291,7 +295,7 @@
               "typeParameterName": "P",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -302,7 +306,7 @@
               "typeParameterName": "G",
               "constraintTokenRange": {
                 "startIndex": 6,
-                "endIndex": 8
+                "endIndex": 7
               },
               "defaultTypeTokenRange": {
                 "startIndex": 9,
@@ -324,6 +328,7 @@
           ],
           "releaseTag": "Public",
           "name": "ForeignResource",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -343,6 +348,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "relationField",
@@ -414,7 +420,7 @@
               "typeParameterName": "G",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -425,7 +431,7 @@
               "typeParameterName": "P",
               "constraintTokenRange": {
                 "startIndex": 6,
-                "endIndex": 8
+                "endIndex": 7
               },
               "defaultTypeTokenRange": {
                 "startIndex": 9,
@@ -434,6 +440,7 @@
             }
           ],
           "name": "PatchOptions",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -453,6 +460,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "fid",
@@ -484,6 +492,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "item",
@@ -564,7 +573,7 @@
               "typeParameterName": "P",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -575,7 +584,7 @@
               "typeParameterName": "G",
               "constraintTokenRange": {
                 "startIndex": 6,
-                "endIndex": 8
+                "endIndex": 7
               },
               "defaultTypeTokenRange": {
                 "startIndex": 9,
@@ -584,6 +593,7 @@
             }
           ],
           "name": "ResourceStore",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "Property",
@@ -617,6 +627,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "_promises",
@@ -624,7 +635,8 @@
                 "startIndex": 1,
                 "endIndex": 5
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Property",
@@ -658,6 +670,7 @@
                   "text": ");"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "connector",
@@ -665,7 +678,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Method",
@@ -707,13 +721,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 7
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -721,9 +735,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "delete"
             },
             {
@@ -749,6 +765,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "fields",
@@ -756,7 +773,8 @@
                 "startIndex": 1,
                 "endIndex": 3
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Property",
@@ -794,6 +812,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "foreignResources",
@@ -801,7 +820,8 @@
                 "startIndex": 1,
                 "endIndex": 6
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Property",
@@ -821,6 +841,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "formatters",
@@ -828,7 +849,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Method",
@@ -862,15 +884,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 5
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "getFields"
             },
             {
@@ -914,15 +937,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 7
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "getResources"
             },
             {
@@ -957,15 +981,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 5
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "getStore"
             },
             {
@@ -1058,6 +1083,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "hooks",
@@ -1065,7 +1091,8 @@
                 "startIndex": 1,
                 "endIndex": 18
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Method",
@@ -1112,13 +1139,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 4,
                 "endIndex": 8
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -1126,9 +1153,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 3
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "patch"
             },
             {
@@ -1233,29 +1262,12 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 15,
-                "endIndex": 21
-              },
-              "releaseTag": "Public",
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "opt",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 11,
-                    "endIndex": 14
-                  }
-                }
-              ],
               "typeParameters": [
                 {
                   "typeParameterName": "G",
                   "constraintTokenRange": {
                     "startIndex": 1,
-                    "endIndex": 3
+                    "endIndex": 2
                   },
                   "defaultTypeTokenRange": {
                     "startIndex": 4,
@@ -1266,7 +1278,7 @@
                   "typeParameterName": "P",
                   "constraintTokenRange": {
                     "startIndex": 6,
-                    "endIndex": 8
+                    "endIndex": 7
                   },
                   "defaultTypeTokenRange": {
                     "startIndex": 9,
@@ -1274,6 +1286,25 @@
                   }
                 }
               ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 15,
+                "endIndex": 21
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "opt",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 11,
+                    "endIndex": 14
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
               "name": "prepareFeatureToNgw"
             },
             {
@@ -1294,6 +1325,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "resource",
@@ -1301,7 +1333,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Property",
@@ -1326,6 +1359,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "resourceItems",
@@ -1333,7 +1367,8 @@
                 "startIndex": 1,
                 "endIndex": 3
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Property",
@@ -1362,6 +1397,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "resources",
@@ -1369,7 +1405,8 @@
                 "startIndex": 1,
                 "endIndex": 4
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Method",
@@ -1402,13 +1439,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 4,
                 "endIndex": 5
               },
               "releaseTag": "Public",
+              "isProtected": true,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -1416,9 +1453,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 3
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "SET_STORE"
             },
             {
@@ -1452,13 +1491,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 4,
                 "endIndex": 5
               },
               "releaseTag": "Public",
+              "isProtected": true,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -1466,9 +1505,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 3
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "UPDATE_FIELDS"
             },
             {
@@ -1511,13 +1552,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 6,
                 "endIndex": 7
               },
               "releaseTag": "Public",
+              "isProtected": true,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -1525,9 +1566,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 5
-                  }
+                  },
+                  "isOptional": true
                 }
               ],
+              "isOptional": false,
               "name": "UPDATE_RESOURCES"
             },
             {
@@ -1579,13 +1622,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 5,
                 "endIndex": 9
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -1593,15 +1636,17 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 4
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "updateStore"
             }
           ],
           "extendsTokenRange": {
             "startIndex": 11,
-            "endIndex": 13
+            "endIndex": 12
           },
           "implementsTokenRanges": []
         }

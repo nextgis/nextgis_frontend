@@ -1,8 +1,8 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.18.19",
-    "schemaVersion": 1004,
+    "toolVersion": "7.28.6",
+    "schemaVersion": 1009,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
       "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
@@ -156,18 +156,21 @@
         "@betaDocumentation": true,
         "@internalRemarks": true,
         "@preapproved": true
-      }
+      },
+      "reportUnsupportedHtmlElements": false
     }
   },
   "kind": "Package",
   "canonicalReference": "@nextgis/react-ngw-map!",
   "docComment": "",
   "name": "@nextgis/react-ngw-map",
+  "preserveMemberOrder": false,
   "members": [
     {
       "kind": "EntryPoint",
       "canonicalReference": "@nextgis/react-ngw-map!",
       "name": "",
+      "preserveMemberOrder": false,
       "members": [
         {
           "kind": "Function",
@@ -229,7 +232,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 6,
                 "endIndex": 7
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -237,7 +241,7 @@
               "typeParameterName": "P",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -259,6 +263,7 @@
           ],
           "releaseTag": "Public",
           "name": "ControlledLayer",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "MethodSignature",
@@ -300,7 +305,8 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
               "name": "addLayer"
@@ -345,7 +351,8 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
               "name": "removeLayer"
@@ -461,7 +468,7 @@
               "typeParameterName": "O",
               "constraintTokenRange": {
                 "startIndex": 7,
-                "endIndex": 9
+                "endIndex": 8
               },
               "defaultTypeTokenRange": {
                 "startIndex": 10,
@@ -470,6 +477,7 @@
             }
           ],
           "name": "MapContainerProps",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -490,6 +498,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "children",
@@ -516,6 +525,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "className",
@@ -542,6 +552,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "id",
@@ -569,6 +580,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "placeholder",
@@ -596,6 +608,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "style",
@@ -631,6 +644,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "whenCreated",
@@ -643,7 +657,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 13,
-              "endIndex": 15
+              "endIndex": 14
             }
           ]
         },
@@ -712,7 +726,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 6,
                 "endIndex": 7
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -720,7 +735,7 @@
               "typeParameterName": "P",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -751,6 +766,7 @@
           ],
           "releaseTag": "Public",
           "name": "MapControlProps",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -771,6 +787,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "children",
@@ -798,6 +815,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "context",
@@ -851,6 +869,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "createControl",
@@ -863,7 +882,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -879,6 +898,7 @@
           ],
           "releaseTag": "Public",
           "name": "NgwMapContextInterface",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -899,6 +919,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "layerContainer",
@@ -926,6 +947,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "ngwMap",
@@ -953,6 +975,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "overlayContainer",
@@ -979,6 +1002,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "pane",
@@ -1095,7 +1119,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 6,
                 "endIndex": 7
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -1103,7 +1128,7 @@
               "typeParameterName": "Props",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -1230,7 +1255,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 6,
                 "endIndex": 7
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -1238,7 +1264,7 @@
               "typeParameterName": "P",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,

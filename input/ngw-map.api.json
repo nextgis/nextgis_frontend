@@ -1,8 +1,8 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.18.19",
-    "schemaVersion": 1004,
+    "toolVersion": "7.28.6",
+    "schemaVersion": 1009,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
       "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
@@ -156,18 +156,21 @@
         "@betaDocumentation": true,
         "@internalRemarks": true,
         "@preapproved": true
-      }
+      },
+      "reportUnsupportedHtmlElements": false
     }
   },
   "kind": "Package",
   "canonicalReference": "@nextgis/ngw-map!",
   "docComment": "",
   "name": "@nextgis/ngw-map",
+  "preserveMemberOrder": false,
   "members": [
     {
       "kind": "EntryPoint",
       "canonicalReference": "@nextgis/ngw-map!",
       "name": "",
+      "preserveMemberOrder": false,
       "members": [
         {
           "kind": "Function",
@@ -222,7 +225,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "createNgwMap"
@@ -308,7 +312,7 @@
               "typeParameterName": "G",
               "constraintTokenRange": {
                 "startIndex": 3,
-                "endIndex": 5
+                "endIndex": 4
               },
               "defaultTypeTokenRange": {
                 "startIndex": 6,
@@ -333,6 +337,7 @@
           ],
           "releaseTag": "Public",
           "name": "NgwLayers",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "IndexSignature",
@@ -361,6 +366,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "returnTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 4
@@ -373,7 +379,8 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 }
               ]
             }
@@ -392,6 +399,7 @@
           ],
           "releaseTag": "Public",
           "name": "NgwLayersMem",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -412,6 +420,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "layer",
@@ -438,6 +447,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "resourceId",
@@ -566,7 +576,7 @@
               "typeParameterName": "O",
               "constraintTokenRange": {
                 "startIndex": 7,
-                "endIndex": 9
+                "endIndex": 8
               },
               "defaultTypeTokenRange": {
                 "startIndex": 10,
@@ -575,6 +585,7 @@
             }
           ],
           "name": "NgwMap",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "Property",
@@ -595,6 +606,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "_ngwLayers",
@@ -602,7 +614,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": true
             },
             {
               "kind": "Constructor",
@@ -623,6 +636,7 @@
                 }
               ],
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -630,7 +644,8 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 }
               ]
             },
@@ -700,37 +715,6 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 11,
-                "endIndex": 13
-              },
-              "releaseTag": "Public",
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "controlDef",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 4,
-                    "endIndex": 5
-                  }
-                },
-                {
-                  "parameterName": "position",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 6,
-                    "endIndex": 7
-                  }
-                },
-                {
-                  "parameterName": "options",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 8,
-                    "endIndex": 10
-                  }
-                }
-              ],
               "typeParameters": [
                 {
                   "typeParameterName": "K",
@@ -744,6 +728,41 @@
                   }
                 }
               ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 11,
+                "endIndex": 13
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "controlDef",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "position",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 7
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 8,
+                    "endIndex": 10
+                  },
+                  "isOptional": true
+                }
+              ],
+              "isOptional": false,
               "name": "addControl"
             },
             {
@@ -787,13 +806,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 7
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -801,9 +820,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "addNgwLayer"
             },
             {
@@ -837,13 +858,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 4,
                 "endIndex": 5
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -851,9 +872,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 3
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "cancelPromise"
             },
             {
@@ -887,13 +910,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 4,
                 "endIndex": 5
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -901,9 +924,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 3
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "cancelPromises"
             },
             {
@@ -925,6 +950,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "connector",
@@ -932,7 +958,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Method",
@@ -952,15 +979,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "disableSelection"
             },
             {
@@ -1004,6 +1032,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "emitter",
@@ -1011,7 +1040,8 @@
                 "startIndex": 1,
                 "endIndex": 7
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Method",
@@ -1031,15 +1061,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "enableSelection"
             },
             {
@@ -1091,13 +1122,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 5,
                 "endIndex": 9
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -1105,16 +1136,19 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 },
                 {
                   "parameterName": "multiple",
                   "parameterTypeTokenRange": {
                     "startIndex": 3,
                     "endIndex": 4
-                  }
+                  },
+                  "isOptional": true
                 }
               ],
+              "isOptional": false,
               "name": "fetchIdentifyGeoJson"
             },
             {
@@ -1211,36 +1245,12 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 15,
-                "endIndex": 19
-              },
-              "releaseTag": "Public",
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "identify",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 11,
-                    "endIndex": 12
-                  }
-                },
-                {
-                  "parameterName": "requestOptions",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 13,
-                    "endIndex": 14
-                  }
-                }
-              ],
               "typeParameters": [
                 {
                   "typeParameterName": "G",
                   "constraintTokenRange": {
                     "startIndex": 1,
-                    "endIndex": 3
+                    "endIndex": 2
                   },
                   "defaultTypeTokenRange": {
                     "startIndex": 4,
@@ -1251,7 +1261,7 @@
                   "typeParameterName": "P",
                   "constraintTokenRange": {
                     "startIndex": 6,
-                    "endIndex": 8
+                    "endIndex": 7
                   },
                   "defaultTypeTokenRange": {
                     "startIndex": 9,
@@ -1259,6 +1269,33 @@
                   }
                 }
               ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 15,
+                "endIndex": 19
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "identify",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 11,
+                    "endIndex": 12
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "requestOptions",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 13,
+                    "endIndex": 14
+                  },
+                  "isOptional": true
+                }
+              ],
+              "isOptional": false,
               "name": "fetchIdentifyItem"
             },
             {
@@ -1359,29 +1396,12 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 16,
-                "endIndex": 20
-              },
-              "releaseTag": "Public",
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "options",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 11,
-                    "endIndex": 15
-                  }
-                }
-              ],
               "typeParameters": [
                 {
                   "typeParameterName": "G",
                   "constraintTokenRange": {
                     "startIndex": 1,
-                    "endIndex": 3
+                    "endIndex": 2
                   },
                   "defaultTypeTokenRange": {
                     "startIndex": 4,
@@ -1392,7 +1412,7 @@
                   "typeParameterName": "P",
                   "constraintTokenRange": {
                     "startIndex": 6,
-                    "endIndex": 8
+                    "endIndex": 7
                   },
                   "defaultTypeTokenRange": {
                     "startIndex": 9,
@@ -1400,6 +1420,25 @@
                   }
                 }
               ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 16,
+                "endIndex": 20
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 11,
+                    "endIndex": 15
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
               "name": "fetchNgwLayerFeature"
             },
             {
@@ -1500,29 +1539,12 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 16,
-                "endIndex": 20
-              },
-              "releaseTag": "Public",
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "options",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 11,
-                    "endIndex": 15
-                  }
-                }
-              ],
               "typeParameters": [
                 {
                   "typeParameterName": "G",
                   "constraintTokenRange": {
                     "startIndex": 1,
-                    "endIndex": 3
+                    "endIndex": 2
                   },
                   "defaultTypeTokenRange": {
                     "startIndex": 4,
@@ -1533,7 +1555,7 @@
                   "typeParameterName": "P",
                   "constraintTokenRange": {
                     "startIndex": 6,
-                    "endIndex": 8
+                    "endIndex": 7
                   },
                   "defaultTypeTokenRange": {
                     "startIndex": 9,
@@ -1541,6 +1563,25 @@
                   }
                 }
               ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 16,
+                "endIndex": 20
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 11,
+                    "endIndex": 15
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
               "name": "fetchNgwLayerFeatures"
             },
             {
@@ -1641,29 +1682,12 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 16,
-                "endIndex": 20
-              },
-              "releaseTag": "Public",
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "options",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 11,
-                    "endIndex": 15
-                  }
-                }
-              ],
               "typeParameters": [
                 {
                   "typeParameterName": "G",
                   "constraintTokenRange": {
                     "startIndex": 1,
-                    "endIndex": 3
+                    "endIndex": 2
                   },
                   "defaultTypeTokenRange": {
                     "startIndex": 4,
@@ -1674,7 +1698,7 @@
                   "typeParameterName": "P",
                   "constraintTokenRange": {
                     "startIndex": 6,
-                    "endIndex": 8
+                    "endIndex": 7
                   },
                   "defaultTypeTokenRange": {
                     "startIndex": 9,
@@ -1682,6 +1706,25 @@
                   }
                 }
               ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 16,
+                "endIndex": 20
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 11,
+                    "endIndex": 15
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
               "name": "fetchNgwLayerItem"
             },
             {
@@ -1782,29 +1825,12 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 16,
-                "endIndex": 20
-              },
-              "releaseTag": "Public",
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "options",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 11,
-                    "endIndex": 15
-                  }
-                }
-              ],
               "typeParameters": [
                 {
                   "typeParameterName": "F",
                   "constraintTokenRange": {
                     "startIndex": 1,
-                    "endIndex": 3
+                    "endIndex": 2
                   },
                   "defaultTypeTokenRange": {
                     "startIndex": 4,
@@ -1815,7 +1841,7 @@
                   "typeParameterName": "G",
                   "constraintTokenRange": {
                     "startIndex": 6,
-                    "endIndex": 8
+                    "endIndex": 7
                   },
                   "defaultTypeTokenRange": {
                     "startIndex": 9,
@@ -1823,6 +1849,25 @@
                   }
                 }
               ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 16,
+                "endIndex": 20
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 11,
+                    "endIndex": 15
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
               "name": "fetchNgwLayerItems"
             },
             {
@@ -1843,15 +1888,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "fit"
             },
             {
@@ -1895,13 +1941,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 5,
                 "endIndex": 7
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -1909,16 +1955,19 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 },
                 {
                   "parameterName": "options",
                   "parameterTypeTokenRange": {
                     "startIndex": 3,
                     "endIndex": 4
-                  }
+                  },
+                  "isOptional": true
                 }
               ],
+              "isOptional": false,
               "name": "fitLayer"
             },
             {
@@ -1944,6 +1993,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "getIcon",
@@ -1951,7 +2001,8 @@
                 "startIndex": 1,
                 "endIndex": 3
               },
-              "isStatic": true
+              "isStatic": true,
+              "isProtected": false
             },
             {
               "kind": "Method",
@@ -2002,13 +2053,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 5,
                 "endIndex": 9
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -2016,16 +2067,19 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 },
                 {
                   "parameterName": "multiple",
                   "parameterTypeTokenRange": {
                     "startIndex": 3,
                     "endIndex": 4
-                  }
+                  },
+                  "isOptional": true
                 }
               ],
+              "isOptional": false,
               "name": "getIdentifyGeoJson"
             },
             {
@@ -2068,13 +2122,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 7
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -2082,9 +2136,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "getNgwLayerByResourceId"
             },
             {
@@ -2185,29 +2241,12 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 16,
-                "endIndex": 20
-              },
-              "releaseTag": "Public",
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "options",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 11,
-                    "endIndex": 15
-                  }
-                }
-              ],
               "typeParameters": [
                 {
                   "typeParameterName": "G",
                   "constraintTokenRange": {
                     "startIndex": 1,
-                    "endIndex": 3
+                    "endIndex": 2
                   },
                   "defaultTypeTokenRange": {
                     "startIndex": 4,
@@ -2218,7 +2257,7 @@
                   "typeParameterName": "P",
                   "constraintTokenRange": {
                     "startIndex": 6,
-                    "endIndex": 8
+                    "endIndex": 7
                   },
                   "defaultTypeTokenRange": {
                     "startIndex": 9,
@@ -2226,6 +2265,25 @@
                   }
                 }
               ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 16,
+                "endIndex": 20
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 11,
+                    "endIndex": 15
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
               "name": "getNgwLayerFeature"
             },
             {
@@ -2317,29 +2375,12 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 14,
-                "endIndex": 18
-              },
-              "releaseTag": "Public",
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "options",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 11,
-                    "endIndex": 13
-                  }
-                }
-              ],
               "typeParameters": [
                 {
                   "typeParameterName": "G",
                   "constraintTokenRange": {
                     "startIndex": 1,
-                    "endIndex": 3
+                    "endIndex": 2
                   },
                   "defaultTypeTokenRange": {
                     "startIndex": 4,
@@ -2350,7 +2391,7 @@
                   "typeParameterName": "P",
                   "constraintTokenRange": {
                     "startIndex": 6,
-                    "endIndex": 8
+                    "endIndex": 7
                   },
                   "defaultTypeTokenRange": {
                     "startIndex": 9,
@@ -2358,6 +2399,25 @@
                   }
                 }
               ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 14,
+                "endIndex": 18
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 11,
+                    "endIndex": 13
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
               "name": "getNgwLayerFeatures"
             },
             {
@@ -2458,29 +2518,12 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 16,
-                "endIndex": 20
-              },
-              "releaseTag": "Public",
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "options",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 11,
-                    "endIndex": 15
-                  }
-                }
-              ],
               "typeParameters": [
                 {
                   "typeParameterName": "G",
                   "constraintTokenRange": {
                     "startIndex": 1,
-                    "endIndex": 3
+                    "endIndex": 2
                   },
                   "defaultTypeTokenRange": {
                     "startIndex": 4,
@@ -2491,7 +2534,7 @@
                   "typeParameterName": "P",
                   "constraintTokenRange": {
                     "startIndex": 6,
-                    "endIndex": 8
+                    "endIndex": 7
                   },
                   "defaultTypeTokenRange": {
                     "startIndex": 9,
@@ -2499,6 +2542,25 @@
                   }
                 }
               ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 16,
+                "endIndex": 20
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 11,
+                    "endIndex": 15
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
               "name": "getNgwLayerItem"
             },
             {
@@ -2599,29 +2661,12 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 16,
-                "endIndex": 20
-              },
-              "releaseTag": "Public",
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "options",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 11,
-                    "endIndex": 15
-                  }
-                }
-              ],
               "typeParameters": [
                 {
                   "typeParameterName": "F",
                   "constraintTokenRange": {
                     "startIndex": 1,
-                    "endIndex": 3
+                    "endIndex": 2
                   },
                   "defaultTypeTokenRange": {
                     "startIndex": 4,
@@ -2632,7 +2677,7 @@
                   "typeParameterName": "G",
                   "constraintTokenRange": {
                     "startIndex": 6,
-                    "endIndex": 8
+                    "endIndex": 7
                   },
                   "defaultTypeTokenRange": {
                     "startIndex": 9,
@@ -2640,6 +2685,25 @@
                   }
                 }
               ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 16,
+                "endIndex": 20
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 11,
+                    "endIndex": 15
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
               "name": "getNgwLayerItems"
             },
             {
@@ -2674,15 +2738,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 5
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "getNgwLayers"
             },
             {
@@ -2721,13 +2786,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 4,
                 "endIndex": 6
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -2735,9 +2800,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 3
-                  }
+                  },
+                  "isOptional": true
                 }
               ],
+              "isOptional": false,
               "name": "onLoad"
             },
             {
@@ -2767,13 +2834,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 4
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -2781,9 +2848,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "removeLayer"
             },
             {
@@ -2822,13 +2891,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 4,
                 "endIndex": 6
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -2836,15 +2905,17 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 3
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "zoomToLayer"
             }
           ],
           "extendsTokenRange": {
             "startIndex": 13,
-            "endIndex": 17
+            "endIndex": 16
           },
           "implementsTokenRanges": []
         },
@@ -2869,6 +2940,7 @@
           ],
           "releaseTag": "Public",
           "name": "NgwMapEvents",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -2889,6 +2961,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "\"ngw-map:create\"",
@@ -2915,6 +2988,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "\"ngw:preselect\"",
@@ -2946,6 +3020,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "\"ngw:select\"",
@@ -2958,7 +3033,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -3023,6 +3098,7 @@
             }
           ],
           "name": "NgwMapOptions",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -3043,6 +3119,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "auth",
@@ -3069,6 +3146,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "baseUrl",
@@ -3096,6 +3174,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "companyLogoOptions",
@@ -3123,6 +3202,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "connector",
@@ -3149,6 +3229,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "osm",
@@ -3175,6 +3256,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "pixelRadius",
@@ -3201,6 +3283,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "qmsId",
@@ -3232,6 +3315,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "resources",
@@ -3263,6 +3347,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "runtimeParams",
@@ -3289,6 +3374,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "setViewDelay",
@@ -3316,6 +3402,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "webmapId",
@@ -3342,6 +3429,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "whitlabel",
@@ -3354,7 +3442,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 5,
-              "endIndex": 7
+              "endIndex": 6
             }
           ]
         },

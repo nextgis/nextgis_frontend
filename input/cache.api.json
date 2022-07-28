@@ -1,8 +1,8 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.18.19",
-    "schemaVersion": 1004,
+    "toolVersion": "7.28.6",
+    "schemaVersion": 1009,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
       "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
@@ -156,18 +156,21 @@
         "@betaDocumentation": true,
         "@internalRemarks": true,
         "@preapproved": true
-      }
+      },
+      "reportUnsupportedHtmlElements": false
     }
   },
   "kind": "Package",
   "canonicalReference": "@nextgis/cache!",
   "docComment": "/**\n * Caching for asynchronous functions\n *\n * @module cache\n *\n * @packageDocumentation\n */\n",
   "name": "@nextgis/cache",
+  "preserveMemberOrder": false,
   "members": [
     {
       "kind": "EntryPoint",
       "canonicalReference": "@nextgis/cache!",
       "name": "",
+      "preserveMemberOrder": false,
       "members": [
         {
           "kind": "Class",
@@ -230,7 +233,7 @@
               "typeParameterName": "O",
               "constraintTokenRange": {
                 "startIndex": 3,
-                "endIndex": 5
+                "endIndex": 4
               },
               "defaultTypeTokenRange": {
                 "startIndex": 6,
@@ -239,6 +242,7 @@
             }
           ],
           "name": "Cache_2",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "Constructor",
@@ -260,6 +264,7 @@
                 }
               ],
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -267,7 +272,8 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": true
                 }
               ]
             },
@@ -345,13 +351,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 13,
                 "endIndex": 15
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -359,30 +365,35 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 },
                 {
                   "parameterName": "valueToSet",
                   "parameterTypeTokenRange": {
                     "startIndex": 3,
                     "endIndex": 7
-                  }
+                  },
+                  "isOptional": false
                 },
                 {
                   "parameterName": "props",
                   "parameterTypeTokenRange": {
                     "startIndex": 8,
                     "endIndex": 10
-                  }
+                  },
+                  "isOptional": true
                 },
                 {
                   "parameterName": "onlyFull",
                   "parameterTypeTokenRange": {
                     "startIndex": 11,
                     "endIndex": 12
-                  }
+                  },
+                  "isOptional": true
                 }
               ],
+              "isOptional": false,
               "name": "add"
             },
             {
@@ -451,13 +462,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 11,
                 "endIndex": 13
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -465,23 +476,27 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 },
                 {
                   "parameterName": "valueToSet",
                   "parameterTypeTokenRange": {
                     "startIndex": 3,
                     "endIndex": 7
-                  }
+                  },
+                  "isOptional": false
                 },
                 {
                   "parameterName": "props",
                   "parameterTypeTokenRange": {
                     "startIndex": 8,
                     "endIndex": 10
-                  }
+                  },
+                  "isOptional": true
                 }
               ],
+              "isOptional": false,
               "name": "addFull"
             },
             {
@@ -507,15 +522,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "all"
             },
             {
@@ -536,15 +552,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "clean"
             },
             {
@@ -574,13 +591,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 4
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -588,9 +605,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "delete"
             },
             {
@@ -632,13 +651,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 6,
                 "endIndex": 7
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 2,
               "parameters": [
                 {
@@ -646,16 +665,19 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 },
                 {
                   "parameterName": "props",
                   "parameterTypeTokenRange": {
                     "startIndex": 3,
                     "endIndex": 5
-                  }
+                  },
+                  "isOptional": true
                 }
               ],
+              "isOptional": false,
               "name": "delete"
             },
             {
@@ -702,13 +724,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 6,
                 "endIndex": 8
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -716,16 +738,19 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 },
                 {
                   "parameterName": "props",
                   "parameterTypeTokenRange": {
                     "startIndex": 3,
                     "endIndex": 5
-                  }
+                  },
+                  "isOptional": true
                 }
               ],
+              "isOptional": false,
               "name": "match"
             },
             {
@@ -772,13 +797,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 6,
                 "endIndex": 8
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -786,16 +811,19 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": true
                 },
                 {
                   "parameterName": "props",
                   "parameterTypeTokenRange": {
                     "startIndex": 3,
                     "endIndex": 5
-                  }
+                  },
+                  "isOptional": true
                 }
               ],
+              "isOptional": false,
               "name": "matchAll"
             }
           ],
