@@ -1,8 +1,8 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.18.19",
-    "schemaVersion": 1004,
+    "toolVersion": "7.28.6",
+    "schemaVersion": 1009,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
       "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
@@ -156,18 +156,21 @@
         "@betaDocumentation": true,
         "@internalRemarks": true,
         "@preapproved": true
-      }
+      },
+      "reportUnsupportedHtmlElements": false
     }
   },
   "kind": "Package",
   "canonicalReference": "@nextgis/react-ngw-ol!",
   "docComment": "",
   "name": "@nextgis/react-ngw-ol",
+  "preserveMemberOrder": false,
   "members": [
     {
       "kind": "EntryPoint",
       "canonicalReference": "@nextgis/react-ngw-ol!",
       "name": "",
+      "preserveMemberOrder": false,
       "members": [
         {
           "kind": "Function",
@@ -232,16 +235,16 @@
             },
             {
               "kind": "Content",
-              "text": "<Props & {\n    mapAdapter: "
+              "text": "<import(\"@nextgis/react-ngw-map\")."
             },
             {
               "kind": "Reference",
-              "text": "MapAdapter",
-              "canonicalReference": "@nextgis/ol-map-adapter!~OlMapAdapter:class"
+              "text": "ReactNgwMapProps",
+              "canonicalReference": "@nextgis/react-ngw-map!ReactNgwMapProps:type"
             },
             {
               "kind": "Content",
-              "text": ";\n}>"
+              "text": ">"
             },
             {
               "kind": "Content",
@@ -260,7 +263,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 9,
                 "endIndex": 10
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -268,7 +272,7 @@
               "typeParameterName": "Props",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,

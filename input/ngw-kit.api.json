@@ -1,8 +1,8 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.18.19",
-    "schemaVersion": 1004,
+    "toolVersion": "7.28.6",
+    "schemaVersion": 1009,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
       "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
@@ -156,18 +156,21 @@
         "@betaDocumentation": true,
         "@internalRemarks": true,
         "@preapproved": true
-      }
+      },
+      "reportUnsupportedHtmlElements": false
     }
   },
   "kind": "Package",
   "canonicalReference": "@nextgis/ngw-kit!",
   "docComment": "/**\n * WebMap plugin and utilities that allow you to interact with NextGIS Web.\n *\n * @remarks\n *\n * Make sure CORS is registered in the {@link https://docs.nextgis.com/docs_ngcom/source/CORS.html | NextGIS Web settings} to be able to send requests.\n *\n * @example\n *\n * As WebMap starter kit example\n * ```javascript\n * import { NgwKit } from '@nextgis/ngw-kit';\n * import { createWebMap } from '@nextgis/webmap';\n * import LeafletMapAdapter from '@nextgis/leaflet-map-adapter';\n *\n * import 'leaflet/dist/leaflet.css';\n *\n * createWebMap({\n *   mapAdapter: new LeafletMapAdapter(),\n *   starterKits: [\n *     new NgwKit({\n *       baseUrl: 'YOU NEXTGIS WEB URL',\n *       resource: 'WEBMAP RESOURCE ID',\n *     }),\n *   ],\n * });\n * ```\n *\n * @example\n *\n * Get NGW vector layer items\n * ```javascript\n * import { getNgwLayerItem, getNgwLayerItems } from '@nextgis/ngw-kit';\n * import NgwConnector from '@nextgis/ngw-connector';\n *\n * const connector = new NgwConnector({ baseUrl: 'YOU NEXTGIS WEB URL'});\n *\n * getNgwLayerItem({\n *   resourceId: 2011,\n *   featureId: 1,\n *   connector: connector\n * }).then((item) => { ... });\n *\n * getNgwLayerItems({\n *   resourceId: 2011,\n *   offset: 10,\n *   limit: 300,\n *   fields: ['name', 'year', 'Ni', 'Cu', 'Pt', 'Pd', 'Au']\n *   orderBy: ['year']\n * }).then((items) => { ... });\n * ```\n *\n * @module ngw-kit\n *\n * @packageDocumentation\n */\n",
   "name": "@nextgis/ngw-kit",
+  "preserveMemberOrder": false,
   "members": [
     {
       "kind": "EntryPoint",
       "canonicalReference": "@nextgis/ngw-kit!",
       "name": "",
+      "preserveMemberOrder": false,
       "members": [
         {
           "kind": "Function",
@@ -222,7 +225,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 5
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "addFeatureAttachment"
@@ -307,21 +311,24 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "webMap",
               "parameterTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 4
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "connector",
               "parameterTypeTokenRange": {
                 "startIndex": 5,
                 "endIndex": 6
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "addNgwLayer"
@@ -338,6 +345,7 @@
           ],
           "releaseTag": "Public",
           "name": "AppSettings",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -357,6 +365,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "bookmark_resource",
@@ -383,6 +392,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "draw_order_enabled",
@@ -409,6 +419,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "extent_bottom",
@@ -435,6 +446,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "extent_left",
@@ -461,6 +473,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "extent_right",
@@ -487,6 +500,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "extent_top",
@@ -514,6 +528,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "root_item",
@@ -585,6 +600,7 @@
           ],
           "releaseTag": "Public",
           "name": "CompanyLogoOptions",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -604,6 +620,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "cssClass",
@@ -630,6 +647,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "padding",
@@ -763,7 +781,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 10,
                 "endIndex": 18
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -771,7 +790,7 @@
               "typeParameterName": "G",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -854,7 +873,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "createGeoJsonAdapter"
@@ -960,7 +980,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 11,
                 "endIndex": 15
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -968,7 +989,7 @@
               "typeParameterName": "G",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -979,7 +1000,7 @@
               "typeParameterName": "P",
               "constraintTokenRange": {
                 "startIndex": 6,
-                "endIndex": 8
+                "endIndex": 7
               },
               "defaultTypeTokenRange": {
                 "startIndex": 9,
@@ -1064,7 +1085,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 8,
                 "endIndex": 9
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -1083,7 +1105,7 @@
               "typeParameterName": "G",
               "constraintTokenRange": {
                 "startIndex": 3,
-                "endIndex": 5
+                "endIndex": 4
               },
               "defaultTypeTokenRange": {
                 "startIndex": 6,
@@ -1173,21 +1195,24 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "webMap",
               "parameterTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 4
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "connector",
               "parameterTypeTokenRange": {
                 "startIndex": 5,
                 "endIndex": 6
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "createNgwLayerAdapter"
@@ -1254,7 +1279,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "createOnFirstShowAdapter"
@@ -1321,7 +1347,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "createOnFirstShowNgwAdapter"
@@ -1379,14 +1406,16 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "item",
               "parameterTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 4
-              }
+              },
+              "isOptional": true
             }
           ],
           "name": "createPopupContent"
@@ -1453,7 +1482,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "createRasterAdapter"
@@ -1506,7 +1536,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "deleteFeatureAttachment"
@@ -1564,7 +1595,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "extendNgwWebmapLayerAdapter"
@@ -1581,6 +1613,7 @@
           ],
           "releaseTag": "Public",
           "name": "ExtendNgwWebmapLayerAdapterOptions",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -1600,6 +1633,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "baseUrl",
@@ -1627,6 +1661,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "connector",
@@ -1654,6 +1689,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "webMap",
@@ -1680,6 +1716,7 @@
               "canonicalReference": "@nextgis/ngw-kit!FeatureRequestParams:interface"
             }
           ],
+          "isReadonly": true,
           "releaseTag": "Public",
           "name": "FEATURE_REQUEST_PARAMS",
           "variableTypeTokenRange": {
@@ -1699,6 +1736,7 @@
           ],
           "releaseTag": "Public",
           "name": "FeatureIdentifyRequestOptions",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -1718,6 +1756,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "geom",
@@ -1744,6 +1783,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "layers",
@@ -1770,6 +1810,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "srs",
@@ -1834,7 +1875,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "featureLayerIdentify"
@@ -1860,6 +1902,7 @@
           ],
           "releaseTag": "Public",
           "name": "FeatureLayerIdentifyOptions",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -1880,6 +1923,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "connector",
@@ -1938,6 +1982,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "geom",
@@ -1964,6 +2009,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "layers",
@@ -1976,7 +2022,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -1992,6 +2038,7 @@
           ],
           "releaseTag": "Public",
           "name": "FeatureRequestParams",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -2011,6 +2058,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "extensions",
@@ -2037,6 +2085,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "fields",
@@ -2063,6 +2112,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "geom_format",
@@ -2089,6 +2139,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "geom",
@@ -2115,6 +2166,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "intersects",
@@ -2141,6 +2193,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "limit",
@@ -2167,6 +2220,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "order_by",
@@ -2193,6 +2247,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "srs",
@@ -2301,7 +2356,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 11,
                 "endIndex": 12
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -2309,7 +2365,7 @@
               "typeParameterName": "G",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -2320,7 +2376,7 @@
               "typeParameterName": "P",
               "constraintTokenRange": {
                 "startIndex": 6,
-                "endIndex": 8
+                "endIndex": 7
               },
               "defaultTypeTokenRange": {
                 "startIndex": 9,
@@ -2431,7 +2487,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 11,
                 "endIndex": 13
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -2439,7 +2496,7 @@
               "typeParameterName": "G",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -2450,7 +2507,7 @@
               "typeParameterName": "P",
               "constraintTokenRange": {
                 "startIndex": 6,
-                "endIndex": 8
+                "endIndex": 7
               },
               "defaultTypeTokenRange": {
                 "startIndex": 9,
@@ -2513,7 +2570,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "fetchNgwExtent"
@@ -2579,7 +2637,7 @@
               "typeParameterName": "P",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -2653,7 +2711,7 @@
               "typeParameterName": "P",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -2710,7 +2768,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "fetchNgwLayerCount"
@@ -2727,6 +2786,7 @@
           ],
           "releaseTag": "Public",
           "name": "FetchNgwLayerCountOptions",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -2746,6 +2806,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "cache",
@@ -2773,6 +2834,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "connector",
@@ -2799,6 +2861,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "resourceId",
@@ -2863,7 +2926,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "fetchNgwLayerExtent"
@@ -2889,6 +2953,7 @@
           ],
           "releaseTag": "Public",
           "name": "FetchNgwLayerExtentOptions",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -2909,6 +2974,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "connector",
@@ -2935,6 +3001,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "resourceId",
@@ -2947,7 +3014,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -3056,7 +3123,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 12,
                 "endIndex": 14
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -3064,7 +3132,7 @@
               "typeParameterName": "G",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -3075,7 +3143,7 @@
               "typeParameterName": "P",
               "constraintTokenRange": {
                 "startIndex": 6,
-                "endIndex": 8
+                "endIndex": 7
               },
               "defaultTypeTokenRange": {
                 "startIndex": 9,
@@ -3186,7 +3254,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 11,
                 "endIndex": 13
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -3194,7 +3263,7 @@
               "typeParameterName": "G",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -3205,7 +3274,7 @@
               "typeParameterName": "P",
               "constraintTokenRange": {
                 "startIndex": 6,
-                "endIndex": 8
+                "endIndex": 7
               },
               "defaultTypeTokenRange": {
                 "startIndex": 9,
@@ -3316,7 +3385,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 11,
                 "endIndex": 13
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -3324,7 +3394,7 @@
               "typeParameterName": "G",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -3335,7 +3405,7 @@
               "typeParameterName": "P",
               "constraintTokenRange": {
                 "startIndex": 6,
-                "endIndex": 8
+                "endIndex": 7
               },
               "defaultTypeTokenRange": {
                 "startIndex": 9,
@@ -3446,7 +3516,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 11,
                 "endIndex": 13
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -3454,7 +3525,7 @@
               "typeParameterName": "G",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -3465,7 +3536,7 @@
               "typeParameterName": "P",
               "constraintTokenRange": {
                 "startIndex": 6,
-                "endIndex": 8
+                "endIndex": 7
               },
               "defaultTypeTokenRange": {
                 "startIndex": 9,
@@ -3528,7 +3599,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "fetchNgwLayerItemExtent"
@@ -3554,6 +3626,7 @@
           ],
           "releaseTag": "Public",
           "name": "FetchNgwLayerItemExtentOptions",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -3573,6 +3646,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "featureId",
@@ -3585,7 +3659,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -3690,7 +3764,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 11,
                 "endIndex": 13
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -3698,7 +3773,7 @@
               "typeParameterName": "G",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -3709,7 +3784,7 @@
               "typeParameterName": "P",
               "constraintTokenRange": {
                 "startIndex": 6,
-                "endIndex": 8
+                "endIndex": 7
               },
               "defaultTypeTokenRange": {
                 "startIndex": 9,
@@ -3814,7 +3889,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 10,
                 "endIndex": 12
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -3822,7 +3898,7 @@
               "typeParameterName": "G",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -3914,21 +3990,24 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "connector",
               "parameterTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 4
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "options",
               "parameterTypeTokenRange": {
                 "startIndex": 5,
                 "endIndex": 6
-              }
+              },
+              "isOptional": true
             }
           ],
           "name": "fetchNgwResourceExtent"
@@ -3954,6 +4033,7 @@
           ],
           "releaseTag": "Public",
           "name": "FetchNgwResourceExtent",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -3974,6 +4054,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "connector",
@@ -4010,6 +4091,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "resource",
@@ -4022,7 +4104,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -4168,6 +4250,7 @@
           ],
           "releaseTag": "Public",
           "name": "GetClassAdapterOptions",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -4201,6 +4284,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "Adapter",
@@ -4227,6 +4311,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "addLayerOptionsPriority",
@@ -4254,6 +4339,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "connector",
@@ -4281,6 +4367,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "item",
@@ -4308,6 +4395,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "layerOptions",
@@ -4335,6 +4423,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "webMap",
@@ -4408,14 +4497,16 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "options",
               "parameterTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 4
-              }
+              },
+              "isOptional": true
             }
           ],
           "name": "getCompanyLogo"
@@ -4517,7 +4608,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 11,
                 "endIndex": 12
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -4525,7 +4617,7 @@
               "typeParameterName": "G",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -4536,7 +4628,7 @@
               "typeParameterName": "P",
               "constraintTokenRange": {
                 "startIndex": 6,
-                "endIndex": 8
+                "endIndex": 7
               },
               "defaultTypeTokenRange": {
                 "startIndex": 9,
@@ -4584,7 +4676,7 @@
               "typeParameterName": "P",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -4593,6 +4685,7 @@
             }
           ],
           "name": "GetIdentifyGeoJsonOptions",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -4613,6 +4706,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "connector",
@@ -4640,6 +4734,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "identify",
@@ -4666,6 +4761,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "multiple",
@@ -4697,6 +4793,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "requestOptions",
@@ -4764,14 +4861,16 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "multiple",
               "parameterTypeTokenRange": {
                 "startIndex": 4,
                 "endIndex": 5
-              }
+              },
+              "isOptional": true
             }
           ],
           "name": "getIdentifyItems"
@@ -4816,7 +4915,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "getImageAdapterOptions"
@@ -4833,6 +4933,7 @@
           ],
           "releaseTag": "Public",
           "name": "GetImageAdapterOptionsParams",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -4852,6 +4953,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "baseUrl",
@@ -4878,6 +4980,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "headers",
@@ -4905,6 +5008,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "nd",
@@ -4931,6 +5035,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "resourceId",
@@ -5012,21 +5117,24 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "webMap",
               "parameterTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 4
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "baseUrl",
               "parameterTypeTokenRange": {
                 "startIndex": 5,
                 "endIndex": 6
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "getLayerAdapterOptions"
@@ -5043,6 +5151,7 @@
           ],
           "releaseTag": "Public",
           "name": "GetLayerAdapterOptions",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -5062,6 +5171,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "baseUrl",
@@ -5089,6 +5199,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "options",
@@ -5116,6 +5227,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "webMap",
@@ -5165,7 +5277,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "getMapWidthForLanInMeters"
@@ -5191,6 +5304,7 @@
           ],
           "releaseTag": "Public",
           "name": "GetNgwItemOptions",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -5210,6 +5324,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "featureId",
@@ -5222,7 +5337,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -5273,7 +5388,7 @@
               "typeParameterName": "P",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -5282,6 +5397,7 @@
             }
           ],
           "name": "GetNgwItemsOptions",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -5315,6 +5431,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "filters",
@@ -5341,6 +5458,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "paramList",
@@ -5353,7 +5471,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 6,
-              "endIndex": 8
+              "endIndex": 7
             }
           ]
         },
@@ -5401,7 +5519,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "getNgwWebmapExtent"
@@ -5444,7 +5563,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "getZoomFromScale"
@@ -5461,6 +5581,7 @@
           ],
           "releaseTag": "Public",
           "name": "IdentifyEvent",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -5481,6 +5602,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "data",
@@ -5508,6 +5630,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "ev",
@@ -5586,7 +5709,7 @@
               "typeParameterName": "G",
               "constraintTokenRange": {
                 "startIndex": 3,
-                "endIndex": 5
+                "endIndex": 4
               },
               "defaultTypeTokenRange": {
                 "startIndex": 6,
@@ -5595,6 +5718,7 @@
             }
           ],
           "name": "IdentifyItem",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "Constructor",
@@ -5616,6 +5740,7 @@
                 }
               ],
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -5623,7 +5748,8 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 }
               ]
             },
@@ -5646,6 +5772,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "extensions",
@@ -5653,7 +5780,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Property",
@@ -5674,6 +5802,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "fields",
@@ -5681,7 +5810,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Method",
@@ -5715,15 +5845,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 5
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "geojson"
             },
             {
@@ -5745,6 +5876,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "geom",
@@ -5752,7 +5884,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Method",
@@ -5786,15 +5919,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 5
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "getBounds"
             },
             {
@@ -5815,6 +5949,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "id",
@@ -5822,7 +5957,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Method",
@@ -5878,13 +6014,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 6,
                 "endIndex": 10
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -5892,9 +6028,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 5
-                  }
+                  },
+                  "isOptional": true
                 }
               ],
+              "isOptional": false,
               "name": "identify"
             },
             {
@@ -5915,6 +6053,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "label",
@@ -5922,7 +6061,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Property",
@@ -5942,6 +6082,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "layerId",
@@ -5949,7 +6090,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Property",
@@ -5969,6 +6111,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "parent",
@@ -5976,7 +6119,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Method",
@@ -6010,22 +6154,23 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 5
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "resource"
             }
           ],
           "implementsTokenRanges": [
             {
               "startIndex": 8,
-              "endIndex": 10
+              "endIndex": 9
             }
           ]
         },
@@ -6041,6 +6186,7 @@
           ],
           "releaseTag": "Public",
           "name": "IdentifyItemOptions",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -6061,6 +6207,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "connector",
@@ -6088,6 +6235,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "feature",
@@ -6120,6 +6268,7 @@
           ],
           "releaseTag": "Public",
           "name": "IdentifyRequestOptions",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -6140,6 +6289,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "connector",
@@ -6185,6 +6335,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "geom",
@@ -6211,6 +6362,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "layers",
@@ -6237,6 +6389,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "radius",
@@ -6249,7 +6402,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -6297,7 +6450,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "mapFeatureDisplayName"
@@ -6314,6 +6468,7 @@
           ],
           "releaseTag": "Public",
           "name": "MapFeatureDisplayNameOptions",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -6334,6 +6489,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "connector",
@@ -6360,6 +6516,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "fields",
@@ -6387,6 +6544,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "resource",
@@ -6413,6 +6571,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "resourceId",
@@ -6471,7 +6630,7 @@
               "typeParameterName": "P",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -6480,6 +6639,7 @@
             }
           ],
           "name": "MapSelectNgwLayerDistinctOptions",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -6499,6 +6659,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "fields",
@@ -6511,7 +6672,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 6,
-              "endIndex": 8
+              "endIndex": 7
             }
           ]
         },
@@ -6577,7 +6738,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "ngwApiToAdapterOptions"
@@ -6594,6 +6756,7 @@
           ],
           "releaseTag": "Public",
           "name": "NgwConfig",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -6613,6 +6776,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "amdUrl",
@@ -6639,6 +6803,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "applicationUrl",
@@ -6665,6 +6830,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "assetUrl",
@@ -6691,6 +6857,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "id",
@@ -6769,7 +6936,7 @@
               "typeParameterName": "G",
               "constraintTokenRange": {
                 "startIndex": 3,
-                "endIndex": 5
+                "endIndex": 4
               },
               "defaultTypeTokenRange": {
                 "startIndex": 6,
@@ -6778,6 +6945,7 @@
             }
           ],
           "name": "NgwFeatureItemResponse",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "MethodSignature",
@@ -6825,7 +6993,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 8,
-              "endIndex": 10
+              "endIndex": 9
             }
           ]
         },
@@ -6876,7 +7044,7 @@
               "typeParameterName": "P",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -6885,6 +7053,7 @@
             }
           ],
           "name": "NgwFeatureRequestOptions",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -6909,6 +7078,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "extensions",
@@ -6935,6 +7105,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "geom",
@@ -6961,6 +7132,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "srs",
@@ -6973,7 +7145,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 6,
-              "endIndex": 8
+              "endIndex": 7
             }
           ]
         },
@@ -7037,6 +7209,7 @@
           ],
           "releaseTag": "Public",
           "name": "NgwIdentifyItem",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -7057,6 +7230,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "feature",
@@ -7083,6 +7257,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "featureId",
@@ -7109,6 +7284,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "resourceId",
@@ -7141,6 +7317,7 @@
           ],
           "releaseTag": "Public",
           "name": "NgwKit",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "Constructor",
@@ -7162,6 +7339,7 @@
                 }
               ],
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -7169,7 +7347,8 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 }
               ]
             },
@@ -7208,13 +7387,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": true,
               "returnTypeTokenRange": {
                 "startIndex": 5,
                 "endIndex": 6
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -7222,16 +7401,19 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 },
                 {
                   "parameterName": "adapter",
                   "parameterTypeTokenRange": {
                     "startIndex": 3,
                     "endIndex": 4
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "addClassAdapters"
             },
             {
@@ -7253,6 +7435,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "connector",
@@ -7260,7 +7443,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Method",
@@ -7294,15 +7478,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 5
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "getLayerAdapters"
             },
             {
@@ -7346,13 +7531,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 7
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -7360,9 +7545,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "onLoadSync"
             },
             {
@@ -7384,6 +7571,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "options",
@@ -7391,7 +7579,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Property",
@@ -7411,6 +7600,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "url",
@@ -7418,7 +7608,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Property",
@@ -7439,6 +7630,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "webMap",
@@ -7446,13 +7638,14 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             }
           ],
           "implementsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -7468,6 +7661,7 @@
           ],
           "releaseTag": "Public",
           "name": "NgwKitOptions",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -7487,6 +7681,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "auth",
@@ -7513,6 +7708,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "baseUrl",
@@ -7540,6 +7736,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "connector",
@@ -7566,6 +7763,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "pixelRadius",
@@ -7593,6 +7791,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "resourceId",
@@ -7689,7 +7888,7 @@
               "typeParameterName": "T",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -7720,6 +7919,7 @@
             }
           ],
           "name": "NgwLayerOptions",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -7739,6 +7939,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "adapter",
@@ -7788,6 +7989,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "adapterOptions",
@@ -7814,6 +8016,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "fit",
@@ -7840,6 +8043,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "headers",
@@ -7866,6 +8070,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "id",
@@ -7892,6 +8097,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "meta",
@@ -7919,6 +8125,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "resource",
@@ -7945,6 +8152,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "simplification",
@@ -7972,6 +8180,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "tileNoData",
@@ -8034,6 +8243,7 @@
           ],
           "releaseTag": "Public",
           "name": "NgwResource",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "Property",
@@ -8054,6 +8264,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "_extent",
@@ -8061,7 +8272,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": true
             },
             {
               "kind": "Property",
@@ -8082,6 +8294,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "connector",
@@ -8089,7 +8302,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Method",
@@ -8132,13 +8346,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 7
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -8146,9 +8360,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": true
                 }
               ],
+              "isOptional": false,
               "name": "getBounds"
             },
             {
@@ -8183,15 +8399,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 5
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "getExtent"
             },
             {
@@ -8213,6 +8430,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "item",
@@ -8220,7 +8438,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             }
           ],
           "implementsTokenRanges": []
@@ -8267,6 +8486,7 @@
             }
           ],
           "name": "NgwWebmapAdapterOptions",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -8287,6 +8507,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "connector",
@@ -8313,6 +8534,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "defaultBasemap",
@@ -8339,6 +8561,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "pixelRadius",
@@ -8366,6 +8589,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "resourceId",
@@ -8392,6 +8616,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "selectable",
@@ -8418,6 +8643,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "useBasemap",
@@ -8444,6 +8670,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "useExtentConstrained",
@@ -8475,6 +8702,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "webMap",
@@ -8487,7 +8715,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 3,
-              "endIndex": 5
+              "endIndex": 4
             }
           ]
         },
@@ -8521,6 +8749,7 @@
           ],
           "releaseTag": "Public",
           "name": "NgwWebmapItem",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "Property",
@@ -8540,6 +8769,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "_rootDescendantsCount",
@@ -8547,7 +8777,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": true
             },
             {
               "kind": "Constructor",
@@ -8622,6 +8853,7 @@
                 }
               ],
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -8629,42 +8861,48 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 },
                 {
                   "parameterName": "item",
                   "parameterTypeTokenRange": {
                     "startIndex": 3,
                     "endIndex": 6
-                  }
+                  },
+                  "isOptional": false
                 },
                 {
                   "parameterName": "options",
                   "parameterTypeTokenRange": {
                     "startIndex": 7,
                     "endIndex": 8
-                  }
+                  },
+                  "isOptional": true
                 },
                 {
                   "parameterName": "connector",
                   "parameterTypeTokenRange": {
                     "startIndex": 9,
                     "endIndex": 10
-                  }
+                  },
+                  "isOptional": true
                 },
                 {
                   "parameterName": "parent",
                   "parameterTypeTokenRange": {
                     "startIndex": 11,
                     "endIndex": 12
-                  }
+                  },
+                  "isOptional": true
                 },
                 {
                   "parameterName": "noInit",
                   "parameterTypeTokenRange": {
                     "startIndex": 13,
                     "endIndex": 14
-                  }
+                  },
+                  "isOptional": true
                 }
               ]
             },
@@ -8686,15 +8924,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "bringToFront"
             },
             {
@@ -8716,6 +8955,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "connector",
@@ -8723,7 +8963,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Method",
@@ -8811,13 +9052,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": true,
               "returnTypeTokenRange": {
                 "startIndex": 13,
                 "endIndex": 17
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -8825,37 +9066,43 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 },
                 {
                   "parameterName": "item",
                   "parameterTypeTokenRange": {
                     "startIndex": 3,
                     "endIndex": 6
-                  }
+                  },
+                  "isOptional": false
                 },
                 {
                   "parameterName": "options",
                   "parameterTypeTokenRange": {
                     "startIndex": 7,
                     "endIndex": 8
-                  }
+                  },
+                  "isOptional": true
                 },
                 {
                   "parameterName": "connector",
                   "parameterTypeTokenRange": {
                     "startIndex": 9,
                     "endIndex": 10
-                  }
+                  },
+                  "isOptional": true
                 },
                 {
                   "parameterName": "parent",
                   "parameterTypeTokenRange": {
                     "startIndex": 11,
                     "endIndex": 12
-                  }
+                  },
+                  "isOptional": true
                 }
               ],
+              "isOptional": false,
               "name": "create"
             },
             {
@@ -8877,6 +9124,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "emitter",
@@ -8884,7 +9132,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Method",
@@ -8904,15 +9153,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "fit"
             },
             {
@@ -8969,6 +9219,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "GetAdapterFromLayerType",
@@ -8976,7 +9227,8 @@
                 "startIndex": 1,
                 "endIndex": 10
               },
-              "isStatic": true
+              "isStatic": true,
+              "isProtected": false
             },
             {
               "kind": "Method",
@@ -9023,13 +9275,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 8
               },
               "releaseTag": "Public",
+              "isProtected": true,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -9037,9 +9289,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "getChildren"
             },
             {
@@ -9083,13 +9337,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 5,
                 "endIndex": 7
               },
               "releaseTag": "Public",
+              "isProtected": true,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -9097,9 +9351,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 4
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "getItemOptions"
             },
             {
@@ -9152,15 +9408,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 9
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "getLayer"
             },
             {
@@ -9204,13 +9461,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 5,
                 "endIndex": 7
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -9218,9 +9475,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 4
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "initItem"
             },
             {
@@ -9251,6 +9510,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "item",
@@ -9258,7 +9518,8 @@
                 "startIndex": 1,
                 "endIndex": 4
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Property",
@@ -9279,6 +9540,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "layer",
@@ -9286,7 +9548,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Property",
@@ -9307,6 +9570,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "options",
@@ -9314,7 +9578,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": true
+              "isStatic": true,
+              "isProtected": false
             },
             {
               "kind": "Property",
@@ -9335,6 +9600,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "webMap",
@@ -9342,12 +9608,13 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             }
           ],
           "extendsTokenRange": {
             "startIndex": 1,
-            "endIndex": 5
+            "endIndex": 4
           },
           "implementsTokenRanges": []
         },
@@ -9393,6 +9660,7 @@
             }
           ],
           "name": "NgwWebmapLayerAdapter",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "Property",
@@ -9413,6 +9681,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "_extent",
@@ -9420,7 +9689,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": true
             },
             {
               "kind": "Method",
@@ -9454,15 +9724,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 5
               },
               "releaseTag": "Public",
+              "isProtected": true,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "_getWebMapLayerItem"
             },
             {
@@ -9493,6 +9764,7 @@
                 }
               ],
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -9500,14 +9772,16 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 },
                 {
                   "parameterName": "options",
                   "parameterTypeTokenRange": {
                     "startIndex": 3,
                     "endIndex": 4
-                  }
+                  },
+                  "isOptional": false
                 }
               ]
             },
@@ -9543,13 +9817,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 5
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -9557,9 +9831,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "addLayer"
             },
             {
@@ -9603,6 +9879,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": true,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "emitter",
@@ -9610,7 +9887,8 @@
                 "startIndex": 1,
                 "endIndex": 7
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Method",
@@ -9644,15 +9922,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 5
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "fetchBookmarks"
             },
             {
@@ -9673,15 +9952,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "getBookmarksResourceId"
             },
             {
@@ -9707,15 +9987,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "getBounds"
             },
             {
@@ -9750,15 +10031,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 5
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "getDependLayers"
             },
             {
@@ -9784,15 +10066,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "getExtent"
             },
             {
@@ -9818,15 +10101,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "getIdentificationIds"
             },
             {
@@ -9852,15 +10136,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "hideLayer"
             },
             {
@@ -9882,6 +10167,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "layer",
@@ -9889,7 +10175,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Property",
@@ -9909,6 +10196,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "map",
@@ -9916,7 +10204,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Property",
@@ -9950,6 +10239,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "NgwWebmapItem",
@@ -9957,7 +10247,8 @@
                 "startIndex": 1,
                 "endIndex": 5
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Property",
@@ -9978,6 +10269,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "options",
@@ -9985,7 +10277,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Property",
@@ -10005,6 +10298,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "pixelRadius",
@@ -10012,7 +10306,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Method",
@@ -10032,15 +10327,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "removeLayer"
             },
             {
@@ -10061,6 +10357,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "resourceId",
@@ -10068,7 +10365,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Method",
@@ -10101,13 +10399,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 5
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -10115,9 +10413,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "setOpacity"
             },
             {
@@ -10143,15 +10443,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "showLayer"
             },
             {
@@ -10172,6 +10473,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "webmapClassName",
@@ -10179,13 +10481,14 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             }
           ],
           "implementsTokenRanges": [
             {
               "startIndex": 3,
-              "endIndex": 5
+              "endIndex": 4
             }
           ]
         },
@@ -10210,6 +10513,7 @@
           ],
           "releaseTag": "Public",
           "name": "NgwWebmapLayerAdapterEvents",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -10230,6 +10534,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "identify",
@@ -10242,7 +10547,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -10298,7 +10603,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 5
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "parseDate"
@@ -10342,7 +10648,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "parseDateFromNgw"
@@ -10461,14 +10768,16 @@
               "parameterTypeTokenRange": {
                 "startIndex": 6,
                 "endIndex": 7
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "resourceFields",
               "parameterTypeTokenRange": {
                 "startIndex": 8,
                 "endIndex": 12
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -10476,7 +10785,7 @@
               "typeParameterName": "T",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -10534,7 +10843,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "prepareNgwFieldsToPropertiesFilter"
@@ -10586,7 +10896,7 @@
               "typeParameterName": "P",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -10706,7 +11016,7 @@
               "typeParameterName": "O",
               "constraintTokenRange": {
                 "startIndex": 5,
-                "endIndex": 7
+                "endIndex": 6
               },
               "defaultTypeTokenRange": {
                 "startIndex": 8,
@@ -10717,7 +11027,7 @@
               "typeParameterName": "F",
               "constraintTokenRange": {
                 "startIndex": 10,
-                "endIndex": 12
+                "endIndex": 11
               },
               "defaultTypeTokenRange": {
                 "startIndex": 13,
@@ -10726,6 +11036,7 @@
             }
           ],
           "name": "ResourceAdapter",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -10745,6 +11056,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "baselayer",
@@ -10907,6 +11219,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "item",
@@ -10933,6 +11246,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "resourceId",
@@ -10945,7 +11259,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 15,
-              "endIndex": 17
+              "endIndex": 16
             }
           ]
         },
@@ -11027,14 +11341,16 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "connector",
               "parameterTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 4
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "resourceIdFromLayerOptions"
@@ -11099,7 +11415,7 @@
               "typeParameterName": "T",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -11202,7 +11518,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 6,
                 "endIndex": 8
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -11210,7 +11527,7 @@
               "typeParameterName": "P",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -11282,14 +11599,16 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "options",
               "parameterTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 4
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "sendIdentifyRequest"
@@ -11340,14 +11659,16 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "lat",
               "parameterTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 4
-              }
+              },
+              "isOptional": true
             }
           ],
           "name": "setScaleRatio"
@@ -11398,6 +11719,7 @@
           ],
           "releaseTag": "Public",
           "name": "TreeGroup",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -11440,6 +11762,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "children",
@@ -11466,6 +11789,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "group_expanded",
@@ -11492,6 +11816,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "item_type",
@@ -11504,7 +11829,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -11520,6 +11845,7 @@
           ],
           "releaseTag": "Public",
           "name": "TreeItem",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -11539,6 +11865,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "_layer",
@@ -11565,6 +11892,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "display_name",
@@ -11591,6 +11919,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "item_type",
@@ -11617,6 +11946,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "parentId",
@@ -11643,6 +11973,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "resourceId",
@@ -11675,6 +12006,7 @@
           ],
           "releaseTag": "Public",
           "name": "TreeLayer",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -11694,6 +12026,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "adapter",
@@ -11720,6 +12053,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "draw_order_position",
@@ -11746,6 +12080,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "item_type",
@@ -11772,6 +12107,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "layer_adapter",
@@ -11798,6 +12134,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "layer_enabled",
@@ -11824,6 +12161,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "layer_max_scale_denom",
@@ -11850,6 +12188,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "layer_min_scale_denom",
@@ -11876,6 +12215,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "layer_style_id",
@@ -11902,6 +12242,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "layer_transparency",
@@ -11928,6 +12269,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "layer_url",
@@ -11954,6 +12296,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "style_parent_id",
@@ -11980,6 +12323,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "updateWmsParams",
@@ -12006,6 +12350,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "url",
@@ -12018,7 +12363,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -12078,14 +12423,16 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "resourceId",
               "parameterTypeTokenRange": {
                 "startIndex": 4,
                 "endIndex": 5
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "updateImageParams"
@@ -12164,14 +12511,16 @@
               "parameterTypeTokenRange": {
                 "startIndex": 6,
                 "endIndex": 7
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "options",
               "parameterTypeTokenRange": {
                 "startIndex": 8,
                 "endIndex": 10
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -12179,7 +12528,7 @@
               "typeParameterName": "P",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -12238,7 +12587,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 4
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "uploadFeatureAttachment"
@@ -12255,6 +12605,7 @@
           ],
           "releaseTag": "Public",
           "name": "UploadFeatureAttachmentOptions",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -12275,6 +12626,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "file",
@@ -12323,6 +12675,7 @@
               "text": ">"
             }
           ],
+          "isReadonly": true,
           "releaseTag": "Public",
           "name": "vectorLayerGeomToPaintTypeAlias",
           "variableTypeTokenRange": {
@@ -12451,7 +12804,7 @@
               "typeParameterName": "O",
               "constraintTokenRange": {
                 "startIndex": 5,
-                "endIndex": 7
+                "endIndex": 6
               },
               "defaultTypeTokenRange": {
                 "startIndex": 8,
@@ -12462,7 +12815,7 @@
               "typeParameterName": "F",
               "constraintTokenRange": {
                 "startIndex": 10,
-                "endIndex": 12
+                "endIndex": 11
               },
               "defaultTypeTokenRange": {
                 "startIndex": 13,
@@ -12482,9 +12835,18 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "WEBMAP_BASELAYER_ID_PREFIX = \"webmap-baselayer\""
+              "text": "WEBMAP_BASELAYER_ID_PREFIX = "
+            },
+            {
+              "kind": "Content",
+              "text": "\"webmap-baselayer\""
             }
           ],
+          "initializerTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          },
+          "isReadonly": true,
           "releaseTag": "Public",
           "name": "WEBMAP_BASELAYER_ID_PREFIX",
           "variableTypeTokenRange": {

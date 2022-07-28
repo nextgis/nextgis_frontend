@@ -1,7 +1,6 @@
 import ImageLayer from 'ol/layer/Image';
 import CanvasImageLayerRenderer from 'ol/renderer/canvas/ImageLayer';
 import ImageWMS from 'ol/source/ImageWMS';
-import WMSServerType from 'ol/source/WMSServerType';
 
 import { resolutionOptions } from '../utils/gerResolution';
 import { queryToObject, objectToQuery } from '../utils/utils';
@@ -70,7 +69,7 @@ export class ImageAdapter extends BaseAdapter implements MainLayerAdapter {
       let ImWms = ImageWMS;
       if (ratio > 1) {
         imageOptions.ratio = ratio;
-        imageOptions.serverType = WMSServerType.MAPSERVER;
+        imageOptions.serverType = 'mapserver';
         class CanvasILRendererExtended extends CanvasImageLayerRenderer {
           renderFrame(frameState: any, target: any) {
             frameState.pixelRatio = ratio;
