@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.15.1](https://github.com/nextgis/nextgisweb_frontend/compare/v1.15.0...v1.15.1) (2022-08-02)
+
+
+### chore
+
+* **vue-ngw-map:** update dependencies ([1f2b688](https://github.com/nextgis/nextgisweb_frontend/commit/1f2b68836c1e3e367bdb1a8c2ff3652e704aae99))
+
+
+### Features
+
+* **ngw-connector:** add request transform method ([13ec477](https://github.com/nextgis/nextgisweb_frontend/commit/13ec4773aac88b6dc5880727241f3b04ef31fac0))
+
+
+### BREAKING CHANGES
+
+* **vue-ngw-map:** Vue is now required as peer dependency
+
+
+
+
+
 # [1.15.0](https://github.com/nextgis/nextgisweb_frontend/compare/v1.14.0...v1.15.0) (2022-07-27)
 
 
