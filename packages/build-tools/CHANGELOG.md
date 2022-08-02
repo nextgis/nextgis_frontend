@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.15.1](https://github.com/nextgis/nextgis_frontend/compare/v1.15.0...v1.15.1) (2022-08-02)
+
+
+### chore
+
+* **vue-ngw-map:** update dependencies ([1f2b688](https://github.com/nextgis/nextgis_frontend/commit/1f2b68836c1e3e367bdb1a8c2ff3652e704aae99))
+
+
+### BREAKING CHANGES
+
+* **vue-ngw-map:** Vue is now required as peer dependency
+
+
+
+
+
 # [1.15.0](https://github.com/nextgis/nextgis_frontend/compare/v1.14.0...v1.15.0) (2022-07-27)
 
 **Note:** Version bump only for package @nextgis/build-tools
