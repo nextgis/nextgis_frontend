@@ -371,7 +371,7 @@ export interface NgwConnectorOptions {
     // (undocumented)
     baseUrl?: string;
     // (undocumented)
-    requestTransform: RequestTransformFunction;
+    requestTransform?: RequestTransformFunction;
     // (undocumented)
     route?: string;
 }
