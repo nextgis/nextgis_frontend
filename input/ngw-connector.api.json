@@ -5324,6 +5324,58 @@
             },
             {
               "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-connector!NgwConnector#setRequestTransform:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setRequestTransform(requestTransform: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RequestTransformFunction",
+                  "canonicalReference": "@nextgis/ngw-connector!RequestTransformFunction:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined | null"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 5
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "requestTransform",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "name": "setRequestTransform"
+            },
+            {
+              "kind": "Method",
               "canonicalReference": "@nextgis/ngw-connector!NgwConnector#updateResource:member(1)",
               "docComment": "/**\n * {@inheritDoc ResourcesControl.update}\n */\n",
               "excerptTokens": [
@@ -5511,6 +5563,34 @@
               "isOptional": true,
               "releaseTag": "Public",
               "name": "baseUrl",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/ngw-connector!NgwConnectorOptions#requestTransform:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "requestTransform: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RequestTransformFunction",
+                  "canonicalReference": "@nextgis/ngw-connector!RequestTransformFunction:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "requestTransform",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -9562,6 +9642,49 @@
             }
           ],
           "extendsTokenRanges": []
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "@nextgis/ngw-connector!RequestTransformFunction:type",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type RequestTransformFunction = "
+            },
+            {
+              "kind": "Content",
+              "text": "(url: string, options: "
+            },
+            {
+              "kind": "Reference",
+              "text": "RequestOptions",
+              "canonicalReference": "@nextgis/ngw-connector!RequestOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ") => [url: string, options: "
+            },
+            {
+              "kind": "Reference",
+              "text": "RequestOptions",
+              "canonicalReference": "@nextgis/ngw-connector!RequestOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "]"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "RequestTransformFunction",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 6
+          }
         },
         {
           "kind": "Interface",
