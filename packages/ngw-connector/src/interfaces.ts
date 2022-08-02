@@ -140,7 +140,7 @@ export interface NgwConnectorOptions {
   baseUrl?: string;
   route?: string;
   auth?: Credentials;
-  requestTransform: RequestTransformFunction;
+  requestTransform?: RequestTransformFunction;
 }
 
 export interface RequestHeaders {
