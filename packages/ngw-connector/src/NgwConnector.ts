@@ -35,6 +35,7 @@ import type {
   Credentials,
   UserInfo,
   Params,
+  RequestTransformFunction,
 } from './interfaces';
 import type { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
 import type { ResourceItem, Resource } from './types/ResourceItem';
@@ -56,6 +57,7 @@ export class NgwConnector {
 
   private routeStr = '/api/component/pyramid/route';
   private activeRequests: CancelablePromise[] = [];
+  private requestTransform?: RequestTransformFunction | null;
 
   constructor(public options: NgwConnectorOptions) {
     const exist = findConnector(options);
@@ -65,6 +67,9 @@ export class NgwConnector {
       if (this.options.route) {
         this.routeStr = this.options.route;
       }
+      if (this.options.requestTransform) {
+        this.requestTransform = this.options.requestTransform;
+      }
       this.resources = new ResourcesControl(this);
       addConnector(this);
     }
@@ -72,6 +77,12 @@ export class NgwConnector {
 
   static create(options: NgwConnectorOptions): NgwConnector {
     return new this(options);
+  }
+
+  setRequestTransform(
+    requestTransform: RequestTransformFunction | undefined | null,
+  ) {
+    this.requestTransform = requestTransform;
   }
 
   /**
@@ -402,9 +413,8 @@ export class NgwConnector {
       if (params) {
         url = template(url, params);
       }
-      // remove double slash
-      url = fixUrlStr(url);
-      return this._loadData(encodeURI(url), options);
+      url = encodeURI(fixUrlStr(url));
+      return this._loadData(url, options);
     } else {
       throw new Error('Empty `url` not allowed');
     }
@@ -544,6 +554,12 @@ export class NgwConnector {
           ...options.headers,
         };
       }
+
+      if (this.requestTransform) {
+        const [transUrl, transOptions] = this.requestTransform(url, options);
+        url = transUrl;
+        options = transOptions;
+      }
       loadData(url, resolve, options, reject, onCancel);
     })
       .then((resp) => {
@@ -571,6 +587,7 @@ export class NgwConnector {
     ) {
       options.signal.addEventListener('abort', () => {
         request.cancel();
+        this._cleanActiveRequests(request);
       });
     }
     this.activeRequests.push(request);
