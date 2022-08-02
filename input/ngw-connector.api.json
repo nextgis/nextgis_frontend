@@ -5575,7 +5575,7 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "requestTransform: "
+                  "text": "requestTransform?: "
                 },
                 {
                   "kind": "Reference",
@@ -5588,7 +5588,7 @@
                 }
               ],
               "isReadonly": false,
-              "isOptional": false,
+              "isOptional": true,
               "releaseTag": "Public",
               "name": "requestTransform",
               "propertyTypeTokenRange": {
