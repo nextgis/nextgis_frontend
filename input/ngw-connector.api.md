@@ -353,6 +353,8 @@ class NgwConnector {
     // (undocumented)
     resources: ResourcesControl;
     setNgw(baseUrl: string): void;
+    // (undocumented)
+    setRequestTransform(requestTransform: RequestTransformFunction | undefined | null): void;
     // Warning: (ae-unresolved-inheritdoc-reference) The @inheritDoc reference could not be resolved: The package "@nextgis/ngw-connector" does not have an export "ResourcesControl"
     //
     // (undocumented)
@@ -368,6 +370,8 @@ export interface NgwConnectorOptions {
     auth?: Credentials;
     // (undocumented)
     baseUrl?: string;
+    // (undocumented)
+    requestTransform: RequestTransformFunction;
     // (undocumented)
     route?: string;
 }
@@ -834,6 +838,9 @@ export interface RequestOptions<M = RequestMethods> {
 }
 
 // @public (undocumented)
+export type RequestTransformFunction = (url: string, options: RequestOptions) => [url: string, options: RequestOptions];
+
+// @public (undocumented)
 export interface Resmeta {
     // (undocumented)
     items: Record<string, any>;
@@ -1100,7 +1107,7 @@ export interface WmsServerServiceLayer {
 
 // Warnings were encountered during analysis:
 //
-// src/NgwConnector.ts:47:7 - (ae-forgotten-export) The symbol "NgwError" needs to be exported by the entry point index.d.ts
-// src/NgwConnector.ts:48:7 - (ae-forgotten-export) The symbol "ResourceNotFoundError" needs to be exported by the entry point index.d.ts
+// src/NgwConnector.ts:48:7 - (ae-forgotten-export) The symbol "NgwError" needs to be exported by the entry point index.d.ts
+// src/NgwConnector.ts:49:7 - (ae-forgotten-export) The symbol "ResourceNotFoundError" needs to be exported by the entry point index.d.ts
 
 ```

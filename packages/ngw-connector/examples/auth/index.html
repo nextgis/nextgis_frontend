@@ -18,13 +18,13 @@
   <div id="results">loading...</div>
 
   <script>
-    var loginStatusElement = document.getElementById('login-status');
-    var resultElement = document.getElementById('results');
-    var appendResponce = function (toElement, resp) {
+    const loginStatusElement = document.getElementById('login-status');
+    const resultElement = document.getElementById('results');
+    const appendResponse = function (toElement, resp) {
       toElement.innerHTML = '';
       toElement.appendChild(document.createElement('pre')).innerHTML = JSON.stringify(resp, null, 2);
     }
-    var connector = new NgwConnector({
+    const connector = new NgwConnector({
       baseUrl: 'https://demo.nextgis.com',
       auth: {
         login: 'ngf_test',
@@ -34,13 +34,13 @@
     connector.get('resource.item', null, {
       id: 4011
     }).then(function (data) {
-      appendResponce(resultElement, data)
+      appendResponse(resultElement, data)
     });
     connector.emitter.on('login', function(data) {
-      appendResponce(loginStatusElement, data);
+      appendResponse(loginStatusElement, data);
     });
     connector.emitter.on('error', function(data) {
-      appendResponce(resultElement, data);
+      appendResponse(resultElement, data);
     });
   </script>
 
