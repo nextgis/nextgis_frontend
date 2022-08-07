@@ -61,7 +61,7 @@ function createPropertyExpressionCb(
 const excludeExpressionList = ['iconSize', 'iconAnchor'];
 
 export function createExpressionCallback(
-  paint: VectorAdapterLayerPaint,
+  paint: Record<string, any>,
 ): GetPaintCallback | undefined {
   let withExpression = false;
   const expressions: {
