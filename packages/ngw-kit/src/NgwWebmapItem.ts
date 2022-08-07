@@ -6,6 +6,7 @@ import {
   LayerAdapter,
   ImageAdapterOptions,
   LayerAdapterDefinition,
+  VectorAdapterOptions,
 } from '@nextgis/webmap';
 import { objectAssign } from '@nextgis/utils';
 
@@ -149,7 +150,8 @@ export class NgwWebmapItem extends Item<ItemOptions> {
 
     if (item.item_type === 'group' || item.item_type === 'root') {
       if (item.children && item.children.length) {
-        this.getChildren(item).forEach((x) => {
+        const children = this.getChildren(item);
+        for (const x of children) {
           const children = new NgwWebmapItem(
             this.webMap,
             x,
@@ -158,7 +160,7 @@ export class NgwWebmapItem extends Item<ItemOptions> {
             this,
           );
           this.tree.addChild(children);
-        });
+        }
       }
       return Promise.resolve();
     } else {
@@ -170,7 +172,6 @@ export class NgwWebmapItem extends Item<ItemOptions> {
           NgwWebmapItem.GetAdapterFromLayerType[item.item_type];
         adapter = getAdapter(item, options, this.webMap, this.connector);
       }
-
       if (adapter) {
         return this.webMap.addLayer(adapter, options).then((newLayer) => {
           setNewLayer(newLayer);
@@ -201,12 +202,13 @@ export class NgwWebmapItem extends Item<ItemOptions> {
     const transparency = item.item_type === 'layer' && item.layer_transparency;
     const opacity =
       typeof transparency === 'number' ? (100 - transparency) / 100 : undefined;
-    const options: Partial<ImageAdapterOptions> = {
+    const options: Partial<ImageAdapterOptions> &
+      Pick<VectorAdapterOptions, 'popupOptions'> = {
       visibility: false,
       headers: this.options.headers,
       crossOrigin: this.options.crossOrigin,
       setViewDelay: this.options.setViewDelay,
-      params: { resource: this.item.resourceId },
+      params: { resource: this.item.resourceId, item: this.item },
     };
     if (this.options.order) {
       const subOrder =
@@ -218,6 +220,9 @@ export class NgwWebmapItem extends Item<ItemOptions> {
       // TODO: find better way to set order in sub level, not limit by 1000 layer in group
       const subLevel = String(subOrder).padStart(4, '0');
       options.order = Number((this.options.order | 0) + '.' + subLevel);
+    }
+    if (this.options.popupOptions) {
+      options.popupOptions = this.options.popupOptions;
     }
     if (item.item_type === 'layer') {
       const { maxZoom, minZoom } = this._getZoomRange(item);

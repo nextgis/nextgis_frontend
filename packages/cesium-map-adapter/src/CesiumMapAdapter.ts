@@ -32,6 +32,7 @@ import { cartesian3ToLngLat } from './utils/cartesian3ToLngLat';
 import { whenSampleTerrainMostDetailed } from './utils/whenSampleTerrainMostDetailed';
 import { MeasureControl } from './controls/MeasureControl';
 
+import type { ScreenSpaceEventHandler } from 'cesium';
 import type {
   FitOptions,
   MapControl,
@@ -45,10 +46,7 @@ import type {
 } from '@nextgis/webmap';
 import type { Type, LngLatArray, LngLatBoundsArray } from '@nextgis/utils';
 import type { PathPaint } from '@nextgis/paint';
-import type {
-  CesiumAdapterMapClickEvent,
-  CesiumMapClickEvent,
-} from './interfaces';
+import type { CesiumAdapterMapClickEvent } from './interfaces';
 
 type Layer = any;
 type Control = any;
@@ -499,10 +497,10 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
     if (viewer) {
       const clickHandler = viewer.screenSpaceEventHandler.getInputAction(
         ScreenSpaceEventType.LEFT_CLICK,
-      );
+      ) as ScreenSpaceEventHandler.PositionedEventCallback;
 
       viewer.screenSpaceEventHandler.setInputAction(
-        (e: CesiumMapClickEvent) => {
+        (e: ScreenSpaceEventHandler.PositionedEvent) => {
           this.emitter.emit('preclick');
           const ct2 = e.position as Cartesian2;
           const scene = viewer.scene;
