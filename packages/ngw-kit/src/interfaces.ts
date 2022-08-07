@@ -1,6 +1,7 @@
 import type { Feature, Geometry, Polygon, Position } from 'geojson';
 import type {
   WebMap,
+  PopupOptions,
   WebMapEvents,
   LayerAdapter,
   FilterOptions,
@@ -165,6 +166,7 @@ export interface NgwWebmapAdapterOptions<M = any> extends A {
    * @defaultValue false;
    */
   useExtentConstrained?: boolean;
+  popupOptions?: PopupOptions;
 }
 
 export interface FeatureLayerIdentifyOptions extends NgwRequestOptions {
