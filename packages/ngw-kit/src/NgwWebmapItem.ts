@@ -152,7 +152,7 @@ export class NgwWebmapItem extends Item<ItemOptions> {
       if (item.children && item.children.length) {
         const children = this.getChildren(item);
         for (const x of children) {
-          const children = new NgwWebmapItem(
+          const children = new (this.constructor as typeof NgwWebmapItem)(
             this.webMap,
             x,
             this.options,
