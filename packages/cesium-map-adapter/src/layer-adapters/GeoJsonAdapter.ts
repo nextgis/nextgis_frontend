@@ -67,6 +67,7 @@ export class GeoJsonAdapter
   private _paint?: Paint;
   private _features: Feature[] = [];
   private _source?: GeoJsonDataSource;
+  private _heightOffset = 0;
   private _popupContainers: {
     [featureId: string]:
       | string
@@ -82,6 +83,9 @@ export class GeoJsonAdapter
 
   addLayer(opt: AdapterOptions): GeoJsonDataSource {
     this.options = { ...this.options, ...opt };
+    if (this.options.heightOffset) {
+      this._heightOffset = this.options.heightOffset;
+    }
     this._paint = this.options.paint;
     const source = new GeoJsonDataSource(opt.id);
     this._source = source;
@@ -324,7 +328,11 @@ export class GeoJsonAdapter
           options.outlineWidth = paint.strokeWidth;
         }
       }
-      const position = Cartesian3.fromDegrees(lonLat[0], lonLat[1], lonLat[2]);
+      const position = Cartesian3.fromDegrees(
+        lonLat[0],
+        lonLat[1],
+        lonLat[2] + this._heightOffset,
+      );
 
       // const orientation = Transforms.headingPitchRollQuaternion(
       //   position,
