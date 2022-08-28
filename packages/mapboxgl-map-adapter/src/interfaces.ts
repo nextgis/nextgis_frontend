@@ -10,3 +10,5 @@ export type VectorLayerSpecification =
   | FillLayerSpecification
   | CircleLayerSpecification
   | SymbolLayerSpecification;
+
+export type SelectedFeaturesIds = (number | string)[];

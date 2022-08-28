@@ -2555,21 +2555,12 @@
             },
             {
               "kind": "Reference",
-              "text": "Pick",
-              "canonicalReference": "!Pick:type"
+              "text": "ItemOptionsToExtend",
+              "canonicalReference": "@nextgis/item!~ItemOptionsToExtend:type"
             },
             {
               "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "AdapterOptions",
-              "canonicalReference": "@nextgis/webmap!AdapterOptions:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ", 'minZoom' | 'maxZoom' | 'crossOrigin' | 'ratio' | 'order' | 'headers' | 'setViewDelay'> "
+              "text": " "
             }
           ],
           "releaseTag": "Public",
@@ -2657,7 +2648,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 4
+              "endIndex": 2
             }
           ]
         },

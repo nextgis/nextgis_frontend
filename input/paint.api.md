@@ -7,6 +7,24 @@
 import type { Feature } from 'geojson';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 
+// @public (undocumented)
+export interface Base3DPaint {
+    // (undocumented)
+    color?: string | Expression;
+    // (undocumented)
+    fill?: boolean;
+    // (undocumented)
+    fillColor?: string | Expression;
+    // (undocumented)
+    stroke?: boolean;
+    // (undocumented)
+    strokeColor?: string | Expression;
+    // (undocumented)
+    strokeWidth?: number | Expression;
+    // (undocumented)
+    type?: Paint3DType;
+}
+
 // Warning: (ae-forgotten-export) The symbol "BasePaintTypes" needs to be exported by the entry point index.d.ts
 //
 // @public (undocumented)
@@ -41,10 +59,28 @@ export interface CirclePaint extends BasePaint {
 }
 
 // @public (undocumented)
-export function createExpressionCallback(paint: VectorAdapterLayerPaint): GetPaintCallback | undefined;
+export function createExpressionCallback(paint: Record<string, any>): GetPaintCallback | undefined;
+
+// @public (undocumented)
+export interface Ellipsoid3DPaint extends Base3DPaint {
+    // (undocumented)
+    height: number;
+    // (undocumented)
+    length: number;
+    // (undocumented)
+    type: 'ellipsoid';
+    // (undocumented)
+    width: number;
+}
 
 // @public (undocumented)
 export type Expression = [ExpressionName, ...any[]];
+
+// @public (undocumented)
+export function expressionCallback<P = Record<string, any>>(paint: P, defaultPaint?: P, getPaintFunctions?: Record<string, GetPaintFunction>): CirclePaint | PathPaint | PinPaint | {
+    (feature: Feature): VectorAdapterLayerPaint;
+    paint: P;
+};
 
 // @public (undocumented)
 export type ExpressionName = 'get' | 'match';
@@ -60,6 +96,16 @@ export interface GetCustomPaintOptions extends BasePaintTypes {
     options?: any;
     // (undocumented)
     type: 'get-paint';
+}
+
+// @public (undocumented)
+export interface GetPaint3DCallback<F extends Feature = Feature> {
+    // (undocumented)
+    (feature: F): VectorAdapterLayerPaint;
+    // (undocumented)
+    paint?: VectorAdapterLayerPaint3D;
+    // (undocumented)
+    type?: Paint3DType;
 }
 
 // @public (undocumented)
@@ -118,6 +164,12 @@ export function isPropertiesPaint(paint: Paint): paint is PropertiesPaint;
 export type Paint<F extends Feature = Feature, P extends Properties | null = F['properties']> = VectorAdapterLayerPaint | GetPaintCallback<F> | PropertiesPaint<P extends null ? Properties : P>;
 
 // @public (undocumented)
+export type Paint3D<F extends Feature = Feature, P extends Properties | null = F['properties']> = VectorAdapterLayerPaint3D | GetPaintCallback<F> | PropertyPaint3D<P extends null ? Properties : P>;
+
+// @public (undocumented)
+export type Paint3DType = 'ellipsoid' | 'sphere';
+
+// @public (undocumented)
 export type PaintType = 'circle' | 'path' | 'pin' | 'icon' | 'get-paint';
 
 // @public (undocumented)
@@ -151,13 +203,36 @@ VectorAdapterLayerPaint | undefined,
 ];
 
 // @public (undocumented)
+export type PropertiesPaint3D<P extends Properties = Properties> = [
+VectorAdapterLayerPaint3D | undefined,
+...PropertyPaint<P>[]
+];
+
+// @public (undocumented)
 export type PropertyPaint<P extends Properties = Properties> = [
 PropertiesFilter<P>,
 VectorAdapterLayerPaint
 ];
 
 // @public (undocumented)
+export type PropertyPaint3D<P extends Properties = Properties> = [
+PropertiesFilter<P>,
+VectorAdapterLayerPaint3D
+];
+
+// @public (undocumented)
+export interface Sphere3DPaint extends Base3DPaint {
+    // (undocumented)
+    radius: number;
+    // (undocumented)
+    type: 'sphere';
+}
+
+// @public (undocumented)
 export type VectorAdapterLayerPaint = CirclePaint | PathPaint | IconPaint | PinPaint | GetCustomPaintOptions;
+
+// @public (undocumented)
+export type VectorAdapterLayerPaint3D = Sphere3DPaint | Ellipsoid3DPaint;
 
 // (No @packageDocumentation comment for this package)
 

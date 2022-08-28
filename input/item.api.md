@@ -8,6 +8,7 @@
 
 import type { AdapterOptions } from '@nextgis/webmap';
 import { EventEmitter } from 'events';
+import type { VectorAdapterOptions } from '@nextgis/webmap';
 
 // @public (undocumented)
 export abstract class BaseProperty<V = any, O extends ItemBasePropertyOptions<V> = ItemBasePropertyOptions<V>, I extends Item = Item> {
@@ -136,8 +137,10 @@ export interface ItemBasePropertyOptions<V> {
     value?: V;
 }
 
+// Warning: (ae-forgotten-export) The symbol "ItemOptionsToExtend" needs to be exported by the entry point index.d.ts
+//
 // @public (undocumented)
-export interface ItemOptions extends Pick<AdapterOptions, 'minZoom' | 'maxZoom' | 'crossOrigin' | 'ratio' | 'order' | 'headers' | 'setViewDelay'> {
+export interface ItemOptions extends ItemOptionsToExtend {
     // (undocumented)
     drawOrderEnabled?: boolean;
     // (undocumented)
