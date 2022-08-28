@@ -15,8 +15,11 @@
     "@types/events": "^3.0.0",
     "@types/polylabel": "^1.0.5",
     "events": "^3.3.0",
-    "maplibre-gl": "^2.1.9",
+
     "polylabel": "^1.1.0"
+  },
+  "peerDependencies": {
+    "maplibre-gl": ">=2.0.0"
   },
   "optionalDependencies": {
     "canvg": "^3.0.9"
