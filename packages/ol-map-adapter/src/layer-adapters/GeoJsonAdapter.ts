@@ -217,13 +217,14 @@ export class GeoJsonAdapter
   }
 
   select(findFeatureCb?: DataLayerFilter<Feature> | PropertiesFilter): void {
+    this.unselect();
     if (typeof findFeatureCb === 'function') {
       const feature = this._features.filter((x) =>
         findFeatureCb(this._createLayerDefOpts(getFeature(x))),
       );
-      feature.forEach((x) => {
+      for (const x of feature) {
         this._selectFeature(x);
-      });
+      }
     } else if (!this.selected) {
       this.selected = true;
       if (this.selectedPaint) {
@@ -439,31 +440,39 @@ export class GeoJsonAdapter
   }
 
   private _selectFeature(feature: OlFeature<any>, coordinates?: number[]) {
-    this.addUnselectCb(() => this._unselectFeature(feature));
-    const options = this.options;
+    const {
+      multiselect,
+      selectedPaint,
+      popupOptions,
+      popupOnSelect,
+      onSelect,
+    } = this.options || {};
     const type: OnLayerSelectType = coordinates ? 'click' : 'api';
-    if (options && !options.multiselect) {
-      this._selectedFeatures.forEach((x) => this._unselectFeature(x));
+    if (!multiselect) {
+      this.addUnselectCb(() => this._unselectFeature(feature));
+      for (const x of this._selectedFeatures) {
+        this._unselectFeature(x);
+      }
     }
     this._selectedFeatures.push(feature);
     this.selected = true;
-    if (options && options.selectedPaint) {
-      const style = styleFunction(feature, options.selectedPaint);
+    if (selectedPaint) {
+      const style = styleFunction(feature, selectedPaint);
       if (style) {
         feature.setStyle(style);
       }
     }
-    if (this.options.popupOnSelect) {
+    if (popupOnSelect) {
       this._openPopup({
         coordinates,
         feature,
-        options: this.options.popupOptions,
+        options: popupOptions,
         type: 'click',
       });
     }
-    if (this.options.onSelect) {
+    if (onSelect) {
       const feature_ = getFeature(feature);
-      this.options.onSelect({
+      onSelect({
         layer: this,
         features: [],
         type,
