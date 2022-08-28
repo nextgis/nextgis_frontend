@@ -13,7 +13,7 @@
     "@nextgis/ol-map-adapter": "^1.15.1",
     "@types/events": "^3.0.0",
     "events": "^3.3.0",
-    "ol": "^7.0.0"
+    "ol": "^6.15.1"
   },
   "devDependencies": {
     "@nextgis/build-tools": "^1.15.1"
