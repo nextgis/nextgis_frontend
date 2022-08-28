@@ -104,11 +104,12 @@ export class GeoJsonAdapter
   }
 
   select(findFeatureFun?: DataLayerFilter): void {
+    this.unselect();
     if (findFeatureFun) {
       const def = this._layers.filter(findFeatureFun);
-      def.forEach((x) => {
+      for (const x of def) {
         this._selectLayer(x, 'api');
-      });
+      }
     } else if (!this.selected) {
       this.selected = true;
       if (this.selectedPaint) {
@@ -708,10 +709,12 @@ export class GeoJsonAdapter
     type: OnLayerSelectType,
     latlng?: LatLngExpression,
   ) {
-    (this.map as any)._addUnselectCb(() => {
-      this._unSelectLayer(def);
-    });
-    if (this.options && !this.options.multiselect) {
+    const { multiselect } = this.options;
+    if (!multiselect) {
+      // To unselect layer on another layer click
+      (this.map as any)._addUnselectCb(() => {
+        this._unSelectLayer(def);
+      });
       this._selectedLayers.forEach((x) => this._unSelectLayer(x));
     }
     this._selectedLayers.push(def);
@@ -802,14 +805,28 @@ export class GeoJsonAdapter
     return geoJsonOptions;
   }
 
-  private _addMapListener() {
+  private _addMapClickListener() {
     const map = this.map;
     if (map) {
-      const { labelField, labelOnHover, unselectOnClick } = this.options;
+      const { unselectOnClick } = this.options;
       const uoc = unselectOnClick ?? true;
       if (uoc) {
         map.on('click', this.$unselect);
       }
+    }
+  }
+
+  private _removeMapClickListener() {
+    this.map.off('zoomend', this.$updateTooltip);
+    this.map.off('moveend', this.$updateTooltip);
+    this.map.off('click', this.$unselect);
+  }
+
+  private _addMapListener() {
+    const map = this.map;
+    if (map) {
+      const { labelField, labelOnHover } = this.options;
+      this._addMapClickListener();
       if (labelField && !labelOnHover) {
         map.on('zoomend', this.$updateTooltip);
         map.on('moveend', this.$updateTooltip);
@@ -818,8 +835,8 @@ export class GeoJsonAdapter
   }
 
   private _removeMapListener() {
+    this._removeMapClickListener();
     this.map.off('zoomend', this.$updateTooltip);
     this.map.off('moveend', this.$updateTooltip);
-    this.map.off('click', this.$unselect);
   }
 }

@@ -189,6 +189,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   }
 
   select(find?: DataLayerFilter<Feature, TLayer> | PropertiesFilter): void {
+    this.unselect();
     if (find) {
       if (typeof find === 'function') {
         const features = this._getFeatures().filter((x) =>
