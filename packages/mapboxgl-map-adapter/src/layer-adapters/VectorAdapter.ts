@@ -46,7 +46,10 @@ import type {
   PropertyFilter,
   Operations,
 } from '@nextgis/properties-filter';
-import type { VectorLayerSpecification } from '../interfaces';
+import type {
+  SelectedFeaturesIds,
+  VectorLayerSpecification,
+} from '../interfaces';
 
 type Layer = VectorLayerSpecification;
 
@@ -115,7 +118,7 @@ export abstract class VectorAdapter<
   protected _types: VectorAdapterLayerType[] = ['polygon', 'point', 'line'];
   protected readonly _sourceId: string;
   protected readonly _selectionName: string;
-  protected _selectedFeatureIds: (number | string)[] | false = [];
+  protected _selectedFeatureIds: SelectedFeaturesIds | false = [];
 
   protected _selectProperties?: PropertiesFilter;
   protected _filterProperties?: PropertiesFilter;
@@ -408,7 +411,7 @@ export abstract class VectorAdapter<
       id: name,
       type: mType,
       source: this._sourceId,
-      filter,
+      filter: filter as FilterSpecification,
       layout: {
         visibility: 'none',
         ...layout,
@@ -434,7 +437,8 @@ export abstract class VectorAdapter<
     if (map) {
       map.addLayer(opt as LayerSpecification);
       if (filter) {
-        const filters = ['all', ...(filter || [])].filter(Boolean);
+        const filter_ = (filter || []) as FilterSpecification[];
+        const filters = ['all', ...filter_].filter(Boolean);
         map.setFilter(opt.id, filters as FilterSpecification);
       }
     }
@@ -688,7 +692,10 @@ export abstract class VectorAdapter<
                 ]);
               } else {
                 filters = ['in', '$id', ''];
-                this.map.setFilter(selLayerName, filters);
+                this.map.setFilter(
+                  selLayerName,
+                  filters as FilterSpecification,
+                );
               }
             }
           }
@@ -711,7 +718,7 @@ export abstract class VectorAdapter<
             if (propertyFilters) {
               propertyFilters.forEach((x) => filters_.push(x));
             }
-            this.map.setFilter(layerName, filters_);
+            this.map.setFilter(layerName, filters_ as FilterSpecification);
           }
         }
       }
