@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/paint",
-  "version": "1.15.1",
+  "version": "1.16.0",
   "description": "Create style for vector layer",
   "main": "index.js",
   "module": "lib/paint.esm-bundler.js",

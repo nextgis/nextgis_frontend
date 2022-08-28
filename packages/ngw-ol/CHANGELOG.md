@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.16.0](https://github.com/nextgis/nextgis_frontend/compare/v1.15.1...v1.16.0) (2022-08-28)
+
+
+### Features
+
+* improve geojson adapter multiselect ([30a3223](https://github.com/nextgis/nextgis_frontend/commit/30a32237411b60d03246bdc8efe292295ffcef44))
+
+
+
+
+
 ## [1.15.1](https://github.com/nextgis/nextgis_frontend/compare/v1.15.0...v1.15.1) (2022-08-02)
 
 **Note:** Version bump only for package @nextgis/ngw-ol
