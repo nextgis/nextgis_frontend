@@ -11462,6 +11462,33 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/webmap!VectorAdapterOptions#heightOffset:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "heightOffset?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "heightOffset",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@nextgis/webmap!VectorAdapterOptions#interactive:member",
               "docComment": "",
               "excerptTokens": [

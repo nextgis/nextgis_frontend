@@ -8572,6 +8572,34 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/ngw-kit!NgwWebmapAdapterOptions#popupOptions:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "popupOptions?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "PopupOptions",
+                  "canonicalReference": "@nextgis/webmap!PopupOptions:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "popupOptions",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@nextgis/ngw-kit!NgwWebmapAdapterOptions#resourceId:member",
               "docComment": "",
               "excerptTokens": [
