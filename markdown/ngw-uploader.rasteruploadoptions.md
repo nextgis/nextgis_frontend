@@ -13,7 +13,7 @@ export interface RasterUploadOptions extends FileUploadOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [style?](./ngw-uploader.rasteruploadoptions.style.md) | [ResourceCreateOptions](./ngw-uploader.resourcecreateoptions.md) | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [style?](./ngw-uploader.rasteruploadoptions.style.md) |  | [ResourceCreateOptions](./ngw-uploader.resourcecreateoptions.md) | <i>(Optional)</i> |
 

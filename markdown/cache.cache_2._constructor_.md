@@ -16,5 +16,5 @@ constructor(options?: CacheOptions);
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | CacheOptions |  |
+|  options | CacheOptions | <i>(Optional)</i> |
 

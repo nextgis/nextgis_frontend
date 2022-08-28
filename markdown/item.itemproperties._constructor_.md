@@ -17,5 +17,5 @@ constructor(item: Item, propertiesList?: ItemPropertyConfig<keyof ItemPropertyTy
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  item | [Item](./item.item.md) |  |
-|  propertiesList | [ItemPropertyConfig](./item.itempropertyconfig.md)<!-- -->&lt;keyof [ItemPropertyTypes](./item.itempropertytypes.md)<!-- -->&gt;\[\] |  |
+|  propertiesList | [ItemPropertyConfig](./item.itempropertyconfig.md)<!-- -->&lt;keyof [ItemPropertyTypes](./item.itempropertytypes.md)<!-- -->&gt;\[\] | <i>(Optional)</i> |
 

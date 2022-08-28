@@ -9,7 +9,7 @@
 ```typescript
 export declare class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> 
 ```
-<b>Implements:</b> [MapAdapter](./webmap.mapadapter.md)<!-- -->&lt;Map, TLayer, IControl&gt;
+<b>Implements:</b> [MapAdapter](./webmap.mapadapter.md)<!-- -->&lt;Map, TLayer, IControl
 
 ## Constructors
 

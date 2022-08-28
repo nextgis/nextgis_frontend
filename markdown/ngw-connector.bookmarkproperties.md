@@ -12,8 +12,8 @@ export interface BookmarkProperties
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [name](./ngw-connector.bookmarkproperties.name.md) | string |  |
-|  [place](./ngw-connector.bookmarkproperties.place.md) | string |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [name](./ngw-connector.bookmarkproperties.name.md) |  | string |  |
+|  [place](./ngw-connector.bookmarkproperties.place.md) |  | string |  |
 

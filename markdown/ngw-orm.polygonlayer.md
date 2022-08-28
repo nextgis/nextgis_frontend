@@ -9,7 +9,7 @@
 ```typescript
 export declare class PolygonLayer extends VectorLayer<Polygon> 
 ```
-<b>Extends:</b> [VectorLayer](./ngw-orm.vectorlayer.md)<!-- -->&lt;Polygon&gt;
+<b>Extends:</b> [VectorLayer](./ngw-orm.vectorlayer.md)<!-- -->&lt;Polygon
 
 ## Properties
 

@@ -59,5 +59,6 @@ export declare class NgwConnector
 |  [post(name, options, params)](./ngw-connector.ngwconnector.post.md) |  | Shortcut method for send POST request to NGW. |
 |  [put(name, options, params)](./ngw-connector.ngwconnector.put.md) |  | Shortcut method for send PUT request to NGW. |
 |  [setNgw(baseUrl)](./ngw-connector.ngwconnector.setngw.md) |  | Fast way to specify the connection address to NextGIS Web. The current connection will be severed. |
+|  [setRequestTransform(requestTransform)](./ngw-connector.ngwconnector.setrequesttransform.md) |  |  |
 |  [updateResource(resource, data)](./ngw-connector.ngwconnector.updateresource.md) |  |  |
 

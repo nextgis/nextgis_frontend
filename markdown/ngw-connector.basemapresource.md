@@ -12,8 +12,8 @@ export interface BasemapResource
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [qms](./ngw-connector.basemapresource.qms.md) | string | Parse to qms-kit.BasemapQms |
-|  [url](./ngw-connector.basemapresource.url.md) | string |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [qms](./ngw-connector.basemapresource.qms.md) |  | string | Parse to qms-kit.BasemapQms |
+|  [url](./ngw-connector.basemapresource.url.md) |  | string |  |
 

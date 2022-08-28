@@ -12,8 +12,8 @@ export interface RasterRequestOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [raster\_layer](./ngw-uploader.rasterrequestoptions.raster_layer.md) | [RasterRequestLayerOptions](./ngw-uploader.rasterrequestlayeroptions.md) |  |
-|  [resource](./ngw-uploader.rasterrequestoptions.resource.md) | [RasterRequestResourceOptions](./ngw-uploader.rasterrequestresourceoptions.md) |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [raster\_layer](./ngw-uploader.rasterrequestoptions.raster_layer.md) |  | [RasterRequestLayerOptions](./ngw-uploader.rasterrequestlayeroptions.md) |  |
+|  [resource](./ngw-uploader.rasterrequestoptions.resource.md) |  | [RasterRequestResourceOptions](./ngw-uploader.rasterrequestresourceoptions.md) |  |
 

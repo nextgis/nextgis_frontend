@@ -17,8 +17,8 @@ addLayer<K extends keyof LayerAdapters, LO extends AdapterOptions = AdapterOptio
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  adapter | [LayerAdapterDefinition](./webmap.layeradapterdefinition.md)<!-- -->&lt;K&gt; | The name of layer adapter from \[MapAdapter.layerAdapters\](webmap\#MapAdapter.layerAdapters). May be custom object or class implemented by \[MainLayerAdapter\](webmap\#MainLayerAdapter). |
-|  options | LO \| [LayerAdaptersOptions](./webmap.layeradaptersoptions.md)<!-- -->\[K\] | Specific options for given adapter |
-|  order | number |  |
+|  options | LO \| [LayerAdaptersOptions](./webmap.layeradaptersoptions.md)<!-- -->\[K\] | <i>(Optional)</i> Specific options for given adapter |
+|  order | number | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

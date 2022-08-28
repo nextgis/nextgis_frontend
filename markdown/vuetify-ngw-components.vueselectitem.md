@@ -12,8 +12,8 @@ export interface VueSelectItem
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [text](./vuetify-ngw-components.vueselectitem.text.md) | string |  |
-|  [value](./vuetify-ngw-components.vueselectitem.value.md) | string \| undefined |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [text](./vuetify-ngw-components.vueselectitem.text.md) |  | string |  |
+|  [value](./vuetify-ngw-components.vueselectitem.value.md) |  | string \| undefined |  |
 

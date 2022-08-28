@@ -12,8 +12,8 @@ export interface LoadingQueue
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [name](./ngw-connector.loadingqueue.name.md) | string |  |
-|  [waiting](./ngw-connector.loadingqueue.waiting.md) | Array&lt;{ resolve: (...args: any\[\]) =&gt; Promise&lt;any&gt;; reject: (...args: any\[\]) =&gt; Promise&lt;Error&gt;; timestamp: Date; }&gt; |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [name](./ngw-connector.loadingqueue.name.md) |  | string |  |
+|  [waiting](./ngw-connector.loadingqueue.waiting.md) |  | Array&lt;{ resolve: (...args: any\[\]) =&gt; Promise&lt;any&gt;; reject: (...args: any\[\]) =&gt; Promise&lt;Error&gt;; timestamp: Date; }&gt; |  |
 

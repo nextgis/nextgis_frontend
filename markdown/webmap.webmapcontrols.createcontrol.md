@@ -17,7 +17,7 @@ createControl(control: MapControl, options?: CreateControlOptions): Promise<C | 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  control | [MapControl](./webmap.mapcontrol.md) |  |
-|  options | [CreateControlOptions](./webmap.createcontroloptions.md) |  |
+|  options | [CreateControlOptions](./webmap.createcontroloptions.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

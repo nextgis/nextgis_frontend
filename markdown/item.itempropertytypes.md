@@ -12,10 +12,10 @@ export interface ItemPropertyTypes
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [any](./item.itempropertytypes.any.md) | any |  |
-|  [boolean](./item.itempropertytypes.boolean.md) | boolean |  |
-|  [number](./item.itempropertytypes.number.md) | number |  |
-|  [string](./item.itempropertytypes.string.md) | string |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [any](./item.itempropertytypes.any.md) |  | any |  |
+|  [boolean](./item.itempropertytypes.boolean.md) |  | boolean |  |
+|  [number](./item.itempropertytypes.number.md) |  | number |  |
+|  [string](./item.itempropertytypes.string.md) |  | string |  |
 

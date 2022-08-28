@@ -15,7 +15,7 @@ export declare function loadScript(src: string, options?: LoadScriptOptions): Pr
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  src | string |  |
-|  options | [LoadScriptOptions](./dom.loadscriptoptions.md) |  |
+|  options | [LoadScriptOptions](./dom.loadscriptoptions.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

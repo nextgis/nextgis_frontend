@@ -12,8 +12,8 @@ export interface FeatureItemExtensions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [attachment?](./ngw-connector.featureitemextensions.attachment.md) | [FeatureItemAttachment](./ngw-connector.featureitemattachment.md)<!-- -->\[\] | <i>(Optional)</i> |
-|  [description?](./ngw-connector.featureitemextensions.description.md) | string | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [attachment?](./ngw-connector.featureitemextensions.attachment.md) |  | [FeatureItemAttachment](./ngw-connector.featureitemattachment.md)<!-- -->\[\] | <i>(Optional)</i> |
+|  [description?](./ngw-connector.featureitemextensions.description.md) |  | string | <i>(Optional)</i> |
 

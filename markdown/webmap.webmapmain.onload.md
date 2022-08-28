@@ -16,7 +16,7 @@ onLoad(event?: keyof WebMapEvents): Promise<this>;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  event | keyof [WebMapEvents](./webmap.webmapevents.md) | The name of the event whose status is checked |
+|  event | keyof [WebMapEvents](./webmap.webmapevents.md) | <i>(Optional)</i> The name of the event whose status is checked |
 
 <b>Returns:</b>
 

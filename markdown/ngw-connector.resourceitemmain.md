@@ -12,8 +12,8 @@ export interface ResourceItemMain
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [resmeta](./ngw-connector.resourceitemmain.resmeta.md) | [Resmeta](./ngw-connector.resmeta.md) |  |
-|  [resource](./ngw-connector.resourceitemmain.resource.md) | [Resource](./ngw-connector.resource.md) |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [resmeta](./ngw-connector.resourceitemmain.resmeta.md) |  | [Resmeta](./ngw-connector.resmeta.md) |  |
+|  [resource](./ngw-connector.resourceitemmain.resource.md) |  | [Resource](./ngw-connector.resource.md) |  |
 

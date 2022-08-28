@@ -16,7 +16,7 @@ getResourceOrFail(resource: ResourceDefinition, requestOptions?: RequestOptions)
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  resource | [ResourceDefinition](./ngw-connector.resourcedefinition.md) |  |
-|  requestOptions | [RequestOptions](./ngw-connector.requestoptions.md) |  |
+|  requestOptions | [RequestOptions](./ngw-connector.requestoptions.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

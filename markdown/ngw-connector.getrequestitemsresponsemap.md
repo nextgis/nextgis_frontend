@@ -13,22 +13,22 @@ export interface GetRequestItemsResponseMap extends RequestItemKeys
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  ["feature\_layer.feature.collection"](./ngw-connector.getrequestitemsresponsemap._feature_layer.feature.collection_.md) | [FeatureItem](./ngw-connector.featureitem.md)<!-- -->\[\] |  |
-|  ["feature\_layer.feature.count"](./ngw-connector.getrequestitemsresponsemap._feature_layer.feature.count_.md) | [FeatureLayerCount](./ngw-connector.featurelayercount.md) |  |
-|  ["feature\_layer.feature.item\_extent"](./ngw-connector.getrequestitemsresponsemap._feature_layer.feature.item_extent_.md) | [NgwExtent](./ngw-connector.ngwextent.md) |  |
-|  ["feature\_layer.feature.item"](./ngw-connector.getrequestitemsresponsemap._feature_layer.feature.item_.md) | [FeatureItem](./ngw-connector.featureitem.md) |  |
-|  ["feature\_layer.field"](./ngw-connector.getrequestitemsresponsemap._feature_layer.field_.md) | [FeatureLayerField](./ngw-connector.featurelayerfield.md)<!-- -->\[\] |  |
-|  ["feature\_layer.store"](./ngw-connector.getrequestitemsresponsemap._feature_layer.store_.md) | [ResourceStoreItem](./ngw-connector.resourcestoreitem.md)<!-- -->\[\] |  |
-|  ["file\_upload.upload"](./ngw-connector.getrequestitemsresponsemap._file_upload.upload_.md) | [FileUploadResp](./ngw-connector.fileuploadresp.md) |  |
-|  ["layer.extent"](./ngw-connector.getrequestitemsresponsemap._layer.extent_.md) | [NgwExtent](./ngw-connector.ngwextent.md) |  |
-|  ["pyramid.company\_logo"](./ngw-connector.getrequestitemsresponsemap._pyramid.company_logo_.md) | string |  |
-|  ["pyramid.route"](./ngw-connector.getrequestitemsresponsemap._pyramid.route_.md) | [PyramidRoute](./ngw-connector.pyramidroute.md) |  |
-|  ["pyramid.settings"](./ngw-connector.getrequestitemsresponsemap._pyramid.settings_.md) | [PyramidSettings](./ngw-connector.pyramidsettings.md) |  |
-|  ["resource.child"](./ngw-connector.getrequestitemsresponsemap._resource.child_.md) | any |  |
-|  ["resource.collection"](./ngw-connector.getrequestitemsresponsemap._resource.collection_.md) | [ResourceItem](./ngw-connector.resourceitem.md)<!-- -->\[\] |  |
-|  ["resource.item"](./ngw-connector.getrequestitemsresponsemap._resource.item_.md) | [ResourceItem](./ngw-connector.resourceitem.md) |  |
-|  ["resource.search"](./ngw-connector.getrequestitemsresponsemap._resource.search_.md) | [ResourceItem](./ngw-connector.resourceitem.md)<!-- -->\[\] |  |
-|  ["spatial\_ref\_sys.collection"](./ngw-connector.getrequestitemsresponsemap._spatial_ref_sys.collection_.md) | [SrsItem](./ngw-connector.srsitem.md)<!-- -->\[\] |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  ["feature\_layer.feature.collection"](./ngw-connector.getrequestitemsresponsemap._feature_layer.feature.collection_.md) |  | [FeatureItem](./ngw-connector.featureitem.md)<!-- -->\[\] |  |
+|  ["feature\_layer.feature.count"](./ngw-connector.getrequestitemsresponsemap._feature_layer.feature.count_.md) |  | [FeatureLayerCount](./ngw-connector.featurelayercount.md) |  |
+|  ["feature\_layer.feature.item\_extent"](./ngw-connector.getrequestitemsresponsemap._feature_layer.feature.item_extent_.md) |  | [NgwExtent](./ngw-connector.ngwextent.md) |  |
+|  ["feature\_layer.feature.item"](./ngw-connector.getrequestitemsresponsemap._feature_layer.feature.item_.md) |  | [FeatureItem](./ngw-connector.featureitem.md) |  |
+|  ["feature\_layer.field"](./ngw-connector.getrequestitemsresponsemap._feature_layer.field_.md) |  | [FeatureLayerField](./ngw-connector.featurelayerfield.md)<!-- -->\[\] |  |
+|  ["feature\_layer.store"](./ngw-connector.getrequestitemsresponsemap._feature_layer.store_.md) |  | [ResourceStoreItem](./ngw-connector.resourcestoreitem.md)<!-- -->\[\] |  |
+|  ["file\_upload.upload"](./ngw-connector.getrequestitemsresponsemap._file_upload.upload_.md) |  | [FileUploadResp](./ngw-connector.fileuploadresp.md) |  |
+|  ["layer.extent"](./ngw-connector.getrequestitemsresponsemap._layer.extent_.md) |  | [NgwExtent](./ngw-connector.ngwextent.md) |  |
+|  ["pyramid.company\_logo"](./ngw-connector.getrequestitemsresponsemap._pyramid.company_logo_.md) |  | string |  |
+|  ["pyramid.route"](./ngw-connector.getrequestitemsresponsemap._pyramid.route_.md) |  | [PyramidRoute](./ngw-connector.pyramidroute.md) |  |
+|  ["pyramid.settings"](./ngw-connector.getrequestitemsresponsemap._pyramid.settings_.md) |  | [PyramidSettings](./ngw-connector.pyramidsettings.md) |  |
+|  ["resource.child"](./ngw-connector.getrequestitemsresponsemap._resource.child_.md) |  | any |  |
+|  ["resource.collection"](./ngw-connector.getrequestitemsresponsemap._resource.collection_.md) |  | [ResourceItem](./ngw-connector.resourceitem.md)<!-- -->\[\] |  |
+|  ["resource.item"](./ngw-connector.getrequestitemsresponsemap._resource.item_.md) |  | [ResourceItem](./ngw-connector.resourceitem.md) |  |
+|  ["resource.search"](./ngw-connector.getrequestitemsresponsemap._resource.search_.md) |  | [ResourceItem](./ngw-connector.resourceitem.md)<!-- -->\[\] |  |
+|  ["spatial\_ref\_sys.collection"](./ngw-connector.getrequestitemsresponsemap._spatial_ref_sys.collection_.md) |  | [SrsItem](./ngw-connector.srsitem.md)<!-- -->\[\] |  |
 

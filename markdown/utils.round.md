@@ -15,7 +15,7 @@ export declare function round(val: number, toFixed?: number): number;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  val | number |  |
-|  toFixed | number |  |
+|  toFixed | number | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

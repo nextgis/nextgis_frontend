@@ -13,10 +13,10 @@ export interface LayerDefinition<F extends Feature = Feature, L = any> extends F
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [feature](./webmap.layerdefinition.feature.md) | F | A vector layer object in geojson format. |
-|  [layer?](./webmap.layerdefinition.layer.md) | L | <i>(Optional)</i> Native layer for a specific adapter layers of a specific map adapter. |
-|  [target](./webmap.layerdefinition.target.md) | [LayerAdapter](./webmap.layeradapter.md) | The adapter in which the layer is created. |
-|  [visible?](./webmap.layerdefinition.visible.md) | boolean | <i>(Optional)</i> Is layer on the map |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [feature](./webmap.layerdefinition.feature.md) |  | F | A vector layer object in geojson format. |
+|  [layer?](./webmap.layerdefinition.layer.md) |  | L | <i>(Optional)</i> Native layer for a specific adapter layers of a specific map adapter. |
+|  [target](./webmap.layerdefinition.target.md) |  | [LayerAdapter](./webmap.layeradapter.md) | The adapter in which the layer is created. |
+|  [visible?](./webmap.layerdefinition.visible.md) |  | boolean | <i>(Optional)</i> Is layer on the map |
 

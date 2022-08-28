@@ -14,7 +14,7 @@ protected _updateItems(e?: LayerAdapter): Promise<VueSelectItem[] | undefined>;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  e | LayerAdapter |  |
+|  e | LayerAdapter | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

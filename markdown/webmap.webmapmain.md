@@ -20,26 +20,26 @@ export declare class WebMapMain<M = any, E extends WebMapEvents = WebMapEvents, 
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [\_initMapState](./webmap.webmapmain._initmapstate.md) |  | Record&lt;string, any&gt; | From runtime params |
-|  [\_starterKits](./webmap.webmapmain._starterkits.md) |  | [StarterKit](./webmap.starterkit.md)<!-- -->\[\] |  |
-|  [emitter](./webmap.webmapmain.emitter.md) |  | StrictEventEmitter&lt;EventEmitter, [WebMapEvents](./webmap.webmapevents.md)<!-- -->&gt; |  |
+|  [\_initMapState](./webmap.webmapmain._initmapstate.md) | <code>protected</code> | Record&lt;string, any&gt; | From runtime params |
+|  [\_starterKits](./webmap.webmapmain._starterkits.md) | <p><code>protected</code></p><p><code>readonly</code></p> | [StarterKit](./webmap.starterkit.md)<!-- -->\[\] |  |
+|  [emitter](./webmap.webmapmain.emitter.md) | <code>readonly</code> | StrictEventEmitter&lt;EventEmitter, [WebMapEvents](./webmap.webmapevents.md)<!-- -->&gt; |  |
 |  [getPaintFunctions](./webmap.webmapmain.getpaintfunctions.md) |  | { \[name: string\]: [GetPaintFunction](./paint.getpaintfunction.md)<!-- -->; } |  |
 |  [getPaintFunctions](./webmap.webmapmain.getpaintfunctions.md) | <code>static</code> | { \[name: string\]: [GetPaintFunction](./paint.getpaintfunction.md)<!-- -->; } |  |
 |  [id](./webmap.webmapmain.id.md) |  | number |  |
-|  [keys](./webmap.webmapmain.keys.md) |  | Keys |  |
+|  [keys](./webmap.webmapmain.keys.md) | <code>readonly</code> | Keys |  |
 |  [keys](./webmap.webmapmain.keys.md) | <code>static</code> | Keys |  |
-|  [mapAdapter](./webmap.webmapmain.mapadapter.md) |  | [MapAdapter](./webmap.mapadapter.md)<!-- -->&lt;M&gt; |  |
+|  [mapAdapter](./webmap.webmapmain.mapadapter.md) | <code>readonly</code> | [MapAdapter](./webmap.mapadapter.md)<!-- -->&lt;M&gt; |  |
 |  [mapState](./webmap.webmapmain.mapstate.md) |  | [Type](./utils.type.md)<!-- -->&lt;StateItem&gt;\[\] |  |
 |  [options](./webmap.webmapmain.options.md) |  | O |  |
-|  [runtimeParams](./webmap.webmapmain.runtimeparams.md) |  | [RuntimeParams](./webmap.runtimeparams.md)<!-- -->\[\] |  |
+|  [runtimeParams](./webmap.webmapmain.runtimeparams.md) | <code>readonly</code> | [RuntimeParams](./webmap.runtimeparams.md)<!-- -->\[\] |  |
 
 ## Methods
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
-|  [\_addLayerProviders()](./webmap.webmapmain._addlayerproviders.md) |  |  |
-|  [\_emitStatusEvent(eventName, data)](./webmap.webmapmain._emitstatusevent.md) |  |  |
-|  [\_onLoadSync()](./webmap.webmapmain._onloadsync.md) |  |  |
+|  [\_addLayerProviders()](./webmap.webmapmain._addlayerproviders.md) | <code>protected</code> |  |
+|  [\_emitStatusEvent(eventName, data)](./webmap.webmapmain._emitstatusevent.md) | <code>protected</code> |  |
+|  [\_onLoadSync()](./webmap.webmapmain._onloadsync.md) | <code>protected</code> |  |
 |  [create()](./webmap.webmapmain.create.md) |  | Manual way to create a map (If [MapOptions.create](./webmap.mapoptions.create.md) is <code>false</code>). |
 |  [destroy()](./webmap.webmapmain.destroy.md) |  | Destroys WebMap, MapAdapter, clears all layers and turn off all event listeners |
 |  [fitBounds(bounds, options)](./webmap.webmapmain.fitbounds.md) |  | Sets a map view that contains the given geographical bounds. |

@@ -12,7 +12,7 @@ export interface DataLoadError
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [target](./webmap.dataloaderror.target.md) | string |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [target](./webmap.dataloaderror.target.md) |  | string |  |
 

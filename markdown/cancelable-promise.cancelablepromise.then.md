@@ -14,8 +14,8 @@ then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | Pro
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  onfulfilled | ((value: T) =&gt; TResult1 \| PromiseLike&lt;TResult1&gt;) \| undefined \| null |  |
-|  onrejected | ((reason: any) =&gt; TResult2 \| PromiseLike&lt;TResult2&gt;) \| undefined \| null |  |
+|  onfulfilled | ((value: T) =&gt; TResult1 \| PromiseLike&lt;TResult1&gt;) \| undefined \| null | <i>(Optional)</i> |
+|  onrejected | ((reason: any) =&gt; TResult2 \| PromiseLike&lt;TResult2&gt;) \| undefined \| null | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

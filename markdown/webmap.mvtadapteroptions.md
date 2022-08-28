@@ -9,12 +9,12 @@
 ```typescript
 export interface MvtAdapterOptions<F extends Feature = Feature> extends VectorAdapterOptions<F> 
 ```
-<b>Extends:</b> [VectorAdapterOptions](./webmap.vectoradapteroptions.md)<!-- -->&lt;F&gt;
+<b>Extends:</b> [VectorAdapterOptions](./webmap.vectoradapteroptions.md)
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [sourceLayer?](./webmap.mvtadapteroptions.sourcelayer.md) | string | <i>(Optional)</i> |
-|  [url](./webmap.mvtadapteroptions.url.md) | string |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [sourceLayer?](./webmap.mvtadapteroptions.sourcelayer.md) |  | string | <i>(Optional)</i> |
+|  [url](./webmap.mvtadapteroptions.url.md) |  | string |  |
 

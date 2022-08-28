@@ -16,7 +16,7 @@ unselect?(findFeatureCb?: DataLayerFilter<F, L> | PropertiesFilter): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  findFeatureCb | [DataLayerFilter](./webmap.datalayerfilter.md)<!-- -->&lt;F, L&gt; \| [PropertiesFilter](./properties-filter.propertiesfilter.md) |  |
+|  findFeatureCb | [DataLayerFilter](./webmap.datalayerfilter.md)<!-- -->&lt;F, L&gt; \| [PropertiesFilter](./properties-filter.propertiesfilter.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

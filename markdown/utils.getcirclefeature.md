@@ -16,8 +16,8 @@ export declare function getCircleFeature(lng: number, lat: number, radius?: numb
 |  --- | --- | --- |
 |  lng | number |  |
 |  lat | number |  |
-|  radius | number |  |
-|  points | number |  |
+|  radius | number | <i>(Optional)</i> |
+|  points | number | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

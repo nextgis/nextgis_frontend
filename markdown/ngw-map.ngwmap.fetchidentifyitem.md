@@ -15,7 +15,7 @@ fetchIdentifyItem<G extends Geometry = Geometry, P extends FeatureProperties = F
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  identify | [NgwIdentify](./ngw-kit.ngwidentify.md) |  |
-|  requestOptions | [NgwFeatureRequestOptions](./ngw-kit.ngwfeaturerequestoptions.md) |  |
+|  requestOptions | [NgwFeatureRequestOptions](./ngw-kit.ngwfeaturerequestoptions.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

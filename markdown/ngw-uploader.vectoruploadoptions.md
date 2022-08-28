@@ -13,8 +13,8 @@ export interface VectorUploadOptions extends FileUploadOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [paint](./ngw-uploader.vectoruploadoptions.paint.md) | GeometryPaint |  |
-|  [style?](./ngw-uploader.vectoruploadoptions.style.md) | [CreateStyleOptions](./ngw-uploader.createstyleoptions.md) | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [paint](./ngw-uploader.vectoruploadoptions.paint.md) |  | [GeometryPaint](./paint.geometrypaint.md) |  |
+|  [style?](./ngw-uploader.vectoruploadoptions.style.md) |  | [CreateStyleOptions](./ngw-uploader.createstyleoptions.md) | <i>(Optional)</i> |
 

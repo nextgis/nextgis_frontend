@@ -9,11 +9,11 @@
 ```typescript
 export interface GetChildrenOfOptions extends Pick<RequestOptions, 'cache'> 
 ```
-<b>Extends:</b> Pick&lt;[RequestOptions](./ngw-connector.requestoptions.md)<!-- -->, 'cache'&gt;
+<b>Extends:</b> Pick&lt;[RequestOptions](./ngw-connector.requestoptions.md)
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [recursive?](./ngw-connector.getchildrenofoptions.recursive.md) | boolean | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [recursive?](./ngw-connector.getchildrenofoptions.recursive.md) |  | boolean | <i>(Optional)</i> |
 

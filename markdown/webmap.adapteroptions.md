@@ -14,29 +14,30 @@ export interface AdapterOptions<ANYPROPS extends Record<string, any> = Record<st
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [adapter?](./webmap.adapteroptions.adapter.md) | string | <i>(Optional)</i> |
-|  [attribution?](./webmap.adapteroptions.attribution.md) | string | <i>(Optional)</i> String to be shown in the attribution control. It describes the layer data and is often a legal obligation towards copyright holders and tile providers. |
-|  [baselayer?](./webmap.adapteroptions.baselayer.md) | boolean | <i>(Optional)</i> Indicate on a cartographic base layer. |
-|  [crossOrigin?](./webmap.adapteroptions.crossorigin.md) | 'anonymous' | <i>(Optional)</i> Parameter added when forming a request for layer data. This is needed if you want to access tile pixel data. Refer to [CORS Settings](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin) for valid String values. |
-|  [fit?](./webmap.adapteroptions.fit.md) | boolean | <i>(Optional)</i> Fit map to layer extent |
-|  [headers?](./webmap.adapteroptions.headers.md) | Record&lt;string, any&gt; | <i>(Optional)</i> |
-|  [id?](./webmap.adapteroptions.id.md) | string | <i>(Optional)</i> Unique Layer ID. If not specified, will be added automatically. |
-|  [maxScale?](./webmap.adapteroptions.maxscale.md) | number | <i>(Optional)</i> TODO: replace by maxZoom |
-|  [maxZoom?](./webmap.adapteroptions.maxzoom.md) | number | <i>(Optional)</i> Maximum zoom level of the map. |
-|  [minScale?](./webmap.adapteroptions.minscale.md) | number | <i>(Optional)</i> TODO: replace by minZoom |
-|  [minZoom?](./webmap.adapteroptions.minzoom.md) | number | <i>(Optional)</i> Minimum zoom level of the map. |
-|  [name?](./webmap.adapteroptions.name.md) | string | <i>(Optional)</i> Non-unique name of the layer. Can be used for user interfaces. |
-|  [nativeOptions?](./webmap.adapteroptions.nativeoptions.md) | NATIVE | <i>(Optional)</i> Map and layer adapter base options Use with care. There may be a conflict in the addLayer method by the adapter of the NextGIS Frontend library |
-|  [onAdded?](./webmap.adapteroptions.onadded.md) | (layer: [LayerAdapter](./webmap.layeradapter.md)<!-- -->) =&gt; void | <i>(Optional)</i> |
-|  [opacity?](./webmap.adapteroptions.opacity.md) | number | <i>(Optional)</i> Layer transparency. From 0-transparent to 1-visible |
-|  [order?](./webmap.adapteroptions.order.md) | number | <i>(Optional)</i> Indicates the map layers display sequence. A layer with a larger order value overlaps smaller ones. Zero value used to indicate baselayer. If the value is not specified explicitly, it will be assigned automatically with an increase of one for each new layer. |
-|  [props?](./webmap.adapteroptions.props.md) | ANYPROPS | <i>(Optional)</i> Any properties to save in layer. May be useful to get additional info from layer event. |
-|  [ratio?](./webmap.adapteroptions.ratio.md) | number | <i>(Optional)</i> |
-|  [setViewDelay?](./webmap.adapteroptions.setviewdelay.md) | number | <i>(Optional)</i> Experimental option to set the map loading delay when changing position |
-|  [srs?](./webmap.adapteroptions.srs.md) | number | <i>(Optional)</i> Experimental only for Ol yet |
-|  [type?](./webmap.adapteroptions.type.md) | [VectorAdapterLayerType](./webmap.vectoradapterlayertype.md) | <i>(Optional)</i> Type for geometries painting, for each layer may be only one of: <code>point</code>, <code>polygon</code> or <code>line</code>. |
-|  [visibility?](./webmap.adapteroptions.visibility.md) | boolean | <i>(Optional)</i> Show layer on the map immediately after adding. Such layers are always under others. Only one base layer can be displayed on the map at a time. |
-|  [waitFullLoad?](./webmap.adapteroptions.waitfullload.md) | boolean | <i>(Optional)</i> Wait until the layer data is fully loaded before allowing added to the map. |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [adapter?](./webmap.adapteroptions.adapter.md) |  | string | <i>(Optional)</i> |
+|  [attribution?](./webmap.adapteroptions.attribution.md) |  | string | <i>(Optional)</i> String to be shown in the attribution control. It describes the layer data and is often a legal obligation towards copyright holders and tile providers. |
+|  [baselayer?](./webmap.adapteroptions.baselayer.md) |  | boolean | <i>(Optional)</i> Indicate on a cartographic base layer. |
+|  [crossOrigin?](./webmap.adapteroptions.crossorigin.md) |  | 'anonymous' | <i>(Optional)</i> Parameter added when forming a request for layer data. This is needed if you want to access tile pixel data. Refer to [CORS Settings](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin) for valid String values. |
+|  [fit?](./webmap.adapteroptions.fit.md) |  | boolean | <i>(Optional)</i> Fit map to layer extent |
+|  [headers?](./webmap.adapteroptions.headers.md) |  | Record&lt;string, any&gt; | <i>(Optional)</i> |
+|  [id?](./webmap.adapteroptions.id.md) |  | string | <i>(Optional)</i> Unique Layer ID. If not specified, will be added automatically. |
+|  [layers?](./webmap.adapteroptions.layers.md) |  | string | <i>(Optional)</i> |
+|  [maxScale?](./webmap.adapteroptions.maxscale.md) |  | number | <i>(Optional)</i> TODO: replace by maxZoom |
+|  [maxZoom?](./webmap.adapteroptions.maxzoom.md) |  | number | <i>(Optional)</i> Maximum zoom level of the map. |
+|  [minScale?](./webmap.adapteroptions.minscale.md) |  | number | <i>(Optional)</i> TODO: replace by minZoom |
+|  [minZoom?](./webmap.adapteroptions.minzoom.md) |  | number | <i>(Optional)</i> Minimum zoom level of the map. |
+|  [name?](./webmap.adapteroptions.name.md) |  | string | <i>(Optional)</i> Non-unique name of the layer. Can be used for user interfaces. |
+|  [nativeOptions?](./webmap.adapteroptions.nativeoptions.md) |  | NATIVE | <i>(Optional)</i> Map and layer adapter base options Use with care. There may be a conflict in the addLayer method by the adapter of the NextGIS Frontend library |
+|  [onAdded?](./webmap.adapteroptions.onadded.md) |  | (layer: [LayerAdapter](./webmap.layeradapter.md)<!-- -->) =&gt; void | <i>(Optional)</i> |
+|  [opacity?](./webmap.adapteroptions.opacity.md) |  | number | <i>(Optional)</i> Layer transparency. From 0-transparent to 1-visible |
+|  [order?](./webmap.adapteroptions.order.md) |  | number | <i>(Optional)</i> Indicates the map layers display sequence. A layer with a larger order value overlaps smaller ones. Zero value used to indicate baselayer. If the value is not specified explicitly, it will be assigned automatically with an increase of one for each new layer. |
+|  [props?](./webmap.adapteroptions.props.md) |  | ANYPROPS | <i>(Optional)</i> Any properties to save in layer. May be useful to get additional info from layer event. |
+|  [ratio?](./webmap.adapteroptions.ratio.md) |  | number | <i>(Optional)</i> |
+|  [setViewDelay?](./webmap.adapteroptions.setviewdelay.md) |  | number | <i>(Optional)</i> Experimental option to set the map loading delay when changing position |
+|  [srs?](./webmap.adapteroptions.srs.md) |  | number | <i>(Optional)</i> Experimental only for Ol yet |
+|  [type?](./webmap.adapteroptions.type.md) |  | [VectorAdapterLayerType](./webmap.vectoradapterlayertype.md) | <i>(Optional)</i> Type for geometries painting, for each layer may be only one of: <code>point</code>, <code>polygon</code> or <code>line</code>. |
+|  [visibility?](./webmap.adapteroptions.visibility.md) |  | boolean | <i>(Optional)</i> Show layer on the map immediately after adding. Such layers are always under others. Only one base layer can be displayed on the map at a time. |
+|  [waitFullLoad?](./webmap.adapteroptions.waitfullload.md) |  | boolean | <i>(Optional)</i> Wait until the layer data is fully loaded before allowing added to the map. |
 

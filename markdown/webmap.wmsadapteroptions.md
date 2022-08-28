@@ -13,12 +13,11 @@ export interface WmsAdapterOptions extends RasterAdapterOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [format?](./webmap.wmsadapteroptions.format.md) | 'image/png' \| 'image/jpeg' \| string | <i>(Optional)</i> |
-|  [layers?](./webmap.wmsadapteroptions.layers.md) | string | <i>(Optional)</i> |
-|  [tileSize?](./webmap.wmsadapteroptions.tilesize.md) | number | <i>(Optional)</i> |
-|  [transparent?](./webmap.wmsadapteroptions.transparent.md) | boolean | <i>(Optional)</i> |
-|  [updateWmsParams?](./webmap.wmsadapteroptions.updatewmsparams.md) | (obj: { \[paramName: string\]: any; }) =&gt; Record&lt;string, unknown&gt; | <i>(Optional)</i> |
-|  [version?](./webmap.wmsadapteroptions.version.md) | string | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [format?](./webmap.wmsadapteroptions.format.md) |  | 'image/png' \| 'image/jpeg' \| string | <i>(Optional)</i> |
+|  [tileSize?](./webmap.wmsadapteroptions.tilesize.md) |  | number | <i>(Optional)</i> |
+|  [transparent?](./webmap.wmsadapteroptions.transparent.md) |  | boolean | <i>(Optional)</i> |
+|  [updateWmsParams?](./webmap.wmsadapteroptions.updatewmsparams.md) |  | (obj: { \[paramName: string\]: any; }) =&gt; Record&lt;string, unknown&gt; | <i>(Optional)</i> |
+|  [version?](./webmap.wmsadapteroptions.version.md) |  | string | <i>(Optional)</i> |
 

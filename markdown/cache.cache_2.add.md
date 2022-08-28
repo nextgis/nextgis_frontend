@@ -16,8 +16,8 @@ add(key: string, valueToSet: CacheValue<V> | (() => CacheValue<V>), props?: Cach
 |  --- | --- | --- |
 |  key | string |  |
 |  valueToSet | CacheValue&lt;V&gt; \| (() =&gt; CacheValue&lt;V&gt;) |  |
-|  props | CacheMatchProps&lt;O&gt; |  |
-|  onlyFull | boolean |  |
+|  props | CacheMatchProps&lt;O&gt; | <i>(Optional)</i> |
+|  onlyFull | boolean | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

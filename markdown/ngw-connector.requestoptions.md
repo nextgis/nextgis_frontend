@@ -12,15 +12,15 @@ export interface RequestOptions<M = RequestMethods>
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [cache?](./ngw-connector.requestoptions.cache.md) | boolean | <i>(Optional)</i> |
-|  [data?](./ngw-connector.requestoptions.data.md) | any | <i>(Optional)</i> |
-|  [file?](./ngw-connector.requestoptions.file.md) | File | <i>(Optional)</i> |
-|  [headers?](./ngw-connector.requestoptions.headers.md) | [RequestHeaders](./ngw-connector.requestheaders.md) | <i>(Optional)</i> |
-|  [method?](./ngw-connector.requestoptions.method.md) | M | <i>(Optional)</i> |
-|  [onProgress?](./ngw-connector.requestoptions.onprogress.md) | (percentComplete: number, event: ProgressEvent) =&gt; void | <i>(Optional)</i> |
-|  [responseType?](./ngw-connector.requestoptions.responsetype.md) | 'json' \| 'blob' | <i>(Optional)</i> |
-|  [signal?](./ngw-connector.requestoptions.signal.md) | AbortSignal | <i>(Optional)</i> |
-|  [withCredentials?](./ngw-connector.requestoptions.withcredentials.md) | boolean | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [cache?](./ngw-connector.requestoptions.cache.md) |  | boolean | <i>(Optional)</i> |
+|  [data?](./ngw-connector.requestoptions.data.md) |  | any | <i>(Optional)</i> |
+|  [file?](./ngw-connector.requestoptions.file.md) |  | File | <i>(Optional)</i> |
+|  [headers?](./ngw-connector.requestoptions.headers.md) |  | [RequestHeaders](./ngw-connector.requestheaders.md) | <i>(Optional)</i> |
+|  [method?](./ngw-connector.requestoptions.method.md) |  | M | <i>(Optional)</i> |
+|  [onProgress?](./ngw-connector.requestoptions.onprogress.md) |  | (percentComplete: number, event: ProgressEvent) =&gt; void | <i>(Optional)</i> |
+|  [responseType?](./ngw-connector.requestoptions.responsetype.md) |  | 'json' \| 'blob' | <i>(Optional)</i> |
+|  [signal?](./ngw-connector.requestoptions.signal.md) |  | AbortSignal | <i>(Optional)</i> |
+|  [withCredentials?](./ngw-connector.requestoptions.withcredentials.md) |  | boolean | <i>(Optional)</i> |
 

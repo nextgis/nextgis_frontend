@@ -12,8 +12,8 @@ export interface FeatureLayersIdentifyItems
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [featureCount](./ngw-connector.featurelayersidentifyitems.featurecount.md) | number |  |
-|  [features](./ngw-connector.featurelayersidentifyitems.features.md) | [LayerFeature](./ngw-connector.layerfeature.md)<!-- -->\[\] |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [featureCount](./ngw-connector.featurelayersidentifyitems.featurecount.md) |  | number |  |
+|  [features](./ngw-connector.featurelayersidentifyitems.features.md) |  | [LayerFeature](./ngw-connector.layerfeature.md)<!-- -->\[\] |  |
 

@@ -16,5 +16,5 @@ constructor(options?: QmsOptions);
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | [QmsOptions](./qms-kit.qmsoptions.md) |  |
+|  options | [QmsOptions](./qms-kit.qmsoptions.md) | <i>(Optional)</i> |
 

@@ -9,7 +9,7 @@
 ```typescript
 declare class NgwOl extends NgwMap<Map> 
 ```
-<b>Extends:</b> [NgwMap](./ngw-map.ngwmap.md)<!-- -->&lt;Map&gt;
+<b>Extends:</b> [NgwMap](./ngw-map.ngwmap.md)<!-- -->&lt;Map
 
 ## Constructors
 

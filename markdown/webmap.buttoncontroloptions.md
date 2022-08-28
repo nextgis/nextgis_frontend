@@ -14,10 +14,10 @@ export interface ButtonControlOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [addClass?](./webmap.buttoncontroloptions.addclass.md) | string | <i>(Optional)</i> Additional css class string |
-|  [html?](./webmap.buttoncontroloptions.html.md) | string \| HTMLElement | <i>(Optional)</i> Button content. |
-|  [onClick](./webmap.buttoncontroloptions.onclick.md) | [OnClick](./webmap.onclick.md) | Set an action to execute when button clicked. |
-|  [title?](./webmap.buttoncontroloptions.title.md) | string | <i>(Optional)</i> Button HTMLElement title |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [addClass?](./webmap.buttoncontroloptions.addclass.md) |  | string | <i>(Optional)</i> Additional css class string |
+|  [html?](./webmap.buttoncontroloptions.html.md) |  | string \| HTMLElement | <i>(Optional)</i> Button content. |
+|  [onClick](./webmap.buttoncontroloptions.onclick.md) |  | [OnClick](./webmap.onclick.md) | Set an action to execute when button clicked. |
+|  [title?](./webmap.buttoncontroloptions.title.md) |  | string | <i>(Optional)</i> Button HTMLElement title |
 

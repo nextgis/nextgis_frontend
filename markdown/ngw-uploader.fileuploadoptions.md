@@ -13,8 +13,8 @@ export interface FileUploadOptions extends ResourceCreateOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [onProgress?](./ngw-uploader.fileuploadoptions.onprogress.md) | (percentComplete: number) =&gt; void | <i>(Optional)</i> |
-|  [put?](./ngw-uploader.fileuploadoptions.put.md) | boolean | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [onProgress?](./ngw-uploader.fileuploadoptions.onprogress.md) |  | (percentComplete: number) =&gt; void | <i>(Optional)</i> |
+|  [put?](./ngw-uploader.fileuploadoptions.put.md) |  | boolean | <i>(Optional)</i> |
 

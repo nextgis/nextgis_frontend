@@ -9,7 +9,7 @@
 ```typescript
 export declare class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> 
 ```
-<b>Implements:</b> [ResourceAdapter](./ngw-kit.resourceadapter.md)<!-- -->&lt;M&gt;
+<b>Implements:</b> [ResourceAdapter](./ngw-kit.resourceadapter.md)
 
 ## Constructors
 
@@ -21,8 +21,8 @@ export declare class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [\_extent?](./ngw-kit.ngwwebmaplayeradapter._extent.md) |  | [LngLatBoundsArray](./utils.lnglatboundsarray.md) | <i>(Optional)</i> |
-|  [emitter](./ngw-kit.ngwwebmaplayeradapter.emitter.md) |  | StrictEventEmitter&lt;EventEmitter, [NgwWebmapLayerAdapterEvents](./ngw-kit.ngwwebmaplayeradapterevents.md)<!-- -->&gt; |  |
+|  [\_extent?](./ngw-kit.ngwwebmaplayeradapter._extent.md) | <code>protected</code> | [LngLatBoundsArray](./utils.lnglatboundsarray.md) | <i>(Optional)</i> |
+|  [emitter](./ngw-kit.ngwwebmaplayeradapter.emitter.md) | <code>readonly</code> | StrictEventEmitter&lt;EventEmitter, [NgwWebmapLayerAdapterEvents](./ngw-kit.ngwwebmaplayeradapterevents.md)<!-- -->&gt; |  |
 |  [layer?](./ngw-kit.ngwwebmaplayeradapter.layer.md) |  | [NgwWebmapItem](./ngw-kit.ngwwebmapitem.md) | <i>(Optional)</i> |
 |  [map](./ngw-kit.ngwwebmaplayeradapter.map.md) |  | M |  |
 |  [NgwWebmapItem](./ngw-kit.ngwwebmaplayeradapter.ngwwebmapitem.md) |  | [Type](./utils.type.md)<!-- -->&lt;[NgwWebmapItem](./ngw-kit.ngwwebmapitem.md)<!-- -->&gt; |  |
@@ -35,7 +35,7 @@ export declare class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
-|  [\_getWebMapLayerItem()](./ngw-kit.ngwwebmaplayeradapter._getwebmaplayeritem.md) |  |  |
+|  [\_getWebMapLayerItem()](./ngw-kit.ngwwebmaplayeradapter._getwebmaplayeritem.md) | <code>protected</code> |  |
 |  [addLayer(options)](./ngw-kit.ngwwebmaplayeradapter.addlayer.md) |  |  |
 |  [fetchBookmarks()](./ngw-kit.ngwwebmaplayeradapter.fetchbookmarks.md) |  |  |
 |  [getBookmarksResourceId()](./ngw-kit.ngwwebmaplayeradapter.getbookmarksresourceid.md) |  |  |

@@ -20,7 +20,7 @@ addFull(key: string, valueToSet: CacheValue<V> | (() => CacheValue<V>), props?: 
 |  --- | --- | --- |
 |  key | string |  |
 |  valueToSet | CacheValue&lt;V&gt; \| (() =&gt; CacheValue&lt;V&gt;) |  |
-|  props | CacheMatchProps&lt;O&gt; |  |
+|  props | CacheMatchProps&lt;O&gt; | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

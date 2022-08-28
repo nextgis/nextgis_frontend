@@ -17,8 +17,8 @@ makeQuery<R = unknown>(url: string, params?: Params | null, options?: RequestOpt
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  url | string | URL address to NGW |
-|  params | [Params](./ngw-connector.params.md) \| null | Query params |
-|  options | [RequestOptions](./ngw-connector.requestoptions.md) | Request options |
+|  params | [Params](./ngw-connector.params.md) \| null | <i>(Optional)</i> Query params |
+|  options | [RequestOptions](./ngw-connector.requestoptions.md) | <i>(Optional)</i> Request options |
 
 <b>Returns:</b>
 

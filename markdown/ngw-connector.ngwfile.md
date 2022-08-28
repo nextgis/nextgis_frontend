@@ -12,9 +12,9 @@ export interface NgwFile
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [mime\_type](./ngw-connector.ngwfile.mime_type.md) | string |  |
-|  [name](./ngw-connector.ngwfile.name.md) | string |  |
-|  [size](./ngw-connector.ngwfile.size.md) | number |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [mime\_type](./ngw-connector.ngwfile.mime_type.md) |  | string |  |
+|  [name](./ngw-connector.ngwfile.name.md) |  | string |  |
+|  [size](./ngw-connector.ngwfile.size.md) |  | number |  |
 

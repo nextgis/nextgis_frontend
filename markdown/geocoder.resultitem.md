@@ -12,9 +12,9 @@ export interface ResultItem
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [extent](./geocoder.resultitem.extent.md) | [LngLatBoundsArray](./utils.lnglatboundsarray.md) |  |
-|  [geom?](./geocoder.resultitem.geom.md) | GeoJsonObject | <i>(Optional)</i> |
-|  [text](./geocoder.resultitem.text.md) | string |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [extent](./geocoder.resultitem.extent.md) |  | [LngLatBoundsArray](./utils.lnglatboundsarray.md) |  |
+|  [geom?](./geocoder.resultitem.geom.md) |  | GeoJsonObject | <i>(Optional)</i> |
+|  [text](./geocoder.resultitem.text.md) |  | string |  |
 

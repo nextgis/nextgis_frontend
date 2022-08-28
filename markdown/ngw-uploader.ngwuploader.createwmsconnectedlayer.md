@@ -15,7 +15,7 @@ createWmsConnectedLayer(opt: CreateWmsConnectedLayerOptions, name?: string): Can
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  opt | [CreateWmsConnectedLayerOptions](./ngw-uploader.createwmsconnectedlayeroptions.md) |  |
-|  name | string |  |
+|  name | string | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

@@ -12,10 +12,10 @@ export interface FeatureItem<F = FeatureProperties, G extends Geometry | string 
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [extensions](./ngw-connector.featureitem.extensions.md) | [FeatureItemExtensions](./ngw-connector.featureitemextensions.md) |  |
-|  [fields](./ngw-connector.featureitem.fields.md) | F |  |
-|  [geom](./ngw-connector.featureitem.geom.md) | G |  |
-|  [id](./ngw-connector.featureitem.id.md) | number |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [extensions](./ngw-connector.featureitem.extensions.md) |  | [FeatureItemExtensions](./ngw-connector.featureitemextensions.md) |  |
+|  [fields](./ngw-connector.featureitem.fields.md) |  | F |  |
+|  [geom](./ngw-connector.featureitem.geom.md) |  | G |  |
+|  [id](./ngw-connector.featureitem.id.md) |  | number |  |
 

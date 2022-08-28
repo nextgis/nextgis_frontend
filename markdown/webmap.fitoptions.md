@@ -14,10 +14,10 @@ export interface FitOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [duration?](./webmap.fitoptions.duration.md) | number | <i>(Optional)</i> |
-|  [maxZoom?](./webmap.fitoptions.maxzoom.md) | number | <i>(Optional)</i> The maximum possible zoom to use. |
-|  [offset?](./webmap.fitoptions.offset.md) | \[number, number\] | <i>(Optional)</i> |
-|  [padding?](./webmap.fitoptions.padding.md) | number | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [duration?](./webmap.fitoptions.duration.md) |  | number | <i>(Optional)</i> |
+|  [maxZoom?](./webmap.fitoptions.maxzoom.md) |  | number | <i>(Optional)</i> The maximum possible zoom to use. |
+|  [offset?](./webmap.fitoptions.offset.md) |  | \[number, number\] | <i>(Optional)</i> |
+|  [padding?](./webmap.fitoptions.padding.md) |  | number | <i>(Optional)</i> |
 

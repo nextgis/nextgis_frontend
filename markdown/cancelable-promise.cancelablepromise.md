@@ -11,7 +11,7 @@ Promise that can be canceled
 ```typescript
 export declare class CancelablePromise<T = any> implements Promise<T> 
 ```
-<b>Implements:</b> Promise&lt;T&gt;
+<b>Implements:</b> Promise
 
 ## Example 1
 
@@ -69,9 +69,9 @@ promise.cancel();
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [\[Symbol.toStringTag\]](./cancelable-promise.cancelablepromise._symbol.tostringtag_.md) |  | string |  |
+|  [\[Symbol.toStringTag\]](./cancelable-promise.cancelablepromise._symbol.tostringtag_.md) | <code>readonly</code> | string |  |
 |  [CancelError](./cancelable-promise.cancelablepromise.cancelerror.md) | <code>static</code> | typeof [CancelError](./cancelable-promise.cancelerror.md) |  |
-|  [id](./cancelable-promise.cancelablepromise.id.md) |  | number |  |
+|  [id](./cancelable-promise.cancelablepromise.id.md) | <code>readonly</code> | number |  |
 |  [PromiseControl](./cancelable-promise.cancelablepromise.promisecontrol.md) | <code>static</code> | typeof PromiseControl |  |
 |  [TimeoutError](./cancelable-promise.cancelablepromise.timeouterror.md) | <code>static</code> | typeof TimeoutError |  |
 

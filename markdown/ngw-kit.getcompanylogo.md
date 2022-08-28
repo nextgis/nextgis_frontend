@@ -15,7 +15,7 @@ export declare function getCompanyLogo(connector: NgwConnector, options?: Compan
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  connector | NgwConnector |  |
-|  options | [CompanyLogoOptions](./ngw-kit.companylogooptions.md) |  |
+|  options | [CompanyLogoOptions](./ngw-kit.companylogooptions.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

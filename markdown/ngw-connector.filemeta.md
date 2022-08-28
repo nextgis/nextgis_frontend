@@ -12,10 +12,10 @@ export interface FileMeta
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [id](./ngw-connector.filemeta.id.md) | string |  |
-|  [mime\_type](./ngw-connector.filemeta.mime_type.md) | string |  |
-|  [name](./ngw-connector.filemeta.name.md) | string |  |
-|  [size](./ngw-connector.filemeta.size.md) | number |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [id](./ngw-connector.filemeta.id.md) |  | string |  |
+|  [mime\_type](./ngw-connector.filemeta.mime_type.md) |  | string |  |
+|  [name](./ngw-connector.filemeta.name.md) |  | string |  |
+|  [size](./ngw-connector.filemeta.size.md) |  | number |  |
 

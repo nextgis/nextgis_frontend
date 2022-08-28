@@ -16,7 +16,7 @@ propertiesFilter(layerDef: LayerDef, filters: PropertiesFilter, options?: Filter
 |  --- | --- | --- |
 |  layerDef | [LayerDef](./webmap.layerdef.md) |  |
 |  filters | [PropertiesFilter](./properties-filter.propertiesfilter.md) |  |
-|  options | [FilterOptions](./webmap.filteroptions.md) |  |
+|  options | [FilterOptions](./webmap.filteroptions.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

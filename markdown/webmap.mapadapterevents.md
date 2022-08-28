@@ -13,9 +13,9 @@ export interface MapAdapterEvents extends MainMapEvents
 
 ## Events
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  ["data-error"](./webmap.mapadapterevents._data-error_.md) | [DataLoadError](./webmap.dataloaderror.md) |  |
-|  ["data-loaded"](./webmap.mapadapterevents._data-loaded_.md) | [DataLoadError](./webmap.dataloaderror.md) |  |
-|  [create](./webmap.mapadapterevents.create.md) | [MapAdapter](./webmap.mapadapter.md) |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  ["data-error"](./webmap.mapadapterevents._data-error_.md) |  | [DataLoadError](./webmap.dataloaderror.md) |  |
+|  ["data-loaded"](./webmap.mapadapterevents._data-loaded_.md) |  | [DataLoadError](./webmap.dataloaderror.md) |  |
+|  [create](./webmap.mapadapterevents.create.md) |  | [MapAdapter](./webmap.mapadapter.md) |  |
 

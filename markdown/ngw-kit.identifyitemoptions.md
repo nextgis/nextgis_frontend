@@ -12,8 +12,8 @@ export interface IdentifyItemOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [connector](./ngw-kit.identifyitemoptions.connector.md) | NgwConnector |  |
-|  [feature](./ngw-kit.identifyitemoptions.feature.md) | [LayerFeature](./ngw-connector.layerfeature.md) |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [connector](./ngw-kit.identifyitemoptions.connector.md) |  | NgwConnector |  |
+|  [feature](./ngw-kit.identifyitemoptions.feature.md) |  | [LayerFeature](./ngw-connector.layerfeature.md) |  |
 

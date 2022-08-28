@@ -12,9 +12,10 @@ export interface NgwConnectorOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [auth?](./ngw-connector.ngwconnectoroptions.auth.md) | [Credentials](./ngw-connector.credentials.md) | <i>(Optional)</i> |
-|  [baseUrl?](./ngw-connector.ngwconnectoroptions.baseurl.md) | string | <i>(Optional)</i> |
-|  [route?](./ngw-connector.ngwconnectoroptions.route.md) | string | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [auth?](./ngw-connector.ngwconnectoroptions.auth.md) |  | [Credentials](./ngw-connector.credentials.md) | <i>(Optional)</i> |
+|  [baseUrl?](./ngw-connector.ngwconnectoroptions.baseurl.md) |  | string | <i>(Optional)</i> |
+|  [requestTransform?](./ngw-connector.ngwconnectoroptions.requesttransform.md) |  | [RequestTransformFunction](./ngw-connector.requesttransformfunction.md) | <i>(Optional)</i> |
+|  [route?](./ngw-connector.ngwconnectoroptions.route.md) |  | string | <i>(Optional)</i> |
 

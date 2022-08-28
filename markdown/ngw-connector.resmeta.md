@@ -12,7 +12,7 @@ export interface Resmeta
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [items](./ngw-connector.resmeta.items.md) | Record&lt;string, any&gt; |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [items](./ngw-connector.resmeta.items.md) |  | Record&lt;string, any&gt; |  |
 

@@ -12,8 +12,8 @@ export interface Credentials
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [login](./ngw-connector.credentials.login.md) | string |  |
-|  [password](./ngw-connector.credentials.password.md) | string |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [login](./ngw-connector.credentials.login.md) |  | string |  |
+|  [password](./ngw-connector.credentials.password.md) |  | string |  |
 

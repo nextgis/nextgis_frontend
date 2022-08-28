@@ -17,7 +17,7 @@ export declare class NgwLayersList extends Vue
 |  --- | --- | --- | --- |
 |  [hideWebmapRoot](./vuetify-ngw-components.ngwlayerslist.hidewebmaproot.md) |  | boolean |  |
 |  [include](./vuetify-ngw-components.ngwlayerslist.include.md) |  | Array&lt;[ResourceAdapter](./ngw-kit.resourceadapter.md) \| string&gt; |  |
-|  [independent](./vuetify-ngw-components.ngwlayerslist.independent.md) |  | boolean |  |
+|  [independent](./vuetify-ngw-components.ngwlayerslist.independent.md) | <code>readonly</code> | boolean |  |
 |  [items](./vuetify-ngw-components.ngwlayerslist.items.md) |  | [VueTreeItem](./vuetify-ngw-components.vuetreeitem.md)<!-- -->\[\] |  |
 |  [ngwMap](./vuetify-ngw-components.ngwlayerslist.ngwmap.md) |  | [NgwMap](./ngw-map.ngwmap.md) |  |
 |  [notOnlyNgwLayer](./vuetify-ngw-components.ngwlayerslist.notonlyngwlayer.md) |  | boolean |  |
@@ -27,7 +27,7 @@ export declare class NgwLayersList extends Vue
 |  [selectionType](./vuetify-ngw-components.ngwlayerslist.selectiontype.md) |  | 'independent' \| 'leaf' |  |
 |  [showLayer](./vuetify-ngw-components.ngwlayerslist.showlayer.md) |  | (layer: [NgwWebmapItem](./ngw-kit.ngwwebmapitem.md)<!-- -->) =&gt; boolean |  |
 |  [showResourceAdapter](./vuetify-ngw-components.ngwlayerslist.showresourceadapter.md) |  | (adapter: LayerAdapter \| [ResourceAdapter](./ngw-kit.resourceadapter.md)<!-- -->) =&gt; boolean |  |
-|  [webMap](./vuetify-ngw-components.ngwlayerslist.webmap.md) |  | WebMap \| undefined |  |
+|  [webMap](./vuetify-ngw-components.ngwlayerslist.webmap.md) | <code>readonly</code> | WebMap \| undefined |  |
 |  [webMapId](./vuetify-ngw-components.ngwlayerslist.webmapid.md) |  | number |  |
 
 ## Methods

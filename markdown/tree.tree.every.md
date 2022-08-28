@@ -14,7 +14,7 @@ every(filter?: PropertyFilter | SelfFilter): boolean;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  filter | [PropertyFilter](./properties-filter.propertyfilter.md) \| SelfFilter |  |
+|  filter | [PropertyFilter](./properties-filter.propertyfilter.md) \| SelfFilter | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

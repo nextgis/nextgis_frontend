@@ -13,9 +13,9 @@ export interface NgwMapEvents extends WebMapEvents
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  ["ngw-map:create"](./ngw-map.ngwmapevents._ngw-map_create_.md) | [NgwMap](./ngw-map.ngwmap.md) |  |
-|  ["ngw:preselect"](./ngw-map.ngwmapevents._ngw_preselect_.md) | void |  |
-|  ["ngw:select"](./ngw-map.ngwmapevents._ngw_select_.md) | [NgwIdentifyEvent](./ngw-map.ngwidentifyevent.md) \| null |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  ["ngw-map:create"](./ngw-map.ngwmapevents._ngw-map_create_.md) |  | [NgwMap](./ngw-map.ngwmap.md) |  |
+|  ["ngw:preselect"](./ngw-map.ngwmapevents._ngw_preselect_.md) |  | void |  |
+|  ["ngw:select"](./ngw-map.ngwmapevents._ngw_select_.md) |  | [NgwIdentifyEvent](./ngw-map.ngwidentifyevent.md) \| null |  |
 

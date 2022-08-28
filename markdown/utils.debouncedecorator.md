@@ -14,7 +14,7 @@ export declare function DebounceDecorator(wait?: number): (target: unknown, key:
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  wait | number |  |
+|  wait | number | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

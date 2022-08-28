@@ -15,7 +15,7 @@ export declare function createPopupContent(feature: Feature, item?: ResourceItem
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  feature | Feature |  |
-|  item | [ResourceItem](./ngw-connector.resourceitem.md) |  |
+|  item | [ResourceItem](./ngw-connector.resourceitem.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

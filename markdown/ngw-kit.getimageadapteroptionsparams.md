@@ -12,10 +12,10 @@ export interface GetImageAdapterOptionsParams
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [baseUrl?](./ngw-kit.getimageadapteroptionsparams.baseurl.md) | string | <i>(Optional)</i> |
-|  [headers](./ngw-kit.getimageadapteroptionsparams.headers.md) | any |  |
-|  [nd?](./ngw-kit.getimageadapteroptionsparams.nd.md) | [TileNoData](./ngw-kit.tilenodata.md) | <i>(Optional)</i> |
-|  [resourceId](./ngw-kit.getimageadapteroptionsparams.resourceid.md) | number \| number\[\] |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [baseUrl?](./ngw-kit.getimageadapteroptionsparams.baseurl.md) |  | string | <i>(Optional)</i> |
+|  [headers](./ngw-kit.getimageadapteroptionsparams.headers.md) |  | any |  |
+|  [nd?](./ngw-kit.getimageadapteroptionsparams.nd.md) |  | [TileNoData](./ngw-kit.tilenodata.md) | <i>(Optional)</i> |
+|  [resourceId](./ngw-kit.getimageadapteroptionsparams.resourceid.md) |  | number \| number\[\] |  |
 

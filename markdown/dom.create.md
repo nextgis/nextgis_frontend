@@ -15,8 +15,8 @@ export declare function create<K extends keyof HTMLElementTagNameMap>(tagName: K
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  tagName | K |  |
-|  className | string \| null |  |
-|  container | HTMLElement |  |
+|  className | string \| null | <i>(Optional)</i> |
+|  container | HTMLElement | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

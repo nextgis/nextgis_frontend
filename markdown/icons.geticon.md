@@ -14,9 +14,9 @@ export declare function getIcon(opt?: IconOptions): IconPaint;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  opt | [IconOptions](./icons.iconoptions.md) |  |
+|  opt | [IconOptions](./icons.iconoptions.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 
-IconPaint
+[IconPaint](./paint.iconpaint.md)
 

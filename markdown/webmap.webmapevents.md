@@ -13,25 +13,25 @@ export interface WebMapEvents extends MainMapEvents
 
 ## Events
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  ["build-map"](./webmap.webmapevents._build-map_.md) | [MapAdapter](./webmap.mapadapter.md) |  |
-|  ["controls:create"](./webmap.webmapevents._controls_create_.md) | any |  |
-|  ["layer:add"](./webmap.webmapevents._layer_add_.md) | [LayerAdapter](./webmap.layeradapter.md) |  |
-|  ["layer:click"](./webmap.webmapevents._layer_click_.md) | [OnLayerClickOptions](./webmap.onlayerclickoptions.md) |  |
-|  ["layer:hide"](./webmap.webmapevents._layer_hide_.md) | [LayerAdapter](./webmap.layeradapter.md) |  |
-|  ["layer:mouseout"](./webmap.webmapevents._layer_mouseout_.md) | [OnLayerClickOptions](./webmap.onlayerclickoptions.md) |  |
-|  ["layer:mouseover"](./webmap.webmapevents._layer_mouseover_.md) | [OnLayerClickOptions](./webmap.onlayerclickoptions.md) |  |
-|  ["layer:preadd"](./webmap.webmapevents._layer_preadd_.md) | [LayerAdapter](./webmap.layeradapter.md) |  |
-|  ["layer:prehide"](./webmap.webmapevents._layer_prehide_.md) | [LayerAdapter](./webmap.layeradapter.md) |  |
-|  ["layer:preremove"](./webmap.webmapevents._layer_preremove_.md) | [LayerAdapter](./webmap.layeradapter.md) |  |
-|  ["layer:preshow"](./webmap.webmapevents._layer_preshow_.md) | [LayerAdapter](./webmap.layeradapter.md) |  |
-|  ["layer:pretoggle"](./webmap.webmapevents._layer_pretoggle_.md) | [LayerAdapter](./webmap.layeradapter.md) |  |
-|  ["layer:preupdate"](./webmap.webmapevents._layer_preupdate_.md) | [LayerAdapter](./webmap.layeradapter.md) |  |
-|  ["layer:remove"](./webmap.webmapevents._layer_remove_.md) | [LayerAdapter](./webmap.layeradapter.md) |  |
-|  ["layer:select"](./webmap.webmapevents._layer_select_.md) | [OnLayerSelectOptions](./webmap.onlayerselectoptions.md) |  |
-|  ["layer:show"](./webmap.webmapevents._layer_show_.md) | [LayerAdapter](./webmap.layeradapter.md) |  |
-|  ["layer:toggle"](./webmap.webmapevents._layer_toggle_.md) | [LayerAdapter](./webmap.layeradapter.md) |  |
-|  ["layer:updated"](./webmap.webmapevents._layer_updated_.md) | [LayerAdapter](./webmap.layeradapter.md) |  |
-|  [create](./webmap.webmapevents.create.md) | [WebMap](./webmap.webmap.md) |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  ["build-map"](./webmap.webmapevents._build-map_.md) |  | [MapAdapter](./webmap.mapadapter.md) |  |
+|  ["controls:create"](./webmap.webmapevents._controls_create_.md) |  | any |  |
+|  ["layer:add"](./webmap.webmapevents._layer_add_.md) |  | [LayerAdapter](./webmap.layeradapter.md) |  |
+|  ["layer:click"](./webmap.webmapevents._layer_click_.md) |  | [OnLayerClickOptions](./webmap.onlayerclickoptions.md) |  |
+|  ["layer:hide"](./webmap.webmapevents._layer_hide_.md) |  | [LayerAdapter](./webmap.layeradapter.md) |  |
+|  ["layer:mouseout"](./webmap.webmapevents._layer_mouseout_.md) |  | [OnLayerClickOptions](./webmap.onlayerclickoptions.md) |  |
+|  ["layer:mouseover"](./webmap.webmapevents._layer_mouseover_.md) |  | [OnLayerClickOptions](./webmap.onlayerclickoptions.md) |  |
+|  ["layer:preadd"](./webmap.webmapevents._layer_preadd_.md) |  | [LayerAdapter](./webmap.layeradapter.md) |  |
+|  ["layer:prehide"](./webmap.webmapevents._layer_prehide_.md) |  | [LayerAdapter](./webmap.layeradapter.md) |  |
+|  ["layer:preremove"](./webmap.webmapevents._layer_preremove_.md) |  | [LayerAdapter](./webmap.layeradapter.md) |  |
+|  ["layer:preshow"](./webmap.webmapevents._layer_preshow_.md) |  | [LayerAdapter](./webmap.layeradapter.md) |  |
+|  ["layer:pretoggle"](./webmap.webmapevents._layer_pretoggle_.md) |  | [LayerAdapter](./webmap.layeradapter.md) |  |
+|  ["layer:preupdate"](./webmap.webmapevents._layer_preupdate_.md) |  | [LayerAdapter](./webmap.layeradapter.md) |  |
+|  ["layer:remove"](./webmap.webmapevents._layer_remove_.md) |  | [LayerAdapter](./webmap.layeradapter.md) |  |
+|  ["layer:select"](./webmap.webmapevents._layer_select_.md) |  | [OnLayerSelectOptions](./webmap.onlayerselectoptions.md) |  |
+|  ["layer:show"](./webmap.webmapevents._layer_show_.md) |  | [LayerAdapter](./webmap.layeradapter.md) |  |
+|  ["layer:toggle"](./webmap.webmapevents._layer_toggle_.md) |  | [LayerAdapter](./webmap.layeradapter.md) |  |
+|  ["layer:updated"](./webmap.webmapevents._layer_updated_.md) |  | [LayerAdapter](./webmap.layeradapter.md) |  |
+|  [create](./webmap.webmapevents.create.md) |  | [WebMap](./webmap.webmap.md) |  |
 
