@@ -11,6 +11,7 @@
   "dependencies": {
     "@nextgis/leaflet-map-adapter": "^1.15.1",
     "@nextgis/ngw-map": "^1.15.1",
+    "leaflet": "1.7.1",
     "leaflet.wms": "^0.2.0"
   },
   "devDependencies": {

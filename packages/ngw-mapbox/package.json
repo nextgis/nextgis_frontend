@@ -11,7 +11,8 @@
   "dependencies": {
     "@nextgis/mapboxgl-map-adapter": "^1.15.1",
     "@nextgis/ngw-map": "^1.15.1",
-    "canvg": "^3.0.9"
+    "canvg": "^3.0.9",
+    "maplibre-gl": "^2.4.0"
   },
   "devDependencies": {
     "@nextgis/build-tools": "^1.15.1"
