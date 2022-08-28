@@ -331,25 +331,27 @@ export abstract class VectorAdapter<
     feature: Feature,
     coordinates?: LngLatLike,
   ): boolean {
+    const { selectable, multiselect, unselectOnSecondClick } = this.options;
     const alreadySelected = this.isFeatureSelected(feature);
     let becameSelected = alreadySelected;
 
-    if (this.options.selectable) {
+    if (selectable || multiselect) {
       let features: Feature[] | undefined = undefined;
       if (alreadySelected) {
-        if (this.options && this.options.unselectOnSecondClick) {
+        if (unselectOnSecondClick) {
           this._unselectFeature(feature, { silent: true });
           becameSelected = false;
         }
       } else {
-        this.map &&
-          this.map._addUnselectCb(() =>
-            this._unselectFeature(feature, { silent: true }),
-          );
+        if (!multiselect) {
+          this.map &&
+            this.map._addUnselectCb(() =>
+              this._unselectFeature(feature, { silent: true }),
+            );
+        }
         features = this._selectFeature(feature, { silent: true });
         becameSelected = true;
       }
-      // alreadySelected = this.isFeatureSelected(feature);
       if (this.options.onSelect) {
         this.options.onSelect({
           layer: this,
@@ -465,7 +467,7 @@ export abstract class VectorAdapter<
 
       const mapboxType = mapboxTypeAlias[type];
       for (const [name, paint] of layers) {
-        let _paint: any;
+        let _paint: any = null;
         let nativePaint: Record<string, any> | null = null;
         let typePaint = null;
         if (this.options.nativePaint) {
@@ -475,10 +477,12 @@ export abstract class VectorAdapter<
               : this.options.nativePaint;
           const opacity = this.options.opacity;
           if (opacity !== undefined && nativePaint) {
-            const allowedNativePaint = allowedByType[type]
-            const opacityProp = allowedNativePaint.find((x) => x[0] === 'opacity');
+            const allowedNativePaint = allowedByType[type];
+            const opacityProp = allowedNativePaint.find(
+              (x) => x[0] === 'opacity',
+            );
             if (opacityProp) {
-              nativePaint[mapboxType + '-' + opacityProp[1]]
+              nativePaint[mapboxType + '-' + opacityProp[1]];
             }
             for (const p in nativePaint) {
               if (p.indexOf('opacity') !== -1) {
