@@ -14,7 +14,7 @@ getSettings?(webMap?: WebMap): Promise<MapOptions>;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  webMap | [WebMap](./webmap.webmap.md) |  |
+|  webMap | [WebMap](./webmap.webmap.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

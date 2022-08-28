@@ -12,12 +12,12 @@ export interface IconOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [color?](./icons.iconoptions.color.md) | string | <i>(Optional)</i> |
-|  [rotate?](./icons.iconoptions.rotate.md) | number | <i>(Optional)</i> |
-|  [shape?](./icons.iconoptions.shape.md) | 'circle' \| 'brill' \| 'rect' \| 'marker' \| 'star' \| 'asterisk' \| 'triangle' \| 'plus' \| 'minus' | <i>(Optional)</i> |
-|  [size?](./icons.iconoptions.size.md) | number | <i>(Optional)</i> |
-|  [stroke?](./icons.iconoptions.stroke.md) | number | <i>(Optional)</i> |
-|  [strokeColor?](./icons.iconoptions.strokecolor.md) | string | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [color?](./icons.iconoptions.color.md) |  | string | <i>(Optional)</i> |
+|  [rotate?](./icons.iconoptions.rotate.md) |  | number | <i>(Optional)</i> |
+|  [shape?](./icons.iconoptions.shape.md) |  | 'rect' \| 'star' \| 'plus' \| 'minus' \| 'brill' \| 'circle' \| 'marker' \| 'triangle' \| 'asterisk' | <i>(Optional)</i> |
+|  [size?](./icons.iconoptions.size.md) |  | number | <i>(Optional)</i> |
+|  [stroke?](./icons.iconoptions.stroke.md) |  | number | <i>(Optional)</i> |
+|  [strokeColor?](./icons.iconoptions.strokecolor.md) |  | string | <i>(Optional)</i> |
 

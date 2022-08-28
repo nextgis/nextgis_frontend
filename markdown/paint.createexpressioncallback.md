@@ -7,14 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function createExpressionCallback(paint: VectorAdapterLayerPaint): GetPaintCallback | undefined;
+export declare function createExpressionCallback(paint: Record<string, any>): GetPaintCallback | undefined;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  paint | [VectorAdapterLayerPaint](./paint.vectoradapterlayerpaint.md) |  |
+|  paint | Record&lt;string, any&gt; |  |
 
 <b>Returns:</b>
 

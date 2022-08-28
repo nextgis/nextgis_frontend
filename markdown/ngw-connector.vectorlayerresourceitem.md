@@ -13,8 +13,8 @@ export interface VectorLayerResourceItem extends ResourceItemMain
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [feature\_layer](./ngw-connector.vectorlayerresourceitem.feature_layer.md) | [FeatureResource](./ngw-connector.featureresource.md) |  |
-|  [vector\_layer](./ngw-connector.vectorlayerresourceitem.vector_layer.md) | [VectorLayer](./ngw-connector.vectorlayer.md) |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [feature\_layer](./ngw-connector.vectorlayerresourceitem.feature_layer.md) |  | [FeatureResource](./ngw-connector.featureresource.md) |  |
+|  [vector\_layer](./ngw-connector.vectorlayerresourceitem.vector_layer.md) |  | [VectorLayer](./ngw-connector.vectorlayer.md) |  |
 

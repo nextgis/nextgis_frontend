@@ -12,7 +12,7 @@ export interface UploadFeatureAttachmentOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [file](./ngw-kit.uploadfeatureattachmentoptions.file.md) | File |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [file](./ngw-kit.uploadfeatureattachmentoptions.file.md) |  | File |  |
 

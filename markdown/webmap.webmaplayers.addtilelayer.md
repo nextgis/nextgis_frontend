@@ -17,7 +17,7 @@ addTileLayer(url: string, options?: Omit<TileAdapterOptions, 'url'>): Promise<Ma
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  url | string |  |
-|  options | Omit&lt;[TileAdapterOptions](./webmap.tileadapteroptions.md)<!-- -->, 'url'&gt; |  |
+|  options | Omit&lt;[TileAdapterOptions](./webmap.tileadapteroptions.md)<!-- -->, 'url'&gt; | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

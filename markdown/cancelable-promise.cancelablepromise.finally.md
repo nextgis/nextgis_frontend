@@ -14,7 +14,7 @@ finally(onfinally?: (() => void) | undefined | null): Promise<T>;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  onfinally | (() =&gt; void) \| undefined \| null |  |
+|  onfinally | (() =&gt; void) \| undefined \| null | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

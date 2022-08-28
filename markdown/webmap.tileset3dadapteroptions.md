@@ -13,8 +13,8 @@ export interface Tileset3DAdapterOptions extends RasterAdapterOptions, VectorAda
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [heightOffset?](./webmap.tileset3dadapteroptions.heightoffset.md) | number | <i>(Optional)</i> |
-|  [useTerrainHeight?](./webmap.tileset3dadapteroptions.useterrainheight.md) | boolean | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [heightOffset?](./webmap.tileset3dadapteroptions.heightoffset.md) |  | number | <i>(Optional)</i> |
+|  [useTerrainHeight?](./webmap.tileset3dadapteroptions.useterrainheight.md) |  | boolean | <i>(Optional)</i> |
 

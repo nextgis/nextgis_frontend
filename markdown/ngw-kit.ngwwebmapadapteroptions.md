@@ -13,14 +13,15 @@ export interface NgwWebmapAdapterOptions<M = any> extends A
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [connector](./ngw-kit.ngwwebmapadapteroptions.connector.md) | NgwConnector |  |
-|  [defaultBasemap?](./ngw-kit.ngwwebmapadapteroptions.defaultbasemap.md) | boolean | <i>(Optional)</i> Add baselayer from OsmLayerAdapter if no \[webmap\_resource\].basemap\_webmap has been set. |
-|  [pixelRadius?](./ngw-kit.ngwwebmapadapteroptions.pixelradius.md) | number | <i>(Optional)</i> Radius for searching objects in pixels |
-|  [resourceId](./ngw-kit.ngwwebmapadapteroptions.resourceid.md) | [ResourceIdDef](./ngw-kit.resourceiddef.md) |  |
-|  [selectable?](./ngw-kit.ngwwebmapadapteroptions.selectable.md) | boolean | <i>(Optional)</i> |
-|  [useBasemap?](./ngw-kit.ngwwebmapadapteroptions.usebasemap.md) | boolean | <i>(Optional)</i> Add baselayers from ngw webmap basemap settings |
-|  [useExtentConstrained?](./ngw-kit.ngwwebmapadapteroptions.useextentconstrained.md) | boolean | <i>(Optional)</i> Set max extent from ngw webmap basemap settings |
-|  [webMap](./ngw-kit.ngwwebmapadapteroptions.webmap.md) | [WebMap](./webmap.webmap.md)<!-- -->&lt;M&gt; |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [connector](./ngw-kit.ngwwebmapadapteroptions.connector.md) |  | NgwConnector |  |
+|  [defaultBasemap?](./ngw-kit.ngwwebmapadapteroptions.defaultbasemap.md) |  | boolean | <i>(Optional)</i> Add baselayer from OsmLayerAdapter if no \[webmap\_resource\].basemap\_webmap has been set. |
+|  [pixelRadius?](./ngw-kit.ngwwebmapadapteroptions.pixelradius.md) |  | number | <i>(Optional)</i> Radius for searching objects in pixels |
+|  [popupOptions?](./ngw-kit.ngwwebmapadapteroptions.popupoptions.md) |  | [PopupOptions](./webmap.popupoptions.md) | <i>(Optional)</i> |
+|  [resourceId](./ngw-kit.ngwwebmapadapteroptions.resourceid.md) |  | [ResourceIdDef](./ngw-kit.resourceiddef.md) |  |
+|  [selectable?](./ngw-kit.ngwwebmapadapteroptions.selectable.md) |  | boolean | <i>(Optional)</i> |
+|  [useBasemap?](./ngw-kit.ngwwebmapadapteroptions.usebasemap.md) |  | boolean | <i>(Optional)</i> Add baselayers from ngw webmap basemap settings |
+|  [useExtentConstrained?](./ngw-kit.ngwwebmapadapteroptions.useextentconstrained.md) |  | boolean | <i>(Optional)</i> Set max extent from ngw webmap basemap settings |
+|  [webMap](./ngw-kit.ngwwebmapadapteroptions.webmap.md) |  | [WebMap](./webmap.webmap.md)<!-- -->&lt;M&gt; |  |
 

@@ -16,8 +16,8 @@ export declare function getCirclePolygonCoordinates(lng: number, lat: number, ra
 |  --- | --- | --- |
 |  lng | number |  |
 |  lat | number |  |
-|  radius | number |  |
-|  points | number |  |
+|  radius | number | <i>(Optional)</i> |
+|  points | number | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

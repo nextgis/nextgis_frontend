@@ -12,9 +12,9 @@ export interface FeatureIdentifyRequestOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [geom](./ngw-kit.featureidentifyrequestoptions.geom.md) | string | WKT Polygon geometry |
-|  [layers](./ngw-kit.featureidentifyrequestoptions.layers.md) | number\[\] |  |
-|  [srs](./ngw-kit.featureidentifyrequestoptions.srs.md) | 3857 |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [geom](./ngw-kit.featureidentifyrequestoptions.geom.md) |  | string | WKT Polygon geometry |
+|  [layers](./ngw-kit.featureidentifyrequestoptions.layers.md) |  | number\[\] |  |
+|  [srs](./ngw-kit.featureidentifyrequestoptions.srs.md) |  | 3857 |  |
 

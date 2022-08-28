@@ -9,7 +9,7 @@
 ```typescript
 export declare class OlMapAdapter implements MapAdapter<Map, Layer> 
 ```
-<b>Implements:</b> [MapAdapter](./webmap.mapadapter.md)<!-- -->&lt;Map, Layer&gt;
+<b>Implements:</b> [MapAdapter](./webmap.mapadapter.md)<!-- -->&lt;Map, Layer
 
 ## Properties
 

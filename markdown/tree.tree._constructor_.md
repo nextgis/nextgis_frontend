@@ -16,6 +16,6 @@ constructor(item?: DefaultTreeItem, options?: TreeOptions<any>);
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  item | DefaultTreeItem |  |
-|  options | TreeOptions&lt;any&gt; |  |
+|  item | DefaultTreeItem | <i>(Optional)</i> |
+|  options | TreeOptions&lt;any&gt; | <i>(Optional)</i> |
 

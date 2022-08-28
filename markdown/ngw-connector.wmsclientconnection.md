@@ -12,11 +12,11 @@ export interface WmsClientConnection
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [capcache?](./ngw-connector.wmsclientconnection.capcache.md) | string | <i>(Optional)</i> If equal query - query capabilities from service |
-|  [password?](./ngw-connector.wmsclientconnection.password.md) | string | <i>(Optional)</i> Password to connect to service |
-|  [url](./ngw-connector.wmsclientconnection.url.md) | string | WMS service url |
-|  [username?](./ngw-connector.wmsclientconnection.username.md) | string | <i>(Optional)</i> User name to connect to service |
-|  [version?](./ngw-connector.wmsclientconnection.version.md) | string | <i>(Optional)</i> WMS version |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [capcache?](./ngw-connector.wmsclientconnection.capcache.md) |  | string | <i>(Optional)</i> If equal query - query capabilities from service |
+|  [password?](./ngw-connector.wmsclientconnection.password.md) |  | string | <i>(Optional)</i> Password to connect to service |
+|  [url](./ngw-connector.wmsclientconnection.url.md) |  | string | WMS service url |
+|  [username?](./ngw-connector.wmsclientconnection.username.md) |  | string | <i>(Optional)</i> User name to connect to service |
+|  [version?](./ngw-connector.wmsclientconnection.version.md) |  | string | <i>(Optional)</i> WMS version |
 

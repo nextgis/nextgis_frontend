@@ -12,10 +12,10 @@ export interface NgwConfig
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [amdUrl](./ngw-kit.ngwconfig.amdurl.md) | string |  |
-|  [applicationUrl](./ngw-kit.ngwconfig.applicationurl.md) | string |  |
-|  [assetUrl](./ngw-kit.ngwconfig.asseturl.md) | string |  |
-|  [id](./ngw-kit.ngwconfig.id.md) | number |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [amdUrl](./ngw-kit.ngwconfig.amdurl.md) |  | string |  |
+|  [applicationUrl](./ngw-kit.ngwconfig.applicationurl.md) |  | string |  |
+|  [assetUrl](./ngw-kit.ngwconfig.asseturl.md) |  | string |  |
+|  [id](./ngw-kit.ngwconfig.id.md) |  | number |  |
 

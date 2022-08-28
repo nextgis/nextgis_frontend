@@ -12,7 +12,7 @@ export interface WmsServerService
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [layers](./ngw-connector.wmsserverservice.layers.md) | [WmsServerServiceLayer](./ngw-connector.wmsserverservicelayer.md)<!-- -->\[\] | Array or WMS service layers. keyname, display\_name and resource\_id are mandatory. |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [layers](./ngw-connector.wmsserverservice.layers.md) |  | [WmsServerServiceLayer](./ngw-connector.wmsserverservicelayer.md)<!-- -->\[\] | Array or WMS service layers. keyname, display\_name and resource\_id are mandatory. |
 

@@ -9,11 +9,11 @@
 ```typescript
 export interface MapboxglMapAdapterOptions extends MapOptions<Map> 
 ```
-<b>Extends:</b> [MapOptions](./webmap.mapoptions.md)<!-- -->&lt;Map&gt;
+<b>Extends:</b> [MapOptions](./webmap.mapoptions.md)<!-- -->&lt;Map
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [style?](./mapboxgl-map-adapter.mapboxglmapadapteroptions.style.md) | Partial&lt;StyleSpecification&gt; \| string | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [style?](./mapboxgl-map-adapter.mapboxglmapadapteroptions.style.md) |  | Partial&lt;StyleSpecification&gt; \| string | <i>(Optional)</i> |
 

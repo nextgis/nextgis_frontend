@@ -12,9 +12,9 @@ export interface GetLayerAdapterOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [baseUrl?](./ngw-kit.getlayeradapteroptions.baseurl.md) | string | <i>(Optional)</i> |
-|  [options](./ngw-kit.getlayeradapteroptions.options.md) | [NgwLayerOptions](./ngw-kit.ngwlayeroptions.md) |  |
-|  [webMap?](./ngw-kit.getlayeradapteroptions.webmap.md) | [WebMap](./webmap.webmap.md) | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [baseUrl?](./ngw-kit.getlayeradapteroptions.baseurl.md) |  | string | <i>(Optional)</i> |
+|  [options](./ngw-kit.getlayeradapteroptions.options.md) |  | [NgwLayerOptions](./ngw-kit.ngwlayeroptions.md) |  |
+|  [webMap?](./ngw-kit.getlayeradapteroptions.webmap.md) |  | [WebMap](./webmap.webmap.md) | <i>(Optional)</i> |
 

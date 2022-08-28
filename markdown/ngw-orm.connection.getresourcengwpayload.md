@@ -16,7 +16,7 @@ getResourceNgwPayload(resource: typeof BaseResource, parent: number, opt?: Parti
 |  --- | --- | --- |
 |  resource | typeof [BaseResource](./ngw-orm.baseresource.md) |  |
 |  parent | number |  |
-|  opt | Partial&lt;SyncOptions&gt; |  |
+|  opt | Partial&lt;SyncOptions&gt; | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

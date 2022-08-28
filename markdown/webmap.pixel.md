@@ -14,10 +14,10 @@ export interface Pixel
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [bottom?](./webmap.pixel.bottom.md) | number | <i>(Optional)</i> |
-|  [left](./webmap.pixel.left.md) | number |  |
-|  [right?](./webmap.pixel.right.md) | number | <i>(Optional)</i> |
-|  [top](./webmap.pixel.top.md) | number |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [bottom?](./webmap.pixel.bottom.md) |  | number | <i>(Optional)</i> |
+|  [left](./webmap.pixel.left.md) |  | number |  |
+|  [right?](./webmap.pixel.right.md) |  | number | <i>(Optional)</i> |
+|  [top](./webmap.pixel.top.md) |  | number |  |
 

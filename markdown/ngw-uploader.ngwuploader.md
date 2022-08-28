@@ -29,7 +29,7 @@ export declare class NgwUploader
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
-|  [\_initialize()](./ngw-uploader.ngwuploader._initialize.md) |  |  |
+|  [\_initialize()](./ngw-uploader.ngwuploader._initialize.md) | <code>protected</code> |  |
 |  [createGroup(nameOrOptions, opt)](./ngw-uploader.ngwuploader.creategroup.md) |  |  |
 |  [createRaster(options)](./ngw-uploader.ngwuploader.createraster.md) |  |  |
 |  [createResource(meta, name, options)](./ngw-uploader.ngwuploader.createresource.md) |  |  |

@@ -9,15 +9,15 @@
 ```typescript
 export interface ResourceAdapter<M = any, L = any, O extends GeoJsonAdapterOptions = GeoJsonAdapterOptions, F extends Feature = Feature> extends VectorLayerAdapter<M, L, O, F> 
 ```
-<b>Extends:</b> [VectorLayerAdapter](./webmap.vectorlayeradapter.md)<!-- -->&lt;M, L, O, F&gt;
+<b>Extends:</b> [VectorLayerAdapter](./webmap.vectorlayeradapter.md)
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [baselayer?](./ngw-kit.resourceadapter.baselayer.md) | boolean | <i>(Optional)</i> |
-|  [item?](./ngw-kit.resourceadapter.item.md) | [ResourceItem](./ngw-connector.resourceitem.md) | <i>(Optional)</i> |
-|  [resourceId](./ngw-kit.resourceadapter.resourceid.md) | number |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [baselayer?](./ngw-kit.resourceadapter.baselayer.md) |  | boolean | <i>(Optional)</i> |
+|  [item?](./ngw-kit.resourceadapter.item.md) |  | [ResourceItem](./ngw-connector.resourceitem.md) | <i>(Optional)</i> |
+|  [resourceId](./ngw-kit.resourceadapter.resourceid.md) |  | number |  |
 
 ## Methods
 

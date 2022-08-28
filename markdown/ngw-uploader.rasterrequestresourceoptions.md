@@ -12,9 +12,9 @@ export interface RasterRequestResourceOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [cls](./ngw-uploader.rasterrequestresourceoptions.cls.md) | 'raster\_layer' |  |
-|  [display\_name](./ngw-uploader.rasterrequestresourceoptions.display_name.md) | string |  |
-|  [parent](./ngw-uploader.rasterrequestresourceoptions.parent.md) | { id: number; } |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [cls](./ngw-uploader.rasterrequestresourceoptions.cls.md) |  | 'raster\_layer' |  |
+|  [display\_name](./ngw-uploader.rasterrequestresourceoptions.display_name.md) |  | string |  |
+|  [parent](./ngw-uploader.rasterrequestresourceoptions.parent.md) |  | { id: number; } |  |
 

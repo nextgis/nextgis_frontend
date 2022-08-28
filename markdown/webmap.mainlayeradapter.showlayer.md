@@ -14,7 +14,7 @@ showLayer?(layer?: L): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  layer | L |  |
+|  layer | L | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

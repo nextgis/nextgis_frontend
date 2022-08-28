@@ -16,5 +16,5 @@ constructor(options?: DialogAdapterOptions);
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | DialogAdapterOptions |  |
+|  options | DialogAdapterOptions | <i>(Optional)</i> |
 

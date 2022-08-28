@@ -12,8 +12,8 @@ export interface RequestItemsResponseMap
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [GET](./ngw-connector.requestitemsresponsemap.get.md) | [GetRequestItemsResponseMap](./ngw-connector.getrequestitemsresponsemap.md) |  |
-|  [POST](./ngw-connector.requestitemsresponsemap.post.md) | [PostRequestItemsResponseMap](./ngw-connector.postrequestitemsresponsemap.md) |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [GET](./ngw-connector.requestitemsresponsemap.get.md) |  | [GetRequestItemsResponseMap](./ngw-connector.getrequestitemsresponsemap.md) |  |
+|  [POST](./ngw-connector.requestitemsresponsemap.post.md) |  | [PostRequestItemsResponseMap](./ngw-connector.postrequestitemsresponsemap.md) |  |
 

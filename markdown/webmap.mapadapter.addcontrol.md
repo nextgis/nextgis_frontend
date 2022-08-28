@@ -16,7 +16,7 @@ addControl<K extends keyof MapControls>(controlName: K | any, position: ControlP
 |  --- | --- | --- |
 |  controlName | K \| any |  |
 |  position | [ControlPosition](./webmap.controlposition.md) |  |
-|  options | [MapControls](./webmap.mapcontrols.md)<!-- -->\[K\] |  |
+|  options | [MapControls](./webmap.mapcontrols.md)<!-- -->\[K\] | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

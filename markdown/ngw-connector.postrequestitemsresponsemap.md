@@ -13,10 +13,10 @@ export interface PostRequestItemsResponseMap extends RequestItemKeys
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  ["feature\_attachment.collection"](./ngw-connector.postrequestitemsresponsemap._feature_attachment.collection_.md) | [IdOnly](./ngw-connector.idonly.md) |  |
-|  ["feature\_layer.identify"](./ngw-connector.postrequestitemsresponsemap._feature_layer.identify_.md) | [FeatureLayersIdentify](./ngw-connector.featurelayersidentify.md) |  |
-|  ["file\_upload.upload"](./ngw-connector.postrequestitemsresponsemap._file_upload.upload_.md) | [FileUploadResp](./ngw-connector.fileuploadresp.md) |  |
-|  ["resource.collection"](./ngw-connector.postrequestitemsresponsemap._resource.collection_.md) | [CreatedResource](./ngw-connector.createdresource.md) |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  ["feature\_attachment.collection"](./ngw-connector.postrequestitemsresponsemap._feature_attachment.collection_.md) |  | [IdOnly](./ngw-connector.idonly.md) |  |
+|  ["feature\_layer.identify"](./ngw-connector.postrequestitemsresponsemap._feature_layer.identify_.md) |  | [FeatureLayersIdentify](./ngw-connector.featurelayersidentify.md) |  |
+|  ["file\_upload.upload"](./ngw-connector.postrequestitemsresponsemap._file_upload.upload_.md) |  | [FileUploadResp](./ngw-connector.fileuploadresp.md) |  |
+|  ["resource.collection"](./ngw-connector.postrequestitemsresponsemap._resource.collection_.md) |  | [CreatedResource](./ngw-connector.createdresource.md) |  |
 

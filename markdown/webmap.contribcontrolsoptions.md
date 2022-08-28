@@ -12,8 +12,8 @@ export interface ContribControlsOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [ATTRIBUTION](./webmap.contribcontrolsoptions.attribution.md) | [AttributionControlOptions](./webmap.attributioncontroloptions.md) |  |
-|  [ZOOM](./webmap.contribcontrolsoptions.zoom.md) | [ZoomControlOptions](./webmap.zoomcontroloptions.md) |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [ATTRIBUTION](./webmap.contribcontrolsoptions.attribution.md) |  | [AttributionControlOptions](./webmap.attributioncontroloptions.md) |  |
+|  [ZOOM](./webmap.contribcontrolsoptions.zoom.md) |  | [ZoomControlOptions](./webmap.zoomcontroloptions.md) |  |
 

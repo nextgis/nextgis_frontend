@@ -16,5 +16,5 @@ constructor(options?: BaseProviderOptions);
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | [BaseProviderOptions](./geocoder.baseprovideroptions.md) |  |
+|  options | [BaseProviderOptions](./geocoder.baseprovideroptions.md) | <i>(Optional)</i> |
 

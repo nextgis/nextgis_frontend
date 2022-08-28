@@ -17,7 +17,7 @@ static find<T extends VectorLayer>(this: ObjectType<T>, optionsOrConditions?: Fi
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  this | ObjectType&lt;T&gt; |  |
-|  optionsOrConditions | FindManyOptions&lt;T&gt; \| PropertiesFilter&lt;T&gt; |  |
+|  optionsOrConditions | FindManyOptions&lt;T&gt; \| [PropertiesFilter](./properties-filter.propertiesfilter.md)<!-- -->&lt;T&gt; | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

@@ -19,5 +19,5 @@ constructor(opt?: {
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  opt | { properties?: P; coordinates?: G\['coordinates'\]; } |  |
+|  opt | { properties?: P; coordinates?: G\['coordinates'\]; } | <i>(Optional)</i> |
 

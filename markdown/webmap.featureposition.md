@@ -12,8 +12,8 @@ export interface FeaturePosition
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [getBounds](./webmap.featureposition.getbounds.md) | () =&gt; [LngLatBoundsArray](./utils.lnglatboundsarray.md) | Get the extent for the geometry on which the action was executed. |
-|  [getCenter](./webmap.featureposition.getcenter.md) | () =&gt; [LngLatArray](./utils.lnglatarray.md) | Get the center for the geometry on which the action was executed. |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [getBounds](./webmap.featureposition.getbounds.md) |  | () =&gt; [LngLatBoundsArray](./utils.lnglatboundsarray.md) | Get the extent for the geometry on which the action was executed. |
+|  [getCenter](./webmap.featureposition.getcenter.md) |  | () =&gt; [LngLatArray](./utils.lnglatarray.md) | Get the center for the geometry on which the action was executed. |
 

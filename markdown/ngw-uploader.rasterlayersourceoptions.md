@@ -12,9 +12,9 @@ export interface RasterLayerSourceOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [id](./ngw-uploader.rasterlayersourceoptions.id.md) | string |  |
-|  [mime\_type](./ngw-uploader.rasterlayersourceoptions.mime_type.md) | string |  |
-|  [size](./ngw-uploader.rasterlayersourceoptions.size.md) | number |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [id](./ngw-uploader.rasterlayersourceoptions.id.md) |  | string |  |
+|  [mime\_type](./ngw-uploader.rasterlayersourceoptions.mime_type.md) |  | string |  |
+|  [size](./ngw-uploader.rasterlayersourceoptions.size.md) |  | number |  |
 

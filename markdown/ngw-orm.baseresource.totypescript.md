@@ -14,7 +14,7 @@ static toTypescript(opt?: ToTypescriptOptions): ToTypescript;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  opt | ToTypescriptOptions |  |
+|  opt | ToTypescriptOptions | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

@@ -20,7 +20,7 @@ export declare class Tree<TREE_ITEM = any>
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [\_parent?](./tree.tree._parent.md) |  | [Tree](./tree.tree.md)<!-- -->&lt;TREE\_ITEM&gt; | <i>(Optional)</i> |
+|  [\_parent?](./tree.tree._parent.md) | <code>protected</code> | [Tree](./tree.tree.md)<!-- -->&lt;TREE\_ITEM&gt; | <i>(Optional)</i> |
 |  [children](./tree.tree.children.md) |  | [Tree](./tree.tree.md)<!-- -->&lt;TREE\_ITEM&gt;\[\] |  |
 |  [item](./tree.tree.item.md) |  | DefaultTreeItem |  |
 |  [relation](./tree.tree.relation.md) |  | TreeRelation |  |

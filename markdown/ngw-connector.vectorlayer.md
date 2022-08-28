@@ -12,8 +12,8 @@ export interface VectorLayer
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [geometry\_type](./ngw-connector.vectorlayer.geometry_type.md) | [GeometryType](./ngw-connector.geometrytype.md) |  |
-|  [srs](./ngw-connector.vectorlayer.srs.md) | { id: number; } |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [geometry\_type](./ngw-connector.vectorlayer.geometry_type.md) |  | [GeometryType](./ngw-connector.geometrytype.md) |  |
+|  [srs](./ngw-connector.vectorlayer.srs.md) |  | { id: number; } |  |
 

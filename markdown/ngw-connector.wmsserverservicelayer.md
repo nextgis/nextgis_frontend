@@ -12,11 +12,11 @@ export interface WmsServerServiceLayer
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [display\_name](./ngw-connector.wmsserverservicelayer.display_name.md) | string | Service item name. |
-|  [keyname](./ngw-connector.wmsserverservicelayer.keyname.md) | string | Key name for WMS service item. Name may be only ASCII symbols without spaces. |
-|  [max\_scale\_denom?](./ngw-connector.wmsserverservicelayer.max_scale_denom.md) | string \| null | <i>(Optional)</i> Maximum scale to show WMS layer. String in form of <code>1 : 100000</code>. |
-|  [min\_scale\_denom?](./ngw-connector.wmsserverservicelayer.min_scale_denom.md) | string \| null | <i>(Optional)</i> Minimum scale to show WMS layer. String in form of <code>1 : 100000</code>. |
-|  [resource\_id](./ngw-connector.wmsserverservicelayer.resource_id.md) | number | Resource identifier which will be WMS layer datasource. Supported types are: vector layer style, raster style, WMS layer. |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [display\_name](./ngw-connector.wmsserverservicelayer.display_name.md) |  | string | Service item name. |
+|  [keyname](./ngw-connector.wmsserverservicelayer.keyname.md) |  | string | Key name for WMS service item. Name may be only ASCII symbols without spaces. |
+|  [max\_scale\_denom?](./ngw-connector.wmsserverservicelayer.max_scale_denom.md) |  | string \| null | <i>(Optional)</i> Maximum scale to show WMS layer. String in form of <code>1 : 100000</code>. |
+|  [min\_scale\_denom?](./ngw-connector.wmsserverservicelayer.min_scale_denom.md) |  | string \| null | <i>(Optional)</i> Minimum scale to show WMS layer. String in form of <code>1 : 100000</code>. |
+|  [resource\_id](./ngw-connector.wmsserverservicelayer.resource_id.md) |  | number | Resource identifier which will be WMS layer datasource. Supported types are: vector layer style, raster style, WMS layer. |
 

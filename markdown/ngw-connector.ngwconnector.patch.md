@@ -17,8 +17,8 @@ patch<K extends keyof RequestItemsParamsMap>(name: K, options?: RequestOptions, 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  name | K | NGW route name from [routes](https://docs.nextgis.com/docs_ngweb_dev/doc/developer/resource.html#routes) |
-|  options | [RequestOptions](./ngw-connector.requestoptions.md) | Request options |
-|  params | [RequestItemsParams](./ngw-connector.requestitemsparams.md)<!-- -->&lt;K&gt; | Request item params or query params |
+|  options | [RequestOptions](./ngw-connector.requestoptions.md) | <i>(Optional)</i> Request options |
+|  params | [RequestItemsParams](./ngw-connector.requestitemsparams.md)<!-- -->&lt;K&gt; | <i>(Optional)</i> Request item params or query params |
 
 <b>Returns:</b>
 

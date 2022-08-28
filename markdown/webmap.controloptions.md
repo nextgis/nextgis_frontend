@@ -12,8 +12,8 @@ export interface ControlOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [control?](./webmap.controloptions.control.md) | string | <i>(Optional)</i> |
-|  [position?](./webmap.controloptions.position.md) | [ControlPosition](./webmap.controlposition.md) | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [control?](./webmap.controloptions.control.md) |  | string | <i>(Optional)</i> |
+|  [position?](./webmap.controloptions.position.md) |  | [ControlPosition](./webmap.controlposition.md) | <i>(Optional)</i> |
 

@@ -9,7 +9,7 @@
 ```typescript
 export declare abstract class BaseProvider<O extends BaseProviderOptions = BaseProviderOptions> extends BaseGeocoder<O> 
 ```
-<b>Extends:</b> BaseGeocoder&lt;O&gt;
+<b>Extends:</b> BaseGeocoder
 
 ## Properties
 

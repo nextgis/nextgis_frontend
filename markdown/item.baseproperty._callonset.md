@@ -14,8 +14,8 @@ protected _callOnSet<W extends V = V>(value?: W, options?: O): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  value | W |  |
-|  options | O |  |
+|  value | W | <i>(Optional)</i> |
+|  options | O | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

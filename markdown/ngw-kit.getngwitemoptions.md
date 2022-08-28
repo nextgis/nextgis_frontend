@@ -13,7 +13,7 @@ export interface GetNgwItemOptions extends FetchNgwLayerExtentOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [featureId](./ngw-kit.getngwitemoptions.featureid.md) | number |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [featureId](./ngw-kit.getngwitemoptions.featureid.md) |  | number |  |
 

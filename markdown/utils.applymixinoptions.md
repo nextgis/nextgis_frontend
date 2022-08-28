@@ -12,7 +12,7 @@ export interface ApplyMixinOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [replace?](./utils.applymixinoptions.replace.md) | boolean | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [replace?](./utils.applymixinoptions.replace.md) |  | boolean | <i>(Optional)</i> |
 

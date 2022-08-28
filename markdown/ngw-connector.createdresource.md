@@ -13,7 +13,7 @@ export interface CreatedResource extends IdOnly
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [parent](./ngw-connector.createdresource.parent.md) | [IdOnly](./ngw-connector.idonly.md) |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [parent](./ngw-connector.createdresource.parent.md) |  | [IdOnly](./ngw-connector.idonly.md) |  |
 

@@ -54,7 +54,7 @@ console.log(COUNTER); // 1
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
 |  [add(key, valueToSet, props, onlyFull)](./cache.cache_2.add.md) |  |  |
-|  [addFull(key, valueToSet, props)](./cache.cache_2.addfull.md) |  | Caching only a non-empty value.<!-- -->Useful for get or create strategy |
+|  [addFull(key, valueToSet, props)](./cache.cache_2.addfull.md) |  | <p>Caching only a non-empty value.</p><p>Useful for get or create strategy</p> |
 |  [all()](./cache.cache_2.all.md) |  |  |
 |  [clean()](./cache.cache_2.clean.md) |  |  |
 |  [delete(item)](./cache.cache_2.delete.md) |  |  |

@@ -14,7 +14,7 @@ makeClientId(credentials?: Credentials): string | undefined;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  credentials | [Credentials](./ngw-connector.credentials.md) |  |
+|  credentials | [Credentials](./ngw-connector.credentials.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

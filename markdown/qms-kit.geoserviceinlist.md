@@ -12,12 +12,12 @@ export interface GeoserviceInList
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [desc](./qms-kit.geoserviceinlist.desc.md) | string |  |
-|  [epsg](./qms-kit.geoserviceinlist.epsg.md) | number |  |
-|  [guid](./qms-kit.geoserviceinlist.guid.md) | string |  |
-|  [id](./qms-kit.geoserviceinlist.id.md) | number |  |
-|  [name](./qms-kit.geoserviceinlist.name.md) | string |  |
-|  [type](./qms-kit.geoserviceinlist.type.md) | string |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [desc](./qms-kit.geoserviceinlist.desc.md) |  | string |  |
+|  [epsg](./qms-kit.geoserviceinlist.epsg.md) |  | number |  |
+|  [guid](./qms-kit.geoserviceinlist.guid.md) |  | string |  |
+|  [id](./qms-kit.geoserviceinlist.id.md) |  | number |  |
+|  [name](./qms-kit.geoserviceinlist.name.md) |  | string |  |
+|  [type](./qms-kit.geoserviceinlist.type.md) |  | string |  |
 

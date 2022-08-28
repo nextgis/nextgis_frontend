@@ -12,11 +12,11 @@ export interface SrsItem
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [auth\_name](./ngw-connector.srsitem.auth_name.md) | string |  |
-|  [auth\_srid](./ngw-connector.srsitem.auth_srid.md) | number |  |
-|  [display\_name](./ngw-connector.srsitem.display_name.md) | string |  |
-|  [id](./ngw-connector.srsitem.id.md) | number |  |
-|  [wkt](./ngw-connector.srsitem.wkt.md) | string |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [auth\_name](./ngw-connector.srsitem.auth_name.md) |  | string |  |
+|  [auth\_srid](./ngw-connector.srsitem.auth_srid.md) |  | number |  |
+|  [display\_name](./ngw-connector.srsitem.display_name.md) |  | string |  |
+|  [id](./ngw-connector.srsitem.id.md) |  | number |  |
+|  [wkt](./ngw-connector.srsitem.wkt.md) |  | string |  |
 

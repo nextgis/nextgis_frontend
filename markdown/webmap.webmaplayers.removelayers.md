@@ -16,7 +16,7 @@ removeLayers(allowCb?: (layer: string, adapter: LayerAdapter) => boolean): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  allowCb | (layer: string, adapter: [LayerAdapter](./webmap.layeradapter.md)<!-- -->) =&gt; boolean |  |
+|  allowCb | (layer: string, adapter: [LayerAdapter](./webmap.layeradapter.md)<!-- -->) =&gt; boolean | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

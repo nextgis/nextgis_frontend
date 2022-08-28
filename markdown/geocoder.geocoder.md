@@ -9,7 +9,7 @@
 ```typescript
 export declare class Geocoder extends BaseGeocoder<GeocoderOptions> 
 ```
-<b>Extends:</b> BaseGeocoder&lt;[GeocoderOptions](./geocoder.geocoderoptions.md)<!-- -->&gt;
+<b>Extends:</b> BaseGeocoder&lt;[GeocoderOptions](./geocoder.geocoderoptions.md)
 
 ## Constructors
 

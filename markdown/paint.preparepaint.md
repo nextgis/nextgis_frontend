@@ -17,8 +17,8 @@ export declare function preparePaint(paint: Paint, defaultPaint?: GeometryPaint,
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  paint | [Paint](./paint.paint.md) |  |
-|  defaultPaint | [GeometryPaint](./paint.geometrypaint.md) |  |
-|  getPaintFunctions | { \[name: string\]: [GetPaintFunction](./paint.getpaintfunction.md)<!-- -->; } |  |
+|  defaultPaint | [GeometryPaint](./paint.geometrypaint.md) | <i>(Optional)</i> |
+|  getPaintFunctions | { \[name: string\]: [GetPaintFunction](./paint.getpaintfunction.md)<!-- -->; } | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

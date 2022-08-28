@@ -14,8 +14,8 @@ export interface LatLng
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [lat](./utils.latlng.lat.md) | number | Latitude, measured in degrees. |
-|  [lng](./utils.latlng.lng.md) | number | Longitude, measured in degrees. |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [lat](./utils.latlng.lat.md) |  | number | Latitude, measured in degrees. |
+|  [lng](./utils.latlng.lng.md) |  | number | Longitude, measured in degrees. |
 

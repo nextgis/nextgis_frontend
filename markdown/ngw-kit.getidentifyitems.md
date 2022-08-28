@@ -17,7 +17,7 @@ export declare function getIdentifyItems(identify: FeatureLayersIdentify & {
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  identify | [FeatureLayersIdentify](./ngw-connector.featurelayersidentify.md) &amp; { resources?: number\[\]; } |  |
-|  multiple | boolean |  |
+|  multiple | boolean | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

@@ -15,7 +15,7 @@ createStyle(opt: CreateStyleOptions, name?: string | number): CancelablePromise<
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  opt | [CreateStyleOptions](./ngw-uploader.createstyleoptions.md) |  |
-|  name | string \| number |  |
+|  name | string \| number | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

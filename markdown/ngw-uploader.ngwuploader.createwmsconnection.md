@@ -15,7 +15,7 @@ createWmsConnection(opt: CreateWmsConnectionOptions, name?: string): CancelableP
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  opt | [CreateWmsConnectionOptions](./ngw-uploader.createwmsconnectionoptions.md) |  |
-|  name | string |  |
+|  name | string | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

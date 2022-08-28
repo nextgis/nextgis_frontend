@@ -17,7 +17,7 @@ clearLayerData(layerDef: LayerDef, cb?: (feature: Feature) => boolean): void;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  layerDef | [LayerDef](./webmap.layerdef.md) |  |
-|  cb | (feature: Feature) =&gt; boolean |  |
+|  cb | (feature: Feature) =&gt; boolean | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

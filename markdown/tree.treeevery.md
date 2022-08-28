@@ -15,9 +15,9 @@ export declare function treeEvery<F extends D = D>(item: F | F[], filter?: Prope
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  item | F \| F\[\] |  |
-|  filter | [PropertyFilter](./properties-filter.propertyfilter.md) \| SelfFilter&lt;F&gt; |  |
-|  relation | TreeRelation&lt;F&gt; |  |
-|  itemPrepare | ItemPrepareFunction&lt;F&gt; |  |
+|  filter | [PropertyFilter](./properties-filter.propertyfilter.md) \| SelfFilter&lt;F&gt; | <i>(Optional)</i> |
+|  relation | TreeRelation&lt;F&gt; | <i>(Optional)</i> |
+|  itemPrepare | ItemPrepareFunction&lt;F&gt; | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

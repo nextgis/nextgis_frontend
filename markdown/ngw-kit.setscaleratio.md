@@ -15,7 +15,7 @@ export declare function setScaleRatio(scale: number, lat?: number): number;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  scale | number |  |
-|  lat | number |  |
+|  lat | number | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

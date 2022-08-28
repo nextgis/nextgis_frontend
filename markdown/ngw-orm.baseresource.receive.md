@@ -15,7 +15,7 @@ static receive(item: ResourceItem, ResCls?: typeof BaseResource): typeof BaseRes
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  item | [ResourceItem](./ngw-connector.resourceitem.md) |  |
-|  ResCls | typeof [BaseResource](./ngw-orm.baseresource.md) |  |
+|  ResCls | typeof [BaseResource](./ngw-orm.baseresource.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

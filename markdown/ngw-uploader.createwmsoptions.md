@@ -13,9 +13,9 @@ export interface CreateWmsOptions extends ResourceCreateOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [id?](./ngw-uploader.createwmsoptions.id.md) | number | <i>(Optional)</i> |
-|  [layers](./ngw-uploader.createwmsoptions.layers.md) | [WmsServerServiceLayer](./ngw-connector.wmsserverservicelayer.md)<!-- -->\[\] |  |
-|  [resourceId?](./ngw-uploader.createwmsoptions.resourceid.md) | number | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [id?](./ngw-uploader.createwmsoptions.id.md) |  | number | <i>(Optional)</i> |
+|  [layers](./ngw-uploader.createwmsoptions.layers.md) |  | [WmsServerServiceLayer](./ngw-connector.wmsserverservicelayer.md)<!-- -->\[\] |  |
+|  [resourceId?](./ngw-uploader.createwmsoptions.resourceid.md) |  | number | <i>(Optional)</i> |
 

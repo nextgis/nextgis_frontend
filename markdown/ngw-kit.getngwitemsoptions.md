@@ -13,8 +13,8 @@ export interface GetNgwItemsOptions<P extends FeatureProperties = FeaturePropert
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [filters?](./ngw-kit.getngwitemsoptions.filters.md) | PropertiesFilter&lt;[PropertiesForNgwFilter](./ngw-kit.propertiesforngwfilter.md)<!-- -->&lt;P&gt;&gt; | <i>(Optional)</i> |
-|  [paramList?](./ngw-kit.getngwitemsoptions.paramlist.md) | \[string, any\]\[\] | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [filters?](./ngw-kit.getngwitemsoptions.filters.md) |  | [PropertiesFilter](./properties-filter.propertiesfilter.md)<!-- -->&lt;[PropertiesForNgwFilter](./ngw-kit.propertiesforngwfilter.md)<!-- -->&lt;P&gt;&gt; | <i>(Optional)</i> |
+|  [paramList?](./ngw-kit.getngwitemsoptions.paramlist.md) |  | \[string, any\]\[\] | <i>(Optional)</i> |
 

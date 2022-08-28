@@ -13,7 +13,7 @@ export interface PatchRequestItemsResponseMap extends RequestItemKeys
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  ["feature\_layer.feature.collection"](./ngw-connector.patchrequestitemsresponsemap._feature_layer.feature.collection_.md) | [IdOnly](./ngw-connector.idonly.md)<!-- -->\[\] |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  ["feature\_layer.feature.collection"](./ngw-connector.patchrequestitemsresponsemap._feature_layer.feature.collection_.md) |  | [IdOnly](./ngw-connector.idonly.md)<!-- -->\[\] |  |
 

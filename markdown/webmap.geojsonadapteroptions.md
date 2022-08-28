@@ -9,11 +9,11 @@
 ```typescript
 export interface GeoJsonAdapterOptions<F extends Feature = Feature, L = any, A = Record<string, any>, N = Record<string, any>> extends VectorAdapterOptions<F, L, A, N> 
 ```
-<b>Extends:</b> [VectorAdapterOptions](./webmap.vectoradapteroptions.md)<!-- -->&lt;F, L, A, N&gt;
+<b>Extends:</b> [VectorAdapterOptions](./webmap.vectoradapteroptions.md)
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [data?](./webmap.geojsonadapteroptions.data.md) | GeoJsonObject | <i>(Optional)</i> Geojson data |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [data?](./webmap.geojsonadapteroptions.data.md) |  | GeoJsonObject | <i>(Optional)</i> Geojson data |
 

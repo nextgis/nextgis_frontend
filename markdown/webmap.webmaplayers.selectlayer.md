@@ -17,7 +17,7 @@ selectLayer(layerDef: LayerDef, findFeatureFun?: DataLayerFilter): void;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  layerDef | [LayerDef](./webmap.layerdef.md) |  |
-|  findFeatureFun | [DataLayerFilter](./webmap.datalayerfilter.md) |  |
+|  findFeatureFun | [DataLayerFilter](./webmap.datalayerfilter.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

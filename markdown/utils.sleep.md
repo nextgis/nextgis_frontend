@@ -14,7 +14,7 @@ export declare function sleep(delay?: number): Promise<void>;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  delay | number |  |
+|  delay | number | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

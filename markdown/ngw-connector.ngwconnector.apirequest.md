@@ -17,8 +17,8 @@ apiRequest<K extends keyof RequestItemsParamsMap, P extends RequestItemKeys = Re
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  name | K | NGW route name from [routes](https://docs.nextgis.com/docs_ngweb_dev/doc/developer/resource.html#routes) |
-|  params\_ | [RequestItemsParams](./ngw-connector.requestitemsparams.md)<!-- -->&lt;K&gt; |  |
-|  requestOptions | [RequestOptions](./ngw-connector.requestoptions.md) | Request options |
+|  params\_ | [RequestItemsParams](./ngw-connector.requestitemsparams.md)<!-- -->&lt;K&gt; | <i>(Optional)</i> |
+|  requestOptions | [RequestOptions](./ngw-connector.requestoptions.md) | <i>(Optional)</i> Request options |
 
 <b>Returns:</b>
 

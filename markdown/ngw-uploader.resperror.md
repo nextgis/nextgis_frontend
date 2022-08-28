@@ -12,9 +12,9 @@ export interface RespError
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [exception](./ngw-uploader.resperror.exception.md) | 'ValidationError' |  |
-|  [message](./ngw-uploader.resperror.message.md) | string |  |
-|  [serializer](./ngw-uploader.resperror.serializer.md) | string |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [exception](./ngw-uploader.resperror.exception.md) |  | 'ValidationError' |  |
+|  [message](./ngw-uploader.resperror.message.md) |  | string |  |
+|  [serializer](./ngw-uploader.resperror.serializer.md) |  | string |  |
 

@@ -12,8 +12,8 @@ export interface LocateOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [maxZoom?](./webmap.locateoptions.maxzoom.md) | [ZoomLevel](./utils.zoomlevel.md) | <i>(Optional)</i> |
-|  [setView?](./webmap.locateoptions.setview.md) | boolean | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [maxZoom?](./webmap.locateoptions.maxzoom.md) |  | [ZoomLevel](./utils.zoomlevel.md) | <i>(Optional)</i> |
+|  [setView?](./webmap.locateoptions.setview.md) |  | boolean | <i>(Optional)</i> |
 

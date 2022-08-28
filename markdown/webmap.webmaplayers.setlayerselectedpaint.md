@@ -15,7 +15,7 @@ setLayerSelectedPaint(layerDef: LayerDef, paint?: Paint | null): void;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  layerDef | [LayerDef](./webmap.layerdef.md) |  |
-|  paint | [Paint](./paint.paint.md) \| null |  |
+|  paint | [Paint](./paint.paint.md) \| null | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

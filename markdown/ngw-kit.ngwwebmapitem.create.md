@@ -16,9 +16,9 @@ static create(webMap: WebMap, item: TreeGroup | TreeLayer, options?: ItemOptions
 |  --- | --- | --- |
 |  webMap | [WebMap](./webmap.webmap.md) |  |
 |  item | [TreeGroup](./ngw-kit.treegroup.md) \| [TreeLayer](./ngw-kit.treelayer.md) |  |
-|  options | [ItemOptions](./item.itemoptions.md) |  |
-|  connector | NgwConnector |  |
-|  parent | [NgwWebmapItem](./ngw-kit.ngwwebmapitem.md) |  |
+|  options | [ItemOptions](./item.itemoptions.md) | <i>(Optional)</i> |
+|  connector | NgwConnector | <i>(Optional)</i> |
+|  parent | [NgwWebmapItem](./ngw-kit.ngwwebmapitem.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

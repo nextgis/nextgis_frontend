@@ -14,7 +14,7 @@ catch<TResult = never>(onrejected?: ((reason: Error) => TResult | PromiseLike<TR
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  onrejected | ((reason: Error) =&gt; TResult \| PromiseLike&lt;TResult&gt;) \| undefined \| null |  |
+|  onrejected | ((reason: Error) =&gt; TResult \| PromiseLike&lt;TResult&gt;) \| undefined \| null | <i>(Optional)</i> |
 
 <b>Returns:</b>
 
