@@ -1,7 +1,7 @@
 {
   "name": "@nextgis/ngw-mapbox",
   "_priority": 10,
-  "version": "1.15.1",
+  "version": "1.16.0",
   "description": "Single-file bundle for rapid deployment of Mapbox GL JS based web-gis applications with NextGIS services",
   "main": "lib/ngw-mapbox.global.prod.js",
   "module": "lib/ngw-mapbox.esm-bundler.js",
@@ -9,8 +9,8 @@
   "jsdelivr": "lib/ngw-mapbox.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/mapboxgl-map-adapter": "^1.15.1",
-    "@nextgis/ngw-map": "^1.15.1",
+    "@nextgis/mapboxgl-map-adapter": "^1.16.0",
+    "@nextgis/ngw-map": "^1.16.0",
     "canvg": "^3.0.9",
     "maplibre-gl": "^2.4.0"
   },

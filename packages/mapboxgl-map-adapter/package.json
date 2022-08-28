@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/mapboxgl-map-adapter",
-  "version": "1.15.1",
+  "version": "1.16.0",
   "_priority": 16,
   "description": "Webmap adapter to use Mapbox GL JS GIS framework.",
   "main": "lib/mapboxgl-map-adapter.global.prod.js",
@@ -9,13 +9,12 @@
   "jsdelivr": "lib/mapboxgl-map-adapter.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/paint": "^1.15.1",
+    "@nextgis/paint": "^1.16.0",
     "@nextgis/properties-filter": "^1.15.1",
-    "@nextgis/webmap": "^1.15.1",
+    "@nextgis/webmap": "^1.16.0",
     "@types/events": "^3.0.0",
     "@types/polylabel": "^1.0.5",
     "events": "^3.3.0",
-
     "polylabel": "^1.1.0"
   },
   "peerDependencies": {
