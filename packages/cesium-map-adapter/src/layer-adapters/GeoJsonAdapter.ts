@@ -95,6 +95,10 @@ export class GeoJsonAdapter
     return source;
   }
 
+  beforeRemove() {
+    this._destroyPopupContainer();
+  }
+
   showLayer(): void {
     if (this._source) {
       this.map.dataSources.add(this._source);
@@ -166,6 +170,7 @@ export class GeoJsonAdapter
   }
 
   unselect(findFeatureCb?: DataLayerFilter<Feature> | PropertiesFilter): void {
+    this._destroyPopupContainer();
     if (this._source) {
       if (this.selected) {
         this.map.selectedEntity = undefined;
@@ -354,6 +359,10 @@ export class GeoJsonAdapter
     return Promise.resolve();
   }
 
+  private _destroyPopupContainer() {
+    this._popupContainers = {};
+  }
+
   private _getDescription(feature: Feature): Property {
     const close = () => {
       // ignore
@@ -503,7 +512,7 @@ export class GeoJsonAdapter
       position = entity.polygon.hierarchy?.getValue(JulianDate.now())
         .positions[0];
     } else if (entity.point) {
-      console.log(entity.point);
+      // console.log(entity.point);
     }
     return position;
   }
