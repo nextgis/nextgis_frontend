@@ -5,6 +5,7 @@ import {
   Color,
   Event,
   Viewer,
+  Entity,
   SceneMode,
   Rectangle,
   Ellipsoid,
@@ -482,13 +483,13 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
         ['move', undefined],
         ['moveend', viewer.camera.moveEnd],
       ];
-      events.forEach(([name, event]) => {
+      for (const [name, event] of events) {
         if (event) {
           event.addEventListener(() => {
             this.emitter.emit(name);
           });
         }
-      });
+      }
     }
   }
 
@@ -498,6 +499,11 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
       const clickHandler = viewer.screenSpaceEventHandler.getInputAction(
         ScreenSpaceEventType.LEFT_CLICK,
       ) as ScreenSpaceEventHandler.PositionedEventCallback;
+
+      // Remove default event click handler
+      viewer.screenSpaceEventHandler.removeInputAction(
+        ScreenSpaceEventType.LEFT_CLICK,
+      );
 
       viewer.screenSpaceEventHandler.setInputAction(
         (e: ScreenSpaceEventHandler.PositionedEvent) => {
@@ -529,14 +535,13 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
               clickData.lngLat = pickedPositionLngLat;
             }
           }
-          // const picked = viewer.scene.pick(e.position);
-          // if (picked && picked.id && picked.id instanceof Entity) {
-          //   viewer.selectedEntity = picked.id;
-          // } else {
-          //   clickHandler(e);
-          // }
+          const picked = viewer.scene.pick(e.position);
+          const isEntityPicked = picked && picked.id instanceof Entity;
+          // Stop propagation for click event on any entry picked
+          if (!isEntityPicked) {
+            this.emitter.emit('click', clickData);
+          }
           clickHandler(e);
-          this.emitter.emit('click', clickData);
         },
         ScreenSpaceEventType.LEFT_CLICK,
       );
