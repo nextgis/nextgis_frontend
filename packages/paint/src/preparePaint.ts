@@ -53,6 +53,33 @@ function createPropertiesPaint(
   };
 }
 
+export function expressionCallback<P = Record<string, any>>(
+  paint: P,
+  defaultPaint?: P,
+  getPaintFunctions?: Record<string, GetPaintFunction>,
+) {
+  const expressionCallback = createExpressionCallback(paint);
+  if (expressionCallback) {
+    const expressionPaintCb = (feature: Feature) => {
+      return preparePaint(
+        expressionCallback(feature),
+        defaultPaint,
+        getPaintFunctions,
+      ) as VectorAdapterLayerPaint;
+    };
+    expressionPaintCb.paint = paint;
+    return expressionPaintCb;
+  }
+  let newPaint: Paint = { ...defaultPaint };
+  newPaint = { ...newPaint, ...paint };
+  newPaint.fill = newPaint.fill !== undefined ? newPaint.fill : true;
+  newPaint.stroke =
+    newPaint.stroke !== undefined
+      ? newPaint.stroke
+      : !newPaint.fill || !!(newPaint.strokeColor || newPaint.strokeOpacity);
+  return newPaint;
+}
+
 export function preparePaint(
   paint: Paint,
   defaultPaint?: GeometryPaint,
@@ -90,25 +117,7 @@ export function preparePaint(
   } else if (paint.type === 'icon') {
     return paint;
   } else {
-    const expressionCallback = createExpressionCallback(paint);
-    if (expressionCallback) {
-      const expressionPaintCb = (feature: Feature) => {
-        return preparePaint(
-          expressionCallback(feature),
-          defaultPaint,
-          getPaintFunctions,
-        ) as VectorAdapterLayerPaint;
-      };
-      expressionPaintCb.paint = paint;
-      return expressionPaintCb;
-    }
-
-    newPaint = { ...newPaint, ...paint };
-    newPaint.fill = newPaint.fill !== undefined ? newPaint.fill : true;
-    newPaint.stroke =
-      newPaint.stroke !== undefined
-        ? newPaint.stroke
-        : !newPaint.fill || !!(newPaint.strokeColor || newPaint.strokeOpacity);
+    newPaint = expressionCallback(paint, defaultPaint, getPaintFunctions);
   }
 
   if (isPaintCallback(newPaint)) {

@@ -46,7 +46,10 @@ import type {
   PropertyFilter,
   Operations,
 } from '@nextgis/properties-filter';
-import type { VectorLayerSpecification } from '../interfaces';
+import type {
+  SelectedFeaturesIds,
+  VectorLayerSpecification,
+} from '../interfaces';
 
 type Layer = VectorLayerSpecification;
 
@@ -115,7 +118,7 @@ export abstract class VectorAdapter<
   protected _types: VectorAdapterLayerType[] = ['polygon', 'point', 'line'];
   protected readonly _sourceId: string;
   protected readonly _selectionName: string;
-  protected _selectedFeatureIds: (number | string)[] | false = [];
+  protected _selectedFeatureIds: SelectedFeaturesIds | false = [];
 
   protected _selectProperties?: PropertiesFilter;
   protected _filterProperties?: PropertiesFilter;
@@ -331,25 +334,27 @@ export abstract class VectorAdapter<
     feature: Feature,
     coordinates?: LngLatLike,
   ): boolean {
+    const { selectable, multiselect, unselectOnSecondClick } = this.options;
     const alreadySelected = this.isFeatureSelected(feature);
     let becameSelected = alreadySelected;
 
-    if (this.options.selectable) {
+    if (selectable || multiselect) {
       let features: Feature[] | undefined = undefined;
       if (alreadySelected) {
-        if (this.options && this.options.unselectOnSecondClick) {
+        if (unselectOnSecondClick) {
           this._unselectFeature(feature, { silent: true });
           becameSelected = false;
         }
       } else {
-        this.map &&
-          this.map._addUnselectCb(() =>
-            this._unselectFeature(feature, { silent: true }),
-          );
+        if (!multiselect) {
+          this.map &&
+            this.map._addUnselectCb(() =>
+              this._unselectFeature(feature, { silent: true }),
+            );
+        }
         features = this._selectFeature(feature, { silent: true });
         becameSelected = true;
       }
-      // alreadySelected = this.isFeatureSelected(feature);
       if (this.options.onSelect) {
         this.options.onSelect({
           layer: this,
@@ -406,7 +411,7 @@ export abstract class VectorAdapter<
       id: name,
       type: mType,
       source: this._sourceId,
-      filter,
+      filter: filter as FilterSpecification,
       layout: {
         visibility: 'none',
         ...layout,
@@ -432,7 +437,8 @@ export abstract class VectorAdapter<
     if (map) {
       map.addLayer(opt as LayerSpecification);
       if (filter) {
-        const filters = ['all', ...(filter || [])].filter(Boolean);
+        const filter_ = (filter || []) as FilterSpecification[];
+        const filters = ['all', ...filter_].filter(Boolean);
         map.setFilter(opt.id, filters as FilterSpecification);
       }
     }
@@ -465,7 +471,7 @@ export abstract class VectorAdapter<
 
       const mapboxType = mapboxTypeAlias[type];
       for (const [name, paint] of layers) {
-        let _paint: any;
+        let _paint: any = null;
         let nativePaint: Record<string, any> | null = null;
         let typePaint = null;
         if (this.options.nativePaint) {
@@ -475,10 +481,12 @@ export abstract class VectorAdapter<
               : this.options.nativePaint;
           const opacity = this.options.opacity;
           if (opacity !== undefined && nativePaint) {
-            const allowedNativePaint = allowedByType[type]
-            const opacityProp = allowedNativePaint.find((x) => x[0] === 'opacity');
+            const allowedNativePaint = allowedByType[type];
+            const opacityProp = allowedNativePaint.find(
+              (x) => x[0] === 'opacity',
+            );
             if (opacityProp) {
-              nativePaint[mapboxType + '-' + opacityProp[1]]
+              nativePaint[mapboxType + '-' + opacityProp[1]];
             }
             for (const p in nativePaint) {
               if (p.indexOf('opacity') !== -1) {
@@ -684,7 +692,10 @@ export abstract class VectorAdapter<
                 ]);
               } else {
                 filters = ['in', '$id', ''];
-                this.map.setFilter(selLayerName, filters);
+                this.map.setFilter(
+                  selLayerName,
+                  filters as FilterSpecification,
+                );
               }
             }
           }
@@ -707,7 +718,7 @@ export abstract class VectorAdapter<
             if (propertyFilters) {
               propertyFilters.forEach((x) => filters_.push(x));
             }
-            this.map.setFilter(layerName, filters_);
+            this.map.setFilter(layerName, filters_ as FilterSpecification);
           }
         }
       }

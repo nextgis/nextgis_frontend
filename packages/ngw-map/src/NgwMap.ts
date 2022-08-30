@@ -428,7 +428,7 @@ export class NgwMap<
       this.$$selectFromNgwRaster = (ev: MapClickEvent) => {
         const count = this._getSelectListenersCount();
         if (count) {
-          this._selectFromNgwRaster(ev);
+          this.selectFromNgwRaster(ev);
         }
       };
       this.$$selectFromNgwVector = (ev: OnLayerMouseOptions) => {
@@ -518,6 +518,72 @@ export class NgwMap<
         this._promises[name] = [];
       }
     });
+  }
+
+  async selectFromNgwRaster(
+    ev: MapClickEvent,
+  ): Promise<NgwIdentifyEvent | undefined> {
+    this._emitStatusEvent('ngw:preselect');
+
+    const promises: Promise<number[] | undefined>[] = [];
+    const layers = Object.values(this._ngwLayers);
+    layers.sort((a, b) => {
+      if (a.layer.order && b.layer.order) {
+        return b.layer.order - a.layer.order;
+      }
+      return 1;
+    });
+    for (const l of layers) {
+      const layer = l.layer;
+      const identFunc =
+        typeof layer.getIdentificationIds === 'function'
+          ? layer.getIdentificationIds
+          : false;
+      if (identFunc && layer.options.selectable && this.isLayerVisible(layer)) {
+        promises.push(identFunc.call(layer));
+      }
+    }
+    const getIdsPromise = Promise.all(promises);
+    const getIds = await getIdsPromise;
+    const ids: number[] = [];
+    for (const x of getIds) {
+      if (x) {
+        ids.push(...x);
+      }
+    }
+
+    if (!ids.length) {
+      this._emitStatusEvent('ngw:select', null);
+      return;
+    }
+
+    const pixelRadius = this.options.pixelRadius || 10;
+    const center = this.getCenter();
+    let zoom = this.getZoom();
+    zoom = zoom !== undefined ? zoom : 20;
+    if (!center || !zoom) {
+      this._emitStatusEvent('ngw:select', null);
+      return;
+    }
+    const radius = getIdentifyRadius(center, zoom, pixelRadius);
+
+    const selectPromise = sendIdentifyRequest(ev, {
+      layers: ids,
+      connector: this.connector,
+      radius,
+    }).then((resp) => {
+      const identify: NgwIdentify = {
+        ...resp,
+        resources: ids,
+        sourceType: 'raster',
+        event: ev,
+      };
+      const identifyEvent: NgwIdentifyEvent = this._prepareToIdentify(identify);
+      this._emitStatusEvent('ngw:select', identify);
+      return identifyEvent;
+    });
+    this._addPromise('select', selectPromise);
+    return selectPromise;
   }
 
   private _addPromise(groupName: PromiseGroup, promise: CancelablePromise) {
@@ -644,71 +710,6 @@ export class NgwMap<
         return identify;
       }
     }
-  }
-
-  private async _selectFromNgwRaster(ev: MapClickEvent) {
-    this._emitStatusEvent('ngw:preselect');
-
-    const promises: Promise<number[] | undefined>[] = [];
-    const layers = Object.values(this._ngwLayers);
-    layers.sort((a, b) => {
-      if (a.layer.order && b.layer.order) {
-        return b.layer.order - a.layer.order;
-      }
-      return 1;
-    });
-    for (const l of layers) {
-      const layer = l.layer;
-      const identFunc =
-        typeof layer.getIdentificationIds === 'function'
-          ? layer.getIdentificationIds
-          : false;
-      if (identFunc && layer.options.selectable && this.isLayerVisible(layer)) {
-        promises.push(identFunc.call(layer));
-      }
-    }
-    const getIdsPromise = Promise.all(promises);
-    const getIds = await getIdsPromise;
-    const ids: number[] = [];
-    for (const x of getIds) {
-      if (x) {
-        ids.push(...x);
-      }
-    }
-
-    if (!ids.length) {
-      this._emitStatusEvent('ngw:select', null);
-      return;
-    }
-
-    const pixelRadius = this.options.pixelRadius || 10;
-    const center = this.getCenter();
-    let zoom = this.getZoom();
-    zoom = zoom !== undefined ? zoom : 20;
-    if (!center || !zoom) {
-      this._emitStatusEvent('ngw:select', null);
-      return;
-    }
-    const radius = getIdentifyRadius(center, zoom, pixelRadius);
-
-    const selectPromise = sendIdentifyRequest(ev, {
-      layers: ids,
-      connector: this.connector,
-      radius,
-    }).then((resp) => {
-      this._emitStatusEvent(
-        'ngw:select',
-        this._prepareToIdentify({
-          ...resp,
-          resources: ids,
-          sourceType: 'raster',
-          event: ev,
-        }),
-      );
-      return resp;
-    });
-    this._addPromise('select', selectPromise);
-    return selectPromise;
   }
 
   private _prepareToIdentify<

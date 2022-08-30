@@ -1,4 +1,4 @@
-import type { AdapterOptions } from '@nextgis/webmap';
+import type { AdapterOptions, VectorAdapterOptions } from '@nextgis/webmap';
 import type { BaseProperty } from './properties/BaseProperty';
 import type { Item } from './Item';
 
@@ -52,17 +52,19 @@ export interface CheckOptions<V = boolean> extends ItemBasePropertyOptions<V> {
   turnOn?: <O = CheckOptions>(options?: O) => void;
 }
 
-export interface ItemOptions
-  extends Pick<
-    AdapterOptions,
-    | 'minZoom'
-    | 'maxZoom'
-    | 'crossOrigin'
-    | 'ratio'
-    | 'order'
-    | 'headers'
-    | 'setViewDelay'
-  > {
+type ItemOptionsToExtend = Pick<
+  AdapterOptions,
+  | 'minZoom'
+  | 'maxZoom'
+  | 'crossOrigin'
+  | 'ratio'
+  | 'order'
+  | 'headers'
+  | 'setViewDelay'
+> &
+  Pick<VectorAdapterOptions, 'popupOptions'>;
+
+export interface ItemOptions extends ItemOptionsToExtend {
   // TODO: check usage and sage remove
   properties?: Array<ItemPropertyConfig<keyof ItemPropertyTypes>>;
   drawOrderEnabled?: boolean;

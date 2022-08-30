@@ -43,7 +43,9 @@ export const findNgwMapParent = (
   let found = false;
   while (firstVueParent && !found) {
     if (!('ngwMap' in firstVueParent)) {
-      firstVueParent = firstVueParent.$parent;
+      if (firstVueParent.$parent) {
+        firstVueParent = firstVueParent.$parent;
+      }
     } else {
       found = true;
     }
