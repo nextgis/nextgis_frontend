@@ -16,8 +16,8 @@ addGeoJsonLayer<K extends keyof LayerAdapters = keyof LayerAdapters, O extends G
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  opt | O |  |
-|  adapter | [LayerAdapterDefinition](./webmap.layeradapterdefinition.md)<!-- -->&lt;K&gt; |  |
+|  opt | O | <i>(Optional)</i> |
+|  adapter | [LayerAdapterDefinition](./webmap.layeradapterdefinition.md)<!-- -->&lt;K&gt; | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

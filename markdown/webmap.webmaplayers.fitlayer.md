@@ -17,7 +17,7 @@ fitLayer(layerDef: LayerDef, options?: FitOptions): Promise<void>;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  layerDef | [LayerDef](./webmap.layerdef.md) |  |
-|  options | [FitOptions](./webmap.fitoptions.md) |  |
+|  options | [FitOptions](./webmap.fitoptions.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

@@ -15,7 +15,7 @@ log(message: string, options?: LogOptions<D>): void;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  message | string |  |
-|  options | [LogOptions](./logging.logoptions.md)<!-- -->&lt;D&gt; |  |
+|  options | [LogOptions](./logging.logoptions.md)<!-- -->&lt;D&gt; | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

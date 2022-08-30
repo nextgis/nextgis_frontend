@@ -13,10 +13,10 @@ export interface QmsAdapterOptions extends RasterAdapterOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [name?](./qms-kit.qmsadapteroptions.name.md) | string | <i>(Optional)</i> |
-|  [qms?](./qms-kit.qmsadapteroptions.qms.md) | [QmsBasemap](./qms-kit.qmsbasemap.md) | <i>(Optional)</i> |
-|  [qmsId?](./qms-kit.qmsadapteroptions.qmsid.md) | number | <i>(Optional)</i> |
-|  [url](./qms-kit.qmsadapteroptions.url.md) | string |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [name?](./qms-kit.qmsadapteroptions.name.md) |  | string | <i>(Optional)</i> |
+|  [qms?](./qms-kit.qmsadapteroptions.qms.md) |  | [QmsBasemap](./qms-kit.qmsbasemap.md) | <i>(Optional)</i> |
+|  [qmsId?](./qms-kit.qmsadapteroptions.qmsid.md) |  | number | <i>(Optional)</i> |
+|  [url](./qms-kit.qmsadapteroptions.url.md) |  | string |  |
 

@@ -13,9 +13,9 @@ export interface TreeGroup extends TreeItem
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [children](./ngw-kit.treegroup.children.md) | Array&lt;[TreeLayer](./ngw-kit.treelayer.md) \| [TreeGroup](./ngw-kit.treegroup.md)<!-- -->&gt; |  |
-|  [group\_expanded?](./ngw-kit.treegroup.group_expanded.md) | boolean | <i>(Optional)</i> |
-|  [item\_type](./ngw-kit.treegroup.item_type.md) | 'root' \| 'group' |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [children](./ngw-kit.treegroup.children.md) |  | Array&lt;[TreeLayer](./ngw-kit.treelayer.md) \| [TreeGroup](./ngw-kit.treegroup.md)<!-- -->&gt; |  |
+|  [group\_expanded?](./ngw-kit.treegroup.group_expanded.md) |  | boolean | <i>(Optional)</i> |
+|  [item\_type](./ngw-kit.treegroup.item_type.md) |  | 'root' \| 'group' |  |
 

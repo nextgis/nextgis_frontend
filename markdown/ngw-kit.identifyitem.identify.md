@@ -14,7 +14,7 @@ identify(options?: Partial<FetchNgwItemOptions<F>>): CancelablePromise<NgwFeatur
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | Partial&lt;[FetchNgwItemOptions](./ngw-kit.fetchngwitemoptions.md)<!-- -->&lt;F&gt;&gt; |  |
+|  options | Partial&lt;[FetchNgwItemOptions](./ngw-kit.fetchngwitemoptions.md)<!-- -->&lt;F&gt;&gt; | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

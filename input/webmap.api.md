@@ -737,6 +737,8 @@ export interface VectorAdapterOptions<F extends Feature = Feature, L = any, A = 
     // (undocumented)
     filter?: DataLayerFilter<F, L>;
     // (undocumented)
+    heightOffset?: number;
+    // (undocumented)
     interactive?: boolean;
     // (undocumented)
     label?: (e: LayerDefinition<F, L>) => string;

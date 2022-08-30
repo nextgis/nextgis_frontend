@@ -12,9 +12,9 @@ export interface FetchNgwLayerCountOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [cache?](./ngw-kit.fetchngwlayercountoptions.cache.md) | boolean | <i>(Optional)</i> |
-|  [connector](./ngw-kit.fetchngwlayercountoptions.connector.md) | NgwConnector |  |
-|  [resourceId](./ngw-kit.fetchngwlayercountoptions.resourceid.md) | number |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [cache?](./ngw-kit.fetchngwlayercountoptions.cache.md) |  | boolean | <i>(Optional)</i> |
+|  [connector](./ngw-kit.fetchngwlayercountoptions.connector.md) |  | NgwConnector |  |
+|  [resourceId](./ngw-kit.fetchngwlayercountoptions.resourceid.md) |  | number |  |
 

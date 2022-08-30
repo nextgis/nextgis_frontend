@@ -14,8 +14,8 @@ openPopup?(findFeatureCb?: DataLayerFilter<F, L>, options?: PopupOptions): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  findFeatureCb | [DataLayerFilter](./webmap.datalayerfilter.md)<!-- -->&lt;F, L&gt; |  |
-|  options | [PopupOptions](./webmap.popupoptions.md) |  |
+|  findFeatureCb | [DataLayerFilter](./webmap.datalayerfilter.md)<!-- -->&lt;F, L&gt; | <i>(Optional)</i> |
+|  options | [PopupOptions](./webmap.popupoptions.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

@@ -13,8 +13,8 @@ export interface FetchNgwLayerExtentOptions extends NgwRequestOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [connector](./ngw-kit.fetchngwlayerextentoptions.connector.md) | NgwConnector |  |
-|  [resourceId](./ngw-kit.fetchngwlayerextentoptions.resourceid.md) | number |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [connector](./ngw-kit.fetchngwlayerextentoptions.connector.md) |  | NgwConnector |  |
+|  [resourceId](./ngw-kit.fetchngwlayerextentoptions.resourceid.md) |  | number |  |
 

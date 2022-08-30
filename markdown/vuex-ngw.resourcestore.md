@@ -35,8 +35,8 @@ export declare abstract class ResourceStore<P extends FeatureProperties = Featur
 |  [getStore()](./vuex-ngw.resourcestore.getstore.md) |  |  |
 |  [patch(opt)](./vuex-ngw.resourcestore.patch.md) |  |  |
 |  [prepareFeatureToNgw(opt)](./vuex-ngw.resourcestore.preparefeaturetongw.md) |  |  |
-|  [SET\_STORE(store)](./vuex-ngw.resourcestore.set_store.md) |  |  |
-|  [UPDATE\_FIELDS(fields)](./vuex-ngw.resourcestore.update_fields.md) |  |  |
-|  [UPDATE\_RESOURCES(resources)](./vuex-ngw.resourcestore.update_resources.md) |  |  |
+|  [SET\_STORE(store)](./vuex-ngw.resourcestore.set_store.md) | <code>protected</code> |  |
+|  [UPDATE\_FIELDS(fields)](./vuex-ngw.resourcestore.update_fields.md) | <code>protected</code> |  |
+|  [UPDATE\_RESOURCES(resources)](./vuex-ngw.resourcestore.update_resources.md) | <code>protected</code> |  |
 |  [updateStore(opt)](./vuex-ngw.resourcestore.updatestore.md) |  |  |
 

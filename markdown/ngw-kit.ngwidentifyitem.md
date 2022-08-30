@@ -12,9 +12,9 @@ export interface NgwIdentifyItem
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [feature](./ngw-kit.ngwidentifyitem.feature.md) | [LayerFeature](./ngw-connector.layerfeature.md) |  |
-|  [featureId](./ngw-kit.ngwidentifyitem.featureid.md) | number |  |
-|  [resourceId](./ngw-kit.ngwidentifyitem.resourceid.md) | number |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [feature](./ngw-kit.ngwidentifyitem.feature.md) |  | [LayerFeature](./ngw-connector.layerfeature.md) |  |
+|  [featureId](./ngw-kit.ngwidentifyitem.featureid.md) |  | number |  |
+|  [resourceId](./ngw-kit.ngwidentifyitem.resourceid.md) |  | number |  |
 

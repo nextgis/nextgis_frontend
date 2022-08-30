@@ -17,7 +17,7 @@ locate?(opt: LocateOptions, events?: LocationEvents): Locate;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  opt | [LocateOptions](./webmap.locateoptions.md) |  |
-|  events | [LocationEvents](./webmap.locationevents.md) |  |
+|  events | [LocationEvents](./webmap.locationevents.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

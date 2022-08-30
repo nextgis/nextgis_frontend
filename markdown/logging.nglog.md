@@ -9,11 +9,11 @@
 ```typescript
 export interface NgLog<D = any> extends Log<D> 
 ```
-<b>Extends:</b> [Log](./logging.log.md)<!-- -->&lt;D&gt;
+<b>Extends:</b> [Log](./logging.log.md)
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [sessionId?](./logging.nglog.sessionid.md) | string | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [sessionId?](./logging.nglog.sessionid.md) |  | string | <i>(Optional)</i> |
 

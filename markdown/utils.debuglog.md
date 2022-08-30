@@ -14,7 +14,7 @@ export declare function debugLog(message?: string): boolean;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  message | string |  |
+|  message | string | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

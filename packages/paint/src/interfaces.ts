@@ -78,7 +78,7 @@ export type PropertyPaint<P extends Properties = Properties> = [
 
 export type PropertiesPaint<P extends Properties = Properties> = [
   VectorAdapterLayerPaint | undefined,
-  ...PropertyPaint<P>[]
+  ...PropertyPaint<P>[],
 ];
 
 export type VectorAdapterLayerPaint =
@@ -101,6 +101,58 @@ export type Paint<
   | VectorAdapterLayerPaint
   | GetPaintCallback<F>
   | PropertiesPaint<P extends null ? Properties : P>;
+
+// 3D Paint
+
+export type Paint3DType = 'ellipsoid' | 'sphere';
+
+export type VectorAdapterLayerPaint3D = Sphere3DPaint | Ellipsoid3DPaint;
+
+export interface Base3DPaint {
+  type?: Paint3DType;
+  color?: string | Expression;
+  fill?: boolean;
+  fillColor?: string | Expression;
+  stroke?: boolean;
+  strokeWidth?: number | Expression;
+  strokeColor?: string | Expression;
+}
+
+export interface Ellipsoid3DPaint extends Base3DPaint {
+  type: 'ellipsoid';
+  length: number;
+  width: number;
+  height: number;
+}
+
+export interface Sphere3DPaint extends Base3DPaint {
+  type: 'sphere';
+  radius: number;
+}
+
+export interface GetPaint3DCallback<F extends Feature = Feature> {
+  (feature: F): VectorAdapterLayerPaint;
+  type?: Paint3DType;
+  paint?: VectorAdapterLayerPaint3D;
+}
+
+export type PropertiesPaint3D<P extends Properties = Properties> = [
+  VectorAdapterLayerPaint3D | undefined,
+  ...PropertyPaint<P>[],
+];
+
+export type PropertyPaint3D<P extends Properties = Properties> = [
+  PropertiesFilter<P>,
+  VectorAdapterLayerPaint3D,
+];
+
+export type Paint3D<
+  F extends Feature = Feature,
+  P extends Properties | null = F['properties'],
+> =
+  | VectorAdapterLayerPaint3D
+  | GetPaintCallback<F>
+  | PropertyPaint3D<P extends null ? Properties : P>;
 
 // MAPBOX
 export type ExpressionName =

@@ -14,7 +14,7 @@ protected UPDATE_RESOURCES(resources?: Record<ResourceDef, number>): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  resources | Record&lt;ResourceDef, number&gt; |  |
+|  resources | Record&lt;ResourceDef, number&gt; | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

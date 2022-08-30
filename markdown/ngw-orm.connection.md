@@ -22,11 +22,11 @@ export declare class Connection
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [baseUrl](./ngw-orm.connection.baseurl.md) |  | string | Connection url. |
+|  [baseUrl](./ngw-orm.connection.baseurl.md) | <code>readonly</code> | string | Connection url. |
 |  [connections](./ngw-orm.connection.connections.md) | <code>static</code> | [Connection](./ngw-orm.connection.md)<!-- -->\[\] |  |
-|  [driver](./ngw-orm.connection.driver.md) |  | NgwConnector | NGW driver used by this connection. |
-|  [isConnected](./ngw-orm.connection.isconnected.md) |  | boolean | Indicates if connection is initialized or not. |
-|  [options](./ngw-orm.connection.options.md) |  | ConnectionOptions | Connection options. |
+|  [driver](./ngw-orm.connection.driver.md) | <code>readonly</code> | NgwConnector | NGW driver used by this connection. |
+|  [isConnected](./ngw-orm.connection.isconnected.md) | <code>readonly</code> | boolean | Indicates if connection is initialized or not. |
+|  [options](./ngw-orm.connection.options.md) | <code>readonly</code> | ConnectionOptions | Connection options. |
 
 ## Methods
 

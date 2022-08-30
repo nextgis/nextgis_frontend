@@ -17,5 +17,5 @@ constructor(executor: (resolve: (value?: T | PromiseLike<T>) => void, reject: (r
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  executor | (resolve: (value?: T \| PromiseLike&lt;T&gt;) =&gt; void, reject: (reason?: any) =&gt; void, onCancel: OnCancelFunction) =&gt; void |  |
-|  timeout | number |  |
+|  timeout | number | <i>(Optional)</i> |
 

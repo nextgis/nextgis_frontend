@@ -75,7 +75,7 @@
 |  [FlattenOptions](./utils.flattenoptions.md) |  |
 |  [JsonMap](./utils.jsonmap.md) |  |
 |  [LatLng](./utils.latlng.md) | Longitude and latitude coordinate, measured in degrees. |
-|  [TileJson](./utils.tilejson.md) | This specification attempts to create a standard for representing metadata about multiple types of web-based layers, to aid clients in configuration and browsing.<!-- -->From [https://github.com/mapbox/tilejson-spec/tree/master/2.2.0](https://github.com/mapbox/tilejson-spec/tree/master/2.2.0) |
+|  [TileJson](./utils.tilejson.md) | <p>This specification attempts to create a standard for representing metadata about multiple types of web-based layers, to aid clients in configuration and browsing.</p><p>From [https://github.com/mapbox/tilejson-spec/tree/master/2.2.0](https://github.com/mapbox/tilejson-spec/tree/master/2.2.0)</p> |
 
 ## Variables
 

@@ -12,11 +12,11 @@ export interface NgwKitOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [auth?](./ngw-kit.ngwkitoptions.auth.md) | { login: string; password: string; } | <i>(Optional)</i> |
-|  [baseUrl?](./ngw-kit.ngwkitoptions.baseurl.md) | string | <i>(Optional)</i> |
-|  [connector?](./ngw-kit.ngwkitoptions.connector.md) | NgwConnector | <i>(Optional)</i> |
-|  [pixelRadius?](./ngw-kit.ngwkitoptions.pixelradius.md) | number | <i>(Optional)</i> Radius for searching objects in pixels |
-|  [resourceId?](./ngw-kit.ngwkitoptions.resourceid.md) | [ResourceIdDef](./ngw-kit.resourceiddef.md) | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [auth?](./ngw-kit.ngwkitoptions.auth.md) |  | { login: string; password: string; } | <i>(Optional)</i> |
+|  [baseUrl?](./ngw-kit.ngwkitoptions.baseurl.md) |  | string | <i>(Optional)</i> |
+|  [connector?](./ngw-kit.ngwkitoptions.connector.md) |  | NgwConnector | <i>(Optional)</i> |
+|  [pixelRadius?](./ngw-kit.ngwkitoptions.pixelradius.md) |  | number | <i>(Optional)</i> Radius for searching objects in pixels |
+|  [resourceId?](./ngw-kit.ngwkitoptions.resourceid.md) |  | [ResourceIdDef](./ngw-kit.resourceiddef.md) | <i>(Optional)</i> |
 

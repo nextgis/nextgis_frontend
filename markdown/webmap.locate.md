@@ -12,7 +12,7 @@ export interface Locate
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [stop](./webmap.locate.stop.md) | () =&gt; void |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [stop](./webmap.locate.stop.md) |  | () =&gt; void |  |
 

@@ -12,12 +12,12 @@ export interface FeatureItemAttachment
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [description](./ngw-connector.featureitemattachment.description.md) | null |  |
-|  [id](./ngw-connector.featureitemattachment.id.md) | number |  |
-|  [is\_image](./ngw-connector.featureitemattachment.is_image.md) | boolean |  |
-|  [mime\_type](./ngw-connector.featureitemattachment.mime_type.md) | string |  |
-|  [name](./ngw-connector.featureitemattachment.name.md) | string |  |
-|  [size](./ngw-connector.featureitemattachment.size.md) | number |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [description](./ngw-connector.featureitemattachment.description.md) |  | null |  |
+|  [id](./ngw-connector.featureitemattachment.id.md) |  | number |  |
+|  [is\_image](./ngw-connector.featureitemattachment.is_image.md) |  | boolean |  |
+|  [mime\_type](./ngw-connector.featureitemattachment.mime_type.md) |  | string |  |
+|  [name](./ngw-connector.featureitemattachment.name.md) |  | string |  |
+|  [size](./ngw-connector.featureitemattachment.size.md) |  | number |  |
 

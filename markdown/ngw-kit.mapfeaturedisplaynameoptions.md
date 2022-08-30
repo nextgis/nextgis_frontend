@@ -12,10 +12,10 @@ export interface MapFeatureDisplayNameOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [connector](./ngw-kit.mapfeaturedisplaynameoptions.connector.md) | NgwConnector |  |
-|  [fields](./ngw-kit.mapfeaturedisplaynameoptions.fields.md) | string\[\] |  |
-|  [resource?](./ngw-kit.mapfeaturedisplaynameoptions.resource.md) | [ResourceDefinition](./ngw-connector.resourcedefinition.md) | <i>(Optional)</i> |
-|  [resourceId?](./ngw-kit.mapfeaturedisplaynameoptions.resourceid.md) | number | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [connector](./ngw-kit.mapfeaturedisplaynameoptions.connector.md) |  | NgwConnector |  |
+|  [fields](./ngw-kit.mapfeaturedisplaynameoptions.fields.md) |  | string\[\] |  |
+|  [resource?](./ngw-kit.mapfeaturedisplaynameoptions.resource.md) |  | [ResourceDefinition](./ngw-connector.resourcedefinition.md) | <i>(Optional)</i> |
+|  [resourceId?](./ngw-kit.mapfeaturedisplaynameoptions.resourceid.md) |  | number | <i>(Optional)</i> |
 

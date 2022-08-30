@@ -15,26 +15,26 @@ export declare class BaselayerSelect extends Vue
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [\_\_updateItems?](./vuetify-ngw-components.baselayerselect.__updateitems.md) |  | (e?: LayerAdapter) =&gt; Promise&lt;void&gt; | <i>(Optional)</i> |
-|  [\_layers](./vuetify-ngw-components.baselayerselect._layers.md) |  | Array&lt;LayerAdapter \| [ResourceAdapter](./ngw-kit.resourceadapter.md)<!-- -->&gt; |  |
+|  [\_\_updateItems?](./vuetify-ngw-components.baselayerselect.__updateitems.md) | <code>protected</code> | (e?: LayerAdapter) =&gt; Promise&lt;void&gt; | <i>(Optional)</i> |
+|  [\_layers](./vuetify-ngw-components.baselayerselect._layers.md) | <code>protected</code> | Array&lt;LayerAdapter \| [ResourceAdapter](./ngw-kit.resourceadapter.md)<!-- -->&gt; |  |
 |  [active](./vuetify-ngw-components.baselayerselect.active.md) |  | string \| false |  |
 |  [allowEmpty](./vuetify-ngw-components.baselayerselect.allowempty.md) |  | boolean |  |
 |  [emptyLayerText](./vuetify-ngw-components.baselayerselect.emptylayertext.md) |  | string |  |
 |  [emptyValue](./vuetify-ngw-components.baselayerselect.emptyvalue.md) |  | string |  |
 |  [internalUpdate](./vuetify-ngw-components.baselayerselect.internalupdate.md) |  | boolean |  |
 |  [items](./vuetify-ngw-components.baselayerselect.items.md) |  | [VueSelectItem](./vuetify-ngw-components.vueselectitem.md)<!-- -->\[\] |  |
-|  [webMap](./vuetify-ngw-components.baselayerselect.webmap.md) |  | WebMap |  |
+|  [webMap](./vuetify-ngw-components.baselayerselect.webmap.md) | <code>readonly</code> | WebMap |  |
 |  [webMapId](./vuetify-ngw-components.baselayerselect.webmapid.md) |  | number |  |
 
 ## Methods
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
-|  [\_checkLayer(e)](./vuetify-ngw-components.baselayerselect._checklayer.md) |  |  |
-|  [\_updateItems(e)](./vuetify-ngw-components.baselayerselect._updateitems.md) |  |  |
+|  [\_checkLayer(e)](./vuetify-ngw-components.baselayerselect._checklayer.md) | <code>protected</code> |  |
+|  [\_updateItems(e)](./vuetify-ngw-components.baselayerselect._updateitems.md) | <code>protected</code> |  |
 |  [beforeDestroy()](./vuetify-ngw-components.baselayerselect.beforedestroy.md) |  |  |
-|  [create()](./vuetify-ngw-components.baselayerselect.create.md) |  |  |
-|  [destroy()](./vuetify-ngw-components.baselayerselect.destroy.md) |  |  |
+|  [create()](./vuetify-ngw-components.baselayerselect.create.md) | <code>protected</code> |  |
+|  [destroy()](./vuetify-ngw-components.baselayerselect.destroy.md) | <code>protected</code> |  |
 |  [mounted()](./vuetify-ngw-components.baselayerselect.mounted.md) |  |  |
 |  [render(h)](./vuetify-ngw-components.baselayerselect.render.md) |  |  |
 |  [setVisibleLayers(active, old)](./vuetify-ngw-components.baselayerselect.setvisiblelayers.md) |  |  |

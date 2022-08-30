@@ -16,7 +16,7 @@ export declare function applyMixins(derivedCtor: Ctor, baseCtors: Ctor[], opt?: 
 |  --- | --- | --- |
 |  derivedCtor | Ctor |  |
 |  baseCtors | Ctor\[\] |  |
-|  opt | [ApplyMixinOptions](./utils.applymixinoptions.md) |  |
+|  opt | [ApplyMixinOptions](./utils.applymixinoptions.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

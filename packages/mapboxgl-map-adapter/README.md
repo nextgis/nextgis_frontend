@@ -10,9 +10,9 @@ Use MapboxglMapAdapter with NPM installation method for building large scale app
 
 ```bash
 # latest stable
-$ npm install --save-dev @nextgis/mapboxgl-map-adapter
+$ npm install --save-dev maplibre-gl @nextgis/mapboxgl-map-adapter
 # or
-$ yarn add @nextgis/mapboxgl-map-adapter
+$ yarn add maplibre-gl @nextgis/mapboxgl-map-adapter
 ```
 
 ```javascript

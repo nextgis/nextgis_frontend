@@ -9,11 +9,11 @@
 ```typescript
 export interface MapSelectNgwLayerDistinctOptions<P extends FeatureProperties = FeatureProperties> extends FetchNgwItemsOptions<P> 
 ```
-<b>Extends:</b> [FetchNgwItemsOptions](./ngw-kit.fetchngwitemsoptions.md)<!-- -->&lt;P&gt;
+<b>Extends:</b> [FetchNgwItemsOptions](./ngw-kit.fetchngwitemsoptions.md)
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [fields](./ngw-kit.mapselectngwlayerdistinctoptions.fields.md) | (keyof P)\[\] |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [fields](./ngw-kit.mapselectngwlayerdistinctoptions.fields.md) |  | (keyof P)\[\] |  |
 

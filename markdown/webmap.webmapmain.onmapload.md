@@ -14,7 +14,7 @@ onMapLoad(cb?: (mapAdapter: MapAdapter) => void): Promise<MapAdapter>;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  cb | (mapAdapter: [MapAdapter](./webmap.mapadapter.md)<!-- -->) =&gt; void |  |
+|  cb | (mapAdapter: [MapAdapter](./webmap.mapadapter.md)<!-- -->) =&gt; void | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

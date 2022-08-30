@@ -14,7 +14,7 @@ static clone<T extends typeof BaseResource = typeof BaseResource>(options?: Part
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | Partial&lt;NgwResourceOptions&gt; |  |
+|  options | Partial&lt;NgwResourceOptions&gt; | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

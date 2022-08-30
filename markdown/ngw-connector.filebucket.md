@@ -12,9 +12,9 @@ export interface FileBucket
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [files](./ngw-connector.filebucket.files.md) | [NgwFile](./ngw-connector.ngwfile.md)<!-- -->\[\] |  |
-|  [main\_tileset?](./ngw-connector.filebucket.main_tileset.md) | string | <i>(Optional)</i> |
-|  [tstamp?](./ngw-connector.filebucket.tstamp.md) | any | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [files](./ngw-connector.filebucket.files.md) |  | [NgwFile](./ngw-connector.ngwfile.md)<!-- -->\[\] |  |
+|  [main\_tileset?](./ngw-connector.filebucket.main_tileset.md) |  | string | <i>(Optional)</i> |
+|  [tstamp?](./ngw-connector.filebucket.tstamp.md) |  | any | <i>(Optional)</i> |
 

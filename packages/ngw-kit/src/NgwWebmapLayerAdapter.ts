@@ -78,8 +78,6 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
       extentConstrained
     ) {
       this.options.webMap.setView({ maxBounds: this._extent });
-      // @ts-ignore
-      window.webmap = this.options.webMap;
     }
     return this.layer;
   }
@@ -230,6 +228,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
           options.minZoom = this.options.minZoom;
           options.maxZoom = this.options.maxZoom;
           options.drawOrderEnabled = webmap.draw_order_enabled;
+          options.popupOptions = this.options.popupOptions;
           const layer = new this.NgwWebmapItem(
             this.options.webMap,
             webmap.root_item,
@@ -361,7 +360,7 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
     if (webMapItem && webMapItem.item.item_type === 'root') {
       const layers = webMapItem.tree.getDescendants();
       const promises: Array<CancelablePromise<any>> = [];
-      layers.forEach((x: NgwWebmapItem) => {
+      for (const x of layers) {
         const item = x.item;
         if (item.item_type === 'layer') {
           const id = item.layer_style_id;
@@ -374,10 +373,9 @@ export class NgwWebmapLayerAdapter<M = any> implements ResourceAdapter<M> {
           });
           promises.push(promise);
         }
-      });
+      }
       const ids = await Promise.all(promises);
       return ids.filter((x) => x !== undefined);
-      // const id = item['layer_style_id']
     }
   }
 }

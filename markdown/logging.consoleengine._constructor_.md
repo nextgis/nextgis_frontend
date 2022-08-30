@@ -16,5 +16,5 @@ constructor(options?: ConsoleEngineOptions);
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | [ConsoleEngineOptions](./logging.consoleengineoptions.md) |  |
+|  options | [ConsoleEngineOptions](./logging.consoleengineoptions.md) | <i>(Optional)</i> |
 

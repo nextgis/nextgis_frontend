@@ -14,8 +14,8 @@ export interface TitleToggle
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [off](./webmap.titletoggle.off.md) | string |  |
-|  [on](./webmap.titletoggle.on.md) | string |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [off](./webmap.titletoggle.off.md) |  | string |  |
+|  [on](./webmap.titletoggle.on.md) |  | string |  |
 

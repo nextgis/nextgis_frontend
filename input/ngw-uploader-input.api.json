@@ -1,8 +1,8 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.18.19",
-    "schemaVersion": 1004,
+    "toolVersion": "7.28.6",
+    "schemaVersion": 1009,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
       "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
@@ -156,18 +156,21 @@
         "@betaDocumentation": true,
         "@internalRemarks": true,
         "@preapproved": true
-      }
+      },
+      "reportUnsupportedHtmlElements": false
     }
   },
   "kind": "Package",
   "canonicalReference": "@nextgis/ngw-uploader-input!",
   "docComment": "",
   "name": "@nextgis/ngw-uploader-input",
+  "preserveMemberOrder": false,
   "members": [
     {
       "kind": "EntryPoint",
       "canonicalReference": "@nextgis/ngw-uploader-input!",
       "name": "",
+      "preserveMemberOrder": false,
       "members": [
         {
           "kind": "Class",
@@ -190,6 +193,7 @@
           ],
           "releaseTag": "Public",
           "name": "NgwUploaderInput",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "Method",
@@ -214,15 +218,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
               },
               "releaseTag": "Public",
+              "isProtected": true,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "_initialize"
             },
             {
@@ -245,6 +250,7 @@
                 }
               ],
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -252,7 +258,8 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 }
               ]
             },
@@ -284,13 +291,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 4
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -298,9 +305,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": true
                 }
               ],
+              "isOptional": false,
               "name": "createInput"
             },
             {
@@ -322,6 +331,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "inputOptions",
@@ -329,7 +339,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Property",
@@ -349,6 +360,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "loginDialog",
@@ -356,12 +368,13 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             }
           ],
           "extendsTokenRange": {
             "startIndex": 1,
-            "endIndex": 3
+            "endIndex": 2
           },
           "implementsTokenRanges": []
         },
@@ -386,6 +399,7 @@
           ],
           "releaseTag": "Public",
           "name": "NgwUploadInputOptions",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -406,6 +420,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "inputOptions",
@@ -432,6 +447,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "loginDialog",
@@ -444,7 +460,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -460,6 +476,7 @@
           ],
           "releaseTag": "Public",
           "name": "UploadInputOptions",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -479,6 +496,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "addTimestampToName",
@@ -505,6 +523,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "createName",
@@ -536,6 +555,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "element",
@@ -571,6 +591,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "error",
@@ -597,6 +618,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "html",
@@ -623,6 +645,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "image",
@@ -649,6 +672,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "name",
@@ -675,6 +699,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "parentId",
@@ -710,6 +735,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "success",
@@ -736,6 +762,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "vector",

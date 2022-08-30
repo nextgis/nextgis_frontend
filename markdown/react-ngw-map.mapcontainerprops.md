@@ -13,12 +13,12 @@ export interface MapContainerProps<M = any, L = any, C = any, O extends NgwMapOp
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [children?](./react-ngw-map.mapcontainerprops.children.md) | ReactNode | <i>(Optional)</i> |
-|  [className?](./react-ngw-map.mapcontainerprops.classname.md) | string | <i>(Optional)</i> |
-|  [id?](./react-ngw-map.mapcontainerprops.id.md) | string | <i>(Optional)</i> |
-|  [placeholder?](./react-ngw-map.mapcontainerprops.placeholder.md) | ReactNode | <i>(Optional)</i> |
-|  [style?](./react-ngw-map.mapcontainerprops.style.md) | CSSProperties | <i>(Optional)</i> |
-|  [whenCreated?](./react-ngw-map.mapcontainerprops.whencreated.md) | (map: [NgwMap](./ngw-map.ngwmap.md)<!-- -->&lt;M, L, C, O&gt;) =&gt; void | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [children?](./react-ngw-map.mapcontainerprops.children.md) |  | ReactNode | <i>(Optional)</i> |
+|  [className?](./react-ngw-map.mapcontainerprops.classname.md) |  | string | <i>(Optional)</i> |
+|  [id?](./react-ngw-map.mapcontainerprops.id.md) |  | string | <i>(Optional)</i> |
+|  [placeholder?](./react-ngw-map.mapcontainerprops.placeholder.md) |  | ReactNode | <i>(Optional)</i> |
+|  [style?](./react-ngw-map.mapcontainerprops.style.md) |  | CSSProperties | <i>(Optional)</i> |
+|  [whenCreated?](./react-ngw-map.mapcontainerprops.whencreated.md) |  | (map: [NgwMap](./ngw-map.ngwmap.md)<!-- -->&lt;M, L, C, O&gt;) =&gt; void | <i>(Optional)</i> |
 

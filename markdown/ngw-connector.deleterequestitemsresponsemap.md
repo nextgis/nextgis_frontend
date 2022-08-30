@@ -13,7 +13,7 @@ export interface DeleteRequestItemsResponseMap extends RequestItemKeys
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  ["feature\_layer.feature.item"](./ngw-connector.deleterequestitemsresponsemap._feature_layer.feature.item_.md) | any |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  ["feature\_layer.feature.item"](./ngw-connector.deleterequestitemsresponsemap._feature_layer.feature.item_.md) |  | any |  |
 

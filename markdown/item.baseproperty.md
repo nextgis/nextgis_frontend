@@ -20,9 +20,9 @@ export declare abstract class BaseProperty<V = any, O extends ItemBasePropertyOp
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [\_blocked](./item.baseproperty._blocked.md) |  | boolean |  |
-|  [\_container?](./item.baseproperty._container.md) |  | HTMLElement | <i>(Optional)</i> |
-|  [\_value?](./item.baseproperty._value.md) |  | V | <i>(Optional)</i> |
+|  [\_blocked](./item.baseproperty._blocked.md) | <code>protected</code> | boolean |  |
+|  [\_container?](./item.baseproperty._container.md) | <code>protected</code> | HTMLElement | <i>(Optional)</i> |
+|  [\_value?](./item.baseproperty._value.md) | <code>protected</code> | V | <i>(Optional)</i> |
 |  [emitter](./item.baseproperty.emitter.md) |  | EventEmitter |  |
 |  [item](./item.baseproperty.item.md) |  | I |  |
 |  [name](./item.baseproperty.name.md) |  | string |  |
@@ -32,9 +32,9 @@ export declare abstract class BaseProperty<V = any, O extends ItemBasePropertyOp
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
-|  [\_callOnSet(value, options)](./item.baseproperty._callonset.md) |  |  |
-|  [\_fireChangeEvent(value, options)](./item.baseproperty._firechangeevent.md) |  |  |
-|  [\_prepareValue(value)](./item.baseproperty._preparevalue.md) |  |  |
+|  [\_callOnSet(value, options)](./item.baseproperty._callonset.md) | <code>protected</code> |  |
+|  [\_fireChangeEvent(value, options)](./item.baseproperty._firechangeevent.md) | <code>protected</code> |  |
+|  [\_prepareValue(value)](./item.baseproperty._preparevalue.md) | <code>protected</code> |  |
 |  [destroy()](./item.baseproperty.destroy.md) |  |  |
 |  [get()](./item.baseproperty.get.md) |  |  |
 |  [getChildren()](./item.baseproperty.getchildren.md) |  |  |

@@ -12,9 +12,9 @@ export interface NgwDateFormat
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [day](./ngw-connector.ngwdateformat.day.md) | number |  |
-|  [month](./ngw-connector.ngwdateformat.month.md) | number |  |
-|  [year](./ngw-connector.ngwdateformat.year.md) | number |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [day](./ngw-connector.ngwdateformat.day.md) |  | number |  |
+|  [month](./ngw-connector.ngwdateformat.month.md) |  | number |  |
+|  [year](./ngw-connector.ngwdateformat.year.md) |  | number |  |
 

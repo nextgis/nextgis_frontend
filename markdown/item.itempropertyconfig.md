@@ -9,13 +9,13 @@
 ```typescript
 export interface ItemPropertyConfig<K extends keyof ItemPropertyTypes> extends ItemPropertyBaseConfig<K> 
 ```
-<b>Extends:</b> [ItemPropertyBaseConfig](./item.itempropertybaseconfig.md)<!-- -->&lt;K&gt;
+<b>Extends:</b> [ItemPropertyBaseConfig](./item.itempropertybaseconfig.md)
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [handler?](./item.itempropertyconfig.handler.md) | [Type](./item.type.md)<!-- -->&lt;[BaseProperty](./item.baseproperty.md)<!-- -->&lt;[ItemPropertyTypes](./item.itempropertytypes.md)<!-- -->\[K\]&gt;&gt; | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [handler?](./item.itempropertyconfig.handler.md) |  | [Type](./item.type.md)<!-- -->&lt;[BaseProperty](./item.baseproperty.md)<!-- -->&lt;[ItemPropertyTypes](./item.itempropertytypes.md)<!-- -->\[K\]&gt;&gt; | <i>(Optional)</i> |
 
 ## Methods
 

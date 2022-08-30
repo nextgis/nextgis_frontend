@@ -1,0 +1,9 @@
+{
+  "name": "Vector adapter select",
+  "description": "Use adapter methods to select features of vector layer. Press CTRL with click to add new features in selection",
+  "ngwMaps": [
+    "ngw-leaflet",
+    "ngw-ol",
+    "ngw-mapbox"
+  ]
+}

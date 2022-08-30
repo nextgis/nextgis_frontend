@@ -13,15 +13,15 @@ export interface TreeLayer extends TreeItem
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [draw\_order\_position](./ngw-connector.treelayer.draw_order_position.md) | number |  |
-|  [item\_type](./ngw-connector.treelayer.item_type.md) | 'layer' |  |
-|  [layer\_adapter](./ngw-connector.treelayer.layer_adapter.md) | string |  |
-|  [layer\_enabled](./ngw-connector.treelayer.layer_enabled.md) | boolean |  |
-|  [layer\_max\_scale\_denom?](./ngw-connector.treelayer.layer_max_scale_denom.md) | number | <i>(Optional)</i> |
-|  [layer\_min\_scale\_denom?](./ngw-connector.treelayer.layer_min_scale_denom.md) | number | <i>(Optional)</i> |
-|  [layer\_style\_id](./ngw-connector.treelayer.layer_style_id.md) | number |  |
-|  [layer\_transparency](./ngw-connector.treelayer.layer_transparency.md) | number |  |
-|  [style\_parent\_id](./ngw-connector.treelayer.style_parent_id.md) | number |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [draw\_order\_position](./ngw-connector.treelayer.draw_order_position.md) |  | number |  |
+|  [item\_type](./ngw-connector.treelayer.item_type.md) |  | 'layer' |  |
+|  [layer\_adapter](./ngw-connector.treelayer.layer_adapter.md) |  | string |  |
+|  [layer\_enabled](./ngw-connector.treelayer.layer_enabled.md) |  | boolean |  |
+|  [layer\_max\_scale\_denom?](./ngw-connector.treelayer.layer_max_scale_denom.md) |  | number | <i>(Optional)</i> |
+|  [layer\_min\_scale\_denom?](./ngw-connector.treelayer.layer_min_scale_denom.md) |  | number | <i>(Optional)</i> |
+|  [layer\_style\_id](./ngw-connector.treelayer.layer_style_id.md) |  | number |  |
+|  [layer\_transparency](./ngw-connector.treelayer.layer_transparency.md) |  | number |  |
+|  [style\_parent\_id](./ngw-connector.treelayer.style_parent_id.md) |  | number |  |
 

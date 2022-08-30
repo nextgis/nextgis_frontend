@@ -14,7 +14,7 @@ filter(filter?: PropertyFilter | SelfFilter<TREE_ITEM>): Tree[];
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  filter | [PropertyFilter](./properties-filter.propertyfilter.md) \| SelfFilter&lt;TREE\_ITEM&gt; |  |
+|  filter | [PropertyFilter](./properties-filter.propertyfilter.md) \| SelfFilter&lt;TREE\_ITEM&gt; | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

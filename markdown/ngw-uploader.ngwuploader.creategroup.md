@@ -15,7 +15,7 @@ createGroup(nameOrOptions: string | GroupOptions, opt?: GroupOptions): Cancelabl
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  nameOrOptions | string \| [GroupOptions](./ngw-uploader.groupoptions.md) |  |
-|  opt | [GroupOptions](./ngw-uploader.groupoptions.md) |  |
+|  opt | [GroupOptions](./ngw-uploader.groupoptions.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

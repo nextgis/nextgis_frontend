@@ -12,11 +12,11 @@ export interface BasemapWebmapItem
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [display\_name](./ngw-connector.basemapwebmapitem.display_name.md) | string |  |
-|  [enabled?](./ngw-connector.basemapwebmapitem.enabled.md) | boolean | <i>(Optional)</i> |
-|  [opacity?](./ngw-connector.basemapwebmapitem.opacity.md) | number | <i>(Optional)</i> |
-|  [position?](./ngw-connector.basemapwebmapitem.position.md) | number | <i>(Optional)</i> |
-|  [resource\_id](./ngw-connector.basemapwebmapitem.resource_id.md) | number |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [display\_name](./ngw-connector.basemapwebmapitem.display_name.md) |  | string |  |
+|  [enabled?](./ngw-connector.basemapwebmapitem.enabled.md) |  | boolean | <i>(Optional)</i> |
+|  [opacity?](./ngw-connector.basemapwebmapitem.opacity.md) |  | number | <i>(Optional)</i> |
+|  [position?](./ngw-connector.basemapwebmapitem.position.md) |  | number | <i>(Optional)</i> |
+|  [resource\_id](./ngw-connector.basemapwebmapitem.resource_id.md) |  | number |  |
 

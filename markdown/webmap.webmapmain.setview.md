@@ -17,7 +17,7 @@ setView(lngLatOr: LngLatArray, zoom?: number): void;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  lngLatOr | [LngLatArray](./utils.lnglatarray.md) |  |
-|  zoom | number | The zoom level to set (0-24). |
+|  zoom | number | <i>(Optional)</i> The zoom level to set (0-24). |
 
 <b>Returns:</b>
 

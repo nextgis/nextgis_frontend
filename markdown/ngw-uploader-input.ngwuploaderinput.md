@@ -28,6 +28,6 @@ export declare class NgwUploaderInput extends NgwUploader
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
-|  [\_initialize()](./ngw-uploader-input.ngwuploaderinput._initialize.md) |  |  |
+|  [\_initialize()](./ngw-uploader-input.ngwuploaderinput._initialize.md) | <code>protected</code> |  |
 |  [createInput(opt)](./ngw-uploader-input.ngwuploaderinput.createinput.md) |  |  |
 

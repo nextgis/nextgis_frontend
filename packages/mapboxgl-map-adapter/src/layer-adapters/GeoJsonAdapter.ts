@@ -1,14 +1,6 @@
 import { defined } from '@nextgis/utils';
 import { featureFilter } from '@nextgis/properties-filter';
 
-import {
-  Map,
-  GeoJSONSource,
-  FilterSpecification,
-  GeoJSONSourceSpecification,
-  FilterSpecificationInputType,
-} from 'maplibre-gl';
-
 import { EventOptions, VectorAdapter } from './VectorAdapter';
 import {
   createFeaturePositionOptions,
@@ -21,6 +13,12 @@ import {
   typeAlias,
 } from '../utils/geomType';
 
+import type {
+  Map,
+  GeoJSONSource,
+  FilterSpecification,
+  GeoJSONSourceSpecification,
+} from 'maplibre-gl';
 import type {
   GeometryCollection,
   GeoJsonProperties,
@@ -40,6 +38,7 @@ import type {
 } from '@nextgis/webmap';
 import type { Feature } from './VectorAdapter';
 import type { TLayer } from '../MapboxglMapAdapter';
+import { SelectedFeaturesIds } from '../interfaces';
 
 let ID = 0;
 
@@ -189,6 +188,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
   }
 
   select(find?: DataLayerFilter<Feature, TLayer> | PropertiesFilter): void {
+    this.unselect();
     if (find) {
       if (typeof find === 'function') {
         const features = this._getFeatures().filter((x) =>
@@ -349,8 +349,8 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
       return;
     }
     const selected = this._selectedFeatureIds;
-    let selectionArray: FilterSpecificationInputType[] = [];
-    const filteredArray: FilterSpecificationInputType[] = [];
+    let selectionArray: SelectedFeaturesIds = [];
+    const filteredArray: SelectedFeaturesIds = [];
     const filtered = this._filteredFeatureIds;
     if (filtered) {
       const features = this._getFeatures();
@@ -380,11 +380,15 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
             if (this._selectionName) {
               const selectFilter: FilterSpecification = [
                 'in',
-                this.featureIdName as FilterSpecificationInputType,
+                this.featureIdName,
               ];
               selectFilter.push(...selectionArray);
 
-              map.setFilter(selLayerName, ['all', geomFilter, selectFilter]);
+              map.setFilter(selLayerName, [
+                'all',
+                geomFilter,
+                selectFilter,
+              ] as FilterSpecification);
             }
           }
           if (layers.indexOf(layerName) !== -1) {
@@ -395,7 +399,7 @@ export class GeoJsonAdapter extends VectorAdapter<GeoJsonAdapterOptions> {
               filter_.push(['!in', this.featureIdName, ...selectionArray]);
               this._updateWithNativeFilter(filter_);
             }
-            map.setFilter(layerName, filter_);
+            map.setFilter(layerName, filter_ as FilterSpecification);
           }
         }
       }

@@ -15,7 +15,7 @@ error(message: string, options?: LogShortcutOptions<D>): void;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  message | string |  |
-|  options | [LogShortcutOptions](./logging.logshortcutoptions.md)<!-- -->&lt;D&gt; |  |
+|  options | [LogShortcutOptions](./logging.logshortcutoptions.md)<!-- -->&lt;D&gt; | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

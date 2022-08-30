@@ -12,7 +12,7 @@ export interface RasterUploadResp
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [status?](./ngw-uploader.rasteruploadresp.status.md) | number | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [status?](./ngw-uploader.rasteruploadresp.status.md) |  | number | <i>(Optional)</i> |
 

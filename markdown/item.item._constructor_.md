@@ -16,5 +16,5 @@ constructor(options?: O);
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | O |  |
+|  options | O | <i>(Optional)</i> |
 

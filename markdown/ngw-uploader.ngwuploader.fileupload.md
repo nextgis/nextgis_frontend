@@ -15,7 +15,7 @@ fileUpload(file: FileType, options?: FileUploadOptions): CancelablePromise<FileM
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  file | FileType |  |
-|  options | [FileUploadOptions](./ngw-uploader.fileuploadoptions.md) |  |
+|  options | [FileUploadOptions](./ngw-uploader.fileuploadoptions.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

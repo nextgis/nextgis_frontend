@@ -13,7 +13,7 @@ export interface NgwUploadOptions extends NgwConnectorOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [connector?](./ngw-uploader.ngwuploadoptions.connector.md) | NgwConnector | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [connector?](./ngw-uploader.ngwuploadoptions.connector.md) |  | NgwConnector | <i>(Optional)</i> |
 

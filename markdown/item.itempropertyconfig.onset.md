@@ -15,7 +15,7 @@ onSet?(value: ItemPropertyTypes[K], options?: ItemBasePropertyOptions<ItemProper
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  value | [ItemPropertyTypes](./item.itempropertytypes.md)<!-- -->\[K\] |  |
-|  options | [ItemBasePropertyOptions](./item.itembasepropertyoptions.md)<!-- -->&lt;[ItemPropertyTypes](./item.itempropertytypes.md)<!-- -->\[K\]&gt; |  |
+|  options | [ItemBasePropertyOptions](./item.itembasepropertyoptions.md)<!-- -->&lt;[ItemPropertyTypes](./item.itempropertytypes.md)<!-- -->\[K\]&gt; | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

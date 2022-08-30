@@ -12,8 +12,8 @@ export interface ResourceHierarchy
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [id](./ngw-connector.resourcehierarchy.id.md) | number |  |
-|  [parent](./ngw-connector.resourcehierarchy.parent.md) | { id: any; } |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [id](./ngw-connector.resourcehierarchy.id.md) |  | number |  |
+|  [parent](./ngw-connector.resourcehierarchy.parent.md) |  | { id: any; } |  |
 

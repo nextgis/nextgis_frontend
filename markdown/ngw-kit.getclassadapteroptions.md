@@ -12,12 +12,12 @@ export interface GetClassAdapterOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [Adapter?](./ngw-kit.getclassadapteroptions.adapter.md) | [Type](./utils.type.md)<!-- -->&lt;[MainLayerAdapter](./webmap.mainlayeradapter.md)<!-- -->&gt; | <i>(Optional)</i> |
-|  [addLayerOptionsPriority?](./ngw-kit.getclassadapteroptions.addlayeroptionspriority.md) | false | <i>(Optional)</i> This is some kind of dirty hack. Get rid of |
-|  [connector](./ngw-kit.getclassadapteroptions.connector.md) | NgwConnector |  |
-|  [item](./ngw-kit.getclassadapteroptions.item.md) | [ResourceItem](./ngw-connector.resourceitem.md) |  |
-|  [layerOptions](./ngw-kit.getclassadapteroptions.layeroptions.md) | [NgwLayerOptions](./ngw-kit.ngwlayeroptions.md) |  |
-|  [webMap](./ngw-kit.getclassadapteroptions.webmap.md) | [WebMap](./webmap.webmap.md) |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [Adapter?](./ngw-kit.getclassadapteroptions.adapter.md) |  | [Type](./utils.type.md)<!-- -->&lt;[MainLayerAdapter](./webmap.mainlayeradapter.md)<!-- -->&gt; | <i>(Optional)</i> |
+|  [addLayerOptionsPriority?](./ngw-kit.getclassadapteroptions.addlayeroptionspriority.md) |  | false | <i>(Optional)</i> This is some kind of dirty hack. Get rid of |
+|  [connector](./ngw-kit.getclassadapteroptions.connector.md) |  | NgwConnector |  |
+|  [item](./ngw-kit.getclassadapteroptions.item.md) |  | [ResourceItem](./ngw-connector.resourceitem.md) |  |
+|  [layerOptions](./ngw-kit.getclassadapteroptions.layeroptions.md) |  | [NgwLayerOptions](./ngw-kit.ngwlayeroptions.md) |  |
+|  [webMap](./ngw-kit.getclassadapteroptions.webmap.md) |  | [WebMap](./webmap.webmap.md) |  |
 

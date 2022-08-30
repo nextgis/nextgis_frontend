@@ -7,14 +7,14 @@
 <b>Signature:</b>
 
 ```typescript
-export interface ItemOptions extends Pick<AdapterOptions, 'minZoom' | 'maxZoom' | 'crossOrigin' | 'ratio' | 'order' | 'headers' | 'setViewDelay'> 
+export interface ItemOptions extends ItemOptionsToExtend 
 ```
-<b>Extends:</b> Pick&lt;[AdapterOptions](./webmap.adapteroptions.md)<!-- -->, 'minZoom' \| 'maxZoom' \| 'crossOrigin' \| 'ratio' \| 'order' \| 'headers' \| 'setViewDelay'&gt;
+<b>Extends:</b> ItemOptionsToExtend
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [drawOrderEnabled?](./item.itemoptions.draworderenabled.md) | boolean | <i>(Optional)</i> |
-|  [properties?](./item.itemoptions.properties.md) | Array&lt;[ItemPropertyConfig](./item.itempropertyconfig.md)<!-- -->&lt;keyof [ItemPropertyTypes](./item.itempropertytypes.md)<!-- -->&gt;&gt; | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [drawOrderEnabled?](./item.itemoptions.draworderenabled.md) |  | boolean | <i>(Optional)</i> |
+|  [properties?](./item.itemoptions.properties.md) |  | Array&lt;[ItemPropertyConfig](./item.itempropertyconfig.md)<!-- -->&lt;keyof [ItemPropertyTypes](./item.itempropertytypes.md)<!-- -->&gt;&gt; | <i>(Optional)</i> |
 

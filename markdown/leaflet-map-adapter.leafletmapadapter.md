@@ -9,7 +9,7 @@
 ```typescript
 export declare class LeafletMapAdapter implements MapAdapter<Map, any, Control> 
 ```
-<b>Implements:</b> [MapAdapter](./webmap.mapadapter.md)<!-- -->&lt;Map, any, Control&gt;
+<b>Implements:</b> [MapAdapter](./webmap.mapadapter.md)<!-- -->&lt;Map, any, Control
 
 ## Properties
 

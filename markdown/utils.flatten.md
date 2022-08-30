@@ -15,7 +15,7 @@ export declare function flatten(data: Record<string, any>, opt?: FlattenOptions)
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  data | Record&lt;string, any&gt; |  |
-|  opt | [FlattenOptions](./utils.flattenoptions.md) |  |
+|  opt | [FlattenOptions](./utils.flattenoptions.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

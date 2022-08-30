@@ -9,7 +9,7 @@
 ```typescript
 export declare class NgwProvider extends BaseProvider<NgwProviderOptions> 
 ```
-<b>Extends:</b> [BaseProvider](./geocoder.baseprovider.md)<!-- -->&lt;NgwProviderOptions&gt;
+<b>Extends:</b> [BaseProvider](./geocoder.baseprovider.md)<!-- -->&lt;NgwProviderOptions
 
 ## Constructors
 

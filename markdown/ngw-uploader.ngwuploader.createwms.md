@@ -15,7 +15,7 @@ createWms(opt: CreateWmsOptions, name?: string): CancelablePromise<CreatedResour
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  opt | [CreateWmsOptions](./ngw-uploader.createwmsoptions.md) |  |
-|  name | string |  |
+|  name | string | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

@@ -12,8 +12,8 @@ export interface NgwLayersMem
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [layer](./ngw-map.ngwlayersmem.layer.md) | [ResourceAdapter](./ngw-kit.resourceadapter.md) |  |
-|  [resourceId](./ngw-map.ngwlayersmem.resourceid.md) | number |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [layer](./ngw-map.ngwlayersmem.layer.md) |  | [ResourceAdapter](./ngw-kit.resourceadapter.md) |  |
+|  [resourceId](./ngw-map.ngwlayersmem.resourceid.md) |  | number |  |
 

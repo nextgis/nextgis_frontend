@@ -14,7 +14,7 @@ getUserInfo(credentials?: Credentials): CancelablePromise<UserInfo>;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  credentials | [Credentials](./ngw-connector.credentials.md) |  |
+|  credentials | [Credentials](./ngw-connector.credentials.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

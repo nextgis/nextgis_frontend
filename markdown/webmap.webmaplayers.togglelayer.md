@@ -17,8 +17,8 @@ toggleLayer(layerDef: LayerDef, status?: boolean, options?: ToggleLayerOptions):
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  layerDef | [LayerDef](./webmap.layerdef.md) |  |
-|  status | boolean |  |
-|  options | [ToggleLayerOptions](./webmap.togglelayeroptions.md) |  |
+|  status | boolean | <i>(Optional)</i> |
+|  options | [ToggleLayerOptions](./webmap.togglelayeroptions.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

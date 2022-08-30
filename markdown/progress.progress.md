@@ -14,8 +14,8 @@ export declare class Progress
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [emitter](./progress.progress.emitter.md) |  | StrictEventEmitter&lt;EventEmitter, [ProgressEvents](./progress.progressevents.md)<!-- -->&gt; |  |
-|  [percent](./progress.progress.percent.md) |  | number |  |
+|  [emitter](./progress.progress.emitter.md) | <code>readonly</code> | StrictEventEmitter&lt;EventEmitter, [ProgressEvents](./progress.progressevents.md)<!-- -->&gt; |  |
+|  [percent](./progress.progress.percent.md) | <code>readonly</code> | number |  |
 
 ## Methods
 

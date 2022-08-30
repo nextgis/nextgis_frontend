@@ -15,7 +15,7 @@ delete(key: string, props?: CacheMatchProps<O>): void;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  key | string |  |
-|  props | CacheMatchProps&lt;O&gt; |  |
+|  props | CacheMatchProps&lt;O&gt; | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

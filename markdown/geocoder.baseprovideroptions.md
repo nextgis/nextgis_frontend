@@ -12,8 +12,8 @@ export interface BaseProviderOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [label?](./geocoder.baseprovideroptions.label.md) | string | <i>(Optional)</i> |
-|  [searchUrl?](./geocoder.baseprovideroptions.searchurl.md) | string | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [label?](./geocoder.baseprovideroptions.label.md) |  | string | <i>(Optional)</i> |
+|  [searchUrl?](./geocoder.baseprovideroptions.searchurl.md) |  | string | <i>(Optional)</i> |
 

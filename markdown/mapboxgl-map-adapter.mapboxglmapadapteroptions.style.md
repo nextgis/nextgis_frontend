@@ -4,6 +4,11 @@
 
 ## MapboxglMapAdapterOptions.style property
 
+> Warning: This API is now obsolete.
+> 
+> use mapAdapterOptions.style instead
+> 
+
 <b>Signature:</b>
 
 ```typescript

@@ -12,12 +12,12 @@ export interface Permission
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [action](./ngw-connector.permission.action.md) | string |  |
-|  [identity](./ngw-connector.permission.identity.md) | string |  |
-|  [permission](./ngw-connector.permission.permission.md) | string |  |
-|  [principal](./ngw-connector.permission.principal.md) | { id: number; } |  |
-|  [propagate](./ngw-connector.permission.propagate.md) | boolean |  |
-|  [scope](./ngw-connector.permission.scope.md) | string |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [action](./ngw-connector.permission.action.md) |  | string |  |
+|  [identity](./ngw-connector.permission.identity.md) |  | string |  |
+|  [permission](./ngw-connector.permission.permission.md) |  | string |  |
+|  [principal](./ngw-connector.permission.principal.md) |  | { id: number; } |  |
+|  [propagate](./ngw-connector.permission.propagate.md) |  | boolean |  |
+|  [scope](./ngw-connector.permission.scope.md) |  | string |  |
 

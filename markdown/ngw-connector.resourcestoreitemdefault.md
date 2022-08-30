@@ -12,8 +12,8 @@ export interface ResourceStoreItemDefault
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [id](./ngw-connector.resourcestoreitemdefault.id.md) | number |  |
-|  [label](./ngw-connector.resourcestoreitemdefault.label.md) | string |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [id](./ngw-connector.resourcestoreitemdefault.id.md) |  | number |  |
+|  [label](./ngw-connector.resourcestoreitemdefault.label.md) |  | string |  |
 

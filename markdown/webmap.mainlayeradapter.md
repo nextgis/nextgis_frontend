@@ -12,14 +12,14 @@ export interface MainLayerAdapter<M = any, L = any, O extends AdapterOptions = A
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [id?](./webmap.mainlayeradapter.id.md) | string | <i>(Optional)</i> |
-|  [layer?](./webmap.mainlayeradapter.layer.md) | L | <i>(Optional)</i> |
-|  [map?](./webmap.mainlayeradapter.map.md) | M | <i>(Optional)</i> |
-|  [name?](./webmap.mainlayeradapter.name.md) | string | <i>(Optional)</i> |
-|  [options](./webmap.mainlayeradapter.options.md) | O |  |
-|  [order?](./webmap.mainlayeradapter.order.md) | number | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [id?](./webmap.mainlayeradapter.id.md) |  | string | <i>(Optional)</i> |
+|  [layer?](./webmap.mainlayeradapter.layer.md) |  | L | <i>(Optional)</i> |
+|  [map?](./webmap.mainlayeradapter.map.md) |  | M | <i>(Optional)</i> |
+|  [name?](./webmap.mainlayeradapter.name.md) |  | string | <i>(Optional)</i> |
+|  [options](./webmap.mainlayeradapter.options.md) |  | O |  |
+|  [order?](./webmap.mainlayeradapter.order.md) |  | number | <i>(Optional)</i> |
 
 ## Methods
 

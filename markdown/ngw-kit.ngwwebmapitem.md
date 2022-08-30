@@ -9,7 +9,7 @@
 ```typescript
 export declare class NgwWebmapItem extends Item<ItemOptions> 
 ```
-<b>Extends:</b> [Item](./item.item.md)<!-- -->&lt;[ItemOptions](./item.itemoptions.md)<!-- -->&gt;
+<b>Extends:</b> [Item](./item.item.md)<!-- -->&lt;[ItemOptions](./item.itemoptions.md)
 
 ## Constructors
 
@@ -21,9 +21,9 @@ export declare class NgwWebmapItem extends Item<ItemOptions>
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [\_rootDescendantsCount](./ngw-kit.ngwwebmapitem._rootdescendantscount.md) |  | number |  |
+|  [\_rootDescendantsCount](./ngw-kit.ngwwebmapitem._rootdescendantscount.md) | <code>protected</code> | number |  |
 |  [connector?](./ngw-kit.ngwwebmapitem.connector.md) |  | NgwConnector | <i>(Optional)</i> |
-|  [emitter](./ngw-kit.ngwwebmapitem.emitter.md) |  | EventEmitter |  |
+|  [emitter](./ngw-kit.ngwwebmapitem.emitter.md) | <code>readonly</code> | EventEmitter |  |
 |  [GetAdapterFromLayerType](./ngw-kit.ngwwebmapitem.getadapterfromlayertype.md) | <code>static</code> | { \[layerType: string\]: (item: [TreeItem](./ngw-kit.treeitem.md)<!-- -->, options: any, webMap: [WebMap](./webmap.webmap.md)<!-- -->, connector?: NgwConnector) =&gt; [LayerAdapterDefinition](./webmap.layeradapterdefinition.md)<!-- -->; } |  |
 |  [item](./ngw-kit.ngwwebmapitem.item.md) |  | [TreeGroup](./ngw-kit.treegroup.md) \| [TreeLayer](./ngw-kit.treelayer.md) |  |
 |  [layer?](./ngw-kit.ngwwebmapitem.layer.md) |  | [LayerAdapter](./webmap.layeradapter.md) | <i>(Optional)</i> |
@@ -37,8 +37,8 @@ export declare class NgwWebmapItem extends Item<ItemOptions>
 |  [bringToFront()](./ngw-kit.ngwwebmapitem.bringtofront.md) |  |  |
 |  [create(webMap, item, options, connector, parent)](./ngw-kit.ngwwebmapitem.create.md) | <code>static</code> |  |
 |  [fit()](./ngw-kit.ngwwebmapitem.fit.md) |  |  |
-|  [getChildren(item)](./ngw-kit.ngwwebmapitem.getchildren.md) |  |  |
-|  [getItemOptions(item)](./ngw-kit.ngwwebmapitem.getitemoptions.md) |  |  |
+|  [getChildren(item)](./ngw-kit.ngwwebmapitem.getchildren.md) | <code>protected</code> |  |
+|  [getItemOptions(item)](./ngw-kit.ngwwebmapitem.getitemoptions.md) | <code>protected</code> |  |
 |  [getLayer()](./ngw-kit.ngwwebmapitem.getlayer.md) |  |  |
 |  [initItem(item)](./ngw-kit.ngwwebmapitem.inititem.md) |  |  |
 

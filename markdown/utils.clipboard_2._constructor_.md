@@ -16,5 +16,5 @@ constructor(text?: string);
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  text | string |  |
+|  text | string | <i>(Optional)</i> |
 

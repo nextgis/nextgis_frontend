@@ -14,7 +14,7 @@ updateTooltip?(layerDef?: LayerDefinition<F, L>): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  layerDef | [LayerDefinition](./webmap.layerdefinition.md)<!-- -->&lt;F, L&gt; |  |
+|  layerDef | [LayerDefinition](./webmap.layerdefinition.md)<!-- -->&lt;F, L&gt; | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

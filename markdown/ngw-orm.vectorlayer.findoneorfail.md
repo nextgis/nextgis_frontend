@@ -17,8 +17,8 @@ static findOneOrFail<T extends VectorLayer>(this: ObjectType<T>, optionsOrCondit
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  this | ObjectType&lt;T&gt; |  |
-|  optionsOrConditions | number \| FindOneOptions&lt;T&gt; \| FindConditions&lt;T&gt; |  |
-|  maybeOptions | FindOneOptions&lt;T&gt; |  |
+|  optionsOrConditions | number \| FindOneOptions&lt;T&gt; \| FindConditions&lt;T&gt; | <i>(Optional)</i> |
+|  maybeOptions | FindOneOptions&lt;T&gt; | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

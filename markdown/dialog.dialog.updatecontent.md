@@ -14,7 +14,7 @@ updateContent(content?: string | Node): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  content | string \| Node |  |
+|  content | string \| Node | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

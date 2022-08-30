@@ -1,8 +1,8 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.18.19",
-    "schemaVersion": 1004,
+    "toolVersion": "7.28.6",
+    "schemaVersion": 1009,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
       "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
@@ -156,18 +156,21 @@
         "@betaDocumentation": true,
         "@internalRemarks": true,
         "@preapproved": true
-      }
+      },
+      "reportUnsupportedHtmlElements": false
     }
   },
   "kind": "Package",
   "canonicalReference": "@nextgis/tree!",
   "docComment": "",
   "name": "@nextgis/tree",
+  "preserveMemberOrder": false,
   "members": [
     {
       "kind": "EntryPoint",
       "canonicalReference": "@nextgis/tree!",
       "name": "",
+      "preserveMemberOrder": false,
       "members": [
         {
           "kind": "Class",
@@ -202,6 +205,7 @@
             }
           ],
           "name": "Tree",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "Property",
@@ -226,6 +230,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "_parent",
@@ -233,7 +238,8 @@
                 "startIndex": 1,
                 "endIndex": 3
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": true
             },
             {
               "kind": "Constructor",
@@ -268,6 +274,7 @@
                 }
               ],
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -275,14 +282,16 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": true
                 },
                 {
                   "parameterName": "options",
                   "parameterTypeTokenRange": {
                     "startIndex": 3,
                     "endIndex": 5
-                  }
+                  },
+                  "isOptional": true
                 }
               ]
             },
@@ -312,13 +321,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 4
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -326,9 +335,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 }
               ],
+              "isOptional": false,
               "name": "addChild"
             },
             {
@@ -354,6 +365,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "children",
@@ -361,7 +373,8 @@
                 "startIndex": 1,
                 "endIndex": 3
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Method",
@@ -399,13 +412,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 5,
                 "endIndex": 6
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -413,9 +426,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 4
-                  }
+                  },
+                  "isOptional": true
                 }
               ],
+              "isOptional": false,
               "name": "every"
             },
             {
@@ -463,13 +478,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 6,
                 "endIndex": 8
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -477,9 +492,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 5
-                  }
+                  },
+                  "isOptional": true
                 }
               ],
+              "isOptional": false,
               "name": "filter"
             },
             {
@@ -523,13 +540,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 6,
                 "endIndex": 7
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -537,9 +554,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 5
-                  }
+                  },
+                  "isOptional": true
                 }
               ],
+              "isOptional": false,
               "name": "find"
             },
             {
@@ -565,15 +584,16 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [],
+              "isOptional": false,
               "name": "getParents"
             },
             {
@@ -595,6 +615,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "item",
@@ -602,7 +623,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Property",
@@ -623,6 +645,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "relation",
@@ -630,7 +653,8 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false
+              "isStatic": false,
+              "isProtected": false
             },
             {
               "kind": "Method",
@@ -668,13 +692,13 @@
                   "text": ";"
                 }
               ],
-              "isOptional": false,
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 5,
                 "endIndex": 6
               },
               "releaseTag": "Public",
+              "isProtected": false,
               "overloadIndex": 1,
               "parameters": [
                 {
@@ -682,9 +706,11 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 4
-                  }
+                  },
+                  "isOptional": true
                 }
               ],
+              "isOptional": false,
               "name": "some"
             }
           ],
@@ -798,28 +824,32 @@
               "parameterTypeTokenRange": {
                 "startIndex": 6,
                 "endIndex": 7
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "filter",
               "parameterTypeTokenRange": {
                 "startIndex": 8,
                 "endIndex": 12
-              }
+              },
+              "isOptional": true
             },
             {
               "parameterName": "relation",
               "parameterTypeTokenRange": {
                 "startIndex": 13,
                 "endIndex": 15
-              }
+              },
+              "isOptional": true
             },
             {
               "parameterName": "itemPrepare",
               "parameterTypeTokenRange": {
                 "startIndex": 16,
                 "endIndex": 18
-              }
+              },
+              "isOptional": true
             }
           ],
           "typeParameters": [
@@ -827,7 +857,7 @@
               "typeParameterName": "F",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -945,28 +975,32 @@
               "parameterTypeTokenRange": {
                 "startIndex": 6,
                 "endIndex": 7
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "filter",
               "parameterTypeTokenRange": {
                 "startIndex": 8,
                 "endIndex": 12
-              }
+              },
+              "isOptional": true
             },
             {
               "parameterName": "relation",
               "parameterTypeTokenRange": {
                 "startIndex": 13,
                 "endIndex": 15
-              }
+              },
+              "isOptional": true
             },
             {
               "parameterName": "itemPrepare",
               "parameterTypeTokenRange": {
                 "startIndex": 16,
                 "endIndex": 18
-              }
+              },
+              "isOptional": true
             }
           ],
           "typeParameters": [
@@ -974,7 +1008,7 @@
               "typeParameterName": "F",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -1092,28 +1126,32 @@
               "parameterTypeTokenRange": {
                 "startIndex": 6,
                 "endIndex": 7
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "filter",
               "parameterTypeTokenRange": {
                 "startIndex": 8,
                 "endIndex": 12
-              }
+              },
+              "isOptional": true
             },
             {
               "parameterName": "relation",
               "parameterTypeTokenRange": {
                 "startIndex": 13,
                 "endIndex": 15
-              }
+              },
+              "isOptional": true
             },
             {
               "parameterName": "itemPrepare",
               "parameterTypeTokenRange": {
                 "startIndex": 16,
                 "endIndex": 18
-              }
+              },
+              "isOptional": true
             }
           ],
           "typeParameters": [
@@ -1121,7 +1159,7 @@
               "typeParameterName": "F",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -1239,28 +1277,32 @@
               "parameterTypeTokenRange": {
                 "startIndex": 6,
                 "endIndex": 7
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "filter",
               "parameterTypeTokenRange": {
                 "startIndex": 8,
                 "endIndex": 12
-              }
+              },
+              "isOptional": true
             },
             {
               "parameterName": "relation",
               "parameterTypeTokenRange": {
                 "startIndex": 13,
                 "endIndex": 15
-              }
+              },
+              "isOptional": true
             },
             {
               "parameterName": "itemPrepare",
               "parameterTypeTokenRange": {
                 "startIndex": 16,
                 "endIndex": 18
-              }
+              },
+              "isOptional": true
             }
           ],
           "typeParameters": [
@@ -1268,7 +1310,7 @@
               "typeParameterName": "F",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,

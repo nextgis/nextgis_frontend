@@ -12,11 +12,11 @@ export interface WmsClientLayer
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [connection](./ngw-connector.wmsclientlayer.connection.md) | { id: number; } | WMS connection. |
-|  [imgformat](./ngw-connector.wmsclientlayer.imgformat.md) | string | Image format. Available values can fetched from WMS connection ('image/png'). |
-|  [srs](./ngw-connector.wmsclientlayer.srs.md) | { id: number; } |  |
-|  [vendor\_params](./ngw-connector.wmsclientlayer.vendor_params.md) | Record&lt;string, string&gt; | Additional parameters added to each request. This is key and value list. |
-|  [wmslayers](./ngw-connector.wmsclientlayer.wmslayers.md) | string | String with layer identifiers separated with comma. Available layers can fetched from WMS connection. |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [connection](./ngw-connector.wmsclientlayer.connection.md) |  | { id: number; } | WMS connection. |
+|  [imgformat](./ngw-connector.wmsclientlayer.imgformat.md) |  | string | Image format. Available values can fetched from WMS connection ('image/png'). |
+|  [srs](./ngw-connector.wmsclientlayer.srs.md) |  | { id: number; } |  |
+|  [vendor\_params](./ngw-connector.wmsclientlayer.vendor_params.md) |  | Record&lt;string, string&gt; | Additional parameters added to each request. This is key and value list. |
+|  [wmslayers](./ngw-connector.wmsclientlayer.wmslayers.md) |  | string | String with layer identifiers separated with comma. Available layers can fetched from WMS connection. |
 

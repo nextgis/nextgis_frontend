@@ -12,7 +12,7 @@ export interface QmsOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [url](./qms-kit.qmsoptions.url.md) | string |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [url](./qms-kit.qmsoptions.url.md) |  | string |  |
 

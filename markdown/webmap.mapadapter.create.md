@@ -14,7 +14,7 @@ create(options?: MapOptions): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | [MapOptions](./webmap.mapoptions.md) |  |
+|  options | [MapOptions](./webmap.mapoptions.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

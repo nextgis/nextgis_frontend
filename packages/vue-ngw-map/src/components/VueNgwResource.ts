@@ -53,7 +53,10 @@ export class VueNgwResource extends Vue {
   }
 
   async mounted(): Promise<void> {
-    this.parentContainer = findNgwMapParent(this.$parent);
+    const parent = this.$parent;
+    if (parent) {
+      this.parentContainer = findNgwMapParent(parent);
+    }
 
     await this.setResourceId(this.$props.resourceId);
 

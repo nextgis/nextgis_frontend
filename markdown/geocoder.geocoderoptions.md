@@ -12,7 +12,7 @@ export interface GeocoderOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [providers](./geocoder.geocoderoptions.providers.md) | [BaseProvider](./geocoder.baseprovider.md)<!-- -->\[\] |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [providers](./geocoder.geocoderoptions.providers.md) |  | [BaseProvider](./geocoder.baseprovider.md)<!-- -->\[\] |  |
 
