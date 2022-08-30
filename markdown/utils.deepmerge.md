@@ -16,7 +16,7 @@ export declare function deepmerge<T>(x: Partial<T>, y: Partial<T>, mergeArray?: 
 |  --- | --- | --- |
 |  x | Partial&lt;T&gt; |  |
 |  y | Partial&lt;T&gt; |  |
-|  mergeArray | boolean |  |
+|  mergeArray | boolean | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

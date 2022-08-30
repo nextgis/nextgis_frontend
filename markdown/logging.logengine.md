@@ -12,13 +12,13 @@ export interface LogEngine<D = unknown>
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [critical](./logging.logengine.critical.md) | ShortcutLogFunc&lt;D&gt; |  |
-|  [debug](./logging.logengine.debug.md) | ShortcutLogFunc&lt;D&gt; |  |
-|  [enabled](./logging.logengine.enabled.md) | boolean |  |
-|  [error](./logging.logengine.error.md) | ShortcutLogFunc&lt;D&gt; |  |
-|  [info](./logging.logengine.info.md) | ShortcutLogFunc&lt;D&gt; |  |
-|  [log](./logging.logengine.log.md) | LogFunc&lt;D&gt; |  |
-|  [warning](./logging.logengine.warning.md) | ShortcutLogFunc&lt;D&gt; |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [critical](./logging.logengine.critical.md) |  | ShortcutLogFunc&lt;D&gt; |  |
+|  [debug](./logging.logengine.debug.md) |  | ShortcutLogFunc&lt;D&gt; |  |
+|  [enabled](./logging.logengine.enabled.md) |  | boolean |  |
+|  [error](./logging.logengine.error.md) |  | ShortcutLogFunc&lt;D&gt; |  |
+|  [info](./logging.logengine.info.md) |  | ShortcutLogFunc&lt;D&gt; |  |
+|  [log](./logging.logengine.log.md) |  | LogFunc&lt;D&gt; |  |
+|  [warning](./logging.logengine.warning.md) |  | ShortcutLogFunc&lt;D&gt; |  |
 

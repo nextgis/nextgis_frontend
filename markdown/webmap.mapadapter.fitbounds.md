@@ -15,7 +15,7 @@ fitBounds(extent: LngLatBoundsArray, options?: FitOptions): void;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  extent | [LngLatBoundsArray](./utils.lnglatboundsarray.md) |  |
-|  options | [FitOptions](./webmap.fitoptions.md) |  |
+|  options | [FitOptions](./webmap.fitoptions.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

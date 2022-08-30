@@ -13,21 +13,21 @@ export interface MapOptions<M = any, C = any> extends ViewOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [controls?](./webmap.mapoptions.controls.md) | Array&lt;keyof [MapControls](./webmap.mapcontrols.md) \| C&gt; | <i>(Optional)</i> List of controls that will be initialized when creating a map instance. It can be defined as a string, then points to the corresponding entry in the \[controlAdapters\](webmap-api\#MapAdapter). |
-|  [controlsOptions?](./webmap.mapoptions.controlsoptions.md) | [ControlsOptions](./webmap.controlsoptions.md) | <i>(Optional)</i> Set options for those controls that are specified by name. |
-|  [create?](./webmap.mapoptions.create.md) | boolean | <i>(Optional)</i> Аutomatic creation of a map from the constructor |
-|  [fitOptions?](./webmap.mapoptions.fitoptions.md) | [FitOptions](./webmap.fitoptions.md) | <i>(Optional)</i> options to specify the initial position of the map |
-|  [map?](./webmap.mapoptions.map.md) | M | <i>(Optional)</i> A pre-initialized instance of the map |
-|  [mapAdapter?](./webmap.mapoptions.mapadapter.md) | [MapAdapter](./webmap.mapadapter.md)<!-- -->&lt;M&gt; | <i>(Optional)</i> The main initialization property of WebMap. Determines the way of interaction with the selected GIS framework. Available: \[Leaflet\](leaflet-map-adapter); \[Openlayers\](ol-map-adapter); \[MapboxGL\](mapboxgl-map-adapter) |
-|  [mapAdapterOptions?](./webmap.mapoptions.mapadapteroptions.md) | Record&lt;string, any&gt; | <i>(Optional)</i> special settings for the selected map adapter |
-|  [onBeforeAddLayer?](./webmap.mapoptions.onbeforeaddlayer.md) | [OnBeforeLayerAdd](./webmap.onbeforelayeradd.md) | <i>(Optional)</i> The callback function is calling before adding each layer |
-|  [paint?](./webmap.mapoptions.paint.md) | [GeometryPaint](./paint.geometrypaint.md) | <i>(Optional)</i> |
-|  [runtimeParams?](./webmap.mapoptions.runtimeparams.md) | [RuntimeParams](./webmap.runtimeparams.md)<!-- -->\[\] | <i>(Optional)</i> A way to save the state of a map to external services |
-|  [selectedPaint?](./webmap.mapoptions.selectedpaint.md) | [GeometryPaint](./paint.geometrypaint.md) | <i>(Optional)</i> |
-|  [starterKits?](./webmap.mapoptions.starterkits.md) | [StarterKit](./webmap.starterkit.md)<!-- -->\[\] | <i>(Optional)</i> One way to extend WebMap functionality with the help of kits. |
-|  [target?](./webmap.mapoptions.target.md) | string \| HTMLElement | <i>(Optional)</i> The HTML element in which NgwMap will render the map, or the element's string id. The specified element must have no children. |
-|  [tileJson?](./webmap.mapoptions.tilejson.md) | [TileJson](./utils.tilejson.md) | <i>(Optional)</i> |
-|  [view?](./webmap.mapoptions.view.md) | '2D' \| '3D' \| '2.5D' | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [controls?](./webmap.mapoptions.controls.md) |  | Array&lt;keyof [MapControls](./webmap.mapcontrols.md) \| C&gt; | <i>(Optional)</i> List of controls that will be initialized when creating a map instance. It can be defined as a string, then points to the corresponding entry in the \[controlAdapters\](webmap-api\#MapAdapter). |
+|  [controlsOptions?](./webmap.mapoptions.controlsoptions.md) |  | [ControlsOptions](./webmap.controlsoptions.md) | <i>(Optional)</i> Set options for those controls that are specified by name. |
+|  [create?](./webmap.mapoptions.create.md) |  | boolean | <i>(Optional)</i> Аutomatic creation of a map from the constructor |
+|  [fitOptions?](./webmap.mapoptions.fitoptions.md) |  | [FitOptions](./webmap.fitoptions.md) | <i>(Optional)</i> options to specify the initial position of the map |
+|  [map?](./webmap.mapoptions.map.md) |  | M | <i>(Optional)</i> A pre-initialized instance of the map |
+|  [mapAdapter?](./webmap.mapoptions.mapadapter.md) |  | [MapAdapter](./webmap.mapadapter.md)<!-- -->&lt;M&gt; | <i>(Optional)</i> The main initialization property of WebMap. Determines the way of interaction with the selected GIS framework. Available: \[Leaflet\](leaflet-map-adapter); \[Openlayers\](ol-map-adapter); \[MapboxGL\](mapboxgl-map-adapter) |
+|  [mapAdapterOptions?](./webmap.mapoptions.mapadapteroptions.md) |  | Record&lt;string, any&gt; | <i>(Optional)</i> special settings for the selected map adapter |
+|  [onBeforeAddLayer?](./webmap.mapoptions.onbeforeaddlayer.md) |  | [OnBeforeLayerAdd](./webmap.onbeforelayeradd.md) | <i>(Optional)</i> The callback function is calling before adding each layer |
+|  [paint?](./webmap.mapoptions.paint.md) |  | [GeometryPaint](./paint.geometrypaint.md) | <i>(Optional)</i> |
+|  [runtimeParams?](./webmap.mapoptions.runtimeparams.md) |  | [RuntimeParams](./webmap.runtimeparams.md)<!-- -->\[\] | <i>(Optional)</i> A way to save the state of a map to external services |
+|  [selectedPaint?](./webmap.mapoptions.selectedpaint.md) |  | [GeometryPaint](./paint.geometrypaint.md) | <i>(Optional)</i> |
+|  [starterKits?](./webmap.mapoptions.starterkits.md) |  | [StarterKit](./webmap.starterkit.md)<!-- -->\[\] | <i>(Optional)</i> One way to extend WebMap functionality with the help of kits. |
+|  [target?](./webmap.mapoptions.target.md) |  | string \| HTMLElement | <i>(Optional)</i> The HTML element in which NgwMap will render the map, or the element's string id. The specified element must have no children. |
+|  [tileJson?](./webmap.mapoptions.tilejson.md) |  | [TileJson](./utils.tilejson.md) | <i>(Optional)</i> |
+|  [view?](./webmap.mapoptions.view.md) |  | '2D' \| '3D' \| '2.5D' | <i>(Optional)</i> |
 

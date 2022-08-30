@@ -12,7 +12,7 @@ export interface ConsoleEngineOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [enabled?](./logging.consoleengineoptions.enabled.md) | boolean | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [enabled?](./logging.consoleengineoptions.enabled.md) |  | boolean | <i>(Optional)</i> |
 

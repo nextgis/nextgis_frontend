@@ -12,10 +12,10 @@ export interface ControlContainerOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [addClass?](./control-container.controlcontaineroptions.addclass.md) | string | <i>(Optional)</i> |
-|  [classPrefix?](./control-container.controlcontaineroptions.classprefix.md) | string | <i>(Optional)</i> |
-|  [map?](./control-container.controlcontaineroptions.map.md) | [MapAdapter](./webmap.mapadapter.md) | <i>(Optional)</i> |
-|  [target?](./control-container.controlcontaineroptions.target.md) | string | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [addClass?](./control-container.controlcontaineroptions.addclass.md) |  | string | <i>(Optional)</i> |
+|  [classPrefix?](./control-container.controlcontaineroptions.classprefix.md) |  | string | <i>(Optional)</i> |
+|  [map?](./control-container.controlcontaineroptions.map.md) |  | [MapAdapter](./webmap.mapadapter.md) | <i>(Optional)</i> |
+|  [target?](./control-container.controlcontaineroptions.target.md) |  | string | <i>(Optional)</i> |
 

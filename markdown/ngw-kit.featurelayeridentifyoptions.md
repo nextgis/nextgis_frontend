@@ -13,9 +13,9 @@ export interface FeatureLayerIdentifyOptions extends NgwRequestOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [connector](./ngw-kit.featurelayeridentifyoptions.connector.md) | NgwConnector |  |
-|  [geom](./ngw-kit.featurelayeridentifyoptions.geom.md) | Feature&lt;Polygon&gt; \| Polygon \| Position\[\] |  |
-|  [layers](./ngw-kit.featurelayeridentifyoptions.layers.md) | number\[\] |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [connector](./ngw-kit.featurelayeridentifyoptions.connector.md) |  | NgwConnector |  |
+|  [geom](./ngw-kit.featurelayeridentifyoptions.geom.md) |  | Feature&lt;Polygon&gt; \| Polygon \| Position\[\] |  |
+|  [layers](./ngw-kit.featurelayeridentifyoptions.layers.md) |  | number\[\] |  |
 

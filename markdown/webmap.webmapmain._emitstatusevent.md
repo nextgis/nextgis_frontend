@@ -15,7 +15,7 @@ protected _emitStatusEvent(eventName: keyof E, data?: EmitStatusEventData): void
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  eventName | keyof E |  |
-|  data | EmitStatusEventData |  |
+|  data | EmitStatusEventData | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

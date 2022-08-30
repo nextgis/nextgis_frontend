@@ -12,7 +12,7 @@ export interface FileUploadResp
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [upload\_meta](./ngw-connector.fileuploadresp.upload_meta.md) | [FileMeta](./ngw-connector.filemeta.md)<!-- -->\[\] |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [upload\_meta](./ngw-connector.fileuploadresp.upload_meta.md) |  | [FileMeta](./ngw-connector.filemeta.md)<!-- -->\[\] |  |
 

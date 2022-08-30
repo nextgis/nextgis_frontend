@@ -12,7 +12,7 @@ export interface LookupTableResource
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [items](./ngw-connector.lookuptableresource.items.md) | Record&lt;string, string&gt; |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [items](./ngw-connector.lookuptableresource.items.md) |  | Record&lt;string, string&gt; |  |
 

@@ -14,7 +14,7 @@ onAdd(map?: M): HTMLElement | undefined;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  map | M |  |
+|  map | M | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

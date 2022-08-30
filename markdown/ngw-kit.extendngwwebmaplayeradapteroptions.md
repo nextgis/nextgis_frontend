@@ -12,9 +12,9 @@ export interface ExtendNgwWebmapLayerAdapterOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [baseUrl?](./ngw-kit.extendngwwebmaplayeradapteroptions.baseurl.md) | string | <i>(Optional)</i> |
-|  [connector](./ngw-kit.extendngwwebmaplayeradapteroptions.connector.md) | NgwConnector |  |
-|  [webMap](./ngw-kit.extendngwwebmaplayeradapteroptions.webmap.md) | [WebMap](./webmap.webmap.md) |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [baseUrl?](./ngw-kit.extendngwwebmaplayeradapteroptions.baseurl.md) |  | string | <i>(Optional)</i> |
+|  [connector](./ngw-kit.extendngwwebmaplayeradapteroptions.connector.md) |  | NgwConnector |  |
+|  [webMap](./ngw-kit.extendngwwebmaplayeradapteroptions.webmap.md) |  | [WebMap](./webmap.webmap.md) |  |
 

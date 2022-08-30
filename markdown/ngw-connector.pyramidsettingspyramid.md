@@ -12,11 +12,11 @@ export interface PyramidSettingsPyramid
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [company\_logo?](./ngw-connector.pyramidsettingspyramid.company_logo.md) | [PyramidSettingsPyramidCompanyLogo](./ngw-connector.pyramidsettingspyramidcompanylogo.md) | <i>(Optional)</i> |
-|  [degree\_format](./ngw-connector.pyramidsettingspyramid.degree_format.md) | 'dd' |  |
-|  [measurement\_srid](./ngw-connector.pyramidsettingspyramid.measurement_srid.md) | 4326 |  |
-|  [support\_url?](./ngw-connector.pyramidsettingspyramid.support_url.md) | string | <i>(Optional)</i> |
-|  [units](./ngw-connector.pyramidsettingspyramid.units.md) | 'metric' |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [company\_logo?](./ngw-connector.pyramidsettingspyramid.company_logo.md) |  | [PyramidSettingsPyramidCompanyLogo](./ngw-connector.pyramidsettingspyramidcompanylogo.md) | <i>(Optional)</i> |
+|  [degree\_format](./ngw-connector.pyramidsettingspyramid.degree_format.md) |  | 'dd' |  |
+|  [measurement\_srid](./ngw-connector.pyramidsettingspyramid.measurement_srid.md) |  | 4326 |  |
+|  [support\_url?](./ngw-connector.pyramidsettingspyramid.support_url.md) |  | string | <i>(Optional)</i> |
+|  [units](./ngw-connector.pyramidsettingspyramid.units.md) |  | 'metric' |  |
 

@@ -7,9 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function ReactNgwMapbox<Props extends MapContainerProps = MapContainerProps<Map>>(props: Props): import("react").FunctionComponentElement<Props & {
-    mapAdapter: MapAdapter;
-}>;
+export declare function ReactNgwMapbox<Props extends MapContainerProps = MapContainerProps<Map>>(props: Props): import("react").FunctionComponentElement<import("@nextgis/react-ngw-map").ReactNgwMapProps>;
 ```
 
 ## Parameters
@@ -20,5 +18,5 @@ export declare function ReactNgwMapbox<Props extends MapContainerProps = MapCont
 
 <b>Returns:</b>
 
-import("react").FunctionComponentElement&lt;Props &amp; { mapAdapter: MapAdapter; }&gt;
+import("react").FunctionComponentElement&lt;import("@nextgis/react-ngw-map").[ReactNgwMapProps](./react-ngw-map.reactngwmapprops.md)<!-- -->&gt;
 

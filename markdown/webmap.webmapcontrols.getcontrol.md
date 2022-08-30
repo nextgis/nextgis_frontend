@@ -17,7 +17,7 @@ getControl<K extends keyof MapControls>(control: K, options?: MapControls[K]): C
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  control | K | Any registered control string name |
-|  options | [MapControls](./webmap.mapcontrols.md)<!-- -->\[K\] | Custom control options |
+|  options | [MapControls](./webmap.mapcontrols.md)<!-- -->\[K\] | <i>(Optional)</i> Custom control options |
 
 <b>Returns:</b>
 

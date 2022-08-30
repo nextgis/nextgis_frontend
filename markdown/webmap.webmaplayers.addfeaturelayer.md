@@ -16,7 +16,7 @@ addFeatureLayer<P extends FeatureProperties = FeatureProperties, G extends Geome
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | O |  |
+|  options | O | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

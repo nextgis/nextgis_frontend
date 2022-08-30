@@ -12,7 +12,7 @@ export interface NgwExtent
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [extent](./ngw-connector.ngwextent.extent.md) | { minLon: number; minLat: number; maxLon: number; maxLat: number; } |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [extent](./ngw-connector.ngwextent.extent.md) |  | { minLon: number; minLat: number; maxLon: number; maxLat: number; } |  |
 

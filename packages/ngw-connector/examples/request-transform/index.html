@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Request transform example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <script src="../../lib/ngw-connector.global.js"></script>
+  </head>
+
+  <body>
+    <p>Requests log:</p>
+    <div id="log">loading...</div>
+
+    <script>
+      const logElement = document.getElementById('log');
+
+      const appendResponse = function (toElement, url, resp) {
+        const pre = toElement.appendChild(document.createElement('pre'));
+        pre.innerHTML = `${url}<br>${JSON.stringify(resp, null, 2)}<br>`;
+      };
+      const connector = new NgwConnector({
+        baseUrl: 'https://demo.nextgis.com',
+        auth: {
+          login: 'ngf_test',
+          password: 'ngf_test',
+        },
+        requestTransform: (url, options, request) => {
+          appendResponse(logElement, url, options);
+          return [url, options];
+        },
+      });
+      connector.getResource(4226);
+      connector.getResource(4224);
+    </script>
+  </body>
+</html>

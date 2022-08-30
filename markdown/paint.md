@@ -9,6 +9,7 @@
 |  Function | Description |
 |  --- | --- |
 |  [createExpressionCallback(paint)](./paint.createexpressioncallback.md) |  |
+|  [expressionCallback(paint, defaultPaint, getPaintFunctions)](./paint.expressioncallback.md) |  |
 |  [isBasePaint(paint)](./paint.isbasepaint.md) |  |
 |  [isExpression(value)](./paint.isexpression.md) |  |
 |  [isIcon(paint)](./paint.isicon.md) |  |
@@ -21,13 +22,17 @@
 
 |  Interface | Description |
 |  --- | --- |
+|  [Base3DPaint](./paint.base3dpaint.md) |  |
 |  [BasePaint](./paint.basepaint.md) |  |
 |  [CirclePaint](./paint.circlepaint.md) |  |
+|  [Ellipsoid3DPaint](./paint.ellipsoid3dpaint.md) |  |
 |  [GetCustomPaintOptions](./paint.getcustompaintoptions.md) |  |
+|  [GetPaint3DCallback](./paint.getpaint3dcallback.md) |  |
 |  [GetPaintCallback](./paint.getpaintcallback.md) |  |
 |  [IconPaint](./paint.iconpaint.md) |  |
 |  [PathPaint](./paint.pathpaint.md) |  |
 |  [PinPaint](./paint.pinpaint.md) |  |
+|  [Sphere3DPaint](./paint.sphere3dpaint.md) |  |
 
 ## Type Aliases
 
@@ -39,8 +44,13 @@
 |  [GetPaintFunction](./paint.getpaintfunction.md) |  |
 |  [IconOptions](./paint.iconoptions.md) |  |
 |  [Paint](./paint.paint.md) |  |
+|  [Paint3D](./paint.paint3d.md) |  |
+|  [Paint3DType](./paint.paint3dtype.md) |  |
 |  [PaintType](./paint.painttype.md) |  |
 |  [PropertiesPaint](./paint.propertiespaint.md) |  |
+|  [PropertiesPaint3D](./paint.propertiespaint3d.md) |  |
 |  [PropertyPaint](./paint.propertypaint.md) |  |
+|  [PropertyPaint3D](./paint.propertypaint3d.md) |  |
 |  [VectorAdapterLayerPaint](./paint.vectoradapterlayerpaint.md) |  |
+|  [VectorAdapterLayerPaint3D](./paint.vectoradapterlayerpaint3d.md) |  |
 

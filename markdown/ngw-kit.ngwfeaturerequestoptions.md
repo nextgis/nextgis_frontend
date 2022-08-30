@@ -9,13 +9,13 @@
 ```typescript
 export interface NgwFeatureRequestOptions<P extends FeatureProperties = FeatureProperties> extends FilterOptions<P> 
 ```
-<b>Extends:</b> [FilterOptions](./webmap.filteroptions.md)<!-- -->&lt;P&gt;
+<b>Extends:</b> [FilterOptions](./webmap.filteroptions.md)
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [extensions?](./ngw-kit.ngwfeaturerequestoptions.extensions.md) | Extensions\[\] \| string\[\] \| null \| false | <i>(Optional)</i> |
-|  [geom?](./ngw-kit.ngwfeaturerequestoptions.geom.md) | boolean | <i>(Optional)</i> |
-|  [srs?](./ngw-kit.ngwfeaturerequestoptions.srs.md) | number | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [extensions?](./ngw-kit.ngwfeaturerequestoptions.extensions.md) |  | Extensions\[\] \| string\[\] \| null \| false | <i>(Optional)</i> |
+|  [geom?](./ngw-kit.ngwfeaturerequestoptions.geom.md) |  | boolean | <i>(Optional)</i> |
+|  [srs?](./ngw-kit.ngwfeaturerequestoptions.srs.md) |  | number | <i>(Optional)</i> |
 

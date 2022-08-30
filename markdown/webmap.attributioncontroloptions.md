@@ -12,8 +12,8 @@ export interface AttributionControlOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [compact?](./webmap.attributioncontroloptions.compact.md) | boolean | <i>(Optional)</i> If true force a compact attribution that shows the full attribution on mouse hover, or if false force the full attribution control. |
-|  [customAttribution?](./webmap.attributioncontroloptions.customattribution.md) | string \| string\[\] | <i>(Optional)</i> String or strings to show in addition to any other attributions. |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [compact?](./webmap.attributioncontroloptions.compact.md) |  | boolean | <i>(Optional)</i> If true force a compact attribution that shows the full attribution on mouse hover, or if false force the full attribution control. |
+|  [customAttribution?](./webmap.attributioncontroloptions.customattribution.md) |  | string \| string\[\] | <i>(Optional)</i> String or strings to show in addition to any other attributions. |
 

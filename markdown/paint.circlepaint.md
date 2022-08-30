@@ -13,8 +13,8 @@ export interface CirclePaint extends BasePaint
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [radius?](./paint.circlepaint.radius.md) | number \| [Expression](./paint.expression.md) | <i>(Optional)</i> |
-|  [type?](./paint.circlepaint.type.md) | 'circle' | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [radius?](./paint.circlepaint.radius.md) |  | number \| [Expression](./paint.expression.md) | <i>(Optional)</i> |
+|  [type?](./paint.circlepaint.type.md) |  | 'circle' | <i>(Optional)</i> |
 

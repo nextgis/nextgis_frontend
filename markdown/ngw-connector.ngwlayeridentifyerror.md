@@ -12,7 +12,7 @@ export interface NgwLayerIdentifyError
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [error](./ngw-connector.ngwlayeridentifyerror.error.md) | 'Not implemented' |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [error](./ngw-connector.ngwlayeridentifyerror.error.md) |  | 'Not implemented' |  |
 

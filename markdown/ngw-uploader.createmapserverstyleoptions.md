@@ -13,8 +13,8 @@ export interface CreateMapserverStyleOptions extends ResourceCreateOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [geometryType](./ngw-uploader.createmapserverstyleoptions.geometrytype.md) | [GeometryType](./ngw-connector.geometrytype.md) |  |
-|  [paint?](./ngw-uploader.createmapserverstyleoptions.paint.md) | GeometryPaint | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [geometryType](./ngw-uploader.createmapserverstyleoptions.geometrytype.md) |  | [GeometryType](./ngw-connector.geometrytype.md) |  |
+|  [paint?](./ngw-uploader.createmapserverstyleoptions.paint.md) |  | [GeometryPaint](./paint.geometrypaint.md) | <i>(Optional)</i> |
 

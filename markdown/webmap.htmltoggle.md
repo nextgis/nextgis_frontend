@@ -14,8 +14,8 @@ export interface HtmlToggle
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [off](./webmap.htmltoggle.off.md) | [HtmlDef](./webmap.htmldef.md) |  |
-|  [on](./webmap.htmltoggle.on.md) | [HtmlDef](./webmap.htmldef.md) |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [off](./webmap.htmltoggle.off.md) |  | [HtmlDef](./webmap.htmldef.md) |  |
+|  [on](./webmap.htmltoggle.on.md) |  | [HtmlDef](./webmap.htmldef.md) |  |
 

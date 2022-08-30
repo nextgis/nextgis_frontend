@@ -14,7 +14,7 @@ unBlock(options?: O): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | O |  |
+|  options | O | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

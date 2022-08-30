@@ -14,7 +14,7 @@ onRemove(map?: M): unknown;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  map | M |  |
+|  map | M | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

@@ -14,7 +14,7 @@ createInput(opt?: UploadInputOptions): HTMLElement;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  opt | [UploadInputOptions](./ngw-uploader-input.uploadinputoptions.md) |  |
+|  opt | [UploadInputOptions](./ngw-uploader-input.uploadinputoptions.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

@@ -12,7 +12,7 @@ export interface BasemapWebmap
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [basemaps](./ngw-connector.basemapwebmap.basemaps.md) | [BasemapWebmapItem](./ngw-connector.basemapwebmapitem.md)<!-- -->\[\] |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [basemaps](./ngw-connector.basemapwebmap.basemaps.md) |  | [BasemapWebmapItem](./ngw-connector.basemapwebmapitem.md)<!-- -->\[\] |  |
 

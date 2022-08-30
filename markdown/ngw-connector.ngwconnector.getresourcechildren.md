@@ -16,7 +16,7 @@ getResourceChildren(resource: ResourceDefinition, requestOptions?: GetChildrenOf
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  resource | [ResourceDefinition](./ngw-connector.resourcedefinition.md) |  |
-|  requestOptions | [GetChildrenOfOptions](./ngw-connector.getchildrenofoptions.md) |  |
+|  requestOptions | [GetChildrenOfOptions](./ngw-connector.getchildrenofoptions.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

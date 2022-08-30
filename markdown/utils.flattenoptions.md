@@ -12,7 +12,7 @@ export interface FlattenOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [flatArray?](./utils.flattenoptions.flatarray.md) | boolean | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [flatArray?](./utils.flattenoptions.flatarray.md) |  | boolean | <i>(Optional)</i> |
 

@@ -16,7 +16,7 @@ clearLayer?(cb?: (feature: F) => boolean): void | Promise<void>;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  cb | (feature: F) =&gt; boolean | Delete only those objects that match the filter. |
+|  cb | (feature: F) =&gt; boolean | <i>(Optional)</i> Delete only those objects that match the filter. |
 
 <b>Returns:</b>
 

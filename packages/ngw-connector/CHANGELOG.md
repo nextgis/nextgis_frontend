@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.16.0](https://github.com/nextgis/nextgis_frontend/compare/v1.15.1...v1.16.0) (2022-08-28)
+
+**Note:** Version bump only for package @nextgis/ngw-connector
+
+
+
+
+
+## [1.15.1](https://github.com/nextgis/nextgis_frontend/compare/v1.15.0...v1.15.1) (2022-08-02)
+
+
+### Features
+
+* **ngw-connector:** add request transform method ([13ec477](https://github.com/nextgis/nextgis_frontend/commit/13ec4773aac88b6dc5880727241f3b04ef31fac0))
+
+
+
+
+
+# [1.15.0](https://github.com/nextgis/nextgis_frontend/compare/v1.14.0...v1.15.0) (2022-07-27)
+
+**Note:** Version bump only for package @nextgis/ngw-connector
+
+
+
+
+
 # [1.14.0](https://github.com/nextgis/nextgis_frontend/compare/v1.13.8...v1.14.0) (2022-07-05)
 
 **Note:** Version bump only for package @nextgis/ngw-connector

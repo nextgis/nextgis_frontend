@@ -9,13 +9,13 @@
 ```typescript
 export interface CreatePopupContentProps<F extends Feature = Feature, L = any> extends LayerDefinition<F, L> 
 ```
-<b>Extends:</b> [LayerDefinition](./webmap.layerdefinition.md)<!-- -->&lt;F, L&gt;
+<b>Extends:</b> [LayerDefinition](./webmap.layerdefinition.md)
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [close](./webmap.createpopupcontentprops.close.md) | () =&gt; void | Close the pop-up programmatically |
-|  [onClose](./webmap.createpopupcontentprops.onclose.md) | (cb: [PopupOnCloseFunction](./webmap.popuponclosefunction.md)<!-- -->) =&gt; void | The callback function that is called when the popup is closed |
-|  [type](./webmap.createpopupcontentprops.type.md) | [OnLayerSelectType](./webmap.onlayerselecttype.md) | The source of the event call. User <code>click</code>, <code>hover</code>, or programmatic <code>api</code> call |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [close](./webmap.createpopupcontentprops.close.md) |  | () =&gt; void | Close the pop-up programmatically |
+|  [onClose](./webmap.createpopupcontentprops.onclose.md) |  | (cb: [PopupOnCloseFunction](./webmap.popuponclosefunction.md)<!-- -->) =&gt; void | The callback function that is called when the popup is closed |
+|  [type](./webmap.createpopupcontentprops.type.md) |  | [OnLayerSelectType](./webmap.onlayerselecttype.md) | The source of the event call. User <code>click</code>, <code>hover</code>, or programmatic <code>api</code> call |
 

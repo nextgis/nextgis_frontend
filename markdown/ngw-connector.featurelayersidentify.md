@@ -12,7 +12,7 @@ export interface FeatureLayersIdentify
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [featureCount](./ngw-connector.featurelayersidentify.featurecount.md) | number |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [featureCount](./ngw-connector.featurelayersidentify.featurecount.md) |  | number |  |
 

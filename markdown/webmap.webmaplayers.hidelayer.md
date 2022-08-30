@@ -17,7 +17,7 @@ hideLayer(layerDef: LayerDef, options?: ToggleLayerOptions): Promise<void>;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  layerDef | [LayerDef](./webmap.layerdef.md) |  |
-|  options | [ToggleLayerOptions](./webmap.togglelayeroptions.md) |  |
+|  options | [ToggleLayerOptions](./webmap.togglelayeroptions.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

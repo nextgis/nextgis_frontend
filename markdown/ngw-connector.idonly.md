@@ -12,7 +12,7 @@ export interface IdOnly
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [id](./ngw-connector.idonly.id.md) | number |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [id](./ngw-connector.idonly.id.md) |  | number |  |
 

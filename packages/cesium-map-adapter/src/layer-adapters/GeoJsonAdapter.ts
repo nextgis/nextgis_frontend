@@ -10,6 +10,7 @@ import {
   VerticalOrigin,
   HeightReference,
   GeoJsonDataSource,
+  EllipsoidGraphics,
 } from 'cesium';
 import { isPaintCallback, isBasePaint, isPaint } from '@nextgis/paint';
 
@@ -21,18 +22,21 @@ import type {
   LayerDefinition,
 } from '@nextgis/webmap';
 import { PropertiesFilter } from '@nextgis/properties-filter';
-import type {
-  VectorAdapterLayerPaint,
-  GeometryPaint,
-  PinPaint,
-  Paint,
-} from '@nextgis/paint';
 
 import { BaseAdapter, Map } from './BaseAdapter';
 import { isFeature3D } from '../utils/isFeature3D';
 import { getEntitiesBoundingSphere } from '../utils/getEntitiesBoundingSphere';
 import { getBoundsFromBoundingSphere } from '../utils/getBoundsFromBoundingSphere';
 import { whenSampleTerrainMostDetailed } from '../utils/whenSampleTerrainMostDetailed';
+
+import type {
+  VectorAdapterLayerPaint,
+  Ellipsoid3DPaint,
+  Sphere3DPaint,
+  GeometryPaint,
+  PinPaint,
+  Paint,
+} from '@nextgis/paint';
 
 type Layer = GeoJsonDataSource;
 
@@ -63,6 +67,15 @@ export class GeoJsonAdapter
   private _paint?: Paint;
   private _features: Feature[] = [];
   private _source?: GeoJsonDataSource;
+  private _heightOffset = 0;
+  private _popupContainers: {
+    [featureId: string]:
+      | string
+      | HTMLElement
+      | Promise<string | HTMLElement | undefined>
+      | undefined;
+  } = {};
+  private _currentPopupId: number | string | null = null;
 
   onTerrainChange = (): void => {
     this.watchHeight();
@@ -70,6 +83,9 @@ export class GeoJsonAdapter
 
   addLayer(opt: AdapterOptions): GeoJsonDataSource {
     this.options = { ...this.options, ...opt };
+    if (this.options.heightOffset) {
+      this._heightOffset = this.options.heightOffset;
+    }
     this._paint = this.options.paint;
     const source = new GeoJsonDataSource(opt.id);
     this._source = source;
@@ -77,6 +93,10 @@ export class GeoJsonAdapter
       this.addData(opt.data);
     }
     return source;
+  }
+
+  beforeRemove() {
+    this._destroyPopupContainer();
   }
 
   showLayer(): void {
@@ -150,6 +170,7 @@ export class GeoJsonAdapter
   }
 
   unselect(findFeatureCb?: DataLayerFilter<Feature> | PropertiesFilter): void {
+    this._destroyPopupContainer();
     if (this._source) {
       if (this.selected) {
         this.map.selectedEntity = undefined;
@@ -200,6 +221,21 @@ export class GeoJsonAdapter
         if (isBasePaint(paint)) {
           if (paint.type === 'pin') {
             promises.push(this._addPin(x, paint));
+          } else if (paint.type === 'ellipsoid') {
+            const ellipsoidPaint3d = paint as Ellipsoid3DPaint;
+            promises.push(this._addEllipsoid(x, ellipsoidPaint3d));
+          } else if (paint.type === 'sphere') {
+            const spherePaint3d = paint as Sphere3DPaint;
+            const spherePaint3dMerge = paint as Ellipsoid3DPaint;
+            const radius = spherePaint3d.radius;
+            const ellipsoidPaint3d = {
+              ...spherePaint3dMerge,
+              type: 'ellipsoid',
+              width: radius,
+              length: radius,
+              height: radius,
+            } as Ellipsoid3DPaint;
+            promises.push(this._addEllipsoid(x, ellipsoidPaint3d));
           } else {
             promises.push(this._addFromGeoJson(x, paint));
           }
@@ -262,6 +298,71 @@ export class GeoJsonAdapter
     }
   }
 
+  private _addEllipsoid(obj: Feature, paint: Ellipsoid3DPaint): Promise<void> {
+    const source = this._source;
+    if (!source) {
+      return Promise.reject();
+    }
+    const nameField = String(this.options.labelField || 'name');
+    let name = '';
+    if (obj.properties && nameField in obj.properties) {
+      name = obj.properties && obj.properties[nameField];
+    }
+    if (obj.type === 'Feature' && obj.geometry.type === 'Point') {
+      const lonLat = obj.geometry.coordinates;
+
+      const options: EllipsoidGraphics | EllipsoidGraphics.ConstructorOptions =
+        {
+          radii: new Cartesian3(paint.length, paint.width, paint.height),
+        };
+      const color = paint.color || 'blue';
+      const fillColor = paint.fillColor || color;
+
+      const fill = paint.fill ?? true;
+      if (fill && color && typeof fillColor === 'string') {
+        options.material = Color.fromCssColorString(fillColor);
+      }
+      // not work with clampToGround
+      if (paint.stroke || paint.strokeColor) {
+        const strokeColor = paint.strokeColor || color;
+        options.outline = true;
+        if (typeof strokeColor === 'string') {
+          options.outlineColor = Color.fromCssColorString(strokeColor);
+        }
+        if (typeof paint.strokeWidth === 'number') {
+          options.outlineWidth = paint.strokeWidth;
+        }
+      }
+      const position = Cartesian3.fromDegrees(
+        lonLat[0],
+        lonLat[1],
+        lonLat[2] + this._heightOffset,
+      );
+
+      // const orientation = Transforms.headingPitchRollQuaternion(
+      //   position,
+      //   new HeadingPitchRoll(Math.toRadians(30.0), Math.toRadians(30.0), 0.0),
+      // );
+
+      const description =
+        this.options.popupOptions?.createPopupContent &&
+        this._getDescription(obj);
+
+      source.entities.add({
+        name: name || (obj.id !== undefined ? 'Feature#' + obj.id : ''),
+        position,
+        description,
+        // orientation,
+        ellipsoid: options,
+      });
+    }
+    return Promise.resolve();
+  }
+
+  private _destroyPopupContainer() {
+    this._popupContainers = {};
+  }
+
   private _getDescription(feature: Feature): Property {
     const close = () => {
       // ignore
@@ -269,23 +370,50 @@ export class GeoJsonAdapter
     const onClose = () => {
       // ignore
     };
+
+    const showContent = (
+      elem:
+        | string
+        | HTMLElement
+        | Promise<string | HTMLElement | undefined>
+        | undefined,
+    ) => {
+      if (elem instanceof HTMLElement) {
+        return elem.outerHTML;
+      }
+      return elem;
+    };
+
     //@ts-ignore
     return {
       getValue: () => {
+        const id = feature.id;
+        if (id !== undefined) {
+          if (id === this._currentPopupId) {
+            const exist = this._popupContainers[id];
+            if (exist) {
+              return showContent(exist);
+            }
+          } else {
+            this._popupContainers = {};
+          }
+          this._currentPopupId = id;
+        }
         if (this.options.popupOptions?.createPopupContent) {
           // @ts-ignore
           const content = this.options.popupOptions.createPopupContent({
             feature,
             type: 'api',
+            target: this,
             close,
             onClose,
           });
-          if (content instanceof HTMLElement) {
-            return content.outerHTML;
+          if (id !== undefined) {
+            this._popupContainers[id] = content;
           }
-          return content;
+          return showContent(content);
         }
-        // return '';
+        return '';
       },
     };
   }
@@ -384,7 +512,7 @@ export class GeoJsonAdapter
       position = entity.polygon.hierarchy?.getValue(JulianDate.now())
         .positions[0];
     } else if (entity.point) {
-      console.log(entity.point);
+      // console.log(entity.point);
     }
     return position;
   }

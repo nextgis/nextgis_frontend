@@ -17,7 +17,7 @@ export declare function debounce<T extends (...args: any[]) => void>(cb: T, wait
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  cb | T |  |
-|  wait | number |  |
+|  wait | number | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

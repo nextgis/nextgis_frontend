@@ -12,9 +12,9 @@ export interface CreateControlOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [addClass?](./webmap.createcontroloptions.addclass.md) | string | <i>(Optional)</i> |
-|  [bar?](./webmap.createcontroloptions.bar.md) | boolean | <i>(Optional)</i> |
-|  [margin?](./webmap.createcontroloptions.margin.md) | boolean | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [addClass?](./webmap.createcontroloptions.addclass.md) |  | string | <i>(Optional)</i> |
+|  [bar?](./webmap.createcontroloptions.bar.md) |  | boolean | <i>(Optional)</i> |
+|  [margin?](./webmap.createcontroloptions.margin.md) |  | boolean | <i>(Optional)</i> |
 

@@ -18,7 +18,7 @@ setLayerOrder(layer: L, order: number, layers?: {
 |  --- | --- | --- |
 |  layer | L |  |
 |  order | number |  |
-|  layers | { \[name: string\]: [LayerAdapter](./webmap.layeradapter.md)<!-- -->; } |  |
+|  layers | { \[name: string\]: [LayerAdapter](./webmap.layeradapter.md)<!-- -->; } | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

@@ -14,7 +14,7 @@ getBounds(options?: FetchNgwLayerExtentOptions): Promise<LngLatBoundsArray | und
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  options | [FetchNgwLayerExtentOptions](./ngw-kit.fetchngwlayerextentoptions.md) |  |
+|  options | [FetchNgwLayerExtentOptions](./ngw-kit.fetchngwlayerextentoptions.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

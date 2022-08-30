@@ -43,6 +43,7 @@ import type { NgwDateTimeFormat } from '@nextgis/ngw-connector';
 import type { OnLayerMouseOptions } from '@nextgis/webmap';
 import { Point } from 'geojson';
 import type { Polygon } from 'geojson';
+import type { PopupOptions } from '@nextgis/webmap';
 import type { Position } from 'geojson';
 import type { PropertiesFilter } from '@nextgis/properties-filter';
 import type { RasterAdapterOptions } from '@nextgis/webmap';
@@ -585,6 +586,8 @@ export interface NgwWebmapAdapterOptions<M = any> extends A {
     connector: NgwConnector;
     defaultBasemap?: boolean;
     pixelRadius?: number;
+    // (undocumented)
+    popupOptions?: PopupOptions;
     // (undocumented)
     resourceId: ResourceIdDef;
     // (undocumented)

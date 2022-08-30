@@ -1,8 +1,8 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.18.19",
-    "schemaVersion": 1004,
+    "toolVersion": "7.28.6",
+    "schemaVersion": 1009,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
       "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
@@ -156,19 +156,249 @@
         "@betaDocumentation": true,
         "@internalRemarks": true,
         "@preapproved": true
-      }
+      },
+      "reportUnsupportedHtmlElements": false
     }
   },
   "kind": "Package",
   "canonicalReference": "@nextgis/paint!",
   "docComment": "",
   "name": "@nextgis/paint",
+  "preserveMemberOrder": false,
   "members": [
     {
       "kind": "EntryPoint",
       "canonicalReference": "@nextgis/paint!",
       "name": "",
+      "preserveMemberOrder": false,
       "members": [
+        {
+          "kind": "Interface",
+          "canonicalReference": "@nextgis/paint!Base3DPaint:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface Base3DPaint "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "Base3DPaint",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/paint!Base3DPaint#color:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "color?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Expression",
+                  "canonicalReference": "@nextgis/paint!Expression:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "color",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/paint!Base3DPaint#fill:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "fill?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "fill",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/paint!Base3DPaint#fillColor:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "fillColor?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Expression",
+                  "canonicalReference": "@nextgis/paint!Expression:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "fillColor",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/paint!Base3DPaint#stroke:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "stroke?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "stroke",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/paint!Base3DPaint#strokeColor:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "strokeColor?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Expression",
+                  "canonicalReference": "@nextgis/paint!Expression:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "strokeColor",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/paint!Base3DPaint#strokeWidth:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "strokeWidth?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Expression",
+                  "canonicalReference": "@nextgis/paint!Expression:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "strokeWidth",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/paint!Base3DPaint#type:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "type?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Paint3DType",
+                  "canonicalReference": "@nextgis/paint!Paint3DType:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "type",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
         {
           "kind": "Interface",
           "canonicalReference": "@nextgis/paint!BasePaint:interface",
@@ -190,6 +420,7 @@
           ],
           "releaseTag": "Public",
           "name": "BasePaint",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -214,6 +445,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "color",
@@ -245,6 +477,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "extrude3d",
@@ -271,6 +504,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "fill",
@@ -302,6 +536,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "fillColor",
@@ -333,6 +568,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "fillOpacity",
@@ -364,6 +600,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "opacity",
@@ -390,6 +627,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "stroke",
@@ -421,6 +659,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "strokeColor",
@@ -452,6 +691,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "strokeOpacity",
@@ -483,6 +723,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "weight",
@@ -495,7 +736,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -520,6 +761,7 @@
           ],
           "releaseTag": "Public",
           "name": "CirclePaint",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -544,6 +786,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "radius",
@@ -570,6 +813,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "type",
@@ -582,7 +826,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -597,8 +841,12 @@
             },
             {
               "kind": "Reference",
-              "text": "VectorAdapterLayerPaint",
-              "canonicalReference": "@nextgis/paint!VectorAdapterLayerPaint:type"
+              "text": "Record",
+              "canonicalReference": "!Record:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<string, any>"
             },
             {
               "kind": "Content",
@@ -619,8 +867,8 @@
             }
           ],
           "returnTypeTokenRange": {
-            "startIndex": 3,
-            "endIndex": 5
+            "startIndex": 4,
+            "endIndex": 6
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -629,11 +877,151 @@
               "parameterName": "paint",
               "parameterTypeTokenRange": {
                 "startIndex": 1,
+                "endIndex": 3
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "createExpressionCallback"
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@nextgis/paint!Ellipsoid3DPaint:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface Ellipsoid3DPaint extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Base3DPaint",
+              "canonicalReference": "@nextgis/paint!Base3DPaint:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "Ellipsoid3DPaint",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/paint!Ellipsoid3DPaint#height:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "height: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "height",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/paint!Ellipsoid3DPaint#length:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "length: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "length",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/paint!Ellipsoid3DPaint#type:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "type: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "'ellipsoid'"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "type",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/paint!Ellipsoid3DPaint#width:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "width: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "width",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
                 "endIndex": 2
               }
             }
           ],
-          "name": "createExpressionCallback"
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 2
+            }
+          ]
         },
         {
           "kind": "TypeAlias",
@@ -668,6 +1056,167 @@
             "startIndex": 1,
             "endIndex": 4
           }
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@nextgis/paint!expressionCallback:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function expressionCallback<P = "
+            },
+            {
+              "kind": "Reference",
+              "text": "Record",
+              "canonicalReference": "!Record:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<string, any>"
+            },
+            {
+              "kind": "Content",
+              "text": ">(paint: "
+            },
+            {
+              "kind": "Content",
+              "text": "P"
+            },
+            {
+              "kind": "Content",
+              "text": ", defaultPaint?: "
+            },
+            {
+              "kind": "Content",
+              "text": "P"
+            },
+            {
+              "kind": "Content",
+              "text": ", getPaintFunctions?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Record",
+              "canonicalReference": "!Record:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<string, "
+            },
+            {
+              "kind": "Reference",
+              "text": "GetPaintFunction",
+              "canonicalReference": "@nextgis/paint!GetPaintFunction:type"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "import(\"./interfaces\")."
+            },
+            {
+              "kind": "Reference",
+              "text": "CirclePaint",
+              "canonicalReference": "@nextgis/paint!CirclePaint:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " | import(\"./interfaces\")."
+            },
+            {
+              "kind": "Reference",
+              "text": "PathPaint",
+              "canonicalReference": "@nextgis/paint!PathPaint:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " | import(\"./interfaces\")."
+            },
+            {
+              "kind": "Reference",
+              "text": "PinPaint",
+              "canonicalReference": "@nextgis/paint!PinPaint:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " | {\n    (feature: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Feature",
+              "canonicalReference": "@types/geojson!Feature:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "VectorAdapterLayerPaint",
+              "canonicalReference": "@nextgis/paint!VectorAdapterLayerPaint:type"
+            },
+            {
+              "kind": "Content",
+              "text": ";\n    paint: P;\n}"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 13,
+            "endIndex": 24
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "paint",
+              "parameterTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 5
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "defaultPaint",
+              "parameterTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 7
+              },
+              "isOptional": true
+            },
+            {
+              "parameterName": "getPaintFunctions",
+              "parameterTypeTokenRange": {
+                "startIndex": 8,
+                "endIndex": 12
+              },
+              "isOptional": true
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "P",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            }
+          ],
+          "name": "expressionCallback"
         },
         {
           "kind": "TypeAlias",
@@ -759,6 +1308,7 @@
           ],
           "releaseTag": "Public",
           "name": "GetCustomPaintOptions",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -783,6 +1333,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "from",
@@ -809,6 +1360,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "options",
@@ -835,6 +1387,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "type",
@@ -847,9 +1400,161 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@nextgis/paint!GetPaint3DCallback:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface GetPaint3DCallback<F extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Feature",
+              "canonicalReference": "@types/geojson!Feature:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            },
+            {
+              "kind": "Content",
+              "text": "= "
+            },
+            {
+              "kind": "Reference",
+              "text": "Feature",
+              "canonicalReference": "@types/geojson!Feature:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "> "
+            }
+          ],
+          "releaseTag": "Public",
+          "typeParameters": [
+            {
+              "typeParameterName": "F",
+              "constraintTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 5
+              }
+            }
+          ],
+          "name": "GetPaint3DCallback",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "CallSignature",
+              "canonicalReference": "@nextgis/paint!GetPaint3DCallback:call(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "(feature: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "F"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "VectorAdapterLayerPaint",
+                  "canonicalReference": "@nextgis/paint!VectorAdapterLayerPaint:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "feature",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ]
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/paint!GetPaint3DCallback#paint:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "paint?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "VectorAdapterLayerPaint3D",
+                  "canonicalReference": "@nextgis/paint!VectorAdapterLayerPaint3D:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "paint",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/paint!GetPaint3DCallback#type:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "type?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Paint3DType",
+                  "canonicalReference": "@nextgis/paint!Paint3DType:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "type",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
         },
         {
           "kind": "Interface",
@@ -889,7 +1594,7 @@
               "typeParameterName": "F",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -898,6 +1603,7 @@
             }
           ],
           "name": "GetPaintCallback",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "CallSignature",
@@ -938,7 +1644,8 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  }
+                  },
+                  "isOptional": false
                 }
               ]
             },
@@ -979,6 +1686,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "paint",
@@ -1006,6 +1714,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "type",
@@ -1103,6 +1812,7 @@
           ],
           "releaseTag": "Public",
           "name": "IconPaint",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -1122,6 +1832,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "className",
@@ -1148,6 +1859,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "html",
@@ -1174,6 +1886,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "iconAnchor",
@@ -1200,6 +1913,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "iconSize",
@@ -1227,6 +1941,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "svg",
@@ -1253,6 +1968,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
               "name": "type",
@@ -1265,7 +1981,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -1318,7 +2034,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "isBasePaint"
@@ -1371,7 +2088,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "isExpression"
@@ -1425,7 +2143,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "isIcon"
@@ -1479,7 +2198,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "isPaint"
@@ -1533,7 +2253,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "isPaintCallback"
@@ -1587,7 +2308,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "isPropertiesPaint"
@@ -1692,7 +2414,7 @@
               "typeParameterName": "F",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -1703,7 +2425,7 @@
               "typeParameterName": "P",
               "constraintTokenRange": {
                 "startIndex": 6,
-                "endIndex": 8
+                "endIndex": 7
               },
               "defaultTypeTokenRange": {
                 "startIndex": 9,
@@ -1714,6 +2436,155 @@
           "typeTokenRange": {
             "startIndex": 11,
             "endIndex": 19
+          }
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "@nextgis/paint!Paint3D:type",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type Paint3D<F extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Feature",
+              "canonicalReference": "@types/geojson!Feature:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            },
+            {
+              "kind": "Content",
+              "text": "= "
+            },
+            {
+              "kind": "Reference",
+              "text": "Feature",
+              "canonicalReference": "@types/geojson!Feature:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", P extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Properties",
+              "canonicalReference": "@nextgis/paint!~Properties:type"
+            },
+            {
+              "kind": "Content",
+              "text": " | null "
+            },
+            {
+              "kind": "Content",
+              "text": "= "
+            },
+            {
+              "kind": "Content",
+              "text": "F['properties']"
+            },
+            {
+              "kind": "Content",
+              "text": "> = "
+            },
+            {
+              "kind": "Reference",
+              "text": "VectorAdapterLayerPaint3D",
+              "canonicalReference": "@nextgis/paint!VectorAdapterLayerPaint3D:type"
+            },
+            {
+              "kind": "Content",
+              "text": " | "
+            },
+            {
+              "kind": "Reference",
+              "text": "GetPaintCallback",
+              "canonicalReference": "@nextgis/paint!GetPaintCallback:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<F> | "
+            },
+            {
+              "kind": "Reference",
+              "text": "PropertyPaint3D",
+              "canonicalReference": "@nextgis/paint!PropertyPaint3D:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<P extends null ? "
+            },
+            {
+              "kind": "Reference",
+              "text": "Properties",
+              "canonicalReference": "@nextgis/paint!~Properties:type"
+            },
+            {
+              "kind": "Content",
+              "text": " : P>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "Paint3D",
+          "typeParameters": [
+            {
+              "typeParameterName": "F",
+              "constraintTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 5
+              }
+            },
+            {
+              "typeParameterName": "P",
+              "constraintTokenRange": {
+                "startIndex": 6,
+                "endIndex": 7
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 9,
+                "endIndex": 10
+              }
+            }
+          ],
+          "typeTokenRange": {
+            "startIndex": 11,
+            "endIndex": 19
+          }
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "@nextgis/paint!Paint3DType:type",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type Paint3DType = "
+            },
+            {
+              "kind": "Content",
+              "text": "'ellipsoid' | 'sphere'"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "Paint3DType",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
           }
         },
         {
@@ -1762,6 +2633,7 @@
           ],
           "releaseTag": "Public",
           "name": "PathPaint",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -1781,6 +2653,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "type",
@@ -1793,7 +2666,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -1818,6 +2691,7 @@
           ],
           "releaseTag": "Public",
           "name": "PinPaint",
+          "preserveMemberOrder": false,
           "members": [
             {
               "kind": "PropertySignature",
@@ -1851,6 +2725,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "icon",
@@ -1877,6 +2752,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "iconfont",
@@ -1908,6 +2784,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "size",
@@ -1939,6 +2816,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "symbol",
@@ -1965,6 +2843,7 @@
                   "text": ";"
                 }
               ],
+              "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
               "name": "type",
@@ -1977,7 +2856,7 @@
           "extendsTokenRanges": [
             {
               "startIndex": 1,
-              "endIndex": 3
+              "endIndex": 2
             }
           ]
         },
@@ -2047,21 +2926,24 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "defaultPaint",
               "parameterTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 4
-              }
+              },
+              "isOptional": true
             },
             {
               "parameterName": "getPaintFunctions",
               "parameterTypeTokenRange": {
                 "startIndex": 5,
                 "endIndex": 8
-              }
+              },
+              "isOptional": true
             }
           ],
           "name": "preparePaint"
@@ -2131,7 +3013,85 @@
               "typeParameterName": "P",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 5
+              }
+            }
+          ],
+          "typeTokenRange": {
+            "startIndex": 6,
+            "endIndex": 11
+          }
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "@nextgis/paint!PropertiesPaint3D:type",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type PropertiesPaint3D<P extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Properties",
+              "canonicalReference": "@nextgis/paint!~Properties:type"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            },
+            {
+              "kind": "Content",
+              "text": "= "
+            },
+            {
+              "kind": "Reference",
+              "text": "Properties",
+              "canonicalReference": "@nextgis/paint!~Properties:type"
+            },
+            {
+              "kind": "Content",
+              "text": "> = "
+            },
+            {
+              "kind": "Content",
+              "text": "[\n    "
+            },
+            {
+              "kind": "Reference",
+              "text": "VectorAdapterLayerPaint3D",
+              "canonicalReference": "@nextgis/paint!VectorAdapterLayerPaint3D:type"
+            },
+            {
+              "kind": "Content",
+              "text": " | undefined,\n    ..."
+            },
+            {
+              "kind": "Reference",
+              "text": "PropertyPaint",
+              "canonicalReference": "@nextgis/paint!PropertyPaint:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<P>[]\n]"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "PropertiesPaint3D",
+          "typeParameters": [
+            {
+              "typeParameterName": "P",
+              "constraintTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -2209,7 +3169,7 @@
               "typeParameterName": "P",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -2221,6 +3181,169 @@
             "startIndex": 6,
             "endIndex": 11
           }
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "@nextgis/paint!PropertyPaint3D:type",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type PropertyPaint3D<P extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Properties",
+              "canonicalReference": "@nextgis/paint!~Properties:type"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            },
+            {
+              "kind": "Content",
+              "text": "= "
+            },
+            {
+              "kind": "Reference",
+              "text": "Properties",
+              "canonicalReference": "@nextgis/paint!~Properties:type"
+            },
+            {
+              "kind": "Content",
+              "text": "> = "
+            },
+            {
+              "kind": "Content",
+              "text": "[\n    "
+            },
+            {
+              "kind": "Reference",
+              "text": "PropertiesFilter",
+              "canonicalReference": "@nextgis/properties-filter!PropertiesFilter:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<P>,\n    "
+            },
+            {
+              "kind": "Reference",
+              "text": "VectorAdapterLayerPaint3D",
+              "canonicalReference": "@nextgis/paint!VectorAdapterLayerPaint3D:type"
+            },
+            {
+              "kind": "Content",
+              "text": "\n]"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "PropertyPaint3D",
+          "typeParameters": [
+            {
+              "typeParameterName": "P",
+              "constraintTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 5
+              }
+            }
+          ],
+          "typeTokenRange": {
+            "startIndex": 6,
+            "endIndex": 11
+          }
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@nextgis/paint!Sphere3DPaint:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface Sphere3DPaint extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Base3DPaint",
+              "canonicalReference": "@nextgis/paint!Base3DPaint:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "Sphere3DPaint",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/paint!Sphere3DPaint#radius:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "radius: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "radius",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/paint!Sphere3DPaint#type:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "type: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "'sphere'"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "type",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 2
+            }
+          ]
         },
         {
           "kind": "TypeAlias",
@@ -2282,6 +3405,41 @@
           "typeTokenRange": {
             "startIndex": 1,
             "endIndex": 10
+          }
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "@nextgis/paint!VectorAdapterLayerPaint3D:type",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type VectorAdapterLayerPaint3D = "
+            },
+            {
+              "kind": "Reference",
+              "text": "Sphere3DPaint",
+              "canonicalReference": "@nextgis/paint!Sphere3DPaint:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " | "
+            },
+            {
+              "kind": "Reference",
+              "text": "Ellipsoid3DPaint",
+              "canonicalReference": "@nextgis/paint!Ellipsoid3DPaint:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "VectorAdapterLayerPaint3D",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 4
           }
         }
       ]

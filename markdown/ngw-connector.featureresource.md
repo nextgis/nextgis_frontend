@@ -12,7 +12,7 @@ export interface FeatureResource
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [fields](./ngw-connector.featureresource.fields.md) | [FeatureLayerField](./ngw-connector.featurelayerfield.md)<!-- -->\[\] |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [fields](./ngw-connector.featureresource.fields.md) |  | [FeatureLayerField](./ngw-connector.featurelayerfield.md)<!-- -->\[\] |  |
 

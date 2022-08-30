@@ -13,9 +13,9 @@ export interface OnLayerSelectOptions<F extends Feature = Feature, L = LayerAdap
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [features?](./webmap.onlayerselectoptions.features.md) | F\[\] \| undefined | <i>(Optional)</i> |
-|  [layer](./webmap.onlayerselectoptions.layer.md) | L |  |
-|  [type](./webmap.onlayerselectoptions.type.md) | [OnLayerSelectType](./webmap.onlayerselecttype.md) |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [features?](./webmap.onlayerselectoptions.features.md) |  | F\[\] \| undefined | <i>(Optional)</i> |
+|  [layer](./webmap.onlayerselectoptions.layer.md) |  | L |  |
+|  [type](./webmap.onlayerselectoptions.type.md) |  | [OnLayerSelectType](./webmap.onlayerselecttype.md) |  |
 

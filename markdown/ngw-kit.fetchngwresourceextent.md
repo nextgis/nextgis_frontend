@@ -13,8 +13,8 @@ export interface FetchNgwResourceExtent extends NgwRequestOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [connector](./ngw-kit.fetchngwresourceextent.connector.md) | NgwConnector |  |
-|  [resource?](./ngw-kit.fetchngwresourceextent.resource.md) | [ResourceDefinition](./ngw-connector.resourcedefinition.md) \| [ResourceItem](./ngw-connector.resourceitem.md) | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [connector](./ngw-kit.fetchngwresourceextent.connector.md) |  | NgwConnector |  |
+|  [resource?](./ngw-kit.fetchngwresourceextent.resource.md) |  | [ResourceDefinition](./ngw-connector.resourcedefinition.md) \| [ResourceItem](./ngw-connector.resourceitem.md) | <i>(Optional)</i> |
 

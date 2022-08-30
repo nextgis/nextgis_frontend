@@ -13,9 +13,9 @@ export interface MapControlProps extends ControlOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [children?](./react-ngw-map.mapcontrolprops.children.md) | ReactNode | <i>(Optional)</i> |
-|  [context](./react-ngw-map.mapcontrolprops.context.md) | [NgwMapContextInterface](./react-ngw-map.ngwmapcontextinterface.md) |  |
-|  [createControl](./react-ngw-map.mapcontrolprops.createcontrol.md) | (portal: MutableRefObject&lt;HTMLDivElement&gt;) =&gt; Promise&lt;unknown&gt; |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [children?](./react-ngw-map.mapcontrolprops.children.md) |  | ReactNode | <i>(Optional)</i> |
+|  [context](./react-ngw-map.mapcontrolprops.context.md) |  | [NgwMapContextInterface](./react-ngw-map.ngwmapcontextinterface.md) |  |
+|  [createControl](./react-ngw-map.mapcontrolprops.createcontrol.md) |  | (portal: MutableRefObject&lt;HTMLDivElement&gt;) =&gt; Promise&lt;unknown&gt; |  |
 

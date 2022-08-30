@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-shape?: 'circle' | 'brill' | 'rect' | 'marker' | 'star' | 'asterisk' | 'triangle' | 'plus' | 'minus';
+shape?: 'rect' | 'star' | 'plus' | 'minus' | 'brill' | 'circle' | 'marker' | 'triangle' | 'asterisk';
 ```

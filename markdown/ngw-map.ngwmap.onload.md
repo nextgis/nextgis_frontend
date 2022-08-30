@@ -14,7 +14,7 @@ onLoad(event?: keyof NgwMapEvents): Promise<this>;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  event | keyof [NgwMapEvents](./ngw-map.ngwmapevents.md) |  |
+|  event | keyof [NgwMapEvents](./ngw-map.ngwmapevents.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

@@ -14,8 +14,8 @@ update(value?: V, options?: O): void;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  value | V |  |
-|  options | O |  |
+|  value | V | <i>(Optional)</i> |
+|  options | O | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

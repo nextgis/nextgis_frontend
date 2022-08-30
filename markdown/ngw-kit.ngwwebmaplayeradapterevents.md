@@ -13,7 +13,7 @@ export interface NgwWebmapLayerAdapterEvents extends WebMapEvents
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [identify](./ngw-kit.ngwwebmaplayeradapterevents.identify.md) | [IdentifyEvent](./ngw-kit.identifyevent.md) |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [identify](./ngw-kit.ngwwebmaplayeradapterevents.identify.md) |  | [IdentifyEvent](./ngw-kit.identifyevent.md) |  |
 

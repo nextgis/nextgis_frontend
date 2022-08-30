@@ -17,7 +17,7 @@ propertiesFilter?(filters: PropertiesFilter<P>, options?: FilterOptions<P>): voi
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  filters | [PropertiesFilter](./properties-filter.propertiesfilter.md)<!-- -->&lt;P&gt; | Filter, conforming to the PropertiesFilter expression specification's. |
-|  options | [FilterOptions](./webmap.filteroptions.md)<!-- -->&lt;P&gt; | Options object. |
+|  options | [FilterOptions](./webmap.filteroptions.md)<!-- -->&lt;P&gt; | <i>(Optional)</i> Options object. |
 
 <b>Returns:</b>
 

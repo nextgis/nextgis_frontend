@@ -12,10 +12,10 @@ export interface NgwMapContextInterface
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [layerContainer?](./react-ngw-map.ngwmapcontextinterface.layercontainer.md) | [ControlledLayer](./react-ngw-map.controlledlayer.md) | <i>(Optional)</i> |
-|  [ngwMap](./react-ngw-map.ngwmapcontextinterface.ngwmap.md) | [NgwMap](./ngw-map.ngwmap.md) |  |
-|  [overlayContainer?](./react-ngw-map.ngwmapcontextinterface.overlaycontainer.md) | [LayerAdapter](./webmap.layeradapter.md) | <i>(Optional)</i> |
-|  [pane?](./react-ngw-map.ngwmapcontextinterface.pane.md) | string | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [layerContainer?](./react-ngw-map.ngwmapcontextinterface.layercontainer.md) |  | [ControlledLayer](./react-ngw-map.controlledlayer.md) | <i>(Optional)</i> |
+|  [ngwMap](./react-ngw-map.ngwmapcontextinterface.ngwmap.md) |  | [NgwMap](./ngw-map.ngwmap.md) |  |
+|  [overlayContainer?](./react-ngw-map.ngwmapcontextinterface.overlaycontainer.md) |  | [LayerAdapter](./webmap.layeradapter.md) | <i>(Optional)</i> |
+|  [pane?](./react-ngw-map.ngwmapcontextinterface.pane.md) |  | string | <i>(Optional)</i> |
 

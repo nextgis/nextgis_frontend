@@ -12,8 +12,8 @@ export interface StateData
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [state](./url-runtime-params.statedata.state.md) | { url: string; type?: 'remove'; params?: { \[name: string\]: string; }; } |  |
-|  [url](./url-runtime-params.statedata.url.md) | string |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [state](./url-runtime-params.statedata.state.md) |  | { url: string; type?: 'remove'; params?: { \[name: string\]: string; }; } |  |
+|  [url](./url-runtime-params.statedata.url.md) |  | string |  |
 

@@ -12,8 +12,8 @@ export interface ChangeEvent<V = any, O extends ItemBasePropertyOptions<V> = Ite
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [options](./item.changeevent.options.md) | O |  |
-|  [value](./item.changeevent.value.md) | V |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [options](./item.changeevent.options.md) |  | O |  |
+|  [value](./item.changeevent.value.md) |  | V |  |
 

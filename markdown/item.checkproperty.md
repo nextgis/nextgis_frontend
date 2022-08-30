@@ -9,7 +9,7 @@
 ```typescript
 export declare class CheckProperty<V extends VAL = VAL, O extends CheckOptions<VAL> = CheckOptions<VAL>> extends BaseProperty<VAL, CheckOptions<VAL>> 
 ```
-<b>Extends:</b> [BaseProperty](./item.baseproperty.md)<!-- -->&lt;VAL, [CheckOptions](./item.checkoptions.md)<!-- -->&lt;VAL&gt;&gt;
+<b>Extends:</b> [BaseProperty](./item.baseproperty.md)<!-- -->&lt;VAL, [CheckOptions](./item.checkoptions.md)<!-- -->&lt;VAL
 
 ## Constructors
 
@@ -27,7 +27,7 @@ export declare class CheckProperty<V extends VAL = VAL, O extends CheckOptions<V
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
-|  [\_prepareValue(value)](./item.checkproperty._preparevalue.md) |  |  |
+|  [\_prepareValue(value)](./item.checkproperty._preparevalue.md) | <code>protected</code> |  |
 |  [block(options)](./item.checkproperty.block.md) |  |  |
 |  [blockChild(options)](./item.checkproperty.blockchild.md) |  |  |
 |  [getHierarchyValue()](./item.checkproperty.gethierarchyvalue.md) |  |  |

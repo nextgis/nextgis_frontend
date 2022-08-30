@@ -15,8 +15,8 @@ export declare function createQmsAdapter(webMap: WebMap, url?: string, createOpt
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  webMap | [WebMap](./webmap.webmap.md) |  |
-|  url | string |  |
-|  createOpt | Partial&lt;[QmsAdapterOptions](./qms-kit.qmsadapteroptions.md)<!-- -->&gt; |  |
+|  url | string | <i>(Optional)</i> |
+|  createOpt | Partial&lt;[QmsAdapterOptions](./qms-kit.qmsadapteroptions.md)<!-- -->&gt; | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

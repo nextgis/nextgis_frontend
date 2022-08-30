@@ -12,10 +12,10 @@ export interface ProgressEvents
 
 ## Events
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [add](./progress.progressevents.add.md) | any |  |
-|  [remove](./progress.progressevents.remove.md) | any |  |
-|  [start](./progress.progressevents.start.md) | any |  |
-|  [stop](./progress.progressevents.stop.md) | any |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [add](./progress.progressevents.add.md) |  | any |  |
+|  [remove](./progress.progressevents.remove.md) |  | any |  |
+|  [start](./progress.progressevents.start.md) |  | any |  |
+|  [stop](./progress.progressevents.stop.md) |  | any |  |
 

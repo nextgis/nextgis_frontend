@@ -5,6 +5,7 @@ import {
   Color,
   Event,
   Viewer,
+  Entity,
   SceneMode,
   Rectangle,
   Ellipsoid,
@@ -32,6 +33,7 @@ import { cartesian3ToLngLat } from './utils/cartesian3ToLngLat';
 import { whenSampleTerrainMostDetailed } from './utils/whenSampleTerrainMostDetailed';
 import { MeasureControl } from './controls/MeasureControl';
 
+import type { ScreenSpaceEventHandler } from 'cesium';
 import type {
   FitOptions,
   MapControl,
@@ -45,10 +47,7 @@ import type {
 } from '@nextgis/webmap';
 import type { Type, LngLatArray, LngLatBoundsArray } from '@nextgis/utils';
 import type { PathPaint } from '@nextgis/paint';
-import type {
-  CesiumAdapterMapClickEvent,
-  CesiumMapClickEvent,
-} from './interfaces';
+import type { CesiumAdapterMapClickEvent } from './interfaces';
 
 type Layer = any;
 type Control = any;
@@ -484,13 +483,13 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
         ['move', undefined],
         ['moveend', viewer.camera.moveEnd],
       ];
-      events.forEach(([name, event]) => {
+      for (const [name, event] of events) {
         if (event) {
           event.addEventListener(() => {
             this.emitter.emit(name);
           });
         }
-      });
+      }
     }
   }
 
@@ -499,10 +498,15 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
     if (viewer) {
       const clickHandler = viewer.screenSpaceEventHandler.getInputAction(
         ScreenSpaceEventType.LEFT_CLICK,
+      ) as ScreenSpaceEventHandler.PositionedEventCallback;
+
+      // Remove default event click handler
+      viewer.screenSpaceEventHandler.removeInputAction(
+        ScreenSpaceEventType.LEFT_CLICK,
       );
 
       viewer.screenSpaceEventHandler.setInputAction(
-        (e: CesiumMapClickEvent) => {
+        (e: ScreenSpaceEventHandler.PositionedEvent) => {
           this.emitter.emit('preclick');
           const ct2 = e.position as Cartesian2;
           const scene = viewer.scene;
@@ -531,14 +535,13 @@ export class CesiumMapAdapter implements MapAdapter<Viewer, Layer> {
               clickData.lngLat = pickedPositionLngLat;
             }
           }
-          // const picked = viewer.scene.pick(e.position);
-          // if (picked && picked.id && picked.id instanceof Entity) {
-          //   viewer.selectedEntity = picked.id;
-          // } else {
-          //   clickHandler(e);
-          // }
+          const picked = viewer.scene.pick(e.position);
+          const isEntityPicked = picked && picked.id instanceof Entity;
+          // Stop propagation for click event on any entry picked
+          if (!isEntityPicked) {
+            this.emitter.emit('click', clickData);
+          }
           clickHandler(e);
-          this.emitter.emit('click', clickData);
         },
         ScreenSpaceEventType.LEFT_CLICK,
       );

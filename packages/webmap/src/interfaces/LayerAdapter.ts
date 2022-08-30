@@ -353,6 +353,8 @@ export interface VectorAdapterOptions<
    */
   selectedLayout?: any;
 
+  heightOffset?: number;
+
   onClick?(opt: OnLayerMouseOptions<F, L>): void;
   onSelect?(opt: OnLayerSelectOptions<F, L>): void;
 

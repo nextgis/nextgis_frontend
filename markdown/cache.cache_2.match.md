@@ -15,7 +15,7 @@ match(key: string, props?: CacheMatchProps<O>): CacheValue<V> | undefined;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  key | string |  |
-|  props | CacheMatchProps&lt;O&gt; |  |
+|  props | CacheMatchProps&lt;O&gt; | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

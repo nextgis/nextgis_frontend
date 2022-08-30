@@ -13,9 +13,9 @@ export interface GetCustomPaintOptions extends BasePaintTypes
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [from](./paint.getcustompaintoptions.from.md) | string \| [GetPaintFunction](./paint.getpaintfunction.md) |  |
-|  [options?](./paint.getcustompaintoptions.options.md) | any | <i>(Optional)</i> |
-|  [type](./paint.getcustompaintoptions.type.md) | 'get-paint' |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [from](./paint.getcustompaintoptions.from.md) |  | string \| [GetPaintFunction](./paint.getpaintfunction.md) |  |
+|  [options?](./paint.getcustompaintoptions.options.md) |  | any | <i>(Optional)</i> |
+|  [type](./paint.getcustompaintoptions.type.md) |  | 'get-paint' |  |
 

@@ -12,13 +12,13 @@ export interface FeatureLayerField
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [datatype](./ngw-connector.featurelayerfield.datatype.md) | [VectorFieldDatatype](./ngw-connector.vectorfielddatatype.md) |  |
-|  [display\_name](./ngw-connector.featurelayerfield.display_name.md) | string |  |
-|  [grid\_visibility](./ngw-connector.featurelayerfield.grid_visibility.md) | boolean |  |
-|  [id](./ngw-connector.featurelayerfield.id.md) | number |  |
-|  [keyname](./ngw-connector.featurelayerfield.keyname.md) | string |  |
-|  [label\_field](./ngw-connector.featurelayerfield.label_field.md) | boolean |  |
-|  [typemod?](./ngw-connector.featurelayerfield.typemod.md) | unknown | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [datatype](./ngw-connector.featurelayerfield.datatype.md) |  | [VectorFieldDatatype](./ngw-connector.vectorfielddatatype.md) |  |
+|  [display\_name](./ngw-connector.featurelayerfield.display_name.md) |  | string |  |
+|  [grid\_visibility](./ngw-connector.featurelayerfield.grid_visibility.md) |  | boolean |  |
+|  [id](./ngw-connector.featurelayerfield.id.md) |  | number |  |
+|  [keyname](./ngw-connector.featurelayerfield.keyname.md) |  | string |  |
+|  [label\_field](./ngw-connector.featurelayerfield.label_field.md) |  | boolean |  |
+|  [typemod?](./ngw-connector.featurelayerfield.typemod.md) |  | unknown | <i>(Optional)</i> |
 

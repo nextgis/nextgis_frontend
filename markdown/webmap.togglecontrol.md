@@ -12,8 +12,8 @@ export interface ToggleControl
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [changeStatus](./webmap.togglecontrol.changestatus.md) | [OnClickSync](./webmap.onclicksync.md) |  |
-|  [onClick](./webmap.togglecontrol.onclick.md) | [OnClick](./webmap.onclick.md) |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [changeStatus](./webmap.togglecontrol.changestatus.md) |  | [OnClickSync](./webmap.onclicksync.md) |  |
+|  [onClick](./webmap.togglecontrol.onclick.md) |  | [OnClick](./webmap.onclick.md) |  |
 

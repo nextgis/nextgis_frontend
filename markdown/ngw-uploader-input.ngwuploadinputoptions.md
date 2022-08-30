@@ -9,12 +9,12 @@
 ```typescript
 export interface NgwUploadInputOptions extends NgwUploadOptions 
 ```
-<b>Extends:</b> NgwUploadOptions
+<b>Extends:</b> [NgwUploadOptions](./ngw-uploader.ngwuploadoptions.md)
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [inputOptions?](./ngw-uploader-input.ngwuploadinputoptions.inputoptions.md) | [UploadInputOptions](./ngw-uploader-input.uploadinputoptions.md) | <i>(Optional)</i> |
-|  [loginDialog?](./ngw-uploader-input.ngwuploadinputoptions.logindialog.md) | boolean | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [inputOptions?](./ngw-uploader-input.ngwuploadinputoptions.inputoptions.md) |  | [UploadInputOptions](./ngw-uploader-input.uploadinputoptions.md) | <i>(Optional)</i> |
+|  [loginDialog?](./ngw-uploader-input.ngwuploadinputoptions.logindialog.md) |  | boolean | <i>(Optional)</i> |
 

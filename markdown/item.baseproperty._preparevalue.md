@@ -14,7 +14,7 @@ protected _prepareValue(value?: V): V | undefined;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  value | V |  |
+|  value | V | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

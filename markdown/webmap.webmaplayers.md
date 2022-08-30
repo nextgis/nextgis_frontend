@@ -9,7 +9,7 @@
 ```typescript
 export declare class WebMapLayers<M = any, L = any, E extends WebMapEvents = WebMapEvents, O extends MapOptions = MapOptions> extends WebMapMain<M, E, O> 
 ```
-<b>Extends:</b> [WebMapMain](./webmap.webmapmain.md)<!-- -->&lt;M, E, O&gt;
+<b>Extends:</b> [WebMapMain](./webmap.webmapmain.md)
 
 ## Constructors
 

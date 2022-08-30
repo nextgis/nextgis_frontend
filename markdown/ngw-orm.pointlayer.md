@@ -9,7 +9,7 @@
 ```typescript
 export declare class PointLayer extends VectorLayer<Point> 
 ```
-<b>Extends:</b> [VectorLayer](./ngw-orm.vectorlayer.md)<!-- -->&lt;Point&gt;
+<b>Extends:</b> [VectorLayer](./ngw-orm.vectorlayer.md)<!-- -->&lt;Point
 
 ## Properties
 

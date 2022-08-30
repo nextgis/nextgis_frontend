@@ -131,10 +131,16 @@ export interface Credentials {
   password: string;
 }
 
+export type RequestTransformFunction = (
+  url: string,
+  options: RequestOptions,
+) => [url: string, options: RequestOptions];
+
 export interface NgwConnectorOptions {
   baseUrl?: string;
   route?: string;
   auth?: Credentials;
+  requestTransform?: RequestTransformFunction;
 }
 
 export interface RequestHeaders {

@@ -14,8 +14,8 @@ matchAll(key?: string, props?: CacheMatchProps<O>): CacheValue<V>[];
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  key | string |  |
-|  props | CacheMatchProps&lt;O&gt; |  |
+|  key | string | <i>(Optional)</i> |
+|  props | CacheMatchProps&lt;O&gt; | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

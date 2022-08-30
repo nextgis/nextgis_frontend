@@ -13,8 +13,8 @@ export interface CreateRasterOptions extends ResourceCreateOptions
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [source](./ngw-uploader.createrasteroptions.source.md) | [FileMeta](./ngw-connector.filemeta.md) |  |
-|  [srs?](./ngw-uploader.createrasteroptions.srs.md) | { id: number; } | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [source](./ngw-uploader.createrasteroptions.source.md) |  | [FileMeta](./ngw-connector.filemeta.md) |  |
+|  [srs?](./ngw-uploader.createrasteroptions.srs.md) |  | { id: number; } | <i>(Optional)</i> |
 

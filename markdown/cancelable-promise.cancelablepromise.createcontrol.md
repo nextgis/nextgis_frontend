@@ -14,7 +14,7 @@ static createControl(opt?: PromiseControlOptions): PromiseControl;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  opt | PromiseControlOptions |  |
+|  opt | PromiseControlOptions | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

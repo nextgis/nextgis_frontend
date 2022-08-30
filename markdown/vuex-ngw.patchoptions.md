@@ -12,8 +12,8 @@ export interface PatchOptions<G extends Geometry | null = Geometry, P extends Ge
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [fid?](./vuex-ngw.patchoptions.fid.md) | number | <i>(Optional)</i> |
-|  [item](./vuex-ngw.patchoptions.item.md) | Feature&lt;G, P&gt; |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [fid?](./vuex-ngw.patchoptions.fid.md) |  | number | <i>(Optional)</i> |
+|  [item](./vuex-ngw.patchoptions.item.md) |  | Feature&lt;G, P&gt; |  |
 

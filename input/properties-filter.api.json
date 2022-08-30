@@ -1,8 +1,8 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.18.19",
-    "schemaVersion": 1004,
+    "toolVersion": "7.28.6",
+    "schemaVersion": 1009,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
       "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
@@ -156,18 +156,21 @@
         "@betaDocumentation": true,
         "@internalRemarks": true,
         "@preapproved": true
-      }
+      },
+      "reportUnsupportedHtmlElements": false
     }
   },
   "kind": "Package",
   "canonicalReference": "@nextgis/properties-filter!",
   "docComment": "",
   "name": "@nextgis/properties-filter",
+  "preserveMemberOrder": false,
   "members": [
     {
       "kind": "EntryPoint",
       "canonicalReference": "@nextgis/properties-filter!",
       "name": "",
+      "preserveMemberOrder": false,
       "members": [
         {
           "kind": "Function",
@@ -231,7 +234,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 5
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "checkIfPropertyFilter"
@@ -284,14 +288,16 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "filters",
               "parameterTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 4
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "featureFilter"
@@ -358,7 +364,8 @@
               "parameterTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 5
-              }
+              },
+              "isOptional": false
             }
           ],
           "name": "isPropertyFilter"
@@ -461,14 +468,16 @@
               "parameterTypeTokenRange": {
                 "startIndex": 6,
                 "endIndex": 7
-              }
+              },
+              "isOptional": false
             },
             {
               "parameterName": "filters",
               "parameterTypeTokenRange": {
                 "startIndex": 8,
                 "endIndex": 10
-              }
+              },
+              "isOptional": false
             }
           ],
           "typeParameters": [
@@ -476,7 +485,7 @@
               "typeParameterName": "T",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -551,7 +560,7 @@
               "typeParameterName": "T",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,
@@ -620,7 +629,7 @@
               "typeParameterName": "T",
               "constraintTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "defaultTypeTokenRange": {
                 "startIndex": 4,

@@ -18,7 +18,7 @@ static save<T extends VectorLayer>(this: ObjectType<T>, entityOrEntities: T | T[
 |  --- | --- | --- |
 |  this | ObjectType&lt;T&gt; |  |
 |  entityOrEntities | T \| T\[\] |  |
-|  options | UpdateOptions |  |
+|  options | UpdateOptions | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

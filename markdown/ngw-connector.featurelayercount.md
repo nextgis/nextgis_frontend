@@ -12,7 +12,7 @@ export interface FeatureLayerCount
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [total\_count](./ngw-connector.featurelayercount.total_count.md) | number |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [total\_count](./ngw-connector.featurelayercount.total_count.md) |  | number |  |
 

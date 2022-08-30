@@ -16,7 +16,7 @@ getResourcesBy(resource: DeepPartial<Resource>, requestOptions?: RequestOptions)
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  resource | [DeepPartial](./utils.deeppartial.md)<!-- -->&lt;[Resource](./ngw-connector.resource.md)<!-- -->&gt; |  |
-|  requestOptions | [RequestOptions](./ngw-connector.requestoptions.md) |  |
+|  requestOptions | [RequestOptions](./ngw-connector.requestoptions.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

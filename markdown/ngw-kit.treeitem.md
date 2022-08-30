@@ -12,11 +12,11 @@ export interface TreeItem
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [\_layer?](./ngw-kit.treeitem._layer.md) | any | <i>(Optional)</i> |
-|  [display\_name?](./ngw-kit.treeitem.display_name.md) | string | <i>(Optional)</i> |
-|  [item\_type](./ngw-kit.treeitem.item_type.md) | 'root' \| 'group' \| 'layer' \| string |  |
-|  [parentId?](./ngw-kit.treeitem.parentid.md) | number | <i>(Optional)</i> |
-|  [resourceId?](./ngw-kit.treeitem.resourceid.md) | number \| \[number, string\] | <i>(Optional)</i> |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [\_layer?](./ngw-kit.treeitem._layer.md) |  | any | <i>(Optional)</i> |
+|  [display\_name?](./ngw-kit.treeitem.display_name.md) |  | string | <i>(Optional)</i> |
+|  [item\_type](./ngw-kit.treeitem.item_type.md) |  | 'root' \| 'group' \| 'layer' \| string |  |
+|  [parentId?](./ngw-kit.treeitem.parentid.md) |  | number | <i>(Optional)</i> |
+|  [resourceId?](./ngw-kit.treeitem.resourceid.md) |  | number \| \[number, string\] | <i>(Optional)</i> |
 

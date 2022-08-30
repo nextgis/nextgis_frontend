@@ -12,9 +12,9 @@ export interface NgwTimeFormat
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [hour](./ngw-connector.ngwtimeformat.hour.md) | number |  |
-|  [minute](./ngw-connector.ngwtimeformat.minute.md) | number |  |
-|  [second](./ngw-connector.ngwtimeformat.second.md) | number |  |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [hour](./ngw-connector.ngwtimeformat.hour.md) |  | number |  |
+|  [minute](./ngw-connector.ngwtimeformat.minute.md) |  | number |  |
+|  [second](./ngw-connector.ngwtimeformat.second.md) |  | number |  |
 

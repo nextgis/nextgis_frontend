@@ -18,7 +18,7 @@ addControl<K extends keyof MapControls>(controlDef: K | C, position: ControlPosi
 |  --- | --- | --- |
 |  controlDef | K \| C |  |
 |  position | [ControlPosition](./webmap.controlposition.md) | position relative to the map angles |
-|  options | [MapControls](./webmap.mapcontrols.md)<!-- -->\[K\] | initialization parameters if the control is set as a string value |
+|  options | [MapControls](./webmap.mapcontrols.md)<!-- -->\[K\] | <i>(Optional)</i> initialization parameters if the control is set as a string value |
 
 <b>Returns:</b>
 
