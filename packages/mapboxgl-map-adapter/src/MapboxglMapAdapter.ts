@@ -134,6 +134,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
               container: options.target,
               attributionControl: false,
               bounds: options.bounds as LngLatBoundsLike,
+              maxBounds: options.maxBounds as LngLatBoundsLike,
               fitBoundsOptions: {
                 ...options.fitOptions,
                 ...fitBoundsOptions,

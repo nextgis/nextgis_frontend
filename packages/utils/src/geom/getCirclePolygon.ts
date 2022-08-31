@@ -7,6 +7,7 @@ const r2d = 180 / Math.PI; // radians to degrees
 export function getCirclePolygonCoordinates(
   lng: number,
   lat: number,
+  /** In kilometers */
   radius = 10,
   points = 6,
 ): Position[] {
