@@ -115,9 +115,11 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
             }
             const { style: mapAdapterStyle, ...mapAdapterOptions } =
               options.mapAdapterOptions || {};
+            const style_: StyleSpecification | string =
+              options.style || mapAdapterStyle;
             const style: StyleSpecification | string =
-              typeof options.style === 'string'
-                ? options.style
+              typeof style_ === 'string'
+                ? style_
                 : {
                     ...{
                       version: 8,
@@ -125,8 +127,7 @@ export class MapboxglMapAdapter implements MapAdapter<Map, TLayer, IControl> {
                       sources: {},
                       layers: [],
                     },
-                    ...options.style,
-                    ...mapAdapterStyle,
+                    ...style_,
                   };
             const mapOpt: MapboxOptions = {
               style,
