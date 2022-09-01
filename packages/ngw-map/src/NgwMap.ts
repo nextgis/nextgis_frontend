@@ -1,7 +1,7 @@
 import StrictEventEmitter from 'strict-event-emitter-types';
 import { EventEmitter } from 'events';
 import CancelablePromise from '@nextgis/cancelable-promise';
-import { defined, isObject } from '@nextgis/utils';
+import { defined, isObject, getIdentifyRadius } from '@nextgis/utils';
 import { AdapterOptions, WebMap } from '@nextgis/webmap';
 import NgwConnector from '@nextgis/ngw-connector';
 
@@ -61,7 +61,6 @@ import type {
   NgwLayers,
 } from './interfaces';
 import type { FetchNgwItemOptions } from '@nextgis/ngw-kit';
-import { getIdentifyRadius } from './utils/getIentifyRadius';
 
 type PromiseGroup = 'select' | 'identify';
 
