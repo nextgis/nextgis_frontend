@@ -6,3 +6,4 @@ export * from './getCirclePolygon';
 export * from './coordTransform';
 export * from './eachCoordinates';
 export * from './isLngLatBoundsArray';
+export * from './getIdentifyRadius';
