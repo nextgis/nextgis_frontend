@@ -2857,6 +2857,68 @@
             },
             {
               "kind": "Method",
+              "canonicalReference": "@nextgis/ngw-map!NgwMap#selectFromNgwRaster:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "selectFromNgwRaster(ev: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "MapClickEvent",
+                  "canonicalReference": "@nextgis/webmap!MapClickEvent:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NgwIdentifyEvent",
+                  "canonicalReference": "@nextgis/ngw-map!NgwIdentifyEvent:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 7
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "ev",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "name": "selectFromNgwRaster"
+            },
+            {
+              "kind": "Method",
               "canonicalReference": "@nextgis/ngw-map!NgwMap#zoomToLayer:member(1)",
               "docComment": "/**\n * @deprecated\n *\n * use {@link NgwMap.fitLayer} instead\n */\n",
               "excerptTokens": [
