@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.16.1](https://github.com/nextgis/nextgisweb_frontend/compare/v1.16.0...v1.16.1) (2022-09-03)
+
+
+### Bug Fixes
+
+* **mapbox-map-adapter:** remove type prop frm native paint ([786e5a2](https://github.com/nextgis/nextgisweb_frontend/commit/786e5a2c280c55e7bfa6a1b257fc52cb2deaa3e1))
+* **mapboxgl-map-adapter:** parse mapAdapterOptions ([8693a3c](https://github.com/nextgis/nextgisweb_frontend/commit/8693a3c00ce22da27cdb6f48b0ee977c33980e69))
+
+
+### Features
+
+* **mapboxgl-map-adapter:** set maxBounds init map option ([c90447a](https://github.com/nextgis/nextgisweb_frontend/commit/c90447aea7e7adbc13a827c9f5517040012970f8))
+* move getIdentifyRadius from ngw-map to utils package ([40d1103](https://github.com/nextgis/nextgisweb_frontend/commit/40d1103fd658ed6ffc7f530d47e36f569ad33ba4))
+
+
+
+
+
 # [1.16.0](https://github.com/nextgis/nextgisweb_frontend/compare/v1.15.1...v1.16.0) (2022-08-28)
 
 
