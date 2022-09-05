@@ -24,6 +24,7 @@ import type { IdentifyItem } from '@nextgis/ngw-kit';
 import type { JsonMap } from '@nextgis/utils';
 import type { LayerAdapter } from '@nextgis/webmap';
 import type { LayerDef } from '@nextgis/webmap';
+import type { MapClickEvent } from '@nextgis/webmap';
 import type { MapControls } from '@nextgis/webmap';
 import type { MapOptions } from '@nextgis/webmap';
 import NgwConnector from '@nextgis/ngw-connector';
@@ -116,6 +117,8 @@ export class NgwMap<M = unknown, L = unknown, C = unknown, O extends NgwMapOptio
     onLoad(event?: keyof NgwMapEvents): Promise<this>;
     // (undocumented)
     removeLayer(layerDef: LayerDef): void;
+    // (undocumented)
+    selectFromNgwRaster(ev: MapClickEvent): Promise<NgwIdentifyEvent | undefined>;
     // @deprecated (undocumented)
     zoomToLayer(layerDef: string | ResourceAdapter): Promise<void>;
 }
