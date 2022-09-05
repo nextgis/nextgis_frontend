@@ -5,6 +5,7 @@ import {
   PropertyFilter,
 } from '@nextgis/properties-filter';
 import {
+  round,
   defined,
   degrees2meters,
   isLngLatBoundsArray,
@@ -183,7 +184,7 @@ function getQueries<
 
 function createWktFromCoordArray(coord: LngLatArray[]): string {
   const polygon = coord.map(([lng, lat]) => {
-    const [x, y] = degrees2meters(lng, lat);
+    const [x, y] = degrees2meters(lng, lat).map((c) => round(c));
     return x + ' ' + y;
   });
   return `POLYGON((${polygon.join(', ')}))`;
@@ -204,6 +205,7 @@ export function fetchNgwLayerItemsRequest<
     orderBy,
     paramList,
     connector,
+    geomFormat,
     intersects,
     resourceId,
   } = options;
@@ -217,6 +219,9 @@ export function fetchNgwLayerItemsRequest<
   }
   if (offset) {
     params.offset = offset;
+  }
+  if (geomFormat) {
+    params.geom_format = geomFormat;
   }
   updateItemRequestParam(params, options);
 
