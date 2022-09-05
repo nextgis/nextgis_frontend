@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/build-tools",
-  "version": "1.15.1",
+  "version": "1.16.1",
   "description": "",
   "dependencies": {
     "@microsoft/api-extractor": "^7.28.6",
@@ -25,7 +25,7 @@
     "rollup-plugin-postcss": "4.0.2",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.32.1",
-    "typescript": "^4.5.2"
+    "typescript": "~4.6"
   },
   "scripts": {
     "clean": "exit 0",
