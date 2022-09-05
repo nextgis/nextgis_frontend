@@ -1,7 +1,7 @@
 {
   "name": "@nextgis/frontend_test",
   "private": true,
-  "version": "1.12.1",
+  "version": "1.16.1",
   "scripts": {
     "test": "yarn karma -- --single-run --coverage",
     "karma": "karma start karma.conf.js"
@@ -29,7 +29,7 @@
     "sinon-chai": "^3.7.0",
     "ts-loader": "^9.2.6",
     "ts-node": "^10.3.0",
-    "typescript": "^4.5.2",
+    "typescript": "~4.6",
     "util": "^0.12.4",
     "webpack": "^5.59.1",
     "webpack-cli": "^4.9.1"

@@ -159,7 +159,7 @@ export interface MapboxglMapAdapterOptions extends MapOptions<Map_2> {
 // src/MapboxglMapAdapter.ts:63:7 - (ae-forgotten-export) The symbol "MvtAdapter" needs to be exported by the entry point index.d.ts
 // src/MapboxglMapAdapter.ts:64:7 - (ae-forgotten-export) The symbol "OsmAdapter" needs to be exported by the entry point index.d.ts
 // src/MapboxglMapAdapter.ts:65:7 - (ae-forgotten-export) The symbol "GeoJsonAdapter" needs to be exported by the entry point index.d.ts
-// src/MapboxglMapAdapter.ts:346:15 - (ae-forgotten-export) The symbol "TLayerAdapter" needs to be exported by the entry point index.d.ts
+// src/MapboxglMapAdapter.ts:348:15 - (ae-forgotten-export) The symbol "TLayerAdapter" needs to be exported by the entry point index.d.ts
 
 // (No @packageDocumentation comment for this package)
 
