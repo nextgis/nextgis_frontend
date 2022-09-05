@@ -277,11 +277,13 @@ export interface CompanyLogoOptions {
   cssClass?: string;
 }
 
+export type GeomFormat = 'wkt' | 'geojson';
+
 export interface FeatureRequestParams {
   srs?: number;
   fields?: string;
   extensions?: string;
-  geom_format?: string;
+  geom_format?: GeomFormat;
   limit?: number;
   intersects?: string;
   order_by?: string;
@@ -295,6 +297,7 @@ export interface NgwFeatureRequestOptions<
 > extends FilterOptions<P> {
   extensions?: Extensions[] | string[] | null | false;
   geom?: boolean;
+  geomFormat?: GeomFormat;
   srs?: number;
 }
 
