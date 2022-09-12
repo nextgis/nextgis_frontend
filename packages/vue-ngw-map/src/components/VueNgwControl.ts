@@ -7,9 +7,9 @@ import { findNgwMapParent, propsBinder } from '../utils';
 import type { NgwMap } from '@nextgis/ngw-map';
 import type {
   MapControl,
-  CreateControlOptions,
-  ControlPosition,
   MapControls,
+  ControlPosition,
+  CreateControlOptions,
 } from '@nextgis/webmap';
 import type { VueNgwMap } from './VueNgwMap';
 
