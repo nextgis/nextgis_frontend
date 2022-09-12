@@ -480,6 +480,7 @@ export abstract class VectorAdapter<
               ? paint
               : this.options.nativePaint;
           const opacity = this.options.opacity;
+          delete nativePaint.type;
           if (opacity !== undefined && nativePaint) {
             const allowedNativePaint = allowedByType[type];
             const opacityProp = allowedNativePaint.find(

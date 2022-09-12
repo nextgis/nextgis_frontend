@@ -2441,7 +2441,7 @@
             },
             {
               "kind": "Content",
-              "text": ", radius?: "
+              "text": ", \nradius?: "
             },
             {
               "kind": "Content",
@@ -2591,6 +2591,83 @@
           "overloadIndex": 1,
           "parameters": [],
           "name": "getGlobalVariable"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "@nextgis/utils!getIdentifyRadius:function(1)",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function getIdentifyRadius(center: "
+            },
+            {
+              "kind": "Reference",
+              "text": "LngLatArray",
+              "canonicalReference": "!unknown"
+            },
+            {
+              "kind": "Content",
+              "text": ", zoom: "
+            },
+            {
+              "kind": "Content",
+              "text": "number"
+            },
+            {
+              "kind": "Content",
+              "text": ", pixelRadius: "
+            },
+            {
+              "kind": "Content",
+              "text": "number"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "number"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 7,
+            "endIndex": 8
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "center",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "zoom",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "pixelRadius",
+              "parameterTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "getIdentifyRadius"
         },
         {
           "kind": "Function",

@@ -128,7 +128,7 @@ export class NgwConnector {
           if (login && password) {
             return this.getUserInfo({ login, password })
               .then(() => {
-                makeQuery();
+                return makeQuery();
               })
               .catch((er) => reject(er));
           }
@@ -146,10 +146,22 @@ export class NgwConnector {
    * Quick way to change NextGIS Web user.
    * @param credentials - New user credentials
    */
-  login(credentials: Credentials): CancelablePromise<UserInfo> {
+  login(
+    credentials: Credentials,
+    options?: RequestOptions,
+  ): CancelablePromise<UserInfo> {
     this.logout();
     addConnector(this);
-    return this.getUserInfo(credentials);
+    return this.getUserInfo(credentials, options)
+      .then((data) => {
+        this.user = data;
+        this.emitter.emit('login', data);
+        return data;
+      })
+      .catch((er) => {
+        this.emitter.emit('login:error', er);
+        throw er;
+      });
   }
 
   /**
@@ -164,33 +176,28 @@ export class NgwConnector {
     this.resources.cache.clean();
   }
 
-  getUserInfo(credentials?: Credentials): CancelablePromise<UserInfo> {
+  getUserInfo(
+    credentials?: Credentials,
+    options?: RequestOptions,
+  ): CancelablePromise<UserInfo> {
     if (this.user && this.user.id) {
       return CancelablePromise.resolve(this.user);
     }
     if (credentials) {
       this.options.auth = credentials;
     }
-    const options: RequestOptions = {
+    const options_: RequestOptions = {
       headers: this.getAuthorizationHeaders(credentials),
       // withCredentials: true
+      ...options,
     };
 
     // Do not use apiRequest('auth.current_user') to avoid circular-references
     return this.makeQuery<UserInfo>(
       '/api/component/auth/current_user',
       {},
-      options,
-    )
-      .then((data) => {
-        this.user = data;
-        this.emitter.emit('login', data);
-        return data;
-      })
-      .catch((er) => {
-        this.emitter.emit('login:error', er);
-        throw er;
-      });
+      options_,
+    );
   }
 
   /**
@@ -283,7 +290,7 @@ export class NgwConnector {
           withCredentials,
           responseType,
           baseUrl: this.options.baseUrl,
-          auth: this.options.auth,
+          userId: this.user?.id,
         }),
       });
     }
