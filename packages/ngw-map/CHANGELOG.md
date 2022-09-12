@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.16.1](https://github.com/nextgis/nextgis_frontend/compare/v1.16.0...v1.16.1) (2022-09-03)
+
+
+### Features
+
+* move getIdentifyRadius from ngw-map to utils package ([40d1103](https://github.com/nextgis/nextgis_frontend/commit/40d1103fd658ed6ffc7f530d47e36f569ad33ba4))
+
+
+
+
+
 # [1.16.0](https://github.com/nextgis/nextgis_frontend/compare/v1.15.1...v1.16.0) (2022-08-28)
 
 **Note:** Version bump only for package @nextgis/ngw-map

@@ -1,21 +1,21 @@
 {
   "name": "@nextgis/vuetify-ngw-components",
-  "version": "1.16.0",
+  "version": "1.16.1",
   "description": "Vuetify components for NGW Frontend",
   "main": "index.js",
   "module": "lib/vuetify-ngw-components.esm-bundler.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/leaflet-map-adapter": "^1.16.0",
-    "@nextgis/ngw-map": "^1.16.0",
-    "@nextgis/utils": "^1.15.1",
+    "@nextgis/leaflet-map-adapter": "^1.16.1",
+    "@nextgis/ngw-map": "^1.16.1",
+    "@nextgis/utils": "^1.16.1",
     "vue": "^2.6.14",
     "vue-class-component": "^7.2.6",
     "vue-property-decorator": "^9.1.2",
     "vuetify": "^2.5.10"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "^1.15.1"
+    "@nextgis/build-tools": "^1.16.1"
   },
   "buildOptions": {
     "name": "VuetifyNgwComponents",
