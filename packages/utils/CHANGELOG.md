@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.16.1](https://github.com/nextgis/nextgis_frontend/compare/v1.16.0...v1.16.1) (2022-09-03)
+
+
+### Features
+
+* **mapboxgl-map-adapter:** set maxBounds init map option ([c90447a](https://github.com/nextgis/nextgis_frontend/commit/c90447aea7e7adbc13a827c9f5517040012970f8))
+* move getIdentifyRadius from ngw-map to utils package ([40d1103](https://github.com/nextgis/nextgis_frontend/commit/40d1103fd658ed6ffc7f530d47e36f569ad33ba4))
+
+
+
+
+
 ## [1.15.1](https://github.com/nextgis/nextgis_frontend/compare/v1.15.0...v1.15.1) (2022-08-02)
 
 **Note:** Version bump only for package @nextgis/utils

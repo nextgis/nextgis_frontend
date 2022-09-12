@@ -10,6 +10,7 @@ import type { EventEmitter } from 'events';
 import type { Feature } from 'geojson';
 import type { GeoJSON as GeoJSON_2 } from 'geojson';
 import type { Geometry } from 'geojson';
+import { LngLatArray as LngLatArray_2 } from '@nextgis/utils';
 import { LngLatBoundsArray as LngLatBoundsArray_2 } from '@nextgis/utils';
 import type { Polygon } from 'geojson';
 import type { Position as Position_2 } from 'geojson';
@@ -156,13 +157,17 @@ export function getBoundsPolygon(b: LngLatBoundsArray): Polygon;
 export function getCircleFeature(lng: number, lat: number, radius?: number, points?: number): Feature<Polygon>;
 
 // @public (undocumented)
-export function getCirclePolygonCoordinates(lng: number, lat: number, radius?: number, points?: number): Position_2[];
+export function getCirclePolygonCoordinates(lng: number, lat: number,
+radius?: number, points?: number): Position_2[];
 
 // @public (undocumented)
 export function getCoordinates(geojson: GeoJSON_2): Position_2[];
 
 // @public (undocumented)
 export function getGlobalVariable(): any;
+
+// @public (undocumented)
+export function getIdentifyRadius(center: LngLatArray_2, zoom: number, pixelRadius: number): number;
 
 // @public (undocumented)
 export function getPolygons(geojson: GeoJSON_2): Position_2[][];
