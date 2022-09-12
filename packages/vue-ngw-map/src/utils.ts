@@ -45,6 +45,11 @@ export const findNgwMapParent = (
     if (!('ngwMap' in firstVueParent)) {
       if (firstVueParent.$parent) {
         firstVueParent = firstVueParent.$parent;
+      } else {
+        found = true;
+        throw new Error(
+          'Cant find `ngwMap` property in VueNgwMap component context',
+        );
       }
     } else {
       found = true;
