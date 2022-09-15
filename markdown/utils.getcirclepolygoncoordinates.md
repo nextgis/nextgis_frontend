@@ -7,7 +7,8 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function getCirclePolygonCoordinates(lng: number, lat: number, radius?: number, points?: number): Position[];
+export declare function getCirclePolygonCoordinates(lng: number, lat: number, 
+radius?: number, points?: number): Position[];
 ```
 
 ## Parameters

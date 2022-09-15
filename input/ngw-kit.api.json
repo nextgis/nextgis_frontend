@@ -2104,8 +2104,9 @@
                   "text": "geom_format?: "
                 },
                 {
-                  "kind": "Content",
-                  "text": "string"
+                  "kind": "Reference",
+                  "text": "GeomFormat",
+                  "canonicalReference": "@nextgis/ngw-kit!GeomFormat:type"
                 },
                 {
                   "kind": "Content",
@@ -4107,6 +4108,31 @@
               "endIndex": 2
             }
           ]
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "@nextgis/ngw-kit!GeomFormat:type",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type GeomFormat = "
+            },
+            {
+              "kind": "Content",
+              "text": "'wkt' | 'geojson'"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "GeomFormat",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          }
         },
         {
           "kind": "TypeAlias",
@@ -7109,6 +7135,34 @@
               "isOptional": true,
               "releaseTag": "Public",
               "name": "geom",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/ngw-kit!NgwFeatureRequestOptions#geomFormat:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "geomFormat?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "GeomFormat",
+                  "canonicalReference": "@nextgis/ngw-kit!GeomFormat:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "geomFormat",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
