@@ -73,5 +73,6 @@ const ngwMap = new NgwMap({
 |  [getNgwLayers()](./ngw-map.ngwmap.getngwlayers.md) |  |  |
 |  [onLoad(event)](./ngw-map.ngwmap.onload.md) |  |  |
 |  [removeLayer(layerDef)](./ngw-map.ngwmap.removelayer.md) |  |  |
+|  [selectFromNgwRaster(ev)](./ngw-map.ngwmap.selectfromngwraster.md) |  |  |
 |  [zoomToLayer(layerDef)](./ngw-map.ngwmap.zoomtolayer.md) |  |  |
 

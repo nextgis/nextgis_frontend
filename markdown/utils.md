@@ -43,6 +43,7 @@
 |  [getCirclePolygonCoordinates(lng, lat, radius, points)](./utils.getcirclepolygoncoordinates.md) |  |
 |  [getCoordinates(geojson)](./utils.getcoordinates.md) |  |
 |  [getGlobalVariable()](./utils.getglobalvariable.md) |  |
+|  [getIdentifyRadius(center, zoom, pixelRadius)](./utils.getidentifyradius.md) |  |
 |  [getPolygons(geojson)](./utils.getpolygons.md) |  |
 |  [isAnyJson(val)](./utils.isanyjson.md) |  |
 |  [isArray(val)](./utils.isarray.md) |  |
