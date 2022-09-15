@@ -23,11 +23,11 @@
     "prerelease": "npm run test:build && lerna version --conventional-commits --conventional-prerelease -m \"chore(release): publish %s\" --no-push --create-release github"
   },
   "devDependencies": {
-    "@microsoft/api-documenter": "^7.14.1",
-    "@types/node": "^17.0.9",
-    "eslint-plugin-tsdoc": "^0.2.14",
-    "lerna": "^4.0.0",
-    "lint-staged": "^12.1.7",
+    "@microsoft/api-documenter": "^7.19.13",
+    "@types/node": "^18.7.18",
+    "eslint-plugin-tsdoc": "^0.2.17",
+    "lerna": "^5.5.1",
+    "lint-staged": "^13.0.3",
     "rimraf": "^3.0.2",
     "yorkie": "^2.0.0"
   },
