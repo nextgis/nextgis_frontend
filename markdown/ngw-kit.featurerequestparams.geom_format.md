@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-geom_format?: string;
+geom_format?: GeomFormat;
 ```

@@ -18,5 +18,5 @@ export declare function ReactNgwMapbox<Props extends MapContainerProps = MapCont
 
 <b>Returns:</b>
 
-import("react").FunctionComponentElement&lt;import("@nextgis/react-ngw-map").ReactNgwMapProps&gt;
+import("react").FunctionComponentElement&lt;import("@nextgis/react-ngw-map").[ReactNgwMapProps](./react-ngw-map.reactngwmapprops.md)<!-- -->&gt;
 
