@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.16.3](https://github.com/nextgis/nextgisweb_frontend/compare/v1.16.2...v1.16.3) (2022-09-16)
+
+
+### Features
+
+* **ngw-kit:** add postgis_layer cls adapter ([ce50b85](https://github.com/nextgis/nextgisweb_frontend/commit/ce50b85af31802e3abea59686786205a7cc261c4))
+
+
+
+
+
 ## [1.16.2](https://github.com/nextgis/nextgisweb_frontend/compare/v1.16.1...v1.16.2) (2022-09-15)
 
 
