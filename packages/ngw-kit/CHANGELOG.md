@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.16.3](https://github.com/nextgis/nextgis_frontend/compare/v1.16.2...v1.16.3) (2022-09-16)
+
+
+### Features
+
+* **ngw-kit:** add postgis_layer cls adapter ([ce50b85](https://github.com/nextgis/nextgis_frontend/commit/ce50b85af31802e3abea59686786205a7cc261c4))
+
+
+
+
+
+## [1.16.2](https://github.com/nextgis/nextgis_frontend/compare/v1.16.1...v1.16.2) (2022-09-15)
+
+
+### Features
+
+* **ngw-connector:** remove login logic from getUserInfo ([2ee3f29](https://github.com/nextgis/nextgis_frontend/commit/2ee3f29a6a694b73fe5e24ab46147aea974761ab))
+
+
+### BREAKING CHANGES
+
+* **ngw-connector:** The getUserInfo mehod does not emit any more login events. Only login method does this
+
+
+
+
+
 ## [1.16.1](https://github.com/nextgis/nextgis_frontend/compare/v1.16.0...v1.16.1) (2022-09-03)
 
 **Note:** Version bump only for package @nextgis/ngw-kit

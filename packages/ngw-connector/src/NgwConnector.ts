@@ -7,6 +7,7 @@ import Cache from '@nextgis/cache';
 import { loadData } from './utils/loadData';
 import { template } from './utils/template';
 import { NgwError } from './errors/NgwError';
+import { apiRequest } from './utils/apiRequest';
 import { ResourceNotFoundError } from './errors/ResourceNotFoundError';
 import { InsufficientPermissionsError } from './errors/InsufficientPermissionsError';
 import {
@@ -23,6 +24,7 @@ import type {
   PostRequestItemsResponseMap,
   GetRequestItemsResponseMap,
   PutRequestItemsResponseMap,
+  RequestTransformFunction,
   GetChildrenOfOptions,
   ResourceIdKeynameDef,
   NgwConnectorOptions,
@@ -35,11 +37,9 @@ import type {
   Credentials,
   UserInfo,
   Params,
-  RequestTransformFunction,
 } from './interfaces';
 import type { RequestItemsParamsMap } from './types/RequestItemsParamsMap';
 import type { ResourceItem, Resource } from './types/ResourceItem';
-import { apiRequest } from './utils/apiRequest';
 
 let ID = 0;
 
@@ -126,7 +126,7 @@ export class NgwConnector {
         if (auth) {
           const { login, password } = auth;
           if (login && password) {
-            return this.getUserInfo({ login, password })
+            return this._login({ login, password })
               .then(() => {
                 return makeQuery();
               })
@@ -152,16 +152,7 @@ export class NgwConnector {
   ): CancelablePromise<UserInfo> {
     this.logout();
     addConnector(this);
-    return this.getUserInfo(credentials, options)
-      .then((data) => {
-        this.user = data;
-        this.emitter.emit('login', data);
-        return data;
-      })
-      .catch((er) => {
-        this.emitter.emit('login:error', er);
-        throw er;
-      });
+    return this._login(credentials, options);
   }
 
   /**
@@ -599,6 +590,22 @@ export class NgwConnector {
     }
     this.activeRequests.push(request);
     return request;
+  }
+
+  private _login(
+    credentials: Credentials,
+    options?: RequestOptions,
+  ): CancelablePromise<UserInfo> {
+    return this.getUserInfo(credentials, options)
+      .then((data) => {
+        this.user = data;
+        this.emitter.emit('login', data);
+        return data;
+      })
+      .catch((er) => {
+        this.emitter.emit('login:error', er);
+        throw er;
+      });
   }
 
   private _cleanActiveRequests(request: CancelablePromise) {
