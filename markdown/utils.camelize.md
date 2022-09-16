@@ -4,17 +4,20 @@
 
 ## camelize() function
 
+Camelize a string, cutting the string by separator character.
+
 <b>Signature:</b>
 
 ```typescript
-export declare function camelize(str: string): string;
+export declare function camelize(text: string, separator?: RegExp): string;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  str | string |  |
+|  text | string | to camelize |
+|  separator | RegExp | <i>(Optional)</i> Word separator (string or regexp)  string Camelized text |
 
 <b>Returns:</b>
 

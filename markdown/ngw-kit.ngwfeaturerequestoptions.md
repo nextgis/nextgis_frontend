@@ -17,5 +17,6 @@ export interface NgwFeatureRequestOptions<P extends FeatureProperties = FeatureP
 |  --- | --- | --- | --- |
 |  [extensions?](./ngw-kit.ngwfeaturerequestoptions.extensions.md) |  | Extensions\[\] \| string\[\] \| null \| false | <i>(Optional)</i> |
 |  [geom?](./ngw-kit.ngwfeaturerequestoptions.geom.md) |  | boolean | <i>(Optional)</i> |
+|  [geomFormat?](./ngw-kit.ngwfeaturerequestoptions.geomformat.md) |  | [GeomFormat](./ngw-kit.geomformat.md) | <i>(Optional)</i> |
 |  [srs?](./ngw-kit.ngwfeaturerequestoptions.srs.md) |  | number | <i>(Optional)</i> |
 

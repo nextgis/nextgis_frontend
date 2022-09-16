@@ -9,7 +9,7 @@ Quick way to change NextGIS Web user.
 <b>Signature:</b>
 
 ```typescript
-login(credentials: Credentials): CancelablePromise<UserInfo>;
+login(credentials: Credentials, options?: RequestOptions): CancelablePromise<UserInfo>;
 ```
 
 ## Parameters
@@ -17,6 +17,7 @@ login(credentials: Credentials): CancelablePromise<UserInfo>;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  credentials | [Credentials](./ngw-connector.credentials.md) | New user credentials |
+|  options | [RequestOptions](./ngw-connector.requestoptions.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 
