@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/ngw-map",
-  "version": "1.16.2",
+  "version": "1.16.3",
   "_priority": 11,
   "description": "",
   "main": "index.js",
@@ -11,7 +11,7 @@
   "dependencies": {
     "@nextgis/icons": "^1.16.2",
     "@nextgis/ngw-connector": "^1.16.2",
-    "@nextgis/ngw-kit": "^1.16.2",
+    "@nextgis/ngw-kit": "^1.16.3",
     "@nextgis/qms-kit": "^1.16.2",
     "@nextgis/utils": "^1.16.2",
     "@nextgis/webmap": "^1.16.2",
