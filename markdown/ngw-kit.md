@@ -176,6 +176,7 @@ getNgwLayerItems({
 |  [ClassAdapter](./ngw-kit.classadapter.md) |  |
 |  [FetchNgwItemOptions](./ngw-kit.fetchngwitemoptions.md) |  |
 |  [FetchNgwItemsOptions](./ngw-kit.fetchngwitemsoptions.md) |  |
+|  [GeomFormat](./ngw-kit.geomformat.md) |  |
 |  [GetClassAdapter](./ngw-kit.getclassadapter.md) |  |
 |  [GetClassAdapterByType](./ngw-kit.getclassadapterbytype.md) |  |
 |  [GetClassAdapterCallback](./ngw-kit.getclassadaptercallback.md) |  |

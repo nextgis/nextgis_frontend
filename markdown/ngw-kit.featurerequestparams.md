@@ -16,7 +16,7 @@ export interface FeatureRequestParams
 |  --- | --- | --- | --- |
 |  [extensions?](./ngw-kit.featurerequestparams.extensions.md) |  | string | <i>(Optional)</i> |
 |  [fields?](./ngw-kit.featurerequestparams.fields.md) |  | string | <i>(Optional)</i> |
-|  [geom\_format?](./ngw-kit.featurerequestparams.geom_format.md) |  | string | <i>(Optional)</i> |
+|  [geom\_format?](./ngw-kit.featurerequestparams.geom_format.md) |  | [GeomFormat](./ngw-kit.geomformat.md) | <i>(Optional)</i> |
 |  [geom?](./ngw-kit.featurerequestparams.geom.md) |  | 'yes' \| 'no' | <i>(Optional)</i> |
 |  [intersects?](./ngw-kit.featurerequestparams.intersects.md) |  | string | <i>(Optional)</i> |
 |  [limit?](./ngw-kit.featurerequestparams.limit.md) |  | number | <i>(Optional)</i> |

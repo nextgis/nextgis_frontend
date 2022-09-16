@@ -34,6 +34,7 @@ const supportCls: ResourceCls[] = [
   'basemap_layer',
   'vector_layer',
   'raster_layer',
+  'postgis_layer',
   'webmap',
   // in tms branch
   'tmsclient_layer',
@@ -49,7 +50,6 @@ async function createAdapterFromFirstStyle({
   const childrenStyles = await connector.getResourceChildren(parent);
   const firstStyle = childrenStyles && childrenStyles[0];
   if (firstStyle) {
-    // eslint-disable-next-line @typescript-eslint/no-use-before-define
     return createAsyncAdapter(
       { ...layerOptions, resource: firstStyle.resource.id },
       webMap,
@@ -96,7 +96,7 @@ export async function createAsyncAdapter(
       if (supportCls.indexOf(cls) !== -1) {
         if (cls === 'webmap') {
           adapter = createWebMapAdapter(adapterOptions);
-        } else if (cls === 'vector_layer') {
+        } else if (cls === 'vector_layer' || cls === 'postgis_layer') {
           const type =
             item.vector_layer &&
             vectorLayerGeomToPaintTypeAlias[item.vector_layer.geometry_type];

@@ -333,12 +333,12 @@ class NgwConnector {
     // (undocumented)
     getResourcesBy(resource: DeepPartial<Resource>, requestOptions?: RequestOptions): CancelablePromise<ResourceItem[]>;
     // (undocumented)
-    getUserInfo(credentials?: Credentials): CancelablePromise<UserInfo>;
+    getUserInfo(credentials?: Credentials, options?: RequestOptions): CancelablePromise<UserInfo>;
     // (undocumented)
     id: number;
     // @internal (undocumented)
     protected _loadData(url: string, options: RequestOptions): CancelablePromise<any>;
-    login(credentials: Credentials): CancelablePromise<UserInfo>;
+    login(credentials: Credentials, options?: RequestOptions): CancelablePromise<UserInfo>;
     logout(): void;
     // (undocumented)
     makeClientId(credentials?: Credentials): string | undefined;

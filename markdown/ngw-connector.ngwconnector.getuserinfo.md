@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-getUserInfo(credentials?: Credentials): CancelablePromise<UserInfo>;
+getUserInfo(credentials?: Credentials, options?: RequestOptions): CancelablePromise<UserInfo>;
 ```
 
 ## Parameters
@@ -15,6 +15,7 @@ getUserInfo(credentials?: Credentials): CancelablePromise<UserInfo>;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  credentials | [Credentials](./ngw-connector.credentials.md) | <i>(Optional)</i> |
+|  options | [RequestOptions](./ngw-connector.requestoptions.md) | <i>(Optional)</i> |
 
 <b>Returns:</b>
 

@@ -184,7 +184,7 @@ export interface FeatureRequestParams {
     // (undocumented)
     geom?: 'yes' | 'no';
     // (undocumented)
-    geom_format?: string;
+    geom_format?: GeomFormat;
     // (undocumented)
     intersects?: string;
     // (undocumented)
@@ -277,6 +277,9 @@ export interface FetchNgwResourceExtent extends NgwRequestOptions {
 
 // @public @deprecated (undocumented)
 export function fetchNgwResourceExtent(item: ResourceItem, connector: NgwConnector, options?: FetchNgwLayerExtentOptions): CancelablePromise<LngLatBoundsArray | undefined>;
+
+// @public (undocumented)
+export type GeomFormat = 'wkt' | 'geojson';
 
 // @public (undocumented)
 export type GetClassAdapter = GetClassAdapterCallback | GetClassAdapterByType;
@@ -482,6 +485,8 @@ export interface NgwFeatureRequestOptions<P extends FeatureProperties = FeatureP
     extensions?: Extensions[] | string[] | null | false;
     // (undocumented)
     geom?: boolean;
+    // (undocumented)
+    geomFormat?: GeomFormat;
     // (undocumented)
     srs?: number;
 }
