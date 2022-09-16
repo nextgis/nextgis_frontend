@@ -21,7 +21,7 @@
 |  [arrayCompare(array1, array2)](./utils.arraycompare.md) | Comparison of the contents of two arrays. Position of elements is ignored. |
 |  [arrayCompareStrict(array1, array2)](./utils.arraycomparestrict.md) | Comparing content and position of elements of two arrays. |
 |  [arrayUnique(arr)](./utils.arrayunique.md) |  |
-|  [camelize(str)](./utils.camelize.md) |  |
+|  [camelize(text, separator)](./utils.camelize.md) | Camelize a string, cutting the string by separator character. |
 |  [capitalize(str)](./utils.capitalize.md) |  |
 |  [coordinatesCount(geojson)](./utils.coordinatescount.md) |  |
 |  [debounce(cb, wait)](./utils.debounce.md) |  |
@@ -43,6 +43,7 @@
 |  [getCirclePolygonCoordinates(lng, lat, radius, points)](./utils.getcirclepolygoncoordinates.md) |  |
 |  [getCoordinates(geojson)](./utils.getcoordinates.md) |  |
 |  [getGlobalVariable()](./utils.getglobalvariable.md) |  |
+|  [getIdentifyRadius(center, zoom, pixelRadius)](./utils.getidentifyradius.md) |  |
 |  [getPolygons(geojson)](./utils.getpolygons.md) |  |
 |  [isAnyJson(val)](./utils.isanyjson.md) |  |
 |  [isArray(val)](./utils.isarray.md) |  |

@@ -50,8 +50,8 @@ export declare class NgwConnector
 |  [getResourceOrFail(resource, requestOptions)](./ngw-connector.ngwconnector.getresourceorfail.md) |  |  |
 |  [getResourceParent(resource, requestOptions)](./ngw-connector.ngwconnector.getresourceparent.md) |  |  |
 |  [getResourcesBy(resource, requestOptions)](./ngw-connector.ngwconnector.getresourcesby.md) |  |  |
-|  [getUserInfo(credentials)](./ngw-connector.ngwconnector.getuserinfo.md) |  |  |
-|  [login(credentials)](./ngw-connector.ngwconnector.login.md) |  | Quick way to change NextGIS Web user. |
+|  [getUserInfo(credentials, options)](./ngw-connector.ngwconnector.getuserinfo.md) |  |  |
+|  [login(credentials, options)](./ngw-connector.ngwconnector.login.md) |  | Quick way to change NextGIS Web user. |
 |  [logout()](./ngw-connector.ngwconnector.logout.md) |  | Disconnecting a user. Aborting all current requests |
 |  [makeClientId(credentials)](./ngw-connector.ngwconnector.makeclientid.md) |  |  |
 |  [makeQuery(url, params, options)](./ngw-connector.ngwconnector.makequery.md) |  | Send request to NGW. |

@@ -44,8 +44,8 @@ export function arrayCompareStrict(array1: any[], array2: any[]): boolean;
 // @public (undocumented)
 export function arrayUnique<T = any>(arr: T[]): T[];
 
-// @public (undocumented)
-export function camelize(str: string): string;
+// @public
+export function camelize(text: string, separator?: RegExp): string;
 
 // @public (undocumented)
 export function capitalize(str: string): string;

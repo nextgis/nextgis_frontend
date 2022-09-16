@@ -18,5 +18,5 @@ export declare function ReactNgwLeaflet<Props extends MapContainerProps = MapCon
 
 <b>Returns:</b>
 
-import("react").FunctionComponentElement&lt;import("@nextgis/react-ngw-map").[ReactNgwMapProps](./react-ngw-map.reactngwmapprops.md)<!-- -->&gt;
+import("react").FunctionComponentElement&lt;import("@nextgis/react-ngw-map").ReactNgwMapProps&gt;
 
