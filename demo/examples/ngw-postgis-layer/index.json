@@ -1,0 +1,6 @@
+{
+  "name": "NGW PostGIS layer",
+  "description": "Add a layer based on PostGIS connection to the WebMap",
+  "ngwMaps": ["ngw-leaflet", "ngw-ol", "ngw-mapbox"],
+  "tags": ["PostGIS", "DB"]
+}
