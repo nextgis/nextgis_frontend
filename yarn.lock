@@ -1286,10 +1286,10 @@
   integrity sha512-9b8mPpKrfeGRuhFH5iO1iwCLeIIsV6+H1sRfxbkoGXIyQE2BTsPd9zqSqQJ+pv5sJ/hT5M1zvOFL02MnEezFug==
 
 "@nextgis/build-tools@file:packages/build-tools":
-  version "1.16.1"
+  version "1.16.2"
   dependencies:
     "@microsoft/api-extractor" "^7.28.6"
-    "@nextgis/eslint-config" "^1.8.4"
+    "@nextgis/eslint-config" "^1.16.2"
     "@rollup/plugin-alias" "^3.1.9"
     "@rollup/plugin-commonjs" "^22.0.1"
     "@rollup/plugin-image" "^2.1.1"
@@ -11313,9 +11313,9 @@ vuetify-loader@^1.7.3:
     loader-utils "^2.0.0"
 
 vuetify@^2.5.10:
-  version "2.6.7"
-  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-2.6.7.tgz#9c6fb7d20e1c4b07417084cbe5996c2dadf099df"
-  integrity sha512-1XxCv6mt1UsKaW7rqow0hF/jOw1ijT/fHH9euWLHgSVIcPAx8D2AY5ihTCBbMmV53Hj/YD0DUvzyk6cM/OGHvw==
+  version "2.6.10"
+  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-2.6.10.tgz#b86cd7a97bf8cd3828a72c349795b5b3c539ebc2"
+  integrity sha512-fgUeRDDCwYkwu6WGEEKGe7IdfzOsXJCZGrqkn1pcS2ycuoDL8mR2/dejH5iFNnBY6MnsT365PAGn0J+9otjfQg==
 
 vuex-class@^0.3.2:
   version "0.3.2"
