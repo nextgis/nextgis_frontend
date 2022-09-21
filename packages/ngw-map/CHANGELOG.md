@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.16.4](https://github.com/nextgis/nextgis_frontend/compare/v1.16.3...v1.16.4) (2022-09-21)
+
+
+### Bug Fixes
+
+* **ngw-map:** correct ngw:select event data for raster layer ([8af8eeb](https://github.com/nextgis/nextgis_frontend/commit/8af8eeb0ef64002e786603623d8fa2868374fff5))
+
+
+
+
+
 ## [1.16.3](https://github.com/nextgis/nextgis_frontend/compare/v1.16.2...v1.16.3) (2022-09-16)
 
 **Note:** Version bump only for package @nextgis/ngw-map
