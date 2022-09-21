@@ -42,7 +42,7 @@ import type { WebMapEvents } from '@nextgis/webmap';
 export function createNgwMap(options: NgwMapOptions): Promise<NgwMap>;
 
 // @public (undocumented)
-export type NgwIdentifyEvent<F = FeatureProperties, G extends Geometry = Geometry> = NgwIdentify & {
+export type NgwIdentifyEvent<F extends FeatureProperties = FeatureProperties, G extends Geometry = Geometry> = NgwIdentify & {
     getIdentifyItems: () => IdentifyItem<F, G>[];
 };
 
