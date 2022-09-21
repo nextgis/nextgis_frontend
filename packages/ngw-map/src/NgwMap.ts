@@ -578,7 +578,7 @@ export class NgwMap<
         event: ev,
       };
       const identifyEvent: NgwIdentifyEvent = this._prepareToIdentify(identify);
-      this._emitStatusEvent('ngw:select', identify);
+      this._emitStatusEvent('ngw:select', identifyEvent);
       return identifyEvent;
     });
     this._addPromise('select', selectPromise);
@@ -712,7 +712,7 @@ export class NgwMap<
   }
 
   private _prepareToIdentify<
-    F = FeatureProperties,
+    F extends FeatureProperties = FeatureProperties,
     G extends Geometry = Geometry,
   >(identify: NgwIdentify): NgwIdentifyEvent {
     const getIdentifyItems_ = () => {
