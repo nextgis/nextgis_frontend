@@ -135,7 +135,7 @@ export interface NgwLayers {
 }
 
 export type NgwIdentifyEvent<
-  F = FeatureProperties,
+  F extends FeatureProperties = FeatureProperties,
   G extends Geometry = Geometry,
 > = NgwIdentify & {
   getIdentifyItems: () => IdentifyItem<F, G>[];
