@@ -220,7 +220,7 @@ export class LeafletMapAdapter implements MapAdapter<Map, any, Control> {
   }
 
   getZoom(): number | undefined {
-    return (this.map && this.map.getZoom()) || undefined;
+    return (this.map && this.map.getZoom()) ?? undefined;
   }
 
   getBounds(): LngLatBoundsArray | undefined {
