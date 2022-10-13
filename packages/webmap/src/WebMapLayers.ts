@@ -601,7 +601,7 @@ export class WebMapLayers<
         this._emitLayerEvent('layer:toggle', id, l);
       }
     };
-    if (layer && layer.options.visibility !== toStatus) {
+    if (layer) {
       return this.onMapLoad().then(() => action(layer));
     }
     return Promise.resolve();
