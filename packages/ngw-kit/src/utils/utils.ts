@@ -20,7 +20,7 @@ export function updateImageParams(
     extent: bbox,
     size: width + ',' + height,
     timestamp: Date.now(),
-    nd,
+    nd: nd ?? 200,
   };
 }
 
