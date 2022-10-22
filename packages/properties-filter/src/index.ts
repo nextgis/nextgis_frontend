@@ -9,6 +9,7 @@ export {
   featureFilter,
 } from './propertiesFilter';
 export type {
+  Operation,
   Operations,
   PropertyFilter,
   PropertiesFilter,
