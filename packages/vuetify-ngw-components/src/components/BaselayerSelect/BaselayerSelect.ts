@@ -40,7 +40,9 @@ export class BaselayerSelect extends Vue {
     const activeLayer = this._layers.find((x) => x.id === active);
     if (this.webMap) {
       if (activeLayer) {
-        this.webMap.showLayer(activeLayer);
+        if (!this.webMap.isLayerVisible(activeLayer)) {
+          this.webMap.showLayer(activeLayer);
+        }
       } else {
         const activeBaseLayer = this.webMap.getActiveBaseLayer();
         if (activeBaseLayer) {
