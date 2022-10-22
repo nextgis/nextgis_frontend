@@ -1,6 +1,6 @@
 import type { Feature } from 'geojson';
 import type {
-  Operations,
+  Operation,
   Properties,
   PropertiesFilter,
   PropertyFilter,
@@ -20,7 +20,7 @@ function like(b: string, a: string, iLike?: boolean): boolean {
 }
 
 export const operationsAliases: {
-  [key in Operations]: (a: any, b: any) => boolean;
+  [key in Operation]: (a: any, b: any) => boolean;
 } = {
   // greater(>)
   gt: (a: any, b: any) => a > b,

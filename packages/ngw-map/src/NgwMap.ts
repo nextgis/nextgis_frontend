@@ -18,6 +18,7 @@ import {
   fetchNgwLayerItem,
   getIdentifyItems,
   getCompanyLogo,
+  fetchNgwExtent,
 } from '@nextgis/ngw-kit';
 import { deprecatedWarn } from '@nextgis/utils';
 import { getIcon } from '@nextgis/icons';
@@ -367,7 +368,10 @@ export class NgwMap<
    * ngwMap.fitLayer('ngw_layer_name');
    * ```
    */
-  async fitLayer(layerDef: LayerDef, options?: FitOptions): Promise<void> {
+  async fitLayer(
+    layerDef: LayerDef | number,
+    options?: FitOptions,
+  ): Promise<void> {
     let id: string | undefined;
     if (typeof layerDef === 'string' || typeof layerDef === 'number') {
       id = String(id);
@@ -390,7 +394,10 @@ export class NgwMap<
           item = await this.connector.getResource(resourceId);
         }
         if (item) {
-          fetchNgwResourceExtent(item, this.connector).then((extent) => {
+          fetchNgwExtent({
+            resourceId: item.resource.id,
+            connector: this.connector,
+          }).then((extent) => {
             if (extent) {
               this.fitBounds(extent, options);
             }
@@ -398,7 +405,10 @@ export class NgwMap<
         }
       }
     } else {
-      super.fitLayer(layerDef, options);
+      super.fitLayer(
+        typeof layerDef === 'number' ? String(layerDef) : layerDef,
+        options,
+      );
     }
   }
 

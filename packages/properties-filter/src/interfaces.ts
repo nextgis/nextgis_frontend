@@ -8,7 +8,7 @@
  * like - LIKE SQL statement (for strings compare)
  * ilike - ILIKE SQL statement (for strings compare)
  */
-export type Operations =
+export type Operation =
   | 'gt'
   | 'lt'
   | 'ge'
@@ -19,6 +19,9 @@ export type Operations =
   | 'notin'
   | 'like'
   | 'ilike';
+
+/** @deprecated use {@link Operation} instead */
+export type Operations = Operation;
 
 export type Properties = { [name: string]: any };
 
@@ -35,7 +38,7 @@ export type PropertyFilter<T extends Properties = Properties> = [
         | `%${string & keyof T}`
         | `%${string & keyof T}%`
         | `${string & keyof T}%`,
-  Operations,
+  Operation,
   any,
 ];
 
