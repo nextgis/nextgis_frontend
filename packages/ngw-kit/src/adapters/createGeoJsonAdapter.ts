@@ -242,7 +242,7 @@ export async function createGeoJsonAdapter(
       }
     }
 
-    async propertiesFilter(filters: PropertiesFilter, opt?: FilterOptions) {
+    async propertiesFilter(filters: PropertiesFilter, opt?: FilterOptions): Promise<void> {
       abort();
       if (this.filter && _fullDataLoad) {
         this.filter((e) => {
