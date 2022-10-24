@@ -639,7 +639,7 @@ export interface VectorLayerAdapter<
   propertiesFilter?(
     filters: PropertiesFilter<P>,
     options?: FilterOptions<P>,
-  ): void;
+  ): Promise<void>;
   /**
    * Cancel the filter, return all objects to the map.
    */

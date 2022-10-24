@@ -308,7 +308,8 @@ export interface GetNgwItemOptions extends FetchNgwLayerExtentOptions {
 export type NgwRequestOptions = Pick<RequestOptions, 'cache' | 'signal'>;
 
 export interface FetchNgwLayerExtentOptions extends NgwRequestOptions {
-  resourceId: number;
+  // TODO: safe rename to resource
+  resourceId: number | string;
   connector: NgwConnector;
 }
 

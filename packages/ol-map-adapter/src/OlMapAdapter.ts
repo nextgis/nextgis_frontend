@@ -264,6 +264,16 @@ export class OlMapAdapter implements MapAdapter<Map, Layer> {
 
   showLayer(layer: Layer): void {
     if (this.map) {
+      const layers = this.map.getLayers();
+
+      for (const l of layers.getArray()) {
+        if (l === layer) {
+          if (__DEV__) {
+            console.warn(`DEV: OL layer already added`);
+          }
+          return;
+        }
+      }
       this.map.addLayer(layer);
     }
   }
