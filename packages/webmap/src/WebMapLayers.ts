@@ -735,20 +735,22 @@ export class WebMapLayers<
     layerDef: LayerDef,
     filters: PropertiesFilter,
     options?: FilterOptions,
-  ): void {
+  ): Promise<void> {
     const layer = this.getLayer(layerDef);
-    if (!layer) return;
-    const adapter = layer as VectorLayerAdapter;
-    if (adapter.propertiesFilter) {
-      adapter.propertiesFilter(filters, options);
-    } else if (adapter.filter) {
-      this.filterLayer(adapter, (e) => {
-        if (e.feature && e.feature.properties) {
-          return propertiesFilter(e.feature.properties, filters);
-        }
-        return true;
-      });
+    if (layer) {
+      const adapter = layer as VectorLayerAdapter;
+      if (adapter.propertiesFilter) {
+        return adapter.propertiesFilter(filters, options);
+      } else if (adapter.filter) {
+        this.filterLayer(adapter, (e) => {
+          if (e.feature && e.feature.properties) {
+            return propertiesFilter(e.feature.properties, filters);
+          }
+          return true;
+        });
+      }
     }
+    return Promise.resolve();
   }
 
   removeLayerFilter(layerDef: LayerDef): void {
