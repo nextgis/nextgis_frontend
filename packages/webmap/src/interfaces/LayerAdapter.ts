@@ -6,6 +6,7 @@ import type {
   FeatureProperties,
   LngLatArray,
   Type,
+  ExtractFeatureProperties,
 } from '@nextgis/utils';
 import type { MapClickEvent } from './MapAdapter';
 
@@ -231,9 +232,9 @@ type _VectorAdapterOptionsToExtend<
 export interface VectorAdapterOptions<
   F extends Feature = Feature,
   L = any,
-  A = Record<string, any>,
-  N = Record<string, any>,
-  P = F['properties'],
+  A extends FeatureProperties = Record<string, any>,
+  N extends FeatureProperties = Record<string, any>,
+  P extends FeatureProperties = ExtractFeatureProperties<F>
 > extends _VectorAdapterOptionsToExtend<P, A, N> {
   /**
    * Determine the appearance of the vector data geometries.
@@ -374,8 +375,8 @@ export interface VectorAdapterOptions<
 export interface GeoJsonAdapterOptions<
   F extends Feature = Feature,
   L = any,
-  A = Record<string, any>,
-  N = Record<string, any>,
+  A extends FeatureProperties = Record<string, any>,
+  N extends FeatureProperties = Record<string, any>,
 > extends VectorAdapterOptions<F, L, A, N> {
   /** Geojson data */
   data?: GeoJsonObject;
