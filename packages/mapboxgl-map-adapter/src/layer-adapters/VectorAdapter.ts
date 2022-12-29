@@ -196,7 +196,7 @@ export abstract class VectorAdapter<
     return this.layer;
   }
 
-  propertiesFilter(filters: PropertiesFilter, options?: FilterOptions): void {
+  async propertiesFilter(filters: PropertiesFilter, options?: FilterOptions): Promise<void> {
     this._filterProperties = filters;
     this._updatePropertiesFilter();
   }
