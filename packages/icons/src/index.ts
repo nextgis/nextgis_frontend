@@ -21,6 +21,9 @@ const svgPath: { [name: string]: string | GetPathCallback } = {
 };
 
 export interface IconOptions {
+  svg?: string;
+  /** Svg path */
+  p?: string;
   shape?:
     | 'rect'
     | 'star'
@@ -40,7 +43,7 @@ export interface IconOptions {
 
 const STROKE = 0.8;
 
-function insertSvg(
+function generateSvg(
   width: number,
   height: number,
   stroke = 0,
@@ -54,6 +57,10 @@ function insertSvg(
     height="${height}"
     viewBox="-${s} -${s} ${width + stroke} ${height + stroke}"
   >${content}</svg>`;
+  return svg;
+}
+
+function insertSvg(svg: string) {
   const oParser = new DOMParser();
   const oDOM = oParser.parseFromString(svg, 'image/svg+xml');
   return oDOM.documentElement;
@@ -63,20 +70,22 @@ type GetPathCallback = (opt?: IconOptions) => string;
 
 export function getIcon(opt: IconOptions = {}): IconPaint {
   // default values
-  const shape = opt.shape || 'circle';
-  const color = opt.color || 'blue';
-  const strokeColor = opt.strokeColor || 'white';
-  const size = opt.size || 12;
+  const shape = opt.shape ?? 'circle';
+  const color = opt.color ?? 'blue';
+  const strokeColor = opt.strokeColor ?? 'white';
+  const size = opt.size ?? 12;
 
   const anchor = size / 2;
   const defSize = 12;
   const stroke = typeof opt.stroke === 'number' ? opt.stroke : STROKE;
   const scale = size / defSize;
 
-  const pathAlias = svgPath[shape] || 'circle';
+  const pathAlias = opt.p || svgPath[shape] || 'circle';
 
   const path = typeof pathAlias === 'string' ? pathAlias : pathAlias(opt);
-  const svg = insertSvg(size, size, stroke * scale, path);
+  const svg = insertSvg(
+    opt.svg || generateSvg(size, size, stroke * scale, path),
+  );
   const fistChild = svg.firstChild as SVGElement;
 
   const transform = `scale(${scale})`;
