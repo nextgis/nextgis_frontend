@@ -82,7 +82,7 @@ import { getWebMap, setWebMap } from './container';
 export class WebMap<
     M = any,
     L = any,
-    C = any,
+    C extends object = any,
     E extends WebMapEvents = WebMapEvents,
     O extends MapOptions = MapOptions,
   >

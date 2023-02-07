@@ -14,11 +14,11 @@ import type {
   TreeRelation,
 } from './interfaces';
 
-export class Tree<TREE_ITEM = any> {
+export class Tree<T extends DefaultTreeItem | undefined = any> {
   relation: TreeRelation = 'children';
-  children: Tree<TREE_ITEM>[] = [];
+  children: Tree<T>[] = [];
 
-  protected _parent?: Tree<TREE_ITEM>;
+  protected _parent?: Tree<T>;
 
   constructor(
     public item: DefaultTreeItem = { children: [] },
@@ -35,7 +35,7 @@ export class Tree<TREE_ITEM = any> {
     }
   }
 
-  addChild(treeItem: TREE_ITEM): void {
+  addChild(treeItem: T): void {
     const childTreeItem = new Tree(treeItem, { relation: this.relation });
     Object.defineProperty(childTreeItem, '_parent', { value: this });
     this.children.push(childTreeItem);
@@ -53,11 +53,11 @@ export class Tree<TREE_ITEM = any> {
     return !!treeSome(this, filter, this.relation, (t) => t.item);
   }
 
-  find(filter?: PropertyFilter | SelfFilter<TREE_ITEM>): Tree {
+  find(filter?: PropertyFilter | SelfFilter<T>): Tree {
     return treeFind<any>(this, filter, this.relation, (t) => t.item);
   }
 
-  filter(filter?: PropertyFilter | SelfFilter<TREE_ITEM>): Tree[] {
+  filter(filter?: PropertyFilter | SelfFilter<T>): Tree[] {
     return treeFilter<any>(this, filter, this.relation, (t) => t.item);
   }
 }

@@ -213,7 +213,7 @@ export function sendIdentifyRequest(
 }
 
 export function createIdentifyItem<
-  F = FeatureProperties,
+  F extends FeatureProperties = FeatureProperties,
   G extends Geometry = Geometry,
 >(opt: IdentifyItemOptions): IdentifyItem<F, G> {
   return new IdentifyItem<F, G>(opt);
