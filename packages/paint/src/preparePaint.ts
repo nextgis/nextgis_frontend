@@ -53,7 +53,7 @@ function createPropertiesPaint(
   };
 }
 
-export function expressionCallback<P = Record<string, any>>(
+export function expressionCallback<P extends Record<string, any> = Record<string, any>>(
   paint: P,
   defaultPaint?: P,
   getPaintFunctions?: Record<string, GetPaintFunction>,

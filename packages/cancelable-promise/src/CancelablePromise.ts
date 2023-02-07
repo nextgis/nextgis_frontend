@@ -160,8 +160,9 @@ export class CancelablePromise<T = any> implements Promise<T> {
     }).catch((er) => {
       if (er instanceof this.CancelError) {
         for (const v of values) {
-          if ('cancel' in v) {
-            (v as CancelablePromise).cancel();
+          const v_ = v as CancelablePromise
+          if ('cancel' in v_) {
+            v_.cancel();
           }
         }
       }
