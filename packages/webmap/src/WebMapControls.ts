@@ -20,7 +20,7 @@ import type { ControlPosition } from './interfaces/MapAdapter';
 export class WebMapControls<
     M = any,
     L = any,
-    C = any,
+    C extends object = any,
     E extends WebMapEvents = WebMapEvents,
     O extends MapOptions = MapOptions,
   >

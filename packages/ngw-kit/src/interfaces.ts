@@ -95,7 +95,7 @@ export type TileNoData = 200 | 404 | 204;
 export interface NgwLayerOptions<
   T extends NgwLayerAdapterType = NgwLayerAdapterType,
   P = FeatureProperties,
-  A = Record<string, any>,
+  A extends Record<string, any> = Record<string, any>,
 > {
   resource: ResourceDefinition;
   id?: string;

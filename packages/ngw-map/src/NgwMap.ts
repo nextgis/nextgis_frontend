@@ -87,7 +87,7 @@ type PromiseGroup = 'select' | 'identify';
 export class NgwMap<
   M = unknown,
   L = unknown,
-  C = unknown,
+  C extends object = any,
   O extends NgwMapOptions<M, C> = NgwMapOptions<M, C>,
 > extends WebMap<M, L, C, NgwMapEvents, O> {
   static getIcon = getIcon;
