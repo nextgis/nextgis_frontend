@@ -1652,6 +1652,121 @@
           "extendsTokenRanges": []
         },
         {
+          "kind": "TypeAlias",
+          "canonicalReference": "@nextgis/webmap!CreatePopupContent:type",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type CreatePopupContent<F extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Feature",
+              "canonicalReference": "@types/geojson!Feature:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            },
+            {
+              "kind": "Content",
+              "text": "= "
+            },
+            {
+              "kind": "Reference",
+              "text": "Feature",
+              "canonicalReference": "@types/geojson!Feature:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", L = "
+            },
+            {
+              "kind": "Content",
+              "text": "any"
+            },
+            {
+              "kind": "Content",
+              "text": "> = "
+            },
+            {
+              "kind": "Content",
+              "text": "(props: "
+            },
+            {
+              "kind": "Reference",
+              "text": "CreatePopupContentProps",
+              "canonicalReference": "@nextgis/webmap!CreatePopupContentProps:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<F, L>) => "
+            },
+            {
+              "kind": "Reference",
+              "text": "HTMLElement",
+              "canonicalReference": "!HTMLElement:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " | string | undefined | "
+            },
+            {
+              "kind": "Reference",
+              "text": "Promise",
+              "canonicalReference": "!Promise:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "HTMLElement",
+              "canonicalReference": "!HTMLElement:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " | string | undefined>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "CreatePopupContent",
+          "typeParameters": [
+            {
+              "typeParameterName": "F",
+              "constraintTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 5
+              }
+            },
+            {
+              "typeParameterName": "L",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 7
+              }
+            }
+          ],
+          "typeTokenRange": {
+            "startIndex": 8,
+            "endIndex": 17
+          }
+        },
+        {
           "kind": "Interface",
           "canonicalReference": "@nextgis/webmap!CreatePopupContentProps:interface",
           "docComment": "",
@@ -9874,44 +9989,13 @@
                   "text": "createPopupContent?: "
                 },
                 {
-                  "kind": "Content",
-                  "text": "(props: "
-                },
-                {
                   "kind": "Reference",
-                  "text": "CreatePopupContentProps",
-                  "canonicalReference": "@nextgis/webmap!CreatePopupContentProps:interface"
+                  "text": "CreatePopupContent",
+                  "canonicalReference": "@nextgis/webmap!CreatePopupContent:type"
                 },
                 {
                   "kind": "Content",
-                  "text": "<F, L>) => "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "HTMLElement",
-                  "canonicalReference": "!HTMLElement:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": " | string | undefined | "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Promise",
-                  "canonicalReference": "!Promise:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<"
-                },
-                {
-                  "kind": "Reference",
-                  "text": "HTMLElement",
-                  "canonicalReference": "!HTMLElement:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": " | string | undefined>"
+                  "text": "<F, L>"
                 },
                 {
                   "kind": "Content",
@@ -9924,7 +10008,7 @@
               "name": "createPopupContent",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 10
+                "endIndex": 3
               }
             },
             {

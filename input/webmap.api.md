@@ -121,6 +121,9 @@ export interface CreateControlOptions {
 }
 
 // @public (undocumented)
+export type CreatePopupContent<F extends Feature = Feature, L = any> = (props: CreatePopupContentProps<F, L>) => HTMLElement | string | undefined | Promise<HTMLElement | string | undefined>;
+
+// @public (undocumented)
 export interface CreatePopupContentProps<F extends Feature = Feature, L = any> extends LayerDefinition<F, L> {
     close: () => void;
     onClose: (cb: PopupOnCloseFunction) => void;
@@ -623,7 +626,7 @@ export interface PopupOptions<F extends Feature = Feature, L = any> {
     // (undocumented)
     closeButton?: boolean;
     // (undocumented)
-    createPopupContent?: (props: CreatePopupContentProps<F, L>) => HTMLElement | string | undefined | Promise<HTMLElement | string | undefined>;
+    createPopupContent?: CreatePopupContent<F, L>;
     // (undocumented)
     fromProperties?: boolean;
     // (undocumented)
