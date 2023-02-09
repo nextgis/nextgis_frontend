@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/item",
-  "version": "1.16.5",
+  "version": "1.16.6",
   "description": "Hierarchical layers control",
   "main": "index.js",
   "module": "lib/item.esm-bundler.js",
@@ -8,12 +8,12 @@
   "jsdelivr": "lib/item.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/tree": "^1.16.5",
+    "@nextgis/tree": "^1.16.6",
     "@types/events": "^3.0.0",
     "events": "^3.3.0"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "^1.16.5"
+    "@nextgis/build-tools": "^1.16.6"
   },
   "buildOptions": {
     "name": "Items",

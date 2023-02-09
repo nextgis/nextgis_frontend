@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.16.6](https://github.com/nextgis/nextgis_frontend/compare/v1.16.5...v1.16.6) (2023-02-09)
+
+### Bug Fixes
+
+- **mapbox-map-adapter:** popup on hover ([d3544e3](https://github.com/nextgis/nextgis_frontend/commit/d3544e3cbf9d3a8754c58d596b8f9c240141d461))
+
 ## [1.16.5](https://github.com/nextgis/nextgis_frontend/compare/v1.16.4...v1.16.5) (2023-02-09)
 
 **Note:** Version bump only for package @nextgis/mapboxgl-map-adapter

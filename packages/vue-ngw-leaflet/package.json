@@ -1,16 +1,16 @@
 {
   "name": "@nextgis/vue-ngw-leaflet",
-  "version": "1.16.5",
+  "version": "1.16.6",
   "description": "Vue ngw map component for leaflet",
   "main": "lib/index.js",
   "module": "lib/vue-ngw-leaflet.esm-bundler.js",
   "#types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/leaflet-map-adapter": "^1.16.5",
-    "@nextgis/vue-ngw-map": "^1.16.5"
+    "@nextgis/leaflet-map-adapter": "^1.16.6",
+    "@nextgis/vue-ngw-map": "^1.16.6"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "^1.16.5"
+    "@nextgis/build-tools": "^1.16.6"
   },
   "buildOptions": {
     "name": "VueNgwLeaflet",

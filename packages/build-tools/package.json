@@ -1,10 +1,10 @@
 {
   "name": "@nextgis/build-tools",
-  "version": "1.16.5",
+  "version": "1.16.6",
   "description": "",
   "dependencies": {
     "@microsoft/api-extractor": "^7.28.6",
-    "@nextgis/eslint-config": "^1.16.5",
+    "@nextgis/eslint-config": "^1.16.6",
     "@rollup/plugin-alias": "^3.1.9",
     "@rollup/plugin-commonjs": "^22.0.1",
     "@rollup/plugin-image": "^2.1.1",

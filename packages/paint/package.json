@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/paint",
-  "version": "1.16.5",
+  "version": "1.16.6",
   "description": "Create style for vector layer",
   "main": "index.js",
   "module": "lib/paint.esm-bundler.js",
@@ -8,11 +8,11 @@
   "jsdelivr": "lib/paint.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/properties-filter": "^1.16.5",
+    "@nextgis/properties-filter": "^1.16.6",
     "geojson": "^0.5.0"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "^1.16.5"
+    "@nextgis/build-tools": "^1.16.6"
   },
   "buildOptions": {
     "name": "Paint",
