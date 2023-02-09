@@ -203,6 +203,14 @@ export interface CreatePopupContentProps<F extends Feature = Feature, L = any>
   onClose: (cb: PopupOnCloseFunction) => void;
 }
 
+export type CreatePopupContent<F extends Feature = Feature, L = any> = (
+  props: CreatePopupContentProps<F, L>,
+) =>
+  | HTMLElement
+  | string
+  | undefined
+  | Promise<HTMLElement | string | undefined>;
+
 export interface PopupOptions<F extends Feature = Feature, L = any> {
   minWidth?: number;
   maxWidth?: number;
@@ -214,13 +222,7 @@ export interface PopupOptions<F extends Feature = Feature, L = any> {
    * @defaultValue true
    */
   unselectOnClose?: boolean;
-  createPopupContent?: (
-    props: CreatePopupContentProps<F, L>,
-  ) =>
-    | HTMLElement
-    | string
-    | undefined
-    | Promise<HTMLElement | string | undefined>;
+  createPopupContent?: CreatePopupContent<F, L>;
 }
 
 type _VectorAdapterOptionsToExtend<
@@ -234,7 +236,7 @@ export interface VectorAdapterOptions<
   L = any,
   A extends FeatureProperties = Record<string, any>,
   N extends FeatureProperties = Record<string, any>,
-  P extends FeatureProperties = ExtractFeatureProperties<F>
+  P extends FeatureProperties = ExtractFeatureProperties<F>,
 > extends _VectorAdapterOptionsToExtend<P, A, N> {
   /**
    * Determine the appearance of the vector data geometries.
