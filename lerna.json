@@ -1,10 +1,8 @@
 {
-  "packages": [
-    "packages/*"
-  ],
+  "packages": ["packages/*"],
   "npmClient": "yarn",
   "useWorkspaces": true,
-  "version": "1.16.4",
+  "version": "1.16.5",
   "command": {
     "version": {
       "message": "chore(release): publish %s"
@@ -17,10 +15,7 @@
       ]
     },
     "publish": {
-      "ignoreChanges": [
-        "@nextgis/frontend_test",
-        "@nextgis/demo-app"
-      ]
+      "ignoreChanges": ["@nextgis/frontend_test", "@nextgis/demo-app"]
     }
   }
 }
