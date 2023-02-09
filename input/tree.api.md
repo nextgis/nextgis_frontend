@@ -6,30 +6,30 @@
 
 import type { PropertyFilter } from '@nextgis/properties-filter';
 
+// Warning: (ae-forgotten-export) The symbol "DefaultTreeItem" needs to be exported by the entry point index.d.ts
+//
 // @public (undocumented)
-export class Tree<TREE_ITEM = any> {
+export class Tree<T extends DefaultTreeItem | undefined = any> {
     // Warning: (ae-forgotten-export) The symbol "TreeOptions" needs to be exported by the entry point index.d.ts
     constructor(item?: DefaultTreeItem, options?: TreeOptions<any>);
     // (undocumented)
-    addChild(treeItem: TREE_ITEM): void;
+    addChild(treeItem: T): void;
     // (undocumented)
-    children: Tree<TREE_ITEM>[];
+    children: Tree<T>[];
     // Warning: (ae-forgotten-export) The symbol "SelfFilter" needs to be exported by the entry point index.d.ts
     //
     // (undocumented)
     every(filter?: PropertyFilter | SelfFilter): boolean;
     // (undocumented)
-    filter(filter?: PropertyFilter | SelfFilter<TREE_ITEM>): Tree[];
+    filter(filter?: PropertyFilter | SelfFilter<T>): Tree[];
     // (undocumented)
-    find(filter?: PropertyFilter | SelfFilter<TREE_ITEM>): Tree;
+    find(filter?: PropertyFilter | SelfFilter<T>): Tree;
     // (undocumented)
     getParents(): Tree[];
-    // Warning: (ae-forgotten-export) The symbol "DefaultTreeItem" needs to be exported by the entry point index.d.ts
-    //
     // (undocumented)
     item: DefaultTreeItem;
     // (undocumented)
-    protected _parent?: Tree<TREE_ITEM>;
+    protected _parent?: Tree<T>;
     // Warning: (ae-forgotten-export) The symbol "TreeRelation" needs to be exported by the entry point index.d.ts
     //
     // (undocumented)
@@ -43,32 +43,23 @@ export class Tree<TREE_ITEM = any> {
 //
 // @public (undocumented)
 function treeEvery<F extends D = D>(item: F | F[], filter?: PropertyFilter | SelfFilter<F>, relation?: TreeRelation<F>, itemPrepare?: ItemPrepareFunction<F>): boolean;
-
 export { treeEvery as every }
-
 export { treeEvery }
 
 // @public (undocumented)
 function treeFilter<F extends D = D>(item: F | F[], filter?: PropertyFilter | SelfFilter<F>, relation?: TreeRelation<F>, itemPrepare?: ItemPrepareFunction<F>): F[];
-
 export { treeFilter as filter }
-
 export { treeFilter }
 
 // @public (undocumented)
 function treeFind<F extends D = D>(item: F | F[], filter?: PropertyFilter | SelfFilter<F>, relation?: TreeRelation<F>, itemPrepare?: ItemPrepareFunction<F>): F | undefined;
-
 export { treeFind as find }
-
 export { treeFind }
 
 // @public (undocumented)
 function treeSome<F extends D = D>(item: F | F[], filter?: PropertyFilter | SelfFilter<F>, relation?: TreeRelation<F>, itemPrepare?: ItemPrepareFunction<F>): boolean;
-
 export { treeSome as some }
-
 export { treeSome }
-
 
 // (No @packageDocumentation comment for this package)
 

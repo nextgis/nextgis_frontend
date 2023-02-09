@@ -8,6 +8,7 @@
 
 import CancelablePromise from '@nextgis/cancelable-promise';
 import { EventEmitter } from 'events';
+import type { ExtractFeatureProperties } from '@nextgis/utils';
 import type { Feature } from 'geojson';
 import type { FeatureProperties } from '@nextgis/utils';
 import type { GeoJsonGeometryTypes } from 'geojson';
@@ -193,7 +194,7 @@ export interface FitOptions {
 }
 
 // @public (undocumented)
-export interface GeoJsonAdapterOptions<F extends Feature = Feature, L = any, A = Record<string, any>, N = Record<string, any>> extends VectorAdapterOptions<F, L, A, N> {
+export interface GeoJsonAdapterOptions<F extends Feature = Feature, L = any, A extends FeatureProperties = Record<string, any>, N extends FeatureProperties = Record<string, any>> extends VectorAdapterOptions<F, L, A, N> {
     data?: GeoJsonObject;
 }
 
@@ -727,7 +728,7 @@ export type VectorAdapterLayerType = 'polygon' | 'point' | 'line';
 // Warning: (ae-forgotten-export) The symbol "_VectorAdapterOptionsToExtend" needs to be exported by the entry point index.d.ts
 //
 // @public (undocumented)
-export interface VectorAdapterOptions<F extends Feature = Feature, L = any, A = Record<string, any>, N = Record<string, any>, P = F['properties']> extends _VectorAdapterOptionsToExtend<P, A, N> {
+export interface VectorAdapterOptions<F extends Feature = Feature, L = any, A extends FeatureProperties = Record<string, any>, N extends FeatureProperties = Record<string, any>, P extends FeatureProperties = ExtractFeatureProperties<F>> extends _VectorAdapterOptionsToExtend<P, A, N> {
     // (undocumented)
     cluster?: boolean;
     clusterMaxZoom?: number;
@@ -796,7 +797,7 @@ export interface VectorLayerAdapter<M = any, L = any, O extends VectorAdapterOpt
     onLayerClick?(event: OnLayerMouseOptions): Promise<any>;
     // (undocumented)
     openPopup?(findFeatureCb?: DataLayerFilter<F, L>, options?: PopupOptions): void;
-    propertiesFilter?(filters: PropertiesFilter<P>, options?: FilterOptions<P>): void;
+    propertiesFilter?(filters: PropertiesFilter<P>, options?: FilterOptions<P>): Promise<void>;
     removeFilter?(): void;
     select?(findFeatureCb?: DataLayerFilter<F, L> | PropertiesFilter): void;
     selected?: boolean;
@@ -819,7 +820,7 @@ export interface ViewOptions {
 }
 
 // @public
-export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEvents, O extends MapOptions = MapOptions> extends WebMapControls<M, L, C, E, O> implements WebMapControls, WebMapLayers, WebMapMain {
+export class WebMap<M = any, L = any, C extends object = any, E extends WebMapEvents = WebMapEvents, O extends MapOptions = MapOptions> extends WebMapControls<M, L, C, E, O> implements WebMapControls, WebMapLayers, WebMapMain {
     constructor(mapOptions: O);
     // @internal (undocumented)
     protected _addLayerProviders(): Promise<void>;
@@ -830,7 +831,7 @@ export class WebMap<M = any, L = any, C = any, E extends WebMapEvents = WebMapEv
 }
 
 // @public
-export class WebMapControls<M = any, L = any, C = any, E extends WebMapEvents = WebMapEvents, O extends MapOptions = MapOptions> extends WebMapLayers<M, L, E, O> implements WebMapLayers, WebMapMain {
+export class WebMapControls<M = any, L = any, C extends object = any, E extends WebMapEvents = WebMapEvents, O extends MapOptions = MapOptions> extends WebMapLayers<M, L, E, O> implements WebMapLayers, WebMapMain {
     // (undocumented)
     addControl<K extends keyof MapControls>(controlDef: K | C, position: ControlPosition, options?: MapControls[K]): Promise<any>;
     // (undocumented)
@@ -934,7 +935,7 @@ export class WebMapLayers<M = any, L = any, E extends WebMapEvents = WebMapEvent
     // (undocumented)
     orderedLayers<LA extends LayerAdapter<M, L> = LayerAdapter<M, L>>(): LA[];
     // (undocumented)
-    propertiesFilter(layerDef: LayerDef, filters: PropertiesFilter, options?: FilterOptions): void;
+    propertiesFilter(layerDef: LayerDef, filters: PropertiesFilter, options?: FilterOptions): Promise<void>;
     removeLayer(layerDef: LayerDef): void;
     // (undocumented)
     removeLayerFilter(layerDef: LayerDef): void;

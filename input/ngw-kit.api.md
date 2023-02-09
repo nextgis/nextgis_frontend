@@ -110,7 +110,7 @@ export function createGeoJsonAdapter(props: GetClassAdapterOptions): Promise<Typ
 export function createGeoJsonFeature<G extends Geometry | null = Geometry, P extends FeatureProperties = FeatureProperties>(item: Pick<FeatureItem, 'id' | 'geom' | 'fields'>): Feature<G, P>;
 
 // @public (undocumented)
-export function createIdentifyItem<F = FeatureProperties, G extends Geometry = Geometry>(opt: IdentifyItemOptions): IdentifyItem<F, G>;
+export function createIdentifyItem<F extends FeatureProperties = FeatureProperties, G extends Geometry = Geometry>(opt: IdentifyItemOptions): IdentifyItem<F, G>;
 
 // @public (undocumented)
 export function createNgwLayerAdapter(options: NgwLayerOptions, webMap: WebMap, connector: NgwConnector): Promise<Type<ResourceAdapter> | undefined>;
@@ -233,7 +233,7 @@ export interface FetchNgwLayerExtentOptions extends NgwRequestOptions {
     // (undocumented)
     connector: NgwConnector;
     // (undocumented)
-    resourceId: number;
+    resourceId: number | string;
 }
 
 // @public (undocumented)
@@ -390,7 +390,7 @@ export interface IdentifyEvent {
 }
 
 // @public (undocumented)
-export class IdentifyItem<F = FeatureProperties, G extends Geometry = Geometry> implements LayerFeature {
+export class IdentifyItem<F extends FeatureProperties = FeatureProperties, G extends Geometry = Geometry> implements LayerFeature {
     constructor(options: IdentifyItemOptions);
     // (undocumented)
     extensions?: FeatureItemExtensions;
@@ -546,7 +546,7 @@ export interface NgwKitOptions {
 export type NgwLayerAdapterType = 'IMAGE' | 'TILE' | 'GEOJSON' | 'MVT' | 'WMS' | 'TERRAIN' | 'MODEL_3D' | 'NGW:WEBMAP';
 
 // @public (undocumented)
-export interface NgwLayerOptions<T extends NgwLayerAdapterType = NgwLayerAdapterType, P = FeatureProperties, A = Record<string, any>> {
+export interface NgwLayerOptions<T extends NgwLayerAdapterType = NgwLayerAdapterType, P = FeatureProperties, A extends Record<string, any> = Record<string, any>> {
     // (undocumented)
     adapter?: T;
     // (undocumented)
