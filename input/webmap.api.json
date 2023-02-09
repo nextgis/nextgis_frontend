@@ -2726,7 +2726,20 @@
             },
             {
               "kind": "Content",
-              "text": ", A = "
+              "text": ", A extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "FeatureProperties",
+              "canonicalReference": "@nextgis/utils!FeatureProperties:type"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            },
+            {
+              "kind": "Content",
+              "text": "= "
             },
             {
               "kind": "Reference",
@@ -2739,7 +2752,20 @@
             },
             {
               "kind": "Content",
-              "text": ", N = "
+              "text": ", N extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "FeatureProperties",
+              "canonicalReference": "@nextgis/utils!FeatureProperties:type"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            },
+            {
+              "kind": "Content",
+              "text": "= "
             },
             {
               "kind": "Reference",
@@ -2791,23 +2817,23 @@
             {
               "typeParameterName": "A",
               "constraintTokenRange": {
-                "startIndex": 0,
-                "endIndex": 0
+                "startIndex": 8,
+                "endIndex": 9
               },
               "defaultTypeTokenRange": {
-                "startIndex": 8,
-                "endIndex": 10
+                "startIndex": 11,
+                "endIndex": 13
               }
             },
             {
               "typeParameterName": "N",
               "constraintTokenRange": {
-                "startIndex": 0,
-                "endIndex": 0
+                "startIndex": 14,
+                "endIndex": 15
               },
               "defaultTypeTokenRange": {
-                "startIndex": 11,
-                "endIndex": 13
+                "startIndex": 17,
+                "endIndex": 19
               }
             }
           ],
@@ -2845,8 +2871,8 @@
           ],
           "extendsTokenRanges": [
             {
-              "startIndex": 14,
-              "endIndex": 15
+              "startIndex": 20,
+              "endIndex": 21
             }
           ]
         },
@@ -7307,7 +7333,7 @@
                 {
                   "kind": "Reference",
                   "text": "ViewOptions",
-                  "canonicalReference": "!unknown"
+                  "canonicalReference": "@nextgis/webmap!ViewOptions:interface"
                 },
                 {
                   "kind": "Content",
@@ -11213,7 +11239,20 @@
             },
             {
               "kind": "Content",
-              "text": ", A = "
+              "text": ", A extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "FeatureProperties",
+              "canonicalReference": "@nextgis/utils!FeatureProperties:type"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            },
+            {
+              "kind": "Content",
+              "text": "= "
             },
             {
               "kind": "Reference",
@@ -11226,7 +11265,20 @@
             },
             {
               "kind": "Content",
-              "text": ", N = "
+              "text": ", N extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "FeatureProperties",
+              "canonicalReference": "@nextgis/utils!FeatureProperties:type"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            },
+            {
+              "kind": "Content",
+              "text": "= "
             },
             {
               "kind": "Reference",
@@ -11239,11 +11291,29 @@
             },
             {
               "kind": "Content",
-              "text": ", P = "
+              "text": ", P extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "FeatureProperties",
+              "canonicalReference": "@nextgis/utils!FeatureProperties:type"
             },
             {
               "kind": "Content",
-              "text": "F['properties']"
+              "text": " "
+            },
+            {
+              "kind": "Content",
+              "text": "= "
+            },
+            {
+              "kind": "Reference",
+              "text": "ExtractFeatureProperties",
+              "canonicalReference": "@nextgis/utils!ExtractFeatureProperties:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<F>"
             },
             {
               "kind": "Content",
@@ -11286,19 +11356,8 @@
             {
               "typeParameterName": "A",
               "constraintTokenRange": {
-                "startIndex": 0,
-                "endIndex": 0
-              },
-              "defaultTypeTokenRange": {
                 "startIndex": 8,
-                "endIndex": 10
-              }
-            },
-            {
-              "typeParameterName": "N",
-              "constraintTokenRange": {
-                "startIndex": 0,
-                "endIndex": 0
+                "endIndex": 9
               },
               "defaultTypeTokenRange": {
                 "startIndex": 11,
@@ -11306,14 +11365,25 @@
               }
             },
             {
-              "typeParameterName": "P",
+              "typeParameterName": "N",
               "constraintTokenRange": {
-                "startIndex": 0,
-                "endIndex": 0
-              },
-              "defaultTypeTokenRange": {
                 "startIndex": 14,
                 "endIndex": 15
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 17,
+                "endIndex": 19
+              }
+            },
+            {
+              "typeParameterName": "P",
+              "constraintTokenRange": {
+                "startIndex": 20,
+                "endIndex": 21
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 23,
+                "endIndex": 25
               }
             }
           ],
@@ -12396,8 +12466,8 @@
           ],
           "extendsTokenRanges": [
             {
-              "startIndex": 16,
-              "endIndex": 17
+              "startIndex": 26,
+              "endIndex": 27
             }
           ]
         },
@@ -13124,8 +13194,13 @@
                   "text": "): "
                 },
                 {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
                   "kind": "Content",
-                  "text": "void"
+                  "text": "<void>"
                 },
                 {
                   "kind": "Content",
@@ -13135,7 +13210,7 @@
               "isOptional": true,
               "returnTypeTokenRange": {
                 "startIndex": 7,
-                "endIndex": 8
+                "endIndex": 9
               },
               "releaseTag": "Public",
               "overloadIndex": 1,
@@ -13673,7 +13748,15 @@
             },
             {
               "kind": "Content",
-              "text": ", C = "
+              "text": ", C extends "
+            },
+            {
+              "kind": "Content",
+              "text": "object "
+            },
+            {
+              "kind": "Content",
+              "text": "= "
             },
             {
               "kind": "Content",
@@ -13795,34 +13878,34 @@
             {
               "typeParameterName": "C",
               "constraintTokenRange": {
-                "startIndex": 0,
-                "endIndex": 0
-              },
-              "defaultTypeTokenRange": {
                 "startIndex": 5,
                 "endIndex": 6
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 7,
+                "endIndex": 8
               }
             },
             {
               "typeParameterName": "E",
               "constraintTokenRange": {
-                "startIndex": 7,
-                "endIndex": 8
+                "startIndex": 9,
+                "endIndex": 10
               },
               "defaultTypeTokenRange": {
-                "startIndex": 10,
-                "endIndex": 11
+                "startIndex": 12,
+                "endIndex": 13
               }
             },
             {
               "typeParameterName": "O",
               "constraintTokenRange": {
-                "startIndex": 12,
-                "endIndex": 13
+                "startIndex": 14,
+                "endIndex": 15
               },
               "defaultTypeTokenRange": {
-                "startIndex": 15,
-                "endIndex": 16
+                "startIndex": 17,
+                "endIndex": 18
               }
             }
           ],
@@ -13945,14 +14028,10 @@
             }
           ],
           "extendsTokenRange": {
-            "startIndex": 17,
-            "endIndex": 18
+            "startIndex": 19,
+            "endIndex": 20
           },
           "implementsTokenRanges": [
-            {
-              "startIndex": 20,
-              "endIndex": 21
-            },
             {
               "startIndex": 22,
               "endIndex": 23
@@ -13960,6 +14039,10 @@
             {
               "startIndex": 24,
               "endIndex": 25
+            },
+            {
+              "startIndex": 26,
+              "endIndex": 27
             }
           ]
         },
@@ -13986,7 +14069,15 @@
             },
             {
               "kind": "Content",
-              "text": ", C = "
+              "text": ", C extends "
+            },
+            {
+              "kind": "Content",
+              "text": "object "
+            },
+            {
+              "kind": "Content",
+              "text": "= "
             },
             {
               "kind": "Content",
@@ -14099,34 +14190,34 @@
             {
               "typeParameterName": "C",
               "constraintTokenRange": {
-                "startIndex": 0,
-                "endIndex": 0
-              },
-              "defaultTypeTokenRange": {
                 "startIndex": 5,
                 "endIndex": 6
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 7,
+                "endIndex": 8
               }
             },
             {
               "typeParameterName": "E",
               "constraintTokenRange": {
-                "startIndex": 7,
-                "endIndex": 8
+                "startIndex": 9,
+                "endIndex": 10
               },
               "defaultTypeTokenRange": {
-                "startIndex": 10,
-                "endIndex": 11
+                "startIndex": 12,
+                "endIndex": 13
               }
             },
             {
               "typeParameterName": "O",
               "constraintTokenRange": {
-                "startIndex": 12,
-                "endIndex": 13
+                "startIndex": 14,
+                "endIndex": 15
               },
               "defaultTypeTokenRange": {
-                "startIndex": 15,
-                "endIndex": 16
+                "startIndex": 17,
+                "endIndex": 18
               }
             }
           ],
@@ -14650,17 +14741,17 @@
             }
           ],
           "extendsTokenRange": {
-            "startIndex": 17,
-            "endIndex": 18
+            "startIndex": 19,
+            "endIndex": 20
           },
           "implementsTokenRanges": [
             {
-              "startIndex": 20,
-              "endIndex": 21
-            },
-            {
               "startIndex": 22,
               "endIndex": 23
+            },
+            {
+              "startIndex": 24,
+              "endIndex": 25
             }
           ]
         },
@@ -17569,8 +17660,13 @@
                   "text": "): "
                 },
                 {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
                   "kind": "Content",
-                  "text": "void"
+                  "text": "<void>"
                 },
                 {
                   "kind": "Content",
@@ -17580,7 +17676,7 @@
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 7,
-                "endIndex": 8
+                "endIndex": 9
               },
               "releaseTag": "Public",
               "isProtected": false,

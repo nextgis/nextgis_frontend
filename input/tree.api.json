@@ -179,7 +179,20 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare class Tree<TREE_ITEM = "
+              "text": "export declare class Tree<T extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "DefaultTreeItem",
+              "canonicalReference": "@nextgis/tree!DefaultTreeItem:type"
+            },
+            {
+              "kind": "Content",
+              "text": " | undefined "
+            },
+            {
+              "kind": "Content",
+              "text": "= "
             },
             {
               "kind": "Content",
@@ -193,14 +206,14 @@
           "releaseTag": "Public",
           "typeParameters": [
             {
-              "typeParameterName": "TREE_ITEM",
+              "typeParameterName": "T",
               "constraintTokenRange": {
-                "startIndex": 0,
-                "endIndex": 0
-              },
-              "defaultTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 5
               }
             }
           ],
@@ -223,7 +236,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "<TREE_ITEM>"
+                  "text": "<T>"
                 },
                 {
                   "kind": "Content",
@@ -306,7 +319,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "TREE_ITEM"
+                  "text": "T"
                 },
                 {
                   "kind": "Content",
@@ -358,7 +371,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "<TREE_ITEM>[]"
+                  "text": "<T>[]"
                 },
                 {
                   "kind": "Content",
@@ -458,7 +471,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "<TREE_ITEM>"
+                  "text": "<T>"
                 },
                 {
                   "kind": "Content",
@@ -524,7 +537,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "<TREE_ITEM>"
+                  "text": "<T>"
                 },
                 {
                   "kind": "Content",

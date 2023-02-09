@@ -7,7 +7,6 @@ import NgwConnector from '@nextgis/ngw-connector';
 
 import {
   fetchNgwLayerFeatureCollection,
-  fetchNgwResourceExtent,
   createNgwLayerAdapter,
   fetchNgwLayerFeature,
   fetchIdentifyGeoJson,

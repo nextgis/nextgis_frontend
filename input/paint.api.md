@@ -77,7 +77,7 @@ export interface Ellipsoid3DPaint extends Base3DPaint {
 export type Expression = [ExpressionName, ...any[]];
 
 // @public (undocumented)
-export function expressionCallback<P = Record<string, any>>(paint: P, defaultPaint?: P, getPaintFunctions?: Record<string, GetPaintFunction>): CirclePaint | PathPaint | PinPaint | {
+export function expressionCallback<P extends Record<string, any> = Record<string, any>>(paint: P, defaultPaint?: P, getPaintFunctions?: Record<string, GetPaintFunction>): CirclePaint | PathPaint | PinPaint | {
     (feature: Feature): VectorAdapterLayerPaint;
     paint: P;
 };

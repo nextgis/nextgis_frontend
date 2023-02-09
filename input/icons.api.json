@@ -261,6 +261,33 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/icons!IconOptions#p:member",
+              "docComment": "/**\n * Svg path\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "p?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "p",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@nextgis/icons!IconOptions#rotate:member",
               "docComment": "",
               "excerptTokens": [
@@ -389,6 +416,33 @@
               "isOptional": true,
               "releaseTag": "Public",
               "name": "strokeColor",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@nextgis/icons!IconOptions#svg:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "svg?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "svg",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2

@@ -13,6 +13,7 @@ export function getIcon(opt?: IconOptions): IconPaint;
 export interface IconOptions {
     // (undocumented)
     color?: string;
+    p?: string;
     // (undocumented)
     rotate?: number;
     // (undocumented)
@@ -23,6 +24,8 @@ export interface IconOptions {
     stroke?: number;
     // (undocumented)
     strokeColor?: string;
+    // (undocumented)
+    svg?: string;
 }
 
 // (No @packageDocumentation comment for this package)

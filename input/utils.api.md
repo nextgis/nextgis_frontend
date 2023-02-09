@@ -125,9 +125,15 @@ export class Events<E = any> {
 }
 
 // @public (undocumented)
+export type ExtractFeatureProperties<F extends Feature = Feature> = FeatureProperties_<F> extends null ? FeatureProperties : FeatureProperties;
+
+// @public (undocumented)
 export type FeatureProperties = {
     [name: string]: any;
 };
+
+// @public (undocumented)
+export type FeatureProperties_<F extends Feature = Feature> = F['properties'];
 
 // @public (undocumented)
 export function fixUrlStr(url: string): string;
@@ -226,7 +232,7 @@ export type LngLatArray = Position | number[];
 export function lngLatArrayToLatLng(coord: LngLatArray): LatLng;
 
 // @public
-export type LngLatBoundsArray = [number, number, number, number] | number[];
+export type LngLatBoundsArray = [west: number, south: number, east: number, north: number] | number[];
 
 // @public (undocumented)
 export function meters2degrees(x: number, y: number): LngLatArray;

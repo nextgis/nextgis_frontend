@@ -61,7 +61,7 @@ export interface NgwLayersMem {
 }
 
 // @public
-export class NgwMap<M = unknown, L = unknown, C = unknown, O extends NgwMapOptions<M, C> = NgwMapOptions<M, C>> extends WebMap<M, L, C, NgwMapEvents, O> {
+export class NgwMap<M = unknown, L = unknown, C extends object = any, O extends NgwMapOptions<M, C> = NgwMapOptions<M, C>> extends WebMap<M, L, C, NgwMapEvents, O> {
     constructor(options: O);
     addControl<K extends keyof MapControls>(controlDef: K | C, position: ControlPosition, options?: MapControls[K]): Promise<any>;
     addNgwLayer(options: NgwLayerOptions): Promise<ResourceAdapter | undefined>;
@@ -92,7 +92,7 @@ export class NgwMap<M = unknown, L = unknown, C = unknown, O extends NgwMapOptio
     // (undocumented)
     fetchNgwLayerItems<F extends FeatureProperties = FeatureProperties, G extends Geometry = Geometry>(options: Omit<FetchNgwItemsOptions<F>, 'connector'>): CancelablePromise<FeatureItem<F, G>[]>;
     fit(): void;
-    fitLayer(layerDef: LayerDef, options?: FitOptions): Promise<void>;
+    fitLayer(layerDef: LayerDef | number, options?: FitOptions): Promise<void>;
     // (undocumented)
     static getIcon: typeof getIcon;
     // Warning: (ae-unresolved-link) The @link reference could not be resolved: The package "@nextgis/ngw-map" does not have an export "fetchIdentifyGeoJson"
