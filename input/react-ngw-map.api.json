@@ -383,7 +383,15 @@
             },
             {
               "kind": "Content",
-              "text": ", C = "
+              "text": ", C extends "
+            },
+            {
+              "kind": "Content",
+              "text": "object "
+            },
+            {
+              "kind": "Content",
+              "text": "= "
             },
             {
               "kind": "Content",
@@ -456,23 +464,23 @@
             {
               "typeParameterName": "C",
               "constraintTokenRange": {
-                "startIndex": 0,
-                "endIndex": 0
-              },
-              "defaultTypeTokenRange": {
                 "startIndex": 5,
                 "endIndex": 6
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 7,
+                "endIndex": 8
               }
             },
             {
               "typeParameterName": "O",
               "constraintTokenRange": {
-                "startIndex": 7,
-                "endIndex": 8
+                "startIndex": 9,
+                "endIndex": 10
               },
               "defaultTypeTokenRange": {
-                "startIndex": 10,
-                "endIndex": 12
+                "startIndex": 12,
+                "endIndex": 14
               }
             }
           ],
@@ -656,8 +664,8 @@
           ],
           "extendsTokenRanges": [
             {
-              "startIndex": 13,
-              "endIndex": 14
+              "startIndex": 15,
+              "endIndex": 16
             }
           ]
         },

@@ -13,7 +13,7 @@ export function onLoad<E extends WebMapEvents = WebMapEvents>(event: keyof E) {
     const originalMethod = descriptor.value;
 
     descriptor.value = function (
-      this: WebMap<unknown, unknown, unknown, E>,
+      this: WebMap<unknown, unknown, object, E>,
       ...args: unknown[]
     ) {
       return new Promise((resolve, reject) => {

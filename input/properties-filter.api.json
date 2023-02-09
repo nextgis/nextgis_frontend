@@ -372,16 +372,42 @@
         },
         {
           "kind": "TypeAlias",
-          "canonicalReference": "@nextgis/properties-filter!Operations:type",
+          "canonicalReference": "@nextgis/properties-filter!Operation:type",
           "docComment": "/**\n * gt - greater (\\>) lt - lower (\\<) ge - greater or equal (\\>=) le - lower or equal (\\<=) eq - equal (=) ne - not equal (!=) like - LIKE SQL statement (for strings compare) ilike - ILIKE SQL statement (for strings compare)\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type Operation = "
+            },
+            {
+              "kind": "Content",
+              "text": "'gt' | 'lt' | 'ge' | 'le' | 'eq' | 'ne' | 'in' | 'notin' | 'like' | 'ilike'"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "Operation",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          }
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "@nextgis/properties-filter!Operations:type",
+          "docComment": "/**\n * @deprecated\n *\n * use {@link Operation} instead\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
               "text": "export declare type Operations = "
             },
             {
-              "kind": "Content",
-              "text": "'gt' | 'lt' | 'ge' | 'le' | 'eq' | 'ne' | 'in' | 'notin' | 'like' | 'ilike'"
+              "kind": "Reference",
+              "text": "Operation",
+              "canonicalReference": "@nextgis/properties-filter!Operation:type"
             },
             {
               "kind": "Content",
@@ -610,8 +636,8 @@
             },
             {
               "kind": "Reference",
-              "text": "Operations",
-              "canonicalReference": "@nextgis/properties-filter!Operations:type"
+              "text": "Operation",
+              "canonicalReference": "@nextgis/properties-filter!Operation:type"
             },
             {
               "kind": "Content",
