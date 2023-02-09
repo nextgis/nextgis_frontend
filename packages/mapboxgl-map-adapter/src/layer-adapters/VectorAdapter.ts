@@ -196,7 +196,10 @@ export abstract class VectorAdapter<
     return this.layer;
   }
 
-  async propertiesFilter(filters: PropertiesFilter, options?: FilterOptions): Promise<void> {
+  async propertiesFilter(
+    filters: PropertiesFilter,
+    options?: FilterOptions,
+  ): Promise<void> {
     this._filterProperties = filters;
     this._updatePropertiesFilter();
   }
@@ -337,11 +340,10 @@ export abstract class VectorAdapter<
     const { selectable, multiselect, unselectOnSecondClick } = this.options;
     const alreadySelected = this.isFeatureSelected(feature);
     let becameSelected = alreadySelected;
-
     if (selectable || multiselect) {
       let features: Feature[] | undefined = undefined;
       if (alreadySelected) {
-        if (unselectOnSecondClick) {
+        if (unselectOnSecondClick && !this.options.selectOnHover) {
           this._unselectFeature(feature, { silent: true });
           becameSelected = false;
         }
@@ -778,10 +780,12 @@ export abstract class VectorAdapter<
     type: OnLayerSelectType;
     refresh?: boolean;
   }): Promise<void> {
-    if (refresh && coordinates) {
+    if (refresh) {
       const openedPopup = this._openedPopup.find((x) => x[0].id === feature.id);
       if (openedPopup) {
-        openedPopup[1].setLngLat(coordinates);
+        if (coordinates) {
+          openedPopup[1].setLngLat(coordinates);
+        }
         return;
       }
     }
