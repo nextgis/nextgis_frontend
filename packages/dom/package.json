@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/dom",
-  "version": "1.16.5",
+  "version": "1.16.6",
   "description": "Collection of libraries for working with the DOM",
   "main": "lib/dom.global.prod.js",
   "module": "lib/dom.esm-bundler.js",
@@ -8,7 +8,7 @@
   "jsdelivr": "lib/dom.global.prod.js",
   "types": "lib/index.d.ts",
   "devDependencies": {
-    "@nextgis/build-tools": "^1.16.5"
+    "@nextgis/build-tools": "^1.16.6"
   },
   "buildOptions": {
     "name": "Dom",

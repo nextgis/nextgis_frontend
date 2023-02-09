@@ -1,7 +1,7 @@
 {
   "name": "@nextgis/ngw-leaflet",
   "_priority": 10,
-  "version": "1.16.5",
+  "version": "1.16.6",
   "description": "Single-file bundle for rapid deployment of Laeflet-based web-gis applications with NextGIS services",
   "main": "lib/ngw-leaflet.global.prod.js",
   "module": "lib/ngw-leaflet.esm-bundler.js",
@@ -9,13 +9,13 @@
   "jsdelivr": "lib/ngw-leaflet.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/leaflet-map-adapter": "^1.16.5",
-    "@nextgis/ngw-map": "^1.16.5",
+    "@nextgis/leaflet-map-adapter": "^1.16.6",
+    "@nextgis/ngw-map": "^1.16.6",
     "leaflet": "1.7.1",
     "leaflet.wms": "^0.2.0"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "^1.16.5"
+    "@nextgis/build-tools": "^1.16.6"
   },
   "buildOptions": {
     "name": "NgwLeaflet",

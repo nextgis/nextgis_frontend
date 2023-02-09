@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/tree",
-  "version": "1.16.5",
+  "version": "1.16.6",
   "description": "Filtering objects by its properties using expressions",
   "main": "index.js",
   "module": "lib/tree.esm-bundler.js",
@@ -8,11 +8,11 @@
   "jsdelivr": "lib/tree.global.prod.js",
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/properties-filter": "^1.16.5",
-    "@nextgis/utils": "^1.16.5"
+    "@nextgis/properties-filter": "^1.16.6",
+    "@nextgis/utils": "^1.16.6"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "^1.16.5"
+    "@nextgis/build-tools": "^1.16.6"
   },
   "buildOptions": {
     "name": "Tree",

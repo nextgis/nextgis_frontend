@@ -1,17 +1,17 @@
 {
   "name": "@nextgis/vue-ngw-map",
-  "version": "1.16.5",
+  "version": "1.16.6",
   "description": "Development tools",
   "main": "index.js",
   "module": "lib/vue-ngw-map.esm-bundler.js",
   "#types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/leaflet-map-adapter": "^1.16.5",
-    "@nextgis/ngw-map": "^1.16.5",
-    "@nextgis/utils": "^1.16.5"
+    "@nextgis/leaflet-map-adapter": "^1.16.6",
+    "@nextgis/ngw-map": "^1.16.6",
+    "@nextgis/utils": "^1.16.6"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "^1.16.5"
+    "@nextgis/build-tools": "^1.16.6"
   },
   "peerDependencies": {
     "vue": "2.x",

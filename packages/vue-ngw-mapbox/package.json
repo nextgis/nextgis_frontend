@@ -1,16 +1,16 @@
 {
   "name": "@nextgis/vue-ngw-mapbox",
-  "version": "1.16.5",
+  "version": "1.16.6",
   "description": "Vue ngw map component for mapbox-gl js",
   "main": "lib/vue-ngw-mapbox.js",
   "module": "lib/vue-ngw-mapbox.esm-bundler.js",
   "#types": "lib/index.d.ts",
   "dependencies": {
-    "@nextgis/mapboxgl-map-adapter": "^1.16.5",
-    "@nextgis/vue-ngw-map": "^1.16.5"
+    "@nextgis/mapboxgl-map-adapter": "^1.16.6",
+    "@nextgis/vue-ngw-map": "^1.16.6"
   },
   "devDependencies": {
-    "@nextgis/build-tools": "^1.16.5"
+    "@nextgis/build-tools": "^1.16.6"
   },
   "buildOptions": {
     "name": "VueNgwMapbox",

@@ -1,6 +1,6 @@
 {
   "name": "@nextgis/progress",
-  "version": "1.16.5",
+  "version": "1.16.6",
   "description": "Tracking the progress of asynchronous operations",
   "main": "index.js",
   "module": "lib/progress.esm-bundler.js",
@@ -8,7 +8,7 @@
   "jsdelivr": "lib/progress.global.prod.js",
   "types": "lib/index.d.ts",
   "devDependencies": {
-    "@nextgis/build-tools": "^1.16.5",
+    "@nextgis/build-tools": "^1.16.6",
     "@types/events": "^3.0.0",
     "events": "^3.3.0",
     "strict-event-emitter-types": "^2.0.0"
