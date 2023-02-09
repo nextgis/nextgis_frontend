@@ -1,7 +1,7 @@
 {
   "name": "@nextgis/frontend_test",
   "private": true,
-  "version": "1.16.2",
+  "version": "1.16.5",
   "scripts": {
     "test": "yarn karma -- --single-run --coverage",
     "karma": "karma start karma.conf.js"

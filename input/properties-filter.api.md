@@ -16,7 +16,10 @@ export function featureFilter(feature: Feature, filters: PropertiesFilter): bool
 export function isPropertyFilter(filter: PropertyFilter | PropertiesFilter | string): filter is PropertyFilter;
 
 // @public
-export type Operations = 'gt' | 'lt' | 'ge' | 'le' | 'eq' | 'ne' | 'in' | 'notin' | 'like' | 'ilike';
+export type Operation = 'gt' | 'lt' | 'ge' | 'le' | 'eq' | 'ne' | 'in' | 'notin' | 'like' | 'ilike';
+
+// @public @deprecated (undocumented)
+export type Operations = Operation;
 
 // Warning: (ae-forgotten-export) The symbol "Properties" needs to be exported by the entry point index.d.ts
 //
@@ -29,7 +32,7 @@ export function propertiesFilter<T extends Properties = Properties>(properties: 
 // @public
 export type PropertyFilter<T extends Properties = Properties> = [
 T extends null ? string : keyof T | `%${string & keyof T}` | `%${string & keyof T}%` | `${string & keyof T}%`,
-Operations,
+Operation,
 any
 ];
 
