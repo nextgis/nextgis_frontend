@@ -676,4 +676,7 @@ export interface VectorLayerAdapter<
   closePopup?(findFeatureCb?: DataLayerFilter<F, L>): void;
 
   updateTooltip?(layerDef?: LayerDefinition<F, L>): void;
+
+  hideLabel?(): void
+  showLabel?(): void
 }
