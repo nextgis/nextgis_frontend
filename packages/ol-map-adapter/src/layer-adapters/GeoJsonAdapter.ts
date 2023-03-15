@@ -79,6 +79,7 @@ export class GeoJsonAdapter
 
   constructor(public map: Map, public options: GeoJsonAdapterOptions) {
     super(map, options);
+    this._labelVisibility = options.labelVisibility ?? this._labelVisibility;
     this.displayProjection = map.getView().getProjection().getCode();
   }
 
